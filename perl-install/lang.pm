@@ -378,8 +378,8 @@ sub unpack_langs {
 
 sub read {
     my ($prefix) = @_;    
-    my $h = getVarsFromSh("$prefix/etc/sysconfig/i18n");
-    my $lang = $h ? $h->{LC_MESSAGES} : 'en_US';
+    my %h = getVarsFromSh("$prefix/etc/sysconfig/i18n");
+    my $lang = $h{LC_MESSAGES} || 'en_US';
     my $langs = 
       cat_("$prefix/etc/rpm/macros") =~ /%_install_langs (.*)/ ? unpack_langs($1) : { $lang => 1 };
     $lang, $langs;
