@@ -15,8 +15,7 @@
 /* kudzu: it grows on you */
 
 /* level of debugging output */
-//#undef DEBUG_LEVEL
-#define DEBUG_LEVEL 2
+#undef DEBUG_LEVEL
 
 #ifdef DEBUG_LEVEL
 #define DEBUG(s...) fprintf(stderr,s)
