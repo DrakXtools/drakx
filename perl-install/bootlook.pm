@@ -389,6 +389,7 @@ sub set_autologin {
 
   setVarsInSh("$prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
+  chmod 0600, "$prefix/etc/sysconfig/autologin";
 #  log::l("cat $prefix/etc/sysconfig/autologin: ", cat_("$prefix/etc/sysconfig/autologin"));
 }
 
