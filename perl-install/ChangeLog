@@ -1,3 +1,110 @@
+2003/01/16  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone.pm: 
+	  - remove help callback (moved into drakhelp)
+
+	* standalone/drakhelp: 
+	  - syntax : drakhelp relative_link
+	example: drakhelp Quick_Startup.html/drakx.html
+	  - drakhelp will check the running wm and will launch kdehelpcenter
+	  with the correct URL after localizing the link.
+	  Otherwise, it launch a default browser: mozilla konqueror or galeon.
+
+	* Makefile.config: 
+	  - add drakhelp
+
+2003/01/16  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: do not propose individual package on
+	upgrade.
+
+	* install_steps.pm: fixed test of alternatives always seen as broken.
+
+2003/01/16  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: add coreutils-doc by default
+	add hdparm in default install (esp. per cooker request)
+
+	* install_steps_interactive.pm: new steps window layout
+	ask security level in every install
+	hopefully last titi's bug on getSoundDevices :-(
+
+	* share/po/Makefile: don't yell when checking for "$" in DrakX.pot and
+	only finding "\$"
+
+	* steps.pm: new steps window layout
+	ask security level in every install
+
+	* security/level.pm, standalone/drakconnect, network/netconnect.pm,
+	standalone/drakperm, standalone/net_monitor, detect_devices.pm,
+	network/tools.pm: replace occurences of "$foo ? $foo : $bar" with "$foo
+	|| $bar"
+
+	* standalone/service_harddrake, standalone.pm: make perl_checker happy
+
+	* network/network.pm: replace occurences of "$foo ? $foo : $bar" with
+	"$foo || $bar"
+	have dhcp-client the default dhcp client
+
+	* share/step-orange-click.xpm, share/step-red-on.xpm,
+	share/step-orange.xpm, share/step-green-on.xpm, share/step-green.xpm,
+	install_steps.pm, install_gtk.pm, share/step-green-click.xpm,
+	share/step-orange-on.xpm, share/step-red-click.xpm, install2.pm,
+	share/step-red.xpm: new steps window layout
+
+	* install_steps_auto_install.pm: configureNetwork step must be non-auto
+	otherwise only
+	install_steps::configureNetwork is called
+
+2003/01/16  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakbug, bootlook.pm, log.pm, standalone.pm,
+	standalone/draksec, standalone/drakTermServ, harddrake/v4l.pm,
+	standalone/drakxtv, standalone/drakgw, harddrake/TODO: "je n'en veux +
+	de cette engeance" (c) pixel :
+	make explanations provided by log and not anymore by standalone,
+	thus preventing using standalone in drakx (which is bad)
+
+	* standalone/service_harddrake, standalone/drakautoinst: perl_checker
+	fixes
+	"je n'en veux + de cette engeance" (c) pixel :
+	make explanations provided by log and not anymore by standalone,
+	thus preventing using standalone in drakx (which is bad)
+
+	* drakxtools.spec: require an recent enought MDK::Common
+
+	* harddrake/sound.pm: "je n'en veux + de cette engeance" (c) pixel :
+	make explanations provided by log and not anymore by standalone,
+	thus preventing using standalone in drakx (which is bad)
+	happy drakx
+	move "require standalone" where needed
+	fix sound configuration while installing
+
+2003/01/16  Warly  <warly@mandrakesoft.com>
+
+	* share/logo-mandrake.png: beta 2
+
+	* share/rpmsrate: move gnucash up on mandrakeclub demand
+
+2003/01/15  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix typo
+	(selectInstallClass): display mandrake release version when listing the
+	choices of partitions to upgrade
+
+	* install_steps.pm: adapt to install_any::find_root_parts() return value
+	changes
+
+	* install_any.pm (find_root_parts):
+	  - do not use guess_mount_point() anymore
+	  - check /etc/mandrake-release instead of /etc/fstab
+	  - return a list of { release => "Mandrake Linux release X.X (XXXX)",
+	part => ... }
+	instead of a list of parts
+
+	* harddrake/sound.pm: do not "use standalone" in a module used during
+	install!
+
 2003/01/16  Pixel  <pixel@mandrakesoft.com>
 
 	* share/po/Makefile: don't yell when checking for "$" in DrakX.pot and
@@ -8127,7 +8234,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.767 2003/01/15 23:33:47 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.768 2003/01/16 00:11:28 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
