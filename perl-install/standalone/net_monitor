@@ -191,7 +191,7 @@ sub connection() {
 	$ct_tag = Glib::Timeout->add(1000, sub {
 				       my ($sec, $min, $hour) = gmtime(time() - $c_time);
 				       my $e = sprintf("%02d:%02d:%02d", $hour, $min, $sec);
-				       $label_ct->set_label($e); 1 })
+				       $label_ct->set_label($e); 1 });
     }
     my $nb_point = 1;
     $first = 1;
@@ -358,13 +358,13 @@ sub scale_tranmistted($) { $_[0] * $scale_t }
 sub scale_received($) { $_[0] * $scale_r }
 
 sub update() {
-     if (!$during_connection) {
+    if (!$during_connection) {
         my $isconnect = test_connected(0);
         if ($isconnect != -2) {
 	    $isconnected = $isconnect; # save current state
 	    $isconnect = test_connected(1); # start new test
        }
-    };
+    }
 
     my @intfs = get_val(); # get values from /proc file system
     foreach (@intfs) {
