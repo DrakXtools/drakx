@@ -6,9 +6,13 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
 
-require harddrake::data;
 use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
+#- needed for proper execution for non-8bits locales
+ugtk2::prepare_gtk2();
+#- this must come *after* gtk2 and gettext initialization, as it uses some
+#- translatable strings
+require harddrake::data;
 
 
 # { field => [ short_translation, full_description] }
@@ -188,7 +192,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
 		# it must come *after* the space, as the space must follow
 		# the colon following the direction of writting.
                 if_($fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
-                    [ "$current_device->{$_}\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:)/ ? 'indian red' : 'black') } ])
+                    [ ($_ && $current_device->{$_} =~ /^(unknown)/ ? N("unknown") : $_ && $current_device->{$_} =~ /^(Unknown)/ ? N("Unknown") : "$current_device->{$_}") . "\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:)/ ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
 
             foreach (keys %$current_device) {
