@@ -457,7 +457,18 @@ sub Create {
 	    check($in, $hd, $part, $all_hds) or return 1;
 	    $migrate_files = need_migration($in, $part->{mntpoint}) or return 1;
 
-	    fsedit::add($hd, $part, $all_hds, { force => 1, primaryOrExtended => $primaryOrExtended });
+	    eval { fsedit::add($hd, $part, $all_hds, { force => 1, primaryOrExtended => $primaryOrExtended }) };
+	    if (my $err = $@) {
+		if ($err =~ /raw_add/ && $hd->hasExtended && !$hd->{primary}{extended}) {
+		    $in->ask_warn(_("Error"), _("You can't create a new partition
+(since you reached the maximal number of primary partitions).
+First remove a primary partition and create an extended partition."));
+		    return 0;
+		} else {
+		    $in->ask_warn(_("Error"), $@);
+		    return 1;
+		}
+	    }
 	    0;
 	},
     ) or return;
