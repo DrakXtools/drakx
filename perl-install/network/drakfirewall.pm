@@ -46,7 +46,7 @@ my @all_servers =
   },
   {
    name => "Samba",
-   pkg => 'libsmbclient0',
+   pkg => 'samba-server',
    ports => '137/tcp 137/udp 138/tcp 138/udp 139/tcp 139/udp ',
    hide => 1,
   },
