@@ -129,6 +129,8 @@ foreach my $hw_class (@harddrake::data::tree) {
         require harddrake::autoconf;
         harddrake::autoconf::xconf($modules_conf, {});
         next;
+    } elsif ($Ident eq "TV") {
+        $modules_conf->write;
     }
 
     next if $is_globetrotter && !$hw_class->{automatic};
