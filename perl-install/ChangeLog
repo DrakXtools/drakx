@@ -1,3 +1,125 @@
+2002/02/26  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakfont: corrected ttf/TTF and xfs restart
+
+	* share/logo-mandrake.png: new logo
+
+2002/02/26  fabman
+
+	* share/po/es.po: updated spanish translations
+
+2002/02/26  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fix translation of test program.
+
+2002/02/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/libstdio/fclose.c: don't segfault when fclose(NULL)
+
+	* share/po/fr.po: 
+	  - explain where to put nbsp spaces, explain
+	what's nbsp spaces, explain how to compose them
+	  - add a few missing nbsp spaces
+	  - translate a few more things
+
+2002/02/26  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/bs.po, share/po/da.po, share/po/zh_TW.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+	* any.pm: fixed English typo
+
+2002/02/26  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/smbnfs_gtk.pm, diskdrake/removable.pm,
+	diskdrake/interactive.pm: propose some mount points for
+	removable/nfs/smb
+
+	* Xconfigurator.pm: make perl_checker happy
+	have "Ok  More  Show all" instead of "Ok  Cancel  Show all"
+	set the locale properly instead of setting the translated messages in
+	the script
+
+	* any.pm: 
+	  - zips() now return devices ending with "4", raw_zips() is the old
+	zips()
+	  - rdvd handling
+	  - add .conf for /etc/devfs/conf.d/ files
+	(devfssymlinkf): use /etc/devfs/conf.d/name.conf instead of putting the
+	symlink in lib/dev-state
+
+	* share/rpmsrate: add sndconfig in INSTALL (installed when user say Yes
+	when asked for a ISA
+	sound card)
+	add xine in VIDEO 4
+
+	* install_steps.pm: 
+	  - zips() now return devices ending with "4", raw_zips() is the old
+	zips()
+	  - rdvd handling
+	  - add .conf for /etc/devfs/conf.d/ files
+	don't add mem=nopentium anymore. kernel people says it's not needed and
+	bad
+	for performance. It also means any bug must be addressed to them
+	create /dev/dvd for DVDs
+
+	* my_gtk.pm (@icon_paths): ease testing
+
+	* lang.pm: create bindtextdomain which does only part of the load_mo job
+
+	* install_steps_interactive.pm: if no sound card are detected AND the user
+	selected things needing a sound card, propose a special case for ISA
+	cards
+
+	* detect_devices.pm: 
+	  - zips() now return devices ending with "4", raw_zips() is the old
+	zips()
+	  - rdvd handling
+	  - add .conf for /etc/devfs/conf.d/ files
+	cleanup
+
+	* fs.pm: 
+	  - zips() now return devices ending with "4", raw_zips() is the old
+	zips()
+	  - rdvd handling
+	  - add .conf for /etc/devfs/conf.d/ files
+
+2002/02/26  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm: Ti Powerbook uses non-std 1152x768, rather than
+	1152x864
+
+2002/02/26  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* standalone/drakxtv: use "xvt -T" rather than "xvt --title": now not only
+	we support rxvt
+	and xterm but konsole too.
+	the only one missing is gnome-terminal which has -t but not -T
+	update comments
+	  - remove useless "no_edit => 1"
+	  - use interactive_gtk to determine if we're runned under X11 (ie
+	authorized acces to X11 server, X11 context, ...)
+	  - add a note to remember that we should add a method to detect if we
+	  run under X11 if/when we implement interactive_qt
+	  - simplify code :
+		* remove is_tv and simplify its code to be a one-liner (replace a
+		  foreach by a scalar context)
+		* use format to prevent reverse lookup on scantv run thus
+		  enabling to reverse the initial hash table
+	  - all cases (newt, gtk, wt/wo xvt, ...) have been re tested on real
+	hw.
+
 2002/02/26  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/hu.po: updated po file
