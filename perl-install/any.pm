@@ -940,6 +940,7 @@ sub ask_window_manager_to_logout {
 	'wmaker' => "killall -USR1 wmaker",
     );
     my $cmd = $h{$wm} or return;
+    $ENV{ICEAUTHORITY} ||= "$ENV{HOME}/.ICEauthority"; #- used by gnome-session
     $cmd = "su $ENV{USER} -c '$cmd'" if $wm eq 'kwin' && $> == 0;
     system($cmd);
     1;
