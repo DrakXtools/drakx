@@ -600,31 +600,7 @@ sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::o->{prefix}/root") . "/
 
 sub report_bug {
     my ($prefix) = @_;
-
-    sub header { "
-********************************************************************************
-* $_[0]
-********************************************************************************";
-    }
-
-    join '', map { chomp; "$_\n" }
-      header("lspci"), detect_devices::stringlist(),
-      header("pci_devices"), cat_("/proc/bus/pci/devices"),
-      header("fdisk"), arch() =~ /ppc/ ? `$ENV{LD_LOADER} pdisk -l` : `$ENV{LD_LOADER} fdisk -l`,
-      header("scsi"), cat_("/proc/scsi/scsi"),
-      header("lsmod"), cat_("/proc/modules"),
-      header("cmdline"), cat_("/proc/cmdline"),
-      header("pcmcia: stab"), cat_("/var/run/stab"),
-      header("usb"), cat_("/proc/bus/usb/devices"),
-      header("partitions"), cat_("/proc/partitions"),
-      header("cpuinfo"), cat_("/proc/cpuinfo"),
-      header("syslog"), cat_("/tmp/syslog"),
-      header("ddcxinfos"), `$ENV{LD_LOADER} ddcxinfos`,
-      header("ddebug.log"), cat_("/tmp/ddebug.log"),
-      header("install.log"), cat_("$prefix/root/install.log"),
-      header("fstab"), cat_("$prefix/etc/fstab"),
-      header("auto_inst"), g_auto_install(),
-      ;
+    any::report_bug($prefix, 'auto_inst' => g_auto_install());
 }
 
 sub g_auto_install {
@@ -720,7 +696,7 @@ sub loadO {
 	    no strict;
 	    eval <$fh>;
 	    close $fh;
-	    $@ and log::l("Bad kickstart file $f (failed $@)");
+	    $@ and die;
 	}
 	add2hash_($o ||= {}, $O);
     }

@@ -800,4 +800,32 @@ sub runlevel {
 
 sub to_utf8 { c::iconv($_[0], $lang::charset || 'ISO-8859-1', "utf-8") }
 
+sub report_bug {
+    my ($prefix, @other) = @_;
+
+    sub header { "
+********************************************************************************
+* $_[0]
+********************************************************************************";
+    }
+
+    join '', map { chomp; "$_\n" }
+      header("lspci"), detect_devices::stringlist(),
+      header("pci_devices"), cat_("/proc/bus/pci/devices"),
+      header("fdisk"), arch() =~ /ppc/ ? `$ENV{LD_LOADER} pdisk -l` : `$ENV{LD_LOADER} fdisk -l`,
+      header("scsi"), cat_("/proc/scsi/scsi"),
+      header("lsmod"), cat_("/proc/modules"),
+      header("cmdline"), cat_("/proc/cmdline"),
+      header("pcmcia: stab"), cat_("/var/run/stab"),
+      header("usb"), cat_("/proc/bus/usb/devices"),
+      header("partitions"), cat_("/proc/partitions"),
+      header("cpuinfo"), cat_("/proc/cpuinfo"),
+      header("syslog"), cat_("/tmp/syslog"),
+      header("ddcxinfos"), `$ENV{LD_LOADER} ddcxinfos`,
+      header("ddebug.log"), cat_("/tmp/ddebug.log"),
+      header("install.log"), cat_("$prefix/root/install.log"),
+      header("fstab"), cat_("$prefix/etc/fstab"),
+      map_index { even($::i) ? header($_) : $_ } @other;
+}
+
 1;
