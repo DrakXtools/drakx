@@ -19,9 +19,12 @@ $(DIRS):
 	make -C $@
 
 install:
-	@install -d $(MISC_DEST)/auto
+	@install -d $(MISC_DEST)/auto $(MISC_DEST)/Distribconf
 	@install mdkinst_stage2_tool $(MISC_DEST)
-	cp -rf `perldoc -l packdrake` $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
+	cp -rf `perldoc -l packdrake` $(MISC_DEST) || { echo "install packdrake first!" ; exit 1; }
+	cp -rf `perldoc -l Packdrakeng` $(MISC_DEST) || { echo "install packdrake first!" ; exit 1; }
+	cp -rf `perldoc -l Distribconf` $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
+	cp -rf `perldoc -l Distribconf::Build` $(MISC_DEST)/Distribconf || { echo "install rpmtools first!" ; exit 1; }
 	@cp -rf `perldoc -l URPM | sed s/URPM.pm//`URPM* $(MISC_DEST) || { echo "install perl-URPM first!" ; exit 1; }
 	@cp -rf `perldoc -l URPM | sed s/URPM.pm//`auto/URPM $(MISC_DEST)/auto || { echo "install perl-URPM first!" ; exit 1; }
 	@cd /usr/bin ; install packdrake $(MISC_DEST) || { echo "packdrake is missing"; exit 1; }
