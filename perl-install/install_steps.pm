@@ -121,7 +121,7 @@ sub ask_mntpoint_s {
 	$m{$m} = 1;
 
 	#- in case the type does not correspond, force it to ext2
-	$_->{type} = 0x83 if $m =~ m|^/| && !isDos($_) && !isWin($_) 
+	$_->{type} = 0x83 if $m =~ m|^/| && !isFat($_);
     }
 }
 
@@ -143,7 +143,7 @@ sub choosePartitionsToFormat($$) {
 	    my $t = fsedit::typeOfPart($_->{device});
 	    $_->{toFormatUnsure} = 
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
-	      isDos({ type => $t }) || isWin({type => $t}) ? !isDos($_) && !isWin($_) : $t != $_->{type};
+	      isFat({ type => $t }) ? !isFat($_) : $t != $_->{type};
 	}
     }
 }

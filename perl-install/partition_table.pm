@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isPrimary isNfs) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -95,6 +95,7 @@ sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1 }}{$_[0]{type}} }
+sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 
 sub isPrimary($$) {
@@ -165,11 +166,11 @@ sub assign_device_numbers($) {
     #
     #- first verify there's at least one primary dos partition, otherwise it
     #- means it is a secondary disk and all will be false :(
-    my ($c, @others) = grep { isDos($_) || isWin($_) } @{$hd->{primary}{normal}};
+    my ($c, @others) = grep { isFat($_) } @{$hd->{primary}{normal}};
     $c or return;
 
     $i = ord 'D';
-    foreach (grep { isDos($_) || isWin($_) } map { $_->{normal} } @{$hd->{extended}}) {
+    foreach (grep { isFat($_) } map { $_->{normal} } @{$hd->{extended}}) {
 	$_->{device_windobe} = chr($i++);
     }
     $c->{device_windobe} = 'C';

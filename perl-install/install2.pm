@@ -269,7 +269,7 @@ sub partitionDisks {
     return if ($o->{isUpgrade});
 
     $::o->{steps}{formatPartitions}{done} = 0;
-    fs::umount_all($o->{fstab}, $o->{prefix}) if $o->{fstab} && !$::testing;
+    eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
 
     my $ok = is_empty_array_ref($o->{hds}) ? install_any::getHds($o) : 1;
     my $auto = $ok && !$o->{partitioning}{readonly} &&

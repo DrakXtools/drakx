@@ -114,15 +114,4 @@ sub zero_MBR($) {
     delete $hd->{extended};
 }
 
-
-sub isFatFormatted($) {
-    my $dev = devices::make($_[0]);
-    local *F; sysopen F, $dev, 0 or return;
-    sysseek F, $common::SECTORSIZE - length($magic), 0;
-
-    #- check magic number
-    my $tmp;
-    sysread(F, $tmp, length $magic) && $tmp eq $magic;
-}
-
 1;
