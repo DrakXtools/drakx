@@ -170,7 +170,9 @@ sub make($) {
 
     if ($file =~ m|/dev/| && -e '/dev/.devfsd') {
 	#- argh, creating devices is no good with devfs...
-	die "devices are handled by devfsd, and $file doesn't exist";
+	#- return the file even if the device file doesn't exist
+	#- the caller will fail or not, better compatibility than raising an exception here
+	return $file;
     }
 
     #- make a directory for this inode if needed.
