@@ -12,6 +12,24 @@
 	#    Option "RENDER" "Enable"
 	#Endsection
 
+2004/10/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/modem.pm (first_modem) fix crash at install time
+
+2004/10/07  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/various.pm, install_steps.pm, Xconfig/default.pm,
+	Xconfig/main.pm, harddrake/autoconf.pm: 
+	  - XFdrake can detect a auxmouse which was not detected by mousedrake
+	so we need to call various_xfree_conf()
+	  - this implies adding parameter $do_pkgs to a few functions
+
+	* Xconfig/parse.pm: fix parsing fully commented Section. eg:
+	#Section "Extensions"
+	#    Option "Composite" "Enable"
+	#    Option "RENDER" "Enable"
+	#Endsection
+
 2004/10/06  José JORGE <jjorge at free.fr>
 
 	* share/po/pt.po: jorge
@@ -40728,7 +40746,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.981 2004/10/06 07:20:40 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.982 2004/10/07 01:23:58 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
