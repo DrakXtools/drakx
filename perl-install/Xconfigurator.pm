@@ -391,7 +391,7 @@ sub testFinalConfig {
     $o->{monitor}{hsyncrange} && $o->{monitor}{vsyncrange} or
       $in->ask_warn('', _("Monitor not configured")), return;
 
-    $o->{card}{server} or
+    $o->{card}{server} || $o->{card}{driver} or
       $in->ask_warn('', _("Graphic card not configured yet")), return;
 
     $o->{card}{depth} or
