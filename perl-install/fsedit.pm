@@ -516,6 +516,7 @@ sub auto_allocate_raids {
 	    my %h = %$md;
 	    delete @h{'hd', 'parts'};
 	    put_in_hash($part, \%h); # mntpoint, level, chunk-size, type
+	    raid::updateSize($part);
 	}
     }
 }
