@@ -323,6 +323,7 @@ ugtk2->exit(0);
 
 dd:
 $::isWizard = 1;
+network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::main('', $netcnx, $in);
 $in->exit(0);
 
