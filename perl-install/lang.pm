@@ -40,7 +40,7 @@ my %languages = my @languages = (
 'bg_BG.UTF-8'=> [ 'Bulgarian (UTF-8)',	'utf_1251',   'bg', 'bg:bg.CP1251:bg_BG.CP1251:bg_BG' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-15','br', 'br:fr_FR:fr' ],
   'bs'  => [ 'Bosnian',			'iso-8859-2', 'bs', 'bs:hr:sr' ],
-'ca_ES' => [ 'Catalan',		'iso-8859-15','ca', 'ca:es_ES:es:fr_FR:fr' ],
+'ca_ES' => [ 'Catalan',			'iso-8859-15','ca', 'ca:es_ES:es' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
   'cy'  => [ 'Cymraeg (Welsh)','iso-8859-14','cy', 'cy:en_GB:en' ],
 'cy_GB.UTF-8'=> [ 'Cymraeg (Welsh) (UTF-8)','utf_14',   'cy', 'cy:en_GB:en' ],
