@@ -842,7 +842,7 @@ sub new {
 
 
     my $o = bless { %opts }, $type;
-    $o->_create_window($title) if !$::isEmbedded;
+    $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
 
     $o->{pop_it} ||= $pop_it || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
