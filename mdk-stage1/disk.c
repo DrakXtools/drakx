@@ -84,7 +84,7 @@ static enum return_type try_with_device(char *dev_name)
 		return try_with_device(dev_name);
 	}
 
-	results = ask_from_entries("Please enter the directory containing the Linux-Mandrake installation.",
+	results = ask_from_entries("Please enter the directory containing the " DISTRIB_NAME " Installation.",
 				   questions_location, &answers_location, 24);
 	if (results != RETURN_OK) {
 		umount("/tmp/disk");
@@ -106,11 +106,11 @@ static enum return_type try_with_device(char *dev_name)
 	if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
 		umount("/tmp/disk");
 		unlink("/tmp/image");
-		error_message("I can't find the Linux-Mandrake installation in the specified directory.");
+		error_message("I can't find the " DISTRIB_NAME " Installation in the specified directory.");
 		return try_with_device(dev_name);
 	}
 
-	log_message("found the Linux-Mandrake Installation, good news!");
+	log_message("found the " DISTRIB_NAME " Installation, good news!");
 
 	if (IS_SPECIAL_STAGE2) {
 		if (load_ramdisk() != RETURN_OK) {

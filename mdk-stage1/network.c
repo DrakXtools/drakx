@@ -513,7 +513,7 @@ static enum return_type intf_select_and_up(void)
 
 enum return_type nfs_prepare(void)
 {
-	char * questions[] = { "NFS server name", "Linux-Mandrake directory", NULL };
+	char * questions[] = { "NFS server name", DISTRIB_NAME " directory", NULL };
 	char * questions_auto[] = { "server", "directory", NULL };
 	char ** answers;
 	char * nfsmount_location;
@@ -524,7 +524,7 @@ enum return_type nfs_prepare(void)
 
 	do {
 		results = ask_from_entries_auto("Please enter the name or IP address of your NFS server, "
-						"and the directory containing the Linux-Mandrake installation.",
+						"and the directory containing the " DISTRIB_NAME " installation.",
 						questions, &answers, 40, questions_auto);
 		if (results != RETURN_OK)
 			return nfs_prepare();
@@ -541,14 +541,14 @@ enum return_type nfs_prepare(void)
 		}
 
 		if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
-			error_message("That NFS volume does not seem to contain the Linux-Mandrake Installation.");
+			error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Installation.");
 			umount("/tmp/image");
 			results = RETURN_BACK;
 		}
 	}
 	while (results == RETURN_BACK);
 
-	log_message("found the Linux-Mandrake Installation, good news!");
+	log_message("found the " DISTRIB_NAME " Installation, good news!");
 
 	if (IS_SPECIAL_STAGE2) {
 		if (load_ramdisk() != RETURN_OK) {

@@ -42,7 +42,7 @@ void init_frontend(void)
 	newtInit();
 	newtCls();
 	
-	newtDrawRootText(0, 0, "Welcome to Linux-Mandrake (" VERSION ") " __DATE__ " " __TIME__);
+	newtDrawRootText(0, 0, "Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__);
 	
 	newtPushHelpLine(" <Alt-F1> for here, <Alt-F3> to see the logs, <Alt-F4> for kernel msg");
 }

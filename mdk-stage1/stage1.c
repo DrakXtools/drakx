@@ -187,7 +187,7 @@ int main(int argc, char **argv)
 		set_param(MODE_TESTING);
 
 	open_log();
-	log_message("welcome to the Linux-Mandrake install (stage1, version " VERSION " built " __DATE__ " " __TIME__")");
+	log_message("welcome to the " DISTRIB_NAME " install (stage1, version " VERSION " built " __DATE__ " " __TIME__")");
 	process_cmdline();
 	spawn_shell();
 	if (load_modules_dependencies())

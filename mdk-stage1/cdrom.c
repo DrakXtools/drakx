@@ -54,13 +54,13 @@ static enum return_type try_with_device(char *dev_name)
 	if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
 		enum return_type results;
 		umount("/tmp/image");
-		results = ask_yes_no("That CDROM disc does not seem to be a Linux-Mandrake Installation CDROM.\nRetry with another disc?");
+		results = ask_yes_no("That CDROM disc does not seem to be a " DISTRIB_NAME " Installation CDROM.\nRetry with another disc?");
 		if (results == RETURN_OK)
 			return try_with_device(dev_name);
 		return results;
 	}
 
-	log_message("found a Linux-Mandrake CDROM, good news!");
+	log_message("found a " DISTRIB_NAME " CDROM, good news!");
 
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible())
 		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */

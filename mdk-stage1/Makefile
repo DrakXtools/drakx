@@ -28,7 +28,7 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 CFLAGS = -Os -Wall -Werror -fomit-frame-pointer
 INCLUDES = -I.
-DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\"
+DEFS = -DVERSION=\"$(VERSION)\"
 
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CFLAGS)
 

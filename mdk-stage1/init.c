@@ -20,7 +20,7 @@
  */
 
 #include "minilibc.h"
-
+#include "config-stage1.h"
 
 #define KICK_FLOPPY     1
 #define KICK_BOOTP	2
@@ -354,7 +354,7 @@ void disable_swap(void)
 		*chptr = '\0';
 
 		/* call swapoff */
-		printf("Swapoff %s ", start);
+		printf("swapoff %s", start);
 		if (swapoff(start))
 			printf(" failed (%d)\n", errno);
 		else
@@ -396,7 +396,7 @@ int main(int argc, char **argv)
 		printf("*** TESTING MODE ***\n");
 
 
-	printf("\n--- Hi. Linux-Mandrake install initializer starting. ---\n");
+	printf("\n--- Hi. " DISTRIB_NAME " install initializer starting. ---\n");
 	printf("VERSION: %s\n", VERSION);
 
 	
@@ -483,9 +483,8 @@ int main(int argc, char **argv)
 		kill(klog_pid, 9);
 		printf("exiting stage1-initializer -- giving hand to rescue\n");
 		return 0;
-        }
-	
-	printf("back to stage1-initializer control -- install exited normally\n");
+        } else
+		printf("back to stage1-initializer control -- install exited normally\n");
 
 	if (testing)
 		return 0;

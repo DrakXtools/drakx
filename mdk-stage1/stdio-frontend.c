@@ -33,7 +33,7 @@
 
 void init_frontend(void)
 {
-	printf("Welcome to Linux-Mandrake (" VERSION ") " __DATE__ " " __TIME__ "\n");
+	printf("Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__ "\n");
 }
 
 

@@ -15,8 +15,13 @@
 #ifndef _CONFIG_STAGE1_H_
 #define _CONFIG_STAGE1_H_
 
+#define _GNU_SOURCE 1
+
+
 /* If we have more than that amount of memory, we assume we can load the second stage as a ramdisk */
 #define MEM_LIMIT_RAMDISK 52 * 1024
+
+#define DISTRIB_NAME "Linux-Mandrake"
 
 /* user-definable (in Makefile): DISABLE_NETWORK, DISABLE_DISK, DISABLE_CDROM, DISABLE_PCMCIA */
 
