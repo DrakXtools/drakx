@@ -113,6 +113,8 @@ sub sagem_set_parameters {
         -f $cmv or $cmv = "$::prefix/etc/eagle-usb/CMVe${type}WO.txt";
         symlinkf($cmv, "$::prefix/etc/eagle-usb/CMVe${type}.txt");
     }
+    #- remove this otherwise eaglectrl won't start
+    unlink("$::prefix/etc/eagle-usb/eagle-usb_must_be_configured");
 }
 
 sub adsl_conf_backend {
