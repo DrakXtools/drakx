@@ -309,8 +309,10 @@ sub setPackages {
 	($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
 	  pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
 
+	if ($::auto_install && !$o->{compssUsersChoice}) {
+	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
+	}
 	$o->{compssUsersChoice}{SYSTEM} = 1;
-#	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
 
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
 	    push @{$o->{default_packages}}, pkgs::packageByName($o->{packages}, "locales-$_") || next;
@@ -721,9 +723,9 @@ sub getHds {
 sub log_sizes {
     my ($o) = @_;
     my @df = common::df($o->{prefix});
-    log::l(sprintf "Installed: %dMB(df), %dMB(rpm)",
-	   ($df[0] - $df[1]) / 1024,
-	   sum(`rpm --root $o->{prefix}/ -qa --queryformat "%{size}\n"`) / sqr(1024)) if -x "$o->{prefix}/bin/rpm";
+    log::l(sprintf "Installed: %s(df), %s(rpm)",
+	   formatXiB($df[0] - $df[1], 1024),
+	   formatXiB(sum(`rpm --root $o->{prefix}/ -qa --queryformat "%{size}\n"`))) if -x "$o->{prefix}/bin/rpm";
 }
 
 1;
