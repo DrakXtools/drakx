@@ -326,8 +326,8 @@ sub beforeInstallPackages {
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
 
+    mkdir "$o->{prefix}$_" foreach qw(/boot /usr /usr/share /usr/share/mdk /usr/share/bootsplash);
     #- add oem lilo theme and background if the files exists.
-    mkdir "$o->{prefix}$_" foreach qw(/boot /usr /usr/share /usr/share/mdk);
     install_any::getAndSaveFile("Mandrake/base/oem-message-graphic", "$o->{prefix}/boot/oem-message-graphic");
     install_any::getAndSaveFile("Mandrake/base/oem-background.png", "$o->{prefix}/usr/share/mdk/oem-background.png");
     #- add oem bootsplash theme if files exists.
