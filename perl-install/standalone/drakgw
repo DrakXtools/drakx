@@ -111,7 +111,7 @@ sub fatal_quit ($) {
 my ($kernel_version) = c::kernel_version() =~ /(...)/;
 log::l("[drakgw] kernel_version $kernel_version");
 
-$kernel_version eq '2.4' or fatal_quit(N("Sorry, we support only 2.4 kernels."));
+$kernel_version >= 2.4 or fatal_quit(N("Sorry, we support only 2.4 kernels."));
 
 begin:
 
@@ -516,8 +516,8 @@ sub quit_global {
 }
 
 sub pur_gtk_mode {
-    require gtk2;
-    import gtk2 qw(:all);
+    require ugtk2;
+    import ugtk2 qw(:wrappers :helpers :create);
     my $setup_state = $shorewall && $shorewall->{masquerade} ? 
                          ($shorewall->{disabled} ? 
 			  N("The setup has already been done, but it's currently disabled.") :
