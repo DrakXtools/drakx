@@ -11,9 +11,16 @@
 
 2000-09-28  François Pons  <fpons@mandrakesoft.com>
 
+	* Makefile.config: added livedrake for drakxtools.
 	* diskdrake.pm: use corrected partition size when resizing a dos
 	partition (like the others).
-	* printerdrake.pm: protect set_help() usage by if $::isInstall.
+	* install_any.pm: no more pnm2ppa packages and others in package
+	to copy when changing CD.
+	* live_install: exec live_install2 instead.
+	* live_install2: contains post live upgrade stuff now.
+	* printerdrake.pm: protect set_help() usage by if $::isInstall,
+	removed reference to package pnm2ppa and others.
+	* standalone/livedrake: initial release for drakxtools.
 
 2000-09-28  DrakX <install@linux-mandrake.com>
 

@@ -190,8 +190,8 @@ sub setup_gsdriver_cups($$$;$) {
 	$printer->{cupsPPD} = $printer::descr_to_ppd{$printer->{cupsDescr}};
 
 	#- install additional filter according to PPD files.
-	$printer->{cupsPPD} =~ /-pnm2ppa\.ppd/ and &$install('pnm2ppa');
-	$printer->{cupsPPD} =~ /-lm1100\.ppd/ and &$install('Lexmark-1100-printer-driver__lm1100');
+	#-$printer->{cupsPPD} =~ /-pnm2ppa\.ppd/ and &$install('pnm2ppa');
+	#-$printer->{cupsPPD} =~ /-lm1100\.ppd/ and &$install('Lexmark-1100-printer-driver__lm1100');
 
 	$printer->{complete} = 1;
 	printer::copy_printer_params($printer, $printer->{configured}{$printer->{QUEUE}} ||= {});
@@ -249,7 +249,7 @@ sub setup_gsdriver_lpr($$$;$) {
 	my %db_entry = %{$printer::thedb{$printer->{DBENTRY}}};
 
 	#- specific printer drivers to install.
-	&$install('pnm2ppa') if $db_entry{GSDRIVER} eq 'ppa';
+	#-&$install('pnm2ppa') if $db_entry{GSDRIVER} eq 'ppa';
 
 	my @list_res = @{$db_entry{RESOLUTION} || []};
 	my @res = map { "$_->{XDPI}x$_->{YDPI}" } @list_res;

@@ -49,47 +49,9 @@ if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
 	xset fp rehash
     fi
 
-    # start DrakX
-    ../../../lib/ld-linux.so.2 ../perl ./live_install2
-
-    # restore all fonts dir from 7.2 in case something gets wrong.
-    for i in misc PEX Speedo Type1 mdk 75dpi 100dpi cyrillic
-    do
-	if [ -d /usr/X11R6/lib/X11/fonts/$i ]; then
-	    if [ ! -e /usr/X11R6/lib/X11/fonts/$i/fonts.dir ]; then
-		cd /usr/X11R6/lib/X11/fonts/$i
-		mkfontdir
-		if [ -n "$DISPLAY" ]; then
-		    xset fp rehash
-		fi
-		cd -
-	    fi
-	fi
-    done
-
-#    for i in MonitorsDB CardsNames Cards+
-#    do
-#	if [ -e /tmp/drakx/mdkinst/$i ]; then
-#	    rm -f /usr/X11R6/lib/X11/$i
-#	    mv /tmp/drakx/mdkinst/$i /usr/X11R6/lib/X11/$i
-#	fi
-#    done
-#
-#    if [ -x /tmp/drakx/mdkinst/packdrake ]; then
-#	rm -f /usr/bin/packdrake
-#	mv /tmp/drakx/mdkinst/packdrake /usr/bin/packdrake
-#    fi
-#
-#    if [ -x /tmp/drakx/mdkinst/libperl.so ]; then
-#	rm -f $perlcoredir/libperl.so
-#	mv /tmp/drakx/mdkinst/libperl.so $perlcoredir/libperl.so
-#    fi
-else
-    echo >&2 "unable to get a working live system to start, check your working directory"
-    exit 2
+    # start DrakX, do not keep shell script in background else the CD is locked by it!!!
+    exec ../../../lib/ld-linux.so.2 ../perl ./live_install2
 fi
 
-#/bin/rm -rf /tmp/drakx
-#/bin/rm -rf /tmp/rhimage
-
-sync
+echo >&2 "unable to get a working live system to start, check your working directory"
+exit 2

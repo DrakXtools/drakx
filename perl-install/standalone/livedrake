@@ -2,9 +2,9 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use common qw(:common :system);
+use common qw(:common :system :file);
 use interactive;
-use mouse;
+use run_program;
 use c;
 
 local $_ = join '', @ARGV;
@@ -23,7 +23,7 @@ while (! -x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
     $in->ask_okcancel(_("Change Cd-Rom"),
 _("Please insert the Installation Cd-Rom in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid live upgrade."), 1) or $in->exit(0);
-    eval { fs::mount("/mnt/cdrom") };
+    run_program::run("mount", "/mnt/cdrom");
 }
 
 if (-x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
@@ -34,18 +34,12 @@ if (-x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
 $in->ask_warn('', _("Unable to start live upgrade !!!\n"));
 $in->exit(1);
 
-sub unlockCdrom {
-    my ($cdrom) = @_;
-    $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
-    $cdrom or cat_("/etc/fstab") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
-    eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
-}
-
 sub ejectCdrom {
     my ($cdrom) = @_;
     $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
+    $cdrom or cat_("/etc/fstab") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
     my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
-    getFile("XXX"); #- close still opened filehandle
-    eval { fs::umount("/mnt/cdrom") };
+    run_program::run("umount", "/mnt/cdrom");
+    ioctl $f, c::CDROM_LOCKDOOR(), 0;
     ioctl $f, c::CDROMEJECT(), 1;
 }
