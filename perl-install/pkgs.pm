@@ -176,6 +176,9 @@ sub selectPackage($$;$$) {
     #- do not select in such case.
     packageFlagInstalled($pkg) and return;
 
+    #- make sure base package are set even if already selected.
+    $base and packageSetFlagBase($pkg, 1);
+
     #- select package and dependancies, otherOnly may be a reference
     #- to a hash to indicate package that will strictly be selected
     #- when value is true, may be selected when value is false (this
@@ -205,7 +208,6 @@ sub selectPackage($$;$$) {
 	    }
 	}
     }
-    $base and packageSetFlagBase($pkg, 1);
     $otherOnly and packageFlagSelected($pkg) and $otherOnly->{packageName($pkg)} = 1;
     $otherOnly or packageSetFlagSelected($pkg, 1+packageFlagSelected($pkg));
     1;
@@ -738,7 +740,7 @@ sub install($$$;$) {
 	c::rpmtransAddPackage($trans, $_->{header}, packageName($_), $isUpgrade && packageName($_) !~ /kernel/) #- TODO: replace `named kernel' by `provides kernel'
 	    foreach @transToInstall;
 
-	my $close = sub {		  
+	my $close = sub {
 #	    c::headerFree(delete $_->{header}) foreach @transToInstall;
 	    c::rpmtransFree($trans);
 	};

@@ -354,26 +354,22 @@ sub formatPartitions {
 #------------------------------------------------------------------------------
 sub choosePackages {
     require pkgs;
-    print "a\n";
     $o->setPackages if $_[1] == 1;
-    print "b\n";
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
-    print "c\n";
     if ($_[1] > 1 || !$o->{isUpgrade} || $::expert) {
 	if ($_[1] == 1) { 
 	    $o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
 	    $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
 	}
-    print "d\n";
 	$o->choosePackages($o->{packages}, $o->{compss}, 
 			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
-    print "e\n";
 	my $pkg = pkgs::packageByName($o->{packages}, 'kdesu');
-    print "f\n";
 	pkgs::unselectPackage($o->{packages}, $pkg) if $pkg && $o->{security} > 3;
-    print "g\n";
-	pkgs::packageSetFlagSelected(pkgs::packageByName($o->{packages}, $_), 1) foreach @{$o->{base}}; #- already done by selectPackagesToUpgrade.
-    print "h\n";
+
+	#- check pre-condition where base backage has to be selected.
+	foreach (@{$o->{base}}) {
+	    pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, $_)) or die "base package not selected";
+	}
     }
 }
 
@@ -381,13 +377,9 @@ sub choosePackages {
 sub doInstallStep {
     $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
 
-    print "i\n";
     $o->beforeInstallPackages;
-    print "j\n";
     $o->installPackages($o->{packages});
-    print "k\n";
     $o->afterInstallPackages;
-    print "l\n";
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {

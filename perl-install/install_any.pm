@@ -122,7 +122,7 @@ sub setPackages($) {
     my ($o) = @_;
 
     require pkgs;
-    if (is_empty_hash_ref($o->{packages})) {
+    if (is_empty_array_ref($o->{packages})) {
 	$o->{packages} = pkgs::psUsingHdlist($o->{prefix});
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
