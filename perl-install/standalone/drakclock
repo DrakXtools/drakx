@@ -212,7 +212,7 @@ Do you want to install ntp ?"))) {
 }
 sub get_server() {
     my $servs = timezone::ntp_servers();
-    [ map { "$_  ($servs->{$_})" } keys %$servs ]
+    [ map { "$_  ($servs->{$_})" } sort keys %$servs ]
 }
 sub update_time() {
     Repaint($drawing_area, 1);
