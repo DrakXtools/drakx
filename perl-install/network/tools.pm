@@ -148,7 +148,6 @@ sub check_link_beat() {
                             $p = Net::Ping->new("icmp");
                         }
                         print $p->ping("www.mandrakesoft.com") ? 1 : 0;
-                        0;
                     });
 }
 
