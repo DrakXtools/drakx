@@ -25,7 +25,7 @@ modules::mergein_conf('/etc/modules.conf');
 # autoreconfigure the mouse on major kernel change:
 my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
 my $curr_kernel = c::kernel_version();
-$curr_kernel =~ s/(^\d+\.\d+).*/\1/;
+$curr_kernel =~ s/(^\d+\.\d+).*/$1/;
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel });
 if ($curr_kernel ne $prev_kernel) {
     require class_discard;
@@ -44,7 +44,7 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
         substInFile { 
             log::explanations("switch XFree86 driver from nvidia to nv") if /Driver "nv.+"/;
             s!Driver "nv.*"!Driver "nv"!g; 
-            s!([^#]Load.*glx)!#\1!g;
+            s!([^#]Load.*glx)!#$1!g;
         } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     }
 }
