@@ -181,7 +181,13 @@ ifdown eth0
 	);
     my $i=0;
     map { defined $set_default or do { $_->[1] and $set_default=$i; }; $i++; } @l;
-    @l = map { $_->[0] = $_->[0] . if_($_->[1], " - " . _ ($_->[2], $_->[1])) } @l;
+    @l = (
+[_("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . _("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
+[_("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . _("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
+[_("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . _("detected on interface %s", $netc->{autodetect}{adsl})), \$conf{adsl}],
+[_("Cable connection") . if_($netc->{autodetect}{cable}, " - " . _("cable connection detected")), \$conf{cable}],
+[_("LAN connection") . if_($netc->{autodetect}{lan}, " - " . _("ethernet card(s) detected")), \$conf{lan}]
+);
     my $e = $in->ask_from(_("Network Configuration Wizard"), _("Choose the connection you want to configure"),
 			  [ map { { label => $_->[0], val => $_->[1], type => 'bool'} } @l ]
 			 ) or goto step_1;
