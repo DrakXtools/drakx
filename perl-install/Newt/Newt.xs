@@ -31,9 +31,10 @@ DESTROY()
 	}
 
 int
-newtInit()
+newtInit(setlocale)
+  int setlocale
   CODE:
-  SLsmg_Setlocale = 0;
+  SLsmg_Setlocale = setlocale;
   newtInit();
 
 int

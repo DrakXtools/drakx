@@ -15,7 +15,16 @@ my ($width, $height) = (80, 25);
 my @wait_messages;
 
 sub new {
-    Newt::Init();
+    if ($::isInstall) {
+	system('unicode_start'); #- don't use run_program, we must do it on current console
+	{ 
+	    local $ENV{LC_CTYPE} = "en_US.UTF-8";
+	    Newt::Init(1);
+	}
+	c::setlocale();
+    } else {
+	Newt::Init(0);
+    }
     Newt::Cls();
     Newt::SetSuspendCallback();
     ($width, $height) = Newt::GetScreenSize();

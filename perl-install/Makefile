@@ -149,6 +149,9 @@ endif
 	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
 
+	perl -pe 's!^echo!/usr/bin/echo!' /bin/unicode_start > $(DEST)/usr/bin/unicode_start
+	chmod a+x $(DEST)/usr/bin/unicode_start
+
 	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' share/aliases
 
 ifeq (i386,$(ARCH))
