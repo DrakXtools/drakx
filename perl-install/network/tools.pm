@@ -115,7 +115,7 @@ sub disconnected { }
 
 sub write_initscript {
     output ("$prefix/etc/rc.d/init.d/internet",
-	    qq{
+	    q{
 #!/bin/bash
 #
 # internet       Bring up/down internet connection
