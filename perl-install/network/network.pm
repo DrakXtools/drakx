@@ -424,9 +424,11 @@ sub configureNetwork2 {
         add2hosts("$etc/hosts", "localhost", "127.0.0.1");
         
         any { $_->{BOOTPROTO} eq "dhcp" } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
-        $in->do_pkgs->ensure_is_installed('tmdns', '/sbin/tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
-        $in->do_pkgs->ensure_is_installed('zcip', '/sbin/zcip', 'auto');
-        $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
+        if ($netc->{ZEROCONF_HOSTNAME}) {
+            $in->do_pkgs->ensure_is_installed('tmdns', '/sbin/tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
+            $in->do_pkgs->ensure_is_installed('zcip', '/sbin/zcip', 'auto');
+            write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME}); 
+        } else { run_program::rooted($::prefix, "chkconfig", "--del", $_) foreach qw(tmdns zcip) }  # disable zeroconf
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
     }
 
