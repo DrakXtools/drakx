@@ -471,7 +471,9 @@ sub setup {
     my $kmap = keyboard2kmap($keyboard) or return;
 
     log::l("loading keymap $kmap");
-    if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
+    if (-x '/bin/loadkeys') {
+	run_program::run('loadkeys', $kmap);
+    } elsif (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
 	load(scalar cat_($f));
     } else {
 	my $F;
