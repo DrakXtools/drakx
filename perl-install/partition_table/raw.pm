@@ -27,6 +27,7 @@ if_(arch() =~ /ppc/,
     [ 'DocsBoot', 0x148, 'DocsBoot' ],
     [ 'system_commander', 0x1ad, "SYSCMNDRSYS" ],
     [ 'Be Os', 0x24, 'Boot Manager' ],
+    [ 'os2', 0, "\xFA\xB8\x30\x00", 0xfA, "OS/2" ],
     [ 'TimO', 0, 'IBM Thinkpad hibernation partition' ],
     [ 'dos', 0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
     [ 'dos', 0xa0, "\x00\xB4\x08\xCD\x13\x72" ], #- nt2k's
