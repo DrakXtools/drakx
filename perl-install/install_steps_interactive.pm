@@ -391,11 +391,11 @@ sub setPackages {
     install_any::setPackages($o, $rebuild_needed);
 
     $w->set(N("Looking at packages already installed..."));
-    pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
+    pkgs::selectPackagesAlreadyInstalled($o->{packages});
 
     if ($rebuild_needed) {
 	$w->set(N("Finding packages to upgrade..."));
-	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
+	pkgs::selectPackagesToUpgrade($o->{packages});
     }
 }
 
@@ -852,7 +852,7 @@ Do you want to install the updates?")),
 	eval {
 	    if ($u->{mirror}) {
 		my $_w = $o->wait_message('', N("Contacting the mirror to get the list of available packages..."));
-		$update_medium = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
+		$update_medium = crypto::getPackages($o->{packages}, $u->{mirror});
 	    }
 	};
     } while $@ || !$update_medium && $o->ask_yesorno('', N("Unable to contact mirror %s", $u->{mirror}) . ($@ ? " :\n$@" : "") . "\n\n" . N("Would you like to try again?"));

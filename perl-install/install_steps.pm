@@ -289,8 +289,8 @@ sub setPackages {
     my ($o, $rebuild_needed) = @_;
 
     install_any::setPackages($o, $rebuild_needed);
-    pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
-    $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
+    pkgs::selectPackagesAlreadyInstalled($o->{packages});
+    $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages});
 }
 
 sub deselectFoundMedia {
@@ -411,7 +411,7 @@ sub pkg_install {
     if ($::testing) {
 	log::l(qq(selecting package "$_")) foreach @l;
     } else {
-	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
+	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen();
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
     }
     my @toInstall = pkgs::packagesToInstall($o->{packages});
@@ -426,7 +426,7 @@ sub pkg_install {
 sub pkg_install_if_requires_satisfied {
     my ($o, @l) = @_;
     require pkgs;
-    $o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
+    $o->{packages}{rpmdb} ||= pkgs::rpmDbOpen();
     foreach (@l) {
 	my %newSelection;
 	my $pkg = pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found";
@@ -446,7 +446,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     if (%{$packages->{state}{ask_remove} || {}}) {
 	log::l("removing : ", join ', ', keys %{$packages->{state}{ask_remove}});
-	pkgs::remove($o->{prefix}, [ keys %{$packages->{state}{ask_remove}} ], $packages);
+	pkgs::remove([ keys %{$packages->{state}{ask_remove}} ], $packages);
     }
 
     #- small transaction will be built based on this selection and depslist.
@@ -454,7 +454,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     my $time = time();
     $ENV{DURING_INSTALL} = 1;
-    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages);
+    pkgs::install($o->{isUpgrade}, \@toInstall, $packages);
 
     any::writeandclean_ldsoconf($o->{prefix});
     delete $ENV{DURING_INSTALL};
@@ -571,7 +571,7 @@ GridHeight=70
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
 	my $pkg = pkgs::packageByName($o->{packages}, 'rpm');
-	$pkg && ($pkg->flag_selected || $pkg->flag_installed) && $pkg->compare(">= 4.0") and pkgs::cleanOldRpmDb($o->{prefix});
+	$pkg && ($pkg->flag_selected || $pkg->flag_installed) && $pkg->compare(">= 4.0") and pkgs::cleanOldRpmDb();
 
 	log::l("moving previous desktop files that have been updated to Trash of each user");
 	install_any::kdemove_desktop_file($o->{prefix});
@@ -611,11 +611,10 @@ sub install_urpmi {
 
     my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
     if ($pkg && ($pkg->flag_selected || $pkg->flag_installed)) {
-	install_any::install_urpmi($o->{prefix}, 
-				   $o->{method},
+	install_any::install_urpmi($o->{method},
 				   $o->{packages},
 				   $o->{packages}{mediums});
-	pkgs::saveCompssUsers($o->{prefix}, $o->{packages}, $o->{compssUsers});
+	pkgs::saveCompssUsers($o->{packages}, $o->{compssUsers});
     }
 }
 
@@ -657,7 +656,7 @@ sub installUpdates {
 
     upNetwork($o);
     require crypto;
-    crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}) and
+    crypto::getPackages($o->{packages}, $u->{mirror}) and
 	$o->pkg_install(@{$u->{packages} || []});
 
     #- re-install urpmi with update security medium.

@@ -138,7 +138,7 @@ sub getFile {
 }
 
 sub getPackages {
-    my ($prefix, $packages, $mirror) = @_;
+    my ($packages, $mirror) = @_;
 
     $crypto::host = $mirror;
 
@@ -158,7 +158,7 @@ sub getPackages {
     
     #- extract hdlist of crypto, then depslist.
     require pkgs;
-    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "",
+    my $update_medium = pkgs::psUsingHdlist('ftp', $packages, "hdlist-updates.cz", "1u", "",
 					    "Updates for Mandrakelinux " . version(), 1, $fhdlist, $pubkey);
     if ($update_medium) {
 	log::l("read updates hdlist");
@@ -170,8 +170,8 @@ sub getPackages {
 	$update_medium->{update} = 1;
 
 	#- search for packages to update.
-	$packages->{rpmdb} ||= pkgs::rpmDbOpen($prefix);
-	pkgs::selectPackagesToUpgrade($packages, $prefix, $update_medium);
+	$packages->{rpmdb} ||= pkgs::rpmDbOpen();
+	pkgs::selectPackagesToUpgrade($packages, $update_medium);
     }
     return $update_medium;
 }

@@ -50,17 +50,16 @@ sub packageMedium {
    return {};
 }
 
-sub cleanHeaders {
-    my ($prefix) = @_;
-    rm_rf("$prefix/tmp/headers") if -e "$prefix/tmp/headers";
+sub cleanHeaders() {
+    rm_rf("$::prefix/tmp/headers") if -e "$::prefix/tmp/headers";
 }
 
 #- get all headers from an hdlist file.
 sub extractHeaders {
-    my ($prefix, $pkgs, $media) = @_;
+    my ($pkgs, $media) = @_;
     my %medium2pkgs;
 
-    cleanHeaders($prefix);
+    cleanHeaders();
 
     foreach (@$pkgs) {
 	foreach my $medium (values %$media) {
@@ -75,12 +74,12 @@ sub extractHeaders {
 	eval {
 	    require packdrake;
 	    my $packer = new packdrake("/tmp/$medium->{hdlist}", quiet => 1);
-	    $packer->extract_archive("$prefix/tmp/headers", map { $_->header_filename } @{$medium2pkgs{$_}});
+	    $packer->extract_archive("$::prefix/tmp/headers", map { $_->header_filename } @{$medium2pkgs{$_}});
 	};
     }
 
     foreach (@$pkgs) {
-	my $f = "$prefix/tmp/headers/" . $_->header_filename;
+	my $f = "$::prefix/tmp/headers/" . $_->header_filename;
 	$_->update_header($f) or log::l("unable to open header file $f"), next;
 	log::l("read header file $f");
     }
@@ -357,17 +356,16 @@ sub unselectAllPackages($) {
 				 callback_choices => \&packageCallbackChoices);
 }
 
-sub urpmidir {
-    my ($prefix) = @_;
-    my $v = "$prefix/var/lib/urpmi";
+sub urpmidir() {
+    my $v = "$::prefix/var/lib/urpmi";
     -l $v && !-e _ and unlink $v and mkdir $v, 0755; #- dangling symlink
     -w $v ? $v : '/tmp';
 }
 
 sub psUpdateHdlistsDeps {
-    my ($prefix, $_method, $packages) = @_;
+    my ($packages) = @_;
     my $need_copy = 0;
-    my $urpmidir = urpmidir($prefix);
+    my $urpmidir = urpmidir();
 
     #- check if current configuration is still up-to-date and do not need to be updated.
     foreach (values %{$packages->{mediums}}) {
@@ -394,7 +392,6 @@ sub psUpdateHdlistsDeps {
 
 sub psUsingHdlists {
     my ($o, $method, $o_hdlistsprefix, $o_packages, $o_initialmedium, $o_callback) = @_;
-    my $prefix = $o->{prefix};
     my $is_ftp = $o_hdlistsprefix =~ /^ftp:/;
     my $listf = install_any::getFile($o_hdlistsprefix && !$is_ftp ? "$o_hdlistsprefix/media/media_info/hdlists" : 'media/media_info/hdlists')
 	or die "no hdlists found";
@@ -431,7 +428,7 @@ sub psUsingHdlists {
     foreach my $h (@hdlists) {
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	my $supplmedium = psUsingHdlist($prefix, $method, $o_packages, @$h);
+	my $supplmedium = psUsingHdlist($method, $o_packages, @$h);
 	$o_callback and $o_callback->($supplmedium, $o_hdlistsprefix, $method);
     }
 
@@ -442,9 +439,9 @@ sub psUsingHdlists {
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $hdlist, $medium_name, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey, $o_nocopy) = @_;
+    my ($method, $packages, $hdlist, $medium_name, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey, $o_nocopy) = @_;
     my $fakemedium = "$descr ($method$medium_name)";
-    my $urpmidir = urpmidir($prefix);
+    my $urpmidir = urpmidir();
     log::l("trying to read $hdlist for medium $medium_name");
 
     my $m = { hdlist     => $hdlist,
@@ -637,7 +634,7 @@ sub readCompssUsers {
 }
 
 sub saveCompssUsers {
-    my ($prefix, $packages, $compssUsers) = @_;
+    my ($packages, $compssUsers) = @_;
     my $flat;
     foreach (@$compssUsers) {
 	my %fl = map { $_ => 1 } @{$_->{flags}};
@@ -649,7 +646,7 @@ sub saveCompssUsers {
 	    }
 	}
     }
-    my $urpmidir = urpmidir($prefix);
+    my $urpmidir = urpmidir();
     output "$urpmidir/compssUsers.flat", $flat;
 }
 
@@ -819,10 +816,9 @@ sub computeGroupSize {
 }
 
 
-sub openInstallLog {
-    my ($prefix) = @_;
+sub openInstallLog() {
 
-    my $f = "$prefix/root/drakx/install.log";
+    my $f = "$::prefix/root/drakx/install.log";
     open(my $LOG, ">> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept."); #-#
     CORE::select((CORE::select($LOG), $| = 1)[0]);
     c::rpmErrorSetCallback(fileno $LOG);
@@ -831,7 +827,7 @@ sub openInstallLog {
 }
 
 sub rpmDbOpen {
-    my ($prefix, $o_rebuild_needed) = @_;
+    my ($o_rebuild_needed) = @_;
 
     if ($o_rebuild_needed) {
 	if (my $pid = fork()) {
@@ -839,17 +835,17 @@ sub rpmDbOpen {
 	    $? & 0xff00 and die "rebuilding of rpm database failed";
 	} else {
 	    log::l("rebuilding rpm database");
-	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";
+	    my $rebuilddb_dir = "$::prefix/var/lib/rpmrebuilddb.$$";
 	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), rm_rf($rebuilddb_dir);
 
-	    URPM::DB::rebuild($prefix) or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
+	    URPM::DB::rebuild($::prefix) or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
 
 	    c::_exit(0);
 	}
     }
 
     my $db;
-    if ($db = URPM::DB::open($prefix)) {
+    if ($db = URPM::DB::open($::prefix)) {
 	log::l("opened rpm database for examining existing packages");
     } else {
 	log::l("unable to open rpm database, using empty rpm db emulation");
@@ -859,31 +855,29 @@ sub rpmDbOpen {
     $db;
 }
 
-sub rpmDbOpenForInstall {
-    my ($prefix) = @_;
+sub rpmDbOpenForInstall() {
 
     #- there is a bug in rpm 4.2 where all operations for accessing rpmdb files are not
     #- always done using prefix, we need to setup a symlink in /var/lib/rpm for that ...
     unless (-e "/var/lib/rpm") {
 	#- check if at some time a /var/lib directory has been made.
 	if (-d "/var/lib") {
-	    symlinkf "$prefix/var/lib/rpm", "/var/lib/rpm";
+	    symlinkf "$::prefix/var/lib/rpm", "/var/lib/rpm";
 	} else {
-	    symlinkf "$prefix/var/lib", "/var/lib";
+	    symlinkf "$::prefix/var/lib", "/var/lib";
 	}
     }
 
-    my $db = URPM::DB::open($prefix, 1);
-    $db and log::l("opened rpmdb for writing in $prefix");
+    my $db = URPM::DB::open($::prefix, 1);
+    $db and log::l("opened rpmdb for writing in $::prefix");
     $db;
 }
 
-sub cleanOldRpmDb {
-    my ($prefix) = @_;
+sub cleanOldRpmDb() {
     my $failed;
 
     foreach (qw(Basenames Conflictname Group Name Packages Providename Requirename Triggername)) {
-	-s "$prefix/var/lib/rpm/$_" or $failed = 'failed';
+	-s "$::prefix/var/lib/rpm/$_" or $failed = 'failed';
     }
     #- rebuilding has been successfull, so remove old rpm database if any.
     #- once we have checked the rpm4 db file are present and not null, in case
@@ -892,22 +886,22 @@ sub cleanOldRpmDb {
 	log::l("rebuilding rpm database completed successfully");
 	foreach (qw(conflictsindex.rpm fileindex.rpm groupindex.rpm nameindex.rpm packages.rpm
                     providesindex.rpm requiredby.rpm triggerindex.rpm)) {
-	    -e "$prefix/var/lib/rpm/$_" or next;
+	    -e "$::prefix/var/lib/rpm/$_" or next;
 	    log::l("removing old rpm file $_");
-	    rm_rf("$prefix/var/lib/rpm/$_");
+	    rm_rf("$::prefix/var/lib/rpm/$_");
 	}
     }
 }
 
 sub selectPackagesAlreadyInstalled {
-    my ($packages, $_prefix) = @_;
+    my ($packages) = @_;
 
     log::l("computing installed flags and size of installed packages");
     $packages->{sizes} = $packages->compute_installed_flags($packages->{rpmdb});
 }
 
 sub selectPackagesToUpgrade {
-    my ($packages, $_prefix, $o_medium) = @_;
+    my ($packages, $o_medium) = @_;
 
     #- check before that if medium is given, it should be valid.
     $o_medium && (! defined $o_medium->{start} || ! defined $o_medium->{end}) and return;
@@ -1024,8 +1018,8 @@ sub installCallback {
 #    log::l($msg .": ". join(',', @_));
 }
 
-sub install($$$;$$) {
-    my ($prefix, $isUpgrade, $toInstall, $packages) = @_;
+sub install {
+    my ($isUpgrade, $toInstall, $packages) = @_;
     my %packages;
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
@@ -1045,11 +1039,11 @@ sub install($$$;$$) {
 	$total += to_int($pkg->size); #- do not correct for upgrade!
     }
 
-    log::l("pkgs::install $prefix");
+    log::l("pkgs::install $::prefix");
     log::l("pkgs::install the following: ", join(" ", map { $_->name } values %packages));
 
     URPM::read_config_files();
-    my $LOG = openInstallLog($prefix);
+    my $LOG = openInstallLog();
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
@@ -1062,14 +1056,14 @@ sub install($$$;$$) {
 
 	#- added to exit typically after last media unselected.
 	if ($nb == 0 && scalar(@transToInstall) == 0) {
-	    cleanHeaders($prefix);
+	    cleanHeaders();
 
 	    loopback::save_boot($loop_boot);
 	    return;
 	}
 
 	#- extract headers for parent as they are used by callback.
-	extractHeaders($prefix, \@transToInstall, $packages->{mediums});
+	extractHeaders(\@transToInstall, $packages->{mediums});
 
 	my ($retry_pkg, $retry_count);
 	while ($retry_pkg || @transToInstall) {
@@ -1120,8 +1114,8 @@ sub install($$$;$$) {
 			print OUTPUT "inst:$id:start:0:$size_typical\ninst:$id:progress:0:$size_typical\nclose:$id\n";
 		    }
 		} else { eval {
-		    my $db = rpmDbOpenForInstall($prefix) or die "error opening RPM database: ", c::rpmErrorString();
-		    my $trans = $db->create_transaction($prefix);
+		    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", c::rpmErrorString();
+		    my $trans = $db->create_transaction($::prefix);
 		    if ($retry_pkg) {
 			log::l("opened rpm database for retry transaction of 1 package only");
 			$trans->add($retry_pkg, $isUpgrade && allowedToUpgrade($retry_pkg->name))
@@ -1239,27 +1233,27 @@ sub install($$$;$$) {
 		}
 	    }
 	}
-	cleanHeaders($prefix);
+	cleanHeaders();
     } while $nb > 0 && !$pkgs::cancel_install;
 
     log::l("closing install.log file");
     close $LOG;
     eval { fs::umount("/mnt/cdrom") };
 
-    cleanHeaders($prefix);
+    cleanHeaders();
 
     loopback::save_boot($loop_boot);
 }
 
 sub remove {
-    my ($prefix, $toRemove, $packages) = @_;
+    my ($toRemove, $packages) = @_;
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
 
     return if !@{$toRemove || []};
 
-    my $db = rpmDbOpenForInstall($prefix) or die "error opening RPM database: ", c::rpmErrorString();
-    my $trans = $db->create_transaction($prefix);
+    my $db = rpmDbOpenForInstall() or die "error opening RPM database: ", c::rpmErrorString();
+    my $trans = $db->create_transaction($::prefix);
 
     foreach my $p (@$toRemove) {
 	#- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.

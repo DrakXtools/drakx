@@ -296,7 +296,7 @@ sub choosePackagesTree {
 			    },
 			    get_info => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return '';
-				pkgs::extractHeaders($o->{prefix}, [$p], $packages->{mediums});
+				pkgs::extractHeaders([$p], $packages->{mediums});
 
 				my $imp = translate($pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 

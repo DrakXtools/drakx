@@ -246,7 +246,7 @@ sub setup_postinstall_rpms($$) {
     my %toCopy;
     #- compute closure of package that may be copied, use INSTALL category
     #- in rpmsrate.
-    $packages->{rpmdb} ||= pkgs::rpmDbOpen($prefix);
+    $packages->{rpmdb} ||= pkgs::rpmDbOpen();
     foreach (@{$packages->{needToCopy} || []}) {
 	my $p = pkgs::packageByName($packages, $_) or next;
 	pkgs::selectPackage($packages, $p, 0, \%toCopy);
@@ -545,7 +545,6 @@ sub selectSupplMedia {
 		return 'error';
 	    }
 	    my $supplmedium = pkgs::psUsingHdlist(
-		$o->{prefix},
 		$suppl_method,
 		$o->{packages},
 		"hdlist$medium_name.cz", #- hdlist
@@ -613,7 +612,7 @@ sub setPackages {
 	1 while $suppl_method = $o->selectSupplMedia($suppl_method);
 
 	#- open rpm db according to right mode needed.
-	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
+	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($rebuild_needed);
 
 	#- always try to select basic kernel (else on upgrade, kernel will never be updated provided a kernel is already
 	#- installed and provides what is necessary).
@@ -632,10 +631,10 @@ sub setPackages {
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
-	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method}, $o->{packages});
+	pkgs::psUpdateHdlistsDeps($o->{packages});
 
 	#- open rpm db (always without rebuilding db, it should be false at this point).
-	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
+	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen();
     }
 }
 
@@ -829,7 +828,7 @@ sub setupFB {
 }
 
 sub install_urpmi {
-    my ($prefix, $method, $packages, $mediums) = @_;
+    my ($method, $packages, $mediums) = @_;
 
     #- rare case where urpmi cannot be installed (no hd install path).
     $method eq 'disk' && !any::hdInstallPath() and return;
@@ -839,7 +838,7 @@ sub install_urpmi {
     delete $packages->{rpmdb};
 
     #- import pubkey in rpmdb.
-    my $db = pkgs::rpmDbOpenForInstall($prefix);
+    my $db = pkgs::rpmDbOpenForInstall();
     $packages->parse_pubkeys(db => $db);
     foreach my $medium (values %$mediums) {
 	$packages->import_needed_pubkeys($medium->{pubkey}, db => $db, callback => sub {
@@ -869,7 +868,7 @@ sub install_urpmi {
 	    #- build a list file if needed.
 	    if ($need_list) {
 		my $mask = umask 077;
-		open(my $LIST, ">$prefix/var/lib/urpmi/list.$name") or log::l("failed to write list.$name");
+		open(my $LIST, ">$::prefix/var/lib/urpmi/list.$name") or log::l("failed to write list.$name");
 		umask $mask;
 
 		#- build list file using internal data, synthesis file should exist.
@@ -884,7 +883,7 @@ sub install_urpmi {
 		    }
 		} else {
 		    #- need to use another method here to build list file.
-		    open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
+		    open(my $F, "parsehdlist '$::prefix/var/lib/urpmi/hdlist.$name.cz' |");
 		    local $_; 
 		    while (<$F>) {
                         my ($arch) = /\.([^\.]+)\.rpm$/;
@@ -898,7 +897,7 @@ sub install_urpmi {
 	    }
 
 	    #- build a names file
-	    if (open my $F, ">", "$prefix/var/lib/urpmi/names.$name") {
+	    if (open my $F, ">", "$::prefix/var/lib/urpmi/names.$name") {
 		if (defined $_->{start} && defined $_->{end}) {
 		    foreach ($_->{start} .. $_->{end}) {
 			print $F $packages->{depslist}[$_]->name . "\n";
@@ -908,11 +907,11 @@ sub install_urpmi {
 	    }
 
 	    #- build synthesis file if there are still not existing (ie not copied from mirror).
-	    if (-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
-		unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
-		run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
+	    if (-s "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
+		unlink "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
+		run_program::rooted($::prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
 				    "--synthesis", "/var/lib/urpmi/hdlist.$name.cz");
-		run_program::rooted($prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
+		run_program::rooted($::prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
 	    }
 
 	    my ($qname, $qdir) = ($name, $dir);
@@ -945,11 +944,11 @@ sub install_urpmi {
 	} else {
 	    #- remove not selected media by removing hdlist and synthesis files copied.
 	    log::l("removing media $name");
-	    unlink "$prefix/var/lib/urpmi/hdlist.$name.cz";
-	    unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
+	    unlink "$::prefix/var/lib/urpmi/hdlist.$name.cz";
+	    unlink "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
 	}
     }
-    eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
+    eval { output "$::prefix/etc/urpmi/urpmi.cfg", @cfg };
 }
 
 
