@@ -6,10 +6,10 @@ use common qw(:common);
 empty => '',
 
 selectLanguage =>
-__("Please choose your preferred language for installation and system usage."),
+ __("Please choose your preferred language for installation and system usage."),
 
 license =>
-__("You need to accept the terms of the above license to continue installation.
+ __("You need to accept the terms of the above license to continue installation.
 
 Please click on \"Accept\" if you are agree with its terms.
 
@@ -17,15 +17,15 @@ Please click on \"Refuse\" if you disagree with its terms. Installation will end
 configuration."),
 
 selectKeyboard =>
-__("Choose the layout corresponding to your keyboard from the list above"),
+ __("Choose the layout corresponding to your keyboard from the list above"),
 
 selectLangs => 
-__("If you wish other languages (than the one you choose at
+ __("If you wish other languages (than the one you choose at
 beginning of installation) will be available after installation, please chose
 them in list above. If you want select all, you just need to select \"All\"."),
 
 selectInstallClass =>
-__("Please choose \"Install\" if there are no previous version of Linux-Mandrake
+ __("Please choose \"Install\" if there are no previous version of Linux-Mandrake
 installed or if you wish to use several operating systems.
 
 Please choose \"Rescue\" if you wish to rescue an already installed version of Linux-Mandrake.
@@ -58,7 +58,7 @@ selectInstallClassCorpo =>
     But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!"),
 
 selectInstallClass2 =>
-__("You must now define your machine usage. Choices are:
+ __("You must now define your machine usage. Choices are:
 
 	* Workstation: this the ideal choice if you intend to use your machine primarily for everyday use, at office or
 	  at home.
@@ -71,7 +71,8 @@ __("You must now define your machine usage. Choices are:
 	  SMB), a print server (Unix style or Microsoft Windows style), an authentication server (NIS), a database
 	  server and so on. As such, do not expect any gimmicks (KDE, GNOME, etc.) to be installed."),
 
-setupSCSI => __("DrakX will attempt to look for PCI SCSI adapter(s). If DrakX
+setupSCSI => 
+ __("DrakX will attempt to look for PCI SCSI adapter(s). If DrakX
 finds an SCSI adapter and knows which driver to use, it will be automatically
 installed.
 
@@ -91,7 +92,8 @@ on retrieving this information from hardware documentation, from the
 manufacturer's Web site (if you have Internet access) or from Microsoft Windows
 (if you have it on your system)."),
 
-doPartitionDisks => __("At this point, you need to choose where to install your
+doPartitionDisks => 
+ __("At this point, you need to choose where to install your
 Linux-Mandrake operating system on your hard drive. If it is empty or if an
 existing operating system uses all the space available on it, you need to
 partition it. Basically, partitioning a hard drive consists of logically
@@ -109,9 +111,9 @@ If partitions have been already defined (from a previous installation or from
 another partitioning tool), you just need choose those to use to install your
 Linux system.
 
-If partitions haven't been already defined, you need to create them. To do that,
-use the wizard available above. Depending of your hard drive configuration,
-several solutions can be available:
+If partitions haven't been already defined, you need to create them. 
+To do that, use the wizard available above. Depending of your hard drive
+configuration, several solutions can be available:
 
 	* Use existing partition: the wizard has detected one or more existing Linux partitions on your hard drive. If
 	  you want to keep them, choose this option. 
@@ -137,7 +139,8 @@ that the size of your Microsoft
 	  choosing this solution. It is powerful but it is very dangerous. You can lose all your data very easily. So,
 	  don't choose this solution unless you know what you are doing."),
 
-partition_with_diskdrake => __("At this point, you need to choose what
+partition_with_diskdrake => 
+ __("At this point, you need to choose what
 partition(s) to use to install your new Linux-Mandrake system. If partitions
 have been already defined (from a previous installation of GNU/Linux or from
 another partitioning tool), you can use existing partitions. In other cases,
@@ -181,7 +184,8 @@ For information, you can reach any option using the keyboard: navigate trough th
 
            * Ctrl-m to set the mount point"),
 
-ask_mntpoint_s => __("Above are listed the existing Linux partitions detected on
+ask_mntpoint_s => 
+ __("Above are listed the existing Linux partitions detected on
 your hard drive. You can keep choices make by the wizard, they are good for a
 common usage. If you change these choices, you must at least define a root
 partition (\"/\"). Don't choose a too little partition or you will not be able
@@ -209,11 +213,13 @@ if it is an SCSI hard drive.
 
 With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"secondary hard drive\", etc..."),
 
-takeOverHdChoose => __("Choose the hard drive you want to erase to install your
+takeOverHdChoose => 
+ __("Choose the hard drive you want to erase to install your
 new Linux-Mandrake partition. Be careful, all data present on it will be lost
 and will not be recoverable."),
 
-takeOverHdConfirm => __("Click on \"OK\" if you want to delete all data and
+takeOverHdConfirm => 
+ __("Click on \"OK\" if you want to delete all data and
 partitions present on this hard drive. Be careful, after clicking on \"OK\", you
 will not be able to recover any data and partitions present on this hard drive,
 including any Windows data.
@@ -221,7 +227,8 @@ including any Windows data.
 Click on \"Cancel\" to cancel this operation without losing any data and
 partitions present on this hard drive."),
 
-resizeFATChoose => __("More than one Microsoft Windows partition have been
+resizeFATChoose => 
+ __("More than one Microsoft Windows partition have been
 detected on your hard drive. Please choose the one you want resize to install
 your new Linux-Mandrake operating system.
 
@@ -249,9 +256,11 @@ With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"sec
 \"Windows name\" is the letter of your hard drive under Windows (the first disk
 or partition is called \"C:\")."),
 
-resizeFATWait => __("Please be patient. This operation can take several minutes."),
+resizeFATWait => 
+ __("Please be patient. This operation can take several minutes."),
 
-formatPartitions => __("Any partitions that have been newly defined must be
+formatPartitions => 
+ __("Any partitions that have been newly defined must be
 formatted for use (formatting meaning creating a filesystem).
 
 At this time, you may wish to reformat some already existing partitions to erase
@@ -271,17 +280,19 @@ Click on \"OK\" when you are ready to format partitions.
 Click on \"Cancel\" if you want to choose other partitions to install your new
 Linux-Mandrake operating system."),
 
-choosePackages => __("You may now select the group of packages you wish to
+choosePackages => 
+ __("You may now select the group of packages you wish to
 install or upgrade.
 
 DrakX will then check whether you have enough room to install them all. If not,
 it will warn you about it. If you want to go on anyway, it will proceed onto the
 installation of all selected groups but will drop some packages of lesser
-interest. At the bottom of the list you can select the option \"Individual
-package selection\"; in this case you will have to browse through more than 1000
-packages..."),
+interest. At the bottom of the list you can select the option 
+\"Individual package selection\"; in this case you will have to browse through
+more than 1000 packages..."),
 
-choosePackagesTree => __("You can now choose individually all the packages you
+choosePackagesTree => 
+ __("You can now choose individually all the packages you
 wish to install.
 
 You can expand or collapse the tree by clicking on options in the left corner of
@@ -294,24 +305,29 @@ If you want not to be warned on dependencies, click on \"Automatic
 dependencies\". If you do this, note that unselecting one package may silently
 unselect several other packages which depend on it."),
 
-chooseCD => __("If you have all the CDs in the list above, click Ok. If you have
+chooseCD => 
+ __("If you have all the CDs in the list above, click Ok. If you have
 none of those CDs, click Cancel. If only some CDs are missing, unselect them,
 then click Ok."),
 
-installPackages => __("Your new Linux-Mandrake operating system is currently
+installPackages => 
+ __("Your new Linux-Mandrake operating system is currently
 installed. This operation should take a few minutes (it depends on size you
 choose to install and the speed of your computer).
 
 Please be patient."),
 
-selectMouse => __( "You can now test your mouse. Use buttons and wheel to verify
+selectMouse => 
+ __( "You can now test your mouse. Use buttons and wheel to verify
 if settings are good. If not, you can click on \"Cancel\" to choose another
 driver."),
 
-selectSerialPort => __("Please select the correct port. For example, the COM1
+selectSerialPort => 
+ __("Please select the correct port. For example, the COM1
 port under MS Windows is named ttyS0 under GNU/Linux."),
 
-configureNetwork => __("If you wish to connect your computer to the Internet or
+configureNetwork => 
+ __("If you wish to connect your computer to the Internet or
 to a local network please choose the correct option. Please turn on your device
 before choosing the correct option to let DrakX detect it automatically.
 
@@ -321,34 +337,41 @@ If you do not have any connection to the Internet or a local network, choose
 If you wish to configure the network later after installation or if you have
 finished to configure your network connection, choose \"Done\"."),
 
-configureNetworkNoModemFound => __("No modem has been detected. Please select
+configureNetworkNoModemFound => 
+ __("No modem has been detected. Please select
 the serial port on which it is plugged.
 
 For information, the first serial port (called \"COM1\" under Mircrosoft
 Windows) is called \"ttyS0\" under Linux."),
 
-configureNetworkDNS => __("You may now enter dialup options. If you don't know
+configureNetworkDNS => 
+ __("You may now enter dialup options. If you don't know
 or are not sure what to enter, the correct informations can be obtained from
 your Internet Service Provider. If you do not enter the DNS (name server)
 information here, this information will be obtained from your Internet Service
 Provider at connection time."),
 
-configureNetworkISDN => __("If your modem is an external modem, please turn on
+configureNetworkISDN => 
+ __("If your modem is an external modem, please turn on
 it now to let DrakX detect it automatically."),
 
-configureNetworkADSL => __("Please turn on your modem and choose the correct one."),
+configureNetworkADSL => 
+ __("Please turn on your modem and choose the correct one."),
 
-configureNetworkADSL2 => __("If you are not sure if informations above are
+configureNetworkADSL2 => 
+ __("If you are not sure if informations above are
 correct or if you don't know or are not sure what to enter, the correct
 informations can be obtained from your Internet Service Provider. If you do not
 enter the DNS (name server) information here, this information will be obtained
 from your Internet Service Provider at connection time."),
 
-configureNetworkCable => __("You may now enter your host name if needed. If you
+configureNetworkCable => 
+ __("You may now enter your host name if needed. If you
 don't know or are not sure what to enter, the correct informations can be
 obtained from your Internet Service Provider."),
 
-configureNetworkIP => __("You may now configure your network device.
+configureNetworkIP => 
+ __("You may now configure your network device.
 
 * IP address: if you don't know or are not sure what to enter,
 ask your network administrator. You should not enter an IP address if
@@ -360,10 +383,12 @@ you select the option \"Automatic IP\" below.
 * Automatic IP: if your network uses BOOTP or DHCP protocol, select this option. If selected, no value is needed in
   \"IP address\". If you don't know or are not sure if you need to select this option, ask your network administrator."),
 
-configureNetworkHost => __("You may now enter your host name if needed. If you
+configureNetworkHost => 
+ __("You may now enter your host name if needed. If you
 don't know or are not sure what to enter, ask your network administrator."),
 
-configureNetworkHostDHCP => __("You may now enter your host name if needed. If you
+configureNetworkHostDHCP => 
+ __("You may now enter your host name if needed. If you
 don't know or are not sure what to enter, leave blank."),
 
 configureNetworkISP =>
@@ -385,7 +410,8 @@ to your legislation."),
 configureTimezone =>
  __("You can now select your timezone according to where you live."),
 
-configureTimezoneGMT => __("GNU/Linux manages time in GMT (Greenwich Manage
+configureTimezoneGMT => 
+ __("GNU/Linux manages time in GMT (Greenwich Manage
 Time) and translates it in local time according to the time zone you have
 selected.
 
@@ -403,11 +429,12 @@ remember that several services can be dangerous if they are enable on a server.
 In general, select only the services that you really need."),
 
 configurePrinter => 
-__("You can configure a local printer (connected to your computer) or remote
+ __("You can configure a local printer (connected to your computer) or remote
 printer (accessible via a Unix, Netware or Microsoft Windows network)."),
 
-configurePrinterSystem => __("
-If you wish to be able to print, please choose one printing system between CUPS and LPR.
+configurePrinterSystem => 
+ __("If you wish to be able to print, please choose one printing system between
+CUPS and LPR.
 
 
 CUPS is a new, powerful and flexible printing system for Unix systems (CUPS
@@ -421,7 +448,7 @@ LPR is the old printing system used in previous Linux-Mandrake distributions.
 If you don't have printer, click on \"None\"."),
 
 configurePrinterConnected => 
-__("GNU/Linux can deal with many types of printer. Each of these types requires
+ __("GNU/Linux can deal with many types of printer. Each of these types requires
 a different setup.
 
 
@@ -437,7 +464,7 @@ If you want to access a printer located on a remote Microsoft Windows machine
 (or on Unix machine using SMB protocol), select \"SMB/Windows 95/98/NT\"."),
 
 configurePrinterLocal => 
-__("Please turn on your printer before continuing to let DrakX detect it.
+ __("Please turn on your printer before continuing to let DrakX detect it.
 
 You have to enter some informations here.
 
@@ -481,11 +508,14 @@ __("You need to enter some informations here.
 "),
 
 configurePrinterDev => 
-__("Your printer has not been detected. Please enter the name of the device on
+ __("Your printer has not been detected. Please enter the name of the device on
 which it is connected.
 
 For information, most printers are connected on the first parallel port. This
 one is called \"/dev/lp0\" under GNU/Linux and \"LPT1\" under Microsoft Windows."),
+
+configurePrinterType => 
+ __("You must now select your printer in the above list."),
 
 configurePrinterOptions => 
 __("Please select rights options according to your printer.
@@ -494,16 +524,15 @@ Please see its documentation if you don't know what choose here.
 You will able to test your configuration in next step and
 you will be able to modify it if it doesn't work as you want."),
 
-configurePrinterType => __("You must now select your printer in the above list."),
-
-setRootPassword => __("You can now enter the root password for your
+setRootPassword => 
+ __("You can now enter the root password for your
 Linux-Mandrake system. The password must be entered twice to verify that both
 password entries are identical.
 
 Root is the system's administrator and is the only user allowed to modify the
-system configuration. Therefore, choose this password carefully. Unhautorized
-use of the root account can be extemely dangerous to the integrity of the
-system, its data and other system connected to it.
+system configuration. Therefore, choose this password carefully. 
+Unauthorized use of the root account can be extemely dangerous to the integrity
+of the system, its data and other system connected to it.
 
 The password should be a mixture of alphanumeric characters and at least 8
 characters long. It should never be written down.
@@ -538,7 +567,8 @@ Therefore, you should connect to the system using the user account
 you will have created here, and login as root only for administration
 and maintenance purposes."),
 
-createBootdisk => __("Creating a boot disk is strongly recommended. If you can't
+createBootdisk => 
+ __("Creating a boot disk is strongly recommended. If you can't
 boot your computer, it's the only way to rescue it without reinstalling it."),
 
 setupBootloaderBeginner =>

@@ -600,6 +600,25 @@ sub main {
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 
+    my $VERSION = cat__(install_any::getFile("VERSION"));
+    $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
+    $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
+    if ($o->{meta_class} eq 'desktop') {
+	$o->{installClass} = 'normal';
+	push @auto, 'selectInstallClass';
+    }
+    if ($oem) {
+	$o->{partitioning}{auto_allocate} = 1;
+	$o->{compssListLevel} = 50;
+	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
+    }
+
+    foreach (@auto) {
+	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;
+	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
+	$s->{hidden} = 1;
+    }
+
     my $o_;
     while (1) {
 	require"install_steps_$o->{interactive}.pm";
@@ -617,26 +636,6 @@ sub main {
 	$o->{interactive} = "newt";
 	require install_steps_newt;
     }
-    my $VERSION = cat__(install_any::getFile("VERSION"));
-    $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
-    $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
-    if ($o->{meta_class} eq 'desktop') {
-	$o->{installClass} = 'normal';
-	push @auto, 'selectInstallClass';
-    }
-    if ($oem) {
-	$o->{partitioning}{auto_allocate} = 1;
-	$o->{compssListLevel} = 50;
-	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
-    }
-
-
-    foreach (@auto) {
-	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;
-	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
-	$s->{hidden} = 1;
-    }
-
     $::o = $o = $o_;
 
     if (-e "/tmp/network") {
