@@ -304,9 +304,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Thu Mar 13 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-22mdk
-- scannerdrake detection fixes (till)
 - drakboot/drakx: fix #3161 (ensure right permissions on
   /etc/sysconfig/autologin for bad root umask case)
+- enable smooth sound configuration update from mdk9.0 (new unified
+  via sound driver) and from mdk8.x
+- scannerdrake detection fixes (till)
 - drakTermServ: Fix IP pool range (stew)
 
 * Wed Mar 12 2003 Pixel <pixel@mandrakesoft.com> 9.1-21mdk

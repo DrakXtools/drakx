@@ -65,8 +65,9 @@
 *** export BROWSER like gnome/kde (look at /etc/gnome/gnomerc)
 
 * hardware support
-** kernel: update alsa, bttv, dvb & saa7134 drivers for better hardware support
-   add "REGISTER ^dvb/adapter[0-9]+/[^/]+$ PERMISSIONS root.video 0660" to devfsd
+** kernel: update alsa, bttv, dvb & saa7134 drivers for better hardware support (the laters from http://bytesex.org)
+*** add "REGISTER ^dvb/adapter[0-9]+/[^/]+$ PERMISSIONS root.video 0660" to devfsd
+*** update oss audigy driver from pserver:anonymous@cvs.sourceforge.net:/cvsroot/emu10k1 cvs
 ** add cx88 driver from http://bytesex.org/snapshot
 ** isa detection/probing in ldetect ? (#118, #497) => need some old hw in order to test
    probably not
