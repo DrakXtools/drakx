@@ -90,12 +90,6 @@ if [ "$ARCH" == "i386" ]; then
 	#disable any existing resolution!!!
 	/usr/sbin/rdev -v $i 65535 #788 #785 
     done
-elif [ "$ARCH" == "ppc" ]; then
-        cp -f "$KERNEL_BOOT_PATH"/boot/vmlinux .
-elif [ "$ARCH" == "ia64" ]; then
-    cp -f "$KERNEL_BOOT_PATH"/boot/efi/vmlinuz* .
-else	
-    cp -f "$KERNEL_BOOT_PATH"/boot/vmlinuz* .
 fi
 
 
