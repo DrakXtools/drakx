@@ -831,7 +831,6 @@ sub new {
 	    flush();
 	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
 	    $::Plug->add($::WizardTable);
- 	    $o->{rwindow} = $::Plug;
 	}
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
 	$::WizardTable->show;
