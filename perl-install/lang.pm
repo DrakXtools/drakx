@@ -59,7 +59,7 @@ my %languages = my @languages = (
 'es_ES.UTF-8'=> [ 'Spanish|Spain (UTF-8)','utf_15', 'es', 'es_ES:es' ],
 'es_MX' => [ 'Spanish|Mexico',	'iso-8859-1', 'es', 'es_MX:es:es_ES' ],
   'et'  => [ 'Estonian',		'iso-8859-15','et', 'et' ],
-'eu_ES' => [ 'Euskara (Basque)','iso-8859-15', 'eu', 'eu:es_ES:fr_FR:es:fr' ],
+'eu_ES' => [ 'Euskara (Basque)','iso-8859-15', 'eu', 'eu' ],
 #-'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
 'fi_FI' => [ 'Finnish (Suomi)',	'iso-8859-15','fi', 'fi' ],
 #-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo' ],
