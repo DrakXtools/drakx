@@ -86,6 +86,8 @@ my ($width, $height) = (300, 150);
 my $left_border = 50;
 my $grid_interval = 30;
 
+my $use_same_scale = 1;
+
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
 MDK::Common::Globals::init(in => $in);
@@ -120,6 +122,7 @@ gtkadd($window1->{window},
                                                    )
                                        )
                            ),
+                0, gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Use same scale for received and transmitted")), $use_same_scale), clicked => sub { $use_same_scale = !$use_same_scale }),
                 0, my $statusbar = Gtk2::Statusbar->new
                ),
       );
@@ -464,7 +467,15 @@ sub draw_monitor {
     my $maxt = 0;
     foreach (@{$o->{stack_t}}) { $maxt = $_ if $_ > $maxt }
 
-    $echr = $echt = $height / max($maxr + $maxt, 1);
+    my ($graph_maxr, $graph_maxt);
+    if ($use_same_scale) {
+        $graph_maxr = $graph_maxt = ($maxr + $maxt)/2;
+    } else {
+        $graph_maxr = $maxr;
+        $graph_maxt = $maxt;
+    }
+    $echr = ($height/2) / max($graph_maxr, 1);
+    $echt = ($height/2) / max($graph_maxt, 1);
 
     my $step = $left_border - 1;
     foreach (@{$o->{stack_t}}) {
@@ -521,7 +532,7 @@ sub draw_monitor {
     for (my $i = $grid_interval; $i <= $height - $grid_interval; $i += $grid_interval) {
 	$pixmap->draw_line($gcl, $left_border, $i, $width, $i);
 	my ($gc2, $text);
-        if ($i > $pix_maxt) {
+        if ($i > ($use_same_scale ? $pix_maxt : $height/2)) {
 	    $text = formatXiB(($height-$i)/$echr);
 	    $gc2 = $gcr;
         } else {
