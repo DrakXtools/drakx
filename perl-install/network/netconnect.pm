@@ -737,6 +737,12 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                         [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ sort keys %eth_intf ], 
                             allow_empty_list => 1, format => sub { $eth_intf{$_[0]} } } ];
                     },
+                    complete => sub { 
+                        if (!keys %eth_intf) {
+                            $in->ask_warn(N("Error"), N("No network adapter on your system!"));
+                            return 1;
+                        };
+                    },
                     post => sub {
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
