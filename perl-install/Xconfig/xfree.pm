@@ -19,7 +19,12 @@ sub read {
     my ($class) = @_;
     my @files = map { "$::prefix/etc/X11/$_" } 'xorg.conf', 'XF86Config-4', 'XF86Config';
     my $file = (find { -f $_ && ! -l $_ } @files) || (find { -f $_ } @files);
-    $class->new(Xconfig::parse::read_XF86Config($file));
+    my $raw_X = $class->new(Xconfig::parse::read_XF86Config($file));
+
+    if (my ($Keyboard) = $raw_X->get_InputDevices('Keyboard')) {
+	$Keyboard->{Driver}{val} = 'keyboard';
+    }
+    $raw_X;
 }
 sub write {
     my ($raw_X, $o_file) = @_;
@@ -52,18 +57,18 @@ sub empty_config {
 my @keyboard_fields = qw(XkbLayout XkbModel XkbDisable XkbOptions XkbCompat);
 sub get_keyboard {
     my ($raw_X) = @_;
-    my $raw_kbd = first($raw_X->get_InputDevices('Keyboard')) or die "no keyboard section";
+    my $raw_kbd = first($raw_X->get_InputDevices('keyboard')) or die "no keyboard section";
     raw_export_section($raw_kbd, \@keyboard_fields);
 }
 sub set_keyboard {
     my ($raw_X, $kbd) = @_;
-    my $raw_kbd = first($raw_X->get_InputDevices('Keyboard')) || _new_keyboard_section($raw_X);
+    my $raw_kbd = first($raw_X->get_InputDevices('keyboard')) || _new_keyboard_section($raw_X);
     raw_import_section($raw_kbd, $kbd);
     _set_Option('keyboard', $raw_kbd, keys %$kbd);
 }
 sub _new_keyboard_section {
     my ($raw_X) = @_;
-    my $raw_kbd = { Identifier => { val => 'Keyboard1' }, Driver => { val => 'Keyboard' } };
+    my $raw_kbd = { Identifier => { val => 'Keyboard1' }, Driver => { val => 'keyboard' } };
     $raw_X->add_Section('InputDevice', $raw_kbd);
 
     my $layout = get_ServerLayout($raw_X)->{InputDevice} ||= [];
