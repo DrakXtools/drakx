@@ -367,13 +367,9 @@ sub choosePartitionsToFormat {
 
 sub formatMountPartitions {
     my ($o, $_fstab) = @_;
-    my $w;
+    my ($w, $wait_message) = fs::format::wait_message($o);
     catch_cdie {
-        fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
-        	my ($msg) = @_;
-        	$w ||= $o->wait_message('', $msg);
-        	$w->set($msg);
-        });
+        fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, $wait_message);
     } sub { 
 	$@ =~ /fsck failed on (\S+)/ or return;
 	$o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can lose data)", $1), 1);

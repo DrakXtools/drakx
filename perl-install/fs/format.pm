@@ -49,12 +49,12 @@ sub part {
 	loopback::format_part($part, $prefix);
     } else {
 	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
-	part_raw($part);
+	part_raw($part, $wait_message);
     }
 }
 
 sub part_raw {
-    my ($part) = @_;
+    my ($part, $wait_message) = @_;
 
     $part->{isFormatted} and return;
 
@@ -82,7 +82,15 @@ sub part_raw {
 
     my ($_pkg, $cmd, @first_options) = @{$cmds{$fs_type} || die N("I do not know how to format %s in type %s", $part->{device}, $part->{fs_type})};
 
-    run_program::raw({ timeout => 60 * 60 }, $cmd, @first_options, @options, devices::make($dev)) or die N("%s formatting of %s failed", $fs_type, $dev);
+    my @args = ($cmd, @first_options, @options, devices::make($dev));
+
+    my $time = time();
+    if ($cmd eq 'mke2fs' && $wait_message) {
+	mke2fs($wait_message, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
+    } else {
+	run_program::raw({ timeout => 60 * 60 }, @args) or die N("%s formatting of %s failed", $fs_type, $dev);
+    }
+    warn "$cmd took: ", formatTimeRaw(time() - $time);
 
     if ($fs_type eq 'ext3') {
 	disable_forced_fsck($dev);
@@ -91,9 +99,37 @@ sub part_raw {
     set_isFormatted($part, 1);
 }
 
+sub mke2fs {
+    my ($wait_message, @args) = @_;
+
+    open(my $F, "@args |");
+
+    local $/ = "\b";
+    local $_;
+    while (<$F>) {
+	$wait_message->('', $1, $2) if m!^\s*(\d+)/(\d+)\b!;
+    }
+    return close($F);
+}
+
 sub disable_forced_fsck {
     my ($dev) = @_;
     run_program::run("tune2fs", "-c0", "-i0", devices::make($dev));
+}
+
+sub wait_message {
+    my ($in) = @_;
+
+    my $w;
+    $w, sub {
+	my ($msg, $current, $total) = @_;
+	if ($msg) {
+	    $w ||= $in->wait_message('', $msg);
+	    $w->set($msg);
+	} elsif ($total) {
+	    $w->set("$current / $total");
+	}
+    };
 }
 
 1;

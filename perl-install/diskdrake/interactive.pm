@@ -1080,12 +1080,8 @@ sub format_ {
 	fs::format::check_package_is_installed($in->do_pkgs, $part->{fs_type}) or return;
     }
     $part->{isFormatted} = 0; #- force format;
-    my $w;
-    fs::format::part($all_hds->{raids}, $part, $::prefix, sub {
-        	my ($msg) = @_;
-        	$w ||= $in->wait_message('', $msg);
-        	$w->set($msg);
-    });
+    my ($_w, $wait_message) = fs::format::wait_message($in);
+    fs::format::part($all_hds->{raids}, $part, $::prefix, $wait_message);
     1;
 }
 

@@ -134,7 +134,7 @@ sub format_part {
     $part->{isFormatted} and return;
 
     make($raids, $part);
-    fs::format::part_raw($part);
+    fs::format::part_raw($part, undef);
     set_isFormatted($_, 1) foreach @{$part->{disks}};
 }
 

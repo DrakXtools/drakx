@@ -63,7 +63,7 @@ sub format_part {
     my ($part, $prefix) = @_;
     fs::mount_part($part->{loopback_device}, $prefix);
     create($part, $prefix);
-    fs::format::part_raw($part);
+    fs::format::part_raw($part, undef);
 }
 
 sub create {
