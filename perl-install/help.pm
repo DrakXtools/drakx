@@ -462,10 +462,10 @@ __("You need to enter some informations here.
    * Printer Connection: If your printer is physically connected to your computer, select \"Local printer\".
      If you want to access a printer located on a remote Unix machine, select \"Remote lpd printer\".
 
-   If you want to access a printer located on a remote Microsoft Windows machine (or on Unix machine using SMB
-   protocol), select \"SMB/Windows 95/98/NT\".
+     If you want to access a printer located on a remote Microsoft Windows machine (or on Unix machine using SMB
+     protocol), select \"SMB/Windows 95/98/NT\".
 
-   If you want to acces a printer located on NetWare network, select \"NetWare\".
+     If you want to acces a printer located on NetWare network, select \"NetWare\".
 "),
 
 configurePrinterDev => 
