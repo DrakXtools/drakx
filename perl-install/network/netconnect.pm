@@ -12,7 +12,6 @@ use Data::Dumper;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
-our @EXPORT = qw(start_internet stop_internet);
 my	%conf;
 #- intro is called only in standalone.
 sub intro {
