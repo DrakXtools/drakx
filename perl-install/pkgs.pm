@@ -798,7 +798,7 @@ sub selectPackagesAlreadyInstalled {
 			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), packageVersion($p));
 			     my $version_rel_test = $version_cmp > 0 || $version_cmp == 0 &&
 			       versionCompare(c::headerGetEntry($header, 'release'), packageRelease($p)) >= 0;
-			     $version_rel_test or log::l("keeping an older package, avoiding selecting $p->{file}");
+			     $version_rel_test or log::l("keeping an older package, avoiding selecting $p->[$FILE]");
 			     packageSetFlagInstalled($p, 1);
 			 }
 		     });
@@ -1169,7 +1169,7 @@ sub install($$$;$$) {
 			    $min < $_ and $min = $_;
 			}
 		    } else {
-			log::l("ignoring package $dep->{file} as its medium is not selected");
+			log::l("ignoring package $dep->[$FILE] as its medium is not selected");
 		    }
 		    --$nb; #- make sure the package is not taken into account as its medium is not selected.
 		}
