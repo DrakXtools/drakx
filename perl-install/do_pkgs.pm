@@ -52,15 +52,17 @@ sub is_installed {
 }
 
 sub check_kernel_module_packages {
-    my ($do, $base_name, $ext_name) = @_;
+    my ($do, $base_name, $o_ext_name) = @_;
     
     require bootloader;
     my @l = map { $base_name . '-' . bootloader::vmlinuz2version($_) } bootloader::installed_vmlinuz();
-    my @rpms = $do->are_available($ext_name, @l);
+    my @ext = if_($o_ext_name, $o_ext_name);
+    my @rpms = $do->are_available(@ext, @l);
 
     log::l("found kernel module packages $_") foreach @rpms;
 
-    @rpms > 1 && \@rpms;
+    #- we want at least a kernel package and the ext package if specified
+    @rpms > @ext && \@rpms;
 }
 
 ################################################################################
