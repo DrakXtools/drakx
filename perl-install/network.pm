@@ -272,12 +272,12 @@ sub configureNetwork {
 	$netc->{minus_one} = 1;
 	my $dhcp_hostname = $netc->{HOSTNAME};
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
-	$in->ask_from_entries_ref(_("Configuring network"),
+	$in->ask_from_entries_refH(_("Configuring network"),
 _("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
-				  [_("Host name")], [ \$netc->{HOSTNAME} ]);
+				   [ { label => _("Host name"), val => \$netc->{HOSTNAME} }]);
 	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l);
@@ -310,11 +310,12 @@ notation (for example, 1.2.3.4).");
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
-    $in->ask_from_entries_ref(_("Configuring network device %s", $intf->{DEVICE}),
+    $in->ask_from_entries_refH(_("Configuring network device %s", $intf->{DEVICE}),
 			      ($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . "\n\n") .
 			      $text,
-			     [ _("IP address"), _("Netmask"), _("Automatic IP") ],
-			     [ \$intf->{IPADDR}, \$intf->{NETMASK}, { val => \$pump, type => "bool", text => _("(bootp/dhcp)") } ],
+			     [ { label => _("IP address"), val => \$intf->{IPADDR} }, 
+			       { label => _("Netmask"),     val => \$intf->{NETMASK} },
+			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") } ],
 			     complete => sub {
 				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
 				 return 0 if $pump;
@@ -356,13 +357,10 @@ sub miscellaneousNetwork {
     my ($in, $clicked) = @_;
     my $u = $::o->{miscellaneous} ||= {};
     $::isInstall and $in->set_help('configureNetworkProxy');
-    !$::beginner || $clicked and $in->ask_from_entries_ref('',
+    !$::beginner || $clicked and $in->ask_from_entries_refH('',
        _("Proxies configuration"),
-       [ _("HTTP proxy"),
-         _("FTP proxy"),
-       ],
-       [ \$u->{http_proxy},
-         \$u->{ftp_proxy},
+       [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
+         { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },
        ],
        complete => sub {
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', _("Proxy should be http://...")), return 1,0;

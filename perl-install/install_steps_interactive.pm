@@ -772,11 +772,10 @@ _("Use NIS") => { val => \$nis, type => 'bool', text => _("yellow pages") },
     ) or return;
 
     $o->{authentication}{NIS} &&= $nis;
-    $o->ask_from_entries_ref('',
+    $o->ask_from_entries_refH('',
 			     _("Authentification NIS"),
-			     [ _("NIS Domain"), _("NIS Server") ],
-			     [ \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}),
-			       { val => \$o->{authentication}{NIS}, list => ["broadcast"] },
+			     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
+			       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"] },
 			     ]) if $nis;
     install_steps::setRootPassword($o);
 }

@@ -362,7 +362,7 @@ sub monitorConfiguration(;$$) {
 
     add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], 'Generic|' . translate($default_monitor)) }) unless $monitor->{type};
     if ($monitor->{type} eq 'Custom') {
-	$in->ask_from_entries_ref('',
+	$in->ask_from_entries_refH('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
@@ -370,9 +370,8 @@ sync rate, which is the rate at which scanlines are displayed.
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
 that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
-				  [ _("Horizontal refresh rate"), _("Vertical refresh rate") ],
-				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges },
-				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges }, ]);
+				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges, label => _("Horizontal refresh rate") },
+				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges, label => _("Vertical refresh rate") }]);
     } else {
 	add2hash($monitor, $monitors{$monitor->{type}});
     }

@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
+    helpers => [ qw(create_okcancel createScrolledWindow may_createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
     wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
@@ -237,7 +237,7 @@ sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 #-###############################################################################
 
 sub create_okcancel {
-    my ($w, $ok, $cancel, $spread) = @_;
+    my ($w, $ok, $cancel, $spread, @other) = @_;
     my $one = ($ok xor $cancel);
     $spread ||= $::isWizard ? "edge" : "spread";
     $ok ||= $::isWizard ? _("Next ->") : _("Ok");
@@ -245,6 +245,7 @@ sub create_okcancel {
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $::isWizard or $w->{retval} = 1; Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel || _("Cancel")), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
     my @l = grep { $_ } $::isWizard ? ($b2, $b1) : ($b1, $b2);
+    push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
 
     $_->can_default($::isWizard) foreach @l;
     gtkadd(create_hbox($spread), @l);
@@ -267,7 +268,7 @@ sub create_box_with_title($@) {
 	      );
 }
 
-sub createScrolledWindow($) {
+sub createScrolledWindow {
     my ($W) = @_;
     my $w = new Gtk::ScrolledWindow(undef, undef);
     $w->set_policy('automatic', 'automatic');
@@ -277,6 +278,11 @@ sub createScrolledWindow($) {
     $W->can("set_focus_vadjustment") and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
     $w
+}
+
+sub may_createScrolledWindow {
+    my ($bool, $list, $width, $height) = @_;
+    $bool ? gtkset_usize(createScrolledWindow($list), $width, $height) : $list;
 }
 
 sub create_menu($@) {
@@ -317,7 +323,7 @@ sub create_packtable($@) {
 	    my ($j) = @_;
 	    if (defined $_) {
 		ref $_ or $_ = new Gtk::Label($_);
-		$w->attach_defaults($_, $j, $j + 1, $i, $i + 1);
+		$w->attach($_, $j, $j + 1, $i, $i + 1, 'fill', 'fill', 5, 0);
 		$_->show;
 	    }
 	} @$_;
@@ -566,87 +572,12 @@ sub _ask_from_list {
     gtkadd($o->{window},
 	   gtkpack($o->create_box_with_title(@$messages),
 		   gtkpack_(new Gtk::VBox(0,7),
-			    1, @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, min(350, $::windowheight - 60)) : $list,
+			    1, may_createScrolledWindow(@$l > 15, $list, 200, min(350, $::windowheight - 60)),
 			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
 		  ));
     $o->show; #- otherwise the moveto is not done
     my $toselect; map_index {
 	$list->append($_);
-	$toselect = $::i if $def && $_ eq $def;
-    } @$l;
-    &$select($toselect);
-
-    $list->grab_focus;
-}
-sub _ask_from_list_with_help {
-    my ($o, $title, $messages, $l, $help, $def) = @_;
-    my (undef, @okcancel) = ref $title ? @$title : $title;
-    my $list = new Gtk::List();
-    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
-    my (@widgets, $timeout, $curr);
-
-    my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
-    my $select = sub {
-	$list->select_item($_[0]);
-    };
-
-    ref $title && !@okcancel ?
-      $list->signal_connect(button_release_event => $leave) :
-      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
-
-    $list->signal_connect(select_child => sub {
-	my ($w, $row) = @_;
-	$curr = $list->child_position($row);
-    });
-    $list->signal_connect(key_press_event => sub {
-        my ($w, $e) = @_;
-	my $c = chr($e->{keyval} & 0xff);
-
-	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-
-	if ($e->{keyval} >= 0x100) {
-	    &$leave if $c eq "\r" || $c eq "\x8d";
-	    $starting_word = '' if $e->{keyval} != 0xffe4; # control
-	} else {
-	    if ($e->{state} & 4) {
-		#- control pressed
-		$c eq "s" or return 1;
-		$start_reg and $start_reg = '', return 1;
-		$curr++;
-	    } else {
-		&$leave if $c eq ' ';
-
-		$curr++ if $starting_word eq '' || $starting_word eq $c;
-		$starting_word .= $c unless $starting_word eq $c;
-	    }
-	    my $word = quotemeta $starting_word;
-	    my $j; for ($j = 0; $j < @$l; $j++) {
-		 $l->[($j + $curr) % @$l] =~ /$start_reg$word/i and last;
-	    }
-	    $j == @$l ?
-	      $starting_word = '' :
-	      &$select(($j + $curr) % @$l);
-
-	    $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
-	}
-	1;
-    });
-
-    $o->{ok_clicked} = $leave;
-    $o->{cancel_clicked} = sub { $o->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
-    gtkadd($o->{window},
-	   gtkpack($o->create_box_with_title(@$messages),
-		   gtkpack_(new Gtk::VBox(0,7),
-			    1, @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, min(350, $::windowheight - 60)) : $list,
-			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
-		  ));
-    $o->show; #- otherwise the moveto is not done
-    my $tips = new Gtk::Tooltips;
-    my $toselect; map_index {
-	my $item = new Gtk::ListItem($_);
-	$list->append_items($item);
-	$tips->set_tip($item, $help->{$_}) if $help->{$_};
-	$item->show;
 	$toselect = $::i if $def && $_ eq $def;
     } @$l;
     &$select($toselect);

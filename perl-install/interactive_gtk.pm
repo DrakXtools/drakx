@@ -10,7 +10,7 @@ use interactive;
 use common qw(:common :functional);
 use my_gtk qw(:helpers :wrappers);
 
-1;
+my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
     $::windowheight ||= 400 if $::isStandalone;
@@ -28,11 +28,6 @@ sub exit {
     c::_exit($_[0]) #- workaround 
 }
 
-sub ask_from_listW {
-    my ($o, $title, $messages, $l, $def) = @_;
-    ask_from_list_with_helpW($o, $title, $messages, $l, undef, $def);
-}
-
 sub test_embedded {
     my ($w) = @_;
     $::isEmbedded or return;
@@ -44,8 +39,8 @@ sub test_embedded {
     $::Plug->add($w->{window});
     $w->{window}->add($w->{rwindow});
 }
-sub ask_from_list_with_helpW {
-    my ($o, $title, $messages, $l, $help, $def) = @_;
+sub ask_from_listW {
+    my ($o, $title, $messages, $l, $def, $help) = @_;
     my $r;
 
     my $w = my_gtk->new(first(deref($title)), %$o);
@@ -176,202 +171,188 @@ sub ask_from_treelistW {
     $w->main or die "ask_from_list cancel";
 }
 
-sub ask_many_from_listW {
-    my ($o, $title, $messages, @l) = @_;
-    my $w = my_gtk->new('', %$o);
-    test_embedded($w);
-    $w->sync; # for XPM's creation
+sub create_list {
+    my ($e, $may_go_to_next_) = @_;
+    my $list = new Gtk::List();
+    $list->set_selection_mode('browse');
+    my ($curr);
+    my $l = $e->{list};
 
+    my $select = sub {
+	$list->select_item($_[0]);
+    };
     my $tips = new Gtk::Tooltips;
-    my @boxes; @boxes = map {
-	my $l = $_;
-	my $box = gtkpack(new Gtk::VBox(0, @{$l->{icons}} ? 10 : 0),
-		map_index {
-		    my $i = $::i;
+    my $toselect;
+    my @widgets = map_index {
+	my $item = new Gtk::ListItem($_);
+	$item->signal_connect(key_press_event => sub {
+    	    my ($w, $e) = @_;
+    	    my $c = chr($e->{keyval} & 0xff);
+	    $may_go_to_next_->($e) if $e->{keyval} < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
+    	    1;
+    	});
+	$list->append_items($item);
+	if ($e->{help}) {
+	    $tips->set_tip($item,
+			   ref($e->{help}) eq 'HASH' ? $e->{help}{$_} :
+			   ref($e->{help}) eq 'CODE' ? $e->{help}($_) : $e->{help});
+	}
+	$item->show;
+	$toselect = $::i if ${$e->{val}} && $_ eq ${$e->{val}};
+	$item->grab_focus if ${$e->{val}} && $_ eq ${$e->{val}};
+	$item;
+    } @$l;
 
-		    my $o = Gtk::CheckButton->new($_);
-		    $tips->set_tip($o, $l->{help}[$i]) if $l->{help}[$i];
-		    $o->set_active(${$l->{ref}[$i]});
-		    $o->signal_connect(clicked => sub { 
-		        my $v = invbool($l->{ref}[$i]);
-			$boxes[$l->{shadow}]->set_sensitive(!$v) if exists $l->{shadow};
-		    });
+    &$select($toselect);
 
-		    my $f = $l->{icons}[$i];
-		    -e $f ? gtkpack_(new Gtk::HBox(0,10), 0, new Gtk::Pixmap(gtkcreate_xpm($w->{window}, $f)), 1, $o) : $o;
-		} @{$l->{labels}});
-	@{$l->{labels}} > (@{$l->{icons}} ? 5 : 11) ? gtkset_usize(createScrolledWindow($box), @{$l->{icons}} ? 350 : 0, $::windowheight - 200) : $box;
-    } @l;
-    gtkadd($w->{window},
-	   gtkpack_(create_box_with_title($w, @$messages),
-		    (map {; 1, $_, 0, '' } @boxes),
-		    0, $w->create_okcancel,
-		   )
-	  );
-    $w->{ok}->grab_focus;
-    $w->main;
+    #- signal_connect after append_items otherwise it is called and destroys the default value
+    $list->signal_connect(select_child => sub {
+	my ($w, $row) = @_;
+	${$e->{val}} = $l->[$list->child_position($row)];
+    });
+
+    may_createScrolledWindow(@$l > 15, $list, 200, min(350, $::windowheight - 60)), 
+      $list,
+	sub { $list->select_item(find_index { $_ eq ${$e->{val}} } @$l) };
 }
 
 sub ask_from_entries_refW {
-    my ($o, $title, $messages, $l, $val, %hcallback) = @_;
-    my ($title_, @okcancel) = deref($title);
+    my ($o, $common, $l, $l2) = @_;
     my $ignore = 0; #-to handle recursivity
 
-    my $w = my_gtk->new($title_, %$o);
-    test_embedded($w);
-    $w->sync; # for XPM's creation
-
-    my $set_icon = sub {
-	my ($i, $button) = @_;
-	gtkdestroy($i->{icon});
-	my $f = $i->{icon2f}->(${$i->{val}});
-	$i->{icon} = -e $f ?
-	  new Gtk::Pixmap(gtkcreate_xpm($w->{window}, $f)) :
-	  new Gtk::Label(translate(${$i->{val}}));
-	$button->add($i->{icon});
-	$i->{icon}->show;
-    };
+    my $mainw = my_gtk->new($common->{title}, %$o);
+    test_embedded($mainw);
+    $mainw->sync; # for XPM's creation
 
     #-the widgets
-    my @widgets = map {
-	my $i = $_;
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack);
+    my $tooltips = new Gtk::Tooltips;
 
-	$i->{type} = "iconlist" if $i->{type} eq "list" && $i->{not_edit} && $i->{icon2f};
+    my $set_all = sub {
+	$ignore = 1;
+	$_->{set}->(${$_->{e}{val}}) foreach @widgets_always, @widgets_advanced;
+	$ignore = 0;
+    };
+    my $get_all = sub {
+	${$_->{e}{val}} = $_->{get}->() foreach @widgets_always, @widgets_advanced;
+    };
+    my $create_widget = sub {
+	my ($e, $ind) = @_;
 
-	if ($i->{type} eq "list") {
-	    my $w = new Gtk::Combo;
-	    $w->set_use_arrows_always(1);
-	    $w->entry->set_editable(!$i->{not_edit});
-	    $w->set_popdown_strings(@{$i->{list}});
-	    $w->disable_activate;
-	    $w;
-	} elsif ($i->{type} eq "iconlist") {
-	    my $w = new Gtk::Button;
-	    $w->signal_connect(clicked => sub {
-		${$i->{val}} = next_val_in_array(${$i->{val}}, $i->{list});
-		$set_icon->($i, $w);
-	    });
-	    $set_icon->($i, $w);
-	    gtkpack_(new Gtk::HBox(0,10), 1, new Gtk::HBox(0,0), 0, $w, 1, new Gtk::HBox(0,0), );
-	} elsif ($i->{type} eq "bool") {
-	    my $w = Gtk::CheckButton->new($i->{text});
-	    $w->set_active(${$i->{val}});
-	    $w->signal_connect(clicked => sub { $ignore or invbool \${$i->{val}} });
-	    $w;
-	} elsif ($i->{type} eq "range") {
-	    my $adj = create_adjustment(${$i->{val}}, $i->{min}, $i->{max});
-	    $adj->signal_connect(value_changed => sub { ${$i->{val}} = $adj->get_value });
-	    my $w = new Gtk::HScale($adj);
-	    $w->set_digits(0);
-	    $w;
-	} else {
-	    new Gtk::Entry;
-	}
-    } @$val;
-    my $ok = $w->create_okcancel(@okcancel);
-
-    sub widget {
-	my ($w, $ref) = @_;
-	($ref->{type} eq "list" && @{$ref->{list}}) ? $w->entry : $w
-    }
-    my @updates = mapn {
-	my ($w, $ref) = @_;
-	sub {
-	    $ref->{type} =~ /bool|range|iconlist/ and return;
-	    ${$ref->{val}} = widget($w, $ref)->get_text;
-	};
-    } \@widgets, $val;
-
-    my @updates_inv = mapn {
-	my ($w, $ref) = @_;
-	sub { 
-	    $ref->{type} =~ /iconlist/ and return;
-	    $ref->{type} eq "bool" ?
-	      $w->set_active(${$ref->{val}}) :
-	      widget($w, $ref)->set_text(${$ref->{val}})
-	};
-    } \@widgets, $val;
-
-
-    for (my $i = 0; $i < @$l; $i++) {
-	my $ind = $i; #-cos lexical bindings pb !!
-	my $widget = widget($widgets[$i], $val->[$i]);
-	my $changed_callback = sub {
-	    return if $ignore; #-handle recursive deadlock
-	    &{$updates[$ind]};
-	    if ($hcallback{changed}) {
-		&{$hcallback{changed}}($ind);
-		#update all the value
-		$ignore = 1;
-		&$_ foreach @updates_inv;
-		$ignore = 0;
-	    };
-	};
 	my $may_go_to_next = sub {
-	    my ($W, $e) = @_;
-	    if (($e->{keyval} & 0x7f) == 0xd) {
-		$W->signal_emit_stop("key_press_event");
-		if ($ind == $#$l) {
-		    @$l == 1 ? $w->{ok}->clicked : $w->{ok}->grab_focus;
+	    my ($w, $e) = @_;
+	    if (!$e || ($e->{keyval} & 0x7f) == 0xd) {
+		$w->signal_emit_stop("key_press_event") if $e;
+		if ($ind == $#widgets) {
+		    @widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
 		} else {
-		    widget($widgets[$ind+1],$val->[$ind+1])->grab_focus;
+		    $widgets[$ind+1]{w}->grab_focus;
 		}
 	    }
 	};
-
-	if ($hcallback{focus_out}) {
-	    my $focusout_callback = sub {
-		return if $ignore;
-		&{$hcallback{focus_out}}($ind);
-		#update all the value
-		$ignore = 1;
-		&$_ foreach @updates_inv;
-		$ignore = 0;
-	    };
-	    $widget->signal_connect(focus_out_event => $focusout_callback);
-	}
-	if (ref $widget eq "Gtk::HScale") {
-	    $widget->signal_connect(key_press_event => $may_go_to_next);
-	}
-	if (ref $widget eq "Gtk::Entry") {
-	    $widget->signal_connect(changed => $changed_callback);
-	    $widget->signal_connect(key_press_event => $may_go_to_next);
-	    $widget->set_text(${$val->[$i]{val}});
-	    $widget->set_visibility(0) if $val->[$i]{hidden};
-	}
-	&{$updates[$i]};
-    }
-
-    my @entry_list = mapn { [($_[0], $_[1])]} $l, \@widgets;
-
-    gtkadd($w->{window},
-	   gtkpack(
-		   create_box_with_title($w, @$messages),
-		   create_packtable({}, @entry_list),
-		   $ok
-		   ));
-    widget($widgets[0],$val->[0])->grab_focus();
-
-#    mapn { $_[0]{expert} and $_[1]->hide } $val, \@widgets, $l;
-
-    if ($hcallback{complete}) {
-	my $callback = sub {
-	    my ($error, $focus) = &{$hcallback{complete}};
-	    #-update all the value
-	    $ignore = 1;
-	    foreach (@updates_inv) { &{$_};}
-	    $ignore = 0;
-	    if ($error) {
-		$focus ||= 0;
-		widget($widgets[$focus], $val->[$focus])->grab_focus();
-	    } else {
-		return 1;
-	    }
+	my $changed = sub {
+	    return if $ignore;
+	    $get_all->();
+	    $common->{callbacks}{changed}->($ind);
+	    $set_all->();
 	};
-	$w->main($callback);
-    } else {
-	$w->main();
-    }
+
+	my ($w, $real_w, $set, $get);
+	if ($e->{type} eq "iconlist") {
+	    $w = new Gtk::Button;
+	    $set = sub {
+		gtkdestroy($e->{icon});
+		my $f = $e->{icon2f}->($_[0]);
+		$e->{icon} = -e $f ?
+		  new Gtk::Pixmap(gtkcreate_xpm($mainw->{window}, $f)) :
+		    new Gtk::Label(translate($_[0]));
+		$w->add($e->{icon});
+		$e->{icon}->show;
+	    };
+	    $w->signal_connect(clicked => sub {		
+		$set->(${$e->{val}} = next_val_in_array(${$e->{val}}, $e->{list}));
+		$changed->();
+	    });
+	    $real_w = gtkpack_(new Gtk::HBox(0,10), 1, new Gtk::HBox(0,0), 0, $w, 1, new Gtk::HBox(0,0), );
+	} elsif ($e->{type} eq "bool") {
+	    $w = Gtk::CheckButton->new($e->{text});
+	    $w->signal_connect(clicked => $changed);
+	    $set = sub { $w->set_active($_[0]) };
+	    $get = sub { $w->get_active };
+	} elsif ($e->{type} eq "range") {
+	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
+	    $adj->signal_connect(value_changed => $changed);
+	    $w = new Gtk::HScale($adj);
+	    $w->set_digits(0);
+	    $w->signal_connect(key_press_event => $may_go_to_next);
+	    $set = sub { $adj->set_value($_[0]) };
+	    $get = sub { $adj->get_value };
+	} elsif ($e->{type} eq "list") {
+	    #- use only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
+#	    if ($e->{help}) {
+		($real_w, $w, $set) = create_list($e, $may_go_to_next);
+#	     } else {
+#		 die;
+#	     }
+	} else {
+	    if ($e->{type} eq "combo") {
+		$w = new Gtk::Combo;
+		$w->set_use_arrows_always(1);
+		$w->entry->set_editable(!$e->{not_edit});
+		$w->set_popdown_strings(@{$e->{list}});
+		$w->disable_activate;
+		($real_w, $w) = ($w, $w->entry);
+	    } else {
+		$w = new Gtk::Entry(${$e->{val}});
+	    }
+	    $w->signal_connect(key_press_event => $may_go_to_next);
+	    $w->signal_connect(changed => $changed);
+	    $w->set_visibility(0) if $e->{hidden};
+	    $set = sub { $w->set_text($_[0]) };
+	    $get = sub { $w->get_text };
+	}
+	$w->signal_connect(focus_out_event => sub {
+	    return if $ignore;
+	    $get_all->();
+	    $common->{callbacks}{focus_out}->($ind);
+	    $set_all->();
+	});
+	$tooltips->set_tip($w, $e->{help}) if $e->{help} && !ref($e->{help});
+    
+	{ e => $e, w => $w, real_w => $real_w || $w, 
+	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
+	  icon_w => -e $e->{icon} ? new Gtk::Pixmap(gtkcreate_xpm($mainw->{window}, $e->{icon})) : '' };
+    };
+    @widgets_always   = map_index { $create_widget->($_, $::i      ) } @$l;
+    @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
+
+    my $set_advanced = sub {
+	($advanced) = @_;
+	$advanced ? $advanced_pack->show : $advanced_pack->hide;
+	@widgets = (@widgets_always, $advanced ? @widgets_advanced : ());
+    };
+    my $advanced_button = [ _("Advanced"), sub { $set_advanced->(!$advanced) } ];
+
+    $set_all->();
+    gtkadd($mainw->{window},
+	   gtkpack(create_box_with_title($mainw, @{$common->{messages}}),
+		   may_createScrolledWindow(@widgets_always > 8, create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_always), 200, min(350, $::windowheight - 60)),
+		   new Gtk::HSeparator,
+		   $advanced_pack = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets_advanced),
+		   $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ())));
+    $set_advanced->(0);
+    (@widgets ? $widgets[0]{w} : $mainw->{ok})->grab_focus();
+
+    $mainw->main(sub {
+        $get_all->();
+        my ($error, $focus) = $common->{callbacks}{complete}->();
+	
+	if ($error) {
+	    $set_all->();
+	    $widgets[$focus || 0]{w}->grab_focus();
+	}
+	!$error;
+    });
 }
 
 
@@ -414,3 +395,5 @@ sub kill {
     }
     $o->{before_killing} = @interactive::objects;
 }
+
+1;
