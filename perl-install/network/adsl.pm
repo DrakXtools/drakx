@@ -99,6 +99,7 @@ sub adsl_probe_info {
     }
     ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if (! defined $adsl_type || $adsl_type =~ /pptp/) && -r $pptp_file;
     my $passwd = passwd_by_login($login);
+    $adsl_type eq 'speedtouch' and ($netc->{vpivci}) = map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, "$1_$2")  } cat_("$prefix/etc/ppp/peers/adsl");
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
     add2hash($netc, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
