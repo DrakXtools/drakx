@@ -86,6 +86,11 @@ my %xim = (
 	XIM => 'ami',
 	XMODIFIERS => '"@im=ami"',
   },
+  'ja' => {
+	ENC => 'EUC-jp',
+	XIM => 'kinput2',
+	XMODIFIERS => '"@im=kinput2"',
+  }
 );
 
 sub std2 { "-mdk-helvetica-medium-r-normal-*-*-$_[1]-*-*-*-*-$_[0]" }
