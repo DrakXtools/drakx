@@ -1,3 +1,41 @@
+2001/03/21  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm (add_kernel): cleanup
+	(suggest): make it work with kernel22-secure and no kernel22
+
+	* share/rpmsrate: remove ipchains and iptables, raise gfcc
+
+2001/03/20  dam's  <damien@mandrakesoft.com>
+
+	* interactive.pm: no wizard if warning
+
+2001/03/20  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix pcmcia functions only on x86
+	  - create install_any::unselectMostPackages
+	  - use it instead of pkgs::unselectAllPackages (otherwise
+	default_packages ends up non-selected)
+
+	* modules.pm (@drivers_by_category): if_ization
+	(load_thiskind): cleanup
+
+	* any.pm, install2.pm, share/rpmsrate: use bastille backend
+
+	* c/stuff.xs.pm, c/Makefile.PL: fix pcmcia functions only on x86
+
+	* install_steps.pm, install_any.pm: 
+	  - create install_any::unselectMostPackages
+	  - use it instead of pkgs::unselectAllPackages (otherwise
+	default_packages ends up non-selected)
+
+2001/03/20  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* modules.pm, install_steps_interactive.pm, any.pm: make_boot_img: add
+	routine for - PPC
+	any.pm: double "Append" entry in expert mode for yaboot.conf - PPC
+	install_steps_interactive: setup dmasound - PPC
+	modules.pm: load Mac hardware modules - PPC
+
 2001/03/20  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: corrected bug in reading resolv.conf, and changed chmod
