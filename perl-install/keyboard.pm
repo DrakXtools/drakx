@@ -476,19 +476,15 @@ sub setup {
     } elsif (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
 	load(scalar cat_($f));
     } else {
-	my $F;
-	if (my $pid = open $F, "-|") {
-	    local $/ = undef;
-	    eval { load(join('', <$F>)) };
-	    waitpid $pid, 0;
-	} else {
+	my $kid = run_program::bg_command(sub {
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/keymaps.cz2", quiet => 1);
 		$packer->extract_archive(undef, "$kmap.bkmap");
 	    };
-	    c::_exit(0);
-	}
+	});
+	local $/ = undef;
+	eval { my $fd = $kid->{fd}; load(join('', <$fd>)) };
     }
     if (-x "/usr/X11R6/bin/setxkbmap") {
 	setxkbmap($keyboard);

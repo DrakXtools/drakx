@@ -172,19 +172,21 @@ sub type2interface {
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
 my $kid_pipe;
-sub connected_bg {
+# request a ref on a bg_connect and a ref on a scalar
+sub connected_bg__raw {
+    my ($kid, $status) = @_;
     local $| = 1;
-    my ($ref) = @_;
-    if (defined $kid_pipe) {
-	fcntl($kid_pipe, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
-	my $a;
-  	if (defined($a = <$kid_pipe>)) {
-	    close($kid_pipe) or warn "kid exited $?";
-	    undef $kid_pipe;
-	    $$ref = $a;
-  	}
-    } else { $kid_pipe = connected2() }
-    1;
+    if (ref($kid_pipe) && ref($$kid_pipe)) {
+	my $fd = $$kid_pipe->{fd};
+	fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
+	my $a  = <$fd>;
+     $$status = $a if defined $a;
+    } else { $$kid_pipe = connected2() }
+}
+
+sub connected_bg {
+    my ($status) = @_;
+    connected_bg__raw(\$kid_pipe, $status);
 }
 
 # test if connected;
@@ -196,54 +198,35 @@ sub connected_bg {
 #    return : nothing
 # cmd = 3 : return current status even if a test is in progress
 my $kid_pipe_connect;
-my $kid_pid;
 my $current_connection_status;
 
 sub test_connected {
     local $| = 1;
     my ($cmd) = @_;
     
-    if (!defined $current_connection_status) { $current_connection_status = -1 }
+    $current_connection_status = -1 if !defined $current_connection_status;
     
     if ($cmd == 0) {
-        if (defined $kid_pipe_connect) {
-	    fcntl($kid_pipe_connect, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
-	    my $a;
-	    if (defined($a = <$kid_pipe_connect>)) {
-		close($kid_pipe_connect) or warn "kid exited $?";
-		undef $kid_pipe_connect;
-		undef $kid_pid;
-		$current_connection_status = $a;
-	    }
-        }
-	return $current_connection_status;
-    }
-    
-    if ($cmd == 1) {
+        connected_bg__raw(\$kid_pipe_connect, \$current_connection_status);
+    } elsif ($cmd == 1) {
         if ($current_connection_status != -2) {
              $current_connection_status = -2;
              $kid_pipe_connect = connected2();
         }
-    }
-    if ($cmd == 2) {
-        if (defined($kid_pid)) {
-	    kill -9, $kid_pid;
-	    undef $kid_pid;
+    } elsif ($cmd == 2) {
+        if (defined($kid_pipe_connect)) {
+	    kill -9, $kid_pipe_connect->{pid};
+	    undef $kid_pipe_connect;
         }
     }
     return $current_connection_status;
 }
 
 sub connected2() {
-    if ($kid_pid = open(my $kid_to_read, "-|")) {
-        #- parent
-        $kid_to_read;
-    } else {
-        #- child
-        require Net::Ping;
-        print Net::Ping->new("icmp")->ping("mandrakesoft.com") ? 1 : 0;
-        c::_exit(0);
-    }
+    bg_command->new(sub {
+                        require Net::Ping;
+                        print Net::Ping->new("icmp")->ping("mandrakesoft.com") ? 1 : 0;
+                    });
 }
 
 sub disconnected() {}
