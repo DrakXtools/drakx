@@ -34,7 +34,7 @@ XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs XFree86-FBDev XFree86-server
 XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
 dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
-rhs-printfilters lpr cups cups-drivers samba ncpfs
+rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils
 );
 #- package that have to be copied only if all their requires are satisfied.
 @needToCopyIfRequiresSatisfied = qw(

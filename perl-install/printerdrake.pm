@@ -189,9 +189,8 @@ sub setup_gsdriver_cups($$$;$) {
 						       [ keys %printer::descr_to_ppd ], $printer->{cupsDescr}) or return;
 	$printer->{cupsPPD} = $printer::descr_to_ppd{$printer->{cupsDescr}};
 
-	#- install additional filter according to PPD files.
-	#-$printer->{cupsPPD} =~ /-pnm2ppa\.ppd/ and &$install('pnm2ppa');
-	#-$printer->{cupsPPD} =~ /-lm1100\.ppd/ and &$install('Lexmark-1100-printer-driver__lm1100');
+	#- install additional tools according to PPD files.
+        $printer->{cupsPPD} =~ /lexmark/i and &$install('ghostscript-utils');
 
 	$printer->{complete} = 1;
 	printer::copy_printer_params($printer, $printer->{configured}{$printer->{QUEUE}} ||= {});
