@@ -446,7 +446,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 #    log::l("updating kde icons according to available devices");
 #    install_any::kdeicons_postinstall($o->{prefix});
 
-    if ($o->{lang} !~ /ja|ko|zh/) {
+    if ($o->{lang} !~ /^(ja|ko|zh|ru|th|vi|be|bg)/) {
 	my $welcome = any::to_utf8(_("Welcome to %s", '%n'));
 	substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdm/kdmrc";
     }
