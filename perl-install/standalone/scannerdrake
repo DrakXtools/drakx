@@ -42,10 +42,11 @@ foreach (@ARGV) {
 }
 
 my $in = 'interactive'->vnew('su');
-if (!files_exist('/usr/bin/scanimage',
-		 '/usr/bin/xsane',
-		 if_(files_exist("/usr/bin/gimp"),
-		     "/usr/lib/gimp/1.2/plug-ins/xsane"))) {
+if (!files_exist(qw(/usr/bin/scanimage
+		    /etc/sane.d/dll.conf)) ||
+    (!files_exist(qw(/usr/bin/xsane)) &&
+     !files_exist(qw(/usr/bin/kooka)) &&
+     !$in->do_pkgs->is_installed('scanner-gui'))) {
     if (!$in->ask_yesorno(N("Warning"), N("SANE packages need to be installed to use scanners.
 
 Do you want to install the SANE packages?"))) {
@@ -53,9 +54,7 @@ Do you want to install the SANE packages?"))) {
 		      N("Aborting Scannerdrake."));
 	exit 0;
     }
-    if (!$in->do_pkgs->install('sane-backends', 'xsane',
-			       if_($in->do_pkgs->is_installed('gimp'),
-				   'xsane-gimp'))) {
+    if (!$in->do_pkgs->install('sane-backends', 'scanner-gui')) {
 	$in->ask_warn(N("Error"),
 		      N("Could not install the packages needed to set up a scanner with Scannerdrake.") . " " .
 		      N("Scannerdrake will not be started now."));
@@ -373,7 +372,7 @@ sub tryConfScanner {
     }
     scanner::confScanner($model, $port, $vendor, $product, $firmware);
     $in->ask_warn(N("Congratulations!"),
-		  N("Your %s has been configured.\nYou may now scan documents using \"XSane\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
+		  N("Your %s has been configured.\nYou may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
     return 1;
 }
 
