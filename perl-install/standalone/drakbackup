@@ -25,7 +25,6 @@ use strict;
 
 use interactive;
 use common;
-use Time::localtime;
 use detect_devices;
 
 # Backend Options.
@@ -337,18 +336,19 @@ sub all_user_list() {
 
 sub the_time() {
     $the_time = "_";
-    $the_time .= localtime->year + 1900;
-    if (localtime->mon < 9) { $the_time .= "0" }
-    $the_time .= localtime->mon + 1;
-    if (localtime->mday < 10) { $the_time .= "0" }
-    $the_time .= localtime->mday;
+	my ($sec, $min, $hour, $day, $month, $year) = localtime(time());
+    $the_time .= $year + 1900;
+    if ($month < 9) { $the_time .= "0" }
+    $the_time .= $month + 1;
+    if ($day < 10) { $the_time .= "0" }
+    $the_time .= $day;
     $the_time .= "_";
-    if (localtime->hour < 10) { $the_time .= "0" }
-    $the_time .= localtime->hour;
-    if (localtime->min < 10) { $the_time .= "0" }
-    $the_time .= localtime->min;
-    if (localtime->sec < 10) { $the_time .= "0" }
-    $the_time .= localtime->sec;    
+    if ($hour < 10) { $the_time .= "0" }
+    $the_time .= $hour;
+    if ($min < 10) { $the_time .= "0" }
+    $the_time .= $min;
+    if ($sec < 10) { $the_time .= "0" }
+    $the_time .= $sec;    
 }
 
 sub get_tape_info() {
