@@ -261,7 +261,7 @@ suits your needs.
 Monitor
 
    The installer will normally automatically detect and configure the
-monitor connected to your machine. If it is correct, you can choose from
+monitor connected to your machine. If it is not correct, you can choose from
 this list the monitor you actually have connected to your computer.
 
 
@@ -297,7 +297,7 @@ sub configureX_monitor() {
     N("Monitor
 
    The installer will normally automatically detect and configure the
-monitor connected to your machine. If it is correct, you can choose from
+monitor connected to your machine. If it is not correct, you can choose from
 this list the monitor you actually have connected to your computer.");
 }
 sub configureX_resolution() {
