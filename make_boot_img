@@ -36,7 +36,7 @@ sub mke2fs {
 _ "$sudo mkdir -p $tmp_mnt $tmp_mnt_initrd";
 mkdir "images";
 
-chomp(my $main = `cat kernel/all.kernels/.main`);
+my $main = chomp_(cat_('kernel/all.kernels/.main'));
 my @kernels = grep { /^2/ } all('kernel/all.kernels');
 
 
