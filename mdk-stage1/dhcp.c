@@ -381,6 +381,10 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 	breq->secs = 0;
 
 	sin = socket(AF_PACKET, SOCK_DGRAM, ntohs(ETH_P_IP));
+	if (sin < 0) {
+		log_perror("af_packet socket");
+		return -1;
+	}
 
 	while (retry <= MAX_ARP_RETRIES) {
 		i = sizeof(*breq);
