@@ -71,10 +71,9 @@ sub partitionWizardSolutions {
 	   "no harddrive on which partitions can be added") if !$readonly;
     }
 
-    if (@$fstab) {
-	my $truefs = grep { isTrueFS($_) } @$fstab;
+    if (my @truefs = grep { isTrueFS($_) } @$fstab) {
 	#- value twice the ext2 partitions
-	$solutions{existing_part} = [ 6 + $truefs + @$fstab, _("Use existing partition"), sub { $o->ask_mntpoint_s($fstab) } ]
+	$solutions{existing_part} = [ 6 + @truefs + @$fstab, _("Use existing partition"), sub { $o->ask_mntpoint_s($fstab) } ]
     } else {
 	push @wizlog, _("There is no existing partition to use");
     }
@@ -83,7 +82,7 @@ sub partitionWizardSolutions {
     fs::df($_) foreach @fats;
     if (my @ok_forloopback = sort { $b->{free} <=> $a->{free} } grep { $_->{free} > $min_linux + $min_freewin } @fats) {
 	$solutions{loopback} = 
-	  [ -10 - @fats, _("Use the FAT partition for loopback"), 
+	  [ -10 - @fats, _("Use the Windows partition for loopback"), 
 	    sub { 
 		my ($s_root, $s_swap);
 		my $part = $o->ask_from_listf('', _("Which partition do you want to use to put Linux4Win?"), \&partition_table_raw::description, \@ok_forloopback) or return;
@@ -179,16 +178,21 @@ sub partitionWizard {
     my ($o, $nodiskdrake) = @_;
 
     my %solutions = partitionWizardSolutions($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
+    %solutions = (loopback => $solutions{loopback}) if $o->{lnx4win};
     delete $solutions{diskdrake} if $nodiskdrake;
 
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
     my $level = $::beginner ? 0 : $::expert ? -9999 : -10;
     my @sol = grep { $_->[0] >= $level } @solutions;
+
+    log::l("solutions found: " . join('', map {$_->[1]} @sol) . " (all solutions found: " . join('', map {$_->[1]} @solutions) . ")");
+
     @solutions = @sol if @sol > 1;
 
     my $ok; while (!$ok) {
 	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;
+	log::l("partitionWizard calling solution $sol->[1]");
 	eval { $ok = $sol->[2]->() };
 	die if $@ =~ /setstep/;
 	$ok &&= !$@;

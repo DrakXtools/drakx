@@ -263,7 +263,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     my @l = ();
     if ($card->{DRI_glx}) {
 	push @l, 'Glide_V5' if $card->{identifier} =~ /Voodoo 5/;
-	push @l, 'Glide_V3-DRI' if $card->{identifier} =~ /Voodoo 3/;
+	push @l, 'Glide_V3-DRI' if $card->{identifier} =~ /Voodoo (3|Banshee)/;
 	push @l, 'Device3Dfx', 'XFree86-glide-module' if $card->{identifier} =~ /Voodoo/;
     }
     if ($card->{Utah_glx}) {
@@ -778,12 +778,12 @@ sub write_XF86Config {
     print G qq(    Option "ZAxisMapping" "4 5"\n) if $O->{nbuttons} > 3;
     print G qq(    Option "ZAxisMapping" "6 7"\n) if $O->{nbuttons} > 5;
 
-    print F "#" unless $O->{XEMU3};
-    print G "#" unless $O->{XEMU3};
+    print F "#" unless $O->{nbuttons} < 3;
+    print G "#" unless $O->{nbuttons} < 3;
     print F qq(    Emulate3Buttons\n);
     print G qq(    Option "Emulate3Buttons"\n);
-    print F "#" unless $O->{XEMU3};
-    print G "#" unless $O->{XEMU3};
+    print F "#" unless $O->{nbuttons} < 3;
+    print G "#" unless $O->{nbuttons} < 3;
     print F qq(    Emulate3Timeout    50\n\n);
     print G qq(    Option "Emulate3Timeout"    "50"\n\n);
     print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
@@ -1083,8 +1083,8 @@ sub main {
     ($prefix, $o, $in, $allowFB, $isLaptop, $install) = @_;
     $o ||= {};
 
-      XF86check_link('');
-      XF86check_link('-4');
+    XF86check_link('');
+    XF86check_link('-4');
 
     {
 	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);

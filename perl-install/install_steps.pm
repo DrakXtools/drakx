@@ -805,6 +805,8 @@ sub miscellaneous {
     my ($o) = @_;
 
     local $_ = $o->{bootloader}{perImageAppend};
+
+    $o->{miscellaneous}{memsize} ||= availableRamMB() . 'M' if $o->{lnx4win};
     if (my $ramsize = $o->{miscellaneous}{memsize} and !/mem=/) {
 	$_ .= " mem=$ramsize";
     }

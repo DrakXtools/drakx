@@ -129,6 +129,7 @@ sub getFile {
 	    ftp::getFile($rel);
 	} elsif ($::o->{method} eq "http") {
 	    require http;
+	    log::l("http getFile $f");
 	    http::getFile($rel);
 	} else {
 	    #- try to open the file, but examine if it is present in the repository, this allow
@@ -308,7 +309,7 @@ sub setPackages($) {
 	my @l = ();
 	push @l, "kapm", "kcmlaptop", "DrakProfile", "DrakSync" if $o->{pcmcia};
 	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
-	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo 3');
+	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo (3|Banshee)');
 	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
 	require timezone;
 	require lang;
@@ -580,12 +581,12 @@ sub generate_ks_cfg {
 	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/rhimage nfs| or die;
 	$ks .= "nfs --server $1 --dir $2\n";
     }
-    my %intf = %{$o->{intf}[0]};
-    if ($intf{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
-	$ks .= "network --bootproto $intf{BOOTPROTO}\n";
+    my ($intf) = values %{$o->{intf}};
+    if ($intf->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+	$ks .= "network --bootproto $intf->{BOOTPROTO}\n";
     } else {
 	require network;
-	my %l = (ip => $intf{IPADDR}, netmask => $intf{NETMASK}, gateway => $o->{netc}{GATEWAY});
+	my %l = (ip => $intf->{IPADDR}, netmask => $intf->{NETMASK}, gateway => $o->{netc}{GATEWAY});
 	$ks .= "network " . join(" ", map_each { $::b && "--$::a $::b" } %l);
 	$ks .= " --nameserver $_" foreach network::dnsServers($o->{netc});
 	$ks .= "\n";

@@ -501,7 +501,8 @@ sub main {
 	    expert    => sub { $::expert = 1; $::beginner = 0 },
 	    beginner  => sub { $::beginner = $v },
 	    class     => sub { $o->{installClass} = $v },
-	    fclass    => sub { $o->{installClass} = $v; push @auto, "selectInstallClass" },
+	    fclass    => sub { $o->{installClass} = $v; push @auto, 'selectInstallClass' },
+	    desktop   => sub { $o->{meta_class} = 'desktop' },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
@@ -631,6 +632,11 @@ sub main {
 
 	$o->{interactive} = "newt";
 	require install_steps_newt;
+    }
+    $o->{meta_class} = 'desktop' if cat__(install_any::getFile("VERSION")) =~ /desktop/i;
+    if ($o->{meta_class} eq 'desktop') {
+	$o->{installClass} = 'normal';
+	push @auto, 'selectInstallClass';
     }
     if ($oem) {
 	push @auto, 'selectInstallClass', 'selectMouse', 'configureTimezone', 'exitInstall';

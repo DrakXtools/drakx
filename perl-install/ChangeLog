@@ -1,3 +1,44 @@
+2000-09-15  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: the reference is now nbuttons to
+	know wether to put Emulate3Buttons or ZAxisMapping.
+	* Xconfigurator.pm (cardConfiguration): install Glide_V3-DRI on
+	Banshee too.
+
+	* Xconfig.pm: guess nbuttons based on Emulate3Buttons and
+	ZAxisMapping.
+
+	* common.pm (availableRamMB): replace availableRam, now use the
+	size of /proc/kcore (what else to find the real ramsize?)
+
+	* common.pm (cat__): created
+
+	* install2.pm (main): add field meta_class in $o. Can be
+	'desktop', in case option desktop is given, or if /desktop/i is
+	found in /VERSION
+
+	* install_steps.pm (miscellaneous): for lnx4win, always have
+	'mem=' (so that the initrd is visible by both windows
+
+	* install2.pm (main): add option "desktop"
+
+	* install_any.pm (generate_ks_cfg): fix for new(?) $o->{intf} format
+
+	* install_interactive.pm (partitionWizardSolutions): 
+	use only TrueFS for existing_part
+	(partitionWizard): have only "loopback" for lnx4win
+
+	* pci_probing/pcitable: associate Voodoo5 with Voodoo5
+
+	* share/Cards+: add Voodoo5
+
+	* bootloader.pm (suggest): add entry linux-nonfb (called linux-up
+	for smp)
+
+2000-09-14  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
+
 2000-09-12  François Pons  <fpons@mandrakesoft.com>
 
 	* detect_devices.pm, mouse.pm: moved probing serial port before to

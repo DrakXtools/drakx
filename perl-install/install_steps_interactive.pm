@@ -154,7 +154,6 @@ sub selectMouse {
     
     $o->{mouse} = $o->ask_from_listf_('', _("Please, choose the type of your mouse."), 
 				      sub { $_[0]{FULLNAME} }, [ mouse::list ], $o->{mouse}) if $force;
-    $o->{mouse}{XEMU3} = 'yes' if $o->{mouse}{nbuttons} < 3;
 
     if ($force && $o->{mouse}{device} eq "ttyS") {
 	$o->set_help('selectSerialPort');
@@ -248,7 +247,7 @@ Continue at your own risk!"));
 			     \&partition_table_raw::description, 
 			     [ install_any::find_root_parts($o->{hds}, $o->{prefix}) ]) or die "setstep exitInstall\n";
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
-    } elsif ($::expert) {
+    } elsif ($::expert && ref($o) =~ /gtk/) {
         install_interactive::partition_with_diskdrake($o, $o->{hds});
     } else {
         install_interactive::partitionWizard($o);
@@ -276,21 +275,23 @@ sub choosePartitionsToFormat($$) {
 
     return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
 
-    $_->{toFormat} ||= $_->{toFormatUnsure} foreach @l;
-    log::l("preparing to format $_->{mntpoint}") foreach grep { $_->{toFormat} } @l;
+    my %toFormat = map { $_ => $_->{toFormat} || $_->{toFormatUnsure} } @l;
 
     my %label;
-    $label{$_} = sprintf("%s   (%s)", 
+    $label{$_} = sprintf("%s   %s", 
 			 isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}, 
-			 isLoopback($_) ? loopback::file($_) : $_->{device}) foreach @l;
+			 isLoopback($_) ? 
+                             $::expert && loopback::file($_) : 
+                             "(" . partition_table_raw::description($_) . ")") foreach @l;
 
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],
-			       [ map { \$_->{toFormat} } @l ]) or die "cancel";
+			       [ map { \$toFormat{$_} } @l ]) or die "cancel";
     @l = grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l;
     $o->ask_many_from_list_ref('', _("Check bad blocks?"),
 			       [ map { $label{$_} } @l ],
 			       [ map { \$_->{toFormatCheck} } @l ]) or goto &choosePartitionsToFormat if $::expert;
+    $_->{toFormat} = $toFormat{$_} foreach @l;
 }
 
 
@@ -807,7 +808,7 @@ sub miscellaneous {
 	_("Miscellaneous questions"), [
 _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 _("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
-_("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 1) => \$u->{memsize}, #- add three for correction.
+_("Precise RAM size if needed (found %d MB)", availableRamMB()) => \$u->{memsize},
 arch() !~ /^sparc/ ? (
 _("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' }, ) : (),
      $::expert ? (

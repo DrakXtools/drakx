@@ -312,6 +312,8 @@ sub df {
 	mkdir $dir;
 	eval { mount($part->{device}, $dir, type2fs($part->{type}), 'readonly') };
 	if ($@) {
+	    $part->{notFormatted} = 1;
+	    $part->{isFormatted} = 0;
 	    unlink $dir;
 	    return;
 	}

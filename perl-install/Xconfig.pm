@@ -30,7 +30,6 @@ sub getinfo {
     add2hash($o->{mouse}, mouse::detect()) unless $o->{mouse}{XMOUSETYPE};
 
     $o->{mouse}{device} ||= "mouse" if -e "/dev/mouse";
-    $o->{mouse}{nbuttons} ||= mouse::X2nbuttons($o->{mouse}{XMOUSETYPE});
     $o;
 }
 
@@ -49,9 +48,11 @@ sub getinfoFromXF86Config {
 	} elsif (/^Section "Pointer"/ .. /^EndSection/) {
 	    $o->{mouse}{XMOUSETYPE} ||= $1 if /^\s*Protocol\s+"(.*?)"/;
 	    $o->{mouse}{device} ||= $1 if m|^\s*Device\s+"/dev/(.*?)"|;
-	    $o->{mouse}{XEMU3} ||= 1 if m/^\s*Emulate3Buttons\s+/;
 	    $o->{mouse}{cleardtrrts} ||= 1 if m/^\s*ClearDTR\s+/;
 	    $o->{mouse}{cleardtrrts} ||= 1 if m/^\s*ClearRTS\s+/;
+	    $o->{mouse}{nbuttons}   = 2 if m/^\s*Emulate3Buttons\s+/;
+	    $o->{mouse}{nbuttons} ||= 5 if m/^\s*ZAxisMapping\s.*5/;
+	    $o->{mouse}{nbuttons}   = 7 if m/^\s*ZAxisMapping\s.*7/;
 	} elsif (my $i = /^Section "Device"/ .. /^EndSection/) {
 	    %c = () if $i == 1;
 
