@@ -16,6 +16,7 @@ my @ALLOWED_LANGS = qw(en_US fr es it de);
 my ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
 my $virtual_key_part;
+my $key_mountopts = 'umask=077,uid=501,gid=501,shortname=mixed';
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
@@ -50,7 +51,7 @@ sub handle_virtual_key {
         require devices;
         my $loop = devices::find_free_loop();
         run_program::run('losetup', $loop, "$dir$file");
-        run_program::run('mount', $loop, '/home', '-o', 'umask=077,uid=501,gid=501,shortname=mixed');
+        run_program::run('mount', $loop, '/home', '-o', $key_mountopts);
 	$virtual_key_part = { device => $loop, mntpoint => '/home', type => 0xc, isMounted => 1 };
     }
 }
@@ -194,7 +195,7 @@ sub key_parts {
     my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } @{$o->{all_hds}{hds}};
     map_index { 
 	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
-	$_->{options} = 'umask=077,uid=501,gid=501,shortname=mixed';
+	$_->{options} = $key_mountopts;
         $_;
     } fsedit::get_fstab(@keys);
 }
