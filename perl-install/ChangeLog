@@ -1,3 +1,111 @@
+2002/02/18  dam's  <damien@mandrakesoft.com>
+
+	* share/logo-mandrake.png: new gfx
+
+2002/02/18  fcrozat
+
+	* share/rpmsrate: Install Guppi when installing gnumeric
+
+2002/02/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: titi sucks again
+
+2002/02/18  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sk.po: updated Slovak ile
+	updated pot file
+
+	* help.pm: updated help file
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/th.po, share/po/el.po,
+	share/po/lt.po, share/po/ar.po, share/po/sl.po, share/po/vi.po,
+	share/po/br.po, share/po/ca.po, share/po/gl.po, share/po/lv.po,
+	share/po/uk.po, share/po/eo.po, share/po/ro.po, share/po/bs.po,
+	share/po/da.po, share/po/zh_TW.po, share/po/cs.po, share/po/af.po:
+	updated pot file
+
+2002/02/18  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm: 
+	  - remove media_type cdrom-burner, use {capacity} instead
+	  - use /proc/sys/dev/cdrom/info to fill in the {capacity}
+
+	* diskdrake/smbnfs_gtk.pm: 
+	  - add Cancel
+	  - move "click here" in "Search servers" on the right side
+	  - remove Export
+	  - fix bug
+
+	* share/rpmsrate: raise xsane in SCANNER (Yves Duret)
+	raise mkisofs & cdrecord in BURNER
+
+	* Xconfigurator.pm: workaround not having the right to connect to our new
+	created test server.
+	info about the pb (sorry for the french):
+	quand on lance le serveur
+	  - via xdm/kdm/startx, ca utilise xauth, xhost est fermé
+	  - via X/xinit, xhost est ouvert sur localhost, xauth n'est pas utilisé
+	  *sauf* si X/xinit est lancé à partir d'un X *et* .Xauthority est non
+	vide.
+	    dans ce cas, xhost est fermé, et aucun xauth n'est ajouté
+	    une conséquence, c'est que XFdrake ne peut pas accéder au X de
+	    test si XFdrake est lancé sous X ou "xauth list" est non vide
+	      exception: quand on lance le xdm/kdm en root, xhost n'est pas
+	fermé,
+	         pas contre il est fermé en root & startx.
+
+	* any.pm (fileshare_config): rework the custom message and launch
+	userdrake
+	(report_bug): add lilo.conf
+
+	* standalone/localedrake: 
+	  - handle --kde_lang with optionally --kde_country
+	  - handle --apply
+	change the message & ask wether to logout or not
+
+	* lang.pm: 
+	  - handle --kde_lang with optionally --kde_country
+	  - handle --apply
+	(lang2kde_lang): add missing valid_kde_langs
+	fuzzy language finding between available langs when it doesn't match
+	(useful for upgrades where fr_FR was fr_FR@euro)
+
+	* diskdrake/interactive.pm: remove cdrom-burner from media_type set
+
+	* install_steps_gtk.pm: s/hbox/vbox for "Select Install Class"
+
+	* fs.pm (mount_options_unpack): add usrquota and grpquota for
+	ext2/ext3/reiserfs/xfs
+	  - remove media_type cdrom-burner, use {capacity} instead
+	  - use /proc/sys/dev/cdrom/info to fill in the {capacity}
+
+	* share/compssUsers: add EDITORS in Development/Development
+	add EDITORS in Development/Development
+
+2002/02/18  yduret
+
+	* bootlook.pm: remove aurora part (commented for the moment)
+
+	* standalone/scannerdrake: HP OfficeJet support
+	scsi/parport preliminary support
+
+	* scanner.pm: update
+	scsi parport preliminary support
+	no more show unsupported scanner
+	common output for ScannerDB update from sane *.desc files and from
+	usbtable
+
+2002/02/17  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm: warn_if_renumbered now also done at install
+
 2002/02/17  Pixel  <pixel@mandrakesoft.com>
 
 	* share/rpmsrate: have icewm-light in any case (to be used as a failsafe
