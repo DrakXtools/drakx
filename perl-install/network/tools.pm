@@ -140,6 +140,25 @@ sub ask_info2 {
     1;
 }
 
+sub detect_timezone() {
+    my %tmz2country = ( 
+		       'Europe/Paris' => N("France"),
+		       'Europe/Amsterdam' => N("Netherlands"),
+		       'Europe/Rome' => N("Italy"),
+		       'Europe/Brussels' => N("Belgium"), 
+		       'America/New_York' => N("United States"),
+		       'Europe/London' => N("United Kingdom") 
+		      );
+    my %tm_parse = MDK::Common::System::getVarsFromSh('/etc/sysconfig/clock');
+    my @country;
+    foreach (keys %tmz2country) {
+	if ($_ eq $tm_parse{ZONE}) {
+	    unshift @country, $tmz2country{$_};
+	} else { push @country, $tmz2country{$_} };
+    }
+    \@country;
+}
+
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
 my $kid_pipe;
