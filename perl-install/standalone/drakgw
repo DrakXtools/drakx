@@ -24,12 +24,11 @@ use detect_devices;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: drakgw [--version]\n";
-/-v/ and die 'version: $Id$ '."\n";
+/-h/ and die "usage: drakgw [--version --verbose]\n";
+/-version/ and die 'version: $Id$ '."\n";
 
-# $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^CLASS="?expert/m; #"
-# $::expert and print "Running in expert mode.\n" and sleep 1;
-
+$::verbose = /-verbose/;
+$::direct = /-direct/;
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
@@ -45,8 +44,9 @@ my $drakgw_setup = "/etc/sysconfig/inet_sharing";
 
 sub start_daemons()
 {
+    log::l("[drakgw] Starting daemons\n");
     grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
-    grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
+    grep(/error: cannot connect/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
     (system("/etc/rc.d/init.d/network restart") == 0) or die "Could not restart the network";
     (system("sh /etc/rc.d/rc.firewall") == 0) or die "Could not start the firewall script";
     (system("/etc/rc.d/init.d/named start") == 0) or die "Could not start the caching nameserver";
@@ -61,6 +61,7 @@ sub start_daemons()
 
 sub stop_daemons()
 {
+    log::l("[drakgw] Stopping daemons\n");
     grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
     grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
     (system("/etc/rc.d/init.d/ipchains stop") == 0) or die "Could not stop ipchains";
@@ -110,6 +111,7 @@ if (-f $drakgw_setup)
 	    rename($dhcpd_conf, "$dhcpd_conf.drakgwdisable") or die "Could not rename $dhcpd_conf to $dhcpd_conf.drakgwdisable";
 	    -f "$rc_firewall.drakgwdisable" and (unlink("$rc_firewall.drakgwdisable") or die "Could not unlink $rc_firewall.drakgwdisable");
 	    rename($rc_firewall, "$rc_firewall.drakgwdisable") or die "Could not rename $rc_firewall to $rc_firewall.drakgwdisable";
+            log::l("[drakgw] Disabled\n");
 	    $in->exit(0);
 	}
 	($r eq "dismiss") and $in->exit(0);
@@ -128,6 +130,7 @@ if (-f $drakgw_setup)
 	    -f $rc_firewall and rename($rc_firewall, "$rc_firewall.old");
 	    rename("$rc_firewall.drakgwdisable", $rc_firewall) or die "Could not find configuration. Please reconfigure.";
 	    start_daemons();
+            log::l("[drakgw] Enabled\n");
 	    $in->exit(0);
 	}
 	($r eq "dismiss") and $in->exit(0);
@@ -144,10 +147,10 @@ if (-f $drakgw_setup)
 #- **********************************
 #- * 1st step: detect/setup
 
-$in->ask_okcancel(_("Internet Connection Sharing"),
-		  _("Your computer can be configured to share its Internet connection.\n\n".
-		    "Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).\n\n".
-		    "Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
+$::direct or $in->ask_okcancel(_("Internet Connection Sharing"),
+			       _("Your computer can be configured to share its Internet connection.\n\n".
+				 "Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).\n\n".
+				 "Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
 
 #my @pci_ethernet_cards;
 #require pci_probing::main;
@@ -163,14 +166,16 @@ my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-sc
 
 my %aliased_devices; (/^alias\s+(eth[0-9])\s+(\S+)/) and ($aliased_devices{$1} = $2) foreach cat_("/etc/modules.conf");
 my $card_netconnect = netconnect::get_net_device("/");
-(defined $card_netconnect) and log::l("Information from netconnect: ignoring card $card_netconnect\n");
+(defined $card_netconnect) and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect\n");
 my @all_cards_getnet = detect_devices::getNet();
 my @all_cards;
 foreach my $card (@all_cards_getnet)
 {
+    log::l("[drakgw] Have network card: $card\n");
     next if ($card eq $card_netconnect);
     push @all_cards, exists $aliased_devices{$card} ? "Interface $card (using module $aliased_devices{$card})" : "Interface $card";
 }
+log::l("[drakgw] Available network cards: ".join(" ; ", @all_cards)."\n");
 
 #  print "pci_detection: "; print ">".$_->[2]."< " foreach (@pci_ethernet_cards);
 #  print "\nconfigured: "; print ">".$_."< " foreach (@configured_devices);
@@ -208,8 +213,8 @@ if ($#all_cards == -1)
 elsif ($#all_cards == 0)
 {
     $interface = $all_cards[0];
-#    $::expert and $in->ask_okcancel(_("Network interface"),
-#				    _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0);
+    $::verbose and ($in->ask_okcancel(_("Network interface"),
+				      _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0));
 }
 else
 {
@@ -221,6 +226,7 @@ else
 }
 $interface =~ /(eth[0-9]+)/ or die("Internal error");
 my $device = $1;
+log::l("[drakgw] Choosing network card: $device\n");
 
 grep(/$device/, @configured_devices) and
     ($in->ask_okcancel('', _("Warning, the network adapter is already configured.\nWould you like to reconfigure?")) or $in->exit(0));
@@ -435,7 +441,7 @@ chmod 0700, $rc_firewall;
 open SYSCONF_NETWORK, "$sysconf_network" or die "Can't open $sysconf_network";
 my @sysconf_network_content = <SYSCONF_NETWORK>;
 close SYSCONF_NETWORK;
-($_ =~ /^FORWARD_IPV4=/ and $_="FORWARD_IPV4=true\n") foreach (@sysconf_network_content);
+($_ =~ /^FORWARD_IPV4=/ and $_="FORWARD_IPV4=true\n") foreach @sysconf_network_content;
 grep(/^FORWARD_IPV4=/, @sysconf_network_content) or push @sysconf_network_content, "FORWARD_IPV4=true\n";
 open SYSCONF_NETWORK, ">$sysconf_network" or die "Can't open $sysconf_network";
 print SYSCONF_NETWORK @sysconf_network_content;
@@ -475,7 +481,7 @@ close DHCPDCONF;
 open CONF_LINUXCONF, "$conf_linuxconf" or die "Can't open $conf_linuxconf";
 my @conf_linuxconf_content = <CONF_LINUXCONF>;
 close CONF_LINUXCONF;
-($_ =~ /^DHCP.interface/ and $_="DHCP.interface $device\n") foreach (@conf_linuxconf_content);
+($_ =~ /^DHCP.interface/ and $_="DHCP.interface $device\n") foreach @conf_linuxconf_content;
 grep(/DHCP.interface/, @conf_linuxconf_content) or push @conf_linuxconf_content, "DHCP.interface $device\n";
 open CONF_LINUXCONF, ">$conf_linuxconf" or die "Can't open $conf_linuxconf";
 print CONF_LINUXCONF @conf_linuxconf_content;
@@ -508,6 +514,7 @@ $in->ask_warn(_("Congratulations!"),
 		"using automatic network configuration (DHCP)."));
 
 
+log::l("[drakgw] Installation complete, exiting\n");
 $in->exit(0);
 
 
