@@ -16,9 +16,10 @@ use c;
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: drakboot [--expert]\n";
+/-h/ and die "usage: drakboot [--expert] [--testing]\n";
 
 $::expert = /-expert/;
+$::testing = /-testing/;
 
 my $in = 'interactive'->vnew('su', 'bootloader');
 
