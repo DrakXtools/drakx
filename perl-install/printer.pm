@@ -1035,8 +1035,10 @@ sub configure_queue($) {
     }
 
     # Make a new printer entry in the $printer structure
-    $printer->{configured}{$printer->{currentqueue}{'queue'}}{'queuedata'}=
-	$printer->{currentqueue};
+    $printer->{configured}{$printer->{currentqueue}{'queue'}}{'queuedata'} =
+        {};
+    copy_printer_params($printer->{currentqueue},
+      $printer->{configured}{$printer->{currentqueue}{'queue'}}{'queuedata'});
     $printer->{configured}{$printer->{currentqueue}{'queue'}}{'args'} = {};
     if ($printer->{currentqueue}{foomatic}) {
 	my $tmp = $printer->{OLD_QUEUE};
@@ -1049,7 +1051,6 @@ sub configure_queue($) {
 	    read_cups_options($printer->{currentqueue}{'queue'});
     }
     # Clean up
-    delete($printer->{currentqueue});
     delete($printer->{ARGS});
     $printer->{OLD_CHOICE} = "";
     $printer->{ARGS} = {};

@@ -705,10 +705,10 @@ sub get_db_entry {
 	if ($printer->{configured}{$queue}{'queuedata'}{'foomatic'}) {
 	    # The queue was configured with Foomatic
 	    my $driverstr;
-	    if ($printer->{configured}{$queue}{'driver'} eq "Postscript") {
+	    if ($printer->{configured}{$queue}{'queuedata'}{'driver'} eq "Postscript") {
 		$driverstr = "PostScript";
 	    } else {
-		$driverstr = "GhostScript + $printer->{configured}{$queue}{'driver'}";
+		$driverstr = "GhostScript + $printer->{configured}{$queue}{'queuedata'}{'driver'}";
 	    }
 	    my $make = uc($printer->{configured}{$queue}{'queuedata'}{'make'});
 	    my $model =	$printer->{configured}{$queue}{'queuedata'}{'model'};
@@ -766,7 +766,7 @@ sub get_db_entry {
 	    $printer->{OLD_CHOICE} = "XXX";
 	}
     } else {
-	if (($::expert) && ($printer->{DBENTRY} !~ (recommended))) {
+	if (($::expert) && ($printer->{DBENTRY} !~ /(recommended)/)) {
 	    my ($make, $model) = $printer->{DBENTRY} =~ /^([^\|]+)\|([^\|]+)\|/;
 	    for my $key (keys %printer::thedb) {
 		if ($key =~ /^$make\|$model\|.*\(recommended\)$/) {
@@ -847,8 +847,10 @@ sub get_printer_info {
 		if ($printer->{PAPERSIZE}) {
 		    $printer->{SPECIAL_OPTIONS} .= 
 			" -o PageSize=$printer->{PAPERSIZE}";
-		} elsif (($pagesize = $ENV{'LC_PAPER'}) ||
+		} elsif (($in->{lang}) ||
+			 ($pagesize = $ENV{'LC_PAPER'}) ||
 			 ($pagesize = $ENV{'LANG'}) ||
+			 ($pagesize = $ENV{'LANGUAGE'}) ||
 			 ($pagesize = $ENV{'LC_ALL'})) {
 		    if (($pagesize eq 'en') || ($pagesize eq 'en_US')) {
 			$pagesize = "Letter";
