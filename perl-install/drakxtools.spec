@@ -312,8 +312,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Fri May 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.4mdk
+* Tue May 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.4mdk
 - drakconnect: fix #3628 (ensure 644 perms on /etc/resolv.conf)
+- keyboardrake: resync with XFree86-4.3 (pablo)
 
 * Wed May 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.3mdk
 - drakbackup: fixes regarding file names in differntial mode (stew)
