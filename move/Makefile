@@ -98,7 +98,7 @@ live_tree_boot:
 	$(MAKE) $(patsubst %, $(DEST)/live_tree_always_i18n_%.clp, $(LANG_FILES))
 
 un_live_tree_boot:
-	./make_live_tree_boot -u
+	./make_live_tree_boot -u $(DEST_LIVETREE)
 	tools/fix-fc-cache.pl $(DEST_LIVETREE)
 
 iso: un_live_tree_boot build install live_tree_boot
