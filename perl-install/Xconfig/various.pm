@@ -53,7 +53,7 @@ sub various {
 
 sub choose_xdm {
     my ($in, $auto) = @_;
-    my $xdm = $::isStandalone ? any::runlevel($::prefix) : 1;
+    my $xdm = $::isStandalone ? any::runlevel() == 5 : 1;
 
     if (!$auto || $::isStandalone) {
 	$in->set_help('configureXxdm') if !$::isStandalone;
@@ -62,7 +62,7 @@ sub choose_xdm {
 N("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
 Would you like XFree to start when you reboot?"), $xdm) or return;
     }
-    any::runlevel($::prefix, $xdm ? 5 : 3);
+    any::runlevel($xdm ? 5 : 3);
 }
 
 sub tvout {
