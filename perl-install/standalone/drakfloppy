@@ -56,6 +56,12 @@ unless ($::isEmbedded) {
 
 my ($output, @modules, @temp_modules, %buttons, %options, $tree_model, $tree, $list_model, $list);
 
+my $conffile = "/etc/sysconfig/drakfloppy";
+
+# we must be robust against config file parsing
+eval { %options = getVarsFromSh($conffile); } or warn N("Error while parsing \"MODULES\" line from $conffile");
+@modules  = split (' ', $options{MODULES});
+
 
 ######## up part
 
@@ -176,7 +182,12 @@ sub pref_dialog() {
     # restore values:
     $buttons{$_}->set_active($options{$_}) foreach keys %buttons;
     fill_tree($kernel_combo->entry->get_text);
-    $list_model->append_set([ map_index { $::i => $_ } @$_ ]) foreach @modules;
+    foreach my $module (@modules) {
+        my $full_path = join('/', "/lib/modules", $kernel_combo->entry->get_text, $module);
+        my $size = get_file_size($full_path);
+        $list_model->append_set(map_index { $::i => $_ } $module, $size, $full_path);
+    }
+    
     $remove_but->set_sensitive(scalar @modules);
     @temp_modules = ();
 
@@ -189,7 +200,7 @@ sub pref_dialog() {
                                   @modules = ();
                                   $list_model->foreach(sub {
                                                            my ($model, $_path, $iter) = @_;
-                                                           push @modules, [ $model->get($iter, 0), $model->get($iter, 1), $model->get($iter, 2) ];
+                                                           push @modules, $model->get($iter, 0);
                                                            return 0;
                                                        }, $val);
                                   $dialog->destroy;
@@ -226,7 +237,7 @@ sub selected_tree {
     
     return if -d $file;
 
-    my $size = (lstat($file))[7];
+    my $size = get_file_size($file);
 
     return if member($file, @temp_modules);
     push @temp_modules, $file;
@@ -277,7 +288,10 @@ sub build_it() {
     $co .= " --mkinitrdargs --ifneeded" if $options{needed};
     $co .= " --mkinitrdargs --omit-scsi-modules" if $options{scsi};
     $co .= " --mkinitrdargs --omit-raid-modules" if $options{raid};
-    $co .= join(" --mkinitrdargs --with=", map { $_->[0] } @modules);
+    $co .= join(" --mkinitrdargs --with=", @modules);
+    $options{MODULES} = join(' ', @modules);
+    setVarsInSh($conffile, \%options);
+
     $co .= " " . $kernel_combo->entry->get_text;
     $co .= " 2>&1 |";
     $::testing or warn_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text)) or return;
@@ -300,6 +314,11 @@ sub build_it() {
     }
   
     return (0);
+}
+
+sub get_file_size {
+    my ($file) = @_;
+    (lstat($file))[7];
 }
 
 ####
