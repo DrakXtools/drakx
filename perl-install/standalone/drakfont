@@ -87,11 +87,10 @@ use lib qw(/usr/lib/libDrakX);
 
 use standalone;    #- warning, standalone must be loaded very first, for 'explanations'
 
-use interactive;
 use ugtk2 qw(:helpers :wrappers :create);
 use common;
 
-my $in = 'interactive'->vnew('su');
+require_root_capability();
 
 #   global variables needed by each functions
 my $xlsfonts = 0;
