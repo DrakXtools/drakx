@@ -695,6 +695,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	$m->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
     }
     kill 15, $pid if defined $pid;
+    ejectCdrom() if $o->{method} eq "cdrom";
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
     #- shoud be enough to fool errorOpeningFile
