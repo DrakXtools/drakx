@@ -453,6 +453,8 @@ sub ask_fromW {
 		$has_scroll = 1;
 		$expand = 1;
 		$real_w = createScrolledWindow($w);
+		$size = (@$l == 1 ? 10 : 4);
+	    } else {
 		$size ||= @{$e->{list}};
 	    }
 	    $width = max(map { length } @{$e->{list}});
@@ -493,9 +495,22 @@ sub ask_fromW {
     @widgets_always   = map_index { $create_widget->($_, $::i      ) } @$l;
     my $always_total_size = $total_size;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
+    my $advanced_total_size = $total_size - $always_total_size;
+
+
+    my $pack = create_box_with_title($mainw, @{$common->{messages}});
+    my ($totalheight, $totalwidth) = ($mainw->{box_size}, 0);
+
+    my $set_default_size = sub {
+	if (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it) {
+	    $mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, $totalheight+6+3+$my_gtk::shape_width) if $has_scroll;
+	    $mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, 0) if $has_horiz_scroll;
+	}
+    };
 
     my $set_advanced = sub {
 	($advanced) = @_;
+	$set_default_size->() if $advanced;
 	$advanced ? $advanced_pack->show : $advanced_pack->hide;
 	@widgets = (@widgets_always, $advanced ? @widgets_advanced : ());
 	$mainw->sync; #- for $set_all below (mainly for the set of clist)
@@ -509,40 +524,45 @@ sub ask_fromW {
 			    } ];
 
     my $create_widgets = sub {
-	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
+	my ($size, @widgets) = @_;
+	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets);
 
-	my ($wantedheight, $wantedwidth) = $::isEmbedded && !$my_gtk::pop_it ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
+	$size && $total_size or return $w; #- do not bother computing stupid/bad things
+	my $ratio = max($size / $total_size, 0.2);
 
-	my $width = max(250, $max_width * 5);
-	$mainw->{box_width} = min($wantedwidth, $width);
+	my ($possibleheight, $possiblewidth) = $::isEmbedded && !$my_gtk::pop_it ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
+	$possibleheight -= $mainw->{box_size};
 
-	my $height = max(200, my_gtk::n_line_size($always_total_size, 'various', $mainw->{rwindow}));
-	$mainw->{box_height} = min($wantedheight, $height);
+	my $wantedwidth = max(250, $max_width * 5);
+	my $width = min($possiblewidth, $wantedwidth);
 
-	my $has = $width > $mainw->{box_width} || $height > $mainw->{box_height};
+	my $wantedheight = my_gtk::n_line_size($size, 'various', $mainw->{rwindow});
+	my $height = min($possibleheight * $ratio, max(200, $wantedheight));
+
+	$totalheight += $height;
+	$totalwidth = max($width, $totalwidth);
+
+	my $has = $wantedwidth > $width || $wantedheight > $height;
 	$has_scroll ||= $has;
 	$has ? createScrolledWindow($w) : $w;
     };
 
-    my $pack = gtkpack_(create_box_with_title($mainw, @{$common->{messages}}),
-		   1, $create_widgets->(@widgets_always),
-		   if_($common->{ok} || $::isWizard, 
-		       0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_(@$l2, $advanced_button))));
+    gtkpack_($pack,
+	     1, $create_widgets->($always_total_size, @widgets_always),
+	     if_($common->{ok} || $::isWizard, 
+		 0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_(@$l2, $advanced_button))));
+    my $has_scroll_always = $has_scroll;
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
-    $always_total_size += $mainw->{box_size};
     $advanced_pack = 
       gtkpack_(new Gtk::VBox(0,0),
 	       0, '',
 	       (map {; 0, new Gtk::Label($_) } @adv),
 	       0, new Gtk::HSeparator,
-	       1, $create_widgets->(@widgets_advanced));
+	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
 
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
-    if (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it) {
-	$mainw->{rwindow}->set_default_size($mainw->{box_width}+6+$my_gtk::shape_width, $mainw->{box_height}+6+3+$my_gtk::shape_width) if $has_scroll;
-	$mainw->{rwindow}->set_default_size($mainw->{box_width}+6+$my_gtk::shape_width, 0) if $has_horiz_scroll;
-    }
+    $set_default_size->() if $has_scroll_always;
     $set_advanced->(0);
     (@widgets ? $widgets[0]{focus_w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 

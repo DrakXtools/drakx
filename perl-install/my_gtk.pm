@@ -677,20 +677,21 @@ sub create_okcancel {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    $o->{box_size} = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
+    my $nbline = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
     $o->{box} = new Gtk::VBox(0,0);
-    if (@_ <= 2 && $o->{box_size} > 4) {
+    $o->{box_size} = n_line_size($nbline, 'text', $o->{box});
+    if (@_ <= 2 && $nbline > 4) {
 	$o->{icon} && !$::isWizard and 
-	  eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
-	my $wanted = n_line_size($o->{box_size}, 'text', $o->{box});
-	my $height = min(250, $wanted);
-	my $has_scroll = $height < $wanted;
+	  eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)) };
+	my $wanted = $o->{box_size};
+	$o->{box_size} = min(200, $o->{box_size});
+	my $has_scroll = $o->{box_size} < $wanted;
 
 	my $wtext = new Gtk::Text;
 	$wtext->can_focus($has_scroll);
 	chomp(my $text = join("\n", @_));
 	my $scroll = createScrolledWindow(gtktext_insert($wtext, $text));
-	$scroll->set_usize(400, $height);
+	$scroll->set_usize(400, $o->{box_size});
 	gtkpack__($o->{box}, $scroll);
     } else {
 	my $a = !$::no_separator;
