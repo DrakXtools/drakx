@@ -428,18 +428,17 @@ sub make_boot_frame {
 	&mk_frame($VB, \%boot_conf_frame);
 	#- open a color choose box
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
-		my $color = new Gtk2::ColorSelectionDialog(N("ProgressBar color selection"));
+		my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
 		$theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
 		my @rgb = map { hex($_)/255 }  ($1 ,$2, $3);
-		$color->colorsel->set_color(@rgb);#$theme{boot_conf}{pc});
+		$color->colorsel->set_current_color(Gtk2::Gdk::Color->new(@rgb));
 		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
 		$color->ok_button->signal_connect(clicked => sub {
-			@rgb = $color->colorsel->get_color();
-			@rgb = map { dec2hex($_*255) } @rgb;
+			my $colour = $color->colorsel->get_current_color();
+			@rgb = map { dec2hex($_*255) } ($colour->red, $colour->green, $colour->blue);
 			$theme{boot_conf}{pc} =  "0x$rgb[0]$rgb[1]$rgb[2]";
 			$color->destroy;
 		});
-		$color->show;
 	}); 
 	#- quit button
 	$boot_conf_frame{widgets}{button}{kill}->signal_connect(clicked => \&CloseAppWindow);
