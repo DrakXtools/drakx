@@ -30,7 +30,7 @@ use log;
 use lang;
 use Digest::MD5 qw(md5_hex);
 
-my @ALLOWED_LANGS = qw(en_US fr es it de);
+my @ALLOWED_LANGS = qw(en_US fr es it de nl);
 my $key_disabled;
 
 my ($using_existing_user_config, $using_existing_host_config);
