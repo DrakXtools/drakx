@@ -434,6 +434,8 @@ sub install2::configMove {
         install_steps::addUser($o);
     }
 
+    $::noauto and goto after_autoconf;
+
     my $wait = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
 
     #- automatic printer, timezone, network configs
@@ -459,6 +461,7 @@ sub install2::configMove {
     require install_any;
     install_any::write_fstab($o);
 
+after_autoconf:
     modules::write_conf('');
     require mouse;
     mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
