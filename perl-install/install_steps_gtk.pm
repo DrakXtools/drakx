@@ -122,7 +122,7 @@ sub new($$) {
     $ENV{DISPLAY} = $wanted_DISPLAY;
     install_gtk::init_gtk();
     install_gtk::init_sizes();
-    install_gtk::install_theme($o, install_gtk::default_theme($o));
+    install_gtk::install_theme($o);
     install_gtk::create_logo_window($o);
 
     $ugtk2::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
@@ -149,7 +149,6 @@ sub leavingStep {
 sub charsetChanged {
     my ($o) = @_;
     Gtk2->set_locale;
-    install_gtk::install_theme($o);
     install_gtk::create_steps_window($o);
 }
 

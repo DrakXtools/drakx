@@ -1,0 +1,107 @@
+style "galaxy-default"
+{
+    GtkButton::default_border         = {1, 2, 1, 2}
+    GtkButton::default_outside_border = {1, 2, 1, 2}
+    GtkWidget::interior_focus         = 1
+    GtkButton::default_spacing        = 6
+    GtkCheckButton::indicator_size    = 15
+    GtkPaned::handle_size             = 6
+    GtkRange::trough_border           = 0
+    GtkRange::slider_width            = 15
+    GtkRange::stepper_size            = 15
+    GtkRange::stepper_spacing         = 0
+    GtkScrollbar::min_slider_length   = 20
+    GtkTreeView::even_row_color       = "#FFFFFF"
+    GtkTreeView::odd_row_color        = "#EFEFEF"
+
+    fg[NORMAL]        = "#000000"
+    fg[ACTIVE]        = "#000000"
+    fg[INSENSITIVE]   = "#949694"
+    fg[PRELIGHT]      = "#000000"
+    fg[SELECTED]      = "#FFFFFF"
+
+    bg[ACTIVE]        = "#CECECE"
+    bg[NORMAL]        = "#E6E7E6"
+    bg[INSENSITIVE]   = "#CECECE"
+    bg[PRELIGHT]      = "#EFEFEF"
+    bg[SELECTED]      = "#21459C"
+
+    base[NORMAL]      = "#ffffff"
+    base[ACTIVE]      = "#7382BD"
+    base[INSENSITIVE] = "#ffffff"
+    base[PRELIGHT]    = "#EFEFEF"
+    base[SELECTED]    = "#7382BD"
+
+    text[NORMAL]      = "#000000"
+    text[ACTIVE]      = "#ffffff"
+    text[PRELIGHT]    = "#ffffff"
+    text[SELECTED]    = "#ffffff"
+    text[INSENSITIVE] = "#ffffff"
+
+    engine "galaxy"
+    {
+    }
+}
+
+
+style "galaxy-button" = "galaxy-default"
+{
+  xthickness = 4
+  ythickness = 4
+}
+
+style "galaxy-thin" = "galaxy-default"
+{
+  xthickness = 1
+  ythickness = 1
+}
+
+
+style "galaxy-menu" = "galaxy-default"
+{
+  fg[PRELIGHT]  = "#ffffff"
+}
+
+style "galaxy-tasklist" = "galaxy-default"
+{
+  xthickness = 2
+  ythickness = 2
+  GtkWidget::focus-line-width = 0
+  GtkWidget::focus-padding = 0
+}
+
+class "GtkWidget" style "galaxy-default"
+class "GtkButton" style "galaxy-button"
+class "EComboButton" style "galaxy-thin"
+widget_class "*.EShortcutsView.GtkButton" style "galaxy-thin"
+widget_class "*Tree*GtkButton" style "galaxy-thin"
+widget_class "*List*GtkButton" style "galaxy-thin"
+class "GtkProgressBar" style "galaxy-menu"
+class "GtkMenuItem" style "galaxy-menu"
+widget_class "*.GtkMenuItem.*" style "galaxy-menu"
+widget_class "*.GtkAccelMenuItem.*" style "galaxy-menu"
+widget_class "*.GtkRadioMenuItem.*" style "galaxy-menu"
+widget_class "*.GtkCheckMenuItem.*" style "galaxy-menu"
+widget_class "*.GtkImageMenuItem.*" style "galaxy-menu"
+widget_class "*.GtkSeparatorMenuItem.*" style "galaxy-menu"
+widget_class "*.PanelApplet.*" style "galaxy-tasklist"
+widget "*.tasklist-button" style "galaxy-tasklist"
+class "GtkNotebook" style "galaxy-thin"
+
+
+style "white-on-blue"
+{
+  base[NORMAL] = { 0.28, 0.38, 0.66 }
+  bg[NORMAL] = { 0.28, 0.38, 0.66 }
+    
+  text[NORMAL] = "#FFFFFF"
+  fg[NORMAL] = "#FFFFFF"
+}
+
+style "background"
+{
+  bg[NORMAL] = { 0.28, 0.38, 0.66 }
+}
+
+widget "*Steps*" style "white-on-blue"
+widget "*background*" style "background"

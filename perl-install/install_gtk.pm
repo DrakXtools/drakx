@@ -12,57 +12,80 @@ use devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 
-my (@background1, @background2);
+my @background;
 
+#- if we're running for the doc team, we want screenshots with
+#- a good B&W contrast: we'll override values of our theme
+my $theme_overriding_for_doc = q(style "galaxy-default"
+{
+    base[SELECTED]    = "#E0E0FF"
+    base[ACTIVE]      = "#E0E0FF"
+    base[PRELIGHT]    = "#E0E0FF"
+    bg[SELECTED]      = "#E0E0FF"
+    bg[ACTIVE]        = "#E0E0FF"
+    bg[PRELIGHT]      = "#E0E0FF"
+    text[ACTIVE]      = "#000000"
+    text[PRELIGHT]    = "#000000"
+    text[SELECTED]    = "#000000"
+    fg[SELECTED]      = "#000000"
+}
+
+style "white-on-blue"
+{
+  base[NORMAL] = { 0.93, 0.93, 0.93 }
+  bg[NORMAL] = { 0.93, 0.93, 0.93 }
+    
+  text[NORMAL] = "#000000"
+  fg[NORMAL] = "#000000"
+}
+
+style "background"
+{
+  bg[NORMAL] = { 0.93, 0.93, 0.93 }
+});
 
 #------------------------------------------------------------------------------
 sub load_rc {
-    my ($name) = @_;
+    my ($o, $name) = @_;
 
     if (my $f = find { -r $_ } map { "$_/$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
-	Gtk2::Rc->parse($f);
-	foreach (cat_($f)) {
+
+	my @contents = cat_($f);
+	$o->{doc} and push @contents, $theme_overriding_for_doc;
+
+	Gtk2::Rc->parse_string(join("\n", @contents));
+	foreach (@contents) {
 	    if (/style\s+"background"/ .. /^\s*$/) {
-		@background1 = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
-		@background2 = map { $_ * 256 * 257 } split ',', $1 if /PRELIGHT.*\{(.*)\}/;
+		@background = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
 	    }
 	}
     }
+
 }
 
 sub default_theme {
     my ($o) = @_;
     $o->{meta_class} eq 'desktop' ? 'blue' :
       $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
-      $o->{simple_themes} || $o->{vga16} ? 'blue' : 'mdk';
+      $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
 }
 
 #------------------------------------------------------------------------------
 sub install_theme {
-    my ($o, $theme) = @_;
+    my ($o) = @_;
 
-    $o->{theme} = $theme || $o->{theme};
+    $o->{theme} ||= default_theme();
+    load_rc($o, "themes-$o->{theme}");
 
-    load_rc($_) foreach "themes-$o->{theme}", "install", "themes";
-
-    my %pango_font_name;
-    if (my $pango_font = lang::l2pango_font($o->{locale}{lang})) {
-	$pango_font_name{10} = "font_name = \"$pango_font 10\"";
-	$pango_font_name{12} = "font_name = \"$pango_font 12\"";
-    }
-    Gtk2::Rc->parse_string(qq(
+    Gtk2::Rc->parse_string(q(
 style "default-font" 
 {
-   $pango_font_name{12}
-}
-style "small-font"
-{
-   $pango_font_name{10}
+   font_name = ") . lang::l2pango_font($o->{locale}{lang}) . q( 12"
 }
 widget "*" style "default-font"
 
 ));
-    gtkset_background(@background1) unless $::live; #- || testing;
+    gtkset_background(@background) unless $::live; #- || testing;
 
     create_logo_window($o);
 #    create_help_window($o);
