@@ -314,7 +314,7 @@ sub start_i810fb() {
 	any::ddcxinfos(); # keep the result otherwise ddcxinfos doesn't return good results afterwards
 	modules::load([ 'i810fb',
 			"xres=$xres", 'hsync1=32', 'hsync2=48', 'vsync1=50', 'vsync2=70',  #- this sucking i810fb does not accept floating point numbers in hsync!
-			 'vram=2', 'bpp=16', 'accel=1', 'mtrr=1', 'hwcur=1', 'xcon=6' ]);
+			 'vram=2', 'bpp=16', 'accel=1', 'mtrr=1', 'hwcur=1', 'xcon=4' ]);
     };
 }
 
