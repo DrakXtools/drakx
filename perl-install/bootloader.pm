@@ -254,13 +254,22 @@ sub read_grub {
     \%b;
 }
 
+sub yaboot2dev {
+    my ($of_path) = @_;
+    find { dev2yaboot($_) eq $of_path } map { "/dev/$_->{dev}" } devices::read_proc_partitions_raw();
+}
+
 # assumes file is in /boot
+# to do: use yaboot2dev for files as well
+#- example of of_path: /pci@f4000000/ata-6@d/disk@0:3,/initrd-2.6.8.1-8mdk.img
 sub yaboot2file {
     my ($of_path) = @_;
-
-    #- example of of_path: /pci@f4000000/ata-6@d/disk@0:3,/initrd-2.6.8.1-8mdk.img
-
-    "$::prefix/boot/" . basename($of_path);
+    
+    if ($of_path =~ /,/) {
+	"$::prefix/boot/" . basename($of_path);
+    } else {
+	yaboot2dev($of_path);
+    }
 }
 
 sub read_cromwell() {
@@ -784,7 +793,7 @@ wait for default boot.
 	if (defined $partition_table::mac::macos_part) {
 	    add_entry($bootloader,
 		      {
-		       label => "macos",
+		       type => "macos",
 		       kernel_or_dev => $partition_table::mac::macos_part
 		      });
 	}
@@ -959,7 +968,7 @@ sub write_yaboot {
 	    push @conf, map { "\t$_" } @entry_conf;
 	} else {
 	    my $of_dev = dev2yaboot($entry->{kernel_or_dev});
-	    push @conf, "$entry->{label}=$of_dev";
+	    push @conf, "$entry->{type}=$of_dev";
 	}
     }
     my $f = "$::prefix/etc/yaboot.conf";
