@@ -82,6 +82,7 @@ arch() =~ /^sparc/ ? (
   "sb1000" => "sb1000",
   "sbni" => "sbni",
   "sis900" => "sis900",
+  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
 ),
   "3c59x" => "3com 3c59x (Vortex)",
   "de4x5" => "Digital 425,434,435,450,500",
@@ -191,7 +192,6 @@ arch() !~ /^sparc|alpha/ ? (
 }],
 [ 'sound', {
 arch() !~ /^sparc/ ? (
-  "alsa" => "ALSA sound module, many sound cards",
   "cmpci" => "C-Media Electronics CMI8338A CMI8338B CMI8738",
   "es1370" => "Ensoniq ES1370 [AudioPCI]",
   "es1371" => "Ensoniq ES1371 [AudioPCI-97]",
@@ -201,6 +201,18 @@ arch() !~ /^sparc/ ? (
   "pas16" => "Pro Audio Spectrum/Studio 16",
   "via82cxxx" => "VIA VT82C686_5",
   "sonicvibes" => "S3 SonicVibes",
+  "snd-card-ice1712" => "IC Ensemble Inc|ICE1712 [Envy24]",
+  "emu10k1" => "Creative Labs|SB Live! (audio)",
+#  "au8820" => "Aureal Semiconductor|Vortex 1",
+#  "au8830" => "Aureal Semiconductor|Vortex 2",
+  "snd-card-ymfpci" => "Yamaha Corporation|YMF-740",
+  "snd-card-trident" => "Silicon Integrated Systems [SiS]|7018 PCI Audio",
+  "snd-card-cs461x" => "Cirrus Logic|CS 4610/11 [CrystalClear SoundFusion Audio Accelerator]",
+  "snd-card-via686a" => "VIA Technologies|VT82C686 [Apollo Super AC97/Audio]",
+  "snd-card-es1938" => "ESS Technology|ES1969 Solo-1 Audiodrive",
+  "snd-card-rme96" => "Xilinx, Inc.|RME Digi96<>Xilinx, Inc.",
+  "snd-card-intel8x0" => "Intel Corporation|82440MX AC'97 Audio Controller<>Intel Corporation",
+  "snd-card-fm801" => "Fortemedia, Inc|Xwave QS3000A [FM801]<>Fortemedia, Inc|FM801 PCI Audio",
 ) : (),
 }],
 [ 'pcmcia', {
@@ -292,9 +304,6 @@ arch() !~ /^sparc/ ? (
   "fat" => "fat",
   "msdos" => "msdos",
   "romfs" => "romfs",
-  "sysv" => "sysv",
-  "ufs" => "ufs",
-  "umsdos" => "umsdos",
   "vfat" => "vfat",
 }],
 [ 'other', {
@@ -306,6 +315,10 @@ arch() !~ /^sparc/ ? (
   "ide-floppy" => "ide-floppy",
   "ide-tape" => "ide-tape",
   "nbd" => "nbd",
+  "bttv" => "Brooktree Corporation|Bt8xx Video Capture",
+  "buz" => "Zoran Corporation|ZR36057PQC Video cutting chipset",
+  "rrunner" => "Essential Communications|Roadrunner serial HIPPI",
+  "defxx" => "DEC|DEFPA"
 #-  "ide-probe-mod" => "ide-probe-mod",
 }],
 );
@@ -398,11 +411,8 @@ sub load {
 	eval { load($_, 'prereq') } foreach @{$deps{$name}};
 	load_raw([ $name, @options ]);
     }
-    if ($name eq "usb-storage") {
-	sleep(2);
-	-d "/proc/scsi/usb" or return;
-	$conf{"usb-storage"}{"post-install"} = "modprobe usbkbd; modprobe keybdev";
-    }
+    sleep 2 if $name =~ /usb-storage|mousedev/;
+
     when_load($name, $type, @options);
 }
 sub load_multi {
@@ -454,8 +464,11 @@ sub load_raw {
 	    }
 	} elsif ($_->[0] =~ /usb-[uo]hci/) {
 	    add_alias('usb-interface', $_->[0]);
+	    my $d = '/proc/bus/usb';
+	    syscall_('mount', $d, $d, my $t= 'usbdevfs', my $f = c::MS_MGC_VAL(), my $fl = '') or die;
 	    #- ensure keyboard is working, the kernel must do the job the BIOS was doing
-	    load_multi("usbkbd", "keybdev");
+	    sleep 2;
+	    load_multi("usbkbd", "keybdev") if detect_devices::hasUsbKeyboard();
 	}
     }
 }
@@ -553,8 +566,8 @@ sub load_thiskind {
 	!($@ && $_->{try});
     } get_that_type($type, $pcic),
       $type =~ /scsi/ && arch() !~ /sparc/ ? 
-	(map { +{ driver => $_, description => $_, try => 1 } } 
-	 get_alias("usb-interface") ? "usb-storage" : (), "imm", "ppa") : ();
+	(map { +{ driver => $_, description => $_, try => 1 } }
+	 detect_devices::hasUsbZip() ? "usb-storage" : (), "imm", "ppa") : ();
 }
 
 sub get_that_type {

@@ -430,7 +430,6 @@ sub setVarsInSh {
     my ($file, $l, @fields) = @_;
     @fields = keys %$l unless @fields;
 
-#-    my $b = 1; $b &&= $l->{$_} foreach @fields; $b or return;
     local *F;
     open F, "> $_[0]" or die "cannot create config file $file";
     $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
@@ -439,7 +438,6 @@ sub setVarsInCsh {
     my ($file, $l, @fields) = @_;
     @fields = keys %$l unless @fields;
 
-#-    my $b = 1; $b &&= $l->{$_} foreach @fields; $b or return;
     local *F;
     open F, "> $_[0]" or die "cannot create config file $file";
     $l->{$_} and print F "setenv $_ $l->{$_}\n" foreach @fields;
@@ -589,7 +587,11 @@ sub removeXiBSuffix($) {
 
 sub formatTime($) {
     my ($s, $m, $h) = gmtime($_[0]);
-    sprintf "%02d:%02d:%02d", $h, $m, $s;
+    if ($h) {
+	sprintf "%02d:%02d", $h, $m;
+    } else {
+	sprintf _("%d minutes"), $m;
+    }
 }
 
 #- return the size of the partition and its free space in KiB

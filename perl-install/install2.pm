@@ -356,13 +356,13 @@ sub miscellaneous {
             TYPE => $o->{installClass},
             SECURITY => $o->{security},
         });
-	
+
 	my $f = "$o->{prefix}/etc/sysconfig/usb";
-	my %usb = getVarsFromSh($f);
-	$usb{MOUSE} = $o->{mouse}{device} eq "usbmouse" && "yes";
-	$usb{KEYBOARD} = (int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog()) && "yes";
-	$usb{ZIP} = bool2yesno(-d "/proc/scsi/usb");
-	setVarsInSh($f, \%usb);
+	output $f,
+"MOUSE=
+KEYBOARD=
+ZIP=
+" if modules::get_alias("usb-interface") && ! -e $f;
 
 	install_any::fsck_option($o);
     } 'installPackages';
@@ -518,6 +518,7 @@ sub main {
 	    live      => sub { $::live = 1 },
 	    noauto    => sub { $::noauto = 1 },
 	    test      => sub { $::testing = 1 },
+            nopci     => sub { $::nopci = 1 },
 	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
 	    newt      => sub { $o->{interactive} = "newt" },
@@ -616,7 +617,7 @@ sub main {
     } modules::get_that_type('sound');
 
     #- needed very early for install_steps_gtk
-    modules::load_thiskind("usb");
+    modules::load_thiskind("usb"); 
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
     lang::set($o->{lang}); #- mainly for defcfg
@@ -694,7 +695,7 @@ sub main {
     modules::write_conf($o->{prefix});
 
     #- to ensure linuxconf doesn't cry against those files being in the future
-    foreach ('/etc/conf.modules', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/X11/fs/config') {
+    foreach ('/etc/modules.conf', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/sysconfig/network', '/etc/X11/fs/config') {
 	my $now = time - 24 * 60 * 60;
 	utime $now, $now, "$o->{prefix}/$_";
     }

@@ -17,12 +17,20 @@ use devices;
 use modules;
 
 
+sub tellAboutProprietaryModules {
+    my ($o);
+    my @l = grep {$_} map { $_->{driver} =~ /^Bad:(.*)/ && $1 } detect_devices::probeall();
+    $o->ask_warn('', 
+_("Some hardware on your computer needs ``proprietary'' drivers to work.
+You can find some information about them at: %s"), join(", ", @l)) if @l;
+}
+
 sub partition_with_diskdrake {
     my ($o, $hds, $nowizard) = @_;
-    my $ok = 1;
+    my $ok; 
     do {
+	$ok = 1;
 	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}, $nowizard);
-	log::l("diskdrake done");
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_fstab(@$hds);
 	

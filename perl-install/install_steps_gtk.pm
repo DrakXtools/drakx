@@ -60,6 +60,10 @@ sub new($$) {
 	devices::make("/dev/kbd");
 
 	if ($ENV{DISPLAY} eq ":0") {
+	    local (*T1, *T2);
+	    open T1, ">/dev/tty5";
+	    open T2, ">/dev/tty6";
+
 	    my $launchX = sub {
 		my $ok = 1;
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
@@ -512,7 +516,7 @@ sub installPackages {
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
 	    $progress_total->update($ratio);
-	    if ($dtime != $last_dtime && $current_total_size > 2 * 1024 * 1024) {
+	    if ($dtime != $last_dtime && $current_total_size > 10 * 1024 * 1024) {
 		$msg_time_total->set(formatTime(10 * round($total_time / 10)));
 		$msg_time_remaining->set(formatTime(10 * round(max($total_time - $dtime, 0) / 10)));
 		$last_dtime = $dtime;

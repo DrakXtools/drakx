@@ -140,7 +140,8 @@ endif
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 
 ifeq (i386,$(ARCH))
-	tar xyC $(DEST) -f ../install/install1_pcmcia.$(ARCH).tar.bz2 ./etc/pcmcia
+	cp -a /etc/pcmcia $(DEST)/etc
+	patch -p0 -d $(DEST)/etc < ../install/pcmcia_config.patch
 endif
 
 	find $(DEST) -name CVS | xargs rm -rf

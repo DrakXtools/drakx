@@ -795,6 +795,8 @@ sub miscellaneous {
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
 
+    install_interactive::tellAboutProprietaryModules($o) unless $clicked;
+
     add2hash_ $o, { useSupermount => $s < 4 && arch() !~ /^sparc/ };
     $s = $l{$s} || $s;
 

@@ -1121,7 +1121,7 @@ Would you like X to start when you reboot?"), 1);
 	    $in->ask_from_entries_refH(_("Autologin"),
 _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
-				       [ _("Choose the default user:") => { val => \$o->{autologin}, list => \@users },
+				       [ _("Choose the default user:") => { val => \$o->{autologin}, list => [ '', @users ] },
 					 _("Choose the window_manager to run:") => { val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
 	}
 	if ($o->{autologin}) {

@@ -172,11 +172,10 @@ sub detect() {
     eval { commands::modprobe("serial") };
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
 
-    if (modules::get_alias("usb-interface")) {
+    if (modules::get_alias("usb-interface") && detect_devices::hasUsbMouse()) {
 	eval { 
 	    modules::load("usbmouse");
 	    modules::load("mousedev");
-	    sleep(2);
 	};
 	if (!$@ && detect_devices::tryOpen("usbmouse")) {
 	    $wacom or modules::unload("serial"); 

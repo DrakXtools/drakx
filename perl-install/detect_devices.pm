@@ -228,6 +228,20 @@ sub syslog {
     `dmesg`;
 }
 
+sub hasUsb {
+    my ($class, $prot) = @_;
+    foreach (cat_("/proc/bus/usb/devices")) {
+	if (/^P/ .. /^I/) {
+	    my ($c, $p) = /Cls=(\d+).*Prot=(\d+)/;
+	    $c == $class && ($prot < 0 || $prot == $p) and log::l("found usb $c $p"), return 1;
+	}
+    }
+    0;
+}
+sub hasUsbKeyboard { hasUsb(3, 1) }
+sub hasUsbMouse { hasUsb(3, 2) }
+sub hasUsbZip { hasUsb(8, -1) }
+
 sub hasSMP { c::detectSMP() }
 
 sub hasUltra66 {
