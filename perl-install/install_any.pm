@@ -681,7 +681,7 @@ sub getHds {
 	goto getHds;
     }
 
-    partition_table_raw::test_for_bad_drives($_) foreach @$hds;
+    $::testing or partition_table_raw::test_for_bad_drives($_) foreach @$hds;
 
     $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)
         unless $flags->{clearall} || $flags->{clear};
