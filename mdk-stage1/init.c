@@ -323,6 +323,7 @@ void unmount_filesystems(void)
                         disallow_eject = 1;
 		if (strcmp(fs[numfs].name, "/")
                     && strcmp(fs[numfs].name, "/dev")
+                    && strcmp(fs[numfs].name, "/sys")
                     && strncmp(fs[numfs].name, "/proc", 5))
                         numfs++;
 	}
