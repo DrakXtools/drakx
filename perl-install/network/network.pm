@@ -171,10 +171,10 @@ sub write_interface_conf {
 sub add2hosts {
     my ($file, $hostname, @ips) = @_;
 
-    my %l = map { if_(/\s*(\S+)(.*)/, $1 => $2) }
-            grep { !/\s+\Q$hostname\E\s*$/ } cat_($file);
-
     my $sub_hostname = $hostname =~ /(.*?)\./ ? " $1" : '';
+    my %l = map { if_(/\s*(\S+)(.*)/, $1 => $2) }
+            grep { !/\s+\Q$hostname$sub_hostname\E\s*$/ } cat_($file);
+
     $l{$_} = "\t\t$hostname$sub_hostname" foreach grep { $_ } @ips;
 
     log::explanations("writing host information to $file");
