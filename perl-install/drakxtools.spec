@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 17mdk
+Release: 18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -291,6 +291,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar  7 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-18mdk
+- ugtk2.pm: fix rpmdrake dumping core when multiple searchs in some
+  sorting modes (#2899)
+- network/adsl.pm: one small logical fix (fpons)
+
 * Thu Mar  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-17mdk
 - draksplash:
   o fix #1766

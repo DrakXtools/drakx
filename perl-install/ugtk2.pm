@@ -1173,11 +1173,23 @@ sub ask_browse_tree_info_given_widgets {
 	    foreach my $node (@{$ptree{$_}}) {
 		my $category;
 		my $parent = $node;
+		my @parents;
 		while ($parent = $w->{tree_model}->iter_parent($parent)) {    #- LEAKS
 		    my $parent_name = $w->{tree_model}->get($parent, 0);
 		    $category = $category ? "$parent_name|$category" : $parent_name;
+		    $_->[1] = "$parent_name|$_->[1]" foreach @parents;
+		    push @parents, [ $parent, $category ];
 		}
-		$cat eq $category and push @to_remove, $node;
+		if ($category =~ /^\Q$cat/) {
+		    push @to_remove, $node;
+		    foreach (@parents) {
+			next if $_->[1] eq $cat || !exists $wtree{$_->[1]};
+			delete $wtree{$_->[1]};
+			delete $node_state{$w->{tree_model}->get_path_str($_->[0])};
+			delete $state_stats{$w->{tree_model}->get_path_str($_->[0])};
+			$_->[0]->free;
+		    }
+		}
 	    }
 	    foreach (@to_remove) {
 		delete $node_state{$w->{tree_model}->get_path_str($_)};
