@@ -99,7 +99,7 @@ sub formatdisk {
 #@ARGV <= 1 or die "usage: make_live [live_location=/tmp/live_tree]\n";
 
     if (!find { m!/proc/bus/usb! } run_program::get_stdout('mount')) {
-        warn "USB service is *NOT* started";
+        warn "USB service is *NOT* started" if !$rescue;
         run_program::get_stdout('service', 'usb', 'start');
     }
 
