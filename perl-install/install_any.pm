@@ -482,7 +482,7 @@ sub selectSupplMedia {
 		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
 		    and $global_ftp_prefix = [ $3, $4, $1, $2 ]; #- for getFile
 	    } else {
-		my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
+		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
 	    }
 	    useMedium($medium_name);
 	    require "$suppl_method.pm"; #- require http or ftp
