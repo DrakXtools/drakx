@@ -320,6 +320,7 @@ sub setPackages {
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
+	push @{$o->{default_packages}}, "kernel-enterprise" if availableRamMB() > 800;
 	push @{$o->{default_packages}}, "kernel22" if c::kernel_version() =~ /^\Q2.2/;
 	push @{$o->{default_packages}}, "kernel22-secure" if $o->{security} > 3;
 	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
