@@ -763,17 +763,7 @@ sub get_mac_model() {
 }
 
 sub get_mac_generation() {
-    my $generation = cat_("/proc/cpuinfo") || die "Can't open /proc/cpuinfo";
-    my @genarray = split(/\n/, $generation);
-    my $count = 0;
-    while ($count <= @genarray) {
-	if ($genarray[$count] =~ /pmac-generation/) {
-	    @genarray = split(/:/, $genarray[$count]);
-	    return $genarray[1];
-	}
-	$count++;
-    }
-    return "Unknown Generation";	
+    cat_('/proc/cpuinfo') =~ /^pmac-generation\s*:\s*(.*)/m ? $1 : "Unknown Generation";	
 }
 
 sub hasSMP() { 
