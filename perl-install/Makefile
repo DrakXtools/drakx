@@ -54,7 +54,7 @@ test_pms_all:
 	msgfmt -o $@ $<
 
 install_pms: $(DIRS)
-	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
+	for i in `perl -ne 's/sub (\w+?)_?(\(\))? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
 	install -d $(DESTREP4PMS)
 	find $(DESTREP4PMS) -name "*.pm.gz" | xargs rm -f
