@@ -1503,7 +1503,7 @@ sub media_browser {
 	hd => N("Hard Disk"),
 	cdrom => N("CDROM"),
     );
-    my @network_protocols = (N_("HTTP"), N_("FTP"), N_("NFS"));
+    my @network_protocols = (if_(!$save, N_("HTTP")), N_("FTP"), N_("NFS"));
 
     my $to_text = sub {
 	my ($hd) = @_;
@@ -1535,7 +1535,23 @@ sub media_browser {
 
     if (member($dev, @network_protocols)) {
 	install_interactive::upNetwork($::o);
-	$in->ask_warn('', 'todo');
+	if ($dev eq 'HTTP') {
+	    require http;
+	    $media_browser{network} ||= 'http://';
+	} else {
+	    $in->ask_warn('', 'todo');
+	    goto ask_media;
+	}
+	while (1) {
+	    $in->ask_from('', 'URL', [
+		{ val => \$media_browser{network} }
+	    ]) or last;
+		    
+	    if ($dev eq 'HTTP') {
+		my $fh = http::getFile($media_browser{network});
+		$fh and return '', $fh;
+	    }
+	}
     } else {
 	if (!$dev->{fs_type} || $dev->{fs_type} eq 'auto' || $dev->{fs_type} =~ /:/) {
 	    if (my $p = fs::type::type_subpart_from_magic($dev)) {
