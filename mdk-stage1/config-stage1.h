@@ -18,8 +18,8 @@
 #define _GNU_SOURCE 1
 
 
-/* If we have more than that amount of memory, we assume we can load the second stage as a ramdisk */
-#define MEM_LIMIT_RAMDISK 52 * 1024
+/* If we have more than that amount of memory (in Mbytes), we assume we can load the second stage as a ramdisk */
+#define MEM_LIMIT_RAMDISK 52
 
 #define DISTRIB_NAME "Linux-Mandrake"
 

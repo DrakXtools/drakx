@@ -183,38 +183,16 @@ int charstar_to_int(char * s)
 
 int total_memory(void)
 {
-	int fd;
-	int i;
-	char buf[4096];
-	char * memtotal_tag = "MemTotal:";
-	int memtotal = 0;
-    
-	fd = open("/proc/meminfo", O_RDONLY);
-	if (fd == -1)
-		fatal_error("could not open /proc/meminfo");
+	int value;
+	struct stat statr;
+	if (stat("/proc/kcore", &statr))
+		return 0;
 
-	i = read(fd, buf, sizeof(buf));
-	if (i < 0)
-		fatal_error("could not read /proc/meminfo");
-		
-	close(fd);
-	buf[i] = 0;
+	/* drakx powered: use /proc/kcore and rounds every 4 Mbytes */
+	value = 4 * ((int)((float)statr.st_size / 1024 / 1024 / 4 + 0.5));
+	log_message("Total Memory: %d Mbytes", value);
 
-	i = 0;
-	while (buf[i] != 0 && strncmp(&buf[i], memtotal_tag, strlen(memtotal_tag)))
-		i++;
-
-	while (buf[i] != 0 && buf[i] != '\n' && !isdigit(buf[i]))
-		i++;
-
-	if (buf[i] == 0 || buf[i] == '\n')
-		fatal_error("could not read MemTotal");
-
-	memtotal = charstar_to_int(&(buf[i]));
-	
-	log_message("%s %d kB", memtotal_tag, memtotal);
-
-	return memtotal;
+	return value;
 }
 
 
