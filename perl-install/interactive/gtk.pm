@@ -619,10 +619,9 @@ sub ask_fromW {
 
     my $always_pack = $create_widgets->(@widgets_always);
 
-    my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
     $advanced_pack = 
       gtkpack_(Gtk2::VBox->new(0,0),
-	       (map { (0, Gtk2::WrappedLabel->new($_)) } @adv),
+	       (map { (0, Gtk2::WrappedLabel->new($_)) } @{$common->{advanced_messages}}),
 	       0, Gtk2::HSeparator->new,
 	       1, $create_widgets->(@widgets_advanced));
 
