@@ -24,7 +24,6 @@ package scanner;
 # - lp: see printerdrake
 # - install: prefix --> done (partially)
 
-use standalone;
 use common;
 use detect_devices;
 use log;
