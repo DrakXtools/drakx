@@ -288,12 +288,12 @@ sub detect() {
 	    return fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
 	}
     } else {
-	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
+	my $ps2_mouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
 
 	#- workaround for some special case were mouse is openable 1/2.
-	if (!$auxmouse) {
-	    $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
-	    $auxmouse and detect_devices::hasMousePS2("psaux"); #- fake another open in order for XFree to see the mouse.
+	if (!$ps2_mouse) {
+	    $ps2_mouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
+	    $ps2_mouse and detect_devices::hasMousePS2("psaux"); #- fake another open in order for XFree to see the mouse.
 	}
 
 	if (modules::get_probeall("usb-interface")) {
@@ -301,16 +301,17 @@ sub detect() {
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l(join('', "found usb mouse $_->{driver} $_->{description} (", if_($_->{type}, $_->{type}), ")")) foreach @l;
 		if (eval { modules::load(qw(hid mousedev usbmouse)); detect_devices::tryOpen("usbmouse") }) {
-		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Wheel");
-		    #- for laptop, we kept the PS/2 as secondary (symbolic).
-		    return { wacom => \@wacom, if_($auxmouse, auxmouse => $auxmouse), %$mouse };
+		    return fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Wheel",
+					  if_($ps2_mouse, auxmouse => $ps2_mouse), #- for laptop, we kept the PS/2 as secondary (symbolic).
+					  wacom => \@wacom);
+		    
 		}
 		eval { modules::unload(qw(usbmouse mousedev hid)) };
 	    }
 	} else {
 	    log::l("no usb interface found for mice");
 	}
-	return { wacom => \@wacom, %$auxmouse };
+	return { wacom => \@wacom, %$ps2_mouse };
     }
 
     #- probe serial device to make sure a wacom has been detected.
