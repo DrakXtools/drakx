@@ -216,6 +216,7 @@ my @cards = grep {
     log::l("[drakgw] Have network card: $_");
     $_ ne $card_netconnect
 } detect_devices::getNet();
+push @cards, $card_netconnect if $::testing;
 log::l("[drakgw] Available network cards: ", join(", ", @cards));
 
 my $format = sub {
