@@ -119,6 +119,9 @@ sub getinfoFromDDC {
     my ($m, @l) = `ddcxinfos`;
     $? == 0 or return $o;
 
+    $O->{size} = 14;
+    $o->{card}{memory} = 1 * 1024;
+
     $o->{card}{memory} ||= to_int($m);
     local $_;
     while (($_ = shift @l) ne "\n") {
