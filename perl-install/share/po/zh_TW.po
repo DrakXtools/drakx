@@ -17760,9 +17760,9 @@ msgid "Send mail report after each backup to:"
 msgstr "在每次備份完成後發送郵件通知該使用者："
 
 #: standalone/drakbackup:2217
-#, fuzzy, c-format
+#, c-format
 msgid "SMTP server for mail:"
-msgstr "網芳主機名稱”"
+msgstr "電子郵件 SMTP 伺服器名稱：”"
 
 #: standalone/drakbackup:2222
 #, c-format
@@ -17790,9 +17790,9 @@ msgid "More Options"
 msgstr "更多選項"
 
 #: standalone/drakbackup:2290
-#, fuzzy, c-format
+#, c-format
 msgid "Backup destination not configured..."
-msgstr "目前網路功能尚未設定"
+msgstr "備份功能尚未設定..."
 
 #: standalone/drakbackup:2310 standalone/drakbackup:4234
 #, c-format
@@ -17861,7 +17861,7 @@ msgid ""
 "Backup Sources: \n"
 msgstr ""
 "\n"
-"備份來源檔: \n"
+"備份來源檔：\n"
 
 #: standalone/drakbackup:2494
 #, c-format
@@ -17870,7 +17870,7 @@ msgid ""
 "- System Files:\n"
 msgstr ""
 "\n"
-"- 系統檔案:\n"
+"- 系統檔案：\n"
 
 #: standalone/drakbackup:2496
 #, c-format
@@ -17879,7 +17879,7 @@ msgid ""
 "- User Files:\n"
 msgstr ""
 "\n"
-"- 使用者檔案:\n"
+"- 使用者檔案：\n"
 
 #: standalone/drakbackup:2498
 #, c-format
@@ -17888,7 +17888,7 @@ msgid ""
 "- Other Files:\n"
 msgstr ""
 "\n"
-"- 其他檔案:\n"
+"- 其他檔案：\n"
 
 #: standalone/drakbackup:2500
 #, c-format
@@ -17897,12 +17897,12 @@ msgid ""
 "- Save on Hard drive on path: %s\n"
 msgstr ""
 "\n"
-"- 儲存於硬碟的路徑: %s\n"
+"- 儲存於硬碟的路徑：%s\n"
 
 #: standalone/drakbackup:2501
 #, c-format
 msgid "\tLimit disk usage to %s MB\n"
-msgstr ""
+msgstr "\t限制磁碟使用量為 %s MB\n"
 
 #: standalone/drakbackup:2504
 #, c-format
@@ -17954,7 +17954,7 @@ msgstr "\t\t刪除=%s"
 #: standalone/drakbackup:2516
 #, c-format
 msgid "\tBackup directly to Tape\n"
-msgstr ""
+msgstr "\t將目錄備份到磁帶中"
 
 #: standalone/drakbackup:2518
 #, c-format
@@ -18011,12 +18011,12 @@ msgstr "\t使用.backupignore 檔案\n"
 #: standalone/drakbackup:2528
 #, c-format
 msgid "\tSend mail to %s\n"
-msgstr ""
+msgstr "\t傳送郵件給 %s\n"
 
 #: standalone/drakbackup:2529
-#, fuzzy, c-format
+#, c-format
 msgid "\tUsing SMTP server %s\n"
-msgstr "位於 CUPS 伺服器 \"%s\""
+msgstr "\t使用 SMTP 伺服器 %s\n"
 
 #: standalone/drakbackup:2531
 #, c-format
@@ -18219,12 +18219,12 @@ msgstr ""
 #: standalone/drakbackup:3204
 #, c-format
 msgid "Search Backups"
-msgstr ""
+msgstr "搜尋備份"
 
 #: standalone/drakbackup:3222
-#, fuzzy, c-format
+#, c-format
 msgid "No matches found..."
-msgstr "找不到印表機！"
+msgstr "找不到符合的..."
 
 #: standalone/drakbackup:3226
 #, fuzzy, c-format
@@ -18477,7 +18477,7 @@ msgstr "檢視備份組態設定"
 #: standalone/drakbackup:4307
 #, c-format
 msgid "Wizard Configuration"
-msgstr "巫師設定模式"
+msgstr "精靈設定模式"
 
 #: standalone/drakbackup:4312
 #, c-format
@@ -18492,7 +18492,7 @@ msgstr "組態設定"
 #: standalone/drakbackup:4321
 #, c-format
 msgid "View Last Log"
-msgstr ""
+msgstr "查看最新紀錄"
 
 #: standalone/drakbackup:4326
 #, c-format
@@ -18555,7 +18555,7 @@ msgstr "建立新的佈景"
 #: standalone/drakboot:161
 #, c-format
 msgid "Use graphical boot"
-msgstr ""
+msgstr "使用圖形化開機畫面"
 
 #: standalone/drakboot:166
 #, c-format
@@ -18591,12 +18591,12 @@ msgstr "開機時啟動 X Window 圖形作業環境"
 #: standalone/drakboot:197
 #, c-format
 msgid "No, I do not want autologin"
-msgstr "不, 我不需要自動登入 (AutoLogin)"
+msgstr "不，我不需要自動登入 (AutoLogin)"
 
 #: standalone/drakboot:198
 #, c-format
 msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "是的, 我需要用這個 (使用者、桌面) 來自動登入"
+msgstr "是的，我要用這個 (使用者、桌面) 來自動登入"
 
 #: standalone/drakboot:201
 #, c-format
@@ -18617,9 +18617,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakbug:41
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrakelinux Bug Report Tool"
-msgstr "Mandrake 臭蟲報告工具"
+msgstr "Mandrakelinux 臭蟲回報工具"
 
 #: standalone/drakbug:46
 #, c-format
@@ -19116,11 +19116,13 @@ msgstr "網路介面尚未設定, 請執行設定巫師"
 
 #. -PO: here "Add Connection" should be translated the same was as in control-center
 #: standalone/drakconnect:973 standalone/net_applet:50
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You do not have any configured Internet connection.\n"
 "Run the \"%s\" assistant from the Mandrakelinux Control Center"
-msgstr "網路介面尚未設定, 請執行設定巫師"
+msgstr ""
+"您沒有任何已設定好的網路連線。\n"
+"請由 Mandrakelinux 控制中心啟動 \"%s\" 設定精靈"
 
 #: standalone/drakconnect:974 standalone/net_applet:51
 #, c-format
