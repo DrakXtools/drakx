@@ -100,6 +100,8 @@ sub entry {
 		   "cdu31a"  => [ c::S_IFBLK(), 15, 0 ],
 		   "cdu535"  => [ c::S_IFBLK(), 24, 0 ],
 		   "cm206cd" => [ c::S_IFBLK(), 32, 0 ],
+		   "fd0H1440"=> [ c::S_IFBLK(),  2,28 ],
+		   "fd1H1440"=> [ c::S_IFBLK(),  2,29 ],
 		   "gscd"    => [ c::S_IFBLK(), 16, 0 ],
 		   "mcd"     => [ c::S_IFBLK(), 23, 0 ],
 		   "mcdx"    => [ c::S_IFBLK(), 20, 0 ],
