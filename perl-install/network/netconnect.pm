@@ -41,16 +41,6 @@ sub detect {
     @pci_modems and $auto_detect->{winmodem}{$_->{driver}} = $_->{description} foreach @pci_modems;
 }
 
-sub pre_func {
-    my ($text) = @_;
-    $in->isa('interactive::gtk') or return;
-    $::Wizard_no_previous = 1;
-    #- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-    #-PO here, "forward" is the standard gtk+ button for "next"; check what is displayed in your language
-    $in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress \"Forward\" to continue.", translate($text)), 1);
-    undef $::Wizard_no_previous;
-}
-
 sub init_globals {
     my ($in, $prefix) = @_;
     MDK::Common::Globals::init(
@@ -124,6 +114,15 @@ If you don't want to use the auto detection, deselect the checkbox.
 	detect($netc->{autodetect}, $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs"));
     }
 
+    my %net_conf_callbacks = (adsl => sub { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) },
+                              cable => sub { require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) },
+                              isdn => sub { require network::isdn; network::isdn::configure($netcnx, $netc, undef) },
+                              lan => sub { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) },
+                              modem => sub { require network::modem; network::modem::configure($in, $netcnx, $mouse, $netc) },
+                              winmodem => sub { require network::modem; network::modem::winmodemConfigure($in, $netcnx, $mouse, $netc) }, 
+                             );
+
+
   step_2:
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{driver} ? 1 : 0;
@@ -151,13 +150,18 @@ If you don't want to use the auto detection, deselect the checkbox.
 			 }
 			) or goto step_1;
 	   load_conf($netcnx, $netc, $intf);
-	   $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($in, $netcnx, $mouse, $netc) or goto step_2 };
-	   $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($in, $netcnx, $mouse, $netc) or goto step_2 }; 
-	   $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc, undef) or goto step_2 };
-	   $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
-	   $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
-	   $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
-       }; $in->exit(0) if $@ =~ /wizcancel/;
+        foreach my $type (qw(modem winmodem isdn adsl cable lan)) {
+            $conf{$type} and do {
+                $in->isa('interactive::gtk') and do {
+                    #-PO here, "forward" is the standard gtk+ button for "next"; check what is displayed in your language
+                    $in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress \"Forward\" to continue.", translate($type)), 1) or goto step_2;
+                    &{$net_conf_callbacks{$type}} or goto step_2;
+                    $netconnect::need_restart_network = 1 if $type =~/lan|cable/;
+                }
+            }
+        }
+       };
+    $in->exit(0) if $@ =~ /wizcancel/;
   
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
@@ -171,8 +175,15 @@ If you don't want to use the auto detection, deselect the checkbox.
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
     
-    eval { $in->ask_yesorno(N("Network configuration"),
-			    N("Configuration is complete, do you want to apply settings ?"), 1) or goto step_2 }; $in->exit(0) if $@ =~ /wizcancel/;
+#    eval { $in->ask_yesorno(N("Network configuration"),
+#			    N("Configuration is complete, do you want to apply settings ?"), 1) or goto step_2_1 }; $in->exit(0) if $@ =~ /wizcancel/;
+    eval { 
+        $in->ask_from_listf_raw({ title => N("Network configuration"), 
+                                  messages => N("Configuration is complete, do you want to apply settings ?")
+                                }, 
+                                [ { label => "", hidden => 1 } ],
+                               ) or goto step_2_1 }; $in->exit(0) if $@ =~ /wizcancel/;
+    
     
     member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
 
