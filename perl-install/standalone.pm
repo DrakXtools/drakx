@@ -212,6 +212,11 @@ sub check_kernel_module_packages {
 	    $_->name eq $ext_name and $list{$_->name} = 1;
 	    $_->name =~ /$base_name/ and $list{$_->name} = 1;
 	}
+	foreach (`rpm --qf '\%{NAME}\n' -qa`) {
+	    chomp;
+	    $_ eq $ext_name and $list{$_} = 1;
+	    /$base_name/ and $list{$_} = 1;
+	}
     };
     if (!$ext_name || $list{$ext_name}) {
 	eval {
@@ -220,13 +225,13 @@ sub check_kernel_module_packages {
 		$version_release = "$1.$2";
 		$ext = $3 ? "-$3" : "";
 		$list{"$base_name$ext-$version_release"} or die "no $base_name for current kernel";
-		$select{"$base_name$ext$version_release"} = 1;
+		$select{"$base_name$ext-$version_release"} = 1;
 	    } else {
 		#- kernel version is not recognized, what to do ?
 	    }
-	    foreach (`rpm -qa kernel*`) {
+	    foreach (`rpm -qa`) {
 		($ext, $version_release) = /kernel[^\-]*(-smp|-enterprise|-secure)?(?:-([^\-]+))$/;
-		$list{"$base_name$ext$version_release"} and $select{"$base_name$ext$version_release"} = 1;
+		$list{"$base_name$ext-$version_release"} and $select{"$base_name$ext-$version_release"} = 1;
 	    }
 	    $result = [ keys(%select), if_($ext_name, $ext_name) ];
 	}
