@@ -37,6 +37,8 @@
 
 void init_frontend(char * welcome_msg)
 {
+	int i;
+	for (i=0; i<38; i++) printf("\n");
 	newtInit();
 	newtCls();
 	

@@ -156,8 +156,7 @@ void doklog()
 //		  print_str_init(log, "] bind error: ");
 //		  print_int_init(log, errno);
 //		  print_str_init(log, "\n");
-//		  sleep(5);
-//	  }
+//		  sleep(//	  }
 //
 //	  print_str_init(log, "] bound socket\n");
 //	  chmod("/dev/log", 0666);
@@ -387,8 +386,8 @@ int main(int argc, char **argv)
 		print_error("could not set new controlling tty");
 
 	if (!testing) {
-		char * my_hostname = "localhost.localdomain";
-		sethostname(my_hostname, strlen(my_hostname));
+		char my_hostname[] = "localhost.localdomain";
+		sethostname(my_hostname, sizeof(my_hostname));
 		/* the default domainname (as of 2.0.35) is "(none)", which confuses 
 		   glibc */
 		setdomainname("", 0);
@@ -404,7 +403,14 @@ int main(int argc, char **argv)
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("Cooker says: chopping a bunch of trees each morning builds a man! (c) Warly\n");
+	printf("Yavpoovoy says:\n");
+	printf("    Abraham leva les yeux et vit un belier, qui s'etait pris par les\n");
+	printf("    cornes dans un buisson, et Abraham alla prendre le belier et l'offrit\n");
+	printf("    en holocauste a la place de son fils. A ce lieu, Abraham donna le nom\n");
+	printf("    de \"Yahve pourvoit\", en sorte que l'on dit aujourd'hui: \"Sur la\n");
+	printf("    montagne. Yahve pourvoit.\"\n");
+	printf("                                               Gn 22, 13-14\n");
+	printf("\n");
 	printf("Running install...\n"); 
 	
 	if (!(installpid = fork())) {
