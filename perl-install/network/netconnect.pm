@@ -658,7 +658,7 @@ killall pppd
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
                                         'sagem'      => [ 'eagle-usb',  "$::prefix/usr/sbin/eaglectrl" ],
-                                        'speedtouch' => [ 'speedtouch', "$::prefix/usr/share/speedtouch/speedtouch.sh" ],
+                                        'speedtouch' => [ 'speedtouch', "$::prefix/usr/sbin/modem_run" ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
                         # FIXME: check that the package installation succeeds, else retry or abort
