@@ -183,7 +183,11 @@ sub add_kernel {
 
 sub get_append {
     my ($b, $key) = @_;
-    ($b->{perImageAppend} =~ /\b$key=(\S*)/)[0];
+    if ($key eq 'mem') {
+	($b->{perImageAppend} =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/)[0];
+    } else {
+	($b->{perImageAppend} =~ /\b$key=(\S*)/)[0];
+    }
 }
 sub add_append {
     my ($b, $key, $val) = @_;
