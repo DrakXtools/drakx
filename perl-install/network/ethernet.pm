@@ -2,7 +2,7 @@ package network::ethernet;
 
 use network::network;
 use modules;
-use any;
+use modules::interactive;
 use detect_devices;
 use common;
 use run_program;
@@ -82,7 +82,7 @@ qq(
 sub conf_network_card {
     my ($netc, $intf, $type, $ipadr, $netadr) = @_;
     #-type =static or dhcp
-    any::load_category($in, 'network/main|usb', !$::expert, 1);
+    modules::interactive::load_category($in, 'network/main|usb', !$::expert, 1);
     my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr);
     my $interface;
     @all_cards == () and $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
@@ -172,7 +172,7 @@ sub go_ethernet {
 sub configureNetwork {
     my ($netc, $intf, $_first_time) = @_;
     local $_;
-    any::load_category($in, 'network/main|usb|pcmcia', !$::expert, 1) or return;
+    modules::interactive::load_category($in, 'network/main|usb|pcmcia', !$::expert, 1) or return;
     my @l = detect_devices::getNet() or die N("no network card found");
     my @all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 
