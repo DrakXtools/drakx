@@ -882,7 +882,8 @@ sub disable_user_view {
 
 sub write_fstab {
     my ($o) = @_;
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount}, lang::fs_options($o->{lang}));
+    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount}, lang::fs_options($o->{lang}))
+	if !$::live;
 }
 
 
