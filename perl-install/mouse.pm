@@ -19,6 +19,13 @@ my @mouses_fields = qw(nbuttons device MOUSETYPE XMOUSETYPE FULLNAME);
 my @mouses = (
 arch() =~ /^sparc/ ? (
   [ 3, "sunmouse", "sun",       "sun",            __("Sun - Mouse") ],
+) : arch() eq "ppc" ? (
+  [ 1, "adbmouse", "Busmouse",  "BusMouse",       __("Apple ADB Mouse") ],
+  [ 2, "adbmouse", "Busmouse",  "BusMouse",       __("Apple ADB Mouse (2 Buttons)") ],
+  [ 3, "adbmouse", "Busmouse",  "BusMouse",       __("Apple ADB Mouse (3+ Buttons)") ],
+  [ 1, "usbmouse", "imps2",     "IMPS/2",         __("Apple USB Mouse") ],
+  [ 2, "usbmouse", "imps2",     "IMPS/2",         __("Apple USB Mouse (2 Buttons)") ],
+  [ 3, "usbmouse", "imps2",     "IMPS/2",         __("Apple USB Mouse (3+ Buttons)") ],
 ) : (
   [ 2, "psaux", "ps/2",         "PS/2",           __("Generic Mouse (PS/2)") ],
   [ 3, "psaux", "ps/2",         "PS/2",           __("Logitech MouseMan/FirstMouse (ps/2)") ],
@@ -114,6 +121,13 @@ sub mouseconfig {
 
 sub detect() {
     return name2mouse("Sun - Mouse") if arch() =~ /^sparc/;
+
+    if (arch() eq"ppc") {
+        return name2mouse("Apple USB Mouse") if detect_devices::hasMouseMacUSB;
+        # No need to search for an ADB mouse.  If I did, the PPC kernel would
+        # find one whether or not I had one installed!  So..  default to it.
+        return name2mouse("Apple ADB Mouse");
+    }
 
     detect_devices::hasMousePS2 and return name2mouse("Generic Mouse (PS/2)");
 

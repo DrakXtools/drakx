@@ -243,6 +243,10 @@ sub hasMousePS2() {
     my $t; sysread(tryOpen("psaux") || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
+sub hasMouseMacUSB {
+    my $t; sysread(tryOpen("usbmouse") || return, $t, 256) != 1 || $t ne "\xFE";
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
