@@ -375,7 +375,7 @@ sub update {
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 #TV    $list->window->freeze();
 #TV    $list->window->clear();
-#TV    build_list();
+    build_list();
 #TV    $list->window->thaw();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
     $isconnected != -1 or return 1;
@@ -664,7 +664,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
     $button_ok->signal_connect(clicked => sub {
 				     $i = 0;
 				     foreach (@mask) {
-					    ${$conf_data[$i]->[1]} = $infos[2*$i+1]->get_text() if $_;
+					    ${$conf_data[$i][1]} = $infos[2*$i+1]->get_text() if $_;
 					    $i++;
 				     }
 				     update();

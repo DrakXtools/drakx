@@ -761,7 +761,7 @@ sub new {
     }
 
     # gtk+-2 is bugged regarding socket/plug support
-    if (0 &&$::isEmbedded && !$pop_it && !eval { $::Plug && $::Plug->child }) {
+    if (0 && $::isEmbedded && !$pop_it && !eval { $::Plug && $::Plug->child }) {
 	die "embedded mode: todo";
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk2::HBox(0,0);
