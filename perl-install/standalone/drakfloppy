@@ -256,7 +256,7 @@ sub expand_tree {
         
         foreach my $dir_entry (all($dir)) {
             my $entry_path = $dir . "/" . $dir_entry;
-            if (-d $entry_path || $dir_entry =~ /\.o(\.gz)?$/) {
+            if (-d $entry_path || $dir_entry =~ /\.(k|)o(\.gz)?$/) {
                 $entry_path =~ s|//|/|g;
                 my $iter = $tree_model->append_set($parent_iter, [ 0 => $dir_entry, 1 => $entry_path, 2 => has_sub_trees($entry_path) ]);
                 #- hackery for partial displaying of trees, used in rpmdrake:
@@ -325,7 +325,7 @@ sub has_sub_trees {
     my ($dir) = @_;
     
     foreach my $file (glob_("$dir/*")) {
-        return 1 if -d $file || $file =~ /\.o(\.gz)?$/;
+        return 1 if -d $file || $file =~ /\.(k|)o(\.gz)?$/;
     }
     
     return 0;
