@@ -19,7 +19,7 @@ sub load_defaults {
         my ($opt, $val) = split /$separator/;
         chop $val;
         if_($opt ne 'set_security_conf', $opt => $val);
-    } cat_($msec->{$category}{defaults_file});
+    } cat_($msec->{$category}{defaults_file}), if_($category eq "checks", 'MAIL_USER');
 }
 
 
@@ -76,9 +76,14 @@ sub get_check_value {
 # list_(functions|checks) -
 #   return a list of functions|checks handled by level.local|security.conf
 
+sub raw_checks_list {
+    my ($msec) = @_;
+    keys %{$msec->{checks}{default}};
+}
+
 sub list_checks {
     my ($msec) = @_;
-    grep { !member($_, qw(MAIL_WARN MAIL_USER)) } keys %{$msec->{checks}{default}};
+    grep { !member($_, qw(MAIL_WARN MAIL_USER)) } $msec->raw_checks_list;
 }
 
 sub list_functions {
@@ -141,7 +146,7 @@ sub apply_functions {
 
 sub apply_checks {
     my ($msec) = @_;
-    my @list =  sort $msec->list_checks;
+    my @list =  sort $msec->raw_checks_list;
     substInFile {
         foreach my $check (@list) { s/^$check.*\n// }
         if (eof) {
