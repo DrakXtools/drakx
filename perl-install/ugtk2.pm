@@ -835,9 +835,15 @@ sub new {
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
 
+    my %window_options = (
+	title => $title || '',
+	if_(!$::isInstall, icon_no_error => wm_icon()),
+    );
+
+
     if ($o->{pop_it}) {
-	$o->{rwindow} = _create_window(
-	    title => $title, 
+	$o->{rwindow} = mygtk2::_create_Window(
+	    %window_options,
 	    modal => $grab || $o->{grab} || $o->{modal},
 	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
 	);
@@ -869,9 +875,10 @@ sub new {
 					   );
 		mygtk2::sync($::WizardWindow);
 	    } else {
-		$::WizardWindow = _create_window(
-		    title => $title,
+		$::WizardWindow = mygtk2::_create_Window(
+		    %window_options,
 		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
+		    if_(!$::isInstall, icon_no_error => wm_icon()),
 		);   
 		$::WizardWindow->show;
 	    }
@@ -925,82 +932,6 @@ sub exit {
 
 #- in case "exit" above was not called by the program
 END { &exit() }
-
-sub _create_window {
-    my (%options) = @_;
-
-    my $no_Window_Manager = !$::isStandalone;
-
-    my $w = gtknew('Window', 
-		   if_(!$::isInstall && !$::isWizard, border_width => 5),
-
-		   #- policy: during install, we need a special code to handle the weird centering, see below
-		   position_policy => $::isInstall ? 'none' : $no_Window_Manager ? 'center-always' : 'center-on-parent',
-
-		   if_(!$::isInstall, icon_no_error => wm_icon()),
-
-		   if_($::isInstall, position => [
-		       $::rootwidth - ($::windowwidth + $::real_windowwidth) / 2, 
-		       $::logoheight + ($::windowheight - $::real_windowheight) / 2,
-		   ]),
-		   %options);
-
-    #- when the window is closed using the window manager "X" button (or alt-f4)
-    $w->signal_connect(delete_event => sub { 
-	if ($::isWizard) {
-	    $w->destroy; 
-	    die 'wizcancel';
-	} else { 
-	    Gtk2->main_quit;
-	} 
-    });
-
-    if ($no_Window_Manager) {
-	force_keyboard_focus($w);
-    }
-
-    if ($::isInstall) {
-	require install_gtk; #- for perl_checker
-	install_gtk::handle_unsafe_mouse($::o, $w);
-	$w->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
-
-	#- force center at a weird position, this can't be handled by position_policy
-	#- because center-on-parent is a window manager hint, and we don't have a WM
-	my ($wi, $he);
-	$w->signal_connect(size_allocate => sub {
-	    my (undef, $event) = @_;
-	    my @w_size = $event->values;
-	    return if $w_size[2] == $wi && $w_size[3] == $he; #BUG
-	    (undef, undef, $wi, $he) = @w_size;
-
-            $w->set_uposition(max(0, $::rootwidth - ($::windowwidth + $wi) / 2), 
-			      max(0, $::logoheight + ($::windowheight - $he) / 2));
-	});
-    }
-
-    $w;
-}
-
-my $current_window;
-sub force_keyboard_focus {
-    my ($w) = @_;
-
-    sub _XSetInputFocus {
-	my ($w) = @_;
-	if ($current_window == $w) {
-	    $w->window->XSetInputFocus;
-	} else {
-	    log::l("not XSetInputFocus since already done and not on top");
-	}
-	0;
-    }
-
-    #- force keyboard focus instead of mouse focus
-    my $previous_current_window = $current_window;
-    $current_window = $w;
-    $w->signal_connect(expose_event => \&_XSetInputFocus);
-    $w->signal_connect(destroy => sub { $current_window = $previous_current_window });
-}
 
 # -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
 #                 ask
