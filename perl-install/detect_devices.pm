@@ -591,8 +591,13 @@ sub whatUsbport() {
 	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
 	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
 	}
+	# For HP's multi-function devices the real model name is in the "SKU"
+	# field. So use this field with priority for $model when it exists.
 	if (($idstr =~ /MDL:([^;]+);/) ||
 	    ($idstr =~ /MODEL:([^;]+);/)) {
+	    $model = $1 if !$model;
+	}
+	if ($idstr =~ /SKU:([^;]+);/) {
 	    $model = $1;
 	}
 	if (($idstr =~ /DES:([^;]+);/) ||

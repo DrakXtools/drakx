@@ -1436,12 +1436,14 @@ sub setup_common {
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
 	if (($_->{val}{MANUFACTURER}) && ($_->{val}{MODEL})) {
-	    $descr = "$_->{val}{MANUFACTURER} $_->{val}{MODEL}";
+	    $descr = "$_->{val}{MANUFACTURER}|$_->{val}{MODEL}";
 	} else {
 	    $descr = $_->{val}{DESCRIPTION};
+	    $descr =~ s/ /\|/;
 	}
 	# Clean up the description from noise which makes the best match
 	# difficult
+	$descr =~ s/Seiko\s+Epson/Epson/;
 	$descr =~ s/\s+Inc\.//;
 	$descr =~ s/\s+Corp\.//;
 	$descr =~ s/\s+SA\.//;
@@ -1452,10 +1454,34 @@ sub setup_common {
 	$descr =~ s/\s+[Ss]eries//;
 	$descr =~ s/\s+\(?[Pp]rinter\)?$//;
 	$printer->{DBENTRY} = "";
-	for my $entry (keys(%printer::thedb)) {
-	    if ($entry =~ m!$descr!i) {
+	# Try to find an exact match, check both whether the detected
+	# make|model is in the make|model of the database entry and vice versa
+	# If there is more than one matching database entry, the longest match
+	# counts.
+	my $matchlength = 0;
+	for my $entry (keys %printer::thedb) {
+	    my $dbmakemodel;
+	    if ($::expert) {
+		$entry =~ m/^(.*)\|[^\|]*$/;
+		$dbmakemodel = $1;
+	    } else {
+		$dbmakemodel = $entry;
+	    }
+	    next if !$dbmakemodel;
+	    $dbmakemodel =~ s/\|/\\\|/;
+	    my $searchterm = $descr;
+	    $searchterm =~ s/\|/\\\|/;
+	    my $lsearchterm = length($searchterm);
+	    if (($lsearchterm > $matchlength) &&
+		($entry =~ m!$searchterm!i)) {
+		$matchlength = $lsearchterm;
 		$printer->{DBENTRY} = $entry;
-		last;
+	    }
+	    my $ldbmakemodel = length($dbmakemodel);
+	    if (($ldbmakemodel > $matchlength) &&
+		($descr =~ m!$dbmakemodel!i)) {
+		$matchlength = $ldbmakemodel;
+		$printer->{DBENTRY} = $entry;
 	    }
 	}
 	if (!$printer->{DBENTRY}) {
