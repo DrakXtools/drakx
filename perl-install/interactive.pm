@@ -79,7 +79,7 @@ sub vnew {
     require c;
     if ($su) {
 	$ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-	$su = '' if $::testing;
+	$su = '' if $::testing || $ENV{TESTING};
     }
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if ($su && $>) {
