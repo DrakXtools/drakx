@@ -188,9 +188,7 @@ sub create_logo_window {
 
 #------------------------------------------------------------------------------
 sub init_gtk() {
-    symlink("/tmp/stage2/etc/gtk-2.0", "/etc/gtk-2.0");
-    symlink("/tmp/stage2/etc/pango", "/etc/pango");
-    symlink("/tmp/stage2/etc/fonts", "/etc/fonts");
+    symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-2.0 pango fonts);
     Gtk2->init(\@ARGV);
     Gtk2->set_locale;
 }
