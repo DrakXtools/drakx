@@ -1,3 +1,43 @@
+2001/08/18  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix pass $all_hds->{hds} instead of
+	$all_hds
+
+2001/08/18  siegel
+
+	* share/po/de.po: new german version
+
+	* standalone/drakgw, bootlook.pm, network/ethernet.pm, install_any.pm,
+	network/network.pm, raid.pm: fixed i18n
+
+	* printerdrake.pm: i18n fixes
+
+2001/08/17  Pixel  <pixel@mandrakesoft.com>
+
+	* install_interactive.pm: use diskdrake_interactive instead of diskdrake
+
+	* standalone/interactive_http/interactive_http.cgi: fix typo
+	restrict the progs callable to a few one.
+
+	* standalone/interactive_http/index.html.pl,
+	standalone/interactive_http/index.html: autogenerate index.html
+
+	* fs.pm, diskdrake_interactive.pm, diskdrake.pm: add mount options choice
+	(with IA-like stripping of unused options)
+
+	* c/stuff.xs.pm: is_ext3 is needed in standalone
+	Xtest not needed in standalone
+
+	* c/Makefile.PL: is_ext3 is needed in standalone
+
+	* standalone/interactive_http/miniserv.init,
+	standalone/interactive_http/Makefile: restrict the progs callable to a
+	few one.
+
+	* Makefile.drakxtools: fix po not build, add interactive_http in DIRS
+
+	* modules.pm: move back sunhme in sparc only
+
 2001/08/17  dam's  <damien@mandrakesoft.com>
 
 	* interactive_gtk.pm: no scrollbar if list <= 10 and the list is alone
