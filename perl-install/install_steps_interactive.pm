@@ -68,7 +68,7 @@ translated etc. that varies from language to language).") if $o->{lang} !~ /^en/
     unless ($o->{useless_thing_accepted}) {
 	$o->set_help('license');
 	$o->{useless_thing_accepted} = $o->ask_from_list_(_("License agreement"), formatAlaTeX(
-_(" Introduction
+_("Introduction
 
 The operating system and the different components available in the Linux-Mandrake distribution 
 shall be called the \"Software Products\" hereafter. The Software Products include, but are not 
@@ -79,7 +79,7 @@ system and the different components of the Linux-Mandrake distribution.
 1. License Agreement
 
 Please read carefully this document. This document is a license agreement between you and  
-MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to the Software Products.
+MandrakeSoft S.A. which applies to the Software Products.
 By installing, duplicating or using the Software Products in any manner, you explicitly 
 accept and fully agree to conform to the terms and conditions of this License. 
 If you disagree with any portion of the License, you are not allowed to install, duplicate or use 
@@ -90,7 +90,34 @@ License. Upon termination of the License,  you must immediately destroy all copi
 Software Products.
 
 
-2. The GPL License and Related Licenses
+2. Limited Warranty
+
+The Software Products and attached documentation are provided \"as is\", with no warranty, to the 
+extent permitted by law. Should the Software Products be defective, MandrakeSoft S.A. will at its 
+own will either replace the Software Products, or reimburse the paid fee.
+This limited warranty is void if you fail to comply to the recommendations, instructions and 
+conditions 
+of use listed in the documentation or license agreements of the Software Products.
+To the extent permitted by law, MandrakeSoft S.A. will in no circumstances be liable for any special, 
+incidental, direct or indirect damages whatsoever (including without limitation damages for loss of 
+business, interruption of business, financial loss, legal fees and penalties resulting from a court 
+judgement, or any other consequential loss) arising out of  the use or inability to use the Software 
+Products, even if MandrakeSoft S.A. has been advised of the possibility or occurance of such 
+damages.
+
+LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES
+
+To the extent permitted by law, MandrakeSoft S.A. or its distributors will, in no circumstances, be 
+liable for any special, incidental, direct or indirect damages whatsoever (including without 
+limitation damages for loss of business, interruption of business, financial loss, legal fees 
+and penalties resulting from a court judgement, or any other consequential loss) arising out 
+of the possession and use of software components or arising out of  downloading software components 
+from one of Linux-Mandrake sites  which are prohibited or restricted in some countries by local laws.
+This limited liability applies to, but is not restricted to, the strong cryptography components 
+included in the Software Products.
+
+
+3. The GPL License and Related Licenses
 
 The Software Products consist of components created by different persons or entities.  Most 
 of these components are governed under the terms and conditions of the GNU General Public 
@@ -101,62 +128,15 @@ on a component license should be addressed to the component author and not to Ma
 The programs developed by MandrakeSoft S.A. are governed by the GPL License. Documentation written 
 by MandrakeSoft S.A. is governed by a specific license. Please refer to the documentation for 
 further details.
-Some versions of the Software Products may contain components which are not governed by the GPL 
-License or similar agreements. Each such component is then governed by the terms and conditions 
-of its own specific license. Please read carefully and comply with such specific licenses before 
-you install, use or redistribute the said components. Such licenses will in general prevent the 
-transfer,  duplication (except for backup purposes), redistribution, reverse engineering, 
-de-assembly, 
-de-compilation or modification of the component. Any breach of agreement will immediately terminate 
-your rights under the specific license. Unless the specific license terms grant you such rights, 
-you usually cannot install the programs on more than one system, or adapt it to be used on a 
-network. 
-In doubt, please contact directly the distributor or editor of the component. Transfer to third 
-parties or copying of such components including the documentation is usually forbidden.
 
 
-3. Intellectual Property Rights
+4. Intellectual Property Rights
 
 All rights to the components of the Software Products belong to their respective authors and are 
 protected by intellectual property and copyright laws applicable to software programs.
 MandrakeSoft S.A. reserves its rights to modify or adapt the Software Products, as a whole or in 
-parts,
-by all means and for all purposes.
-\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of MandrakeSoft S.A.  All rights 
-are 
-reserved. The duplication is forbidden without prior written consent by MandrakeSoft S.A.
-
-
-4. Limited Warranty
-
-The Software Products and attached documentation are provided \"as is\", with no warranty, to the 
-extent permitted by law. Should the Software Products be defective, MandrakeSoft S.A. will at its 
-own will either replace the Software Products, or reimburse the paid fee.
-This limited warranty is void if you fail to comply to the recommendations, instructions and 
-conditions 
-of use listed in the documentation or license agreements of the Software Products.
-To the extent permitted by law, MandrakeSoft S.A. will in no circumstances be liable for any 
-special, 
-incidental, direct or indirect damages whatsoever (including without limitation damages for loss of 
-business, interruption of business, financial loss, legal fees and penalties resulting from a court 
-judgement, or any other consequential loss) arising out of  the use or inability to use the 
-Software 
-Products, even if MandrakeSoft S.A. has been advised of the possibility or occurance of such 
-damages.
-
-LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES
-
-To the extent permitted by law, MandrakeSoft S.A. or its distributors will, in no circumstances, be 
-liable for any special, incidental, direct or indirect damages whatsoever (including without 
-limitation 
-damages for loss of business, interruption of business, financial loss, legal fees and penalties 
-resulting from a court judgement, or any other consequential loss) arising out of the possession 
-and 
-use of software components or arising out of  downloading software components from one of 
-Linux-Mandrake 
-sites  which are prohibited or restricted in some countries by local laws. This limited liability 
-applies to, but is not restricted to, the strong cryptography components included in the Software 
-Products.
+parts, by all means and for all purposes.
+\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of MandrakeSoft S.A.  
 
 
 5. Governing Laws 
@@ -166,10 +146,8 @@ portion is excluded from this contract. You remain bound by the other applicable
 agreement.
 The terms and conditions of this License are governed by the Laws of France.
 All disputes on the terms of this license will preferably be settled out of court. As a last 
-resort, 
-the dispute will be referred to the appropriate Courts of Law of Paris - France.
-For any question on this document, please contact MandrakeSoft S.A.,  
-43, rue d'Aboukir, 75002 Paris - France
+resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.
+For any question on this document, please contact MandrakeSoft S.A.  
 ")), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
     }
 }

@@ -522,17 +522,44 @@ sub installPackages {
     undef *install_any::changeMedium;
     *install_any::changeMedium = sub {
 	my ($method, $medium) = @_;
-	my $msg =
-_("Change your Cd-Rom!
-
-Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you don't have it, press Cancel to avoid installation from this Cd-Rom.", pkgs::mediumDescr($o->{packages}, $medium));
 
 	#- if not using a cdrom medium, always abort.
 	$method eq 'cdrom' and do {
 	    local $my_gtk::grab = 1;
-	    print "\a";
-	    $o->ask_okcancel('', $msg);
+	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
+	    print "\a";	    
+	    $name !~ /application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX(_("
+Warning
+
+Please read carefully the terms below. If you disagree with any
+portion, you are not allowed to install the next CD media. Press 'Cancel' 
+to continue the installation without using these media.
+
+
+Some components contained in the next CD media are not governed
+by the GPL License or similar agreements. Each such component is then
+governed by the terms and conditions of its own specific license. 
+Please read carefully and comply with such specific licenses before 
+you use or redistribute the said components. 
+Such licenses will in general prevent the transfer,  duplication 
+(except for backup purposes), redistribution, reverse engineering, 
+de-assembly, de-compilation or modification of the component. 
+Any breach of agreement will immediately terminate your rights under 
+the specific license. Unless the specific license terms grant you such
+rights, you usually cannot install the programs on more than one
+system, or adapt it to be used on a network. In doubt, please contact 
+directly the distributor or editor of the component. 
+Transfer to third parties or copying of such components including the 
+documentation is usually forbidden.
+
+
+All rights to the components of the next CD media belong to their 
+respective authors and are protected by intellectual property and 
+copyright laws applicable to software programs.
+")), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept") and $o->ask_okcancel('', _("Change your Cd-Rom!
+
+Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
+If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name));
 	};
     };
     catch_cdie { $o->install_steps::installPackages($packages); }
