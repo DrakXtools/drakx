@@ -120,17 +120,22 @@ sub ask {
                 $_[1]->set($started ? _("running") : _("stopped"));
                 $started, $action;
     };
-    gtkadd($W->{window}, gtkadd(my $b = new Gtk::EventBox(), gtkpack_($W->create_box_with_title(_("Services and deamons")),
-	1, gtkset_usize(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
-	    map {
-                my $service = $_;
-        	my $infos_old = description($_, $prefix);
-		my $infos;
+    my $strip = sub {
+                my $infos_old = $_[0];
+                my $infos;
 		while ($infos_old =~ s/(.{40})//) {
                     $1 =~ /(.*) ([^ ]*)/;
 		    $infos .= "$1\n$2";
                 }
                 $infos .= $infos_old;
+    };
+    my $b = new Gtk::EventBox();
+    $b->set_events(["pointer_motion_mask"]);
+    gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(_("Services and deamons")),
+	1, gtkset_usize(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
+	    map {
+                my $service = $_;
+        	my $infos = $strip->(description($_, $prefix));
                 $infos ||= _("No additionnal information\nabout this service, sorry.");
 		my $l = new Gtk::Label();
                 my ($started, $action) = $update_service->($service, gtkset_justify($l, 0));
@@ -146,7 +151,7 @@ sub ask {
                                         }}), "@$on_services" =~ /$service/ )),
 		  map { my $a = $_;
                       gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_($a)),
-                          clicked => sub { my $c = "service $service " . lc($a); local $_=`$c`; s/\033\[[^mG]*[mG]//g;
+                          clicked => sub { my $c = "service $service " . lc($a) . " 2>&1"; local $_=$strip->(`$c`); s/\033\[[^mG]*[mG]//g;
                                            ($started, $action) = $update_service->($service, $l);
                                            $display->($_);
                                          }
@@ -157,11 +162,12 @@ sub ask {
             0, gtkpack(gtkset_border_width(new Gtk::HBox(0,0),5), $W->create_okcancel)
             ))
 	  );
-    $b->set_events(["pointer_motion_mask"]);
     $b->signal_connect( motion_notify_event => sub { my ($w, $e) = @_;
                                                                my ($ox, $oy) = $w->window->get_deskrelative_origin;
                                                                $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy; });
-    $b->signal_connect( button_press_event => sub { $w_popup and $w_popup->destroy;});
+    $b->signal_connect( button_press_event => sub { $nopop->()});
+    $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
+    $::isEmbedded and kill (12, $::CCPID);
     $W->main or return;
     ($l, $on_services);
 }
