@@ -424,7 +424,12 @@ sub ask_from_entries_refW {
 		$w->disable_activate;
 		($real_w, $w) = ($w, $w->entry);
 	    } else {
-		$w = new Gtk::Entry(${$e->{val}});
+                # ${...} removed here, it causes a number given as default
+                # value in addition being interpreted as the maximum length
+                # of the field, so a field with '1' or '1.0' as default
+                # allows only 1 character to be entered.
+                # $w = new Gtk::Entry(${$e->{val}});
+                $w = new Gtk::Entry($e->{val});		
 	    }
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $w->signal_connect(changed => $changed);
