@@ -361,16 +361,14 @@ sub text_view {
 }
 
 sub help() {
-    text_view(N("drakTermServ Overview
-			   
-        - Create Etherboot Enabled Boot Images:
+    text_view(N("drakTermServ Overview") . "\n\n" .
+N("        - Create Etherboot Enabled Boot Images:
         		To boot a kernel via etherboot, a special kernel/initrd image must be created.
         		mkinitrd-net does much of this work and drakTermServ is just a graphical interface
         		to help manage/customize these images. To create the file 
         		/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an include in 
-        		dhcpd.conf, you should create the etherboot images for at least one full kernel.
-
-        - Maintain /etc/dhcpd.conf:
+        		dhcpd.conf, you should create the etherboot images for at least one full kernel.") . "\n\n" .
+N("        - Maintain /etc/dhcpd.conf:
         		To net boot clients, each client needs a dhcpd.conf entry, assigning an IP address
         		and net boot images to the machine. drakTermServ helps create/remove these entries.
 			
@@ -378,17 +376,16 @@ sub help() {
         		also consider that when etherboot looks for the images, it expects names like
         		boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).
 			 
-        		A typical dhcpd.conf stanza to support a diskless client looks like:
-        		
-				host curly {
+        		A typical dhcpd.conf stanza to support a diskless client looks like:") . "\n\n" .
+"				host curly {
 					hardware ethernet        00:20:af:2f:f7:9d;
 					fixed-address              192.168.192.3;
 					#type                          fat;
 					filename                      \"i386/boot/boot-3c509.2.4.18-6mdk.nbi\";
 					#hdw_config                true;
 				}
-			
-			While you can use a pool of IP addresses, rather than setup a specific entry for
+			" . "\n" .
+N("			While you can use a pool of IP addresses, rather than setup a specific entry for
 			a client machine, using a fixed address scheme facilitates using the functionality
 			of client-specific configuration files that ClusterNFS provides.
 			
@@ -407,9 +404,8 @@ sub help() {
 			read/write mount points to allow the client to alter the file. Once you are satisfied 
 			with the configuration, you can remove root login priviledges from the client.
 			
-			Note: You must stop/start the server after adding or changing clients.
-			
-        - Maintain /etc/exports:
+			Note: You must stop/start the server after adding or changing clients.") . "\n\n" .
+N("        - Maintain /etc/exports:
         		Clusternfs allows export of the root filesystem to diskless clients. drakTermServ
         		sets up the correct entry to allow anonymous access to the root filesystem from
         		diskless clients.
@@ -419,19 +415,18 @@ sub help() {
         		/                  (ro,all_squash)
         		/home              SUBNET/MASK(rw,root_squash)
 			
-			With SUBNET/MASK being defined for your network.
-        		
-        - Maintain /etc/shadow\$\$CLIENT\$\$:
+			With SUBNET/MASK being defined for your network.") .
+        		"\n\n" .
+N("        - Maintain /etc/shadow\$\$CLIENT\$\$:
         		For users to be able to log into the system from a diskless client, their entry in
         		/etc/shadow needs to be duplicated in /etc/shadow\$\$CLIENTS\$\$. drakTermServ helps
-        		in this respect by adding or removing system users from this file.
-
-        - Per client /etc/X11/XF86Config-4\$\$IP-ADDRESS\$\$:
+        		in this respect by adding or removing system users from this file.") . "\n\n" .
+N("        - Per client /etc/X11/XF86Config-4\$\$IP-ADDRESS\$\$:
         		Through clusternfs, each diskless client can have it's own unique configuration files
         		on the root filesystem of the server. By allowing local client hardware configuration, 
-        		drakTermServ will help create these files.
-
-        - Per client system configuration files:
+        		drakTermServ will help create these files.") .
+"\n\n" .
+N("        - Per client system configuration files:
         		Through clusternfs, each diskless client can have it's own unique configuration files
         		on the root filesystem of the server. By allowing local client hardware configuration, 
 				clients can customize files such as /etc/modules.conf, /etc/sysconfig/mouse, 
@@ -439,9 +434,8 @@ sub help() {
 
         Note: Enabling local client hardware configuration does enable root login to the terminal 
         server on each client machine that has this feature enabled.  Local configuration can be turned
-        back off, retaining the configuration files, once the client machine is configured.
-		
-        - /etc/xinetd.d/tftp:
+        back off, retaining the configuration files, once the client machine is configured.") . "\n\n" .
+N("        - /etc/xinetd.d/tftp:
         		drakTermServ will configure this file to work in conjunction with the images created by
         		mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up the boot image to each
         		diskless client.
@@ -461,9 +455,8 @@ sub help() {
         		
         		The changes here from the default installation are changing the disable flag to
         		'no' and changing the directory path to /var/lib/tftpboot, where mkinitrd-net
-        		puts it's images.
-
-        - Create etherboot floppies/CDs:
+        		puts it's images.") . "\n\n" .
+N("        - Create etherboot floppies/CDs:
         		The diskless client machines need either ROM images on the NIC, or a boot floppy
         		or CD to initate the boot sequence.  drakTermServ will help generate these images,
         		based on the NIC in the client machine.
@@ -471,10 +464,7 @@ sub help() {
         		A basic example of creating a boot floppy for a 3Com 3c509 manually:
         		
         		cat /usr/lib/etherboot/boot1a.bin \\
-        			/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0
- 
-
-"));
+        			/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0") . "\n\n");
 }
 
 sub make_boot() {
