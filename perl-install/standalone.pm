@@ -96,7 +96,7 @@ Network & Internet connection and monitoring application
   --no-verify-rpm        don't verify packages signatures
   --changelog-first      display changelog before filelist in the description window
   --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"),
-           'scannerdrake' => N("[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--dynamic=dev]"),
+           'scannerdrake' => N("[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-usbtable] [--dynamic=dev]"),
 	      'XFdrake' => N(" [everything]
        XFdrake [--noauto] monitor
        XFdrake resolution"),
