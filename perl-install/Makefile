@@ -143,9 +143,6 @@ endif
 	done
 	mv -f $(DEST)/$(LIB)/libimlib-png.so $(DEST)/usr/$(LIB)
 
-#	# transform xpm's in png's
-	for i in $(DEST)/usr/share/icons/*.xpm; do convert $$i $${i%xpm}png; rm $$i; done
-
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
 	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
