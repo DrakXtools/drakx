@@ -66,9 +66,9 @@ sub pppConfig {
 #- output:
 #-  $modem->{device} : device where the modem were detected
 sub modem_detect_backend {
-    my ($modem, $mouse) = @_;
-    $mouse ||={};
-    $mouse->{device} ||= readlink "/dev/mouse";
+    my $modem = @_;
+    my $mouse = {};
+    $mouse->{device} = readlink "/dev/mouse";
     my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
     eval { modules::load($serdev) };
 
