@@ -982,15 +982,19 @@ sub upNetwork {
     modules::write_conf();
     if (hasNetwork($o)) {
 	if ($o->{netcnx}{type} =~ /adsl|lan|cable/) {
+	    log::l("starting network ($o->{netcnx}{type})");
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
 	    return 1;
 	} elsif (!$b_pppAvoided) {
+	    log::l("starting network (ppp: $o->{netcnx}{type})");
 	    eval { modules::load(qw(serial ppp bsd_comp ppp_deflate)) };
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
 	    return 1;
+	} else {
+	    log::l(qq(not starting network (b/c ppp avoided and type is "$o->{netcnx}{type})"));
 	}
     }
     $::testing;
