@@ -1,3 +1,66 @@
+2002/09/19  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - s/rpm/mdk/ in package version matching
+
+2002/09/19  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: avoid proposing ntfs partition to be
+	formatted.
+
+2002/09/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* network/tools.pm: fix spurious ";" before closing block
+
+	* standalone.pm: when in install mode, log when a **** does a "use
+	standalone"
+
+	* interactive.pm: require log will reliably fail, use require 'log.pm'
+	instead
+
+	* install_steps_interactive.pm: fix titisucks making cards choice in bttv
+	dialog unavailable
+
+	* install2.pm: revert
+	try to workaround strange situations when mkinitrd fail because
+	loop is not loaded (we don't know who calls mkinitrd), by loading
+	the loop module right after format-mount'ing the partitions
+
+2002/09/19  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm: catch error in Done (mainly "reboot needed"),
+	so that fstab can be written
+	even if reboot needed (useful when removing partitions mounted by
+	default)
+
+	* install_steps.pm: 
+	  - do not set type to ext2 when the type is ntfs
+	  - set to ext3 instead of ext2
+
+2002/09/19  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/v4l.pm: don't use standalone while installing
+
+	* security/libsafe.pm: s/package draksec::libsafe/package
+	security::libsafe/
+	anyway nobody uses that one
+
+2002/09/19  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: remove old WIZARDS package
+	add drakwizard
+	remove LPRng
+
+2002/09/18  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm: 
+	  - add ntfs in isOtherAvailableFS
+	  - but ensure it is not in isMountableRW
+
+2002/09/18  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: remove *-mdk-cdcom
+
 2002/09/18  florin
 
 	* standalone/drakgw: more details for the dhcp server
@@ -3743,7 +3806,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.752 2002/09/16 23:19:57 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.753 2002/09/18 14:47:41 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
