@@ -229,6 +229,8 @@ sub reallyChooseGroups {
 	gtkset_tip($tips, $check, $help);
 	$check;
     };
+    #- when restarting this step, it might be necessary to reload the compssUsers.pl (bug 11558). kludgy.
+    if (!ref $o->{gtk_display_compssUsers}) { install_any::load_rate_files($o) }
     gtkadd($w->{window},
 	   gtkpack_($w->create_box_with_title(N("Package Group Selection")),
 		    1, $o->{gtk_display_compssUsers}->($entry),

@@ -441,6 +441,8 @@ sub prep_net_suppl_media {
     delete $INC{'IO/Socket.pm'};
     delete $INC{'IO/Socket/UNIX.pm'};
     delete $INC{'IO/Socket/INET.pm'};
+    delete $INC{'ftp.pm'};
+    delete $INC{'http.pm'};
     require IO::Socket;
 }
 
@@ -511,7 +513,8 @@ sub selectSupplMedia {
 		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
 	    }
 	    useMedium($medium_name);
-	    require "$suppl_method.pm"; #- require http or ftp
+	    require http;
+	    require ftp if $suppl_method eq 'ftp';
 	    #- first, try to find an hdlists file
 	    eval { pkgs::psUsingHdlists($o, $suppl_method, $url, $o->{packages}, $medium_name, \&setup_suppl_medium) };
 	    if ($@) {
@@ -583,6 +586,20 @@ sub _media_rank {
     $y;
 }
 
+sub load_rate_files {
+    my ($o) = @_;
+    #- must be done after getProvides
+    #- if there is a supplementary media, the rpmsrate/compssUsers are overridable
+    pkgs::read_rpmsrate(
+	$o->{packages},
+	getFile(-e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
+    );
+    ($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
+	$o->{meta_class},
+	-e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
+    );
+}
+
 sub setPackages {
     my ($o, $rebuild_needed) = @_;
 
@@ -603,16 +620,7 @@ sub setPackages {
 	pkgs::selectPackage($o->{packages},
 			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
-	#- must be done after getProvides
-	#- if there is a supplementary media, the rpmsrate/compssUsers are overridable
-	pkgs::read_rpmsrate(
-	    $o->{packages},
-	    getFile(-e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
-	);
-	($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
-	    $o->{meta_class},
-	    -e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
-	);
+	load_rate_files($o);
 
 	#- preselect default_packages and compssUsers selected.
 	setDefaultPackages($o);
