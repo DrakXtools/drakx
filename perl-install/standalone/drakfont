@@ -71,7 +71,7 @@ my $windows       = "@ARGV" =~ /--windows_import|-wi/;
 my $strong        = "@ARGV"  =~ /--strong|-s/;
 my $replace       = "@ARGV"  =~ /--replace|-r/;
 my ($application) = "@ARGV"  =~ /--application (\w+)/;
-my ($install)     = "@ARGV"  =~ /--install (\w*)/;
+my ($install)     = "@ARGV"  =~ /--install (\w)/;
 my ($uninstall)   = "@ARGV"  =~ /--uninstall (\w+)/;
 
 my $xfs_conffile = '/etc/X11/fs/config';
@@ -158,7 +158,7 @@ sub search_dir_font {
 
 	foreach my $i (@installed_fonts) {
 	    foreach my $j (@font_list_tmp) {
-		if ( $j =~ /$i/) { push @font_list, "$i" ;}
+		if (( $j =~ !/$i/) && !grep ($j , @font_list))  { push @font_list, "$j" ;}
 	    }
 	}
 
