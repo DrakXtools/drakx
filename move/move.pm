@@ -59,10 +59,12 @@ sub install2::startMove {
     output('/var/run/console/mdk', 1);
     run_program::run('pam_console_apply');
 
-    fork() or exec 'gmessage', '...' or c::_exit(0);
-
-    sleep 1;
-    exec 'su', 'mdk', 'startkde';
+    if (fork()) {
+	sleep 1;
+	exec 'su', 'mdk', 'startkde';
+    } else {
+	exec 'xwait' or c::_exit(0);
+    }
 }
 
 sub automatic_xconf {

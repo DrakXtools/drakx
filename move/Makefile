@@ -10,9 +10,17 @@ INSTALL = ../perl-install
 
 INSTALL_FILES = install2.pm install_steps.pm install_any.pm install_interactive.pm install_steps_gtk.pm install_steps_interactive.pm install_messages.pm install_gtk.pm help.pm
 
+ARCH := $(shell arch | egrep "(x86_64|sparc64|s390x)")
+ifneq ("x$(ARCH)", "x")
+LIB_NAME = lib64
+else
+LIB_NAME = lib
+endif
+
+
 all: install
 
-build:
+build: xwait
 	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" make init stage1-network stage1-cdrom init-move
 
 install: build
@@ -21,7 +29,7 @@ install: build
 	 #- todo: make_boot_img alike to create boot volume from ../mdk-stage1/stage1-cdrom (isolinux mandatory since stock kernel is so big)
 	sudo cp -f $(STAGE1)/init-move $(DEST_LIVETREE)/sbin/init
 
-	sudo cp -f runstage2 $(DEST_LIVETREE)/usr/bin
+	sudo cp -f runstage2 xwait $(DEST_LIVETREE)/usr/bin
 	sudo rm -rf $(DEST_STAGE2)
 	sudo mkdir -p $(DEST_STAGE2)
 	sudo cp -f *.pm $(DEST_STAGE2)
@@ -46,3 +54,12 @@ install: build
 	grep ChangeLog $(INSTALL)/CVS/Entries > /tmp/version
 	sudo cp -f /tmp/version $(DEST_LIVETREE)/usr/share/VERSION
 	sudo rm -f $(DEST_LIVETREE)/lock
+
+
+xwait: %: %.c
+	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
+
+clean:
+	rm -f xwait
+
+# mkisofs -D -U -r $(DEST_LIVETREE) | create_compressed_fs - 65536 $(DEST_LIVETREE).clp 2000 2>/dev/null
