@@ -253,6 +253,15 @@ sub parse_file {
 
   my $taille = @all;
   my $i = 0;
+  my $test;
+  if ($en && !$ey) {
+      $test = sub { !/$en/o };
+  } elsif ($ey && !$en) {
+      $test = sub { /$ey/o };
+  } else {
+      $test = sub { /$ey/o && !/$en/o };
+  }
+
   foreach (@all) {
       $i++;
       if ($pbar && $i % 10) { 
@@ -260,9 +269,7 @@ sub parse_file {
        $win_pb->window->process_updates(1); # no gtkflush() because we do not want to refresh the TextView
       }
       
-      if ($en eq "" && /$ey/i)     { logcolorize($_); next }
-      if (!  /$en/i && /$ey/i)     { logcolorize($_); next }
-      if (!  /$en/i && $ey eq "")  { logcolorize($_); next }
+      logcolorize($_) if $test;
   }
   $win_pb->destroy if !$::isEmbedded || !$isExplain;
 
