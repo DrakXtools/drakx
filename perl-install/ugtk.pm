@@ -7,8 +7,9 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border $use_pixbuf $use_imlib);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem create_dialog destroy_window) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkcombo_setpopdown_strings gtkset_editable gtksetstyle gtkset_text gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkexpand gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_visibility gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkflush gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkcreate_png_pixbuf gtkbuttonset create_pixbutton gtkroot gtkentry compose_with_back compose_pixbufs) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkcan_default gtkgrab_default gtkcombo_setpopdown_strings gtkset_editable gtkset_menu gtksetstyle gtkset_text gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkexpand gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_visibility gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkshow_all gtkhide gtkdestroy gtkflush gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_position gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkcreate_png_pixbuf gtkbuttonset create_pixbutton gtkroot gtkentry compose_with_back compose_pixbufs) ],
     various => [ qw(add2notebook add_icon_path n_line_size) ],
+    libconf => [ qw(create_edit_widget build_edit_widget_atom create_conf_tree)],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -31,15 +32,17 @@ use common;
 my @icon_paths;
 sub add_icon_path { push @icon_paths, @_ }
 sub icon_paths {
-   (@icon_paths, $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps", "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons');
+   (@icon_paths, $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "pixmaps" );
 }  
 
 #-#######################
 # gtk widgets wrappers
 #-#######################
 
+sub gtkcan_default            { $_[0]->can_default($_[1]); $_[0] }
 sub gtkdestroy                { $_[0] and $_[0]->destroy }
 sub gtkflush                  { Gtk->main_iteration while Gtk->events_pending }
+sub gtkgrab_default           { $_[0]->grab_default(); $_[0] }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
 sub gtkpack                   { gtkpowerpack(1, 1, @_) }
@@ -55,11 +58,13 @@ sub gtkresize                 { $_[0]->window->resize($_[1], $_[2]); $_[0] }
 sub gtkset_active             { $_[0]->set_active($_[1]); $_[0] }
 sub gtkset_border_width       { $_[0]->set_border_width($_[1]); $_[0] }
 sub gtkset_editable           { $_[0]->set_editable($_[1]); $_[0] }
+sub gtkset_menu               { $_[0]->set_menu($_[1]); $_[0] }
 sub gtkset_justify            { $_[0]->set_justify($_[1]); $_[0] }
 sub gtkset_layout             { $_[0]->set_layout($_[1]); $_[0] }
 sub gtkset_modal              { $_[0]->set_modal($_[1]); $_[0] }
 sub gtkset_mousecursor_normal { gtkset_mousecursor(68, @_) }
 sub gtkset_mousecursor_wait   { gtkset_mousecursor(150, @_) }
+sub gtkset_position           { $_[0]->set_position($_[1]); $_[0] }
 sub gtkset_relief             { $_[0]->set_relief($_[1]); $_[0] }
 sub gtkset_sensitive          { $_[0]->set_sensitive($_[1]); $_[0] }
 sub gtkset_visibility         { $_[0]->set_visibility($_[1]); $_[0] }
@@ -68,6 +73,7 @@ sub gtkset_shadow_type        { $_[0]->set_shadow_type($_[1]); $_[0] }
 sub gtkset_style              { $_[0]->set_style($_[1]); $_[0] }
 sub gtkset_usize              { $_[0]->set_usize($_[1],$_[2]); $_[0] }
 sub gtkshow                   { $_[0]->show; $_[0] }
+sub gtkshow_all               { $_[0]->show_all; $_[0] }
 sub gtksize                   { $_[0]->size($_[1],$_[2]); $_[0] }
 sub gtkexpand                 { $_[0]->expand; $_[0] }
 
@@ -276,40 +282,28 @@ sub create_box_with_title {
     }
 }
 
-# drakfloppy / logdrake
 sub create_dialog {
-    my ($label, $c) = @_;
+    my ($title, $label, $ok, $cancel) = @_;
     my $ret = 0;
     my $dialog = new Gtk::Dialog;
     $dialog->signal_connect (delete_event => sub { Gtk->main_quit() });
-    $dialog->set_title(_("logdrake"));
+    $dialog->set_title($title);
     $dialog->border_width(10);
-    $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
+    $dialog->set_position(1);
+    gtkpack($dialog->vbox, $label);
 
-    my $button = new Gtk::Button _("OK");
-    $button->can_default(1);
-    $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy(); Gtk->main_quit() });
-    $dialog->action_area->pack_start($button, 1, 1, 0);
-    $button->grab_default;
-
-    if ($c) {
-	my $button2 = new Gtk::Button _("Cancel");
-	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy(); Gtk->main_quit() });
-	$button2->can_default(1);
-	$dialog->action_area->pack_start($button2, 1, 1, 0);
-    }
+    $ok and gtkpack($dialog->action_area,
+	      gtksignal_connect(gtkgrab_default(gtkcan_default(new Gtk::Button($ok), 1)),
+				clicked => sub { $ret = 1; Gtk->main_quit() }));
+    
+    $cancel and gtkpack($dialog->action_area,
+	      gtksignal_connect(gtkgrab_default(gtkcan_default(new Gtk::Button($cancel), 1)),
+				clicked => sub { $ret = 0; Gtk->main_quit() }));
 
     $dialog->show_all;
     Gtk->main();
+    $dialog and $dialog->destroy();
     $ret;
-}
-
-# drakfloppy / logdrake
-sub destroy_window {
-	my($widget, $windowref, $w2) = @_;
-	$$windowref = undef;
-	$w2 = undef if defined $w2;
-	0;
 }
 
 sub create_hbox { gtkset_layout(gtkset_border_width(new Gtk::HButtonBox, 3), $_[0] || 'spread') }
@@ -364,10 +358,10 @@ sub createScrolledWindow {
     $policy ||= [ 'automatic', 'automatic'];
     $w->set_policy(@{$policy});
     if(member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text))) {
-       $w->add($W)
+        $w->add($W)
     } else {
-       $w->add_with_viewport($W);
-       $viewport_shadow and gtkset_shadow_type($w->child, $viewport_shadow);
+        $w->add_with_viewport($W);
+        $viewport_shadow and gtkset_shadow_type($w->child, $viewport_shadow);
     }
     $W->can("set_focus_vadjustment") and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
@@ -603,9 +597,21 @@ sub gtkicons_labels_widget {
     }
     my $fixed = new Gtk::Fixed;
     foreach (@tab) { $fixed->put($_, 75, 65) }
+    my $is_resized = 0;
     my $w_ret = createScrolledWindow($fixed, undef, 'none');
     my $redraw_function;
     $redraw_function = sub { 
+	if ($is_resized == 0) {
+		if (3 < $#args) {
+			#- Ugly hacks, don't touch! ########
+			my $timeout1 = Gtk->timeout_add(100, sub {
+					$fixed->set_usize($w_ret->allocation->[2] - 22, 0);
+					&$redraw_function;
+					0
+			});
+		}
+		$is_resized = 1;
+	}
 	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2]-22, $fixed->allocation->[3], 40, 15, 20, @tab);
     };
     $fixed->signal_connect(expose_event => $redraw_function);
@@ -652,6 +658,77 @@ sub write_on_pixmap {
 						 &$draw();
 					     });
     $darea;
+}
+
+#-#######################
+# libconf public routines
+#-#######################
+
+sub create_edit_widgets_file {
+    my ($confStruct) = @_;
+    require Data::Dumper;
+    print " pp : " . Data::Dumper->Dump([$confStruct],['confStruct']) . "\n";
+    gtkpack_(new Gtk::VBox(0,0),
+	     0, "filename : $confStruct->{filename}",
+	     1, createScrolledWindow(gtkpack__(new Gtk::VBox(0,20),
+					       map { build_edit_widget_atom($_) } @{$confStruct->{atoms}},
+					      ), undef, 'none'
+				    ),
+	    );
+}
+
+sub build_edit_widget_atom {
+    my ($hash, $exec_func) = @_;
+    require Data::Dumper;
+    if ($hash->{type} eq 'KEY_VALUE') {
+	my $entry;
+	gtkpack__(new Gtk::VBox(0, 5),
+		  gtkpack__(new Gtk::VBox(0, 0),
+			    $hash->{comments} ?
+			    @{$hash->{comments}} > 3 ?
+			    createScrolledWindow(gtktext_insert(new Gtk::Text, join("\n", @{$hash->{comments}})), undef, 'none') :
+			    map {gtkpack__(new Gtk::HBox(0,0), $_)} @{$hash->{comments}}
+			    : (),
+			   ),
+		  gtkpack__(new Gtk::HBox(0,5),
+			    gtkset_justify(new Gtk::Label($hash->{key}),1), 
+			    gtksignal_connect($entry = gtkentry($hash->{value}),
+					      focus_out_event => $exec_func, $hash,
+					     ),
+			   )
+		 )
+    }
+}
+
+my $libconf_fill_tree_idx;
+sub create_conf_tree {
+    my ($confStruct, $exec_func, $viewport_shadow) = @_;
+    $libconf_fill_tree_idx = 0;
+    createScrolledWindow(libconf_fill_tree($confStruct->{atoms}, $exec_func), undef, $viewport_shadow);
+}
+
+#-#######################
+# libconf private routines
+#-#######################
+
+sub libconf_fill_tree {
+    my ($list, $exec_func, $section) = @_;
+    my $tree = new Gtk::Tree();
+    my @tab = @$list;
+    my $continue = 1;
+    for (;$libconf_fill_tree_idx<@tab && $continue;$libconf_fill_tree_idx++) {
+	if ($tab[$libconf_fill_tree_idx]->{type} eq 'KEY_VALUE') {
+	    $tree->append( gtksignal_connect(create_treeitem($tab[$libconf_fill_tree_idx]->{key}),
+					     select => sub { $exec_func->($_[1]) }, $tab[$libconf_fill_tree_idx] ));
+ 	} elsif ($tab[$libconf_fill_tree_idx]->{type} eq 'SECTION') {
+	    $section and $libconf_fill_tree_idx--, last;
+	    print " ############# SECTION : $libconf_fill_tree_idx " . $tab[$libconf_fill_tree_idx]->{name} . "\n";
+ 	    $tree->append(my $item = create_treeitem($tab[$libconf_fill_tree_idx]->{name}));
+	    $libconf_fill_tree_idx++;
+ 	    $item->set_subtree(libconf_fill_tree(\@tab, $exec_func, 1));
+	}
+    }
+    gtkshow_all($tree);
 }
 
 #-#######################
@@ -707,9 +784,6 @@ sub gtkctree_children {
     @l;
 }
 
-
-
-
 sub gtkpowerpack {
     #- Get Default Attributes (if any). 2 syntaxes allowed :
     #- gtkpowerpack( {expand => 1, fill => 0}, $box...) : the attributes are picked from a specified hash ref
@@ -736,7 +810,7 @@ sub gtkpowerpack {
 	my $RefAttrs;
 	ref($_[0]) eq 'HASH' || ref($_[0]) eq 'ARRAY' and $RefAttrs = shift;
 	foreach ("expand", "fill", "padding", "pack_end") {
-	    if ($RefDefaultAttrs->{$_} eq 'arg') {
+	    if (defined $RefDefaultAttrs->{$_} && $RefDefaultAttrs->{$_} eq 'arg') {
 		ref ($_[0]) and die "error in packing definition\n";
 		$attr{$_} = shift;
 		ref($RefAttrs) eq 'ARRAY' and shift @$RefAttrs;
