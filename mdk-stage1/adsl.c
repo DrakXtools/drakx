@@ -102,8 +102,11 @@ static enum return_type adsl_connect(char * net_device, char * username, char * 
 	}
 
 	if (status != RETURN_OK) {
-		kill(ppp_pid, SIGTERM);
 		log_message("PPP: could not connect");
+		kill(ppp_pid, SIGTERM);
+		sleep(1);
+		kill(ppp_pid, SIGKILL);
+		sleep(1);
 	}
 	return status;
 }
