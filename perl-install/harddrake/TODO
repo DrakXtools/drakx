@@ -2,9 +2,7 @@
 
 * Harddrake TODO:
 ** fixes
-*** if no file don't run configurator
-*** don't offer to run configurator if empty hash (aka first boot)
-*** IDE, SCSI: bus => bus_id, bus="IDE/SCSI"
+*** IDE, SCSI: bus => bus_id, bus="IDE/SCSI" => move into DrakX
 *** SCSI: get vendor string
 *** timeout on dialogs in service
 *** mouse.pm: only probe serial if :
@@ -23,7 +21,14 @@
 
 *** mode neuneu/expert => automatic/tools
 
+** voir dadou -> interface
+
 ** missing
+*** check4modem
+*** subsys ... for sysv boot
+*** su support
+*** config module => expert only
+*** mode expert => oui/non (cf dadou)
 *** add updfstab
 *** make all drakx tools a simple one-liner that call right module so that
     harddrake2 and mcc can load these tools without more ram eater
@@ -39,7 +44,6 @@
 
 ** ensure scannerdrake use is ok (=> yvounet)
 
-
 * Postponed
 ** use fbgtk+2 when booting on fbcon for smoother GUI
 *** pixel, convert perl-GTK to gtk+2 :-)
@@ -54,13 +58,11 @@
 
 
 * / no hope / useless :
-** don't die when one icon is missing ?
 ** Once we've swtiched to perl-5.8, consider doing:
     use Storable;
     retrieve %oldconfig
     store %config, $previous_conf;
 
-** move som subs into detect_devices.pm
 ** enable a string to be passed as detector; in that case, do ourself the =~
 ** alter detect_devices in order to only probe one time
 ** detect *ALL* mouses if more than one (mousedrake?)
