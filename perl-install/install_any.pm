@@ -581,9 +581,13 @@ sub g_default_packages {
 
     my $floppy = detect_devices::floppy();
 
-    $o->ask_okcancel('', _("Insert a FAT formatted floppy in drive %s", $floppy), 1) or return;
+    while (1) {
+	$o->ask_okcancel('', _("Insert a FAT formatted floppy in drive %s", $floppy), 1) or return;
 
-    fs::mount(devices::make($floppy), "/floppy", "vfat", 0);
+	eval { fs::mount(devices::make($floppy), "/floppy", "vfat", 0) };
+	last if !$@;
+	$o->ask_warn('', _("This floppy is not FAT formatted"));
+    }
 
     require Data::Dumper;
     output('/floppy/auto_inst.cfg', 
