@@ -386,7 +386,7 @@ END
 'OK'
 END
     }
-    print CHAT <<END
+    print CHAT <<END;
 'ATDT$toreplace{phone}'
 'CONNECT' ''
 END
