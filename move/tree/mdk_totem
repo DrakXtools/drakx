@@ -28,8 +28,7 @@ sub busy_pids_and_files() {
 sub remove_simple_daemons {
     my (@busy) = @_;
     foreach (@busy) {
-	$_->{to_restart} = 'kdeinit kicker' if $_->{cmdline} =~ m!\b(kicker)\b!;
-	$_->{to_kill} = $_->{cmdline} =~ m!\b(kdesud|kded|kio_uiserver|klaptopdaemon|artsd|portmap)\b!;
+	$_->{to_kill} = $_->{cmdline} =~ m!\b(kdesud|kded|kdesktop|kicker|kio_uiserver|klaptopdaemon|artsd|portmap)\b!;
     }
     my @auto_killed = grep { $_->{to_restart} || $_->{to_kill} } @busy;
 
@@ -115,5 +114,6 @@ if (my $pid = fork()) {
     exec 'sudo', 'mdk_behind_totem', 
 	'--boot-loop', $file2loop{'live_tree_boot.clp'},
 	'--main-loop', $file2loop{'live_tree.clp'},
-	'--totem-pid', $totem_pid;
+	'--totem-pid', $totem_pid,
+	'--user', $ENV{USER};
 }

@@ -19,6 +19,11 @@ while [ -n "$1" ]; do
             shift
 	    shift
 	;;
+	--user)
+            USER="$2"
+            shift
+	    shift
+	;;
 	*)
             ok=''
 	    shift
@@ -68,8 +73,10 @@ mount_cd() {
 
     mdk_move_loop to_cdrom always always_i18n totem nvidia
 
-    # tell kicker that it should refetch menu's icons
-    dcop kicker ksycoca notifyDatabaseChanged '(' ')'
+    # restore killed kde apps
+    su -c kded $USER
+    su -c kicker $USER
+    su -c kdesktop $USER
 }
 
 while [ -e "/proc/$totem_pid" ]; do
