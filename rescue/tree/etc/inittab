@@ -6,7 +6,7 @@ si::sysinit:/etc/rc.sysinit
 re:6:wait:/etc/rc.reboot
 ca:12345:ctrlaltdel:/sbin/fakeshutdown
 
-1:12345:respawn:/bin/bash --login
+1:12345:respawn:/sbin/mingetty --autologin root tty1
 2:23:respawn:/sbin/mingetty tty2
 3:23:respawn:/sbin/mingetty tty3
 4:23:respawn:/sbin/mingetty tty4
