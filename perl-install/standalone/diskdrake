@@ -49,8 +49,8 @@ while (my $e = shift @l) {
 	$options{$option} = '';
     }
 }
-$::expert = delete $options{expert};
-$::testing = delete $options{testing};
+$::expert = defined(delete $options{expert});
+$::testing = defined(delete $options{testing});
 
 my @types = qw(hd nfs smb removable fileshare);
 my ($type, $para) = ('hd', '');
