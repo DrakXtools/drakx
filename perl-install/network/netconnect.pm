@@ -76,7 +76,7 @@ sub detect_timezone() {
       my $intf  = $o_intf  || {};
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
-      my (%connection_steps, %connections, %rconnections, @connection_list);
+      my (%connections, %rconnections, @connection_list);
       my ($modem, $ntf_name, $ipadr, $netadr, $gateway_ex, $up, $modem, $isdn, $isdn_type, $adsl_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -110,22 +110,14 @@ sub detect_timezone() {
 
       my $first_modem = sub { first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}}) };
 
-      my $next_cnx_step = sub {
-          my $next = $connection_steps{$cnx_type};
-          # FIXME: we want this in standalone mode too:
-          $need_restart_network = 1 if $next =~ /lan|cable/;
-          if ($next eq "multiple_internet_cnx") {
-              return 1 < scalar(keys %{$netc->{internet_cnx}}) ? "multiple_internet_cnx" : $connection_steps{multiple_internet_cnx};
-          }
-          return $next;
-      };
-
       my $handle_multiple_cnx = sub {
+          $need_restart_network = 1 if $netcnx->{type} =~ /lan|cable/;
           my $nb = keys %{$netc->{internet_cnx}};
           if (1 < $nb) {
+              return "multiple_internet_cnx";
           } else {
               $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
-              return $::isInstall ? "network_on_boot" : "apply_settings"
+              return $::isInstall ? "network_on_boot" : "apply_settings";
           }
       };
     
@@ -240,7 +232,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                    {
                     name => N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.",
                               translate($type), N("Next")),
-                    post => $next_cnx_step,
+                    post => $handle_multiple_cnx,
                    },
 
                  
@@ -483,7 +475,7 @@ killall pppd
                     post => sub {
                         network::modem::ppp_configure($in, $netc, $modem);
                         $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
-                        $next_cnx_step->();
+                        $handle_multiple_cnx->();
                     },
                    },
          
