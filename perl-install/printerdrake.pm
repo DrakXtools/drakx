@@ -1144,9 +1144,9 @@ sub setup_default_spooler {
 			    $printer::spooler_inv{$printer->{SPOOLER}},
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
+    # Install the spooler if not done yet
+    install_spooler($printer, $in);
     if ($printer->{SPOOLER} ne $oldspooler) {
-	# Install the spooler if not done yet
-	install_spooler($printer, $in);
 	# Get the queues of this spooler
         printer::read_configured_queues($printer);
 	# Copy queues from former spooler
