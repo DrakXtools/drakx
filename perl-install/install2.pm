@@ -23,7 +23,6 @@ use run_program;
 use any;
 use log;
 use fs;
-#-$::corporate=1;
 
 
 #-#######################################################################################
@@ -403,7 +402,6 @@ sub main {
 	    newt      => sub { $o->{interactive} = "newt" },
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
-	    corporate => sub { $::corporate = 1 },
 	    kickstart => sub { $::auto_install = $v },
 	    uml_install => sub { $::uml_install = 1 },
 	    auto_install => sub { $::auto_install = $v },
@@ -587,7 +585,6 @@ sub main {
 
     if (!$::move && !$::testing) {
 	my $VERSION = cat__(install_any::getFile("VERSION")) or do { print "VERSION file missing\n"; sleep 5 };
-	$::corporate = 1 if $VERSION =~ /corporate/i;
 	$o->{meta_class} = 'desktop' if $VERSION =~ /desktop|discovery/i;
 	$o->{meta_class} = 'download' if $VERSION =~ /download/i;
 	$o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;

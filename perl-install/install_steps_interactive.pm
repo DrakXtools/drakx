@@ -428,7 +428,7 @@ sub choosePackages {
     undef $w;
 
   chooseGroups:
-    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate && $o->{meta_class} ne 'desktop';
+    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && $o->{meta_class} ne 'desktop';
 
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
@@ -1161,7 +1161,7 @@ sub setRootPassword {
 	 messages => N("Set root password"),
 	 advanced_messages => authentication::kind2description(),
 	 interactive_help_id => "setRootPassword",
-	 cancel => ($o->{security} <= 2 && !$::corporate ? 
+	 cancel => ($o->{security} <= 2 ? 
 		    #-PO: keep this short or else the buttons will not fit in the window
 		    N("No password") : ''),
 	 focus_first => 1,

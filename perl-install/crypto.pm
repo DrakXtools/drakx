@@ -57,7 +57,7 @@ sub mirrors {
 	local $SIG{ALRM} = sub { die "timeout" };
 	alarm 60;
 	my $distro_type = $o_distro_type || 'updates';
-	my $sub_dir = $distro_type =~ /cooker|community/ ? '' : ($::corporate ? '/corporate' : '') . '/' . version();
+	my $sub_dir = $distro_type =~ /cooker|community/ ? '' : '/' . version();
 	foreach (<$f>) {
 	    my ($arch, $url, $dir) = m|$distro_type([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
