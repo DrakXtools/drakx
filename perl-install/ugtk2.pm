@@ -772,6 +772,7 @@ sub new {
 			log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 			$::expert = !$::expert;
 		    }
+		    0;
 		});
 	    } else {
 		my $draw1 = Gtk2::DrawingArea->new;
@@ -1214,7 +1215,7 @@ sub ask_browse_tree_info_given_widgets {
     $w->{tree}->signal_connect(key_press_event => sub {
 	my $c = chr($_[1]->keyval & 0xff);
 	$toggle->(0) if $_[1]->keyval >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
-	1;
+	0;
     });
     $w->{tree}->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
