@@ -350,7 +350,7 @@ sub get_descr_from_ppd {
     my %ppd;
 
     #- if there is no ppd, this means this is the PostScript generic filter.
-    local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return "PostScript";
+    local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return "Generic PostScript";
     foreach (<F>) {
 	/^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
 	/^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and do { $ppd{$1} = $2; next };

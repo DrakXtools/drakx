@@ -461,7 +461,7 @@ configurePrinterLPR =>
 __("You need to enter some informations here.
 
 
-   * Name of queue: the print spooler uses "lp" as default printer name. So, you need have a printer named \"lp\".
+   * Name of queue: the print spooler uses \"lp\" as default printer name. So, you need have a printer named \"lp\".
     If you have only one printer, you can use several names for it. You just need to separate them by a pipe
     character (a \"|\"). So, if you prefer to have a more meaningful name, you have to put it first, eg: \"My printer|lp\".
     The printer having \"lp\" in its name(s) will be the default printer.
