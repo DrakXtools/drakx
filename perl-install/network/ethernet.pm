@@ -52,6 +52,7 @@ sub get_eth_cards {
         my $interface = $_;
         my $description;
         my $a = c::getNetDriver($interface) || $modules_conf->get_alias($interface);
+        $a = "eth1394" if $a eq "ip1394";
         if (my $b = find { $_->{device} eq $interface } @devs) { # PCMCIA case
             $a = $b->{driver};
             $description = $b->{description};
