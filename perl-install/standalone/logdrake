@@ -116,14 +116,14 @@ my $darkgray = gtkcolor(0x2F2F, 0x4F4F, 0x4F4F);
 # Define good notables:
 my @word_good = ("starting\n", "Freeing", "Detected", "starting.", "accepted.\n", "authenticated.\n", "Ready", "active", "reloading", "saved;", "restarting", "ONLINE\n");
 my @word_warn = ("dangling", "closed.\n", "Assuming", "root", "root\n", "exiting\n", "missing", "Ignored", "adminalert:", "deleting", "OFFLINE\n");
-my @word_bad = ("bad");
+my @word_bad = "bad";
 my @word_note = ("LOGIN", "DHCP_OFFER", "optimized", "reset:", "unloaded", "disconnected", "connect", "Successful", "registered\n");
 my @line_good = ("up", "DHCP_ACK", "Cleaned", "Initializing", "Starting", "success", "successfully", "alive", "found", "ONLINE\n");
 my @line_warn = ("warning:", "WARNING:", "invalid", "obsolete", "bad", "Password", "detected", "timeout", "timeout:", "attackalert:", "wrong", "Lame", "FAILED", "failing", "unknown", "obsolete", "stopped.\n", "terminating.", "disabled\n", "disabled", "Lost");
 my @line_bad = ("DENY", "lost", "shutting", "dead", "DHCP_NAK", "failure;", "Unable", "inactive", "terminating", "refused", "rejected", "down", "OFFLINE\n", "error\n", "ERROR\n", "ERROR:", "error", "ERROR", "error:", "failed:");
 
 # Define specifics:
-my @daemons = ("named");
+my @daemons = "named";
 
 # Now define what we want to use when:
 my $col_good = 'green4';
@@ -290,7 +290,7 @@ sub parse_file {
       if (!  /$en/i and /$ey/i)     { logcolorize($_); next }
       if (!  /$en/i and $ey eq "")  { logcolorize($_); next }
   }
-  $win_pb->destroy() unless $::isEmbedded && $::isExplain;
+  $win_pb->destroy() if !$::isEmbedded || !$::isExplain;
 
   if ($::isTail) {
       close F;
@@ -311,6 +311,7 @@ sub input_callback  {
 ##########################################################################################
 
 sub logcolorize {
+    local $_ = shift; #my ($data) = @_;
 
     # we get date & time if it is date & time (dmesg)
     s/(\D{3} .. (\d\d:\d\d:\d\d ))//;
