@@ -50,13 +50,9 @@ sub spooler {
     # LPRng is not officially supported any more since Mandrake 9.0, so
     # show it only in the spooler menu when it was manually installed.
     my @res;
-    if (files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd))) {
-        foreach (qw(cups lprng pdq)) { push @res, $spooler_inv{$_}{long_name} };
-#        {qw(cups lprng pdq)}{long_name};
-    } else {
-        foreach (qw(cups pdq)) { push @res, $spooler_inv{$_}{long_name} };
-#	return spooler_inv{qw(cups pdq)}{long_name};
-    }
+    my @spoolers = qw(cups pdq);
+    push @spoolers, 'lprng' if files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd));
+    push @res, $spooler_inv{$_}{long_name} foreach @spoolers;
     return @res;
 }
 
@@ -91,7 +87,7 @@ sub SIGHUP_daemon {
 			    "devfs" => "devfsd",
 			    );
     my $daemon = $daemons{$service};
-    $daemon = $service if ! defined $daemon;
+    $daemon = $service unless defined $daemon;
 #    if ($service eq "cups") {
 #	# The current CUPS (1.1.13) dies on SIGHUP, do the normal restart.
 #	printer::services::restart($service);
@@ -1330,7 +1326,7 @@ sub configure_hpoj {
 	    close F;
 	    if ($devid) {
 		$device_ok = 1;
-                local *F;
+          local *F;
 		if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -mdl 2>/dev/null |") {
 		    $model_long = join("", <F>);
 		    close F;
@@ -1350,9 +1346,7 @@ sub configure_hpoj {
 		    close F;
 		    chomp $serialnumber_long;
 		}
-		if (cardReaderDetected($ptalprobedevice)) {
-		    $cardreader = 1;
-		}
+		$cardreader = 1 if cardReaderDetected($ptalprobedevice);
 	    }
 	}
 	if ($bus ne "hpjd") {
@@ -1574,9 +1568,7 @@ mtools_skip_check=1
 	$mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*\"([A-Za-z ]*)\"/m;
 	my $alloweddrives = lc($1);
 	foreach my $letter ("p", "q", "r", "s") {
-	    if ($alloweddrives !~ /$letter/) {
-		$alloweddrives .= $letter;
-	    }
+         $alloweddrives .= $letter if $alloweddrives !~ /$letter/;
 	}
 	$mtoolsfmconf =~ s/^\s*DRIVES\s*=\s*\"[A-Za-z ]*\"/DRIVES=\"$alloweddrives\"/m;
 	$mtoolsfmconf =~ s/^\s*LEFTDRIVE\s*=\s*\"[^\"]*\"/LEFTDRIVE=\"p\"/m;
