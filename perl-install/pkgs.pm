@@ -588,7 +588,7 @@ sub install($$$;$) {
 	                       $p->{name}, $p->{version}, $p->{release},
 			       c::headerGetEntry(getHeader($p), 'arch');
 	$packages{$p->{name}} = $p;
-	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $isUpgrade && ($useOnlyUpgrade || $p->{name} !~ /kernel/)); #- TODO: replace `named kernel' by `provides kernel'
+	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $isUpgrade && $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
 	$total += $p->{size};
     }
