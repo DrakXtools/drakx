@@ -530,6 +530,13 @@ sub ask_fromW {
 
 		$w->set_popdown_strings(@formatted_list);
 		($real_w, $w) = ($w, $w->entry);
+
+		#- FIXME workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
+		my $idle;
+		$w->signal_connect(changed => sub {
+		    $idle ||= Gtk2->idle_add(sub { undef $idle; $changed->(); 0 });
+		});
+
 		$set = sub {
 		    my $s = may_apply($e->{format}, $_[0]);
 		    $w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
@@ -545,13 +552,13 @@ sub ask_fromW {
 		$width = $l[@l / 16]; # take the third octile (think quartile)
 	    } else {
                 $w = Gtk2::Entry->new;
+		$w->signal_connect(changed => $changed);
 		$w->signal_connect(focus_in_event => sub { $w->select_region(0, -1) });
 		$w->signal_connect(focus_out_event => sub { $w->select_region(0, 0) });
 		$set = sub { $w->set_text($_[0]) if $_[0] ne $w->get_text };
 		$get = sub { $w->get_text };
 	    }
 	    $w->signal_connect(key_press_event => $may_go_to_next);
-	    $w->signal_connect(changed => $changed);
 	    $w->set_visibility(0) if $e->{hidden};
 	}
 	$w->signal_connect(focus_out_event => sub { 
