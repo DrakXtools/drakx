@@ -448,7 +448,8 @@ sub make_nbis() {
 	my $buff = N("Creating net boot images for all kernels");
 	$in->ask_warn(N("Information"), N("This will take a few minutes."));
 	cursor_wait();
-	system("/usr/bin/mknbi-set");
+	my @kernels = grep { /vmlinuz-/ } all("/boot");
+	system("/usr/bin/mknbi-set -k /boot/$_") foreach @kernels;
 	cursor_norm();
 	$buff .= "\n\n\t" . N("Done!");	
 	text_view($buff, "wizard");
