@@ -90,6 +90,7 @@ our %alsa2oss =
      "snd-opti92x-ad1848" => [ "unknown" ], # isa
      "snd-opti92x-cs4231" => [ "unknown" ], # isa
      "snd-opti93x" => [ "mad16" ],
+     "snd-pcxhr"   => [ "unknown" ], # pci
      "snd-rme32"   => [ "unknown" ], # isa
      "snd-rme96"   => [ "rme96xx" ], # pci
      "snd-rme9652" => [ "rme96xx" ], # pci
