@@ -27,7 +27,7 @@ my $has_nvaudio = -x '/lib/modules/' . c::kernel_version() . '/';
 
 our %alsa2oss = 
     (
-     if_(arch() =~ /ppc/, "snd-powermac" => [ "unknown" ]),
+     if_(arch() =~ /ppc/, "snd-powermac" => [ "dmasound_pmac" ]),
      if_(arch() =~ /sparc/, "snd-sun-amd7930" => [ "unknown" ]),
      if_(arch() =~ /sparc/, "snd-sun-cs4231" => [ "unknown" ]),
      "snd-ad1816a" => [ "ad1816" ], # isa
@@ -95,12 +95,12 @@ our %alsa2oss =
      "snd-vxpocket" => [ "unknown" ], # pcmcia
      "snd-wavefront" => [ "wavefront" ], # isa
      "snd-ymfpci"  => [ "ymfpci" ],
-     "snd-powermac" => [ "dmasound_pmac" ], # mac
      );
 
 
 our %oss2alsa = 
     (
+     if_(arch() =~ /ppc/, "dmasound_pmac" => [ "snd-powermac" ]),
      "ad1816"  => [ "snd-ad1816a" ],
      "ad1848"  => [ "snd-ad1848", "snd-cs4236" ],
      "ad1889"  => [ "unknown" ],
@@ -143,7 +143,6 @@ our %oss2alsa =
      "via82cxxx_audio" => [ "snd-via82xx" ],
      "wavefront" => [ "snd-wavefront" ],
      "ymfpci"  => [ "snd-ymfpci" ],
-     "dmasound_pmac" => [ "snd-powermac" ], # mac
      );
 
 my @blacklist = qw(cs46xx cs4281);
