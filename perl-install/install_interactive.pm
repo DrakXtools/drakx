@@ -82,7 +82,7 @@ sub partitionWizardSolutions {
     my (%solutions);
 
     my $min_linux = 400 << 11;
-    my $max_linux = 3000 << 11;
+    my $max_linux = 2000 << 11;
     my $min_swap = 50 << 11;
     my $max_swap = 300 << 11;
     my $min_freewin = 100 << 11;
