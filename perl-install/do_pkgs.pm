@@ -9,21 +9,16 @@ sub do_pkgs {
 package do_pkgs_common;
 use common;
 
-sub new {
-    my ($type, $in) = @_;
-    bless { in => $in }, $type;
-}
-
 sub ensure_is_installed {
     my ($do, $pkg, $o_file, $b_auto) = @_;
 
     if (! $o_file || ! -e "$::prefix$o_file") {
-	$do->{in}->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$b_auto;
 	$do->install($pkg) or return;
     }
     if ($o_file && ! -e "$::prefix$o_file") {
-	$do->{in}->ask_warn('', N("Mandatory package %s is missing", $pkg));
+	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg));
 	return;
     }
     1;
@@ -52,6 +47,11 @@ sub new {
     my ($type, $in) = @_;
     require pkgs;
     bless { in => $in, o => $::o }, $type;
+}
+
+sub in {
+    my ($do) = @_;
+    $do->{in};
 }
 
 sub install {
@@ -130,6 +130,20 @@ use log;
 
 our @ISA = qw(do_pkgs_common);
 
+sub new {
+    my ($type, $o_in) = @_;
+    bless { in => $o_in }, $type;
+}
+
+sub in {
+    my ($do) = @_;
+    $do->{in} ||= do {
+	require interactive;
+	interactive->vnew;
+    };
+    $do->{in};
+}
+
 sub install {
     my ($do, @l) = @_;
 
@@ -140,11 +154,11 @@ sub install {
 	return 1;
     }
 
-    my $_wait = $do->{in}->wait_message('', N("Installing packages..."));
-    $do->{in}->suspend;
+    my $_wait = $do->in->wait_message('', N("Installing packages..."));
+    $do->in->suspend;
     log::explanations("installed packages @l");
     my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', '--no-verify-rpm', @l) == 0;
-    $do->{in}->resume;
+    $do->in->resume;
     $ret;
 }
 
@@ -214,11 +228,11 @@ sub are_installed {
 
 sub remove {
     my ($do, @l) = @_;
-    my $_wait = $do->{in}->wait_message('', N("Removing packages..."));
-    $do->{in}->suspend;
+    my $_wait = $do->in->wait_message('', N("Removing packages..."));
+    $do->in->suspend;
     log::explanations("removed packages @l");
     my $ret = system('rpm', '-e', @l) == 0;
-    $do->{in}->resume;
+    $do->in->resume;
     $ret;
 }
 
