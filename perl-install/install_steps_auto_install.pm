@@ -3,9 +3,11 @@ package install_steps_auto_install; # $Id$
 use diagnostics;
 use strict;
 use lang;
-use vars qw(@ISA $graphical);
+use vars qw(@ISA $graphical @graphical_steps);
 
 @ISA = qw(install_steps);
+
+@graphical_steps = qw(enteringStep installPackages);
 
 use modules;
 
@@ -22,8 +24,16 @@ sub new {
 
     if ($graphical) {
 	require install_steps_gtk;
-	undef *enteringStep; *enteringStep = \&install_steps_gtk::enteringStep;
-	undef *installPackages; *installPackages = \&install_steps_gtk::installPackages;
+	push @ISA, 'interactive_gtk';
+	foreach my $f (@graphical_steps) {
+	    no strict 'refs';
+	    my $pkg = $install_steps_gtk::{$f} ? 'install_steps_gtk' : 'install_steps_interactive';
+	    log::l("install_steps_auto_install: adding function ", $pkg, "::", $f);
+	    *{"install_steps_auto_install::$f"} = sub {
+		local @ISA = ('install_steps_gtk', @ISA);
+		&{$pkg . '::' . $f};
+	    };
+	}
 	goto &install_steps_gtk::new;
     } else {
 	(bless {}, ref $type || $type)->SUPER::new($o);
