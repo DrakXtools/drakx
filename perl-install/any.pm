@@ -731,6 +731,7 @@ sub selectLanguage {
 			    advanced_messages => formatAlaTeX(N("Mandrakelinux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
+			    advanced_state => 1,
 			    callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 },
                                            changed => sub {
                                                if ($last_utf8 == $in->{locale}{utf8}) {
