@@ -167,10 +167,6 @@ int configure_net_device(struct interface_info * intf)
 
 	intf->is_up = 1;
 
-	/* I need to sleep a bit in order for kernel to finish init of the
-           network device; if not, first sendto() will get an EINVAL */
-	sleep(2);
-	
 	return 0;
 }
 
@@ -421,6 +417,16 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	
 	if (configure_net_device(intf))
 		return RETURN_ERROR;
+
+	if (intf->boot_proto == BOOTPROTO_STATIC) {
+		/* I need to sleep a bit in order for kernel to finish
+		   init of the network device; if not, first sendto() for
+		   gethostbyaddr will get an EINVAL. */
+		wait_message("Bringing up networking...");
+		sleep(2);
+		remove_wait_message();
+	}
+
 	return add_default_route();
 }
 

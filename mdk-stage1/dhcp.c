@@ -175,8 +175,11 @@ static int initial_setup_interface(char * device, int s) {
 	}
 
 	/* I need to sleep a bit in order for kernel to finish init of the
-           network device */
+           network device; this would allow to not send further multiple
+           dhcp requests when only one is needed. */
+	wait_message("Bringing up networking...");
 	sleep(2);
+	remove_wait_message();
 
 	return 0;
 }
