@@ -638,7 +638,7 @@ wait %d seconds for default boot.
 	}
     }
     $bootloader->{default} ||= "linux";
-    $bootloader->{method} = first(method_choices($fstab, $bootloader));
+    $bootloader->{method} ||= first(method_choices($fstab, $bootloader));
 }
 
 sub detect_bootloader() {
