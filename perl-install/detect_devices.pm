@@ -59,6 +59,7 @@ sub burners { grep { isBurner($_->{device}) } cdroms() }
 sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } getIDE() }
 
 sub floppies() {
+    require modules;
     my @ide = map { $_->{device} } ls120s() and modules::load("ide-floppy");
     my @scsi = map { $_->{device} } usbfdus();
     (@ide, @scsi, grep { tryOpen($_) } qw(fd0 fd1));
@@ -179,6 +180,7 @@ sub probeall {
     my ($probe_type) = @_;
     require pci_probing::main;
     require sbus_probing::main;
+    require modules;
     pci_probing::main::probe($probe_type), sbus_probing::main::probe(), modules::get_pcmcia_devices();
 }
 sub matching_desc {
