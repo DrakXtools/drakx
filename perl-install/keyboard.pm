@@ -131,7 +131,7 @@ my %lang2keyboard =
   'uz\@Cyrl'  => 'uz:80 ru_yawerty:40',
   'uz\@Latn'  => 'us:80 uz:80',
   've'  => 'us_intl',
-  'vi'  => 'vn:80 us:60 us_intl:50',
+  'vi'  => 'vn:80 us:70 us_intl:60',
   'wa'  => 'be:90 fr:5',
   'xh'  => 'us_intl',
   'yi'  => 'il_phonetic:90 il:10 us_intl:10',
@@ -178,25 +178,24 @@ arch() =~ /^sparc/ ? (
  "am_old" => [ N_("Armenian (old)"), "am_old",	    "am(old)", 1 ],
  "am" => [ N_("Armenian (typewriter)"), "am-armscii8", "am",   1 ],
  "am_phonetic" => [ N_("Armenian (phonetic)"), "am_phonetic", "am(phonetic)",1 ],
- "ar" => [ N_("Arabic"),          "us",              "ar(digits)",   1 ],
- "az" => [ N_("Azerbaidjani (latin)"), "az",         "az",    0 ],
-#"a3" => [ N_("Azerbaidjani (cyrillic)"), "az-koi8k","az(cyrillic)",1 ],
+ "ar" => [ N_("Arabic"),          "us",             "ar(digits)",   1 ],
+ "az" => [ N_("Azerbaidjani (latin)"), "az",        "az",    0 ],
  "be" => [ N_("Belgian"),        "be2-latin1",      "be",    0 ],
- "ben" => [ N_("Bengali"),        "us",              "ben",   1 ],
+ "ben" => [ N_("Bengali"),        "us",             "ben",   1 ],
 "bg_phonetic" => [ N_("Bulgarian (phonetic)"), "bg", "bg(phonetic)", 1 ],
  "bg" => [ N_("Bulgarian (BDS)"), "bg",             "bg",    1 ],
- "br" => [ N_("Brazilian (ABNT-2)"), "br-abnt2",     "br",    0 ],
-#- Bosnia and Croatia use the same layout, but people are confused if there
-#- isn't an antry for their country
- "bs" => [ N_("Bosnian"),	 "croat",           "hr",    0 ],
+ "br" => [ N_("Brazilian (ABNT-2)"), "br-abnt2",    "br",    0 ],
+ "bs" => [ N_("Bosnian"),	 "croat",           "bs",    0 ],
  "by" => [ N_("Belarusian"),     "by-cp1251",       "by",    1 ],
+# old XKB layout
  "ch_de" => [ N_("Swiss (German layout)"), "sg-latin1", "de_CH", 0 ],
+# old XKB layout
  "ch_fr" => [ N_("Swiss (French layout)"), "fr_CH-latin1", "fr_CH", 0 ],
  "cz" => [ N_("Czech (QWERTZ)"), "cz",              "cz",    0 ],
  "cz_qwerty" => [ N_("Czech (QWERTY)"), "cz-lat2", "cz_qwerty", 0 ],
  "de" => [ N_("German"),         "de-latin1",       "de",    0 ],
  "de_nodeadkeys" => [ N_("German (no dead keys)"), "de-latin1-nodeadkeys", "de(nodeadkeys)", 0 ],
- "dev" => [ N_("Devanagari"),     "us",              "dev",   0 ],
+ "dev" => [ N_("Devanagari"),     "us",             "dev",   0 ],
  "dk" => [ N_("Danish"),         "dk-latin1",       "dk",    0 ],
  "dvorak" => [ N_("Dvorak (US)"), "pc-dvorak-latin1", "dvorak", 0 ],
  "dvorak_eo" => [ N_("Dvorak (Esperanto)"), "us",   "dvorak(eo)", 0 ],
@@ -213,6 +212,7 @@ arch() =~ /^sparc/ ? (
  "gr_pl" => [ N_("Greek (polytonic)"), "gr-8859_7", "el(polytonic)", 1 ],
  "guj" => [ N_("Gujarati"),       "us",              "guj",  1 ],
  "gur" => [ N_("Gurmukhi"),       "us",              "gur",  1 ],
+# old XKB layout
  "hu" => [ N_("Hungarian"),      "hu-latin2",       "hu",    0 ],
  "hr" => [ N_("Croatian"),	 "croat",           "hr",    0 ],
  "ie" => [ N_("Irish"),          "uk",              "ie",    0 ],
@@ -222,6 +222,7 @@ arch() =~ /^sparc/ ? (
  "is" => [ N_("Icelandic"),      "is-latin1",       "is",    0 ],
  "it" => [ N_("Italian"),        "it-latin1",       "it",    0 ],
  "iu" => [ N_("Inuktitut"),      "us",              "iu",    1 ],
+# old XKB layout
 # Japanese keyboard is dual latin/kana; but telling it here shows a
 # message to choose the switching key that is misleading, as input methods
 # aren't automatically enabled when typing in kana
@@ -233,10 +234,14 @@ arch() =~ /^sparc/ ? (
  "ky" => [ N_("Kyrgyz keyboard"), "ru",             "ky",    1 ],
  "la" => [ N_("Latin American"), "la-latin1",       "la",    0 ],
  "lao" => [ N_("Laotian"),	 "us",	            "lo",    1 ], 
+# old XKB layout
  "lt" => [ N_("Lithuanian AZERTY (old)"), "lt-latin7", "lt_a", 0 ],
+# old XKB layout
 #- TODO: write a console kbd map for lt_new
  "lt_new" => [ N_("Lithuanian AZERTY (new)"), "lt-latin7", "lt_std", 0 ],
+# old XKB layout
  "lt_b" => [ N_("Lithuanian \"number row\" QWERTY"), "ltb-latin7", "lt", 1 ],
+# old XKB layout
  "lt_p" => [ N_("Lithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt_p", 0 ],
  "lv" => [ N_("Latvian"),	 "lv-latin7",       "lv",    0 ],
  "mal" => [ N_("Malayalam"),	 "us",              "ml(mlplusnum)", 1 ],
@@ -247,14 +252,15 @@ arch() =~ /^sparc/ ? (
  "mt_us" => [ N_("Maltese (US)"), "us",             "mt_us", 0 ],
  "nl" => [ N_("Dutch"),          "nl-latin1",       "nl",    0 ],
  "no" => [ N_("Norwegian"),      "no-latin1",       "no",    0 ],
- "ori" => [ N_("Oriya"),          "us",              "ori",  1 ],
+ "ori" => [ N_("Oriya"),         "us",              "ori",   1 ],
  "pl" => [ N_("Polish (qwerty layout)"), "pl",      "pl",    0 ],
  "pl2" => [ N_("Polish (qwertz layout)"), "pl-latin2", "pl2", 0 ],
  "pt" => [ N_("Portuguese"),     "pt-latin1",       "pt",    0 ],
+# old XKB layout
  "qc" => [ N_("Canadian (Quebec)"), "qc-latin1", "ca_enhanced", 0 ],
 #- TODO: write a console kbd map for ro2
- "ro2" => [ N_("Romanian (qwertz)"), "ro2",         "ro2",   0 ],
- "ro" => [ N_("Romanian (qwerty)"), "ro",           "ro",    0 ],
+ "ro2" => [ N_("Romanian (qwertz)"), "ro2",         "ro",    0 ],
+ "ro" => [ N_("Romanian (qwerty)"), "ro",           "ro(us_ro)", 0 ],
  "ru" => [ N_("Russian"),        "ru4",             "ru(winkeys)", 1 ],
  "ru_yawerty" => [ N_("Russian (Phonetic)"), "ru-yawerty", "ru(phonetic)", 1 ],
  "sapmi" => [ N_("Saami (norwegian)"), "no-latin1",  "sapmi", 0 ],
@@ -274,7 +280,7 @@ arch() =~ /^sparc/ ? (
  "th" => [ N_("Thai keyboard"),  "th",              "th",    1 ],
 # TODO: console map
  "tj" => [ N_("Tajik keyboard"), "ru4",             "tj",    1 ],
- "tr_f" => [ N_("Turkish (traditional \"F\" model)"), "trf", "tr_f", 0 ],
+ "tr_f" => [ N_("Turkish (traditional \"F\" model)"), "trf", "tr(tr_f)", 0 ],
  "tr_q" => [ N_("Turkish (modern \"Q\" model)"), "tr_q-latin5", "tr", 0 ],
 #-"tw => [ N_("Chineses bopomofo"), "tw",           "tw",    1 ],
  "ua" => [ N_("Ukrainian"),      "ua",              "ua",    1 ],
@@ -282,6 +288,7 @@ arch() =~ /^sparc/ ? (
  "us" => [ N_("US keyboard"),    "us",              "en_US", 0 ],
  "us_intl" => [ N_("US keyboard (international)"), "us-latin1", "us_intl", 0 ],
  "uz" => [ N_("Uzbek (cyrillic)"), "uz.uni",         "uz",    1 ],
+# old XKB layout
  "vn" => [ N_("Vietnamese \"numeric row\" QWERTY"), "vn-tcvn", "vn(toggle)", 0 ], 
  "yu" => [ N_("Yugoslavian (latin)"), "sr",         "yu",    0 ],
 ),
