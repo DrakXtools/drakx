@@ -441,6 +441,9 @@ sub set_default_options {
 			       nosuid => 1, 'rsize=8192,wsize=8192' => 1, soft => 1,
 			      });
     }
+    if (isThisFs('smbfs', $part)) {
+	put_in_hash($options, { 'username=' => '%' });
+    }
     if (isFat($part) || $is_auto) {
 
 	put_in_hash($options, {
