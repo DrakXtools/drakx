@@ -574,8 +574,8 @@ sub getUPS() {
     (map {
         $_->{port} = $_->{DEVICE};
         $_->{bus} = "Serial";
-        $_->{driver} = "UPS:mge-utalk" if $_->{MODEL} =~ /0001/;
-        $_->{driver} = "UPS:mge-shut"  if $_->{MODEL} =~ /0002/;
+        $_->{driver} = "mge-utalk" if $_->{MODEL} =~ /0001/;
+        $_->{driver} = "mge-shut"  if $_->{MODEL} =~ /0002/;
         $_->{media_type} = 'UPS';
         $_->{description} = "MGE UPS SYSTEMS|UPS - Uninterruptible Power Supply" if $_->{MODEL} =~ /000[12]/;
         $_;
@@ -586,6 +586,7 @@ sub getUPS() {
           ($_->{name} = $_->{description}) =~ s/.*\|//;
           $_->{port} = "/dev/"; # FIXME
           $_->{media_type} = 'UPS';
+          $_->{driver} =~ s/^UPS://;
           $_;
       } grep { $_->{driver} =~ /ups$/ } @usb_devices);
 }
