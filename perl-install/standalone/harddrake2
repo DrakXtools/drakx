@@ -246,6 +246,8 @@ my @classes;
 foreach (@harddrake::data::tree) {
     my ($Ident, $title, $icon, $configurator, $detector) = @$_;
     next if ref($detector) ne "CODE"; #skip class witouth detector
+    # blacklist agp controllers b/c string is not yet translated:
+    next if $Ident eq 'AGP';
     next if $Ident =~ /(MODEM|PRINTER)/ && $::testing;
     next if $Ident =~ /JAZZ/ && !$options{JAZZ_DETECTION};
     next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
