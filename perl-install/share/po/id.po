@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-19 17:46+0700\n"
+"PO-Revision-Date: 2005-03-20 10:38+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -12896,7 +12896,7 @@ msgid ""
 msgstr ""
 "Tidak ada printer lokal yang ditemukan! Untuk menginstal printer secara "
 "manual masukkan nama divais/file pada baris masukan (Port Parallel: "
-"/dev/lp0, /dev/lp1, ..., "sebanding dengan LPT1:, LPT2:, ..., printer "
+"/dev/lp0, /dev/lp1, ..., sebanding dengan LPT1:, LPT2:, ..., printer "
 "USB pertama: /dev/usb/lp0, printer USB kedua: /dev/usb/lp1, ...)."
 
 #: printer/printerdrake.pm:1288
@@ -13002,13 +13002,13 @@ msgid ""
 "Please choose the port that your printer is connected to or enter a device "
 "name/file name in the input line"
 msgstr ""
-"Pilih port tempat printer Anda terhubung atau masukkan nama alat/file di "
-"baris masukan"
+"Pilih port yang digunakan oleh printer Anda atau masukkan nama "
+"divais/file pada baris masukan"
 
 #: printer/printerdrake.pm:1329
 #, c-format
 msgid "Please choose the port that your printer is connected to."
-msgstr "Pilihlah port tempat printer Anda terhubung."
+msgstr "Pilihlah port yang digunakan oleh printer Anda."
 
 #: printer/printerdrake.pm:1331
 #, c-format
@@ -13022,21 +13022,21 @@ msgstr ""
 #: printer/printerdrake.pm:1335
 #, c-format
 msgid "You must choose/enter a printer/device!"
-msgstr "Pilih/masukkan printer/device!"
+msgstr "Pilih/masukkan printer/divais!"
 
 #: printer/printerdrake.pm:1375 printer/printerdrake.pm:1437
 #: printer/printerdrake.pm:1527 printer/printerdrake.pm:1665
 #: printer/printerdrake.pm:1740 printer/printerdrake.pm:1892
 #: printer/printerdrake.pm:1978 printer/printerdrake.pm:1987
 #: printer/printerdrake.pm:1996 printer/printerdrake.pm:2007
-#, fuzzy, c-format
+#, c-format
 msgid "Aborting"
-msgstr "Batal"
+msgstr "Membatalkan"
 
 #: printer/printerdrake.pm:1410
 #, c-format
 msgid "Remote lpd Printer Options"
-msgstr "Pilihan printer lpd remote"
+msgstr "Opsi printer lpd remote"
 
 #: printer/printerdrake.pm:1411
 #, c-format
@@ -13044,8 +13044,8 @@ msgid ""
 "To use a remote lpd printer, you need to supply the hostname of the printer "
 "server and the printer name on that server."
 msgstr ""
-"Untuk memakai printer lpd remote, berikan nama host\n"
-"server printer dan nama printer di server tsb."
+"Untuk menggunakan printer lpd remote, Anda harus memberikan nama host"
+"dari server printer dan nama printer pada server tsb."
 
 #: printer/printerdrake.pm:1412
 #, c-format
@@ -13076,7 +13076,7 @@ msgstr "Nama printer remote hilang!"
 #: standalone/harddrake2:256
 #, c-format
 msgid "Information"
-msgstr "Info"
+msgstr "Informasi"
 
 #: printer/printerdrake.pm:1449 printer/printerdrake.pm:2025
 #, c-format
@@ -13086,22 +13086,22 @@ msgstr "Terdeteksi model: %s %s"
 #: printer/printerdrake.pm:1531 printer/printerdrake.pm:1785
 #, c-format
 msgid "Scanning network..."
-msgstr "Jaringan sedang di-scan..."
+msgstr "Memeriksa jaringan..."
 
 #: printer/printerdrake.pm:1543 printer/printerdrake.pm:1564
 #, c-format
 msgid ", printer \"%s\" on server \"%s\""
-msgstr ", printer \"%s\" di server \"%s\""
+msgstr ", printer \"%s\" pada server \"%s\""
 
 #: printer/printerdrake.pm:1546 printer/printerdrake.pm:1567
 #, c-format
 msgid "Printer \"%s\" on server \"%s\""
-msgstr "Printer \"%s\" di server \"%s\""
+msgstr "Printer \"%s\" pada server \"%s\""
 
 #: printer/printerdrake.pm:1588
 #, c-format
 msgid "SMB (Windows 9x/NT) Printer Options"
-msgstr "Pilihan printer SMB (windows 95/NT)"
+msgstr "Opsi printer SMB (windows 95/NT)"
 
 #: printer/printerdrake.pm:1589
 #, c-format
@@ -13111,10 +13111,10 @@ msgid ""
 "the print server, as well as the share name for the printer you wish to "
 "access and any applicable user name, password, and workgroup information."
 msgstr ""
-"Untuk mencetak ke printer SMB, berikan nama host SMB (Catatan! Mungkin "
-"berbeda dengan nama host TCP/IP) dan mungkin alamat IP server printer, nama "
-"share printer yang ingin Anda akses, juga nama pengguna, katasandi, dan info "
-"workgroup."
+"Untuk mencetak pada printer SMB, Anda harus memberikan nama host SMB "
+"(Catatan! Mungkin berbeda dengan nama host TCP/IP) dan mungkin "
+"alamat IP server printer, juga nama share printer yang ingin Anda "
+"akses, juga nama pengguna, katasandi, dan informasi workgroup."
 
 #: printer/printerdrake.pm:1590
 #, c-format
@@ -13122,8 +13122,9 @@ msgid ""
 " If the desired printer was auto-detected, simply choose it from the list "
 "and then add user name, password, and/or workgroup if needed."
 msgstr ""
-" Jika printer yg diinginkan terdeteksi, pilihlah dari daftar lalu tambahkan "
-"nama pengguna, katasandi, dan/atau grupkerja jika perlu."
+" Jika printer yang diinginkan terdeteksi secara otomatis, pilihlah dari "
+"daftar lalu tambahkan nama pengguna, katasandi, dan/atau workgroup "
+"jika diperlukan."
 
 #: printer/printerdrake.pm:1592
 #, c-format
@@ -13143,7 +13144,7 @@ msgstr "Nama share"
 #: printer/printerdrake.pm:1597
 #, c-format
 msgid "Workgroup"
-msgstr "Grupkerja"
+msgstr "Workgroup"
 
 #: printer/printerdrake.pm:1599
 #, c-format
@@ -13153,7 +13154,7 @@ msgstr "Otomatis terdeteksi"
 #: printer/printerdrake.pm:1609
 #, c-format
 msgid "Either the server name or the server's IP must be given!"
-msgstr "Harus ada nama/IP server!"
+msgstr "Nama server atau IP server harus diberikan!"
 
 #: printer/printerdrake.pm:1613
 #, c-format
@@ -13189,21 +13190,21 @@ msgid ""
 "\n"
 msgstr ""
 "Anda akan menset up pencetakan ke account Windows dengan katasandi. "
-"Berhubung kesalahan arsitekture divais lunak klien Samba, katasandi "
-"ditampilkan dalam teks di baris perintah klien Samba untuk mengirim job "
-"cetak ke server Windows. Ini memungkinkan tiap pengguna di komputer ini "
-"melihat katasandi di layar dengan perintah \"ps auxwww\".\n"
+"Karena kesalahan pada arsitekture perangkat lunak klien Samba, katasandi "
+"ditampilkan dalam teks pada baris perintah klien Samba untuk mengirim "
+"tugas pencetakan ke server Windows. Ini memungkinkan tiap pengguna pada "
+"komputer ini melihat katasandi pada layar dengan perintah \"ps auxwww\".\n"
 "\n"
-"Kami anjurkan beberapa alternatif berikut (pada semua kasus Anda harus yakin "
-"bahwa hanya komputer di jaringan lokal Anda yang dapat mengakses server "
-"Windows Anda, misalnya dengan adanya firewall):\n"
+"Kami merekomendasikan beberapa alternatif berikut (pada semua kasus Anda "
+"harus yakin bahwa hanya komputer pada jaringan lokal Anda yang dapat "
+"mengakses server Windows Anda, misalnya dengan adanya firewall):\n"
 "\n"
-"Pakailah account tanpa-katasandi di server Windows Anda, sebagai account "
+"Gunakan account tanpa-katasandi pada server Windows Anda, sebagai account "
 "\"GUEST\" atau account khusus untuk pencetakan. Jangan hapus proteksi "
 "katasandi account pribadi atau administrator.\n"
 "\n"
 "Set up server Windows Anda agar printer dapat dipakai dengan protokol LPD. "
-"Laluset up pencetakan dari komputer ini dengan tipe koneksi \"%s\" di "
+"Lalu set up pencetakan dari komputer ini dengan tipe koneksi \"%s\" pada "
 "Printerdrake.\n"
 "\n"
 
@@ -13215,8 +13216,9 @@ msgid ""
 "type in Printerdrake.\n"
 "\n"
 msgstr ""
-"Set up server Windows Anda agar printer tersedia di protokol IPP dan set up "
-"pencetakan dari komputer ini dengan tipe koneksi \"%s\" di Printerdrake.\n"
+"Set up server Windows Anda agar printer tersedia pada protokol IPP dan "
+"set up pencetakan dari komputer ini dengan tipe koneksi \"%s\" pada "
+"Printerdrake.\n"
 
 #: printer/printerdrake.pm:1633
 #, c-format
@@ -13226,15 +13228,16 @@ msgid ""
 "\n"
 "Do you really want to continue setting up this printer as you are doing now?"
 msgstr ""
-"Hubungkan printer Anda ke server Linux server dan membuat komputer Windows "
-"terhubung sebagai klien.\n"
+"Hubungkan printer Anda ke server Linux server dan mengijinkan "
+"komputer Windows terhubung sebagai klien.\n"
 "\n"
-"Anda ingin lanjuntukan set up printer ini seperti yang Anda lakukan sekarang?"
+"Apakah Anda ingin melanjutkan setting printer ini seperti yang Anda "
+"lakukan sekarang?"
 
 #: printer/printerdrake.pm:1711
 #, c-format
 msgid "NetWare Printer Options"
-msgstr "Pilihan printer NetWare"
+msgstr "Opsi Printer NetWare"
 
 #: printer/printerdrake.pm:1712
 #, c-format
@@ -13244,9 +13247,10 @@ msgid ""
 "print queue name for the printer you wish to access and any applicable user "
 "name and password."
 msgstr ""
-"Jika ingin mencetak pakai printer NetWare, berikan nama server printer "
-"NetWare (tak selalu sama dengan nama TCP/IPnya) juga nama antrian printer "
-"yang ingin digunakan beserta nama pengguna dan katasandinya."
+"Untuk mencetak pada printer NetWare, Anda harus menyediakan nama server "
+"print NetWare (Perhatikan! Ia mungkin berbeda dengan nama host TCP/IP) "
+"dan juga nama antrian cetak untuk printer yang akan Anda akses dan "
+"nama pengguna dan katasandinya."
 
 #: printer/printerdrake.pm:1713
 #, c-format
@@ -13256,7 +13260,7 @@ msgstr "Server Printer"
 #: printer/printerdrake.pm:1714
 #, c-format
 msgid "Print Queue Name"
-msgstr "Nama antrian printer"
+msgstr "Nama Antrian Printer"
 
 #: printer/printerdrake.pm:1719
 #, c-format
@@ -13289,8 +13293,9 @@ msgid ""
 "Choose one of the auto-detected printers from the list or enter the hostname "
 "or IP and the optional port number (default is 9100) in the input fields."
 msgstr ""
-"Pilih satu printer dari daftar atau isilah namahost atau IP dan nomor port "
-"opsional (default 9100)."
+"Pilih satu dari printer yang terdeteksi secara otomatis dari daftar atau "
+"isilah nama host atau IP dan nomor port opsional (default 9100) pada "
+"kolom input."
 
 #: printer/printerdrake.pm:1844
 #, c-format
@@ -13300,9 +13305,10 @@ msgid ""
 "JetDirect servers the port number is usually 9100, on other servers it can "
 "vary. See the manual of your hardware."
 msgstr ""
-"Untuk mencetak ke printer TCP/socket, berikan nama host atau IP printer dan "
-"nomor portnya (default 9100). Nomor port server HP JetDirect biasanya 9100, "
-"server lain mungkin bervariasi. Lihat manual perangkat keras Anda."
+"Untuk mencetak pada printer TCP atau socket, Anda harus menyediakan nama "
+"host atau IP printer dan nomor portnya (default 9100). Pada server HP "
+"JetDirect nomor port biasanya 9100, server lain mungkin bervariasi. "
+"Lihat manual perangkat keras Anda."
 
 #: printer/printerdrake.pm:1848
 #, c-format
@@ -13315,14 +13321,14 @@ msgid "Printer host name or IP"
 msgstr "Nama host atau IP printer"
 
 #: printer/printerdrake.pm:1927
-#, fuzzy, c-format
+#, c-format
 msgid "Refreshing Device URI list..."
-msgstr "Penyegaran data printer..."
+msgstr "Memperbarui daftar URI divais..."
 
 #: printer/printerdrake.pm:1930 printer/printerdrake.pm:1932
 #, c-format
 msgid "Printer Device URI"
-msgstr "Device Printer URI"
+msgstr "URI Divais Printer"
 
 #: printer/printerdrake.pm:1931
 #, c-format
@@ -13331,9 +13337,9 @@ msgid ""
 "either the CUPS or the Foomatic specifications. Note that not all URI types "
 "are supported by all the spoolers."
 msgstr ""
-"Anda dapat menset langsung URI untuk akses printer. URI harus memenuhi "
-"spesifikasi CUPS/Foomatic. Ingat, tak semua tipe URI di-support oleh semua "
-"spooler."
+"Anda dapat menentukan URI untuk akses printer secara langsung. URI harus "
+"memenuhi spesifikasi CUPS atau Foomatic. Perhatikan bahwa tidak semua "
+"tipe URI didukung oleh semua spooler."
 
 #: printer/printerdrake.pm:1957
 #, c-format
@@ -13351,8 +13357,8 @@ msgid ""
 "Here you can specify any arbitrary command line into which the job should be "
 "piped instead of being sent directly to a printer."
 msgstr ""
-"Anda dapat menentukan perintah sebarang tempat job di-pipe-kan sbg ganti "
-"pengiriman langsung ke printer."
+"Disini, Anda dapat menentukan sembarang perintah baris tempat job akan "
+"di-pipe-kan sebagai ganti pengiriman langsung ke printer."
 
 #: printer/printerdrake.pm:2062
 #, c-format
@@ -13372,6 +13378,10 @@ msgid ""
 "inkjets, scanning on multi-function devices, and memory card access on "
 "printers with card readers. "
 msgstr ""
+"Pada banyak printer HP terdapat fungsi khusus yang tersedia, perawatan "
+"pengujian level tinta, pembersihan nozzle, perataan head, ...) pada "
+"semua inkjet yang tidak terlalu kuno, pencarian pada divais multi "
+"fungsi, dan akses kartu memori pada printer dengan pembaca karu."
 
 #: printer/printerdrake.pm:2106
 #, c-format
@@ -13379,6 +13389,8 @@ msgid ""
 "To access these extra functions on your HP printer, it must be set up with "
 "the appropriate software: "
 msgstr ""
+"Untuk mengakses fungsi tambahan ini pada printer HP Anda, harus diset "
+"dengan perangkat lunak yang sesuai: "
 
 #: printer/printerdrake.pm:2107
 #, c-format
@@ -13387,6 +13399,9 @@ msgid ""
 "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
 "newer PhotoSmart models "
 msgstr ""
+"Gunakan HPLIP yang lebih baru untuk mengijinkan perawatan printer "
+"melalui \"Toolbox\" aplikasi grafis yang mudah digunakan dan model "
+"PhotoSmart terbaru yang canggih "
 
 #: printer/printerdrake.pm:2108
 #, c-format
@@ -13394,25 +13409,27 @@ msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
 msgstr ""
+"atau dengan HPOJ yang lama yang mengijinkan hanya scanner dan akses kartu "
+"memori, tetapi bisa membantu jika terdapat kegagalan HPLIP. "
 
 #: printer/printerdrake.pm:2110
 #, c-format
 msgid "What is your choice (choose \"None\" for non-HP printers)? "
-msgstr ""
+msgstr "Apa pilihan Anda (pilih \"None\" untuk printer non-HP)? "
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2112
 #: printer/printerdrake.pm:2138 printer/printerdrake.pm:2144
 #: printer/printerdrake.pm:2170
-#, fuzzy, c-format
+#, c-format
 msgid "HPLIP"
-msgstr "PL_IP"
+msgstr "HPLIP"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2114
 #: printer/printerdrake.pm:2270 printer/printerdrake.pm:2276
 #: printer/printerdrake.pm:2287
 #, c-format
 msgid "HPOJ"
-msgstr ""
+msgstr "HPOJ"
 
 #: printer/printerdrake.pm:2119
 #, c-format
@@ -13421,90 +13438,91 @@ msgid ""
 "LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony "
 "IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"
 msgstr ""
-"Printer Anda alat multifungsi dari HP atau Sony (OfficeJet, PSC, LaserJet "
-"1100/1200/1220/3000/3200/3300/4345 dg scanner, DeskJet 450, Sony IJP-V100), "
-"HP PhotoSmart atau HP LaserJet 2200?"
+"Apakah printer Anda printer multi fungsi dari HP atau Sony (OfficeJet, "
+"PSC, LaserJet 1100/1200/1220/3000/3200/3300/4345 dengan scanner, "
+"DeskJet 450, Sony IJP-V100), HP PhotoSmart atau HP LaserJet 2200?"
 
 #: printer/printerdrake.pm:2138 printer/printerdrake.pm:2270
 #, c-format
 msgid "Installing %s package..."
-msgstr "Instalasi paket %s..."
+msgstr "Menginstall paket %s..."
 
 #: printer/printerdrake.pm:2145 printer/printerdrake.pm:2277
 #, c-format
 msgid "Only printing will be possible on the %s."
-msgstr ""
+msgstr "Hanya pencetakan yang dimungkinkan pada %s."
 
 #: printer/printerdrake.pm:2160
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove your old HPOJ configuration file %s for your %s! "
-msgstr "Tidak dapat membuat direktori konfigurasi gnome per-user %s: %s\n"
+msgstr "Tidak dapat menghapus file konfigurasi HPOJ %s lama Anda "
+"untuk %s Anda! "
 
 #: printer/printerdrake.pm:2162
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "Silahkan hapus file secara manual dan restart HPOJ."
 
 #: printer/printerdrake.pm:2170 printer/printerdrake.pm:2287
 #, c-format
 msgid "Checking device and configuring %s..."
-msgstr "Pengecekan alat dan penyetelan %s..."
+msgstr "Pengujian divais dan mengkonfigurasi %s..."
 
 #: printer/printerdrake.pm:2189
-#, fuzzy, c-format
+#, c-format
 msgid "Which printer do you want to set up with HPLIP?"
-msgstr "Sektor mana yang hendak dipindah"
+msgstr "Printer mana yang hendak diset up dengan HPLIP?"
 
 #: printer/printerdrake.pm:2218 printer/printerdrake.pm:2331
 #, c-format
 msgid "Installing SANE packages..."
-msgstr "Instalasi paket SANE..."
+msgstr "Menginstall paket SANE..."
 
 #: printer/printerdrake.pm:2231 printer/printerdrake.pm:2344
 #, c-format
 msgid "Scanning on the %s will not be possible."
-msgstr ""
+msgstr "Scanning pada %s tidak dimungkinkan."
 
 #: printer/printerdrake.pm:2246
 #, c-format
 msgid "Using and Maintaining your %s"
-msgstr ""
+msgstr "Menggunakan dan Mengelola %s Anda"
 
 #: printer/printerdrake.pm:2371
 #, c-format
 msgid "Installing mtools packages..."
-msgstr "Instalasi paket mtools..."
+msgstr "Menginstall paket mtools..."
 
 #: printer/printerdrake.pm:2379
-#, fuzzy, c-format
+#, c-format
 msgid "Photo memory card access on the %s will not be possible."
-msgstr "Akses kartu memori foto pada alat multifungsi HP Anda"
+msgstr "Akses kartu memori foto pada %s tidak dimungkinkan."
 
 #: printer/printerdrake.pm:2395
 #, c-format
 msgid "Scanning on your HP multi-function device"
-msgstr "Sedang men-scan alat multifungsi HP Anda"
+msgstr "Men-scan divais multi fungsi HP Anda"
 
 #: printer/printerdrake.pm:2404
 #, c-format
 msgid "Photo memory card access on your HP multi-function device"
-msgstr "Akses kartu memori foto pada alat multifungsi HP Anda"
+msgstr "Akses kartu memori foto pada divais multi fungsi HP Anda"
 
 #: printer/printerdrake.pm:2421
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring device..."
-msgstr "Konfigurasi..."
+msgstr "Mengkonfigurasi divais..."
 
 #: printer/printerdrake.pm:2455
 #, c-format
 msgid "Making printer port available for CUPS..."
-msgstr "Sediakan port printer untuk CUPS..."
+msgstr "Membuat port printer tersedia untuk CUPS..."
 
 #: printer/printerdrake.pm:2464 printer/printerdrake.pm:2715
 #: printer/printerdrake.pm:2857
 #, c-format
 msgid "Reading printer database..."
-msgstr "Pembacaan database printer..."
+msgstr "Membaca database printer..."
 
 #: printer/printerdrake.pm:2674
 #, c-format
@@ -13514,14 +13532,16 @@ msgstr "Masukkan Nama Printer dan Komentar"
 #: printer/printerdrake.pm:2678 printer/printerdrake.pm:3965
 #, c-format
 msgid "Name of printer should contain only letters, numbers and the underscore"
-msgstr "Nama printer harus hanya berupa huruf, angka, atau garisbawah"
+msgstr "Nama printer harus hanya berupa huruf, angka, atau garis bawah"
 
 #: printer/printerdrake.pm:2684 printer/printerdrake.pm:3970
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
 "do you really want to overwrite its configuration?"
-msgstr "Sudah ada printer \"%s\", Anda benar ingin menindih konfigurasinya?"
+msgstr ""
+"Printer \"%s\" sudah ada, \n"
+"Apakah Anda ingin menimpa konfigurasinya?"
 
 #: printer/printerdrake.pm:2691
 #, c-format
@@ -13530,6 +13550,9 @@ msgid ""
 "printer unaccessible from Windows clients. Do you really want to use this "
 "name?"
 msgstr ""
+"Nama printer \"%s\" memiliki lebih dari 12 karakter yang dapat "
+"membuat printer tidak dapat diakses dari klien Windows. Apakah "
+"Anda ingin menggunakan nama ini?"
 
 #: printer/printerdrake.pm:2700
 #, c-format
@@ -13537,8 +13560,8 @@ msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
 "Location fields do not need to be filled in. They are comments for the users."
 msgstr ""
-"Tiap printer perlu nama (misalnya \"printer\"). Kolom Penjelasan / Lokasi "
-"tak harus terisi. Itu komentar untuk pengguna."
+"Setiap printer perlu nama (misalnya \"printer\"). Kolom Penjelasan / "
+"Lokasi tidak harus terisi. Kolom tersebut hanya komentar untuk pengguna."
 
 #: printer/printerdrake.pm:2701
 #, c-format
@@ -13561,7 +13584,7 @@ msgstr "Lokasi"
 #: printer/printerdrake.pm:2720
 #, c-format
 msgid "Preparing printer database..."
-msgstr "Persiapan database printer ..."
+msgstr "Mempersiapkan database printer ..."
 
 #: printer/printerdrake.pm:2836
 #, c-format
@@ -13582,12 +13605,13 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Printerdrake telan membandingkan nama model printer terdeteksi dengan daftar "
-"model di database untuk menemukan yang paling cocok. Ini mungkin salah, "
-"khususnya jika printer Anda tak terdaftar di semua database. Periksa apakah "
-"pilihan sudah benar dan klik \"Model sudah benar\", jika salah, klik \"Pilih "
-"model secara manual\" sehingga Anda dapat memilih model printer Anda secara "
-"manual di layar berikut.\n"
+"Printerdrake telan membandingkan nama model printer yang terdeteksi "
+"secara otomatis dengan daftar model pada database untuk menemukan "
+"yang paling cocok. Pilihan ini mungkin salah, khususnya jika printer "
+"Anda tidak terdaftar pada database. Periksa apakah pilihan sudah "
+"benar dan klik \"Model sudah benar\" jika benar dan jika tidak, "
+"klik \"Pilih model secara manual\" sehingga Anda dapat memilih "
+"model printer Anda secara manual pada layar berikut.\n"
 "\n"
 "Printerdrake telah menemukan:\n"
 "\n"
@@ -13615,14 +13639,14 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Periksa apakah Printerdrake mendeteksi otomatis model printer Anda dengan "
-"benar. Cari model yang benar di daftar jika model yang salah atau \"Printer "
-"raw\" diterangkan."
+"Periksa apakah Printerdrake sudah mendeteksi otomatis model printer "
+"Anda dengan benar. Temukan model yang benar pada daftar jika model "
+"salah atau \"Printer raw\" ditandai."
 
 #: printer/printerdrake.pm:2889
 #, c-format
 msgid "Install a manufacturer-supplied PPD file"
-msgstr ""
+msgstr "Install file PPD yang disertakan pembuat"
 
 #: printer/printerdrake.pm:2920
 #, c-format
@@ -13630,6 +13654,8 @@ msgid ""
 "Every PostScript printer is delivered with a PPD file which describes the "
 "printer's options and features."
 msgstr ""
+"Setiap printer PostScript hadir dengan file PPD yang menjelaskan opsi "
+"dan fitur printer."
 
 #: printer/printerdrake.pm:2921
 #, c-format
@@ -13637,11 +13663,13 @@ msgid ""
 "This file is usually somewhere on the CD with the Windows and Mac drivers "
 "delivered with the printer."
 msgstr ""
+"File ini biasanya terdapat pada CD dengan driver untuk Windows dan Mac "
+"yang datang dengan printer."
 
 #: printer/printerdrake.pm:2922
 #, c-format
 msgid "You can find the PPD files also on the manufacturer's web sites."
-msgstr ""
+msgstr "Anda juga bisa menemukan file PPD pada web site pembuat."
 
 #: printer/printerdrake.pm:2923
 #, c-format
@@ -13649,6 +13677,8 @@ msgid ""
 "If you have Windows installed on your machine, you can find the PPD file on "
 "your Windows partition, too."
 msgstr ""
+"Jika Anda memiliki Windows pada komputer Anda, Anda juga bisa menemukan "
+"file PPD pada partisi Windows Anda."
 
 #: printer/printerdrake.pm:2924
 #, c-format
@@ -13657,6 +13687,9 @@ msgid ""
 "makes all options of the printer available which are provided by the "
 "printer's hardware"
 msgstr ""
+"Menginstall file PPD printer dan menggunakannya ketika setting printer "
+"membuat semua opsi printer yang disediakan perangkat keras printer "
+"tersedia"
 
 #: printer/printerdrake.pm:2925
 #, c-format
@@ -13664,45 +13697,47 @@ msgid ""
 "Here you can choose the PPD file to be installed on your machine, it will "
 "then be used for the setup of your printer."
 msgstr ""
+"Disini Anda bisa memilih file PPD yang akan diinstall pada komputer "
+"Anda, dan akan digunakan untuk setup printer Anda."
 
 #: printer/printerdrake.pm:2927
-#, fuzzy, c-format
+#, c-format
 msgid "Install PPD file from"
-msgstr "Instal rpm"
+msgstr "Install file PPD dari"
 
 #: printer/printerdrake.pm:2930 printer/printerdrake.pm:2938
 #: standalone/scannerdrake:183 standalone/scannerdrake:192
 #: standalone/scannerdrake:242 standalone/scannerdrake:250
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy Disk"
 msgstr "Disket"
 
 #: printer/printerdrake.pm:2931 printer/printerdrake.pm:2940
 #: standalone/scannerdrake:184 standalone/scannerdrake:194
 #: standalone/scannerdrake:243 standalone/scannerdrake:252
-#, fuzzy, c-format
+#, c-format
 msgid "Other place"
-msgstr "Port lain"
+msgstr "Tempat lain"
 
 #: printer/printerdrake.pm:2946
-#, fuzzy, c-format
+#, c-format
 msgid "Select PPD file"
-msgstr "Pilih file"
+msgstr "Pilih file PPD"
 
 #: printer/printerdrake.pm:2950
 #, c-format
 msgid "The PPD file %s does not exist or is unreadable!"
-msgstr ""
+msgstr "File PPD %S tidak ada atau tidak terbaca!"
 
 #: printer/printerdrake.pm:2956
 #, c-format
 msgid "The PPD file %s does not conform with the PPD specifications!"
-msgstr ""
+msgstr "File PPD %S tidak sesuai dengan spesifikasi PPD!"
 
 #: printer/printerdrake.pm:2967
-#, fuzzy, c-format
+#, c-format
 msgid "Installing PPD file..."
-msgstr "Instalasi %s ..."
+msgstr "Menginstall file PPD..."
 
 #: printer/printerdrake.pm:3084
 #, c-format
@@ -13719,17 +13754,17 @@ msgid ""
 "first parallel port before you print a test page. Otherwise the printer will "
 "not work. Your connection type setting will be ignored by the driver."
 msgstr ""
-"Anda sedang melakukan konfigurasi winprinter laser OKI. Printer ini memakai "
-"protokol komunikasi khusus dan karenanya bekerja hanya saat terhubung port "
-"paralel pertama. Bila printer Anda terhubung dg port lain atau dengan kotak "
-"server cetak hubungkan printer dg port paralel pertama sebelum melakukan tes "
-"cetak. Jika tidak, printer takkan bekerja. Setting tipe koneksi Anda akan "
-"diabaikan oleh driver."
+"Anda sedang mengkonfigurasi winprinter laser OKI. Printer ini memakai "
+"protokol komunikasi khusus dan sehingga hanya bekerja saat terhubung pada "
+"port paralel pertama. Bila printer Anda terhubung dengan port lain atau "
+"dengan server cetak, hubungkan printer dengan port paralel pertama "
+"sebelum mencetak halaman pengujian. Jika tidak, printer tidak akan "
+"bekerja. Setting tipe koneksi Anda akan diabaikan oleh driver."
 
 #: printer/printerdrake.pm:3110 printer/printerdrake.pm:3140
 #, c-format
 msgid "Lexmark inkjet configuration"
-msgstr "Konfigurasi Lexmark inkjet"
+msgstr "Konfigurasi inkjet Lexmark"
 
 #: printer/printerdrake.pm:3111
 #, c-format
@@ -13739,9 +13774,9 @@ msgid ""
 "printer to a local port or configure it on the machine where it is connected "
 "to."
 msgstr ""
-"Driver printer inkjet yg disediakan Lexmark hanya men-support printer lokal, "
-"bukan printer di komputer remote atau kotak server cetak. Hubungkan printer "
-"Anda ke port lokal atau konfigurasikan di komputer yang terhubung dengannya."
+"Driver printer inkjet yang disediakan Lexmark hanya mendukung printer lokal, "
+"bukan printer pada komputer remote atau server cetak. Hubungkan printer "
+"Anda ke port lokal atau konfigurasikan pada komputer yang terhubung dengannya."
 
 #: printer/printerdrake.pm:3141
 #, c-format
@@ -13755,53 +13790,57 @@ msgid ""
 "agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and "
 "adjust the head alignment settings with this program."
 msgstr ""
-"Agar dapat mencetak dg Lexmark inkjet dan konfigurasi ini, Anda perlu driver "
-"printer inkjet yg disediakan Lexmark (http://www.lexmark.com/). Klik link "
-"\"Drivers\". Pilih model Anda lalu sistem operasi \"Linux\". Driver "
-"disediakan berupa paket RPM atau shell script dg instalasi grafis "
-"interaktif. Anda tak perlu melakukan konfigurasi via frontend grafis ini. "
-"Batalkan langsung setelah persetujuan lisensi. Lalu cetak halaman printhead "
-"alignment dg \"lexmarkmaintain\" dan cocokkan setting head alignment dg "
-"program ini."
+"Untuk dapat mencetak dengan inkjet Lexmark dan konfigurasi ini, Anda "
+"perlu driver printer inkjet yang disediakan Lexmark "
+"(http://www.lexmark.com/). Klik link \"Drivers\". Pilih model Anda "
+"lalu sistem operasi \"Linux\" sebagai sistem operasi. Driver hadir "
+"dalam paket RPM atau shell script dengan instalasi grafis "
+"interaktif. Anda tidak perlu melakukan konfigurasi via tampilan "
+"grafis ini. Batalkan langsung setelah persetujuan lisensi. Lalu "
+"cetak halaman perataan head printer dengan \"lexmarkmaintain\" "
+"dan cocokkan setting head alignment dengan program ini."
 
 #: printer/printerdrake.pm:3151
-#, fuzzy, c-format
+#, c-format
 msgid "Lexmark X125 configuration"
-msgstr "Konfigurasi Lexmark inkjet"
+msgstr "Konfigurasi Lexmark X125"
 
 #: printer/printerdrake.pm:3152
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected via "
 "USB, no printers on remote machines or print server boxes. Please connect "
 "your printer to a local USB port or configure it on the machine where it is "
 "connected to."
 msgstr ""
-"Driver printer inkjet yg disediakan Lexmark hanya men-support printer lokal, "
-"bukan printer di komputer remote atau kotak server cetak. Hubungkan printer "
-"Anda ke port lokal atau konfigurasikan di komputer yang terhubung dengannya."
+"Driver untuk printer ini hanya mendukung printer lokal via USB, tanpa "
+"printer pada komputer remote atau server cetak. Silahkan hubungkan "
+"printer Anda ke port USB lokal atau konfigurasikan pada komputer "
+"dimana ia terhubung."
 
 #: printer/printerdrake.pm:3174
-#, fuzzy, c-format
+#, c-format
 msgid "Samsung ML/QL-85G configuration"
-msgstr "Konfigurasi suara"
+msgstr "Konfigurasi Smasung ML/QL-85G"
 
 #: printer/printerdrake.pm:3175 printer/printerdrake.pm:3202
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The driver for this printer only supports printers locally connected on the "
 "first parallel port, no printers on remote machines or print server boxes or "
 "on other parallel ports. Please connect your printer to the first parallel "
 "port or configure it on the machine where it is connected to."
 msgstr ""
-"Driver printer inkjet yg disediakan Lexmark hanya men-support printer lokal, "
-"bukan printer di komputer remote atau kotak server cetak. Hubungkan printer "
-"Anda ke port lokal atau konfigurasikan di komputer yang terhubung dengannya."
+"Driver untuk printer ini hanya mendukung printer yang terhubung secara "
+"lokal pada port paraller pertama, bukan printer pada komputer remote "
+"atau server cetak atau pada port parallel lain. Silahkan hubungkan "
+"printer Anda ke port parallel pertama atau konfigurasikan pada "
+"komputer dimana ia terhubung."
 
 #: printer/printerdrake.pm:3201
-#, fuzzy, c-format
+#, c-format
 msgid "Canon LBP-460/660 configuration"
-msgstr "Konfigurasi manual"
+msgstr "Konfigurasi Canon LBP-460/660"
 
 #: printer/printerdrake.pm:3220
 #, c-format
@@ -13818,11 +13857,12 @@ msgid ""
 "duplex unit, extra trays) are set correctly. Note that with a very high "
 "printout quality/resolution printing can get substantially slower."
 msgstr ""
-"Setting standar printer\n"
+"Setting default printer\n"
 "\n"
-"Cek ukuran halaman dan jenis tinta/mode cetak (jika ada) juga konfigurasi "
-"perangkat keras printer laser (memori, unit duplex, tray extra). Ingat, "
-"pencetakan dg kualitas tinggi berjalan amat lambat."
+"Anda harus memastikan bahwa ukuran kertas dan jenis tinta/mode cetak "
+"(jika ada) juga konfigurasi perangkat keras printer laser (memori, "
+"unit duplex, tray extra) ditentukan dengan benar. Perhatikan bahwa "
+"pencetakan dengan kualitas tinggi berjalan amat lambat."
 
 #: printer/printerdrake.pm:3494
 #, c-format
@@ -13832,7 +13872,7 @@ msgstr "Setting default printer"
 #: printer/printerdrake.pm:3501
 #, c-format
 msgid "Option %s must be an integer number!"
-msgstr "Opsi %s harus berupa integer!"
+msgstr "Opsi %s harus berupa bilangan integer!"
 
 #: printer/printerdrake.pm:3505
 #, c-format
@@ -13842,7 +13882,7 @@ msgstr "Opsi %s harus berupa bilangan!"
 #: printer/printerdrake.pm:3509
 #, c-format
 msgid "Option %s out of range!"
-msgstr "Opsi %s keluar batas!"
+msgstr "Opsi %s diluar jangkauan!"
 
 #: printer/printerdrake.pm:3560
 #, c-format
@@ -13850,8 +13890,8 @@ msgid ""
 "Do you want to set this printer (\"%s\")\n"
 "as the default printer?"
 msgstr ""
-"Ingin menset printer ini (\"%s\")\n"
-"sbg printer standar?"
+"Apakah Anda ingin menentukan printer ini (\"%s\")\n"
+"sebagai printer default?"
 
 #: printer/printerdrake.pm:3575
 #, c-format
@@ -13866,14 +13906,15 @@ msgid ""
 "laser printers with too low memory it can even not come out. In most cases "
 "it is enough to print the standard test page."
 msgstr ""
-"Pilihlah halaman tes yang ingin Anda cetak.\n"
-"Ingat: halaman tes photo perlu waktu lama untuk dicetak. Di printer laser "
-"bermemori rendah itu bahkan takkan muncul. Umumnya cukup halaman tes standar."
+"Silahkan pilih halaman tes yang ingin Anda cetak.\n"
+"Perhatikan: halaman tes photo perlu waktu lama untuk dicetak dan pada "
+"printer laser bermemori rendah itu bisa tidak muncul. Umumnya cukup "
+"mencetak halaman tes standar."
 
 #: printer/printerdrake.pm:3580
 #, c-format
 msgid "No test pages"
-msgstr "Tiada halaman tes"
+msgstr "Tanpa halaman tes"
 
 #: printer/printerdrake.pm:3581
 #, c-format
@@ -13908,12 +13949,12 @@ msgstr "Jangan cetak halaman tes"
 #: printer/printerdrake.pm:3626 printer/printerdrake.pm:3809
 #, c-format
 msgid "Printing test page(s)..."
-msgstr "Pencetakan halaman tes..."
+msgstr "Mencetak halaman tes..."
 
 #: printer/printerdrake.pm:3646
-#, fuzzy, c-format
+#, c-format
 msgid "Skipping photo test page."
-msgstr "Halaman tes foto"
+msgstr "Melewati halaman tes foto"
 
 #: printer/printerdrake.pm:3663
 #, c-format
@@ -13925,7 +13966,7 @@ msgid ""
 "\n"
 msgstr ""
 "Halaman tes telah dikirim ke printer.\n"
-"Akan butuh waktu sebentar untuk mulai mencetak.\n"
+"Akan butuh waktu sebentar sebelum printer mulai mencetak.\n"
 "Status cetak:\n"
 "%s\n"
 "\n"
@@ -13937,12 +13978,12 @@ msgid ""
 "It may take some time before the printer starts.\n"
 msgstr ""
 "Halaman test telah dikirim ke printer.\n"
-"Akan butuh waktu sebentar untuk mulai mencetak.\n"
+"Akan butuh waktu sebentar sebelum printer mulai mencetak.\n"
 
 #: printer/printerdrake.pm:3677
 #, c-format
 msgid "Did it work properly?"
-msgstr "Bekerja dg baik?"
+msgstr "Apakah bekerja dengan baik?"
 
 #: printer/printerdrake.pm:3700 printer/printerdrake.pm:5049
 #, c-format
@@ -13957,10 +13998,10 @@ msgid ""
 "\"kprinter <file>\". The graphical tools allow you to choose the printer and "
 "to modify the option settings easily.\n"
 msgstr ""
-"Utk mencetak file dari baris perintah (window terminal) pakailah komando "
-"komando \"%s <file>\" atau alat cetak grafis: \"xpp <file>\" atau \"kprinter "
-"<file>\". Alat grafis memungkinkan Anda memilih printer dan memodifikasi "
-"setting dengan mudah.\n"
+"Untuk mencetak file dari perintah baris (terminal) pakailah "
+"perintah \"%s <file>\" atau perkakas pencetakan grafis: \"xpp <file>\" "
+"atau \"kprinter <file>\". Perkakas grafis memungkinkan Anda memilih "
+"printer dan memodifikasi setting dengan mudah.\n"
 
 #: printer/printerdrake.pm:3740
 #, c-format
@@ -13969,9 +14010,9 @@ msgid ""
 "printing dialogs of many applications, but here do not supply the file name "
 "because the file to print is provided by the application.\n"
 msgstr ""
-"Komando ini dapat Anda pakai dalam kotak \"Perintah cetak\" dialog cetak di "
-"banyak aplikasi, tapi jangan berikan nama file di sini karena file yang "
-"dicetak akan diberikan oleh aplikasi.\n"
+"Perintah ini dapat Anda pakai dalam kotak \"Perintah cetak\" dari "
+"dialog cetak pada banyak aplikasi, tapi jangan berikan nama file "
+"di sini karena file yang dicetak akan diberikan oleh aplikasi.\n"
 
 #: printer/printerdrake.pm:3743 printer/printerdrake.pm:3760
 #: printer/printerdrake.pm:3770
@@ -13983,8 +14024,9 @@ msgid ""
 "line, e. g. \"%s <file>\". "
 msgstr ""
 "\n"
-"Komando \"%s\" juga memungkinkan modifikasi setting job cetak tertentu. "
-"Tambahkan setting yang diinginkan ke baris perintah, mis. \"%s <file>\". "
+"Perintah \"%s\" juga mengijinkan modifikasi setting job cetak "
+"tertentu. Tambahkan setting yang diinginkan ke baris perintah, "
+"mis. \"%s <file>\". "
 
 #: printer/printerdrake.pm:3746 printer/printerdrake.pm:3786
 #, c-format
@@ -13993,8 +14035,8 @@ msgid ""
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
-"Untuk mengetahui opsi printer bacalah daftar di bawah atau klik tombol "
-"\"Daftar opsi cetak\".%s%s%s\n"
+"Untuk mengetahui opsi printer yang tersedia, bacalah daftar di bawah "
+"atau klik tombol \"Daftar opsi cetak\".%s%s%s\n"
 "\n"
 
 #: printer/printerdrake.pm:3750
@@ -14003,7 +14045,7 @@ msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
 msgstr ""
-"Daftar opsi cetak tersedia untuk printer ini:\n"
+"Berikut adalah daftar opsi cetak yang tersedia untuk printer ini:\n"
 "\n"
 
 #: printer/printerdrake.pm:3755 printer/printerdrake.pm:3765
@@ -14012,7 +14054,7 @@ msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\".\n"
 msgstr ""
-"Utk mencetak file dari baris komando (window terminal) gunakan perintah \"%s "
+"Untuk mencetak file dari perintah baris (terminal) gunakan perintah \"%s "
 "<file>\".\n"
 
 #: printer/printerdrake.pm:3757 printer/printerdrake.pm:3767
@@ -14023,16 +14065,18 @@ msgid ""
 "printing dialogs of many applications. But here do not supply the file name "
 "because the file to print is provided by the application.\n"
 msgstr ""
-"Perintah ini digunakan di kotak \"Perintah cetak\" di dialog cetak beberapa "
-"aplikasi. Tapi jangan berikan nama file di sini karena file yg dicetak akan "
-"diberikan oleh aplikasi.\n"
+"Perintah ini dapat Anda pakai dalam kotak \"Perintah cetak\" dari "
+"dialog cetak pada banyak aplikasi, tapi jangan berikan nama file "
+"di sini karena file yang dicetak akan diberikan oleh aplikasi.\n"
 
 #: printer/printerdrake.pm:3762 printer/printerdrake.pm:3772
 #, c-format
 msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
-msgstr "Untuk mendapat daftar opsi printer klik \"Daftar opsi cetak\"."
+msgstr ""
+"Untuk mendapat daftar opsi yang tersedia untuk printer ini, klik pada "
+"tombol \"Daftar opsi cetak\"."
 
 #: printer/printerdrake.pm:3775
 #, c-format
@@ -14040,7 +14084,7 @@ msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\" or \"%s <file>\".\n"
 msgstr ""
-"Utk mencetak file dari baris komando (jendela terminal) gunakan komando \"%s "
+"Untuk mencetak file dari perintah baris (terminal) gunakan perintah \"%s "
 "<file>\" atau \"%s <file>\".\n"
 
 #: printer/printerdrake.pm:3779
@@ -14053,11 +14097,12 @@ msgid ""
 "jobs immediately when you click it. This is for example useful for paper "
 "jams.\n"
 msgstr ""
-"Anda juga dapat memakai antarmuka grafis \"xpdq\" untuk setting opsi dan "
-"kontrol job cetak.\n"
-"Jika KDE Anda pakai sbg lingkungan desktop Anda punya ikon \"tombol panik\", "
-"di desktop, berlabel \"STOP Printer!\", yang menghentikan semua job cetak "
-"seketika bila Anda tekan. Ini berguna contohnya saat kertas macet.\n"
+"Anda juga dapat menggunakan antarmuka grafis \"xpdq\" untuk setting "
+"opsi dan menangani kontrol job pencetakan.\n"
+"Jika Anda menggunakan KDE sebagai lingkungan desktop, Anda memiliki"
+"ikon \"tombol panik\" pada desktop, berlabel \"STOP Printer!\", "
+"yang menghentikan semua job pencetakan seketika bila Anda tekan. "
+"Ini berguna misalnya ketika kertas macet.\n"
 
 #: printer/printerdrake.pm:3783
 #, c-format
@@ -14068,34 +14113,34 @@ msgid ""
 "line, e. g. \"%s <file>\".\n"
 msgstr ""
 "\n"
-"Komando \"%s\" dan \"%s\" juga memungkinkan modifikasi setting opsi job "
-"cetak tertentu. Tambahkan setting yg diinginkan ke baris perintah, misalnya "
-"\"%s <file>\".\n"
+"Perintah \"%s\" dan \"%s\" juga mengijinkan untuk memodifikasi setting "
+"opsi job pencetakan tertentu. Tambahkan setting yang diinginkan pada "
+"baris perintah, misalnya \"%s <file>\".\n"
 
 #: printer/printerdrake.pm:3793
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
-msgstr "Cetak/Scan/Kartu Foto di \"%s\""
+msgstr "Pencetakan/Scan/Kartu Foto pada \"%s\""
 
 #: printer/printerdrake.pm:3794
 #, c-format
 msgid "Printing/Scanning on \"%s\""
-msgstr "Cetak/Scan di \"%s\""
+msgstr "Pencetakan/Scan pada \"%s\""
 
 #: printer/printerdrake.pm:3796
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
-msgstr "Cetak/Akses Kartu Foto di \"%s\""
+msgstr "Pencetakan/Akses Kartu Foto pada \"%s\""
 
 #: printer/printerdrake.pm:3798
-#, fuzzy, c-format
+#, c-format
 msgid "Using/Maintaining the printer \"%s\""
-msgstr "Pencetakan di printer \"%s\""
+msgstr "Menggunakan/Perawatan printer \"%s\""
 
 #: printer/printerdrake.pm:3799
 #, c-format
 msgid "Printing on the printer \"%s\""
-msgstr "Pencetakan di printer \"%s\""
+msgstr "Pencetakan pada printer \"%s\""
 
 #: printer/printerdrake.pm:3805
 #, c-format
@@ -14109,6 +14154,9 @@ msgid ""
 "features of your printer are supported.\n"
 "\n"
 msgstr ""
+"%s Anda diset-up dengan perangkat lunak driver HPLIP milik HP. Dengan "
+"ini, banyak fitur printer Anda yang didukung.\n"
+
 
 #: printer/printerdrake.pm:3830
 #, c-format
@@ -14116,6 +14164,8 @@ msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
 msgstr ""
+"Scanner pada printer Anda bisa digunakan dengan perangkat lunak SANE, "
+"misalnya Kooka atau XSane (keduanya dalam menu Multimedia/Graphics). "
 
 #: printer/printerdrake.pm:3831
 #, c-format
@@ -14124,6 +14174,8 @@ msgid ""
 "your scanner on the network.\n"
 "\n"
 msgstr ""
+"Jalankan Scannerdrake (Perangkat Lunak/Scanner pada Pusat Kontrol "
+"Mandrakelinux) untuk berbagi scanner pada jaringan.\n"
 
 #: printer/printerdrake.pm:3835
 #, c-format
@@ -14131,6 +14183,8 @@ msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
 msgstr ""
+"Pembaca kartu memori pada printer Anda bisa diakses seperti divais "
+"penyimpanan USB."
 
 #: printer/printerdrake.pm:3836
 #, c-format
@@ -14139,6 +14193,9 @@ msgid ""
 "your desktop.\n"
 "\n"
 msgstr ""
+"Setelah menghubungkan kartu, ikon hard disk untuk mengakses kartu akan "
+"muncul pada desktop Anda.\n"
+"\n"
 
 #: printer/printerdrake.pm:3838
 #, c-format
@@ -14147,6 +14204,9 @@ msgid ""
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
 msgstr ""
+"Pembaca kartu memori pada printer Anda bisa diakses menggunakan Toolbox "
+"Printer HP (Menu: System/Monitoring/HP Printer Toolbox) klik tombol "
+"\"Access Photo Cards...\" pada tab \"Functions\". "
 
 #: printer/printerdrake.pm:3839
 #, c-format
@@ -14155,6 +14215,8 @@ msgid ""
 "card reader is usually faster.\n"
 "\n"
 msgstr ""
+"Perhatikan bahwa ini sangatlah lambat, membaca citra dari kamera atau "
+"pembaca kartu USB biasanya lebih cepat.\n"
 
 #: printer/printerdrake.pm:3842
 #, c-format
@@ -14163,29 +14225,31 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
+"Toolbox Printer HP (Menu: System/Monitoring/HP Printer Toolbox) menawarkan "
+"banyak status pengawasan dan fungsi perawatan untuk %s Anda:\n"
 
 #: printer/printerdrake.pm:3843
 #, c-format
 msgid " - Ink level/status info\n"
-msgstr ""
+msgstr " - Level tinta/informasi status\n"
 
 #: printer/printerdrake.pm:3844
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr ""
+msgstr " - Pembersihan nozzle tinta\n"
 
 #: printer/printerdrake.pm:3845
 #, c-format
 msgid " - Print head alignment\n"
-msgstr ""
+msgstr " - Perataan head pencetak\n"
 
 #: printer/printerdrake.pm:3846
-#, fuzzy, c-format
+#, c-format
 msgid " - Color calibration\n"
-msgstr "Konfigurasi warna"
+msgstr " - Kalibrasi warna\n"
 
 #: printer/printerdrake.pm:3861
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your multi-function device was configured automatically to be able to scan. "
 "Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the "
@@ -14199,14 +14263,17 @@ msgid ""
 "device, you only need to use \"scannerdrake\" if you want to share the "
 "scanner on the network."
 msgstr ""
-"Alat multifungsi Anda terkonfigurasi otomatis agar dapat men-scan. Kini Anda "
-"dapat men-scan dg \"scanimage\" (\"scanimage -d hp:%s\" untuk menentukan "
-"scanner jika Anda punya beberapa) dari baris perintah atau dg antarmuka "
-"grafis \"xscanimage\" atau \"xsane\". Jika Anda memakai GIMP, Anda dapat "
-"juga men-scan dg memilih poin yg sesuai di menu \"File\"/\"Acquire\". "
-"Panggil \"man scanimage\" di baris perintah untuk informasi lanjut.\n"
+"Divais multi fungsi Anda terkonfigurasi otomatis agar dapat men-scan. "
+"Kini Anda dapat men-scan dengan \"scanimage\" (\"scanimage -d hp:%s\" "
+"untuk menentukan scanner jika Anda punya beberapa) dari perintah baris "
+"atau dengan antarmuka grafis \"xscanimage\" atau \"xsane\". Jika Anda "
+"memakai GIMP, Anda dapat juga men-scan dengan memilih poin yang sesuai "
+"pada menu \"File\"/\"Acquire\". Gunakan \"man scanimage\" pada perintah "
+"baris untuk mendapatkan informasi lebih banyak.\n"
 "\n"
-"Jangan pakai \"scannerdrake\" untuk alat ini!"
+"Anda tidak perlu menjalankan \"scannerdrake\" untuk men-setting "
+"scanning pada divais ini, Anda hanya perlu menggunakan \"scannerdrake\" "
+"jika Anda hendak berbagi scanner pada jaringan."
 
 #: printer/printerdrake.pm:3887
 #, c-format
@@ -14221,14 +14288,16 @@ msgid ""
 "can switch between drive letters with the field at the upper-right corners "
 "of the file lists."
 msgstr ""
-"Printer Anda telah dikonfigurasikan secara otomatis untuk mengakses drive "
-"kartu foto dari PC Anda. Kini Anda dapat mengakses kartu foto Anda dg "
-"program grafis \"MtoolsFM\" (Menu: \"Aplikasi\" -> \"Perkakas File\" -> "
-"\"Manajer File MTools\") atau baris komando \"mtools\" (ketik \"man mtools\" "
-"di baris komando untuk info lebih lanjut). Anda temukan sistem file kartu di "
-"drive \"p:\", atau huruf drive selanjutnya bila Anda punya lebih dari satu "
-"printer HP dengan drive kartu foto. Di \"MtoolsFM\" Anda dapat men-switch "
-"drive dg isian di sudut kanan atas daftar file."
+"Printer Anda telah terkonfigurasi secara otomatis untuk memberi Anda "
+"akses ke kartu foto dari PC Anda. Kini Anda dapat mengakses kartu foto "
+"Anda menggunakan program grafis \"MtoolsFM\" (Menu: \"Aplikasi\" -> \""
+"Perkakas File\" -> \"Manajer File MTools\") atau utilitas perintah "
+"baris \"mtools\" (ketik \"man mtools\" pada baris komando untuk "
+"informasi lebih lanjut). Anda akan menemukan sistem file kartu pada "
+"drive \"p:\", atau huruf drive selanjutnya bila Anda punya lebih "
+"dari satu printer HP dengan drive kartu foto. Pada \"MtoolsFM\" "
+"Anda dapat bertukar antar huruf drive dengan field pada sudut kanan "
+"atas daftar file."
 
 #: printer/printerdrake.pm:3929 printer/printerdrake.pm:3956
 #: printer/printerdrake.pm:3991
@@ -14245,11 +14314,11 @@ msgid ""
 "overtaken, but jobs will not be transferred.\n"
 "Not all queues can be transferred due to the following reasons:\n"
 msgstr ""
-"Anda dapat menyalin konfigurasi printer yg Anda buat untuk spooler %s ke %s, "
-"spooler Anda sekarang. Semua data konfigurasi (nama printer, keterangan, "
-"lokasi, tipe koneksi, dan setting opsi default) disamakan, tapi job takkan "
-"ditransfer. \n"
-"Tak semua antrian dapat ditransfer karena alasan berikut:\n"
+"Anda dapat menyalin konfigurasi printer yang Anda buat untuk spooler %s "
+"ke %s, spooler Anda sekarang. Semua data konfigurasi (nama printer, "
+"keterangan, lokasi, tipe koneksi, dan setting opsi default) diambil "
+"alih, tetapi job tidak akan ditransfer. \n"
+"Tidak semua antrian dapat ditransfer karena alasan berikut:\n"
 
 #: printer/printerdrake.pm:3933
 #, c-format
@@ -14257,20 +14326,21 @@ msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
 msgstr ""
-"CUPS tak men-support printer server Novell atau printer yg mengirim data ke "
-"perintah format-bebas.\n"
+"CUPS tidak mendukung printer pada server Novell atau printer yang "
+"mengirim data ke perintah format-bebas.\n"
 
 #: printer/printerdrake.pm:3935
 #, c-format
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
-msgstr "PDQ hanya men-support printer lokal, LPD remote, dan Soket/TCP.\n"
+msgstr ""
+"PDQ hanya mendukung printer lokal, LPD remote, dan Soket/TCP.\n"
 
 #: printer/printerdrake.pm:3937
 #, c-format
 msgid "LPD and LPRng do not support IPP printers.\n"
-msgstr "LPD and LPRng tak men-support printer IPP.\n"
+msgstr "LPD and LPRng tidak mendukung printer IPP.\n"
 
 #: printer/printerdrake.pm:3939
 #, c-format
@@ -14278,8 +14348,8 @@ msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
 msgstr ""
-"Antrian tak dibuat oleh program ini atau \"foomatic-configure\" tak dapat "
-"ditransfer."
+"Sebagai tambahan, antrian tidak dibuat oleh program ini atau "
+"\"foomatic-configure\" tidak dapat ditransfer."
 
 #: printer/printerdrake.pm:3940
 #, c-format
@@ -14289,8 +14359,8 @@ msgid ""
 "or with native CUPS drivers cannot be transferred."
 msgstr ""
 "\n"
-"Juga printer yg terkonfigurasi dengan file PPD dari pabrik atau driver CUPS "
-"asli tak dapat ditransfer."
+"Juga printer yang terkonfigurasi dengan file PPD dari pabrik atau "
+"driver CUPS asli tidak dapat ditransfer."
 
 #: printer/printerdrake.pm:3941
 #, c-format
@@ -14300,7 +14370,7 @@ msgid ""
 "\"Transfer\"."
 msgstr ""
 "\n"
-"Tandai printer yg ingin Anda transfer lalu klik\"Transfer\"."
+"Tandai printer yang ingin Anda transfer lalu klik\"Transfer\"."
 
 #: printer/printerdrake.pm:3944
 #, c-format
@@ -14319,8 +14389,8 @@ msgid ""
 "Click \"Transfer\" to overwrite it.\n"
 "You can also type a new name or skip this printer."
 msgstr ""
-"Printer bernama \"%s\" telah ada di %s. \n"
-"Klik \"Transfer\" untuk menindihnya.\n"
+"Printer bernama \"%s\" telah ada pada %s. \n"
+"Klik \"Transfer\" untuk menimpanya.\n"
 "Anda juga dapat menuliskan nama baru atau melewatkan printer ini."
 
 #: printer/printerdrake.pm:3978
@@ -14331,7 +14401,7 @@ msgstr "Nama printer baru"
 #: printer/printerdrake.pm:3981
 #, c-format
 msgid "Transferring %s..."
-msgstr "Pemindahan %s ..."
+msgstr "Mentransfer %s ..."
 
 #: printer/printerdrake.pm:3992
 #, c-format
@@ -14339,18 +14409,18 @@ msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
 "the default printer under the new printing system %s?"
 msgstr ""
-"Anda telah men-transfer printer standar lama Anda (\"%s\"), Akankah ia juga "
-"dijadikan printer default pada sistem cetak baru %s?"
+"Anda telah men-transfer printer standar lama Anda (\"%s\"), Apakah "
+"akan dijadikan printer default pada sistem cetak baru %s?"
 
 #: printer/printerdrake.pm:4002
 #, c-format
 msgid "Refreshing printer data..."
-msgstr "Penyegaran data printer..."
+msgstr "Pembaruan data printer..."
 
 #: printer/printerdrake.pm:4011
 #, c-format
 msgid "Starting network..."
-msgstr "Pemulaian network..."
+msgstr "Menjalankan jaringan..."
 
 #: printer/printerdrake.pm:4054 printer/printerdrake.pm:4058
 #: printer/printerdrake.pm:4060
@@ -14361,7 +14431,7 @@ msgstr "Konfigurasikan jaringan sekarang"
 #: printer/printerdrake.pm:4055
 #, c-format
 msgid "Network functionality not configured"
-msgstr "Fungsi network tak dikonfigurasi"
+msgstr "Fungsi jaringan tidak terkonfigurasi"
 
 #: printer/printerdrake.pm:4056
 #, c-format
@@ -14371,18 +14441,18 @@ msgid ""
 "configuration, you will not be able to use the printer which you are "
 "configuring now. How do you want to proceed?"
 msgstr ""
-"Anda akan melakukan konfigurasi printer remote. Ini memerlukan akses "
-"jaringan aktif, tapi konfigurasi jaringan Anda belum ada. Jika diteruskan "
-"tanpa konfigurasi network, Anda takkan dapat menggunakan printer yang Anda "
-"konfigurasikan sekarang. Bagaimana Anda mau teruskan?"
+"Anda akan mengkonfigurasi printer remote. Ini memerlukan akses jaringan "
+"aktif, tapi konfigurasi jaringan Anda belum ada. Jika diteruskan tanpa "
+"konfigurasi jaringan, Anda tidak akan dapat menggunakan printer yang Anda "
+"konfigurasikan sekarang. Bagaimana Anda mau meneruskan?"
 
 #: printer/printerdrake.pm:4059
 #, c-format
 msgid "Go on without configuring the network"
-msgstr "Jalan tanpa konfigurasi jaringan"
+msgstr "Lanjutkan tanpa konfigurasi jaringan"
 
 #: printer/printerdrake.pm:4094
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The network configuration done during the installation cannot be started "
 "now. Please check whether the network is accessible after booting your "
@@ -14390,11 +14460,11 @@ msgid ""
 "\"Network & Internet\"/\"Connection\", and afterwards set up the printer, "
 "also using the %s Control Center, section \"Hardware\"/\"Printer\""
 msgstr ""
-"Konfigurasi network yang dilakukan saat instalasi kini tak dapat jalan. "
-"Tolong cek apakah network dapat diakses setelah sistem diboot dan betulkan "
-"konfigurasi dengan Pusat Kontrol Mandrake, bagian \"Network & Internet\"/"
-"\"Koneksi\", lalu set printer juga dg Pusat Kontrol Mandrake, bagian "
-"\"Hardware\"/\"Printer\""
+"Konfigurasi jaringan yang dilakukan saat instalasi kini tidak berjalan. "
+"Silahkan periksa apakah jaringan dapat diakses setelah sistem diboot "
+"dan perbaiki konfigurasi dengan Pusat Kontrol Mandrake, bagian "
+"\"Network & Internet\"/\"Koneksi\", lalu set printer juga dengan "
+"Pusat Kontrol Mandrake, bagian \"Hardware\"/\"Printer\""
 
 #: printer/printerdrake.pm:4095
 #, c-format
@@ -14403,13 +14473,14 @@ msgid ""
 "your configuration and your hardware. Then try to configure your remote "
 "printer again."
 msgstr ""
-"Akses network tak jalan dan tak dapat dimulai. Cek konfigurasi dan hardware "
-"Anda, lalu coba konfigurasikan printer remote Anda lagi."
+"Akses jaringan tidak berjalan dan tidak dapat dimulai. Periksa "
+"konfigurasi dan perangkat keras Anda, lalu coba konfigurasikan "
+"printer remote Anda lagi."
 
 #: printer/printerdrake.pm:4105
 #, c-format
 msgid "Restarting printing system..."
-msgstr "Mulai ulang sistem cetak ..."
+msgstr "Menjalankan ulang sistem cetak ..."
 
 #: printer/printerdrake.pm:4135
 #, c-format
@@ -14419,12 +14490,12 @@ msgstr "tinggi"
 #: printer/printerdrake.pm:4135
 #, c-format
 msgid "paranoid"
-msgstr "penakut"
+msgstr "paranoid"
 
 #: printer/printerdrake.pm:4137
 #, c-format
 msgid "Installing a printing system in the %s security level"
-msgstr "Instalasi sistem cetak dalam level keamanan %s"
+msgstr "Menginstall sistem cetak pad level keamanan %s"
 
 #: printer/printerdrake.pm:4138
 #, c-format
