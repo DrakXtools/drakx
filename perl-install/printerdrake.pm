@@ -373,16 +373,26 @@ You can add some more or change the existing ones."),
 	while ($continue) {
 	    $printer::printer_type_inv{$printer->{TYPE}} or $printer->{TYPE} = printer::default_printer_type($printer);
 	    $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
-	    if ($::beginner) {
-		$printer->{str_type} =
-		  $in->ask_from_list_(_("Select Printer Connection"),
-				      _("How is the printer connected?"),
-				      [ printer::printer_type($printer) ],
-				      $printer->{str_type},
-				     );
-	    } else {
-		if ($printer->{mode} eq 'cups') {
-		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
+	    if ($printer->{mode} eq 'cups') {
+		$printer->{str_type} = $in->ask_from_list_(_("Select Printer Connection"),
+							   _("How is the printer connected?"),
+							   [ printer::printer_type($printer) ],
+							   $printer->{str_type},
+							  );
+		$printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
+		if ($printer->{TYPE} eq 'REMOTE') {
+		    $printer->{str_type} = $printer::printer_type_inv{CUPS};
+		    $printer->{str_type} = $in->ask_from_list_(_("Select Remote Printer Connection"),
+_("With a remote CUPS server, you do not have to configure
+any printer here; printers will be automatically detected.
+In case of doubt, select \"Remote cups server\"."),
+							       [ @printer::printer_type_inv{qw(CUPS LPD SOCKET)} ],
+							       $printer->{str_type},
+							      );
+		    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
+		}
+		$printer->{TYPE} eq 'CUPS' and return; #- exit printer configuration.
+		$in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
 _("Every printer need a name (for example lp).
 Other parameters such as the description of the printer or its location
 can be defined. What name should be used for this printer and
@@ -390,9 +400,15 @@ how is the printer connected?"), [
 _("Name of printer") => { val => \$printer->{QUEUE} },
 _("Description") => { val => \$printer->{Info} },
 _("Location") => { val => \$printer->{Location} },
-_("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::printer_type($printer) ] },
 				  ],
-					       ) or printer::remove_queue($printer), $continue = 1, last;
+					   ) or printer::remove_queue($printer), $continue = 1, last;
+	    } else {
+		if ($::beginner) {
+		    $printer->{str_type} = $in->ask_from_list_(_("Select Printer Connection"),
+							       _("How is the printer connected?"),
+							       [ printer::printer_type($printer) ],
+							       $printer->{str_type},
+							      );
 		} else {
 		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
 _("Every print queue (which print jobs are directed to) needs a
@@ -402,21 +418,21 @@ _("Name of queue") => { val => \$printer->{QUEUE} },
 _("Spool directory") => { val => \$printer->{SPOOLDIR} },
 _("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::printer_type($printer) ] },
 										      ],
-					   changed => sub {
-					       $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];
-					   }
-					  ) or printer::remove_queue($printer), $continue = 1, last;
+					       changed => sub {
+						   $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];
+					       }
+					      ) or printer::remove_queue($printer), $continue = 1, last;
 		}
+		$printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 	    }
-	    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 
 	    $continue = 0;
 	    for ($printer->{TYPE}) {
 		/LOCAL/     and setup_local    ($printer, $in, $install) and last;
-		/REMOTE/    and setup_remote   ($printer, $in, $install) and last;
+		/LPD/       and setup_remote   ($printer, $in, $install) and last;
+		/SOCKET/    and setup_socket   ($printer, $in, $install) and last;
 		/SMB/       and setup_smb      ($printer, $in, $install) and last;
 		/NCP/       and setup_ncp      ($printer, $in, $install) and last;
-		/SOCKET/    and setup_socket   ($printer, $in, $install) and last;
 		/URI/       and setup_uri      ($printer, $in, $install) and last;
 		$continue = 1; last;
 	    }

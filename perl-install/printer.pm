@@ -16,12 +16,14 @@ my $PRINTER_DB_FILE    = "/usr/lib/rhs/rhs-printfilters/printerdb";
 my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 
 %printer_type = (
-    __("Local printer")           => "LOCAL",
-    __("Network printer (lpd)")   => "REMOTE",
-    __("SMB/Windows 95/98/NT")    => "SMB",
-    __("NetWare")                 => "NCP",
-    __("Socket")                  => "SOCKET",
-    __("Printer Device URI")      => "URI",
+    __("Local printer")            => "LOCAL",
+    __("Remote printer")           => "REMOTE",
+    __("Remote cups server")       => "CUPS",
+    __("Remote lpd server")        => "LPD",
+    __("Network printer (socket)") => "SOCKET",
+    __("SMB/Windows 95/98/NT")     => "SMB",
+    __("NetWare")                  => "NCP",
+    __("Printer Device URI")       => "URI",
 );
 %printer_type_inv = reverse %printer_type;
 
@@ -44,8 +46,8 @@ sub default_spooldir($) { "/var/spool/lpd/" . default_queue($_[0]) }
 sub default_printer_type($) { "LOCAL" }
 sub printer_type($) {
     for ($_[0]{mode}) {
-	/cups/ && return @printer_type_inv{qw(LOCAL REMOTE SMB), $::expert ? qw(SOCKET URI) : ()};
-	/lpr/  && return @printer_type_inv{qw(LOCAL REMOTE SMB NCP)};
+	/cups/ && return @printer_type_inv{qw(LOCAL REMOTE SMB), $::expert ? qw(URI) : ()};
+	/lpr/  && return @printer_type_inv{qw(LOCAL LPD SMB NCP)};
     }
 }
 
@@ -335,7 +337,7 @@ sub read_printers_conf {
 sub get_direct_uri {
     #- get the local printer to access via a Device URI.
     my @direct_uri;
-    local *F; open F, "chroot $prefix/ /usr/sbin/lpinfo -v |";
+    local *F; open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/sbin/lpinfo -v |";
     foreach (<F>) {
 	/^(direct|usb|serial)\s+(\S*)/ and push @direct_uri, $2;
     }
@@ -367,7 +369,7 @@ sub poll_ppd_base {
     run_program::rooted($prefix, "/etc/rc.d/init.d/cups start");
 
     foreach (1..10) {
-	local *PPDS; open PPDS, "chroot $prefix/ /usr/bin/poll_ppd_base -a |";
+	local *PPDS; open PPDS, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
 	foreach (<PPDS>) {
 	    chomp;
 	    my ($ppd, $mf, $descr, $lang) = split /\|/;
@@ -641,7 +643,7 @@ sub print_pages($@) {
 	run_program::rooted($prefix, $lpr, "-P$queue", $_);
     }
     sleep 5; #- allow lpr to send pages.
-    local *F; open F, "chroot $prefix/ $lpq -P$queue |";
+    local *F; open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "$lpq -P$queue |";
     my @lpq_output = grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
     close F;
     @lpq_output;

@@ -496,6 +496,7 @@ sub main {
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    vga16     => sub { $o->{vga16} = $v },
+	    vga       => sub { $o->{vga} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    expert    => sub { $::expert = 1; $::beginner = 0 },
 	    beginner  => sub { $::beginner = $v },
@@ -523,7 +524,7 @@ sub main {
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	}}{lc $n}; &$f if $f;
-    } %cmdline;    
+    } %cmdline;
 
     undef $::auto_install if $cfg;
     if ($::g_auto_install) {
