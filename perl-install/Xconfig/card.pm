@@ -367,7 +367,7 @@ sub multi_head_choices {
 
 	    #- special case for multi head card using only one BusID.
 	    @cards = map {
-		map_index { { screen => $::i, %$_ } } ($_) x ($_->{MULTI_HEAD} || 1);
+		map_index { { Screen => $::i, %$_ } } ($_) x ($_->{MULTI_HEAD} || 1);
 	    } @cards;
 
 	    delete $_->{server} foreach @cards; #- XFree 3 doesn't handle multi head (?)
@@ -393,12 +393,11 @@ sub xfree_and_glx_choices {
     #- XFree version available, better to parse available package and get version from it.
     my ($xf4_ver, $xf3_ver) = ('4.2.0', '3.3.6');
 
-    my @choices = do {
-	#- basic installation, use of XFree 4.2 or XFree 3.3.
-	my $xf3 = { text => _("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } };
-	my $xf4 = { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } };
-	$card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3);
-    };
+    my $xf3 = { text => _("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } };
+    my $xf4 = { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } };
+
+    #- no XFree3 with multi-head
+    my @choices = $card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3);
 
     #- no GLX with Xinerama
     return @choices if $card->{Xinerama};
