@@ -20,7 +20,7 @@ sub ask_from_listW {
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	gtkadd($w->{window},
 	       gtkpack(create_box_with_title($o, @$messages),
-		       gtkadd(create_hbox(),
+		       gtkadd((@$l < 3 ? create_hbox() : create_vbox()),
 			      map {
 				  my $b = new Gtk::Button($_);
 				  $b->signal_connect(clicked => [ $f, $_ ]);

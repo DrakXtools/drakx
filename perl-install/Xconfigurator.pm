@@ -2,14 +2,15 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $resolution_wanted @depths @resolutions @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate @vsync_range %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
+use vars qw($in $install $resolution_wanted @depths @resolutions @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate @vsync_range %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
 
 use pci_probing::main;
 use common qw(:common :file);
-use interactive_gtk;
 use log;
 
 use Xconfigurator_consts;
+
+my $tmpconfig = "/tmp/Xconfig";
 
 1;
 
@@ -52,7 +53,7 @@ sub readCardsDB {
 		add2hash($card, $c);
 	    },
 	    CHIPSET => sub { $card->{chipset} = $val; 
-			     $card->{flags}->{needVideoRam} if member($val, qw(RIVA128));
+			     $card->{flags}->{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128));
 			 },
 	    SERVER => sub { $card->{server} = $val; },
 	    RAMDAC => sub { $card->{ramdac} = $val; },
@@ -148,6 +149,27 @@ sub cardConfiguration(;$) {
     add2hash($card, { type => $in->ask_from_list('', _("Choose a graphic card"), [keys %cards]) }) unless $card->{type} || $card->{server};
     add2hash($card, $cards{$card->{type}}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
+
+    $card->{prog} = "/usr/X11R6/bin/XF86_$card->{server}";
+
+    -x $card->{prog} or !defined $install or &$install($card->{server});
+    -x $card->{prog} or die "server $card->{server} is not available (should be in $card->{prog})";
+
+    unless ($::testing) {
+	unlink("/etc/X11/X");
+	symlink("../../$card->{prog}", "/etc/X11/X");
+    }
+
+    unless ($card->{type}) {
+	$card->{flags}->{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
+    }
+
+    $card->{flags}->{needVideoRam} and
+      $card->{memory} ||= 
+	$videomemory{$in->ask_from_list_('', 
+					 _("Give your graphic card memory size"), 
+					 [ sort { $videomemory{$a} <=> $videomemory{$b} } 
+					   keys %videomemory])};
     $card;
 }
 
@@ -166,20 +188,54 @@ sub testConfig($) {
     my ($o) = @_;
     my ($resolutions, $clocklines);
 
-    write_XF86Config($o, "/tmp/Xconfig");
+    write_XF86Config($o, $tmpconfig);
 
     local *F;
-    open F, "/etc/X11/X :9 -probeonly -pn -xf86config /tmp/Xconfig 2>&1 |";
+    open F, "$o->{card}->{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
     foreach (<F>) {
 	#$videomemory = $2 if /(videoram|Video RAM):\s*(\d*)/;
 	# look for clocks
 	push @$clocklines, $1 if /clocks: (.*)/ && !/(pixel |num)clocks:/;
 
 	push @$resolutions, [ $1, $2 ] if /: Mode "(\d+)x(\d+)": mode clock/;
+	print;
     }
     close F or die "X probeonly failed";
 
     ($resolutions, $clocklines);
+}
+
+sub testFinalConfig($) {
+    my ($o) = @_;
+
+    write_XF86Config($o, $::testing ? $tmpconfig : "/etc/X11/XF86Config");
+
+    my $pid; unless ($pid = fork) {
+	my @l = "X";
+	@l = ($o->{card}->{prog}, "-xf86config", $tmpconfig) if $::testing;
+	exec @l, ":9" or exit 1;
+    }
+    do { sleep 1; } until (c::Xtest(':0'));
+
+    local *F;
+    open F, "|perl" or die;
+    print F "use lib qw(", join(' ', @INC), ");\n";
+    print F q{
+	use interactive_gtk;
+        use my_gtk qw(:wrappers);
+
+	$ENV{DISPLAY} = ":9";
+        gtkset_mousecursor(2);
+        gtkset_background(200, 210, 210);
+        my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
+        $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
+	$my_gtk::force_focus = 1;
+	exit !interactive_gtk->new->ask_yesorno('', _("It this ok?"));
+    };
+    my $rc = close F;
+    kill 2, $pid;
+
+    $rc;
 }
 
 sub autoResolutions($) {
@@ -193,11 +249,11 @@ sub autoResolutions($) {
 
     # Configure the modes order.
     my ($ok, $best);
-    foreach (@depths) {
+    foreach (reverse @depths) {
 	local $card->{default_depth} = $_;
 
 	my ($resolutions, $clocklines) = eval { testConfig($o) };
-	if ($@) {
+	if ($@ || !$resolutions) {
 	    delete $card->{depth}->{$_};
 	} else {
 	    $card->{clocklines} ||= $clocklines unless $card->{flags}->{noclockprobe};
@@ -207,30 +263,20 @@ sub autoResolutions($) {
 	    my ($b) = sort { $b->[0] <=> $a->[0] } @$resolutions;
 
 	    # require $resolution_wanted, no matter what bpp this requires
-	    $best = $_ if $b->[0] >= $hres_wanted;
+	    $card->{default_depth} = $_, last if $b->[0] >= $hres_wanted;
 	}
     }
     $ok or die "no valid modes";
-
-    $card->{default_depth} = $best;
 }
 
 
-sub moreCardConfiguration {
-    my ($o) = @_;
+sub resolutionsConfiguration {
+    my ($o, $manual) = @_;
     my $card = $o->{card};
 
-    $card->{vendor} ||= "Unknown";
-    $card->{model} ||= "Unknown";
-
-    unless ($card->{type}) {
-	$card->{flags}->{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
-    }
-
-    my $manual;
     # some of these guys hate to be poked               
     # if we dont know then its at the user's discretion
-    #my $manual = 
+    #my $manual ||= 
     #  $card->{server} =~ /^(TGA|Mach32)/ || 
     #  $card->{name} =~ /^Riva 128/ ||
     #  $card->{chipset} =~ /^(RIVA128|mgag)/ ||
@@ -253,25 +299,24 @@ sub moreCardConfiguration {
     #$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
     #						       _("Do you want to try?") ]);
     
-    $card->{flags}->{needVideoRam} and
-      $card->{memory} ||= 
-	$videomemory{$in->ask_from_list_('', 
-					 _("Give your graphic card memory size"), 
-					 [ sort { $videomemory{$a} <=> $videomemory{$b} } 
-					   keys %videomemory])};
+    findLegalModes($card);
 
-    findLegalModes($o->{card});
-
-    unless ($manual || $::expert) {
+    unless ($manual || $::expert || !$in->ask_okcancel(_("Automatic resolutions"), 
+_("I can try to find the available resolutions (eg: 800x600).
+Alas it can freeze sometimes
+Do you want to try?"))) {
 	# swith to virtual console 1 (hopefully not X :)
 	my $vt = setVirtual(1);
-
-	autoMemoryAndClocksline($o);
 	autoResolutions($o);
-
 	# restore the virtual console
 	setVirtual($vt);
     }
+    my %l;
+    foreach ($card->{depth})
+
+    ask_from_list(_("Resolution"),
+		  _("Choose resolution and color depth"),
+		  [ ]);
 }
 
 
@@ -421,11 +466,13 @@ sub XF86check_link {
     }
 }
 
+
 # * Program entry point. 
 sub main {
-    my ($default, $interact) = @_;
+    my ($default, $interact, $install_pkg) = @_;
     my $o = $default;
     $in = $interact;
+    $install = $install_pkg;
 
     $o->{resolution_wanted} ||= $resolution_wanted;
     
@@ -433,29 +480,27 @@ sub main {
 
     $o->{card} = cardConfiguration($o->{card});
 
-    unless ($::testing) {
-	my $prog = "/usr/X11R6/bin/XF86_$o->{card}->{server}";
-	-x $prog or die "server $o->{card}->{server} is not available (should be in $prog)";
-	unlink("/etc/X11/X");
-	symlink("../../$prog", "/etc/X11/X");
-    }
-
     $o->{monitor} = monitorConfiguration($o->{monitor});
 
-    moreCardConfiguration($o);
+    resolutionsConfiguration($o);
 
-    write_XF86Config($o, "/tmp/Xconfig");
+    my $ok = testFinalConfig($o);
+    my $quit;
 
-    unless (fork) {
-	exec "X", ":9" or exit 1;
+    until ($ok || $quit) {
+
+	my %c = my @c = (
+	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
+           __("Change Graphic card") => sub { $o->{card} = cardConfiguration() },
+	   __("Change Resolution") => sub { resolutionsConfiguration($o, 1) },
+	   __("Test again") => sub { $ok = testFinalConfig($o) },
+	   __("Quit") => sub { $quit = 1 },
+        );
+	&{$c{$in->ask_from_list_('', 
+				 _("What do you want to do?"),
+				 [ grep { !ref } @c ])}};
     }
     
-    {
-	local $ENV{DISPLAY} = ":9";
-	my $w = interactive_gtk->new;
-	$w->ask_yesorno("Do you see this message");
-    }
-
     # Success 
-    rewriteInittab(rc & STARTX ? 5 : 3);
+#    rewriteInittab($rc ? 3 : 5) unless $::testing;
 }

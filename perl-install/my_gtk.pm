@@ -6,8 +6,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_adjustment create_box_with_title) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy) ],
+    helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -118,6 +118,33 @@ sub gtkadd($@) {
     $w
 }
 
+sub gtkset_mousecursor($) {
+    my ($type) = @_;
+    Gtk->init;
+
+    my $root = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
+    $root->set_cursor(Gtk::Gdk::Cursor->new($type));
+}
+
+sub gtkset_background($$$) {
+    my ($r, $g, $b) = @_;
+
+    Gtk->init;
+    my $root = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
+    my $gc = Gtk::Gdk::GC->new($root);
+
+    my $color = bless {}, 'Gtk::Gdk::Color';
+    $color->red  ($r << 8);
+    $color->green($g << 8);
+    $color->blue ($b << 8);
+    $color = $root->get_colormap->color_alloc($color);
+    $gc->set_foreground($color);
+    $root->set_background($color);
+    
+    my ($h, $w) = $root->get_size;
+    
+    $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
+}
 
 
 
@@ -139,7 +166,7 @@ sub create_okcancel($;$$) {
 sub create_box_with_title($@) {
     my $o = shift;
     $o->{box} = gtkpack_(new Gtk::VBox(0,0),
-			 0, map({ new Gtk::Label("  $_  ") } @_),
+			 map({ 0, $_ } @_),
 			 0, new Gtk::HSeparator,
 		       )
 }
@@ -201,6 +228,11 @@ sub create_packtable($@) {
 
 sub create_hbox {
     my $w = new Gtk::HButtonBox;
+    $w->set_layout(-spread);
+    $w;
+}
+sub create_vbox {
+    my $w = new Gtk::VButtonBox;
     $w->set_layout(-spread);
     $w;
 }
@@ -291,7 +323,7 @@ sub _ask_from_list($$$$) {
     gtkadd($o->{window}, 
 	   gtkpack($o->create_box_with_title(@$messages), 
 		   @widgets > 15 ? 
-		     gtkset_usize(createScrolledWindow($list), 0, 300) : 
+		     gtkset_usize(createScrolledWindow($list), 200, 300) : 
 		     $list));
     $widgets[$def]->grab_focus;
 }
@@ -329,3 +361,5 @@ sub _ask_okcancel($@) {
 #    $w->set_alignment(!/W/i, !/N/i);
 #    $w
 #}
+
+

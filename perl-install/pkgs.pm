@@ -221,6 +221,10 @@ sub init_db {
     c::rpmErrorSetCallback($fd);
 #    c::rpmSetVeryVerbose();
     
+    log::l("reading /usr/lib/rpm/rpmrc");
+    c::rpmReadConfigFiles() or die "can't read rpm config files";
+    log::l("\tdone");
+
     $isUpgrade ? c::rpmdbRebuild($prefix) : c::rpmdbInit($prefix, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
 }
 
@@ -237,6 +241,8 @@ sub getHeader($) {
 
 sub install {
     my ($prefix, $toInstall, $isUpgrade, $force) = @_;
+
+    c::rpmReadConfigFiles() or die "can't read rpm config files";
 
     my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
     log::l("opened rpm database");

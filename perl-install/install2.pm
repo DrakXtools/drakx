@@ -178,10 +178,6 @@ sub formatPartitions {
 }
 
 sub findInstallFiles {
-    log::l("reading /usr/lib/rpm/rpmrc");
-    c::rpmReadConfigFiles() or die "can't read rpm config files";
-    log::l("\tdone");
-
     $o->{packages} = pkgs::psUsingDirectory();
     pkgs::getDeps($o->{packages});
 
