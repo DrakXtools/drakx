@@ -93,9 +93,11 @@ static enum return_type try_with_device(char *dev_name)
 	strcat(location_full, answers_location[0]);
 
 	if (access(location_full, R_OK)) {
+		char * path = strdup(answers_location[0]);
 		stg1_error_message("Directory or ISO image file could not be found on partition.\n"
 			      "Here's a short extract of the files in the directory %s:\n"
-			      "%s", dirname(answers_location[0]), extract_list_directory(dirname(location_full)));
+			      "%s", dirname(path), extract_list_directory(dirname(location_full)));
+		free(path);
 		goto ask_dir;
 	}
 
