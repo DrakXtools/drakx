@@ -191,8 +191,6 @@ gtkflush();
 $window1->main;
 ugtk2->exit(0);
 
-
-
 sub manage {
     my ($netc, $netcnx, $intf) = @_;
 
@@ -203,7 +201,7 @@ sub manage {
     $notebook->set_property('show-tabs', 0);
     $notebook->set_property('show-border', 0);
     my $apply_button;
-    
+  
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
 									    changed => sub {
@@ -335,26 +333,51 @@ sub build_notebook {
     }
     
     #- options box
-    gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),
+    gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),	    
 	    gtkpack__(Gtk2::VBox->new(0,0),
-		      map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
-									    toggled => $apply))
-			} ([ "ONBOOT", N("Start at boot") ],
-			   [ "HWADDR", N("Track network card id (useful for laptops)") ],
-			   [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
-			  ),		     
+		      $gui->{intf_bool}{ONBOOT} = gtksignal_connect(Gtk2::CheckButton->new(N("Start at boot")),
+								    toggled => $apply),
+		      if_($interface =~ /eth/,
+			  map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
+										toggled => $apply))
+			    } ([ "HWADDR", N("Track network card id (useful for laptops)") ],
+			       [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
+			      ),		     
+			 ),
+		      if_($interface eq 'ippp0',
+			  gtkpack(Gtk2::HBox->new(0,0),
+				  gtkpack__(new Gtk2::VBox(0,0),
+					    Gtk2::Label->new(N("Dialing mode")),
+					    my @dialing_mode_radio = gtkradio(("auto") x 2, "manual"),
+					   ),
+				  Gtk2::VSeparator->new,
+				  gtkpack__(new Gtk2::VBox(0,0),
+					    Gtk2::Label->new(N("Connection speed")),
+					    my @speed_radio = gtkradio(("64 Kb/s") x 2, "128 Kb/s"),
+					   ),
+				 ),
+			  gtkpack_(Gtk2::HBox->new(0,0),
+				   0, Gtk2::Label->new(N("Connection timeout (in sec)")),
+				   1, gtksignal_connect($gui->{cnx}{huptimeout} = Gtk2::Entry->new,
+							key_press_event => $apply),
+				  ),
+			 ),
 		     ));
+    $dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'auto'; $apply });
+    $dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'static'; $apply });
+    $speed_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '64'; $apply });
+    $speed_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '128'; $apply });
     $gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
     
     #- account box
     if ($interface eq 'speedtouch' || $interface eq 'sagem') {
 	$gui->{description} = $interface eq 'speedtouch' ? 'Alcatel|USB ADSL Modem (Speed Touch)' : 'Analog Devices Inc.|USB ADSL modem';
 	gtkpack_($gui->{sheet}{Account} = Gtk2::VBox->new(0,0),
-		 0, gtkpack_(Gtk2::VBox->new(0,0),
-			     1, Gtk2::Label->new(N("Authentication")),
-			     0, my $auth_menu  = gtksignal_connect(Gtk2::OptionMenu->new,
-								   changed => $apply),
-			    ),
+		 # 0, gtkpack_(Gtk2::VBox->new(0,0),
+		 # 			     1, Gtk2::Label->new(N("Authentication")),
+		 # 			     0, my $auth_menu  = gtksignal_connect(Gtk2::OptionMenu->new,
+		 # 								   changed => $apply),
+		 # 			    ),
 		 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
 				    1, Gtk2::Label->new($_->[0]),
 				    0, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::Entry->new,
@@ -366,11 +389,38 @@ sub build_notebook {
 		      #[ N("Provider phone number"), 'phone_out' ],
 		     ),
 		);
-	$auth_menu->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
+	#$auth_menu->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
 	$gui->{intf}{passwd}->set_visibility(0);
 	/^user\s+"([^"]+)"/ and $intf->{login} = $1 foreach cat_("/etc/ppp/peers/adsl");
 	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{read_secret_backend()};
 	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
+    }
+    
+    #- Modem box
+    if ($interface eq 'ippp0') {
+	gtkpack($gui->{sheet}{Modem} = Gtk2::HBox->new(0,0),
+		gtkpack_(Gtk2::VBox->new(0,0),
+			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
+					    1, Gtk2::Label->new($_->[0]),
+					    0, $gui->{netcnx}{$_->[1]} = gtksignal_connect(Gtk2::Entry->new,
+											   key_press_event => $apply),
+					   ),
+			       );
+			   } ([ N("Card IRQ"), 'irq' ],
+			      [ N("Card mem (DMA)"), 'mem' ],
+			      [ N("Card IO"), 'io' ],
+			      [ N("Card IO_1"), 'io1' ],
+			     ),
+			),
+ 		Gtk2::VSeparator->new,
+		gtkpack__(new Gtk2::VBox(0,0),
+			  Gtk2::Label->new(N("Protocol")),
+			  my @protocol_radio = gtkradio(N("Protocol"), N("European protocol (EDSS1)"), 
+							N("Protocol for the rest of the world\nNo D-Channel (leased lines)")),
+			 ),
+	       );
+	$protocol_radio[0]->signal_connect('toggled' => sub { $gui->{isdn}{protocol} = 2; $apply });
+	$protocol_radio[1]->signal_connect('toggled' => sub { $gui->{isdn}{protocol} = 3; $apply });
     }
     
     #- informations box
@@ -399,7 +449,7 @@ sub build_notebook {
 
 sub populate_notebook {
     my ($notebook, $gui) = @_;
-    foreach ('Tcp/ip', 'Account', 'Wireless', 'Options', 'Informations') {
+    foreach ('Tcp/ip', 'Account', 'Wireless', 'Modem', 'Options', 'Informations') {
 	!$gui->{sheet}{$_} and next;
 	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new($_));
     }
@@ -407,7 +457,7 @@ sub populate_notebook {
 
 sub save {
     my ($netc, $netcnx, $intf, $gui, $apply_button) = @_;
-
+ 
     save_notebook($netc, $intf->{$_}, $gui->{$_}) foreach keys %$intf;
     apply($netc, $netcnx, $intf, $apply_button);
 }
@@ -470,7 +520,6 @@ sub del_intf() {
     wizards->new->safe_process($wiz, $in);
     $in->exit(0);
 }
-
 
 sub get_intf_ip {
     my ($interface) = @_;
