@@ -31,11 +31,11 @@ GLIBC_INCLUDES = -I.
 INCLUDES = $($(L)_INCLUDES)
 
 GLIBC_LDFLAGS_STAGE1 = -static
-DIETLIBC_LDFLAGS_STAGE1 = -nostdlib $(top_dir)/dietlibc/start.o
+DIETLIBC_LDFLAGS_STAGE1 = -nostdlib $(top_dir)/dietlibc/bin-$(ARCH)/start.o
 LDFLAGS_STAGE1 = $($(L)_LDFLAGS_STAGE1)
 
 GLIBC_LIBC =
-DIETLIBC_LIBC = $(top_dir)/dietlibc/dietlibc.a
+DIETLIBC_LIBC = $(top_dir)/dietlibc/bin-$(ARCH)/dietlibc.a
 STAGE1_LIBC = $($(L)_LIBC)
 
 STRIPCMD = strip -R .note -R .comment
