@@ -23,7 +23,7 @@ sub install_raw {
     s|^/|| foreach @_;
     _ "tar c -C / @_ | tar x -C $tmp" if @_;
 }
-sub install_lib {
+sub install_deref {
     s|^/|| foreach @_;
     _ "tar c -C / --dereference @_ | tar x -C $tmp" if @_;
 }
@@ -35,9 +35,9 @@ sub install_l {
     push @l, 
       `ldd @l 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/lib/.*?/,/lib/,'`;
 
-    @l = uniq(map { chomp_($_) } @l);
-    install_raw(grep { !/lib.*\.so/ } @l);
-    install_lib(grep {  /lib.*\.so/ } @l);
+    my ($deref, $raw) = partition { /lib.*\.so/ || readlink("/$_") =~ m|/etc/alternatives| } uniq(map { chomp_($_) } @l);
+    install_raw(@$raw);
+    install_deref(@$deref);
 }
 
 sub installown($$) {
