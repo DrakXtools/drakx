@@ -1,5 +1,23 @@
 #!/usr/bin/perl
 
+# DrakSec
+
+# Copyright (C) 2002 MandrakeSoft (cbelisle@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -8,6 +26,7 @@ use common;
 use interactive;
 use any;
 use c;
+use security::msec;
 
 local $_ = join '', @ARGV;
 
@@ -23,15 +42,22 @@ $::isEmbedded and kill USR2, $::CCPID;
 
 my $security = any::get_secure_level('');
 my $libsafe = any::config_libsafe('');
+my @logins = security::msec::get_user_list('');
+my $email = "put.your\@email.here";
 
-if (any::choose_security_level($in, \$security, \$libsafe)) {
-
+if (any::choose_security_level($in, \$security, \$libsafe, \$email)) {
     any::config_libsafe('', $libsafe);
 
     my $w = $in->wait_message('', _("Setting security level"));
     $in->suspend;
     $ENV{LILO_PASSWORD} = ''; # make it non interactive
     system "/usr/sbin/msec", $security;
+    $in->resume;
+
+    my $w = $in->wait_message('', _("Setting security user"));
+    $in->suspend;
+    security::msec::add_config('', "set_security_conf", "MAIL_USER", $email);
+    security::msec::commit_changes('');
     $in->resume;
 }
 
