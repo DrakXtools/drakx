@@ -106,7 +106,7 @@ sub hdInstallPath() {
 sub install_acpi_pkgs {
     my ($do_pkgs, $b) = @_;
 
-    my $acpi = bootloader::get_append_with_key($b, 'acpi') or return;
+    my $acpi = bootloader::get_append_with_key($b, 'acpi');
     if (!member($acpi, 'off', 'ht')) {
 	$do_pkgs->install('acpi', 'acpid') if !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid");
     }
