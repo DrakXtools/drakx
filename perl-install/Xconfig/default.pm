@@ -33,22 +33,12 @@ sub configure {
 sub config_mouse {
     my ($raw_X, $mouse) = @_;
     mouse::set_xfree_conf($mouse, $raw_X);
-    if (my @wacoms = @{$mouse->{wacom} || []}) {
-	$raw_X->set_wacoms(map { { Device => "/dev/$_", USB => m|input/event| } } @wacoms);
-	$raw_X->{xfree3}->add_load_module('xf86Wacom.so');
-    }
 }
 
 sub config_keyboard {
     my ($raw_X, $keyboard) = @_;
 
     my $XkbLayout = keyboard::keyboard2xkb($keyboard);
-
-    if (!$XkbLayout || $XkbLayout =~ /([^(]*)/ && !-e "$::prefix/usr/X11R6/lib/X11/xkb/symbols/$1") {
-	my $f = keyboard::xmodmap_file($keyboard);
-	cp_af($f, "$::prefix/etc/X11/xinit/Xmodmap");	
-	$XkbLayout = '';
-    }
 
     {
 	my $f = "$::prefix/etc/sysconfig/i18n";
