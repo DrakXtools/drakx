@@ -2338,8 +2338,8 @@ sub copy_queues_from {
 				  N("Reading printer data..."));
 	@oldqueues = printer::main::get_copiable_queues($oldspooler, $newspooler);
 	@oldqueues = sort(@oldqueues);
-	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
-	$oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
+	$newspoolerstr = $printer::data::shortspooler_inv{$newspooler};
+	$oldspoolerstr = $printer::data::shortspooler_inv{$oldspooler};
 	foreach (@oldqueues) {
 	    push @queuesselected, 1;
 	    push @queueentries, { text => $_, type => 'bool', 
@@ -2566,7 +2566,7 @@ sub security_check {
 This printing system runs a daemon (background process) which waits for print jobs and handles them. This daemon is also accessable by remote machines through the network and so it is a possible point for attacks. Therefore only a few selected daemons are started by default in this security level.
 
 Do you really want to configure printing on this machine?",
-			   $printer::main::shortspooler_inv{$spooler},
+			   $printer::data::shortspooler_inv{$spooler},
 			   $securitystr))) {
         printer::main::add_spooler_to_security_level($spooler, $security);
 	my $service;
@@ -2601,7 +2601,7 @@ sub start_spooler_on_boot {
 It is possible that the automatic starting was turned off by changing to a higher security level, because the printing system is a potential point for attacks.
 
 Do you want to have the automatic starting of the printing system turned on again?",
-		       $printer::main::shortspooler_inv{$printer->{SPOOLER}}))) {
+		       $printer::data::shortspooler_inv{$printer->{SPOOLER}}))) {
 	    services::start_service_on_boot($service);
 	}
     }
@@ -2675,11 +2675,12 @@ sub setup_default_spooler {
     $in->set_help('setupDefaultSpooler') if $::isInstall;
     $printer->{SPOOLER} ||= 'cups';
     my $oldspooler = $printer->{SPOOLER};
+
     my $str_spooler = 
 	$in->ask_from_list_(N("Select Printer Spooler"),
 			    N("Which printing system (spooler) do you want to use?"),
 			    [ printer::main::spooler() ],
-			    $printer::spooler_inv{$printer->{SPOOLER}},
+			    $spoolers{$printer->{SPOOLER}},
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
     # Install the spooler if not done yet
