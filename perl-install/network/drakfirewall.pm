@@ -19,12 +19,12 @@ my @all_servers =
    ports => '53/tcp 53/udp',
   },
   {
-   name => "SSH",
+   name => N_("SSH server"),
    pkg => 'openssh-server',
    ports => '22/tcp',
   },
   {
-   name => "FTP",
+   name => N_("FTP server"),
    pkg => 'ftp-server-krb5 wu-ftpd proftpd pure-ftpd',
    ports => '20/tcp 21/tcp',
   },
@@ -39,19 +39,19 @@ my @all_servers =
    ports => '109/tcp 110/tcp 143/tcp',
   },
   {
-   name => "Telnet",
+   name => N_("Telnet server"),
    pkg => 'telnet-server-krb5',
    ports => '23/tcp',
    hide => 1,
   },
   {
-   name => "Samba",
+   name => N_("Samba server"),
    pkg => 'samba-server',
    ports => '137/tcp 137/udp 138/tcp 138/udp 139/tcp 139/udp ',
    hide => 1,
   },
   {
-   name => "CUPS",
+   name => N_("CUPS server"),
    pkg => 'cups',
    ports => '631/tcp 631/udp',
    hide => 1,
