@@ -97,7 +97,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     }
     if ($Ident eq "AUDIO") {
         # automatic sound slots configuration
-        system("rm -f /etc/asound.state");
+        rm_rf("/etc/asound.state");
         harddrake::sound::configure_sound_slots();
         next;
     } elsif ($Ident eq "ETHERNET") {
@@ -121,7 +121,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     if (!$hw_class->{automatic}) {
         $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
         unless ($pid = fork()) {
-            $splash and !system('echo verbose > /proc/splash') and $splash = 0;
+            $splash and eval { output('/proc/splash', 'verbose') } and $splash = 0;
             exec("/usr/share/harddrake/confirm", $Ident, $timeout, $msg);
         }
         alarm($timeout);
