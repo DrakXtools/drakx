@@ -491,7 +491,6 @@ my ($prev_pic, $prev_canvas);
 #- Desc  => destroy properly all widget of preview window
 sub kill_preview() {
 		$prev_window->destroy; undef($prev_window);
-		$prev_canvas->destroy; undef($prev_canvas);
 		undef($prev_pic);
 }
 #- Desc  => create a new window with a preview of splash screen
@@ -513,16 +512,7 @@ sub show_prev {
  }
 
  $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h}, 'hyper');
- $prev_canvas && $prev_canvas->isa('Gtk2::Widget')
-	 or $prev_canvas = Gtk2::DrawingArea->new and $prev_window->add($prev_canvas);
- $prev_canvas->set_size_request($theme{res}{w}, $theme{res}{h});
-     $prev_canvas->signal_connect(expose_event => sub {
-     my ($w, $event) = @_;
-     my ($x, $y, $width, $height) = $event->area->values;
-     $prev_pic->render_to_drawable($w->window, $w->style->fg_gc('normal'), $x, $y, $x, $y, $width, $height, 'normal', 0, 0);
-     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height);
-     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height);
- });
+ $prev_window->add(Gtk2::Image->new_from_pixbuf($prev_pic));
  $prev_window->signal_connect(delete_event => \&kill_preview);
  $prev_window->show_all;
  
