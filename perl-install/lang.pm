@@ -15,12 +15,15 @@ my %languages = (
   "de" => [ "German",    "lat0-sun16",	"iso15",	"de_DE" ],
   "hu" => [ "Hungarian", "lat2-sun16",  "iso02",	"hu_HU" ],
   "is" => [ "Icelandic", "lat0-sun16",	"iso15",	"is_IS" ],
+  "id" => [ "Indonesian","lat0-sun16",  "iso15",        "id" ],
   "it" => [ "Italian",   "lat0-sun16",	"iso15",	"it_IT" ],
   "no" => [ "Norwegian", "lat0-sun16",	"iso15",	"no_NO" ],
   "ro" => [ "Romanian",  "lat2-sun16",	"iso02",	"ro_RO" ],
   "sk" => [ "Slovak",    "lat2-sun16",	"iso02",	"sk_SK" ],
+  "es" => [ "Spanish",   "lat0-sun16",  "iso15",        "es" ],
   "ru" => [ "Russian",   "Cyr_a8x16", 	"koi2alt",	"ru_SU" ],
   "uk" => [ "Ukrainian", "ruscii_8x16",	"koi2alt",	"uk_UA" ],
+  "wa" => [ "Walon",     "lat0-sun16",  "iso15",        "wa" ],
 );
 
 1;
