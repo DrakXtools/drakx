@@ -1,7 +1,7 @@
 package network::shorewall; # $Id$
 
-use diagnostics;
-use strict;
+
+
 
 use detect_devices;
 use network::netconnect;
@@ -72,18 +72,21 @@ sub read {
     if (my ($e) = get_config_file('masq')) {
 	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
     }
+    require Data::Dumper;
+    print "before\n";
+    print Data::Dumper->Dump([\%conf], ['%conf']);
+    put_in_hash(\%conf, default_interfaces());
+    print "after\n";
+    print Data::Dumper->Dump([\%conf], ['%conf']);
     foreach (get_config_file('interfaces')) {
 	my ($name, $interface) = @$_;
-	if ($name eq 'net') {
-	    $conf{net_interface} = $interface;
-	} elsif ($name eq 'masq') {
+	if ($name eq 'masq') {
 	    $conf{masquerade}{interface} = $interface;
-	} elsif ($name eq 'loc') {
-	    push @{$conf{loc_interface}}, $interface;
-	} else {
-	    log::l("unknown interface name $name");
+	    $conf{loc_interface} = [ difference2($conf{loc_interface}, [$interface]) ];
 	}
     }
+    print "after masq\n";
+    print Data::Dumper->Dump([\%conf], ['%conf']);
     $conf{net_interface} && \%conf;
 }
 
