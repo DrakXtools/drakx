@@ -185,16 +185,16 @@ $thm_button->signal_connect('clicked',
 sub {
         my $error = 0;
         my $boot_conf_file = '/etc/sysconfig/bootsplash';
-	my $lilomsg = '/boot/lilo-graphic/message';
-        #lilo installation
-        if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
-	    use File::Copy;
-	    ( copy($lilomsg,"/boot/lilo-graphic/message.old") 
-	      and standalone::explanations(_("Backup %s to %s.old",$lilomsg,$lilomsg)) ) 
-	      or $in->ask_warn(_("Error"), _("unable to backup lilo message"));
-	    ( copy($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg) 
-	      and standalone::explanations(_("Copy %s to %s",$themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)) )
-	      or $in->ask_warn(_("Error"), _("can't change lilo message"));
+	my $lilomsg = '/boot/message-graphic';
+      #lilo installation
+      if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
+			use MDK::Common::File;
+	    standalone::explanations(_("Backup %s to %s.old",$lilomsg,$lilomsg)); 
+	    cp_af($lilomsg,"/boot/message-graphic.old") ;
+	    #can't use this anymore or $in->ask_warn(_("Error"), _("unable to backup lilo message"));
+	    standalone::explanations(_("Copy %s to %s",$themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)); 
+	    cp_af($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg) ;
+			#can't use this anymore  or $in->ask_warn(_("Error"), _("can't change lilo message"));
 	} else {
             $error = 1;
             $in->ask_warn(_("Error"), _("Lilo message not found"));
