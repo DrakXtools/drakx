@@ -53,7 +53,11 @@ if ($img =~ /rdz$/) {
     foreach (glob('all.kernels/*')) {
 	$_ =~ 'cardmgr' and next;
 	my ($kern) = $_ =~ /all.kernels\/([^\/]+)/;
-	_ "$sudo cp -f all.kernels/$kern/boot/vmlinuz* all.kernels/$kern/vmlinuz";
+	if ($arch !~ /ppc/) {
+	    _ "$sudo cp -f all.kernels/$kern/boot/vmlinuz* all.kernels/$kern/vmlinuz";
+	} else {
+	    _ "$sudo cp -f all.kernels/$kern/boot/vmlinux* all.kernels/$kern/vmlinux";
+	}
 	$::{"boot_img_$arch"}->($mnt, $img, "all.kernels/$kern/", "all.modules/$kern");
     }
 }
@@ -344,13 +348,14 @@ image=/vmlinux$I.gz
 }
 
 sub boot_img_ppc {
-    my ($mnt, $img) = @_;
+    my ($mnt, $img, $kern, $modz) = @_;
     my $dir = "/export";
-	my $boot = "boot"; #- non-absolute pathname only!
+    my $boot = "boot"; #- non-absolute pathname only!
+    my ($extension) = $modz =~ /.*\/([^\/]+)/;
     _ "mkdir -p $dir/$boot";
-	_ "cp -f vmlinux $dir/$boot/vmlinux";
-	_ "cp -f all.rdz $dir/boot/all.gz";
-	_ "cp -f tools/ppc/yaboot $dir/boot/yaboot";
+    _ "cp -f $kern/vmlinux $dir/$boot/vmlinux";
+    _ "cp -f all.rdz$extension $dir/boot/all.gz";
+    _ "cp -f tools/ppc/yaboot $dir/boot/yaboot";
 	
 	output("$dir/$boot/yaboot.conf", "
 init-message = \"\\nWelcome to Mandrake Linux PPC!\\nHit <TAB> for boot options.\\n\\n\"
