@@ -15,11 +15,8 @@ use list_modules;
 my %modules_only_for_all_img = (
 
   'network/main' => [
-    qw(olympic acenic),
+    qw(acenic),
     qw(aironet4500_card com20020-pci hamachi starfire winbond-840),
-
-    # token ring
-    qw(tmspci ibmtr abyss),
 
     if_(arch() =~ /x86_64/, qw(orinoco_plx)), # don't support laptop for now
     if_(arch() =~ /x86_64/, qw(hp100 epic100)), # old (nico)
