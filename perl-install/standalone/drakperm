@@ -13,7 +13,7 @@ local $_ = join '', @ARGV;
 
 #- vars declaration
 my ($level) = chomp_(`cat /etc/sysconfig/msec | grep SECURE_LEVEL= |cut -d= -f2`);
-my ($default_perm_level) = "level " . $level;
+my $default_perm_level = "level " . $level;
 my %perm_files = ($default_perm_level => '/usr/share/msec/perm.' . $level,
                   'editable' => '/etc/security/msec/perm.local',
                  );
@@ -197,16 +197,16 @@ sub display_perm {
 sub save_perm() {
     my $val;
     if ($modified) {
-        local *F;
-        open F, '>' . $perm_files{editable} or die(qq(Impossible to process "$perm_files{editable}"));
+        my $F;
+        open $F, '>' . $perm_files{editable} or die(qq(Impossible to process "$perm_files{editable}"));
         $model->foreach(sub {
                             my ($model, $_path, $iter) = @_;
                             return 0 if $model->get($iter, 0);
                             my $line = $model->get($iter, 1) . "\t" . $model->get($iter, 2) . ($model->get($iter, 3) ? "." . $model->get($iter, 3) : "") . "\t" . $model->get($iter, 4) . "\n";
-                            print F $line;
+                            print $F $line;
                             return 0;
                         }, $val);
-        close F;
+        close $F;
     }
     $modified = 0;
     ugtk2->exit;
@@ -214,12 +214,9 @@ sub save_perm() {
 
 sub load_perms() {
     foreach my $file (@perm_files{($default_perm_level, 'editable')}) {
-        local *F;
-        open F, $file;
-        
         my @editable = if_($file ne $perm_files{editable}, editable => $pixbuf);
         local $_;
-        while (<F>) {
+        foreach (cat_($file)) {
             next if /^#/;
             # Editable, Path, User, Group, Permissions
             if (m/^(\S+)\s+([^.\s]+)\.(\S+)?\s+(\d+)/) {
@@ -231,7 +228,6 @@ sub load_perms() {
             }
             $index++;
         }
-        close F;
     }
 }
 
@@ -411,15 +407,12 @@ sub row_setting_dialog {
 sub get_user_or_group {
     my $what = @_;
     my @users;
-    local *F;
-    open F, $what eq 'users' ? '/etc/passwd' : '/etc/group';
      
     local $_;
-    while (<F>) {
+    while (cat_($what eq 'users' ? '/etc/passwd' : '/etc/group')) {
      m/^([^#:]+):[^:]+:[^:]+:/ or next;
      push @users, $1;
     }
-    close F;
     return sort(@users);
 }
 
