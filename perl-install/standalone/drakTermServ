@@ -686,8 +686,15 @@ sub maintain_clients {
 	my $entry_nbi = new Gtk::Combo();
 
 	my @images = grep(/\.nbi/, all("/var/lib/tftpboot/"));
-	$entry_nbi->set_popdown_strings(@images);
-	$entry_nbi->set_value_in_list(1, 0);
+	my $have_nbis = @images;
+	if ($have_nbis ne 0) {
+		$entry_nbi->set_popdown_strings(@images);
+		$entry_nbi->set_value_in_list(1, 0);
+	} else {
+		$in->ask_warn('',_("No net boot images created!"));		
+		make_nbi();
+		return 1;
+	}
 			 
 	gtkpack($status_box,
 		my $client_box = gtkpack_(new Gtk::VBox(1,10),
@@ -1248,7 +1255,8 @@ sub addclient {
 
 		my $clients = "/etc/dhcpd.conf.etherboot.clients";
 		open(CLIENT, ">> $clients") || warn ("Can't open $clients!");
-		print_client_entry("CLIENT", $hostname, %ts_clients);
+		my $client_entry = format_client_entry($hostname, %ts_clients);
+		print CLIENT $client_entry;
 		close CLIENT;	
 		0;
 	} 
@@ -1277,25 +1285,27 @@ sub delclient {
 	}	
 }
 
-sub print_client_entry {
-	#- print a client entry, in proper format
-	my ($handle, $client, %ts_clients) = @_;
+sub format_client_entry {
+	#- create a client entry, in proper format
+	my ($client, %ts_clients) = @_;
 
-	print $handle "host $client {\n";
-	print $handle "\thardware ethernet\t$ts_clients{$client}->{hardware};\n";
-	print $handle "\tfixed-address\t\t$ts_clients{$client}->{address};\n";
-	print $handle "\tfilename\t\t\"$ts_clients{$client}->{filename}\";\n";
-	print $handle "}\n";
+	my $entry = "host $client {\n";
+	$entry .= "\thardware ethernet\t$ts_clients{$client}->{hardware};\n";
+	$entry .= "\tfixed-address\t\t$ts_clients{$client}->{address};\n";
+	$entry .= "\tfilename\t\t\"$ts_clients{$client}->{filename}\";\n";
+	$entry .= "}\n";
+	$entry
 }
 
 sub write_dhcpd_conf {
 	my %ts_clients = @_;
 	my $clients = "/etc/dhcpd.conf.etherboot.clients";
 	my $key;
-	
+		
 	open(CLIENT, "> $clients") || warn ("Can't open $clients!");
 	foreach $key(keys(%ts_clients)){
-		print_client_entry("CLIENT", $key, %ts_clients);
+		my $client_entry = format_client_entry($key, %ts_clients);
+		print CLIENT $client_entry;
 	}
 	close CLIENT	
 }
