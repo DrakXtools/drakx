@@ -938,7 +938,7 @@ sub install_lilo {
 
     write_lilo_conf($bootloader, $fstab, $hds);
 
-    if (!$::testing && arch() !~ /ia64/) {
+    if (!$::testing && arch() !~ /ia64/ && $bootloader->{method} =~ /lilo/) {
 	log::l("Installing boot loader...");
 	my $error;
 	run_program::rooted($::prefix, "lilo", "2>", \$error) or die "lilo failed: $error";
