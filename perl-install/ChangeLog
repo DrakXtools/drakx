@@ -1,3 +1,77 @@
+2001/09/20  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: don't reapply the conf, if already applied.
+	usefull for dhcp, because the network should be restarted after
+	configured
+
+	* mouse.pm: text positionning
+
+	* standalone/net_monitor: less gethostbyname
+
+2001/09/20  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: take care not probing in /dev/ for finding package to upgrade,
+	this cause
+	problem in live_upgrade.
+
+	* network/netconnect.pm: tried to fix damien sucking.
+
+2001/09/20  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/nl.po, share/po/da.po, share/po/zh_TW.po: updated Danish,
+	Chinese and Dutch files
+
+2001/09/20  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: raise i18n fonts
+	s/telnet-server/telnet-server-krb5/
+
+	* fsedit.pm (hds): do a get_major_minor where needed
+
+	* fs.pm (add2all_hds): allow both "smbfs" and "smb" as fs type
+
+	* lang.pm: replace xcin by chinput as per Alex request
+
+	* printerdrake.pm: back out the modif from till as asked by till
+
+2001/09/20  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Make it possible to configure more than 1 printer in a
+	"recommended" mode installation.
+
+2001/09/19  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, network/netconnect.pm, network/ethernet.pm: network
+	restart at better place
+
+2001/09/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: chromium and tuxracer don't work well with Riva
+
+2001/09/19  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/it.po: updated pot file
+	updated help xml
+
+	* help.pm: updated help file
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/bg.po, share/po/sr.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/nl.po, share/po/ja.po,
+	share/po/sv.po, share/po/hu.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/vi.po, share/po/gl.po,
+	share/po/ca.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/bs.po, share/po/da.po, share/po/zh_TW.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+	* share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/de.po:
+	updated help xml
+
+	* share/po/wa.po: updated pot file
+	updated pot file
+
 2001/09/19  dam's  <damien@mandrakesoft.com>
 
 	* network/adsl.pm, network/netconnect.pm, network/ethernet.pm: network
