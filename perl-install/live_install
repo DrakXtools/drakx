@@ -1,28 +1,38 @@
-#!../perl
+#!/bin/sh
 
-my $dir = `pwd`;
-chomp $dir;
-$dir .= "/../../..";
+dir=`pwd`/../../..
 
-#- update /tmp/rhimage which points to top dir of Mandrake CD.
-system "/bin/rm", "-rf", "/tmp/rhimage";
-mkdir "/tmp/rhimage", 0700 or die "cannot create directory /tmp/rhimage";
-system "/bin/rm", "-rf", "/tmp/drakx";
-mkdir "/tmp/drakx", 0700 or die "cannot create directory /tmp/drakx\n";
+/bin/rm -rf /tmp/rhimage
+mkdir -m 0700 /tmp/rhimage || exit 1
+/bin/rm -rf /tmp/drakx
+mkdir -m 0700 /tmp/drakx || exit 2
 
-#- copy whole set of mdkinst tree and symlink to the CD.
-foreach (qw(Mandrake RPMS misc boot images)) {
-    symlink "$dir/../../$_", "/tmp/rhimage/$_";
-}
-system "/bin/cp", "-a", "$dir/../../Mandrake/mdkinst", "/tmp/drakx";
+for i in Mandrake RPMS misc boot images
+do
+    ln -sf "$dir/../../$i" "/tmp/rhimage/$i" 
+done
 
-#- start the true live_install.
-if (-x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2") {
-    chdir "/tmp/drakx/mdkinst/usr/bin/perl-install2";
-    system "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2";
-} else {
-    print STDERR "unable to get a working live system to start, check your working directory";
-}
+/bin/cp -a "$dir/../../Mandrake/mdkinst" "/tmp/drakx"
 
-system "/bin/rm", "-rf", "/tmp/drakx";
-system "/bin/rm", "-rf", "/tmp/rhimage";
+if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
+    $perlcoredir=/usr/lib/perl5/5.6.0/i386-linux/CORE
+    cd /tmp/drakx/mdkinst/usr/bin/perl-install
+    if [ -x $perlcoredir/libperl.so ]; then
+	mv $perlcoredir/libperl.so /tmp/drakx/mdkinst
+    else
+	mkdir -p $perlcoredir
+	ln -sf /tmp/drakx/mdkinst/$perlcoredir/libperl.so $perlcoredir/libperl.so
+    fi
+
+    ../../../lib/ld-linux.so.2 ../perl ./live_install2
+
+    rm -f $perlcoredir/libperl.so
+    if [ -x /tmp/drakx/mdkinst ]; then
+	mv /tmp/drakx/mdkinst/libperl.so $perlcoredir/libperl.so
+    fi
+else
+    echo >&2 "unable to get a working live system to start, check your working directory"
+fi
+
+#/bin/rm -rf /tmp/drakx
+#/bin/rm -rf /tmp/rhimage

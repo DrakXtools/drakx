@@ -49,7 +49,7 @@ _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 					 );
 
     #- make the DeviceURI from DEVICE.
-    $printer->{DeviceURI} = ($printer->{DEVICE} =~ /usb/ ? "usb:" : "parallel:") . $_->{DEVICE};
+    $printer->{DeviceURI} = ($printer->{DEVICE} =~ /usb/ ? "usb:" : "parallel:") . $printer->{DEVICE};
 
     foreach (@parport) {
 	$printer->{DEVICE} eq $_->{port} or next;
@@ -149,7 +149,7 @@ sub setup_uri($$$) {
     my ($printer, $in, $install) = @_;
 
     return if !$in->ask_from_entries_refH(_("Printer Device URI"),
-_("You can specify directly the URI to access the printer with CUPS."),
+_("You can specify directly the URI to access the printer with CUPS."), [
 _("Printer Device URI") => { val => \$printer->{DeviceURI}, list => [ printer::get_direct_uri(),
                                                                       "file:/",
                                                                       "http://",
@@ -157,7 +157,7 @@ _("Printer Device URI") => { val => \$printer->{DeviceURI}, list => [ printer::g
                                                                       "lpq://",
                                                                       "smb://",
                                                                       "socket://",
-                                                                    ], },
+                                                                    ], not_edit => 0 }, ],
 					 );
     if ($printer->{DeviceURI} =~ /^smb:/) {
         &$install('samba');

@@ -271,6 +271,7 @@ sub choosePackages {
 sub beforeInstallPackages {
     my ($o) = @_;
 
+    log::l("before install packages");
     #- save these files in case of upgrade failure.
     if ($o->{isUpgrade}) {
 	foreach (@filesToSaveForUpgrade) {
@@ -281,20 +282,27 @@ sub beforeInstallPackages {
 	}
     }
 
+    log::l("before install packages, after copy");
     #- some packages need such files for proper installation.
     any::writeandclean_ldsoconf($o->{prefix});
+    log::l("before install packages, after writing ld.so.conf");
     $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
+    log::l("before install packages, after adding localhost in hosts");
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
 
+    log::l("before openning database");
     require pkgs;
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
+    log::l("initialized database");
 }
 
 sub pkg_install {
     my ($o, @l) = @_;
+    log::l("selecting packages");
     require pkgs;
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
+    log::l("installing packages");
     $o->installPackages;
 }
 
@@ -671,7 +679,8 @@ sub readBootloaderConfigBeforeInstall {
     foreach my $e (@{$o->{bootloader}{entries}}) {
 	while (my $v = readlink "$o->{prefix}/$e->{kernel_or_dev}") {
 	    $v = "/boot/$v" if $v !~ m|^/|;
-	    -e "$o->{prefix}$v" or next;
+	    log::l("testing for presence of file $o->{prefix}$v");
+	    -e "$o->{prefix}$v" or last;
 	    log::l("renaming /boot/$e->{kernel_or_dev} entry by $v");
 	    $e->{kernel_or_dev} = $v;
 	}
