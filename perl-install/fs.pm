@@ -14,7 +14,7 @@ use detect_devices;
 use commands;
 use modules;
 use raid;
-use fsedit
+use fsedit;
 use loopback;
 
 1;
