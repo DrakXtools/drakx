@@ -581,7 +581,7 @@ sub Mount_point_raw_hd {
     my $mntpoint = $part->{mntpoint};
     $in->ask_from(
         '',
-        _("Where do you want to mount device %s?", $part->{device}),
+        _("Where do you want to mount %s?", $part->{device}),
 	[ { label => _("Mount point"), val => \$mntpoint, 
 	    list => [ if_($mntpoint, $mntpoint), '', @$propositions ], 
 	    not_edit => 0 } ],

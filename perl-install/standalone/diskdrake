@@ -49,7 +49,7 @@ while (my $e = shift @l) {
 $::expert = defined(delete $options{expert});
 $::testing = defined(delete $options{testing});
 
-my @types = qw(hd nfs smb removable fileshare);
+my @types = qw(hd nfs smb dav removable fileshare);
 my ($type, $para) = ('hd', '');
 foreach (@types) {
     if (exists $options{$_}) {
@@ -108,6 +108,9 @@ if ($type eq 'hd') {
       first(grep { $para eq $_->{device} } @{$all_hds->{raw_hds}}) || die "unknown removable $para\n" :
       $in->ask_from_listf('', '', \&diskdrake::interactive::format_raw_hd_info, $all_hds->{raw_hds}) or $in->exit(0);
     diskdrake::removable::main($in, $all_hds, $raw_hd);
+} elsif ($type eq 'dav') {
+    require diskdrake::dav;
+    diskdrake::dav::main($in, $all_hds);
 } else {
     $in->ask_warn('', "Sorry only a gtk frontend is available") if !$in->isa('interactive::gtk');
     require diskdrake::smbnfs_gtk;
