@@ -1,3 +1,112 @@
+2003/01/15  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sq.po, share/po/it.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated pot file
+
+	* share/po/nl.po: updated pot file
+	fixed encoding problem
+	updated Dutch file
+
+	* lang.pm: Added "Amharic" in the languages list, so it can be choosed and
+	its
+	translations can get installed from the rpm packages
+
+2003/01/15  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm (suggest_onmbr): log the choice
+
+	* patch/patch-9.0-auto-inst-network-config.pl: fix for network module
+	probe & configuration in interactive auto_install
+
+	* install_steps.pm: adapt to install_any::find_root_parts() return value
+	changes
+
+	* install_steps_interactive.pm (selectInstallClass): display mandrake
+	release version when listing the choices of partitions to upgrade
+
+	* install_any.pm (find_root_parts):
+	  - do not use guess_mount_point() anymore
+	  - check /etc/mandrake-release instead of /etc/fstab
+	  - return a list of { release => "Mandrake Linux release X.X (XXXX)",
+	part => ... }
+	instead of a list of parts
+
+	* install_steps_auto_install.pm: move
+	install_steps_auto_install_non_interactive::configureNetwork() to
+	install_steps_auto_install::configureNetwork() as it should be
+	(thanks to Luc Bourdot)
+
+	* harddrake/sound.pm: do not "use standalone" in a module used during
+	install!
+
+2003/01/15  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/sound.pm: snd-sscape does not exist
+	  - factorize snd devices listing in detect_devices::getSoundDevices()
+	so that each caller is ppc aware
+	  - factorize sound slots configuration into
+	  harddrake::sound::configure_sound_slots() so that harddrake service
+	  will eventually set them at bootstrapping time
+
+	* standalone/drakproxy: drakproxy need common for getVarsFromSh()
+
+	* detect_devices.pm, install2.pm, install_steps_interactive.pm: 
+	  - factorize snd devices listing in detect_devices::getSoundDevices()
+	so that each caller is ppc aware
+	  - factorize sound slots configuration into
+	  harddrake::sound::configure_sound_slots() so that harddrake service
+	  will eventually set them at bootstrapping time
+
+	* standalone/harddrake2: add an option to skip jazz drives detection
+
+2003/01/14  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/list: /usr/share/magic has moved to /usr/share/misc/magic
+
+	* any.pm: ensure cancel on setupBootloader__mbr_or_not do cancel
+
+	* modules.pm: changes to have less "Use of uninitialized value"
+
+	* printer/printerdrake.pm: please perl_checker
+
+	* share/list: unicore/To/Fold.pl is necessary to fix "panic: swash_fetch"
+	error occuring in
+	a regexp with /i on ->{device} (fixes bug #799)
+
+	* install2.pm: don't probe mouse when testing (startup is now much faster)
+	remove the ugly temporary fix for fontconfig
+	remove duplicate code
+	don't automatically configure network on upgrade, now only done when
+	called via summary
+
+	* sbus_probing/main.pm: fix bug & cleanup (to have less warning in debug
+	mode)
+
+	* interactive/gtk.pm: set_active on Gtk2::CheckButton is pretty dumb, it
+	thinks undef is true ;p
+
+2003/01/14  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/data.pm, printer/printerdrake.pm: Removed bugs from Titi which
+	prevented printerdrake from installing the requested spooler.
+
+2003/01/14  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakfont: fix font_choice()
+
+	* harddrake/check_snd.pl: add harddrake::sound checker
+
 2003/01/14  Pixel  <pixel@mandrakesoft.com>
 
 	* share/list: unicore/To/Fold.pl is necessary to fix "panic: swash_fetch"
@@ -7991,7 +8100,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.765 2003/01/10 16:26:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.766 2003/01/14 13:34:55 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
