@@ -2,6 +2,8 @@ package standalone; # $Id$
 
 $::isStandalone = 1;
 
+$ENV{SHARE_PATH} ||= "/usr/share";
+
 
 sub pkgs_install {
     my ($in, @l) = @_;
