@@ -64,19 +64,17 @@ sub check {
 sub get_vg {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
-    (split(':', run_program::get_stdout('lvm2', 'pvdisplay', '-c', $dev)))[1];
+    chomp_(run_program::get_stdout('lvm2', 'pvs', '--noheadings', '-o', 'vg_name', $dev));
 }
 
 sub update_size {
     my ($lvm) = @_;
-    my @l = split(':', run_program::get_stdout('lvm2', 'vgdisplay', '-c', '-D', $lvm->{VG_name}));
-    $lvm->{totalsectors} = ($lvm->{PE_size} = $l[12]) * $l[13];
+    $lvm->{totalsectors} = chomp_(run_program::get_stdout('lvm2', 'vgs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'vg_size', $lvm->{VG_name}));
 }
 
 sub get_lv_size {
     my ($lvm_device) = @_;
-    my $info = run_program::get_stdout('lvm2', 'lvdisplay', '-D', '-c', "/dev/$lvm_device");
-    (split(':', $info))[6];
+    chomp_(run_program::get_stdout('lvm2', 'lvs', '--noheadings', '--nosuffix', '--units', 's', '-o', 'lv_size', "/dev/$lvm_device"));
 }
 
 sub get_lvs {
