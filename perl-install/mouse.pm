@@ -280,6 +280,8 @@ sub detect() {
 		}
 		eval { modules::unload(qw(usbmouse mousedev hid)) };
 	    }
+	} else {
+	    log::l("no usb interface found for mice");
 	}
 	$auxmouse;
     };
@@ -296,6 +298,8 @@ sub detect() {
 	    }
 	    $keep_mouse or eval { modules::unload("evdev", "wacom") };
 	}
+    } else {
+	log::l("no usb interface found for wacom");
     }
 
     #- at this level, not all possible mice are detected so avoid invoking serial_probe
