@@ -352,7 +352,9 @@ sub langsLANGUAGE {
 
 sub pack_langs { 
     my ($l) = @_; 
-    $l->{all} ? 'all' : join ':', uniq(map { $languages{$_}[3] } langs($l));
+    my $s = $l->{all} ? 'all' : join ':', uniq(map { $languages{$_}[3] } langs($l));
+    $ENV{RPM_INSTALL_LANG} = $s;
+    $s;
 }
 
 sub write_langs {
