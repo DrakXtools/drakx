@@ -220,6 +220,8 @@ sub lilo_choice() {
     eval { any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
     my $err = $@;
     if ($err && $err !~ /wizcancel/) {
+        # BUG: note that the following message won't speak about the right bootloader if user is currently switching between 
+        # various bootloaders and if the error occured before boot sector get overwritten by bootloader installer
         $in->ask_warn(N("Error"), 
                       [ N("Installation of %s failed. The following error occured:", bootloader::detect_bootloader()), $err ]);
         goto ask;
