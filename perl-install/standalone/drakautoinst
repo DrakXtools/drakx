@@ -30,7 +30,6 @@ use Data::Dumper;
 local $_ = join '', @ARGV;
 
 $::direct = /-direct/;
-$::direct = 1; #DEBUG
 
 my $in = 'interactive'->vnew('su', 'default');
 
@@ -38,8 +37,8 @@ begin:
 $::isEmbedded and kill 'USR2', $::CCPID;
 
 my $imagefile = "/root/drakx/replay_install.img";
--f $imagefile or $in->ask_okcancel(N("Error!"), 
-				   N("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
+-f $imagefile or $in->ask_warn(N("Error!"), 
+			       N("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
 
 $::direct or $in->ask_okcancel(N("Auto Install Configurator"),
 N("You are about to configure an Auto Install floppy. This feature is somewhat dangerous and must be used circumspectly.
