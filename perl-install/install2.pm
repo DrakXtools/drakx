@@ -457,8 +457,9 @@ sub main {
     eval { spawnShell() };
 
     modules::load_dependencies(($::testing ? ".." : "") . "/modules/modules.dep");
+    require modules::any_conf;
     require modules::modules_conf;
-    $o->{modules_conf} = modules::modules_conf->read('/tmp/modules.conf');
+    $o->{modules_conf} = modules::modules_conf::read(modules::any_conf::vnew(), '/tmp/modules.conf');
     modules::read_already_loaded($o->{modules_conf});
 
     #- done before auto_install is called to allow the -IP feature on auto_install file name
