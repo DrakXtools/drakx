@@ -79,19 +79,15 @@ system. There are thousands of packages available for Mandrake Linux, and
 you are not supposed to know them all by heart.
 
 If you are performing a standard installation from CDROM, you will first be
-asked to specify the CDs you currently have. Check the CD labels and
-highlight the boxes corresponding to the CDs you have available for
-installation. Click \"OK\" when you are ready to continue.
+asked to specify the CDs you currently have (in Expert mode only). Check
+the CD labels and highlight the boxes corresponding to the CDs you have
+available for installation. Click \"OK\" when you are ready to continue.
 
 Packages are sorted in groups corresponding to a particular use of your
 machine. The groups themselves are sorted into four sections:
 
  * \"Workstation\": if you plant to use your machine as a workstation,
 select one or more of the corresponding groups.
-
- * \"Graphical Environment\": this is where you will choose your preferred
-graphical environment. At least one must be selected if you want to have a
-graphical workstation!
 
  * \"Development\": if the machine is to be used for programming, choose the
 desired group(s).
@@ -100,13 +96,16 @@ desired group(s).
 be able to select which of the most common services you wish to see
 installed on the machine.
 
+ * \"Graphical Environment\": this is where you will choose your preferred
+graphical environment. At least one must be selected if you want to have a
+graphical workstation!
+
 Moving the mouse cursor over a group name will display a short explanatory
 text about that group.
 
-Clicking the \"Advanced\" button will allow you to select the \"Individual
-package selection\" option. This is useful if you are familiar with the
-packages being offered or if you want to have total control over what will
-be installed.
+You can check the \"Individual package selection\" box, which is useful if
+you are familiar with the packages being offered or if you want to have
+total control over what will be installed.
 
 If you started the installation in \"Update\" mode, you can unselect all
 groups to avoid installing any new package. This is useful for repairing or
@@ -187,9 +186,7 @@ enabled on a server. In general, select only the services you really need."),
 
 configureTimezoneGMT => 
 __("GNU/Linux manages time in GMT (Greenwich Manage Time) and translates it in
-local time according to the time zone you selected.
-
-If you use Microsoft Windows on this computer, choose \"No\"."),
+local time according to the time zone you selected."),
 
 configureX => 
 __("X (for X Window System) is the heart of the GNU/Linux graphical interface
@@ -324,7 +321,7 @@ ready to use. Just click \"OK\" to reboot the system. You can start
 GNU/Linux or Windows, whichever you prefer (if you are dual-booting), as
 soon as the computer has booted up again.
 
-The \"Advanced\" button shows two more buttons to:
+The \"Advanced\" button (in Expert mode only) shows two more buttons to:
 
  * \"generate auto-install floppy\": to create an installation floppy disk
 which will automatically perform a whole installation without the help of
@@ -600,8 +597,51 @@ If your computer is not connected to any administrated network, you will
 want to choose \"Local files\" for authentication."),
 
 setupBootloader => 
-__("Unless you know specifically otherwise, the usual choice is \"/dev/hda\"
-(primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."),
+__("LILO and GRUB are boot loaders for GNU/Linux. This stage, normally, is
+totally automated. In fact, DrakX analyzes the disk boot sector and acts
+accordingly, depending on what it finds here:
+
+ * if Windows boot sector is found, it will replace it with a GRUB/LILO boot
+sector. Hence, you will be able to load either GNU/Linux or another OS;
+
+ * if a GRUB or LILO boot sector is found, it will replace it with a new
+one;
+
+If in doubt, DrakX will display a dialog with various options.
+
+ * \"Boot loader to use\": you have three choices:
+
+    * \"LILO with graphical menu\": if you prefer LILO with its graphical
+interface.
+
+    * \"GRUB\": if you prefer GRUB (text menu).
+
+    * \"LILO with text menu\": if you prefer LILO with its text menu interface.
+
+ * \"Boot device\": in most cases, you will not change the default
+(\"/dev/hda\"), but if you prefer, the boot loader can be installed on the
+second hard drive (\"/dev/hdb\"), or even on a floppy disk (\"/dev/fd0\").
+
+ * \"Delay before booting the default image\": when rebooting the computer,
+this is the delay granted to the user to choose - in the boot loader menu,
+another boot entry than the default one.
+
+!! Beware that if you choose not to install a boot loader (by selecting
+\"Cancel\" here), you must ensure that you have a way to boot your Mandrake
+Linux system! Also be sure you know what you do before changing any of the
+options. !!
+
+Clicking the \"Advanced\" button in this dialog will offer many advanced
+options, which are reserved to the expert user.
+
+Mandrake Linux installs its own boot loader, which will let you boot either
+GNU/Linux or any other operating systems which you have on your system.
+
+If there is another operating system installed on your machine, it will be
+automatically added to the boot menu. Here, you can choose to fine-tune the
+existing options. Double-clicking on an existing entry allows you to change
+its parameters or remove it; \"Add\" creates a new entry; and \"Done\" goes
+on to the next installation step."),
 
 setupBootloaderAddEntry => 
 __("LILO (the LInux LOader) and GRUB are boot loaders: they are able to boot
