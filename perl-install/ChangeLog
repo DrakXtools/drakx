@@ -1,3 +1,27 @@
+2004/03/08  Pixel  <pixel at mandrakesoft.com>
+
+	* modules.pm: a missing module is now an error, that way it won't be in
+	scsi_hostadapters. In load_category(), exception is caught, so no pb
+	when using load_category(). But beware, this may break!
+
+	* install_any.pm: in generate_automatic_stage1_params():
+	  - handle FTP via HTTP proxy (bugzilla #8699)
+	  - cleanup using a different data-structure
+
+2004/03/08  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: UI coherency (#8675).
+	Fix some missing configuration options (#8654).
+
+2004/03/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: rename ensure_is_installed_if_availlable( as
+	ensure_is_installed_if_available()
+	install unicorn package for bewan modems
+
+	* do_pkgs.pm: rename ensure_is_installed_if_availlable( as
+	ensure_is_installed_if_available()
+
 2004/03/08  Fabian Mandelbaum  <fabman at 2vias.com.ar>
 
 	* share/po/es.po: Updated Spanish translations
@@ -28646,7 +28670,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.904 2004/03/04 14:09:46 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.905 2004/03/08 15:21:09 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
