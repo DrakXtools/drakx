@@ -144,7 +144,9 @@ END
     #- install kppprc file according to used configuration.
     mkdir_p("$::prefix/usr/share/config");
 
-    output("$::prefix/usr/share/config/kppprc", c::to_utf8(<<END));
+    $toreplace{$_->[0]} = $modem->{$_->[0]} || $_->[1] foreach [ 'Timeout', 60 ], [ 'UseLockFile', 1 ], [ 'Enter', 'CR' ], [ 'Volume', 0 ],
+                                                               [ 'BusyWait', 0 ], [ 'FlowControl', 'CRTSCTS' ], [ 'Speed', 115200 ];
+    output($modem->{kppprc} || "$::prefix/usr/share/config/kppprc", c::to_utf8(<<END));
 # KDE Config File
 
 [Account0]
@@ -174,15 +176,15 @@ StorePassword=1
 DisconnectCommand=
 
 [Modem]
-BusyWait=0
-Enter=CR
-FlowControl=CRTSCTS
-Volume=0
-Timeout=60
+BusyWait=$toreplace{BusyWait}
+Enter=$toreplace{Enter}
+FlowControl=$toreplace{FlowControl}
+Volume=$toreplace{Volume}
+Timeout=$toreplace{Timeout}
 UseCDLine=0
-UseLockFile=1
+UseLockFile=$toreplace{UseLockFile}
 Device=/dev/modem
-Speed=115200
+Speed=$toreplace{Speed}
 
 [Graph]
 InBytes=0,0,255
