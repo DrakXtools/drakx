@@ -425,7 +425,7 @@ sub choosePackages {
     my $size2install = min($availableC, do {
 	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
 	
-	if (!$::expert) {
+	if (1) {
 	    if ($o->{isUpgrade}) {
 		min($def_size, $max);
 	    } else {
