@@ -11,7 +11,7 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: draksec [--expert]\n";
 
-$::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
+$::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^CLASS="?expert/m; #"
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
