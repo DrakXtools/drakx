@@ -771,13 +771,17 @@ sub compare_with_proc_partitions {
 
     my @l1 = partition_table::get_normal_parts($hd);
     my @l2 = grep { $_->{rootDevice} eq $hd->{device} } read_proc_partitions([$hd]);
-    
-    if (int(@l1) != int(@l2) && arch() ne 'ppc') {
+
+    #- /proc/partitions includes partition with type "empty" and a non-null size
+    #- so add them for comparison
+    my ($len1, $len2) = (int(@l1) + $hd->{primary}{nb_special_empty}, int(@l2));
+
+    if ($len1 != $len2 && arch() ne 'ppc') {
 	die sprintf(
-		    "/proc/partitions doesn't agree with drakx %d != %d:\n%s\n", int(@l1), int(@l2),
+		    "/proc/partitions doesn't agree with drakx %d != %d:\n%s\n", $len1, $len2,
 		    "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @l2));
     }
-    int @l2;
+    $len2;
 }
 
 sub use_proc_partitions {

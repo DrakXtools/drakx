@@ -491,11 +491,12 @@ sub read_one($$) {
 
     my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();
     my @normal = grep { $_->{size} && $_->{type} && !isExtended($_) } @$pt;
+    my $nb_special_empty = int(grep { $_->{size} && $_->{type} == 0 } @$pt);
 
     @extended > 1 and die "more than one extended partition";
 
     $_->{rootDevice} = $hd->{device} foreach @normal, @extended;
-    { raw => $pt, extended => $extended[0], normal => \@normal, info => $info };
+    { raw => $pt, extended => $extended[0], normal => \@normal, info => $info, nb_special_empty => $nb_special_empty };
 }
 
 sub read {
