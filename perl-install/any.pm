@@ -711,6 +711,14 @@ sub ask_users {
 	$u->{shell} ||= '/bin/bash';
 	my $names = @$users ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
 
+	my $verif = sub {
+	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
+	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', _("This password is too simple")), return (1,2);
+	    $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
+	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+	    member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
+	    return 0;
+	};
 	$in->ask_from_entries_refH_powered(
 	    { title => _("Add user"),
 	      messages => _("Enter a user\n%s", $names),
@@ -722,14 +730,8 @@ sub ask_users {
 			  $u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
 		      }
 		  },
-	          complete => sub {
-		      $u->{password} eq $u->{password2} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
-		      $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', _("This password is too simple")), return (1,2);
-		      $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
-		      $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-		      member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
-		      return 0;
-		  },
+	          complete => $verif,
+                  canceled => sub { $u->{name} ? &$verif : 0; },
 	    } }, [ 
 	    { label => _("Real name"), val => \$u->{realname} },
 	    { label => _("User name"), val => \$u->{name} },
@@ -740,9 +742,9 @@ sub ask_users {
 	    { label => _("Icon"), val => \$u->{icon}, list => [ facesnames($prefix) ], icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
 	      ),
            ],
-        ) or return;
+        );
 
-	push @$users, $u;
+	push @$users, $u if $u->{name};
 	$u = {};
     }
 }
