@@ -287,16 +287,13 @@ sub detect() {
     };
 
     if (modules::get_probeall("usb-interface")) {
-	my $keep_mouse;
 	if (my (@l) = detect_devices::usbWacom()) {
 	    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
 	    eval { modules::load("wacom", "evdev") };
-	    unless ($@) {
-		foreach (0..$#l) {
-		    detect_devices::tryOpen("input/event$_") and $keep_mouse = 1, push @wacom, "input/event$_";
-		}
+	    if (!$@) {
+		@wacom = grep { detect_devices::tryOpen($_) } map_index { "input/event$::i" } @l;
 	    }
-	    $keep_mouse or eval { modules::unload("evdev", "wacom") };
+	    @wacom or eval { modules::unload("evdev", "wacom") };
 	}
     } else {
 	log::l("no usb interface found for wacom");
