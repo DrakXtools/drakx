@@ -5,7 +5,7 @@ use strict;
 
 use Socket;
 
-use common qw(:common :file :system);
+use common qw(:common :file :system :functional);
 use detect_devices;
 use modules;
 use log;
@@ -66,13 +66,20 @@ sub write_resolv_conf {
 sub write_interface_conf {
     my ($file, $intf) = @_;
 
-    add2hash($intf, { ONBOOT => "yes" });
+    my @ip = split '\.', $intf->{IPADDR};
+    my @mask = split '\.', $intf->{NETMASK};
+    add2hash($intf, { 
+		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
+		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),
+		     ONBOOT => "yes",
+		    });
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT));
 }
 
 sub add2hosts {
-    my ($file, $ip, $hostname) = @_;
-    my %l = ($ip => $hostname);
+    my ($file, $hostname, @ips) = @_;
+    my %l;
+    $l{$_} = $hostname foreach @ips;
 
     local *F;
     if (-e $file) {
@@ -116,17 +123,17 @@ sub addDefaultRoute {
     c::addDefaultRoute($netc->{gateway}) if $netc->{gateway} || !$::testing;
 }
 
-sub getAvailableNetDevice {
-    my $device = detect_devices::getNet();
-
-    unless ($device) {
-	modules::load_thiskind('net') or return;
-	$device = detect_devices::getNet();
-    }
-    $device;
-}
-
 sub dnsServers {
     my ($netc) = @_;
     map { $netc->{$_} } qw(dnsServer dnsServer2 dnsServer3);
 }
+
+sub getNet() {
+    my @l = detect_devices::getNet();
+    unless (@l) {
+	modules::load_thiskind('net') or return;
+	@l = detect_devices::getNet();
+    }
+    @l;
+}
+

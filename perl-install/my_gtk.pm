@@ -15,7 +15,7 @@ $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 
 use Gtk;
 use c;
-use common qw(:common);
+use common qw(:common :functional);
 
 my $forgetTime = 1000; # in milli-seconds
 $border = 5;
@@ -229,17 +229,17 @@ sub create_adjustment($$$) {
 sub create_packtable($@) {
     my $options = shift;
     my $w = new Gtk::Table(0, 0, $options->{homogeneous} || 0);
-    my $i = 0; foreach (@_) {
-	for (my $j = 0; $j < @$_; $j++) {
-	    if (defined $_->[$j]) {
-		my $l = $_->[$j]; 
-		ref $l or $l = new Gtk::Label($l);
-		$w->attach_defaults($l, $j, $j + 1, $i, $i + 1);
-		$l->show;
+    map_index {
+	my ($i) = @_;
+	map_index {
+	    my ($j) = @_;
+	    if (defined $_) {
+		ref $_ or $_ = new Gtk::Label($_);
+		$w->attach_defaults($_, $j, $j + 1, $i, $i + 1);
+		$_->show;
 	    }
-	}
-	$i++;
-    }
+	} @$_;
+    } @_;
     $w->set_col_spacings($options->{col_spacings} || 0);
     $w->set_row_spacings($options->{row_spacings} || 0);
     $w
@@ -341,10 +341,10 @@ sub _ask_from_list($$$$) {
 	$o->{retval} = $l->[$list->child_position($_[1])];
 	Gtk->main_quit;
     });
-    for (my $i = 0; $i < @$l; $i++) {
-	my $focused = $i;
-	$def = $i if $l->[$i] eq $def;
-	my $w = new Gtk::ListItem($l->[$i]);
+    map_index {
+	my ($i) = @_;
+	$def = $i if $_ eq $def;
+	my $w = new Gtk::ListItem($_);
 	my $id = $w->signal_connect(key_press_event => sub {
              my ($w, $e) = @_;
 	     my $c = chr $e->{keyval};
@@ -353,11 +353,11 @@ sub _ask_from_list($$$$) {
 	
 	     if ($e->{keyval} >= 0x100) {
 		   if ($c eq "\r" || $c eq "\x8d") {
-		       $list->select_item($focused);
+		       $list->select_item($i);
 		   }
 		   $starting_word = '';
 	     } else {
-		   my $curr = $focused + bool($starting_word eq '' || $starting_word eq $c);
+		   my $curr = $i + bool($starting_word eq '' || $starting_word eq $c);
 		   $starting_word .= $c unless $starting_word eq $c;
 	
 		   my $j; for ($j = 0; $j < @$l; $j++) {
@@ -373,7 +373,7 @@ sub _ask_from_list($$$$) {
 	});
 	push @::ask_from_list_widgets, $w; # hack!! to not get SIGSEGV
 	push @widgets, $w;
-    }
+    } @$l;
     gtkadd($list, @widgets);
     gtkadd($o->{window}, 
 	   gtkpack($o->create_box_with_title(@$messages), 

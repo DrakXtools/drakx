@@ -69,7 +69,10 @@ sub leavingStep($$) {
     }
 
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
-	&$f();
+	eval { &$f() };
+	$o->ask_warn(_("Error"), [ 
+_("An error occured, i don't know how to handle it nicely,
+so continue at your own risk :("), $@ ]) if $@;
     }
 }
 
@@ -118,6 +121,13 @@ sub choosePackages($$$) {
     my ($o, $packages, $compss) = @_;
 }
 
+sub beforeInstallPackages {
+    my ($o) = @_;
+
+    network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
+    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
+}
+
 sub installPackages($$) {
     my ($o, $packages) = @_;
     my $toInstall = [ grep { $_->{selected} && !$_->{installed} } values %$packages ];
@@ -140,15 +150,13 @@ sub mouseConfig($) {
 sub configureNetwork($) {
     my ($o) = @_;
     my $etc = "$o->{prefix}/etc";
-
-    # all information is in {intf}, but don't let network be aware of this :)
 #
 #    rc = checkNetConfig(&$o->{intf}, &$o->{netc}, &$o->{intfFinal},
 #			 &$o->{netcFinal}, &$o->{driversLoaded}, $o->{direction});
-    network::write_conf("$etc/sysconfig/network", $o->{intf});
-    network::write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$o->{intf}{DEVICE}", $o->{intf});
-    network::write_resolv_conf("$etc/resolv.conf", $o->{intf});
-    network::add2hosts("$etc/hosts", $o->{intf}{IPADDR}, $o->{intf}{HOSTNAME});
+    network::write_conf("$etc/sysconfig/network", $o->{netc});
+    network::write_resolv_conf("$etc/resolv.conf", $o->{netc});
+    network::write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach @{$o->{intf}};
+    network::add2hosts("$etc/hosts", $o->{netc}{HOSTNAME}, map { $_->{IPADDR} } @{$o->{intf}});
 #    syscall_('sethostname', $hostname, length $hostname) or warn "sethostname failed: $!";
     #res_init();		# reinit the resolver so DNS changes take affect     
 }

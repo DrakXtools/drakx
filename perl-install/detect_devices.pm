@@ -128,12 +128,8 @@ sub getDAC960() {
 }
 
 
-sub getNet() {
-    # I should probably ask which device to use if multiple ones are available -- oh well :-( 
-    foreach (qw(eth0 tr0 plip0 plip1 plip2 fddi0)) {
-	hasNetDevice($_) and log::l("$_ is available -- using it for networking"), return $_;
-    }
-    undef;
+sub getNet() { 
+    grep { hasNetDevice($_) } qw(eth0 tr0 plip0 plip1 plip2 fddi0);
 }
 sub getPlip() {
     foreach (0..2) {

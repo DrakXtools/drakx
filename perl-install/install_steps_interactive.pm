@@ -10,6 +10,7 @@ use vars qw(@ISA);
 use common qw(:common);
 use partition_table qw(:types);
 use install_steps;
+use network;
 use modules;
 use lang;
 use fs;
@@ -122,7 +123,16 @@ sub configureNetwork($) {
     }
     
     if ($r !~ /^Keep/) {
-	$o->configureNetworkAsk or return;
+	my @l = first(network::getNet());
+	@l = ($l[0]) unless $::expert; # keep only one
+
+	foreach my $dev (@l) {
+	    my ($l) = grep { $_->{DEVICE} eq $dev } @{$o->{intf}};
+
+	    push @{$o->{intf}}, $l = { DEVICE => $dev } unless $l;
+	    $o->configureNetworkIntf($l);
+	}
+	$o->configureNetworkNet($o->{netc} ||= {});
     }
     $o->SUPER::configureNetwork;
 }

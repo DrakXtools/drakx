@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     common => [ qw(__ min max sum sign product bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
-    functional => [ qw(fold_left difference2 before_leaving catch_cdie cdie) ],
+    functional => [ qw(fold_left map_index mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
     constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
@@ -21,14 +21,21 @@ $SECTORSIZE = 512;
 
 1;
 
+sub fold_left(&@) {
+    my $f = shift;
+    local $a = shift;
+    foreach $b (@_) { $a = &$f() }
+    $a
+}
+
 sub _ { my $s = shift @_; sprintf translate($s), @_ }
 #delete $main::{'_'};
 sub __ { $_[0] }
-sub min { fold_left(sub { $a < $b ? $a : $b }, @_) }
-sub max { fold_left(sub { $a > $b ? $a : $b }, @_) }
-sub sum { fold_left(sub { $a + $b }, @_) }
+sub min { fold_left { $a < $b ? $a : $b } @_ }
+sub max { fold_left { $a > $b ? $a : $b } @_ }
+sub sum { fold_left { $a + $b } @_ }
 sub sign { $_[0] <=> 0 }
-sub product { fold_left(sub { $a * $b }, @_) }
+sub product { fold_left { $a * $b } @_ }
 sub first { $_[0] }
 sub second { $_[1] }
 sub top { $_[$#_] }
@@ -68,12 +75,30 @@ sub touch {
     utime $now, $now, $f;
 }
 
-sub fold_left(&$@) {
+sub map_index(&@) {
     my $f = shift;
-    local $a = shift;
-    foreach $b (@_) { $a = &$f() }
-    $a
+    my @l;
+    local $::i = 0;
+    foreach (@_) { push @l, &$f($::i); $::i++; }
+    @l;
 }
+
+sub smapn {
+    my $f = shift;
+    my $n = shift;
+    my @r = ();
+    for (my $i = 0; $i < $n; $i++) { push @r, &$f(map { $_->[$i] } @_); }
+    @r
+}
+sub mapn(&@) {
+    my $f = shift;
+    smapn($f, min(map { scalar @$_ } @_), @_);
+}
+sub mapn_(&@) {
+    my $f = shift;
+    smapn($f, max(map { scalar @$_ } @_), @_);
+}
+
 
 sub add_f4before_leaving {
     my ($f, $b, $name) = @_;

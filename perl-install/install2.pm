@@ -100,15 +100,15 @@ appropriate to you."),
 
 my @installStepsFields = qw(text redoable onError needs);
 my @installSteps = (
-#  selectLanguage => [ __("Choose your language"), 1, 1 ],
-#  selectPath => [ __("Choose install or upgrade"), 0, 0 ],
-#  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
-#  setupSCSI => [ __("Setup SCSI"), 1, 0 ],	
-#  partitionDisks => [ __("Setup filesystems"), 1, 0 ],
-#  formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
-#  choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
-#  doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
-##  configureMouse => [ __("Configure mouse"), 0, 0 ],
+  selectLanguage => [ __("Choose your language"), 1, 1 ],
+  selectPath => [ __("Choose install or upgrade"), 0, 0 ],
+  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
+  setupSCSI => [ __("Setup SCSI"), 1, 0 ],	
+  partitionDisks => [ __("Setup filesystems"), 1, 0 ],
+  formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
+  choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
+  doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
+#  configureMouse => [ __("Configure mouse"), 0, 0 ],
   configureNetwork => [ __("Configure networking"), 1, 1, "formatPartitions" ],
 #  configureTimezone => [ __("Configure timezone"), 0, 0 ],
 #  configureServices => [ __("Configure services"), 0, 0 ],
@@ -168,6 +168,7 @@ $o = $::o = {
 #    isUpgrade => 0,
 #    installClass => 'beginner',
 
+    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
     default => $default, 
     steps => \%installSteps, 
     orderedSteps => \@orderedInstallSteps,
@@ -243,16 +244,12 @@ sub partitionDisks {
 sub formatPartitions {
     $o->choosePartitionsToFormat($o->{fstab});
 
-    $::testing and return;
-
-    $o->formatPartitions(@{$o->{fstab}});
-
-    fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
-
+    unless ($::testing) {
+	$o->formatPartitions(@{$o->{fstab}});
+	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
+    }
     mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc etc/sysconfig etc/sysconfig/network-scripts 
                                              home mnt tmp var var/tmp var/lib var/lib/rpm);
-    network::add2hosts("$o->{prefix}/etc/hosts", "127.0.0.1", "localhost.localdomain");
-    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
 sub choosePackages {
@@ -272,12 +269,13 @@ sub choosePackages {
 }
 
 sub doInstallStep {
+    $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
 }
 
 sub configureMouse { $o->mouseConfig }
-sub configureNetwork { $o->configureNetwork }
+sub configureNetwork { $o->configureNetwork($o->{steps}{$o->{step}}{entered} == 1 && !$_[0]) }
 sub configureTimezone { $o->timeConfig }
 sub configureServices { $o->servicesConfig }
 sub setRootPassword { $o->setRootPassword }
@@ -331,11 +329,10 @@ sub main {
 
     $o = install_steps_graphical->new($o);
 
-    # all information is put in {intf}, but don't let network be aware of this :)
-    $o->{intf} = network::read_conf("/tmp/network");
+    $o->{netc} = network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	log::l("found network config file $file");
-	$o->{intf} = network::read_interface_conf($file);
+	push @{$o->{intf}}, network::read_interface_conf($file);
     }
 
     modules::load_deps("/modules/modules.dep");
