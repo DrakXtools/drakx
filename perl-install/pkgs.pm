@@ -165,16 +165,16 @@ sub packageById {
 
 sub bestKernelPackage {
     my ($packages) = @_;
-    my ($best, $best2);
+    my ($best, $best2, $best3);
 
     foreach (keys %{$packages->{provides}{kernel}}) {
 	my $pkg = $packages->{depslist}[$_] or next;
-	$pkg->name =~ /kernel-\d/ and $best = $pkg, last;
-	$pkg->name =~ /kernel-i686/ and $best = $pkg;
-	$pkg->name =~ /kernel-enterprise/ and $best2 = $pkg;
+	$pkg->name =~ /kernel-\d/ and $best = $pkg;
+	$pkg->name =~ /kernel-i686/ and $best2 = $pkg;
+	$pkg->name =~ /kernel-enterprise/ and $best3 = $pkg;
     }
 
-    $best || $best2;
+    $best || $best2 || $best3;
 }
 
 sub packagesOfMedium {
