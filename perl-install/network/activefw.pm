@@ -69,11 +69,6 @@ sub call_method {
     @ret;
 }
 
-sub get_mode {
-    my ($o) = @_;
-    $o->call_method('GetMode');
-}
-
 sub blacklist {
     my ($o, $seq, $blacklist) = @_;
     $o->call_method('Blacklist',
@@ -97,6 +92,11 @@ sub unwhitelist {
     my ($o, $addr) = @_;
     $o->call_method('UnWhitelist',
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
+}
+
+sub get_interactive {
+    my ($o) = @_;
+    $o->call_method('GetMode');
 }
 
 sub set_interactive {

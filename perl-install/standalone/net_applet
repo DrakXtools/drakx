@@ -84,7 +84,7 @@ my $activefw = activefw->new(sub {
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Attack";
 });
-my $interactive_ids = $activefw->get_mode;
+my $interactive_ids = $activefw->get_interactive;
 
 checkNetwork();
 cronNetwork();
