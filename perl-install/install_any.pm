@@ -81,6 +81,19 @@ sub shells($) {
     @l ? @l : "/bin/bash";
 }
 
+sub getAvailableSpace {
+    my ($o) = @_;
+
+    do { $_->{mntpoint} eq '/usr' and return $_->{size} << 9 } foreach @{$o->{fstab}};
+    do { $_->{mntpoint} eq '/'    and return $_->{size} << 9 } foreach @{$o->{fstab}};
+
+    if ($::testing) {
+	log::l("taking 200MB for testing");
+	return 200 << 20;
+    }
+    die "missing root partition";
+}
+
 sub setPackages {
     my ($o) = @_;
 
@@ -97,9 +110,8 @@ sub setPackages {
     $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
 
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
-    #PIXEL
-    my $size = 100 << 20;
-    pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages},$size , $o->{installClass}, $o->{lang});
+
+    pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
 }
 
 sub addToBeDone(&$) {
