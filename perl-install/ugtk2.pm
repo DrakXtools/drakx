@@ -873,10 +873,7 @@ sub new {
 		    if_(!$::isInstall && !$::isStandalone, position_policy => 'center_always'),
 		);
 	    
-		if ($::isInstall) {
-		    require install_gtk; #- for perl_checker
-		    $::WizardWindow->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
-		} else {
+		if (!$::isInstall) {
 		    eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
 		    $@ and log::l("ERROR: missing wizard banner");
 		}
@@ -966,6 +963,7 @@ sub _create_window {
     if ($::isInstall) {
 	require install_gtk; #- for perl_checker
 	install_gtk::handle_unsafe_mouse($::o, $w);
+	$w->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
     }
 
     if ($force_center_at_pos) {
