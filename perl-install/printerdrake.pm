@@ -234,18 +234,18 @@ sub setup_lpd {
     }
 
     return if !$in->ask_from_entries_refH(_("Remote lpd Printer Options"),
-_("To use a remote lpd print queue, you need to supply
-the hostname of the printer server and the queue name
+_("To use a remote lpd print, you need to supply
+the hostname of the printer server and the printer name
 on that server."), [
-{ label => _("Remote hostname"), val => \$remotehost },
-{ label => _("Remote queue"), val => \$remotequeue } ],
+{ label => _("Remote host name"), val => \$remotehost },
+{ label => _("Remote printer name"), val => \$remotequeue } ],
 complete => sub {
     unless ($remotehost ne "") {
 	$in->ask_warn('', _("Remote host name missing!"));
 	return (1,0);
     }
     unless ($remotequeue ne "") {
-	$in->ask_warn('', _("Remote queue name missing!"));
+	$in->ask_warn('', _("Remote printer name missing!"));
 	return (1,1);
     }
     return 0;
@@ -441,8 +441,8 @@ sub setup_socket {
 
     return if !$in->ask_from_entries_refH(_("Socket Printer Options"),
 _("To print to a socket printer, you need to provide the
-hostname of the printer and optionally the port number."), [
-{ label => _("Printer Hostname"), val => \$remotehost },
+host name of the printer and optionally the port number."), [
+{ label => _("Printer host name"), val => \$remotehost },
 { label => _("Port"), val => \$remoteport } ],
 complete => sub {
     unless ($remotehost ne "") {
@@ -571,10 +571,50 @@ sub get_db_entry {
 		$printer->{currentqueue}{'driver'} =
 		    $printer::thedb{$printer->{DBENTRY}}{driver};
 	    }
+	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
 	} elsif (($::expert) && ($printer->{SPOOLER} eq "cups")) {
 	    # Do we have a native CUPS driver or a PostScript PPD file?
 	    $printer->{DBENTRY} = printer::get_descr_from_ppd($printer) ||
 		$printer->{DBENTRY};
+	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
+	} else {
+	    # Point the list cursor at least to manufacturer and model of the
+	    # printer
+	    $printer->{DBENTRY} = "";
+	    my $make = $printer->{configured}{$queue}{'make'};
+	    my $model = $printer->{configured}{$queue}{'model'};
+	    my $key;
+	    for $key (keys %printer::thedb) {
+		if ((($::expert) &&
+		     ($key =~ /^$make\|$model\|.*\(recommended\)$/)) ||
+		    ((!$::expert) &&
+		     ($key =~ /^$make\|$model$/))) {
+		    $printer->{DBENTRY} = $key;
+		}
+	    }
+	    if ($printer->{DBENTRY} eq "") {
+		# Exact match of make and model did not work, try to clean
+		# ups the model name
+		$model =~ s/PS//;
+		$model =~ s/PostScript//;
+		$model =~ s/Series//;
+		for $key (keys %printer::thedb) {
+		    if ((($::expert) &&
+			 ($key =~ /^$make\|$model\|.*\(recommended\)$/)) ||
+			((!$::expert) &&
+			 ($key =~ /^$make\|$model$/))) {
+			$printer->{DBENTRY} = $key;
+		    }
+		}
+	    }
+	    if ($printer->{DBENTRY} eq "") {
+		# Exact match with cleaned-up model did not work, try a best
+		# match
+		$printer->{DBENTRY} =
+		    bestMatchSentence("$make|$model",
+				      keys %printer::thedb);
+	    }
+	    $printer->{OLD_CHOICE} = "";
 	}
     } else {
 	if (($::expert) && ($printer->{DBENTRY} !~ (recommended))) {
@@ -588,8 +628,8 @@ sub get_db_entry {
 		}
 	    }
 	}
+	$printer->{OLD_CHOICE} = $printer->{DBENTRY};
     }
-    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
 }
 
 sub choose_model {
@@ -600,7 +640,6 @@ sub choose_model {
     }
     $in->set_help('configurePrinterType') if $::isInstall;
     # Choose the printer/driver from the list
-
     return ($printer->{DBENTRY} = $in->ask_from_treelist
 	(_("Printer model selection"),
 	 _("Which printer model do you have?"), '|',
@@ -634,7 +673,7 @@ sub get_printer_info {
 	    if (($printer->{configured}{$queue}) &&
 		($printer->{configured}{$queue}{'queuedata'}{'foomatic'})) {
 		# The queue was already configured with Foomatic ...
-		if ($printer->{DBENTRY} eq $oldchoice) {
+		if (($printer->{DBENTRY} eq $oldchoice) && 0) {
 		    # ... and the user didn't change the printer/driver
 		    $printer->{ARGS} =
 			$printer->{configured}{$queue}{'args'};
@@ -820,7 +859,8 @@ sub print_testpages {
 Note: the photo test page can take a rather long time to get printed
 and on laser printers with too low memory it can even not come out.
 In most cases it is enough to print the standard test page."),
-          cancel => _("No test pages"),
+          cancel => ($printer->{configured}{$printer->{OLD_QUEUE}} ?
+		     _("Cancel") : _("No test pages")),
           ok => _("Print")},
 	 [
 	  { text => _("Standard test page"), type => 'bool',
@@ -858,15 +898,21 @@ In most cases it is enough to print the standard test page."),
 	    # print the stuff
 	    @lpq_output = printer::print_pages($printer, @testpages);
 	}
-	
+	my $dialogtext;
 	if (@lpq_output) {
-	    $in->ask_yesorno('',_("Test page(s) have been sent to the printer.
+	    $dialogtext = _("Test page(s) have been sent to the printer.
 It may take some time before the printer starts.
-Printing status:\n%s\n\nDoes it work properly?", @lpq_output), 1) and return 1;
+Printing status:\n%s\n\n", @lpq_output);
 	} else {
-	    $in->ask_yesorno('', _("Test page(s) have been sent to the printer.
-It may take some time before the printer starts.
-Does it work properly?"), 1) and return 1;
+	    $dialogtext = _("Test page(s) have been sent to the printer.
+It may take some time before the printer starts.\n");
+	}
+	if ($printer->{configured}{$printer->{OLD_QUEUE}}) {
+	    $in->ask_warn('',$dialogtext);
+	    return 1;
+	} else {
+	    $in->ask_yesorno('',$dialogtext . _("Did it work properly?"), 1) 
+		and return 1;
 	}
     } else {
 	return 1;
@@ -961,75 +1007,91 @@ sub main {
 	install_spooler($printer, $in);
     }
 
-    my ($queue, $continue, $newqueue) = ('', 1, 0);
+    # Control variables for the main loop
+    my ($queue, $continue, $newqueue, $editqueue) = ('', 1, 0, 0);
+    # Cursor position in queue modification window
+    my $modify = _("Printer options");
     while ($continue) {
 	$newqueue = 0;
 	# When the queue list is not shown, cancelling the printer type
 	# dislog should leave the program
 	$continue = 0;
-	if (!$ask_multiple_printer && %{$printer->{configured} || {}} == ()) {
-	    $newqueue = 1;
-	    $queue = $printer->{want} || 
-		$in->ask_yesorno(_("Printer"),
-				 _("Would you like to configure printing?"),
-				 0) ? 'lp' : _("Done");
-	    if ($queue ne _("Done")) {
+	if ($editqueue) {
+	    # The user was either in the printer modification dialog and did
+	    # not close it or he had set up a new queue and said that the test
+	    # page didn't come out correctly, so let the user edit the queue.
+	    $newqueue = 0;
+	    $continue = 1;
+	    $editqueue = 0;
+	} else {
+	    # Reset modification window cursor when one leaves the window
+	    $modify = _("Printer options");
+	    if (!$ask_multiple_printer && 
+		%{$printer->{configured} || {}} == ()) {
+		$newqueue = 1;
+		$queue = $printer->{want} || 
+		    $in->ask_yesorno(_("Printer"),
+				    _("Would you like to configure printing?"),
+				    0) ? 'lp' : _("Done");
+		if ($queue ne _("Done")) {
+		    $printer->{SPOOLER} ||= 
+			setup_default_spooler ($printer, $in) ||
+			    return;
+		}
+	    } else {
+		# Ask for a spooler when none is defined
 		$printer->{SPOOLER} ||= 
 		    setup_default_spooler ($printer, $in) ||
 			return;
-	    }
-	} else {
-	    # Ask for a spooler when none is defined
-	    $printer->{SPOOLER} ||= 
-		setup_default_spooler ($printer, $in) ||
-		    return;
-	    # Show a queue list window when there is at least one queue
-	    # or when we are in expert mode
-	    unless ((%{$printer->{configured} || {}} == ()) && (!$::expert)) {
-		# Cancelling the printer type dialog should leed to this
-		# dialog
-		$continue = 1;
-		$in->ask_from_entries_refH_powered(
-		    {messages =>
-                      _("The following printers are configured.\nYou can add some more or modify the existing ones."),
-		      cancel => '',
-		    },
-		    # List the queues
-                    [ { val => \$queue, format => \&translate,
+		# Show a queue list window when there is at least one queue
+		# or when we are in expert mode
+		unless ((%{$printer->{configured} || {}} == ()) && 
+			(!$::expert)) {
+		    # Cancelling the printer type dialog should leed to this
+		    # dialog
+		    $continue = 1;
+		    $in->ask_from_entries_refH_powered(
+			{messages =>
+			     _("The following printers are configured.\nYou can add some more or modify the existing ones."),
+			 cancel => '',
+			},
+			# List the queues
+			[ { val => \$queue, format => \&translate,
 		        list => [ (sort keys %{$printer->{configured} || {}}),
-		    # Button to add a new queue
-		    _("Add printer"),
-		    # In expert mode we can change the spooler
-		    ($::expert ?
-		     ( _("Spooler: ") .
-		       $printer::spooler_inv{$printer->{SPOOLER}} ) : ()),
-		    # Bored by configuring your printers, get out of here!
-		    _("Done") ] } ]
-		);
-	    } else {
-		#- as there are no printer already configured, Add one
-		#- automatically.
-		$queue = _("Add printer"); 
-	    } 
-	                                         
-	    if ($queue eq _("Add printer")) {
-		$newqueue = 1;
-		my %queues; 
-		@queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
-		my $i = ''; while ($i < 100) { last unless exists $queues{"lp$i"}; ++$i; }
-		$queue = "lp$i";
+			# Button to add a new queue
+			_("Add printer"),
+		        # In expert mode we can change the spooler
+		        ($::expert ?
+		         ( _("Spooler: ") .
+		           $printer::spooler_inv{$printer->{SPOOLER}} ) : ()),
+		        # Bored by configuring your printers, get out of here!
+		        _("Done") ] } ]
+		    );
+		} else {
+		    #- as there are no printer already configured, Add one
+		    #- automatically.
+		    $queue = _("Add printer"); 
+		} 
+	        # Determine a default name for a new printer queue
+		if ($queue eq _("Add printer")) {
+		    $newqueue = 1;
+		    my %queues; 
+		    @queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
+		    my $i = ''; while ($i < 100) { last unless exists $queues{"lp$i"}; ++$i; }
+		    $queue = "lp$i";
+		}
+		if ($queue =~ /^Spooler: /) {
+		    $printer->{SPOOLER} =
+			setup_default_spooler ($printer, $in) || 
+			    $printer->{SPOOLER};
+		    next;
+		}
 	    }
-	    if ($queue =~ /^Spooler: /) {
-		$printer->{SPOOLER} =
-		    setup_default_spooler ($printer, $in) || 
-			$printer->{SPOOLER};
-		next;
-	    }
+	    # Save the default spooler
+	    printer::set_default_spooler($printer);
+	    #- Close printerdrake
+	    $queue eq _("Done") and last;
 	}
-	# Save the default spooler
-	printer::set_default_spooler($printer);
-	#- Close printerdrake
-	$queue eq _("Done") and last;
 
 	if ($newqueue) {
 	    #- Set default values for a new queue
@@ -1062,24 +1124,22 @@ sub main {
 	    }
 	    setup_printer_connection($printer, $in) or next;
 	    choose_printer_name($printer, $in) or next;
-	    
-	    #- configure the printer driver
-	    if (setup_gsdriver($printer, $in,
-			       $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
-		#if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
-		#    printer::remove_queue($printer, $printer->{OLD_QUEUE});
-		#}
-		#delete $printer->{OLD_QUEUE}
-	        #   if (($printer->{QUEUE} ne $printer->{OLD_QUEUE}) && 
-		#       ($printer->{configured}{$printer->{QUEUE}}));
-		$continue = $::expert || !$::isInstall;
+	    get_db_entry($printer);
+	    choose_model($printer, $in) || return;
+	    get_printer_info($printer);
+	    setup_options($printer, $in) || return;
+	    $printer->{complete} = 1;
+	    printer::configure_queue($printer);
+	    $printer->{complete} = 0;
+	    if (print_testpages($printer, $in,
+				$printer->{TYPE} !~ /LOCAL/ && $upNetwork)) { 
+		$continue = ($::expert || !$::isInstall);
 	    } else {
-		$continue = 1;
+		$editqueue = 1;
 	    }
 	} else {
 	    # Modify a queue, ask which part should be modified
-	    my $modify = _("Printer options");
-	    while ($in->ask_from_entries_refH_powered
+	    if ($in->ask_from_entries_refH_powered
 		   ({ title => _("Modify printer"),
 		      messages => _("Printer %s: %s %s
 What do you want to modify on this printer?",
@@ -1098,12 +1158,20 @@ What do you want to modify on this printer?",
 				  _("Printer options"),
 				  _("Print test pages"),
 				  _("Remove printer") ] } ] ) ) {
+		# Stay in the queue edit window until the user clicks "Close"
+		# or deletes the queue
+		$editqueue = 1; 
 		#- Copy the queue data and work on the copy
 		$printer->{currentqueue} = {};
 	        printer::copy_printer_params
 		  ($printer->{configured}{$queue}{'queuedata'},
 		   $printer->{currentqueue})
 		      if $printer->{configured}{$queue};
+		#- Keep in mind the printer driver which was used, so it can
+		#- be determined whether the driver is only available in expert
+		#- and so for setting the options for the driver in
+		#- recommended mode a special treatment has to be applied.
+		my $driver = $printer->{currentqueue}{driver};
 		#- keep in mind old name of queue (in case of changing)
 		$printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
 		#- Which printer type did we have before (check beginning of 
@@ -1151,23 +1219,57 @@ What do you want to modify on this printer?",
 			}
 		    }
 		} elsif ($modify eq _("Printer options")) {
-		    get_printer_info($printer);
-		    setup_options($printer, $in) && do {
-			$printer->{complete} = 1;
-		        printer::configure_queue($printer);
-			$printer->{complete} = 0;
+		    if ((!$::expert) &&
+			(!(($printer->{currentqueue}{foomatic}) &&
+			   ($driver eq
+			    $printer::thedb{$printer->{DBENTRY}}{driver})))) {
+			# This is a hack to allow to adjust the options of a
+			# printer which was set up in expert mode when
+			# one is currently in recommended mode (CUPS printer
+			# or not recommended Foomatic driver)
+			$::expert = 1;	
+			# Read database in expert mode
+			%printer::thedb = ();
+		        printer::read_printer_db($printer->{SPOOLER});
+			# Neutralize printer data set
+			delete($printer->{currentqueue}{foomatic});
+			delete($printer->{currentqueue}{id});
+			delete($printer->{currentqueue}{ppd});
+			# Re-read printer data in expert mode
+			get_db_entry($printer);
+			get_printer_info($printer);
+			setup_options($printer, $in) && do {
+			    $printer->{complete} = 1;
+			    printer::configure_queue($printer);
+			    $printer->{complete} = 0;
+			};
+			$::expert = 0;
+			# Re-read database in recommended mode
+			%printer::thedb = ();
+		        printer::read_printer_db($printer->{SPOOLER});
+		    } else {
+			# Normal procedure for recommended driver or expert
+			# mode
+			setup_options($printer, $in) && do {
+			    $printer->{complete} = 1;
+			    printer::configure_queue($printer);
+			    $printer->{complete} = 0;
+			};
 		    }
 		} elsif ($modify eq _("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
 		} elsif ($modify eq _("Remove printer")) {
 		    $in->ask_yesorno('',
 	   _("Do you really want to remove the printer \"%s\"?", $queue), 1) &&
-		      printer::remove_queue($printer, $queue) && last;
+		      printer::remove_queue($printer, $queue) && 
+			  ($editqueue = 0);
 		}
-		# Reinitialize $printer data structure
-	        printer::resetinfo($printer);
+	    } else {
+		$editqueue = 0;
 	    }
+	    $continue = ($::expert || !$::isInstall);
 	}
+	$queue = $printer->{currentqueue}{queue};
 	if ($continue) {
 	    # Reinitialize $printer data structure
 	    printer::resetinfo($printer);

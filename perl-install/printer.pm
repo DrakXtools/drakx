@@ -51,11 +51,21 @@ sub spooler {
     return @spooler_inv{qw(cups lpd lprng pdq)};
 }
 sub printer_type($) {
-    for ($_[0]{SPOOLER}) {
-	/cups/ && return @printer_type_inv{qw(LOCAL CUPS LPD SOCKET SMB), $::expert ? qw(URI) : ()};
-	/lpd/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), $::expert ? qw(POSTPIPE URI) : ()};
-	/lprng/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), $::expert ? qw(POSTPIPE URI) : ()};
-	/pdq/  && return @printer_type_inv{qw(LOCAL LPD SOCKET), $::expert ? qw(URI) : ()};
+    my ($printer) = @_;
+    for ($printer->{SPOOLER}) {
+	# In the case of CUPS as spooler only present the "Remote CUPS
+	# server" option when one adds a new printer, not when one modifies
+	# an already configured one.
+	/cups/ && return @printer_type_inv{qw(LOCAL), 
+			 $printer->{configured}{$printer->{OLD_QUEUE}} ?
+			     () : qw(CUPS), qw(LPD SOCKET SMB), 
+			     $::expert ? qw(URI) : ()};
+	/lpd/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP),
+					   $::expert ? qw(POSTPIPE URI) : ()};
+	/lprng/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP),
+					   $::expert ? qw(POSTPIPE URI) : ()};
+	/pdq/  && return @printer_type_inv{qw(LOCAL LPD SOCKET),
+					   $::expert ? qw(URI) : ()};
     }
 }
 
@@ -292,9 +302,11 @@ sub read_printer_db(;$) {
 	    }
 	}
     }
+    close DBPATH;
 
     #- Load CUPS driver database if CUPS is used as spooler
     if (($spooler) && ($spooler eq "cups") && ($::expert)) {
+
 	#&$install('cups-drivers') unless $::testing;
 	#my $w;
 	#if ($in) {
@@ -309,6 +321,7 @@ sub read_printer_db(;$) {
     #%descr_to_help        = map { $printer::thedb{$_}{DESCR}, $printer::thedb{$_}{ABOUT} } @entries_db_short;
     #@entry_db_description = keys %descr_to_db;
     #db_to_descr          = reverse %descr_to_db;
+
 }
 
 sub read_foomatic_options ($) {
@@ -588,10 +601,15 @@ sub configure_queue($) {
     my ($printer) = @_;
 
     if ($printer->{currentqueue}{foomatic}) {
-	#- Create the queue with "foomatic-configure"
+	#- Create the queue with "foomatic-configure", in case of queue
+	#- renaming copy the old queue
         run_program::rooted($prefix, "foomatic-configure",
 			    "-s", $printer->{SPOOLER},
 			    "-n", $printer->{currentqueue}{'queue'},
+			    (($printer->{currentqueue}{'queue'} ne 
+			      $printer->{OLD_QUEUE}) &&
+			     ($printer->{configured}{$printer->{OLD_QUEUE}}) ?
+			     ("-C", $printer->{OLD_QUEUE}) : ()),
 			    "-c", $printer->{currentqueue}{'connect'},
 			    "-p", $printer->{currentqueue}{'id'},
 			    "-d", $printer->{currentqueue}{'driver'},
@@ -615,6 +633,15 @@ sub configure_queue($) {
 			        ("-L", $printer->{currentqueue}{'loc'}) : (),
 			    @{$printer->{OPTIONS}}
 			    ) or die "lpadmin failed";
+	# Copy the old queue's PPD file to the new queue when it is renamed,
+	# to conserve the option settings
+	if (($printer->{currentqueue}{'queue'} ne 
+	     $printer->{OLD_QUEUE}) &&
+	    ($printer->{configured}{$printer->{OLD_QUEUE}})) {
+	    run_program::rooted($prefix, "cp", "-f",
+		"/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd",
+		"/etc/cups/ppd/$printer->{currentqueue}{'queue'}.ppd");
+	}
     }
 
     my $useUSB = 0;
