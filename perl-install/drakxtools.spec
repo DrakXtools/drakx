@@ -288,8 +288,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Mon Jan  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.8mdk
+* Tue Jan  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.8mdk
+- update french translation
 - harddrake: treat usb hubs as usb controllers
+- logdrake: set it non editable
+- printerdrake:
+  o simplify gimp-print configuration 
+  o let it work
+- various cleanups (pixel)
+- standalone tools: first help system bits (deush)
 
 * Mon Jan  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.7mdk
 - printerdrake fixes
