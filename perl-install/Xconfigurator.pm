@@ -1027,7 +1027,7 @@ sub show_info {
 #- Program entry point.
 sub main {
     my ($o, $allowFB);
-    ($prefix, $o, $in, $allowFB, $isLaptop, $install, $lang) = @_;
+    ($prefix, $o, $in, $allowFB, $isLaptop, $install) = @_;
     $o ||= {};
 
     XF86check_link('');
