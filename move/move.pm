@@ -514,6 +514,7 @@ sub install2::configMove {
     require install_steps_interactive;
     if (cat_('/proc/mounts') !~ /nfs/) {
         install_steps_interactive::configureNetwork($o);
+	touch('/etc/resolv.conf');
         enable_service('network');
     }
     enable_service('netfs');
