@@ -60,6 +60,9 @@ $o = $::o = {
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => { eth0 => { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } },
 
+    netc => {},
+    intf => {},
+             
 #-step : the current one
 #-prefix
 #-mouse
@@ -240,7 +243,7 @@ sub configureNetwork {
     my ($_clicked, $_ent_number, $auto) = @_;
     #- get current configuration of network device.
     require network;
-    eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
+    eval { network::read_all_conf($o->{prefix}, $o->{netc}, $o->{intf}) };
     installStepsCall($o, $auto, 'configureNetwork') if !$o->{isUpgrade};
 }
 #------------------------------------------------------------------------------
