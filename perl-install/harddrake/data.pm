@@ -31,12 +31,12 @@ sub set_removable_configurator {
 
 our @tree =
     (
-     [ "FLOPPY", , N("Floppy"), "floppy.png", "", \&detect_devices::floppies, 0 ],
-     [ "ZIP", , N("Zip"), "floppy.png", "", \&detect_devices::zips, 0 ],
+     [ "FLOPPY", , N("Floppy"), "floppy.png", "", \&detect_devices::floppies, 1 ],
+     [ "ZIP", , N("Zip"), "floppy.png", "", \&detect_devices::zips, 1 ],
      [ "HARDDISK", , N("Disk"), "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds, 1 ],
-     [ "CDROM", , N("CDROM"), "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms }, 0 ],
-     [ "BURNER", , N("CD/DVD burners"), "cd.png", "", \&detect_devices::burners, 0 ],
-     [ "DVDROM", , N("DVD-ROM"), "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() }, 0 ],
+     [ "CDROM", , N("CDROM"), "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms }, 1 ],
+     [ "BURNER", , N("CD/DVD burners"), "cd.png", "", \&detect_devices::burners, 1 ],
+     [ "DVDROM", , N("DVD-ROM"), "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() }, 1 ],
      [ "TAPE", , N("Tape"), "tape.png", "", \&detect_devices::tapes, 0 ],
      [ "VIDEO", , N("Videocard"), "video.png", "$sbindir/XFdrake",  sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices }, 1 ],
      [ "TV", , N("Tvcard"), "tv.png", "/usr/bin/XawTV", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices }, 0 ],     

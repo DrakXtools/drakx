@@ -33,9 +33,9 @@ foreach (@harddrake::data::tree) {
     ref($detector) eq 'CODE' or next;
 
     my %ID = map {
-	   my $i = $_;
-	   my $id = defined $i->{device} ? $i->{device} : join(':', map { $i->{$_} } qw(vendor id subvendor subid));
-	   $id => $i;
+        my $i = $_;
+        my $id = defined $i->{device} ? $i->{device} : join(':', map { $i->{$_} } qw(vendor id subvendor subid));
+        $id => $i;
     } &$detector;
     $config{$Ident} = \%ID;
     next if is_empty_hash_ref $previous_config; # don't fsck on first run
@@ -45,32 +45,33 @@ foreach (@harddrake::data::tree) {
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
     if (@was_removed) {
-	$msg .= N("Some devices in the \"%s\" hardware class were removed:\n", $item) .
-	    "- " . harddrake::data::custom_id($oldconfig->{$_}, $item) . " was removed\n" foreach @was_removed . "\n";
+     $msg .= N("Some devices in the \"%s\" hardware class were removed:\n", $item) .
+         "- " . harddrake::data::custom_id($oldconfig->{$_}, $item) . " was removed\n" foreach @was_removed . "\n";
     }
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
     $msg .= N("Some devices were added:\n", $item) if @added;
     $msg .= "- " . harddrake::data::custom_id($ID{$_}, $item) . " was added\n" foreach @added;
     @added || @was_removed or next;
+    harddrake::data::set_removable_configurator($Ident, first(values %$oldconfig, values %ID), \$configurator);
     next unless -x $configurator;
     my ($pid, $no);
     $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
     unless ($pid = fork()) {
-	exec("/usr/share/harddrake/confirm 'Hardware changes in $Ident class ($timeout seconds to answer)' '" . $msg . "Do you want to run the appropriate config tool ?'");
+     exec("/usr/share/harddrake/confirm 'Hardware changes in $Ident class ($timeout seconds to answer)' '" . $msg . "Do you want to run the appropriate config tool ?'");
     }
     alarm($timeout);
     wait();
     my $res = $?;
     alarm(0);
     if ($no) {
-	require interactive;
-	undef $wait;
+     require interactive;
+     undef $wait;
      $in ||= interactive->vnew;
-	$wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
+     $wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
     } elsif ($res) {
-	if (fork()) {
-	    wait();
-	} else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
+     if (fork()) {
+         wait();
+     } else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
     }
 }
 
