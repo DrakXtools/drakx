@@ -499,12 +499,67 @@ substInFile { s/^DHCP.interface.*\n//; $_ .= "DHCP.interface $device\n" if eof }
 #-  2. BrowseAddress <server's Broadcast IP> # broadcast printer info into
 #-                                           # the local network.
 #-
+#-  3. BrowseOrder Deny,Allow
+#-     BrowseDeny All
+#-     BrowseAllow <IP mask for local net> # Only accept broadcast signals 
+#-                                         # coming from local network
+#-
+#-  4. <Location />
+#-     Order Deny,Allow
+#-     Deny From All
+#-     Allow From <IP mask for local net> # Allow only machines of local 
+#-     </Location>                        # network to access the server
+#-     
 #- These steps are only done when the CUPS package is installed.
 
 substInFile {
     s/^ServerName[^:].*\n//; $_ .= "ServerName $lan_address.1\n" if eof;
     s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
+    s/^BrowseOrder.*\n//; $_ .= "BrowseOrder Deny,Allow\n" if eof;
+    s/^BrowseDeny.*\n//; $_ .= "BrowseDeny All\n" if eof;
+    s/^BrowseAllow.*\n//; $_ .= "BrowseAllow $lan_address.*\n" if eof;
 } $cups_conf;
+
+
+#- Modify the root location block in /etc/cups/cupsd.conf
+
+if (-f $cups_conf) {
+    my @cups_conf_content = cat_($cups_conf);
+    my @root_location; my $root_location_start; my $root_location_end;
+
+    # Cut out the root location block so that it can be treated seperately
+    # without affecting the rest of the file
+    if (grep(m|^\s*<Location\s+/\s*>|, @cups_conf_content)) {
+	$root_location_start = -1;
+	$root_location_end = -1;
+	# Go through all the lines, bail out when start and end line found
+	for (my $i = 0; $i < @cups_conf_content && $root_location_end == -1; $i++) {
+	    if ($cups_conf_content[$i] =~ m|^\s*<\s*Location\s+/\s*>|) {
+		$root_location_start = $i;
+	    } elsif (($cups_conf_content[$i] =~ m|^\s*<\s*/Location\s*>|) && ($root_location_start != -1)) {
+		$root_location_end = $i;
+	    }
+	}
+	# Rip out the block and store it seperately
+	@root_location = splice(@cups_conf_content, $root_location_start, $root_location_end - $root_location_start + 1);
+    } else {
+	# If there is no root location block, create one
+	$root_location_start = @cups_conf_content;
+	@root_location = ("<Location />\n", "</Location>\n");
+    }
+ 
+    # Delete all former "Order", "Allow", and "Deny" lines from the root location block
+    s/^\s*Order.*//, s/^\s*Allow.*//, s/^\s*Deny.*// foreach @root_location;
+ 
+    # Add the new "Order" and "Deny" lines, add an "Allow" line for the local network
+    splice(@root_location, -1, 0, $_) foreach ("Order Deny,Allow\n", "Deny From All\n", "Allow From 127.0.0.1\n",
+					       "Allow From $lan_address.*\n");
+ 
+    # Put the changed root location block back into the file
+    splice(@cups_conf_content, $root_location_start, 0, @root_location);
+ 
+    output $cups_conf, @cups_conf_content;
+}
 
 
 #- start the daemons
@@ -537,6 +592,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.29  2001/03/26 15:29:01  gc
+#- first attempt at pixelization of code (till's cups patches)
+#-
 #- Revision 1.28  2001/03/21 18:07:36  gc
 #- honour embedded mode
 #-
