@@ -40,6 +40,7 @@
 #include "mount.h"
 #include "automatic.h"
 #include "dhcp.h"
+#include "url.h"
 
 #include "network.h"
 
@@ -578,15 +579,15 @@ enum return_type nfs_prepare(void)
 		strcat(nfsmount_location, ":");
 		strcat(nfsmount_location, answers[1]);
 		
-		if (my_mount(nfsmount_location, "/tmp/image", "nfs") == -1) {
+		if (my_mount(nfsmount_location, IMAGE_LOCATION, "nfs") == -1) {
 			error_message("I can't mount the directory from the NFS server.");
 			results = RETURN_BACK;
 			continue;
 		}
 
-		if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
+		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
 			error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Distribution.");
-			umount("/tmp/image");
+			umount(IMAGE_LOCATION);
 			results = RETURN_BACK;
 		}
 	}
@@ -602,7 +603,7 @@ enum return_type nfs_prepare(void)
 	}
 
 	if (IS_RESCUE)
-		umount("/tmp/image");
+		umount(IMAGE_LOCATION);
 
 	method_name = strdup("nfs");
 	return RETURN_OK;
@@ -611,12 +612,140 @@ enum return_type nfs_prepare(void)
 
 enum return_type ftp_prepare(void)
 {
-	error_message("Currently unsupported");
-	return RETURN_ERROR;
+	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
+	char * questions_auto[] = { "server", "directory", "user", "pass", NULL };
+	char ** answers;
+	enum return_type results;
+
+	if (!ramdisk_possible()) {
+		error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
+			      MEM_LIMIT_RAMDISK >> 10, total_memory() >> 10);
+		return RETURN_ERROR;
+	}
+
+	results = intf_select_and_up();
+
+	if (results != RETURN_OK)
+		return results;
+
+	do {
+		char location_full[500];
+		int ftp_serv_response;
+		int fd, size;
+
+		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
+						"the directory containing the " DISTRIB_NAME " Distribution, "
+						"and the login/pass if necessary (leave blank for anonymous).",
+						questions, &answers, 40, questions_auto);
+		if (results != RETURN_OK)
+			return ftp_prepare();
+
+		log_message("FTP: trying to connect to %s", answers[0]);
+
+		ftp_serv_response = ftp_open_connection(answers[0], answers[2], answers[3], "");
+		if (ftp_serv_response < 0) {
+			log_message("FTP: error connect %d", ftp_serv_response);
+			if (ftp_serv_response == FTPERR_BAD_HOSTNAME)
+				error_message("Error: bad hostname.");
+			else if (ftp_serv_response == FTPERR_FAILED_CONNECT)
+				error_message("Error: failed to connect to remote host.");
+			else
+				error_message("Error: couldn't connect.");
+			results = RETURN_BACK;
+			continue;
+		}
+
+		strcpy(location_full, answers[1]);
+		strcat(location_full, get_ramdisk_realname());
+
+		log_message("FTP: trying to retrieve %s", location_full);
+
+		fd = ftp_start_download(ftp_serv_response, location_full, &size);
+		if (fd < 0) {
+			log_message("FTP: error get %d", fd);
+			if (fd == FTPERR_PASSIVE_ERROR)
+				error_message("Error: error with passive connection.");
+			else if (fd == FTPERR_FILE_NOT_FOUND)
+				error_message("Error: file not found (%s).", location_full);
+			else if (fd == FTPERR_BAD_SERVER_RESPONSE)
+				error_message("Error: bad server response (server too busy?).");
+			else
+				error_message("Error: couldn't retrieve Installation program.");
+			results = RETURN_BACK;
+			continue;
+		}
+
+		log_message("FTP: size of download %d bytes", size);
+		
+		results = load_ramdisk_fd(fd, size);
+		if (results == RETURN_OK)
+			ftp_end_data_command(fd);
+
+		method_name = strdup("ftp");
+		add_to_env("HOST", answers[0]);
+		add_to_env("PREFIX", answers[1]);
+		if (strcmp(answers[2], "")) {
+			add_to_env("LOGIN", answers[2]);
+			add_to_env("PASSWORD", answers[3]);
+		}
+	}
+	while (results == RETURN_BACK);
+
+	return RETURN_OK;
 }
 
 enum return_type http_prepare(void)
 {
-	error_message("Currently unsupported");
-	return RETURN_ERROR;
+	char * questions[] = { "HTTP server", DISTRIB_NAME " directory", NULL };
+	char * questions_auto[] = { "server", "directory", NULL };
+	char ** answers;
+	enum return_type results;
+
+	if (!ramdisk_possible()) {
+		error_message("HTTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
+			      MEM_LIMIT_RAMDISK >> 10, total_memory() >> 10);
+		return RETURN_ERROR;
+	}
+
+	results = intf_select_and_up();
+
+	if (results != RETURN_OK)
+		return results;
+
+	do {
+		char location_full[500];
+		int fd;
+
+		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
+						"and the directory containing the " DISTRIB_NAME " Distribution.",
+						questions, &answers, 40, questions_auto);
+		if (results != RETURN_OK)
+			return http_prepare();
+
+		strcpy(location_full, answers[1]);
+		strcat(location_full, get_ramdisk_realname());
+
+		log_message("HTTP: trying to retrieve %s", location_full);
+		
+		fd = http_download_file(answers[0], location_full);
+		if (fd < 0) {
+			log_message("HTTP: error %d", fd);
+			if (fd == FTPERR_FAILED_CONNECT)
+				error_message("Error: couldn't connect to server.");
+			else
+				error_message("Error: couldn't get file (%s).", location_full);
+			results = RETURN_BACK;
+			continue;
+		}
+		
+		results = load_ramdisk_fd(fd, 0);
+
+		method_name = strdup("http");
+		sprintf(location_full, "http://%s/%s", answers[0], answers[1]);
+		add_to_env("URLPREFIX", location_full);
+	}
+	while (results == RETURN_BACK);
+
+	return RETURN_OK;
+
 }

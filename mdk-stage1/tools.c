@@ -26,6 +26,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdio.h>
 #include <zlib.h>
 #include "stage1.h"
 #include "log.h"
@@ -137,6 +138,15 @@ void unset_param(int i)
 	stage1_mode &= ~i;
 }
 
+int charstar_to_int(char * s)
+{
+	int number = 0;
+	while (*s && isdigit(*s)) {
+		number = (number * 10) + (*s - '0');
+		s++;
+	}
+	return number;
+}
 
 int total_memory(void)
 {
@@ -167,10 +177,7 @@ int total_memory(void)
 	if (buf[i] == 0 || buf[i] == '\n')
 		fatal_error("could not read MemTotal");
 
-	while (buf[i] != 0 && isdigit(buf[i])) {
-	    memtotal = (memtotal * 10) + (buf[i] - '0');
-	    i++;
-	}
+	memtotal = charstar_to_int(&(buf[i]));
 	
 	log_message("%s %d kB", memtotal_tag, memtotal);
 
@@ -189,34 +196,17 @@ int ramdisk_possible(void)
 }
 
 
-enum return_type load_ramdisk(void)
+enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 {
-	char * img_name;
 	gzFile st2;
 	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd (and actually is a ramdisk device file) */
-	int ram_fd, st2_fd;
+	int ram_fd;
 	char buffer[4096];
-	char * stg2_name = get_param_valued("special_stage2");
-	char * begin_img = "/tmp/image/Mandrake/base/";
-	char * end_img = "_stage2.gz";
 	int gz_errnum;
-	struct stat statr;
+	char * wait_msg = "Loading program into memory...";
+	int bytes_read = 0;
 
-	if (!stg2_name)
-		stg2_name = "mdkinst";
-
-	if (IS_RESCUE)
-		stg2_name = "rescue";
-	
-	img_name = malloc(strlen(begin_img) + strlen(stg2_name) + strlen(end_img) + 1);
-	strcpy(img_name, begin_img);
-	strcat(img_name, stg2_name);
-	strcat(img_name, end_img);
-
-	log_message("trying to load %s as a ramdisk", img_name);
-
-	st2_fd = open(img_name, O_RDONLY); /* to be able to see the progression */
-	st2 = gzdopen(st2_fd, "r");
+	st2 = gzdopen(ramdisk_fd, "r");
 
 	if (!st2) {
 		log_message("Opening compressed ramdisk: %s", gzerror(st2, &gz_errnum));
@@ -231,8 +221,7 @@ enum return_type load_ramdisk(void)
 		return RETURN_ERROR;
 	}
 	
-	stat(img_name, &statr);
-	init_progression("Loading program into memory...", statr.st_size);
+	init_progression(wait_msg, size);
 
 	while (!gzeof(st2)) {
 		int actually = gzread(st2, buffer, sizeof(buffer));
@@ -246,7 +235,7 @@ enum return_type load_ramdisk(void)
 			remove_wait_message();
 			return RETURN_ERROR;
 		}
-		update_progression(lseek(st2_fd, 0L, SEEK_CUR));
+		update_progression((int)((bytes_read += actually) / RAMDISK_COMPRESSION_RATIO));
 	}
 
 	end_progression();
@@ -257,7 +246,7 @@ enum return_type load_ramdisk(void)
 	if (IS_RESCUE)
 		return RETURN_OK; /* fucksike, I lost several hours wondering why the kernel won't see the rescue if it is alreay mounted */
 
-	if (my_mount(ramdisk, "/tmp/stage2", "ext2"))
+	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2"))
 		return RETURN_ERROR;
 
 	set_param(MODE_RAMDISK);
@@ -266,6 +255,52 @@ enum return_type load_ramdisk(void)
 }
 
 
+char * get_ramdisk_realname(void)
+{
+	char img_name[500];
+	char * stg2_name = get_param_valued("special_stage2");
+	char * begin_img = RAMDISK_LOCATION;
+	char * end_img = "_stage2.gz";
+
+	if (!stg2_name)
+		stg2_name = "mdkinst";
+
+	if (IS_RESCUE)
+		stg2_name = "rescue";
+	
+	strcpy(img_name, begin_img);
+	strcat(img_name, stg2_name);
+	strcat(img_name, end_img);
+
+	return strdup(img_name);
+}
+
+
+enum return_type load_ramdisk(void)
+{
+	int st2_fd;
+	struct stat statr;
+	char img_name[500];
+
+	strcpy(img_name, IMAGE_LOCATION);
+	strcat(img_name, get_ramdisk_realname());
+
+	log_message("trying to load %s as a ramdisk", img_name);
+
+	st2_fd = open(img_name, O_RDONLY); /* to be able to see the progression */
+
+	if (st2_fd == -1) {
+		log_message("open ramdisk file (%s) failed", img_name);
+		error_message("Could not open compressed ramdisk file (%s).", img_name);
+		return RETURN_ERROR;
+	}
+
+	if (stat(img_name, &statr))
+		return RETURN_ERROR;
+	else
+		return load_ramdisk_fd(st2_fd, statr.st_size);
+}
+
 /* pixel's */
 void * memdup(void *src, size_t size)
 {
@@ -273,4 +308,32 @@ void * memdup(void *src, size_t size)
 	r = malloc(size);
 	memcpy(r, src, size);
 	return r;
+}
+
+
+static char ** my_env = NULL;
+static int env_size = 0;
+
+void handle_env(char ** env)
+{
+	char ** ptr = env;
+	while (ptr && *ptr) {
+		ptr++;
+		env_size++;
+	}
+	my_env = malloc(sizeof(char *) * 100);
+	memcpy(my_env, env, sizeof(char *) * (env_size+1));
+}
+
+char ** grab_env(void) {
+	return my_env;
+}
+
+void add_to_env(char * name, char * value)
+{
+	char tmp[500];
+	sprintf(tmp, "%s=%s", name, value);
+	my_env[env_size] = strdup(tmp);
+	env_size++;
+	my_env[env_size] = NULL;
 }

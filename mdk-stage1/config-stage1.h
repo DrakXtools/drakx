@@ -23,6 +23,13 @@
 
 #define DISTRIB_NAME "Linux-Mandrake"
 
+#define RAMDISK_COMPRESSION_RATIO 1.9
+
+#define LIVE_LOCATION    "/Mandrake/mdkinst/"
+#define RAMDISK_LOCATION "/Mandrake/base/"
+#define IMAGE_LOCATION   "/tmp/image"
+#define STAGE2_LOCATION  "/tmp/stage2"
+
 /* user-definable (in Makefile): DISABLE_NETWORK, DISABLE_DISK, DISABLE_CDROM, DISABLE_PCMCIA */
 
 

@@ -58,7 +58,9 @@ static enum return_type try_with_device(char *dev_name)
 	char * questions_location[] = { "Directory", NULL };
 	char ** answers_location;
 	char device_fullname[50];
-	char location_full[50];
+	char location_full[500];
+
+	char * disk_own_mount = "/tmp/disk";
 
 	int major, minor, blocks;
 	char name[100];
@@ -97,42 +99,43 @@ static enum return_type try_with_device(char *dev_name)
 	strcpy(device_fullname, "/dev/");
 	strcat(device_fullname, choice);
 	
-	if (my_mount(device_fullname, "/tmp/disk", "ext2") == -1 &&
-	    my_mount(device_fullname, "/tmp/disk", "vfat") == -1 &&
-	    my_mount(device_fullname, "/tmp/disk", "reiserfs") == -1) {
+	if (my_mount(device_fullname, disk_own_mount, "ext2") == -1 &&
+	    my_mount(device_fullname, disk_own_mount, "vfat") == -1 &&
+	    my_mount(device_fullname, disk_own_mount, "reiserfs") == -1) {
 		error_message("I can't find a valid filesystem.");
 		return try_with_device(dev_name);
 	}
 
 	if (ask_from_entries("Please enter the directory containing the " DISTRIB_NAME " Distribution.",
 			     questions_location, &answers_location, 24) != RETURN_OK) {
-		umount("/tmp/disk");
+		umount(disk_own_mount);
 		return try_with_device(dev_name);
 	}
 
-	strcpy(location_full, "/tmp/disk/");
+	strcpy(location_full, disk_own_mount);
+	strcat(location_full, "/");
 	strcat(location_full, answers_location[0]);
 
 	if (access(location_full, R_OK)) {
 		error_message("Directory could not be found on partition.\n"
 			      "Here's a short extract of the files in the root of the partition:\n"
-			      "%s", list_directory("/tmp/disk"));
-		umount("/tmp/disk");
+			      "%s", list_directory(disk_own_mount));
+		umount(disk_own_mount);
 		return try_with_device(dev_name);
 	}
 
-	unlink("/tmp/image");
-	symlink(location_full, "/tmp/image");
+	unlink(IMAGE_LOCATION);
+	symlink(location_full, IMAGE_LOCATION);
 
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible()) {
 		/* RAMDISK install */
-		if (access("/tmp/image" RAMDISK_LOCATION, R_OK)) {
+		if (access(IMAGE_LOCATION RAMDISK_LOCATION, R_OK)) {
 			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
 				      "(I need the directory " RAMDISK_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
-				      "%s", list_directory("/tmp/image"));
-			umount("/tmp/disk");
-			unlink("/tmp/image");
+				      "%s", list_directory(IMAGE_LOCATION));
+			umount(disk_own_mount);
+			unlink(IMAGE_LOCATION);
 			return try_with_device(dev_name);
 		}
 		if (load_ramdisk() != RETURN_OK) {
@@ -142,28 +145,28 @@ static enum return_type try_with_device(char *dev_name)
 	} else {
 		/* LIVE install */
 		char p;
-		if (access("/tmp/image" LIVE_LOCATION, R_OK)) {
+		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
 			error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
 				      "(I need the directory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
-				      "%s", list_directory("/tmp/image"));
-			umount("/tmp/disk");
-			unlink("/tmp/image");
+				      "%s", list_directory(IMAGE_LOCATION));
+			umount(disk_own_mount);
+			unlink(IMAGE_LOCATION);
 			return try_with_device(dev_name);
 		}
-		if (readlink("/tmp/image" LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
+		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
 			error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
 				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
-			umount("/tmp/disk");
-			unlink("/tmp/image");
+			umount(disk_own_mount);
+			unlink(IMAGE_LOCATION);
 			return try_with_device(dev_name);
 		}
 		log_message("found the " DISTRIB_NAME " Installation, good news!");
 	}
 
 	if (IS_RESCUE)
-		umount("/tmp/image");
+		umount(IMAGE_LOCATION);
 
 	method_name = strdup("disk");
 	return RETURN_OK;

@@ -48,7 +48,4 @@ extern char * method_name;
 
 void fatal_error(char *msg);
 
-#define LIVE_LOCATION "/Mandrake/mdkinst"
-#define RAMDISK_LOCATION "/Mandrake/base"
-
 #endif

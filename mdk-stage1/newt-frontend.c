@@ -30,6 +30,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <sys/time.h>
 #include "stage1.h"
 #include "log.h"
 #include "newt.h"
@@ -74,12 +75,13 @@ void info_message(char *msg, ...)
 		vlog_message(msg, args);
 }
 
+
 void wait_message(char *msg, ...)
 {
 	int width = 8;
 	int height = 3;
 	char * title = "Please wait...";
-	newtComponent t, f;
+	newtComponent c, f;
 	char * buf = NULL;
 	int size = 0;
 	int i = 0;
@@ -99,13 +101,13 @@ void wait_message(char *msg, ...)
 	
 	newtCenteredWindow(width, height, title);
 
-	t = newtTextbox(1, 1, width - 2, height - 2, NEWT_TEXTBOX_WRAP);
-	newtTextboxSetText(t, buf);
+	c = newtTextbox(1, 1, width - 2, height - 2, NEWT_TEXTBOX_WRAP);
+	newtTextboxSetText(c, buf);
 	f = newtForm(NULL, NULL, 0);
 
 	free(buf);
 
-	newtFormAddComponent(f, t);
+	newtFormAddComponent(f, c);
 
 	newtDrawForm(f);
 	newtRefresh();
@@ -121,30 +123,57 @@ void remove_wait_message(void)
 static newtComponent form = NULL, scale = NULL;
 static int size_progress;
 static int actually_drawn;
+static char * msg_progress;
 
 void init_progression(char *msg, int size)
 {
 	size_progress = size;
-	actually_drawn = 0;
-	newtCenteredWindow(70, 5, "Please wait...");
-	form = newtForm(NULL, NULL, 0);
-	newtFormAddComponent(form, newtLabel(1, 1, msg));
-	scale = newtScale(1, 3, 68, size);
-	newtFormAddComponent(form, scale);
-	newtDrawForm(form);
-	newtRefresh();
+	if (size) {
+		actually_drawn = 0;
+		newtCenteredWindow(70, 5, "Please wait...");
+		form = newtForm(NULL, NULL, 0);
+		newtFormAddComponent(form, newtLabel(1, 1, msg));
+		scale = newtScale(1, 3, 68, size);
+		newtFormAddComponent(form, scale);
+		newtDrawForm(form);
+		newtRefresh();
+	}
+	else {
+		wait_message(msg);
+		msg_progress = msg;
+	}
 }
 
 void update_progression(int current_size)
 {
-	newtScaleSet(scale, current_size);
-	newtRefresh();
+	if (size_progress) {
+		newtScaleSet(scale, current_size);
+		newtRefresh();
+	}
+	else {
+		struct timeval t;
+		int time;
+		static int last_time = -1;
+		gettimeofday(&t, NULL);
+		time = t.tv_sec*3 + t.tv_usec/300000;
+		if (time != last_time) {
+			char msg_prog_final[500];
+			sprintf(msg_prog_final, "%s (%d bytes read) ", msg_progress, current_size);
+			remove_wait_message();
+			wait_message(msg_prog_final);
+		}
+		last_time = time;
+	}
 }
 
 void end_progression(void)
 {
-	newtPopWindow();
-	newtFormDestroy(form);
+	if (size_progress) {
+		newtPopWindow();
+		newtFormDestroy(form);
+	}
+	else
+		remove_wait_message();
 }
 
 

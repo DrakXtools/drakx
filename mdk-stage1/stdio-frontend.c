@@ -127,31 +127,42 @@ void remove_wait_message(void)
 
 static int size_progress;
 static int actually_drawn;
-
+#define PROGRESS_SIZE 60
 void init_progression(char *msg, int size)
 {
 	int i;
 	size_progress = size;
-	actually_drawn = 0;
-	printf("%s\n[", msg);
-	for (i=0; i<60; i++)
-		printf(".");
-	printf("]\033[G[");		/* only works on ANSI-compatibles */
-	fflush(stdout);
+	printf("%s\n", msg);
+	if (size) {
+		printf("[");
+		actually_drawn = 0;
+		for (i=0; i<PROGRESS_SIZE; i++)
+			printf(".");
+		printf("]\033[G[");		/* only works on ANSI-compatibles */
+		fflush(stdout);
+	}
 }
 
 void update_progression(int current_size)
 {
-	while ((int)((current_size*60)/size_progress) > actually_drawn) {
-		printf("*");
-		actually_drawn++;
-	}
+	if (size_progress) {
+		while ((int)((current_size*PROGRESS_SIZE)/size_progress) > actually_drawn) {
+			printf("*");
+			actually_drawn++;
+		}
+	} else
+		printf("\033[G%d bytes read", current_size);
+	
 	fflush(stdout);
 }
 
 void end_progression(void)
 {
-	printf("]\n");
+	if (size_progress) {
+		update_progression(size_progress);
+		printf("]\n");
+	} else
+		printf(" done.\n");
 }
 
 

@@ -189,6 +189,7 @@ int main(int argc, char **argv, char **env)
 	open_log();
 	log_message("welcome to the " DISTRIB_NAME " install (stage1, version " VERSION " built " __DATE__ " " __TIME__")");
 	process_cmdline();
+	handle_env(env);
 	spawn_shell();
 	if (load_modules_dependencies())
 		fatal_error("could not open and parse modules dependencies");
@@ -203,8 +204,8 @@ int main(int argc, char **argv, char **env)
 		fatal_error("could not select an installation method");
 
 	if (!IS_RAMDISK) {
-		if (symlink("/tmp/image/Mandrake/mdkinst", "/tmp/stage2") != 0)
-			fatal_error("symlink to /tmp/stage2 failed");
+		if (symlink(IMAGE_LOCATION LIVE_LOCATION, STAGE2_LOCATION) != 0)
+			fatal_error("symlink to " STAGE2_LOCATION " failed");
 	}
 
 	if (IS_RESCUE) {
@@ -223,10 +224,11 @@ int main(int argc, char **argv, char **env)
 
 	argptr = stage2_args;
 	*argptr++ = "/usr/bin/runinstall2";
+	*argptr++ = "--method";
 	*argptr++ = method_name;
 	*argptr++ = NULL;
 
-	execve(stage2_args[0], stage2_args, env);
+	execve(stage2_args[0], stage2_args, grab_env());
 
 	printf("error in exec of stage2 :-(\n");
 	fatal_error(strerror(errno));

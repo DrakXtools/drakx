@@ -81,7 +81,7 @@ STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
 STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c
-NETWORKSRC = network.c dns.c nfsmount.c dhcp.c
+NETWORKSRC = network.c dns.c nfsmount.c dhcp.c url.c
 
 ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)
 

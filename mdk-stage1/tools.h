@@ -28,10 +28,16 @@ void process_cmdline(void);
 int get_param(int i);
 void set_param(int i);
 void unset_param(int i);
+int charstar_to_int(char * s);
 int total_memory(void);
 int ramdisk_possible(void);
+char * get_ramdisk_realname(void);
 enum return_type load_ramdisk(void);
+enum return_type load_ramdisk_fd(int ramdisk_fd, int size);
 void * memdup(void *src, size_t size);
+void add_to_env(char * name, char * value);
+void handle_env(char ** env);
+char ** grab_env(void);
 
 struct param_elem
 {
