@@ -58,7 +58,7 @@ if ($>) {
 #    exit !$@;
 #}
 my $in = interactive_gtk->new;
-my $hds =
+my ($hds, $lvms) =
     catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
     sub {
 	my ($err) = $@ =~ /(.*) at /;
@@ -67,6 +67,7 @@ my $hds =
 [_("I can't read your partition table, it's too corrupted for me :(
 I'll try to go on blanking bad partitions"), $err]);
     };
+push @$hds, @$lvms;
 
 $SIG{__DIE__} = sub { chomp (my $m = $_[0]); log::l("ERROR: $m") };
 my $fstab = [ fsedit::get_fstab(@$hds) ];
