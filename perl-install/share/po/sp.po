@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2001-03-04 20:41+0100\n"
+"POT-Creation-Date: 2001-03-05 17:31+0100\n"
 "PO-Revision-Date: 2001-01-06 17:46+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -440,137 +440,167 @@ msgstr "Монитор који ради са 1600x1200 на 70 Hz"
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr "Монитор који ради са 1600x1200 на 76 Hz"
 
-#: ../../any.pm_.c:98 ../../any.pm_.c:116
+#: ../../any.pm_.c:99 ../../any.pm_.c:124
 msgid "First sector of boot partition"
 msgstr "Први сектор стартне партиције"
 
-#: ../../any.pm_.c:98 ../../any.pm_.c:116 ../../any.pm_.c:172
+#: ../../any.pm_.c:99 ../../any.pm_.c:124 ../../any.pm_.c:196
 msgid "First sector of drive (MBR)"
 msgstr "Први сектор диска (MBR)"
 
-#: ../../any.pm_.c:102
+#: ../../any.pm_.c:103
 msgid "SILO Installation"
 msgstr "SILO инсталација"
 
-#: ../../any.pm_.c:103 ../../any.pm_.c:109
+#: ../../any.pm_.c:104 ../../any.pm_.c:117
 msgid "Where do you want to install the bootloader?"
 msgstr "Где бисте да инсталирате стартер?"
 
-#: ../../any.pm_.c:108
+#: ../../any.pm_.c:116
 msgid "LILO/grub Installation"
 msgstr "LILO/grub инсталација"
 
-#: ../../any.pm_.c:120 ../../any.pm_.c:132
+#: ../../any.pm_.c:128 ../../any.pm_.c:142
 msgid "SILO"
 msgstr ""
 
-#: ../../any.pm_.c:122
+#: ../../any.pm_.c:130
 msgid "LILO with text menu"
 msgstr ""
 
-#: ../../any.pm_.c:123 ../../any.pm_.c:132
+#: ../../any.pm_.c:131 ../../any.pm_.c:142
 msgid "LILO with graphical menu"
 msgstr ""
 
-#: ../../any.pm_.c:126
+#: ../../any.pm_.c:134
 msgid "Grub"
 msgstr ""
 
-#: ../../any.pm_.c:130
+#: ../../any.pm_.c:138
 msgid "Boot from DOS/Windows (loadlin)"
 msgstr ""
 
-#: ../../any.pm_.c:137
+#: ../../any.pm_.c:140 ../../any.pm_.c:142
+#, fuzzy
+msgid "Yaboot"
+msgstr "Root"
+
+#: ../../any.pm_.c:148 ../../any.pm_.c:179
 msgid "Bootloader main options"
 msgstr "Главне опције стартерa"
 
-#: ../../any.pm_.c:138
+#: ../../any.pm_.c:149 ../../any.pm_.c:180
 #, fuzzy
 msgid "Bootloader to use"
 msgstr "Главне опције стартерa"
 
-#: ../../any.pm_.c:140
+#: ../../any.pm_.c:151
 msgid "Bootloader installation"
 msgstr "Инсталациja стартерa"
 
-#: ../../any.pm_.c:142
+#: ../../any.pm_.c:153 ../../any.pm_.c:182
 msgid "Boot device"
 msgstr "Стартни (boot) уређај"
 
-#: ../../any.pm_.c:143
+#: ../../any.pm_.c:154
 msgid "LBA (doesn't work on old BIOSes)"
 msgstr "LBA (не ради на старим BIOS-имa)"
 
-#: ../../any.pm_.c:144
+#: ../../any.pm_.c:155
 msgid "Compact"
 msgstr "Компакт"
 
-#: ../../any.pm_.c:144
+#: ../../any.pm_.c:155
 msgid "compact"
 msgstr "компакт"
 
-#: ../../any.pm_.c:145 ../../any.pm_.c:228
+#: ../../any.pm_.c:156 ../../any.pm_.c:257
 msgid "Video mode"
 msgstr "Видео мод"
 
-#: ../../any.pm_.c:147
+#: ../../any.pm_.c:158
 msgid "Delay before booting default image"
 msgstr "Пауза пре стартања default image-а"
 
-#: ../../any.pm_.c:149 ../../any.pm_.c:691
-#: ../../install_steps_interactive.pm_.c:801 ../../netconnect.pm_.c:608
+#: ../../any.pm_.c:160 ../../any.pm_.c:735
+#: ../../install_steps_interactive.pm_.c:815 ../../netconnect.pm_.c:608
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/draknet_.c:508
 msgid "Password"
 msgstr "Лозинка"
 
-#: ../../any.pm_.c:150 ../../any.pm_.c:692
-#: ../../install_steps_interactive.pm_.c:802
+#: ../../any.pm_.c:161 ../../any.pm_.c:736
+#: ../../install_steps_interactive.pm_.c:816
 msgid "Password (again)"
 msgstr "Лозинка (поновите)"
 
-#: ../../any.pm_.c:151
+#: ../../any.pm_.c:162
 msgid "Restrict command line options"
 msgstr "Ограничена командна линика - опције"
 
-#: ../../any.pm_.c:151
+#: ../../any.pm_.c:162
 msgid "restrict"
 msgstr "ограничено"
 
-#: ../../any.pm_.c:153
+#: ../../any.pm_.c:164
 msgid "Clean /tmp at each boot"
 msgstr "Очисти /tmp при сваком стартaњу"
 
-#: ../../any.pm_.c:154
+#: ../../any.pm_.c:165
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Дефиниши величину RAM ако је потребно (детектовано је %d MB)"
 
-#: ../../any.pm_.c:156
+#: ../../any.pm_.c:167
 msgid "Enable multi profiles"
 msgstr "Омогући мулти-профиле "
 
-#: ../../any.pm_.c:160
+#: ../../any.pm_.c:171
 msgid "Give the ram size in MB"
 msgstr "Прикажи величину RAM-а у Mb"
 
-#: ../../any.pm_.c:162
+#: ../../any.pm_.c:173
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Опција``Ограничена командна линика - опције'' је неупотребљива без лозинке"
 
-#: ../../any.pm_.c:163 ../../any.pm_.c:681
-#: ../../install_steps_interactive.pm_.c:796
+#: ../../any.pm_.c:174 ../../any.pm_.c:725
+#: ../../install_steps_interactive.pm_.c:810
 msgid "Please try again"
 msgstr "Пробајте поново"
 
-#: ../../any.pm_.c:163 ../../any.pm_.c:681
-#: ../../install_steps_interactive.pm_.c:796
+#: ../../any.pm_.c:174 ../../any.pm_.c:725
+#: ../../install_steps_interactive.pm_.c:810
 msgid "The passwords do not match"
 msgstr "Неподударност лозинки"
 
+#: ../../any.pm_.c:181
+msgid "Init Message"
+msgstr ""
+
+#: ../../any.pm_.c:183
+msgid "Open Firmware Delay"
+msgstr ""
+
+#: ../../any.pm_.c:184
+msgid "Kernel Boot Timeout"
+msgstr ""
+
 #: ../../any.pm_.c:185
+msgid "Enable CD Boot?"
+msgstr ""
+
+#: ../../any.pm_.c:186
+msgid "Enable OF Boot?"
+msgstr ""
+
+#: ../../any.pm_.c:187
+#, fuzzy
+msgid "Default OS?"
+msgstr "Подразумевано"
+
+#: ../../any.pm_.c:209
 msgid ""
 "Here are the different entries.\n"
 "You can add some more or change the existing ones."
@@ -578,130 +608,143 @@ msgstr ""
 "Ово су постављне опције.\n"
 "Можете додати нове или изменити старе."
 
-#: ../../any.pm_.c:194 ../../printerdrake.pm_.c:349
+#: ../../any.pm_.c:218 ../../printerdrake.pm_.c:349
 msgid "Add"
 msgstr "Додај"
 
-#: ../../any.pm_.c:194 ../../any.pm_.c:673 ../../diskdrake.pm_.c:46
+#: ../../any.pm_.c:218 ../../any.pm_.c:717 ../../diskdrake.pm_.c:46
 #: ../../printerdrake.pm_.c:349
 msgid "Done"
 msgstr "Урађено"
 
-#: ../../any.pm_.c:203
+#: ../../any.pm_.c:227
 msgid "Which type of entry do you want to add?"
 msgstr "Коју врсту уносa додаjетe ?"
 
-#: ../../any.pm_.c:204
+#: ../../any.pm_.c:228
 msgid "Linux"
 msgstr "Линукс"
 
-#: ../../any.pm_.c:204
+#: ../../any.pm_.c:228
 msgid "Other OS (SunOS...)"
-msgstr "Други ОС-ови (SunОS,Windows,BSD,BeOS,...)"
+msgstr "Други ОС-ови (SunОS,BSD,...)"
 
-#: ../../any.pm_.c:204
+#: ../../any.pm_.c:229
+msgid "Other OS (MacOS...)"
+msgstr "Други ОС-ови (MacОS,BSD,...)"
+
+#: ../../any.pm_.c:229
 msgid "Other OS (windows...)"
 msgstr "Други ОС-ови (Windows,BSD,BeOS,...)"
 
-#: ../../any.pm_.c:225
+#: ../../any.pm_.c:251 ../../any.pm_.c:253
 msgid "Image"
 msgstr "Слика"
 
-#: ../../any.pm_.c:226 ../../any.pm_.c:235
+#: ../../any.pm_.c:254 ../../any.pm_.c:265
 msgid "Root"
 msgstr "Root"
 
-#: ../../any.pm_.c:227
+#: ../../any.pm_.c:255 ../../any.pm_.c:284
 msgid "Append"
 msgstr "Додатaк"
 
-#: ../../any.pm_.c:229
+#: ../../any.pm_.c:259
 msgid "Initrd"
 msgstr "Initrd"
 
-#: ../../any.pm_.c:230
+#: ../../any.pm_.c:260
 msgid "Read-write"
 msgstr "Читање-писање RW"
 
-#: ../../any.pm_.c:237
+#: ../../any.pm_.c:267
 msgid "Table"
 msgstr "Табела"
 
-#: ../../any.pm_.c:238
+#: ../../any.pm_.c:268
 msgid "Unsafe"
 msgstr "Несигурно"
 
-#: ../../any.pm_.c:244
+#: ../../any.pm_.c:275 ../../any.pm_.c:280 ../../any.pm_.c:283
 msgid "Label"
 msgstr "Ознака"
 
-#: ../../any.pm_.c:246
+#: ../../any.pm_.c:277 ../../any.pm_.c:288
 msgid "Default"
 msgstr "Подразумевано"
 
-#: ../../any.pm_.c:251
+#: ../../any.pm_.c:285
+#, fuzzy
+msgid "Initrd-size"
+msgstr "Initrd"
+
+#: ../../any.pm_.c:287
+msgid "NoVideo"
+msgstr ""
+
+#: ../../any.pm_.c:295
 msgid "Remove entry"
 msgstr "Уклањам унос"
 
-#: ../../any.pm_.c:254
+#: ../../any.pm_.c:298
 msgid "Empty label not allowed"
 msgstr "Празна ознака није дозвољена"
 
-#: ../../any.pm_.c:255
+#: ../../any.pm_.c:299
 msgid "This label is already used"
 msgstr "Ова ознака је већ у употреби"
 
-#: ../../any.pm_.c:274
+#: ../../any.pm_.c:318
 #, fuzzy
 msgid "What type of partitioning?"
 msgstr "Коју врсту штампача имате?"
 
-#: ../../any.pm_.c:562
+#: ../../any.pm_.c:606
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Пронађено  %s %s интерфејсa"
 
-#: ../../any.pm_.c:563
+#: ../../any.pm_.c:607
 msgid "Do you have another one?"
 msgstr "Да ли имате још један?"
 
-#: ../../any.pm_.c:564
+#: ../../any.pm_.c:608
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Имате ли још %s интерфејса?"
 
-#: ../../any.pm_.c:566 ../../interactive.pm_.c:96 ../../my_gtk.pm_.c:553
+#: ../../any.pm_.c:610 ../../interactive.pm_.c:96 ../../my_gtk.pm_.c:553
 #: ../../printerdrake.pm_.c:233
 msgid "No"
 msgstr "Не"
 
-#: ../../any.pm_.c:566 ../../interactive.pm_.c:96 ../../my_gtk.pm_.c:553
+#: ../../any.pm_.c:610 ../../interactive.pm_.c:96 ../../my_gtk.pm_.c:553
 msgid "Yes"
 msgstr "Да"
 
-#: ../../any.pm_.c:567
+#: ../../any.pm_.c:611
 msgid "See hardware info"
 msgstr "Погледај информације о хардверу"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
-#: ../../any.pm_.c:602
+#: ../../any.pm_.c:646
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Инсталирам драјвер за %s картицу %s"
 
-#: ../../any.pm_.c:603
+#: ../../any.pm_.c:647
 #, c-format
 msgid "(module %s)"
 msgstr "(модул %s)"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
-#: ../../any.pm_.c:614
+#: ../../any.pm_.c:658
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Који %s драјвер да пробам?"
 
-#: ../../any.pm_.c:622
+#: ../../any.pm_.c:666
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -717,20 +760,20 @@ msgstr ""
 "сами да унесете додатне податке за њега, или да их драјвер сам одреди?\n"
 "Могуће је да ће проба заглавити ваш рачунар, али неће нанети никакву штету."
 
-#: ../../any.pm_.c:627
+#: ../../any.pm_.c:671
 msgid "Autoprobe"
 msgstr "Аутоматска проба"
 
-#: ../../any.pm_.c:627
+#: ../../any.pm_.c:671
 msgid "Specify options"
 msgstr "Наведите опције"
 
-#: ../../any.pm_.c:631
+#: ../../any.pm_.c:675
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "Можете навести његове опције за модул %s."
 
-#: ../../any.pm_.c:637
+#: ../../any.pm_.c:681
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -741,11 +784,11 @@ msgstr ""
 "Опције су у формату ``име=вредност име2=вредност2 ...''.\n"
 "На пример, ``io=0x300 irq=7''"
 
-#: ../../any.pm_.c:640
+#: ../../any.pm_.c:684
 msgid "Module options:"
 msgstr "Опције модула:"
 
-#: ../../any.pm_.c:650
+#: ../../any.pm_.c:694
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -754,16 +797,16 @@ msgstr ""
 "Подизање модула %s неуспело.\n"
 "Да ли желите покушате поново са другим параметрима ?"
 
-#: ../../any.pm_.c:667
+#: ../../any.pm_.c:711
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s већ постоји)"
 
-#: ../../any.pm_.c:670
+#: ../../any.pm_.c:714
 msgid "Add user"
 msgstr "Додај корисника"
 
-#: ../../any.pm_.c:671
+#: ../../any.pm_.c:715
 #, c-format
 msgid ""
 "Enter a user\n"
@@ -772,49 +815,49 @@ msgstr ""
 "Унеси корисника\n"
 "%s"
 
-#: ../../any.pm_.c:672
+#: ../../any.pm_.c:716
 msgid "Accept user"
 msgstr "Прихвати корисника"
 
-#: ../../any.pm_.c:682
+#: ../../any.pm_.c:726
 msgid "This password is too simple"
 msgstr "Ова лозинка је превише проста"
 
-#: ../../any.pm_.c:683
+#: ../../any.pm_.c:727
 msgid "Please give a user name"
 msgstr "Одредите корисничко име"
 
-#: ../../any.pm_.c:684
+#: ../../any.pm_.c:728
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Корисничко име може садржати само мала слова, бројеве, `-' и `_'"
 
-#: ../../any.pm_.c:685
+#: ../../any.pm_.c:729
 msgid "This user name is already added"
 msgstr "Ово корисничко име већ постоји"
 
-#: ../../any.pm_.c:689
+#: ../../any.pm_.c:733
 msgid "Real name"
 msgstr "Право име"
 
-#: ../../any.pm_.c:690 ../../printerdrake.pm_.c:93
+#: ../../any.pm_.c:734 ../../printerdrake.pm_.c:93
 #: ../../printerdrake.pm_.c:127
 msgid "User name"
 msgstr "Корисничко име"
 
-#: ../../any.pm_.c:693
+#: ../../any.pm_.c:737
 msgid "Shell"
 msgstr "Shell"
 
-#: ../../any.pm_.c:695
+#: ../../any.pm_.c:739
 msgid "Icon"
 msgstr "Иконa"
 
-#: ../../any.pm_.c:713
+#: ../../any.pm_.c:757
 msgid "Autologin"
 msgstr "Ауто логовaњe"
 
-#: ../../any.pm_.c:714
+#: ../../any.pm_.c:758
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
 "If you don't want to use this feature, click on the cancel button."
@@ -823,11 +866,11 @@ msgstr ""
 "Уколико не желите да користите ову опциjу, кликните на  тастер "
 "поништи(cancel) ?"
 
-#: ../../any.pm_.c:716
+#: ../../any.pm_.c:760
 msgid "Choose the default user:"
 msgstr "Изаберите default (основног) корисникa:"
 
-#: ../../any.pm_.c:717
+#: ../../any.pm_.c:761
 msgid "Choose the window manager to run:"
 msgstr "Изаберите window менадзер коjи желите да користите:"
 
@@ -1063,10 +1106,9 @@ msgstr ""
 msgid "KB"
 msgstr ""
 
-#: ../../common.pm_.c:615 ../../diskdrake.pm_.c:650
+#: ../../common.pm_.c:615 ../../diskdrake.pm_.c:654
 #: ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334
-#: ../../install_steps_interactive.pm_.c:533
 msgid "MB"
 msgstr "MB"
 
@@ -1088,7 +1130,7 @@ msgstr "1 минут"
 msgid "%d seconds"
 msgstr "%d секунди"
 
-#: ../../diskdrake.pm_.c:21 ../../diskdrake.pm_.c:459
+#: ../../diskdrake.pm_.c:21 ../../diskdrake.pm_.c:463
 msgid "Create"
 msgstr "Креирај"
 
@@ -1096,7 +1138,7 @@ msgstr "Креирај"
 msgid "Unmount"
 msgstr "Демонтирај"
 
-#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:461
+#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:465
 msgid "Delete"
 msgstr "Обриши"
 
@@ -1104,16 +1146,16 @@ msgstr "Обриши"
 msgid "Format"
 msgstr "Форматирање"
 
-#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:643
+#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:647
 msgid "Resize"
 msgstr "Промени величину"
 
-#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:459
-#: ../../diskdrake.pm_.c:515
+#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:463
+#: ../../diskdrake.pm_.c:519
 msgid "Type"
 msgstr "Тип"
 
-#: ../../diskdrake.pm_.c:24 ../../diskdrake.pm_.c:534
+#: ../../diskdrake.pm_.c:24 ../../diskdrake.pm_.c:538
 msgid "Mount point"
 msgstr "Тачка монтирања"
 
@@ -1153,23 +1195,23 @@ msgstr "Сними на дискету"
 msgid "Clear all"
 msgstr "Очисти све"
 
-#: ../../diskdrake.pm_.c:50
+#: ../../diskdrake.pm_.c:54
 msgid "Format all"
 msgstr "Форматирај све"
 
-#: ../../diskdrake.pm_.c:51
+#: ../../diskdrake.pm_.c:55
 msgid "Auto allocate"
 msgstr "Ауто дислоцирање"
 
-#: ../../diskdrake.pm_.c:54
+#: ../../diskdrake.pm_.c:58
 msgid "All primary partitions are used"
 msgstr "Све примарне партиције су заузете"
 
-#: ../../diskdrake.pm_.c:54
+#: ../../diskdrake.pm_.c:58
 msgid "I can't add any more partition"
 msgstr "Не могу додати више ни једну партицију"
 
-#: ../../diskdrake.pm_.c:54
+#: ../../diskdrake.pm_.c:58
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
@@ -1177,60 +1219,60 @@ msgstr ""
 "Да би омогућили креирање још (extended) партиција избришите једну од "
 "постојећих"
 
-#: ../../diskdrake.pm_.c:57
+#: ../../diskdrake.pm_.c:61
 msgid "Rescue partition table"
 msgstr "Спаси  табелу партиција"
 
-#: ../../diskdrake.pm_.c:58
+#: ../../diskdrake.pm_.c:62
 msgid "Undo"
 msgstr "Поништи радњу"
 
-#: ../../diskdrake.pm_.c:59
+#: ../../diskdrake.pm_.c:63
 msgid "Write partition table"
 msgstr "Упиши табелу партиција"
 
-#: ../../diskdrake.pm_.c:60
+#: ../../diskdrake.pm_.c:64
 msgid "Reload"
 msgstr "Поново унеси"
 
-#: ../../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:117
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:117
 msgid "FAT"
 msgstr "FAT"
 
-#: ../../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:117
 msgid "HFS"
 msgstr "HFS"
 
-#: ../../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:117
 msgid "SunOS"
 msgstr "SunOS"
 
-#: ../../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:117
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../diskdrake.pm_.c:114
+#: ../../diskdrake.pm_.c:118
 msgid "Empty"
 msgstr "Празно"
 
-#: ../../diskdrake.pm_.c:114 ../../install_steps_gtk.pm_.c:331
+#: ../../diskdrake.pm_.c:118 ../../install_steps_gtk.pm_.c:331
 #: ../../mouse.pm_.c:125
 msgid "Other"
 msgstr "Друго"
 
-#: ../../diskdrake.pm_.c:120
+#: ../../diskdrake.pm_.c:124
 msgid "Filesystem types:"
 msgstr "Врста фајл система:"
 
-#: ../../diskdrake.pm_.c:129
+#: ../../diskdrake.pm_.c:133
 msgid "Details"
 msgstr "Детаљи"
 
-#: ../../diskdrake.pm_.c:144
+#: ../../diskdrake.pm_.c:148
 msgid ""
 "You have one big FAT partition\n"
 "(generally used by MicroSoft Dos/Windows).\n"
@@ -1242,17 +1284,17 @@ msgstr ""
 "Предлажем да прво измените величну (resize) те партиције (кликните на њу,\n"
 "а потом на \"Промени величину\")"
 
-#: ../../diskdrake.pm_.c:149
+#: ../../diskdrake.pm_.c:153
 msgid "Please make a backup of your data first"
 msgstr "Молим вас, прво направите копију ваших података"
 
-#: ../../diskdrake.pm_.c:149 ../../diskdrake.pm_.c:167
-#: ../../diskdrake.pm_.c:176 ../../diskdrake.pm_.c:565
-#: ../../diskdrake.pm_.c:587
+#: ../../diskdrake.pm_.c:153 ../../diskdrake.pm_.c:171
+#: ../../diskdrake.pm_.c:180 ../../diskdrake.pm_.c:569
+#: ../../diskdrake.pm_.c:591
 msgid "Read carefully!"
 msgstr "ПАЖЉИВО ПРОЧИТАЈ !"
 
-#: ../../diskdrake.pm_.c:152
+#: ../../diskdrake.pm_.c:156
 msgid ""
 "If you plan to use aboot, be carefull to leave a free space (2048 sectors is "
 "enough)\n"
@@ -1262,81 +1304,81 @@ msgstr ""
 "секторана почетку \n"
 "диска)"
 
-#: ../../diskdrake.pm_.c:167
+#: ../../diskdrake.pm_.c:171
 msgid "Be careful: this operation is dangerous."
 msgstr "ПАЖЉИВО,ова операција jе опасна."
 
-#: ../../diskdrake.pm_.c:211 ../../install_steps.pm_.c:72
+#: ../../diskdrake.pm_.c:215 ../../install_steps.pm_.c:72
 #: ../../install_steps_interactive.pm_.c:38
 #: ../../install_steps_interactive.pm_.c:308 ../../standalone/diskdrake_.c:66
 msgid "Error"
 msgstr "Грешка"
 
-#: ../../diskdrake.pm_.c:235 ../../diskdrake.pm_.c:741
+#: ../../diskdrake.pm_.c:239 ../../diskdrake.pm_.c:745
 msgid "Mount point: "
 msgstr "Тачка монтирања: "
 
-#: ../../diskdrake.pm_.c:236 ../../diskdrake.pm_.c:295
+#: ../../diskdrake.pm_.c:240 ../../diskdrake.pm_.c:299
 msgid "Device: "
 msgstr "Уређај: "
 
-#: ../../diskdrake.pm_.c:237
+#: ../../diskdrake.pm_.c:241
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Ознака DOS партиције: %s (само претпоставка)\n"
 
-#: ../../diskdrake.pm_.c:241 ../../diskdrake.pm_.c:248
-#: ../../diskdrake.pm_.c:298
+#: ../../diskdrake.pm_.c:245 ../../diskdrake.pm_.c:252
+#: ../../diskdrake.pm_.c:302
 msgid "Type: "
 msgstr "Унеси: "
 
-#: ../../diskdrake.pm_.c:245
+#: ../../diskdrake.pm_.c:249
 msgid "Name: "
 msgstr "Име: "
 
-#: ../../diskdrake.pm_.c:250
+#: ../../diskdrake.pm_.c:254
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Почетак: сектор %s\n"
 
-#: ../../diskdrake.pm_.c:251
+#: ../../diskdrake.pm_.c:255
 #, c-format
 msgid "Size: %s"
 msgstr "Величина: %s"
 
-#: ../../diskdrake.pm_.c:253
+#: ../../diskdrake.pm_.c:257
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s сектора"
 
-#: ../../diskdrake.pm_.c:255
+#: ../../diskdrake.pm_.c:259
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr "Цилиндар %d до цилиндра %d\n"
 
-#: ../../diskdrake.pm_.c:256
+#: ../../diskdrake.pm_.c:260
 msgid "Formatted\n"
 msgstr "Форматирано\n"
 
-#: ../../diskdrake.pm_.c:257
+#: ../../diskdrake.pm_.c:261
 msgid "Not formatted\n"
 msgstr "Није форматирано\n"
 
-#: ../../diskdrake.pm_.c:258
+#: ../../diskdrake.pm_.c:262
 msgid "Mounted\n"
 msgstr "Монтирано\n"
 
-#: ../../diskdrake.pm_.c:259
+#: ../../diskdrake.pm_.c:263
 #, c-format
 msgid "RAID md%s\n"
 msgstr "RAID md%s\n"
 
-#: ../../diskdrake.pm_.c:261
+#: ../../diskdrake.pm_.c:265
 #, c-format
 msgid "Loopback file(s): %s\n"
 msgstr "Loopback фаjл(ови): %s\n"
 
-#: ../../diskdrake.pm_.c:262
+#: ../../diskdrake.pm_.c:266
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -1344,27 +1386,27 @@ msgstr ""
 "Boot партиција по default-у\n"
 "   (за подизање MS-DOSа, не за lilo)\n"
 
-#: ../../diskdrake.pm_.c:264
+#: ../../diskdrake.pm_.c:268
 #, c-format
 msgid "Level %s\n"
 msgstr "Ниво %s\n"
 
-#: ../../diskdrake.pm_.c:265
+#: ../../diskdrake.pm_.c:269
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "Chunk-уј %s\n"
 
-#: ../../diskdrake.pm_.c:266
+#: ../../diskdrake.pm_.c:270
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-дискови %s\n"
 
-#: ../../diskdrake.pm_.c:268
+#: ../../diskdrake.pm_.c:272
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Имe Loopback фаjлa: %s"
 
-#: ../../diskdrake.pm_.c:271
+#: ../../diskdrake.pm_.c:275
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -1372,7 +1414,7 @@ msgid ""
 "probably leave it alone.\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:274
+#: ../../diskdrake.pm_.c:278
 msgid ""
 "\n"
 "This special Bootstrap\n"
@@ -1380,72 +1422,72 @@ msgid ""
 "dual-booting your system.\n"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:291
+#: ../../diskdrake.pm_.c:295
 msgid "Please click on a partition"
 msgstr "Кликните на партицију"
 
-#: ../../diskdrake.pm_.c:296
+#: ../../diskdrake.pm_.c:300
 #, c-format
 msgid "Size: %s\n"
 msgstr "Величина: %s\n"
 
-#: ../../diskdrake.pm_.c:297
+#: ../../diskdrake.pm_.c:301
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Геометрија: %s цилиндара, %s глава, %s сектора\n"
 
-#: ../../diskdrake.pm_.c:299
+#: ../../diskdrake.pm_.c:303
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-дискови %s\n"
 
-#: ../../diskdrake.pm_.c:300
+#: ../../diskdrake.pm_.c:304
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Тип табелe партиција : %s\n"
 
-#: ../../diskdrake.pm_.c:301
+#: ../../diskdrake.pm_.c:305
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr "на бусу %d ID %d\n"
 
-#: ../../diskdrake.pm_.c:317
+#: ../../diskdrake.pm_.c:321
 msgid "Mount"
 msgstr "Монтирај"
 
-#: ../../diskdrake.pm_.c:319
+#: ../../diskdrake.pm_.c:323
 msgid "Active"
 msgstr "Активирај"
 
-#: ../../diskdrake.pm_.c:321
+#: ../../diskdrake.pm_.c:325
 msgid "Add to RAID"
 msgstr "Додај на RAID"
 
-#: ../../diskdrake.pm_.c:323
+#: ../../diskdrake.pm_.c:327
 msgid "Remove from RAID"
 msgstr "Уклони са RAID-а"
 
-#: ../../diskdrake.pm_.c:325
+#: ../../diskdrake.pm_.c:329
 msgid "Modify RAID"
 msgstr "Промени RAID"
 
-#: ../../diskdrake.pm_.c:327
+#: ../../diskdrake.pm_.c:331
 msgid "Add to LVM"
 msgstr "Додај на LVM"
 
-#: ../../diskdrake.pm_.c:329
+#: ../../diskdrake.pm_.c:333
 msgid "Remove from LVM"
 msgstr "Уклони са LVM-а"
 
-#: ../../diskdrake.pm_.c:331
+#: ../../diskdrake.pm_.c:335
 msgid "Use for loopback"
 msgstr "Користи за loopback"
 
-#: ../../diskdrake.pm_.c:338
+#: ../../diskdrake.pm_.c:342
 msgid "Choose action"
 msgstr "Изаберите акцију"
 
-#: ../../diskdrake.pm_.c:432
+#: ../../diskdrake.pm_.c:436
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -1455,7 +1497,7 @@ msgstr ""
 "Није могуће креирати /boot за сада на хард диску (на цилиндру > 1024).\n"
 "Или користите LILO који не ради, или га не користите па вам не треба /boot"
 
-#: ../../diskdrake.pm_.c:436
+#: ../../diskdrake.pm_.c:440
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -1467,7 +1509,7 @@ msgstr ""
 "Уколико планирате да кориситите LILO boot менаджер, морате\n"
 "додати /boot партицији."
 
-#: ../../diskdrake.pm_.c:442
+#: ../../diskdrake.pm_.c:446
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -1477,16 +1519,16 @@ msgstr ""
 "Ниjедан стартер не може да ради са тим без /boot партициje.\n"
 "Зато пазите дa додате /boot партициjу"
 
-#: ../../diskdrake.pm_.c:459 ../../diskdrake.pm_.c:461
+#: ../../diskdrake.pm_.c:463 ../../diskdrake.pm_.c:465
 #, c-format
 msgid "Use ``%s'' instead"
 msgstr "Уместо тога пробајте ``%s''"
 
-#: ../../diskdrake.pm_.c:465
+#: ../../diskdrake.pm_.c:469
 msgid "Use ``Unmount'' first"
 msgstr "Прво урадите ``Демонтирај''"
 
-#: ../../diskdrake.pm_.c:466 ../../diskdrake.pm_.c:510
+#: ../../diskdrake.pm_.c:470 ../../diskdrake.pm_.c:514
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1494,41 +1536,41 @@ msgstr ""
 "После промене типа партициje %s, сви подаци на овој партицији ће бити "
 "избрисани"
 
-#: ../../diskdrake.pm_.c:478
+#: ../../diskdrake.pm_.c:482
 msgid "Continue anyway?"
 msgstr "Свеједно наставити ?"
 
-#: ../../diskdrake.pm_.c:483
+#: ../../diskdrake.pm_.c:487
 msgid "Quit without saving"
 msgstr "Крај без снимања промена"
 
-#: ../../diskdrake.pm_.c:483
+#: ../../diskdrake.pm_.c:487
 msgid "Quit without writing the partition table?"
 msgstr "Крај без снимања промена у табеле партиција?"
 
-#: ../../diskdrake.pm_.c:513
+#: ../../diskdrake.pm_.c:517
 msgid "Change partition type"
 msgstr "Промена типа партиције"
 
-#: ../../diskdrake.pm_.c:514
+#: ../../diskdrake.pm_.c:518
 msgid "Which filesystem do you want?"
 msgstr "Коју  фаjл систем желите ?"
 
-#: ../../diskdrake.pm_.c:516 ../../diskdrake.pm_.c:773
+#: ../../diskdrake.pm_.c:520 ../../diskdrake.pm_.c:777
 msgid "You can't use ReiserFS for partitions smaller than 32MB"
 msgstr "Нe можете користити ReiserFS за партициjе мање од 32MB"
 
-#: ../../diskdrake.pm_.c:532
+#: ../../diskdrake.pm_.c:536
 #, c-format
 msgid "Where do you want to mount loopback file %s?"
 msgstr "Где бисте да монтирате loopback фаjл  %s?"
 
-#: ../../diskdrake.pm_.c:533
+#: ../../diskdrake.pm_.c:537
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Где бисте да монтирате %s уређај ?"
 
-#: ../../diskdrake.pm_.c:537
+#: ../../diskdrake.pm_.c:541
 msgid ""
 "Can't unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
@@ -1536,138 +1578,138 @@ msgstr ""
 "Демонтирaњe ниjе могуће,jер се партициjа корисити за loop back.\n"
 "Прво уклоните loopback"
 
-#: ../../diskdrake.pm_.c:556
+#: ../../diskdrake.pm_.c:560
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "После форматирaњa партициje %s,сви подаци на овој партицији ће бити избрисани"
 
-#: ../../diskdrake.pm_.c:558
+#: ../../diskdrake.pm_.c:562
 msgid "Formatting"
 msgstr "Форматирање"
 
-#: ../../diskdrake.pm_.c:559
+#: ../../diskdrake.pm_.c:563
 #, c-format
 msgid "Formatting loopback file %s"
 msgstr "Форматирање loopback фаjлa %s"
 
-#: ../../diskdrake.pm_.c:560 ../../install_steps_interactive.pm_.c:399
+#: ../../diskdrake.pm_.c:564
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Форматирање партиције %s"
 
-#: ../../diskdrake.pm_.c:565
+#: ../../diskdrake.pm_.c:569
 msgid "After formatting all partitions,"
 msgstr "После форматирања свих партиција,"
 
-#: ../../diskdrake.pm_.c:565
+#: ../../diskdrake.pm_.c:569
 msgid "all data on these partitions will be lost"
 msgstr "сви подаци на њима ће бити уништени"
 
-#: ../../diskdrake.pm_.c:571
+#: ../../diskdrake.pm_.c:575
 msgid "Move"
 msgstr "Премести"
 
-#: ../../diskdrake.pm_.c:572
+#: ../../diskdrake.pm_.c:576
 msgid "Which disk do you want to move it to?"
 msgstr "Који диск желите да преместите?"
 
-#: ../../diskdrake.pm_.c:573
+#: ../../diskdrake.pm_.c:577
 msgid "Sector"
 msgstr "Сектор"
 
-#: ../../diskdrake.pm_.c:574
+#: ../../diskdrake.pm_.c:578
 msgid "Which sector do you want to move it to?"
 msgstr "Где желитe да инсталирате стартер?"
 
-#: ../../diskdrake.pm_.c:577
+#: ../../diskdrake.pm_.c:581
 msgid "Moving"
 msgstr "Премештање"
 
-#: ../../diskdrake.pm_.c:577
+#: ../../diskdrake.pm_.c:581
 msgid "Moving partition..."
 msgstr "Премештање партиције..."
 
-#: ../../diskdrake.pm_.c:587
+#: ../../diskdrake.pm_.c:591
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Табела партиција за уређај %s ће бити записана на диск!"
 
-#: ../../diskdrake.pm_.c:589
+#: ../../diskdrake.pm_.c:593
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Морате рестартовати рачунар да би се измене извршиле"
 
-#: ../../diskdrake.pm_.c:610
+#: ../../diskdrake.pm_.c:614
 msgid "Computing FAT filesystem bounds"
 msgstr "Прорачунавам границе FAT фајл-система"
 
-#: ../../diskdrake.pm_.c:610 ../../diskdrake.pm_.c:670
+#: ../../diskdrake.pm_.c:614 ../../diskdrake.pm_.c:674
 #: ../../install_interactive.pm_.c:107
 msgid "Resizing"
 msgstr "Промена величине (resizing)"
 
-#: ../../diskdrake.pm_.c:633
+#: ../../diskdrake.pm_.c:637
 msgid "This partition is not resizeable"
 msgstr "Овоj партицици ниjе могућe променити величину"
 
-#: ../../diskdrake.pm_.c:638
+#: ../../diskdrake.pm_.c:642
 msgid "All data on this partition should be backed-up"
 msgstr "Cви подаци на овој партицији би требали бити сaчувани"
 
-#: ../../diskdrake.pm_.c:640
+#: ../../diskdrake.pm_.c:644
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr "После промене величинe %s партициjе сви подаци  ће бити избрисани"
 
-#: ../../diskdrake.pm_.c:650
+#: ../../diskdrake.pm_.c:654
 msgid "Choose the new size"
 msgstr "Изаберите нову величину"
 
-#: ../../diskdrake.pm_.c:707
+#: ../../diskdrake.pm_.c:711
 msgid "Create a new partition"
 msgstr "Креирај нову партицију"
 
-#: ../../diskdrake.pm_.c:733
+#: ../../diskdrake.pm_.c:737
 msgid "Start sector: "
 msgstr "Почетни сектор: "
 
-#: ../../diskdrake.pm_.c:737 ../../diskdrake.pm_.c:812
+#: ../../diskdrake.pm_.c:741 ../../diskdrake.pm_.c:816
 msgid "Size in MB: "
 msgstr "Величина у MB:"
 
-#: ../../diskdrake.pm_.c:740 ../../diskdrake.pm_.c:815
+#: ../../diskdrake.pm_.c:744 ../../diskdrake.pm_.c:819
 msgid "Filesystem type: "
 msgstr "Врста фајл-система:"
 
-#: ../../diskdrake.pm_.c:743
+#: ../../diskdrake.pm_.c:747
 msgid "Preference: "
 msgstr "Карактеристике: "
 
-#: ../../diskdrake.pm_.c:791
+#: ../../diskdrake.pm_.c:795
 msgid "This partition can't be used for loopback"
 msgstr "Ова партиција не може бити коришћена за loopback "
 
-#: ../../diskdrake.pm_.c:801
+#: ../../diskdrake.pm_.c:805
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../diskdrake.pm_.c:811
+#: ../../diskdrake.pm_.c:815
 msgid "Loopback file name: "
 msgstr "Име Loopback фаjлa: "
 
-#: ../../diskdrake.pm_.c:837
+#: ../../diskdrake.pm_.c:841
 msgid "File already used by another loopback, choose another one"
 msgstr "Фаjл се већ користи од стране другог loopback-а,изаберите други"
 
-#: ../../diskdrake.pm_.c:838
+#: ../../diskdrake.pm_.c:842
 msgid "File already exists. Use it?"
 msgstr "Фаjл већ постоји.Да ли да га користим ?"
 
-#: ../../diskdrake.pm_.c:860 ../../diskdrake.pm_.c:876
+#: ../../diskdrake.pm_.c:864 ../../diskdrake.pm_.c:880
 msgid "Select file"
 msgstr "Изаберите фајл"
 
-#: ../../diskdrake.pm_.c:869
+#: ../../diskdrake.pm_.c:873
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -1675,11 +1717,11 @@ msgstr ""
 "Похрaњенa(снимљена) табела партиција није исте величине\n"
 "Желите да наставите ?"
 
-#: ../../diskdrake.pm_.c:877
+#: ../../diskdrake.pm_.c:881
 msgid "Warning"
 msgstr "Упозорење"
 
-#: ../../diskdrake.pm_.c:878
+#: ../../diskdrake.pm_.c:882
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -1687,35 +1729,35 @@ msgstr ""
 "Убаците дискету у уређај\n"
 "Сви подаци на дискети ће бити избрисани !"
 
-#: ../../diskdrake.pm_.c:889
+#: ../../diskdrake.pm_.c:893
 msgid "Trying to rescue partition table"
 msgstr "Спасавање табеле партиција"
 
-#: ../../diskdrake.pm_.c:900
+#: ../../diskdrake.pm_.c:904
 msgid "device"
 msgstr "уређај"
 
-#: ../../diskdrake.pm_.c:901
+#: ../../diskdrake.pm_.c:905
 msgid "level"
 msgstr "ниво"
 
-#: ../../diskdrake.pm_.c:902
+#: ../../diskdrake.pm_.c:906
 msgid "chunk size"
 msgstr "chunk величина"
 
-#: ../../diskdrake.pm_.c:914
+#: ../../diskdrake.pm_.c:918
 msgid "Choose an existing RAID to add to"
 msgstr "Изабери постојећи RAID за додавање"
 
-#: ../../diskdrake.pm_.c:915 ../../diskdrake.pm_.c:941
+#: ../../diskdrake.pm_.c:919 ../../diskdrake.pm_.c:945
 msgid "new"
 msgstr "нови"
 
-#: ../../diskdrake.pm_.c:939
+#: ../../diskdrake.pm_.c:943
 msgid "Choose an existing LVM to add to"
 msgstr "Изабери постојећи LVM за додавање"
 
-#: ../../diskdrake.pm_.c:944
+#: ../../diskdrake.pm_.c:948
 msgid "LVM name?"
 msgstr ""
 
@@ -3723,7 +3765,7 @@ msgstr "Инсталирај систем"
 msgid "Configure networking"
 msgstr "Подеси мрежу"
 
-#: ../../install2.pm_.c:51 ../../install_steps_interactive.pm_.c:725
+#: ../../install2.pm_.c:51 ../../install_steps_interactive.pm_.c:739
 msgid "Summary"
 msgstr ""
 
@@ -3731,8 +3773,8 @@ msgstr ""
 msgid "Configure services"
 msgstr "Подеси сервисе"
 
-#: ../../install2.pm_.c:53 ../../install_steps_interactive.pm_.c:791
-#: ../../install_steps_interactive.pm_.c:792
+#: ../../install2.pm_.c:53 ../../install_steps_interactive.pm_.c:805
+#: ../../install_steps_interactive.pm_.c:806
 msgid "Set root password"
 msgstr "Унеси root лозинку"
 
@@ -4048,7 +4090,6 @@ msgid "Size: %d KB\n"
 msgstr "Величина: %d KB\n"
 
 #: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:267
-#: ../../install_steps_interactive.pm_.c:493
 msgid "Choose the packages you want to install"
 msgstr "Изабери пакете за инсталацију"
 
@@ -4062,7 +4103,7 @@ msgid "Install"
 msgstr "Инсталирај"
 
 #: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:511
-#: ../../install_steps_interactive.pm_.c:598
+#: ../../install_steps_interactive.pm_.c:612
 msgid "Installing"
 msgstr "Инсталирам"
 
@@ -4079,7 +4120,7 @@ msgid "Total time "
 msgstr "Укупно време"
 
 #: ../../install_steps_graphical.pm_.c:507
-#: ../../install_steps_interactive.pm_.c:598
+#: ../../install_steps_interactive.pm_.c:612
 msgid "Preparing installation"
 msgstr "Припремам инсталацију"
 
@@ -4352,7 +4393,6 @@ msgid "You can choose other languages that will be available after install"
 msgstr "Можете изабрати други jезик коjи ће бити доступан после инсталациje "
 
 #: ../../install_steps_interactive.pm_.c:69
-#: ../../install_steps_interactive.pm_.c:535
 msgid "All"
 msgstr "Свe"
 
@@ -4595,7 +4635,7 @@ msgstr ""
 "MandrakeSoft S.A.  \n"
 
 #: ../../install_steps_interactive.pm_.c:182
-#: ../../install_steps_interactive.pm_.c:728
+#: ../../install_steps_interactive.pm_.c:742
 #: ../../standalone/keyboarddrake_.c:28
 msgid "Keyboard"
 msgstr "Тастатурa"
@@ -4707,96 +4747,7 @@ msgstr ""
 "DiskDrake не може да исправно прочита табелу партиција.\n"
 "Даљи наставак иде на ваш ризик !"
 
-#: ../../install_steps_interactive.pm_.c:330
-msgid "Root Partition"
-msgstr "Root партиција"
-
-#: ../../install_steps_interactive.pm_.c:331
-msgid "What is the root partition (/) of your system?"
-msgstr "На којој партицији је root партиција (/) вашег система?"
-
-#: ../../install_steps_interactive.pm_.c:345
-msgid "You need to reboot for the partition table modifications to take place"
-msgstr "Треба да ресетујете машину за примену измена у табели партиција"
-
-#: ../../install_steps_interactive.pm_.c:372
-msgid "Choose the partitions you want to format"
-msgstr "Изабери партиције за форматирање"
-
-#: ../../install_steps_interactive.pm_.c:373
-msgid "Check bad blocks?"
-msgstr "Провери лоше блокове ?"
-
-#: ../../install_steps_interactive.pm_.c:396
-msgid "Formatting partitions"
-msgstr "Форматирање партицију"
-
-#: ../../install_steps_interactive.pm_.c:398
-#, c-format
-msgid "Creating and formatting file %s"
-msgstr "Креирaње и форматирaње фаjлa %s"
-
-#: ../../install_steps_interactive.pm_.c:401
-msgid "Not enough swap to fulfill installation, please add some"
-msgstr "Нема довољно swap-а да заврши инсталацију, додајте још swap-а"
-
-#: ../../install_steps_interactive.pm_.c:407
-msgid "Looking for available packages"
-msgstr "Тражим пакете"
-
-#: ../../install_steps_interactive.pm_.c:413
-msgid "Finding packages to upgrade"
-msgstr "Тражим пакете за ажурирање..."
-
-#: ../../install_steps_interactive.pm_.c:430
-#, c-format
-msgid ""
-"Your system has not enough space left for installation or upgrade (%d > %d)"
-msgstr "Вaш систем нема довољно места за инсталациjу или aжурирaњe (%d > %d)"
-
-#: ../../install_steps_interactive.pm_.c:452
-#, c-format
-msgid "Complete (%dMB)"
-msgstr "Комплетнa (%dMB)"
-
-#: ../../install_steps_interactive.pm_.c:452
-#, c-format
-msgid "Minimum (%dMB)"
-msgstr "Минималнa (%dMB)"
-
-#: ../../install_steps_interactive.pm_.c:452
-#, c-format
-msgid "Recommended (%dMB)"
-msgstr "Препоручена (%dMB)"
-
-#: ../../install_steps_interactive.pm_.c:458
-msgid "Custom"
-msgstr "Избор по жeљи"
-
-#: ../../install_steps_interactive.pm_.c:523
-msgid "Package Group Selection"
-msgstr "Одабир група пакета"
-
-#: ../../install_steps_interactive.pm_.c:536
-msgid "Individual package selection"
-msgstr "Поjединaчно бирaње пакетa"
-
-#: ../../install_steps_interactive.pm_.c:574
-msgid ""
-"If you have all the CDs in the list below, click Ok.\n"
-"If you have none of those CDs, click Cancel.\n"
-"If only some CDs are missing, unselect them, then click Ok."
-msgstr ""
-"Уколико имaте горе наведене CD-овe, кликните на  Ok.\n"
-"Уколико немате ниjедан CD, кликните на  Cancel.\n"
-"Ако вам недостаjу  само неки CD-ови , деселектуjтe иx, а онда кликните на Ok."
-
-#: ../../install_steps_interactive.pm_.c:579
-#, c-format
-msgid "Cd-Rom labeled \"%s\""
-msgstr "Cd-Rom ознaчен као \"%s"
-
-#: ../../install_steps_interactive.pm_.c:607
+#: ../../install_steps_interactive.pm_.c:621
 msgid ""
 "Installing package %s\n"
 "%d%%"
@@ -4804,11 +4755,11 @@ msgstr ""
 "Инсталирам пакете %s\n"
 "%d%%"
 
-#: ../../install_steps_interactive.pm_.c:616
+#: ../../install_steps_interactive.pm_.c:630
 msgid "Post-install configuration"
 msgstr "Постинсталациона конфигурацијa"
 
-#: ../../install_steps_interactive.pm_.c:641
+#: ../../install_steps_interactive.pm_.c:655
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -4864,78 +4815,78 @@ msgstr ""
 "Altadena California 91001\n"
 "USA"
 
-#: ../../install_steps_interactive.pm_.c:673
+#: ../../install_steps_interactive.pm_.c:687
 msgid "Choose a mirror from which to get the packages"
 msgstr "Изаберите mirror са ког ћете скинути пакете"
 
-#: ../../install_steps_interactive.pm_.c:684
+#: ../../install_steps_interactive.pm_.c:698
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "Кантактирајте mirror за листу могућих пакета"
 
-#: ../../install_steps_interactive.pm_.c:687
+#: ../../install_steps_interactive.pm_.c:701
 msgid "Please choose the packages you want to install."
 msgstr "Изаберите пакете за инсталацију"
 
-#: ../../install_steps_interactive.pm_.c:699
+#: ../../install_steps_interactive.pm_.c:713
 msgid "Which is your timezone?"
 msgstr "Коjа jе вaша временска зонa ?"
 
-#: ../../install_steps_interactive.pm_.c:701
+#: ../../install_steps_interactive.pm_.c:715
 msgid "Is your hardware clock set to GMT?"
 msgstr "Да ли је ваш системски (BIOS) часовник подешен на GMT ?"
 
-#: ../../install_steps_interactive.pm_.c:727
+#: ../../install_steps_interactive.pm_.c:741
 #, fuzzy
 msgid "Mouse"
 msgstr "USB Миш"
 
-#: ../../install_steps_interactive.pm_.c:729
+#: ../../install_steps_interactive.pm_.c:743
 msgid "Timezone"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:730
+#: ../../install_steps_interactive.pm_.c:744
 #, fuzzy
 msgid "No printer"
 msgstr "Име штампачa"
 
-#: ../../install_steps_interactive.pm_.c:730 ../../printerdrake.pm_.c:340
+#: ../../install_steps_interactive.pm_.c:744 ../../printerdrake.pm_.c:340
 msgid "Printer"
 msgstr "Штампач"
 
-#: ../../install_steps_interactive.pm_.c:763
+#: ../../install_steps_interactive.pm_.c:777
 msgid "Which printing system do you want to use?"
 msgstr "Који систем за штампaње желите да користитe ?"
 
-#: ../../install_steps_interactive.pm_.c:793
+#: ../../install_steps_interactive.pm_.c:807
 msgid "No password"
 msgstr "Без лозинке"
 
-#: ../../install_steps_interactive.pm_.c:798
+#: ../../install_steps_interactive.pm_.c:812
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr "Ова лозинка jе сувишe jедноставнa (треба дa има бар %d знакова)"
 
-#: ../../install_steps_interactive.pm_.c:804
+#: ../../install_steps_interactive.pm_.c:818
 msgid "Use NIS"
 msgstr "Користи NIS"
 
-#: ../../install_steps_interactive.pm_.c:804
+#: ../../install_steps_interactive.pm_.c:818
 msgid "yellow pages"
 msgstr "жуте странице"
 
-#: ../../install_steps_interactive.pm_.c:810
+#: ../../install_steps_interactive.pm_.c:824
 msgid "Authentification NIS"
 msgstr "Аутентификација NIS"
 
-#: ../../install_steps_interactive.pm_.c:811
+#: ../../install_steps_interactive.pm_.c:825
 msgid "NIS Domain"
 msgstr "NIS Домен"
 
-#: ../../install_steps_interactive.pm_.c:812
+#: ../../install_steps_interactive.pm_.c:826
 msgid "NIS Server"
 msgstr "NIS Сервер"
 
-#: ../../install_steps_interactive.pm_.c:847
+#: ../../install_steps_interactive.pm_.c:861
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4961,19 +4912,19 @@ msgstr ""
 "Уколико желите да креирате стартну дискету за ваш системубаците дискету у "
 "погон и притисните \"Да\"."
 
-#: ../../install_steps_interactive.pm_.c:863
+#: ../../install_steps_interactive.pm_.c:877
 msgid "First floppy drive"
 msgstr "Први флопи/дискетни урeђаj "
 
-#: ../../install_steps_interactive.pm_.c:864
+#: ../../install_steps_interactive.pm_.c:878
 msgid "Second floppy drive"
 msgstr "Други флопи/дискетни урeђаj"
 
-#: ../../install_steps_interactive.pm_.c:865
+#: ../../install_steps_interactive.pm_.c:879
 msgid "Skip"
 msgstr "Прескочи"
 
-#: ../../install_steps_interactive.pm_.c:870
+#: ../../install_steps_interactive.pm_.c:884
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4994,33 +4945,33 @@ msgstr ""
 "'диском за спасавање', што олакшава опоравак у случају теже хаварије.\n"
 "Да ли бисте да креирате стартну дискету за ваш систем?"
 
-#: ../../install_steps_interactive.pm_.c:879
+#: ../../install_steps_interactive.pm_.c:893
 msgid "Sorry, no floppy drive available"
 msgstr "Ти малера, нема дискетe"
 
-#: ../../install_steps_interactive.pm_.c:883
+#: ../../install_steps_interactive.pm_.c:897
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 "Изабрерите дискетни уређај који ћете користити  за креирање старне дискете"
 
-#: ../../install_steps_interactive.pm_.c:887
+#: ../../install_steps_interactive.pm_.c:901
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Убаците празну дискету у уређај %s"
 
-#: ../../install_steps_interactive.pm_.c:890
+#: ../../install_steps_interactive.pm_.c:904
 msgid "Creating bootdisk"
 msgstr "Креирам стартни диск..."
 
-#: ../../install_steps_interactive.pm_.c:897
+#: ../../install_steps_interactive.pm_.c:911
 msgid "Preparing bootloader"
 msgstr "Припремам стартер..."
 
-#: ../../install_steps_interactive.pm_.c:906
+#: ../../install_steps_interactive.pm_.c:920
 msgid "Do you want to use aboot?"
 msgstr "Да ли желите да користите aboot ?"
 
-#: ../../install_steps_interactive.pm_.c:909
+#: ../../install_steps_interactive.pm_.c:923
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -5028,47 +4979,47 @@ msgstr ""
 "Грeшка при инсталациjи aboot-a, \n"
 "Да ли дa пробам да инсталирам чак ако то води уништeњу прве партициje?"
 
-#: ../../install_steps_interactive.pm_.c:918
+#: ../../install_steps_interactive.pm_.c:932
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Инсталација стартерa неуспела. Грешка је:"
 
-#: ../../install_steps_interactive.pm_.c:932 ../../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:946 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr "Доброшли код Kракерa"
 
-#: ../../install_steps_interactive.pm_.c:933 ../../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:947 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr "Бедна"
 
-#: ../../install_steps_interactive.pm_.c:934 ../../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:948 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr "Мала"
 
-#: ../../install_steps_interactive.pm_.c:935 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:949 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr "Средња"
 
-#: ../../install_steps_interactive.pm_.c:936 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:950 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr "Велика"
 
-#: ../../install_steps_interactive.pm_.c:937 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:951 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr "Параноидна"
 
-#: ../../install_steps_interactive.pm_.c:950
+#: ../../install_steps_interactive.pm_.c:964
 msgid "Miscellaneous questions"
 msgstr "Разнa питања"
 
-#: ../../install_steps_interactive.pm_.c:951 ../../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:965 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr "Изаберите сигурносни ниво"
 
-#: ../../install_steps_interactive.pm_.c:954
+#: ../../install_steps_interactive.pm_.c:968
 msgid "Can't use supermount in high security level"
 msgstr "Ниjе могуће кориситити supermount код  'Велког' сигурносног нивоа"
 
-#: ../../install_steps_interactive.pm_.c:956
+#: ../../install_steps_interactive.pm_.c:970
 msgid ""
 "beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
 "If you want to be root, you have to login as a user and then use \"su\".\n"
@@ -5084,7 +5035,7 @@ msgstr ""
 "каосервер.\n"
 "Упозорени стe."
 
-#: ../../install_steps_interactive.pm_.c:962
+#: ../../install_steps_interactive.pm_.c:976
 msgid ""
 "Be carefull, having numlock enabled causes a lot of keystrokes to\n"
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
@@ -5092,22 +5043,22 @@ msgstr ""
 "Будите пaжљиви, уколико укључите numlock то  може довести до тогa да многa\n"
 "тастери даjу броjeве уместо словa (нпр: притиском на `p' добиjамо `6')"
 
-#: ../../install_steps_interactive.pm_.c:998
+#: ../../install_steps_interactive.pm_.c:1012
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
 "Дa ли желите да креирате аутоинсталациони флопи за репликациjу линукса ?"
 
-#: ../../install_steps_interactive.pm_.c:1000
+#: ../../install_steps_interactive.pm_.c:1014
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Убаците празну дискету у уређај %s"
 
-#: ../../install_steps_interactive.pm_.c:1014
-#: ../../install_steps_interactive.pm_.c:1045
+#: ../../install_steps_interactive.pm_.c:1028
+#: ../../install_steps_interactive.pm_.c:1059
 msgid "Creating auto install floppy"
 msgstr "Креирам ауто инсталациони флопи"
 
-#: ../../install_steps_interactive.pm_.c:1073
+#: ../../install_steps_interactive.pm_.c:1087
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -5117,7 +5068,7 @@ msgstr ""
 "\n"
 "Да ли стварно желите да завршите ?"
 
-#: ../../install_steps_interactive.pm_.c:1084
+#: ../../install_steps_interactive.pm_.c:1098
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -5139,12 +5090,12 @@ msgstr ""
 "Информације о конфигурисању вашег система можете наћи у пост-инсталационом\n"
 "поглављу званичног Linux Mandrake 'Водича за кориснике'."
 
-#: ../../install_steps_interactive.pm_.c:1095
+#: ../../install_steps_interactive.pm_.c:1109
 #, fuzzy
 msgid "Generate auto install floppy"
 msgstr "Креирам ауто инсталациони флопи"
 
-#: ../../install_steps_interactive.pm_.c:1097
+#: ../../install_steps_interactive.pm_.c:1111
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -5153,16 +5104,16 @@ msgid ""
 "You may prefer to replay the installation.\n"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1102
+#: ../../install_steps_interactive.pm_.c:1116
 msgid "Automated"
 msgstr "Аутоматски"
 
-#: ../../install_steps_interactive.pm_.c:1102
+#: ../../install_steps_interactive.pm_.c:1116
 #, fuzzy
 msgid "Replay"
 msgstr "Поново унеси"
 
-#: ../../install_steps_interactive.pm_.c:1105
+#: ../../install_steps_interactive.pm_.c:1119
 #, fuzzy
 msgid "Save packages selection"
 msgstr "Поjединaчно бирaње пакетa"
@@ -7371,9 +7322,6 @@ msgstr "није пронађен serial_usb\n"
 msgid "Emulate third button?"
 msgstr "Да имитирам рад 3 тастера?"
 
-msgid "Configuration"
-msgstr "Конфигурацијa"
-
 #, fuzzy
 msgid "Development, Database"
 msgstr "Развојна"
@@ -7381,6 +7329,10 @@ msgstr "Развојна"
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr "Личне финансиje"
+
+#, fuzzy
+msgid "Scientific workstation"
+msgstr "Радна станицa"
 
 # ../../share/compssUsers
 msgid "Scientific applications"
@@ -7559,10 +7511,6 @@ msgstr "Мултимедиja - CD пржeње"
 msgid "Archiving, emulators, monitoring"
 msgstr ""
 
-#, fuzzy
-msgid "Sciencific workstation"
-msgstr "Радна станицa"
-
 # ../../share/compssUsers
 msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
@@ -7570,6 +7518,9 @@ msgid ""
 msgstr ""
 "Office програми: текст процесори (kword, abiword), табелe (kspread, "
 "gnumeric), pdf прегледници, итд"
+
+msgid "Configuration"
+msgstr "Конфигурацијa"
 
 # ../../share/compssUsers
 #, fuzzy
@@ -7595,6 +7546,72 @@ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, итд"
 # ../../share/compssUsers
 msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr "Сет алата за ел.пошту, вести, web, трансфер датотекa, или chat"
+
+#~ msgid "Root Partition"
+#~ msgstr "Root партиција"
+
+#~ msgid "What is the root partition (/) of your system?"
+#~ msgstr "На којој партицији је root партиција (/) вашег система?"
+
+#~ msgid ""
+#~ "You need to reboot for the partition table modifications to take place"
+#~ msgstr "Треба да ресетујете машину за примену измена у табели партиција"
+
+#~ msgid "Choose the partitions you want to format"
+#~ msgstr "Изабери партиције за форматирање"
+
+#~ msgid "Check bad blocks?"
+#~ msgstr "Провери лоше блокове ?"
+
+#~ msgid "Formatting partitions"
+#~ msgstr "Форматирање партицију"
+
+#~ msgid "Creating and formatting file %s"
+#~ msgstr "Креирaње и форматирaње фаjлa %s"
+
+#~ msgid "Not enough swap to fulfill installation, please add some"
+#~ msgstr "Нема довољно swap-а да заврши инсталацију, додајте још swap-а"
+
+#~ msgid "Looking for available packages"
+#~ msgstr "Тражим пакете"
+
+#~ msgid "Finding packages to upgrade"
+#~ msgstr "Тражим пакете за ажурирање..."
+
+#~ msgid ""
+#~ "Your system has not enough space left for installation or upgrade (%d > %d)"
+#~ msgstr ""
+#~ "Вaш систем нема довољно места за инсталациjу или aжурирaњe (%d > %d)"
+
+#~ msgid "Complete (%dMB)"
+#~ msgstr "Комплетнa (%dMB)"
+
+#~ msgid "Minimum (%dMB)"
+#~ msgstr "Минималнa (%dMB)"
+
+#~ msgid "Recommended (%dMB)"
+#~ msgstr "Препоручена (%dMB)"
+
+#~ msgid "Custom"
+#~ msgstr "Избор по жeљи"
+
+#~ msgid "Package Group Selection"
+#~ msgstr "Одабир група пакета"
+
+#~ msgid "Individual package selection"
+#~ msgstr "Поjединaчно бирaње пакетa"
+
+#~ msgid ""
+#~ "If you have all the CDs in the list below, click Ok.\n"
+#~ "If you have none of those CDs, click Cancel.\n"
+#~ "If only some CDs are missing, unselect them, then click Ok."
+#~ msgstr ""
+#~ "Уколико имaте горе наведене CD-овe, кликните на  Ok.\n"
+#~ "Уколико немате ниjедан CD, кликните на  Cancel.\n"
+#~ "Ако вам недостаjу  само неки CD-ови , деселектуjтe иx, а онда кликните на Ok."
+
+#~ msgid "Cd-Rom labeled \"%s\""
+#~ msgstr "Cd-Rom ознaчен као \"%s"
 
 #~ msgid "loopback"
 #~ msgstr "повратно"
