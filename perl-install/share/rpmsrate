@@ -481,10 +481,11 @@ DOCS
 
 SYSTEM
   5 at MAKEDEV anacron eject kudzu ldetect
-    locales iputils urpmi cpio
+    locales iputils urpmi cpio msec
 
-  5 HIGH_SECURITY libsafe kernel22-secure
- 
+  5 HIGH_SECURITY libsafe kernel-secure
+  5 BIGMEM kernel-enterprise
+  5 SMP kernel-smp
   5 PCMCIA pcmcia-cs
 
   4 ftp ftp-client-krb5 gpm hexedit strace sudo
