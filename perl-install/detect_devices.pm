@@ -695,40 +695,38 @@ sub getIPsInLocalNetworks {
     my @local_bcasts;
     my $current_bcast = "";
 	
-    if (-x "/sbin/ifconfig") {
-	local *IFCONFIG_OUT;
-	open IFCONFIG_OUT, "export LC_ALL=C; /sbin/ifconfig|" or die "Couldn't run \"ifconfig\"!";
-	while (my $readline = <IFCONFIG_OUT>) {
-	    # New entry ...
-	    if ($readline =~ /^(\S+)\s/) {
-		my $dev = $1;
-		# ... for a local network (eth = ethernet, 
-		#     vmnet = VMWare,
-		#     ethernet card connected to ISP excluded)?
-		$dev_is_localnet = (($dev =~ /^eth/) || ($dev =~ /^vmnet/));
-		# delete previous address
-		$current_bcast = "";
-	    }
-	    # Are we in the important line now?
-	    if ($readline =~ /\sBcast:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
-		# Rip out the broadcast IP address
-		$current_bcast = $1;
-		
-		# Are we in an entry for a local network?
-		if ($dev_is_localnet == 1) {
-		    # Store current IP address
-		    push @local_bcasts, $current_bcast;
-		}
+    local *IFCONFIG_OUT;
+    open IFCONFIG_OUT, "export LC_ALL=C; ifconfig |" or return ();
+    while (my $readline = <IFCONFIG_OUT>) {
+	# New entry ...
+	if ($readline =~ /^(\S+)\s/) {
+	    my $dev = $1;
+	    # ... for a local network (eth = ethernet, 
+	    #     vmnet = VMWare,
+	    #     ethernet card connected to ISP excluded)?
+	    $dev_is_localnet = (($dev =~ /^eth/) || ($dev =~ /^vmnet/));
+	    # delete previous address
+	    $current_bcast = "";
+	}
+	# Are we in the important line now?
+	if ($readline =~ /\sBcast:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
+	    # Rip out the broadcast IP address
+	    $current_bcast = $1;
+	    
+	    # Are we in an entry for a local network?
+	    if ($dev_is_localnet == 1) {
+		# Store current IP address
+		push @local_bcasts, $current_bcast;
 	    }
 	}
-	close(IFCONFIG_OUT);
     }
+    close(IFCONFIG_OUT);
 
     my @addresses;
     # Now ping all broadcast addresses 
     for my $bcast (@local_bcasts) {
 	local *F;
-	open F, "ping -w 1 -b -n $bcast | cut -f 4 -d \" \" | sed s/:// | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | uniq |" or next;
+	open F, "export LC_ALL=C; ping -w 1 -b -n $bcast | cut -f 4 -d \" \" | sed s/:// | egrep \"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+\" | uniq |" or next;
 	while (<F>) { chomp; push @addresses, $_ }
 	close F;
     }
