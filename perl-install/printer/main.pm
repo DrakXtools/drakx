@@ -280,8 +280,6 @@ sub read_configured_queues($) {
 		}
 		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{driver} = 'CUPS/PPD';
 		$printer->{OLD_QUEUE} = "";
-		# Read out the printer's options
-		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{args} = read_cups_options($QUEUES[$i]{queuedata}{queue});
 	    }
 	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= "";
 	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= N("Unknown model");
@@ -529,102 +527,37 @@ sub read_foomatic_options ($) {
     local *F;
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
 	"foomatic-configure -P -q -p $printer->{currentqueue}{printer}" .
-	    " -d $printer->{currentqueue}{driver}" . 
-		($printer->{OLD_QUEUE} ?
-		  " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
-		($printer->{SPECIAL_OPTIONS} ?
-		  " $printer->{SPECIAL_OPTIONS}" : "") 
-		    . " |" or
-	    die "Could not run foomatic-configure";
+	" -d $printer->{currentqueue}{driver}" . 
+	($printer->{OLD_QUEUE} ?
+	 " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
+	 ($printer->{SPECIAL_OPTIONS} ?
+	  " $printer->{SPECIAL_OPTIONS}" : "") 
+	 . " |" or
+	 die "Could not run foomatic-configure";
     eval join('', (<F>)); 
     close F;
     # Return the arguments field
     return $COMBODATA->{args};
 }
 
-sub read_cups_options ($) {
-    my ($queue_or_file) = @_;
-    # Generate the option data from a CUPS PPD file/a CUPS queue
-    # Use the same Perl data structure as Foomatic uses to be able to
-    # reuse the dialog
+sub read_ppd_options ($) {
+    my ($printer) = @_;
+    # Generate the option data for a given PPD file
+    my $COMBODATA;
     local *F;
-    if ($queue_or_file =~ /.ppd.gz$/) { # compressed PPD file
-	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
-	    "gunzip -cd $queue_or_file | lphelp - |" or return 0;
-    } else { # PPD file not compressed or queue
-	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . #-#
-	    "lphelp $queue_or_file |" or return 0;
-    }
-    my $i;
-    my $j;
-    my @args;
-    my $line;
-    my $inoption = 0;
-    my $inchoices = 0;
-#    my $innumerical = 0;
-    while ($line = <F>) {
-	chomp $line;
-	if ($inoption) {
-	    if ($inchoices) {
-		if ($line =~ /^\s*(\S+)\s+(\S.*)$/) {
-		    push(@{$args[$i]{vals}}, {});
-		    $j = $#{$args[$i]{vals}};
-		    $args[$i]{vals}[$j]{value} = $1;
-		    my $comment = $2;
-		    # Did we find the default setting?
-		    if ($comment =~ /default\)\s*$/) {
-			$args[$i]{default} = $args[$i]{vals}[$j]{value};
-			$comment =~ s/,\s*default\)\s*$//;
-		    } else {
-			$comment =~ s/\)\s*$//;
-		    }
-		    # Remove opening paranthese
-		    $comment =~ s/^\(//;
-		    # Remove page size info
-		    $comment =~ s/,\s*size:\s*[0-9\.]+x[0-9\.]+in$//;
-		    $args[$i]{vals}[$j]{comment} = $comment;
-		} elsif ($line =~ /^\s*$/ && $#{$args[$i]{vals}} > -1) {
-		    $inchoices = 0;
-		    $inoption = 0;
-		}
-#	    } elsif ($innumerical == 1) {
-#		if ($line =~ /^\s*The default value is ([0-9\.]+)\s*$/) {
-#		    $args[$i]{default} = $1;
-#		    $innumerical = 0;
-#		    $inoption = 0;
-#		}
-	    } else {
-		if ($line =~ /^\s*<choice>/) {
-		    $inchoices = 1;
-#		} elsif ($line =~ /^\s*<value> must be a(.*) number in the range ([0-9\.]+)\.\.([0-9\.]+)\s*$/) {
-#		    delete($args[$i]{vals});
-#		    $args[$i]{min} = $2;
-#		    $args[$i]{max} = $3;
-#		    my $type = $1;
-#		    if ($type =~ /integer/) {
-#			$args[$i]{type} = 'int';
-#		    } else {
-#			$args[$i]{type} = 'float';
-#		    }
-#		    $innumerical = 1;
-		}
-	    }
-	} else {
-	    if ($line =~ /^\s*([^\s:][^:]*):\s+-o\s+([^\s=]+)=<choice>\s*$/) {
-#	    if ($line =~ /^\s*([^\s:][^:]*):\s+-o\s+([^\s=]+)=<.*>\s*$/) {
-		$inoption = 1;
-		push(@args, {});
-		$i = $#args;
-		$args[$i]{comment} = $1;
-		$args[$i]{name} = $2;
-		$args[$i]{type} = 'enum';
-		@{$args[$i]{vals}} = ();
-	    }
-	}
-    }
+    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
+	"foomatic-configure -P -q" .
+	" --ppd /usr/share/cups/model/$printer->{currentqueue}{ppd}" .
+	($printer->{OLD_QUEUE} ?
+	 " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
+	 ($printer->{SPECIAL_OPTIONS} ?
+	  " $printer->{SPECIAL_OPTIONS}" : "") 
+		    . " |" or
+	    die "Could not run foomatic-configure";
+    eval join('', (<F>)); 
     close F;
     # Return the arguments field
-    return \@args;
+    return $COMBODATA->{args};
 }
 
 sub set_cups_special_options {
@@ -1685,16 +1618,8 @@ sub configure_queue($) {
 
     # Store the default option settings
     $printer->{configured}{$printer->{currentqueue}{queue}}{args} = {};
-    if ($printer->{currentqueue}{foomatic}) {
-	my $tmp = $printer->{OLD_QUEUE};
-	$printer->{OLD_QUEUE} = $printer->{currentqueue}{queue};
-	$printer->{configured}{$printer->{currentqueue}{queue}}{args} = 
-	    read_foomatic_options($printer);
-	$printer->{OLD_QUEUE} = $tmp;
-    } elsif ($printer->{currentqueue}{ppd}) {
-	$printer->{configured}{$printer->{currentqueue}{queue}}{args} =
-	    read_cups_options($printer->{currentqueue}{queue});
-    }
+    $printer->{configured}{$printer->{currentqueue}{queue}}{args} =
+	$printer->{ARGS};
     # Clean up
     delete($printer->{ARGS});
     $printer->{OLD_CHOICE} = "";

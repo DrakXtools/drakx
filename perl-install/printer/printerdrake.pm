@@ -2163,14 +2163,18 @@ The first command can be given by any normal user, the second must be given as r
 		if (!$printer->{DBENTRY} || !$oldchoice ||
 		    $printer->{DBENTRY} eq $oldchoice) {
 		    # ... and the user didn't change the printer/driver
-		    $printer->{ARGS} = printer::main::read_cups_options($queue);
+		    $printer->{ARGS} = $printer->{configured}{$queue}{args};
+		    use Data::Dumper;
+		    print Dumper($printer->{ARGS});
 		} else {
 		    # ... and the user has chosen another printer/driver
-		    $printer->{ARGS} = printer::main::read_cups_options("/usr/share/cups/model/$printer->{currentqueue}{ppd}");
+		    $printer->{ARGS} = 
+			printer::main::read_ppd_options($printer);
 		}
 	    } else {
 		# The queue was not configured before
-		$printer->{ARGS} = printer::main::read_cups_options("/usr/share/cups/model/$printer->{currentqueue}{ppd}");
+		$printer->{ARGS} =
+		    printer::main::read_ppd_options($printer);
 	    }
 	}
     }
@@ -2201,6 +2205,7 @@ sub setup_options {
 	 "DoubleSided",
 	 "Resolution",      # Resolution/Quality
 	 "GSResolution",
+	 "HWResolution",
 	 "JCLResolution",
 	 "Quality",
 	 "PrintQuality",
@@ -2208,6 +2213,10 @@ sub setup_options {
 	 "QualityType",
 	 "ImageType",
 	 "stpImageType",
+	 "EconoMode",
+	 "JCLEconoMode",
+	 "FastRes",
+	 "JCLFastRes",
 	 "InkType",         # Colour/Gray/BW, 4-ink/6-ink
 	 "stpInkType",
 	 "Mode",
@@ -2274,8 +2283,28 @@ sub setup_options {
 	my @choicelists;
 	my @shortchoicelists;
 	my $i;
+	my @oldgroup = ("", "");
 	for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
 	    my $optshortdefault = $printer->{ARGS}[$i]{default};
+	    # Should the option only show when the "Advanced" button was
+	    # clicked?
+	    my $advanced = ((defined($printer->{ARGS}[$i]{group}) and
+			     ($printer->{ARGS}[$i]{group} !~
+			      /^(|General|.*install.*)$/i)) or
+			    (!($printer->{ARGS}[$i]{group}) and
+			     !member($printer->{ARGS}[$i]{name},
+				     @simple_options)) ? 1 : 0);
+	    # Group header
+	    if ($printer->{ARGS}[$i]{group} ne $oldgroup[$advanced]) {
+		my $level = $#{$printer->{ARGS}[$i]{grouptrans}};
+		$oldgroup[$advanced] = $printer->{ARGS}[$i]{group};
+		if ($printer->{ARGS}[$i]{group}) {
+		    push(@widgets,
+			 { val => join
+			       (" / ", @{$printer->{ARGS}[$i]{grouptrans}}),
+			   advanced => $advanced });
+		}
+	    }
 	    if ($printer->{ARGS}[$i]{type} eq 'enum') {
 		# enumerated option
 		push(@choicelists, []);
@@ -2292,24 +2321,27 @@ sub setup_options {
 		       val => \$userinputs[$i], 
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
-		       advanced => (defined($printer->{ARGS}[$i]{group}) and
-				    ($printer->{ARGS}[$i]{group} !~
-				     /^(|General|.*install.*)$/i)) })
+		       sort => 0,
+		       advanced => $advanced })
 		    if ($printer->{ARGS}[$i]{name} ne 'PageRegion');
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
-		push(@choicelists, [$printer->{ARGS}[$i]{name}, 
-				    $printer->{ARGS}[$i]{name_false}]);
+		push(@choicelists, [($printer->{ARGS}[$i]{comment_true} ||
+				     $printer->{ARGS}[$i]{name}),
+				    ($printer->{ARGS}[$i]{comment_false} ||
+				     $printer->{ARGS}[$i]{name_false})]);
 		push(@shortchoicelists, []);
-		push(@userinputs, $choicelists[$i][1-$optshortdefault]);
+		my $numdefault = 
+		    ($optshortdefault =~ m!^\s*(true|on|yes|1)\s*$! ? 
+		     "1" : "0");
+		push(@userinputs, $choicelists[$i][1-$numdefault]);
 		push(@widgets,
 		     { label => $printer->{ARGS}[$i]{comment},
 		       val => \$userinputs[$i],
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
-		       advanced => (defined($printer->{ARGS}[$i]{group}) and
-				    ($printer->{ARGS}[$i]{group} !~
-				     /^(|General|.*install.*)$/i)) });
+		       sort => 0,
+		       advanced => $advanced });
 	    } else {
 		# numerical option
 		push(@choicelists, []);
@@ -2323,10 +2355,7 @@ sub setup_options {
 			   #min => $printer->{ARGS}[$i]{min},
 			   #max => $printer->{ARGS}[$i]{max},
 			   val => \$userinputs[$i],
-			   advanced => 
-			   (defined($printer->{ARGS}[$i]{group}) and
-			    ($printer->{ARGS}[$i]{group} !~
-			     /^(|General|.*install.*)$/i)) });
+			   advanced => $advanced });
 	    }
 	}
 	# Show the options dialog. The call-back function does a
@@ -2401,16 +2430,25 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		my $j;
 		for ($j = 0; $j <= $#{$choicelists[$i]}; $j++) {
 		    if ($choicelists[$i][$j] eq $userinputs[$i]) {
-			push(@{$printer->{currentqueue}{options}}, $printer->{ARGS}[$i]{name} . "=" . $shortchoicelists[$i][$j]);
+			$printer->{ARGS}[$i]{default} =
+			    $shortchoicelists[$i][$j];
+			push(@{$printer->{currentqueue}{options}},
+			     $printer->{ARGS}[$i]{name} . "=" .
+			     $shortchoicelists[$i][$j]);
 		    }
 		}
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
-		push(@{$printer->{currentqueue}{options}}, $printer->{ARGS}[$i]{name} . "=" .
-		     ($choicelists[$i][0] eq $userinputs[$i] ? "1" : "0"));
+		my $v = 
+		    ($choicelists[$i][0] eq $userinputs[$i] ? "1" : "0");
+		$printer->{ARGS}[$i]{default} = $v;
+		push(@{$printer->{currentqueue}{options}},
+		     $printer->{ARGS}[$i]{name} . "=" . $v);
 	    } else {
 		# numerical option
-		push(@{$printer->{currentqueue}{options}}, $printer->{ARGS}[$i]{name} . "=" . $userinputs[$i]);
+		$printer->{ARGS}[$i]{default} = $userinputs[$i];
+		push(@{$printer->{currentqueue}{options}},
+		     $printer->{ARGS}[$i]{name} . "=" . $userinputs[$i]);
 	    }
 	}
     }
