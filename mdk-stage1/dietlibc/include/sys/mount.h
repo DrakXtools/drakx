@@ -3,6 +3,7 @@
 
 #include <sys/cdefs.h>
 #include <sys/types.h>
+#include <asm/atomic.h>
 #include <linux/fs.h>
 
 int  mount(const char* specialfile, const char* dir, const char* filesystemtype,
