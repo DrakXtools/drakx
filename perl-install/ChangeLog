@@ -1,3 +1,274 @@
+2001/06/11  dam's  <damien@mandrakesoft.com>
+
+	* proxy.pm: updated
+	typoCVS:
+	----------------------------------------------------------------------
+	proxy
+
+	* my_gtk.pm: added gtkset_layout
+
+	* standalone/drakproxy: corrected CVS:
+	----------------------------------------------------------------------
+	updated
+	perlised
+
+	* interactive.pm: no icon if wizard
+
+2001/06/11  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm: added some bigger memory range.
+
+	* Xconfigurator.pm: fix missing newline on /etc/X11/glx.conf when
+	modifying mga_dma = 0
+	really fix the Matrox G200 PCI card acceleration using XF3, by disabling
+	DMA on
+	/etc/X11/glx.conf
+	added magic probe of resolution found, if the probed resolution seems
+	strange
+	according to memory available, it try to let the user select the right
+	resolution and depth.
+
+	* install_steps.pm, printer.pm: applied patches given for printer
+	configuration bug reported by David Eastcott.
+
+2001/06/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: have PPP drivers in net_raw rather than in net
+	add PPP modules for 'net' drivers
+
+	* rescue/tree/etc/rc.sysinit: minor changes
+
+	* rescue/tree/etc/inittab, rescue/tree/sbin/fakeshutdown: umount as much
+	as possible before rebooting the rescue
+
+	* mdk-stage1/ppp/pppd/magic.c, mdk-stage1/ppp/pppd/md5.c,
+	mdk-stage1/ppp/pppd/utils.c, mdk-stage1/ppp/pppd/pathnames.h,
+	mdk-stage1/ppp/pppd/options.c, mdk-stage1/ppp/pppd/main.c,
+	mdk-stage1/ppp/pppd/multilink.c, mdk-stage1/ppp/pppd/auth.c: have adsl
+	pppoe installation available
+	Initial revision
+	import initial ppp sources
+
+	* mdk-stage1/dhcp.c: change location of error message when no reply
+	received
+
+	* mdk-stage1/rp-pppoe/man/pppoe-relay.8,
+	mdk-stage1/rp-pppoe/configs/firewall-masq,
+	mdk-stage1/rp-pppoe/gui/html/props-nic.png,
+	mdk-stage1/rp-pppoe/src/pppoe-sniff.c,
+	mdk-stage1/rp-pppoe/configs/firewall-standalone,
+	mdk-stage1/rp-pppoe/gui/html/tkpppoe.html,
+	mdk-stage1/rp-pppoe/doc/KERNEL-MODE-PPPOE, mdk-stage1/rp-pppoe/go-gui,
+	mdk-stage1/rp-pppoe/gui/tkpppoe.in, mdk-stage1/rp-pppoe/man/adsl-stop.8,
+	mdk-stage1/rp-pppoe/scripts/adsl-start.in,
+	mdk-stage1/rp-pppoe/man/pppoe-sniff.8, mdk-stage1/rp-pppoe/go,
+	mdk-stage1/rp-pppoe/man/pppoe.8,
+	mdk-stage1/rp-pppoe/gui/html/mainwin-nonroot.png,
+	mdk-stage1/rp-pppoe/gui/tkpppoe.1, mdk-stage1/rp-pppoe/src/Makefile.in,
+	mdk-stage1/rp-pppoe/src/pppoe.c, mdk-stage1/rp-pppoe/src/pppoe-server.c,
+	mdk-stage1/rp-pppoe/src/pppoe.h, mdk-stage1/rp-pppoe/gui/wrapper.c,
+	mdk-stage1/rp-pppoe/man/pppoe-server.8,
+	mdk-stage1/rp-pppoe/configs/pppoe.conf,
+	mdk-stage1/rp-pppoe/gui/html/props-advanced.png,
+	mdk-stage1/rp-pppoe/src/common.c, mdk-stage1/rp-pppoe/src/install-sh,
+	mdk-stage1/rp-pppoe/doc/LICENSE, mdk-stage1/rp-pppoe/src/configure,
+	mdk-stage1/rp-pppoe/src/config.h.in, mdk-stage1/rp-pppoe/src/relay.c,
+	mdk-stage1/rp-pppoe/src/discovery.c, mdk-stage1/rp-pppoe/src/if.c,
+	mdk-stage1/rp-pppoe/doc/CHANGES, mdk-stage1/rp-pppoe/src/relay.h,
+	mdk-stage1/rp-pppoe/scripts/adsl-init.in,
+	mdk-stage1/rp-pppoe/rp-pppoe.spec,
+	mdk-stage1/rp-pppoe/scripts/adsl-connect.in,
+	mdk-stage1/rp-pppoe/man/pppoe.conf.5,
+	mdk-stage1/rp-pppoe/scripts/adsl-init-turbolinux.in,
+	mdk-stage1/rp-pppoe/man/adsl-start.8,
+	mdk-stage1/rp-pppoe/gui/html/mainwin.png,
+	mdk-stage1/rp-pppoe/rp-pppoe-gui.spec,
+	mdk-stage1/rp-pppoe/gui/html/props-basic.png,
+	mdk-stage1/rp-pppoe/man/adsl-status.8,
+	mdk-stage1/rp-pppoe/configs/pppoe-server-options,
+	mdk-stage1/rp-pppoe/man/adsl-connect.8,
+	mdk-stage1/rp-pppoe/scripts/adsl-setup.in,
+	mdk-stage1/rp-pppoe/scripts/adsl-stop.in,
+	mdk-stage1/rp-pppoe/gui/Makefile.in, mdk-stage1/rp-pppoe/src/debug.c,
+	mdk-stage1/rp-pppoe/doc/PROBLEMS, mdk-stage1/rp-pppoe/src/ppp.c,
+	mdk-stage1/rp-pppoe/README,
+	mdk-stage1/rp-pppoe/gui/html/mainwin-busy.png,
+	mdk-stage1/rp-pppoe/gui/pppoe-wrapper.1,
+	mdk-stage1/rp-pppoe/scripts/adsl-status,
+	mdk-stage1/rp-pppoe/man/adsl-setup.8,
+	mdk-stage1/rp-pppoe/gui/html/props-options.png,
+	mdk-stage1/rp-pppoe/src/configure.in,
+	mdk-stage1/rp-pppoe/configs/pap-secrets, mdk-stage1/rp-pppoe/src/md5.c,
+	mdk-stage1/rp-pppoe/scripts/adsl-init-suse.in,
+	mdk-stage1/rp-pppoe/src/md5.h, mdk-stage1/rp-pppoe/src/plugin.c,
+	mdk-stage1/rp-pppoe/doc/HOW-TO-CONNECT: Initial revision
+	import initial sources from rp-pppoe v3.0
+
+	* mdk-stage1/Makefile: change handling of .depend in Makefile
+	have adsl pppoe installation available
+
+	* mdk-stage1/newt-frontend.c: axalon sucks, we can have NEWT_FLAG_PASSWORD
+	that will show us '**' for passwords
+
+	* mdk-stage1/ppp/pppd/.cvsignore, mdk-stage1/ppp/.cvsignore,
+	mdk-stage1/ppp/pppd/Makefile, mdk-stage1/rp-pppoe/src/.cvsignore,
+	mdk-stage1/rp-pppoe/src/config.h, mdk-stage1/adsl.c,
+	mdk-stage1/rp-pppoe/.cvsignore, mdk-stage1/rp-pppoe/src/Makefile,
+	mdk-stage1/make_boot_img: have adsl pppoe installation available
+
+	* detect_devices.pm, install_any.pm, raid.pm, fsedit.pm: include patch to
+	autodetect raid arrays (still needs a kernel that implements the
+	ioctl..)
+
+	* tools/Makefile: perl 5.6.1 now
+
+	* mdk-stage1/stage1.c, mdk-stage1/tools.c: do not set root=/dev/ram3 from
+	my code anymore, expect the bootloader to set the parameter correctly
+
+	* mdk-stage1/ppp/scripts/ip-up.local.add, mdk-stage1/ppp/scripts/README,
+	mdk-stage1/ppp/solaris/Makefile.sol2,
+	mdk-stage1/ppp/svr4/ppp_comp.Master, mdk-stage1/ppp/sample/ip-down,
+	mdk-stage1/ppp/solaris/Makefile.sol2-64,
+	mdk-stage1/ppp/include/net/ppp_defs.h,
+	mdk-stage1/ppp/pppstats/Makefile.sunos4,
+	mdk-stage1/ppp/chat/Makefile.sol2, mdk-stage1/ppp/pppd/sys-linux.c,
+	mdk-stage1/ppp/pppd/ipxcp.c, mdk-stage1/ppp/pppd/ipxcp.h,
+	mdk-stage1/ppp/pppdump/deflate.c, mdk-stage1/ppp/pppd/Makefile.linux,
+	mdk-stage1/ppp/pppd/upap.c, mdk-stage1/ppp/modules/deflate.c,
+	mdk-stage1/ppp/README.sunos4, mdk-stage1/ppp/pppdump/Makefile.sol2,
+	mdk-stage1/ppp/configure, mdk-stage1/ppp/pppd/upap.h,
+	mdk-stage1/ppp/svr4/ppp_mod.c, mdk-stage1/ppp/pppstats/Makefile.sol2,
+	mdk-stage1/ppp/pppd/ipv6cp.c, mdk-stage1/ppp/scripts/options-ssh-loc,
+	mdk-stage1/ppp/pppd/plugins/Makefile.sol2, mdk-stage1/ppp/pppd/ipv6cp.h,
+	mdk-stage1/ppp/contrib/pppgetpass/pppgetpass.vt.c,
+	mdk-stage1/ppp/solaris/ppp_ahdlc_mod.c,
+	mdk-stage1/ppp/sunos4/if_ppp_vdcmd.c,
+	mdk-stage1/ppp/solaris/ppp_ahdlc.c, mdk-stage1/ppp/pppd/magic.h,
+	mdk-stage1/ppp/svr4/ppp_comp_mod.c,
+	mdk-stage1/ppp/include/linux/if_ppp.h, mdk-stage1/ppp/pppd/eui64.c,
+	mdk-stage1/ppp/scripts/secure-card, mdk-stage1/ppp/scripts/redialer,
+	mdk-stage1/ppp/modules/bsd-comp.c, mdk-stage1/ppp/pppd/eui64.h,
+	mdk-stage1/ppp/sunos4/ppp_vdcmd.c, mdk-stage1/ppp/modules/ppp_mod.h,
+	mdk-stage1/ppp/pppd/md5.h, mdk-stage1/ppp/pppd/chap_ms.c,
+	mdk-stage1/ppp/pppd/chap_ms.h, mdk-stage1/ppp/etc.ppp/pap-secrets,
+	mdk-stage1/ppp/solaris/Makefile.top, mdk-stage1/ppp/chat/chat.8,
+	mdk-stage1/ppp/svr4/Makefile.sol2-64, mdk-stage1/ppp/svr4/Makefile.sol2,
+	mdk-stage1/ppp/include/net/ppp-comp.h, mdk-stage1/ppp/sunos4/Makefile,
+	mdk-stage1/ppp/PLUGINS, mdk-stage1/ppp/pppdump/Makefile.sunos4,
+	mdk-stage1/ppp/sample/ip-up, mdk-stage1/ppp/sample/options.ttyXX,
+	mdk-stage1/ppp/scripts/options-rsh-rem, mdk-stage1/ppp/pppd/fsm.c,
+	mdk-stage1/ppp/chat/chat.c, mdk-stage1/ppp/scripts/ppp-on-rsh,
+	mdk-stage1/ppp/pppd/fsm.h, mdk-stage1/ppp/pppd/tdb.c,
+	mdk-stage1/ppp/pppd/patchlevel.h, mdk-stage1/ppp/pppstats/pppstats.8,
+	mdk-stage1/ppp/svr4/ppp.conf, mdk-stage1/ppp/pppd/tdb.h,
+	mdk-stage1/ppp/pppd/demand.c, mdk-stage1/ppp/include/net/if_ppp.h,
+	mdk-stage1/ppp/solaris/Makedefs, mdk-stage1/ppp/modules/if_ppp.c,
+	mdk-stage1/ppp/include/net/slcompress.h, mdk-stage1/ppp/sunos4/Makedefs,
+	mdk-stage1/ppp/pppd/sys-linux.c.wtmp,
+	mdk-stage1/ppp/include/linux/if_pppvar.h,
+	mdk-stage1/ppp/solaris/ppp_comp.c, mdk-stage1/ppp/chat/Makefile.linux,
+	mdk-stage1/ppp/README.cbcp, mdk-stage1/ppp/pppd/ppp.pam,
+	mdk-stage1/ppp/solaris/ppp_comp_mod.c, mdk-stage1/ppp/Changes-2.3,
+	mdk-stage1/ppp/sample/options, mdk-stage1/ppp/pppstats/pppstats.c,
+	mdk-stage1/ppp/sunos4/ppp_comp_vdcmd.c,
+	mdk-stage1/ppp/pppdump/Makefile.linux.pppdump-Makefile,
+	mdk-stage1/ppp/README.MSCHAP80, mdk-stage1/ppp/pppdump/pppdump.8,
+	mdk-stage1/ppp/sunos4/Makefile.top, mdk-stage1/ppp/include/net/pppio.h,
+	mdk-stage1/ppp/pppd/ipcp.c, mdk-stage1/ppp/FAQ,
+	mdk-stage1/ppp/pppd/ipcp.h, mdk-stage1/ppp/pppd/sys-sunos4.c,
+	mdk-stage1/ppp/modules/ppp_comp.c, mdk-stage1/ppp/README.sol2,
+	mdk-stage1/ppp/modules/vjcompress.c, mdk-stage1/ppp/scripts/ppp-on-ssh,
+	mdk-stage1/ppp/svr4/ppp_ahdlc_mod.c, mdk-stage1/ppp/sunos4/ppp.INSTALL,
+	mdk-stage1/ppp/modules/ppp.c, mdk-stage1/ppp/pppdump/pppdump.c,
+	mdk-stage1/ppp/pppd/plugins/passprompt.c,
+	mdk-stage1/ppp/pppdump/Makefile.linux, mdk-stage1/ppp/pppd/lcp.c,
+	mdk-stage1/ppp/pppd/lcp.h, mdk-stage1/ppp/scripts/chat-callback,
+	mdk-stage1/ppp/chat/Makefile.sunos4, mdk-stage1/ppp/SETUP,
+	mdk-stage1/ppp/pppd/Makefile.sol2,
+	mdk-stage1/ppp/pppd/plugins/minconn.c,
+	mdk-stage1/ppp/etc.ppp/options.options,
+	mdk-stage1/ppp/pppdump/Makefile.linux.makeopt,
+	mdk-stage1/ppp/svr4/ppp.Node, mdk-stage1/ppp/scripts/options-ssh-rem,
+	mdk-stage1/ppp/solaris/ppp.c, mdk-stage1/ppp/svr4/ppp.System,
+	mdk-stage1/ppp/etc.ppp/chap-secrets,
+	mdk-stage1/ppp/pppstats/Makefile.linux,
+	mdk-stage1/ppp/sample/pap-secrets,
+	mdk-stage1/ppp/pppd/Makefile.linux.make, mdk-stage1/ppp/pppd/pppd.8,
+	mdk-stage1/ppp/contrib/pppgetpass/pppgetpass.8,
+	mdk-stage1/ppp/pppd/Makefile.sunos4, mdk-stage1/ppp/scripts/ppp-on,
+	mdk-stage1/ppp/include/linux/ppp_defs.h,
+	mdk-stage1/ppp/scripts/chatchat/chatchat.c,
+	mdk-stage1/ppp/scripts/chatchat/README,
+	mdk-stage1/ppp/modules/ppp_ahdlc.c, mdk-stage1/ppp/svr4/ppp.Master,
+	mdk-stage1/ppp/svr4/Makedefs,
+	mdk-stage1/ppp/contrib/pppgetpass/pppgetpass.gtk.c,
+	mdk-stage1/ppp/svr4/ppp_ahdl.System, mdk-stage1/ppp/pppd/pppd.h,
+	mdk-stage1/ppp/scripts/ppp-off, mdk-stage1/ppp/solaris/Makedefs.sol2,
+	mdk-stage1/ppp/common/zlib.c, mdk-stage1/ppp/scripts/options-rsh-loc,
+	mdk-stage1/ppp/common/zlib.h, mdk-stage1/ppp/solaris/ppp_mod.c,
+	mdk-stage1/ppp/contrib/pppgetpass/Makefile.linux,
+	mdk-stage1/ppp/solaris/ppp_mod.h, mdk-stage1/ppp/scripts/ppp-on-dialer,
+	mdk-stage1/ppp/pppd/sys-solaris.c, mdk-stage1/ppp/README.linux,
+	mdk-stage1/ppp/sample/auth-down, mdk-stage1/ppp/svr4/ppp_ahdl.Master,
+	mdk-stage1/ppp/pppdump/zlib.c, mdk-stage1/ppp/include/pcap-int.h,
+	mdk-stage1/ppp/pppdump/zlib.h, mdk-stage1/ppp/pppd/ccp.c,
+	mdk-stage1/ppp/chat/Makefile.linux.makeopt, mdk-stage1/ppp/pppd/ccp.h,
+	mdk-stage1/ppp/pppd/Makefile.linux.makeopt,
+	mdk-stage1/ppp/include/net/vjcompress.h, mdk-stage1/ppp/pppd/cbcp.c,
+	mdk-stage1/ppp/contrib/pppgetpass/pppgetpass.sh,
+	mdk-stage1/ppp/pppd/cbcp.h, mdk-stage1/ppp/scripts/ip-down.local.add,
+	mdk-stage1/ppp/pppd/tty.c, mdk-stage1/ppp/include/linux/ppp-comp.h,
+	mdk-stage1/ppp/sample/auth-up, mdk-stage1/ppp/sunos4/ppp_ahdlc_vdcmd.c,
+	mdk-stage1/ppp/pppd/pppd.h.wtmp, mdk-stage1/ppp/solaris/ppp.conf,
+	mdk-stage1/ppp/pppd/chap.c, mdk-stage1/ppp/pppd/chap.h,
+	mdk-stage1/ppp/scripts/callback, mdk-stage1/ppp/linux/Makefile.top,
+	mdk-stage1/ppp/svr4/ppp_comp.System, mdk-stage1/ppp/pppd/md4.c,
+	mdk-stage1/ppp/svr4/Makedefs.sol2, mdk-stage1/ppp/pppdump/bsd-comp.c,
+	mdk-stage1/ppp/README, mdk-stage1/ppp/pppd/md4.h,
+	mdk-stage1/ppp/etc.ppp/options, mdk-stage1/ppp/svr4/Makefile.top,
+	mdk-stage1/ppp/svr4/Makefile.svr4,
+	mdk-stage1/ppp/pppd/plugins/Makefile.linux,
+	mdk-stage1/ppp/pppdump/ppp-comp.h: Initial revision
+	import initial ppp sources
+
+2001/06/11  odin
+
+	* standalone/drakproxy: first import of drakproxy
+
+2001/06/11  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): don't check /usr/bin/urpmi, better check
+	/usr/sbin/urpmi.update
+
+	* commands.pm (grep_): add a missing semi-colon
+
+	* share/compssUsers: remove NIS which is handled by DrakX (titi sucks)
+
+2001/06/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/guessmounts, rescue/make_rescue_img, rescue/tree/etc/rc.sysinit,
+	rescue/Makefile: 
+	  - add 'guessmounts' that mimics RH's detecting of partitions when
+	rescue starts
+
+2001/06/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/az.po: updated Azeri file
+
+	* share/po/ru.po, share/po/DrakX.pot: updated Russian file
+
+2001/06/10  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/guessmounts: pixelization (tested!)
+
+	* install_any.pm (g_auto_install): more comments in auto_inst.cfg file
+
+2001/06/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/list.i386: rescuept is in /sbin now
+
+	* share/list: rescuept in /sbin now
+
 2001/06/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/network.c: don't wait on upping lo interface
