@@ -564,7 +564,7 @@ The following options may be added on the command line :
     floppy.
 
 You can choose the following kernels :
-" . join('', map_index { " o  0alt$::i07 is kernel $_\n" } @kernels) . "
+" . join('', map_index { " o  0falt$::i07 is kernel $_\n" } @kernels) . "
 " . (-e "isolinux/boot.msg" ?
      "0c[F1-Help] [F2-Advanced Help] [F3-Main]07" :
      "0c[F1-Help] [F2-Advanced Help]07") . "\n";
