@@ -570,7 +570,11 @@ my %charset2pango_font = (
 sub charset2pango_font {
     my ($charset) = @_;
     
-    $charset2pango_font{$charset}->[1] || $charset2pango_font{default}->[1];
+    if (exists $charset2pango_font{$charset}) {
+	$charset2pango_font{$charset}->[1];
+    } else {
+	$charset2pango_font{default}->[1];
+    }
 }
 
 sub lang2pango_font {
