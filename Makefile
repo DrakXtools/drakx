@@ -2,7 +2,7 @@ include Makefile.config
 
 DIRS = tools kernel mdk-stage1 perl-install rescue
 
-.PHONY: dirs install
+.PHONY: dirs install isolinux-graphic.bmp.parameters isolinux-graphic-simple.bmp.parameters
 
 install: dirs images rescue install_only
 
@@ -84,3 +84,9 @@ upload_only:
 	upload $(IMAGES_DEST)/alternatives '' ;\
 	upload $(GENERIC_INSTALL_DEST)/isolinux '' ;\
 	echo
+
+isolinux-graphic.bmp.parameters: isolinux-graphic.bmp isolinux
+	perl -I perl-install perl-install/standalone/draksplash2 --isolinux --kernel isolinux/alt0/vmlinuz --initrd isolinux/alt0/all.rdz $<
+
+isolinux-graphic-simple.bmp.parameters: isolinux-graphic-simple.bmp isolinux
+	perl -I perl-install perl-install/standalone/draksplash2 --isolinux --size 1400 $<
