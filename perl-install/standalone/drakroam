@@ -12,11 +12,16 @@
 # - roaming status fails (no idea why)
 #   maybe same reason bash-completion killall can't see wlandetect?
 
-# todo
+# todo (wlandetect version)
 # - make known and available lists have more rows by default (why so small?)
 # - refresh status every x seconds
 # - find a good way to drop the access point and resume roaming
 # - make 'key' column wider by default
+# todo (waproamd version)
+# - listen to dbus for pings from waproamd; update all on receiving a dbus ping
+# - setup static network configurations
+# - handle keys (can key file be named after ESSID?)
+# - should files be named as MAC or as essid:ESSID ?
 
 use lib qw(/usr/lib/libDrakX);
 
