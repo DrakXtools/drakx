@@ -28,9 +28,7 @@
 
 /* Some global stuff */
 
-extern char * method_name;
 extern char * interactive_fifo;
-extern char * stage2_kickstart;
 
 #define MODE_TESTING        (1 << 0)
 #define MODE_EXPERT         (1 << 1)

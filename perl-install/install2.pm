@@ -370,7 +370,11 @@ sub main {
 	    $opt = '';
 	}
     } $cmdline{$opt} = 1 if $opt;
-    
+
+    #- from stage1
+    put_in_hash(\%ENV, { getVarsFromSh('/tmp/env') });
+    exists $ENV{$_} and $cmdline{lc($_)} = $ENV{$_} foreach qw(METHOD PCMCIA KICKSTART);
+
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
@@ -437,6 +441,9 @@ sub main {
         require move;
         move::init($o);
     }
+
+    #- free up stage1 memory
+    eval { fs::umount($_) } foreach qw(/stage1/proc/bus/usb /stage1/proc /stage1);
 
     $o->{prefix} = $::prefix = $::testing ? "/tmp/test-perl-install" : $::move ? "" : "/mnt";
     mkdir $o->{prefix}, 0755;

@@ -57,7 +57,11 @@ ifeq (i386, $(ARCH))
 INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
 INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\"
-INIT_DEFS_ADD_MANDRAKE_MOVE = -DBINARY=\"/usr/bin/runstage2.pl\"
+ifdef MOVE
+INIT_DEFS_ADD_STAGE2 = -DBINARY=\"/usr/bin/runstage2.pl\"
+else
+INIT_DEFS_ADD_STAGE2 = -DBINARY=\"/usr/bin/runinstall2\"
+endif
 else
 ifeq (x86_64, $(ARCH))
 INITSRC = minilibc.c init.c
@@ -73,7 +77,7 @@ endif
 endif
 
 INITOBJS = $(subst .c,.o,$(INITSRC))
-INITOBJS-MANDRAKE_MOVE = $(subst .c,-MOVE.o,$(INITSRC))
+INITOBJS-STAGE2 = $(subst .c,-STAGE2.o,$(INITSRC))
 
 
  #- frontends
@@ -159,7 +163,7 @@ endif
 endif
 
 
-BINS = init stage1-full
+BINS = init init-stage2 stage1-full
 
 ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-network
@@ -202,7 +206,7 @@ init: $(INITOBJS) $(INIT_LIBC)
 	$(CC) $(LDFLAGS_INIT) -o $@ $^
 	$(STRIPCMD) $@
 
-init-move: $(INITOBJS-MANDRAKE_MOVE) $(INIT_LIBC)
+init-stage2: $(INITOBJS-STAGE2) $(INIT_LIBC)
 	$(CC) $(LDFLAGS_INIT) -o $@ $^
 	$(STRIPCMD) $@
 
@@ -222,8 +226,8 @@ stage1-full: $(STAGE1OBJS-FULL) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRON
 $(INITOBJS): %.o: %.c
 	$(COMPILE) $(INIT_DEFS) $(INIT_DEFS_ADD) -c $<
 
-$(INITOBJS-MANDRAKE_MOVE): %-MOVE.o: %.c
-	$(COMPILE) $(INIT_DEFS) $(INIT_DEFS_ADD_MANDRAKE_MOVE) -c $< -o $@
+$(INITOBJS-STAGE2): %-STAGE2.o: %.c
+	$(COMPILE) $(INIT_DEFS) $(INIT_DEFS_ADD_STAGE2) -c $< -o $@
 
 $(STAGE1OBJS-CDROM): %-CDROM.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) $(CDROM_DEFS) -c $< -o $@

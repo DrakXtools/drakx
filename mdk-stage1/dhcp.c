@@ -213,7 +213,7 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 
 	if (breq->bootfile && strlen(breq->bootfile) > 0) {
                 if (IS_NETAUTO)
-                        stage2_kickstart = strdup(breq->bootfile);
+                        add_to_env("KICKSTART", breq->bootfile);
                 else
                         log_message("warning: ignoring `bootfile' DHCP server parameter, since `netauto' boot parameter was not given; reboot with `linux netauto' (and anymore useful boot parameters) if you want `bootfile' to be used as a `auto_inst.cfg.pl' stage2 configuration file");
         }

@@ -693,7 +693,7 @@ enum return_type nfs_prepare(void)
 	if (IS_RESCUE)
 		umount(IMAGE_LOCATION);
 
-	method_name = strdup("nfs");
+        add_to_env("METHOD", "nfs");
 	return RETURN_OK;
 }
 
@@ -800,13 +800,13 @@ enum return_type ftp_prepare(void)
 		}
 
 		if (use_http_proxy) {
-		        method_name = strdup("http");
+                        add_to_env("METHOD", "http");
 		        sprintf(location_full, "ftp://%s%s", ftp_hostname, answers[1]);
 		        add_to_env("URLPREFIX", location_full);
 			add_to_env("PROXY", answers[4]);
 			add_to_env("PROXYPORT", answers[5]);
 		} else {
-		        method_name = strdup("ftp");
+                        add_to_env("METHOD", "ftp");
 		        add_to_env("HOST", answers[0]);
 			add_to_env("PREFIX", answers[1]);
 			if (!streq(answers[2], "")) {
@@ -875,7 +875,7 @@ enum return_type http_prepare(void)
 		if (load_ramdisk_fd(fd, size) != RETURN_OK)
 			return RETURN_ERROR;
 
-		method_name = strdup("http");
+                add_to_env("METHOD", "http");
 		sprintf(location_full, "http://%s%s", answers[0], answers[1]);
 		add_to_env("URLPREFIX", location_full);
                 if (!streq(answers[2], ""))

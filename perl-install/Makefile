@@ -12,6 +12,8 @@ OTHERS     = $(OTHERDIRS) $(OTHERFILES)
 OTHERDIRS  = tools/ddcprobe tools/serial_probe
 OTHERFILES = tools/rpcinfo-flushed.c
 
+STAGE1 = ../mdk-stage1
+
 .PHONY: all $(DIRS) install clean stage2 full_stage2
 
 all: list_modules.pm TAGS $(DIRS)
@@ -172,7 +174,7 @@ endif
 
 	gzip -9f $(DEST)/usr/share/ldetect-lst/*
 
-	cd share ; cp -a consolefonts $(DEST)/usr/share
+	cd share ; cp -a consolefonts devices symlinks $(DEST)/usr/share
 	-cd share ; cp -f *.png $(DEST)/usr/share
 	-cd pixmaps ; cp -af *.png *.xpm langs $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	unneeded=`perl -I. -Mlang -e 'lang::get_unneeded_png_lang_files'`; cd $(DEST)/usr/share; rm -f $$unneeded
@@ -192,6 +194,8 @@ ifeq (i386,$(ARCH))
 	cp -a /etc/pcmcia $(DEST)/etc
 	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.modules/`cat ../kernel/all.kernels/.main`/modules.dep
 endif
+
+	cp -f $(STAGE1)/init-stage2 $(DEST)/usr/bin/init
 
 	find $(DEST) -name CVS | xargs rm -rf
 

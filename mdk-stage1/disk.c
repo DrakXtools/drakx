@@ -205,11 +205,7 @@ static enum return_type try_with_device(char *dev_name)
 	static char ** answers_location = NULL;
 	char location_full[500];
 
-#ifndef MANDRAKE_MOVE
-	char * disk_own_mount = "/tmp/hdimage";
-#else
 	char * disk_own_mount = SLASH_LOCATION "/tmp/hdimage";
-#endif
         char * loopdev = NULL;
 
 	char * parts[50];
@@ -235,9 +231,6 @@ static enum return_type try_with_device(char *dev_name)
                 if (results != RETURN_OK)
                         return results;
         }
-#ifdef MANDRAKE_MOVE
-	mkdir (SLASH_LOCATION "/tmp", 0755);
-#endif
 	
         if (try_mount(choice, disk_own_mount)) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, reiserfs).");
@@ -327,7 +320,7 @@ static enum return_type try_with_device(char *dev_name)
 		umount(disk_own_mount);
 	}
 
-	method_name = strdup("disk");
+        add_to_env("METHOD", "disk");
 	return RETURN_OK;
 }
 
@@ -447,7 +440,7 @@ process_recovery(void)
                                 if (ramdisk_possible())
                                         load_ramdisk(); /* if load of ramdisk failed, try to continue in live */
                                 
-                                method_name = strdup("disk");
+                                add_to_env("METHOD", "disk");
                                 return 1;
                         }
 

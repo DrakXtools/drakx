@@ -410,31 +410,16 @@ void * memdup(void *src, size_t size)
 }
 
 
-static char ** my_env = NULL;
-static int env_size = 0;
-
-void handle_env(char ** env)
-{
-	char ** ptr = env;
-	while (ptr && *ptr) {
-		ptr++;
-		env_size++;
-	}
-	my_env = malloc(sizeof(char *) * 100);
-	memcpy(my_env, env, sizeof(char *) * (env_size+1));
-}
-
-char ** grab_env(void) {
-	return my_env;
-}
-
 void add_to_env(char * name, char * value)
 {
-	char tmp[500];
-	sprintf(tmp, "%s=%s", name, value);
-	my_env[env_size] = strdup(tmp);
-	env_size++;
-	my_env[env_size] = NULL;
+        FILE* fakeenv = fopen(SLASH_LOCATION "/tmp/env", "a");
+        if (fakeenv) {
+                char* e = asprintf_("%s=%s\n", name, value);
+                fwrite(e, 1, strlen(e), fakeenv);
+                free(e);
+                fclose(fakeenv);
+        } else 
+                log_message("couldn't fopen to fake env");
 }
 
 

@@ -29,23 +29,26 @@
 
 #define LIVE_LOCATION    "/Mandrake/mdkinst/"
 #define RAMDISK_LOCATION "/Mandrake/base/"
-#define STAGE2_LOCATION  "/tmp/stage2"
+#define SLASH_LOCATION   "/sysroot"
+#define STAGE2_LOCATION  SLASH_LOCATION "/tmp/stage2"
 
 #ifdef MANDRAKE_MOVE
 #define MEM_LIMIT_MOVE 120
 #define DISTRIB_NAME "Mandrakemove"
-#define IMAGE_LOCATION   "/sysroot/cdrom"
-#define IMAGE_LOCATION_REAL "/sysroot/image"
-#define SLASH_LOCATION   "/sysroot"
+#define IMAGE_LOCATION SLASH_LOCATION "/cdrom"
+#define IMAGE_LOCATION_REAL SLASH_LOCATION "/image"
 #define RAW_LOCATION_REL "/cdrom"
-#define LIVE_LOCATION_REL "/image"
-#define BOOT_LOCATION "/sysroot/image_boot"
-#define ALWAYS_LOCATION "/sysroot/image_always"
-#define TOTEM_LOCATION "/sysroot/image_totem"
+#define STAGE2_LOCATION_REL "/image"
+#define BOOT_LOCATION SLASH_LOCATION "/image_boot"
+#define ALWAYS_LOCATION SLASH_LOCATION "/image_always"
+#define TOTEM_LOCATION SLASH_LOCATION "/image_totem"
+
 #else
+
 #define DISTRIB_NAME "Mandrake Linux"
-#define IMAGE_LOCATION   "/tmp/image"
+#define IMAGE_LOCATION SLASH_LOCATION "/tmp/image"
 #define IMAGE_LOCATION_REAL "/tmp/image"
+#define STAGE2_LOCATION_REL "/tmp/stage2"
 #endif
 
 

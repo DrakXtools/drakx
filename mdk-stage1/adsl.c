@@ -75,7 +75,7 @@ static enum return_type adsl_connect(char * net_device, char * username, char * 
 			log_perror("could not set new controlling tty");
 		
 		printf("\t(exec of pppd)\n");
-		execve(pppd_launch[0], pppd_launch, grab_env());
+		execv(pppd_launch[0], pppd_launch);
 		log_message("execve of %s failed: %s", pppd_launch[0], strerror(errno));
 		exit(-1);
 	}

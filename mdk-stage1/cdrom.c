@@ -82,7 +82,7 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 	if (IS_RESCUE)
 		umount(IMAGE_LOCATION);
 
-	method_name = strdup("cdrom");
+        add_to_env("METHOD", "cdrom");
 	return RETURN_OK;
 }		
 

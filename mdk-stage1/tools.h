@@ -38,8 +38,6 @@ enum return_type load_ramdisk(void);
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size);
 void * memdup(void *src, size_t size);
 void add_to_env(char * name, char * value);
-void handle_env(char ** env);
-char ** grab_env(void);
 char ** list_directory(char * direct);
 int string_array_length(char ** a);
 int kernel_version(void);
