@@ -35,6 +35,7 @@ sub ntp_server {
 	substInFile {
 	    if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {
 		$_ = $server ? "server $server\n" : "#server $1\n";
+		$server = '';
 	    }
 	} $f;
     } else {
