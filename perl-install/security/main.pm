@@ -8,8 +8,6 @@ use my_gtk qw(:helpers :wrappers :ask);
 
 use security::msec;
 
-sub myexit { my_gtk->exit(@_) }
-
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
     my $mainw = my_gtk->new('wait');
@@ -81,8 +79,8 @@ sub draksec_main {
 	}
 
 	# Connect the signals
-	$window->signal_connect('delete_event', sub { $window->destroy(); });
-	$window->signal_connect('destroy', sub { my_gtk->exit(); });
+	$window->signal_connect('delete_event', sub { $window->destroy() });
+	$window->signal_connect('destroy', sub { my_gtk->exit() });
 
 	$window->add(my $vbox = gtkshow(new Gtk::VBox(0, 0)));
 
