@@ -445,71 +445,71 @@ sub read_configured_queues($) {
     my $i;
     my $N = $#QUEUES + 1;
     for ($i = 0;  $i < $N; $i++) {
-	$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}} = 
+	$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}} = 
 	    $QUEUES[$i];
-	if ((!$QUEUES[$i]->{'make'}) || (!$QUEUES[$i]->{'model'})) {
+	if ((!$QUEUES[$i]->{make}) || (!$QUEUES[$i]->{model})) {
 	    if ($printer->{SPOOLER} eq "cups") {
-		$printer->{OLD_QUEUE} = $QUEUES[$i]->{'queuedata'}{'queue'};
+		$printer->{OLD_QUEUE} = $QUEUES[$i]->{queuedata}{queue};
 		my $descr = get_descr_from_ppd($printer);
 		$descr =~ m/^([^\|]*)\|([^\|]*)\|.*$/;
-		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'make'} ||= $1;
-		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'model'} ||= $2;
+		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{make} ||= $1;
+		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{model} ||= $2;
 		# Read out which PPD file was originally used to set up this
 		# queue
 		local *F;
-		if (open F, "< $prefix/etc/cups/ppd/$QUEUES[$i]->{'queuedata'}{'queue'}.ppd") {
+		if (open F, "< $prefix/etc/cups/ppd/$QUEUES[$i]->{queuedata}{queue}.ppd") {
 		    while (my $line = <F>) {
 			if ($line =~ /^\*%MDKMODELCHOICE:(.+)$/) {
-			    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'} = $1;
+			    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{ppd} = $1;
 			}
 		    }
 		    close F;
 		}
 		# Mark that we have a CUPS queue but do not know the name
 		# the PPD file in /usr/share/cups/model
-		if (!$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'}) {
-		    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'ppd'} = '1';
+		if (!$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{ppd}) {
+		    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{ppd} = '1';
 		}
-		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'driver'} = 'CUPS/PPD';
+		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{driver} = 'CUPS/PPD';
 		$printer->{OLD_QUEUE} = "";
 		# Read out the printer's options
-		$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'args'} = read_cups_options($QUEUES[$i]->{'queuedata'}{'queue'});
+		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{args} = read_cups_options($QUEUES[$i]->{queuedata}{queue});
 	    }
-	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'make'} ||= "";
-	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'model'} ||= _("Unknown model");
+	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{make} ||= "";
+	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{model} ||= _("Unknown model");
 	} else {
-	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'make'} = $QUEUES[$i]->{'make'};
-	    $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{'model'} = $QUEUES[$i]->{'model'};
+	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{make} = $QUEUES[$i]->{make};
+	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{model} = $QUEUES[$i]->{model};
 	}
 	# Fill in "options" field
-	if (my $args = $printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'args'}) {
+	if (my $args = $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{args}) {
 	    my $arg;
 	    my @options;
 	    for $arg (@{$args}) {
 		push(@options, "-o");
-		my $optstr = $arg->{'name'} . "=" . $arg->{'default'};
+		my $optstr = $arg->{name} . "=" . $arg->{default};
 		push(@options, $optstr);
 	    }
-	    @{$printer->{configured}{$QUEUES[$i]->{'queuedata'}{'queue'}}{'queuedata'}{options}} = @options;
+	    @{$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{options}} = @options;
 	}
 	# Construct an entry line for tree view in main window of
 	# printerdrake
-	make_menuentry($printer, $QUEUES[$i]->{'queuedata'}{'queue'});
+	make_menuentry($printer, $QUEUES[$i]->{queuedata}{queue});
     }
 }
 
 sub make_menuentry {
     my ($printer, $queue) = @_;
     my $spooler = $shortspooler_inv{$printer->{SPOOLER}};
-    my $connect = $printer->{configured}{$queue}{'queuedata'}{'connect'};
+    my $connect = $printer->{configured}{$queue}{queuedata}{connect};
     my $localremote;
     if (($connect =~ m!^file:!) || ($connect =~ m!^ptal:/mlc:!)) {
 	$localremote = _("Local Printers");
     } else {
 	$localremote = _("Remote Printers");
     }
-    my $make = $printer->{configured}{$queue}{'queuedata'}{'make'};
-    my $model = $printer->{configured}{$queue}{'queuedata'}{'model'};
+    my $make = $printer->{configured}{$queue}{queuedata}{make};
+    my $model = $printer->{configured}{$queue}{queuedata}{model};
     my $connection;
     if ($connect =~ m!^file:/dev/lp(\d+)$!) {
 	my $number = $1;
@@ -550,7 +550,7 @@ sub make_menuentry {
 	$connection = ($::expert ? ", URI: $connect" : "");
     }
     my $sep = "!";
-    $printer->{configured}{$queue}{'queuedata'}{'menuentry'} = 
+    $printer->{configured}{$queue}{queuedata}{menuentry} = 
 	($::expert ? "$spooler$sep" : "") .
 	"$localremote$sep$queue: $make $model$connection";
 }
@@ -697,8 +697,8 @@ sub read_foomatic_options ($) {
     my $COMBODATA;
     local *F;
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	"foomatic-configure -P -q -p $printer->{currentqueue}{'printer'}" .
-	    " -d $printer->{currentqueue}{'driver'}" . 
+	"foomatic-configure -P -q -p $printer->{currentqueue}{printer}" .
+	    " -d $printer->{currentqueue}{driver}" . 
 		($printer->{OLD_QUEUE} ?
 		  " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
 		($printer->{SPECIAL_OPTIONS} ?
@@ -708,7 +708,7 @@ sub read_foomatic_options ($) {
     eval (join('',(<F>))); 
     close F;
     # Return the arguments field
-    return $COMBODATA->{'args'};
+    return $COMBODATA->{args};
 }
 
 sub read_cups_options ($) {
@@ -1099,78 +1099,78 @@ sub configure_queue($) {
 	#- Create the queue with "foomatic-configure", in case of queue
 	#- renaming copy the old queue
         run_program::rooted($prefix, "foomatic-configure", "-q",
-			    "-s", $printer->{currentqueue}{'spooler'},
-			    "-n", $printer->{currentqueue}{'queue'},
-			    (($printer->{currentqueue}{'queue'} ne 
+			    "-s", $printer->{currentqueue}{spooler},
+			    "-n", $printer->{currentqueue}{queue},
+			    (($printer->{currentqueue}{queue} ne 
 			      $printer->{OLD_QUEUE}) &&
 			     ($printer->{configured}{$printer->{OLD_QUEUE}}) ?
 			     ("-C", $printer->{OLD_QUEUE}) : ()),
-			    "-c", $printer->{currentqueue}{'connect'},
-			    "-p", $printer->{currentqueue}{'printer'},
-			    "-d", $printer->{currentqueue}{'driver'},
-			    "-N", $printer->{currentqueue}{'desc'},
-			    "-L", $printer->{currentqueue}{'loc'},
+			    "-c", $printer->{currentqueue}{connect},
+			    "-p", $printer->{currentqueue}{printer},
+			    "-d", $printer->{currentqueue}{driver},
+			    "-N", $printer->{currentqueue}{desc},
+			    "-L", $printer->{currentqueue}{loc},
 			    @{$printer->{currentqueue}{options}}
 			    ) or die "foomatic-configure failed";
     } elsif ($printer->{currentqueue}{ppd}) {
 	#- If the chosen driver is a PPD file from /usr/share/cups/model,
 	#- we use lpadmin to set up the queue
         run_program::rooted($prefix, "lpadmin",
-			    "-p", $printer->{currentqueue}{'queue'},
+			    "-p", $printer->{currentqueue}{queue},
 #			    $printer->{State} eq 'Idle' && 
 #			        $printer->{Accepting} eq 'Yes' ? ("-E") : (),
 			    "-E",
-			    "-v", $printer->{currentqueue}{'connect'},
-			    ($printer->{currentqueue}{'ppd'} ne '1') ?
-			        ("-m", $printer->{currentqueue}{'ppd'}) : (),
-			    $printer->{currentqueue}{'desc'} ?
-			        ("-D", $printer->{currentqueue}{'desc'}) : (),
-			    $printer->{currentqueue}{'loc'} ? 
-			        ("-L", $printer->{currentqueue}{'loc'}) : (),
+			    "-v", $printer->{currentqueue}{connect},
+			    ($printer->{currentqueue}{ppd} ne '1') ?
+			        ("-m", $printer->{currentqueue}{ppd}) : (),
+			    $printer->{currentqueue}{desc} ?
+			        ("-D", $printer->{currentqueue}{desc}) : (),
+			    $printer->{currentqueue}{loc} ? 
+			        ("-L", $printer->{currentqueue}{loc}) : (),
 			    @{$printer->{currentqueue}{options}}
 			    ) or die "lpadmin failed";
 	# Add a comment line containing the path of the used PPD file to the
 	# end of the PPD file
-	if ($printer->{currentqueue}{'ppd'} ne '1') {
-	    open F, ">> $prefix/etc/cups/ppd/$printer->{currentqueue}{'queue'}.ppd";
-	    print F "*%MDKMODELCHOICE:$printer->{currentqueue}{'ppd'}\n";
+	if ($printer->{currentqueue}{ppd} ne '1') {
+	    open F, ">> $prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd";
+	    print F "*%MDKMODELCHOICE:$printer->{currentqueue}{ppd}\n";
 	    close F;
 	}
 	# Copy the old queue's PPD file to the new queue when it is renamed,
 	# to conserve the option settings
-	if (($printer->{currentqueue}{'queue'} ne 
+	if (($printer->{currentqueue}{queue} ne 
 	     $printer->{OLD_QUEUE}) &&
 	    ($printer->{configured}{$printer->{OLD_QUEUE}})) {
 	    system("echo yes | cp -f " .
 		   "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd " .
-		   "$prefix/etc/cups/ppd/$printer->{currentqueue}{'queue'}.ppd");
+		   "$prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd");
 	}
     } else {
 	# Raw queue
         run_program::rooted($prefix, "foomatic-configure", "-q",
-			    "-s", $printer->{currentqueue}{'spooler'},
-			    "-n", $printer->{currentqueue}{'queue'},
-			    "-c", $printer->{currentqueue}{'connect'},
-			    "-d", $printer->{currentqueue}{'driver'},
-			    "-N", $printer->{currentqueue}{'desc'},
-			    "-L", $printer->{currentqueue}{'loc'}
+			    "-s", $printer->{currentqueue}{spooler},
+			    "-n", $printer->{currentqueue}{queue},
+			    "-c", $printer->{currentqueue}{connect},
+			    "-d", $printer->{currentqueue}{driver},
+			    "-N", $printer->{currentqueue}{desc},
+			    "-L", $printer->{currentqueue}{loc}
 			    ) or die "foomatic-configure failed";
     }	  
 
     # Make sure that queue is active
     if ($printer->{SPOOLER} ne "pdq") {
         run_program::rooted($prefix, "foomatic-printjob",
-			    "-s", $printer->{currentqueue}{'spooler'},
-			    "-C", "up", $printer->{currentqueue}{'queue'});
+			    "-s", $printer->{currentqueue}{spooler},
+			    "-C", "up", $printer->{currentqueue}{queue});
     }
 
     # Check whether a USB printer is configured and activate USB printing if so
     my $useUSB = 0;
     foreach (values %{$printer->{configured}}) {
-	$useUSB ||= $_->{'queuedata'}{'connect'} =~ /usb/ || 
+	$useUSB ||= $_->{queuedata}{connect} =~ /usb/ || 
 	    $_->{DeviceURI} =~ /usb/;
     }
-    $useUSB ||= ($printer->{currentqueue}{'queue'}{'queuedata'}{'connect'}
+    $useUSB ||= ($printer->{currentqueue}{queue}{queuedata}{connect}
 		 =~ /usb/);
     if ($useUSB) {
 	my $f = "$prefix/etc/sysconfig/usb";
@@ -1182,31 +1182,31 @@ sub configure_queue($) {
     # Open permissions for device file when PDQ is chosen as spooler
     # so normal users can print.
     if ($printer->{SPOOLER} eq 'pdq') {
-	if ($printer->{currentqueue}{'connect'} =~ m!^\s*file:(\S*)\s*$!) {
+	if ($printer->{currentqueue}{connect} =~ m!^\s*file:(\S*)\s*$!) {
 	    set_permissions($1,"666");
 	}
     }
 
     # Make a new printer entry in the $printer structure
-    $printer->{configured}{$printer->{currentqueue}{'queue'}}{'queuedata'} =
+    $printer->{configured}{$printer->{currentqueue}{queue}}{queuedata} =
         {};
     copy_printer_params($printer->{currentqueue},
-      $printer->{configured}{$printer->{currentqueue}{'queue'}}{'queuedata'});
+      $printer->{configured}{$printer->{currentqueue}{queue}}{queuedata});
     # Construct an entry line for tree view in main window of
     # printerdrake
-    make_menuentry($printer, $printer->{currentqueue}{'queue'});
+    make_menuentry($printer, $printer->{currentqueue}{queue});
 
     # Store the default option settings
-    $printer->{configured}{$printer->{currentqueue}{'queue'}}{'args'} = {};
+    $printer->{configured}{$printer->{currentqueue}{queue}}{args} = {};
     if ($printer->{currentqueue}{foomatic}) {
 	my $tmp = $printer->{OLD_QUEUE};
-	$printer->{OLD_QUEUE} = $printer->{currentqueue}{'queue'};
-	$printer->{configured}{$printer->{currentqueue}{'queue'}}{'args'} = 
+	$printer->{OLD_QUEUE} = $printer->{currentqueue}{queue};
+	$printer->{configured}{$printer->{currentqueue}{queue}}{args} = 
 	    read_foomatic_options($printer);
 	$printer->{OLD_QUEUE} = $tmp;
     } elsif ($printer->{currentqueue}{ppd}) {
-	$printer->{configured}{$printer->{currentqueue}{'queue'}}{'args'} =
-	    read_cups_options($printer->{currentqueue}{'queue'});
+	$printer->{configured}{$printer->{currentqueue}{queue}}{args} =
+	    read_cups_options($printer->{currentqueue}{queue});
     }
     # Clean up
     delete($printer->{ARGS});
