@@ -214,12 +214,9 @@ sub findIntf {
 my $ip_regexp = qr/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
 sub is_ip {
     my ($ip) = @_;
-    return 0 unless $ip =~ $ip_regexp;
-    my @fields = ($1, $2, $3, $4);
-    foreach (@fields) {
-	return 0 if $_ < 0 || $_ > 255;
-    }
-    return 1;
+    my @fields = $ip =~ $ip_regexp or return;
+    return if grep { $_ < 0 || $_ > 255 } @fields;
+    @fields;
 }
 
 sub netmask {
@@ -227,21 +224,20 @@ sub netmask {
     return "255.255.255.0" unless is_ip($ip);
     $ip =~ $ip_regexp;
     if ($1 >= 1 && $1 < 127) {
-	return "255.0.0.0";    #-1.0.0.0 to 127.0.0.0
+	"255.0.0.0";    #-1.0.0.0 to 127.0.0.0
     } elsif ($1  >= 128 && $1 <= 191){
-	return "255.255.0.0";  #-128.0.0.0 to 191.255.0.0
+	"255.255.0.0";  #-128.0.0.0 to 191.255.0.0
     } elsif ($1 >= 192 && $1 <= 223) {
-	return "255.255.255.0";
+	"255.255.255.0";
     } else {
-	return "255.255.255.255"; #-experimental classes
+	"255.255.255.255"; #-experimental classes
     }
 }
 
 sub masked_ip {
     my ($ip) = @_;
-    return "" unless is_ip($ip);
+    my @ip = is_ip($ip) or return '';
     my @mask = netmask($ip) =~ $ip_regexp;
-    my @ip   = $ip          =~ $ip_regexp;
     for (my $i = 0; $i < @ip; $i++) {
 	$ip[$i] &= int $mask[$i];
     }
