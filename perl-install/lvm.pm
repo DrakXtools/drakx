@@ -136,6 +136,7 @@ sub suggest_lv_name {
 
 sub lv_create {
     my ($lvm, $lv) = @_;
+    suggest_lv_name($lvm, $lv);
     $lv->{device} = "$lvm->{VG_name}/$lv->{lv_name}";
     lvm_cmd_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
     $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
