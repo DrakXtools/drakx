@@ -8,6 +8,7 @@ use strict;
 #- misc imports
 #-######################################################################################
 use common qw(:common :system :file);
+use detect_devices;
 use run_program;
 use commands;
 use log;
@@ -333,6 +334,7 @@ sub write {
     setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => keyboard2kmap($keyboard), 
 						    KBCHARSET => $charset,
 						    REMOVE_MOD_META_L => "",
+						    DISABLE_WINDOWS_KEY => detect_devices::isLaptop() ? "yes" : "",
 						    BACKSPACE => $isNotDelete ? "BackSpace" : "Delete" });
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
 }
