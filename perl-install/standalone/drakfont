@@ -717,6 +717,7 @@ sub file_ok_sel {
 
 sub list_remove() { #- TODO : multi-selection
     my ($treeStore, $iter) = $list->get_selection->get_selected;
+    return unless $iter;
     my $to_remove = $treeStore->get($iter, 0);
     my ($index) = map_index { if_($_ eq $to_remove, $::i) } @install;
     splice @install, $index, 1;
