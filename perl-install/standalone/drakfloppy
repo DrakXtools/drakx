@@ -95,9 +95,7 @@ $kernel_combo->set_popdown_strings(do {
 });
 #$kernel_combo->entry->set_text(`uname -r`);
 $kernel_combo->entry->signal_connect(changed => sub { change_tree($kernel_combo->entry->get_text()); $list->clear() });
-my $aaaa = `uname -r`;
-chomp($aaaa);
-$kernel_button->signal_connect(clicked => sub { $kernel_combo->entry->set_text($aaaa); $list->clear() });
+$kernel_button->signal_connect(clicked => sub { $kernel_combo->entry->set_text(chomp_(`uname -r`)); $list->clear() });
 
 $ker_hbox->pack_start(new Gtk::Label(N("kernel version")), 0, 0, 0);
 $ker_hbox->pack_start($kernel_combo, 0, 0, 0);
