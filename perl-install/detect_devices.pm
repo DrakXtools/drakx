@@ -35,6 +35,7 @@ sub get {
     getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
 sub hds         { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get() }
+sub tapes       { grep { $_->{media_type} eq 'tape' && ($::isStandalone || !isRemovableDrive($_)) } get() }
 sub cdroms      { grep { $_->{media_type} eq 'cdrom' } get() }
 sub burners     { grep { isBurner($_) } cdroms() }
 sub dvdroms     { grep { isDvdDrive($_) } cdroms() }
