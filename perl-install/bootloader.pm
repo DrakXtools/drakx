@@ -1200,9 +1200,13 @@ sub grub2dev {
 sub grub2file {
     my ($grub_file, $grub2dev, $fstab) = @_;
     if (my ($device, $rel_file) = grub2dev_and_file($grub_file, $grub2dev)) {	
-	my $part = fs::get::device2part($device, $fstab) or log::l("ERROR: unknown device $device (computed from $grub_file)");
-	my $mntpoint = $part->{mntpoint} || '';
-	($mntpoint eq '/' ? '' : $mntpoint) . '/' . $rel_file;
+	if (my $part = fs::get::device2part($device, $fstab)) {
+	    my $mntpoint = $part->{mntpoint} || '';
+	    ($mntpoint eq '/' ? '' : $mntpoint) . '/' . $rel_file;
+	} else {
+	    log::l("ERROR: unknown device $device (computed from $grub_file)");
+	    $grub_file;
+	}
     } else {
 	$grub_file;
     }
@@ -1222,8 +1226,13 @@ sub write_grub {
     }
 
     my $file2grub = sub {
-	my ($part, $file) = fs::get::file2part($fstab, $_[0], 'keep_simple_symlinks');
-	device2grub($part, \@sorted_hds) . $file;
+	my ($file) = @_;
+	if ($file =~ m!^\(.*\)/!) {
+	    $file; #- it's already in grub format
+	} else {
+	    my ($part, $rel_file) = fs::get::file2part($fstab, $_[0], 'keep_simple_symlinks');
+	    device2grub($part, \@sorted_hds) . $rel_file;
+	}
     };
     {
 	my @conf;
