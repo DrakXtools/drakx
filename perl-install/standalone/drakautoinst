@@ -89,7 +89,7 @@ my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
 my $o_old = $o;
 
-if (!$::isEmbedded && $in->isa('interactive_gtk')) {
+if (!$::isEmbedded && $in->isa('interactive::gtk')) {
     require Gtk;
     init Gtk;
     require my_gtk;
@@ -368,6 +368,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.19  2002/07/23 10:35:55  tvignaud
+#- - Big Move 1: interactive::* hierarchy
+#-
 #- Revision 1.18  2002/03/06 20:17:51  damien
 #- corrected HASH and ARRAY label
 #-

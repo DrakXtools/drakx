@@ -2572,7 +2572,7 @@ sub main {
 	    #if ((!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
 	    if ((!$::isEmbedded) && (!$::isInstall) &&
 	    #if ((!$::isInstall) &&
-		($in->isa('interactive_gtk'))) {
+		($in->isa('interactive::gtk'))) {
 		$continue = 1;
 		# Enter wizard mode
 		$::Wizard_pix_up = "wiz_printerdrake.png";
@@ -2915,14 +2915,11 @@ What do you want to modify on this printer?",
 
 	# Delete some variables
 	$printer->{OLD_QUEUE} = "";
-	$printer->{QUEUE} = "";
-	$printer->{TYPE} = "";
-	$printer->{str_type} = "";
+	foreach (qw(QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)) {
+		$printer->{$_} = "";
+	}
 	$printer->{currentqueue} = {};
-	$printer->{DBENTRY} = "";
-	$printer->{ARGS} = "";
 	$printer->{complete} = 0;
-	$printer->{OLD_CHOICE} = "";
     }
     # Clean up the $printer data structure for auto-install log
     for my $queue (keys %{$printer->{configured}}) {
@@ -2935,20 +2932,7 @@ What do you want to modify on this printer?",
 	    delete($printer->{configured}{$queue}{queuedata}{menuentry});
 	}
     }
-    delete($printer->{OLD_QUEUE});
-    delete($printer->{QUEUE});
-    delete($printer->{TYPE});
-    delete($printer->{str_type});
-    delete($printer->{currentqueue});
-    delete($printer->{DBENTRY});
-    delete($printer->{ARGS});
-    delete($printer->{complete});
-    delete($printer->{OLD_CHOICE});
-    delete($printer->{NEW});
-    delete($printer->{MORETHANONE});
-    delete($printer->{MANUALMODEL});
-    #use Data::Dumper;
-    #print "###############################################################################\n", Dumper($printer); 
-
+	foreach (qw(Old_queue QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL))
+	{ delete $printer->{$_} };
 }
 

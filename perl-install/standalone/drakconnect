@@ -51,7 +51,7 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 #$::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = 'interactive'->vnew('su', 'network');
-!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
+!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard=1;
 $::Wizard_pix_up = "wiz_drakconnect.png";
 $::Wizard_title = "Network & Internet Configuration";
 

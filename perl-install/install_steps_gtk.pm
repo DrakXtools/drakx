@@ -4,14 +4,14 @@ use diagnostics;
 use strict;
 use vars qw(@ISA);
 
-@ISA = qw(install_steps_interactive interactive_gtk);
+@ISA = qw(install_steps_interactive interactive::gtk);
 
 #-######################################################################################
 #- misc imports
 #-######################################################################################
 use pkgs;
 use install_steps_interactive;
-use interactive_gtk;
+use interactive::gtk;
 use common;
 use my_gtk qw(:helpers :wrappers);
 use Gtk;
@@ -113,7 +113,7 @@ sub new($$) {
     $my_gtk::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
     $o = (bless {}, ref $type || $type)->SUPER::new($o);
-    $o->interactive_gtk::new;
+    $o->interactive::gtk::new;
     $o;
 }
 

@@ -1,4 +1,4 @@
-package interactive_http; # $Id$
+package interactive::http; # $Id$
 
 use diagnostics;
 use strict;

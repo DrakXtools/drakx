@@ -73,8 +73,8 @@ sub vnew {
     my ($type, $su, $icon) = @_;
     $su = $su eq "su";
     if ($ENV{INTERACTIVE_HTTP}) {
-	require interactive_http;
-	return interactive_http->new;
+	require interactive::http;
+	return interactive::http->new;
     }
     require c;
     if ($su) {
@@ -89,9 +89,9 @@ sub vnew {
 		exec {'consolehelper'} $0, @ARGV or die _("consolehelper missing");
 	    }
 	}
-	eval { require interactive_gtk };
+	eval { require interactive::gtk };
 	if (!$@) {
-	    my $o = interactive_gtk->new;
+	    my $o = interactive::gtk->new;
 	    if ($icon && $icon ne 'default' && !$::isWizard) { $o->{icon} = $icon } else { undef $o->{icon} }
 	    return $o;
 	}
@@ -107,8 +107,8 @@ sub vnew {
     require 'log.pm';
     undef *log::l;
     *log::l = sub {}; # otherwise, it will bother us :(
-    require interactive_newt;
-    interactive_newt->new;
+    require interactive::newt;
+    interactive::newt->new;
 }
 
 sub enter_console {}

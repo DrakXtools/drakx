@@ -7,7 +7,7 @@ include Makefile.config
 
 POFILES   = $(shell ls share/po/*.po)
 MOFILES   = $(POFILES:%.po=%.mo)
-DISTFILES = Makefile Makefile.config Newt apps.net_monitor diskdrake c ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po sbus_probing resize_fat share/diskdrake.rc $(STANDALONEPMS) standalone/icons pixmaps network standalone/interactive_http rpcinfo-flushed.c *.pm security harddrake
+DISTFILES = Makefile Makefile.config Newt apps.net_monitor diskdrake c ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po sbus_probing resize_fat share/diskdrake.rc $(STANDALONEPMS) standalone/icons pixmaps network interactive standalone/interactive_http rpcinfo-flushed.c *.pm security harddrake
 OTHERS     = $(OTHERDIRS) $(OTHERFILES)
 OTHERDIRS  = tools/ddcprobe tools/serial_probe
 OTHERFILES = tools/rpcinfo-flushed.c
@@ -23,7 +23,7 @@ TAGS: $(ALLPMS)
 	@etags -o - $^ /usr/lib/perl5/*/*/MDK/Common/*.pm | ./perl2etags > $@
 
 clean:
-	for i in $(DIRS) share/po; do $(MAKE) -C $$i clean; done
+	for i in $(DIRS) share/po; do $(MAKE) -C $$i clean; done;:
 	rm -rf auto ../drakxtools.tar.bz2
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
@@ -34,7 +34,7 @@ check:
 
 localcopy: clean
 	rm -rf standalone/pixmaps
-	$(MAKE) -C ../tools clean
+	$(MAKE) -C ../tools clean || :
 	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION) ; cp -af perl-install $(PACKAGE)-$(PKGVERSION) ; cp -af $(OTHERS) $(PACKAGE)-$(PKGVERSION)
 	cd
 	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'

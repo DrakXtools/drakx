@@ -120,8 +120,8 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 #       we provide scantv a bogus table (france) which will
 #       will be ignored since "All" is selected (because of -a)
 		  $ftable_id = "france -a " if ($ftable_id eq -1);
-		  # Note that this'll be broken if/when we implement interactive_qt
-		  my $use_X =$in->isa('interactive_gtk') && -x "/usr/X11R6/bin/xvt";
+		  # Note that this'll be broken if/when we implement interactive::qt
+		  my $use_X =$in->isa('interactive::gtk') && -x "/usr/X11R6/bin/xvt";
 		  my $home = $ENV{HOME};
 		  my $i=system ( (($use_X ) ?
 					   "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")

@@ -1129,7 +1129,7 @@ sub check_prog {
 
 sub remove_unused {
     $::testing and return;
-    if ($::o->isa('interactive_gtk')) {
+    if ($::o->isa('interactive::gtk')) {
 	unlink glob_("/lib/lib$_*") foreach qw(slang newt);
 	unlink "/usr/bin/perl-install/auto/Newt/Newt.so";
     } else {

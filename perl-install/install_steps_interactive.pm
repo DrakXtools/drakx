@@ -87,7 +87,7 @@ sub selectLanguage {
 
     $o->charsetChanged;
 
-    if ($o->isa('interactive_gtk')) {
+    if ($o->isa('interactive::gtk')) {
 	$o->ask_warn('', formatAlaTeX(
 "If you see this message it is because you chose a language for
 which DrakX does not include a translation yet; however the fact
@@ -406,7 +406,7 @@ Continue at your own risk!"));
 			            \&partition_table::description, \@l) or die "setstep exitInstall\n";
         }
 	install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
-    } elsif ($::expert && $o->isa('interactive_gtk')) {
+    } elsif ($::expert && $o->isa('interactive::gtk')) {
         install_interactive::partition_with_diskdrake($o, $o->{all_hds});
     } else {
         install_interactive::partitionWizard($o);

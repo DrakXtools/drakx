@@ -4,10 +4,10 @@ use diagnostics;
 use strict;
 use vars qw(@ISA);
 
-@ISA = qw(install_steps_interactive interactive_stdio);
+@ISA = qw(install_steps_interactive interactive::stdio);
 
 use common;
-use interactive_stdio;
+use interactive::stdio;
 use install_steps_interactive;
 use lang;
 

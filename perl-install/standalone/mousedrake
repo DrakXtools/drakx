@@ -58,7 +58,7 @@ $mouse->{XMOUSETYPE} eq $curr_env->{mouse}{XMOUSETYPE} ||
 $::isEmbedded and kill USR2, $::CCPID;
 if (!$mouse || !$::auto) {
     $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
-    if ($::isEmbedded && $in->isa('interactive_gtk')) {
+    if ($::isEmbedded && $in->isa('interactive::gtk')) {
 	require my_gtk;
 	my $time_tag = Gtk->timeout_add(100, sub {
 					    defined $::Plug && defined $::Plug->child or return 1;
@@ -70,7 +70,7 @@ if (!$mouse || !$::auto) {
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
 				       $mouse->{type} . '|' . $mouse->{name});
-    Gtk->timeout_remove($time_tag2) if $::isEmbedded  && $in->isa('interactive_gtk');
+    Gtk->timeout_remove($time_tag2) if $::isEmbedded  && $in->isa('interactive::gtk');
     $name or $::isEmbedded ? do { kill(USR1, $::CCPID); goto begin } : $in->exit(0);
     my $mouse_chosen = mouse::fullname2mouse($name);
     $mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name} or $mouse = $mouse_chosen;

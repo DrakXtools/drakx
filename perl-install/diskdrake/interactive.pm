@@ -161,7 +161,7 @@ struct all_hds {
 sub main {
     my ($in, $all_hds) = @_;
 
-    if ($in->isa('interactive_gtk')) {
+    if ($in->isa('interactive::gtk')) {
 	require diskdrake::hd_gtk;
 	goto &diskdrake::hd_gtk::main;
     }

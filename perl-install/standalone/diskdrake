@@ -112,7 +112,7 @@ if ($type eq 'hd') {
       $in->ask_from_listf('', '', \&diskdrake::interactive::format_raw_hd_info, $all_hds->{raw_hds}) or $in->exit(0);
     diskdrake::removable::main($in, $all_hds, $raw_hd);
 } else {
-    $in->ask_warn('', "Sorry only a gtk frontend is available") if !$in->isa('interactive_gtk');
+    $in->ask_warn('', "Sorry only a gtk frontend is available") if !$in->isa('interactive::gtk');
     require diskdrake::smbnfs_gtk;
     diskdrake::smbnfs_gtk::main($in, $all_hds, $type);
 }

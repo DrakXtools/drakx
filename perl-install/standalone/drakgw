@@ -56,9 +56,9 @@ my $drakgw_setup = "/etc/sysconfig/inet_sharing";
 
 my $in = 'interactive'->vnew('su', 'default');
 
-!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
+!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard=1;
 
-pur_gtk_mode() if $::isEmbedded && $in->isa('interactive_gtk');
+pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
 
 sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
 
@@ -611,6 +611,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.62  2002/07/23 10:35:55  tvignaud
+#- - Big Move 1: interactive::* hierarchy
+#-
 #- Revision 1.61  2002/04/09 08:50:36  gc
 #- time to remove ipchains/2.2 stuff since now ipchains and iptables
 #- packages conflict

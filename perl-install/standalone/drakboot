@@ -25,7 +25,7 @@ my $in = 'interactive'->vnew('su', 'bootloader');
 
 $::lilo_choice = \&lilo_choice;
 
-if ($in->isa('interactive_gtk')) {
+if ($in->isa('interactive::gtk')) {
     require 'bootlook.pm';
 } else {
     lilo_choice();

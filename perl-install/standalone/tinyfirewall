@@ -34,7 +34,7 @@ local $_ = join '', @ARGV;
 
 my $in = 'interactive'->vnew('su', 'default');
 
-$::isEmbedded && $in->isa('interactive_gtk') or goto dd;
+$::isEmbedded && $in->isa('interactive::gtk') or goto dd;
 require Gtk;
 init Gtk;
 

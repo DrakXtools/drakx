@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 8mdk
+Release: 9mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -245,6 +245,10 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Jul 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-9mdk
+- reorganization cleanup:
+	move interactive_* into interactive::*
+
 * Sun Jul 21 2002 Pixel <pixel@mandrakesoft.com> 1.1.8-8mdk
 - new snapshot (beware of XFdrake)
 

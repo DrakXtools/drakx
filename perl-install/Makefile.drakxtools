@@ -26,7 +26,7 @@ $(DIRS):
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps} $(LIBDEST)/{network,security,harddrake} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps} $(LIBDEST)/{network,security,harddrake,interactive} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
@@ -35,7 +35,7 @@ install:
 	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)/lsnetdrake
 
 	install -m 644 *.pm $(LIBDEST)
-	for i in network harddrake security; do install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
+	for i in network harddrake security interactive; do install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(DATADIR)/$(NAME)
 

@@ -4,13 +4,13 @@ use diagnostics;
 use strict;
 use vars qw(@ISA);
 
-@ISA = qw(install_steps_interactive interactive_newt);
+@ISA = qw(install_steps_interactive interactive::newt);
 
 #-######################################################################################
 #- misc imports
 #-######################################################################################
 use install_steps_interactive;
-use interactive_newt;
+use interactive::newt;
 use install_any;
 use devices;
 use lang;
@@ -28,7 +28,7 @@ sub banner {
 sub new($$) {
     my ($type, $o) = @_;
 
-    interactive_newt->new;
+    interactive::newt->new;
 
     banner('');
     Newt::PushHelpLine(_("  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "));
@@ -44,7 +44,7 @@ sub enteringStep {
 
 sub exitInstall { 
     &install_steps_interactive::exitInstall;
-    interactive_newt::end;
+    interactive::newt::end;
 }
 
 #-######################################################################################

@@ -252,7 +252,7 @@ sub ask_standalone_gtk {
 
 sub ask {    
     my ($in, $prefix) = @_;
-    !$::isInstall && $in->isa('interactive_gtk') ? &ask_standalone_gtk : &ask_install;
+    !$::isInstall && $in->isa('interactive::gtk') ? &ask_standalone_gtk : &ask_install;
 }
 
 sub doit {

@@ -638,7 +638,7 @@ sub testFinalConfig {
     print F "use lib qw(", join(' ', @INC), ");\n";
     print F q{
         require lang;
-	use interactive_gtk;
+	use interactive::gtk;
         use my_gtk qw(:wrappers);
 
         $::isStandalone = 1;
@@ -664,7 +664,7 @@ sub testFinalConfig {
         -r "} . $::prefix . q{/$background" && -x "} . $::prefix . q{/$qiv" and
             system(($::testing ? "} . $::prefix . q{" : "chroot } . $::prefix . q{/ ") . "$qiv -y $background");
 
-        my $in = interactive_gtk->new;
+        my $in = interactive::gtk->new;
 	$in->exit($in->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
@@ -858,7 +858,7 @@ sub chooseResolutionsGtk {
 sub chooseResolutions {
     my ($in, $card, $chosen_depth, $chosen_w) = @_;
 
-    return chooseResolutionsGtk($card, $chosen_depth, $chosen_w) if $in->isa('interactive_gtk');
+    return chooseResolutionsGtk($card, $chosen_depth, $chosen_w) if $in->isa('interactive::gtk');
 
     my $best_w;
     my $allowed_depth = allowedDepth($card);
@@ -1379,7 +1379,7 @@ _("I can setup your computer to automatically start the graphical interface (XFr
 Would you like XFree to start when you reboot?"), 1);
 	    any::runlevel($::prefix, $run ? 5 : 3) if !$::testing;
 	}
-	if ($::isStandalone && $in->isa('interactive_gtk')) {
+	if ($::isStandalone && $in->isa('interactive::gtk')) {
 	    if (my $wm = any::running_window_manager()) {
 		if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst (lc $wm)), 1)) {
 		    fork and $in->exit;
