@@ -129,7 +129,7 @@ sub initrd {
 	 _ "sudo mv /tmp/pcmcia_config_tmp $mnt/etc/pcmcia/config";
     }
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
-    $modz = "kernel/all.modules$I/$ext";
+    my $modz = "kernel/all.modules$I/$ext";
     if ($type !~ /blank/) {
 	_ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar" ;
 	_ "$sudo cp -f $modz/modules.dep $mnt/modules/";
@@ -200,7 +200,19 @@ sub boot_img_i386 {
 	unlink "$mnt/$short_type.rdz";
 	my $avail = (split ' ', `df $mnt`)[-3];
 	my $s = int((-s $rdz) / 1024);
-	die sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
+
+	my ($ext) = $img =~ /\.img-(.*)/ or die "bad initrd name ($img)";
+	my $dir = "kernel/all.modules/$ext";
+	my $pcitable = cat_('/usr/share/ldetect-lst/pcitable');
+	my @l = sort { $a <=> $b } map {
+	    my ($name) = /(\w+)\.k?o$/ or die "bad file in .mar";
+	    my $gz_size = chomp_(`gzip -c $dir/$_ | wc -c`);
+	    sprintf "%7d  %6d      %s\n", $gz_size, listlength($pcitable =~ /"$name"/g), $name;
+	} split(' ', `mdk-stage1/mar/mar -l $dir/${type}_modules.mar`);
+	output('.not-enough-room', "gz size - pcitable - name\n", @l);
+
+	warn sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
+	die qq(check file ".not-enough-room" to see modules size and pcitable usage\n);
     }
 
     my $timeout = 72;
