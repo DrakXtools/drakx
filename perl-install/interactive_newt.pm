@@ -101,15 +101,9 @@ sub ask_from_entries_refW {
 	    $w = Newt::Component::Checkbox(-1, -1, $e->{text} || '', checkval(${$e->{val}}), " *");
 	    $set = sub { $w->CheckboxSetValue(checkval($_[0])) };
 	    $get = sub { $w->CheckboxGetValue == ord '*' };
-#	 } elsif ($e->{type} eq 'range') {
-#	     my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
-#	     $adj->signal_connect(value_changed => $changed);
-#	     $w = new Gtk::HScale($adj);
-#	     $w->set_digits(0);
-#	     $w->signal_connect(key_press_event => $may_go_to_next);
-#	     $set = sub { $adj->set_value($_[0]) };
-#	     $get = sub { $adj->get_value };
-	 } elsif ($e->{type} =~ /list/) {
+	} elsif ($e->{type} eq 'button') {
+	    $w = Newt::Component::Button(-1, -1, $e->{text} || '');
+	} elsif ($e->{type} =~ /list/) {
 	    my ($h, $wi) = (5, 20);
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
 	    $size = min(int @{$e->{list}}, $h);
@@ -188,14 +182,19 @@ sub ask_from_entries_refW {
 	!$error;
     };
 
-    my $canceled;
+    my ($canceled, $r);
     do {
-	my $r = $form->RunForm;
+	$r = $form->RunForm;
 	$canceled = $cancel && $$r == $$cancel;
     } until ($check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'}));
 
     $form->FormDestroy;
     Newt::PopWindow;
+
+    foreach (@widgets) {
+	$_->{e}{clicked}() if $$r == ${$_->{w}};
+    }
+
     !$canceled;
 }
 

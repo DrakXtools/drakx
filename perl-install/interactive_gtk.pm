@@ -234,6 +234,13 @@ sub ask_from_entries_refW {
     my $get_all = sub {
 	${$_->{e}{val}} = $_->{get}->() foreach @widgets_always, @widgets_advanced;
     };
+    my $update = sub {
+	my ($f) = @_;
+	return if $ignore;
+	$get_all->();
+	$f->();
+	$set_all->();
+	};
     my $create_widget = sub {
 	my ($e, $ind) = @_;
 
@@ -248,12 +255,7 @@ sub ask_from_entries_refW {
 		}
 	    }
 	};
-	my $changed = sub {
-	    return if $ignore;
-	    $get_all->();
-	    $common->{callbacks}{changed}->($ind);
-	    $set_all->();
-	};
+	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
 
 	my ($w, $real_w, $set, $get, $expand, $size);
 	if ($e->{type} eq 'iconlist') {
@@ -277,6 +279,14 @@ sub ask_from_entries_refW {
 	    $w->signal_connect(clicked => $changed);
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
+	} elsif ($e->{type} eq 'button') {
+	    $w = Gtk::Button->new($e->{text});
+	    $w->signal_connect(clicked => sub {
+		$o->{retval} = 1;
+		Gtk->main_quit;
+		$mainw->destroy;
+		$e->{clicked}();
+	    });
 	} elsif ($e->{type} eq 'range') {
 	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
 	    $adj->signal_connect(value_changed => $changed);
@@ -317,11 +327,8 @@ sub ask_from_entries_refW {
 	    $set = sub { $w->set_text($_[0]) };
 	    $get = sub { $w->get_text };
 	}
-	$w->signal_connect(focus_out_event => sub {
-	    return if $ignore;
-	    $get_all->();
-	    $common->{callbacks}{focus_out}->($ind);
-	    $set_all->();
+	$w->signal_connect(focus_out_event => sub { 
+            $update->(sub { $common->{callbacks}{focus_out}($ind) });
 	});
 	$tooltips->set_tip($w, $e->{help}) if $e->{help} && !ref($e->{help});
 

@@ -16,6 +16,7 @@ use common qw(:common :functional);
 #-  advanced => wether it is shown in by default or only in advanced mode
 #-  disabled => function returning wether it should be disabled (grayed)
 #-  type     => 
+#-     button => (with text, clicked) (type defaults to button if clicked is there)
 #-     bool (with text)
 #-     range (with min, max)
 #-     combo (with list, not_edit)
@@ -219,6 +220,9 @@ sub ask_from_entries_refH_powered_normalize {
 	} elsif ($e->{type} eq 'range') {
 	    $e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
 	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
+	} elsif ($e->{type} eq 'button' || $e->{clicked}) {
+	    $e->{type} = 'button';
+	    $e->{clicked} ||= sub {};
 	}
 	$e->{disabled} ||= sub { 0 };
     }
