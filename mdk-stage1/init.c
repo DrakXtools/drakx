@@ -27,6 +27,9 @@
 
 #include "config-stage1.h"
 
+#if defined(__powerpc__)
+#define TIOCSCTTY     0x540
+#endif
 
 char * env[] = {
 	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",

@@ -29,11 +29,17 @@ F = NEWT
 ifeq (ia64, $(ARCH))
 L = GLIBC
 endif
+ifeq (ppc, $(ARCH))
+L = GLIBC
+endif
 
 
  #- flags used by all stuff
+ifeq (ppc, $(ARCH))
+CFLAGS = -Os -pipe -Wall -fomit-frame-pointer
+else
 CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
-
+endif
 
 DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I.
 GLIBC_INCLUDES = -I.
