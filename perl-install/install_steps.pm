@@ -742,7 +742,9 @@ sub setupBootloader($) {
     } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
-	lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
+	$o->{lnx4win} ?
+	  lilo::install_loadlin($o->{prefix}, $o->{bootloader}, $o->{fstab}) :
+	      lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
     }
 }
 

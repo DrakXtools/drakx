@@ -616,10 +616,7 @@ sub setRootPassword {
 		 $::beginner ? () : "setRootPasswordNIS");
 
     $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 || $::corporate ? () : _("No password")],
-			 [ _("Set root password"), 
-			   $::beginner ? "\n" .
-_("(a user ``mandrake'' with password ``mandrake'' has been automatically added)") : ()
-			 ], [
+			 [ _("Set root password"), "\n" ], [
 _("Password") => { val => \$sup->{password},  hidden => 1 },
 _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
   $o->{installClass} eq "server" || $::expert ? (
