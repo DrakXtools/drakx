@@ -56,7 +56,8 @@ PUBLISHING
   5 enscript ghostscript-module-X
   4 docbook-dtd31-sgml ghostscript-utils gv jadetex latex2html psutils tetex-afm
     tetex-doc tetex-dvilj tetex-dvips tetex-latex tetex-xdvi texinfo
-  1 docbook-style-dsssl docbook-style-dsssl-doc openjade sgml-tools ghostscript-module-SVGALIB
+  1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB
+  1 BOOKS docbook-style-dsssl-doc
 
   5 CUPS 
       cups-drivers xpp
@@ -64,14 +65,15 @@ PUBLISHING
   5 LPR rhs-printfilters
 
 SHELLS
-  3 bash-doc zsh zsh-doc
+  3 zsh
+  3 BOOKS bash-doc zsh-doc
   2 eshell pdksh tcsh
   1 bash1
 
 SCIENCES
   5 3D openuniverse
   4 gnuplot gtkgraph
-  3 bc xlispstat
+  3 HDF bc xlispstat
   2 mathplot octave
   1 xoscope
 
@@ -87,8 +89,11 @@ EDITORS
 TEXT_TOOLS
   5 words
   4 groff patch recode rgrep
-  3 aspell ed gawk-doc ispell
-  2 groff-gxditview lout lout-doc
+  3 aspell ed ispell
+  2 groff-gxditview lout
+  BOOKS
+    3 gawk-doc
+    1 lout-doc
 
 COMMUNICATIONS
   4 efax
@@ -163,7 +168,8 @@ NETWORKING_REMOTE_ACCESS
   CLIENT
     5 openssh-clients
     3 vnc vnc-SVGALIB
-    2 rsh telnet vnc-doc vnc-java
+    2 rsh telnet vnc-java
+    2 BOOKS vnc-doc
     1 sftp
   SERVER
     5 openssh-server
@@ -205,6 +211,7 @@ DATABASES
     3 MySQL-client MySQL-shared postgresql postgresql-server
   SERVER
     5 postgresql-server
+    4 MySQL
     2 postgresql-odbc postgresql-perl postgresql-tcl postgresql-test
   DEVELOPEMENT
     1 MySQL-bench MySQL-devel postgresql-jdbc postgresql-python postgresql-tk
@@ -232,37 +239,43 @@ DEVELOPMENT
     strace
   4 ElectricFence ImageMagick-devel Mesa-common-devel Xaw3d-devel cdecl cproto cvs detect-devel
     flex gcc-c++ gcc-chill gcc-java gd-devel gmp-devel gperf
-    guile guile-devel jikes kaffe kernel-doc kernel-source libgr-devel
+    guile guile-devel jikes kaffe kernel-source libgr-devel
     libjpeg-devel    
     libpng-devel libtermcap-devel libtiff-devel libungif-devel libxml-devel libxml2-devel
-    linuxconf-devel lkmpg nasm nasm-doc nasm-rdoff p2c perl-DBI perl-Digest-MD5 perl-GTK
+    linuxconf-devel lkmpg nasm nasm-rdoff p2c perl-DBI perl-Digest-MD5 perl-GTK
     perl-GTK-GLArea perl-GTK-GdkImlib perl-IO-stringy perl-PDL perl-Parse-RecDescent
-    pmake pmake-customs python python-devel rcs rpmlint slang-devel slang-doc sox-devel svgalib-devel
+    pmake pmake-customs python python-devel rcs rpmlint slang-devel sox-devel svgalib-devel
     tkinter umb-scheme zlib-devel
-  3 pam-doc XFree86-devel dev86 dev86-devel doxygen dpsftplib dpsftplib-devel egcs
+  3 XFree86-devel dev86 dev86-devel doxygen dpsftplib dpsftplib-devel egcs
     egcs-c++ egcs-g77 egcs-objc gdk-pixbuf-devel gimp-devel glademm glibc-profile
     gpm-devel gprolog rpm-build
     kudzu-devel libghttp-devel libgtop-devel libmikmod-devel librep-devel libunicode-devel
     mercury p2c-devel perl-DB_File perl-Data-ShowTable perl-HTML-Parser perl-HTML-SimpleParse
     perl-MIME-Base64 perl-MIME-tools perl-MP3-Info perl-MailTools perl-Msgcat perl-Mysql
-    perl-URI popt-devel pwdb-devel pygtk pygtk-libglade python-docs python-imaging
+    perl-URI popt-devel pwdb-devel pygtk pygtk-libglade python-imaging
     rpm-python swi-prolog t1lib-devel ucd-snmp-devel mpeg_lib-devel xxgdb
   2 C++2LaTeX SmallEiffel WindowMaker-devel aalib-devel adns-devel alsa-lib-devel audiofile-devel
     cups-devel e2fsprogs-devel egcs-objc-devel g-wrap-devel gcc-g77 gcc-objc
     gettext-devel ghc gkrellm-devel gob happy ibtk libPropList-devel libsigc++-examples
     licq-devel ocaml openldap-devel parted-devel pciutils-devel perl-devel pilot-link-devel
-    pinfo postgresql-devel pth pygtk-glarea qt2-doc rep-gtk-libglade ruby ruby-doc
+    pinfo postgresql-devel pth pygtk-glarea rep-gtk-libglade ruby
     ruby-extensions ruby-gtk swig teyjus tmake xwpe xwpe-X11 recode-devel
   1 aspell-devel cdrecord-devel clisp cracklib-devel eperl faces-devel fnlib-devel freetype-devel
     ghc-prof gtk+mdk-devel gtkglarea-devel XFree86-static-libs 
     haskell-GTK haskell-GTK-devel hugs98 imap-devel ltrace perl-Tk perlftlib php-devel
     pth-devel sane-devel swig-devel tkcvs xdelta-devel
     isapnptools-devel pango-devel
-    
+
+  BOOKS
+    4 slang-doc kernel-doc nasm-doc
+    3 pam-doc python-docs
+    2 qt2-doc ruby-doc
+  
   KDE
     3 kdebase-devel kdegraphics-devel kdelibs-devel kdelibs-sound-devel
       kdemultimedia-devel kdenetwork-devel
     1 kdesupport-devel kdeaddutils-devel koffice-devel
+
   GNOME
     4 memprof perl-GTK-Glade perl-GTK-Gnome gnome-pim-devel
     3 glade gnome-guile pygnome gnome-core-devel gnome-guile-devel
@@ -290,7 +303,8 @@ FILE_TOOLS
 
 WEB_SERVER
   5 apache apache-mod_perl mod_ssl
-  4 apache-suexec apache-manual
+  4 apache-suexec 
+  4 BOOKS apache-manual
   3 Zope Zope-core Zope-pcgi Zope-zserver php-dba_gdbm_db2 php-gd
     php-imap php-ldap php-manual php-mysql php-oracle php-pgsql php-readline
     php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl 
@@ -306,23 +320,23 @@ SERVER
 
 CONFIG
   5 drakxtools ldetect
-  4 ipchains iptables
+  4 ipchains iptables Bastille
   3 ipvsadm linuxconf quota shapecfg timetool userdrake usernet
   2 control-panel adjtimex isicom xinput timeconfig
   1 ipxutils
   4 GNOME gnome-linuxconf
 
 SYSTEM
-  5 Aurora DrakConf MAKEDEV MandrakeUpdate XFree86 XFree86-75dpi-fonts 
+  5 Aurora DrakConf MAKEDEV XFree86 XFree86-75dpi-fonts 
     autologin at anacron drakfloppy drakfont eject gurpmi harddrake kudzu
     linux_logo locales man-pages usbd iputils xterm
     raidtools rpmdrake urpmi
   4 Mesa detect-lst fonts-ttf-decoratives fonts-ttf-west_european
     imlib-cfgeditor imwheel menudrake reiserfs-utils sndconfig tksysv ftp
   3 X11R6-contrib XFree86-100dpi-fonts 
-    autofs drakprofile ext2resize sane 
-  2 DrakeLogo adns audiofile awesfx compat-glibc fbset gfcc grub-doc
-    lilo-doc sudo
+    autofs drakprofile ext2resize sane acpid
+  2 DrakeLogo adns audiofile awesfx compat-glibc fbset gfcc sudo
+  2 BOOKS grub-doc lilo-doc
   1 xtoolwait fdutils genromfs ext2ed mailcap pango usbview kernel-utils
   GNOME
     3 gnome-print gnorpm
