@@ -497,7 +497,7 @@ sub get_text_coord {
 }
 
 sub gtkicons_labels_widget {
-    my ($args, $w, $color_text, $widget_for_font, $background,  $back_pixbuf, $x_back, $y_back, $x_round,
+    my ($args, $w, $widget_for_font, $background,  $back_pixbuf, $x_back, $y_back, $x_round,
 	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
@@ -518,7 +518,7 @@ sub gtkicons_labels_widget {
 	    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
 	    my $state = $darea->{state};
 	    if (!defined($dbl_area)) {
-		   ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $widget_for_font->style->font, $x_round, 1,
+		   ($pix, $width, $height) = create_pix_text($darea, $label, $widget_for_font->style->font, $x_round, 1,
 										  1, 0, [$background, $background], $x_back2, $y_back2, 1, 0);
 		   ($dx, $dy) = (max($width, $x_round), $y_round + $height);
 		   $darea->set_usize($dx, $dy);
@@ -627,7 +627,7 @@ sub write_on_pixmap {
 
 sub create_pix_text {
     #ref widget, txt, color_txt, [font], [width], [height], flag1, flag2, [ (background background_highlighted background_selecteded) backsize x y], centeredx, centeredy
-    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $backgrounds,  $x_back, $y_back, $centeredx, $centeredy) = @_;
+    my ($w, $text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $backgrounds,  $x_back, $y_back, $centeredx, $centeredy) = @_;
     my $color_background;
     my $fake_darea = new Gtk::DrawingArea;
     my $style = $fake_darea->style->copy();
@@ -648,7 +648,7 @@ sub create_pix_text {
     }
     
     
-    $color_text ||= gtkcolor(0, 0, 0);
+    my $color_text = gtkcolor(0, 0, 0);
     my $gc_text = new Gtk::Gdk::GC($w->window);
     $gc_text->set_foreground($color_text);
     my $i = 0;
