@@ -48,7 +48,7 @@ sub leavingStep {
     my ($o, $step) = @_;
     log::l("step `$step' finished");
 
-    if (-d "$o->{prefix}/root") {
+    if (-d "$o->{prefix}/root/drakx") {
 	eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root/drakx") };
 	output(install_any::auto_inst_file(), install_any::g_auto_install());
     }
