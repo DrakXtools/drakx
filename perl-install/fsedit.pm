@@ -165,8 +165,9 @@ sub hds {
     }
 
     
-    my $l = { %{ empty_all_hds() }, hds => \@hds, lvms => \@lvms, raids => \@raids };
-    $l;
+    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, lvms => \@lvms, raids => \@raids };
+    fs::get_major_minor(get_all_fstab($all_hds));
+    $all_hds;
 }
 
 
@@ -200,7 +201,7 @@ sub readProcPartitions {
     foreach my $part (@parts) {
 	my $dev;
 	if ($devfs_like) {
-	    $dev = -e "/dev/$part->{dev}" ? $part->{dev} : sprintf("%x%02x", $part->{major}, $part->{minor});
+	    $dev = -e "/dev/$part->{dev}" ? $part->{dev} : sprintf("0x%x%02x", $part->{major}, $part->{minor});
 	    $part->{rootDevice} = $devfs2normal{dirname($part->{dev}) . '/disc'};
 	} else {
 	    $dev = $part->{dev};

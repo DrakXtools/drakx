@@ -66,7 +66,7 @@ sub merge_fstabs {
 	my ($p2) = grep { fsedit::is_same_hd($_, $p) } @l or next;
 	@l       = grep { !fsedit::is_same_hd($_, $p) } @l;
 
-	$p->{type} ne $p2->{type} && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
+	$p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
 	  log::l("err, fstab and partition table do not agree for $p->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type}))), next;
 	
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
@@ -74,9 +74,6 @@ sub merge_fstabs {
 	$p->{type} ||= $p2->{type};
 	$p->{options} = $p2->{options} if $p->{type} eq 'defaults';
 	add2hash($p, $p2);
-	if ($p->{device} ne $p2->{device}) {
-	    print "HERE\n";
-	}
 	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device};
     }
     @l;
@@ -96,10 +93,19 @@ sub add2all_hds {
     }
 }
 
+sub get_major_minor {
+    (undef, $_->{major}, $_->{minor}) = devices::entry($_->{device}) foreach @_;
+}
+
 sub merge_info_from_mtab {
     my ($fstab) = @_;
 
-    my @l1 = map {; { device => $_->{device}, type => fs2type('swap') } } read_fstab('', '/proc/swaps');
+    my @l1 = map { my $l = $_; 
+		   my %l = (type => fs2type('swap')); 
+		   $l{$_} = $l->{$_} foreach qw(device major minor); 
+		   \%l;
+	       } read_fstab('', '/proc/swaps');
+    
     my @l2 = map { read_fstab('', $_) } '/etc/mtab', '/proc/mounts';
 
     foreach (@l1, @l2) {
@@ -398,7 +404,7 @@ sub get_raw_hds {
        detect_devices::floppies(), detect_devices::cdroms(), 
        (map { $_->{device} .= '4'; $_ } detect_devices::zips())
       ];
-    (undef, $_->{major}, $_->{minor}) = devices::entry($_->{device}) foreach @{$all_hds->{raw_hds}};
+    get_major_minor(@{$all_hds->{raw_hds}});
 
     my @fstab = read_fstab($prefix, "/etc/fstab", 'all_options');
     $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
