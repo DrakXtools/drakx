@@ -279,7 +279,7 @@ my @chain_rules;
 #- **********************************
 #- * 2nd step: configure
 
-$wait_configuring = $in->wait_message('Configuring...', _("Configuring scripts, installing software, starting servers..."));
+$wait_configuring = $in->wait_message(_("Configuring..."), _("Configuring scripts, installing software, starting servers..."));
 
 #- setup the /etc/sysconfig/network-script/ script
 
