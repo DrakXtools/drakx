@@ -801,13 +801,8 @@ sub loadO {
 
 sub generate_automatic_stage1_params {
     my ($o) = @_;
-    my @ks = ();
 
-    if ($o->{method} =~ /hd/) {
-	push @ks, "method:disk";
-    } else {
-	push @ks, "method:" . $o->{method};
-    }
+    my @ks = "method:$o->{method}";
 
     if ($o->{method} =~ /http/) {
 	"$ENV{URLPREFIX}" =~ m|http://(.*)/(.*)| or die;
