@@ -534,7 +534,7 @@ sub _create_window($$) {
     my ($o, $title) = @_;
     my $w = new Gtk::Window;
     my $gc = Gtk::Gdk::GC->new(gtkroot());
-    !$::isStandalone && !$::live && !$::g_auto_install and $my_gtk::shape_width = 5;
+    !$::isStandalone && !$::live && !$::g_auto_install and $my_gtk::shape_width = 3;
 #-  $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
     $gc->set_foreground(gtkcolor(5120, 10752, 22784)); #- in hex : 20, 42, 89
 #-    $gc->set_foreground(gtkcolor(16896, 16896, 16896)); #- in hex : 66, 66, 66

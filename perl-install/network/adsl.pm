@@ -19,7 +19,7 @@ sub configure {
     my $type = $in->ask_from_list_(_("Connect to the Internet"),
 				   _("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
-If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel Speedtouch usb")]) or return;
+If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb")]) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
