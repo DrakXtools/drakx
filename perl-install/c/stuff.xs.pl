@@ -23,6 +23,8 @@ print '
 #include <sys/stat.h>
 #include <sys/utsname.h>
 #include <sys/mount.h>
+#undef __USE_MISC
+#include <linux/wireless.h>
 #include <linux/keyboard.h>
 #include <linux/kd.h>
 #include <linux/hdreg.h>
@@ -31,6 +33,7 @@ print '
 #include <linux/cdrom.h>
 #include <linux/loop.h>
 #include <linux/blkpg.h>
+#include <linux/iso_fs.h>
 #include <net/if.h>
 #include <net/route.h>
 #include <netinet/in.h>
@@ -49,6 +52,7 @@ typedef __uint8_t u8;
 #include <ext2fs/ext2fs.h>
 
 // for UPS on USB:
+# define HID_MAX_USAGES 1024
 #include <linux/hiddev.h>
 
 #include <libldetect.h>
@@ -69,11 +73,11 @@ char *promRootName();
 
 ';
 
-$ENV{C_DRAKX} && $Config{archname} =~ /i.86/ and print '
+$Config{archname} =~ /i.86/ and print '
 char *pcmcia_probe(void);
 ';
 
-$ENV{C_RPM} and print '
+print '
 #undef Fflush
 #undef Mkdir
 #undef Stat
@@ -91,7 +95,7 @@ void rpmError_callback(void) {
 
 ';
 
-$ENV{C_DRAKX} and print '
+print '
 
 void log_message(const char * s, ...) {
    va_list args;
@@ -144,11 +148,17 @@ SV * iconv_(char* s, char* from_charset, char* to_charset) {
   return newSVpv(retval, 0);
 }
 
+int length_of_space_padded(char *str, int len) {
+  while (len >= 0 && str[len-1] == \' \')
+    --len;
+  return len;
+}
+
 MODULE = c::stuff		PACKAGE = c::stuff
 
 ';
 
-$ENV{C_DRAKX} && $Config{archname} =~ /i.86/ and print '
+$Config{archname} =~ /i.86/ and print '
 char *
 pcmcia_probe()
 ';
@@ -213,6 +223,23 @@ is_ext3(device_name)
       RETVAL = 0;
     } else {
       RETVAL = fs->super->s_feature_compat & EXT3_FEATURE_COMPAT_HAS_JOURNAL;
+      ext2fs_close(fs);  
+    }
+  }
+  OUTPUT:
+  RETVAL
+
+char *
+get_ext2_label(device_name)
+  char * device_name
+  CODE:
+  {
+    ext2_filsys fs;
+    int retval = ext2fs_open (device_name, 0, 0, 0, unix_io_manager, &fs);
+    if (retval) {
+      RETVAL = 0;
+    } else {
+      RETVAL = fs->super->s_volume_name;
       ext2fs_close(fs);  
     }
   }
@@ -401,12 +428,67 @@ hasNetDevice(device)
     int s = socket(AF_INET, SOCK_DGRAM, 0);
     if (s == -1) { RETVAL = 0; return; }
 
-    strcpy(req.ifr_name, device);
+    strncpy(req.ifr_name, device, IFNAMSIZ);
 
     RETVAL = ioctl(s, SIOCGIFFLAGS, &req) == 0;
     close(s);
   OUTPUT:
   RETVAL
+
+
+int
+isNetDeviceWirelessAware(device)
+  char * device
+  CODE:
+    struct iwreq ifr;
+
+    int s = socket(AF_INET, SOCK_DGRAM, 0);
+
+    memset(&ifr, 0, sizeof(ifr));
+    strncpy(ifr.ifr_name, device, IFNAMSIZ);
+    RETVAL = ioctl(s, SIOCGIWNAME, &ifr) != -1;
+    close(s);
+  OUTPUT:
+  RETVAL
+
+
+void
+get_netdevices()
+  PPCODE:
+     struct ifconf ifc;
+     struct ifreq *ifr;
+     int i;
+     int numreqs = 10;
+
+     int s = socket(AF_INET, SOCK_DGRAM, 0);
+
+     ifc.ifc_buf = NULL;
+     for (;;) {
+          ifc.ifc_len = sizeof(struct ifreq) * numreqs;
+          ifc.ifc_buf = realloc(ifc.ifc_buf, ifc.ifc_len);
+
+          if (ioctl(s, SIOCGIFCONF, &ifc) < 0) {
+               perror("SIOCGIFCONF");
+               return;
+          }
+          if (ifc.ifc_len == sizeof(struct ifreq) * numreqs) {
+               /* assume it overflowed and try again */
+               numreqs += 10;                                                                         
+               continue;                                                                              
+          }
+          break;
+     }
+     if (ifc.ifc_len) {
+          ifr = ifc.ifc_req;
+          EXTEND(sp, ifc.ifc_len);
+          for (i=0; i < ifc.ifc_len; i+= sizeof(struct ifreq)) {
+               PUSHs(sv_2mortal(newSVpv(ifr->ifr_name, 0)));
+               ifr++;
+          }
+     }
+
+     close(s);
+
 
 char*
 getNetDriver(char* device)
@@ -418,7 +500,7 @@ getNetDriver(char* device)
     int s = socket(AF_INET, SOCK_DGRAM, 0);
 
     memset(&ifr, 0, sizeof(ifr));
-    strncpy(ifr.ifr_name, device, sizeof(ifr.ifr_name)-1);
+    strncpy(ifr.ifr_name, device, IFNAMSIZ);
 
     drvinfo.cmd = ETHTOOL_GDRVINFO;
     ifr.ifr_data = (caddr_t) &drvinfo;
@@ -626,9 +708,22 @@ standard_charset()
   OUTPUT:
   RETVAL
 
+void
+get_iso_volume_ids(int fd)
+  INIT:
+  struct iso_primary_descriptor voldesc;
+  PPCODE:
+  lseek(fd, 16 * ISOFS_BLOCK_SIZE, SEEK_SET);
+  if (read(fd, &voldesc, sizeof(struct iso_primary_descriptor)) == sizeof(struct iso_primary_descriptor)) {
+    if (voldesc.type[0] == ISO_VD_PRIMARY && !strncmp(voldesc.id, ISO_STANDARD_ID, sizeof(voldesc.id))) {
+      XPUSHs(sv_2mortal(newSVpv(voldesc.volume_id, length_of_space_padded(voldesc.volume_id, sizeof(voldesc.volume_id)))));
+      XPUSHs(sv_2mortal(newSVpv(voldesc.application_id, length_of_space_padded(voldesc.application_id, sizeof(voldesc.application_id)))));
+    }
+  }
+
 ';
 
-$ENV{C_RPM} and print '
+print '
 const char *
 rpmErrorString()
 
