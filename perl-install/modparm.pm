@@ -23,6 +23,9 @@ sub get_options_name($) {
   my ($module) = @_;
 
   my @names;
+  $modinfo = '/sbin/modinfo';
+  -e $modinfo or $modinfo = '/usr/bin/modinfo';
+  -e $modinfo or die _('modinfo is not available');
   my @line = `/sbin/modinfo -p $module`;
   print "yop : @line \n";
   foreach (@line) {
