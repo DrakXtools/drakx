@@ -374,7 +374,7 @@ sub ask_fromW {
     my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window));
  
     #-the widgets
-    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack);
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced);
     my $tooltips = Gtk2::Tooltips->new;
     my $ok_clicked = sub { 
 	!$mainw->{ok} || $mainw->{ok}->get_property('sensitive') or return;
@@ -398,6 +398,10 @@ sub ask_fromW {
 	$f->();
 	$set_all->();
     };
+
+    my $label_sizegrp = Gtk2::SizeGroup->new('horizontal');
+    my $realw_sizegrp = Gtk2::SizeGroup->new('horizontal');
+
     my $create_widget = sub {
 	my ($e, $ind) = @_;
 
@@ -414,7 +418,7 @@ sub ask_fromW {
 	};
 	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
 
-	my ($w, $real_w, $focus_w, $set, $get);
+	my ($w, $real_w, $focus_w, $set, $get, $grow);
 	if ($e->{type} eq 'iconlist') {
 	    $w = Gtk2::Button->new;
 	    $set = sub {
@@ -493,7 +497,7 @@ sub ask_fromW {
 		$real_w = gtkpack_(Gtk2::HBox->new(0,0),
 				   1, create_scrolled_window($w), 
 				   0, gtkpack__(Gtk2::VBox->new(0,0), map { $_->{button} } @buttons));
-		$real_w->set_data(must_grow => 1)
+		$grow = 1;
 	    } else {
 
 		my $quit_if_double_click = 
@@ -520,6 +524,7 @@ sub ask_fromW {
 		}
 		if (@{$e->{list}} > 10) {
 		    $real_w = create_scrolled_window($w);
+		    $grow = 1;
 		}
 	    }
 	} else {
@@ -573,9 +578,15 @@ sub ask_fromW {
 	});
 	$tooltips->set_tip($w, $e->{help}) if $e->{help} && !ref($e->{help});
 
-	{ e => $e, w => $w, real_w => $real_w || $w, focus_w => $focus_w || $w,
-	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
-	  icon_w => $e->{icon} && eval { gtkcreate_img($e->{icon}) } };
+	$real_w ||= $w;
+	$real_w = gtkpack_(Gtk2::HBox->new,
+			   if_($e->{icon}, 0, eval { gtkcreate_img($e->{icon}) }),
+			   0, gtkadd_widget($label_sizegrp, $e->{label}),
+			   1, gtkadd_widget($realw_sizegrp, $real_w),
+			  ) if !$real_w->isa("Gtk2::CheckButton") || $e->{icon} || $e->{label};
+
+	{ e => $e, w => $w, real_w => $real_w, focus_w => $focus_w || $w,
+	  get => $get || sub { ${$e->{val}} }, set => $set || sub {}, grow => $grow };
     };
     @widgets_always   = map_index { $create_widget->($_, $::i)       } @$l;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
@@ -583,11 +594,16 @@ sub ask_fromW {
     my $pack = create_box_with_title($mainw, @{$common->{messages}});
     ugtk2::set_main_window_size($mainw) if $mainw->{pop_it} && @$l;
 
+    my @before_widgets_advanced = (
+	  (map { { grow => 0, real_w => Gtk2::WrappedLabel->new($_) } } @{$common->{advanced_messages}}),
+	    { grow => 0, real_w => Gtk2::HSeparator->new },
+    );
+
     my $first_time = 1;
     my $set_advanced = sub {
 	($advanced) = @_;
 	$update->($common->{callbacks}{advanced}) if $advanced && !$first_time;
-	$advanced ? $advanced_pack->show : $advanced_pack->hide;
+	$advanced ? $_->{real_w}->show : $_->{real_w}->hide foreach @before_widgets_advanced, @widgets_advanced;
 	@widgets = (@widgets_always, if_($advanced, @widgets_advanced));
 	$mainw->sync; #- for $set_all below (mainly for the set of clist)
 	$first_time = 0;
@@ -599,31 +615,6 @@ sub ask_fromW {
 				$set_advanced->(!$advanced);
 				$w->child->set_label($advanced ? $common->{advanced_label_close} : $common->{advanced_label});
 			    } ];
-
-    my $label_sizegrp = Gtk2::SizeGroup->new('horizontal');
-    my $realw_sizegrp = Gtk2::SizeGroup->new('horizontal');
-    my $create_widgets = sub {
-	my (@widgets) = @_;
-	gtkpack_(Gtk2::VBox->new,
-              map {
-                  ($_->{real_w}->isa("Gtk2::ScrolledWindow") || $_->{real_w}->get_data('must_grow') ? 1 : 0), 
-                   $_->{real_w}->isa("Gtk2::CheckButton") && !$_->{icon_w} && !$_->{e}{label} ?
-                     $_->{real_w} : gtkpack_(Gtk2::HBox->new,
-                                             if_($_->{icon_w}, 0, $_->{icon_w}),
-                                             0, gtkadd_widget($label_sizegrp, $_->{e}{label}),
-                                             1, gtkadd_widget($realw_sizegrp, $_->{real_w}),
-                                            );
-               } @widgets
-              );
-    };
-
-    my $always_pack = $create_widgets->(@widgets_always);
-
-    $advanced_pack = 
-      gtkpack_(Gtk2::VBox->new(0,0),
-	       (map { (0, Gtk2::WrappedLabel->new($_)) } @{$common->{advanced_messages}}),
-	       0, Gtk2::HSeparator->new,
-	       1, $create_widgets->(@widgets_advanced));
 
     my @help = if_($common->{interactive_help}, 
 		   [ N("Help"), sub { 
@@ -637,9 +628,10 @@ sub ask_fromW {
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
 
     gtkpack($pack,
-	    create_scrolled_window(gtkpack(Gtk2::VBox->new(0,0),
-					   $always_pack,
-					   if_(@widgets_advanced, $advanced_pack)), 
+	    create_scrolled_window(gtkpack_(Gtk2::VBox->new(0,0),
+					    (map { $_->{grow}, $_->{real_w} } 
+					      @widgets_always, 
+					      if_(@widgets_advanced, @before_widgets_advanced, @widgets_advanced))),
 				   [ 'automatic', 'automatic' ], 'none')) if @$l || !$mainw->{pop_it};
 	    
     if ($buttons_pack) {
