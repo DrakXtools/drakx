@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-23 22:25+0700\n"
+"PO-Revision-Date: 2005-03-24 09:43+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -23042,7 +23042,7 @@ msgstr ""
 #: standalone/drakvpn:368
 #, c-format
 msgid "ipsec.conf entries"
-msgstr ""
+msgstr "entri ipsec.conf"
 
 #: standalone/drakvpn:369
 #, c-format
@@ -23058,26 +23058,36 @@ msgid ""
 "\n"
 "Choose the section you would like to add.\n"
 msgstr ""
+"File %s berisi beberapa bagian yang berbeda.\n"
+"\n"
+"Berikut adalah kerangkanya:\t'setup konfigurasi' \n"
+"\t\t\t\t\t'default koneksi' \n"
+"\t\t\t\t\t'normal1'\n"
+"\t\t\t\t\t'normal2' \n"
+"\n"
+"Anda bisa menambahkan salah satu dari bagian ini.\n"
+"\n"
+"Pilih bab yang hendak Anda tambah.\n"
 
 #: standalone/drakvpn:376
-#, fuzzy, c-format
+#, c-format
 msgid "config setup"
-msgstr "konfigurasi ulang"
+msgstr "konfigurasi setup"
 
 #: standalone/drakvpn:376
-#, fuzzy, c-format
+#, c-format
 msgid "conn %default"
-msgstr "standar"
+msgstr "koneksi %default"
 
 #: standalone/drakvpn:376
-#, fuzzy, c-format
+#, c-format
 msgid "normal conn"
-msgstr "Modus Normal"
+msgstr "koneksi normal"
 
 #: standalone/drakvpn:382 standalone/drakvpn:423 standalone/drakvpn:510
-#, fuzzy, c-format
+#, c-format
 msgid "Exists!"
-msgstr "Keluar"
+msgstr "Sudah ada!"
 
 #: standalone/drakvpn:383 standalone/drakvpn:424
 #, c-format
@@ -23088,6 +23098,11 @@ msgid ""
 "You'll have to go back and add another section\n"
 "or change its name.\n"
 msgstr ""
+"Bagian dengan nama ini sudah ada.\n"
+"Nama bagian harus unik.\n"
+"\n"
+"Anda harus kembali dan memilih bagian lain atau\n"
+"merubah namanya.\n"
 
 #: standalone/drakvpn:400
 #, c-format
@@ -23100,36 +23115,43 @@ msgid ""
 "\n"
 "Choose continue or previous when you are done.\n"
 msgstr ""
+"Bagian ini harus berada pada bagian atas dari file\n"
+"%s Anda.\n"
+"\n"
+"Pastikan semua bagian lain mengikuti bagian konfigurasi\n"
+"setup ini.\n"
+"\n"
+"Silahkan lanjutkan atau kembali ketika Anda sudah selesai.\n"
 
 #: standalone/drakvpn:405
-#, fuzzy, c-format
+#, c-format
 msgid "interfaces"
-msgstr "Interface"
+msgstr "antarmuka"
 
 #: standalone/drakvpn:406
 #, c-format
 msgid "klipsdebug"
-msgstr ""
+msgstr "klipsdebug"
 
 #: standalone/drakvpn:407
 #, c-format
 msgid "plutodebug"
-msgstr ""
+msgstr "plutodebug"
 
 #: standalone/drakvpn:408
 #, c-format
 msgid "plutoload"
-msgstr ""
+msgstr "plutoload"
 
 #: standalone/drakvpn:409
 #, c-format
 msgid "plutostart"
-msgstr ""
+msgstr "plutostart"
 
 #: standalone/drakvpn:410
 #, c-format
 msgid "uniqueids"
-msgstr ""
+msgstr "uniqueids"
 
 #: standalone/drakvpn:444
 #, c-format
@@ -23143,26 +23165,34 @@ msgid ""
 "them here, globally, you can define them in each\n"
 "section.\n"
 msgstr ""
+"Ini adalah bagian pertama setelah konfigurasi \n"
+"setup.\n"
+"\n"
+"Disini Anda bisa mendefinisikan setting default. \n"
+"Semua bagian lain akan mengikuti bagian ini.\n"
+"Setting disebelah kiri bersifat opsional. Jika tidak \n"
+"didefinisikan disini, secara global, Anda bisa melakukannya\n"
+"pada setiap bagian.\n"
 
 #: standalone/drakvpn:451
-#, fuzzy, c-format
+#, c-format
 msgid "PFS"
-msgstr "HFS"
+msgstr "PFS"
 
 #: standalone/drakvpn:452
 #, c-format
 msgid "keyingtries"
-msgstr ""
+msgstr "keyingtries"
 
 #: standalone/drakvpn:453
 #, c-format
 msgid "compress"
-msgstr ""
+msgstr "kompres"
 
 #: standalone/drakvpn:454
 #, c-format
 msgid "disablearrivalcheck"
-msgstr ""
+msgstr "disablearrivalcheck"
 
 #: standalone/drakvpn:455 standalone/drakvpn:494
 #, c-format
@@ -23172,22 +23202,22 @@ msgstr "kiri"
 #: standalone/drakvpn:456 standalone/drakvpn:495
 #, c-format
 msgid "leftcert"
-msgstr ""
+msgstr "leftcert"
 
 #: standalone/drakvpn:457 standalone/drakvpn:496
 #, c-format
 msgid "leftrsasigkey"
-msgstr ""
+msgstr "leftrsasigkey"
 
 #: standalone/drakvpn:458 standalone/drakvpn:497
 #, c-format
 msgid "leftsubnet"
-msgstr ""
+msgstr "leftsubnet"
 
 #: standalone/drakvpn:459 standalone/drakvpn:498
 #, c-format
 msgid "leftnexthop"
-msgstr ""
+msgstr "leftnexthop"
 
 #: standalone/drakvpn:488
 #, c-format
@@ -23197,21 +23227,25 @@ msgid ""
 "You can now add a new section.\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian, atau koneksi.\n"
+"\n"
+"Anda bisa menambahkan bagian baru.\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data.\n"
 
 #: standalone/drakvpn:491
-#, fuzzy, c-format
+#, c-format
 msgid "section name"
-msgstr "Nama koneksi"
+msgstr "nama bagian"
 
 #: standalone/drakvpn:492
-#, fuzzy, c-format
+#, c-format
 msgid "authby"
-msgstr "Path"
+msgstr "dibuat oleh"
 
 #: standalone/drakvpn:493
-#, fuzzy, c-format
+#, c-format
 msgid "auto"
-msgstr "Pengarang:"
+msgstr "otomatis"
 
 #: standalone/drakvpn:499
 #, c-format
@@ -23219,24 +23253,24 @@ msgid "right"
 msgstr "kanan"
 
 #: standalone/drakvpn:500
-#, fuzzy, c-format
+#, c-format
 msgid "rightcert"
-msgstr "Lebih Kuat"
+msgstr "rightcert"
 
 #: standalone/drakvpn:501
 #, c-format
 msgid "rightrsasigkey"
-msgstr ""
+msgstr "rightrsasigkey"
 
 #: standalone/drakvpn:502
 #, c-format
 msgid "rightsubnet"
-msgstr ""
+msgstr "rightsubnet"
 
 #: standalone/drakvpn:503
 #, c-format
 msgid "rightnexthop"
-msgstr ""
+msgstr "rightnexthop"
 
 #: standalone/drakvpn:511
 #, c-format
@@ -23247,6 +23281,11 @@ msgid ""
 "You'll have to go back and add another section\n"
 "or change the name of the section.\n"
 msgstr ""
+"Bagian dengan nama ini sudah ada.\n"
+"Nama bagian harus unik.\n"
+"\n"
+"Anda harus kembali dan menambahkan bagian lain atau\n"
+"merubah nama bagian.\n"
 
 #: standalone/drakvpn:543
 #, c-format
@@ -23257,11 +23296,16 @@ msgid ""
 "\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"Menambah Kebijakan Keamanan.\n"
+"\n"
+"Anda bisa menambah Kebijakan Keamanan.\n"
+"\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data.\n"
 
 #: standalone/drakvpn:576 standalone/drakvpn:826
-#, fuzzy, c-format
+#, c-format
 msgid "Edit section"
-msgstr "Pilihan path"
+msgstr "Edit bagian"
 
 #: standalone/drakvpn:577
 #, c-format
@@ -23271,17 +23315,21 @@ msgid ""
 "You can choose here below the one you want to edit \n"
 "and then click on next.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian atau koneksi.\n"
+"\n"
+"Anda bisa memilih mana yang akan Anda edit dibawah ini \n"
+"lalu klik pada selanjutnya.\n"
 
 #: standalone/drakvpn:580 standalone/drakvpn:660 standalone/drakvpn:831
 #: standalone/drakvpn:877
-#, fuzzy, c-format
+#, c-format
 msgid "Section names"
-msgstr "Nama koneksi"
+msgstr "Nama bagian"
 
 #: standalone/drakvpn:590
-#, fuzzy, c-format
+#, c-format
 msgid "Can not edit!"
-msgstr "%s di %s tak tercari"
+msgstr "Tidak bisa edit!"
 
 #: standalone/drakvpn:591
 #, c-format
@@ -23293,6 +23341,12 @@ msgid ""
 "of the %s file, and eventually, disable or\n"
 "enable the opportunistic encryption.\n"
 msgstr ""
+"Anda tidak bisa mengedit bagian ini.\n"
+"\n"
+"Bagian ini wajib untuk Freeswan 2.X.\n"
+"Seseorang harus menentukan versi 2.0 pada bagian \n"
+"atas dari file %s, dan menonaktifkan atau\n"
+"mengaktifkan enkripsi oportunistik.\n"
 
 #: standalone/drakvpn:600
 #, c-format
@@ -23302,6 +23356,10 @@ msgid ""
 "You can now edit the config setup section entries.\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian.\n"
+"\n"
+"Anda bisa mengedit bagian entri konfigurasi setup.\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data.\n"
 
 #: standalone/drakvpn:611
 #, c-format
@@ -23311,6 +23369,10 @@ msgid ""
 "You can now edit the default section entries.\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian atau koneksi.\n"
+"\n"
+"Anda bisa mengedit bagian entri default.\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data.\n"
 
 #: standalone/drakvpn:624
 #, c-format
@@ -23321,6 +23383,11 @@ msgid ""
 "\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian atau koneksi.\n"
+"\n"
+"Anda bisa mengedit bagian entri normal.\n"
+"\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data.\n"
 
 #: standalone/drakvpn:645
 #, c-format
@@ -23331,11 +23398,16 @@ msgid ""
 "\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"Edit Kebijakan Keamanan.\n"
+"\n"
+"Anda bisa mengedit Kebijakan Keamanan.\n"
+"\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data.\n"
 
 #: standalone/drakvpn:656 standalone/drakvpn:873
-#, fuzzy, c-format
+#, c-format
 msgid "Remove section"
-msgstr "Hapus Daftar"
+msgstr "Hapus bagian"
 
 #: standalone/drakvpn:657 standalone/drakvpn:874
 #, c-format
@@ -23345,6 +23417,10 @@ msgid ""
 "You can choose here below the one you want to remove\n"
 "and then click on next.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian atau koneksi.\n"
+"\n"
+"Anda bisa memilih mana yang hendak Anda hapus dibawah ini\n"
+"dan klik pada selanjutnya.\n"
 
 #: standalone/drakvpn:686
 #, c-format
@@ -23359,6 +23435,15 @@ msgid ""
 "  - remove \t\t (remove an existing section)\n"
 "  - commit \t\t (writes the changes to the real file)"
 msgstr ""
+"File konfigurasi racoon.conf.\n"
+"\n"
+"Isi dari file ini dibagi menjadi beberapa bagian.\n"
+"Anda bisa:\n"
+"  - tampilkan \t\t (menampilkan isi file)\n"
+"  - tambah\t\t\t (menambahkan satu bagian)\n"
+"  - edit \t\t\t (memodifikasi parameter pada bagian yang ada)\n"
+"  - hapus \t\t (menghapus bagian yang ada)\n"
+"  - setujui \t\t (menulis perubahan pada file sesungguhnya)"
 
 #: standalone/drakvpn:714
 #, c-format
@@ -23369,11 +23454,16 @@ msgid ""
 "\n"
 "You'll have to go back and choose configure.\n"
 msgstr ""
+"File %s tidak ada\n"
+"\n"
+"Ini merupakan konfigurasi baru.\n"
+"\n"
+"Anda harus kembali dan memilih konfigurasi.\n"
 
 #: standalone/drakvpn:728
 #, c-format
 msgid "racoonf.conf entries"
-msgstr ""
+msgstr "entri racoonf.conf"
 
 #: standalone/drakvpn:729
 #, c-format
@@ -23387,11 +23477,19 @@ msgid ""
 "\n"
 "Choose the section you would like to add.\n"
 msgstr ""
+"Bagian langkah 'tambah'.\n"
+"\n"
+"Berikut ada kerangka file racoon.conf:\n"
+"\t'path'\n"
+"\t'remote'\n"
+"\t'sainfo' \n"
+"\n"
+"Pilih bagian yang hendak Anda tambah.\n"
 
 #: standalone/drakvpn:735
-#, fuzzy, c-format
+#, c-format
 msgid "path"
-msgstr "Path"
+msgstr "path"
 
 #: standalone/drakvpn:735
 #, c-format
@@ -23399,9 +23497,9 @@ msgid "remote"
 msgstr "remote"
 
 #: standalone/drakvpn:735
-#, fuzzy, c-format
+#, c-format
 msgid "sainfo"
-msgstr "Spanyol"
+msgstr "sainfo"
 
 #: standalone/drakvpn:743
 #, c-format
@@ -23412,11 +23510,16 @@ msgid ""
 "\n"
 "Put your mouse over the certificate entry to obtain online help."
 msgstr ""
+"Bagian langkah 'tambah path'.\n"
+"\n"
+"Bagian path harus berada pada bagian atas dari file racoon.conf.\n"
+"\n"
+"Letakkan mouse Anda pada entri sertifikat untuk mendapatkan bantuan online."
 
 #: standalone/drakvpn:746
-#, fuzzy, c-format
+#, c-format
 msgid "path type"
-msgstr "Ubah tipe"
+msgstr "tipe path"
 
 #: standalone/drakvpn:750
 #, c-format
@@ -23441,11 +23544,30 @@ msgid ""
 "of the identifier and the shared secret key which are used at\n"
 "Pre-shared key authentication method in phase 1."
 msgstr ""
+"path include path: menentukan path untuk menyertakan \n"
+"sebuah file. Lihat Penyertaan File.\n"
+"\tContoh: path include '/etc/racoon'\n"
+"\n"
+"path pre_shared_key file: menentukan file berisi\n"
+"kunci 'pre-shared' untuk berbagai ID. Lihat File Kunci Pre-shared.\n"
+"\tContoh: path pre_shared_key '/etc/racoon/psk.txt' ;\n"
+"\n"
+"path certificate path: racoon(8) akan mencari direktori ini\n"
+"jika sebuah sertifikat atau permintaan sertifikat diterima.\n"
+"\tContoh: path certificate '/etc/cert' ;\n"
+"\n"
+"Penyertaan File: menyertakan file \n"
+"file konfigurasi lain bisa disertakan.\n"
+"\tContoh: include \"remote.conf\" ;\n"
+"\n"
+"File Kunci Pre-shared : File kunci 'pre-shared' mendefinisikan sepasang\n"
+"pengenal dan kunci rahasia yang digunakan saat metode authentikasi\n"
+"kunci 'Pre-shared' pada fase 1."
 
 #: standalone/drakvpn:770 standalone/drakvpn:863
-#, fuzzy, c-format
+#, c-format
 msgid "real file"
-msgstr "Pilih file"
+msgstr "file sesungguhnya"
 
 #: standalone/drakvpn:793
 #, c-format
@@ -23456,6 +23578,11 @@ msgid ""
 "You can now choose the remote settings.\n"
 "Choose continue or previous when you are done.\n"
 msgstr ""
+"Pastikan Anda sudah mendapatkan bagian path\n"
+"pada bagian atas dari file racoon.conf Anda.\n"
+"\n"
+"Anda bisa memilih setting remote.\n"
+"Silahkan melanjutkan atau sebelumnya jika Anda selesai.\n"
 
 #: standalone/drakvpn:810
 #, c-format
@@ -23466,6 +23593,11 @@ msgid ""
 "You can now choose the sainfo settings.\n"
 "Choose continue or previous when you are done.\n"
 msgstr ""
+"Pastikan Anda sudah mendapatkan bagian path\n"
+"pada bagian atas dari file %s Anda.\n"
+"\n"
+"Anda bisa bisa memilih setting sainfo.\n"
+"Silahkan melanjutkan atau sebelumnya jika Anda selesai.\n"
 
 #: standalone/drakvpn:827
 #, c-format
@@ -23475,6 +23607,10 @@ msgid ""
 "You can choose here in the list below the one you want\n"
 "to edit and then click on next.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian atau koneksi.\n"
+"\n"
+"Anda bisa memilih mana yang hendak Anda edit dibawah ini\n"
+"dan klik pada selanjutnya.\n"
 
 #: standalone/drakvpn:838
 #, c-format
@@ -23486,6 +23622,12 @@ msgid ""
 "\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"File %s Anda memiliki beberapa bagian.\n"
+"\n"
+"\n"
+"Anda bisa mengedit bagian entri remote.\n"
+"\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data.\n"
 
 #: standalone/drakvpn:847
 #, c-format
@@ -23496,6 +23638,11 @@ msgid ""
 "\n"
 "Choose continue when you are done to write the data."
 msgstr ""
+"File %s Anda memiliki beberapa bagian.\n"
+"\n"
+"Anda bisa mengedit bagian entri sainfo.\n"
+"\n"
+"Silahkan melanjutkan ketika Anda selesai untuk menulis data."
 
 #: standalone/drakvpn:855
 #, c-format
@@ -23510,11 +23657,20 @@ msgid ""
 "\n"
 "Choose continue or previous when you are done.\n"
 msgstr ""
+"Bagian ini harus berada pada bagian atas dari file\n"
+"%s Anda.\n"
+"\n"
+"Pastikan bagian lain mengikuti bagian path\n"
+"ini.\n"
+"\n"
+"Anda bisa mengedit entri path.\n"
+"\n"
+"Silahkan melanjutkan untuk sebelumnya ketika Anda selesai.\n"
 
 #: standalone/drakvpn:862
 #, c-format
 msgid "path_type"
-msgstr ""
+msgstr "tipe_path"
 
 #: standalone/drakvpn:903
 #, c-format
@@ -23527,11 +23683,18 @@ msgid ""
 "You should make sure that that the tunnels shorewall\n"
 "section is configured."
 msgstr ""
+"Semuanya sudah dikonfigurasikan.\n"
+"\n"
+"Anda bisa berbagi sumber daya melalui Internet,\n"
+"dalam cara yang aman, menggunakan koneksi VPN.\n"
+"\n"
+"Anda harus memastikan bahwa bagian tunnel shorewall\n"
+"sudah dikonfigurasikan."
 
 #: standalone/drakvpn:923
 #, c-format
 msgid "Sainfo source address"
-msgstr ""
+msgstr "Alamat sumber Sainfo"
 
 #: standalone/drakvpn:924
 #, c-format
@@ -23555,11 +23718,29 @@ msgid ""
 "sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
 "\t172.16.1.0/24 is the source address"
 msgstr ""
+"sainfo (id_sumber id_tujuan | anonymous) { perintah }\n"
+"mendefinisikan parameter dari IKE fase 2\n"
+"(pembuatan IPsec-SA).\n"
+"\n"
+"id_sumber dan id_tujuan dibuat seperti:\n"
+"\n"
+"\talamat alamat [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Contoh\n"
+"\n"
+"sainfo anonymous (menerima koneksi dari manapun juga)\n"
+"\tbiarkan kosong jika Anda ingin anonim\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\t203.178.141.209 adalah alamat sumber\n"
+"\n"
+"sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
+"\t172.16.1.0/24 adalah alamat sumber"
 
 #: standalone/drakvpn:941
-#, fuzzy, c-format
+#, c-format
 msgid "Sainfo source protocol"
-msgstr "Protokol Eropa"
+msgstr "Protokol sumber Sainfo"
 
 #: standalone/drakvpn:942
 #, c-format
@@ -23580,11 +23761,26 @@ msgid ""
 "sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
 "\tthe first 'any' allows any protocol for the source"
 msgstr ""
+"sainfo (id_sumber id_tujuan | anonymous) { perintah }\n"
+"mendefinisikan parameter IKE fase 2\n"
+"(pembuatan IPsec-SA).\n"
+"\n"
+"id_sumber dan id_tujuan dibuat seperti:\n"
+"\n"
+"\talamat alamat [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Contoh: \n"
+"\n"
+"sainfo anonymous (menerima koneksi dari manapun juga)\n"
+"\tbiarkan kosong jika Anda ingin anonim\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\tt'any' pertama mengijinkan sembarang protokol untuk sumber"
 
 #: standalone/drakvpn:956
 #, c-format
 msgid "Sainfo destination address"
-msgstr ""
+msgstr "Alamat tujuan Sainfo"
 
 #: standalone/drakvpn:957
 #, c-format
@@ -23608,11 +23804,29 @@ msgid ""
 "sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
 "\t172.16.2.0/24 is the destination address"
 msgstr ""
+"sainfo (id_sumber id_tujuan | anonymous) { perintah }\n"
+"mendefinisikan parameter dari IKE fase 2\n"
+"(pembuatan IPsec-SA).\n"
+"\n"
+"id_sumber dan id_tujuan dibuat seperti:\n"
+"\n"
+"\talamat alamat [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Contoh\n"
+"\n"
+"sainfo anonymous (menerima koneksi dari manapun juga)\n"
+"\tbiarkan kosong jika Anda ingin anonim\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\t203.178.141.209 adalah alamat sumber\n"
+"\n"
+"sainfo address 172.16.1.0/24 any address 172.16.2.0/24 any\n"
+"\t172.16.1.0/24 adalah alamat sumber"
 
 #: standalone/drakvpn:974
-#, fuzzy, c-format
+#, c-format
 msgid "Sainfo destination protocol"
-msgstr "Alat Migrasi Windows"
+msgstr "Protokol tujuan Sainfo"
 
 #: standalone/drakvpn:975
 #, c-format
@@ -23633,11 +23847,26 @@ msgid ""
 "sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
 "\tthe last 'any' allows any protocol for the destination"
 msgstr ""
+"sainfo (id_sumber id_tujuan | anonymous) { perintah }\n"
+"mendefinisikan parameter IKE fase 2\n"
+"(pembuatan IPsec-SA).\n"
+"\n"
+"id_sumber dan id_tujuan dibuat seperti:\n"
+"\n"
+"\talamat alamat [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Contoh: \n"
+"\n"
+"sainfo anonymous (menerima koneksi dari manapun juga)\n"
+"\tbiarkan kosong jika Anda ingin anonim\n"
+"\n"
+"sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
+"\tt'any' terakhir mengijinkan sembarang protokol untuk tujuan"
 
 #: standalone/drakvpn:989
 #, c-format
 msgid "PFS group"
-msgstr ""
+msgstr "Grup PFS"
 
 #: standalone/drakvpn:991
 #, c-format
@@ -23648,11 +23877,16 @@ msgid ""
 "group is one of the following: modp768, modp1024, modp1536.\n"
 "Or you can define 1, 2, or 5 as the DH group number."
 msgstr ""
+"mendefinisikan grup eksponensial Diffie-Hellman.\n"
+"Jika Anda tidak membutuhkan PFS maka Anda bisa melupakan direktif ini.\n"
+"Sembarang proposal akan diterima jika Anda tidak menentukan.\n"
+"Grup adalah satu dari berikut: modp768, modp1024, modp1536.\n"
+"Atau Anda bisa mendefinisikan 1, 2, atau 5 sebagai anggota grup DH."
 
 #: standalone/drakvpn:996
-#, fuzzy, c-format
+#, c-format
 msgid "Lifetime number"
-msgstr "nomor"
+msgstr "Angka Waktu Hidup"
 
 #: standalone/drakvpn:997
 #, c-format
@@ -23674,11 +23908,27 @@ msgid ""
 "\n"
 "So, here, the lifetime numbers are 1, 1, 30, 30, 60 and 12.\n"
 msgstr ""
+"mendefinisikan waktu hidup dari waktu tertentu yang akan diajukan\n"
+"pada negosiasi fase 1. Sembarang proposal akan diterima, dan \n"
+"atribut tidak akan diajukan pada peer jika Anda tidak \n"
+"menentukannya. Mereka bisa ditentukan secara individu pada \n"
+"setiap proposal.\n"
+"\n"
+"Misalnya: \n"
+"\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 60 sec;\n"
+"\tlifetime time 12 hour;\n"
+"\n"
+"Jadi, disini, angka waktu hidup adalah 1, 1, 30, 30, 60 dan 12.\n"
 
 #: standalone/drakvpn:1013
 #, c-format
 msgid "Lifetime unit"
-msgstr ""
+msgstr "Unit waktu hidup"
 
 #: standalone/drakvpn:1015
 #, c-format
@@ -23701,26 +23951,43 @@ msgid ""
 "So, here, the lifetime units are 'min', 'min', 'sec', 'sec', 'sec' and "
 "'hour'.\n"
 msgstr ""
+"mendefinisikan waktu hidup dari waktu tertentu yang akan diajukan\n"
+"pada negosiasi fase 1. Sembarang proposal akan diterima, dan \n"
+"atribut tidak akan diajukan pada peer jika Anda tidak \n"
+"menentukannya. Mereka bisa ditentukan secara individu pada \n"
+"setiap proposal.\n"
+"\n"
+"Misalnya: \n"
+"\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 60 sec;\n"
+"\tlifetime time 12 hour;\n"
+"\n"
+"Jadi, disini, unit waktu hidup adalah 'min', 'min', 'sec', 'sec', 'sec' dan "
+"'hour'.\n"
 
 #: standalone/drakvpn:1031 standalone/drakvpn:1116
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption algorithm"
-msgstr "otentikasi"
+msgstr "Algoritma enkripsi"
 
 #: standalone/drakvpn:1033
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication algorithm"
-msgstr "otentikasi"
+msgstr "Algoritma otentikasi"
 
 #: standalone/drakvpn:1035
 #, c-format
 msgid "Compression algorithm"
-msgstr ""
+msgstr "Algoritma kompresi"
 
 #: standalone/drakvpn:1036
-#, fuzzy, c-format
+#, c-format
 msgid "deflate"
-msgstr "standar"
+msgstr "mengurangi"
 
 #: standalone/drakvpn:1043
 #, c-format
@@ -23741,11 +24008,21 @@ msgid ""
 "remote anonymous\n"
 "remote ::1 [8000]"
 msgstr ""
+"remote (alamat | anonymous) [[port]] { perintah }\n"
+"menentukan parameter untuk IKE fase 1 untuk setiap node remote.\n"
+"Port default adalah 500.  Jika anonymous ditentukan, perintah \n"
+"berlaku untuk semua peer yang tidak cocok dengan sembarang direktif\n"
+"remote lain\n"
+"\n"
+"Contoh: \n"
+"\n"
+"remote anonymous\n"
+"remote ::1 [8000]"
 
 #: standalone/drakvpn:1052
-#, fuzzy, c-format
+#, c-format
 msgid "Exchange mode"
-msgstr "mode dial"
+msgstr "Mode pertukaran"
 
 #: standalone/drakvpn:1054
 #, c-format
@@ -23757,21 +24034,27 @@ msgid ""
 "modes are acceptable. The first exchange mode is what\n"
 "racoon uses when it is the initiator.\n"
 msgstr ""
+"mendefinisikan mode pertukaran untuk fase 1 ketika racoon \n"
+"adalah inisiator. Juga berarti mode pertukaran yang diterima\n"
+"ketika racoon merupakan responder. Lebih dari satu mode dapat\n"
+"ditentukan dengan memisahkan dengan koma. Semua mode diterima.\n"
+"Mode pertukaran pertama yang digunakan oleh racoon adalah ketika\n"
+"ia menjadi inisiator.\n"
 
 #: standalone/drakvpn:1060
-#, fuzzy, c-format
+#, c-format
 msgid "Generate policy"
-msgstr "Keamanan"
+msgstr "Membuat kebijakan"
 
 #: standalone/drakvpn:1061 standalone/drakvpn:1077 standalone/drakvpn:1090
 #, c-format
 msgid "off"
-msgstr ""
+msgstr "non-aktif"
 
 #: standalone/drakvpn:1061 standalone/drakvpn:1077 standalone/drakvpn:1090
-#, fuzzy, c-format
+#, c-format
 msgid "on"
-msgstr "Turun"
+msgstr "aktif"
 
 #: standalone/drakvpn:1062
 #, c-format
@@ -23791,11 +24074,25 @@ msgid ""
 "tiator and the responder.  This directive is ignored in\n"
 "the initiator case.  The default value is off."
 msgstr ""
+"Direktif ini untuk responder.  Untuk itu Anda harus\n"
+"menentukan pasif aktif agar racoon(8) hanya menjadi \n"
+"responder.  Jika responder belum memiliki sembarang \n"
+"kebijakan pada SPD selama negosiasi fase 2, dan direktif\n"
+"aktif, racoon(8) akan memilih proposal pertama pada \n"
+"SA payload dari inisiator, dan menghasilkan entri \n"
+"kebijakan dari proposal.  Ini berguna untuk melakukan\n"
+"negosiasi dengan klien yang mendapatkan alokasi alamat IP\n"
+"secara dinamis. Perhatikan bahwa kebijakan yang tidak benar\n"
+"bisa terinstall pada SPD responder oleh initiator. Sehingga\n"
+"komunikasi lain bisa gagal jika kebijakan tersebut terinstall\n"
+"karena ketidaksesuaian kebijakan antara inisiator dan juga\n"
+"responder.  Direktif ini diabaikan pada kasus inisiator.\n"
+"Nilai default adalah non-aktif."
 
 #: standalone/drakvpn:1076
-#, fuzzy, c-format
+#, c-format
 msgid "Passive"
-msgstr "Palestina"
+msgstr "Pasif"
 
 #: standalone/drakvpn:1078
 #, c-format
@@ -23804,46 +24101,49 @@ msgid ""
 "to on.  The default value is off.  It is useful for a\n"
 "server."
 msgstr ""
+"Jika Anda tidak ingin mengawali negosiasi, tentukan\n"
+"menjadi aktif. Nilai default adalah non-aktif. Ini berguna\n"
+"untuk server."
 
 #: standalone/drakvpn:1081
 #, c-format
 msgid "Certificate type"
-msgstr ""
+msgstr "Tipe sertifikat"
 
 #: standalone/drakvpn:1083
-#, fuzzy, c-format
+#, c-format
 msgid "My certfile"
-msgstr "Pilih file"
+msgstr "Certfileku"
 
 #: standalone/drakvpn:1084
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the certificate"
-msgstr "Nama Printer"
+msgstr "Nama sertifikat"
 
 #: standalone/drakvpn:1085
 #, c-format
 msgid "My private key"
-msgstr ""
+msgstr "Kunci Privatku"
 
 #: standalone/drakvpn:1086
-#, fuzzy, c-format
+#, c-format
 msgid "Name of the private key"
-msgstr "Nama Printer"
+msgstr "Nama kunci privat"
 
 #: standalone/drakvpn:1087
-#, fuzzy, c-format
+#, c-format
 msgid "Peers certfile"
-msgstr "Pilih file"
+msgstr "Certfile peer"
 
 #: standalone/drakvpn:1088
 #, c-format
 msgid "Name of the peers certificate"
-msgstr ""
+msgstr "Nama sertifikat peer"
 
 #: standalone/drakvpn:1089
-#, fuzzy, c-format
+#, c-format
 msgid "Verify cert"
-msgstr "amat bagus"
+msgstr "Verifikasi cert"
 
 #: standalone/drakvpn:1091
 #, c-format
@@ -23851,11 +24151,13 @@ msgid ""
 "If you do not want to verify the peer's certificate for\n"
 "some reason, set this to off.  The default is on."
 msgstr ""
+"Jika Anda tidak ingin memverifikasi sertifikat peer untuk\n"
+"beberapa alasan, tentukan menjadi non-aktif. Defaultnya aktif."
 
 #: standalone/drakvpn:1093
 #, c-format
 msgid "My identifier"
-msgstr ""
+msgstr "Penandaku"
 
 #: standalone/drakvpn:1094
 #, c-format
@@ -23883,16 +24185,38 @@ msgid ""
 "\n"
 "my_identifier user_fqdn \"myemail@mydomain.com\""
 msgstr ""
+"menentukan penanda yang dikirim ke host remote dan\n"
+"tipe yang digunakan pada negosiasi fase 1. Alamat, FQDN,\n"
+"user_fqdn, keyid dan asn1dn dapat digunakan sebagai tipeid.\n"
+"mereka digunakan seperti:\n"
+"\tpenanda_ku alamat [alamat];\n"
+"\t\ttipe adalah alamat IP.  Ini adalah tipe default\n"
+"\t\tjika Anda tidak menentukan penanda yang akan digunakan.\n"
+"\tpenanda_ku user_fqdn string;\n"
+"\t\ttipe adalah USER_FQDN (user fully-qualified\n"
+"\t\tdomain name).\n"
+"\tpenanda_ku string FQDN;\n"
+"\t\ttipe adalah FQDN (fully-qualified domain name).\n"
+"\tpenanda_ku file keyid;\n"
+"\t\ttipe adalah KEY_ID.\n"
+"\tpenanda_ku asn1dn [string];\n"
+"\t\ttipe adalah nama ASN.1 yang dibedakan. Jika \n"
+"\t\tstring diabaikan, racoon(8) akan mendapatkan DN dari\n"
+"\t\tKolom Subject dari sertifikat.\n"
+"\n"
+"Contoh: \n"
+"\n"
+"penanda_ku user_fqdn \"myemail@mydomain.com\""
 
 #: standalone/drakvpn:1114
-#, fuzzy, c-format
+#, c-format
 msgid "Peers identifier"
-msgstr "Printer"
+msgstr "Penanda peer"
 
 #: standalone/drakvpn:1115
-#, fuzzy, c-format
+#, c-format
 msgid "Proposal"
-msgstr "Protokol"
+msgstr "Proposal"
 
 #: standalone/drakvpn:1117
 #, c-format
@@ -23905,16 +24229,23 @@ msgid ""
 "\n"
 "For other transforms, this statement should not be used."
 msgstr ""
+"tentukan algoritma enkripsi yang digunakan untuk\n"
+"negosiasi fase 1. Direktif ini harus didefinisikan. \n"
+"algoritma adalah salah satu dari berikut: \n"
+"\n"
+"DES, 3DES, blowfish, cast128 untuk oakley.\n"
+"\n"
+"Untuk transformasi lain, perintah ini harus tidak digunakan."
 
 #: standalone/drakvpn:1124
 #, c-format
 msgid "Hash algorithm"
-msgstr ""
+msgstr "Algoritma hash"
 
 #: standalone/drakvpn:1126
-#, fuzzy, c-format
+#, c-format
 msgid "DH group"
-msgstr "Grup"
+msgstr "Grup DH"
 
 #: standalone/drakvpn:1133
 #, c-format
@@ -23924,47 +24255,47 @@ msgstr "Perintah"
 #: standalone/drakvpn:1134
 #, c-format
 msgid "Source IP range"
-msgstr ""
+msgstr "Jangkauan IP sumber"
 
 #: standalone/drakvpn:1135
 #, c-format
 msgid "Destination IP range"
-msgstr ""
+msgstr "Jangkauan IP tujuan"
 
 #: standalone/drakvpn:1136
-#, fuzzy, c-format
+#, c-format
 msgid "Upper-layer protocol"
-msgstr "Protokol Eropa"
+msgstr "Protokol layer atas"
 
 #: standalone/drakvpn:1136 standalone/drakvpn:1143
-#, fuzzy, c-format
+#, c-format
 msgid "any"
-msgstr "Mei"
+msgstr "sembarang"
 
 #: standalone/drakvpn:1138
 #, c-format
 msgid "Flag"
-msgstr "Flag"
+msgstr "Bendera"
 
 #: standalone/drakvpn:1139
 #, c-format
 msgid "Direction"
-msgstr "Arah"
+msgstr "Tujuan"
 
 #: standalone/drakvpn:1140
 #, c-format
 msgid "IPsec policy"
-msgstr ""
+msgstr "Kebijakan IPsec"
 
 #: standalone/drakvpn:1140
-#, fuzzy, c-format
+#, c-format
 msgid "ipsec"
-msgstr "Msec"
+msgstr "ipsec"
 
 #: standalone/drakvpn:1140
-#, fuzzy, c-format
+#, c-format
 msgid "discard"
-msgstr "telah dimatikan"
+msgstr "buang"
 
 #: standalone/drakvpn:1143
 #, c-format
@@ -23972,44 +24303,44 @@ msgid "Mode"
 msgstr "Mode"
 
 #: standalone/drakvpn:1143
-#, fuzzy, c-format
+#, c-format
 msgid "tunnel"
 msgstr "Kanal"
 
 #: standalone/drakvpn:1143
-#, fuzzy, c-format
+#, c-format
 msgid "transport"
-msgstr "dipancarkan"
+msgstr "transport"
 
 #: standalone/drakvpn:1145
-#, fuzzy, c-format
+#, c-format
 msgid "Source/destination"
-msgstr "Stasiunkerja"
+msgstr "Sumber/tujuan"
 
 #: standalone/drakvpn:1146
 #, c-format
 msgid "require"
-msgstr ""
+msgstr "membutuhkan"
 
 #: standalone/drakvpn:1146
 #, c-format
 msgid "default"
-msgstr "standar"
+msgstr "default"
 
 #: standalone/drakvpn:1146
-#, fuzzy, c-format
+#, c-format
 msgid "use"
-msgstr "Mouse"
+msgstr "gunakan"
 
 #: standalone/drakvpn:1146
-#, fuzzy, c-format
+#, c-format
 msgid "unique"
-msgstr "Martinique"
+msgstr "unik"
 
 #: standalone/drakxtv:45
 #, c-format
 msgid "USA (broadcast)"
-msgstr "AS (siaran)"
+msgstr "AS (broadcast)"
 
 #: standalone/drakxtv:45
 #, c-format
@@ -24029,7 +24360,7 @@ msgstr "Kanada (kabel)"
 #: standalone/drakxtv:46
 #, c-format
 msgid "Japan (broadcast)"
-msgstr "Jepang (siaran)"
+msgstr "Jepang (broadcast)"
 
 #: standalone/drakxtv:46
 #, c-format
@@ -24039,7 +24370,7 @@ msgstr "Jepang (kabel)"
 #: standalone/drakxtv:46
 #, c-format
 msgid "China (broadcast)"
-msgstr "Cina (siaran)"
+msgstr "Cina (broadcast)"
 
 #: standalone/drakxtv:47
 #, c-format
@@ -24072,7 +24403,7 @@ msgid ""
 "Please,\n"
 "type in your tv norm and country"
 msgstr ""
-"Tolong,\n"
+"Harap,\n"
 "tuliskan standar dan daerah tv Anda"
 
 #: standalone/drakxtv:87
@@ -24088,32 +24419,32 @@ msgstr "Area:"
 #: standalone/drakxtv:93
 #, c-format
 msgid "Scanning for TV channels in progress..."
-msgstr "Kanal TV sedang di-scan ..."
+msgstr "Pencarian kanal TV sedang berjalan..."
 
 #: standalone/drakxtv:103
 #, c-format
 msgid "Scanning for TV channels"
-msgstr "Men-scan kanal TV"
+msgstr "Pencarian kanal TV"
 
 #: standalone/drakxtv:107
 #, c-format
 msgid "There was an error while scanning for TV channels"
-msgstr "Ada error saat men-scan kanal TV"
+msgstr "Terdapat kesalahan saat pencarian kanal TV"
 
 #: standalone/drakxtv:110
 #, c-format
 msgid "Have a nice day!"
-msgstr "Daagh!"
+msgstr "Selamat menikmati!"
 
 #: standalone/drakxtv:111
 #, c-format
 msgid "Now, you can run xawtv (under X Window!) !\n"
-msgstr "Kini Anda dapat menjalankan xawtv di Window X\n"
+msgstr "Sekarang, Anda bisa menjalankan xawtv (pada X Window) !\n"
 
 #: standalone/drakxtv:149
 #, c-format
 msgid "No TV Card detected!"
-msgstr "Kartu TV tak terdeteksi!"
+msgstr "Tidak ada Kartu TV yang terdeteksi!"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: standalone/drakxtv:151
@@ -24128,11 +24459,11 @@ msgid ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
-"Kartu TV tak terdeteksi. Pastikan Kartu Video/TV yg disupport Linux "
-"terhubung dengan benar.\n"
+"Tidak ada Kartu TV yang terdeteksi. Pastikan Kartu Video/TV yang didukung "
+"Linux terhubung dengan benar.\n"
 "\n"
 "\n"
-"Kunjungi database divais keras di:\n"
+"Kunjungi database perangkat keras kami di:\n"
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
@@ -24151,7 +24482,8 @@ msgstr "daftar driver alternatif untuk kartu suara ini"
 #, c-format
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "ini adalah bus fisik tempat alat tersambung (mis: PCI, USB, ...)"
+msgstr ""
+"ini adalah bus fisik tempat divais tersambung (mis: PCI, USB, ...)"
 
 #: standalone/harddrake2:29 standalone/harddrake2:144
 #, c-format
@@ -24164,7 +24496,8 @@ msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
 msgstr ""
-"- Alat PCI dan USB: daftar id PCI/USB vendor, device, subvendor dan subdevice"
+"- Divais PCI dan USB: daftar id PCI/USB vendor, device, subvendor dan "
+"subdivais"
 
 #: standalone/harddrake2:33
 #, c-format
