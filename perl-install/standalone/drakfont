@@ -218,6 +218,7 @@ sub put_font_dir {
 
 sub remove_fonts {
 #    rm_rf(@)
+# recuperer le path pour regenerer le type1inst
     mkdir_p($drakfont_dir);
     cp_af(@font_list, $drakfont_dir);
     system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
