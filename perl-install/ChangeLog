@@ -1,3 +1,39 @@
+2001/04/11  François Pons  <fpons@mandrakesoft.com>
+
+	* printerdrake.pm: make printer devices more accurate.
+	removed limitation to only one port probed
+
+	* mouse.pm: fix wacom usb tablet
+
+	* standalone/printerdrake: added missing take into account of
+	/etc/modules.conf
+
+	* detect_devices.pm: fixed printer probe (usb and parallel).
+
+2001/04/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* services.pm: have many more services tooltipped from here so we can get
+	translations afterwards
+
+	* share/po/fr.po: write the shitload of untranslated and fuzzy msg
+
+	* share/compssUsers: fix typos of rpmsrate groups
+
+2001/04/11  Pixel  <pixel@mandrakesoft.com>
+
+	* run_program.pm (rooted): don't call install_any::check_prog if rooted
+
+	* diskdrake.pm (More): fix exception relaunching
+
+	* install_any.pm (check_prog): make it work
+
+	* any.pm (setupBootloader): nicer look&feel
+
+	* standalone/drakboot: make it work (why was bootloader::install
+	commented?)
+
+	* Makefile: take cardmgr-*
+
 2001/04/11  fabman
 
 	* share/po/es.po: updated spanish .po file
