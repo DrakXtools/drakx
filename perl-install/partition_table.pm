@@ -440,6 +440,7 @@ sub adjust_main_extended {
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
     }
     if (!@{$hd->{extended} || []} && $hd->{primary}{extended}) {
+	will_tell_kernel($hd, del => $hd->{primary}{extended});
 	%{$hd->{primary}{extended}} = (); #- modify the raw entry
 	delete $hd->{primary}{extended};
     }
@@ -626,7 +627,7 @@ sub tell_kernel {
 	    } elsif ($action eq 'del') {
 		$force_reboot ||= !c::del_partition(fileno $F, $part_number);
 	    }
-	    log::l("tell kernel $action ($part_number $o_start $o_size), rebootNeeded is now " . bool2yesno($hd->{rebootNeeded}));
+	    log::l("tell kernel $action ($part_number $o_start $o_size), rebootNeeded is now " . bool2text($hd->{rebootNeeded}));
 	}
     }
     if ($force_reboot) {
