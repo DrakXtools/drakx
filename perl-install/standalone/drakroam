@@ -231,9 +231,14 @@ sub UpdateAll {
 	&UpdateRoaming;
 }
 
+sub isRoamingRunning() {
+	my $name = basename($roaming_daemon->{binary});
+	any { /\Q$name\E$/ } run_program::get_stdout("ps", "-A");
+}
+
 sub UpdateRoaming() {
 	my $name = basename($roaming_daemon->{binary});
-	my $status = (any { /\Q$name\E$/ } run_program::get_stdout("ps", "-A")) ? "on" : "off";
+	my $status = isRoamingRunning() ? "on" : "off";
 	$RoamStatus->set_text("Roaming: $status");
 	return FALSE; #- do not update again if launched on timeout
 }
@@ -314,8 +319,10 @@ sub StopRoam() {
 
 sub SetInterval() {
 	$ScanInterval = $ScanEntry->get_text;
-	StopRoam();
-	StartRoam();
+	if (isRoamingRunning()) {
+	    StopRoam();
+	    StartRoam();
+	}
 }
 
 sub ConnectNow {
