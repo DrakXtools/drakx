@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 22mdk
+Release: 23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -303,6 +303,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar 13 2003 Till Kamppeter <till@mandrakesoft.com> 9.1-23mdk
+- printerdrake: Fixed bug #417: '$' character in printer URI was not
+  correctly handled.
+- Desktop group simplification (francois).
+- Translation updates (pablo, fabian).
+
 * Thu Mar 13 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-22mdk
 - drakboot/drakx: fix #3161 (ensure right permissions on
   /etc/sysconfig/autologin for bad root umask case)
