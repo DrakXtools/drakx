@@ -255,7 +255,7 @@ sub mandrake_release() {
 }
 
 sub require_root_capability() {
-    return unless $>; # we're already root
+    return if $::testing || !$>; # we're already root
     if (check_for_xserver()) {
 	if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
 	    exec("kdesu", "--ignorebutton", "-c", "$0 @ARGV") or die N("kdesu missing");
