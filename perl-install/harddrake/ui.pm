@@ -104,7 +104,7 @@ sub detect {
     foreach (@harddrake::data::tree) {
         my ($Ident, $title, $icon, $configurator, $detector) = @$_;
         next if ref($detector) ne "CODE"; #skip class witouth detector
-        next if $Ident =~ /(MODEM|PRINTER)/ && $::testing;
+        next if $Ident =~ /(MODEM|PRINTER)/ && !$::testing;
         next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
         next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
 #    print N("Probing %s class\n", $Ident);
