@@ -441,27 +441,18 @@ sub get_kernels_and_labels() {
 	  { complete_version => $_, /(.*mdk)(.*)/ ? (ext => $2, version => $1) : (version => $_) };
       } @kernels;
 
-    my %majors;
-    foreach (@kernels) {
-	push @{$majors{$1}}, $_ if $_->{version} =~ /^(2\.\d+)/
-    }
-    while (my ($major, $l) = each %majors) {
-	$l->[0]{version} = $major if @$l == 1;
-    }
-
     if (-e "$::prefix/usr/lib/lsb") {
 	my ($kernel_24, $other) = partition { $_->{ext} eq '' && $_->{version} =~ /^\Q2.4/ } @kernels;
 	@kernels = (@$kernel_24, @$other);
     }
-    my %labels;
+
+    my %labels = ('' => $kernels[0]{complete_version});    
     foreach (@kernels) {
-	my $label = '';
-	if (exists $labels{$label}) {
-	    $label = '-' . $_->{ext} if $_->{ext};
-	}
-	if (exists $labels{$label}) {
-	    $label = '-' . $_->{version} . $_->{ext};
-	}
+	my @propositions = (
+			    if_($_->{ext}, '-' . $_->{ext}), 
+			    '-' . $_->{version} . $_->{ext},
+			   );
+	my $label = find { ! exists $labels{$_} } @propositions;
 	$labels{$label} = $_->{complete_version};
     }
     %labels;
