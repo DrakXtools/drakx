@@ -75,12 +75,12 @@ sub gtkval_register {
 	delete $refs{$ref}{$w};
 	delete $refs{$ref} if !%{$refs{$ref}};
     });
-    $refs{$ref}{$w} = [ $sub, $w ];
+    push @{$refs{$ref}{$w}}, [ $sub, $w ];
 }
 sub gtkval_modify {
     my ($ref, $val, @to_skip) = @_;
     $$ref = $val;
-    foreach (values %{$refs{$ref} || {}}) {
+    foreach (map { @$_ } values %{$refs{$ref} || {}}) {	
 	my ($f, @para) = @$_;
 	$f->(@para) if !member($f, @to_skip);
     }
