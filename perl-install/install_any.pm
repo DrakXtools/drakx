@@ -1562,7 +1562,7 @@ sub clp_on_disk() { "$::prefix/tmp/$clp_name" }
 sub move_clp_to_disk() {
     return if -e clp_on_disk();
 
-    my ($loop, $current_clp) = devices::find_clp_loop($clp_name);
+    my ($loop, $current_clp) = devices::find_clp_loop($clp_name) or return;
     log::l("move_clp_to_disk: copying $current_clp to ", clp_on_disk());
     cp_af($current_clp, clp_on_disk());
     run_program::run('losetup', $loop, clp_on_disk());
