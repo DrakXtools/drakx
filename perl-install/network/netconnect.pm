@@ -209,9 +209,9 @@ If you don't want to use the auto detection, deselect the checkbox.
       $success = ask_connect_now($netc->{internet_cnx_choice});
 
   step_3:
-    my $m = $success ? join(N("Congratulations, the network and Internet configuration is finished.
+    my $m = $success ? join('', N("Congratulations, the network and Internet configuration is finished.
 
-"), if_($::isStandalone && $in->isa('interactive_gtk'),
+"), if_($::isStandalone && $in->isa('interactive::gtk'),
 N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))) : 
       N("Problems occured during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
