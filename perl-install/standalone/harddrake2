@@ -343,7 +343,7 @@ foreach (@classes) {
         rename_field($_, 'vendor_name', 'Vendor');
         rename_field($_, 'usb_driver', 'driver');
         rename_field($_, 'usb_media_type', 'media_type');
-        foreach my $i (qw(EMULATEWHEEL MOUSETYPE XMOUSETYPE auxmouse devfs_prefix id pci_bus pci_device pci_function subid subvendor unsafe usb_bus usb_pci_bus usb_pci_device usb_vendor val vendor wacom)) { delete $_->{$i} };
+        foreach my $i (qw(EMULATEWHEEL MOUSETYPE XMOUSETYPE auxmouse devfs_prefix id pci_bus pci_device pci_function subid subvendor unsafe usb_bus usb_pci_bus usb_pci_device usb_vendor usb_id val vendor wacom)) { delete $_->{$i} };
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         foreach my $field (qw(devfs_device device)) {
