@@ -78,11 +78,17 @@ my ($modem_check_box, $printer_check_box, $current_device, $current_configurator
 
 
 #-PO Translators, please keep all "/" charaters !!!
+my %menus = (
+             'options' => N("/_Options"),
+             'help' => N("/_Help")
+             );
+
 my %menu_options = (
-                    'PRINTERS_DETECTION' => [ N("/_Options"), N("/Autodetect _printers") ],
-                    'MODEMS_DETECTION' => [ N("/_Options"), N("/Autodetect _modems") ],
-                    'JAZZ_DETECTION' => [ N("/_Options"), N("/Autodetect _jazz drives") ],
-);
+                    'PRINTERS_DETECTION' => [ $menus{options}, N("/Autodetect _printers") ],
+                    'MODEMS_DETECTION' => [ $menus{options}, N("/Autodetect _modems") ],
+                    'JAZZ_DETECTION' => [ $menus{options}, N("/Autodetect _jazz drives") ],
+                    );
+
 
 my @menu_items = 
     (
@@ -94,10 +100,10 @@ my @menu_items =
          callback => sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->active } },
      {   path => join('', @{$menu_options{JAZZ_DETECTION}}), type => '<CheckItem>',
          callback => sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->active } },
-     {   path => N("/_Help"), type => '<Branch>' },
-     {   path => N("/_Help").N("/_Help"), callback => sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } } },
+     {   path => $menus{help}, type => '<Branch>' },
+     {   path => $menus{help}.N("/_Help"), callback => sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } } },
      {
-         path => N("/_Help").N("/_Fields description"), 
+         path => $menus{help}.N("/_Fields description"), 
          callback => sub {
              if ($current_device) {
                  $in->ask_warn(N("Harddrake help"), 
@@ -108,9 +114,9 @@ my @menu_items =
                  }
              }
      },
-     {   path => N("/_Help").N("/_Report Bug"),
+     {   path => $menus{help}.N("/_Report Bug"),
          callback => sub { unless (fork()) { exec("drakbug --report harddrake2 &") } } },
-     {   path => N("/_Help").N("/_About..."), 
+     {   path => $menus{help}.N("/_About..."), 
          callback => sub {
              $in->ask_warn(N("About Harddrake"), 
                            join("", N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion:"), " $harddrake::data::version\n", 
@@ -132,28 +138,34 @@ add_icon_path('/usr/share/pixmaps/harddrake2/');
 $::noBorder = 1;
 $w = ugtk2->new(N("Harddrake2 version ") . $harddrake::data::version);
 local $::main_window;   # fake diagnostics pragma
-$::main_window = $w->{rwindow} unless $::isEmbedded;
-my ($menubar, $factory);
-unless ($::isEmbedded) {
-    $w->{window}->set_size_request(805, 550);
+my ($menubar, $factory, $opt_menu, $help_menu);
+if ($::isEmbedded) {
+    ($menubar, $factory) = create_factory_popup_menu($::Plug, @menu_items);
+    $opt_menu = $factory->get_widget("<main>" . strip_first_underscore($menus{options}));
+    print "MENU: $opt_menu => \"<main>" . strip_first_underscore($menus{options}),"\"\n";
+    $help_menu = $factory->get_widget("<main>" . strip_first_underscore($menus{help}));
+} else {
+    $::main_window = $w->{rwindow};
     ($menubar, $factory) = create_factory_menu($w->{rwindow}, @menu_items);
+    $w->{window}->set_size_request(805, 550);
 }
+
 my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
 my ($statusbar, $sig_id);
 $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            if_(!$::isEmbedded, 0, $menubar),
-                           1, create_hpaned(gtkadd(new Gtk2::Frame(N("Detected hardware")), 
+                           1, create_hpaned(gtkadd(Gtk2::Frame->new(N("Detected hardware")), 
                                                    create_scrolled_window(gtkset_size_request(my $tree = Gtk2::TreeView->new_with_model($tree_model), 350, -1))),
                                             gtkpack_(0, Gtk2::VBox->new(0, 0),
-                                                     1, gtkadd(my $frame = new Gtk2::Frame(N("Information")),
+                                                     1, gtkadd(my $frame = Gtk2::Frame->new(N("Information")),
                                                                create_scrolled_window(my $text = Gtk2::TextView->new)),
-                                                     0, my $module_cfg_button = gtksignal_connect(new Gtk2::Button(N("Configure module")),
+                                                     0, my $module_cfg_button = gtksignal_connect(Gtk2::Button->new(N("Configure module")),
                                                                                                   clicked => sub {
                                                                                                       require modules::interactive;
                                                                                                       modules::interactive::config_window($in, $current_device);
                                                                                                       gtkset_mousecursor_normal();
                                                                                                   }),
-                                                     0, my $config_button = gtksignal_connect(new Gtk2::Button(N("Run config tool")),
+                                                     0, my $config_button = gtksignal_connect(Gtk2::Button->new(N("Run config tool")),
                                                                                               # we've a configurator, let's add a button for it and show it
                                                                                               clicked => sub {
                                                                                                   return 1 if defined $pid;
@@ -167,9 +179,14 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                      ),
                                             ( 'resize1' => 1)
                                             ),
-                           0, $statusbar = new Gtk2::Statusbar,
-                           if_($::isEmbedded, 0, gtksignal_connect(my $but = new Gtk2::Button(N("Quit")),
-                                                                   'clicked' => \&quit_global))
+                           0, $statusbar = Gtk2::Statusbar->new,
+                           if_($::isEmbedded, 0, gtkpack(create_hbox(),
+                                                         gtksignal_connect(Gtk2::Button->new(N("Options")), 'event' => popup_menu($opt_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new(N("Help")), 'event' => popup_menu($help_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new(N("Quit")),
+                                                                           'clicked' => \&quit_global),
+                                                         ),
+                               )
                            )
                   );
 
@@ -289,10 +306,8 @@ $w->{rwindow}->set_position('center') unless $::isEmbedded;
 foreach (keys %menu_options) {
     my $title = strip_first_underscore(@{$menu_options{$_}});
     $options{$_} = 0 unless defined($options{$_}); # force detection by default
-    unless ($::isEmbedded) {
-        $check_boxes{$_} = $factory->get_widget("<main>" . $title);
-        $check_boxes{$_}->set_active($options{$_});    # restore saved values
-    }
+    $check_boxes{$_} = $factory->get_widget("<main>" . $title);
+    $check_boxes{$_}->set_active($options{$_});    # restore saved values
 }
 
 $textcolumn->set_min_width(350);
@@ -326,10 +341,23 @@ sub rename_field {
     my ($dev, $field, $new_field) = @_;
     if ($dev->{$field}) {
         if ($dev->{$new_field}) {
-            $dev->{$new_field} .= " ($_->{$field})";
+            $dev->{$new_field} .= " ($dev->{$field})";
         } else {
-            $dev->{$new_field} = $_->{$field};
+            $dev->{$new_field} = $dev->{$field};
         }
         delete $dev->{$field};
     }
+}
+
+sub popup_menu {
+    my ($menu) = @_;
+    sub { my (undef, $event) = @_;
+          if ($event->type eq 'button-press') {
+              $menu->popup(undef, undef, undef, undef, $event->button, $event->time);
+              # Tell calling code that we have handled this event; the buck stops here.
+              return 1;
+          }
+          # Tell calling code that we have not handled this event; pass it on.
+          return 0;
+      }
 }
