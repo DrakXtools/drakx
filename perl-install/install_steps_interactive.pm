@@ -414,7 +414,7 @@ sub choosePackages {
     $w = undef;
 
   chooseGroups:
-    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate;
+    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate && $o->{meta_class} ne 'desktop';
 
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $availableC);
