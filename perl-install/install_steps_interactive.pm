@@ -527,7 +527,38 @@ sub choosePackagesTree {
 			    sort => 1,
 			   });
 }
-
+sub loadSavePackagesOnFloppy {
+    my ($o, $packages) = @_;
+    my $choice = $o->ask_from_listf('', 
+_("Please choose load or save package selection on floppy.
+The format is the same as auto_install generated floppies."),
+				    sub { translate($_[0]{text}) },
+				    [ { text => _("Load from floppy"), code => sub {
+					    while (1) {
+						my $w = $o->wait_message(_("Package selection"), _("Loading from floppy"));
+						log::l("load package selection from floppy");
+						my $O = eval { install_any::loadO({}, 'floppy') };
+						if ($@) {
+						    $w = undef; #- close wait message.
+						    $o->ask_okcancel('', _("Insert a floppy containing package selection"))
+						      or return;
+						} else {
+						    install_any::unselectMostPackages($o);
+						    foreach (@{$O->{default_packages} || []}) {
+							my $pkg = pkgs::packageByName($packages, $_);
+							pkgs::selectPackage($packages, $pkg) if $pkg;
+						    }
+						    return 1;
+						}
+					    }
+					} },
+				      { text => _("Save on floppy"), code => sub {
+					    log::l("save package selection to floppy");
+					    install_any::g_default_packages($o, 'quiet');
+					} },
+				    ]);
+    $choice->{code} and $choice->{code}();
+}
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
 
