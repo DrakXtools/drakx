@@ -92,7 +92,7 @@ int ppcDetectSMP(void)
 }
 #endif /* __powerpc__ */
 
-#ifdef __i386__
+#if defined(__i386__) || defined(__x86_64__)
 /*
  * Copyright (c) 1996, by Steve Passe
  * All rights reserved.
@@ -495,8 +495,7 @@ int detectSMP(void)
 	/* TODO: Update to check against /proc/pal/cpuX */
     return isSMP = 1;
 #elif __x86_64__
-	/* TODO: Update when SMP machines are there */
-	return isSMP = 0;
+	return isSMP = intelDetectSMP() || intelDetectSMP_mptable();
 #else
     #error unknown architecture
 #endif
