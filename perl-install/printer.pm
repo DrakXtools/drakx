@@ -28,7 +28,7 @@ use strict;
 =cut
 
 #-#####################################################################################
-use vars qw(%thedb %printer_type %printer_type_inv $printer_type_default @papersize_type %fields $spooldir @entries_db_short @entry_db_description %descr_to_db %db_to_descr);
+use vars qw(%thedb %thedb_gsdriver %printer_type %printer_type_inv $printer_type_default @papersize_type %fields $spooldir @entries_db_short @entry_db_description %descr_to_db %db_to_descr);
 #-#####################################################################################
 
 =head2 Imports
@@ -315,6 +315,7 @@ sub read_printer_db(;$) {
 		  }
 	      }
 	    $thedb{$entryname} = $entry;
+	    $thedb_gsdriver{$entry->{GSDRIVER}} = $entry;
 	}
     }
 
@@ -388,6 +389,87 @@ my $intro_printcap_test = "
 
 ";
 
+sub read_configured_queue($) {
+    my ($entry) = @_;
+    my $current = undef;
+
+    #- read /etc/printcap file.
+    local *PRINTCAP; open PRINTCAP, "$prefix/etc/printcap" or die "Can't open printcap file $!";
+    foreach (<PRINTCAP>) {
+	chomp;
+	my $p = '(?:\{(.*?)\}|(\S+))';
+	if (/^##PRINTTOOL3##\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p(?:\s+$p)?/) {
+	    if ($current) {
+		add2hash($entry->{configured}{$current->{QUEUE}} ||= {}, $current);
+		$current = undef;
+	    }
+	    $current = {
+			TYPE => $1 || $2,
+			GSDRIVER => $3 || $4,
+			RESOLUTION => $5 || $6,
+			PAPERSIZE => $7 || $8,
+			#- ignored $9 || $10,
+			DBENTRY => $11 || $12,
+			BITSPERPIXEL => $13 || $14,
+			CRLF => $15 || $16,
+		       };
+	    print STDERR "found printer $current->{QUEUE} of type $current->{TYPE} in $prefix/etc/printcap\n";
+	} elsif (/^([^:]*):\\/) {
+	    $current->{QUEUE} = $1;
+	    print STDERR "found printer $current->{QUEUE} of type $current->{TYPE} in $prefix/etc/printcap\n";
+	} elsif (/^\s+:sd=([^:]*):\\/) {
+	    $current->{SPOOLDIR} = $1;
+	} elsif (/^\s+:lp=([^:]*):\\/) {
+	    $current->{DEVICE} = $1;
+	} elsif (/^\s+:rm=([^:]*):\\/) {
+	    $current->{REMOTEHOST} = $1;
+	} elsif (/^\s+:rp=([^:]*):\\/) {
+	    $current->{REMOTEQUEUE} = $1;
+	}
+    }
+    if ($current) {
+	add2hash($entry->{configured}{$current->{QUEUE}} ||= {}, $current);
+	$current = undef;
+    }
+
+    #- get extra parameters for SMB or NCP type queue.
+    foreach (values %{$entry->{configured}}) {
+	if ($_->{TYPE} eq 'SMB') {
+	    my $config_file = "$prefix$_->{SPOOLDIR}/.config";
+	    local *F; open F, "$config_file" or die "Can't open $config_file $!";
+	    foreach (<F>) {
+		chomp;
+		if (/^\s*share='\\\\(.*?)\\(.*?)'/) {
+		    $_->{SMBHOST} = $1;
+		    $_->{SMBSHARE} = $2;
+		} elsif (/^\s*hostip=(.*)/) {
+		    $_->{SMBHOSTIP} = $1;
+		} elsif (/^\s*user='(.*)'/) {
+		    $_->{SMBUSER} = $1;
+		} elsif (/^\s*password='(.*)'/) {
+		    $_->{SMBPASSWD} = $1;
+		} elsif (/^\s*workgroup='(.*)'/) {
+		    $_->{SMBWORKGROUP} = $1;
+		}
+	    }
+	} elsif ($_->{TYPE} eq 'NCP') {
+	    my $config_file = "$prefix$_->{SPOOLDIR}/.config";
+	    local *F; open F, "$config_file" or die "Can't open $config_file $!";
+	    foreach (<F>) {
+		chomp;
+		if (/^\s*server=(.*)/) {
+		    $_->{NCPHOST} = $1;
+		} elsif (/^\s*user='(.*)'/) {
+		    $_->{NCPUSER} = $1;
+		} elsif (/^\s*password='(.*)'/) {
+		    $_->{NCPPASSWD} = $1;
+		} elsif (/^\s*queue='(.*)'/) {
+		    $_->{NCPQUEUE} = $1;
+		}
+	    }
+	}
+    }
+}
 
 sub configure_queue($) {
     my ($entry) = @_;
@@ -462,7 +544,7 @@ sub configure_queue($) {
 
     copy_master_filter($queue_path);
 
-    #-now the printcap file
+    #-now the printcap file, note this one contains all the printer (use configured for that).
     local *PRINTCAP;
     if ($::testing) {
 	*PRINTCAP = *STDOUT;
@@ -471,35 +553,38 @@ sub configure_queue($) {
     }
 
     print PRINTCAP $intro_printcap_test;
-    printf PRINTCAP "##PRINTTOOL3##  %s %s %s %s %s %s %s%s\n",
-      $entry->{TYPE},
-	$dbentry->{GSDRIVER},
-	  $entry->{RESOLUTION},
-	    $entry->{PAPERSIZE},
-	      "{}",
-		$dbentry->{ENTRY},
-		  $entry->{BITSPERPIXEL},
-		    $entry->{CRLF} ? " 1" : "";
+    foreach (values %{$entry->{configured}}) {
+	my $db_ = $thedb{($_->{DBENTRY})} or die "no dbentry";
 
+	printf PRINTCAP "##PRINTTOOL3##  %s %s %s %s %s %s %s%s\n",
+	  $_->{TYPE} || '{}',
+	    $db_->{GSDRIVER} || '{}',
+	      $_->{RESOLUTION} || '{}',
+		$_->{PAPERSIZE} || '{}',
+		  '{}',
+		    $db_->{ENTRY} || '{}',
+		      $_->{BITSPERPIXEL} || '{}',
+			$_->{CRLF} ? " 1" : "";
 
-    print PRINTCAP "$entry->{QUEUE}:\\\n";
-    print PRINTCAP "\t:sd=$entry->{SPOOLDIR}:\\\n";
-    print PRINTCAP "\t:mx#0:\\\n\t:sh:\\\n";
+	print PRINTCAP "$_->{QUEUE}:\\\n";
+	print PRINTCAP "\t:sd=$_->{SPOOLDIR}:\\\n";
+	print PRINTCAP "\t:mx#0:\\\n\t:sh:\\\n";
 
-    if ($entry->{TYPE} eq "LOCAL") {
-	print PRINTCAP "\t:lp=$entry->{DEVICE}:\\\n";
-    } elsif ($entry->{TYPE} eq "REMOTE") {
-	print PRINTCAP "\t:rm=$entry->{REMOTEHOST}:\\\n";
-	print PRINTCAP "\t:rp=$entry->{REMOTEQUEUE}:\\\n";
-    } else {
-	#- (pcentry->Type == (PRINTER_SMB | PRINTER_NCP))
-	print PRINTCAP "\t:lp=/dev/null:\\\n";
-	print PRINTCAP "\t:af=$entry->{SPOOLDIR}/acct\\\n";
+	if ($_->{TYPE} eq "LOCAL") {
+	    print PRINTCAP "\t:lp=$_->{DEVICE}:\\\n";
+	} elsif ($_->{TYPE} eq "REMOTE") {
+	    print PRINTCAP "\t:rm=$_->{REMOTEHOST}:\\\n";
+	    print PRINTCAP "\t:rp=$_->{REMOTEQUEUE}:\\\n";
+	} else {
+	    #- (pcentry->Type == (PRINTER_SMB | PRINTER_NCP))
+	    print PRINTCAP "\t:lp=/dev/null:\\\n";
+	    print PRINTCAP "\t:af=$_->{SPOOLDIR}/acct\\\n";
+	}
+
+	#- cheating to get the input filter!
+	print PRINTCAP "\t:if=$_->{SPOOLDIR}/filter:\n";
+	print PRINTCAP "\n";
     }
-
-    #- cheating to get the input filter!
-    print PRINTCAP "\t:if=$entry->{SPOOLDIR}/filter:\n";
-
 }
 
 
