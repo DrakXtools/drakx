@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2002-03-10 11:04GMT\n"
-"Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
-"Language-Team: Norsk\n"
+"PO-Revision-Date: 2003-02-13 14:50+0100\n"
+"Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
+"Language-Team: Norsk Bokmål <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -22,7 +22,7 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
-"per-user deling bruker gruppen \"fileshare\". \n"
+"Per-bruker deling bruker gruppen \"fileshare\". \n"
 "Du kan bruke userdrake til å legge til en bruker i denne gruppen."
 
 #: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
@@ -53,6 +53,11 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
+"Vil du tillate brukere å dele noen av katalogene deres?\n"
+"Ved å tillate dette kan brukere enkelt klikke på \"Share\" i konqueror og "
+"nautilus.\n"
+"\n"
+"\"Egendefiner\"tillater egne oppsett per bruker.\n"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -141,17 +146,14 @@ msgid "Choose the default user:"
 msgstr "Velg standard bruker:"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use this feature?"
-msgstr "Ønsker du å bruke aboot?"
+msgstr "Ønsker du å bruke denne finessen?"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Jeg kan sette opp maskinen din til å automatisk logge på en bruker ved "
-"oppstart.\n"
-"Vil du bruke denne tjenesten?"
+msgstr "Jeg kan sette opp maskinen din til å automatisk logge på en bruker."
 
 #: ../../any.pm:1
 #, c-format
@@ -266,9 +268,9 @@ msgid "access to compilation tools"
 msgstr "tilgang til kompileringsverktøy"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "access to network tools"
-msgstr "tilgang til rpmverktøy"
+msgstr "tilgang til nettverksverktøy"
 
 #: ../../any.pm:1
 #, c-format
@@ -542,9 +544,9 @@ msgid "Skip"
 msgstr "Dropp"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Floppy"
-msgstr "Lagre på diskett"
+msgstr "På diskett"
 
 #: ../../any.pm:1
 #, c-format
@@ -1165,7 +1167,7 @@ msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Du kan ikke bruke JFS for partisjoner mindre enn 16 MB"
 
 #: ../../fsedit.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can't read the partition table of device %s, it's too corrupted for me :(\n"
 "I can try to go on, erasing over bad partitions (ALL DATA will be lost!).\n"
@@ -1174,7 +1176,7 @@ msgid ""
 "\n"
 "Do you agree to loose all the partitions?\n"
 msgstr ""
-"Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
+"Jeg kan ikke lese partisjonstabellen på %s, den er for ødelagt for meg :(\n"
 "Jeg kan forsøke å blanke ut dårlige partisjoner (ALLE DATA vil gå tapt!)\n"
 "Den andre løsningen er å ikke la DrakX modifisere partisjonstabellen.\n"
 "(feilen er %s)\n"
@@ -1273,7 +1275,7 @@ msgstr ""
 "kunne gjenopprettes!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
 "your installed hardware, you may (or may not), see the following entries:\n"
@@ -1305,14 +1307,17 @@ msgid ""
 "displayed here. You can click on the button to change the parameters\n"
 "associated to it."
 msgstr ""
-"Here are presented various parameters concerning your machine. Depending on\n"
-"your installed hardware, you may - or not, see the following entries:\n"
+"Her får du presentert diverse parametre angående din maskin. Avhengig av "
+"hva\n"
+" slags installert maskinvare du har, så vil du (eller muligens ikke) se de "
+"følgende typene:\n"
+" * \"Mouse\": sjekk den gjeldende museoppsettet og klikk på knappe for å "
+"endren\n"
+"den om nødvendig.\n"
 "\n"
-" * \"Mouse\": check the current mouse configuration and click on the button\n"
-"to change it if necessary.\n"
-"\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
+" * \"Keyboard\": sjekk det gjeldende keyboardoppsettet og klikk på knappen "
+"for\n"
+"å forandre om nødvendig.\n"
 "\n"
 " * \"Timezone\": DrakX gjetter tidssonen din ut i fra språket du\n"
 "har valgt. Men her, også for valget av tastatur, er du kanskje ikke\n"
@@ -1526,6 +1531,30 @@ msgid ""
 "If DrakX is not able to probe for the options which need to be passed, you\n"
 "will need to manually provide options to the driver."
 msgstr ""
+"DrakX vil nå oppdage alle IDE-enheter som er tilstede på ditt system. Det "
+"vil også\n"
+"scanne etter en eller flere PCI SCSI-kort på systemet ditt. Hvis ett SCSI-"
+"kort er tilstede,\n"
+"så DrakX automatisk installere den passende driveren.\n"
+"\n"
+"På grunn av at maskinvareoppdagelse ikke alltid klarer å oppdage enkelte "
+"enheter,\n"
+"så vil DrakX spørre deg om du har ett PCI SCSI-kort tilstede. Velg \"Yes\"\n"
+"hvis du vet at du har ett SCSI-kort installert på din maskin. Velg \"No\" "
+"hvis du\n"
+"ikke har noe SCSI-maskinvare. Hvis du er usikker, kan du sjekke listen over\n"
+"maskinvare som er oppdaget på din maskin ved å velge \"See hardware info\" "
+"og\n"
+"klikke \"OK\". Utforsk maskinvarelisten og så velg \"OK\"\n"
+"for å gå tilbake til SCSI-grensesnitt spørsmålet.\n"
+"\n"
+"Hvis du må spesifisere kontrolleren din manuelt, så vil DrakX spørre deg om\n"
+"å gjøre noen valg for det. Du burde tillate DrakX å teste maskinvaren for\n"
+"kort-spesifikke valg som maskinvaren trenger for å initialiseres. Dette\n"
+"pleier vanligvis å gå bra.\n"
+"\n"
+"Hvis DrakX ikke klarer å oppdage det riktige oppsettet som trengs, så må du\n"
+"manuelt sette det opp for driveren."
 
 #: ../../help.pm:1
 #, c-format
@@ -1549,6 +1578,32 @@ msgid ""
 "emulate an \"lpd\" server, you must turn on the \"cups-lpd\" daemon. It has\n"
 "graphical front-ends for printing or choosing printer options."
 msgstr ""
+"Her velger vi printeren for din maskin. Andre operativsystemer tilbyr "
+"kanskje\n"
+"en, men Mandrake Linux tilbyr to.\n"
+"\n"
+" * \"pdq\" -- som beter ``print, don't queue'', er valget hvis du har en \n"
+"direkte tilkobling til din printer og du vil ha muligheten til å flykte fra "
+"printerkræsj,\n"
+"og du ikke har nettverksprintere. Den vil håndtere veldig enkle "
+"nettverkstilfeller\n"
+"og er litt treg for nettverk. Velg \"pdq\" hvis dette er din første reise "
+"til GNU/Linux-land.\n"
+"Du kan gjøre egne valg selv etter installasjonen ved å kjøre PrinterDrake "
+"fra\n"
+"Mandrake Control Center og klikke på expert-knappen.\n"
+"\n"
+" * \"CUPS\" -- ``Common Unix Printing System'', er perfekt til å printe til\n"
+"din egne lokale printer, og også til printerene på andre siden av kloden. "
+"Den er\n"
+"simpel og kan opptrå som både printer og klient for det forhistoriske \"lpd"
+"\"-printingsystemet.\n"
+"Den er kompatibel med de fleste eldre, populære printersystemene. Den kan "
+"også gjøre mange\n"
+"triks, men standardoppsettet er nesten like enkelt som \"pdq\". Hvis du "
+"trenger å\n"
+"emulere en \"lpd\"-server, må du slå på \"cups-lpd\"-daemonen. Den har ett\n"
+"grafisk grensesnitt for printing eller printeroppsett."
 
 #: ../../help.pm:1
 #, c-format
@@ -1633,6 +1688,52 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer many advanced\n"
 "options, which are reserved for the expert user."
 msgstr ""
+"LILO og grub er GNU/Linux bootloadere. Normalt, så er dette steget helt "
+"automatisk.\n"
+"Faktisk så vil DrakX analysere diskens bootsektor og sette opp deretter, "
+"ettersom\n"
+"hva den finner der:\n"
+"\n"
+" * hvis en Windows bootsektor blir funnet, vil den bli byttet ut med en grub/"
+"LILO\n"
+"bootsektor. Dermed vil du ha muligheten til å laste inn både GNU/Linux eller "
+"andre\n"
+"operativsystemer.\n"
+"\n"
+" * hvis en grub eller LILO bootsektor blir funnet, vil den bli byttet ut med "
+"en ny en.\n"
+"\n"
+"hvis du er usikker, så vil DrakX vise fram en dialog med flere valg.\n"
+"\n"
+" * \"Bootloader å bruke:\": du har tre valg:\n"
+"\n"
+"    * \"GRUB\": hvis du foretrekker grub (tekstmeny);\n"
+"\n"
+"    * \"LILO med grafisk meny\": hvis du foretrekker LILO med ett grafisk "
+"grensesnitt;\n"
+"\n"
+"    * \"LILO med tekstmeny\": hvis du foretrekker lilo med tekstmeny "
+"grensesnitt.\n"
+"\n"
+" * * \"Oppstartsenhet\": I de fleste tilfeller, så vil du ikke endre "
+"standard\n"
+"(\"/dev/hda\"), men hvis du foretrekker det, så kan bootloaderen bli "
+"installert på en\n"
+"annen harddisk (feks. \"/dev/hdb\"), eller tom. på en diskett (\"/dev/fd0"
+"\");\n"
+"\n"
+" * * \"Forsink før man starter opp med standard image\": når du restarter "
+"maskinen,\n"
+"så er dette hvor lang tid brukeren har på å velge -- i bootloadermenyen,\n"
+"ett annet valg en det som er standard.\n"
+"\n"
+"!! Vær obs på at hvis du velger å ikke installere en bootlader (ved å velge\n"
+"\"Avbryt\" her), så må du være sikker på at du har en måte å starte ditt\n"
+"Mandrake Linux system! Vær også sikker på at du vet hva du gjør før du "
+"endrer\n"
+"noen av valgene. !!\n"
+"Ved å velge \"Avansert\" i denne menyen så vil du få mange avanserte valg, \n"
+"som er reservert for ekspertbrukere."
 
 #: ../../help.pm:1
 #, c-format
@@ -1672,6 +1773,51 @@ msgid ""
 "If your computer is not connected to any administrated network, you will\n"
 "want to choose \"Local files\" for authentication."
 msgstr ""
+"Dette er det mest kritisike valget med hensyn til sikkerheten på ditt\n"
+"GNU/Linux system: du må skrive inn \"root\"-passordet. \"Root\" er\n"
+"systemadministratoren og er den eneste som er autorisert til å gjøre\n"
+"oppdateringer, legge til brukere, endre på generell konfigurasjon, etc. Kort "
+"sagt,\n"
+"\"root\" kan gjøre alt! Derfor er det viktig at du velger et root-passord "
+"som er vanskelig\n"
+"å gjette -- DrakX vil si i fra hvis det er for enkelt. Som du ser, så kan du "
+"velge å\n"
+"ikke skrive inn noe passord, men det er noe vi anbefaler sterkt imot dette,\n"
+"om ikke for annet enn av en enkelt grunn: ikke tro at fordi du booter GNU/"
+"Linux\n"
+"så er dine andre operativsystemer beskyttet mot feil. Siden \"root\" kan "
+"omgå alle\n"
+"begrensninger og kan ved uhell slette alle data på en partisjon, så er det "
+"viktig å\n"
+"gjøre det vanskelig å bli \"root\".\n"
+"\n"
+"Passordet burde være en blanding av alfanummeriske tegn og være på minst 8 "
+"tegn.\n"
+"Aldri skriv ned \"root\"-passordet -- det gjør det for enkelt å bryte seg "
+"inn på systemet\n"
+"ditt. \n"
+"Uansett, du bør ikke lage passordet for langt og komplisert siden du må være "
+"i stand\n"
+"til å huske det uten altfor mye trøbbel.\n"
+"\n"
+"Passordet vil ikke bli vist på skjermen når du skriver det. Dermed må du "
+"skrive inn\n"
+"passordet to ganger for å minske sjansen for å skrive feil. Hvis du klarer å "
+"skrive passordet\n"
+"feil to ganger, så må dette passordet bli brukt første gang du logger inn.\n"
+"\n"
+"I ekspertmodus vil du ha muligheten til å koble deg til en "
+"autentikasjonsserver, som NIS eller LDAP.\n"
+"\n"
+"Hvis nettverket ditt bruker enten LDAP, NIS eller PDC Windows "
+"domenepåloggingstjeneste,\n"
+"så vennligst velg det passende til \"autentisering\". Har duingen anelse, så "
+"spørr\n"
+"nettverksoperatøren din.\n"
+"\n"
+"Hvis din maskin ikke er koblet til noe administrert nettverk, så vil du "
+"velge \"Lokale filer\" for\n"
+"autentisering."
 
 #: ../../help.pm:1
 #, c-format
@@ -1705,6 +1851,27 @@ msgid ""
 "your mouse to activate it correctly. Then test that all buttons and\n"
 "movements are correct."
 msgstr ""
+"DrakX oppdager vanligvis antall knapper på musen din. Hvis ikke, så vil den\n"
+"anta at du har en to-knappers mus og vil sette opp treknappers-emulering.\n"
+"DrakX vil automatisk oppdage om du har en PS/2, seriell eller USB mus.\n"
+"\n"
+"Hvis du ønsker å spesifisere en annerledes musetype, velg den passende typen "
+"fra\n"
+"listen du blir vist.\n"
+"\n"
+"Hvis du velger en annen mus enn hva som er forhåndsvalgt, så vil en "
+"testskjerm bli vist.\n"
+"Bruk knappene og musehjulet for å sjekke at oppsettet er riktig. Hvis musa "
+"ikke virker ordentlig,\n"
+"trykk [Space] eller [Enter] for å \"avbryte\" og velge på nytt.\n"
+"\n"
+"Noen ganger så blir ikke musehjulet automatisk oppdaget. Du vil da måtte "
+"velge\n"
+"manuelt fra listen. Vær sikker på at du velger en som er på riktig port. "
+"Etter at du har\n"
+"klikket på \"OK\" knappen, så vil et musebilde bli vist. Du må da bevege "
+"musehjulet for\n"
+"å aktivere det riktig. Så sjekk om at alle knappene og bevegelsene er riktig."
 
 #: ../../help.pm:1
 #, c-format
@@ -1861,7 +2028,7 @@ msgstr ""
 "eller partisjonen er kalt \"C:\")."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -1933,83 +2100,76 @@ msgid ""
 "may find it a useful place to store a spare kernel and ramdisk images for\n"
 "emergency boot situations."
 msgstr ""
-"På dette punktet må du velge hvilken\n"
-"partisjon(er) som skal brukes til å installere ditt nye Mandrake Linux "
-"system. Hvis partisjoner\n"
-"allerede har blitt definert (fra en tidligere installasjon av GNU/Linux "
-"eller fra\n"
-"et annet partisjoneringsverktøy), kan du bruke eksisterende partisjoner. I "
-"andre tilfeller\n"
+"På dette punktet må du velge hvilke partisjon(er) som skal brukes til å\n"
+"installere ditt nye Mandrake Linux system. Hvis partisjone allerede har\n"
+"blitt definert (fra en tidligere installasjon av GNU/Linux eller fra et "
+"annet\n"
+"partisjoneringsverktøy), kan du bruke eksisterende partisjoner. I andre "
+"tilfeller\n"
 "må harddiskpartisjoner defineres.\n"
-"\n"
 "\n"
 "For å opprette partisjoner må du først velge en harddisk. Du kan velge disk\n"
 "for partisjonering ved å klikke på \"hda\" for den første IDE disken, \"hdb"
-"\" for\n"
-"den andre eller \"sda\" for den første SCSI disken osv.\n"
-"\n"
+"\"\n"
+"for den andre eller \"sda\" for den første SCSI disken osv.\n"
 "\n"
 "For å partisjonere den valgte harddisken kan du bruke disse valgene:\n"
 "\n"
-"   * Fjern alle: dette valget sletter alle partisjoner tilgjengelig på den "
+" * \"Fjern alle\": dette valget sletter alle partisjoner tilgjengelig på den "
 "valgte harddisken.\n"
 "\n"
+" * \"Auto allokering\": dette valget lar deg automatisk opprette ext3 og "
+"swappartisjoner på den ledige plassen på harddisken din.\n"
 "\n"
-"   * Auto allokering:: dette valget lar deg automatisk opprette Ext2 og "
-"veksel partisjoner på den ledige plassen på\n"
-"     harddisken din.\n"
+" * \"Mer\": gir deg tilgang til ekstra finesser:\n"
 "\n"
+" * \"Gjenopprett partisjonstabell\": gir deg muligheten til å gjenopprette "
+"en\n"
+"tidligere lagret partisjonstabell fra en diskett.\n"
 "\n"
-"   * Redd partisjonstabell: hvis partisjonstabellen din er skadet kan du "
-"forsøke å redde den ved å bruke dette valget. Vær\n"
-"     forsiktig og husk at det kan gå galt.\n"
+" * \"Lagre til diskett\": hvis du ønsker å lagre partisjonstabellen din på "
+"en diskett\n"
+"for å kunne gjenopprette denne senere kan du bruke dett valget. Det "
+"anbefales\n"
+"på det sterkeste å bruke dette valget.\n"
 "\n"
+" * \"Redd partisjonstabell\": hvis partisjonstabellen din er skadet kan du\n"
+"forsøke å redde den ved å bruke dette valget. Vær forsiktig og husk at\n"
+"det kan gå galt.\n"
 "\n"
-"   * Angre: du kan bruke dette valget til kanselere endringene dine.\n"
+" * \"Last inn partisjonstabell på nytt\": avskaff alle forandringer og last "
+"inn\n"
+"din opprinnelige partisjonstabell. \n"
 "\n"
+" * \"Veiviser\": bruk dette valget om du vil bruke en veiviser for å "
+"partisjonere\n"
+"harddisken din. Dette er anbefalt om du ikke har gode nok kunnskaper om "
+"partisjonering.\n"
 "\n"
-"   * Last igjen: du kan bruke dette valget hvis du angrer alle endringer og "
-"vil laste partisjonstabellen du begynte med\n"
+" * \"Angre\": du kan bruke dette valget til kanselere endringene dine.\n"
 "\n"
+" * \"Gå til normal/ekspertmodus\": gir deg ekstra valg under partisjoneringa "
+"(type, valg, format)\n"
+"og gir deg mere informasjon.\n"
 "\n"
-"   * Veiviser: Hvis du ønsker å bruke en hjelper til å partisjonere "
-"harddisken din kan du bruke dette valget. Anbefales hvis\n"
-"     du ikke har god kunnskap om partisjonering.\n"
-"\n"
-"\n"
-"   * Gjenopprett fra diskett: hvis du har lagret partisjonstabellen din på "
-"en diskett under en tidligere installasjon kan du\n"
-"     gjenopprette denne ved å bruke dette valget.\n"
-"\n"
-"\n"
-"   * Lagre på diskett: hvis du ønsker å lagre partisjonstabellen din på en "
-"diskett for å kunne gjenopprette denne kan du bruke dette\n"
-"     valget. Det anbefales på det sterkeste å bruke dette valget.\n"
-"\n"
-"\n"
-"   * Ferdig: når du er ferdig med å partisjonere harddisken din bruk dette "
+" * \"Ferdig\": når du er ferdig med å partisjonere harddisken din bruk dette "
 "valget til å lagre endringene dine.\n"
 "\n"
-"\n"
-"For informasjon kan du nå valgene ved å bruke tastaturet: naviger gjennom "
-"partisjonene ved å bruke Tab og Up/Down pilene.\n"
-"\n"
+"Merk: du kan nå valgene ved å bruke tastaturet: naviger gjennom partisjonene "
+"ved å bruke [Tab] og [Opp/Ned]-pitastene.\n"
 "\n"
 "Når en partisjon er valgt kan du bruke:\n"
 "\n"
-"           * Ctrl-c til å opprette en ny partisjon (når en tom partisjon er "
-"valgt)\n"
+" * Ctrl-c til å opprette en ny partisjon (når en tom partisjon er valgt).\n"
 "\n"
-"           * Ctrl-d til å slette en partisjon\n"
+" * Ctrl-d til å slette en partisjon.\n"
 "\n"
-"           * Ctrl-m til å sette monteringspunktet\n"
-".............\n"
+" * Ctrl-m til å sette monteringspunktet.\n"
 "\n"
-".............\n"
-"Hvis du installerer på en PPV maskin, så vil du nok lage en liten "
+"Hvis du installerer på en PPC-maskin, så vil du nok lage en liten "
 "HFS'bootstrap-partisjon' på minst en megabyte for bruk\n"
 "av yaboot oppstartslasteren. Hvis du ønsker  å lage partisjonen litt større, "
-"laoss si 50 MB, så kan du kanskje lagre en ekstra kjene og ramdiskbilde for "
+"la oss si 50 MB, så kan du lagre en ekstra kjene og ramdiskbilde for "
 "nødsituasjoner."
 
 #: ../../help.pm:1
@@ -2758,7 +2918,7 @@ msgid "Yes"
 msgstr "Ja"
 
 #: ../../install_any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
 "\n"
@@ -2770,7 +2930,7 @@ msgid ""
 "\n"
 "Do you really want to install these servers?\n"
 msgstr ""
-"D har valgt følgende tjener(e): %s\n"
+"Du har valgt følgende tjener(e): %s\n"
 "\n"
 "\n"
 "Disse tjenerene er aktivert som standard. De har ingen kjente sikkerhets-\n"
@@ -2781,14 +2941,14 @@ msgstr ""
 "Ønsker du virkelig å installere disse tjenerene?\n"
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System configuration"
-msgstr "Internett-konfigurasjon"
+msgstr "Systemkonfigurasjon"
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System installation"
-msgstr "SILO-installasjon"
+msgstr "Systeminstallasjon"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2855,11 +3015,11 @@ msgid "Remove Windows(TM)"
 msgstr "Fjern Windows(TM)"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
-"Det finnes ingen FAT partisjon å forandre størrelsen på eller å bruke som "
-"loopback (ikke nok plass igjen)"
+"Det finnes ingen FAT partisjon å forandre størrelsen på(eller ikke nok plass "
+"igjen)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2917,9 +3077,9 @@ msgstr ""
 "Windows-partisjonen din er for fragmentert, vennligst kjør ``defrag'' først"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Bruk den ledige plassen på Windows partisjonen"
+msgstr "Beregner den ledige plassen på Windows partisjonen"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2941,11 +3101,11 @@ msgid "Use the free space on the Windows partition"
 msgstr "Bruk den ledige plassen på Windows partisjonen"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
-"Det finnes ingen FAT partisjon å forandre størrelsen på eller å bruke som "
-"loopback (ikke nok plass igjen)"
+"Det finnes ingen FAT partisjon til å bruke som loopback (eller ikke nok "
+"plass igjen)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3642,9 +3802,9 @@ msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reboot"
-msgstr "Root"
+msgstr "Restart"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3709,7 +3869,7 @@ msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -3719,7 +3879,7 @@ msgstr ""
 "Det virker som du har en OldWorld eller ukjent\n"
 "maskin, yaboot oppstartslasteren vil ikke virke for deg.\n"
 "Installasjonen vil fortsette, men du må\n"
-"bruke BootX for å starte din maskin."
+"bruke BootX eller andre måter for å starte din maskin."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3732,19 +3892,19 @@ msgid "Domain Admin Password"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Admin User Name"
-msgstr "Domenenavn"
+msgstr "Domeneadministrator-brukernavn"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Windows Domain"
-msgstr "NIS-domene"
+msgstr "Windows-domene"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication Windows Domain"
-msgstr "Autentisering LDAP"
+msgstr "Autentisering Windows Domene"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3845,24 +4005,24 @@ msgid "Sound card"
 msgstr "Lydkort"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "not configured"
-msgstr "Konfigurer på nytt"
+msgstr "ikke konfigurert"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network"
-msgstr "Nettverksgrensesnitt"
+msgstr "Nettverk"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical interface"
-msgstr "X ved oppstart"
+msgstr "Grafisk grensesnitt"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader"
-msgstr "Oppstartslaster som skal brukes"
+msgstr "Oppstartslaster"
 
 #: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
 #: ../../printer/printerdrake.pm:1
@@ -3954,7 +4114,7 @@ msgstr ""
 "Kontakter Mandrake Linux web-sted for å få en liste over tilgjengelige speil"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
 "have been updated after the distribution was released. They may\n"
@@ -3965,13 +4125,14 @@ msgid ""
 "\n"
 "Do you want to install the updates ?"
 msgstr ""
-"Du har nå muligheten til å laste ned pakker som har blitt sluppet\n"
-"etter at distribusjonen ble sluppet.\n"
+"Du har nå muligheten til å laste ned oppdaterte pakker. Dette er pakker som\n"
+"har blitt sluppet etter at distribusjonen ble sluppet. Dette kan være enten\n"
+"sikkerhetsoppdatering eller bugfikser.\n"
 "\n"
-"Du kan få sikkerhetsoppdateringer og bugfikser, men du trenger en\n"
-"internettoppkobling for å fortsette.\n"
+"For å laste ned disse pakkene, så må du ha en fungerende "
+"internettoppkobling.\n"
 "\n"
-"Ønsker du å installere oppdateringene?"
+"Ønsker du å installere oppdateringene ?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4101,9 +4262,9 @@ msgid "Finding packages to upgrade..."
 msgstr "Finner pakker som skal oppgraderes"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Looking at packages already installed..."
-msgstr "Du kan ikke fjerne denne pakken, den er allerede installert"
+msgstr "Ser på pakker som allerede er installert..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4111,9 +4272,9 @@ msgid "Looking for available packages..."
 msgstr "Søker etter tilgjengelige pakker"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Looking for available packages and rebuilding rpm database..."
-msgstr "Søker etter tilgjengelige pakker"
+msgstr "Søker etter tilgjengelige pakker og bygger om igjen rpm-databasen..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4224,19 +4385,19 @@ msgid "Upgrade"
 msgstr "Oppgrader"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Upgrade %s"
-msgstr "Oppgrader"
+msgstr "Oppgrader %s"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "Er dette en installering eller en oppdatering?"
+msgstr "Er dette en installering eller en oppgradering?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install/Upgrade"
-msgstr "Installer/Oppdater"
+msgstr "Installer/Oppgrader"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4326,9 +4487,9 @@ msgid "Advanced"
 msgstr "Avansert"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove"
-msgstr "Fjern skriver"
+msgstr "Fjern"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
 #, c-format
@@ -4450,14 +4611,14 @@ msgid "Thai keyboard"
 msgstr "Thai-tastatur"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (Typewriter-layout)"
-msgstr "Armensk (skrivemaskin)"
+msgstr "Tamilsk (skrivemaskin-layout)"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (ISCII-layout)"
-msgstr "Tamilsk (TSCII)"
+msgstr "Tamilsk (ISCII-layout)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4545,9 +4706,9 @@ msgid "Maltese (UK)"
 msgstr ""
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mongolian (cyrillic)"
-msgstr "Serbisk (cyrillic)"
+msgstr "Mongolsk (cyrillic)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4590,9 +4751,9 @@ msgid "Lithuanian AZERTY (old)"
 msgstr "Liauisk AZERTY (gammel)"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Laotian"
-msgstr "Lotvisk"
+msgstr "Laot"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4755,9 +4916,9 @@ msgid "Belarusian"
 msgstr "Belarusian"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bosnian"
-msgstr "Estlandsk"
+msgstr "Bosnisk"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4775,9 +4936,9 @@ msgid "Bulgarian (phonetic)"
 msgstr "Bulgarsk (phonetic)"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bengali"
-msgstr "slå på"
+msgstr "Bengalsk"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6078,9 +6239,9 @@ msgid "serial"
 msgstr "seriell"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Microsoft Explorer"
-msgstr "Microsoft IntelliMouse"
+msgstr "Microsoft Utforsker"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -6153,9 +6314,9 @@ msgid "Finish"
 msgstr "Avslutt"
 
 #: ../../my_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -6715,9 +6876,9 @@ msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr ""
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "[keyboard]"
-msgstr "Tastatur"
+msgstr "[tastatur]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -6805,9 +6966,9 @@ msgid "Exit install"
 msgstr "Avslutt installering"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install system updates"
-msgstr "Installer systemet"
+msgstr "Installer systemeoppdateringer"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6850,9 +7011,9 @@ msgid "Format partitions"
 msgstr "Formater partisjoner"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning"
-msgstr "Skriver ut"
+msgstr "Partisjonering"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7005,7 +7166,7 @@ msgid "Multi-head configuration"
 msgstr "Multi-hode konfigurasjon"
 
 #: ../../Xconfig/card.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an X server"
 msgstr "Velg en X-tjener"
 
@@ -7202,14 +7363,14 @@ msgid "256 colors (8 bits)"
 msgstr "256 farger (8 bits)"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this the correct setting?"
-msgstr "Er dette riktig?"
+msgstr "Er dette riktig oppsett?"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving in %d seconds"
-msgstr "%d sekunder"
+msgstr "Forlater om %d sekunder"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
@@ -7474,7 +7635,7 @@ msgid "Please click on a partition"
 msgstr "Vennligst klikk på en partisjon"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have one big MicroSoft Windows partition.\n"
 "I suggest you first resize that partition\n"
@@ -7612,7 +7773,7 @@ msgstr ""
 "dual-boote ditt system.\n"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -7770,7 +7931,7 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -7853,7 +8014,7 @@ msgid "File already exists. Use it?"
 msgstr "Filen eksisterer allerede. Bruke denne?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "File is already used by another loopback, choose another one"
 msgstr "Filen blir allerede brukt av en annen loopback, velg en annen"
 
@@ -7994,7 +8155,7 @@ msgid "Where do you want to mount device %s?"
 msgstr "Hvor vil du montere %s enheten?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Hvor vil du montere loopback-filen %s?"
 
@@ -8311,14 +8472,14 @@ msgid "Joystick"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner"
-msgstr "Velg et grafikk-kort"
+msgstr "Scanner"
 
 #: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown/Others"
-msgstr "Ukjent|Generisk"
+msgstr "Ukjent/Andre"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -8326,12 +8487,12 @@ msgid "Bridges and system controllers"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Modem"
-msgstr "Modell"
+msgstr "Modem"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernetcard"
 msgstr "Ethernettkort"
 
@@ -8346,29 +8507,29 @@ msgid "Webcam"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Soundcard"
 msgstr "Lydkort"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Other MultiMedia devices"
-msgstr "Andre"
+msgstr "Andre multimediaenheter"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tvcard"
 msgstr "TV-kort"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Videocard"
-msgstr "Skjermmodus"
+msgstr "Skjermkort"
 
 #: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tape"
-msgstr "Type"
+msgstr "Tape"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -8386,19 +8547,19 @@ msgid "CDROM"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disk"
-msgstr "Dansk"
+msgstr "Disk"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
-msgstr ""
+msgstr "Zip"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy"
-msgstr "Lagre på diskett"
+msgstr "Diskett"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -8455,9 +8616,9 @@ msgid "Sound trouble shooting"
 msgstr ""
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr "Det er ingen kjent driver for lydkortet ditt (%s)"
+msgstr "Feil: \"%s\" driveren for lydkortet ditt er ikke i listen"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -8475,18 +8636,18 @@ msgid "No known driver"
 msgstr "Ingen kjent driver"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Det er ingen OSS/ALSA alternative drivere for lydkortet ditt (%s) som nå "
-"bruker \"%s\""
+"Det er ingen gratis drivere for lydkortet ditt (%s), men det er en "
+"propritetær driver på \"%s\"."
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No open source driver"
-msgstr "Ingen kjent driver"
+msgstr "Ingen kjent open source driver"
 
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -8590,9 +8751,9 @@ msgid "Radio support:"
 msgstr ""
 
 #: ../../harddrake/v4l.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "PLL setting:"
-msgstr "Formatering"
+msgstr "PLL-oppsett:"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -8605,14 +8766,14 @@ msgid "Number of capture buffers:"
 msgstr ""
 
 #: ../../harddrake/v4l.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tuner type:"
-msgstr "Endre type"
+msgstr "Tuner type:"
 
 #: ../../harddrake/v4l.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Card model:"
-msgstr "Kort mem (DMA)"
+msgstr "Kortmodell:"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -8644,9 +8805,9 @@ msgid "Auto-detect"
 msgstr "Automatisk detektering"
 
 #: ../../interactive/newt.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do"
-msgstr "Ferdig"
+msgstr "Gjør"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -8783,7 +8944,7 @@ msgstr ""
 "F.eks., ``io=0x300 irq=7''"
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You may now provide options to module %s.\n"
 "Note that any address should be entered with the prefix 0x like '0x123'"
@@ -8829,9 +8990,9 @@ msgid "You can configure each parameter of the module here."
 msgstr "Du kan konfigurere hvert parameter av modulen her."
 
 #: ../../modules/parameters.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "comma separated strings"
-msgstr "Formater partisjoner"
+msgstr "kommaseparerte strenger"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -8849,9 +9010,9 @@ msgid "%d comma separated numbers"
 msgstr ""
 
 #: ../../modules/parameters.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "a number"
-msgstr "Telefonnummer"
+msgstr "et nummer"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -8904,9 +9065,9 @@ msgid "use pppoe"
 msgstr "bruk pppoe"
 
 #: ../../network/drakfirewall.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Other ports"
-msgstr "Test porter"
+msgstr "Andre porter"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -8944,7 +9105,7 @@ msgid ""
 msgstr ""
 
 #: ../../network/drakfirewall.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "drakfirewall configurator\n"
 "\n"
@@ -8952,36 +9113,36 @@ msgid ""
 "For a powerful and dedicated firewall solution, please look to the\n"
 "specialized MandrakeSecurity Firewall distribution."
 msgstr ""
-"tinyfirewall konfigurering\n"
+"drakfirewall konfigurering\n"
 "\n"
 "Dette konfigurerer en personlig brannmur for denne Mandrake Linux maskinen.\n"
 "For en kraftig dedikert brannmurløsning ta en kikk på den\n"
 "spesialiserte MandrakeSecurity Firewall distribusjonen."
 
 #: ../../network/drakfirewall.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No network card"
-msgstr "ingen nettverkskort funnet"
+msgstr "Inget nettverkskort"
 
 #: ../../network/drakfirewall.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "POP and IMAP Server"
-msgstr "LDAP-tjener"
+msgstr "POP og IMAP-tjener"
 
 #: ../../network/drakfirewall.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mail Server"
-msgstr "Databasetjener"
+msgstr "Mailtjener"
 
 #: ../../network/drakfirewall.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Server"
-msgstr "Domenenavn"
+msgstr "Domenenavntjener"
 
 #: ../../network/drakfirewall.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Web Server"
-msgstr "Tjener"
+msgstr "Webtjener"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -8989,9 +9150,9 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Zeroconf Host name"
-msgstr "Vertsnavn"
+msgstr "Ukonfigurert vertsnavn"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9077,9 +9238,9 @@ msgstr ""
 "velg et PCI-kort i neste skjermbilde."
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Which of the following is your ISDN card?"
-msgstr "Hvilket er ditt ISDN-kort?"
+msgstr "Hvilket av de følgende er ditt ISDN-kort?"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9155,9 +9316,9 @@ msgstr ""
 " ingen D-kanal (leid linje)"
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "European protocol"
-msgstr "Europaprotokollen"
+msgstr "Europeisk protokoll"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9229,14 +9390,14 @@ msgstr ""
 "\n"
 
 #: ../../network/modem.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do nothing"
-msgstr "men ikke lik"
+msgstr "Gjør ingenting"
 
 #: ../../network/modem.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install rpm"
-msgstr "Installer"
+msgstr "Installer rpm"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -9245,9 +9406,9 @@ msgid ""
 msgstr ""
 
 #: ../../network/modem.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Title"
-msgstr "Tabell"
+msgstr "Tittel"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -9420,9 +9581,9 @@ msgid "Cable connection"
 msgstr "Kabeltilkobling"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "detected"
-msgstr "oppdaget %s"
+msgstr "oppdaget"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -9440,9 +9601,9 @@ msgid "ISDN connection"
 msgstr "ISDN-tilkobling"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Winmodem connection"
-msgstr "Normal modemtilkobling"
+msgstr "Winmodemtilkobling"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -9584,9 +9745,9 @@ msgid "You are currently connected to the Internet."
 msgstr "Du er for øyeblikket koblet opp mot Internett"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
-msgstr "URLen bør begynne med \"http:\""
+msgstr "URLen bør begynne med 'ftp:' eller 'http:'"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9609,14 +9770,14 @@ msgid "Proxies configuration"
 msgstr "Konfigurasjon proxy"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Gateway address should be in format 1.2.3.4"
-msgstr "IP-adresse bør være i format 1.2.3.4"
+msgstr "Gatewayadresse bør være i format 1.2.3.4"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DNS server address should be in format 1.2.3.4"
-msgstr "IP-adresse bør være i format 1.2.3.4"
+msgstr "DNS-tjener adresse bør være i format 1.2.3.4"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9666,9 +9827,9 @@ msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adresse bør være i format 1.2.3.4"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Start at boot"
-msgstr "Startet ved oppstart"
+msgstr "Start ved oppstart"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -9681,9 +9842,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Spor id nettverkskort (nyttig for bærbare)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
+msgstr "(bootp/dhcp/ukonfigurert)"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9840,7 +10001,7 @@ msgid "Connection Configuration"
 msgstr "Konfigurasjon tilknytning."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
@@ -9849,12 +10010,12 @@ msgstr ""
 "Prøv å rekonfigurere tilkoblingen din."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Av sikkerhetsgrunner vil den bli frakoblet nå."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Systemet er nå koblet opp mot Internett."
 
@@ -9874,7 +10035,7 @@ msgid "Internet configuration"
 msgstr "Internett-konfigurasjon"
 
 #: ../../partition_table/raw.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
 "A test to check the integrity of data has failed. \n"
@@ -9883,7 +10044,8 @@ msgid ""
 msgstr ""
 "Noe som ikke er bra skjer med disken din. \n"
 "En test for å sjekke dataintegritet var mislykket. \n"
-"Dette betyr at å skrive noe til disken vil av og til ende opp som ubrukelig"
+"Dette betyr at å skrive noe til disken vil ende opp med tilfeldig,\n"
+"ubrukelig data"
 
 #: ../../printer/cups.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -10145,6 +10307,7 @@ msgstr "Skriver ut testsider"
 msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr ""
+"Klarte ikke å fjerne skriver \"%s\" fra Star Office/OpenOffice.org/GIMP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10216,7 +10379,7 @@ msgid "Printer manufacturer, model, driver"
 msgstr "Skriverprodusent, modell, driver"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "Fjerner gammel skriver \"%s\" ..."
 
@@ -10231,9 +10394,9 @@ msgid "Printer connection type"
 msgstr "Skrivertilkoblingstype"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Learn how to use this printer"
-msgstr "Vet hvordan man skal bruke denne skriveren"
+msgstr "Lær hvordan man skal bruke denne skriveren"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10282,9 +10445,9 @@ msgid "Change the printing system"
 msgstr "Endrer utskriftssystemet"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer sharing"
-msgstr "Fildeling"
+msgstr "Skriverdeling"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10297,25 +10460,28 @@ msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "Frisker opp skriverliste (for å vise alle tilgjengelige CUPS skrivere)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
 "it."
 msgstr ""
-"Her er følgende skriverkø.\n"
-"Du kan legge til flere eller endre de eksisterende."
+"De følgende skriverne er konfigurerte. Dobbeltklikk på skriveren for å endre "
+"oppsettet; for å gjøre den til standard printer; eller for å vise "
+"informasjon om den."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; to view information about it; "
 "or to make a printer on a remote CUPS server available for Star Office/"
 "OpenOffice.org/GIMP."
 msgstr ""
-"Her er følgende skriverkø.\n"
-"Du kan legge til flere eller endre de eksisterende."
+"De følgende skriverne er konfigurerte. Dobbetklikk på skriveren for å endre "
+"oppsettet; for å gjøre dem til standard skriver; for å vise informasjon om "
+"den; eller for å gjøre en skriver på en fjern CUPS-tjener tilgjengelig for "
+"Star Office/ OpenOffice.org/GIMP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10328,9 +10494,9 @@ msgid "Would you like to configure printing?"
 msgstr "Ønsker du å konfigurere en skriver?"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Preparing Printerdrake..."
-msgstr "Klargjører PrinterDrake ..."
+msgstr "Klargjører PrinterDrake..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10343,14 +10509,14 @@ msgid "Installing Foomatic..."
 msgstr "Installerer Foomatic ..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to configure printer \"%s\"!"
-msgstr "Konfigurerer skriver \"%s\" ..."
+msgstr "Klarte ikke å konfigurere skriver \"%s\"!"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring printer \"%s\"..."
-msgstr "Konfigurerer skriver \"%s\" ..."
+msgstr "Konfigurerer skriver \"%s\"..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10368,14 +10534,14 @@ msgid "Select Printer Spooler"
 msgstr "Velg skrivertkøbehandler"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing %s ..."
-msgstr "Installerer pakke..."
+msgstr "Installerer %s ..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Removing %s ..."
-msgstr "Fjerner %s"
+msgstr "Fjerner %s ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10601,7 +10767,7 @@ msgstr ""
 "dataene inn i en fritt formet kommando.\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can copy the printer configuration which you have done for the spooler %"
 "s to %s, your current spooler. All the configuration data (printer name, "
@@ -10659,9 +10825,9 @@ msgid "Printing on the printer \"%s\""
 msgstr "Skriver ut på skriver \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printing/Photo Card Access on \"%s\""
-msgstr "Skriver ut/Skanner på \"%s\""
+msgstr "Skriver ut/Fotokort tilgang på \"%s\""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10669,9 +10835,9 @@ msgid "Printing/Scanning on \"%s\""
 msgstr "Skriver ut/Skanner på \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
-msgstr "Skriver ut/Skanner på \"%s\""
+msgstr "Skriver ut/Skanner/Fotokort på \"%s\""
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -10691,6 +10857,10 @@ msgid ""
 "a particular printing job. Simply add the desired settings to the command "
 "line, e. g. \"%s <file>\".\n"
 msgstr ""
+"\n"
+"\"%s\" og \"%s\" kommandoene tillater deg også til å modifisere valgene for "
+"en spesifik skriverjobb. Bare legg til de ønskede valgene til "
+"kommandolinjen, feks. \"%s <fil>\".\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10834,7 +11004,7 @@ msgid "No test pages"
 msgstr "Ingen testsider"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please select the test pages you want to print.\n"
 "Note: the photo test page can take a rather long time to get printed and on "
@@ -10842,10 +11012,9 @@ msgid ""
 "it is enough to print the standard test page."
 msgstr ""
 "Vennligst velg testsidene du ønsker å skrive ut.\n"
-"Merk deg, fototestsiden kan ta lang tid å skrive ut,\n"
-"og på laserskrivere med for lite minne vil den ikke\n"
-"skrives ut i det hele tatt. Som regel vil det holde å\n"
-"skrive ut standard testside."
+"Merk deg, fototestsiden kan ta lang tid å skrive ut, og på laserskrivere med "
+"for lite minne vil den ikke skrives ut i det hele tatt. Som regel vildet "
+"holde å skrive ut standard testside."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15802,6 +15971,8 @@ msgid ""
 "No browser is installed on your system, Please install one if you want to "
 "browse the help system"
 msgstr ""
+"Ingen nettlser er installert på ditt system, du må installere en om du vil "
+"bruke hjelpesystemet"
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
@@ -15974,9 +16145,9 @@ msgid "path"
 msgstr ""
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Location of auto_install.cfg file"
-msgstr "Oppretter diskett for autoinstallasjon"
+msgstr "Lokalisjon for auto_install.cfg fil"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15986,22 +16157,29 @@ msgid ""
 "Leave it blank if you do not want to set up automatic installation mode.\n"
 "\n"
 msgstr ""
+"Vennligst vis hvor auto_install.cfg fila er lokalisert.\n"
+"\n"
+"La den være blanket ut om du ikke vil sette opp automatisk "
+"installasjonsmodus.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
+"Inget CD- eller DVD-image funnet, vennligst kopier over "
+"installasjonsprogrammet og rpm filene."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "No image found"
-msgstr "Ingen lokal skriver funnet!\n"
+msgstr "Inget image funnet"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation image directory"
-msgstr "Xpmac (installasjons skjermdriver)"
+msgstr "Installasjons-image katalog"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16012,16 +16190,21 @@ msgid ""
 "contents.\n"
 "\n"
 msgstr ""
+"Vennligst vis hvor installasjons-imaget vil være tilgjengelige.\n"
+"\n"
+"Hvis du ikke har en eksisterende katalog, vennligst kopier over CD- eller "
+"DVD-innholdet\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "The DHCP end ip"
-msgstr ""
+msgstr "DHCP slutt-ip"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "The DHCP start ip"
-msgstr ""
+msgstr "DHCP start-ip"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16032,21 +16215,25 @@ msgid ""
 "The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
+"DHCP-servern vil tillate andre maskine å boote ved hjelp av PXE i det gitte "
+"adresseområdet.\n"
+"\n"
+"Nettverksadressen %s brukerer nettmasken %s.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface %s (on network %s)"
-msgstr "Grensesnitt %s (bruker modul %s)"
+msgstr "Grensesnitt %s (på nettverk %s)"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
 msgstr ""
-"Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp\n"
-"mot Internett"
+"Vennligst velg hvilken nettverksadapter du ønsker å bruke for dhcp-serveren."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are about to configure your computer to install a PXE server as a DHCP "
 "server\n"
@@ -16060,23 +16247,27 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Du er i ferd med å konfigurere maskinen din til å dele Internett-"
-"tilkobling.\n"
-"Andre maskiner i nettverket ditt vil da kunne bruke denne maskinens "
-"Internett tilkobling.\n"
+"Du er i ferd med å konfigurere maskinen din til å installere en PXE-server "
+"som DHCP-server\n"
+"og en TFTP-server for å lage en installasjonsserver.\n"
+"Med denne finessen så kan andre maskiner på ditt lokale nettverk bli "
+"installerbare fra denne maskinen.\n"
 "\n"
-"Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
-"nettverk (LAN)."
+"Vær sikker på at du har konfigurert din Nettverk/Internett-tilkobling ved "
+"hjelp av drakconnect før du går videre.\n"
+"\n"
+"Merk: du trenger ett dedikert nettverkskort for å sette opp ett Lokalt "
+"Nettverk(LAN)."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation Server Configuration"
-msgstr "LAN-konfigurasjon"
+msgstr "Installasjons-server konfigurasjon"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Server Configuration"
-msgstr "LAN-konfigurasjon"
+msgstr "PXE-server konfigurasjon"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
@@ -16632,9 +16823,9 @@ msgid "/_Quit"
 msgstr "/_Avslutt"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the vendor name of the processor"
-msgstr "leverandørnavnet til enheten"
+msgstr "leverandørnavnet til prosessoren"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16642,39 +16833,39 @@ msgid "the vendor name of the device"
 msgstr "leverandørnavnet til enheten"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "The type of bus on which the mouse is connected"
-msgstr "Vennligst velg hvilken serieport musen din koblet til."
+msgstr "Busstypen musen din er tilkoblet"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Stepping of the cpu (sub model (generation) number)"
-msgstr ""
+msgstr "Serie av prosessoren (undermodell (generasjon) nummer)"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Model stepping"
-msgstr "Formatering"
+msgstr "Modellserie"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the number of the processor"
-msgstr "leverandørnavnet til enheten"
+msgstr "leverandørnavnet til prosessoren"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Processor ID"
-msgstr ""
+msgstr "Prosessorid"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "network printer port"
-msgstr ", TCP/IP vert \"%s\", port %s"
+msgstr "nettverksprinterport"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Name"
-msgstr "Navn: "
+msgstr "Navn"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16682,19 +16873,19 @@ msgid "Number of buttons"
 msgstr "Antall knapper"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Official vendor name of the cpu"
-msgstr "leverandørnavnet til enheten"
+msgstr "Leverandørnavnet til prosessoren"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Model name"
-msgstr "Modulnavn"
+msgstr "Modellnavn"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Generation of the cpu (eg: 8 for PentiumIII, ...)"
-msgstr ""
+msgstr "Generasjon av prosessoren (feks. 8 for PentiumIII, ...)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16719,22 +16910,22 @@ msgstr "Mediaklasse"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Sub generation of the cpu"
-msgstr ""
+msgstr "Undergenerering av prosessoren"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Level"
-msgstr "nivå"
+msgstr "Nivå"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Format of floppies the drive accept"
-msgstr ""
+msgstr "Diskettformater diskettstasjonen tar"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy format"
-msgstr "Formater"
+msgstr "Diskettformat"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16742,41 +16933,46 @@ msgid ""
 "Some of the early i486DX-100 chips cannot reliably return to operating mode "
 "after the \"halt\" instruction is used"
 msgstr ""
+"Noen av de tidligere i486DX-100-brikkene kan ikke returnere ordentlig "
+"tilbake til operativt modues etter at \"halt\"-instruksjonen har blitt brukt."
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Halt bug"
-msgstr ""
+msgstr "Halt feil"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
+"Tidlige pentiumer var fulle av feil og fryste når man dekodet F00F bytekode"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "F00f bug"
-msgstr ""
+msgstr "F00f feil"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
 msgstr ""
+"ja betyr at den matematiske tilleggsprosessoren har en unntaksvektor "
+"tilkoblet"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Whether the FPU has an irq vector"
-msgstr ""
+msgstr "Om matteprosessoren har en avbruddsvektor"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr ""
+msgstr "ja betyr at prosessoren har en matematisk tilleggprosessor"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Is FPU present"
-msgstr ""
+msgstr "Er matteprosessor tilgjengelig"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16785,21 +16981,24 @@ msgid ""
 "processor which did not achieve the required precision when performing a "
 "Floating point DIVision (FDIV)"
 msgstr ""
+"Tidligere Inten Pentium brikker hadde en feil i matteprosessoren som gjorde "
+"at man ikke oppnådde den nødvendige presisjonen når man gjorde \"Floating "
+"point DIVision\" (FDIV)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Fdiv bug"
-msgstr ""
+msgstr "Fdiv feil"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "CPU flags reported by the kernel"
-msgstr ""
+msgstr "Prosessorflagg rapportert av kjernen"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Flags"
-msgstr ""
+msgstr "Flagg"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16812,7 +17011,7 @@ msgid "Module"
 msgstr "Modul"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr "nytt dynamisk enhetsnavn generert av incore kjerne devfs"
 
@@ -16832,9 +17031,9 @@ msgid "Old device file"
 msgstr "Gammel enhetfil"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "This field describes the device"
-msgstr "dette feltet beskriver enheten"
+msgstr "Dette feltet beskriver enheten"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16843,51 +17042,53 @@ msgid ""
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
+"Prosessorklokkefrekvens i Mhz (MegaHertz som kan bli (grovt) målt i antall "
+"instruksjoner prosessoren klarer å utføre per sekund)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Frequency (MHz)"
-msgstr ""
+msgstr "Frekvens (MHz)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Information level that can be obtained through the cpuid instruction"
-msgstr ""
+msgstr "Informasjonsnivå kan bli anskaffet via prosessorid-instruksjonen"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Cpuid level"
-msgstr "Sikkerhetsnivå"
+msgstr "Prosessorid-nivå"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Family of the cpu (eg: 6 for i686 class)"
-msgstr ""
+msgstr "Prosessorfamilie (feks. 6 for i686-klasse)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Cpuid family"
-msgstr ""
+msgstr "Prosessorid-familie"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr ""
+msgstr "Om denne prosessoren har Cyrix 6x86 kommafeil"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
-msgstr ""
+msgstr "Kommafeil"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Size of the (second level) cpu cache"
-msgstr ""
+msgstr "Størrelse på andrenivå prosessor-hurtigminne"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Cache size"
-msgstr "skivestørrelse"
+msgstr "Hurtigminnestørrelse"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16906,7 +17107,7 @@ msgid "Location on the bus"
 msgstr "Lokasjon på bussen"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
@@ -16926,11 +17127,14 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
+"GNU/Linux kjernen trenger å kjøre kalkulasjonsberegning under oppstart for å "
+"initialisere en tidtaker. Dens resultat er lagret som \"bogomips\" som en "
+"måte for å \"måle\" prosessorens ytelse."
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Bogomips"
-msgstr ""
+msgstr "Bogomips"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16996,7 +17200,7 @@ msgstr "Bytt CD"
 #: ../../standalone/localedrake:1
 #, c-format
 msgid "The change is done, but to be effective you must logout"
-msgstr ""
+msgstr "Endringen er gjort, men for å være effektivisert så må du logge ut"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -17004,24 +17208,24 @@ msgid "Save as.."
 msgstr "Lagre Som..."
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter your email address below "
-msgstr "Vennligst prøv igjen"
+msgstr "Vennligst skriv inn epostadressen din nedenfor"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "alert configuration"
-msgstr "Internett-konfigurasjon"
+msgstr "varsel-konfigurasjon"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
-msgstr ""
+msgstr "Du vil motta en advarsel hvis lasten er høyere enn denne advarselen"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "load setting"
-msgstr "Formatering"
+msgstr "last inn oppsett"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -17029,73 +17233,73 @@ msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
 msgstr ""
+"Du vil motta en advarsel hvis en av de valgte tjenestene ikke lenger kjører"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "service setting"
-msgstr "Tjener"
+msgstr "tjenesteoppsett"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Xinetd Service"
-msgstr "Skrivertjener"
+msgstr "Xinetd-tjener"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Webmin Service"
-msgstr "Tjenester"
+msgstr "Webmin-tjeneste"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "SSH Server"
-msgstr "NIS-tjener"
+msgstr "SSH-tjener"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Samba Server"
-msgstr "NIS-tjener"
+msgstr "Samba-tjener"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Postfix Mail Server"
-msgstr "Postfix posttjener, Inn nyhetstjener"
+msgstr "Postfix posttjener"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ftp Server"
-msgstr "NIS-tjener"
+msgstr "Ftp-server"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Domain Name Resolver"
-msgstr "Domenenavn"
+msgstr "Domenenavnoppslagstjeneste"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Apache World Wide Web Server"
-msgstr ""
+msgstr "Apache World Wide Web Tjener"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to the mail configuration utility.\n"
 "\n"
 "Here, you'll be able to set up the alert system.\n"
 msgstr ""
-"Velkommen til proxy-konfigurasjonsverktøyet.\n"
+"Velkommen til mail-konfigurasjonsverktøyet.\n"
 "\n"
-"Her kan du sette opp dine http og ftp proxier\n"
-"med eller uten brukernavn og passord\n"
+"Her kan du sette opp varslingsystemet.\n"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mail alert configuration"
-msgstr "Lilo/Grub konfigurasjon"
+msgstr "E-post varslingskonfigurasjon"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Mail alert"
-msgstr ""
+msgstr "E-post varsel"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -17145,7 +17349,7 @@ msgstr "søk"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Mandrake Tools Explanation"
-msgstr ""
+msgstr "Mandrakeverktøy-forklaringer"
 
 #: ../../standalone/logdrake:1
 #, fuzzy, c-format
@@ -17158,9 +17362,9 @@ msgid "Messages"
 msgstr "meldinger"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "User"
-msgstr "Brukernavn"
+msgstr "Bruker"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -17213,9 +17417,9 @@ msgid "/File/_New"
 msgstr "/Fil/_Ny"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Show only for the selected day"
-msgstr "Vis kun for denne dag"
+msgstr "Vis kun for den valgte dag"
 
 #: ../../standalone/mousedrake:1
 #, c-format
@@ -17228,14 +17432,14 @@ msgid "Please choose your mouse type."
 msgstr "Vennligst velg din musetype."
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connect %s"
-msgstr "Koble til"
+msgstr "Koble til %s"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnect %s"
-msgstr "Koble fra"
+msgstr "Koble fra %s"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -17243,41 +17447,43 @@ msgid ""
 "Warning, another internet connection has been detected, maybe using your "
 "network"
 msgstr ""
+"Advarsel, en annen internettoppkobling har blitt oppdaget, kanskje bruker "
+"ditt nettverk"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "received"
-msgstr ""
+msgstr "mottatt"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "transmitted"
-msgstr ""
+msgstr "overført"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "received: "
-msgstr ""
+msgstr "mottatt: "
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "sent: "
-msgstr ""
+msgstr "sendt: "
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Local measure"
-msgstr "Lokale filer"
+msgstr "Lokal måling"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "average"
-msgstr ""
+msgstr "gjennomsnitt"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Color configuration"
-msgstr "Internett-konfigurasjon"
+msgstr "Farge-konfigurasjon"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -17285,41 +17491,43 @@ msgid ""
 "Connection failed.\n"
 "Verify your configuration in the Mandrake Control Center."
 msgstr ""
+"Oppkobling feilet.\n"
+"Sjekk konfigurasjonen din i Mandrake Control Center."
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
 msgid "Connection complete."
-msgstr "Oppkoblingshastighet"
+msgstr "Koblet opp."
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from the Internet complete."
-msgstr ""
+msgstr "Frakobling fra internett fullført."
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from the Internet failed."
-msgstr ""
+msgstr "Frakobling fra internett feilet."
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connecting to the Internet "
-msgstr "Koble opp mot Internett"
+msgstr "Kobler opp mot Internett"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from the Internet "
-msgstr "Koble opp mot Internett"
+msgstr "Kobler fra Internett"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wait please, testing your connection..."
-msgstr "Tester tilkoblingen din..."
+msgstr "Vennligst venter, tester tilkoblingen din..."
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Logs"
-msgstr ""
+msgstr "Logger"
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
@@ -17329,30 +17537,30 @@ msgstr "Oppkoblingstype:"
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Receiving Speed:"
-msgstr ""
+msgstr "Nedlastningshastighet:"
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
 msgid "Sending Speed:"
-msgstr "Finner enheter..."
+msgstr "Sendehastighet:"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Statistics"
-msgstr ""
+msgstr "Statistikker"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Profile "
-msgstr "Profil: "
+msgstr "Profil "
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Monitoring"
-msgstr "Nettverkskonfigurasjon"
+msgstr "Nettverksovervåkning"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reading printer data ..."
 msgstr "Leser skriverdata: ..."
 
@@ -17363,6 +17571,9 @@ msgid ""
 "You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
 "applications menu."
 msgstr ""
+"Din %s har blitt konfigurert.\n"
+"Du vil nå kunne scanne dokumentene dine ved hjelp av \"XSane\" fra "
+"Multimedia/Grafikk i applikasjonsmenyen."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17371,11 +17582,13 @@ msgid ""
 "You can launch printerdrake from the Mandrake Control Center in Hardware "
 "section."
 msgstr ""
+"%s må være konfigurert av printerdrake.\n"
+"Du kan kjøre Mandrake Conrol Center fra maskinvareseksjonen."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose device"
-msgstr "Oppstartsenhet"
+msgstr "velg enhet"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17383,36 +17596,38 @@ msgid ""
 "Scannerdrake was not able to detect your %s.\n"
 "Please select the device where your scanner is attached"
 msgstr ""
+"Scannerdrake var ikke i stand til å oppdage din %s.\n"
+"Vennligst velg enheten hvor scanneren din er tilkoblet"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is unsupported"
-msgstr ""
+msgstr "%s er ikke støttet"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is not known by this version of scannerdrake."
-msgstr ""
+msgstr "%s er ikke kjent av denne versjonen av scannerdrake."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
+msgstr "%s er ikke støttet i denne versjonen av Mandrake Linux."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select a scanner"
-msgstr "Velg et grafikk-kort"
+msgstr "Velg en scanner"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
-msgstr ""
+msgstr "%s er ikke i skannerdatabasen, konfigurere den manuelt?"
 
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "Ønsker du å konfigurere en skriver?"
+msgstr "%s ble funnet på %s, vil du autokonfigurere den?"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17425,19 +17640,19 @@ msgid "Test ports"
 msgstr "Test porter"
 
 #: ../../standalone/service_harddrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware probing in progress"
-msgstr "oppdagelse pågår"
+msgstr "Maskinvareoppdagelse pågår"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Some devices were added:\n"
-msgstr ""
+msgstr "Noen enheter ble lagt til:\n"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr ""
+msgstr "Noen enheter i \"%s\" maskinvareklassen ble fjernet:\n"
 
 #: ../../share/compssUsers:999
 msgid "Office Workstation"
@@ -17564,11 +17779,11 @@ msgstr "Bøker og howto's om Linux og fri programvare"
 
 #: ../../share/compssUsers:999
 msgid "LSB"
-msgstr ""
+msgstr "LSB"
 
 #: ../../share/compssUsers:999
 msgid "Linux Standard Base. Third party applications support"
-msgstr ""
+msgstr "Linux Standard Base. Tredjeparts programvarestøtte"
 
 #: ../../share/compssUsers:999
 msgid "Web/FTP"
@@ -17681,3 +17896,359 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "http://www.mandrakelinux.com/en/90errata.php3"
+#~ msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+
+#~ msgid "Formatting partitions"
+#~ msgstr "Formaterer partisjoner"
+
+#~ msgid ""
+#~ "Your system support multiple head configuration.\n"
+#~ "What do you want to do?"
+#~ msgstr ""
+#~ "Systemet ditt støtter konfigurasjon for flere hoder.\n"
+#~ "Hva ønsker du å gjøre?"
+
+#~ msgid "FAT"
+#~ msgstr "FAT"
+
+#~ msgid "Formatting loopback file %s"
+#~ msgstr "Formaterer loopback-fil %s"
+
+#~ msgid "Formatting"
+#~ msgstr "Formatering"
+
+#~ msgid "The network needs to be restarted"
+#~ msgstr "Nettverket må startes på nytt"
+
+#~ msgid "(bootp/dhcp)"
+#~ msgstr "(bootp/dhcp)"
+
+#, fuzzy
+#~ msgid "Local printers available on: "
+#~ msgstr "ingen tilgjengelige partisjoner"
+
+#, fuzzy
+#~ msgid "modinfo is not available"
+#~ msgstr "Ingen diskettstasjon tilgjengelig"
+
+#~ msgid "You don't have enough free space on your Windows partition"
+#~ msgstr "Du har ikke nok ledig plass på Windows partisjonen din"
+
+#~ msgid "/_Help..."
+#~ msgstr "/_Hjelp..."
+
+#~ msgid "Do you really want to leave the installation?"
+#~ msgstr "Ønsker du virkelig å forlate installasjonen?"
+
+#, fuzzy
+#~ msgid "Upgrade partition %s"
+#~ msgstr "partisjon %s"
+
+#~ msgid "Tamil (Unicode)"
+#~ msgstr "Tamilsk (Unicode)"
+
+#~ msgid "Setup filesystems"
+#~ msgstr "Oppsett filsystemer"
+
+#~ msgid "Boot from DOS/Windows (loadlin)"
+#~ msgstr "Start fra DOS/Windows (loadlin)"
+
+#~ msgid "Remove entry"
+#~ msgstr "Fjern inngang"
+
+#~ msgid "Desktop"
+#~ msgstr "Skrivebord"
+
+#~ msgid "Start Menu"
+#~ msgstr "Startmeny"
+
+#~ msgid ""
+#~ "The \"%s\" driver for your sound card is unlisted\n"
+#~ "\n"
+#~ "Please send the output of the \"lspcidrake -v\" command to\n"
+#~ "<install at mandrakesoft dot com>\n"
+#~ "with subject: unlisted sound driver \"%s\""
+#~ msgstr ""
+#~ "\"%s\" driveren for lydkortet ditt er ikke listet\n"
+#~ "\n"
+#~ "Vennligst send utskrift av \"lspcidrake -v\" kommandoen til\n"
+#~ "<install at mandrakesoft dot com>\n"
+#~ "med subject: unlisted sound driver \"%s\""
+
+#~ msgid "You must have a swap partition"
+#~ msgstr "Du må ha en vekslingspartisjon"
+
+#~ msgid "Install Class"
+#~ msgstr "Installeringsklasse"
+
+#~ msgid "Please choose one of the following classes of installation:"
+#~ msgstr "Vennligst velg en av følgende installasjonsklasser:"
+
+#~ msgid "Which installation class do you want?"
+#~ msgstr "Hvilken installasjonsklasse ønsker du?"
+
+#~ msgid "Recommended"
+#~ msgstr "Anbefalt"
+
+#~ msgid "Expert"
+#~ msgstr "Ekspert"
+
+#~ msgid "Upgrade packages only"
+#~ msgstr "Oppgrader kun pakker"
+
+#~ msgid "No root partition found to perform an upgrade"
+#~ msgstr "Ingen rotpartisjon funnet for oppgradering"
+
+#~ msgid "Root Partition"
+#~ msgstr "Rotpartisjon"
+
+#~ msgid "What is the root partition (/) of your system?"
+#~ msgstr "Hva er rotpartisjonen (/) på ditt system?"
+
+#~ msgid "ISDN card"
+#~ msgstr "ISDN-kort"
+
+#~ msgid "Specify CUPS server"
+#~ msgstr "Spesifiser CUPS tjener"
+
+#~ msgid ""
+#~ "To get access to printers on remote CUPS servers in your local network "
+#~ "you do not have to configure anything; the CUPS servers inform your "
+#~ "machine automatically about their printers. All printers currently known "
+#~ "to your machine are listed in the \"Remote printers\" section in the main "
+#~ "window of Printerdrake. When your CUPS server is not in your local "
+#~ "network, you have to enter the CUPS server IP address and optionally the "
+#~ "port number to get the printer information from the server, otherwise "
+#~ "leave these fields blank."
+#~ msgstr ""
+#~ "For å få tilgang til fjern CUPS-tjenere i ditt lokale nettverk trenger du "
+#~ "ikke å konfigurere noen ting; CUPS-tjenerene informerer maskinen din "
+#~ "automatisk om skriverene. Alle skriverene som før øyeblikket er kjent for "
+#~ "maskinen din er listet i \"Remote printers\" seksjonen i hovedvinduet til "
+#~ "Printerdrake. Når CUPS-tjeneren din ikke er i ditt lokale nettverk, må du "
+#~ "entre CUPS-tjenerens IP-adresse og evnt. portnummeret for å få skriver- "
+#~ "informasjon fra tjeneren, ellers la disse feltene være tomme."
+
+#~ msgid ""
+#~ "\n"
+#~ "Normally, CUPS is automatically configured according to your network "
+#~ "environment, so that you can access the printers on the CUPS servers in "
+#~ "your local network. If this does not work correctly, turn off \"Automatic "
+#~ "CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do "
+#~ "not forget to restart CUPS afterwards (command: \"service cups restart\")."
+#~ msgstr ""
+#~ "\n"
+#~ "Normalt er CUPS konfigurert automatisk ihht. til nettverksmiljøet ditt, "
+#~ "så du kan ha tilgang til skrivere på CUPS-tjenerene i ditt lokale "
+#~ "nettverk. Hvis dette ikke virker ordentlig, skru av \"Automatic CUPS "
+#~ "configuration\" og rediger filen /etc/cups/cupsd.conf manuelt. Ikke glem "
+#~ "å starte CUPS på nytt etterpå (kommando: \"service cups restart\")."
+
+#~ msgid "The IP address should look like 192.168.1.20"
+#~ msgstr "IP-adresse bør være i format 1.2.3.4"
+
+#~ msgid "CUPS server IP"
+#~ msgstr "CUPS tjener IP"
+
+#, fuzzy
+#~ msgid ""
+#~ "The following printer\n"
+#~ "\n"
+#~ msgstr "Følgende pakker vil bli fjernet"
+
+#, fuzzy
+#~ msgid ""
+#~ "The following packages need to be installed:\n"
+#~ " @list_of_rpm_to_install"
+#~ msgstr "Følgende pakker vil bli installert"
+
+#~ msgid "can not open /etc/inittab for reading: %s"
+#~ msgstr "kan ikke åpne /etc/inittab for lesing: %s"
+
+#, fuzzy
+#~ msgid "cpu number "
+#~ msgstr "Telefonnummer"
+
+#~ msgid ""
+#~ "You now have the opportunity to download encryption software.\n"
+#~ "\n"
+#~ "WARNING:\n"
+#~ "\n"
+#~ "Due to different general requirements applicable to these software and "
+#~ "imposed\n"
+#~ "by various jurisdictions, customer and/or end user of theses software "
+#~ "should\n"
+#~ "ensure that the laws of his/their jurisdiction allow him/them to "
+#~ "download, stock\n"
+#~ "and/or use these software.\n"
+#~ "\n"
+#~ "In addition customer and/or end user shall particularly be aware to not "
+#~ "infringe\n"
+#~ "the laws of his/their jurisdiction. Should customer and/or end user not\n"
+#~ "respect the provision of these applicable laws, he/they will incure "
+#~ "serious\n"
+#~ "sanctions.\n"
+#~ "\n"
+#~ "In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
+#~ "liable\n"
+#~ "for special, indirect or incidental damages whatsoever (including, but "
+#~ "not\n"
+#~ "limited to loss of profits, business interruption, loss of commercial "
+#~ "data and\n"
+#~ "other pecuniary losses, and eventual liabilities and indemnification to "
+#~ "be paid\n"
+#~ "pursuant to a court decision) arising out of use, possession, or the "
+#~ "sole\n"
+#~ "downloading of these software, to which customer and/or end user could\n"
+#~ "eventually have access after having sign up the present agreement.\n"
+#~ "\n"
+#~ "\n"
+#~ "For any queries relating to these agreement, please contact \n"
+#~ "Mandrakesoft, Inc.\n"
+#~ "2400 N. Lincoln Avenue Suite 243\n"
+#~ "Altadena California 91001\n"
+#~ "USA"
+#~ msgstr ""
+#~ "Du har nå mulighet til å laste ned programvare for kryptering.\n"
+#~ "\n"
+#~ "ADVARSEL:\n"
+#~ "\n"
+#~ "Pga. forskjellige krav som er tillagt denne programvaren og pålagt av "
+#~ "forskjellige\n"
+#~ "myndigheter, bør kunde og/eller sluttbruker av denne programvaren "
+#~ "forsikre seg\n"
+#~ "om at lovene i sin/deres jurisdiksjon tillater han/dem å laste ned, ha i "
+#~ "besittelse\n"
+#~ "og/eller bruke denne programvaren.\n"
+#~ "\n"
+#~ "I tillegg skal kunde og/eller sluttbruker spesielt være oppmerksom på å "
+#~ "ikke bryte\n"
+#~ "lovene i sin/deres jurisdiksjon. Skulle kunde og/eller sluttbruker ikke\n"
+#~ "respektere bestemmelsene av disse lovene, vil han/de pådra seg alvorlige\n"
+#~ "sanksjoner.\n"
+#~ "\n"
+#~ "Under ingen omstendighet skal Mandrakesoft og eller ikke sine produsenter "
+#~ "og/eller\n"
+#~ "leverandører bli holdt ansvarlige for særskilte, indirekte eller "
+#~ "tilfeldige\n"
+#~ "skader uansett hva som enn skulle (inkludert, men ikke begrenset til tap "
+#~ "av fortjeneste,\n"
+#~ "forretningsavbrudd, tap av kommersiell data og andre pengemessige tap, og "
+#~ "endelige\n"
+#~ "ansvarsforhold og erstatninger som skal betales ifølge en rettslig\n"
+#~ "avgjørelse) oppstå ut av bruk, besittelse, eller ene og alene "
+#~ "nedlastingen\n"
+#~ "av denne programvaren, som kunde og/eller sluttbruker til slutt kan ha\n"
+#~ "tilgang til etter å ha sagt seg enig i og undertegnet fremviste avtale.\n"
+#~ "\n"
+#~ "For spørsmål angående denne avtalen, vennligst kontakt \n"
+#~ "Mandrakesoft, Inc.\n"
+#~ "2400 N. Lincoln Avenue Suite 243\n"
+#~ "Altadena California 91001\n"
+#~ "USA"
+
+#~ msgid "Proxy configuration"
+#~ msgstr "Proxy-konfigurasjon"
+
+#~ msgid ""
+#~ "Welcome to the proxy configuration utility.\n"
+#~ "\n"
+#~ "Here, you'll be able to set up your http and ftp proxies\n"
+#~ "with or without login and password\n"
+#~ msgstr ""
+#~ "Velkommen til proxy-konfigurasjonsverktøyet.\n"
+#~ "\n"
+#~ "Her kan du sette opp dine http og ftp proxier\n"
+#~ "med eller uten brukernavn og passord\n"
+
+#~ msgid ""
+#~ "Please fill in the http proxy informations\n"
+#~ "Leave it blank if you don't want an http proxy"
+#~ msgstr ""
+#~ "Vennligst fill ut med http proxy informasjon\n"
+#~ "La feltet være hvis du ikke ønsker en http proxy"
+
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgid "port"
+#~ msgstr "port"
+
+#~ msgid "URL should begin with 'http:'"
+#~ msgstr "URLen bør begynne med \"http:\""
+
+#~ msgid "The port part should be numeric"
+#~ msgstr "Portnummer burde være numerisk"
+
+#~ msgid ""
+#~ "Please fill in the ftp proxy informations\n"
+#~ "Leave it blank if you don't want an ftp proxy"
+#~ msgstr ""
+#~ "Vennligst fyll ut ftp-proxy informasjonen-nLa feltet være hvis du ikke "
+#~ "ønsker en ftp-proxy"
+
+#~ msgid ""
+#~ "Please enter proxy login and password, if any.\n"
+#~ "Leave it blank if you don't want login/passwd"
+#~ msgstr ""
+#~ "Vennligst skriv inn proxy brukernavn og passord, hvis det eksisterer.\n"
+#~ "La det være hvis du ikke ønsker brukernavn/passord"
+
+#~ msgid "login"
+#~ msgstr "brukernavn"
+
+#~ msgid "password"
+#~ msgstr "passord"
+
+#~ msgid "re-type password"
+#~ msgstr "skriv inn passord på nytt"
+
+#~ msgid "The passwords don't match. Try again!"
+#~ msgstr "Passordene stemmer ikke overens. Prøv igjen!"
+
+#~ msgid "Can't write file %s"
+#~ msgstr "Kan ikke skrive fil %s"
+
+#~ msgid "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
+#~ msgstr "-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"
+
+#~ msgid "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
+#~ msgstr "-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"
+
+#~ msgid "no help implemented yet.\n"
+#~ msgstr "ingen hjelp implementert ennå.\n"
+
+#~ msgid "Please click on a medium"
+#~ msgstr "Vennligst klikk på ett media"
+
+#~ msgid "Removing LPRng..."
+#~ msgstr "Fjerner LPRng..."
+
+#~ msgid "Removing LPD..."
+#~ msgstr "Fjerner LPD..."
+
+#~ msgid "usage: drakfloppy\n"
+#~ msgstr "bruk: drakfloppy\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Usage: harddrake [-h|--help] [--test]\n"
+#~ msgstr "bruk: keyboarddrake [--expert] [tastatur]\n"
+
+#~ msgid "usage: keyboarddrake [--expert] [keyboard]\n"
+#~ msgstr "bruk: keyboarddrake [--expert] [tastatur]\n"
+
+#~ msgid "Probing %s class\n"
+#~ msgstr "Søker %s klasse\n"
+
+#~ msgid "detected on interface %s"
+#~ msgstr "oppdaget på grensesnitt %s"
+
+#~ msgid "unable to backup lilo message"
+#~ msgstr "kan ikke ta backup av lilo beskjed"
+
+#~ msgid "can't change lilo message"
+#~ msgstr "kan ikke endre lilo beskjed"
