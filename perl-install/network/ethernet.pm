@@ -1,6 +1,6 @@
 package network::ethernet;
 
-use strict;
+
 use network::network;
 use modules;
 use modules::interactive;
@@ -8,7 +8,7 @@ use detect_devices;
 use common;
 use run_program;
 use network::tools;
-use vars qw(@ISA @EXPORT);
+
 use MDK::Common::Globals "network", qw($in $prefix);
 
 @ISA = qw(Exporter);
@@ -156,10 +156,6 @@ sub go_ethernet {
     conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
     $netc->{NET_INTERFACE} = $netc->{NET_DEVICE};
     configureNetwork($netc, $intf, $first_time) or return;
-#      if ( $::isStandalone and $netc->{NET_DEVICE}) {
-#  	$in->ask_yesorno(N("Network interface"),
-#  			 N("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
-#      }
     1;
 }
 
@@ -186,7 +182,6 @@ sub configureNetwork {
     
     if ($last->{BOOTPROTO} !~ /static/) {
 	$netc->{minus_one} = 1;
-	$netc->{DHCP} = 1;
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
 	$in->ask_from(N("Configuring network"),
 N("Please enter your host name if you know it.
@@ -194,7 +189,7 @@ Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
 		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
-			{ label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
+			if_($netc->{ZEROCONF}, { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} }),
 		      ]) or goto configureNetwork_step_1;
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;

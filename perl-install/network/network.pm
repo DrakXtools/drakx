@@ -3,14 +3,14 @@ package network::network; # $Id$wir
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use strict;
+
 use Socket;
 use common;
 use detect_devices;
 use run_program;
 use any;
 use log;
-use vars qw(@ISA @EXPORT);
+
 
 @ISA = qw(Exporter);
 @EXPORT = qw(resolv configureNetworkIntf netmask dns is_ip masked_ip findIntf addDefaultRoute read_all_conf dnsServers guessHostname configureNetworkNet read_resolv_conf read_interface_conf add2hosts gateway configureNetwork2 write_conf sethostname down_it read_conf write_resolv_conf up_it);
@@ -75,9 +75,9 @@ sub write_conf {
 
 sub write_zeroconf {
     my ($file, $netc);
-    my %zeroconf_file = getVarsFromSh($file) or die "cannot open file $file: $!";
+    my %zeroconf_file = getVarsFromSh($file) or die "$file isn't installed";
     $zeroconf_file{hostname} = $netc->{ZEROCONF_HOSTNAME};
-    setVarsInSh($file, %zeroconf_file);
+    setVarsInSh($file, \%zeroconf_file);
 }
 
 sub write_resolv_conf {
@@ -301,7 +301,7 @@ Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4).");
     }
     my $auto_ip = $intf->{BOOTPROTO} !~ /static/;
-    my ($dhcp, $zeroconf, $onboot) = (1, 1, 1);
+    my ($zeroconf, $onboot) = (1, 1);
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
@@ -312,8 +312,7 @@ notation (for example, 1.2.3.4).");
 	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $auto_ip } },
 	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $auto_ip } },
 	           if_(!$::expert, { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp/zeroconf)") }),
-	           if_($::expert, { label => N("Automatic IP"), val => \$auto_ip, type => "bool" },
-		       { val => \$dhcp, type => "bool", text => N("bootp/dhcp"), disabled => sub { !$auto_ip } },
+	           if_($::expert, { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp)") },
 		       { val => \$zeroconf, type => "bool", text => N("zeroconf"), disabled => sub { !$auto_ip } },
 		       { label => N("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
@@ -333,13 +332,9 @@ notation (for example, 1.2.3.4).");
 	         ],
 	         complete => sub {
 		     
-		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($dhcp, "dhcp") , if_($zeroconf, "zeroconf")) : "static";
-		     
-		     if ($auto_ip && !$dhcp && !$zeroconf) {
-			 $in->ask_warn('', N("For an Automatic IP you have to select at least one protocol : dhcp or zeroconf"));
-			 return 1;
-		     }
-		     return 0 if $auto_ip;
+		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp") , if_($zeroconf, "zeroconf")) : "static";
+		     $netc->{DHCP} = $auto_ip;
+		     $netc->{ZEROCONF} = $zeroconf if $auto_ip;
 
 		     if (my @bad = map_index { if_(!is_ip($intf->{$_}), $::i) } @fields) {
 			 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
@@ -497,20 +492,11 @@ sub configureNetwork2 {
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
-    
-    if (any { $_->{BOOTPROTO} =~ /dhcp/ } values %$intf) {
-	$in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
-    }
-    if (any { $_->{BOOTPROTO} =~ /zeroconf/ } values %$intf) {
- 	$in->do_pkgs->install(qw(tmdns zcip));
-    }
-    if (any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
-	$in->do_pkgs->install('pump');
-    }
-    #-res_init();		#- reinit the resolver so DNS changes take affect
-    
-    write_zeroconf('/etc/tmdns.conf', $netc) if $netc->{ZEROCONF_HOSTNAME};
 
+    $netc->{DHCP} && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
+    $netc->{ZEROCONF} && $in->do_pkgs->install(qw(tmdns zcip)) and write_zeroconf('/etc/tmdns.conf', $netc);      
+    any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
+            
     proxy_configure($::o->{miscellaneous});
 }
 
