@@ -1,3 +1,40 @@
+2001/08/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/adsl.c: 
+	  - fix problem of clashing user/pass between adsl and ftp/http in case
+	of automatic installs
+	  - update doc on automatic install parameters (doc/TECH-INFOS)
+
+	* mdk-stage1/doc/TECH-INFOS: 
+	  - small update
+	  - fix problem of clashing user/pass between adsl and ftp/http in case
+	of automatic installs
+	  - update doc on automatic install parameters (doc/TECH-INFOS)
+
+2001/08/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/no.po: updated Norwegian file
+
+2001/08/02  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: instead of testing if ref($in) or ref($o) contains
+	/gtk/, test if interactive_gtk is in ISA of the object
+	add jfs support
+
+	* install_steps_interactive.pm, services.pm, install_interactive.pm,
+	network/netconnect.pm, Xconfigurator.pm: instead of testing if ref($in)
+	or ref($o) contains /gtk/, test if interactive_gtk is in ISA of the
+	object
+
+	* partition_table.pm: JFS support
+	add jfs support
+
+	* fsedit.pm, diskdrake.pm: JFS support
+
+	* tools/ntp_servers.pl, timezone.pm: update ntp servers list
+
+	* fs.pm, share/list: add jfs support
+
 2001/08/02  Pixel  <pixel@mandrakesoft.com>
 
 	* tools/ntp_servers.pl, timezone.pm: update ntp servers list
