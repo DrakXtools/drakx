@@ -43,9 +43,9 @@
 #  cdrw: /sys/dev/cdrom/info   
 #        /scsi/host0/bus0/target4/lun0   #   
 #  tar --use-compress-prog=bzip2 xf foo.tar.bz2   
-
-# todo today;   new gi
-#		ftp 
+#
+#  don't forget to build floppy boot
+#
 
 
 
@@ -1040,17 +1040,26 @@ sub wizard_step2 {
 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
 						      0, my $check_restore_sys = new Gtk::CheckButton(_("on Hard Drive")),
 						      1, new Gtk::VBox(0, 5),
-						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {filedialog()  }),
+						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {
+							  ${$central_widget}->destroy();
+							  advanced_where_hd();
+							  }),
 						      ),
 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
 						      0, my $check_restore_user = new Gtk::CheckButton(_("across Network")),
 						      1, new Gtk::VBox(0, 5),
-						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {filedialog()  }),
+						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {
+							  ${$central_widget}->destroy();
+							  advanced_where_net();
+							  }),
 						      ),
 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
 						      0, my $check_restore_other = new Gtk::CheckButton(_("on CDROM")),
 						      1, new Gtk::VBox(0, 5),	
-						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {filedialog()  }),
+						      0, gtksignal_connect(new Gtk::Button(_("Configure it")), clicked => sub {
+							  ${$central_widget}->destroy();
+							  advanced_where_cd();
+							  }),
 						      ),
 						      1, new Gtk::VBox(0, 5),
 						      ),
