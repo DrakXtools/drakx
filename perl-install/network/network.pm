@@ -518,6 +518,9 @@ sub wlan_ng_configure {
                                     dot11WEPDefaultKey0 => qq("$ethntf->{WIRELESS_ENC_KEY}")
                                 )
                             });
+        #- hide settings for non-root users
+        chmod 0600, $wlan_conf_file;
+        chmod 0600, $wlan_ssid_file;
     }
     #- apply settings on wlan interface
     require services;
