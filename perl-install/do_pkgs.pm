@@ -65,7 +65,7 @@ sub check_kernel_module_packages {
                                   map {
                                       $base_name . '-' . bootloader::vmlinuz2version($_);
                                   } bootloader::installed_vmlinuz());
-    my @ext = if_($o_ext_name, $do->are_available($o_ext_name));
+    my @ext = $o_ext_name && $do->are_available($o_ext_name);
 
     log::l("found kernel module packages $_") foreach @rpms, @ext;
 
