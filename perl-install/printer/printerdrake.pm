@@ -4566,7 +4566,7 @@ sub configure_queue {
     $printer->{complete} = 1;
     my $retval = printer::main::configure_queue($printer);
     $printer->{complete} = 0;
-    if (!$retval) {
+    if (!$retval && !$printer->{noninteractive}) {
 	local $::isWizard = 0;
 	$in->ask_warn(N("Printerdrake"),
 		      N("Failed to configure printer \"%s\"!",
@@ -5121,7 +5121,7 @@ sub edit_printer {
     $printer->{NEW} = 0;
 
     while (defined($printer->{QUEUE}) || 
-	   defined($queue)) {  # Do not when current queue
+	   defined($queue)) {  # Do not continue when current queue
 	                       # is deleted
 	# Modify a queue, ask which part should be modified
 #	$in->set_help('modifyPrinterMenu') if $::isInstall;
@@ -5224,11 +5224,12 @@ What do you want to modify on this printer?",
 		choose_printer_type($printer, $in, $upNetwork) &&
 		    setup_printer_connection($printer, $in, $upNetwork) &&
 		    #get_db_entry($printer, $in) &&
-		    #get_printer_info($printer, $in) &&
+		    get_printer_info($printer, $in) &&
 		    configure_queue($printer, $in);
 	    } elsif ($modify eq N("Printer name, description, location")) {
 		choose_printer_name($printer, $in) and
-		    configure_queue($printer, $in);
+		    get_printer_info($printer, $in) and
+		    configure_queue($printer, $in) or next;
 		# Delete old queue when it was renamed
 		if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
 		    my $_w = $in->wait_message(

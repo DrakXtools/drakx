@@ -211,7 +211,7 @@ sub resetinfo($) {
     $printer->{QUEUE} = "";
     $printer->{OLD_QUEUE} = "";
     $printer->{OLD_CHOICE} = "";
-    $printer->{ARGS} = "";
+    $printer->{ARGS} = {};
     $printer->{DBENTRY} = "";
     $printer->{DEFAULT} = "";
     $printer->{currentqueue} = {};
@@ -1927,7 +1927,7 @@ sub configure_queue($) {
 			   ("--ppd",
 			    ($printer->{currentqueue}{ppd} !~ m!^/! ?
 			     "/usr/share/cups/model/" : "") .
-			    $printer->{currentqueue}{ppd}) : "") :
+			    $printer->{currentqueue}{ppd}) : ()) :
 			  ("-d", "raw"))),
 			"-N", $printer->{currentqueue}{desc},
 			"-L", $printer->{currentqueue}{loc},
