@@ -224,7 +224,7 @@ sub reallyChooseGroups {
 	   gtkpack_($w->create_box_with_title(N("Package Group Selection")),
 		    1, $o->{gtk_display_compssUsers}->($entry),
 		    1, '',
-		   0, gtknew('HBox', children_loose => [
+		    0, gtknew('HBox', children_loose => [
 			  gtknew('Button', text => N("Help"), clicked => $o->interactive_help_sub_display_id('choosePackages')),
 			  $w_size,
 			  if_($individual,
@@ -235,7 +235,7 @@ sub reallyChooseGroups {
 		  ),
 	  );
     $w->main;
-    1;    
+    1;
 }
 
 sub choosePackagesTree {
@@ -634,11 +634,12 @@ sub summary_prompt {
 
 sub deselectFoundMedia {
     #- group by CD
-    my ($o, $hdlists) = @_;
+    my ($o, $hdlists, $mediumsize) = @_;
     my %cdlist;
     my @hdlist2;
     my @corresp;
     my $i = 0;
+    my $totalsize = 0;
     foreach (@$hdlists) {
 	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/;
 	if (!$cd || !@{$cdlist{$cd} || []}) {
@@ -652,15 +653,20 @@ sub deselectFoundMedia {
 	    $cdlist{$1} ||= [];
 	    push @{$cdlist{$1}}, $i;
 	}
+	$mediumsize->{$_->[0]} == 0 and $totalsize = -1; #- don't check size, total medium size unknown
+	$totalsize >= 0 and $totalsize += $mediumsize->{$_->[0]};
 	++$i;
     }
     my @selection = (1) x @hdlist2;
     my $copy_rpms_on_disk = 0;
+    #- check available size for copying rpms from infos in hdlists file
+    if ($totalsize >= 0) {
+	# TODO my $availvar = install_any::getAvailableSpace_mounted('/var');
+    }
     if ($o->{method} !~ /-iso$/) {
 	my $w = ugtk2->new("");
 	$i = -1;
 	$w->sync;
-	#- TODO check available size for copying rpms from infos in hdlists file
 	ugtk2::gtkadd(
 	    $w->{window},
 	    gtkpack(

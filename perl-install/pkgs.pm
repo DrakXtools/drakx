@@ -404,7 +404,7 @@ sub psUsingHdlists {
 
     #- parse hdlists file.
     my $medium_name = $o_initialmedium || 1;
-    my @hdlists;
+    my (@hdlists, %mediumsize);
     foreach (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
@@ -416,16 +416,23 @@ sub psUsingHdlists {
 	#- in this hdlist is allowed
 	if (/^askmedia/) { $deselectionAllowed = 1; next }
 	my $cdsuppl = index($medium_name, 's') >= 0;
-	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die qq(invalid hdlist description "$_" in hdlists file);
-	push @hdlists, [ $2, $medium_name, $3, $4, !$1, 
+	my ($noauto, $hdlist, $rpmsdir, $descr, $size) = m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*([^(]*)(\(.+\))?$/
+	    or die qq(invalid hdlist description "$_" in hdlists file);
+	$descr =~ s/\s+$//;
+	push @hdlists, [ $hdlist, $medium_name, $rpmsdir, $descr, !$noauto, 
 	    #- hdlist path, suppl CDs are mounted on /mnt/cdrom :
-	    $o_hdlistsprefix ? ($is_ftp ? "media/media_info/$2" : "$o_hdlistsprefix/media/media_info/$2") : undef,
+	    $o_hdlistsprefix ? ($is_ftp ? "media/media_info/$hdlist" : "$o_hdlistsprefix/media/media_info/$hdlist") : undef,
 	];
+	if ($size) {
+	    ($mediumsize{$hdlist}) = $size =~ /(\d+)/;
+	} else {
+	    $mediumsize{$hdlist} = 0;
+	}
 	$cdsuppl ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
     }
     my $copy_rpms_on_disk = 0;
     if ($deselectionAllowed && !defined $o_initialmedium) {
-	(my $finalhdlists, $copy_rpms_on_disk) = $o->deselectFoundMedia(\@hdlists);
+	(my $finalhdlists, $copy_rpms_on_disk) = $o->deselectFoundMedia(\@hdlists, \%mediumsize);
 	@hdlists = @$finalhdlists;
     }
 
