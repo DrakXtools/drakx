@@ -605,13 +605,13 @@ characters long. It should never be written down.
 Do not make the password too long or complicated, though: you must be able to
 remember it without too much effort."),
 
-setRootPasswordMd5 =>
- __("To enable a more secure system, you should select \"Use shadow file\" and
-\"Use MD5 passwords\"."),
+setRootPasswordAuth =>
+ __("If your network uses LDAP (or NIS) protocol for authentication, select
+\"LDAP\" (or \"NIS\") as authentication. If you don't know, ask your network
+administrator.
 
-setRootPasswordNIS =>
- __("If your network uses NIS, select \"Use NIS\". If you don't know, ask your
-network administrator."),
+If your computer is not connected to any administrated network, you may want to
+choose \"Local files\" for authentication."),
 
 addUser =>
  __("You may now create one or more \"regular\" user account(s), as
