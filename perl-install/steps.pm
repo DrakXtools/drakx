@@ -25,13 +25,13 @@ use common;
   addUser            => [ __("Add a user"), 1, 1, '', "installPackages", 'user' ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '', "formatPartitions", 'network' ],
   summary            => [ __("Summary"), 1, 0, '', "installPackages", 'summary' ],
-  installUpdates     => [ __("Install system updates"), 1, 1, '',  ["installPackages", "configureNetwork", "summary"], '' ],
   configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages", 'services' ],
   setupBootloader    => [ __("Install bootloader"), 1, 0, '', "installPackages", 'bootloader' ],
 if_((arch() !~ /alpha/) && (arch() !~ /ppc/),
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "installPackages", 'bootdisk' ],
 ),
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"], 'X' ],
+  installUpdates     => [ __("Install system updates"), 1, 1, '',  ["installPackages", "configureNetwork", "summary"], '' ],
   exitInstall        => [ __("Exit install"), 0, 0, '!$::expert && !$::live', '', 'exit' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
