@@ -510,7 +510,7 @@ sub installPackages {
 	    $progress->update($_[2] ? $_[1] / $_[2] : 0);
 
 	    my $dtime = time() - $start_time;
-	    my $ratio = $total_size ? ($_[1] + $current_total_size) / $total_size : 0;
+	    my $ratio = $total_size ? ($_[1] + $current_total_size) / $total_size : 0; $ratio >= 1 and $ratio = 1;
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
 	    $progress_total->update($ratio);
