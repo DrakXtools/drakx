@@ -671,7 +671,7 @@ Please choose the minimal installation you want"), [ __("Base system only"), __(
 	    $o->{default_packages} = [];
 	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
 	} else {
-	    install_any::setDefaultPackage($o);
+	    install_any::setDefaultPackages($o);
 	    $o->{compssUsersChoice}{X} = $type eq __('With X');
 	}
 	install_any::unselectMostPackages($o);
