@@ -671,10 +671,12 @@ sub ask_from__add_modify_removeW {
 sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
 
-    my $w = ugtk2->new($title, %$o, grab => 1, pop_it => 1, if__($::main_window, transient => $::main_window));
+    my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
+    my $w = ugtk2->new($title, %$o, grab => 1, if__($::main_window, transient => $::main_window));
     gtkadd($w->{window}, my $hbox = Gtk2::HBox->new(0,0));
     $hbox->pack_start(my $box = Gtk2::VBox->new(0,0), 1, 1, 10);  
-    $box->pack_start($_, 1, 1, 4) foreach my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
+    $box->pack_start(shift @l, 0, 0, 4);
+    $box->pack_start($_, 1, 1, 4) foreach @l;
 
     ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1; 0 });
     $w->{rwindow}->set_position('center') if $::isStandalone && !$w->{isEmbedded} && !$w->{isWizard};
