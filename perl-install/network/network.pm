@@ -341,7 +341,7 @@ sub read_all_conf {
     add2hash($netc, read_resolv_conf());
     add2hash($netc, read_tmdns_conf("$::prefix/etc/tmdns.conf")) if -r "$::prefix/etc/tmdns.conf";
     foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
-	if (/^ifcfg-([A-Za-z0-9:]+)$/ && $1 ne 'lo') {
+	if (/^ifcfg-([A-Za-z0-9.:]+)$/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
 	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
 	}
