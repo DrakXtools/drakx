@@ -38,7 +38,7 @@ our %adsl_data = (
                   { 
                    vpi => 8, 
                    vci => 23,
-                   Encapsulation => 4,
+                   Encapsulation => 6,
                    dnsServer2 => '213.228.0.68',
                    dnsServer3 => '212.27.32.176',
                    method => 'pppoa',
@@ -49,7 +49,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 24,
-                   Encapsulation => 6,
+                   Encapsulation => 4,
                    dnsServer2 => '213.228.0.68',
                    dnsServer3 => '212.27.32.176',
                    DOMAINNAME2 => 'free.fr',
