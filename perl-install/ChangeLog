@@ -1,3 +1,62 @@
+2001/07/12  François Pons  <fpons@mandrakesoft.com>
+
+	* interactive.pm: added ask_browse_tree_info and ask_browse_tree_info_refW
+	(default).
+
+	* services.pm: reworked to use new service layout for install.
+
+	* install_steps_gtk.pm: use common code for tree with info dialog
+	(individual package selection).
+
+	* fs.pm: fixed wrong examination of fsck return code (exit code 1 says
+	fsck succeeded in
+	fixing partition and now is ok).
+
+	* interactive_gtk.pm: merging common code for individual package selection
+	and service to create
+	ask_browse_tree_info_refW, added featrures for group icon always
+	up-to-date
+	(take some memory but not too much, not used if flat model).
+
+	* run_program.pm: changed exit code of failed exec in rooted to 128
+	instead of 1 (may clash with
+	exit code of fsck else).
+
+	* any.pm: fixed bug for writing in /etc/sysconfig/desktop file.
+
+2001/07/10  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* mdk-stage1/init.c, mdk-stage1/Makefile.common: minor mods for PPC build,
+	define TIOCSCTTY, Makefile mods
+
+2001/07/09  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: added multiple tries if a transaction of only one package
+	fails.
+
+	* install_any.pm: added LDAP support for authentication.
+
+	* install_steps_interactive.pm: added LDAP support for password
+	authentication, updated root password window look.
+
+	* bootloader.pm: fixed compilation error.
+	removed compilation error, the resolution is not quite good and may be
+	reworked :-)
+
+	* help.pm: updated root password help.
+
+2001/07/09  mbadaire
+
+	* bootloader.pm: modify lilo.conf to elilo.conf if arch ia64
+
+	* common.pm: Add IA64 support
+
+2001/07/08  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm (suggest): replace "is ia64" with "is not ia64" so that
+	boot partition is
+	set correctly again
+
 2001/07/08  Pixel  <pixel@mandrakesoft.com>
 
 	* bootloader.pm (suggest): replace "is ia64" with "is not ia64" so that
