@@ -760,7 +760,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 	int fd, size, line_pos = 0;
 	char line[500];
 	int use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
- 
+
 	fd = http_download_file(MIRRORLIST_HOST, MIRRORLIST_PATH, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
 	if (fd < 0) {
 		log_message("HTTP: unable to get mirrors list");
