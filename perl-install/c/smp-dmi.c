@@ -296,5 +296,7 @@ int intelDetectSMP(void) {
 }
 
 int dmiDetectMemory(void) {
-	return max(dmi_detect(memory_in_MB_type6), dmi_detect(memory_in_MB_type17));
+	int s1 = dmi_detect(memory_in_MB_type6);
+	int s2 = dmi_detect(memory_in_MB_type17);
+	return s1 > s2 ? s1 : s2;
 }
