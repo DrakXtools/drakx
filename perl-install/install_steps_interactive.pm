@@ -896,7 +896,7 @@ sub miscellaneous {
 	4 => _("High"),
 	5 => _("Paranoid"),
     );
-    delete @l{0,4,5} unless $::expert;
+    delete @l{0,1,5} unless $::expert;
 
     my $u = $o->{miscellaneous} ||= {};
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
@@ -908,7 +908,7 @@ sub miscellaneous {
 	[ _("Is this machine a laptop?"), 
 	  _("Use hard drive optimisations?"), 
 	  _("Choose security level"),
-	  _("Precise RAM size if needed (found %d MB)", availableRam / 1024),
+	  _("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3), #- add three for correction.
 	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
 	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },

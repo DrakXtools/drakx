@@ -57,7 +57,7 @@ sub write_conf {
 		     });
     add2hash($netc, { DOMAINNAME => $netc->{HOSTNAME} =~ /\.(.*)/ });
 
-    setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV));
+    setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_resolv_conf {
