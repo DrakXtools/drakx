@@ -616,20 +616,23 @@ sub _gtknew_handle_children {
 #- * if the {child} doesn't handle the method, we try with the {real_window}
 #-   (eg : add_accel_group set_position set_default_size
 #- * a few methods are handled specially
-my %for_real_window = map { $_ => 1 } qw(show);
+my %for_real_window = map { $_ => 1 } qw();
 sub mygtk2::MagicWindow::AUTOLOAD {
     my ($w, @args) = @_;
 
     my ($meth) = $mygtk2::MagicWindow::AUTOLOAD =~ /mygtk2::MagicWindow::(.*)/;
 
-    my $s = $meth eq 'destroy' && $w->{pop_it} ||
-	    $for_real_window{$meth} || 
+    my @s = $meth eq 'show'
+              ? ('real_window', 'child') :
+            $w->{pop_it} && ($meth eq 'destroy' || $meth eq 'hide') ||
+	    $for_real_window{$meth} ||
             !$w->{child}->can($meth)
-	      ? 'real_window' : 'child';
+	      ? 'real_window'
+	      : 'child';
 
-#-    warn "mygtk2::MagicWindow::$meth on $s (@args)\n";
+#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on $s (@args)\n";
 
-    $w->{$s}->$meth(@args);
+    $w->{$_}->$meth(@args) foreach @s;
 }
 
 sub _create_Window {
