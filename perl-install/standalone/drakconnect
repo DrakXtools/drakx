@@ -439,6 +439,11 @@ sub build_notebook {
                                                     key_press_event => $apply),
                               ),
                      ),
+                  gtkpack__(Gtk2::HBox->new(0,5),
+                            Gtk2::Label->new(N("Metric")),
+                            gtksignal_connect(gtkset_text($gui->{intf}{METRIC} = Gtk2::Entry->new, $intf->{METRIC}),
+                                              key_press_event => $apply)),
+
                  );
         $dialing_mode_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'auto'; $apply->() });
 	$dialing_mode_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'static'; $apply->() });
