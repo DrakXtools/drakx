@@ -346,12 +346,8 @@ sub use_floppy {
 
 
 sub is_wireless_intf {
-    my ($intf, $module) = @_;
-    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinoco_cs orinoco airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport 3c59x);
-    foreach (@wireless_modules) {
-        return 1 if $module =~ /$_/;
-    }
-    return 0;
+    my ($module) = @_;
+    member($module, qw(airo aironet_cs aironet4500_cs airo_cs airport hermes orinoco_cs netwave_cs orinoco ray_cs wavelan_cs wvlan_cs))
 }
 
 1;
