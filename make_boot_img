@@ -41,7 +41,7 @@ sub initrd {
     _ "echo y | mke2fs $tmp";
     _ "$sudo mount $tmp $mnt -o loop";
     _ "$sudo cp -a $instdir/$inst1/* $mnt";
-    _ "$sudo install -d $mnt/modules";
+    _ "sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
     _ "$sudo cp -f modules/${type}_modules.cgz $mnt/modules/modules.cgz";
     _ "$sudo cp -f modules/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
