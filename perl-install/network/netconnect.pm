@@ -338,7 +338,6 @@ sub start_internet {
     init_globals($o, $o->{prefix});
     #- give a chance for module to be loaded using kernel-BOOT modules...
     $::isStandalone or modules::load_category('network/main|gigabit|usb');
-    run_program::rooted($prefix, "/sbin/service", "network", "restart");
     run_program::rooted($prefix, $connect_file);
 }
 
