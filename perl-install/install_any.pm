@@ -495,6 +495,30 @@ sub install_urpmi {
     #- rare case where urpmi cannot be installed (no hd install path).
     $method eq 'disk' && !any::hdInstallPath() and return;
 
+    #- clean to avoid opening twice the rpm db.
+    delete $packages->{rpmdb};
+
+    #- import pubkey in rpmdb.
+    my $db = pkgs::rpmDbOpenForInstall($prefix);
+    $packages->parse_pubkeys(db => $db);
+    foreach (values %$mediums) {
+	foreach my $k (@{$_->{pubkey}}) {
+	    my $id;
+	    foreach my $kv (values %{$packages->{keys} || {}}) {
+		URPM::compare_pubkeys($k, $kv) == 0 and $id = $kv->{id}, last;
+	    }
+	    unless ($id) {
+		URPM::import_pubkey(block => $k->{block}, db => $db);
+		$packages->parse_pubkeys(db => $db);
+		foreach my $kv (values %{$packages->{keys} || {}}) {
+		    URPM::compare_pubkeys($k, $kv) == 0 and $id = $kv->{id}, last;
+		}
+	    }
+	    #- the key has been found, take care of it for the given medium.
+	    $id and $_->{key_ids}{$id} = undef;
+	}
+    }
+
     my @cfg;
     foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
 	my $name = $_->{fakemedium};
@@ -566,7 +590,8 @@ sub install_urpmi {
 	    push @cfg, "$qname " . ($need_list ? "" : $qdir) . " {
   hdlist: hdlist.$name.cz
   with_hdlist: $with" . ($need_list ? "
-  list: list.$name" : "") . ($dir =~ /removable:/ && "
+  list: list.$name" : "") . (keys(%{$_->{key_ids}}) && "
+  key-ids: " . join(',', keys(%{$_->{key_ids}}))) . ($dir =~ /removable:/ && "
   removable: /dev/cdrom") . "
   update" . "
 }
