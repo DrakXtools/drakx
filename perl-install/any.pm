@@ -153,6 +153,7 @@ sub setupBootloader {
 	my $memsize = bootloader::get_append($b, 'mem');
 	my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
 
+	$b->{password2} ||= $b->{password} ||= '';
 	$b->{vga} ||= 'normal';
 	if (arch() !~ /ppc/) {
 	$in->ask_from('', _("Bootloader main options"), [
