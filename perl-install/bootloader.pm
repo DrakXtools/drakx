@@ -343,7 +343,6 @@ sub suggest {
 	 lba32 => 1,
 	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
 	 map => "/boot/map",
-	 install => "/boot/boot.b",
          ),
 	});
 
@@ -450,7 +449,7 @@ wait %d seconds for default boot.
 	    );
     unless ($lilo->{methods}) {
 	$lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
-	if ($lilo->{methods}{lilo} && -e "$prefix/boot/lilo-graphic") {
+	if ($lilo->{methods}{lilo} && -e "$prefix/boot/message-graphic") {
 	    $lilo->{methods}{lilo} = "lilo-graphic";
 	    exists $lilo->{methods}{grub} and $lilo->{methods}{grub} = undef;
 	}
@@ -696,27 +695,6 @@ sub write_lilo_conf {
 	}
     };
 
-    if ($lilo->{message}) {
- 	local *F;
-	-d "$prefix/boot/lilo-menu" and open F, ">$prefix/boot/lilo-menu/message" and print F $lilo->{message};
-	-d "$prefix/boot/lilo-text" and open F, ">$prefix/boot/lilo-text/message" and print F $lilo->{message};
-	-d "$prefix/boot/lilo-graphic" || -d "$prefix/boot/lilo-menu" || -d "$prefix/boot/lilo-text" or
-	  open F, ">$prefix/boot/message" and print F $lilo->{message}; #- fallback in case of another lilo.
-    }
-    foreach ($lilo->{methods}{lilo}, "lilo-menu", "lilo-graphic", "lilo-text") {
-	if (-e "$prefix/boot/$_/boot.b" && -e "$prefix/boot/$_/message") {
-	    symlinkf $_, "$prefix/boot/lilo";
-	    symlinkf "lilo/boot.b", "$prefix/boot/boot.b";
-	    symlinkf "lilo/message", "$prefix/boot/message";
-	    log::l("stage2 of lilo used is " . readlink "$prefix/boot/lilo");
-	    last;
-	}
-    }
-    if (arch() !~ /ia64/) {
-	-e "$prefix/boot/boot.b" && -e "$prefix/boot/message" or die "unable to get right lilo configuration in $prefix/boot";
-    }
-
-
     my %bios2dev = map_index { $::i => $_ } dev2bios($hds, $lilo->{first_hd_device} || $lilo->{boot});
     my %dev2bios = reverse %bios2dev;
 
@@ -802,6 +780,10 @@ sub write_lilo_conf {
 
 sub install_lilo {
     my ($prefix, $lilo, $fstab, $hds) = @_;
+
+    $lilo->{install} = 'text' if $lilo->{methods}{lilo} eq 'lilo-text';
+    output("$prefix/boot/message-text", $lilo->{message}) if $lilo->{message};
+    symlinkf "message-" . ($lilo->{methods}{lilo} eq 'lilo-graphic' ? 'graphic' : 'text'), "$prefix/boot/message";
 
     write_lilo_conf($prefix, $lilo, $fstab, $hds);
 
