@@ -220,6 +220,7 @@ sub selectKeyboard {
 			  list => [ difference2([ keyboard::KEYBOARDs() ], \@best) ], advanced => @best > 1 }
 		      ]);
 	$o->{keyboard}{KEYBOARD} = $other ? $ext_keyboard : $KEYBOARD;
+	delete $o->{keyboard}{unsafe};
     }
     any::keyboard_group_toggle_choose($o, $o->{keyboard}) or goto &selectKeyboard;
     install_steps::selectKeyboard($o);
