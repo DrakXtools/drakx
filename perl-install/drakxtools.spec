@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.16mdk
+Release: 0.17mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,30 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Feb 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.17mdk
+- drakboot: remove bad entries after reading existing conf file (pixel)
+- drakclock: let's look better when embedded
+- drakconnect:
+  o wizard:
+    * explain about DNS (#7908)
+    * fix automatically found "...2" dns when network is done
+  o manage interface: check gateway entry (poulpy)
+- drakfont: new banner style
+- drakvpn:
+  o fix drakvpn logic when translated
+  o fix steps skiped b/c of translations
+  o start to sanitize gui (more user friendly labels, pull-down menus, ...)
+  o fix the ";" mark in the "Security Policies" section (florin)
+- interactive layer: don't have a scroll inside a scroll which causes
+  display pbs (#7433) (pixel)
+- printerdrake:
+  o recognize parallel printers also when they miss the
+    "CLASS:PRINTER;" in their device ID string (ex: Brother HL-720,
+    bug #7753) (till)
+  o warn when there's no network access
+  o remove printer list button when there's no network also in expert
+    mode.
+
 * Sun Feb 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.16mdk
 - fix harddrake crash (#7897)
 - printerdrake (till):
