@@ -157,7 +157,7 @@ endif
 
 ifeq (i386,$(ARCH))
 	cp -a /etc/pcmcia $(DEST)/etc
-	patch -p0 -d $(DEST)/etc < ../tools/pcmcia_config.patch
+	patch --no-backup-if-mismatch -p0 -d $(DEST)/etc < ../tools/pcmcia_config.patch
 endif
 
 	find $(DEST) -name CVS | xargs rm -rf
