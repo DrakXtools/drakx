@@ -366,7 +366,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - harddrake:
   o detect more webcams
   o do not detect speakers as keyboards
-- printerdrake: misc fixes (till):
+- printerdrake: misc fixes (till)
 
 * Thu Feb 10 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.23mdk
 - printerdrake (till):
