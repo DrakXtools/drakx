@@ -115,7 +115,7 @@ sub ask_install_simple {
 			    _("Choose which services should be automatically started at boot time"),
 			    {
 			     list => $l,
-			     help => sub { description($_, $prefix) },
+			     help => sub { description($_[0], $prefix) },
 			     values => $on_services,
 			     sort => 1,
 			    });
