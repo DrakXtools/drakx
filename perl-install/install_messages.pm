@@ -141,7 +141,7 @@ consult the Errata available from:
 
 Information on configuring your system is available in the post
 install chapter of the Official Mandrakelinux User's Guide.",
-N("http://www.mandrakelinux.com/en/101errata.php3"));
+N("http://www.mandrakelinux.com/en/102errata.php3"));
 }
 
 1;
