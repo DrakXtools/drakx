@@ -216,7 +216,9 @@ if ($a_mode) {
     $pixmap->set($t_pixmap, $t_mask)
 }
 
-main Gtk;
+Gtk->main_iteration while Gtk->events_pending;
+kill USR2, $::CCPID;
+Gtk->main;
 #-------------------------------------------------------------
 # get user names to put in combo  
 #-------------------------------------------------------------
