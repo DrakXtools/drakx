@@ -37,8 +37,7 @@ localcopy: clean
 	$(MAKE) -C ../tools clean || :
 	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION) ; cp -af perl-install $(PACKAGE)-$(PKGVERSION) ; cp -af $(OTHERS) $(PACKAGE)-$(PKGVERSION)
 	cd
-	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict).*//g'
-	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict).*//g'
+	@make nuke_perl
 
 
 $(DIRS):
@@ -236,10 +235,12 @@ export:
 	cd ..; cvs export -d $(PACKAGE)-$(PKGVERSION) -r $(TAG) $(PACKAGE)
 	cd ../$(PACKAGE)-$(PKGVERSION) && rm -rf $(OTHERDIRS) && set -x && for f in $(OTHERDIRS); do cvs -d `cat ../CVS/Root` export -r $(TAG) -d `basename $$f` gi/$$f; done
 	cd ..; set -x && for f in $(OTHERFILES); do cvs -d `cat ../CVS/Root` export -r $(TAG) -d $(PACKAGE)-$(PKGVERSION) gi/$$f; done
-	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
-	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
-
+	@make nuke_perl
 
 cvstag:
 	cvs tag $(CVSTAGOPT) $(TAG)
 	cd ..; cvs tag $(CVSTAGOPT) $(TAG) $(OTHERS)
+
+nuke_perl:
+	find ../$(PACKAGE)-$(PKGVERSION) -name '*.pm' | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict).*//g'
+	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict).*//g'
