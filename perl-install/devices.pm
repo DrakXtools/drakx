@@ -132,7 +132,8 @@ sub make($) {
     }
     -e $file and return $file; #- assume nobody takes fun at creating files named as device
 
-    my ($type, $major, $minor) = entry($_);
+    my ($type, $major, $minor) = eval { entry($_) };
+    $@ and die "unknown device $_ (caller is " . join(":", caller()) . ")";
 
     #- make a directory for this inode if needed.
     mkdir dirname($file), 0755;
