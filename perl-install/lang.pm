@@ -1019,7 +1019,7 @@ sub write {
 	}
 	
     }
-    if ($locale->{IM}) {
+    if ($locale->{IM} && $locale->{IM} ne 'None') {
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, $gtkqt_im{$locale->{IM}});
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
