@@ -10,6 +10,8 @@ use fs;
 sub main {
     my ($in, $all_hds) = @_;
     my $davs = $all_hds->{davs};
+
+    $in->do_pkgs->ensure_is_installed('davfs', '/sbin/mount.davfs') or return;
     
     my $quit;
     do {
