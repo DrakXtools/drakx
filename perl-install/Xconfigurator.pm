@@ -700,15 +700,17 @@ sub write_XF86Config {
     print G "EndSection\n\n\n";
 
     #- write module section for version 3.
-    print F qq(
+    if ($o->{wacom} || $o->{card}{Utah_glx}) {
+	print F qq(
 Section "Module"
-) if $o->{wacom} || $o->{Utah_glx};
-    print F qq(    Load "xf86Wacom.so"\n) if $o->{wacom};
-    print F qq(    Load "glx-3.so"\n) if $o->{Utah_glx}; #- glx.so may clash with server version 4.
-    print F qq(
+);
+	print F qq(    Load "xf86Wacom.so"\n) if $o->{wacom};
+	print F qq(    Load "glx-3.so"\n) if $o->{card}{Utah_glx}; #- glx.so may clash with server version 4.
+	print F qq(
 EndSection
 
-) if $o->{wacom} || $o->{Utah_glx};
+);
+    }
 
     #- write wacom device support.
     print F qq(
