@@ -7,7 +7,7 @@ CFLAGS      = -Wall
 
 .PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist.ordered $(BASE)/filelist $(BASE)/compss $(DIRS) xhost+ install
+all: $(BASE)/depslist.ordered $(BASE)/compss $(DIRS) xhost+ install
 
 $(DIRS):
 	make -C $@
@@ -26,9 +26,6 @@ ddcprobe/ddcxinfos:
 
 $(BASE)/compss $(BASE)/depslist.ordered: $(BASE)/hdlists $(BASE)/hdlist.cz
 	genbasefiles $(BASE) `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
-
-$(BASE)/filelist: $(RPMS)
-#	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
 
 $(BASE)/hdlist.cz: $(BASE)/hdlists $(RPMS)
 	genhdlists --noclean --distrib $(ROOTDEST)
