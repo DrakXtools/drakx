@@ -85,7 +85,7 @@ get_needed_files: $(DIRS) $(MOFILES)
 	find auto -follow -name "*.so" >> /tmp/list
 
 	for i in $(LOCALFILES) `cat /tmp/list` ; do \
-		ldd $$i 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
+		ldd $$i 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/lib/.*?/,/lib/,' | sort | uniq >> /tmp/list; \
 	done
 
 	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' >> /tmp/list
@@ -160,7 +160,7 @@ endif
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.* rpmsrate $(ROOTDEST)/Mandrake/base
 
-	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS
+	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS*
 
 	for i in ../kernel/modules.description ../kernel/all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
