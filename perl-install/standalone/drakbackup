@@ -118,6 +118,7 @@ my $ignore_files_list;
 my @list_of_rpm_to_install;
 my @other_files;
 my @sys_files = "/etc";
+my @files_for_direct_tape;
 my $host_passwd;
 my $untar_prefix = "tar -C $restore_path -x";
 
@@ -243,8 +244,8 @@ sub get_free_space {
 
 sub check_storage_quota {
 	my ($dir) = @_;
-	my $used = `du $dir`;	
-	my $used_space = $used / 1024;
+	my $used = `du -b $dir`;	
+	my $used_space = $used / 1024 / 1024;
 	if ($used_space > $conf{MAX_SPACE}) {
 		return $used_space;
 	} else {
@@ -726,9 +727,11 @@ sub check_for_cd() {
 		show_warning("f", N("Does not appear to be recordable media!"));
 		return 1;
 	}
-	if ($log_buff =~ /Is not erasable/ && $conf{MEDIA_ERASE}) {
-		show_warning("f", N("Not erasable media!"));
-		return 1;
+	#- non-fatal, just disable erase
+	if (($log_buff =~ /Is not erasable/ || $log_buff =~ /Found DVD media/) && $conf{MEDIA_ERASE}) {
+		show_warning("w", N("Not erasable media!"));
+		$conf{MEDIA_ERASE} = 0;
+		save_conf_file();
 	}
 	 
 	if ($conf{MULTI_SESSION}) {
@@ -753,8 +756,8 @@ sub check_for_cd() {
 	
 sub write_on_cd() {	
 	my $command = "cdrecord -v dev=$conf{CD_DEVICE} -data ";
-	# DVD+RW use -dao
-	$command .= "-dao " if $conf{DVDRW};
+	# DVD+RW use -sao
+	$command .= "-sao " if $conf{DVDRW};
 	#- only blank if it's the first session
 	$command .= "blank=fast " if $conf{MEDIA_ERASE} && $session_offset eq '';
 	#- multi-session mode
@@ -896,7 +899,13 @@ sub build_tape() {
 	}
 	
 	#- do the backup
-	$command = "tar -cvf $conf{TAPE_DEVICE} @file_list_to_send_by_ftp";
+	$command = "tar -cvf $conf{TAPE_DEVICE} ";
+	if ($conf{DIRECT_TAPE}) {
+		($command, undef) = handle_ignores($command, undef, @files_for_direct_tape);
+		$command .= " @files_for_direct_tape";
+	} else {
+		$command .= " @file_list_to_send_by_ftp";
+	}
 	spawn_progress($command, "Running tar to tape");
 	
 	#- eject the tape?
@@ -932,12 +941,13 @@ sub build_backup_files() {
 	my $incr;
 	my $base;
 	my $find_args = "! -type d -print";
-	
+		
 	local $_;
     $results = "";
 	$log_buff = "";
-	#- flush this so if the user does 2 runs in a row we don't try to send the same files
+	#- flush these so if the user does 2 runs in a row we don't try to send the same files
 	@file_list_to_send_by_ftp = ();
+	@files_for_direct_tape = ();
 		
 	$interactive and gtkset_mousecursor_wait();
     read_conf_file();
@@ -1086,11 +1096,11 @@ sub build_backup_files() {
 	}
 	  
 	my $filecount = @file_list_to_send_by_ftp;
-	if (!$filecount) {
+	if (!$filecount && !$conf{DIRECT_TAPE}) {
 		my $msg = N("No changes to backup!");
 		show_warning("w", $msg);
 		$interactive and gtkset_mousecursor_normal();
-		$interactive and interactive_mode();
+		$interactive and interactive_mode_box();
 		results_to_logfile();
 		return 1;		
 	}
@@ -1156,13 +1166,15 @@ sub build_backup_files() {
 	#- write our catalog file
 	if (!$media_problem) {
 		my $catalog = substr($the_time, 1);
+		my $direct_tape = "";
+		$direct_tape = "Direct" if $conf{DIRECT_TAPE};
 		if (!$conf{USE_NET} && !$conf{USE_TAPE} && !$conf{USE_CD}) { 
 			$catalog .= ":HD:localhost:$conf{PATH_TO_SAVE}";
 			$conf{NET_PROTO} = '';
 		} 
 		$catalog .= ":$conf{NET_PROTO}:$conf{LOGIN}\@$conf{HOST_NAME}:$conf{HOST_PATH}" if $conf{NET_PROTO};
 		$catalog .= ":CD:$vol_name:$conf{CD_DEVICE}" if $conf{USE_CD};
-		$catalog .= ":Tape:$vol_name:$conf{TAPE_DEVICE}" if $conf{USE_TAPE};
+		$catalog .= ":" . $direct_tape . "Tape:$vol_name:$conf{TAPE_DEVICE}" if $conf{USE_TAPE};
 		$catalog .= ":System" unless $conf{NO_SYS_FILES};
 		$catalog .= ":I" if $conf{SYS_INCREMENTAL_BACKUPS} && !$conf{NO_SYS_FILES} && !$conf{SYS_DIFFERENTIAL_BACKUPS};
 		$catalog .= ":D" if $conf{SYS_INCREMENTAL_BACKUPS} && !$conf{NO_SYS_FILES} && $conf{SYS_DIFFERENTIAL_BACKUPS};
@@ -1242,8 +1254,13 @@ sub do_find {
 sub do_tar {
 	my ($tar_cmd, $dest_file, $list_file, @files) = @_;
 	my $full_dest_file = $conf{PATH_TO_SAVE} . "/" . $dest_file . $the_time . "." . $conf{OPTION_COMP};
-	#- if $list_file is undefined, then use the @files list
-	defined($list_file) ? system("$tar_cmd -f $full_dest_file -T $list_file") : system("$tar_cmd -f $full_dest_file @files");
+	if ($conf{DIRECT_TAPE}) {
+		log::explanations("Direct tape backup - tar deferred...");
+		defined($list_file) ? push @files_for_direct_tape, $list_file : push @files_for_direct_tape, @files;
+	} else {
+		#- if $list_file is undefined, then use the @files list
+		defined($list_file) ? system("$tar_cmd -f $full_dest_file -T $list_file") : system("$tar_cmd -f $full_dest_file @files");
+	}
 	push_list($dest_file);
 }
 
@@ -1257,8 +1274,12 @@ sub push_list {
 
 sub files_to_results {
 	my ($basename) = @_;
-	$results .= "\nfile: " . $conf{PATH_TO_SAVE} . "/backup_" . $basename . $the_time . "." . $conf{OPTION_COMP} . "\n\n";
-	$results .= cat_("$conf{PATH_TO_SAVE}/list_" . $basename . $the_time . ".txt");
+	if ($conf{DIRECT_TAPE}) {
+		$results .= "\nDirect to tape:\n\n";
+	} else {
+		$results .= "\nfile: " . $conf{PATH_TO_SAVE} . "/backup_" . $basename . $the_time . "." . $conf{OPTION_COMP} . "\n\n";
+		$results .= cat_("$conf{PATH_TO_SAVE}/list_" . $basename . $the_time . ".txt");
+	}
 	$results .= "\nignored:\n" . $ignore_files_list . "\n" if $ignore_files_list;
 }
 
@@ -1860,6 +1881,12 @@ sub advanced_where_tape {
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Backup directly to tape")), $conf{USE_TAPE}),
+	    		1, new Gtk2::VBox(0, 5),
+	    		0, gtkset_sensitive(my $direct_to_tape = new Gtk2::CheckButton(), $conf{USE_TAPE}),
+			),
+			0, new Gtk2::VBox(0, 5),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
 	    		0, gtkset_sensitive(new Gtk2::Label(N("Don't rewind tape after backup")), $conf{USE_TAPE}),
 	    		1, new Gtk2::VBox(0, 5),
 	    		0, gtkset_sensitive(my $check_tape_rewind = new Gtk2::CheckButton(), $conf{USE_TAPE}),
@@ -1899,6 +1926,11 @@ sub advanced_where_tape {
 			$conf{TAPE_DEVICE} =~ s|/nst|/st|;
 		}
 		$combo_where_tape_device->entry->set_text($conf{TAPE_DEVICE});
+		destroy_widget();
+		$current_widget->($previous_function);
+    });
+	gtksignal_connect(gtkset_active($direct_to_tape, $conf{DIRECT_TAPE}), toggled => sub { 
+		$conf{DIRECT_TAPE} = $conf{DIRECT_TAPE} ? 0 : 1;
 		destroy_widget();
 		$current_widget->($previous_function);
     });
@@ -2508,11 +2540,12 @@ sub system_state() {
 		$conf{USE_CD} and $system_state .= N("\n- Burn to CD");
 		$conf{USE_CD} and $conf{CDRW} and $system_state .= N("RW");
 		$conf{USE_CD} and $system_state .= N(" on device: %s", $conf{CD_DEVICE});
-		$conf{USE_CD} and $conf{MULTI_SESSION} and $system_state .= N(" (multi-session)");
+		$conf{USE_CD} && $conf{MULTI_SESSION} and $system_state .= N(" (multi-session)");
 		$conf{USE_TAPE} and $system_state .= N("\n- Save to Tape on device: %s", $conf{TAPE_DEVICE});
 		(($conf{USE_CD} || $conf{USE_TAPE}) && $conf{MEDIA_ERASE}) and $system_state .= N("\t\tErase=%s", $erase_media);
 		$conf{USE_CD} || $conf{USE_TAPE} and $system_state .= "\n";
-		
+		$conf{USE_TAPE} && $conf{DIRECT_TAPE} and $system_state .= N("\tBackup directly to Tape\n");
+
 		$conf{USE_NET} and $system_state .= N("\n- Save via %s on host: %s\n", $conf{NET_PROTO}, $conf{HOST_NAME});
 		$conf{USE_NET} and $system_state .= N("\t\t user name: %s\n\t\t on path: %s \n", $conf{LOGIN}, $conf{HOST_PATH});
 		$system_state .= N("\n- Options:\n");
@@ -3475,7 +3508,7 @@ sub restore_catalog_entry {
 		}	
 	}
 	
-	if ($media eq 'Tape') {
+	if ($media =~ /^DirectTape|^Tape/) {
 		#- a little more complicated, we need to check if other backups
 		#- were done on this tape, and try to find the offset to this one
 		$in->ask_okcancel(N("Restore From Tape"), N("Insert the tape with volume label %s\n in the tape drive device %s", $vol_host, $dev_path) ,1) ? ($vol_name = get_tape_label($dev_path)) : return 0;
@@ -3483,7 +3516,7 @@ sub restore_catalog_entry {
 			show_warning("f", N("Not the correct tape label. Tape is labelled %s.", $vol_name));
 			return 0;
 		} else {
-			$restore_result = restore_tape($cat_entry, $dev_path, @restore_files);
+			$restore_result = restore_tape($media, $cat_entry, $dev_path, @restore_files);
 		}			
 	}
 	
@@ -3574,15 +3607,28 @@ sub restore_hd_or_cd {
 }
 
 sub restore_tape {
-	my ($cat_entry, $dev_path, @restore_files) = @_;
+	my ($media, $cat_entry, $dev_path, @restore_files) = @_;
 	my $indv_files = @restore_files;
 	my $wild_card = catalog_to_wildcard($cat_entry);
 	$dev_path =~ s|/st|/nst|;
+	my $command = "tar -C $restore_path -xf $dev_path";
+
+	if ($media eq "DirectTape") {
+		position_tape($cat_entry, $dev_path);
+		if ($indv_files != 0) {
+			foreach (@restore_files) {
+				$command .= " " . substr($_, 1);
+			}
+		}
+		spawn_progress($command, "Restoring files from $dev_path to $restore_path.");
+		return 0;
+	}
 		
 	if ($indv_files == 0) {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
-			get_file_from_tape($cat_entry, $dev_path);
+			position_tape($cat_entry, $dev_path);
+			get_tarfile_from_tape($dev_path);
 			return 1 if no_tarfile("$conf{PATH_TO_SAVE}/$_");
 			untar("$cfg_dir/restores/$conf{PATH_TO_SAVE}/$_", "all", $_, undef);
 		}
@@ -3590,7 +3636,10 @@ sub restore_tape {
 		#- individual files - pull from appropriate catalog
 		foreach (@restore_files) {
 			my ($restorefile, $tarfile) = file_to_tarfile($_, $wild_card);
-			get_file_from_tape($cat_entry, $dev_path) if !-e "$cfg_dir/restores/$tarfile";
+			if (!-e "$cfg_dir/restores/$tarfile") {
+				position_tape($cat_entry, $dev_path); 
+				get_tarfile_from_tape($dev_path);
+			}
 			return 1 if no_tarfile($tarfile);
 			untar("$cfg_dir/restores/$tarfile $restorefile", "files", $tarfile, $restorefile);
 		}
@@ -3724,11 +3773,15 @@ sub find_tape_offset {
 	}	
 }
 
-sub get_file_from_tape {
+sub position_tape {
 	my ($cat_entry, $dev_path) = @_;
 	my $offset = find_tape_offset($cat_entry);
 	spawn_progress("mt -f $dev_path rewind", "Rewinding tape on $dev_path.");
 	spawn_progress("mt -f $dev_path fsf $offset", "Moving forward $offset file records.");
+}
+
+sub get_tarfile_from_tape {
+	my ($dev_path) = @_;
 	spawn_progress("tar -C $cfg_dir/restores -xf $dev_path", "Untarring from $dev_path to work directory.");
 }
 
