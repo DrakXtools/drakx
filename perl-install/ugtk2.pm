@@ -508,11 +508,11 @@ sub create_okcancel {
     my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
     # but in the installer where all windows run in wizard mode because of design even when not in a wizard step
-    my @extras = (@l2, @r2, if_(!$::isInstall && ($::isWizard || $ok && $cancel), Gtk2::Label->new));
+    my @extras = (@l2, @r2, if_($::isInstall || ($::isWizard || $ok && $cancel), Gtk2::Label->new));
     my @l; # buttons list
     if ($::isWizard) {
         # wizard mode: order is cancel/extras/white/prev/next
-        push @l, if_(!$::isInstall, $w->{wizcancel}), @extras, if_($::isInstall, Gtk2::Label->new), $bprev, $bok;
+        push @l, if_(!$::isInstall, $w->{wizcancel}), @extras, $bprev, $bok;
     } else { 
         # normal mode: cancel/ok button follow current desktop's HIG
         my @extras = (@l2, @r2, if_($ok && $cancel, Gtk2::Label->new)); # space buttons but if there's only one
