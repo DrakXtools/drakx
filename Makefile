@@ -31,9 +31,9 @@ UPLOAD_DEST = $(UPLOAD_DEST_)/cooker
 UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
 UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
-.PHONY: dirs $(FLOPPY_IMG) install
+.PHONY: dirs perl-install $(FLOPPY_IMG) install
 
-install: build rescue
+install: all.modules build rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
 ifneq (ppc,$(ARCH))
 	for i in $(FRELEASE_BOOT_IMG); do cp -f $${i}* $(ROOTDEST)/images; done
@@ -50,13 +50,11 @@ build: $(FBOOT_IMG)
 
 dirs:
 	@for n in . $(DIRS); do \
-		[ "$$n" = "." ] || make -C $$n all ;\
+		[ "$$n" = "." ] || $(MAKE) -C $$n all ;\
 	done
 
 rescue: all.modules
 	make -C $@
-
-network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
 $(FBOOT_RDZ): dirs all.modules
 	./make_boot_img $@ `basename $(@:%.rdz=%)`
@@ -69,7 +67,13 @@ tar: clean
 	cd .. ; tar cfy gi.tar.bz2 gi
 	rm needed_rpms.lst
 
-all.modules:
+perl-install:
+	make -C perl-install all
+
+mdk-stage1/mar/mar:
+	make -C mdk-stage1/mar
+
+all.modules: mdk-stage1/mar/mar perl-install
 	`./tools/specific_arch ./update_kernel`
 
 $(FBOOT_IMG:%=%f): %f: %
