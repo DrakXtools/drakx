@@ -171,6 +171,7 @@ sub get_options {
 }
 sub set_options {
     my ($name, $new_option) = @_;
+    log::l(qq(set option "$new_option" for module "$name"));
     $conf{$name}{options} = $new_option;
 }
 sub add_alias { 
@@ -199,11 +200,13 @@ sub remove_probeall {
 
 sub remove_alias($) {
     my ($name) = @_;
+    log::l(qq(removing alias "$name"));
     remove_alias_regexp("^$name\$");
 }
 
 sub remove_alias_regexp($) {
     my ($aliased) = @_;
+    log::l(qq(removing all aliases that match "$aliased"));
     foreach (keys %conf) {
         delete $conf{$_}{alias} if /$aliased/;
     }
@@ -211,6 +214,7 @@ sub remove_alias_regexp($) {
 
 sub remove_alias_regexp_byname($) {
     my ($name) = @_;
+    log::l(qq(removing all aliases which names match "$name"));
     foreach (keys %conf) {
         delete $conf{$_} if /$name/;
     }
@@ -219,6 +223,7 @@ sub remove_alias_regexp_byname($) {
 sub remove_module($) {
     my ($name) = @_;
     remove_alias($name);
+    log::l("removing module $name");
     delete $conf{$name};
     0;
 }
