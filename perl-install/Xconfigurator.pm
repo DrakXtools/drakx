@@ -1365,8 +1365,7 @@ sub show_info {
 
 #- Program entry point.
 sub main {
-    my ($o, $cardOptions);
-    ($prefix, $o, $in, $cardOptions, $install) = @_;
+    ($prefix, my $o, $in, my $cardOptions, $install) = @_;
     $o ||= {};
 
     XF86check_link('');
