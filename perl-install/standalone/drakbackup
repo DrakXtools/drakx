@@ -2129,7 +2129,7 @@ sub advanced_where_tape {
 
 	my $combo_where_tape_device = new Gtk2::OptionMenu();
     if (@tape_devices) {  
-		$combo_where_tape_device->set_popdown_strings(@tape_devices) 
+		$combo_where_tape_device->set_popdown_strings('', @tape_devices) 
 	} else {
 		$combo_where_tape_device->set_popdown_strings(@no_devices);
 	}
@@ -3714,9 +3714,9 @@ sub restore_catalog_entry {
 	
 	#- can be a volume name or a host name
 	my $vol_host = $line_data[2];
-	
+
 	#- see if we have a username embedded in the host
-	if (index($vol_host, "@")) {
+	if (index($vol_host, "@") != -1) {
 		my @user_host = split("@", $vol_host);
 		$username = $user_host[0];
 		$vol_host = $user_host[1];
@@ -3807,7 +3807,7 @@ sub restore_catalog_entry {
 	}
 
 	# cleanup our restore dir - unlink fails here?
-	system("rm -f $cfg_dir/restores/*");
+	system("rm -fr $cfg_dir/restores/*");
 
 	if (!$restore_result) {
 		show_warning("i", N("Files Restored..."));
@@ -3848,7 +3848,7 @@ sub restore_tape {
 	my ($cat_entry, $dev_path, @restore_files) = @_;
 	my $indv_files = @restore_files;
 	my $command;
-		
+
 	my $wild_card = catalog_to_wildcard($cat_entry);
 	$dev_path =~ s|/st|/nst|;
 		
@@ -3860,10 +3860,10 @@ sub restore_tape {
 			spawn_progress($command, "Rewinding tape on $dev_path.");
 			$command = "mt -f $dev_path fsf $offset";
 			spawn_progress($command, "Moving forward $offset file records.");
-			$command = "tar -C cfg_dir/restores -xf $dev_path";
+			$command = "tar -C $cfg_dir/restores -xf $dev_path";
 			spawn_progress($command, "Untarring from $dev_path to work directory.");
-			if (-e "$cfg_dir/restores/$_") {
-				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$_";
+			if (-e "$cfg_dir/restores/$save_path/$_") {
+				$command = "tar -C $restore_path -xzf $cfg_dir/restores/$save_path/$_";
 				spawn_progress($command, "Untarring \n$_ \nto $restore_path.");
 			} else {
 				return 1;
@@ -4452,9 +4452,9 @@ sub install_rpm {
 	if ($previous_function eq '') {
 		$previous_function = \&advanced_where;
 	}
-    my $box_what_user;
+	destroy_widget();
     gtkpack($advanced_box,
-	    $box_what_user = gtkpack_(new Gtk2::VBox(0, 15),
+		my $box_what_user = gtkpack_(new Gtk2::VBox(0, 15),
 			0, N("The following packages need to be installed:\n") . join(' ', @list_of_rpm_to_install),
 			0, new Gtk2::HSeparator,
 			0, gtksignal_connect(Gtk2::Button->new(N("Install")), clicked => sub {  
