@@ -1,5 +1,25 @@
 2001/01/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
+	* mdk-stage1/disk.c: fix failing umount for DISK installs in some failing
+	loopback situations
+	act nicely when no partitions are found on some disk
+
+	* mdk-stage1/modules.h: polish generic blank.img situation (no modules
+	and/or modules.dep available)
+
+	* mdk-stage1/lomount.c: fix failing umount for DISK installs in some
+	failing loopback situations
+	better log messages
+	continue anyway when insmod'ing of modules fail (for blank.img)
+
+	* mdk-stage1/probing.c: close some fd's
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.c: polish generic blank.img
+	situation (no modules and/or modules.dep available)
+	continue anyway when insmod'ing of modules fail (for blank.img)
+
+2001/01/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
 	* mdk-stage1/Makefile, mdk-stage1/disk.c: 
 	  - add DISK install from ISO image file
 	  - add FTP
