@@ -86,7 +86,7 @@ sub basic_secadmin_entry {
 sub network_generate_page {
 	my ($rsecurity_net_hash, $msec) = @_;
 	my @network_options = $msec->get_functions('', "network");
-        my @yesno_choices = qw(yes no default);
+        my @yesno_choices = qw(yes no default ignore);
 	my @alllocal_choices = qw(ALL LOCAL NONE default);
 
 	my @items;
@@ -122,7 +122,7 @@ sub network_generate_page {
 sub system_generate_page {
 	my ($rsecurity_system_hash, $msec) = @_;
 	my @system_options = $msec->get_functions('', "system");
-        my @yesno_choices = qw(yes no default);
+        my @yesno_choices = qw(yes no default ignore);
 	my @alllocal_choices = qw(ALL LOCAL NONE default);
 
 	my @items;
@@ -159,7 +159,7 @@ sub system_generate_page {
 sub checks_generate_page {
 	my ($rsecurity_checks_hash, $msec) = @_;
 	my @security_checks = $msec->get_checks('');
-	my @choices = qw(yes no default);
+	my @choices = qw(yes no default ignore);
 	my @ignore_list = qw(MAIL_WARN MAIL_USER);
 
 	my @items;
