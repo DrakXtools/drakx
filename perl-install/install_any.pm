@@ -729,40 +729,7 @@ sub getAndSaveAutoInstallFloppies {
 
     eval { modules::load('loop') };
 
-    if (arch() =~ /sparc/) {
-	my $mountdir = "$o->{prefix}/tmp/mount"; mkdir_p($mountdir);
-	my $workdir = "$o->{prefix}/tmp/work"; -d $workdir or rmdir $workdir;
-
-	my ($imagefile) = getAndSaveInstallFloppies($o, "$o->{prefix}/tmp", $name) or return;
-        devices::make($_) foreach qw(/dev/loop6 /dev/ram);
-
-        run_program::run("losetup", "/dev/loop6", $imagefile);
-        fs::mount("/dev/loop6", $mountdir, "romfs", 'readonly');
-        cp_af($mountdir, $workdir);
-        fs::umount($mountdir);
-        run_program::run("losetup", "-d", "/dev/loop6");
-
-	substInFile { s/timeout.*//; s/^(\s*append\s*=\s*".*)"/$1 kickstart=floppy"/ } "$workdir/silo.conf"; #" for po
-#-TODO	output "$workdir/ks.cfg", generate_ks_cfg($o);
-	output "$workdir/boot.msg", "\n7m",
-"!! If you press enter, an auto-install is going to start.
-    ALL data on this computer is going to be lost,
-    including any Windows partitions !!
-", "7m\n";
-
-	local $o->{partitioning}{clearall} = 1;
-	output("$workdir/auto_inst.cfg", g_auto_install());
-
-        run_program::run("genromfs", "-d", $workdir, "-f", "/dev/ram", "-A", "2048,/..", "-a", "512", "-V", "DrakX autoinst");
-        fs::mount("/dev/ram", $mountdir, 'romfs', 0);
-        run_program::run("silo", "-r", $mountdir, "-F", "-i", "/fd.b", "-b", "/second.b", "-C", "/silo.conf");
-        fs::umount($mountdir);
-	require commands;
-        commands::dd("if=/dev/ram", "of=$dest_dir/replay_install.img", "bs=1440", "count=1024");
-
-        rm_rf($workdir, $mountdir, $imagefile);
-	$imagefile;
-    } elsif (arch() =~ /ia64/) {
+    if (arch() =~ /ia64/) {
 	#- nothing yet
     } else {
 	my $mountdir = "$o->{prefix}/root/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;
