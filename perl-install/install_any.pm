@@ -424,8 +424,8 @@ formatAlaTeX(N("You have selected the following server(s): %s
 
 
 These servers are activated by default. They don't have any known security
-issues, but some new could be found. In that case, you must make sure to upgrade
-as soon as possible.
+issues, but some new ones could be found. In that case, you must make sure
+to upgrade as soon as possible.
 
 
 Do you really want to install these servers?

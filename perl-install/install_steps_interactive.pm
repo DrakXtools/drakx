@@ -162,14 +162,14 @@ sub selectMouse {
 
     my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
     $o->{mouse} = mouse::fullname2mouse(
-	$o->ask_from_treelist_('', N("Please choose the type of your mouse."), 
+	$o->ask_from_treelist_('', N("Please choose your type of mouse."), 
 			       '|', [ mouse::fullnames() ], $prev) || return) if $force;
 
     if ($force && $o->{mouse}{type} eq 'serial') {
 	$o->set_help('selectSerialPort');
 	$o->{mouse}{device} = 
 	  $o->ask_from_listf(N("Mouse Port"),
-			    N("Please choose on which serial port your mouse is connected to."),
+			    N("Please choose which serial port your mouse is connected to."),
 			    \&mouse::serial_port2text,
 			    [ mouse::serial_ports() ]) or return;
     }
@@ -722,7 +722,7 @@ sub installUpdates {
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
 formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
-have been released after the distribution was released. They may
+have been updated after the distribution was released. They may
 contain security or bug fixes.
 
 To download these packages, you will need to have a working Internet 
@@ -1072,7 +1072,7 @@ sub setupBootloader {
     if (arch() =~ /ppc/) {
 	my $machtype = detect_devices::get_mac_generation();
 	if ($machtype !~ /NewWorld/) {
-	    $o->ask_warn('', N("You appear to have an OldWorld or Unknown\n machine, the yaboot bootloader will not work for you.\nThe install will continue, but you'll\n need to use BootX to boot your machine"));
+	    $o->ask_warn('', N("You appear to have an OldWorld or Unknown\n machine, the yaboot bootloader will not work for you.\nThe install will continue, but you'll\n need to use BootX or some other means to boot your machine"));
 	    log::l("OldWorld or Unknown Machine - no yaboot setup");
 	    return;
 	}

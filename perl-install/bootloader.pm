@@ -452,7 +452,7 @@ sub suggest {
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 N_("Welcome to %s the operating system chooser!
 
-Choose an operating system in the list above or
+Choose an operating system from the list above or
 wait %d seconds for default boot.
 
 ");

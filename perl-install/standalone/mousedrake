@@ -50,7 +50,7 @@ if (!$mouse || !$::auto) {
     $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', N("Emulate third button?"), 1));
 
     $mouse->{device} = $in->ask_from_listf(N("Mouse Port"),
-					   N("Please choose on which serial port your mouse is connected to."),
+					   N("Please choose which serial port your mouse is connected to."),
 					   \&mouse::serial_port2text,
 					   [ mouse::serial_ports ],
 					   $mouse->{device},

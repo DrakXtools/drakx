@@ -17,8 +17,8 @@ use run_program;
 sub description {
     my %services = (
 alsa => N_("Launch the ALSA (Advanced Linux Sound Architecture) sound system"),
-anacron => N_("Anacron a periodic command scheduler."),
-apmd => N_("apmd is used for monitoring batery status and logging it via syslog.
+anacron => N_("Anacron is a periodic command scheduler."),
+apmd => N_("apmd is used for monitoring battery status and logging it via syslog.
 It can also be used for shutting down the machine when the battery is low."),
 atd => N_("Runs commands scheduled by the at command at the time specified when
 at was run, and runs batch commands when the load average is low enough."),

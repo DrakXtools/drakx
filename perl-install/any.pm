@@ -197,7 +197,7 @@ sub setupBootloader__general {
             { label => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
             { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
 		if_(detect_devices::isLaptop(),
-            { label => N("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
+            { label => N("Enable multiple profiles"), val => \$profiles, type => 'bool', advanced => 1 },
 		),
         ],
         complete => sub {
@@ -340,7 +340,7 @@ if_(arch() !~ /sparc|ppc|ia64/,
 
     $in->ask_from__add_modify_remove('',
 N("Here are the entries on your boot menu so far.
-You can add some more or change the existing ones."), [ { 
+You can create additional entries or change the existing ones."), [ { 
         format => sub {
 	    my ($e) = @_;
 	    ref $e ? 
@@ -461,7 +461,7 @@ sub ask_users {
 	    $u->{name} or $in->ask_warn('', N("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return (1,0);
-	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name is already added")), return (1,0);
+	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name has already been added")), return (1,0);
 	    return 0;
 	};
 	my $ret = $in->ask_from_(
@@ -700,7 +700,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 	 -e '/usr/bin/userdrake' ? (ok => N("Launch userdrake"), cancel => N("Cancel")) : (cancel => ''),
 	 messages =>
 N("The per-user sharing uses the group \"fileshare\". 
-You can use userdrake to add a user in this group.")
+You can use userdrake to add a user to this group.")
 	}, [])) {
 	    if (!fork()) { exec "userdrake" or c::_exit(0) }
 	}
