@@ -232,9 +232,9 @@ sub Wizard {
 sub Done {
     my ($in, $all_hds) = @_;
     eval { raid::verify($all_hds->{raids}) };
-    if ($@) {
+    if (my $err = $@) {
 	$::expert or die;
-	$in->ask_okcancel('', [ $@, _("Continue anyway?")]) or return;
+	$in->ask_okcancel('', [ formatError($err), _("Continue anyway?")]) or return;
     }
     foreach (@{$all_hds->{hds}}) {
 	if (!write_partitions($in, $_)) {
@@ -935,7 +935,7 @@ No bootloader is able to handle this without a /boot partition.
 So be careful to add a /boot partition"));
 	undef $_;
     } elsif ($_) {
-	$in->ask_warn('', $_);
+	$in->ask_warn('', formatError($_));
     }
     !$_;
 }
