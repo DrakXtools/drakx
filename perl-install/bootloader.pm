@@ -356,17 +356,18 @@ wait %d seconds for default boot.
 	}
     } else {
 	#- search for dos (or windows) boot partition. Don't look in extended partitions!
-	my ($dos, $win) = 0, 0;
+	my %nbs;
 	foreach (@$hds) {
 	    foreach (@{$_->{primary}{normal}}) {
+		my $label = isNT($_) ? 'NT' : isDos($_) ? 'dos' : 'windows';
 		add_entry($lilo->{entries},
 			  {
 			   type => 'other',
 			   kernel_or_dev => "/dev/$_->{device}",
-			   label => isDos($_) ? "dos"     . ($dos++ ? $dos : '') : "windows" . ($win++ ? $win : '') ,
+			   label => $label . ($nbs{$label}++ ? $nbs{$label} : ''),
 			   table => "/dev/$_->{rootDevice}",
 			   unsafe => 1
-			  }) if isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) });
+			  }) if isNT($_) || isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) });
 	    }
 	}
     }
