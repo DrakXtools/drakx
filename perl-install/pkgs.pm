@@ -524,9 +524,12 @@ sub read_rpmsrate {
 		    my $p = packageByName($packages, $_) or next;
 		    my @m2 = map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense;
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
-		    if (member('INSTALL', @m3) || member('PRINTER', @m3)) {
+		    if (member('INSTALL', @m3)) {
 			member('NOCOPY', @m3) or push @{$packages->{needToCopy} ||= []}, $_;
 			next; #- don't need to put INSTALL flag for a package.
+		    }
+		    if (member('PRINTER', @m3)) {
+			push @{$packages->{needToCopy} ||= []}, $_;
 		    }
 		    if ($p->rate) {
 			my @m4 = $p->rflags;
