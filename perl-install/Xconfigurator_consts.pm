@@ -101,9 +101,9 @@ sub bios_vga_modes {
    65536 => __("64 MB or more"),
 );
 
-$good_default_monitor = arch() !~ /ppc/ ? "High Frequency SVGA, 1024x768 at 70 Hz" : 
-    detect_devices::get_mac_model =~ /^iBook/ ? "iBook 800x600" : "iMac/PowerBook 1024x768";
-$low_default_monitor = "Super VGA, 800x600 at 56 Hz";
+$good_default_monitor = arch() !~ /ppc/ ? 'Generic|1600x1200 @ 70 Hz' :
+  detect_devices::get_mac_model =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768';
+$low_default_monitor = 'Generic|800x600 @ 56 Hz';
 
 @vsyncranges = ("50-70", "50-90", "50-100", "40-150");
 
