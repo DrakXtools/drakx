@@ -18,7 +18,7 @@ use ugtk qw(:helpers :wrappers :various);
 use common;
 use log;
 
-add_icon_path(@icon_paths, "$ENV{SHARE_PATH}/libDrakX/pixmaps", '/usr/lib/libDrakX/icons', 'standalone/icons');
+add_icon_path(@ugtk::icon_paths, "$ENV{SHARE_PATH}/libDrakX/pixmaps", '/usr/lib/libDrakX/icons', 'standalone/icons');
 
 my $forgetTime = 1000; #- in milli-seconds
 $border = 5;
