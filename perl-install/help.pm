@@ -762,32 +762,4 @@ any Windows data.
 
 Click on \"Cancel\" to cancel this operation without losing any data and
 partitions present on this hard drive."),
-
-setupDefaultSpooler =>
-__("Here we select a printing system for your computer to use.  Other OSes may
-offer you one, but mandrake offers three.  
-
-pdq--which means print, don't queue, is the choice if you have a direct
-connection to your printer and you want to be able to panic out of printer
-jams, and you do not have any networked printers.  It will handle only 
-very simple network cases and is somewhat slow for networks.  Pick pdq
-if this is your maiden voyage to linux.  You can change your choices 
-after install by running printerdrake from the Control Center and 
-clicking the expert button.
-
-CUPS--Common Unix Printing System is excellent at printing to your local
-printer and also halfway round the planet.  It is simple and can act like
-a server or a client for the ancient lpd printing system, so it is
-compatible with the systems that went before.  It can do many tricks,
-but the basic setup is almost as easy as pdq.  If you need this to emulate
-an lpd server, you must turn on the cups-lpd daemon.  It has graphical 
-front-ends for printing or choosing printer options.
-
-lprNG--line printer daemon New Generation--this system can do approximately
-the same things the others can do, but it will print to printers mounted
-on a Novell Network, because it supports IPX protocol, and it can print
-directly to shell commands.  If you have need of Novell or printing to
-commands without using a separate pipe construct, use lprNG.  Otherwise,
-CUPS is preferable as it is simpler and better at working over networks."),
-
 );
