@@ -84,8 +84,9 @@ sub vmlinuz2kernel_str {
     };
 }
 sub kernel_str2label {
-    my ($kernel) = @_;
-    $kernel->{use_long_name} ? sanitize_ver("linux-$kernel->{version}") : 
+    my ($kernel, $o_use_long_name) = @_;
+    $o_use_long_name || $kernel->{use_long_name} ?
+      sanitize_ver("linux-$kernel->{version}") : 
         $kernel->{ext} ? "linux$kernel->{ext}" : 'linux';
 }
 
@@ -310,7 +311,8 @@ sub add_entry {
     my ($bootloader, $v) = @_;
 
     my $to_add = $v;
-    foreach my $label ($v->{label}, map { 'old' . $_ . '_' . $v->{label} } ('', 2..10)) {
+    my $label = $v->{label};
+    for (my $i = 0; $i < 10;) {
 	my $conflicting = get_label($label, $bootloader);
 
 	$to_add->{label} = $label;
@@ -328,6 +330,9 @@ sub add_entry {
 	    return $v;
 	}
 	$to_add = $conflicting;
+
+	my $new_label = $v->{label} eq 'linux' && kernel_str2label(vmlinuz2kernel_str($to_add->{kernel_or_dev}), 'use_long_name');
+	$label = $new_label && $label ne $new_label ? $new_label : 'old' . ($i++ ? $i : '') . "_$label";
     }
     die 'add_entry';
 }
