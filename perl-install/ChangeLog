@@ -1,3 +1,343 @@
+2005/03/15  mareklaane
+
+	* share/po/et.po: Fixed translation.
+
+2005/03/15  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: allow drakconnect to display multiple instances
+	of the same adsl device
+	fix comment
+	fix unicorn packages installation
+	do not compare translated string, on Pixel's advice
+	allow not to set gateway device (#14633)
+
+	* network/adsl.pm: allow drakconnect to display multiple instances of the
+	same adsl device
+
+	* mdk-stage1/stage1.c, install_any.pm: fix pcmcia modules loading
+
+2005/03/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/cy.po: updated Italian and Welsh files
+
+2005/03/15  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/empty.pm: do not drop field {info} that can be created
+	in zero_MBR
+	do not drop field {info} that can be created in zero_MBR
+	do not drop field {info} that can be created in zero_MBR
+
+	* c/stuff.xs.pl, detect_devices.pm, modules.pm, install_any.pm,
+	share/list: 
+	  - add dmi_probe()
+	  - some special code on dmi is now moved in dmitable with flags Pkg:
+	and Module:
+
+	* bootloader.pm: fix typo
+
+	* Xconfig/main.pm: 
+	  - new function Xconfig::monitor::is_valid()
+	  - new function Xconfig::monitor::probe() which probes DDC, then
+	fallbacks on DMI
+
+	* Xconfig/monitor.pm: 
+	  - new function Xconfig::monitor::is_valid()
+	  - new function Xconfig::monitor::probe() which probes DDC, then
+	fallbacks on DMI
+	don't pass $monitors_db around, use memoized monitors_db()
+
+2005/03/15  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Fix cdrom device name
+
+2005/03/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm: install scim-input-pad too for japanese
+
+	* drakxtools.spec: 10.2-5mdk
+
+2005/03/14  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* share/rpmsrate: install setarch by default on x86_64, add provisions for
+	a320raid-kernel
+	drivers, add 32-bit compat galaxy gnome theme
+
+2005/03/14  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/03/14  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/shorewall.pm: allow connections from local net to firewall
+	(#14586)
+
+	* network/adsl.pm: remove eagle-usb_must_be_configured file
+	fix and force CMVs symlink creation
+
+2005/03/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po: fixed encoding
+	fixed syntax errors
+
+	* share/po/ja.po, share/po/wa.po: updated Japanese file
+
+2005/03/14  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: fix netmask string..
+
+2005/03/14  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/bootloader-config: ensure we have /sbin in our PATH
+
+2005/03/14  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Fix typo
+
+	* share/po/zh_CN.po: Fix newline issue
+
+	* install_any.pm: Change the code for the rpm copying progress bar to
+	avoid forking.
+
+	* crypto.pm: Update mirror list
+
+	* install_steps_gtk.pm: Don't die while upgrading if
+	/var/ftp/pub/Mandrakelinux isn't there (bug #14585)
+
+2005/03/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: fix netmask message after funda fixed blino message
+
+	* share/po/br.po: update
+	fix netmask message after funda fixed blino message
+
+2005/03/14  willysr
+
+	* share/po/id.po: Delete Conflict Indicator and Little Update
+	Little Update
+	Updated
+	Updated
+	Updated again
+	Downgrade one version
+	updated
+
+2005/03/13  mbukovjan
+
+	* share/po/cs.po: Updates to Czech translations
+
+2005/03/13  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: add some xxXGA names
+
+	* any.pm: fix looking for the user uid.gid
+
+	* bootloader.pm: don't die when we have no entries in grub menu.lst
+
+2005/03/13  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+	* DrakX
+
+2005/03/13  willysr
+
+	* share/po/id.po: Updated
+
+2005/03/12  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, network/netconnect.pm, share/po/be.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	standalone/drakconnect, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/lv.po,
+	share/po/hu.po, share/po/fa.po, share/po/id.po, share/po/ru.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: s/Netmask
+	address/Netmask/. typo fix
+
+	* share/po/zh_CN.po: s/Netmask address/Netmask/. typo fix
+	Updated Simplified Chinese translation
+	Updated Simplified Chinese translation
+
+2005/03/12  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2005/03/12  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: Updates
+	soft/control-center/po/da.po gi/perl-install/share/po/da.po
+
+2005/03/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/vi.po: updated Vietnamese file; corrected
+	syntax error in Chinese file
+
+2005/03/11  mareklaane
+
+	* share/po/et.po: Updated translation.
+
+2005/03/11  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install_any.pm: remove useless /
+	really create ISO images mountpoint (me sux)
+	use full path to rpms for ISO media
+
+	* network/adsl.pm: fix typo (linetype for eagle-usb)
+
+2005/03/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/lt.po, share/po/tg.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* share/po/be.po, share/po/ar.po, share/po/br.po, share/po/am.po,
+	share/po/cy.po, share/po/bs.po, share/po/az.po, share/po/bg.po: updated
+	pot file
+	updated pot file
+
+2005/03/11  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: grf, translate last minute strings
+
+2005/03/11  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/xfree.pm: for 1400x1050, put the resolutions (60 and 75Hz are
+	already in extramodes, but they are GTF modelines, we can overrule them)
+
+2005/03/11  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_gtk.pm: When removing duplicate physical media, take DVDs
+	into account as well as CDs
+
+	* install_any.pm: Use library functions
+	Create an empty MD5SUM file to make urpmi happy
+	Don't stack information windows on top of another
+	Eject last CD after copy of rpms on disk
+
+2005/03/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/uk.po, share/po/eu.po, share/po/bn.po, share/po/ms.po,
+	share/po/am.po, share/po/ko.po, share/po/sl.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/hr.po, share/po/ja.po, share/po/zh_CN.po,
+	share/po/tr.po, share/po/cs.po: fix translations
+
+2005/03/10  fisher
+
+	* share/po/uk.po: tr-tion update
+
+2005/03/10  huftis
+
+	* share/po/nn.po: Updated Norwegian Nynorsk translation.
+
+2005/03/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/modem.pm: use a higher timeout for modem dialing (#10814)
+
+	* install_any.pm: don't spawn a shell if stage2 isn't run directly
+	setup urpmi media for ISO images
+
+	* network/netconnect.pm, mdk-stage1/thirdparty.c: fix messages
+
+2005/03/10  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone.pm: help perl
+
+	* Xconfig/monitor.pm: cleanup
+	simplify
+	we don't want the 4/3 detailed_timings otherwise they conflict with the
+	Xorg builtin vesamodes
+
+	* partition_table/dos.pm: catch bad use of get_rawCHS()
+
+	* Xconfig/xfree.pm: don't add modelines for 1280x1024, they are already in
+	standard vesamodes (builtin Xorg)
+	when adding gtf modelines, have them sorted with high frequencies first
+	(since Xorg prefer the first matching modeline (!))
+
+2005/03/10  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Put a wait message for copying rpms from CDs
+
+2005/03/10  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* diskdrake/interactive.pm, partition_table/raw.pm, fs/type.pm: Diskdrake
+	mods for XBox (thks Pixel)
+
+2005/03/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/ltg.po, share/po/ky.po, share/po/am.po, share/po/cy.po,
+	share/po/fur.po, share/po/vi.po, share/po/tl.po, share/po/uz@Latn.po:
+	fix kde merge
+	further merge with KDE
+	remove duplicated string
+	remove uneeded string
+	merge in new strings
+
+	* standalone/harddrake2 (upload) remove uneeded string
+	enable to upload the hardware list
+
+	* Xconfig/monitor.pm (getinfoFromDDC) fix crash (eg when called from
+	hwdb-clients)
+
+	* run_program.pm (raw) ensure runned programs are logged in explanations
+
+	* share/po/DrakX.pot, share/po/Makefile: merge in new strings
+
+	* share/po/br.po, share/po/fr.po: fix kde merge
+	further merge with KDE
+	update
+	remove duplicated string
+	remove uneeded string
+	merge translations from KDE
+	merge in new strings
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/nb.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/po/mn.po, share/po/lt.po, share/po/tg.po, share/po/bs.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/ta.po,
+	share/po/nl.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po: fix kde merge
+	further merge with KDE
+	remove duplicated string
+	remove uneeded string
+	merge translations from KDE
+	merge in new strings
+
+	* drakxtools.spec: 10.2-4mdk
+	harddrake: require hwdb-clients
+
 2005/03/10  Pixel  <pixel at mandrakesoft.com>
 
 	* Xconfig/monitor.pm: we don't want the 4/3 detailed_timings otherwise
@@ -46439,7 +46779,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1014 2005/03/09 18:41:38 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1015 2005/03/10 10:51:42 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
