@@ -1417,7 +1417,7 @@ What do you want to modify on this printer?",
 	    }
 	    $continue = ($::expert || !$::isInstall);
 	}
-	if ($continue) {
+	if (($continue) || ($::isInstall)) {
 	    # Reinitialize $printer data structure
 	    printer::resetinfo($printer);
 	}
