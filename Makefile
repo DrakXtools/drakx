@@ -86,6 +86,11 @@ upload: clean install
 	upload Mandrake/base compss* ;\
 	upload Mandrake/base *_stage2.gz ;\
 	upload boot '' ;\
+	upload misc genbasefiles ;\
+	upload misc genhdlist_cz2 ;\
+	upload misc make_mdkinst_stage2 ;\
+	upload misc packdrake ;\
+	upload misc rpm2header ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo
 
