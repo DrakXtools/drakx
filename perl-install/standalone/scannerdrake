@@ -81,9 +81,13 @@ sub tryConfScanner {
 	$in->ask_warn('scannerdrake', _("This %s scanner is unsupported", $model));
 	return;
     }
-    if ($scanner::scannerDB->{$model}{driver} =~ /Parport/) {
-	$in->ask_warn('scannerdrake', _("This %s scanner uses parallel port, which is unsupported for the moment", $model));
-	return;
+    # if ($scanner::scannerDB->{$model}{driver} =~ /Parport/) {
+    # 	$in->ask_warn('scannerdrake', _("This %s scanner uses parallel port, which is unsupported for the moment", $model));
+    # 	return;
+    #     }
+    if ($scanner::scannerDB->{$model}{driver} =~ /SCSI/) {
+     	#$in->ask_warn('scannerdrake', _("This %s scanner uses parallel port, which is unsupported for the moment", $model));
+     	#return;
     }
     scanner::confScanner($model,$port);
 }
@@ -94,6 +98,9 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.6  2002/02/18 16:12:07  yduret
+# scsi/parport preliminary support
+#
 # Revision 1.5  2002/01/18 20:16:48  gc
 # - move 'use standalone' up to comply to 'explanations'
 # - fix a small english problem
