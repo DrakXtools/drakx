@@ -782,7 +782,17 @@ sub readBootloaderConfigBeforeInstall {
 	if (my $v = readlink "$o->{prefix}/boot/$image") {
 	    $v = "/boot/$v" if $v !~ m|^/|;
 	    if (-e "$o->{prefix}$v") {
-		my $e = lilo::get("/boot/$image", $o->{bootloader}) or next;
+		my $e;
+
+		if (arch() =~ /sparc/) {
+		    require silo;
+		    $e = silo::get("/boot/$image", $o->{bootloader});
+		} else {
+		    require lilo;
+		    $e = lilo::get("/boot/$image", $o->{bootloader});
+		}
+
+		$e or next;
 		$e->{kernel_or_dev} = $v;
 		log::l("renaming /boot/$image entry by $v");
 	    }
@@ -912,7 +922,7 @@ sub miscellaneous {
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
     $ENV{SECURE_LEVEL} = $o->{security};
-    add2hash_ $o, { useSupermount => $o->{security} < 4 && $o->{installClass} !~ /corporate|server/ };
+    add2hash_ $o, { useSupermount => $o->{security} < 4 && arch() !~ /sparc/ && $o->{installClass} !~ /corporate|server/ };
 
     cat_("/proc/cmdline") =~ /mem=(\S+)/;
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });

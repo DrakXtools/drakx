@@ -960,7 +960,7 @@ sub miscellaneous {
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
 
-    add2hash_ $o, { useSupermount => $s < 4 && arch() =~ /^sparc/ };
+    add2hash_ $o, { useSupermount => $s < 4 && arch() !~ /^sparc/ };
     $s = $l{$s} || $s;
 
     !$::beginner || $clicked and $o->ask_from_entries_refH('',

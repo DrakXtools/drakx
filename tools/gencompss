@@ -4,11 +4,11 @@ open F, "bzip2 -dc @ARGV 2>/dev/null | hdlist2groups - |";
 foreach (<F>) {
     chop;
     /(.*):(.*)/;
-    push @{$l{$2}}, $1;
+    $l{$2}{$1} = undef;
 }
 close F or die;
 foreach (sort keys %l) {
     print "$_\n";
-    print "\t$_\n" foreach sort @{$l{$_}};
+    print "\t$_\n" foreach sort keys %{$l{$_}};
     print "\n";
 }

@@ -10,12 +10,15 @@
 	* commands.pm: fixed insmod command to take modules64.cz* on sparc*
 	* install2.pm: removed create boot disk and create auto install disk on
 	sparc*. force writing of /etc/conf.modules for step setupBootloader.
+	* install_steps.pm: fixed upgrade for sparc* and disable supermount for sparc*.
 	* install_steps_interactive.pm: added missing $prefix for glob_. call
 	configure_entry in setupSILO. fixed cancel or None entry on setupBootloader.
 	* modules.pm: updated alias for sparc*.
 	* any.pm: fixed proprable wrong test for setupBootloader in beginner at
 	the very beginning.
 	* printer.pm: fixed typo.
+	* Xconfigurator.pm: avoid testing if using a Sun* server, added depth and
+	resolution for these server too.
 
 2000-05-24  François Pons  <fpons@mandrakesoft.com>
 

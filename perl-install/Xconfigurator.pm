@@ -293,7 +293,7 @@ sub testFinalConfig($;$$) {
     my $f = "/etc/X11/XF86Config.test";
     write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/$f");
 
-    $skiptest || $o->{card}{server} eq 'FBDev' and return 1; #- avoid testing since untestable without reboot.
+    $skiptest || $o->{card}{server} =~ 'FBDev|Sun' and return 1; #- avoid testing with these.
 
     #- needed for bad cards not restoring cleanly framebuffer
     my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
@@ -423,8 +423,11 @@ sub autoDefaultDepth($$) {
 
     return 24 if $card->{identifier} =~ /SiS/;
 
-    if ($card->{server} eq 'FBDev') {
-	return 16; #- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.
+    for ($card->{server}) {
+	/FBDev/   and return 16; #- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.
+	/Sun24/   and return 24;
+	/SunMono/ and return 2;
+	/Sun/     and return 8;
     }
 
     while (my ($d, $r) = each %{$card->{depth}}) {
@@ -530,6 +533,11 @@ sub resolutionsConfiguration($%) {
     #- For the mono and vga16 server, no further configuration is required.
     if (member($card->{server}, "Mono", "VGA16")) {
 	$card->{depth}{8} = [[ 640, 480 ]];
+	return;
+    } elsif ($card->{server} =~ /Sun/) {
+	$card->{depth}{2} = [[ 1152, 864 ]] if $card->{server} eq "SunMono";
+	$card->{depth}{8} = [[ 1152, 864 ]] if $card->{server} eq "Sun";
+	$card->{depth}{24} = [[ 1152, 864 ]] if $card->{server} eq "Sun24";
 	return;
     }
 
