@@ -935,7 +935,9 @@ sub summary {
   
     my @sound_cards = detect_devices::getSoundDevices();
 
+    my $sound_index = 0;
     foreach my $device (@sound_cards) {
+	my $own_sound_index = $sound_index;
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("Sound card"),
@@ -944,9 +946,10 @@ sub summary {
 	    },
 	    clicked => sub {
 	        require harddrake::sound; 
-	        harddrake::sound::config($o, $device)
+	        harddrake::sound::config($o, $device, $own_sound_index)
 	    },
 	};
+     $sound_index++;
     }
 
     if (!@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO})) {

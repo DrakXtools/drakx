@@ -141,13 +141,13 @@ sub get_alternative {
 }
 
 sub do_switch {
-    my ($old_driver, $new_driver) = @_;
+    my ($old_driver, $new_driver, $index) = @_;
     log::explanations("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
     rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
     unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
     modules::remove_module($old_driver); # completed by the next add_alias()
-    modules::add_alias("sound-slot-$::i", $new_driver);
+    modules::add_alias("sound-slot-$index", $new_driver);
     modules::write_conf();
     if ($new_driver =~ /^snd-/) {
         rooted("service alsa start") unless $blacklisted;
@@ -160,7 +160,7 @@ sub do_switch {
 }
 
 sub switch {
-    my ($in, $device) = @_;
+    my ($in, $device, $index) = @_;
     my $driver = $device->{current_driver};
     $driver ||= $device->{driver};
 
@@ -173,7 +173,7 @@ sub switch {
                           N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
                             $device->{description}, $driver),
                           [
-                           &get_any_driver_entry($in, $driver, $device),
+                           &get_any_driver_entry($in, $driver, $device, $index),
                           ]
                          );
         } elsif ($in->ask_from_({ title => N("Sound configuration"),
@@ -207,7 +207,7 @@ To use alsa, one can either use:
                                     val => N("Trouble shooting"), disabled => sub {},
                                     clicked => sub { &trouble($in) }
                                 },
-                                &get_any_driver_entry($in, $driver, $device),
+                                &get_any_driver_entry($in, $driver, $device, $index),
                                 ]))
         {
             return if $new_driver eq $driver;
@@ -216,7 +216,7 @@ To use alsa, one can either use:
 It has been reported to oops the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
             my $wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
-            do_switch($driver, $new_driver);
+            do_switch($driver, $new_driver, $index);
             undef $wait;
         }
     } elsif ($driver =~ /^Bad:/) {
@@ -228,7 +228,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
         $in->ask_from(N("No known driver"), 
                       N("There's no known driver for your sound card (%s)",
                         $device->{description}),
-                      [ &get_any_driver_entry($in, $driver, $device) ]);
+                      [ &get_any_driver_entry($in, $driver, $device, $index) ]);
     } else {
         $in->ask_warn(N("Unkown driver"), 
                       N("Error: The \"%s\" driver for your sound card is unlisted"),
@@ -238,8 +238,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
 }
 
 sub config {
-    my ($in, $device) = @_;
-    switch($in, $device);
+    switch(@_);
 }
 
 
@@ -269,7 +268,7 @@ initlevel 3
 }
 
 sub choose_any_driver {
-    my ($in, $driver, $card) = @_;
+    my ($in, $driver, $card, $index) = @_;
     my $old_driver = $driver;
     if ($in->ask_from(N("Choosing an arbitratry driver"),
                       formatAlaTeX(N("If you really think that you know which driver is the right one for your card
@@ -281,15 +280,15 @@ The current driver for your \"%s\" sound card is \"%s\" ", $card, $driver)),
                       ]
                      )) {
         
-        do_switch($old_driver, $driver);
+        do_switch($old_driver, $driver, $index);
     }
 }
 
 sub get_any_driver_entry {
-    my ($in, $driver, $device) = @_;
+    my ($in, $driver, $device, $index) = @_;
     {
         val => N("Let me pick any driver"), disabled => sub {},
-        clicked => sub { &choose_any_driver($in, $driver, $device->{description}); goto end }
+        clicked => sub { &choose_any_driver($in, $driver, $device->{description}, $index); goto end }
     }
 }
 
