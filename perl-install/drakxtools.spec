@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.8mdk
+Release: 0.9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -366,6 +366,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jan  6 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.9mdk
+- diskdrake: display a progress bar while formating (pixel)
+- localedrake: fix UIM config b/c of new UIM-0.4.5
+
 * Wed Jan  5 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.8mdk
 - drakauth: "Administrator (root)" is more user-friendly than "root"
 - drakbackup (stew):
