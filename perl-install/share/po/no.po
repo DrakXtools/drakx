@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2002-01-08 13:54+0100\n"
+"POT-Creation-Date: 2002-01-21 08:41+0100\n"
 "PO-Revision-Date: 2001-09-21 10:22+0200\n"
 "Last-Translator: Andreas Bergstrøm <abergstr@halden.net>\n"
 "Language-Team: Norsk\n"
@@ -238,7 +238,7 @@ msgid "XFree86 server: %s"
 msgstr "XFree86-tjener: %s"
 
 #: ../../Xconfigurator.pm_.c:837 ../../printerdrake.pm_.c:1930
-#: ../../standalone/draknet_.c:301 ../../standalone/draknet_.c:304
+#: ../../standalone/draknet_.c:275 ../../standalone/draknet_.c:278
 msgid "Expert Mode"
 msgstr "Ekspertmodus"
 
@@ -569,15 +569,15 @@ msgstr "Skjermmodus"
 msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
-#: ../../any.pm_.c:166 ../../any.pm_.c:752
-#: ../../install_steps_interactive.pm_.c:1074 ../../network/modem.pm_.c:46
+#: ../../any.pm_.c:166 ../../any.pm_.c:756
+#: ../../install_steps_interactive.pm_.c:1079 ../../network/modem.pm_.c:48
 #: ../../printerdrake.pm_.c:430 ../../printerdrake.pm_.c:509
-#: ../../standalone/draknet_.c:620
+#: ../../standalone/draknet_.c:624
 msgid "Password"
 msgstr "Passord"
 
-#: ../../any.pm_.c:167 ../../any.pm_.c:753
-#: ../../install_steps_interactive.pm_.c:1075
+#: ../../any.pm_.c:167 ../../any.pm_.c:757
+#: ../../install_steps_interactive.pm_.c:1080
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
@@ -612,13 +612,14 @@ msgid ""
 msgstr ""
 "Opsjon ``Begrense kommandolinje-opsjoner'' kan ikke brukes uten et passord"
 
-#: ../../any.pm_.c:180 ../../any.pm_.c:729
-#: ../../install_steps_interactive.pm_.c:1069
+#: ../../any.pm_.c:180 ../../any.pm_.c:733
+#: ../../diskdrake_interactive.pm_.c:1087
+#: ../../install_steps_interactive.pm_.c:1074
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../../any.pm_.c:180 ../../any.pm_.c:729
-#: ../../install_steps_interactive.pm_.c:1069
+#: ../../any.pm_.c:180 ../../any.pm_.c:733
+#: ../../install_steps_interactive.pm_.c:1074
 msgid "The passwords do not match"
 msgstr "Passordene stemmer ikke overens"
 
@@ -654,13 +655,13 @@ msgstr ""
 "Her er de forskjellige oppføringene.\n"
 "Du kan legge til flere eller endre de eksisterende."
 
-#: ../../any.pm_.c:236 ../../standalone/drakbackup_.c:640
-#: ../../standalone/drakbackup_.c:742 ../../standalone/drakfont_.c:756
-#: ../../standalone/drakfont_.c:793
+#: ../../any.pm_.c:236 ../../standalone/drakbackup_.c:720
+#: ../../standalone/drakbackup_.c:823 ../../standalone/drakfont_.c:761
+#: ../../standalone/drakfont_.c:798
 msgid "Add"
 msgstr "Legg til"
 
-#: ../../any.pm_.c:236 ../../any.pm_.c:740 ../../diskdrake.pm_.c:160
+#: ../../any.pm_.c:236 ../../any.pm_.c:744 ../../diskdrake.pm_.c:160
 #: ../../interactive_http.pm_.c:153 ../../printerdrake.pm_.c:1891
 #: ../../printerdrake.pm_.c:1892 ../../printerdrake.pm_.c:1949
 #: ../../printerdrake.pm_.c:1993
@@ -675,7 +676,7 @@ msgstr "Modifiser"
 msgid "Which type of entry do you want to add?"
 msgstr "Hvilken inngangstype vil du legge til"
 
-#: ../../any.pm_.c:245
+#: ../../any.pm_.c:245 ../../standalone/drakbackup_.c:863
 msgid "Linux"
 msgstr "Linux"
 
@@ -747,53 +748,53 @@ msgstr "Tom etikett er ikke tillatt"
 msgid "This label is already used"
 msgstr "Denne etiketten er allerede i bruk"
 
-#: ../../any.pm_.c:619
+#: ../../any.pm_.c:624
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Fant %s %s grensesnitt"
 
-#: ../../any.pm_.c:620
+#: ../../any.pm_.c:625
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../../any.pm_.c:621
+#: ../../any.pm_.c:626
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
-#: ../../any.pm_.c:623 ../../any.pm_.c:782 ../../interactive.pm_.c:112
-#: ../../my_gtk.pm_.c:909
+#: ../../any.pm_.c:628 ../../any.pm_.c:786 ../../interactive.pm_.c:112
+#: ../../my_gtk.pm_.c:978
 msgid "No"
 msgstr "Nei"
 
-#: ../../any.pm_.c:623 ../../any.pm_.c:781 ../../interactive.pm_.c:112
-#: ../../my_gtk.pm_.c:909
+#: ../../any.pm_.c:628 ../../any.pm_.c:785 ../../interactive.pm_.c:112
+#: ../../my_gtk.pm_.c:978
 msgid "Yes"
 msgstr "Ja"
 
-#: ../../any.pm_.c:624
+#: ../../any.pm_.c:629
 msgid "See hardware info"
 msgstr "Se maskinvareinfo"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
-#: ../../any.pm_.c:659
+#: ../../any.pm_.c:663
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Installerer driver for %s kort %s"
 
-#: ../../any.pm_.c:660
+#: ../../any.pm_.c:664
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
-#: ../../any.pm_.c:671
+#: ../../any.pm_.c:675
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Hvilken %s driver skal jeg prøve?"
 
-#: ../../any.pm_.c:679
+#: ../../any.pm_.c:683
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -812,20 +813,20 @@ msgstr ""
 "burde\n"
 "ikke forårsake noen skader."
 
-#: ../../any.pm_.c:684
+#: ../../any.pm_.c:688
 msgid "Autoprobe"
 msgstr "Automatisk sondering"
 
-#: ../../any.pm_.c:684
+#: ../../any.pm_.c:688
 msgid "Specify options"
 msgstr "Spesifiser opsjoner"
 
-#: ../../any.pm_.c:688
+#: ../../any.pm_.c:692
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "Du kan nå gi dens opsjoner til modul %s."
 
-#: ../../any.pm_.c:694
+#: ../../any.pm_.c:698
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -836,11 +837,11 @@ msgstr ""
 "Opsjonene er i format ``navn=verdi navn2=verdi2 ...''.\n"
 "F.eks., ``io=0x300 irq=7''"
 
-#: ../../any.pm_.c:697
+#: ../../any.pm_.c:701
 msgid "Module options:"
 msgstr "Modulopsjoner:"
 
-#: ../../any.pm_.c:708
+#: ../../any.pm_.c:712
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -849,33 +850,33 @@ msgstr ""
 "Lasting av modul %s feilet.\n"
 "Ønsker du å prøve igjen med andre parametere?"
 
-#: ../../any.pm_.c:726
+#: ../../any.pm_.c:730
 #, c-format
 msgid "(already added %s)"
 msgstr "(allerede lagt til %s)"
 
-#: ../../any.pm_.c:730
+#: ../../any.pm_.c:734
 msgid "This password is too simple"
 msgstr "Dette passordet er for enkelt"
 
-#: ../../any.pm_.c:731
+#: ../../any.pm_.c:735
 msgid "Please give a user name"
 msgstr "Vennligst oppgi et brukernavn"
 
-#: ../../any.pm_.c:732
+#: ../../any.pm_.c:736
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde små bokstaver, tall, `-' og `_'"
 
-#: ../../any.pm_.c:733
+#: ../../any.pm_.c:737
 msgid "This user name is already added"
 msgstr "Denne brukeren er allerede lagt til"
 
-#: ../../any.pm_.c:737
+#: ../../any.pm_.c:741
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: ../../any.pm_.c:738
+#: ../../any.pm_.c:742
 #, c-format
 msgid ""
 "Enter a user\n"
@@ -884,32 +885,32 @@ msgstr ""
 "Entre en bruker\n"
 "%s"
 
-#: ../../any.pm_.c:739
+#: ../../any.pm_.c:743
 msgid "Accept user"
 msgstr "Godta bruker"
 
-#: ../../any.pm_.c:750
+#: ../../any.pm_.c:754
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../../any.pm_.c:751 ../../printerdrake.pm_.c:429
+#: ../../any.pm_.c:755 ../../printerdrake.pm_.c:429
 #: ../../printerdrake.pm_.c:508
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../../any.pm_.c:754
+#: ../../any.pm_.c:758
 msgid "Shell"
 msgstr "Skall"
 
-#: ../../any.pm_.c:756
+#: ../../any.pm_.c:760
 msgid "Icon"
 msgstr "Ikon"
 
-#: ../../any.pm_.c:778
+#: ../../any.pm_.c:782
 msgid "Autologin"
 msgstr "Autoinnlogging"
 
-#: ../../any.pm_.c:779
+#: ../../any.pm_.c:783
 #, fuzzy
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
@@ -918,37 +919,37 @@ msgstr ""
 "Jeg kan sette opp maskinen din til å automatisk starte X ved oppstart.\n"
 "Vil du at X skal starte når du starter maskinen på nytt?"
 
-#: ../../any.pm_.c:783
+#: ../../any.pm_.c:787
 msgid "Choose the default user:"
 msgstr "Velg standard bruker:"
 
-#: ../../any.pm_.c:784
+#: ../../any.pm_.c:788
 msgid "Choose the window manager to run:"
 msgstr "Velg vindushåndtereren som skal kjøres:"
 
-#: ../../any.pm_.c:793
+#: ../../any.pm_.c:797
 #, fuzzy
 msgid "Please choose a language to use."
 msgstr "Vennligst velg språk som skal brukes."
 
-#: ../../any.pm_.c:795
+#: ../../any.pm_.c:799
 msgid "You can choose other languages that will be available after install"
 msgstr "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
 
-#: ../../any.pm_.c:807 ../../install_steps_interactive.pm_.c:702
+#: ../../any.pm_.c:811 ../../install_steps_interactive.pm_.c:701
 msgid "All"
 msgstr "Alle"
 
-#: ../../any.pm_.c:891
+#: ../../any.pm_.c:895
 #, fuzzy
 msgid "Allow all users"
 msgstr "Legg til en bruker"
 
-#: ../../any.pm_.c:891 ../../install_steps_interactive.pm_.c:514
+#: ../../any.pm_.c:895 ../../install_steps_interactive.pm_.c:514
 msgid "Custom"
 msgstr "Skreddersydd"
 
-#: ../../any.pm_.c:891
+#: ../../any.pm_.c:895
 #, fuzzy
 msgid "No sharing"
 msgstr "CUPS starter"
@@ -971,52 +972,52 @@ msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:857
+#: ../../bootloader.pm_.c:858
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:860
+#: ../../bootloader.pm_.c:861
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:863
+#: ../../bootloader.pm_.c:864
 msgid "Press enter to boot the selected OS, 'e' to edit the"
 msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:866
+#: ../../bootloader.pm_.c:867
 msgid "commands before booting, or 'c' for a command-line."
 msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
-#: ../../bootloader.pm_.c:869
+#: ../../bootloader.pm_.c:870
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
 msgstr "Den markerte inngangen vil bli startet automatisk om %d sekunder."
 
-#: ../../bootloader.pm_.c:873
+#: ../../bootloader.pm_.c:874
 msgid "not enough room in /boot"
 msgstr "ikke nok plass i /boot"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #. -PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-#: ../../bootloader.pm_.c:973
+#: ../../bootloader.pm_.c:974
 msgid "Desktop"
 msgstr "Skrivebord"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#: ../../bootloader.pm_.c:975
+#: ../../bootloader.pm_.c:976
 msgid "Start Menu"
 msgstr "Startmeny"
 
-#: ../../bootloader.pm_.c:994
+#: ../../bootloader.pm_.c:995
 #, fuzzy, c-format
 msgid "You can't install the bootloader on a %s partition\n"
 msgstr "Hvor ønsker du installere oppstartslasteren?"
@@ -1074,8 +1075,9 @@ msgstr ""
 "Du bruker for øyeblikket %s som oppstartshåndterer.\n"
 "Klikk på Konfigurer for å starte oppsett-hjelperen."
 
-#: ../../bootlook.pm_.c:104 ../../standalone/drakgw_.c:694
-#: ../../standalone/draknet_.c:283 ../../standalone/tinyfirewall_.c:57
+#: ../../bootlook.pm_.c:104 ../../standalone/drakbackup_.c:1473
+#: ../../standalone/drakbackup_.c:1482 ../../standalone/drakgw_.c:706
+#: ../../standalone/draknet_.c:257 ../../standalone/tinyfirewall_.c:59
 msgid "Configure"
 msgstr "Konfigurer"
 
@@ -1099,28 +1101,30 @@ msgstr "Nei, jeg vil ikke ha autologin"
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Ja, jeg vil ha autologin med denne (bruker; skrivebord)"
 
-#: ../../bootlook.pm_.c:155 ../../standalone/drakbackup_.c:2904
-#: ../../standalone/drakbackup_.c:3156 ../../standalone/drakbackup_.c:3189
-#: ../../standalone/drakfont_.c:523 ../../standalone/drakfont_.c:599
-#: ../../standalone/drakfont_.c:650 ../../standalone/drakfont_.c:714
-#: ../../standalone/drakfont_.c:736 ../../standalone/draknet_.c:108
-#: ../../standalone/draknet_.c:140 ../../standalone/draknet_.c:211
-#: ../../standalone/draknet_.c:323 ../../standalone/draknet_.c:439
-#: ../../standalone/draknet_.c:517 ../../standalone/draknet_.c:560
-#: ../../standalone/draknet_.c:661
+#: ../../bootlook.pm_.c:155 ../../standalone/drakbackup_.c:3111
+#: ../../standalone/drakbackup_.c:3368 ../../standalone/drakfont_.c:525
+#: ../../standalone/drakfont_.c:627 ../../standalone/drakfont_.c:691
+#: ../../standalone/drakfont_.c:737 ../../standalone/draknet_.c:109
+#: ../../standalone/draknet_.c:141 ../../standalone/draknet_.c:297
+#: ../../standalone/draknet_.c:435 ../../standalone/draknet_.c:521
+#: ../../standalone/draknet_.c:564 ../../standalone/draknet_.c:665
 msgid "OK"
 msgstr "OK"
 
-#: ../../bootlook.pm_.c:156 ../../install_steps_gtk.pm_.c:521
-#: ../../interactive.pm_.c:122 ../../interactive.pm_.c:289
-#: ../../interactive.pm_.c:311 ../../interactive_stdio.pm_.c:141
-#: ../../my_gtk.pm_.c:606 ../../my_gtk.pm_.c:609 ../../my_gtk.pm_.c:910
-#: ../../printerdrake.pm_.c:1200 ../../standalone/drakautoinst_.c:203
-#: ../../standalone/drakfont_.c:601 ../../standalone/drakfont_.c:738
-#: ../../standalone/drakgw_.c:699 ../../standalone/draknet_.c:115
-#: ../../standalone/draknet_.c:147 ../../standalone/draknet_.c:316
-#: ../../standalone/draknet_.c:533 ../../standalone/draknet_.c:675
-#: ../../standalone/tinyfirewall_.c:63
+#: ../../bootlook.pm_.c:156 ../../install_steps_gtk.pm_.c:463
+#: ../../install_steps_gtk.pm_.c:521 ../../interactive.pm_.c:122
+#: ../../interactive.pm_.c:289 ../../interactive.pm_.c:311
+#: ../../interactive_stdio.pm_.c:141 ../../my_gtk.pm_.c:653
+#: ../../my_gtk.pm_.c:656 ../../my_gtk.pm_.c:979 ../../printerdrake.pm_.c:1200
+#: ../../standalone/drakautoinst_.c:204 ../../standalone/drakbackup_.c:2298
+#: ../../standalone/drakbackup_.c:2316 ../../standalone/drakbackup_.c:2337
+#: ../../standalone/drakbackup_.c:2358 ../../standalone/drakbackup_.c:2376
+#: ../../standalone/drakbackup_.c:2424 ../../standalone/drakbackup_.c:2444
+#: ../../standalone/drakbackup_.c:2463 ../../standalone/drakfont_.c:739
+#: ../../standalone/drakgw_.c:711 ../../standalone/draknet_.c:116
+#: ../../standalone/draknet_.c:148 ../../standalone/draknet_.c:290
+#: ../../standalone/draknet_.c:537 ../../standalone/draknet_.c:679
+#: ../../standalone/tinyfirewall_.c:65
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -1219,8 +1223,8 @@ msgstr ""
 msgid "Please make a backup of your data first"
 msgstr "Vennligst ta sikkerhetskopi av din data først"
 
-#: ../../diskdrake.pm_.c:99 ../../diskdrake_interactive.pm_.c:803
-#: ../../diskdrake_interactive.pm_.c:812 ../../diskdrake_interactive.pm_.c:866
+#: ../../diskdrake.pm_.c:99 ../../diskdrake_interactive.pm_.c:851
+#: ../../diskdrake_interactive.pm_.c:860 ../../diskdrake_interactive.pm_.c:914
 msgid "Read carefully!"
 msgstr "Les nøye!"
 
@@ -1234,11 +1238,11 @@ msgstr ""
 "sektorer er nok)\n"
 "ved begynnelsen av disken"
 
-#: ../../diskdrake.pm_.c:121 ../../diskdrake_interactive.pm_.c:315
-#: ../../diskdrake_interactive.pm_.c:330 ../../install_steps.pm_.c:72
+#: ../../diskdrake.pm_.c:121 ../../diskdrake_interactive.pm_.c:314
+#: ../../diskdrake_interactive.pm_.c:329 ../../install_steps.pm_.c:72
 #: ../../install_steps_interactive.pm_.c:67
 #: ../../install_steps_interactive.pm_.c:349 ../../interactive_http.pm_.c:119
-#: ../../interactive_http.pm_.c:120 ../../standalone/diskdrake_.c:69
+#: ../../interactive_http.pm_.c:120 ../../standalone/diskdrake_.c:71
 msgid "Error"
 msgstr "Feil"
 
@@ -1255,12 +1259,13 @@ msgid "Mount"
 msgstr "Monter"
 
 #: ../../diskdrake.pm_.c:196 ../../diskdrake.pm_.c:218
-#: ../../diskdrake.pm_.c:505 ../../diskdrake_interactive.pm_.c:354
+#: ../../diskdrake.pm_.c:505 ../../diskdrake_interactive.pm_.c:353
 #: ../../diskdrake_interactive.pm_.c:525
 msgid "Mount point"
 msgstr "Monteringspunkt"
 
 #: ../../diskdrake.pm_.c:197 ../../diskdrake.pm_.c:219
+#: ../../diskdrake_interactive.pm_.c:355
 msgid "Options"
 msgstr "Valg"
 
@@ -1270,7 +1275,7 @@ msgid "Export"
 msgstr "Ekspert"
 
 #: ../../diskdrake.pm_.c:220 ../../diskdrake.pm_.c:443
-#: ../../diskdrake.pm_.c:560 ../../diskdrake_interactive.pm_.c:355
+#: ../../diskdrake.pm_.c:535 ../../diskdrake_interactive.pm_.c:354
 #: ../../diskdrake_interactive.pm_.c:490
 msgid "Type"
 msgstr "Type"
@@ -1347,13 +1352,13 @@ msgstr "SunOS"
 msgid "Swap"
 msgstr "Veksel"
 
-#: ../../diskdrake.pm_.c:422 ../../diskdrake_interactive.pm_.c:954
+#: ../../diskdrake.pm_.c:422 ../../diskdrake_interactive.pm_.c:1002
 msgid "Empty"
 msgstr "Tom"
 
 #: ../../diskdrake.pm_.c:422 ../../install_steps_gtk.pm_.c:378
 #: ../../install_steps_gtk.pm_.c:438 ../../mouse.pm_.c:161
-#: ../../services.pm_.c:161
+#: ../../services.pm_.c:161 ../../standalone/drakbackup_.c:915
 msgid "Other"
 msgstr "Andre"
 
@@ -1392,99 +1397,87 @@ msgid "Where do you want to mount device %s?"
 msgstr "Hvor vil du montere %s enheten?"
 
 #: ../../diskdrake.pm_.c:526
-msgid "Mount options"
-msgstr "Monteringsvalg:"
-
-#: ../../diskdrake.pm_.c:533
-msgid "Various"
-msgstr "Diverse"
-
-#: ../../diskdrake.pm_.c:551
 msgid "Removable media"
 msgstr "Fjernbart media"
 
-#: ../../diskdrake.pm_.c:558
+#: ../../diskdrake.pm_.c:533
 msgid "Change type"
 msgstr "Endre type"
 
-#: ../../diskdrake.pm_.c:559 ../../diskdrake_interactive.pm_.c:489
+#: ../../diskdrake.pm_.c:534 ../../diskdrake_interactive.pm_.c:489
 msgid "Which filesystem do you want?"
 msgstr "Hvilket filsystem ønsker du?"
 
-#: ../../diskdrake.pm_.c:626
+#: ../../diskdrake.pm_.c:601
 msgid "click here"
 msgstr ""
 
-#: ../../diskdrake_interactive.pm_.c:163
+#: ../../diskdrake_interactive.pm_.c:164
 msgid "Choose a partition"
 msgstr "Velg en partisjon"
 
-#: ../../diskdrake_interactive.pm_.c:163
+#: ../../diskdrake_interactive.pm_.c:164
 msgid "Choose another partition"
 msgstr "Velg en annen partisjon"
 
-#: ../../diskdrake_interactive.pm_.c:188
+#: ../../diskdrake_interactive.pm_.c:189
 msgid "Exit"
 msgstr "Avslutt"
 
-#: ../../diskdrake_interactive.pm_.c:210
+#: ../../diskdrake_interactive.pm_.c:211
 msgid "Toggle to expert mode"
 msgstr "Skift til ekspertmodus"
 
-#: ../../diskdrake_interactive.pm_.c:210
+#: ../../diskdrake_interactive.pm_.c:211
 msgid "Toggle to normal mode"
 msgstr "Skift til normalmodus"
 
-#: ../../diskdrake_interactive.pm_.c:210
+#: ../../diskdrake_interactive.pm_.c:211
 msgid "Undo"
 msgstr "Angre"
 
-#: ../../diskdrake_interactive.pm_.c:229
+#: ../../diskdrake_interactive.pm_.c:230
 msgid "Continue anyway?"
 msgstr "Fortsette likevel?"
 
-#: ../../diskdrake_interactive.pm_.c:234
+#: ../../diskdrake_interactive.pm_.c:235
 msgid "Quit without saving"
 msgstr "Avslutt uten å lagre"
 
-#: ../../diskdrake_interactive.pm_.c:234
+#: ../../diskdrake_interactive.pm_.c:235
 msgid "Quit without writing the partition table?"
 msgstr "Avslutt uten å skrive partisjonstabellen?"
 
-#: ../../diskdrake_interactive.pm_.c:237
+#: ../../diskdrake_interactive.pm_.c:238
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Ønsker du å lagre modifiseringen av /etc/fstab"
 
-#: ../../diskdrake_interactive.pm_.c:247
+#: ../../diskdrake_interactive.pm_.c:248
 msgid "Auto allocate"
 msgstr "Automatisk allokering"
 
-#: ../../diskdrake_interactive.pm_.c:247
+#: ../../diskdrake_interactive.pm_.c:248
 msgid "Clear all"
 msgstr "Fjern alle"
 
-#: ../../diskdrake_interactive.pm_.c:247
+#: ../../diskdrake_interactive.pm_.c:248
 #: ../../install_steps_interactive.pm_.c:201
 msgid "More"
 msgstr "Mer"
 
-#: ../../diskdrake_interactive.pm_.c:250
+#: ../../diskdrake_interactive.pm_.c:251
 msgid "Hard drive information"
 msgstr "Harddisk informasjon"
 
-#: ../../diskdrake_interactive.pm_.c:267
-msgid "Not enough space for auto-allocating"
-msgstr "Ikke nok plass for auto-allokering"
-
-#: ../../diskdrake_interactive.pm_.c:273
+#: ../../diskdrake_interactive.pm_.c:272
 msgid "All primary partitions are used"
 msgstr "Alle primære partisjoner er i bruk"
 
-#: ../../diskdrake_interactive.pm_.c:274
+#: ../../diskdrake_interactive.pm_.c:273
 msgid "I can't add any more partition"
 msgstr "Jeg kan ikke legge til flere partisjoner"
 
-#: ../../diskdrake_interactive.pm_.c:275
+#: ../../diskdrake_interactive.pm_.c:274
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
@@ -1492,36 +1485,36 @@ msgstr ""
 "For å ha flere partisjoner vennligst slett en for å kunne opprette en "
 "utvidet partisjon"
 
-#: ../../diskdrake_interactive.pm_.c:285
+#: ../../diskdrake_interactive.pm_.c:284
 #, fuzzy
 msgid "Save partition table"
 msgstr "Endre partisjonstype"
 
-#: ../../diskdrake_interactive.pm_.c:286
+#: ../../diskdrake_interactive.pm_.c:285
 #, fuzzy
 msgid "Restore partition table"
 msgstr "Prøver å redde partisjonstabell"
 
-#: ../../diskdrake_interactive.pm_.c:287
+#: ../../diskdrake_interactive.pm_.c:286
 #, fuzzy
 msgid "Rescue partition table"
 msgstr "Prøver å redde partisjonstabell"
 
-#: ../../diskdrake_interactive.pm_.c:289
+#: ../../diskdrake_interactive.pm_.c:288
 #, fuzzy
 msgid "Reload partition table"
 msgstr "Endre partisjonstype"
 
-#: ../../diskdrake_interactive.pm_.c:294
+#: ../../diskdrake_interactive.pm_.c:293
 #, fuzzy
 msgid "Removable media automounting"
 msgstr "Fjernbart media"
 
-#: ../../diskdrake_interactive.pm_.c:303 ../../diskdrake_interactive.pm_.c:323
+#: ../../diskdrake_interactive.pm_.c:302 ../../diskdrake_interactive.pm_.c:322
 msgid "Select file"
 msgstr "Velg fil"
 
-#: ../../diskdrake_interactive.pm_.c:310
+#: ../../diskdrake_interactive.pm_.c:309
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -1529,11 +1522,11 @@ msgstr ""
 "Kopien av partisjonstabellen har ikke samme størrelse\n"
 "Fortsette for det?"
 
-#: ../../diskdrake_interactive.pm_.c:324
+#: ../../diskdrake_interactive.pm_.c:323
 msgid "Warning"
 msgstr "Advarsel"
 
-#: ../../diskdrake_interactive.pm_.c:325
+#: ../../diskdrake_interactive.pm_.c:324
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -1541,11 +1534,11 @@ msgstr ""
 "Sett inn en diskett i stasjonen\n"
 "Alle data på denne disketten vil gå tapt"
 
-#: ../../diskdrake_interactive.pm_.c:336
+#: ../../diskdrake_interactive.pm_.c:335
 msgid "Trying to rescue partition table"
 msgstr "Prøver å redde partisjonstabell"
 
-#: ../../diskdrake_interactive.pm_.c:342
+#: ../../diskdrake_interactive.pm_.c:341
 msgid "Detailed information"
 msgstr "Detaljert informasjon"
 
@@ -1605,8 +1598,8 @@ msgstr "Størrelse i MB: "
 msgid "Filesystem type: "
 msgstr "Filsystemtype: "
 
-#: ../../diskdrake_interactive.pm_.c:418 ../../diskdrake_interactive.pm_.c:938
-#: ../../diskdrake_interactive.pm_.c:1012
+#: ../../diskdrake_interactive.pm_.c:418 ../../diskdrake_interactive.pm_.c:986
+#: ../../diskdrake_interactive.pm_.c:1060
 msgid "Mount point: "
 msgstr "Monteringspunkt: "
 
@@ -1733,27 +1726,35 @@ msgstr "Filen blir allerede brukt av en annen loopback, velg en annen"
 msgid "File already exists. Use it?"
 msgstr "Filen eksisterer allerede. Bruke denne?"
 
-#: ../../diskdrake_interactive.pm_.c:786
+#: ../../diskdrake_interactive.pm_.c:765
+msgid "Mount options"
+msgstr "Monteringsvalg:"
+
+#: ../../diskdrake_interactive.pm_.c:772
+msgid "Various"
+msgstr "Diverse"
+
+#: ../../diskdrake_interactive.pm_.c:834
 msgid "device"
 msgstr "enhet"
 
-#: ../../diskdrake_interactive.pm_.c:787
+#: ../../diskdrake_interactive.pm_.c:835
 msgid "level"
 msgstr "nivå"
 
-#: ../../diskdrake_interactive.pm_.c:788
+#: ../../diskdrake_interactive.pm_.c:836
 msgid "chunk size"
 msgstr "skivestørrelse"
 
-#: ../../diskdrake_interactive.pm_.c:803
+#: ../../diskdrake_interactive.pm_.c:851
 msgid "Be careful: this operation is dangerous."
 msgstr "Vær forsiktig: denne operasjonen er farlig."
 
-#: ../../diskdrake_interactive.pm_.c:818
+#: ../../diskdrake_interactive.pm_.c:866
 msgid "What type of partitioning?"
 msgstr "Hva slags type partisjonering?"
 
-#: ../../diskdrake_interactive.pm_.c:836
+#: ../../diskdrake_interactive.pm_.c:884
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -1765,7 +1766,7 @@ msgstr ""
 "Enten bruker du LILO og denne ikke virker, eller du bruker ikke LILO og du "
 "trenger ikke /boot"
 
-#: ../../diskdrake_interactive.pm_.c:840
+#: ../../diskdrake_interactive.pm_.c:888
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -1778,7 +1779,7 @@ msgstr ""
 "Hvis du skal bruke oppstartshåndtereren LILO, vær nøye med å legge til en\n"
 "/boot partisjon"
 
-#: ../../diskdrake_interactive.pm_.c:846
+#: ../../diskdrake_interactive.pm_.c:894
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -1788,132 +1789,134 @@ msgstr ""
 "Ingen oppstartslaster kan håndtere dette uten en /boot partisjon.\n"
 "Så vær nøye med å legge til en /boot partisjon"
 
-#: ../../diskdrake_interactive.pm_.c:866
+#: ../../diskdrake_interactive.pm_.c:914
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
 
-#: ../../diskdrake_interactive.pm_.c:870
+#: ../../diskdrake_interactive.pm_.c:918
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
 
-#: ../../diskdrake_interactive.pm_.c:881
+#: ../../diskdrake_interactive.pm_.c:929
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "Etter formatering av partisjon %s vil alle data på denne partisjonen\n"
 "gå tapt"
 
-#: ../../diskdrake_interactive.pm_.c:883
+#: ../../diskdrake_interactive.pm_.c:931
 msgid "Formatting"
 msgstr "Formatering"
 
-#: ../../diskdrake_interactive.pm_.c:884
+#: ../../diskdrake_interactive.pm_.c:932
 #, c-format
 msgid "Formatting loopback file %s"
 msgstr "Formaterer loopback-fil %s"
 
-#: ../../diskdrake_interactive.pm_.c:885
+#: ../../diskdrake_interactive.pm_.c:933
 #: ../../install_steps_interactive.pm_.c:458
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
 
-#: ../../diskdrake_interactive.pm_.c:896
+#: ../../diskdrake_interactive.pm_.c:944
 #, fuzzy
 msgid "Hide files"
 msgstr "mkraid mislykket"
 
-#: ../../diskdrake_interactive.pm_.c:896
+#: ../../diskdrake_interactive.pm_.c:944
 #, fuzzy
 msgid "Move files to the new partition"
 msgstr "Ikke nok plass til å allokere en ny partisjon"
 
-#: ../../diskdrake_interactive.pm_.c:897
+#: ../../diskdrake_interactive.pm_.c:945
 #, c-format
 msgid ""
 "Directory %s already contain some data\n"
 "(%s)"
 msgstr ""
 
-#: ../../diskdrake_interactive.pm_.c:908
+#: ../../diskdrake_interactive.pm_.c:956
 #, fuzzy
 msgid "Moving files to the new partition"
 msgstr "Ikke nok plass til å allokere en ny partisjon"
 
-#: ../../diskdrake_interactive.pm_.c:912
+#: ../../diskdrake_interactive.pm_.c:960
 #, c-format
 msgid "Copying %s"
 msgstr ""
 
-#: ../../diskdrake_interactive.pm_.c:916
+#: ../../diskdrake_interactive.pm_.c:964
 #, fuzzy, c-format
 msgid "Removing %s"
 msgstr "Fjerner LPD..."
 
-#: ../../diskdrake_interactive.pm_.c:939 ../../diskdrake_interactive.pm_.c:998
+#: ../../diskdrake_interactive.pm_.c:987
+#: ../../diskdrake_interactive.pm_.c:1046
 msgid "Device: "
 msgstr "Enhet: "
 
-#: ../../diskdrake_interactive.pm_.c:940
+#: ../../diskdrake_interactive.pm_.c:988
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS diskbokstav: %s (bare en gjetning)\n"
 
-#: ../../diskdrake_interactive.pm_.c:944 ../../diskdrake_interactive.pm_.c:952
-#: ../../diskdrake_interactive.pm_.c:1016
+#: ../../diskdrake_interactive.pm_.c:992
+#: ../../diskdrake_interactive.pm_.c:1000
+#: ../../diskdrake_interactive.pm_.c:1064
 msgid "Type: "
 msgstr "Type: "
 
-#: ../../diskdrake_interactive.pm_.c:948
+#: ../../diskdrake_interactive.pm_.c:996
 msgid "Name: "
 msgstr "Navn: "
 
-#: ../../diskdrake_interactive.pm_.c:956
+#: ../../diskdrake_interactive.pm_.c:1004
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Start: sektor %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:957
+#: ../../diskdrake_interactive.pm_.c:1005
 #, c-format
 msgid "Size: %s"
 msgstr "Størrelse: %s"
 
-#: ../../diskdrake_interactive.pm_.c:959
+#: ../../diskdrake_interactive.pm_.c:1007
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s sektorer"
 
-#: ../../diskdrake_interactive.pm_.c:961
+#: ../../diskdrake_interactive.pm_.c:1009
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr "Sylinder %d til sylinder %d\n"
 
-#: ../../diskdrake_interactive.pm_.c:962
+#: ../../diskdrake_interactive.pm_.c:1010
 msgid "Formatted\n"
 msgstr "Formatert\n"
 
-#: ../../diskdrake_interactive.pm_.c:963
+#: ../../diskdrake_interactive.pm_.c:1011
 msgid "Not formatted\n"
 msgstr "Ikke formatert\n"
 
-#: ../../diskdrake_interactive.pm_.c:964
+#: ../../diskdrake_interactive.pm_.c:1012
 msgid "Mounted\n"
 msgstr "Montert\n"
 
-#: ../../diskdrake_interactive.pm_.c:965
+#: ../../diskdrake_interactive.pm_.c:1013
 #, c-format
 msgid "RAID md%s\n"
 msgstr "RAID md%s\n"
 
-#: ../../diskdrake_interactive.pm_.c:967
+#: ../../diskdrake_interactive.pm_.c:1015
 #, fuzzy, c-format
 msgid ""
 "Loopback file(s):\n"
 "   %s\n"
 msgstr "Loopback-fil(s): %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:968
+#: ../../diskdrake_interactive.pm_.c:1016
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -1921,27 +1924,27 @@ msgstr ""
 "Partisjon startet opp som standard\n"
 "    (for MS-DOS oppstart, ikke for lilo)\n"
 
-#: ../../diskdrake_interactive.pm_.c:970
+#: ../../diskdrake_interactive.pm_.c:1018
 #, c-format
 msgid "Level %s\n"
 msgstr "Nivå %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:971
+#: ../../diskdrake_interactive.pm_.c:1019
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "Skivestørrelse %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:972
+#: ../../diskdrake_interactive.pm_.c:1020
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-disker %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:974
+#: ../../diskdrake_interactive.pm_.c:1022
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Loopback filnavn: %s"
 
-#: ../../diskdrake_interactive.pm_.c:977
+#: ../../diskdrake_interactive.pm_.c:1025
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -1954,7 +1957,7 @@ msgstr ""
 "driverpartisjon, du bør nok\n"
 "la den være i fred.\n"
 
-#: ../../diskdrake_interactive.pm_.c:980
+#: ../../diskdrake_interactive.pm_.c:1028
 msgid ""
 "\n"
 "This special Bootstrap\n"
@@ -1966,65 +1969,92 @@ msgstr ""
 "partisjonen er for å\n"
 "dual-boote ditt system.\n"
 
-#: ../../diskdrake_interactive.pm_.c:999
+#: ../../diskdrake_interactive.pm_.c:1047
 #, c-format
 msgid "Size: %s\n"
 msgstr "Størrelse: %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:1000
+#: ../../diskdrake_interactive.pm_.c:1048
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s sylindere, %s hoder, %s sektorer\n"
 
-#: ../../diskdrake_interactive.pm_.c:1001
+#: ../../diskdrake_interactive.pm_.c:1049
 msgid "Info: "
 msgstr "Info: "
 
-#: ../../diskdrake_interactive.pm_.c:1002
+#: ../../diskdrake_interactive.pm_.c:1050
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-disker %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:1003
+#: ../../diskdrake_interactive.pm_.c:1051
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Type partisjonstabell: %s\n"
 
-#: ../../diskdrake_interactive.pm_.c:1004
+#: ../../diskdrake_interactive.pm_.c:1052
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr "på buss %d id %d\n"
 
-#: ../../diskdrake_interactive.pm_.c:1018
+#: ../../diskdrake_interactive.pm_.c:1066
 #, c-format
 msgid "Options: %s"
 msgstr "Valg: %s"
 
-#: ../../fs.pm_.c:458 ../../fs.pm_.c:468 ../../fs.pm_.c:472 ../../fs.pm_.c:476
-#: ../../fs.pm_.c:480 ../../fs.pm_.c:484
+#: ../../diskdrake_interactive.pm_.c:1082
+#, fuzzy
+msgid "Filesystem encryption key"
+msgstr "Filsystemtype: "
+
+#: ../../diskdrake_interactive.pm_.c:1083
+msgid "Choose your filesystem encryption key"
+msgstr ""
+
+#: ../../diskdrake_interactive.pm_.c:1086
+#, fuzzy, c-format
+msgid "This encryption key is too simple (must be at least %d characters long)"
+msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
+
+#: ../../diskdrake_interactive.pm_.c:1087
+#, fuzzy
+msgid "The encryption keys do not match"
+msgstr "Passordene stemmer ikke overens"
+
+#: ../../diskdrake_interactive.pm_.c:1090
+msgid "Encryption key"
+msgstr ""
+
+#: ../../diskdrake_interactive.pm_.c:1091
+msgid "Encryption key (again)"
+msgstr ""
+
+#: ../../fs.pm_.c:460 ../../fs.pm_.c:470 ../../fs.pm_.c:474 ../../fs.pm_.c:478
+#: ../../fs.pm_.c:482 ../../fs.pm_.c:486
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s mislykket"
 
-#: ../../fs.pm_.c:519
+#: ../../fs.pm_.c:523
 #, c-format
 msgid "I don't know how to format %s in type %s"
 msgstr "Jeg vet ikke hvordan formatere %s i type %s"
 
-#: ../../fs.pm_.c:581
+#: ../../fs.pm_.c:595
 msgid "mount failed"
 msgstr "montering mislykket"
 
-#: ../../fs.pm_.c:601
+#: ../../fs.pm_.c:615
 #, c-format
 msgid "fsck failed with exit code %d or signal %d"
 msgstr "fsck avsluttet med feilkode %d eller signal %d"
 
-#: ../../fs.pm_.c:610 ../../fs.pm_.c:616 ../../partition_table.pm_.c:579
+#: ../../fs.pm_.c:624 ../../fs.pm_.c:630 ../../partition_table.pm_.c:579
 msgid "mount failed: "
 msgstr "montering mislykket: "
 
-#: ../../fs.pm_.c:631 ../../partition_table.pm_.c:575
+#: ../../fs.pm_.c:645 ../../partition_table.pm_.c:575
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "feil ved demontering av %s: %s"
@@ -2037,44 +2067,58 @@ msgstr "enkel"
 msgid "server"
 msgstr "server"
 
-#: ../../fsedit.pm_.c:465
+#: ../../fsedit.pm_.c:466
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Du kan ikke bruke JFS for partisjoner mindre enn 16 MB"
 
-#: ../../fsedit.pm_.c:466
+#: ../../fsedit.pm_.c:467
 msgid "You can't use ReiserFS for partitions smaller than 32MB"
 msgstr "Du kan ikke bruke ReiserFS for partisjoner mindre enn 32MB"
 
-#: ../../fsedit.pm_.c:475
+#: ../../fsedit.pm_.c:476
 msgid "Mount points must begin with a leading /"
 msgstr "Monteringspunkter må begynne med /"
 
-#: ../../fsedit.pm_.c:476
+#: ../../fsedit.pm_.c:477
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Det finnes allerede en partisjon med monteringspunkt %s\n"
 
-#: ../../fsedit.pm_.c:480
+#: ../../fsedit.pm_.c:481
 #, c-format
 msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Du kan ikke bruke LVM logisk volum som monteringspunkt %s"
 
-#: ../../fsedit.pm_.c:482
+#: ../../fsedit.pm_.c:483
 msgid "This directory should remain within the root filesystem"
 msgstr "Denne katalogen bør forbli i root filsystemet"
 
-#: ../../fsedit.pm_.c:484
+#: ../../fsedit.pm_.c:485
 msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
 msgstr ""
 "Du trenger et virkelig filsystem (ext2, reiserfs) for dette "
 "monteringspunktet\n"
 
-#: ../../fsedit.pm_.c:600
+#: ../../fsedit.pm_.c:487
+#, fuzzy, c-format
+msgid "You can't use an encrypted file system for mount point %s"
+msgstr "Du kan ikke bruke LVM logisk volum som monteringspunkt %s"
+
+#: ../../fsedit.pm_.c:545
+#, fuzzy
+msgid "Not enough free space for auto-allocating"
+msgstr "Ikke nok plass for auto-allokering"
+
+#: ../../fsedit.pm_.c:547
+msgid "Nothing to do"
+msgstr ""
+
+#: ../../fsedit.pm_.c:611
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr "Feil ved åpning av %s for skriving: %s"
 
-#: ../../fsedit.pm_.c:685
+#: ../../fsedit.pm_.c:696
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -2082,7 +2126,7 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../../fsedit.pm_.c:708
+#: ../../fsedit.pm_.c:719
 msgid "You don't have any partitions!"
 msgstr "Du har ingen partisjoner!"
 
@@ -3350,7 +3394,7 @@ msgstr ""
 msgid "You must also format %s"
 msgstr ""
 
-#: ../../install_any.pm_.c:431
+#: ../../install_any.pm_.c:436
 #, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
@@ -3374,20 +3418,20 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å installere disse tjenerene?\n"
 
-#: ../../install_any.pm_.c:467
+#: ../../install_any.pm_.c:472
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Kan ikke bruke broadcast med intet NIS domene"
 
-#: ../../install_any.pm_.c:800
+#: ../../install_any.pm_.c:806
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "Sett inn en FAT-formatert diskett i stasjon %s"
 
-#: ../../install_any.pm_.c:804
+#: ../../install_any.pm_.c:810
 msgid "This floppy is not FAT formatted"
 msgstr "Denne disketten er ikke FAT-formatert"
 
-#: ../../install_any.pm_.c:816
+#: ../../install_any.pm_.c:822
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -3395,7 +3439,7 @@ msgstr ""
 "For å bruke dette valget av pakker, start installasjonen med'linux "
 "defcfg=floppy'"
 
-#: ../../install_any.pm_.c:838 ../../partition_table.pm_.c:741
+#: ../../install_any.pm_.c:844 ../../partition_table.pm_.c:741
 #, c-format
 msgid "Error reading file %s"
 msgstr "Feil ved lesing av fil %s"
@@ -3405,7 +3449,9 @@ msgstr "Feil ved lesing av fil %s"
 #: ../../interactive.pm_.c:289 ../../interactive.pm_.c:311
 #: ../../interactive_http.pm_.c:104 ../../interactive_newt.pm_.c:170
 #: ../../interactive_stdio.pm_.c:141 ../../interactive_stdio.pm_.c:142
-#: ../../my_gtk.pm_.c:605 ../../my_gtk.pm_.c:910 ../../my_gtk.pm_.c:932
+#: ../../my_gtk.pm_.c:652 ../../my_gtk.pm_.c:979 ../../my_gtk.pm_.c:1001
+#: ../../standalone/drakbackup_.c:2325 ../../standalone/drakbackup_.c:2396
+#: ../../standalone/drakbackup_.c:2412
 msgid "Ok"
 msgstr "Ok"
 
@@ -3719,11 +3765,11 @@ msgstr "Du vil kunne velge disse mere spesifisert i neste trinn."
 msgid "Percentage of packages to install"
 msgstr "Prosentdel av pakker å installere"
 
-#: ../../install_steps_gtk.pm_.c:291 ../../install_steps_interactive.pm_.c:688
+#: ../../install_steps_gtk.pm_.c:291 ../../install_steps_interactive.pm_.c:687
 msgid "Package Group Selection"
 msgstr "Valg pakkegruppe"
 
-#: ../../install_steps_gtk.pm_.c:322 ../../install_steps_interactive.pm_.c:703
+#: ../../install_steps_gtk.pm_.c:322 ../../install_steps_interactive.pm_.c:702
 msgid "Individual package selection"
 msgstr "Individuelt pakkevalg"
 
@@ -3820,7 +3866,7 @@ msgstr "Minimal installasjon"
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../../install_steps_gtk.pm_.c:502 ../../install_steps_interactive.pm_.c:770
+#: ../../install_steps_gtk.pm_.c:502 ../../install_steps_interactive.pm_.c:769
 msgid "Installing"
 msgstr "Installerer"
 
@@ -3836,28 +3882,28 @@ msgstr "Tid som gjenstår "
 msgid "Please wait, preparing installation"
 msgstr "Vennligst vent, forbereder installasjon"
 
-#: ../../install_steps_gtk.pm_.c:588
+#: ../../install_steps_gtk.pm_.c:592
 #, c-format
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:593
+#: ../../install_steps_gtk.pm_.c:597
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../../install_steps_gtk.pm_.c:634 ../../install_steps_interactive.pm_.c:178
-#: ../../install_steps_interactive.pm_.c:794
-#: ../../standalone/drakautoinst_.c:202
+#: ../../install_steps_gtk.pm_.c:638 ../../install_steps_interactive.pm_.c:178
+#: ../../install_steps_interactive.pm_.c:793
+#: ../../standalone/drakautoinst_.c:203
 msgid "Accept"
 msgstr "Godta"
 
-#: ../../install_steps_gtk.pm_.c:634 ../../install_steps_interactive.pm_.c:178
-#: ../../install_steps_interactive.pm_.c:794
+#: ../../install_steps_gtk.pm_.c:638 ../../install_steps_interactive.pm_.c:178
+#: ../../install_steps_interactive.pm_.c:793
 msgid "Refuse"
 msgstr "Nekte"
 
-#: ../../install_steps_gtk.pm_.c:635 ../../install_steps_interactive.pm_.c:795
+#: ../../install_steps_gtk.pm_.c:639 ../../install_steps_interactive.pm_.c:794
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -3872,17 +3918,17 @@ msgstr ""
 "ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
-#: ../../install_steps_gtk.pm_.c:649 ../../install_steps_gtk.pm_.c:653
-#: ../../install_steps_interactive.pm_.c:807
-#: ../../install_steps_interactive.pm_.c:811
+#: ../../install_steps_gtk.pm_.c:653 ../../install_steps_gtk.pm_.c:657
+#: ../../install_steps_interactive.pm_.c:806
+#: ../../install_steps_interactive.pm_.c:810
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_gtk.pm_.c:649 ../../install_steps_interactive.pm_.c:807
+#: ../../install_steps_gtk.pm_.c:653 ../../install_steps_interactive.pm_.c:806
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
-#: ../../install_steps_gtk.pm_.c:653 ../../install_steps_interactive.pm_.c:811
+#: ../../install_steps_gtk.pm_.c:657 ../../install_steps_interactive.pm_.c:810
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
@@ -4193,7 +4239,7 @@ msgstr ""
 "For any question on this document, please contact MandrakeSoft S.A.  \n"
 
 #: ../../install_steps_interactive.pm_.c:198
-#: ../../install_steps_interactive.pm_.c:1007
+#: ../../install_steps_interactive.pm_.c:1012
 #: ../../standalone/keyboarddrake_.c:28
 msgid "Keyboard"
 msgstr "Tastatur"
@@ -4230,13 +4276,14 @@ msgstr "Ekspert"
 
 #: ../../install_steps_interactive.pm_.c:239
 #: ../../install_steps_interactive.pm_.c:243
-msgid "Update"
+#, fuzzy
+msgid "Upgrade"
 msgstr "Oppdater"
 
 #: ../../install_steps_interactive.pm_.c:239
 #: ../../install_steps_interactive.pm_.c:243
 #, fuzzy
-msgid "Update packages only"
+msgid "Upgrade packages only"
 msgstr "Oppdaterer pakkevalg"
 
 #: ../../install_steps_interactive.pm_.c:259
@@ -4244,11 +4291,11 @@ msgstr "Oppdaterer pakkevalg"
 msgid "Please choose the type of your mouse."
 msgstr "Vennligst velg din musetype."
 
-#: ../../install_steps_interactive.pm_.c:265 ../../standalone/mousedrake_.c:64
+#: ../../install_steps_interactive.pm_.c:265 ../../standalone/mousedrake_.c:65
 msgid "Mouse Port"
 msgstr "Museport"
 
-#: ../../install_steps_interactive.pm_.c:266 ../../standalone/mousedrake_.c:65
+#: ../../install_steps_interactive.pm_.c:266 ../../standalone/mousedrake_.c:66
 msgid "Please choose on which serial port your mouse is connected to."
 msgstr "Vennligst velg hvilken serieport musen din koblet til."
 
@@ -4454,7 +4501,7 @@ msgid ""
 "Please choose the minimal installation you want"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:745
+#: ../../install_steps_interactive.pm_.c:744
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
@@ -4464,16 +4511,16 @@ msgstr ""
 "Hvis du ikke har noen av disse CDene, klikk Avbryt.\n"
 "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
-#: ../../install_steps_interactive.pm_.c:750
+#: ../../install_steps_interactive.pm_.c:749
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr "CD-ROMen ved navnet \"%s\""
 
-#: ../../install_steps_interactive.pm_.c:770
+#: ../../install_steps_interactive.pm_.c:769
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../../install_steps_interactive.pm_.c:779
+#: ../../install_steps_interactive.pm_.c:778
 #, c-format
 msgid ""
 "Installing package %s\n"
@@ -4482,21 +4529,21 @@ msgstr ""
 "Installerer pakke %s\n"
 "%d%%"
 
-#: ../../install_steps_interactive.pm_.c:825
+#: ../../install_steps_interactive.pm_.c:824
 msgid "Post-install configuration"
 msgstr "Konfigurasjon postinstallering"
 
-#: ../../install_steps_interactive.pm_.c:831
+#: ../../install_steps_interactive.pm_.c:830
 #, c-format
 msgid "Please insert the Boot floppy used in drive %s"
 msgstr "Sett inn en oppstartsdiskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:837
+#: ../../install_steps_interactive.pm_.c:836
 #, c-format
 msgid "Please insert the Update Modules floppy in drive %s"
 msgstr "Sett inn oppdater moduler disketten i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:857
+#: ../../install_steps_interactive.pm_.c:856
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -4570,7 +4617,7 @@ msgstr ""
 "Altadena California 91001\n"
 "USA"
 
-#: ../../install_steps_interactive.pm_.c:895
+#: ../../install_steps_interactive.pm_.c:894
 msgid ""
 "You have now the possibility to download updated packages that have\n"
 "been released after the distribution has been made available.\n"
@@ -4578,137 +4625,137 @@ msgid ""
 "You will get security fixes or bug fixes, but you need to have an\n"
 "Internet connection configured to proceed.\n"
 "\n"
-"Do you want to continue ?"
+"Do you want to install the updates ?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:909
+#: ../../install_steps_interactive.pm_.c:908
 #, fuzzy
 msgid "Contacting Mandrake Linux web site to get the list of available mirrors"
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
 
-#: ../../install_steps_interactive.pm_.c:914
+#: ../../install_steps_interactive.pm_.c:913
 msgid "Choose a mirror from which to get the packages"
 msgstr "Velg et speil som pakkene kan hentes fra"
 
-#: ../../install_steps_interactive.pm_.c:923
+#: ../../install_steps_interactive.pm_.c:922
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
 
-#: ../../install_steps_interactive.pm_.c:944
+#: ../../install_steps_interactive.pm_.c:949
 msgid "Which is your timezone?"
 msgstr "Hva er din tidsone?"
 
-#: ../../install_steps_interactive.pm_.c:949
+#: ../../install_steps_interactive.pm_.c:954
 msgid "Hardware clock set to GMT"
 msgstr "Maskinvareklokken din satt til GMT"
 
-#: ../../install_steps_interactive.pm_.c:950
+#: ../../install_steps_interactive.pm_.c:955
 msgid "Automatic time synchronization (using NTP)"
 msgstr "Automatisk tidssynkronisering (ved hjelp av NTP)"
 
-#: ../../install_steps_interactive.pm_.c:957
+#: ../../install_steps_interactive.pm_.c:962
 msgid "NTP Server"
 msgstr "NTP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:991
-#: ../../install_steps_interactive.pm_.c:999 ../../printerdrake.pm_.c:104
+#: ../../install_steps_interactive.pm_.c:996
+#: ../../install_steps_interactive.pm_.c:1004 ../../printerdrake.pm_.c:104
 msgid "Remote CUPS server"
 msgstr "Fjern-CUPS tjener"
 
-#: ../../install_steps_interactive.pm_.c:992
+#: ../../install_steps_interactive.pm_.c:997
 msgid "No printer"
 msgstr "Ingen skriver"
 
-#: ../../install_steps_interactive.pm_.c:1003 ../../steps.pm_.c:27
+#: ../../install_steps_interactive.pm_.c:1008 ../../steps.pm_.c:27
 msgid "Summary"
 msgstr "Oppsummering"
 
-#: ../../install_steps_interactive.pm_.c:1006
+#: ../../install_steps_interactive.pm_.c:1011
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../../install_steps_interactive.pm_.c:1008
+#: ../../install_steps_interactive.pm_.c:1013
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: ../../install_steps_interactive.pm_.c:1009 ../../printerdrake.pm_.c:1818
+#: ../../install_steps_interactive.pm_.c:1014 ../../printerdrake.pm_.c:1818
 #: ../../printerdrake.pm_.c:1889
 msgid "Printer"
 msgstr "Skriver"
 
-#: ../../install_steps_interactive.pm_.c:1011
+#: ../../install_steps_interactive.pm_.c:1016
 msgid "ISDN card"
 msgstr "ISDN-kort"
 
-#: ../../install_steps_interactive.pm_.c:1014
+#: ../../install_steps_interactive.pm_.c:1019
 msgid "Sound card"
 msgstr "Lydkort"
 
-#: ../../install_steps_interactive.pm_.c:1017
+#: ../../install_steps_interactive.pm_.c:1022
 msgid "TV card"
 msgstr "TV-kort"
 
-#: ../../install_steps_interactive.pm_.c:1053
-#: ../../install_steps_interactive.pm_.c:1077
-#: ../../install_steps_interactive.pm_.c:1081
+#: ../../install_steps_interactive.pm_.c:1058
+#: ../../install_steps_interactive.pm_.c:1082
+#: ../../install_steps_interactive.pm_.c:1086
 msgid "LDAP"
 msgstr "LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1054
-#: ../../install_steps_interactive.pm_.c:1077
-#: ../../install_steps_interactive.pm_.c:1090
+#: ../../install_steps_interactive.pm_.c:1059
+#: ../../install_steps_interactive.pm_.c:1082
+#: ../../install_steps_interactive.pm_.c:1095
 msgid "NIS"
 msgstr "NIS"
 
-#: ../../install_steps_interactive.pm_.c:1055
-#: ../../install_steps_interactive.pm_.c:1077
+#: ../../install_steps_interactive.pm_.c:1060
+#: ../../install_steps_interactive.pm_.c:1082
 msgid "Local files"
 msgstr "Lokale filer"
 
-#: ../../install_steps_interactive.pm_.c:1064
-#: ../../install_steps_interactive.pm_.c:1065 ../../steps.pm_.c:24
+#: ../../install_steps_interactive.pm_.c:1069
+#: ../../install_steps_interactive.pm_.c:1070 ../../steps.pm_.c:24
 msgid "Set root password"
 msgstr "Sett root-passord"
 
-#: ../../install_steps_interactive.pm_.c:1066
+#: ../../install_steps_interactive.pm_.c:1071
 msgid "No password"
 msgstr "Intet passord"
 
-#: ../../install_steps_interactive.pm_.c:1071
+#: ../../install_steps_interactive.pm_.c:1076
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
-#: ../../install_steps_interactive.pm_.c:1077 ../../network/modem.pm_.c:47
-#: ../../standalone/draknet_.c:621
+#: ../../install_steps_interactive.pm_.c:1082 ../../network/modem.pm_.c:49
+#: ../../standalone/draknet_.c:625
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
-#: ../../install_steps_interactive.pm_.c:1085
+#: ../../install_steps_interactive.pm_.c:1090
 msgid "Authentication LDAP"
 msgstr "Autentisering LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1086
+#: ../../install_steps_interactive.pm_.c:1091
 msgid "LDAP Base dn"
 msgstr "LDAP grunnleggende dn"
 
-#: ../../install_steps_interactive.pm_.c:1087
+#: ../../install_steps_interactive.pm_.c:1092
 msgid "LDAP Server"
 msgstr "LDAP-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1093
+#: ../../install_steps_interactive.pm_.c:1098
 msgid "Authentication NIS"
 msgstr "Autentisering NIS"
 
-#: ../../install_steps_interactive.pm_.c:1094
+#: ../../install_steps_interactive.pm_.c:1099
 msgid "NIS Domain"
 msgstr "NIS-domene"
 
-#: ../../install_steps_interactive.pm_.c:1095
+#: ../../install_steps_interactive.pm_.c:1100
 msgid "NIS Server"
 msgstr "NIS-tjener"
 
-#: ../../install_steps_interactive.pm_.c:1130
+#: ../../install_steps_interactive.pm_.c:1135
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4739,19 +4786,19 @@ msgstr ""
 "en diskett\n"
 "i den første stasjonen og trykk \"Ok\"."
 
-#: ../../install_steps_interactive.pm_.c:1146
+#: ../../install_steps_interactive.pm_.c:1151
 msgid "First floppy drive"
 msgstr "Første diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1147
+#: ../../install_steps_interactive.pm_.c:1152
 msgid "Second floppy drive"
 msgstr "Andre diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:1148 ../../printerdrake.pm_.c:1424
+#: ../../install_steps_interactive.pm_.c:1153 ../../printerdrake.pm_.c:1424
 msgid "Skip"
 msgstr "Dropp"
 
-#: ../../install_steps_interactive.pm_.c:1153
+#: ../../install_steps_interactive.pm_.c:1158
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4776,28 +4823,28 @@ msgstr ""
 "etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
 "ditt?"
 
-#: ../../install_steps_interactive.pm_.c:1162
+#: ../../install_steps_interactive.pm_.c:1167
 msgid "Sorry, no floppy drive available"
 msgstr "Beklager, ingen diskettstasjon tilgjengelig"
 
-#: ../../install_steps_interactive.pm_.c:1166
+#: ../../install_steps_interactive.pm_.c:1171
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
 
-#: ../../install_steps_interactive.pm_.c:1170
+#: ../../install_steps_interactive.pm_.c:1175
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Sett inn en diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:1173
+#: ../../install_steps_interactive.pm_.c:1178
 msgid "Creating bootdisk"
 msgstr "Oppretter oppstartdiskett"
 
-#: ../../install_steps_interactive.pm_.c:1180
+#: ../../install_steps_interactive.pm_.c:1185
 msgid "Preparing bootloader"
 msgstr "Klargjør oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1191
+#: ../../install_steps_interactive.pm_.c:1196
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -4809,11 +4856,11 @@ msgstr ""
 "Installasjonen vil fortsette, men du må\n"
 "bruke BootX for å starte din maskin."
 
-#: ../../install_steps_interactive.pm_.c:1197
+#: ../../install_steps_interactive.pm_.c:1202
 msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
-#: ../../install_steps_interactive.pm_.c:1200
+#: ../../install_steps_interactive.pm_.c:1205
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -4821,16 +4868,16 @@ msgstr ""
 "Feil ved installasjon av aboot, \n"
 "prøve å installere selv om det ødelegger den første partisjonen?"
 
-#: ../../install_steps_interactive.pm_.c:1207
+#: ../../install_steps_interactive.pm_.c:1212
 #, fuzzy
 msgid "Installing bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:1213
+#: ../../install_steps_interactive.pm_.c:1218
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
 
-#: ../../install_steps_interactive.pm_.c:1221
+#: ../../install_steps_interactive.pm_.c:1226
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -4841,34 +4888,34 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:1229 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:1234 ../../standalone/draksec_.c:24
 msgid "Low"
 msgstr "Lav"
 
-#: ../../install_steps_interactive.pm_.c:1230 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:1235 ../../standalone/draksec_.c:25
 msgid "Medium"
 msgstr "Medium"
 
-#: ../../install_steps_interactive.pm_.c:1231 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:1236 ../../standalone/draksec_.c:26
 msgid "High"
 msgstr "Høy"
 
-#: ../../install_steps_interactive.pm_.c:1235 ../../standalone/draksec_.c:70
+#: ../../install_steps_interactive.pm_.c:1240 ../../standalone/draksec_.c:71
 msgid "Choose security level"
 msgstr "Velg sikkerhetsnivå"
 
-#: ../../install_steps_interactive.pm_.c:1271
-#: ../../standalone/drakautoinst_.c:80
+#: ../../install_steps_interactive.pm_.c:1276
+#: ../../standalone/drakautoinst_.c:81
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:1275
-#: ../../standalone/drakautoinst_.c:82
+#: ../../install_steps_interactive.pm_.c:1280
+#: ../../standalone/drakautoinst_.c:83
 msgid "Creating auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1286
+#: ../../install_steps_interactive.pm_.c:1291
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -4878,7 +4925,7 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: ../../install_steps_interactive.pm_.c:1297
+#: ../../install_steps_interactive.pm_.c:1302
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -4900,11 +4947,11 @@ msgstr ""
 "Informasjon om konfigurering av systemet ditt finnes i post\n"
 "install-kapittelet i Official Mandrake Linux User's Guide."
 
-#: ../../install_steps_interactive.pm_.c:1309
+#: ../../install_steps_interactive.pm_.c:1314
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1311
+#: ../../install_steps_interactive.pm_.c:1316
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -4918,15 +4965,15 @@ msgstr ""
 "\n"
 "Du kanskje ønske å kjøre installasjonen omigjen.\n"
 
-#: ../../install_steps_interactive.pm_.c:1316
+#: ../../install_steps_interactive.pm_.c:1321
 msgid "Automated"
 msgstr "Automatisert"
 
-#: ../../install_steps_interactive.pm_.c:1316
+#: ../../install_steps_interactive.pm_.c:1321
 msgid "Replay"
 msgstr "Gjør igjen"
 
-#: ../../install_steps_interactive.pm_.c:1319
+#: ../../install_steps_interactive.pm_.c:1324
 msgid "Save packages selection"
 msgstr "Lagre pakkevalg"
 
@@ -5455,23 +5502,23 @@ msgstr "BEVEG HJULET DITT!"
 msgid "-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
-#: ../../my_gtk.pm_.c:570
+#: ../../my_gtk.pm_.c:617
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
-#: ../../my_gtk.pm_.c:605
+#: ../../my_gtk.pm_.c:652
 msgid "Finish"
 msgstr "Avslutt"
 
-#: ../../my_gtk.pm_.c:605
+#: ../../my_gtk.pm_.c:652
 msgid "Next ->"
 msgstr "Neste ->"
 
-#: ../../my_gtk.pm_.c:606
+#: ../../my_gtk.pm_.c:653
 msgid "<- Previous"
 msgstr "<- Forrige"
 
-#: ../../my_gtk.pm_.c:910
+#: ../../my_gtk.pm_.c:979
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
@@ -5522,7 +5569,7 @@ msgstr ""
 "Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt.\n"
 "Jeg kan ikke sette opp denne tilkoblingstypen."
 
-#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:233
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:243
 msgid "Choose the network interface"
 msgstr "Velg nettverksgrensesnitt"
 
@@ -5537,7 +5584,7 @@ msgstr ""
 msgid "no network card found"
 msgstr "ingen nettverkskort funnet"
 
-#: ../../network/ethernet.pm_.c:202 ../../network/network.pm_.c:350
+#: ../../network/ethernet.pm_.c:202 ../../network/network.pm_.c:355
 msgid "Configuring network"
 msgstr "Konfigurerer nettverk"
 
@@ -5553,7 +5600,7 @@ msgstr ""
 "Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
 "som ``minboks.mittlab.mittfirma.no''."
 
-#: ../../network/ethernet.pm_.c:207 ../../network/network.pm_.c:355
+#: ../../network/ethernet.pm_.c:207 ../../network/network.pm_.c:360
 msgid "Host name"
 msgstr "Vertsnavn"
 
@@ -5699,51 +5746,51 @@ msgstr ""
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Ingen ISDN PCI-kort funnet. Vennligst velg et i neste skjermbilde."
 
-#: ../../network/modem.pm_.c:37
+#: ../../network/modem.pm_.c:39
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Vennligst velg hvilken serieport modemet ditt koblet til."
 
-#: ../../network/modem.pm_.c:42
+#: ../../network/modem.pm_.c:44
 msgid "Dialup options"
 msgstr "Opsjoner oppringt"
 
-#: ../../network/modem.pm_.c:43 ../../standalone/draknet_.c:617
+#: ../../network/modem.pm_.c:45 ../../standalone/draknet_.c:621
 msgid "Connection name"
 msgstr "Navn tilknytning"
 
-#: ../../network/modem.pm_.c:44 ../../standalone/draknet_.c:618
+#: ../../network/modem.pm_.c:46 ../../standalone/draknet_.c:622
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: ../../network/modem.pm_.c:45 ../../standalone/draknet_.c:619
+#: ../../network/modem.pm_.c:47 ../../standalone/draknet_.c:623
 msgid "Login ID"
 msgstr "Login ID"
 
-#: ../../network/modem.pm_.c:47 ../../standalone/draknet_.c:621
+#: ../../network/modem.pm_.c:49 ../../standalone/draknet_.c:625
 msgid "CHAP"
 msgstr ""
 
-#: ../../network/modem.pm_.c:47 ../../standalone/draknet_.c:621
+#: ../../network/modem.pm_.c:49 ../../standalone/draknet_.c:625
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../network/modem.pm_.c:47 ../../standalone/draknet_.c:621
+#: ../../network/modem.pm_.c:49 ../../standalone/draknet_.c:625
 msgid "Script-based"
 msgstr "Scriptbasert"
 
-#: ../../network/modem.pm_.c:47 ../../standalone/draknet_.c:621
+#: ../../network/modem.pm_.c:49 ../../standalone/draknet_.c:625
 msgid "Terminal-based"
 msgstr "Terminalbasert"
 
-#: ../../network/modem.pm_.c:48 ../../standalone/draknet_.c:622
+#: ../../network/modem.pm_.c:50 ../../standalone/draknet_.c:626
 msgid "Domain name"
 msgstr "Domenenavn"
 
-#: ../../network/modem.pm_.c:49 ../../standalone/draknet_.c:623
+#: ../../network/modem.pm_.c:51 ../../standalone/draknet_.c:627
 msgid "First DNS Server (optional)"
 msgstr "Første DNS-tjener (valgfri)"
 
-#: ../../network/modem.pm_.c:50 ../../standalone/draknet_.c:624
+#: ../../network/modem.pm_.c:52 ../../standalone/draknet_.c:628
 msgid "Second DNS Server (optional)"
 msgstr "Andre DNS-tjener (valgfri)"
 
@@ -5819,8 +5866,8 @@ msgstr ""
 "\n"
 "Trykk OK for å begynne."
 
-#: ../../network/netconnect.pm_.c:135 ../../network/netconnect.pm_.c:250
-#: ../../network/netconnect.pm_.c:262 ../../network/tools.pm_.c:57
+#: ../../network/netconnect.pm_.c:135 ../../network/netconnect.pm_.c:247
+#: ../../network/netconnect.pm_.c:265 ../../network/tools.pm_.c:57
 msgid "Network Configuration"
 msgstr "Nettverkskonfigurasjon"
 
@@ -5926,15 +5973,15 @@ msgstr "Internett tilkobling"
 msgid "Do you want to start the connection at boot?"
 msgstr "Ønsker du å starte tilkoblingen din ved oppstart?"
 
-#: ../../network/netconnect.pm_.c:246
+#: ../../network/netconnect.pm_.c:242
 msgid "Network configuration"
 msgstr "Nettverkskonfigurasjon"
 
-#: ../../network/netconnect.pm_.c:247
+#: ../../network/netconnect.pm_.c:243
 msgid "The network needs to be restarted"
 msgstr ""
 
-#: ../../network/netconnect.pm_.c:250
+#: ../../network/netconnect.pm_.c:247
 #, c-format
 msgid ""
 "A problem occured while restarting the network: \n"
@@ -5945,7 +5992,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../../network/netconnect.pm_.c:254
+#: ../../network/netconnect.pm_.c:256
 msgid ""
 "Congratulations, the network and internet configuration is finished.\n"
 "\n"
@@ -5955,7 +6002,7 @@ msgstr ""
 "\n"
 "Konfigurasjonen vil nå bli aktivert.\n"
 
-#: ../../network/netconnect.pm_.c:257
+#: ../../network/netconnect.pm_.c:259
 msgid ""
 "After that is done, we recommend you to restart your X\n"
 "environnement to avoid hostname changing problem."
@@ -5963,7 +6010,14 @@ msgstr ""
 "Etter at det er ferding, anbefaler vi at du restarter X\n"
 "slik at du unngår problemer med at vertsnavnet forandres."
 
-#: ../../network/network.pm_.c:283
+#: ../../network/netconnect.pm_.c:260
+msgid ""
+"Problems occur during configuration.\n"
+"Test your connection via net_monitor or mcc. If your connection doesn't "
+"work, you might want to relaunch the configuration"
+msgstr ""
+
+#: ../../network/network.pm_.c:287
 msgid ""
 "WARNING: This device has been previously configured to connect to the "
 "Internet.\n"
@@ -5975,7 +6029,7 @@ msgstr ""
 "Trykk OK for å beholde enhetens konfigurasjon.\n"
 "Modifisering av feltene nedenfor vil overskrive denne konfigurasjonen."
 
-#: ../../network/network.pm_.c:288
+#: ../../network/network.pm_.c:292
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
@@ -5985,38 +6039,38 @@ msgstr ""
 "Hvert element bør entres som en IP-adresse i punkt-desimal\n"
 "notasjon (f.eks, 1.2.3.4)."
 
-#: ../../network/network.pm_.c:297 ../../network/network.pm_.c:298
+#: ../../network/network.pm_.c:301 ../../network/network.pm_.c:302
 #, c-format
 msgid "Configuring network device %s"
 msgstr "Konfigurerer nettverksenhet %s"
 
-#: ../../network/network.pm_.c:298
+#: ../../network/network.pm_.c:302
 #, c-format
 msgid " (driver %s)"
 msgstr " (driver %s)"
 
-#: ../../network/network.pm_.c:300 ../../standalone/draknet_.c:258
-#: ../../standalone/draknet_.c:471
+#: ../../network/network.pm_.c:304 ../../standalone/draknet_.c:232
+#: ../../standalone/draknet_.c:467
 msgid "IP address"
 msgstr "IP-adresse"
 
-#: ../../network/network.pm_.c:301 ../../standalone/draknet_.c:472
+#: ../../network/network.pm_.c:305 ../../standalone/draknet_.c:468
 msgid "Netmask"
 msgstr "Nettmaske"
 
-#: ../../network/network.pm_.c:302
+#: ../../network/network.pm_.c:306
 msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
-#: ../../network/network.pm_.c:302
+#: ../../network/network.pm_.c:306
 msgid "Automatic IP"
 msgstr "Automatisk IP"
 
-#: ../../network/network.pm_.c:323 ../../printerdrake.pm_.c:434
+#: ../../network/network.pm_.c:327 ../../printerdrake.pm_.c:434
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP-adresse bør være i format 1.2.3.4"
 
-#: ../../network/network.pm_.c:351
+#: ../../network/network.pm_.c:356
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
@@ -6028,39 +6082,40 @@ msgstr ""
 "så som ``minboks.mittlab.mittfirma.no''.\n"
 "Du kan også entre IP-adressen til gateway'en hvis du har en"
 
-#: ../../network/network.pm_.c:356
+#: ../../network/network.pm_.c:361
 msgid "DNS server"
 msgstr "DNS-tjener"
 
-#: ../../network/network.pm_.c:357 ../../standalone/draknet_.c:616
-msgid "Gateway"
-msgstr "Gateway"
+#: ../../network/network.pm_.c:362
+#, c-format
+msgid "Gateway (e.g. %s)"
+msgstr ""
 
-#: ../../network/network.pm_.c:359
+#: ../../network/network.pm_.c:364
 msgid "Gateway device"
 msgstr "Gateway-enhet"
 
-#: ../../network/network.pm_.c:371
+#: ../../network/network.pm_.c:376
 msgid "Proxies configuration"
 msgstr "Konfigurasjon proxy"
 
-#: ../../network/network.pm_.c:372
+#: ../../network/network.pm_.c:377
 msgid "HTTP proxy"
 msgstr "HTTP-proxy"
 
-#: ../../network/network.pm_.c:373
+#: ../../network/network.pm_.c:378
 msgid "FTP proxy"
 msgstr "FTP-proxy"
 
-#: ../../network/network.pm_.c:374
+#: ../../network/network.pm_.c:379
 msgid "Track network card id (usefull for laptops)"
 msgstr ""
 
-#: ../../network/network.pm_.c:377
+#: ../../network/network.pm_.c:382
 msgid "Proxy should be http://..."
 msgstr "Proxy burde være http://..."
 
-#: ../../network/network.pm_.c:378
+#: ../../network/network.pm_.c:383
 msgid "Proxy should be ftp://..."
 msgstr "Proxy burde være ftp://..."
 
@@ -6084,12 +6139,11 @@ msgstr "Internett-konfigurasjon"
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Vil du prøve å koble opp mot Internett nå?"
 
-#: ../../network/tools.pm_.c:44 ../../standalone/draknet_.c:190
-#: ../../standalone/draknet_.c:196
+#: ../../network/tools.pm_.c:44 ../../standalone/draknet_.c:197
 msgid "Testing your connection..."
 msgstr "Tester tilkoblingen din..."
 
-#: ../../network/tools.pm_.c:50 ../../standalone/draknet_.c:223
+#: ../../network/tools.pm_.c:50
 msgid "The system is now connected to Internet."
 msgstr "Systemet er nå koblet opp mot Internett."
 
@@ -6097,7 +6151,7 @@ msgstr "Systemet er nå koblet opp mot Internett."
 msgid "For Security reason, it will be disconnected now."
 msgstr "Av sikkerhetsgrunner vil den bli frakoblet nå."
 
-#: ../../network/tools.pm_.c:52 ../../standalone/draknet_.c:223
+#: ../../network/tools.pm_.c:52
 msgid ""
 "The system doesn't seem to be connected to internet.\n"
 "Try to reconfigure your connection."
@@ -6113,43 +6167,43 @@ msgstr "Konfigurasjon tilknytning."
 msgid "Please fill or check the field below"
 msgstr "Vennnligst fyll eller merk feltet under"
 
-#: ../../network/tools.pm_.c:79 ../../standalone/draknet_.c:603
+#: ../../network/tools.pm_.c:79 ../../standalone/draknet_.c:607
 msgid "Card IRQ"
 msgstr "Kort IRQ"
 
-#: ../../network/tools.pm_.c:80 ../../standalone/draknet_.c:604
+#: ../../network/tools.pm_.c:80 ../../standalone/draknet_.c:608
 msgid "Card mem (DMA)"
 msgstr "Kort mem (DMA)"
 
-#: ../../network/tools.pm_.c:81 ../../standalone/draknet_.c:605
+#: ../../network/tools.pm_.c:81 ../../standalone/draknet_.c:609
 msgid "Card IO"
 msgstr "Kort IO"
 
-#: ../../network/tools.pm_.c:82 ../../standalone/draknet_.c:606
+#: ../../network/tools.pm_.c:82 ../../standalone/draknet_.c:610
 msgid "Card IO_0"
 msgstr "Kort IO_0"
 
-#: ../../network/tools.pm_.c:83 ../../standalone/draknet_.c:607
+#: ../../network/tools.pm_.c:83 ../../standalone/draknet_.c:611
 msgid "Card IO_1"
 msgstr "Kort IO_1"
 
-#: ../../network/tools.pm_.c:84 ../../standalone/draknet_.c:608
+#: ../../network/tools.pm_.c:84 ../../standalone/draknet_.c:612
 msgid "Your personal phone number"
 msgstr "Ditt telefonnummer"
 
-#: ../../network/tools.pm_.c:85 ../../standalone/draknet_.c:609
+#: ../../network/tools.pm_.c:85 ../../standalone/draknet_.c:613
 msgid "Provider name (ex provider.net)"
 msgstr "Navn tilbyder (f.eks. tilbyder.net)"
 
-#: ../../network/tools.pm_.c:86 ../../standalone/draknet_.c:610
+#: ../../network/tools.pm_.c:86 ../../standalone/draknet_.c:614
 msgid "Provider phone number"
 msgstr "Telefonnummer tilbyder"
 
-#: ../../network/tools.pm_.c:87 ../../standalone/draknet_.c:611
+#: ../../network/tools.pm_.c:87 ../../standalone/draknet_.c:615
 msgid "Provider dns 1 (optional)"
 msgstr "Tilbyder dns 1 (valgfri)"
 
-#: ../../network/tools.pm_.c:88 ../../standalone/draknet_.c:612
+#: ../../network/tools.pm_.c:88 ../../standalone/draknet_.c:616
 msgid "Provider dns 2 (optional)"
 msgstr "Tilbyder dns 2 (valgfri)"
 
@@ -6157,23 +6211,23 @@ msgstr "Tilbyder dns 2 (valgfri)"
 msgid "Choose your country"
 msgstr "Velg land"
 
-#: ../../network/tools.pm_.c:90 ../../standalone/draknet_.c:615
+#: ../../network/tools.pm_.c:90 ../../standalone/draknet_.c:619
 msgid "Dialing mode"
 msgstr "Oppringningsmodus"
 
-#: ../../network/tools.pm_.c:91 ../../standalone/draknet_.c:627
+#: ../../network/tools.pm_.c:91 ../../standalone/draknet_.c:631
 msgid "Connection speed"
 msgstr "Oppkoblingshastighet"
 
-#: ../../network/tools.pm_.c:92 ../../standalone/draknet_.c:628
+#: ../../network/tools.pm_.c:92 ../../standalone/draknet_.c:632
 msgid "Connection timeout (in sec)"
 msgstr "Oppkoblingens timout (i sekunder)"
 
-#: ../../network/tools.pm_.c:93 ../../standalone/draknet_.c:613
+#: ../../network/tools.pm_.c:93 ../../standalone/draknet_.c:617
 msgid "Account Login (user name)"
 msgstr "Logg inn (brukernavn)"
 
-#: ../../network/tools.pm_.c:94 ../../standalone/draknet_.c:614
+#: ../../network/tools.pm_.c:94 ../../standalone/draknet_.c:618
 msgid "Account Password"
 msgstr "Passord"
 
@@ -6392,8 +6446,8 @@ msgstr ""
 #: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:1332
 #: ../../printerdrake.pm_.c:1336 ../../printerdrake.pm_.c:1337
 #: ../../printerdrake.pm_.c:1338 ../../printerdrake.pm_.c:2056
-#: ../../standalone/drakbackup_.c:642 ../../standalone/drakfont_.c:574
-#: ../../standalone/drakfont_.c:758
+#: ../../standalone/drakbackup_.c:722 ../../standalone/drakbackup_.c:2482
+#: ../../standalone/drakfont_.c:573 ../../standalone/drakfont_.c:763
 msgid "Close"
 msgstr "Lukk"
 
@@ -6426,12 +6480,12 @@ msgstr "Port"
 msgid "Automatic CUPS configuration"
 msgstr "Konfigurasjon av automatiske skritt"
 
-#: ../../printerdrake.pm_.c:217 ../../standalone/scannerdrake_.c:40
+#: ../../printerdrake.pm_.c:217 ../../standalone/scannerdrake_.c:42
 #, fuzzy
 msgid "Detecting devices ..."
 msgstr "Finner enheter..."
 
-#: ../../printerdrake.pm_.c:217 ../../standalone/scannerdrake_.c:40
+#: ../../printerdrake.pm_.c:217 ../../standalone/scannerdrake_.c:42
 msgid "Test ports"
 msgstr "Test porter"
 
@@ -6926,7 +6980,7 @@ msgid "Print option list"
 msgstr "Opsjoner for skriver"
 
 #: ../../printerdrake.pm_.c:1360 ../../printerdrake.pm_.c:1786
-#: ../../standalone/printerdrake_.c:48
+#: ../../standalone/printerdrake_.c:49
 msgid "Reading printer data ..."
 msgstr "Leser skriverdata: ..."
 
@@ -7218,7 +7272,7 @@ msgid ""
 "\"Add Printer\" to add a new printer."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1930 ../../standalone/draknet_.c:304
+#: ../../printerdrake.pm_.c:1930 ../../standalone/draknet_.c:278
 msgid "Normal Mode"
 msgstr "Normalt modus"
 
@@ -7726,7 +7780,7 @@ msgstr "Internett"
 msgid "File sharing"
 msgstr ""
 
-#: ../../services.pm_.c:132
+#: ../../services.pm_.c:132 ../../standalone/drakbackup_.c:905
 #, fuzzy
 msgid "System"
 msgstr "Systemmodus"
@@ -7795,7 +7849,7 @@ msgstr "Sektor"
 msgid "Installing packages..."
 msgstr "Installerer pakke %s"
 
-#: ../../standalone/diskdrake_.c:70
+#: ../../standalone/diskdrake_.c:72
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
@@ -7803,20 +7857,20 @@ msgstr ""
 "Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
 "Jeg vil førsøke å blanke ut dårlige partisjoner"
 
-#: ../../standalone/drakautoinst_.c:44
+#: ../../standalone/drakautoinst_.c:45
 msgid "Error!"
 msgstr "Feil!"
 
-#: ../../standalone/drakautoinst_.c:45
+#: ../../standalone/drakautoinst_.c:46
 #, c-format
 msgid "I can't find needed image file `%s'."
 msgstr "Jeg kan ikke finne filen '%s' som jeg trenger."
 
-#: ../../standalone/drakautoinst_.c:47
+#: ../../standalone/drakautoinst_.c:48
 msgid "Auto Install Configurator"
 msgstr "Autoinstallasjonskonfigurering"
 
-#: ../../standalone/drakautoinst_.c:48
+#: ../../standalone/drakautoinst_.c:49
 msgid ""
 "You are about to configure an Auto Install floppy. This feature is somewhat "
 "dangerous and must be used circumspectly.\n"
@@ -7842,11 +7896,11 @@ msgstr ""
 "\n"
 "Ønsker du å fortsette?"
 
-#: ../../standalone/drakautoinst_.c:70
+#: ../../standalone/drakautoinst_.c:71
 msgid "Automatic Steps Configuration"
 msgstr "Konfigurasjon av automatiske skritt"
 
-#: ../../standalone/drakautoinst_.c:71
+#: ../../standalone/drakautoinst_.c:72
 msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
@@ -7854,7 +7908,7 @@ msgstr ""
 "Vennligst velg for hvert steg om det skal være som under installasjonen, "
 "eller manuelt"
 
-#: ../../standalone/drakautoinst_.c:144
+#: ../../standalone/drakautoinst_.c:145
 msgid ""
 "\n"
 "Welcome.\n"
@@ -7862,11 +7916,11 @@ msgid ""
 "The parameters of the auto-install are available in the sections on the left"
 msgstr ""
 
-#: ../../standalone/drakautoinst_.c:242 ../../standalone/drakgw_.c:650
+#: ../../standalone/drakautoinst_.c:243 ../../standalone/drakgw_.c:662
 msgid "Congratulations!"
 msgstr "Gratulerer!"
 
-#: ../../standalone/drakautoinst_.c:243
+#: ../../standalone/drakautoinst_.c:244
 msgid ""
 "The floppy has been successfully generated.\n"
 "You may now replay your installation."
@@ -7874,741 +7928,767 @@ msgstr ""
 "Disketten har blitt generert.\n"
 "Du kan nå gjennomføre installasjonen på nytt."
 
-#: ../../standalone/drakautoinst_.c:281
+#: ../../standalone/drakautoinst_.c:282
 #, fuzzy
 msgid "Auto Install"
 msgstr "Installer"
 
-#: ../../standalone/drakautoinst_.c:343
+#: ../../standalone/drakautoinst_.c:344
 #, fuzzy
 msgid "Add an item"
 msgstr "Legg til en bruker"
 
-#: ../../standalone/drakautoinst_.c:350
+#: ../../standalone/drakautoinst_.c:351
 #, fuzzy
 msgid "Remove the last item"
 msgstr "Formaterer loopback-fil %s"
 
-#: ../../standalone/drakbackup_.c:359 ../../standalone/drakbackup_.c:1205
+#: ../../standalone/drakbackup_.c:374 ../../standalone/drakbackup_.c:1288
 msgid "hourly"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:363 ../../standalone/drakbackup_.c:1205
+#: ../../standalone/drakbackup_.c:378 ../../standalone/drakbackup_.c:1288
 msgid "daily"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:367 ../../standalone/drakbackup_.c:1205
+#: ../../standalone/drakbackup_.c:382 ../../standalone/drakbackup_.c:1288
 msgid "weekly"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:371 ../../standalone/drakbackup_.c:1205
+#: ../../standalone/drakbackup_.c:386 ../../standalone/drakbackup_.c:1288
 msgid "monthly"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:496 ../../standalone/drakbackup_.c:529
+#: ../../standalone/drakbackup_.c:454 ../../standalone/drakbackup_.c:457
+#: ../../standalone/drakbackup_.c:461
+msgid ""
+"***********************************************************************\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:455
+msgid ""
+"\n"
+"                      DrakBackup Report \n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:456
+msgid ""
+"\n"
+"                      DrakBackup Daemon Report\n"
+"\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:459
+msgid ""
+"\n"
+"\n"
+"***********************************************************************\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:460
+msgid ""
+"\n"
+"                    DrakBackup Report Details\n"
+"\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:482
+msgid "total progess"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:549 ../../standalone/drakbackup_.c:596
 msgid "Backup system files..."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:530 ../../standalone/drakbackup_.c:577
+#: ../../standalone/drakbackup_.c:597 ../../standalone/drakbackup_.c:660
 #, fuzzy
 msgid "Hard Disk Backup files..."
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:539
+#: ../../standalone/drakbackup_.c:608
 #, fuzzy
 msgid "Backup User files..."
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:540
+#: ../../standalone/drakbackup_.c:609
 msgid "Hard Disk Backup Progress..."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:576
+#: ../../standalone/drakbackup_.c:659
 #, fuzzy
 msgid "Backup Other files..."
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:616 ../../standalone/drakbackup_.c:627
-#: ../../standalone/drakbackup_.c:638 ../../standalone/drakfont_.c:754
+#: ../../standalone/drakbackup_.c:667
+msgid ""
+"file list send by FTP : $_\n"
+" "
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:696 ../../standalone/drakbackup_.c:707
+#: ../../standalone/drakbackup_.c:718 ../../standalone/drakfont_.c:759
 #, fuzzy
 msgid "File Selection"
 msgstr "Pakkevalg"
 
-#: ../../standalone/drakbackup_.c:643
+#: ../../standalone/drakbackup_.c:723
 msgid "Select the files or directories and click on 'Add'"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:654
+#: ../../standalone/drakbackup_.c:734
 msgid ""
 "\n"
 "Please check all options that you need.\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:655
-msgid "This options can backup and restore all files on your /etc directory.\n"
+#: ../../standalone/drakbackup_.c:735
+msgid ""
+"These options can backup and restore all files in your /etc directory.\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:656
+#: ../../standalone/drakbackup_.c:736
 msgid "Backup your System files. ( /etc directory )"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:657
+#: ../../standalone/drakbackup_.c:737
 msgid "Use incremental backup  (do not replace old backups)"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:658
+#: ../../standalone/drakbackup_.c:738
 msgid "Do not include critical files (passwd, goup, fstab)"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:659
+#: ../../standalone/drakbackup_.c:739
 msgid ""
 "With this option you will be able to restore any version\n"
 " of your /etc directory."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:684
-msgid "Please check all user that you want to include inb your backup."
+#: ../../standalone/drakbackup_.c:765
+#, fuzzy
+msgid "Please check all users that you want to include in your backup."
+msgstr "Vennligst velg pakkene du ønsker å installere."
+
+#: ../../standalone/drakbackup_.c:792
+msgid "Do not include the browser cache"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:711
-msgid " do not include the browser cache"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:712 ../../standalone/drakbackup_.c:745
+#: ../../standalone/drakbackup_.c:793 ../../standalone/drakbackup_.c:826
 msgid "Use Incremental Backups  (do not replace old backups)"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:743 ../../standalone/drakfont_.c:794
+#: ../../standalone/drakbackup_.c:824 ../../standalone/drakfont_.c:799
 #, fuzzy
 msgid "Remove Selected"
 msgstr "Fjern inngang"
 
-#: ../../standalone/drakbackup_.c:782
+#: ../../standalone/drakbackup_.c:868
 #, fuzzy
-msgid " Linux "
-msgstr "Linux"
-
-#: ../../standalone/drakbackup_.c:787
-#, fuzzy
-msgid " Windows (FAT32) "
+msgid "Windows (FAT32)"
 msgstr "Fjern Windows(TM)"
 
-#: ../../standalone/drakbackup_.c:825
+#: ../../standalone/drakbackup_.c:910
 #, fuzzy
-msgid " System "
-msgstr "Systemmodus"
-
-#: ../../standalone/drakbackup_.c:830
-#, fuzzy
-msgid " Users "
+msgid "Users"
 msgstr "Brukernavn"
 
-#: ../../standalone/drakbackup_.c:835
+#: ../../standalone/drakbackup_.c:937
+msgid "Use FTP connection to backup"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:940
 #, fuzzy
-msgid " Other "
-msgstr "Andre"
+msgid "Please enter the host name or IP."
+msgstr "Vennligst test musen."
 
-#: ../../standalone/drakbackup_.c:840
-msgid " A Entire System  "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:857
-msgid " Use FTP connexion to backup"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:860
-msgid "please entrer the host name or IP."
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:865
+#: ../../standalone/drakbackup_.c:945
 msgid ""
-"Please entrer the directory to\n"
-" put the backup on this host. "
+"Please enter the directory to\n"
+" put the backup on this host."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:870
+#: ../../standalone/drakbackup_.c:950
 #, fuzzy
-msgid "please entrer your login"
+msgid "Please enter your login"
 msgstr "Vennligst prøv igjen"
 
-#: ../../standalone/drakbackup_.c:875
-msgid "please entrer your passord"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:881
+#: ../../standalone/drakbackup_.c:955
 #, fuzzy
-msgid " remember this password"
+msgid "Please enter your passord"
+msgstr "Vennligst prøv igjen"
+
+#: ../../standalone/drakbackup_.c:961
+#, fuzzy
+msgid "Remember this password"
 msgstr "skriv inn passord på nytt"
 
-#: ../../standalone/drakbackup_.c:956 ../../standalone/drakbackup_.c:1955
-msgid " FTP Connexion"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:963 ../../standalone/drakbackup_.c:1962
+#: ../../standalone/drakbackup_.c:1037 ../../standalone/drakbackup_.c:2081
 #, fuzzy
-msgid " Secure Connexion "
+msgid "FTP Connection"
+msgstr "Lokalt nettverksoppkobling"
+
+#: ../../standalone/drakbackup_.c:1044 ../../standalone/drakbackup_.c:2089
+#, fuzzy
+msgid "Secure Connection"
 msgstr "Velg skrivertilkobling"
 
-#: ../../standalone/drakbackup_.c:992 ../../standalone/drakbackup_.c:2683
-msgid " Use CD/DVDROM to backup"
+#: ../../standalone/drakbackup_.c:1073 ../../standalone/drakbackup_.c:2890
+msgid "Use CD/DVDROM to backup"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:995
+#: ../../standalone/drakbackup_.c:1076 ../../standalone/drakbackup_.c:2894
 #, fuzzy
-msgid "please choose your CD space"
+msgid "Please choose your CD space"
 msgstr "Vennligst velg tastatur-oppsettet ditt."
 
-#: ../../standalone/drakbackup_.c:1001
+#: ../../standalone/drakbackup_.c:1082 ../../standalone/drakbackup_.c:2906
 #, fuzzy
-msgid " Please check if you are using CDRW media"
+msgid "Please check if you are using CDRW media"
 msgstr "Vennligst klikk på en partisjon"
 
-#: ../../standalone/drakbackup_.c:1007 ../../standalone/drakbackup_.c:2705
+#: ../../standalone/drakbackup_.c:1088 ../../standalone/drakbackup_.c:2912
 msgid "Please check if you want to erase your CDRW before"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1013
+#: ../../standalone/drakbackup_.c:1094
 #, fuzzy
 msgid ""
-" Please check if you want to include\n"
+"Please check if you want to include\n"
 " install boot on your CD."
 msgstr "Vennligst velg pakkene du ønsker å installere."
 
-#: ../../standalone/drakbackup_.c:1019
+#: ../../standalone/drakbackup_.c:1100
 msgid ""
-"please enter your CD Writer device name\n"
+"Please enter your CD Writer device name\n"
 " ex: 0,1,0"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1061
-msgid " Use tape to backup"
+#: ../../standalone/drakbackup_.c:1142
+#, fuzzy
+msgid "Use tape to backup"
+msgstr "Dårlig sikkerhetskopi-fil"
+
+#: ../../standalone/drakbackup_.c:1145
+msgid "Please enter the device name to use for backup"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1064
-msgid "Please entrer device name where backup "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1070 ../../standalone/drakbackup_.c:1114
-#: ../../standalone/drakbackup_.c:1914
+#: ../../standalone/drakbackup_.c:1151 ../../standalone/drakbackup_.c:1195
 msgid ""
 "Please entrer the maximum size\n"
-" allowed for Drakbackup "
+" allowed for Drakbackup"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1103 ../../standalone/drakbackup_.c:1903
-msgid " Use Hard Disk to backup"
+#: ../../standalone/drakbackup_.c:1187
+msgid "Please entrer the directory to save:"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1106 ../../standalone/drakbackup_.c:1906
-msgid "Please entrer the directory to save: "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1120 ../../standalone/drakbackup_.c:1920
+#: ../../standalone/drakbackup_.c:1201 ../../standalone/drakbackup_.c:2046
 #, fuzzy
-msgid " Use quota for backup files."
+msgid "Use quota for backup files."
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:1173
+#: ../../standalone/drakbackup_.c:1255
 #, fuzzy
-msgid " Network "
+msgid "Network"
 msgstr "Nettverksgrensesnitt"
 
-#: ../../standalone/drakbackup_.c:1178
-msgid " CDROM / DVDROM "
+#: ../../standalone/drakbackup_.c:1265
+msgid "HardDrive / NFS"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1183
-msgid " HardDrive / NFS "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1188
+#: ../../standalone/drakbackup_.c:1295
 #, fuzzy
-msgid " Tape "
-msgstr "Type: "
-
-#: ../../standalone/drakbackup_.c:1212
-#, fuzzy
-msgid " Use daemon"
+msgid "Use daemon"
 msgstr "Brukernavn"
 
-#: ../../standalone/drakbackup_.c:1217
-msgid ""
-"Please choose interval \n"
-"space between each backup "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1223
+#: ../../standalone/drakbackup_.c:1300
 #, fuzzy
 msgid ""
-"Please choose\n"
-"media to backup. "
+"Please choose the time \n"
+"interval between each backup"
+msgstr "Vennligst velg pakkene du ønsker å installere."
+
+#: ../../standalone/drakbackup_.c:1306
+#, fuzzy
+msgid ""
+"Please choose the\n"
+"media for backup."
 msgstr "Vennligst velg språk som skal brukes."
 
-#: ../../standalone/drakbackup_.c:1226
-msgid " Use CD/DVDROM with daemon"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1227
-msgid " Use Hard Drive with daemon"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1228
-msgid " Use Network with daemon"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1232
-msgid "Please be careful that cron deamon is include on your services. "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1264
-msgid "Please choose correct options to backup. "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1269
-msgid ""
-" Use Tar and bzip2  ( very slow) [please be careful if you\n"
-" (un)select this option all your old backups will be deleted ]"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1270
+#: ../../standalone/drakbackup_.c:1310
 #, fuzzy
-msgid " Use .backupignore files"
-msgstr "Dårlig sikkerhetskopi-fil"
+msgid "Use Hard Drive with daemon"
+msgstr "Oppdaging av harddisk"
 
 #: ../../standalone/drakbackup_.c:1312
-msgid " What "
+#, fuzzy
+msgid "Use FTP with daemon"
+msgstr "Brukernavn"
+
+#: ../../standalone/drakbackup_.c:1316
+msgid "Please be sure that the cron daemon is included in your services."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1317
+#: ../../standalone/drakbackup_.c:1361
+msgid "Send mail report after each backup to :"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1411
+msgid "What"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1416
 #, fuzzy
-msgid " Where "
+msgid "Where"
 msgstr "Hjul"
 
-#: ../../standalone/drakbackup_.c:1322
-msgid " When "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1327
+#: ../../standalone/drakbackup_.c:1421
 #, fuzzy
-msgid " More Options"
+msgid "When"
+msgstr "Hjul"
+
+#: ../../standalone/drakbackup_.c:1426
+#, fuzzy
+msgid "More Options"
 msgstr "Modulopsjoner:"
 
-#: ../../standalone/drakbackup_.c:1349 ../../standalone/drakbackup_.c:2591
-msgid "         Drakbackup Configuration       "
-msgstr ""
+#: ../../standalone/drakbackup_.c:1448 ../../standalone/drakbackup_.c:2798
+#, fuzzy
+msgid "Drakbackup Configuration"
+msgstr "Nettverkskonfigurasjon"
 
-#: ../../standalone/drakbackup_.c:1370
+#: ../../standalone/drakbackup_.c:1469
 #, fuzzy
 msgid "Please choose where you want to backup"
 msgstr "Vennligst velg pakkene du ønsker å installere."
 
-#: ../../standalone/drakbackup_.c:1372
+#: ../../standalone/drakbackup_.c:1471
 msgid "on Hard Drive"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1374 ../../standalone/drakbackup_.c:1383
-#: ../../standalone/drakbackup_.c:1392 ../../standalone/drakbackup_.c:1401
-#, fuzzy
-msgid "Configure it"
-msgstr "Konfigurer X"
-
-#: ../../standalone/drakbackup_.c:1381
+#: ../../standalone/drakbackup_.c:1480
 msgid "across Network"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1390
-msgid "on CDROM"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1399
+#: ../../standalone/drakbackup_.c:1546
 #, fuzzy
-msgid "on Tape Device"
-msgstr "Skriverenhet"
-
-#: ../../standalone/drakbackup_.c:1447
-#, fuzzy
-msgid "Please choose that you want to backup"
+msgid "Please choose what you want to backup"
 msgstr "Vennligst velg pakkene du ønsker å installere."
 
-#: ../../standalone/drakbackup_.c:1448
+#: ../../standalone/drakbackup_.c:1547
 #, fuzzy
 msgid "Backup system"
 msgstr "Oppsett filsystemer"
 
-#: ../../standalone/drakbackup_.c:1449
+#: ../../standalone/drakbackup_.c:1548
 msgid "Backup Users"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1452
+#: ../../standalone/drakbackup_.c:1551
 msgid "Select user manually"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1538
+#: ../../standalone/drakbackup_.c:1637
 msgid ""
 "\n"
 "Backup Sources: \n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1539
+#: ../../standalone/drakbackup_.c:1638
 msgid ""
 "\n"
 "- System Files:\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1540 ../../standalone/drakbackup_.c:1542
-msgid "\t\t$_\n"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:1541
+#: ../../standalone/drakbackup_.c:1640
 msgid ""
 "\n"
-"- Users Files:\n"
+"- User Files:\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1543
+#: ../../standalone/drakbackup_.c:1642
 msgid ""
 "\n"
 "- Other Files:\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1545
+#: ../../standalone/drakbackup_.c:1644
 #, c-format
 msgid ""
 "\n"
-"- Path to save backups: %s\n"
+"- Save on Hard drive on path : %s\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1546
+#: ../../standalone/drakbackup_.c:1645
+#, c-format
+msgid ""
+"\n"
+"- Save on FTP on host : %s\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1646
+msgid ""
+"\t\t user name: $login_user\n"
+"\t\t on path: $host_path \n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1647
 #, fuzzy
 msgid ""
 "\n"
 "- Options:\n"
 msgstr "Valg"
 
-#: ../../standalone/drakbackup_.c:1547
+#: ../../standalone/drakbackup_.c:1648
 msgid "\tDo not include System Files\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1548
-msgid ""
-"\tBackups use tar and bzip2\n"
-" "
+#: ../../standalone/drakbackup_.c:1649
+msgid "\tBackups use tar and bzip2\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1549
+#: ../../standalone/drakbackup_.c:1650
 msgid "\tBackups use tar and gzip\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1551
-msgid "No configuration please click Wizard or Advanced.\n"
+#: ../../standalone/drakbackup_.c:1651
+msgid ""
+"\n"
+"- Daemon ($when_space) include :\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1556
+#: ../../standalone/drakbackup_.c:1652
+msgid "\t-Hard drive.\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1653
+msgid "\t-CDROM.\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1654
+msgid "\t-Network by FTP.\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1655
+msgid "\t-Network by SSH.\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1657
+msgid "No configuration, please click Wizard or Advanced.\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:1662
 msgid ""
 "List of data to restore:\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1657
+#: ../../standalone/drakbackup_.c:1763
 msgid ""
 "List of data corrupted:\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1659
+#: ../../standalone/drakbackup_.c:1765
 #, fuzzy
 msgid "Please uncheck or remove it on next time."
 msgstr "Vennligst velg hvilken serieport modemet ditt koblet til."
 
-#: ../../standalone/drakbackup_.c:1669
-msgid "         Backup files are corrupted      "
+#: ../../standalone/drakbackup_.c:1775
+msgid "Backup files are corrupted"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1692
-msgid "         All your selectionned data have been          "
+#: ../../standalone/drakbackup_.c:1798
+msgid "          All your selectionned data have been          "
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1693
+#: ../../standalone/drakbackup_.c:1799
 #, c-format
 msgid "          Successfuly Restored on %s       "
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1772
+#: ../../standalone/drakbackup_.c:1898
 #, fuzzy
 msgid "         Restore Configuration       "
 msgstr "Nettverkskonfigurasjon"
 
-#: ../../standalone/drakbackup_.c:1793
-msgid " Sure to restore the other files ."
+#: ../../standalone/drakbackup_.c:1919
+msgid "OK to restore the other files."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1818
-msgid "User list to restore (only the more recent date per user is important)"
+#: ../../standalone/drakbackup_.c:1944
+msgid "User list to restore (only the most recent date per user is important)"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1871
-msgid " Backup the system files before."
-msgstr ""
+#: ../../standalone/drakbackup_.c:1997
+#, fuzzy
+msgid "Backup the system files before:"
+msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:1873
+#: ../../standalone/drakbackup_.c:1999
 #, fuzzy
 msgid "please choose the date to restore"
 msgstr "Vennligst velg din musetype."
 
-#: ../../standalone/drakbackup_.c:1992
-msgid " Use Hard Disk to find backups"
+#: ../../standalone/drakbackup_.c:2029
+#, fuzzy
+msgid "Use Hard Disk to backup"
+msgstr "Dårlig sikkerhetskopi-fil"
+
+#: ../../standalone/drakbackup_.c:2032
+#, fuzzy
+msgid "Please enter the directory to save:"
+msgstr "Vennligst test musen."
+
+#: ../../standalone/drakbackup_.c:2040
+msgid ""
+"Please enter the maximum size\n"
+" allowed for Drakbackup"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:1994
-msgid "Please entrer the directory to find backup "
+#: ../../standalone/drakbackup_.c:2119
+msgid "Restore from Hard Disk."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2002
-msgid " Use Network to find backups"
+#: ../../standalone/drakbackup_.c:2121
+msgid "Please enter the directory where backups are stored"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2058
-msgid "select an other media to find backups"
-msgstr ""
+#: ../../standalone/drakbackup_.c:2182
+#, fuzzy
+msgid "Select another media to restore from"
+msgstr "Vennligst velg din musetype."
 
-#: ../../standalone/drakbackup_.c:2060
+#: ../../standalone/drakbackup_.c:2184
 #, fuzzy
 msgid "Other Media"
 msgstr "Andre"
 
-#: ../../standalone/drakbackup_.c:2066
+#: ../../standalone/drakbackup_.c:2190
 #, fuzzy
 msgid "Restore system"
 msgstr "Installer systemet"
 
-#: ../../standalone/drakbackup_.c:2067
+#: ../../standalone/drakbackup_.c:2191
 msgid "Restore Users"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2068
+#: ../../standalone/drakbackup_.c:2192
 msgid "Restore Other"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2070
-msgid "select path to restore (instead of / ) "
+#: ../../standalone/drakbackup_.c:2194
+msgid "select path to restore (instead of / )"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2074
-msgid "do new backup before restore (only for incremental backups.)"
+#: ../../standalone/drakbackup_.c:2198
+msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2133
+#: ../../standalone/drakbackup_.c:2199
+msgid "Remove user directories before restore."
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:2259
 msgid "Restore all backups"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2141
+#: ../../standalone/drakbackup_.c:2267
 #, fuzzy
 msgid "Custom Restore"
 msgstr "Skreddersydd"
 
-#: ../../standalone/drakbackup_.c:2172 ../../standalone/drakbackup_.c:2190
-#: ../../standalone/drakbackup_.c:2211 ../../standalone/drakbackup_.c:2232
-#: ../../standalone/drakbackup_.c:2250 ../../standalone/drakbackup_.c:2300
-#: ../../standalone/drakbackup_.c:2320 ../../standalone/drakbackup_.c:2339
-#, fuzzy
-msgid " Cancel "
-msgstr "Avbryt"
-
-#: ../../standalone/drakbackup_.c:2174 ../../standalone/drakbackup_.c:2213
-#: ../../standalone/drakbackup_.c:2234 ../../standalone/drakbackup_.c:2252
-#: ../../standalone/drakbackup_.c:2360
-msgid " Help "
+#: ../../standalone/drakbackup_.c:2300 ../../standalone/drakbackup_.c:2318
+#: ../../standalone/drakbackup_.c:2339 ../../standalone/drakbackup_.c:2360
+#: ../../standalone/drakbackup_.c:2378 ../../standalone/drakbackup_.c:2410
+#: ../../standalone/drakbackup_.c:2426 ../../standalone/drakbackup_.c:2446
+#: ../../standalone/drakbackup_.c:2465 ../../standalone/drakbackup_.c:2484
+msgid "Help"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2177 ../../standalone/drakbackup_.c:2197
-#: ../../standalone/drakbackup_.c:2216 ../../standalone/drakbackup_.c:2237
-#: ../../standalone/drakbackup_.c:2255 ../../standalone/drakbackup_.c:2305
-#: ../../standalone/drakbackup_.c:2325 ../../standalone/drakbackup_.c:2344
+#: ../../standalone/drakbackup_.c:2303 ../../standalone/drakbackup_.c:2323
+#: ../../standalone/drakbackup_.c:2342 ../../standalone/drakbackup_.c:2363
+#: ../../standalone/drakbackup_.c:2381 ../../standalone/drakbackup_.c:2429
+#: ../../standalone/drakbackup_.c:2449 ../../standalone/drakbackup_.c:2468
 #, fuzzy
-msgid " Previous "
+msgid "Previous"
 msgstr "<- Forrige"
 
-#: ../../standalone/drakbackup_.c:2179 ../../standalone/drakbackup_.c:2239
-msgid " Save "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:2192 ../../standalone/drakbackup_.c:2285
-#: ../../standalone/drakbackup_.c:2302 ../../standalone/drakbackup_.c:2322
-#: ../../standalone/drakbackup_.c:2341
-msgid "     Help      "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:2199 ../../standalone/drakbackup_.c:2271
-#: ../../standalone/drakbackup_.c:2287
+#: ../../standalone/drakbackup_.c:2305 ../../standalone/drakbackup_.c:2365
 #, fuzzy
-msgid " Ok "
-msgstr "Ok"
+msgid "Save"
+msgstr "Status"
 
-#: ../../standalone/drakbackup_.c:2218
+#: ../../standalone/drakbackup_.c:2344
 #, fuzzy
-msgid " Build Backup "
+msgid "Build Backup"
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:2257
-msgid " Restore "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:2307 ../../standalone/drakbackup_.c:2327
-#: ../../standalone/drakbackup_.c:2346
-msgid "     Next      "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:2358
+#: ../../standalone/drakbackup_.c:2383 ../../standalone/drakbackup_.c:3038
 #, fuzzy
-msgid "close"
-msgstr "Lukk"
+msgid "Restore"
+msgstr "Skreddersydd"
 
-#: ../../standalone/drakbackup_.c:2378
+#: ../../standalone/drakbackup_.c:2431 ../../standalone/drakbackup_.c:2451
+#: ../../standalone/drakbackup_.c:2470
+#, fuzzy
+msgid "Next"
+msgstr "Neste ->"
+
+#: ../../standalone/drakbackup_.c:2502
 msgid ""
 "Please Build backup before to restore it...\n"
 " or verify that your path to save is correct."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2399
+#: ../../standalone/drakbackup_.c:2523
+msgid ""
+"Error durind sendmail\n"
+"  your report mail was not sent\n"
+"  Please configure sendmail"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:2547
+msgid ""
+"Error durind sending file via FTP.\n"
+" Please correct your FTP configuration."
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:2570
 #, fuzzy
-msgid " Please check data to restore..."
+msgid "Please select data to restore..."
 msgstr "Vennligst velg språk som skal brukes."
 
-#: ../../standalone/drakbackup_.c:2420
-msgid " Please check way where backup..."
-msgstr ""
+#: ../../standalone/drakbackup_.c:2591
+#, fuzzy
+msgid "Please select media for backup..."
+msgstr "Vennligst velg språk som skal brukes."
 
-#: ../../standalone/drakbackup_.c:2442
-msgid " Please check data to backup..."
-msgstr ""
+#: ../../standalone/drakbackup_.c:2613
+#, fuzzy
+msgid "Please select data to backup..."
+msgstr "Vennligst velg språk som skal brukes."
 
-#: ../../standalone/drakbackup_.c:2464
+#: ../../standalone/drakbackup_.c:2635
 msgid ""
-" No configuration file found \n"
+"No configuration file found \n"
 "please click Wizard or Advanced."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2485
-msgid " Under Devel ... please wait."
+#: ../../standalone/drakbackup_.c:2656
+msgid "Under Devel ... please wait."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2565
+#: ../../standalone/drakbackup_.c:2736
 #, fuzzy
 msgid "Backup system files"
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:2567
+#: ../../standalone/drakbackup_.c:2738
 #, fuzzy
 msgid "Backup user files"
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:2569
+#: ../../standalone/drakbackup_.c:2740
 #, fuzzy
 msgid "Backup other files"
 msgstr "Dårlig sikkerhetskopi-fil"
 
-#: ../../standalone/drakbackup_.c:2571
+#: ../../standalone/drakbackup_.c:2742 ../../standalone/drakbackup_.c:2773
 msgid "Total Progress"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2631
-msgid " Data list to include on CDROM. "
+#: ../../standalone/drakbackup_.c:2764
+msgid "files sending by FTP"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2687
+#: ../../standalone/drakbackup_.c:2768
 #, fuzzy
-msgid "Please choose your CD space"
-msgstr "Vennligst velg tastatur-oppsettet ditt."
+msgid "Sending files..."
+msgstr "Finner enheter..."
 
-#: ../../standalone/drakbackup_.c:2693
-msgid "Please entrer the cd writer speed "
+#: ../../standalone/drakbackup_.c:2838
+msgid "Data list to include on CDROM."
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2699
-#, fuzzy
-msgid "Please check if you are using CDRW media"
-msgstr "Vennligst klikk på en partisjon"
+#: ../../standalone/drakbackup_.c:2900
+msgid "Please entrer the cd writer speed"
+msgstr ""
 
-#: ../../standalone/drakbackup_.c:2711
+#: ../../standalone/drakbackup_.c:2918
 msgid "Please enter your CD Writer device name (ex: 0,1,0)"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2717
+#: ../../standalone/drakbackup_.c:2924
 #, fuzzy
 msgid "Please check if you want to include install boot on your CD."
 msgstr "Vennligst velg pakkene du ønsker å installere."
 
-#: ../../standalone/drakbackup_.c:2785
-msgid " Backup Now from configuration file "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:2790
-msgid " Backup Now on CDROM "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:2795
+#: ../../standalone/drakbackup_.c:2992
 #, fuzzy
-msgid " View Backup Configuration.  "
+msgid "Backup Now from configuration file"
 msgstr "Nettverkskonfigurasjon"
 
-#: ../../standalone/drakbackup_.c:2818
+#: ../../standalone/drakbackup_.c:3002
 #, fuzzy
-msgid " Wizard Configuration "
+msgid "View Backup Configuration."
+msgstr "Nettverkskonfigurasjon"
+
+#: ../../standalone/drakbackup_.c:3025
+#, fuzzy
+msgid "Wizard Configuration"
 msgstr "LAN-konfigurasjon"
 
-#: ../../standalone/drakbackup_.c:2822
+#: ../../standalone/drakbackup_.c:3029
 #, fuzzy
-msgid " Advanced Configuration "
+msgid "Advanced Configuration"
 msgstr "LAN-konfigurasjon"
 
-#: ../../standalone/drakbackup_.c:2826
-msgid " Backup Now "
-msgstr ""
+#: ../../standalone/drakbackup_.c:3033
+#, fuzzy
+msgid "Backup Now"
+msgstr "Oppsett filsystemer"
 
-#: ../../standalone/drakbackup_.c:2831
-msgid "     Restore      "
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:2851
+#: ../../standalone/drakbackup_.c:3058
 msgid "Drakbackup"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2898
+#: ../../standalone/drakbackup_.c:3105
 msgid ""
 "\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2918
-#, fuzzy
-msgid "toto"
-msgstr "toot"
-
-#: ../../standalone/drakbackup_.c:2920
+#: ../../standalone/drakbackup_.c:3126
 msgid ""
-"options description:\n"
+"Options description:\n"
 "\n"
-" In this step Drakbacup allow you to change:\n"
+" In this step Drakbackup allow you to change:\n"
 "\n"
-" - the compression mode:\n"
+" - The compression mode:\n"
 "    \n"
-"      if you check bzip2 compression, you will compress\n"
-"      better than gzip your data (about 2-10 %).\n"
-"      This options are not checked by default because\n"
-"      this compression mode need more time ( about 1000% more).\n"
+"      If you check bzip2 compression, you will compress\n"
+"      your data better than gzip (about 2-10 %).\n"
+"      This option is not checked by default because\n"
+"      this compression mode needs more time ( about 1000% more).\n"
 " \n"
-" - the udpate mode:\n"
+" - The update mode:\n"
 "\n"
-"      This options will update your backup, but this\n"
-"      options are not really interesting because you need\n"
-"      to decompress your backup before to update it.\n"
+"      This option will update your backup, but this\n"
+"      option is not really useful because you need to\n"
+"      decompress your backup before you can update it.\n"
 "      \n"
 " - the .backupignore mode:\n"
 "\n"
 "      Like with cvs, Drakbackup will ignore all references\n"
-"      included on  .backupignore files in each directories.\n"
+"      included in .backupignore files in each directories.\n"
 "      ex: \n"
-"         \\$> cat .backupignore\n"
+"         /*> cat .backupignore*/\n"
 "         *.o\n"
 "         *~\n"
 "         ...\n"
@@ -8616,50 +8696,50 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2950
+#: ../../standalone/drakbackup_.c:3156
 msgid ""
 "options description:\n"
 "\n"
 " - Backup system files:\n"
 "       \n"
-"\tThis  options allow you to backup your /etc directory,\n"
-"\twhich contain all configuration files please be\n"
-"\tcarreful during restore step to not overwriting\n"
+"\tThis option allows you to backup your /etc directory,\n"
+"\twhich contains all configuration files. Please be\n"
+"\tcareful during the restore step to not overwrite:\n"
 "\t\t/etc/passwd \n"
 "\t\t/etc/group \n"
 "\t\t/etc/fstab\n"
 "\n"
 " - Backup User files: \n"
 "\n"
-"\tThis option allow to select all users that you want \n"
+"\tThis option allows you select all users that you want \n"
 "\tto backup.\n"
-"\tTo preserve disk space, it recommeded to not include\n"
-"\tbrowsers cache.\n"
+"\tTo preserve disk space, it is recommended that you \n"
+"\tdo not include web browser's cache.\n"
 "\n"
 " - Backup Other files: \n"
 "\n"
-"\tThis option allow to add more data to save.\n"
-"\tWith the other backup it's not possible in\n"
+"\tThis option allows you to add more data to save.\n"
+"\tWith the other backup it's not possible at the \n"
 "\tmoment to select select incremental backup.\t\t\n"
 " \n"
 " - Incremental Backups:\n"
 "\n"
-"\tThe incremental backup is the most powerfull \n"
-"\toption to use backup, this option allow you \n"
+"\tThe incremental backup is the most powerful \n"
+"\toption for backup. This option allows you \n"
 "\tto backup all your data the first time, and \n"
-"\tonly the changed after.\n"
-"\tSo you will be able during the restore\n"
+"\tonly the changed afterward.\n"
+"\tThen you will be able, during the restore\n"
 "\tstep, to restore your data from a specified\n"
 "\tdate.\n"
-"\tIf you have not selected this options all\n"
+"\tIf you have not selected this option all\n"
 "\told backups are deleted before each backup.    \n"
 "\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:2989
+#: ../../standalone/drakbackup_.c:3195
 msgid ""
-"restore description:\n"
+"Restore description:\n"
 " \n"
 "Only the most recent date will be used ,because with incremental \n"
 "backups it is necesarry to restore one by one each older backups.\n"
@@ -8685,7 +8765,18 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:3015
+#: ../../standalone/drakbackup_.c:3221
+msgid ""
+"Sendmail Error:\n"
+"\n"
+"\n"
+" Some errors during sendmail are caused by \n"
+" a bad configuration of postfix. To solve it you have to\n"
+" set myhostname or mydomain in /etc/postfix/main.cf\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakbackup_.c:3230
 msgid ""
 " Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita.fr>\n"
 "\n"
@@ -8705,16 +8796,16 @@ msgid ""
 "\n"
 "                                            _____________________\n"
 "\n"
-"description:\n"
+"Description:\n"
 "\n"
-"  Drakbacup is use to backup your system.\n"
-"  During the configuration you can select \n"
+"  Drakbackup is used to backup your system.\n"
+"  During the configuration you can select: \n"
 "\t- System files, \n"
 "\t- Users files, \n"
 "\t- Other files.\n"
-"\tor All your system ...  and Other (like windows Partitions)\n"
+"\tor All your system ...  and Other (like Windows Partitions)\n"
 "\n"
-"  Drakbacup allow you to backup your system on:\n"
+"  Drakbackup allows you to backup your system on:\n"
 "\t- Harddrive.\n"
 "\t- NFS.\n"
 "\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
@@ -8723,54 +8814,52 @@ msgid ""
 "\t- Webdav.\n"
 "\t- Tape.\n"
 "\n"
-"  Drakbacup allow you to Restore your system on\n"
-"  choosen directory.\n"
+"  Drakbackup allows you to restore your system to\n"
+"  a user selected directory.\n"
 "\n"
-"  Per default all backup will be stored on your\n"
-"  /var/drakbackup directory\n"
+"  By default all backups will be stored in your\n"
+"  /var/drakbackup directory.\n"
 "\n"
-"  configuration file:\n"
+"  Configuration file:\n"
 "\t/etc/drakconf/drakbackup/drakbakup.conf\n"
 "\n"
 "\n"
 "Restore Step:\n"
 "  \n"
-"  During the Restore Step DrakBackup will remove \n"
+"  During the restore step, DrakBackup will remove \n"
 "  your original directory and verify that all \n"
-"  backup files are not corrupted. But it is recommended \n"
-"  to build a last backup before to do it.\n"
+"  backup files are not corrupted. It is recommended \n"
+"  you do a last backup before restoring.\n"
 "\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:3071
+#: ../../standalone/drakbackup_.c:3286
 msgid ""
 "options description:\n"
 "\n"
 "Please be careful when you are using ftp backup, because only \n"
-"backup already build are send on server.\n"
-"So in moment, you need to build backup on your hard drive\n"
-"before to send it.\n"
+"backups that are already built are sent to the server.\n"
+"So at the moment, you need to build the backup on your hard \n"
+"drive before sending it to the server.\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:3080
+#: ../../standalone/drakbackup_.c:3295
 msgid ""
 "\n"
 "Restore Backup Problems:\n"
 "\n"
-"During the restore step, Drakbackup verify all your\n"
-"backup files before to restore it.\n"
-"Because before to restore it, Drakbackup will remove \n"
+"During the restore step, Drakbackup will verify all your\n"
+"backup files before restoring them.\n"
+"Before the restore, Drakbackup will remove \n"
 "your original directory, and you will loose all your \n"
-"data. so please be carreful and do not modify the backup\n"
-"data files by hand.\n"
-"\n"
-"\n"
+"data. It is important to be careful and not modify the \n"
+"backup data files by hand.\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:3094
+#: ../../standalone/drakbackup_.c:3307
 msgid ""
 " Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita.fr>\n"
 "\n"
@@ -8790,16 +8879,16 @@ msgid ""
 "\n"
 "                                            _____________________\n"
 "\n"
-"description:\n"
+"Description:\n"
 "\n"
-"  Drakbacup is use to backup your system.\n"
+"  Drakbackup is used to backup your system.\n"
 "  During the configuration you can select \n"
 "\t- System files, \n"
 "\t- Users files, \n"
 "\t- Other files.\n"
-"\tor All your system ...  and Other (like windows Partitions)\n"
+"\tor All your system ...  and Other (like Windows Partitions)\n"
 "\n"
-"  Drakbacup allow you to backup your system on:\n"
+"  Drakbackup allows you to backup your system on:\n"
 "\t- Harddrive.\n"
 "\t- NFS.\n"
 "\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
@@ -8808,141 +8897,122 @@ msgid ""
 "\t- Webdav.\n"
 "\t- Tape.\n"
 "\n"
-"  Drakbacup allow you to Restore your system on\n"
-"  choosen directory.\n"
+"  Drakbackup allows you to restore your system to\n"
+"  a user selected directory.\n"
 "\n"
-"  Per default all backup will be stored on your\n"
-"  /var/drakbackup directory\n"
+"  By default all backups will be stored in your\n"
+"  /var/drakbackup directory.\n"
 "\n"
-"  configuration file:\n"
+"  Configuration file:\n"
 "\t/etc/drakconf/drakbackup/drakbakup.conf\n"
 "\n"
 "Restore Step:\n"
 "  \n"
-"  During the Restore Step DrakBackup will remove \n"
-"  your original directory and verify that all \n"
-"  backup files are not corrupted. But it is recommended \n"
-"  to build a last backup before to do it.\n"
+"  During the restore step, Drakbackup will remove\n"
+"  your original directory and verify that all\n"
+"  backup files are not corrupted. It is recommended\n"
+"  you do a last backup before restoring.\n"
 " \n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakbackup_.c:3171
-msgid ""
-"\n"
-"Description: Drakbacup Restore Mode. \n"
-"\n"
-"Drakbacup allow to restore the system (etc, var files)\n"
-" from starup or on drakconf utility.\n"
-"\n"
-"\tsystem backup:\n"
-"                   backup_sys.tar.gz \n"
-"\tuser backup\n"
-"\t\t   backup_user_james.tar.gz      \n"
-"\t\t   backup_user_seb.tar.gz\n"
-"\tother directories\n"
-"                   backup_other.tar.gz          \n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakfont_.c:222
-msgid "Search installed fonts"
 msgstr ""
 
 #: ../../standalone/drakfont_.c:224
+msgid "Search installed fonts"
+msgstr ""
+
+#: ../../standalone/drakfont_.c:226
 msgid "Unselect fonts installed"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:245
+#: ../../standalone/drakfont_.c:247
 msgid "parse all fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:246
+#: ../../standalone/drakfont_.c:248
 #, fuzzy
 msgid "no fonts found"
 msgstr "ingen nettverkskort funnet"
 
-#: ../../standalone/drakfont_.c:254 ../../standalone/drakfont_.c:296
-#: ../../standalone/drakfont_.c:345 ../../standalone/drakfont_.c:402
-#: ../../standalone/drakfont_.c:408 ../../standalone/drakfont_.c:434
-#: ../../standalone/drakfont_.c:446 ../../standalone/drakfont_.c:459
+#: ../../standalone/drakfont_.c:256 ../../standalone/drakfont_.c:298
+#: ../../standalone/drakfont_.c:347 ../../standalone/drakfont_.c:404
+#: ../../standalone/drakfont_.c:410 ../../standalone/drakfont_.c:436
+#: ../../standalone/drakfont_.c:448 ../../standalone/drakfont_.c:461
 #, fuzzy
 msgid "done"
 msgstr "Ferdig"
 
-#: ../../standalone/drakfont_.c:258
-msgid "could not find any font in /win*/fonts"
+#: ../../standalone/drakfont_.c:260
+msgid "could not find any font in your mounted partitions"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:294
+#: ../../standalone/drakfont_.c:296
 msgid "Reselect correct fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:297
+#: ../../standalone/drakfont_.c:299
 msgid "could not find any font.\n"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:320
+#: ../../standalone/drakfont_.c:322
 msgid "Search fonts in installed list"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:343
+#: ../../standalone/drakfont_.c:345
 #, fuzzy
 msgid "Fonts copy"
 msgstr "Formater diskett"
 
-#: ../../standalone/drakfont_.c:346
+#: ../../standalone/drakfont_.c:348
 #, fuzzy
 msgid "True Type fonts installation"
 msgstr "Forbereder installasjon"
 
-#: ../../standalone/drakfont_.c:349
+#: ../../standalone/drakfont_.c:351
 msgid "please wait during ttmkfdir..."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:351
+#: ../../standalone/drakfont_.c:353
 msgid "True Type install done"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:358 ../../standalone/drakfont_.c:374
+#: ../../standalone/drakfont_.c:360 ../../standalone/drakfont_.c:376
 msgid "Fonts conversion"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:362 ../../standalone/drakfont_.c:378
-#: ../../standalone/drakfont_.c:398
+#: ../../standalone/drakfont_.c:364 ../../standalone/drakfont_.c:380
+#: ../../standalone/drakfont_.c:400
 msgid "type1inst building"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:367 ../../standalone/drakfont_.c:382
+#: ../../standalone/drakfont_.c:369 ../../standalone/drakfont_.c:384
 msgid "Ghostscript referencing"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:389
+#: ../../standalone/drakfont_.c:391
 msgid "ttf fonts conversion"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:393
+#: ../../standalone/drakfont_.c:395
 msgid "pfm fonts conversion"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:403
+#: ../../standalone/drakfont_.c:405
 msgid "Suppress temporary Files"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:406
+#: ../../standalone/drakfont_.c:408
 msgid "Restart XFS"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:444 ../../standalone/drakfont_.c:454
+#: ../../standalone/drakfont_.c:446 ../../standalone/drakfont_.c:456
 msgid "Suppress Fonts Files"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:456
+#: ../../standalone/drakfont_.c:458
 #, fuzzy
 msgid "xfs restart"
 msgstr "begrense"
 
-#: ../../standalone/drakfont_.c:463
+#: ../../standalone/drakfont_.c:465
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
 "install them on your system.\n"
@@ -8951,131 +9021,131 @@ msgid ""
 "may hang up your X Server."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:538
+#: ../../standalone/drakfont_.c:540
 #, fuzzy
 msgid "Fonts Importation"
 msgstr "Formater partisjoner"
 
-#: ../../standalone/drakfont_.c:559
+#: ../../standalone/drakfont_.c:558
 #, fuzzy
 msgid "Windows Importation"
 msgstr "Gnome arbeidstasjon"
 
-#: ../../standalone/drakfont_.c:561
+#: ../../standalone/drakfont_.c:560
 msgid "Advanced Importation"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:563
+#: ../../standalone/drakfont_.c:562
 msgid "Uninstall Fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:565
+#: ../../standalone/drakfont_.c:564
 #, fuzzy
 msgid "Font List"
 msgstr "Monteringspunkt"
 
-#: ../../standalone/drakfont_.c:570
+#: ../../standalone/drakfont_.c:569
 #, fuzzy
 msgid "About"
 msgstr "Avbryt"
 
-#: ../../standalone/drakfont_.c:572
+#: ../../standalone/drakfont_.c:571
 msgid "             Help           "
 msgstr ""
 
-#: ../../standalone/drakfont_.c:728
+#: ../../standalone/drakfont_.c:711
 #, fuzzy
 msgid "Choose the applications that will support the fonts :"
 msgstr "Velg partisjonene du ønsker å partisjonere"
 
-#: ../../standalone/drakfont_.c:730
+#: ../../standalone/drakfont_.c:715
 msgid "Ghostscript"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:731
+#: ../../standalone/drakfont_.c:719
 #, fuzzy
 msgid "StarOffice"
 msgstr "Office"
 
-#: ../../standalone/drakfont_.c:732
+#: ../../standalone/drakfont_.c:723
 #, fuzzy
 msgid "Abiword"
 msgstr "Avbryt"
 
-#: ../../standalone/drakfont_.c:733
+#: ../../standalone/drakfont_.c:727
 #, fuzzy
 msgid "Generic Printers"
 msgstr "Skriver"
 
-#: ../../standalone/drakfont_.c:759
+#: ../../standalone/drakfont_.c:764
 msgid "Select the font file or directory and click on 'Add'"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:795
+#: ../../standalone/drakfont_.c:800
 #, fuzzy
 msgid "Install List"
 msgstr "Installer systemet"
 
-#: ../../standalone/drakfont_.c:825
+#: ../../standalone/drakfont_.c:830
 msgid "click here if you are sure."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:827
+#: ../../standalone/drakfont_.c:832
 msgid "here if no."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:864
+#: ../../standalone/drakfont_.c:869
 msgid "Unselected All"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:866
+#: ../../standalone/drakfont_.c:871
 #, fuzzy
 msgid "Selected All"
 msgstr "Velg fil"
 
-#: ../../standalone/drakfont_.c:868
+#: ../../standalone/drakfont_.c:873
 #, fuzzy
 msgid "Remove List"
 msgstr "Fjern skriver"
 
-#: ../../standalone/drakfont_.c:886 ../../standalone/drakfont_.c:906
+#: ../../standalone/drakfont_.c:891 ../../standalone/drakfont_.c:911
 #, fuzzy
 msgid "Initials tests"
 msgstr "Initmelding"
 
-#: ../../standalone/drakfont_.c:887
+#: ../../standalone/drakfont_.c:892
 #, fuzzy
 msgid "Copy fonts on your system"
 msgstr "Ikke noe nettverksadapter i systemet ditt!"
 
-#: ../../standalone/drakfont_.c:888
+#: ../../standalone/drakfont_.c:893
 msgid "Install & convert Fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:889
+#: ../../standalone/drakfont_.c:894
 #, fuzzy
 msgid "Post Install"
 msgstr "Installer"
 
-#: ../../standalone/drakfont_.c:907
+#: ../../standalone/drakfont_.c:912
 #, fuzzy
 msgid "Remove fonts on your system"
 msgstr "Ikke noe nettverksadapter i systemet ditt!"
 
-#: ../../standalone/drakfont_.c:908
+#: ../../standalone/drakfont_.c:913
 #, fuzzy
 msgid "Post Uninstall"
 msgstr "Avslutt installering"
 
-#: ../../standalone/drakgw_.c:36 ../../standalone/drakgw_.c:181
+#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:191
 msgid "Internet Connection Sharing"
 msgstr "Deling av Internett tilkobling"
 
-#: ../../standalone/drakgw_.c:119
+#: ../../standalone/drakgw_.c:129
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Deling av Internett tilkobling er slått på"
 
-#: ../../standalone/drakgw_.c:120
+#: ../../standalone/drakgw_.c:130
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
@@ -9087,31 +9157,31 @@ msgstr ""
 "\n"
 "Hva vil du gjøre?"
 
-#: ../../standalone/drakgw_.c:124
+#: ../../standalone/drakgw_.c:134
 msgid "disable"
 msgstr "slå av"
 
-#: ../../standalone/drakgw_.c:124 ../../standalone/drakgw_.c:149
+#: ../../standalone/drakgw_.c:134 ../../standalone/drakgw_.c:159
 msgid "dismiss"
 msgstr "avvis"
 
-#: ../../standalone/drakgw_.c:124 ../../standalone/drakgw_.c:149
+#: ../../standalone/drakgw_.c:134 ../../standalone/drakgw_.c:159
 msgid "reconfigure"
 msgstr "Konfigurer på nytt"
 
-#: ../../standalone/drakgw_.c:127
+#: ../../standalone/drakgw_.c:137
 msgid "Disabling servers..."
 msgstr "Slår av tjenere..."
 
-#: ../../standalone/drakgw_.c:135
+#: ../../standalone/drakgw_.c:145
 msgid "Internet connection sharing is now disabled."
 msgstr "Deling av Internett tilkobling er slått av"
 
-#: ../../standalone/drakgw_.c:144
+#: ../../standalone/drakgw_.c:154
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Deling av Internett tilkobling er slått av"
 
-#: ../../standalone/drakgw_.c:145
+#: ../../standalone/drakgw_.c:155
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -9123,19 +9193,19 @@ msgstr ""
 "\n"
 "Hva vil du gjøre?"
 
-#: ../../standalone/drakgw_.c:149
+#: ../../standalone/drakgw_.c:159
 msgid "enable"
 msgstr "slå på"
 
-#: ../../standalone/drakgw_.c:156
+#: ../../standalone/drakgw_.c:166
 msgid "Enabling servers..."
 msgstr "Slår på tjenere..."
 
-#: ../../standalone/drakgw_.c:161
+#: ../../standalone/drakgw_.c:171
 msgid "Internet connection sharing is now enabled."
 msgstr "Deling av Internett tilkobling er nå slått på."
 
-#: ../../standalone/drakgw_.c:182
+#: ../../standalone/drakgw_.c:192
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -9152,21 +9222,21 @@ msgstr ""
 "Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
 "nettverk (LAN)."
 
-#: ../../standalone/drakgw_.c:208
+#: ../../standalone/drakgw_.c:218
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Grensesnitt %s (bruker modul %s)"
 
-#: ../../standalone/drakgw_.c:209
+#: ../../standalone/drakgw_.c:219
 #, c-format
 msgid "Interface %s"
 msgstr "Grensesnitt %s"
 
-#: ../../standalone/drakgw_.c:217
+#: ../../standalone/drakgw_.c:227
 msgid "No network adapter on your system!"
 msgstr "Ikke noe nettverksadapter i systemet ditt!"
 
-#: ../../standalone/drakgw_.c:218
+#: ../../standalone/drakgw_.c:228
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -9174,11 +9244,11 @@ msgstr ""
 "Ikke noe ethernet nettverksadapter har blitt oppdaget i systemet ditt. "
 "Vennligst kjør verktøyet for maskinvarekonfigurasjon."
 
-#: ../../standalone/drakgw_.c:224
+#: ../../standalone/drakgw_.c:234
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
 
-#: ../../standalone/drakgw_.c:225
+#: ../../standalone/drakgw_.c:235
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -9193,7 +9263,7 @@ msgstr ""
 "\n"
 "Jeg er i ferd med å sette opp ditt lokale nettverk (LAN) med dette adapteret."
 
-#: ../../standalone/drakgw_.c:234
+#: ../../standalone/drakgw_.c:244
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
@@ -9201,12 +9271,12 @@ msgstr ""
 "Vennligst velg hvilket nettverksadapter som skal kobles til ditt lokale "
 "nettverk (LAN)."
 
-#: ../../standalone/drakgw_.c:252
+#: ../../standalone/drakgw_.c:262
 #, fuzzy
 msgid "Network interface already configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../../standalone/drakgw_.c:253
+#: ../../standalone/drakgw_.c:263
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -9216,17 +9286,17 @@ msgid ""
 "You can do it manually but you need to know what you're doing."
 msgstr ""
 
-#: ../../standalone/drakgw_.c:258
+#: ../../standalone/drakgw_.c:268
 #, fuzzy
 msgid "Automatic reconfiguration"
 msgstr "Konfigurasjon av automatiske skritt"
 
-#: ../../standalone/drakgw_.c:259
+#: ../../standalone/drakgw_.c:269
 #, fuzzy
 msgid "Show current interface configuration"
 msgstr "Modifiser skriverkonfigurasjon"
 
-#: ../../standalone/drakgw_.c:261
+#: ../../standalone/drakgw_.c:271
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -9237,7 +9307,7 @@ msgid ""
 "Driver: %s"
 msgstr ""
 
-#: ../../standalone/drakgw_.c:273
+#: ../../standalone/drakgw_.c:283
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the C-Class Network that "
@@ -9249,33 +9319,33 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../standalone/drakgw_.c:278
+#: ../../standalone/drakgw_.c:288
 msgid "C-Class Local Network"
 msgstr ""
 
-#: ../../standalone/drakgw_.c:279
+#: ../../standalone/drakgw_.c:289
 #, fuzzy
 msgid "(This) DHCP Server IP"
 msgstr "CUPS tjener IP"
 
-#: ../../standalone/drakgw_.c:280
+#: ../../standalone/drakgw_.c:290
 msgid "Re-configure interface and DHCP server"
 msgstr ""
 
-#: ../../standalone/drakgw_.c:287
+#: ../../standalone/drakgw_.c:297
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr ""
 
-#: ../../standalone/drakgw_.c:299
+#: ../../standalone/drakgw_.c:308
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "Mulig LAN-adresse konflikt funnet i konfigurasjonen til %s!\n"
 
-#: ../../standalone/drakgw_.c:307 ../../standalone/drakgw_.c:313
+#: ../../standalone/drakgw_.c:316 ../../standalone/drakgw_.c:322
 msgid "Firewalling configuration detected!"
 msgstr "Brannmurkonfigurasjon oppdaget!"
 
-#: ../../standalone/drakgw_.c:308 ../../standalone/drakgw_.c:314
+#: ../../standalone/drakgw_.c:317 ../../standalone/drakgw_.c:323
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fix after installation."
@@ -9283,20 +9353,20 @@ msgstr ""
 "Advarsel! En eksisterende brannmurkonfigurasjon har blitt oppdaget. Du "
 "trenger muligens å konfigurere noe manuelt etter installasjon."
 
-#: ../../standalone/drakgw_.c:322
+#: ../../standalone/drakgw_.c:331
 msgid "Configuring..."
 msgstr "Konfigurerer..."
 
-#: ../../standalone/drakgw_.c:323
+#: ../../standalone/drakgw_.c:332
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Konfigurerer script, installerer programvare, starter tjenere..."
 
-#: ../../standalone/drakgw_.c:359
+#: ../../standalone/drakgw_.c:369
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Problemer ved installering av pakke %s"
 
-#: ../../standalone/drakgw_.c:651
+#: ../../standalone/drakgw_.c:663
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -9306,23 +9376,23 @@ msgstr ""
 "Du kan nå dele Internett-tilkobling med andre maskiner på ditt lokale "
 "nettverk ved å bruke automatisk nettverkskonfigurasjon (DHCP)."
 
-#: ../../standalone/drakgw_.c:668
+#: ../../standalone/drakgw_.c:680
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "Oppsett har allerede blitt gjort, men er for øyeblikket slått av."
 
-#: ../../standalone/drakgw_.c:669
+#: ../../standalone/drakgw_.c:681
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "Oppsett har allerede blitt gjort, og er for øyeblikket slått på."
 
-#: ../../standalone/drakgw_.c:670
+#: ../../standalone/drakgw_.c:682
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Deling av Internett tilkobling har aldri blitt konfigurert."
 
-#: ../../standalone/drakgw_.c:675
+#: ../../standalone/drakgw_.c:687
 msgid "Internet connection sharing configuration"
 msgstr "Internett deling av tilkobling konfigurasjon"
 
-#: ../../standalone/drakgw_.c:682
+#: ../../standalone/drakgw_.c:694
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -9337,142 +9407,124 @@ msgstr ""
 "\n"
 "Klikk på Konfigurer for å starte oppsett-hjelperen."
 
-#: ../../standalone/draknet_.c:79
+#: ../../standalone/draknet_.c:80
 #, c-format
 msgid "Network configuration (%d adapters)"
 msgstr "Nettverkskonfigurasjon (%d adaptere"
 
-#: ../../standalone/draknet_.c:86 ../../standalone/draknet_.c:590
+#: ../../standalone/draknet_.c:87 ../../standalone/draknet_.c:594
 msgid "Profile: "
 msgstr "Profil: "
 
-#: ../../standalone/draknet_.c:94
+#: ../../standalone/draknet_.c:95
 msgid "Del profile..."
 msgstr "Slett profil..."
 
-#: ../../standalone/draknet_.c:100
+#: ../../standalone/draknet_.c:101
 msgid "Profile to delete:"
 msgstr "Profil som skal slettes:"
 
-#: ../../standalone/draknet_.c:128
+#: ../../standalone/draknet_.c:129
 msgid "New profile..."
 msgstr "Ny profil...."
 
-#: ../../standalone/draknet_.c:134
+#: ../../standalone/draknet_.c:135
 msgid ""
 "Name of the profile to create (the new profile is created as a copy of the "
 "current one) :"
 msgstr ""
 
-#: ../../standalone/draknet_.c:160
+#: ../../standalone/draknet_.c:161
 msgid "Hostname: "
 msgstr "Vertsnavn: "
 
-#: ../../standalone/draknet_.c:167
+#: ../../standalone/draknet_.c:168
 msgid "Internet access"
 msgstr "Internett-tilgang"
 
-#: ../../standalone/draknet_.c:180
+#: ../../standalone/draknet_.c:181
 msgid "Type:"
 msgstr "Type:"
 
-#: ../../standalone/draknet_.c:183 ../../standalone/draknet_.c:400
+#: ../../standalone/draknet_.c:184 ../../standalone/draknet_.c:375
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: ../../standalone/draknet_.c:183 ../../standalone/draknet_.c:400
+#: ../../standalone/draknet_.c:184 ../../standalone/draknet_.c:375
 msgid "Interface:"
 msgstr "Grensesnitt:"
 
-#: ../../standalone/draknet_.c:194
+#: ../../standalone/draknet_.c:195
 msgid "Status:"
 msgstr "Status:"
 
-#: ../../standalone/draknet_.c:199
+#: ../../standalone/draknet_.c:202
 msgid "Wait please"
 msgstr ""
 
-#: ../../standalone/draknet_.c:218
-msgid "Starting your connection..."
-msgstr "Starter tilkoblingen din..."
-
-#: ../../standalone/draknet_.c:226
-msgid "Closing your connection..."
-msgstr "Lukker tilkoblingen din..."
-
-#: ../../standalone/draknet_.c:231
-msgid ""
-"The connection is not closed.\n"
-"Try to do it manually by running\n"
-"/etc/sysconfig/network-scripts/net_cnx_down\n"
-"in root."
-msgstr ""
-"Tilkoblingen er ikke lukket.\n"
-"Prøv å gjøre det manuelt ved å kjøre\n"
-"/etc/sysconfig/network-scripts/net_cnx_down\n"
-"i root."
-
-#: ../../standalone/draknet_.c:234
-msgid "The system is now disconnected."
-msgstr "Systemet er nå nedkoblet."
-
-#: ../../standalone/draknet_.c:246
+#: ../../standalone/draknet_.c:220
 msgid "Configure Internet Access..."
 msgstr "Konfigurer internetttilgang...."
 
-#: ../../standalone/draknet_.c:253 ../../standalone/draknet_.c:452
+#: ../../standalone/draknet_.c:227 ../../standalone/draknet_.c:448
 msgid "LAN configuration"
 msgstr "LAN-konfigurasjon"
 
-#: ../../standalone/draknet_.c:258
+#: ../../standalone/draknet_.c:232
 msgid "Driver"
 msgstr "Driver"
 
-#: ../../standalone/draknet_.c:258
+#: ../../standalone/draknet_.c:232
 msgid "Interface"
 msgstr "rensesnitt"
 
-#: ../../standalone/draknet_.c:258
+#: ../../standalone/draknet_.c:232
 msgid "Protocol"
 msgstr "Protokoll"
 
-#: ../../standalone/draknet_.c:258
+#: ../../standalone/draknet_.c:232
 msgid "State"
 msgstr "Status"
 
-#: ../../standalone/draknet_.c:270
+#: ../../standalone/draknet_.c:244
 msgid "Configure Local Area Network..."
 msgstr "Konfigurer lokalt nettverk"
 
-#: ../../standalone/draknet_.c:282
+#: ../../standalone/draknet_.c:256
 msgid "Click here to launch the wizard ->"
 msgstr ""
 
-#: ../../standalone/draknet_.c:309
+#: ../../standalone/draknet_.c:283
 msgid "Apply"
 msgstr "Bruk"
 
-#: ../../standalone/draknet_.c:328
+#: ../../standalone/draknet_.c:302
 msgid "Please Wait... Applying the configuration"
 msgstr "Vennligst vent . . . Setter konfigurasjonen på plass"
 
-#: ../../standalone/draknet_.c:408
+#: ../../standalone/draknet_.c:383 ../../standalone/draknet_.c:406
 msgid "Connected"
 msgstr "Tilkoblet"
 
-#: ../../standalone/draknet_.c:408
+#: ../../standalone/draknet_.c:383 ../../standalone/draknet_.c:406
 msgid "Not connected"
 msgstr "Ikke tilkoblet"
 
-#: ../../standalone/draknet_.c:409
+#: ../../standalone/draknet_.c:384 ../../standalone/draknet_.c:407
 msgid "Connect..."
 msgstr "Koble til..."
 
-#: ../../standalone/draknet_.c:409
+#: ../../standalone/draknet_.c:384 ../../standalone/draknet_.c:407
 msgid "Disconnect..."
 msgstr "Koble fra..."
 
-#: ../../standalone/draknet_.c:434
+#: ../../standalone/draknet_.c:403
+msgid ""
+"Warning, another Internet connection has been detected, maybe using your "
+"network"
+msgstr ""
+
+#: ../../standalone/draknet_.c:430
 msgid ""
 "You don't have any configured interface.\n"
 "Configure them first by clicking on 'Configure'"
@@ -9480,36 +9532,42 @@ msgstr ""
 "Du har ingen konfigurerte grensesnitt.\n"
 "Konfigurer disse først ved å klikke på 'Konfigurer'"
 
-#: ../../standalone/draknet_.c:456
+#: ../../standalone/draknet_.c:452
 msgid "LAN Configuration"
 msgstr "LAN-konfigurasjon"
 
-#: ../../standalone/draknet_.c:467
+#: ../../standalone/draknet_.c:463
 #, c-format
 msgid "Adapter %s: %s"
 msgstr "Adapter %s: %s"
 
-#: ../../standalone/draknet_.c:473
+#: ../../standalone/draknet_.c:469
 msgid "Boot Protocol"
 msgstr "Oppstartsprotokoll"
 
-#: ../../standalone/draknet_.c:474
+#: ../../standalone/draknet_.c:470
 msgid "Started on boot"
 msgstr "Startet ved oppstart"
 
-#: ../../standalone/draknet_.c:475
+#: ../../standalone/draknet_.c:471
 msgid "DHCP client"
 msgstr "DHCP-klient"
 
-#: ../../standalone/draknet_.c:499 ../../standalone/draknet_.c:501
+#: ../../standalone/draknet_.c:496 ../../standalone/draknet_.c:499
 msgid "activate now"
 msgstr "aktiver nå"
 
-#: ../../standalone/draknet_.c:499 ../../standalone/draknet_.c:501
+#: ../../standalone/draknet_.c:496 ../../standalone/draknet_.c:499
 msgid "desactivate now"
 msgstr "deaktiver nå"
 
-#: ../../standalone/draknet_.c:555
+#: ../../standalone/draknet_.c:502
+msgid ""
+"This interface has not been configured yet.\n"
+"Launch the configuration wizard in the main window"
+msgstr ""
+
+#: ../../standalone/draknet_.c:559
 msgid ""
 "You don't have any internet connection.\n"
 "Create one first by clicking on 'Configure'"
@@ -9517,43 +9575,47 @@ msgstr ""
 "Du har ingen internett-tilkobling.\n"
 "Opprett en først ved å klikke på 'Konfigurer'"
 
-#: ../../standalone/draknet_.c:579
+#: ../../standalone/draknet_.c:583
 msgid "Internet connection configuration"
 msgstr "Internett tilkobling konfigurasjon"
 
-#: ../../standalone/draknet_.c:583
+#: ../../standalone/draknet_.c:587
 msgid "Internet Connection Configuration"
 msgstr "Internett tilkobling konfigurasjon"
 
-#: ../../standalone/draknet_.c:592
+#: ../../standalone/draknet_.c:596
 msgid "Connection type: "
 msgstr "Oppkoblingstype:"
 
-#: ../../standalone/draknet_.c:598
+#: ../../standalone/draknet_.c:602
 msgid "Parameters"
 msgstr "Parametere"
 
-#: ../../standalone/draknet_.c:625
+#: ../../standalone/draknet_.c:620
+msgid "Gateway"
+msgstr "Gateway"
+
+#: ../../standalone/draknet_.c:629
 msgid "Ethernet Card"
 msgstr "Ethernettkort"
 
-#: ../../standalone/draknet_.c:626
+#: ../../standalone/draknet_.c:630
 msgid "DHCP Client"
 msgstr "DHCP-klient"
 
-#: ../../standalone/draksec_.c:21
+#: ../../standalone/draksec_.c:22
 msgid "Welcome To Crackers"
 msgstr "Velkommen til Crackers"
 
-#: ../../standalone/draksec_.c:22
+#: ../../standalone/draksec_.c:23
 msgid "Poor"
 msgstr "Dårlig"
 
-#: ../../standalone/draksec_.c:26
+#: ../../standalone/draksec_.c:27
 msgid "Paranoid"
 msgstr "Paranoid"
 
-#: ../../standalone/draksec_.c:29
+#: ../../standalone/draksec_.c:30
 msgid ""
 "This level is to be used with care. It makes your system more easy to use,\n"
 "but very sensitive: it must not be used for a machine connected to others\n"
@@ -9563,7 +9625,7 @@ msgstr ""
 "bruke, men mer utsatt: det må ikke brukes på en maskin koblet til andre\n"
 "eller til Internett. Det er ingen adgang med passord."
 
-#: ../../standalone/draksec_.c:32
+#: ../../standalone/draksec_.c:33
 msgid ""
 "Password are now enabled, but use as a networked computer is still not "
 "recommended."
@@ -9571,7 +9633,7 @@ msgstr ""
 "Passord er nå aktivert, men bruk som nettverksmaskin er fortsatt ikke "
 "anbefalt."
 
-#: ../../standalone/draksec_.c:33
+#: ../../standalone/draksec_.c:34
 msgid ""
 "Few improvements for this security level, the main one is that there are\n"
 "more security warnings and checks."
@@ -9579,7 +9641,7 @@ msgstr ""
 "Få endringer for dette sikkerhetsnivået, hovedforskjellen er at det er\n"
 "flere advarsler og kontroller."
 
-#: ../../standalone/draksec_.c:35
+#: ../../standalone/draksec_.c:36
 msgid ""
 "This is the standard security recommended for a computer that will be used\n"
 "to connect to the Internet as a client. There are now security checks. "
@@ -9587,7 +9649,7 @@ msgstr ""
 "Dette er standard sikkerhet anbefalt for en maskin som vil bli brukt til\n"
 "tilkobling mot Internett som klient. Det er nå sikkerhetskontroller. "
 
-#: ../../standalone/draksec_.c:37
+#: ../../standalone/draksec_.c:38
 msgid ""
 "With this security level, the use of this system as a server becomes "
 "possible.\n"
@@ -9598,7 +9660,7 @@ msgstr ""
 "Sikkerheten er nå høy nok til å bruke systemet som en tjener som\n"
 "godtar oppkoblinger fra mange klienter. "
 
-#: ../../standalone/draksec_.c:40
+#: ../../standalone/draksec_.c:41
 msgid ""
 "We take level 4 features, but now the system is entirely closed.\n"
 "Security features are at their maximum."
@@ -9606,22 +9668,22 @@ msgstr ""
 "Vi tar funksjonene for nivå 4, men nå er systemet fullstendig stengt.\n"
 "Sikkerhetsfunksjonene er nå på maksimum."
 
-#: ../../standalone/draksec_.c:73
+#: ../../standalone/draksec_.c:74
 #, fuzzy
 msgid "Security level"
 msgstr "Setter sikkerhetsnivå"
 
-#: ../../standalone/draksec_.c:75
+#: ../../standalone/draksec_.c:76
 #, fuzzy
 msgid "Use libsafe for servers"
 msgstr "Velg opsjoner for tjener"
 
-#: ../../standalone/draksec_.c:76
+#: ../../standalone/draksec_.c:77
 msgid ""
 "A library which defends against buffer overflow and format string attacks."
 msgstr ""
 
-#: ../../standalone/draksec_.c:80
+#: ../../standalone/draksec_.c:81
 msgid "Setting security level"
 msgstr "Setter sikkerhetsnivå"
 
@@ -9645,11 +9707,11 @@ msgstr "Vennligst velg tastatur-oppsettet ditt."
 msgid "Do you want the BackSpace to return Delete in console?"
 msgstr "Ønsker du at BackSpace skal returnere Delete i konsoll?"
 
-#: ../../standalone/livedrake_.c:23
+#: ../../standalone/livedrake_.c:24
 msgid "Change Cd-Rom"
 msgstr "Bytt CD"
 
-#: ../../standalone/livedrake_.c:24
+#: ../../standalone/livedrake_.c:25
 msgid ""
 "Please insert the Installation Cd-Rom in your drive and press Ok when done.\n"
 "If you don't have it, press Cancel to avoid live upgrade."
@@ -9657,51 +9719,51 @@ msgstr ""
 "Vennligst sett inn installasjons-CD'en i stasjonen og trykk Ok når du er\n"
 "ferdig. Hvis du ikke har denne, trykk Avbryt for å unngå oppgradering."
 
-#: ../../standalone/livedrake_.c:34
+#: ../../standalone/livedrake_.c:35
 msgid "Unable to start live upgrade !!!\n"
 msgstr "Kan ikke starte oppgradering !!!\n"
 
-#: ../../standalone/mousedrake_.c:48
+#: ../../standalone/mousedrake_.c:49
 msgid "Please, choose the type of your mouse."
 msgstr "Vennligst velg din musetype."
 
-#: ../../standalone/mousedrake_.c:58
+#: ../../standalone/mousedrake_.c:59
 msgid "no serial_usb found\n"
 msgstr "ingen serie_usb funnet\n"
 
-#: ../../standalone/mousedrake_.c:62
+#: ../../standalone/mousedrake_.c:63
 msgid "Emulate third button?"
 msgstr "Emulere tredje knapp?"
 
-#: ../../standalone/scannerdrake_.c:51
+#: ../../standalone/scannerdrake_.c:53
 #, c-format
-msgid "%s found on %s, configuring it ?"
+msgid "%s found on %s, configure it ?"
 msgstr ""
 
-#: ../../standalone/scannerdrake_.c:58
+#: ../../standalone/scannerdrake_.c:60
 #, fuzzy
 msgid "Select a scanner"
 msgstr "Velg et grafikk-kort"
 
-#: ../../standalone/scannerdrake_.c:79
+#: ../../standalone/scannerdrake_.c:81
 #, c-format
 msgid "This %s scanner is unsupported"
 msgstr ""
 
-#: ../../standalone/scannerdrake_.c:83
+#: ../../standalone/scannerdrake_.c:85
 #, c-format
 msgid "This %s scanner uses parallel port, which is unsupported for the moment"
 msgstr ""
 
-#: ../../standalone/tinyfirewall_.c:29
+#: ../../standalone/tinyfirewall_.c:31
 msgid "Firewalling Configuration"
 msgstr "Brannmurkonfigurasjon"
 
-#: ../../standalone/tinyfirewall_.c:42
+#: ../../standalone/tinyfirewall_.c:44
 msgid "Firewalling configuration"
 msgstr "Brannmurkonfigurasjon"
 
-#: ../../standalone/tinyfirewall_.c:77
+#: ../../standalone/tinyfirewall_.c:79
 msgid ""
 "Firewalling\n"
 "\n"
@@ -9713,7 +9775,7 @@ msgstr ""
 "Du har allerede satt opp en brannmur.\n"
 "Klikk på Konfigurer for å endre eller fjerne brannmuren"
 
-#: ../../standalone/tinyfirewall_.c:81
+#: ../../standalone/tinyfirewall_.c:83
 msgid ""
 "Firewalling\n"
 "\n"
@@ -10213,6 +10275,78 @@ msgstr "Multimedia - CD-brenning"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Vitenskaplig arbeidsstasjon"
+
+#, fuzzy
+#~ msgid " Linux "
+#~ msgstr "Linux"
+
+#, fuzzy
+#~ msgid " System "
+#~ msgstr "Systemmodus"
+
+#, fuzzy
+#~ msgid " Other "
+#~ msgstr "Andre"
+
+#, fuzzy
+#~ msgid "please choose your CD space"
+#~ msgstr "Vennligst velg tastatur-oppsettet ditt."
+
+#, fuzzy
+#~ msgid " Please check if you are using CDRW media"
+#~ msgstr "Vennligst klikk på en partisjon"
+
+#, fuzzy
+#~ msgid " Tape "
+#~ msgstr "Type: "
+
+#, fuzzy
+#~ msgid " Use .backupignore files"
+#~ msgstr "Dårlig sikkerhetskopi-fil"
+
+#, fuzzy
+#~ msgid "Configure it"
+#~ msgstr "Konfigurer X"
+
+#, fuzzy
+#~ msgid "on Tape Device"
+#~ msgstr "Skriverenhet"
+
+#, fuzzy
+#~ msgid " Cancel "
+#~ msgstr "Avbryt"
+
+#, fuzzy
+#~ msgid " Ok "
+#~ msgstr "Ok"
+
+#, fuzzy
+#~ msgid "close"
+#~ msgstr "Lukk"
+
+#, fuzzy
+#~ msgid "toto"
+#~ msgstr "toot"
+
+#~ msgid "Starting your connection..."
+#~ msgstr "Starter tilkoblingen din..."
+
+#~ msgid "Closing your connection..."
+#~ msgstr "Lukker tilkoblingen din..."
+
+#~ msgid ""
+#~ "The connection is not closed.\n"
+#~ "Try to do it manually by running\n"
+#~ "/etc/sysconfig/network-scripts/net_cnx_down\n"
+#~ "in root."
+#~ msgstr ""
+#~ "Tilkoblingen er ikke lukket.\n"
+#~ "Prøv å gjøre det manuelt ved å kjøre\n"
+#~ "/etc/sysconfig/network-scripts/net_cnx_down\n"
+#~ "i root."
+
+#~ msgid "The system is now disconnected."
+#~ msgstr "Systemet er nå nedkoblet."
 
 #~ msgid "Choose the size you want to install"
 #~ msgstr "Velg størrelsen du ønsker å installere"
