@@ -537,6 +537,7 @@ sub autoDefaultDepth($$) {
 
 	#- try to have resolution_wanted
 	$best = max($best || 0, $d) if $r->[0][0] >= $wres_wanted;
+	$best = $card->{suggest_depth}, last if $r->[0][0] >= $wres_wanted || $r->[0][0] >= $card->{suggest_wres};
     }
     $best || $depth or die "no valid modes";
 }
@@ -658,7 +659,7 @@ sub resolutionsConfiguration {
     #- remove unusable resolutions (based on the video memory size and the monitor hsync rate)
     keepOnlyLegalModes($card, $o->{monitor});
 
-    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size});
+    my $res = $o->{resolution_wanted} || $card->{suggest_wres} || autoDefaultResolution($o->{monitor}{size});
     my $wres = first(split 'x', $res);
 
     #- take the first available resolution <= the wanted resolution
@@ -1029,8 +1030,8 @@ sub info {
     $info .= _("Graphic card: %s\n", $o->{card}{type});
     $info .= _("Graphic memory: %s kB\n", $o->{card}{memory}) if $o->{card}{memory};
     if ($o->{default_depth} and my $depth = $o->{card}{depth}{$o->{default_depth}}) {
-    $info .= _("Color depth: %s\n", translate($depths{$o->{default_depth}}));
-    $info .= _("Resolution: %s\n", join "x", @{$depth->[0]}) if $depth && !is_empty_array_ref($depth->[0]);
+	$info .= _("Color depth: %s\n", translate($depths{$o->{default_depth}}));
+	$info .= _("Resolution: %s\n", join "x", @{$depth->[0]}) if $depth && !is_empty_array_ref($depth->[0]);
     }
     $info .= _("XFree86 server: %s\n", $o->{card}{server}) if $o->{card}{server};
     $info .= _("XFree86 driver: %s\n", $o->{card}{driver}) if $o->{card}{driver};
