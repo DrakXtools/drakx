@@ -92,7 +92,7 @@ sub write_conf {
 		     if_(!$netc->{DHCP}, HOSTNAME => "localhost.$netc->{DOMAINNAME}"),
 		    });
 
-    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, qw(HOSTNAME DOMAINNAME)), qw(NETWORKING FORWARD_IPV4 GATEWAY GATEWAYDEV NISDOMAIN));
+    setVarsInSh($file, $netc, if_(!$netc->{DHCP}, qw(HOSTNAME)), qw(NETWORKING FORWARD_IPV4 GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
 sub write_zeroconf {
