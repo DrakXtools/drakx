@@ -26,7 +26,7 @@ our @tree =
 	["HARDDISK","Disk", "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds],
 	["CDROM","CDROM", "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms } ],
 	["BURNER","CD/DVD burners", "cd.png", "", \&detect_devices::burners],
-	["DVDROM","DVD-ROM", "cd.png", "", \&detect_devices::dvdroms],
+	["DVDROM","DVD-ROM", "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms}],
 	["TAPE","Tape", "tape.png", "", \&detect_devices::tapes],
 #	["CDBURNER","Cd burners", "cd.png", "", \&detect_devices::burners],
 
