@@ -800,7 +800,7 @@ sub suggest_mount_point {
 	} elsif ($name eq 'fd') {
 	    $name = 'floppy';
 	} else {
-	    log::l("set_removable_mntpoints: don't know what to with hd $e->{device}");
+	    log::l("suggest_mount_point: don't know what to with hd $e->{device}");
 	}
     }
     $name;
