@@ -55,11 +55,11 @@ sub install_theme {
 	Gtk::Rc->parse_string(qq(
 style "default-font" 
 {
-   fontset = "$font"
+   fontset = "$font,*"
 }
 style "small-font"
 {
-   fontset = "$font2"
+   fontset = "$font2,*"
 }
 widget "*" style "default-font"
 widget "*Steps*" style "small-font"

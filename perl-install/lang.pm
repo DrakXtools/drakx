@@ -16,12 +16,14 @@ use log;
 #- key (to be used in $LC_ALL), [0] = english name, [1] = charset encoding,
 #- [2] = value for $LANG, [3] = value for LANGUAGE (a list of possible
 #- languages, carefully choosen)
+#-
+#- when adding a new language here, also add a line in kleyboards list
 my %languages = (
 'en_US' => [ 'English|United States',	'iso-8859-1', 'en', 'en_US:en' ],
 'en_GB' => [ 'English|United Kingdom',	'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
-  'az'  => [ 'Azeri|Latin',		'iso-8859-9e','az', 'az:tr' ],
+  'az'  => [ 'Azeri (Latin)',		'iso-8859-9e','az', 'az:tr' ],
 #-'a3'  => [ 'Azeri|Cyrillic',		'koi8-c',     'a3', 'a3' ],
   'be'  => [ 'Belarussian',		 'cp1251',    'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
@@ -33,6 +35,8 @@ my %languages = (
   'cy'  => [ 'Cymraeg (Welsh)',		'iso-8859-14','cy', 'cy:en_GB:en' ],
   'da'  => [ 'Danish',			'iso-8859-1', 'da', 'da' ],		
 'de_AT' => [ 'German|Austria',		'iso-8859-1', 'de', 'de_AT:de' ],
+'de_BE' => [ 'German|Belgium',		'iso-8859-1', 'de', 'de_BE:de' ],
+'de_CH' => [ 'German|Switzerland',	'iso-8859-1', 'de', 'de_CH:de' ],
 'de_DE' => [ 'German|Germany',		'iso-8859-1', 'de', 'de_DE:de' ],
   'el'  => [ 'Greek',                   'iso-8859-7', 'el', 'el' ],
   'eo'  => [ 'Esperanto',		'iso-8859-3', 'eo', 'eo' ],
@@ -45,9 +49,9 @@ my %languages = (
   'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
   'fi'  => [ 'Suomi (Finnish)',		'iso-8859-15', 'fi', 'fi' ],
 #-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo' ],
-'fr_BE' => [ 'French|Belgium',		'iso-8859-1', 'fr', 'fr_CA:fr' ],
+'fr_BE' => [ 'French|Belgium',		'iso-8859-1', 'fr', 'fr_BE:fr' ],
 'fr_CA' => [ 'French|Canada',		'iso-8859-1', 'fr', 'fr_CA:fr' ],
-'fr_CH' => [ 'French|Switzerland',	'iso-8859-1', 'fr', 'fr_CA:fr' ],
+'fr_CH' => [ 'French|Switzerland',	'iso-8859-1', 'fr', 'fr_CH:fr' ],
 'fr_FR' => [ 'French|France',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
   'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
 #-'gd'  => [ 'Scottish gaelic',		'iso-8859-14','gd', 'gd:en_GB:en' ],
@@ -62,7 +66,8 @@ my %languages = (
 #- we catch the few catalog files still using the wrong code
   'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in_ID' ],
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
-  'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT:it' ],
+'it_CH' => [ 'Italian|Switzerland',	'iso-8859-1', 'it', 'it_IT:it' ],
+'it_IT' => [ 'Italian|Italy',  		'iso-8859-1', 'it', 'it_IT:it' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
   'ka'  => [ 'Georgian',                'georgian-ps','ka', 'ka' ],
   'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
@@ -77,9 +82,9 @@ my %languages = (
 'nl_BE' => [ 'Dutch|Belgium',		'iso-8859-1', 'nl', 'nl_NL:nl' ],
 'nl_NL' => [ 'Dutch|Netherlands',	'iso-8859-1', 'nl', 'nl_NL:nl' ],
 # 'nb' is the new locale name in glibc 2.2
-  'no'  => [ 'Norwegian|Bokmaal',	'iso-8859-1', 'no', 'no:nb:ny:no@nynorsk:no_NY' ],
-# no_NY is used by KDE (but not standard); 'ny' is the new locale in glibc 2.2
-  'ny'	=> [ 'Norwegian|Nynorsk','iso-8859-1', 'no', 'ny:no@nynorsk:no_NY:no:nb' ],
+  'no'  => [ 'Norwegian|Bokmaal',	'iso-8859-1', 'no', 'no:nb:nn:no@nynorsk:no_NY' ],
+# no_NY is used by KDE (but not standard); 'nn' is the new locale in glibc 2.2
+  'nn'	=> [ 'Norwegian|Nynorsk','iso-8859-1', 'no', 'nn:no@nynorsk:no_NY:no:nb' ],
 #-'oc'  => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
 #-'pd'	=> [ 'Plauttdietsch',		'iso-8859-1', 'pd', 'pd' ],
 #-'ph'  => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph:tl' ],
@@ -202,16 +207,17 @@ my %charsets = (
 	std_("iso8859-4") ],
   "iso-8859-5" => [ "iso05.f16",	"iso05",	"trivial.trans",
 	std2("iso8859-5", 10), std2("iso8859-5",  8) ],
-#- arabic needs special console driver for text mode [acon]
-#- (and gtk support isn't done yet)
+#-#- arabic needs special console driver for text mode [acon]
+#-#- (and gtk support isn't done yet)
   "iso-8859-6" => [ "iso06.f16",	"iso06",	"trivial.trans",
 	std_("iso8859-6") ],
   "iso-8859-7" => [ "iso07.f16",	"iso07",	"trivial.trans",
 	std_("iso8859-7") ],
-#- hebrew needs special console driver for text mode [acon]
-#- (and gtk support isn't done yet)
-  "iso-8859-8" => [ "iso08.f16",	"iso08",	"trivial.trans",
-	std_("iso8859-8") ],
+#-#- hebrew needs special console driver for text mode [acon]
+#-#- (and gtk support isn't done yet)
+   "iso-8859-8" => [ "iso08.f16",	"iso08",	"trivial.trans",
+#	std_("iso8859-8") ],
+	std_("microsoft-cp1255") ],
   "iso-8859-9" => [ "iso09.f16",	"iso09",	"trivial.trans",
 	sub { std("iso8859-9", @_) } ],
   "iso-8859-13" => [ "tlat7",		"iso01",	"trivial.trans",
@@ -221,7 +227,7 @@ my %charsets = (
   "iso-8859-15" => [ "lat0-sun16",	undef,		"iso15",
 	std("iso8859-15") ],
   "iso-8859-9e" => [ "tiso09e",		"iso09",	"trivial.trans",
-	std("iso8859-9e") ],
+	std2("iso8859-9e",10) ],
 #- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
@@ -229,12 +235,12 @@ my %charsets = (
 	std("koi8-r") ],
   "koi8-u"     => [ "UniCyr_8x16",	undef,		"koi8-u",
 	std("koi8-u") ],
-  "koi8-c"     => [ "koi8-c",		"iso01",	"trivial.trans",
+  "koi8-k"     => [ "koi8-k",		"iso01",	"trivial.trans",
 	std("koi8-c") ],
   "tatar-cyr"  => [ "tatar-cyr",	undef,		"cp1251",
 	std("tatar-cyr") ],
   "cp1251"     => [ "UniCyr_8x16",	undef,		"cp1251",
-	std("microsoft-cp1251") ],
+	sub { std("microsoft-cp1251", @_) } ],
 #- Yiddish needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
@@ -252,7 +258,8 @@ my %charsets = (
   "tcvn"       => [ "tcvn8x16",		"tcvn",		"trivial.trans",
 	std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
   "viscii"     => [ "viscii10-8x16",	"viscii.uni",	"viscii1.0_to_viscii1.1.trans",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
+#-	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
+	std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
 #- Farsi (iranian) needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "isiri-3342" => [ undef,		undef,		"trivial.trans",
@@ -297,14 +304,29 @@ sub set {
 	    #run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
 	}
 
-	$ENV{LC_ALL}    = $lang;
+#- set all LC_* variables to a unique locale ("C"), and only redefine
+#- LC_CTYPE (for X11 choosing the fontset) and LANGUAGE (for the po files)
+	$ENV{LC_NUMERIC}		= "C";
+	$ENV{LC_TIME}			= "C";
+	$ENV{LC_COLLATE}		= "C";
+	$ENV{LC_MONETARY}		= "C";
+	$ENV{LC_MESSAGES}		= "C";
+	$ENV{LC_PAPER}			= "C";
+	$ENV{LC_NAME}			= "C";
+	$ENV{LC_ADDRESS}		= "C";
+	$ENV{LC_TELEPHONE}		= "C";
+	$ENV{LC_MEASUREMENT}	= "C";
+	$ENV{LC_IDENTIFICATION}	= "C";
+
+	$ENV{LC_CTYPE}  = $lang;
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
+
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
 	delete $ENV{LC_ALL};
-	delete $ENV{LINGUAGE};
+	delete $ENV{LANGUAGE};
 	delete $ENV{LINGUAS};
     }
 }
