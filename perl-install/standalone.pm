@@ -197,7 +197,7 @@ sub ensure_is_installed {
 }
 
 sub check_kernel_module_packages {
-    my ($do, $base_name, $o_ext_name) = @_;
+    my ($_o, $base_name, $o_ext_name) = @_;
     my ($result, %list, %select);
     my @rpm_qa if 0;
 
