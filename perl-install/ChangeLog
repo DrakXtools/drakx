@@ -1,3 +1,164 @@
+2003/02/20  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk2.pm: ensure {box_size} is set (to have less warnings)
+
+	* diskdrake/interactive.pm, fsedit.pm: 
+	  - simplify check_mntpoint
+	  - fix checking mount point in Mount_point()
+
+	* interactive/gtk.pm, standalone/diskdrake, interactive.pm: have less
+	warnings when debugging
+
+	* Xconfig/card.pm: log why auto X config failed (needVideoRam)
+
+2003/02/19  alus
+
+	* share/po/pl.po: updated
+
+2003/02/19  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fixed if update fail to allow retry.
+	added code to retry finding an update medium if something went wrong.
+	add ugly probed type of network configuration.
+	make sure network::network:: is used (just in case)
+	add default configuration for network for summary.
+
+	* install_steps.pm: add simplified menu for desktop mode.
+
+	* pkgs.pm: added a missing sanity unwind.
+	add sanity code on error when reading hdlist (this will avoid update
+	medium
+	being trashed if an error occurred during hdlist download and so ...)
+
+	* crypto.pm: code slight reorganization.
+
+2003/02/19  gbeauchesne
+
+	* share/rpmsrate, share/compssUsers: 
+	  - Add localized help files for OpenOffice.org
+	  - Add new SPELLCHECK category for myspell spellchecking and
+	hyphenators
+
+	* mdk-stage1/Makefile: Enable all usual stage1-* BINS on x86-64. Add
+	dietlibc to DIRS too for that
+	arch. Fix rescue-gui build with $(DIET) wrapper.
+
+	* mdk-stage1/mar/Makefile: Rearrange build so that only mar binary is
+	built with glibc and other objects
+	with either glibc or dietlibc.
+
+2003/02/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* lang.pm: I'm stupid, we need to set UTF8 when there are two installed
+	langs with different encodings, not just when the additional
+	languages have different encoding than main one
+
+	* loopback.pm, any.pm, diskdrake/interactive.pm, fs.pm, install_steps.pm,
+	network/ethernet.pm, bootloader.pm, install_steps_interactive.pm,
+	diskdrake/hd_gtk.pm, lvm.pm, fsedit.pm, install2.pm,
+	network/drakfirewall.pm, raid.pm, install_interactive.pm,
+	install_any.pm, partition_table/raw.pm, partition_table.pm: to
+	workaround perl bug removing UTF8 flag when passing scalars to die's,
+	pass
+	a scalar-ref. but we need to de-ref, so it might break many things :).
+	let's make a prayer :).
+
+	* share/rpmsrate: add fonts-ttf-arabic when locale ar
+
+	* ugtk2.pm: set the destroy handler after wizard creation, or the fact
+	that
+	wizard window will overwrite existing window will also destroy
+	the destroy handler
+	fix some segfaults caused by still calling destroy
+	or other gtk functions after a destroy has been
+	already done, triggered by the user clicking on
+	the WM's "close this application" button (#1651)
+	better comply to look of text like in Gtk1 (text inside a Frame)
+	clean
+
+2003/02/19  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+	updated Uzbek file
+
+	* share/rpmsrate: Improved the locale->font selection;
+	added the tetex-latex-arab-doc package (previously was included in the
+	main)
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/sq.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated Uzbek file
+
+2003/02/19  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm: don't log "warning: find_index failed in ..."
+
+	* install_steps.pm, install_steps_interactive.pm: add some more
+	formatError
+
+	* raid.pm: mkraid wants all the md devices written in raidtab to exist,
+	even if asking to
+	create a specific md
+	cleanup
+
+	* install_steps_auto_install.pm: add a formatError
+
+	* pixmaps/X.png: add it back (used by XFdrake)
+
+	* install_any.pm: use formatError
+
+	* install_interactive.pm: add some formatError's
+
+	* fsedit.pm, detect_devices.pm: 
+	  - cleanup & simplify
+	  - handle raid on raid detection
+
+	* interactive/gtk.pm: can't use $mainw->{ok}->clicked since $mainw->{ok}
+	doesn't always exist, set
+	{retval} and main_quit instead (the way it was done for double click, is
+	this
+	ok when pressing enter?)
+
+	* diskdrake/interactive.pm: use formatError on $err
+	use formatError($err) instead of $@
+	  - allow raid on raid (raid 10)
+	  - focus mount point in Mount_point
+	  - focus type in Type
+
+	* standalone/icons/ic82-tape-40.png, pixmaps/ic82-tape-40.png,
+	pixmaps/ic82-systemeplus-40.png,
+	standalone/icons/ic82-systemeplus-40.png: move some images from
+	standalone to pixmaps to have them both during install and after install
+	(images used by XFdrake)
+
+	* install_steps_gtk.pm: indent more the entries in the summary (as asked
+	by dadou)
+
+2003/02/19  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakxtv: 
+	  - perl_checker fixes
+	  - indent-region, untabify
+	  - comment workaround
+	workaround a drakx bug which don't always add bttv to /etc/modules
+
+	* standalone/scannerdrake: cleanup
+	fix embedding
+
+	* standalone/printerdrake: hide the icon when embedded to get more space
+	fix embedding and clean it up
+
 2003/02/19  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps_interactive.pm: make sure network::network:: is used (just
@@ -12052,7 +12213,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.787 2003/02/19 13:41:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.788 2003/02/19 14:25:22 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
