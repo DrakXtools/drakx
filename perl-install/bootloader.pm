@@ -631,31 +631,24 @@ sub write_lilo_conf {
 	}
     };
 
-    #- try to use a specific stage2 if defined and present.
-    -e "$prefix/boot/$lilo->{methods}{lilo}" and symlinkf $lilo->{methods}{lilo}, "$prefix/boot/lilo";
-    log::l("stage2 of lilo used is " . readlink "$prefix/boot/lilo");
-
-    if ($lilo->{methods}{lilo} eq "lilo-graphic") {
-	-e "$prefix/boot/$lilo->{methods}{lilo}/message" and symlinkf "$lilo->{methods}{lilo}/message", "$prefix/boot/message";
-    }  else  {
-	-e "$prefix/boot/message" and unlink "$prefix/boot/message";
-	print "-->$prefix/boot/messag<--\n";
-	
-	my $msg_en =
-	  #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-__("Welcome to %s the operating system chooser!
-
-Choose an operating system in the list above or
-wait %d seconds for default boot.
-
-");
-	my $msg = translate($msg_en);
-	#- use the english version if more than 20% of 8bits chars
-	$msg = $msg_en if int(grep { $_ & 0x80 } unpack "c*", $msg) / length($msg) > 0.2;
-	$msg = sprintf $msg, arch() =~ /sparc/ ? "SILO" : "LILO", $lilo->{timeout};
+    if ($lilo->{message}) {
  	local *F;
-	open F, ">$prefix/boot/message" and print F $msg;
+	-d "$prefix/boot/lilo-menu" and open F, ">$prefix/boot/lilo-menu/message" and print F $lilo->{message};
+	-d "$prefix/boot/lilo-text" and open F, ">$prefix/boot/lilo-text/message" and print F $lilo->{message};
+	-d "$prefix/boot/lilo-graphic" || -d "$prefix/boot/lilo-menu" || -d "$prefix/boot/lilo-text" or
+	  open F, ">$prefix/boot/message" and print F $lilo->{message}; #- fallback in case of another lilo.
     }
+    foreach ($lilo->{methods}{lilo}, "lilo-menu", "lilo-graphic", "lilo-text") {
+	if (-e "$prefix/boot/$lilo->{methods}{lilo}/boot.b" && -e "$prefix/boot/$lilo->{methods}{lilo}/message") {
+	    symlinkf $lilo->{methods}{lilo}, "$prefix/boot/lilo";
+	    symlinkf "lilo/boot.b", "$prefix/boot/boot.b";
+	    symlinkf "lilo/message", "$prefix/boot/message";
+	    log::l("stage2 of lilo used is " . readlink "$prefix/boot/lilo");
+	    last;
+	}
+    }
+    -e "$prefix/boot/boot.b" && -e "$prefix/boot/message" or die "unable to get right lilo configuration in $prefix/boot";
+
     {
 	local *F;
         local $\ = "\n";
