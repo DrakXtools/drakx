@@ -268,7 +268,7 @@ sub selectInstallClass {
         $o->selectPackagesToUpgrade() if $o->{isUpgrade};
     }
     if ($o->{isUpgrade}) {
-	@{$o->{orderedSteps}} = map { /selectInstallClass/ ? ($_, "partitionDisks") : $_ } 
+	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "partitionDisks") : $_ } 
 	                        grep { !/partitionDisks/ } @{$o->{orderedSteps}};
 	my $s; foreach (@{$o->{orderedSteps}}) {
 	    $s->{next} = $_;
