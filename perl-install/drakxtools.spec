@@ -367,7 +367,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Thu Dec 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.7mdk
-- detect more fix floppies when dmidecode is supported (pixel)
+- detect more floppies when dmidecode is supported (pixel)
 - drakconnect:
   o do not crash when configuring a modem
   o fix NETMASK autofilling
