@@ -227,6 +227,11 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
             do_switch($driver, $new_driver);
             undef $wait;
         }
+    } elsif ($driver =~ /^Bad:/) {
+        $driver =~ s/^Bad://;
+        $in->ask_warn(N("No open source driver"), 
+                      N("There's no free driver for your sound card (%s), but there's a proprietary driver at \"%s\".",
+                        $device->{description}, $driver));
     } elsif ($driver eq "unknown") {
         $in->ask_warn(N("No known driver"), 
                       N("There's no known driver for your sound card (%s)",
