@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ may_apply even odd arch better_arch compat_arch min max sqr sum and_ or_ if_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref next_val_in_array) ],
+    common     => [ qw(__ may_apply even odd arch better_arch compat_arch min max sqr sum and_ or_ if_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ put_in_hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref next_val_in_array) ],
     functional => [ qw(fold_left compose mapgrep map_index grep_index find_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
     file       => [ qw(dirname basename touch all glob_ cat_ cat__ output symlinkf chop_ mode typeFromMagic expand_symlinks) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInShMode setVarsInCsh substInFile availableMemory availableRamMB removeXiBSuffix formatXiB template2file template2userfile update_userkderc list_skels formatTime formatTimeRaw unix2dos setVirtual isCdNotEjectable) ],
@@ -77,7 +77,7 @@ sub to_float { $_[0] =~ /(\d*(\.\d*)?)/; $1 }
 sub ikeys { my %l = @_; sort { $a <=> $b } keys %l }
 sub add2hash($$)  { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } $a }
 sub add2hash_($$) { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { exists $a->{$k} or $a->{$k} = $v } $a }
-sub set_in_hash($$) { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} = $v } $a }
+sub put_in_hash($$) { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} = $v } $a }
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
 sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }
 sub basename { @_ == 1 or die "usage: basename <name>\n"; local $_ = shift; s|/*\s*$||; s|.*/||; $_ }

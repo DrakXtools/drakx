@@ -427,7 +427,7 @@ sub write_fstab($;$$) {
 sub merge_fstabs {
     my ($fstab, $manualFstab) = @_;
     my %l; $l{$_->{device}} = $_ foreach @$manualFstab;
-    common::set_in_hash($_, $l{$_->{device}}) foreach @$fstab;
+    put_in_hash($_, $l{$_->{device}}) foreach @$fstab;
 }
 
 #sub check_mount_all_fstab($;$) {
