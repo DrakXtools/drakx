@@ -473,28 +473,34 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
     my $w = my_gtk->new(_("Installing"));
-    $w->{window}->set_usize($::windowwidth * 0.8, 260);#$::windowheight * 0.9);
     $w->sync;
     my $text = new Gtk::Label;
+    my $advertising;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
-    gtkadd($w->{window}, gtkpack(new Gtk::VBox(0,10),
-#				 gtkxpm($w->{window}, "$ENV{SHARE_PATH}/ad.xpm"),
-			       _("Please wait, "), $msg, $progress,
-			       create_packtable({},
-						[_("Time remaining "), $msg_time_remaining],
-						[_("Total time "), $msg_time_total],
-						),
-			       $text,
-			       $progress_total,
-			       '',
-			       gtkadd(create_hbox(),
-				      my $cancel = new Gtk::Button(_("Cancel"))),
-			      ));
+    gtkadd($w->{window}, my $box = new Gtk::VBox(0,10));
+    $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.8, 70),
+#			   $msg, $progress,
+			   create_packtable({},
+					    [_("Time remaining "), $msg_time_remaining],
+#					    [_("Total time "), $msg_time_total],
+					   ),
+#			   $text,
+			   $progress_total,
+			   gtkadd(create_hbox(),
+				  my $cancel = new Gtk::Button(_("Cancel"))),
+			  )), 1, 1, 0);
     $w->sync;
-    $msg->set(_("Preparing installation"));
+    $msg->set(_("Please wait, preparing installation"));
     gtkset_mousecursor_normal($cancel->window);
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
+
+    my ($i_image, $i);
+    my $nb_images = 6;
+
+    my $dir = "$o->{prefix}/tmp/drakx-images"; mkdir $dir;
+    install_any::getAndSaveFile("Mandrake/mdkinst$ENV{SHARE_PATH}/ad-$_.png", "$dir/ad-$_.png") 
+      foreach 0 .. $nb_images-1; 
 
     my $oldInstallCallback = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
@@ -513,6 +519,16 @@ sub installPackages {
 	    my $p = pkgs::packageByName($o->{packages}, $name);
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
+
+	    $i++;
+	    my $old_i_image = $i_image;
+	    $i_image = int($i / $nb * $nb_images);
+	    if ($old_i_image ne $i_image) {
+		my $f = "$dir/ad-$i_image.png";
+		log::l("advertising $f");
+		gtkdestroy($advertising);
+		gtkpack($box, $advertising = gtkpng($f));
+	    }
 	    $w->flush;
 	} elsif ($m =~ /^Progressing installing package/) {
 	    $progress->update($_[2] ? $_[1] / $_[2] : 0);
