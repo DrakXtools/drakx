@@ -29,8 +29,6 @@ use interactive;
 use ugtk2 qw(:create :dialogs :wrappers :helpers);
 use vars qw(*F);
 
-$::isInstall and die "Not supported during install.\n";
-
 my $in = 'interactive'->vnew('su');
 
 my ($isExplain, $Explain, $isFile, $File, $isWord, $Word);
