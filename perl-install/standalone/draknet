@@ -28,6 +28,9 @@ use network::tools;
 use network;
 use c;
 use MDK::Common;
+use any;
+use network::isdn;
+use network::adsl;
 
 my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -241,7 +244,7 @@ $vbox1->pack_start($frame2,1,1,0);
 my $vbox2 = new Gtk::VBox(0,0);
 $vbox2->set_border_width(5);
 $frame2->add($vbox2);
-my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocol"), _("Driver"), _("State"));
+my $clist1 = new_with_titles Gtk::CList("", _("Interface"), _("IP address"), _("Protocol"), _("Driver"), _("State"));
 $clist1->set_column_auto_resize($_,1) foreach (0..4);
 $clist1->column_titles_passive();
 $clist1->set_shadow_type('etched_out');
@@ -249,17 +252,8 @@ $vbox2->pack_start($clist1, 0, 0, 5);
 #$scrolled1->add_with_viewport($table2);
 
 my $ip_regexp = qr/(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/;
-foreach my $i (0..$#all_cards) {
-    my $ip;
-    if (-e "/sbin/ifconfig") {
-	local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
-	/inet addr\:$ip_regexp/; $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
-	$_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
-	$state = /eth$i/ ? "up" : "down";
-    } else { $ip=$intf->{"eth$_"}{IPADDR}; $state = "n/a"; }
-    $clist1->append($_+1, "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i]->[1], $state);
-    $clist1->set_selectable($i, 0);
-}
+
+build_clist();
 
 my $hbox3 = new Gtk::HBox(0,0);
 my $button3 = new Gtk::Button(_("Configure Local Area Network..."));
@@ -352,6 +346,21 @@ dd:
 network::netconnect::intro('', $netcnx, $in);
 $in->exit(0);
 
+sub build_clist {
+    foreach my $i (0..$#all_cards) {
+	my $ip;
+	if (-e "/sbin/ifconfig") {
+	    local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
+	    /inet addr\:$ip_regexp/; $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
+	    $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
+	    $state = /eth$i/ ? "up" : "down";
+	} else { $ip=$intf->{"eth$_"}{IPADDR}; $state = "n/a"; }
+	$clist1->append("", "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i]->[1], $state);
+	$clist1->set_pixmap ($i, 0, gtkcreate_png("eth_card_mini2.png"));
+
+	$clist1->set_selectable($i, 0);
+    }
+}
 
 sub apply {
     $old_profile=$netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
@@ -360,8 +369,8 @@ sub apply {
     $netcnx->{type} eq 'modem' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc); #$light
     $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
-    $netcnx->{type} eq 'adsl_ppoe' and adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe');
-    $netcnx->{type} eq 'adsl_pptp' and adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp');;
+    $netcnx->{type} eq 'adsl_ppoe' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe');
+    $netcnx->{type} eq 'adsl_pptp' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp');
 
     network::configureNetwork2($in, $prefix, $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
@@ -382,16 +391,7 @@ sub update {
     $button2->child->set($c ? _("Disconnect...") : _("Connect..."));
     $clist1->freeze();
     $clist1->clear();
-    foreach my $i (0..$#all_cards) {
-	my $ip;
-	if (-e "/sbin/ifconfig") {
-	    local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
-	    /inet addr\:$ip_regexp/; $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
-	    $state = ethisup($i) ? "up" : "down";
-	} else { $ip=$intf->{"eth$i"}{IPADDR}; $state = "n/a"; }
-	$clist1->append($i+1, "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i]->[1], $state);
-	$clist1->set_selectable($i, 0);
-    }
+    build_clist();
     $clist1->thaw();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
     $tag = Gtk->timeout_add(5000, \&update);
