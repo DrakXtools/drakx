@@ -458,7 +458,7 @@ sub choosePackages {
 
     my $min_size = pkgs::selectedSize($packages);
     undef $w;
-    unless ($min_size < $availableC) {
+    if ($min_size >= $availableC) {
 	$o->ask_warn('', N("Your system does not have enough space left for installation or upgrade (%d > %d)",
 			   $min_size, $availableC));
 	install_steps::rebootNeeded($o);
@@ -537,7 +537,7 @@ sub chooseGroups {
     log::l("system_size: $system_size");
 
     my %stable_flags = grep_each { $::b } %{$o->{rpmsrate_flags_chosen}};
-    delete $stable_flags{$_} foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
+    delete $stable_flags{"CAT_$_"} foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
 
     my $compute_size = sub {
 	my %pkgs;
@@ -562,7 +562,7 @@ sub chooseGroups {
     my ($size, $unselect_all);
     my $available_size = install_any::getAvailableSpace($o) / sqr(1024);
     my $size_to_display = sub { 
-	my $lsize = $system_size + $compute_size->(map { @{$_->{flags}} } grep { $_->{selected} } @$compssUsers);
+	my $lsize = $system_size + $compute_size->(map { "CAT_$_" } map { @{$_->{flags}} } grep { $_->{selected} } @$compssUsers);
 
 	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
 	$unselect_all ||= $size > $lsize;
@@ -584,39 +584,38 @@ sub chooseGroups {
 	$o->ask_warn('', N("Selected size is larger than available space"));	
     }
 
-    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach map { @{$_->{flags}} } grep { !$_->{selected} } @$compssUsers;
-    $o->{rpmsrate_flags_chosen}{$_} = 1 foreach map { @{$_->{flags}} } grep {  $_->{selected} } @$compssUsers;
+    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach grep { /^CAT_/ } keys %{$o->{rpmsrate_flags_chosen}};
+    $o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach map { @{$_->{flags}} } grep {  $_->{selected} } @$compssUsers;
+    $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 1;
 
     log::l("compssUsersChoice selected: ", join(', ', map { qq("$_->{path}|$_->{label}") } grep { $_->{selected} } @$compssUsers));
 
     #- do not try to deselect package (by default no groups are selected).
-    $o->{isUpgrade} or $unselect_all and install_any::unselectMostPackages($o);
+    if (!$o->{isUpgrade}) {
+	install_any::unselectMostPackages($o) if $unselect_all;
+    }
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
     if (!$o->{isUpgrade} && !any { $_->{selected} } @$compssUsers) {
 	my $docs = !$o->{excludedocs};	
-	my $minimal = !any { $_ } values %{$o->{rpmsrate_flags_chosen}};
+	my $minimal;
 
 	$o->ask_from(N("Type of install"), 
 		     N("You have not selected any group of packages.
 Please choose the minimal installation you want:"),
 		     [
-		      { val => \$o->{rpmsrate_flags_chosen}{X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
+		      { val => \$o->{rpmsrate_flags_chosen}{CAT_X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
 		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
 		      { val => \$minimal, type => 'bool', text => N("Truly minimal install (especially no urpmi)") },
 		     ],
-		     changed => sub { $o->{rpmsrate_flags_chosen}{X} = $docs = 0 if $minimal },
+		     changed => sub { $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = 0 if $minimal },
 	) or return &chooseGroups;
 
-	$o->{excludedocs} = !$docs || $minimal;
-
-	#- reselect according to user selection.
 	if ($minimal) {
-	    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach keys %{$o->{rpmsrate_flags_chosen}};
-	} else {
-	    my $X = $o->{rpmsrate_flags_chosen}{X}; #- do not let setDefaultPackages modify this one
-	    install_any::setDefaultPackages($o, 'clean');
-	    $o->{rpmsrate_flags_chosen}{X} = $X;
+	    $o->{rpmsrate_flags_chosen}{CAT_X} = $docs = 0; #- redo it in "changed" was not called
+	    $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 0;
 	}
+	$o->{excludedocs} = !$docs;
+
 	install_any::unselectMostPackages($o);
     }
     1;
@@ -1021,7 +1020,7 @@ sub summary {
      $sound_index++;
     }
 
-    if (!@sound_cards && ($o->{rpmsrate_flags_chosen}{GAMES} || $o->{rpmsrate_flags_chosen}{AUDIO})) {
+    if (!@sound_cards && ($o->{rpmsrate_flags_chosen}{CAT_GAMES} || $o->{rpmsrate_flags_chosen}{CAT_AUDIO})) {
 	#- if no sound card are detected AND the user selected things needing a sound card,
 	#- propose a special case for ISA cards
 	push @l, {

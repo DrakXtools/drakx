@@ -639,11 +639,7 @@ sub setPackages {
 }
 
 sub setDefaultPackages {
-    my ($o, $b_clean) = @_;
-
-    if ($b_clean) {
-	delete $o->{default_packages}; #- clean modified variables.
-    }
+    my ($o) = @_;
 
     push @{$o->{default_packages}}, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
     push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
@@ -664,21 +660,21 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
-    unless ($b_clean) {
-	if ($::auto_install && ($o->{rpmsrate_flags_chosen} || {})->{ALL}) {
-	    $o->{rpmsrate_flags_chosen}{$_} = 1 foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
+    {
+	if ($::auto_install && ($o->{rpmsrate_flags_chosen} || {})->{CAT_ALL}) {
+	    $o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
 	}
 	if (!$o->{rpmsrate_flags_chosen} && !$o->{isUpgrade}) {
 	    #- use default selection seen in compssUsers directly.
 	    foreach (@{$o->{compssUsers}}) {
 		$_->{selected} = $_->{default_selected} or next;
-		$o->{rpmsrate_flags_chosen}{$_} = 1 foreach @{$_->{flags}};
+		$o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach @{$_->{flags}};
 	    }
 	}
     }
     $o->{rpmsrate_flags_chosen}{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
     $o->{rpmsrate_flags_chosen}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
-    $o->{rpmsrate_flags_chosen}{SYSTEM} = 1;
+    $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 1;
     $o->{rpmsrate_flags_chosen}{DOCS} = !$o->{excludedocs};
     $o->{rpmsrate_flags_chosen}{UTF8} = $o->{locale}{utf8};
     $o->{rpmsrate_flags_chosen}{BURNER} = 1 if detect_devices::burners();
@@ -1200,8 +1196,17 @@ sub loadO {
 	    }
 	}
     }
+    #- {rpmsrate_flags_chosen} was called {compssUsersChoice}
     if (my $rpmsrate_flags_chosen = delete $o->{compssUsersChoice}) {
 	$o->{rpmsrate_flags_chosen} = $rpmsrate_flags_chosen;
+    }
+    #- compssUsers flags are now named CAT_XXX
+    if ($o->{rpmsrate_flags_chosen} &&
+	! any { /^CAT_/ } keys %{$o->{rpmsrate_flags_chosen}}) {
+	#- we don't really know if this is needed for compatibility, but it won't hurt :)
+	foreach (keys %{$o->{rpmsrate_flags_chosen}}) {
+	    $o->{rpmsrate_flags_chosen}{"CAT_$_"} = $o->{rpmsrate_flags_chosen}{$_};
+	}
     }
 
     $o;
