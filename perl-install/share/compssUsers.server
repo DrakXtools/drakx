@@ -1,6 +1,27 @@
+     # --- Workstation
+
+Office Workstation [icon=office] [path=Workstation] [selected=server] [descr=Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc]
+    OFFICE
+    SPELLCHECK
+    PUBLISHING
+    PIM
+    ARCHIVING
+    PRINTER
+
+Internet station [icon=networking] [path=Workstation] [selected=server] [descr=Set of tools to read and send mail and news (mutt, tin..) and to browse the Web]
+    NETWORKING_WWW
+    NETWORKING_MAIL
+    NETWORKING_NEWS
+    COMMUNICATIONS
+    NETWORKING_CHAT
+    NETWORKING_FILE_TRANSFER
+    NETWORKING_IRC
+    NETWORKING_INSTANT_MESSAGING
+    NETWORKING_DNS
+
      # --- Graphical Environment
 
-KDE Workstation [icon=kde] [path=Graphical Environment] [descr=The K Desktop Environment, the basic graphical environment with a collection of accompanying tools]
+KDE Workstation [icon=kde] [path=Graphical Environment] [selected=server] [descr=The K Desktop Environment, the basic graphical environment with a collection of accompanying tools]
 	KDE
 	X
 
@@ -8,13 +29,13 @@ GNOME Workstation [icon=gnome] [path=Graphical Environment] [descr=A graphical e
 	GNOME
 	X
 
-Other Graphical Desktops [icon=windowmanager] [selected=server] [path=Graphical Environment] [descr=XFce, Window Maker, IceWm]
+Other Graphical Desktops [icon=windowmanager] [path=Graphical Environment] [descr=XFce, Window Maker, IceWm]
 	GRAPHICAL_DESKTOP
 	X
 
      # --- Development
 
-Development [icon=editors] [path=Development] [descr=C and C++ development libraries, programs and include files]
+Development [icon=editors] [path=Development] [selected=server] [descr=C and C++ development libraries, programs and include files]
 	DEVELOPMENT
 
 Documentation [icon=documentation] [path=Development] [descr=Books and Howto's on Linux and Free Software]
@@ -61,11 +82,11 @@ Database [icon=archiving] [path=Server] [descr=PostgreSQL or MySQL database serv
 SSH server [icon=networking] [path=Utilities] [selected=server] [descr=ssh server]
 	NETWORKING_REMOTE_ACCESS_SERVER
 
-Webmin [icon=archiving] [path=Utilities] [descr=webmin remote configuration server]
+Webmin [icon=archiving] [path=Utilities] [selected=server] [descr=webmin remote configuration server]
 	WEBMIN
 
 Network Utilities/Monitoring [icon=archiving] [path=Utilities] [selected=server] [descr=Monitoring tools, processes accounting, tcpdump, nmap, ...]
 	MONITORING	
 
-MandrakeSoft Wizards [icon=archiving] [path=Utilities] [descr=Wizards to configure servers]
+MandrakeSoft Wizards [icon=archiving] [path=Utilities] [selected=server] [descr=Wizards to configure servers]
 	WIZARDS
