@@ -10,6 +10,7 @@ use vars qw($pcitable_addons $usbtable_addons);
 use log;
 use common;
 use devices;
+use run_program;
 use c;
 
 #-#####################################################################################
@@ -551,22 +552,33 @@ sub hasMousePS2 {
 }
 
 sub raidAutoStartIoctl {
-    eval { modules::load('md') };
-    my $md = devices::make("md0");
     local *F;
-    sysopen F, $md, 2 or return;
+    sysopen F, devices::make("md0"), 2 or return;
     ioctl F, 2324, 0;
 }
 
+sub raidAutoStartRaidtab {
+    my (@parts) = @_;
+    #- faking a raidtab, it seems to be working :-)))
+    #- (choosing md0, but it works for the others!)
+    foreach (@parts) {
+	output("/etc/raidtab", "raiddev /dev/md0\n  device " . devices::make($_->{device}) . "\n");
+	run_program::run('raidstart', devices::make("md0"));
+    }
+}
+
 sub raidAutoStart {
+    my (@parts) = @_;
+
     log::l("raidAutoStart");
+    eval { modules::load('md') };
     my %personalities = ( '1' => 'linear', '2' => 'raid0', '3' => 'raid1', '4' => 'raid5' );
-    raidAutoStartIoctl() or log::l("warning, RAID_AUTORUN not supported by kernel"), return;
-    if (my @needed_perso = map { if_(/^kmod: failed.*md-personality-(.)/, $personalities{$1}) } syslog()) {
+    raidAutoStartIoctl() or raidAutoStartRaidtab(@parts);
+    if (my @needed_perso = map { 
+	if_(/^kmod: failed.*md-personality-(.)/ ||
+	    /^md: personality (.) is not loaded/, $personalities{$1}) } syslog()) {
 	log::l("RAID: autostart needs personality from $_"), eval { modules::load(@needed_perso) };
-	return raidAutoStartIoctl();
-    } else {
-	1;
+	raidAutoStartIoctl() or raidAutoStartRaidtab(@parts);
     }
 }
 

@@ -90,7 +90,10 @@ sub raids {
     my ($hds) = @_;
 
     my @parts = get_fstab(@$hds);
-    (grep { isRawRAID($_) } @parts) && detect_devices::raidAutoStart() or return [];
+    {
+	my @l = grep { isRawRAID($_) } @parts or return [];
+	detect_devices::raidAutoStart(@l);
+    }
 
     fs::get_major_minor(@parts);
     my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_partitions();
