@@ -86,7 +86,7 @@ sub ask_info2 {
 		   if__($cnx->{phone_out}, { label => _("Provider phone number"), val => \$cnx->{phone_out} }),
 		   if__($netc->{dnsServer2}, { label => _("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
 		   if__($netc->{dnsServer3}, { label => _("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
-		   if__($cnx->{vpivci}, { label => _("Choose your country"), val => \$netc->{vpivci}, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK'] }),
+		   if__($cnx->{vpivci}, { label => _("Choose your country"), val => \$netc->{vpivci}, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK', 'USA'] }),
 		   if__($cnx->{dialing_mode}, { label => _("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
 		   if__($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
 		   if__($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
@@ -95,7 +95,7 @@ sub ask_info2 {
 		  ]
 		 ) or return;
     if ($netc->{vpivci}) {
-	foreach (['Netherlands', '8_48'], ['France', '8_35'], ['Belgium', '8_35'], ['Italy', '8_35'], ['UK', '0_38']) {
+	foreach (['Netherlands', '8_48'], ['France', '8_35'], ['Belgium', '8_35'], ['Italy', '8_35'], ['UK', '0_38'], ['USA', '8_35']) {
 	    $netc->{vpivci} eq $_->[0] and $netc->{vpivci} = $_->[1];
 	}
     }
