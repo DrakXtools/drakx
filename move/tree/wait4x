@@ -2,7 +2,7 @@
 
 use MDK::Common;
 use lib qw(/usr/lib/libDrakX);
-use c;
+use xf86misc::main;
 
 my $nb = 0;
 $| = 1;
@@ -11,7 +11,7 @@ foreach (1..30) {
     print ".";
     sleep 1;
     print("no X server :(\n"), exit 1 if !fuzzy_pidofs(qr/\bX_move\b/);
-    $nb++ if c::Xtest(':0');
+    $nb++ if xf86misc::main::Xtest(':0');
     if ($nb > 2) { #- one succeeded test is not enough :-(
         print "found\n";
         exit 0;
