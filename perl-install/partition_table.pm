@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isRawLVM isRawRAID isRAID isLVM isNT isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isApplePartMap isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isNT isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isApplePartMap isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -235,7 +235,6 @@ sub isDos { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
 sub isFat { isDos($_[0]) || isWin($_[0]) }
 sub isSunOS { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
-sub isNfs { $_[0]{type} eq 'nfs' }
 sub isNT { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isApple { type2fs($_[0]) eq 'apple' && defined $_[0]{isDriver} }
 sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }

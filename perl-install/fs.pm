@@ -132,7 +132,7 @@ sub add2all_hds {
 
     foreach (@l) {
 	my $s = 
-	    isNfs($_) ? 'nfss' :
+	    isThisFs('nfs', $_) ? 'nfss' :
 	    isThisFs('smbfs', $_) ? 'smbs' :
 	    'special';
 	push @{$all_hds->{$s}}, $_;
@@ -436,7 +436,7 @@ sub set_default_options {
 	#- news spool to speed up news servers).
 	$options->{noatime} = detect_devices::isLaptop();
     }
-    if (isNfs($part)) {
+    if (isThisFs('nfs', $part)) {
 	put_in_hash($options, { 
 			       nosuid => 1, 'rsize=8192,wsize=8192' => 1, soft => 1,
 			      });
@@ -525,7 +525,7 @@ sub get_raw_hds {
     get_major_minor(@{$all_hds->{raw_hds}});
 
     my @fstab = read_fstab($prefix, "/etc/fstab", 'all_options');
-    $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
+    $all_hds->{nfss} = [ grep { isThisFs('nfs', $_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
     $all_hds->{special} = [
        (grep { isThisFs('tmpfs', $_) } @fstab),
