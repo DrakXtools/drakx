@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 1.1.11
-Release: 2mdk
+Version: 1.1.12
+Release: 1mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -286,6 +286,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Nov 12 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.12-1mdk
+- printerdrake cleanups
+- various perl lifting
+
 * Sun Nov 10 2002 Pixel <pixel@mandrakesoft.com> 1.1.11-2mdk
 - bug fix (printerdrake, netconnect)
 
