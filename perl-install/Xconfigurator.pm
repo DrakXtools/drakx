@@ -661,7 +661,7 @@ sub chooseResolutionsGtk($$;$) {
     my $W = my_gtk->new(_("Resolution"));
     my %txt2depth = reverse %depths;
     my ($r, $depth_combo, %w2depth, %w2h, %w2widget, $pix_monitor, $pix_colors, $w2_combo);
-
+    $w2_combo = new Gtk::Combo;
     my $best_w;
     while (my ($depth, $res) = each %{$card->{depth}}) {
 	foreach (@$res) {
@@ -685,14 +685,6 @@ sub chooseResolutionsGtk($$;$) {
 	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
 	if ($chosen_w == $w) {
 	    &$set($r);
-	    if ($::isEmbedded) {
-		$no_human=1;
-		$w2_combo->entry->set_text($w . "x" . $w2h{$w});
-		unless (member($chosen_depth, @{$w2depth{$w}})) {
-		    $chosen_depth = max(@{$w2depth{$w}});
-		    &$set_depth();
-		}
-	    }
 	}
 	$r->signal_connect("clicked" => sub {
 			       $ignore and return;
@@ -717,7 +709,7 @@ sub chooseResolutionsGtk($$;$) {
 					   if_(!$::isEmbedded, map {$w2widget{$_} } ikeys(%w2widget)),
 					   gtkpack2(new Gtk::HBox(0,0),
 						    create_packtable({ col_spacings => 5, row_spacings => 5},
-	     [ if_($::isEmbedded,$w2_combo = new Gtk::Combo) , new Gtk::Label("")],
+	     [ if_($::isEmbedded,$w2_combo) , new Gtk::Label("")],
 	     [ $depth_combo = new Gtk::Combo, gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'), $pix_colors = gtkpng ("colors")) ],
 							     ),
 						   ),
@@ -754,6 +746,10 @@ sub chooseResolutionsGtk($$;$) {
     &$set_depth();
     $W->{ok}->grab_focus;
 
+    if ($::isEmbedded) {
+	$no_human=1;
+	$w2_combo->entry->set_text($chosen_w . "x" . $w2h{$chosen_w});
+    }
     $W->main or return;
     ($chosen_depth, $chosen_w);
 }
