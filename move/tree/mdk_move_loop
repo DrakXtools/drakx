@@ -1,15 +1,22 @@
 #!/usr/bin/perl
 
-my %loop = (boot => 'loop0', always => 'loop1', totem => 'loop2');
-
-sub check {
-    my ($loop, $file) = @_;
-    `sudo losetup /dev/$loop 2>/dev/null` =~ m!/$file!;
-}
-
 sub name2file { 
     my ($name) = @_;
     "live_tree_$name.clp";
+}
+
+sub get_file2loop {
+    my (@names) = @_;
+    my %files = map { name2file($_) => 1 } @names;
+    my %file2loop;
+    foreach (0 .. 9) {
+	my ($file) = `sudo losetup /dev/loop$_ 2>/dev/null` =~ m!\([^)]*/([^)]*)\)! or last;
+        if (delete $files{$file}) {
+	    $file2loop{$file} = "loop$_";
+	    last if !%files;
+	}
+    }
+    %file2loop;
 }
 
 sub to_memory {
@@ -38,9 +45,10 @@ my ($direction, @names) = @ARGV;
 my $f = $direction eq 'to_memory' && \&to_memory || $direction eq 'to_cdrom' && \&to_cdrom;
 $f && @names or usage();
 
+my %file2loop = get_file2loop(@names);
+
 foreach my $name (@names) {
-    my $loop = $loop{$name} or die "unknown name $name\n";
     my $file = name2file($name);
-    check($loop, $file) or next;
+    my $loop = $file2loop{$file} or die "unknown name $name\n";
     $f->($loop, $file);
 }
