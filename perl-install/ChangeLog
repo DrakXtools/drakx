@@ -1,3 +1,58 @@
+2002/02/03  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: help lilo when there is hdd with no hdc drive (needs
+	testing!)
+
+2002/02/03  warly
+
+	* share/rpmsrate.server, share/compssUsers.server: add rpmsrate.server and
+	compssUsers.server
+
+2002/02/02  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: XFree is now 4.2
+
+	* standalone/fileshareset: fix dropping samba sections which don't have
+	any "path="
+
+2002/02/01  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sv.po, share/po/DrakX.pot: updated Swedish file
+
+	* share/po/fr.po: merged again French file to recover some lost strings;
+	and added non breakable spaces at all the needed places as required
+	by French typography
+
+2002/02/01  Pixel  <pixel@mandrakesoft.com>
+
+	* my_gtk.pm: please perl_checker
+
+	* install_interactive.pm: use from_Mb for choosing the size of the windows
+	partition
+
+	* install_steps.pm: create symlink /etc/security/msec/server in security >
+	3
+
+2002/02/01  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: First steps of the implementation for the "Add printer"
+	wizard.
+
+	* detect_devices.pm: Made auto-detection working for HP DeskJet 840C on
+	USB
+	General improvements for reliability of USB printer auto-detection
+
+2002/02/01  yduret
+
+	* pixmaps/wiz_scannerdrake.png: readding it with -kb option (i am still
+	jeune and boulet)
+	rm for readding with -kb option (i am jeune and boulet)
+
+	* standalone/logdrake: ergo fix thx dadou report
+	fix --explain=foo bug that prevent to show anything
+
+	* bootlook.pm: ergo fix thx dadou report...
+
 2002/02/01  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* services.pm, standalone/drakbackup, printerdrake.pm,
