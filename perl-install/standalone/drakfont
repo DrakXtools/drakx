@@ -119,7 +119,6 @@ foreach my $i (@application) {
 # print "applications supproted: so: $so  gs: $gs \n";
 
 
-
 # PATH and binary full path
 my $xfs_conffile = '/etc/X11/fs/config';
 my $drakfont_dir = '/home/seb/new2_drakfont'; # '/usr/X11R6/lib/X11/fonts/drakfont';
@@ -149,6 +148,8 @@ my $pbar;
 my $pbar1;
 my $pbar2;
 my $pbar3;
+my $font_box;
+my $table;
 
 sub list_fontpath {
     foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
@@ -185,7 +186,8 @@ sub search_windows_font {
 	}
 	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
 	    foreach my $i (@{$_->[0]}) {
-		$interactive and progress($pbar, 100/$nb_dir);
+		$interactive && $nb_dir and progress($pbar, 100/$nb_dir);
+#		$interactive && !$nb_dir and sub { $table->destroy(); gtkpack($font_box, _("no fonts found")) }; #fixme msg
 		!$replace && grep(/$i/, @installed_fonts) and next;
 		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_->[1]/fonts/$i";
 	    }
@@ -395,7 +397,7 @@ sub backend_mod {
 
 #######################################  INTERACTIVE ######################################################################
 
-my $font_box;
+
 
 my $check4;
 my $check1;
@@ -403,61 +405,97 @@ my $check2;
 my $check3;
 
 sub interactive_mode {
+$interactive = 1;
 
 init Gtk;
-$interactive = 1;
-#sub main_gi {
-    my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
-    $window1->set_position(1);
-    $window1->set_title(_("Fonts Importation"));
-#    $window1->set_policy(1, 1, 1);
-    $window1->set_border_width(5);
 
-    my $font_sel;
-    gtkadd($window1,
-	   gtkpack_(new Gtk::HBox(0,2),
-		    1, gtkpack_(new Gtk::VBox(0,0),
-				1, new Gtk::VBox(0,0),
-				0, gtkpack($font_box = new Gtk::VBox(0,5),
-					$font_sel = new Gtk::FontSelection,
+
+my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+$window1->signal_connect (delete_event => sub { Gtk->exit(0) });
+$window1->set_position(1);
+$window1->set_title(_("Fonts Importation"));
+$window1->set_border_width(5);
+
+my $font_sel;
+gtkadd($window1,
+       gtkpack_(new Gtk::HBox(0,2),
+		1, gtkpack_(new Gtk::VBox(0,0),
+			    1, new Gtk::VBox(0,0),
+			    0, gtkpack($font_box = new Gtk::VBox(0,5),
+				       $font_sel = new Gtk::FontSelection,
 				       ),
-				1, new Gtk::VBox(0,0)
-			       ),
-		    0, gtkpack_(new Gtk::VBox(0,5),
-				0, _("DrakFont"),
-				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-					  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
-							    sub { $windows = 1; backend_mod(); }),
-					  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
-							    sub { gtkdestroy($font_sel); import_status(); search_windows_font();
-							      }),
-					  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => sub { Gtk->main_quit() }),
-					 ),
-				1, new Gtk::VBox(0,0),
-				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-					  gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub { print _("Help\n") }),
-					  gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
-					 ),
-			       )
-		   ),
-	  );
-    $window1->show_all;
-    $window1->realize;
-    $window1->show_all();
+			    1, new Gtk::VBox(0,0)
+			    ),
+		0, gtkpack_(new Gtk::VBox(0,5),
+			    0, _("DrakFont"),
+			    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+				      gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
+							sub { gtkdestroy($font_sel); $windows = 1; backend_mod(); lisence(); }),
+				      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
+							sub {  }),
+				      gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => sub { Gtk->main_quit() }),
+				      ),
+			    1, new Gtk::VBox(0,0),
+			    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+				      gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub { print _("Help\n") }),
+				      gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
+				      ),
+			    )
+		),
+       );
+$window1->show_all;
+$window1->realize;
+$window1->show_all();
 #}
-
+# import_status();
 #main_gi;
 Gtk->main;
 Gtk->exit(0);
 }
+
+
+my $text;
+my $vscrollbar;
+
+
+sub lisence {
+    gtkpack($font_box,
+	    $text = new Gtk::Text( undef, undef ),
+	    $text->set_editable( 0 ),
+	    $text->show(),
+	    $vscrollbar = new Gtk::VScrollbar( $text->vadj ),
+	    $vscrollbar->show(),
+	    $text->insert( undef, $text->style->black, undef, "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode. " ),
+	    );
+
+    $font_box->show_all();
+}
+	    
+
+#	    my $text = new Gtk::Text;
+
+
+#	    $text->set_editable( 0 ),
+#	    my $vscrollbar = new Gtk::VScrollbar( $text->$vadj );
+#	    my $hbox->pack_start( $vscrollbar, 0, 0, 0 );
+#	    $vscrollbar->show();
+
+#    $wtext->can_focus($has_scroll);
+#    chomp(my $text = join("\n", @_));
+#    my $scroll = createScrolledWindow(gtktext_insert($wtext, $text));
+#    $scroll->set_usize(400, $height);
+#    gtkpack__($o->{box}, $scroll);
+
+
+#	_("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode."),
+	    
+
 
 sub import_status {
     my $adj = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
     my $adj1 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
     my $adj2 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
     my $adj3 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
-    my $table;
     gtkpack($font_box,
 	    $table = create_packtable({ col_spacings => 30, row_spacings => 20},
    [_("Search Fonts on your System"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)],
@@ -496,57 +534,3 @@ sub progress {
 # xlsfonts | less pour verifier l'installation des polices.
 
 
-# sub file_s {
-#     my $window1 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-#     $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
-#     $window1->set_position(1);
-#     $window1->set_title(_("Fonts Importation"));
-#     $window1->set_policy(1, 1, 1);
-#     $window1->set_border_width(5);
-    
-
-# 	if (not defined $window1) {
-# 		$window1 = new Gtk::FileSelection "file selection dialog";
-# 		$window1->position(-mouse);
-# 		$window1->signal_connect("destroy", \&destroy_window, \$window1);
-# 		$window1->signal_connect("delete_event", \&destroy_window, \$window1);
-# 		$window1->ok_button->signal_connect("clicked", \&file_selection_ok, $window1);
-# 		$window1->cancel_button->signal_connect("clicked", sub { destroy $window1 });
-		
-# 	}
-# 	if (!visible $window1) {
-# 		show $window1;
-# 	} else {
-# 		destroy $window1;
-# 	}
-# }
-
-
-
-
-
-
-
-
-
-
-
-
-#     gtkadd($window1,
-# 	   gtkpack_(new Gtk::HBox(0,6),
-# 		1, my $notebook =  new Gtk::FontSelection,		
-# 		    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-# 			      _("DrakFont"),
-# 			      gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $windows = 1; backend_mod(); }),
-# 			      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub { 
-# 				  gtkdestroy($);
-# #				  $window1->destroy(); 
-# 				  install_gi(); }),
-# 			      gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked 	=> sub { Gtk->main_quit() }),
-# 			      gtksignal_connect(new Gtk::Button(_("Close")), clicked 		=> sub { Gtk->main_quit() }),
-# 			      )
-# 		    ),
-# 	   );
-#     $window1->show_all;
-#     $window1->realize;
-#     $window1->show_all();
