@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.2mdk
+Release: 0.3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Nov 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.3mdk
+- bootloader: let be kernel-i686-up-64GB aware (pixel)
+- diskdrake: LVM/DM/MD fixes (pixel)
+- drakupdate_fstab: use the right encoding when creating an entry for
+  /etc/fstab (pixel, #12387)
+- PPC fixes (Christiaan Welvaart, pixel)
+- service_harddrake: on startup, redo ethX aliases
+
 * Fri Nov 12 2004 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 10.2-0.2mdk
 - Rebuild for new perl
 - drakauth (pixel):
