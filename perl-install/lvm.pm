@@ -31,25 +31,25 @@ sub cylinder_size {
 init();
 
 sub init() {
-    eval { modules::load('lvm-mod') };
-    run_program::run('vgscan') if !-e '/etc/lvmtab';
-    run_program::run('vgchange', '-a', 'y');
+    eval { modules::load('dm-mod') };
+    run_program::run('lvm2', 'vgscan') if !-e '/etc/lvmtab';
+    run_program::run('lvm2', 'vgchange', '-a', 'y');
 }
 
-sub run {
-    if (my $r = run_program::run(@_)) {
+sub lvm_cmd {
+    if (my $r = run_program::run('lvm2', @_)) {
 	$r;
     } else {
 	$? >> 8 == 98 or return;
 
 	#- sometimes, it needs running vgscan again, doing so:
-	run_program::run('vgscan');
-	run_program::run(@_);
+	run_program::run('lvm2', 'vgscan');
+	run_program::run('lvm2', @_);
     }
 }
-sub run_or_die {
+sub lvm_cmd_or_die {
     my ($prog, @para) = @_;
-    run($prog, @para) or die "$prog failed\n";
+    lvm_cmd($prog, @para) or die "$prog failed\n";
 }
 
 sub check {
@@ -65,24 +65,24 @@ sub check {
 sub get_vg {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
-    (split(':', run_program::get_stdout('pvdisplay', '-c', $dev)))[1];
+    (split(':', run_program::get_stdout('lvm2', 'pvdisplay', '-c', $dev)))[1];
 }
 
 sub update_size {
     my ($lvm) = @_;
-    my @l = split(':', run_program::get_stdout('vgdisplay', '-c', '-D', $lvm->{VG_name}));
+    my @l = split(':', run_program::get_stdout('lvm2', 'vgdisplay', '-c', '-D', $lvm->{VG_name}));
     $lvm->{totalsectors} = ($lvm->{PE_size} = $l[12]) * $l[13];
 }
 
 sub get_lv_size {
     my ($lvm_device) = @_;
-    my $info = run_program::get_stdout('lvdisplay', '-D', '-c', "/dev/$lvm_device");
+    my $info = run_program::get_stdout('lvm2', 'lvdisplay', '-D', '-c', "/dev/$lvm_device");
     (split(':', $info))[6];
 }
 
 sub get_lvs {
     my ($lvm) = @_;
-    my @l = run_program::get_stdout('vgdisplay', '-v', '-D', $lvm->{VG_name});
+    my @l = run_program::get_stdout('lvm2', 'vgdisplay', '-v', '-D', $lvm->{VG_name});
     $lvm->{primary}{normal} = 
       [
        map {
@@ -98,17 +98,17 @@ sub get_lvs {
 sub vg_add {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
-    run_or_die('pvcreate', '-y', '-ff', $dev);
-    my $prog = run('vgdisplay', $part->{lvm}) ? 'vgextend' : 'vgcreate';
-    run_or_die($prog, $part->{lvm}, $dev);
+    lvm_cmd_or_die('pvcreate', '-y', '-ff', $dev);
+    my $prog = lvm_cmd('vgdisplay', $part->{lvm}) ? 'vgextend' : 'vgcreate';
+    lvm_cmd_or_die($prog, $part->{lvm}, $dev);
 }
 
 sub vg_destroy {
     my ($lvm) = @_;
 
     is_empty_array_ref($lvm->{primary}{normal}) or die \N("Remove the logical volumes first\n");
-    run('vgchange', '-a', 'n', $lvm->{VG_name});
-    run_or_die('vgremove', $lvm->{VG_name});
+    lvm_cmd('vgchange', '-a', 'n', $lvm->{VG_name});
+    lvm_cmd_or_die('vgremove', $lvm->{VG_name});
     foreach (@{$lvm->{disks}}) {
 	delete $_->{lvm};
 	$_->{isFormatted} = 0;
@@ -119,7 +119,7 @@ sub vg_destroy {
 sub lv_delete {
     my ($lvm, $lv) = @_;
 
-    run_or_die('lvremove', '-f', "/dev/$lv->{device}");
+    lvm_cmd_or_die('lvremove', '-f', "/dev/$lv->{device}");
 
     my $list = $lvm->{primary}{normal};
     @$list = grep { $_ != $lv } @$list;
@@ -130,7 +130,7 @@ sub lv_create {
     my $list = $lvm->{primary}{normal} ||= [];
     $lv->{lv_name} ||= 1 + max(map { if_($_->{device} =~ /(\d+)$/, $1) } @$list);
     $lv->{device} = "$lvm->{VG_name}/$lv->{lv_name}";
-    run_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
+    lvm_cmd_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $lv->{lv_name}, $lvm->{VG_name});
     $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
     $lv->{notFormatted} = 1;
     $lv->{isFormatted} = 0;
@@ -139,8 +139,8 @@ sub lv_create {
 
 sub lv_resize {
     my ($lv, $oldsize) = @_;
-    run_or_die($oldsize > $lv->{size} ? ('lvreduce', '-f') : 'lvextend', 
-	       '--size', int($lv->{size} / 2) . 'k', "/dev/$lv->{device}");
+    lvm_cmd_or_die($oldsize > $lv->{size} ? ('lvreduce', '-f') : 'lvextend', 
+		   '--size', int($lv->{size} / 2) . 'k', "/dev/$lv->{device}");
     $lv->{size} = get_lv_size($lv->{device}); #- the resized partition may not be the exact asked size
 }
 

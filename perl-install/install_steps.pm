@@ -426,7 +426,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     }
 
     #- generate /etc/lvmtab needed for rc.sysinit
-    run_program::rooted($o->{prefix}, 'vgscan') if -e '/etc/lvmtab';
+    run_program::rooted($o->{prefix}, 'lvm2', 'vgscan') if -e '/etc/lvmtab';
 
     #- configure PCMCIA services if needed.
     modules::write_pcmcia($o->{prefix}, $o->{pcmcia});

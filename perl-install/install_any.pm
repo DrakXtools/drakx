@@ -329,7 +329,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
     push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
-    push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
+    push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     # BUG: if first snd card is managed by OSS and the second one by alsa, we do not install alsa-utils:
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-/;
     push @{$o->{default_packages}}, "grub" if isLoopback(fsedit::get_root($o->{fstab}));
@@ -1104,7 +1104,7 @@ sub remove_bigseldom_used() {
     unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(marble3d);
     unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
       (map { @$_ } @bigseldom_used_groups),
-      qw(pvcreate pvdisplay vgchange vgcreate vgdisplay vgextend vgremove vgscan lvcreate lvdisplay lvremove /lib/liblvm.so),
+      qw(lvm2),
       qw(mkreiserfs resize_reiserfs mkfs.xfs fsck.jfs);
 }
 
