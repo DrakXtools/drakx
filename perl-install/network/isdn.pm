@@ -68,7 +68,7 @@ defaultroute
 sub setup_capi_conf {
     my ($capi_card) = @_;
 
-    $in->do_pkgs->install('isdn4k-utils'); #- capi4linux service
+    $in->do_pkgs->ensure_is_installed('isdn4k-utils', "$::prefix/etc/rc.d/init.d/capi4linux"); #- capi4linux service
     is_module_installed($capi_card->{driver}) or $in->do_pkgs->install($capi_card->{driver});
     if ($capi_card->{firmware} && ! -f "$::prefix/usr/lib/isdn/$capi_card->{firmware}") {
         $in->do_pkgs->install("$capi_card->{driver}-firmware");
