@@ -361,6 +361,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     delete $ENV{DURING_INSTALL};
     run_program::rooted($o->{prefix}, 'ldconfig') or die "ldconfig failed!";
     log::l("Install took: ", formatTimeRaw(time - $time));
+    log_sizes($o);
 }
 
 sub afterInstallPackages($) {
@@ -431,9 +432,12 @@ Consoles 1,3,4,7 may also contain interesting information";
 	install_any::install_urpmi($o->{prefix}, $o->{method}, $o->{packages}[2]);
 	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
-
-    install_any::getAndSaveFile('RPM-GPG-KEYS', '/root/tmp/RPM-GPG-KEYS');
-    run_program::rooted($o->{prefix}, qw(gpg --fast-import --keyring /etc/rpm/pubring.gpg /root/tmp/RPM-GPG-KEYS));
+    {
+	my $f = "$o->{prefix}/root/tmp/RPM-GPG-KEYS";
+	install_any::getAndSaveFile('RPM-GPG-KEYS', $f);
+	run_program::rooted($o->{prefix}, qw(gpg --import --homedir /etc/rpm /root/tmp/RPM-GPG-KEYS));
+	unlink $f;
+    }
 
 #    #- update language and icons for KDE.
 #    update_userkderc($o->{prefix}, 'Locale', Language => "");
@@ -837,7 +841,11 @@ sub generateAutoInstFloppy($) {
 }
 
 #------------------------------------------------------------------------------
-sub exitInstall { install_any::unlockCdrom }
+sub exitInstall { 
+    my ($o) = @_;
+    install_any::unlockCdrom;
+    install_any::log_sizes($o);
+}
 
 #------------------------------------------------------------------------------
 sub hasNetwork {

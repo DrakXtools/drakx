@@ -80,7 +80,7 @@ sub exitInstall {
 	my $O = bless $o, "install_steps_gtk";
 	$O->exitInstall($alldone);
     } else {
-	install_steps::exitInstall;
+	install_steps::exitInstall($o);
 	print "\a";
 	print "Auto installation complete (the postInstall is done yet though)\n";
 	print "Press <Enter> to reboot\n";

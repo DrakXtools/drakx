@@ -697,6 +697,7 @@ sub main {
 	last if $o->{step} eq 'exitInstall';
     }
     install_any::clean_postinstall_rpms();
+    install_any::log_sizes($o);
     install_any::ejectCdrom();
 
     $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});

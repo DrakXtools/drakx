@@ -97,12 +97,15 @@ sub ask_from_listf_ {
 }
 sub ask_from_listf {
     my ($o, $title, $message, $f, $l, $def) = @_;
+    my $def2;
     my (@l,%l); my $i = 0; foreach (@$l) {
 	my $v = $f->($_, $i++);
 	push @l, $v;
 	$l{$v} = $_;
+	$def2 = $v if $def && $_ eq $def;
     }
-    my $r = ask_from_list($o, $title, $message, \@l, defined $def ? $f->($def) : $def) or return;
+    $def2 ||= $f->($def) if $def;
+    my $r = ask_from_list($o, $title, $message, \@l, $def2) or return;
     $l{$r};
 }
 

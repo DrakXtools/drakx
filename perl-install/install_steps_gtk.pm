@@ -526,6 +526,7 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", pkg
 	#- if not using a cdrom medium, always abort.
 	$method eq 'cdrom' and do {
 	    local $my_gtk::grab = 1;
+	    print "\a";
 	    $o->ask_okcancel('', $msg);
 	};
     };

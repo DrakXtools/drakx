@@ -4,6 +4,24 @@
 	* share/themes-mdk-Desktop.rc, share/themes/mdk-Desktop-bg.png:
 	initial release.
 
+2000-09-22  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: add some call to log_sizes to log the
+	installed size
+
+	* install_steps_gtk.pm (installPackages): beep before changeMedium		
+
+2000-09-21  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm (ask_from_listf): try to call the f translation
+	function on the default value with the index
+
+	* install_steps.pm (afterInstallPackages): make the gpg code work,
+	changed the call to 
+	"gpg --fast-import --homedir /etc/rpm /root/tmp/RPM-GPG-KEYS"
+
+	* detect_devices.pm: cleanup and removed unused code
+
 2000-09-21  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* detect_devices.pm (getNet()): really remove plip in standalone

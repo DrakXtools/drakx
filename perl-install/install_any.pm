@@ -691,4 +691,10 @@ sub getHds {
     $ok;
 }
 
+sub log_sizes {
+    my ($o) = @_;
+    my @df = common::df($o->{prefix});
+    log::l(sprintf "Installed: %dMB(df), %dMB(rpm)", ($df[0] - $df[1]) / 1024, sum(`rpm --root $o->{prefix} -qa --queryformat "%{size}\n"`) / sqr(1024));
+}
+
 1;
