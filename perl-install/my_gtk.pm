@@ -892,7 +892,7 @@ sub _create_window($$) {
 	my ($X, $Y, $Wi, $He) = @{$my_gtk::force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
 
-	if (!$::isStandalone && !$::live && !$::g_auto_install) {
+	if (!$::isStandalone && !$::live && !$::g_auto_install && !$::noShadow) {
 	    my $sqw = $my_gtk::shape_width; #square width
 	    my $wia = int(($wi+7)/8);
 	    my $s = "\xFF" x ($wia*$he);
