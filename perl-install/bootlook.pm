@@ -280,7 +280,7 @@ sub isAutologin {
     chomp ($line);
     $line =  ($line eq "yes");
     my %au = get_autologin('');
-    return ($line && $au{autologin} && $au{desktop});
+    return ($line && defined $au{autologin});
 }
 
 sub get_autologin {

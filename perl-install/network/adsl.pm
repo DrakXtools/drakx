@@ -138,9 +138,10 @@ user "$adsl->{login}"
 						      ['ppp-compress-26', 'ppp_deflate']);
 	$::isStandalone and modules::write_conf($prefix);
 	my $mgmtrpm;
-	if($::isStandalone) {
+	if ($::isStandalone) {
 	    $mgmtrpm = `grep speedtouch_mgmt /var/lib/urpmi/depslist.ordered` ? 1 : 0;
 	} else {
+	    require pkgs;
 	    $mgmtrpm = pkgs::packageByName($in->{package}, "speedtouch_mgmt");
 	}
 	$mgmtrpm ? $in->do_pkgs->install('speedtouch_mgmt') : $in->ask_warn('', _('You need the alcatel microcode.
