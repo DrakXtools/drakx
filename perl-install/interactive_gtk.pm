@@ -792,7 +792,7 @@ sub wait_messageW($$$) {
     my $w = my_gtk->new($title, %$o, grab => 1);
     gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
     $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
-    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(join("\n", warp_text($_))) } @$messages;
+    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(warp_text($_)) } @$messages;
 
     ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
     $w->{rwindow}->set_position('center') if ($::isStandalone && (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it));
@@ -802,7 +802,7 @@ sub wait_messageW($$$) {
 }
 sub wait_message_nextW {
     my ($o, $messages, $w) = @_;
-    my $msg = join("\n", warp_text(join "\n", @$messages));
+    my $msg = warp_text(join "\n", @$messages);
     return if $msg eq $w->{wait_messageW}->get; #- needed otherwise no expose_event :(
     $w->{displayed} = 0;
     $w->{wait_messageW}->set($msg);
