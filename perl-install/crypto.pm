@@ -17,6 +17,9 @@ my %url2land = (
 		gr => _("Greece"),
 		no => _("Norway"),
 		se => _("Sweden"),
+		nl => _("Netherlands"),
+		it => _("Italy"),
+		at => _("Austria"),
 	       );
 
 my %land2tzs = (
