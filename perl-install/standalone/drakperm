@@ -109,7 +109,7 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                            gtkpack_(Gtk2::VBox->new(0,5),
                                     0, gtkadd(Gtk2::HBox->new(0,5),
                                               Gtk2::Label->new(N("The current security level is %s
-Select permissions to see/edit", $default_perm_level)),
+Select permissions to see/edit", $level)),
                                               $combo_perm
                               ),
                                     1, create_scrolled_window($permList),
