@@ -496,6 +496,11 @@ such as ``mybox.mylab.myco.com''."),
 			_("Do you want to configure a dialup connection with modem for your system?"), 0)) {
 	$o->pppConfig;
     }
+    #- (dam's)
+    if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
+			_("Do you want to configure a ISDN connection for your system?"), 0)) {
+        Netconnect::isdn($o->{prefix}, $o->{netc}, $o, bool($o->{pcmcia}));
+    }
 }
 
 sub configureNetworkIntf {

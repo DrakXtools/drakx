@@ -1,3 +1,11 @@
+2000-08-16  dam's  <damien@mandrakesoft.com>
+
+	* install_steps_interactive.pm(configureNetwork): added call to
+	isdn configuration
+	* added standalone/DrakFuck: standalone entry point to configure
+	internet connexion.
+	* added Netconnect.pm: internet connexion functions.
+
 2000-08-11  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_interactive.pm (selectInstallClass): yet a bigger
@@ -56,7 +64,7 @@
 	* install_steps_gtk.pm (installPackages): removed the displaying
 	of size to install (people are bothered cuz not the same size)
 
-2000-08-06  Dam's  <damien@mandrakesoft.com>
+2000-08-06  dam's  <damien@mandrakesoft.com>
 
 	* install_steps_gtk.pm (create_steps_window): use drawing area
 	instead of button. Implemented all steps events. 
@@ -74,7 +82,7 @@
 	correspond to install2 function and install_steps* methods (eg:
 	configureX & setupXfree unified to configureX)
 
-2000-08-04  Dam's  <damien@mandrakesoft.com>
+2000-08-04  dam's  <damien@mandrakesoft.com>
 
 	* any.pm (setAutoLogin): added this method to write xdm-config
 	* Xconfigurator.pm: clenead autologin code and use of above method
