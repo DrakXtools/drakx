@@ -222,7 +222,7 @@ sub selectMouse {
     my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
     $o->{mouse} = mouse::fullname2mouse(
 	$o->ask_from_treelist_('', _("Please, choose the type of your mouse."), 
-			       '|', [ mouse::fullnames ], $prev)) if $force;
+			       '|', [ mouse::fullnames ], $prev) || return) if $force;
 
     if ($force && $o->{mouse}{type} eq 'serial') {
 	$o->set_help('selectSerialPort');
