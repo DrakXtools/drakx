@@ -2,7 +2,7 @@ package pkgs; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(*LOG %preferred $limitMinTrans %compssListDesc);
+use vars qw(%preferred $limitMinTrans %compssListDesc);
 
 use MDK::Common::System;
 use URPM;
