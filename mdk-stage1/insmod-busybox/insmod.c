@@ -512,7 +512,7 @@ int arch_init_module (struct obj_file *f, struct new_module *);
 
 /*======================================================================*/
 
-int flag_force_load = 0;
+int flag_force_load = 1;
 int flag_autoclean = 0;
 int flag_export = 1;
 
