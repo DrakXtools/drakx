@@ -806,8 +806,10 @@ sub setupBootloaderBefore {
     my ($o) = @_;
 
     require bootloader;
-    if (my @l = (grep { $_->{bus} eq 'ide' } detect_devices::burners(), detect_devices::raw_zips())) {
-	bootloader::set_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
+    if (detect_devices::faking_ide_scsi()) {
+	if (my @l = (grep { $_->{bus} eq 'ide' } detect_devices::burners())) {
+	    bootloader::set_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
+	}
     }
     if ($o->{miscellaneous}{HDPARM}) {
 	bootloader::set_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide/ } all("/proc/ide");

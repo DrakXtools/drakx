@@ -50,11 +50,13 @@ sub zips()        {
     } raw_zips();
 }
 
+sub faking_ide_scsi() { !$::isStandalone && !$::move && c::kernel_version() =~ /^\Q2.4/ }
+
 sub cdroms__faking_ide_scsi() { grep { $_->{media_type} eq 'cdrom' } cdroms_and_zips__faking_ide_scsi() }
 sub cdroms_and_zips__faking_ide_scsi() {
-    my @l = grep { $_->{media_type} eq 'cdrom' || member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get();
+    my @l = grep { $_->{media_type} eq 'cdrom' } get();
 
-    if (my @l_need_fake = grep { !$::isStandalone && !$::move && $_->{bus} eq 'ide' && !($_->{media_type} eq 'cdrom' && !isBurner($_)) } @l) {
+    if (my @l_need_fake = grep { faking_ide_scsi() && $_->{bus} eq 'ide' && !($_->{media_type} eq 'cdrom' && !isBurner($_)) } @l) {
 	require modules;
 	modules::add_probeall('scsi_hostadapter', 'ide-scsi');
 
