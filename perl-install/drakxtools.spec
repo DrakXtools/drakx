@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 35mdk
+Release: 36mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -308,6 +308,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon May 12 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-36mdk
+- drakboot:
+  o do not loop on console (part of #3560) (pixel)
+  o do not log localized messages
+  o if the bootsplash is missing, just go back to main config window
+
 * Wed Apr 30 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-35mdk
 - draksec: fix #3618 (let one pick any security level)
 - harddrake service: display all removed devices
