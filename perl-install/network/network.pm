@@ -78,7 +78,8 @@ sub read_tmdns_conf() {
 }
 
 sub write_conf {
-    my ($file, $netc) = @_;
+    my ($netc) = @_;
+    my $file = "$::prefix/etc/sysconfig/network";
 
     if ($netc->{HOSTNAME} && $netc->{HOSTNAME} =~ /\.(.+)$/) {
 	$netc->{DOMAINNAME} = $1;
@@ -437,7 +438,7 @@ sub configureNetwork2 {
         network::ethernet::configure_eth_aliases($modules_conf);
 
         $netc->{wireless_eth} and $in->do_pkgs->ensure_binary_is_installed('wireless-tools', 'iwconfig', 'auto');
-        write_conf("$etc/sysconfig/network", $netc);
+        write_conf($netc);
         write_resolv_conf("$etc/resolv.conf", $netc) unless $netc->{DHCP};
         if ($::isInstall && ! -e "/etc/resolv.conf") {
             #- symlink resolv.conf in install root too so that updates and suppl media can be added
