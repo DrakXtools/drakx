@@ -174,7 +174,6 @@ sub connection {
     $statusbar->push(1, $isconnected2 ? _("Disconnecting from Internet ") : _("Connecting to Internet "));
     if(!$isconnected2) {
 	$c_time = time();
-	gmtime($_[0]);
 	$ct_tag = Gtk->timeout_add(1000, sub {
 				       my ($sec,$min,$hour) = gmtime(time() - $c_time);
 				       my $e = sprintf ("%02d:%02d:%02d", $hour, $min, $sec);
