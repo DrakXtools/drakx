@@ -331,11 +331,11 @@ sub setupFB {
     my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
     if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
 			 {
-			  label => 'fb',
+			  label => 'linux-fb',
 			  root => $root,
-			  vga => $vga || 785, #- TODO default to 640x480x16.
+			  vga => $vga || 785,
 			 })) {
-	$o->{bootloader}{default} = 'fb';
+	$o->{bootloader}{default} = 'linux-fb';
 	lilo::install($o->{prefix}, $o->{bootloader});
     } else {
 	#- should deactivate X11 in such case.
