@@ -50,7 +50,7 @@ our %l = (
       qw(catc CDCEther kaweth pegasus rtl8150 usbnet),
     ],
     wireless => [
-      qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503 at76c503-rfmd),
+      qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503 at76c503-rfmd atmel_cs),
       qw(hermes netwave_cs orinoco orinoco_cs prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
