@@ -95,6 +95,8 @@ sub load_category {
 	eval { load([ $_->{driver}, $_->{options} ]) };
 	$_->{error} = $@;
 
+	$_->{try} = 1 if $_->{driver} eq 'hptraid';
+
 	!($_->{error} && $_->{try});
     } probe_category($category, $probe_type),
       map { { driver => $_, description => $_, try => 1 } } @try_modules;
