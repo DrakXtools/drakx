@@ -806,6 +806,13 @@ sub langsLANGUAGE {
     uniq(map { split ':', getLANGUAGE($_, $c) } langs($l));
 }
 
+sub langs_selected {
+    my ($locale) = @_; 
+    #- adding the UTF-8 flag (if not forced) depends on the selected languages
+    $locale->{utf8} ||= l2charset($locale->{lang}) =~ /utf|unicode/
+			|| (uniq map { l2charset($_) } langs($locale->{langs})) > 1;
+}
+
 sub pack_langs { 
     my ($l) = @_; 
     my $s = $l->{all} ? 'all' : join ':', uniq(map { getLANGUAGE($_) } langs($l));
@@ -849,8 +856,6 @@ sub write {
 
     $locale && $locale->{lang} or return;
 
-    $locale->{utf8} ||= l2charset($locale->{lang}) =~ /utf|unicode/
-			|| (uniq map { l2charset($_) } langs($locale->{langs})) > 1;
     my $locale_lang = getlocale_for_lang($locale->{lang}, $locale->{country}, $locale->{utf8});
     my $locale_country = getlocale_for_country($locale->{lang}, $locale->{country}, $locale->{utf8});
 

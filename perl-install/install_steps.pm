@@ -99,6 +99,7 @@ sub selectLanguage {
 	$o->{locale}{country} = $1;
     }
 
+    lang::langs_selected($o->{locale});
     log::l("selectLanguage: pack_langs ", lang::pack_langs($o->{locale}{langs}));
 
     #- for auto_install compatibility with old $o->{keyboard} containing directly $o->{keyboard}{KEYBOARD}
