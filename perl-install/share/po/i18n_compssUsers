@@ -11,7 +11,9 @@ sub get {
     open F, "../compssUsers$meta_class" or return; #die "can't open file ../compssUsers$meta_class";
     foreach (<F>) {
 	/^\s*$/ || /^#/ and next;
-	s/#.*//;
+	# i18n the Group names:
+	s/#.*!{--- }//;
+	s/[ ]*# --- //;
 
 	if (/^(\S.*)/) {
 	    my ($icon, $descr);
