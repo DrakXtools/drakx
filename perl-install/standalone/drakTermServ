@@ -38,7 +38,7 @@
 #
 
 use Gtk;
-use lib qw(/usr/lib/libDrakX );
+use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
@@ -53,7 +53,7 @@ use POSIX;
 
 my $in = 'interactive'->vnew('su');
 
-my @buff;	#- used o display status info
+my @buff;	#- used to display status info
 
 my $central_widget;
 my $window1;
@@ -63,8 +63,10 @@ my $main_box;
 
 my $nfs_subnet;
 my $nfs_mask;
-
-my $in = 'interactive'->vnew;
+my $thin_clients = 0;
+my $cfg_dir = "/etc/drakxtools/draktermserv/";
+my $cfg_file = $cfg_dir . "draktermserv.conf";
+my $server_ip = get_ip_from_sys();
 
 if ("@ARGV" =~ /--help|-h/) {
     print q(Mandrake Terminal Server Configurator
@@ -146,8 +148,69 @@ if ("@ARGV" =~ /--delclient/) {
 	delclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3]);
 	exit(0);	
 }
-	
+
+read_conf_file();	
 interactive_mode() if $#ARGV<1;
+
+sub read_conf_file {
+	if (-e $cfg_file) {
+		open (CONF_FILE, "<". $cfg_file) || print "You must be root to read configuration file. \n";
+		while (<CONF_FILE>) {
+			next unless /\S/;
+			next if /^#/;
+			chomp;
+			if (/^ALLOW_THIN/)       { $thin_clients = 1 }
+		}
+	}
+	close CONF_FILE;
+}
+
+sub write_conf_file {
+	my @cfg_list;
+	if ($thin_clients eq 1) {
+		@cfg_list = ("ALLOW_THIN\n");
+	}
+	output_p($cfg_file, @cfg_list);
+	chmod(0600, $cfg_file);
+}
+
+sub write_thin_inittab {
+	my ($client_ip) = @_;
+	
+	my $inittab = "
+# /etc/inittab\$\$IP=$client_ip\$\$
+# created by drakTermServ
+
+id:5:initdefault:
+
+# System initialization.
+si::sysinit:/etc/rc.d/rc.sysinit
+
+l0:0:wait:/etc/rc.d/rc 0
+l1:1:wait:/etc/rc.d/rc 1
+l2:2:wait:/etc/rc.d/rc 2
+l3:3:wait:/etc/rc.d/rc 3
+l4:4:wait:/etc/rc.d/rc 4
+l5:5:wait:/etc/rc.d/rc 5
+l6:6:wait:/etc/rc.d/rc 6
+
+# Things to run in every runlevel.
+ud::once:/sbin/update
+
+# Trap CTRL-ALT-DELETE
+ca::ctrlaltdel:/sbin/reboot -f
+
+# Run gettys in standard runlevels
+1:2345:respawn:/sbin/mingetty tty1
+
+# Connect to X server
+x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
+
+	my $inittab_file = "/etc/inittab\$\$IP=$client_ip\$\$";
+	open(INITTAB, "> $inittab_file") || warn ("Can't open $inittab_file!");
+	print INITTAB $inittab;
+	close INITTAB	
+}
 
 sub cursor_wait {
 	# turn the cursor to a watch
@@ -199,61 +262,64 @@ sub interactive_mode {
 						$main_box = new Gtk::VBox(0,10),
 					),
 					1, gtkpack_(new Gtk::HBox(0,2),
-						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							       gtksignal_connect(new Gtk::Button(_("Enable Server")), clicked 	=>
-									 sub { ${$central_widget}->destroy(); 
-									 	$windows = 1;
-									 	cursor_wait(); 
-									 	enable_ts();
-									 	cursor_norm();
-									 }),
-							       gtksignal_connect(new Gtk::Button(_("Disable Server")), clicked => 
-									 sub { ${$central_widget}->destroy(); 
-									 	cursor_wait();
-									 	disable_ts();
-									 	cursor_norm(); 
-									 }),
-							      ),
-						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							       gtksignal_connect(new Gtk::Button(_("Start Server")), clicked =>
+						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							gtksignal_connect(new Gtk::Button(_("Enable Server")), clicked 	=>
+								sub { ${$central_widget}->destroy(); 
+									$windows = 1;
+									cursor_wait(); 
+									enable_ts();
+									cursor_norm();
+								}),
+							gtksignal_connect(new Gtk::Button(_("Disable Server")), clicked => 
+								sub { ${$central_widget}->destroy(); 
+									cursor_wait();
+									disable_ts();
+									cursor_norm(); 
+								}),
+						),
+						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							gtksignal_connect(new Gtk::Button(_("Start Server")), clicked =>
 								sub {  ${$central_widget}->destroy(); 
 									$windows = 0; 
 									cursor_wait();	
 									start_ts();
 									cursor_norm();
 								}),
-							       gtksignal_connect(new Gtk::Button(_("Stop Server")), clicked 	=>
-								 sub { ${$central_widget}->destroy(); 
-								 	cursor_wait();
-								 	stop_ts();
-								 	cursor_norm();
-								 }),
-							      ),
-							 0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							       gtksignal_connect(new Gtk::Button(_("Etherboot Floppy/ISO")), clicked 	=>
-									 sub { ${$central_widget}->destroy(); $windows = 1; make_boot() }),
-							       gtksignal_connect(new Gtk::Button(_("Net Boot Images")), clicked => 
-									 sub { ${$central_widget}->destroy(); make_nbi() }),
-							      ),
-						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							       gtksignal_connect(new Gtk::Button(_("Add/Del Users")), clicked =>
-								 sub {  ${$central_widget}->destroy(); $windows = 0; maintain_users() }),
-							       gtksignal_connect(new Gtk::Button(_("Add/Del Clients")), clicked 	=>
-								 sub { ${$central_widget}->destroy(); maintain_clients()}),
-							      ),     
-						     1, new Gtk::HBox(0,2),
-						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							       gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
-										 sub { ${$central_widget}->destroy(); help() }),
-							       gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
-										     $::isEmbedded and kill 'USR1', $::CCPID;
-										     Gtk->main_quit() }),
-							      ),
-						    ),
+							gtksignal_connect(new Gtk::Button(_("Stop Server")), clicked 	=>
+								sub { ${$central_widget}->destroy(); 
+									cursor_wait();
+									stop_ts();
+									cursor_norm();
+								}),
+							),
+						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							gtksignal_connect(new Gtk::Button(_("Etherboot Floppy/ISO")), clicked 	=>
+								sub { ${$central_widget}->destroy(); $windows = 1; make_boot() }),
+							gtksignal_connect(new Gtk::Button(_("Net Boot Images")), clicked => 
+								sub { ${$central_widget}->destroy(); make_nbi() }),
+						),
+						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							gtksignal_connect(new Gtk::Button(_("Add/Del Users")), clicked =>
+								sub {  ${$central_widget}->destroy(); $windows = 0; maintain_users() }),
+							gtksignal_connect(new Gtk::Button(_("Add/Del Clients")), clicked 	=>
+								sub { ${$central_widget}->destroy(); maintain_clients()}),
+						),     
+						1, new Gtk::HBox(0,2),
+						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
+								sub { ${$central_widget}->destroy(); help() }),
+							gtksignal_connect(new Gtk::Button(_("Close")), clicked => 
+								sub { write_conf_file();
+									$::isEmbedded and kill 'USR1', $::CCPID;
+									Gtk->main_quit() 
+								}
+							),
+						),
 					),
-			     ),
-		    ),
-	   );
+				),
+			),
+		),
+	);
     $central_widget = \$main_box;
     $window1->show_all;
     $window1->realize;
@@ -332,6 +398,7 @@ sub help {
 				host curly {
 					hardware ethernet        00:20:af:2f:f7:9d;
 					fixed-address              192.168.192.3;
+					#type                          fat;
 					filename                      \"i386/boot/boot-3c509.2.4.18-6mdk.nbi\";
 				}
 			
@@ -339,7 +406,14 @@ sub help {
 			a client machine, using a fixed address scheme facilitates using the functionality
 			of client-specific configuration files that ClusterNFS provides.
 			
-			Note: You must stop/start the server after adding or changing clients/
+			Note: The \"#type\" entry is only used by drakTermServ.  Clients can either be \"thin\"
+			or 'fat'.  Thin clients run most software on the server via xdmcp, while fat clients run most
+			software on the client machine. A special inittab, /etc/inittab\$\$IP=client_ip\$\$ is
+			written for thin clients. System config files xdm-config, kdmrc, and gdm.conf are modified
+			if thin clients are used, to enable xdmcp. Since there are security issues in using xdmcp,
+			hosts.deny and hosts.allow are modified to limit access to the local subnet.
+			
+			Note: You must stop/start the server after adding or changing clients.
 			
         - Maintain /etc/exports:
         		Clusternfs allows export of the root filesystem to diskless clients. drakTermServ
@@ -364,7 +438,7 @@ sub help {
         		files.
 
         - Per client system configuration files:
-        		Through clusternfs, each diskless client cand have it's own unique configuration files
+        		Through clusternfs, each diskless client can have it's own unique configuration files
         		on the root filesystem of the server. In the future, drakTermServ can help create files
         		such as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/keyboard on a per-client
         		basis.
@@ -669,6 +743,10 @@ sub maintain_clients {
 		$c_detail->append($c_det_ip);
 		$c_det_ip->show();
 		
+		my $c_det_type = new_with_label Gtk::TreeItem(_("type: %s", $clients{$key}{type}));
+		$c_detail->append($c_det_type);
+		$c_det_type->show();
+		
 		if ($clients{$key}{filename} ne '') {
 			my $c_det_nbi = new_with_label Gtk::TreeItem($clients{$key}{filename});
 			$c_detail->append($c_det_nbi);
@@ -702,10 +780,13 @@ sub maintain_clients {
 		make_nbi();
 		return 1;
 	}
+	
+	my $check_thin;
+	my $is_thin = 0;
 			 
 	gtkpack($status_box,
-		my $client_box = gtkpack_(new Gtk::VBox(1,10),
-			0, gtkadd(new Gtk::HBox(0,10),
+		$client_box = gtkpack_(new Gtk::VBox(1,10),
+			0, gtkadd(new Gtk::HBox(0,5),
 				gtkadd(new Gtk::VBox(0,5),
 					gtkadd($label_host), gtkadd($entry_host),
 					gtkadd($label_mac), gtkadd($entry_mac),
@@ -713,7 +794,12 @@ sub maintain_clients {
 					gtkadd($label_nbi), gtkadd($entry_nbi),
 				),
 				gtkadd(new Gtk::VBox(1,10),
-					new Gtk::HBox(1,1),
+					gtkadd(new Gtk::HBox(0,1),
+						gtksignal_connect($check_thin = new Gtk::CheckButton(_("Thin Client")), clicked =>
+							sub { invbool \$is_thin }),
+						$check_allow_thin = new Gtk::CheckButton(_("Allow Thin Clients")),
+					), 
+#					new Gtk::HBox(1,1),
 					gtksignal_connect(new Gtk::Button(_("Add Client -->")), clicked => 
 						sub { my $hostname = $entry_host->get_text();
 							my $mac = $entry_mac->get_text();
@@ -721,7 +807,7 @@ sub maintain_clients {
 							my $nbi = $entry_nbi->entry->get_text(); 
 							if ($hostname ne '' && $mac ne '' && $ip ne '') {
 	
-								my $result = addclient(0, $hostname, $mac, $ip, $nbi);
+								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
 								
 								if ($result eq 0) {
 									my $t_client = new_with_label Gtk::TreeItem($hostname);
@@ -738,12 +824,21 @@ sub maintain_clients {
 									my $c_det_ip = new_with_label Gtk::TreeItem($ip);
 									$c_detail->append($c_det_ip);
 									$c_det_ip->show();
-		
+									
+									my $client_type = "type: fat";
+									$client_type = "type: thin" if ($is_thin eq 1);
+									my $c_det_type = new_with_label Gtk::TreeItem($client_type);
+									$c_detail->append($c_det_type);
+									$c_det_type->show();
+									
 									if ($nbi ne '') {
 										my $c_det_nbi = new_with_label Gtk::TreeItem($nbi);
 										$c_detail->append($c_det_nbi);
 										$c_det_nbi->show();
 									}
+									
+									$check_thin->set_active(0);
+									$is_thin = 0;
 									$t_client->show();
 								}		
 							}
@@ -761,12 +856,19 @@ sub maintain_clients {
 						}),
 					gtksignal_connect(new Gtk::Button(_("dhcpd Config...")), clicked => 
 						sub { ${$central_widget}->destroy(); dhcpd_config() }),
-					new Gtk::HBox(1,1),
+#					new Gtk::HBox(1,1),
 				),
 				createScrolledWindow($tree_clients),
 			),),
 	);
-	
+
+	$check_allow_thin->set_active($thin_clients);
+	$check_thin->set_sensitive($thin_clients);
+	gtksignal_connect($check_allow_thin, clicked => 
+		sub { invbool \$thin_clients;
+			$check_thin->set_sensitive($thin_clients);
+		}
+	);
 	$central_widget = \$client_box;
 	$client_box->show_all();
 }
@@ -891,7 +993,7 @@ sub dhcpd_config {
 			0, gtkadd(new Gtk::VBox(0,0),
 				new Gtk::Label(_("dhcpd Server Configuration")."\n\n".
 					_("Most of these values were extracted\nfrom your running system.\nYou can modify as needed.")),
-				
+				new Gtk::HSeparator,
 				gtkadd((new Gtk::HBox),
 					new Gtk::Label(_("Dynamic IP Address Pool:")),
 				),
@@ -957,8 +1059,15 @@ sub get_subnet_from_sys {
 sub get_broadcast_from_sys {
 	my @ifconfig = grep(/inet/, `/sbin/ifconfig eth0`);
 	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
-	
+		
 	$ifvalues[5];
+}
+
+sub get_ip_from_sys {
+	my @ifconfig = grep(/inet/, `/sbin/ifconfig eth0`);
+	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
+		
+	$ifvalues[3];
 }
 
 sub write_dhcpd_config {
@@ -1258,7 +1367,7 @@ sub deluser {
 
 sub addclient {
 	#- add a new client entry after checking for dups
-	my ($cmd_line, $hostname, $mac, $ip, $nbi) = @_;
+	my ($cmd_line, $hostname, $mac, $ip, $nbi, $is_thin) = @_;
 
 	my $host_in_use = 0;
 	my $mac_in_use = 0;
@@ -1285,8 +1394,13 @@ sub addclient {
 	if (!$host_in_use && !$mac_in_use && !$ip_in_use) {
 		$ts_clients{$hostname}{hardware} = $mac;
 		$ts_clients{$hostname}{address} = $ip;
+		if ($is_thin eq 1) {
+			$ts_clients{$hostname}{type} = "thin";
+		} else {
+			$ts_clients{$hostname}{type} = "fat";
+		}
 		$ts_clients{$hostname}{filename} = $nbi;
-
+			
 		my $clients = "/etc/dhcpd.conf.etherboot.clients";
 		open(CLIENT, ">> $clients") || warn ("Can't open $clients!");
 		my $client_entry = format_client_entry($hostname, %ts_clients);
@@ -1326,8 +1440,10 @@ sub format_client_entry {
 	my $entry = "host $client {\n";
 	$entry .= "\thardware ethernet\t$ts_clients{$client}{hardware};\n";
 	$entry .= "\tfixed-address\t\t$ts_clients{$client}{address};\n";
+	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if ($ts_clients{$client}{type} ne '');
 	$entry .= "\tfilename\t\t\"$ts_clients{$client}{filename}\";\n" if ($ts_clients{$client}{filename} ne '');
 	$entry .= "}\n";
+	write_thin_inittab($ts_clients{$client}{address}) if ($ts_clients{$client}{type} eq "thin"); 
 	$entry
 }
 
@@ -1360,6 +1476,7 @@ sub read_dhcpd_conf {
 				$hostname = $val;
 			} else {
 				$name = "address" if ($name =~ /fixed-address/);
+				$name = "type" if ($name =~ /#type/);
 				$ts_clients{$hostname}{$name} = $val;
 			}
 		}	
