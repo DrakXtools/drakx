@@ -5,9 +5,7 @@
 *** non needed stuff to run X must be posponed after X11 startup
 **** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
 *** enable the user to force a module (isa, isapnp, ...)
-*** pci freeze (fseek ?) [should be fixed]
-*** 2detect/look 4
-**** isapnp devices
+*** pci freeze (fseek ?)
 *** print "NOT LOADED" if module isn't loaded
 
 ** draksound
@@ -16,6 +14,7 @@
 *** add 'ALSA/OSS': tag to modules list
 
 * Postponed
+*** detect isapnp devices
 ** more use of my_gtk/ugtk
 ** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
 *** fpons, convert perl-GTK to gtk+2 :-)
