@@ -18,7 +18,7 @@ use log;
 if (arch() =~ /ppc/) {
     @important_types = ('Linux native', 'Linux swap', 'Apple HFS Partition', 'Apple Bootstrap');
 } else {
-    @important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'ReiserFS', 'JFS', 'ext3', 'DOS FAT16', 'Win98 FAT32'));
+    @important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: ext3', 'DOS FAT16', 'Win98 FAT32'));
 }
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
@@ -33,10 +33,10 @@ arch() =~ /^ppc/ ? (
   0x401	=> 'Apple Bootstrap',
   0x402	=> 'Apple HFS Partition',
 ) : arch() =~ /^i.86/ ? (
-  0x183 => 'ReiserFS',
-  0x283 => 'XFS',
-  0x383 => 'JFS',
-  0x483 => 'ext3',
+  0x183 => 'Journalised FS: ReiserFS',
+  0x283 => 'Journalised FS: XFS',
+  0x383 => 'Journalised FS: JFS',
+  0x483 => 'Journalised FS: ext3',
 ) : arch() =~ /^sparc/ ? (
   0x1 => 'SunOS boot',
   0x2 => 'SunOS root',
