@@ -76,17 +76,16 @@ sub per_entry_action_box {
 	 if_($entry->{mntpoint} && !$entry->{isMounted}, N_("Mount"))) if $entry;
 
     my @l = (
-             if_([ $entry, N_("Mount point") => \&raw_hd_mount_point ]),
-             if_([ $entry && $entry->{mntpoint}, N_("Options") => \&raw_hd_options ]),
-             [ N_("Cancel") => sub {} ],
-             [ "" ],
-             [ N_("Done") => \&done ],
-            );
+	     if_($entry, N_("Mount point") => \&raw_hd_mount_point),
+	     if_($entry && $entry->{mntpoint}, N_("Options") => \&raw_hd_options),
+	     N_("Cancel") => sub {},
+	     N_("Done") => \&done,
+	    );
     push @buttons, map {
         my ($txt, $f) = @$_;
         $f ? gtksignal_connect(Gtk2::Button->new(translate($txt)), clicked => sub { try_($kind, $txt, $f, $entry) })
           : Gtk2::Label->new("");
-    } @l;
+    } group_by2(@l);
     
     gtkadd($box, gtkpack(Gtk2::HBox->new(0,0), @buttons));
 }
