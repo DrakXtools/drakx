@@ -477,7 +477,7 @@ sub create_okcancel {
 
 sub _setup_paned {
     my ($paned, $child1, $child2, %options) = @_;
-    foreach (['resize1', 0 ], [ 'shrink1', 1], [ 'resize2', 1 ], [ 'shrink2', 1 ]) {
+    foreach ([ 'resize1', 0 ], [ 'shrink1', 1 ], [ 'resize2', 1 ], [ 'shrink2', 1 ]) {
         $options{$_->[0]} = $_->[1] unless defined($options{$_->[0]});
     }
     $paned->pack1(gtkshow($child1), $options{resize1}, $options{shrink1});
