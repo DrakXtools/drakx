@@ -576,6 +576,11 @@ sub autoDefaultDepth($$) {
 sub autoDefaultResolution {
     return "1024x768" if detect_devices::hasPCMCIA;
 
+	if (arch() =~ /ppc/) {
+		my $mac_model = detect_devices::get_mac_model();
+		return "1024x768" if $mac_model =~ /PowerBook1,1/; #- 800x600 not a pretty site on Powerbook
+	}
+	
     my ($size) = @_;
     $monitorSize2resolution[round($size || 14)] || #- assume a small monitor (size is in inch)
       $monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
