@@ -17,13 +17,9 @@ my %modules_only_for_all_img = (
   'network/main' => [
     qw(olympic acenic),
     qw(aironet4500_card com20020-pci hamachi starfire winbond-840),
-    qw(fealnx 3c990 3c990fx prism2_plx dgrs),
 
     # token ring
     qw(tmspci ibmtr abyss),
-
-    qw(3c501 3c503 3c505 3c507 3c515), # unused, hopefully?
-    qw(eepro 82596 de620 depca ewrk3 cs89x0),
 
     if_(arch() =~ /x86_64/, qw(orinoco_plx)), # don't support laptop for now
     if_(arch() =~ /x86_64/, qw(hp100 epic100)), # old (nico)
@@ -105,6 +101,8 @@ my @modules_removed_from_stage1 = flatten_and_check(\%modules_removed_from_stage
 my %images = (
     pcmcia  => 'fs/cdrom disk/cdrom|raw|pcmcia bus/pcmcia',
     cdrom   => 'fs/cdrom disk/cdrom|raw|scsi',
+    network  => 'bus/usb|pcmcia fs/network',
+    network_drivers => 'network/main|pcmcia|usb|raw|gigabit',
     all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit bus/firewire disk/firewire',
 );
 
@@ -115,7 +113,7 @@ pci_modules4stage1($1) if "@ARGV" =~ /pci_modules4stage1:(.*)/;
 
 sub images {
     while (my ($image, $l) = each %images) {
-	my @modules = @modules_always_on_stage1;
+	my @modules = if_($image !~ /drivers/, @modules_always_on_stage1);
 	foreach (split(' ', $l)) { 
 	    push @modules, category2modules($_);
 	}
