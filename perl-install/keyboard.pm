@@ -165,7 +165,7 @@ arch() eq "ppc" ? (
 #-"ar_d" => [ __("Arabic (QWERTY, arabic digits)"),"ar-8859_6","ar(digits)" ],
  "az" => [ __("Azerbaidjani (latin)"), "az",	"az" ],
 #"a3" => [ __("Azerbaidjani (cyrillic)"), "az-koi8k","az(cyrillic)" ],
- "be" => [ __("Belgian"),        "be-latin1",   "be" ],
+ "be" => [ __("Belgian"),        "be2-latin1",   "be" ],
  "bg" => [ __("Bulgarian"),      "bg",          "bg" ],
  "br" => [ __("Brazilian (ABNT-2)"),      "br-abnt2",    "br" ],
  "by" => [ __("Belarusian"),      "by-cp1251",  "by" ],
