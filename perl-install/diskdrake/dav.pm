@@ -82,13 +82,15 @@ sub ask_server {
     my ($in, $dav, $_all_hds) = @_;
 
     my $server = $dav->{device};
-    $in->ask_from('', N("Please enter the WebDAV server URL"),
-		  [ { val => \$server } ],
-		  complete => sub {
-		      $server =~ m!https?://! or $in->ask_warn('', N("The URL must begin with http:// or https://")), return 1;
-		      0;
-		  },
-		 ) or return;
+    $in->ask_from_({ messages => N("Please enter the WebDAV server URL"),
+		     focus_first => 1,
+		     callbacks => {
+		         complete => sub {
+			     $server =~ m!https?://! or $in->ask_warn('', N("The URL must begin with http:// or https://")), return 1;
+			     0;
+			 },
+		     } },
+		  [ { val => \$server } ]) or return;
     $dav->{device} = $server;
 }
 
