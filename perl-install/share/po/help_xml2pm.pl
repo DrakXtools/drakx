@@ -159,9 +159,10 @@ sub rewrite2_ {
 	"\n$text\n";
 
     } elsif (member($tree->{tag},  
-                    'emphasis', 'acronym', 'ulink', 'tip', 'note',
-		    'primary', 'indexterm', 'application', 'keycombo', 
-		    'superscript', 'xref',
+		    'acronym', 'application', 'emphasis', 'indexterm', 
+		    'keycombo', 'note', 'primary', 
+		    'superscript', 'systemitem', 
+		    'tip', 'ulink', 'xref' 
 		   )) {
 	# ignored tags
 	$text;
