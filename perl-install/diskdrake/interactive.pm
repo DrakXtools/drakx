@@ -353,6 +353,12 @@ sub Auto_allocate {
 sub More {
     my ($in, $hd) = @_;
 
+    my %automounting = (
+	0 => N("No supermount"), 
+	1 => N("Supermount"),
+	magicdev => N("Supermount except for CDROM drives"),
+    );
+
     my $r;
     $in->ask_from('', '',
 	    [
@@ -361,8 +367,10 @@ sub More {
 	     { val => N("Rescue partition table"),  clicked_may_quit => sub { Rescuept($in, $hd);     1 } },
 	         if_($::isInstall, 
 	     { val => N("Reload partition table"), clicked_may_quit => sub { $r = 'force_reload'; 1 } }),
-	         if_($::isInstall, 
-	     { text => N("Removable media automounting"), val => \$::o->{useSupermount}, type => 'bool' },
+	         if_($::isInstall || 1, 
+	     { label => N("Removable media automounting"), val => \$::o->{useSupermount}, 
+	       format => sub { $automounting{$_[0]} }, 
+	       list => [ 0, 'magicdev', 1 ], advanced => 1 },
 		 ),
 	    ],
     ) && $r;
