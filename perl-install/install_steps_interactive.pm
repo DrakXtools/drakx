@@ -652,7 +652,7 @@ sub chooseGroups {
     log::l("compssUsersChoice: " . (!$val{$_} && "not ") . "selected [$_] as [$o->{compssUsers}{$_}{label}]") foreach keys %val;
 
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
-    unless (grep { $val{$_} } keys %val) {
+    unless ($o->{isUpgrade} || grep { $val{$_} } keys %val) {
 	my $type;
 
 	#- search for what is currently selected.
@@ -671,7 +671,7 @@ Please choose the minimal installation you want"), [ __("Base system only"), __(
 	    $o->{default_packages} = [];
 	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
 	} else {
-	    install_any::setDefaultPackages($o);
+	    install_any::setDefaultPackages($o, 'clean');
 	    $o->{compssUsersChoice}{X} = $type eq __('With X');
 	}
 	install_any::unselectMostPackages($o);
