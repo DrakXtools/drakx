@@ -1,3 +1,99 @@
+2001/04/05  dam's  <damien@mandrakesoft.com>
+
+	* ChangeLog, bootloader.pm: readded passwd. Must verify that it's secure
+	vs msec.
+
+	* my_gtk.pm: added gtksize
+
+2001/04/05  fcrozat
+
+	* share/rpmsrate: No longer propose nautilus-mozilla (required by
+	nautilus)
+	propose nautilus-trilobite (for Eazel services)
+
+2001/04/05  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (choosePackagesTree): invert the meaning of 'Show
+	automatically selected
+	packages' to go along with the new description
+
+	* commands.pm, install_steps_interactive.pm, install_any.pm: 
+	  - move report_bug in install_any
+	  - g_auto_install generates the auto_inst.cfg string without output'ing
+	it
+
+	* fs.pm (format_reiserfs): quietly format reiserfs
+
+	* Xconfigurator.pm (write_XF86Config): try to have $_ interpreted
+	(otherwise you get things like ``InputDevice "Stylus$_" "AlwaysCore"'')
+
+	* share/rpmsrate: 
+	  - add ldetect
+	  - the default Aurora chose is the categorizing one
+
+	* install_steps.pm (configureXBefore): fix the xkb verification (was
+	broken for things like ``de(nodeadkeys)'')
+	  - move report_bug in install_any
+	  - g_auto_install generates the auto_inst.cfg string without output'ing
+	it
+
+2001/04/05  siegel
+
+	* share/po/de.po: fixed typo
+
+2001/04/05  yduret
+
+	* bootlook.pm: fix pablo mess
+	install autolgin just if we want to autolog :)
+
+2001/04/04  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/rpmsrate: added SCANNER and PHOTO groups
+
+2001/04/04  François Pons  <fpons@mandrakesoft.com>
+
+	* printerdrake.pm: make sure to insmod parport_probe alone as it is not
+	available in 2.4 kernel and
+	this this not a problem (silent error).
+	added complete callback to check queue name under cups does contains
+	only letters, numerics or underscore.
+
+	* install_steps_interactive.pm: fixed printer description in summary.
+
+	* install2.pm: added selectPackagesToUpgrade the first time choosePackages
+	is called.
+
+	* Xconfigurator.pm: removed limitation to 24 bits for SiS card, make sure
+	to remove 32 bits depth
+	for such card.
+
+	* detect_devices.pm: fixed parport probe for printer under 2.4 kernel.
+
+	* diskdrake.pm: fixed adding 1 to size for resize2fs, causing a corruption
+	some times.
+
+	* printer.pm: added die on error of lpadmin.
+
+	* install_any.pm: fixed multiple wait message (looking+finding packages)
+
+2001/04/04  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sk.po, share/po/az.po: Updated Azeri and Slovak files
+
+2001/04/04  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (tv): add ultracam & usbvideo
+	(@skip_modules_on_stage1): kaweth and pegasus doesn't work on stage1, so
+	skip them
+	(@skip_modules_on_stage1): kaweth and pegasus doesn't work on stage1, so
+	skip them
+
+	* install_any.pm (kernelVersion): cleanup
+
+2001/04/04  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_any.pm: kernelVersion mods for PPC
+
 2001/04/04  daouda
 
 	* share/rpmsrate: add gatos for ati tv card .
