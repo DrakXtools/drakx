@@ -86,7 +86,7 @@ begin:
 #- **********************************
 #- * 0th step: verify if we are already set up
 
-if ($shorewall && -f "/etc/shorewall/tunnels") {
+if (0 && $shorewall && -f "/etc/shorewall/tunnels") {
     $::Wizard_no_previous = 1;
 
     if (!$shorewall->{disabled}) { 
@@ -148,7 +148,7 @@ What would you like to do ?"),
 #- * 1st step: detect/setup
 step_ask_confirm:
 
-undef $::Wizard_no_previous;
+$::Wizard_no_previous = 1;
     
 $direct or $in->ask_okcancel(N("Simple VPN setup."),
 N("You are about to configure your computer to use a VPN connection.
@@ -162,6 +162,8 @@ computers look as if they were on the same network.
 
 Make sure you have configured your Network/Internet access using
 drakconnect before going any further."), 1) or goto begin;
+
+undef $::Wizard_no_previous;
 
 if ($kernel_version < 2.5) {
 	system("/sbin/modprobe ipsec") if -e "/sbin/modprobe";
