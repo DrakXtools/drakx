@@ -14,16 +14,21 @@ my %options = (
 
 	       'vmlinuz=s' => \ (my $vmlinuz), 
 	       'initrd-options=s' => \ (my $initrd_options),
-	       'no-link' => \ (my $nolink),
+
+	       'no-short-name' => \ (my $no_short_name),
 	       'no-entry' => \ (my $no_entry),
 	       'no-launch' => \ (my $no_launch),
 	       'no-initrd' => \ (my $no_initrd),	       
+
+	       'no-link' => \ (my $nolink),
 	      );
 
 GetOptions(%options) or die "usage: Releve " . join(' ', map { "[--$_]" } keys %options) . "\n";
 
 my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash detectloader);
 $action && member($action, @known_actions) or die "<action> must be one of " . join(' ', @known_actions) . "\n";
+
+$no_short_name ||= $nolink;
 
 if ($vmlinuz) {
     if (my $ver = bootloader::vmlinuz2version($vmlinuz)) {
@@ -85,13 +90,15 @@ sub add_kernel() {
     bootloader::create_link_source();
 
     my $kernel_str = bootloader::vmlinuz2kernel_str($vmlinuz);
+    $kernel_str->{use_long_name} = $no_short_name;
+
     my $root_part = fsedit::get_root([ fsedit::get_fstab(@$hds) ]);
     bootloader::add_kernel($bootloader, $kernel_str, 
 			   { 
 			    root => "/dev/$root_part->{device}", 
 			    initrd_options => $initrd_options,
 			    if_($bootloader->{default_vga}, vga => $bootloader->{default_vga}),
-			   }, $nolink, $no_initrd);
+			   }, $no_short_name, $no_initrd);
 
     modify_bootloader();
 }
