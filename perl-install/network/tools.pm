@@ -38,7 +38,7 @@ sub read_secret_backend {
     foreach my $i ("pap-secrets", "chap-secrets") {
 	foreach (cat_("$prefix/etc/ppp/$i")) {
 	    my ($login, $server, $passwd) = split(' ');
-	    ($a, $b, $c) = $passwd =~ /"(.*)"|'(.*)'|(.*)/;
+	    my ($a, $b, $c) = $passwd =~ /"(.*)"|'(.*)'|(.*)/;
 	    $passwd = $a ? $a : $b ? $b : $c;
 	    push @$conf, {login => $login,
 			  passwd => $passwd,
