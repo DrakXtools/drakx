@@ -108,7 +108,7 @@ BEGIN {
               'oblin' => 'Olivier Blin <oblin at mandrakesoft.com>',
               'othauvin' => 'Olivier Thauvin  <thauvin at aerov.jussieu.fr>',
               'pablo'   => 'Pablo Saratxaga  <pablo at mandrakesoft.com>',
-              'peroyvind' => 'Per Øyvind Karlsen <peroyvind at linux-mandrake.com>'
+              'peroyvind' => 'Per Øyvind Karlsen <peroyvind at linux-mandrake.com>',
               'phetroy'  => 'Philippe Libat',
               'philippe'  => 'Philippe Libat',
               'prigaux' => 'Pixel  <pixel at mandrakesoft.com>',
