@@ -287,6 +287,9 @@ sub setPackages($) {
 	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
+	#- some program that may be crazy on some conditions (hack waiting for Aurora to work if no fb).
+	$o->{allowFB} or push @pkgs::skip_list, 'Aurora';
+
 	#- must be done after selecting base packages (to save memory)
 	pkgs::getProvides($o->{packages});
 
@@ -374,7 +377,7 @@ sub setupFB {
     my ($o, $vga) = @_;
 
     #- install needed packages for frame buffer.
-    $o->pkg_install(qw(kernel-fb XFree86-FBDev));
+    $o->pkg_install('kernel-fb');
 
     $vga ||= 785; #- assume at least 640x480x16.
 

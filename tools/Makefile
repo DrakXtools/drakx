@@ -7,7 +7,7 @@ CFLAGS      = -Wall
 
 .PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist $(BASE)/filelist $(BASE)/compss $(DIRS) xhost+ install
+all: $(BASE)/depslist.ordered $(BASE)/filelist $(BASE)/compss $(DIRS) xhost+ install
 
 $(DIRS):
 	make -C $@

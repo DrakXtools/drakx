@@ -190,8 +190,8 @@ sub dev2prompath { #- SPARC only
     $dev;
 }
 
-sub suggest($$$$$) {
-    my ($prefix, $lilo, $hds, $fstab, $kernelVersion) = @_;
+sub suggest($$$$$;$) {
+    my ($prefix, $lilo, $hds, $fstab, $kernelVersion, $vga_fb) = @_;
     my $root_part = fsedit::get_root($fstab);
     my $root = isLoopback($root_part) ? "loop7" : $root_part->{device};
     my $boot = fsedit::get_root($fstab, 'boot')->{device};
@@ -264,6 +264,16 @@ wait %d seconds for default boot.
 		label => 'failsafe',
 		root  => "/dev/$root",
 	       })->{append} .= " failsafe" unless $lilo->{password};
+
+    if (-e "$prefix/boot/vmlinuz-${kernelVersion}fb") {
+	add_kernel($prefix, $lilo, $kernelVersion, 'fb',
+		  {
+		   label => 'linux-fb',
+		   root  => "/dev/$root",
+		   $vga_fb ? ( vga => $vga_fb) : (), #- specific mode for kernel-fb.
+		  });
+	$vga_fb and $lilo->{default} = 'linux-fb'; #- make it by default.
+    }
 
     #- manage hackkernel if installed.
     my $hasHack = -e "$prefix/boot/vmlinuz-hack";
