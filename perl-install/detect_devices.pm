@@ -172,7 +172,7 @@ sub getSCSI() {
     $first =~ /^Attached devices:/ or $err->($first);
 
     @l = map_index {
-	my ($host, $channel, $id, $lun) = /^Host: scsi(\d+) Channel: (\d+) Id: (\d+) Lun: (\d+)/ or $err->($_);
+	my ($host, $channel, $id, $lun) = m/^Host: scsi(\d+) Channel: (\d+) Id: (\d+) Lun: (\d+)/ or $err->($_);
 	my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/m or $err->($_);
 	my ($type) = /^\s*Type:\s*(.*)/m or $err->($_);
 	{ info => "$vendor $model", channel => $channel, id => $id, lun => $lun, 
