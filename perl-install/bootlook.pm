@@ -44,30 +44,21 @@ my $auto_mode = any::get_autologin();
 my $inmain = 0;
 my $lilogrub = chomp_(`detectloader -q`);
 
-my $window = $::isEmbedded ? new Gtk2::Plug($::XID) : new Gtk2::Window("toplevel");
+my $w = ugtk2->new();
+my $window = $w->{window};
 $window->signal_connect(delete_event => sub { utk2->exit(0) });
-$window->set_title(N("Boot Style Configuration"));
-$window->set_border_width(2);
-#$window->realize;
+unless ($::isEmbedded) {
+    $w->{rwindow}->set_title(N("Boot Style Configuration"));
+    $window->set_border_width(2);
 
-# drakX mode
-#my ($t_pixmap, $t_mask) = gtkcreate_img("tradi.png");
-#my ($h_pixmap, $h_mask) = gtkcreate_img("hori.png");
-#my ($v_pixmap, $v_mask) = gtkcreate_img("verti.png");
-#my ($g_pixmap, $g_mask) = gtkcreate_img("gmon.png");
-#my ($c_pixmap, $c_mask) = gtkcreate_img("categ.png");
-
-# a pixmap widget to contain the pixmap
-#my $pixmap = new Gtk2::Pixmap($h_pixmap, $h_mask);
-
-### menus definition
-# the menus are not shown
-# but they provides shiny shortcut like C-q
-my @menu_items = ({ path => N("/_File"), type => '<Branch>' },
-		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { ugtk2->exit(0) } },
-		 );
-my $menubar = create_factory_menu($window, @menu_items);
-######### menus end
+    ### menus definition
+    # the menus are not shown but they provides shiny shortcut like C-q
+    my @menu_items = ({ path => N("/_File"), type => '<Branch>' },
+                      { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { ugtk2->exit(0) } },
+                      );
+    my $menubar = create_factory_menu($w->{rwindow}, @menu_items);
+    ######### menus end
+}
 
 my $user_combo = new Gtk2::Combo;
 $user_combo->set_popdown_strings(@usernames);
@@ -348,7 +339,7 @@ $window->show_all();
 $no_bootsplash and $thm_frame->hide();
 gtkflush();
 $inmain = 1;
-Gtk2->main;
+$w->main;
 Gtk2->exit(0);
 
 #-------------------------------------------------------------
