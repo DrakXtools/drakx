@@ -28,7 +28,7 @@ fi
 
 $SUDO rm -rf $STAGE2TMP
 install -d $STAGE2TMP
-$SUDO cp -a $DEST/* $STAGE2TMP
+$SUDO cp -a $DEST/* $STAGE2TMP || exit 1
 
 #mkdir -p $MNTPOINT 2>/dev/null
 #for i in $MNTPOINT $STAGE2; do $SUDO umount $i 2>/dev/null ; done
