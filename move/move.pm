@@ -104,13 +104,16 @@ sub init {
 
     modules::load_category('multimedia/sound');
 
+    modules::load_category('bus/usb'); 
+    install_steps::setupSCSI($o);
+    handleMoveKey($o);
+
 drakx_stuff:
-    $o->{steps}{handleMoveKey} = { reachable => 1, text => "Handle Move Key" };
     $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
     $o->{steps}{verifyKey} = { reachable => 1, text => "Verify Key" };
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ qw(setupSCSI handleMoveKey selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard startMove) ];
+    $o->{orderedSteps} = [ qw(selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
@@ -191,9 +194,8 @@ sub keys_parts {
     } fsedit::get_fstab(@keys);
 }
     
-sub install2::handleMoveKey {
-    my ($o_reread) = @_;
-    my $o = $::o;
+sub handleMoveKey {
+    my ($o, $o_reread) = @_;
 
     if ($o_reread) {
         $o->{all_hds} = fsedit::empty_all_hds();
@@ -230,7 +232,7 @@ Operating System.")),
                             ok => N("Detect again USB key"),
                             cancel => N("Continue without USB key") }) or return;
 
-        install2::handleMoveKey('reread');
+        handleMoveKey($o, 'reread');
     }
 
     local *F;
@@ -248,7 +250,7 @@ unplug it, remove write protection, and then plug it again.")),
 
         modules::load('usb-storage');
         sleep 2;
-        install2::handleMoveKey('reread');
+        handleMoveKey($o, 'reread');
     }
     close F;
     unlink '/home/.touched';
