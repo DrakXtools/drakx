@@ -18,6 +18,7 @@ sk98lin acenic
 3c90x
 ns83820
 aironet4500_card aironet4500_core com20020-pci hamachi starfire winbond-840
+fealnx
 
 dc395x_trm
 BusLogic seagate fdomain g_NCR5380
