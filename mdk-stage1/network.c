@@ -830,7 +830,9 @@ static enum return_type intf_select_and_up(char **http_proxy_host, char **http_p
 
 	if (results == RETURN_OK) {
 		if (http_proxy_host && http_proxy_port) {
-			intf_get_http_proxy(sel_intf);
+			results = intf_get_http_proxy(sel_intf);
+			if (results != RETURN_OK)
+				return results;
 			*http_proxy_host = sel_intf->http_proxy_host;
 			*http_proxy_port = sel_intf->http_proxy_port;
 		}
