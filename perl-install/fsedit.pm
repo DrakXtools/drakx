@@ -41,9 +41,6 @@ my @partitions_signatures = (
 
 sub typeOfPart($) { typeFromMagic(devices::make($_[0]), @partitions_signatures) }
 
-
-sub typeOfPart_($) { typeFromMagic($_[0], @partitions_signatures) }
-
 #-######################################################################################
 #- Functions
 #-######################################################################################
