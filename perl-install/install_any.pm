@@ -329,8 +329,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
-    # BUG: if first snd card is managed by OSS and the second one by alsa, we do not install alsa-utils:
-    push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-/;
+    push @{$o->{default_packages}}, "alsa", "alsa-utils" if find { modules::get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
     push @{$o->{default_packages}}, "grub" if isLoopback(fsedit::get_root($o->{fstab}));
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fsedit::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
