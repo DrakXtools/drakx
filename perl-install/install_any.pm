@@ -1510,55 +1510,6 @@ sub write_fstab {
     fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$o->{isUpgrade} || $o->{migrate_device_names};
 }
 
-my @bigseldom_used_groups = (
-);
-
-sub check_prog {
-    my ($f) = @_;
-
-    return if $f =~ m|^/| ? -x $f : whereis_binary($f);
-
-    common::usingRamdisk() or log::l("ERROR: check_prog can't find the program $f and we're not using ramdisk"), return;
-
-    my ($f_) = map { m|^/| ? $_ : "/usr/bin/$_" } $f;
-    remove_bigseldom_used();
-    foreach (@bigseldom_used_groups) {
-	my (@l) = map { m|^/| ? $_ : "/usr/bin/$_" } @$_;
-	if (member($f_, @l)) {
-	    foreach (@l) {
-		getAndSaveFile($_);
-		chmod 0755, $_;
-	    }
-	    return;
-	}
-    }
-    getAndSaveFile($f_);
-    chmod 0755, $f_;
-}
-
-sub remove_unused {
-    $::testing and return;
-    if (@_ ? $_[0] : $::o->isa('interactive::gtk')) {
-	unlink glob_("/lib/lib$_*") foreach qw(slang newt);
-	unlink "/usr/bin/perl-install/auto/Newt/Newt.so";
-    } else {
-	unlink glob_("/usr/X11R6/bin/XF*");
-    }
-}
-
-sub remove_bigseldom_used() {
-    log::l("remove_bigseldom_used");
-    $::testing and return;
-    remove_unused();
-    unlink "/usr/X11R6/lib/modules/xf86Wacom.so";
-    unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(marble3d);
-    unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
-      (map { @$_ } @bigseldom_used_groups),
-      qw(lvm2),
-      qw(mkreiserfs resize_reiserfs mkfs.xfs fsck.jfs);
-}
-
-
 #-###############################################################################
 #- pcmcia various
 #-###############################################################################

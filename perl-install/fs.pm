@@ -216,7 +216,7 @@ sub merge_info_from_mtab {
 	    $_->{real_mntpoint} = delete $_->{mntpoint};
 	    if ($_->{real_mntpoint} eq '/tmp/hdimage') {
 		log::l("found hdimage on $_->{device}");
-		$_->{mntpoint} = common::usingRamdisk() && "/mnt/hd"; #- remap for hd install.
+		$_->{mntpoint} = "/mnt/hd"; #- remap for hd install.
 	    }
 	}
 	$_->{isMounted} = 1;

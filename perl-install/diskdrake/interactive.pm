@@ -419,7 +419,7 @@ sub part_possible_actions {
     $part or return;
 
     my %actions = my @l = (
-        N_("Mount point")      => '($part->{real_mntpoint} && common::usingRamdisk()) || (!isBusy && !isSwap && !isNonMountable)',
+        N_("Mount point")      => '$part->{real_mntpoint} || (!isBusy && !isSwap && !isNonMountable)',
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '$::expert',
         N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && $part->{fs_type} eq "xfs"',

@@ -146,8 +146,6 @@ sub formatTime {
     }
 }
 
-sub usingRamdisk() { any { /ram3/ } cat_("/proc/mounts") }
-
 sub expand_symlinks_but_simple {
     my ($f) = @_;
     my $link = readlink($f);

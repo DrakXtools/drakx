@@ -52,10 +52,6 @@ sub raw {
     return 1 if $root && $<;
 
     $root ? ($root .= '/') : ($root = '');
-    if (!$root && !$::isStandalone) {
-	require install_any;
-	install_any::check_prog($real_name) if $real_name !~ /\|/;
-    }
     
     $ENV{HOME} || $::isInstall or $ENV{HOME} = '/root';
     my $tmpdir = sub {

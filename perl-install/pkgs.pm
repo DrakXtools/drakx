@@ -498,13 +498,6 @@ sub psUsingHdlist {
     #- integrate medium in media list, only here to avoid download error (update) to be propagated.
     $packages->{mediums}{$medium_name} = $m;
 
-    #- avoid using more than one medium if Cd is not ejectable.
-    #- but keep all medium here so that urpmi has the whole set.
-    $m->{ignored} ||= (
-	install_any::method_allows_medium_change($method) && $medium_name > 1    #- first cdrom
-	&& $medium_name !~ /^\d+s/			#- not a suppl. CD
-	&& !common::usingRamdisk());
-
     #- parse synthesis (if available) of directly hdlist (with packing).
     if ($m->{ignored}) {
 	log::l("ignoring packages in $hdlist");

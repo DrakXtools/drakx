@@ -549,22 +549,6 @@ sub main {
     #- need to be after oo-izing $o
     if ($o->{brltty}) {
 	symlink "/tmp/stage2/$_", $_ foreach "/etc/brltty";
-	if (common::usingRamdisk()) {
-	    install_any::remove_unused(0);
-	    mkdir '/tmp/stage2/etc/brltty';
-	    mkdir '/lib/brltty';
-	    foreach ($o->{brltty}{table}, "brltty-$o->{brltty}{driver}.hlp") {
-		install_any::getAndSaveFile("/etc/brltty/$_") if $_;
-	    }
-	    install_any::getAndSaveFile("/lib/brltty/libbrlttyb$o->{brltty}{driver}.so") or do {
-		local $| = 1;
-		print("Braille driver $o->{brltty}{driver} for BRLTTY was not found.\n",
-		      "Press ENTER to continue.\n\a");
-		<STDIN>;
-	    };
-	    install_any::getAndSaveFile("/usr/bin/brltty");
-	    chmod 0755, "/usr/bin/brltty";
-	}
 	eval { modules::load("serial") };
 	devices::make($_) foreach $o->{brltty}{device} ? $o->{brltty}{device} : qw(ttyS0 ttyS1);
 	devices::make("vcsa");
@@ -627,8 +611,6 @@ sub main {
 	require install_steps_newt;
     }
     $::o = $o = $o_;
-
-    install_any::remove_unused() if common::usingRamdisk();
 
     #-the main cycle
     my $clicked = 0;

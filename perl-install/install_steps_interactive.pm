@@ -275,7 +275,7 @@ sub ask_mntpoint_s { #- }{}
 			      not_edit => 0,
 			      list => [ '', fsedit::suggestions_mntpoint(fs::get::empty_all_hds()) ],
 			  };
-		        } grep { !$_->{real_mntpoint} || common::usingRamdisk() } @fstab ]) or return;
+		        } @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
 }
@@ -670,16 +670,6 @@ sub chooseCD {
     my @mediums = grep { $_ != $install_any::boot_medium } pkgs::allMediums($packages);
     my @mediumsDescr;
     my %mediumsDescr;
-
-    if (!common::usingRamdisk()) {
-	#- mono-cd in case of no ramdisk
-	foreach (@mediums) {
-	    pkgs::mediumDescr($packages, $install_any::boot_medium) eq pkgs::mediumDescr($packages, $_) and next;
-	    undef $packages->{mediums}{$_}{selected};
-	}
-	log::l("low memory install, using single CD installation (as it is not ejectable)");
-	return;
-    }
 
     #- the boot medium is already selected.
     $mediumsDescr{pkgs::mediumDescr($packages, $install_any::boot_medium)} = 1;
