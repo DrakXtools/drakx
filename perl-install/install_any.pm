@@ -912,8 +912,13 @@ sub generate_automatic_stage1_params {
 	    push @ks, "dns:$dnss[0]" if @dnss;
 	}
     }
+
+    #- sync it with ../mdk-stage1/automatic.c
+    my %aliases = (method => 'met', network => 'netw', interface => 'int', gateway => 'gat', netmask => 'netm',
+		   adsluser => 'adslu', adslpass => 'adslp', hostname => 'hos', domain => 'dom', server => 'ser',
+		   directory => 'dir', user => 'use', pass => 'pas', disk => 'dis', partition => 'par');
     
-    "automatic=".join(',', @ks);
+    'automatic='.join(',', map { (/^([^:]+)(:.*)/ && $aliases{$1}) ? $aliases{$1}.$2 : $_ } @ks);
 }
 
 sub guess_mount_point {
