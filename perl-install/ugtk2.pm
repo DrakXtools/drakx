@@ -1101,7 +1101,7 @@ sub _ask_dir {
     $f->selection_entry->get_parent->hide;
     $f->ok_button->signal_connect(clicked => sub {
 				      my ($model, $iter) = $f->dir_list->get_selection->get_selected;
-				      $o->{retval} .= $model->get($iter, 0) if $model;
+				      $o->{retval} .= '/'.$model->get($iter, 0) if $model;
 				  });
 }
 
