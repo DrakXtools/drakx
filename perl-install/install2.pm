@@ -519,7 +519,7 @@ sub main {
 	    mkdir '/tmp/stage2/etc/brltty';
 	    mkdir '/lib/brltty';
 	    foreach ($o->{brltty}{table}, "brltty-$o->{brltty}{driver}.hlp") {
-		install_any::getAndSaveFile($_ , "/tmp/stage2/$_") if $_;
+		install_any::getAndSaveFile("/etc/brltty/$_", "/tmp/stage2/etc/brltty/$_") if $_;
 	    }
 	    install_any::getAndSaveFile("/lib/brltty/libbrlttyb$o->{brltty}{driver}.so") or do {
 		local $| = 1;
@@ -530,6 +530,8 @@ sub main {
 	    install_any::getAndSaveFile("/usr/bin/brltty");
 	    chmod 0755, "/usr/bin/brltty";
 	}
+	eval { modules::load("serial") };
+	devices::make($o->{brltty}{device});
 	devices::make("vcsa");
 	run_program::run("brltty");
     }
