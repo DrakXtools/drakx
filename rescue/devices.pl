@@ -22,7 +22,6 @@ foreach (<DATA>) {
 __DATA__
 c   5   1 console
 b   2   0 fd0-1
-c   0   0 initctl
 c   1   2 kmem
 b   7   0 loop0-15
 c   1   1 mem
