@@ -408,7 +408,7 @@ sub pppConfig {
 
     symlinkf($modem->{device}, "$prefix/dev/modem") or log::l("creation of $prefix/dev/modem failed")
       if $modem->{device} ne "/dev/modem";
-    $in->do_pkgs->install->('ppp') if !$::testing;
+    $in->do_pkgs->install('ppp') if !$::testing;
 
     my %toreplace;
     $toreplace{$_} = $modem->{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
