@@ -21,11 +21,11 @@
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
-
-use interactive;
-use printerdrake;
-use printer;
 use common;
+use interactive;
+use printer::printerdrake;
+use printer::main;
+use modules;
 use c;
 
 local $_ = join '', @ARGV;
@@ -38,7 +38,7 @@ if (/-expert/) {
 } elsif (/-beginner/) {
     $::expert = 0;
 } else {
-    printer::get_usermode ();
+    printer::main::get_usermode ();
 }
 $::noauto = /-noauto/;
 $::testing = /-testing/;
@@ -49,33 +49,33 @@ my $in = 'interactive'->vnew('su', 'printer-mdk');
 
 my $commandline = $_;
 
-exit 0 if !printerdrake::first_time_dialog($printer, $in, 1);
+exit 0 unless printer::printerdrake::first_time_dialog($printer, $in, 1);
 
 {
 # Check whether Foomatic is installed and install it if necessary
-printerdrake::install_foomatic($in);
+printer::printerdrake::install_foomatic($in);
 
 my $w = $in->wait_message(N("Printerdrake"), N("Reading printer data ..."));
 # Get what was installed before
-eval { $printer = printer::getinfo('') };
+eval { $printer = printer::main::getinfo('') };
 # Choose the spooler by command line options
 $commandline =~ /-cups/ and
-    $printer->{SPOOLER} = 'cups' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'cups' and printer::main::read_configured_queues($printer);
 $commandline =~ /-lpr/ and 
-    $printer->{SPOOLER} = 'lpd' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'lpd'  and printer::main::read_configured_queues($printer);
 $commandline =~ /-lpd/ and 
-    $printer->{SPOOLER} = 'lpd' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'lpd'  and printer::main::read_configured_queues($printer);
 $commandline =~ /-lprng/ and 
-    $printer->{SPOOLER} ='lprng' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} ='lprng' and printer::main::read_configured_queues($printer);
 $commandline =~ /-pdq/ and 
-    $printer->{SPOOLER} = 'pdq' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'pdq'  and printer::main::read_configured_queues($printer);
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 }
 
 begin:
 $::isEmbedded and kill 'USR2', $::CCPID;
 
-printerdrake::main($printer, $in, 1);
+printer::printerdrake::main($printer, $in, 1);
 
 $::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
 goto begin;

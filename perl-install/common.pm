@@ -4,11 +4,12 @@ use MDK::Common;
 use MDK::Common::System;
 use diagnostics;
 use strict;
+use run_program;
 use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt);
+@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -183,6 +184,62 @@ sub join_lines {
 	}
     }
     @l, if_($s, $s);
+}
+
+
+sub set_alternative {
+    my ($command, $executable) = @_;
+    local *F;
+    # Read the list of executables for the given command to find the number
+    # of the desired executable
+    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
+	"/bin/sh -c \"export LC_ALL=C; /bin/echo | update-alternatives --config $command \" |" or
+	    die "Could not run \"update-alternatives\"!";
+    my $choice = 0;
+    while (my $line = <F>) {
+	chomp $line;
+	if ($line =~ m/^[\* ][\+ ]\s*([0-9]+)\s+(\S+)\s*$/) { # list entry?
+	    if ($2 eq $executable) {
+		$choice = $1;
+		last;
+	    }
+	}
+    }
+    close F;
+    # If the executable was found, assign the command to it
+    if ($choice > 0) {
+	system(($::testing ? $::prefix : "chroot $::prefix/ ") .
+	       "/bin/sh -c \"/bin/echo $choice | update-alternatives --config $command > /dev/null 2>&1\"");
+    }
+    return 1;
+}    
+
+sub files_exist {
+    my @files = @_;
+    foreach my $file (@files) {
+	   return 0 unless -f "$::prefix$file"
+    }
+    return 1;
+}
+
+sub set_permissions {
+    my ($file, $perms, $owner, $group) = @_;
+    # We only need to set the permissions during installation to be able to
+    # print test pages. After installation the devfsd daemon does the business
+    # automatically.
+    return 1 unless $::isInstall;
+    if ($owner && $group) {
+        run_program::rooted($::prefix, "/bin/chown", "$owner.$group", $file)
+	    or die "Could not start chown!";
+    } elsif ($owner) {
+        run_program::rooted($::prefix, "/bin/chown", $owner, $file)
+	    or die "Could not start chown!";
+    } elsif ($group) {
+        run_program::rooted($::prefix, "/bin/chgrp", $group, $file)
+	    or die "Could not start chgrp!";
+    }
+    run_program::rooted($::prefix, "/bin/chmod", $perms, $file)
+	or die "Could not start chmod!";
 }
 
 1;

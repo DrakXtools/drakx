@@ -1,11 +1,16 @@
 package services; # $Id$
 
-use diagnostics;
-use strict;
+
+
 
 #-######################################################################################
 #- misc imports
 #-######################################################################################
+
+use strict;
+use common;
+use run_program;
+
 use common;
 use run_program;
 
@@ -226,7 +231,7 @@ sub ask_standalone_gtk {
                                                push @$on_services, $service if !member($service, @$on_services);
                                            } else {
                                                @$on_services = grep { $_ ne $service } @$on_services;
-                                        } }), member($service, @$on_services))),
+                                        }}), member($service, @$on_services))),
 		  map { my $a = $_;
                       gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(translate($a)),
                           clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_ = `$c`; s/\033\[[^mG]*[mG]//g;
@@ -285,5 +290,81 @@ sub services {
     my @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } @raw_l;
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
 }
+
+
+
+
+
+
+# the following functions are mostly by printer related modules
+
+#-if we are in an DrakX config
+our $prefix = "";
+
+
+sub restart ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
+}
+
+sub start ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
+    return (($? >> 8) != 0) ? 0 : 1;
+}
+
+sub start_not_running_service ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
+    return (($? >> 8) != 0) ? 0 : 1;
+}
+
+sub stop ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
+    return (($? >> 8) != 0) ? 0 : 1;
+}
+
+sub is_service_running ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    return 0 if !(-x "$prefix/etc/rc.d/init.d/$service");
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
+    # The exit status is not zero when the service is not running
+    return (($? >> 8) != 0) ? 0 : 1;
+}
+
+sub starts_on_boot ($) {
+    my ($service) = @_;
+    local *F; 
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
+	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" or
+	    return 0;
+    while (my $line = <F>) {
+	chomp $line;
+	if ($line =~ /:on/) {
+	    close F;
+	    return 1;
+	}
+    }
+    close F;
+    return 0;
+}
+
+sub start_service_on_boot ($) {
+    my ($service) = @_;
+    run_program::rooted($prefix, "/sbin/chkconfig", "--add", $service)
+	or return 0;
+    return 1;
+}
+
 
 1;

@@ -1,53 +1,28 @@
-package printer;
+package printer::main;
 
 # $Id$
 
-#use diagnostics;
-#use strict;
+#
+#
 
 
 use common;
 use run_program;
+use printer::services;
+use printer::default;
+use printer::gimp;
+use printer::cups;
+use printer::office;
+use printer::detect;
+use printer::data;
+use services;
 
-#-if we are in an DrakX config
-my $prefix = "";
 
 #-location of the printer database in an installed system
 my $PRINTER_DB_FILE = "/usr/share/foomatic/db/compiled/overview.xml";
-#-configuration directory of Foomatic
-my $FOOMATICCONFDIR = "/etc/foomatic"; 
-#-location of the file containing the default spooler's name
-my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 
 #-Did we already read the subroutines of /usr/sbin/ptal-init?
 my $ptalinitread = 0;
-
-our %spoolers = ('ppq' => {
-                          'help' => "/usr/bin/lphelp %s |",
-					 'print_command' => 'lpr-pdq',
-					 'long_name' =>N("PDQ - Print, Don't Queue"),
-					 'short_name' => N("PDQ")
-                 },
-                'lpd' => {
-                        'help' => "/usr/bin/pdq -h -P %s 2>&1 |",
-                        'print_command' => 'lpr-cups',
-				    'long_name' => N("LPD - Line Printer Daemon"),
-					   'short_name' => N("LPD")
-                 },
-			 'lprng' => {
-				'print_command' => 'lpr-lpd',
-				'long_name' => N("LPRng - LPR New Generation"),
-				'short_name' => N("LPRng")
-			 },
-			 'cups' => {
-				'print_command' => 'lpr-cups',
-				'long_name' => N("CUPS - Common Unix Printing System"),
-				'short_name' => N("CUPS")
-			 }
-            );
-our %spooler_inv = map { $spooler{$_}{long_name} => $_ } keys %spoolers;
-
-our %shortspooler_inv = map { $spooler{$_}{short_name} => $_ } keys %spoolers;
 
 %printer_type = (
     N("Local printer")                              => "LOCAL",
@@ -66,8 +41,6 @@ our %printer_type_inv = reverse %printer_type;
 
 sub set_prefix($) { $prefix = $_[0] }
 
-sub default_printer_type($) { "LOCAL" }
-
 sub spooler {
     # LPD is taken from the menu for the moment because the classic LPD is
     # highly unsecure. Depending on how the GNU lpr development is going on
@@ -78,8 +51,7 @@ sub spooler {
     # LPRng is not officially supported any more since Mandrake 9.0, so
     # show it only in the spooler menu when it was manually installed.
     my @res;
-    if (files_exist((qw(/usr/lib/filters/lpf
-			/usr/sbin/lpd)))) {
+    if (files_exist((qw(/usr/lib/filters/lpf /usr/sbin/lpd)))) {
         foreach (qw(cups lprng pdq)) { push @res, $spooler_inv{$_}{long_name} };
 #        {qw(cups lprng pdq)}{long_name};
     } else {
@@ -104,133 +76,6 @@ sub printer_type($) {
     }
 }
 
-sub get_default_spooler () {
-    if (-f "$prefix$FOOMATIC_DEFAULT_SPOOLER") {
-	my $spool = cat_("$prefix$FOOMATIC_DEFAULT_SPOOLER");
-	chomp $spool;
-	return $spool if $spool =~ /cups|lpd|lprng|pdq/; 
-    }
-}
-
-sub set_default_spooler ($) {
-    my ($printer) = @_;
-    # Mark the default driver in a file
-    output_p("$prefix$FOOMATIC_DEFAULT_SPOOLER", $printer->{SPOOLER});
-}
-
-sub set_permissions {
-    my ($file, $perms, $owner, $group) = @_;
-    # We only need to set the permissions during installation to be able to
-    # print test pages. After installation the devfsd daemon does the business
-    # automatically.
-    if (!$::isInstall) { return 1 }
-    if ($owner && $group) {
-        run_program::rooted($prefix, "/bin/chown", "$owner.$group", $file)
-	    or die "Could not start chown!";
-    } elsif ($owner) {
-        run_program::rooted($prefix, "/bin/chown", $owner, $file)
-	    or die "Could not start chown!";
-    } elsif ($group) {
-        run_program::rooted($prefix, "/bin/chgrp", $group, $file)
-	    or die "Could not start chgrp!";
-    }
-    run_program::rooted($prefix, "/bin/chmod", $perms, $file)
-	or die "Could not start chmod!";
-}
-
-sub restart_service ($) {
-    my ($service) = @_;
-    # Exit silently if the service is not installed
-    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
-    if (($? >> 8) != 0) {
-	return 0;
-    } else {
-	# CUPS needs some time to come up.
-	wait_for_cups() if $service eq "cups";
-	return 1;
-    }
-}
-
-sub start_service ($) {
-    my ($service) = @_;
-    # Exit silently if the service is not installed
-    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
-    if (($? >> 8) != 0) {
-	return 0;
-    } else {
-	# CUPS needs some time to come up.
-	wait_for_cups() if $service eq "cups";
-	return 1;
-    }
-}
-
-sub start_not_running_service ($) {
-    my ($service) = @_;
-    # Exit silently if the service is not installed
-    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
-    # The exit status is not zero when the service is not running
-    if (($? >> 8) != 0) {
-	run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
-	if (($? >> 8) != 0) {
-	    return 0;
-	} else {
-	    # CUPS needs some time to come up.
-	    wait_for_cups() if $service eq "cups";
-	    return 1;
-	}
-    } else {
-	return 1;
-    }
-}
-
-sub stop_service ($) {
-    my ($service) = @_;
-    # Exit silently if the service is not installed
-    return 1 if !(-x "$prefix/etc/rc.d/init.d/$service");
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
-    if (($? >> 8) != 0) { return 0 } else { return 1 }
-}
-
-sub service_running ($) {
-    my ($service) = @_;
-    # Exit silently if the service is not installed
-    return 0 if !(-x "$prefix/etc/rc.d/init.d/$service");
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
-    # The exit status is not zero when the service is not running
-    if (($? >> 8) != 0) {
-	return 0;
-    } else {
-	return 1;
-    }
-}
-
-sub service_starts_on_boot ($) {
-    my ($service) = @_;
-    local *F; 
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" or
-	    return 0;
-    while (my $line = <F>) {
-	chomp $line;
-	if ($line =~ /:on/) {
-	    close F;
-	    return 1;
-	}
-    }
-    close F;
-    return 0;
-}
-
-sub start_service_on_boot ($) {
-    my ($service) = @_;
-    run_program::rooted($prefix, "/sbin/chkconfig", "--add", $service)
-	or return 0;
-    return 1;
-}
-
 sub SIGHUP_daemon {
     my ($service) = @_;
     if ($service eq "cupsd") { $service = "cups" };
@@ -250,39 +95,21 @@ sub SIGHUP_daemon {
     $daemon = $service if ! defined $daemon;
 #    if ($service eq "cups") {
 #	# The current CUPS (1.1.13) dies on SIGHUP, do the normal restart.
-#	restart_service($service);
+#	printer::services::restart($service);
 #	# CUPS needs some time to come up.
-#	wait_for_cups();
+#	printer::services::wait_for_cups();
 #    } else {
 
     # Send the SIGHUP
     run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
     if ($service eq "cups") {
 	# CUPS needs some time to come up.
-	wait_for_cups();
+	printer::services::wait_for_cups();
     }
 
     return 1;
 }
 
-sub wait_for_cups {
-    # CUPS needs some time to come up. Wait up to 30 seconds, checking
-    # whether CUPS is ready.
-    my $cupsready = 0;
-    my $i;
-    for ($i = 0; $i < 30; $i++) {
-	run_program::rooted($prefix, "/usr/bin/lpstat", "-r");
-	if (($? >> 8) != 0) {
-	    # CUPS is not ready, continue
-	    sleep 1;
-	} else {
-	    # CUPS is ready, quit
-	    $cupsready = 1;
-	    last;
-	}
-    }
-    return $cupsready;
-}
 
 sub assure_device_is_available_for_cups {
     # Checks whether CUPS already "knows" a certain port, it does not
@@ -312,285 +139,6 @@ sub assure_device_is_available_for_cups {
     return $result;
 }
 
-sub network_running {
-    # If the network is not running return 0, otherwise 1.
-    local *F; 
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /sbin/ifconfig\" |" or
-	    die "Could not run \"ifconfig\"!";
-    while (my $line = <F>) {
-	if (($line !~ /^lo\s+/) && # The loopback device can have been 
-                                   # started by the spooler's startup script
-	    ($line =~ /^(\S+)\s+/)) { # In this line starts an entry for a
-	                              # running network
-	    close F;
-	    return 1;
-	}
-    }
-    close F;
-    return 0;
-}
-
-sub getSNMPModel {
-
-    my ($host) = @_;
-    my $manufacturer = "";
-    my $model = "";
-    my $description = "";
-    my $serialnumber = "";
-    
-    # SNMP request to auto-detect model
-    local *F;
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") .
-	"/bin/sh -c \"scli -1 -c 'show printer info' $host\" |" or
-	return { CLASS => 'PRINTER',
-		 MODEL => N("Unknown Model"),
-		 MANUFACTURER => "",
-		 DESCRIPTION => "",
-		 SERIALNUMBER => ""
-		 };
-    while (my $l = <F>) {
-	chomp $l;
-	if (($l =~ /^\s*Manufacturer:\s*(\S.*)$/i) &&
-	    ($l =~ /^\s*Vendor:\s*(\S.*)$/i)) {
-	    $manufacturer = $1;
-	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
-	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
-	} elsif ($l =~ /^\s*Model:\s*(\S.*)$/i) {
-	    $model = $1;
-	} elsif ($l =~ /^\s*Description:\s*(\S.*)$/i) {
-	    $description = $1;
-	    $description =~ s/Hewlett[-\s_]Packard/HP/;
-	    $description =~ s/HEWLETT[-\s_]PACKARD/HP/;
-	} elsif ($l =~ /^\s*Serial\s*Number:\s*(\S.*)$/i) {
-	    $serialnumber = $1;
-	}
-    }
-    close F;
-
-    # Was there a manufacturer and a model in the output?
-    # If not, get them from the description
-    if (($manufacturer eq "") || ($model eq "")) {
-	if ($description =~ /^\s*(\S*)\s+(\S.*)$/) {
-	    if ($manufacturer eq "") {
-		$manufacturer = $1;
-	    }
-	    if ($model eq "") {
-		$model = $2;
-	    }
-	}
-	# No description field? Make one out of manufacturer and model.
-    } elsif ($description eq "") {
-	$description = "$manufacturer $model";
-    }
-    
-    # We couldn't determine a model
-    if ($model eq "") {
-	$model = N("Unknown Model");
-    }
-    
-    # Remove trailing spaces
-    $manufacturer =~ s/(\S+)\s+$/$1/;
-    $model =~ s/(\S+)\s+$/$1/;
-    $description =~ s/(\S+)\s+$/$1/;
-    $serialnumber =~ s/(\S+)\s+$/$1/;
-
-    # Now we have all info for one printer
-    # Store this auto-detection result in the data structure
-    return  { CLASS => 'PRINTER',
-	      MODEL => $model,
-	      MANUFACTURER => $manufacturer,
-	      DESCRIPTION => $description,
-	      SERIALNUMBER => $serialnumber
-	      };
-}
-
-sub getSMBPrinterShares {
-
-    my ($host) = @_;
-    
-    # SMB request to auto-detect shares
-    local *F;
-    open F, ($::testing ? "" : "chroot $prefix/ ") .
-	"/bin/sh -c \"export LC_ALL=C; smbclient -N -L $host\" |" or return ();
-    my $insharelist = 0;
-    my @shares;
-    while (my $l = <F>) {
-	chomp $l;
-	if ($l =~ /^\s*Sharename\s+Type\s+Comment\s*$/i) {
-	    $insharelist = 1;
-	} elsif ($l =~ /^\s*Server\s+Comment\s*$/i) {
-	    $insharelist = 0;
-	} elsif (($l =~ /^\s*(\S+)\s+Printer\s*(.*)$/i) &&
-		 ($insharelist)) {
-	    my $name = $1;
-	    my $description = $2;
-	    $description =~ s/^(\s*)//;
-	    push (@shares, { name => $name, description => $description });
-	}
-    }
-    close F;
-
-    return @shares;
-}
-
-sub getIPsInLocalNetworks {
-
-    # subroutine determines the list of all hosts reachable in the local
-    # networks by means of pinging the broadcast addresses.
-    
-    # Return an empty list if no network is running
-    if (!network_running()) {
-	return ();
-    }
-    
-    # Read the output of "ifconfig" to determine the broadcast addresses of
-    # the local networks
-    my $dev_is_localnet = 0;
-    my @local_bcasts;
-    my $current_bcast = "";
-	
-    local *IFCONFIG_OUT;
-    open IFCONFIG_OUT, ($::testing ? "" : "chroot $prefix/ ") .
-	"/bin/sh -c \"export LC_ALL=C; ifconfig\" |" or return ();
-    while (my $readline = <IFCONFIG_OUT>) {
-	# New entry ...
-	if ($readline =~ /^(\S+)\s/) {
-	    my $dev = $1;
-	    # ... for a local network (eth = ethernet, 
-	    #     vmnet = VMWare,
-	    #     ethernet card connected to ISP excluded)?
-	    $dev_is_localnet = (($dev =~ /^eth/) || ($dev =~ /^vmnet/));
-	    # delete previous address
-	    $current_bcast = "";
-	}
-	# Are we in the important line now?
-	if ($readline =~ /\sBcast:([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\s/) {
-	    # Rip out the broadcast IP address
-	    $current_bcast = $1;
-	    
-	    # Are we in an entry for a local network?
-	    if ($dev_is_localnet == 1) {
-		# Store current IP address
-		push @local_bcasts, $current_bcast;
-	    }
-	}
-    }
-    close(IFCONFIG_OUT);
-
-    my @addresses;
-    # Now ping all broadcast addresses and additionally "nmblookup" the
-    # networks (to find Windows servers which do not answer to ping)
-    foreach my $bcast (@local_bcasts) {
-	local *F;
-	open F, ($::testing ? "" : "chroot $prefix/ ") . 
-	    "/bin/sh -c \"export LC_ALL=C; ping -w 1 -b -n $bcast | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
-	    or next;
-	local $_;
-	while (<F>) { chomp; push @addresses, $_ }
-	close F;
-	if (-x "/usr/bin/nmblookup") {
-	    local *F;
-	    open F, ($::testing ? "" : "chroot $prefix/ ") . 
-		"/bin/sh -c \"export LC_ALL=C; nmblookup -B $bcast \\* | cut -f 1 -d ' ' | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
-		or next;
-	    local $_;
-	    while (<F>) { chomp;
-			  push @addresses, $_ if !(member($_,@addresses)) }
-	}
-    }
-
-    @addresses;
-}
-
-sub whatNetPrinter {
-
-    my ($network, $smb) = @_;
-
-    my $i; 
-    my @res;
-
-    # Which ports should be scanned?
-    my @portstoscan;
-    push @portstoscan, "139" if $smb;
-    push @portstoscan, "4010", "4020", "4030", "5503", "9100-9104" if $network;
-    
-    return () if $#portstoscan < 0;
-    my $portlist = join (",", @portstoscan);
-    
-    # Which hosts should be scanned?
-    # (Applying nmap to a whole network is very time-consuming, because nmap
-    #  waits for a certain timeout period on non-existing hosts, so we get a 
-    #  lists of existing hosts by pinging the broadcast addresses for existing
-    #  hosts and then scanning only them, which is much faster)
-    my @hostips = getIPsInLocalNetworks();
-    return () if $#hostips < 0;
-    my $hostlist = join (" ", @hostips);
-
-    # Scan network for printers, the timeout settings are there to avoid
-    # delays caused by machines blocking their ports with a firewall
-    local *F;
-    open F, ($::testing ? "" : "chroot $prefix/ ") .
-	"/bin/sh -c \"export LC_ALL=C; nmap -r -P0 --host_timeout 400 --initial_rtt_timeout 200 -p $portlist $hostlist\" |"
-	or return @res;
-    my $host = "";
-    my $ip = "";
-    my $port = "";
-    my $modelinfo = "";
-    while (my $line = <F>) {
-	chomp $line;
-
-	# head line of the report of a host with the ports in question open
-	#if ($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S*)\s*\(([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\)\s*:\s*$/i) {
-	if ($line =~ m/^\s*Interesting\s+ports\s+on\s+(\S*)\s*\((\S+)\)\s*:\s*$/i) {
-	    $host = $1;
-	    $ip = $2;
-	    if ($host eq "") {
-		$host = $ip;
-	    }
-	    $port = "";
-
-	    undef $modelinfo;
-
-	} elsif ($line =~ m/^\s*(\d+)\/\S+\s+open\s+/i) {
-	    next if $ip eq "";
-	    $port = $1;
-	    
-	    # Now we have all info for one printer
-	    # Store this auto-detection result in the data structure
-
-	    # Determine the protocol by the port number
-
-	    # SMB/Windows
-	    if ($port eq "139") {
-		my @shares = getSMBPrinterShares($ip);
-		foreach my $share (@shares) {
-		    push @res, { port => "smb://$host/$share->{name}",
-				 val => { CLASS => 'PRINTER',
-					  MODEL => N("Unknown Model"),
-					  MANUFACTURER => "",
-					  DESCRIPTION =>
-					      "$share->{description}",
-					  SERIALNUMBER => ""
-				      }
-			     };
-		}
-	    } else {
-		if (!defined($modelinfo)) {
-		    # SNMP request to auto-detect model
-		    $modelinfo = getSNMPModel ($ip);
-		}
-		if (defined($modelinfo)) {
-		    push @res, { port => "socket://$host:$port",
-				 val => $modelinfo
-				 };
-		}
-	    }
-	}
-    }
-    close F;
-    @res;
-}
 
 sub spooler_in_security_level {
     # Was the current spooler already added to the current security level?
@@ -625,41 +173,6 @@ sub add_spooler_to_security_level {
     }
     return 1;
 }
-
-sub files_exist {
-    my @files = @_;
-    foreach my $file (@files) {
-	   return 0 if ! -f "$prefix$file";
-    }
-    return 1;
-}
-
-sub set_alternative {
-    my ($command, $executable) = @_;
-    local *F;
-    # Read the list of executables for the given command to find the number
-    # of the desired executable
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /bin/echo | update-alternatives --config $command \" |" or
-	    die "Could not run \"update-alternatives\"!";
-    my $choice = 0;
-    while (my $line = <F>) {
-	chomp $line;
-	if ($line =~ m/^[\* ][\+ ]\s*([0-9]+)\s+(\S+)\s*$/) { # list entry?
-	    if ($2 eq $executable) {
-		$choice = $1;
-		last;
-	    }
-	}
-    }
-    close F;
-    # If the executable was found, assign the command to it
-    if ($choice > 0) {
-	system(($::testing ? $prefix : "chroot $prefix/ ") .
-	       "/bin/sh -c \"/bin/echo $choice | update-alternatives --config $command > /dev/null 2>&1\"");
-    }
-    return 1;
-}    
 
 sub pdq_panic_button {
     my $setting = $_[0];
@@ -707,7 +220,7 @@ sub read_configured_queues($) {
     my ($printer) = @_;
     my @QUEUES;
     # Get the default spooler choice from the config file
-    $printer->{SPOOLER} ||= get_default_spooler();
+    $printer->{SPOOLER} ||= printer::default::get_spooler();
     if (!$printer->{SPOOLER}) {
 	#- Find the first spooler where there are queues
 	foreach my $spooler (qw(cups pdq lprng lpd)) {
@@ -717,9 +230,7 @@ sub read_configured_queues($) {
 		$service = "lpd";
 	    }
 	    if ($service ne "pdq") {
-		if (!service_running($service)) {
-		    next;
-		}
+		next unless services::is_service_running($service);
 		# daemon is running, spooler found
 		$printer->{SPOOLER} = $spooler;
 	    }
@@ -1205,7 +716,7 @@ sub set_cups_autoconf {
     output($file, @file_content);
 
     # Restart CUPS
-    restart_service("cups");
+    printer::services::restart("cups");
 
     return 1;
 }
@@ -1259,28 +770,6 @@ sub get_usermode {
     return 0;
 }
 
-sub set_default_printer {
-    my ($printer) = $_[0];
-    run_program::rooted($prefix, "foomatic-configure",
-			"-D", "-q", "-s", $printer->{SPOOLER},
-			"-n", $printer->{DEFAULT}) or return 0;
-    return 1;
-}
-
-sub get_default_printer {
-    my $printer = $_[0];
-    local *F;
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"foomatic-configure -Q -q -s $printer->{SPOOLER} |" or return undef;
-    my $line;
-    while ($line = <F>) {
-	if ($line =~ m!^\s*<defaultqueue>(.*)</defaultqueue>\s*$!) {
-	    return $1;
-	}
-    }
-    return undef;
-}
-
 sub read_cupsd_conf {
     cat_("$prefix/etc/cups/cupsd.conf");
 }
@@ -1290,7 +779,7 @@ sub write_cupsd_conf {
     output("$prefix/etc/cups/cupsd.conf", @cupsd_conf);
 
     #- restart cups after updating configuration.
-    restart_service("cups");
+    printer::services::restart("cups");
 }
 
 sub read_printers_conf {
@@ -1390,7 +879,7 @@ sub poll_ppd_base {
     #- if cups continue to modify it (because it reads the ppd files available), the
     #- poll_ppd_base program simply cores :-)
     run_program::rooted($prefix, "ifconfig lo 127.0.0.1"); #- else cups will not be happy! and ifup lo don't run ?
-    start_not_running_service("cups");
+    printer::services::start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
 	local *PPDS; open PPDS, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
@@ -1591,7 +1080,7 @@ sub restart_queue($) {
     foreach ($printer->{SPOOLER}) {
 	/cups/ && do {
 	    #- restart cups.
-	    restart_service("cups");
+	    printer::services::restart("cups");
 	    last };
 	/lpr|lprng/ && do {
 	    #- restart lpd.
@@ -1600,7 +1089,7 @@ sub restart_queue($) {
 		kill 'TERM', $pidlpd if $pidlpd;
 		unlink "$prefix$_";
 	    }
-	    restart_service("lpd"); sleep 1;
+	    printer::services::restart("lpd"); sleep 1;
 	    last };
     }
     # Kill the jobs
@@ -1846,7 +1335,7 @@ sub configure_hpoj {
 	     ($device =~ /\/dev\/lp/) ||
 	     ($device =~ /printers/)) {
 	$bus = "par";
-	$address_arg = parport_addr($device);
+	$address_arg = printer::detect::parport_addr($device);
 	$address_arg =~ /^\s*-base\s+(\S+)/;
 	eval ("$base_address = $1");
     } elsif ($device =~ /socket/) {
@@ -1877,7 +1366,7 @@ sub configure_hpoj {
 	# Check if the device is really an HP multi-function device
 	if ($bus ne "hpjd") {
 	    # Start ptal-mlcd daemon for locally connected devices
-	    stop_service("hpoj");
+	    services::stop("hpoj");
 	    run_program::rooted($prefix, 
 				"ptal-mlcd", "$bus:probe", "-device", 
 				$device, split(' ',$address_arg));
@@ -1926,7 +1415,7 @@ sub configure_hpoj {
 		}
 		close F;
 	    }
-	    start_service("hpoj");
+	    printer::services::start("hpoj");
 	}
 	last;
     }
@@ -2089,29 +1578,10 @@ sub configure_hpoj {
     readOneDevice ($ptaldevice);
 
     # Restart HPOJ
-    restart_service("hpoj");
+    printer::services::restart("hpoj");
 
     # Return HPOJ device name to form the URI
     return $ptaldevice;
-}
-
-sub parport_addr {
-    # auto-detect the parallel port addresses
-    my ($device) = @_;
-    $device =~ m!^/dev/lp(\d+)$! or
-	$device =~ m!^/dev/printers/(\d+)$!;
-    my $portnumber = $1;
-    my $parport_addresses = 
-	`cat /proc/sys/dev/parport/parport$portnumber/base-addr`;
-    my $address_arg;
-    if ($parport_addresses =~ /^\s*(\d+)\s+(\d+)\s*$/) {
-	$address_arg = sprintf(" -base 0x%x -basehigh 0x%x", $1, $2);
-    } elsif ($parport_addresses =~ /^\s*(\d+)\s*$/) {
-	$address_arg = sprintf(" -base 0x%x", $1);
-    } else {
-	$address_arg = "";
-    }
-    return $address_arg;
 }
 
 sub config_sane {
@@ -2192,33 +1662,33 @@ RIGHTDRIVE=\" \"
 sub configureapplications {
     my ($printer) = @_;
     setcupslink ($printer);
-    configurestaroffice($printer);
-    configureopenoffice($printer);
-    configuregimp($printer);
+    printer::office::configureoffice('Star Office', $printer);
+    printer::office::configureoffice('OpenOffice.Org', $printer);
+    printer::gimp::configure($printer);
 }
 
 sub addcupsremotetoapplications {
     my ($printer, $queue) = @_;
     setcupslink ($printer);
-    return (addcupsremotetostaroffice($printer, $queue) &&
-	    addcupsremotetoopenoffice($printer, $queue) &&
-	    addcupsremotetogimp($printer, $queue));
+    return (printer::office::add_cups_remote_to_office('Star Office', $printer, $queue) &&
+	    printer::office::add_cups_remote_to_office('OpenOffice.Org', $printer, $queue) &&
+	    printer::gimp::addcupsremoteto($printer, $queue));
 }
 
 sub removeprinterfromapplications {
     my ($printer, $queue) = @_;
     setcupslink ($printer);
-    return (removeprinterfromstaroffice($printer, $queue) &&
-	    removeprinterfromopenoffice($printer, $queue) &&
-	    removeprinterfromgimp($printer, $queue));
+    return (printer::office::remove_printer_from_office('Star Office', $printer, $queue) &&
+	    printer::office::remove_printer_from_office('OpenOffice.Org', $printer, $queue) &&
+	    printer::gimp::removeprinterfrom($printer, $queue));
 }
 
 sub removelocalprintersfromapplications {
     my ($printer) = @_;
     setcupslink ($printer);
-    removelocalprintersfromstaroffice($printer);
-    removelocalprintersfromopenoffice($printer);
-    removelocalprintersfromgimp($printer);
+    printer::office::remove_local_printers_from_office('Star Office', $printer);
+    printer::office::remove_local_printers_from_office('OpenOffice.Org', $printer);
+    printer::gimp::removelocalprintersfrom($printer);
 }
 
 sub setcupslink {
@@ -2230,1077 +1700,5 @@ sub setcupslink {
     return 1;
 }
 
-sub getcupsremotequeues {
-    # The following code reads in a list of all remote printers which the
-    # local CUPS daemon knows due to broadcasting of remote servers or 
-    # "BrowsePoll" entries in the local /etc/cups/cupsd.conf
-    local *F;
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"lpstat -v |" or return ();
-    my @printerlist;
-    my $line;
-    while ($line = <F>) {
-	if ($line =~ m/^\s*device\s+for\s+([^:\s]+):\s*(\S+)\s*$/) {
-	    my $queuename = $1;
-	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
-		(!$printer->{configured}{$queuename})) {
-		my $server = $1;
-		push (@printerlist, "$queuename|$server");
-	    }
-	}
-    }
-    close F;
-    return @printerlist;
-}
-
-# ------------------------------------------------------------------
-#   Star Offica/OpenOffice.org
-# ------------------------------------------------------------------
-
-sub configurestaroffice {
-    my ($printer) = @_;
-    # Do we have Star Office installed?
-    my $configfilename = findsofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
-    my $configprefix = $1;
-    # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Update remote CUPS queues
-    if (0 && ($printer->{SPOOLER} eq "cups") && 
-	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
-	my @printerlist = getcupsremotequeues();
-	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
-	    my $queue = $1;
-	    my $server = $2;
-	    if (-x "$prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/wget", "-O",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$queue.ppd"));
-	    } else {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/curl", "-o",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$queue.ppd"));
-	    }
-	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
-		$configfilecontent = 
-		    makestarofficeprinterentry($printer, $queue,
-					       $configprefix,
-					       $configfilecontent);
-	    }
-	}
-    }
-    # Update local printer queues
-    foreach my $queue (keys(%{$printer->{configured}})) {
-	# Check if we have a PPD file
-	if (! -r "$prefix/etc/foomatic/$queue.ppd") {
-	    if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
-		# If we have a PPD file in the CUPS config dir, link to it
-		run_program::rooted($prefix, 
-				    "ln", "-sf",
-				    "/etc/cups/ppd/$queue.ppd",
-				    "/etc/foomatic/$queue.ppd");
-	    } elsif (-r "$prefix/usr/share/postscript/ppd/$queue.ppd") {
-		# Check PPD directory of GPR, too
-		run_program::rooted($prefix, 
-				    "ln", "-sf",
-				    "/usr/share/postscript/ppd/$queue.ppd",
-				    "/etc/foomatic/$queue.ppd");
-	    } else {
-		# No PPD file at all? We cannot set up this printer
-		next;
-	    }
-	}
-	$configfilecontent = 
-	    makestarofficeprinterentry($printer, $queue, $configprefix,
-				       $configfilecontent);
-    }
-    # Patch PostScript output to print Euro symbol correctly also for
-    # the "Generic Printer"
-    $configfilecontent = removeentry
-	("ports", "default_queue=", $configfilecontent);
-    $configfilecontent = addentry
-	("ports",
-	 "default_queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}}",
-	 $configfilecontent);
-    # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub configureopenoffice {
-    my ($printer) = @_;
-    # Do we have OpenOffice.org installed?
-    my $configfilename = findopenofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
-    my $configprefix = $1;
-    # Load OpenOffice.org printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Update remote CUPS queues
-    if (0 && ($printer->{SPOOLER} eq "cups") && 
-	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
-	my @printerlist = getcupsremotequeues();
-	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
-	    my $queue = $1;
-	    my $server = $2;
-	    if (-x "$prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/wget", "-O",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$queue.ppd"));
-	    } else {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/curl", "-o",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$queue.ppd"));
-	    }
-	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
-		$configfilecontent = 
-		    makeopenofficeprinterentry($printer, $queue,
-					       $configprefix,
-					       $configfilecontent);
-	    }
-	}
-    }
-    # Update local printer queues
-    foreach my $queue (keys(%{$printer->{configured}})) {
-	# Check if we have a PPD file
-	if (! -r "$prefix/etc/foomatic/$queue.ppd") {
-	    if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
-		# If we have a PPD file in the CUPS config dir, link to it
-		run_program::rooted($prefix, 
-				    "ln", "-sf",
-				    "/etc/cups/ppd/$queue.ppd",
-				    "/etc/foomatic/$queue.ppd");
-	    } elsif (-r "$prefix/usr/share/postscript/ppd/$queue.ppd") {
-		# Check PPD directory of GPR, too
-		run_program::rooted($prefix, 
-				    "ln", "-sf",
-				    "/usr/share/postscript/ppd/$queue.ppd",
-				    "/etc/foomatic/$queue.ppd");
-	    } else {
-		# No PPD file at all? We cannot set up this printer
-		next;
-	    }
-	}
-	$configfilecontent = 
-	    makeopenofficeprinterentry($printer, $queue, $configprefix,
-				       $configfilecontent);
-    }
-    # Patch PostScript output to print Euro symbol correctly also for
-    # the "Generic Printer"
-    $configfilecontent = removeentry
-	("Generic Printer", "Command=", $configfilecontent);
-    $configfilecontent = addentry
-	("Generic Printer", 
-	 "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}}",
-	 $configfilecontent);
-    # Write back OpenOffice.org configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub addcupsremotetostaroffice {
-    my ($printer, $queue) = @_;
-    # Do we have Star Office installed?
-    my $configfilename = findsofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
-    my $configprefix = $1;
-    # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Update remote CUPS queues
-    if (($printer->{SPOOLER} eq "cups") && 
-	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
-	my @printerlist = getcupsremotequeues();
-	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
-	    my $q = $1;
-	    next if $q ne $queue;
-	    my $server = $2;
-	    # Remove server name from queue name
-	    $q =~ s/^([^@]*)@.*$/$1/;
-	    if (-x "$prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/wget", "-O",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$q.ppd"));
-	    } else {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/curl", "-o",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$q.ppd"));
-	    }
-	    # Does the file exist and is it not an error message?
-	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
-		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
-		 /^\*PPD-Adobe/)) {
-		$configfilecontent = 
-		    makestarofficeprinterentry($printer, $queue,
-					       $configprefix,
-					       $configfilecontent);
-	    } else {
-		unlink ("$prefix/etc/foomatic/$queue.ppd");
-		return 0;
-	    }
-	    last;
-	}
-    }
-    # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub addcupsremotetoopenoffice {
-    my ($printer, $queue) = @_;
-    # Do we have OpenOffice.org installed?
-    my $configfilename = findopenofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
-    my $configprefix = $1;
-    # Load OpenOffice.org printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Update remote CUPS queues
-    if (($printer->{SPOOLER} eq "cups") && 
-	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
-	my @printerlist = getcupsremotequeues();
-	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
-	    my $q = $1;
-	    next if $q ne $queue;
-	    my $server = $2;
-	    # Remove server name from queue name
-	    $q =~ s/^([^@]*)@.*$/$1/;
-	    if (-x "$prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/wget", "-O",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$q.ppd"));
-	    } else {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/curl", "-o",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$q.ppd"));
-	    }
-	    # Does the file exist and is it not an error message?
-	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
-		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
-		 /^\*PPD-Adobe/)) {
-		$configfilecontent = 
-		    makeopenofficeprinterentry($printer, $queue,
-					       $configprefix,
-					       $configfilecontent);
-	    } else {
-		unlink ("$prefix/etc/foomatic/$queue.ppd");
-		return 0;
-	    }
-	}
-    }
-    # Write back OpenOffice.org configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub removeprinterfromstaroffice {
-    my ($printer, $queue) = @_;
-    # Do we have Star Office installed?
-    my $configfilename = findsofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
-    my $configprefix = $1;
-    # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Remove the printer entry
-    $configfilecontent = 
-	removestarofficeprinterentry($printer, $queue, $configprefix,
-				     $configfilecontent);
-    # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub removeprinterfromopenoffice {
-    my ($printer, $queue) = @_;
-    # Do we have OpenOffice.org installed?
-    my $configfilename = findopenofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
-    my $configprefix = $1;
-    # Load OpenOffice.org printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Remove the printer entry
-    $configfilecontent = 
-	removeopenofficeprinterentry($printer, $queue, $configprefix,
-				     $configfilecontent);
-    # Write back OpenOffice.org configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub removelocalprintersfromstaroffice {
-    my ($printer) = @_;
-    # Do we have Star Office installed?
-    my $configfilename = findsofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
-    my $configprefix = $1;
-    # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Remove the printer entries
-    foreach my $queue (keys(%{$printer->{configured}})) {
-	$configfilecontent = 
-	    removestarofficeprinterentry($printer, $queue, $configprefix,
-					 $configfilecontent);
-    }
-    # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub removelocalprintersfromopenoffice {
-    my ($printer) = @_;
-    # Do we have OpenOffice.org installed?
-    my $configfilename = findopenofficeconfigfile();
-    return 1 if !$configfilename;
-    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
-    my $configprefix = $1;
-    # Load OpenOffice.org printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
-    # Remove the printer entries
-    foreach my $queue (keys(%{$printer->{configured}})) {
-	$configfilecontent = 
-	    removeopenofficeprinterentry($printer, $queue, $configprefix,
-					 $configfilecontent);
-    }
-    # Write back OpenOffice.org configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
-}
-
-sub makestarofficeprinterentry {
-    my ($printer, $queue, $configprefix, $configfile) = @_;
-    # Set default printer
-    if ($queue eq $printer->{DEFAULT}) {
-	$configfile = removeentry("windows", "device=", $configfile);
-	$configfile = addentry("windows", 
-			       "device=$queue,$queue PostScript,$queue",
-			       $configfile);
-    }
-    # Make an entry in the "[devices]" section
-    $configfile = removeentry("devices", "$queue=", $configfile);
-    $configfile = addentry("devices", 
-			   "$queue=$queue PostScript,$queue",
-			   $configfile);
-    # Make an entry in the "[ports]" section
-    # The "perl" command patches the PostScript output to print the Euro
-    # symbol correctly.
-    $configfile = removeentry("ports", "$queue=", $configfile);
-    $configfile = addentry("ports", 
-			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue",
-			   $configfile);
-    # Make printer's section
-    $configfile = addsection("$queue,PostScript,$queue", $configfile);
-    # Load PPD file
-    my $ppd = cat_("$prefix/etc/foomatic/$queue.ppd");
-    # Set the PostScript level
-    my $pslevel;
-    if ($ppd =~ /^\s*\*LanguageLevel:\s*\"?([^\s\"]+)\"?\s*$/m) {
-	$pslevel = $1;
-	$pslevel = "2" if $pslevel eq "3";
-    } else {
-	$pslevel = "2";
-    }
-    $configfile = removeentry("$queue.PostScript.$queue",
-			      "Level=", $configfile);
-    $configfile = addentry("$queue.PostScript.$queue", 
-			   "Level=$pslevel", $configfile);
-    # Set Color/BW
-    my $color;
-    if ($ppd =~ /^\s*\*ColorDevice:\s*\"?([Tt]rue)\"?\s*$/m) {
-	$color = "1";
-    } else {
-	$color = "0";
-    }
-    $configfile = removeentry("$queue.PostScript.$queue",
-			      "BitmapColor=", $configfile);
-    $configfile = addentry("$queue.PostScript.$queue", 
-			   "BitmapColor=$color", $configfile);
-    # Set the default paper size
-    if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
-	my $papersize = $1;
-	$configfile = removeentry("$queue.PostScript.$queue",
-				  "PageSize=", $configfile);
-	$configfile = removeentry("$queue.PostScript.$queue",
-				  "PPD_PageSize=", $configfile);
-	$configfile = addentry("$queue.PostScript.$queue", 
-			       "PageSize=$papersize", $configfile);
-	$configfile = addentry("$queue.PostScript.$queue", 
-			       "PPD_PageSize=$papersize", $configfile);
-    }
-    # Link the PPD file
-    run_program::rooted($prefix, 
-			"ln", "-sf", "/etc/foomatic/$queue.ppd", 
-			"$configprefix/share/xp3/ppds/$queue.PS");
-    return $configfile;
-}
-
-sub makeopenofficeprinterentry {
-    my ($printer, $queue, $configprefix, $configfile) = @_;
-    # Make printer's section
-    $configfile = addsection($queue, $configfile);
-    # Load PPD file
-    my $ppd = cat_("$prefix/etc/foomatic/$queue.ppd");
-    # "PPD_PageSize" line
-    if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
-	my $papersize = $1;
-	$configfile = removeentry($queue,
-				  "PPD_PageSize=", $configfile);
-	$configfile = addentry($queue, 
-			       "PPD_PageSize=$papersize", $configfile);
-    }
-    # "Command" line
-    # The "perl" command patches the PostScript output to print the Euro
-    # symbol correctly.
-    $configfile = removeentry($queue, "Command=", $configfile);
-    $configfile = addentry($queue, 
-			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue",
-			   $configfile);
-    # "Comment" line 
-    $configfile = removeentry($queue, "Comment=", $configfile);
-    if (($printer->{configured}{$queue}) &&
-	($printer->{configured}{$queue}{queuedata}{desc})) {
-	$configfile = addentry
-	    ($queue, 
-	     "Comment=$printer->{configured}{$queue}{queuedata}{desc}",
-	     $configfile);
-    } else {
-	$configfile = addentry($queue, 
-			       "Comment=",
-			       $configfile);
-    }
-    # "Location" line 
-    $configfile = removeentry($queue, "Location=", $configfile);
-    if (($printer->{configured}{$queue}) &&
-	($printer->{configured}{$queue}{queuedata}{loc})) {
-	$configfile = addentry
-	    ($queue, 
-	     "Location=$printer->{configured}{$queue}{queuedata}{loc}",
-	     $configfile);
-    } else {
-	$configfile = addentry($queue, 
-			       "Location=",
-			       $configfile);
-    }
-    # "DefaultPrinter" line
-    $configfile = removeentry($queue, "DefaultPrinter=", $configfile);
-    my $default = "0";
-    if ($queue eq $printer->{DEFAULT}) {
-	$default = "1";
-	# "DefaultPrinter=0" for the "Generic Printer"
-	$configfile = removeentry("Generic Printer", "DefaultPrinter=",
-				  $configfile);
-	$configfile = addentry("Generic Printer", 
-			       "DefaultPrinter=0",
-			       $configfile);	
-    }
-    $configfile = addentry($queue, 
-			   "DefaultPrinter=$default",
-			   $configfile);
-    # "Printer" line 
-    $configfile = removeentry($queue, "Printer=", $configfile);
-    $configfile = addentry($queue, 
-			   "Printer=$queue/$queue",
-			   $configfile);
-    # Link the PPD file
-    run_program::rooted($prefix, 
-			"ln", "-sf", "/etc/foomatic/$queue.ppd", 
-			"$configprefix/share/psprint/driver/$queue.PS");
-    return $configfile;
-}
-
-sub removestarofficeprinterentry {
-    my ($printer, $queue, $configprefix, $configfile) = @_;
-    # Remove default printer entry
-    $configfile = removeentry("windows", "device=$queue,", $configfile);
-    # Remove entry in the "[devices]" section
-    $configfile = removeentry("devices", "$queue=", $configfile);
-    # Remove entry in the "[ports]" section
-    $configfile = removeentry("ports", "$queue=", $configfile);
-    # Remove "[$queue,PostScript,$queue]" section
-    $configfile = removesection("$queue,PostScript,$queue", $configfile);
-    # Remove Link of PPD file
-    run_program::rooted($prefix, 
-			"rm", "-f", 
-			"$configprefix/share/xp3/ppds/$queue.PS");
-    return $configfile;
-}
-
-sub removeopenofficeprinterentry {
-    my ($printer, $queue, $configprefix, $configfile) = @_;
-    # Remove printer's section
-    $configfile = removesection($queue, $configfile);
-    # Remove Link of PPD file
-    run_program::rooted($prefix, 
-			"rm", "-f", 
-			"$configprefix/share/psprint/driver/$queue.PS");
-    return $configfile;
-}
-
-sub findsofficeconfigfile {
-    my @configfilenames = 
-	("/usr/lib/*/share/xp3/Xpdefaults",
-	 "/usr/local/lib/*/share/xp3/Xpdefaults",
-	 "/usr/local/*/share/xp3/Xpdefaults",
-	 "/opt/*/share/xp3/Xpdefaults");
-    foreach my $configfilename (@configfilenames) {
-	local *F;
-	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
-	    my $filename = <F>;
-	    close F;
-	    if ($filename) {
-		if ($prefix ne "") {
-		    $filename =~ s/^$prefix//;
-		}
-		# Work around a bug in the "ls" of "busybox". During
-		# installation it outputs the mask given on the command line
-		# instead of nothing when the mask does not match any file
-		next if $filename =~ /\*/;
-		return $filename;
-	    }
-	}
-    }
-    return "";
-}
-
-sub findopenofficeconfigfile {
-    my @configfilenames =
-	("/usr/lib/*/share/psprint/psprint.conf",
-	 "/usr/local/lib/*/share/psprint/psprint.conf",
-	 "/usr/local/*/share/psprint/psprint.conf",
-	 "/opt/*/share/psprint/psprint.conf");
-    foreach my $configfilename (@configfilenames) {
-	local *F;
-	if (open F, "ls -r $prefix$configfilename 2> /dev/null |") {
-	    my $filename = <F>;
-	    close F;
-	    if ($filename) {
-		if ($prefix ne "") {
-		    $filename =~ s/^$prefix//;
-		}
-		# Work around a bug in the "ls" of "busybox". During
-		# installation it outputs the mask given on the command line
-		# instead of nothing when the mask does not match any file
-		next if $filename =~ /\*/;
-		return $filename;
-	    }
-	}
-    }
-    return "";
-}
-
-sub readsofficeconfigfile {
-    my ($file) = @_;
-    local *F; 
-    open F, "< $prefix$file" or return "";
-    my $filecontent = join("", <F>);
-    close F;
-    return $filecontent;
-}
-
-sub writesofficeconfigfile {
-    my ($file, $filecontent) = @_;
-    local *F; 
-    open F, "> $prefix$file" or return 0;
-    print F $filecontent;
-    close F;
-    return 1;
-}
-
-sub addentry {
-    my ($section, $entry, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $entryinserted = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	if (!$sectionfound) {
-	    if (/^\s*\[\s*$section\s*\]\s*$/) {
-		$sectionfound = 1;
-	    }
-	} else {
-	    if (!/^\s*$/ && !/^\s*;/) { #-#
-		$_ = "$entry\n$_";
-		$entryinserted = 1;
-		last;
-	    }
-	}
-    }
-    if ($sectionfound && !$entryinserted) {
-	push(@lines, $entry);
-    }
-    return join ("\n", @lines);
-}
-
-sub addsection {
-    my ($section, $filecontent) = @_;
-    my $entryinserted = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	if (/^\s*\[\s*$section\s*\]\s*$/) {
-	    # section already there, nothing to be done
-	    return $filecontent;
-	}
-    }
-    return $filecontent . "\n[$section]";
-}
-
-sub removeentry {
-    my ($section, $entry, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $done = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	$_ = "$_\n";
-	next if $done;
-	if (!$sectionfound) {
-	    if (/^\s*\[\s*$section\s*\]\s*$/) {
-		$sectionfound = 1;
-	    }
-	} else {
-	    if (/^\s*\[.*\]\s*$/) { # Next section
-		$done = 1;
-	    } elsif (/^\s*$entry/) {
-		$_ = "";
-		$done = 1;
-	    }
-	}
-    }
-    return join ("", @lines);
-}
-
-sub removesection {
-    my ($section, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $done = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	$_ = "$_\n";
-	next if $done;
-	if (!$sectionfound) {
-	    if (/^\s*\[\s*$section\s*\]\s*$/) {
-		$_ = "";
-		$sectionfound = 1;
-	    }
-	} else {
-	    if (/^\s*\[.*\]\s*$/) { # Next section
-		$done = 1;
-	    } else {
-		$_ = "";
-	    }
-	}
-    }
-    return join ("", @lines);
-}
-
-# ------------------------------------------------------------------
-#   GIMP
-# ------------------------------------------------------------------
-
-sub configuregimp {
-    my ($printer, $queue) = @_;
-    # Do we have files to treat?
-    my @configfilenames = findgimpconfigfiles();
-    return 1 if $#configfilenames < 0;
-    # There is no system-wide config file, treat every user's config file
-    foreach my $configfilename (@configfilenames) {
-	# Load GIMP's printer config file
-	my $configfilecontent = readgimpconfigfile($configfilename);
-	# Update local printer queues
-	foreach my $queue (keys(%{$printer->{configured}})) {
-	    # Check if we have a PPD file
-	    if (! -r "$prefix/etc/foomatic/$queue.ppd") {
-		if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
-		    # If we have a PPD file in the CUPS config dir, link to it
-		    run_program::rooted($prefix, 
-					"ln", "-sf",
-					"/etc/cups/ppd/$queue.ppd",
-					"/etc/foomatic/$queue.ppd");
-		} elsif (-r "$prefix/usr/share/postscript/ppd/$queue.ppd") {
-		    # Check PPD directory of GPR, too
-		    run_program::rooted
-			($prefix, 
-			 "ln", "-sf",
-			 "/usr/share/postscript/ppd/$queue.ppd",
-			 "/etc/foomatic/$queue.ppd");
-		} else {
-		    # No PPD file at all? We cannot set up this printer
-		    next;
-		}
-	    }
-	    # Add the printer entry
-	    if (!isgimpprinterconfigured ($queue, $configfilecontent)) {
-		# Remove the old printer entry
-		$configfilecontent = 
-		    removegimpprinter($queue, $configfilecontent);
-		# Add the new printer entry
-		$configfilecontent = 
-		    makegimpprinterentry($printer, $queue,
-					 $configfilecontent);
-	    }
-	}
-	# Default printer
-	if ($printer->{DEFAULT}) {
-	    if ($configfilecontent !~ /^\s*Current\-Printer\s*:/m) {
-		$configfilecontent =~
-		    s/\n/\nCurrent-Printer: $printer->{DEFAULT}\n/s;
-	    } else {
-		$configfilecontent =~ /^\s*Current\-Printer\s*:\s*(\S+)\s*$/m;
-		if (!isgimpprinterconfigured ($1, $configfilecontent)) {
-		    $configfilecontent =~
-			s/(Current\-Printer\s*:\s*)\S+/$1$printer->{DEFAULT}/;
-		}
-	    }
-	}
-	# Write back GIMP's printer configuration file
-	writegimpconfigfile($configfilename, $configfilecontent);
-    }
-    return 1;
-}
-
-sub addcupsremotetogimp {
-    my ($printer, $queue) = @_;
-    # Do we have files to treat?
-    my @configfilenames = findgimpconfigfiles();
-    return 1 if $#configfilenames < 0;
-    my @printerlist = getcupsremotequeues();
-    my $ppdfile = "";
-    if (($printer->{SPOOLER} eq "cups") && 
-	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
-	foreach my $listentry (@printerlist) {
-	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
-	    my $q = $1;
-	    next if $q ne $queue;
-	    my $server = $2;
-	    # Remove server name from queue name
-	    $q =~ s/^([^@]*)@.*$/$1/;
-	    if (-x "$prefix/usr/bin/wget") {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/wget", "-O",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$q.ppd"));
-	    } else {
-		eval(run_program::rooted
-		     ($prefix, "/usr/bin/curl", "-o",
-		      "/etc/foomatic/$queue.ppd",
-		      "http://$server:631/printers/$q.ppd"));
-	    }
-	    # Does the file exist and is it not an error message?
-	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
-		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
-		 /^\*PPD-Adobe/)) {
-		$ppdfile = "/etc/foomatic/$queue.ppd";
-	    } else {
-		unlink ("$prefix/etc/foomatic/$queue.ppd");
-		return 0;
-	    }
-	}
-    } else {
-	return 1;
-    }
-    # There is no system-wide config file, treat every user's config file
-    foreach my $configfilename (@configfilenames) {
-	# Load GIMP's printer config file
-	my $configfilecontent = readgimpconfigfile($configfilename);
-	# Add the printer entry
-	if (!isgimpprinterconfigured ($queue, $configfilecontent)) {
-	    # Remove the old printer entry
-	    $configfilecontent = 
-		removegimpprinter($queue, $configfilecontent);
-	    # Add the new printer entry
-	    $configfilecontent = 
-		makegimpprinterentry($printer, $queue,
-				     $configfilecontent);
-	}
-	# Write back GIMP's printer configuration file
-	writegimpconfigfile($configfilename, $configfilecontent);
-    }
-    return 1;
-}
-
-sub removeprinterfromgimp {
-    my ($printer, $queue) = @_;
-    # Do we have files to treat?
-    my @configfilenames = findgimpconfigfiles();
-    return 1 if $#configfilenames < 0;
-    # There is no system-wide config file, treat every user's config file
-    foreach my $configfilename (@configfilenames) {
-	# Load GIMP's printer config file
-	my $configfilecontent = readgimpconfigfile($configfilename);
-	# Remove the printer entry
-	$configfilecontent = 
-	    removegimpprinter($queue, $configfilecontent);
-	# Write back GIMP's printer configuration file
-	writegimpconfigfile($configfilename, $configfilecontent);
-    }
-    return 1;
-}
-
-sub removelocalprintersfromgimp {
-    my ($printer) = @_;
-    # Do we have files to treat?
-    my @configfilenames = findgimpconfigfiles();
-    return 1 if $#configfilenames < 0;
-    # There is no system-wide config file, treat every user's config file
-    foreach my $configfilename (@configfilenames) {
-	# Load GIMP's printer config file
-	my $configfilecontent = readgimpconfigfile($configfilename);
-	# Remove the printer entries
-	foreach my $queue (keys(%{$printer->{configured}})) {
-	    $configfilecontent = 
-		removegimpprinter($queue, $configfilecontent);
-	}
-	# Write back GIMP's printer configuration file
-	writegimpconfigfile($configfilename, $configfilecontent);
-    }
-    return 1;
-}
-
-sub makegimpprinterentry {
-    my ($printer, $queue, $configfile) = @_;
-    # Make printer's section
-    $configfile = addgimpprinter($queue, $configfile);
-    # Load PPD file
-    my $ppd = cat_("$prefix/etc/foomatic/$queue.ppd");
-    # Is the printer configured with GIMP-Print?
-    my $gimpprintqueue = 0;
-    my $gimpprintdriver = "ps2";
-    if ($ppd =~ /CUPS\s*\+\s*GIMP\s*\-\s*Print/im) {
-	# Native CUPS driver
-	$gimpprintqueue = 1;
-	$ppd =~ /\s*\*ModelName:\s*\"(\S+)\"\s*$/im;
-	$gimpprintdriver = $1;
-    } elsif ($ppd =~ /Foomatic\s*\+\s*gimp\s*\-\s*print/im) {
-	# GhostScript + Foomatic driver
-	$gimpprintqueue = 1;
-	$ppd =~
-	    /'idx'\s*=>\s*'ev\/gimp-print-((escp2|pcl|bjc|lexmark)\-\S*)'/im;
-	$gimpprintdriver = $1;
-    }
-    if ($gimpprintqueue) {
-	# Get the paper size from the PPD file
-	if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
-	    my $papersize = $1;
-	    $configfile = removegimpentry($queue,
-					  "Media-Size", $configfile);
-	    $configfile = addgimpentry($queue, 
-				       "Media-Size: $papersize", $configfile);
-	}
-	$configfile = removegimpentry($queue,
-				      "PPD-File:", $configfile);
-	$configfile = addgimpentry($queue, 
-				   "PPD-File:", $configfile);
-	$configfile = removegimpentry($queue,
-				      "Driver:", $configfile);
-	$configfile = addgimpentry($queue, 
-				   "Driver: $gimpprintdriver", $configfile);
-	$configfile = removegimpentry($queue,
-				      "Destination:", $configfile);
-	$configfile = addgimpentry($queue, 
-				   "Destination: /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue -o raw", $configfile);
-    } else {
-	$configfile = removegimpentry($queue,
-				      "PPD-File:", $configfile);
-	$configfile = addgimpentry($queue, 
-				   "PPD-File: /etc/foomatic/$queue.ppd", $configfile);
-	$configfile = removegimpentry($queue,
-				      "Driver:", $configfile);
-	$configfile = addgimpentry($queue, 
-				   "Driver: ps2", $configfile);
-	$configfile = removegimpentry($queue,
-				      "Destination:", $configfile);
-	$configfile = addgimpentry($queue, 
-				   "Destination: /usr/bin/$lprcommand{$printer->{SPOOLER}{print_command}} -P $queue", $configfile);
-    }
-    return $configfile;
-}
-
-sub findgimpconfigfiles {
-    my @configfilenames;
-    if (-d "$prefix/usr/lib/gimp/1.2") {
-	push (@configfilenames, ".gimp-1.2/printrc");
-    }
-    if (-d "$prefix/usr/lib/gimp/1.3") {
-	push (@configfilenames, ".gimp-1.3/printrc");
-    }
-    my @filestotreat;
-    local *PASSWD;
-    open PASSWD, "< $prefix/etc/passwd" or die "Cannot read /etc/passwd!\n";
-    local $_;
-    while (<PASSWD>) {
-	chomp;
-	if (/^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
-	    my ($username, $uid, $gid, $homedir) = ($1, $2, $3, $4);
-	    if ((($uid == 0) || ($uid >= 500)) && ($username ne "nobody")) {
-		foreach my $file (@configfilenames) {
-		    my $dir = "$homedir/$file";
-		    $dir =~ s,/[^/]*$,,;
-		    next if (-f $dir) && (! -d $dir);
-		    if (! -d "$prefix$dir") {
-			run_program::rooted($prefix, 
-					    "/bin/mkdir", $dir)
-			    or next;
-			run_program::rooted($prefix, 
-					      "/bin/chown", "$uid.$gid", $dir)
-			    or next;
-		    }
-		    if (! -f "$prefix$homedir/$file") {
-			local *F;
-			open F, "> $prefix$homedir/$file" or next;
-			print F "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n";
-			close F;
-			run_program::rooted($prefix, 
-					    "/bin/chown", "$uid.$gid",
-					    "$homedir/$file")
-			    or next;
-		    }
-		    push (@filestotreat, "$homedir/$file");
-		}
-	    }
-	}
-    }
-    @filestotreat;
-}
-
-sub readgimpconfigfile {
-    my ($file) = @_;
-    local *F; 
-    open F, "< $prefix$file" or return "";
-    my $filecontent = join("", <F>);
-    close F;
-    return $filecontent;
-}
-
-sub writegimpconfigfile {
-    my ($file, $filecontent) = @_;
-    local *F; 
-    open F, "> $prefix$file" or return 0;
-    print F $filecontent;
-    close F;
-    return 1;
-}
-
-sub addgimpentry {
-    my ($section, $entry, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $entryinserted = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	if (!$sectionfound) {
-	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
-		$sectionfound = 1;
-	    }
-	} else {
-	    if (!/^\s*$/ && !/^\s*;/) { #-#
-		$_ = "$entry\n$_";
-		$entryinserted = 1;
-		last;
-	    }
-	}
-    }
-    if ($sectionfound && !$entryinserted) {
-	push(@lines, $entry);
-    }
-    return join ("\n", @lines);
-}
-
-sub addgimpprinter {
-    my ($section, $filecontent) = @_;
-    my $entryinserted = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	if (/^\s*Printer\s*:\s*($section)\s*$/) {
-	    # section already there, nothing to be done
-	    return $filecontent;
-	}
-    }
-    return $filecontent . "\nPrinter: $section";
-}
-
-sub removegimpentry {
-    my ($section, $entry, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $done = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	$_ = "$_\n";
-	next if $done;
-	if (!$sectionfound) {
-	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
-		$sectionfound = 1;
-	    }
-	} else {
-	    if (/^\s*Printer\s*:\s*.*\s*$/) { # Next section
-		$done = 1;
-	    } elsif (/^\s*$entry/) {
-		$_ = "";
-		$done = 1;
-	    }
-	}
-    }
-    return join ("", @lines);
-}
-
-sub removegimpprinter {
-    my ($section, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $done = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	$_ = "$_\n";
-	next if $done;
-	if (!$sectionfound) {
-	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
-		$_ = "";
-		$sectionfound = 1;
-	    }
-	} else {
-	    if (/^\s*Printer\s*:\s*.*\s*$/) { # Next section
-		$done = 1;
-	    } else {
-		$_ = "";
-	    }
-	}
-    }
-    return join ("", @lines);
-}
-
-sub isgimpprinterconfigured {
-    my ($queue, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $done = 0;
-    my $drivernotps2 = 0;
-    my $ppdfileset = 0;
-    my $nonrawprinting = 0;
-    my @lines = split("\n", $filecontent);
-    foreach (@lines) {
-	last if $done;
-	if (!$sectionfound) {
-	    if (/^\s*Printer\s*:\s*($queue)\s*$/) {
-		$sectionfound = 1;
-	    }
-	} else {
-	    if (/^\s*Printer\s*:\s*.*\s*$/) { # Next section
-		$done = 1;
-	    } elsif (/^\s*Driver:\s*(\S+)\s*$/) {
-		$drivernotps2 = ($1 ne "ps2");
-	    } elsif (/^\s*PPD\-File:\s*(\S+)\s*$/) {
-		$ppdfileset = 1;
-	    } elsif (/^\s*Destination:\s*(\S+.*)$/) {
-		$nonrawprinting = ($1 !~ /\-o\s*raw/);
-	    } 
-	}
-    }
-    return 0 if $done && !$sectionfound;
-    return 1 if $ppdfileset || $drivernotps2 || $nonrawprinting;
-    return 0;
-}
-
-# ------------------------------------------------------------------
 
 1;

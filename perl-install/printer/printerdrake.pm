@@ -1,7 +1,7 @@
-package printerdrake;
+package printer::printerdrake;
 # $Id$
-use diagnostics;
-use strict;
+
+
 
 
 use common;
@@ -9,7 +9,10 @@ use detect_devices;
 use modules;
 use network;
 use log;
-use printer;
+use printer::main;
+use printer::services;
+use printer::detect;
+use printer::default;
 
 1;
 
@@ -20,7 +23,7 @@ sub choose_printer_type {
     $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
     my $autodetect = 0;
     $autodetect = 1 if $printer->{AUTODETECT};
-    my @printertypes = printer::printer_type($printer);
+    my @printertypes = printer::main::printer_type($printer);
     $in->ask_from_(
 		   { title => N("Select Printer Connection"),
 		     messages => N("How is the printer connected?") .
@@ -63,13 +66,13 @@ sub config_cups {
     # when "Apply" was at least pressed once.
     my $retvalue = 0;
     # Read CUPS config file
-    my @cupsd_conf = printer::read_cupsd_conf();
+    my @cupsd_conf = printer::main::read_cupsd_conf();
     foreach (@cupsd_conf) {
 	/^\s*BrowsePoll\s+(\S+)/ and $server = $1, last;
     }
     $server =~ /([^:]*):(.*)/ and ($server, $port) = ($1, $2);
     #- Did we have automatic or manual configuration mode for CUPS
-    $autoconf = printer::get_cups_autoconf();
+    $autoconf = printer::main::get_cups_autoconf();
     #- Remember the server/port/autoconf settings to check whether the user
     #- has changed them.
     my $oldserver = $server;
@@ -123,11 +126,11 @@ Normally, CUPS is automatically configured according to your network environment
 		    map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/;
 			  $_ } @cupsd_conf;
 	    }
-	    printer::write_cupsd_conf(@cupsd_conf);
+	    printer::main::write_cupsd_conf(@cupsd_conf);
 	}
 	# Set auto-configuration state
 	if ($autoconf != $oldautoconf) {
-	    printer::set_cups_autoconf($autoconf);
+	    printer::main::set_cups_autoconf($autoconf);
 	}
 	# Save user settings for auto-install
 	$printer->{BROWSEPOLLADDR} = $server;
@@ -142,49 +145,28 @@ sub setup_printer_connection {
     # Choose the appropriate connection config dialog
     my $done = 1;
     foreach ($printer->{TYPE}) {
-	/LOCAL/     and setup_local_autoscan ($printer, $in, $upNetwork)
-	    and last;
-	/LPD/       and setup_lpd      ($printer, $in, $upNetwork) and last;
-	/SOCKET/    and setup_socket   ($printer, $in, $upNetwork) and last;
-	/SMB/       and setup_smb      ($printer, $in, $upNetwork) and last;
-	/NCP/       and setup_ncp      ($printer, $in, $upNetwork) and last;
-	/URI/       and setup_uri      ($printer, $in, $upNetwork) and last;
-	/POSTPIPE/  and setup_postpipe ($printer, $in) and last;
+	/LOCAL/    and setup_local_autoscan ($printer, $in, $upNetwork) and last;
+	/LPD/      and setup_lpd      ($printer, $in, $upNetwork) and last;
+	/SOCKET/   and setup_socket   ($printer, $in, $upNetwork) and last;
+	/SMB/      and setup_smb      ($printer, $in, $upNetwork) and last;
+	/NCP/      and setup_ncp      ($printer, $in, $upNetwork) and last;
+	/URI/      and setup_uri      ($printer, $in, $upNetwork) and last;
+	/POSTPIPE/ and setup_postpipe ($printer, $in) and last;
 	$done = 0; last;
     }
     return $done;
 }
 
-sub local_detect {
-    modules::get_probeall("usb-interface") and eval { modules::load("printer") };
-    eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
-    eval { modules::load(qw(parport_pc lp parport_probe)) }; #- take care as not available on 2.4 kernel (silent error).
-    my $b = before_leaving { eval { modules::unload("parport_probe") } };
-    detect_devices::whatPrinter();
-}
-
-sub net_detect {
-    printer::whatNetPrinter(1, 0)
-}
-
-sub net_smb_detect {
-    printer::whatNetPrinter(0, 1)
-}
-
-sub detect {
-    local_detect(), net_detect(), net_smb_detect();
-}
-
 sub first_time_dialog {
     my ($printer, $in, $upNetwork) = @_;
-    return 1 if printer::get_default_spooler () or $::isInstall;
+    return 1 if printer::default::get_spooler () or $::isInstall;
 
     # Wait message
     my $w = $in->wait_message(N("Printerdrake"), 
 			      N("Checking your system..."));
 
     # Auto-detect local printers
-    my @autodetected = local_detect();
+    my @autodetected = printer::detect::local_detect();
     my @printerlist;
     my $localprinterspresent;
     if (@autodetected == ()) {
@@ -233,7 +215,7 @@ sub first_time_dialog {
     # configure networking.
     my $havelocalnetworks = 
 	 (check_network($printer, $in, $upNetwork, 1) && 
-	  (printer::getIPsInLocalNetworks() != ()));
+	  (printer::detect::getIPsInLocalNetworks() != ()));
 
     # Finish building the dialog text
     my $question = ($havelocalnetworks ?
@@ -268,7 +250,7 @@ sub wizard_welcome {
 	undef $printer->{AUTODETECTSMB};
     } else {
 	$havelocalnetworks = ((check_network($printer, $in, $upNetwork, 1)) &&
-			      (printer::getIPsInLocalNetworks() != ()));
+			      (printer::detect::getIPsInLocalNetworks() != ()));
 	if (!$havelocalnetworks) {
 	    undef $printer->{AUTODETECTNETWORK};
 	    undef $printer->{AUTODETECTSMB};
@@ -340,21 +322,9 @@ If you have printer(s) connected to this machine, Please plug it/them in on this
 			 { text => N("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
 			   val => \$autodetectsmb } : ())) : ())
 		      ]);
-		if ($autodetectlocal) {
-		    $printer->{AUTODETECTLOCAL} = 1;
-		} else {
-		    undef $printer->{AUTODETECTLOCAL};
-		}
-		if ($autodetectnetwork) {
-		    $printer->{AUTODETECTNETWORK} = 1;
-		} else {
-		    undef $printer->{AUTODETECTNETWORK};
-		}
-		if ($autodetectsmb && ($printer->{SPOOLER} ne "pdq")) {
-		    $printer->{AUTODETECTSMB} = 1;
-		} else {
-		    undef $printer->{AUTODETECTSMB};
-		}
+		$printer->{AUTODETECTLOCAL} = $autodetectlocal ? 1 : undef;
+		$printer->{AUTODETECTNETWORK} = $autodetectnetwork ? 1 : undef;
+		$printer->{AUTODETECTSMB} = ($autodetectsmb && ($printer->{SPOOLER} ne "pdq")) ? 1 : undef;
 	    }
 	};
 	return ($@ =~ /wizcancel/) ? 0 : $ret;
@@ -390,7 +360,7 @@ sub setup_local_autoscan {
     # If the user requested auto-detection of remote printers, check
     # whether the network functionality is configured and running
     if ($printer->{AUTODETECTNETWORK} || $printer->{AUTODETECTSMB}) {
-	if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
+	return 0 unless check_network($printer, $in, $upNetwork, 0);
     }
 
     my @autodetected;
@@ -399,17 +369,18 @@ sub setup_local_autoscan {
     if ($do_auto_detect) {
 	if ((!$::testing) &&
 	    (!$expert_or_modify) && ($printer->{AUTODETECTSMB}) &&
-	    (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+	    (!files_exist((qw(/usr/bin/smbclient))))) {
 	    $in->do_pkgs->install('samba-client');
 	}
 	my $w = $in->wait_message(N("Printer auto-detection"), N("Detecting devices..."));
 	# When HPOJ is running, it blocks the printer ports on which it is
 	# configured, so we stop it here. If it is not installed or not 
 	# configured, this command has no effect.
-	printer::stop_service("hpoj");
-	@autodetected = ($expert_or_modify || $printer->{AUTODETECTLOCAL})    and local_detect,
-				 (!$expert_or_modify && $printer->{AUTODETECTNETWORK}) and net_detect,
-				 (!$expert_or_modify && $printer->{AUTODETECTSMB})     and net_smb_detect;
+	require services;
+	services::stop("hpoj");
+	@autodetected = ($expert_or_modify || $printer->{AUTODETECTLOCAL})    and printer::detect::local_detect(),
+				 (!$expert_or_modify && $printer->{AUTODETECTNETWORK}) and printer::detect::net_detect(),
+				 (!$expert_or_modify && $printer->{AUTODETECTSMB})     and printer::detect::net_smb_detect();
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
 	$printer->{MORETHANONE} = ($#autodetected > 0);
@@ -476,7 +447,7 @@ sub setup_local_autoscan {
 	}
 	# We are ready with auto-detection, so we restart HPOJ here. If it 
 	# is not installed or not configured, this command has no effect.
-	printer::start_service("hpoj");
+	printer::services::start("hpoj");
     } else {
 	# Always ask for queue name in recommended mode when no auto-
 	# detection was done
@@ -557,15 +528,11 @@ sub setup_local_autoscan {
 		last;
 	    }
 	}
-    } else {
-	$device = "";
-    }
+    } else { $device = "" }
     if (($menuchoice eq "") && (@menuentrieslist > -1)) {
 	$menuchoice = $menuentrieslist[0];
 	$oldmenuchoice = $menuchoice;
-	if ($device eq "") {
-	    $device = $menuentries->{$menuchoice};
-	}
+	$device = $menuentries->{$menuchoice} if $device eq "";
     }
     if ($in) {
 	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
@@ -660,7 +627,7 @@ sub setup_local_autoscan {
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if ((($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng')) &&
         (!$::testing) && ($device =~ /^socket:/) &&
-        (!printer::files_exist((qw(/usr/bin/nc))))) {
+        (!files_exist((qw(/usr/bin/nc))))) {
         $in->do_pkgs->install('nc');
     }
 
@@ -716,13 +683,13 @@ complete => sub {
     #- LPD does not support filtered queues to a remote LPD server by itself
     #- It needs an additional program as "rlpr"
     if (($printer->{SPOOLER} eq 'lpd') && (!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/rlpr))))) {
+        (!files_exist((qw(/usr/bin/rlpr))))) {
         $in->do_pkgs->install('rlpr');
     }
 
     # Auto-detect printer model (works if host is an ethernet-connected
     # printer)
-    my $modelinfo = printer::getSNMPModel ($remotehost);
+    my $modelinfo = printer::detect::getSNMPModel ($remotehost);
     my $auto_hpoj;
     if ((defined($modelinfo)) &&
 	($modelinfo->{MANUFACTURER} ne "") &&
@@ -740,7 +707,7 @@ complete => sub {
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		  $printer->{currentqueue}{connect}, $auto_hpoj,
                   ({port => $printer->{currentqueue}{connect},
-                    val => $modelinfo }));
+                    val => $modelinfo}));
 
     1;
 }
@@ -802,11 +769,11 @@ sub setup_smb {
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
 	if ((!$::testing) &&
-	    (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+	    (!files_exist((qw(/usr/bin/smbclient))))) {
 	    $in->do_pkgs->install('samba-client');
 	}
 	my $w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
-	@autodetected = net_smb_detect();
+	@autodetected = printer::detect::net_smb_detect();
 	foreach my $p (@autodetected) {
 	    my $menustr;
 	    $p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!;
@@ -872,7 +839,7 @@ sub setup_smb {
 	     val => \$menuchoice, list => \@menuentrieslist, 
 	     not_edit => 1, format => \&translate, sort => 0,
 	     allow_empty_list => 1, type => 'combo' } :
-	   ()) ],
+	     ()) ],
 	 complete => sub {
 	     if (!network::is_ip($smbserverip) && $smbserverip ne "") {
 		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
@@ -930,10 +897,10 @@ Do you really want to continue setting up this printer as you are doing now?"), 
     ($smbserver || $smbserverip), "/$smbshare");
 
     if ((!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+        (!files_exist((qw(/usr/bin/smbclient))))) {
 	$in->do_pkgs->install('samba-client');
     }
-    $printer->{SPOOLER} eq 'cups' and printer::restart_queue($printer);
+    $printer->{SPOOLER} eq 'cups' and printer::main::restart_queue($printer);
     1;
 }
 
@@ -1000,7 +967,7 @@ complete => sub {
     "$ncpserver/$ncpqueue");
 
     if ((!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/nprint))))) {
+        (!files_exist((qw(/usr/bin/nprint))))) {
 	$in->do_pkgs->install('ncpfs');
     }
 
@@ -1046,7 +1013,7 @@ sub setup_socket {
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
 	my $w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
-	@autodetected = net_detect();
+	@autodetected = printer::detect::net_detect();
 	foreach my $p (@autodetected) {
 	    my $menustr;
 	    $p->{port} =~ m!^socket://([^:]+):(\d+)$!;
@@ -1134,7 +1101,7 @@ sub setup_socket {
 	   { val => \$menuchoice, list => \@menuentrieslist, 
 	     not_edit => 0, format => \&translate, sort => 0,
 	     allow_empty_list => 1, type => 'list' } :
-	   ())
+	     ())
 	  ]
 	 );
     
@@ -1145,14 +1112,14 @@ sub setup_socket {
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if ((($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng'))&& 
         (!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/nc))))) {
+        (!files_exist((qw(/usr/bin/nc))))) {
         $in->do_pkgs->install('nc');
     }
 
     # Auto-detect printer model
     my $modelinfo;
     if ($printer->{AUTODETECT}) {
-	$modelinfo = printer::getSNMPModel ($remotehost);
+	$modelinfo = printer::detect::getSNMPModel ($remotehost);
     }
     my $auto_hpoj;
     if ((defined($modelinfo)) &&
@@ -1210,24 +1177,24 @@ complete => sub {
     # It needs an additional program as "rlpr"
     if (($printer->{currentqueue}{connect} =~ /^lpd:/) &&
 	($printer->{SPOOLER} eq 'lpd') && (!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/rlpr))))) {
+        (!files_exist((qw(/usr/bin/rlpr))))) {
         $in->do_pkgs->install('rlpr');
     }
     if (($printer->{currentqueue}{connect} =~ /^smb:/) &&
         (!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+        (!files_exist((qw(/usr/bin/smbclient))))) {
 	$in->do_pkgs->install('samba-client');
     }
     if (($printer->{currentqueue}{connect} =~ /^ncp:/) &&
 	(!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/nprint))))) {
+        (!files_exist((qw(/usr/bin/nprint))))) {
 	$in->do_pkgs->install('ncpfs');
     }
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if (($printer->{currentqueue}{connect} =~ /^socket:/) &&
 	(($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng')) &&
         (!$::testing) &&
-        (!printer::files_exist((qw(/usr/bin/nc))))) {
+        (!files_exist((qw(/usr/bin/nc))))) {
         $in->do_pkgs->install('nc');
     }
 
@@ -1239,7 +1206,7 @@ complete => sub {
 	# Auto-detect printer model (works if host is an ethernet-connected
 	# printer)
 	my $remotehost = $1;
-	my $modelinfo = printer::getSNMPModel ($remotehost);
+	my $modelinfo = printer::main::getSNMPModel ($remotehost);
         my $auto_hpoj;
         if ((defined($modelinfo)) &&
             ($modelinfo->{MANUFACTURER} ne "") &&
@@ -1325,7 +1292,7 @@ sub setup_common {
 	    ($isHPOJ)) {
 	    # Install HPOJ package
 	    if ((!$::testing) &&
-		(!printer::files_exist((qw(/usr/sbin/ptal-mlcd
+		(!files_exist((qw(/usr/sbin/ptal-mlcd
 					   /usr/sbin/ptal-init
 					   /usr/bin/xojpanel))))) {
 		my $w = $in->wait_message(N("Printerdrake"),
@@ -1336,7 +1303,7 @@ sub setup_common {
 	    my $w = $in->wait_message
 		(N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."));
-	    $ptaldevice = printer::configure_hpoj($device, @autodetected);
+	    $ptaldevice = printer::main::configure_hpoj($device, @autodetected);
 	    
 	    if ($ptaldevice) {
 		# Configure scanning with SANE on the MF device
@@ -1344,12 +1311,12 @@ sub setup_common {
 		    ($makemodel !~ /HP\s+LaserJet\s+2200/i)) {
 		    # Install SANE
 		    if ((!$::testing) &&
-			(!printer::files_exist((qw(/usr/bin/scanimage
+			(!files_exist((qw(/usr/bin/scanimage
 						   /usr/bin/xscanimage
 						   /usr/bin/xsane
 						   /etc/sane.d/dll.conf
 						   /usr/lib/libsane-hpoj.so.1),
-						(printer::files_exist
+						(files_exist
 						 ('/usr/bin/gimp') ? 
 						 '/usr/bin/xsane-gimp' : 
 						 ()))))) {
@@ -1363,7 +1330,7 @@ sub setup_common {
 						  ('gimp'),'xsane-gimp'));
 		    }
 		    # Configure the HPOJ SANE backend
-		    printer::config_sane();
+		    printer::main::config_sane();
 		}
 		# Configure photo card access with mtools and MToolsFM
 		if ((($makemodel =~ /HP\s+PhotoSmart/i) ||
@@ -1373,7 +1340,7 @@ sub setup_common {
 		    ($makemodel !~ /HP\s+PhotoSmart\s+7150/i)) {
 		    # Install mtools and MToolsFM
 		    if ((!$::testing) &&
-			(!printer::files_exist(qw(/usr/bin/mdir
+			(!files_exist(qw(/usr/bin/mdir
 						  /usr/bin/mcopy
 						  /usr/bin/MToolsFM
 						  )))) {
@@ -1383,7 +1350,7 @@ sub setup_common {
 			$in->do_pkgs->install('mtools', 'mtoolsfm');
 		    }
 		    # Configure mtools/MToolsFM for photo card access
-		    printer::config_photocard();
+		    printer::main::config_photocard();
 		}
 		
 		my $text = "";
@@ -1429,14 +1396,14 @@ sub setup_common {
 	($device !~ /^http:/) &&
 	($device !~ /^ipp:/)) {
 	my $w = $in->wait_message(N("Printerdrake"), N("Making printer port available for CUPS..."));
-	printer::assure_device_is_available_for_cups($ptaldevice || $device);
+	printer::main::assure_device_is_available_for_cups($ptaldevice || $device);
     }
 
     #- Read the printer driver database if necessary
-    if ((keys %printer::thedb) == 0) {
+    if ((keys %printer::main::thedb) == 0) {
 	my $w = $in->wait_message(N("Printerdrake"),
 				  N("Reading printer database..."));
-        printer::read_printer_db($printer->{SPOOLER});
+        printer::main::read_printer_db($printer->{SPOOLER});
     }
 
     #- Search the database entry which matches the detected printer best
@@ -1467,7 +1434,7 @@ sub setup_common {
 	# If there is more than one matching database entry, the longest match
 	# counts.
 	my $matchlength = 0;
-	foreach my $entry (keys %printer::thedb) {
+	foreach my $entry (keys %printer::main::thedb) {
 	    my $dbmakemodel;
 	    if ($::expert) {
 		$entry =~ m/^(.*)\|[^\|]*$/;
@@ -1494,7 +1461,7 @@ sub setup_common {
 	}
 	if (!$printer->{DBENTRY}) {
 	    $printer->{DBENTRY} =
-		bestMatchSentence ($descr, keys %printer::thedb);
+		bestMatchSentence ($descr, keys %printer::main::thedb);
 	}
         # If the manufacturer was not guessed correctly, discard the
         # guess.
@@ -1559,10 +1526,10 @@ N("Every printer needs a name (for example \"printer\"). The Description and Loc
 sub get_db_entry {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
-    if ((keys %printer::thedb) == 0) {
+    if ((keys %printer::main::thedb) == 0) {
 	my $w = $in->wait_message(N("Printerdrake"),
 				  N("Reading printer database..."));
-        printer::read_printer_db($printer->{SPOOLER});
+        printer::main::read_printer_db($printer->{SPOOLER});
     }
     my $w = $in->wait_message(N("Printerdrake"),
 			      N("Preparing printer database..."));
@@ -1583,7 +1550,7 @@ sub get_db_entry {
 		$printer->{DBENTRY} = "$make|$model|$driverstr";
 		# database key contains the "(recommended)" for the
 		# recommended driver, so add it if necessary
-		if (!member($printer->{DBENTRY}, keys(%printer::thedb))) {
+		if (!member($printer->{DBENTRY}, keys(%printer::main::thedb))) {
 		    $printer->{DBENTRY} .= " (recommended)";
 		}
 	    } else {
@@ -1593,7 +1560,7 @@ sub get_db_entry {
 	} elsif (($printer->{SPOOLER} eq "cups") && ($::expert) &&
 		 ($printer->{configured}{$queue}{queuedata}{ppd})) {
 	    # Do we have a native CUPS driver or a PostScript PPD file?
-	    $printer->{DBENTRY} = printer::get_descr_from_ppd($printer) || $printer->{DBENTRY};
+	    $printer->{DBENTRY} = printer::main::get_descr_from_ppd($printer) || $printer->{DBENTRY};
 	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
 	} else {
 	    # Point the list cursor at least to manufacturer and model of the
@@ -1601,7 +1568,7 @@ sub get_db_entry {
 	    $printer->{DBENTRY} = "";
 	    my $make = uc($printer->{configured}{$queue}{queuedata}{make});
 	    my $model = $printer->{configured}{$queue}{queuedata}{model};
-	    foreach my $key (keys %printer::thedb) {
+	    foreach my $key (keys %printer::main::thedb) {
 		if ((($::expert) && ($key =~ /^$make\|$model\|.*\(recommended\)$/)) ||
 		    ((!$::expert) && ($key =~ /^$make\|$model$/))) {
 		    $printer->{DBENTRY} = $key;
@@ -1613,7 +1580,7 @@ sub get_db_entry {
 		$model =~ s/PS//;
 		$model =~ s/PostScript//;
 		$model =~ s/Series//;
-		foreach my $key (keys %printer::thedb) {
+		for $key (keys %printer::main::thedb) {
 		    if ((($::expert) && ($key =~ /^$make\|$model\|.*\(recommended\)$/)) ||
 			((!$::expert) && ($key =~ /^$make\|$model$/))) {
 			$printer->{DBENTRY} = $key;
@@ -1623,7 +1590,7 @@ sub get_db_entry {
 	    if (($printer->{DBENTRY} eq "") && ($make ne "")) {
 		# Exact match with cleaned-up model did not work, try a best match
 		my $matchstr = "$make|$model";
-		$printer->{DBENTRY} = bestMatchSentence($matchstr, keys %printer::thedb);
+		$printer->{DBENTRY} = bestMatchSentence($matchstr, keys %printer::main::thedb);
 		# If the manufacturer was not guessed correctly, discard the
 		# guess.
 		$printer->{DBENTRY} =~ /^([^\|]+)\|/;
@@ -1639,7 +1606,7 @@ sub get_db_entry {
     } else {
 	if (($::expert) && ($printer->{DBENTRY} !~ /(recommended)/)) {
 	    my ($make, $model) = $printer->{DBENTRY} =~ /^([^\|]+)\|([^\|]+)\|/;
-	    foreach my $key (keys %printer::thedb) {
+	    foreach my $key (keys %printer::main::thedb) {
 		if ($key =~ /^$make\|$model\|.*\(recommended\)$/) {
 		    $printer->{DBENTRY} = $key;
 		}
@@ -1680,12 +1647,12 @@ sub choose_model {
     my ($printer, $in) = @_;
     $in->set_help('chooseModel') if $::isInstall;
     #- Read the printer driver database if necessary
-    if ((keys %printer::thedb) == 0) {
+    if ((keys %printer::main::thedb) == 0) {
 	my $w = $in->wait_message(N("Printerdrake"),
 				  N("Reading printer database..."));
-        printer::read_printer_db($printer->{SPOOLER});
+        printer::main::read_printer_db($printer->{SPOOLER});
     }
-    if (!member($printer->{DBENTRY}, keys(%printer::thedb))) {
+    if (!member($printer->{DBENTRY}, keys(%printer::main::thedb))) {
 	$printer->{DBENTRY} = N("Raw printer (No driver)");
     }
     # Choose the printer/driver from the list
@@ -1695,17 +1662,17 @@ sub choose_model {
 
 Please check whether Printerdrake did the auto-detection of your printer model correctly. Search the correct model in the list when the cursor is standing on a wrong model or on \"Raw printer\".") . " " .
 N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
-							 [ keys %printer::thedb ], $printer->{DBENTRY}));
+							 [ keys %printer::main::thedb ], $printer->{DBENTRY}));
 
 }
 
 sub get_printer_info {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
-    #if ((keys %printer::thedb) == 0) {
+    #if ((keys %printer::main::thedb) == 0) {
     #    my $w = $in->wait_message(N("Printerdrake"), 
     #                              N("Reading printer database..."));
-    #    printer::read_printer_db($printer->{SPOOLER});
+    #    printer::main::read_printer_db($printer->{SPOOLER});
     #}
     my $queue = $printer->{OLD_QUEUE};
     my $oldchoice = $printer->{OLD_CHOICE};
@@ -1714,13 +1681,13 @@ sub get_printer_info {
 	(($oldchoice) && ($printer->{DBENTRY}) && # make/model/driver changed
 	 (($oldchoice ne $printer->{DBENTRY}) ||
 	  ($printer->{currentqueue}{driver} ne 
-	   $printer::thedb{$printer->{DBENTRY}}{driver})))) {
+	   $printer::main::thedb{$printer->{DBENTRY}}{driver})))) {
 	delete($printer->{currentqueue}{printer});
 	delete($printer->{currentqueue}{ppd});
 	$printer->{currentqueue}{foomatic} = 0;
 	# Read info from printer database
 	foreach (qw(printer ppd driver make model)) { #- copy some parameter, shorter that way...
-	    $printer->{currentqueue}{$_} = $printer::thedb{$printer->{DBENTRY}}{$_};
+	    $printer->{currentqueue}{$_} = $printer::main::thedb{$printer->{DBENTRY}}{$_};
 	}
 	$newdriver = 1;
     }
@@ -1739,7 +1706,7 @@ sub get_printer_info {
 		    $printer->{ARGS} = $printer->{configured}{$queue}{args};
 		} else {
 		    # ... and the user has chosen another printer/driver
-		    $printer->{ARGS} = printer::read_foomatic_options($printer);
+		    $printer->{ARGS} = printer::main::read_foomatic_options($printer);
 		}
 	    } else {
 		# The queue was not configured with Foomatic before
@@ -1776,16 +1743,16 @@ sub get_printer_info {
 		    }
 		    $printer->{currentqueue}{connect} = 'file:/dev/null';
 		    # Start the oki4daemon
-		    printer::start_service_on_boot('oki4daemon');
-		    printer::start_service('oki4daemon');
+		    services::start_service_on_boot('oki4daemon');
+		    printer::services::start('oki4daemon');
 		    # Set permissions
 		    if ($printer->{SPOOLER} eq 'cups') {
-			printer::set_permissions('/dev/oki4drv', '660', 'lp',
+			set_permissions('/dev/oki4drv', '660', 'lp',
 						 'sys');
 		    } elsif ($printer->{SPOOLER} eq 'pdq') {
-			printer::set_permissions('/dev/oki4drv', '666');
+			set_permissions('/dev/oki4drv', '666');
 		    } else {
-			printer::set_permissions('/dev/oki4drv', '660', 'lp',
+			set_permissions('/dev/oki4drv', '660', 'lp',
 						 'lp');
 		    }
 		} elsif ($printer->{currentqueue}{driver} eq 'lexmarkinkjet') {
@@ -1822,11 +1789,11 @@ sub get_printer_info {
 		    # Set device permissions
 		    $printer->{currentqueue}{connect} =~ /^\s*file:(\S*)\s*$/;
 		    if ($printer->{SPOOLER} eq 'cups') {
-			printer::set_permissions($1, '660', 'lp', 'sys');
+			set_permissions($1, '660', 'lp', 'sys');
 		    } elsif ($printer->{SPOOLER} eq 'pdq') {
-			printer::set_permissions($1, '666');
+			set_permissions($1, '666');
 		    } else {
-			printer::set_permissions($1, '660', 'lp', 'lp');
+			set_permissions($1, '660', 'lp', 'lp');
 		    }
 		    # This is needed to have the device not blocked by the
 		    # spooler backend.
@@ -1836,10 +1803,10 @@ sub get_printer_info {
 		    if ($drivertype eq 'Z22') { $drivertype = 'Z32' }
 		    if ($drivertype eq 'Z23') { $drivertype = 'Z33' }
 		    $drivertype = lc($drivertype);
-		    if (!printer::files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
+		    if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
 			eval { $in->do_pkgs->install("lexmark-drivers-$drivertype") };
 		    }
-		    if (!printer::files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
+		    if (!files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
 			# Driver installation failed, probably we do not have
 			# the commercial CDs
 			$in->ask_warn(N("Lexmark inkjet configuration"),
@@ -1857,7 +1824,7 @@ Some of these printers, as the HP LaserJet 1000, for which this driver was origi
 The first command can be given by any normal user, the second must be given as root. After having done so you can print normally.
 "));
 		}
-		$printer->{ARGS} = printer::read_foomatic_options($printer);
+		$printer->{ARGS} = printer::main::read_foomatic_options($printer);
 		delete($printer->{SPECIAL_OPTIONS});
 	    }
 	} elsif ($printer->{currentqueue}{ppd}) { # CUPS+PPD queue?
@@ -1872,14 +1839,14 @@ The first command can be given by any normal user, the second must be given as r
 		if ((!$printer->{DBENTRY}) || (!$oldchoice) ||
 		    ($printer->{DBENTRY} eq $oldchoice)) {
 		    # ... and the user didn't change the printer/driver
-		    $printer->{ARGS} = printer::read_cups_options($queue);
+		    $printer->{ARGS} = printer::main::read_cups_options($queue);
 		} else {
 		    # ... and the user has chosen another printer/driver
-		    $printer->{ARGS} = printer::read_cups_options("/usr/share/cups/model/$printer->{currentqueue}{ppd}");
+		    $printer->{ARGS} = printer::main::read_cups_options("/usr/share/cups/model/$printer->{currentqueue}{ppd}");
 		}
 	    } else {
 		# The queue was not configured before
-		$printer->{ARGS} = printer::read_cups_options("/usr/share/cups/model/$printer->{currentqueue}{ppd}");
+		$printer->{ARGS} = printer::main::read_cups_options("/usr/share/cups/model/$printer->{currentqueue}{ppd}");
 	    }
 	}
     }
@@ -2050,7 +2017,7 @@ sub setup_options {
 			$printer->{DBENTRY} =~ /^[^\|]*\|[^\|]*\|(.*)$/;
 			$driver = $1;
 		    } else {
-			$driver = printer::get_descr_from_ppd($printer);
+			$driver = printer::main::get_descr_from_ppd($printer);
 			if ($driver =~ /^[^\|]*\|[^\|]*$/) { # No driver info
 			    $driver = "CUPS/PPD";
 			} else {
@@ -2092,7 +2059,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 			 }
 		     }
 		     return (0);
-		 });
+		 } );
 	}
 	# Read out the user's choices and generate the appropriate command
 	# line arguments
@@ -2127,7 +2094,7 @@ sub setasdefault {
 	                               # so set the current one as default
 	($in->ask_yesorno('', N("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 0))) { # Ask the user
 	$printer->{DEFAULT} = $printer->{QUEUE};
-        printer::set_default_printer($printer);
+        printer::default::set_printer($printer);
     }
 }
 	
@@ -2226,7 +2193,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	   { text => N("Do not print any test page"), type => 'bool', 
 	     val => \$res2 } : ())
 	  ]);
-    $res2 = 1 if !($standard || $altletter || $alta4 || $photo || $ascii);
+    $res2 = 1 unless $standard || $altletter || $alta4 || $photo || $ascii;
     if ($res1 && !$res2) {
 	my @lpq_output;
 	{
@@ -2242,7 +2209,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	    my @testpages;
 	    # Install the filter to convert the photo test page to PS
 	    if (($printer->{SPOOLER} ne "cups") && ($photo) && (!$::testing) &&
-		(!printer::files_exist((qw(/usr/bin/convert))))) {
+		(!files_exist((qw(/usr/bin/convert))))) {
 		$in->do_pkgs->install('ImageMagick');
 	    }
 	    # set up list of pages to print
@@ -2252,7 +2219,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	    $photo && push (@testpages, $phototestpage);
 	    $ascii && push (@testpages, $asciitestpage);
 	    # print the stuff
-	    @lpq_output = printer::print_pages($printer, @testpages);
+	    @lpq_output = printer::main::print_pages($printer, @testpages);
 	}
 	my $dialogtext;
 	if (@lpq_output) {
@@ -2325,11 +2292,11 @@ The \"%s\" command also allows to modify the option settings for a particular pr
 (!$cupsremote ?
  N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning, $photocard) . printer::help_output($printer, 'lpd') : 
+", $scanning, $photocard) . printer::main::help_output($printer, 'lpd') : 
  $scanning . $photocard .
  N("Here is a list of the available printing options for the current printer:
 
-") . printer::help_output($printer, 'lpd')) : $scanning . $photocard);
+") . printer::main::help_output($printer, 'lpd')) : $scanning . $photocard);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -2365,7 +2332,7 @@ The \"%s\" and \"%s\" commands also allow to modify the option settings for a pa
 ", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
 N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning, $photocard) . printer::help_output($printer, 'pdq') :
+", $scanning, $photocard) . printer::main::help_output($printer, 'pdq') :
  $scanning . $photocard);
     }
     my $windowtitle = ($scanning ?
@@ -2385,7 +2352,7 @@ N("To know about the options available for the current printer read either the l
 	    if ($choice ne N("Close")) {
 		my $w = $in->wait_message(N("Printerdrake"),
 					  N("Printing test page(s)..."));
-	        printer::print_optionlist($printer);
+	        printer::main::print_optionlist($printer);
 	    }
 	}
     } else {
@@ -2444,14 +2411,14 @@ sub copy_queues_from {
     {
 	my $w = $in->wait_message(N("Printerdrake"),
 				  N("Reading printer data..."));
-	@oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
+	@oldqueues = printer::main::get_copiable_queues($oldspooler, $newspooler);
 	@oldqueues = sort(@oldqueues);
 	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
 	$oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
 	foreach (@oldqueues) {
 	    push (@queuesselected, 1);
 	    push (@queueentries, { text => $_, type => 'bool', 
-				   val => \$queuesselected[$#queuesselected] });
+				   val => \$queuesselected[$#queuesselected] } );
 	}
 	# LPRng and LPD use the same config files, therefore one sees the 
 	# queues of LPD when one uses LPRng and vice versa, but these queues
@@ -2517,7 +2484,7 @@ You can also type a new name or skip this printer.",
 		    {
 			my $w = $in->wait_message(N("Printerdrake"), 
 			   N("Transferring %s...", $oldqueue));
-		        printer::copy_foomatic_queue($printer, $oldqueue,
+		        printer::main::copy_foomatic_queue($printer, $oldqueue,
 						   $oldspooler, $newqueue) and
 							 $queuecopied = 1;
 		    }
@@ -2529,7 +2496,7 @@ You can also type a new name or skip this printer.",
 			     (N("Transfer printer configuration"),
 			      N("You have transferred your former default printer (\"%s\"), Should it be also the default printer under the new printing system %s?", $oldqueue, $newspoolerstr), 1))) {
 			    $printer->{DEFAULT} = $newqueue;
-			    printer::set_default_printer($printer);
+			    printer::default::set_printer($printer);
 			}
 		    }
 		}
@@ -2538,7 +2505,7 @@ You can also type a new name or skip this printer.",
         if ($queuecopied) {
 	    my $w = $in->wait_message(N("Printerdrake"),
                                       N("Refreshing printer data..."));
-	    printer::read_configured_queues($printer);
+	    printer::main::read_configured_queues($printer);
         }
     }
 }
@@ -2553,9 +2520,7 @@ sub start_network {
 		     undef $upNetwork; 
 		     sleep(1);
 		     $ret });
-    } else {
-	return printer::start_service("network");
-    }
+    } else { return printer::services::start("network") }
 }
 
 sub check_network {
@@ -2577,7 +2542,7 @@ sub check_network {
     # (otherwise the network is not configured yet and drakconnect has to be
     # started)
 
-    if ((!printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) &&
+    if ((!files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) &&
 	(!$dontconfigure)) {
 	my $go_on = 0;
 	while (!$go_on) {
@@ -2599,7 +2564,7 @@ sub check_network {
 		    } else {
 			system("/usr/sbin/drakconnect");
 		    }
-		    if (printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
+		    if (files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
 			$go_on = 1;
 		    }
 		} else {
@@ -2612,11 +2577,11 @@ sub check_network {
     }
 
     # Do not try to start the network if it is not configured
-    if (!printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) { return 0 }
+    if (!files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) { return 0 }
 
     # Second check: Is the network running?
 
-    if (printer::network_running()) { return 1 }
+    if (printer::detect::network_running()) { return 1 }
 
     # The network is configured now, start it.
     if ((!start_network($in, $upNetwork)) && (!$dontconfigure)) {
@@ -2635,7 +2600,7 @@ N("The network access was not running and could not be started. Please check you
     my $w = $in->wait_message(N("Configuration of a remote printer"), 
 			      N("Restarting printing system..."));
 
-    return printer::SIGHUP_daemon($printer->{SPOOLER});
+    return printer::main::SIGHUP_daemon($printer->{SPOOLER});
 
 }
 
@@ -2667,7 +2632,7 @@ sub security_check {
     
     # Exit silently if the current spooler is already activated for the current
     # security level
-    if (printer::spooler_in_security_level($spooler, $security)) { return 1 }
+    if (printer::main::spooler_in_security_level($spooler, $security)) { return 1 }
 
     # Tell user in which security mode he is and ask him whether he really
     # wants to activate the spooler in the given security mode. Stop the
@@ -2679,16 +2644,16 @@ sub security_check {
 This printing system runs a daemon (background process) which waits for print jobs and handles them. This daemon is also accessable by remote machines through the network and so it is a possible point for attacks. Therefore only a few selected daemons are started by default in this security level.
 
 Do you really want to configure printing on this machine?",
-			   $printer::shortspooler_inv{$spooler},
+			   $printer::main::shortspooler_inv{$spooler},
 			   $securitystr))) {
-        printer::add_spooler_to_security_level($spooler, $security);
+        printer::main::add_spooler_to_security_level($spooler, $security);
 	my $service;
 	if (($spooler eq "lpr") || ($spooler eq "lprng")) {
 	    $service = "lpd";
 	} else {
 	    $service = $spooler;
 	}
-        printer::start_service_on_boot($service);
+        services::start_service_on_boot($service); #TV
 	return 1;
     } else {
 	return 0;
@@ -2705,15 +2670,15 @@ sub start_spooler_on_boot {
     local $::isWizard = 0;
 
     $in->set_help('startSpoolerOnBoot') if $::isInstall;
-    if (!printer::service_starts_on_boot($service)) {
+    if (!services::starts_on_boot($service)) {
 	if ($in->ask_yesorno(N("Starting the printing system at boot time"),
 			     N("The printing system (%s) will not be started automatically when the machine is booted.
 
 It is possible that the automatic starting was turned off by changing to a higher security level, because the printing system is a potential point for attacks.
 
 Do you want to have the automatic starting of the printing system turned on again?",
-		       $printer::shortspooler_inv{$printer->{SPOOLER}}))) {
-	    printer::start_service_on_boot($service);
+		       $printer::main::shortspooler_inv{$printer->{SPOOLER}}))) {
+	    services::start_service_on_boot($service);
 	}
     }
     1;
@@ -2725,15 +2690,13 @@ sub install_spooler {
     if (!$::testing) {
 	# If the user refuses to install the spooler in high or paranoid
 	# security level, exit.
-	if (!security_check($printer, $in, $printer->{SPOOLER})) {
-	    return 0;
-	}
+	return 0 unless security_check($printer, $in, $printer->{SPOOLER});
 	if ($printer->{SPOOLER} eq "cups") {
 	    {
 		my $w = $in->wait_message(N("Printerdrake"),
 					  N("Checking installed software..."));
 		if ((!$::testing) &&
-		    (!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
+		    (!files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
 						/sbin/ifconfig
 						/usr/bin/xpp),
 					     ($::expert ? 
@@ -2743,8 +2706,8 @@ sub install_spooler {
 					   ($::expert ? 'cups-drivers' : ())));
 		}
 		if ((!$::testing) &&
-		    ((!printer::files_exist((qw(/usr/bin/wget)))) &&
-		     (!printer::files_exist((qw(/usr/bin/curl)))))) {
+		    ((!files_exist((qw(/usr/bin/wget)))) &&
+		     (!files_exist((qw(/usr/bin/curl)))))) {
 		    $in->do_pkgs->install
 			($::isInstall ? 'curl' : 'webfetch');
 		}
@@ -2759,17 +2722,17 @@ sub install_spooler {
 		# Start daemon
 		# Avoid unnecessary restarting of CUPS, this blocks the
 		# startup of printerdrake for several seconds.
-		printer::start_not_running_service("cups");
+		printer::services::start_not_running_service("cups");
 		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
-	        printer::set_alternative("lpr","/usr/bin/lpr-cups");
-	        printer::set_alternative("lpq","/usr/bin/lpq-cups");
-	        printer::set_alternative("lprm","/usr/bin/lprm-cups");
-	        printer::set_alternative("lp","/usr/bin/lp-cups");
-	        printer::set_alternative("cancel","/usr/bin/cancel-cups");
-	        printer::set_alternative("lpstat","/usr/bin/lpstat-cups");
-	        printer::set_alternative("lpc","/usr/sbin/lpc-cups");
+	        set_alternative("lpr","/usr/bin/lpr-cups");
+	        set_alternative("lpq","/usr/bin/lpq-cups");
+	        set_alternative("lprm","/usr/bin/lprm-cups");
+	        set_alternative("lp","/usr/bin/lp-cups");
+	        set_alternative("cancel","/usr/bin/cancel-cups");
+	        set_alternative("lpstat","/usr/bin/lpstat-cups");
+	        set_alternative("lpc","/usr/sbin/lpc-cups");
 		# Remove PDQ panic buttons from the user's KDE Desktops
-	        printer::pdq_panic_button("remove");
+	        printer::main::pdq_panic_button("remove");
 	    }
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "cups");
@@ -2779,13 +2742,13 @@ sub install_spooler {
 					  N("Checking installed software..."));
 		# "lpr" conflicts with "LPRng", remove "LPRng"
 		if ((!$::testing) &&
-		    (printer::files_exist((qw(/usr/lib/filters/lpf))))) {
+		    (files_exist((qw(/usr/lib/filters/lpf))))) {
 		    my $w = $in->wait_message(N("Printerdrake"),
 					      N("Removing LPRng..."));
 		    $in->do_pkgs->remove_nodeps('LPRng');
 		}
 		if ((!$::testing) &&
-		    (!printer::files_exist((qw(/usr/sbin/lpf
+		    (!files_exist((qw(/usr/sbin/lpf
 					       /usr/sbin/lpd
 					       /sbin/ifconfig
 					       /usr/bin/gpr
@@ -2801,14 +2764,14 @@ sub install_spooler {
 		    sleep(1);
 		};
 		# Start daemon
-	        printer::restart_service("lpd");
+	        printer::services::restart("lpd");
 		# Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
-	        printer::set_alternative("lpr","/usr/bin/lpr-lpd");
-	        printer::set_alternative("lpq","/usr/bin/lpq-lpd");
-	        printer::set_alternative("lprm","/usr/bin/lprm-lpd");
-	        printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
+	        set_alternative("lpr","/usr/bin/lpr-lpd");
+	        set_alternative("lpq","/usr/bin/lpq-lpd");
+	        set_alternative("lprm","/usr/bin/lprm-lpd");
+	        set_alternative("lpc","/usr/sbin/lpc-lpd");
 		# Remove PDQ panic buttons from the user's KDE Desktops
-	        printer::pdq_panic_button("remove");
+	        printer::main::pdq_panic_button("remove");
 	    }
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "lpd");
@@ -2818,13 +2781,13 @@ sub install_spooler {
 					  N("Checking installed software..."));
 		# "LPRng" conflicts with "lpr", remove "lpr"
 		if ((!$::testing) &&
-		    (printer::files_exist((qw(/usr/sbin/lpf))))) {
+		    (files_exist((qw(/usr/sbin/lpf))))) {
 		    my $w = $in->wait_message(N("Printerdrake"),
 					      N("Removing LPD..."));
 		    $in->do_pkgs->remove_nodeps('lpr');
 		}
 		if ((!$::testing) &&
-		    (!printer::files_exist((qw(/usr/lib/filters/lpf
+		    (!files_exist((qw(/usr/lib/filters/lpf
 					       /usr/sbin/lpd
 					       /sbin/ifconfig
 					       /usr/bin/gpr
@@ -2840,17 +2803,17 @@ sub install_spooler {
 		    sleep(1);
 		};
 		# Start daemon
-	        printer::restart_service("lpd");
+	        printer::services::restart("lpd");
 		# Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
-	        printer::set_alternative("lpr","/usr/bin/lpr-lpd");
-	        printer::set_alternative("lpq","/usr/bin/lpq-lpd");
-	        printer::set_alternative("lprm","/usr/bin/lprm-lpd");
-	        printer::set_alternative("lp","/usr/bin/lp-lpd");
-	        printer::set_alternative("cancel","/usr/bin/cancel-lpd");
-	        printer::set_alternative("lpstat","/usr/bin/lpstat-lpd");
-	        printer::set_alternative("lpc","/usr/sbin/lpc-lpd");
+	        set_alternative("lpr","/usr/bin/lpr-lpd");
+	        set_alternative("lpq","/usr/bin/lpq-lpd");
+	        set_alternative("lprm","/usr/bin/lprm-lpd");
+	        set_alternative("lp","/usr/bin/lp-lpd");
+	        set_alternative("cancel","/usr/bin/cancel-lpd");
+	        set_alternative("lpstat","/usr/bin/lpstat-lpd");
+	        set_alternative("lpc","/usr/sbin/lpc-lpd");
 		# Remove PDQ panic buttons from the user's KDE Desktops
-	        printer::pdq_panic_button("remove");
+	        printer::main::pdq_panic_button("remove");
 	    }
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "lpd");
@@ -2859,7 +2822,7 @@ sub install_spooler {
 		my $w = $in->wait_message(N("Printerdrake"),
 					  N("Checking installed software..."));
 		if ((!$::testing) &&
-		    (!printer::files_exist((qw(/usr/bin/pdq
+		    (!files_exist((qw(/usr/bin/pdq
 					       /usr/X11R6/bin/xpdq))))) {
 		    $in->do_pkgs->install('pdq');
 		}
@@ -2873,16 +2836,16 @@ sub install_spooler {
 		# PDQ has no daemon, so nothing needs to be started
 		
 		# Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
-	        printer::set_alternative("lpr","/usr/bin/lpr-pdq");
-	        printer::set_alternative("lpq","/usr/bin/lpq-foomatic");
-	        printer::set_alternative("lprm","/usr/bin/lprm-foomatic");
+	        set_alternative("lpr","/usr/bin/lpr-pdq");
+	        set_alternative("lpq","/usr/bin/lpq-foomatic");
+	        set_alternative("lprm","/usr/bin/lprm-foomatic");
 		# Add PDQ panic buttons to the user's KDE Desktops
-	        printer::pdq_panic_button("add");
+	        printer::main::pdq_panic_button("add");
 	    }
 	}
 	# Give a SIGHUP to the devfsd daemon to correct the permissions
 	# for the /dev/... files according to the spooler
-	printer::SIGHUP_daemon("devfs");
+	printer::main::SIGHUP_daemon("devfs");
     }
     1;
 }
@@ -2895,7 +2858,7 @@ sub setup_default_spooler {
     my $str_spooler = 
 	$in->ask_from_list_(N("Select Printer Spooler"),
 			    N("Which printing system (spooler) do you want to use?"),
-			    [ printer::spooler() ],
+			    [ printer::main::spooler() ],
 			    $printer::spooler_inv{$printer->{SPOOLER}},
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
@@ -2906,24 +2869,24 @@ sub setup_default_spooler {
     }
     if ($printer->{SPOOLER} ne $oldspooler) {
 	# Remove the local printers from Star Office/OpenOffice.org/GIMP
-	printer::removelocalprintersfromapplications($printer);
+	printer::main::removelocalprintersfromapplications($printer);
 	# Get the queues of this spooler
 	{
 	    my $w = $in->wait_message(N("Printerdrake"),
 				      N("Reading printer data..."));
-	    printer::read_configured_queues($printer);
+	    printer::main::read_configured_queues($printer);
 	}
 	# Copy queues from former spooler
 	copy_queues_from($printer, $in, $oldspooler);
 	# Re-read the printer database (CUPS has additional drivers, PDQ
 	# has no raw queue)
-	%printer::thedb = ();
+	%printer::main::thedb = ();
 	#my $w = $in->wait_message(N("Printerdrake"),
 	#                          N("Reading printer database..."));
-	#printer::read_printer_db($printer->{SPOOLER});
+	#printer::main::read_printer_db($printer->{SPOOLER});
     }
     # Save spooler choice
-    printer::set_default_spooler($printer);
+    printer::default::set_spooler($printer);
     return $printer->{SPOOLER};
 }
 
@@ -2933,14 +2896,14 @@ sub configure_queue {
 			      N("Configuring printer \"%s\"...",
 				$printer->{currentqueue}{queue}));
     $printer->{complete} = 1;
-    printer::configure_queue($printer);
+    printer::main::configure_queue($printer);
     $printer->{complete} = 0;
 }
 
 sub install_foomatic {
     my ($in) = @_;
     if ((!$::testing) &&
-	(!printer::files_exist((qw(/usr/bin/foomatic-configure
+	(!files_exist((qw(/usr/bin/foomatic-configure
 				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm)
 				    )))) {
 	my $w = $in->wait_message(N("Printerdrake"),
@@ -2967,7 +2930,7 @@ sub main {
 
     # Save the user mode, so that the same one is used on the next start
     # of Printerdrake
-    printer::set_usermode($::expert);
+    printer::main::set_usermode($::expert);
 
     # Default printer name, we do not use "lp" so that one can switch the
     # default printer under LPD without needing to rename another printer.
@@ -2980,14 +2943,14 @@ sub main {
 	my $w = $in->wait_message(N("Printerdrake"),
 				  N("Checking installed software..."));
 	if ((!$::testing) &&
-	    (!printer::files_exist((qw(/usr/bin/foomatic-configure
+	    (!files_exist((qw(/usr/bin/foomatic-configure
 				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
 				       /usr/bin/escputil
 				       /usr/share/printer-testpages/testprint.ps
 				       /usr/bin/nmap
 				       /usr/bin/scli
 				       ),
-				    (printer::files_exist("/usr/bin/gimp") ?
+				    (files_exist("/usr/bin/gimp") ?
 				     "/usr/lib/gimp/1.2/plug-ins/print" : ())
 				    )))) {
 	    $in->do_pkgs->install('foomatic','printer-utils','printer-testpages','nmap','scli',
@@ -2995,14 +2958,14 @@ sub main {
 	}
 
 	# only experts should be asked for the spooler
-	!$::expert and $printer->{SPOOLER} ||= 'cups';
+	$printer->{SPOOLER} ||= 'cups' if $::expert;
 
     }
 
     # If we have chosen a spooler, install it and mark it as default spooler
     if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
 	if (!install_spooler($printer, $in, $upNetwork)) { return }
-        printer::set_default_spooler($printer);
+        printer::default::set_spooler($printer);
     }
 
     # Turn on printer autodetection by default
@@ -3025,7 +2988,7 @@ sub main {
 	    ((!defined($printer->{DEFAULT})) || ($printer->{DEFAULT} eq ''))) {
 	    my $w = $in->wait_message(N("Printerdrake"),
 				      N("Preparing Printerdrake..."));
-	    $printer->{DEFAULT} = printer::get_default_printer($printer);
+	    $printer->{DEFAULT} = printer::default::get_printer($printer);
 	    if ($printer->{DEFAULT}) {
 		# If a CUPS system has only remote printers and no default
 		# printer defined, it defines the first printer whose
@@ -3033,17 +2996,15 @@ sub main {
 		# daemon, so on every start another printer gets the default
 		# printer. To avoid this, make sure that the default printer
 		# is defined.
-		printer::set_default_printer($printer);
-	    } else {
-		$printer->{DEFAULT} = '';
-	    }
+		printer::default::set_printer($printer);
+	    } else { $printer->{DEFAULT} = '' }
 	}
 
 	# Configure the current printer queues in applications
 	{
 	    my $w = $in->wait_message(N("Printerdrake"),
 				      N("Configuring applications..."));
-	    printer::configureapplications($printer);
+	    printer::main::configureapplications($printer);
 	}
 
 	if ($editqueue) {
@@ -3082,7 +3043,7 @@ sub main {
 		my $havelocalnetworks_or_expert =
 		    (($::expert) ||
 		     (check_network($printer, $in, $upNetwork, 1) && 
-		      (printer::getIPsInLocalNetworks() != ())));
+		      (printer::detect::getIPsInLocalNetworks() != ())));
 		# Show a queue list window when there is at least one queue,
 		# when we are in expert mode, or when we are not in the
 		# installation.
@@ -3109,7 +3070,7 @@ sub main {
 			} elsif ($printer->{SPOOLER} eq "cups") {
 			    ($cursorpos) = 
 				grep { /!$printer->{DEFAULT}:[^!]*$/ }
-			    printer::get_cups_remote_queues($printer);
+			    printer::main::get_cups_remote_queues($printer);
 			}
 		    }
 		    # Generate the list of available printers
@@ -3120,7 +3081,7 @@ sub main {
 				 keys(%{$printer->{configured}
 					|| {}})),
 				($printer->{SPOOLER} eq "cups" ?
-				 printer::get_cups_remote_queues($printer) : 
+				 printer::main::get_cups_remote_queues($printer) :
 				 ())))
 			  );
 		    my $noprinters = ($#printerlist < 0);
@@ -3194,23 +3155,23 @@ sub main {
 		    );
 		    # Toggle expert mode and standard mode
 		    if ($menuchoice eq "\@usermode") {
-			printer::set_usermode(!$::expert);
+			printer::main::set_usermode(!$::expert);
 			# make sure that the "cups-drivers" package gets
 			# installed when switching into expert mode
 			if (($::expert) && ($printer->{SPOOLER} eq "cups")) {
 			    install_spooler($printer, $in, $upNetwork);
 			}
 			# Read printer database for the new user mode
-			%printer::thedb = ();
+			%printer::main::thedb = ();
 			#my $w = $in->wait_message(N("Printerdrake"), 
 			#                   N("Reading printer database..."));
-		        #printer::read_printer_db($printer->{SPOOLER});
+		        #printer::main::read_printer_db($printer->{SPOOLER});
 			# Re-read printer queues to switch the tree
 			# structure between expert/normal mode.
 			my $w = $in->wait_message
 			    (N("Printerdrake"), 
 			     N("Reading printer data..."));
-			printer::read_configured_queues($printer);
+			printer::main::read_configured_queues($printer);
 			$cursorpos = "::";
 			next;
 		    }
@@ -3249,7 +3210,7 @@ sub main {
 		}
 	    }
 	    # Save the default spooler
-	    printer::set_default_spooler($printer);
+	    printer::default::set_spooler($printer);
 	    #- Close printerdrake
 	    $menuchoice eq "\@quit" and last;
 	}
@@ -3257,7 +3218,7 @@ sub main {
 	    $printer->{NEW} = 1;
 	    #- Set default values for a new queue
 	    $printer::printer_type_inv{$printer->{TYPE}} or 
-		$printer->{TYPE} = printer::default_printer_type($printer);
+		$printer->{TYPE} = printer::default::printer_type($printer);
 	    $printer->{currentqueue} = { queue    => $queue,
 					 foomatic => 0,
 					 desc     => "",
@@ -3416,7 +3377,7 @@ sub main {
 	    if ($printer->{configured}{$queue}) {
 		# Here we must regenerate the menu entry, because the
 		# parameters can be changed.
-		printer::make_menuentry($printer,$queue);
+		printer::main::make_menuentry($printer,$queue);
 		$printer->{configured}{$queue}{queuedata}{menuentry} =~
 		    /!([^!]+)$/;
 		$infoline = $1 .
@@ -3473,7 +3434,7 @@ What do you want to modify on this printer?",
 		$printer->{currentqueue} = {};
 		my $driver;
 		if ($printer->{configured}{$queue}) {
-		    printer::copy_printer_params($printer->{configured}{$queue}{queuedata}, $printer->{currentqueue});
+		    printer::main::copy_printer_params($printer->{configured}{$queue}{queuedata}, $printer->{currentqueue});
 		    #- Keep in mind the printer driver which was used, so it
                     #- can be determined whether the driver is only
 		    #- available in expert and so for setting the options
@@ -3512,12 +3473,12 @@ What do you want to modify on this printer?",
 			    (N("Printerdrake"),
 			     N("Removing old printer \"%s\"...",
 			       $printer->{OLD_QUEUE}));
-		        printer::remove_queue($printer, $printer->{OLD_QUEUE});
+		        printer::main::remove_queue($printer, $printer->{OLD_QUEUE});
 			# If the default printer was renamed, correct the
 			# the default printer setting of the spooler
 			if ($queue eq $printer->{DEFAULT}) {
 			    $printer->{DEFAULT} = $printer->{QUEUE};
-			    printer::set_default_printer($printer);
+			    printer::default::set_printer($printer);
 			}
 			$queue = $printer->{QUEUE};
 		    }
@@ -3534,11 +3495,11 @@ What do you want to modify on this printer?",
 			configure_queue($printer, $in);
 		} elsif ($modify eq N("Set this printer as the default")) {
 		    $printer->{DEFAULT} = $queue;
-		    printer::set_default_printer($printer);
+		    printer::default::set_printer($printer);
 		    $in->ask_warn(N("Default printer"),
 				  N("The printer \"%s\" is set as the default printer now.", $queue));
 		} elsif ($modify eq N("Add this printer to Star Office/OpenOffice.org/GIMP")) {
-		    if (printer::addcupsremotetoapplications
+		    if (printer::main::addcupsremotetoapplications
 			($printer, $queue)) {
 			$in->ask_warn(N("Adding printer to Star Office/OpenOffice.org/GIMP"),
 				      N("The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP.", $queue));
@@ -3547,7 +3508,7 @@ What do you want to modify on this printer?",
 				      N("Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP.", $queue));
 		    }
 		} elsif ($modify eq N("Remove this printer from Star Office/OpenOffice.org/GIMP")) {
-		    if (printer::removeprinterfromapplications
+		    if (printer::main::removeprinterfromapplications
 			($printer, $queue)) {
 			$in->ask_warn(N("Removing printer from Star Office/OpenOffice.org/GIMP"),
 				      N("The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/GIMP.", $queue));
@@ -3566,7 +3527,7 @@ What do you want to modify on this printer?",
 			    my $w = $in->wait_message
 				(N("Printerdrake"),
 				 N("Removing printer \"%s\"...", $queue));
-			    if (printer::remove_queue($printer, $queue)) { 
+			    if (printer::main::remove_queue($printer, $queue)) { 
 				$editqueue = 0;
 				# Define a new default printer if we have
 				# removed the default one
@@ -3574,7 +3535,7 @@ What do you want to modify on this printer?",
 				    my @k = sort(keys(%{$printer->{configured}}));
 				    if (@k) {
 					$printer->{DEFAULT} = $k[0];
-				        printer::set_default_printer($printer);
+				        printer::default::set_printer($printer);
 				    } else {
 					$printer->{DEFAULT} = "";
 				    }
@@ -3619,7 +3580,7 @@ What do you want to modify on this printer?",
 	if ($::isInstall && !$::expert && !$menushown && !$continue) {
 	    my $w = $in->wait_message(N("Printerdrake"),
 				      N("Configuring applications..."));
-	    printer::configureapplications($printer);
+	    printer::main::configureapplications($printer);
 	}
 
 	# Delete some variables
