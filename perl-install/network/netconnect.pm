@@ -9,7 +9,6 @@ use modules;
 use any;
 use mouse;
 use network;
-use Data::Dumper;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
@@ -71,6 +70,7 @@ sub detect {
     network::adsl->import;
     $auto_detect->{adsl} = adsl_detect($adsl);
 
+    my $modem = {};
     require network::modem;
     network::modem->import;
     my ($modem, @pci_modems) = detect_devices::getModem();

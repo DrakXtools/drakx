@@ -7,7 +7,6 @@ use modules;
 use detect_devices;
 use mouse;
 use network::tools;
-use Data::Dumper;
 
 sub configure {
     my ($in, $netcnx, $mouse, $netc, $_intf) = @_;

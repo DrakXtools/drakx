@@ -5,7 +5,6 @@ use run_program;
 use network::tools;
 use network::ethernet;
 use modules;
-use Data::Dumper;
 use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix);
 
