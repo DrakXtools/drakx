@@ -193,7 +193,7 @@ our %adsl_data = (
                    DOMAINNAME2 => 'wanadoo.fr',
                   },
 
-                  N("France") . "|Télé2 128k " =>
+                  N("France") . "|Télé2" =>
                   {
                    vpi => 8,
                    vci => 23,
