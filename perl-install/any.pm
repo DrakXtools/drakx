@@ -361,7 +361,7 @@ if_(arch() !~ /sparc|ppc|ia64/,
 	    $e->{label} = "$prefix-$nb";
 	}
 	$Modify->($e) or return;
-	push @{$b->{entries}}, $e;
+	bootloader::add_entry($b, $e);
 	$e;
     };
 

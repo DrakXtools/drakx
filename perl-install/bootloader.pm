@@ -52,14 +52,19 @@ sub get_label {
 }
 
 sub mkinitrd {
-    my ($kernelVersion, $initrdImage) = @_;
+    my ($kernelVersion, $initrdImage, $o_vga) = @_;
 
     $::testing || -e "$::prefix/$initrdImage" and return 1;
 
     my $loop_boot = loopback::prepare_boot();
 
+    my $o_resolution = $o_vga && do {
+	require Xconfig::resolution_and_depth;
+	my $res = Xconfig::resolution_and_depth::from_bios($o_vga);
+	$res && $res->{X};
+    };
     modules::load('loop');
-    if (!run_program::rooted($::prefix, "mkinitrd", "-v", "-f", $initrdImage, "--ifneeded", $kernelVersion)) {
+    if (!run_program::rooted($::prefix, "mkinitrd", "-v", "-f", $initrdImage, "--ifneeded", $kernelVersion, if_($o_resolution, '--splash' => $o_resolution))) {
 	unlink("$::prefix/$initrdImage");
 	die "mkinitrd failed";
     }
@@ -278,7 +283,7 @@ sub add_kernel {
 				   symlinkf("vmlinuz-$version", "$::prefix/boot/vmlinuz$ext") ? $ext : "-$version");
 
     my $initrd = "/boot/initrd-$version.img";
-    mkinitrd($version, $initrd) or undef $initrd;
+    mkinitrd($version, $initrd, $v->{vga}) or undef $initrd;
     if ($initrd && $ext ne "-$version") {
 	$initrd = "/boot/initrd$ext.img";
 	symlinkf("initrd-$version.img", "$::prefix$initrd") or cp_af("$::prefix/boot/initrd-$version.img", "$::prefix$initrd");
@@ -384,7 +389,7 @@ sub configure_entry {
 
 	if ($specific_version) {
 	    $entry->{initrd} or $entry->{initrd} = "/boot/initrd-$specific_version.img";
-	    mkinitrd($specific_version, $entry->{initrd}) or undef $entry->{initrd};
+	    mkinitrd($specific_version, $entry->{initrd}, $entry->{vga}) or undef $entry->{initrd};
 	}
     }
     $entry;

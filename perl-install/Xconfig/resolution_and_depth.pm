@@ -44,6 +44,11 @@ my @bios_vga_modes = (
     { bios => 794, X => 1280, Y => 1024, Depth => 16 },
 );
 
+sub from_bios {
+    my ($bios) = @_;
+    find { $_->{bios} == $bios } @bios_vga_modes;
+}
+
 sub size2default_resolution {
     my ($size) = @_; #- size in inch
 
