@@ -60,7 +60,7 @@ export SECURE_LEVEL=2
 for i in /etc /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
 mount -t proc proc /mnt/proc
 rpm --root /mnt --initdb
-echo >/mnt/etc/fstab "$hd$inst / ext2 defaults 1 1"
+echo >/mnt/etc/fstab "$hd$root / ext2 defaults 1 1"
 for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList | grep I: | cut -d: -f2`; do
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && rpm --root /mnt -ivh /cdrom/Mandrake/RPMS/$i.*.rpm --nodeps --force
 done
