@@ -903,7 +903,7 @@ sub configurePrinter {
     $ask_multiple_printer-- or return;
 
     #- install packages needed for printer::getinfo()
-    $::testing or $o->do_pkgs->install('foomatic');
+    $::testing or $o->do_pkgs->install('foomatic-db-engine');
 
     #- take default configuration, this include choosing the right system
     #- currently used by the system.
