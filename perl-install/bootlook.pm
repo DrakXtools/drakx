@@ -31,6 +31,7 @@ use standalone;
 use common qw(:common :file :functional :system);
 use my_gtk qw(:helpers :wrappers);
 use any;
+use bootloader;
 
 setlocale (LC_ALL, "");
 Locale::GetText::textdomain ("Bootlookdrake");
