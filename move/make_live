@@ -65,11 +65,12 @@ sub installPackages() {
                                  qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
 				 qw(ATI_GLX ATI_GLX-utils NVIDIA_GLX),
 				 qw(hcfpcimodem hsflinmodem ltmodem ipw2100),
+				 qw(nxclient), #- proprietary soft from powerpack
 				 qw(xinput), #- for some mice
                                  qw(perl-Term-Readline-Gnu binutils emacs-X11 bash-completion),  #- allow debugging move
                                  qw(openssh-askpass-gnome),  #- openssh-askpass for mountloop doesn't allow to click on ok/cancel buttons
                                  qw(clanbomber freeciv-client freeciv-server crack-attack kdegames),  #- more games
-                                 qw(numlock shorewall),
+                                 qw(numlock shorewall clamav),
                                  qw(xawtv zapping),  #- tv apps
                                  qw(scribus scribus-i18n-de scribus-i18n-fr),  #- John Jablonski says it's so much useful
                                                                  ],
@@ -256,3 +257,6 @@ unlink "$::prefix/usr/lib/libDrakX/modem.pm";
 foreach (glob("$::prefix/usr/lib/openoffice/share/template/*")) {
     symlink '../../english/wizard/bitmap', "$_/wizard/bitmap";
 }
+
+# fix nxclient 
+system("chmod a+x $::prefix/etc/profile.d/nx*");
