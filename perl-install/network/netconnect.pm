@@ -514,7 +514,11 @@ Take a look at http://www.linmodems.org"),
                             #- we need a better agreement to use list_modules::category2modules('network/slmodem')
                             member($driver, qw(slamr slusb)) and $type = "slmodem";
                             if ($type && (my $packages = $in->do_pkgs->check_kernel_module_packages("$type-kernel", if_(! -f $pkgs2path{$type}, $type)))) {
-                                $in->do_pkgs->install(@$packages);
+                                if ($in->do_pkgs->install(@$packages)) {
+                                    # start slmodemd when installing it (thus preventing the average user to have to restart
+                                    # his machine in order to get a working connection):
+                                    system("service slmodemd start") if $::isStandalone && $type eq 'slmodem';
+                                }
                                 $modem->{device} = $devices{$type} || '/dev/modem';
                                 return "ppp_provider";
                             }
