@@ -65,9 +65,7 @@ sub addUsers {
 
 sub crypt {
     my ($password, $md5) = @_;
-    $md5 ?
-      c::crypt_md5($password, salt(8)) :
-         crypt    ($password, salt(2));
+    crypt($password, $md5 ? '$1$' . salt(8) : salt(2));
 }
 sub enableShadow {
     my ($prefix) = @_;
