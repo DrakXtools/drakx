@@ -505,12 +505,14 @@ sub mount {
 
     -d $where or commands::mkdir_('-p', $where);
 
+    my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
+
     if ($fs eq 'nfs') {
 	log::l("calling nfs::mount($dev, $where)");
 #	nfs::mount($dev, $where) or die _("nfs mount failed");
     } elsif ($fs eq 'smbfs') {
 	die "no smb yet...";
-    } else {
+    } elsif (member($fs, 'ext2', @fs_modules)) {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
 
 	my $flag = c::MS_MGC_VAL();
@@ -519,8 +521,6 @@ sub mount {
 
 	if ($fs eq 'vfat') {
 	    $mount_opt = 'check=relaxed';
-	    eval { modules::load('vfat') }; #- try using vfat
-	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
 	} elsif ($fs eq 'reiserfs') {
 	    #- could be better if we knew if there is a /boot or not
 	    #- without knowing it, / is forced to be mounted with notail
@@ -531,16 +531,19 @@ sub mount {
 	    $? & 0x0100 and log::l("fsck corrected partition $dev");
 	    $? & 0xfeff and die _("fsck failed with exit code %d or signal %d", $? >> 8, $? & 255);
 	}
-	if (member($fs, qw(hfs romfs ufs reiserfs xfs jfs ext3))) {
+	if (member($fs, @fs_modules)) {
 	    eval { modules::load($fs) };
 	}
 
 	$where =~ s|/$||;
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
+    } else {
+	log::l("skipping mounting $fs partition");
+	return;
     }
     local *F;
-    open F, ">>/etc/mtab" or return; #- fail silently, must be read-only /etc
+    open F, ">>/etc/mtab" or return; #- fail silently, /etc must be read-only
     print F "$dev $where $fs defaults 0 0\n";
 }
 
