@@ -17,10 +17,7 @@ my ($all_hds, $in, $tree_model, $current_entry, $current_leaf, %icons);
 sub main {
     ($in, $all_hds, my $type) = @_;
     my ($kind) = $type eq 'smb' ? smb2kind() : nfs2kind();
-    {
-	local $ugtk2::pop_it = 1;
-	$kind->check($in) or return;
-    }
+    $kind->check($in) or return;
 
     my $w = ugtk2->new('DiskDrake');
 
