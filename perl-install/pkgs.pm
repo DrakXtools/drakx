@@ -361,7 +361,7 @@ sub psUsingHdlists {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
-	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
+	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die qq(invalid hdlist description "$_" in hdlists file);
 
 	#- make sure the first medium is always selected!
 	#- by default select all image.
@@ -529,10 +529,16 @@ sub read_rpmsrate {
 
 sub readCompssUsers {
     my ($meta_class) = @_;
-    my (%compssUsers, @sorted, $l);
 
     my $file = 'Mandrake/base/compssUsers';
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
+    readCompssUsers_raw($f);
+}
+
+sub readCompssUsers_raw {
+    my ($f) = @_;
+    my (%compssUsers, @sorted, $l);
+
     local $_;
     while (<$f>) {
 	/^\s*$/ || /^#/ and next;
