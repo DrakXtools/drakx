@@ -319,12 +319,6 @@ sub configure_pcmcia {
     return if $running;
     $running = 1;
 
-    if (c::kernel_version() =~ /^2\.2/) {
-	my $msg = N("PCMCIA support no longer exists for 2.2 kernels. Please use a 2.4 kernel.");
-	log::l($msg);
-	return $msg;
-    }
-
     log::l("i try to configure pcmcia services");
 
     symlink "/tmp/stage2/$_", $_ foreach "/etc/pcmcia";

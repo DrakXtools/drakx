@@ -606,7 +606,7 @@ sub real_format_part {
 	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
         format_ext3($dev, @options);
     } elsif (isThisFs("reiserfs", $part)) {
-        format_reiserfs($dev, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
+        format_reiserfs($dev, @options);
     } elsif (isThisFs("xfs", $part)) {
         format_xfs($dev, @options);
     } elsif (isThisFs("jfs", $part)) {
