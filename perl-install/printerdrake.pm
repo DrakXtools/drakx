@@ -747,7 +747,7 @@ sub choose_model {
 }
 
 sub get_printer_info {
-    my ($printer) = @_;
+    my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
     #if ((keys %printer::thedb) == 0) {
     #    my $w = $in->wait_message('', _("Reading printer database ..."));
@@ -786,7 +786,128 @@ sub get_printer_info {
 		}
 	    } else {
 		# The queue was not configured with Foomatic before
+		# Set some special options
+		$printer->{SPECIAL_OPTIONS} = '';
+		# Default page size depending on the country/language
+		# (US/Canada -> Letter, Others -> A4)
+		my $pagesize;
+		if ($printer->{PAPERSIZE}) {
+		    $printer->{SPECIAL_OPTIONS} .= 
+			" -o PageSize=$printer->{PAPERSIZE}";
+		} elsif (($pagesize = $ENV{'LC_PAPER'}) ||
+			 ($pagesize = $ENV{'LANG'}) ||
+			 ($pagesize = $ENV{'LC_ALL'})) {
+		    if (($pagesize eq 'en') || ($pagesize eq 'en_US')) {
+			$pagesize = "Letter";
+		    } else {
+			$pagesize = "A4";
+		    }
+		    $printer->{SPECIAL_OPTIONS} .= 
+			" -o PageSize=$pagesize";
+		}
+		# oki4w driver -> OKI winprinter which needs the
+		# oki4daemon to work
+		if ($printer->{currentqueue}{'driver'} eq 'oki4w') {
+		    if ($printer->{currentqueue}{'connect'} ne 
+			'file:/dev/lp0') {
+			$in->ask_warn(_("OKI winprinter configuration"),
+				      _("You are configuring an OKI laser winprinter. These printers
+use a very special communication protocol and therefore they
+work only when connected to the first parallel port. When
+your printer is connected to another port or to a print
+server box please connect the printer to the first parallel
+port before you print a test page. Otherwise the printer
+will not work. Your connection type setting will be ignored
+by the driver."));
+		    }
+		    $printer->{currentqueue}{'connect'} = 'file:/dev/null';
+		    # Start the oki4daemon
+		    printer::start_service_on_boot('oki4daemon');
+		    printer::start_service('oki4daemon');
+		    # Set permissions
+		    if ($printer->{SPOOLER} eq 'cups') {
+			printer::set_permissions('/dev/oki4drv', '660', 'lp',
+						 'sys');
+		    } elsif ($printer->{SPOOLER} eq 'pdq') {
+			printer::set_permissions('/dev/oki4drv', '666');
+		    } else {
+			printer::set_permissions('/dev/oki4drv', '660', 'lp',
+						 'lp');
+		    }
+		} elsif ($printer->{currentqueue}{'driver'} eq 'lexmarkinkjet') {
+		    # Set "Port" option
+		    if ($printer->{currentqueue}{'connect'} eq 
+			'file:/dev/lp0') {
+			$printer->{SPECIAL_OPTIONS} .= 
+			    " -o Port=ParPort1";
+		    } elsif ($printer->{currentqueue}{'connect'} eq 
+			'file:/dev/lp1') {
+			$printer->{SPECIAL_OPTIONS} .= 
+			    " -o Port=ParPort2";
+		    } elsif ($printer->{currentqueue}{'connect'} eq 
+			'file:/dev/lp2') {
+			$printer->{SPECIAL_OPTIONS} .= 
+			    " -o Port=ParPort3";
+		    } elsif ($printer->{currentqueue}{'connect'} eq 
+			'file:/dev/usb/lp0') {
+			$printer->{SPECIAL_OPTIONS} .= 
+			    " -o Port=USB1";
+		    } elsif ($printer->{currentqueue}{'connect'} eq 
+			'file:/dev/usb/lp1') {
+			$printer->{SPECIAL_OPTIONS} .= 
+			    " -o Port=USB2";
+		    } elsif ($printer->{currentqueue}{'connect'} eq 
+			'file:/dev/usb/lp2') {
+			$printer->{SPECIAL_OPTIONS} .= 
+			    " -o Port=USB3";
+		    } else {
+			$in->ask_warn(_("Lexmark inkjet configuration"),
+				      _("The inkjet printer drivers provided by Lexmark only support
+local printers, no printers on remote machines or print server
+boxes. Please connect your printer to a local port or
+configure it on the machine where it is connected to."));
+			return 0;
+		    }
+		    # Set device permissions
+		    $printer->{currentqueue}{'connect'} =~ /^\s*file:(\S*)\s*$/;
+		    if ($printer->{SPOOLER} eq 'cups') {
+			printer::set_permissions($1, '660', 'lp', 'sys');
+		    } elsif ($printer->{SPOOLER} eq 'pdq') {
+			printer::set_permissions($1, '666');
+		    } else {
+			printer::set_permissions($1, '660', 'lp', 'lp');
+		    }
+		    # This is needed to have the device not blocked by the
+		    # spooler backend.
+		    $printer->{currentqueue}{'connect'} = 'file:/dev/null';
+		    #install packages
+		    my $drivertype = $printer->{currentqueue}{'model'};
+		    if ($drivertype eq 'Z22') {$drivertype = 'Z32';}
+		    if ($drivertype eq 'Z23') {$drivertype = 'Z33';}
+		    $drivertype = lc($drivertype);
+		    if (!printer::files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
+			$in->do_pkgs->install("lexmark-drivers-$drivertype");
+		    }
+		    if (!printer::files_exist("/usr/local/lexmark/$drivertype/$drivertype")) {
+			# Driver installation failed, probably we do not have
+			# the commercial CDs
+			$in->ask_warn(_("Lexmark inkjet configuration"),
+				      _("To be able to print with your Lexmark inkjet and this
+configuration, you need the inkjet printer drivers
+provided by Lexmark (http://www.lexmark.com/). Go to
+the US site and click on the \"Drivers\" button. Then
+choose your model and afterwards \"Linux\" as
+operating system. The drivers come as RPM packages
+or shell scripts with interactive graphical installation.
+You do not need to do this configuration by the
+graphical frontends. Cancel directly after the license
+agreement. Then print printhead alignment pages with
+\"lexmarkmaintain\" and adjust the head alignment
+settings with this program."));
+		    }
+		}
 		$printer->{ARGS} = printer::read_foomatic_options($printer);
+		delete($printer->{SPECIAL_OPTIONS});
 	    }
 	} elsif ($printer->{currentqueue}{'ppd'}) { # CUPS+PPD queue?
 	    # If we had a Foomatic queue before, unmark the flag and initialize
@@ -811,6 +932,7 @@ sub get_printer_info {
 	    }
 	}
     }
+    1;
 }
 
 sub setup_options {
@@ -1162,34 +1284,90 @@ new printing system %s?", $oldqueue, $newspoolerstr), 1))) {
     }
 }
 
-sub setup_default_spooler {
+sub check_network {
+    # CUPS, LPD, and LPRng need at least basic network functionality to
+    # work. Here we check the state of the network to assure that the
+    # chosen spooler will work.
+
     my ($printer, $in) = @_;
-    $printer->{SPOOLER} ||= 'cups';
-    my $oldspooler = $printer->{SPOOLER};
-    my $str_spooler = 
-	$in->ask_from_list_(_("Select Printer Spooler"),
-			    _("Which printing system (spooler) do you want to use?"),
-			    [ printer::spooler() ],
-			    $printer::spooler_inv{$printer->{SPOOLER}},
-			    ) or return;
-    $printer->{SPOOLER} = $printer::spooler{$str_spooler};
-    # Install the spooler if not done yet
-    install_spooler($printer, $in);
-    if ($printer->{SPOOLER} ne $oldspooler) {
-	# Get the queues of this spooler
-	{
-	    my $w = $in->wait_message('', _("Reading printer data ..."));
-	    printer::read_configured_queues($printer);
-	}
-	# Copy queues from former spooler
-	copy_queues_from($printer, $in, $oldspooler);
-	# Re-read the printer database (CUPS has additional drivers, PDQ
-	# has no raw queue)
-	%printer::thedb = ();
-	#my $w = $in->wait_message('', _("Reading printer database ..."));
-	#printer::read_printer_db($printer->{SPOOLER});
+    if ((!$printer->{SPOOLER}) || ($printer->{SPOOLER} eq "pdq")) {
+	return 1;
     }
-    return $printer->{SPOOLER};
+
+    # First Check: Does /etc/sysconfig/network-scripts/draknet_conf exist
+    # (otherwise the network is not configured yet and draknet has to be
+    # started)
+
+    if (!printer::files_exist("/etc/sysconfig/network-scripts/draknet_conf")) {
+	my $go_on = 0;
+	while (!$go_on) {
+	    my $choice = _("Configure the network now");
+	    if ($in->ask_from(_("Network functionality not configured"),
+			      _("The printing system which you are going to use (%s) needs basic 
+network functionality, but your network functionality is not
+configured yet. If you go on without network configuration, your
+printing system will set up a network only consisting of the 
+local machine which does not allow the usage of remote printers
+or the sharing of a local printer with remote clients, but you
+can set up local printers usable from your local machine. How do
+ you want to proceed?",
+				$printer::shortspooler_inv{$printer->{SPOOLER}}),
+			      [ { val => \$choice, type => 'list',
+				  list => [ _("Configure the network now"),
+					    _("Go on without configuring the network") ]} ] )) {
+		if ($choice eq _("Configure the network now")){
+		    if ($::isInstall) {
+			require network::netconnect;
+		        network::netconnect::main
+			    ($in->{prefix}, $in->{netcnx} ||= {}, 
+			     $in->{netc}, $in->{mouse}, $in, 
+			     $in->{intf}, 0,
+			     $in->{lang} eq "fr_FR" && 
+			     $in->{keyboard} eq "fr", 0);
+		    } else {
+			system("/usr/sbin/draknet");
+		    }
+		    if (printer::files_exist("/etc/sysconfig/network-scripts/draknet_conf")) {
+			$go_on = 1;
+		    }
+		} else {
+		    return 1;
+		}
+	    } else {
+		return 0;
+	    }
+	}
+    }
+    # Second check: The network is configured now, check whether it is up
+    # and running and if not, start it.
+
+    if (!printer::network_status()) {
+	printer::restart_service("network");
+    }
+
+    1;
+}
+
+sub start_spooler_on_boot {
+    # Checks whether the spooler will be started at boot time and if not,
+    # ask the user whether he wants to start the spooler at boot time.
+    my ($printer, $in, $service) = @_;
+    if (!printer::service_starts_on_boot($service)) {
+	if ($in->ask_yesorno(_("Starting the printing system at boot time"),
+			     _("The printing system (%s) will not be started automatically
+when the machine is booted.
+
+It is possible that the automatic starting was turned off 
+by changing to a higher security level, because the printing
+system is a potential point for attacks.
+
+Do you want to have the automatic starting of the printing
+system turned on again?",
+		       $printer::shortspooler_inv{$printer->{SPOOLER}})), 1) {
+	    printer::start_service_on_boot($service);
+	}
+    }
+    1;
 }
 
 sub install_spooler {
@@ -1211,9 +1389,13 @@ sub install_spooler {
 				       if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
 				       ($::expert ? 'cups-drivers' : ())));
 	    }
+	    # Check whether the network functionality is configured and
+	    # running
+	    if (!check_network($printer, $in)) {return 0};
 	    # Start daemon
 	    printer::start_service("cups");
-	    #sleep 1;
+	    # Should it be started at boot time?
+	    start_spooler_on_boot($printer, $in, "cups");
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    # "lpr" conflicts with "LPRng", remove "LPRng"
 	    if ((!$::testing) &&
@@ -1227,9 +1409,13 @@ sub install_spooler {
 					   /sbin/ifconfig))))) {
 		$in->do_pkgs->install(('lpr', 'net-tools'));
 	    }
+	    # Check whether the network functionality is configured and
+	    # running
+	    if (!check_network($printer, $in)) {return 0};
 	    # Start daemon
 	    printer::restart_service("lpd");
-	    #sleep 1;
+	    # Should it be started at boot time?
+	    start_spooler_on_boot($printer, $in, "lpd");
 	} elsif ($printer->{SPOOLER} eq "lprng") {
 	    # "LPRng" conflicts with "lpr", remove "lpr"
 	    if ((!$::testing) &&
@@ -1243,9 +1429,13 @@ sub install_spooler {
 					   /sbin/ifconfig))))) {
 		$in->do_pkgs->install('LPRng', 'net-tools');
 	    }
+	    # Check whether the network functionality is configured and
+	    # running
+	    if (!check_network($printer, $in)) {return 0};
 	    # Start daemon
 	    printer::restart_service("lpd");
-	    #sleep 1;
+	    # Should it be started at boot time?
+	    start_spooler_on_boot($printer, $in, "lpd");
 	} elsif ($printer->{SPOOLER} eq "pdq") {
 	    if ((!$::testing) &&
 		(!printer::files_exist((qw(/usr/bin/pdq
@@ -1255,6 +1445,40 @@ sub install_spooler {
 	    # PDQ has no daemon, so nothing needs to be started
 	}
     }
+    1;
+}
+
+sub setup_default_spooler {
+    my ($printer, $in) = @_;
+    $printer->{SPOOLER} ||= 'cups';
+    my $oldspooler = $printer->{SPOOLER};
+    my $str_spooler = 
+	$in->ask_from_list_(_("Select Printer Spooler"),
+			    _("Which printing system (spooler) do you want to use?"),
+			    [ printer::spooler() ],
+			    $printer::spooler_inv{$printer->{SPOOLER}},
+			    ) or return;
+    $printer->{SPOOLER} = $printer::spooler{$str_spooler};
+    # Install the spooler if not done yet
+    if (!install_spooler($printer, $in)) {
+	$printer->{SPOOLER} = $oldspooler;
+	return;
+    }
+    if ($printer->{SPOOLER} ne $oldspooler) {
+	# Get the queues of this spooler
+	{
+	    my $w = $in->wait_message('', _("Reading printer data ..."));
+	    printer::read_configured_queues($printer);
+	}
+	# Copy queues from former spooler
+	copy_queues_from($printer, $in, $oldspooler);
+	# Re-read the printer database (CUPS has additional drivers, PDQ
+	# has no raw queue)
+	%printer::thedb = ();
+	#my $w = $in->wait_message('', _("Reading printer database ..."));
+	#printer::read_printer_db($printer->{SPOOLER});
+    }
+    return $printer->{SPOOLER};
 }
 
 sub configure_queue {
@@ -1266,7 +1490,7 @@ sub configure_queue {
     $printer->{complete} = 0;
 }
 
-#- Program entry point for configuration with of the printing system.
+#- Program entry point for configuration of the printing system.
 sub main {
     my ($printer, $in, $ask_multiple_printer, $upNetwork) = @_;
 
@@ -1297,7 +1521,7 @@ sub main {
 
 	# If we have chosen a spooler, install it.
 	if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
-	    install_spooler($printer, $in);
+	    if (!install_spooler($printer, $in)) {return;}
 	}
 
     }
@@ -1468,7 +1692,7 @@ sub main {
 	    choose_printer_name($printer, $in) or next;
 	    get_db_entry($printer, $in);
 	    choose_model($printer, $in) or next;
-	    get_printer_info($printer);
+	    get_printer_info($printer, $in) or next;
 	    setup_options($printer, $in) or next;
 	    configure_queue($printer, $in);
 	    setasdefault($printer, $in);
@@ -1559,15 +1783,14 @@ What do you want to modify on this printer?",
 		} elsif (($modify eq _("Printer manufacturer, model, driver")) ||
 			 ($modify eq _("Printer manufacturer, model"))) {
 		    get_db_entry($printer, $in);
-		    choose_model($printer, $in) && do {
-			get_printer_info($printer);
+		    choose_model($printer, $in) &&
+			get_printer_info($printer, $in) &&
+			    setup_options($printer, $in) &&
+				configure_queue($printer, $in);
+		} elsif ($modify eq _("Printer options")) {
+		    get_printer_info($printer, $in) &&
 			setup_options($printer, $in) &&
 			    configure_queue($printer, $in);
-		    }
-		} elsif ($modify eq _("Printer options")) {
-		    get_printer_info($printer);
-		    setup_options($printer, $in) &&
-			configure_queue($printer, $in);
 		} elsif ($modify eq _("Set this printer as the default")) {
 		    $printer->{DEFAULT} = $queue;
 		    printer::set_default_printer($printer);

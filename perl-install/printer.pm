@@ -50,12 +50,21 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 %printer_type_inv = reverse %printer_type;
 
 #------------------------------------------------------------------------------
+
 sub set_prefix($) { $prefix = $_[0]; }
 
 sub default_printer_type($) { "LOCAL" }
+
 sub spooler {
-    return @spooler_inv{qw(cups lpd lprng pdq)};
+    # LPD is taken from the menu for the moment because the classic LPD is
+    # highly unsecure. Depending on how the GNU lpr development is going on
+    # LPD support can be reactivated by uncommenting the line which is
+    # commented out now.
+
+    #return @spooler_inv{qw(cups lpd lprng pdq)};
+    return @spooler_inv{qw(cups lprng pdq)};
 }
+
 sub printer_type($) {
     my ($printer) = @_;
     for ($printer->{SPOOLER}) {
@@ -98,6 +107,22 @@ sub set_default_spooler ($) {
     close DEFSPOOL;
 }
 
+sub set_permissions {
+    my ($file, $perms, $owner, $group) = @_;
+    if ($owner && $group) {
+        run_program::rooted($prefix, "/bin/chown", "$owner.$group", $file)
+	    || die "Could not restart chown!";
+    } elsif ($owner) {
+        run_program::rooted($prefix, "/bin/chown", $owner, $file)
+	    || die "Could not restart chown!";
+    } elsif ($group) {
+        run_program::rooted($prefix, "/bin/chgrp", $group, $file)
+	    || die "Could not restart chgrp!";
+    }
+    run_program::rooted($prefix, "/bin/chmod", $perms, $file)
+	|| die "Could not restart chmod!";
+}
+
 sub restart_service ($) {
     my ($service) = @_;
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart")
@@ -114,6 +139,53 @@ sub stop_service ($) {
     my ($service) = @_;
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop")
 	|| die "Could not stop $service!";
+}
+
+sub service_starts_on_boot ($) {
+    my ($service) = @_;
+    local *F; 
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"/sbin/chkconfig --list $service 2>&1 |" ||
+	    die "Could not run chkconfig!";
+    while (<F>) {
+	chomp;
+	if ($_ =~ /:on/) {
+	    close F;
+	    return 1;
+	}
+    }
+    close F;
+    return 0;
+}
+
+sub start_service_on_boot ($) {
+    my ($service) = @_;
+    run_program::rooted($prefix, "/sbin/chkconfig", "--add", $service)
+	|| die "Could not start chkconfig!";
+}
+
+sub network_status {
+    # If the network is not running or not running as configured,
+    # return 0, otherwise 1.
+    local *F; 
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"/etc/rc.d/init.d/network status |" ||
+	    die "Could not run \"/etc/rc.d/init.d/network status\"!";
+    while(<F>) {
+	if (($_ =~ /Devices.*down/) || # Are there configured devices which
+	                               # are down
+	    ($_ =~ /Devices.*modified/)) { # Configured devices which are not
+	                                   # running as configured
+	    my $devices = <F>;
+	    chomp $devices;
+	    if ($devices !~ /^\s*$/) { # Blank line
+		close F;
+		return 0;
+	    }
+	}
+    }
+    close F;
+    return 1;
 }
 
 sub files_exist {
@@ -378,7 +450,9 @@ sub read_foomatic_options ($) {
 	"foomatic-configure -P -p $printer->{currentqueue}{'printer'}" .
 	    " -d $printer->{currentqueue}{'driver'}" . 
 		($printer->{OLD_QUEUE} ?
-		  " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") 
+		  " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
+		($printer->{SPECIAL_OPTIONS} ?
+		  " $printer->{SPECIAL_OPTIONS}" : "") 
 		    . " |" ||
 	    die "Could not run foomatic-configure";
     eval (join('',(<F>))); 
@@ -810,6 +884,14 @@ sub configure_queue($) {
 	my %usb = getVarsFromSh($f);
 	$usb{PRINTER} = "yes";
 	setVarsInSh($f, \%usb);
+    }
+
+    # Open permissions for device file when PDQ is chosen as spooler
+    # so normal users can print.
+    if ($printer->{SPOOLER} eq 'pdq') {
+	if ($printer->{currentqueue}{'connect'} =~ m!^\s*file:(\S*)\s*$!) {
+	    set_permissions($1,"666");
+	}
     }
 
     # Make a new printer entry in the $printer structure
