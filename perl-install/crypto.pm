@@ -67,7 +67,6 @@ sub mirrors {
 		my $qu = quotemeta $_;
 		$url =~ /\.$qu(?:\..*)?$/ and $land = $url2land{$_};
 	    }
-	    $dir =~ s!/main$!!;
 	    $mirrors{$url} = [ $land, $dir . $sub_dir ];
 	}
 	http::getFile('/XXX'); #- close connection.
@@ -147,8 +146,7 @@ sub getPackages {
     
     #- extract hdlist of crypto, then depslist.
     require pkgs;
-    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u",
-					    $::o->{distro_type} =~ /cooker|community/ ? "main" : "",
+    my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "",
 					    "Updates for Mandrakelinux " . version(), 1, $fhdlist, $pubkey);
     if ($update_medium) {
 	log::l("read updates hdlist");
