@@ -43,6 +43,7 @@ XFree86 dhcpxd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb
 my $postinstall_rpms = '';
 my $current_medium = 1;
 my $asked_medium = 1;
+my $cdrom = undef;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
@@ -81,8 +82,8 @@ sub errorOpeningFile($) {
 
     my $max = 32; #- always refuse after $max tries.
     if ($::o->{method} eq "cdrom") {
-	cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| or return;
-	my $cdrom = $1;
+	cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+	return unless $cdrom;
 	ejectCdrom($cdrom);
 	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
 	    $current_medium = $asked_medium;

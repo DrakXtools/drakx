@@ -1016,7 +1016,7 @@ sub install($$$;$$) {
 		log::l("bad package $_->{file}");
 		packageSetFlagSelected($_, 0);
 	    }
-	    cdie "error installing package list: " . join("\n", map { $_->{file} } @badpkgs);
+	    cdie ("error installing package list: " . join("\n", map { $_->{file} } @badpkgs));
 	}
     } while ($nb > 0 && !$pkgs::cancel_install);
 
