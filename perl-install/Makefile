@@ -142,6 +142,7 @@ endif
 
 	for i in ../all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
+	touch share/po/*.po
 	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
 #	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
