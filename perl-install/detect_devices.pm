@@ -747,10 +747,12 @@ sub dmidecode() {
 	    }
 	}
 	my $Chassis = $l{Chassis} =~ /^Type:\s*(\S+)/m && $1;
+	my $BIOS_Year = $l{BIOS} =~ m!^Release Date:.*?(\d{4})!m && $1 ||
+	                $l{BIOS} =~ m!^Release Date:.*?\d\d/\d\d/(\d\d)!m && "20$1";
 	
 	$dmidecode_infos = { 
 	    isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Sub Notebook', 'Docking Station'),
-	    if_($l{BIOS} =~ /^Release Date:.*?(\d{4})/m, BIOS_Year => $1),
+	    if_($BIOS_Year, BIOS_Year => $BIOS_Year),
 	};
     }
     $dmidecode_infos;
