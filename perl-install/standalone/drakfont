@@ -91,6 +91,7 @@ use common;
 #use Config;
 #use POSIX;
 
+my $in = 'interactive'->vnew('su', 'network');
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
 
 if ("@ARGV" =~ /--help|-h/) {
