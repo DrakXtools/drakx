@@ -38,7 +38,7 @@ sub writeconf() {
 }
 
 sub read_nut_config() {
-    $struct = Libconf::Glueconf::NUT::Ups_conf->new({ filename => $files{devices} })
+    $struct = Libconf::Glueconf::NUT::Ups_conf->new({ filename => $files{devices} });
 }
 
 sub readDriversList() {
@@ -47,7 +47,7 @@ sub readDriversList() {
     foreach (cat_(first(glob("/usr/share/doc/nut-*/docs/driver.list")))) {
         /^#/ and next;
         if (my ($vendor, $model, $extra, $driver) = /^"(.*)"\s+"(.*)"\s+"(.*)"\s+"(.*)"/) {
-            $ups{$vendor}{$model.$extra} = {
+            $ups{$vendor}{$model . $extra} = {
                                      driver => $driver,
                                      extra => $extra,
                                     };
@@ -118,7 +118,7 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                name => sub {
                                    if (@new_devices) {
                                        N("Congratulations") . "\n\n" . 
-                                         N("The wizard successfully added the following UPS devices:") . join("\n\n-", @new_devices)
+                                         N("The wizard successfully added the following UPS devices:") . join("\n\n-", @new_devices);
                                      } else {
                                          N("No new UPS devices was found");
                                      }
@@ -130,7 +130,7 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                             type => 'combo', sort => 1, separator => '|' }, ],
                                 post => sub {
                                     ($vendor, $model, $extra) = ($1, $2, $3) if $ups =~ /(.*)\|(.*) \((.*)\)$/;
-                                    ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model.$extra}{driver}, "");
+                                    ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model . $extra}{driver}, "");
                                     ($driver) = split(/\s+/, $driver);
                                     "driver";
                                 },
@@ -373,7 +373,7 @@ foreach my $i (@pages) {
                                              my ($id, $label, $sub) = @$_;
                                              gtksignal_connect($buttons{$id} = Gtk2::Button->new($label), clicked => sub { 
 								 $sub->($model, $list, $getindex);
-							       })
+							       });
                                          } ([ 'add', N("Add"), $i->{callbacks}{add} || \&add_callback ],
                                             [ 'edit', N("Edit"), \&edit_callback ],
                                             [ 'remove', N("Remove"), \&del_callback ],
