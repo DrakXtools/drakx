@@ -214,7 +214,7 @@ sub monitorConfiguration(;$$) {
     } else {
 	$monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
 
-	readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/share/MonitorsDB");
+	readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/X11R6/lib/X11/MonitorsDB");
 
 	add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
 	if ($monitor->{type} eq 'Unlisted') {

@@ -334,12 +334,15 @@ sub killCardServices {
     $pid and kill(15, $pid); #- send SIGTERM
 }
 
+sub unlockCdrom() {
+    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage|;
+    eval { ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
+}
 sub ejectCdrom() {
     cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage|;
     my $f = eval { detect_devices::tryOpen($1) } or return;
     getFile("XXX"); #- close still opened filehandle
     eval { fs::umount("/tmp/rhimage") };
-    ioctl $f, c::CDROM_LOCKDOOR(), 0; #- in case the umount fails...
     ioctl $f, c::CDROMEJECT(), 1;
 }
 

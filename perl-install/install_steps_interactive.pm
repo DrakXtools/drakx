@@ -941,6 +941,8 @@ _("Some steps are not completed.
 
 Do you really want to quit now?"), 0);
 
+    install_any::unlockCdrom;
+
     $o->ask_warn('',
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.

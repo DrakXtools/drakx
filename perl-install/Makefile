@@ -28,20 +28,11 @@ clean:
 	rm -rf auto ../diskdrake*
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
-tar: clean
-	cd .. ; tar cfy perl-install.tar.bz2 $(EXCLUDE:%=--exclude %) perl-install
-
-tar-diskdrake: clean pci_probing
-	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
-
-	l=`./perl2fcalls -uses -excludec -excluderesize_fat::c_rewritten diskdrake | sort | uniq | grep -v "^resize_fat::" | sed -e 's/::/\//' -e 's/^/diskdrake\//' -e 's/$$/.pm/'` ; \
-	cd .. ; tar cfz diskdrake.tgz --exclude CVS $(patsubst %,diskdrake/%,c c.pm resize_fat po diskdrake*) $$l
-
-tar-XFdrake: clean
-	cd .. ; rm -rf XFdrake ; cp -af perl-install XFdrake
-
-	l=`./perl2fcalls -uses -excludec -excludepci_probing::ids XFdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/XFdrake\//' -e 's/$$/.pm/'` ; \
-	cd .. ; tar cfz XFdrake.tgz --exclude CVS $(patsubst %,XFdrake/%,c MonitorsDB po pci_probing XFdrake*) $$l
+tar-drakxtools: clean
+	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe drakxtools	
+	cd ../drakxtools ; rm -f install* ForMakefile.pm pkgs.pm ftp.pm t.pm ; mv Makefile.drakxtools Makefile
+	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe po pci_probing resize_fat diskdrake diskdrake.rc XFdrake *.pm)
+	cd .. ; rm -rf drakxtools
 
 $(DIRS):
 	install -d auto
@@ -91,6 +82,7 @@ get_needed_files: $(DIRS)
 	install -d $(DEST)/usr/share
 	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
+	install -d $(DEST)/usr/X11R6/lib/X11
 	install -d $(ROOTDEST)/Mandrake/base
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 	cp -f $(LOCALFILES2) $(DEST)/usr/bin
@@ -126,7 +118,8 @@ get_needed_files: $(DIRS)
 
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
-	cp ifcfg-ppp.* chat-ppp.* kppprc.in modparm.lst MonitorsDB $(DEST)/usr/share
+	cp ifcfg-ppp.* chat-ppp.* kppprc.in modparm.lst $(DEST)/usr/share
+	cp MonitorsDB $(DEST)/usr/X11R6/lib/X11
 	cp logo-mandrake.xpm $(DEST)/usr/share
 	cp -a themes $(DEST)/usr/share/gtk
 	cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base

@@ -46,7 +46,6 @@ sub ask_from_listW {
     my ($title, @okcancel) = ref $title_ ? @$title_ : ($title_, _("Ok"), _("Cancel"));
 
     my $mesg = join("\n", @$messages);
-    log::l("ask_from_listW: " . (join "|", @$l));
 
     if (@$l == 1) {
 	Newt::WinMessage($title, @$l, $mesg);

@@ -1,7 +1,9 @@
 .PHONY: clean
 
+C_RPM = 1
+
 stuff: %: %.xs
-	test -e Makefile_c || C_RPM=1 perl Makefile.PL
+	test -e Makefile_c || C_RPM=$(C_RPM) perl Makefile.PL
 	$(MAKE) -f Makefile_c
 	rm -f ../auto/c ; ln -s ../c/blib/arch/auto ../auto/c
 
@@ -11,5 +13,5 @@ clean:
 
 stuff.xs: %: %.pm
 	rm -f $@
-	export C_RPM=1 ; perl $< > $@
+	export C_RPM=$(C_RPM) ; perl $< > $@
 	chmod a-w $@
