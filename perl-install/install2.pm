@@ -296,7 +296,7 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 sub installCrypto { $o->installCrypto }
 #------------------------------------------------------------------------------
-sub configureServices { $::expert and $o->configureServices }
+sub configureServices { $o->configureServices($_[0]) }
 #------------------------------------------------------------------------------
 sub setRootPassword {
     return if $o->{isUpgrade};
