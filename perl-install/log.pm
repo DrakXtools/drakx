@@ -2,10 +2,10 @@ package log; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(*LOG *LOG2);
 
 use c;
 
+my ($LOG, $LOG2);
 
 #-#####################################################################################
 #- Globals
@@ -16,7 +16,7 @@ my $logDebugMessages = 0;
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub F() { *LOG }
+sub F() { $LOG }
 
 sub l {
     $logOpen or openLog();
@@ -25,8 +25,8 @@ sub l {
     } elsif ($::isStandalone) {
 	c::syslog(c::LOG_WARNING(), join("", @_));
     } elsif ($::isInstall) {
-	print LOG "* ", @_, "\n";
-	print LOG2 "* ", @_, "\n";
+	print $LOG "* ", @_, "\n";
+	print $LOG2 "* ", @_, "\n";
     } else {
 	print STDERR @_, "\n";
     }
@@ -37,13 +37,13 @@ sub w { &l }
 sub openLog(;$) {
     if ($::isInstall) {
 	if ($_[0]) { #- useLocal
-	    open LOG, "> $_[0]"; #-#
+	    open $LOG, "> $_[0]"; #-#
 	} else {
-	    open LOG, "> /dev/tty3"; #-#
+	    open $LOG, "> /dev/tty3"; #-#
 	}
-	open LOG2, ">> /tmp/ddebug.log"; #-#
-	select((select(LOG),  $| = 1)[0]);
-	select((select(LOG2), $| = 1)[0]);
+	open $LOG2, ">> /tmp/ddebug.log"; #-#
+	select((select($LOG),  $| = 1)[0]);
+	select((select($LOG2), $| = 1)[0]);
     }
     exists $ENV{DEBUG} and $logDebugMessages = 1;
     $logOpen = 1;
@@ -52,7 +52,7 @@ sub openLog(;$) {
 sub closeLog() { 
     if ($::isStandalone) {
 	c::closelog();
-    } else { close LOG; close LOG2 }
+    } else { close $LOG; close $LOG2 }
 }
 
 sub explanations { c::syslog(c::LOG_INFO()|c::LOG_LOCAL1(), "@_") }
