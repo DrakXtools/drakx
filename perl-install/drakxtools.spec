@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.12mdk
+Release: 0.13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,6 +312,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul 10 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.13mdk
+- drakfloppy: one cannot edit output buffer
+- drakperm: fix crash when moving lines around sorted columns
+- draksec: more stock icons
+- logdrake: fixes
+
 * Thu Jul 10 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.12mdk
 - drakboot, drakfont: use stock button
 - drakconnect, drakfloppy: grey widgest instead of hiding them when
