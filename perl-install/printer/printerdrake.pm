@@ -2317,14 +2317,113 @@ sub choose_model {
 	$printer->{DBENTRY} = N("Raw printer (No driver)");
     }
     # Choose the printer/driver from the list
-    return($printer->{DBENTRY} = $in->ask_from_treelist(N("Printer model selection"),
-							 N("Which printer model do you have?") .
-							 N("
+    my $choice = $printer->{DBENTRY};
+    my $loadppdchosen = 0;
+    while (1) {
+	if ($in->ask_from_({ 
+	    title => N("Printer model selection"),
+	    messages => N("Which printer model do you have?") .
+		N("
 
-Please check whether Printerdrake did the auto-detection of your printer model correctly. Find the correct model in the list when a wrong model or \"Raw printer\" is highlighted.") . " " .
-N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
-							 [ keys %printer::main::thedb ], $printer->{DBENTRY}));
+Please check whether Printerdrake did the auto-detection of your printer model correctly. Find the correct model in the list when a wrong model or \"Raw printer\" is highlighted.") 
+		. " " .
+		N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."),
+		#cancel => (""),
+		#ok => (""),
+	    }, [ 
+		 # List the printers/drivers
+		 { val => \$choice, format => \&translate,
+		   sort => 0, separator => "|", tree_expanded => 0,
+		   quit_if_double_click => 1, allow_empty_list => 1,
+		   list => [ keys %printer::main::thedb ] },
+		 # Button to install a manufacturer-supplied PPD file
+		 { clicked_may_quit =>
+		       sub { 
+			   $loadppdchosen = 1;
+			   1; 
+		       },
+		   val => N("Install a manufacturer-supplied PPD file") },
+		 ])) {
+	    $printer->{DBENTRY} = $choice if !$loadppdchosen;
+	} else {
+	    return 0;
+	}
+	last if !$loadppdchosen;
+	# Install a manufacturer-supplied PPD file
+	my $ppdentry;
+	if ($ppdentry = installppd($printer, $in)) {
+	    $choice = $ppdentry;
+	}
+	$loadppdchosen = 0;
+    }
+    return 1;
+}
 
+sub installppd {
+    my ($printer, $in) = @_;
+
+    # Install a manufacturer-supplied PPD file
+
+    # The dialogs to choose the PPD file should appear as extra
+    # windows and not embedded in the "Add printer" wizard.
+    local $::isWizard = 0;
+
+    my $ppdfile;
+    my ($mediachoice);
+    while (1) {
+	# Tell user about PPD file installation
+	$in->ask_from('Printerdrake',
+		      N("Every PostScript printer is delivered with a PPD file which describes the printer's options and features.") . " " .
+		      N("This file is usually somewhere on the CD with the Windows and Mac drivers delivered with the printer.") . " " .
+		      N("You can find the PPD files also on the manufacturer's web sites.") . " " .
+		      N("If you have Windows installed on your machine, you can find the PPD file on your Windows partition, too.") . "\n" .
+		      N("Installing the printer's PPD file and using it when setting up the printer makes all options of the printer available which are provided by the printer's hardware") . "\n" .
+		      N("Here you can choose the PPD file to be installed on your machine, it will then be used for the setup of your printer."),
+		      [
+		       { label => N("Install PPD file from"), 
+			 val => \$mediachoice,
+			 list => [N("CD-ROM"),
+				  N("Floppy Disk"), 
+				  N("Other place")], 
+			 not_edit => 1, sort => 0 },
+		       ],
+		      ) or return 0;
+	my $dir;
+	if ($mediachoice eq N("CD-ROM")) {
+	    $dir = "/mnt/cdrom";
+	} elsif ($mediachoice eq N("Floppy Disk")) {
+	    $dir = "/mnt/floppy";
+	} elsif ($mediachoice eq N("Other place")) {
+	    $dir = "/mnt";
+	} else {
+	    return 0;
+	}
+	# Let user select a PPD file from a floppy, hard disk, ...
+        $ppdfile = $in->ask_file(N("Select PPD file"), "$dir");
+	last if !$ppdfile;
+	if (! -r $ppdfile) {
+	    $in->ask_warn('Printerdrake',
+			  N("The PPD file %s does not exist or is unreadable!",
+			    $ppdfile));
+	    next;
+	}
+	if (! printer::main::checkppd($printer, $ppdfile)) {
+	    $in->ask_warn('Printerdrake',
+			  N("The PPD file %s does not conform with the PPD specifications!",
+			    $ppdfile));
+	    next;
+	}
+	last;
+    }
+
+    return 0 if !$ppdfile;
+
+    # Install the PPD file in /usr/share/cups/ppd/printerdrake/
+    my $_w = $in->wait_message(N("Printerdrake"),
+			       N("Installing PPD file..."));
+    my $ppdentry = printer::main::installppd($printer, $ppdfile);
+    undef $_w;
+    return $ppdentry;
 }
 
 my %lexmarkinkjet_options = (

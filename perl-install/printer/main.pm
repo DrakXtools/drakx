@@ -1396,6 +1396,36 @@ sub get_direct_uri() {
     @direct_uri;
 }
 
+sub checkppd {
+    # Check whether the PPD file is valid
+    my ($printer, $ppdfile) = @_;
+    return 1 if $printer->{SPOOLER} ne "cups";
+    return run_program::rooted($::prefix, "cupstestppd", "-q",
+			       $ppdfile);
+}
+
+sub installppd {
+    # Install the PPD file in /usr/share/cups/model/printerdrake/
+    my ($printer, $ppdfile) = @_;
+    return "" if !$ppdfile;
+    # Install PPD file
+    mkdir_p("$::prefix/usr/share/cups/model/printerdrake");
+    # "cp_f()" is broken, it hangs infinitely
+    # cp_f($ppdfile, "$::prefix/usr/share/cups/model/printerdrake");
+    run_program::rooted($::prefix, "cp", "-f", "$ppdfile",
+			"$::prefix/usr/share/cups/model/printerdrake");
+    $ppdfile =~ s!^(.*)(/[^/]+)$!/usr/share/cups/model/printerdrake$2!;
+    chmod 0644, "$::prefix$ppdfile";
+    # Restart CUPS to register new PPD file
+    printer::services::restart("cups") if $printer->{SPOOLER} eq "cups";
+    # Re-read printer database
+    %thedb = ();
+    read_printer_db($printer, $printer->{SPOOLER});
+    # Return description string of the PPD file
+    my $ppdentry = get_descr_from_ppdfile($printer, $ppdfile);
+    return $ppdentry;
+}
+
 sub clean_manufacturer_name {
     my ($make) = @_;
     # Clean some manufacturer's names so that every manufacturer has only
@@ -1508,15 +1538,23 @@ sub ppd_entry_str {
 
 sub get_descr_from_ppd {
     my ($printer) = @_;
-    my %ppd;
-
     #- if there is no ppd, this means this is a raw queue.
     if (! -r "$::prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd") {
 	return "|" . N("Unknown model");
     }
+    return get_descr_from_ppdfile($printer, "/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd");
+}
+
+sub get_descr_from_ppdfile {
+    my ($printer, $ppdfile) = @_;
+    my %ppd;
+
+    # Remove ".gz" from end of file name, so that "catMaybeCompressed" works
+    $ppdfile =~ s/\.gz$//;
+
     eval {
 	local $_;
-	foreach (cat_("$::prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd")) {
+	foreach (catMaybeCompressed("$::prefix$ppdfile")) {
 	    # "OTHERS|Generic PostScript printer|PostScript (en)";
 	    /^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and
 		do { $ppd{$1} = $2; next };
