@@ -47,6 +47,7 @@
 #include "log.h"
 #include "network.h"
 #include "frontend.h"
+#include "automatic.h"
 
 #include "dhcp.h"
 
@@ -67,6 +68,8 @@ typedef short bp_int16;
 #define DHCP_OPTION_SERVER		54
 #define DHCP_OPTION_OPTIONREQ		55
 #define DHCP_OPTION_MAXSIZE		57
+
+#define DHCP_OPTION_CLIENT_IDENTIFIER	61
 
 #define BOOTP_CLIENT_PORT	68
 #define BOOTP_SERVER_PORT	67
@@ -512,6 +515,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	short aShort;
 	int num_options;
 	char requested_options[50];
+	char * my_hostname, * my_domainname, * client_id_str, * client_id_hwaddr;
 
 	if (strncmp(intf->device, "eth", 3)) {
 		stg1_error_message("DHCP available only for Ethernet networking.");
@@ -522,6 +526,35 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	if (s < 0) {
 		log_perror("socket");
 		return RETURN_ERROR;
+	}
+
+	{
+		enum return_type results;
+		char * questions[] = { "Host name", "Domain name", NULL };
+		char * questions_auto[] = { "hostname", "domain" };
+		static char ** answers = NULL;
+		char * boulet;
+
+		my_hostname = my_domainname = client_id_str = client_id_hwaddr = NULL;
+		
+		results = ask_from_entries_auto("If the DHCP server needs to know you by name; please fill in this information. "
+						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
+						"domain name, for a machine called `mybox.mynetwork.com' on the Internet.",
+						questions, &answers, 32, questions_auto, NULL);
+		if (results == RETURN_OK)
+		{
+			my_hostname = answers[0];
+			if ((boulet = strchr(my_hostname, '.')) != NULL)
+				boulet[0] = '\0';
+			my_domainname = answers[1];
+			
+			if (*my_hostname && *my_domainname) {
+				/* if we have both, then create client id from them */
+				client_id_str = memdup(my_hostname, strlen(my_domainname) + 2);
+				strcat(client_id_str, ".");
+				strcat(client_id_str, my_domainname);
+			}
+		}
 	}
 
 	if (initial_setup_interface(intf->device, s) != 0) {
@@ -536,6 +569,22 @@ enum return_type perform_dhcp(struct interface_info * intf)
 
 	messageType = DHCP_TYPE_DISCOVER;
 	add_vendor_code(&breq, DHCP_OPTION_TYPE, 1, &messageType);
+
+	/* add pieces needed to have DDNS/DHCP IP selection based on requested name */
+	if (my_hostname && *my_hostname) { /* pick client id form based on absence or presence of domain name */
+		if (*my_domainname) /* alternate style <hostname>.<domainname> */
+			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str), client_id_str);
+		else { /* usual style (aka windows / dhcpcd) */
+			/* but put MAC in form required for client identifier first */
+			client_id_hwaddr = malloc(IFHWADDRLEN+2);
+			client_id_hwaddr[0] = 1;  /* set flag for ethernet */
+			memcpy(client_id_hwaddr+1, gen_hwaddr, IFHWADDRLEN);
+			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, IFHWADDRLEN+1, client_id_hwaddr);
+		}
+		/* this is the one that the dhcp server really wants for DDNS updates */
+		add_vendor_code(&breq, BOOTP_OPTION_HOSTNAME, strlen(my_hostname), my_hostname);
+		log_message("DHCP: telling server to use name = %s", my_hostname);
+	}
 
 	memset(&client_addr.sin_addr, 0, sizeof(&client_addr.sin_addr));
 	client_addr.sin_family = AF_INET;
@@ -575,6 +624,16 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	add_vendor_code(&breq, DHCP_OPTION_TYPE, 1, &messageType);
 	add_vendor_code(&breq, DHCP_OPTION_SERVER, 4, &server_addr.sin_addr);
 	add_vendor_code(&breq, DHCP_OPTION_REQADDR, 4, &bresp.yiaddr);
+
+	/* if used the first time, then have to use it again */
+	if (my_hostname && *my_hostname) { /* add pieces needed to have DDNS/DHCP IP selection based on requested name */
+		if (my_domainname && *my_domainname) /* alternate style */
+			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, strlen(client_id_str), client_id_str);
+		else /* usual style (aka windows / dhcpcd) */
+			add_vendor_code(&breq, DHCP_OPTION_CLIENT_IDENTIFIER, IFHWADDRLEN+1, client_id_hwaddr);
+		/* this is the one that the dhcp server really wants for DDNS updates */
+		add_vendor_code(&breq, BOOTP_OPTION_HOSTNAME, strlen(my_hostname), my_hostname);
+	}
 
 	aShort = ntohs(sizeof(struct bootp_request));
 	add_vendor_code(&breq, DHCP_OPTION_MAXSIZE, 2, &aShort);
