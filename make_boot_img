@@ -404,83 +404,204 @@ image=/vmlinux$I.gz
 }
 
 sub boot_img_ppc {
-    my ($mnt, $img, $kern, $modz) = @_;
-    my $dir = "/export";
-    my $boot = "boot"; #- non-absolute pathname only!
-    my ($extension) = $modz =~ /.*\/([^\/]+)/;
-    _ "mkdir -p $dir/$boot";
-    _ "cp -f $kern $dir/$boot/vmlinux";
-    _ "cp -f images/all.rdz$extension $dir/boot/all.gz";
-    _ "cp -f tools/ppc/yaboot $dir/boot/yaboot";
+    my (@kernels) = @_;
+	#- hack to produce directly into /export the needed file for cdrom boot.
+	my $dir = "/export";
+	my $boot = "boot"; #- non-absolute pathname only!
+    _ "rm -rf $dir/$boot"; mkdir "$dir/$boot", 0777;
+	foreach (glob("kernel/all.kernels/*")) {
+		my $ext = basename($_);
+		if ($ext =~ /2.4/) {
+			_ "cp $_/boot/vmlinux $dir/$boot/vmlinux";
+			_ "cp images/all.rdz-$ext $dir/$boot/all.gz";
+		}
+		if ($ext =~ /2.2/) {
+			_ "cp $_/boot/vmlinux $dir/$boot/vmlinux-2.2";
+			_ "cp images/all.rdz-$ext $dir/$boot/all-2.2.gz";
+		}
+    }
+    _ "cp -f /usr/lib/yaboot/yaboot $dir/$boot/yaboot";
 	
+	output("$dir/$boot/ofboot.b", "<CHRP-BOOT>
+<COMPATIBLE>
+MacRISC
+</COMPATIBLE>
+<DESCRIPTION>
+Mandrake Linux PPC bootloader
+</DESCRIPTION>
+<BOOT-SCRIPT>
+\" screen\" output
+dev screen
+\" \"(0000000000aa00aa0000aaaaaa0000aa00aaaa5500aaaaaa)\" drop 0 8 set-colors
+\" \"(5555555555ff55ff5555ffffff5555ff55ffffff55ffffff)\" drop 8 8 set-colors
+device-end
+3 to foreground-color
+0 to background-color
+\" \"(0C)\" fb8-write drop
+\" Booting Mandrake Linux PPC...\" fb8-write drop 100 ms
+boot cd:2,\\\\yaboot
+</BOOT-SCRIPT>
+<OS-BADGE-ICONS>
+1010
+000000000000F8FEACF6000000000000
+0000000000F5FFFFFEFEF50000000000
+00000000002BFAFEFAFCF70000000000
+0000000000F65D5857812B0000000000
+0000000000F5350B2F88560000000000
+0000000000F6335708F8FE0000000000
+00000000005600F600F5FD8100000000
+00000000F9F8000000F5FAFFF8000000
+000000008100F5F50000F6FEFE000000
+000000F8F700F500F50000FCFFF70000
+00000088F70000F50000F5FCFF2B0000
+0000002F582A00F5000008ADE02C0000
+00090B0A35A62B0000002D3B350A0000
+000A0A0B0B3BF60000505E0B0A0B0A00
+002E350B0B2F87FAFCF45F0B2E090000
+00000007335FF82BF72B575907000000
+000000000000ACFFFF81000000000000
+000000000081FFFFFFFF810000000000
+0000000000FBFFFFFFFFAC0000000000
+000000000081DFDFDFFFFB0000000000
+000000000081DD5F83FFFD0000000000
+000000000081DDDF5EACFF0000000000
+0000000000FDF981F981FFFF00000000
+00000000FFACF9F9F981FFFFAC000000
+00000000FFF98181F9F981FFFF000000
+000000ACACF981F981F9F9FFFFAC0000
+000000FFACF9F981F9F981FFFFFB0000
+00000083DFFBF981F9F95EFFFFFC0000
+005F5F5FDDFFFBF9F9F983DDDD5F0000
+005F5F5F5FDD81F9F9E7DF5F5F5F5F00
+0083DD5F5F83FFFFFFFFDF5F835F0000
+000000FBDDDFACFBACFBDFDFFB000000
+000000000000FFFFFFFF000000000000
+0000000000FFFFFFFFFFFF0000000000
+0000000000FFFFFFFFFFFF0000000000
+0000000000FFFFFFFFFFFF0000000000
+0000000000FFFFFFFFFFFF0000000000
+0000000000FFFFFFFFFFFF0000000000
+0000000000FFFFFFFFFFFFFF00000000
+00000000FFFFFFFFFFFFFFFFFF000000
+00000000FFFFFFFFFFFFFFFFFF000000
+000000FFFFFFFFFFFFFFFFFFFFFF0000
+000000FFFFFFFFFFFFFFFFFFFFFF0000
+000000FFFFFFFFFFFFFFFFFFFFFF0000
+00FFFFFFFFFFFFFFFFFFFFFFFFFF0000
+00FFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+00FFFFFFFFFFFFFFFFFFFFFFFFFF0000
+000000FFFFFFFFFFFFFFFFFFFF000000
+</OS-BADGE-ICONS>
+</CHRP-BOOT>
+");
+
 	output("$dir/$boot/yaboot.conf", "
 init-message = \"\\nWelcome to Mandrake Linux PPC!\\nHit <TAB> for boot options.\\n\\n\"
 timeout = 150
-default = install-novideo
+default = install-gui
+message=cd:,\\\\\\\\yaboot.msg
 
 image = cd:,\\\\\\\\vmlinux
-    label = install-novideo
+    label = install-gui
     root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
-    initrd-size = 32000
-    append = \" video=ofonly\"
-    
-image = cd:,\\\\\\\\vmlinux
-    label = install-atyfb
+    initrd-size = 34000
+
+image = cd:,\\\\\\\\vmlinux-2.2
+    label = install-gui-2.2
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all.gz
-    initrd-size = 32000
-    append = \" video=atyfb:vmode:17\"
-    
-image = cd:,\\\\\\\\vmlinux
-    label = install-aty128fb
-    root = /dev/ram3
-    initrd = cd:,\\\\\\\\all.gz
-    initrd-size = 32000
-    append = \" video=aty128fb:vmode:17\"
+    initrd = cd:,\\\\\\\\all-2.2.gz
+    initrd-size = 34000
 
 image = cd:,\\\\\\\\vmlinux
     label = install-text
     root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
-    initrd-size = 32000
+    initrd-size = 34000
     append = \" text video=ofonly\"
+
+image = cd:,\\\\\\\\vmlinux-2.2
+    label = install-text-2.2
+    root = /dev/ram3
+    initrd = cd:,\\\\\\\\all-2.2.gz
+    initrd-size = 34000
+    append = \" text video=ofonly\"
+
+image = cd:,\\\\\\\\vmlinux
+    label = install-gui-old
+    root = /dev/ram3
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 34000
+    append = \" gui-old video=ofonly\"
+
+image = cd:,\\\\\\\\vmlinux-2.2
+    label = install-gui-old-2.2
+    root = /dev/ram3
+    initrd = cd:,\\\\\\\\all-2.2.gz
+    initrd-size = 34000
+    append = \" gui-old video=ofonly\"
 
 image = enet:0,vmlinux
     label = install-net
     root = /dev/ram3
     initrd = enet:0,all.gz
-    initrd-size = 32000
+    initrd-size = 34000
     append = \" video=ofonly\"
 
+image = enet:0,vmlinux-2.2
+    label = install-net-2.2
+    root = /dev/ram3
+    initrd = enet:0,all-2.2.gz
+    initrd-size = 34000
+    append = \" video=ofonly\"
+	
 image = enet:0,vmlinux
     label = install-net-text
     root = /dev/ram3
     initrd = enet:0,all.gz
-    initrd-size = 32000
+    initrd-size = 34000
     append = \" text video=ofonly\"
 
+image = enet:0,vmlinux-2.2
+    label = install-net-text-2.2
+    root = /dev/ram3
+    initrd = enet:0,all-2.2.gz
+    initrd-size = 34000
+    append = \" text video=ofonly\"
+	
 image = cd:,\\\\\\\\vmlinux
     label = rescue
     root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
-    initrd-size = 32000
+    initrd-size = 34000
     append = \" rescue video=ofonly\"    
 
 image = enet:0,vmlinux
     label = rescue-net
     root = /dev/ram3
     initrd = enet:0,all.gz
-    initrd-size = 32000
+    initrd-size = 34000
     append = \" rescue video=ofonly\"    
 ");
-	#- seem to need 2 yaboot.conf, one in the root, and one in boot
-	_ "cp -f $dir/boot/yaboot.conf $dir/yaboot.conf";		
 
-	output("$dir/$boot/README", "
-To Build a Bootable CD-ROM, do:
-cd /tools/ppc
-./mkINSTALLCD /export ppc-cd.img
+	output("$dir/$boot/yaboot.msg", "
+Thanks for choosing Mandrake Linux PPC.  The following is a short
+explanation of the various options for booting the install CD.
+
+All options ending with \"2.2\" will use the 2.2.20-9mdkBOOT kernel.
+The default syntax with no suffix uses the 2.4.18-4mdkBOOT kernel.
+The default if you just hit enter is \"install-gui\".
+
+install-gui:        	uses XFree86 fbdev mode
+install-text:       	text based install
+install-gui-old:    	old Xpmac gui
+install-net:            allows you to use a minimal boot CD,
+                        pulling the rest of the install from
+                        a network server
+install-net-text:       text mode network install
+rescue:                 boots the rescue image
+rescue-net:             boots the rescue image from a network server
+
 ");
 
 }
