@@ -920,6 +920,7 @@ Do you want to install the updates ?"))) || return;
 
     if ($update_medium) {
 	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
+	    $o->{isUpgrade} = 1; #- now force upgrade mode, else update will be installed instead of upgraded.
 	    $o->pkg_install;
 	} else {
 	    #- make sure to not try to install the packages (which are automatically selected by getPackage above).
