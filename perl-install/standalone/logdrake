@@ -246,7 +246,7 @@ sub parse_file {
 		 my $pbar = new Gtk2::ProgressBar()
 		 )
 	);
-  $win_pb->set_transient_for($my_win->{rwindow});
+  $win_pb->set_transient_for($my_win->{rwindow}) unless $::isEmbedded;
   $win_pb->set_modal(1);
   $win_pb->set_position('center');
   $win_pb->realize();
@@ -296,7 +296,7 @@ sub parse_file {
       open F, $file or die "E: $!";
       local $_;
       while (<F>) {}; #to prevent to output the file twice..
-      $log_text->set_point($log_text->get_length());
+#      $log_text->set_point($log_text->get_length());
       my $timer = Gtk2->timeout_add(1000, \&input_callback);
   }     
 }
