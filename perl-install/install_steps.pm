@@ -299,6 +299,9 @@ sub beforeInstallPackages {
     #- some packages need such files for proper installation.
     install_any::write_fstab($o);
 
+    #- configure PCMCIA services if needed (gnome-panel use it to detect pcmcia)
+    modules::write_pcmcia($o->{prefix}, $o->{pcmcia});
+
     require network;
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
 
@@ -406,9 +409,6 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- generate /etc/lvmtab needed for rc.sysinit
     run_program::rooted($o->{prefix}, 'vgscan') if -e '/etc/lvmtab';
-
-    #- configure PCMCIA services if needed.
-    modules::write_pcmcia($o->{prefix}, $o->{pcmcia});
 
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";
