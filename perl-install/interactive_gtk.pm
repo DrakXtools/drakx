@@ -638,7 +638,7 @@ sub ask_browse_tree_info_refW {
 	}
 	$tree->node_set_pixmap($node, 1, $pix{$state}[0], $pix{$state}[1]);
     };
-    my $set_node_state_tree; $set_node_state_tree = sub {
+    my $set_node_state_tree = sub {
 	my ($node, $state) = @_;
 	unless ($pix{$state}) {
 	    foreach ("$ENV{SHARE_PATH}/$state.png", "$ENV{SHARE_PATH}/rpm-$state.png") {
