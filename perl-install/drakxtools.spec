@@ -357,12 +357,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Tue Feb  8 2005 Olivier Blin <oblin@mandrakesoft.com> 10.2-0.20mdk
-- drakconnect:
-  o basic ndiswrapper support
-  o add default connection methods for some DSL ISP
-- drakproxy: gnome proxy support
-- net_applet: start automatically in fluxbox and XFce4 too
+* Tue Feb  8 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.20mdk
+- drakconnect (blino):
+  o add basic ndiswrapper support
+  o select manual adsl connection type if the network interface was
+    static
+  o add missing protocol for Free and Telecom Italia in ISB DB
+- drakproxy: support gnome proxy (blino)
+- printerdrake (till):
+  o adapt to new printer drivers packages
+  o limit automatically generated print queue names to 12 characters
+    and warn user if he manually enters longer names (which will make
+    the printer unaccessible for some Windows clients) (#12674).
+- allow upper case letters in users' real names (rafael)
+- net_applet: automatically start in fluxbox and XFce4 too (blino)
 
 * Fri Feb  4 2005 Olivier Blin <blino@mandrake.org> 10.2-0.19mdk
 - drakconnect: add bpalogin support for cable connections
