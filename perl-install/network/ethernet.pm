@@ -1,4 +1,4 @@
-package network::ethernet;
+package network::ethernet; # $Id$
 
 
 use network::network;

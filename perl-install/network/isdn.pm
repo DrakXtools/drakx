@@ -1,4 +1,4 @@
-package network::isdn;
+package network::isdn; # $Id$
 
 use strict;
 use network::isdn_consts;

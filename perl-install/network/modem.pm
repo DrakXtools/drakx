@@ -1,4 +1,4 @@
-package network::modem;
+package network::modem; # $Id$
 
 use strict;
 use common;

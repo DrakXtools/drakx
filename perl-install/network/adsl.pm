@@ -1,4 +1,4 @@
-package network::adsl;
+package network::adsl; # $Id$
 
 use common;
 use run_program;
