@@ -67,45 +67,53 @@ my %ignoreBadPkg = (
 #- following flags : selected, force, installed, base, skip.
 #- size and deps are grouped to save memory too and make a much
 #- simpler and faster depslist reader, this gets (sizeDeps).
-sub packageHeaderFile   { $_[0]->[$FILE] }
-sub packageName         { $_[0]->[$FILE] =~ /^([^:\s]*)-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
-			    : die "invalid file `$_[0]->[$FILE]'\n" . backtrace() }
-sub packageVersion      { $_[0]->[$FILE] =~ /^[^:\s]*-([^:\-\s]+)-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
-			    : die "invalid file `$_[0]->[$FILE]'" }
-sub packageRelease      { $_[0]->[$FILE] =~ /^[^:\s]*-[^:\-\s]+-([^:\-\s]+)\.[^:\.\-\s]*(?::.*)?/ ? $1
-			    : die "invalid file `$_[0]->[$FILE]'" }
-sub packageArch         { $_[0]->[$FILE] =~ /^[^:\s]*-[^:\-\s]+-[^:\-\s]+\.([^:\.\-\s]*)(?::.*)?/ ? $1
-			    : die "invalid file `$_[0]->[$FILE]'" }
-sub packageFile         { $_[0]->[$FILE] =~ /^([^:\s]*-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*)(?::(.*))?/ ? ($2 || $1) . ".rpm"
-			    : die "invalid file `$_[0]->[$FILE]'" }
-sub packageEpoch        { $_[0]->[$EPOCH] || 0 }
+sub packageHeaderFile   { $_[0] ? $_[0]->[$FILE]
+			    : die "invalid package from\n" . backtrace() }
+sub packageName         { $_[0] && $_[0]->[$FILE] =~ /^([^:\s]*)-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
+			    : die "invalid file `" . ($_[0] && $_[0]->[$FILE]) . "'\n" . backtrace() }
+sub packageVersion      { $_[0] && $_[0]->[$FILE] =~ /^[^:\s]*-([^:\-\s]+)-[^:\-\s]+\.[^:\.\-\s]*(?::.*)?/ ? $1
+			    : die "invalid file `" . ($_[0] && $_[0]->[$FILE]) . "'\n" . backtrace() }
+sub packageRelease      { $_[0] && $_[0]->[$FILE] =~ /^[^:\s]*-[^:\-\s]+-([^:\-\s]+)\.[^:\.\-\s]*(?::.*)?/ ? $1
+			    : die "invalid file `" . ($_[0] && $_[0]->[$FILE]) . "'\n" . backtrace() }
+sub packageArch         { $_[0] && $_[0]->[$FILE] =~ /^[^:\s]*-[^:\-\s]+-[^:\-\s]+\.([^:\.\-\s]*)(?::.*)?/ ? $1
+			    : die "invalid file `" . ($_[0] && $_[0]->[$FILE]) . "'\n" . backtrace() }
+sub packageFile         { $_[0] && $_[0]->[$FILE] =~ /^([^:\s]*-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*)(?::(.*))?/ ? ($2 || $1) . ".rpm"
+			    : die "invalid file `" . ($_[0] && $_[0]->[$FILE]) . "'\n" . backtrace() }
+sub packageEpoch        { $_[0] && $_[0]->[$EPOCH] || 0 }
 
-sub packageSize   { to_int($_[0]->[$SIZE_DEPS]) }
-sub packageDepsId { split ' ', ($_[0]->[$SIZE_DEPS] =~ /^\d*\s*(.*)/)[0] }
+sub packageSize   { to_int($_[0] && $_[0]->[$SIZE_DEPS]) }
+sub packageDepsId { split ' ', ($_[0] && ($_[0]->[$SIZE_DEPS] =~ /^\d*\s*(.*)/)[0]) }
 
-sub packageFlagSelected  { $_[0]->[$FLAGS] & $PKGS_SELECTED }
-sub packageFlagForce     { $_[0]->[$FLAGS] & $PKGS_FORCE }
-sub packageFlagInstalled { $_[0]->[$FLAGS] & $PKGS_INSTALLED }
-sub packageFlagBase      { $_[0]->[$FLAGS] & $PKGS_BASE }
-sub packageFlagUpgrade   { $_[0]->[$FLAGS] & $PKGS_UPGRADE }
+sub packageFlagSelected  { $_[0] && $_[0]->[$FLAGS] & $PKGS_SELECTED }
+sub packageFlagForce     { $_[0] && $_[0]->[$FLAGS] & $PKGS_FORCE }
+sub packageFlagInstalled { $_[0] && $_[0]->[$FLAGS] & $PKGS_INSTALLED }
+sub packageFlagBase      { $_[0] && $_[0]->[$FLAGS] & $PKGS_BASE }
+sub packageFlagUpgrade   { $_[0] && $_[0]->[$FLAGS] & $PKGS_UPGRADE }
 
 sub packageSetFlagSelected  { $_[0]->[$FLAGS] &= ~$PKGS_SELECTED; $_[0]->[$FLAGS] |= $_[1] & $PKGS_SELECTED; }
 
-sub packageSetFlagForce     { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_FORCE)     : ($_[0]->[$FLAGS] &= ~$PKGS_FORCE); }
-sub packageSetFlagInstalled { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_INSTALLED) : ($_[0]->[$FLAGS] &= ~$PKGS_INSTALLED); }
-sub packageSetFlagBase      { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_BASE)      : ($_[0]->[$FLAGS] &= ~$PKGS_BASE); }
-sub packageSetFlagUpgrade   { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_UPGRADE)   : ($_[0]->[$FLAGS] &= ~$PKGS_UPGRADE); }
+sub packageSetFlagForce     { $_[0] or die "invalid package from\n" . backtrace();
+			      $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_FORCE)     : ($_[0]->[$FLAGS] &= ~$PKGS_FORCE); }
+sub packageSetFlagInstalled { $_[0] or die "invalid package from\n" . backtrace();
+			      $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_INSTALLED) : ($_[0]->[$FLAGS] &= ~$PKGS_INSTALLED); }
+sub packageSetFlagBase      { $_[0] or die "invalid package from\n" . backtrace();
+			      $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_BASE)      : ($_[0]->[$FLAGS] &= ~$PKGS_BASE); }
+sub packageSetFlagUpgrade   { $_[0] or die "invalid package from\n" . backtrace();
+			      $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_UPGRADE)   : ($_[0]->[$FLAGS] &= ~$PKGS_UPGRADE); }
 
-sub packageMedium { $_[0]->[$MEDIUM] }
+sub packageMedium { $_[0] or die "invalid package from\n" . backtrace();
+		    $_[0]->[$MEDIUM] }
 
-sub packageProvides { map { $_[0]->{depslist}[$_] || die "unkown package id $_" } unpack "s*", $_[1]->[$PROVIDES] }
+sub packageProvides { $_[1] or die "invalid package from\n" . backtrace();
+		      map { $_[0]->{depslist}[$_] || die "unkown package id $_" } unpack "s*", $_[1]->[$PROVIDES] }
 
-sub packageRate          { substr($_[0]->[$VALUES], 0, 1) }
-sub packageRateRFlags    { my ($rate, @flags) = split "\t", $_[0]->[$VALUES]; ($rate, @flags) }
-sub packageSetRateRFlags { my ($pkg, $rate, @flags) = @_; $pkg->[$VALUES] = join("\t", $rate, @flags) }
+sub packageRate          { substr($_[0] && $_[0]->[$VALUES], 0, 1) }
+sub packageRateRFlags    { my ($rate, @flags) = split "\t", $_[0] && $_[0]->[$VALUES]; ($rate, @flags) }
+sub packageSetRateRFlags { my ($pkg, $rate, @flags) = @_; $pkg or die "invalid package from\n" . backtrace();
+			   $pkg->[$VALUES] = join("\t", $rate, @flags) }
 
-sub packageHeader     { $_[0]->[$HEADER] }
-sub packageFreeHeader { c::headerFree(delete $_[0]->[$HEADER]) }
+sub packageHeader     { $_[0] && $_[0]->[$HEADER] }
+sub packageFreeHeader { $_[0] && c::headerFree(delete $_[0]->[$HEADER]) }
 
 sub packageSelectedOrInstalled { packageFlagSelected($_[0]) || packageFlagInstalled($_[0]) }
 
@@ -190,11 +198,11 @@ sub packageById {
 sub packagesOfMedium {
     my ($packages, $mediumName) = @_;
     my $medium = $packages->{mediums}{$mediumName};
-    grep { $_->[$MEDIUM] == $medium } @{$packages->{depslist}};
+    grep { $_ && $_->[$MEDIUM] == $medium } @{$packages->{depslist}};
 }
 sub packagesToInstall {
     my ($packages) = @_;
-    grep { $_->[$MEDIUM]{selected} && packageFlagSelected($_) && !packageFlagInstalled($_) } values %{$packages->{names}};
+    grep { packageFlagSelected($_) && !packageFlagInstalled($_) && $_->[$MEDIUM]{selected} } values %{$packages->{names}};
 }
 
 sub allMediums {
@@ -210,13 +218,11 @@ sub mediumDescr {
 sub selectPackage { #($$;$$$)
     my ($packages, $pkg, $base, $otherOnly, $check_recursion) = @_;
 
-    #- check if the same or better version is installed,
-    #- do not select in such case.
-    packageFlagInstalled($pkg) and return;
-
     #- check for medium selection, if the medium has not been
     #- selected, the package cannot be selected.
-    $pkg->[$MEDIUM]{selected} or return;
+    #- check if the same or better version is installed,
+    #- do not select in such case.
+    $pkg && $pkg->[$MEDIUM]{selected} && !packageFlagInstalled($pkg) or return;
 
     #- avoid infinite recursion (mainly against badly generated depslist.ordered).
     $check_recursion ||= {}; exists $check_recursion->{$pkg->[$FILE]} and return; $check_recursion->{$pkg->[$FILE]} = undef;
