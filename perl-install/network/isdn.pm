@@ -62,12 +62,12 @@ We recommand the light configuration.
     run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
     $in->do_pkgs->install($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
     my $light = $e =~ /light/ ? 1 : 0;
-    isdn_write_config_backend($isdn, $light, $netc);
+    isdn_write_config_backend($isdn, $light, $netc, $netcnx);
     1;
 }
 
 sub isdn_write_config_backend {
-    my ($isdn, $light, $netc) = @_;
+    my ($isdn, $light, $netc, $netcnx) = @_;
     if ($light) {
 	modules::mergein_conf("$prefix/etc/modules.conf");
 	if ($isdn->{id}) {

@@ -376,10 +376,10 @@ sub apply {
     network::netconnect::save_conf($netcnx, $netc, $intf);
 
     $netcnx->{type} eq 'modem' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
-    $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc); #$light
+    $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc, $netcnx); #$light
     $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '');
-    $netcnx->{type} eq 'adsl_ppoe' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe');
-    $netcnx->{type} eq 'adsl_pptp' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp');
+    $netcnx->{type} eq 'adsl_ppoe' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe', $netcnx);
+    $netcnx->{type} eq 'adsl_pptp' and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp', $netcnx);
 
     $netcnx->{dhcp_client} and $netc->{dhcp_client} = $netcnx->{dhcp_client};
     network::configureNetwork2($in, $prefix, $netc, $intf);

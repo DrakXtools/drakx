@@ -84,12 +84,12 @@ sub adsl_conf {
     adsl_ask_info ($adsl, $netc, $intf) or return;
   adsl_conf_step_2:
     $adsl_type eq 'speedtouch' or conf_network_card($netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
-    adsl_conf_backend($adsl, $netc, $adsl_type);
+    adsl_conf_backend($adsl, $netc, $adsl_type, $netcnx);
     1;
 }
 
 sub adsl_conf_backend {
-    my ($adsl, $netc, $adsl_type) = @_;
+    my ($adsl, $netc, $adsl_type, $netcnx) = @_;
 
     mkdir_p("$prefix/etc/ppp");
     output("$prefix/etc/ppp/options",
