@@ -734,7 +734,13 @@ sub setupBootloaderBefore {
 	#- check for valid fb mode to enable a default boot with frame buffer.
 	my $vga = $o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
 				    !detect_devices::matching_desc('Matrox') &&
-				    !detect_devices::matching_desc('Rage Mobility')
+				    !detect_devices::matching_desc('Rage Mobility') &&
+				    !detect_devices::matching_desc('SiS.*SG86C2.5') &&
+				    !detect_devices::matching_desc('SiS.*559[78]') &&
+				    !detect_devices::matching_desc('SiS.*300') &&
+				    !detect_devices::matching_desc('SiS.*540') &&
+				    !detect_devices::matching_desc('SiS.*6C?326') &&
+				    !detect_devices::matching_desc('SiS.*6C?236')
 				   );
 	my $force_vga = $o->{allowFB} && (detect_devices::matching_desc('SiS.*630') #- SiS 630 need frame buffer.
 					 );
