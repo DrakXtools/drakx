@@ -175,12 +175,11 @@ sub UpdateStatus() {
 	my $CurrentWEP = "";
 	my $CurrentSignal = "-";
 	print("Updating\n");
-     local $_;
 	foreach (run_program::get_stdout($IWConfig)) {
-		if (/ESSID:"(\S*)"/) { $CurrentNet = $1 }
-		if (/Mode:(\S*)\s/) { $CurrentMode = $1 }
-		if (/key:(\S*)\s/) { $CurrentWEP = $1 }
-		if (m!Quality:(\S*)/!) { $CurrentSignal = $1 }
+		/ESSID:"(\S*)"/ and $CurrentNet = $1;
+		/Mode:(\S*)\s/ and $CurrentMode = $1;
+		/key:(\S*)\s/ and $CurrentWEP = $1;
+		m!Quality:(\S*)/! and $CurrentSignal = $1;
 	}
 	foreach (run_program::get_stdout($IFConfig, $device)) {
 		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
@@ -198,18 +197,15 @@ sub UpdateStatus() {
 }
 
 sub UpdateAvailable() {
+	my ($essid, $mode, $wep, $signal);
 	print("Running iwlist\n");
 	@{$AvailableList->{data}} = ();
-     my ($mode, $wep, $signal, $essid);
-     foreach (run_program::get_stdout($IWList, "scan")) {
-		if (/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
-		elsif (/([^ ]+)([ \t]+)No scan results/) { $device = $1 }
-		if (/ESSID:"(\S*)"/) {
-			$essid = $1;
-			print("Found $essid.\n");
-		}
-		if (/Mode:(\S*)/) { $mode = $1 }
-		if (m!Quality:(\S*)/!) { $signal = $1 }
+	foreach (run_program::get_stdout($IWList, "scan")) {
+		/([^ ]+)([ \t]+)Scan completed :/ and $device = $1;
+		/([^ ]+)([ \t]+)No scan results/ and  $device = $1;
+		/ESSID:"(\S*)"/ and $essid = $1;
+		/Mode:(\S*)/ and $mode = $1;
+		m!Quality:(\S*)/! and $signal = $1;
 		if (/key:(\S*)\s/) {
 			$wep = $1;
 			print("Mode: $mode, WEP: $wep, Signal: $signal\n");
@@ -225,11 +221,9 @@ sub AddNet {
 }
 
 sub ReadConfig() {
-	open(my $CONFIG, $config) or die "Configuration file not found.\n";
 	print "Reading config file.\n\n";
 	my $line = 0;
-     local $_;
-	while (<$CONFIG>) {
+	foreach (cat_($config)) {
 		$line++;
                 if (/^#/) {} #ignore comments
 		elsif (/^\n/) {} #ignore blank lines
@@ -253,7 +247,6 @@ sub ReadConfig() {
 		}
 		else { die "Line $line of configuration file is not parseable.\n" }
 	}
-	close $CONFIG;
 }
 
 sub WriteConfig() {
@@ -298,6 +291,7 @@ sub SetInterval() {
 }
 
 sub ConnectNow {
+	my ($row) = @_;
 	my @command = "";
 	push @command, "$IWConfig essid $KnownList->{data}[$row][0] ";
 	if ($KnownList->{data}[$row][1]) {
@@ -328,7 +322,6 @@ sub Disconnect {
 }
 
 sub Dialog {
-# read file
     my ($FilePointer) = @_;
     my $content = join('', cat_($FilePointer));
     # dump into a dialog
