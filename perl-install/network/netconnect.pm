@@ -348,7 +348,7 @@ sub real_main {
                             return "isdn_ask";
                         } elsif ($isdn_name eq N("External ISDN modem")) {
                             detect($modules_conf, $netc->{autodetect}, 'modem');
-                            $netc->{isdntype} = 'isdn_external';
+                            $netcnx->{type} = $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
                             network::isdn::read_config($netcnx->{isdn_external});
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
