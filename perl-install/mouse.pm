@@ -229,7 +229,7 @@ sub mouseconfig {
 
     #- check new probing methods keep everything used here intact!
     foreach (0..3) {
-	$t = detect_devices::probeSerial("/dev/ttyS$_");
+	$t = detect_devices::probeSerial("/dev/ttyS$_") or next;
 	if ($t->{CLASS} eq 'MOUSE') {
 	    $t->{MFG} ||= $t->{MANUFACTURER};
 
@@ -296,7 +296,7 @@ sub detect() {
     #- which takes a while for its probe.
     if ($::isStandalone) {
 	my $mouse = $fast_mouse_probe->();
-	$mouse and return ($mouse, @wacom);
+	$mouse and return { wacom => \@wacom, %$mouse };
     }
 
     #- probe serial device to make sure a wacom has been detected.
@@ -306,10 +306,10 @@ sub detect() {
     if (!$::isStandalone) {
 	my $mouse = $fast_mouse_probe->();
 	$r && $mouse and $r->{auxmouse} = $mouse; #- we kept the auxilliary mouse as PS/2.
-	$r and return ($r, @wacom);
-	$mouse and return ($mouse, @wacom);
+	$r and return { wacom => \@wacom, %$r };
+	$mouse and return { wacom => \@wacom, %$mouse };
     } else {
-	$r and return ($r, @wacom);
+	$r and return { wacom => \@wacom, %$r };
     }
 
     #- in case only a wacom has been found, assume an inexistant mouse (necessary).
@@ -317,7 +317,7 @@ sub detect() {
 			nbuttons   => 2,
 			device     => "nothing",
 			MOUSETYPE  => "Microsoft",
-			XMOUSETYPE => "Microsoft"}, @wacom;
+			XMOUSETYPE => "Microsoft", wacom => \@wacom };
 
     if (!modules::get_probeall("usb-interface") && detect_devices::is_a_recent_computer() && $::isInstall) {
 	#- special case for non detected usb interface on a box with no mouse.
@@ -333,6 +333,21 @@ sub detect() {
     #- defaults to generic serial mouse on ttyS0.
     #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)
     return fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
+}
+
+sub set_xfree_conf {
+    my ($mouse, $xfree_conf) = @_;
+    
+    my @mice = map {
+	{
+	    Protocol => $_->{XMOUSETYPE},
+	    Device => "/dev/$_->{device}",
+	    if_($_->{nbuttons} > 3, ZAxisMapping => [ '4 5', if_($_->{nbuttons} > 5, '6 7') ]),
+	    if_($_->{nbuttons} < 3, Emulate3Buttons => undef, Emulate3Timeout => 50),
+	};
+    } ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
+    
+    $xfree_conf->set_mice(@mice);
 }
 
 #- write_conf : write the mouse infos into the Xconfig files.
@@ -354,17 +369,7 @@ sub write_conf {
 
     require Xconfig::xfree;
     my $xfree_conf = Xconfig::xfree->read;
-
-    my @mice = map {
-	{
-	    Protocol => $_->{XMOUSETYPE},
-	    Device => "/dev/$_->{device}",
-	    if_($_->{nbuttons} > 3, ZAxisMapping => [ '4 5', if_($_->{nbuttons} > 5, '6 7') ]),
-	    if_($_->{nbuttons} < 3, Emulate3Buttons => undef, Emulate3Timeout => 50),
-	};
-    } ($mouse, $mouse->{auxmouse});
-    
-    $xfree_conf->set_mice(@mice);
+    set_xfree_conf($mouse, $xfree_conf);
     $xfree_conf->write;    
 }
 
