@@ -1,3 +1,105 @@
+2004/02/10  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/pwp-05.pl, share/advertising/dis-11.pl,
+	share/advertising/ppp-11.pl, share/advertising/dwd-02.pl,
+	share/advertising/dis-09.pl, share/advertising/ppp-09.pl,
+	share/advertising/pwp-04.pl, share/advertising/dis-04.pl,
+	share/advertising/pwp-06.pl, share/advertising/dwd-09.pl: Update
+
+	* share/advertising/dwd-06.pl: Update
+	Update
+
+2004/02/10  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - add 'ath' and 'wlan' to ethernet kind
+	  - use regexp once
+
+2004/02/10  fwang
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/02/10  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/probing.c: fake usb floppies detection by looking at blocks
+	size of scsi disk devices, 1048575 is for 2.4 and 1440 for 2.6
+
+	* mdk-stage1/mount.c: in network mode we need to create nodes as well
+	because of usb floppies support
+
+	* mdk-stage1/tools.c, mdk-stage1/tools.h: floppy_device returns first
+	floppy device, look for medias first in case of usb floppies (maybe ide
+	floppies also? never tested) then regular floppy drive
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.c: use floppy_device rather than
+	/dev/fd0 because we now support usb floppies as well
+
+2004/02/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po, share/po/uz@Latn.po: updated pot file
+	updated pot file
+
+2004/02/10  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm, detect_devices.pm, install_steps.pm: no need to fake scsi for
+	ide anymore (hopefully!)
+
+	* interactive/gtk.pm: have modal windows
+
+	* ugtk2.pm: better code for detecting if the window is hidden or not
+	(fixes embedded drakconnect wizard should be popped window) (bugzilla
+	#7246)
+
+	* services.pm: for install, a service is on if there is at least one
+	runlevel for which the
+	service is on (esp. for service "dm") (bugzilla #7146)
+
+	* c/stuff.xs.pl: we don't KTYP anymore, but we need K_NOSUCHMAP
+
+	* keyboard.pm: rewrite & cleanup. Now works with kernel 2.6, don't know
+	exactly why...
+
+	* common.pm: add unpack_with_refs()
+
+	* tools/serial_probe/serial.c: fix serial probe not detecting legacy mice
+
+	* share/keymaps.tar.bz2: update
+
+2004/02/10  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Use logdrake mail method, allow definition of
+	SMTP server. (Arnaud de Lorbeau)
+
+2004/02/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: do not allow to step forward if no network card
+	was found (workaround
+	#7672). we'd better be able to manually add an unsupported network
+	card though.
+
+	* drakxtools.spec: 10-0.10mdk
+
+	* security/msec.pm (apply_checks) reindent
+	(apply_checks) fix unable to save checks when config file is empty
+	(aka substInFile does not support using print in that case)
+
+	* share/po/fr.po: update
+
 2004/02/10  fwang
 
 	* share/po/zh_CN.po: update
@@ -25630,7 +25732,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.866 2004/02/04 23:34:48 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.867 2004/02/10 11:19:28 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
