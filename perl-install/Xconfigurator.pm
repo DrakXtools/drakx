@@ -1201,10 +1201,13 @@ Section "Module"
 
 # This loads the DBE extension module.
     Load	"dbe"
-
+);
+    unless ($o->{card}{DRI_glx} && $o->{card}{driver} eq 'r128') {
+	print G qq(
 # This loads the Video for Linux module.
     Load        "v4l"
 );
+    }
     if ($o->{card}{DRI_glx}) {
 	print G qq(
     Load	"glx"
