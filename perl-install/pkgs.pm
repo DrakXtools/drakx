@@ -317,12 +317,15 @@ sub init_db {
     c::rpmErrorSetCallback(fileno LOG);
 #-    c::rpmSetVeryVerbose();
 
-#    log::l("reading /usr/lib/rpm/rpmrc");
-#    c::rpmReadConfigFiles() or die "can't read rpm config files";
-#    log::l("\tdone");
+    log::l("reading /usr/lib/rpm/rpmrc");
+    c::rpmReadConfigFiles() or die "can't read rpm config files";
+    log::l("\tdone");
 
-    $isUpgrade and c::rpmdbRebuild($prefix) || die "rebuilding of rpm database failed: ", c::rpmErrorString();
-    c::rpmdbInit($prefix, 0644) || die "creation of rpm database failed: ", c::rpmErrorString();
+    if ($isUpgrade) {
+	c::rpmdbRebuild($prefix) or die "rebuilding of rpm database failed: ", c::rpmErrorString();
+    }
+
+    c::rpmdbInit($prefix, 0644) or die "creation of rpm database failed: ", c::rpmErrorString();
 #-    $isUpgrade ? c::rpmdbRebuild($prefix) : c::rpmdbInit($prefix, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
 }
 
@@ -488,9 +491,12 @@ sub install($$) {
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
 
+    #- if someone try to change the function log::ld or the parameters used,
+    #- DON TRY THAT unless you have modified accordingly install_steps_gtk.
+    #- because log::ld is catched, furthermore do not translate the messages used.
     log::l("starting installation: ", $nb, " packages, ", $total, " bytes");
+    log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
 
-    #- !! do not translate these messages, they are used when catched (cf install_steps_gtk)
     my $callbackOpen = sub {
 	my $f = (my $p = $packages{$_[0]})->{file};
 	print LOG "$f\n";

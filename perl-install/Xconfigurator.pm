@@ -120,13 +120,14 @@ sub rewriteInittab {
 
 sub keepOnlyLegalModes {
     my ($card, $monitor) = @_;
-    my $mem = 1024 * ($card->{memory} || 99999);
+    my $mem = 1024 * ($card->{memory} || ($card->{server} eq 'FBDev' ? 2048 : 99999));
     my $hsync = max(split(/[,-]/, $monitor->{hsyncrange}));
 
     while (my ($depth, $res) = each %{$card->{depth}}) {
 	@$res = grep {
 	    $mem >= product(@$_, $depth / 8) &&
-	    $hsync >= ($min_hsync4wres{$_->[0]} || 0)
+	    $hsync >= ($min_hsync4wres{$_->[0]} || 0) &&
+	    ($card->{server} ne 'FBDev' || $vgamodes{"$_->[0]x$_->[1]x$depth"})
 	} @$res;
 	delete $card->{depth}{$depth} if @$res == 0;
     }
@@ -387,17 +388,17 @@ sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
-#    if ($card->{server} eq 'FBDev') {
-#	16; #- assume 16 bits depth for this case.
-#    } else {
-	while (my ($d, $r) = each %{$card->{depth}}) {
-	    $depth = $depth ? max($depth, $d) : $d;
+    if ($card->{server} eq 'FBDev') {
+	return 16; #- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.
+    }
 
-	    # try to have $resolution_wanted
-	    $best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
-	}
-	$best || $depth or die "no valid modes";
-#    }
+    while (my ($d, $r) = each %{$card->{depth}}) {
+	$depth = $depth ? max($depth, $d) : $d;
+
+	#- try to have $resolution_wanted
+	$best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
+    }
+    $best || $depth or die "no valid modes";
 }
 
 sub autoDefaultResolution(;$) {

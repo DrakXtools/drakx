@@ -229,7 +229,12 @@ rpmdbOpenForTraversal(root)
   char *root
   CODE:
   static rpmdb db;
+  rpmErrorCallBackType old_cb;
+  old_cb = rpmErrorSetCallback(rpmError_callback_empty);
+  rpmSetVerbosity(RPMMESS_FATALERROR);
   RETVAL = rpmdbOpenForTraversal(root, &db) == 0 ? db : NULL;
+  rpmErrorSetCallback(old_cb);
+  rpmSetVerbosity(RPMMESS_NORMAL);
   OUTPUT:
   RETVAL
 
@@ -392,7 +397,12 @@ int
 rpmdbRebuild(root)
   char *root
   CODE:
+  rpmErrorCallBackType old_cb;
+  old_cb = rpmErrorSetCallback(rpmError_callback_empty);
+  rpmSetVerbosity(RPMMESS_FATALERROR);
   RETVAL = rpmdbRebuild(root) == 0;
+  rpmErrorSetCallback(old_cb);
+  rpmSetVerbosity(RPMMESS_NORMAL);
   OUTPUT:
   RETVAL
 
@@ -461,16 +471,16 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackStart, callbackPr
       }
 
       case RPMCALLBACK_INST_START: {
-  	  dSP ;
-  	  PUSHMARK(sp) ;
-  	  XPUSHs(sv_2mortal(newSVpv(n, 0)));
-  	  PUTBACK ;
-  	  perl_call_sv(callbackStart, G_DISCARD);
-          last_amount = 0;
-  	} break;
+  	dSP ;
+  	PUSHMARK(sp) ;
+  	XPUSHs(sv_2mortal(newSVpv(n, 0)));
+  	PUTBACK ;
+  	perl_call_sv(callbackStart, G_DISCARD);
+        last_amount = 0;
+      } break;
 
       case RPMCALLBACK_INST_PROGRESS:
-         if ((amount - last_amount) * 4 / total) {
+        if ((amount - last_amount) * 4 / total) {
   	  dSP;
   	  PUSHMARK(sp);
   	  XPUSHs(sv_2mortal(newSViv(amount)));
