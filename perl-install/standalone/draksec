@@ -53,6 +53,8 @@ sub remove_wait_msg { $_[0]->destroy }
 
 sub basic_seclevel_explanations() {
     my $text = gtkset_markup(Gtk2::Label->new,
+#-PO Do not alter the <span ..> and </span> tags
+#-PO Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words
                              formatAlaTeX(N("Here, you can setup the security level and administrator of your machine.
 
 
