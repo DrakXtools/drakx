@@ -412,7 +412,7 @@ sub unselectMostPackages {
 sub warnAboutNaughtyServers {
     my ($o) = @_;
     my @naughtyServers = pkgs::naughtyServers($o->{packages}) or return 1;
-    if (!$o->ask_yesorno('', 
+    my $r = $o->ask_from_list_('', 
 formatAlaTeX(N("You have selected the following server(s): %s
 
 
@@ -422,9 +422,12 @@ to upgrade as soon as possible.
 
 
 Do you really want to install these servers?
-", join(", ", @naughtyServers))), 1)) {
+", join(", ", @naughtyServers))), [ N_("Yes"), N_("No") ], 'Yes') or return;
+    if ($r ne 'Yes') {
+	log::l("unselecting naughty servers");
 	pkgs::unselectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_)) foreach @naughtyServers;
     }
+    1;
 }
 
 sub warnAboutRemovedPackages {

@@ -386,6 +386,7 @@ sub choosePackages {
     log::l("max size (level $min_mark) is : " . formatXiB($max_size));
     pkgs::restoreSelected($b);
 
+  chooseGroups:
     $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate;
 
     ($o->{packages_}{ind}) =
@@ -394,7 +395,7 @@ sub choosePackages {
     $o->choosePackagesTree($packages) if $individual;
 
     install_any::warnAboutRemovedPackages($o, $o->{packages});
-    install_any::warnAboutNaughtyServers($o);
+    install_any::warnAboutNaughtyServers($o) or goto chooseGroups;
 }
 
 sub choosePackagesTree {
