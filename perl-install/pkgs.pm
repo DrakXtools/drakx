@@ -1298,6 +1298,8 @@ ucd-snmp
 );
 
     my @new_92 = qw(
+apache2
+apache2-mod_perl
 DansGuardian
 MySQL-Max
 clusternfs
