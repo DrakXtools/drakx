@@ -241,12 +241,12 @@ sub hds {
 
 sub get_hds {
     #- $in is optional
-    my ($flags, $in) = @_;
+    my ($flags, $o_in) = @_;
 
-    if ($in) {
+    if ($o_in) {
 	catch_cdie { hds($flags, sub {
 	    my ($dev, $err) = @_;
-            $in->ask_yesorno(N("Error"), 
+            $o_in->ask_yesorno(N("Error"), 
 N("I can't read the partition table of device %s, it's too corrupted for me :(
 I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
 The other solution is to not allow DrakX to modify the partition table.
@@ -254,7 +254,7 @@ The other solution is to not allow DrakX to modify the partition table.
 
 Do you agree to lose all the partitions?
 ", $dev, formatError($err)));
-        }) } sub { $in->ask_okcancel('', formatError($@)) };
+        }) } sub { $o_in->ask_okcancel('', formatError($@)) };
     } else {
 	catch_cdie { hds($flags) } sub { 1 }
     }

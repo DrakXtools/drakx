@@ -150,7 +150,7 @@ sub setupSCSI {
     modules::load_category('bus/firewire');
     modules::load_category('disk/scsi|hardware_raid|firewire');
 
-    install_any::getHds($o, $o);
+    install_any::getHds($o);
 }
 
 #------------------------------------------------------------------------------

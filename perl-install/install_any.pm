@@ -948,10 +948,10 @@ sub use_root_part {
 }
 
 sub getHds {
-    my ($o, $in) = @_;
+    my ($o, $o_in) = @_;
 
   getHds: 
-    my $all_hds = fsedit::get_hds($o->{partitioning}, $in);
+    my $all_hds = fsedit::get_hds($o->{partitioning}, $o_in);
     my $hds = $all_hds->{hds};
 
     if (is_empty_array_ref($hds)) { #- no way
