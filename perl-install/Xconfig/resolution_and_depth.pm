@@ -134,7 +134,7 @@ sub choose {
 		  [ {
 		     val => \$resolution, type => 'list', sort => 0,
 		     list => [ sort { $a->{X} <=> $b->{X} } @resolutions ],
-		     format => sub { "$_[0]{X}x$_[0]{Y} $_[0]{Depth}bpp" },
+		     format => \&to_string,
 		    } ]) or return;
     $resolution;
 }
