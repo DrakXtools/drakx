@@ -394,7 +394,6 @@ sub build_backup_files {
     }
 }
 
-
 sub list_remove {
     my($widget, $list) = @_;
     my @to_remove;
@@ -468,10 +467,6 @@ sub wizard_old {
 		    ],
 		  ) or goto step_2;
 }
-
-
-
-
 
 sub advanced_what_sys {
     my $box_what_sys;
@@ -558,8 +553,6 @@ sub advanced_what_other {
     $central_widget = \$box_what_other;
     $up_box->show_all();
 }
-
-
 
 sub advanced_what{
     my $box_what;
@@ -679,7 +672,6 @@ sub advanced_where_net_ssh {
     $central_widget = \$box_where_ssh;
     $up_box->show_all();
 }
-
 
 sub advanced_where_net {
     my $box_where_net;
@@ -1231,8 +1223,6 @@ sub restore_step2 {
     $up_box->show_all();
 }
 
-
-
 sub restore_box {
     my $retore_box;
     my $retore_box3;
@@ -1241,7 +1231,7 @@ sub restore_box {
     my $check_restore_other;
 
     find_backup_to_restore();
-
+    restore_button_box();
     @user_list_to_restore = @user_backuped;
     if ($other_backuped || $sys_backuped || @user_backuped) {
 	gtkpack($advanced_box,
@@ -1276,66 +1266,11 @@ sub restore_box {
 			   )
 		);
     }
+    $custom_help = "retore";
+    $current_widget = \&restore_box;
     $central_widget = \$retore_box;
     $up_box->show_all();
 }
-
-# sub restore_box {
-#     my $retore_box;
-#     my $retore_box3;
-#     my $check_restore_sys;
-#     my $check_restore_user;
-#     my $check_restore_other;
-
-#     find_backup_to_restore();
-
-#     @user_list_to_restore = @user_backuped;
-#     if ($other_backuped || $sys_backuped || @user_backuped) {
-# 	gtkpack($advanced_box,
-# 		$retore_box = gtkpack(new Gtk::VBox(0,1),
-# 			       $retore_box2 = gtkpack(new Gtk::VBox(0,10),
-# 				   $retore_box3 = gtkpack_(new Gtk::VBox(0,10),
-# 				     0, gtkpack_(new Gtk::HBox(0,10),
-# 						 1, new Gtk::HBox(0,10),
-# 						 1, gtkpack_(new Gtk::VBox(0,10),
-# 							     0, gtksignal_connect(new Gtk::Button(_("Restore all backups (last)")), 
-# 								 clicked => sub { $retore_box3->destroy(); 
-# 										  $restore_sys = 1;
-# 										  $restore_other = 1;
-# 										  $restore_user = 1;
-# 										  do_restore(); }),
-# 							     0, gtksignal_connect(new Gtk::Button(_("Custom Restore")), 
-# 								 clicked => sub { $retore_box3->destroy(); restore_step2(); }),
-# 							     ),
-# 						 1, new Gtk::HBox(0,10),
-# 						 ),
-# 				      1, new Gtk::HBox(0,10),
-# 						       ),),),
-# 	    );
-#     } else {
-# 	gtkpack($advanced_box,
-# 		$retore_box = gtkpack_(new Gtk::VBox(0,1),
-# 		1, gtkpack_(new Gtk::HBox(0, 0),
-# 		     1, gtkadd(new Gtk::Frame(_("Restoration Step.")),
-# 			       $retore_box2 = gtkpack(new Gtk::VBox(0,10),
-# 				   $retore_box3 = gtkpack_(new Gtk::VBox(0,10),
-# 				     1, _("Please Build backup before to restore it..."),
-# 				     0, gtkpack_(new Gtk::HBox(0,10),
-# 						 1, new Gtk::HBox(0,10),
-# 						 ),
-# 				      1, new Gtk::HBox(0,10),
-# 						       ),),),),
-# 			   )
-# 		);
-#     }
-#     $central_widget = \$retore_box;
-#     $up_box->show_all();
-# }
-
-
-
-
-
 
 sub adv_button_box {
 
@@ -1355,8 +1290,7 @@ sub adv_button_box {
 	    );
 }
 
-
-sub adv_button_box {
+sub restore_button_box {
 
     $button_box_tmp->destroy();
     gtkpack($button_box,
@@ -1367,13 +1301,10 @@ sub adv_button_box {
 						  ${$central_widget}->destroy(); restore_help();}),
 					      1, new Gtk::HBox(0, 0),
 					      1, gtksignal_connect(new Gtk::Button(_("     Next      ")), clicked => sub {
-						  ${$central_widget}->destroy(); restore_help();}),
+						  ${$central_widget}->destroy(); adv_help(\&$current_widget,$custom_help);}),
 					      ),
 	    );
 }
-
-
-
 
 sub main_button_box {
 
@@ -1413,8 +1344,6 @@ sub interactive_mode_box {
     $central_widget = \$box2;
     $up_box->show_all();    
 }
-
-
 
 sub interactive_mode {
     $interactive = 1;
@@ -1463,7 +1392,6 @@ sub interactive_mode {
     Gtk->main;
     Gtk->exit(0);
 }
-
 
 sub about {
     my $text = new Gtk::Text(undef, undef);
@@ -1544,7 +1472,6 @@ configuration file:
     $up_box->show_all();
 }
 
-
 sub adv_help {
     my ($function, $custom_help) = @_,
     my $text = new Gtk::Text(undef, undef);
@@ -1619,8 +1546,6 @@ configuration file:
     $central_widget = \$advanced_box_help;
     $up_box->show_all();
 }
-
-
 
 
 sub restore_help {
