@@ -22,6 +22,16 @@ sub kind2name {
     SMBKRB => N("Active Directory with Winbind") }}{$kind};
 }
 
+my %kind2pam_kind = (
+    local     => [],
+    SmartCard => ['castella'],
+    LDAP      => ['ldap'], 
+    NIS       => [],
+    AD        => ['krb5'],
+    winbind   => ['winbind'], 
+    SMBKRB    => ['winbind'],
+);
+
 sub kind2description() {
     join('', 
          map {
@@ -145,13 +155,14 @@ sub set {
 
     log::l("authentication::set $kind");
 
-    sshd_config_UsePAM($kind ne 'local');
+    my $pam_modules = $kind2pam_kind{$kind} or log::l("kind2pam_kind doesn't know $kind");
+    $pam_modules ||= [];
+    sshd_config_UsePAM(@$pam_modules > 0);
+    set_pam_authentication(@$pam_modules);
 
     if ($kind eq 'local') {
-	set_pam_authentication();
     } elsif ($kind eq 'SmartCard') {
 	$in->do_pkgs->install('castella-pam');
-	set_pam_authentication('castella');
     } elsif ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
@@ -161,7 +172,6 @@ sub set {
 	} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
 
 	set_nsswitch_priority('ldap');
-	set_pam_authentication('ldap');
 
 	update_ldap_conf(
 			 host => $authentication->{LDAP_server},
@@ -175,7 +185,6 @@ sub set {
 	my $port = "389";
 	
 	set_nsswitch_priority('ldap');
-	set_pam_authentication('krb5');
 
 	my $ssl = { 
 		   anonymous => 'off', 
@@ -260,7 +269,6 @@ sub set {
 	
 	$in->do_pkgs->install('samba-winbind');
 	set_nsswitch_priority('winbind');
-	set_pam_authentication('winbind');
 
 	require network::smb;
 	network::smb::write_smb_conf($domain);
@@ -282,7 +290,6 @@ sub set {
 	configure_krb5_for_AD($authentication);
 	$in->do_pkgs->install('samba-winbind', 'pam_krb5', 'samba-server', 'samba-client');
 	set_nsswitch_priority('winbind');
-	set_pam_authentication('winbind');
 
 		
 	require network::smb;
