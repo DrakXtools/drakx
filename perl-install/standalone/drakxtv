@@ -35,19 +35,20 @@ sub scan4channels {
 #    my %freqtables = map {$i=$_;$i =~ s/ (.*)/-\1/;_($_) => $i} (...)
 #   this table must be checked on each xawtv release :
     my %freqtables = 
-	   (_("USA (bcast)") => "us-bcast", _("USA (cable)") => "us-cable", _("USA (cable-hrc)") => "us-cable-hrc", _("Canada (cable)") => "canada-cable",
+	   ("us-bcast" => _("USA (bcast)"), "us-cable" => _("USA (cable)"), "us-cable-hrc" => _("USA (cable-hrc)"), "canada-cable" => _("Canada (cable)"),
+	    "japan-bcast" => _("Japan (bcast)"), "japan-cable" => _("Japan (cable)"), "china-bcast" => _("China (bcast)"),
+	    "europe-west" => _("West Europe"), "europe-east" => _("East Europe"), "italy" => _("Italy"), "ireland" => _("Ireland"), "france" => _("France"),
+	    "newzealand" => _("Newzealand"), "australia" => _("Australia"),
+	    "southafrica" => _("South Africa"),
+	    "argentina" => _("Argentina"),
+	    -1 =>_("All")
+	    );
 # HRC is Harmonically Related Carrier
-	_("Japan (bcast)") => "japan-bcast", _("Japan (cable)") => "japan-cable", _("China (bcast)") => "china-bcast",
-	_("West Europe") => "europe-west", _("East Europe") => "europe-east", _("Italy") => "italy", _("Ireland") => "ireland", _("France") => "france",
-	_("Newzealand") => "newzealand", _("Australia") => "australia",
-	_("South Africa") => "southafrica",
-	_("Argentina") => "argentina",
-	_("All") => -1);
 
     $in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
 			   [
-			    { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], not_edit => 1, type => 'combo'},
-			    { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], not_edit => 1, sort => 1},
+			    { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo'},
+			    { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
 			    ],
 			   complete => sub { 
 				  my $wait = $in->wait_message(_('Please wait'),
@@ -55,9 +56,9 @@ sub scan4channels {
 
 #                     france is a bogus table provided to scantv which will
 #                     ignore it as "All" is selected because of -a
-				  $ftable_id = $freqtables{$ftable_id};
 				  $ftable_id = "france -a " if ($ftable_id eq -1);
-				  my $use_X =$ENV{DISPLAY} && -x "/usr/X11R6/bin/xvt";
+				  # Note that this'll be broken if/when we implement interactive_qt
+				  my $use_X =$in->isa('interactive_gtk') && -x "/usr/X11R6/bin/xvt";
 				  system( (($use_X ) ?
 						 "xvt -title '"._("Scanning for TV channels")." ...' -e ":"")
 						. "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
@@ -68,14 +69,8 @@ sub scan4channels {
 }
 
 
-sub is_tv {
-    foreach (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1)) {
-	   return 1;
-    }
-    0;
-}
-
-scan4channels('interactive'->vnew()) if (is_tv);
+scan4channels('interactive'->vnew()) 
+    if grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1);
 
 # TODO :
 # - offer to sort channels after
