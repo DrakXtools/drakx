@@ -191,12 +191,12 @@ sub ask_standalone_gtk {
     my $W = ugtk2->new(N("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
-    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup = Gtk2::Window->new('popup'),
+    my $display = sub { $nopop->(); $_[0] and gtkshow(gtkadd($w_popup = Gtk2::Window->new('popup'),
         				       gtksignal_connect(gtkadd(Gtk2::EventBox->new,
         				           gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
-        					   gtkset_justify(Gtk2::Label->new($_[0]), 0))),
+        					   gtkset_justify(Gtk2::Label->new($_[0]), 'left'))),
         					   button_press_event => sub { $nopop->() }
-		      ))), $x, $y) };
+		      )))->move($x, $y) };
     my $update_service = sub {
 		my $started = -e "/var/lock/subsys/$_[0]";
                 my $action = $started ? "stop" : "start";
@@ -215,13 +215,13 @@ sub ask_standalone_gtk {
     my $b = Gtk2::EventBox->new;
     $b->set_events('pointer_motion_mask');
     gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(N("Services and deamons")),
-	1, gtkset_size_request(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
+	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;
         	my $infos = $strip->(description($_, $prefix));
                 $infos ||= N("No additional information\nabout this service, sorry.");
 		my $l = Gtk2::Label->new;
-                my ($started, $action) = $update_service->($service, gtkset_justify($l, 0));
+                my ($started, $action) = $update_service->($service, gtkset_justify($l, 'left'));
 		[ gtkpack__(Gtk2::HBox->new(0,0), $_),
 		  gtkpack__(Gtk2::HBox->new(0,0), $l),
 		  gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(N("Info")), clicked => sub { $display->($infos) })),
@@ -246,8 +246,8 @@ sub ask_standalone_gtk {
             ))
 	  );
     $b->signal_connect(motion_notify_event => sub { my ($w, $e) = @_;
-						    my ($ox, $oy) = $w->window->get_deskrelative_origin;
-						    $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy });
+						    my ($ox, $oy) = $w->window->get_origin;
+						    $x = $e->x+$ox; $y = $e->y+$oy });
     $b->signal_connect(button_press_event => sub { $nopop->() });
     $::isEmbedded and flush();
     $W->main or return;
