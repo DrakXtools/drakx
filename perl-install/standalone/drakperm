@@ -42,7 +42,7 @@ each_index {
     $col->set_min_width($column_sizes[$::i]);
 #    $col->set_sort_column_id($::i);
     $permList->append_column($col);
-} (N("path"), N("user"), N("group"), N("permissions"));
+} (N("Path"), N("User"), N("Group"), N("Permissions"));
 
 #- widgets settings
 my $combo_perm = new Gtk2::OptionMenu;
@@ -111,7 +111,7 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                  1, gtkadd(Gtk2::Frame->new,
                            gtkpack_(Gtk2::VBox->new(0,5),
                                     0, gtkadd(Gtk2::HBox->new(0,5),
-                                              Gtk2::Label->new(N("select perm file to see/edit")),
+                                              Gtk2::Label->new(N("Select perm file to see/edit")),
                                               $combo_perm
                               ),
                                     1, create_scrolled_window($permList),
@@ -122,9 +122,9 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                                                                                $_->[1]);
                                                                 } ([ N("Up"), N("Move selected rule up one level"), \&up_callback ], 
                                                                    [ N("Down"), N("Move selected rule down one level"), \&down_callback ], 
-                                                                   [ N("add a rule"), N("Add a new rule at the end"), \&add_callback ],
-                                                                   [ N("delete"), N("Delete selected rule"), \&del_callback ], 
-                                                                   [ N("edit"), N("Edit current rule"), \&edit_callback ])),
+                                                                   [ N("Add a rule"), N("Add a new rule at the end"), \&add_callback ],
+                                                                   [ N("Delete"), N("Delete selected rule"), \&del_callback ], 
+                                                                   [ N("Edit"), N("Edit current rule"), \&edit_callback ])),
                                     0, gtkpack(Gtk2::HButtonBox->new,
                                                gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { ugtk2->exit }),
                                                gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => \&save_perm),
@@ -329,9 +329,9 @@ sub row_setting_dialog {
     $usr_vbox->add($usr_check);
     $usr_vbox->add($usr_hbox);
      
-    $usr_hbox->add(new Gtk2::Label(N("user :")));
+    $usr_hbox->add(new Gtk2::Label(N("User :")));
     $usr_hbox->add($users);
-    $usr_hbox->add(new Gtk2::Label(N("group :")));
+    $usr_hbox->add(new Gtk2::Label(N("Group :")));
     $usr_hbox->add($groups);
      
     $F_rights->add($hb_rights);
