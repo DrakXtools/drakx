@@ -789,7 +789,7 @@ sub ask_users {
 	      callbacks => {
 	          focus_out => sub {
 		      if ($_[0] eq 0) {
-			  $u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
+			  $u->{name} ||= lc first($u->{realname} =~ /([\w-]+)/);
 		      }
 		  },
 	          complete => $verif,
