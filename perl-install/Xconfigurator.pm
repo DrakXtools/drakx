@@ -1534,30 +1534,24 @@ Current configuration is:
 	}
 
 	if ($::isStandalone && $0 =~ /Xdrakres/) {
-	    my $found;
-	    foreach (@window_managers) {
-		if (`pidof "$_"` > 0) {
-		    if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst $_), 1)) {
-			fork and $in->exit;
-			system("kwmcom logout") if /kwm/;
-			system("dcop kdesktop default logout") if /kwin/;
-			system("save-session --kill") if /gnome-session/;
-			system("killall -QUIT icewm") if /icewm/;
+	    if (my $wm = any::running_window_manager()) {
+		if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst (lc $wm)), 1)) {
+		    fork and $in->exit;
+		    any::ask_window_manager_to_logout($wm);
 
-			open STDIN, "</dev/zero";
-			open STDOUT, ">/dev/null";
-			open STDERR, ">&STDERR";
-			c::setsid();
-		        exec qw(perl -e), q{
-                          my $wm = shift;
-  		          for (my $nb = 30; $nb && `pidof "$wm"` > 0; $nb--) { sleep 1 }
-  		          system("killall X ; killall -15 xdm gdm kdm prefdm") unless `pidof "$wm"` > 0;
-  		        }, $_;
-		    }
-		    $found = 1; last;
+		    open STDIN, "</dev/zero";
+		    open STDOUT, ">/dev/null";
+		    open STDERR, ">&STDERR";
+		    c::setsid();
+		    exec qw(perl -e), q{
+                        my $wm = shift;
+  		        for (my $nb = 30; $nb && `pidof "$wm"` > 0; $nb--) { sleep 1 }
+  		        system("killall X ; killall -15 xdm gdm kdm prefdm") unless `pidof "$wm"` > 0;
+  		    }, $wm;
 		}
+	    } else {
+		$in->ask_warn('', _("Please log out and then use Ctrl-Alt-BackSpace"));
 	    }
-	    $in->ask_warn('', _("Please log out and then use Ctrl-Alt-BackSpace")) unless $found;
 	} else {
 	    $in->set_help('configureXxdm') unless $::isStandalone;
 	    my $run = exists $o->{xdm} ? $o->{xdm} : $::auto || $in->ask_yesorno(_("X at startup"),
