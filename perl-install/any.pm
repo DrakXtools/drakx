@@ -530,13 +530,9 @@ END
 	do { $replaced ||= 1
 	       if s/^\s*"?$toreplace{login}"?\s+ppp0\s+(\S+)/"$toreplace{login}"  ppp0  "$toreplace{passwd}"/ } foreach @l;
 	if ($replaced) {
-	    local *F;
-	    open F, ">$secrets" or die "Can't open $secrets: $!";
-	    print F @l;
+	    output($secrets, @l);
         } else {
-	    local *F;
-	    open F, ">>$secrets" or die "Can't open $secrets: $!";
-	    print F "$toreplace{login}  ppp0  \"$toreplace{passwd}\"\n";
+	    append_to_file($secrets, "$toreplace{login}  ppp0  \"$toreplace{passwd}\"\n");
 	}
 	#- restore access right to secrets file, just in case.
 	chmod 0600, $secrets;
@@ -545,11 +541,7 @@ END
     #- install kppprc file according to used configuration.
     mkdir_p("$prefix/usr/share/config");
 
-    {
-	local *KPPPRC;
-	open KPPPRC, ">$prefix/usr/share/config/kppprc" or die "Can't open $prefix/usr/share/config/kppprc: $!";
-	#chmod 0600, "$prefix/usr/share/config/kppprc";
-	print KPPPRC c::to_utf8(<<END);
+    output("$prefix/usr/share/config/kppprc", c::to_utf8(<<END));
 # KDE Config File
 [Account0]
 ExDNSDisabled=0
@@ -606,7 +598,6 @@ ShowClock=1
 DockIntoPanel=0
 pppdTimeout=30
 END
-    }
     miscellaneousNetwork();
 }
 
