@@ -396,7 +396,7 @@ END
     commands::mkdir_("-p", "$prefix/usr/share/config");
     template2file("$ENV{SHARE_PATH}/kppprc.in", "$prefix/usr/share/config/kppprc", %toreplace);
 
-    miscellaneousNetwork($in, $prefix);
+    miscellaneousNetwork($prefix);
 }
 
 sub miscellaneousNetwork {

@@ -303,8 +303,13 @@ sub pkg_install {
     log::l("selecting packages");
     require pkgs;
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
-    log::l("installing packages");
-    $o->installPackages;
+    my @toInstall = pkgs::packagesToInstall($o->{packages});
+    if (@toInstall) {
+	log::l("installing packages");
+	$o->installPackages;
+    } else {
+	log::l("all packages selected are already installed, nothing to do")
+    }
 }
 
 sub pkg_install_if_requires_satisfied {
