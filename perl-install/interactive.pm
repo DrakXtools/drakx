@@ -14,6 +14,7 @@ use common qw(:common :functional);
 #-  icon     => icon to put before the description
 #-  help     => tooltip
 #-  advanced => wether it is shown in by default or only in advanced mode
+#-  disabled => function returning wether it should be disabled (grayed)
 #-  type     => 
 #-     bool (with text)
 #-     range (with min, max)
@@ -213,12 +214,13 @@ sub ask_from_entries_refH_powered_normalize {
 	    $e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
 	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
 	}
+	$e->{disabled} ||= sub { 0 };
     }
 
     #- don't display empty lists
     @$l = grep { !($_->{list} && @{$_->{list}} == () && $_->{not_edit}) } @$l;
 
-    $common->{messages} = [ deref($common->{messages}) ];
+    $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
     add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") }) if !exists $common->{ok};
     add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 } });
 }
