@@ -1124,7 +1124,7 @@ notation (for example, 1.2.3.4).")),
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
                             [
-                             { label => N("Operating Mode"), val => \$ethntf->{WIRELESS_MODE}, 
+                             { label => N("Operating Mode"), val => \$ethntf->{WIRELESS_MODE},
                                list => [ keys %wireless_mode ] },
                              { label => N("Network name (ESSID)"), val => \$ethntf->{WIRELESS_ESSID} },
                              { label => N("Network ID"), val => \$ethntf->{WIRELESS_NWID}, advanced => 1 },
