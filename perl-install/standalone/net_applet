@@ -84,7 +84,11 @@ ugtk2::exit(0);
 
 sub is_running {
     my ($name) = @_;
-    any { !/^\s*$$\b/ && /\b\Q$name\E$/ } `ps -u $ENV{USER}`;
+    any {
+	my ($ppid, $pid, $n) = /^\s*(\d+)\s+(\d+)\s+(.*)/;
+	#- to run ps, perl may create some process with $name as name and 1 as ppid
+	$ppid ne 1 && $pid ne $$ && $n eq $name;
+    } `ps -o '%P %p %c' -u $ENV{USER}`;
 }
 sub shouldStart() {
     my %p = getVarsFromSh($onstartupfile);
