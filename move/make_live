@@ -104,6 +104,8 @@ print "Making live in $::prefix directory.\n";
 
     eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
 
+    symlinkf("/etc/X11/ksycoca", "$::prefix/usr/share/services/ksycoca");
+
     config_X_proprietary_drivers();
 
     unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';

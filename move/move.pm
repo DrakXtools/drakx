@@ -408,13 +408,12 @@ sub install2::configMove {
     mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
     detect_devices::install_addons('');
 
+    symlinkf("/usr/share/services/ksycoca-$o->{locale}{lang}", '/etc/X11/ksycoca');
+
     {
 	my $user = $o->{users}[0]{name};
 	cp_af("/usr/share/config/kdeglobals", $confdir);
 	lang::configure_kdeglobals($o->{locale}, "/home/$user/.kde/share/config");
-
-	mkdir_p("/home/$user/.kde/share/services");
-	cp_af("/usr/share/services/ksycoca-$o->{locale}{lang}", "/home/$user/.kde/share/services/ksycoca");
 
         run_program::run('chown', '-R', "$user.$user", "/home/$user/.kde");
     }
