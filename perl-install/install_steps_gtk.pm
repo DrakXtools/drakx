@@ -467,11 +467,13 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
     my $w = my_gtk->new(_("Installing"));
-    $w->{window}->set_usize($::windowwidth * 0.8, 260);
+    $w->{window}->set_usize($::windowwidth * 0.8, $::windowheight * 0.9);
+    $w->sync;
     my $text = new Gtk::Label;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
     gtkadd($w->{window}, gtkpack(new Gtk::VBox(0,10),
+#				 gtkxpm($w->{window}, "$ENV{SHARE_PATH}/ad.xpm"),
 			       _("Please wait, "), $msg, $progress,
 			       create_packtable({},
 						[_("Time remaining "), $msg_time_remaining],
