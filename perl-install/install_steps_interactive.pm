@@ -1201,7 +1201,7 @@ sub addUser {
 	  if !member('mandrake', map { $_->{name} } @{$o->{users}});
     }
     if ($o->{security} >= 1 || $clicked) {
-	my @suggested_names = @{$o->{users}} ? () : grep { !/lost+found/ } all("$::prefix/home");
+	my @suggested_names = @{$o->{users}} ? () : grep { !/lost\+found/ } all("$::prefix/home");
 	any::ask_users($o, $o->{users}, $o->{security}, \@suggested_names);
     }
     add2hash($o, any::get_autologin());
