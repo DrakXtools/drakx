@@ -3,7 +3,7 @@ package security::main;
 use strict;
 
 use standalone;
-use MDK::Common;
+use common;
 use my_gtk qw(:helpers :wrappers :ask);
 
 use security::msec;
