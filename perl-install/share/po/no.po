@@ -315,7 +315,6 @@ msgid "Autologin"
 msgstr "Autoinnlogg"
 
 #: ../../Xconfigurator.pm_.c:1103
-#, fuzzy
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
 "If you don't want to use this feature, click on the cancel button."
@@ -2456,28 +2455,24 @@ msgid "Error reading file $f"
 msgstr "Feil ved lesing av fil $f"
 
 #: ../../install_any.pm_.c:889
-#, fuzzy
 msgid "Use free space"
-msgstr "Bruk for loopback"
+msgstr "Bruk ledig plass"
 
 #: ../../install_any.pm_.c:891
 msgid "Not enough free space to allocate new partitions"
-msgstr ""
+msgstr "Ikke nok plass til å allokere en ny partisjon"
 
 #: ../../install_any.pm_.c:897
-#, fuzzy
 msgid "Use existing partition"
-msgstr "Formaterer partisjoner"
+msgstr "Bruk eksisterende partisjon"
 
 #: ../../install_any.pm_.c:899
-#, fuzzy
 msgid "There is no existing partition to use"
-msgstr "Prøver å redde partisjonstabell"
+msgstr "Det finnes ingen eksisterende partisjon som kan brukes"
 
 #: ../../install_any.pm_.c:906
-#, fuzzy
 msgid "Use the FAT partition for loopback"
-msgstr "Bruk for loopback"
+msgstr "Bruk FAT partisjonen for loopback"
 
 #: ../../install_any.pm_.c:909
 msgid "Which partition do you want to use to put Linux4Win?"
@@ -2497,12 +2492,11 @@ msgstr "Veksel-partisjonsstørrelse i MB: "
 
 #: ../../install_any.pm_.c:920
 msgid "Use the free space on the FAT partition"
-msgstr ""
+msgstr "Bruk den ledige plassen på FAT partisjonen"
 
 #: ../../install_any.pm_.c:922
-#, fuzzy
 msgid "Which partition do you want to resize?"
-msgstr "Hvilken partisjonstype ønsker du?"
+msgstr "Hvilken partisjonstype ønsker du å forandre størrelse på?"
 
 #: ../../install_any.pm_.c:925
 #, c-format
@@ -2510,10 +2504,13 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occured: %s"
 msgstr ""
+"FAT resizeren greidde ikke å håndtere din partisjon, \n"
+"følgene feil fant sted: %s"
 
 #: ../../install_any.pm_.c:928
 msgid "Your windows partition is too fragmented, please run ``defrag'' first"
 msgstr ""
+"Din windows partisjon er for fragmentert, vennligst kjør 'defrag' først"
 
 #: ../../install_any.pm_.c:929
 msgid ""
@@ -2536,48 +2533,47 @@ msgstr ""
 "Når du er sikker, trykk Ok."
 
 #: ../../install_any.pm_.c:938
-#, fuzzy
 msgid "Which size do you want to keep for windows on"
-msgstr "Hvilken sektor vil du flytte til?"
+msgstr "Hvilken størrelse ønsker du å beholde vinduer på?"
 
 #: ../../install_any.pm_.c:939
-#, fuzzy, c-format
+#, c-format
 msgid "partition %s"
-msgstr "Partisjon"
+msgstr "partisjon %s"
 
 #: ../../install_any.pm_.c:945
-#, fuzzy, c-format
+#, c-format
 msgid "FAT resizing failed: %s"
-msgstr "Automatisk endring av størrelse mislykket"
+msgstr "Krymping/forstørring av FAT feilet: %s"
 
 #: ../../install_any.pm_.c:960
 msgid ""
 "There is no FAT partitions to resize or to use as loopback (or not enough "
 "space left)"
 msgstr ""
+"Det finnes ingen FAT partisjon å forandre størrelsen på eller å brukes som "
+"loopback (ikke nok plass igjen)"
 
 #: ../../install_any.pm_.c:966
 msgid "Remove Windows(TM)"
-msgstr ""
+msgstr "Fjern Windows(TM)"
 
 #: ../../install_any.pm_.c:966
 msgid "Take over the hard drive"
-msgstr ""
+msgstr "Ta over harddisken"
 
 #: ../../install_any.pm_.c:968
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr ""
+msgstr "Du har mer enn en harddisk, hvilken ønsker du å installere linux på?"
 
 #: ../../install_any.pm_.c:970
-#, fuzzy, c-format
+#, c-format
 msgid "All existing partitions and their data will be lost on drive %s"
-msgstr ""
-"Etter endring av størrelse for partisjon %s, vil alle data på denne\n"
-"partisjonen vil gå tapt"
+msgstr "Alle eksisterende partisjoner og deres data vil være tapt på disk %s"
 
 #: ../../install_any.pm_.c:979
 msgid "Use diskdrake"
-msgstr ""
+msgstr "Bruk diskdrake"
 
 #: ../../install_any.pm_.c:987
 msgid ""
@@ -2605,10 +2601,10 @@ msgstr ""
 
 #: ../../install_any.pm_.c:1002
 msgid "Use fdisk"
-msgstr ""
+msgstr "Bruk fdisk"
 
 #: ../../install_any.pm_.c:1005
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, don't forget to save using `w'"
@@ -2957,7 +2953,6 @@ msgid "Expert"
 msgstr "Ekspert"
 
 #: ../../install_steps_interactive.pm_.c:122
-#, fuzzy
 msgid ""
 "Are you sure you are an expert? \n"
 "You will be allowed to make powerful but dangerous things here.\n"
@@ -3022,12 +3017,12 @@ msgstr "Velg monteringspunktene"
 
 #: ../../install_steps_interactive.pm_.c:225
 msgid "The DrakX Partitioning wizard found the following solutions:"
-msgstr ""
+msgstr "DrakX partisjonsveiviseren fant disse løsningene:"
 
 #: ../../install_steps_interactive.pm_.c:228
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning failed: %s"
-msgstr "Type partisjonstabell: %s\n"
+msgstr "Partisjonering feilet: %s"
 
 #: ../../install_steps_interactive.pm_.c:235
 msgid "You need to reboot for the partition table modifications to take place"
@@ -3070,9 +3065,9 @@ msgid "Your system has not enough space left for installation or upgrade"
 msgstr "Systemet ditt har ikke nok plass for installasjon eller oppgradering"
 
 #: ../../install_steps_interactive.pm_.c:324
-#, fuzzy, c-format
+#, c-format
 msgid "Full (%dMB)"
-msgstr "(%dMB)"
+msgstr "Full(%dMB)"
 
 #: ../../install_steps_interactive.pm_.c:324
 #, c-format
@@ -3080,9 +3075,9 @@ msgid "Normal (%dMB)"
 msgstr "Normal (%dMB)"
 
 #: ../../install_steps_interactive.pm_.c:324
-#, fuzzy, c-format
+#, c-format
 msgid "Small(%dMB)"
-msgstr "(%dMB)"
+msgstr "Liten(%dMB)"
 
 #: ../../install_steps_interactive.pm_.c:347
 msgid "Package Group Selection"
