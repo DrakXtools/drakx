@@ -768,8 +768,14 @@ sub l2pango_font {
 }
 
 sub set {
-    my ($lang, $b_translate_for_console) = @_;
+    my ($locale, $b_translate_for_console) = @_;
+    
+    if ($::move) {
+	put_in_hash(\%ENV, i18n_env($locale));
+	return;
+    }
 
+    my ($lang) = $locale->{lang};
     exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I don't know it!"), return;
 
     my $dir = "$ENV{SHARE_PATH}/locale";
@@ -880,10 +886,8 @@ sub write_langs {
     substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $s\n" if eof && $s } "$prefix/etc/rpm/macros";
 }
 
-sub write { 
-    my ($prefix, $locale, $b_user_only, $b_dont_touch_kde_files) = @_;
-
-    $locale && $locale->{lang} or return;
+sub i18n_env {
+    my ($locale) = @_;
 
     my $locale_lang = getlocale_for_lang($locale->{lang}, $locale->{country}, $locale->{utf8});
     my $locale_country = getlocale_for_country($locale->{lang}, $locale->{country}, $locale->{utf8});
@@ -894,7 +898,18 @@ sub write {
 	LANGUAGE => getLANGUAGE($locale->{lang}, $locale->{country}, $locale->{utf8}),
 	(map { $_ => $locale_country } qw(LC_NUMERIC LC_MONETARY LC_ADDRESS LC_MEASUREMENT LC_NAME LC_PAPER LC_IDENTIFICATION LC_TELEPHONE))
     };
+
     log::l("lang::write: lang:$locale->{lang} country:$locale->{country} locale|lang:$locale_lang locale|country:$locale_country language:$h->{LANGUAGE}");
+
+    $h;
+}
+
+sub write { 
+    my ($prefix, $locale, $b_user_only, $b_dont_touch_kde_files) = @_;
+
+    $locale && $locale->{lang} or return;
+
+    my $h = i18n_env($locale);
 
     my ($name, $sfm, $acm) = l2console_font($locale, 0);
     if ($name && !$b_user_only) {
@@ -924,10 +939,10 @@ sub write {
 	}
 	
     }
-    add2hash $h, $xim{$locale_lang};
+    add2hash $h, $xim{$h->{LANG}};
 
     #- deactivate translations on console for RTL languages
-    if ($locale_lang =~ /ar|fa|he|ur|yi/) {
+    if ($h->{LANG} =~ /ar|fa|he|ur|yi/) {
 	add2hash $h, { CONSOLE_NOT_LOCALIZED => 'yes' }
     }
 
