@@ -274,13 +274,13 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
 			$card->{identifier} =~ /Matrox.* G[24][05]0.*AGP/ || #- prefer 16bit with AGP only
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
-			#$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
+			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
 			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
     #- 3D acceleration configuration for XFree 4 using DRI but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{DRI_glx_EXPERIMENTAL} = ($card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
 				     $card->{identifier} =~ /SiS.*6C?236/ ||
-				     $card->{identifier} =~ /SiS.*630/ ||
-				     $card->{identifier} =~ /Radeon /); #- 16bits preferable ?
+				     $card->{identifier} =~ /SiS.*630/);
+				     #$card->{identifier} =~ /Radeon /); #- 16bits preferable ?
     #- 3D acceleration configuration for XFree 4 using NVIDIA driver (TNT, TN2 and GeForce cards only).
     $card->{NVIDIA_glx} = $cardOptions->{allowNVIDIA_rpms} && ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2/ || #- TNT2 cards
 							       $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||
@@ -291,11 +291,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     #- check to use XFree 4 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
     $card->{force_xf4} = arch() =~ /ppc/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
-    $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /RIVA TNT/ ||
-						  $card->{type} =~ /RIVA128/ ||
-						  $card->{type} =~ /GeForce/ ||
-						  $card->{type} =~ /SiS / && $card->{type} !~ /SiS 6326/ ||
-						  $card->{type} =~ /NeoMagic /);
+    $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /NeoMagic /);
     #- take into account current environment in standalone to keep
     #- the XFree86 version.
     if ($::isStandalone) {
@@ -564,8 +560,7 @@ sub testFinalConfig {
     $skiptest || $o->{card}{server} =~ 'FBDev|Sun' and return 1; #- avoid testing with these.
 
     #- needed for bad cards not restoring cleanly framebuffer
-    my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE|S3 Inc|Rage Mobility (?:P\/M|L) |3D Rage LT/;
-    $bad_card ||= $o->{card}{use_xf4}; #- TODO obsoleted to check, when using fbdev of XFree 4!
+    my $bad_card = $o->{card}{identifier} =~ /i740|Rage Mobility (?:P\/M|L) |3D Rage LT/;
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $verybad_card = $o->{card}{driver} eq 'i810';
