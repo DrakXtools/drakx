@@ -237,17 +237,14 @@ sub new {
     foreach (@class_tree) {
 	my ($devices_list, $arg, $icon, $arg2, $title, $configurator ) = @$_;
 	my $hw_class_tree = $tree->insert_node(undef, undef, @$arg, (gtkcreate_png($icon)) x 2, @$arg2);
-	   my $prev_item;
 	# Fill the graphic tree with a "tree leaf" widget per device
 	foreach (@$devices_list) {
 		  my $custom_id = harddrake::data::custom_id($_, $title);
 		  $custom_id .= ' ' while exists($tree->{data}{$custom_id});
-		  my $hw_item = $tree->insert_node($hw_class_tree, $prev_item, [$custom_id ], 5, (undef) x 4, 1, 0);
+		  my $hw_item = $tree->insert_node($hw_class_tree, undef, [$custom_id ], 5, (undef) x 4, 1, 0);
 		  $tree->{data}{$custom_id} = $_;
 		  $tree->{configurator}{$custom_id} = $configurator;
-		  $prev_item = $hw_item;
 	   }
-	undef $prev_item;
     }
 
     $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
