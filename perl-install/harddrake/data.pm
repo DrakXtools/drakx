@@ -6,13 +6,13 @@ use MDK::Common;
 use class_discard;
 
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
-our ($version, $sbindir, $bindir) = ("1.1.6", "/usr/sbin", "/usr/bin");
+our ($version, $sbindir, $bindir) = ("1.1.7", "/usr/sbin", "/usr/bin");
 
 my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_IDE|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') } @devices;
+    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI)|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') && $_->{type} ne 'network'} @devices;
 }
 
 
@@ -47,7 +47,7 @@ our @tree =
 	    my @usbnet = qw/CDCEther catc kaweth pegasus usbnet/;
 	    # should be taken from detect_devices.pm or modules.pm. it's identical
 	    
-	    grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) } @devices}],
+	    grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} eq 'network' } @devices}],
 #	["","Tokenring cards", "Ethernetcard.png", "", \&detect_devices::getNet],
 #	["","FDDI cards", "Ethernetcard.png", "", \&detect_devices::getNet],
 #	["","Modem", "Modem.png", "", \&detect_devices::getNet],
@@ -66,7 +66,7 @@ our @tree =
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}],
 
 	["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
-	["SCSI_CONTROLLER","SCSI controllers", "scsi.png", "", \&detect_devices::getSCSI],
+	["SCSI_CONTROLLER","SCSI controllers", "scsi.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_SCSI' } @devices}],
 	["USB_CONTROLLER","USB controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_USB' } @devices}],
 	["SMB_CONTROLLER","SMBus controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_SMBUS' } @devices}],
 	);

@@ -3,6 +3,7 @@
 * Harddrake TODO:
 ** fixes
 *** timeout on dialogs in service
+*** kill config tool on exit !
 
 ** wishes
 *** non needed stuff to run X must be posponed after X11 startup
@@ -16,12 +17,6 @@
 *** config module (module options configuration button) => expert only
 *** embedded mode
 *** add updfstab as in kudzu
-*** detect pcimcia:
-  	
-    foreach (detect_devices::pcmcia_probe()) {
-        printf "m: %-15s t: %-20s d: %-12s  d: %s\n",
-              $_->{driver}, $_->{type}, $_->{device}, $_->{description}
-    }
 *** detect isapnp devices
 *** window with sliders so that we can resize
 *** check4modem
@@ -93,8 +88,17 @@ sub disconnect($$) {
 
     "Unknown/Others",
 
+* ####################################################################
 
-* Suggestion
+* Suggestions
+** a dialog in harddrake to select the driver of choice. 
+easy way: greping pcitable for all known oss modules and alsa' snd-*
+ones, then build a hand hash (oss<->alsa modules names) that enable to
+get alsa or (respectively oss) module from oss (respectively alsa)
+module.
+then offering a window to switch from alsa to oss.
+
+** various
 Subject: Re: [Cooker] Optional ALSA Support for SB Live!
 From: Fabrice FACORAT <f.faber@netcourrier.com>
 To: cooker@linux-mandrake.com
