@@ -174,7 +174,7 @@ dirs1="usr/lib/libDrakX usr/share/libDrakX"
 (cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n")|egrep -v 'bin/.*harddrake' > %{name}.list
 (cd $RPM_BUILD_ROOT ; find $dirs1 -type d -printf "%%%%dir /%%p\n") >> %{name}.list
 
-perl -ni -e '/clock|drak(backup|bug|clock|floppy|font|log|net_monitor|perm|printer|sec|splash|TermServ)|gtk|icons|logdrake|net_monitor|pixmaps|printer|xf86misc/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
+perl -ni -e '/clock|drak(backup|bug|clock|floppy|font|log|net_monitor|perm|printer|sec|splash|TermServ)|gtk|icons|logdrake|net_applet|net_monitor|pixmaps|printer|xf86misc/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 
 #mdk menu entry
