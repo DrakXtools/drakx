@@ -38,8 +38,9 @@ my (%config, $wait);
 my $in;
 my $splash = -f '/proc/splash';
 # For each hw, class, detect device, compare and offer to reconfigure if needed
-foreach (@harddrake::data::tree) {
-    my ($Ident, $item, undef, $configurator, $detector, $do_it) = @$_;
+foreach my $hw_class (@harddrake::data::tree) {
+    my ($Ident, $item, $configurator, $detector, $do_it) = @$hw_class{qw(class string configurator detector checked_on_boot)};
+
     next unless $do_it ^ $invert_do_it;
     # No detector ? (should never happen but who know ?)
     ref($detector) eq 'CODE' or next;

@@ -243,8 +243,8 @@ my $index = 0;
 my @classes;
 
 # Fill the graphic devices tree with a "tree branch" widget per device category
-foreach (@harddrake::data::tree) {
-    my ($Ident, $title, $icon, $configurator, $detector) = @$_;
+foreach my $hw_class (@harddrake::data::tree) {
+    my ($Ident, $title, $icon, $configurator, $detector) = @$hw_class{qw(class string icon configurator detector)};
     next if ref($detector) ne "CODE"; #skip class witouth detector
     # blacklist agp controllers b/c string is not yet translated:
     next if $Ident eq 'AGP';
