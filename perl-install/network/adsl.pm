@@ -104,6 +104,7 @@ sub sagem_set_parameters {
             s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
             s/STATIC_IP=.*\n//;
             s!</eaglectrl>!STATIC_IP=$netc->{static_ip}\n</eaglectrl>! if $netc->{static_ip};
+            #- TODO: add ISP info, $netc->{provider_id}
         } "$::prefix$cfg_file";
     }
     #- create CMV symlinks for both POTS and ISDN lines
@@ -187,7 +188,7 @@ noaccomp),
                    stop =>  "/usr/bin/killall pppoa",
                    get_intf => '/sbin/eaglectrl -i',
                    server => {
-                              pppoa => q("/usr/sbin/fctStartAdsl -t 1 -i"),
+                              pppoa => q("/sbin/fctStartAdsl -t 1 -i"),
                              },
                    ppp_options => qq(
 mru 1492
