@@ -2,7 +2,7 @@ package network::shorewall; # $Id$
 
 
 
-use strict;
+
 use detect_devices;
 use network::netconnect;
 use run_program;
@@ -86,6 +86,7 @@ sub read {
 
 sub write {
     my ($conf) = @_;
+    my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
 
     my %ports_by_proto;
     foreach (split ' ', $conf->{ports}) {
@@ -111,11 +112,13 @@ sub write {
 		    [ 'all', 'all', 'REJECT', 'info' ],
 		   );
     set_config_file('rules',
+    		    if_(cat_("$prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'tcp', '1723' ]),
+		    if_(cat_("$prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
 		    (map { 
 			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto 
 		    } ('net', if_($conf->{masquerade}, 'masq'), if_($conf->{loc_interface}, 'loc'))),
 		    if_($conf->{masquerade}, map { [ 'ACCEPT', 'masq', 'fw', $_, join(',', @drakgw_ports), '-' ] } 'tcp', 'udp'),
-				if_($conf->{masquerade}, map { [ 'ACCEPT', 'fw', 'masq', $_, join(',', @internal_ports), '-' ] } 'tcp', 'udp'),
+	            if_($conf->{masquerade}, map { [ 'ACCEPT', 'fw', 'masq', $_, join(',', @internal_ports), '-' ] } 'tcp', 'udp'),
 		   );
     set_config_file('masq', 
 		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : (),
