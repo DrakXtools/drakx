@@ -7,13 +7,12 @@ use lib qw(/usr/lib/libDrakX);
 use vars qw(@ISA @EXPORT_OK);
 use detect_devices;
 use MDK::Common;
+use class_discard;
 
 @ISA = qw(Exporter);
 @EXPORT_OK = (qw(version tree));
 
 our ($version, $sbindir) = ("1.1.5", "/usr/sbin/");
-
-sub wait_message {}  #- needed to emulate $in required by printerdrake::auto_detect as argument
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
@@ -62,7 +61,7 @@ our @tree =
 	["UNKNOWN","Unknown/Others", "unknown.png", "" , \&unknown],
 
 	["PRINTER","Printer", "hw_printer.png", "$sbindir/printerdrake", 
-	 sub { require printerdrake; printerdrake::auto_detect(bless {}) } ],
+	 sub { require printerdrake; printerdrake::auto_detect(class_discard->new)  } ],
 	["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake",
 	 sub { require scanner; scanner::findScannerUsbport() }],
 	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { use mouse; &mouse::detect()}],
