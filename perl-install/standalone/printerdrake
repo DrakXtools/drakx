@@ -302,9 +302,9 @@ sub RefreshLocalPrintersFull {
 	push(@LocalReal, $p) if $searchstr =~ /\Q$strfilt/i;
     };
     foreach my $p (sort { lc($a) cmp lc($b) } @LocalReal) {
-	my $state = ($printer->{SPOOLER} !~ /cups/ ? N('Unknown') :
-		     (printer::cups::queue_enabled($p) ? N('Enabled') :
-		      N('Disabled')));
+	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
+		     (printer::cups::queue_enabled($p) ? N("Enabled") :
+		      N("Disabled")));
 	my $connect = printer::main::connectionstr($printer->{configured}{$p}{queuedata}{connect});
 	my $description = $printer->{configured}{$p}{queuedata}{desc};
 	my $location = $printer->{configured}{$p}{queuedata}{loc};
@@ -340,9 +340,9 @@ sub RefreshRemotePrintersFull {
     foreach my $p (sort { lc($a->{queuename}) cmp lc($b->{queuename}) } 
 		   @RemoteReal) {
 	my $queue = $p->{queuename};
-	my $state = ($printer->{SPOOLER} !~ /cups/ ? N('Unknown') :
-		     (printer::cups::queue_enabled($queue) ? N('Enabled') :
-		      N('Disabled')));
+	my $state = ($printer->{SPOOLER} !~ /cups/ ? N("Unknown") :
+		     (printer::cups::queue_enabled($queue) ? N("Enabled") :
+		      N("Disabled")));
 	my $server = ($p->{ipp} ?
 		      $p->{ipp} : $printer->{remote_cups_server});
 	my $description = $p->{description};
