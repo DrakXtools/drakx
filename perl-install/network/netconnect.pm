@@ -534,6 +534,7 @@ If you don't know, choose 'use pppoe'"),
                               { label => N("ADSL connection type :"), val => \$adsl_type, type => "list",
                                 list => [
                                          N("Dynamic Host Configuration Protocol (DHCP)"),
+                                         N("Manual TCP/IP configuration"),
                                          N("Point to Point Tuneling Protocol (PPPTP)"),
                                          N("PPP over Ethernet (PPPoE)"),
                                          N("PPP over ATM (PPPoA)"),
