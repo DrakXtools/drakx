@@ -194,7 +194,7 @@ sub suggest_part {
 sub suggestions_mntpoint {
     my ($hds) = @_;
     sort grep { !/swap/ && !has_mntpoint($_, $hds) }
-      (@suggestions_mntpoints, map { $_->{mntpoint} } $suggestions{expert});
+      (@suggestions_mntpoints, map { $_->{mntpoint} } $suggestions{server});
 }
 
 #-sub partitionDrives {
