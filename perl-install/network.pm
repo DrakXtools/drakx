@@ -253,7 +253,7 @@ sub configureNetwork {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($in, $intf2, $netc->{net_device}, 0) or last;
+	configureNetworkIntf($in, $intf2, $netc->{NET_DEVICE}, 0) or last;
 
 	$netc ||= {};
 	$last = $intf2;
@@ -284,8 +284,8 @@ sub configureNetworkIntf {
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
 	$text = _("WARNING : This device has been previously configured to connect to the Internet.
-Simply press Cancel to keep this device configured.
-Modifying the fields below and clicking on OK will override this configuration.");
+Simply press OK to keep this device configured.
+Modifying the fields below will override this configuration.");
     }
     else {
 	$text = _("Please enter the IP configuration for this machine.
