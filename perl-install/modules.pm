@@ -15,39 +15,43 @@ my %deps = ();
 
 my @drivers_by_category = (
 [ 'net', {
+arch() =~ /^sparc/ ? (
+  "myri_sbus" => "MyriCOM Gigabit Ethernet",
+  "sunbmac" => "Sun BigMac Ethernet",
+  "sunhme" => "Sun Happy Meal Ethernet",
+  "sunqe" => "Sun Quad Ethernet",
+) : (
   "3c509" => "3com 3c509",
   "3c501" => "3com 3c501",
   "3c503" => "3com 3c503",
   "3c505" => "3com 3c505",
   "3c507" => "3com 3c507",
   "3c515" => "3com 3c515",
-  "3c59x" => "3com 3c59x (Vortex)",
-  "3c59x" => "3com 3c90x (Boomerang)",
-  "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
+  "3c90x" => "3com 3c90x and 3c980",
   "at1700" => "Allied Telesis AT1700",
   "ac3200" => "Ansel Communication AC3200",
   "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
   "82596" => "Apricot 82596",
 #  "atp" => "ATP", # builtin the kernel
-  "cs89x0" => "CS89x0",
-  "de4x5" => "Digital 425,434,435,450,500",
-  "depca" => "Digital DEPCA and EtherWORKS",
   "e2100" => "Cabletron E2100",
-  "ewrk3" => "Digital EtherWORKS 3",
-  "old_tulip" => "Digital 21040/21041/21140 (old Tulip driver)",
-  "tulip" => "Digital 21040/21041/21140 (Tulip)",
+  "tlan" => "Compaq Netelligent",
+  "cs89x0" => "CS89x0",
   "de600" => "D-Link DE-600 pocket adapter",
   "de620" => "D-Link DE-620 pocket adapter",
   "dgrs" => "Digi International RightSwitch",
+  "depca" => "Digital DEPCA and EtherWORKS",
+  "ewrk3" => "Digital EtherWORKS 3",
+  "old_tulip" => "Digital 21040/21041/21140 (old Tulip driver)",
+  "tulip" => "Digital 21040/21041/21140 (Tulip)",
+  "eth16i" => "ICL EtherTeam 16i",
   "epic100" => "EPIC 100",
+  "eexpress" => "Intel EtherExpress",
+  "eepro" => "Intel EtherExpress Pro",
+  "eepro100" => "Intel EtherExpress Pro 100", #- should run on sparc but no memory on floppy
   "hp100" => "HP10/100VG any LAN ",
   "hp" => "HP LAN/AnyLan",
   "hp-plus" => "HP PCLAN/plus",
-  "eth16i" => "ICL EtherTeam 16i",
-  "eexpress" => "Intel EtherExpress",
-  "eepro" => "Intel EtherExpress Pro",
-  "eepro100" => "Intel EtherExpress Pro 100",
   "lance" => "Lance",
   "lne390" => "Mylex LNE390",
   "ne" => "NE2000 and compatible",
@@ -56,24 +60,19 @@ my @drivers_by_category = (
   "ni5010" => "NI 5010",
   "ni52" => "NI 5210",
   "ni65" => "NI 6510",
-  "rtl8139" => "RealTek RTL8129/8139",
   "es3210" => "Racal-Interlan ES3210",
-#  "rcpci" => "RedCreek Virtual Private Network", # TODO
+  "rcpci45" => "RedCreek PCI45 LAN",
   "epic100" => "SMC 83c170 EPIC/100",
   "sktr" => "Syskonnect Token ring adaptor",
   "smc9194" => "SMC 9000 series",
   "smc-ultra" => "SMC Ultra",
   "smc-ultra32" => "SMC Ultra 32",
-#  "sunhme" => "Sun Happy Meal", # not there anymore?
-  "tlan" => "Compaq Netelligent",
-  "via-rhine" => "VIA Rhine",
-#  "wavelan" => "AT&T WaveLAN & DEC RoamAbout DS", # TODO
-  "wd" => "WD8003, WD8013 and compatible",
   "yellowfin" => "Symbios Yellowfin G-NIC",
+  "via-rhine" => "VIA Rhine",
+#  "wavelan" => "AT&T WaveLAN & DEC RoamAbout DS", # TODO is a "AT&T GIS WaveLAN ISA" ?
+  "wd" => "WD8003, WD8013 and compatible",
 
-  "8390" => "8390",
   "dmfe" => "dmfe",
-  "dummy" => "dummy",
   "fmv18x" => "fmv18x",
   "ibmtr" => "Token Ring Tropic",
   "olympic" => "olympic",
@@ -82,15 +81,24 @@ my @drivers_by_category = (
   "sb1000" => "sb1000",
   "sbni" => "sbni",
   "sis900" => "sis900",
+),
+  "3c59x" => "3com 3c59x (Vortex)",
+  "de4x5" => "Digital 425,434,435,450,500",
+  "rtl8139" => "RealTek RTL8129/8139",
+
+  "8390" => "8390",
+  "dummy" => "dummy",
   "nfs" => "Network File System (nfs)",
   "lockd" => "lockd",
   "sunrpc" => "sunrpc",
 }],
 [ 'scsi', {
+arch() =~ /^sparc/ ? (
+  "qlogicpti" => "Performance Technologies ISP",
+) : (
   "aha152x" => "Adaptec 152x",
   "aha1542" => "Adaptec 1542",
   "aha1740" => "Adaptec 1740",
-  "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "advansys" => "AdvanSys Adapters",
   "in2000" => "Always IN2000",
   "AM53C974" => "AMD SCSI",
@@ -102,12 +110,8 @@ my @drivers_by_category = (
   "g_NCR5380" => "NCR 5380",
   "NCR53c406a" => "NCR 53c406a",
   "53c7,8xx" => "NCR 53c7xx",
-  "ncr53c8xx" => "NCR 53C8xx PCI",
-#  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicfas" => "Qlogic FAS",
-  "qlogicisp" => "Qlogic ISP",
   "seagate" => "Seagate ST01/02",
-  "sym53c8xx" => "Symbios 53c8xx",
   "t128" => "Trantor T128/T128F/T228",
   "u14-34f" => "UltraStor 14F/34F",
   "ultrastor" => "UltraStor 14F/24F/34F",
@@ -121,8 +125,17 @@ my @drivers_by_category = (
   "sim710" => "sim710",
   "sym53c416" => "sym53c416",
   "tmscsim" => "tmscsim",
+),
+  "aic7xxx" => "Adaptec 2740, 2840, 2940",
+  "ncr53c8xx" => "NCR 53C8xx PCI",
+#  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
+  "qlogicisp" => "Qlogic ISP",
+  "sym53c8xx" => "Symbios 53c8xx",
 }],
 [ 'disk', {
+arch() =~ /^sparc/ ? (
+  "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
+) : (
   "DAC960" => "Mylex DAC960",
 #  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "megaraid" => "AMI MegaRAID",
@@ -134,8 +147,10 @@ my @drivers_by_category = (
   "eata_dma" => "EATA DMA Adapters",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "imm" => "Iomega Zip (new driver)",
+),
 }],
 [ 'cdrom', {
+arch() !~ /^sparc/ ? (
   "sbpcd" => "SoundBlaster/Panasonic",
   "aztcd" => "Aztech CD",
   "gscd" => "Goldstar R420",
@@ -147,10 +162,12 @@ my @drivers_by_category = (
   "sjcd" => "Sanyo",
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
+) : (),
   "isofs" => "iso9660",
   "ide-cd" => "ide-cd",
 }],
 [ 'sound', {
+arch() !~ /^sparc/ ? (
   "alsa" => "ALSA sound module, many sound cards",
   "cmpci" => "C-Media Electronics CMI8338A CMI8338B CMI8738",
   "es1370" => "Ensoniq ES1370 [AudioPCI]",
@@ -161,8 +178,10 @@ my @drivers_by_category = (
   "pas16" => "Pro Audio Spectrum/Studio 16",
   "via82cxxx" => "VIA VT82C686_5",
   "sonicvibes" => "S3 SonicVibes",
+) : (),
 }],
 [ 'pcmcia', {
+arch() !~ /^sparc/ ? (
   "ide_cs" => "ide_cs",
   "fmvj18x_cs" => "fmvj18x_cs",
   "fdomain_cs" => "fdomain_cs",
@@ -193,14 +212,18 @@ my @drivers_by_category = (
   "sram_mtd" => "sram_mtd",
   "tulip_cb" => "tulip_cb",
 
+) : (),
 }],
 [ 'pcmcia_everywhere', {
+arch() !~ /^sparc/ ? (
   "pcmcia_core" => "PCMCIA core support",
   "tcic" => "PCMCIA tcic controller",
   "ds" => "PCMCIA card support",
   "i82365" => "PCMCIA i82365 controller",
+) : (),
 }],
 [ 'paride', {
+arch() !~ /^sparc/ ? (
   "aten" => "ATEN EH-100",
   "bpck" => "Microsolutions backpack",
   "comm" => "DataStor (older type) commuter adapter",
@@ -219,6 +242,7 @@ my @drivers_by_category = (
   "pcd"  => "Parallel port CD-ROM",
   "pf"   => "Parallel port ATAPI disk",
   "paride" => "Main parallel port module",
+) : (),
 }],
 [ 'raid', {
   "linear" => "linear",
@@ -227,6 +251,7 @@ my @drivers_by_category = (
   "raid5" => "raid5",
 }],
 [ 'mouse', {
+arch() !~ /^sparc/ ? (
   "busmouse" => "busmouse",
   "msbusmouse" => "msbusmouse",
   "serial" => "serial",
@@ -236,6 +261,7 @@ my @drivers_by_category = (
   "usb-uhci", "USB (uhci)",
   "usb-ohci", "USB (ohci)",
   "usb-ohci-hcd", "USB (ohci-hcd)",
+) : (),
 }],
 [ 'fs', {
   "smbfs" => "Windows SMB",

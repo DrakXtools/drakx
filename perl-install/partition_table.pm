@@ -25,6 +25,16 @@ use Data::Dumper;
 
 my %types = (
   0x0 => 'Empty',
+arch() =~ /^sparc/ ? (
+  0x1 => 'SunOS boot',
+  0x2 => 'SunOS root',
+  0x3 => 'SunOS swap',
+  0x4 => 'SunOS usr',
+  0x5 => 'Whole disk',
+  0x6 => 'SunOS stand',
+  0x7 => 'SunOS var',
+  0x8 => 'SunOS home',
+) : (
   0x1 => 'DOS 12-bit FAT',
   0x2 => 'XENIX root',
   0x3 => 'XENIX /usr',
@@ -33,6 +43,7 @@ my %types = (
   0x6 => 'DOS FAT16',
   0x7 => 'OS/2 IFS (e.g., HPFS) / Windows NT NTFS / Advanced Unix / QNX2.x pre-1988 (see below under IDs 4d-4f)',
   0x8 => 'OS/2 (v1.0-1.3 only) / AIX boot partition / SplitDrive / Commodore DOS / DELL partition spanning multiple drives / QNX 1.x and 2.x ("qny")',
+),
   0x9 => 'AIX data partition / Coherent filesystem / QNX 1.x and 2.x ("qnz")',
   0xa => 'OS/2 Boot Manager / Coherent swap partition / OPUS',
   0xb => 'Win98 FAT32',
@@ -140,11 +151,13 @@ my %types = (
 );
 
 my %type2fs = (
+arch() !~ /^sparc/ ? (
   0x01 => 'vfat',
   0x04 => 'vfat',
   0x05 => 'ignore',
   0x06 => 'vfat',
   0x07 => 'hpfs',
+) : (),
   0x0b => 'vfat',
   0x0c => 'vfat',
   0x0e => 'vfat',
@@ -171,7 +184,8 @@ sub name2type($) {
     /0x(.*)/ ? hex $1 : $types_rev{$_} || $_;
 }
 
-sub isExtended($) { $_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85 }
+sub isWholedisk($) { arch() =~ /^sparc/ && $_[0]{type} == 5 }
+sub isExtended($) { (arch() !~ /^sparc/ && $_[0]{type} == 5) || $_[0]{type} == 0xf || $_[0]{type} == 0x85 }
 sub isRAID($) { $_[0]{type} == 0xfd }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
@@ -211,8 +225,10 @@ sub adjustEnd($$) {
     $part->{size} = $end2 - $part->{start};
 }
 sub adjustStartAndEnd($$) {
-    &adjustStart;
-    &adjustEnd;
+    my ($hd, $part) = @_;
+
+    $hd->adjustStart($part);
+    $hd->adjustEnd($part);
 }
 
 sub verifyNotOverlap($$) {
@@ -225,9 +241,14 @@ sub verifyInside($$) {
 }
 
 sub verifyParts_ {
-    foreach my $i (@_) { foreach (@_) {
-	$i != $_ and verifyNotOverlap($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 9, $_->{size} >> 9;
-    }}
+    foreach my $i (@_) {
+	foreach (@_) {
+	    next if !$i || !$_ || $i == $_ || isWholedisk($i); #- avoid testing twice on whole disk for simplicity :-)
+	    isWholedisk($_) ?
+		verifyInside($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!", $i->{size} >> 9, $_->{size} >> 9:
+		verifyNotOverlap($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 9, $_->{size} >> 9;
+	}
+    }
 }
 sub verifyParts($) {
     my ($hd) = @_;
@@ -235,7 +256,7 @@ sub verifyParts($) {
 }
 sub verifyPrimary($) {
     my ($pt) = @_;
-    $_->{start} > 0 || arch() eq "sparc" || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
+    $_->{start} > 0 || arch() =~ /^sparc/ || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
     verifyParts_(@{$pt->{normal}}, $pt->{extended});
 }
 
@@ -338,7 +359,6 @@ sub read_one($$) {
 	    bless $hd, "partition_table_$_";
 	    ($pt, $info) = $hd->read($sector);
 	};
-	print ">>> $@\n";
 	$@ or last;
     }
 
@@ -416,7 +436,8 @@ sub write($) {
 	$_->{normal}{local_start} = $_->{normal}{start} - $_->{start};
 	$_->{extended} and $_->{extended}{local_start} = $_->{extended}{start} - $hd->{primary}{extended}{start};
 
-	$hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
+	print "Trying to write an extended partition table, bad !!!\n";
+	#$hd->write($_->{start}, $_->{raw}) or die "writing of partition table failed";
     }
     $hd->{isDirty} = 0;
 
@@ -535,7 +556,7 @@ sub add($$;$$) {
     $part->{isFormatted} = 0;
     $part->{rootDevice} = $hd->{device};
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
-    $part->{start} ||= 1; #- starting at sector 0 is not allowed
+    $part->{start} ||= 1 if arch() !~ /^sparc/; #- starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part) unless $forceNoAdjust;
 
     my $e = $hd->{primary}{extended};

@@ -85,6 +85,19 @@ my %lang2keyboard =
 #- key = extension for Xmodmap file, [0] = description of the keyboard,
 #- [1] = name for loadkeys, [2] = name for XKB
 my %keyboards = (
+arch() =~ /^sparc/ ? (
+ "cs" => [ __("Czech"),          "sunt5-us-cz", "cs" ],
+ "de" => [ __("German"),         "sunt5-de-latin1", "de" ],
+ "dvorak" => [ __("Dvorak"),     "sundvorak",   "dvorak" ],
+ "es" => [ __("Spanish"),        "sunt5-es",    "es" ],
+ "fi" => [ __("Finnish"),        "sunt5-fi-latin1", "fi" ],
+ "fr" => [ __("French"),         "sunt5-fr-latin1", "fr" ],
+ "no" => [ __("Norwegian"),      "sunt4-no-latin1", "no" ],
+ "pl" => [ __("Polish"),         "sun-pl-altgraph", "pl" ],
+ "ru" => [ __("Russian"),        "sunt5-ru",    "ru" ],
+ "uk" => [ __("UK keyboard"),    "sunt5-uk",    "us" ],
+ "us" => [ __("US keyboard"),    "sunkeymap",   "us" ],
+) : (
  "am" => [ __("Armenian"),       "am-armscii8", "am" ],
  "be" => [ __("Belgian"),        "be-latin1",   "be" ],
  "bg" => [ __("Bulgarian"),      "bg",          "bg" ],
@@ -130,6 +143,7 @@ my %keyboards = (
  "us" => [ __("US keyboard"),    "us",           "us" ],
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
  "yu" => [ __("Yugoslavian (latin layout)"), "sr", "yu" ],
+),
 );
 
 #-######################################################################################
@@ -151,10 +165,12 @@ sub text2keyboard {
 
 sub lang2keyboard($) {
     local ($_) = @_;
-    $lang2keyboard{$_} || $keyboards{$_} && $_ || "us"; #-substr($_, 0, 2);
+    my $kb = $lang2keyboard{$_} || $keyboards{$_} && $_ || "us";
+    $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboad mapping to us.
 }
 
 sub load($) {
+    return if arch() =~ /^sparc/;
     my ($keymap) = @_;
 
     my ($magic, @keymaps) = unpack "I i" . c::MAX_NR_KEYMAPS() . "a*", $keymap;
@@ -207,7 +223,7 @@ sub setup($) {
 	eval { load(<F>) };
     }
     my $f = xmodmap_file($keyboard);
-    eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;
+    #eval { run_program::run('xmodmap', $f) } unless $::testing || !$f;
 }
 
 sub write($$;$) {

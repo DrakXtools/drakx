@@ -144,11 +144,13 @@ sub mount_part($;$$) {
 
     $part->{isMounted} and return;
 
-    if (isSwap($part)) {
-	swap::swapon($part->{device});
-    } else {
-	$part->{mntpoint} or die "missing mount point";
-	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly);
+    unless ($::testing) {
+	if (isSwap($part)) {
+	  swap::swapon($part->{device});
+	} else {
+	    $part->{mntpoint} or die "missing mount point";
+	    mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly);
+	}
     }
     $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
 }
@@ -158,9 +160,11 @@ sub umount_part($;$) {
 
     $part->{isMounted} or return;
 
-    isSwap($part) ?
-      swap::swapoff($part->{device}) :
-      umount(($prefix || '') . ($part->{mntpoint} || devices::make($part->{device})));
+    unless ($::testing) {
+	isSwap($part) ?
+	  swap::swapoff($part->{device}) :
+	  umount(($prefix || '') . ($part->{mntpoint} || devices::make($part->{device})));
+    }
     $part->{isMounted} = 0;
 }
 

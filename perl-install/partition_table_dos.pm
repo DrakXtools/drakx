@@ -8,6 +8,7 @@ use vars qw(@ISA);
 
 use common qw(:common :system :file);
 use partition_table_raw;
+use partition_table;
 use c;
 
 my @fields = qw(active start_head start_sec start_cyl type end_head end_sec end_cyl start size);
@@ -42,6 +43,14 @@ sub sector2CHS($$) {
     ($start, $h, $s + 1);
 }
 
+#- use default partition table adust functions.
+sub adjustStart($$) {
+    &partition_table::adjustStart;
+}
+sub adjustEnd($$) {
+    &partition_table::adjustEnd;
+}
+
 sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
@@ -67,8 +76,15 @@ sub read($$) {
 sub write($$$;$) {
     my ($hd, $sector, $pt) = @_;
 
-    local *F; partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
-    c::lseek_sector(fileno(F), $sector, $offset) or return 0;
+    #- handle testing for writing partition table on file only!
+    local *F;
+    if ($::testing) {
+	my $file = "/tmp/partition_table_$hd->{device}";
+	open F, ">$file" or die "error opening test file $file";
+    } else {
+	partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+        c::lseek_sector(fileno(F), $sector, $offset) or return 0;
+    }
 
     @$pt == $nb_primary or die "partition table does not have $nb_primary entries";
     foreach (@$pt) {

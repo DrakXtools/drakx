@@ -40,6 +40,9 @@ sub get_geometry($) {
 
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
 
+    #- handle this strange but necessary reduction of visible cylinders on sparc, assume 2 for instance.
+    $geom{total_cylinders} = $geom{cylinders}; $geom{cylinders} -= 2 if arch() =~ /^sparc/;
+
     { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
 }
 
@@ -55,7 +58,7 @@ sub kernel_read($) {
 sub zero_MBR($) {
     my ($hd) = @_;
 #    unless (ref($hd) =~ /partition_table/) {
-	my $type = arch() eq "alpha" ? "bsd" : arch() eq "sparc" ? "sun" : "dos";
+	my $type = arch() eq "alpha" ? "bsd" : arch() =~ /^sparc/ ? "sun" : "dos";
 	bless $hd, "partition_table_$type";
 #    }
     $hd->{isDirty} = $hd->{needKernelReread} = 1;

@@ -84,8 +84,14 @@ sub readProcPartitions {
     @parts;
 }
 
+#- get all normal partition including special ones as found on sparc.
 sub get_fstab(@) {
     map { partition_table::get_normal_parts($_) } @_;
+}
+
+#- get normal partition that should be visible for working on.
+sub get_visible_fstab(@) {
+    grep { $_ && !partition_table::isWholedisk($_) } get_fstab(@_);
 }
 
 sub free_space(@) {

@@ -686,14 +686,7 @@ failures. Would you like to create a bootdisk for your system?"),
 }
 
 #------------------------------------------------------------------------------
-sub setupBootloaderBefore {
-    my ($o) = @_;
-    my $w = $o->wait_message('', _("Preparing bootloader"));
-    $o->SUPER::setupBootloaderBefore($o);
-}
-
-#------------------------------------------------------------------------------
-sub setupBootloader {
+sub setupLILO {
     my ($o, $more) = @_;
     my $b = $o->{bootloader};
 
@@ -818,6 +811,131 @@ _("Default") => { val => \$default, type => 'bool' },
 		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
 	unlink "$o->{prefix}/tmp/.error";
 	die "already displayed";
+    }
+}
+
+#------------------------------------------------------------------------------
+sub setupSILO {
+    my ($o, $more) = @_;
+    my $b = $o->{bootloader};
+
+    #- assume this default parameters.
+    $b->{root} = "/dev/" . fsedit::get_root($o->{fstab})->{device};
+    $b->{partition} = ($b->{root} =~ /\D*(\d*)/)[0] || '1';
+
+    if ($::beginner && $more == 1) {
+	#- nothing more to do here.
+    } elsif ($more || !$::beginner) {
+	$o->set_help("setupBootloaderGeneral");
+
+	$::expert and $o->ask_yesorno('', _("Do you want to use SILO?"), 1) || return;
+
+	my @l = (
+_("Delay before booting default image") => \$b->{timeout},
+$o->{security} < 4 ? () : (
+_("Password") => { val => \$b->{password}, hidden => 1 },
+_("Password (again)") => { val => \$b->{password2}, hidden => 1 },
+_("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
+)
+	);
+
+	$o->ask_from_entries_refH('', _("SILO main options"), \@l,
+				 complete => sub {
+#-				     $o->{security} > 4 && length($b->{password}) < 6 and $o->ask_warn('', _("At this level of security, a password (and a good one) in silo is requested")), return 1;
+				     $b->{restricted} && !$b->{password} and $o->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
+				     $b->{password} eq $b->{password2} or !$b->{restricted} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return 1;
+				     0;
+				 }
+				) or return;
+    }
+
+    until ($::beginner && $more <= 1) {
+	$o->set_help('setupBootloaderAddEntry');
+	my $c = $o->ask_from_list_([''], 
+_("Here are the following entries in SILO.
+You can add some more or change the existing ones."),
+		[ (sort @{[map_each { "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}]}), __("Add"), __("Done") ],
+	);
+	$c eq "Done" and last;
+
+	my ($e, $name);
+
+	if ($c eq "Add") {
+	    my @labels = map { $_->{label} } values %{$b->{entries}};
+	    my $prefix;
+
+	    $e = { type => 'image' };
+	    $prefix = "linux";
+
+	    $e->{label} = $prefix;
+	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
+	} else {
+	    ($name) = $c =~ /\((.*?)\)/;
+	    $e = $b->{entries}{$name};
+	}
+	my $old_name = $name;
+	my %old_e = %$e;
+	my $default = my $old_default = $e->{label} eq $b->{default};
+	    
+	my @l;
+	if ($e->{type} eq "image") { 
+	    @l = (
+_("Image") => { val => \$name, list => [ eval { glob_("/boot/vmlinuz*") } ] },
+_("Partition") => { val => \$e->{partition}, list => [ map { ("/dev/$_->{device}" =~ /\D*(\d*)/)[0] || 1} @{$o->{fstab}} ], not_edit => !$::expert },
+_("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+_("Append") => \$e->{append},
+_("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("/boot/initrd*") } ] },
+_("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
+	    );
+	    @l = @l[0..7] unless $::expert;
+	} else {
+	    die "Other SILO entries not supported at the moment";
+	}
+	@l = (
+_("Label") => \$e->{label},
+@l,
+_("Default") => { val => \$default, type => 'bool' },
+	);
+
+	if ($o->ask_from_entries_refH($c eq "Add" ? '' : ['', _("Ok"), _("Remove entry")], 
+	    '', \@l,
+	    complete => sub {
+		$e->{label} or $o->ask_warn('', _("Empty label not allowed")), return 1;
+		member($e->{label}, map { $_->{label} } grep { $_ != $e } values %{$b->{entries}}) and $o->ask_warn('', _("This label is already in use")), return 1;
+			    $name ne $old_name && $b->{entries}{$name} and $o->ask_warn('', _("A entry %s already exists", $name)), return 1;
+			   }
+		)) {
+	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
+	    
+	    delete $b->{entries}{$old_name};
+	    $b->{entries}{$name} = $e;
+	} else {
+	    delete $b->{entries}{$old_name};	    
+	}
+    }
+    eval { $o->SUPER::setupBootloader };
+    if ($@) {
+	$o->ask_warn('', 
+		     [ _("Installation of SILO failed. The following error occured:"),
+		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
+	unlink "$o->{prefix}/tmp/.error";
+	die "already displayed";
+    }
+}
+
+#------------------------------------------------------------------------------
+sub setupBootloaderBefore {
+    my ($o) = @_;
+    my $w = $o->wait_message('', _("Preparing bootloader"));
+    $o->SUPER::setupBootloaderBefore($o);
+}
+
+#------------------------------------------------------------------------------
+sub setupBootloader {
+    if (arch() =~ /^sparc/) {
+	&setupSILO;
+    } else {
+	&setupLILO;
     }
 }
 

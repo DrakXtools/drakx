@@ -17,21 +17,9 @@ use log;
 
 my @mouses_fields = qw(nbuttons device MOUSETYPE XMOUSETYPE FULLNAME);
 my @mouses = (
-  [ 0, "none",  "none",         "Microsoft",      __("No Mouse") ],
-  [ 2, "ttyS",  "pnp",          "Auto",           __("Microsoft Rev 2.1A or higher (serial)") ],
-  [ 3, "ttyS",  "logim",        "MouseMan",       __("Logitech CC Series (serial)") ],
-  [ 5, "ttyS",  "pnp",          "IntelliMouse",   __("Logitech MouseMan+/FirstMouse+ (serial)") ],
-  [ 5, "ttyS",  "ms3",          "IntelliMouse",   __("ASCII MieMouse (serial)") ],
-  [ 5, "ttyS",  "ms3",          "IntelliMouse",   __("Genius NetMouse (serial)") ],
-  [ 5, "ttyS",  "ms3",          "IntelliMouse",   __("Microsoft IntelliMouse (serial)") ],
-  [ 2, "ttyS",  "MMSeries",     "MMSeries",       __("MM Series (serial)") ],
-  [ 2, "ttyS",  "MMHitTab",     "MMHittab",       __("MM HitTablet (serial)") ],
-  [ 3, "ttyS",  "Logitech",     "Logitech",       __("Logitech Mouse (serial, old C7 type)") ],
-  [ 3, "ttyS",  "MouseMan",     "MouseMan",       __("Logitech MouseMan/FirstMouse (serial)") ],
-  [ 2, "ttyS",  "Microsoft",    "Microsoft",  	  __("Generic Mouse (serial)") ],
-  [ 2, "ttyS",  "Microsoft",    "Microsoft",      __("Microsoft compatible (serial)") ],
-  [ 3, "ttyS",  "Microsoft",    "Microsoft",  	  __("Generic 3 Button Mouse (serial)") ],
-  [ 2, "ttyS",  "MouseSystems", "MouseSystems",   __("Mouse Systems (serial)") ],
+arch() =~ /^sparc/ ? (
+  [ 3, "sunmouse", "sun",       "sun",            __("Sun - Mouse") ],
+) : (
   [ 2, "psaux", "ps/2",         "PS/2",           __("Generic Mouse (PS/2)") ],
   [ 3, "psaux", "ps/2",         "PS/2",           __("Logitech MouseMan/FirstMouse (ps/2)") ],
   [ 3, "psaux", "ps/2",         "PS/2",           __("Generic 3 Button Mouse (PS/2)") ],
@@ -48,6 +36,22 @@ my @mouses = (
   [ 3, "logibm",   "Busmouse",  "BusMouse",       __("Logitech Bus Mouse") ],
   [ 2, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse") ],
   [ 3, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse (3 buttons or more)") ],
+),
+  [ 0, "none",  "none",         "Microsoft",      __("No Mouse") ],
+  [ 2, "ttyS",  "pnp",          "Auto",           __("Microsoft Rev 2.1A or higher (serial)") ],
+  [ 3, "ttyS",  "logim",        "MouseMan",       __("Logitech CC Series (serial)") ],
+  [ 5, "ttyS",  "pnp",          "IntelliMouse",   __("Logitech MouseMan+/FirstMouse+ (serial)") ],
+  [ 5, "ttyS",  "ms3",          "IntelliMouse",   __("ASCII MieMouse (serial)") ],
+  [ 5, "ttyS",  "ms3",          "IntelliMouse",   __("Genius NetMouse (serial)") ],
+  [ 5, "ttyS",  "ms3",          "IntelliMouse",   __("Microsoft IntelliMouse (serial)") ],
+  [ 2, "ttyS",  "MMSeries",     "MMSeries",       __("MM Series (serial)") ],
+  [ 2, "ttyS",  "MMHitTab",     "MMHittab",       __("MM HitTablet (serial)") ],
+  [ 3, "ttyS",  "Logitech",     "Logitech",       __("Logitech Mouse (serial, old C7 type)") ],
+  [ 3, "ttyS",  "MouseMan",     "MouseMan",       __("Logitech MouseMan/FirstMouse (serial)") ],
+  [ 2, "ttyS",  "Microsoft",    "Microsoft",  	  __("Generic Mouse (serial)") ],
+  [ 2, "ttyS",  "Microsoft",    "Microsoft",      __("Microsoft compatible (serial)") ],
+  [ 3, "ttyS",  "Microsoft",    "Microsoft",  	  __("Generic 3 Button Mouse (serial)") ],
+  [ 2, "ttyS",  "MouseSystems", "MouseSystems",   __("Mouse Systems (serial)") ],
 );
 map_index {
     my %l; @l{@mouses_fields} = @$_;
@@ -109,6 +113,8 @@ sub mouseconfig {
 }
 
 sub detect() {
+    return name2mouse("Sun - Mouse") if arch() =~ /^sparc/;
+
     detect_devices::hasMousePS2 and return name2mouse("Generic Mouse (PS/2)");
 
     eval { commands::modprobe("serial") };

@@ -564,17 +564,29 @@ sub createBootdisk($) {
 
     return if $::testing;
 
-    require lilo;
-    lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
-    $o->{mkbootdisk} = $dev;
+    if (arch() =~ /^sparc/) {
+	require silo;
+        silo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
+	$o->{mkbootdisk} = $dev;
+    } else {
+	require lilo;
+        lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev, $o->{bootloader}{perImageAppend});
+	$o->{mkbootdisk} = $dev;
+    }
 }
 
 #------------------------------------------------------------------------------
 sub readBootloaderConfigBeforeInstall {
     my ($o) = @_;
     my ($image, $v);
-    require lilo;
-    add2hash($o->{bootloader} ||= {}, lilo::read($o->{prefix}, "/etc/lilo.conf"));
+
+    if (arch() =~ /^sparc/) {
+	require silo;
+	add2hash($o->{bootloader} ||= {}, silo::read($o->{prefix}, "/etc/silo.conf"));
+    } else {
+	require lilo;
+	add2hash($o->{bootloader} ||= {}, lilo::read($o->{prefix}, "/etc/lilo.conf"));
+    }
 
     #- since kernel or kernel-smp may not be upgraded, it should be checked
     #- if there is a need to update existing lilo.conf entries by using that
@@ -602,15 +614,25 @@ sub readBootloaderConfigBeforeInstall {
 
 sub setupBootloaderBefore {
     my ($o) = @_;
-    require lilo;
-    lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
-    $o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
+    if (arch() =~ /^sparc/) {
+	require silo;
+        silo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+    } else {
+	require lilo;
+        lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
+    }
 }
 
 sub setupBootloader($) {
     my ($o) = @_;
     return if $::g_auto_install;
-    lilo::install($o->{prefix}, $o->{bootloader});
+
+    if (arch() =~ /^sparc/) {
+        silo::install($o->{prefix}, $o->{bootloader});
+    } else {
+        lilo::install($o->{prefix}, $o->{bootloader});
+    }
 }
 
 #------------------------------------------------------------------------------

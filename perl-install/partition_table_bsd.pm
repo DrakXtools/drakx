@@ -56,6 +56,14 @@ my $magic = 0x82564557;
 my $nb_primary = 8;
 my $offset = 0x40;
 
+#- use default partition table adust functions.
+sub adjustStart($$) {
+    &partition_table::adjustStart;
+}
+sub adjustEnd($$) {
+    &partition_table::adjustEnd;
+}
+
 sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
@@ -89,8 +97,15 @@ sub read($$) {
 sub write($$$;$) {
     my ($hd, $sector, $pt, $info) = @_;
 
-    local *F; partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
-    c::lseek_sector(fileno(F), $sector, $offset) or return 0;
+    #- handle testing for writing partition table on file only!
+    local *F;
+    if ($::testing) {
+	my $file = "/tmp/partition_table_$hd->{device}";
+	open F, ">$file" or die "error opening test file $file";
+    } else {
+	partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+        c::lseek_sector(fileno(F), $sector, $offset) or return 0;
+    }
 
     #- TODO compute checksum
 

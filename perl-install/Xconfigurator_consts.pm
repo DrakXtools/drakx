@@ -540,6 +540,45 @@ $keyboardsection_part2 = '
 #    XkbDisable
 ';
 
+if (arch() =~ /^sparc/) {
+    $keyboardsection_part3 = '
+# To customise the XKB settings to suit your keyboard, modify the
+# lines below (which are the defaults).  For example:
+#    XkbModel    "type6"
+# If you have a SUN keyboard, you may use:
+#    XkbModel    "sun"
+#
+# Then to change the language, change the Layout setting.
+# For example, a german layout can be obtained with:
+#    XkbLayout   "de"
+# or:
+#    XkbLayout   "de"
+#    XkbVariant  "nodeadkeys"
+#
+# If you\'d like to switch the positions of your capslock and
+# control keys, use:
+#    XkbOptions  "ctrl:swapcaps"
+
+# These are the default XKB settings for XFree86 on SUN:
+#    XkbRules    "sun"
+#    XkbModel    "type5_unix"
+#    XkbLayout   "us"
+#    XkbCompat   "compat/complete"
+#    XkbTypes    "types/complete"
+#    XkbKeycodes "sun(type5)"
+#    XkbGeometry "sun(type5)"
+#    XkbSymbols  "sun/us(sun5)"
+
+    XkbRules    "sun"
+    XkbModel    "sun"
+    XkbLayout   "us"
+    XkbCompat   "compat/complete"
+    XkbTypes    "types/complete"
+    XkbKeycodes "sun(type5)"
+    XkbGeometry "sun(type5)"
+    XkbSymbols  "sun/us(sun5)"
+';
+} else {
 $keyboardsection_part3 = '
 # To customise the XKB settings to suit your keyboard, modify the
 # lines below (which are the defaults).  For example, for a non-U.S.
@@ -574,6 +613,7 @@ $keyboardsection_part3 = '
     XkbRules        "xfree86"
     XkbModel        "pc101"
 ';
+}
 
 $keyboardsection_end = '
 EndSection

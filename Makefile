@@ -1,7 +1,13 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-BOOT_IMG = hd.img cdrom.img network.img network_ks.img pcmcia.img pcmcia_ks.img
+BOOT_IMG = hd.img cdrom.img network.img
+ifeq (i386,$(ARCH))
+BOOT_IMG += pcmcia.img pcmcia_ks.img network_ks.img
+endif
+ifeq (sparc,$(ARCH))
+BOOT_IMG += live.img tftp.img tftprd.img
+endif
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = install/install install/full-install install/local-install install/installinit/init
 DIRS = tools install install/installinit perl-install
@@ -21,27 +27,29 @@ AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 
 install: build autoboot
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
-	cp -f $(BOOT_IMG) $(ROOTDEST)/images ; rm $(ROOTDEST)/images/*_ks.img
+	cp -f $(BOOT_IMG) $(ROOTDEST)/images ; rm -f $(ROOTDEST)/images/*_ks.img
 	make -C perl-install full_stage2
 
 build: $(BOOT_IMG)
 
 autoboot:
+ifeq (i386,$(ARCH))
 	install -d $(AUTOBOOT)
 	cp -f vmlinuz $(AUTOBOOT)
 	cp -f hd.rdz $(AUTOBOOT)/initrd.hd
 	cp -f cdrom.rdz $(AUTOBOOT)/initrd.cd
 	cp -f pcmcia.rdz $(AUTOBOOT)/initrd.pc
 	cp -f network.rdz $(AUTOBOOT)/initrd.nt
+endif
 
 dirs:
 	for i in $(DIRS); do make -C $$i; done
 
 $(BOOT_RDZ): dirs modules
-	./make_boot_img $@ $(@:%.rdz=%)
+	`./tools/specific_arch ./make_boot_img` $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz
-	./make_boot_img $@ $(@:%.img=%)
+	`./tools/specific_arch ./make_boot_img` $@ $(@:%.img=%)
 
 tar: clean
 	rpm -qa > needed_rpms.lst
@@ -49,14 +57,14 @@ tar: clean
 	rm needed_rpms.lst
 
 modules: kernel/lib/modules
-	./update_kernel
+	`./tools/specific_arch ./update_kernel`
 
 $(BOOT_IMG:%=%f): %f: %
 	dd if=$< of=/dev/fd0
 	xmessage "Floppy done"
 
 clean:
-	rm -rf $(BOOT_IMG) $(BOOT_RDZ) $(BINS) modules install_pcmcia_modules vmlinuz System.map
+	rm -rf $(BOOT_IMG) $(BOOT_RDZ) $(BINS) modules install_pcmcia_modules vmlinu* System.map
 	rm -rf install/*/sbin/install install/*/sbin/init
 	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f

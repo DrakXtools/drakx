@@ -55,8 +55,9 @@ install_pms: $(DIRS)
 
 get_needed_files: $(DIRS)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
-	cp -f list /tmp/list
-	perl -pi -e "s/ARCH/$(ARCH)/" /tmp/list
+	cp -f `../tools/specific_arch list` /tmp/list
+#	cp -f list /tmp/list
+#	perl -pi -e "s/ARCH/$(ARCH)/" /tmp/list
 	find auto -follow -name "*.so" >> /tmp/list
 
 	for i in $(LOCALFILES) `cat /tmp/list` ; do \
@@ -75,6 +76,13 @@ get_needed_files: $(DIRS)
 	install -d $(ROOTDEST)/Mandrake/base
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 #	cp -f $(LOCALFILES2) $(DEST)/usr/bin
+ifeq (sparc,$(ARCH))
+	cp -a /usr/X11R6/lib/X11/xkb $(DEST)/usr/X11R6/lib/X11
+	rm -f $(DEST)/usr/X11R6/lib/X11/xkb/compiled
+	ln -s /tmp $(DEST)/usr/X11R6/lib/X11/xkb/compiled
+	ln -s /usr/X11R6/lib/X11 $(DEST)/usr/lib/X11
+	ln -s /usr/X11R6/lib/X11/xkb/xkbcomp $(DEST)/usr/bin/xkbcomp
+endif
 
 	for i in `cat /tmp/list`; do \
 		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
@@ -101,7 +109,7 @@ get_needed_files: $(DIRS)
 
 	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' aliases
 
-	tar xfy locales.tar.bz2 -C $(DEST)
+	tar xfy `../tools/specific_arch locales.tar.bz2` -C $(DEST)
 #	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
 #	DEST=$(DEST) perl -I. -MForMakefile -e 'xmodmap()'
 
@@ -128,7 +136,7 @@ get_needed_files: $(DIRS)
 	tar xyC $(DEST) -f ../install/install1_pcmcia.tar.bz2 ./etc/pcmcia
 
 full_stage2:
-	sudo rm -rf $(DEST)
+	rm -rf $(DEST)
 	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 
 	$(MAKE) stage2

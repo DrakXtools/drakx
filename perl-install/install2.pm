@@ -121,7 +121,7 @@ $o = $::o = {
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
-    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 }, #- , readonly => 0
+    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 }, #-, readonly => 0 },
 #-    security => 2,
   partitions => [
     { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
@@ -189,9 +189,10 @@ $o = $::o = {
 #-    display => "192.168.1.19:1",
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
-    base => [ qw(basesystem sed initscripts console-tools utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info initscripts isapnptools kernel less ldconfig logrotate losetup man mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec) ],
-    base_i386 => [ "lilo", "mkbootdisk" ],
-    base_alpha => [ "aboot" ],
+    base => [ qw(basesystem sed initscripts console-tools utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info initscripts kernel less ldconfig logrotate losetup man mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec) ],
+    base_i386 => [ "lilo", "mkbootdisk", "isapnptools" ],
+    base_alpha => [ "aboot", "isapnptools" ],
+    base_sparc => [ "silo", "mkbootdisk" ],
 
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
