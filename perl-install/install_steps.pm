@@ -584,7 +584,22 @@ sub configureNetwork {
     my ($o) = @_;
     require network;
     network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
-    $o->{netcnx} ||= 'lan';
+    if ($o->{method} eq "ftp" || $o->{method} eq "http" || $o->{method} eq "nfs") {
+	my $prefix = $o->{prefix};
+	my ($connect_file, $disconnect_file, $connect_prog) = 
+  ("/etc/sysconfig/network-scripts/net_cnx_up", "/etc/sysconfig/network-scripts/net_cnx_down", "/etc/sysconfig/network-scripts/net_cnx_pg");
+	$o->{netcnx}{type}='lan';
+	output "$prefix$connect_file",
+	  qq(
+ifup eth0
+);
+	output "$prefix$disconnect_file",
+	  qq(
+ifdown eth0
+);
+	chmod 0755, "$prefix$disconnect_file";
+	chmod 0755, "$prefix$connect_file";
+    }
 }
 
 #------------------------------------------------------------------------------
