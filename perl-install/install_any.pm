@@ -585,8 +585,8 @@ sub install_urpmi {
   with_hdlist: $with" . ($need_list ? "
   list: list.$name" : "") . (keys(%{$_->{key_ids}}) ? "
   key-ids: " . join(',', keys(%{$_->{key_ids}})) : "") . ($dir =~ /removable:/ && "
-  removable: /dev/cdrom") . "
-  update" . "
+  removable: /dev/cdrom") . ($_->{update} ? "
+  update" : ""). "
 }
 
 ";
