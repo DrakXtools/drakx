@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-09-27 14:34+0200\n"
+"POT-Creation-Date: 2000-09-28 14:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -449,7 +449,7 @@ msgstr ""
 msgid "LILO/grub Installation"
 msgstr ""
 
-#: ../../any.pm_.c:111 ../../install_steps_interactive.pm_.c:638
+#: ../../any.pm_.c:111 ../../install_steps_interactive.pm_.c:744
 msgid "None"
 msgstr ""
 
@@ -485,14 +485,15 @@ msgstr ""
 msgid "Delay before booting default image"
 msgstr ""
 
-#: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:666
-#: ../../install_steps_interactive.pm_.c:717 ../../printerdrake.pm_.c:94
-#: ../../printerdrake.pm_.c:128 ../../standalone/adduserdrake_.c:42
+#: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:772
+#: ../../install_steps_interactive.pm_.c:823 ../../netconnect.pm_.c:507
+#: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
+#: ../../standalone/adduserdrake_.c:42
 msgid "Password"
 msgstr ""
 
-#: ../../any.pm_.c:135 ../../install_steps_interactive.pm_.c:667
-#: ../../install_steps_interactive.pm_.c:718
+#: ../../any.pm_.c:135 ../../install_steps_interactive.pm_.c:773
+#: ../../install_steps_interactive.pm_.c:824
 #: ../../standalone/adduserdrake_.c:43
 msgid "Password (again)"
 msgstr ""
@@ -514,14 +515,14 @@ msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 
-#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:676
-#: ../../install_steps_interactive.pm_.c:731
+#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:782
+#: ../../install_steps_interactive.pm_.c:837
 #: ../../standalone/adduserdrake_.c:56
 msgid "Please try again"
 msgstr ""
 
-#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:676
-#: ../../install_steps_interactive.pm_.c:731
+#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:782
+#: ../../install_steps_interactive.pm_.c:837
 #: ../../standalone/adduserdrake_.c:56
 msgid "The passwords do not match"
 msgstr ""
@@ -538,8 +539,8 @@ msgid "Add"
 msgstr ""
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:45
-#: ../../install_steps_interactive.pm_.c:711 ../../printerdrake.pm_.c:353
-#: ../../standalone/adduserdrake_.c:36
+#: ../../install_steps_interactive.pm_.c:817 ../../netconnect.pm_.c:746
+#: ../../printerdrake.pm_.c:353 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr ""
 
@@ -595,8 +596,8 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: ../../any.pm_.c:220 ../../install_gtk.pm_.c:82
-#: ../../install_steps_interactive.pm_.c:664 ../../interactive.pm_.c:76
+#: ../../any.pm_.c:220 ../../install_gtk.pm_.c:81
+#: ../../install_steps_interactive.pm_.c:770 ../../interactive.pm_.c:76
 #: ../../interactive.pm_.c:86 ../../interactive.pm_.c:250
 #: ../../interactive_newt.pm_.c:51 ../../interactive_newt.pm_.c:99
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:243
@@ -632,12 +633,13 @@ msgid "Do you have any %s interfaces?"
 msgstr ""
 
 #: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:77 ../../printerdrake.pm_.c:234
+#: ../../netconnect.pm_.c:78 ../../netconnect.pm_.c:428
+#: ../../printerdrake.pm_.c:234
 msgid "No"
 msgstr ""
 
 #: ../../any.pm_.c:502 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:75
+#: ../../netconnect.pm_.c:76 ../../netconnect.pm_.c:426
 msgid "Yes"
 msgstr ""
 
@@ -942,7 +944,7 @@ msgstr ""
 
 #: ../../diskdrake.pm_.c:202 ../../install_steps.pm_.c:73
 #: ../../install_steps_interactive.pm_.c:38
-#: ../../install_steps_interactive.pm_.c:238 ../../standalone/diskdrake_.c:60
+#: ../../install_steps_interactive.pm_.c:341 ../../standalone/diskdrake_.c:60
 #: ../../standalone/rpmdrake_.c:294 ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr ""
@@ -1176,7 +1178,7 @@ msgstr ""
 msgid "Formatting loopback file %s"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:518 ../../install_steps_interactive.pm_.c:325
+#: ../../diskdrake.pm_.c:518 ../../install_steps_interactive.pm_.c:428
 #, c-format
 msgid "Formatting partition %s"
 msgstr ""
@@ -1227,7 +1229,7 @@ msgid "Computing FAT filesystem bounds"
 msgstr ""
 
 #: ../../diskdrake.pm_.c:568 ../../diskdrake.pm_.c:622
-#: ../../install_interactive.pm_.c:106
+#: ../../install_interactive.pm_.c:107
 msgid "Resizing"
 msgstr ""
 
@@ -1246,7 +1248,7 @@ msgstr ""
 
 #: ../../diskdrake.pm_.c:601 ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334
-#: ../../install_steps_interactive.pm_.c:426
+#: ../../install_steps_interactive.pm_.c:531
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr ""
@@ -1428,12 +1430,12 @@ msgid ""
 "installed or if you wish to use several operating systems.\n"
 "\n"
 "\n"
-"Please choose \"Rescue\" if you wish to rescue an already installed version "
+"Please choose \"Update\" if you wish to update an already installed version "
 "of Linux-Mandrake.\n"
 "\n"
 "\n"
 "Depend of your knowledge in GNU/Linux, you can choose one of the following "
-"levels to install or rescue your\n"
+"levels to install or update your\n"
 "Linux-Mandrake operating system:\n"
 "\n"
 "\t* Recommanded: if you have never installed a GNU/Linux operating system "
@@ -2424,7 +2426,7 @@ msgstr ""
 msgid "Choose your keyboard"
 msgstr ""
 
-#: ../../install2.pm_.c:45 ../../install_steps_interactive.pm_.c:420
+#: ../../install2.pm_.c:45 ../../install_steps_interactive.pm_.c:524
 msgid "Miscellaneous"
 msgstr ""
 
@@ -2460,8 +2462,8 @@ msgstr ""
 msgid "Configure printer"
 msgstr ""
 
-#: ../../install2.pm_.c:55 ../../install_steps_interactive.pm_.c:664
-#: ../../install_steps_interactive.pm_.c:665
+#: ../../install2.pm_.c:55 ../../install_steps_interactive.pm_.c:770
+#: ../../install_steps_interactive.pm_.c:771
 msgid "Set root password"
 msgstr ""
 
@@ -2493,15 +2495,15 @@ msgstr ""
 msgid "Error reading file $f"
 msgstr ""
 
-#: ../../install_gtk.pm_.c:428
+#: ../../install_gtk.pm_.c:427
 msgid "Please test the mouse"
 msgstr ""
 
-#: ../../install_gtk.pm_.c:429
+#: ../../install_gtk.pm_.c:428
 msgid "To activate the mouse,"
 msgstr ""
 
-#: ../../install_gtk.pm_.c:430
+#: ../../install_gtk.pm_.c:429
 msgid "MOVE YOUR WHEEL!"
 msgstr ""
 
@@ -2551,45 +2553,45 @@ msgid "Use the Windows partition for loopback"
 msgstr ""
 
 #: ../../install_interactive.pm_.c:90
-msgid "Which partition do you want to use to put Linux4Win?"
-msgstr ""
-
-#: ../../install_interactive.pm_.c:91
-msgid "Choose the sizes"
+msgid "Which partition do you want to use for Linux4Win?"
 msgstr ""
 
 #: ../../install_interactive.pm_.c:92
-msgid "Root partition size in MB: "
+msgid "Choose the sizes"
 msgstr ""
 
 #: ../../install_interactive.pm_.c:93
+msgid "Root partition size in MB: "
+msgstr ""
+
+#: ../../install_interactive.pm_.c:94
 msgid "Swap partition size in MB: "
 msgstr ""
 
-#: ../../install_interactive.pm_.c:101
+#: ../../install_interactive.pm_.c:102
 msgid "Use the free space on the Windows partition"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:104
+#: ../../install_interactive.pm_.c:105
 msgid "Which partition do you want to resize?"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:106
+#: ../../install_interactive.pm_.c:107
 msgid "Computing Windows filesystem bounds"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:108
+#: ../../install_interactive.pm_.c:109
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occured: %s"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:111
+#: ../../install_interactive.pm_.c:112
 msgid "Your Windows partition is too fragmented, please run ``defrag'' first"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:112
+#: ../../install_interactive.pm_.c:113
 msgid ""
 "WARNING!\n"
 "\n"
@@ -2600,56 +2602,56 @@ msgid ""
 "When sure, press Ok."
 msgstr ""
 
-#: ../../install_interactive.pm_.c:121
+#: ../../install_interactive.pm_.c:122
 msgid "Which size do you want to keep for windows on"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:122
+#: ../../install_interactive.pm_.c:123
 #, c-format
 msgid "partition %s"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:128
+#: ../../install_interactive.pm_.c:129
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:143
+#: ../../install_interactive.pm_.c:144
 msgid ""
 "There is no FAT partitions to resize or to use as loopback (or not enough "
 "space left)"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:148
+#: ../../install_interactive.pm_.c:150
 msgid "Erase entire disk"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:148
+#: ../../install_interactive.pm_.c:150
 msgid "Remove Windows(TM)"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:151
+#: ../../install_interactive.pm_.c:153
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:154
+#: ../../install_interactive.pm_.c:156
 #, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:162
+#: ../../install_interactive.pm_.c:164
 msgid "Expert mode"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:162
+#: ../../install_interactive.pm_.c:164
 msgid "Use diskdrake"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:166
+#: ../../install_interactive.pm_.c:168
 msgid "Use fdisk"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:169
+#: ../../install_interactive.pm_.c:171
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -2657,19 +2659,23 @@ msgid ""
 msgstr ""
 
 #: ../../install_interactive.pm_.c:202
+msgid "I can't find any room for installing"
+msgstr ""
+
+#: ../../install_interactive.pm_.c:205
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:207
+#: ../../install_interactive.pm_.c:210
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:222
+#: ../../install_interactive.pm_.c:225
 msgid "Bringing up the network"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:227
+#: ../../install_interactive.pm_.c:230
 msgid "Bringing down the network"
 msgstr ""
 
@@ -2715,69 +2721,69 @@ msgstr ""
 msgid "Total size: "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:352
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
 #: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:353
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
 #: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:259
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
 msgid "Choose the packages you want to install"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:262
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
 msgid "Info"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:267
-#: ../../install_steps_interactive.pm_.c:139 ../../standalone/rpmdrake_.c:161
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:242 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:465
-#: ../../install_steps_interactive.pm_.c:500
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:606
 msgid "Installing"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:471
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
 msgid "Please wait, "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:473
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
 msgid "Time remaining "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:474
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
 msgid "Total time "
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:483
-#: ../../install_steps_interactive.pm_.c:500
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:606
 msgid "Preparing installation"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:499
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
 #, c-format
 msgid "Installing package %s"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:541
-#: ../../install_steps_gtk.pm_.c:545
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:542
+#: ../../install_steps_gtk.pm_.c:546
 msgid "Go on anyway?"
 msgstr ""
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:541
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:542
 msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../../install_steps_graphical.pm_.c:577
-#: ../../install_steps_interactive.pm_.c:905
+#: ../../install_steps_interactive.pm_.c:1011
 msgid "Use existing configuration for X11?"
 msgstr ""
 
@@ -2793,13 +2799,13 @@ msgstr ""
 msgid "Please, choose one of the following classes of installation:"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:214
+#: ../../install_steps_gtk.pm_.c:215
 #, c-format
 msgid ""
 "The total size for the groups you have selected is approximately %d MB.\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:216
+#: ../../install_steps_gtk.pm_.c:217
 msgid ""
 "If you wish to install less than this size,\n"
 "select the percentage of packages that you want to install.\n"
@@ -2808,7 +2814,7 @@ msgid ""
 "a percentage of 100%% will install all selected packages."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:221
+#: ../../install_steps_gtk.pm_.c:222
 msgid ""
 "You have space on your disk for only %d%% of these packages.\n"
 "\n"
@@ -2818,101 +2824,101 @@ msgid ""
 "a percentage of %d%% will install as many packages as possible."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:227
+#: ../../install_steps_gtk.pm_.c:228
 msgid "You will be able to choose them more specifically in the next step."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:229
+#: ../../install_steps_gtk.pm_.c:230
 msgid "Percentage of packages to install"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:271
+#: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:331 ../../standalone/rpmdrake_.c:101
+#: ../../install_steps_gtk.pm_.c:332 ../../standalone/rpmdrake_.c:101
 msgid "Expand Tree"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:332 ../../standalone/rpmdrake_.c:102
+#: ../../install_steps_gtk.pm_.c:333 ../../standalone/rpmdrake_.c:102
 msgid "Collapse Tree"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:333
+#: ../../install_steps_gtk.pm_.c:334
 msgid "Toggle between flat and group sorted"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:350
+#: ../../install_steps_gtk.pm_.c:351
 msgid "Bad package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:351
+#: ../../install_steps_gtk.pm_.c:352
 #, c-format
 msgid "Name: %s\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:354
+#: ../../install_steps_gtk.pm_.c:355
 #, c-format
 msgid "Importance: %s\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:362
+#: ../../install_steps_gtk.pm_.c:363
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:381
+#: ../../install_steps_gtk.pm_.c:382
 msgid ""
 "You can't select this package as there is not enough space left to install it"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:385
+#: ../../install_steps_gtk.pm_.c:386
 msgid "The following packages are going to be installed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:386
+#: ../../install_steps_gtk.pm_.c:387
 msgid "The following packages are going to be removed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:396
+#: ../../install_steps_gtk.pm_.c:397
 msgid "You can't select/unselect this package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:415
+#: ../../install_steps_gtk.pm_.c:416
 msgid "This is a mandatory package, it can't be unselected"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:417
+#: ../../install_steps_gtk.pm_.c:418
 msgid "You can't unselect this package. It is already installed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:421
+#: ../../install_steps_gtk.pm_.c:422
 msgid ""
 "This package must be upgraded\n"
 "Are you sure you want to deselect it?"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:424
+#: ../../install_steps_gtk.pm_.c:425
 msgid "You can't unselect this package. It must be upgraded"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:468
+#: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:480 ../../interactive.pm_.c:86
+#: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
 #: ../../interactive_newt.pm_.c:99 ../../interactive_stdio.pm_.c:27
 #: ../../my_gtk.pm_.c:246 ../../my_gtk.pm_.c:486
 msgid "Cancel"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:494
+#: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:525
+#: ../../install_steps_gtk.pm_.c:526
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -2922,7 +2928,7 @@ msgid ""
 "If you don't have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:545
+#: ../../install_steps_gtk.pm_.c:546
 msgid "There was an error installing packages:"
 msgstr ""
 
@@ -2934,65 +2940,227 @@ msgstr ""
 msgid "Please, choose a language to use."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:72
+#: ../../install_steps_interactive.pm_.c:71
+msgid ""
+" Introduction\n"
+"\n"
+"The operating system and the different components available in the "
+"Linux-Mandrake distribution \n"
+"shall be called the \"Software Products\" hereafter. The Software Products "
+"include, but are not \n"
+"restricted to, the set of programs, methods, rules and documentation related "
+"to the operating \n"
+"system and the different components of the Linux-Mandrake distribution.\n"
+"\n"
+"\n"
+"1. License Agreement\n"
+"\n"
+"Please read carefully this document. This document is a license agreement "
+"between you and  \n"
+"MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France, which applies to "
+"the Software Products.\n"
+"By installing, duplicating or using the Software Products in any manner, you "
+"explicitly \n"
+"accept and fully agree to conform to the terms and conditions of this "
+"License. \n"
+"If you disagree with any portion of the License, you are not allowed to "
+"install, duplicate or use \n"
+"the Software Products. \n"
+"Any attempt to install, duplicate or use the Software Products in a manner "
+"which does not comply \n"
+"with the terms and conditions of this License is void and will terminate "
+"your rights under this \n"
+"License. Upon termination of the License,  you must immediately destroy all "
+"copies of the \n"
+"Software Products.\n"
+"\n"
+"\n"
+"2. The GPL License and Related Licenses\n"
+"\n"
+"The Software Products consist of components created by different persons or "
+"entities.  Most \n"
+"of these components are governed under the terms and conditions of the GNU "
+"General Public \n"
+"Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
+"licenses allow you to use, \n"
+"duplicate, adapt or redistribute the components which they cover. Please "
+"read carefully the terms \n"
+"and conditions of the license agreement for each component before using any "
+"component. Any question \n"
+"on a component license should be addressed to the component author and not "
+"to MandrakeSoft.\n"
+"The programs developed by MandrakeSoft S.A. are governed by the GPL License. "
+"Documentation written \n"
+"by MandrakeSoft S.A. is governed by a specific license. Please refer to the "
+"documentation for \n"
+"further details.\n"
+"Some versions of the Software Products may contain components which are not "
+"governed by the GPL \n"
+"License or similar agreements. Each such component is then governed by the "
+"terms and conditions \n"
+"of its own specific license. Please read carefully and comply with such "
+"specific licenses before \n"
+"you install, use or redistribute the said components. Such licenses will in "
+"general prevent the \n"
+"transfer,  duplication (except for backup purposes), redistribution, reverse "
+"engineering, \n"
+"de-assembly, \n"
+"de-compilation or modification of the component. Any breach of agreement "
+"will immediately terminate \n"
+"your rights under the specific license. Unless the specific license terms "
+"grant you such rights, \n"
+"you usually cannot install the programs on more than one system, or adapt it "
+"to be used on a \n"
+"network. \n"
+"In doubt, please contact directly the distributor or editor of the "
+"component. Transfer to third \n"
+"parties or copying of such components including the documentation is usually "
+"forbidden.\n"
+"\n"
+"\n"
+"3. Intellectual Property Rights\n"
+"\n"
+"All rights to the components of the Software Products belong to their "
+"respective authors and are \n"
+"protected by intellectual property and copyright laws applicable to software "
+"programs.\n"
+"MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
+"Products, as a whole or in \n"
+"parts,\n"
+"by all means and for all purposes.\n"
+"\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of "
+"MandrakeSoft S.A.  All rights \n"
+"are \n"
+"reserved. The duplication is forbidden without prior written consent by "
+"MandrakeSoft S.A.\n"
+"\n"
+"\n"
+"4. Limited Warranty\n"
+"\n"
+"The Software Products and attached documentation are provided \"as is\", "
+"with no warranty, to the \n"
+"extent permitted by law. Should the Software Products be defective, "
+"MandrakeSoft S.A. will at its \n"
+"own will either replace the Software Products, or reimburse the paid fee.\n"
+"This limited warranty is void if you fail to comply to the recommendations, "
+"instructions and \n"
+"conditions \n"
+"of use listed in the documentation or license agreements of the Software "
+"Products.\n"
+"To the extent permitted by law, MandrakeSoft S.A. will in no circumstances "
+"be liable for any \n"
+"special, \n"
+"incidental, direct or indirect damages whatsoever (including without "
+"limitation damages for loss of \n"
+"business, interruption of business, financial loss, legal fees and penalties "
+"resulting from a court \n"
+"judgement, or any other consequential loss) arising out of  the use or "
+"inability to use the \n"
+"Software \n"
+"Products, even if MandrakeSoft S.A. has been advised of the possibility or "
+"occurance of such \n"
+"damages.\n"
+"\n"
+"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+"COUNTRIES\n"
+"\n"
+"To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
+"in no circumstances, be \n"
+"liable for any special, incidental, direct or indirect damages whatsoever "
+"(including without \n"
+"limitation \n"
+"damages for loss of business, interruption of business, financial loss, "
+"legal fees and penalties \n"
+"resulting from a court judgement, or any other consequential loss) arising "
+"out of the possession \n"
+"and \n"
+"use of software components or arising out of  downloading software "
+"components from one of \n"
+"Linux-Mandrake \n"
+"sites  which are prohibited or restricted in some countries by local laws. "
+"This limited liability \n"
+"applies to, but is not restricted to, the strong cryptography components "
+"included in the Software \n"
+"Products.\n"
+"\n"
+"\n"
+"5. Governing Laws \n"
+"\n"
+"If any portion of this agreement is held void, illegal or inapplicable by a "
+"court judgement, this \n"
+"portion is excluded from this contract. You remain bound by the other "
+"applicable sections of the \n"
+"agreement.\n"
+"The terms and conditions of this License are governed by the Laws of "
+"France.\n"
+"All disputes on the terms of this license will preferably be settled out of "
+"court. As a last \n"
+"resort, \n"
+"the dispute will be referred to the appropriate Courts of Law of Paris - "
+"France.\n"
+"For any question on this document, please contact MandrakeSoft S.A.,  \n"
+"42, rue d'Aboukir, 75002 Paris - France\n"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:173
 msgid "Accept"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:72
+#: ../../install_steps_interactive.pm_.c:173
 msgid "Refuse"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:180
 #: ../../standalone/keyboarddrake_.c:21
 msgid "Keyboard"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:80
+#: ../../install_steps_interactive.pm_.c:181
 #: ../../standalone/keyboarddrake_.c:22
 msgid "Please, choose your keyboard layout."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:91
+#: ../../install_steps_interactive.pm_.c:192
 msgid "You can choose other languages that will be available after install"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:98
-#: ../../install_steps_interactive.pm_.c:428
+#: ../../install_steps_interactive.pm_.c:199
+#: ../../install_steps_interactive.pm_.c:533
 msgid "All"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:106
-#: ../../install_steps_interactive.pm_.c:150
+#: ../../install_steps_interactive.pm_.c:207
+#: ../../install_steps_interactive.pm_.c:253
 msgid "Install Class"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:106
+#: ../../install_steps_interactive.pm_.c:207
 msgid "Which installation class do you want?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:108
-msgid "Install/Rescue"
+#: ../../install_steps_interactive.pm_.c:209
+msgid "Install/Update"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:108
-msgid "Is this an install or a rescue?"
+#: ../../install_steps_interactive.pm_.c:209
+msgid "Is this an install or an update?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:117
+#: ../../install_steps_interactive.pm_.c:218
 msgid "Recommended"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:119
-#: ../../install_steps_interactive.pm_.c:134
+#: ../../install_steps_interactive.pm_.c:221
+#: ../../install_steps_interactive.pm_.c:237
 msgid "Customized"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:120
-#: ../../install_steps_interactive.pm_.c:134
+#: ../../install_steps_interactive.pm_.c:222
+#: ../../install_steps_interactive.pm_.c:237
 msgid "Expert"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:129
+#: ../../install_steps_interactive.pm_.c:232
 msgid ""
 "Are you sure you are an expert? \n"
 "You will be allowed to make powerful but dangerous things here.\n"
@@ -3001,67 +3169,67 @@ msgid ""
 "are you ready to answer that kind of questions?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:139
-msgid "Rescue"
+#: ../../install_steps_interactive.pm_.c:242
+msgid "Update"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:145
+#: ../../install_steps_interactive.pm_.c:248
 msgid "Workstation"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:146
+#: ../../install_steps_interactive.pm_.c:249
 msgid "Development"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:147
+#: ../../install_steps_interactive.pm_.c:250
 msgid "Server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:151
+#: ../../install_steps_interactive.pm_.c:254
 msgid "What is your system used for?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:167 ../../standalone/mousedrake_.c:24
+#: ../../install_steps_interactive.pm_.c:270 ../../standalone/mousedrake_.c:24
 msgid "Please, choose the type of your mouse."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:174 ../../standalone/mousedrake_.c:40
+#: ../../install_steps_interactive.pm_.c:277 ../../standalone/mousedrake_.c:40
 msgid "Mouse Port"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:175
+#: ../../install_steps_interactive.pm_.c:278
 msgid "Please choose on which serial port your mouse is connected to."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:194
+#: ../../install_steps_interactive.pm_.c:297
 msgid "Configuring PCMCIA cards..."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:194
+#: ../../install_steps_interactive.pm_.c:297
 msgid "PCMCIA"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:198
+#: ../../install_steps_interactive.pm_.c:301
 msgid "Configuring IDE"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:198
+#: ../../install_steps_interactive.pm_.c:301
 msgid "IDE"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:211
+#: ../../install_steps_interactive.pm_.c:314
 msgid "no available partitions"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:214
+#: ../../install_steps_interactive.pm_.c:317
 msgid "Scanning partitions to find mount points"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:222
+#: ../../install_steps_interactive.pm_.c:325
 msgid "Choose the mount points"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:239
+#: ../../install_steps_interactive.pm_.c:342
 #, c-format
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
@@ -3072,115 +3240,115 @@ msgid ""
 "Do you agree to loose all the partitions?\n"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:252
+#: ../../install_steps_interactive.pm_.c:355
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:260
+#: ../../install_steps_interactive.pm_.c:363
 msgid "Root Partition"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:261
+#: ../../install_steps_interactive.pm_.c:364
 msgid "What is the root partition (/) of your system?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:275
+#: ../../install_steps_interactive.pm_.c:378
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:299
+#: ../../install_steps_interactive.pm_.c:402
 msgid "Choose the partitions you want to format"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:309
+#: ../../install_steps_interactive.pm_.c:412
 msgid "Check bad blocks?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:320
+#: ../../install_steps_interactive.pm_.c:423
 msgid "Formatting partitions"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:324
+#: ../../install_steps_interactive.pm_.c:427
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:327
+#: ../../install_steps_interactive.pm_.c:430
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:333
+#: ../../install_steps_interactive.pm_.c:436
 msgid "Looking for available packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:339
+#: ../../install_steps_interactive.pm_.c:442
 msgid "Finding packages to upgrade"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:356
+#: ../../install_steps_interactive.pm_.c:459
 #, c-format
 msgid ""
 "Your system has not enough space left for installation or upgrade (%d > %d)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:378
-#: ../../install_steps_interactive.pm_.c:383
+#: ../../install_steps_interactive.pm_.c:481
+#: ../../install_steps_interactive.pm_.c:486
 #, c-format
 msgid "Complete (%dMB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:378
+#: ../../install_steps_interactive.pm_.c:481
 msgid "Custom"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:378
-#: ../../install_steps_interactive.pm_.c:383
+#: ../../install_steps_interactive.pm_.c:481
+#: ../../install_steps_interactive.pm_.c:486
 #, c-format
 msgid "Minimum (%dMB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:383
+#: ../../install_steps_interactive.pm_.c:486
 #, c-format
 msgid "Recommended (%dMB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:388
+#: ../../install_steps_interactive.pm_.c:491
 msgid "Select the size you want to install"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:422
+#: ../../install_steps_interactive.pm_.c:526
 msgid "Package Group Selection"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:429
+#: ../../install_steps_interactive.pm_.c:534
 msgid "Individual package selection"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:476
+#: ../../install_steps_interactive.pm_.c:582
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:481
+#: ../../install_steps_interactive.pm_.c:587
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:509
+#: ../../install_steps_interactive.pm_.c:615
 msgid ""
 "Installing package %s\n"
 "%d%%"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:518
+#: ../../install_steps_interactive.pm_.c:624
 msgid "Post-install configuration"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:543
+#: ../../install_steps_interactive.pm_.c:649
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -3219,92 +3387,92 @@ msgid ""
 "USA"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:574
+#: ../../install_steps_interactive.pm_.c:680
 msgid "Choose a mirror from which to get the packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:582
+#: ../../install_steps_interactive.pm_.c:688
 msgid "Contacting the mirror to get the list of available packages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:585
+#: ../../install_steps_interactive.pm_.c:691
 msgid "Please choose the packages you want to install."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:597
+#: ../../install_steps_interactive.pm_.c:703
 msgid "Which is your timezone?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:599
+#: ../../install_steps_interactive.pm_.c:705
 msgid "Is your hardware clock set to GMT?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:637
+#: ../../install_steps_interactive.pm_.c:743
 msgid "Which printing system do you want to use?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:664
+#: ../../install_steps_interactive.pm_.c:770
 msgid "No password"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:669
+#: ../../install_steps_interactive.pm_.c:775
 msgid "Use shadow file"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:669
+#: ../../install_steps_interactive.pm_.c:775
 msgid "shadow"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:670
+#: ../../install_steps_interactive.pm_.c:776
 msgid "MD5"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:670
+#: ../../install_steps_interactive.pm_.c:776
 msgid "Use MD5 passwords"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:672
+#: ../../install_steps_interactive.pm_.c:778
 msgid "Use NIS"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:672
+#: ../../install_steps_interactive.pm_.c:778
 msgid "yellow pages"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:678
+#: ../../install_steps_interactive.pm_.c:784
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:685
+#: ../../install_steps_interactive.pm_.c:791
 msgid "Authentification NIS"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:686
+#: ../../install_steps_interactive.pm_.c:792
 msgid "NIS Domain"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:686
+#: ../../install_steps_interactive.pm_.c:792
 msgid "NIS Server"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:711
+#: ../../install_steps_interactive.pm_.c:817
 #: ../../standalone/adduserdrake_.c:36
 msgid "Accept user"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:711
+#: ../../install_steps_interactive.pm_.c:817
 #: ../../standalone/adduserdrake_.c:36
 msgid "Add user"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:712
+#: ../../install_steps_interactive.pm_.c:818
 #: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid "(already added %s)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:712
+#: ../../install_steps_interactive.pm_.c:818
 #: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid ""
@@ -3312,48 +3480,48 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:714
+#: ../../install_steps_interactive.pm_.c:820
 #: ../../standalone/adduserdrake_.c:39
 msgid "Real name"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:715 ../../printerdrake.pm_.c:93
+#: ../../install_steps_interactive.pm_.c:821 ../../printerdrake.pm_.c:93
 #: ../../printerdrake.pm_.c:127 ../../standalone/adduserdrake_.c:40
 msgid "User name"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:720
+#: ../../install_steps_interactive.pm_.c:826
 #: ../../standalone/adduserdrake_.c:45
 msgid "Shell"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:722
+#: ../../install_steps_interactive.pm_.c:828
 #: ../../standalone/adduserdrake_.c:47
 msgid "Icon"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:732
+#: ../../install_steps_interactive.pm_.c:838
 #: ../../standalone/adduserdrake_.c:57
 msgid "This password is too simple"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:733
+#: ../../install_steps_interactive.pm_.c:839
 #: ../../standalone/adduserdrake_.c:58
 msgid "Please give a user name"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:734
+#: ../../install_steps_interactive.pm_.c:840
 #: ../../standalone/adduserdrake_.c:59
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:735
+#: ../../install_steps_interactive.pm_.c:841
 #: ../../standalone/adduserdrake_.c:60
 msgid "This user name is already added"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:759
+#: ../../install_steps_interactive.pm_.c:865
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -3371,19 +3539,19 @@ msgid ""
 "drive and press \"Ok\"."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:775
+#: ../../install_steps_interactive.pm_.c:881
 msgid "First floppy drive"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:776
+#: ../../install_steps_interactive.pm_.c:882
 msgid "Second floppy drive"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:777
+#: ../../install_steps_interactive.pm_.c:883
 msgid "Skip"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:782
+#: ../../install_steps_interactive.pm_.c:888
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -3397,111 +3565,111 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:791
+#: ../../install_steps_interactive.pm_.c:897
 msgid "Sorry, no floppy drive available"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:794
+#: ../../install_steps_interactive.pm_.c:900
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:800
+#: ../../install_steps_interactive.pm_.c:906
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:803
+#: ../../install_steps_interactive.pm_.c:909
 msgid "Creating bootdisk"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:810
+#: ../../install_steps_interactive.pm_.c:916
 msgid "Preparing bootloader"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:819
+#: ../../install_steps_interactive.pm_.c:925
 msgid "Do you want to use aboot?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:822
+#: ../../install_steps_interactive.pm_.c:928
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:831
+#: ../../install_steps_interactive.pm_.c:937
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:845 ../../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:951 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:846 ../../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:952 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:847 ../../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:953 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:848 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:954 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:849 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:955 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:850 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:956 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:864
+#: ../../install_steps_interactive.pm_.c:970
 msgid "Miscellaneous questions"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:865
+#: ../../install_steps_interactive.pm_.c:971
 msgid "(may cause data corruption)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:865
+#: ../../install_steps_interactive.pm_.c:971
 msgid "Use hard drive optimisations?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:866 ../../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:972 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:867
+#: ../../install_steps_interactive.pm_.c:973
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:869
+#: ../../install_steps_interactive.pm_.c:975
 msgid "Removable media automounting"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:871
+#: ../../install_steps_interactive.pm_.c:977
 msgid "Clean /tmp at each boot"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:874
+#: ../../install_steps_interactive.pm_.c:980
 msgid "Enable multi profiles"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:876
+#: ../../install_steps_interactive.pm_.c:982
 msgid "Enable num lock at startup"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:879
+#: ../../install_steps_interactive.pm_.c:985
 msgid "Give the ram size in MB"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:881
+#: ../../install_steps_interactive.pm_.c:987
 msgid "Can't use supermount in high security level"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:883
+#: ../../install_steps_interactive.pm_.c:989
 msgid ""
 "beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
 "If you want to be root, you have to login as a user and then use \"su\".\n"
@@ -3510,22 +3678,22 @@ msgid ""
 "You have been warned."
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:888
+#: ../../install_steps_interactive.pm_.c:994
 msgid ""
 "Be carefull, having numlock enabled causes a lot of keystrokes to\n"
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:934
+#: ../../install_steps_interactive.pm_.c:1040
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:936
+#: ../../install_steps_interactive.pm_.c:1042
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm_.c:951
+#: ../../install_steps_interactive.pm_.c:1057
 msgid "Creating auto install floppy"
 msgstr ""
 
@@ -3904,149 +4072,149 @@ msgstr ""
 msgid "Is this correct?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:80
+#: ../../netconnect.pm_.c:81
 msgid "Internet configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:81
+#: ../../netconnect.pm_.c:82
 msgid "Do you want to try to connect to the internet now?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:116 ../../netconnect.pm_.c:190
-#: ../../netconnect.pm_.c:209 ../../netconnect.pm_.c:221
-#: ../../netconnect.pm_.c:233
+#: ../../netconnect.pm_.c:117 ../../netconnect.pm_.c:191
+#: ../../netconnect.pm_.c:210 ../../netconnect.pm_.c:222
+#: ../../netconnect.pm_.c:234
 msgid "ISDN Configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:116
+#: ../../netconnect.pm_.c:117
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
 msgstr ""
 
-#: ../../netconnect.pm_.c:133
+#: ../../netconnect.pm_.c:134
 msgid "Connection Configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:134
+#: ../../netconnect.pm_.c:135
 msgid "Please fill or check the field below"
 msgstr ""
 
-#: ../../netconnect.pm_.c:136
+#: ../../netconnect.pm_.c:137
 msgid "Card IRQ"
 msgstr ""
 
-#: ../../netconnect.pm_.c:137
+#: ../../netconnect.pm_.c:138
 msgid "Card mem (DMA)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:138
+#: ../../netconnect.pm_.c:139
 msgid "Card IO"
 msgstr ""
 
-#: ../../netconnect.pm_.c:139
+#: ../../netconnect.pm_.c:140
 msgid "Card IO_0"
 msgstr ""
 
-#: ../../netconnect.pm_.c:140
+#: ../../netconnect.pm_.c:141
 msgid "Card IO_1"
 msgstr ""
 
-#: ../../netconnect.pm_.c:141
+#: ../../netconnect.pm_.c:142
 msgid "Your personnal phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:143
+#: ../../netconnect.pm_.c:144
 msgid "Provider name (ex provider.net)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:144
+#: ../../netconnect.pm_.c:145
 msgid "Provider phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:145
+#: ../../netconnect.pm_.c:146
 msgid "Provider dns 1"
 msgstr ""
 
-#: ../../netconnect.pm_.c:146
+#: ../../netconnect.pm_.c:147
 msgid "Provider dns 2"
 msgstr ""
 
-#: ../../netconnect.pm_.c:147
+#: ../../netconnect.pm_.c:148
 msgid "Dialing mode"
 msgstr ""
 
-#: ../../netconnect.pm_.c:148
+#: ../../netconnect.pm_.c:149
 msgid ""
 "Time (secs) of inactivity after which\n"
 "it hangs up. (leave blank to disable it)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:149
+#: ../../netconnect.pm_.c:150
 msgid "Account Login (user name)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:150
+#: ../../netconnect.pm_.c:151
 msgid "Account Password"
 msgstr ""
 
-#: ../../netconnect.pm_.c:151
+#: ../../netconnect.pm_.c:152
 msgid "Confirm Password"
 msgstr ""
 
-#: ../../netconnect.pm_.c:183
+#: ../../netconnect.pm_.c:184
 msgid "Germany"
 msgstr ""
 
-#: ../../netconnect.pm_.c:183
+#: ../../netconnect.pm_.c:184
 msgid "Germany (1TR6)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:185
+#: ../../netconnect.pm_.c:186
 msgid "Europe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:185
+#: ../../netconnect.pm_.c:186
 msgid "Europe (EDSS1)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:187
+#: ../../netconnect.pm_.c:188
 msgid "Rest of the world"
 msgstr ""
 
-#: ../../netconnect.pm_.c:187
+#: ../../netconnect.pm_.c:188
 msgid "Rest of the world - no D-Channel (leased lines)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:191
+#: ../../netconnect.pm_.c:192
 msgid "Which protocol do you want to use ?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:201
+#: ../../netconnect.pm_.c:202
 msgid "ISA / PCMCIA"
 msgstr ""
 
-#: ../../netconnect.pm_.c:203
+#: ../../netconnect.pm_.c:204
 msgid "PCI"
 msgstr ""
 
-#: ../../netconnect.pm_.c:205
+#: ../../netconnect.pm_.c:206
 msgid "I don't know"
 msgstr ""
 
-#: ../../netconnect.pm_.c:210
+#: ../../netconnect.pm_.c:211
 msgid "What kind of card do you have?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:216
+#: ../../netconnect.pm_.c:217
 msgid "Continue"
 msgstr ""
 
-#: ../../netconnect.pm_.c:218
+#: ../../netconnect.pm_.c:219
 msgid "Abort"
 msgstr ""
 
-#: ../../netconnect.pm_.c:222
+#: ../../netconnect.pm_.c:223
 msgid ""
 "\n"
 "If you have an ISA card, the values on the next screen should be right.\n"
@@ -4054,25 +4222,243 @@ msgid ""
 "If you have a PCMCIA card, you have to know the irq and io of your card.\n"
 msgstr ""
 
-#: ../../netconnect.pm_.c:234
+#: ../../netconnect.pm_.c:235
 msgid "Which is your ISDN card ?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:258
+#: ../../netconnect.pm_.c:259
 msgid "I have found an ISDN Card:\n"
 msgstr ""
 
-#: ../../netconnect.pm_.c:264
+#: ../../netconnect.pm_.c:265
 msgid ""
 "I have detected an ISDN PCI Card, but I don't know the type. Please select "
 "one PCI card on the next screen."
 msgstr ""
 
-#: ../../netconnect.pm_.c:274
+#: ../../netconnect.pm_.c:275
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr ""
 
-#: ../../netconnect.pm_.c:747
+#: ../../netconnect.pm_.c:306
+msgid ""
+"No ethernet network adapter has been detected on your system.\n"
+"I cannot set up this connection type."
+msgstr ""
+
+#: ../../netconnect.pm_.c:310 ../../standalone/drakgw_.c:222
+msgid "Choose the network interface"
+msgstr ""
+
+#: ../../netconnect.pm_.c:311
+msgid ""
+"Please choose which network adapter you want to use to connect to internet"
+msgstr ""
+
+#: ../../netconnect.pm_.c:327 ../../netconnect.pm_.c:560
+#: ../../netconnect.pm_.c:685 ../../standalone/drakgw_.c:217
+msgid "Network interface"
+msgstr ""
+
+#: ../../netconnect.pm_.c:328
+msgid "I'm about to restart the network device $device. Do you agree?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:431
+msgid "ADSL configuration"
+msgstr ""
+
+#: ../../netconnect.pm_.c:432
+msgid "Do you want to start your connection at boot?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:488
+msgid "Try to find a modem?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:498
+msgid "Please choose which serial port your modem is connected to."
+msgstr ""
+
+#: ../../netconnect.pm_.c:503
+msgid "Dialup options"
+msgstr ""
+
+#: ../../netconnect.pm_.c:504
+msgid "Connection name"
+msgstr ""
+
+#: ../../netconnect.pm_.c:505
+msgid "Phone number"
+msgstr ""
+
+#: ../../netconnect.pm_.c:506
+msgid "Login ID"
+msgstr ""
+
+#: ../../netconnect.pm_.c:508
+msgid "Authentication"
+msgstr ""
+
+#: ../../netconnect.pm_.c:508
+msgid "PAP"
+msgstr ""
+
+#: ../../netconnect.pm_.c:508
+msgid "Script-based"
+msgstr ""
+
+#: ../../netconnect.pm_.c:508
+msgid "Terminal-based"
+msgstr ""
+
+#: ../../netconnect.pm_.c:509
+msgid "Domain name"
+msgstr ""
+
+#: ../../netconnect.pm_.c:511
+msgid "First DNS Server"
+msgstr ""
+
+#: ../../netconnect.pm_.c:512
+msgid "Second DNS Server"
+msgstr ""
+
+#: ../../netconnect.pm_.c:536
+msgid "Connect to internet"
+msgstr ""
+
+#: ../../netconnect.pm_.c:538
+msgid "Disconnect from internet"
+msgstr ""
+
+#: ../../netconnect.pm_.c:540
+msgid "Configure internet connection"
+msgstr ""
+
+#: ../../netconnect.pm_.c:543
+msgid "Internet connection & configuration"
+msgstr ""
+
+#: ../../netconnect.pm_.c:544
+msgid "What do you wish to do?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:561 ../../netconnect.pm_.c:686
+msgid ""
+"I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:575
+msgid "Connect to internet with a normal modem"
+msgstr ""
+
+#: ../../netconnect.pm_.c:593
+msgid "Connect to internet using ISDN"
+msgstr ""
+
+#: ../../netconnect.pm_.c:598
+msgid "Internal ISDN card"
+msgstr ""
+
+#: ../../netconnect.pm_.c:600
+msgid "External ISDN modem"
+msgstr ""
+
+#: ../../netconnect.pm_.c:603 ../../netconnect.pm_.c:636
+#: ../../netconnect.pm_.c:648 ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:719
+msgid "Connect to the Internet"
+msgstr ""
+
+#: ../../netconnect.pm_.c:604
+msgid "What kind is your ISDN connection?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:622
+msgid "Connect to internet using DSL (or ADSL)"
+msgstr ""
+
+#: ../../netconnect.pm_.c:631
+msgid "France"
+msgstr ""
+
+#: ../../netconnect.pm_.c:633
+msgid "Other countries"
+msgstr ""
+
+#: ../../netconnect.pm_.c:637
+msgid "In which country are you located ?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:643
+msgid "Alcatel modem"
+msgstr ""
+
+#: ../../netconnect.pm_.c:645
+msgid "ECI modem"
+msgstr ""
+
+#: ../../netconnect.pm_.c:649
+msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
+msgstr ""
+
+#: ../../netconnect.pm_.c:667
+msgid "use pppoe"
+msgstr ""
+
+#: ../../netconnect.pm_.c:669
+msgid "don't use pppoe"
+msgstr ""
+
+#: ../../netconnect.pm_.c:673
+msgid ""
+"The most common way to connect with adsl is dhcp + pppoe.\n"
+"However, it exists some connection that only use dhcp.\n"
+"If you don't know, choose 'use pppoe'"
+msgstr ""
+
+#: ../../netconnect.pm_.c:696
+msgid "Connect to internet using Cable"
+msgstr ""
+
+#: ../../netconnect.pm_.c:720
+msgid ""
+"Which dhcp client do you want to use?\n"
+"Default is dhcpd"
+msgstr ""
+
+#: ../../netconnect.pm_.c:733
+msgid "Configure local network"
+msgstr ""
+
+#: ../../netconnect.pm_.c:733
+msgid "Reconfigure local network"
+msgstr ""
+
+#: ../../netconnect.pm_.c:740
+msgid "Disable networking"
+msgstr ""
+
+#: ../../netconnect.pm_.c:750
+msgid "Connect to the Internet / Configure local Network"
+msgstr ""
+
+#: ../../netconnect.pm_.c:751
+msgid ""
+"Local networking has already been configured.\n"
+"Do you want to:"
+msgstr ""
+
+#: ../../netconnect.pm_.c:752
+msgid "How do you want to connect to the Internet?"
+msgstr ""
+
+#: ../../netconnect.pm_.c:769
+msgid "Network Configuration"
+msgstr ""
+
+#: ../../netconnect.pm_.c:770
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -4834,10 +5220,6 @@ msgid ""
 "hardware configuration tool."
 msgstr ""
 
-#: ../../standalone/drakgw_.c:217
-msgid "Network interface"
-msgstr ""
-
 #: ../../standalone/drakgw_.c:218
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -4845,10 +5227,6 @@ msgid ""
 "$interface\n"
 "\n"
 "Would you like to setup your Local Area Network with that adapter?"
-msgstr ""
-
-#: ../../standalone/drakgw_.c:222
-msgid "Choose the network interface"
 msgstr ""
 
 #: ../../standalone/drakgw_.c:223
