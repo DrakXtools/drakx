@@ -30,17 +30,21 @@ use fs;
 
 #- package that have to be copied for proper installation (just to avoid changing cdrom)
 #- here XFree86 is copied entirey if not already installed, maybe better to copy only server.
+#- considered obsoletes :
+#- XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 
+#- XFree86-W32 XFree86-I128 XFree86-VGA16 XFree86-3DLabs 
 @needToCopy = qw(
-XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
-XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
-XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs XFree86-FBDev XFree86-server
+XFree86-Mach64 XFree86-S3 XFree86-S3V XFree86-SVGA 
+XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-FBDev XFree86-server
 XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
 dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
-rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils autologin
+autologin
+foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
+cups xpp qtcups kups cups-drivers lpr LPRng pdq ImageMagick
 );
 #- package that have to be copied only if all their requires are satisfied.
 @needToCopyIfRequiresSatisfied = qw(
-Mesa-common xpp libqtcups2 qtcups kups
+Mesa-common
 );
 
 #- boot medium (the first medium to take into account).
