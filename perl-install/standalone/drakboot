@@ -311,12 +311,12 @@ gtkflush();
 $w->main;
 $in->exit(0);
 
-sub lilo_choice {
+sub lilo_choice() {
     my $bootloader = bootloader::read(); 
     
     my ($all_hds) = fsedit::get_hds();
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
-    fs::merge_info_from_fstab($fstab);
+    fs::merge_info_from_fstab($fstab, '', 0, undef);
 
     $::expert=1;
     
@@ -338,7 +338,7 @@ sub lilo_choice {
 # launch autologin functions
 #-------------------------------------------------------------
 
-sub updateAutologin {
+sub updateAutologin() {
     my ($usern, $deskt) = ($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
     if ($auto_buttons[0]->get_active()) {
         $in->do_pkgs->install('autologin') if $x_mode;
