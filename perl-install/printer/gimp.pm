@@ -180,7 +180,7 @@ sub makeprinterentry {
 	# GhostScript + Foomatic driver
 	$gimpprintqueue = 1;
 	$ppd =~
-	    /'idx'\s*=>\s*'ev\/gimp-print-((escp2|pcl|bjc|lexmark)\-\S*)'/im;
+	    /\-sModel=((escp2|pcl|bjc|lexmark)\-[^\s\"\']*)/im;
 	$gimpprintdriver = $1;
     }
     if ($gimpprintqueue) {
@@ -260,6 +260,7 @@ sub addentry {
     my $sectionfound = 0;
     my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
+    while ($lines[-1] !~ /\S/) { pop @lines; }
     foreach (@lines) {
 	if (!$sectionfound) {
 	    $sectionfound = 1 if /^\s*Printer\s*:\s*($section)\s*$/;
@@ -272,23 +273,25 @@ sub addentry {
 	}
     }
     push(@lines, $entry) if $sectionfound && !$entryinserted;
-    return join("\n", @lines);
+    return join("\n", @lines) . "\n";
 }
 
 sub addprinter {
     my ($section, $filecontent) = @_;
     my @lines = split("\n", $filecontent);
+    while ($lines[-1] !~ /\S/) { pop @lines; }
     foreach (@lines) {
      # section already there, nothing to be done
      return $filecontent if /^\s*Printer\s*:\s*($section)\s*$/;
     }
-    return $filecontent . "\nPrinter: $section";
+    return $filecontent . "\nPrinter: $section\n";
 }
 
 sub removeentry {
     my ($section, $entry, $filecontent) = @_;
     my $sectionfound;
-    my @lines = split("\n", $filecontent);
+    my @lines = split(/^/, $filecontent);
+    while ($lines[-1] !~ /\S/) { pop @lines; }
     foreach (@lines) {
 	if (!$sectionfound) {
 	    $sectionfound = /^\s*Printer\s*:\s*($section)\s*$/;
@@ -300,13 +303,14 @@ sub removeentry {
          }
 	}
     }
-    return join "\n", @lines;
+    return join "", @lines;
 }
 
 sub removeprinter {
     my ($section, $filecontent) = @_;
     my $sectionfound;
-    my @lines = split("\n", $filecontent);
+    my @lines = split(/^/, $filecontent);
+    while ($lines[-1] !~ /\S/) { pop @lines; }
     foreach (@lines) {
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
@@ -318,7 +322,7 @@ sub removeprinter {
          $_ = "";
 	}
     }
-    return join "\n", @lines;
+    return join "", @lines;
 }
 
 sub isprinterconfigured {
