@@ -36,14 +36,19 @@ use log;
 use c;
 
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-if ($::isEmbedded) {
-  print "EMBED\n";
-  print "parent XID\t$::XID\n";
-  print "mcc pid\t$::CCPID\n";
+my %options;
+my @l = @ARGV;
+while (my $e = shift @l) {
+    my ($option) = $e =~ /--?(.*)/ or next;
+    if ($option eq 'embedded') {
+	$::isEmbedded = 1;
+	($::XID, $::CCPID, @l) = @l;
+    } elsif ($option =~ /(.*?)=(.*)/) {
+	$options{$1} = $2;
+    } else {
+	$options{$option} = '';
+    }
 }
-
-my %options = map { /(.*?)=(.*)/ ? ($1,$2) : ($_,'') } map { if_(/--?(.*)/, $1) } @ARGV;
 $::expert = delete $options{expert};
 $::testing = delete $options{testing};
 
