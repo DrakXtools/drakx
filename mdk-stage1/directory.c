@@ -135,6 +135,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		add_to_env("ISOPATH", location_full);
 		add_to_env("METHOD", method_iso);
 	} else {
+		log_message("assuming %s is a mirror tree", location_full);
 		symlink(location_full, IMAGE_LOCATION);
 		add_to_env("METHOD", method_live);
 	}
