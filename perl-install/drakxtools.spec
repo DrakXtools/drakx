@@ -299,6 +299,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - scannerdrake updates (till)
 - diskdrake fixes (pixel)
 - printerdrake fixes (till)
+- drakconnect fix (poulpy)
 
 * Mon Feb 17 2003 Till Kamppeter <till@mandrakesoft.com> 9.1-0.34mdk
 - Fixed automatic print queue generation for HP DeskJet 990C.
