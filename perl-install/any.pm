@@ -912,13 +912,18 @@ Or on the command line use: "usermod -G fileshare user_name"');
 }
 
 sub ddcxinfos {
+    my @l = `$ENV{LD_LOADER} ddcxinfos`;
     if ($::isInstall && -e "/tmp/ddcxinfos") {
-	cat_("/tmp/ddcxinfos");
-    } else {
-	my @l = `$ENV{LD_LOADER} ddcxinfos`;
-	output("/tmp/ddcxinfos", @l) if $::isInstall;
-	@l;
+	my @l_old = cat_("/tmp/ddcxinfos");
+	if (@l < @l_old) {
+	    log::l("new ddcxinfos is worse, keeping the previous one");
+	    @l = @l_old;
+	} elsif (@l > @l_old) {
+	    log::l("new ddcxinfos is better, dropping the previous one");
+	}
     }
+    output("/tmp/ddcxinfos", @l) if $::isInstall;
+    @l;
 }
 
 1;
