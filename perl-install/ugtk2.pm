@@ -946,10 +946,13 @@ sub _create_window {
 		   %options);
 
     if ($force_focus) {
+	#- force keyboard focus instead of mouse focus (useful when we have no Window Manager)
 	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
 	$w->signal_connect(expose_event => \&_XSetInputFocus);
 	$w->signal_connect(destroy => sub { $ugtk2::current_window = $previous_current_window });
     }
+
+    #- when the window is closed using the window manager "X" button (or alt-f4)
     $w->signal_connect(delete_event => sub { 
 	if ($::isWizard) {
 	    $w->destroy; 
