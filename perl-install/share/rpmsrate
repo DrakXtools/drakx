@@ -600,7 +600,7 @@ CAT_X
   4 gurpmi rpmdrake drakconf userdrake fonts-ttf-decoratives fonts-ttf-west_european
     mandrake-mime menudrake mandrake_desk
     mdkonline drakfirsttime gtk-engines bootsplash
-    galaxy-gnome
+    galaxy-gnome x86-compat-galaxy-gnome
 
   3 xorg-x11-100dpi-fonts draksync
   3 USB usbview
@@ -636,7 +636,7 @@ CAT_SYSTEM
   5 at eject ldetect harddrake udev s2u sharutils
     locales iputils urpmi cpio msec tmpwatch gnupg
 
-  5 lshw dmidecode
+  5 lshw dmidecode setarch
 
   5 HIGH_SECURITY libsafe kernel-secure lads
   5 BIGMEM kernel
@@ -657,6 +657,9 @@ CAT_SYSTEM
      SMP cm2020-smp
      HIGH_SECURITY cm2020-secure
      BIGMEM cm2020-enterprise
+  5 DRIVER"a320raid"
+     a320raid-kernel
+     SMP a320raid-kernelsmp
 
   5 CAT_KDE || CAT_GNOME gnome-volume-manager
 
