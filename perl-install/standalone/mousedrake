@@ -23,7 +23,6 @@ if (!$::noauto) {
     $mouse = $probed_mouse if !$mouse->{XMOUSETYPE} || !$probed_mouse->{unsafe};
 }
 
-$::isEmbedded and kill 'USR2', $::CCPID;
 if (!$mouse || !$::auto) {
     $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
     if ($::isEmbedded && $in->isa('interactive::gtk')) {
@@ -39,7 +38,7 @@ if (!$mouse || !$::auto) {
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
 				       $mouse->{type} . '|' . $mouse->{name});
-    $name or $::isEmbedded ? do { kill('USR1', $::CCPID); goto begin } : $in->exit(0);
+    $in->exit(0);
     my $mouse_chosen = mouse::fullname2mouse($name);
     $mouse = $mouse_chosen if !($mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name});
 
@@ -61,5 +60,5 @@ if (!$mouse || !$::auto) {
 mouse::write_conf($in, $mouse, 1);
 system('service', 'gpm', 'restart') if -e '/var/lock/subsys/gpm';
 
-$::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
+$in->exit(0);
 goto begin;
