@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 
-@ARGV == 2 or die "Usage: $0 filename.img imagetype\n  ex. $0 cdrom-changedisk.img cdrom\n\nPut the old images (*.img), new vmlinuz, new modules.dep and new *.mar files in a fresh directory, and update each image file one by one.";
+@ARGV == 3 or die "Usage: $0 filename.img imagetype path_to_mar_bin\n  ex. $0 cdrom-changedisk.img cdrom\n\nPut the old images (*.img), new vmlinuz, new modules.dep and new *.mar files in a fresh directory, and update each image file one by one.";
 
 $file = $ARGV[0];
 $img = $ARGV[1];
+$marbin = $ARGV[2];
 
 sub __ { print @_, "\n"; system(@_); }
 sub _ { __ @_; $? and die; }
@@ -32,6 +33,8 @@ system("df $topdir/img");
 print "\n";
 
 _ "cp -f vmlinuz $topdir/img/vmlinuz";
+system("$marbin -l $topdir/initrd/modules/modules.mar | sort > $topdir/oldmar");
+system("$marbin -l ${img}_modules.mar | sort > $topdir/newmar");
 _ "cp -f ${img}_modules.mar $topdir/initrd/modules/modules.mar";
 _ "cp -f modules.dep $topdir/initrd/modules/modules.dep";
 
@@ -42,6 +45,8 @@ print "\n\tNew sizes:\n";
 print `ls -l vmlinuz`;
 print `ls -l ${img}_modules.mar`;
 system("df $topdir/img");
+print "\nDiff from old to new marfiles:\n";
+print `diff -u $topdir/oldmar $topdir/newmar`;
 print "\n";
 
 _ "umount $topdir/img";
