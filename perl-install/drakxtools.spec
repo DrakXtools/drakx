@@ -240,6 +240,16 @@ cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 	icon="harddrake.png"
 EOF
 
+cat > $RPM_BUILD_ROOT%_menudir/net_applet <<EOF
+?package(drakxtools):\
+        needs="X11"\
+        section="System/Monitoring"\
+        title="NetApplet"\
+        longtitle="Network monitoring applet"\
+        command="/usr/bin/net_applet"\
+        icon="connected.png"
+EOF
+
 cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2 <<EOF
 #!/bin/sh
 exec /usr/share/harddrake/service_harddrake X11
