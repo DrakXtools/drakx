@@ -3,7 +3,7 @@ package partition_table_raw; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :system :file);
+use common qw(:common :system :file :constant);
 use devices;
 use c;
 
@@ -131,6 +131,34 @@ sub zero_MBR_and_dirty {
     zero_MBR($hd);
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
 
+}
+
+#- ugly stuff needed mainly for Western Digital IDE drives
+#- try writing what we've just read, yells if it fails
+#- testing on last sector of head #0 (unused in 99% cases)
+sub test_for_bad_drives {
+    my ($hd) = @_;
+
+    log::l("test_for_bad_drives($hd->{file})");
+    my $sector = $hd->{geom}{sectors} - 1;
+    
+
+    local *F; partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+
+    my $seek = sub {
+	c::lseek_sector(fileno(F), $sector, 0) or die "seeking to sector $sector failed";
+    };
+    my $tmp;
+
+    &$seek; sysread F, $tmp, $SECTORSIZE or die "test_for_bad_drives: can't even read ($!)";
+    &$seek; syswrite F, $tmp or die "test_for_bad_drives: can't even write ($!)";
+
+    my $tmp2;
+    &$seek; sysread F, $tmp2, $SECTORSIZE or die "test_for_bad_drives: can't even read again ($!)";
+    $tmp eq $tmp2 or die
+_("Something bad is happening on your drive. 
+A test to check the integrity of data has failed. 
+It means writing anything on the disk will end up with random trash");
 }
 
 1;
