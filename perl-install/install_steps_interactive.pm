@@ -892,13 +892,13 @@ sub installUpdates {
     $o->hasNetwork or return;
 
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
-_("You have now the possibility to download updated packages that have
+formatAlaTeX(_("You have now the possibility to download updated packages that have
 been released after the distribution has been made available.
 
 You will get security fixes or bug fixes, but you need to have an
 Internet connection configured to proceed.
 
-Do you want to install the updates ?")) || return;
+Do you want to install the updates ?"))) || return;
 
     #- bring all interface up for installing crypto packages.
     install_interactive::upNetwork($o);
