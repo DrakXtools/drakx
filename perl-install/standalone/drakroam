@@ -57,9 +57,7 @@ my %available_roaming_daemons = (
 				      },
 				      read_config => sub {
 					  my ($config) = @_;
-					  my $line = 0;
-					  foreach (cat_($config)) {
-					      $line++;
+					  each_index {
 					      if (/^#/) {} #ignore comments
 					      elsif (/^\n/) {} #ignore blank lines
 					      elsif (/([^ \t]+)([ \t]+)(.*)/) {
@@ -80,8 +78,8 @@ my %available_roaming_daemons = (
 						  else { $dhcp = 0 }
 						  &AddNet($essid, $mode, $channel, $key, $dhcp);
 					      }
-					      else { die "Line $line of configuration file is not parseable.\n" }
-					  }
+					      else { die "Line $::i of configuration file is not parseable.\n" }
+					  } cat_($config)
 				      },
 				      write_config => sub {
 					  my ($config) = @_;
