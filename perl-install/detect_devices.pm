@@ -857,9 +857,8 @@ sub suggest_mount_point {
     my $name = $e->{media_type};
     if (member($e->{media_type}, 'hd', 'fd')) {
 	if (exists $e->{usb_driver}) {
-	    return usb2removable($e) || 'removable';
-	}
-	if (isZipDrive($e)) {
+	    $name = usb2removable($e) || 'removable';
+	} elsif (isZipDrive($e)) {
 	    $name = 'zip';
 	} elsif ($e->{media_type} eq 'fd') {
 	    $name = 'floppy';
