@@ -1003,22 +1003,11 @@ sub use_root_part {
 }
 
 sub getHds {
-    my ($o, $f_err) = @_;
-    my $ok = 1;
+    my ($o, $in) = @_;
     my $try_scsi = !$::expert;
-    my $flags = $o->{partitioning};
-
-    my @drives = detect_devices::hds();
-#    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table::raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
-    my $all_hds = catch_cdie { fsedit::hds(\@drives, $flags) }
-      sub {
-	  $ok = 0;
-	  my $err = formatError($@);
-	  log::l("error reading partition table: $err");
-	  !$flags->{readonly} && $f_err and $f_err->($err);
-      };
+    my $all_hds = fsedit::get_hds($o->{partitioning}, $in);
     my $hds = $all_hds->{hds};
 
     if (is_empty_array_ref($hds) && $try_scsi) {
@@ -1026,15 +1015,13 @@ sub getHds {
 	$o->setupSCSI; #- ask for an unautodetected scsi card
 	goto getHds;
     }
-    if (!$::testing) {
-	@$hds = grep { eval { partition_table::raw::test_for_bad_drives($_) }; !$@ } @$hds;
+
+    if (is_empty_array_ref($hds)) { #- no way
+	die _("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 
-    $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)
-        if !($flags->{clearall} || $flags->{clear});
-
     #- try to figure out if the same number of hds is available, use them if ok.
-    $ok && $hds && @$hds > 0 && @{$o->{all_hds}{hds} || []} == @$hds and return $ok;
+    @{$o->{all_hds}{hds} || []} == @$hds and return 1;
 
     fs::get_raw_hds('', $all_hds);
     fs::add2all_hds($all_hds, @{$o->{manualFstab}});
@@ -1062,7 +1049,7 @@ sub getHds {
     }
     #- a good job is to mount SunOS root partition, and to use mount point described here in /etc/vfstab.
 
-    $ok;
+    1;
 }
 
 sub log_sizes {

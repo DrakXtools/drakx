@@ -360,26 +360,7 @@ sub ask_mntpoint_s {
 sub doPartitionDisks {
     my ($o) = @_;
 
-    my $warned;
-    install_any::getHds($o, sub {
-	my ($err) = @_;
-	$warned = 1;
-	if ($o->ask_yesorno(_("Error"), 
-_("I can't read your partition table, it's too corrupted for me :(
-I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
-The other solution is to not allow DrakX to modify the partition table.
-(the error is %s)
-
-Do you agree to loose all the partitions?
-", $err))) {
-            0;
-        } else {
-            $o->{partitioning}{readonly} = 1;
-            1;
-        }
-    }) or $warned or $o->ask_warn('', 
-_("DiskDrake failed to read correctly the partition table.
-Continue at your own risk!"));
+    install_any::getHds($o, $o);
 
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) { #- need to make bootstrap part if NewWorld machine - thx Pixel ;^)
 	if (defined $partition_table::mac::bootstrap_part) {
