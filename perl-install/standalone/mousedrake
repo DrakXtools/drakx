@@ -25,12 +25,16 @@ if (!$::noauto) {
 
 if (!$mouse || !$::auto) {
     $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
+    my $test_hbox;
     if ($::isEmbedded && $in->isa('interactive::gtk')) {
 	#- HACK: waiting for the ask_from_treelistf to attach itself
 	#- and adding the nice test mouse to it
 	Gtk2->timeout_add(100, sub {
 			     defined $::Plug && defined $::Plug->child or return 1;
-			     mouse::test_mouse_standalone($mouse, $::Plug->child);
+			     $test_hbox = Gtk2::HBox->new(0, 0);
+			     $::WizardTable->attach($test_hbox, 2, 3, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
+			     $test_hbox->show_all;
+			     mouse::test_mouse_standalone($mouse, $test_hbox);
 			     0;
 			 });
     }
@@ -55,6 +59,7 @@ if (!$mouse || !$::auto) {
 					   [ mouse::serial_ports ],
 					   $mouse->{device},
 					  ) || goto begin if $mouse->{type} eq 'serial';
+    $test_hbox and $test_hbox->destroy;
 }
 
 mouse::write_conf($in, $mouse, 1);
