@@ -120,13 +120,16 @@ my %lang2keyboard =
 
 # USB kbd table
 # The numeric values are the bCountryCode field (5th byte)  of HID descriptor
+# NOTE: we don't trust when the layout is declared as us layout (0x21)
+# as most manufacturers just use that value when selling physical devices
+# with different layouts printed on the keys.
 my @usb2keyboard =
 (
   qw(SKIP ar_SKIP be ca_SKIP qc cz dk fi fr de gr il hu us_intl it jp),
 #- 0x10
   qw(kr la nl no ir pl pt ru sk es se ch_de ch_de ch_de tw_SKIP tr_q),
 #- 0x20
-  qw(uk us yu tr_f),
+  qw(uk us_SKIP yu tr_f),
 #- higher codes not attribued as of 2002-02
 );
 
@@ -550,7 +553,7 @@ sub check() {
 	}
     }
     /SKIP/ || $keyboards{$_} or $err->("invalid keyboard $_ in \@usb2keyboard keyboard.pm") foreach @usb2keyboard;
-    $usb2keyboard[0x21] eq 'us' or $err->('@usb2keyboard is badly modified, 0x21 is not us keyboard');
+    $usb2keyboard[0x21] eq 'us_SKIP' or $err->('@usb2keyboard is badly modified, 0x21 is not us keyboard');
 
     my @xkb_groups = map { if_(/grp:(\S+)/, $1) } cat_('/usr/lib/X11/xkb/rules/xfree86.lst');
     $err->("invalid xkb group toggle '$_' in \%grp_toggles") foreach difference2([ keys %grp_toggles ], \@xkb_groups);
