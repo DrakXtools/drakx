@@ -268,7 +268,7 @@ sub gateway {
 sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
-    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinico_cs orinico airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport);
+    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinoco_cs orinoco airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport);
     my $flag = 0;
     foreach (@wireless_modules) {
 	$module =~ /$_/ and $flag =1;
