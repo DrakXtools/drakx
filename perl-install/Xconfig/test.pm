@@ -119,7 +119,7 @@ sub test {
             1;
 	});
 
-        my $background = "/usr/share/pixmaps/backgrounds/linux-mandrake/XFdrake-image-test.jpg";
+        my $background = "/usr/share/mdk/xfdrake/xfdrake-test-card.jpg";
         my $qiv = "/usr/bin/qiv";
         run_program::rooted($::prefix, $qiv, "-y", $background)
             if -r "$::prefix/$background" && -x "$::prefix/$qiv";
