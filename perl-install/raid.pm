@@ -25,7 +25,7 @@ sub new {
     my $md_part = { %opts };
     add2hash_($md_part, { 'chunk-size' => '64', disks => [], 
 			  fs_type => 'ext3',
-			  device => 'md' . int(@$raids), 
+			  device => first(free_mds($raids)), 
 			  notFormatted => 1, level => 1 });
     push @$raids, $md_part;
     foreach (@{$md_part->{disks}}) {
@@ -156,6 +156,11 @@ sub active_mds() {
 }
 sub inactive_mds() {
     map { if_(/^(md\d+)\s*:\s*inactive/, $1) } cat_("/proc/mdstat");
+}
+
+sub free_mds {
+    my ($raids) = @_;
+    difference2([ map { "md$_" } 0 .. raid::max_nb() ], [ map { $_->{device} } @$raids ]);
 }
 
 sub detect_during_install {
