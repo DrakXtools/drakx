@@ -452,7 +452,7 @@ int main(int argc, char **argv)
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("Remember what Warly said: drink white part of an egg each morning builds a man!\n");
+	printf("Remember what Warly said: drink an egg white each morning builds a man!\n");
 	printf("running stage1...\n"); 
 	
 	if (!(installpid = fork())) {
