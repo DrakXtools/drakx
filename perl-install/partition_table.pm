@@ -15,11 +15,9 @@ use common;
 use partition_table_raw;
 use log;
 
-if (arch() =~ /ppc/) {
-    @important_types = ('Linux native', 'Linux swap', 'Apple HFS Partition', 'Apple Bootstrap');
-} else {
-    @important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'Journalised FS: ReiserFS', 'Journalised FS: ext3', 'DOS FAT16', 'Win98 FAT32'));
-}
+@important_types = ('Linux native', 'Linux swap', 
+		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'DOS FAT16', 'Win98 FAT32'),
+		    if_(arch() =~ /ppc/, 'Apple HFS Partition', 'Apple Bootstrap'));
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
 @fields2save = qw(primary extended totalsectors isDirty needKernelReread);
