@@ -24,7 +24,7 @@ my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
                                   );
 $blacklist->get_selection->set_mode('multiple');
 $blacklist->set_headers_clickable(1);
-for (0, 1, 2) {
+foreach (0, 1, 2) {
     $blacklist->get_column($_)->signal_connect('clicked', \&sort_by_column, $blacklist->get_model);
     #- sort on timestamp if Date column is clicked
     #- sort columns include hidden columns while list columns don't
