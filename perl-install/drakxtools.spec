@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.7mdk
+Release: 0.8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.8mdk
+- drakconnect wizard:
+  o blacklist forcedeth for network hotplug (#7389)
+  o fix ethernet devices description matching
+  o fix unwritten ethernet interface config
+  o fix empty list in "multiple internet_connexions" step
+- fix vendor/description for some Lite-On drives
+- ugtk2 layer: fix some layout (spurious space at window bottom)
+  (pixel)
+
 * Sun Feb  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.7mdk
 - drakx11: make XFdrake startup be instantenous for non nv|ati cards
 - drakTermServ: add PXE image support (Venantius Kumar)
