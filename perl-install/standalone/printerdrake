@@ -39,6 +39,11 @@ $::skiptest = /-skiptest/;
 $::testing = /-testing/;
 
 my $printer;
+
+my $in = 'interactive'->vnew('su', 'printer');
+
+{
+my $w = $in->wait_message('', _("Reading printer data ..."));
 # Get what was installed before
 eval { $printer = printer::getinfo('') };
 # Choose the spooler by command line options
@@ -53,9 +58,8 @@ eval { $printer = printer::getinfo('') };
 /-pdq/ and 
     $printer->{mode} = 'pdq' and printer::read_configured_queues($printer);
 
-my $in = 'interactive'->vnew('su', 'printer');
-
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
+}
 
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
