@@ -563,7 +563,7 @@ sub installPackages {
     *install_any::changeMedium = sub {
 	my ($method, $medium) = @_;
 	my %medium_msg = ();
-	$medium_msg{$medium} or $medium_msg{$medium} = _("Installation CD #%s", ($medium || 1));
+	$medium_msg{$medium} or $medium_msg{$medium} = _("Installation CD Nr %s", ($medium || 1));
 	my %method_msg = (
 			  cdrom =>
 _("Change your Cd-Rom!

@@ -327,7 +327,7 @@ sub chooseCD {
 
     $o->ask_many_from_list_ref('',
 			       _("Choose other CD to install"),
-			       [ map { $packages->[2]{$_}{descr} || _("Cd-Rom #%s", $_) } grep { $_ } keys %{$packages->[2]} ],
+			       [ map { $packages->[2]{$_}{descr} || _("Cd-Rom Nr %s", $_) } grep { $_ } keys %{$packages->[2]} ],
 			       [ map { \$packages->[2]{$_}{selected} } grep { $_ } keys %{$packages->[2]} ]
 			      ) or goto &chooseCD unless $::beginner;
 }
