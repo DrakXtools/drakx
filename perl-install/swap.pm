@@ -9,7 +9,7 @@ use devices;
 
 sub make {
     my ($dev, $checkBlocks) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "mkswap", if_($checkBlocks, '-c'), devices::make($dev)) or die \N("%s formatting of %s failed", 'swap', $dev);
+    run_program::raw({ timeout => 60 * 60 }, "mkswap", if_($checkBlocks, '-c'), devices::make($dev)) or die N("%s formatting of %s failed", 'swap', $dev);
 }
 
 sub enable {

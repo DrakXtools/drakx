@@ -861,7 +861,7 @@ sub loadO {
 	-e "$f.pl" and $f .= ".pl" unless -e $f;
 
 	my $fh;
-	if (-e $f) { open $fh, $f } else { $fh = getFile($f) or die \N("Error reading file %s", $f) }
+	if (-e $f) { open $fh, $f } else { $fh = getFile($f) or die N("Error reading file %s", $f) }
 	{
 	    local $/ = "\0";
 	    no strict;
@@ -985,7 +985,7 @@ sub getHds {
     my $hds = $all_hds->{hds};
 
     if (is_empty_array_ref($hds) && !$::move) { #- no way
-	die \N("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
+	die N("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 
     #- try to figure out if the same number of hds is available, use them if ok.

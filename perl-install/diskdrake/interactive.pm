@@ -1053,7 +1053,7 @@ sub check {
 
 sub check_rebootNeeded {
     my ($_in, $hd) = @_;
-    $hd->{rebootNeeded} and die \N("You'll need to reboot before the modification can take place");
+    $hd->{rebootNeeded} and die N("You'll need to reboot before the modification can take place");
 }
 
 sub write_partitions {

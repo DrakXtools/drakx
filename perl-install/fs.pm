@@ -578,7 +578,7 @@ sub format_ext2($@) {
     my ($dev, @options) = @_;
     $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
-    run_program::raw({ timeout => 60 * 60 }, 'mke2fs', '-F', @options, devices::make($dev)) or die \N("%s formatting of %s failed", (any { $_ eq '-j' } @options) ? "ext3" : "ext2", $dev);
+    run_program::raw({ timeout => 60 * 60 }, 'mke2fs', '-F', @options, devices::make($dev)) or die N("%s formatting of %s failed", (any { $_ eq '-j' } @options) ? "ext3" : "ext2", $dev);
 }
 sub format_ext3 {
     my ($dev, @options) = @_;
@@ -588,23 +588,23 @@ sub format_ext3 {
 sub format_reiserfs {
     my ($dev, @options) = @_;
     #TODO add -h tea
-    run_program::raw({ timeout => 60 * 60 }, "mkreiserfs", "-ff", @options, devices::make($dev)) or die \N("%s formatting of %s failed", "reiserfs", $dev);
+    run_program::raw({ timeout => 60 * 60 }, "mkreiserfs", "-ff", @options, devices::make($dev)) or die N("%s formatting of %s failed", "reiserfs", $dev);
 }
 sub format_xfs {
     my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "mkfs.xfs", "-f", "-q", @options, devices::make($dev)) or die \N("%s formatting of %s failed", "xfs", $dev);
+    run_program::raw({ timeout => 60 * 60 }, "mkfs.xfs", "-f", "-q", @options, devices::make($dev)) or die N("%s formatting of %s failed", "xfs", $dev);
 }
 sub format_jfs {
     my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "mkfs.jfs", "-f", @options, devices::make($dev)) or die \N("%s formatting of %s failed", "jfs", $dev);
+    run_program::raw({ timeout => 60 * 60 }, "mkfs.jfs", "-f", @options, devices::make($dev)) or die N("%s formatting of %s failed", "jfs", $dev);
 }
 sub format_dos {
     my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "mkdosfs", @options, devices::make($dev)) or die \N("%s formatting of %s failed", "dos", $dev);
+    run_program::raw({ timeout => 60 * 60 }, "mkdosfs", @options, devices::make($dev)) or die N("%s formatting of %s failed", "dos", $dev);
 }
 sub format_hfs {
     my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "hformat", @options, devices::make($dev)) or die \N("%s formatting of %s failed", "HFS", $dev);
+    run_program::raw({ timeout => 60 * 60 }, "hformat", @options, devices::make($dev)) or die N("%s formatting of %s failed", "HFS", $dev);
 }
 sub real_format_part {
     my ($part) = @_;
@@ -645,7 +645,7 @@ sub real_format_part {
 	my $check_blocks = any { /^-c$/ } @options;
         swap::make($dev, $check_blocks);
     } else {
-	die \N("I don't know how to format %s in type %s", $part->{device}, type2name($part->{type}));
+	die N("I don't know how to format %s in type %s", $part->{device}, type2name($part->{type}));
     }
     $part->{isFormatted} = 1;
 }
@@ -717,7 +717,7 @@ sub mount {
 
     if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone || $::move) {
 	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
-	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die \N("mounting partition %s in directory %s failed", $dev, $where);
+	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die N("mounting partition %s in directory %s failed", $dev, $where);
     } else {
 	my @types = ('ext2', 'proc', 'sysfs', 'usbdevfs', 'iso9660', 'devfs', @fs_modules);
 
@@ -770,7 +770,7 @@ sub mount {
 	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
-	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die \(N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)");
+	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
     
         eval { #- fail silently, /etc may be read-only
 	    append_to_file("/etc/mtab", "$dev $where $fs defaults 0 0\n");
@@ -786,7 +786,7 @@ sub umount {
 
     syscall_('umount2', $mntpoint, 0) or do {
 	kill 15, fuzzy_pidofs('^fam\b');
-	syscall_('umount2', $mntpoint, 0) or die \N("error unmounting %s: %s", $mntpoint, $!);
+	syscall_('umount2', $mntpoint, 0) or die N("error unmounting %s: %s", $mntpoint, $!);
     };
 
     substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)

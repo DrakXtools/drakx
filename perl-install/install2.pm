@@ -116,7 +116,7 @@ sub setupSCSI {
 
     if (!$o->{blank} && !$::testing && !$::uml_install) {
 	-d '/lib/modules/' . c::kernel_version() ||
-	  -s modules::cz_file() or die \N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
+	  -s modules::cz_file() or die N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
 
     installStepsCall($o, $auto, 'setupSCSI', $clicked);
@@ -166,7 +166,7 @@ sub formatPartitions {
     if ($want_root_formated) {
 	foreach ('/usr') {
 	    my $part = fsedit::mntpoint2part($_, $o->{fstab}) or next;
-	    $part->{toFormat} or die \N("You must also format %s", $_);
+	    $part->{toFormat} or die N("You must also format %s", $_);
 	}
     }
     installStepsCall($o, $auto, 'formatMountPartitions', $o->{fstab}) if !$::testing;
@@ -628,7 +628,6 @@ sub main {
 	$o->kill_action;
 	$clicked = 0;
 	if ($err) {
-	    ref($err) eq 'SCALAR' and $err = $$err;
 	    local $_ = $err;
 	    $o->kill_action;
 	    if (!/^already displayed/) {

@@ -80,7 +80,7 @@ sub set {
     } elsif ($kind eq 'NIS') {
 	$in->do_pkgs->install('ypbind');
 	my $domain = $netc->{NISDOMAIN};
-	$domain || $val ne "broadcast" or die \N("Can't use broadcast with no NIS domain");
+	$domain || $val ne "broadcast" or die N("Can't use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($val ne "broadcast" && " server") : "ypserver";
 	substInFile {
 	    $_ = "#~$_" unless /^#/;

@@ -112,7 +112,7 @@ sub vg_add {
 sub vg_destroy {
     my ($lvm) = @_;
 
-    is_empty_array_ref($lvm->{primary}{normal}) or die \N("Remove the logical volumes first\n");
+    is_empty_array_ref($lvm->{primary}{normal}) or die N("Remove the logical volumes first\n");
     lvm_cmd('vgchange', '-a', 'n', $lvm->{VG_name});
     lvm_cmd_or_die('vgremove', $lvm->{VG_name});
     foreach (@{$lvm->{disks}}) {
