@@ -140,7 +140,8 @@ sub create_clist {
     $list, sub {
 	my ($v) = @_;
 	eval {
-	    $select->(find_index { $_ eq $v } @{$e->{list}});
+	    my $nb = find_index { $_ eq $v } @{$e->{list}};
+	    $select->($nb) if $nb != $list->focus_row;
 	};
     };
 }
@@ -269,7 +270,7 @@ sub create_ctree {
 
     $tree, sub {
 	my $v = may_apply($e->{format}, $_[0]);
-	$select->($wleaves{$v} || return);
+	$select->($wleaves{$v} || return) if $wleaves{$v} != $tree->selection;
     }, $size;
 }
 
