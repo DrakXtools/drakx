@@ -154,15 +154,7 @@ sub wait_message($$$) {
     $b;
 }
 
-sub kill {
-    my ($o) = @_;
-    $o->{before_killing} ||= 0;
-    while (@interactive::objects > $o->{before_killing}) {
-	my $w = pop @interactive::objects;
-	$w->destroy;
-    }
-    $o->{before_killing} = @interactive::objects;
-}
+sub kill {}
 
 #-######################################################################################
 #- Wonderful perl :(

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KERNEL_BOOT_PATH="kernel-2.2.13BOOTchou5"
+KERNEL_BOOT_PATH="kernel"
 
 SCSI_DRIVERS="
      53c7,8xx.o AM53C974.o BusLogic.o NCR53c406a.o advansys.o aha152x.o
@@ -54,6 +54,7 @@ PCMCIA_MODULES="$PCMCIA_DRIVERS $MISCMODULES $FSMODULES"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 
+PRISTINE_MODULES="serial.o"
 
 cp -f "$KERNEL_BOOT_PATH"/boot/vmlinuz* vmlinuz
 cp -f "$KERNEL_BOOT_PATH"/boot/System.map* System.map
@@ -64,6 +65,7 @@ cp -f "$KERNEL_BOOT_PATH"/boot/System.map* System.map
 rm -rf modules ; install -d modules
 (cd modules ; 
     cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
+    mkdir pristine ; cp $PRISTINE_MODULES pristine
     /sbin/depmod -m ../System.map -i -e *.o | grep ': ' | sed 's/\.o//g' > modules.dep
     ls *.o              | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
     ls $NETWORK_MODULES | cpio --quiet -H crc -o | gzip -9 > network_modules.cgz

@@ -1,7 +1,5 @@
 #!../perl
 
-@ARGV == 0 or die "usage: $0\n";
-
 my $dir = `pwd`;
 chomp $dir;
 $dir .= "/../../..";
@@ -10,4 +8,4 @@ $ENV{PERL5LIB} = join ":", map { "$dir/$_" } @INC;
 $ENV{LD_LIBRARY_PATH} = "$dir/usr/lib";
 $ENV{PATH} = join ":", map { "$dir/$_" } split ":", "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin";
 
-exec "../perl", "./install2", "--g_auto_install" or die;
+exec "../perl", "./install2", "--g_auto_install", @ARGV or die;

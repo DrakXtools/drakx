@@ -222,3 +222,14 @@ sub wait_message_endW {
     my ($o, $w) = @_;
     $w->destroy;
 }
+
+sub kill {
+    my ($o) = @_;
+    $o->{before_killing} ||= 0;
+    while (@interactive::objects > $o->{before_killing}) {
+	my $w = pop @interactive::objects;
+	$w->destroy;
+    }
+    @my_gtk::grabbed = ();
+    $o->{before_killing} = @interactive::objects;
+}

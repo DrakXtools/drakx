@@ -39,9 +39,9 @@ sub initrd {
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
     _ "echo y | mke2fs $tmp";
-    _ "$sudo mount $tmp $mnt -o loop";
+    _ "$sudo mount -t ext2 $tmp $mnt -o loop";
     _ "$sudo cp -a $instdir/$inst1/* $mnt";
-    _ "sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
+    _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
     _ "$sudo cp -f modules/${type}_modules.cgz $mnt/modules/modules.cgz";
     _ "$sudo cp -f modules/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
@@ -54,7 +54,7 @@ sub boot_img {
 
     __ "$sudo umount $mnt 2>/dev/null";
     _ "bunzip2 -c $instdir/installinit/emptyboot.img.bz2 > $img";
-    _ "$sudo mount -o umask=0 $img $mnt -o loop";
+    _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz";
     initrd("${mnt}2", "$mnt/$type.rdz");
     

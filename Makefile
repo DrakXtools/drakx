@@ -1,6 +1,6 @@
 BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img gi_pcmcia.img
 BINS = install/install install/local-install install/installinit/init
-
+DIRS = install mouseconfig perl-install ddcprobe
 
 
 .PHONY: $(BOOT_IMG) $(FLOPPY_IMG) $(BINS) update_kernel
@@ -10,7 +10,10 @@ all: $(BOOT_IMG)
 	cp -f $(BOOT_IMG) /export/images
 
 clean:
-	rm -rf $(BOOT_IMG) $(BINS) modules vmlinuz System.map
+	rm -rf $(BOOT_IMG) $(BINS) modules install_pcmcia_modules vmlinuz System.map
+	rm -rf install/*/sbin/install install/*/sbin/init
+	for i in $(DIRS); do make -C $$i clean; done
+	find . -name "*~" -o -name ".#*" | xargs rm -f
 
 $(BOOT_IMG): $(BINS)
 	if [ ! -e modules ]; then $(MAKE) update_kernel; fi
@@ -21,6 +24,7 @@ $(BINS):
 
 
 update_kernel:
+	cd install ; ln -sf ../kernel/cardmgr/* .
 	./update_kernel
 
 $(BOOT_IMG:%=%f): %f: %
