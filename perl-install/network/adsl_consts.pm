@@ -5,7 +5,6 @@ package network::adsl_consts; # $Id$
 use vars qw(@ISA @EXPORT);
 use common;
 use utf8;
-use encoding "utf8";
 
 @ISA = qw(Exporter);
 @EXPORT = qw(@adsl_data);
