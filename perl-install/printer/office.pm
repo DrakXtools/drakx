@@ -11,6 +11,8 @@ use printer::cups;
 #   Star Office/OpenOffice.org
 # ------------------------------------------------------------------
 
+# OpenOffice.org stuff applies only for Star Office 6.x now, as our
+# OpenOffice.org is patched for native CUPS support
 
 our $suites = {
     'OpenOffice.Org' => {
@@ -19,10 +21,10 @@ our $suites = {
 	'file_name' => '^(.*)/share/psprint/psprint.conf$',
 	'param' => ["Generic Printer", "Command="],
 	'perl' => "/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/",
-	'files' => ["/usr/lib/*/share/psprint/psprint.conf",
-		    "/usr/local/lib/*/share/psprint/psprint.conf",
-		    "/usr/local/*/share/psprint/psprint.conf",
-		    "/opt/*/share/psprint/psprint.conf"],
+	'files' => ["/usr/lib/office6*/share/psprint/psprint.conf",
+		    "/usr/local/lib/office6*/share/psprint/psprint.conf",
+		    "/usr/local/office6*/share/psprint/psprint.conf",
+		    "/opt/office6*/share/psprint/psprint.conf"],
     },
     'Star Office' => {
 	'make' => \&makestarofficeprinterentry,

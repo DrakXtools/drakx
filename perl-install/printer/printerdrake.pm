@@ -16,6 +16,9 @@ use printer::data;
 
 1;
 
+my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by uncompresing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
+");
+
 sub choose_printer_type {
     my ($printer, $in) = @_;
     $printer->{str_type} = $printer_type_inv{$printer->{TYPE}};
@@ -399,7 +402,8 @@ N("Examples for correct IPs:\n") .
 			if ($in->ask_from_
 			    (
 			     { title => N("Accessing printers on remote CUPS servers"),
-			       messages => N("Enter IP address and port of the host whose printers you want to use."),
+			       messages => N("Enter IP address and port of the host whose printers you want to use.") . ' ' .
+				   N("If no port is given, 631 will be taken as default."),
 			       callbacks => {
 				   complete => sub {
 				       if ($ip =~ /^\s*$/) {
@@ -418,7 +422,9 @@ N("Examples for correct IPs:\n") .
 				       } else {
 					   $ip = $1;
 				       }
-				       if ($port !~ /^\s*(\d+)\s*$/) {
+				       if ($port !~ /\S/) {
+					   $port = '631';
+				       } elsif ($port !~ /^\s*(\d+)\s*$/) {
 					   $in->ask_warn('', N("The port number should be an integer!"));
 					   return (1,1);
 				       } else {
@@ -437,7 +443,7 @@ N("Examples for correct IPs:\n") .
 				   },
 			       },
 			   },
-			     # List the host types
+			     # Ask for IP and port
 			     [ { val => \$ip, 
 				 label => N("IP address") },
 			       { val => \$port, 
@@ -1744,6 +1750,7 @@ sub setup_common {
 
     my $ptaldevice = "";
     my $isHPOJ = 0;
+    my $_w;
     if ($device =~ /^\/dev\// || $device =~ /^socket:\/\//) {
 	# Ask user whether he has a multi-function device when he didn't
 	# do auto-detection or when auto-detection failed
@@ -1765,13 +1772,14 @@ sub setup_common {
 		!files_exist(qw(/usr/sbin/ptal-mlcd
 					   /usr/sbin/ptal-init
 					   /usr/bin/xojpanel))) {
-		my $_w = $in->wait_message(N("Printerdrake"),
+		$_w = $in->wait_message(N("Printerdrake"),
 					   N("Installing HPOJ package..."))
 		    if (!$printer->{noninteractive});
 		$in->do_pkgs->install('hpoj', 'xojpanel');
 	    }
 	    # Configure and start HPOJ
-	    my $_w = $in->wait_message
+	    undef $_w;
+	    $_w = $in->wait_message
 		(N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."))
 		if (!$printer->{noninteractive});
@@ -1791,7 +1799,8 @@ sub setup_common {
 						   /usr/lib/libsane-hpoj.so.1),
 						if_(files_exist('/usr/bin/gimp'), 
 						    '/usr/bin/xsane-gimp'))) {
-			my $_w = $in->wait_message
+			undef $_w;
+			$_w = $in->wait_message
 			    (N("Printerdrake"),
 			     N("Installing SANE packages..."))
 			    if (!$printer->{noninteractive});
@@ -1807,7 +1816,8 @@ sub setup_common {
 		if (($makemodel =~ /HP\s+PhotoSmart/i ||
 		     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
 		     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
-		     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i) &&
+		     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
+		     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i) &&
 		    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
 		    # Install mtools and MToolsFM
 		    if (!$::testing &&
@@ -1815,7 +1825,8 @@ sub setup_common {
 						  /usr/bin/mcopy
 						  /usr/bin/MToolsFM
 						  ))) {
-			my $_w = $in->wait_message
+			undef $_w;
+			$_w = $in->wait_message
 			    (N("Printerdrake"),
 			     N("Installing mtools packages..."))
 			    if (!$printer->{noninteractive});
@@ -1830,6 +1841,7 @@ sub setup_common {
 		    # Inform user about how to scan with his MF device
 		    $text = scanner_help($makemodel, "ptal:/$ptaldevice");
 		    if ($text) {
+			undef $_w;
 			$in->ask_warn
 			    (N("Scanning on your HP multi-function device"),
 			     $text);
@@ -1838,6 +1850,7 @@ sub setup_common {
 		    # MF device
 		    $text = photocard_help($makemodel, "ptal:/$ptaldevice");
 		    if ($text) {
+			undef $_w;
 			$in->ask_warn(N("Photo memory card access on your HP multi-function device"),
 				      $text);
 		    }
@@ -1848,6 +1861,10 @@ sub setup_common {
 		# make the DeviceURI from $device.
 		$printer->{currentqueue}{connect} = $device;
 	    }
+	    $_w = $in->wait_message
+		(N("Printerdrake"),
+		 N("Checking device and configuring HPOJ..."))
+		if (!$printer->{noninteractive} && !defined($_w));
 	} else {
 	    # make the DeviceURI from $device.
 	    $printer->{currentqueue}{connect} = $device;
@@ -2445,17 +2462,9 @@ sub get_printer_info {
 		    $in->ask_warn(N("Lexmark inkjet configuration"),
 				  N("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
 		}
-	    } elsif ($printer->{currentqueue}{driver} eq 'pbmtozjs') {
-		$in->ask_warn(N("GDI Laser Printer using the Zenographics ZJ-Stream Format"),
-			      N("Your printer belongs to the group of GDI laser printers (winprinters) sold by different manufacturers which uses the Zenographics ZJ-stream raster format for the data sent to the printer. The driver for these printers is still in a very early development stage and so it will perhaps not always work properly. Especially it is possible that the printer only works when you choose the A4 paper size.
-
-Some of these printers, as the HP LaserJet 1000, for which this driver was originally created, need their firmware to be uploaded to them after they are turned on. In the case of the HP LaserJet 1000 you have to search the printer's Windows driver CD or your Windows partition for the file \"sihp1000.img\" and upload the file to the printer with one of the following commands:
-
-     lpr -o raw sihp1000.img
-     cat sihp1000.img > /dev/usb/lp0
-
-The first command can be given by any normal user, the second must be given as root. After having done so you can print normally.
-"));
+	    } elsif ($printer->{currentqueue}{printer} eq 'HP-LaserJet_1000') {
+		$in->ask_warn(N("Firmware-Upload for HP LaserJet 1000"),
+			      $hp1000fwtext);
 	    }
 	    if ($printer->{currentqueue}{foomatic}) { # Foomatic queue?
 		$printer->{ARGS} = 
@@ -2874,6 +2883,7 @@ sub printer_help {
     my $cupsremote = 0;
     my $scanning = "";
     my $photocard = "";
+    my $hp11000fw = "";
     if ($printer->{configured}{$queue}) {
 	if ($printer->{configured}{$queue}{queuedata}{model} eq "Unknown model" ||
 	    $printer->{configured}{$queue}{queuedata}{model} eq N("Raw printer")) {
@@ -2895,6 +2905,10 @@ sub printer_help {
 	if ($photocard) {
 	    $photocard = "\n\n$photocard\n\n";
 	}
+	if ($printer->{configured}{$queue}{queuedata}{printer} eq
+	    'HP-LaserJet_1000') {
+	    $hp11000fw = "\n\n$hp1000fwtext\n";
+	}
     } else {
 	$cupsremote = 1;
     }
@@ -2910,13 +2924,13 @@ N("These commands you can also use in the \"Printing command\" field of the prin
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
 (!$cupsremote ?
- N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
+ N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s%s
 
-", $scanning, $photocard) . printer::main::help_output($printer, 'cups') : 
- $scanning . $photocard .
+", $scanning, $photocard, $hp11000fw) . printer::main::help_output($printer, 'cups') : 
+ $scanning . $photocard . $hp11000fw .
  N("Here is a list of the available printing options for the current printer:
 
-") . printer::main::help_output($printer, 'cups')) : $scanning . $photocard);
+") . printer::main::help_output($printer, 'cups')) : $scanning . $photocard . $hp11000fw);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -2926,7 +2940,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard : $scanning . $photocard);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard . $hp11000fw: $scanning . $photocard . $hp11000fw);
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -2936,7 +2950,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard : $scanning . $photocard);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard . $hp11000fw : $scanning . $photocard . $hp11000fw);
     } elsif ($spooler eq "pdq") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\" or \"%s <file>\".
@@ -2950,10 +2964,10 @@ If you are using KDE as desktop environment you have a \"panic button\", an icon
 N("
 The \"%s\" and \"%s\" commands also allow to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".
 ", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
-N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
+N("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s%s
 
-", $scanning, $photocard) . printer::main::help_output($printer, 'pdq') :
- $scanning . $photocard);
+", $scanning, $photocard, $hp11000fw) . printer::main::help_output($printer, 'pdq') :
+ $scanning . $photocard . $hp11000fw);
     }
     my $windowtitle = ($scanning ?
                        ($photocard ?
@@ -3005,7 +3019,8 @@ sub photocard_help {
 	if (($makemodel =~ /HP\s+PhotoSmart/i ||
 	     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
 	     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
-	     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i) &&
+	     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
+	     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i) &&
 	    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
 	    # Models with built-in photo card drives
 	    return N("Your printer was configured automatically to give you access to the photo card drives from your PC. Now you can access your photo cards using the graphical program \"MtoolsFM\" (Menu: \"Applications\" -> \"File tools\" -> \"MTools File Manager\") or the command line utilities \"mtools\" (enter \"man mtools\" on the command line for more info). You find the card's file system under the drive letter \"p:\", or subsequent drive letters when you have more than one HP printer with photo card drives. In \"MtoolsFM\" you can switch between drive letters with the field at the upper-right corners of the file lists.",
