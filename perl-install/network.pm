@@ -121,7 +121,7 @@ sub write_interface_conf {
 		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
 		    });
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT), $netc->{wireless_eth} ? qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV) : ());
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT), ($intf->{wireless_eth}) ? qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV) : ());
 }
 
 sub add2hosts {
@@ -298,7 +298,7 @@ sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
     my @wireless_modules = ("airo_cs", "netwave_cs", "ray_cs", "wavelan_cs", "wvlan_cs");
-    member($module, @wireless_modules) and $netc->{wireless_eth}=1;
+    member($module, @wireless_modules) and $intf->{wireless_eth}=1 and $netc->{wireless_eth}=1;
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
 	$text = _("WARNING: This device has been previously configured to connect to the Internet.
@@ -321,7 +321,7 @@ notation (for example, 1.2.3.4).");
 			     [ { label => _("IP address"), val => \$intf->{IPADDR} }, 
 			       { label => _("Netmask"),     val => \$intf->{NETMASK} },
 			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
-			       if_(member($module, @wireless_modules),
+#			       if_(member($module, @wireless_modules),
 			       { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
 			       { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
 			       { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
@@ -334,7 +334,7 @@ notation (for example, 1.2.3.4).");
 			       { label => "WIRELESS_IWCONFIG", val => \$intf->{WIRELESS_IWCONFIG} },
 			       { label => "WIRELESS_IWSPY", val => \$intf->{WIRELESS_IWSPY} },
 			       { label => "WIRELESS_IWPRIV", val => \$intf->{WIRELESS_IWPRIV} }
-			       ),
+			       #),
 			     ],
 			     complete => sub {
 				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";

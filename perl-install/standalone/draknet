@@ -26,6 +26,7 @@ use lib qw(/usr/lib/libDrakX);
 use interactive;
 use standalone;
 use netconnect;
+use common qw(:common :file :functional :system);
 use c;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
@@ -59,8 +60,9 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-#$::isEmbedded or goto dd;
+$::isEmbedded or goto dd;
 netconnect::read_net_conf('', $netcnx, $netc);
+any::setup_thiskind($in, 'net', !$::expert, 1);
 my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
 netconnect::load_conf('', $netcnx, $netc, $intf);
 
@@ -134,16 +136,18 @@ $vbox1->pack_start($frame2,1,1,0);
 #$table2->set_row_spacings(5);
 #$table2->set_col_spacings(5);
 #$frame2->add($table2);
+my $vbox2 = new Gtk::VBox(0,0);
+$vbox2->set_border_width(5);
+$frame2->add($vbox2);
 my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocole"), _("Driver"));
 $clist1->set_column_width (2, 80);
 $clist1->set_column_width (4, 60);
-$frame2->add($clist1);
+$vbox2->pack_start($clist1, 0, 0, 0);
 #$scrolled1->add_with_viewport($table2);
 
-any::setup_thiskind($in, 'net', !$::expert, 1);
-my @eth_infos;
 foreach (0..$#all_cards) {
 $clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
+$clist1->set_selectable($_, 0);
 #    $table2->attach(new Gtk::Label(_("Network adaptater n°%s", $_+1) . " (eth$_):"), 0, 1, $i, $i+1, 'fill', 'fill',0,0);
 #    $table2->attach(new Gtk::Label($intf->{"eth${_}"}{IPADDR} . " (" . $intf->{"eth${_}"}{BOOTPROTO} . ")"), 1, 2, $i, $i+1, 'fill', 'fill',0,0);
 #    $netc->{NET_DEVICE} eq "eth$_" and $table2->attach( _("connected to internet by %s", $netcnx->{type}), 2, 3, $i, $i+1, 'fill', 'fill',0,0);
@@ -153,6 +157,11 @@ $clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPR
     print $all_cards[$_]->[1] . "\n";
     print "-----\n";
 }
+
+my $button3 = new Gtk::Button(_("Configure..."));
+$button3->signal_connect( clicked => [ \&configure_lan, '', $netcnx, $netc, $intf]);
+$vbox2->pack_start($button3, 0, 0, 5);
+
 
 #  my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0):"));
 #  $table2->attach($label9, 0, 1, 0, 1, 'fill', 'fill',0,0);
@@ -208,6 +217,13 @@ sub update {
     $label_host->set ($h);
     $label4->set($netcnx->{type});
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
+    $clist1->freeze();
+    $clist1->clear();
+    foreach (0..$#all_cards) {
+	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
+	$clist1->set_selectable($_, 0);
+    }
+    $clist1->thaw();
 }
 
 sub get_profiles {
@@ -227,6 +243,89 @@ sub get_profiles {
 sub quit_global {
     $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
 }
+
+sub configure_lan {
+    my (undef, $prefix, $netcnx, $netc, $intf) = @_;
+    my $window = new Gtk::Window -toplevel;
+    my @infos;
+    $window->set_policy (1, 1, 1);
+    $window->signal_connect ( delete_event => sub { Gtk->main_quit; });
+    $window->set_position(1);
+    $window->set_title(_("LAN configuration"));
+    $window->border_width(10);
+    my $vbox1 = new Gtk::VBox(0,0);
+    $window->add($vbox1);
+    $vbox1->pack_start(new Gtk::Label(_("LAN Configuration")),0,1,0);
+    my $notebook = new Gtk::Notebook;
+    $vbox1->pack_start($notebook,0,1,0);
+    my @eth_data;
+    foreach (0..$#all_cards) {
+	my $vbox_local=new Gtk::VBox(0,0);
+	$vbox_local->pack_start(new Gtk::Label(_("Adapter %s: %s", $_+1 , "eth$_")),1,1,0);
+	#	Eth${_}Hostname=$netc->{HOSTNAME}
+	#       Eth${_}HostAlias=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
+	#	Eth${_}Driver=$all_cards[$_]->[1]
+        my @conf_data = ([_("IP address"), \$intf->{"eth$_"}->{IPADDR}],
+			 [_("Netmask"), \$intf->{"eth$_"}{NETMASK}],
+			 [_("Boot Protocol"), \$intf->{"eth$_"}{BOOTPROTO}, ["static", "dhcp", "bootp"]],
+			 [_("Started on boot"), \$intf->{"eth$_"}{ONBOOT} , ["static", "dhcp"]],
+			 [_("DHCP client"), \$netcnx->{dhcp_client}]
+			);
+	my $i=0;
+	foreach (@conf_data) {
+	    $infos[2*$i]=new Gtk::HBox(0,0);
+	    my $l=new Gtk::Label($_->[0]);
+	    $l->set_justify('left');
+	    $infos[2*$i]->pack_start($l,1,1,0);
+	    $vbox_local->pack_start($infos[2*$i],0,0,0);
+	    if (defined $_->[2]) {
+		my $c=new Gtk::Combo();
+		$c->set_popdown_strings(@{$_->[2]});
+		$infos[2*$i+1]=$c->entry;
+		$infos[2*$i+1]->set_editable(0);
+		$infos[2*$i]->pack_start($c,0,0,0);
+	    } else {
+		$infos[2*$i+1]=new Gtk::Entry();
+		$infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
+	    }
+	    $infos[2*$i+1]->set_text(${$_->[1]});
+	    $i++;
+	}
+	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
+	#	$clist1->set_selectable($_, 0);
+	print "--eth$_\n";
+	$notebook->append_page($vbox_local, "eth$_");
+    }
+    my $bbox1 = new Gtk::HButtonBox;
+    $vbox1->pack_start($bbox1,0,0,0);
+    $bbox1->set_layout(-end);
+    my $button_ok = new Gtk::Button "OK";
+    $button_ok->signal_connect ( clicked => sub {
+				     $i=0;
+				     foreach (@mask) {
+					 if ($_) {
+					     print $conf_data[$i]->[1] . "\n";
+					     print ${$conf_data[$i]->[1]} . " - " . $infos[2*$i+1]->get_text() . "\n";
+					     ${$conf_data[$i]->[1]}=$infos[2*$i+1]->get_text();
+					     update();
+					 }
+					 else { $infos[2*$i]->hide; }
+					 $i++;
+				     }
+				     $window->destroy(); Gtk->main_quit;
+				 });
+    $bbox1->add($button_ok);
+    my $button_cancel = new Gtk::Button "Cancel";
+    $button_cancel->signal_connect ( clicked => sub { $window->destroy(); Gtk->main_quit });
+    $bbox1->add($button_cancel);
+
+    $window->set_modal(1);
+    $window->show_all();
+    $intf->{"eth$_"}{BOOTPROTO} eq dhcp or $infos[8]->hide;
+    $window->set_position('center_always');
+    Gtk->main;
+}
+
 
 sub configure_net {
     my (undef, $prefix, $netcnx, $netc, $intf) = @_;
