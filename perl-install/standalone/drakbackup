@@ -107,7 +107,7 @@
 #		12- cpio use !!
 #		13- boot floppy disk (with dialog)
 #		14- build autoboot with backup and install cd 
-#		15- use .backupignore like on CVS
+#DONE		15- use .backupignore like on CVS
 #		16- afficher les modif dans un fichier texte du meme nom 
 #			pour afficher durant le restore.
 #		17- futur: could be possible to restore a specific file 
@@ -315,6 +315,7 @@ sub explain_conf() {
 	print "                            User Mode: default is ~/.drakbackup/backups.\n";
 	print "NO_SYS_FILES               Don't backup system files.\n";
 	print "NO_USER_FILES              Don't backup user files.\n";
+	print "BACKUPIGNORE               Honor .backupignore files in backup directories\n";
 	print "OPTION_COMP                Compression option - TAR.GZ or TAR.BZ2 (tar.gz is default).\n";
 	print "BROWSER_CACHE              Backup web browser cache also.\n";
 	print "CDRW                       Backup media is re-writable CD.\n";
@@ -586,7 +587,8 @@ sub save_conf_file() {
 		    "HOST_NAME=$host_name\n"
 		    );
     $no_critical_sys and push @cfg_list, "NO_CRITICAL_SYS\n"; 
-    $no_critical_sys or push @cfg_list, "CRITICAL_SYS\n"; 
+    $no_critical_sys or push @cfg_list, "CRITICAL_SYS\n";
+	$backupignore and push @cfg_list, "BACKUPIGNORE\n"; 
     $send_mail and push @cfg_list, "SEND_MAIL\n";
     $backup_sys_versions and push @cfg_list, "SYS_INCREMENTAL_BACKUPS\n"; 
     $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n"; 
@@ -724,6 +726,7 @@ sub read_conf_file() {
 			if (/^OTHER_DIFFERENTIAL_BACKUPS/) { $other_diff_mode = 1 }
 			if (/^NO_CRITICAL_SYS/) { $no_critical_sys = 1 }
 			if (/^CRITICAL_SYS/)   { $no_critical_sys = 0 }
+			if (/^BACKUPIGNORE/)   { $backupignore = 1 }
 			if (/^DEL_HD_FILES/)   { $del_hd_files = 1 }
 	    }
 		close(CONF_FILE);
@@ -1223,6 +1226,7 @@ sub build_backup_files() {
     the_time();    
     $send_mail and complete_results();
     -d  $save_path or mkdir_p($save_path);
+		
     if ($comp_mode) { 
 		$DEBUG and $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 ";
 		$DEBUG or $tar_cmd = "tar c --use-compress-program /usr/bin/bzip2 "; 
@@ -2444,8 +2448,8 @@ sub advanced_when() {
 sub advanced_options() {
     my $box_options;
     
-    gtkpack($advanced_box,
-	    $box_options = gtkpack_(new Gtk2::VBox(0, 15),
+	gtkpack($advanced_box,
+		$box_options = gtkpack_(new Gtk2::VBox(0, 15),
 # 				 0, gtkpack_(new Gtk2::HBox(0,10),
 # 					     1, new Gtk2::VBox(0,10),
 # 					     1, gtkcreate_img("ic82-moreoption-40"),
@@ -2455,20 +2459,20 @@ sub advanced_options() {
 # 				 0, new Gtk2::HSeparator,
 # 				 0, gtkpack_(new Gtk2::VBox(0,10),
 # 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk2::CheckButton( N("Use Tar and bzip2 (very slow) [Please be careful if you\n (un)select this option, as all your old backups will be deleted.]")), 0),
-# 			 0, gtkset_sensitive(my $check_backupignore = new Gtk2::CheckButton( N("Use .backupignore files")), 0),
-				    0, new Gtk2::VBox(0,10),
-				    0, gtkpack_(new Gtk2::HBox(0,10),
-						0, my $check_mail = new Gtk2::CheckButton(N("Send mail report after each backup to:")),
-						1, new Gtk2::HBox(0,10),
-						0, my $mail_entry = new Gtk2::Entry(),
-					),
+ 			0, my $check_backupignore = new Gtk2::CheckButton(N("Use .backupignore files")),
+#			0, new Gtk2::VBox(0,10),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, my $check_mail = new Gtk2::CheckButton(N("Send mail report after each backup to:")),
+				1, new Gtk2::HBox(0,10),
+				0, my $mail_entry = new Gtk2::Entry(),
+			),
 #					     ),
-				    0, gtkpack_(new Gtk2::HBox(0,10),
-						0, my $check_del_hd_files = new Gtk2::CheckButton(N("Delete Hard Drive tar files after backup to other media.")),
-					),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, my $check_del_hd_files = new Gtk2::CheckButton(N("Delete Hard Drive tar files after backup to other media.")),
+			),
 		),
 	);
-    check_list([$check_mail, \$send_mail], [$check_del_hd_files, \$del_hd_files]);
+    check_list([$check_mail, \$send_mail], [$check_del_hd_files, \$del_hd_files], [$check_backupignore, \$backupignore]);
 #    check_list([$check_mail, \$send_mail], [$check_tar_bz2, \$comp_mode], [$check_backupignore, \$backupignore]);
     $mail_entry->set_text($user_mail);
     $mail_entry->signal_connect('changed', sub { $user_mail = $mail_entry->get_text });
@@ -4843,30 +4847,36 @@ sub adv_help {
 
  In this step Drakbackup allow you to change:
 
- - The compression mode:
+ - the .backupignore mode:
+
+      Like with cvs, drakbackup will ignore all references
+      included in .backupignore files in each directory.
+      
+	  Example: 
+         #> cat .backupignore
+         *.o
+         *~
+         ...
+ 
+ - The user(s) to whom drakbackup reports should be mailed to.
+      
+      This can be a comma sperated lists of local users, or
+      internet email addresses if your system is setup to
+      do internet mail.
+  
+ - The compression mode (not enabled):
     
       If you check bzip2 compression, you will compress
       your data better than gzip (about 2-10 %%).
       This option is not checked by default because
       this compression mode needs more time (about 1000%% more).
  
- - The update mode:
+ - The update mode (not enabled):
 
       This option will update your backup, but this
       option is not really useful because you need to
       decompress your backup before you can update it.
       
- - the .backupignore mode:
-
-      Like with cvs, Drakbackup will ignore all references
-      included in .backupignore files in each directories.
-      ex: 
-         #> cat .backupignore
-         *.o
-         *~
-         ...
-      
-
 "), 
 			"mail_pb" =>
 			N("
@@ -4921,9 +4931,15 @@ sub adv_help {
 "), 
 			"restore" =>
 			N("Restore Description:
+
+Drakbackup now allows you to search the backup lists for a particular
+file or files to restore.  If the search is successful, you will be 
+presented with a list of matches, along with backup media and dates.
+You can then select individual files to restore from your backup media.
  
-Only the most recent date will be used, because with incremental 
-backups it is necessary to restore one by one each older backup.
+For 'normal' restores, only the most recent date will be used, 
+because with incremental  backups it is necessary to restore 
+one by one each older backup.
 
 So if you don't want to restore a user please unselect all their
 check boxes.
