@@ -520,13 +520,6 @@ sub install_urpmi {
     my @cfg = map_index {
 	my $name = $_->{fakemedium};
 
-	#- build synthesis file at install, this will improve performance greatly.
-	run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
-			    "--compact", "--name", "--provides", "--requires", "/var/lib/urpmi/hdlist.$name.cz");
-	run_program::rooted($prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
-	#- safe guard correct generation of synthesis file.
-	-s "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" > 24 or unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
-
 	local *LIST;
 	my $mask = umask 077;
 	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name");
@@ -536,7 +529,7 @@ sub install_urpmi {
                       disk => "file:/" . hdInstallPath(),
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
-		      cdrom => "removable_cdrom://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
+		      cdrom => "removable://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
 
 	local *FILES; open FILES, "$ENV{LD_LOADER} parsehdlist /tmp/$_->{hdlist} |";
 	print LIST "$dir/$_\n" foreach chomp_(<FILES>);
@@ -550,13 +543,16 @@ sub install_urpmi {
 	"$qname " . ($dir !~ /^(ftp|http)/ && $qdir) . " {
   hdlist: hdlist.$name.cz
   with_hdlist: ../base/$_->{hdlist}
-  list: list.$name" . ($dir =~ /removable_([^\s:_]*)/ && "
-  removable: /dev/$1") . "
+  list: list.$name" . ($dir =~ /removable:/ && "
+  removable: /dev/cdrom") . "
 }
 
 ";
     } values %$mediums;
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
+
+    #- automatically build all synthesis files.
+    run_program::rooted($prefix, "perl", "-e", 'use urpm; $urpm = new urpm; $urpm->read_config; $urpm->update_media');
 }
 
 
