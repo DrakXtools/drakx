@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/mount.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
@@ -30,6 +31,7 @@
 #include "log.h"
 #include "mar/mar-extract-only.h"
 #include "frontend.h"
+#include "mount.h"
 #include "modules_descr.h"
 
 #include "modules.h"
@@ -374,4 +376,68 @@ enum return_type ask_insmod(enum driver_type type)
 		return insmod_with_options(choice, type);
 	} else
 		return results;
+}
+
+
+void update_modules(void)
+{
+	FILE * f;
+	char ** disk_contents;
+	char final_name[500];
+	char floppy_mount_location[] = "/tmp/floppy";
+
+	stg1_info_message("Please insert the Update Modules disk.");;
+
+	my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
+
+	if (my_mount("/dev/fd0", floppy_mount_location, "ext2") == -1) {
+		stg1_error_message("I can't find a Linux ext2 floppy in first floppy drive.");
+		return update_modules();
+	}
+
+	disk_contents = list_directory(floppy_mount_location);
+
+	if (!(f = fopen("/tmp/floppy/to_load", "rb"))) {
+		stg1_error_message("I can't find \"to_load\" file.");
+		umount(floppy_mount_location);
+		return update_modules();
+	}
+	while (1) {
+		char module[500];
+		char * options;
+		char ** entry = disk_contents;
+
+		if (!fgets(module, sizeof(module), f)) break;
+		if (module[0] == '#' || strlen(module) == 0)
+			continue;
+
+		while (module[strlen(module)-1] == '\n')
+			module[strlen(module)-1] = '\0';
+		options = strchr(module, ' ');
+		if (options) {
+			options[0] = '\0';
+			options++;
+		}
+
+		log_message("updatemodules: (%s) (%s)", module, options);
+		while (entry && *entry) {
+			if (!strncmp(*entry, module, strlen(module)) && (*entry)[strlen(module)] == '.') {
+				sprintf(final_name, "%s/%s", floppy_mount_location, *entry);
+				if (insmod_call(final_name, options)) {
+					log_message("\t%s (floppy): failed", *entry);
+					stg1_error_message("Insmod %s (floppy) failed.", *entry);
+				}
+				break;
+			}
+			entry++;
+		}
+		if (!entry || !*entry) {
+			enum insmod_return ret = my_insmod(module, ANY_DRIVER_TYPE, options);
+			if (ret != INSMOD_OK) {
+				log_message("\t%s (marfile): failed", module);
+				stg1_error_message("Insmod %s (marfile) failed.", module);
+			}
+		}
+	}
+	fclose(f);
 }

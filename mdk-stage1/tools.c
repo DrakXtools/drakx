@@ -87,6 +87,8 @@ void process_cmdline(void)
 		params[param_number].value = value;
 		param_number++;
 		if (!strcmp(name, "expert")) set_param(MODE_EXPERT);
+		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
+		if (!strcmp(name, "updatemodules")) set_param(MODE_UPDATEMODULES);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
 		if (!strcmp(name, "automatic")) {

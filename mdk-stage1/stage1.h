@@ -37,6 +37,8 @@ extern char * interactive_fifo;
 #define MODE_AUTOMATIC	    (1 << 4)
 #define MODE_SPECIAL_STAGE2 (1 << 8)
 #define MODE_RAMDISK        (1 << 9)
+#define MODE_CHANGEDISK     (1 << 10)
+#define MODE_UPDATEMODULES  (1 << 11)
 
 #define IS_TESTING     (get_param(MODE_TESTING))
 #define IS_EXPERT      (get_param(MODE_EXPERT))
@@ -44,6 +46,8 @@ extern char * interactive_fifo;
 #define IS_AUTOMATIC   (get_param(MODE_AUTOMATIC))
 #define IS_SPECIAL_STAGE2 (get_param(MODE_SPECIAL_STAGE2))
 #define IS_RAMDISK     (get_param(MODE_RAMDISK))
+#define IS_CHANGEDISK  (get_param(MODE_CHANGEDISK))
+#define IS_UPDATEMODULES (get_param(MODE_UPDATEMODULES))
 
 void fatal_error(char *msg) __attribute__ ((noreturn));
 

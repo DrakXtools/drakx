@@ -379,7 +379,14 @@ int main(int argc, char **argv, char **env)
 	if (IS_EXPERT)
 		expert_third_party_modules();
 
+	if (IS_UPDATEMODULES)
+		update_modules();
+
 	handle_pcmcia(&pcmcia_adapter);
+
+	if (IS_CHANGEDISK)
+		stg1_info_message("You are starting the installation with an alternate booting method. "
+				  "Please change your disk, and insert the Installation disk.");
 
 	ret = method_select_and_prepare();
 
