@@ -83,6 +83,9 @@ my $ct_tag;
 my ($pixmap, $darea);
 my ($width, $height) = (300, 150);
 
+my $left_border = 50;
+my $grid_interval = 30;
+
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
 MDK::Common::Globals::init(in => $in);
@@ -230,6 +233,8 @@ sub connection() {
     }
 }
 
+sub graph_window_width() { $width - $left_border }
+
 sub rescan() {
     get_val();
     foreach (@interfaces) {
@@ -247,10 +252,10 @@ sub rescan() {
 	    push(@{$monitor->{$intf}{stack_ra}}, $monitor->{$intf}{recva}/10);
 	    $monitor->{$intf}{recva} = $monitor->{$intf}{recvan} = 0;
 	} else { push(@{$monitor->{$intf}{stack_ra}}, -1) }
-	shift @{$monitor->{$intf}{stack_ra}} if @{$monitor->{$intf}{stack_ra}} > 250;
+	shift @{$monitor->{$intf}{stack_ra}} if @{$monitor->{$intf}{stack_ra}} > graph_window_width();
 
 	push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
-	shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > 250;
+	shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > graph_window_width();
 	$monitor->{$intf}{labelr}->set_label(formatXiB($recv - $monitor->{$intf}{initialr}));
 	$monitor->{$intf}{referencer} = $recv;
 
@@ -260,10 +265,10 @@ sub rescan() {
 	    push(@{$monitor->{$intf}{stack_ta}}, $monitor->{$intf}{transmita}/10);
 	    $monitor->{$intf}{transmita} = $monitor->{$intf}{transmitan} = 0;
 	} else { push(@{$monitor->{$intf}{stack_ta}}, -1) }
-	shift @{$monitor->{$intf}{stack_ta}} if @{$monitor->{$intf}{stack_ta}} > 250;
+	shift @{$monitor->{$intf}{stack_ta}} if @{$monitor->{$intf}{stack_ta}} > graph_window_width();
 
 	push(@{$monitor->{$intf}{stack_t}}, $transmit - $reft);
-	shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > 250;
+	shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > graph_window_width();
 	$monitor->{$intf}{labelt}->set_label(formatXiB($transmit - $monitor->{$intf}{initialt}));
 	$monitor->{$intf}{referencet} = $transmit;
 
@@ -402,8 +407,8 @@ sub update() {
                                     my $received    = $x >= 0 ? $monitor->{$intf}{stack_r}[$x] : 0;
                                     my $transmitted = $x >= 0 ? $monitor->{$intf}{stack_t}[$x] : 0;
                                     my $type;
-                                    $y * $scale / 150 < $transmitted and $type = N("transmitted");
-                                    (150 - $y) * $scale / 150 < $received and $type = N("received");
+                                    $y * $scale / $height < $transmitted and $type = N("transmitted");
+                                    ($height - $y) * $scale / $height < $received and $type = N("received");
                                     $measure_r->set_label(formatXiB($received));
                                     $measure_t->set_label(formatXiB($transmitted));
                                 });
@@ -456,37 +461,37 @@ sub draw_monitor {
     my $ech = $maxr + $maxt;
     $ech == 0 and $ech = 1;
     $scale = $ech;
-    my $step = 49;
+    my $step = $left_border - 1;
     foreach (@{$o->{stack_t}}) {
-	$pixmap->draw_rectangle($gct, 1, $step, 0, 1, $_*150/$ech);
+	$pixmap->draw_rectangle($gct, 1, $step, 0, 1, $_*$height/$ech);
 	$step++;
     }
-    $step = 49;
+    $step = $left_border - 1;
     my ($av1, $av2, $last_a);
     foreach (@{$o->{stack_ta}}) {
 	if ($_ != -1) {
 	    if (!defined $av1) { $av1 = $_ } else { defined $av2 or $av2 = $_ }
 	    if ($av1 && $av2) {
-		$pixmap->draw_line($gca, $step-15, $av1*150/$ech, $step-5, $av2*150/$ech);
+		$pixmap->draw_line($gca, $step-15, $av1*$height/$ech, $step-5, $av2*$height/$ech);
 		$av1 = $av2;
 		undef $av2;
-		$last_a = $step-50;
+		$last_a = $step - $left_border;
 	    }
 	}
 	$step++;
     }
-    $step = 49;
+    $step = $left_border - 1;
     foreach (@{$o->{stack_r}}) {
-	$pixmap->draw_rectangle($gcr, 1, $step, 151-$_*150/$ech, 1, $_*150/$ech);
+	$pixmap->draw_rectangle($gcr, 1, $step, $height-$_*$height/$ech, 1, $_*$height/$ech);
 	$step++;
     }
-    $step = 49;
+    $step = $left_border - 1;
     ($av1, $av2) = undef;
     foreach (@{$o->{stack_ra}}) {
 	if ($_ != -1) {
 	    if (!defined $av1) { $av1 = $_ } else { defined $av2 or $av2 = $_ }
 	    if (defined $av1 && defined $av2) {
-		$pixmap->draw_line($gca, $step-15, 151-$av1*150/$ech, $step-5, 151-$av2*150/$ech);
+		$pixmap->draw_line($gca, $step-15, $height-$av1*$height/$ech, $step-5, $height-$av2*$height/$ech);
 		$av1 = $av2;
 		undef $av2;
 	    }
@@ -498,36 +503,38 @@ sub draw_monitor {
     my $gcl = Gtk2::Gdk::GC->new($darea->{$intf}->window);
     $gcl->set_foreground($darea->{$intf}->style->white);
     $gcl->set_line_attributes(1, 'on-off-dash', 'not-last', 'round');
-    for (my $i = 30; $i <= 120; $i += 30) {
-	$pixmap->draw_line($gcl, 50, $i, 300, $i);
+    for (my $i = $grid_interval; $i <= $height - $grid_interval; $i += $grid_interval) {
+	$pixmap->draw_line($gcl, $left_border, $i, $width, $i);
 	my ($gc2, $text);
 	my ($dif1, $dif2);
 	if ($last_a) {
-	    $dif1 = abs(150-(@{$o->{stack_ra}}[$last_a])*150/$ech - $i);
-	    $dif2 = abs((@{$o->{stack_ta}}[$last_a])*150/$ech - $i);
+	    $dif1 = abs($height-(@{$o->{stack_ra}}[$last_a])*$height/$ech - $i);
+	    $dif2 = abs((@{$o->{stack_ta}}[$last_a])*$height/$ech - $i);
 	} else {
-	    $dif1 = abs(150-(@{$o->{stack_r}}[@{$o->{stack_r}}-1])*150/$ech - $i);
-	    $dif2 = abs((@{$o->{stack_t}}[@{$o->{stack_t}}-1])*150/$ech - $i);
+	    $dif1 = abs($height-(@{$o->{stack_r}}[@{$o->{stack_r}}-1])*$height/$ech - $i);
+	    $dif2 = abs((@{$o->{stack_t}}[@{$o->{stack_t}}-1])*$height/$ech - $i);
 	}
 	if ($dif1 < $dif2) {
-	    $text = formatXiB((150-$i)*$ech/150);
+	    $text = formatXiB(($height-$i)*$ech/$height);
 	    $gc2 = $gcr;
 	    my $x_l = 5;
-	    if ($i > 30 && $switch) {
-		$pixmap->draw_line($gct, $x_l, 0, $x_l, $i-30);
-		$pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $i-30);
-		$pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $i-30);
-		$pixmap->draw_polygon($gct, 1, $x_l-4, $i-30, $x_l+5, $i-30, $x_l, $i-25);
-	    }
-	    if ($switch) {
-		$pixmap->draw_line($gcr, $x_l, 150, $x_l, $i);
-		$pixmap->draw_line($gcr, $x_l-1, 150, $x_l-1, $i);
-		$pixmap->draw_line($gcr, $x_l+1, 150, $x_l+1, $i);
-		$pixmap->draw_polygon($gcr, 1, $x_l-5, $i, $x_l+5, $i, $x_l, $i-6);
-	    }
-	    undef $switch;
+            if ($switch) {
+                if ($i > $grid_interval) {
+                    $pixmap->draw_line($gct, $x_l, 0, $x_l, $i-$grid_interval);
+                    $pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $i-$grid_interval);
+                    $pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $i-$grid_interval);
+                    $pixmap->draw_polygon($gct, 1, $x_l-4, $i-$grid_interval, $x_l+5, $i-$grid_interval, $x_l, $i-25);
+                }
+
+                $pixmap->draw_line($gcr, $x_l, $height, $x_l, $i);
+                $pixmap->draw_line($gcr, $x_l-1, $height, $x_l-1, $i);
+                $pixmap->draw_line($gcr, $x_l+1, $height, $x_l+1, $i);
+                $pixmap->draw_polygon($gcr, 1, $x_l-5, $i, $x_l+5, $i, $x_l, $i-6);
+
+                undef $switch;
+            }
 	} else {
-	    $text = formatXiB($i*$ech/150);
+	    $text = formatXiB($i*$ech/$height);
 	    $gc2 = $gct;
 	}
      $pixmap->draw_layout($gc2, 45-string_width($darea->{$intf}, $text), $i-5, $darea->{$intf}->create_pango_layout($text));
