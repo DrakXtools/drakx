@@ -66,7 +66,7 @@ sub choose_xdm {
     my ($in, $b_auto) = @_;
     my $xdm = $::isStandalone ? runlevel() == 5 : 1;
 
-    if (!$b_auto || $::isStandalone) {
+    if (!$b_auto) {
 	$xdm = $in->ask_yesorno_({ 
 				  title => N("Graphical interface at startup"),
 				  messages =>
