@@ -178,8 +178,8 @@ sub printerConfig($) {
 	#Don't wait, if the user enter something, you must remember it
 	$o->ask_from_entries_ref(_("Standard Printer Options"),
 				 _("Every print queue (which print jobs are directed to) needs a 
-			   name (often lp) and a spool directory associated with it. What 
-			   name and directory should be used for this queue?"),
+name (often lp) and a spool directory associated with it. What 
+name and directory should be used for this queue?"),
 				 [_("Name of queue:"), _("Spool directory:")],
 				 [\$o->{printer}{QUEUE}, \$o->{printer}{SPOOLDIR}],
 				 changed => sub 
