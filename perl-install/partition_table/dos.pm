@@ -151,15 +151,16 @@ sub set_best_geometry_for_the_partition_table {
 	log::l("$hd->{device}: would need looking at BIOS info to find out geometry");
 	return;
     } 
+    my $default_ok = is_geometry_valid_for_the_partition_table($hd, $hd->{geom}, 0);
     if ($guessed_geom->{invalid}) {
 	log::l("$hd->{device}: no valid geometry guessed from partition table");
+	$default_ok and return;
 	$guessed_geom = try_every_geometry($hd) or return;
     }
     
     if ($guessed_geom->{heads} == $hd->{geom}{heads} && $guessed_geom->{sectors} == $hd->{geom}{sectors}) {
 	# cool!
     } else {
-	my $default_ok = is_geometry_valid_for_the_partition_table($hd, $hd->{geom}, 0);
 	my $guessed_ok = is_geometry_valid_for_the_partition_table($hd, $guessed_geom, 0);
 	if ($default_ok && $guessed_ok) {
 	    #- oh my!?
