@@ -66,6 +66,7 @@ our @tree =
                       member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo)) } @devices) },
        0 ],
      [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
+     [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
      [ "ETHERNET", , N("Ethernetcard"), "hw_network.png", "$sbindir/drakconnect", sub {
          #- generic NIC detection for USB seems broken (class, subclass, 
          #- protocol report are not accurate) so I'll need to verify against
@@ -77,7 +78,6 @@ our @tree =
      [ "MODEM", , N("Modem"), "modem.png", "$sbindir/drakconnect", sub { detect_devices::getModem() }, 0 ],
      [ "ADSL", , N("ADSL adapters"), "modem.png", "$sbindir/drakconnect", sub { 
            require network::adsl; my $a = network::adsl::adsl_detect(); $a ? f(grep { $_ } values %$a) : () }, 0 ],
-     [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
                                                             if_(!is_empty_hash_ref($isdn), $isdn) }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices) }, 0 ],
      [ "PRINTER", , N("Printer"), "hw_printer.png", "$sbindir/printerdrake", sub { 
