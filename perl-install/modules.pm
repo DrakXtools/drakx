@@ -88,6 +88,7 @@ arch() =~ /^sparc/ ? (
 
   "8390" => "8390",
   "dummy" => "dummy",
+  "af_packet" => "packet socket",
   "nfs" => "Network File System (nfs)",
   "lockd" => "lockd",
   "sunrpc" => "sunrpc",
@@ -132,6 +133,8 @@ arch() =~ /^sparc/ ? (
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
   "scsi_mod" => "scsi_mod",
+  "ide-mod" => "ide-mod",
+  "ide-probe" => "ide-probe",
 }],
 [ 'disk', {
 arch() =~ /^sparc/ ? (

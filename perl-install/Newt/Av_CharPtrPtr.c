@@ -52,7 +52,7 @@ SV *rv;
 				if( s[x] == NULL )
 					warn("XS_unpack_charPtrPtr: unable to malloc char*");
 				else
-					strcpy( s[x], SvPV( *ssv, na ) );
+					strcpy( s[x], SvPV( *ssv, PL_na ) );
 			}
 			else
 				warn("XS_unpack_charPtrPtr: array elem %d was not a string.", x );

@@ -252,6 +252,7 @@ sub selectKeyboard {
 
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
+	lang::write($o->{prefix});
 	keyboard::write($o->{prefix}, $o->{keyboard});
     } 'doInstallStep' unless $::g_auto_install;
 }
@@ -287,7 +288,7 @@ sub setupSCSI {
 sub partitionDisks {
     return
       $o->{fstab} = [
-	{ device => "loop7", type => 0x83, size => ((cat_('/dos/lnx4win/size.txt'))[0]*2048), mntpoint => "/", isFormatted => 1, isMounted => 1 },
+	{ device => "loop7", type => 0x83, size => 2048 * cat_('/dos/lnx4win/size.txt'), mntpoint => "/", isFormatted => 1, isMounted => 1 },
 	{ device => "/initrd/dos/lnx4win/swapfile", type => 0x82, mntpoint => "swap", isFormatted => 1, isMounted => 1 },
       ] if $o->{lnx4win};
     return if $o->{isUpgrade};
@@ -361,7 +362,6 @@ sub choosePackages {
 	if ($_[1] == 1) { 
 	    $o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
 	    $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
-
 	}
 	$o->choosePackages($o->{packages}, $o->{compss}, 
 			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
@@ -617,8 +617,7 @@ sub main {
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
-    eval { modules::load("ide-disk") };
-    eval { modules::load("sd_mod") };
+    eval { modules::load($_) } foreach qw(ide-probe ide-disk sd_mod af_packet);
     install_any::lnx4win_preinstall() if $o->{lnx4win};
 
     #-the main cycle

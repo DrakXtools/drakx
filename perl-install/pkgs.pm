@@ -25,18 +25,18 @@ autoirpm autoirpm-icons numlock
 
 my %by_lang = (
   ar    => [ 'acon' ],
-  cs	=> [ 'XFree86-ISO8859-2' ],
-  hr	=> [ 'XFree86-ISO8859-2' ],
-  hu	=> [ 'XFree86-ISO8859-2' ],
+  cs	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  hr	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  hu	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   ja    => [ 'rxvt-CLE', 'fonts-ttf-japanese', 'kterm' ],
   ko    => [ 'rxvt-CLE', 'fonts-ttf-korean' ],
-  pl	=> [ 'XFree86-ISO8859-2' ],
-  ro	=> [ 'XFree86-ISO8859-2' ],
+  pl	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  ro	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   ru	=> [ 'XFree86-cyrillic-fonts' ],
-  sk	=> [ 'XFree86-ISO8859-2' ],
-  sl	=> [ 'XFree86-ISO8859-2' ],
-  sr	=> [ 'XFree86-ISO8859-2' ],
-  tr	=> [ 'XFree86-ISO8859-9' ],
+  sk	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  sl	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  sr	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  'tr'	=> [ 'XFree86-ISO8859-9', 'XFree86-ISO8859-9-75dpi-fonts' ],
   zh_CN => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
@@ -262,9 +262,9 @@ sub readCompssList($$$) {
     }
 
     my %done;
-    my $locales = "locales-" . substr($ENV{LANG}, 0, 2);
-    if (my $p = $packages->{$locales}) {
-	foreach ($locales, @{$p->{provides} || []}, @{$by_lang{$ENV{LANG}} || []}) {
+    foreach (split ':', $ENV{RPM_INSTALL_LANG}) {
+	my $p = $packages->{"locales-$_"} || {};
+	foreach ("locales-$_", @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
 	    next if $done{$_}; $done{$_} = 1;
 	    my $p = $packages->{$_} or next;
 	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x $nb_values ]} ];

@@ -718,7 +718,7 @@ sub create_steps_window {
 
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
-		    (map { 1, $_ } map {
+		    (map {; 1, $_ } map {
 			my $step = $o->{steps}{$_};
 			my $circle =
 			  $step->{done}    && \@green_circle  ||
@@ -807,7 +807,7 @@ END
     open F, ">$file" or die "can't create X configuration file $file";
     print F <<END;
 Section "Files"
-   FontPath   "/usr/X11R6/lib/X11/fonts:unscaled,/usr/X11R6/lib/X11/fonts"
+   FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
 EndSection
 
 Section "Keyboard"

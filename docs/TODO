@@ -1,66 +1,88 @@
-(done,pix)bug: DrakConf don't follow the charset -> add setlocale(LC_ALL, "")
-(done,pix)for ko|ja|zh, gnome-terminal should point to rxvt (-CLE)
-(done,pix)group cdrom in /etc/group (gid=22)
-(done,pix)drakxtools should require urpmi
-(done,pix)bug: gdm unset LANG
-(done,pix) zip with automount -> ppa not autoloaded
-(done,pix)when you set the kde icons to Large, maybe it'd be good to chown the .kderc
-(done,pix)lilo in russian/japaneese is horrible
-(ok,pix)test ide burners
-(ok)test check bad blocks optional for mke2fs
-(done,pix)hd install: no umount is done at the end of install :(
-
-just before release:
-(done,pix)- mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
-(done,pix)- crypto dependencies to update
-(done,pix)- update kudzu's pcitable
-(done,pix)- update pcitable for 86C368 if 3.3.6 (and other S3 3D's)
-            ("ATI|3D Rage P/M Mobility AGP 2x" -> changed to Server:Mach64)
-
---------------------------------------------------------------------------------
-ask package installation languages (must be put in RPM_INSTALL_LANG)
-
-remount ro before X test.
+-choices--------------------------------------------------------------------------------
+index/compress hdlist?
 
 checkboxes in groups based on compssList (and availableSpace?)
 
-rpmdrake and same name packages
+PPPoE install and configuration (SuSE includes it, DHCP-like)
 
-(workaround)with 2MB of video ram, chooses 8bpp instead of 16bpp
+standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
-the XFdrake test does not handle the fontset
+feature missing: cancel installation
+
+crypto: add a cancel & progress bar while downloading
+
+error handling (like reading hdlist)
+
+get the error when reading .rpm files fail
+
+diskdrake in text mode
+
+add fdisk using the zvt widget (taken in gnome-libs)
+
+see what can be done with nvram (50 bytes to save information)
+
+Tree -> CTree, ``all'' branch with all packages
+show the value associated (100->a must, 90->great, 80->nice, ... 10->useless, 0->do not install)
+
+sound config
+
+grub, chos, gag
+
+enable the testing of the mouse type (under X) (wheel)
+
+using setxkb, enable the testing of the keyboard
+
+----
+paride in stage1
+
+msec custom
+
+stage1 & network: add ability to choose the network interface to use
+stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
+
+ability to add nfs/weird_fs entries in fstab
+
+(fpons)pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
+
+auto ppp-configure with free provider
 
 
-replace
-	{ device => "loop7", type => 0x83, size => cat_('/dos/lnx4win/size.txt') * 2048, mntpoint => "/", isFormatted => 1, isMounted => 1 },
-by
-	{ device => "loop7", type => 0x83, size => ((cat_('/dos/lnx4win/size.txt'))[0]*2048), mntpoint => "/", isFormatted => 1, isMounted => 1 },
+-easy fixes-----------------------------------------------------------------------------
+remove every << and >> (doesn't handle > 32bits)
 
+usb module not removed if no mouse found
 
---------------------------------------------------------------------------------
-mandrake_desk has not installed while kdebase it there on upgrade
+(small)urpmi: handle many args on cmd-line
 
-(done,pix)bug (by dadou): Si la partition racine est trop petite pour installer le système, un
-message d'erreur apparaît pour signaler le problème (bien) mais on ne
-peut en sortir. La seule solution est de redémarrer.
+fstab must be sorted (/usr/local after /usr)
 
-Je viens de faire une installation sur une machine où seul Be était
+configure DHCP for newbies if ethernet & DHCP card available
+
+rpmdrake proposition for cdrom labels
+
+fix any // in path to ftp server otherwise windobe server bug :(
+
+(?) Je viens de faire une installation sur une machine où seul Be était
 installé. Je l'ai supprimé et installé (mode recommandé) Oxygen. Au
 redémarrage, le boot manager de Be apparaît et il est impossible de
 démarrer Linux.
 Pourquoi ne pas installer LILO si on supprime toutes les partitions ?
 
-fix any // in path to ftp server otherwise windobe server bug :(
+(?) Xconfiguration: if "can't open fixed font", relaunch xfs.
+
+(?) in chooseResolutions: display the graphic card found
+
+(?) diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
+
+
+-fixes needing thinking-----------------------------------------------------------------
+handle not enough room for update
+(fpons)verify the free space is big enough.
 
 missing feature in lilo configuration: can't give hda2 with /boot/vmlinuz if
 already hda1 with /boot/vmlinuz
 
-I have Mandrake 6.1  installed and working on a ThinkPad 770.
-To enable the PCMCIA Token ring I have to append the following line to
-/etc/pcmcia/config.opts
-module "ibmtr_cs" opts "mmiobase=0xd2000 srambase=0xd4000"
-
-configure DHCP for newbies if ethernet & DHCP card available
+the XFdrake test does not handle the fontset
 
 > Here I go into the printer configuration select 'HP Deskjet 722C Colour',
 > print a test ASCII page, pressing 'No' when prompted to indicate the page did
@@ -68,112 +90,90 @@ configure DHCP for newbies if ethernet & DHCP card available
 > again.
 > ask_from_list cancel at /usr/lib/libDrakX/my_gtk.pm line 504.
 
-refresh the kde desktop after package installation in rpmdrake
-(restart kpanel)
-
 bug in ext2resizing (no sparse superbloc, don't finish properly)
 
 diskdrake: take from parted mklabel, hide(?)
-
-error handling (like reading hdlist)
-
-smp not detected (mhoward@memphisonline.com on cooker, bios=BP6PW)
-
-UDMA66 (ultra66.o for promise)
 
 bug in kde desktop if keeps home but not an upgrade
 	
 bug in users: mandrake user is added twice in strange installs
 (mixed of security 0 + ???)
 
-(obsolete)bug when selecting compssUsers, do not deselect after (if u deselect)
-
-(done,fpons)in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
-
-bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
+bugs rpmdrake: 
+- just after installing a package, switch to `Installed', the package has wrong name
+- refresh the kde desktop after package installation in rpmdrake
+(restart kpanel)
+- rpmdrake and same name packages
 
 urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
 
-PPPoE install and configuration (SuSE includes it, DHCP-like)
-
-auto ppp-configure with free provider
-
-standalone applications for configuration (netdrake, authentificationconf, soundcard)
-
-Xconfiguration: if "can't open fixed font", relaunch xfs.
-
 bug in defcfg in with lang=fr_FR, display is buggy
-
-feature missing: cancel installation
-cancel button in packages installation
-
-crypto: add a cancel while downloading
 
 bug keyboard focus: after switch in console at Xconfig step
 
-rpmdrake proposition for cdrom labels
 
-(done,pix)detect ide burners and then add hdX=ide-scsi to kernel cmdline
 
-bug in upgrade: install from hda1:/usr/local/blah with hda1:/
-
-msec custom
-
-paride in stage1
-
+-to look at--------------------------------------------------------------------------
 bug in diskdrake: can in strange cases create a primary partition at sector #0
 
 (done,pix(partly, protection against bugging))bug in diskdrake:
 in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
 in the middle, remove the first one. Result hda5 at the end and bug.
 
-(pix)add paride.o (and the others)
-
-(pix)install text on mem=8M, mem=16M?
-
 (fpons)bug: CANON BJC 4X00 do not work with current rhs-printfilters
   (work with magicfilters (debian))
   (should be handled by ghostscript BJC600's driver)
 
-(pix)see what can be done with nvram (50 bytes to save information)
-
-i18n
-
-stage1 & network: add ability to choose the network interface to use
-stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
-
-ability to add nfs/weird_fs entries in fstab
-
-(pix)diskdrake in text mode
-
-is configureNetworkNet needed with dhcp/bootp?
+(pix)install text on mem=8M, mem=16M?
 
 (pix)kickstart
 partitioning? raid?
 X configuration and bootloader in kickstart
 
-(pix)Tree -> CTree, ``all'' branch with all packages
-
-(fpons)verify the free space is big enough.
-
-(fpons)pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
-
 XFdrake chooseResolutions with ask_from_list do not permit ``Show all''
 
 have a better time estimation of the remaining time in install packages
 
-smaller zsh (or ash in initrd)
+(?) options in mkfs, progress bar when formatting
 
-initrd in bzip2
 
-(pix)options in mkfs, progress bar when formatting
+-hardware-------------------------------------------------------------------------------
+I have Mandrake 6.1  installed and working on a ThinkPad 770.
+To enable the PCMCIA Token ring I have to append the following line to
+/etc/pcmcia/config.opts
+module "ibmtr_cs" opts "mmiobase=0xd2000 srambase=0xd4000"
+
+smp not detected (mhoward@memphisonline.com on cooker, bios=BP6PW)
+
+UDMA66 (ultra66.o for promise)
+
+bug if ide-scsi, no more hdX, but scd0 (aka sr0)
 
 aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 
 try detect_devices::floppies (and how are scsi floppies handled?)
 maybe: do a iotcl FDGETPRM to detect fd1, fd0.
 
-grub, chos, gag
+(fpons)handle dat drives
+
+hibernation on laptop -> clock not restored
+
+XFree: handle by card options
+eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
+
+# in 2.3.15 "Silicon Integrated Systems [SiS]|SiS900 10/100 Ethernet" is handled
+
+
+-(?)---------------------------------------------------------------------------------
+(?)initrd in bzip2
+
+(?)smaller zsh (or ash in initrd)
+
+(?)is configureNetworkNet needed with dhcp/bootp?
+
+(?)bug in upgrade: install from hda1:/usr/local/blah with hda1:/
+
+(?)mandrake_desk was not installed while kdebase it there on upgrade
 
 (?)when clicking on X configuration, installation of packages is not displayed
 
@@ -183,22 +183,8 @@ grub, chos, gag
 when asking GMT or not, display the time for each possibility
 the list is too big for USA
 
-(fpons)handle dat drives
-
-sound config
-
 (?)ability to select the type of install when booting of cdrom
 (?)use the ability of el torito to handle 2.88MB or more 
-
-add fdisk using the zvt widget (taken in gnome-libs)
-
-using setxkb, enable the testing of the keyboard
-
-enable the testing of the mouse type (under X) (wheel)
-
-in chooseResolutions: display the graphic card found
-
-diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 (obsolete)lilo-deinstallation in case of lilo auto-installation for beginners
 
@@ -206,21 +192,16 @@ diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 (obsolete)trash on the screen when X first starts
 
-(?)get the error when reading .rpm files fail
-
 (?)remove the gray line surrounding the logo
 
 (?)cleanup /etc/services & /etc/protocols
 
-# in 2.3.15 "Silicon Integrated Systems [SiS]|SiS900 10/100 Ethernet" is handled
-
 (?)strange: no scsi of type 'fd', only 'tape'
 
-XFree: handle by card options
-eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
+(?)remount ro before X test.
 
-compress hdlist?
 
+-done---------------------------------------------------------------------------------
 (done,fpons)rewrite mouseconfig in perl?
 
 (done,pix)kudzu or not in miscellaneous
@@ -364,3 +345,40 @@ contient la variable « default » positionnée sur autre chose que
 
 (done,pix)kde's icons: 28 horiz and 25 vert grid for big icons
 
+(done,pix)bug: DrakConf don't follow the charset -> add setlocale(LC_ALL, "")
+(done,pix)for ko|ja|zh, gnome-terminal should point to rxvt (-CLE)
+(done,pix)group cdrom in /etc/group (gid=22)
+(done,pix)drakxtools should require urpmi
+(done,pix)bug: gdm unset LANG
+(done,pix) zip with automount -> ppa not autoloaded
+(done,pix)when you set the kde icons to Large, maybe it'd be good to chown the .kderc
+(done,pix)lilo in russian/japaneese is horrible
+(ok,pix)test ide burners
+(ok)test check bad blocks optional for mke2fs
+(done,pix)hd install: no umount is done at the end of install :(
+
+just before release:
+(done,pix)- mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
+(done,pix)- crypto dependencies to update
+(done,pix)- update kudzu's pcitable
+(done,pix)- update pcitable for 86C368 if 3.3.6 (and other S3 3D's)
+            ("ATI|3D Rage P/M Mobility AGP 2x" -> changed to Server:Mach64)
+
+(done,pix)with 2MB of video ram, chooses 8bpp instead of 16bpp
+
+(done,pix) replace
+	{ device => "loop7", type => 0x83, size => ((cat_('/dos/lnx4win/size.txt'))[0]*2048), mntpoint => "/", isFormatted => 1, isMounted => 1 },
+by
+	{ device => "loop7", type => 0x83, size => cat_('/dos/lnx4win/size.txt') * 2048, mntpoint => "/", isFormatted => 1, isMounted => 1 },
+
+(done,fpons)in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
+
+(done,pix)ask package installation languages (must be put in RPM_INSTALL_LANG)
+
+(done,pix)bug (by dadou): Si la partition racine est trop petite pour installer le système, un
+message d'erreur apparaît pour signaler le problème (bien) mais on ne
+peut en sortir. La seule solution est de redémarrer.
+
+(obsolete)bug when selecting compssUsers, do not deselect after (if u deselect)
+
+(done,pix)detect ide burners and then add hdX=ide-scsi to kernel cmdline

@@ -92,11 +92,11 @@ sub gtksignal_connect($@) {
 }
 sub gtkpack($@) {
     my $box = shift;
-    gtkpack_($box, map { 1, $_} @_);
+    gtkpack_($box, map {; 1, $_ } @_);
 }
 sub gtkpack__($@) {
     my $box = shift;
-    gtkpack_($box, map { 0, $_} @_);
+    gtkpack_($box, map {; 0, $_ } @_);
 }
 sub gtkpack_($@) {
     my $box = shift;

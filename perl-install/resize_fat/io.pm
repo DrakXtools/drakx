@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 
 use resize_fat::fat;
+use c;
 
 1;
 
@@ -24,23 +25,18 @@ sub write($$$$) {
 sub read_cluster($$) {
     my ($fs, $cluster) = @_;
     my $buf;
+    my $pos = $fs->{cluster_offset} / 512 + $cluster * ($fs->{cluster_size} / 512);
 
-    eval {
-	$buf = &read($fs,
-		     $fs->{cluster_offset} + $cluster * $fs->{cluster_size},
-		     $fs->{cluster_size});
-    }; @$ and die "reading cluster #$cluster failed on device $fs->{fs_name}";
+    c::lseek_sector(fileno $fs->{fd}, $pos, 0) or die "seeking to sector #$pos failed on device $fs->{fs_name}";
+    sysread $fs->{fd}, $buf, $fs->{cluster_size} or die "reading at sector #$pos failed on device $fs->{fs_name}";
     $buf;
 }
 sub write_cluster($$$) {
     my ($fs, $cluster, $buf) = @_;
+    my $pos = $fs->{cluster_offset} / 512 + $cluster * ($fs->{cluster_size} / 512);
 
-    eval {
-    &write($fs,
-	   $fs->{cluster_offset} + $cluster * $fs->{cluster_size},
-	   $fs->{cluster_size},
-	   $buf);
-    }; @$ and die "writing cluster #$cluster failed on device $fs->{fs_name}";
+    c::lseek_sector(fileno $fs->{fd}, $pos, 0) or die "seeking to sector #$pos failed on device $fs->{fs_name}";
+    syswrite $fs->{fd}, $buf or die "writing at sector #$pos failed on device $fs->{fs_name}";
 }
 
 sub read_file($$) {

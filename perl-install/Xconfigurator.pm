@@ -327,20 +327,20 @@ sub testFinalConfig($;$$) {
 
     my $b = before_leaving { unlink $f_err };
 
-    local $_;
-    local *F; open F, $f_err;
-    i: while (<F>) {
-	if (/\b(error|not supported)\b/i) {
-	    my @msg = !/error/ && $_ ;
-	    while (<F>) {
-		/not fatal/ and last i;
-		/^$/ and last;
-		push @msg, $_;
+    unless (c::Xtest(":9")) {
+	local $_;
+	local *F; open F, $f_err;
+      i: while (<F>) {
+	    if (/\b(error|not supported)\b/i) {
+		my @msg = !/error/ && $_ ;
+		while (<F>) {
+		    /not fatal/ and last i;
+		    /^$/ and last;
+		    push @msg, $_;
+		}
+		$in->ask_warn('', [ _("An error occurred:"), " ", @msg, _("\ntry changing some parameters") ]);
+		return 0;
 	    }
-	    $in->ask_warn('', [ _("An error occurred:"), " ",
-				@msg,
-				_("\ntry changing some parameters") ]);
-	    return 0;
 	}
     }
 

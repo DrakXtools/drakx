@@ -445,7 +445,7 @@ sub g_auto_install(;$) {
 	}
     }
 
-#-    local $o->{partitioning}{clearall} = 1;
+    local $o->{partitioning}{auto_allocate} = 1;
 
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
@@ -479,8 +479,8 @@ sub loadO {
 	    local $/ = "\0";
 	    no strict;
 	    eval <F>;
+	    $@ and log::l("Bad kickstart file $f (failed $@)");
 	}
-	$@ and log::l _("Bad kickstart file %s (failed %s)", $f, $@);
 	add2hash_($o ||= {}, $O);
     }
     bless $o, ref $O;

@@ -71,6 +71,14 @@ sub selectKeyboard($) {
 						 keyboard::keyboard2text($o->{keyboard})));
     delete $o->{keyboard_unsafe};
     install_steps::selectKeyboard($o);
+
+
+    if ($::expert) {
+	my $langs = $o->ask_many_from_list('', 
+		_("You can choose other languages that will be available after install"),
+		[ lang::list() ]) or goto &selectLanguage if $::expert;
+	lang::set_langs($o->{langs} = grep_index { $langs->[$::i] } lang::list());
+    }
 }
 #------------------------------------------------------------------------------
 sub selectPath($) {

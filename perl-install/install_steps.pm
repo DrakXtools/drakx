@@ -84,7 +84,7 @@ sub set_help { 1 }
 #------------------------------------------------------------------------------
 sub selectLanguage {
     my ($o) = @_;
-    lang::set($o->{lang});
+    lang::set($o->{lang}, $o->{langs});
 
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
@@ -260,6 +260,10 @@ sub afterInstallPackages($) {
 
     #- remove the nasty acon...
     run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
+
+    #- make the mdk fonts last in available fonts for buggy kde
+    run_program::rooted($o->{prefix}, "chkfontpath", "--remove", "/usr/X11R6/lib/X11/fonts/mdk");
+    run_program::rooted($o->{prefix}, "chkfontpath", "--add", "/usr/X11R6/lib/X11/fonts/mdk");
 
     #- create /etc/sysconfig/desktop file according to user choice and presence of /usr/bin/kdm or /usr/bin/gdm.
     my $f = "$o->{prefix}/etc/sysconfig/desktop";

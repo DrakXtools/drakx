@@ -200,7 +200,7 @@ sub text2lang {
 }
 
 sub set {
-    my ($lang, $prefix) = @_;
+    my ($lang, $langs) = @_;
 
     if ($lang) {
 	$ENV{LC_ALL}    = $lang;
@@ -208,7 +208,7 @@ sub set {
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
 #- apparently autoconf/automake doesn't like LINGUAS having a list of values
 #-	$ENV{LINGUAS}   = $languages{$lang}[3];
-	$ENV{RPM_INSTALL_LANG} = $languages{$lang}[3];
+	set_langs($langs || [$lang]);
 
 	local $_ = $languages{$lang}[1];
 	s/iso-8859-1$/iso-8859-15/;
@@ -224,6 +224,14 @@ sub set {
 	delete $ENV{LINGUAS};
 	delete $ENV{RPM_INSTALL_LANG};
     }
+}
+
+sub set_langs {
+    my ($l) = @_;
+    $ENV{RPM_INSTALL_LANG} = member('all', @$l) ? 'all' :
+      join ':', uniq(map { substr($languages{$_}[2], 0, 2) } @$l);
+
+#    $ENV{RPM_INSTALL_LANG} = join ':', uniq(map { split ':', $languages{$_}[3] } @{$_[0]});
 }
 
 sub write {
