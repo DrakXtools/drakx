@@ -51,6 +51,18 @@ sub is_installed {
     $do->are_installed($name);
 }
 
+sub check_kernel_module_packages {
+    my ($do, $base_name, $ext_name) = @_;
+    
+    require bootloader;
+    my @l = map { $base_name . '-' . bootloader::vmlinuz2version($_) } bootloader::installed_vmlinuz();
+    my @rpms = $do->are_available($ext_name, @l);
+
+    log::l("found kernel module packages $_") foreach @rpms;
+
+    @rpms > 1 && \@rpms;
+}
+
 ################################################################################
 package do_pkgs_during_install;
 use run_program;
@@ -80,28 +92,14 @@ sub install {
     }
 }
 
-sub check_kernel_module_packages {
-    my ($do, $base_name, $o_ext_name) = @_;
-
-    if (!$o_ext_name || pkgs::packageByName($do->{o}{packages}, $o_ext_name)) {
-	my @rpms = map {
-	    my $name = $base_name . $_->{ext} . '-' . $_->{version};
-	    if ($_->{pkg}->flag_available && pkgs::packageByName($do->{o}{packages}, $name)) {
-		log::l("found kernel module packages $name");
-		$name;
-	    } else {
-		();
-	    }
-	} pkgs::packages2kernels($do->{o}{packages});
-
-	@rpms and return [ @rpms, if_($o_ext_name, $o_ext_name) ];
-    }
-    return undef;
-}
-
 sub what_provides {
     my ($do, $name) = @_;
     map { $_->name } pkgs::packagesProviding($do->{o}{packages}, $name);
+}
+
+sub are_available {
+    my ($do, @pkgs) = @_;
+    grep { pkgs::packageByName($do->{o}{packages}, $_) } @pkgs;
 }
 
 sub are_installed {
@@ -177,13 +175,9 @@ sub install {
     $ret;
 }
 
-sub check_kernel_module_packages {
-    my ($_do, $base_name, $o_ext_name) = @_;
-    my ($result, %list, %select);
-    my @rpm_qa if 0;
-
-    #- initialize only once from rpm -qa output...
-    @rpm_qa or @rpm_qa = `rpm -qa`;
+sub are_available {
+    my ($_do, @pkgs) = @_;
+    my %pkgs = map { $_ => 1 } @pkgs;
 
     eval {
 	local *_;
@@ -193,35 +187,9 @@ sub check_kernel_module_packages {
 	foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
 	    $urpm->parse_synthesis("$urpm->{statedir}/synthesis.$_->{hdlist}");
 	}
-	foreach (@{$urpm->{depslist} || []}) {
-	    $_->name eq $o_ext_name and $list{$_->name} = 1;
-	    $_->name =~ /$base_name/ and $list{$_->name} = 1;
-	}
-	foreach (@rpm_qa) {
-	    my ($name) = /(.*?)-[^-]*-[^-]*$/ or next;
-	    $name eq $o_ext_name and $list{$name} = 0;
-	    $name =~ /$base_name/ and $list{$name} = 0;
-	}
+	map { $_->name } grep { $pkgs{$_->name} } @{$urpm->{depslist} || []};
     };
-    if (!$o_ext_name || exists $list{$o_ext_name}) {
-	eval {
-	    my ($version_release, $ext);
-	    if (c::kernel_version() =~ /([^-]*)-([^-]*mdk)(\S*)/) {
-		$version_release = "$1.$2";
-		$ext = $3 ? "-$3" : "";
-		exists $list{"$base_name$ext-$version_release"} or die "no $base_name for current kernel";
-		$list{"$base_name$ext-$version_release"} and $select{"$base_name$ext-$version_release"} = 1;
-	    } else {
-		#- kernel version is not recognized, what to do ?
-	    }
-	    foreach (@rpm_qa) {
-		($ext, $version_release) = /kernel[^\-]*(-smp|-enterprise|-secure)?(?:-([^\-]+))$/;
-		$list{"$base_name$ext-$version_release"} and $select{"$base_name$ext-$version_release"} = 1;
-	    }
-	    $result = [ keys(%select), if_($o_ext_name, $o_ext_name) ];
-	}
-    }
-    return $result;
+    
 }
 
 sub what_provides {
