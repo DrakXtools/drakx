@@ -438,16 +438,18 @@ sub test_mouse {
   	my $w = $font->string_width($t);
   	$darea->window->draw_string($font, $darea->style->black_gc, ($darea->allocation->[2]-$width)/2 + ($width - $w) / 2, ($darea->allocation->[3]-$height)/2 + $y, $t);
     };
-    my $drawarea; $drawarea = sub { $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
-								 $image, 0, 0,
-								 ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
-								 210, 350);
-				    $draw_text->(_("Please test the mouse"), $height - 120);
-				    $draw_text->(_("To activate the mouse,"), $height - 105) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
-				    $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
-				    return if $::isStandalone;
-				    $darea->window->draw_rectangle($darea->style->bg_gc('normal'), 1, 0, $height-65, $width, $height);
-				};
+    my $drawarea; 
+    $drawarea = sub { $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
+						  $image, 0, 0,
+						  ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
+						  210, 350);
+		      if ($::isInstall) {
+			  $draw_text->(_("Please test the mouse"), $height - 120);
+			  $draw_text->(_("To activate the mouse,"), $height - 105) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+			  $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+			  $darea->window->draw_rectangle($darea->style->bg_gc('normal'), 1, 0, $height-65, $width, $height);
+		      }
+		  };
 
     my $paintButton = sub {
 	my ($nb, $pressed) = @_;
