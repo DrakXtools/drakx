@@ -46,6 +46,9 @@ my $in = 'interactive'->vnew('su', 'printer');
 my $commandline = $_;
 
 {
+# Check whether Foomatic is installed and install it if necessary
+printerdrake::install_foomatic($in);
+
 my $w = $in->wait_message('', _("Reading printer data ..."));
 # Get what was installed before
 eval { $printer = printer::getinfo('') };
