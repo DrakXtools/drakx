@@ -178,11 +178,8 @@ sub remove_alias($) {
 sub remove_alias_regexp($) {
     my ($name) = @_;
     foreach (keys %conf) {
-	$conf{$_}{alias} && $_ =~ /$name/ or next;
-	delete $conf{$_}{alias};
-	return 1;
+        delete $conf{$_}{alias} if /$name/;
     }
-    0;
 }
 
 sub remove_module($) {
