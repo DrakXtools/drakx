@@ -23,14 +23,15 @@
 # - handle keys (can key file be named after ESSID?)
 # - should files be named as MAC or as essid:ESSID ?
 
+use strict;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;
 use common;
 use run_program;
 
-require ugtk2;
-ugtk2->import(qw(:wrappers :create));
+use Glib qw(TRUE FALSE);
+use ugtk2 qw(:create :helpers :wrappers);
 use Gtk2::SimpleList;
 
 require_root_capability();
@@ -57,7 +58,7 @@ my %available_roaming_daemons = (
 				      config_location => '/etc/wlandetect.conf',
 				      binary => '/usr/sbin/wlandetect',
 				      start_options => sub {
-					  my ($interval, $device) = @_;
+					  my ($interval, undef) = @_;
 					  "-d -t $interval";
 				      },
 				      read_config => sub {
@@ -76,7 +77,7 @@ my %available_roaming_daemons = (
 						  &AddNet($essid, $mode, $channel, $dhcp, $key);
 					      }
 					      else { die "Line $::i of configuration file is not parseable.\n" }
-					  } cat_($config)
+					  } cat_($config);
 				      },
 				      write_config => sub {
 					  my ($config) = @_;
@@ -365,7 +366,7 @@ sub ConnectNow {
 		push @command, "$IFConfig $device up; $DHClient $device";
 	}
 	else {
-		push @command, "$IFUp $device"
+		push @command, "$IFUp $device";
 	}
 	my $ToBash = join("", @command);
 	print "Sending $ToBash\n" if $::testing;
