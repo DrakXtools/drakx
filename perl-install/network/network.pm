@@ -606,6 +606,8 @@ sub wpa_supplicant_add_network {
         $s .= "}\n";
     }
     output($wpa_supplicant_conf, $s);
+    #- hide keys for non-root users
+    chmod 0600, $wpa_supplicant_conf;
 }
 
 #- configureNetwork2 : configure the network interfaces.
