@@ -442,7 +442,6 @@ Configure them first by clicking on 'Configure'")));
     gtkpack($window->vbox,
             Gtk2::Label->new(N("LAN Configuration")),
             my $notebook = Gtk2::Notebook->new,
-            my $bbox8 = Gtk2::HButtonBox->new,
            );
 
     foreach (0..$#all_cards) {
@@ -508,7 +507,6 @@ Configure them first by clicking on 'Configure'")));
 	#	$list->set_selectable($_, 0);
 	$notebook->append_page($vbox_local, Gtk2::Label->new($interface));
     }
-    $bbox8->set_layout('end');
 
     my $exit_dialogsub = sub {
         sensitive_buttons(1);
