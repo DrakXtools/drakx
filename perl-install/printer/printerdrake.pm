@@ -83,8 +83,8 @@ sub config_cups {
     #- according to new settings. There are no other point where such
     #- information is written in this file.
     
-    if ($in->ask_from_
-	({ title => ($::expert ? N("CUPS configuration") :
+    if ($in->ask_from_(
+	 { title => ($::expert ? N("CUPS configuration") :
 		     N("Specify CUPS server")),
 	   messages => N("To get access to printers on remote CUPS servers in your local network you do not have to configure anything; the CUPS servers inform your machine automatically about their printers. All printers currently known to your machine are listed in the \"Remote printers\" section in the main window of Printerdrake. When your CUPS server is not in your local network, you have to enter the CUPS server IP address and optionally the port number to get the printer information from the server, otherwise leave these fields blank.") .
 	       ($::expert ? "\n" . N("
@@ -263,8 +263,8 @@ sub wizard_welcome {
 	eval {
 	    if ($::expert) {
 		if ($::isWizard) {
-		    $ret = $in->ask_okcancel
-			(N("Add a new printer"),
+		    $ret = $in->ask_okcancel(
+			 N("Add a new printer"),
 			 N("
 Welcome to the Printer Setup Wizard
 
@@ -275,9 +275,9 @@ It asks you for all necessary information to set up the printer and gives you ac
 		    $ret = 1;
 		}
 	    } else {
-		$ret = $in->ask_from_
-		    ({title => N("Add a new printer"),
-		      messages => ($printer->{SPOOLER} ne "pdq" ? 
+		$ret = $in->ask_from_(
+		     { title => N("Add a new printer"),
+		       messages => ($printer->{SPOOLER} ne "pdq" ? 
 				   ($havelocalnetworks ? N("
 Welcome to the Printer Setup Wizard
 
@@ -541,8 +541,8 @@ sub setup_local_autoscan {
 	    $do_auto_detect = 0;
 	    $printer->{MANUAL} = 1;
 	    if ($::expert) {
-		$device = $in->ask_from_entry
-		    (N("Local Printer"),
+		$device = $in->ask_from_entry(
+		     N("Local Printer"),
 		     N("No local printer found! To manually install a printer enter a device name/file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."),
 		     { 
 			 complete => sub {
@@ -564,8 +564,7 @@ sub setup_local_autoscan {
 	} else {
 	    my $manualconf = 0;
 	    $manualconf = 1 if $printer->{MANUAL} || !$do_auto_detect;
-	    if (!$in->ask_from_
-		(
+	    if (!$in->ask_from_(
 		 { title => ($expert_or_modify ?
 			     N("Local Printer") :
 			     N("Available printers")),
@@ -824,11 +823,12 @@ sub setup_smb {
 	$oldmenuchoice = $menuchoice;
     }
 
-    return 0 if !$in->ask_from
-	(N("SMB (Windows 9x/NT) Printer Options"),
+    return 0 if !$in->ask_from(
+	 N("SMB (Windows 9x/NT) Printer Options"),
 	 N("To print to a SMB printer, you need to provide the SMB host name (Note! It may be different from its TCP/IP hostname!) and possibly the IP address of the print server, as well as the share name for the printer you wish to access and any applicable user name, password, and workgroup information.") .
 	 ($autodetect ? N(" If the desired printer was auto-detected, simply choose it from the list and then add user name, password, and/or workgroup if needed.") : ""),
-	 [{ label => N("SMB server host"), val => \$smbserver },
+	 [ 
+	  { label => N("SMB server host"), val => \$smbserver },
 	  { label => N("SMB server IP"), val => \$smbserverip },
 	  { label => N("Share name"), val => \$smbshare },
 	  { label => N("User name"), val => \$smbuser },
@@ -855,8 +855,8 @@ sub setup_smb {
 	     }
 	     if ($smbpassword ne "") {
 		 local $::isWizard = 0;
-		 my $yes = $in->ask_yesorno
-		     (N("SECURITY WARNING!"),
+		 my $yes = $in->ask_yesorno(
+		      N("SECURITY WARNING!"),
 		      N("You are about to set up printing to a Windows account with password. Due to a fault in the architecture of the Samba client software the password is put in clear text into the command line of the Samba client used to transmit the print job to the Windows server. So it is possible for every user on this machine to display the password on the screen by issuing commands as \"ps auxwww\".
 
 We recommend to make use of one of the following alternatives (in all cases you have to make sure that only machines from your local network have access to your Windows server, for example by means of a firewall):
@@ -1062,8 +1062,8 @@ sub setup_socket {
 	$oldmenuchoice = $menuchoice;
     }
 
-    return 0 if !$in->ask_from_
-	({
+    return 0 if !$in->ask_from_(
+	 {
 	     title => N("TCP/Socket Printer Options"),
 	     messages => ($autodetect ?
 			  N("Choose one of the auto-detected printers from the list or enter the hostname or IP and the optional port number (default is 9100) into the input fields.") :
@@ -1071,8 +1071,7 @@ sub setup_socket {
 		 callbacks => {
 		 complete => sub {
 		     unless ($remotehost ne "") {
-			 $in->ask_warn
-			     ('', N("Printer host name or IP missing!"));
+			 $in->ask_warn('', N("Printer host name or IP missing!"));
 			 return (1,0);
 		     }
 		     unless ($remoteport =~ /^[0-9]+$/) {
@@ -1300,8 +1299,8 @@ sub setup_common {
 		$in->do_pkgs->install('hpoj', 'xojpanel');
 	    }
 	    # Configure and start HPOJ
-	    my $w = $in->wait_message
-		(N("Printerdrake"),
+	    my $w = $in->wait_message(
+		 N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."));
 	    $ptaldevice = printer::main::configure_hpoj($device, @autodetected);
 	    
@@ -1320,14 +1319,13 @@ sub setup_common {
 						 ('/usr/bin/gimp') ? 
 						 '/usr/bin/xsane-gimp' : 
 						 ()))))) {
-			my $w = $in->wait_message
-			    (N("Printerdrake"),
+			my $w = $in->wait_message(
+			     N("Printerdrake"),
 			     N("Installing SANE packages..."));
 			$in->do_pkgs->install('sane-backends',
 					      'sane-frontends',
 					      'xsane', 'libsane-hpoj0',
-					      if_($in->do_pkgs->is_installed
-						  ('gimp'),'xsane-gimp'));
+					      if_($in->do_pkgs->is_installed('gimp'), 'xsane-gimp'));
 		    }
 		    # Configure the HPOJ SANE backend
 		    printer::main::config_sane();
@@ -1344,8 +1342,8 @@ sub setup_common {
 						  /usr/bin/mcopy
 						  /usr/bin/MToolsFM
 						  )))) {
-			my $w = $in->wait_message
-			    (N("Printerdrake"),
+			my $w = $in->wait_message(
+			     N("Printerdrake"),
 			     N("Installing mtools packages..."));
 			$in->do_pkgs->install('mtools', 'mtoolsfm');
 		    }
@@ -1357,8 +1355,8 @@ sub setup_common {
 		# Inform user about how to scan with his MF device
 		$text = scanner_help($makemodel, "ptal:/$ptaldevice");
 		if ($text) {
-		    $in->ask_warn
-			(N("Scanning on your HP multi-function device"),
+		    $in->ask_warn(
+			 N("Scanning on your HP multi-function device"),
 			 $text);
 		}
 		# Inform user about how to access photo cards with his MF
@@ -1492,8 +1490,7 @@ sub choose_printer_name {
     # Name, description, location
     $in->set_help('setupPrinterName') if $::isInstall;
     my $default = $printer->{currentqueue}{queue};
-    $in->ask_from_
-	(
+    $in->ask_from_(
 	 { title => N("Enter Printer Name and Comments"),
 	   #cancel => !$printer->{configured}{$queue} ? '' : N("Remove queue"),
 	   callbacks => { complete => sub {
@@ -1627,8 +1624,8 @@ sub is_model_correct {
 	return 1;
     }
     $dbentry =~ s/\|/ /g;
-    my $res = $in->ask_from_list_
-	    (N("Your printer model"),
+    my $res = $in->ask_from_list_(
+	     N("Your printer model"),
 	     N("Printerdrake has compared the model name resulting from the printer auto-detection with the models listed in its printer database to find the best match. This choice can be wrong, especially when your printer is not listed at all in the database. So check whether the choice is correct and click \"The model is correct\" if so and if not, click \"Select model manually\" so that you can choose your printer model manually on the next screen.
 
 For your printer Printerdrake has found:
@@ -2034,8 +2031,8 @@ sub setup_options {
 	# Do not show the options setup dialog when installing a new printer
 	# in recommended mode without "Manual configuration" turned on.
 	if ((!$printer->{NEW}) or ($::expert) or ($printer->{MANUAL})) {
-	    return 0 if !$in->ask_from
-		($windowtitle,
+	    return 0 if !$in->ask_from(
+		 $windowtitle,
 		 N("Printer default settings
 
 You should make sure that the page size and the ink type/printing mode (if available) and also the hardware configuration of laser printers (memory, duplex unit, extra trays) are set correctly. Note that with a very high printout quality/resolution printing can get substantially slower."),
@@ -2114,8 +2111,8 @@ sub print_testpages {
     my $oldphoto = 0;
     my $oldascii = 0;
     my $oldres2 = 0;
-    my $res1 = $in->ask_from_
-	({ title => N("Test pages"),
+    my $res1 = $in->ask_from_(
+	 { title => N("Test pages"),
 	   messages => N("Please select the test pages you want to print.
 Note: the photo test page can take a rather long time to get printed and on laser printers with too low memory it can even not come out. In most cases it is enough to print the standard test page."),
 	   cancel => ((!$printer->{NEW}) ?
@@ -2234,7 +2231,7 @@ It may take some time before the printer starts.\n");
 	    $in->ask_warn('',$dialogtext);
 	    return 1;
 	} else {
-	    $in->ask_yesorno('',$dialogtext . N("Did it work properly?"), 1) 
+	    $in->ask_yesorno('', $dialogtext . N("Did it work properly?"), 1) 
 		and return 1;
 	}
     } else {
@@ -2345,8 +2342,8 @@ N("To know about the options available for the current printer read either the l
     if (!$raw && !$cupsremote) {
         my $choice;
         while ($choice ne N("Close")) {
-	    $choice = $in->ask_from_list_
-	        ($windowtitle, $dialogtext,
+	    $choice = $in->ask_from_list_(
+	         $windowtitle, $dialogtext,
 		 [ N("Print option list"), N("Close") ],
 		 N("Close"));
 	    if ($choice ne N("Close")) {
@@ -2429,8 +2426,8 @@ sub copy_queues_from {
 	}
     }
     if ($noninteractive ||
-	$in->ask_from_
-	({ title => N("Transfer printer configuration"),
+	$in->ask_from_(
+	 { title => N("Transfer printer configuration"),
 	   messages => N("You can copy the printer configuration which you have done for the spooler %s to %s, your current spooler. All the configuration data (printer name, description, location, connection type, and default option settings) is overtaken, but jobs will not be transferred.
 Not all queues can be transferred due to the following reasons:
 ", $oldspoolerstr, $newspoolerstr) .
@@ -2457,8 +2454,8 @@ Mark the printers which you want to transfer and click
                 my $newqueue = $_;
                 if ((!$printer->{configured}{$newqueue}) ||
 		    ($noninteractive) ||
-		    ($in->ask_from_
-	             ({ title => N("Transfer printer configuration"),
+		    ($in->ask_from_(
+	              { title => N("Transfer printer configuration"),
 	                messages => N("A printer named \"%s\" already exists under %s. 
 Click \"Transfer\" to overwrite it.
 You can also type a new name or skip this printer.", 
@@ -2492,8 +2489,8 @@ You can also type a new name or skip this printer.",
 			# Make the former default printer the new default
 			# printer if the user does not reject
 			if (($noninteractive) ||
-			    ($in->ask_yesorno
-			     (N("Transfer printer configuration"),
+			    ($in->ask_yesorno(
+			      N("Transfer printer configuration"),
 			      N("You have transferred your former default printer (\"%s\"), Should it be also the default printer under the new printing system %s?", $oldqueue, $newspoolerstr), 1))) {
 			    $printer->{DEFAULT} = $newqueue;
 			    printer::default::set_printer($printer);
@@ -2708,8 +2705,7 @@ sub install_spooler {
 		if ((!$::testing) &&
 		    ((!files_exist((qw(/usr/bin/wget)))) &&
 		     (!files_exist((qw(/usr/bin/curl)))))) {
-		    $in->do_pkgs->install
-			($::isInstall ? 'curl' : 'webfetch');
+		    $in->do_pkgs->install($::isInstall ? 'curl' : 'webfetch');
 		}
 		# Try to start the network when CUPS is the spooler, so that
 		# remote CUPS printers get displayed (especially during
@@ -2724,13 +2720,13 @@ sub install_spooler {
 		# startup of printerdrake for several seconds.
 		printer::services::start_not_running_service("cups");
 		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr","/usr/bin/lpr-cups");
-	        set_alternative("lpq","/usr/bin/lpq-cups");
-	        set_alternative("lprm","/usr/bin/lprm-cups");
-	        set_alternative("lp","/usr/bin/lp-cups");
-	        set_alternative("cancel","/usr/bin/cancel-cups");
-	        set_alternative("lpstat","/usr/bin/lpstat-cups");
-	        set_alternative("lpc","/usr/sbin/lpc-cups");
+	        set_alternative("lpr", "/usr/bin/lpr-cups");
+	        set_alternative("lpq", "/usr/bin/lpq-cups");
+	        set_alternative("lprm", "/usr/bin/lprm-cups");
+	        set_alternative("lp", "/usr/bin/lp-cups");
+	        set_alternative("cancel", "/usr/bin/cancel-cups");
+	        set_alternative("lpstat", "/usr/bin/lpstat-cups");
+	        set_alternative("lpc", "/usr/sbin/lpc-cups");
 		# Remove PDQ panic buttons from the user's KDE Desktops
 	        printer::main::pdq_panic_button("remove");
 	    }
@@ -2766,10 +2762,10 @@ sub install_spooler {
 		# Start daemon
 	        printer::services::restart("lpd");
 		# Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr","/usr/bin/lpr-lpd");
-	        set_alternative("lpq","/usr/bin/lpq-lpd");
-	        set_alternative("lprm","/usr/bin/lprm-lpd");
-	        set_alternative("lpc","/usr/sbin/lpc-lpd");
+	        set_alternative("lpr", "/usr/bin/lpr-lpd");
+	        set_alternative("lpq", "/usr/bin/lpq-lpd");
+	        set_alternative("lprm", "/usr/bin/lprm-lpd");
+	        set_alternative("lpc", "/usr/sbin/lpc-lpd");
 		# Remove PDQ panic buttons from the user's KDE Desktops
 	        printer::main::pdq_panic_button("remove");
 	    }
@@ -2805,13 +2801,13 @@ sub install_spooler {
 		# Start daemon
 	        printer::services::restart("lpd");
 		# Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr","/usr/bin/lpr-lpd");
-	        set_alternative("lpq","/usr/bin/lpq-lpd");
-	        set_alternative("lprm","/usr/bin/lprm-lpd");
-	        set_alternative("lp","/usr/bin/lp-lpd");
-	        set_alternative("cancel","/usr/bin/cancel-lpd");
-	        set_alternative("lpstat","/usr/bin/lpstat-lpd");
-	        set_alternative("lpc","/usr/sbin/lpc-lpd");
+	        set_alternative("lpr", "/usr/bin/lpr-lpd");
+	        set_alternative("lpq", "/usr/bin/lpq-lpd");
+	        set_alternative("lprm", "/usr/bin/lprm-lpd");
+	        set_alternative("lp", "/usr/bin/lp-lpd");
+	        set_alternative("cancel", "/usr/bin/cancel-lpd");
+	        set_alternative("lpstat", "/usr/bin/lpstat-lpd");
+	        set_alternative("lpc", "/usr/sbin/lpc-lpd");
 		# Remove PDQ panic buttons from the user's KDE Desktops
 	        printer::main::pdq_panic_button("remove");
 	    }
@@ -2836,9 +2832,9 @@ sub install_spooler {
 		# PDQ has no daemon, so nothing needs to be started
 		
 		# Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
-	        set_alternative("lpr","/usr/bin/lpr-pdq");
-	        set_alternative("lpq","/usr/bin/lpq-foomatic");
-	        set_alternative("lprm","/usr/bin/lprm-foomatic");
+	        set_alternative("lpr", "/usr/bin/lpr-pdq");
+	        set_alternative("lpq", "/usr/bin/lpq-foomatic");
+	        set_alternative("lprm", "/usr/bin/lprm-foomatic");
 		# Add PDQ panic buttons to the user's KDE Desktops
 	        printer::main::pdq_panic_button("add");
 	    }
@@ -2953,7 +2949,7 @@ sub main {
 				    (files_exist("/usr/bin/gimp") ?
 				     "/usr/lib/gimp/1.2/plug-ins/print" : ())
 				    )))) {
-	    $in->do_pkgs->install('foomatic','printer-utils','printer-testpages','nmap','scli',
+	    $in->do_pkgs->install('foomatic', 'printer-utils', 'printer-testpages', 'nmap', 'scli',
 				  if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
 	}
 
@@ -3168,8 +3164,8 @@ sub main {
 		        #printer::main::read_printer_db($printer->{SPOOLER});
 			# Re-read printer queues to switch the tree
 			# structure between expert/normal mode.
-			my $w = $in->wait_message
-			    (N("Printerdrake"), 
+			my $w = $in->wait_message(
+			     N("Printerdrake"), 
 			     N("Reading printer data..."));
 			printer::main::read_configured_queues($printer);
 			$cursorpos = "::";
@@ -3310,7 +3306,7 @@ sub main {
 			# Leave wizard mode with congratulations screen
 			wizard_close($in, 1);
 			$continue = ($::expert || !$::isInstall || $menushown ||
-				     $in->ask_yesorno('',N("Do you want to configure another printer?")));
+				     $in->ask_yesorno('', N("Do you want to configure another printer?")));
 		    } elsif ($testpages == 2) {
 			# User was not content with test pages
 			# Leave wizard mode without congratulations
@@ -3360,7 +3356,7 @@ sub main {
 		if ($testpages == 1) {
 		    # User was content with test pages
 		    $continue = ($::expert || !$::isInstall || $menushown ||
-				 $in->ask_yesorno('',N("Do you want to configure another printer?")));
+				 $in->ask_yesorno('', N("Do you want to configure another printer?")));
 		} elsif ($testpages == 2) {
 		    # User was not content with test pages
 		    $editqueue = 1;
@@ -3394,8 +3390,8 @@ sub main {
 		$cursorpos =~ /!([^!]+)$/;
 		$infoline = $1;
 	    }
-	    if ($in->ask_from_
-		   ({ title => N("Modify printer configuration"),
+	    if ($in->ask_from_(
+		    { title => N("Modify printer configuration"),
 		      messages => 
 			   N("Printer %s
 What do you want to modify on this printer?",
@@ -3469,8 +3465,8 @@ What do you want to modify on this printer?",
 			configure_queue($printer, $in);
 		    # Delete old queue when it was renamed
 		    if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
-			my $w = $in->wait_message
-			    (N("Printerdrake"),
+			my $w = $in->wait_message(
+			     N("Printerdrake"),
 			     N("Removing old printer \"%s\"...",
 			       $printer->{OLD_QUEUE}));
 		        printer::main::remove_queue($printer, $printer->{OLD_QUEUE});
@@ -3524,8 +3520,8 @@ What do you want to modify on this printer?",
 		    if ($in->ask_yesorno('',
            N("Do you really want to remove the printer \"%s\"?", $queue), 1)) {
 			{
-			    my $w = $in->wait_message
-				(N("Printerdrake"),
+			    my $w = $in->wait_message(
+				 N("Printerdrake"),
 				 N("Removing printer \"%s\"...", $queue));
 			    if (printer::main::remove_queue($printer, $queue)) { 
 				$editqueue = 0;
@@ -3572,7 +3568,7 @@ What do you want to modify on this printer?",
 	    }
 	    $continue = ($editqueue || $::expert || !$::isInstall || 
 			 $menushown ||
-			 $in->ask_yesorno('',N("Do you want to configure another printer?")));
+			 $in->ask_yesorno('', N("Do you want to configure another printer?")));
 	}
 
 	# Configure the current printer queue in applications when main menu

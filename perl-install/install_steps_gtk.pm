@@ -48,7 +48,7 @@ sub new($$) {
 		unless (-d "/var/log") { mkdir("/var/log") }
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork) {
-		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : ("-kb")), "-dpms","-s","240",
+		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : ("-kb")), "-dpms", "-s", "240",
 		      ($_[0] =~ /Xpmac/ ? $xpmac_opts !~ /ofonly/ ? ("-mode", "17", "-depth", "32") : ("-mach64") :()),
 		      ($_[0] =~ /Xsun/ || $_[0] =~ /Xpmac/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
 		       ("-allowMouseOpenFail", "-xf86config", $f)) or exit 1;
@@ -292,7 +292,7 @@ sub choosePackagesTree {
 				N("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available / sqr(1024));
 			    },
 			    node_state => sub {
-				my $p = pkgs::packageByName($packages,$_[0]) or return;
+				my $p = pkgs::packageByName($packages, $_[0]) or return;
 				pkgs::packageMedium($packages, $p)->{selected} or return;
 				$p->flag_base                           and return 'base';
 				$p->flag_installed && !$p->flag_upgrade and return 'installed';

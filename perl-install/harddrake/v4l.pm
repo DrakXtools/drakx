@@ -200,7 +200,7 @@ my %pll_lst =
      -1 => N("Default"),
      0 => "don't use pll",
      1 => "28 Mhz Crystal (X)",
-     2 =>"35 Mhz Crystal"
+     2 => "35 Mhz Crystal"
      );
 
 sub config {

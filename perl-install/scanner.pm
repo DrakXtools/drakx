@@ -39,7 +39,7 @@ sub confScanner {
     $port ||= detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
-    output("$_sanedir/$a.conf", (join "\n",@{$scannerDB->{$model}{lines}}));
+    output("$_sanedir/$a.conf", (join "\n", @{$scannerDB->{$model}{lines}}));
     substInFile { s/\$DEVICE/$port/ } "$_sanedir/$a.conf";
     add2dll($a);
 }

@@ -66,7 +66,7 @@ sub new {
 	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
 				       for (my $i = 0; $i < (540/$y1); $i++) {
-					   $draw1->window->draw_pixmap ($draw1->style->bg_gc('normal'),
+					   $draw1->window->draw_pixmap($draw1->style->bg_gc('normal'),
 									$im_up, 0, 0, 0, $y1*$i,
 									$x1, $y1);
 					   $draw1->window->draw_string(
@@ -78,7 +78,7 @@ sub new {
 				   });
 	    $draw2->signal_connect(expose_event => sub {
 				       for (my $i = 0; $i < (300/$y2); $i++) {
-					   $draw2->window->draw_pixmap ($draw2->style->bg_gc('normal'),
+					   $draw2->window->draw_pixmap($draw2->style->bg_gc('normal'),
 									$im_left, 0, 0, 0, $y2*$i,
 									$x2, $y2);
 				       }

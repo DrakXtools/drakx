@@ -19,7 +19,7 @@ sub new() {
     Newt::Cls();
     Newt::SetSuspendCallback();
     ($width, $height) = Newt::GetScreenSize();
-    open STDERR,">/dev/null" if $::isStandalone && !$::testing;
+    open STDERR, ">/dev/null" if $::isStandalone && !$::testing;
     bless {}, $_[0];
 }
 
@@ -53,7 +53,7 @@ sub myTextbox {
 
 sub separator {
     my $blank = Newt::Component::Form(\undef, '', 0);
-    $blank->FormSetWidth ($_[0]);
+    $blank->FormSetWidth($_[0]);
     $blank->FormSetHeight($_[1]);
     $blank;
 }

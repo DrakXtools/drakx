@@ -127,7 +127,7 @@ sub create_steps_window {
 			my $in_button;
 			my $draw_pix = sub {
 			    my ($map, $mask) = gtkcreate_xpm($_[0]);
-			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+			    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 							 $map, 0, 0,
 							 ($darea->allocation->[2]-$PIX_W)/2 + 3,
 							 ($darea->allocation->[3]-$PIX_H)/2,

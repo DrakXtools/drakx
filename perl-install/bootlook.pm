@@ -97,12 +97,12 @@ my $a_box = new Gtk::VBox(0, 0);
 my $x_box = new Gtk::VBox(0, 0);
 my $disp_mode = arch() =~ /ppc/ ? N("Yaboot mode") : N("Lilo/grub mode");
 
-my %themes = 	('path' =>'/usr/share/bootsplash/themes/',
-		 'default' =>'Mandrake',
-		 'def_thmb' =>'/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
-		 'lilo' => {'file' =>'/lilo/message',
-			  'thumb' =>'/lilo/thumb.png' },
-		 'boot' => {'path' =>'/images/',
+my %themes = 	('path' => '/usr/share/bootsplash/themes/',
+		 'default' => 'Mandrake',
+		 'def_thmb' => '/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
+		 'lilo' => {'file' => '/lilo/message',
+			  'thumb' => '/lilo/thumb.png' },
+		 'boot' => {'path' => '/images/',
 		 	#'thumb'=>'/images/thumb.png',
 			},
 		 );
@@ -128,7 +128,7 @@ foreach (all('.')) {
     }
 #       $_ eq $themes{'defaut'} and $default = $themes{'defaut'};
 }
-my %combo = ('thms' => '','lilo' => '','boot' => '');
+my %combo = ('thms' => '', 'lilo' => '', 'boot' => '');
 foreach (keys(%combo)) {
     $combo{$_} = new Gtk::Combo;
     $combo{$_}->set_value_in_list(1, 0);
@@ -166,7 +166,7 @@ $combo{'lilo'}->entry->signal_connect(changed => sub {
     undef($lilo_pixbuf);
     $lilo_pixbuf = gtkcreate_png_pixbuf(-r $new_file ? $new_file : $themes{'def_thmb'});
     $lilo_pixbuf = $lilo_pixbuf->scale_simple(155,116,0);
-    $lilo_pic->set($lilo_pixbuf->render_pixmap_and_mask(0),'');
+    $lilo_pic->set($lilo_pixbuf->render_pixmap_and_mask(0), '');
 });
 
 $no_bootsplash == 0 
@@ -175,7 +175,7 @@ $no_bootsplash == 0
     undef($boot_pixmap);
     $boot_pixmap = gtkcreate_png_pixbuf( $img_file);
     $boot_pixmap = $boot_pixmap->scale_simple(155,116,0);
-    $boot_pic->set($boot_pixmap->render_pixmap_and_mask(0),'');
+    $boot_pic->set($boot_pixmap->render_pixmap_and_mask(0), '');
 });
 
 $combo{'thms'}->entry->set_text($themes{'default'});
@@ -190,9 +190,9 @@ sub {
       if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
 			use MDK::Common::File;
 	    standalone::explanations(N("Backup %s to %s.old",$lilomsg,$lilomsg)); 
-	    cp_af($lilomsg,"/boot/message-graphic.old");
+	    cp_af($lilomsg, "/boot/message-graphic.old");
 	    #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
-	    standalone::explanations(N("Copy %s to %s",$themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)); 
+	    standalone::explanations(N("Copy %s to %s", $themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)); 
 	    cp_af($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg);
 			#can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
 	} else {
@@ -233,7 +233,7 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
                     $error = 1;
                 }
         } else {
-                $in->ask_warn("Error","BootSplash screen not found");
+                $in->ask_warn("Error", "BootSplash screen not found");
         }
         #here is mkinitrd time
         if (!$error) {
@@ -264,9 +264,9 @@ gtkadd($window,
 		  gtkadd(new Gtk::Frame ("$disp_mode"),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
-					      1,N("You are currently using %s as your boot manager.
+					      1, N("You are currently using %s as your boot manager.
 Click on Configure to launch the setup wizard.", $lilogrub),
-					      0,gtksignal_connect(new Gtk::Button (N("Configure")), clicked => $::lilo_choice),
+					      0, gtksignal_connect(new Gtk::Button (N("Configure")), clicked => $::lilo_choice),
 					     )),
 #				    "" #we need some place under the button -- replaced by gtkset_border_width( for the moment
 #				   )
@@ -339,7 +339,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 					       )
 				    )
 			 ),
-		 gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
+		 gtkadd (gtkset_layout(new Gtk::HButtonBox, -end),
 			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
 			 gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
 			)

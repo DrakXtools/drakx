@@ -582,7 +582,7 @@ sub load_conf {
     $netcnx->{modem}=$modem;
     $netcnx->{modem}=$isdn_external;
     $netcnx->{isdn_internal}=$isdn;
-    -e "$prefix/etc/sysconfig/network" and put_in_hash($netc,network::read_conf("$prefix/etc/sysconfig/network"));
+    -e "$prefix/etc/sysconfig/network" and put_in_hash($netc, network::read_conf("$prefix/etc/sysconfig/network"));
     foreach (glob_("$prefix/etc/sysconfig/ifcfg-*")) {
 	my $l = network::read_interface_conf($_);
 	$intf->{$l->{DEVICE}} = $l;

@@ -93,7 +93,7 @@ sub ask_info2 {
 		   if__($netc->{dnsServer2}, { label => N("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
 		   if__($netc->{dnsServer3}, { label => N("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
 		   if__($cnx->{vpivci}, { label => N("Choose your country"), val => \$netc->{vpivci}, list => detect_timezone() }),
-		   if__($cnx->{dialing_mode}, { label => N("Dialing mode"), val => \$cnx->{dialing_mode},list => ["auto","manual"] }),
+		   if__($cnx->{dialing_mode}, { label => N("Dialing mode"), val => \$cnx->{dialing_mode},list => ["auto", "manual"] }),
 		   if__($cnx->{speed}, { label => N("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"] }),
 		   if__($cnx->{huptimeout}, { label => N("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
 		   if__($cnx->{login}, { label => N("Account Login (user name)"), val => \$cnx->{login} }),

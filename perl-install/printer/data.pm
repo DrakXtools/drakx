@@ -12,7 +12,7 @@ our %lprcommand;
 our %spoolers = ('ppq' => {
                           'help' => "/usr/bin/lphelp %s |",
 					 'print_command' => 'lpr-pdq',
-					 'long_name' =>N("PDQ - Print, Don't Queue"),
+					 'long_name' => N("PDQ - Print, Don't Queue"),
 					 'short_name' => N("PDQ")
                  },
                 'lpd' => {

@@ -93,7 +93,7 @@ sub ask_fromW {
 	} else {
 	    print $e->{hidden} ?
 	      $q->password_field(-name => "w$::i", -default => ${$e->{val}}) :
-	      $q->textfield     (-name => "w$::i", -default => ${$e->{val}});
+	      $q->textfield(     -name => "w$::i", -default => ${$e->{val}});
 	}
 
 	print "</td></tr>\n";

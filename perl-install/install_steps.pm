@@ -692,7 +692,7 @@ sub configureServices {
 #------------------------------------------------------------------------------
 sub configurePrinter {
     my($o) = @_;
-    $o->do_pkgs->install('foomatic', 'printer-utils','printer-testpages',
+    $o->do_pkgs->install('foomatic', 'printer-utils', 'printer-testpages',
 			 if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
     
     require printer::main;

@@ -237,7 +237,7 @@ sub read_configured_queues($) {
 	    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 		"foomatic-configure -P -q -s $spooler |" or
 		    die "Could not run foomatic-configure";
-	    eval join('',(<F>)); 
+	    eval join('', <F>); 
 	    close F;
 	    if ($service eq "pdq") {
 		#- Have we found queues? PDQ has no damon, so we consider
@@ -258,7 +258,7 @@ sub read_configured_queues($) {
 	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
 	    "foomatic-configure -P -q -s $printer->{SPOOLER} |" or
 		die "Could not run foomatic-configure";
-	eval join('',(<F>)); 
+	eval join('', <F>); 
 	close F;
     }
     $printer->{configured} = {};
@@ -522,7 +522,7 @@ sub read_foomatic_options ($) {
 		  " $printer->{SPECIAL_OPTIONS}" : "") 
 		    . " |" or
 	    die "Could not run foomatic-configure";
-    eval join('',(<F>)); 
+    eval join('', (<F>)); 
     close F;
     # Return the arguments field
     return $COMBODATA->{args};
@@ -1020,7 +1020,7 @@ sub configure_queue($) {
     # so normal users can print.
     if ($printer->{SPOOLER} eq 'pdq') {
 	if ($printer->{currentqueue}{connect} =~ m!^\s*file:(\S*)\s*$!) {
-	    set_permissions($1,"666");
+	    set_permissions($1, "666");
 	}
     }
 
@@ -1455,7 +1455,7 @@ sub configure_hpoj {
 
     # Open configuration file
     local *CONFIG;
-    open(CONFIG,"> $prefix/etc/ptal/$ptaldevice") or
+    open(CONFIG, "> $prefix/etc/ptal/$ptaldevice") or
 	die "Could not open /etc/ptal/$ptaldevice for writing!\n";
 
     # Write file header.

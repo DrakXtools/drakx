@@ -200,7 +200,7 @@ To use alsa, one can either use:
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oopses the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
-            my $wait = $in->wait_message(N("Please wait"),N("Please Wait... Applying the configuration"));
+            my $wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
             do_switch($driver, $new_driver);
             undef $wait;
         }

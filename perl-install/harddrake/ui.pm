@@ -137,11 +137,11 @@ sub detect {
                 $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(pci_bus pci_device pci_function);
             }
             # split description into manufacturer/description
-            ($_->{Vendor}, $_->{description}) = split(/\|/,$_->{description}) if exists $_->{description};
+            ($_->{Vendor}, $_->{description}) = split(/\|/, $_->{description}) if exists $_->{description};
             
             if (exists $_->{val}) { # Scanner ?
                 my $val = $_->{val};
-                ($_->{Vendor},$_->{description}) = split(/\|/, $val->{DESCRIPTION});
+                ($_->{Vendor}, $_->{description}) = split(/\|/, $val->{DESCRIPTION});
             }
             # EIDE detection incoherency:
             if (exists $_->{bus} && $_->{bus} eq 'ide') {
@@ -276,7 +276,7 @@ sub new {
     }
 
     $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
-    $w->{rwindow}->signal_connect (delete_event => \&quit_global);
+    $w->{rwindow}->signal_connect(delete_event => \&quit_global);
     undef $wait;
     gtkset_mousecursor_normal();
     $w->{rwindow}->set_position('center') unless $::isEmbedded;

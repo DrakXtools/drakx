@@ -66,9 +66,9 @@ sub gtkset_visibility         { $_[0]->set_visibility($_[1]); $_[0] }
 sub gtkset_tip                { $_[0]->set_tip($_[1], $_[2]) if $_[2]; $_[1] }
 sub gtkset_shadow_type        { $_[0]->set_shadow_type($_[1]); $_[0] }
 sub gtkset_style              { $_[0]->set_style($_[1]); $_[0] }
-sub gtkset_usize              { $_[0]->set_usize($_[1],$_[2]); $_[0] }
+sub gtkset_usize              { $_[0]->set_usize($_[1], $_[2]); $_[0] }
 sub gtkshow                   { $_[0]->show; $_[0] }
-sub gtksize                   { $_[0]->size($_[1],$_[2]); $_[0] }
+sub gtksize                   { $_[0]->size($_[1], $_[2]); $_[0] }
 sub gtkexpand                 { $_[0]->expand; $_[0] }
 
 sub gdkpixmap {
@@ -281,7 +281,7 @@ sub create_dialog {
     my ($label, $c) = @_;
     my $ret = 0;
     my $dialog = new Gtk::Dialog;
-    $dialog->signal_connect (delete_event => sub { Gtk->main_quit() });
+    $dialog->signal_connect(delete_event => sub { Gtk->main_quit() });
     $dialog->set_title(N("logdrake"));
     $dialog->border_width(10);
     $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
@@ -643,8 +643,8 @@ sub write_on_pixmap {
   	}
     };
     $darea->signal_connect(expose_event => sub { $darea->window->draw_rectangle($darea->style->white_gc, 1, 0, 0, $width, $height);
-						 $darea->window->draw_pixmap
-						   ($darea->style->white_gc,
+						 $darea->window->draw_pixmap(
+						    $darea->style->white_gc,
 						    $gdkpixmap, 0, 0,
 						    ($darea->allocation->[2]-$width)/2, ($darea->allocation->[3]-$height)/2,
 						    $width, $height);

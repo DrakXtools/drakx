@@ -383,7 +383,7 @@ sub doPartitionDisks {
 		fsedit::add($freepart->{hd}, { start => $freepart->{start}, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
-		$o->ask_warn('',N("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
+		$o->ask_warn('', N("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
 	    }
 	}
     }

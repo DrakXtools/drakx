@@ -495,44 +495,44 @@ sub test_mouse {
 	my $x = 60 + $nb*33;
 	$drawarea->();
 	if ($nb == 0) {
-	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					 $m3_left, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+31, ($darea->allocation->[3]-$height)/2 + 52,
 					 59, 91);
 	} elsif ($nb == 2) {
-	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					 $m3_right, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+117, ($darea->allocation->[3]-$height)/2 + 52,
 					 61, 91);
 	} elsif ($nb == 1) {
 	    if ($mouse->{nbuttons} > 3) {
-		$darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+		$darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					     $m3_middle, 0, 0,
 					     ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
 					     13, 62);
 	    } else {
-  		$darea->window->draw_arc ($darea->style->black_gc,
+  		$darea->window->draw_arc($darea->style->black_gc,
   					  1, ($darea->allocation->[2]-$width)/2 + $x, ($darea->allocation->[3]-$height)/2 + 90, 20, 25,
   					  0, 360*64);
 	    }
 	} elsif ($nb == 3) {
 	    $wait = 1;
-	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					 $aru, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+102, ($darea->allocation->[3]-$height)/2 + 57,
 					 6, 8);
-	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					 $m3_middle, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
 					 13, 62);
 	    Gtk->timeout_add(200, sub { $wait = 0 });
 	} elsif ($nb == 4) {
 	    $wait = 1;
-	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					 $ard, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+102, ($darea->allocation->[3]-$height)/2 + 131,
 					 6, 8);
-	    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+	    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					 $m3_middle, 0, 0,
 					 ($darea->allocation->[2]-$width)/2+98, ($darea->allocation->[3]-$height)/2 + 67,
 					 13, 62);

@@ -97,7 +97,7 @@ sub configureoffice {
     # the "Generic Printer"
     my @parameters = $suites{$suite}{param};
     $configfilecontent = removeentry(@parameters, $configfilecontent);
-    $configfilecontent =addentry($parameters[0],$parameters[1] . $suites{$suite}{perl} . $printer::data::lprcommand{$printer->{SPOOLER}{print_command}}, $configfilecontent);
+    $configfilecontent =addentry($parameters[0], $parameters[1] . $suites{$suite}{perl} . $printer::data::lprcommand{$printer->{SPOOLER}{print_command}}, $configfilecontent);
     # Write back Star Office configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
