@@ -776,8 +776,10 @@ sub advanced_install {
 				       gtksignal_connect(new Gtk2::Button(N("Remove Selected")), clicked => \&list_remove),
 				       gtksignal_connect(new Gtk2::Button(N("Install List")), 
 							 clicked => sub {
-							     ${$central_widget}->destroy();
-							     appli_choice();
+							     if (@install) {
+ 								 ${$central_widget}->destroy();
+ 								 appli_choice();
+							     }
 							 })
 				      )
 			       )
