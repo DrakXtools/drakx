@@ -282,20 +282,8 @@ sub all_user_list() {
 }
 
 sub the_time() {
-    $the_time = "_";
-	my ($sec, $min, $hour, $day, $month, $year) = localtime(time());
-    $the_time .= $year + 1900;
-    if ($month < 9) { $the_time .= "0" }
-    $the_time .= $month + 1;
-    if ($day < 10) { $the_time .= "0" }
-    $the_time .= $day;
-    $the_time .= "_";
-    if ($hour < 10) { $the_time .= "0" }
-    $the_time .= $hour;
-    if ($min < 10) { $the_time .= "0" }
-    $the_time .= $min;
-    if ($sec < 10) { $the_time .= "0" }
-    $the_time .= $sec;    
+    my ($sec, $min, $hour, $day, $month, $year) = localtime(time());
+    sprintf("_%d%02d%02d_%02d%02d%02d", $year + 1900, $month + 1, $day, $hour, $min, $sec);
 }
 
 sub get_tape_info() {
