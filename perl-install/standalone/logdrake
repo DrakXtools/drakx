@@ -170,7 +170,7 @@ gtkadd($my_win->{window},
 														      clicked => sub {
 															  $refcount_search++; 
 															  gtkset_sensitive($yy, $refcount_search);
-														      }) } keys %files,
+														      }) } sort keys %files,
 										)
 								       ),
 							     0, gtkadd(gtkset_border_width(new Gtk2::Frame(N("Calendar")),2),
