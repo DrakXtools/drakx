@@ -220,6 +220,22 @@ sub boot_img_i386 {
     (my $initrd_type = $type) =~ s/-changedisk//;
     initrd($tmp_mnt_initrd, $initrd_type, $I, $rdz);
     my $short_type = substr($type, 0, 8);
+
+    my $timeout = 72;
+    output "$mnt/syslinux.cfg",
+"default linux
+prompt 1
+timeout $timeout
+display boot.msg
+F1 help.msg
+F2 advanced.msg
+F3 boot.msg
+" . join('', map {
+"label $_->[0]
+  kernel vmlinuz
+  append initrd=$short_type.rdz $_->[1]
+" } entries_append($type));
+
     eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
     if ($@) {
 	unlink "$mnt/$short_type.rdz";
@@ -240,21 +256,6 @@ sub boot_img_i386 {
 	die qq(check file ".not-enough-room" to see modules size and pcitable usage\n);
     }
     unlink $rdz;
-
-    my $timeout = 72;
-    output "$mnt/syslinux.cfg",
-"default linux
-prompt 1
-timeout $timeout
-display boot.msg
-F1 help.msg
-F2 advanced.msg
-F3 boot.msg
-" . join('', map {
-"label $_->[0]
-  kernel vmlinuz
-  append initrd=$short_type.rdz $_->[1]
-" } entries_append($type));
 
     _ "sync";
     _ "df $mnt";
