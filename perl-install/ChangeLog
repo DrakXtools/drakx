@@ -1,3 +1,87 @@
+2004/11/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/ja.po: update (Yukiko Bando)
+
+	* share/po/br.po: update
+
+2004/11/22  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/make_rescue_img, mdk-stage1/pci-resource/update-pci-ids.pl,
+	docs/HACKING, Makefile: 
+	  - no more kernel/all.modules, things are in kernel/all.kernels
+	  - cleanup what we keep in kernel/all.kernels: only vmlinuz,
+	modules.dep, *.mar, all_modules.tar, modules.cz
+	  - replace all_modules.list + modules with all_modules.tar
+	  - kernel/all.modules/modules.cz-VERSION are now in
+	kernel/all.kernels/VERSION/modules.cz
+	  - allow having a normal in isolinux, but don't use it for floppy
+	images
+	(for this, add kernel/all.kernels/.main-BOOT)
+	  - add many modules kernel/list_modules.pm in unused categories since
+	we don't
+	  take all modules from kernel, only those listed
+	  (needed to have a not too big modules.cz for normal kernel)
+	  - complete rewrite of update_kernel (now written in perl)
+
+2004/11/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm (real_main) in "ADSL provider" step, plain reset
+	the protocol on
+	provider switch
+
+	* standalone/harddrake2: kill a stock icon
+
+	* share/po/br.po: update
+
+2004/11/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm (alsa2oss) add snd-azx
+
+	* share/rpmsrate: fix wrong package name
+
+2004/11/18  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* install_steps_gtk.pm: use 'fbdev' server on x86_64 too
+
+	* share/advertising/list-cpd, share/advertising/list-cps: update to match
+	warly's config files
+
+2004/11/18  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive.pm: fix prototype
+	remove some unneeded ";", add some for normalization (as told by
+	perl_checker)
+
+	* install_steps_interactive.pm, diskdrake/interactive.pm: since we don't
+	use ramdisk but clp, some code is dead
+	(remove usingRamdisk(), check_prog(), remove_unused()...)
+	add some ";", remove some ";", as told by perl_checker
+
+	* install2.pm, pkgs.pm, run_program.pm: since we don't use ramdisk but
+	clp, some code is dead
+	(remove usingRamdisk(), check_prog(), remove_unused()...)
+
+	* lang.pm, fs.pm, common.pm, install_any.pm: since we don't use ramdisk
+	but clp, some code is dead
+	(remove usingRamdisk(), check_prog(), remove_unused()...)
+	remove some unneeded ";", add some for normalization (as told by
+	perl_checker)
+
+	* partition_table/gpt.pm, standalone/harddrake2, partition_table/raw.pm,
+	partition_table/mac.pm, install_steps_auto_install.pm,
+	diskdrake/hd_gtk.pm: add some ";", remove some ";", as told by
+	perl_checker
+
+	* wizards.pm, install_steps.pm, install_gtk.pm, network/isdn.pm,
+	diskdrake/resize_ntfs.pm, network/netconnect.pm, mouse.pm, lvm.pm,
+	devices.pm, raid.pm, crypto.pm, Xconfig/screen.pm, commands.pm,
+	install_interactive.pm, ugtk2.pm, partition_table.pm, any.pm,
+	interactive/stdio.pm, interactive/newt.pm, harddrake/sound.pm,
+	services.pm, authentication.pm, network/ethernet.pm, bootloader.pm,
+	harddrake/data.pm, interactive/gtk.pm, network/adsl.pm, fsedit.pm,
+	detect_devices.pm, modules.pm, network/shorewall.pm: remove some
+	unneeded ";", add some for normalization (as told by perl_checker)
+
 2004/11/18  Pixel  <pixel at mandrakesoft.com>
 
 	* diskdrake/hd_gtk.pm, install_steps_auto_install.pm,
@@ -41818,7 +41902,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.986 2004/10/11 05:30:08 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.987 2004/11/18 12:57:21 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
