@@ -87,7 +87,7 @@ sub unblacklist {
         $o->{daemon}->UnBlacklist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
     };
     if ($@) {
-        print "(Blacklist) exception: $@\n";
+        print "(UnBlacklist) exception: $@\n";
         $o->dispatch;
     }
 }
