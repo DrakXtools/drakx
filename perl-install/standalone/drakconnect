@@ -172,7 +172,7 @@ $list->signal_connect(button_press_event => sub {
                       });
 
 
-build_list();
+update_list();
 
 my ($bbox0, $label_host, $int_state, $button_expert);
 
@@ -281,7 +281,7 @@ $::isWizard = 1;
 network::netconnect::main('', $netcnx, $in);
 $in->exit(0);
 
-sub get_int_ip {
+sub get_intf_ip {
     my ($interface) = @_;
     my ($ip, $state, $mask);
     if (-x "/sbin/ifconfig") {
@@ -296,16 +296,18 @@ sub get_int_ip {
     ($ip, $state, $mask);
 }
 
-sub get_eth_ip {
-    my ($interface_num) = @_;
-    get_int_ip("eth$interface_num");
-}
+my %intf;
 
-sub build_list() {
-    foreach my $i (0..$#all_cards) {
-	my ($ip, $state) = get_eth_ip($i);
-
-        $tree_model->append_set(undef, [ map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i][1], $state) ]);
+sub update_list() {
+    my %new_intf = map { @$_ } @all_cards;
+    my @new_intf = sort keys %new_intf;
+    foreach my $interface (@new_intf) {
+        my ($ip, $state) = get_intf_ip($interface);
+        $intf{$interface}{iter} ||= $tree_model->append(undef);
+        $tree_model->set($intf{$interface}{iter}, map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), $interface, $ip , $intf->{$interface}{BOOTPROTO}, $new_intf{$interface}, $state));
+    }
+    foreach my $i (difference2([ keys %intf ], \@new_intf)) {
+        delete $intf{$i};
     }
 }
 
@@ -327,7 +329,7 @@ sub apply() {
     $button_apply->set_sensitive(0);
 }
 
-sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig eth$_[0]` =~ /inet/ }
+sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig $_[0]` =~ /inet/ }
 
 my $to_update;
 sub update() {
@@ -336,8 +338,7 @@ sub update() {
     $type_label->set($netcnx->{type});
     $int_label->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
     $interface_name->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
-    $tree_model->clear;
-    build_list();
+    update_list();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
     return 1 if $isconnected == -1;
     $int_state->set($isconnected ? N("Connected") : N("Not connected"));
@@ -415,6 +416,11 @@ sub get_intf_status {
     ethisup($c) ? N("Deactivate now") : N("Activate now")
 }
 
+sub get_intf_status {
+    my ($c) = @_;
+    ethisup($c) ? N("Deactivate now") : N("Activate now")
+}
+
 sub configure_lan() {
     my $window = _create_dialog(N("LAN configuration"), { small => 1 });
     my @card_tab;
@@ -450,16 +456,17 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 
 	my $vbox_local = new Gtk2::VBox(0,0);
 	$vbox_local->set_border_width(10);
-	$vbox_local->pack_start(new Gtk2::Label(N("Adapter %s: %s", $_+1 , "eth$_")),1,1,0);
+	$vbox_local->pack_start(new Gtk2::Label(N("Adapter %s: %s", $_+1 , $all_cards[$_][0])),1,1,0);
 	#	Eth${_}Hostname = $netc->{HOSTNAME}
 	#       Eth${_}HostAlias = " . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 	#	Eth${_}Driver = $all_cards[$_]->[1]
-	my ($ip, undef, $mask) = get_eth_ip($_);
-	$mask ||= $intf->{"eth$_"}{NETMASK};
+	my $interface = $all_cards[$_][0];
+	my ($ip, undef, $mask) = get_intf_ip($interface);
+	$mask ||= $intf->{$interface}{NETMASK};
         @conf_data = ([ N("IP address"), \$ip ],
 		      [ N("Netmask"), \$mask ],
-		      [ N("Boot Protocol"), \$intf->{"eth$_"}{BOOTPROTO}, ["static", "dhcp", "bootp"] ],
-		      [ N("Started on boot"), \$intf->{"eth$_"}{ONBOOT} , ["yes", "no"] ],
+		      [ N("Boot Protocol"), \$intf->{$interface}{BOOTPROTO}, ["static", "dhcp", "bootp"] ],
+		      [ N("Started on boot"), \$intf->{$interface}{ONBOOT} , ["yes", "no"] ],
 		      [ N("DHCP client"), \$netcnx->{dhcp_client} ]
 		     );
 	my $i = 0;
@@ -486,13 +493,12 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $i++;
 	}
 
-	my $c = $_;
 	my $widget_temp;
-	if (-e "$::prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
-         $widget_temp = gtksignal_connect(new Gtk2::Button(get_intf_status($c)),
+	if (-e "$::prefix/etc/sysconfig/network-scripts/ifcfg-$interface") {
+         $widget_temp = gtksignal_connect(new Gtk2::Button(get_intf_status($interface)),
                                           clicked => sub {
-                                              system("/sbin/if" . (ethisup($c) ? "down" : "up") . " eth$c");
-                                              $_[0]->set_label(get_intf_status($c));
+                                              system("/sbin/if" . (ethisup($interface) ? "down" : "up") . " $interface");
+                                              $_[0]->set_label(get_intf_status($interface));
                                               update();
                                           });
 	} else {
@@ -501,9 +507,9 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	$vbox_local->pack_start(gtkpack__(new Gtk2::HBox(0,0),
 					  $widget_temp
 					 ),0,0,0);
-	#	$list->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
+	#	$list->append($_+1, $interface, $intf->{$interface}{IPADDR}, $intf->{$interface}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$list->set_selectable($_, 0);
-	$notebook->append_page($vbox_local, Gtk2::Label->new("eth$_"));
+	$notebook->append_page($vbox_local, Gtk2::Label->new($interface));
     }
     my $bbox8 = new Gtk2::HButtonBox;
     $vbox0->pack_start($bbox8,0,0,10);
@@ -513,18 +519,17 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $button_ok->signal_connect(clicked => sub {
 				   foreach (0..$#all_cards) {
 				       my @infos = @{$card_tab[2*$_]};
-				       
 				       each_index { ${$_->[1]} = $infos[2*$::i+1]->get_text } @{$card_tab[2*$_+1]};
-				       
-				       if ($intf->{"eth$_"}{BOOTPROTO} ne "static") {
-					   delete @{$intf->{"eth$_"}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
+				       my $interface = $all_cards[$_][0];
+				       if ($intf->{$interface}{BOOTPROTO} ne "static") {
+                           delete @{$intf->{$interface}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
 				       } else {
 					   if ($infos[1]->get_text ne "No ip") {
-					       $intf->{"eth$_"}{IPADDR}  = $infos[1]->get_text;
-					       $intf->{"eth$_"}{NETMASK} = $infos[3]->get_text;
+					       $intf->{$interface}{IPADDR}  = $infos[1]->get_text;
+					       $intf->{$interface}{NETMASK} = $infos[3]->get_text;
 					   }
 				       }
-				   }
+                       }
 				   update();
 				   $button_apply->set_sensitive(1);
 				   $window->destroy; Gtk2->main_quit;
@@ -540,7 +545,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $window->show_all;
     foreach (0..$#all_cards) {
 	my @infos = @{$card_tab[2*$_]};
-	$intf->{"eth$_"}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
+	$intf->{$all_cards[$_][0]}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
     }
     $window->run;
 }
