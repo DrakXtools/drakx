@@ -1,3 +1,5 @@
+use Config;
+
 print '
 #include "EXTERN.h"
 #include "perl.h"
@@ -106,9 +108,12 @@ Xtest(display)
   RETVAL
 ';
 
-$ENV{C_DRAKX} and print '
+$ENV{C_DRAKX} && $Config{archname} =~ /i.86/ and print '
 char *
 pcmcia_probe()
+';
+
+$ENV{C_DRAKX} and print '
 
 void
 setMouseLive(display, type, emulate3buttons)
