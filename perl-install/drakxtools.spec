@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 5mdk
+Release: 6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Aug 31 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-6mdk
+- drakboot: default parameters are those of the default target (pixel)
+- drakedm: in non expert mode, only display the list of *installed* display
+  managers
+- drakfloppy, drakconnect: fix more dialogs height
+- fix requires
 
 * Thu Aug 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-5mdk
 - drakhelp: add support for contextual help (daouda)
