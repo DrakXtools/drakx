@@ -821,7 +821,7 @@ sub autologin {
     my @wm = (split (' ', `$cmd /usr/sbin/chksession -l 2>/dev/null`));
     my @users = map { $_->{name} } @{$o->{users} || []};
 
-    if (@wm && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
+    if (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
 	add2hash_($o, { autologin => $users[0] });
 
 	$in->ask_from_(
@@ -834,6 +834,8 @@ Do you want to use this feature?"),
 			 { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
 		      )
 	  or delete $o->{autologin};
+    } else {
+	delete $o->{autologin};
     }
 }
 
