@@ -185,16 +185,16 @@ sub loadkeys_files {
     my (@l, %l);
     foreach (values %keyboards) {
 	local $_ = $trans{$_->[1]} || $_->[1];
-	my ($l) = glob("$p/$_$post");
-	$l or /(..)/ and ($l) = glob("$p/$1$post");
+	my ($l) = glob_("$p/$_$post");
+	$l or /(..)/ and ($l) = glob_("$p/$1$post");
 	print STDERR "unknown $_\n" if $_[0] && !$l; $l or next;
 	push @l, $l;
 	foreach (`zgrep include $l | grep "^include"`) {
 	    /include\s+"(.*)"/ or die "bad line $_";
-	    @l{glob("$p/$1.inc.gz")} = ();
+	    @l{glob_("$p/$1.inc.gz")} = ();
 	}
     }        
-    @l, keys %l, map { glob("$p/$_.inc.gz") } qw(compose euro windowkeys linux-keys-bare);
+    @l, keys %l, map { glob_("$p/$_.inc.gz") } qw(compose euro windowkeys linux-keys-bare);
 }
 
 sub lang2keyboard($) {
