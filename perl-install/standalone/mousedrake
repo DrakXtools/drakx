@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use common qw(:system);
+use interactive;
+use mouse;
+
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: mousedrake [--auto] [--noauto] [--testing]\n";
+
+$::auto = /--auto/;
+$::noauto = /--noauto/;
+$::testing = /--testing/;
+$::isStandalone = 1;
+
+my $in = vnew interactive;
+
+my $mouse = mouse::detect() unless $::noauto;
+
+if (!(my $name = $mouse->{FULLNAME}) || !$::auto) {
+    $name ||= "Generic Mouse (serial)";
+    $name = $in->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $name);
+    $mouse = mouse::name2mouse($name);
+
+    if ($mouse->{device} eq "usbmouse") {
+	my ($c) = pci_probing::main::probe("serial_usb") or die _("no serial_usb found\n");
+	eval { modules::load($c->[1], "serial_usb") };
+    }
+}
+
+$mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
+
+$mouse->{device} = mouse::serial_ports_names2dev(
+	$in->ask_from_list(_("Mouse Port"),
+			   _("Which serial port is your mouse connected to?"),
+			   [ mouse::serial_ports_names() ])) if $mouse->{device} eq "ttyS";
+
+mouse::write('', $mouse);
+modules::write_conf("/etc/conf.modules") if $mouse->{device} eq "usbmouse" && !$::testing;
+
+my $f = "/etc/X11/XF86Config";
+substInFile {
+    if (/^Section "Pointer"/ .. /^EndSection/) {
+	s|^(\s*Protocol\s+).*|$1 "$mouse->{XMOUSETYPE}"|;
+	s|^(\s*Device\s+).*|$1 "/dev/mouse"|;
+    }
+} $f if -e $f && !$::testing;
+
+exec 'true' if ref($in) =~ /gtk/; #- workaround for perl-GTK

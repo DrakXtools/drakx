@@ -17,7 +17,6 @@ dirs:
 	for i in $(DIRS); do make -C $$i; done
 
 $(BOOT_IMG): modules dirs
-	make dirs
 	./make_boot_img $@ $(@:gi_%.img=%)
 
 tar: clean

@@ -333,7 +333,7 @@ sub read($;$) {
       read_one($hd, 0) || return 0;
 
     $hd->{primary} = $pt;
-    $hd->{extended} = undef;
+    undef $hd->{extended};
     $clearall and return $hd->{isDirty} = $hd->{needKernelReread} = 1;
     verifyPrimary($pt);
 

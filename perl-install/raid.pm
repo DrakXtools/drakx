@@ -44,7 +44,7 @@ sub delete($$) {
     $nb = nb($nb);
 
     delete $_->{raid} foreach @{$raid->[$nb]{disks}};
-    $raid->[$nb] = undef;
+    undef $raid->[$nb];
 }
 
 sub changeNb($$$) {

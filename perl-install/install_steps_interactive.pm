@@ -145,6 +145,8 @@ sub selectMouse {
 			  _("Which serial port is your mouse connected to?"),
 			  [ mouse::serial_ports_names() ])) if $o->{mouse}{device} eq "ttyS";
 
+    $o->setup_thiskind('serial_usb', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
+
     $o->SUPER::selectMouse;
 }
 #------------------------------------------------------------------------------
@@ -261,6 +263,12 @@ sub installPackages {
 	} else { unshift @_, $m; goto $old }
     };
     $o->SUPER::installPackages($packages);
+}
+
+sub afterInstallPackages($) {
+    my ($o) = @_;
+    my $w = $o->wait_message('', _("Post install stuff"));
+    $o->SUPER::afterInstallPackages($o);
 }
 
 #------------------------------------------------------------------------------
@@ -601,7 +609,7 @@ _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list
 	    local *F; open F, "chroot $o->{prefix} /usr/bin/lpq |";
 	    my @lpq_output = grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
 
-	    $w = undef; #- erase wait message window.
+	    undef $w; #- erase wait message window.
 	    if (@lpq_output) {
 		$action = $o->ask_yesorno('', _("Is this correct? Printing status:\n%s", "@lpq_output"), 1) ? 'done' : 'change';
 	    } else {

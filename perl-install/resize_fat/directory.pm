@@ -67,7 +67,7 @@ sub traverse_all($$) {
 	resize_fat::io::read_file($fs, $fs->{fat32_root_dir_cluster}) :
 	resize_fat::io::read($fs, $fs->{root_dir_offset}, $fs->{root_dir_size});
     traverse($directory, $traverse_all);
-    $traverse_all = undef; #- circular reference is no good for perl's poor GC :(
+    undef $traverse_all; #- circular reference is no good for perl's poor GC :(
 }
 
 

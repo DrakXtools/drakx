@@ -391,7 +391,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade X manualFstab); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade X manualFstab nomouseprobe); #- TODO modules bootloader 
 
 #-    local $o->{partitioning}{clearall} = 1;
 
@@ -459,6 +459,10 @@ sub install_urpmi {
 	print OUT foreach <$fd>;
     }
     {
+	local *F = getFile("depslist");
+	output("$prefix/etc/urpmi/depslist", <F>);
+    }
+    {
 	local *LIST;
 	open LIST, ">$prefix/etc/urpmi/list.$name" or log::l("failed to write list.$name"), return;
 
@@ -472,7 +476,6 @@ sub install_urpmi {
 	$dir .= "/Mandrake/RPMS with ../base/hdlist" if $method =~ /ftp|http/;
 	eval { output "$prefix/etc/urpmi/urpmi.cfg", "$name $dir\n" };
     }
-    run_program::rooted($prefix, "urpmi.update");
 }
 
 1;

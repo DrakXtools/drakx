@@ -153,18 +153,18 @@ sub cardConfiguration(;$$$) {
     readCardsDB("$prefix/usr/X11R6/lib/X11/Cards");
 
     add2hash($card, $cards{$card->{type}}) if $card->{type}; #- try to get info from given type
-    $card->{type} = undef unless $card->{server}; #- bad type as we can't find the server
+    undef $card->{type} unless $card->{server}; #- bad type as we can't find the server
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
     $card->{type} = $in->ask_from_list('', _("Select a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
-    $card->{type} = undef, $card->{server} = $in->ask_from_list('', _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
+    undef $card->{type}, $card->{server} = $in->ask_from_list('', _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
 
     add2hash($card, $cards{$card->{type}}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     $card->{prog} = "/usr/X11R6/bin/XF86_$card->{server}";
 
-    -x "$prefix$card->{prog}" or !defined $install or &$install($card->{server});
+    -x "$prefix$card->{prog}" or $install && &$install($card->{server});
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
     symlinkf "../..$card->{prog}", "$prefix/etc/X11/X" unless $::testing;

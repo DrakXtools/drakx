@@ -186,7 +186,7 @@ $o = $::o = {
 
 
 
-    base => [ qw(basesystem sed initscripts console-tools mkbootdisk utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base) ],
+    base => [ qw(basesystem sed initscripts console-tools mkbootdisk utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base) ],
 #-GOLD    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
 
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
@@ -335,6 +335,7 @@ sub choosePackages {
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
     unless ($o->{isUpgrade}) {
 	$o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
+	pkgs::unselect($o->{packages}, $o->{packages}{kdesu}) if $o->{packages}{kdesu} && $o->{security} > 3;
 	$o->{packages}{$_}{selected} = 1 foreach @{$o->{base}}; #- already done by selectPackagesToUpgrade.
     }
 }
@@ -486,6 +487,7 @@ sub main {
 	    simple_themes => sub { $o->{simple_themes} = 1 },
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
+	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	}}{lc $n}; &$f if $f;
     } %cmdline;    
 
@@ -525,7 +527,7 @@ sub main {
 	eval { $o = $::o = install_any::loadO($o, "floppy") };
 	if ($@) {
 	    log::l("error using auto_install, continuing");
-	    $::auto_install = undef;
+	    undef $::auto_install;
 	}
     }
     unless ($::auto_install) {
@@ -539,7 +541,7 @@ sub main {
     mkdir $o->{prefix}, 0755;
 
     #- needed very early for install_steps_gtk
-    eval { $o->{mouse} ||= mouse::detect() };
+    eval { $o->{mouse} ||= mouse::detect() } unless $o->{nomouseprobe};
 
     $::o = $o = $::auto_install ?
       install_steps_auto_install->new($o) :

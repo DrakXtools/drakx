@@ -2,24 +2,12 @@
 
 KERNEL_BOOT_PATH="kernel"
 
-SCSI_DRIVERS="
-     53c7,8xx.o AM53C974.o BusLogic.o NCR53c406a.o advansys.o aha152x.o
-     aha1542.o aha1740.o aic7xxx.o dtc.o eata_dma.o eata_pio.o fdomain.o
-     g_NCR5380.o gdth.o in2000.o initio.o megaraid.o ncr53c8xx.o pas16.o
-     qlogicisp.o seagate.o sym53c8xx.o t128.o u14-34f.o wd7000.o ultrastor.o"
+SCSI_DRIVERS=`perl -Iperl-install -e 'use modules; while (($m,$v)=each %modules::drivers) { print "$m.o\n" if $v->{type} eq "scsi" }'`
 
-# broken network modules: at1700.o
-NETWORK_DRIVERS="
-     3c501.o 3c503.o 3c505.o 3c507.o 3c509.o 3c59x.o 3c90x.o 82596.o 8390.o ac3200.o
-     acenic.o epic100.o cs89x0.o de4x5.o de600.o de620.o dgrs.o e2100.o
-     eepro.o eepro100.o eexpress.o es3210.o eth16i.o hp-plus.o hp.o
-     hp100.o ibmtr.o lance.o lne390.o ne.o ne2k-pci.o ne3210.o ni52.o
-     ni5010.o ni65.o plip.o
-     pcnet32.o rtl8139.o sktr.o smc9194.o smc-ultra.o
-     smc-ultra32.o tlan.o 
-     tulip.o via-rhine.o wavelan.o wd.o yellowfin.o
+NETWORK_DRIVERS=`perl -Iperl-install -e 'use modules; while (($m,$v)=each %modules::drivers) { print "$m.o\n" if $v->{type} eq "net" }'`
+NETWORK_DRIVERS="$NETWORK_DRIVERS 82596.o 8390.o cs89x0.o dgrs.o lockd.o nfs.o sunrpc.o wavelan.o"
 
-     nfs.o lockd.o sunrpc.o"
+
 #     3c589_cs.o ibmtr_cs.o nmclan_cs.o pcnet_cs.o smc91c92_cs.o wavelan_cs.o
 #     fmvj18x_cs.o netwave_cs.o xirc2ps_cs.o 3c574_cs.o"
 
@@ -56,8 +44,6 @@ LNX4WIN_MODULES="$FSMODULES loop.o isofs.o $SCSI_DRIVERS"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 
-PRISTINE_MODULES="serial.o"
-
 cp -f "$KERNEL_BOOT_PATH"/boot/vmlinuz* vmlinuz
 cp -f "$KERNEL_BOOT_PATH"/boot/System.map* System.map
 
@@ -66,9 +52,9 @@ cp -f "$KERNEL_BOOT_PATH"/boot/System.map* System.map
 
 rm -rf modules ; install -d modules
 rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
+install -d lnx4win/initrd/modules
 (cd modules ; 
     cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
-    mkdir pristine ; cp $PRISTINE_MODULES pristine
     /sbin/depmod -m ../System.map -i -e *.o | grep ': ' | sed 's/\.o//g' > modules.dep
     ls *.o              | ../build_archive modules 400000
     ls *.o              | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2

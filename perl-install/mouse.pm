@@ -117,8 +117,8 @@ sub detect() {
     #- @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
     #- modules::unload("serial");
 
-    if (my ($c) = pci_probing::main::probe("SERIAL_USB")) {
-	eval { modules::load($c->[1], 'usbmouse') };
+    if (my ($c) = pci_probing::main::probe("serial_usb")) {
+	eval { modules::load($c->[1], "serial_usb") };
 	sleep(1);
 	do { modules::unload("serial"); return name2mouse("USB Mouse") } if !$@ && detect_devices::tryOpen("usbmouse");
 	modules::unload($c->[1]);

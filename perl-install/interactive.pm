@@ -38,6 +38,17 @@ sub new($) {
     bless {}, ref $type || $type;
 }
 
+sub vnew {
+    if (c::Xtest($ENV{DISPLAY} ||= ":0")) {
+	require 'interactive_gtk.pm';
+	interactive_gtk->new;
+    } else {
+	undef *log::l;
+	*log::l = sub {}; # otherwise, it will bother us :(
+	require 'interactive_newt.pm';
+	interactive_newt->new;
+    }
+}
 
 #-######################################################################################
 #- Interactive functions

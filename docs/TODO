@@ -1,4 +1,6 @@
-bug: if u choose mouse usb != found mouse, it fails at X config
+move security question before isntallation of packages
+
+verify kernel-smp is put in lilo by default, works on torturebox :-/
 
 i18n
 
@@ -19,11 +21,7 @@ X configuration and bootloader in kickstart
 auto_partitions
 suggested partition tables must be better foreach installClass
 
-(pix)options in mkfs, progress bar when formatting
-
 (pix)Tree -> CTree, ``all'' branch with all packages
-
-install postfix in place of sendmail for security levels 4&5
 
 update the list of modules (in update_kernel)
 
@@ -42,6 +40,8 @@ have a better time estimation of the remaining time in install packages
 smaller zsh (or ash in initrd)
 
 initrd in bzip2
+
+(pix)options in mkfs, progress bar when formatting
 
 aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 
@@ -106,4 +106,6 @@ compress hdlist?
 (done,pix)standalone generator of mdkinst_stage2.gz
 
 (done,pix)text install
+
+(done,pix) if u choose mouse usb != found mouse, it fails at X config
 

@@ -150,7 +150,7 @@ sub ask_from_entries_refW {
 	    $widget->signal_connect(changed => $changed_callback);
 	    my $go_to_next = sub {
 		if ($ind == $#$l) {
-		    $w->{ok}->grab_focus();
+		    @$l == 1 ? $w->{ok}->clicked : $w->{ok}->grab_focus();
 		} else {
 		    widget($widgets[$ind+1],$val->[$ind+1])->grab_focus();
 		}

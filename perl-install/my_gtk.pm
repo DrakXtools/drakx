@@ -328,7 +328,7 @@ sub _create_window($$) {
 
     $w->signal_connect("map_event" => sub { c::XSetInputFocus($w->window->XWINDOW); }) if $my_gtk::force_focus || $o->{force_focus};
     $w->signal_connect("expose_event" => sub { c::XSetInputFocus($w->window->XWINDOW); }) if $my_gtk::force_focus || $o->{force_focus};
-    $w->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
+    $w->signal_connect("delete_event" => sub { undef $o->{retval}; Gtk->main_quit });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
     $w->signal_connect("key_press_event" => sub {
@@ -445,7 +445,7 @@ sub _ask_from_entry($$@) {
     my $entry = new Gtk::Entry;
     my $f = sub { $o->{retval} = $entry->get_text; Gtk->main_quit };
     $o->{ok_clicked} = $f;
-    $o->{cancel_clicked} = sub { $o->{retval} = undef; Gtk->main_quit };
+    $o->{cancel_clicked} = sub { undef $o->{retval}; Gtk->main_quit };
 
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
@@ -469,7 +469,9 @@ sub _ask_from_list {
 	$list->moveto($_[0], 0, 0.5, 0);
     };
 
-    $list->signal_connect(button_release_event => $leave) if ref $title && !@okcancel;
+    $list->signal_connect(button_press_event => 
+			  ref $title && !@okcancel ? $leave : sub { &$leave if $_[1]{type} =~ /^2/ }
+			 );
     $list->signal_connect(select_row => sub {
 	my ($w, $row, undef, $e) = @_;
 	$curr = $row;

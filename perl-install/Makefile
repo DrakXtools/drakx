@@ -2,7 +2,7 @@ VERSION     = 2.2.10-BOOT
 SUDO        = sudo
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
 PMS         = *.pm Newt/*.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 g_auto_install
-PMS	   .= $(patsubst %, standalone/%,diskdrake XFdrake rpmdrake)
+PMS	   += $(patsubst %, standalone/%,diskdrake XFdrake rpmdrake mousedrake)
 REP4PMS     = /usr/bin/perl-install
 ROOTDEST    = /export
 DEST        = $(ROOTDEST)/Mandrake/mdkinst
@@ -31,8 +31,8 @@ clean:
 
 tar-drakxtools: clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe drakxtools	
-	cd ../drakxtools ; rm -f install* ForMakefile.pm pkgs.pm ftp.pm t.pm ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe po pci_probing resize_fat diskdrake diskdrake.rc XFdrake *.pm)
+	cd ../drakxtools ; rm -rf install* ForMakefile.pm pkgs.pm ftp.pm t.pm standalone/CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
+	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe po pci_probing resize_fat diskdrake diskdrake.rc XFdrake mousedrake *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
@@ -63,7 +63,7 @@ install_pms: $(DIRS)
 	cp -f po/*.po* $(DESTREP4PMS)/po ||:
 	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
-	chmod a+x $(DESTREP4PMS)/XFdrake
+	chmod a+x $(DESTREP4PMS)/standalone/*
 	chmod a+x $(DESTREP4PMS)/g_auto_install
 
 get_needed_files: $(DIRS)

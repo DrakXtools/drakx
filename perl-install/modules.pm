@@ -2,7 +2,7 @@ package modules;
 
 use diagnostics;
 use strict;
-use vars qw(%loaded);
+use vars qw(%loaded %drivers);
 
 use common qw(:common :file);
 use pci_probing::main;
@@ -17,7 +17,7 @@ my $scsi = 0;
 my %deps = ();
 
 my @drivers_by_category = (
-[ \&detect_devices::hasEthernet, 'net', 'ethernet', {
+[ 'net', {
   "3c509" => "3com 3c509",
   "3c501" => "3com 3c501",
   "3c503" => "3com 3c503",
@@ -29,6 +29,7 @@ my @drivers_by_category = (
   "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
   "at1700" => "Allied Telesis AT1700",
   "ac3200" => "Ansel Communication AC3200",
+  "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
   "apricot" => "Apricot 82596",
   "atp" => "ATP",
@@ -60,30 +61,37 @@ my @drivers_by_category = (
   "es3210" => "Racal-Interlan ES3210",
   "rcpci45" => "RedCreek PCI45 LAN",
   "epic100" => "SMC 83c170 EPIC/100",
+  "sktr" => "Syskonnect Token ring adaptor",
   "smc9194" => "SMC 9000 series",
   "smc-ultra" => "SMC Ultra",
   "smc-ultra32" => "SMC Ultra 32",
+  "sunhme" => "Sun Happy Meal",
+  "tr" => "IBM TR Auto LANstreamer",
   "via-rhine" => "VIA Rhine",
   "wd" => "WD8003, WD8013 and compatible",
+  "yellowfin" => "Symbios Yellowfin G-NIC",
 }],
-[ \&detect_devices::hasSCSI, 'scsi', undef, {
+[ 'scsi', {
   "aha152x" => "Adaptec 152x",
   "aha1542" => "Adaptec 1542",
   "aha1740" => "Adaptec 1740",
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "advansys" => "AdvanSys Adapters",
+  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller",
   "in2000" => "Always IN2000",
   "AM53C974" => "AMD SCSI",
   "megaraid" => "AMI MegaRAID",
   "BusLogic" => "BusLogic Adapters",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "dtc" => "DTC 3180/3280",
+  "eata" => "EATA SCSI PM2x24/PM3224",
   "eata_dma" => "EATA DMA Adapters",
   "eata_pio" => "EATA PIO Adapters",
   "seagate" => "Future Domain TMC-885, TMC-950",
   "fdomain" => "Future Domain TMC-16x0",
   "gdth" => "ICP Disk Array Controller",
   "initio" => "Initio",
+  "ips" => "IBM ServeRAID controller",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "g_NCR5380" => "NCR 5380",
   "NCR53c406a" => "NCR 53c406a",
@@ -94,12 +102,13 @@ my @drivers_by_category = (
   "qlogicfas" => "Qlogic FAS",
   "qlogicisp" => "Qlogic ISP",
   "seagate" => "Seagate ST01/02",
+  "sym53c8xx" => "Symbios 53c8xx",
   "t128" => "Trantor T128/T128F/T228",
   "u14-34f" => "UltraStor 14F/34F",
   "ultrastor" => "UltraStor 14F/24F/34F",
   "wd7000" => "Western Digital wd7000",
 }],
-[ undef, 'cdrom', 'none', {
+[ 'cdrom', {
   "sbpcd" => "SoundBlaster/Panasonic",
   "aztcd" => "Aztech CD",
   "bpcd" => "Backpack CDROM",
@@ -111,23 +120,37 @@ my @drivers_by_category = (
   "sjcd" => "Sanyo",
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
-}]
+}],
+[ 'sound', {
+  "alsa" => "ALSA sound module, many sound cards",
+  "cmpci" => "C-Media Electronics CMI8338A CMI8338B CMI8738",
+  "es1370" => "Ensoniq ES1370 [AudioPCI]",
+  "es1371" => "Ensoniq ES1371 [AudioPCI-97]",
+  "esssolo1" => "ESS Technology ES1969 Solo-1 Audiodrive",
+  "maestro" => "Maestro",
+  "nm256" => "Neomagic MagicMedia 256AV",
+  "via82cxxx" => "VIA VT82C686_5",
+  "sonicvibes" => "S3 SonicVibes",
+}],
 );
 
-my @drivers_fields = qw(text detect type minor);
-my %drivers = (
-  "plip" => [ "PLIP (parallel port)", \&detect_devices::hasPlip, 'net', 'plip' ],
-  "ibmtr" => [ "Token Ring", \&detect_devices::hasTokenRing, 'net', 'tr' ],
-  "DAC960" => [ "Mylex DAC960", undef, 'scsi', undef ],
-  "pcmcia_core" => [ "PCMCIA core support", undef, 'pcmcia', undef ],
-  "ds" => [ "PCMCIA card support", undef, 'pcmcia', undef ],
-  "i82365" => [ "PCMCIA i82365 controller", undef, 'pcmcia', undef ],
-  "tcic" => [ "PCMCIA tcic controller", undef, 'pcmcia', undef ],
-  "isofs" => [ "iso9660", undef, 'fs', undef ],
-  "nfs" => [ "Network File System (nfs)", undef, 'fs', undef ],
-  "smbfs" => [ "Windows SMB", undef, 'fs', undef ],
-  "loop" => [ "Loopback device", undef, 'other', undef ],
-  "lp" => [ "Parallel Printer", undef, 'other', undef ],
+my @drivers_fields = qw(text type);
+%drivers = (
+  "plip" => [ "PLIP (parallel port)", 'net' ],
+  "ibmtr" => [ "Token Ring", 'net' ],
+  "DAC960" => [ "Mylex DAC960", 'scsi' ],
+  "pcmcia_core" => [ "PCMCIA core support", 'pcmcia' ],
+  "ds" => [ "PCMCIA card support", 'pcmcia' ],
+  "i82365" => [ "PCMCIA i82365 controller", 'pcmcia' ],
+  "tcic" => [ "PCMCIA tcic controller", 'pcmcia' ],
+  "isofs" => [ "iso9660", 'fs' ],
+  "nfs" => [ "Network File System (nfs)", 'fs' ],
+  "smbfs" => [ "Windows SMB", 'fs' ],
+  "loop" => [ "Loopback device", 'other' ],
+  "lp" => [ "Parallel Printer", 'other' ],
+  "usb-uhci", [ "USB (uhci)", 'serial_usb' ],
+  "usb-ohci", [ "USB (ohci)", 'serial_usb' ],
+  "usb-ohci-hcd", [ "USB (ohci-hcd)", 'serial_usb' ],
 );
 foreach (@drivers_by_category) {
     my @l = @$_;
@@ -142,7 +165,6 @@ while (my ($k, $v) = each %drivers) {
 
 1;
 
-sub drivers { %drivers }
 sub text_of_type($) {
     my ($type) = @_;
 
@@ -176,7 +198,7 @@ sub load {
     push @{$loaded{$type}}, $name;
 
     if ($type) {
-	$conf{$type}{alias} = $name if $type eq 'usbmouse';
+	$conf{usbmouse}{alias} = $name if $type =~ /serial_usb/i;
 	$conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name if $type eq 'scsi';
     }
     $conf{$name}{options} = join " ", @options if @options;

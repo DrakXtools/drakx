@@ -278,7 +278,7 @@ sub chooseSizeToInstall {
     my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
     my $default = pkgs::correctSize((sum map { $_->{size} } grep { $_->{selected} } values %$packages) / sqr(1024) || $availableSpace * 0.7);
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($default, 100, $availableSpace);
+    my $adj = create_adjustment($default, 75, $availableSpace);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
 
     gtkadd($w->{window},
@@ -337,7 +337,7 @@ sub choosePackagesTree {
 	my ($p, $name, $parent) = @_;
 	my $w = create_treeitem($name);
 	$items{++$itemsNB} = [ $w, $p ];
-	$parent->{packages_item}{$itemsNB} = undef if $parent;
+	undef $parent->{packages_item}{$itemsNB} if $parent;
 	$w->show;
 	$w->set_sensitive(!$p->{base} && !$p->{installed});
 	$w->signal_connect(focus_in_event => sub {
@@ -551,9 +551,6 @@ _("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and ret
       };
     $w->destroy;
 }
-
-
-
 
 #------------------------------------------------------------------------------
 sub load_rc($) {

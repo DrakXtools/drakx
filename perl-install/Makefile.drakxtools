@@ -16,7 +16,8 @@ $(DIRS):
 
 install:
 	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(X11DEST) $(DIRS:%=$(LIBDEST)/%)
-	install diskdrake XFdrake ddcprobe/ddcxinfos $(SBINDEST)
+	install diskdrake XFdrake mousedrake $(SBINDEST)
+	install -s ddcprobe/ddcxinfos $(SBINDEST)
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
 	install -m 644 MonitorsDB $(X11DEST)
@@ -27,4 +28,4 @@ install:
 	install -m 644 $(patsubst %,pci_probing/%.pm,main pcitable pci_class) $(LIBDEST)/pci_probing
 	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
 	cp -rf auto $(LIBDEST)
-
+	find $(LIBDEST) -name "*.so" | xargs strip
