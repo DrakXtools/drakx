@@ -94,8 +94,7 @@ sub allowed {
     } elsif ($using_xf4) {
 	if ($card->{use_DRI_GLX}) {
 	    $prefered_depth = 16;
-	    push @depths, 16;
-	    push @depths, 24 if member($card->{Driver}, 'mga', 'tdfx', 'r128', 'radeon');
+	    push @depths, 16, 24;
 	}
     } elsif ($card->{use_UTAH_GLX}) {
 	$prefered_depth = 16;
