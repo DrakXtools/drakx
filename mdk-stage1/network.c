@@ -405,6 +405,9 @@ static enum return_type configure_network(struct interface_info * intf)
 	char ips[50];
 	char * name;
 
+	if (hostname && domain)
+		return RETURN_OK;
+
 	wait_message("Trying to resolve hostname...");
 	strcpy(ips, inet_ntoa(intf->ip));
 	name = mygethostbyaddr(ips);
@@ -419,7 +422,7 @@ static enum return_type configure_network(struct interface_info * intf)
 
 	log_message("reverse name lookup on self failed");
 
-	if (domain != NULL)
+	if (domain)
 		return RETURN_OK;
 
 	if (dns_server.s_addr != 0) {
