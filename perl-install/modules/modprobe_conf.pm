@@ -1,4 +1,4 @@
-package modules::modprobe_conf;
+package modules::modprobe_conf; # $Id$
 
 use log;
 use common;

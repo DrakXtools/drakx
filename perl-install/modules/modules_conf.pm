@@ -1,4 +1,4 @@
-package modules::modules_conf;
+package modules::modules_conf; # $Id$
 
 use log;
 use common;
