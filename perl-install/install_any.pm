@@ -165,7 +165,7 @@ sub setup_postinstall_rpms($$) {
 	pkgs::selectPackage($packages, $p, 0, \%toCopy);
     }
 
-    my @toCopy = grep { $_ && !$_->flag_selected } map { pkgs::packageByName($packages, $_) } keys %toCopy;
+    my @toCopy = grep { $_ && !$_->flag_selected } map { $packages->{depslist}[$_] } keys %toCopy;
 
     #- extract headers of package, this is necessary for getting
     #- the complete filename of each package.
