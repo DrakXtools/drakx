@@ -327,7 +327,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Fri Aug  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.6mdk
-- add a 6px border around scrolled TextViews (FACORAT Fabrice, #10561)
+- add a 6px border around scrolled TextViews (Fabrice FACORAT, #10561)
 - drakbackup: fix crash when selecting an entry in pull down menus
 - localedrake:
   o fix configuring IM
