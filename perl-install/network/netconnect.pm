@@ -452,6 +452,7 @@ Take a look at http://www.linmodems.org"),
                             /^Hcf:/ and $type = "hcfpcimodem";
                             /^Hsf:/ and $type = "hsflinmodem";
                             /^LT:/  and $type = "ltmodem";
+                            print "«$type» => «$relocations{$type}» [", $in->do_pkgs->what_provides($type), "]\n";
                             $relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
                         }
                         

@@ -15,7 +15,7 @@ use printer::default;
 use printer::data;
 
 my $companyname = "MandrakeSoft";
-my $distroname = "Mandrake Linux";
+my $distroname = "Mandrakelinux";
 my $shortdistroname = "Mandrake";
 my $domainname = "mandrakesoft.com";
 

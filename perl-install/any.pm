@@ -630,7 +630,7 @@ sub selectLanguage {
 
         my $last_utf8 = $in->{locale}{utf8};
 	add2hash($common, { cancel => '',
-			    advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
+			    advanced_messages => formatAlaTeX(N("Mandrakelinux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
 			    callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 },

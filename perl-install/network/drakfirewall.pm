@@ -145,7 +145,7 @@ sub get_conf {
     } else {
 	$in->ask_okcancel('', N("drakfirewall configurator
 
-This configures a personal firewall for this Mandrake Linux machine.
+This configures a personal firewall for this Mandrakelinux machine.
 For a powerful and dedicated firewall solution, please look to the
 specialized MandrakeSecurity Firewall distribution."), 1) or return;
 

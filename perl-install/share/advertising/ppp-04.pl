@@ -10,7 +10,7 @@ $border = 10;  #- for leftish text
 
 # @text = ([ N("text to display"), center => 1 ],
 
-@text = (N("In the Mandrake Linux menu you will find easy-to-use applications for all tasks:"),
+@text = (N("In the Mandrakelinux menu you will find easy-to-use applications for all tasks:"),
          ' ',
          N("	- Create, edit and share office documents with <b>OpenOffice.org</b>"),
 	 N("	- Take charge of your personal data with the integrated personal information suites: <b>Kontact</b> and <b>Evolution</b>"),

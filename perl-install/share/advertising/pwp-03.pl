@@ -12,4 +12,4 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>Choose your graphical Desktop environment!</b>"), center => 1 ],
         ' ',
-	N("When you log into your Mandrake Linux system for the first time, you can choose between several popular graphical desktops environments, including: KDE, GNOME, WindowMaker, IceWM, and others."));
+	N("When you log into your Mandrakelinux system for the first time, you can choose between several popular graphical desktops environments, including: KDE, GNOME, WindowMaker, IceWM, and others."));

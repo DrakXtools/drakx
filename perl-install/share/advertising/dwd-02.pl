@@ -10,7 +10,7 @@ $border = 10;  #- for leftish text
 
 # @text = ([ N("text to display"), center => 1 ],
 
-@text = ([ N("<b>Join the Mandrake Linux community!</b>"), center => 1 ],
+@text = ([ N("<b>Join the Mandrakelinux community!</b>"), center => 1 ],
         ' ',
 	N("If you would like to get involved, please subscribe to the \"Cooker\" mailing list by visiting <b>mandrake-linux.com/cooker</b>"),
         ' ',

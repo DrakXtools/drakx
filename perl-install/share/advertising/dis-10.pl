@@ -15,7 +15,7 @@ $border = 10;  #- for leftish text
 	N("Take advantage of valuable benefits, products and services by joining MandrakeClub, such as:"),
 	N("	- Full access to commercial applications"),
 	N("	- Special download mirror list exclusively for MandrakeClub Members"),
-	N("	- Voting for software to put in Mandrake Linux"),
+	N("	- Voting for software to put in Mandrakelinux"),
 	N("	- Special discounts for products and services at MandrakeStore"),
 	N("	- Plus much more"),
 	' ',

@@ -9,7 +9,7 @@ use common;
 #            you want it changed.
 sub acceptLicense() {
     N("Before continuing, you should carefully read the terms of the license. It
-covers the entire Mandrake Linux distribution. If you do agree with all the
+covers the entire Mandrakelinux distribution. If you do agree with all the
 terms in it, check the \"%s\" box. If not, clicking on the \"%s\" button
 will reboot your computer.", N("Accept"), N("Quit"));
 }
@@ -83,18 +83,18 @@ With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means
 \"second lowest SCSI ID\", etc.");
 }
 sub chooseCd() {
-    N("The Mandrake Linux installation is distributed on several CD-ROMs. If a
+    N("The Mandrakelinux installation is distributed on several CD-ROMs. If a
 selected package is located on another CD-ROM, DrakX will eject the current
 CD and ask you to insert the correct CD as required.");
 }
 sub choosePackages() {
     N("It is now time to specify which programs you wish to install on your
-system. There are thousands of packages available for Mandrake Linux, and
+system. There are thousands of packages available for Mandrakelinux, and
 to make it simpler to manage the packages have been placed into groups of
 similar applications.
 
 Packages are sorted into groups corresponding to a particular use of your
-machine. Mandrake Linux sorts packages groups in four categories. You can
+machine. Mandrakelinux sorts packages groups in four categories. You can
 mix and match applications from the various categories, so a
 ``Workstation'' installation can still have applications from the
 ``Development'' category installed.
@@ -148,10 +148,10 @@ right to let you know the purpose of the package.
 !! If a server package has been selected, either because you specifically
 chose the individual package or because it was part of a group of packages,
 you will be asked to confirm that you really want those servers to be
-installed. By default Mandrake Linux will automatically start any installed
+installed. By default Mandrakelinux will automatically start any installed
 services at boot time. Even if they are safe and have no known issues at
 the time the distribution was shipped, it is entirely possible that that
-security holes were discovered after this version of Mandrake Linux was
+security holes were discovered after this version of Mandrakelinux was
 finalized. If you do not know what a particular service is supposed to do
 or why it is being installed, then click \"%s\". Clicking \"%s\" will
 install the listed services and they will be started automatically by
@@ -174,7 +174,7 @@ create such a floppy.", N("No"), N("Yes"), N("Automatic dependencies"));
 sub configureNetwork() {
     N("You will now set up your Internet/network connection. If you wish to
 connect your computer to the Internet or to a local network, click \"%s\".
-Mandrake Linux will attempt to auto-detect network devices and modems. If
+Mandrakelinux will attempt to auto-detect network devices and modems. If
 this detection fails, uncheck the \"%s\" box. You may also choose not to
 configure the network, or to do it later, in which case clicking the \"%s\"
 button will take you to the next step.
@@ -189,7 +189,7 @@ from your Internet Service Provider or system administrator.
 
 About Winmodem Connection. Winmodems are special integrated low-end modems
 that require additional software to work compared to Normal modems. Some of
-those modems actually work under Mandrake Linux, some others do not. You
+those modems actually work under Mandrakelinux, some others do not. You
 can consult the list of supported modems at LinModems.
 
 You can consult the ``Starter Guide'' chapter about Internet connections
@@ -248,7 +248,7 @@ best suits your needs.");
 sub configureX_chooser() {
     N("X (for X Window System) is the heart of the GNU/Linux graphical interface
 on which all the graphical environments (KDE, GNOME, AfterStep,
-WindowMaker, etc.) bundled with Mandrake Linux rely upon.
+WindowMaker, etc.) bundled with Mandrakelinux rely upon.
 
 You will be presented with a list of different parameters to change to get
 an optimal graphical display: Graphic Card
@@ -334,7 +334,7 @@ Linux operating system on your hard drive. If your hard drive is empty or
 if an existing operating system is using all the available space you will
 have to partition the drive. Basically, partitioning a hard drive consists
 of logically dividing it to create the space needed to install your new
-Mandrake Linux system.
+Mandrakelinux system.
 
 Because the process of partitioning a hard drive is usually irreversible
 and can lead to lost data if there is an existing operating system already
@@ -361,7 +361,7 @@ data (see ``Erase entire disk'' solution) or resize your Microsoft Windows
 FAT or NTFS partition. Resizing can be performed without the loss of any
 data, provided you have previously defragmented the Windows partition.
 Backing up your data is strongly recommended.. Using this option is
-recommended if you want to use both Mandrake Linux and Microsoft Windows on
+recommended if you want to use both Mandrakelinux and Microsoft Windows on
 the same computer.
 
    Before choosing this option, please understand that after this
@@ -370,7 +370,7 @@ then when you started. You will have less free space under Microsoft
 Windows to store your data or to install new software.
 
  * \"%s\": if you want to delete all data and all partitions present on
-your hard drive and replace them with your new Mandrake Linux system,
+your hard drive and replace them with your new Mandrakelinux system,
 choose this option. Be careful, because you will not be able to undo your
 choice after you confirm.
 
@@ -438,13 +438,13 @@ it.
 Click on \"%s\" when you are ready to format the partitions.
 
 Click on \"%s\" if you want to choose another partition for your new
-Mandrake Linux operating system installation.
+Mandrakelinux operating system installation.
 
 Click on \"%s\" if you wish to select partitions that will be checked for
 bad blocks on the disk.", N("Next"), N("Previous"), N("Advanced"));
 }
 sub installUpdates() {
-    N("At the time you are installing Mandrake Linux, it is likely that some
+    N("At the time you are installing Mandrakelinux, it is likely that some
 packages will have been updated since the initial release. Bugs may have
 been fixed, security issues resolved. To allow you to benefit from these
 updates, you are now able to download them from the Internet. Check \"%s\"
@@ -473,7 +473,7 @@ address.", N("Security Administrator"));
 }
 sub partition_with_diskdrake() {
     N("At this point, you need to choose which partition(s) will be used for the
-installation of your Mandrake Linux system. If partitions have already been
+installation of your Mandrakelinux system. If partitions have already been
 defined, either from a previous installation of GNU/Linux or by another
 partitioning tool, you can use existing partitions. Otherwise, hard drive
 partitions must be defined.
@@ -546,7 +546,7 @@ emergency boot situations.", N("Clear all"), N("Auto allocate"), N("More"), N("S
 sub resizeFATChoose() {
     N("More than one Microsoft partition has been detected on your hard drive.
 Please choose the one which you want to resize in order to install your new
-Mandrake Linux operating system.
+Mandrakelinux operating system.
 
 Each partition is listed as follows: \"Linux name\", \"Windows name\"
 \"Capacity\".
@@ -585,7 +585,7 @@ sub selectInstallClass() {
 found on your machine.
 
 DrakX now needs to know if you want to perform a new install or an upgrade
-of an existing Mandrake Linux system:
+of an existing Mandrakelinux system:
 
  * \"%s\": For the most part, this completely wipes out the old system. If
 you wish to change how your hard drives are partitioned, or change the file
@@ -593,13 +593,13 @@ system, you should use this option. However, depending on your partitioning
 scheme, you can prevent some of your existing data from being over-written.
 
  * \"%s\": this installation class allows you to update the packages
-currently installed on your Mandrake Linux system. Your current
+currently installed on your Mandrakelinux system. Your current
 partitioning scheme and user data is not altered. Most of other
 configuration steps remain available, similar to a standard installation.
 
-Using the ``Upgrade'' option should work fine on Mandrake Linux systems
+Using the ``Upgrade'' option should work fine on Mandrakelinux systems
 running version \"8.1\" or later. Performing an Upgrade on versions prior
-to Mandrake Linux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
+to Mandrakelinux version \"8.1\" is not recommended.", N("Install"), N("Upgrade"));
 }
 sub selectKeyboard() {
     N("Depending on the language you chose in section , DrakX will automatically
@@ -633,7 +633,7 @@ language in the tree view and \"%s\" in the Advanced section.
 
 About UTF-8 (unicode) support: Unicode is a new character encoding meant to
 cover all existing languages. Though full support for it in GNU/Linux is
-still under development. For that reason, Mandrake Linux will be using it
+still under development. For that reason, Mandrakelinux will be using it
 or not depending on the user choices:
 
  * If you choose a languages with a strong legacy encoding (latin1
@@ -760,7 +760,7 @@ instabilities, machine freeze, ...) you should try disabling APIC by
 checking this box.
 
 !! Be aware that if you choose not to install a bootloader (by selecting
-\"%s\"), you must ensure that you have a way to boot your Mandrake Linux
+\"%s\"), you must ensure that you have a way to boot your Mandrakelinux
 system! Be sure you know what you are doing before changing any of the
 options. !!
 
@@ -801,7 +801,7 @@ won't install any bootloader. Use it only if you know what you are doing.", N("F
 }
 sub setupDefaultSpooler() {
     N("Now, it's time to select a printing system for your computer. Other OSs may
-offer you one, but Mandrake Linux offers two. Each of the printing systems
+offer you one, but Mandrakelinux offers two. Each of the printing systems
 is best suited to particular types of configuration.
 
  * \"%s\" -- which is an acronym for ``print, don't queue'', is the choice
@@ -992,7 +992,7 @@ idea to review this setup.", N("Configure"), N("Keyboard"), N("Country / Region"
 }
 sub takeOverHdChoose() {
     N("Choose the hard drive you want to erase in order to install your new
-Mandrake Linux partition. Be careful, all data on this drive will be lost
+Mandrakelinux partition. Be careful, all data on this drive will be lost
 and will not be recoverable!");
 }
 sub takeOverHdConfirm() {

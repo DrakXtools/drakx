@@ -10,10 +10,10 @@ $border = 10;  #- for leftish text
 
 # @text = ([ N("text to display"), center => 1 ],
 
-@text = ([ N("<b>Congratulations for choosing Mandrake Linux!</b>"), center => 1 ],
+@text = ([ N("<b>Congratulations for choosing Mandrakelinux!</b>"), center => 1 ],
         ' ',
         N("Welcome to the Open Source world!"),
         ' ',
-        N("Your new Mandrake Linux distribution and its many applications are the result of collaborative efforts between MandrakeSoft developers and Mandrake Linux contributors throughout the world."),
+        N("Your new Mandrakelinux distribution and its many applications are the result of collaborative efforts between MandrakeSoft developers and Mandrakelinux contributors throughout the world."),
 	' ',
 	N("We would like to thank everyone who participated in the development of this latest release.")); 
