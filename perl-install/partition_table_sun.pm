@@ -45,13 +45,9 @@ sub adjustStart($$) {
 
     #- since partition must always start on cylinders boundaries on sparc,
     #- note that if start sector is on the first cylinder, it is adjusted
-    #- to 0 and it is valid, maybe not in fact, problem with Sun disk label.
-    #- IT COULD HURT IF STARTING AT 0, MAYBE THERE ARE SOME FLAGS FOR EXT2
-    #- TO AVOID WRITING ANYTHING ON THE FIRST 1024 BYTES OF DISK, ELSE PROM
-    #- MAY ERASE EVERYTHING... TO BE CHECKED LATER.
-    #- so now, starting on cylinder 1 is perfect altough it waste some disk space !
+    #- to 0 and it is valid, cylinder 0 bug is from bad define for sparc
+    #- compilation of mke2fs combined with a blind kernel...
     $part->{start} = round_down($part->{start}, $hd->cylinder_size());
-    $part->{start} = $hd->cylinder_size() if $part->{start} == 0;
     $part->{size} = $end - $part->{start};
     $part->{size} = $hd->cylinder_size() if $part->{size} <= 0;
 }

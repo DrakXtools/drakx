@@ -361,7 +361,7 @@ sub get_holes($) {
 	my $current = $start;
 	$start = $_->{start} + $_->{size};
 	{ start => $current, size => $_->{start} - $current }
-    } sort { $a->{start} <=> $b->{start} } get_normal_parts($hd), { start => $hd->{totalsectors}, size => 0 };    
+    } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd), { start => $hd->{totalsectors}, size => 0 };    
 }
 
 

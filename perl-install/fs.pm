@@ -204,6 +204,8 @@ sub mount($$$;$) {
 	    #- without knowing it, / is forced to be mounted with notail
 	    $mount_opt = 'notail' if $where =~ m|/(boot)?$|;
 	    eval { modules::load('reiserfs') };
+	} elsif ($fs eq 'romfs') {
+	    eval { modules::load('romfs') };
 	}
 
 	$where =~ s|/$||;

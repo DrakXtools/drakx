@@ -58,12 +58,12 @@ my (%installSteps, @orderedInstallSteps);
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '' ],
-arch() !~ /alpha|sparc/ ? (
+arch() !~ /alpha/ ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
-arch() !~ /alpha|sparc/ ? (
+arch() !~ /alpha/ ? (
   generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!$::expert || $o->{lnx4win}', "doInstallStep" ],
 ) : (),
   exitInstall        => [ __("Exit install"), 0, 0, '$::beginner' ],
@@ -92,44 +92,31 @@ my @install_classes = qw(normal developer server);
 my %suggestedPartitions = (
 arch() =~ /^sparc/ ? (
   normal => [
-    { mntpoint => "/",     size => 600 << 11, type => 0x83, ratio => 5, maxsize =>1000 << 11 },
-    { mntpoint => "swap",  size => 128 << 11, type => 0x82, ratio => 1, maxsize => 400 << 11 },
+    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
-    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 2 },
-  ],
-  developer => [
-    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
-    { mntpoint => "swap",  size => 128 << 11, type => 0x82, ratio => 1, maxsize => 400 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
-    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
-  ],
-  server => [
-    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
-    { mntpoint => "swap",  size => 128 << 11, type => 0x82, ratio => 2, maxsize => 800 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>3000 << 11 },
-    { mntpoint => "/var",  size => 100 << 11, type => 0x83, ratio => 4 },
-    { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
+    { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 3 },
   ],
 ) : (
   normal => [
-    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 3500 << 11 },
+    { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize =>3500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 3 },
   ],
+),
   developer => [
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
     { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
   ],
   server => [
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
     { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 250 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>3000 << 11 },
     { mntpoint => "/var",  size => 100 << 11, type => 0x83, ratio => 4 },
     { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
   ],
-),
 );
 $suggestedPartitions{corporate} = $suggestedPartitions{server};
 

@@ -742,34 +742,52 @@ sub createBootdisk {
 
     return if $first_time && $::beginner || $o->{lnx4win};
 
-    my @l = detect_devices::floppies();
-    my %l = (
-	     'fd0'  => __("First floppy drive"),
-	     'fd1'  => __("Second floppy drive"),
-	     'Skip' => __("Skip"),
-	    );
-    $l{$_} ||= $_ foreach @l;
+    if (arch() =~ /sparc/) {
+	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
+	$o->ask_okcancel('',
+			 _("A custom bootdisk provides a way of booting into your Linux system without
+depending on the normal bootloader. This is useful if you don't want to install
+SILO on your system, or another operating system removes SILO, or SILO doesn't
+work with your hardware configuration. A custom bootdisk can also be used with
+the Mandrake rescue image, making it much easier to recover from severe system
+failures.
 
-    if ($first_time || @l == 1) {
-	$o->ask_yesorno('',
-			_("A custom bootdisk provides a way of booting into your Linux system without
+If you want to create a bootdisk for your system, insert a floppy in the first
+drive and press \"Ok\"."),
+			 $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
+	my @l = detect_devices::floppies();
+	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
+	$o->{mkbootdisk} or return;
+    } else {
+	my @l = detect_devices::floppies();
+	my %l = (
+		 'fd0'  => __("First floppy drive"),
+		 'fd1'  => __("Second floppy drive"),
+		 'Skip' => __("Skip"),
+		 );
+	$l{$_} ||= $_ foreach @l;
+
+	if ($first_time || @l == 1) {
+	    $o->ask_yesorno('',
+			    _("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 LILO (or grub) on your system, or another operating system removes LILO, or LILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
 failures. Would you like to create a bootdisk for your system?"), 
-			$o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
-	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
-    } else {
-	@l or die _("Sorry, no floppy drive available");
+			    $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
+	    $o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
+	} else {
+	    @l or die _("Sorry, no floppy drive available");
 
-	$o->{mkbootdisk} = ${{reverse %l}}{$o->ask_from_list_('',
-							      _("Choose the floppy drive you want to use to make the bootdisk"),
-							      [ @l{@l, "Skip"} ], $o->{mkbootdisk})};
-	return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Skip';
+	    $o->{mkbootdisk} = ${{reverse %l}}{$o->ask_from_list_('',
+								  _("Choose the floppy drive you want to use to make the bootdisk"),
+								  [ @l{@l, "Skip"} ], $o->{mkbootdisk})};
+	    return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Skip';
+        }
+        $o->ask_warn('', _("Insert a floppy in drive %s", $l{$o->{mkbootdisk}}));
     }
 
-    $o->ask_warn('', _("Insert a floppy in drive %s", $l{$o->{mkbootdisk}}));
     my $w = $o->wait_message('', _("Creating bootdisk"));
     install_steps::createBootdisk($o);
 }
@@ -794,18 +812,21 @@ sub setupSILO {
     my ($o, $more) = @_;
     my $b = $o->{bootloader};
 
-    #- assume this default parameters.
-    $b->{root} = "/dev/" . fsedit::get_root($o->{fstab})->{device};
-    $b->{partition} = ($b->{root} =~ /\D*(\d*)/)[0] || '1';
-
-    if ($::beginner && $more == 1) {
-	#- nothing more to do here.
+    if ($::beginner && $more >= 1) {
+	my @silo_install = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
+	$o->set_help('setupBootloaderBeginner') unless $::isStandalone; #- no problem of translation for this one.
+	$b->{use_partition} = $o->ask_from_list_(_("SILO Installation"),
+						 _("Where do you want to install the bootloader?"),
+						 \@silo_install, $silo_install[$b->{use_partition}]);
     } elsif ($more || !$::beginner) {
 	$o->set_help("setupSILOGeneral");
 
 	$::expert and $o->ask_yesorno('', _("Do you want to use SILO?"), 1) || return;
 
+	my @silo_install_lang = (_("First sector of drive (MBR)"), _("First sector of boot partition"));
+	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
 	my @l = (
+_("Bootloader installation") => { val => \$silo_install_lang, list => \@silo_install_lang, not_edit => 1 },
 _("Delay before booting default image") => \$b->{timeout},
 $o->{security} < 4 ? () : (
 _("Password") => { val => \$b->{password}, hidden => 1 },
@@ -822,6 +843,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 				     0;
 				 }
 				) or return;
+	$b->{use_partition} = $silo_install_lang eq _("First sector of drive (MBR)") ? 0 : 1;
     }
 
     until ($::beginner && $more <= 1) {
@@ -1052,24 +1074,60 @@ _("Do you want to generate an auto install floppy for linux replication?"), $flo
     my $image = $o->{pcmcia} ? "pcmcia" :
       ${{ hd => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 
-    {
-	my $w = $o->wait_message('', _("Creating auto install floppy"));
-	install_any::getAndSaveFile("$image.img", $dev) or log::l("failed to write $dev"), return;
-    }
-    fs::mount($dev, "/floppy", "vfat", 0);
-    substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";
+    if (arch() =~ /sparc/) {
+	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
 
-    unlink "/floppy/help.msg";
-    output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
-    output "/floppy/boot.msg", "\n0c",
+	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
+	my $mountdir = "$o->{prefix}/tmp/mount"; -d $mountdir or mkdir $mountdir, 0755;
+	my $workdir = "$o->{prefix}/tmp/work"; -d $workdir or rmdir $workdir;
+
+	my $w = $o->wait_message('', _("Creating auto install floppy"));
+        install_any::getAndSaveFile("$image.img", $imagefile) or log::l("failed to write $dev"), return;
+        devices::make($_) foreach qw(/dev/loop6 /dev/ram);
+
+        run_program::run("losetup", "/dev/loop6", $imagefile);
+        fs::mount("/dev/loop6", $mountdir, "romfs", 'readonly');
+        commands::cp("-f", $mountdir, $workdir);
+        fs::umount($mountdir);
+        run_program::run("losetup", "-d", "/dev/loop6");
+
+	substInFile { s/timeout.*//; s/^(\s*append\s*=\s*\".*)\"/$1 kickstart=floppy\"/ } "$workdir/silo.conf";
+	output "$workdir/ks.cfg", install_any::generate_ks_cfg($o);
+	output "$workdir/boot.msg", "\n7m",
+"!! If you press enter, an auto-install is going to start.
+   All data on this computer is going to be lost !!
+", "7m\n";
+
+	local $o->{partitioning}{clearall} = 1;
+	install_any::g_auto_install("$workdir/auto_inst.cfg");
+
+        run_program::run("genromfs", "-d", $workdir, "-f", "/dev/ram", "-A", "2048,/..", "-a", "512", "-V", "DrakX autoinst");
+        fs::mount("/dev/ram", $mountdir, 'romfs', 0);
+        run_program::run("silo", "-r", $mountdir, "-F", "-i", "/fd.b", "-b", "/second.b", "-C", "/silo.conf");
+        fs::umount($mountdir);
+        commands::dd("if=/dev/ram", "of=$dev", "bs=1440", "count=1024");
+
+        commands::rm("-rf", $workdir, $mountdir, $imagefile);
+    } else {
+	{
+	    my $w = $o->wait_message('', _("Creating auto install floppy"));
+	    install_any::getAndSaveFile("$image.img", $dev) or log::l("failed to write $dev"), return;
+	}
+        fs::mount($dev, "/floppy", "vfat", 0);
+	substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";
+
+	unlink "/floppy/help.msg";
+	output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
+	output "/floppy/boot.msg", "\n0c",
 "!! If you press enter, an auto-install is going to start.
    All data on this computer is going to be lost !!
 ", "07\n";
 
-    local $o->{partitioning}{clearall} = 1;
-    install_any::g_auto_install("/floppy/auto_inst.cfg");
+	local $o->{partitioning}{clearall} = 1;
+	install_any::g_auto_install("/floppy/auto_inst.cfg");
 
-    fs::umount("/floppy");
+	fs::umount("/floppy");
+    }
 }
 
 #------------------------------------------------------------------------------

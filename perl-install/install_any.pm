@@ -598,7 +598,7 @@ sub loadO {
     if ($f =~ /^(floppy|patch)$/) {
 	my $f = $f eq "floppy" ? "auto_inst.cfg" : "patch";
 	unless ($::testing) {
-	    fs::mount(devices::make("fd0"), "/mnt", "vfat", 'readonly');
+	    fs::mount(devices::make("fd0"), "/mnt", (arch() =~ /sparc/ ? "romfs" : "vfat"), 'readonly');
 	    $f = "/mnt/$f";
 	}
 	-e $f or $f .= ".pl";

@@ -202,7 +202,7 @@ sub choosePartitionsToFormat($$) {
 	      fsedit::typeOfPart($_->{device});
 	    $_->{toFormatUnsure} = $_->{mntpoint} eq "/" ||
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
-	      (isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
+	      (!$t || isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
 	}
     }
 }
@@ -852,6 +852,7 @@ sub setupBootloader($) {
 #	  map_index { "$::i:$b->{part_nb}$_ root=$b->{root} $b->{perImageAppend}\n" }
 #	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
     } elsif (arch() =~ /^sparc/) {
+        silo::set_promvars($o->{fstab}, $o->{bootloader});
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
 	lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});

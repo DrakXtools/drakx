@@ -252,11 +252,18 @@ To Build a Bootable CD-ROM, try:
 	_ "cp -f vmlinuz$I $dir/vmlinux$I.gz";
 	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd("${mnt}2", "$dir/$type.rdz");
 
+	output("$dir/boot.msg", "
+Welcome to Linux-Mandrake 7.1
+
+Press <Enter> to install or upgrade a system 7mLinux-Mandrake7m
+");
+
 	output("$dir/silo.conf", "
 partition=1
 default=linux
 timeout=100
 read-write
+message=/boot.msg
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz

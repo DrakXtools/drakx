@@ -536,10 +536,12 @@ sub resolutionsConfiguration($%) {
 	$card->{depth}{8} = [[ 640, 480 ]];
 	return;
     } elsif ($card->{server} =~ /Sun/) {
-	$card->{depth}{2} = [[ 1152, 864 ]] if $card->{server} eq "SunMono";
-	$card->{depth}{8} = [[ 1152, 864 ]] if $card->{server} eq "Sun";
-	$card->{depth}{24} = [[ 1152, 864 ]] if $card->{server} eq "Sun24";
-	return;
+	$card->{depth}{2} = [[ 1152, 864 ]] if $card->{server} =~ /^(SunMono)$/;
+	$card->{depth}{8} = [[ 1152, 864 ]] if $card->{server} =~ /^(SunMono|Sun)$/;
+	$card->{depth}{24} = [[ 1152, 864 ]] if $card->{server} =~ /^(SunMono|Sun|Sun24)$/;
+	$card->{default_wres} = 1152;
+	$o->{default_depth} = max(keys %{$card->{depth}});
+	return 1; #- aka we cannot test, assumed as good (should be).
     }
 
     #- some of these guys hate to be poked

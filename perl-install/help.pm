@@ -385,6 +385,11 @@ in this case, you will need a boot disk in order to boot them!"),
 
 setupSILOGeneral =>
  __("SILO main options are:
+  - Bootloader installation: Indicate where you want to place the
+information required to boot to GNU/Linux. Unless you know exactly
+what you are doing, choose \"First sector of drive (MBR)\".
+
+
   - Delay before booting default image: Specifies the number in tenths
 of a second the boot loader should wait before booting the first image.
 This is useful on systems that immediately boot from the hard disk after

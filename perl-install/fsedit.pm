@@ -22,14 +22,9 @@ use log;
 #- Globals
 #-#####################################################################################
 my @suggestions = (
-arch() =~ /^sparc/ ? (
-  { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 1000 << 11 },
-  { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 500 << 11 },
-) : (
+  { mntpoint => "/boot",    size =>  16 << 11, type => 0x83, ratio => 1, maxsize =>  30 << 11 },
   { mntpoint => "/",        size =>  50 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
   { mntpoint => "swap",     size =>  30 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
-),
-  { mntpoint => "/boot",    size =>  16 << 11, type => 0x83, ratio => 1, maxsize =>  30 << 11 },
   { mntpoint => "/usr",     size => 200 << 11, type => 0x83, ratio => 6, maxsize =>3000 << 11 },
   { mntpoint => "/home",    size =>  50 << 11, type => 0x83, ratio => 3 },
   { mntpoint => "/var",     size => 200 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
@@ -168,7 +163,6 @@ sub computeSize($$$$) {
 	} @l;
     }
     my $size = int min($max, $best->{size} + $free_space * ($tot_ratios && $best->{ratio} / $tot_ratios));
-
     #- verify other entry can fill the hole
     if (grep { $_->{size} < $max - $size } @L) { $size } else { $max }
 }
