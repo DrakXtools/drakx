@@ -47,7 +47,6 @@ eval {
   language:
     my $old_lang = $locale->{lang};
     $locale->{lang} = any::selectLanguage($in, $locale->{lang});
-    print "$old_lang => $locale->{lang}\n";
     $locale->{IM} ||= lang::get_default_im($locale->{lang}) if $old_lang ne $locale->{lang};
     undef $::Wizard_no_previous;
     select_country() or goto language;
