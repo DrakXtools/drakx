@@ -87,6 +87,9 @@ clean:
 	mkisofs -R $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
 	fi
 
+check_dirs:
+	for i in `cat data/*.dirs`; do grep /tmp/live_tree$$i/ data/*.list; done ||:
+
 # perl tools/busy-files-accesses --no-link --no-dir --full-dirs 'data/always.dirs data/boot.dirs data/totem.dirs' --already-have data/always.list
 
 # touch r/isolinux/boot.cat ; find r/isolinux -type f -printf '%p 100\n' > r.sort ; echo 'r/isolinux/live_tree_boot.clp 5' >> r.sort
