@@ -321,8 +321,8 @@ sub configure_krb5_for_AD {
     krb5_conf_update($krb5_conf_file,
 		     libdefaults => (
 				     default_realm => $uc_domain,
-				     dns_lookup_realm => $authentication->{AD_server} ? 'false' : 'true',
-				     dns_lookup_kdc => $authentication->{AD_server} ? 'false' : 'true',
+				     dns_lookup_realm => $authentication->{AD_server} ? 'true' : 'false',
+				     dns_lookup_kdc => $authentication->{AD_server} ? 'true' : 'false',
 				    ));
 
     my @sections = (
