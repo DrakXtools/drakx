@@ -108,7 +108,7 @@ sub bestMirror {
 sub version {
     require pkgs;
     my $pkg = pkgs::packageByName($::o->{packages}, 'mandrake-release');
-    $pkg && pkgs::packageVersion($pkg) || '8.2'; #- safe but dangerous ;-)
+    $pkg && $pkg->version || '8.2'; #- safe but dangerous ;-)
 }
 
 sub dir { $mirrors{$_[0]}[1] . '/' . version() }
@@ -127,8 +127,6 @@ sub getFile {
     $$retr   = $ftp->retr($file) or ftp::rewindGetFile();
     $$retr ||= $ftp->retr($file);
 }
-
-sub getDepslist { getFile("depslist-crypto", $_[0]) or die "unable to get depslist-crypto" }
 
 sub getPackages {
     my ($prefix, $packages, $mirror) = @_;

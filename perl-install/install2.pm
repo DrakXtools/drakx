@@ -207,7 +207,7 @@ sub choosePackages {
     log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
 
     #- check pre-condition where base backage has to be selected.
-    pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, 'basesystem')) or die "basesystem package not selected";
+    pkgs::packageByName($o->{packages}, 'basesystem')->flag_selected or die "basesystem package not selected";
 
     #- check if there are package that need installation.
     $o->{steps}{installPackages}{done} = 0 if $o->{steps}{installPackages}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
@@ -307,7 +307,7 @@ sub configureX {
     modules::write_conf($o->{prefix});
 
     require pkgs;
-    installStepsCall($o, $auto, 'configureX', $clicked) if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked || $::testing;
+    installStepsCall($o, $auto, 'configureX', $clicked) if pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed && !$o->{X}{disabled} || $clicked || $::testing;
 }
 #------------------------------------------------------------------------------
 sub exitInstall {

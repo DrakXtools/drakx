@@ -348,17 +348,16 @@ sub choosePackagesTree {
 			    node_state => sub {
 				my $p = pkgs::packageByName($packages,$_[0]) or return;
 				pkgs::packageMedium($packages, $p)->{selected} or return;
-				pkgs::packageFlagBase($p) and return 'base';
-				pkgs::packageFlagInstalled($p) and return 'installed';
-				pkgs::packageFlagSelected($p) and return 'selected';
+				$p->flag_base      and return 'base';
+				$p->flag_installed and return 'installed';
+				$p->flag_selected  and return 'selected';
 				return 'unselected';
 			    },
 			    build_tree => sub {
 				my ($add_node, $flat) = @_;
 				if ($flat) {
-				    foreach (sort keys %{$packages->{names}}) {
-					!$limit_to_medium ||
-					  pkgs::packageMedium($packages, $packages->{names}{$_}) == $limit_to_medium or next;
+				    foreach (sort map { $_->name } grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) }
+					     @{$packages->{depslist}}) {
 					$add_node->($_, undef);
 				    }
 				} else {
@@ -366,13 +365,13 @@ sub choosePackagesTree {
 					my (%fl, @firstchoice, @others);
 					#$fl{$_} = $o->{compssUsersChoice}{$_} foreach @{$o->{compssUsers}{$root}{flags}}; #- FEATURE:improve choce of packages...
 					$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
-					foreach my $p (values %{$packages->{names}}) {
+					foreach my $p (@{$packages->{depslist}}) {
 					    !$limit_to_medium || pkgs::packageMedium($packages, $p) == $limit_to_medium or next;
-					    my ($rate, @flags) = pkgs::packageRateRFlags($p);
-					    next if !($rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags);
-					    $rate >= 3 ?
-					      push(@firstchoice, pkgs::packageName($p)) :
-						push(@others,      pkgs::packageName($p));
+					    my @flags = $p->rflags;
+					    next if !($p->rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags);
+					    $p->rate >= 3 ?
+					      push(@firstchoice, $p->name) :
+						push(@others,    $p->name);
 					}
 					my $root2 = join('|', map { translate($_) } split('\|', $root));
 					$add_node->($_, $root2                   ) foreach sort @firstchoice;
@@ -383,35 +382,33 @@ sub choosePackagesTree {
 			    get_info => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return '';
 				pkgs::extractHeaders($o->{prefix}, [$p], $packages->{mediums});
-				pkgs::packageHeader($p) or die;
 
-				my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ?
-									  5 : pkgs::packageRate($p)});
+				my $imp = translate($pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 
 				my $info = $@ ? _("Bad package") :
-				  (_("Name: %s\n", pkgs::packageName($p)) .
-				   _("Version: %s\n", pkgs::packageVersion($p) . '-' . pkgs::packageRelease($p)) .
-				   _("Size: %d KB\n", pkgs::packageSize($p) / 1024) .
+				  (_("Name: %s\n", $p->name) .
+				   _("Version: %s\n", $p->version . '-' . $p->release) .
+				   _("Size: %d KB\n", $p->size / 1024) .
 				   ($imp && _("Importance: %s\n", $imp)) . "\n" .
-				   formatLines(c::headerGetEntry(pkgs::packageHeader($p), 'description')));
-				pkgs::packageFreeHeader($p);
+				   formatLines($p->description));
 				return $info;
 			    },
 			    toggle_nodes => sub {
 				my $set_state = shift @_;
 				my @n = map { pkgs::packageByName($packages, $_) } @_;
 				my %l;
-				my $isSelection = !pkgs::packageFlagSelected($n[0]);
+				my $isSelection = !$n[0]->flag_selected;
 				foreach (@n) {
-				    pkgs::togglePackageSelection($packages, $_, my $l = {});
-				    @l{grep {$l->{$_}} keys %$l} = ();
+				    #pkgs::togglePackageSelection($packages, $_, my $l = {});
+				    #@l{grep {$l->{$_}} keys %$l} = ();
+				    pkgs::togglePackageSelection($packages, $_, \%l);
 				}
-				if (my @l = keys %l) {
+				if (my @l = map { $packages->{depslist}[$_]->name } keys %l) {
 				    #- check for size before trying to select.
 				    my $size = pkgs::selectedSize($packages);
 				    foreach (@l) {
-					my $p = $packages->{names}{$_};
-					pkgs::packageFlagSelected($p) or $size += pkgs::packageSize($p);
+					my $p = pkgs::packageByName($packages, $_);
+					$p->flag_selected or $size += $p->size;
 				    }
 				    if (pkgs::correctSize($size / sqr(1024)) > $available / sqr(1024)) {
 					return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
@@ -429,29 +426,27 @@ sub choosePackagesTree {
 				    }
 				    foreach (@l) {
 					my $p = pkgs::packageByName($packages, $_);
-					$set_state->($_, pkgs::packageFlagSelected($p) ? 'selected' : 'unselected');
+					$set_state->($_, $p->flag_selected ? 'selected' : 'unselected');
 				    }
 				} else {
 				    $o->ask_warn('', _("You can't select/unselect this package"));
 				}
 			    },
 			    grep_allowed_to_toggle => sub {
-				grep { $_ ne _("Other") && !pkgs::packageFlagBase(pkgs::packageByName($packages, $_)) } @_;
+				grep { $_ ne _("Other") && !pkgs::packageByName($packages, $_)->flag_base } @_;
 			    },
 			    grep_unselected => sub {
-				grep { !pkgs::packageFlagSelected(pkgs::packageByName($packages, $_)) } @_;
+				grep { !pkgs::packageByName($packages, $_)->flag_selected } @_;
 			    },
 			    check_interactive_to_toggle => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return;
-				if (pkgs::packageFlagBase($p)) {
+				if ($p->flag_base) {
 				    $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
-				} elsif (pkgs::packageFlagInstalled($p)) {
+				} elsif ($p->flag_installed) {
 				    $o->ask_warn('', _("You can't unselect this package. It is already installed"));
-				} elsif (pkgs::packageFlagUpgrade($p)) {
+				} elsif ($p->flag_selected && $p->flag_installed) {
 				    if ($::expert) {
-					if (pkgs::packageFlagSelected($p)) {
-					    $o->ask_yesorno('', _("This package must be upgraded.\nAre you sure you want to deselect it?")) or return;
-					}
+					$o->ask_yesorno('', _("This package must be upgraded.\nAre you sure you want to deselect it?")) or return;
 					return 1;
 				    } else {
 					$o->ask_warn('', _("You can't unselect this package. It must be upgraded"));
@@ -603,35 +598,32 @@ sub installPackages {
 
     my $oldInstallCallback = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
-	my $m = shift;
-	if ($m =~ /^Starting installation/) {
-	    $nb = $_[0];
-	    $total_size = $_[1]; $current_total_size = 0;
+	my ($data, $type, $id, $subtype, $amount, $total) = @_;
+	if ($type eq 'user' && $subtype eq 'install') {
+	    #- $amount and $total are used to return number of package and total size.
+	    $nb = $amount;
+	    $total_size = $total; $current_total_size = 0;
 	    $start_time = time();
 	    $msg->set(_("%d packages", $nb));
 	    $w->flush;
-	} elsif ($m =~ /^Starting installing package/) {
+	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    $progress->update(0);
-	    my $name = $_[0];
-	    $msg->set(_("Installing package %s", $name));
+	    my $p = $data->{depslist}[$id];
+	    $msg->set(_("Installing package %s", $p->name));
 	    $current_total_size += $last_size;
-	    my $p = pkgs::packageByName($o->{packages}, $name);
-	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
-	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
+	    $last_size = $p->size;
+	    $text->set((split /\n/, $p->summary)[0] || '');
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
-	} elsif ($m =~ /^Progressing installing package/) {
-	    $progress->update($_[2] ? $_[1] / $_[2] : 0);
+	} elsif ($type eq 'inst' && $subtype eq 'progress') {
+	    $progress->update($total ? $amount / $total : 0);
 
 	    my $dtime = time() - $start_time;
 	    my $ratio = 
 	      $total_size == 0 ? 0 :
-		pkgs::size2time($current_total_size + $_[1], $total_size) / pkgs::size2time($total_size, $total_size);
+		pkgs::size2time($current_total_size + $amount, $total_size) / pkgs::size2time($total_size, $total_size);
 	    $ratio >= 1 and $ratio = 1;
 	    my $total_time = $ratio ? $dtime / $ratio : time();
-
-#-	    my $ratio2 = $total_size == 0 ? 0 : ($current_total_size + $_[1]) / $total_size;
-#-	    log::l(sprintf("XXXX advance %d %d %s", $current_total_size + $_[1], $dtime, formatTimeRaw($total_time)));
 
 	    $progress_total->update($ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 80_000_000) {

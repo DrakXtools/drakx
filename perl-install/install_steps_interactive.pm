@@ -533,10 +533,9 @@ sub choosePackagesTree {
     $o->ask_many_from_list('', _("Choose the packages you want to install"),
 			   {
 			    list => [ grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium }
-				      map { pkgs::packageByName($packages, $_) }
-				      keys %{$packages->{names}} ],
-			    value => \&pkgs::packageFlagSelected,
-			    label => \&pkgs::packageName,
+				      @{$packages->{depslist}} ],
+			    value => \&URPM::Package::flag_selected,
+			    label => \&URPM::Package::name,
 			    sort => 1,
 			   });
 }
@@ -766,13 +765,13 @@ sub installPackages {
 
     my $old = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
-	my $m = shift;
-	if ($m =~ /^Starting installation/) {
-	    $total = $_[1];
-	} elsif ($m =~ /^Starting installing package/) {
-	    my $name = $_[0];
-	    $w->set(_("Installing package %s\n%d%%", $name, $total && 100 * $current / $total));
-	    $current += pkgs::packageSize(pkgs::packageByName($o->{packages}, $name));
+	my ($data, $type, $id, $subtype, $_amount, $_total) = @_;
+	if ($type eq 'user' && $subtype eq 'install') {
+	    $total = $_amount;
+	} elsif ($type eq 'inst' && $subtype eq 'start') {
+	    my $p = $data->{depslist}[$id];
+	    $w->set(_("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
+	    $current += $p->size;
 	} else { unshift @_, $m; goto $old }
     };
 
@@ -991,7 +990,7 @@ sub summary {
     my $format_printers = sub {
 	my $printer = $o->{printer};
 	if (is_empty_hash_ref($printer->{configured})) {
-	    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups')) and return _("Remote CUPS server");
+	    pkgs::packageByName($o->{packages}, 'cups')->flag_installed and return _("Remote CUPS server");
 	    return _("No printer");
 	}
 	my $entry;

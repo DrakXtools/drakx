@@ -165,7 +165,7 @@ sub setup_postinstall_rpms($$) {
 	pkgs::selectPackage($packages, $p, 0, \%toCopy);
     }
 
-    my @toCopy = grep { $_ && pkgs::packageFlagSelected($_) == 0 } map { pkgs::packageByName($packages, $_) } keys %toCopy;
+    my @toCopy = grep { $_ && !$_->flag_selected } map { pkgs::packageByName($packages, $_) } keys %toCopy;
 
     #- extract headers of package, this is necessary for getting
     #- the complete filename of each package.
@@ -1116,7 +1116,7 @@ sub is_installed {
     my ($do, @l) = @_;
     foreach (@l) {
 	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
-	$p && pkgs::packageFlagSelected($p) or return;
+	$p && $p->flag_selected or return;
     }
     1;
 }
@@ -1137,7 +1137,10 @@ sub remove_nodeps {
 
     @l = grep {
 	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
-	pkgs::packageSetFlagSelected($p, 0) if $p;
+	if ($p) {
+	    $p->set_flag_requested(0);
+	    $p->set_flag_required(0);
+	}
 	$p;
     } @l;
     run_program::rooted($do->{o}->{prefix}, 'rpm', '-e', '--nodeps', @l);

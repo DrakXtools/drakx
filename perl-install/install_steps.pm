@@ -362,8 +362,8 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 	$o->{toSave} = [];
 
 	#- hack for compat-glibc to upgrade properly :-(
-	if (pkgs::packageFlagSelected(pkgs::packageByName($packages, 'compat-glibc')) &&
-	    !pkgs::packageFlagInstalled(pkgs::packageByName($packages, 'compat-glibc'))) {
+	if (pkgs::packageByName($packages, 'compat-glibc')->flag_selected &&
+	    !pkgs::packageByName($packages, 'compat-glibc')->flag_installed) {
 	    rename "$o->{prefix}/usr/i386-glibc20-linux", "$o->{prefix}/usr/i386-glibc20-linux.mdkgisave";
 	}
     }
@@ -373,7 +373,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     my $time = time;
     $ENV{DURING_INSTALL} = 1;
-    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages->{depslist}, $packages->{mediums});
+    pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages);
     delete $ENV{DURING_INSTALL};
     run_program::rooted_or_die($o->{prefix}, 'ldconfig') unless $::g_auto_install;
     log::l("Install took: ", formatTimeRaw(time - $time));
@@ -406,7 +406,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     if (do {
 	my $p = pkgs::packageByName($o->{packages}, 'devfsd');
-	$p && pkgs::packageFlagInstalled($p)
+	$p && $p->flag_installed
     }) {
         require bootloader;
 	bootloader::may_append($o->{bootloader}, devfs => 'mount');
@@ -489,8 +489,7 @@ GridHeight=70
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
 	my $pkg = pkgs::packageByName($o->{packages}, 'rpm');
-	$pkg && pkgs::packageSelectedOrInstalled($pkg) && pkgs::versionCompare(pkgs::packageVersion($pkg), '4.0') >= 0 and
-	  pkgs::clean_old_rpm_db($o->{prefix});
+	$pkg && ($pkg->flag_selected || $pkg->flag_installed) && $pkg->compare(">= 4.0") and pkgs::clean_old_rpm_db($o->{prefix});
 
 	log::l("moving previous desktop files that have been updated to Trash of each user");
 	install_any::kdemove_desktop_file($o->{prefix});
@@ -536,7 +535,7 @@ sub install_urpmi {
     my ($o) = @_;
 
     my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
-    if ($pkg && pkgs::packageSelectedOrInstalled($pkg)) {
+    if ($pkg && ($pkg->flag_selected || $pkg->flag_installed)) {
 	install_any::install_urpmi($o->{prefix}, 
 				   $::oem ? 'cdrom' : $o->{method}, #- HACK
 				   $o->{packages}{mediums});
@@ -833,7 +832,7 @@ sub setupBootloaderBefore {
 	#- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
 	my $need_fb = grep {
 	    my $p = pkgs::packageByName($o->{packages}, $_);
-	    $p && pkgs::packageFlagInstalled($p);
+	    $p && $p->flag_installed;
 	} 'Aurora', 'bootsplash';
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
 			    ($force_vga || $vga && $need_fb) && $o->{vga}, $o->{meta_class} ne 'server');
