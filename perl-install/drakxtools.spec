@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 56mdk
+Release: 57mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -318,6 +318,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jul 21 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-57mdk
+- drakauth (vincent):
+  o restart services if needed
+  o describe authentification kinds
+  o modify nss_path one to sub config winbind for AD
+- drakconnect: misc bug fixes (olivier)
+- localedrake: fix xmodifiers setting which is broken since
+  perl-MDK-Common-1.1.13-1mdk
+- net_monitor:
+  o fix GraphicalContext memory leak (olivier)
+  o translate connection type (Fabrice Facorat)
+  o fix spacing (from Fabrice Facorat, #10300)
+
 * Mon Jul 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-56mdk
 - bootloader-config (pixel):
   o save prior boot loader config file (#10072)
