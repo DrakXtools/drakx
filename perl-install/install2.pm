@@ -609,7 +609,7 @@ sub main {
     common::sync(); common::sync();
 
     log::l("installation complete, leaving");
-    log::l("files still open by install2: ", readlink($_)) foreach glob_("/proc/$$/fd/*");
+    log::l("files still open by install2: ", readlink($_)) foreach glob_("/proc/self/fd/*");
     print "\n" x 80;
 }
 
