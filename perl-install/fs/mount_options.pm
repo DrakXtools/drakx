@@ -168,6 +168,7 @@ sub set_default {
 	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
 	$part->{fs_type} = !$options->{supermount} ? 'auto' :
 		    $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
+	$options->{sync} = 1 if $part->{media_type} ne 'cdrom';
     }
 
     if ($part->{media_type} eq 'cdrom') {
