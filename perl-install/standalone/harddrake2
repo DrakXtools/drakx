@@ -127,6 +127,11 @@ my %groups = (
                N("Device") => [ qw(device devfs_device) ],
                N("Partitions") => [ qw(primary_partitions extended_partitions) ],
               },
+              MOUSE =>
+              {
+               N("Identification") => [ qw(name type MOUSETYPE XMOUSETYPE) ],
+               N("Features") => [ qw(EMULATEWHEEL nbuttons) ],
+              },
              );
 
 $groups{$_} = $groups{HARDDISK} foreach qw(BURNER CDROM DVDROM);
