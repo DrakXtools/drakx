@@ -355,7 +355,7 @@ sub load_modules {
 	/ttyS/   and push @l, qw(serial);
 	/event/  and push @l, qw(wacom evdev);
     }
-    if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse}{name})) {
+    if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse} && $mouse->{auxmouse}{name})) {
 	push @l, qw(evdev);
     }
     eval { modules::load(@l) };
@@ -365,8 +365,8 @@ sub set_xfree_conf {
     my ($mouse, $xfree_conf, $b_keep_auxmouse_unchanged) = @_;
 
     my ($synaptics, $mouse_) = partition { $_->{name} eq N_("Synaptics Touchpad") }
-      ($mouse, if_(!is_empty_hash_ref($mouse->{auxmouse}), $mouse->{auxmouse}));
-    undef $mouse->{auxmouse} if $synaptics && $synaptics == $mouse->{auxmouse};
+      ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
+    delete $mouse->{auxmouse} if $synaptics && $synaptics == $mouse->{auxmouse};
     my @mice = map {
 	{
 	    Protocol => $_->{XMOUSETYPE},
@@ -391,7 +391,7 @@ sub set_xfree_conf {
     $synaptics and $xfree_conf->set_synaptics(map { {
         Device => "/dev/$_->{device}",
         Protocol => $_->{XMOUSETYPE},
-        Primary => $_ ne $mouse->{auxmouse},
+        Primary => $_ != $mouse->{auxmouse},
     } } @$synaptics);
 }
 
@@ -416,7 +416,7 @@ sub various_xfree_conf {
 	}
     }
 
-    if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse}{name})) {
+    if (member(N_("Synaptics Touchpad"), $mouse->{name}, $mouse->{auxmouse} && $mouse->{auxmouse}{name})) {
 	$do_pkgs->install("synaptics");
     }
 }
