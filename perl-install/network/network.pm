@@ -164,7 +164,7 @@ sub write_interface_conf {
 
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR METRIC MII_NOT_SUPPORTED TYPE USERCTL),
                 qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV),
-                if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
+                if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_CLIENT DHCP_HOSTNAME NEEDHOSTNAME PEERDNS PEERYP PEERNTPD DHCP_TIMEOUT)),
                 if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
                );
     substInFile { s/^DEVICE='(`.*`)'/DEVICE=$1/g } $file; #- remove quotes if DEVICE is the result of a command
@@ -650,11 +650,11 @@ sub configureNetwork2 {
         foreach (grep { !/^ppp\d+/ } keys %$intf) {
 	    unlink("$etc/sysconfig/network-scripts/$_");
 	    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_", $intf->{$_}, $netc, $::prefix);
+	    $intf->{$_}{BOOTPROTO} eq "dhcp" and network::ethernet::install_dhcp_client($in, $intf->{$_});
 	}
         add2hosts("$etc/hosts", $netc->{HOSTNAME}, "127.0.0.1") if $netc->{HOSTNAME};
         add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
-        any { $_->{BOOTPROTO} eq "dhcp" } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
         if ($netc->{ZEROCONF_HOSTNAME}) {
             $in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
             $in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');

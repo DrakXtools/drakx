@@ -377,8 +377,8 @@ sub build_notebook {
                 gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,10), 5),
                           gtkpack__(Gtk2::HBox->new,
                                   Gtk2::Label->new(N("DHCP client")),
-                                  gtksignal_connect($gui->{netc}{dhcp_client} = Gtk2::ComboBox->new_with_strings(\@network::ethernet::dhcp_clients,
-                                                                                                                 $netc->{dhcp_client} || $network::ethernet::dhcp_clients[0]),
+                                  gtksignal_connect($gui->{intf}{DHCP_CLIENT} = Gtk2::ComboBox->new_with_strings(\@network::ethernet::dhcp_clients,
+                                                                                                                 $intf->{DHCP_CLIENT} || $network::ethernet::dhcp_clients[0]),
                                                     changed => $apply)),
                           gtksignal_connect($gui->{intf_bool}{NEEDHOSTNAME} = Gtk2::CheckButton->new(N("Assign host name from DHCP address")), toggled => $apply),
                           gtkpack__(Gtk2::HBox->new,
@@ -399,7 +399,7 @@ sub build_notebook {
 	}
 	$gui->{intf}{$_}->set_text($intf->{$_}) foreach qw(DHCP_HOSTNAME DHCP_TIMEOUT);
 	$gui->{intf_bool}{$_}->set_active(text2bool($intf->{$_})) foreach qw(NEEDHOSTNAME PEERDNS PEERYP PEERNTPD);
-	$gui->{netc}{dhcp_client}->set_text($netc->{dhcp_client});
+	$gui->{intf}{DHCP_CLIENT}->set_text($intf->{DHCP_CLIENT});
 	$gui->{sheet}{DHCP}->set_sensitive($intf->{BOOTPROTO} eq 'dhcp');
     }
 
@@ -915,7 +915,7 @@ Configure them first by clicking on 'Configure'")));
 		      [ N("Netmask"), \$mask ],
 		      [ N("Boot Protocol"), \$intf->{$interface}{BOOTPROTO}, ["static", "dhcp", "bootp"] ],
 		      [ N("Started on boot"), \$intf->{$interface}{ONBOOT} , ["yes", "no"] ],
-		      [ N("DHCP client"), \$netcnx->{dhcp_client} ]
+		      [ N("DHCP client"), \$intf->{$interface}{DHCP_CLIENT} ]
 		     );
 	my $i = 0;
 	my $size_group = Gtk2::SizeGroup->new('horizontal');

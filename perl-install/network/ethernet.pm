@@ -9,7 +9,19 @@ use common;
 use run_program;
 use network::tools;
 
-our @dhcp_clients = qw(dhcp-client dhcpcd pump dhcpxd);
+our @dhcp_clients = qw(dhclient dhcpcd pump dhcpxd);
+
+sub install_dhcp_client {
+    my ($in, $ethntf) = @_;
+    my %packages = (
+        "dhclient" => "dhcp-client",
+    );
+    my $client = $ethntf->{DHCP_CLIENT};
+    #- use default dhcp client if none is provided
+    $client ||= $dhcp_clients[0];
+    $client = $packages{$client} if exists $packages{$client};
+    $in->do_pkgs->install($client);
+}
 
 sub write_ether_conf {
     my ($in, $modules_conf, $netcnx, $netc, $intf) = @_;

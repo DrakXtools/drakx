@@ -1011,8 +1011,7 @@ Do you really want to reconfigure this device?"),
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
                         delete $ethntf->{TYPE} if $netcnx->{type} ne 'adsl' || !member($adsl_type, qw(manual dhcp));
-                        $netc->{dhcp_client} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd)) || "dhcp-client";
-                        $netc->{dhcp_client} = "dhcp-client" if $netc->{dhcp_client} eq "dhclient";
+                        $ethntf->{DHCP_CLIENT} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd));
                     },
                     name => sub { join('', 
                                        N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module),
@@ -1037,7 +1036,7 @@ notation (for example, 1.2.3.4).")),
                               { text => N("Start at boot"), val => \$onboot, type => "bool" },
                              ),
                           if_($auto_ip,
-                              { label => N("DHCP client"), val => \$netc->{dhcp_client},
+                              { label => N("DHCP client"), val => \$ethntf->{DHCP_CLIENT},
                                 list => \@network::ethernet::dhcp_clients, advanced => 1 },
                               { label => N("DHCP timeout (in seconds)"), val => \$ethntf->{DHCP_TIMEOUT}, advanced => 1 },
                               { text => N("Get DNS servers from DHCP"), val => \$peerdns, type => "bool", advanced => 1 },
@@ -1081,7 +1080,6 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $netc->{$_} = $ethntf->{DEVICE} foreach qw(NET_DEVICE NET_INTERFACE);
                         if ($auto_ip) {
-                            $in->do_pkgs->install($netc->{dhcp_client});
                             #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface to dhcp
                             $delete_gateway_settings->($ntf_name);
                         }
