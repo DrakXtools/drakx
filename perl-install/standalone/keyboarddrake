@@ -38,9 +38,11 @@ if ($::expert) {
 keyboard::setxkbmap($keyboard);
 eval {
     my $xfree_conf = Xconfig::xfree->read;
-    my $xkb = keyboard::keyboard2full_xkb($keyboard);
-    $xfree_conf->set_keyboard($xkb);
-    $xfree_conf->write;
+    if (!is_empty_array_ref($xfree_conf)) {
+	my $xkb = keyboard::keyboard2full_xkb($keyboard);
+	$xfree_conf->set_keyboard($xkb);
+	$xfree_conf->write;
+    }
 };
 
 keyboard::write($keyboard);
