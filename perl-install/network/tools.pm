@@ -8,7 +8,7 @@ use vars qw(@ISA @EXPORT @EXPORT_OK);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_providers_backend read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
+@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
 
 our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
 our $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
@@ -74,8 +74,6 @@ sub passwd_by_login {
 sub connect_backend() { run_program::rooted($::prefix, "$connect_file &") }
 
 sub disconnect_backend() { run_program::rooted($::prefix, "$disconnect_file &") }
-
-sub read_providers_backend { my ($file) = @_; map { /(.*?)=>/ } catMaybeCompressed($file) }
 
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
