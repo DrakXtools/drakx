@@ -1,0 +1,52 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use common qw(:common :system);
+use interactive;
+use mouse;
+use c;
+
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: livedrake [--auto] [--testing]\n";
+
+$::auto = /-auto/;
+$::testing = /-testing/;
+$::isStandalone = 1;
+
+my $in = vnew interactive('su');
+
+my $cd_mntpoint = "/mnt/cdrom";
+
+while (! -x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
+    ejectCdrom();
+    $in->ask_okcancel(_("Change Cd-Rom"),
+_("Please insert the Installation Cd-Rom in your drive and press Ok when done.
+If you don't have it, press Cancel to avoid live upgrade."), 1) or $in->exit(0);
+    eval { fs::mount("/mnt/cdrom") };
+}
+
+if (-x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
+    chdir "/$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/";
+    exec "./live_install";
+}
+
+$in->ask_warn('', _("Unable to start live upgrade !!!\n"));
+$in->exit(1);
+
+sub unlockCdrom(;$) {
+    my ($cdrom) = @_;
+    $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
+    $cdrom or cat_("/etc/fstab") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
+    eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
+}
+
+sub ejectCdrom(;$) {
+    my ($cdrom) = @_;
+    $cdrom or cat_("/proc/mounts") =~ m|(/dev/\S+)\s+/mnt/cdrom\s| and $cdrom = $1;
+    my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
+    getFile("XXX"); #- close still opened filehandle
+    eval { fs::umount("/mnt/cdrom") };
+    ioctl $f, c::CDROMEJECT(), 1;
+}
