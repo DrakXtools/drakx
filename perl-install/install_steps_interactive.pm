@@ -778,7 +778,7 @@ sub updateModulesFromFloppy {
 sub configureNetwork {
     my ($o) = @_;
     require network::ethernet;
-    modules::load_category($o->{modules_conf}, network::ethernet::get_eth_categories());
+    modules::load_category($o->{modules_conf}, list_modules::ethernet_categories());
 
     if ($o->{meta_class} eq 'firewall') {
 	require network::netconnect;

@@ -379,7 +379,7 @@ sub easy_dhcp {
 
     require modules;
     require network::ethernet;
-    modules::load_category($modules_conf, network::ethernet::get_eth_categories());
+    modules::load_category($modules_conf, list_modules::ethernet_categories());
     my @all_dev = sort map { $_->[0] } network::ethernet::get_eth_cards($modules_conf);
 
     #- only for a single ethernet network card

@@ -8,10 +8,6 @@ use detect_devices;
 use common;
 use run_program;
 use network::tools;
-use vars qw(@ISA @EXPORT);
-
-@ISA = qw(Exporter);
-@EXPORT = qw(get_eth_categories);
 
 sub write_ether_conf {
     my ($in, $modules_conf, $netcnx, $netc, $intf) = @_;
@@ -36,10 +32,6 @@ sub mapIntfToDevice {
       grep { $_->{pci_bus} == $bus && $_->{pci_device} == $slot && $_->{pci_function} == $func } detect_devices::probeall() : {};
 }
 
-
-sub get_eth_categories() {
-    'network/main|gigabit|pcmcia|usb|wireless|firewire';
-}
 
 # return list of [ intf_name, module, device_description ] tuples such as:
 # [ "eth0", "3c59x", "3Com Corporation|3c905C-TX [Fast Etherlink]" ]

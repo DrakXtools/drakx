@@ -251,6 +251,10 @@ sub module2category {
     return;
 }
 
+sub ethernet_categories() {
+    'network/main|gigabit|pcmcia|usb|wireless|firewire';
+}
+
 sub sub_categories {
     my ($t1) = @_;
     keys %{$l{$t1}};

@@ -22,7 +22,7 @@ sub detect {
              },
              lan => sub { # ethernet
                  require network::ethernet;
-                 modules::load_category($modules_conf, network::ethernet::get_eth_categories());
+                 modules::load_category($modules_conf, list_modules::ethernet_categories());
                  $auto_detect->{lan} = { map { $_->[0] => $_->[1] } network::ethernet::get_eth_cards($modules_conf) };
              },
              adsl => sub {
@@ -126,7 +126,7 @@ sub real_main {
       my $lan_detect = sub {
           detect($modules_conf, $netc->{autodetect}, 'lan');
           require network::ethernet;
-          modules::interactive::load_category($in, $modules_conf, network::ethernet::get_eth_categories(), !$::expert, 0);
+          modules::interactive::load_category($in, $modules_conf, list_modules::ethernet_categories(), !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
           %all_eth_intf = network::ethernet::get_eth_cards_names(@all_cards); #- needed not to loose GATEWAYDEV
           require list_modules; #- FIXME: check if useful
@@ -889,7 +889,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     post => sub {
                         if ($ntf_name eq "Manually load a driver") {
                             require network::ethernet;
-                            modules::interactive::load_category__prompt($in, $modules_conf, network::ethernet::get_eth_categories());
+                            modules::interactive::load_category__prompt($in, $modules_conf, list_modules::ethernet_categories());
                             return 'lan';
                         }
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
