@@ -1,3 +1,83 @@
+2001/02/05  dam's  <damien@mandrakesoft.com>
+
+	* Makefile.drakxtools, Makefile: added wizard.rc handling in Makfiles.
+
+	* standalone/draknet: added infos recovering.
+
+	* netconnect.pm: added load_conf() to recover saved infos from conffile.
+
+2001/02/05  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: removed abusive white char.
+	updated to use urpmi new format (change fakemedium to better label)
+	fixed frame buffer usage if not enabled (installation of Aurora)
+	clean up and remove unused code.
+
+	* ftp.pm: rebuild URLPREFIX as stage1 does not provide it anymore.
+
+	* pkgs.pm: updated to use urpmi new format (change fakemedium to better
+	label)
+
+	* Xconfigurator.pm: Removed Device3Dfx as it is no more.
+
+	* install_steps.pm: fixed frame buffer usage if not enabled (installation
+	of Aurora)
+	clean up and remove unused code.
+
+2001/02/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/list: updated list of gconv modules
+
+2001/02/05  Pixel  <pixel@mandrakesoft.com>
+
+	* commands.pm (head_tail): fix usage
+
+	* interactive_gtk.pm (create_ctree): node_moveto done only if
+	node_is_visible is not full
+
+2001/02/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/mar/mar-frontend.c: fix bug when creating marfiles with
+	file-not-found in args
+
+2001/02/04  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_newt.pm: fix adaptation to the terminal size, should now
+	work in 80x25
+
+	* Xconfigurator.pm (monitorConfiguration): better handling of auto_install
+
+	* install_steps_interactive.pm (choosePackages): don't call
+	chooseSizeToInstall even with experts
+
+	* install_steps_gtk.pm (charsetChanged): re-create steps window
+
+2001/02/03  dam's  <damien@mandrakesoft.com>
+
+	* modules.pm, standalone/draknet, netconnect.pm: corrected module.conf
+	update, net conf saving, and no wizard by default.
+
+2001/02/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+2001/02/03  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (monitorConfiguration): ease use of {X}{type} in
+	auto_installs
+
+	* install_steps_gtk.pm (charsetChanged): created, takes care of setting to
+	the right charset the windows
+
+	* install_steps_interactive.pm (selectLanguage): call charsetChanged
+
+	* share/rpmsrate: fix ``LOCALES "zh_CN"'' with ``LOCALES"zh_CN"''
+	move ftp to SYSTEM so that it is installed
+
+	* Makefile: install cardmgr
+
+	* modules.pm (configure_pcmcia): cleanup
+
 2001/02/03  Pixel  <pixel@mandrakesoft.com>
 
 	* Xconfigurator.pm (monitorConfiguration): ease use of {X}{type} in
