@@ -847,141 +847,155 @@ sub summary {
 
     my @l;
 
-    my $timezone_manually_set;  
-    push @l, { 
-	      label => N("Country"),
-	      val => sub { lang::c2name($o->{locale}{country}) },
-	      clicked => sub {
-		  any::selectCountry($o, $o->{locale}) or return;
-		  lang::write($o->{prefix}, $o->{locale});
-		  if (!$timezone_manually_set) {
-		      delete $o->{timezone};
-		      install_any::preConfigureTimezone($o); #- now we can precise the timezone thanks to the country
-		  }
-	      },
-	     };
-    push @l, { 
-	      label => N("Timezone"),
-	      val => sub { $o->{timezone}{timezone} },
-	      clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
-	     };
+    push @l, {
+	group => N("System"), 
+	label => N("Keyboard"), 
+	val => sub { $o->{keyboard} && translate(keyboard::keyboard2text($o->{keyboard})) },
+	clicked => sub { $o->selectKeyboard(1) },
+    };
 
-    push @l, { 
-	      label => N("Keyboard"), 
-	      val => sub { $o->{keyboard} && translate(keyboard::keyboard2text($o->{keyboard})) },
-	      clicked => sub { $o->selectKeyboard(1) },
-	     };
-    push @l, { 
-	      label => N("Mouse"),
-	      val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
-	      clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}) },
-	     };
+    my $timezone_manually_set;  
+    push @l, {
+	group => N("System"),
+	label => N("Country"),
+	val => sub { lang::c2name($o->{locale}{country}) },
+	clicked => sub {
+	    any::selectCountry($o, $o->{locale}) or return;
+	    lang::write($o->{prefix}, $o->{locale});
+	    if (!$timezone_manually_set) {
+		delete $o->{timezone};
+		install_any::preConfigureTimezone($o); #- now we can precise the timezone thanks to the country
+	    }
+	},
+    };
+    push @l, {
+	group => N("System"),
+	label => N("Timezone"),
+	val => sub { $o->{timezone}{timezone} },
+	clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
+    };
 
     push @l, {
-	      label => N("Printer"),
-	      val => sub {
-		  if (is_empty_hash_ref($o->{printer}{configured})) {
-		      require pkgs;
-		      my $p = pkgs::packageByName($o->{packages}, 'cups');
-		      $p && $p->flag_installed ? N("Remote CUPS server") : N("No printer");
-		  } elsif (my $p = find { $_ && ($_->{make} || $_->{model}) }
-			     $o->{printer}{currentqueue},
-			     map { $_->{queuedata} } ($o->{printer}{configured}{$o->{printer}{DEFAULT}}, values %{$o->{printer}{configured}})) {
-		      "$p->{make} $p->{model}";
-		  } else {
-		      N("Remote CUPS server"); #- fall back in case of something wrong.
-		  }
-	      },
-	      clicked => sub { $o->configurePrinter(1) },
-	     };
+	group => N("System"),
+	label => N("Mouse"),
+	val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
+	clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}) },
+    };
+
+    push @l, {
+	group => N("Hardware"),
+	label => N("Printer"),
+	val => sub {
+	    if (is_empty_hash_ref($o->{printer}{configured})) {
+		require pkgs;
+		my $p = pkgs::packageByName($o->{packages}, 'cups');
+		$p && $p->flag_installed ? N("Remote CUPS server") : N("No printer");
+	    } elsif (my $p = find { $_ && ($_->{make} || $_->{model}) }
+		     $o->{printer}{currentqueue},
+		     map { $_->{queuedata} } ($o->{printer}{configured}{$o->{printer}{DEFAULT}}, values %{$o->{printer}{configured}})) {
+		"$p->{make} $p->{model}";
+	    } else {
+		N("Remote CUPS server"); #- fall back in case of something wrong.
+	    }
+	},
+	clicked => sub { $o->configurePrinter(1) },
+    };
   
     my @sound_cards = detect_devices::getSoundDevices();
 
     foreach my $device (@sound_cards) {
-	push @l, { 
-		  label => N("Sound card"),
-		  val => sub { $device->{description} },
-		  clicked => sub {
-		      require harddrake::sound; 
-		      harddrake::sound::config($o, $device)
-		    },
-		 };
+	push @l, {
+	    group => N("Hardware"),
+	    label => N("Sound card"),
+	    val => sub { $device->{description} },
+	    clicked => sub {
+	        require harddrake::sound; 
+	        harddrake::sound::config($o, $device)
+	    },
+	};
     }
 
     if (!@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO})) {
 	#- if no sound card are detected AND the user selected things needing a sound card,
 	#- propose a special case for ISA cards
 	push @l, {
-		  label => N("Sound card"),
-		  clicked => sub {
-		      if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
-			  $o->do_pkgs->install('sndconfig');
-			  $o->ask_warn('', N("Run \"sndconfig\" after installation to configure your sound card"));
-		      } else {
-			  $o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
-		      }
-		  },
-		 };
+	    group => N("Hardware"),
+	    label => N("Sound card"),
+	    clicked => sub {
+	        if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
+	    	  $o->do_pkgs->install('sndconfig');
+	    	  $o->ask_warn('', N("Run \"sndconfig\" after installation to configure your sound card"));
+	        } else {
+	    	  $o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
+	        }
+	    },
+	};
     }
 
     foreach (grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()) {
 	my $driver = $_->{driver};
 	push @l, {
-		  label => N("TV card"),
-		  val => sub { $_->{description} }, 
-		  clicked => sub { 
-		      require harddrake::v4l; 
-		      harddrake::v4l::config($o, $driver);
-		  }
-		 };
+	    group => N("Hardware"),
+	    label => N("TV card"),
+	    val => sub { $_->{description} }, 
+	    clicked => sub { 
+	        require harddrake::v4l; 
+	        harddrake::v4l::config($o, $driver);
+	    }
+	};
     }
 
-    push @l, { 
-	      label => N("Bootloader"),
-	      val => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" },
-	      clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) },
-	     };
+    push @l, {
+	group => N("Hardware"),
+	label => N("Graphical interface"),
+	val => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : N("not configured") },
+	clicked => sub { configureX($o, 'expert') }, 
+    };
 
     push @l, {
-	      label => N("Graphical interface"),
-	      val => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : N("not configured") },
-	      clicked => sub { configureX($o, 'expert') }, 
-	     };
+	group => N("Network & Internet"),
+	label => N("Network"),
+	val => sub { $o->{netcnx}{type} || N("not configured") },
+	clicked => sub { 
+	    require network::netconnect;
+	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
+	},
+    };
 
     push @l, {
-	      label => N("Network"),
-	      val => sub { $o->{netcnx}{type} || N("not configured") },
-	      clicked => sub { 
-		  require network::netconnect;
-		  network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
-	      },
-	     };
+	group => N("Security"),
+	label => N("Firewall"),
+	val => sub { 
+	    require network::shorewall;
+	    my $shorewall = network::shorewall::read();
+	    $shorewall && !$shorewall->{disabled} ? N("activated") : N("disabled");
+	},
+	clicked => sub { 
+	    require network::drakfirewall;
+	    network::drakfirewall::main($o, $o->{security} <= 3);
+	},
+    } if detect_devices::getNet();
 
     push @l, {
-	      label => N("Firewall"),
-	      val => sub { 
-		  require network::shorewall;
-		  my $shorewall = network::shorewall::read();
-		  $shorewall && !$shorewall->{disabled} ? N("activated") : N("disabled");
-	      },
-	      clicked => sub { 
-		  require network::drakfirewall;
-		  network::drakfirewall::main($o, $o->{security} <= 3);
-	      },
-	     } if detect_devices::getNet();
+	group => N("Boot"),
+	label => N("Bootloader"),
+	val => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" },
+	clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) },
+    };
 
     push @l, {
-	      label => N("Services"),
-	      val => sub {
-		  require services;
-		  my ($l, $activated) = services::services();
-		  N("Services: %d activated for %d registered", int(@$activated), int(@$l));
-	      },
-	      clicked => sub { 
-		  require services;
-		  $o->{services} = services::ask($o) and services::doit($o, $o->{services});
-	      },
-	     };
+	group => N("System"),
+	label => N("Services"),
+	val => sub {
+	    require services;
+	    my ($l, $activated) = services::services();
+	    N("Services: %d activated for %d registered", int(@$activated), int(@$l));
+	},
+	clicked => sub { 
+	    require services;
+	    $o->{services} = services::ask($o) and services::doit($o, $o->{services});
+	},
+    };
 
     my $check_complete = sub {
 	$o->{raw_X} || !pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed ||
