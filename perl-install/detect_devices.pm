@@ -184,7 +184,7 @@ sub getSCSI() {
     each_index {
 	my $dev = "sd" . chr($::i + ord('a'));
 	put_in_hash $_, { device => $dev, media_type => isZipDrive($_) ? 'hd' : isFloppyOrHD($dev) };
-    } grep { $_->{raw_type} =~ /Direct-Access/ } @l;
+    } grep { $_->{raw_type} =~ /Direct-Access|Optical Device/ } @l;
 
     each_index {
 	put_in_hash $_, { device => "st$::i", media_type => 'tape' };
