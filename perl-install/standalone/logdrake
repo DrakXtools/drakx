@@ -55,7 +55,7 @@ unless ($::isEmbedded) {
 $my_win->{window}->signal_connect(delete_event => \&quit);
 
 my $cal = gtkset_sensitive(new Gtk2::Calendar(), 0);
-my (undef, undef, undef, $mday) = localtime(time());
+my $mday = (localtime(time()))[3];
 $cal->select_day($mday);
 my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
 my $cal_mode = 0;
@@ -246,7 +246,7 @@ sub parse_file {
                      $pbar = new Gtk2::ProgressBar()
                      )
              );
-      $win_pb->set_transient_for($my_win->{rwindow}) unless $::isEmbedded;
+      $win_pb->set_transient_for($my_win->{rwindow});
       $win_pb->set_modal(1);
       $win_pb->set_position('center');
       $win_pb->realize();
