@@ -102,6 +102,7 @@ my %languages = (
   'tt'	=> [ 'Tatar',			'tatar-cyr',  'tg', 'tg' ],
 #-'ur'	=> [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk_UA:uk' ],
+  'uz'  => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz' ],
   'vi'  => [ 'Vietnamese|TCVN',       'tcvn',       'vi',
 					'vi_VN.TCVN:vi_VN.TCVN-5712:vi_VN.tcvn:vi' ],
 'vi_VN.VISCII' => [ 'Vietnamese|VISCII','viscii',   'vi',
