@@ -249,7 +249,7 @@ sub interactive_mode() {
 	$::Wizard_title = N("Terminal Server Configuration");
 	$::Wizard_pix_up = "ic82-network-40.png";
 	$in->isa('interactive::gtk') and $::isWizard = 1;
-    $window1 = ugtk2->new(N("Termial Server Configuration"));
+    $window1 = ugtk2->new(N("Terminal Server Configuration"));
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     $window1->{rwindow}->set_border_width(5);
 
