@@ -271,7 +271,7 @@ sub build_tree {
     my ($netc, $intf, $interface, $interface_name, $protocol) = @_;
 
     if ($interface eq 'adsl') {
-	$intf->{pages} = { 'TCP/IP' => 1, 'Account' => 1, 'Options' => 1, 'Information' => 1 };
+	$intf->{pages} = { 'TCP/IP' => 1, 'DHCP' => 1, 'Account' => 1, 'Options' => 1, 'Information' => 1 };
 	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_name);
 	$intf->{save} = sub {
             $netc->{internet_cnx_choice} = 'adsl';
@@ -291,7 +291,7 @@ sub build_tree {
     }
     else {
 	#- ethernet is default
-	$intf->{pages} = { 'TCP/IP' => 1, if_($intf->{WIRELESS_MODE}, 'Wireless' => 1), 'Options' => 1, 'Information' => 1 };
+	$intf->{pages} = { 'TCP/IP' => 1, 'DHCP' => 1, if_($intf->{WIRELESS_MODE}, 'Wireless' => 1), 'Options' => 1, 'Information' => 1 };
     }
 }
 
@@ -316,9 +316,7 @@ sub build_notebook {
                                                      foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
                                                          $_->set_sensitive(to_bool($protocol eq "static"));
                                                      }
-                                                     foreach ($gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD}) {
-                                                         $_->set_sensitive(to_bool($protocol eq "dhcp"));
-                                                     }
+                                                     $gui->{sheet}{DHCP}->set_sensitive($intf->{BOOTPROTO} eq 'dhcp');
                                                      $apply->();
                                                  },
                                                                                          ),
@@ -343,27 +341,6 @@ sub build_notebook {
                                 ),
                             ),
                    ),
-                if_($is_ethernet,
-                    gtkadd(gtkcreate_frame(N("Dynamic Host Configuration Protocol (DHCP)")),
-                           gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,10), 5),
-                                    0, gtkpack(Gtk2::VBox->new(1,0),
-                                               gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("DHCP client"))),
-                                               gtkpack__(Gtk2::HBox->new,
-                                                         gtksignal_connect($gui->{netc}{dhcp_client} = Gtk2::ComboBox->new_with_strings(\@network::ethernet::dhcp_clients,
-                                                                                                                                        $netc->{dhcp_client} || $network::ethernet::dhcp_clients[0]),
-                                                                           changed => $apply)),
-                                           ),
-                                    0, gtkpack(Gtk2::VBox->new(1,0),
-                                               gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("DHCP timeout (in seconds)"))),
-                                               gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{intf}{DHCP_TIMEOUT} = Gtk2::Entry->new,
-                                                                                            key_press_event => $apply)),
-                                           ),
-                                    0, gtksignal_connect($gui->{intf_bool}{PEERDNS} = Gtk2::CheckButton->new(N("Get DNS servers from DHCP")), toggled => $apply),
-                                    0, gtksignal_connect($gui->{intf_bool}{PEERYP} = Gtk2::CheckButton->new(N("Get YP servers from DHCP")), toggled => $apply),
-                                    0, gtksignal_connect($gui->{intf_bool}{PEERNTPD} = Gtk2::CheckButton->new(N("Get NTPD servers from DHCP")), toggled => $apply),
-                                ),
-                       ),
-                ),
                 gtkpack_(Gtk2::VBox->new,
                          1, gtkadd(gtkcreate_frame(N("DNS servers")),
                                    gtkpack(Gtk2::VBox->new(0,0),
@@ -387,17 +364,36 @@ sub build_notebook {
             if ($intf->{BOOTPROTO} ne 'static') {
                 $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY};
             }
-            if ($intf->{BOOTPROTO} ne 'dhcp') {
-                $_->set_sensitive(0) foreach $gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD};
-            }
 	} else {
-	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}, $gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD};
+	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY};
 	    delete $gui->{intf}{BOOTPROTO};
 	}
 	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface_name);
-	$gui->{intf}{DHCP_TIMEOUT}->set_text($intf->{DHCP_TIMEOUT});
-	$gui->{intf_bool}{$_}->set_active(text2bool($intf->{$_})) foreach qw(PEERDNS PEERYP PEERNTPD);
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
+    }
+
+    if ($intf->{pages}{DHCP}) {
+	gtkpack(gtkset_border_width($gui->{sheet}{DHCP} = Gtk2::HBox->new(0,10), 5),
+                gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,10), 5),
+                          gtkpack__(Gtk2::HBox->new,
+                                  Gtk2::Label->new(N("DHCP client")),
+                                  gtksignal_connect($gui->{netc}{dhcp_client} = Gtk2::ComboBox->new_with_strings(\@network::ethernet::dhcp_clients,
+                                                                                                                 $netc->{dhcp_client} || $network::ethernet::dhcp_clients[0]),
+                                                    changed => $apply)),
+                          gtkpack__(Gtk2::HBox->new,
+                                  Gtk2::Label->new(N("DHCP timeout (in seconds)")),
+                                  gtksignal_connect($gui->{intf}{DHCP_TIMEOUT} = Gtk2::Entry->new,
+                                                    key_press_event => $apply)),
+                          gtksignal_connect($gui->{intf_bool}{PEERDNS} = Gtk2::CheckButton->new(N("Get DNS servers from DHCP")), toggled => $apply),
+                          gtksignal_connect($gui->{intf_bool}{PEERYP} = Gtk2::CheckButton->new(N("Get YP servers from DHCP")), toggled => $apply),
+                          gtksignal_connect($gui->{intf_bool}{PEERNTPD} = Gtk2::CheckButton->new(N("Get NTPD servers from DHCP")), toggled => $apply),
+                      ),
+            );
+	$gui->{intf}{DHCP_TIMEOUT}->set_text($intf->{DHCP_TIMEOUT});
+	defined $intf->{PEERDNS} or $intf->{PEERDNS} = "yes";
+	$gui->{intf_bool}{$_}->set_active(text2bool($intf->{$_})) foreach qw(PEERDNS PEERYP PEERNTPD);
+	$gui->{netc}{dhcp_client}->set_text($netc->{dhcp_client});
+	$gui->{sheet}{DHCP}->set_sensitive($intf->{BOOTPROTO} eq 'dhcp');
     }
 
     if ($intf->{pages}{Wireless}) {
@@ -630,7 +626,7 @@ sub build_notebook {
 
 sub populate_notebook {
     my ($notebook, $gui) = @_;
-    foreach ('TCP/IP', 'Account', 'Wireless', 'Modem', 'Options', 'Information') {
+    foreach ('TCP/IP', 'DHCP', 'Account', 'Wireless', 'Modem', 'Options', 'Information') {
 	!$gui->{sheet}{$_} and next;
 	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new(translate($_)));
     }
