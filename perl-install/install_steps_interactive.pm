@@ -81,13 +81,15 @@ sub acceptLicense {
 
     my $r = 'Refuse';
 
-    $o->ask_from_({ title => N("License agreement"), 
-		    cancel => N("Quit"),
-		    messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
-		    interactive_help_id => 'acceptLicense',
-		    callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
-		  },
-		  [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ]) 
+    ($::recovery ?
+     $o->ask_yesorno('', N("Do you want to recover your system?"), 0) :
+     $o->ask_from_({ title => N("License agreement"), 
+		     cancel => N("Quit"),
+		     messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()),
+		     interactive_help_id => 'acceptLicense',
+		     callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
+		   },
+		   [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list', format => sub { translate($_[0]) } } ]))
       or do {
 	  install_any::ejectCdrom();
 	  $o->exit;
