@@ -472,6 +472,8 @@ sub beforeInstallPackages {
     $o->SUPER::beforeInstallPackages;
     $o->copy_advertising;
 }
+
+my @advertising_images;
 sub copy_advertising {
     my ($o) = @_;
 
@@ -484,6 +486,7 @@ sub copy_advertising {
 	    chomp;
 	    install_any::getAndSaveFile("Mandrake/share/advertising/$_", "$dir/$_");
 	}
+	@advertising_images = map { "$dir/$_" } @files;
     }
 }
 
@@ -517,8 +520,7 @@ sub installPackages {
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
 
     my ($change_time, $i);
-    my @images = glob_("$o->{prefix}/tmp/drakx-images/*");
-    if (@images) {
+    if (@advertising_images) {
 	log::l("hiding");
 	$msg->hide;
 	$progress->hide;
@@ -543,9 +545,9 @@ sub installPackages {
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
 
-	    if (@images && time() - $change_time > 20) {
+	    if (@advertising_images && time() - $change_time > 20) {
 		$change_time = time();
-                my $f = $images[$i++ % @images];
+                my $f = $advertising_images[$i++ % @advertising_images];
 		log::l("advertising $f");
 		gtkdestroy($advertising);
 		gtkpack($box, $advertising = gtkpng($f));
