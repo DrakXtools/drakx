@@ -267,8 +267,6 @@ sub setupBootloader__general {
 		),
             { text => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
             { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
-		if_(detect_devices::isLaptop(),
-		),
         ]) or return 0;
     } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
