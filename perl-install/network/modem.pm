@@ -13,10 +13,11 @@ sub configure {
     $netcnx->{type} = 'modem';
     my $modem = $netcnx->{$netcnx->{type}};
     $modem->{device} = $netc->{autodetect}{modem};
+    my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
+    $modem->{connection} = $l{Name};
+    $modem->{domain} = $l{Domain};
+    ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
 
-    foreach (cat_("/usr/share/config/kppprc")) {
-	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split(',', $1);
-    }
     foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
 	/.*ATDT(\d*)/ and $modem->{phone} = $1;
     }
