@@ -307,7 +307,7 @@ static enum return_type insmod_with_options(char * mod, enum driver_type type)
 	enum return_type results;
 	char options[500] = "options ";
 
-	results = ask_from_entries("Please enter the parameters to give to the kernel:", questions, &answers, 24);
+	results = ask_from_entries("Please enter the parameters to give to the kernel:", questions, &answers, 24, NULL);
 	if (results != RETURN_OK)
 		return results;
 
@@ -350,16 +350,7 @@ enum return_type ask_insmod(enum driver_type type)
 
 	if (results == RETURN_OK) {
 		choice[strlen(choice)-2] = '\0'; /* remove trailing .o */
-		if (my_insmod(choice, type, NULL)) {
-			enum return_type results;
-			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
-
-			results = ask_yes_no("Insmod failed.\nTry with parameters?");
-			if (results == RETURN_OK)
-				return insmod_with_options(choice, type);
-			return RETURN_ERROR;
-		} else
-			return RETURN_OK;
+		return insmod_with_options(choice, type);
 	} else
 		return results;
 }
