@@ -28,12 +28,13 @@ my @skip_modules_on_stage1 = (
   qw(sktr tmspci ibmtr abyss), # alt token ring
   qw(old_tulip rtl8139),
   if_(arch() =~ /alpha|ppc/, qw(sb1000)),
-  "apa1480_cb",
-  "imm",
-  "ppa",
-  "plip",
-  qw(3w-xxxx pci2220i qla2x00 i2o_block),
-  qw(eata_pio eata_dma),
+  qw(
+  apa1480_cb
+  imm ppa plip
+  3w-xxxx pci2220i qla2x00 i2o_block
+  eata_pio eata_dma
+  qla2200 qla2300
+  ),
   'AM53C974', # deprecated by tmscsim
   qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
   "u14-34f", #- duplicate from ultrastor.o
@@ -110,6 +111,7 @@ sub check {
 	$error = 1;
     }
 
+    my %module2category;
     my %deprecated_modules = %listed;
     my $not_listed = sub {
 	my ($msg, $verbose, @l) = @_;
@@ -122,6 +124,7 @@ sub check {
 	    s|kernel/||; s|drivers/||; s|3rdparty/||;
 	    $_ = dirname $_;
 	    $_ = dirname $_ if $mod eq basename($_);
+	    $module2category{$mod} = $_;
 	    push @{$not_listed{$_}}, $mod;
 	}
 	if ($verbose) {
@@ -131,6 +134,28 @@ sub check {
     $not_listed->('NOT LISTED', 1, `cd all.kernels/2.4* ; find -name "*.o" -o -name "*.o.gz"`);
     $not_listed->('not listed', $verbose, `rpm -qpl /RPMS/kernel-2.4*`);
     print "bad/old modules : ", join(" ", sort keys %deprecated_modules), "\n" if %deprecated_modules;
+
+    {
+	require '/usr/bin/merge2pcitable.pl';
+	my $pcitable = read_pcitable("/usr/share/ldetect-lst/pcitable");
+	my $usbtable = read_pcitable("/usr/share/ldetect-lst/usbtable");
+
+	my @l = uniq grep { !/:/ && $_ ne 'unknown' } map { $_->[0] } values %$pcitable;
+	if (my @l = difference2(\@l, [ keys %listed ])) {
+	    my %not_listed;
+	    push @{$not_listed{$module2category{$_}}}, $_ foreach @l;
+	    print STDERR "PCITABLE MODULES NOT LISTED $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
+	    #$error = 1;
+	}
+
+	my @l = uniq grep { !/:/ && $_ ne 'unknown' } map { $_->[0] } values %$usbtable;
+	if (my @l = difference2(\@l, [ keys %listed ])) {
+	    my %not_listed;
+	    push @{$not_listed{$module2category{$_}}}, $_ foreach @l;
+	    print STDERR "USBTABLE MODULES NOT LISTED $_: ", join(" ", @{$not_listed{$_}}), "\n" foreach sort keys %not_listed;
+	    #$error = 1;
+	}
+    }
 
     exit $error;
 }
