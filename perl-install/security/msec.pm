@@ -3,62 +3,10 @@ package security::msec;
 use strict;
 use vars qw($VERSION);
 use MDK::Common::File;
+use MDK::Common;
 
 $VERSION = "0.2";
 
-=head1 NAME
-
-msec - Perl functions to handle msec configuration files
-
-=head1 SYNOPSYS
-
-    #!/usr/bin/perl
-    
-    use strict;
-    use lib qw(/usr/lib/libDrakX);
-    require security::msec;
-    
-    my $msec = new security::msec;
-    
-    my (%options, %defaults);
-    
-    my @functions = $msec->get_functions();
-    
-    foreach (@functions) { $options{$_} = $msec->get_function_value($_) }
-    foreach (@functions) { $defaults{$_} = $msec->get_function_default($_) }
-    foreach (@functions) { $msec->config_function($_, $options{$_}) }
-    
-    my @checks = $msec->get_default_checks;
-    foreach (@checks) { $options{$_} = $msec->get_check_value($_) }
-    foreach (@checks) { $defaults{$_} = $msec->get_check_default($_) }
-    foreach (@checks) { $msec->config_check($_, $options{$_}) }
-
-=head1 DESCRIPTION
-
-C<msec> is a perl module used by draksec to customize the different options
-that can be set in msec's configuration files.
-
-=head1 COPYRIGHT
-
-Copyright (C) 2000-2002 MandrakeSoft <tvignaud@mandrakesoft.com>
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2, or (at your option)
-any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-
-=cut
-
-use MDK::Common;
 
 
 my $check_file = "$::prefix/etc/security/msec/security.conf";
@@ -86,9 +34,9 @@ sub get_default {
 
     foreach (cat_($default_file)) {
 	   if ($category eq 'functions') {
-		  (undef, $default_value) = split(/ /, $_) if /^$option/;
+		  (undef, $default_value) = split / / if /^$option/;
 	   } elsif ($category eq 'checks') {
-		  (undef, $default_value) = split(/=/, $_) if /^$option/;
+		  (undef, $default_value) = split /=/ if /^$option/;
 	   }
     }
     chop $default_value;
@@ -133,9 +81,8 @@ sub get_value {
 #   return a list of functions handled by level.local (see
 #   man mseclib for more info).
 sub get_functions {
-    shift;
-    my ($category) = @_;
-    my (@functions, @tmp_network_list, @tmp_system_list);
+    my (undef, $category) = @_;
+    my @functions;
 
     ## TODO handle 3 last functions here so they can be removed from this list
     my @ignore_list = qw(indirect commit_changes closelog error initlog log set_secure_level
@@ -159,7 +106,7 @@ sub get_functions {
     # not in the ignore list, add it to the returned list.
     foreach (cat_($file)) {
         if (/^def/) {
-            (undef, $function) = split(/ /, $_);
+            (undef, $function) = split / /;
             ($function, undef) = split(/\(/, $function);
             if (!member($function, @ignore_list) && member($function, @{$options{$category}})) {
                 push(@functions, $function)
@@ -188,8 +135,7 @@ sub get_function_default {
 # config_function(function, value) -
 #   Apply the configuration to 'prefix'/etc/security/msec/level.local
 sub config_function {
-    shift;
-    my ($function, $value) = @_;
+    my (undef, $function, $value) = @_;
     my $options_file = "$::prefix/etc/security/msec/level.local";
 
     substInFile { s/^$function.*\n// } $options_file;
