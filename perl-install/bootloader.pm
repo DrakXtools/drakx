@@ -500,11 +500,21 @@ sub set_append {
     modify_append($b, sub {
 	my ($simple, $dict) = @_;
 	if ($has_val) {
-	    @$dict = grep { $_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val) } @$dict;
-	    push @$dict, [ $key, $val ] if !($val eq '' || $key eq 'mem' && !$val);
+	    my $to_add = $key eq 'mem' ? $val : $val ne '';
+	    @$dict = map {
+		if ($_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val)) {
+		    $_;
+		} elsif ($to_add) {
+		    $to_add = 0;
+		    [ $key, $val ];
+		} else {
+		    ();
+		}
+	    } @$dict;
+
+	    push @$dict, [ $key, $val ] if $to_add;
 	} else {
-	    @$simple = grep { $_ ne $key } @$simple;
-	    push @$simple, $key;
+	    @$simple = uniq(@$simple, $key);
 	}
     });
 }
