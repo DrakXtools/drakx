@@ -454,11 +454,14 @@ sub psUsingHdlist {
     $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
 
-    #- copy existing synthesis file too.
-    my $newsf = "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-    install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
-    $m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
-    -s $newsf > 0 or unlink $newsf;
+    #- if $fhdlist is defined, this is preferable not to try to find the associated synthesis.
+    unless ($fhdlist) {
+	#- copy existing synthesis file too.
+	my $newsf = "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
+	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
+	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
+	-s $newsf > 0 or unlink $newsf;
+    }
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
