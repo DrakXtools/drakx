@@ -1,3 +1,37 @@
+2001/08/28  dam's  <damien@mandrakesoft.com>
+
+	* interactive.pm, install2.pm: corrected icon handling
+
+2001/08/28  François Pons  <fpons@mandrakesoft.com>
+
+	* share/list: added /sbin/e2fsck
+
+	* share/aliases: added fsck.ext2 -> e2fsck (now in list file)
+	removed e2fsck.shared as e2fsprogs now provide a shared version instead
+	of a
+	static one.
+
+	* Makefile.config: really fix typo...
+	fixed typo.
+	removed reference to e2fsck.shared (now use e2fsck from package which is
+	shared
+	since 1.23-2mdk).
+
+2001/08/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: remove the temporary file /tmp/autoinst.img
+
+2001/08/28  siegel
+
+	* ChangeLog, keyboard.pm: 
+	  - keyboard.pm: write DISABLE_WINDOWS_KEY=no in /etc/sysconfig/keyboard
+	if no laptop is detected (= give users the chance to know about the
+	existence of this variable).
+
+2001/08/28  yduret
+
+	* standalone/diskdrake: embedded mode nicer
+
 2001/08/28  Stefan Siegel  <siegel@mandrakesoft.com>
 
 	* keyboard.pm: write DISABLE_WINDOWS_KEY=no in /etc/sysconfig/keyboard 
