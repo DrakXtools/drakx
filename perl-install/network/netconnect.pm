@@ -83,7 +83,6 @@ sub detect_timezone() {
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
-      use Data::Dumper;
 
       my %wireless_mode = (N("Ad-hoc") => "Ad-hoc", 
                            N("Managed") => "Managed", 
