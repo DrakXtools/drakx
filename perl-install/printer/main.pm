@@ -15,6 +15,10 @@ use printer::office;
 use printer::detect;
 use services;
 
+use vars qw(@ISA @EXPORT);
+
+@ISA = qw(Exporter);
+@EXPORT = qw(%printer_type %printer_type_inv);
 
 #-location of the printer database in an installed system
 my $PRINTER_DB_FILE = "/usr/share/foomatic/db/compiled/overview.xml";

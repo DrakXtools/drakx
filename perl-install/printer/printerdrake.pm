@@ -20,7 +20,7 @@ use printer::data;
 sub choose_printer_type {
     my ($printer, $in) = @_;
     $in->set_help('configurePrinterConnected') if $::isInstall;
-    $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
+    $printer->{str_type} = $printer_type_inv{$printer->{TYPE}};
     my $autodetect = 0;
     $autodetect = 1 if $printer->{AUTODETECT};
     my @printertypes = printer::main::printer_type($printer);
@@ -41,7 +41,7 @@ Printers on remote CUPS servers you do not have to configure here; these printer
 		    ]
 		   ) or return 0;
     $printer->{AUTODETECT} = $autodetect ? 1 : undef;
-    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
+    $printer->{TYPE} = $printer_type{$printer->{str_type}};
     1;
 }
 
@@ -2682,7 +2682,7 @@ sub setup_default_spooler {
 			    [ printer::main::spooler() ],
 			    $spoolers{$printer->{SPOOLER}},
 			    ) or return;
-    $printer->{SPOOLER} = $printer::spooler{$str_spooler};
+    $printer->{SPOOLER} = $spoolers{$str_spooler};
     # Install the spooler if not done yet
     if (!install_spooler($printer, $in, $upNetwork)) {
 	$printer->{SPOOLER} = $oldspooler;
@@ -3027,7 +3027,7 @@ sub main {
 	if ($newqueue) {
 	    $printer->{NEW} = 1;
 	    #- Set default values for a new queue
-	    $printer::printer_type_inv{$printer->{TYPE}} or 
+	    $printer_type_inv{$printer->{TYPE}} or 
 		$printer->{TYPE} = printer::default::printer_type($printer);
 	    $printer->{currentqueue} = { queue    => $queue,
 					 foomatic => 0,
