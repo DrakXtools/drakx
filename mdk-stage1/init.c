@@ -568,8 +568,10 @@ int main(int argc, char **argv)
 
 	if (!abnormal_termination) {
                 if (reboot_magic == BMAGIC_REBOOT) {
+#ifdef DEBUG
                         printf("automatic reboot in 10 seconds\n");
                         sleep(10);
+#endif
                         reboot(0xfee1dead, 672274793, reboot_magic);
                 } else {
                         printf("you may safely poweroff your computer now\n");
