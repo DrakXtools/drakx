@@ -36,10 +36,10 @@ all: $(TARGETS)
 ddcxinfos: $(OBJS) $(LIBS)
 	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LDFLAGS)
 
-libx86emu.a:
+libx86emu.a: x86emu/*.c
 	$(MAKE) -C x86emu
 
-libint10.a: libx86emu.a
+libint10.a: libx86emu.a int10/*.c
 	$(MAKE) -C int10
 
 %.o: %.c
