@@ -33,9 +33,8 @@ sub ask_fileW {
 sub create_boxradio {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
 
-    my $boxradio = gtkpack2__(Gtk2::VBox->new(0, 0),
-			      my @radios = gtkradio('', @{$e->{formatted_list}}));
-    $boxradio->show;
+    my $boxradio = gtkshow(gtkpack2__(Gtk2::VBox->new(0, 0),
+                                      my @radios = gtkradio('', @{$e->{formatted_list}})));
     my $tips = Gtk2::Tooltips->new;
     mapn {
 	my ($txt, $w) = @_;
@@ -314,8 +313,7 @@ sub create_list {
 	    &$may_go_to_next if $event->keyval < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
     	    0;
     	});
-	$list->append_items($item);
-	$item->show;
+	$list->append_items(gtkshow($item));
 	if ($e->{help}) {
 	    gtkset_tip($tips, $item,
 		       ref($e->{help}) eq 'HASH' ? $e->{help}{$_} :
@@ -399,8 +397,7 @@ sub ask_fromW {
 		$e->{icon} = -e $f ?
 		    gtkcreate_img($f) :
 		    Gtk2::Label->new(may_apply($e->{format}, $_[0]));
-		$w->add($e->{icon});
-		$e->{icon}->show;
+		$w->add(gtkshow($e->{icon}));
 	    };
 	    $w->signal_connect(clicked => sub {
 		$set->(${$e->{val}} = next_val_in_array(${$e->{val}}, $e->{list}));
@@ -648,15 +645,14 @@ sub ask_fromW {
 		     }, 1 ]);
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
 
-    $pack->pack_start($always_pack, 1, 1, 0); $always_pack->show;
+    $pack->pack_start(gtkshow($always_pack), 1, 1, 0);
     $pack->pack_start($advanced_pack, 1, 1, 0);
     if ($buttons_pack) {
 	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
 	    $buttons_pack->set_size_request($::windowwidth * 0.9 - 20, -1);
 	    $buttons_pack = gtkpack__(Gtk2::HBox->new(0,0), $buttons_pack);
 	}
-	$pack->pack_start($buttons_pack, 0, 0, 0);
-	$buttons_pack->show;
+	$pack->pack_start(gtkshow($buttons_pack), 0, 0, 0);
     }
     gtkadd($mainw->{window}, $pack);
     $set_default_size->() if $has_scroll_always;
