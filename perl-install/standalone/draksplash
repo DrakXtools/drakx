@@ -384,7 +384,7 @@ sub mk_frame {
        my @popdown;
 	  if ($ref->{widget}{combo}{$1}) {
                   @popdown = @{$ref->{widget}{combo}{$1}};
-                  $ref->{widgets}{combo}{$1} = new Gtk2::Combo;
+                  $ref->{widgets}{combo}{$1} = $ref->{widget}{extras}{$1}{noneditable} ? Gtk2::OptionMenu->new : Gtk2::Combo->new;
                   $hboxes{$key}->add($ref->{widgets}{combo}{$1});
                   $ref->{widgets}{combo}{$1}->set_popdown_strings(@popdown);
      }
