@@ -1441,6 +1441,8 @@ It is not necessary on most networks."),
                         if ($a) {
                             # local $::isWizard = 0;
                             my $_w = $in->wait_message('', N("Testing your connection..."), 1);
+                            disconnect_backend($netc);
+                            sleep 1;
                             connect_backend($netc);
                             my $s = 30;
                             $type =~ /modem/ and $s = 50;
