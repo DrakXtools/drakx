@@ -267,7 +267,9 @@ foreach (@harddrake::data::tree) {
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         $custom_id .= ' ' while $data{$custom_id}; # get a unique id for eg bt8xx audio/video funtions
-        $_->{device} = '/dev/'.$_->{device} if $_->{device};
+        foreach my $field (qw(devfs_device device)) {
+            $_->{$field} = '/dev/'.$_->{$field} if $_->{$field};
+        }
         $tree_model->append_set($parent_iter, [ 1 => $custom_id ])->free;
         $data{$custom_id} = $_;
         $configurators{$custom_id} = $configurator;
