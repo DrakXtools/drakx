@@ -137,7 +137,7 @@ sub ask_okcancel {
 
     if ($::isWizard) {
 	$::no_separator = 1;
-    	$o->ask_from_no_check({ title => $title, messages => $message, focus_cancel => !$def });
+    	$o->ask_from_no_check({ title => $title, messages => $message, focus_cancel => !$def }, []);
     } else {
 	ask_from_list_($o, $title, $message, [ N_("Ok"), N_("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
     }
