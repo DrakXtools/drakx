@@ -133,11 +133,11 @@ foreach (@ARGV) { /^([^=:]*)[=:]?(.*)/ and $options{$1} = $2; /^no([^=:]*)/ and 
 
 #- default language fall to english ?
 foreach ($options{lang} || 'en') {
-    /fr/ and ($lang, $flang, $charset) = ('fr', 'fr_FR@euro', 'iso-8859-15');
+    /fr/ and ($lang, $flang, $charset) = ('fr', 'fr_FR', 'iso-8859-15');
     /en/ and ($lang, $flang, $charset) = ('en', 'en_US', 'iso-8859-1');
-    /de/ and ($lang, $flang, $charset) = ('de', 'de_DE@euro', 'iso-8859-15');
-    /it/ and ($lang, $flang, $charset) = ('it', 'it_IT@euro', 'iso-8859-15');
-    /es/ and ($lang, $flang, $charset) = ('es', 'es_ES@euro', 'iso-8859-15');
+    /de/ and ($lang, $flang, $charset) = ('de', 'de_DE', 'iso-8859-15');
+    /it/ and ($lang, $flang, $charset) = ('it', 'it_IT', 'iso-8859-15');
+    /es/ and ($lang, $flang, $charset) = ('es', 'es_ES', 'iso-8859-15');
 }
 foreach (keys %options) {
     print "Using option [$_" . ($options{$_} && "=$options{$_}") . "]\n";
