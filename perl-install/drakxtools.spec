@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 23mdk
+Release: 24mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Oct 11 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-24mdk
+- drakconnect (blino):
+  o delete wizard: remove /etc/sysconfig/network-scripts/ethX files
+  o ADSL configuration:
+    * remove /etc/sysconfig/network-scripts/ethX files that may have
+      been created by sagem scripts
+    * don't write ifcfg-ppp0 for static/dhcp connections
+
 * Fri Oct  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-23mdk
 - drakconnect:
   o fix encapsulation for chinese ISPs (Funda Wang, #10965)
