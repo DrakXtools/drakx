@@ -79,6 +79,14 @@ sub initrd {
     install_stripped("$instdir/init", "$mnt/sbin");
     install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
+    if ($type eq "network" || $type eq "all" || $type eq "other" || $type eq "blank") {
+	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
+	install_stripped("$instdir/rp-pppoe/pppoe-bin", "$mnt/sbin/pppoe");
+	_ "$sudo cp -a /dev/ppp $mnt/dev";
+	_ "$sudo cp -a /dev/ptyp0 $mnt/dev";
+	_ "$sudo cp -a /dev/ttyp0 $mnt/dev";
+    }
+
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
     if ($ftype eq "pcmcia" && $arch !~ /ppc/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
@@ -140,43 +148,43 @@ F1 help.msg
 F2 boot.msg
 label linux
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga=788
 label vgalo
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=785
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga=785
 label vgahi
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=791
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga=791
 label vga16
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic vga16
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 vga16
 label text
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic text
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 text
 label patch
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic patch vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 patch vga=788
 label expert
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic expert vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 expert vga=788
 label rescue
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic rescue rw
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 rescue rw
 label lnx4win
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $automatic lnx4win vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $automatic root=/dev/ram3 lnx4win vga=788
 label preinst
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom rescue oem rw
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
 label oem
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom rescue oem rw
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
 label auto
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $automatic auto_install=Mandrake/base/auto_inst.cfg.pl
 label all
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz pcmcia vga=788
+  append ramdisk_size=32000 initrd=$type.rdz pcmcia root=/dev/ram3 vga=788
 label ackbar
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz automatic=method:nfs,network:static,ip:192.168.1.205,dns:192.168.1.11,domain:mandrakesoft.com,server:ackbar,directory:/export vga=788
@@ -198,8 +206,8 @@ sub boot_img_alpha {
 
     mkdir "$mnt/etc", 0777;
     output("$mnt/etc/aboot.conf", 
-"0:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 $type
-1:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 text $type
+"0:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 root=/dev/ram3 $type
+1:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 root=/dev/ram3 text $type
 ");
     _ "sync";
     _ "df $mnt";
@@ -245,19 +253,19 @@ image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000$corporate\"
+  append=\"ramdisk_size=32000$corporate root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 text$corporate\"
+  append=\"ramdisk_size=32000 text$corporate root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 expert$corporate\"
+  append=\"ramdisk_size=32000 expert$corporate root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 ks$corporate\"
+  append=\"ramdisk_size=32000 ks$corporate root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=rescue
   initrd=/$boot/live.rdz
@@ -266,19 +274,19 @@ image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000$corporate\"
+  append=\"ramdisk_size=32000$corporate root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=text
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 text$corporate\"
+  append=\"ramdisk_size=32000 text$corporate root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=expert
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 expert$corporate\"
+  append=\"ramdisk_size=32000 expert$corporate root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 ks$corporate\"
+  append=\"ramdisk_size=32000 ks$corporate root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=rescue
   initrd=/$boot/live64.rdz
@@ -330,7 +338,7 @@ message=/boot.msg
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append=\"ramdisk_size=32000 $ltype$corporate\"
+  append=\"ramdisk_size=32000 $ltype$corporate root=/dev/ram3\"
 ");
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
