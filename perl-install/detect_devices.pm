@@ -283,13 +283,14 @@ sub probeSerialDevices {
     -l "/dev/mouse" and $serialprobe{"/dev/" . readlink "/dev/mouse"} = undef;
     foreach (keys %serialprobe) { m|^/dev/(.*)| and touch "/var/lock/LCK..$1" }
 
-    #- start probing all serial ports... really faster than before :-)
+    print STDERR "Please wait while probing serial ports...\n";
+    #- start probing all serial ports... really faster than before ...
+    #- ... but still take some time :-)
     local *F;
     open F, "serial_probe 2>/dev/null |";
     my %current = (); foreach (<F>) {
-	chomp;
 	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};
-	$current{$1} = $2 if /^([^=]+)=(.*)$/;
+	$current{$1} = $2 if /^([^=]+)=(.*?)\s*$/;
     }
     close F;
 

@@ -180,7 +180,7 @@ $o = $::o = {
     orderedSteps => \@orderedInstallSteps,
 
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
-#-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
+#-    intf => { eth0 => { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } },
 
 #-step : the current one
 #-prefix
@@ -373,18 +373,7 @@ STORAGE=
 sub configureNetwork {
     $::live and return;
     #- get current configuration of network device.
-    eval {
-	$o->{netc} ||= {}; $o->{intf} ||= [];
-	add2hash($o->{netc}, network::read_conf("$o->{prefix}/etc/sysconfig/network")) if -r "$o->{prefix}/etc/sysconfig/network";
-	add2hash($o->{netc}, network::read_resolv_conf("$o->{prefix}/etc/resolv.conf")) if -r "$o->{prefix}/etc/resolv.conf";
-	foreach (all("$o->{prefix}/etc/sysconfig/network-scripts")) {
-	    if (/ifcfg-(\w+)/ && $1 ne 'lo' && $1 !~ /ppp/) {
-		my $intf = network::findIntf($o->{intf}, $1);
-		add2hash($intf, { getVarsFromSh("$o->{prefix}/etc/sysconfig/network-scripts/$_") });
-	    }
-	}
-    };
-
+    eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
     $o->configureNetwork($_[1] == 1);
 }
 #------------------------------------------------------------------------------
@@ -658,7 +647,7 @@ sub main {
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	log::l("found network config file $file");
 	my $l = network::read_interface_conf($file);
-	add2hash(network::findIntf($o->{intf} ||= [], $l->{DEVICE}), $l);
+	add2hash(network::findIntf($o->{intf} ||= {}, $l->{DEVICE}), $l);
     }
 
     #-the main cycle

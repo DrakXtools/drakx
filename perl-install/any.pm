@@ -400,7 +400,7 @@ END
 }
 
 sub miscellaneousNetwork {
-    my ($in, $prefix) = @_;
+    my ($prefix) = @_;
     setVarsInSh ("$prefix/etc/profile.d/proxy.sh",  $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
     setVarsInCsh("$prefix/etc/profile.d/proxy.csh", $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
 }

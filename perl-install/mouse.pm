@@ -167,22 +167,30 @@ sub detect() {
         return name2mouse("Apple ADB Mouse");
     }
 
-    detect_devices::hasMousePS2 and return { %{name2mouse("Generic Mouse (PS/2)")}, unsafe => 1 };
+    #- probe serial device to make sure a wacom has been detected.
+    eval { commands::modprobe("serial") };
+    my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
+
+    detect_devices::hasMousePS2 and return { %{name2mouse("Generic Mouse (PS/2)")}, unsafe => 1 }, $wacom;
 
     if (modules::get_alias("usb-interface") && detect_devices::hasUsbMouse()) {
 	eval { 
 	    modules::load("usbmouse");
 	    modules::load("mousedev");
 	};
-	!$@ && detect_devices::tryOpen("usbmouse") and return name2mouse("USB Mouse");
+	!$@ && detect_devices::tryOpen("usbmouse") and return name2mouse("USB Mouse"), $wacom;
 	eval { 
 	    modules::unload("mousedev");
 	    modules::unload("usbmouse");
 	}
     }
 
-    eval { commands::modprobe("serial") };
-    my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
+    #- in case only a wacom has been found, assume an inexistant mouse (necessary).
+    $wacom and 	return { CLASS      => 'MOUSE',
+			 nbuttons   => 2,
+			 device     => "nothing",
+			 MOUSETYPE  => "Microsoft",
+			 XMOUSETYPE => "Microsoft"}, $wacom;
 
     #- defaults to generic serial mouse on ttyS0.
     #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)

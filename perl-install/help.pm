@@ -11,12 +11,11 @@ __("Choose preferred language for install and system usage."),
 selectKeyboard =>
  __("Choose the layout corresponding to your keyboard from the list above"),
 
-selectInstallClass => [
+selectInstallClass =>
  __("Choose \"Install\" if there are no previous versions of GNU/Linux
 installed, or if you wish to use multiple distributions or versions.
 
-Choose \"Rescue\" if you wish to rescue a previous version of Mandrake Linux:
-%s or %s.
+Choose \"Rescue\" if you wish to rescue a version of Linux-Mandrake already installed.
 
 
 Select:
@@ -30,7 +29,7 @@ Select:
     perform a highly customized installation. As for a \"Customized\"
     installation class, you will be able to select the usage for your system.
     But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!
-"), '5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold 2000', '7.0 (Air)' ],
+"), #-'5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold 2000', '7.0 (Air)' ],
 
 selectInstallClassCorpo =>
  __("Select:

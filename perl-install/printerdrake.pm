@@ -36,17 +36,19 @@ sub setup_local($$$) {
 						$_->{val}{DESCRIPTION}) . $_->{port};
     }
     if (@str) {
-	@port = map { $_->{port} } @parport;
+	@port = map { $_->{port} } grep { $_->{val}{DESCRIPTION} } @parport;
+	#- in such case for a beginner, do not ask the port, get the first one.
+	!$::expert && @port > 0 and $in = undef;
     } else {
 	@port = detect_devices::whatPrinterPort();
     }
     $printer->{DEVICE} = $port[0] if $port[0];
 
-    return if !$in->ask_from_entries_refH(_("Local Printer Device"),
-					  _("What device is your printer connected to 
+    $in and return if !$in->ask_from_entries_refH(_("Local Printer Device"),
+						  _("What device is your printer connected to 
 (note that /dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
 _("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
-					 );
+					         );
 
     #- make the DeviceURI from DEVICE.
     $printer->{DeviceURI} = ($printer->{DEVICE} =~ /usb/ ? "usb:" : "parallel:") . $printer->{DEVICE};

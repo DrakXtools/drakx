@@ -1,3 +1,18 @@
+2000-09-12  François Pons  <fpons@mandrakesoft.com>
+
+	* detect_devices.pm, mouse.pm: moved probing serial port before to
+	detect a wacom tablet (even if a PS/2 or USB mouse is found).
+	* help.pm: corrected reference to previous version of LM (jloup).
+	* install2.pm: removed duplicate code for getting network
+	configuration, using network module.
+	* netconnect.pm: intf is now a hash and no more an array.
+	* network.pm: changed nature of intf to hash from array, reworked
+	write_resolv_conf function to keep old code in comment but only
+	when not used anymore (to make it easier by hand modification).
+	* printer.pm: SOCKET accessible to expert only (jloup).
+	* printerdrake.pm: local port only available for expert if a
+	printer has been detected (jloup).
+
 2000-09-11  François Pons  <fpons@mandrakesoft.com>
 
 	* Xconfigurator.pm: reorganized choices of 3D optimizations, added
