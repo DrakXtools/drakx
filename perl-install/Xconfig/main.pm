@@ -64,10 +64,10 @@ sub configure_everything {
     my $X = {};
     my $ok = 1;
 
-    my $ddc_info = Xconfig::monitor::getinfoFromDDC();
-    $options->{VideoRam_probed} = $ddc_info->{VideoRam_probed};
+    my $probed_info = Xconfig::monitor::probe();
+    $options->{VideoRam_probed} = $probed_info->{VideoRam_probed};
     $ok &&= $X->{card} = Xconfig::card::configure($in, $raw_X, $do_pkgs, $auto, $options);
-    $ok &&= $X->{monitors} = Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices), $ddc_info, $auto);
+    $ok &&= $X->{monitors} = Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices), $probed_info, $auto);
     $ok &&= Xconfig::screen::configure($raw_X);
     $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitors}, $auto);
     $ok &&= Xconfig::test::test($in, $raw_X, $X->{card}, '', 'skip_badcard') if !$auto;

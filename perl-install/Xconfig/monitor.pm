@@ -33,11 +33,11 @@ my @HorizSync_ranges = (
 );
 
 sub configure {
-    my ($in, $raw_X, $nb_monitors, $o_ddc_info, $b_auto) = @_;
+    my ($in, $raw_X, $nb_monitors, $o_probed_info, $b_auto) = @_;
 
     my $monitors = [ $raw_X->get_or_new_monitors($nb_monitors) ];
-    if ($o_ddc_info) {
-	put_in_hash($monitors->[0], $o_ddc_info);
+    if ($o_probed_info) {
+	put_in_hash($monitors->[0], $o_probed_info);
     }
     my $head_nb = 1;
     foreach my $monitor (@$monitors) {
@@ -63,14 +63,15 @@ sub configure_auto_install {
     mapn {
 	my ($monitor, $auto_install_monitor) = @_;
 	put_in_hash($monitor, $auto_install_monitor);
+	configure_automatic($monitor);
     } $monitors, $old_X->{monitors} if $old_X->{monitors};
 
-    if (!$monitors->[0]{HorizSync} && !($monitors->[0]{VendorName} && $monitors->[0]{ModelName})) {
-	put_in_hash($monitors->[0], getinfoFromDDC());
+    if (!is_valid($monitors->[0])) {
+	put_in_hash($monitors->[0], probe());
     }
 
     foreach my $monitor (@$monitors) {
-	if (!configure_automatic($monitor)) {
+	if (!is_valid($monitor)) {
 	    good_default_monitor() =~ /(.*)\|(.*)/ or internal_error("bad good_default_monitor");
 	    put_in_hash($monitor, { VendorName => $1, ModelName => $2 });
 	    configure_automatic($monitor) or internal_error("good_default_monitor (" . good_default_monitor()  . ") is unknown in MonitorsDB");
@@ -83,7 +84,7 @@ sub configure_auto_install {
 sub choose {
     my ($in, $monitor, $head_nb, $b_auto) = @_;
 
-    my $ok = configure_automatic($monitor);
+    my $ok = is_valid($monitor);
     if ($b_auto) {
 	log::l("Xconfig::monitor: auto failed") if !$ok;
 	return $ok;
@@ -99,7 +100,7 @@ sub choose {
 	    my $merged_name = $monitor->{VendorName} . '|' . $monitor->{ModelName};
 
 	    if (!exists $h_monitors{$merged_name}) {
-		$merged_name = $monitor->{HorizSync} ? 'Custom' : good_default_monitor();
+		$merged_name = is_valid($monitor) ? 'Custom' : good_default_monitor();
 	    } else {
 		$merged_name;
 	    }
@@ -121,12 +122,15 @@ sub choose {
     if ($merged_name eq "Plug'n Play") {
 	local $::noauto = 0; #- hey, you asked for plug'n play, so i do probe!
 	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
-	put_in_hash($monitor, getinfoFromDDC()) if $head_nb <= 1;
-	if ($head_nb > 1 || configure_automatic($monitor)) {
-	    $monitor->{VendorName} = "Plug'n Play";
+	if ($head_nb <= 1) {
+	    if (my $probed_info = probe()) {
+		put_in_hash($monitor, $probed_info);
+	    } else {
+		$in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));
+		goto ask_monitor;
+	    }
 	} else {
-	    $in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));
-	    goto ask_monitor;
+	    $monitor->{VendorName} = "Plug'n Play";
 	}
     } elsif ($merged_name eq 'Custom') {
 	$in->ask_from('',
@@ -155,7 +159,7 @@ sub configure_automatic {
 	if (my $mon = find { lc($_->{EISA_ID}) eq $monitor->{EISA_ID} } monitors_db()) {
 	    add2hash($monitor, $mon);
 	    log::l("EISA_ID corresponds to: $monitor->{ModelName}");
-	} elsif (!$monitor->{HorizSync} || !$monitor->{VertRefresh}) {
+	} elsif (!is_valid($monitor)) {
 	    log::l("unknown EISA_ID and partial DDC probe, so unknown monitor");
 	    delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};	    
 	}
@@ -164,11 +168,23 @@ sub configure_automatic {
 	    put_in_hash($monitor, $mon);
 	}
     }
-
-    return $monitor->{HorizSync} && $monitor->{VertRefresh};
+    is_valid($monitor);
 }
 
-sub getinfoFromDDC() {
+sub is_valid {
+    my ($monitor) = @_;
+    $monitor->{HorizSync} && $monitor->{VertRefresh};
+}
+
+sub probe() {
+    my $monitor = probe_DDC();
+    if (!configure_automatic($monitor || {})) {
+	$monitor = probe_DMI();
+    }
+    is_valid($monitor) && $monitor;
+}
+
+sub probe_DDC() {
     my ($edid, $vbe) = any::monitor_full_edid() or return;
     my $monitor = eval($edid);
 
@@ -198,6 +214,21 @@ sub getinfoFromDDC() {
 	$monitor->{ModelName} = $monitor->{monitor_name};
     }
     $monitor;
+}
+
+sub probe_DMI() {
+    my ($res) = my @res = uniq(map { if_($_->{driver} =~ /^Resolution:(.*)/, $1) } detect_devices::probeall()) or return;
+    if (@res > 1) {
+	log::l("oops, more than one resolution from DMI and pci probe: ", join(' ', @res));
+    }
+    my ($X, $Y) = $res =~ /(\d+)x(\d+)/ or log::l("bad resolution $res"), return;
+
+    {
+	VendorName => 'Generic',
+	ModelName => "Flat Panel $res",
+	HorizSync => '31.5-100', VertRefresh => '60',
+	preferred_resolution => { X => $X, Y => $Y },
+    };
 }
 
 my $monitors_db;
