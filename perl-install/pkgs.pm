@@ -343,14 +343,21 @@ sub unselectAllPackages($) {
 				 callback_choices => \&packageCallbackChoices);
 }
 
+sub urpmidir {
+    my ($prefix) = @_;
+    my $v = "$prefix/var/lib/urpmi";
+    -l $v && !-e _ and unlink $v and mkdir $v, 0755; #- dangling symlink
+    -w $v ? $v : '/tmp';
+}
+
 sub psUpdateHdlistsDeps {
     my ($prefix, $_method, $packages) = @_;
     my $need_copy = 0;
+    my $urpmidir = urpmidir($prefix);
 
     #- check if current configuration is still up-to-date and do not need to be updated.
     foreach (values %{$packages->{mediums}}) {
 	$_->{selected} || $_->{ignored} or next;
-	my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
 	my $hdlistf = "$urpmidir/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	my $synthesisf = "$urpmidir/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	if (-s $hdlistf != $_->{hdlist_size}) {
@@ -366,7 +373,6 @@ sub psUpdateHdlistsDeps {
 
     if ($need_copy) {
 	#- this is necessary for urpmi.
-	my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
 	install_any::getAndSaveFile("Mandrake/base/$_", "$urpmidir/$_") foreach qw(rpmsrate);
     }
 }
@@ -407,7 +413,7 @@ sub psUsingHdlists {
 sub psUsingHdlist {
     my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey) = @_;
     my $fakemedium = "$descr ($method$medium)";
-    my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
+    my $urpmidir = urpmidir($prefix);
     log::l("trying to read $hdlist for medium $medium");
 
     #- if the medium already exist, use it.
@@ -618,7 +624,7 @@ sub saveCompssUsers {
 	    }
 	}
     }
-    my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
+    my $urpmidir = urpmidir($prefix);
     output "$urpmidir/compssUsers.flat", $flat;
 }
 
