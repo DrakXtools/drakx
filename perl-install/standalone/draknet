@@ -201,7 +201,10 @@ Try to reconfigure your connection."));
 				  netconnect::disconnect_backend($prefix);
 				  sleep 5;
 				  my $up=netconnect::connected($prefix, $netc);
-				  $l->set($up ? _("The connection is not closed. Try to do it manually by running /etc/sysconfig/network-scripts/net_cnx_down in root.") : _("The system is now disconnected.") );
+				  $l->set($up ? _("The connection is not closed.
+Try to do it manually by running
+/etc/sysconfig/network-scripts/net_cnx_down
+in root.") : _("The system is now disconnected.") );
 			      }
 			      $button_ok->set_sensitive(1);
 			      Gtk->main();
