@@ -553,7 +553,8 @@ END
 	chmod 0600, $secrets;
     } #- CHAP is not supported by initscripts, need patching before doing more on that here!
 
-    install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
+    #-install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
+    install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", "$o->{prefix}/usr/share/config/kppprc", %toreplace);
 
     miscellaneousNetwork($o);
 }
