@@ -81,9 +81,9 @@ sub resolve_and_ping {
     } else {
         $p = Net::Ping->new('icmp');
     }
-    $p->Net::Ping::hires;       #- get ping as float
+    $p->hires; #- get ping as float
     #- default timeout is 5 seconds
-    my ($ret, $ping, $address) = $p->Net::Ping::ping($hostname, 5);
+    my ($ret, $ping, $address) = $p->ping($hostname, 5);
     if ($ret) {
         return $address, $ping;
     } elsif (defined($ret)) {
@@ -98,7 +98,7 @@ sub update_status {
         fcntl($fd, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
         local $| = 1;
         if (defined(my $output = <$fd>)) {
-            ($o->{address}, $o->{ping}) = $output =~ /^([\d\.]+)\|([\d\.\,]+)*$/;
+            ($o->{address}, $o->{ping}) = $output =~ /^([\d\.]+)\|([\d\.,]+)*$/;
             $o->{done} = 1;
             undef $o->{kid};
         }
