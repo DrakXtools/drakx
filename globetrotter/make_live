@@ -136,7 +136,7 @@ sub installPackages() {
     !$pid and do {
         while (1) {
             sleep(10);
-            run_program::run('/usr/bin/killall', 'gconftool-2');
+            run_program::run('/usr/bin/killall', 'gconftool-2') if -x '/usr/bin/killall';
         }
     };
     my $_b = before_leaving { kill 'TERM', $pid if $pid };
