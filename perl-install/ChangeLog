@@ -1,3 +1,95 @@
+2001/01/26  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (installPackages): prepare for advertising...
+
+	* interactive_newt.pm (ask_from_entries_refW): major rework for new
+	format, still need work
+	(ask_from_entries_refW): use NEWT_FLAG_PASSWORD (aka 1<<11) instead of
+	NEWT_FLAG_HIDDEN
+	(myTextbox): wrap the text if needed
+	(myTextbox): use a vertical scrollbar if needed
+
+	* Newt/Newt.xs (newtFormAddGrid): new name for
+	newtGridAddComponentsToForm, swap
+	parameters for much better understanding
+	(newtListboxGetCurrent): returns a SV (together with
+	newtListboxAddEntry)
+	(newtListboxAddEntry): data is now a SV
+
+2001/01/25  dam's  <damien@mandrakesoft.com>
+
+	* install2.pm: disable steps 'packages choice', 'configure X', and
+	'configure' 'printer'
+
+	* install_steps_interactive.pm: don't oblige user addition
+
+	* network.pm: display ethernet module
+
+	* netconnect.pm: network informations filled into
+	$prefix/var/lib/naat/configuration
+
+2001/01/25  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stage1-data/stage1.tar.bz2: restore symlink /sbin/sh ->
+	/usr/bin/sh for stage2
+
+	* mdk-stage1/probing.h: better tightness of probing stuff
+
+	* mdk-stage1/probing.c: better tightness of probing stuff
+	print warning message when insmod of PCI-detected device fails
+
+	* mdk-stage1/stage1.c: 
+	  - mdk-stage1: now linux-2.4 uses floppy.o to access floppy drives
+	  - remove fat/vfat modules from some boot floppies now that we don't
+	need it anymore
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: re-integrate autoprobe of
+	tulip network cards, kernel-2.4 has strange way to classify some of its
+	net modules..
+
+2001/01/25  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/it.po: Waw, italian translator is very fast :)
+	updated Indonesian and Italian fiels
+
+	* share/po/id.po: updated Indonesian and Italian fiels
+
+	* share/locales.tar.bz2: added iso9 locale definitions
+
+	* lang.pm: fixed LANGUAGE for mk locale
+
+2001/01/25  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (spawnShell): fix error message
+
+2001/01/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stage1-data/stage1.tar.bz2: 
+	  - clean up deprecated symlinks (insmod, rmmod, cardmgr)
+	  - remove unecessary device files
+
+	* mdk-stage1/pcmcia/cardmgr.c, mdk-stage1/pcmcia/lex_config.c,
+	mdk-stage1/pcmcia/vg468.h, mdk-stage1/pcmcia/cardmgr.h,
+	mdk-stage1/pcmcia/bulkmem.h, mdk-stage1/pcmcia/i82365.h,
+	mdk-stage1/pcmcia/cirrus.h, mdk-stage1/pcmcia/driver_ops.h,
+	mdk-stage1/pcmcia/config.h, mdk-stage1/pcmcia/version.h,
+	mdk-stage1/pcmcia/cistpl.h, mdk-stage1/stage1.c,
+	mdk-stage1/pcmcia_config.patch, mdk-stage1/pcmcia/cs.h,
+	mdk-stage1/pcmcia/Makefile, mdk-stage1/pcmcia/ds.h,
+	mdk-stage1/pcmcia/pcmcia.h, mdk-stage1/pcmcia/cs_types.h,
+	mdk-stage1/pcmcia/yacc_config.c, mdk-stage1/Makefile,
+	mdk-stage1/pcmcia/tcic.h, mdk-stage1/pcmcia/yacc_config.h,
+	mdk-stage1/pcmcia/pcmcia_probe.c: stage1: add pcmcia
+
+2001/01/24  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm (%types): s|Compaq|Compaq/HP| per request of fpitoun
+
+	* install_steps.pm (afterInstallPackages): cleanup
+
+	* interactive.pm: better documentation of ask_from_entries_refH features
+	(entry)
+
 2001/01/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/stage1-data/stage1.tar.bz2: 
