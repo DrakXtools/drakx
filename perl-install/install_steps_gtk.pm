@@ -416,7 +416,7 @@ sub choosePackagesTree {
 				}
 			    },
 			    grep_allowed_to_toggle => sub {
-				grep { !pkgs::packageFlagBase(pkgs::packageByName($packages, $_)) } @_;
+				grep { $_ ne _("Other") && !pkgs::packageFlagBase(pkgs::packageByName($packages, $_)) } @_;
 			    },
 			    grep_unselected => sub {
 				grep { !pkgs::packageFlagSelected(pkgs::packageByName($packages, $_)) } @_;
