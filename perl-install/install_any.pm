@@ -1,6 +1,5 @@
 package install_any; # $Id$
 
-use diagnostics;
 use strict;
 
 use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $boot_medium $current_medium $asked_medium @advertising_images);
@@ -39,6 +38,13 @@ $asked_medium = $boot_medium;
 my $postinstall_rpms = '';
 my $cdrom;
 my %iso_images;
+
+sub mountCdrom($;$) {
+    my ($mountpoint, $cdrom_) = @_;
+    $cdrom_ = $cdrom if !defined $cdrom_;
+    eval { fs::mount($cdrom_, $mountpoint, "iso9660", 'readonly') };
+}
+
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
@@ -64,6 +70,7 @@ sub askChangeMedium($$) {
     my ($method, $medium) = @_;
     my $allow;
     do {
+	local $::o->{method} = $method = 'cdrom' if $medium =~ /^\d+s$/; #- Suppl CD
 	eval { $allow = changeMedium($method, $medium) };
     } while $@; #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
     log::l($allow ? "accepting medium $medium" : "refusing medium $medium");
@@ -137,7 +144,7 @@ sub errorOpeningFile($) {
 	ejectCdrom($cdrom);
 	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
 	    $current_medium = $asked_medium;
-	    eval { fs::mount($cdrom, "/tmp/image", "iso9660", 'readonly') };
+	    mountCdrom("/tmp/image");
 	    my $getFile = getFile($file); 
 	    $getFile && @advertising_images and copy_advertising($::o);
 	    $getFile and return $getFile;
@@ -154,6 +161,9 @@ sub errorOpeningFile($) {
 	}
     }
 
+    #- Don't unselect supplementary CDs.
+    return if $asked_medium =~ /^\d+s$/;
+
     #- keep in mind the asked medium has been refused on this way.
     #- this means it is no more selected.
     $::o->{packages}{mediums}{$asked_medium}{selected} = undef;
@@ -165,7 +175,7 @@ sub errorOpeningFile($) {
     return;
 }
 sub getFile {
-    my ($f, $o_method) = @_;
+    my ($f, $o_method, $altroot) = @_;
     log::l("getFile $f:$o_method");
     my $rel = relGetFile($f);
     do {
@@ -182,11 +192,13 @@ sub getFile {
 	    require http;
 	    http::getFile("$ENV{URLPREFIX}/$rel");
 	} else {
-	    #- try to open the file, but examine if it is present in the repository, this allow
-	    #- handling changing a media when some of the file on the first CD has been copied
-	    #- to other to avoid media change...
+	    #- try to open the file, but examine if it is present in the repository,
+	    #- this allows handling changing a media when some of the files on the
+	    #- first CD have been copied to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
-	    $f2 = "/tmp/image/$rel" if !$postinstall_rpms || !-e $f2;
+	    $altroot = '/tmp/image' unless $altroot;
+	    $f2 = "$altroot/$rel" if !$postinstall_rpms || !-e $f2;
+	    $f2 = $rel if $rel =~ m!^/! && !-e $f2; #- not a relative path
 	    my $F; open($F, $f2) && $F;
 	}
     } || errorOpeningFile($f);
@@ -343,7 +355,53 @@ sub setPackages {
 
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
-	$o->{packages} = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
+	my $cdrom;
+	($o->{packages}, my $suppl_CDs) = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
+
+	#- ask whether there are supplementary CDs
+	SUPPL: {
+	    if ($suppl_CDs && !$o->{isUpgrade}
+	        && $o->ask_yesorno('', N("Do you have a supplementary CD to install?"), 0))
+	    {
+		#- by convention, the media names for suppl. CDs match /^\d+s$/
+		my $medium = '1s'; #- supplement 1
+		local $::isWizard = 0;
+		local $o->{method} = 'cdrom';
+		(my $cdromdev) = detect_devices::cdroms();
+		last SUPPL if !$cdromdev;
+		$cdrom = $cdromdev->{device};
+		my $dev = devices::make($cdrom);
+		ejectCdrom($cdrom);
+		if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
+		    mountCdrom("/mnt/cdrom", $cdrom);
+		    log::l($@) if $@;
+		    useMedium($medium);
+		    my $supplmedium = pkgs::psUsingHdlist(
+			$o->{prefix}, # /mnt
+			'cdrom',
+			$o->{packages},
+			"hdlist$medium.cz",
+			$medium,
+			'Mandrake/RPMS',
+			"Supplementary CD $medium",
+			1, # selected
+			"/mnt/cdrom/Mandrake/base/hdlist$medium.cz",
+		    );
+		    if ($supplmedium) {
+			log::l("read suppl hdlist");
+			$supplmedium->{prefix} = "removable://mnt/cdrom"; #- pour install_urpmi
+			$supplmedium->{selected} = 1;
+			$supplmedium->{method} = 'cdrom';
+		    } else {
+			log::l("no suppl hdlist");
+		    }
+		    #- TODO loop if there are several supplementary CDs
+		    # ++$medium; $medium .= "s";
+		}
+	    } else {
+		$suppl_CDs = 0;
+	    }
+	}
 
 	#- open rpm db according to right mode needed.
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
@@ -357,12 +415,36 @@ sub setPackages {
 			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
 	#- must be done after getProvides
-	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
-	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{meta_class});
+	#- if there is a supplementary CD, override the rpmsrate/compssUsers
+	pkgs::read_rpmsrate(
+	    $o->{packages},
+	    getFile($suppl_CDs ? "/mnt/cdrom/Mandrake/base/rpmsrate" : "Mandrake/base/rpmsrate")
+	);
+	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers(
+	    $o->{meta_class},
+	    $suppl_CDs ? "/mnt/cdrom/Mandrake/base/compssUsers" : "",
+	);
 
 	#- preselect default_packages and compssUsersChoices.
 	setDefaultPackages($o);
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+
+	#- umount supplementary CD. Will re-ask for it later
+	if ($suppl_CDs) {
+	    getFile("XXX"); #- close still opened filehandles
+	    log::l("Umounting suppl. CD");
+	    eval { fs::umount("/mnt/cdrom") };
+	    #- re-mount CD 1 if this was a cdrom install
+	    if ($o->{method} eq 'cdrom') {
+		eval { 
+		    my $dev = detect_devices::tryOpen($cdrom);	    
+		    ioctl($dev, c::CDROMEJECT(), 1);
+		};
+		$o->ask_warn('', N("Insert the CD 1 again"));
+		mountCdrom("/tmp/image", $cdrom);
+		$asked_medium = 1;
+	    }
+	}
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
@@ -588,7 +670,8 @@ sub install_urpmi {
 					   cdrom => "removable://mnt/cdrom" }}{$method} ||
 		       #- for live_update or live_install script.
 		       readlink("/tmp/image/Mandrake") =~ m,^(/.*)/Mandrake/*$, && "removable:/$1") . "/$_->{rpmsdir}";
-	    my $need_list = $dir =~ m,^(?:[^:]*://[^/:\@]*:[^/:\@]+\@|.*%{),; #- use list file only if visible password or macro.
+	    #- use list file only if visible password or macro.
+	    my $need_list = $dir =~ m,^(?:[^:]*://[^/:\@]*:[^/:\@]+\@|.*%{),; #- }
 
 	    #- build a list file if needed.
 	    if ($need_list) {
@@ -596,7 +679,7 @@ sub install_urpmi {
 		open(my $LIST, ">$prefix/var/lib/urpmi/list.$name") or log::l("failed to write list.$name");
 		umask $mask;
 
-		#- build list file using internal data, synthesis file should exists.
+		#- build list file using internal data, synthesis file should exist.
 		if ($_->{end} > $_->{start}) {
 		    #- WARNING this method of build only works because synthesis (or hdlist)
 		    #-         has been read.
@@ -640,7 +723,7 @@ sub install_urpmi {
 	    } else {
 		$with = $_->{rpmsdir};
 		$with =~ s|/[^/]*%{ARCH}.*||;
-		$with =~ s|/+|/|g; $with =~ s|/$||; $with =~ s|[^/]||g; $with =~ s|/|../|g;
+		$with =~ s|/+|/|g; $with =~ s|/$||; $with =~ s|[^/]||g; $with =~ s!/!../!g;
 		$with .= "../Mandrake/base/$_->{hdlist}";
 	    }
 

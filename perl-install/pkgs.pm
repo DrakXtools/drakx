@@ -1,6 +1,5 @@
 package pkgs; # $Id$
 
-use diagnostics;
 use strict;
 
 use MDK::Common::System;
@@ -83,6 +82,11 @@ sub extractHeaders {
 	$_->update_header($f) or log::l("unable to open header file $f"), next;
 	log::l("read header file $f");
     }
+}
+
+sub isSupplCDMedium($) {
+    my ($medium) = @_;
+    $medium->{method} eq 'cdrom' && $medium->{medium} =~ /^\d+s$/;
 }
 
 #- TODO BEFORE TODO
@@ -371,6 +375,7 @@ sub psUsingHdlists {
     my ($prefix, $method) = @_;
     my $listf = install_any::getFile('Mandrake/base/hdlists') or die "no hdlists found";
     my $packages = new URPM;
+    my $suppl_CDs = 0;
 
     #- add additional fields used by DrakX.
     @$packages{qw(count mediums)} = (0, {});
@@ -381,6 +386,9 @@ sub psUsingHdlists {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
+	#- we'll ask afterwards for supplementary CDs, if the hdlists file contains
+	#- a line that begins with "suppl"
+	if (/^suppl/) { $suppl_CDs = 1; next }
 	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die qq(invalid hdlist description "$_" in hdlists file);
 
 	#- make sure the first medium is always selected!
@@ -393,7 +401,7 @@ sub psUsingHdlists {
     log::l("psUsingHdlists read " . int(@{$packages->{depslist}}) .
 	   " headers on " . int(keys %{$packages->{mediums}}) . " hdlists");
 
-    $packages;
+    return ($packages, $suppl_CDs);
 }
 
 sub psUsingHdlist {
@@ -448,7 +456,10 @@ sub psUsingHdlist {
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
-    $m->{ignored} ||= install_any::method_allows_medium_change($method) && $medium > 1 && !common::usingRamdisk();
+    $m->{ignored} ||= (
+	install_any::method_allows_medium_change($method) && $medium > 1    #- first cdrom
+	&& $medium !~ /^\d+s/			#- not a suppl. CD
+	&& !common::usingRamdisk());
 
     #- parse synthesis (if available) of directly hdlist (with packing).
     if ($m->{ignored}) {
@@ -560,9 +571,9 @@ sub read_rpmsrate {
 }
 
 sub readCompssUsers {
-    my ($meta_class) = @_;
+    my ($meta_class, $file) = @_;
 
-    my $file = 'Mandrake/base/compssUsers';
+    $file = 'Mandrake/base/compssUsers' if !$file;
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
     readCompssUsers_raw($f);
 }
@@ -920,13 +931,28 @@ sub installTransactionClosure {
     $medium or return (); #- no more medium usable -> end of installation by returning empty list.
     ($min_id, $max_id) = ($medium->{start}, $medium->{end});
 
+    #- Supplementary CD : switch temporarily to "cdrom" method
+    my $suppl_CD = isSupplCDMedium($medium);
+    local $::o->{method} = do {
+	my $cdrom;
+	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
+	if (!defined $cdrom) {
+	    (my $cdromdev) = detect_devices::cdroms();
+	    $cdrom = $cdromdev->{device};
+	    log::l("cdrom redetected at $cdrom");
+	    my $dev = devices::make($cdrom);
+	    install_any::ejectCdrom($cdrom) if $::o->{method} eq 'cdrom'; # will umount /tmp/image
+	    install_any::mountCdrom("/mnt/cdrom", $cdrom);
+	} else { log::l("cdrom already found at $cdrom") }
+	'cdrom';
+    } if $suppl_CD;
     #- it is sure at least one package will be installed according to medium chosen.
     install_any::useMedium($medium->{medium});
     if (install_any::method_allows_medium_change($medium->{method})) {
 	my $pkg = $packages->{depslist}[$l[0]];
 
 	#- force changeCD callback to be called from main process.
-	install_any::getFile($pkg->filename, $medium->{descr});
+	install_any::getFile($pkg->filename, $medium->{descr}, $suppl_CD ? '/mnt/cdrom' : undef);
 	#- close opened handle above.
 	install_any::getFile('XXX');
     }
@@ -1062,7 +1088,8 @@ sub install($$$;$$) {
 		    my $trans = $db->create_transaction($prefix);
 		    if ($retry_pkg) {
 			log::l("opened rpm database for retry transaction of 1 package only");
-			$trans->add($retry_pkg, $isUpgrade && allowedToUpgrade($retry_pkg->name));
+			$trans->add($retry_pkg, $isUpgrade && allowedToUpgrade($retry_pkg->name))
+			    or log::l("add failed for ".$retry_pkg->fullname);
 		    } else {
 			log::l("opened rpm database for transaction of " . int(@transToInstall) .
 			       " new packages, still $nb after that to do");
@@ -1082,7 +1109,12 @@ sub install($$$;$$) {
 						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
 						print $LOG "$f\n";
-						$fd = install_any::getFile($f, $medium->{descr});
+						if (isSupplCDMedium($medium)) {
+						    #- supplementary CD already mounted in /mnt/cdrom
+						    $fd = install_any::getFile($f, $medium->{descr}, '/mnt/cdrom');
+						} else {
+						    $fd = install_any::getFile($f, $medium->{descr});
+						}
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
 						my ($data, $_type, $id) = @_;
@@ -1176,6 +1208,7 @@ sub install($$$;$$) {
 
     log::l("closing install.log file");
     close $LOG;
+    eval { fs::umount("/mnt/cdrom") };
 
     cleanHeaders($prefix);
 
