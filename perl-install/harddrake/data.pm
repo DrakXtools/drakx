@@ -238,7 +238,7 @@ our @tree =
       icon => "memory.png",
       configurator => "",
       detector => sub { f(modules::probe_category('various/agpgart')) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
