@@ -108,6 +108,7 @@ sub selectLanguage {
     }
 
     lang::set($o->{locale}, !$o->isa('interactive::gtk'));
+    add2hash_($o->{locale}, { utf8 => lang::utf8_should_be_needed($o->{locale}) });
 
     log::l("selectLanguage: pack_langs: ", lang::pack_langs($o->{locale}{langs}), " utf8-flag: ", to_bool($o->{locale}{utf8}));
 
