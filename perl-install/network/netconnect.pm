@@ -213,7 +213,7 @@ sub real_main {
       };
 
       my $handle_multiple_cnx = sub {
-          $need_restart_network = member($netcnx->{type}, qw(cable lan)) || $netcnx->{type} eq 'adsl' && $adsl_devices{$ntf_name};
+          $need_restart_network = member($netcnx->{type}, qw(cable lan)) || $netcnx->{type} eq 'adsl' && !$adsl_devices{$ntf_name};
           my $nb = keys %{$netc->{internet_cnx}};
           if (1 < $nb) {
               return "multiple_internet_cnx";
