@@ -2581,6 +2581,9 @@ sub check_network {
 	}
     }
 
+    # Do not try to start the network if it is not configured
+    if (!printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) { return 0 }
+
     # Second check: Is the network running?
 
     if (printer::network_running()) { return 1 }

@@ -274,19 +274,23 @@ sub assure_device_is_available_for_cups {
     # file:/dev/null instead. Restart CUPS if necessary to assure that
     # CUPS knows the device.
     my ($device) = @_;
-    local *F; 
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" or
+    my $result;
+    for ($i = 0; $i < 3; $i++) {
+	local *F; 
+	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
+	    "/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" or
 	    die "Could not run \"lpinfo\"!";
-    while (my $line = <F>) {
-	if ($line =~ /$device/) { # Found a line containing the device name,
-	                          # so CUPS knows it.
-	    close F;
-	    return 1;
+	while (my $line = <F>) {
+	    if ($line =~ /$device/) { # Found a line containing the device
+		                      # name, so CUPS knows it.
+		close F;
+		return 1;
+	    }
 	}
+	close F;
+	$result = SIGHUP_daemon("cups");
     }
-    close F;
-    return SIGHUP_daemon("cups");
+    return $result;
 }
 
 sub network_running {
@@ -415,6 +419,11 @@ sub getIPsInLocalNetworks {
 
     # subroutine determines the list of all hosts reachable in the local
     # networks by means of pinging the broadcast addresses.
+    
+    # Return an empty list if no network is running
+    if (!network_running()) {
+	return ();
+    }
     
     # Read the output of "ifconfig" to determine the broadcast addresses of
     # the local networks
