@@ -1218,84 +1218,110 @@ sub install($$$;$$) {
 	#- and make sure there are no staling open file descriptor too (before forking)!
 	install_any::getFile('XXX');
 
-	local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
-	if (my $pid = fork()) {
-	    close OUTPUT;
-	    my $error_msg = '';
-	    local $_;
-	    while (<INPUT>) {
-		if (/^die:(.*)/) {
-		    $error_msg = $1;
-		    last;
-		} else {
-		    chomp;
-		    my @params = split ":";
-		    if ($params[0] eq 'close') {
-			&$callbackClose($params[1]);
+	my $retry = 3;
+	while (@transToInstall) {
+	    local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
+	    if (my $pid = fork()) {
+		close OUTPUT;
+		my $error_msg = '';
+		local $_;
+		while (<INPUT>) {
+		    if (/^die:(.*)/) {
+			$error_msg = $1;
+			last;
 		    } else {
-			installCallback(@params);
+			chomp;
+			my @params = split ":";
+			if ($params[0] eq 'close') {
+			    &$callbackClose($params[1]);
+			} else {
+			    installCallback(@params);
+			}
 		    }
 		}
-	    }
-	    $error_msg and $error_msg .= join('', <INPUT>);
-	    waitpid $pid, 0;
-	    close INPUT;
-	    $error_msg and die $error_msg;
-	} else {
-	    #- child process will run each transaction.
-	    $SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
-	    my $db;
-	    eval {
+		$error_msg and $error_msg .= join('', <INPUT>);
+		waitpid $pid, 0;
 		close INPUT;
-		select((select(OUTPUT),  $| = 1)[0]);
-		$db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
-		my $trans = c::rpmtransCreateSet($db, $prefix);
-		log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
+		$error_msg and die $error_msg;
+	    } else {
+		#- child process will run each transaction.
+		$SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
+		my $db;
+		eval {
+		    close INPUT;
+		    select((select(OUTPUT),  $| = 1)[0]);
+		    $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
+		    my $trans = c::rpmtransCreateSet($db, $prefix);
+		    log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
 
-		c::rpmtransAddPackage($trans, $_->[$HEADER], packageName($_), $isUpgrade && allowedToUpgrade(packageName($_)))
-		    foreach @transToInstall;
+		    c::rpmtransAddPackage($trans, $_->[$HEADER], packageName($_), $isUpgrade && allowedToUpgrade(packageName($_)))
+			foreach @transToInstall;
 
-		c::rpmdepOrder($trans) or die "error ordering package list: " . c::rpmErrorString();
-		c::rpmtransSetScriptFd($trans, fileno LOG);
+		    c::rpmdepOrder($trans) or die "error ordering package list: " . c::rpmErrorString();
+		    c::rpmtransSetScriptFd($trans, fileno LOG);
 
-		log::l("rpmRunTransactions start");
-		my @probs = c::rpmRunTransactions($trans, $callbackOpen,
-						  sub { #- callbackClose
-						      print OUTPUT "close:$_[0]\n"; },
-						  sub { #- installCallback
-						      print OUTPUT join(":", @_), "\n"; },
-						  1);
-		log::l("rpmRunTransactions done, now trying to close still opened fd");
-		install_any::getFile('XXX'); #- close still opened fd.
+		    log::l("rpmRunTransactions start");
+		    my @probs = c::rpmRunTransactions($trans, $callbackOpen,
+						      sub { #- callbackClose
+							  print OUTPUT "close:$_[0]\n"; },
+						      sub { #- installCallback
+							  print OUTPUT join(":", @_), "\n"; },
+						      1);
+		    log::l("rpmRunTransactions done, now trying to close still opened fd");
+		    install_any::getFile('XXX'); #- close still opened fd.
 
-		if (@probs) {
-		    my %parts;
-		    @probs = reverse grep {
-			if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
-			    $parts{$3} ? 0 : ($parts{$3} = 1);
-			} else { 1; }
-		    } reverse map { s|/mnt||; $_ } @probs;
+		    if (@probs) {
+			my %parts;
+			@probs = reverse grep {
+			    if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {
+				$parts{$3} ? 0 : ($parts{$3} = 1);
+			    } else {
+				1;
+			    }
+			} reverse map { s|/mnt||; $_ } @probs;
 
-		    c::rpmdbClose($db);
-		    die "installation of rpms failed:\n  ", join("\n  ", @probs);
+			c::rpmdbClose($db);
+			die "installation of rpms failed:\n  ", join("\n  ", @probs);
+		    }
+		}; $@ and print OUTPUT "die:$@\n";
+
+		c::rpmdbClose($db);
+		log::l("rpm database closed");
+
+		close OUTPUT;
+		c::_exit(0);
+	    }
+
+	    #- after enough retry, abort.
+	    my @badPackages;
+	    foreach (@transToInstall) {
+		if (!packageFlagInstalled($_) && $_->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($_)})) {
+		    push @badPackages, $_;
+		} else {
+		    packageFreeHeader($_);
 		}
-	    }; $@ and print OUTPUT "die:$@\n";
+	    }
+	    @transToInstall = @badPackages;
+	    $retry or last;
 
-	    c::rpmdbClose($db);
-	    log::l("rpm database closed");
-
-	    close OUTPUT;
-	    c::_exit(0);
+	    #- examine each package, check they have been installed accordingly.
+	    if (@transToInstall) {
+		foreach (@transToInstall) {
+		    log::l("bad package $_->[$FILE]");
+		}
+		log::l("retrying transaction on bad packages");
+		--$retry;
+	    }
 	}
 	packageFreeHeader($_) foreach @transToInstall;
 	cleanHeaders($prefix);
 
-	if (my @badpkgs = grep { !packageFlagInstalled($_) && $_->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($_)}) } @transToInstall) {
-	    foreach (@badpkgs) {
-		log::l("bad package $_->[$FILE]");
+	if (@transToInstall) {
+	    foreach (@transToInstall) {
+		log::l("bad package $_->[$FILE] unable to be installed");
 		packageSetFlagSelected($_, 0);
 	    }
-	    cdie ("error installing package list: " . join(", ", map { $_->[$FILE] } @badpkgs));
+	    cdie ("error installing package list: " . join(", ", map { $_->[$FILE] } @transToInstall));
 	}
     } while ($nb > 0 && !$pkgs::cancel_install);
 
