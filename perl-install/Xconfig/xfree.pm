@@ -22,10 +22,12 @@ sub read {
     $class->new(Xconfig::parse::read_XF86Config($file));
 }
 sub write {
-    my ($raw_X) = @_;
-    my $file = "$::prefix/etc/X11/XF86Config";
-    rename $file, "$file.old";
-    rename "$file-4", "$file-4.old"; #- there won't be any XF86Config-4 anymore, we want this!
+    my ($raw_X, $o_file) = @_;
+    my $file = $o_file || "$::prefix/etc/X11/XF86Config";
+    if (!$o_file) {
+	rename $file, "$file.old";
+	rename "$file-4", "$file-4.old"; #- there won't be any XF86Config-4 anymore, we want this!
+    }
     Xconfig::parse::write_XF86Config($raw_X, $file);
 }
 sub prepare_write {
