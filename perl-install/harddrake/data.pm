@@ -310,6 +310,19 @@ our @tree =
      },
 
      {
+      class => "PCMCIA_CONTROLLER",
+      string => N("PCMCIA controllers"),
+      icon => "scsi.png",
+      configurator => "",
+      detector => sub {
+          require list_modules;
+          my @modules = list_modules::category2modules('bus/pcmcia');
+          f(grep { member($_->{driver}, @modules) } @devices);
+      },
+      checked_on_boot => 1,
+     },
+
+     {
       class => "SCSI_CONTROLLER",
       string => N("SCSI controllers"),
       icon => "scsi.png",
