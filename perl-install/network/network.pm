@@ -342,6 +342,7 @@ sub read_all_conf {
     $netcnx->{type} or probe_netcnx_type($::prefix, $netc, $intf, $netcnx);
 }
 
+#- FIXME: this is buggy, use network::tools::get_default_gateway_interface
 sub probe_netcnx_type {
     my ($_prefix, $_netc, $intf, $netcnx) = @_;
     #- try to probe $netcnx->{type} which is used almost everywhere.
