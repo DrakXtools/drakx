@@ -394,7 +394,7 @@ int mandrake_move_post(void)
         int fd;
         char rootdev[] = "0x0100"; 
 
-        if (scall(!(f = fopen(IMAGE_LOCATION "/move/symlinks", "rb")), "fopen"))
+        if (scall(!(f = fopen(IMAGE_LOCATION_REAL "/move/symlinks", "rb")), "fopen"))
                 return RETURN_ERROR;
         while (fgets(buf, sizeof(buf), f)) {
                 char oldpath[500], newpath[500];
@@ -411,7 +411,7 @@ int mandrake_move_post(void)
         // we need only the ones before mounting /dev as devfs
         if (scall(mkdir(SLASH_LOCATION "/dev", 0755), "mkdir"))
                 return RETURN_ERROR;
-        if (scall(!(f = fopen(IMAGE_LOCATION "/move/devices", "rb")), "fopen"))
+        if (scall(!(f = fopen(IMAGE_LOCATION_REAL "/move/devices", "rb")), "fopen"))
                 return RETURN_ERROR;
         while (fgets(buf, sizeof(buf), f)) {
                 char name[500], path[500], type;
@@ -501,8 +501,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
                         method_select_and_prepare();
 
 	if (!IS_RAMDISK)
-		if (symlink(IMAGE_LOCATION LIVE_LOCATION, STAGE2_LOCATION) != 0)
-			log_perror("symlink from " IMAGE_LOCATION LIVE_LOCATION " to " STAGE2_LOCATION " failed");
+		if (symlink(IMAGE_LOCATION_REAL LIVE_LOCATION, STAGE2_LOCATION) != 0)
+			log_perror("symlink from " IMAGE_LOCATION_REAL LIVE_LOCATION " to " STAGE2_LOCATION " failed");
 
 	if (interactive_pid != 0)
 		kill(interactive_pid, 9);

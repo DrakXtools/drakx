@@ -40,6 +40,7 @@
 #else
 #define DISTRIB_NAME "Mandrake Linux"
 #define IMAGE_LOCATION   "/tmp/image"
+#define IMAGE_LOCATION_REAL "/tmp/image"
 #endif
 
 
