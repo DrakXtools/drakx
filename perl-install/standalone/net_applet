@@ -90,7 +90,7 @@ sub md5file {
     return wantarray() ? @md5 : $md5[0];
 }
 sub netMonitor() {
-    system("/usr/sbin/net_monitor --testing");
+    system("/usr/sbin/net_monitor --testing &");
     checkNetwork()
 }
 sub checkNetwork() {
