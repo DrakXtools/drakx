@@ -37,7 +37,7 @@ sub ide_zips() { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) }
 #-sub jazzs() { grep { member($_->{media_type}, 'fd', 'hd') && isJazDrive($_) } get(); }
 sub ls120s() { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get(); }
 sub cdroms() { 
-    my @l = grep { $_->{media_type} =~ /cdrom/ } get(); 
+    my @l = grep { $_->{media_type} eq 'cdrom' } get(); 
     if (my @l2 = IDEburners()) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
@@ -50,9 +50,9 @@ sub cdroms() {
     }
     @l;
 }
-sub burners    { grep { $_->{media_type} eq 'cdrom-burner' || $_->{media_type} =~ /cdrom/ && isBurner($_) } get() }
-sub IDEburners { grep { $_->{media_type} eq 'cdrom-burner' || $_->{media_type} =~ /cdrom/ && isBurner($_) } getIDE() }
-sub dvdroms    { grep { $_->{media_type} =~ /cdrom/ && isDvdDrive($_) } get() }
+sub burners    { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } get() }
+sub IDEburners { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } getIDE() }
+sub dvdroms    { grep { $_->{media_type} eq 'cdrom' && isDvdDrive($_) } get() }
 
 sub get_mac_model() {
     my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
@@ -93,19 +93,49 @@ sub floppies_dev() { map { $_->{device} } floppies() }
 sub floppy { first(floppies_dev()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
-sub isBurner { 
-    my ($e) = @_;
-    my $dev = $e->{device};
-    if (my($nb) = $dev =~ /scd(.*)/) {
-	grep { /^(scd|sr)$nb:.*writer/ } syslog();
-    } else {
-	my $f = tryOpen($dev); #- SCSI burner are not detected this way.
-	$f && c::isBurner(fileno($f));
+sub get_sys_cdrom_info {
+    my (@drives) = @_;
+
+    my @drives_order;
+    foreach (cat_("/proc/sys/dev/cdrom/info")) {
+	my ($t, $l) = split ':';
+	my @l = split ' ', $l;
+	if ($t eq 'drive name') {
+	    @drives_order = map {
+		s/^sr/scd/;
+		my $dev = $_;
+		first(grep { $_->{device} eq $dev } @drives);
+	    } @l;
+	} else {
+	    my $capacity;
+	    if ($t eq 'Can write CD-R') {
+		$capacity = 'burner';
+	    } elsif ($t eq 'Can read DVD') {
+		$capacity = 'DVD';
+	    }
+	    if ($capacity) {
+		each_index {
+		    ($drives_order[$::i] || {})->{capacity} .= "$capacity " if $_;
+		} @l;
+	    }
+	}
     }
 }
+
+sub isBurner { 
+    my ($e) = @_;
+    $e->{capacity} =~ /burner/ and return 1;
+      
+    #- do not work for SCSI
+    my $f = tryOpen($e->{device}); #- SCSI burner are not detected this way.
+    $f && c::isBurner(fileno($f));
+}
 sub isDvdDrive {
-    $_[0]{info} =~ /DVD/; #- SCSI DVD seems not to be detected correctly, so use another probe after.
-    my $f = tryOpen($_[0]{device});
+    my ($e) = @_;
+    $e->{capacity} =~ /DVD/ || $e->{info} =~ /DVD/ and return 1;
+
+    #- do not work for SCSI
+    my $f = tryOpen($e->{device});
     $f && c::isDvdDrive(fileno($f));
 }
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
@@ -140,15 +170,13 @@ sub getSCSI() {
 	} elsif ($type =~ /Sequential-Access/) {
 	    $device = "st" . $tapeNum++;
 	    $type = 'tape';
-	} elsif ($type =~ /CD-ROM/) {
+	} elsif ($type =~ /(CD-ROM|WORM)/) {
 	    $device = "scd" . $cdromNum++;
 	    $type = 'cdrom';
-	} elsif ($type =~ /WORM/) {
-	    $device = "scd" . $cdromNum++;
-	    $type = 'cdrom-burner';
 	}
 	$device and push @drives, { device => $device, media_type => $type, info => "$vendor $model", id => $id, bus => 0 };
     }
+    get_sys_cdrom_info(@drives);
     @drives;
 }
 
@@ -168,6 +196,7 @@ sub getIDE() {
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
 	push @idi, { media_type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };
     }
+    get_sys_cdrom_info(@idi);
     @idi;
 }
 
