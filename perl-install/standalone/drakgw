@@ -174,7 +174,7 @@ foreach my $card (@all_cards_getnet)
 {
     log::l("[drakgw] Have network card: $card\n");
     next if ($card eq $card_netconnect);
-    push @all_cards, exists $aliased_devices{$card} ? "Interface $card (using module $aliased_devices{$card})" : "Interface $card";
+    push @all_cards, exists $aliased_devices{$card} ? "Interface $card ("._("using module")." $aliased_devices{$card})" : "Interface $card";
 }
 log::l("[drakgw] Available network cards: ".join(" ; ", @all_cards)."\n");
 
