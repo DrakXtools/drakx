@@ -46,9 +46,9 @@ foreach (@harddrake::data::tree) {
     }
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
     $msg .= N("Some devices were added:\n", $item) if @added;
-    $msg .= "- ". harddrake::data::custom_id($ID{$_}, $item) ." was added\n" foreach (@added);
+    $msg .= "- ". harddrake::data::custom_id($ID{$_}, $item) ." was added\n" foreach @added;
     @added || @was_removed or next;
-    next unless (-x $configurator);
+    next unless -x $configurator;
     my ($pid, $no);
     $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
     unless ($pid = fork) {

@@ -653,7 +653,7 @@ sub whatUsbport() {
 	# field. So use this field with priority for $model when it exists.
 	if (($idstr =~ /MDL:([^;]+);/) ||
 	    ($idstr =~ /MODEL:([^;]+);/)) {
-	    $model = $1 if !$model;
+	    $model ||= $1;
 	}
 	if ($idstr =~ /SKU:([^;]+);/) {
 	    $model = $1;

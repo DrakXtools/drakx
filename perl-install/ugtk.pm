@@ -818,7 +818,7 @@ sub gtkcreate_png {
 
 sub compose_pixbufs {
     my ($pixbuf, $back_pixbuf_unaltered, $alpha_threshold) = @_;
-    $alpha_threshold = 255 unless $alpha_threshold;
+    $alpha_threshold ||= 255;
     my ($width, $height) = ($pixbuf->get_height, $pixbuf->get_width);
     my $back_pixbuf = Gtk::Gdk::Pixbuf->new('rgb', 0, 8, $height, $width);
 

@@ -40,6 +40,7 @@ sub find_servers {
 
     my $domain = chomp_(`domainname`);
     my @servers;
+    local $_;
     while (<F>) {
 	chomp;
 	my ($ip, $name) = /(\S+)\s+(\S+)/ or log::l("bad line in rpcinfo output"), next;

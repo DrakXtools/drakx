@@ -36,7 +36,7 @@ $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
-    $port = detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner" if !$port;
+    $port ||= detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     output("$_sanedir/$a.conf", (join "\n",@{$scannerDB->{$model}{lines}}));

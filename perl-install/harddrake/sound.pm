@@ -158,7 +158,7 @@ sub do_switch {
 sub switch {
     my ($in, $device) = @_;
     my $driver = $device->{current_driver};
-    $driver = $device->{driver} unless $driver;
+    $driver ||= $device->{driver};
 
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
     my $alternative = get_alternative($driver);

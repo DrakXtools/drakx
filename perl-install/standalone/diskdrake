@@ -68,6 +68,7 @@ if ($>) {
 my $in = 'interactive'->vnew('su');
 
 if ($type eq 'fileshare') {
+    require any;
     any::fileshare_config($in);
     $in->exit(0);
 }
