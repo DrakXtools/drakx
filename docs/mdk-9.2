@@ -1,0 +1,43 @@
+-*- outline -*-
+
+        drakxtools todo list for mdk9.2
+        (mainly gtk+ oriented for now)
+
+* mcc vs tools communication
+** faster tools embedding in mcc (gc idea)
+   move gui into gui/<sg>.pm so that mcc can just do require on them
+   instead of doing slow fork+perl startup (same idea as fast_cgi,
+   perl_mod and the like)
+** told apps to ask user whether to save their changes or to discard them on cancel (#1437)
+
+* ugtk2 & tools guies:
+** cleanups:
+*** $o->flush() should be sub { $_[0]->window->process_updates(1) }
+    see logdrake::parse_file()'s progress bar as an example
+** saner/cleaner usage of gtk+-2.2 widgets:
+*** use MessageDialog for modal windows (cleaner)
+*** use button boxes everywhen when we have several buttons for saner gui (as per gnome specs/recommendations)
+*** gtk::combo => gtk::optionMenu (as per gtk+-2 doc)
+*** use size::group to let things be smoother in some places
+
+* tools
+** all:
+*** have a button or a menu to access help (was already part of mdk9.1 specs)
+** drakboot:
+*** should prevent the user to insert a space in a kernel label (#2826)
+** mcc:
+*** make tool names be black or blue (like in rpmdrake & harddrake2 guies) (#2695)
+** harddrake: colorize the internal help
+
+
+* packages
+** main package updates:
+*** rpm-4.2
+*** kernel-2.6 (if availlable and stabilized: not probable) ?
+** add new packages:
+*** kernel-mosix
+*** dvb packages
+
+* hardware support
+** kernel: update alsa, bttv, dvb & saa7134 drivers for better hardware support
+** isa detection/probing in ldetect ? (#118, #497) => need some old hw
