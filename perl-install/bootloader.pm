@@ -85,6 +85,7 @@ sub mkbootdisk($$$;$) {
     } else {
 	push @l, "--bios", 0, if $dev !~ /fd/;
     }
+    eval { modules::load_multi(qw(msdos vfat)) };
     run_program::rooted_or_die($prefix, @l, "--device", "/dev/$dev", $kernelVersion);
 }
 
