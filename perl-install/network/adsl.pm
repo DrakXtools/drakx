@@ -86,9 +86,9 @@ sub adsl_probe_info {
 sub adsl_detect() {
     my $adsl = {};
     require detect_devices;
-    $adsl->{speedtouch} = detect_devices::getSpeedtouch();
-    $adsl->{sagem} = detect_devices::getSagem();
-    $adsl->{eci} = detect_devices::getECI();
+    ($adsl->{speedtouch}) = detect_devices::getSpeedtouch();
+    ($adsl->{sagem}) = detect_devices::getSagem();
+    ($adsl->{eci}) = detect_devices::getECI();
     return $adsl;
 }
 
