@@ -197,8 +197,8 @@ our @tree =
           #- protocol report are not accurate) so I'll need to verify against
           #- known drivers :-(
           require list_modules;
-          my @usbnet = list_modules::category2modules('network/gigabit|main|pcmcia|usb|wireless');
-          f(grep { member($_->{driver}, @usbnet) } @devices);
+          my @net_modules = list_modules::category2modules('network/gigabit|main|pcmcia|usb|wireless');
+          f(grep { member($_->{driver}, @net_modules) } @devices);
       },
       checked_on_boot => 1,
      },
