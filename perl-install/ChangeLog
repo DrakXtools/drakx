@@ -1,3 +1,117 @@
+2002/08/27  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: 
+	  - new 'previous' button bug fix
+
+2002/08/27  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: display a warning message about packages
+	to remove.
+
+	* install_any.pm: added warn about packages to remove.
+
+	* crypto.pm: restore real distrution version used.
+
+2002/08/27  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/nl.po: updated po file
+
+	* share/po/sk.po: updated Slovak file
+
+2002/08/27  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm: handle "readonly" per hds
+
+	* Xconfig/various.pm, standalone/drakboot: use the new fsedit::get_hds
+
+	* my_gtk.pm: 
+	  - add ",*-r-*" in wizard fontset
+	  - i18n the fontset
+
+	* detect_devices.pm: set {prefix} for rd/ida/cciss/... (instead of doing
+	it in fsedit::hds)
+
+	* partition_table/raw.pm (test_for_bad_drives): classify error messages
+	(either read, write or something-else)
+
+	* fsedit.pm: 
+	  - create lvms() which contains what was in hds()
+	  - create get_hds() which handle errors when calling hds()
+	  - remove commented obsolete code
+	  - read_partitions is now read_proc_partitions_raw
+	  - readProcPartitions is now read_proc_partitions
+	  - read_proc_partitions use fake {start}s so that the empty space is
+	computed ok by get_normal_parts_and_holes
+	  - verifyHds doesn't exist anymore
+	  - part of it is in hds() using compare_with_proc_partitions() and
+	use_proc_partitions()
+	  - part of it is in install_any::getHds
+
+	* any.pm: set password2 to password so that upgrading bootloader with an
+	existing password works (thanks to Aleksander Adamowski)
+	add ntools and ctools in %high_security_groups
+
+	* install_interactive.pm: handle "readonly" flag per hard drives instead
+	of a global one
+
+	* standalone/diskdrake: use function fsedit::get_hds which handles errors
+
+	* install_any.pm, install_steps_interactive.pm: remove/simplify error
+	hanling (most of it is moved to fsedit.pm)
+
+	* partition_table.pm: 
+	  - do not handle clearall in read()
+	  - ensure not partition table in written when "readonly" (it must not
+	happen, but just in case)
+
+	* diskdrake/hd_gtk.pm: nicer error message when no devices are available
+	(esp. for standalone)
+
+2002/08/27  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: catalog restore via HD, CD, tape & network
+
+2002/08/27  siegel
+
+	* share/po/de.po: updates
+	updates
+
+2002/08/27  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: 
+	  - Bug fix: s/detect_devices::getSNMPModel/printer::getSNMPModel/
+	  - Added support for the photo card reader in the HP PSC 2200 series.
+	Make number of MB to install in first time dialog changeable without
+	breaking the translations.
+
+	* printer.pm: Set default text margins to half an inch and default size
+	for images
+	to be printed to the full page.
+
+2002/08/26  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/monitor.pm: fix 2 occurences of use of $monitors as a hash
+	(thanks to Nora Etukudo)
+
+	* bootloader.pm: correctly handle empty and commented lines in lilo.conf
+
+	* mouse.pm: create /dev/usbmouse symlink for non devfs use
+
+	* detect_devices.pm: dev_is_devfs always return false during install
+
+2002/08/26  Till Kamppeter  <till@mandrakesoft.com>
+
+	* standalone/printerdrake: 
+	  - Ask user whether he really wants to set up printing when he starts
+	Printerdrake for the first time.
+	  - Added titles ("Printerdrake") to all wait messages.
+
+	* printerdrake.pm: Button to close Printerdrake shows "Done" during
+	installation and in MCC and "Quit" in standalone mode.
+	  - Ask user whether he really wants to set up printing when he starts
+	Printerdrake for the first time.
+	  - Added titles ("Printerdrake") to all wait messages.
+
 2002/08/26  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* network/ethernet.pm: 
@@ -551,7 +665,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.726 2002/08/22 22:56:12 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.727 2002/08/26 22:15:10 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
