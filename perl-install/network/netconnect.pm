@@ -1250,6 +1250,7 @@ See iwpriv(8) man page for further information."),
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one.") .
+ " " . # better looking text (to be merged into texts since some languages (eg: ja) doesn't need it
 N("Last but not least you can also type in your DNS server IP addresses."),
                     data => sub {
                         [ { label => $auto_ip ? N("Host name (optional)") : N("Host name"), val => \$netc->{HOSTNAME} },
