@@ -53,6 +53,64 @@ sub ask_from_listW {
     $r or die "ask_from_list cancel";
 }
 
+sub ask_from_treelist {
+    my ($o, $title, $messages, $separator, $l, $def) = @_;
+    my $sep = quotemeta $separator;
+    my $w = my_gtk->new($title);
+    my $tree = Gtk::CTree->new(1, 0);
+
+    my %wtree;
+    my $parent; $parent = sub {
+	if (my $w = $wtree{"$_[0]$separator"}) { return $w }
+	my $s;
+	foreach (split $sep, $_[0]) {
+	    $wtree{"$s$_$separator"} ||= 
+	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 2, (undef) x 4, 0, 0);
+	    $s .= "$_$separator";
+	}
+	$wtree{$s};
+    };
+    my ($root, $leaf, $wdef, $ndef);
+    foreach (@$l) {
+	($root, $leaf) = /(.*)$sep(.+)/o or ($root, $leaf) = ('', $_);
+	my $node = $tree->insert_node($parent->($root), undef, [$leaf], 2, (undef) x 4, 1, 0);
+
+	if ($def eq $_) {
+	    $wdef = $node;
+	    my $s; $tree->expand($wtree{$s .= "$_$separator"}) foreach split $sep, $root;
+	    foreach (1 .. @$l) {
+		$tree->node_nth($_) == $node and $ndef = $_, last;
+	    }
+	}
+    }
+    undef %wtree;
+
+    my $curr;
+    my $leave = sub { 
+	$curr->row->is_leaf or return;
+	my @l; for (; $curr; $curr = $curr->row->parent) { 
+	    unshift @l, first $tree->node_get_pixtext($curr, 0);
+	}
+	$w->{retval} = join $separator, @l;
+	Gtk->main_quit;
+    };
+    gtkadd($w->{window},
+	   gtkpack_(new Gtk::VBox(0,0),
+		    1, gtkset_usize(createScrolledWindow($tree), 200, 280),
+		    0, $w->create_okcancel));
+    $tree->set_selection_mode('browse');
+    $tree->signal_connect(tree_select_row => sub { $curr = $_[1] });
+    $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
+
+    $tree->focus_row($ndef) if $ndef;
+    $tree->select($wdef) if $wdef;
+    $tree->node_moveto($wdef, 0, 0.5, 0) if $wdef;
+
+    $tree->grab_focus;
+    $w->{window}->show_all;
+    $w->main or die "ask_from_list cancel";
+}
+
 sub ask_many_from_list_refW {
     my ($o, $title, $messages, $list, $val) = @_;
     ask_many_from_list_with_help_refW($o, $title, $messages, $list, undef, $val)

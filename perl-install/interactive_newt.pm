@@ -78,11 +78,6 @@ sub ask_from_listW {
     }
 }
 
-sub ask_many_from_list_with_help_refW {
-    my ($o, $title, $messages, $list, $help, $val) = @_;
-    ask_many_from_list_refW($o, $title, $messages, $list, $val);
-}
-
 sub ask_many_from_list_refW {
     my ($o, $title, $messages, $list, $val) = @_;
     my $height = min(int @$list, 18);
