@@ -253,7 +253,7 @@ sub real_main {
                    {
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
-                    data => {
+                    data => sub {
                              [ 
                              (map {
                                  my ($dstruct, $field, $item) = @$_;
