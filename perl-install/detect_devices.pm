@@ -51,6 +51,7 @@ sub cdroms() {
 }
 sub burners    { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } get() }
 sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } getIDE() }
+sub dvdroms    { grep { $_->{type} eq 'cdrom' && isDvdDrive($_) } get() }
 
 sub get_mac_model() {
 	my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
@@ -78,6 +79,7 @@ sub isBurner {
 	$f && c::isBurner(fileno($f));
     }
 }
+sub isDvdDrive { $_[0]->{info} =~ /DVD/ }
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
 sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
