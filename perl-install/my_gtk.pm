@@ -156,23 +156,18 @@ END { &exit() }
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
     $spread ||= $::isWizard ? "end" : "spread";
-    $cancel = $::isWizard ? _("Previous") : _("Cancel") if !defined $cancel && !defined $ok;
-    my $cancel_xpm;
-    $cancel eq $_->[0] and $cancel_xpm = gtkxpm($_->[1]) foreach ([ _("Previous"), 'stock_left.xpm' ], [ _("Cancel"), 'stock_cancel.xpm']);
-    $ok = $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next")) : _("Ok") if !defined $ok;
-    my $ok_xpm;
-    $ok eq $_->[0] and $ok_xpm = gtkxpm($_->[1]) foreach ([ _("Finish"), 'stock_exit.xpm' ], [ _("Next"), 'stock_right.xpm'], [ _("Ok"), 'stock_ok.xpm']);
-    my $b1 = gtksignal_connect($w->{ok} = create_pixbutton($ok, $ok_xpm, $::isWizard), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
-    my $b2 = $cancel && gtksignal_connect($w->{cancel} = create_pixbutton($cancel, $cancel_xpm),
-					  clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
-    $::isWizard and gtksignal_connect($w->{wizcancel} = create_pixbutton(_("Cancel"), gtkxpm('stock_cancel.xpm')), clicked =>sub{die'wizcancel'});
+    $cancel = $::isWizard ? _("<- Previous") : _("Cancel") if !defined $cancel && !defined $ok;
+    $ok = $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next ->")) : _("Ok") if !defined $ok;
+    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
+    my $b2 = $cancel && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
+    $::isWizard and gtksignal_connect($w->{wizcancel} = new Gtk::Button(_("Cancel")), clicked => sub { die 'wizcancel' });
     my @l = grep { $_ } $::isWizard ? ($w->{wizcancel}, $::Wizard_no_previous ? () : $b2, $b1): ($b1, $b2);
     push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
 
     $_->can_default($::isWizard) foreach @l;
-
     gtkadd(create_hbox($spread), @l);
 }
+
 
 sub _create_window($$) {
     my ($o, $title) = @_;
