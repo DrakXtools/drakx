@@ -245,7 +245,7 @@ When your mouse comes over an item, a small balloon help will popup which
 describes the role of the service.
 
 Be especially careful in this step if you intend to use your machine as a
-server: you will probably want not to start any services which you don't
+server: you will probably want not to start any services that you don't
 want."),
 
 configurePrinter =>
