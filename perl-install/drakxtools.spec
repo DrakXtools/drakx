@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 5mdk
+Release: 6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-6mdk
+- drakconnect: fix sagem8xx && speedtouch adsl modem scripts
+
 * Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-5mdk
 - drakconnect: write vci and vpi parameters in decimal base when
   configuring speedtouch
