@@ -152,6 +152,10 @@ sub doPartitionDisksAfter {
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, @{$o->{lvms}}, $o->{raid}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
+    if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{hds}) {
+	die _("You must have a FAT partition mounted in /boot/efi");
+    }
+
     if ($o->{partitioning}{use_existing_root}) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
 	fs::mount_part($_, $o->{prefix}) foreach grep { $_->{mntpoint} && !$_->{notFormatted} } @{$o->{fstab}};
