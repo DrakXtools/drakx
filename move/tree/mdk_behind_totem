@@ -42,8 +42,10 @@ umount_cd() {
 
     ln -sf /image_always/lib /
 
-    umount /image && \
-	/image_always/sbin/losetup -d /dev/$main_loop || { mount_cd; kill $totem_pid; exec mdk_totem; }
+    if [ ! -l /image ]; then
+	umount /image && \
+	    /image_always/sbin/losetup -d /dev/$main_loop || { mount_cd; kill $totem_pid; exec mdk_totem; }
+    fi
     
     /image_always/usr/bin/eject
 }
