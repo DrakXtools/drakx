@@ -845,17 +845,6 @@ sub summary {
     my ($o) = @_;
 
     my @l;
-    
-    push @l, { 
-	      label => N("Keyboard"), 
-	      val => sub { $o->{keyboard} && translate(keyboard::keyboard2text($o->{keyboard})) },
-	      clicked => sub { $o->selectKeyboard(1) },
-	     };
-    push @l, { 
-	      label => N("Mouse"),
-	      val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
-	      clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}) },
-	     };
 
     my $timezone_manually_set;  
     push @l, { 
@@ -874,6 +863,17 @@ sub summary {
 	      label => N("Timezone"),
 	      val => sub { $o->{timezone}{timezone} },
 	      clicked => sub { $timezone_manually_set = $o->configureTimezone(1) || $timezone_manually_set },
+	     };
+
+    push @l, { 
+	      label => N("Keyboard"), 
+	      val => sub { $o->{keyboard} && translate(keyboard::keyboard2text($o->{keyboard})) },
+	      clicked => sub { $o->selectKeyboard(1) },
+	     };
+    push @l, { 
+	      label => N("Mouse"),
+	      val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
+	      clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}) },
 	     };
 
     push @l, {
@@ -907,19 +907,33 @@ sub summary {
 		 };
     }
 
-    #- if no sound card are detected AND the user selected things needing a sound card,
-    #- propose a special case for ISA cards
-    push @l, {
-	      label => N("Sound card"),
-	      clicked => sub {
-		  if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
-		      $o->do_pkgs->install('sndconfig');
-		      $o->ask_warn('', N("Run \"sndconfig\" after installation to configure your sound card"));
-		  } else {
-		      $o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
+    if (!@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO})) {
+	#- if no sound card are detected AND the user selected things needing a sound card,
+	#- propose a special case for ISA cards
+	push @l, {
+		  label => N("Sound card"),
+		  clicked => sub {
+		      if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
+			  $o->do_pkgs->install('sndconfig');
+			  $o->ask_warn('', N("Run \"sndconfig\" after installation to configure your sound card"));
+		      } else {
+			  $o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
+		      }
+		  },
+		 };
+    }
+
+    foreach (grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()) {
+	my $driver = $_->{driver};
+	push @l, {
+		  label => N("TV card"),
+		  val => sub { $_->{description} }, 
+		  clicked => sub { 
+		      require harddrake::v4l; 
+		      harddrake::v4l::config($o, $driver);
 		  }
-	      },
-	     } if !@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO});
+		 };
+    }
 
     push @l, { 
 	      label => N("Bootloader"),
@@ -941,18 +955,6 @@ sub summary {
 		  network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
 	      },
 	     };
-
-    foreach (grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()) {
-	my $driver = $_->{driver};
-	push @l, {
-		  label => N("TV card"),
-		  val => sub { $_->{description} }, 
-		  clicked => sub { 
-		      require harddrake::v4l; 
-		      harddrake::v4l::config($o, $driver);
-		  }
-		 };
-    }
 
     while (1) {
 	$o->summary_prompt(\@l);
