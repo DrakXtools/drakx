@@ -255,12 +255,13 @@ sub configureNetwork {
     my @l = detect_devices::getNet() or die _("no network card found");
     my @all_cards = netconnect::conf_network_card_backend ($prefix, $netc, $intf, undef, undef, undef, undef);
 
+  configureNetwork_step_1:
     my $n_card=0;
     my $last; foreach ($::expert ? @l : $l[0]) {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card]->[1]) or last;
+	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card]->[1]) or return;
 
 	$netc ||= {};
 	$last = $intf2;
@@ -280,10 +281,10 @@ _("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
-				   [ { label => _("Host name"), val => \$netc->{HOSTNAME} }]);
+				   [ { label => _("Host name"), val => \$netc->{HOSTNAME} }]) or goto configureNetwork_step_1;
 	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
-	configureNetworkNet($in, $netc, $last ||= {}, @l);
+	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
 	if ( $netc->{GATEWAY} ) {
 	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
 	    unlink "$prefix/etc/sysconfig/network-scripts/net_cnx_down";
@@ -291,6 +292,7 @@ such as ``mybox.mylab.myco.com''."),
 	}
     }
     miscellaneousNetwork($in);
+    1;
 }
 
 
@@ -302,7 +304,7 @@ sub configureNetworkIntf {
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
 	$text = _("WARNING: This device has been previously configured to connect to the Internet.
-Simply press OK to keep this device configured.
+Simply accept to keep this device configured.
 Modifying the fields below will override this configuration.");
     }
     else {
@@ -381,7 +383,7 @@ You may also enter the IP address of the gateway if you have one"),
 				 { label => _("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
 				    ),
 			       ],
-			      ) or return;
+			      );
 }
 
 sub miscellaneousNetwork {
