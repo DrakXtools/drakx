@@ -835,7 +835,7 @@ my %charset2kde_font = (
   'utf_lat8' => [ "Sans,10", "Monospace,10" ],
   'utf_mlym' => [ "malayalam,14", ],
   'utf_taml' => [ "TSCu_Paranar,14", "Tsc_avarangalfxd,10", "TSCu_Paranar,12", ],
-  'utf_tfng' => [ "Harpax Berbère,14", ],
+  'utf_tfng' => [ "Hapax Berbère,14", ],
   #- the following should be changed to better defaults when better fonts
   #- get available
   'utf_geor' => [ "ClearlyU,15" ],
