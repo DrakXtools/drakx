@@ -132,7 +132,7 @@ sub doPartitionDisksBefore {
 	eval { fs::umount("/tmp/hdimage") };
     }
     eval { 
-	close pkgs::LOG;
+	close *pkgs::LOG;
 	eval { fs::umount("$o->{prefix}/proc") };
 	eval {          fs::umount_all($o->{fstab}, $o->{prefix}) };
 	eval { sleep 1; fs::umount_all($o->{fstab}, $o->{prefix}) } if $@; #- HACK
