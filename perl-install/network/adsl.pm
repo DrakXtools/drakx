@@ -161,6 +161,12 @@ lcp-echo-interval 0)
     if ($adsl_type =~ /^pp/) {
         mkdir_p("$::prefix/etc/ppp");
         $in->do_pkgs->install('ppp') if !$>;
+        my %packages = (
+                        pppoa => [ qw(ppp-pppoatm) ],
+                        pppoe => [ qw(ppp-pppoe rp-pppoe) ],
+                        pptp  => [ qw(pptp-linux pptp-adsl) ],
+                       );
+        $in->do_pkgs->install(@{$packages{$adsl_type}}) if !$>;
         output("$::prefix/etc/ppp/options",
                qq(lock
 noipdefault
