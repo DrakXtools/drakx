@@ -16,7 +16,7 @@ include $(top_dir)/Makefile.common
 all: insmod insmod-DIET libinsmod.a libinsmod-DIET.a
 
 clean:
-	rm -f *.o insmod libinsmod.a libinsmod-DIET.a
+	rm -f *.o insmod insmod-DIET libinsmod.a libinsmod-DIET.a
 
 
 FLAGS = -c -Wall -Os -fomit-frame-pointer -D_GNU_SOURCE -DBB_VER='"0.47"' -DBB_BT='"2000.12.06-14:02+0000"'
