@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 35mdk
+Release: 36mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon May 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-36mdk
+- ugtk2:: still provide compat stuff for OptionMenu widget (#9826)
+- drakTermServ: add /etc/modprobe* mount points for client hardware
+  config (stew)
+
 * Wed May 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-35mdk
 - authentication:
   o fix winbind configuration and do the same for LDAP
