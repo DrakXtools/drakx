@@ -340,6 +340,14 @@ our @isdndata =
 our @isdn_capi =
   (
    {
+    vendor => 0x1131,
+    id => 0x5402,
+    description => 'AVM Audiovisuelles|Fritz DSL ISDN/DSL Adapter',
+    bus => 'PCI',
+    driver => 'fcdsl',
+    firmware => 'fdslbase.bin'
+   },
+   {
     vendor => 0x1244,
     id => 0x0a00,
     description => 'AVM Audiovisuelles|A1 ISDN Adapter [Fritz] CAPI',
