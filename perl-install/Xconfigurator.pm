@@ -1026,7 +1026,7 @@ Would you like X to start when you reboot?"), 1);
 		$l{uid} > 500, $l{name};
 	    } cat_("$o->{prefix}/etc/passwd");
 
-	    if (exists $o->{miscellaneous}{autologuser} || $::auto || @users
+	    if (exists $o->{miscellaneous}{autologuser} || $::auto || !@users
 		|| $in->ask_yesorno(_("Autologin at startup"),
 _("I can set up your computer to automatically log on one user.
 Would you like to use this feature?"), 1)) {
