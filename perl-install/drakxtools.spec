@@ -364,6 +364,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o handle madwifi (fredl)
   o try to detect default connection in adsl > isdn > modem > ethernet
     order
+- drakups: really fix refreshing UPS list when adding a new UPS though
+  the add wizard
 - harddrake: list all mice and keyboards (thus lowering unknown
   hardware in hwdb-clients)
 - mousedrake, XFdrake: use input/mice instead of psaux for synaptics
