@@ -1017,9 +1017,9 @@ sub main {
     my ($o, $allowFB);
     ($prefix, $o, $in, $allowFB, $isLaptop, $install) = @_;
     $o ||= {};
-    
-    XF86check_link('');
-    XF86check_link('-4');
+
+      XF86check_link('');
+      XF86check_link('-4');
 
     {
 	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);
@@ -1114,6 +1114,6 @@ If you don't want to use this feature, click on the cancel button."),
 	    }
 	    any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, "kde");
 	}
-       run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
+	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
 }
