@@ -201,7 +201,7 @@ static int try_mount(char * dev, char * location)
 
 static enum return_type try_with_device(char *dev_name)
 {
-	char * questions_location[] = { "Directory or ISO image", NULL };
+	char * questions_location[] = { "Directory or ISO images directory or ISO image", NULL };
 	char * questions_location_auto[] = { "directory", NULL };
 	static char ** answers_location = NULL;
 	char location_full[500];
@@ -232,7 +232,7 @@ static enum return_type try_with_device(char *dev_name)
                 if (results != RETURN_OK)
                         return results;
         }
-	
+
         if (try_mount(choice, disk_own_mount)) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, ntfs, reiserfs).");
 		return try_with_device(dev_name);
@@ -257,6 +257,62 @@ static enum return_type try_with_device(char *dev_name)
 	}
 
 	unlink(IMAGE_LOCATION);
+
+#ifndef MANDRAKE_MOVE
+	if (!stat(location_full, &statbuf) && S_ISDIR(statbuf.st_mode)) {
+		char **file;
+		char *stage2_isos[100];
+		int stage2_iso_number = 0;
+
+		log_message("\"%s\" exists and is a directory, looking for iso files", location_full);
+
+		for (file = list_directory(location_full); *file; file++) {
+			char isofile[500], install_location[600];
+
+			if (strstr(*file, ".iso") != *file + strlen(*file) - 4)
+				/* file doesn't end in .iso, skipping */
+				continue;
+			
+			strcpy(isofile, location_full);
+			strcat(isofile, "/");
+			strcat(isofile, *file);
+
+			if (lomount(isofile, IMAGE_LOCATION, &loopdev, 0)) {
+				log_message("unable to mount iso file \"%s\", skipping", isofile);
+				continue;
+			}
+
+			strcpy(install_location, IMAGE_LOCATION);
+
+			if (IS_SPECIAL_STAGE2 || ramdisk_possible())
+				strcat(install_location, get_ramdisk_realname()); /* RAMDISK install */
+			else
+				strcat(install_location, LIVE_LOCATION); /* LIVE install */
+
+			if (access(install_location, R_OK)) {
+				log_message("ISO image \"%s\" doesn't contain stage2 installer", isofile);
+			} else {
+				log_message("stage2 installer found in ISO image is \"%s\"", isofile);
+				stage2_isos[stage2_iso_number++] = strdup(*file);
+			}
+
+ 			umount(IMAGE_LOCATION);
+		}
+
+		stage2_isos[stage2_iso_number] = NULL;
+
+		if (stage2_iso_number > 0) {
+			results = ask_from_list("Please choose the ISO image to be used to install the " DISTRIB_NAME " Distribution, or cancel to use as a mirrored directory", stage2_isos, file);
+			if (results == RETURN_OK) {
+				strcat(location_full, "/");
+				strcat(location_full, *file);
+				log_message("installer will use ISO image \"%s\"", location_full);
+			}
+		} else {
+			log_message("no ISO image found in \"%s\" directory", location_full);
+		}
+	}
+#endif
 
 	if (!stat(location_full, &statbuf) && !S_ISDIR(statbuf.st_mode)) {
 		log_message("%s exists and is not a directory, assuming this is an ISO image", location_full);
