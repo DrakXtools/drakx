@@ -537,13 +537,16 @@ sub installPackages {
 	    log::l("advertising $f");
 	    eval { my $pl = $f; $pl =~ s/\.png$/\.pl/;
 		   my ($width, $height, @data);
+		   $in->ask_warn('', "avant evalcat");
 		   eval(cat_($pl));
+		   $in->ask_warn('', "wi : $width | he : $height \ndata :\n @data");
 		   my ($pix, undef) = gtkcreate_png($f);
 		   my $dbl_area;
 		   my $darea = new Gtk::DrawingArea;
 		   gtkpack($box, $advertising = gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub {
 			   eval {
 			       if (!defined($dbl_area)) {
+				   $in->ask_warn('', "pix $pix | darea $darea \n ");
 				   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, $width, $height);
 				   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
 							  $pix, 0, 0, $width, $height);

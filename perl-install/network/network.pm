@@ -66,12 +66,12 @@ sub down_it {
 sub write_conf {
     my ($file, $netc) = @_;
 
+   ($netc->{DOMAINNAME}) ||= 'localdomain';
     add2hash($netc, {
 		     NETWORKING => "yes",
 		     FORWARD_IPV4 => "false",
-		     HOSTNAME => "localhost.localdomain",
+		     HOSTNAME => "localhost.$netc->{DOMAINNAME}",
 		    });
-   ($netc->{DOMAINNAME}) ||= ($netc->{HOSTNAME} =~ /\.(.*)/);
 
     setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 DHCP_HOSTNAME HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
