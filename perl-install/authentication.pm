@@ -52,7 +52,6 @@ sub ask_parameters {
     }
 
     if ($kind eq 'LDAP') {
-	$authentication->{LDAP_server} ||= 'ldap.' . $netc->{DOMAINNAME};
 	$netc->{LDAPDOMAIN} ||= domain_to_ldap_domain($netc->{DOMAINNAME});
 	$in->ask_from('',
 		     N("Authentication LDAP"),
@@ -156,11 +155,9 @@ sub set {
 	update_ldap_conf(
 			 host => $authentication->{LDAP_server},
 			 base => $domain,
-			 port => 636,
-			 ssl => 'on',
-			 nss_base_shadow => "ou=People,$domain",
-			 nss_base_passwd => "ou=People,$domain",
-			 nss_base_group => "ou=Group,$domain",
+			 nss_base_shadow => $domain."?sub",
+			 nss_base_passwd => $domain."?sub",
+			 nss_base_group => $domain."?sub",
 			);
     } elsif ($kind eq 'AD') {
 	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
@@ -326,7 +323,7 @@ sub set_pam_authentication {
 	password => [ intersection(\@authentication_kinds, [ 'ldap', 'krb5' ]) ],
     );
     my %before_first = (
-	session => intersection(\@authentication_kinds, [ 'winbind', 'krb5' ]) ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') : '',
+	session => intersection(\@authentication_kinds, [ 'winbind', 'krb5','ldap' ]) ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') : '',
     );
     my %after_deny = (
 	session => member('krb5', @authentication_kinds) ? pam_format_line('session', 'optional', 'pam_krb5') : '',
