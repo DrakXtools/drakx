@@ -1358,7 +1358,7 @@ sub filedialog_generic {
     		my $file_name = $file_dialog->get_filename;
     		if (!member($file_name, @other_files)) {
 				push(@other_files, $file_name);
-				$list_model->append_set(undef, $file_name);
+				$list_model->append_set(0, $file_name);
     		}
 		}
 		$file_dialog->destroy;
@@ -1494,7 +1494,7 @@ sub advanced_what_other() {
 	$list_others->set_headers_visible(0);	
 	
 	foreach (@other_files) {
-    	$list_model->append_set(undef, $_);		
+    	$list_model->append_set(0, $_);		
 	}
 	
 	$list_others->get_selection->signal_connect(changed => sub {
@@ -3340,7 +3340,7 @@ sub catalog_restore {
 			foreach (@contents) {
 				chop;
 				my $s = $_;
-				$lmodel->append_set(undef, $s);
+				$lmodel->append_set(0, $s);
 			}
 		}
 		gtkset_mousecursor_normal();

@@ -797,7 +797,7 @@ sub make_nbi() {
 sub update_list {
     my ($list_model) = @_;
     $list_model->clear;
-    $list_model->append_set(undef, $_) foreach grep { /\.nbi/ } all($tftpboot);
+    $list_model->append_set(0, $_) foreach grep { /\.nbi/ } all($tftpboot);
 }
 
 sub build_n_update {
@@ -828,7 +828,7 @@ sub maintain_users() {
 	foreach (@sys_users) {
 		my ($s_label) = split(/:/, $_, 2);
 		if (any { /$s_label/ } @homes) {
-    		$list_model->append_set(undef, $s_label);
+    		$list_model->append_set(0, $s_label);
 		}
 	}
 
@@ -849,7 +849,7 @@ sub maintain_users() {
 		my ($t_label) = split(/:/, $_, 2);
 		my @system_entry = grep { /$t_label/ } @sys_users; 
 		$t_label = $t_label . " !!!" if $_ ne $system_entry[0];
-		$list_model->append_set(undef, $t_label);
+		$list_model->append_set(0, $t_label);
 	}
 	
 	$list_ts_users->get_selection->signal_connect(changed => sub {
@@ -870,7 +870,7 @@ sub maintain_users() {
 					gtksignal_connect(new Gtk2::Button(N("Add User -->")), clicked => 
 						sub { my $result = adduser(0, $sys_user);
 							if ($result == 0) {
-    							$list_model->append_set(undef, $sys_user);
+    							$list_model->append_set(0, $sys_user);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("<-- Del User")), clicked => 
