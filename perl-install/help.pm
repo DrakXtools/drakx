@@ -150,60 +150,6 @@ selectKeyboard =>
 selectPath => 
  __("Choose \"Installation\" if there are no previous versions of Linux
 installed, or if you wish use to multiple distributions or versions.
-  - Beginner: If you have not installed Linux before, or wish to install
-the distribution elected \"Product of the year\" for 1999, click here.
-  - Developer: If you are familiar with Linux and will be using the
-computer primarily for software development, you will find happiness
-here.
-  - Server: If you wish to install a general purpose server, or the
-Linux distribution elected \"Distribution/Server\" for 1999, select
-this.
-  - Expert: If you know GNU/Linux and want to perform a highly
-  - Beginner: If you have not installed Linux before, or wish to install
-the distribution elected \"Product of the year\" for 1999, click here.
-  - Developer: If you are familiar with Linux and will be using the
-computer primarily for software development, you will find happiness
-here.
-  - Server: If you wish to install a general purpose server, or the
-Linux distribution elected \"Distribution/Server\" for 1999, select
-this.
-  - Expert: If you know GNU/Linux and want to perform a highly
-  - Beginner: If you have not installed Linux before, or wish to install
-the distribution elected \"Product of the year\" for 1999, click here.
-  - Developer: If you are familiar with Linux and will be using the
-computer primarily for software development, you will find happiness
-here.
-  - Server: If you wish to install a general purpose server, or the
-Linux distribution elected \"Distribution/Server\" for 1999, select
-this.
-  - Expert: If you know GNU/Linux and want to perform a highly
-  - Beginner: If you have not installed Linux before, or wish to install
-the distribution elected \"Product of the year\" for 1999, click here.
-  - Developer: If you are familiar with Linux and will be using the
-computer primarily for software development, you will find happiness
-here.
-  - Server: If you wish to install a general purpose server, or the
-Linux distribution elected \"Distribution/Server\" for 1999, select
-this.
-  - Expert: If you know GNU/Linux and want to perform a highly
-  - Beginner: If you have not installed Linux before, or wish to install
-the distribution elected \"Product of the year\" for 1999, click here.
-  - Developer: If you are familiar with Linux and will be using the
-computer primarily for software development, you will find happiness
-here.
-  - Server: If you wish to install a general purpose server, or the
-Linux distribution elected \"Distribution/Server\" for 1999, select
-this.
-  - Expert: If you know GNU/Linux and want to perform a highly
-  - Beginner: If you have not installed Linux before, or wish to install
-the distribution elected \"Product of the year\" for 1999, click here.
-  - Developer: If you are familiar with Linux and will be using the
-computer primarily for software development, you will find happiness
-here.
-  - Server: If you wish to install a general purpose server, or the
-Linux distribution elected \"Distribution/Server\" for 1999, select
-this.
-  - Expert: If you know GNU/Linux and want to perform a highly
 
 Choose \"Update\" if you wish to update a previous version of Mandrake
 Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
