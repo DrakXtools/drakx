@@ -331,7 +331,7 @@ sub apply() {
 
 sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig $_[0]` =~ /inet/ }
 
-sub update_intbutt {
+sub update_intbutt() {
     $int_state->set($isconnected ? N("Connected") : N("Not connected"));
     $int_connect->child->set($isconnected ? N("Disconnect...") : N("Connect..."));
     $int_connect->set_sensitive(1);
