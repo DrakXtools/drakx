@@ -19,11 +19,12 @@
  *
  */
 
+#include <stdlib.h>
+
 #ifdef __sparc__
 
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
 #include <asm/openpromio.h>

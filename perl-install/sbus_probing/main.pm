@@ -108,7 +108,7 @@ sub prom_walk($$$$) {
 		       $result;
 		   } ||
 		   $prob_name eq 'leo' && c::prom_getproperty('model') =~ /501-2503/ && '_t' ||
-		   $prob_name eq 'tcx' && c::prom_getboot('tcx-8-bit') && '_8b' ||
+		   $prob_name eq 'tcx' && c::prom_getbool('tcx-8-bit') && '_8b' ||
 		   $prob_name eq 'afb' && sprintf "_btx%x", c::prom_getint('board_type') ||
 		   $prob_name eq 'ffb' && sprintf "_btx%x", c::prom_getint('board_type'));
 

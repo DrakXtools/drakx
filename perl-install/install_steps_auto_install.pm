@@ -35,6 +35,7 @@ sub exitInstall {
     my ($o) = @_;
     return if $o->{autoExitInstall};
 
+    print "\a";
     print "Auto installation complete\n";
     print "Press <Enter> to reboot\n";
     <STDIN>;

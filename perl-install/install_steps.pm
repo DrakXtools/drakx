@@ -308,8 +308,8 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     my $time = time;
     $ENV{DURING_INSTALL} = 1;
     pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages->[1], $packages->[2]);
-    run_program::rooted($o->{prefix}, 'ldconfig');
     delete $ENV{DURING_INSTALL};
+    run_program::rooted($o->{prefix}, 'ldconfig') or die "ldconfig failed!";
     log::l("Install took: ", formatTime(time - $time));
 }
 
@@ -338,14 +338,11 @@ Consoles 1,3,4,7 may also contain interesting information";
     #-  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
 
-    #- call ldconfig at the end of package installation
-    run_program::rooted($o->{prefix}, "ldconfig");
-
     #- configure PCMCIA services if needed.
     $o->pcmciaConfig();
 
     #- for mandrake_firstime
-    output "$o->{prefix}/var/lock/TMP_1ST", "";
+    touch "$o->{prefix}/var/lock/TMP_1ST";
 
     #- remove the nasty acon...
     run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
