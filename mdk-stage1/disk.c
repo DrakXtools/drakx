@@ -33,6 +33,7 @@
 #include "log.h"
 #include "mount.h"
 #include "lomount.h"
+#include "automatic.h"
 
 #include "disk.h"
 
@@ -54,6 +55,7 @@ static char * disk_extract_list_directory(char * direct)
 static enum return_type try_with_device(char *dev_name)
 {
 	char * questions_location[] = { "Directory or ISO image", NULL };
+	char * questions_location_auto[] = { "directory", NULL };
 	static char ** answers_location = NULL;
 	char device_fullname[50];
 	char location_full[500];
@@ -95,8 +97,8 @@ static enum return_type try_with_device(char *dev_name)
 		return RETURN_ERROR;
 	}
 
-	results = ask_from_list_comments("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.",
-					 parts, parts_comments, &choice);
+	results = ask_from_list_comments_auto("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.",
+					      parts, parts_comments, &choice, "partition", parts);
 	if (results != RETURN_OK)
 		return results;
 
@@ -110,8 +112,8 @@ static enum return_type try_with_device(char *dev_name)
 		return try_with_device(dev_name);
 	}
 
-	if (ask_from_entries("Please enter the directory (or ISO image file) containing the " DISTRIB_NAME " Distribution.",
-			     questions_location, &answers_location, 24, NULL) != RETURN_OK) {
+	if (ask_from_entries_auto("Please enter the directory (or ISO image file) containing the " DISTRIB_NAME " Distribution.",
+				  questions_location, &answers_location, 24, questions_location_auto, NULL) != RETURN_OK) {
 		umount(disk_own_mount);
 		return try_with_device(dev_name);
 	}
@@ -218,7 +220,8 @@ enum return_type disk_prepare(void)
 		return disk_prepare();
 	}
 
-	results = ask_from_list_comments("Please choose the DISK drive on which you copied the " DISTRIB_NAME " Distribution.", medias, medias_models, &choice);
+	results = ask_from_list_comments_auto("Please choose the DISK drive on which you copied the " DISTRIB_NAME " Distribution.",
+					      medias, medias_models, &choice, "disk", medias);
 
 	if (results != RETURN_OK)
 		return results;
