@@ -70,7 +70,7 @@ $(FBOOT_IMG): %.img: %.rdz
 
 tar: clean
 	rpm -qa > needed_rpms.lst
-	cd .. ; tar cfy gi.tar.bz2 gi
+	cd .. ; tar cfj gi.tar.bz2 gi
 	rm needed_rpms.lst
 
 perl-install:
