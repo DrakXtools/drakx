@@ -989,14 +989,14 @@ Allowing this will permit users to simply click on "Share" in konqueror and naut
     setVarsInSh($file, \%conf);
     if ($r eq $l[2]) {
 	# custom
-	if ($in->ask_from_('', 
+	if ($in->ask_from_no_check(
 	{
-	 -e '/usr/bin/userdrake' ? (ok => _("Launch userdrake")) : (cancel => ''),	     
-	 title =>
+	 -e '/usr/bin/userdrake' ? (ok => _("Launch userdrake"), cancel => _("Cancel")) : (cancel => ''),
+	 messages =>
 _("The per-user sharing uses the group \"fileshare\". 
 You can use userdrake to add a user in this group.")
-	})) {
-	    if (fork) { exec "userdrake" or c::_exit(0) }
+	}, [])) {
+	    if (!fork) { exec "userdrake" or c::_exit(0) }
 	}
     }
 }
