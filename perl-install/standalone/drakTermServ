@@ -378,9 +378,9 @@ sub text_view {
 }
 
 sub help() {
-	my $inittab_str = "/etc/inittab\$\$IP=client_ip\$\$";
-	my $shadow_str = "/etc/shadow\$\$CLIENT\$\$";
-	my $xfconfig_str = "/etc/X11/XF86Config-4\$\$IP=client_ip\$\$";
+	my $inittab_str = '/etc/inittab$$IP=client_ip$$';
+	my $shadow_str = '/etc/shadow$$CLIENT$$';
+	my $xfconfig_str = '/etc/X11/XF86Config-4$$IP=client_ip$$';
 	
     text_view(N("drakTermServ Overview") . "\n\n" .
 N("        - Create Etherboot Enabled Boot Images:
@@ -667,7 +667,7 @@ sub maintain_users() {
 	#- copy users from /etc/shadow to /etc/shadow$$CLIENT$$ to allow ts login
 	my $user_box;
 	my @sys_users = cat_("/etc/shadow");
-	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
+	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
 	my $titer;
 	
 	#- use /homes to filter system daemons
@@ -1353,7 +1353,7 @@ sub show_status() {
 sub adduser {
 	my ($cmd_line, $username) = @_;
 	my @active_users = cat_("/etc/shadow");
-	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
+	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
 	my $is_user = grep { /$username/ } @active_users;
 	my $add_fail = 0;
 	my $in_already;
@@ -1374,7 +1374,7 @@ sub adduser {
 		} else {
 			# new ts user
 			local *FHANDLE;
-			open(FHANDLE, ">> /etc/shadow\$\$CLIENT\$\$");
+			open(FHANDLE, '>> /etc/shadow$$CLIENT$$');
 			print FHANDLE $shadow_entry[0] or $add_fail = 1; 
 			close FHANDLE;
 			$in_already = 0;
@@ -1401,7 +1401,7 @@ sub deluser {
 	my $i;
 	my $user_deleted;
 		
-	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
+	my @ts_users = cat_('/etc/shadow\$\$CLIENT$$');
 	my $is_ts_user = grep { /$username/ } @ts_users;
 	
 	if ($is_ts_user) {
@@ -1415,7 +1415,7 @@ sub deluser {
 			$i++;
 		}
 		local *FHANDLE;
-		open(FHANDLE, "> /etc/shadow\$\$CLIENT\$\$");
+		open(FHANDLE, '> /etc/shadow$$CLIENT$$');
 		print FHANDLE $_ foreach @ts_users;
 		close FHANDLE;
 	}
@@ -1631,7 +1631,7 @@ sub client_hdw_config {
 	if ($mode == 1) {
 		log::explanations("Allowing root access for $client_ip");
 		my $suffix = "\$\$IP=$client_ip\$\$";
-		cp_af("/etc/shadow\$\$CLIENT\$\$", "/etc/shadow$suffix");
+		cp_af('/etc/shadow$$CLIENT$$', "/etc/shadow$suffix");
 		my @sys_users = cat_("/etc/shadow");
 		foreach (@sys_users) {
 			if (/^root:/) {
@@ -1643,7 +1643,7 @@ sub client_hdw_config {
 		# make all the local config files
 		cp_af("/etc/sysconfig/mouse", "/etc/sysconfig/mouse$suffix") if -f "/etc/sysconfig/mouse";
 		cp_af("/etc/X11/XF86Config", "/etc/X11/XF86Config$suffix") if -f "/etc/X11/XF86Config";
-		cp_af("/etc/X11/XF86Config-4\$\$CLIENT\$\$", "/etc/X11/XF86Config-4$suffix") if -f "/etc/X11/XF86Config-4\$\$CLIENT\$\$";
+		cp_af('/etc/X11/XF86Config-4$$CLIENT$$', "/etc/X11/XF86Config-4$suffix") if -f '/etc/X11/XF86Config-4$$CLIENT$$';
 		cp_af("/dev/null", "/etc/modules.conf$suffix");
 		cp_af("/dev/null", "/etc/modules$suffix");
 		# create mount points so they can be edited by the client

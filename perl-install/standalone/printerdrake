@@ -122,7 +122,7 @@ my $error = 0;
 my $GetValue = -65533;
 my $stringsearch = '';
 
-sub HelpSystem { exec("drakhelp --id printerdrake") unless fork(); };
+sub HelpSystem { exec("drakhelp --id printerdrake") unless fork() };
 
 $us->{wnd} = ugtk2->new(N("Mandrake Linux Printer Management Tool") . " " . $us->{VERSION});
 gtkset_size_request($us->{wnd}{rwindow}, 660, 460);
@@ -131,8 +131,8 @@ if (!$::isEmbedded) {
     $us->{wnd}{rwindow}->set_position('center');
 }
 $us->{wnd}{window}->signal_connect(delete_event => \&QuitGlobal);
-my $ltree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String" );
-my $rtree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String" );
+my $ltree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
+my $rtree_model = Gtk2::ListStore->new("Glib::String", "Glib::String", "Glib::String", "Glib::String", "Glib::String");
 my ($localtree, $remotetree);
 $localtree = CreateTree($ltree_model);
 $remotetree = CreateTree($rtree_model);
@@ -146,7 +146,7 @@ my %options = (
 my %buttorcheck;
 my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{rwindow},
                                            ([ N("/_File"), undef, undef, undef, '<Branch>' ],
-                                            [ N("/_File") . N("/_Refresh"), undef, sub { Refresh($stringsearch)}, undef, '<StockItem>', 'gtk-refresh' ],
+                                            [ N("/_File") . N("/_Refresh"), undef, sub { Refresh($stringsearch) }, undef, '<StockItem>', 'gtk-refresh' ],
                                             [ N("/_File") . N("/_Quit"), N("<control>Q"), \&QuitGlobal, undef, '<StockItem>', 'gtk-quit' ],
                                             [ N("/_Actions"), undef, undef, undef, '<Branch>' ],
                                             [ N("/_Actions") . N("/_Add Printer"), undef, \&AddPrinter, undef, '<StockItem>', 'gtk-add' ],
@@ -188,20 +188,20 @@ my $searchBox = gtkpack_(Gtk2::HBox->new(0,5),
                          1, Gtk2::Label->new(""),
                          0, Gtk2::Label->new(N("Search:")),
                          0, gtksignal_connect($filter = Gtk2::Entry->new,
-				       key_press_event => sub { $_[1]->keyval == $Gtk2::Gdk::Keysyms{Return} and Refresh($filter->get_text()) } ),
+				       key_press_event => sub { $_[1]->keyval == $Gtk2::Gdk::Keysyms{Return} and Refresh($filter->get_text) }),
                          0, my $fbut = Gtk2::Button->new(N("Apply filter")),
                         );
 gtkappend_page(my $nb = Gtk2::Notebook->new, gtkpack(create_scrolled_window($localtree)), gtkshow(Gtk2::Label->new(N("Configured on this machine"))));
 gtkappend_page($nb, gtkpack(create_scrolled_window($remotetree)), gtkshow(Gtk2::Label->new(N("Configured on other machines"))));
 $nb->set_show_border(0);
-$us->{wnd}{window}->add( gtkpack_(Gtk2::VBox->new(0, 0),
+$us->{wnd}{window}->add(gtkpack_(Gtk2::VBox->new(0, 0),
 				  0, $menu,
 				  0, $toolb,
 				  0, $searchBox,
 				  0, Gtk2::HSeparator->new,
-				  1, $nb ));
+				  1, $nb));
 my @lcolsize = (1, 1, 1, 1, 1, 1, -1);
-my @rcolsize = (1, 1, 1, 1, 1, -1) ;
+my @rcolsize = (1, 1, 1, 1, 1, -1);
 each_index {
     my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i);
     $col->set_sort_column_id($::i);
@@ -215,10 +215,9 @@ each_index {
     $col->set_min_width($rcolsize[$::i]);
     $remotetree->append_column($col);
 } (N("Def."), N("Printer Name"), N("Server Name"), N("Description"), N("Location"));
-my @toolbwg;
-map {
-    my $t = $toolb->append_item($_->[0], $_->[1], $_->[2],  
-			       Gtk2::Image->new_from_file($pixdir . $_->[2] . '.png'), $_->[3], $toolb); push(@toolbwg, $t);
+my @toolbwg = map {
+    $toolb->append_item($_->[0], $_->[1], $_->[2],  
+                        Gtk2::Image->new_from_file($pixdir . $_->[2] . '.png'), $_->[3], $toolb);
 #    $toolb->append_space;
 #-PO "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
 } ( [ N("Add Printer"), N("Add a new printer to the system"), 'printer_add', \&AddPrinter ], 
@@ -236,7 +235,7 @@ map {
 my ($tbadd, $tbdefault, $tbedit, $tbdel, $tbref, $tbconfig) = @toolbwg;
 GrayDelEdit();
 
-$fbut->signal_connect('clicked', sub { $stringsearch = $filter->get_text() ; Refresh($stringsearch) });
+$fbut->signal_connect('clicked', sub { $stringsearch = $filter->get_text; Refresh($stringsearch) });
 Refresh($stringsearch);
 $nb->signal_connect('switch-page' => sub { NotebookSwitch() });
 $us->{wnd}{rwindow}->show_all;
@@ -256,7 +255,7 @@ Gtk2->main;
 ugtk2->exit;
 
 sub GrayDelEdit {
-    foreach (($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete})) { defined $_ and $_->set_sensitive(0) };
+    foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { defined $_ and $_->set_sensitive(0) };
 }
 
 sub TreeUnselect {
@@ -265,7 +264,7 @@ sub TreeUnselect {
     GrayDelEdit()
 }
 sub NotebookSwitch { 
-    my $page = $nb->get_current_page();
+    my $page = $nb->get_current_page;
     TreeUnselect($localtree);
     TreeUnselect($remotetree);
     #set_selection_on_first();
@@ -274,7 +273,7 @@ sub NotebookSwitch {
 sub RefreshLocalPrintersFull {
     my ($strfilt) = @_;
     my @printers;
-    defined $printer and @printers = keys %{$printer->{'configured'}};
+    defined $printer and @printers = keys %{$printer->{configured}};
     $ltree_model->clear;
     my @LocalReal;
     LOOP: foreach my $p (@printers) {
@@ -305,9 +304,9 @@ sub RefreshRemotePrintersFull {
     my ($strfilt) = @_;
     my @printers;
     defined $printer and @printers = printer::cups::lpstat_lpv();
-    $rtree_model->clear();
+    $rtree_model->clear;
     my @RemoteReal;
-    LOOP:foreach my $p (@printers) {
+    LOOP: foreach my $p (@printers) {
 	# No locally defined queues
 	next LOOP if defined($printer->{configured}{$p->{queuename}});
 	# Apply string search to all fields, not only the printer name
@@ -405,7 +404,7 @@ sub activate_mainwindow {
 
 sub set_selection_on_first {
     # On which page are we currently
-    my $page = $nb->get_current_page();
+    my $page = $nb->get_current_page;
     my ($tree, $model);
     if ($page <= 0) {
 	# Locally defined printer: first page
@@ -416,12 +415,12 @@ sub set_selection_on_first {
 	$tree = $remotetree;
 	$model = $rtree_model;
     }
-    my $iter = $model->get_iter_first();
+    my $iter = $model->get_iter_first;
     $tree->get_selection->select_iter($iter) if $iter;
 }
 
 sub set_selection {
-    my ($queue) = (@_);
+    my ($queue) = @_;
     return if !$queue;
     my ($tree, $model, $page);
     if (defined($printer->{configured}{$queue})) {
@@ -436,7 +435,7 @@ sub set_selection {
 	$page = 1;
     }
     # Search entry on page
-    my $iter = $model->get_iter_first();
+    my $iter = $model->get_iter_first;
     while ($iter) {
 	my $q = $model->get($iter, 1);
 	if ($q eq $queue) {
@@ -453,7 +452,7 @@ sub set_selection {
 
 sub get_selection {
     my $queue;
-    my $page = $nb->get_current_page();
+    my $page = $nb->get_current_page;
     if ($page <= 0) {
 	$queue = GetNameEntFromIter($localtree, $ltree_model, 1);
     } elsif ($page == 1) {
@@ -476,14 +475,14 @@ sub CreateTree {
     $tree->get_selection->set_mode('browse');
     $tree->set_headers_visible(1);
     $tree->set_rules_hint(1);
-    $tree->get_selection->signal_connect('changed' => sub { foreach (($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete})) { $_->set_sensitive(1);} });
+    $tree->get_selection->signal_connect('changed' => sub { foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { $_->set_sensitive(1) } });
     $tree->signal_connect(button_press_event => sub {
 			       my (undef, $event) = @_;
 			       my (undef, $iter) = $tree->get_selection->get_selected;
 			       return unless $iter;
-			       foreach (($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete})) { $_->set_sensitive(1) };
+			       foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { $_->set_sensitive(1) };
 			       my $queue = $tree_model->get($iter, 1);
-			       if(!defined($printer->{configured}{$queue})){
+			       if (!defined($printer->{configured}{$queue})) {
 				   foreach ($tbdel, $buttorcheck{delete}) { 
 				       $_->set_sensitive(0);
 				   }
@@ -494,14 +493,14 @@ sub CreateTree {
 			       my (undef, $event) = @_;
 			       my (undef, $iter) = $tree->get_selection->get_selected;
 			       return unless $iter;
-			       Edit() if ($event->keyval == $Gtk2::Gdk::Keysyms{Return});
+			       Edit() if $event->keyval == $Gtk2::Gdk::Keysyms{Return};
 			   });
     $tree
 }
 
 sub NewDialog {
     my ($title, $no_button) = @_;
-    my $dialog = gtkset_border_width(Gtk2::Dialog->new(), 10);
+    my $dialog = gtkset_border_width(Gtk2::Dialog->new, 10);
     $dialog->set_transient_for($us->{wnd}{rwindow});
     $dialog->set_position('center-on-parent');
     $dialog->set_title($title);
@@ -522,7 +521,7 @@ sub About {
     foreach my $row ([ N("Authors: "), '', '' ], [ '', 'Till Kamppeter', '<till@mandrakesoft.com>' ], ['', '', '']) {
         $tree_model->append_set(undef, [ map_index { $::i => $_ } @$row ]);
     }
-    $list->get_selection()->set_mode('none');
+    $list->get_selection->set_mode('none');
     gtkpack_($window_about->vbox,
              -r "$pixdir/printerdrake.png" ?
              (0, Gtk2::Image->new_from_file("$pixdir/printerdrake.png")) : (1, gtkmodify_font(Gtk2::Label->new(N("Printer Management \n") . $us->{VERSION}), 'Bold 18'),),
