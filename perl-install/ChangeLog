@@ -1,3 +1,447 @@
+2002/07/31  Christian Belisle  <cbelisle@mandrakesoft.com>
+
+	* security/msec.pm: 
+	  - Fix page change between checks -> advanced
+	  - Factorize options-related functions
+	  - s/choose_options/choose_functions
+	  - Added security checks page
+	  - put the basic button on top (in the advanced page)
+	  - move set_server_link in the ignore list temporary
+
+	* security/main.pm: 
+	  - Factorize options-related functions
+	  - s/choose_options/choose_functions
+	  - Added security checks page
+	  - factorize functions (many functions -> one function)
+
+2002/07/31  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* share/rpmsrate: 
+	  - s/GNOME/X/ for gnome-linuxconf
+
+	* standalone/drakbug: 
+	  - many changes
+	  - command line support (--report name_of_program), to be used in tools
+	  - ergonomy fixes (use table to align widget correctly)
+
+2002/07/31  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* run_program.pm: 
+	  - fix $ENV{HOME} value to '/root' if usermode break it
+
+2002/07/31  gbeauchesne
+
+	* c/Makefile.PL: lib64 fixes
+
+2002/07/31  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/cdrom.c: hopefully fix "device or resource busy" problem in
+	cdrom
+	automatic mode (I messed up between truth value and number in a
+	list... the first value is numbered "0" whicih is "false"...)
+
+2002/07/31  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/help-it.pot, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/bs.po, share/po/ro.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/vi.po, share/po/fr.po,
+	share/po/nl.po, share/po/it.po, share/po/help-fr.pot, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/lv.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/hu.po: updated pot file
+
+	* share/po/pt.po, share/po/eu.po: updated Portuguese file
+	updated pot file
+
+2002/07/31  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/main.pm: 
+	  - add non-wizard ability to XFdrake
+	  - first part of ATI TVout support
+	(still needs patching initscript, and adding an entry in bootloader)
+	  (and testing of course :)
+
+	* install_steps_interactive.pm, printerdrake.pm, pkgs.pm, network/adsl.pm,
+	modules.pm, commands.pm, install_interactive.pm, install_steps_gtk.pm,
+	interactive/stdio.pm, services.pm, keyboard.pm: make new perl_checker
+	happy
+	make new perl_checker happy (and that's not easy!)
+
+	* any.pm (devfssymlinkf): when creating a symlink on the system, use devfs
+	name if devfs is mounted
+	replace "$foo" with $foo
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* Xconfig/test.pm: change the location of X test image as told by dadou
+
+	* Xconfig/resolution_and_depth.pm (choose_gtk): ensure the response is one
+	of @resolutions (so that Y and maybe bios is kept)
+	(to_string): created
+	fix using $_ instead of $_[0] (thanks to perl_checker)
+	make new perl_checker happy (and that's not easy!)
+
+	* network/modem.pm: replace "$foo" with $foo
+
+	* resize_fat/info_sector.pm, Xconfig/xfreeX.pm: make perl_checker happy
+	again (replacing "{xx}->{yy}" by "{xx}{yy}")
+
+	* printer.pm, install_any.pm, detect_devices.pm: make perl_checker happy
+	again (replacing "{xx}->{yy}" by "{xx}{yy}")
+	replace "$foo" with $foo
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* bootlook.pm, network/netconnect.pm, network/ethernet.pm: make
+	perl_checker happy again (replacing "{xx}->{yy}" by "{xx}{yy}")
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* network/tools.pm, install_gtk.pm, network/isdn.pm: replace "$foo" with
+	$foo
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* my_gtk.pm (create_box_with_title): create an empty box when there is no
+	message
+	(also don't set $o->{box} since unused outside of this function)
+	replace "$foo" with $foo
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* Xconfig/card.pm: 
+	  - add non-wizard ability to XFdrake
+	  - first part of ATI TVout support
+	(still needs patching initscript, and adding an entry in bootloader)
+	  (and testing of course :)
+	handle cancel in xfree_and_glx_choose
+	default VideoRam choice 4096 when needVideoRam
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* network/network.pm: make perl_checker happy again (replacing
+	"{xx}->{yy}" by "{xx}{yy}")
+	replace "$foo" with $foo
+	  - have is_ip return the 4 parts of the ip address
+	  - cleanup
+	make new perl_checker happy (and that's not easy!)
+
+	* interactive/gtk.pm: allow "icon" to use the icon path
+	make new perl_checker happy (and that's not easy!)
+
+	* Makefile, crypto.pm: make new perl_checker happy
+
+	* Xconfig/monitor.pm: fix keeping the existing name when choosing monitor
+
+	* resize_fat/main.pm: make perl_checker happy again (replacing
+	"{xx}->{yy}" by "{xx}{yy}")
+	make new perl_checker happy
+
+	* standalone/mousedrake: Handle parsing --embedded command line in
+	standalone.pm
+	=> allows to remove the somewhat mythical
+	$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+	what is needed for usbmouse is "hid mousedev usbmouse" not the weird
+	"serial_usb"
+	make new perl_checker happy
+
+	* mouse.pm (read): don't look at /dev/mouse symlink to get {device},
+	sysconfig/mouse
+	gives it, so why bother (this fixes /dev//dev/misc/psaux bug)
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* standalone/logdrake, standalone/tinyfirewall, standalone/drakboot,
+	standalone.pm, standalone/drakTermServ, standalone/net_monitor,
+	standalone/drakbackup, standalone/printerdrake, standalone/drakconnect,
+	standalone/drakxtv, standalone/draksec, standalone/drakxservices,
+	standalone/drakautoinst, standalone/drakproxy, standalone/diskdrake,
+	standalone/drakfloppy, standalone/drakfont, standalone/scannerdrake:
+	Handle parsing --embedded command line in standalone.pm
+	=> allows to remove the somewhat mythical
+	$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+
+	* standalone/keyboarddrake, standalone/drakgw: Handle parsing --embedded
+	command line in standalone.pm
+	=> allows to remove the somewhat mythical
+	$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+	make new perl_checker happy
+
+	* install2.pm: allow acceptLicence to be automatic
+	make new perl_checker happy
+	make new perl_checker happy (and that's not easy!)
+
+	* diskdrake/interactive.pm: make perl_checker happy again (replacing
+	"{xx}->{yy}" by "{xx}{yy}")
+	make new perl_checker happy (and that's not easy!)
+
+	* standalone/XFdrake: Handle parsing --embedded command line in
+	standalone.pm
+	=> allows to remove the somewhat mythical
+	$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+	  - add non-wizard ability to XFdrake
+	  - first part of ATI TVout support
+	  (still needs patching initscript, and adding an entry in bootloader)
+	  (and testing of course :)
+	use configure_chooser when there is an existing configuration
+
+	* log.pm, interactive.pm, resize_fat/fat.pm, network/smb.pm, raid.pm,
+	partition_table.pm, diskdrake/hd_gtk.pm, install_steps.pm, swap.pm,
+	resize_fat/directory.pm, devices.pm, lang.pm, partition_table/raw.pm,
+	bootloader.pm, fsedit.pm, network/isdn_consts.pm: make new perl_checker
+	happy (and that's not easy!)
+
+	* Xconfig/various.pm: make perl_checker happy again (replacing
+	"{xx}->{yy}" by "{xx}{yy}")
+	  - add non-wizard ability to XFdrake
+	  - first part of ATI TVout support
+	(still needs patching initscript, and adding an entry in bootloader)
+	  (and testing of course :)
+	(info): fix displaying depth
+
+2002/07/31  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: Started working on network printer auto-detection.
+
+	* detect_devices.pm: Added subroutines for ethernet printer
+	auto-detection.
+
+2002/07/31  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: 
+	  - bump harddrake version
+	  - module configuration is saved (todo: read the config)
+	initial configuration window for modules. nothing is done yet.
+	remove latest (?) gtk warnings
+	don't display bogus fields
+	in embedded mode, don't kill the main gtk app (aka drakconf) but
+	only harddrake
+	  - add embedded mode for drakconf
+	further simplification
+	  - the hw tree and the info text are auto-size now
+	  - further ui simplifications
+	still more my_gtk simplifications
+	 ui.pm |   49 ++++++++++++++++---------------------------------
+	 1 files changed, 16 insertions(+), 33 deletions(-)
+	  - simplify Gtk::Text filling
+	
+	  - less gtk warnings get printed
+	further my_gtk simplifications
+	further my_gtk simplifications
+	further use of my_gtk
+	  - remove useless realizations
+	
+	  - simplify ctree and frames creation
+	  - make used once callbacks be anonymous functions
+	
+	  - replace scores of useless ->show() call by one show_all() call
+	
+	
+	 ui.pm |   82
+	+++++++++++++++++++++++++++---------------------------------------
+	 1 files changed, 34 insertions(+), 48 deletions(-)
+
+	* printer.pm: "cp -a" doesn't need "echo yes|"
+
+	* modparm.pm: split parameters in raw_parameters and parameters.
+	raw_parameters is
+	used by harddrake to list module options in order to offer a module
+	configuration window.
+
+	* harddrake/TODO: update
+	  - bump harddrake version
+	  - module configuration is saved (todo: read the config)
+	in embedded mode, don't kill the main gtk app (aka drakconf) but
+	only harddrake
+	  - add embedded mode for drakconf
+	  - bump version number
+	  - fix pcmcia network card detection (no more unknown)
+	  - fix scsi detection :
+	
+		o fix SCSI controllers detection (no more unknown)
+	
+		o fix misdetection of scsi devices as scsi host adapter
+	
+		o fix double scsi devices detection (both unknown and real
+		  category)
+	
+	  - update TODO list
+
+	* Makefile: rename a few target:
+	  - srpm -> slowsrpm
+	  - fastsrpm -> srpm
+
+	* drakxtools.spec: 15mdk (will be released tomorrow before the beta2)
+	don't require detect-lst, it'll take harddrake instead :-(
+	14mdk
+
+	* harddrake/data.pm: 
+	  - bump harddrake version
+	  - module configuration is saved (todo: read the config)
+	  - bump version number
+	  - fix pcmcia network card detection (no more unknown)
+	  - fix scsi detection :
+	
+		o fix SCSI controllers detection (no more unknown)
+	
+		o fix misdetection of scsi devices as scsi host adapter
+	
+		o fix double scsi devices detection (both unknown and real
+		  category)
+	
+	  - update TODO list
+
+	* share/po/fr.po: update fr translation
+
+2002/07/30  alus
+
+	* share/po/pl.po: variuos fixes and updates
+	updates
+
+2002/07/30  Christian Belisle  <cbelisle@mandrakesoft.com>
+
+	* security/libsafe.pm: 
+	  - complete re-write of draksec. splitted all the libsafe related
+	functions
+	in this file.
+
+	* security/msec.pm, standalone/draksec: 
+	  - complete re-write
+
+	* security/main.pm: 
+	  -complete re-write of draksec. The main functions will go in this
+	file.
+
+2002/07/30  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* Makefile.drakxtools: 
+	  - mv drakbug executable from $$SBINDEST to $$BINDEST
+
+2002/07/30  gbeauchesne
+
+	* tools/Makefile, tools/aewm-drakx/Makefile: lib64 fixes
+
+2002/07/30  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/lt.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/bs.po, share/po/ro.po,
+	share/po/wa.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: reflect errata changes
+
+	* install_steps_interactive.pm: have errata in parameter to not break too
+	much updates
+	8.2->9.0
+	s/82errata.php3/90errata.php3/
+
+2002/07/30  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cs.po: updated po file
+
+2002/07/30  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: 
+	  - call fsck.jfs before mounting read-write (otherwise mount simply
+	fails)
+	  - propose fsck -y for ext2 when fsck -a fails
+
+	* standalone/drakbackup: never EVER put $xxxx in to-be-translated
+	strings!!
+
+	* diskdrake/interactive.pm (Add2LVM): for LVM on RAID, ensure the RAID is
+	created & enabled
+
+	* Xconfig/parse.pm: fix handling of commented empty line
+
+	* standalone/drakautoinst: use $o->{interactiveSteps} instead of
+	@install_steps_auto_install::graphical_steps
+
+	* keyboard.pm, c/stuff.xs.pl, detect_devices.pm, install_steps.pm: use usb
+	keyboard bCountryCode to choose the right keyboard
+
+	* install_steps_interactive.pm: use usb keyboard bCountryCode to choose
+	the right keyboard
+	  - call fsck.jfs before mounting read-write (otherwise mount simply
+	fails)
+	  - propose fsck -y for ext2 when fsck -a fails
+
+2002/07/30  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printerdrake.pm: Better placement for waiting message.
+
+	* printer.pm: Fixed a typo and a comment in the "SIGHUP_daemon()"
+	function.
+
+2002/07/30  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* share/po/fr.po: further translations
+	update fr translation
+
+	* standalone/drakbackup: don't translate useless strings (here: "\n")
+
+	* standalone/drakbug: deush need to learn english
+
+2002/07/29  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (g_auto_install): also save chosen on_services (this is
+	the only thing left to do to make it work :)
+
+	* mouse.pm: 
+	  - don't display "To activate the mouse, MOVE YOUR WHEEL!" when not
+	install
+	  - don't display "Please test the mouse" either
+	allow to not mess with X config auxmouse
+	(that way mousedrake doesn't need to care about it)
+
+	* run_program.pm: fix rooted() when chrooted and saving the result in a
+	perl variable
+
+	* Xconfig/resolution_and_depth.pm (configure_auto_install): really use
+	resolution_wanted given in $o
+
+	* partition_table.pm: cleanup
+
+	* services.pm (ask_standalone_gtk, ask_install): only return the
+	on_services (those
+	functions used to return ($l, $on_services) which used in a scalar
+	context
+	returned $on_services)
+
+	* standalone/mousedrake: 
+	  - fix using deprecated Xconfig.pm
+	  - document dam's hack for test mouse
+	  - cleanup
+	  - don't bother reading XFree mouse config
+	(using keep_auxmouse_unchanged of mouse::write_conf)
+
+	* diskdrake/interactive.pm: nicer error message when "You can't create a
+	new partition
+	(since you reached the maximal number of primary partitions).
+	First remove a primary partition and create an extended partition."
+
+	* printer.pm: make perl_checker happy
+
+	* standalone/XFdrake: make perl_checker happy
+	(ask_for_X_restart): make it work
+
+2002/07/29  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: Fixed some "$prefix" issues in the HPOJ auto-configuration
+	and in the Star Office/OpenOffice.org auto-configuration.
+
 2002/07/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* install_any.pm: use aliases for stage1 params to reduce kernel msg
