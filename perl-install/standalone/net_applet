@@ -44,7 +44,7 @@ my %appletstate = (
 	    );
 
 my %actions = (
-               'confNetwork' => { name => N("Configure Network"), launch => sub { configNetwork() } },
+               'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },
                'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } }
               );
