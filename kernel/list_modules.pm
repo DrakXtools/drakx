@@ -59,7 +59,7 @@ our %l = (
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
-      qw(b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam divas),
+      qw(cdc-acm b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam divas),
     ],
   },
 
