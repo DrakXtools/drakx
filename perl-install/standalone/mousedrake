@@ -6,6 +6,7 @@ use common qw(:common :system);
 use interactive;
 use mouse;
 use c;
+require 'dumpvar.pl';
 
 local $_ = join '', @ARGV;
 
@@ -33,7 +34,6 @@ if (!$mouse || !$::auto) {
 	eval { modules::load($c->[1], "serial_usb") };
     }
 }
-
 $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
 
 $o->{mouse}{device} = 
@@ -42,34 +42,7 @@ $o->{mouse}{device} =
 		     \&mouse::serial_port2text,
 		     [ mouse::serial_ports ]) if $mouse->{type} eq 'serial';
 
-mouse::write('', $mouse);
-modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
-
-my $f = "/etc/X11/XF86Config";
-my $g = "/etc/X11/XF86Config-4";
-
-my @zaxis = (
-  $mouse->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
-  $mouse->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
-  $mouse->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
-);
-
-my $zaxis = join('', map { qq(\n    $_->[0]) . ($_->[1] && qq( $_->[1])) } @zaxis);
-substInFile {
-    if (/^Section\s+"Pointer"/ .. /^EndSection/) {
-	$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-	s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
-	s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
-    }
-} $f if -e $f && !$::testing;
-
-$zaxis = join('', map { qq(\n    Option "$_->[0]") . ($_->[1] && qq( "$_->[1]")) } @zaxis);
-substInFile {
-    if (/Identifier\s+"Mouse1"/ .. /^EndSection/) {
-	$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-	s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
-	s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$zaxis|;
-    }
-} $g if -e $g && !$::testing;
+dumpValue(\$mouse);
+mouse::write_conf($mouse);
 
 $in->exit(0);
