@@ -396,7 +396,6 @@ sub advanced {
 
     read_conf_file();
 
-
     my ($pix_net_map, $pix_net_mask) = gtkcreate_png("../pixmaps/backup_net.png");
     my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
     my ($pix_time_map, $pix_time_mask) = gtkcreate_png("../pixmaps/backup_time.png");
@@ -404,6 +403,9 @@ sub advanced {
     my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("../pixmaps/bootloader.png");
     my ($pix_other_map, $pix_other_mask) = gtkcreate_png("../pixmaps/net_u.png");
     my ($pix_options_map, $pix_options_mask) = gtkcreate_png("../pixmaps/backup_options.png");
+    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("../pixmaps/hd.png");
+    my ($pix_net2_map, $pix_net2_mask) = gtkcreate_png("../pixmaps/net.png");
+    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("../pixmaps/cdrom.png");
 
     my $label_what = gtkpack(new Gtk::VBox( 0, 2),
 			 new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
@@ -438,18 +440,18 @@ sub advanced {
 			 ); 
 
     my $label_where_network = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
-			 _(" Network & \n MandrakeOnline ")
+			 new Gtk::Pixmap($pix_net2_map, $pix_net2_mask),
+			 _(" Network ")
 			 );
 
     my $label_where_cd = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
-			 _(" Hard Drive ")
+			 new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
+			 _(" CDROM ")
 			 );
 
     my $label_where_hd = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
-			 _(" CDROM ")
+			 new Gtk::Pixmap($pix_hd2_map, $pix_hd2_mask),
+			 _(" Hard Drive ")
 			 );
 
     my $box_what_sys =  gtkpack_(new Gtk::VBox(0,1),
