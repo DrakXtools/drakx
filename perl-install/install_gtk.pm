@@ -261,7 +261,7 @@ EndSection
 
 Section "InputDevice"
     Identifier "Keyboard"
-    Driver "Keyboard"
+    Driver "keyboard"
     %s
     Option "XkbModel" "pc105"
     Option "XkbLayout" ""
