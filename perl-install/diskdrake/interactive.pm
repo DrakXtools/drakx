@@ -1006,11 +1006,10 @@ sub is_part_existing {
 
 sub modifyRAID {
     my ($in, $raids, $md_part) = @_;
-    my @free_mds = difference2([ map { "md$_" } 0 .. raid::max_nb() ], [ map { $_->{device} } @$raids ]);
     my $prev_device = $md_part->{device};
     $in->ask_from('', '',
 		  [
-{ label => N("device"), val => \$md_part->{device}, list => [ $md_part->{device}, @free_mds ] },
+{ label => N("device"), val => \$md_part->{device}, list => [ $md_part->{device}, raid::free_mds($raids) ], sort => 0 },
 { label => N("level"), val => \$md_part->{level}, list => [ qw(0 1 4 5 linear) ] },
 { label => N("chunk size in KiB"), val => \$md_part->{'chunk-size'} },
 		  ],
