@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 9mdk
+Release: 10mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Mar 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-10mdk
+- drakboot: enhance yaboot macos entry handling (cjw, #14642)
+- drakconnect: disable network hotplug for the via-velocity driver
+  (#14763)
+- drakups:
+  o fix driver for APC UPSes for auto USB probing
+  o set extra parameters if present
+- net_applet (blino):
+  o force start from menu (#14858)
+  o don't modify autostart config file value if started with --force
+- XFdrake (blino):
+  o use new recommended settings for synaptics-0.14.0
+  o use specific Synaptics settings for ALPS devices (#14512)
+
 * Fri Mar 18 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-9mdk
 - drakTermServ: detect all NIC that're know to drakconnect
 - drakups: fix device path when manually adding an UPS (#12290)
