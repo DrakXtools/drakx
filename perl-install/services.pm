@@ -185,16 +185,16 @@ sub ask_standalone_gtk {
     my ($in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
 
-    require my_gtk;
-    my_gtk->import(qw(:helpers :wrappers));
+    require ugtk2;
+    ugtk2->import(qw(:wrappers :create));
 
-    my $W = my_gtk->new(N("Services"));
+    my $W = ugtk2->new(N("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
-    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup = new Gtk::Window('-popup'),
-        				       gtksignal_connect(gtkadd(new Gtk::EventBox(),
-        				           gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'),
-        					   gtkset_justify(new Gtk::Label($_[0]), 0))),
+    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup = Gtk2::Window->new('popup'),
+        				       gtksignal_connect(gtkadd(Gtk2::EventBox->new,
+        				           gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
+        					   gtkset_justify(Gtk2::Label->new($_[0]), 0))),
         					   button_press_event => sub { $nopop->() }
 		      ))), $x, $y) };
     my $update_service = sub {
@@ -212,28 +212,28 @@ sub ask_standalone_gtk {
                 }
                 $infos .= $infos_old;
     };
-    my $b = new Gtk::EventBox();
-    $b->set_events(["pointer_motion_mask"]);
+    my $b = Gtk2::EventBox->new;
+    $b->set_events('pointer_motion_mask');
     gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(N("Services and deamons")),
-	1, gtkset_usize(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
+	1, gtkset_size_request(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;
         	my $infos = $strip->(description($_, $prefix));
                 $infos ||= N("No additional information\nabout this service, sorry.");
-		my $l = new Gtk::Label();
+		my $l = Gtk2::Label->new;
                 my ($started, $action) = $update_service->($service, gtkset_justify($l, 0));
-		[ gtkpack__(new Gtk::HBox(0,0), $_),
-		  gtkpack__(new Gtk::HBox(0,0), $l),
-		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(N("Info")), clicked => sub { $display->($infos) })),
-                  gtkpack__(new Gtk::HBox(0,0), gtkset_active(gtksignal_connect(
-                          new Gtk::CheckButton(N("On boot")),
+		[ gtkpack__(Gtk2::HBox->new(0,0), $_),
+		  gtkpack__(Gtk2::HBox->new(0,0), $l),
+		  gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(N("Info")), clicked => sub { $display->($infos) })),
+                  gtkpack__(Gtk2::HBox->new(0,0), gtkset_active(gtksignal_connect(
+                          Gtk2::CheckButton->new(N("On boot")),
                           clicked => sub { if ($_[0]->active) {
                                                push @$on_services, $service if !member($service, @$on_services);
                                            } else {
                                                @$on_services = grep { $_ ne $service } @$on_services;
                                         } }), member($service, @$on_services))),
 		  map { my $a = $_;
-                      gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(translate($a)),
+                      gtkpack__(Gtk2::HBox->new(0,0), gtksignal_connect(Gtk2::Button->new(translate($a)),
                           clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_ = `$c`; s/\033\[[^mG]*[mG]//g;
                                            ($started, $action) = $update_service->($service, $l);
                                            $display->($_);
@@ -242,7 +242,7 @@ sub ask_standalone_gtk {
 		]
 	    }
             @$l)), 500, 400),
-            0, gtkpack(gtkset_border_width(new Gtk::HBox(0,0),5), $W->create_okcancel)
+            0, gtkpack(gtkset_border_width(Gtk2::HBox->new(0,0),5), $W->create_okcancel)
             ))
 	  );
     $b->signal_connect(motion_notify_event => sub { my ($w, $e) = @_;

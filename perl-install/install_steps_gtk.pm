@@ -13,8 +13,7 @@ use pkgs;
 use install_steps_interactive;
 use interactive::gtk;
 use common;
-use my_gtk qw(:helpers :wrappers);
-use Gtk;
+use ugtk2 qw(:helpers :wrappers :create);
 use devices;
 use modules;
 use install_gtk;
@@ -30,7 +29,7 @@ sub new($$) {
     my ($type, $o) = @_;
 
     my $old = $SIG{__DIE__};
-    $SIG{__DIE__} = sub { $_[0] !~ /my_gtk\.pm/ and goto $old };
+    $SIG{__DIE__} = sub { $_[0] !~ /ugtk2\.pm/ and goto $old };
 
     $ENV{DISPLAY} ||= $o->{display} || ":0";
     unless ($::testing) {
@@ -105,11 +104,12 @@ sub new($$) {
 	}
     }
   OK:
+    install_gtk::init_gtk();
     install_gtk::init_sizes();
     install_gtk::install_theme($o, install_gtk::default_theme($o));
     install_gtk::create_logo_window($o);
 
-    $my_gtk::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
+    $ugtk2::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
     $o = (bless {}, ref $type || $type)->SUPER::new($o);
     $o->interactive::gtk::new;
@@ -133,7 +133,7 @@ sub leavingStep {
 
 sub charsetChanged {
     my ($o) = @_;
-    Gtk->set_locale;
+    Gtk2->set_locale;
     install_gtk::install_theme($o);
     install_gtk::create_steps_window($o);
 }
@@ -157,22 +157,25 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $::live || @$l == 1 || !@$l2 and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
 
-    my $w = my_gtk->new(N("Install Class"));
-    my $focused;
+    my $w = ugtk2->new(N("Install Class"));
+    my ($focused, @radios);
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(N("Please choose one of the following classes of installation:")),
-		   (my @radios = gtkradio($def, @$l)),
+		   (@radios = gtkradio($def, @$l)),
 		   gtkadd(create_vbox(),
 			  map { my $v = $_; 
-				my $b = new Gtk::Button(translate($_));
+				my $b = Gtk2::Button->new(translate($_));
 				$focused = $b if $_ eq $def2;
-				gtksignal_connect($b, "clicked" => sub { $w->{retval} = $v; Gtk->main_quit });
+				gtksignal_connect($b, "clicked" => sub {
+						      $w->{retval} = $v;
+						      mapn { $verif->($_[1]) if $_[0]->get_active } \@radios, $l;
+						      Gtk2->main_quit
+						  });
 			    } @$l2)
 		  ));
     $focused->grab_focus if $focused;
     $w->main;
 
-    mapn { $verif->($_[1]) if $_[0]->active } \@radios, $l;
     install_gtk::create_steps_window($o);
 
     $w->{retval};
@@ -189,7 +192,7 @@ sub selectMouse {
       $old{name}   eq $mouse->{name}   &&
       $old{device} eq $mouse->{device} && !$force and return;
 
-    local $my_gtk::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
+    local $ugtk2::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
 
     while (1) {
 	log::l("telling X server to use another mouse");
@@ -209,23 +212,23 @@ sub selectMouse {
 sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $val) = @_;
 
-    my $w = my_gtk->new('');
-    my $tips = new Gtk::Tooltips;
-    my $w_size = new Gtk::Label(&$size_to_display);
+    my $w = ugtk2->new('');
+    my $tips = Gtk2::Tooltips->new;
+    my $w_size = Gtk2::Label->new(&$size_to_display);
 
     my $entry = sub {
 	my ($e) = @_;
 	my $text = translate($o->{compssUsers}{$e}{label});
 	my $help = translate($o->{compssUsers}{$e}{descr});
 
-	my $check = Gtk::CheckButton->new($text);
+	my $check = Gtk2::CheckButton->new($text);
 	$check->set_active($val->{$e});
 	$check->signal_connect(clicked => sub { 
 	    $val->{$e} = $check->get_active;
 	    $w_size->set(&$size_to_display);
 	});
 	gtkset_tip($tips, $check, $help);
-	#gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check);
+	#gtkpack_(Gtk2::HBox->new(0, 0), 0, gtkpng($file), 1, $check);
 	$check;
     };
     my $entries_in_path = sub {
@@ -234,13 +237,13 @@ sub reallyChooseGroups {
     };
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(N("Package Group Selection")),
-		   gtkpack_(new Gtk::VBox(0,0),
-			   1, gtkpack_(new Gtk::HBox(0,0),
+		   gtkpack_(Gtk2::VBox->new(0, 0),
+			   1, gtkpack_(Gtk2::HBox->new(0, 0),
 			        $o->{meta_class} eq 'server' ? (
-				   1, gtkpack(new Gtk::VBox(0,0), 
+				   1, gtkpack(Gtk2::VBox->new(0, 0), 
 					   $entries_in_path->('Server'),
 					  ),
-				   1, gtkpack(new Gtk::VBox(0,0), 
+				   1, gtkpack(Gtk2::VBox->new(0, 0), 
 					   $entries_in_path->('Graphical Environment'),
 					   '',
 					   $entries_in_path->('Development'),
@@ -248,14 +251,14 @@ sub reallyChooseGroups {
 					   $entries_in_path->('Utilities'),
 					  ),
 				) : (
-				   1, gtkpack(new Gtk::VBox(0,0), 
+				   1, gtkpack(Gtk2::VBox->new(0, 0), 
 					   $entries_in_path->('Workstation'),
 					   '',
 					   $entry->('Development|Development'),
 					   $entry->('Development|Documentation'),
 					   $entry->('Development|LSB'),
 					  ),
-				   0, gtkpack(new Gtk::VBox(0,0), 
+				   0, gtkpack(Gtk2::VBox->new(0, 0), 
 					   $entries_in_path->('Server'),
 					   '',
 					   $entries_in_path->('Graphical Environment'),
@@ -263,15 +266,15 @@ sub reallyChooseGroups {
 				),
 			   )),
 		   '',
-		   gtkadd(new Gtk::HBox(0,0),
+		   gtkadd(Gtk2::HBox->new(0, 0),
 			  $w_size,
 			  if_($individual, do {
-			      my $check = Gtk::CheckButton->new(N("Individual package selection"));
+			      my $check = Gtk2::CheckButton->new(N("Individual package selection"));
 			      $check->set_active($$individual);
 			      $check->signal_connect(clicked => sub { $$individual = $check->get_active });
 			      $check;
 			  }),
-			  gtksignal_connect(new Gtk::Button(N("Ok")), clicked => sub { Gtk->main_quit }),
+			  gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { Gtk2->main_quit }),
 			 ),
 		  ),
 	  );
@@ -441,17 +444,17 @@ sub installPackages {
 
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
-    my $w = my_gtk->new(N("Installing"));
+    my $w = ugtk2->new(N("Installing"));
     $w->sync;
-    my $text = new Gtk::Label;
+    my $text = Gtk2::Label->new;
     my ($advertising, $change_time, $i);
     my $show_advertising if 0;
     $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
-    my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (N("Estimating")) x 2;
-    my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
-    $w->{rwindow}->set_policy(1, 1, 1);
-    gtkadd($w->{window}, my $box = new Gtk::VBox(0,10));
-    $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.6, 0),
+    my ($msg, $msg_time_remaining, $msg_time_total) = map { Gtk2::Label->new($_) } '', (N("Estimating")) x 2;
+    my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
+    $w->{rwindow}->set_resizable(0);  #- so that it will auto shrink when passing from adverts to details
+    gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
+    $box->pack_end(gtkshow(gtkpack(gtkset_size_request(Gtk2::VBox->new(0,5), $::windowwidth * 0.6, -1),
 			   $msg, $progress,
 			   create_packtable({},
 					    [N("Time remaining "), $msg_time_remaining],
@@ -460,8 +463,8 @@ sub installPackages {
 			   $text,
 			   $progress_total,
 			   gtkadd(create_hbox(),
-				  my $cancel = new Gtk::Button(N("Cancel")),
-				  my $details = new Gtk::Button(N("Details")),
+				  my $cancel = Gtk2::Button->new(N("Cancel")),
+				  my $details = Gtk2::Button->new(N("Details")),
 				  ),
 			  )), 0, 1, 0);
     $details->hide if !@install_any::advertising_images;
@@ -482,23 +485,18 @@ sub installPackages {
 	    my ($draw_text, $width, $height, @data, $icon, $icon_dx, $icon_dy, $icon_px);
 	    -e $pl and $draw_text = 1;
 	    eval(cat_($pl)) if $draw_text;
-	    my ($pix, undef) = gtkcreate_png($f);
-	    if ($icon) {
-		($icon_px, undef) = gtkcreate_png($icon_name);
-	    }
+	    my $pix = gtkcreate_pixbuf($f);
+	    $icon_px = gtkcreate_pixbuf($icon_name) if $icon;
 	    my $dbl_area;
-	    my $darea = new Gtk::DrawingArea;
+	    my $darea = Gtk2::DrawingArea->new;
 	    gtkpack($box, $advertising = !$draw_text ?
-		    gtkpng($f) :
-		    gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub {
-			       my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
+		    gtkcreate_img($f) :
+		    gtksignal_connect(gtkset_size_request($darea, $width, $height), expose_event => sub {
+			       my (undef, undef, $dx, $dy) = $darea->allocation->values;
 			       if (!defined($dbl_area)) {
-				   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, $dx, $dy);
-				   $dbl_area->draw_rectangle($darea->style->bg_gc('active'), 1, 0, 0, $dx, $dy);
-				   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-							  $pix, 0, 0, ($dx-$width)/2, 0, $width, $height);
-				   my $gc_text = new Gtk::Gdk::GC($darea->window);
-				   $gc_text->set_foreground(gtkcolor(65535, 65535, 65535));
+				   $darea->window->draw_rectangle($darea->style->bg_gc('active'), 1, 0, 0, $dx, $dy);
+				   $pix->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
+							    ($dx-$width)/2, 0, $width, $height, 'none', 0, 0);
 				   my $yicon = 0;
 				   my $decy = 0;
 				   my $first = 1;
@@ -510,25 +508,28 @@ sub installPackages {
 					   my $iconx = ($dx-$width)/2 + $x + ${$widths}[0] - $icon_dx;
 					   my $icony = $y + ${$heights}[0] - $icon_dy/2;
 					   $icony > 0 or $icony = 0;
-					   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'), $icon_px, 0, 0,
-								  $iconx, $icony, $icon_dx, $icon_dy
-								 );
+					   $icon_px->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
+									$iconx, $icony, $icon_dx, $icon_dy, 'none', 0, 0);
 					   $yicon = $icony + $icon_dy;
 				       }
 				       my $i = 0;
 				       $yicon > $y + ${$heights}[0] and $decy = $yicon - ($y + ${$heights}[$i]);
 				       foreach (@{$lines}) {
-					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  ($dx-$width)/2 + $x + ${$widths}[$i], ($first ? 0 : $decy) + $y + ${$heights}[$i], $_);
- 					   $bold and $dbl_area->draw_string($darea->style->font, $gc_text,
-									    ($dx-$width)/2 + $x + ${$widths}[$i] + 1, ($first ? 0 : $decy) + $y + ${$heights}[$i], $_);
+					   my $layout = $darea->create_pango_layout($_);
+					   $darea->window->draw_layout($darea->style->white_gc,
+								       ($dx-$width)/2 + $x + ${$widths}[$i],
+								       ($first ? 0 : $decy) + $y + ${$heights}[$i],
+								       $layout);
+					   $darea->window->draw_layout($darea->style->white_gc,
+								       ($dx-$width)/2 + $x + ${$widths}[$i] + 1,
+								       ($first ? 0 : $decy) + $y + ${$heights}[$i],
+								       $layout);
+					   $layout->unref;
 					   $i++;
 				       }
 				       $first = 0;
 				   }
 			       }
-			       $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
-							   $dbl_area, 0, 0, 0, 0, $dx, $dy);
 			   }));
 	} else {
 	    $advertising = undef;
@@ -553,7 +554,7 @@ sub installPackages {
 	    $msg->set(N("%d packages", $nb));
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
-	    $progress->update(0);
+	    $progress->set_fraction(0);
 	    my $p = $data->{depslist}[$id];
 	    $msg->set(N("Installing package %s", $p->name));
 	    $current_total_size += $last_size;
@@ -562,7 +563,7 @@ sub installPackages {
 	    $advertize->(1) if $show_advertising && $total_size > 20_000_000 && time() - $change_time > 20;
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'progress') {
-	    $progress->update($total ? $amount / $total : 0);
+	    $progress->set_fraction($total ? $amount / $total : 0);
 
 	    my $dtime = time() - $start_time;
 	    my $ratio = 
@@ -571,7 +572,7 @@ sub installPackages {
 	    $ratio >= 1 and $ratio = 1;
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
-	    $progress_total->update($ratio);
+	    $progress_total->set_fraction($ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 80_000_000) {
 		$msg_time_total->set(formatTime(10 * round($total_time / 10) + 10));
 #-		$msg_time_total->set(formatTimeRaw($total_time) . "  " . formatTimeRaw($dtime / $ratio2));
@@ -588,7 +589,7 @@ sub installPackages {
 
 	#- if not using a cdrom medium, always abort.
 	if ($method eq 'cdrom' && !$::oem) {
-	    local $my_gtk::grab = 1;
+	    local $ugtk2::grab = 1;
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
 	    my $time = time();

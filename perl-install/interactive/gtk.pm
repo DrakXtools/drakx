@@ -8,29 +8,29 @@ use vars qw(@ISA);
 
 use interactive;
 use common;
-use my_gtk qw(:helpers :wrappers);
+use ugtk2 qw(:helpers :wrappers :create);
 
 my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
-    ($::windowheight, $::windowwidth) = my_gtk::gtkroot()->get_size if !$::isInstall;
+    ($::windowwidth, $::windowheight) = gtkroot()->get_size if !$::isInstall;
     goto &interactive::new;
 }
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
 sub leave_console { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 
-sub exit { my_gtk::exit(@_) }
+sub exit { ugtk2::exit(@_) }
 
 sub ask_warn {
-    local $my_gtk::pop_it = 1;
+    local $ugtk2::pop_it = 1;
     &interactive::ask_warn;
 }
 
 sub ask_fileW {
     my ($o, $title, $dir) = @_;
-    my $w = my_gtk->new($title);
+    my $w = ugtk2->new($title);
     $dir .= '/' if $dir !~ m|/$|;
-    my_gtk::_ask_file($w, $title, $dir); 
+    ugtk2::_ask_file($w, $title, $dir); 
     $w->main;
 }
 
@@ -38,10 +38,10 @@ sub create_boxradio {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
-    my $boxradio = gtkpack2__(new Gtk::VBox(0, 0),
+    my $boxradio = gtkpack2__(Gtk2::VBox->new(0, 0),
 			      my @radios = gtkradio('', @l));
     $boxradio->show;
-    my $tips = new Gtk::Tooltips;
+    my $tips = Gtk2::Tooltips->new;
     mapn {
 	my ($txt, $w) = @_;
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
@@ -68,40 +68,34 @@ sub create_boxradio {
     }, $radios[0];
 }
 
-sub create_clist {
+sub create_treeview_list {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my $curr;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
-    my $list = new Gtk::CList(1);
-    $list->set_selection_mode('browse');
-    $list->set_column_auto_resize(0, 1);
+    my $list = Gtk2::ListStore->new(Gtk2::GType->STRING);
+    my $list_tv = Gtk2::TreeView->new_with_model($list);
+    $list_tv->set_headers_visible(0);
+    $list_tv->get_selection()->set_mode('browse');
+    my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new(), 'text' => 0);
+    $list_tv->append_column($textcolumn);
+    
+    my $select = sub { $list_tv->set_cursor($_[0], $textcolumn, 0) };
 
-    my $select = sub {
-	$list->set_focus_row($_[0]);
-	$list->select_row($_[0], 0);
-	$list->moveto($_[0], 0, 0.5, 0) if $list->row_is_visible($_[0]) ne 'full';
-    };
-
-#    ref $title && !@okcancel ?
-#      $list->signal_connect(button_release_event => $leave) :
-#      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
-
-    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
+    my ($first_time, $starting_word, $start_reg) = (1, '', '^');
     my $timeout;
-    $list->signal_connect(key_press_event => sub {
+    $list_tv->signal_connect(key_press_event => sub {
         my ($w, $event) = @_;
-	my $c = chr($event->{keyval} & 0xff);
+	my $c = chr($event->keyval & 0xff);
 
-	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+	Gtk2->timeout_remove($timeout) if $timeout; $timeout = '';
 	
-	if ($event->{keyval} >= 0x100) {
-	    &$may_go_to_next if $c eq "\r" || $c eq "\x8d";
-	    $starting_word = '' if $event->{keyval} != 0xffe4; # control
+	if ($event->keyval >= 0x100) {
+	    &$may_go_to_next if member($event->keyval, (Gtk2::Gdk::Event::Key->Sym_Return, Gtk2::Gdk::Event::Key->Sym_KP_Enter));
+	    $starting_word = '' if !member($event->keyval, (Gtk2::Gdk::Event::Key->Sym_Control_L, Gtk2::Gdk::Event::Key->Sym_Control_R));
 	} else {
-	    if ($event->{state} & 4) {
-		#- control pressed
-		$c eq "s" or return 1;
+	    if (member('control-mask', @{$event->state})) {
+		$c eq 's' or return 1;
 		$start_reg and $start_reg = '', return 1;
 		$curr++;
 	    } else {
@@ -114,42 +108,57 @@ sub create_clist {
 	    my $j; for ($j = 0; $j < @l; $j++) {
 		 $l[($j + $curr) % @l] =~ /$start_reg$word/i and last;
 	    }
-	    $j == @l ?
-	      ($starting_word = '') :
-	      $select->(($j + $curr) % @l);
+	    if ($j == @l) {
+		$starting_word = '';
+	    } else {
+		my $path = Gtk2::TreePath->new_from_string(($j + $curr) % @l);
+		$select->($path);
+		$path->free;
+	    }
 
-	    $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
+	    $timeout = Gtk2->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
 	1;
     });
-    $list->show;
+    $list_tv->show;
 
-    $list->append($_) foreach @l;
+    $list->append_set([ 0 => $_ ])->free foreach @l;
 
-    $list->signal_connect(select_row => sub {
-	my ($w, $row) = @_;
+    $list_tv->get_selection->signal_connect(changed => sub {
+	my ($model, $iter) = $_[0]->get_selected;
+	$model && $iter or return;
+	my $row = $model->get_path_str($iter);
+	$iter->free;
 	${$e->{val}} = $e->{list}[$curr = $row];
 	&$changed;
     });
-    $list->signal_connect(button_press_event => $double_click) if $double_click;
+    $list_tv->signal_connect(button_press_event => $double_click) if $double_click;
 
-    $list, sub {
+    $list_tv, sub {
 	my ($v) = @_;
 	eval {
 	    my $nb = find_index { $_ eq $v } @{$e->{list}};
-	    $select->($nb) if $nb != $list->focus_row;
+	    my ($path) = $list_tv->get_cursor;
+	    if ($path) {
+		$select->($path) if $nb != $path->to_string;
+		$path->free;
+	    }
 	};
     };
 }
 
-sub create_ctree {
+sub create_treeview_tree {
     my ($e, $may_go_to_next, $changed, $double_click, $tree_expanded) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     $tree_expanded = to_bool($tree_expanded); #- to reduce "Use of uninitialized value", especially when debugging
 
     my $sep = quotemeta $e->{separator};
-    my $tree = Gtk::CTree->new(1, 0);
+    my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    my $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree->get_selection->set_mode('browse');
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree->set_headers_visible(0);
 
     my (%wtree, %wleaves, $size, $selected_via_click);
     my $parent; $parent = sub {
@@ -157,7 +166,7 @@ sub create_ctree {
 	my $s = '';
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
-	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, $tree_expanded);
+	      $tree_model->append_set($s ? $parent->($s) : undef, [ 0 => $_ ]);
 	    $size++ if !$s;
 	    $s .= "$_$e->{separator}";
 	}
@@ -165,130 +174,149 @@ sub create_ctree {
     };
     foreach (@l) {
 	my ($root, $leaf) = /(.*)$sep(.+)/ ? ($1, $2) : ('', $_);
-	$wleaves{$_} = $tree->insert_node($parent->($root), undef, [$leaf], 5, (undef) x 4, 1, 0);
+	my $iter = $tree_model->append_set($parent->($root), [ 0 => $leaf ]);
+	$wleaves{$_} = $tree_model->get_path_str($iter);
+	$iter->free;
     }
+    $_->free foreach values %wtree;
     undef %wtree;
 
+    #- do some precomputing to not slowdown selection change and key press
+    my (%precomp, @ordered_keys);
+    $tree_model->foreach(sub {
+        my (undef, $path_, $iter) = @_;
+	my ($path, $pathstr, @ll, $val, $listval);
+	$path = $path_->copy;
+	$pathstr = $path->to_string;
+	while ($path->get_depth) { unshift @ll, $tree_model->get($path, 0); $path->up }
+	$val = join($e->{separator}, @ll);
+	mapn { $listval = $_[1] if $val eq $_[0] } \@l, $e->{list};
+	$precomp{$pathstr} = { value => $tree_model->get($iter, 0), fullvalue => $val, listvalue => $listval };
+	push @ordered_keys, $pathstr;
+	0
+    }, undef);
+    
     my $select = sub {
-	my ($node) = @_;
-	for (my $c = $node; $c; $c = $c->row->parent) { 
-	    $tree->expand($c);
-	}
-	for (my $i = 0; $tree->node_nth($i); $i++) {
-	    if ($tree->node_nth($i) == $node) {
-		$tree->set_focus_row($i);
-		last;
-	    }
-	}
-	$tree->select($node);
-	$tree->node_moveto($node, 0, 0.5, 0) if $tree->node_is_visible($node) ne 'full';
+	my ($path_str) = @_;
+	my $path = Gtk2::TreePath->new_from_string($path_str);
+	print STDERR "TODO: Gtk2::TreeView::expand_to_path segfaults as of 2.1.2, disabling it until a fix\n";
+	return;
+	$tree->expand_to_path($path);
+	$path->free;
+	$path = Gtk2::TreePath->new_from_string($path_str);
+	$tree->set_cursor($path, undef, 0);
+	$tree->scroll_to_cell($path, undef, 1, 0.5, 0);
+	$path->free;
     };
 
-    my $curr = $tree->node_nth(0); #- default value
-    $tree->set_column_auto_resize(0, 1);
-    $tree->set_selection_mode('browse');
-    $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
-    $tree->signal_connect(tree_select_row => sub { 
-	$curr = $_[1]; 
-	if ($curr->row->is_leaf) {
-	    my @ll; for (my $c = $curr; $c; $c = $c->row->parent) { 
-		unshift @ll, first $tree->node_get_pixtext($c, 0);
-	    }
-	    my $val = join $e->{separator}, @ll;
-	    mapn {
-		${$e->{val}} = $_[1] if $val eq $_[0]
-	    } \@l, $e->{list};
+    my $curr = $tree_model->get_iter_first; #- default value
+    $tree->expand_all if $tree_expanded;
+
+    $tree->get_selection->signal_connect(changed => sub {
+	my ($model, $iter) = $_[0]->get_selected;
+	$model && $iter or return;
+	$curr->free if ref $curr;
+	my $path = $tree_model->get_path($curr = $iter);
+	if (!$tree_model->iter_has_child($iter)) {
+	    ${$e->{val}} = $precomp{$path->to_string}{listvalue};
 	    &$changed;
 	} else {
-	    $tree->expand($curr) if $selected_via_click;
+	    print STDERR "TODO: Gtk2::TreeView::expand_row scrolls the tree and make the expanded row invisible, disable it for now\n";
+#	    $tree->expand_row($path, 0) if $selected_via_click;
 	}
+	$path->free;
     });
     my ($first_time, $starting_word, $start_reg) = (1, '', "^");
     my $timeout;
 
-    my $toggle = sub { 
-	$curr->row->is_leaf ? 
-	  &$may_go_to_next :
-	  $tree->toggle_expansion($curr);
+    my $toggle = sub {
+	if ($tree_model->iter_has_child($curr)) {
+	    my $path = $tree_model->get_path($curr);
+	    $tree->toggle_expansion($path, 0);
+	    $path->free;
+	} else {
+	    &$may_go_to_next;
+	}
     };
+
     $tree->signal_connect(key_press_event => sub {
         my ($w, $event) = @_;
 	$selected_via_click = 0;
-	my $c = chr($event->{keyval} & 0xff);
+	my $c = chr($event->keyval & 0xff);
 	$curr or return;
-	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+	Gtk2->timeout_remove($timeout) if $timeout; $timeout = '';
 
-	if ($event->{keyval} >= 0x100) {
-	    &$toggle if $c eq "\r" || $c eq "\x8d";
-	    $starting_word = '' if $event->{keyval} != 0xffe4; # control
+	if ($event->keyval >= 0x100) {
+	    &$toggle if member($event->keyval, (Gtk2::Gdk::Event::Key->Sym_Return, Gtk2::Gdk::Event::Key->Sym_KP_Enter));
+	    $starting_word = '' if !member($event->keyval, (Gtk2::Gdk::Event::Key->Sym_Control_L, Gtk2::Gdk::Event::Key->Sym_Control_R));
 	} else {
 	    my $next;
-	    if ($event->{state} & 4) {
-		#- control pressed
+	    if (member('control-mask', @{$event->state})) {
 		$c eq "s" or return 1;
 		$start_reg and $start_reg = '', return 1;
 		$next = 1;
 	    } else {
 		&$toggle if $c eq ' ';
-
 		$next = 1 if $starting_word eq '' || $starting_word eq $c;
 		$starting_word .= $c unless $starting_word eq $c;
 	    }
 	    my $word = quotemeta $starting_word;
 	    my ($after, $best);
 
-	    $tree->pre_recursive(undef, sub { 
-		my ($tree, $node) = @_;
+	    my $currpath = $tree_model->get_path_str($curr);
+	    foreach my $v (@ordered_keys) { 
 		$next &&= !$after;
-		$after ||= $node == $curr;
-		my ($t) = $tree->node_get_pixtext($node, 0);
-
-		if ($t =~ /$start_reg$word/i) {
+		$after ||= $v eq $currpath;
+		if ($precomp{$v}{value} =~ /$start_reg$word/i) {
 		    if ($after && !$next) {
-			($best, $after) = ($node, 0);
+			($best, $after) = ($v, 0);
 		    } else {
-			$best ||= $node;
+			$best ||= $v;
 		    }
 		}
-	    });
+	    }
+
 	    if (defined $best) {
 		$select->($best);
 	    } else {
 		$starting_word = '';
 	    }
-	    $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
+
+	    $timeout = Gtk2->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
 	1;
     });
     $tree->signal_connect(button_press_event => sub {
 	$selected_via_click = 1;
-	&$double_click if $curr->row->is_leaf && $double_click;
+	&$double_click if !$tree_model->iter_has_child($curr) && $double_click;
     });
 
     $tree, sub {
 	my $v = may_apply($e->{format}, $_[0]);
-	$select->($wleaves{$v} || return) if $wleaves{$v} != $tree->selection;
+	my ($model, $iter) = $tree->get_selection->get_selected;
+	$select->($wleaves{$v} || return) if !$model || $wleaves{$v} ne $model->get_path_str($iter);
+	$iter->free if ref $iter;
     }, $size;
 }
 
 sub create_list {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my $l = $e->{list};
-    my $list = new Gtk::List();
+    my $list = Gtk2::List->new;
     $list->set_selection_mode('browse');
 
     my $select = sub {
 	$list->select_item($_[0]);
     };
 
-    my $tips = new Gtk::Tooltips;
+    my $tips = Gtk2::Tooltips->new;
     my $toselect;
     each_index {
-	my $item = new Gtk::ListItem(may_apply($e->{format}, $_));
+	my $item = Gtk2::ListItem->new(may_apply($e->{format}, $_));
 	$item->signal_connect(key_press_event => sub {
     	    my ($w, $event) = @_;
-    	    my $c = chr($event->{keyval} & 0xff);
-	    $may_go_to_next->($event) if $event->{keyval} < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
+    	    my $c = chr($event->keyval & 0xff);
+	    $may_go_to_next->($event) if $event->keyval < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
     	    1;
     	});
 	$list->append_items($item);
@@ -321,12 +349,11 @@ sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
     my $ignore = 0; #-to handle recursivity
 
-    my $mainw = my_gtk->new($common->{title}, %$o);
-    $mainw->sync; # for XPM's creation
-
+    my $mainw = ugtk2->new($common->{title}, %$o);
+ 
     #-the widgets
     my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $total_size, $max_width);
-    my $tooltips = new Gtk::Tooltips;
+    my $tooltips = Gtk2::Tooltips->new;
 
     my $set_all = sub {
 	$ignore = 1;
@@ -343,15 +370,15 @@ sub ask_fromW {
 	$get_all->();
 	$f->();
 	$set_all->();
-	};
+    };
     my $create_widget = sub {
 	my ($e, $ind) = @_;
 
 	my $may_go_to_next = sub {
 	    my ($w, $event, $kind) = @_;
 	    if ($kind eq 'tab') {
-		if (($event->{keyval} & 0x7f) == 0x9) {
-		    $w->signal_emit_stop("key_press_event");
+		if (($event->keyval & 0x7f) == 0x9) {
+		    $w->signal_stop_emission_by_name('key_press_event');
 		    if ($ind == $#widgets) {
 			$mainw->{ok}->grab_focus;
 		    } else {
@@ -359,8 +386,8 @@ sub ask_fromW {
 		    }
 		}
 	    } else {
-		if (!$event || ($event->{keyval} & 0x7f) == 0xd) {
-		    $w->signal_emit_stop("key_press_event") if $event;
+		if (!$event || ($event->keyval & 0x7f) == 0xd) {
+		    $w->signal_stop_emission_by_name('key_press_event') if $event;
 		    if ($ind == $#widgets) {
 			@widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
 		    } else {
@@ -373,13 +400,13 @@ sub ask_fromW {
 
 	my ($w, $real_w, $focus_w, $set, $get, $expand, $size, $width);
 	if ($e->{type} eq 'iconlist') {
-	    $w = new Gtk::Button;
+	    $w = Gtk2::Button->new;
 	    $set = sub {
 		gtkdestroy($e->{icon});
 		my $f = $e->{icon2f}->($_[0]);
 		$e->{icon} = -e $f ?
-		    gtkpng($f) :
-		    new Gtk::Label(may_apply($e->{format}, $_[0]));
+		    gtkcreate_img($f) :
+		    Gtk2::Label->new(may_apply($e->{format}, $_[0]));
 		$w->add($e->{icon});
 		$e->{icon}->show;
 	    };
@@ -387,19 +414,19 @@ sub ask_fromW {
 		$set->(${$e->{val}} = next_val_in_array(${$e->{val}}, $e->{list}));
 		$changed->();
 	    });
-	    $real_w = gtkpack_(new Gtk::HBox(0,10), 1, new Gtk::HBox(0,0), 0, $w, 1, new Gtk::HBox(0,0));
+	    $real_w = gtkpack_(Gtk2::HBox->new(0,10), 1, Gtk2::HBox->new(0,0), 0, $w, 1, Gtk2::HBox->new(0,0));
 	} elsif ($e->{type} eq 'bool') {
-	    $w = Gtk::CheckButton->new($e->{text});
+	    $w = Gtk2::CheckButton->new($e->{text});
 	    $w->signal_connect(clicked => $changed);
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
 	    $width = length $e->{text};
 	} elsif ($e->{type} eq 'label') {
-	    $w = Gtk::Label->new(${$e->{val}});
+	    $w = Gtk2::Label->new(${$e->{val}});
 	    $set = sub { $w->set($_[0]) };
 	    $width = length ${$e->{val}};
 	} elsif ($e->{type} eq 'button') {
-	    $w = Gtk::Button->new('');
+	    $w = Gtk2::Button->new('');
 	    $w->signal_connect(clicked => sub {
 		$get_all->();
 		if ($::isWizard) {
@@ -409,7 +436,7 @@ sub ask_fromW {
 		}
 		if (my $v = $e->{clicked_may_quit}()) {
 		    $mainw->{retval} = $v;
-		    Gtk->main_quit;
+		    Gtk2->main_quit;
 		}
 		if ($::isWizard) {
 		    $mainw->{rwindow}->set_sensitive(1);
@@ -423,7 +450,7 @@ sub ask_fromW {
 	} elsif ($e->{type} eq 'range') {
 	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
 	    $adj->signal_connect(value_changed => $changed);
-	    $w = new Gtk::HScale($adj);
+	    $w = Gtk2::HScale->new($adj);
 	    $w->set_digits(0);
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $set = sub { $adj->set_value($_[0]) };
@@ -434,23 +461,24 @@ sub ask_fromW {
 	    my $quit_if_double_click = 
 	      #- i'm the only one, double click means accepting
 	      @$l == 1 || $e->{quit_if_double_click} ? 
-		sub { if ($_[1]{type} =~ /^2/) { $mainw->{retval} = 1; Gtk->main_quit } } : ''; 
+		sub { if ($_[1]->type =~ /^2/) { $mainw->{retval} = 1; Gtk2->main_quit } } : ''; 
 
 	    my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
 	    my $use_boxradio = exists $e->{gtk}{use_boxradio} ? $e->{gtk}{use_boxradio} : @{$e->{list}} <= 8;
 
 	    if ($e->{help}) {
-		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
+		#- used only when needed, as key bindings are dropped by List (ListStore does not seems to accepts Tooltips).
 		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
 	    } elsif ($e->{type} eq 'treelist') {
-		($w, $set, $size) = create_ctree(@para, $e->{tree_expanded});
+		($w, $set, $size) = create_treeview_tree(@para, $e->{tree_expanded});
+		$e->{saved_default_val} = ${$e->{val}};  #- during realization, signals will mess up the default val :(
 	    } else {
-		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_clist(@para);
+		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_treeview_list(@para);
 	    }
 	    if (@{$e->{list}} > (@$l == 1 ? 10 : 4)) {
 		$has_scroll = 1;
 		$expand = 1;
-		$real_w = createScrolledWindow($w);
+		$real_w = create_scrolled_window($w);
 		$size = (@$l == 1 ? 10 : 4);
 	    } else {
 		$size ||= @{$e->{list}};
@@ -458,7 +486,7 @@ sub ask_fromW {
 	    $width = max(map { length } @{$e->{list}});
 	} else {
 	    if ($e->{type} eq "combo") {
-		$w = new Gtk::Combo;
+		$w = Gtk2::Combo->new;
 		$w->set_use_arrows_always(1);
 		$w->entry->set_editable(!$e->{not_edit});
 		$w->disable_activate;
@@ -481,9 +509,9 @@ sub ask_fromW {
 		$has_horiz_scroll = 1;
 		$width = $l[@l / 16]; # take the third octile (think quartile)
 	    } else {
-                $w = new Gtk::Entry;
-		$w->signal_connect(focus_in_event => sub { $w->select_region });
-		$w->signal_connect(focus_out_event => sub { $w->select_region(0,0) });
+                $w = Gtk2::Entry->new;
+		$w->signal_connect(focus_in_event => sub { $w->select_region(0, -1) });
+		$w->signal_connect(focus_out_event => sub { $w->select_region(0, 0) });
 		$set = sub { $w->set_text($_[0]) if $_[0] ne $w->get_text };
 		$get = sub { $w->get_text };
 	    }
@@ -501,7 +529,7 @@ sub ask_fromW {
     
 	{ e => $e, w => $w, real_w => $real_w || $w, focus_w => $focus_w || $w, expand => $expand,
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
-	  icon_w => $e->{icon} && eval { gtkpng($e->{icon}) } };
+	  icon_w => $e->{icon} && eval { gtkcreate_img($e->{icon}) } };
     };
     @widgets_always   = map_index { $create_widget->($_, $::i)       } @$l;
     my $always_total_size = $total_size;
@@ -510,11 +538,11 @@ sub ask_fromW {
 
 
     my $pack = create_box_with_title($mainw, @{$common->{messages}});
-    my ($totalheight, $totalwidth) = ($mainw->{box_size}, 0);
+    my ($totalwidth, $totalheight) = (0, $mainw->{box_size});
 
     my $set_default_size = sub {
 	if (($has_scroll || $has_horiz_scroll) && !$mainw->{isEmbedded} && !$mainw->{isWizard}) {
-	    $mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, $has_scroll ? $totalheight+6+3+$my_gtk::shape_width : 0);
+	    $mainw->{rwindow}->set_default_size($totalwidth+6+$ugtk2::shape_width, $has_scroll ? $totalheight+6+3+$ugtk2::shape_width : -1);
 	}
     };
 
@@ -547,7 +575,7 @@ sub ask_fromW {
 	my $wantedwidth = max(250, $max_width * 5);
 	my $width = min($possiblewidth, $wantedwidth);
 
-	my $wantedheight = my_gtk::n_line_size($size, 'various', $mainw->{rwindow});
+	my $wantedheight = ugtk2::n_line_size($size, 'various', $mainw->{rwindow});
 	my $height = min($possibleheight * $ratio, max(200, $wantedheight));
 
 	$totalheight += $height;
@@ -555,7 +583,7 @@ sub ask_fromW {
 
 	my $has = $wantedwidth > $width || $wantedheight > $height;
 	$has_scroll ||= $has;
-	$has ? createScrolledWindow($w) : $w;
+	$has ? create_scrolled_window($w) : $w;
     };
 
     gtkpack_($pack,
@@ -565,10 +593,10 @@ sub ask_fromW {
     my $has_scroll_always = $has_scroll;
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
     $advanced_pack = 
-      gtkpack_(new Gtk::VBox(0,0),
+      gtkpack_(Gtk2::VBox->new(0,0),
 	       0, '',
-	       (map { (0, new Gtk::Label($_)) } @adv),
-	       0, new Gtk::HSeparator,
+	       (map { (0, Gtk2::Label->new($_)) } @adv),
+	       0, Gtk2::HSeparator->new,
 	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
 
     $pack->pack_start($advanced_pack, 1, 1, 0);
@@ -590,6 +618,8 @@ sub ask_fromW {
 	    !$error;
 	}
     };
+
+    $_->{set}->($_->{e}{saved_default_val} || next) foreach @widgets_always, @widgets_advanced;
     $mainw->main(map { $check->($common->{callbacks}{$_}) } 'complete', 'canceled');
 }
 
@@ -597,17 +627,17 @@ sub ask_fromW {
 sub ask_browse_tree_info_refW {
     my ($o, $common) = @_;
     add2hash($common, { wait_message => sub { $o->wait_message(@_) } });
-    my_gtk::ask_browse_tree_info($common);
+    ugtk2::ask_browse_tree_info($common);
 }
 
 sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
 
-    local $my_gtk::pop_it = 1;
-    my $w = my_gtk->new($title, %$o, grab => 1);
-    gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
-    $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
-    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(scalar warp_text($_)) } @$messages;
+    local $ugtk2::pop_it = 1;
+    my $w = ugtk2->new($title, %$o, grab => 1);
+    gtkadd($w->{window}, my $hbox = Gtk2::HBox->new(0,0));
+    $hbox->pack_start(my $box = Gtk2::VBox->new(0,0), 1, 1, 10);  
+    $box->pack_start($_, 1, 1, 4) foreach my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
 
     ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
     $w->{rwindow}->set_position('center') if $::isStandalone && !$w->{isEmbedded} && !$w->{isWizard};

@@ -10,7 +10,7 @@ use common;
 use interactive;
 use network::smb;
 use network::nfs;
-use my_gtk qw(:helpers :wrappers :ask);
+use ugtk2 qw(:helpers :wrappers :create);
 
 my ($all_hds, $in, $tree, $current_entry, $current_leaf, %icons);
 
@@ -18,11 +18,11 @@ sub main {
     ($in, $all_hds, my $type) = @_;
     my ($kind) = $type eq 'smb' ? smb2kind() : nfs2kind();
     {
-	local $my_gtk::pop_it = 1;
+	local $ugtk2::pop_it = 1;
 	$kind->check($in) or return;
     }
 
-    my $w = my_gtk->new('DiskDrake');
+    my $w = ugtk2->new('DiskDrake');
 
     add_smbnfs($w->{window}, $kind);
     $w->{rwindow}->set_default_size(400, 300) if $w->{rwindow}->can('set_default_size');
@@ -45,7 +45,7 @@ sub try_ {
 	$in->ask_warn(N("Error"), formatError($err));
     }
     update($kind);
-    Gtk->main_quit if member($name, 'Cancel', 'Done');
+    Gtk2->main_quit if member($name, 'Cancel', 'Done');
 }
 
 sub raw_hd_options {
@@ -61,12 +61,12 @@ sub raw_hd_mount_point {
 
 sub per_entry_info_box {
     my ($box, $kind, $entry) = @_;
-    $_->isa('Gtk::Button') or $_->destroy foreach map { $_->widget } $box->children;
+    $_->isa('Gtk2::Button') or $_->destroy foreach map { $_->widget } $box->children;
     my $info;
     if ($entry) {
 	$info = diskdrake::interactive::format_raw_hd_info($entry);
     }
-    gtkpack($box, gtkadd(new Gtk::Frame(N("Details")), gtkset_justify(new Gtk::Label($info), 'left')));
+    gtkpack($box, gtkadd(Gtk2::Frame->new(N("Details")), gtkset_justify(Gtk2::Label->new($info), 'left')));
 }
 
 sub per_entry_action_box {
@@ -77,7 +77,7 @@ sub per_entry_action_box {
 
     push @buttons, map {
 	  my $s = $_;
-	  gtksignal_connect(new Gtk::Button(translate($s)), clicked => sub { try($kind, $s, {}, $entry) });
+	  gtksignal_connect(Gtk2::Button->new(translate($s)), clicked => sub { try($kind, $s, {}, $entry) });
       } (if_($entry->{isMounted}, N_("Unmount")),
 	 if_($entry->{mntpoint} && !$entry->{isMounted}, N_("Mount"))) if $entry;
 
@@ -89,10 +89,10 @@ sub per_entry_action_box {
 	    );
     push @buttons, map {
 	my ($txt, $f) = @$_;
-	gtksignal_connect(new Gtk::Button(translate($txt)), clicked => sub { try_($kind, $txt, $f, $entry) });
+	gtksignal_connect(Gtk2::Button->new(translate($txt)), clicked => sub { try_($kind, $txt, $f, $entry) });
     } group_by2(@l);
 
-    gtkadd($box, gtkpack(new Gtk::HBox(0,0), @buttons));
+    gtkadd($box, gtkpack(Gtk2::HBox->new(0,0), @buttons));
 }
 
 sub done {
@@ -133,7 +133,7 @@ sub import_ctree {
     my ($kind, $info_box) = @_;
     my (%servers_displayed, %wservers, %wexports, $inside);
 
-    $tree = Gtk::CTree->new(1, 0);
+    $tree = Gtk2::CTree->new(1, 0);
     $tree->set_column_auto_resize(0, 1);
     $tree->set_selection_mode('browse');
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
@@ -197,7 +197,7 @@ sub import_ctree {
     };
 
     { 
-	my $search = new Gtk::Button(N("Search servers"));
+	my $search = Gtk2::Button->new(N("Search servers"));
 	gtkpack__($info_box, 
 		  gtksignal_connect($search,
 				    clicked => sub {
@@ -221,7 +221,7 @@ sub import_ctree {
 	} else {
 	    if (!$curr->row->children) {
 		gtkset_mousecursor_wait($tree->window);
-		my_gtk::flush();
+		ugtk2::flush();
 		$add_exports->($curr);		
 		gtkset_mousecursor_normal($tree->window);
 	    }
@@ -237,13 +237,13 @@ sub add_smbnfs {
     my ($widget, $kind) = @_;
     die if $kind->{main_box};
 
-    $kind->{info_box} = new Gtk::VBox(0,0);
+    $kind->{info_box} = Gtk2::VBox->new(0,0);
     $kind->{display_box} = createScrolledWindow(import_ctree($kind, $kind->{info_box}));
-    $kind->{action_box} = new Gtk::HBox(0,0);
+    $kind->{action_box} = Gtk2::HBox->new(0,0);
     $kind->{main_box} =
-      gtkpack_(new Gtk::VBox(0,7),
-	       1, gtkpack(new Gtk::HBox(0,7),
-			  gtkset_usize($kind->{display_box}, 200, 0),
+      gtkpack_(Gtk2::VBox->new(0,7),
+	       1, gtkpack(Gtk2::HBox->new(0,7),
+			  gtkset_size_request($kind->{display_box}, 200, 0),
 			  $kind->{info_box}),
 	       0, $kind->{action_box},
 	     );

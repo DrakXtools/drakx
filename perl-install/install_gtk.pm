@@ -3,7 +3,7 @@ package install_gtk; # $Id$
 use diagnostics;
 use strict;
 
-use my_gtk qw(:helpers :wrappers);
+use ugtk2 qw(:wrappers :helpers :create);
 use common;
 use lang;
 use devices;
@@ -20,7 +20,7 @@ sub load_rc {
     my ($name) = @_;
 
     if (my ($f) = grep { -r $_ } map { "$_/$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
-	Gtk::Rc->parse($f);
+	Gtk2::Rc->parse($f);
 	foreach (cat_($f)) {
 	    if (/style\s+"background"/ .. /^\s*$/) {
 		@background1 = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
@@ -47,7 +47,7 @@ sub install_theme {
 
     if (my ($font, $font2) = lang::get_x_fontset($o->{lang}, $::rootwidth < 800 ? 10 : 12)) {
 	$font2 ||= $font;
-	Gtk::Rc->parse_string(qq(
+	Gtk2::Rc->parse_string(qq(
 style "default-font" 
 {
    fontset = "$font,*"
@@ -61,7 +61,6 @@ widget "*Steps*" style "small-font"
 
 ));
     }
-
     gtkset_background(@background1) unless $::live; #- || testing;
 
     create_logo_window($o);
@@ -71,12 +70,12 @@ widget "*Steps*" style "small-font"
 #------------------------------------------------------------------------------
 sub create_big_help {
     my ($o) = @_;
-    my $w = my_gtk->new('', grab => 1, force_position => [ $::stepswidth, $::logoheight ]);
-    $w->{rwindow}->set_usize($::logowidth, $::rootheight - $::logoheight);
+    my $w = ugtk2->new('', grab => 1, force_position => [ $::stepswidth, $::logoheight ]);
+    $w->{rwindow}->set_size_request($::logowidth, $::rootheight - $::logoheight);
     gtkadd($w->{window},
-	   gtkpack_(new Gtk::VBox(0,0),
-		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, $o->{current_help})),
-		    0, gtksignal_connect(my $ok = new Gtk::Button(N("Ok")), "clicked" => sub { Gtk->main_quit }),
+	   gtkpack_(Gtk2::VBox->new(0,0),
+		    1, create_scrolled_window(gtktext_insert(Gtk2::TextView->new, $o->{current_help})),
+		    0, gtksignal_connect(my $ok = Gtk2::Button->new(N("Ok")), "clicked" => sub { Gtk2->main_quit }),
 		   ));
     $ok->grab_focus;
     $w->main;
@@ -89,15 +88,15 @@ sub create_help_window {
 
     my $w;
     if ($w = $o->{help_window}) {
-	$_->destroy foreach $w->{window}->children;
+	$w->{window}->foreach(sub { $_[0]->destroy }, undef);
     } else {
-	$w = $o->{help_window} = bless {}, 'my_gtk';
-	$w->{rwindow} = $w->{window} = new Gtk::Window;
+	$w = $o->{help_window} = bless {}, 'ugtk2';
+	$w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
 	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
-	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
+	$w->{rwindow}->set_size_request($::helpwidth, $::helpheight);
 	$w->{rwindow}->set_title('skip');
     };
-    gtkadd($w->{window}, createScrolledWindow($o->{help_window_text} = new Gtk::Text));
+    gtkadd($w->{window}, create_scrolled_window($o->{help_window_text} = Gtk2::TextView->new));
     $w->show;
 }
 
@@ -109,29 +108,32 @@ sub create_steps_window {
 
     $o->{steps_window}->destroy if $o->{steps_window};
 
-    my $w = bless {}, 'my_gtk';
-    $w->{rwindow} = $w->{window} = new Gtk::Window;
+    my $w = bless {}, 'ugtk2';
+    $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
     $w->{rwindow}->set_uposition(0, 0);
-    $w->{rwindow}->set_usize($::stepswidth, $::stepsheight);
+    $w->{rwindow}->set_size_request($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_events('button_press_mask');
     $w->{rwindow}->set_title('skip');
     #$w->show;
 
+    my %cache_pixbuf;
     gtkadd($w->{window},
-	   gtkpack_(new Gtk::VBox(0,0),
+	   gtkpack_(Gtk2::VBox->new(0,0),
 		    (map { (1, $_) } map {
 			my $step_name = $_;
 			my $step = $o->{steps}{$_};
-			my $darea = new Gtk::DrawingArea;
+			my $darea = Gtk2::DrawingArea->new;
 			my $in_button;
 			my $draw_pix = sub {
-			    my ($map, $mask) = gtkcreate_xpm($_[0]);
-			    $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
-							 $map, 0, 0,
-							 ($darea->allocation->[2]-$PIX_W)/2 + 3,
-							 ($darea->allocation->[3]-$PIX_H)/2,
-							 $PIX_W, $PIX_H);
+			    $cache_pixbuf{$_[0]} ||= gtkcreate_pixbuf($_[0]);
+			    $cache_pixbuf{$_[0]}->render_to_drawable($darea->window(),
+								     $darea->style()->bg_gc('normal'),
+								     0, 0,
+								     ($darea->allocation->width-$PIX_W)/2 + 3,
+								     ($darea->allocation->height-$PIX_H)/2,
+								     $PIX_W, $PIX_H,
+								     'none', 0, 0);
 			};
 
 			my $f = sub { 
@@ -139,8 +141,9 @@ sub create_steps_window {
 			    my $color = $step->{done} ? 'green' : $step->{entered} ? 'orange' : 'red';
 			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
 			};
-			$darea->set_usize($PIX_W+3,$PIX_H);
-			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask']);
+			$darea->set_size_request($PIX_W+3,$PIX_H);
+			$darea->add_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask',
+					    'button_press_mask', 'button_release_mask']);
 			$darea->signal_connect(expose_event => sub { $draw_pix->($f->('')) });
 			if ($step->{reachable}) {
 			    $darea->signal_connect(enter_notify_event => sub { $in_button = 1; $draw_pix->($f->('-on')) });
@@ -148,7 +151,7 @@ sub create_steps_window {
 			    $darea->signal_connect(button_press_event => sub { $draw_pix->($f->('-click')) });
 			    $darea->signal_connect(button_release_event => sub { $in_button && die "setstep $step_name\n" });
 			}
-			gtkpack_(new Gtk::HBox(0,5), 0, $darea, 0, new Gtk::Label(translate($step->{text})));
+			gtkpack_(Gtk2::HBox->new(0,5), 0, $darea, 0, Gtk2::Label->new(translate($step->{text})));
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}})));
@@ -161,23 +164,30 @@ sub create_logo_window {
     my ($o) = @_;
 
     gtkdestroy($o->{logo_window});
-    my $w = bless {}, 'my_gtk';
-    $w->{rwindow} = $w->{window} = new Gtk::Window;
+
+    my $w = bless {}, 'ugtk2';
+    $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
     $w->{rwindow}->set_uposition($::stepswidth, 0);
-    $w->{rwindow}->set_usize($::logowidth, $::logoheight);
+    $w->{rwindow}->set_size_request($::logowidth, $::logoheight);
     $w->{rwindow}->set_name("logo");
     $w->{rwindow}->set_title('skip');
     $w->show;
     my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.png" : "logo-mandrake.png";
     $o->{meta_class} eq 'firewall' and $file = "logo-mandrake-Firewall.png";
     -r $file or $file = "$ENV{SHARE_PATH}/$file";
-    -r $file and gtkadd($w->{window}, gtkpng($file));
+    -r $file and gtkadd($w->{window}, gtkcreate_img($file));
     $o->{logo_window} = $w;
 }
 
 #------------------------------------------------------------------------------
+sub init_gtk() {
+    Gtk2->init(\@ARGV);
+    Gtk2->set_locale;
+}
+
+#------------------------------------------------------------------------------
 sub init_sizes() {
-    ($::rootheight,  $::rootwidth)    = gtkroot()->get_size;
+    ($::rootwidth,  $::rootheight)    = (Gtk2::Gdk->screen_width, Gtk2::Gdk->screen_height);
     $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
     ($::stepswidth,  $::stepsheight)  = (145, $::rootheight);

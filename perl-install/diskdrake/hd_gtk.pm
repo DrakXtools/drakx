@@ -5,7 +5,7 @@ use strict;
 
 use common;
 use resize_fat::main;
-use my_gtk qw(:helpers :wrappers :ask);
+use ugtk2 qw(:helpers :wrappers :create);
 use partition_table qw(:types);
 use partition_table::raw;
 use detect_devices;
@@ -54,22 +54,22 @@ sub main {
 
     local $in->{grab} = 1;
 
-    $w = my_gtk->new('DiskDrake');
+    $w = ugtk2->new('DiskDrake');
     my $rc = "/usr/share/libDrakX/diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
-    Gtk::Rc->parse($rc);
+    Gtk2::Rc->parse($rc);
 
     # TODO
 #    is_empty_array_ref($all_hds->{raids}) or raid::stopAll;
 #    updateLoopback();
 
     gtkadd($w->{window},
-	   gtkpack_(new Gtk::VBox(0,7),
+	   gtkpack_(Gtk2::VBox->new(0,7),
 		    0, (my $filesystems_button_box = filesystems_button_box()),
-		    1, (my $notebook_widget = new Gtk::Notebook),
-		    0, (my $per_kind_action_box = new Gtk::HBox(0,0)),
-		    0, (my $general_action_box  = new Gtk::HBox(0,0)),
+		    1, (my $notebook_widget = Gtk2::Notebook->new),
+		    0, (my $per_kind_action_box = Gtk2::HBox->new(0,0)),
+		    0, (my $general_action_box  = Gtk2::HBox->new(0,0)),
 		   ),
 	  );
     my $lock;
@@ -86,14 +86,14 @@ sub main {
     };
     create_automatic_notebooks($notebook_widget);
 
-    $notebook_widget->signal_connect('switch_page' => sub {
+    $notebook_widget->signal_connect(switch_page => sub {
 	$current_kind = $notebook[$_[2]];
 	$current_entry = '';
 	$update_all->();
     });
     $w->sync;
     $done_button->grab_focus;
-    $my_gtk::pop_it = 1;
+    $ugtk2::pop_it = 1;
     $in->ask_okcancel(N("Read carefully!"), N("Please make a backup of your data first"), 1) or return
       if $::isStandalone;
     $in->ask_warn('', 
@@ -123,7 +123,7 @@ sub try_ {
     $update_all->();
 
     if ($v && member($name, 'Done', 'Wizard')) {
-	$::isEmbedded ? kill('USR1', $::CCPID) : Gtk->main_quit; 
+	$::isEmbedded ? kill('USR1', $::CCPID) : Gtk2->main_quit; 
     }
 }
 
@@ -134,16 +134,16 @@ sub add_kind2notebook {
     my ($notebook_widget, $kind) = @_;
     die if $kind->{main_box};
 
-    $kind->{display_box} = gtkset_usize(new Gtk::HBox(0,0), $width, $height);
-    $kind->{action_box} = gtkset_usize(new Gtk::VBox(0,0), 150, 180);
-    $kind->{info_box} = new Gtk::VBox(0,0);
+    $kind->{display_box} = gtkset_size_request(Gtk2::HBox->new(0,0), $width, $height);
+    $kind->{action_box} = gtkset_size_request(Gtk2::VBox->new(0,0), 150, 180);
+    $kind->{info_box} = Gtk2::VBox->new(0,0);
     $kind->{main_box} =
-      gtkpack_(new Gtk::VBox(0,7),
+      gtkpack_(Gtk2::VBox->new(0,7),
 	       0, $kind->{display_box},
-	       1, gtkpack_(new Gtk::HBox(0,7),
+	       1, gtkpack_(Gtk2::HBox->new(0,7),
 			   0, $kind->{action_box},
 			   1, $kind->{info_box}));
-    my_gtk::add2notebook($notebook_widget, $kind->{name}, $kind->{main_box});
+    ugtk2::add2notebook($notebook_widget, $kind->{name}, $kind->{main_box});
     push @notebook, $kind;
     $kind;
 }
@@ -155,7 +155,7 @@ sub general_action_box {
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 
 		   N_("Done"));
     foreach my $s (@actions) {
-	my $button = new Gtk::Button(translate($s));
+	my $button = Gtk2::Button->new(translate($s));
 	$done_button = $button if $s eq 'Done';
 	gtkadd($box, gtksignal_connect($button, clicked => sub { try($s) }));
     }
@@ -168,7 +168,7 @@ sub per_kind_action_box {
 
     foreach my $s (diskdrake::interactive::hd_possible_actions($in, kind2hd($kind), $all_hds)) {
 	gtkadd($box, 
-	       gtksignal_connect(new Gtk::Button(translate($s)),
+	       gtksignal_connect(Gtk2::Button->new(translate($s)),
 				 clicked => sub { try($s, kind2hd($kind)) }));
     }
 }
@@ -179,20 +179,20 @@ sub per_entry_action_box {
     if ($entry) {
 	my @buttons = map { 
 	    my $s = $_;
-	    my $w = new Gtk::Button(translate($s));
+	    my $w = Gtk2::Button->new(translate($s));
 	    $w->signal_connect(clicked => sub { try($s, kind2hd($kind), $entry) });
 	    $w;
 	} diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds);
 
-	gtkadd($box, gtkadd(new Gtk::Frame(N("Choose action")),
-			    createScrolledWindow(gtkpack__(new Gtk::VBox(0,0), @buttons)))) if @buttons;
+	gtkadd($box, gtkadd(Gtk2::Frame->new(N("Choose action")),
+			    create_scrolled_window(gtkpack__(Gtk2::VBox->new(0,0), @buttons)))) if @buttons;
     } else {
 	my $txt = !$::isStandalone && fsedit::is_one_big_fat($all_hds->{hds}) ?
 N("You have one big FAT partition
 (generally used by MicroSoft Dos/Windows).
 I suggest you first resize that partition
 (click on it, then click on \"Resize\")") : N("Please click on a partition");
-	gtkpack($box, gtktext_insert(new Gtk::Text, $txt));
+	gtkpack($box, gtktext_insert(Gtk2::TextView->new, $txt));
     }
 }
 
@@ -205,7 +205,7 @@ sub per_entry_info_box {
     } elsif ($kind->{type} =~ /hd|lvm/) {
 	$info = diskdrake::interactive::format_hd_info($kind->{val});
     }
-    gtkpack($box, gtkadd(new Gtk::Frame(N("Details")), gtkset_justify(new Gtk::Label($info), 'left')));
+    gtkpack($box, gtkadd(Gtk2::Frame->new(N("Details")), gtkset_justify(Gtk2::Label->new($info), 'left')));
 }
 
 sub current_kind_changed {
@@ -271,13 +271,13 @@ sub create_buttons4partitions {
     }
 
     foreach my $entry (@parts) {
-	my $w = new Gtk::Button($entry->{mntpoint} || '') or die '';
+	my $w = Gtk2::Button->new($entry->{mntpoint} || '') or die '';
 	$w->signal_connect(focus_in_event     => sub { current_entry_changed($kind, $entry) });
 	$w->signal_connect(button_press_event => sub { current_entry_changed($kind, $entry) });
 	$w->signal_connect(key_press_event => sub {
-	    my ($w, $e) = @_;
-	    $e->{state} & 4 or return; 
-	    my $c = chr $e->{keyval};
+	    my (undef, $event) = @_;
+	    member('control-mask', @{$event->state}) or return; 
+	    my $c = chr $event->keyval;
 
 	    foreach my $s (diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds)) {
 		${{
@@ -293,7 +293,7 @@ sub create_buttons4partitions {
 	    }
 	});
 	$w->set_name("PART_" . type2name($entry->{type}));
-	$w->set_usize($entry->{size} * $ratio + $minwidth, 0);
+	$w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
 	gtkpack__($kind->{display_box}, $w);
 	$w->grab_focus if $current_entry && fsedit::is_same_part($current_entry, $entry);
     }
@@ -327,9 +327,9 @@ sub filesystems_button_box() {
 		 N_("Other"), N_("Empty"));
     my %name2type = (Ext2 => 0x83, 'Journalised FS' => 0x483, Swap => 0x82, Other => 1, FAT => 0xb, HFS => 0x402);
 
-    gtkpack(new Gtk::HBox(0,0), 
+    gtkpack(Gtk2::HBox->new(0,0), 
 	    N("Filesystem types:"),
-	    map { my $w = new Gtk::Button(translate($_));
+	    map { my $w = Gtk2::Button->new(translate($_));
 		  my $t = $name2type{$_};
 		  $w->signal_connect(clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
 		  $w->can_focus(0);
