@@ -148,7 +148,7 @@ sub conf_network_card_backend {
     
     $netc->{NET_DEVICE} = $interface; #- one consider that there is only ONE Internet connection device..
     
-    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $netadr, 'yes');
+    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $netadr, 'yes');
     
     $intf->{$interface}{IPADDR} = $ipadr if $ipadr;
     $interface;
@@ -166,20 +166,18 @@ sub configureNetwork {
     my ($netc, $intf, $_first_time) = @_;
     local $_;
     modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1) or return;
-    my @l = detect_devices::getNet() or die \N("no network card found");
     my @all_cards = conf_network_card_backend($netc, $intf);
+    my @l = map { $_->[0] } @all_cards;
 
   configureNetwork_step_1:
-    my $n_card = 0;
     $netc ||= {};
-    my $last; foreach (@l) {
-	my $intf2 = findIntf($intf ||= {}, $_);
+    my $last; foreach (@all_cards) {
+	my $intf2 = findIntf($intf ||= {}, $_->[0]);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card][1]) or return;
+	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $_->[1]) or return;
 
 	$last = $intf2;
-	$n_card++;
     }
     $last or return;
     

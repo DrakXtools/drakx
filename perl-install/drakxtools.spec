@@ -291,6 +291,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+- avoid virtual ethX to be reconfigured by drakconnect (francois)
+
 * Thu Mar  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-17mdk
 - draksplash:
   o fix #1766
