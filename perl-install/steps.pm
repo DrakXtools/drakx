@@ -12,7 +12,7 @@ use common;
     #entered reachable toBeDone next done;
     my @installSteps = (
   selectLanguage     => [ N_("Choose your language"), 1, 1, '', '', 'language' ],
-  acceptLicense      => [ N_("License"), 1, 1, '', '', '' ],
+  acceptLicense      => [ N_("License"), 1, -1, '', '', '' ],
   selectMouse        => [ N_("Configure mouse"), 1, 1, '1', '', 'mouse' ],
   setupSCSI          => [ N_("Hard drive detection"), 1, 0, '1', '', 'harddrive' ],
   selectInstallClass => [ N_("Select installation class"), 1, 1, '1', '', '' ],
