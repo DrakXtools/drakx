@@ -229,7 +229,7 @@ sub cardConfiguration(;$$$) {
 	    $single_heads{$_->{busid}} = $_;
 	}
 	if ($configure_multi_head) {
-	    push @choices, { text => _("Configure all heads independantly"), code => sub { $configure_multi_head->('') } };
+	    push @choices, { text => _("Configure all heads independently"), code => sub { $configure_multi_head->('') } };
 	    push @choices, { text => _("Use Xinerama extension"), code => sub { $configure_multi_head->(1) } };
 	}
 	foreach my $e (values %single_heads) {
