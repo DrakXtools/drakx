@@ -39,7 +39,7 @@ sub confScanner {
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     output("$_sanedir/$a.conf", (join "\n",@{$scannerDB->{$model}{lines}}));
-    substInFile {s/\$DEVICE/$port/} "$_sanedir/$a.conf";
+    substInFile { s/\$DEVICE/$port/ } "$_sanedir/$a.conf";
     add2dll($a);
 }
 
@@ -93,9 +93,9 @@ sub readScannerDB {
 	    add2hash($card->{flags}, $c->{flags});
 	    add2hash($card, $c);
 	},
-	ASK => sub { $card->{ask} = $val; },
-	SERVER => sub { $card->{server} = $val; },
-	DRIVER => sub { $card->{driver} = $val; },
+	ASK => sub { $card->{ask} = $val },
+	SERVER => sub { $card->{server} = $val },
+	DRIVER => sub { $card->{driver} = $val },
 	UNSUPPORTED => sub { $card->{flags}{unsupported} = 1 },
 	COMMENT => sub {},
     };
@@ -114,7 +114,7 @@ sub readScannerDB {
 }
 
 sub updateScannerDBfromUsbtable {
-    substInFile {s/END//} "ScannerDB";
+    substInFile { s/END// } "ScannerDB";
     local *F;
     open F, ">>ScannerDB" or die "can't write ScannerDB config in ScannerDB: $!";
     print F "# generated from usbtable by scannerdrake\n";
@@ -134,7 +134,7 @@ sub updateScannerDBfromUsbtable {
 
 sub updateScannerDBfromSane {
     my ($_sanesrcdir) = @_;
-    substInFile {s/END//} "ScannerDB";
+    substInFile { s/END// } "ScannerDB";
 
     local *Y;
     open Y, ">>ScannerDB" or die "can't write ScannerDB config in ScannerDB: $!";
@@ -146,8 +146,8 @@ sub updateScannerDBfromSane {
 		   "Agfa" => "AGFA-Gevaert NV",
 		   "Epson" => "Seiko Epson Corp.",
 		   "Fujitsu Computer Products of America" => "Fujitsu",
-		   "HP" => sub {$_[0] =~ s/HP\s/Hewlett-Packard|/; $_[0] =~ s/HP4200/Hewlett-Packard|ScanJet 4200C/; $_[0];},
-		   "Hewlett-Packard" => sub {$_[0] =~ s/HP 3200 C/Hewlett-Packard|ScanJet 3200C/; $_[0];},
+		   "HP" => sub { $_[0] =~ s/HP\s/Hewlett-Packard|/; $_[0] =~ s/HP4200/Hewlett-Packard|ScanJet 4200C/; $_[0] },
+		   "Hewlett-Packard" => sub { $_[0] =~ s/HP 3200 C/Hewlett-Packard|ScanJet 3200C/; $_[0] },
 		   "Kodak" => "Kodak Co.",
 		   "Mustek" => "Mustek Systems Inc.",
 		   "NEC" => "NEC Systems",
@@ -169,12 +169,12 @@ sub updateScannerDBfromSane {
 	my ($lineno, $cmd, $val) = 0;
 	my ($name, $intf, $comment,$mfg);
 	my $fs = {
-		  backend => sub {$backend = $val;},
-		  mfg => sub {$mfg = $val; $name=undef;},#bug when a new mfg comes. should called $fs->{$name}(); but ??
+		  backend => sub { $backend = $val },
+		  mfg => sub { $mfg = $val; $name = undef },#bug when a new mfg comes. should called $fs->{ $name }(); but ??
 		  model => sub {
-		      unless ($name) {$name = $val; next;}
+		      unless ($name) { $name = $val; next }
 		      $name = (member($mfg, keys %$sane2DB))
-			? (ref $sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{$mfg}|$name" : "$mfg|$name";
+			? (ref $sane2DB->{ $mfg}) ? $sane2DB->{ $mfg }($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
 		      if (member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
@@ -184,15 +184,15 @@ sub updateScannerDBfromSane {
 		      }
 		      $name = $val;
 		  },
-		  interface => sub {$intf = $val;},
-		  comment => sub {$comment = $val;},
+		  interface => sub { $intf = $val },
+		  comment => sub { $comment = $val },
 		 };
 	local $_;
 	while (<$F>) { $lineno++;
 		       s/\s+$//;
 		       /^\;/ and next;
 		       ($cmd, $val) = /:(\S+)\s*\"([^\;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
-		       my $f = $fs->{$cmd};
+		       my $f = $fs->{ $cmd };
 		       $f ? $f->() : log::l("unknown line $lineno ($_)");
 		   }
 	$fs->{model}(); # the last one
@@ -208,6 +208,9 @@ sub updateScannerDBfromSane {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.8  2002/08/01 16:20:15  tvignaud
+# perl_checker fixes
+#
 # Revision 1.7  2002/07/08 08:34:51  tvignaud
 # this doesn't need either "#!/usr/bin/perl" nor "use lib qw(/usr/lib/libDrakX);"
 #

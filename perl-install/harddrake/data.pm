@@ -59,10 +59,13 @@ our @tree =
 	["UNKNOWN","Unknown/Others", "unknown.png", "" , \&unknown],
 
 	["PRINTER","Printer", "hw_printer.png", "$sbindir/printerdrake", 
-	 sub { require printerdrake; printerdrake::auto_detect(class_discard->new)  } ],
+	 sub { 
+		require printerdrake; printerdrake::auto_detect(class_discard->new)  } ],
 	["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake",
-	 sub { require scanner; scanner::findScannerUsbport() }],
-	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { require mouse; &mouse::detect() } ],
+	 sub { 
+		require scanner; scanner::findScannerUsbport() }],
+	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { 
+	    require mouse; &mouse::detect() } ],
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}],
 
 	["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub { grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
