@@ -15,14 +15,12 @@ use detect_devices;
 use modules;
 use run_program;
 use lang;
-use raid;
 use keyboard;
-use log;
 use fsedit;
 use loopback;
-use commands;
-use network;
+#use commands;
 use any;
+use log;
 use fs;
 
 @filesToSaveForUpgrade = qw(
@@ -291,6 +289,7 @@ sub beforeInstallPackages {
     $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
     log::l("before install packages, after adding localhost in hosts");
+    require network;
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
 
     log::l("before openning database");
@@ -502,6 +501,7 @@ sub selectMouse($) {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o) = @_;
+    require network;
     network::configureNetwork2($o->{prefix}, $o->{netc}, $o->{intf});
 }
 
@@ -629,6 +629,7 @@ sub addUser($) {
 		chmod $mode, "$p$u->{home}";
 	    }
 	}
+	require commands;
 	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
     }
@@ -736,6 +737,7 @@ sub configureXBefore {
     my ($o) = @_;
     my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
     if (!-e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb" && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
+	require commands;
 	commands::cp("-f", $f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
 	$xkb = '';
     }

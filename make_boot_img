@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|blank|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|network|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 Config->import;
@@ -25,6 +25,8 @@ _ "$sudo mkdir $mnt" unless -e $mnt;
 _ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
 
 $install = $ {{
+    all => "full-install",
+    other => "full-install",
     blank => "full-install",
     live => "full-install",
     tftp => "full-install",
@@ -53,7 +55,7 @@ sub initrd {
     my $tar = "$instdir/install1.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
-    _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
+    _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($type eq "all" ? 4000 : 2000);
     _ "$mke2fs $tmp";
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
@@ -67,7 +69,8 @@ sub initrd {
 	_ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	_ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
     }
-    _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
+    my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
+    _ "$sudo cp -f install_${ftype}_modules/* $mnt/modules/" if -d "install_${ftype}_modules";
     _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz" if $type !~ /blank/;
     _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
@@ -86,13 +89,16 @@ sub boot_img_i386 {
     __ "$sudo umount $mnt 2>/dev/null";
     if ($type eq "hd") {
 	_ "bunzip2 -c $instdir/installinit/msgboot.img.bz2 > $img";
+    } elsif ($type eq "all") {
+	_ "bunzip2 -c $instdir/installinit/msgboot-graphicallogo-2880.img.bz2 > $img";
     } else {
 	_ "bunzip2 -c $instdir/installinit/msgboot-graphicallogo.img.bz2 > $img";
     }
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
     -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
-    
+
+    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
     my $timeout = 72;
     output("$mnt/syslinux.cfg", "
 default linux
@@ -103,34 +109,34 @@ F1 help.msg
 F2 boot.msg
 label linux
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $ftype vga=788
 label vgalo
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type vga=785
+  append ramdisk_size=32000 initrd=$type.rdz $ftype vga=785
 label vgahi
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type vga=791
+  append ramdisk_size=32000 initrd=$type.rdz $ftype vga=791
 label vga16
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type vga16
+  append ramdisk_size=32000 initrd=$type.rdz $ftype vga16
 label text
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type text
+  append ramdisk_size=32000 initrd=$type.rdz $ftype text
 label patch
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type patch vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $ftype patch vga=788
 label expert
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type expert vga=788
+  append ramdisk_size=32000 initrd=$type.rdz $ftype expert vga=788
 label rescue
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type rescue rw
+  append ramdisk_size=32000 initrd=$type.rdz $ftype rescue rw
 label oem
   kernel vmlinuz
   append ramdisk_size=32000 initrd=cdrom.rdz cdrom rescue oem rw
 label auto
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type auto_install=auto_inst.cfg.pl
+  append ramdisk_size=32000 initrd=$type.rdz $ftype auto_install=auto_inst.cfg.pl
 ");
     _ "sync";
     _ "df $mnt";

@@ -12,22 +12,19 @@ use vars qw($o $version);
 #-######################################################################################
 use common qw(:common :file :system :functional);
 use install_any qw(:all);
-use log;
+use install_steps;
 use commands;
-use network;
 use lang;
 use keyboard;
 use mouse;
-use fs;
-use raid;
 use fsedit;
 use devices;
 use partition_table qw(:types);
 use modules;
 use detect_devices;
 use run_program;
-
-use install_steps;
+use log;
+use fs;
 
 $::VERSION = "7.1";
 #-$::corporate=1;
@@ -289,6 +286,7 @@ sub formatPartitions {
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
 
+    require raid;
     raid::prepare_prefixed($o->{raid}, $o->{prefix});
 
     my $d = "/initrd/loopfs/lnx4win";
@@ -372,6 +370,7 @@ STORAGE=
 sub configureNetwork {
     $::live and return;
     #- get current configuration of network device.
+    require network;
     eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
     $o->configureNetwork($_[1] == 1);
 }
@@ -642,12 +641,15 @@ sub main {
 
     $::o = $o = $o_;
 
-    #- get stage1 network configuration if any.
-    $o->{netc} ||= network::read_conf("/tmp/network");
-    if (my ($file) = glob_('/tmp/ifcfg-*')) {
-	log::l("found network config file $file");
-	my $l = network::read_interface_conf($file);
-	add2hash(network::findIntf($o->{intf} ||= {}, $l->{DEVICE}), $l);
+    if (-e "/tmp/network") {
+	require network;
+	#- get stage1 network configuration if any.
+	$o->{netc} ||= network::read_conf("/tmp/network");
+	if (my ($file) = glob_('/tmp/ifcfg-*')) {
+	    log::l("found network config file $file");
+	    my $l = network::read_interface_conf($file);
+	    add2hash(network::findIntf($o->{intf} ||= {}, $l->{DEVICE}), $l);
+	}
     }
 
     #-the main cycle

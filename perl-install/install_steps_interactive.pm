@@ -17,17 +17,13 @@ use install_steps;
 use install_interactive;
 use install_any;
 use detect_devices;
-use netconnect;
 use run_program;
-use commands;
 use devices;
 use fsedit;
-use network;
-use raid;
+use loopback;
 use mouse;
 use modules;
 use lang;
-use loopback;
 use keyboard;
 use any;
 use fs;
@@ -470,6 +466,7 @@ sub afterInstallPackages($) {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o, $first_time) = @_;
+    require netconnect;
     netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse},  $o, $o->{pcmcia}, $o->{intf}, $first_time);
 }
 
@@ -872,16 +869,15 @@ sub configureX {
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy($) {
     my ($o) = @_;
-
     $::expert || $::g_auto_install or return;
 
     my ($floppy) = detect_devices::floppies();
-
     $o->ask_yesorno('', 
 _("Do you want to generate an auto install floppy for linux replication?"), $floppy) or return;
 
     $o->ask_warn('', _("Insert a blank floppy in drive %s", $floppy));
 
+    require commands;
     my $dev = devices::make($floppy);
 
     my $image = $o->{pcmcia} ? "pcmcia" :

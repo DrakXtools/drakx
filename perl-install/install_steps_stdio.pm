@@ -7,12 +7,9 @@ use vars qw(@ISA);
 @ISA = qw(install_steps_interactive interactive_stdio);
 
 use common qw(:common);
-use devices;
-use run_program;
 use interactive_stdio;
 use install_steps_interactive;
-use install_any;
-use log;
+use lang;
 
 sub new($$) {
     my ($type, $o) = @_;

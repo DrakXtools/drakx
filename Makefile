@@ -3,7 +3,7 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 RELEASE_BOOT_IMG = hd.img cdrom.img network.img
 ifeq (i386,$(ARCH))
-RELEASE_BOOT_IMG += pcmcia.img blank.img
+RELEASE_BOOT_IMG += pcmcia.img blank.img all.img other.img
 endif
 ifeq (sparc,$(ARCH))
 BOOT_IMG = live.img tftp.img tftprd.img live64.img tftp64.img tftprd64.img
@@ -44,7 +44,7 @@ build: $(BOOT_IMG)
 autoboot:
 ifeq (i386,$(ARCH))
 	install -d $(ROOTDEST)/boot
-	cp -f vmlinuz {hd,cdrom,pcmcia,network}.rdz $(ROOTDEST)/boot
+	cp -f vmlinuz {hd,cdrom,pcmcia,network,all,other}.rdz $(ROOTDEST)/boot
 	/usr/sbin/rdev -v $(ROOTDEST)/boot/vmlinuz 788
 endif
 

@@ -1,24 +1,19 @@
 package partition_table;
 
-use diagnostics;
-use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fields2save);
+#use diagnostics;
+#use strict;
+#use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fields2save);
 use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRAID isMDRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 
 use common qw(:common :system :functional);
-use partition_table_empty;
 use partition_table_raw;
-use partition_table_dos;
-use partition_table_bsd;
-use partition_table_sun;
-use partition_table_mac;
 use log;
 
 
@@ -214,6 +209,7 @@ sub name2type($) {
 sub isWholedisk($) { arch() =~ /^sparc/ && $_[0]{type} == 5 }
 sub isExtended($) { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
 sub isRAID($) { $_[0]{type} == 0xfd }
+sub isMDRAID { $_[0]{device} =~ /^md/ }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isReiserfs($) { $type2fs{$_[0]{type}} eq 'reiserfs' }
@@ -378,6 +374,7 @@ sub read_one($$) {
 	foreach ('empty', @parttype) {
 	    /unknown/ and die "unknown partition table format";
 	    eval {
+		require("partition_table_$_.pm");
 		bless $hd, "partition_table_$_";
 		($pt, $info) = $hd->read($sector);
 		log::l("found a $_ partition table on $hd->{file} at sector $sector");

@@ -9,28 +9,17 @@ use vars qw(@ISA);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :file :functional :system);
-use partition_table qw(:types);
-use my_gtk qw(:helpers :wrappers);
-use Gtk;
-#-use Gtk::XmHTML;
-use devices;
-use fsedit;
-use commands;
-use modules;
-use pkgs;
-use partition_table qw(:types);
-use partition_table_raw;
-use install_steps;
 use install_steps_interactive;
 use interactive_gtk;
+use common qw(:common :file :functional :system);
+use my_gtk qw(:helpers :wrappers);
+use Gtk;
+use devices;
+use modules;
 use install_gtk;
 use install_any;
-use diskdrake;
 use log;
 use mouse;
-use help;
-use lang;
 
 #-######################################################################################
 #- In/Out Steps Functions
@@ -189,9 +178,11 @@ sub selectMouse {
     $o->SUPER::selectMouse($force);
     $old{FULLNAME} eq $o->{mouse}{FULLNAME} && !$force and return;
 
+    local $my_gtk::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
+
     while (1) {
 	log::l("telling X server to use another mouse");
-	eval { commands::modprobe("serial") } if $o->{mouse}{device} =~ /ttyS/;
+	eval { modules::load('serial') } if $o->{mouse}{device} =~ /ttyS/;
 
 	if (!$::testing) {
 	    symlinkf($o->{mouse}{device}, "/dev/mouse");
@@ -218,6 +209,7 @@ sub chooseSizeToInstall {
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 20, 0);
     my $val;
 
+    require pkgs;
     gtkadd($w->{window},
 	  gtkpack(new Gtk::VBox(0,20),
 		  _("The total size for the groups you have selected is approximately %d MB.\n", pkgs::correctSize($max_size_ / sqr(1024))) .

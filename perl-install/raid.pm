@@ -7,6 +7,7 @@ use strict;
 #- misc imports
 #-######################################################################################
 use common qw(:common :functional);
+use partition_table qw(:types);
 use run_program;
 use devices;
 use commands;
@@ -15,11 +16,6 @@ use fs;
 sub nb($) { 
     my ($nb) = @_;
     first((ref $nb ? $nb->{device} : $nb) =~ /(\d+)/);
-}
-
-sub is($) {
-    my ($part) = @_;
-    $part->{device} =~ /^md/;
 }
 
 sub new($$) {
@@ -122,7 +118,7 @@ EOF
 
 sub make {
     my ($raid, $part) = @_;
-    is($_) and make($raid, $_) foreach @{$part->{disks}};
+    isMDRAID($_) and make($raid, $_) foreach @{$part->{disks}};
     my $dev = devices::make($part->{device});
     eval { commands::modprobe(module($part)) };
     run_program::run("raidstop", $dev);

@@ -8,12 +8,10 @@ use log;
 use devices;
 use partition_table qw(:types);
 use run_program;
-use nfs;
 use swap;
 use detect_devices;
 use commands;
 use modules;
-use raid;
 use fsedit;
 use loopback;
 
@@ -136,7 +134,8 @@ sub real_format_part {
 }
 sub format_part {
     my ($raid, $part, $prefix) = @_;
-    if (raid::is($part)) {
+    if (isRAID($part)) {
+	require raid;
 	raid::format_part($raid, $part);
     } elsif (isLoopback($part)) {
 	loopback::format_part($part, $prefix);
@@ -187,7 +186,7 @@ sub mount($$$;$) {
 
     if ($fs eq 'nfs') {
 	log::l("calling nfs::mount($dev, $where)");
-	nfs::mount($dev, $where) or die _("nfs mount failed");
+#	nfs::mount($dev, $where) or die _("nfs mount failed");
     } elsif ($fs eq 'smb') {
 	die "no smb yet...";
     } else {

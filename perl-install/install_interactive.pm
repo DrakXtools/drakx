@@ -6,15 +6,14 @@ use strict;
 use vars;
 
 use common qw(:common :functional);
-use fs;
-use fsedit;
-use log;
 use partition_table qw(:types);
 use partition_table_raw;
 use detect_devices;
 use install_steps;
 use devices;
-use modules;
+use fsedit;
+use log;
+use fs;
 
 
 sub tellAboutProprietaryModules {
@@ -30,6 +29,7 @@ sub partition_with_diskdrake {
     my $ok; 
     do {
 	$ok = 1;
+	require diskdrake;
 	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}, $nowizard);
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_fstab(@$hds);
@@ -154,7 +154,6 @@ When sure, press Ok.")) or return;
     }
 
     if (!$readonly && ref($o) =~ /gtk/) { #- diskdrake only available in gtk for now
-	require diskdrake;
 	$solutions{diskdrake} = [ 0, ($::beginner ? _("Expert mode") : _("Use diskdrake")), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
     }
 

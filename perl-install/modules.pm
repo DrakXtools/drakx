@@ -30,7 +30,7 @@ arch() =~ /^sparc/ ? (
   "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
   "at1700" => "Allied Telesis AT1700",
   "ac3200" => "Ansel Communication AC3200",
-#BIG  "acenic" => "AceNIC Gigabit Ethernet",
+  "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
   "82596" => "Apricot 82596",
 #  "atp" => "ATP", # builtin the kernel
@@ -82,10 +82,10 @@ arch() =~ /^sparc/ ? (
   "sb1000" => "sb1000",
   "sbni" => "sbni",
   "sis900" => "sis900",
-#BIG  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
+  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
 ),
   "3c59x" => "3com 3c59x (Vortex)",
-#BIG  "de4x5" => "Digital 425,434,435,450,500",
+  "de4x5" => "Digital 425,434,435,450,500",
   "rtl8139" => "RealTek RTL8129/8139",
 }],
 [ 'net_raw', {
@@ -111,12 +111,12 @@ arch() =~ /^sparc/ ? (
   "advansys" => "AdvanSys Adapters",
   "in2000" => "Always IN2000",
   "AM53C974" => "AMD SCSI",
-#unsused  "BusLogic" => "BusLogic Adapters",
+  "BusLogic" => "BusLogic Adapters",
   "dtc" => "DTC 3180/3280",
-#unsused  "seagate" => "Future Domain TMC-885, TMC-950",
-#unsused  "fdomain" => "Future Domain TMC-16x0",
+  "seagate" => "Future Domain TMC-885, TMC-950",
+  "fdomain" => "Future Domain TMC-16x0",
   "initio" => "Initio",
-#unsused  "g_NCR5380" => "NCR 5380",
+  "g_NCR5380" => "NCR 5380",
   "NCR53c406a" => "NCR 53c406a",
   "53c7,8xx" => "NCR 53c7xx",
   "qlogicfas" => "Qlogic FAS",
@@ -128,12 +128,12 @@ arch() =~ /^sparc/ ? (
 
   "a100u2w" => "a100u2w",
   "atp870u" => "atp870u (Acard/Artop)",
-#unsused  "dc395x_trm" => "dc395x_trm",
+  "dc395x_trm" => "dc395x_trm",
   "psi240i" => "psi240i",
   "qlogicfc" => "qlogicfc",
   "sim710" => "sim710",
   "sym53c416" => "sym53c416",
-#unsused  "tmscsim" => "tmscsim",
+  "tmscsim" => "tmscsim",
 ),
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "ncr53c8xx" => "NCR 53C8xx PCI",
@@ -144,8 +144,8 @@ arch() =~ /^sparc/ ? (
 [ 'scsi_raw', {
   "scsi_mod" => "scsi_mod",
   "sd_mod" => "sd_mod",
-  "ide-mod" => "ide-mod",
-  "ide-probe" => "ide-probe",
+#-  "ide-mod" => "ide-mod",
+#-  "ide-probe" => "ide-probe",
 #-  "ide-probe-mod" => "ide-probe-mod",
 }],
 [ 'disk', {
@@ -153,33 +153,33 @@ arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
 ) : arch() =~ /alpha/ ? () : (
   "DAC960" => "Mylex DAC960",
-#unused  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
+  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "megaraid" => "AMI MegaRAID",
   "aacraid" => "AACxxx Raid Controller",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "gdth" => "ICP Disk Array Controller",
   "ips" => "IBM ServeRAID controller",
-#unused	 "eata" => "EATA SCSI PM2x24/PM3224",
-#unused	 "eata_pio" => "EATA PIO Adapters",
-#unused	 "eata_dma" => "EATA DMA Adapters",
+  "eata" => "EATA SCSI PM2x24/PM3224",
+  "eata_pio" => "EATA PIO Adapters",
+  "eata_dma" => "EATA DMA Adapters",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "imm" => "Iomega Zip (new driver)",
 ),
 }],
 [ 'disk_raw', {
-  "ide-disk" => "IDE disk",
+#-  "ide-disk" => "IDE disk",
 }],
 [ 'cdrom', {
 arch() !~ /^sparc|alpha/ ? (
   "sbpcd" => "SoundBlaster/Panasonic",
-#-  "aztcd" => "Aztech CD",
-#-  "gscd" => "Goldstar R420",
-#-  "isp16" => "ISP16/MAD16/Mozart",
-#-  "mcd" => "Mitsumi", #- removed for space
-#-  "mcdx" => "Mitsumi (alternate)",
-#-  "optcd" => "Optics Storage 8000",
-#-  "cm206" => "Phillips CM206/CM260",
-#-  "sjcd" => "Sanyo",
+  "aztcd" => "Aztech CD",
+  "gscd" => "Goldstar R420",
+  "isp16" => "ISP16/MAD16/Mozart",
+  "mcd" => "Mitsumi", #- removed for space
+  "mcdx" => "Mitsumi (alternate)",
+  "optcd" => "Optics Storage 8000",
+  "cm206" => "Phillips CM206/CM260",
+  "sjcd" => "Sanyo",
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
 ) : (),
@@ -237,7 +237,7 @@ arch() !~ /^sparc/ ? (
   "3c589_cs" => "3c589_cs",
   "parport_cs" => "parport_cs", 
   "3c575_cb" => "3c575_cb",
-#unused  "apa1480_cb" => "apa1480_cb",
+  "apa1480_cb" => "apa1480_cb",
   "cb_enabler" => "cb_enabler",
   "epic_cb" => "epic_cb",
   "iflash2+_mtd" => "iflash2+_mtd",
@@ -327,9 +327,18 @@ my %type_aliases = (
   scsi => 'disk',
 );
 
-my @skip_modules_on_stage1 =
-  arch() =~ /alpha/ ? qw(sb1000) :
-  ();
+my @skip_big_modules_on_stage1 = 
+qw(
+acenic sk98lin de4x5
+BusLogic seagate fdomain g_NCR5380 dc395x_trm tmscsim
+dpt_i2o eata eata_pio eata_dma
+apa1480_cb
+aztcd gscd isp16 mcd mcdx optcd cm206 sjcd 
+);
+
+my @skip_modules_on_stage1 = (
+  arch() =~ /alpha/ ? qw(sb1000) : (),
+);
 
 
 my @drivers_fields = qw(text type);
@@ -347,8 +356,11 @@ while (my ($k, $v) = each %drivers) {
 sub module_of_type__4update_kernel {
     my ($type) = @_;
     $type = join "|", map { $_, $_ . "_raw" } split ' ', $type;
-    my %skip; @skip{@skip_modules_on_stage1} = ();
-    grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
+    my %skip; 
+    @skip{@skip_modules_on_stage1} = ();
+    @skip{@skip_big_modules_on_stage1} = () if $type !~ /big/;
+    "big" =~ /^($type)$/ ? @skip_big_modules_on_stage1 : (),
+      grep { !exists $skip{$_} } grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
 }
 sub module_of_type {
     my ($type) = @_;

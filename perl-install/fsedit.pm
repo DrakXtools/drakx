@@ -14,9 +14,8 @@ use Data::Dumper;
 use fsedit;
 use devices;
 use loopback;
-use raid;
-use fs;
 use log;
+use fs;
 
 #-#####################################################################################
 #- Globals
@@ -108,12 +107,6 @@ sub get_visible_fstab {
 
 sub free_space {
     sum map { $_->{size} } map { partition_table::get_holes($_) } @_;
-}
-
-sub hasRAID {
-    my $b = 0;
-    map { $b ||= isRAID($_) } get_fstab(@_);
-    $b;
 }
 
 sub is_one_big_fat {
@@ -261,7 +254,7 @@ sub check_mntpoint {
     };
     $check->($fake_part) unless $mntpoint eq '/' && $loopbackDevice; #- '/' is a special case, no loop check
 
-    die "raid / with no /boot" if $mntpoint eq "/" && raid::is($part) && !has_mntpoint("/boot", $hds);
+    die "raid / with no /boot" if $mntpoint eq "/" && isMDRAID($part) && !has_mntpoint("/boot", $hds);
     die _("You need a true filesystem (ext2, reiserfs) for this mount point\n") if !isTrueFS($part) && member($mntpoint, qw(/ /usr));
 #-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";

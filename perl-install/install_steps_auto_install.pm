@@ -2,7 +2,6 @@ package install_steps_auto_install;
 
 use diagnostics;
 use strict;
-use netconnect;
 use lang;
 use vars qw(@ISA);
 
@@ -36,7 +35,7 @@ sub new {
 sub configureNetwork {
     my ($o) = @_;
     modules::load_thiskind('net');
-    netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{pcmcia}, $o->{intf}, 1);
+    goto &install_steps::configureNetwork;
 }
 
 sub enteringStep($$$) {

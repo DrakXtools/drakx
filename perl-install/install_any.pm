@@ -15,18 +15,16 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy);
 #- misc imports
 #-######################################################################################
 use common qw(:common :system :functional :file);
-use commands;
 use run_program;
 use partition_table qw(:types);
 use partition_table_raw;
 use devices;
 use fsedit;
-use network;
 use modules;
 use detect_devices;
-use fs;
 use any;
 use log;
+use fs;
 
 #- package that have to be copied for proper installation (just to avoid changing cdrom)
 #- here XFree86 is copied entirey if not already installed, maybe better to copy only server.
@@ -158,10 +156,11 @@ sub setup_postinstall_rpms($$) {
     $postinstall_rpms and return;
     $postinstall_rpms = "$prefix/usr/postinstall-rpm";
 
+    require pkgs;
+    require commands;
+
     log::l("postinstall rpms directory set to $postinstall_rpms");
     commands::mkdir_('-p', $postinstall_rpms);
-
-    require pkgs;
 
     #- compute closure of unselected package that may be copied,
     #- don't complain if package does not exists as it may happen
@@ -182,6 +181,7 @@ sub setup_postinstall_rpms($$) {
     commands::cp((map { "/tmp/rhimage/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 }
 sub clean_postinstall_rpms() {
+    require commands;
     $postinstall_rpms and -d $postinstall_rpms and commands::rm('-rf', $postinstall_rpms);
 }
 
@@ -342,6 +342,7 @@ sub setAuthentication {
 	    $_ = "#~$_" unless /^#/;
 	    $_ .= "$t $nis\n" if eof;
 	} "$p/etc/yp.conf";
+	require network;
 	network::write_conf("$p/etc/sysconfig/network", $o->{netc});
     }
 }
@@ -599,6 +600,7 @@ sub generate_ks_cfg {
     if ($intf{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
 	$ks .= "network --bootproto $intf{BOOTPROTO}\n";
     } else {
+	require network;
 	my %l = (ip => $intf{IPADDR}, netmask => $intf{NETMASK}, gateway => $o->{netc}{GATEWAY});
 	$ks .= "network " . join(" ", map_each { $::b && "--$::a $::b" } %l);
 	$ks .= " --nameserver $_" foreach network::dnsServers($o->{netc});
