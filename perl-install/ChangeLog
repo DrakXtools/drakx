@@ -1,5 +1,82 @@
 2004/02/12  David Baudens  <baudens at mandrakesoft.com>
 
+	* share/advertising/dwd-09.pl: Update text to reflect reality
+
+2004/02/12  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: fix ethernet and adsl conflict in menu
+
+2004/02/12  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakvpn: hopefuly better interface
+
+2004/02/12  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.c, mdk-stage1/tools.c: try to
+	detect regular floppy drives
+
+	* mdk-stage1/Makefile.common: linux/fd.h is too broken to compile with -W
+	:(
+
+	* install2.pm: i810fb on 2.6 needs intel-agp module, doesn't like hwcur
+	and xcon parameters
+
+2004/02/12  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm: 
+	  - install ldap packages *before* doing ldapsearch
+	  - pam*.so modules do not have /lib/security/ prefix anymore
+
+	* Makefile: add rule dont_run_directly_stage2
+
+	* devices.pm: add input/mice
+
+	* install_any.pm: change return type of pkgs::packages2kernels()
+	add kernel-2.4* in group LSB
+
+	* bootloader.pm: in get_kernels_and_labels():
+	  - change internal data structure
+	  - change regexp matching kernel names (was broken for
+	2.4.25-0.pre7.3mdk)
+	  - default to kernel 2.4 when lsb is installed
+
+	* do_pkgs.pm, pkgs.pm: change return type of pkgs::packages2kernels()
+
+	* standalone/icons/wiz_drakvpn.png: re-adding with -kb
+	removing for re-adding with -kb
+
+	* Xconfig/card.pm: handle case where rpm can't be found (eg: XFree86-SVGA
+	for xfree3) (part of bugzilla #7786)
+
+	* install_steps_interactive.pm: warn that selecting LSB means having 2.4
+	by default
+
+2004/02/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: fix driver blacklist
+
+	* drakxtools.spec: fix changelog
+	10-0.12mdk
+	10-0.11mdk
+
+	* ugtk2.pm (new) simplify banner rendering, make it cpu lighter
+
+	* standalone/drakclock (DrawPointAt) simplify draw_points call
+
+	* network/netconnect.pm: ask isp for ip and gateway by default (#7705)
+	do use the actual user's answer
+	preselect right protocol for ethernet though connections
+	fix step linking with ask_connect_now and restart steps:
+	  - fix check for restart step
+	  - only offer to connect now for ppp connections
+	fix module retrieving when configuring an adsl connection over ethernet
+	sort ADSL protocols according to locale
+	fix adsk over ethernet through dhcp protocol
+
+	* share/po/fr.po: update
+
+2004/02/12  David Baudens  <baudens at mandrakesoft.com>
+
 	* share/advertising/ppp-07.pl, share/advertising/dis-11.pl,
 	share/advertising/dis-10.pl, share/advertising/ppp-11.pl,
 	share/advertising/ppp-10.pl, share/advertising/dis-05.pl,
@@ -25886,7 +25963,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.868 2004/02/10 17:12:15 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.869 2004/02/12 12:23:22 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
