@@ -400,7 +400,7 @@ sub pppConfig {
     $modem or return;
 
     if ($modem->{device} ne "/dev/modem") {
-	symlinkf($modem->{device}, "$prefix/dev/modem") ? add_devfslink($prefix, "$prefix/dev/modem") : log::l("creation of $prefix/dev/modem failed")
+	devfssymlinkf($modem->{device}, 'modem', $prefix) or log::l("creation of $prefix/dev/modem failed")
     }
     $in->do_pkgs->install('ppp') if !$::testing;
 
@@ -829,9 +829,9 @@ sub report_bug {
       map_index { even($::i) ? header($_) : $_ } @other;
 }
 
-sub add_devfslink {
-    my ($prefix, $link) = @_;
-    commands::cp("-f", $link, "$prefix/lib/dev-state/");
+sub devfssymlinkf {
+    my ($if, $of, $prefix) = @_;
+    symlinkf($if, "$prefix/$_") foreach ("dev/$of", "lib/dev-state/$of");
 }
 
 1;
