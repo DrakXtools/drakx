@@ -543,20 +543,21 @@ sub _create_window($$) {
 		      );
     my $table;
     if ($::isStandalone || $::live || $::g_auto_install) { gtkadd($w, $inner) } else {
+	my $sqw = $my_gtk::shape_width;
 	gtkadd($w, $table = new Gtk::Table(2, 2, 0));
 	$table->attach( $inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
-	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 1), expose_event => sub {
-					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, 7, 7);
-					      $_[0]->window->draw_rectangle($gc, 1, 0, 7, 7, $_[0]->allocation->[3]);
+	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, $sqw, 1), expose_event => sub {
+					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
+					      $_[0]->window->draw_rectangle($gc, 1, 0, $sqw, $sqw, $_[0]->allocation->[3]);
 					  }),
 			1, 2, 0, 1, 'fill', 'fill', 0, 0);
-	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 1, 7), expose_event => sub {
-					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, 7, 7);
-					      $_[0]->window->draw_rectangle($gc, 1, 7, 0, $_[0]->allocation->[2], 7);
+	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 1, $sqw), expose_event => sub {
+					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, $sqw, $sqw);
+					      $_[0]->window->draw_rectangle($gc, 1, $sqw, 0, $_[0]->allocation->[2], $sqw);
 					  }),
 			0, 1, 1, 2, 'fill', 'fill', 0, 0);
-	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 7), expose_event => sub {
-					      $_[0]->window->draw_rectangle($gc, 1, 0, 0, 7, 7);
+	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, $sqw, $sqw), expose_event => sub {
+					      $_[0]->window->draw_rectangle($gc, 1, 0, 0, $sqw, $sqw);
 					  }),
 			1, 2, 1, 2, 'fill', 'fill', 0, 0);
 	$table->show_all;
