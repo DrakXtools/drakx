@@ -1302,17 +1302,19 @@ sub png_lang_files() {
 
 sub check() {
     $^W = 0;
-    my $ok = 1;
+    my ($warnings, $errors) = (0, 0);
     my $warn = sub {
-	print STDERR "$_[0]\n";
+	my ($msg, $b_is_error) = @_;
+	if ($b_is_error) {
+	    print STDERR "\tErrors:\n" if !$errors++;
+	} else {
+	    print STDERR "\tWarnings:\n" if !$warnings++;
+	}
+	print STDERR "$msg\n";
     };
-    my $err = sub {
-	&$warn;
-	$ok = 0;
-    };
+    my $err = sub { $warn->($_[0], 'error') };
     
     my @wanted_charsets = uniq map { l2charset($_) } list_langs();
-    print "\tWarnings:\n";
     $warn->("unused charset $_ (given in \%charsets, but not used in \%langs)") foreach difference2([ keys %charsets ], \@wanted_charsets);
 
     $warn->("unused entry $_ in \%xim") foreach grep { !/UTF-8/ } difference2([ keys %IM_locale_specific_config ], [ map { l2locale($_) } list_langs() ]);
@@ -1333,8 +1335,6 @@ sub check() {
     $warn->("no country corresponding to default locale $_->[1] of lang $_->[0]")
       foreach grep { $_->[1] =~ /.._(..)/ && !exists $countries{$1} } map { [ $_, l2locale($_) ] } list_langs();
 
-    print "\tErrors:\n";
-
     $err->("invalid charset $_ ($_ does not exist in \%charsets)") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
     $err->("invalid charset $_ in \%charset2kde_font ($_ does not exist in \%charsets)") foreach difference2([ keys %charset2kde_font ], [ 'default', keys %charsets ]);
 
@@ -1348,7 +1348,7 @@ sub check() {
       foreach grep { !member($_->[1], @locales) } map { [ $_, c2locale($_) ] } list_countries();
 
 
-    exit($ok ? 0 : 1);
+    exit($errors ? 1 : 0);
 }
 
 1;
