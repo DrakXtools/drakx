@@ -345,6 +345,9 @@ sub help {
         		A typical exports entry for clusternfs is:
         		
         		/                  (ro,all_squash)
+        		/home              SUBNET/MASK(rw,root_squash)
+			
+			With SUBNET/MASK being defined for your network.
         		
         - Maintain /etc/shadow\$\$CLIENT\$\$:
         		For users to be able to log into the system from a diskless client, their entry in
@@ -1170,7 +1173,7 @@ sub deluser {
 			if ($user =~ /$username/) {
 				splice (@ts_users, $i, 1);
 				$user_deleted = 1;
-				break();
+				break;
 			}
 			$i++;
 		}			
