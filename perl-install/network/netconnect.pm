@@ -12,7 +12,7 @@ use network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
-@EXPORT = qw(start_internet stop_internet);
+our @EXPORT = qw(start_internet stop_internet);
 
 #- intro is called only in standalone.
 sub intro {
@@ -184,6 +184,7 @@ If you don't want to use the auto detection, deselect the checkbox.
     my %conf;
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
+    my @l;
 #     my @l = (
 # 	     [N("Normal modem connection"), $netc->{autodetect}{modem}, N_("detected on port %s"), \$conf{modem}],
 # 	     [N("ISDN connection"), $netc->{autodetect}{isdn}{description}, N_("detected %s"), \$conf{isdn}],
