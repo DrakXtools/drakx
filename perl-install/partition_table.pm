@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isNT isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isApplePartMap isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isNT isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 

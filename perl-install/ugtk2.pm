@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack2_
       gtkpack2__ gtkpowerpack gtkcombo_setpopdown_strings gtkset_editable gtkset_selectable gtkentry 
       gtkset_text gtkset_tip gtkappenditems gtkappend  gtkset_shadow_type gtkset_layout gtkset_relief
       gtkadd gtkexpand gtkput gtktext_append gtktext_insert gtkset_size_request gtksize gtkset_justify gtkset_active

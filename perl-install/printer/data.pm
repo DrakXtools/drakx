@@ -5,7 +5,7 @@ use common;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(%lprcommand  %spoolers %spooler_inv %shortspooler_inv);
+@EXPORT = qw(%spoolers %spooler_inv %shortspooler_inv);
 
 
 # BUG, FIXME : this was neither declered nor setted anywhere before :
