@@ -181,6 +181,7 @@ sub write_preload_conf {
     push @l, intersection([ qw(bttv cx8800 saa7134) ],
 			  [ map { $_->{driver} } detect_devices::probeall() ]);
     push @l, 'nvram' if cat_('/proc/bus/input/devices') =~ m!^N: Name="SynPS/2 Synaptics TouchPad"$!m;
+    push @l, map { $_->{driver} } probe_category('various/laptop');
     my @l_26 = @l;
     if (my ($agp) = probe_category('various/agpgart')) {
 	push @l_26, $agp->{driver};

@@ -196,7 +196,10 @@ our %l = (
     char => [
       if_(arch() =~ /ia64/, qw(efivars)),
       qw(hw_random applicom n_r3964 nvram pc110pad ppdev),
-      qw(mxser moxa isicom wdt_pci epca synclink istallion sonypi i810-tco sx), #- what are these???
+      qw(mxser moxa isicom wdt_pci epca synclink istallion i810-tco sx), #- what are these???
+    ],
+    laptop => [
+      qw(i8k sonypi toshiba),
     ],
     other => [
       qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
