@@ -1,3 +1,124 @@
+2002/09/04  baudens
+
+	* standalone/icons/wiz_logdrake.png, standalone/logdrake: Add image for
+	logdrake
+
+	* share/po/fr.po: Update
+	Update
+
+2002/09/04  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* network/network.pm: 
+	  - correct typos in orinoco orinoco_cs modules
+
+2002/09/04  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfig/test.pm: move last warning before removing tempory file in order
+	to have a chance to look
+	at them.
+
+2002/09/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: add fcrozat
+
+	* rescue/tree/etc/rc.sysinit: drvinst serial_usb in rc.sysinit so that
+	legacy free machines may
+	work with rescue
+
+2002/09/04  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* standalone/drakperm: changing bad save path for perm.local
+
+	* bootlook.pm: replace convert dependencies by gdk-pixbuf dependencies
+
+2002/09/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/cy.po, share/po/da.po: updated Danish and Welsh files
+
+2002/09/04  Pixel  <pixel@mandrakesoft.com>
+
+	* drakxtools.spec: remove symlink Xconfigurator (which was broken anyway,
+	thanks to Ian Ventura-Whiting for reporting it)
+
+	* bootloader.pm (same_entries): compare kernel options sorted (this is an
+	approximation of
+	reality since order can matter, but...). An example is "quiet
+	devfs=mount
+	hdc=ide-scsi" vs "devfs=mount hdc=ide-scsi quiet" (thanks to Gabriel
+	Phoenix)
+
+	* ugtk.pm: make perl_checker happy
+
+	* install_steps.pm (addUser): fix calling with a user already existing
+	(mainly for installs keeping the / non-formatted, special for pixel)
+
+	* share/keymaps.tar.bz2: update (now includes ro2)
+
+	* install_steps_interactive.pm: fix dialog box asking "Load from floppy"
+	or "Save on floppy" in individual package selection
+
+	* fs.pm: revert add2hash_ username=% to add2hash (it breaks diskdrake
+	--smb not
+	defaulting to username=%, and i can't find out what was wrong in
+	auto_install's manualFstab)
+	handle no options in fs::mount (is it really needed?... it should not!)
+
+	* Xconfig/test.pm: set isInstall in test script otherwise it uses
+	/usr/X11R6/bin/xtest
+
+2002/09/04  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: enable perl-Expect (moved to main)
+
+2002/09/04  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* Makefile.config: add drakperm!
+
+	* harddrake/ui.pm: 
+	  - add --test option to skip mice|modem|printer detection (now
+	harddrake start instantaneously)
+	  - print probed class to show progression
+	  - fix tree moving by using a Gtk::CTree instead of a Gtk::Tree; side
+	  effect is some code cleaning which compensate above features (code
+	  lenght)
+	  - let my_gtk handle embedded case
+	  - don't try to center window when embedded
+
+	* standalone/drakbackup: embbed drakbackup in mcc
+
+	* drakxtools.spec: 33mdk
+	32mdk
+
+	* standalone/drakperm: 
+	  - really embbed
+	  - kill stupid things (aka embedded window withouth any widget vs
+	toplevel window)
+
+	* ugtk.pm: gtkcreate_png_pixbuf() : support jpeg too for bootlook.pm
+
+	* share/po/fr.po: s/Si vous disque/Si votre disque/
+	s/Si non,, Les partitions devront être créés/Sinon, les partitions
+	devront ,bj(Btre cr,bii(Bes/
+	s/des fonctionnalité additionnelle/des fonctionnalit,bi(Bs
+	additionnelles/
+	s/sur un disque amovibles/sur un disque amovible/
+	s/sauves la table/sauve la table/
+	s/pour récurer les partitions/pour r,bi(Bcup,bi(Brer les partitions/
+	fix dadou fsck; please check the po before comitting it!!!!!
+
+2002/09/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* drakxtools.spec: meumeu
+	meuh
+
+	* ugtk.pm, my_gtk.pm: try to get rid of BEGIN but still be able to start
+	up the install :-)
+
+2002/09/03  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/icons/harddrake2/multimedia.png: re-adding with -kb
+	removing for re-adding with -kb
+
 2002/09/03  baudens
 
 	* share/advertising/09-server.pl, share/advertising/02-community.pl,
@@ -1930,7 +2051,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.735 2002/09/02 16:50:45 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.736 2002/09/03 23:31:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
