@@ -89,7 +89,8 @@ our @tree =
          &mouse::detect() }, 1 ],
      [ "JOYSTICK", , N("Joystick"), "joystick.png", "", sub {}, 0 ],
 
-     [ "ATA_STORAGE", , N("(E)IDE/ATA controllers"), "ide_hd.png", "", sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) }, 0 ],
+     [ "ATA_STORAGE", , N("(E)IDE/ATA controllers"), "ide_hd.png", "", sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/
+                                                                                        || $_->{driver} eq '3w-xxxx' } @devices) }, 0 ],
      [ "FIREWIRE_CONTROLLER", , N("Firewire controllers"), "usb.png", "", sub { f(grep { $_->{driver} =~ /ohci1394/ } @devices) }, 1 ],
      [ "SCSI_CONTROLLER", , N("SCSI controllers"), "scsi.png", "", sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices) }, 0 ],
      [ "USB_CONTROLLER", , N("USB controllers"), "usb.png", "", sub { f(grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices) }, 0 ],
