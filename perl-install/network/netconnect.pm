@@ -85,7 +85,7 @@ sub real_main {
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
-      my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
+      my ($isdn, $isdn_capi, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -355,13 +355,16 @@ sub real_main {
                         if ($isdn->{id}) {
                             log::explanations("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
                             $isdn->{description} =~ s/\|/ -- /;
-                            
                         }
-                        network::isdn::read_config($netcnx->{isdn_internal});
+
+                        network::isdn::read_config($isdn);
+                        $isdn->{driver} = $isdn_cards{$isdn_name}{driver}; #- do not let config overwrite default driver
+
+                        $isdn_capi = network::isdn::get_capi_card($isdn) and return "isdn_driver";
                         return "isdn_protocol";
                     },
                    },
-                   
+
 
                    isdn_ask =>
                    {
@@ -410,7 +413,24 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                     }
                    },
 
-                   
+
+                   isdn_driver =>
+                   {
+                    pre => sub {
+                        $isdn_name = "capidrv";
+                    },
+                    name => N("A capi driver is available for this modem. This capi driver can offer more capabilities than the free driver (like sending faxes). Which driver do you want to use ?"),
+                    data => sub { [
+                                   { label => N("Driver"), type => "list", val => \$isdn_name,
+                                     list => [ $isdn->{driver}, "capidrv" ] }
+                                  ] },
+                    post => sub {
+                        $isdn->{driver} = $isdn_name;
+                        return "isdn_protocol";
+                    }
+                   },
+
+
                    isdn_protocol =>
                    {
                     name => N("ISDN Configuration") . "\n\n" . N("Which protocol do you want to use?"),
