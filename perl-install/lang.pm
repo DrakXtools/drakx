@@ -981,7 +981,7 @@ sub write {
 		s/^(Language)=.*/$1=$locale->{lang}/;
 		if (!member($kde_charset, 'iso8859-1', 'iso8859-15')) { 
 		    #- don't keep the default for those
-    		    my $font_list = $charset2kde_font{$charset} || $charset2kde_font{default};
+    		    my $font_list = $charset2kde_font{l2charset($locale->{lang})} || $charset2kde_font{default};
 		    my $font_small = $font_list->[0];
 		    my $font_huge = $font_small;
 		    $font_huge =~ s/(.*?),\d+/$1,24/;
