@@ -49,7 +49,6 @@ my $my_win = ugtk2->new('logdrake');
 unless ($::isEmbedded) {
     $my_win->{rwindow}->set_title(N("logdrake"));
     $my_win->{window}->set_border_width(5);
-    #$my_win->{rwindow}->set_policy(1, 1, 1);
     #$my_win->{window}->set_default_size(540,460);
 }
 $my_win->{window}->signal_connect(delete_event => \&quit);
