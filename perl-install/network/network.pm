@@ -27,15 +27,15 @@ sub read_conf {
 }
 
 sub read_resolv_conf_raw {
-    my ($file) = @_;
-    $file ||= "$::prefix/etc/resolv.conf";
-    { nameserver => [ cat_($file) =~ /^\s*nameserver\s+(\S+)/mg ],
-      search => [ if_(cat_($file) =~ /^\s*search\s+(.*)/m, split(' ', $1)) ] };
+    my ($o_file) = @_;
+    my $s = cat_($o_file || "$::prefix/etc/resolv.conf");
+    { nameserver => [ $s =~ /^\s*nameserver\s+(\S+)/mg ],
+      search => [ if_($s =~ /^\s*search\s+(.*)/m, split(' ', $1)) ] };
 }
 
 sub read_resolv_conf {
-    my ($file) = @_;
-    my $resolv_conf = read_resolv_conf_raw($file);
+    my ($o_file) = @_;
+    my $resolv_conf = read_resolv_conf_raw($o_file);
     +{
       (mapn { $_[0] => $_[1] } [ qw(dnsServer dnsServer2 dnsServer3) ], $resolv_conf->{nameserver}),
       (mapn { $_[0] => $_[1] } [ qw(DOMAINNAME DOMAINNAME2 DOMAINNAME3) ], $resolv_conf->{search}),
