@@ -3,8 +3,9 @@ package Xconfig::card; # $Id$
 use diagnostics;
 use strict;
 
-use common;
+use detect_devices;
 use modules;
+use common;
 use log;
 
 
