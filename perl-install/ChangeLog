@@ -1,3 +1,35 @@
+2001/09/16  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (getAndSaveAutoInstallFloppy): skip it on ia64
+	more up to my need ALL flag in compssUsersChoice
+	remove auto-install special case (initialisation of compssUsersChoice)
+
+	* share/rpmsrate: 
+	  - cleanup packages appearing twice in rpmsrate
+	  - handle a few case of packages appearing twice
+	  - special case for packages appearing in INSTALL section (flag
+	dropped)
+	  - new special flag ALL for compssUsersChoice
+
+	* pkgs.pm: more up to my need ALL flag in compssUsersChoice
+	  - cleanup packages appearing twice in rpmsrate
+	  - handle a few case of packages appearing twice
+	  - special case for packages appearing in INSTALL section (flag
+	dropped)
+	  - new special flag ALL for compssUsersChoice
+
+	* rescue/make_rescue_img: use new mkdir_p, rm_rf and cp_af from
+	MDK::Common
+
+2001/09/16  siegel
+
+	* share/po/help_xml2pm.pl: added "systemitem"
+
+2001/09/16  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Fixed bug which prevents printerdrake from running without
+	PDQ installed.
+
 2001/09/16  dam's  <damien@mandrakesoft.com>
 
 	* mouse.pm, my_gtk.pm: bugfix + cosmetic changes
