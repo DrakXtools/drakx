@@ -159,7 +159,7 @@ sub write_fstab {
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
 	    ($_->{freq}, $_->{passno}) :
-	  isTrueFS($_) ? 
+	  isTrueFS($_) && $_->{options} !~ /encryption=/ ? 
 	    (1, $_->{mntpoint} eq '/' ? 1 : loopback::carryRootLoopback($_) ? 0 : 2) : 
 	    (0, 0);
 
@@ -231,6 +231,8 @@ sub mount_options_unpack {
 	isThisFs($fs, $part) || $part->{type} eq 'auto' && member($fs, @auto_fs) or next;
 	$non_defaults->{$_} = 1 foreach @$l;
     }
+
+    $non_defaults->{encrypted} = 1 if !$part->{isFormatted} || isSwap($part);
 
     $non_defaults->{supermount} = 1 if member(type2fs($part), 'auto', @auto_fs);
 
@@ -488,33 +490,35 @@ sub real_format_part {
 
     $part->{isFormatted} and return;
 
+    my $dev = $part->{real_device} || $part->{device};
+
     my @options = $part->{toFormatCheck} ? "-c" : ();
-    log::l("formatting device $part->{device} (type ", type2name($part->{type}), ")");
+    log::l("formatting device $dev (type ", type2name($part->{type}), ")");
 
     if (isExt2($part)) {
 	push @options, "-F" if isLoopback($part);
 	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
-	format_ext2($part->{device}, @options);
+	format_ext2($dev, @options);
     } elsif (isThisFs("ext3", $part)) {
 	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
-        format_ext3($part->{device}, @options);
+        format_ext3($dev, @options);
     } elsif (isThisFs("reiserfs", $part)) {
-        format_reiserfs($part->{device}, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
+        format_reiserfs($dev, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
     } elsif (isThisFs("xfs", $part)) {
-        format_xfs($part->{device}, @options);
+        format_xfs($dev, @options);
     } elsif (isThisFs("jfs", $part)) {
-        format_jfs($part->{device}, @options);
+        format_jfs($dev, @options);
     } elsif (isDos($part)) {
-        format_dos($part->{device}, @options);
+        format_dos($dev, @options);
     } elsif (isWin($part)) {
-        format_dos($part->{device}, @options, '-F', 32);
+        format_dos($dev, @options, '-F', 32);
     } elsif (isThisFs('hfs', $part)) {
-        format_hfs($part->{device}, @options, '-l', "Untitled");
+        format_hfs($dev, @options, '-l', "Untitled");
     } elsif (isAppleBootstrap($part)) {
-        format_hfs($part->{device}, @options, '-l', "bootstrap");
+        format_hfs($dev, @options, '-l', "bootstrap");
     } elsif (isSwap($part)) {
 	my $check_blocks = grep { /^-c$/ } @options;
-        swap::make($part->{device}, $check_blocks);
+        swap::make($dev, $check_blocks);
     } else {
 	die _("I don't know how to format %s in type %s", $_->{device}, type2name($_->{type}));
     }
@@ -535,6 +539,14 @@ sub format_part {
 ################################################################################
 # mounting functions
 ################################################################################
+sub set_loop {
+    my ($part) = @_;
+    if (!$part->{real_device}) {
+	eval { modules::load('loop') };
+	$part->{real_device} = devices::set_loop(devices::make($part->{device}), $part->{encrypt_key}, $part->{options} =~ /encryption=(\w+)/);
+    }
+}
+
 sub formatMount_part {
     my ($part, $raids, $fstab, $prefix, $callback) = @_;
 
@@ -544,7 +556,9 @@ sub formatMount_part {
     if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
 	formatMount_part($p, $raids, $fstab, $prefix, $callback) unless loopback::carryRootLoopback($part);
     }
-
+    if ($part->{encrypt_key}) {
+	set_loop($part);
+    }
     if ($part->{toFormat}) {
 	$callback->($part) if $callback;
 	format_part($raids, $part, $prefix);
@@ -662,14 +676,13 @@ sub mount_part {
 	} else {
 	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
 
-	    my $dev = $part->{device};
 	    my $mntpoint = ($prefix || '') . $part->{mntpoint};
-	    if (isLoopback($part)) {
-		eval { modules::load('loop') };
-		$dev = $part->{real_device} = devices::set_loop($part->{device}) || die;
+	    if (isLoopback($part) || $part->{encrypt_key}) {
+		set_loop($part);
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
+	    my $dev = $part->{real_device} || $part->{device};
 	    mount($dev, $mntpoint, type2fs($part), $rdonly, $part->{options});
 	    rmdir "$mntpoint/lost+found";
 	}
@@ -689,7 +702,7 @@ sub umount_part {
 	    umount("/initrd/loopfs");
 	} else {
 	    umount(($prefix || '') . $part->{mntpoint} || devices::make($part->{device}));
-	    c::del_loop(delete $part->{real_device}) if isLoopback($part);
+	    devices::del_loop(delete $part->{real_device}) if $part->{real_device};
 	}
     }
     $part->{isMounted} = 0;

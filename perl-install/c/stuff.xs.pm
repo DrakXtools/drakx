@@ -413,48 +413,6 @@ kernel_version()
   RETVAL
 
 int
-set_loop(dev_fd, file)
-  int dev_fd
-  char *file
-  CODE:
-  RETVAL = 0;
-{
-  struct loop_info loopinfo;
-  int file_fd = open(file, O_RDWR);
-
-  if (file_fd < 0) return;
-
-  memset(&loopinfo, 0, sizeof(loopinfo));
-  strncpy(loopinfo.lo_name, file, LO_NAME_SIZE);
-  loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
-
-  if (ioctl(dev_fd, LOOP_SET_FD, file_fd) < 0) return;
-  if (ioctl(dev_fd, LOOP_SET_STATUS, &loopinfo) < 0) {
-    ioctl(dev_fd, LOOP_CLR_FD, 0);
-    return;
-  }
-  close(file_fd);
-  RETVAL = 1;
-}
-  OUTPUT:
-  RETVAL
-
-int
-del_loop(device)
-  char *device
-  CODE:
-  RETVAL = 0;
-{
-  int fd;
-  if ((fd = open(device, O_RDONLY)) < 0) return;
-  if (ioctl(fd, LOOP_CLR_FD, 0) < 0) return;
-  close(fd);
-  RETVAL = 1;
-}
-  OUTPUT:
-  RETVAL
-
-int
 prom_open()
 
 void

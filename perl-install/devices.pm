@@ -32,17 +32,38 @@ sub size($) {
     $low + 1;
 }
 
-sub set_loop {
-    my ($file) = @_;
-
+sub del_loop {
+    my ($dev) = @_;
+    run_program::run("losetup", "-d", $dev);
+}
+sub find_free_loop {
     foreach (0..7) {
-	local *F;
 	my $dev = make("loop$_");
-	sysopen F, $dev, 2 or next;
-	!ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
-	log::l("trying with loop $dev");
-	return c::set_loop(fileno F, $file) && $dev;
+	{
+	    local *F;
+	    sysopen F, $dev, 2 or next;
+	    !ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
+	    close F;
+	}
+	return $dev;
     }
+    die "no free loop found";
+}
+sub set_loop {
+    my ($file, $encrypt_key, $encryption) = @_;
+    my $dev = find_free_loop();
+
+    if ($encrypt_key && $encryption) {
+	my $cmd = "losetup -p 0 -e $encryption $dev $file";
+	log::l("calling $cmd");
+	local *F;
+	open F, "|$cmd";
+	print F $encrypt_key;
+	close F or die "losetup failed";
+    } else {
+	run_program::run("losetup", $dev, $file) or return;
+    }
+    $dev;
 }
 
 sub entry {

@@ -787,7 +787,7 @@ sub getAndSaveAutoInstallFloppy {
 
 	fs::umount($mountdir);
 	rmdir $mountdir;
-	c::del_loop($dev);
+	devices::del_loop($dev);
 	require commands;
 	commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
 	unlink $imagefile;

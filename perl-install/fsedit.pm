@@ -416,6 +416,7 @@ sub suggest_part {
     $part->{mntpoint} = $best->{mntpoint};
     $part->{type} = $best->{type} if !(isTrueFS($best) && isTrueFS($part));
     $part->{size} = computeSize($part, $best, $all_hds, $suggestions);
+    $part->{options} = $best->{options} if $best->{options};
     1;
 }
 
