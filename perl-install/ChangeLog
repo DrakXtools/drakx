@@ -1,3 +1,77 @@
+2001/12/05  dam's  <damien@mandrakesoft.com>
+
+	* share/logo-mandrake.png: updateed logo
+
+2001/12/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile, mdk-stage1/pcmcia_/cardmgr.c: 
+	  - fix problems with sockets not initialized (disabling
+	hotplug support -> cardmgr handles sockets)
+	  - fix problems with PCMCIA net adapters now using PCI
+	  modules, by adding PCMCIA base code in `network.img'
+
+2001/12/05  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: no need to give kernelVersion to bootloader::suggest
+
+	* pkgs.pm (selectPackage): hard coded preference to simple kernel
+
+	* install_any.pm (kernelVersion): looks at /boot/vmlinuz
+
+	* diskdrake.pm: fix call to fileshare_config
+
+	* steps.pm: createBootdisk now after setupBootloader (together with dumber
+	install_any::kernelVersion)
+
+	* network/tools.pm: fix missing ";" (thanks to Robert Fox)
+
+	* bootloader.pm (suggest, add_kernel): much cleanup
+
+	* fs.pm: fix type "smb" vs "smbfs", and handle options in fs::mount
+
+2001/12/05  sdupont
+
+	* pixmaps/backup_bot2.png: update pixmaps
+
+	* standalone/drakbackup: todo : scp ssl sftp rsync connections perl || c ?
+	done : bzip2 backup
+	merge
+
+2001/12/04  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakbackup: corrected pixmap path
+	corrected pixmap path
+
+	* Makefile.config: added drakbackup drakfont
+
+2001/12/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* any.pm, mdk-stage1/log.c, docs/README: save stage1.log and have it in
+	report.bug
+
+	* mdk-stage1/automatic.c, mdk-stage1/doc/TECH-INFOS: support shorter
+	versions of automatic keywords to beat problems with very long kernel
+	commandlines
+
+	* install_interactive.pm: try to not get something poorly wrapped
+
+	* c/stuff.xs.pm: floppy_info: add missing close(fd)
+
+2001/12/04  Pixel  <pixel@mandrakesoft.com>
+
+	* network/smb.pm: cleaner smbclient call
+
+	* install_steps.pm: re-enable supermount by default
+
+2001/12/04  sdupont
+
+	* pixmaps/backup_bot.png, pixmaps/backup_left.png: correct colors
+	problems.
+
+	* standalone/drakbackup: bzip2 ok for compression to see: decomp without
+	pbs whith tar.gz and tar.bz2
+	todo: update mode -> decomp + update tar file + recomp
+
 2001/12/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* install_interactive.pm: try to not get something poorly wrapped
