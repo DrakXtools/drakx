@@ -1,3 +1,82 @@
+2002/03/05  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* modules.pm: Add USB2 controller
+
+2002/03/05  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: corrected expert option in install mode
+	added expert mode
+
+	* my_gtk.pm: greater interstice
+
+	* modparm.pm: cosmetic
+	gzipped modules handled
+
+2002/03/05  fcrozat
+
+	* share/rpmsrate: Install xlockmore when installing gnome, since
+	xscreensaver can't lock
+	root desktop..
+
+2002/03/05  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: deactivate v4l module if DRI is enabled and r128
+	driver used.
+
+	* install_steps.pm: added auto restore of some files (/etc/profile) needed
+	by upgrade (from .rpmnew).
+	added log for hasNetwork (so that we can understand why installUpdates
+	do nothing).
+
+	* crypto.pm: avoid trying to find hdlist-updates.cz in existing medium
+	(instead of ftp one).
+
+	* fs.pm: fixed hd install to allow using specific directory.
+
+	* install_any.pm: fix duplicate synthesis.hdlist.xxx file present in
+	/var/lib/urpmi, and
+	furthermore uncompressed :-(
+	fixed possible bug when generating synthesis file for urpmi
+	installation.
+
+2002/03/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c, mdk-stage1/dhcp.h, mdk-stage1/network.c: save
+	dhcp_hostname for stage2
+
+	* install_any.pm: fix bug in generating automatic stage1
+	params for http
+
+	* modules.pm: aironet core sucking thing
+
+2002/03/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sr.po, share/po/sp.po: updated po files
+
+2002/03/05  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: if mem=nopentium is given on cmdline, have it after
+	install
+
+	* modules.pm (extract_modules): created (was done in load_raw)
+
+2002/03/05  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* Xconfigurator.pm: use UseFBDev for r128 - PPC
+
+2002/03/05  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Added support for HP's newest MF devices: HP OfficeJet
+	D series, HP LaserJet 33xx MFP.
+	Fixed bug of printerdrake sometimes assuming the user has an MF device
+	when he has typed the device file name in the expert mode.
+
+2002/03/05  yduret
+
+	* bootlook.pm: fix nobody bug
+
+	* standalone/logdrake: mail alert: use eval {} to catch wizcancel
+
 2002/03/04  dam's  <damien@mandrakesoft.com>
 
 	* modparm.pm: corected weirdness, I suck
