@@ -330,6 +330,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Fri Sep  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.20mdk
 - detect more devices
 - misc GUI cleanups
+- netconnect: support DHCP and static for sagem devices (blino)
 
 * Thu Sep  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.19mdk
 - add icons to most tools' windows
