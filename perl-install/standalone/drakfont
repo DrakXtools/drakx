@@ -219,9 +219,9 @@ sub chk_empty_xfs_path {
 
 sub search_installed_fonts {
     list_fontpath();
-    $interactive and progress($pbar, 0.01, _("Search installed fonts"));
+    $interactive and progress($pbar, 0.1, _("Search installed fonts"));
     push @installed_fonts, all($_) foreach @installed_fonts_path;
-    $interactive and progress($pbar, 1/4, _("Unselect fonts installed"));
+    $interactive and progress($pbar, 0.1, _("Unselect fonts installed"));
 }
 
 sub search_installed_fonts_full_path {
@@ -251,7 +251,7 @@ sub search_windows_font {
 		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_->[1]/fonts/$i";
 	    }
 	}
-	$interactive && $nb_dir and  progress($pbar, 1/4, _("done"));
+	$interactive && $nb_dir and  progress($pbar, 1, _("done"));
     }
     if(!@font_list) {
 	print "[35mdrakfont:: could not find any font in /win*/fonts [0m\n";
@@ -293,7 +293,7 @@ sub search_dir_font {
 	}
 	$interactive and progress($pbar, 0.50/@install, _("Reselect correct fonts"));
     }
-    $interactive and progress($pbar, 1/3, _("done"));
+    $interactive and progress($pbar, 1, _("done"));
     !@font_list && $interactive and display_error(_("could not find any font.\n"));
 }
 
