@@ -74,7 +74,7 @@ sub vnew {
 	eval { require interactive_gtk };
 	if (!$@) {
 	    my $o = interactive_gtk->new;
-	    $icon && $icon != 'default' && !$::isWizard and $o->{icon} = $icon;
+	    if ($icon && $icon != 'default' && !$::isWizard) { $o->{icon} = $icon } else { undef $o->{icon} }
 	    return $o;
 	}
     }
