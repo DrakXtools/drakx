@@ -912,8 +912,10 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 	    %l = ($type => 1);
 	} else {
 	    %l = map_each { $::a => services::starts_on_boot($::b->[1]) } %types;
-	    $in->ask_from('', N("You can export using NFS or SMB. Please select which you would like to use."),
-			  [ map { { text => $types{$_}[2], val => \$l{$_}, type => 'bool' } } keys %l ]) or return;
+	    $in->ask_from_({ messages => N("You can export using NFS or SMB. Please select which you would like to use."),
+			     callbacks => { ok_disabled => sub { !any { $_ } values %l } },
+			   },
+			   [ map { { text => $types{$_}[2], val => \$l{$_}, type => 'bool' } } keys %l ]) or return;
 	}
 	foreach (keys %types) {
 	    my ($pkg, $service, $_descr) = @{$types{$_}};
