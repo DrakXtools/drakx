@@ -292,6 +292,9 @@ Do you really want to get your printers auto-detected?"),
 	# configured, this command has no effect.
 	printer::stop_service("hpoj");
 	@parport = auto_detect($in);
+	# We have more than one printer, so we must ask the user for a queue
+	# name in the fully automatic printer configuration.
+	$printer->{MORETHANONE} = ($#parport > 0);
 	for my $p (@parport) {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
@@ -349,6 +352,9 @@ Do you really want to get your printers auto-detected?"),
 	# is not installed or not configured, this command has no effect.
 	printer::start_service("hpoj");
     } else {
+	# Always ask for queue name in recommended mode when no auto-
+	# detection was done
+	$printer->{MORETHANONE} = ($#parport > 0);
 	my $m;
 	for ($m = 0; $m <= 2; $m++) {
 	    my $menustr = _("Printer on parallel port \#%s", $m);
@@ -628,10 +634,18 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
              ($descr !~ /Hewlett[\s-]+Packard/i)))
             {$printer->{DBENTRY} = ""};
     }
+
+    #- Pre-fill the "Description" field with the printer's model name
     if ((!$printer->{currentqueue}{'desc'}) && ($descr)) {
 	$printer->{currentqueue}{'desc'} = $descr;
 	$printer->{currentqueue}{'desc'} =~ s/\|/ /g;
     }
+
+    #- When we have chosen a printer here, the question whether the
+    #- automatically chosen model from the database is correct, should
+    #- have "This model is correct" as default answer
+    delete($printer->{MANUALMODEL});
+
     1;
 }
 
@@ -1116,6 +1130,27 @@ sub get_db_entry {
     }
 }
 
+sub is_model_correct {
+    my ($printer, $in) = @_;
+    $in->set_help('chooseModel') if $::isInstall;
+    my $dbentry = $printer->{DBENTRY};
+    $dbentry =~ s/\|/ /g;
+    my $res = $in->ask_from_list_
+	    (_("Your printer model"),
+	     _("Printerdrake has compared the model name resulting from the printer auto-detection with the models listed in its printer database to find the best match. This choice can be wrong, especially when your printer is not listed at all in the database. So check whether the choice is correct and click \"The model is correct\" if so and if not, click \"Select model manually\" so that you can choose your printer model manually on the next screen.
+
+For your printer Printerdrake has found:
+
+%s", $dbentry),
+	     [_("The model is correct"),
+	      _("Select model manually")],
+	     ($printer->{MANUALMODEL} ? _("Select model manually") : 
+	      _("The model is correct")));
+    return 0 if !$res;
+    $printer->{MANUALMODEL} = ($res eq _("Select model manually"));
+    1;
+}
+
 sub choose_model {
     my ($printer, $in) = @_;
     $in->set_help('chooseModel') if $::isInstall;
@@ -1132,7 +1167,8 @@ sub choose_model {
 							 _("Which printer model do you have?") .
 							 _("
 
-Please check whether Printerdrake did the auto-detection of your printer model correctly. Search the correct model in the list when the cursor is standing on a wrong model or on \"Raw printer\"."), '|',
+Please check whether Printerdrake did the auto-detection of your printer model correctly. Search the correct model in the list when the cursor is standing on a wrong model or on \"Raw printer\".") . " " .
+_("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
 							 [ keys %printer::thedb ], $printer->{DBENTRY}));
 
 }
@@ -1342,11 +1378,14 @@ sub setup_options {
 	 "PrintoutQuality",
 	 "QualityType",
 	 "ImageType",
+	 "stpImageType",
 	 "InkType",         # Colour/Gray/BW, 4-ink/6-ink
+	 "stpInkType",
 	 "Mode",
 	 "OutputMode",
 	 "OutputType",
 	 "ColorMode",
+	 "ColorModel",
 	 "PrintingMode",
 	 "Monochrome",
 	 "BlackOnly",
@@ -1359,6 +1398,7 @@ sub setup_options {
 	 "GammaGeneral",
 	 "MasterGamma",
 	 "StpGamma",
+	 "stpGamma",
 	 "EconoMode",       # Ink/Toner saving
 	 "Economode",
 	 "TonerSaving",
@@ -1487,34 +1527,39 @@ sub setup_options {
 		$windowtitle .= ", $driver";
 	    }
 	}
-	return 0 if !$in->ask_from
-	    ($windowtitle,
-	     _("Printer default settings
+	# Do not show the options setup dialog when installing a new printer
+	# in recommended mode without "Manual configuration" turned on.
+	if ((!$printer->{NEW}) or ($::expert) or ($printer->{MANUAL})) {
+	    return 0 if !$in->ask_from
+		($windowtitle,
+		 _("Printer default settings
 
 You should make sure that the page size and the ink type/printing mode (if available) and also the hardware configuration of laser printers (memory, duplex unit, extra trays) are set correctly. Note that with a very high printout quality/resolution printing can get substantially slower."),
-	     \@widgets,
-	     complete => sub {
-		 my $i;
-		 for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
-		     if (($printer->{ARGS}[$i]{'type'} eq 'int') || ($printer->{ARGS}[$i]{'type'} eq 'float')) {
-			 unless (($printer->{ARGS}[$i]{'type'} ne 'int') || ($userinputs[$i] =~ /^[\-\+]?[0-9]+$/)) {
-			     $in->ask_warn('', _("Option %s must be an integer number!", $printer->{ARGS}[$i]{'comment'}));
-			     return (1, $i);
-			 }
-			 unless (($printer->{ARGS}[$i]{'type'} ne 'float') || ($userinputs[$i] =~ /^[\-\+]?[0-9\.]+$/)) {
-			     $in->ask_warn('', _("Option %s must be a number!", $printer->{ARGS}[$i]{'comment'}));
-			     return (1, $i);
-			 }
-			 unless (($userinputs[$i] >= $printer->{ARGS}[$i]{'min'}) &&
-				 ($userinputs[$i] <= $printer->{ARGS}[$i]{'max'})) {
-			     $in->ask_warn('', _("Option %s out of range!", $printer->{ARGS}[$i]{'comment'}));
-			     return (1, $i);
+		 \@widgets,
+		 complete => sub {
+		     my $i;
+		     for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
+			 if (($printer->{ARGS}[$i]{'type'} eq 'int') || ($printer->{ARGS}[$i]{'type'} eq 'float')) {
+			     unless (($printer->{ARGS}[$i]{'type'} ne 'int') || ($userinputs[$i] =~ /^[\-\+]?[0-9]+$/)) {
+				 $in->ask_warn('', _("Option %s must be an integer number!", $printer->{ARGS}[$i]{'comment'}));
+				 return (1, $i);
+			     }
+			     unless (($printer->{ARGS}[$i]{'type'} ne 'float') || ($userinputs[$i] =~ /^[\-\+]?[0-9\.]+$/)) {
+				 $in->ask_warn('', _("Option %s must be a number!", $printer->{ARGS}[$i]{'comment'}));
+				 return (1, $i);
+			     }
+			     unless (($userinputs[$i] >= $printer->{ARGS}[$i]{'min'}) &&
+				     ($userinputs[$i] <= $printer->{ARGS}[$i]{'max'})) {
+				 $in->ask_warn('', _("Option %s out of range!", $printer->{ARGS}[$i]{'comment'}));
+				 return (1, $i);
+			     }
 			 }
 		     }
-		 }
-		 return (0);
-	     } );
-	# Read out the user's choices
+		     return (0);
+		 } );
+	}
+	# Read out the user's choices and generate the appropriate command
+	# line arguments
 	@{$printer->{currentqueue}{options}} = ();
 	for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
 	    push(@{$printer->{currentqueue}{options}}, "-o");
@@ -2330,7 +2375,7 @@ sub main {
 		# Show a queue list window when there is at least one queue,
 		# when we are in expert mode, or when we are not in the
 		# installation.
-		unless ((%{$printer->{configured} || {}} == ()) && 
+		unless ((!%{$printer->{configured} || {}}) && 
 			(!$::expert) && ($::isInstall)) {
 		    $in->set_help('mainMenu') if $::isInstall;
 		    # Cancelling the printer type dialog should leed to this
@@ -2529,27 +2574,35 @@ sub main {
 			goto step_0;
 		    };
 		  step_3:
-		    if (($::expert) or ($printer->{MANUAL})) {
+		    if (($::expert) or ($printer->{MANUAL}) or
+			($printer->{MORETHANONE})) {
 			choose_printer_name($printer, $in) or
 			    goto step_2;
 		    }
 		    get_db_entry($printer, $in);
+		  step_3_9:
+		    if ((!$::expert) and (!$printer->{MANUAL})) {
+			is_model_correct($printer, $in) or do {
+			    goto step_3 if $printer->{MORETHANONE};
+			    goto step_2;
+			}
+		    }
 		  step_4:
 		    # Remember DB entry for "Previous" button in wizard
 		    my $dbentry = $printer->{DBENTRY};
-		    if (($::expert) or ($printer->{MANUAL})) { 
+		    if (($::expert) or ($printer->{MANUAL}) or
+			($printer->{MANUALMODEL})) { 
 			choose_model($printer, $in) or do {
 			    # Restore DB entry
 			    $printer->{DBENTRY} = $dbentry;
+			    goto step_3_9 if $printer->{MANUALMODEL};
 			    goto step_3;
 			};
 		    }
 		    get_printer_info($printer, $in) or next;
 		  step_5:
-		    if (($::expert) or ($printer->{MANUAL})) { 
-			setup_options($printer, $in) or
-			    goto step_4;
-		    }
+		    setup_options($printer, $in) or
+			goto step_4;
 		    configure_queue($printer, $in);
 		    undef $printer->{MANUAL} if $printer->{MANUAL};
 		    $::Wizard_no_previous = 1;
@@ -2594,17 +2647,20 @@ sub main {
 		#- Cancelling one of the following dialogs should
 		#- restart printerdrake
 		$continue = 1;
-		if (($::expert) or ($printer->{MANUAL})) {
+		if (($::expert) or ($printer->{MANUAL}) or
+		    ($printer->{MORETHANONE})) {
 		    choose_printer_name($printer, $in) or next;
 		}
 		get_db_entry($printer, $in);
-		if (($::expert) or ($printer->{MANUAL})) { 
+		if ((!$::expert) and (!$printer->{MANUAL})) {
+		    is_model_correct($printer, $in) or next;
+		}
+		if (($::expert) or ($printer->{MANUAL}) or
+		    ($printer->{MANUALMODEL})) { 
 		    choose_model($printer, $in) or next;
 		}
 		get_printer_info($printer, $in) or next;
-		if (($::expert) or ($printer->{MANUAL})) { 
-		    setup_options($printer, $in) or next;
-		}
+		setup_options($printer, $in) or next;
 		configure_queue($printer, $in);
 		undef $printer->{MANUAL} if $printer->{MANUAL};
 		setasdefault($printer, $in);
@@ -2739,12 +2795,12 @@ What do you want to modify on this printer?",
 		    get_db_entry($printer, $in);
 		    choose_model($printer, $in) &&
 			get_printer_info($printer, $in) &&
-			    setup_options($printer, $in) &&
-				configure_queue($printer, $in);
+			setup_options($printer, $in) &&
+			configure_queue($printer, $in);
 		} elsif ($modify eq _("Printer options")) {
 		    get_printer_info($printer, $in) &&
 			setup_options($printer, $in) &&
-			    configure_queue($printer, $in);
+			configure_queue($printer, $in);
 		} elsif ($modify eq _("Set this printer as the default")) {
 		    $printer->{DEFAULT} = $queue;
 		    printer::set_default_printer($printer);
@@ -2846,6 +2902,8 @@ What do you want to modify on this printer?",
     delete($printer->{complete});
     delete($printer->{OLD_CHOICE});
     delete($printer->{NEW});
+    delete($printer->{MORETHANONE});
+    delete($printer->{MANUALMODEL});
     #use Data::Dumper;
     #print "###############################################################################\n", Dumper($printer); 
 
