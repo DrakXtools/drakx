@@ -449,7 +449,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     my $welcome = _("Welcome to %s", "HOSTNAME");
     substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdmrc";
-    substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;
+    substInFile { s/^(UserView)=true/$1=false/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} >= 3;
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
     #- konsole and gnome-terminal are lamers in exotic languages, link them to something better
