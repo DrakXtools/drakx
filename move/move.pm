@@ -242,11 +242,7 @@ sub key_parts {
     return () if $key_disabled;
 
     my @keys = grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{hds}};
-    map_index { 
-	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
-	$_->{options} = $key_mountopts;
-        $_;
-    } (fsedit::get_fstab(@keys), grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{raw_hds}});
+    (fsedit::get_fstab(@keys), grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{raw_hds}});
 }
     
 sub key_mount {
@@ -262,7 +258,11 @@ sub key_mount {
     }
 
     require fs;
-    eval { fs::mount_part($_) } foreach key_parts($o);
+    each_index { 
+	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
+	$_->{options} = $key_mountopts;
+	eval { fs::mount_part($_); 1 } or delete $_->{mntpoint};
+    } key_parts($o);
 }
 
 sub key_umount {
