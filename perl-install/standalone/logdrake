@@ -272,7 +272,7 @@ sub parse_file {
   my @all=catMaybeCompressed ($file);
 
   if ($isExplain) {
-      my @t, $t;
+      my (@t, $t);
       while (@all) {
 	  $t = pop @all;
 	  next if ($t =~ /logdrake/);
@@ -511,6 +511,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.8  2002/02/04 14:00:52  damien
+# embedded, explain
+#
 # Revision 1.7  2002/02/01 22:59:27  yduret
 # ergo fix thx dadou report
 #
