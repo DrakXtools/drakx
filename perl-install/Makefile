@@ -88,22 +88,20 @@ ifeq (sparc,$(ARCH))
 endif
 
 	for i in `cat /tmp/list`; do \
-	    if [ -e $$i ]; then \
-		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
-		  install -s $$i $(DEST)/lib; \
-		else \
-		  d=$$i; \
-	          (echo $$d | grep -q "^[^/]") && d="$(REP4PMS)/$$d"; \
-		  d=`echo $(DEST)/$$d | sed 's/\/usr\/local\//\/usr\//'`; \
-		  install -d `dirname $$d` && \
-		  if (echo $$i | grep -q "\.pm"); then \
-		     perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
-		  elif (echo $$i | grep -q "\.so"); then \
-			  install -s $$i $$d; \
-		  else \
-		  	  cp -f $$i $$d; \
-		  fi; \
-		fi; \
+	    if (echo $$i | grep -q "lib/[^/]*\.so"); then \
+	      install -s $$i $(DEST)/lib; \
+	    else \
+	      d=$$i; \
+	      (echo $$d | grep -q "^[^/]") && d="$(REP4PMS)/$$d"; \
+	      d=`echo $(DEST)/$$d | sed 's/\/usr\/local\//\/usr\//'`; \
+	      install -d `dirname $$d` && \
+	      if (echo $$i | grep -q "\.pm"); then \
+	    	 perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
+	      elif (echo $$i | grep -q "\.so"); then \
+	    	      install -s $$i $$d; \
+	      else \
+	    	      cp -f $$i $$d; \
+	      fi; \
 	    fi; \
 	done
 	mv -f $(DEST)/lib/libimlib-png.so $(DEST)/usr/lib

@@ -256,3 +256,75 @@ doesn't contain scsi modules nor ide.
 >    - Architectural overview of each
 
 have a look at gi/install.fig
+
+
+********************************************************************************
+* OEM **************************************************************************
+********************************************************************************
+> I am a system OEM in Bangalore,India selling systems bundled with
+> Mandrake Linux. The problem is that with every system I sell, I need to
+> install & configure the system which takes HOURS!. Can I do a diskcopy
+> instead?
+> 
+> Please Help. This is a major bottleneck for  me.
+
+many solutions:
+
+- make an install on drive hdb, then either
+   1. dd if=/dev/hdb of=/dev/hdc
+   2. dd if=/dev/hdb of=/dev/hdc count=1 ; kernel_reread /dev/hdc ; 
+      mke2fs /dev/hdc1 ; mount /dev/hdb1 /source ; mount /dev/hdc1 /dest ; cp -a /source /dest
+
+- try the oem feature
+   3. - burn a cd out of *latest* cooker
+      - boot on it telling "oem" to syslinux
+      !! it will destroy every data on the harddrive !!
+      - you now have a very automated install matrix 
+      (duplicate it with "dd if=/dev/hdb of=/dev/hdc bs=1M count=730")
+
+    put the harddrive in the oem box, the user will now have an *very* automated
+    install, just asking the root password and user password.
+
+   4. (just like 3. without burning a cd, doing the first part by hand)
+      have a look at the /etc/oem script on the rescue and do it by hand...
+
+
+cu Pixel.
+
+
+comments:
+1. maybe copy unnecessary things -> take too long
+   solution -> use bs=8k count=xxxx 
+2. kernel_reread can be found on the new rescue, source is also at end of this
+mail. This solution works with one partition. Can be easily enhanced to many
+primary partitions... For extended partitions, more complicated, but not much :)
+3. has just been added in latest cooker. It may still have some pb. The main
+current limitation is IDE only, though it can be fixed easily for special cases.
+
+--------------------------------------------------------------------------------
+#include <stdio.h>
+#include <sys/mount.h>
+#include <fcntl.h>
+
+void die(char *msg)
+{
+  perror(msg);
+  exit(1);
+}
+
+void kernel_read(char *dev)
+{
+  int fd;
+  if ((fd = open(dev, O_RDONLY)) == -1) die("can't open device");
+  ioctl(fd, BLKRRPART, 0);
+  close(fd);
+}
+
+int main(int argc, char **argv) 
+{
+  if (argc != 2) {
+    fprintf(stderr, "usage: kernel_read_part <hard drive device>\n");
+    exit(1);
+  }
+  kernel_read(argv[1]);
+}

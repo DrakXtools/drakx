@@ -15,9 +15,6 @@ BOOT_IMG += $(RELEASE_BOOT_IMG)
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = install/install install/full-install install/local-install install/installinit/init
 DIRS = tools install install/installinit perl-install
-ifeq (i386,$(ARCH))
-#DIRS += lnx4win
-endif
 
 ROOTDEST = /export
 UPLOAD_DEST_ = ~/cooker
@@ -47,11 +44,6 @@ build: $(BOOT_IMG)
 
 autoboot:
 ifeq (i386,$(ARCH))
-	install -d $(ROOTDEST)/lnx4win
-	cp -f vmlinuz $(ROOTDEST)/lnx4win
-	cp -f cdrom.rdz $(ROOTDEST)/lnx4win/initrd.gz
-	/usr/sbin/rdev -v $(ROOTDEST)/lnx4win/vmlinuz 788
-
 	install -d $(ROOTDEST)/boot
 	cp -f vmlinuz {hd,cdrom,pcmcia,network}.rdz $(ROOTDEST)/boot
 	/usr/sbin/rdev -v $(ROOTDEST)/boot/vmlinuz 788
@@ -95,7 +87,6 @@ upload: clean install
 	upload Mandrake/mdkinst '' ;\
 	upload Mandrake/base {compss*,mdkinst_stage2.gz,rescue_stage2.gz} ;\
 	upload boot '' ;\
-	upload lnx4win {initrd.gz,vmlinuz} ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo 
 

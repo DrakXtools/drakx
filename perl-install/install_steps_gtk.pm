@@ -767,10 +767,11 @@ sub create_steps_window {
 			$pixmap->signal_connect(enter_notify_event => sub {  print "HERE\n" });
 
 			if ($step->{reachable}) {
-			    my $button = new Gtk::Button
+			    my $button = new Gtk::Button;
 			    $button->set_relief('none');
 			    gtksignal_connect(gtkadd($button, $b), clicked => sub { die "setstep $step_name\n" });
 			    $button;
+			}
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}}),

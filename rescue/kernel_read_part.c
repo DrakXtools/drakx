@@ -1,13 +1,6 @@
-#include <unistd.h>
-#include <stdlib.h>
 #include <stdio.h>
-#include <sys/types.h>
-#include <sys/ioctl.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
 #include <sys/mount.h>
 #include <fcntl.h>
-
 
 void die(char *msg)
 {
@@ -18,15 +11,9 @@ void die(char *msg)
 void kernel_read(char *dev)
 {
   int fd;
-
-  sync();
   if ((fd = open(dev, O_RDONLY)) == -1) die("can't open device");
-  sync(); 
-  sleep(1);
   ioctl(fd, BLKRRPART, 0);
-  sync();
   close(fd);
-  sync();
 }
 
 int main(int argc, char **argv) 
