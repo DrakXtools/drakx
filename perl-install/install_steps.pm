@@ -829,6 +829,9 @@ sub addUser {
 	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
     }
+    #- since we wrote the password in /etc/passwd, we must convert to shadow
+    run_program::rooted($::prefix, 'pwconv') if $o->{authentication}{shadow};
+
     any::addUsers($p, $users);
 
     $o->pkg_install("autologin") if $o->{autologin};
