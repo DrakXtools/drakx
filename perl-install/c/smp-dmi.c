@@ -179,7 +179,7 @@ int main(int argc, char *argv[])
 	return intelDetectSMP();
 }
 
-static int intelDetectSMP(void) {
+int intelDetectSMP(void) {
   	unsigned char buf[20];
 	int fd=open("/dev/mem", O_RDONLY);
 	long fp=0xE0000L;
