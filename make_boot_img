@@ -727,7 +727,7 @@ sub isolinux_move {
     rename "move/isolinux/all.rdz-$main", "move/isolinux/all.rdz";
 
     bmp_to_msg('move/data/isolinux-graphic.bmp', 'move/isolinux/boot.msg', '371,144,4,4', 11, 127);
-    _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
+    _ "cp /usr/lib/syslinux/isolinux.bin move/isolinux/isolinux.bin";
 }
 
 sub hd_grub {
