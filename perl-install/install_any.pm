@@ -41,7 +41,7 @@ my $cdrom = undef;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
-    $_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+    $_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::prefix, $::o->{packages});
 
     $asked_medium eq $_[0] or log::l("selecting new medium '$_[0]'");
     $asked_medium = $_[0];
@@ -501,7 +501,7 @@ sub setupFB {
 
 sub hdInstallPath() {
     my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
-    my $head = first(readlink("/tmp/hdimage") =~ m|$::o->{prefix}(.*)|);
+    my $head = first(readlink("/tmp/hdimage") =~ m|$::prefix(.*)|);
     $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
 }
 
@@ -628,7 +628,7 @@ sub kdemove_desktop_file {
 #-###############################################################################
 #- auto_install stuff
 #-###############################################################################
-sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::o->{prefix}/root/drakx") . "/auto_inst.cfg.pl" }
+sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::prefix/root/drakx") . "/auto_inst.cfg.pl" }
 
 sub report_bug {
     my ($prefix) = @_;

@@ -139,7 +139,7 @@ sub group_n_lm {
 }
 
 sub screenshot_dir__and_move {
-    my ($dir1, $dir2) = ("$::o->{prefix}/root", '/tmp/stage2');
+    my ($dir1, $dir2) = ("$::prefix/root", '/tmp/stage2');
     if (-e $dir1) {
 	if (-e "$dir2/DrakX-screenshots") {
 	    cp_af("$dir2/DrakX-screenshots", $dir1);
