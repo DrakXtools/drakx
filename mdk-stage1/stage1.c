@@ -1,9 +1,7 @@
 /*
- * Guillaume Cottenceau (gc@mandrakesoft.com)
+ * Guillaume Cottenceau (was gc@mandrakesoft.com)
  *
- * Copyright 2000-2001 MandrakeSoft
- *
- * View the homepage: http://people.mandrakesoft.com/~gc/html/stage1.html
+ * Copyright 2000-2004 MandrakeSoft
  *
  *
  * This software may be freely redistributed under the terms of the GNU
