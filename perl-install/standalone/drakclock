@@ -104,7 +104,11 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new,
                                                             $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
                                                             timezone::ntp_server($1);
                                                             system("/sbin/chkconfig --level 35 ntpd on");
-                                                            system("service ntpd restart");
+                                                            system("service ntpd stop");
+                                                            #verify that we have a valid hostname (thx sam)
+                                                            $choosed_serv =~ s/[^-a-zA-Z0-9.]//g;
+                                                            system("/usr/sbin/ntpdate", $choosed_serv);
+                                                            system("service ntpd start");
                                                         } else {
                                                             if (-e $ntpdlock) { 
                                                                 system("service ntpd stop");
