@@ -590,8 +590,8 @@ sub cz_file {
     "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz-" . c::kernel_version();
 }
 
-sub load_raw {
-    my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } grep { $_->[0] !~ /ignore/ } @_;
+sub extract_modules {
+    my ($dir, @modules) = @_;
     my $cz = cz_file();
     if (!-e $cz) {
 	unlink $_ foreach glob_("/lib/modules*.cz*");
@@ -601,8 +601,13 @@ sub load_raw {
     eval {
 	require packdrake;
 	my $packer = new packdrake($cz, quiet => 1);
-	$packer->extract_archive("/tmp", map { "$_->[0].o" } @l);
+	$packer->extract_archive($dir, map { "$_.o" } @modules);
     };
+}
+
+sub load_raw {
+    my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } grep { $_->[0] !~ /ignore/ } @_;
+    extract_modules('/tmp', map { $_->[0] } @l);
     my @failed = grep {
 	my $m = "/tmp/$_->[0].o";
 	if (-e $m && run_program::run(["/usr/bin/insmod_", "insmod"], '2>', '/dev/tty5', $m, @{$_->[1]})) {
