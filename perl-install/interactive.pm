@@ -355,11 +355,13 @@ sub ask_from_ {
     my ($o, $common, $l) = @_;
     ask_from_normalize($o, $common, $l);
     @$l or return 1;
+    $common->{cancel} = '' if !defined wantarray();
     ask_from_real($o, $common, $l);
 }
 sub ask_from_no_check {
     my ($o, $common, $l) = @_;
     ask_from_normalize($o, $common, $l);
+    $common->{cancel} = '' if !defined wantarray();
     $o->ask_fromW($common, partition { !$_->{advanced} } @$l);
 }
 sub ask_from_real {
