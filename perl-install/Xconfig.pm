@@ -60,7 +60,7 @@ sub getinfoFromXF86Config {
 		  if $c{driver} =~ /keyboard/i;
 		@mouse{qw(XMOUSETYPE device chordmiddle nbuttons)} = @c{qw(XMOUSETYPE device chordmiddle nbuttons)}
 		  if $c{driver} =~ /mouse/i;
-		$wacom{$c{device}} = undef;
+		$wacom{$c{device}} = undef
 		  if $c{driver} =~ /wacom/i;
 	    }
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
