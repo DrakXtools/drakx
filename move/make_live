@@ -67,7 +67,7 @@ print "Making live in $::prefix directory.\n";
     system("chroot $::prefix update-menus");
     system("chroot $::prefix fc-cache");  #- generate cache in all directories mentioned in config file
     system("chroot $::prefix kbuildsycoca --global");
-    rm_rf("$::prefix/dev"); # we don't need it, we use devfs
+    eval { rm_rf("$::prefix/dev") }; # we don't need it, we use devfs
 }
 
 symlinkf('/var/lib/xkb', "$::prefix/etc/X11/xkb/compiled"); # don't want the relative path, prefering the absolute path
