@@ -1255,7 +1255,7 @@ sub setup_common {
 						  )))) {
 			my $w = $in->wait_message
 			    ('', _("Installing mtools packages..."));
-			$in->do_pkgs->install('mtools', 'MToolsFM');
+			$in->do_pkgs->install('mtools', 'mtoolsfm');
 		    }
 		    # Configure mtools/MToolsFM for photo card access
 		    printer::config_photocard();

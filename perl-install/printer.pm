@@ -1469,6 +1469,12 @@ sub configure_hpoj {
         sub getConfigInfo {
             return (%configInfo)
         }";
+
+	if ($::isInstall) {
+	    # Needed for photo card reader detection during installation
+	    system("ln -s $prefix/var/run/ptal-mlcd /var/run/ptal-mlcd");
+	    system("ln -s $prefix/etc/ptal /etc/ptal");
+	}
 	$ptalinitread = 1;
     }
 
