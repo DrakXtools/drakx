@@ -921,19 +921,9 @@ sub new {
 		    0;
 		});
 	    } elsif (!$o->{isEmbedded}) {
-		my $draw1 = Gtk2::DrawingArea->new;
-		$draw1->set_size_request(540, 100);
-		my $pixbuf_up = gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png");
-		$draw1->modify_font(Gtk2::Pango::FontDescription->from_string(N("utopia 25")));
-		$draw1->signal_connect(realize => sub { set_back_pixbuf($draw1, $pixbuf_up) });
-		$draw1->signal_connect(expose_event => sub {
-                            my $layout = $draw1->create_pango_layout($::Wizard_title);
-                            $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
-				       });
-
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
-		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
-		$draw1->show;
+		$::WizardTable->attach(gtkshow(Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title)),
+                                 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    }
 	    $::WizardWindow->show;
 	}
