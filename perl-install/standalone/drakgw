@@ -30,6 +30,7 @@ use detect_devices;
 use interactive;
 use network::network;
 use network::ethernet;
+use run_program;
 use log;
 use c;
 use network::netconnect;
@@ -80,13 +81,11 @@ sub start_daemons () {
     system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
 
     my $netscripts = '/etc/sysconfig/network-scripts';
-    sys("$netscripts/net_cnx_down >/dev/null");
+    sys("$netscripts/net_cnx_down >/dev/null") if cat_("$netscripts/net_cnx_down") !~ /network/;
     sys("/etc/rc.d/init.d/network restart >/dev/null");
-    sys("$netscripts/net_cnx_up >/dev/null");
+    sys("$netscripts/net_cnx_up >/dev/null") if cat_("$netscripts/net_cnx_down") !~ /network/;
 
-    sys("/etc/init.d/shorewall restart >/dev/null");
-
-    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'squid', 'shorewall';
+    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'squid';
     sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
 }
 
@@ -96,7 +95,6 @@ sub stop_daemons () {
     foreach (qw(dhcpd squid named)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
     }
-    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall stop >/dev/null");
     sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd', 'squid';
 }
 
@@ -119,10 +117,37 @@ begin:
 #- **********************************
 #- * 0th step: verify if we are already set up
 
-if ($shorewall && -f $masq_file && grep { !/^#/ } cat_("$masq_file")) {
+if ($shorewall && -f $masq_file || -f "$masq_file.drakgwdisable" && grep { !/^#/ } cat_($masq_file) || grep { !/^#/ } cat_("$masq_file.drakgwdisable")) {
     $::Wizard_no_previous = 1;
     my $r;
-    if (!$shorewall->{disabled}) {
+    if (-f "$masq_file.drakgwdisable") {
+	$r = $in->ask_from_list_(N("Internet Connection Sharing currently disabled"),
+N("The setup of Internet connection sharing has already been done.
+It's currently disabled.
+
+What would you like to do?"),
+				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
+	if ($r eq "enable") {
+	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
+		rename($_, "$_.old") if -f $_;
+		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
+	    };
+	    {
+		my $_wait_enabl = $in->wait_message('', N("Enabling servers..."));
+		start_daemons();
+		print "add rules entries\n";
+		substInFile {
+		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
+		} "/etc/shorewall/rules";
+		run_program::rooted($::prefix, 'chkconfig', '--add', 'shorewall');
+		run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
+	    }
+            log::l("[drakgw] Enabled");
+         }
+	    $::Wizard_finished = 1;
+	    $in->ask_okcancel('', N("Internet Connection Sharing is now enabled."));
+	    quit_global($in, 0);
+	} elsif (!$shorewall->{disabled}) {
 	$r = $in->ask_from_list_(N("Internet Connection Sharing currently enabled"),
 N("The setup of Internet Connection Sharing has already been done.
 It's currently enabled.
@@ -152,27 +177,6 @@ What would you like to do?"),
 	if ($r eq "dismiss") {
 	    quit_global($in, 0);
 	}
-    } else {
-	$r = $in->ask_from_list_(N("Internet Connection Sharing currently disabled"),
-N("The setup of Internet connection sharing has already been done.
-It's currently disabled.
-
-What would you like to do?"),
-				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
-	if ($r eq "enable") {
-	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
-		rename($_, "$_.old") if -f $_;
-		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
-	    };
-	    {
-		my $_wait_enabl = $in->wait_message('', N("Enabling servers..."));
-		start_daemons();
-	    }
-            log::l("[drakgw] Enabled");
-         }
-	    $::Wizard_finished = 1;
-	    $in->ask_okcancel('', N("Internet Connection Sharing is now enabled."));
-	    quit_global($in, 0);
 	}
 	if ($r eq "dismiss") {
 	    quit_global($in, 0);
@@ -197,8 +201,6 @@ Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).
 
 
 step_detectsetup:
-
-undef $::Wizard_no_previous;
 
 my @configured_devices = map { /ifcfg-(\S+)/ } glob('/etc/sysconfig/network-scripts/ifcfg*');
 
@@ -404,11 +406,6 @@ put_in_hash($shorewall ||= {}, {
     masquerade => { subnet => "$lan_address.0/$netmask" },
 });
 
-network::shorewall::write($shorewall);
-print "add rules entries\n";
-substInFile {
-	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
-} "/etc/shorewall/rules";
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
 
@@ -578,6 +575,13 @@ if (-f $cups_conf && !$::testing) {
 
 start_daemons();
 
+network::shorewall::write($shorewall);
+print "add rules entries\n";
+substInFile {
+	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
+} "/etc/shorewall/rules";
+run_program::rooted($::prefix, 'chkconfig', '--add', 'shorewall');
+run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
 
 #- bye-bye message
 
