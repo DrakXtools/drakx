@@ -16,7 +16,7 @@ sub load_defaults {
     my ($msec, $category) = @_;
     my $separator = $msec->{$category}{def_separator};
     map { 
-        my ($opt, $val) = split /$separator/;
+        my ($opt, $val) = split(/$separator/, $_, 2);
         chop $val;
         if_($opt ne 'set_security_conf', $opt => $val);
     } cat_($msec->{$category}{defaults_file}), if_($category eq "checks", 'MAIL_USER');
