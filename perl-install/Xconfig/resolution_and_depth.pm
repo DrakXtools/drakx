@@ -125,9 +125,14 @@ sub filter_using_HorizSync {
 sub choose {
     my ($in, $default_resolution, @resolutions) = @_;
 
-    $in->ask_from_listf(_("Resolutions"), "",
-			sub { "$_[0]{X}x$_[0]{Y} $_[0]{Depth}bpp" },
-			\@resolutions, $default_resolution || {});
+    my $resolution = $default_resolution || {};
+    $in->ask_from(_("Resolutions"), "",
+		  [ {
+		     val => \$resolution, type => 'list', sort => 0,
+		     list => [ sort { $a->{X} <=> $b->{X} } @resolutions ],
+		     format => sub { "$_[0]{X}x$_[0]{Y} $_[0]{Depth}bpp" },
+		    } ])
+      and $resolution;
 }
 
 
