@@ -27,7 +27,7 @@ our %l = (
         qw(lance lanstreamer natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
         qw(olympic pcnet32 plip prism2_plx rcpci),
         qw(sb1000 sdladrv sis900 skfp smc-ultra smc9194 starfire),
-        qw(tc35815 tlan tmspci tulip tulip_old via-rhine),
+        qw(tc35815 tlan tmspci tulip via-rhine),
         qw(wd winbond-840 forcedeth),
       ),
       qw(3c59x 8139too 8139cp sundance), #rtl8139
