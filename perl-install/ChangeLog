@@ -1,3 +1,85 @@
+2001/06/25  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/id.po: updated Indonesian file
+
+2001/06/25  Pixel  <pixel@mandrakesoft.com>
+
+	* c/stuff.xs.pm: switch from llseek to lseek64
+
+2001/06/23  siegel
+
+	* share/po/de.po: new german version
+
+2001/06/22  François Pons  <fpons@mandrakesoft.com>
+
+	* bootloader.pm: take care of enterprise kernel if installed.
+
+	* install_any.pm: automagically install kernel-enterprise if memory is
+	greater than 800MB.
+
+2001/06/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: unfuzzyise
+
+2001/06/22  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, tinyfirewall.pm,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, help.pm, share/po/zh_TW.Big5.po,
+	share/po/it.po, share/po/id.po, install_steps_interactive.pm,
+	share/po/pl.po, share/po/no.po, share/po/fi.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	install_steps_gtk.pm, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, bootlook.pm, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	install_steps_newt.pm, share/po/af.po: s/Linux-Mandrake/Mandrake Linux/
+
+2001/06/21  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: added minimal support for rpmtools >= 3.0
+
+2001/06/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: generate_automatic_stage1_params: listize
+	use busybox for the shell of stage2
+
+	* mdk-stage1/Makefile: defaults to not spawn shell
+
+	* mdk-stage1/hack: kloug
+
+	* Makefile, tools/i386/busybox, share/list.ppc, share/list,
+	share/list.alpha, share/aliases: use busybox for the shell of stage2
+
+2001/06/21  Pixel  <pixel@mandrakesoft.com>
+
+	* docs/README, rescue/tree/etc/issue: s/Linux-Mandrake/Mandrake Linux/
+	s/linux-mandrake/mandrakesoft/
+	(hand made, no i18n messages done)
+	s/Linux-Mandrake/Mandrake Linux/
+	s/linux-mandrake/mandrakesoft/
+	(hand made, no i18n messages done)
+
+	* genmodparm: remove duplicate, look in gi/tools
+
+	* standalone/printerdrake, install2, docs/HACKING, tools/genmodparm,
+	mdk-stage1/config-stage1.h, ChangeLog, resize_fat/README,
+	standalone/diskdrake, standalone/XFdrake, rescue/tree/etc/rc.sysinit,
+	mdk-stage1/init.c, tools/mailchangelog.pl, detect_devices.pm,
+	mdk-stage1/doc/README, resize_fat/main.pm, tools/cvslog2changelog.pl,
+	bootloader.pm: s/Linux-Mandrake/Mandrake Linux/
+	s/linux-mandrake/mandrakesoft/
+	(hand made, no i18n messages done)
+
+	* mdk-stage1/make_boot_img: remove GG sux
+	s/Linux-Mandrake/Mandrake Linux/
+	s/linux-mandrake/mandrakesoft/
+	(hand made, no i18n messages done)
+
 2001/06/11  dam's  <damien@mandrakesoft.com>
 
 	* proxy.pm: updated
