@@ -548,6 +548,9 @@ sub mount_part {
 	    my $mntpoint = ($o_prefix || '') . $part->{mntpoint};
 	    if (isLoopback($part) || $part->{encrypt_key}) {
 		set_loop($part);
+	    } elsif ($part->{options} =~ /encrypted/) {
+		log::l("skip mounting $part->{device} since we don't have the encrypt_key");
+		return;
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
