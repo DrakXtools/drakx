@@ -500,13 +500,6 @@ sub fill_tiled {
 
 sub gtkicons_labels_widget {
     my ($args, $w, $color_text, $font, $background, $x_back, $y_back, $x_round, $y_round, $x_back2, $y_back2, $icon_width, $icon_height) = @_;
-#-      [_("Menus") , 'menudrake-mdk.png', "$_sbindir/menus.pm"],
-#-      [_("Services") , 'service-mdk.png', "$_sbindir/drakxservices"],
-#-      [_("Fonts"), 'drakfont-mdk.png', "$_xbindir/drakfont"],
-#-      [_("Date & Time") , 'time-mdk.png', "$_sbindir/clock.pm"],
-#-      [_("Software Manager"), 'harddrake-mdk.png', "$_bindir/rpmdrake"],
-#-      [_("Logs"), 'logdrake-mdk.png', "$_sbindir/logdrake"],
-#-      [_("Console"), 'drakboot-mdk.png', "$_xbindir/rxvt"],
 
     my @tab;
     my $i = 0;
@@ -516,6 +509,10 @@ sub gtkicons_labels_widget {
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
 	my ($icon, undef) = gtkcreate_png($_->[1]);
+	$darea->signal_connect( size_allocate => sub {
+				    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
+				    ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
+				});
 	$darea->signal_connect(expose_event => sub {
 		   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
 		   if (!defined($dbl_area)) {
@@ -532,6 +529,7 @@ sub gtkicons_labels_widget {
 		   }
 		   $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
 					       $dbl_area, 0, 0, 0, 0, $dx, $dy);
+		   ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
 	       });
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
 	$darea->signal_connect( button_release_event => sub { system("$exec&") });
@@ -541,19 +539,62 @@ sub gtkicons_labels_widget {
     my $fixed = new Gtk::Fixed;
     $i = 0;
     foreach (@tab) {
-	$fixed->put($_, $i*75, 65);
+	$fixed->put($_, 75, 65);
 	$i++;
     }
-    $fixed->signal_connect( size_allocate => sub {
-				my ($dx, $dy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
-				foreach (@tab) {
-#				    $fixed->move();
-				}
-			    });
+    $fixed->signal_connect(expose_event => sub {
+			       my ($fx, $fy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
+			       foreach (compute($fx, $fy, 40, 30, 5, @tab)) {
+				   $fixed->move(@$_);
+			       }
+			   });
+
     $fixed->signal_connect( realize => sub { $fixed->window->set_back_pixmap($background, 0) });
     $i = 0;
     $fixed->show_all();
     $fixed;
+}
+
+sub compute {
+    my ($fx, $fy, $decx, $decy, $interstice, @tab) = @_;
+    my $nb = $#tab;
+    my $nb_sav = $nb;
+    my $index = 0;
+    my @dx2;
+    my @dx;
+    my @dy;
+    my $line_up = 0;
+  bcl_init:
+    @dx2 = undef;
+  bcl:
+    @dx = map{ $_->{dx} } @tab[$index..$index+$nb];
+    $dy[$index] = max(map{ $_->{dy} } @tab[$index..$index+$nb]);
+    foreach (0..$#dx) {
+	if ($dx[$_] > $dx2[$_]) { $dx2[$_] = $dx[$_] } else { $dx[$_] = $dx2[$_] }
+    }
+    my $line_size = 0;
+    $line_size = $decx + sum(@dx2) + $nb * $interstice;
+    if ($line_size > $fx) {
+	$index = 0; $nb--; goto bcl_init;
+    }
+    $nb and $line_up = ($fx-$line_size)/$nb;
+    $index += $nb+1;
+    $index <= $#tab and goto bcl;
+    my @ret;
+    my $n = 0;
+    my $y = $decy;
+    my $x = $decx/2;
+    foreach (0..$nb_sav) {
+	$ret[$_] = [$tab[$_], $x, $y];
+	$x += $dx2[$n] + $interstice + $line_up;
+	$n++;
+	if ($n > $nb) {
+	    $n = 0;
+	    $x = $decx/2;
+	    $y += $dy[$_+1];
+	}
+    }
+    @ret;
 }
 
 sub write_on_pixmap {
