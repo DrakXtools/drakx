@@ -19,8 +19,8 @@ sub read {
 #- files are optional
 sub write {
     my ($both, $xfree3_file, $xfree4_file) = @_;
-    $both->{xfree3}->write($xfree3_file);
-    $both->{xfree4}->write($xfree4_file);
+    $both->{xfree3} ? $both->{xfree3}->write($xfree3_file) : unlink($xfree3_file);
+    $both->{xfree4} ? $both->{xfree4}->write($xfree4_file) : unlink($xfree4_file);
 }
 
 sub empty_config {
@@ -53,15 +53,21 @@ sub set_monitors { set_both('set_monitors', @_) }
 sub get_both {
     my ($getter, $both) = @_;
 
-    my @l3 = $both->{xfree3}->$getter;
-    my @l4 = $both->{xfree4}->$getter;
-    merge_values(\@l3, \@l4);
+    if ($both->{xfree3}) {
+	$both->{xfree4}->$getter;
+    } elsif ($both->{xfree4}) {
+	$both->{xfree3}->$getter;
+    } else {
+	my @l3 = $both->{xfree3}->$getter;
+	my @l4 = $both->{xfree4}->$getter;
+	merge_values(\@l3, \@l4);
+    }
 }
 sub set_both {
     my ($setter, $both, @l) = @_;
 
-    $both->{xfree3}->$setter(@l);
-    $both->{xfree4}->$setter(@l);
+    $both->{xfree3}->$setter(@l) if $both->{xfree3};
+    $both->{xfree4}->$setter(@l) if $both->{xfree4};
 }
 
 sub merge_values {
