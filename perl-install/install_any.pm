@@ -795,7 +795,7 @@ sub getAndSaveAutoInstallFloppies {
 		# hd_grub boot disk is different than others
 		substInFile {
 		    s/^(\s*timeout.*)/timeout 1/;
-		    s/(\s*automatic=method:disk)/$1 $param/
+		    s/\bautomatic=method:disk/$param/;
 		} "$mountdir/menu.lst";
 	    } elsif (-e "$mountdir/syslinux.cfg") {
 		substInFile { 
