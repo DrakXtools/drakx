@@ -256,9 +256,6 @@ unlink "$::prefix/usr/bin/$_" foreach qw(userdrake);
 #- selecting language must be done from drakx anyway
 unlink "$::prefix/usr/bin/localedrake";
 
-#- drakxtools contains a broken unneeded file
-unlink "$::prefix/usr/lib/libDrakX/modem.pm";
-
 #- fix openoffice autopilote feature
 foreach (glob("$::prefix/usr/lib/openoffice/share/template/*")) {
     symlink '../../english/wizard/bitmap', "$_/wizard/bitmap";
