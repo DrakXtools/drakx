@@ -230,7 +230,7 @@ sub ask_from_entries_refH_powered_normalize {
 
     foreach my $e (@$l) {
 	if (my $l = $e->{list}) {
-	    if ($e->{sort} || @$l > 10 && !exists $e->{sort}) {
+	    if ($e->{sort}) {
 		my @l2 = map { may_apply($e->{format}, $_) } @$l;
 		my @places = sort { $l2[$a] cmp $l2[$b] } 0 .. $#l2;
 		$e->{list} = $l = [ map { $l->[$_] } @places ];
