@@ -174,22 +174,18 @@ sub UpdateStatus() {
 	my $CurrentMode = "";
 	my $CurrentWEP = "";
 	my $CurrentSignal = "-";
-     my @output;
 	print("Updating\n");
-     @output = run_program::get_stdout($IWConfig);
      local $_;
-	foreach (@output) {
+	foreach (run_program::get_stdout($IWConfig)) {
 		if (/ESSID:"(\S*)"/) { $CurrentNet = $1 }
 		if (/Mode:(\S*)\s/) { $CurrentMode = $1 }
 		if (/key:(\S*)\s/) { $CurrentWEP = $1 }
 		if (m!Quality:(\S*)/!) { $CurrentSignal = $1 }
 	}
-     @output = run_program::get_stdout($IFConfig, $device);
-	foreach (@output) {
+	foreach (run_program::get_stdout($IFConfig, $device)) {
 		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
 	}
-     @output = run_program::get_stdout($route);
-	foreach (@output) {
+	foreach (run_program::get_stdout($route)) {
 		if (/default\s*(\S*)\s/) { $CurrentGW = $1 }
 		else { $CurrentGW = "---.---.---.---" }
 	}
