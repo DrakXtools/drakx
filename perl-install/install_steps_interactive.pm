@@ -23,7 +23,7 @@ use devices;
 use fsedit;
 use network;
 use raid;
-use Netconnect;
+use netconnect;
 use mouse;
 use modules;
 use lang;
@@ -497,7 +497,7 @@ such as ``mybox.mylab.myco.com''."),
     #- (dam's)
     if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
 			_("Do you want to configure a ISDN connection for your system?"), 0)) {
-        Netconnect::isdn($o->{prefix}, $o->{isdn}, $o, bool($o->{pcmcia}));
+        Netconnect::detect_isdn($o->{prefix}, $o->{isdn}, $o, bool($o->{pcmcia}));
     }
 }
 

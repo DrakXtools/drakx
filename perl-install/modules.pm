@@ -96,7 +96,8 @@ arch() =~ /^sparc/ ? (
   "sunrpc" => "sunrpc",
 }],
 [ 'isdn', {
-  "hisax" => "hisax",
+   "hisax" => "hisax",
+   "b1pci" => "b1pci",
 }],
 [ 'scsi', {
 arch() =~ /^sparc/ ? (
@@ -538,9 +539,9 @@ sub load_thiskind {
 
 sub get_that_type {
     my ($type, $pcic) = @_;
-    
-    grep { 
-	my $l = $drivers{$_->{driver}}; 
+
+    grep {
+	my $l = $drivers{$_->{driver}};
 	$l && $l->{type} eq $type && detect_devices::check($_);
     } detect_devices::probeall('', $pcic);
 }
