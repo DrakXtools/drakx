@@ -750,3 +750,8 @@ END
 
     }
 }
+print '
+
+PROTOTYPES: ENABLE
+';
+
