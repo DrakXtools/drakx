@@ -1,3 +1,79 @@
+2002/02/05  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: log the "chkconfig --del gpm" when there is a serial
+	mouse
+
+2002/02/04  dam's  <damien@mandrakesoft.com>
+
+	* standalone/logdrake: corrected typo. Yvounet, check your code!!
+	embedded, explain
+
+	* my_gtk.pm: bug correction
+
+	* standalone/drakfont, services.pm, network/netconnect.pm: applied cooker
+	guy english review
+
+2002/02/04  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: added v4l module all the time (along with dbe already
+	present).
+
+2002/02/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps.pm: have numlock activated when isLaptop rather than
+	$o->{pcmcia}
+
+2002/02/04  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sp.po, share/po/zh_CN.po, share/po/no.po, share/po/fi.po,
+	share/po/DrakX.pot, share/po/th.po, share/po/es.po, share/po/fr.po,
+	share/po/sr.po, share/po/el.po, share/po/et.po, share/po/sk.po,
+	share/po/tr.po, share/po/eu.po, share/po/sl.po, share/po/vi.po,
+	share/po/uk.po, share/po/eo.po, share/po/nl.po, share/po/wa.po,
+	share/po/sv.po, share/po/zh_TW.po: updated some po files
+
+2002/02/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: fix creating /etc/security/msec/server
+
+	* share/po/fr.po: fix "More" translation
+
+2002/02/04  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Made HP multi-function devices configured
+	with HPOJ being displayed correctly by printerdrake.
+
+	* detect_devices.pm: Replace "Hewlett-Packard" by "HP" when HP device is
+	detected on a parallel port.
+
+2002/02/04  tvignaud
+
+	* share/po/fr.po: update french translations
+
+2002/02/03  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: force a few more "list"s instead of "combo" boxes
+	since "format" is now handled for combo boxes, combo boxes are used in
+	much too many places. Fix this by forcing type "list" for some cases,
+	and using type "list" when a ask_from has only one entry
+
+	* interactive.pm: since "format" is now handled for combo boxes, combo
+	boxes are used in much too many places. Fix this by forcing type "list"
+	for some cases, and using type "list" when a ask_from has only one entry
+
+	* bootloader.pm: 
+	  - fix some vga text modes 80x30
+	  - chmod 600 lilo.conf when a password is given
+	  - fix general "append"
+	(thanks to David Eastcott)
+	"password" works without "restricted", not the other way round (reported
+	by David Eastcott)
+	fix typo
+
+2002/02/03  warly
+
+	* share/rpmsrate.server: synchronize with current cooker rpmsrate
+
 2002/02/03  Pixel  <pixel@mandrakesoft.com>
 
 	* any.pm: force a few more "list"s instead of "combo" boxes
