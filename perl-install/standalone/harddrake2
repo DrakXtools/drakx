@@ -402,7 +402,12 @@ foreach (@classes) {
             $hd->{geometry} = join('/', map { $info->{geom}{$_} } qw(cylinders heads sectors)) . " (CHS)";
             $hd->{primary_partitions} = @{$info->{primary}{normal}};
             $hd->{extended_partitions} = @{$info->{extended}};
-            delete $hd->{extended_partitions} if $hd->{extended_partitions} eq '0';
+            $hd->{primary_partitions} .= " (" . join(', ', map { $_->{device} }@{$info->{primary}{normal}}) . ")" if $hd->{primary_partitions};
+            if ($hd->{extended_partitions}) {
+                $hd->{extended_partitions} .= " (" . join(', ', map { $_->{normal}{device} }@{$info->{extended}}) . ")";
+            } else {
+                delete $hd->{extended_partitions} if $hd->{extended_partitions} eq '0';
+            }
         }
         $_->{EMULATEWHEEL} = bool2yesno($_->{EMULATEWHEEL}) if $Ident eq "MOUSE";
         rename_field($_, 'usb_bus', 'bus');
