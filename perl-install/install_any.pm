@@ -144,7 +144,7 @@ sub errorOpeningFile($) {
     my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
     $current_medium eq $asked_medium and log::l("errorOpeningFile $file"), return; #- nothing to do in such case.
-    $::o->{packages}{mediums}{$asked_medium}{selected} or return; #- not selected means no need for worying about.
+    $::o->{packages}{mediums}{$asked_medium}{selected} or return; #- not selected means no need to worry about.
     my $current_method = $::o->{packages}{mediums}{$asked_medium}{method} || $::o->{method};
 
     my $max = 32; #- always refuse after $max tries.
@@ -366,8 +366,15 @@ sub selectSupplMedia {
     #- ask whether there are supplementary media
     my $prev_asked_medium = $asked_medium;
     if ($suppl_method && !$o->{isUpgrade}
-	&& (my $suppl = $o->ask_from_list_('', N("Do you have a supplementary installation media to configure?"),
-		[ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None')
+	&& (my $suppl = $o->ask_from_list_(
+	    '', formatAlaTeX(
+#-PO: keep the double empty lines between sections, this is formated a la LaTeX
+		N("The following media have been found and will be used during install: %s.
+
+
+Do you have a supplementary installation media to configure?",
+		    join ", ", uniq(map { $_->{descr} } values %{$o->{packages}{mediums}}))
+	    ), [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None')
 	) ne 'None')
     {
 	#- translate to method name
@@ -612,7 +619,7 @@ sub warnAboutNaughtyServers {
     my @naughtyServers = pkgs::naughtyServers($o->{packages}) or return 1;
     my $r = $o->ask_from_list_('', 
 formatAlaTeX(
-             #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+             #-PO: keep the double empty lines between sections, this is formated a la LaTeX
              N("You have selected the following server(s): %s
 
 
@@ -635,7 +642,7 @@ sub warnAboutRemovedPackages {
     my @removedPackages = keys %{$packages->{state}{ask_remove} || {}} or return;
     if (!$o->ask_yesorno('', 
 formatAlaTeX(
-             #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+             #-PO: keep the double empty lines between sections, this is formated a la LaTeX
              N("The following packages will be removed to allow upgrading your system: %s
 
 
