@@ -66,7 +66,7 @@ sub merge_fstabs {
 	my ($p2) = grep { fsedit::is_same_hd($_, $p) } @l or next;
 	@l       = grep { !fsedit::is_same_hd($_, $p) } @l;
 
-	$p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
+	$p2->{type} && $p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
 	  log::l("err, fstab and partition table do not agree for $p->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type}))), next;
 	
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
