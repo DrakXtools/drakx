@@ -4427,7 +4427,8 @@ sub build_backup_box() {
 				1, new Gtk2::VBox(0, 5),	
 				1, gtksignal_connect(my $button_from_conf_file = Gtk2::Button->new, clicked => sub { 
 					destroy_widget();
-					build_backup_box_see_conf();
+					build_backup_status();
+					build_backup_files(); 
 				}),
  				0, new Gtk2::VBox(0, 5),	
 				1, gtksignal_connect(my $button_see_conf = Gtk2::Button->new, clicked => sub { 
