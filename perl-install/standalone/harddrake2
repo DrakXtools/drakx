@@ -58,7 +58,6 @@ my %fields =
       "geometry" => [ N("Geometry"), N("Cylinder/head/sectors geometry of the disk") ],
       "hlt_bug" => [ N("Halt bug"), 
                      N("Some of the early i486DX-100 chips cannot reliably return to operating mode after the \"halt\" instruction is used") ],
-      "info" => [ N("Floppy format"), N("format of floppies supported by the drive") ],
       "level" => [ N("Level"), N("sub generation of the cpu") ],
       "media_type" => [ N("Media class"), N("class of hardware device") ],
       "Model" => [ N("Model"), N("hard disk model") ],
@@ -74,6 +73,14 @@ my %fields =
       "Vendor" => [ N("Vendor"), N("the vendor name of the device") ],
       "vendor_id" => [ N("Vendor"), N("the vendor name of the processor") ],
       "wp" => [ N("Write protection"), N("the WP flag in the CR0 register of the cpu enforce write proctection at the memory page level, thus enabling the processor to prevent unchecked kernel accesses to user memory (aka this is a bug guard)") ],
+     },
+     floppy =>
+     {
+      info => [ N("Floppy format"), N("format of floppies supported by the drive") ],
+     },
+     HARDDISK =>
+     {
+      info => [ N("Disk identifier"), N("usually the disk serial number") ],
      },
     );
 
