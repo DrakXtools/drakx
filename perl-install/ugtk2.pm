@@ -29,7 +29,6 @@ use log;
 use common;
 
 use Gtk2;
-use Gtk2::Pango;  #- we use non method Gtk2::Pango::PANGO_PIXELS so we can't rely on lazyloading
 
 if (!$::no_ugtk_init) {
     !$ENV{DISPLAY} || system('/usr/X11R6/bin/xtest') and die "Cannot be run in console mode.\n";
@@ -532,7 +531,7 @@ sub gtkfontinfo {
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
 	no strict;
 	my $func = "get_$_";
-	$fontinfo{$_} = Gtk2::Pango::Pango::PANGO_PIXELS($metrics->$func);
+	$fontinfo{$_} = Gtk2::Pango->PANGO_PIXELS($metrics->$func);
     }
     $metrics->unref;
     %fontinfo;
