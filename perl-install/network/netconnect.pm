@@ -669,6 +669,13 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
 
                    adsl_protocol =>
                    {
+                    pre => sub {
+                        # preselect right protocol for ethernet though connections:
+                        if (!exists $adsl_devices{$ntf_name}) {
+                            $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+                            $adsl_type = $ethntf->{BOOTPROTO} || "dhcp";
+                        }
+                    },
                     name => N("Connect to the Internet") . "\n\n" .
                     N("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few use dhcp.
@@ -684,7 +691,6 @@ If you don't know, choose 'use pppoe'"),
                         # process static/dhcp ethernet devices:
                         if (!exists $adsl_devices{$ntf_name} && member($adsl_type, qw(manual dhcp))) {
                             $auto_ip = $adsl_type eq 'dhcp';
-                            $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                             $find_lan_module->();
                             return 'lan_intf';
                         }
