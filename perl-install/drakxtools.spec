@@ -6,7 +6,7 @@ Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-# Temporary requires for tools that still use gtk+1 (mainly drakfloppy and net_monitor)
+# Temporary requires for tools that still use gtk+1 (that is net_monitor; drakcronat is being ported)
 Requires: perl-GTK >= 0.7008-29mdk, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
 Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.04.04.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
 Conflicts: drakconf < 9.1-14mdk
@@ -313,6 +313,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Fri May 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-38mdk
 - drakconnect: fix #852 (poulpy)
+- drakboot:
+  o do not install both lilo and grub when grub is choosen
+  o further fix #2826: replace spaces by underscores in labels
 
 * Thu May 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-37mdk
 - drakfont: fix #1352 (do not add font directory with dummy messages)
