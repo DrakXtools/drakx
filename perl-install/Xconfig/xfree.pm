@@ -12,13 +12,16 @@ sub new {
     bless $val, $class;
 }
 
+sub _conf_files() {
+    map { "$::prefix/etc/X11/$_" } 'xorg.conf', 'XF86Config-4', 'XF86Config';
+}
+
 ################################################################################
 # I/O ##########################################################################
 ################################################################################
 sub read {
     my ($class) = @_;
-    my @files = map { "$::prefix/etc/X11/$_" } 'xorg.conf', 'XF86Config-4', 'XF86Config';
-    my $file = (find { -f $_ && ! -l $_ } @files) || (find { -f $_ } @files);
+    my $file = find { -f $_ } _conf_files();
     my $raw_X = $class->new(Xconfig::parse::read_XF86Config($file));
 
     if (my ($Keyboard) = $raw_X->get_InputDevices('Keyboard')) {
@@ -28,17 +31,17 @@ sub read {
 }
 sub write {
     my ($raw_X, $o_file) = @_;
-    my $file = $o_file || "$::prefix/etc/X11/XF86Config";
+    my $file = $o_file || first(_conf_files());
     if (!$o_file) {
-	my $xorg = "$::prefix/etc/X11/xorg.conf";
-	foreach ($file, "$file-4", $xorg) {
+	foreach (_conf_files()) {
 	    if (-l $_) {
 		unlink $_;
 	    } else {
-		rename $_, "$_.old"; #- there will not be any XF86Config-4 anymore, we want this!
+		rename $_, "$_.old"; #- there will not be any XF86Config nor XF86Config-4 anymore, we want this!
 	    }
 	}
-	symlinkf 'XF86Config', $xorg;
+	#- keep it for old programs still using this name
+	symlink basename($file), "$::prefix/etc/X11/XF86Config";
     }
     Xconfig::parse::write_XF86Config($raw_X, $file);
 }
