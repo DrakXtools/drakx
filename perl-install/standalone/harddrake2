@@ -187,7 +187,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
             show_hide($current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/, $module_cfg_button);
             
             $current_configurator = $configurators{$id};
-            show_hide(-x $current_configurator, $config_button);
+            show_hide(-x scalar first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
             return 1;
         }
     }
@@ -234,7 +234,9 @@ foreach (@harddrake::data::tree) {
             my $i = $_;
             $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(bus id);
         }
-        if ($Ident eq "AUDIO") {
+	   if ($Ident =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/) {
+            $configurator = "/usr/sbin/diskdrake --removable=$_->{device}";
+        } elsif ($Ident eq "AUDIO") {
             require harddrake::sound;
             my $alter = harddrake::sound::get_alternative($_->{driver});
             $_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
