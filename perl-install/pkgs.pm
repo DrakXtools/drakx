@@ -943,7 +943,7 @@ sub install($$$;$$) {
 	    $error_msg and die $error_msg;
 	} else {
 	    #- child process will run each transaction.
-	    $SIG{SEGV} = sub { print OUTPUT "die:crashed\n"; c::_exit(0) };
+	    $SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
 	    eval {
 		close INPUT;
 		select((select(OUTPUT),  $| = 1)[0]);
