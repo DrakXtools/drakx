@@ -232,7 +232,7 @@ my $bok = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'),
 
                                 log::explanations("Setting security periodic checks");
                                 foreach my $key (keys %security_checks_value) {
-                                    $msec->set_check($key, from_i18n($security_checks_value{$key}->entry->get_text));
+                                    $msec->set_check($inv_fields{$key} || $key, from_i18n($security_checks_value{$key}->entry->get_text));
                                 }
                                 $msec->apply_checks;
 
