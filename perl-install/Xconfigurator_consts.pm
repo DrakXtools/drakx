@@ -45,9 +45,9 @@ use common;
 @allbutfbservers = grep { arch() =~ /^sparc/ || $serversdriver{$_} ne "fbdev" } keys(%serversdriver);
 @allservers = keys(%serversdriver);
 
-@allbutfbdrivers = (arch() =~ /^sparc/ ? qw(sunbw2 suncg14 suncg3 suncg6 sunffb sunleo suntcx) :
+@allbutfbdrivers = ((arch() =~ /^sparc/ ? qw(sunbw2 suncg14 suncg3 suncg6 sunffb sunleo suntcx) :
 		    qw(apm ark chips cirrus cyrix glide i128 i740 i810 imstt mga neomagic newport nv rendition
-                       s3 s3virge savage siliconmotion sis tdfx tga trident tseng vmware)), qw(ati glint vga);
+                       s3 s3virge savage siliconmotion sis tdfx tga trident tseng vmware)), qw(ati glint vga));
 @alldrivers = (@allbutfbdrivers, 'fbdev', 'vesa');
 
 %vgamodes = (
