@@ -127,11 +127,7 @@ sub connection {
 				    0;
 				});
     Gtk->main_iteration while Gtk->events_pending;
-    my $pid;
-    unless ($pid = fork) {
-	die (_("cannot fork: ") . $~) unless defined $pid;
-	exec( $isconnected2 ? "/etc/sysconfig/network-scripts/net_cnx_down" : "/etc/sysconfig/network-scripts/net_cnx_up");
-    }
+    my $tag2 = Gtk->timeout_add(1000, sub { system( $isconnected2 ? "/etc/sysconfig/network-scripts/net_cnx_down &" : "/etc/sysconfig/network-scripts/net_cnx_up &"); 0; });
 }
 
 sub rescan {
