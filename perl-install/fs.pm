@@ -89,6 +89,11 @@ sub format_ext2($@) {
     run_program::run("mke2fs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);
 }
 
+sub format_ext3 {
+    my ($dev, @options) = @_;
+    format_ext2($dev, "-j", @options);
+}
+
 sub format_reiserfs($@) {
     my ($dev, @options) = @_;
 
@@ -131,6 +136,8 @@ sub real_format_part {
     if (isExt2($part)) {
 	push @options, "-F" if isLoopback($part);
 	format_ext2($part->{device}, @options);
+    } elsif (isThisFs("ext3", $part)) {
+        format_ext3($part->{device}, @options);
     } elsif (isThisFs("reiserfs", $part)) {
         format_reiserfs($part->{device}, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
     } elsif (isThisFs("xfs", $part)) {
@@ -221,26 +228,18 @@ sub mount($$$;$) {
 	    $mount_opt = 'check=relaxed';
 	    eval { modules::load('vfat') }; #- try using vfat
 	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
-	} elsif ($fs eq 'hfs') {
-	    eval { modules::load('hfs') };
-	} elsif ($fs eq 'ufs') {
-	    eval { modules::load('ufs') };
-	} elsif ($fs eq 'xfs') {
-	    eval { modules::load('xfs') };
-	} elsif ($fs eq 'jfs') {
-	    eval { modules::load('jfs') };
 	} elsif ($fs eq 'reiserfs') {
 	    #- could be better if we knew if there is a /boot or not
 	    #- without knowing it, / is forced to be mounted with notail
 	    # if $where =~ m|/(boot)?$|;
 	    $mount_opt = 'notail'; #- notail in any case
-	    eval { modules::load('reiserfs') };
-	} elsif ($fs eq 'romfs') {
-	    eval { modules::load('romfs') };
 	} elsif ($fs eq 'ext2') {
 	    run_program::run("fsck.ext2", "-a", $dev);
 	    $? & 0x0100 and log::l("fsck corrected partition $dev");
 	    $? & 0xfeff and die _("fsck failed with exit code %d or signal %d", $? >> 8, $? & 255);
+	}
+	if (member($fs, qw(hfs romfs ufs reiserfs xfs jfs ext3))) {
+	    eval { modules::load($fs) };
 	}
 
 	$where =~ s|/$||;

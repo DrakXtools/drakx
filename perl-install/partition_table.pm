@@ -18,7 +18,7 @@ use log;
 if (arch() =~ /ppc/) {
     @important_types = ('Linux native', 'Linux swap', 'Apple HFS Partition', 'Apple Bootstrap');
 } else {
-    @important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'ReiserFS', 'JFS', 'DOS FAT16', 'Win98 FAT32'));
+    @important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'ReiserFS', 'JFS', 'ext3', 'DOS FAT16', 'Win98 FAT32'));
 }
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
@@ -36,6 +36,7 @@ arch() =~ /^ppc/ ? (
   0x183 => 'ReiserFS',
   0x283 => 'XFS',
   0x383 => 'JFS',
+  0x483 => 'ext3',
 ) : arch() =~ /^sparc/ ? (
   0x1 => 'SunOS boot',
   0x2 => 'SunOS root',
@@ -191,6 +192,7 @@ arch() !~ /sparc/ ? (
   0x183=> 'reiserfs',
   0x283=> 'xfs',
   0x383=> 'jfs',
+  0x483=> 'ext3',
   0x401 => 'apple',
   0x402 => 'hfs',
   nfs  => 'nfs', #- hack
@@ -237,7 +239,7 @@ sub isAppleBootstrap($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isBo
 sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isThisFs { $type2fs{$_[1]{type}} eq $_[0] }
-sub isTrueFS { isExt2($_[0]) || isThisFs("reiserfs", $_[0]) || isThisFs("xfs", $_[0]) || isThisFs("jfs", $_[0]) }
+sub isTrueFS { member($type2fs{$_[0]{type}}, qw(ext2 reiserfs xfs jfs ext3)) }
 sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
 sub isNonMountable { isRAID($_[0]) || isLVM($_[0]) }
 

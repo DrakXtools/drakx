@@ -60,7 +60,16 @@ arch() !~ /^sparc/ ? (
 ) : (),
 );
 
-sub typeOfPart { typeFromMagic(devices::make($_[0]), @partitions_signatures) }
+sub typeOfPart { 
+    my $dev = devices::make($_[0]);
+    my $t = typeFromMagic($dev, @partitions_signatures);
+    if ($t == 0x83) {
+	#- there is no magic to differentiate ext3 and ext2. Using libext2fs
+	#- to check if it has a journal
+	$t = 0x483 if c::is_ext3($dev);
+    }
+    $t;
+}
 
 #-######################################################################################
 #- Functions
