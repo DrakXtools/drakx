@@ -151,6 +151,7 @@ sub read {
 	my $f = $bootloader::{"read_$main_method"} or die "unknown bootloader method $main_method (read)";
 	my $bootloader = $f->($fstab);
 	my $type = partition_table::raw::typeOfMBR($bootloader->{boot});
+	warn "typeOfMBR $type on $bootloader->{boot} for method $main_method\n" if $ENV{DEBUG};
 	if ($type eq $main_method) {
 	    my @prefered_entries = map { get_label($_, $bootloader) } $bootloader->{default}, 'linux';
 
