@@ -334,7 +334,6 @@ sub setPackages {
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
 	push @{$o->{default_packages}}, "kernel-enterprise" if (availableRamMB() > 800) && (arch() !~ /ia64/);
 	push @{$o->{default_packages}}, "kernel22" if c::kernel_version() =~ /^\Q2.2/;
-	push @{$o->{default_packages}}, "kernel22-secure" if $o->{security} > 3;
 	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
@@ -373,6 +372,7 @@ sub setPackages {
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
 	$o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
 	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
+	$o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
 	$o->{compssUsersChoice}{'3D'} = 1 if 
 	    detect_devices::matching_desc('Matrox.* G[245][05]0') ||
 	    detect_devices::matching_desc('Riva.*128') ||
