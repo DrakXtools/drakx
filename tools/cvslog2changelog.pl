@@ -69,7 +69,7 @@ BEGIN {
 	      'uid533'  => 'François Pons  <fpons@mandrakesoft.com>',
 	      'uid535'  => 'Guillaume Cottenceau  <gc@mandrakesoft.com>',
 	      'uid553'  => 'Pixel  <pixel@mandrakesoft.com>',
-	      'tvignaud' => 'Thierry Vignaud  <tvignaud@mandrakesoft.com',
+	      'tvignaud' => 'Thierry Vignaud  <tvignaud@mandrakesoft.com>',
 	      'sbenedict'=>'Stew Benedict  <sbenedict@mandrakesoft.com>',
 	      'tkamppeter' => 'Till Kamppeter <till@mandrakesoft.com>',
 	      'yduret' => 'Yves Duret <yduret@mandrakesoft.com>'
