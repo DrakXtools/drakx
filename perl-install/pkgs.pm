@@ -2,7 +2,7 @@ package pkgs;
 
 use diagnostics;
 use strict;
-use vars qw($fd);
+use vars qw($fd $size_correction_ratio);
 
 use common qw(:common :file :functional);
 use install_any;
@@ -11,6 +11,8 @@ use pkgs;
 use fs;
 use lang;
 use c;
+
+$size_correction_ratio = 1.04;
 
 1;
 
@@ -60,7 +62,7 @@ sub unselect($$;$) {
     return if defined $size && $size <= 0;
 
     #- garbage collect for circular dependencies
-    my $changed = 1;
+    my $changed = 0; #1;
     while ($changed) {
 	$changed = 0;
       NEXT: foreach my $p (grep { $_->{selected} > 0 && !$_->{base} } values %$packages) {

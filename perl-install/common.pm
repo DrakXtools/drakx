@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ min max sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text) ],
+    common     => [ qw(__ min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text) ],
     functional => [ qw(fold_left map_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
@@ -40,6 +40,7 @@ sub __ { $_[0] }
 sub min { fold_left { $a < $b ? $a : $b } @_ }
 sub max { fold_left { $a > $b ? $a : $b } @_ }
 sub sum { fold_left { $a + $b } @_ }
+sub sqr { $_[0] * $_[0] }
 sub sign { $_[0] <=> 0 }
 sub product { fold_left { $a * $b } @_ }
 sub first { $_[0] }

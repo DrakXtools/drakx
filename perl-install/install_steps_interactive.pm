@@ -175,18 +175,18 @@ sub configureNetwork($) {
 	    my $intf = network::findIntf($o->{intf} ||= [], $_);
 	    add2hash($intf, $last);
 	    add2hash($intf, { NETMASK => '255.255.255.0' });
-	    $o->configureNetworkIntf($intf);
+	    $o->configureNetworkIntf($intf) or return;
 
 	    $o->{netc} ||= {};
 	    delete $o->{netc}{dnsServer};
 	    delete $o->{netc}{GATEWAY};
 	    $last = $intf;
 	}
-	#	 { 
-	#	     my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
-	#	     network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
-	#	 }
-	$o->configureNetworkNet($o->{netc}, $last ||= {}, @l);
+	#-	  { 
+	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
+	#-	  }
+	$o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
     }
     install_steps::configureNetwork($o);
 }
