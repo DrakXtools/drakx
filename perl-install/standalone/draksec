@@ -149,9 +149,9 @@ my $common_opts = { col_spacings => 10, row_spacings => 5, homogenous => 1 };
 ######################## BASIC OPTIONS PAGE ################################
 my ($seclevel_entry, $secadmin_entry);
 
-$notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
-                                       basic_seclevel_explanations(),
-                                       create_packtable($common_opts,
+$notebook->append_page(gtkshow(gtkpack_(new Gtk2::VBox(0, 0),
+                                       1, basic_seclevel_explanations(),
+                                       0, create_packtable($common_opts,
                                                         [ 
                                                           do {
                                                               my @sec_levels = security::level::get_common_list();
@@ -211,7 +211,10 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                                                          ), 50, -1
                                                                                                                 )
                                                                                            ]
-                                                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain))))),
+                                                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain))),
+                                                          [ 'never', 'automatic' ],
+                                                         )
+                                  ),
                            new_wrapped_label($label));
     $options_values{$domain} = \%values;
 }
