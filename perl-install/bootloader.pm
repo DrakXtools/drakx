@@ -614,7 +614,7 @@ sub install_lilo ($$) {
 	if (arch() =~ /ia64/) {
 	    (my $part, $file) = fsedit::file2part($prefix, $fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } @$hds;
-	    $dev2efi->{$part->{device}} . ":" . $file;
+	    #- FUCK TO THE GUY WHICH DOESN'T DO perl -cw bootloader.pm #$dev2efi->{$part->{device}} . ":" . $file;
 	} else {
 	    $file
 	}
@@ -752,8 +752,8 @@ sub install_grub {
     }
     my $bootIsReiser = isReiserfs(fsedit::get_root($fstab, 'boot'));
     my $file2grub = sub {	
-	my ($part, $file) = fsedit::file2part($prefix, $fstab, $file);
-	dev2grub($part->{device}, \%dev2bios) . $file;
+	#- FUCK TO THE GUY WHICH DOESN'T DO perl -cw bootloader.pm #my ($part, $file) = fsedit::file2part($prefix, $fstab, $file);
+	#- FUCK TO THE GUY WHICH DOESN'T DO perl -cw bootloader.pm #dev2grub($part->{device}, \%dev2bios) . $file;
     };
     {
 	local *F;
