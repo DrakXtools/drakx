@@ -638,9 +638,6 @@ sub _icon_paths() {
    (@icon_paths, (exists $ENV{SHARE_PATH} ? ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps") : ()),
     "/usr/lib/libDrakX/icons", "pixmaps", 'standalone/icons', '/usr/share/rpmdrake/icons');
 }  
-add_icon_path(@icon_paths,
-	      exists $ENV{SHARE_PATH} ? "$ENV{SHARE_PATH}/libDrakX/pixmaps" : (),
-	      '/usr/lib/libDrakX/icons', 'standalone/icons');
 
 sub sync {
     my ($window) = @_;
