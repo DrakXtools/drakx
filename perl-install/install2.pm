@@ -5,9 +5,9 @@ use strict;
 
 use vars qw($o);
 
-########################################################################################
-# misc imports
-########################################################################################
+#-######################################################################################
+#- misc imports
+#-######################################################################################
 use common qw(:common :file :system :functional);
 use install_any qw(:all);
 use log;
@@ -25,12 +25,10 @@ use printer;
 use run_program;
 use install_steps_graphical;
 
-use Data::Dumper;
 
-
-########################################################################################
-# Steps  table
-########################################################################################
+#-######################################################################################
+#- Steps  table
+#-######################################################################################
 my %stepsHelp = (
 
 selectLanguage => 
@@ -220,16 +218,16 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
 
 $installSteps{first} = $installSteps[0];
 
-########################################################################################
-# INTERN CONSTANT
-########################################################################################
+#-#####################################################################################
+#-INTERN CONSTANT
+#-#####################################################################################
 my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
 
-########################################################################################
-# Default value
-########################################################################################
+#-#####################################################################################
+#-Default value
+#-#####################################################################################
 # partition layout for a server
-#NOT YET USED
+# NOT YET USED
 my @serverPartitioning = (
 		     { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		     { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
@@ -287,12 +285,12 @@ my $default = {
 #    display => "192.168.1.9:0",
 };
 
-########################################################################################
-#$O
-#the big struct which contain, well everything (globals + the interactive methods ...)
-#if you want to do a kickstart file, you just have to add all the required fields (see for example
-#the variable $default)
-########################################################################################
+#-#######################################################################################
+#-$O
+#-the big struct which contain, well everything (globals + the interactive methods ...)
+#-if you want to do a kickstart file, you just have to add all the required fields (see for example
+#-the variable $default)
+#-#######################################################################################
 $o = $::o = { 
 
     default      => $default,              
@@ -319,21 +317,19 @@ $o = $::o = {
 
 };
 
-########################################################################################
-# Steps Functions
-# each step function are called with two arguments : clicked(because if you are a 
-# beginner you can force the the step) and the entered number
-########################################################################################
+#-######################################################################################
+#- Steps Functions
+#- each step function are called with two arguments : clicked(because if you are a 
+#- beginner you can force the the step) and the entered number
+#-######################################################################################
 
 #------------------------------------------------------------------------------
 sub selectLanguage {
-    lang::set($o->{lang} = $o->chooseLanguage);
-    $o->{keyboard} = $o->default("keyboard") || keyboard::lang2keyboard($o->{lang});
-    keyboard::setup($o->{keyboard});
+    $o->selectLanguage;
 
     addToBeDone {
 	unless ($o->{isUpgrade}) {
-	    lang::write($o->{prefix});
+	    lang    ::write($o->{prefix});
             keyboard::write($o->{prefix}, $o->{keyboard});
 	}
     } 'doInstallStep';
@@ -344,9 +340,7 @@ sub selectKeyboard {
     my ($clicked) = $_[0];
     return if $o->{installClass} eq "beginner" && !$clicked;
 
-    $o->{keyboard} = $o->chooseKeyboard;
-    keyboard::setup($o->{keyboard});
-
+    $o->selectKeyboard;
     #if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	keyboard::write($o->{prefix}, $o->{keyboard}) unless $o->{isUpgrade};
@@ -356,20 +350,28 @@ sub selectKeyboard {
 #------------------------------------------------------------------------------
 sub selectPath {
     $o->{isUpgrade}    = $o->selectInstallOrUpgrade;
+
     $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
     $o->{orderedSteps} = $o->{isUpgrade} ? \@orderedUpgradeSteps : \@orderedInstallSteps;
 }
 
+#------------------------------------------------------------------------------
 sub selectInstallClass {
     $o->{installClass} = $o->selectInstallClass(@install_classes);
+
     $::expert = $o->{installClass} eq "expert";
 }
 
+#------------------------------------------------------------------------------
 sub setupSCSI {
+    my ($clicked) = $_[0];
     $o->{autoSCSI} ||= $o->{installClass} eq "beginner";
-    $o->setupSCSI($o->{autoSCSI} && !$_[0]);
+
+    $o->setupSCSI($o->{autoSCSI} && !$clicked);
 }
 
+#------------------------------------------------------------------------------
+#PADTODO
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
     $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{default}{partitioning}) }
@@ -403,6 +405,7 @@ I'll try to go on blanking bad partitions"));
 
 }
 
+#PADTODO
 sub formatPartitions {
     $o->choosePartitionsToFormat($o->{fstab});
 
@@ -414,12 +417,16 @@ sub formatPartitions {
                                              home mnt tmp var var/tmp var/lib var/lib/rpm);
 }
 
+#------------------------------------------------------------------------------
+#PADTODO
 sub choosePackages {
     install_any::setPackages($o) if $_[1] == 1;
     $o->choosePackages($o->{packages}, $o->{compss}); 
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
 
+#------------------------------------------------------------------------------
+#PADTODO
 sub doInstallStep {
     install_any::setPackages($o) unless $_[1]; # FIXME
     $o->beforeInstallPackages;
@@ -427,38 +434,60 @@ sub doInstallStep {
     $o->afterInstallPackages;
 }
 
+#------------------------------------------------------------------------------
 sub configureMouse { $o->mouseConfig }
-sub configureNetwork { $o->configureNetwork($_[1] == 1 && !$_[0]) }
+#------------------------------------------------------------------------------
+sub configureNetwork { 
+    my ($clicked, $entered) = @_;
+    $o->configureNetwork($entered == 1 && !$clicked) 
+}
+#------------------------------------------------------------------------------
+#PADTODO
 sub configureTimezone { 
+    my ($clicked) = $_[0];
     my $f = "$o->{prefix}/etc/sysconfig/clock";
-    return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$_[0];
+    return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$clicked;
     $o->timeConfig($f);
 }
+#------------------------------------------------------------------------------
 sub configureServices { $o->servicesConfig  }
+#------------------------------------------------------------------------------
 sub configurePrinter  { $o->printerConfig   }
+#------------------------------------------------------------------------------
 sub setRootPassword   { $o->setRootPassword }
+#------------------------------------------------------------------------------
 sub addUser { 
     $o->addUser;
+
     addToBeDone {
 	run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); # use shadow passwords
     } 'doInstallStep';
 }
 
+#------------------------------------------------------------------------------
+#PADTODO
 sub createBootdisk {
     fs::write($o->{prefix}, $o->{fstab}) unless $o->{isUpgrade};
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
     $o->createBootdisk($_[1] == 1);
 }
 
+#------------------------------------------------------------------------------
 sub setupBootloader {
     $o->setupBootloader;
 }
+#------------------------------------------------------------------------------
 sub configureX {
-    $o->setupXfree if $o->{packages}{XFree86}{installed} || $_[0];
+    my ($clicked) = $_[0];
+    $o->setupXfree if $o->{packages}{XFree86}{installed} || $clicked;
 }
+#------------------------------------------------------------------------------
 sub exitInstall { $o->exitInstall }
 
 
+#-######################################################################################
+#- MAIN
+#-######################################################################################
 sub main {
     $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
@@ -516,6 +545,7 @@ sub main {
     }
     
 
+    #the main cycle
     my $clicked = 0;
     for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->enteringStep($o->{step});
