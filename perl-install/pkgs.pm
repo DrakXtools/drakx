@@ -458,7 +458,7 @@ sub read_rpmsrate {
 
 	@l = grep { $_->[0] < length $indent } @l;
 
-	my @m = @l ? @{$l[$#l][1]} : ();
+	my @m = @l ? @{$l[-1][1]} : ();
 	my ($t, $flag, @l2);
 	while ($data =~ 
 	       /^((
@@ -515,7 +515,7 @@ sub read_rpmsrate {
 	    }
 	    push @l, @l2;
 	} else {
-	    push @l, [ $l2[0][0], $l2[$#l2][1] ];
+	    push @l, [ $l2[0][0], $l2[-1][1] ];
 	}
     }
     $fatal_error and die "$fatal_error fatal errors in rpmsrate";

@@ -607,6 +607,10 @@ sub main {
 	    next MAIN unless $o->{steps}{$o->{step}}{reachable}; #- sanity check: avoid a step not reachable on error.
 	    redo MAIN;
 	}
+
+    my $_w = $o->wait_message('foo', "fsqfdlsk jfmqdslkf jqlsdmkf mlkqjd jlmkq\nqdsfqdsfqsdfqdsf\nqdsfqsdf");
+    sleep 10;
+
 	$o->{steps}{$o->{step}}{done} = 1;
 	$o->leavingStep($o->{step});
 

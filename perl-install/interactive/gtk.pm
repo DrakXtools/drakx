@@ -678,7 +678,7 @@ sub wait_messageW($$$) {
     $box->pack_start(shift @l, 0, 0, 4);
     $box->pack_start($_, 1, 1, 4) foreach @l;
 
-    ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1; 0 });
+    ($w->{wait_messageW} = $l[-1])->signal_connect(expose_event => sub { $w->{displayed} = 1; 0 });
     $w->{rwindow}->set_position('center') if $::isStandalone && !$w->{isEmbedded} && !$w->{isWizard};
     $w->{window}->show_all;
     $w->sync until $w->{displayed};
