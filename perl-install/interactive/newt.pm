@@ -129,18 +129,18 @@ sub ask_fromW_real {
 
 	my ($w, $real_w, $set, $get, $expand, $size);
 	if ($e->{type} eq 'bool') {
-	    $w = Newt::Component::Checkbox(-1, -1, $e->{text} || '', checkval(${$e->{val}}), " *");
+	    $w = Newt::Component::Checkbox($e->{text} || '', checkval(${$e->{val}}), " *");
 	    $set = sub { $w->CheckboxSetValue(checkval($_[0])) };
 	    $get = sub { $w->CheckboxGetValue == ord '*' };
 	} elsif ($e->{type} eq 'button') {
-	    $w = Newt::Component::Button(-1, -1, simplify_string(may_apply($e->{format}, ${$e->{val}})));
+	    $w = Newt::Component::Button(simplify_string(may_apply($e->{format}, ${$e->{val}})));
 	} elsif ($e->{type} =~ /list/) {
 	    my ($h) = @$l == 1 && $height > 30 ? 10 : 5;
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
 	    $has_scroll = 1;
 	    $size = min(int @{$e->{list}}, $h);
 
-	    $w = Newt::Component::Listbox(-1, -1, $size, $scroll); #- NEWT_FLAG_SCROLL	    
+	    $w = Newt::Component::Listbox($size, $scroll); #- NEWT_FLAG_SCROLL	    
 
 	    my @l = map { 
 		my $t = simplify_string(may_apply($e->{format}, $_), $width - 10);
@@ -157,7 +157,7 @@ sub ask_fromW_real {
 		} @{$e->{list}};
 	    };
 	} else {
-	    $w = Newt::Component::Entry(-1, -1, '', 20, ($e->{hidden} && 1 << 11) | (1 << 2));
+	    $w = Newt::Component::Entry('', 20, ($e->{hidden} && 1 << 11) | (1 << 2));
 	    $get = sub { $w->EntryGetValue };
 	    $set = sub { $w->EntrySet($_[0], 1) };
 	}
@@ -177,7 +177,7 @@ sub ask_fromW_real {
 
     my $grid = Newt::Grid::CreateGrid(3, max(1, int @$l));
     each_index {
-	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label(-1, -1, $_->{e}{label})}, 0, 0, 1, 0, 1, 0);
+	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label($_->{e}{label})}, 0, 0, 1, 0, 1, 0);
 	$grid->GridSetField(1, $::i, 1, ${$_->{real_w}}, 0, 0, 0, 0, 1, 0);
     } @widgets;
 
@@ -192,7 +192,7 @@ sub ask_fromW_real {
 	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
 	    $has_scroll = 1;
 
-	    my $scroll = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10); # 9=NEWT_COLORSET_CHECKBOX, 10=NEWT_COLORSET_ACTCHECKBOX
+	    my $scroll = Newt::Component::VerticalScrollbar($height, 9, 10); # 9=NEWT_COLORSET_CHECKBOX, 10=NEWT_COLORSET_ACTCHECKBOX
 	    my $subf = $scroll->Form('', 0);
 	    $subf->FormSetHeight($height);
 	    $subf->FormAddGrid($grid, 0);

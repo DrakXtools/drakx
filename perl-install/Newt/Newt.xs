@@ -115,28 +115,30 @@ addCallback(co, callback)
   newtComponentAddCallback(co, componentCallback, callback);
 
 Newt::Component
-newtCompactButton(left,top,text)
-	int left;
-	int top;
+newtCompactButton(text)
 	const char * text;
+	CODE: 
+	RETVAL = newtCompactButton(-1, -1, text);
+	OUTPUT:
+	RETVAL
 
 Newt::Component
-newtButton(left,top,text)
-	int left;
-	int top;
+newtButton(text)
 	const char * text;
+	CODE: 
+	RETVAL = newtButton(-1, -1, text);
+	OUTPUT:
+	RETVAL
 
 Newt::Component
-newtCheckbox(left,top,text,defValue,seq)
-	int left;
-	int top;
+newtCheckbox(text,defValue,seq)
 	const char * text;
 	char *defValue;
 	const char * seq;
-  CODE: 
-  RETVAL = newtCheckbox(left, top, text, defValue[0], seq, NULL);
-  OUTPUT:
-  RETVAL
+	CODE: 
+	RETVAL = newtCheckbox(-1, -1, text, defValue[0], seq, NULL);
+	OUTPUT:
+	RETVAL
 
 int
 newtCheckboxGetValue(co)
@@ -150,10 +152,12 @@ newtCheckboxSetValue(co, value)
   newtCheckboxSetValue(co, value[0]);
 
 Newt::Component
-newtLabel(left,top,text)
-	int left;
-	int top;
+newtLabel(text)
 	const char * text;
+CODE:
+        RETVAL = newtLabel(-1, -1, text);
+OUTPUT:
+	RETVAL
 
 void
 newtLabelSetText(co,text)
@@ -161,12 +165,14 @@ newtLabelSetText(co,text)
 	const char * text;
 
 Newt::Component
-newtVerticalScrollbar(left,top,height,normalColorset,thumbColorset)
-	int left;
-	int top;
+newtVerticalScrollbar(height,normalColorset,thumbColorset)
 	int height;
 	int normalColorset;
 	int thumbColorset;
+CODE:
+        RETVAL = newtVerticalScrollbar(-1, -1, height,normalColorset,thumbColorset);
+OUTPUT:
+	RETVAL
 
 void
 newtScrollbarSet(co,where,total)
@@ -175,11 +181,13 @@ newtScrollbarSet(co,where,total)
 	int total;
 
 Newt::Component
-newtListbox(left,top,height,flags)
-	int left;
-	int top;
+newtListbox(height,flags)
 	int height;
 	int flags;
+CODE:
+        RETVAL = newtListbox(-1, -1, height, flags);
+OUTPUT:
+	RETVAL
 
 SV *
 newtListboxGetCurrent(co)
@@ -209,16 +217,6 @@ CODE:
 	RETVAL = newtListboxAddEntry(co, text, data);
 OUTPUT:
 	RETVAL
-
-Newt::Component
-newtTextboxReflowed(left,top,text,width,flexDown,flexUp,flags)
-	int left;
-	int top;
-	char * text;
-	int width;
-	int flexDown;
-	int flexUp;
-	int flags;
 
 Newt::Component
 newtTextbox(left,top,width,height,flags)
@@ -307,16 +305,14 @@ newtDrawForm(form)
 	Newt::Component form;
 
 Newt::Component
-newtEntry(left,top,initialValue,width,flag)
-	int left;
-	int top;
+newtEntry(initialValue,width,flag)
 	const char * initialValue;
 	int width;
         int flag;
 	CODE:
 	{
 		char *result;
-		RETVAL = newtEntry(left,top,initialValue,width,&result,flag);
+		RETVAL = newtEntry(-1, -1, initialValue,width,&result,flag);
 	}
 	OUTPUT:
 	RETVAL
