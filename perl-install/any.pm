@@ -189,7 +189,6 @@ sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
     my @method_choices = bootloader::method_choices($fstab);
-    my $profiles = bootloader::has_profiles($b);
     my $prev_force_acpi = my $force_acpi = bootloader::get_append($b, 'acpi') !~ /off|ht/;
     my $prev_force_noapic = my $force_noapic = bootloader::get_append($b, 'noapic');
     my $prev_force_nolapic = my $force_nolapic = bootloader::get_append($b, 'nolapic');
@@ -230,7 +229,6 @@ sub setupBootloader__general {
             { text => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
             { label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
 		if_(detect_devices::isLaptop(),
-            { text => N("Enable multiple profiles"), val => \$profiles, type => 'bool', advanced => 1 },
 		),
         ]) or return 0;
     } else {
@@ -256,7 +254,6 @@ sub setupBootloader__general {
 	$in->do_pkgs->ensure_binary_is_installed('grub', "grub", 1) or return 0;
     }
 
-    bootloader::set_profiles($b, $profiles);
     bootloader::set_append($b, "mem", $memsize || 0);
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append($b, acpi => ($force_acpi ? '' : 'ht'));

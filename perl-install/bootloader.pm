@@ -813,25 +813,6 @@ sub create_link_source() {
     }
 }
 
-sub has_profiles { my ($b) = @_; to_bool(get_label("office", $b)) }
-sub set_profiles {
-    my ($b, $want_profiles) = @_;
-
-    my $office = get_label("office", $b);
-    if ($want_profiles xor $office) {
-	my $e = get_label("linux", $b);
-	if ($want_profiles) {
-	    push @{$b->{entries}}, { %$e, label => "office", append => "$e->{append} prof=Office" };
-	    $e->{append} .= " prof=Home";
-	} else {
-	    # remove profiles
-	    $e->{append} =~ s/\s*prof=\w+//;
-	    @{$b->{entries}} = grep { $_ != $office } @{$b->{entries}};
-	}
-    }
-
-}
-
 sub get_of_dev {
     my ($unix_dev) = @_;
 
