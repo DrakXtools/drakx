@@ -3,6 +3,93 @@
 	* bootlook.pm: corrected typo
 	added use bootloader
 
+	* standalone/net_monitor: typo
+
+	* netconnect.pm: if neuneu but explicited clicked, don't skip
+	corrected pcmcia driver
+	corrected typo
+
+	* lang.pm: pixel sux
+
+	* network.pm, standalone/draknet: corrected network connection
+
+	* my_gtk.pm: corrected set_modal
+
+2001/04/12  fabman
+
+	* share/po/es.po: updated spanish .po files
+
+2001/04/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: removed Cancel of Summary.
+	fixed ask printer configuration.
+
+	* common.pm: improved bestMatchSentence2.
+
+	* detect_devices.pm: fix Hewlett-Packard to HP in case.
+
+	* standalone/printerdrake: never ask to configure a printer in standalone.
+
+	* printerdrake.pm: automatically add a queue if nothing exists.
+	fixed ask to configure a printer.
+
+	* modules.pm, commands.pm, lang.pm, keyboard.pm, pkgs.pm: fixed log of
+	packdrake.
+
+2001/04/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: un-dadouize a problem
+	sync
+
+2001/04/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sp.po, share/po/fi.po, share/po/DrakX.pot,
+	share/po/zh_CN.GB2312.po, share/po/es.po, share/po/fr.po,
+	share/po/sr.po, share/po/de.po, share/po/el.po, share/po/et.po,
+	share/po/sk.po, share/po/eu.po, share/po/sl.po, share/po/vi.po,
+	share/po/ko.po, share/po/eo.po, share/po/ja.po, share/po/wa.po,
+	share/po/sv.po, share/po/da.po, share/po/is.po, share/po/zh_TW.Big5.po,
+	share/po/id.po: Updated Chinese file
+
+	* share/po/it.po: Updated Italian file
+	Updated Chinese file
+
+2001/04/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (installPackages): fix no advertising with less
+	than 20MB of packages
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize):
+	  - when not_edit and empty list, die.
+	  - when not_edit and single element list, don't display that entry.
+
+	* install_steps_interactive.pm (configureX): fix for X test at install
+	with exotic fonts
+
+	* lang.pm (pack_langs): set RPM_INSTALL_LANG for package "menu"
+
+	* modules.pm (configure_pcmcia): better handling for not running cardmgr
+	many times
+	(configure_pcmcia): always run cardmgr so that it is run even if stage1
+	did create a /var/run/stab. This is just a try :-/
+
+2001/04/12  siegel
+
+	* share/po/de.po: new german version
+
+2001/04/12  yduret
+
+	* bootlook.pm: added some stuff
+
+2001/04/11  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: no setmodal 0 if wizard
+
+2001/04/12  dam's  <damien@mandrakesoft.com>
+
+	* bootlook.pm: corrected typo
+	added use bootloader
+
 	* netconnect.pm: corrected typo
 
 2001/04/12  fabman
