@@ -144,7 +144,7 @@ my $boot_pixbuf ;
 my $boot_pic = gtkpng($themes{'def_thmb'});
 
 my $thm_button = new Gtk::Button(_("Install themes"));
-my $logo_thm = new Gtk::CheckButton(_("Display theme under console"));
+my $logo_thm = new Gtk::CheckButton(_("Display theme\nunder console"));
 my $B_create = new Gtk::Button(_("Create new theme"));
 my $keep_logo = 1;
 $logo_thm->set_active(1);
@@ -165,6 +165,7 @@ $combo{'lilo'}->entry->signal_connect(changed => sub {
     my $new_file = $themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'thumb'};
     undef($lilo_pixbuf);
     $lilo_pixbuf = gtkcreate_png_pixbuf(-r $new_file ? $new_file : $themes{'def_thmb'});
+    $lilo_pixbuf = $lilo_pixbuf->scale_simple(155,116,0);
     $lilo_pic->set($lilo_pixbuf->render_pixmap_and_mask(0),'');
 });
 
@@ -173,7 +174,7 @@ $no_bootsplash == 0
     local $img_file = $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg";
     undef($boot_pixmap);
     $boot_pixmap = gtkcreate_png_pixbuf( $img_file);
-    $boot_pixmap = $boot_pixmap->scale_simple(159,119,0);
+    $boot_pixmap = $boot_pixmap->scale_simple(155,116,0);
     $boot_pic->set($boot_pixmap->render_pixmap_and_mask(0),'');
 });
 
@@ -277,7 +278,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            _("Themes"),
                                            $combo{'thms'},
-                                           _("\nSelect a theme for\nlilo and bootsplash,\nyou can choose\nthem separatly"),
+                                           _("\nSelect theme for\nlilo and bootsplash,\nyou can choose\nthem separatly"),
                                            $logo_thm),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            _("Lilo screen"),
