@@ -34,9 +34,8 @@ sub init {
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
 
-    #- to be able to adduser, one need to have /etc/passwd and /etc/group writable
-    #- sudoers must a file, not a symlink
-    system("cp /image/etc/{passwd,group,sudoers} /etc");
+    #- these files need be writable but we need a sensible first contents
+    system("cp /image/etc/$_ /etc") foreach qw(passwd group sudoers fstab);
 
     mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_") foreach qw(cups profile.d sysconfig/network-scripts);
  
@@ -44,8 +43,8 @@ sub init {
     symlinkf_short("/image/etc/$_", "/etc/$_")
       foreach qw(alternatives shadow man.config services shells pam.d security inputrc ld.so.conf 
                  DIR_COLORS bashrc profile rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
-                 dynamic gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
-                 skel ld.so.cache openoffice xinetd.d);
+                 dynamic hotplug gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
+                 skel ld.so.cache openoffice xinetd.d xinetd.conf syslog.conf sysctl.conf);
     symlinkf_short("/image/etc/X11/$_", "/etc/X11/$_")
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
 
