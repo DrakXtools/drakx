@@ -78,15 +78,16 @@ my $mountdir = "/root/tmp/drakautoinst-mountdir"; -d $mountdir or mkdir $mountdi
 my $floppy = detect_devices::floppy();
 my $dev = devices::make($floppy);
 $in->ask_okcancel('', _("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
-#{
-#    my $w = $in->wait_message('', _("Creating auto install floppy"));
-#    commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
-#    common::sync();
-#}
+{
+    my $w = $in->wait_message('', _("Creating auto install floppy"));
+    commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
+    common::sync();
+}
 fs::mount($dev, $mountdir, 'vfat', 0);
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
 my $o_old = $o;
+
 if (ref($in) =~ /gtk/) {
     require Gtk;
     init Gtk;
@@ -125,7 +126,6 @@ if (ref($in) =~ /gtk/) {
 	      );
 
     member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [$_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_\}") ] foreach (keys %$o);
-
 
     my $W = my_gtk->new(_('$o edition'));
     my @box_to_hide;
@@ -253,6 +253,7 @@ sub quit_global {
 }
 
 
+
 sub h2widget {
     my ($k, $label) = @_;
     my $w;
@@ -358,6 +359,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.11  2001/10/26 13:45:11  damien
+#- progress bar hack
+#-
 #- Revision 1.10  2001/10/25 11:59:58  damien
 #- simple variables handled, code compression.
 #-

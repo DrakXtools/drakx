@@ -156,7 +156,7 @@ foreach my $i (@application) {
 
 # PATH and binary full path
 my $xfs_conffile = '/etc/X11/fs/config';
-my $drakfont_dir = '/home/seb/new2_drakfont'; # '/usr/X11R6/lib/X11/fonts/drakfont';
+my $drakfont_dir = '/home/damien/new2_drakfont'; # '/usr/X11R6/lib/X11/fonts/drakfont';
 my $ttf2pt1 = '/usr/sbin/ttf2pt1';
 my $pfm2afm = '/usr/sbin/pfm2afm';
 my $type1inst = '/usr/sbin/type1inst';
@@ -191,8 +191,9 @@ sub list_fontpath {
 
 sub search_installed_fonts {
     list_fontpath();
+    $interactive and progress($pbar, 0, _("search installed fonts"));
     push @installed_fonts, all($_) foreach @installed_fonts_path;
-	$interactive and  progress($pbar, 100/3 );
+    $interactive and progress($pbar, 100/3, _("Search fonts in install list"));
 }
 
 sub search_installed_fonts_full_path {
@@ -218,7 +219,7 @@ sub search_windows_font {
 	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
 	    foreach my $i (@{$_->[0]}) {
 		if($interactive) {
-		    if($nb_dir) { progress($pbar, 34/$nb_dir) } else {
+		    if($nb_dir) { progress($pbar, 34/$nb_dir, "toto") } else {
 			display_error(_("no fonts found"));
 			return 0;
 		    }
@@ -227,7 +228,7 @@ sub search_windows_font {
 		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_->[1]/fonts/$i";
 	    }
 	}
-	$interactive && $nb_dir and  progress($pbar, 100/3 );
+	$interactive && $nb_dir and  progress($pbar, 100/3, "toto");
     }
     1;
 }
@@ -261,10 +262,8 @@ sub search_dir_font {
 		!grep /$fn/, (@installed_fonts) and push @font_list, "$fn";
 	    }
 	}
-	print "Fonts in directory " . $dir . " : " . $_ . "\n" foreach (@font_list_tmp);
     }
-    print ".........................................\n\n";
-    print "Font to install : " . $_ . "\n" foreach (@font_list);
+    $interactive and progress($pbar, 2*100/3, _("Search fonts in install list"));
 }
 
 sub search_dir_font_uninstall {
@@ -303,22 +302,24 @@ sub put_font_dir {
     dir_created();
     foreach my $i (@font_list) {
 	cp_af($i, $drakfont_dir . "/tmp/tmp");
-	$interactive and  progress($pbar1, 100/@font_list );
+	$interactive and progress($pbar1, 100/@font_list, _("Fonts copy"));
     }
     system ("cd $drakfont_dir/tmp/tmp   && cp *.ttf ../../ttf");
     system ("cd $drakfont_dir/ttf && $ttmkfdir > fonts.dir" );
-    system ("$chkfontpath -a $drakfont_dir/ttf");
-    $interactive and  progress($pbar2, 50 );
+    my $restart_xfs = "$chkfontpath -a $drakfont_dir/ttf";
+    $interactive and progress($pbar2, 50, _("True Type fonts installation"));
 
+#    my nb += $_ ?1 : 0 foreach ($so, $gs); #add abiword when implemented
     if ($so && $gs)  {
       foreach my $fontname ( glob ("$drakfont_dir/tmp/tmp/*.ttf") ) { 
 	system ("cd $drakfont_dir/tmp/tmp && $ttf2pt1 -b $fontname");
       }
-      system ("cd  $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm *.afm ../Type1");
+      system ("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm *.afm ../Type1");
       system ("cd $drakfont_dir/tmp/Type1 && $type1inst" );
       system ("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` " );
       system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
-      system ("cd $drakfont_dir/Type1 && $type1inst &&  $chkfontpath -a $drakfont_dir/Type1");
+      system ("cd $drakfont_dir/Type1 && $type1inst");
+      $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
     }
     if (!$so && $gs)  {
       foreach my $fontname ( glob ("$/drakfont_dir/tmp/tmp/*.ttf") ) { 
@@ -328,7 +329,8 @@ sub put_font_dir {
       system ("cd $drakfont_dir/tmp/Type1 && $type1inst" );
       system ("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` " );
       system ("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
-      system ("cd $drakfont_dir/Type1 && $type1inst &&  $chkfontpath -a $drakfont_dir/Type1");
+      system ("cd $drakfont_dir/Type1 && $type1inst");
+      $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
     }
     if ($so && !$gs)  {
       foreach my $fontname ( glob ("$drakfont_dir/tmp/tmp/*.ttf") ) { 
@@ -339,14 +341,15 @@ sub put_font_dir {
       }
       system ("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
       system ("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
-      system ("cd $drakfont_dir/Type1 && $type1inst &&  $chkfontpath -a $drakfont_dir/Type1");
+      system ("cd $drakfont_dir/Type1 && $type1inst");
+      $restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
     }
-    $interactive and  progress($pbar2, 50 );
+    $interactive and  progress($pbar2, 50, _("Fonts conversion for applications"));
     rm_rf("$drakfont_dir/tmp/");
-    $interactive and  progress($pbar3, 50 );
+    $interactive and  progress($pbar3, 50, _("Suppress temporary Files"));
     print "\n\nretarting xfs......\n";
-    system ("/etc/rc.d/init.d/xfs restart");
-    $interactive and  progress($pbar3, 50 );
+    system ($restart_xfs);
+    $interactive and  progress($pbar3, 50, _("Restart XFS"));
   }
 }
 
@@ -422,8 +425,6 @@ sub backend_mod {
 	print ".......Install Specifics Fonts...........\n\n";
 	search_installed_fonts();
 	search_dir_font $_ foreach (@install);
-	print "font directory_______ : $_ \n" foreach (@install);
-	print ".................................................\n\n";
 	print "Font to install : " . $_ . "\n" foreach (@font_list);
 	put_font_dir();
 	print "\n...............The End...................\n";
@@ -659,16 +660,11 @@ sub font_choice {
 sub file_ok_sel { 
     my ( $widget, $file_selection ) = @_;     
     my $file_name = $file_selection->get_filename();
-    print "nom du rep:".$file_name."\n\n";
-#    print "liste complete rep : $_ \n" foreach (@install);
-#    print "\n___________\n";
-    if (@install) {   
-	grep( $file_name , @install) or push @install, $file_name &&  $list->add(gtkshow(new Gtk::ListItem($file_name)));
+    print "-- @install\n";
+    if(!member($file_name, @install)) {
+	push(@install, $file_name);
+	$list->add(gtkshow(new Gtk::ListItem($file_name)));
     }
-    else { 
-	push @install, $file_name &&  $list->add(gtkshow(new Gtk::ListItem($file_name))); 
-    }
-#    print ("$file_name\n");   
 }
 
 sub list_remove {
@@ -711,16 +707,20 @@ sub import_status {
     my $adj2 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
     my $adj3 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
     my $table;
+    $pbar = new_with_adjustment Gtk::ProgressBar($adj);
+    $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1);
+    $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2);
+    $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3);
     gtkpack($font_box,
 	    $table = create_packtable({ col_spacings => 10, row_spacings => 2},
-   [ " ", $label1 = new Gtk::Label(' ' ), ' '],				 
-   [_("Initial tests"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), ' '],
-   [ " ", $label2 = new Gtk::Label(' ' ), ' '],				 
-   [_("Copy all fonts on your system"), $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), ' '],
-   [ " ", $label3 = new Gtk::Label(' ' ), ' '],				 
-   [_("Install & convert Fonts"), $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), ' '],
-   [ " ", $label4 = new Gtk::Label(' ' ), ' '],				 
-   [_("Post Install"), $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), ' '],
+   [ " ", $pbar->{label} = new Gtk::Label(' ' ), ' '],				 
+   [_("Initial tests"), $pbar, ' '],
+   [ " ", $pbar1->{label} = new Gtk::Label(' ' ), ' '],				 
+   [_("Copy all fonts on your system"), $pbar1, ' '],
+   [ " ", $pbar2->{label} = new Gtk::Label(' ' ), ' '],				 
+   [_("Install & convert Fonts"), $pbar2, ' '],
+   [ " ", $pbar3->{label} = new Gtk::Label(' ' ), ' '],				 
+   [_("Post Install"), $pbar3, ' '],
 			    ),
 # 	    $table = create_packtable({ col_spacings => 10, row_spacings => 2},
 #    [ " ", $label1 = new Gtk::Label(' ' )],				 
@@ -735,22 +735,25 @@ sub import_status {
 	   );
     $central_widget = \$table;
     $font_box->show_all();
-    progress($pbar, 0.1 );
+    progress($pbar, 0.1, "toto");
 #    my $timer  = Gtk->timeout_add(  5, \&progress_timeout );
 #    my $timer1 = Gtk->timeout_add( 10, \&progress_timeout1 );
 #    my $timer2 = Gtk->timeout_add( 15, \&progress_timeout2 );
 #    my $timer3 = Gtk->timeout_add( 20, \&progress_timeout3 );
+    Gtk->main_iteration while Gtk->events_pending;
     backend_mod();
 }
 
 sub progress {
-    my ($bar, $incr) = @_;
+    my ($bar, $incr, $label_text) = @_;
     my $new_val;
     my $adjt;
     $new_val = $pbar->get_value() + $incr;
     $adjt = $bar->adjustment;
-    $bar->set_value( $new_val );
+    $bar->set_value($new_val);
+    $bar->{label}->set($label_text);
 #    $new_val < 100 || gtkset_active($check1 , 1);
+    Gtk->main_iteration while Gtk->events_pending;
     $new_val < 100 ;
 }
 
