@@ -884,7 +884,7 @@ sub miscellaneousBefore {
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
     $ENV{SECURE_LEVEL} = $o->{security};
-    add2hash_ $o, { useSupermount => 0 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
+    add2hash_ $o, { useSupermount => 1 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
 
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia} });
 }
