@@ -192,7 +192,7 @@ If you do not have an existing directory, please copy the CD or DVD contents.
       [ { label => N("Installation image directory"), val => \$dir, type => 'entry' }, ])
   or goto step_ip_range;
 
-unless (-d $dir && -e "$dir/VERSION" && -d "$dir/isolinux" && -d "$dir/Mandrake/base") {
+unless (-d $dir && -e "$dir/VERSION" && -d "$dir/install/isolinux" && -d "$dir/install/stage2") {
     $in->ask_warn(N("No image found"), 
 		  N("No CD or DVD image found, please copy the installation program and rpm files."));
     goto step_install_dir;
@@ -203,7 +203,7 @@ unless (-d $dir && -e "$dir/VERSION" && -d "$dir/isolinux" && -d "$dir/Mandrake/
 
 step_auto_install:
 
-my $auto_inst_cfg = "Mandrake/base/auto_inst.cfg"; #- TODO change according configuration?
+my $auto_inst_cfg = "install/auto_inst.cfg"; #- TODO change according configuration?
 -e "$dir/$auto_inst_cfg" or $auto_inst_cfg = '';
 
 $in->ask_from('Choose auto installation',
@@ -246,7 +246,7 @@ build_dhcpd_conf($dhcpd_conf, "/etc/dhcpd.conf");
 
 #- make kernel and initrd available for initrd.
 mkdir "/var/lib/tftpboot/PXEClient/images";
-sys("cp", "-af", "$dir/isolinux/alt0", "/var/lib/tftpboot/PXEClient/images/");
+sys("cp", "-af", "$dir/install/isolinux/alt0", "/var/lib/tftpboot/PXEClient/images/");
 
 my $pxelinux_cfg = parse_pxelinux_cfg("/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
 my $label;

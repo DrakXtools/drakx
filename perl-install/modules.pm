@@ -258,7 +258,7 @@ sub extract_modules {
     if (!-e $cz) {
 	unlink $_ foreach glob_("/lib/modules*.cz*");
 	require install_any;
-        install_any::getAndSaveFile("Mandrake/mdkinst$cz", $cz) or die "failed to get modules $cz: $!";
+        install_any::getAndSaveFile("install/stage2/live$cz", $cz) or die "failed to get modules $cz: $!";
     }
     eval {
 	require packdrake;

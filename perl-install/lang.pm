@@ -873,7 +873,7 @@ sub set {
 	symlink "../$main_charset/$_", "$dir/$lang/$_" foreach @LCs, 'LC_MESSAGES';	    
 	
 	#- getting LC_CTYPE (putting it directly in $lang)
-	install_any::getAndSaveFile("Mandrake/mdkinst$dir/$charset/LC_CTYPE", "$dir/$lang/LC_CTYPE");
+	install_any::getAndSaveFile("install/stage2/live$dir/$charset/LC_CTYPE", "$dir/$lang/LC_CTYPE");
     }
     
     #- set all LC_* variables to a unique locale ("C"), and only redefine

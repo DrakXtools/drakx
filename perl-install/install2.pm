@@ -420,7 +420,7 @@ sub main {
     } %cmdline;
 
     if ($::testing) {
-	$ENV{SHARE_PATH} ||= "/export/Mandrake/mdkinst/usr/share";
+	$ENV{SHARE_PATH} ||= "/export/install/stage2/live/usr/share";
 	$ENV{SHARE_PATH} = "/usr/share" if !-e $ENV{SHARE_PATH};
     } else {
 	$ENV{SHARE_PATH} ||= "/usr/share";
@@ -531,9 +531,9 @@ sub main {
     modules::load_category($o->{modules_conf}, 'bus/usb'); 
 
     #- oem patch should be read before to still allow patch or defcfg.
-    eval { $o = $::o = install_any::loadO($o, "Mandrake/base/patch-oem.pl"); log::l("successfully read oem patch") };
+    eval { $o = $::o = install_any::loadO($o, "install/patch-oem.pl"); log::l("successfully read oem patch") };
     #- recovery mode should be read early to allow default parameter to be taken.
-    eval { $o = $::o = install_any::loadO($o, "Mandrake/base/recovery.cfg"); log::l("successfully read recovery") } if $::recovery;
+    eval { $o = $::o = install_any::loadO($o, "install/recovery.cfg"); log::l("successfully read recovery") } if $::recovery;
     $@ and $::recovery = 0; #- avoid keeping recovery if there was a problem reading the recovery.cfg file.
     #- patch should be read after defcfg in order to take precedance.
     eval { $o = $::o = install_any::loadO($o, $cfg); log::l("successfully read default configuration: $cfg") } if $cfg;
@@ -669,7 +669,7 @@ sub main {
 
     #- save recovery file if needed (ie disk style install).
     $o->{method} eq 'disk' and
-      output($o->{prefix}.any::hdInstallPath()."/Mandrake/base/recovery.cfg", install_any::g_auto_install(1));
+      output($o->{prefix} . any::hdInstallPath() . '/install/recovery.cfg', install_any::g_auto_install(1));
 
     #- mainly for auto_install's
     #- do not use run_program::xxx because it doesn't leave stdin/stdout unchanged

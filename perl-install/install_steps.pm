@@ -338,7 +338,7 @@ sub beforeInstallPackages {
 
     #- add oem theme if the files exists.
     mkdir_p("$o->{prefix}/usr/share");
-    install_any::getAndSaveFile("Mandrake/base/oem-theme.rpm", "$o->{prefix}/usr/share/oem-theme.rpm");
+    install_any::getAndSaveFile("install/oem-theme.rpm", "$o->{prefix}/usr/share/oem-theme.rpm");
 }
 
 sub pkg_install {
@@ -406,7 +406,7 @@ sub afterInstallPackages($) {
 
     die N("Some important packages didn't get installed properly.
 Either your cdrom drive or your cdrom is defective.
-Check the cdrom on an installed computer using \"rpm -qpl Mandrake/RPMS/*.rpm\"
+Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm\"
 ") if any { m|read failed: Input/output error| } cat_("$o->{prefix}/root/drakx/install.log");
 
     if (arch() !~ /^sparc/) { #- TODO restore it as may be needed for sparc

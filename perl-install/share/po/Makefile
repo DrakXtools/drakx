@@ -1,3 +1,4 @@
+include ../../../Makefile.config
 include ../../Makefile.config
 
 PMSFILES = $(ALLPMS) ../move/move.pm ../move/tree/mdk_totem

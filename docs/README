@@ -42,16 +42,16 @@ one is the main one :
 (2) multi-cdrom install
 	DIRS == the root directories of all the media that the install will see
 
-``gendistrib'' will scan the file Mandrake/base/hdlists in the main root
+``gendistrib'' will scan the file media/media_info/hdlists in the main root
 directory (the first one in DIRS) to search for all media used. Typically you
-use Mandrake/RPMS* for RPM packages repository.
-For multi-cd, please use Mandrake/RPMS or Mandrake/RPMS1, Mandrake/RPMS2, etc.
-For one CD or a network/hd volume, please use Mandrake/RPMS.
+use media/main for RPM packages repository.
+For multi-cd, please use media/main or media/foo, etc.
+For one CD or a network/hd volume, please use media/main.
 
-Optionnally, you can modify ``Mandrake/base/rpmsrate''; this file manages
+Optionnally, you can modify ``media/media_info/rpmsrate''; this file manages
 the relative importance of the files, and thus their installation or not.
 
-Also, mdkinst_stage2.gz must be remade if you modify files in Mandrake/mdkinst.
+Also, mdkinst_stage2.gz must be remade if you modify files in install/stage2/live.
 See below for information about these files.
 
 ********************************************************************************
@@ -59,7 +59,7 @@ See below for information about these files.
 ********************************************************************************
 First here are the different things needed :
 
-Mandrake/base/hdlists
+media/media_info/hdlists
 	description of the available install media.
 	format is one line for one medium as
 		<hdlist_name> <rpms_directory> <description>
@@ -68,26 +68,26 @@ Mandrake/base/hdlists
 		hdlist1.cz	Mandrake/RPMS1	Boot CD
 		hdlist2.cz	Mandrake/RPMS2	Extension CD
 
-Mandrake/base/hdlist*.cz
+media/media_info/hdlist*.cz
 	table of rpm's headers, referred by ``hdlists''
 	their contents can be listed using ``packdrake -l <hdlist_file>'' or
 	or ``parsehdlist <hdlist_file>''.
-	! Need to be remade when Mandrake/RPMS* changes (with ``gendistrib'') !
+	! Need to be remade when media/main changes (with ``gendistrib'') !
 
-Mandrake/base/depslist.ordered
+media/media_info/depslist.ordered
 	for each packages, tell which package it depends on. Also contains the
 	size for some (obscure) bloody reasons.
-	! Need to be remade when Mandrake/RPMS* changes !
+	! Need to be remade when media/main changes !
 	(with ``gendistrib --noclean --distrib .'')
 
-Mandrake/base/compssUsers
+media/media_info/compssUsers
 
-Mandrake/base/rpmsrate
+media/media_info/rpmsrate
 	ranks and classify packages, so that the installer will know which
         ones to install. format is :
 		<intern_group>
 			<level> <packages>
-	where <intern_group> is a symbolic name used in Mandrake/base/compssUsers* files,
+	where <intern_group> is a symbolic name used in media/media_info/compssUsers* files,
 	and <level> defines importance level as described below :
 		5	must have
 		4	important
@@ -98,28 +98,28 @@ Mandrake/base/rpmsrate
 	and 5 (must have). export mode add 3 (very nice) level. other level (below 2)
 	can only be selected using individual package selection.
 
-Mandrake/mdkinst
+install/stage2/live
 	live system used on certain installs. See ``Ramdisk or not'' below for
 	more.
 
-Mandrake/base/mdkinst_stage2.bz2
+install/stage2/mdkinst_stage2.bz2
 	for the ramdisk. live sytem in ext2 filesystem bzipped2.
-	generated from Mandrake/mdkinst tree using misc/make_mdkinst_stage2
+	generated from install/stage2/live tree using misc/make_mdkinst_stage2
 	See ``Ramdisk or not'' below for more.
 
-Mandrake/base/rescue_stage2.bz2
+install/stage2/rescue_stage2.bz2
 	rescue ramdisk. live sytem in ext2 filesystem bzipped2.
 	this is the ramdisk loaded when typing rescue on boot prompt.
 	there is no live system available, only the ramdisk is used.
 
-images/*.img
+install/images/*.img
 	floppy boot images to use with DrakX. Use:
 	- cdrom.img for cdrom install
 	- network.img + network_drivers.img for ftp/nfs install (non-pcmcia devices)
 	- hd_grub.img for hard-disk install (see http://qa.mandrakesoft.com/hd_grub.cgi)
 	- pcmcia.img for pcmcia install (see ``PCMCIA install'' below for more)
 
-images/boot.iso
+install/images/boot.iso
 	iso image to burn enabling any install (cdrom/hd/nfs/ftp)
 
 ********************************************************************************
@@ -183,7 +183,7 @@ used is getting big, and costs a lot in memory
 | nfs   | live    | live
 | ftp   | ramdisk | ramdisk
 | http  | ramdisk | ramdisk
-| hd    | ramdisk | live if Mandrake/mdkinst/usr/bin/runinstall2 is a link,
+| hd    | ramdisk | live if install/stage2/live/usr/bin/runinstall2 is a link,
 |       |         |   ramdisk otherwise
 | cdrom | ramdisk | live if memory < 52MB, ramdisk otherwise
 
@@ -193,7 +193,7 @@ a failure dialog will be printed explaining that there is not enough memory
 to perform the installation.
 
 When i say live, it means that the stage1 will *mount* the
-Mandrake/mdkinst and use it that way.
+install/stage2/live and use it that way.
 
 The ramdisk is used in place of the live in some cases. This ramdisk is filled
 with mdkinst_stage2.gz
@@ -267,7 +267,7 @@ providing this file:
 - from a floppy disk; use "kickstart=floppy" as kernel parameter,
   as explained in the document
 - from the installation volume itself; put the file in the
-  "Mandrake/base" directory of the installation volume; use
+  "install" directory of the installation volume; use
   "kickstart" only, or "kickstart=filename" to specify another
   filename than auto_inst.cfg
 - specified by the network; setup your DHCP server to provide the

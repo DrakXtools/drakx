@@ -2,7 +2,7 @@
 
 [ $# != 2 ] && { 
     echo "usage: make_mdkinst_stage2 <live dir> <output image>" ; 
-    echo "  example: misc/make_mdkinst_stage2 Mandrake/mdkinst Mandrake/base/mdkinst_stage2"
+    echo "  example: misc/make_mdkinst_stage2 install/stage2/live install/stage2/mdkinst_stage2"
     exit
 }
 
@@ -17,8 +17,8 @@ STAGE2=$2
 testandset() { [ -x $1/packdrake ] && BUILD_ARCHIVE=$1/packdrake; }
 testandset `pwd`/misc
 testandset `pwd`/.
-testandset /$DEST/../../misc
-testandset `pwd`/$DEST/../../misc
+testandset /$DEST/../../../misc
+testandset `pwd`/$DEST/../../../misc
 [ -z "$BUILD_ARCHIVE" ] && { echo "can't find packdrake"; exit 1; }
 
 if [ $EUID != "0" ]; then

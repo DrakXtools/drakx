@@ -27,8 +27,8 @@
 
 #define RAMDISK_COMPRESSION_RATIO 1.95
 
-#define LIVE_LOCATION    "/Mandrake/mdkinst/"
-#define RAMDISK_LOCATION "/Mandrake/base/"
+#define LIVE_LOCATION    "/install/stage2/live/"
+#define RAMDISK_LOCATION "/install/stage2/"
 #define SLASH_LOCATION   "/sysroot"
 #define STAGE2_LOCATION  SLASH_LOCATION "/tmp/stage2"
 

@@ -212,7 +212,7 @@ sub getFile {
     } || errorOpeningFile($f);
 }
 sub getAndSaveFile {
-    my ($file, $local) = @_ == 1 ? ("Mandrake/mdkinst$_[0]", $_[0]) : @_;
+    my ($file, $local) = @_ == 1 ? ("install/stage2/live$_[0]", $_[0]) : @_;
     local $/ = \ (16 * 1024);
     my $f = ref($file) ? $file : getFile($file) or return;
     open(my $F, ">$local") or log::l("getAndSaveFile(opening $local): $!"), return;
@@ -390,10 +390,10 @@ sub setPackages {
 			$o->{packages},
 			"hdlist$medium.cz",
 			$medium,
-			'Mandrake/RPMS',
+			'media/main',
 			"Supplementary CD $medium",
 			1, # selected
-			"/mnt/cdrom/Mandrake/base/hdlist$medium.cz",
+			"/mnt/cdrom/media/main/media_info/hdlist$medium.cz",
 		    );
 		    if ($supplmedium) {
 			log::l("read suppl hdlist");
@@ -426,11 +426,11 @@ sub setPackages {
 	#- if there is a supplementary CD, override the rpmsrate/compssUsers
 	pkgs::read_rpmsrate(
 	    $o->{packages},
-	    getFile($suppl_CDs ? "/mnt/cdrom/Mandrake/base/rpmsrate" : "Mandrake/base/rpmsrate")
+	    getFile($suppl_CDs ? "/mnt/cdrom/media/media_info/rpmsrate" : "media/media_info/rpmsrate")
 	);
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers(
 	    $o->{meta_class},
-	    $suppl_CDs ? "/mnt/cdrom/Mandrake/base/compssUsers" : "",
+	    $suppl_CDs ? "/mnt/cdrom/media/media_info/compssUsers" : "",
 	);
 
 	#- preselect default_packages and compssUsersChoices.
@@ -674,7 +674,7 @@ sub install_urpmi {
 					   http => $ENV{URLPREFIX},
 					   cdrom => "removable://mnt/cdrom" }}{$method} ||
 		       #- for live_update or live_install script.
-		       readlink("/tmp/image/Mandrake") =~ m,^(/.*)/Mandrake/*$, && "removable:/$1") . "/$_->{rpmsdir}";
+		       readlink("/tmp/image/media") =~ m,^(/.*)/media/*$, && "removable:/$1") . "/$_->{rpmsdir}";
 	    #- use list file only if visible password or macro.
 	    my $need_list = $dir =~ m,^(?:[^:]*://[^/:\@]*:[^/:\@]+\@|.*%{),; #- }
 
@@ -720,7 +720,7 @@ sub install_urpmi {
 	    my ($qname, $qdir) = ($name, $dir);
 	    $qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
-	    #- compute correctly reference to Mandrake/base
+	    #- compute correctly reference to media/media_info
 	    my $with;
 	    if ($_->{update}) {
 		#- an update medium always use "../base/hdlist.cz";
@@ -729,7 +729,7 @@ sub install_urpmi {
 		$with = $_->{rpmsdir};
 		$with =~ s|/[^/]*%{ARCH}.*||;
 		$with =~ s|/+|/|g; $with =~ s|/$||; $with =~ s|[^/]||g; $with =~ s!/!../!g;
-		$with .= "../Mandrake/base/$_->{hdlist}";
+		$with .= "../media/media_info/$_->{hdlist}";
 	    }
 
 	    #- output new urpmi.cfg format here.
@@ -862,9 +862,9 @@ sub getAndSaveInstallFloppies {
 	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
 
 	if ($have_drivers) {
-	    getAndSaveFile("images/${image}_drivers.img", "$dest_dir/${name}_drivers.img") or log::l("failed to write Install Floppy (${image}_drivers.img) to $dest_dir/${name}_drivers.img"), return;
+	    getAndSaveFile("install/images/${image}_drivers.img", "$dest_dir/${name}_drivers.img") or log::l("failed to write Install Floppy (${image}_drivers.img) to $dest_dir/${name}_drivers.img"), return;
 	}
-	getAndSaveFile("images/$image.img", "$dest_dir/$name.img") or log::l("failed to write Install Floppy ($image.img) to $dest_dir/$name.img"), return;
+	getAndSaveFile("install/images/$image.img", "$dest_dir/$name.img") or log::l("failed to write Install Floppy ($image.img) to $dest_dir/$name.img"), return;
 
 	"$dest_dir/$name.img", if_($have_drivers, "$dest_dir/${name}_drivers.img");
     }
@@ -1162,7 +1162,7 @@ sub copy_advertising {
     return if $::rootwidth < 800;
 
     my $f;
-    my $source_dir = "Mandrake/share/advertising";
+    my $source_dir = "install/extra/advertising";
     foreach ("." . $o->{locale}{lang}, "." . substr($o->{locale}{lang},0,2), '') {
 	$f = getFile("$source_dir$_/list") or next;
 	$source_dir = "$source_dir$_";

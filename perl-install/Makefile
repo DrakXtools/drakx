@@ -3,6 +3,7 @@ PKGVERSION:=$(shell rpm -q --qf '%{VERSION}\n' --specfile $(PACKAGE).spec|head -
 RELEASE:=$(shell rpm -q --qf '%{RELEASE}\n' --specfile $(PACKAGE).spec|head -n 1)
 TAG := $(shell echo "V$(PKGVERSION)_$(RELEASE)" | tr -- '-.' '__')
 
+include ../Makefile.config
 include Makefile.config
 
 POFILES   = $(shell ls share/po/*.po)
@@ -108,7 +109,7 @@ get_needed_files: $(DIRS) mo_files
 	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
 	install -d $(DEST)/usr/X11R6/lib/X11
-	install -d $(ROOTDEST)/Mandrake/base
+	install -d $(MEDIA_INFO_DEST)
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 #	cp -f $(LOCALFILES2) $(DEST)/usr/bin
 	ln -s ../X11R6/lib/X11 $(DEST)/usr/lib/X11
@@ -171,9 +172,9 @@ endif
 	-cd share ; cp -f *.png $(DEST)/usr/share
 	-cd pixmaps ; cp -af *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cp `perl -I. -Mlang -e 'lang::png_lang_files()'` $(DEST)/usr/share/langs
-	cd share ; cp compssUsers compssUsers.* rpmsrate $(ROOTDEST)/Mandrake/base
+	cd share ; cp compssUsers compssUsers.* rpmsrate $(MEDIA_INFO_DEST)
 
-	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS*
+	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 
 	for i in ../kernel/modules.description ../kernel/all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
@@ -194,7 +195,7 @@ endif
 
 full_stage2:
 	$(MAKE) stage2
-	$(ROOTDEST)/misc/make_mdkinst_stage2 $(DEST) $(ROOTDEST)/Mandrake/base/mdkinst_stage2
+	$(MISC_DEST)/make_mdkinst_stage2 $(DEST) $(STAGE2_DEST)/mdkinst_stage2
 
 stage2:
 	if [ `id -u` = 0 ]; then rm -rf $(DEST); else $(SUDO) rm -rf $(DEST); fi

@@ -669,7 +669,7 @@ static int mirrorlist_entry_split(const char *entry, char *mirror[4]) /* mirror 
 	mirror[2] = strndup(entry, host_sep - entry);
 	entry = host_sep;
 
-	path_sep = strstr(entry, "/Mandrake/RPMS");
+	path_sep = strstr(entry, "/media/main");
 	if (!path_sep || path_sep == entry) {
 		log_message("NETWORK: this path isn't valid : \"%s\"", entry);
 		return -1;

@@ -1,8 +1,7 @@
-ROOTDEST    = /export
-DEST        = $(ROOTDEST)/Mandrake/mdkinst
-RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
+include ../Makefile.config
+
+RPMS        = $(wildcard $(MAIN_RPMS_DIR)/*.rpm)
 DIRS	    = ddcprobe serial_probe
-BASE        = $(ROOTDEST)/Mandrake/base
 CFLAGS      = -Wall
 
 ARCH := $(shell arch | egrep "(x86_64|sparc64|s390x)")
@@ -20,14 +19,14 @@ $(DIRS):
 	make -C $@
 
 install:
-	@install -d $(ROOTDEST)/misc/auto
-	@install make_mdkinst_stage2 $(ROOTDEST)/misc
-	@cp -rf `perl -Mpackdrake -le 'print $$INC{"packdrake.pm"}'` $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`URPM* $(ROOTDEST)/misc || { echo "install perl-URPM first!" ; exit 1; }
-	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`auto/URPM $(ROOTDEST)/misc/auto || { echo "install perl-URPM first!" ; exit 1; }
-	@cd /usr/bin ; install packdrake $(ROOTDEST)/misc || { echo "packdrake is missing"; exit 1; }
-	@cd /usr/bin ; install gendistrib rpm2header $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	@mkdir -p $(DEST)/usr/bin
+	@install -d $(MISC_DEST)/auto
+	@install make_mdkinst_stage2 $(MISC_DEST)
+	cp -rf `perl -Mpackdrake -le 'print $$INC{"packdrake.pm"}'` $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
+	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`URPM* $(MISC_DEST) || { echo "install perl-URPM first!" ; exit 1; }
+	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`auto/URPM $(MISC_DEST)/auto || { echo "install perl-URPM first!" ; exit 1; }
+	@cd /usr/bin ; install packdrake $(MISC_DEST) || { echo "packdrake is missing"; exit 1; }
+	@cd /usr/bin ; install gendistrib rpm2header $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
+	@mkdir -p $(STAGE2_LIVE)/usr/bin
 
 xhost+: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@

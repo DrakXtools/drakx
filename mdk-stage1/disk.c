@@ -360,9 +360,9 @@ process_recovery(void)
                                         goto examine_next_part;
                                 }
                                 strcpy(location, disk_own_mount);
-                                strcat(location, "/Mandrake/base");
+                                strcat(location, "/install/stage2");
                                 if (access(location, R_OK)) {
-                                        log_message("Mandrake/base is not here");
+                                        log_message("install/stage2 is not here");
                                         goto examine_next_part;
                                 }
 

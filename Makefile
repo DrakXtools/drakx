@@ -1,10 +1,6 @@
-ROOTDEST = /export
+include Makefile.config
 
 DIRS = tools kernel mdk-stage1 perl-install rescue
-
-
-ARCH := $(patsubst i%86,i386,$(shell uname -m))
-ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 .PHONY: dirs install
 
@@ -22,29 +18,29 @@ tar: clean
 	rm needed_rpms.lst
 
 install_only:
-	for i in images misc Mandrake Mandrake/base Mandrake/share; do install -d $(ROOTDEST)/$$i ; done
+	install -d $(MISC_DEST) $(EXTRA_INSTALL_DEST) $(IMAGES_DEST) $(MEDIA_INFO_DEST)
     ifneq (ppc,$(ARCH))
-	cp -f images/* $(ROOTDEST)/images
+	cp -f images/* $(IMAGES_DEST)
     endif
     ifeq (alpha,$(ARCH))
 	cp -f images/* $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
     endif
-	cd $(ROOTDEST)/images; rm -rf alternatives 
-	if [ `ls $(ROOTDEST)/images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
-	  cd $(ROOTDEST)/images; mkdir alternatives; cd alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
+	rm -rf $(IMAGES_DEST)/alternatives 
+	if [ `ls $(IMAGES_DEST)/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
+	  cd $(IMAGES_DEST); mkdir alternatives; cd alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
 	fi
-	cd $(ROOTDEST)/images; md5sum *.{img,iso}* > MD5SUM
+	cd $(IMAGES_DEST); md5sum *.{img,iso}* > MD5SUM
 
     ifeq (i386,$(ARCH))
-	rm -rf $(ROOTDEST)/isolinux
-	cp -af isolinux $(ROOTDEST)
+	rm -rf $(GENERIC_INSTALL_DEST)/isolinux
+	cp -af isolinux $(GENERIC_INSTALL_DEST)
     endif
 
     ifeq (x86_64,$(ARCH))
-	rm -rf $(ROOTDEST)/isolinux
-	cp -af isolinux $(ROOTDEST)
+	rm -rf $(GENERIC_INSTALL_DEST)/isolinux
+	cp -af isolinux $(GENERIC_INSTALL_DEST)
     endif
 
 	make -C perl-install full_stage2
@@ -57,7 +53,7 @@ clean:
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
 check:
-	@badrights=`find $(ROOTDEST)/Mandrake/mdkinst | perl -lne 'print if !((stat)[2] & 4)'`; [ -z "$$badrights" ] || { echo "bad rights for files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$badrights" ; echo "bad rights for files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
+	@badrights=`find $(STAGE2_LIVE) | perl -lne 'print if !((stat)[2] & 4)'`; [ -z "$$badrights" ] || { echo "bad rights for files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$badrights" ; echo "bad rights for files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 	@missing_kb=`find -name "Entries" | xargs perl -F/ -alne 'print $$ARGV =~ m|(.*)/CVS|, "/$$F[1]" if $$F[1] =~ /\.(png|gif|bmp|xcf|gz|bz2|tar|rdz|so|a|o|mar|img|exe)$$/ && $$F[4] ne "-kb"'` ; [ -z "$$missing_kb" ] || { echo "missing -kb in CVS for files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing_kb" ; echo "missing -kb in CVS for files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 
 upload: 
@@ -71,20 +67,20 @@ upload:
 	$(MAKE) upload_only
 
 upload_only:
-	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@ken:/c/cooker/$$1; } ;\
-	upload Mandrake/mdkinst '' ;\
-	upload Mandrake/base 'compssUsers*' ;\
-	upload Mandrake/base rpmsrate ;\
-	upload Mandrake/base '*_stage2.bz2' ;\
-	upload Mandrake/share/advertising '' ;\
-	upload misc gendistrib ;\
-	upload misc make_mdkinst_stage2 ;\
-	upload misc packdrake ;\
-	upload misc packdrake.pm ;\
-	upload misc auto ;\
-	upload images MD5SUM ;\
-	upload images '*.img*' ;\
-	upload images '*.iso*' ;\
-	upload images/alternatives '' ;\
-	upload isolinux '' ;\
+	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $$1/$$2 mandrake@ken:/c/cooker/$$1; } ;\
+	upload $(STAGE2_LIVE) '' ;\
+	upload $(MEDIA_INFO_DEST) 'compssUsers*' ;\
+	upload $(MEDIA_INFO_DEST) rpmsrate ;\
+	upload $(GENERIC_INSTALL_DEST) '*_stage2.bz2' ;\
+	upload $(EXTRA_INSTALL_DEST)/advertising '' ;\
+	upload $(MISC_DEST) gendistrib ;\
+	upload $(MISC_DEST) make_mdkinst_stage2 ;\
+	upload $(MISC_DEST) packdrake ;\
+	upload $(MISC_DEST) packdrake.pm ;\
+	upload $(MISC_DEST) auto ;\
+	upload $(IMAGES_DEST) MD5SUM ;\
+	upload $(IMAGES_DEST) '*.img*' ;\
+	upload $(IMAGES_DEST) '*.iso*' ;\
+	upload $(IMAGES_DEST)/alternatives '' ;\
+	upload $(GENERIC_INSTALL_DEST)/isolinux '' ;\
 	echo

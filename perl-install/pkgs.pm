@@ -361,25 +361,25 @@ sub psUpdateHdlistsDeps {
 	my $hdlistf = "$urpmidir/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	my $synthesisf = "$urpmidir/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	if (-s $hdlistf != $_->{hdlist_size}) {
-	    install_any::getAndSaveFile("Mandrake/base/$_->{hdlist}", $hdlistf) or die "no $_->{hdlist} found";
+	    install_any::getAndSaveFile("media/media_info/$_->{hdlist}", $hdlistf) or die "no $_->{hdlist} found";
 	    symlinkf $hdlistf, "/tmp/$_->{hdlist}";
 	    ++$need_copy;
 	}
 	if (-s $synthesisf != $_->{synthesis_hdlist_size}) {
-	    install_any::getAndSaveFile("Mandrake/base/synthesis.$_->{hdlist}", $synthesisf);
+	    install_any::getAndSaveFile("media/media_info/synthesis.$_->{hdlist}", $synthesisf);
 	    -s $synthesisf > 0 or unlink $synthesisf;
 	}
     }
 
     if ($need_copy) {
 	#- this is necessary for urpmi.
-	install_any::getAndSaveFile("Mandrake/base/$_", "$urpmidir/$_") foreach qw(rpmsrate);
+	install_any::getAndSaveFile("media/media_info/$_", "$urpmidir/$_") foreach qw(rpmsrate);
     }
 }
 
 sub psUsingHdlists {
     my ($prefix, $method) = @_;
-    my $listf = install_any::getFile('Mandrake/base/hdlists') or die "no hdlists found";
+    my $listf = install_any::getFile('media/media_info/hdlists') or die "no hdlists found";
     my $packages = new URPM;
     my $suppl_CDs = 0;
 
@@ -434,7 +434,7 @@ sub psUsingHdlist {
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$urpmidir/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
-    install_any::getAndSaveFile($o_fhdlist || "Mandrake/base/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
+    install_any::getAndSaveFile($o_fhdlist || "media/media_info/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
     $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
 
@@ -442,7 +442,7 @@ sub psUsingHdlist {
     my $newsf = "$urpmidir/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     unless ($o_fhdlist) {
 	#- copy existing synthesis file too.
-	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
+	install_any::getAndSaveFile("media/media_info/synthesis.$hdlist", $newsf);
 	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
 	-s $newsf > 0 or unlink $newsf;
     }
@@ -452,7 +452,7 @@ sub psUsingHdlist {
     if (!$o_fhdlist || $o_pubkey) {
 	$m->{pubkey} = $o_pubkey;
 	unless ($m->{pubkey}) {
-	    my $pubkey = install_any::getFile("Mandrake/base/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
+	    my $pubkey = install_any::getFile("media/media_info/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
 	    $m->{pubkey} = [ $packages->parse_armored_file($pubkey) ];
 	}
     }
@@ -579,7 +579,7 @@ sub read_rpmsrate {
 sub readCompssUsers {
     my ($meta_class, $file) = @_;
 
-    $file ||= 'Mandrake/base/compssUsers';
+    $file ||= 'media/media_info/compssUsers';
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
     readCompssUsers_raw($f);
 }
