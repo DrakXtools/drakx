@@ -881,6 +881,7 @@ Section "Monitor"
    VertRefresh 50-70
    Modeline "640x480"     25.175 640  664  760  800   480  491  493  525
    Modeline "640x480"     28.3   640  664  760  800   480  491  493  525
+   ModeLine "800x600"     36     800  824  896 1024   600  601  603  625
 EndSection
 
 
@@ -891,15 +892,10 @@ Section "Device"
    Chipset "generic"
 EndSection
 
-
-Section "Screen"
-    Driver "svga"
-    Device      "Generic VGA"
-    Monitor     "My Monitor"
-    Subsection "Display"
-        Modes       "640x480"
-        ViewPort    0 0
-    EndSubsection
+Section "Device"
+   Identifier "svga"
+   VendorName "Unknown"
+   BoardName "Unknown"
 EndSection
 
 Section "Screen"
@@ -913,23 +909,34 @@ Section "Screen"
 EndSection
 
 Section "Screen"
-    Driver      "accel"
-    Device      "Generic VGA"
-    Monitor     "My Monitor"
-    Subsection "Display"
-        Depth       16
-        Modes       "640x480"
-        ViewPort    0 0
-    EndSubsection
-EndSection
-
-Section "Screen"
     Driver      "fbdev"
     Device      "Generic VGA"
     Monitor     "My Monitor"
     Subsection "Display"
         Depth       16
         Modes       "default"
+        ViewPort    0 0
+    EndSubsection
+EndSection
+
+Section "Screen"
+    Driver "svga"
+    Device      "svga"
+    Monitor     "My Monitor"
+    Subsection "Display"
+        Depth       16
+        Modes       "800x600" "640x480"
+        ViewPort    0 0
+    EndSubsection
+EndSection
+
+Section "Screen"
+    Driver      "accel"
+    Device      "svga"
+    Monitor     "My Monitor"
+    Subsection "Display"
+        Depth       16
+        Modes       "800x600" "640x480"
         ViewPort    0 0
     EndSubsection
 EndSection

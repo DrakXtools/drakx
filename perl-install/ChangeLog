@@ -1,5 +1,9 @@
 2000-02-28  Pixel  <pixel@mandrakesoft.com>
 
+	* install_steps_gtk.pm (createXconf): do not use "Generic VGA" for
+	svga and accel. SVGA also wants 16 bpp. added ugly modeline for
+	800x600.	
+
 	* partition_table_raw.pm (get_geometry): when the
 	HDIO_GET_IDENTITY fails, defaults to what GETGEO gave
 
