@@ -605,8 +605,7 @@ sub setRootPassword($) {
     $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 ? () : _("No password")],
 			 [ _("Set root password"), 
 			   $::beginner ? "\n" .
-_("(a user ``mandrake'' with password ``mandrake'' has been automatically added.
-Do not use the user ``root'', except in special occasions.") : ()
+_("(an user ``mandrake'' with password ``mandrake'' has been automatically added)") : ()
 			 ], [
 _("Password") => { val => \$sup->{password},  hidden => 1 },
 _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
@@ -691,6 +690,9 @@ sub addUser($) {
 #------------------------------------------------------------------------------
 sub createBootdisk {
     my ($o, $first_time) = @_;
+
+    return if $first_time && $::beginner;
+
     my @l = detect_devices::floppies();
     my %l = (
 	     'fd0'  => __("First floppy drive"),
