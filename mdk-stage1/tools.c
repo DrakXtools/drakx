@@ -446,6 +446,40 @@ int kernel_version(void)
         return charstar_to_int(val.release + 2);
 }
 
+int try_mount(char * dev, char * location)
+{
+	char device_fullname[50];
+	strcpy(device_fullname, "/dev/");
+	strcat(device_fullname, dev);
+
+	if (my_mount(device_fullname, location, "ext2", 0) == -1 &&
+	    my_mount(device_fullname, location, "vfat", 0) == -1 &&
+	    my_mount(device_fullname, location, "ntfs", 0) == -1 &&
+	    my_mount(device_fullname, location, "reiserfs", 0) == -1) {
+                return 1;
+        }
+
+        return 0;
+}
+
+int get_disks(char *** names, char *** models)
+{
+	char ** ptr;
+	int count = 0;
+
+	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
+	
+	get_medias(DISK, names, models, BUS_ANY);
+
+	ptr = *names;
+	while (ptr && *ptr) {
+		count++;
+		ptr++;
+	}
+
+        return count;
+}
+
 char * floppy_device(void)
 {
         char ** names, ** models;

@@ -48,6 +48,8 @@ void add_to_env(char * name, char * value);
 char ** list_directory(char * direct);
 int string_array_length(char ** a);
 int kernel_version(void);
+int try_mount(char * dev, char * location);
+int get_disks(char *** names, char *** models);
 char * floppy_device(void);
 char * asprintf_(const char *msg, ...);
 int scall_(int retval, char * msg, char * file, int line);
