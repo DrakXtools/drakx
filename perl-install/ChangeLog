@@ -1,4 +1,13 @@
-2000-07-20  dam's  <damien@mandrakesoft.com>
+2000-07-27  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: changed expert message to ask
+	using XFree 3.3 instead of XFree 4.0 used by default (server).
+	* Xconfigurator.pm: make sure only one server is installed,
+	default to XFree 4.0 if supported unless XFree 3.3 accept
+	3D acceleration and not XFree 4.0, ask user in such case.
+	* pci_probing/pcitable: added Intel 815 pci ids.
+
+2000-07-26  dam's  <damien@mandrakesoft.com>
 
 	* install_steps_gtk.pm: applied new LN stars, logo title and help
 	logo. improved steps appearences.

@@ -175,14 +175,35 @@ sub cardConfiguration(;$$$) {
     add2hash($card, cardName2card($card->{type})) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    $::xf4 = $card->{driver} && !$card->{flags}{unsupported};
-    $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 && $card->{driver} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
+    #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
+    $card->{Utah_glx} = ($card->{identifier} =~ /MGA G[24]00/ ||
+			 $card->{type} =~ /ATI Mach64/ ||
+			 $card->{type} =~ /RIVA TNT/ ||
+			 $card->{type} =~ /SiS / ||
+			 $card->{type} =~ /S3 ViRGE/ ||
+			 $card->{type} =~ /Intel 810/);
+    #- 3D acceleration configuration for XFree 4.0 using DRI.
+    $card->{DRI_glx} = ($card->{type} =~ /Voodoo3 / || $card->{type} =~ /Voodoo Banshee / ||
+			$card->{identified} =~ /MGA G[24]00/ ||
+			$card->{type} =~ /Intel 810/ ||
+			$card->{type} =~ /ATI Rage 128/);
+
+    #- try to figure if 3D acceleration is supported
+    #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
+    if ($card->{driver} && $card->{Utah_glx} && !$card->{DRI_glx}) {
+	$::beginner || $in->ask_yesorno('',
+					_("Your card can have 3D acceleration but only with XFree 3.3.
+Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '';
+    }
+
+    !$::force_xf3 && $card->{driver} && !$card->{flags}{unsupported} or $card->{driver} = ''; #- disable XFree 4.0
+    $card->{prog} = "/usr/X11R6/bin/" . ($card->{driver} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
 					 "Xsun$1" : "XF86_$card->{server}");
 
     -x "$prefix$card->{prog}" or $install && do {
 	$in->suspend;
-	&$install($card->{server});
-	&$install('server') if $::xf4 && $card->{driver};
+	&$install($card->{server}, $card->{Utah_glx} ? 'Mesa' : ()) if !$card->{driver};
+	&$install('server') if $card->{driver}; #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
 	$in->resume;
     };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
@@ -199,21 +220,14 @@ sub cardConfiguration(;$$$) {
 					 [ sort { $videomemory{$a} <=> $videomemory{$b} }
 					   keys %videomemory])};
 
-    #- 3D acceleration configuration for X version 3 using Utah-GLX.
-    $card->{Utah_glx} = (-x "$prefix/usr/X11R6/lib/modules/glx-3.so" &&
-			 ($card->{identifier} =~ /MGA G[24]00/ ||
-			  $card->{type} =~ /ATI Mach64/ ||
-			  $card->{type} =~ /RIVA TNT/ ||
-			  $card->{type} =~ /SiS / ||
-			  $card->{type} =~ /S3 ViRGE/ ||
-			  $card->{type} =~ /Intel 810/));
+
     #- hack for ATI Mach64 card where two options should be used if using Utah-GLX.
     if ($card->{type} =~ /ATI Mach64/) {
 	$card->{options}{no_font_cache} = $card->{Utah_glx};
 	$card->{options}{no_pixmap_cache} = $card->{Utah_glx};
     }
 
-    #- 3D acceleration configuration for X version 4 using DRI, this is enabled by default
+    #- 3D acceleration configuration for XFree 4.0 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
     ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 32768) if $card->{identifier} =~ /MGA G[24]00/;
     ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 10000) if $card->{type} =~ /Intel 810/;
@@ -280,7 +294,7 @@ sub testConfig($) {
     unlink "/tmp/.X9-lock";
     #- restart_xfs;
 
-    my $f = $tmpconfig . ($::xf4 && $o->{card}{driver} && "-4");
+    my $f = $tmpconfig . ($o->{card}{driver} && "-4");
     local *F;
     open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $f 2>&1 |";
     foreach (<F>) {
@@ -317,7 +331,7 @@ sub testFinalConfig($;$$) {
     #- needed for bad cards not restoring cleanly framebuffer
     my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
     $bad_card ||= $o->{card}{identifier} eq "ATI|3D Rage P/M Mobility AGP 2x";
-    $bad_card ||= $::xf4;
+    $bad_card ||= $o->{card}{driver}; #- TODO obsoleted to check, when using fbdev of XFree 4.0!
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $mesg = _("Do you want to test the configuration?");
@@ -347,7 +361,7 @@ sub testFinalConfig($;$$) {
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
-	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && $o->{card}{driver} && "-4")) : ()),
+	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($o->{card}{driver} && "-4")) : ()),
 	  ":9" or c::_exit(0);
     }
 
