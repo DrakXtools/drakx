@@ -967,7 +967,8 @@ sub getHds {
     my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
-	$win[0]{mntpoint} = "/mnt/windows";
+	#- Suggest /boot/efi on ia64.
+	$win[0]{mntpoint} = arch() =~ /ia64/ ? "/boot/efi" : "/mnt/windows";
     } else {
 	my %w; foreach (@win) {
 	    my $v = $w{$_->{device_windobe}}++;
