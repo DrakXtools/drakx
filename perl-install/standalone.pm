@@ -140,8 +140,8 @@ foreach (@ARGV) {
 
 
 sub version {
-    print STDERR 'Drakxtools version 9.1.0
-Copyright (C) 1999-2002 MandrakeSoft by <install@mandrakesoft.com>
+    print STDERR 'Drakxtools version 9.3.0
+Copyright (C) 1999-2003 MandrakeSoft by <install@mandrakesoft.com>
 ',  $::license, "\n";
 }
 
