@@ -115,7 +115,7 @@ upload:
 	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
 
 	$(MAKE) install
-#	$(MAKE) check
+	$(MAKE) check
 	$(MAKE) upload_only
 
 upload_only:
