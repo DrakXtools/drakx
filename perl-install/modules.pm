@@ -63,6 +63,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "hp-plus" => "HP PCLAN/plus",
   "hp100" => "HP10/100VG any LAN ",
   "ibmtr" => "Token Ring Tropic",
+  "kaweth" => "kaweth",
 # requires scsi_mod???  "iph5526" => "iph5526",
   "lance" => "Lance",
   "natsemi" => "National Semiconductor 10/100",
@@ -74,6 +75,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "old_tulip" => "Digital 21040/21041/21140 (old Tulip driver)",
   "olympic" => "olympic",
   "pcnet32" => "AMD PC/Net 32",
+  "pegasus" => "pegasus", 
   "plip" => "PLIP (parallel port)",
   "rcpci" => "Red Creek Hardware VPN",
   "rrunner" => "Roadrunner serial HIPPI", # mostly unused
@@ -112,6 +114,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "parport_pc" => "parport_pc",
   "sunrpc" => "sunrpc",
   "pci-scan" => "pci-scan",
+  "usbcore" => "usbcore",
 }],
 [ 'isdn', {
    "hisax" => "hisax",
@@ -120,8 +123,25 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
    "t1pci" => "t1pci",
    "c4" => "c4",
 }],
-[ 'media', {
+[ 'tv', {
+ "cpia_usb" => '',
+ "ibmcam" => '',
+ "mod_quickcam" => '',
+ "ov511" => '',
+ "bttv" => "Brooktree Corporation|Bt8xx Video Capture",
+}],
+[ 'scanner', {
+ "scanner" => '',
+ "microtek" => '',
+}],
+[ 'photo', {
+ "dc2xx" => '',
+ "mdc800" => '',
+}],
+[ 'joystick', {
    "ns558" => "Creative Labs SB Live! joystick",
+}],
+[ 'radio', {
    "radio-maxiradio" => "radio-maxiradio",
 }],
 [ 'scsi', {
@@ -353,7 +373,6 @@ if_(arch() !~ /^sparc/,
 }],
 [ 'other', {
   "agpgart" => "agpgart",
-  "bttv" => "Brooktree Corporation|Bt8xx Video Capture",
   "buz" => "Zoran Corporation|ZR36057PQC Video cutting chipset",
   "defxx" => "DEC|DEFPA",
   "i810_rng" => "i810_rng",
@@ -379,6 +398,7 @@ qw(
 sk98lin acenic
 aironet4500_card com20020-pci hamachi starfire winbond-840
 
+kaweth
 dc395x_trm
 BusLogic seagate fdomain g_NCR5380 tmscsim
 )
