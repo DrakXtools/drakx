@@ -39,57 +39,6 @@ sub test_embedded {
     $::Plug->add($w->{window});
     $w->{window}->add($w->{rwindow});
 }
-sub ask_from_listW {
-    my ($o, $title, $messages, $l, $def, $help) = @_;
-    my $r;
-
-    my $w = my_gtk->new(first(deref($title)), %$o);
-    test_embedded($w);
-#gtkset_usize(createScrolledWindow($tree), 300, min(350, $::windowheight - 60)),
-    $w->{retval} = $def || $l->[0]; #- nearly especially for the X test case (see timeout in Xconfigurator.pm)
-    $w->{rwindow}->set_policy(0, 0, 1)  if $::isWizard;
-    if (@$l < 5 or $::isWizard) {
-	my $defW;
-	my $tips = new Gtk::Tooltips;
-	my $g = sub { $w->{retval} = $_[1]; };
-	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
-	my $b;
-	$w->sync;
-	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)) || die "pixmap $! not found.";
-	if ($::isWizard) {
-	    gtkset_usize($w->{rwindow}, 500, 400);
-	}
-	gtkadd($w->{window},
-	       gtkpack2_(create_box_with_title($w, @$messages),
-			 1,
-			 gtkpack3( $::isWizard,
-				   new Gtk::HBox(0,0),
-				   $::isWizard ? ($pixmap, gtkset_usize(new Gtk::VBox(0,0),30, 0)) : (),
-				   gtkpack2__( $::isWizard ? new Gtk::VBox(0,0): ( @$l < 3 && sum(map { length $_ } @$l) < 60 ? create_hbox() : create_vbox()),
-					      $::isWizard ? gtkset_usize(new Gtk::VBox(0,0), 0, 30) : (),
-						  map {
-						      $::isWizard ? $b = new Gtk::RadioButton($b ? ($_, $b) : $_) : ($b = new Gtk::Button($_));
-						      $tips->set_tip($b, $help->{$_}) if $help && $help->{$_};
-						      $_ eq $def and $defW = $b;
-						      $b->signal_connect(clicked => [ $::isWizard ? $g : $f, $_ ]);
-						      $b;
-						  } @$l, )),
-			 0, new Gtk::HSeparator,
-			 $::isWizard ? (0, $w->create_okcancel()) : (),
-			),
-	      );
-
-	$defW->grab_focus if $defW;
-	$r = $w->main;
-    } else {
-	#- use ask_from_list_with_help only when needed, as key bindings are
-	#- dropped by List (CList does not seems to accepts Tooltips).
-	$help ? $w->_ask_from_list_with_help($title, $messages, $l, $help, $def) :
-	  $w->_ask_from_list($title, $messages, $l, $def);
-	$r = $w->main;
-    }
-    $r or $::isWizard ? 0 : die "ask_from_list cancel";
-}
 
 sub ask_from_treelistW {
     my ($o, $title, $messages, $separator, $l, $def) = @_;
@@ -148,10 +97,10 @@ sub ask_from_treelistW {
     $tree->signal_connect(tree_select_row => sub { $curr = $_[1]; });
     $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
     $tree->signal_connect(key_press_event => sub {
-        my ($w, $e) = @_;
-	my $c = chr($e->{keyval} & 0xff);
+        my ($w, $event) = @_;
+	my $c = chr($event->{keyval} & 0xff);
 	$curr or return;
-	if ($e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
+	if ($event->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
 	    if ($curr->row->is_leaf) { &$leave }
 	    else { $tree->toggle_expansion($curr) }
 	}
@@ -171,49 +120,114 @@ sub ask_from_treelistW {
     $w->main or die "ask_from_list cancel";
 }
 
+sub create_clist {
+    my ($e, $may_go_to_next) = @_;
+    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
+    my (@widgets, $timeout, $curr);
+    my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
+
+    my $list = new Gtk::CList(1);
+    $list->set_selection_mode('browse');
+    $list->set_column_auto_resize(0, 1);
+
+    my $select = sub {
+	$list->set_focus_row($_[0]);
+	$list->select_row($_[0], 0);
+	$list->moveto($_[0], 0, 0.5, 0);
+    };
+    my $select_val = sub { 
+	eval { $select->(find_index { $_ eq ${$e->{val}} } @{$e->{list}}) };
+    };
+
+#    ref $title && !@okcancel ?
+#      $list->signal_connect(button_release_event => $leave) :
+#      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
+
+    $list->signal_connect(select_row => sub {
+	my ($w, $row) = @_;
+	${$e->{val}} = $e->{list}[$curr = $row];
+    });
+    $list->signal_connect(key_press_event => sub {
+        my ($w, $event) = @_;
+	my $c = chr($event->{keyval} & 0xff);
+
+	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+	
+	if ($event->{keyval} >= 0x100) {
+	    &$may_go_to_next if $c eq "\r" || $c eq "\x8d";
+	    $starting_word = '' if $event->{keyval} != 0xffe4; # control
+	} else {
+	    if ($event->{state} & 4) {
+		#- control pressed
+		$c eq "s" or return 1;
+		$start_reg and $start_reg = '', return 1;
+		$curr++;
+	    } else {
+		&$may_go_to_next if $c eq ' ';
+
+		$curr++ if $starting_word eq '' || $starting_word eq $c;
+		$starting_word .= $c unless $starting_word eq $c;
+	    }
+	    my $word = quotemeta $starting_word;
+	    my $j; for ($j = 0; $j < @l; $j++) {
+		 $l[($j + $curr) % @l] =~ /$start_reg$word/i and last;
+	    }
+	    $j == @l ?
+	      $starting_word = '' :
+	      $select->(($j + $curr) % @l);
+
+	    $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+	}
+	1;
+    });
+
+    $list->append($_) foreach @l;
+
+    &$select_val;
+    $list, $select_val;
+}
+
 sub create_list {
-    my ($e, $may_go_to_next_) = @_;
+    my ($e, $may_go_to_next) = @_;
+    my $l = $e->{list};
     my $list = new Gtk::List();
     $list->set_selection_mode('browse');
-    my ($curr);
-    my $l = $e->{list};
 
     my $select = sub {
 	$list->select_item($_[0]);
     };
+    my $select_val = sub { 
+	eval { $select->(find_index { $_ eq ${$e->{val}} } @$l) };
+    };
+
     my $tips = new Gtk::Tooltips;
     my $toselect;
-    my @widgets = map_index {
-	my $item = new Gtk::ListItem($_);
+    map_index {
+	my $item = new Gtk::ListItem(may_apply($e->{format}, $_));
 	$item->signal_connect(key_press_event => sub {
-    	    my ($w, $e) = @_;
-    	    my $c = chr($e->{keyval} & 0xff);
-	    $may_go_to_next_->($e) if $e->{keyval} < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
+    	    my ($w, $event) = @_;
+    	    my $c = chr($event->{keyval} & 0xff);
+	    $may_go_to_next->($event) if $event->{keyval} < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
     	    1;
     	});
 	$list->append_items($item);
+	$item->show;
 	if ($e->{help}) {
 	    $tips->set_tip($item,
 			   ref($e->{help}) eq 'HASH' ? $e->{help}{$_} :
 			   ref($e->{help}) eq 'CODE' ? $e->{help}($_) : $e->{help});
 	}
-	$item->show;
-	$toselect = $::i if ${$e->{val}} && $_ eq ${$e->{val}};
 	$item->grab_focus if ${$e->{val}} && $_ eq ${$e->{val}};
-	$item;
     } @$l;
 
-    &$select($toselect);
+    &$select_val;
 
-    #- signal_connect after append_items otherwise it is called and destroys the default value
+    #- signal_connect'ed after append_items otherwise it is called and destroys the default value
     $list->signal_connect(select_child => sub {
 	my ($w, $row) = @_;
 	${$e->{val}} = $l->[$list->child_position($row)];
     });
-
-    may_createScrolledWindow(@$l > 15, $list, 200, min(350, $::windowheight - 60)), 
-      $list,
-	sub { $list->select_item(find_index { $_ eq ${$e->{val}} } @$l) };
+    $list, $select_val;
 }
 
 sub ask_from_entries_refW {
@@ -240,9 +254,9 @@ sub ask_from_entries_refW {
 	my ($e, $ind) = @_;
 
 	my $may_go_to_next = sub {
-	    my ($w, $e) = @_;
-	    if (!$e || ($e->{keyval} & 0x7f) == 0xd) {
-		$w->signal_emit_stop("key_press_event") if $e;
+	    my ($w, $event) = @_;
+	    if (!$event || ($event->{keyval} & 0x7f) == 0xd) {
+		$w->signal_emit_stop("key_press_event") if $event;
 		if ($ind == $#widgets) {
 		    @widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
 		} else {
@@ -289,11 +303,12 @@ sub ask_from_entries_refW {
 	    $get = sub { $adj->get_value };
 	} elsif ($e->{type} eq "list") {
 	    #- use only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
-#	    if ($e->{help}) {
-		($real_w, $w, $set) = create_list($e, $may_go_to_next);
-#	     } else {
-#		 die;
-#	     }
+	    if ($e->{help}) {
+		($w, $set) = create_list($e, $may_go_to_next);
+	     } else {
+		($w, $set) = create_clist($e, $may_go_to_next);
+	     }
+	    $real_w = may_createScrolledWindow(@{$e->{list}} > 15, $w, 200, min(350, $::windowheight - 60)); 
 	} else {
 	    if ($e->{type} eq "combo") {
 		$w = new Gtk::Combo;
