@@ -75,19 +75,37 @@ sub remove_kernel() {
     unlink "/lib/modules/$kernel_version/build";
     remove_now_broken_boot_symlinks();
 
+    my %proposed_labels;
+    my @new_entries;
 
     my ($to_remove, $to_keep) = partition {
-	$_->{kernel_or_dev} && $_->{kernel_or_dev} eq $image;
+	if ($_->{kernel_or_dev} && $_->{kernel_or_dev} eq $image) {
+	    1;
+	} else {
+	    my $vmlinuz = $_->{kernel_or_dev} && bootloader::expand_vmlinuz_symlink($_->{kernel_or_dev});
+	    if ($vmlinuz && "/boot/$vmlinuz" eq $image) {
+		if (!%proposed_labels) {
+		    %proposed_labels = bootloader::get_kernels_and_labels_before_kernel_remove($vmlinuz); 
+		}
+		if (my $proposed = $proposed_labels{$_->{label}}) {
+		    my %to_add = %$_;
+		    put_in_hash(\%to_add, $proposed);
+		    push @new_entries, \%to_add;
+		}
+		1;
+	    } else {
+		0;
+	    }
+	}
     } @{$bootloader->{entries}};
 
     $_->{initrd} && unlink $_->{initrd} foreach @$to_remove;
 
-#    foreach (@$to_keep) {
-#	$_->{kernel_or_dev} && bootloader::expand_vmlinuz_symlink($_->{kernel_or_dev}) eq $image or next;
-#    }
-
     @{$bootloader->{entries}} = @$to_keep;
 
+    foreach (@new_entries) {
+	bootloader::add_kernel($bootloader, $_, {});
+    }
 
     modify_bootloader();
 }    
