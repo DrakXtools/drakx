@@ -12,7 +12,7 @@ my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|Hub|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/ && $_->{driver} ne '^(scanner|usbvision)$' && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|class\|Mouse/  && $_->{media_type} !~ /class\|Mouse/ && $_->{driver} !~ /www.linmodems.org/ } @devices;
+    grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/ && $_->{driver} !~ /^(scanner|usbvision)$|Mouse:USB|class\|Mouse|www.linmodems.org|nvnet/ && $_->{type} ne 'network' } @devices;
 }
 
 
@@ -41,12 +41,12 @@ our @tree =
          #- generic NIC detection for USB seems broken (class, subclass, 
          #- protocol report are not accurate) so I'll need to verify against
          #- known drivers :-(
-         my @usbnet = qw(CDCEther catc kaweth pegasus usbnet);
+         my @usbnet = qw(CDCEther catc kaweth nvnet pegasus usbnet); # rought hack for nforce2's nvet
          # should be taken from detect_devices.pm or modules.pm. it's identical
          
          grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} eq 'network' } @devices }, 1 ],
      [ "MODEM", "Modem", "modem.png", "", sub { detect_devices::getModem() }, 0 ],
-     [ "BRIDGE", "Bridge(s)", "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE/ } @devices }, 0 ],
+     [ "BRIDGE", "Bridges and system controllers", "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
      [ "UNKNOWN", "Unknown/Others", "unknown.png", "", \&unknown, 0 ],
 
      [ "PRINTER", "Printer", "hw_printer.png", "$sbindir/printerdrake", sub { 
