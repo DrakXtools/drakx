@@ -535,7 +535,7 @@ Take a look at http://www.linmodems.org"),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
                         [ { val => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
-                            list => [ grep { $_ ne $o_mouse->{device} } (mouse::serial_ports(), grep { -e $_ } '/dev/modem', '/dev/ttySL0') ] } ],
+                            list => [ grep { $_ ne $o_mouse->{device} } (mouse::serial_ports(), grep { -e $_ } '/dev/modem', '/dev/ttySL0', '/dev/ttyS14',) ] } ],
                         },
                     post => sub {
                         $ntf_name = $modem->{device};
