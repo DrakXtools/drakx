@@ -81,8 +81,7 @@ arch() =~ /alpha/ ? (
 #-INTERNAL CONSTANT
 #-#####################################################################################
 
-#- these strings are used in quite a lot of places and must not be changed!!!!!
-my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
+my @install_classes = qw(normal developer server);
 
 #-#####################################################################################
 #-Default value
@@ -327,13 +326,7 @@ Then choose action ``Mount point'' and set it to `/'");
 sub formatPartitions {
     unless ($o->{lnx4win} || $o->{isUpgrade}) {
 	$o->choosePartitionsToFormat($o->{fstab});
-
-	unless ($::testing) {
-	    $o->formatPartitions(@{$o->{fstab}});
-	    fs::mount_all([ grep { isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
-	    die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
-	    fs::mount_all([ grep { isExt2($_) } @{$o->{fstab}} ], $o->{prefix}, $o->{hd_dev});
-	}
+	$o->formatMountPartitions($o->{fstab}) unless $::testing;
 	eval { $o = $::o = install_any::loadO($o) } if $_[1] == 1;
 
     }
@@ -546,11 +539,16 @@ sub main {
 	symlinkf $root, "/tmp/rhimage" or die "unable to create link /tmp/rhimage";
     }
 
-    unlink "/sbin/insmod"  unless $::testing;
-    unlink "/modules/pcmcia_core.o" unless $::testing; #- always use module from archive.
-    unlink "/modules/i82365.o" unless $::testing;
-    unlink "/modules/tcic.o" unless $::testing;
-    unlink "/modules/ds.o" unless $::testing;
+    unless ($::testing) {
+	unlink $_ foreach (
+			   "/sbin/insmod", "/sbin/rmmod", "/sbin/install",
+			   "/modules/modules.cgz",
+			   "/modules/pcmcia_core.o", #- always use module from archive.
+			   "/modules/i82365.o",
+			   "/modules/tcic.o",
+			   "/modules/ds.o",
+			   );
+    }
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');

@@ -255,7 +255,7 @@ set_loop(dev_fd, file)
 
   if (file_fd < 0) return;
 
-  memset(&loopinfo, 0, sizeof (loopinfo));
+  memset(&loopinfo, 0, sizeof(loopinfo));
   strncpy(loopinfo.lo_name, file, LO_NAME_SIZE);
   loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
 
@@ -269,6 +269,22 @@ set_loop(dev_fd, file)
 }
   OUTPUT:
   RETVAL
+
+int
+del_loop(device)
+  char *device
+  CODE:
+  RETVAL = 0;
+{
+  int fd;
+  if ((fd = open(device, O_RDONLY)) < 0) return;
+  if (ioctl(fd, LOOP_CLR_FD, 0) < 0) return;
+  close(fd);
+  RETVAL = 1;
+}
+  OUTPUT:
+  RETVAL
+
 ';
 
 $ENV{C_RPM} and print '

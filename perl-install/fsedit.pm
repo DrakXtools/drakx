@@ -230,7 +230,7 @@ sub has_mntpoint($$) {
 #- do this before modifying $part->{mntpoint}
 #- $part->{mntpoint} should not be used here, use $mntpoint instead
 sub check_mntpoint {
-    my ($mntpoint, $hd, $part, $hds) = @_;
+    my ($mntpoint, $hd, $part, $hds, $loopbackDevice) = @_;
 
     $mntpoint eq '' || isSwap($part) || isRAID($part) and return;
 
@@ -238,7 +238,23 @@ sub check_mntpoint {
     m|^/| or die _("Mount points must begin with a leading /");
 #-    m|(.)/$| and die "The mount point $_ is illegal.\nMount points may not end with a /";
 
-    has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s", $mntpoint);
+    has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s\n", $mntpoint);
+
+    my $fake_part = { mntpoint => $mntpoint, device => $loopbackDevice };
+    $fake_part->{loopback_file} = 1 if $loopbackDevice;
+    my $fstab = [ get_fstab(@$hds), $fake_part ];
+    my $check; $check = sub {
+	my ($p, @seen) = @_;
+	push @seen, $p->{mntpoint} || return;
+	@seen > 1 && $p->{mntpoint} eq $mntpoint and die _("Circular mounts %s\n", join(", ", @seen));
+	if (my $part = fs::up_mount_point($p->{mntpoint}, $fstab)) {
+	    $check->($part, @seen);
+	}
+	if (isLoopback($p)) {
+	    $check->($p->{device}, @seen);
+	}
+    };
+    $check->($fake_part);
 
 #-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
@@ -267,12 +283,9 @@ sub allocatePartitions($$) {
 	    while (suggest_part($hd, 
 				$part = { start => $start, size => 0, maxsize => $size }, 
 				$hds, $to_add)) {
-		log::l("partsize " . ($part->{size}+ $part->{start}));
-		log::l("size " . ($size+ $start));
 		add($hd, $part, $hds);
 		$size -= $part->{size} + $part->{start} - $start;
 		$start = $part->{start} + $part->{size};
-		log::l("size " . ($size+ $start));
 	    }
 	}
     }

@@ -165,11 +165,9 @@ sub choosePartitionsToFormat($$) {
     }
 }
 
-sub formatPartitions {
-    my $o = shift;
-    foreach (@_) {
-	fs::format_part($o->{raid}, $_) if $_->{toFormat};
-    }
+sub formatMountPartitions {
+    my ($o) = @_;
+    fs::formatMount_all($o->{raid}, $o->{fstab}, $o->{prefix});
 }
 
 #------------------------------------------------------------------------------

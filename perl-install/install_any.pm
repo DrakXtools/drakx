@@ -178,6 +178,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "apmd" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
+	push @{$o->{default_packages}}, "alsa" if modules::get_alias("sound") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{packages});
 

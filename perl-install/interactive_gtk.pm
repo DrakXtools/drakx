@@ -297,14 +297,16 @@ sub wait_messageW($$$) {
 		   @$messages,
 		   $w->{wait_messageW} = new Gtk::Label($W)));
     $w->{rwindow}->set_position('center') if $::isStandalone;
-    $w->{wait_messageW}->signal_connect(expose_event => sub { $w->{displayed} = 1 });
+    $w->{wait_messageW}->signal_connect(expose_event => sub { print "expose_event\n"; $w->{displayed} = 1 });
     $w->sync until $w->{displayed};
     $w;
 }
 sub wait_message_nextW {
     my ($o, $messages, $w) = @_;
+    my $msg = join "\n", @$messages;
+    return if $msg eq $w->{wait_messageW}->get; #- needed otherwise no expose_event :(
     $w->{displayed} = 0;
-    $w->{wait_messageW}->set(join "\n", @$messages);
+    $w->{wait_messageW}->set($msg);
     $w->flush until $w->{displayed};
 }
 sub wait_message_endW {

@@ -24,17 +24,16 @@ sub loopbacks {
 }
 
 sub format_part {
-    my ($part) = @_;
-    my $prefix = $::isStandalone ? '' : $::o->{prefix};
+    my ($part, $prefix) = @_;
     fs::mount_part($part->{device}, $prefix);
-    my $f = create($part);
+    my $f = create($part, $prefix);
     local $part->{device} = $f;
     fs::real_format_part($part);
 }
 
 sub create {
-    my ($part) = @_;
-    my $f = "$part->{device}{mntpoint}$part->{loopback_file}";
+    my ($part, $prefix) = @_;
+    my $f = "$prefix$part->{device}{mntpoint}$part->{loopback_file}";
     return $f if -e $f;
 
     eval { commands::mkdir_("-p", dirname($f)) };

@@ -25,6 +25,7 @@ use mouse;
 use modules;
 use lang;
 use services;
+use loopback;
 use keyboard;
 use any;
 use fs;
@@ -223,15 +224,17 @@ sub choosePartitionsToFormat($$) {
 			       [ map { \$_->{toFormatCheck} } @l ]) or goto &choosePartitionsToFormat if $::expert;
 }
 
-sub formatPartitions {
-    my $o = shift;
-    my $w = $o->wait_message('', '');
-    foreach (@_) {
-	if ($_->{toFormat}) {
-	    $w->set(_("Formatting partition %s", $_->{device}));
-	    fs::format_part($o->{raid}, $_);
-	}
-    }
+
+sub formatMountPartitions {
+    my ($o, $fstab) = @_;
+    my $w = $o->wait_message('', _("Formatting partitions"));
+    fs::formatMount_all($o->{raid}, $o->{fstab}, $o->{prefix}, sub {
+	my ($part) = @_;
+	$w->set(isLoopback($part) ?
+		_("Creating and formatting loopback file %s", loopback::file($part)) :
+		_("Formatting partition %s", $part->{device}));
+    });
+    die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
 }
 
 #------------------------------------------------------------------------------

@@ -38,11 +38,12 @@ sub size($) {
 sub set_loop {
     my ($file) = @_;
 
-    foreach (0..9) {
+    foreach (0..7) {
 	local *F;
 	my $dev = make("loop$_");
-	sysopen F, $dev, 0 or next;
+	sysopen F, $dev, 2 or next;
 	!ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
+	log::l("trying with loop $dev");
 	return c::set_loop(fileno F, $file) && $dev;
     }
 }

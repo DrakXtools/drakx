@@ -338,6 +338,11 @@ sub text2driver($) {
     die "$text is not a valid module description";
 }
 
+sub get_alias {
+    my ($alias) = @_;
+    $conf{$alias}{alias};
+}
+
 sub add_alias($$) { 
     my ($alias, $name) = @_;
     /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return $_ foreach keys %conf;

@@ -24,6 +24,9 @@ add choice clean /tmp or not in expert
 
 kernel chosen by default must be the one according to supermount/secure
 
+bug if ide-scsi, no more hdX, but scd0 (aka sr0)
+ (and add alias block-major-11 ide-scsi ?)
+
 -features-------------------------------------------------------------------------------
 let diskdrake have dos/win partition automatically set up with mount point,
 this will help loopback too.
@@ -97,16 +100,16 @@ possibility to specify the mouse
 (done,pix,7.1)partitioning, keyboard shortcut.
 
 ----
-paride in stage1
+(?) paride in stage1
 
-msec custom
+(?) msec custom
 
 stage1 & network: add ability to choose the network interface to use
 stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
 
 ability to add nfs/weird_fs entries in fstab
 
-(fpons)pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
+(obsolete) pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
 
 auto ppp-configure with free provider
 
@@ -182,9 +185,9 @@ adduserdrake to remove/update users
 
 (?)see what can be done with nvram (50 bytes to save information)
 
-support wacom
+better wacom support
 
-bug in diskdrake: can in strange cases create a primary partition at sector #0
+(obsolete) bug in diskdrake: can in strange cases create a primary partition at sector #0
 
 (done,pix(partly, protection against bugging))bug in diskdrake:
 in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
@@ -202,14 +205,16 @@ X configuration and bootloader in kickstart
 
 XFdrake chooseResolutions with ask_from_list do not permit ``Show all''
 
-have a better time estimation of the remaining time in install packages
+(obsolete) have a better time estimation of the remaining time in install packages
 
 (?) options in mkfs, progress bar when formatting
 
-(?) when some occur, partition must be unset isFormatted
+(?) when some error occurs, partition must be unset isFormatted
 
 -hardware-------------------------------------------------------------------------------
-with no floppy drive, mkbootdisk step fails badly
+- with no floppy drive, mkbootdisk step fails badly
+- try detect_devices::floppies (and how are scsi floppies handled?)
+maybe: do a iotcl FDGETPRM to detect fd1, fd0.
 
 need a simple solution to precise mouse type (syslinux option?)
 
@@ -226,22 +231,13 @@ smp not detected (mhoward@memphisonline.com on cooker, bios=BP6PW)
 
 UDMA66 (ultra66.o for promise)
 
-bug if ide-scsi, no more hdX, but scd0 (aka sr0)
-(and add alias block-major-11 ide-scsi ?)
-
 aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 
-try detect_devices::floppies (and how are scsi floppies handled?)
-maybe: do a iotcl FDGETPRM to detect fd1, fd0.
-
-usb module not removed if no mouse found
+(obsolete) usb module not removed if no mouse found
 
 (fpons)handle dat drives
 
 hibernation on laptop -> clock not restored
-
-XFree: handle by card options
-eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
 
 # in 2.3.15 "Silicon Integrated Systems [SiS]|SiS900 10/100 Ethernet" is handled
 
@@ -250,8 +246,6 @@ eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
 (?)using setxkb, enable the testing of the keyboard
 
 (?)XFdrake does not handle fbdev
-
-(?) Xconfiguration: if "can't open fixed font", relaunch xfs.
 
 (?) Je viens de faire une installation sur une machine où seul Be était
 installé. Je l'ai supprimé et installé (mode recommandé) Oxygen. Au
@@ -492,4 +486,9 @@ try to figure why?
 (done,pix)in chooseResolutions: display the graphic card found
 
 (done,pix)with pcmcia, need ONBOOT=no
+
+(fpons,done) XFree: handle by card options
+eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
+
+(done,pix) Xconfiguration: if "can't open fixed font", relaunch xfs.
 

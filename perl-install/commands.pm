@@ -68,6 +68,7 @@ sub mount {
     my $fs = $t && shift;
 
     @_ == 2 or die "usage: mount [-r] [-t <fs>] <device> <dir>\n",
+    "       (use -r for readonly)\n",
     "       (if /dev/ is left off the device name, a temporary node will be created)\n";
 
     my ($dev, $where) = @_;

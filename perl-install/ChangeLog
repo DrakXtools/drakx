@@ -1,3 +1,19 @@
+2000-03-11  Pixel  <pixel@mandrakesoft.com>
+
+	* devices.pm (set_loop): created, searches for an available
+	loopback and sets the file to it
+
+	* lilo.pm (dev2grub): fixed a missing slash
+
+	* interactive_gtk.pm (wait_message_nextW): do not update if same
+	message, otherwise silly gtk won't do anything and we'll wait
+	forever :(
+
+2000-03-10  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (@install_classes): cleanup, no more i18n (is now in
+	install_steps_interactive), remove old entries
+
 2000-03-09  Pixel  <pixel@mandrakesoft.com>
 
 	* modules.pm (write_conf): don't add alias block-major-11 in every case

@@ -37,6 +37,15 @@ sub read_fstab($) {
     } <F>;
 }
 
+sub up_mount_point {
+    my ($mntpoint, $fstab) = @_;
+    while (1) {
+	$mntpoint = dirname($mntpoint);
+	$mntpoint ne "." or return;
+	$_->{mntpoint} eq $mntpoint and return $_ foreach @$fstab;
+    }
+}
+
 sub check_mounted($) {
     my ($fstab) = @_;
 
@@ -113,14 +122,37 @@ sub real_format_part {
     $part->{isFormatted} = 1;
 }
 sub format_part {
-    my ($raid, $part) = @_;
+    my ($raid, $part, $prefix) = @_;
     if (raid::is($part)) {
 	raid::format_part($raid, $part);
     } elsif (isLoopback($part)) {
-	loopback::format_part($part);
+	loopback::format_part($part, $prefix);
     } else {
 	real_format_part($part);
     }
+}
+
+sub formatMount_part {
+    my ($part, $raid, $fstab, $prefix, $callback) = @_;
+
+    if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
+	formatMount_part($p, $raid, $fstab, $prefix, $callback);
+    }
+    if (isLoopback($part)) {
+	formatMount_part($part->{device}, $raid, $fstab, $prefix, $callback);
+    }
+
+    if ($part->{toFormat}) {
+	$callback->($part) if $callback;
+	format_part($raid, $part, $prefix);
+    }
+    mount_part($part, $prefix);
+}
+
+sub formatMount_all {
+    my ($raid, $fstab, $prefix, $callback) = @_;
+    formatMount_part($_, $raid, $fstab, $prefix, $callback) 
+      foreach sort { isLoopback($a) ? 1 : -1 } grep { $_->{mntpoint} } @$fstab;
 }
 
 sub mount($$$;$) {
@@ -173,11 +205,15 @@ sub mount_part($;$$) {
     $part->{isMounted} and return;
 
     unless ($::testing) {
-	local $part->{device} = devices::set_loop(loopback::file($part)) || die if isLoopback($part);
 	if (isSwap($part)) {
-	    swap::swapon($part->{device});
+	    swap::swapon(isLoopback($part) ? $prefix . loopback::file($part) : $part->{device});
 	} else {
 	    $part->{mntpoint} or die "missing mount point";
+
+	    eval { modules::load('loop') } if isLoopback($part);
+	    $part->{real_device} = devices::set_loop($prefix . loopback::file($part)) || die if isLoopback($part);
+	    local $part->{device} = $part->{real_device} if isLoopback($part);
+
 	    mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly);
 	}
     }
@@ -190,9 +226,12 @@ sub umount_part($;$) {
     $part->{isMounted} or return;
 
     unless ($::testing) {
-	isSwap($part) ?
-	  swap::swapoff($part->{device}) :
-	  umount(($prefix || '') . ($part->{mntpoint} || devices::make($part->{device})));
+	if (isSwap($part)) {
+	    swap::swapoff($part->{device});
+	} else {
+	    umount(($prefix || '') . $part->{mntpoint} || devices::make($part->{device}));
+	    c::del_loop(delete $part->{real_device}) if isLoopback($part);
+	}
     }
     $part->{isMounted} = 0;
 }
@@ -308,19 +347,19 @@ sub write_fstab($;$$) {
     print F join(" ", @$_), "\n" foreach sort { $a->[1] cmp $b->[1] } @to_add;
 }
 
-sub check_mount_all_fstab($;$) {
-    my ($fstab, $prefix) = @_;
-    $prefix ||= '';
-
-    foreach (sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
-	#- avoid unwanted mount in fstab.
-	next if ($_->{device} =~ /none/ || $_->{type} =~ /nfs|smbfs|ncpfs|proc/ || $_->{options} =~ /noauto|ro/);
-
-	#- TODO fsck
-
-	eval { mount(devices::make($_->{device}), $prefix . $_->{mntpoint}, $_->{type}, 0); };
-	if ($@) {
-	    log::l("unable to mount partition $_->{device} on $prefix/$_->{mntpoint}");
-	}
-    }
-}
+#sub check_mount_all_fstab($;$) {
+#    my ($fstab, $prefix) = @_;
+#    $prefix ||= '';
+#
+#    foreach (sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
+#	 #- avoid unwanted mount in fstab.
+#	 next if ($_->{device} =~ /none/ || $_->{type} =~ /nfs|smbfs|ncpfs|proc/ || $_->{options} =~ /noauto|ro/);
+#
+#	 #- TODO fsck
+#
+#	 eval { mount(devices::make($_->{device}), $prefix . $_->{mntpoint}, $_->{type}, 0); };
+#	 if ($@) {
+#	     log::l("unable to mount partition $_->{device} on $prefix/$_->{mntpoint}");
+#	 }
+#    }
+#}
