@@ -45,7 +45,7 @@ sub ask_from_list_with_helpW {
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	my $b;
 	$w->sync;
-	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)); # or goto nowizard;
+	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)) || die "pixmap $! not found.";
 	$::isWizard and gtkset_usize($w->{rwindow}, 500, 400);
 	gtkadd($w->{window},
 	       gtkpack2_(create_box_with_title($w, @$messages),
