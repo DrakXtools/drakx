@@ -506,7 +506,7 @@ sub install_urpmi {
 					   cdrom => "removable://mnt/cdrom" }}{$method} ||
 		       #- for live_update or live_install script.
 		       readlink("/tmp/image/Mandrake") =~ m,^(/.*)/Mandrake/*$, && "removable:/$1") . "/$_->{rpmsdir}";
-	    my $need_list = $dir =~ m|^[^:]*://[^/:\@]*:[^/:\@]+\@|; #- use list file only if a password is visible
+	    my $need_list = $dir =~ m,^(?:[^:]*://[^/:\@]*:[^/:\@]+\@|.*%{),; #- use list file only if visible password or macro.
 
 	    #- build a list file if needed.
 	    if ($need_list) {
@@ -519,14 +519,20 @@ sub install_urpmi {
 		    #- WARNING this method of build only works because synthesis (or hdlist)
 		    #-         has been read.
 		    foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
-			print $LIST "$dir/".$_->filename."\n";
+			my $ldir = $dir;
+			my $arch = $_->arch;
+			$ldir =~ s/%{ARCH}/$arch/g;
+			print $LIST "$ldir/".$_->filename."\n";
 		    }
 		} else {
 		    #- need to use another method here to build synthesis.
 		    open(my $F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |");
 		    local $_; 
 		    while (<$F>) {
-			print $LIST "$dir/$_";
+			my $ldir = $dir;
+			my $arch = $_->arch;
+			$ldir =~ s/%{ARCH}/$arch/g;
+			print $LIST "$ldir/$_";
 		    }
 		    close $F;
 		}
