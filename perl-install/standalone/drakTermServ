@@ -312,7 +312,7 @@ sub interactive_mode() {
 							}),
 						  ),
 						),
-						1, gtkpack_(new Gtk2::HBox(1,2),
+						0, gtkpack_(new Gtk2::HBox,
 							0, gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
 								destroy_widget();
 								help();
@@ -321,6 +321,7 @@ sub interactive_mode() {
 								destroy_widget();
 								start_wizard();
 							}),
+							1, "",
 							0, gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
 								write_conf_file();
 								restart_server() if $changes_made == 1;
