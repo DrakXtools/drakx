@@ -75,10 +75,9 @@ my ($width, $height) = (300, 150);
 
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
-my $combo1 = Gtk2::Combo->new;
+my $combo1 = Gtk2::OptionMenu->new;
 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 $combo1->entry->set_text($netcnx->{PROFILE} || "default");
-$combo1->entry->set_editable(0);
 MDK::Common::Globals::init(
 			   in => $in,
 			   prefix => '',
@@ -135,7 +134,6 @@ $window1->{rwindow}->realize;
 $combo1->entry->signal_connect(changed => sub {
 				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text);
 				    network::netconnect::load_conf($netcnx, $netc, $intf);
-				    network::netconnect::set_net_conf($netcnx, $netc, $intf);
 				    network::netconnect::read_net_conf('', $netcnx, $netc);
 				});
 my $gct = Gtk2::Gdk::GC->new($window1->{rwindow}->window);
