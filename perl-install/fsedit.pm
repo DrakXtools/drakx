@@ -22,13 +22,14 @@ my @suggestions = (
   { mntpoint => "/tmp",     minsize =>  50 << 11, size => 100 << 11, type => 0x83 }, 
   { mntpoint => "/mnt/iso", minsize => 700 << 11, size => 800 << 11, type => 0x83 }, 
 );
+my @suggestions_mntpoints = qw(/mnt/dos);
 
 
 1;
 
 sub suggestions_mntpoint($) { 
     my ($hds) = @_;
-    grep { !/swap/ && !has_mntpoint($_, $hds) } map { $_->{mntpoint} } @suggestions;
+    @suggestions_mntpoints, grep { !/swap/ && !has_mntpoint($_, $hds) } map { $_->{mntpoint} } @suggestions;
 }
 
 sub hds($$) {

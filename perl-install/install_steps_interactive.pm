@@ -29,6 +29,7 @@ use vars qw(@ISA);
 use common qw(:common);
 use partition_table qw(:types);
 use install_steps;
+use modules;
 use lang;
 use log;
 
@@ -62,6 +63,23 @@ sub selectInstallClass($@) {
 		       [ @classes ]);
 }
 
+sub setupSCSI {
+    my ($o) = @_;
+    my @l = modules::load_thiskind('scsi');
+    while (1) {
+	@l ?
+	  $o->ask_yesorno('', 
+			  [ _("Found ") . join(", ", map { $_->[0] } @l) . _(" scsi interfaces"),
+			    _("Do you have another one?") ]) :
+	  $o->ask_yesorno('', _("Do you have an scsi interface?")) or return;
+
+	my $l = $o->ask_from_list('', _("What scsi card have you?"), [ modules::text_of_type('scsi') ]) or return;
+	my $m = modules::text2driver($l);
+	modules::load($m);
+	push @l, [ $l, $m ];
+    }
+}
+
 sub rebootNeeded($) {
     my ($o) = @_;
     $o->ask_warn('', _("You need to reboot for the partition table modifications to take place"));
@@ -82,18 +100,19 @@ sub choosePartitionsToFormat($$) {
 sub createBootdisk($) {
     my ($o) = @_;
     
-    $o->{default}->{mkbootdisk} = $o->ask_yesorno('',
+    if ($o->{default}->{mkbootdisk} = $o->ask_yesorno('',
  _("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 lilo on your system, or another operating system removes lilo, or lilo doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?"));
+failures. Would you like to create a bootdisk for your system?"))) {
 
-    $o->ask_warn('',
+	$o->ask_warn('',
 _("Insert a floppy in drive fd0 (aka A:)"));
 
-    $o->SUPER::createBootdisk;
+	$o->SUPER::createBootdisk;
+    }
 }
 
 sub setupBootloader($) {

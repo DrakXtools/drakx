@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(__ min max sum sign product bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate) ],
+    common => [ qw(__ min max sum sign product bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
     functional => [ qw(fold_left difference2) ],
     file => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh) ],
@@ -127,6 +127,20 @@ sub untranslate($@) {
     my $s = shift;
     foreach (@_) { translate($_) eq $s and return $_ }
     die "untranslate failed";
+}
+
+sub warp_text($;$) {
+    my ($text, $width) = shift;
+    $width ||= 80;
+   
+    my ($t, @l); foreach (split /(\s+)/, $text) {
+	if (length "$t$_" > $width) {
+	    push @l, $t;
+	    $t = '';
+	}
+	$t .= $_;
+    }
+    @l, $t;
 }
 
 sub getVarsFromSh($) {

@@ -9,7 +9,7 @@ use log;
 
 sub run($@) { rooted('', @_) }
 
-sub rooted($$@) {
+sub rooted {
     my ($root, $name, @args) = @_;
 
     log::l("running: $name @args" . ($root ? " with root $root" : ""));

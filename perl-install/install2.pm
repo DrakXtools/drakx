@@ -90,7 +90,7 @@ my @serverPartitioning = (
 );
 
 my $default = {
-#    display => "jaba:1",
+#    display => "192.168.1.9:0",
     user => { name => 'foo', password => 'foo', shell => '/bin/bash', realname => 'really, it is foo' },
     rootPassword => 'toto',
     lang => 'fr',
@@ -129,20 +129,12 @@ sub selectInstallClass {
     $::expert = $o->{installClass} eq "expert";
 }
 
-sub setupSCSI {
-    $o->{direction} < 0 && detect_devices::hasSCSI() and return;
-
-    # If we have any scsi adapters configured from earlier, then don't bother asking again
-    while (my ($k, $v) = each %modules::loaded) {
-	$v->{type} eq 'scsi' and return;
-    }
-#    $o->setupSCSIInterfaces(0, \%modules::loaded, $o->{hints}->{flags}->{autoscsi}, $o->{direction});
-}
+sub setupSCSI { $o->setupSCSI }
 
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
     $o->{hds} = fsedit::hds($o->{drives}, $o->{default}->{partitionning});
-    @{$o->{hds}} > 0 or die _"An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem";
+    @{$o->{hds}} > 0 or die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
 
     unless ($o->{isUpgrade}) {
 	$o->doPartitionDisks($o->{hds});
@@ -161,7 +153,7 @@ sub partitionDisks {
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
 
     my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};
-    $root_fs or die _"partitionning failed: no root filesystem";
+    $root_fs or die _("partitionning failed: no root filesystem");
 
 }
 
@@ -230,6 +222,7 @@ sub main {
 
     #  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install";
+    unlink "/sbin/insmod";
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
@@ -257,7 +250,7 @@ sub main {
 	$o->{intf} = net::readNetInterfaceConfig($file);
     }
 
-    modules::load_deps("/modules/modules.dep");
+    modules::load_deps("/lib/modules/modules.dep");
     modules::read_conf("/tmp/conf.modules");
 
     for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
@@ -265,7 +258,7 @@ sub main {
 	eval { 
 	    &{$install2::{$step}}();
 	};
-	$o->errorInStep($@) if $@;
+	$o->errorInStep($@), redo if $@;
 	$o->leavingStep($step);
     }
     killCardServices();

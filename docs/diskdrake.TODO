@@ -1,5 +1,5 @@
-- bug (autoallocate)
-
+- bug when creating smallest partitions (size < 0)
+- add warnings for scsi drives if you create more than sdx15
 - the information put in save/restore partitions must be cleaned
 (remove mounted/formatted/..., also remove the Data::Dumper dependency)
 - test, test, test

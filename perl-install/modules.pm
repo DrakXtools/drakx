@@ -199,6 +199,21 @@ foreach (@drivers_by_category) {
 1;
 
 
+sub text_of_type($) {
+    my ($type) = @_;
+
+    map { $_->[0] } grep { $_->[3] eq $type } values %drivers;
+}
+
+sub text2driver($) {
+    my ($text) = @_;
+    while (my ($k, $v) = each %drivers) {
+	$v->[0] eq $text and return $k;
+    }
+    die "$text is not a valid module description";
+}
+
+
 sub load($;$$) {
     my ($name, $type, $minor) = @_;
 
@@ -216,8 +231,11 @@ sub load_raw($$$@) {
     my ($name, $type, $minor, @options) = @_;
 
 #    @options or @options = guiGetModuleOptions($name);
+    my $m = "/modules/$name.o";
+    -r $m or $m = "/lib$m";
+    -r $m or die "can't find module $name";
 
-    run_program::run("insmod", "/modules/$name.o", @options) or die("insmod $name failed");
+    run_program::run("insmod", $m, @options) or die("insmod $name failed");
 
     # this is a hack to make plip go
     if ($name eq "parport_pc") {
@@ -293,25 +311,20 @@ sub load_thiskind($) {
     my @devs;
     my $found;
 
-    log::l("in load_thiskind, type = $type");
-
-    unless ($type eq 'scsi' || $type eq 'net') {
-	 log::l("pci probing for $type devices");
-	 @devs = pci::probe($type);
-	 log::l("pci probe found " . scalar @devs . "$type devices");
+    if ($type eq 'scsi' || $type eq 'net') {
+	 @devs = pci_probing::main::probe($type);
+	 log::l("pci probe found " . scalar @devs . " $type devices");
     }
 
     my %devs;
-    foreach (@devs) {
-	 my $m = $_->{module};
-	 $devs{$m}++ and log::l("multiple $m devices found"), next;
-	 $drivers{$m} or log::l("module $m not in install table"), next;
-	 log::l("found driver for $m");
-	 load($m);
-	 $found = 1;
+    foreach (map { $_->[1] } @devs) {
+	 $devs{$_}++ and log::l("multiple $_ devices found"), next;
+	 $drivers{$_} or log::l("module $_ not in install table"), next;
+	 log::l("found driver for $_");
+	 load($_);
+	 $found = $_;
     }
-    pci::free(@devs);
-    $found;
+    @devs;
 }
 
 # This assumes only one of each driver type is loaded

@@ -1,3 +1,4 @@
+VERSION = 2.2.11-1mdkBOOT
 SO_FILES = c/blib/arch/auto/c/c.so
 PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake
 ROOTDEST = /export
@@ -92,7 +93,7 @@ get_needed_files: $(SO_FILES)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	cp -f list /tmp/list
 	for i in c/blib/arch/auto/c/c.so $(LOCALFILES) `cat /tmp/list` ; do \
-		ldd $$i 2>/dev/null | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
+		ldd $$i 2>/dev/null | grep -v "not a dynamic" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
 	done
 
 	install -d $(DEST)/lib
@@ -104,12 +105,12 @@ get_needed_files: $(SO_FILES)
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 
 	for i in `cat /tmp/list`; do \
-		if (echo $$i | grep "lib/[^/]*\.so"); then \
+		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
 		  install -s $$i $(DEST)/lib; \
 		else \
 		  d=`echo $(DEST)/$$i | sed 's/\/usr\/local\//\/usr\//'`; \
 		  install -d `dirname $$d` && \
-		  if (echo $$i | grep "\.pm"); then \
+		  if (echo $$i | grep -q "\.pm"); then \
 		     perl -pe '$$_ eq "__END__" and exit(0);' $$i > $$d; \
 		  else \
 		  	  cp -f $$i $$d; \
@@ -132,6 +133,11 @@ get_needed_files: $(SO_FILES)
 	cp MonitorsDB $(DEST)/usr/share
 	cp compss $(ROOTDEST)/Mandrake/base
 
+	install -d $(DEST)/lib/modules
+	(cd /lib/modules/$(VERSION) ; \
+	 cp `find -name "*.o"` $(DEST)/lib/modules ; \
+	 /sbin/depmod -m /boot/System.map-$(VERSION) -i -e *.o | grep ': ' | sed 's/\.o//g' > $(DEST)/lib/modules/modules.dep)
+
 	ln -s install2 $(DEST)/usr/bin/runinstall2
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
@@ -151,8 +157,8 @@ full_stage2:
 
 stage2:
 	$(MAKE) install_pms
-	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
-	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/compss Mandrake/instimage/usr/[bl]*
+#	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
+#	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/compss Mandrake/instimage/usr/[bl]*
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd

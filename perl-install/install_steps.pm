@@ -48,8 +48,8 @@ sub selectInstallOrUpgrade($) {
 sub selectInstallClass($@) {
     $o->{default}->{installClass} || $_[1];
 }
-sub setupSCSIInterfaces {
-    die "TODO";
+sub setupSCSI {
+    modules::load_thiskind('scsi');
 }
 
 sub doPartitionDisks($$) {

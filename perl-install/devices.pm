@@ -47,10 +47,10 @@ sub make($) {
 
     -e $file and return $file; # assume nobody takes fun at creating files named as device
 
-    if (/^sd(.)(\d\d)/) {
+    if (/^sd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
 	$major = 8;
-	$minor = ord($1) - ord('a') + $2;
+	$minor = ord($1) - ord('a') + ($2 || 0);
     } elsif (/^hd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
 	($major, $minor) = 
