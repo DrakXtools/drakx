@@ -785,7 +785,9 @@ Modifying the fields below will override this configuration."),
                         $onboot = $ethntf->{ONBOOT} ? $ethntf->{ONBOOT} =~ /yes/ : bool2yesno(!member($ethntf->{DEVICE}, 
                                                                                                       map { $_->{device} } detect_devices::pcmcia_probe()));
                         $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/; 
-                        $hotplug = $::isStandalone && !$ethntf->{MII_NOT_SUPPORTED} || 1;
+                        # blacklist bogus driver, enable ifplugd support else:
+                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno(member($module, qw(forcedeth)));
+                        $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
