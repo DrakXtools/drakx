@@ -114,7 +114,7 @@ sub set_sound_slot {
 
 
 sub read {
-    my ($type, $o_file) = @_;
+    my (undef, $o_file) = @_;
 
     my $conf = modules::any_conf::vnew();
     my $raw_conf = modules::any_conf::read_raw($o_file || $::prefix . $conf->file);
