@@ -408,6 +408,8 @@ Take a look at http://www.linmodems.org"),
                    ppp_provider =>
                    {
                     pre => sub {
+                        network::modem::ppp_read_conf($netcnx, $netc) if !$modem_conf_read;
+                        $modem_conf_read = 1;
                         @isp = map {
                             my $country = $_;
                             map { 
@@ -427,7 +429,7 @@ Take a look at http://www.linmodems.org"),
                         ($country, $provider) = split('/', $provider);
                         $country = { reverse %countries }->{$country};
                         my %l = getVarsFromSh("$db_path/$country/$provider");
-                        if ($old_provider ne $provider) {
+                        if (defined $old_provider && $old_provider ne $provider) {
                             $modem->{connection} = $l{Name};
                             $modem->{phone} = $l{Phonenumber};
                             $modem->{$_} = $l{$_} foreach qw(Authentication AutoName Domain Gateway IPAddr SubnetMask);
@@ -447,8 +449,6 @@ Take a look at http://www.linmodems.org"),
                                          q(ifdown ppp0
 killall pppd
 ), $netcnx->{type});
-                        network::modem::ppp_read_conf($netcnx, $netc) if !$modem_conf_read;
-                        $modem_conf_read = 1;
                     },
                     name => N("Dialup: account options"), 
                     data => sub {
