@@ -1,23 +1,28 @@
 #!/usr/bin/perl
 
-BEGIN { 
-    # fake module ``c'' so that no need to build DrakX
-    $INC{'c.pm'} = 1;
-    package c; sub AUTOLOAD { } sub getpagesize { 1024 } # getpagesize is needed by swap.pm, otherwise sigsegv
-}
-
 use lib "../..";
-use pkgs;
 use common ":common";
-
 
 sub get {
     my ($meta_class) = @_;
-    local *install_any::getFile = sub {
-	open GETFILE, "../compssUsers$meta_class" and *GETFILE;
-    };
-    my (undef, undef, undef, $descr) = pkgs::readCompssUsers([{}], [], $meta_class);
-    %$descr;
+    my %compssUsersDescr;
+
+    local *F;
+    open F, "../compssUsers$meta_class" or die "can't open file ../compssUsers$meta_class";
+    foreach (<F>) {
+	/^\s*$/ || /^#/ and next;
+	s/#.*//;
+
+	if (/^(\S.*)/) {
+	    my ($icon, $descr);
+	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
+	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
+	    $compssUsersDescr{$_} = $descr; 
+	}
+    }
+    close F;
+
+    %compssUsersDescr;
 }
 
 foreach (uniq(get(''), get('.desktop'))) {
@@ -28,4 +33,3 @@ msgid "$_"
 msgstr ""
 );
 }
-
