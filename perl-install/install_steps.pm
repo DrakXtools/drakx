@@ -46,7 +46,10 @@ sub leavingStep {
     my ($o, $step) = @_;
     log::l("step `$step' finished");
 
-    eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") } if -d "$o->{prefix}/root" && !$::testing;
+    if (-d "$o->{prefix}/root") {
+	eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
+	install_any::g_auto_install();
+    }
 
     for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
 	#- the reachability property must be recomputed each time to take
@@ -161,16 +164,16 @@ sub formatPartitions {
 
 #------------------------------------------------------------------------------
 sub setPackages {
-    my ($o, $install_classes) = @_;
-    install_any::setPackages($o, $install_classes);
+    my ($o) = @_;
+    install_any::setPackages($o);
 }
 sub selectPackagesToUpgrade {
     my ($o) = @_;
     install_any::selectPackagesToUpgrade($o);
 }
 
-sub choosePackages($$$) {
-    my ($o, $packages, $compss) = @_;
+sub choosePackages($$$$) {
+    my ($o, $packages, $compss, $compssUsers) = @_;
 }
 
 sub beforeInstallPackages {
@@ -223,8 +226,7 @@ sub configureNetwork($) {
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
 
-    install_any::pkg_install($o, "dhcpcd") if grep { $_->{BOOTPROTO} eq "dhcp" } @{$o->{intf}};
-    install_any::pkg_install($o, "pump")   if grep { $_->{BOOTPROTO} eq "bootp" } @{$o->{intf}};
+    install_any::pkg_install($o, "dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp|bootp)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
 }
 
@@ -264,13 +266,13 @@ sub printerConfig {
 }
 
 #------------------------------------------------------------------------------
-my @etc_pass_fields = qw(name password uid gid realname home shell);
+my @etc_pass_fields = qw(name pw uid gid realname home shell);
 sub setRootPassword($) {
     my ($o) = @_;
     my $p = $o->{prefix};
-    my %u = %{$o->{superuser} ||= {}};
+    my $u = $o->{superuser} ||= {};
 
-    $u{password} = install_any::crypt($u{password}) if $u{password};
+    $u->{pw} ||= $u->{password} && install_any::crypt($u->{password});
 
     my @lines = cat_(my $f = "$p/etc/passwd") or log::l("missing passwd file"), return;
 
@@ -280,8 +282,8 @@ sub setRootPassword($) {
 	if (/^root:/) {
 	    chomp;
 	    my %l; @l{@etc_pass_fields} = split ':';
-	    add2hash(\%u, \%l);
-	    $_ = join(':', @u{@etc_pass_fields}) . "\n";
+	    add2hash($u, \%l);
+	    $_ = join(':', @$u{@etc_pass_fields}) . "\n";
 	}
 	print F $_;
     }
@@ -306,7 +308,9 @@ sub addUser($) {
 	if (!$g || getgrgid($g)) { for ($g = 500; getgrgid($g) || $gids{$g}; $g++) {} }
 
 	$_->{home} ||= "/home/$_->{name}";
-	@$_{qw(uid gid pw)} = ($u, $g, $_->{password} && install_any::crypt($_->{password}));
+	$_->{uid} = $u;
+	$_->{gid} = $g;
+	$_{pw} ||= $_->{password} && install_any::crypt($_->{password});
     }
     my @passwd = cat_("$p/etc/passwd");;
 
@@ -320,7 +324,11 @@ sub addUser($) {
     foreach (@l) {
 	if (! -d "$p$_->{home}") {
 	    eval { commands::cp("-f", "$p/etc/skel", "$p$_->{home}") }; 
-	    if ($@) { log::l("copying of skel failed: $@"); mkdir("$p$_->{home}", 0750); }
+	    if ($@) {
+		log::l("copying of skel failed: $@"); mkdir("$p$_->{home}", 0750); 
+	    } else {
+		chmod 0750, "$p$_->{home}";
+	    }
 	}
 	commands::chown_("-r", "$_->{uid}.$_->{gid}", "$p$_->{home}")
 	    if $_->{uid} != $_->{oldu} || $_->{gid} != $_->{oldg};
@@ -388,6 +396,17 @@ sub setupBootloader($) {
 #------------------------------------------------------------------------------
 sub setupXfree {
     my ($o) = @_;
+}
+
+#------------------------------------------------------------------------------
+sub miscellaneous {
+    my ($o) = @_;
+    setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
+	LAPTOP => bool2text($o->{miscellaneous}{LAPTOP}),
+        HDPARM => $o->{miscellaneous}{HDPARM},
+        TYPE => $o->{installClass},
+        SECURITY => $o->{security},
+    });
 }
 
 #------------------------------------------------------------------------------

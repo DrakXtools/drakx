@@ -42,10 +42,11 @@ my @installSteps = (
   selectPath         => [ __("Choose install or upgrade"), 0, 0, "selectInstallClass" ],
   selectMouse        => [ __("Configure mouse"), 1, 1 ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1 ],
-  partitionDisks     => [ __("Setup filesystems"), 1, 0 ],
+  partitionDisks     => [ __("Setup filesystems"), 1, 0, "selectPath" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
   doInstallStep      => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
+  miscellaneous      => [ __("Miscellaneous"), 1, 1 ],
   configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
 #-  configureServices => [ __("Configure services"), 0, 0 ],
@@ -86,9 +87,8 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #- partition layout
 my %suggestedPartitions = (
   beginner => [
-    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
-    { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
     { mntpoint => "/",     size => 700 << 11, type => 0x83 },
+    { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
     { mntpoint => "/home", size => 300 << 11, type => 0x83 },
   ],
   developer => [
@@ -123,6 +123,7 @@ $o = $::o = {
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0, readonly => 0 },
+    security => 3,
 #-    partitions => [
 #-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
 #-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
@@ -180,7 +181,7 @@ $o = $::o = {
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
-    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
+    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl-base) ],
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
 
@@ -269,8 +270,8 @@ sub setupSCSI {
 sub partitionDisks {
     return
       $o->{fstab} = [
-	{ device => "loop7", mntpoint => "/", isFormatted => 1, isMounted => 1 },
-	{ device => "/initrd/dos/lnx4win/swapfile", mntpoint => "swap", isFormatted => 1, isMounted => 1 },
+	{ device => "loop7", type => 0x83, mntpoint => "/", isFormatted => 1, isMounted => 1 },
+	{ device => "/initrd/dos/lnx4win/swapfile", type => 0x82, mntpoint => "swap", isFormatted => 1, isMounted => 1 },
       ] if $o->{lnx4win};
     return if $o->{isUpgrade};
 
@@ -306,18 +307,20 @@ sub formatPartitions {
 	    $o->formatPartitions(@{$o->{fstab}});
 	    fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
 	}
+	eval { $o = $::o = install_any::loadO($o) } if $_[1] == 1;
     }
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
-	home mnt root tmp var var/tmp var/lib var/lib/rpm);
+	home mnt tmp var var/tmp var/lib var/lib/rpm);
+    mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
 }
 
 #------------------------------------------------------------------------------
 #-PADTODO
 sub choosePackages {
-    $o->setPackages($o, \@install_classes) if $_[1] == 1;
+    $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
-    $o->choosePackages($o->{packages}, $o->{compss});
+    $o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers});
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
 
@@ -383,7 +386,7 @@ sub setRootPassword {
 sub addUser {
     return if $o->{isUpgrade};
 
-    $o->addUser;
+    $o->addUser($_[0]);
     install_any::setAuthentication();
 }
 
@@ -409,6 +412,8 @@ sub configureX {
     $o->setupXfree if $o->{packages}{XFree86}{installed} || $clicked;
 }
 #------------------------------------------------------------------------------
+sub miscellaneous { $o->miscellaneous($_[0]); }
+#------------------------------------------------------------------------------
 sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 
 
@@ -420,6 +425,7 @@ sub main {
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
+    my $cfg;
     my %cmdline; map { 
 	my ($n, $v) = split '=';
 	$cmdline{$n} = $v || 1;
@@ -445,13 +451,14 @@ sub main {
 	    beginner  => sub { $o->{installClass} = 'beginner'; $::beginner = 1 },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = 1 },
-	    test      => sub { $::testing = 1 },
 	    display   => sub { $o->{display} = $v },
-#	    ks        => sub { $::auto_install = 1 },
-#	    kickstart => sub { $::auto_install = 1 },
-#	    auto_install => sub { $::auto_install = 1 },
-	    defaultcfg => sub { $o = install_any::loadO($o, $v) },
-	    alawindows => sub { $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
+	    security  => sub { $o->{security} = $v },
+	    test      => sub { $::testing = 1 },
+	    defcfg    => sub { $cfg = $v },
+#	    ks        => sub { $::auto_install = 1; $cfg = $v; },
+#	    kickstart => sub { $::auto_install = 1; $cfg = $v; },
+	    auto_install => sub { $::auto_install = 1; $cfg = $v; },
+	    alawindows => sub { $o->{security} = $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
@@ -482,16 +489,10 @@ sub main {
 
     if ($::auto_install) {
 	require 'install_steps_auto_install.pm';
-	my $f = "auto_inst.cfg";
-	unless ($::testing) {
-	    fs::mount(devices::make("fd0"), "/mnt", "vfat", 0);
-	    $f = "/mnt/$f";
-	}
-	$o = install_any::loadO($o, $f);
-	fs::umount("/mnt") unless $::testing;
     } else {
 	require 'install_steps_graphical.pm';
     }
+    eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
@@ -551,13 +552,11 @@ sub main {
     fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
 
-    install_any::lnx4win_postinstall() if $o->{lnx4win};
+    install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
 
     log::l("installation complete, leaving");
     print "\n" x 30;
-
-    install_any::g_auto_install() if $::g_auto_install;
 }
 
 #-######################################################################################

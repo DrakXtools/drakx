@@ -26,6 +26,7 @@ my @drivers_by_category = (
   "3c515" => "3com 3c515",
   "3c59x" => "3com 3c59x (Vortex)",
   "3c59x" => "3com 3c90x (Boomerang)",
+  "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
   "at1700" => "Allied Telesis AT1700",
   "ac3200" => "Ansel Communication AC3200",
   "pcnet32" => "AMD PC/Net 32",

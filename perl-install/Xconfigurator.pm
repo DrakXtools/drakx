@@ -111,17 +111,12 @@ sub readMonitorsDB {
 
 sub rewriteInittab {
     my ($runlevel) = @_;
-    {
-	local (*F, *G);
-	open F, "$prefix/etc/inittab" or die "cannot open $prefix/etc/inittab: $!";
-	open G, "> $prefix/etc/inittab-" or die "cannot write in $prefix/etc/inittab-: $!";
-
-	foreach (<F>) {
-	    print G /^(id:)[35](:initdefault:)\s*$/ ? "$1$runlevel$2\n" : $_; # **
-	}
+    local @ARGV = grep { -r $_ } "$prefix/etc/inittab" or log::l("missing inittab!!!"), return;
+    local $^I = '';
+    while (<>) {
+	s/^(id:)[35](:initdefault:)\s*$/$1$runlevel$2\n/;
+	print;
     }
-    unlink("$prefix/etc/inittab");
-    rename("$prefix/etc/inittab-", "$prefix/etc/inittab");
 }
 
 sub keepOnlyLegalModes {

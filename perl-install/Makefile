@@ -1,5 +1,6 @@
 VERSION     = 2.2.10-BOOT                                                                             
 SUDO        = sudo
+MKE2FS      = /sbin/mke2fs -q -m 0 -F
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
 PMS         = *.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
 REP4PMS     = /usr/bin/perl-install
@@ -33,7 +34,7 @@ tar: clean
 	cd .. ; tar cfy perl-install.tar.bz2 $(EXCLUDE:%=--exclude %) perl-install
 
 floppy:
-	dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cp -a ../install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
+	dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; $(MKE2FS) /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cp -a ../install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 
 tar-diskdrake: clean pci_probing
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
@@ -62,8 +63,8 @@ verify_c:
 gendepslist: %: %.cc 
 	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb1 -lz -o $@
 
-$(BASE)/depslist: gendepslist $(RPMS) 
-	./gendepslist $(BASE)/depslist $(ROOTDEST)/Mandrake/RPMS/*.rpm
+$(BASE)/depslist: $(BASE)/hdlist gendepslist
+	./gendepslist -h $@ $<
 
 $(BASE)/hdlist: $(RPMS) 
 	$(ROOTDEST)/misc/genhdlist $(ROOTDEST)
@@ -138,7 +139,7 @@ get_needed_files: $(DIRS)
 	cp -a consolefonts $(DEST)/usr/share
 	cp modparm.lst MonitorsDB $(DEST)/usr/share
 	cp logo-mandrake.xpm $(DEST)/usr/share
-	cp compss compssList $(ROOTDEST)/Mandrake/base
+	cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base
 
 	cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/
 	install -d $(DEST)/lib/modules
@@ -152,7 +153,7 @@ get_needed_files: $(DIRS)
 
 as_root:
 	/bin/dd if=/dev/zero of=/tmp/initrd bs=1k count=4000
-	echo y | /sbin/mke2fs /tmp/initrd
+	$(MKE2FS) /tmp/initrd
 	losetup /dev/loop0 /tmp/initrd
 	mount /dev/loop0 /mnt/initrd
 	chmod a+w /mnt/initrd
@@ -171,8 +172,8 @@ stage2:
 	$(SUDO) cp -a $(DEST)/* $(STAGE2TMP)
 
 	$(SUDO) umount /mnt/stage2 ; true
-	dd if=/dev/zero of=$(STAGE2) bs=1M count=15
-	echo y | /sbin/mke2fs $(STAGE2)
+	dd if=/dev/zero of=$(STAGE2) bs=1M count=16
+	$(MKE2FS) $(STAGE2)
 	$(SUDO) mount -t ext2 $(STAGE2) /mnt/stage2 -o loop
 
 #	hack to reduce the STAGE2 image
@@ -186,8 +187,6 @@ stage2:
 
 	$(SUDO) umount $(STAGE2)
 	gzip -f -9 $(STAGE2)
-#	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
-#	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/compss Mandrake/mdkinst/usr/[bl]*
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd

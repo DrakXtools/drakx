@@ -7,6 +7,8 @@
 $instdir = "install";
 $ks = "kickstart=floppy" if $type =~ s/_ks//;
 $mnt = "/mnt/disk";
+$mke2fs = "/sbin/mke2fs -q -m 0 -F";
+
 if ($>) {
     $sudo = "sudo";
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
@@ -39,7 +41,7 @@ sub initrd {
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
-    _ "echo y | mke2fs $tmp";
+    _ "$mke2fs $tmp";
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
     _ "$sudo cp -a $instdir/$inst1/* $mnt";
     _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";

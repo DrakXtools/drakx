@@ -58,36 +58,35 @@ sub get_mntpoints_from_fstab($) {
 }
 
 sub format_ext2($;$) {
-    my ($dev, $bad_blocks) = @_;
-    my @options;
+    my ($dev, @options) = @_;
 
     $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
-    $bad_blocks and push @options, "-c";
 
     run_program::run("mke2fs", devices::make($dev), @options) or die _("%s formatting of %s failed", "ext2", $dev);
 }
 
 sub format_dos($;$@) {
-    my ($dev, $bad_blocks, @options) = @_;
+    my ($dev, @options) = @_;
 
-    run_program::run("mkdosfs", devices::make($dev), @options, $bad_blocks ? "-c" : ()) or die _("%s formatting of %s failed", "dos", $dev);
+    run_program::run("mkdosfs", devices::make($dev), @options) or die _("%s formatting of %s failed", "dos", $dev);
 }
 
-sub format_part($;$) {
-    my ($part, $bad_blocks) = @_;
+sub format_part($;$@) {
+    my ($part, @options) = @_;
 
     $part->{isFormatted} and return;
 
     log::l("formatting device $part->{device} (type ", type2name($part->{type}), ")");
 
     if (isExt2($part)) {
-	format_ext2($part->{device}, $bad_blocks);
+	format_ext2($part->{device}, @options);
     } elsif (isDos($part)) {
-        format_dos($part->{device}, $bad_blocks);
+        format_dos($part->{device}, @options);
     } elsif (isWin($part)) {
-        format_dos($part->{device}, $bad_blocks, '-F', 32);
+        format_dos($part->{device}, @options, '-F', 32);
     } elsif (isSwap($part)) {
-        swap::make($part->{device}, $bad_blocks);
+	my $check_blocks = grep { /^-c$/ } @options;
+        swap::make($part->{device}, $check_blocks);
     } else {
 	die _("don't know how to format %s in type %s", $_->{device}, type2name($_->{type}));
     }
@@ -233,6 +232,7 @@ sub write_fstab($;$$) {
 	  @new{($_->{mntpoint}, $_->{"$dir$_->{device}"})} = undef;
 
 	  eval { devices::make("$prefix/$dir$_->{device}") } if $_->{device} && $dir;
+	  mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint};
 
 	  [ "$dir$_->{device}", $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 

@@ -57,16 +57,16 @@ sub ask_many_from_list_refW($$$$$) {
     my $n = 0;
     my $w = my_gtk->new('', %$o);
     gtkadd($w->{window},
-	   gtkpack(create_box_with_title($w, @$messages),
-		   gtkpack(new Gtk::VBox(0,0),
+	   gtkpack_(create_box_with_title($w, @$messages),
+		   1, gtkset_usize(createScrolledWindow(gtkpack(new Gtk::VBox(0,0),
 			   map {
 			       my $nn = $n++;
 			       my $o = Gtk::CheckButton->new($_);
 			       $o->set_active(${$val->[$nn]});
 			       $o->signal_connect(clicked => sub { invbool \${$val->[$nn]} });
 			       $o;
-			   } @$list),
-		   $w->create_okcancel,
+			   } @$list)), 0, @$list > 11 ? 250 : @$list * 260 / 11 + 10),
+		   0, $w->create_okcancel,
 		  )
 	  );
     $w->{ok}->grab_focus;

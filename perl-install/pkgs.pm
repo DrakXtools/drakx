@@ -80,21 +80,21 @@ sub unselect($$;$) {
     }
     return if defined $size && $size <= 0;
 
-#    #- garbage collect for circular dependencies
-#    my $changed = 0; #1;
-#    while ($changed) {
-#	 $changed = 0;
-#      NEXT: foreach my $p (grep { $_->{selected} > 0 && !$_->{base} } values %$packages) {
-#	     my $set = set_new(@{$p->{provides}});
-#	     foreach (@{$set->{list}}) {
-#		 my $q = Package($packages, $_);
-#		 $q->{selected} == -1 || $q->{base} and next NEXT;
-#		 set_add($set, @{$q->{provides}}) if $q->{selected};
-#	     }
-#	     $p->{selected} = 0;
-#	     $changed = 1;
-#	 }
-#    }
+#-    #- garbage collect for circular dependencies
+#-    my $changed = 0; #1;
+#-    while ($changed) {
+#-	  $changed = 0;
+#-	NEXT: foreach my $p (grep { $_->{selected} > 0 && !$_->{base} } values %$packages) {
+#-	      my $set = set_new(@{$p->{provides}});
+#-	      foreach (@{$set->{list}}) {
+#-		  my $q = Package($packages, $_);
+#-		  $q->{selected} == -1 || $q->{base} and next NEXT;
+#-		  set_add($set, @{$q->{provides}}) if $q->{selected};
+#-	      }
+#-	      $p->{selected} = 0;
+#-	      $changed = 1;
+#-	  }
+#-    }
 }
 sub toggle($$) {
     my ($packages, $p) = @_;
@@ -168,6 +168,11 @@ sub getDeps($) {
     }
 }
 
+sub category2packages($) {
+    my ($p) = @_;
+    $p->{packages} || [ map { @{ category2packages($_) } } values %{$p->{childs}} ];
+}
+
 sub readCompss($) {
     my ($packages) = @_;
     my ($compss, $compss_, $ps) = { childs => {} };
@@ -195,9 +200,17 @@ sub readCompss($) {
     ($compss, $compss_);
 }
 
-sub readCompssList($$) {
-    my ($packages, $compss_) = @_;
-
+sub readCompssList($$$) {
+    my ($packages, $compss_, $lang) = @_;
+    my ($r, $s) = ('', '');
+    if ($lang) { 
+	local $SIG{__DIE__} = 'none';
+	my ($l) = split ' ', lang::lang2text($lang);
+	$r = "($lang";
+	$r .= "|$1" if $lang =~ /(..)./;
+	$r .= "|$l" if $l;
+	$r .= ")";
+    }
     my $f = install_any::getFile("compssList") or die "can't find compssList";
     local $_ = <$f>;
     my $level = [ split ];
@@ -206,25 +219,48 @@ sub readCompssList($$) {
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 
-	/^packages\s*$/ and do { $e = $packages; next };
-	/^categories\s*$/ and do { $e = $compss_; next };
+	/^packages\s*$/ and do { $e = $packages; $s = '-'; next };
+	/^categories\s*$/ and do { $e = $compss_; $s = ':'; next };
 
 	my ($name, @values) = split;
 
 	$e or log::l("neither packages nor categories");
-
 	my $p = $e->{$name} or log::l("unknown entry $name (in compssList)"), next;
+
+	@values = map { $_ + 40 } @values if $name =~ /$s$r$/i;
 	$p->{values} = \@values;
     }
     $level;
 }
 
-sub verif_lang($$) {
-    my ($p, $lang) = @_;
+sub readCompssUsers {
+    my ($packages, $compss) = @_;
+    my (%compssUsers, $l);
+
+    my $f = install_any::getFile("compssUsers") or die "can't find compssUsers";
+    foreach (<$f>) {
+	/^\s*$/ || /^#/ and next;
+	s/#.*//;
+
+	if (/^(\S.*)/) {
+	    $compssUsers{$1} = $l = [];
+	} elsif (/\s+\+(.*)/) {
+	    push @$l, $packages->{$1} || do { log::l("unknown package $1 (in compssUsers)"); next };
+	} elsif (/\s+(.*)/) {
+	    my $p = $compss;
+	    $p &&= $p->{childs}{$_} foreach split ':', $1;
+	    $p or log::l("unknown category $1 (in compssUsers)"), next;
+	    push @$l, @{ category2packages($p) };
+	}
+    }
+    \%compssUsers;
+}
+
+sub isLangSensitive($$) {
+    my ($name, $lang) = @_;
     local $SIG{__DIE__} = 'none';
-    $p->{options} =~ /l/ or return 1;
-    $p->{name} =~ /-([^-]*)$/ or return 1;
-    !($1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@);
+    $name =~ /-([^-]*)$/ or return;
+    $1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@;
 }
 
 sub setSelectedFromCompssList($$$$$$) {
@@ -244,7 +280,6 @@ sub setSelectedFromCompssList($$$$$$) {
 	$level = min($level, $p->{values}[$ind]);
 	last if $level == 0;
 
-	verif_lang($p, $lang) or next;
 	&select($packages, $p) unless $isUpgrade;
 
 	my $nb = 0; foreach (@packages) {

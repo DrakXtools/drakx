@@ -95,10 +95,11 @@ sub selectRootPartition($@) {
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
-    $o->{installClass} =
-      $o->ask_from_list_(_("Install Class"),
-			 _("What installation class do you want?"),
-			 [ @classes ], $o->{installClass});
+    my %c; $c{$_} = ucfirst translate($_) foreach @classes;
+    $o->{installClass} = ${{reverse %c}}{
+      $o->ask_from_list(_("Install Class"),
+			_("What installation class do you want?"),
+			[ map { $c{$_} } @classes ], $c{$o->{installClass}})};
     install_steps::selectInstallClass($o);
 }
 
@@ -191,15 +192,29 @@ sub formatPartitions {
 }
 #------------------------------------------------------------------------------
 sub setPackages {
-    my ($o, $install_classes) = @_;
+    my ($o) = @_;
     my $w = $o->wait_message('', _("Looking for available packages"));
-    $o->SUPER::setPackages($install_classes);
+    $o->SUPER::setPackages;
 }
 #------------------------------------------------------------------------------
 sub selectPackagesToUpgrade {
     my ($o) = @_;
     my $w = $o->wait_message('', _("Finding packages to upgrade"));
     $o->SUPER::selectPackagesToUpgrade();
+}
+#------------------------------------------------------------------------------
+sub choosePackages {
+    my ($o, $packages, $compss, $compssUsers) = @_;
+    my %s;
+    
+    $o->ask_many_from_list_ref('',
+			       _("Package Group Selection"),
+			       [ keys %$compssUsers ],
+			       [ map { \$s{$_} } keys %$compssUsers ]
+			       ) or return;
+    foreach (grep { $s{$_} } keys %s) {
+	pkgs::select($o->{packages}, $_) foreach @{$compssUsers->{$_}};
+    }
 }
 #------------------------------------------------------------------------------
 sub configureNetwork($) {
@@ -243,13 +258,15 @@ sub configureNetwork($) {
 	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
 	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
 	#-	  }
-	$o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
+	$last->{BOOTPROTO} =~ /^(dhcp|bootp)$/ ||
+	  $o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
     }
     install_steps::configureNetwork($o);
 }
 
 sub configureNetworkIntf {
     my ($o, $intf) = @_;
+    my $pump = 0;
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
@@ -257,9 +274,11 @@ sub configureNetworkIntf {
 _("Please enter the IP configuration for this machine.
 Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4)."),
-			     [ _("IP address:"), _("Netmask:")],
-			     [ \$intf->{IPADDR}, \$intf->{NETMASK} ],
+			     [ _("IP address:"), _("Netmask:"), _("Automatic IP") ],
+			     [ \$intf->{IPADDR}, \$intf->{NETMASK}, { val => \$pump, type => "bool", text => _("(bootp/dhcp)") } ],
 			     complete => sub {
+				 $intf->{BOOTPROTO} = $pump ? "bootp" : "static";
+				 return 0 if $pump;
 				 for (my $i = 0; $i < @fields; $i++) {
 				     unless (network::is_ip($intf->{$fields[$i]})) {
 					 $o->ask_warn('', _("IP address should be in format 1.2.3.4"));
@@ -277,6 +296,7 @@ notation (for example, 1.2.3.4)."),
 
 sub configureNetworkNet {
     my ($o, $netc, $intf, @devices) = @_;
+
     $netc->{dnsServer} ||= network::dns($intf->{IPADDR});
     $netc->{GATEWAY}   ||= network::gateway($intf->{IPADDR});
 
@@ -505,7 +525,10 @@ sub setRootPassword($) {
     my $sup = $o->{superuser} ||= {};
     $sup->{password2} ||= $sup->{password} ||= "";
 
-    $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
+    return if $o->{security} < 2;
+
+    $o->{security} < 2 or 
+      $o->ask_from_entries_ref([_("Set root password"), _("Ok"), _("No password")],
 			 _("Set root password"),
 			 [_("Password:"), _("Password (again):"), $o->{installClass} eq "server" || $::expert ? (_("Use shadow file"), _("Use MD5 passwords")) : () ],
 			 [{ val => \$sup->{password},  hidden => 1 },
@@ -515,10 +538,11 @@ sub setRootPassword($) {
 			 ],
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
-			     (length $sup->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
+			     length $sup->{password} < ($o->{security} > 4 ? 10 : 6)
+			       and $o->ask_warn('', _("This password is too simple")), return (1,0);
 			     return 0
 			 }
-			);
+    );
     install_steps::setRootPassword($o);
 }
 
@@ -526,16 +550,16 @@ sub setRootPassword($) {
 #-addUser
 #------------------------------------------------------------------------------
 sub addUser($) {
-    my ($o) = @_;
-    my $u = $o->{user} ||= {};
+    my ($o, $clicked) = @_;
+    my $u = $o->{user} ||= $o->{security} < 2 ? { name => "mandrake", realname => "default" } : {};
     $u->{password2} ||= $u->{password} ||= "";
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
-    if ($o->ask_from_entries_ref(
-        [ _("Add user"), _("Add user"), _("Done") ],
+    if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_ref(
+        [ _("Add user"), _("Accept user"), _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} } @{$o->{users}})) : ''),
-        [ _("Real name"), _("User name"), _("Password"), _("Password (again)"), _("Shell") ],
+        [ _("Real name"), _("User name"), $o->{security} < 3 ? () : (_("Password"), _("Password (again)")), $::beginner ? () : _("Shell") ],
         [ \$u->{realname}, \$u->{name},
 	  {val => \$u->{password}, hidden => 1}, {val => \$u->{password2}, hidden => 1},
 	  {val => \$u->{shell}, list => \@shells, not_edit => !$::expert},
@@ -555,7 +579,7 @@ sub addUser($) {
     )) {
 	push @{$o->{users}}, $o->{user};
 	$o->{user} = {};
-	goto &addUser;#- if $::expert;
+	goto &addUser unless $o->{security} < 2 && !$clicked;
     }
     install_steps::addUser($o);
 }
@@ -623,8 +647,10 @@ _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bo
 _("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
 _("Delay before booting default image") => \$b->{timeout},
 _("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
+$o->{security} < 3 ? () : (
 _("Password") => { val => \$b->{password}, hidden => 1 },
 _("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
+)
 	);
 	@l = @l[0..3] if $::beginner;
 
@@ -634,6 +660,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 				 [ grep_index { even($::i) } @l ],
 				 [ grep_index {  odd($::i) } @l ],
 				 complete => sub {
+				     $o->{security} > 4 && length($b->{password}) < 6 and $o->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
 				     $b->{restricted} && !$b->{password} and $o->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
 				     0;
 				 }
@@ -704,6 +731,40 @@ _("Default") => { val => \$default, type => 'bool' },
 		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
 	die "already displayed";
     }
+}
+
+#------------------------------------------------------------------------------
+sub miscellaneous {
+    my ($o, $clicked) = @_;
+    my %l = (
+	1 => _("Windows(TM)"),
+	2 => _("Low"),
+	3 => _("Medium"),
+	4 => _("High"),
+	5 => _("Paranoid"),
+    );
+    my $u = $o->{miscellaneous} ||= {};
+    exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
+    my $s = $o->{security} || ${{
+	beginner  => 2,
+	developer => 3,
+	server    => 4,
+	expert    => 3
+    }}{$o->{installClass}};
+    $s = $l{$s} || $s;
+
+    !$::beginner || $clicked and $o->ask_from_entries_ref('',
+	_("Miscellaneous questions"),
+	[ _("Do you have a laptop?"), 
+	  _("Use hard drive optimizations"), 
+	  _("Security level") ],
+	[ { val => \$u->{LAPTOP}, type => 'bool' },
+	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause disk problems)") },
+	  { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
+	],
+    ) or return;
+    my %m = reverse %l; $o->{security} = $m{$s};
+    $o->SUPER::miscellaneous;
 }
 
 #------------------------------------------------------------------------------

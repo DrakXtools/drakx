@@ -38,13 +38,12 @@ sub size($) {
 sub make($) {
     local $_ = my $file = $_[0];
     my ($type, $major, $minor);
-    my $prefix = '';
 
     if (m,^(.*/(?:dev|tmp))/(.*),) {
 	$_ = $2;
     } else {
-	$file = "$prefix/dev/$_";
-	-e $file or $file = "$prefix/tmp/$_";
+	$file = "/tmp/$_";
+	-e $file or $file = "/dev/$_";
     }
     -e $file and return $file; #- assume nobody takes fun at creating files named as device
 
@@ -75,28 +74,29 @@ sub make($) {
 	$type = c::S_IFBLK();
 	$major = 72 + $1;
 	$minor = 16 * $2 + ($4 || 0);
-    } else {
+    } elsif (/(.*)(\d+)$/) {
+	    ($type, $major, $minor) =
+	     @{ ${{"fd"     => [ c::S_IFBLK(), 2,  0 ],
+		   "lp"     => [ c::S_IFCHR(), 6,  0 ],
+		   "scd"    => [ c::S_IFBLK(), 11, 0 ],
+		   "nst"    => [ c::S_IFCHR(), 9, 128 ],
+	       }}{$1}};
+	    $minor += $2;
+    }
+    unless ($type) {
 	($type, $major, $minor) =
-	    @{ $ {{"aztcd"   => [ c::S_IFBLK(), 29, 0 ],
+	     @{ ${{"aztcd"   => [ c::S_IFBLK(), 29, 0 ],
 		   "bpcd"    => [ c::S_IFBLK(), 41, 0 ],
 		   "cdu31a"  => [ c::S_IFBLK(), 15, 0 ],
 		   "cdu535"  => [ c::S_IFBLK(), 24, 0 ],
 		   "cm206cd" => [ c::S_IFBLK(), 32, 0 ],
-		   "tty"     => [ c::S_IFCHR(), 5, 0 ],
-		   "fd0"     => [ c::S_IFBLK(), 2, 0 ],
-		   "fd1"     => [ c::S_IFBLK(), 2, 1 ],
+		   "tty"     => [ c::S_IFCHR(), 5,  0 ],
 		   "gscd"    => [ c::S_IFBLK(), 16, 0 ],
-		   "lp0"     => [ c::S_IFCHR(), 6, 0 ],
-		   "lp1"     => [ c::S_IFCHR(), 6, 1 ],
-		   "lp2"     => [ c::S_IFCHR(), 6, 2 ],
 		   "mcd"     => [ c::S_IFBLK(), 23, 0 ],
 		   "mcdx"    => [ c::S_IFBLK(), 20, 0 ],
-		   "nst0"    => [ c::S_IFCHR(), 9, 128 ],
-		   "random"  => [ c::S_IFCHR(), 1, 8 ],
+		   "random"  => [ c::S_IFCHR(), 1,  8 ],
 		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
 		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],
-		   "scd0"    => [ c::S_IFBLK(), 11, 0 ],
-		   "scd1"    => [ c::S_IFBLK(), 11, 1 ],
 		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
 	       }}{$_} or die "unknown device $_" };
     }

@@ -22,6 +22,17 @@ sometimes wonder what the whole make does :-%
 Instead, changing some .pm files is quite easy (nice interpreted language)
 
 ********************************************************************************
+* Making your custom install cdrom *********************************************
+********************************************************************************
+If you have your own rpms you want to add, or make your own updated cdrom, you
+just have to update:
+- Mandrake/base/hdlist: use ``misc/genhdlist .''
+- Mandrake/base/depslist: use ``misc/gendepslist -h Mandrake/base/depslist Mandrake/base/hdlist''
+
+Optionnally, you can modify Mandrake/base/compss, compssList and compssUsers
+See below for information about these files.
+
+********************************************************************************
 * FILES ************************************************************************
 ********************************************************************************
 First he are the different things needed :
@@ -38,6 +49,10 @@ Mandrake/base/depslist
 Mandrake/base/compss
 	obsoletes comps. It store packages in different categories, a bit like
 	the %{GROUP} field
+
+Mandrake/base/compssUsers
+	obsoletes comps. It contains the different user classes like ``Graphics
+	Manipulation'' and ``Games''
 
 Mandrake/base/compssList
 	for each packages, it gives the appreciation for each type of user.
@@ -65,6 +80,36 @@ Some optional files :
 
 Mandrake/base/depslist.html
 	html formatted depslist
+
+********************************************************************************
+* logs *************************************************************************
+********************************************************************************
+During install, a lot of interesting stuff can be found in different places:
+in consoles and in files. To switch to console 2 for example, do Ctrl-Alt-F2
+from the X install.
+- alt-F1: the stdout of the install. Not very interesting stuff
+- alt-F2: simple shell. Quite a lot of commands are available but as they are
+written in perl (for space), they do not handle the very same options as normal.
+After install, you can do ``chroot /mnt'' to see your system just like after
+rebooting. ``rpm -qa'' works for example.
+- alt-F3: a lot of interesting things. Be carefull, some ``ERROR'' messages are
+not interesting.
+- alt-F4: kernel's place. aka the output of dmesg.
+- alt-F5: the graphical install lives there (may switch to console 7 one day :)
+- alt-F7: the output of commands (like lilo or mke2fs).
+
+- /tmp/ddebug.log: same (or nearly the same) as alt-F3
+- /tmp/syslog: same as alt-F4
+- /mnt/root/ddebug.log: at the end of each step, DrakX tries to backup
+/tmp/ddebug.log to /mnt/root. Available only after mounting of /.
+- /mnt/root/install.log: the log of the installation (or upgrade) of the rpms
+(just like rpm's /mnt/tmp/(install|upgrade).log)
+- /mnt/root/auto_inst.cfg.pl: a kickstart file generated at the end of each
+step. Can be used in 2 ways: kickstart install or ``defcfg'' install. Hopefully
+you know about kickstart. ``defcfg'' is a way to customize the default values in
+install. For example, French can be the default language with a qwerty keyboard,
+the auto-partitionning partitions can be changed, the default user class can be
+set to developer (!)...
 
 ********************************************************************************
 * po translation files *********************************************************

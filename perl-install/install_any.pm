@@ -17,6 +17,7 @@ use common qw(:common :system :functional :file);
 use commands;
 use run_program;
 use partition_table qw(:types);
+use devices;
 use fsedit;
 use detect_devices;
 use pkgs;
@@ -30,7 +31,7 @@ use log;
 sub relGetFile($) {
     local $_ = $_[0];
     my $dir = m|/| ? "mdkinst" :
-      (member($_, qw(compss compssList depslist hdlist)) ? "base" : "RPMS");
+      (member($_, qw(compss compssList compssUsers depslist hdlist)) ? "base" : "RPMS");
     $_ = "Mandrake/$dir/$_";
     s/i386/i586/;
     $_;
@@ -108,12 +109,10 @@ sub getAvailableSpace {
     die "missing root partition";
 }
 
-sub setPackages($$) {
-    my ($o, $install_classes) = @_;
+sub setPackages($) {
+    my ($o) = @_;
 
-    if ($o->{packages}) {
-	$_->{selected} = 0 foreach values %{$o->{packages}};
-    } else {
+    if (is_empty_hash_ref($o->{packages})) {
 	my $useHdlist = $o->{method} !~ /nfs|hd/ || $o->{isUpgrade};
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
@@ -123,11 +122,14 @@ sub setPackages($$) {
 	pkgs::getDeps($o->{packages});
 
 	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c);
-	$o->{compssListLevels} ||= $install_classes;
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c, $o->{lang});
+	$o->{compssUsers} = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
+    } else {
+    	$_->{selected} = 0 foreach values %{$o->{packages}};
     }
+
 
     #- this will be done if necessary in the selectPackagesToUpgrade,
     #- move the selection here ? this will remove the little window.
@@ -315,9 +317,12 @@ sub lnx4win_postinstall {
     my $kernel = "$dir/vmlinuz";
     rename $kernel, "$kernel.old";
     commands::dd("if=$prefix/boot/vmlinuz", "of=$kernel");
+    run_program::run("rdev", $kernel, "/dev/loop7");
 
     unlink "$dir/size.txt";
     unlink "$dir/swapfile.txt";
+
+    mkdir "$prefix/initrd", 0755;
     symlinkf "/initrd/dos", "$prefix/mnt/dos";
 }
 
@@ -331,8 +336,11 @@ sub unlockCdroms {
       foreach detect_devices::cdroms();
 }
 
-sub g_auto_install {
-    my $o = {};
+sub auto_inst_file() { "$::o->{prefix}/root/auto_inst.cfg.pl" }
+
+sub g_auto_install(;$) {
+    my ($f) = @_; $f ||= auto_inst_file;
+    my $o = bless {};
 
     $o->{default_packages} = [ map { $_->{name} } grep { $_->{selected} && !$_->{base} } values %{$::o->{packages}} ];
 
@@ -341,29 +349,40 @@ sub g_auto_install {
     
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentification printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning); #- TODO modules bootloader 
 
-    $o->{partitioning}{clearall} = 1;
+    local $o->{partitioning}{clearall} = 1;
 
-    delete @$_{qw(oldu oldg pw password2)} foreach $o->{superuser}, @{$o->{users} || []};
+    $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
     local *F;
-    open F, ">auto_inst.cfg.pl" or die;
+    open F, ">$f" or log::l("can't output the auto_install script in $f"), return;
     print F Data::Dumper->Dump([$o], ['$o']), "\0";
 }
 
 sub loadO {
-    my ($O, $f) = @_;
+    my ($O, $f) = @_; $f ||= auto_inst_file;
     my $o;
-    -e $f or $f .= ".pl";
-    {
-	local *F;
-	open F, $f or die _("Error reading file $f");
+    if ($f eq "floppy") {
+	my $f = "auto_inst.cfg";
+	unless ($::testing) {
+	    fs::mount(devices::make("fd0"), "/mnt", "vfat", 0);
+	    $f = "/mnt/$f";
+	}
+	-e $f or $f .= ".pl";
+	$o = loadO($O, $f);
+	fs::umount("/mnt") unless $::testing;
+    } else {
+	-e $f or $f .= ".pl";
+	{
+	    local *F;
+	    open F, $f or die _("Error reading file $f");
 
-	local $/ = "\0";
-	eval <F>;
+	    local $/ = "\0";
+	    eval <F>;
+	}
+	$@ and log::l _("Bad kickstart file %s (failed %s)", $f, $@);
+	add2hash_($o, $O);
     }
-    $@ and log::l _("Bad kickstart file %s (failed %s)", $f, $@);
-    add2hash_($o, $O);
-    $o;
+    bless $o, ref $O;
 }
 
 sub pkg_install {
