@@ -196,8 +196,11 @@ our %l = (
     ],
     char => [
       if_(arch() =~ /ia64/, qw(efivars)),
-      qw(hw_random applicom n_r3964 nvram pc110pad ppdev),
+      qw(applicom n_r3964 nvram pc110pad ppdev),
       qw(wdt_pci i810-tco sx), #- what are these???
+    ],
+    crypto => [
+      qw(amd768_rng amd7xx_tco i810_rng hw_random padlock),
     ],
     laptop => [
       qw(i8k sonypi toshiba),
