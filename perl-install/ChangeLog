@@ -1,3 +1,92 @@
+2001/03/21  dam's  <damien@mandrakesoft.com>
+
+	* standalone/tinyfirewall, tinyfirewall.pm: new tinyfirewall conf tool
+
+	* netconnect.pm: corrected /etc/sysconfig/network-scripts/net_up.* bug
+
+2001/03/21  François Pons  <fpons@mandrakesoft.com>
+
+	* detect_devices.pm: added pci id reference.
+
+	* c/stuff.xs.pm: added support for pci id extraction.
+
+	* Xconfigurator.pm: fixed wrong XFree4 version reference.
+	fixed null string in monitor identifier.
+	added multi-head support in XFdrake.
+
+2001/03/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: honour embedded mode
+
+	* share/compssUsers: move NETWORKING_FILE (contains stuff for nfs
+	mounting..) from Internet
+	Station to Network Computer
+
+2001/03/21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/pt.po, share/po/DrakX.pot, share/po/es.po,
+	share/po/fr.po, share/po/bg.po, share/po/ga.po, share/po/de.po,
+	share/po/et.po, share/po/tr.po, share/po/eu.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/lt.po, share/po/sl.po, share/po/br.po, share/po/ca.po,
+	share/po/gl.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/ro.po, share/po/da.po, share/po/cs.po, share/po/af.po: Updated
+	Croatian and Serbian files
+
+	* share/po/sp.po, share/po/sr.po: Updated Serbian files
+	Updated Croatian and Serbian files
+
+	* share/po/az.po: Updated Azeri file
+	Updated Croatian and Serbian files
+
+	* share/po/sk.po: Updated Azeri and Slovak files
+	Updated Croatian and Serbian files
+
+	* lang.pm: Added fields to charsets table holding info for mount
+	(iocharset and
+	codepage mount options)
+
+2001/03/21  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (g_default_packages): nice warning if mount in vfat fails
+
+	* share/rpmsrate: move webmin to CONFIG
+	remove ipchains and iptables, raise gfcc
+
+	* docs/README: add cvs howto
+
+	* install_steps_interactive.pm (summary): fix
+
+	* detect_devices.pm: old code
+
+	* bootloader.pm (install_lilo): ensure labels don't contain spaces, lilo
+	doesn't like them
+	(add_kernel): cleanup
+	(suggest): make it work with kernel22-secure and no kernel22
+
+	* modules.pm (when_load): move the alias sound to when_load, don't check
+	ppc as it
+	could be used for non-ppc
+	(load_thiskind): fix pb causing imm,ppa,usb-storage to be tested for
+	every
+	load_thiskind, not only scsi one
+
+	* c/stuff.xs.pm (from_utf8): as pablo said...
+
+2001/03/21  siegel
+
+	* share/po/de.po: new german version
+	new german version
+
+2001/03/20  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (@drivers_by_category): if_ization
+	(load_thiskind): cleanup
+
 2001/03/21  Pixel  <pixel@mandrakesoft.com>
 
 	* bootloader.pm (add_kernel): cleanup
