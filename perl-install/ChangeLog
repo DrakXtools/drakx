@@ -1,3 +1,18 @@
+2001/02/09  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_gtk.pm, interactive.pm, interactive_newt.pm: add button
+	handling, quite weird behaviour though cuz of newt sillyness
+
+	* install2.pm: configureTimezone doesn't take parameter
+	/etc/sysconfig/clock
+	(main): have compatibility with old stage1 (rhimage -> image)
+	(formatPartitions):
+	s|etc/sysconfig/consoletrans|etc/sysconfig/console/consoletrans|
+	as it should now be (see lang.pm 1.143)
+
+	* install_steps.pm, install_steps_interactive.pm, timezone.pm:
+	configureTimezone doesn't take parameter /etc/sysconfig/clock
+
 2001/02/09  siegel
 
 	* share/po/de.po: new german version
