@@ -158,6 +158,7 @@ arch() =~ /^sparc/ ? (
 #******(missing-2.4)  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
   "megaraid" => "AMI MegaRAID",
 #******(missing-2.4)  "aacraid" => "AACxxx Raid Controller",
+  "cciss" => "Compaq Smart Array 5300 Controller",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "gdth" => "ICP Disk Array Controller",
   "ips" => "IBM ServeRAID controller",
