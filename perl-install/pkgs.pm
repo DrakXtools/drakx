@@ -788,8 +788,10 @@ sub selectPackagesToUpgrade {
 
     my %selection;
     $packages->request_packages_to_upgrade($packages->{rpmdb}, $state, \%selection, requested => undef);
+    log::l("resolving dependencies...");
     $packages->resolve_requested($packages->{rpmdb}, $state, \%selection,
 				 callback_choices => \&packageCallbackChoices);
+    log::l("...done");
 }
 
 sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kernel-smp|kernel-linus|kernel-linus2.2|hackkernel|kernel-enterprise)$/ }
