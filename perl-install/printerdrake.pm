@@ -240,7 +240,7 @@ sub main($$$;$) {
 				      $printer->{want}) ? 'lp' : 'Done';
 	} else {
 	    $queue = $in->ask_from_list_([''],
-_("Here are the following print queue.
+_("Here are the following print queues.
 You can add some more or change the existing ones."),
 					 [ (sort keys %{$printer->{configured} || {}}), __("Add"), __("Done") ],
 					);
