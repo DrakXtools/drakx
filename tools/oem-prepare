@@ -112,21 +112,20 @@ sub select_packages {
     my ($dir, $lang) = @_;
     my $o = { packages => read_depslist("$dir/Mandrake/base/depslist.ordered") };
 
-    #- DO NOT FORGET TO UPDATE HERE ACCORDING TO gi/perl-install/install_any.pm
-    my @pkgs = qw(XFree86 XFree86-server XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
-		  dhcpcd pump dhcpxd dhcp-client isdn-light isdn4net isdn4k-utils dev pptp-adsl rp-pppoe ppp ypbind
-		  autologin
-		  foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
-		  cups xpp qtcups kups cups-drivers lpr LPRng pdq ImageMagick
+    #- act as DrakX will do to select packages.
+    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate") || die "unable to read rpmsrate");
+    ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
+      pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
+    eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
 
-		  kernel-pcmcia-cs apmd cdrecord rio500 grio500
-                 );
-    push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
-    foreach (@pkgs) {
-	my $pkg = pkgs::packageByName($o->{packages}, $_);
-	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
-    }
+    #- first select closure, package that will be selected for closure at least.
+    $o->{compssUsersChoice}{$_} = 1 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND INSTALL);
+    pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
+    $o->{compssUsersChoice}{$_} = 0 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND INSTALL);
+
+    #- first select package that have to go to closure according to their names.
     foreach my $pkg (@{$o->{packages}{depslist}}) {
+	$pkg->{name} =~ /kernel-(\d|smp|enterprise|secure)/ and pkgs::selectPackage($o->{packages}, $pkg);
 	$pkg->{name} =~ /NVIDIA/ and pkgs::selectPackage($o->{packages}, $pkg);
     }
     foreach my $pkg (@{$o->{packages}{depslist}}) {
@@ -136,20 +135,13 @@ sub select_packages {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and $pkg->{closure} = 1;
     }
-
-    #- act as DrakX will do to select packages.
+    
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die "no basesystem package found");
-    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate") || die "unable to read rpmsrate");
-    ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
-      pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
-    eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
+    #- by default, choose:
+    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
+    $o->{compssUsersChoice}{$_} = 1 
+	foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
 
-    if (!$o->{compssUsersChoice}) {
-	#- by default, choose:
-	$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG';
-	$o->{compssUsersChoice}{$_} = 1 
-	    foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
-    }
     if (exists $options{server}) {
 	foreach (qw(KDE ACCESSIBILITY PUBLISHING CUPS EDITORS TEXT_TOOLS COMMUNICATIONS TERMINALS
 		    NETWORKING_FILE_TRANSFER NETWORKING_OTHER
@@ -157,7 +149,7 @@ sub select_packages {
 		    NETWORKING_MAIL_SERVER NETWORKING_OTHER_SERVER
 		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS NETWORKING_DNS_SERVER
 		    NETWORKING_FILE NETWORKING_FILE_SERVER NETWORKING_WWW NETWORKING_WWW_SERVER
-		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM X)) {
+		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM X DOCS)) {
 	    $o->{compssUsersChoice}{$_} = 1;
 	}
 	#- additional packages to be selected for server, databases with MySQL (avoid rpmsrate modifications).
@@ -167,7 +159,7 @@ sub select_packages {
 	}
     } else {
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
-	$o->{compssUsersChoice}{$_} = 1 foreach qw(SYSTEM X);
+	$o->{compssUsersChoice}{$_} = 1 foreach qw(SYSTEM X DOCS);
 	@{$o->{compssUsersChoice}}{grep { /SERVER|DATABASES/ } keys %{$o->{compssUsersChoice}}} = ();
     }
 
@@ -182,7 +174,7 @@ sub select_packages {
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
 
     #- package that have to selected here as a bonus for oem install.
-    foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfsprogs xfsprogs jfsprogs icewm-light
+    foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools icewm-light
 		Mesa Mesa-demos alsa alsa-utils Mesa-demos
                 glibc vim-minimal kernel
 	       ), exists $options{server} ? qw(kernel22 openldap-migration openldap-clients pam_ldap) : ()) {
@@ -191,13 +183,10 @@ sub select_packages {
     }
 
     #- special packages that are to be move to closure always ...
-    foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure kernel-pcmcia-cs
-		xawtv kwintv xscreensaver-gl xmms-mesa openuniverse
-		csmash chromium tuxracer armagetron 
-		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs
-		sox aumix xmms-arts xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
-	       ), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib
-						kernel-enterprise kernel22-secure) : ()) {
+    foreach (qw(nfs-utils-client numlock kernel22 usbd hotplug alsa alsa-utils imwheel
+		raidtools lvm reiserfsprogs xfsprogs jfsprogs),
+	     exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib
+					  kernel-enterprise kernel22-secure) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
 	    pkgs::selectPackage($o->{packages}, $pkg);

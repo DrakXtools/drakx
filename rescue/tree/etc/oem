@@ -352,93 +352,6 @@ if (open F, ">/hd/Mandrake/oem_patch.pl") {
     print "Setting OEM specific extension to DrakX\n";
     if (exists $options{server}) {
 	print F q{
-	    use install_any;
-	    package install_any;
-	    undef *setPackages;
-	    *setPackages = sub {
-		my ($o) = @_;
-
-		require pkgs;
-		if (!$o->{packages} || is_empty_hash_ref($o->{packages}{names})) {
-		    $o->{packages} = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
-
-		    push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
-		    push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-		    push @{$o->{default_packages}}, "kernel-enterprise" if (availableRamMB() > 800) && (arch() !~ /ia64/);
-		    push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
-		    push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
-		    push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
-		    push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
-		    push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
-		    push @{$o->{default_packages}}, "usbd", "hotplug" if modules::get_alias("usb-interface");
-		    push @{$o->{default_packages}}, "reiserfsprogs" if grep { isThisFs("reiserfs", $_) } @{$o->{fstab}};
-		    push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
-		    push @{$o->{default_packages}}, "jfsprogs" if grep { isThisFs("jfs", $_) } @{$o->{fstab}};
-		    push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
-		    push @{$o->{default_packages}}, "imwheel" if $o->{mouse}{nbuttons} > 3;
-
-		  pkgs::getDeps($o->{prefix}, $o->{packages});
-		  pkgs::selectPackage($o->{packages},
-				    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
-
-		    #- must be done after selecting base packages (to save memory)
-		  pkgs::getProvides($o->{packages});
-
-		    #- must be done after getProvides
-		  pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
-		    ($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{meta_class});
-
-		    if ($::auto_install && $o->{compssUsersChoice}{ALL}) {
-			$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
-		    }
-		    if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
-			#- by default, choose:
-			$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
-			$o->{compssUsersChoice}{$_} = 1 
-			    foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
-		    }
-		    $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
-		    $o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
-		    $o->{compssUsersChoice}{SYSTEM} = 1;
-		    $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
-		    $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
-		    $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
-		    $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
-		    $o->{compssUsersChoice}{'3D'} = 1 if 
-		      detect_devices::matching_desc('Matrox.* G[245][05]0') ||
-			detect_devices::matching_desc('Riva.*128') ||
-			  detect_devices::matching_desc('Rage X[CL]') ||
-			    detect_devices::matching_desc('Rage Mobility [PL]') ||
-			      detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
-				detect_devices::matching_desc('Voodoo [35]') ||
-				  detect_devices::matching_desc('Voodoo Banshee') ||
-				    detect_devices::matching_desc('8281[05].* CGC') ||
-				      detect_devices::matching_desc('Rage 128') ||
-					detect_devices::matching_desc('Radeon ') ||
-					  detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
-					    detect_devices::matching_desc('[nN]Vidia.*NV[56]') ||
-					      detect_devices::matching_desc('[nN]Vidia.*Vanta') ||
-						detect_devices::matching_desc('[nN]Vidia.*GeForce') || #- GeForce cards
-						  detect_devices::matching_desc('[nN]Vidia.*NV1[15]') ||
-						    detect_devices::matching_desc('[nN]Vidia.*Quadro');
-
-
-		    foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
-		      pkgs::packageByName($o->{packages}, "locales-$_") or next;
-			push @{$o->{default_packages}}, "locales-$_";
-			$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1; #- mainly for zh in case of zh_TW.Big5
-		    }
-		    foreach (lang::langsLANGUAGE($o->{langs})) {
-			$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
-		    }
-		    $o->{compssUsersChoice}{'CHARSET"' . lang::lang2charset($o->{lang}) . '"'} = 1;
-		} else {
-		    #- this has to be done to make sure necessary files for urpmi are
-		    #- present.
-		  pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method});
-		}
-	    };
-
 	    use install_steps;
 	    package install_steps;
 	    undef *choosePackages;
@@ -681,21 +594,20 @@ sub select_packages {
     my ($dir, $lang) = @_;
     my $o = { packages => read_depslist("$dir/Mandrake/base/depslist.ordered") };
 
-    #- DO NOT FORGET TO UPDATE HERE ACCORDING TO gi/perl-install/install_any.pm
-    my @pkgs = qw(XFree86 XFree86-server XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
-		  dhcpcd pump dhcpxd dhcp-client isdn-light isdn4net isdn4k-utils dev pptp-adsl rp-pppoe ppp ypbind
-		  autologin
-		  foomatic printer-utils printer-testpages gimpprint rlpr samba-client ncpfs nc
-		  cups xpp qtcups kups cups-drivers lpr LPRng pdq ImageMagick
+    #- act as DrakX will do to select packages.
+    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate") || die "unable to read rpmsrate");
+    ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
+      pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
+    eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
 
-		  apmd cdrecord rio500 grio500
-                 );
-    push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
-    foreach (@pkgs) {
-	my $pkg = pkgs::packageByName($o->{packages}, $_);
-	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
-    }
+    #- first select closure, package that will be selected for closure at least.
+    $o->{compssUsersChoice}{$_} = 1 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND INSTALL);
+    pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
+    $o->{compssUsersChoice}{$_} = 0 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND INSTALL);
+
+    #- first select package that have to go to closure according to their names.
     foreach my $pkg (@{$o->{packages}{depslist}}) {
+	$pkg->{name} =~ /kernel-(\d|smp|enterprise|secure)/ and pkgs::selectPackage($o->{packages}, $pkg);
 	$pkg->{name} =~ /NVIDIA/ and pkgs::selectPackage($o->{packages}, $pkg);
     }
     foreach my $pkg (@{$o->{packages}{depslist}}) {
@@ -705,20 +617,13 @@ sub select_packages {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and $pkg->{closure} = 1;
     }
-
-    #- act as DrakX will do to select packages.
+    
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die "no basesystem package found");
-    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate") || die "unable to read rpmsrate");
-    ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
-      pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
-    eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
+    #- by default, choose:
+    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
+    $o->{compssUsersChoice}{$_} = 1 
+	foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
 
-    if (!$o->{compssUsersChoice}) {
-	#- by default, choose:
-	$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG';
-	$o->{compssUsersChoice}{$_} = 1 
-	    foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
-    }
     if (exists $options{server}) {
 	foreach (qw(KDE ACCESSIBILITY PUBLISHING CUPS EDITORS TEXT_TOOLS COMMUNICATIONS TERMINALS
 		    NETWORKING_FILE_TRANSFER NETWORKING_OTHER
@@ -726,7 +631,7 @@ sub select_packages {
 		    NETWORKING_MAIL_SERVER NETWORKING_OTHER_SERVER
 		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS NETWORKING_DNS_SERVER
 		    NETWORKING_FILE NETWORKING_FILE_SERVER NETWORKING_WWW NETWORKING_WWW_SERVER
-		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM X)) {
+		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM X DOCS)) {
 	    $o->{compssUsersChoice}{$_} = 1;
 	}
 	#- additional packages to be selected for server, databases with MySQL (avoid rpmsrate modifications).
@@ -736,7 +641,7 @@ sub select_packages {
 	}
     } else {
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
-	$o->{compssUsersChoice}{$_} = 1 foreach qw(SYSTEM X);
+	$o->{compssUsersChoice}{$_} = 1 foreach qw(SYSTEM X DOCS);
 	@{$o->{compssUsersChoice}}{grep { /SERVER|DATABASES/ } keys %{$o->{compssUsersChoice}}} = ();
     }
 
@@ -760,13 +665,10 @@ sub select_packages {
     }
 
     #- special packages that are to be move to closure always ...
-    foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure kernel-pcmcia-cs
-		xawtv kwintv xscreensaver-gl xmms-mesa openuniverse
-		csmash chromium tuxracer armagetron 
-		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs xfsprogs jfsprogs 
-		sox aumix xmms-arts xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
-	       ), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib
-					       kernel-enterprise kernel22-secure) : ()) {
+    foreach (qw(nfs-utils-client numlock kernel22 usbd hotplug alsa alsa-utils imwheel
+		raidtools lvm reiserfsprogs xfsprogs jfsprogs),
+	     exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib
+					  kernel-enterprise kernel22-secure) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
 	    pkgs::selectPackage($o->{packages}, $pkg);
