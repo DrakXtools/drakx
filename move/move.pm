@@ -50,16 +50,20 @@ sub symlinkf_short {
 sub handle_etcfiles {
     my (@allowed_modes) = @_;
     #- non-trivial files listed from tools/scan-etc.pl
+    my ($mode, $allowed);
     foreach (chomp_(cat_('/image/move/etcfiles'))) {
-        my $mode if 0;
-        m|^# (\S+)| and $mode = $1;
-        m|^/| && member($mode, @allowed_modes) and do {
-            $mode eq 'READ' && !-e $_ and symlinkf_short("/image$_", $_);
-            if ($mode eq 'OVERWRITE') {
+        if (m|^# (\S+)|) {
+	    $mode = $1;
+	    $allowed = member($mode, @allowed_modes);
+	} elsif (m|^/| && $allowed) {
+            if ($mode eq 'READ') {
+		symlinkf_short("/image$_", $_) if !-e $_;
+	    } elsif ($mode eq 'OVERWRITE') {
                 mkdir_p(dirname($_));
                 cp_f("/image$_", $_);  #- need copy contents
-            }
-            $mode eq 'DIR' and mkdir_p $_;
+            } elsif ($mode eq 'DIR') {
+		mkdir_p $_;
+	    }
         }
     }
 
@@ -141,7 +145,7 @@ sub init {
 
     #- ro things
     symlinkf_short("/image/etc/$_", "/etc/$_")
-      foreach qw(alternatives man.config services shells pam.d security inputrc ld.so.conf 
+      foreach qw(alternatives man.config services shells pam.d inputrc ld.so.conf 
                  DIR_COLORS bashrc profile init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
                  dynamic hotplug gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache openoffice xinetd.d xinetd.conf syslog.conf sysctl.conf sysconfig/networking/ifcfg-lo
