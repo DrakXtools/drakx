@@ -347,6 +347,7 @@ sub main {
     };
     $ENV{PERL_BADLANG} = 1;
     $ENV{LD_ASSUME_KERNEL} = '2.4.1';
+    delete $ENV{TERMINFO};
     umask 022;
 
     $::isInstall = 1;
