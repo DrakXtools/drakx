@@ -128,7 +128,9 @@ CDROMSRC = cdrom.c $(MOVE_ADDSRC)
 DISKSRC = disk.c directory.c lomount.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c lomount.c $(MOVE_ADDSRC)
 
-ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)
+# use sort to remove duplicates
+STAGE1_ALLSRC = $(sort $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
+ALLSRC = $(INITSRC) $(STAGE1_ALLSRC)
 
 
 
@@ -142,7 +144,7 @@ STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
 NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 
 
-STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
+STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
 
 ifeq (i386, $(ARCH))
