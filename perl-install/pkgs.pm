@@ -199,8 +199,13 @@ my $A = -121568/100000000000; # -1.21568e-05; #- because perl does like that on 
 my $B = 121561/100000; # 1.21561
 my $C = -239889/10000; # -23.9889 #- doesn't take hdlist's into account as getAvailableSpace will do it.
 my $D = (-sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A; #- $A is negative so a positive solution is with - sqrt ...
-sub correctSize { $_[0] < $D ? ($A * $_[0] + $B) * $_[0] + $C : $_[0] } #- size correction in MB.
-sub invCorrectSize { $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0]; } #- size correction in MB.
+sub correctSize {
+    my $csz = ($A * $_[0] + $B) * $_[0] + $C;
+    $csz > $_[0] ? $csz : $_[0]; #- size correction (in MB) should be above input argument (as $A is negative).
+sub invCorrectSize {
+    my $sz = $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0];
+    $sz < $_[0] ? $sz : $_[0];
+}
 
 sub selectedSize {
     my ($packages) = @_;
