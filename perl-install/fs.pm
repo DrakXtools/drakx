@@ -168,10 +168,12 @@ sub merge_info_from_mtab {
 
     foreach (@l1, @l2) {
 	log::l("found mounted partition on $_->{device} with $_->{mntpoint}");
-	if ($::isInstall && $_->{mntpoint} eq '/tmp/hdimage') {
-	    log::l("found hdimage on $_->{device}");
+	if ($::isInstall && $_->{mntpoint} =~ m!/tmp/(image|hdimage)!) {
 	    $_->{real_mntpoint} = delete $_->{mntpoint};
-	    $_->{mntpoint} = common::usingRamdisk() && "/mnt/hd"; #- remap for hd install.
+	    if ($_->{real_mntpoint} eq '/tmp/hdimage') {
+		log::l("found hdimage on $_->{device}");
+		$_->{mntpoint} = common::usingRamdisk() && "/mnt/hd"; #- remap for hd install.
+	    }
 	}
 	$_->{isMounted} = $_->{isFormatted} = 1;
 	delete $_->{options};
