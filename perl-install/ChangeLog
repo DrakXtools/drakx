@@ -1,3 +1,146 @@
+2003/08/30  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated
+
+2003/08/30  Pixel  <pixel at mandrakesoft.com>
+
+	* Makefile: since XFree86-VGA16-3.3.6-29mdk is bad, insist on having
+	XFree86-VGA16 28mdk instead
+
+2003/08/30  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/icons/wiz_printerdrake.png: Updated head image for
+	add-printer wizard to have the new printerdrake icon.
+
+2003/08/29  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: remove system("cp..."); (I suck so much...)
+
+2003/08/29  François Pons  <fpons at mandrakesoft.com>
+
+	* pkgs.pm: try to make sure additional CD are taken into account if low
+	memory available
+	for configuring urpmi.
+
+2003/08/29  gbeauchesne
+
+	* modules.pm: no imm/ppa on ia64
+
+2003/08/29  keld
+
+	* share/po/da.po: Updates
+	soft/menu-messages/da.po soft/GtkMdkWidgets/po/da.po
+	soft/urpmi/po/da.po soft/wizard_perl/po/da.po
+	gi/perl-install/share/po/da.po
+
+2003/08/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ko.po, share/po/sl.po, share/po/vi.po, share/po/mt.po,
+	share/po/af.po, share/po/tr.po, share/po/sk.po, share/po/ja.po,
+	share/po/hr.po, share/po/ga.po, share/po/nl.po, share/po/nb.po,
+	share/po/he.po, share/po/az.po, share/po/fa.po, share/po/cy.po,
+	share/po/et.po, share/po/lv.po, share/po/uz@Cyrl.po, share/po/lt.po,
+	share/po/sv.po, share/po/zh_TW.po, share/po/eu.po, share/po/wa.po,
+	share/po/bs.po, share/po/sr@Latn.po, share/po/de.po, share/po/is.po,
+	share/po/ro.po, share/po/ru.po, share/po/bg.po, share/po/pl.po,
+	share/po/ms.po, share/po/eo.po, share/po/tg.po, share/po/ta.po,
+	share/po/id.po, share/po/sq.po, share/po/da.po, share/po/ca.po,
+	share/po/gl.po, share/po/uz.po, share/po/el.po, share/po/fi.po,
+	share/po/it.po, share/po/th.po, share/po/ar.po, share/po/es.po,
+	share/po/be.po, share/po/DrakX.pot, share/po/fr.po, share/po/sr.po,
+	share/po/pt.po, share/po/pt_BR.po, share/po/hu.po: updated pot file
+
+	* share/po/uk.po, share/po/cs.po, share/po/zh_CN.po: updated pot file
+	updated Czech, Ukrainian and Chinese files
+
+2003/08/29  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: set {perImageAppend} to the append= line from the default
+	entry or the first image= entry
+
+	* ugtk2.pm: set_minmax_width was commented which caused the individual
+	package selection
+	tree to be to large (fix bug #4548 #4865)
+
+2003/08/29  Till Kamppeter  <till at mandrakesoft.com>
+
+	* pixmaps/unselected.png, pixmaps/printer_conf.png,
+	pixmaps/cups_config.png, pixmaps/printer_del.png,
+	pixmaps/printer_add.png, pixmaps/refresh.png, pixmaps/printerdrake.png,
+	pixmaps/selected.png, standalone/printerdrake,
+	pixmaps/printer_default.png, pixmaps/redhat-config-users.png,
+	pixmaps/help.png, pixmaps/slpash-drakeprint-2.png, pixmaps/about.png:
+	New GTK2-based main window for printerdrake (only after installation).
+
+	* printer/printerdrake.pm: Do not show hidden options in the options
+	dialog.
+	Enabled Wizards in embedded mode. They work there now!
+
+2003/08/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: restore profiles feature through new netprofile
+	package
+
+	* ctxhelp.pm: provided by mandrake_doc-drakxtools-LL
+
+	* drakxtools.spec: 9.2-5mdk
+
+	* standalone/drakconnect: restore profiles feature
+	fix title when not embedded (print right number of network interfaces
+	instead of displaying a big random number)
+
+	* share/po/fr.po: translation just means translation, not gratuitously
+	speaking about
+	the whole universe
+
+2003/08/29  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: major cleaning
+
+2003/08/28  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Partially updated
+	Updated
+
+2003/08/28  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/28  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: removed drakprofile
+
+	* share/compssUsers, share/compssUsers.desktop: select Documentation for
+	all classes
+
+2003/08/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+2003/08/28  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: don't install autologin if using KDE or Gnome desktop
+	(not needed nor used)
+
+	* any.pm: 
+	  - configure /etc/sysconfig/autologin in case of xdm, but remove it if
+	kde/gnome
+	  - create any::sessions()
+	if there is only one users and meta_class is discovery, choose autologin
+	without asking
+
+2003/08/28  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Moved some stuff from mainwindow_interactive()
+	to main() and init() as
+	it has nothing to do with the main window.
+
+2003/08/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: fix dialogs heigh
+
+	* ugtk2.pm (create_dialog) enable to pass an already created Gtk2::Label
+
 2003/08/28  Daouda Lo  <daouda at mandrakesoft.com>
 
 	* ctxhelp.pm: 
@@ -20270,7 +20413,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.827 2003/08/27 23:27:51 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.828 2003/08/28 18:05:09 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
