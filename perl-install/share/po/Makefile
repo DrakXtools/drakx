@@ -1,7 +1,6 @@
 include ../../Makefile.config
 
 PMSFILES = $(wildcard $(ALLPMS:%=../../%))
-PMSCFILES = $(PMSFILES:%=%_.c)
 
 # temporarly don't include those po files
 # (too low translation percentage)
@@ -30,18 +29,13 @@ help:
 %.mo: %.po
 	msgfmt -o $@ $<
 
-$(PMSCFILES): %_.c: %
-	./fake_c.pl $< > $@
-
 $(POFILES): DrakX.pot
 	perl -ne 'print unless /^# DO NOT BOTHER TO MODIFY HERE, SEE:|^#.*\Qdrakx-help.xml/ .. /^$$/' $@ > $@t
 	if [ -e help-$@t ]; then perl -pe 's|^#~ ||' -i $@t ; msgmerge -C $@t help-$@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
 DrakX.pot: $(PMSFILES)
-	$(MAKE) $(PMSCFILES);
-	xgettext -F -n --add-comments='-PO' --keyword=N --keyword=N_ -o $@ $(PMSCFILES)
-	rm $(PMSCFILES)
+	perl_checker -q --generate-pot $@ $(PMSFILES)
 	perl i18n_compssUsers 2>/dev/null >> $@
 
 install:
@@ -51,7 +45,7 @@ install:
 	done
 
 clean:
-	@rm -rf drakx-help.xml .memdump doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
+	@rm -rf drakx-help.xml .memdump doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t)
 
 check:
 	@grep -F '$$' DrakX.pot && { echo "bad translation strings (contains \$$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"; exit 1; } ||:
