@@ -588,7 +588,7 @@ sub ask_fromW {
 	my (@widgets) = @_;
 	gtkpack__(Gtk2::VBox->new,
                map { 
-                   $_->{real_w} =~ /Gtk2::CheckButton/ && !$_->{icon_w} && !$_->{e}{label} ?
+                   $_->{real_w}->isa("Gtk2::CheckButton") && !$_->{icon_w} && !$_->{e}{label} ?
                      $_->{real_w} : gtkpack_(Gtk2::HBox->new,
                                              0, $_->{icon_w},
                                              0, gtkadd_widget($label_sizegrp, $_->{e}{label}),
