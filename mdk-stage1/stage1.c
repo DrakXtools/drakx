@@ -295,6 +295,9 @@ static void handle_pcmcia(char ** pcmcia_adapter)
 	wait_message("Enabling PCMCIA extension cards...");
 	log_message("cardmgr rc: %d", cardmgr_call());
 	remove_wait_message();
+
+	if (IS_EXPERT)
+		expert_third_party_modules();
 #endif
 }
 
