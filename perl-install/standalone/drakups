@@ -9,7 +9,7 @@ use detect_devices;
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use interactive;
 use Libconf qw(:functions);
-use Libconf::Glueconf::Ups;
+use Libconf::Glueconf::NUT::Ups_conf;
 
 # config files:
 my %files = (devices => "/etc/ups/ups.conf",
@@ -243,7 +243,7 @@ my @pages = (
                              remove => sub { },
                             },
                load => sub {
-                   $struct = Libconf::Glueconf::Ups->new($files{devices});
+                   $struct = Libconf::Glueconf::NUT::Ups_conf->new($files{devices});
                    map { [ $_, @{$struct->{$_}}{qw(driver port)} ] } keys %$struct;
                },
              },
@@ -258,7 +258,7 @@ my @pages = (
                              remove => sub { },
                             },
                load => sub {
-                   $users = Libconf::Glueconf::Ups->new($files{users});
+                   $users = Libconf::Glueconf::NUT::Ups_conf->new($files{users});
                    map { [ $_ ] } keys %$users;
                },
              },
