@@ -6,7 +6,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;
 
 use common;
-use ugtk2 qw(:helpers :wrappers);
+use ugtk2 qw(:helpers :wrappers :create);
 use interactive;
 
 my $in = 'interactive'->vnew('su', 'default');
@@ -33,7 +33,6 @@ my $prec_txt = $default_perm_level;
 my $w = ugtk2->new('drakperm');
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
-my $scroll = new Gtk2::ScrolledWindow;
 my $treeModel = Gtk2::TreeStore->new((Gtk2::GType->STRING) x 4);
 my $permList = Gtk2::TreeView->new_with_model($treeModel);
 
@@ -48,24 +47,16 @@ each_index {
 
 #TV $permList->set_shadow_type('out');
 
-my $vb = new Gtk2::VBox(0,5);
-my $select_box = new Gtk2::HBox(0,5);
-my $action_box = new Gtk2::HBox(0,5);
 my $up_down_box = new Gtk2::HBox(0,5);
-my $B_quit = new Gtk2::Button(N("quit"));
-my $B_sav = new Gtk2::Button(N("save"));
 my $B_up = new Gtk2::Button(N("Up"));
 my $B_del = new Gtk2::Button(N("delete"));
 my $B_edit = new Gtk2::Button(N("edit"));
 my $B_down = new Gtk2::Button(N("Down"));
 my $B_add = new Gtk2::Button(N("add a rule"));
-my $label_perm = new Gtk2::Label(N("select perm file to see/edit"));
-my $combo_perm = new Gtk2::Combo;
 my $tips = new Gtk2::Tooltips;
-my $pres = new Gtk2::Label(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."));
-my $F = new Gtk2::Frame;
 
 #- widgets settings
+my $combo_perm = new Gtk2::Combo;
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
 $tips->set_tip($B_add, N("Add a new rule at the end"));
@@ -78,8 +69,6 @@ $tips->set_tip($B_del, N("Delete selected rule"));
 $W->signal_connect(delete_event => sub { ugtk2->exit });
 $permList->signal_connect(select_row => \&row_setting_data);
 #$permList->signal_connect( unselect_row => sub { undef(%CURENT)});
-$B_sav->signal_connect(clicked => \&save_perm);
-$B_quit->signal_connect(clicked => sub { ugtk2->exit });
 $B_edit->signal_connect(clicked => \&row_setting_dialog);
 $B_add->signal_connect(clicked  => sub {
 			    #$permList->insert( $rows_cnt , '');
@@ -115,32 +104,34 @@ $permList->signal_connect( button_press_event => sub {
 				&row_setting_dialog if $event->type eq '2button_press';
 			    });
 
-#Viewing management
-$select_box->add($label_perm);
-$select_box->add($combo_perm);
-
-$scroll->add($permList);
-#$scroll->set_policy('automatic', 'automatic');
 
 
 foreach ($B_up, $B_down, $B_add, $B_del, $B_edit) {
     $up_down_box->add($_);
 }
 
-$action_box->add($B_sav);
-$action_box->add($B_quit);
 
-$vb->pack_start($select_box,0,0,5);
-$vb->pack_start($scroll,1,1,5);
-$vb->pack_start($up_down_box,0,0,5);
-$vb->pack_start($action_box,0,0,5);
 
-my $vb_ = new Gtk2::VBox(0,5);
-$F->add($vb);
-$vb_->pack_start($pres,0,0,5);
-$vb_->pack_start($F,1,1,5);
 
-$W->add($vb_);
+$W->add(gtkpack_(Gtk2::VBox->new(0,5),
+                 0, Gtk2::Label->new(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules.")),
+                 1, gtkadd(Gtk2::Frame->new,
+                           gtkpack_(Gtk2::VBox->new(0,5),
+                                    #Viewing management
+                                    0, gtkadd(Gtk2::HBox->new(0,5),
+                                              Gtk2::Label->new(N("select perm file to see/edit")),
+                                              $combo_perm
+                                              ),
+                                    1, create_scrolled_window($permList),
+                                    0, $up_down_box,
+                                    0, gtkadd(Gtk2::HBox->new(0,5),
+                                              gtksignal_connect(Gtk2::Button->new(N("save")), clicked => \&save_perm),
+                                              gtksignal_connect(Gtk2::Button->new(N("quit")), clicked => sub { ugtk2->exit })
+                                              )
+                                    )
+                           )
+                 )
+        );
 $W->show_all;
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
