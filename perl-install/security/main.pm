@@ -32,7 +32,7 @@ sub basic_seclevel_explanations {
 	my $text = new Gtk::Text(undef, undef);
 	$text->set_editable(0);
 	$text->insert(undef, $text->style->black, undef,
-			    "Standard: This is the standard security recommended for a computer that will be used to connect
+			    _("Standard: This is the standard security recommended for a computer that will be used to connect
                to the Internet as a client.
 
 High:       There are already some restrictions, and more automatic checks are run every night.
@@ -46,7 +46,7 @@ Paranoid:  This is similar to the previous level, but the system is entirely clo
 
 Security Administrator:
                If the 'Security Alerts' option is set, security alerts will be sent to this user (username or
-	       email)");
+	       email)"));
 
 	gtkpack_(gtkshow(new Gtk::HBox(0, 0)), 1, $text);
 }
@@ -191,13 +191,13 @@ sub draksec_main {
 	unless ($::isEmbedded) {
 	  $w->{rwindow}->set_policy(1,1,1);
 	  $w->{rwindow}->set_position(1);
-	  $w->{rwindow}->set_title("DrakSec - Basic Options" );
+	  $w->{rwindow}->set_title("DrakSec");
 	  $window->set_usize( 598,490);
 	}
 
 	# Connect the signals
-	$window->signal_connect("delete_event", sub { $window->destroy(); } );
-	$window->signal_connect("destroy", sub { my_gtk->exit(); } );
+	$window->signal_connect('delete_event', sub { $window->destroy(); } );
+	$window->signal_connect('destroy', sub { my_gtk->exit(); } );
 	$window->realize();
 
 	$window->add(my $vbox = gtkshow(new Gtk::VBox(0, 0)));
@@ -217,13 +217,13 @@ sub draksec_main {
 											 [ basic_seclevel_option(\$seclevel_entry, $msec) ],
 											 [ basic_secadmin_check(\$secadmin_check, $msec) ],
 											 [ basic_secadmin_entry(\$secadmin_entry, $msec) ] )),
-					   gtkshow(new Gtk::Label("Basic")));
+					   gtkshow(new Gtk::Label(_("Basic"))));
 
 	######################### NETWORK OPTIONS ##################################
 	my %network_options_value;
 	$notebook->append_page(gtkpack__(gtkshow(new Gtk::VBox(0, 0)),
 							   network_generate_page(\%network_options_value, $msec)),
-					   gtkshow(new Gtk::Label("Network Options")));
+					   gtkshow(new Gtk::Label(_("Network Options"))));
 
 
 	########################## SYSTEM OPTIONS ##################################
@@ -232,14 +232,14 @@ sub draksec_main {
 	$notebook->append_page(gtkpack_(
 							  gtkshow(new Gtk::VBox(0, 0)),
 							  1, system_generate_page(\%system_options_value, $msec)),
-					   gtkshow(new Gtk::Label("System Options")));
+					   gtkshow(new Gtk::Label(_("System Options"))));
 
 	######################## PERIODIC CHECKS ###################################
 	my %security_checks_value;
 
 	$notebook->append_page(gtkpack(gtkshow(new Gtk::VBox(0, 0)),
 							 checks_generate_page(\%security_checks_value, $msec)),
-					   gtkshow(new Gtk::Label("Periodic Checks")));
+					   gtkshow(new Gtk::Label(_("Periodic Checks"))));
 
 
 	####################### OK CANCEL BUTTONS ##################################
@@ -297,8 +297,8 @@ sub draksec_main {
 	gtkpack_($vbox,
 		    1, gtkshow($notebook),
 		    0, gtkadd(gtkadd(gtkshow(new Gtk::HBox(0, 0)),
-						 gtkshow($bok)),
-				    gtkshow($bcancel)));
+						 $bok),
+				    $bcancel));
 	$bcancel->can_default(1);
 	$bcancel->grab_default();
 

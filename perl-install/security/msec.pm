@@ -137,6 +137,9 @@ sub get_default {
 # ***********************************************
 
 # get_secure_level(prefix) - Get the secure level
+
+# duplicated with some drakx code
+
 sub get_secure_level {
     shift @_;
     my $prefix = $_;
