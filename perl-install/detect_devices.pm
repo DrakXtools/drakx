@@ -639,7 +639,7 @@ sub firewire_probe() {
 	}
     }
     foreach (@l) {
-	if ($e->{specifier_id} == 0x00609e && $e->{specifier_version} == 0x010483) {
+	if ($_->{specifier_id} == 0x00609e && $_->{specifier_version} == 0x010483) {
 	    add2hash($_, { driver => 'sbp2', description => "Generic Firewire Storage Controller" });
 	}
     }
