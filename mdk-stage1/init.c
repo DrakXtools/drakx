@@ -28,7 +28,7 @@
 #include "config-stage1.h"
 
 #if defined(__powerpc__)
-#define TIOCSCTTY     0x540
+#define TIOCSCTTY     0x540E
 #endif
 
 char * env[] = {
