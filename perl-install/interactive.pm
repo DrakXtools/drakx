@@ -105,6 +105,8 @@ sub vnew {
 	    my $o = interactive::gtk->new;
 	    if ($o_icon && $o_icon ne 'default' && !$::isWizard) { $o->{icon} = $o_icon } else { undef $o->{icon} }
 	    return $o;
+	} elsif ($::testing) {
+	    die;
 	}
     }
 
