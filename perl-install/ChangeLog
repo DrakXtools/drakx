@@ -2,6 +2,105 @@
 
 	* share/advertising/list: Temporary fix
 
+	* share/advertising/15-mdkexpert-corporate.pl,
+	share/advertising/14-mdkexpert.pl, share/advertising/13-mdkcampus.pl,
+	share/advertising/12-mdkstore.pl, share/advertising/11-mdkstore.pl:
+	Temporary new texts. Need to be checked and fixed
+
+2002/08/30  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed possible problem with is_installed and
+	are_installed.
+
+2002/08/30  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* network/network.pm: fix looping on network step when configuring
+	ethernet card
+
+2002/08/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+	updated Swedish file
+
+2002/08/30  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/keyboarddrake: 
+	  - use keyboard::keyboard2full_xkb
+	  - call setxkbmap with -option and -model
+	  - use "/etc/init.d/keytable restart" instead of loadkeys
+
+	* keyboard.pm, Xconfig/default.pm: most of the code of
+	Xconfig::default::config_keyboard moved to keyboard::keyboard2full_xkb
+
+	* verify_c: ignore c::from_utf8
+
+	* any.pm: 
+	  - set GRP_TOGGLE to '' when no GRP_TOGGLE are used
+	  - defaults to previous GRP_TOGGLE if one is available
+
+	* Xconfig/card.pm: make perl_checker happy
+
+	* Xconfig/resolution_and_depth.pm: fix typo (choosing the Flat Panel
+	resolution by default)
+
+2002/08/30  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk.pm, drakxtools.spec: 
+	  - mcc :
+	o kill gtkpng_() and gtk_createpng_() wrappers: if icon is missing,
+	    better die while testing rather than make perl display "uncaught
+	    code ..."
+	  o kill unused timer
+	  o use new ln's icons
+	  o disable stupid icon highlighting (was made with duplicating
+	    manually all icons in gimp and blue-y them there); restore this
+	    effect'll need little play with gamma
+	  o use ugtk
+	  o kill dead code
+	  o cleanups
+	  o icons:
+	    * switch to new icons set
+	    * replace pixmap table by a pixbuf one
+	    * use pixbufs for backgrouns and icons,
+	    * composite background and icons with transparency trough
+	      ugtk::compose_pixbufs()
+	    * render icons with full alpha blender in left column
+	    * comment the different states
+	    * simplify callbacks
+	  - ugtk :
+	  o readd gdkpixbuf support
+	  o ensure imlib is used by default to load files, not gdk-pixbuf
+	  o compose_with_back(): load a png icon into a pixbuf and call
+	    compose_pixbufs with background pixbuf
+	  o compose_pixbufs(): render transparent icon onto background into a
+	    new pixbuf
+	  o merge gtkcreate_png_pixbuf() from gdk-pixbuf-0-branch : load an
+	    icon into a pixbuf
+	    gdk-pixbuf-0-branch also uses it to simplify a lot of code
+	  o gtkicons_labels_widget() :
+	    * add a new background pixbuf parameter that'll be composited with
+	icons
+	    * render icons with alpha blender in right area
+	    * kill imlib_counter
+	    * kill imlib usage for
+	    * kill dead code (was dead since i fixed mcc memory leaks)
+	
+	  - TODO: icon flashing on application launch
+	
+	  - POSTPONED: merge big cleanup, global replacement of imlib usage by
+	gdk-pixbuf
+	             from gdk-pixbuf-0-branch since it would impacted drakx
+	which is not
+	             so good
+
+2002/08/30  Warly  <warly@mandrakesoft.com>
+
+	* share/logo-mandrake.png: rc1
+
+2002/08/30  baudens
+
+	* share/advertising/list: Temporary fix
+
 2002/08/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* install_steps_newt.pm: Added text for translators
@@ -1198,7 +1297,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.730 2002/08/29 23:22:59 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.731 2002/08/30 10:06:00 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
