@@ -459,12 +459,12 @@ EOF
 
 my $email = ) . "'$email';\n\n";
 
-	$cron .= q(local *F;
-open F, '|/usr/sbin/sendmail -oi -t';
-print F q(Subject: logdrake Mail Alert
+	$cron .= q(my $F;
+open $F, '|/usr/sbin/sendmail -oi -t';
+print $F q(Subject: logdrake2 Mail Alert
 From: root@localhost
 To: ), "$email\n";
-print F $r;
+print $F $r;
 
 # EOF);
     output_with_perm "/etc/cron.hourly/logdrake_service", 0755, $cron;
