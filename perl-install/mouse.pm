@@ -477,13 +477,13 @@ sub test_mouse {
 
     $darea->realize();
     my $wait = 0;
-    my ($m3_image, $m3_mask) = gtkcreate_xpm($darea, 'mouse_3b.xpm');
-    my ($m3_imagep, $m3_maskp) = gtkcreate_xpm($darea, 'mouse_3b+.xpm');
-    my ($m3_left, $m3_left_mask) = gtkcreate_xpm($darea, 'mouse_left.xpm');
-    my ($m3_right, $m3_right_mask) = gtkcreate_xpm($darea, 'mouse_right.xpm');
-    my ($m3_middle, $m3_middle_mask) = gtkcreate_xpm($darea, 'mouse_middle.xpm');
-    my ($aru, $aru_mask) = gtkcreate_xpm($darea, 'arrow_up.xpm');
-    my ($ard, $ard_mask) = gtkcreate_xpm($darea, 'arrow_down.xpm');
+    my ($m3_image, $m3_mask) = gtkcreate_xpm('mouse_3b.xpm');
+    my ($m3_imagep, $m3_maskp) = gtkcreate_xpm('mouse_3b+.xpm');
+    my ($m3_left, $m3_left_mask) = gtkcreate_xpm('mouse_left.xpm');
+    my ($m3_right, $m3_right_mask) = gtkcreate_xpm('mouse_right.xpm');
+    my ($m3_middle, $m3_middle_mask) = gtkcreate_xpm('mouse_middle.xpm');
+    my ($aru, $aru_mask) = gtkcreate_xpm('arrow_up.xpm');
+    my ($ard, $ard_mask) = gtkcreate_xpm('arrow_down.xpm');
     my $image = $m3_image;
     $mouse->{nbuttons} > 3 and $image = $m3_imagep;
     my $draw_text = sub {

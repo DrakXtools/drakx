@@ -369,10 +369,11 @@ my @icon_paths = ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/
 sub add_icon_path { @icon_paths = uniq(@icon_paths, @_) }
 
 sub gtkcreate_xpm {
-    my ($w, $f) = @_;
+    my ($f) = @_;
+    my $rw = gtkroot();
     $f =~ m|.xpm$| or $f="$f.xpm";
     if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach @icon_paths }
-    my @l = Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
+    my @l = Gtk::Gdk::Pixmap->create_from_xpm($rw, new Gtk::Style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
 
