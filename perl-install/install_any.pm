@@ -302,6 +302,7 @@ sub setPackages {
 	push @{$o->{default_packages}}, "kernel-smp" if $o->{security} <= 3 && detect_devices::hasSMP(); #- no need for kernel-smp if we have kernel-secure which is smp
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
+	push @{$o->{default_packages}}, "lvm" if -e '/etc/lvmtab';
 	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("snd-slot-0") =~ /^snd-card-/;
 
@@ -651,33 +652,32 @@ sub guess_mount_point {
 }
 
 sub suggest_mount_points {
-    my ($hds, $prefix, $uniq) = @_;
-    my @fstab = fsedit::get_fstab(@$hds);
+    my ($fstab, $prefix, $uniq) = @_;
 
     my $user;
-    foreach my $part (grep { isTrueFS($_) } @fstab) {
+    foreach my $part (grep { isTrueFS($_) } @$fstab) {
 	$part->{mntpoint} && !$part->{unsafeMntpoint} and next; #- if already found via an fstab
 
 	my ($mnt, $handle) = guess_mount_point($part, $prefix, \$user) or next;
 
-	next if $uniq && fsedit::mntpoint2part($mnt, \@fstab);
+	next if $uniq && fsedit::mntpoint2part($mnt, $fstab);
 	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
-	fs::get_mntpoints_from_fstab([ fsedit::get_fstab(@$hds) ], $handle->{dir}, $uniq) if $mnt eq '/';
+	fs::get_mntpoints_from_fstab($fstab, $handle->{dir}, $uniq) if $mnt eq '/';
     }
-    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @fstab;
+    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @$fstab;
 }
 
 #- mainly for finding the root partitions for upgrade
 sub find_root_parts {
-    my ($hds, $prefix) = @_;
+    my ($fstab, $prefix) = @_;
     log::l("find_root_parts");
     my $user;
     grep { 
 	my ($mnt) = guess_mount_point($_, $prefix, \$user);
 	$mnt eq '/';
-    } fsedit::get_fstab(@$hds);
+    } @$fstab;
 }
 sub use_root_part {
     my ($fstab, $part, $prefix) = @_;
@@ -697,7 +697,7 @@ sub getHds {
 #    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
-    my $hds = catch_cdie { fsedit::hds(\@drives, $flags) }
+    my ($hds, $lvms) = catch_cdie { fsedit::hds(\@drives, $flags) }
       sub {
 	  $ok = 0;
 	  my $err = $@; $err =~ s/ at (.*?)$//;
@@ -709,14 +709,14 @@ sub getHds {
 	$o->setupSCSI; #- ask for an unautodetected scsi card
 	goto getHds;
     }
-
     $::testing or partition_table_raw::test_for_bad_drives($_) foreach @$hds;
 
     $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)
         unless $flags->{clearall} || $flags->{clear};
 
     $o->{hds} = $hds;
-    $o->{fstab} = [ fsedit::get_fstab(@$hds) ];
+    $o->{lvms} = $lvms;
+    $o->{fstab} = [ fsedit::get_fstab(@$hds, @$lvms) ];
     fs::check_mounted($o->{fstab});
     fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
 
