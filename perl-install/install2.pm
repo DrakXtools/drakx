@@ -279,7 +279,7 @@ sub setupSCSI {
 sub partitionDisks {
     return
       $o->{fstab} = [
-	{ device => "loop7", type => 0x83, mntpoint => "/", isFormatted => 1, isMounted => 1 },
+	{ device => "loop7", type => 0x83, size => ((cat_('/dos/lnx4win/size.txt'))[0]*2048), mntpoint => "/", isFormatted => 1, isMounted => 1 },
 	{ device => "/initrd/dos/lnx4win/swapfile", type => 0x82, mntpoint => "swap", isFormatted => 1, isMounted => 1 },
       ] if $o->{lnx4win};
     return if $o->{isUpgrade};
@@ -365,10 +365,6 @@ sub choosePackages {
 #------------------------------------------------------------------------------
 sub doInstallStep {
     $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
-
-    #- some packages need such files for proper installation.
-    install_any::write_ldsoconf($o->{prefix});
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
@@ -646,6 +642,9 @@ sub main {
 
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
+
+    #- make sure failed upgrade will not hurt too much.
+    install_steps::cleanIfFailedUpgrade($o);
 
     #- have the really bleeding edge ddebug.log for this f*cking msec :-/
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };

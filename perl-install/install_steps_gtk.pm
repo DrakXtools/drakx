@@ -514,7 +514,7 @@ sub choosePackagesTree {
 sub installPackages {
     my ($o, $packages) = @_;
 
-    my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime);
+    my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
     my $w = my_gtk->new(_("Installing"), grab => 1);
     $w->{window}->set_usize($windowwidth * 0.8, $windowheight * 0.5);
