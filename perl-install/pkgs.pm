@@ -297,10 +297,12 @@ sub setPackageSelection($$$) {
 sub unselectAllPackages($) {
     my ($packages) = @_;
     my %keep_selected;
+    log::l("unselecting all packages...");
     foreach (@{$packages->{depslist}}) {
 	if ($_->flag_base || $_->flag_installed && $_->flag_selected) {
 	    #- keep track of package that should be kept selected.
 	    $keep_selected{$_->id} = $_;
+	    log::l("...keeping ".$_->fullname);
 	} else {
 	    #- deselect all packages except base or packages that need to be upgraded.
 	    $_->set_flag_required(0);
