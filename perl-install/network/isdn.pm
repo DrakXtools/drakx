@@ -41,11 +41,8 @@ We recommand the light configuration.
 	$netc->{isdntype} = 'isdn_internal';
 	$netcnx->{isdn_internal} = isdn_read_config($isdn);
 	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type', 'is_light';
-	if (defined $netc->{autodetect}{isdn}{id}) {
-	    $netcnx->{isdn_internal}{is_light} = 1;
-	} else {
-	    $netcnx->{isdn_internal}{is_light} = $netc->{autodetect}{isdn}{is_light};
-	}
+	$netcnx->{isdn_internal}{is_light} =
+	  defined $netc->{autodetect}{isdn}{id} ? 1 : $netc->{autodetect}{isdn}{is_light};
 	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
     } else {
 	$netc->{isdntype} = 'isdn_external';
