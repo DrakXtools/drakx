@@ -6,11 +6,11 @@ my $mar = '../mdk-stage1/mar/mar';
 -x $mar or die "ERROR: Sorry, need $mar binary\n";
 
 my %sanity_check = (
-    hd => [ 
+    cdrom => [ 
 	qw(sym53c8xx),
 	if_(arch() !~ /ppc|x86_64/, 'advansys'),
     ],
-    network => [ 
+    all => [ 
 	qw(3c59x eepro100 tulip via-rhine ne2k-pci 8139too), 
 	if_(arch() !~ /ppc/, 'e100'), 
 	if_(arch() !~ /ppc|ia64/, 'tlan'),
