@@ -106,7 +106,7 @@ sub printer_type($) {
 
 sub get_default_spooler () {
     if (-f "$prefix$FOOMATIC_DEFAULT_SPOOLER") {
-	my $spool = cat_("$prefix$FOOMATIC_DEFAULT_SPOOLER")
+	my $spool = cat_("$prefix$FOOMATIC_DEFAULT_SPOOLER");
 	chomp $spool;
 	return $spool if $spool =~ /cups|lpd|lprng|pdq/; 
     }
@@ -2146,7 +2146,7 @@ drive s: file=\":3\" remote
 # for some photo cards.
 mtools_skip_check=1
 ";
-    local *F
+    local *F;
     open F, ">> $prefix/etc/mtools.conf" or 
 	die "can't write mtools config in /etc/mtools.conf: $!";
     print F $mtoolsconf_append;
