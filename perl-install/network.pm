@@ -370,7 +370,7 @@ sub configureNetwork2 {
     sethostname($netc) unless $::testing;
     addDefaultRoute($netc) unless $::testing;
     
-    grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf and $install && $install->('dhcpd');
+    grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf and $install && $install->('dhcpcd');
     grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $install && $install->('pump');
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
