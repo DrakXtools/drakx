@@ -1014,13 +1014,16 @@ sub write_grub_config {
 		print F "initrd ", $file2grub->($_->{initrd}) if $_->{initrd};
 	    } else {
 		print F "root ", dev2grub($_->{kernel_or_dev}, \%dev2bios);
-		if ($_->{kernel_or_dev} !~ /fd/) {
-		    #- boot off the second drive, so reverse the BIOS maps
-		    $_->{mapdrive} ||= { '0x80' => '0x81', '0x81' => '0x80' } 
-		      if $_->{table} && ($bootloader->{first_hd_device} || $bootloader->{boot}) !~ /$_->{table}/;
-	    
-		    map_each { print F "map ($::b) ($::a)" } %{$_->{mapdrive} || {}};
 
+		if (my ($dev) = $_->{table} =~ m|/dev/(.*)|) {
+		    if ($dev2bios{$dev} =~ /hd([1-9])/) {
+			#- boot off the nth drive, so reverse the BIOS maps
+			my $nb = sprintf("0x%x", 0x80 + $1);
+			$_->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
+		    }
+		}
+		if ($_->{mapdrive}) {
+		    map_each { print F "map ($::b) ($::a)" } %{$_->{mapdrive}};
 		    print F "makeactive";
 		}
 		print F "chainloader +1";
