@@ -77,14 +77,16 @@ sub get_default {
 	   $num_level = $sec_levels{$word_level};
         $default_file = "$::prefix/usr/share/msec/level.".$num_level;
     }
-    elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf"; }
+    elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf" }
 
+    local *F;
     open F, $default_file;
+    local $_;
     while (<F>) {
 	   if ($category eq 'functions') {
-		  if ($_ =~ /^$option/) { (undef, $default_value) = split(/ /, $_) }
+		  (undef, $default_value) = split(/ /, $_) if /^$option/;
 	   } elsif ($category eq 'checks') {
-		  if ($_ =~ /^$option/) { (undef, $default_value) = split(/=/, $_) }
+		  (undef, $default_value) = split(/=/, $_) if /^$option/;
 	   }
     }
     close F;
@@ -101,9 +103,11 @@ sub get_value {
     $item_file = $check_file if $category eq 'checks';
 
     if (-e $item_file) {
+        local *F;
         open F, $item_file;
+        local $_;
         while (<F>) {
-            if ($_ =~ /^$item/) {
+            if (/^$item/) {
 			 if ($category eq 'functions') {
 				my $i = $_;
 				(undef, $_) = split /\(/;
@@ -166,8 +170,7 @@ sub set_secure_level {
 sub get_functions {
     shift;
     my ($category) = @_;
-    my @functions = ();
-    my (@tmp_network_list, @tmp_system_list);
+    my (@functions, @tmp_network_list, @tmp_system_list);
 
     ## TODO handle 3 last functions here so they can be removed from this list
     my @ignore_list = qw(indirect commit_changes closelog error initlog log set_secure_level
@@ -189,13 +192,15 @@ sub get_functions {
 
     # read mseclib.py to get each function's name and if it's
     # not in the ignore list, add it to the returned list.
+    local *F;
     open F, $file;
+    local $_;
     while (<F>) {
-        if ($_ =~ /^def/) {
+        if (/^def/) {
             (undef, $function) = split(/ /, $_);
             ($function, undef) = split(/\(/, $function);
-            if (!(member($function, @ignore_list))) {
-                push(@functions, $function) if member($function, @{$options{$category}});
+            if (!member($function, @ignore_list) && member($function, @{$options{$category}})) {
+                push(@functions, $function)
             }
         }
     }
@@ -226,12 +231,8 @@ sub config_function {
     my ($function, $value) = @_;
     my $options_file = "$::prefix/etc/security/msec/level.local";
 
-    if ($value eq 'default') {
-	   substInFile { s/^$function.*\n// } $options_file;
-    } else {
-	   substInFile { s/^$function.*\n// } $options_file;
-	   append_to_file($options_file, "$function ($value)")
-    }
+    substInFile { s/^$function.*\n// } $options_file;
+    append_to_file($options_file, "$function ($value)") if $value ne 'default';
 }
 
 # ***********************************************
@@ -241,13 +242,14 @@ sub config_function {
 # get_default_checks() -
 #   return a list of periodic checks handled by security.conf
 sub get_default_checks {
-    my $check;
-    my @checks = ();
+    my ($check, @checks);
 
     my $check_file = "$::prefix/var/lib/msec/security.conf";
 
     if (-e $check_file) {
+        local *F;
         open F, $check_file;
+        local $_;
         while (<F>) {
             ($check, undef) = split(/=/, $_);
             push @checks, $check if !(member($check, qw(MAIL_USER)))
