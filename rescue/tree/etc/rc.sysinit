@@ -8,6 +8,9 @@ echo -e "\t\t\tWelcome to \\033[1;36mMandrake\\033[0;39m Linux"
 
 action "Remounting root filesystem in read-write mode" mount -n -o remount,rw /
 
+#- free up stage1 memory
+umount /stage1/proc/bus/usb /stage1/proc /stage1
+
 ln -s /tmp/stage2/etc/* /etc 2>/dev/null
 
 mkdir /proc
