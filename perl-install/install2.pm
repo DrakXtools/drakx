@@ -343,6 +343,7 @@ sub main {
 		       install_steps_auto_install::errorInStep();
 		   };
     $ENV{PERL_BADLANG} = 1;
+    umask 022;
 
     $::isInstall = 1;
     $::expert = $::g_auto_install = 0;
@@ -546,7 +547,6 @@ sub main {
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
-	log::l("umask is ", umask());
 	eval {
 	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};
