@@ -19,7 +19,7 @@
 all: pci-ids.h
 
 pci-ids.h: /usr/share/ldetect-lst/pcitable update-pci-ids.pl
-	perl update-pci-ids.pl > $@
+	perl update-pci-ids.pl > $@ || rm -f $@
 
 clean:
 	rm -f pci-ids.h
