@@ -128,6 +128,7 @@ sub setupBootloader {
 	local $::Wizard_finished = 1 if $::isStandalone;
 	setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
     }
+    1;
 }
 
 sub installBootloader {
