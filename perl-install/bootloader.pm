@@ -614,7 +614,7 @@ sub install_lilo ($$) {
 	if (arch() =~ /ia64/) {
 	    (my $part, $file) = fsedit::file2part($prefix, $fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } @$hds;
-	    #- FUCK TO THE GUY WHICH DOESN'T DO perl -cw bootloader.pm #$dev2efi->{$part->{device}} . ":" . $file;
+	    $hds->{$part->{device}} . ":" . $file;
 	} else {
 	    $file
 	}
@@ -648,7 +648,8 @@ wait %d seconds for default boot.
     {
 	local *F;
         local $\ = "\n";
-	my $f = "$prefix/etc/lilo.conf";
+	my $f = arch() =~ /ia64/ ? "$prefix/boot/efi/elilo.conf" : "$prefix/etc/lilo.conf";
+
 	open F, ">$f" or die "cannot create lilo config file: $f";
 	log::l("writing lilo config to $f");
 
