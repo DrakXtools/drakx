@@ -78,7 +78,7 @@ our %langs = (
 'lo' =>    [ 'Laotian',             'Laotian',           'lo_LA', ' 2   ', 'utf_lo' ],
 'lt' =>    [ 'Lithuanian',          'Lietuviskai',       'lt_LT', '1    ', 'iso-8859-13' ],
 #- ltg_LV locale not done yet, using lv_LV for now
-'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg,lv' ],
+#'ltg' =>   [ 'Latgalian',           'Latgalisu',         'lv_LV', '1    ', 'iso-8859-13', 'ltg,lv' ],
 'lv' =>    [ 'Latvian',             'Latviesu',          'lv_LV', '1    ', 'iso-8859-13' ],
 'mi' =>    [ 'Maori',               'Maori',             'mi_NZ', '   4 ', 'unicode' ],
 'mk' =>    [ 'Macedonian',          'Makedonski',        'mk_MK', '1    ', 'utf_cyr1' ],
