@@ -124,7 +124,8 @@ sub read {
 
 sub write {
     my ($conf) = @_;
-    my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
+    my $default_dev = get_default_device();
+    my $use_pptp = $default_dev =~ /^ppp/ && cat_("$::prefix/etc/ppp/peers/$default_dev") =~ /pptp/;
 	my $squid_port = network::network::read_squid_conf()->{http_port}[0];
 
     my %ports_by_proto;
@@ -148,8 +149,8 @@ sub write {
 		    [ 'all', 'all', 'REJECT', 'info' ],
 		   );
     set_config_file('rules',
-    		    if_(cat_("$::prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'tcp', '1723' ]),
-		    if_(cat_("$::prefix$connect_file") =~ /pptp/, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
+    		    if_($use_pptp, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'tcp', '1723' ]),
+		    if_($use_pptp, [ 'ACCEPT', 'fw', 'loc:10.0.0.138', 'gre' ]),
 		    (map { 
 			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto; 
 		    } ('net', if_($conf->{loc_interface}[0], 'loc'))),
