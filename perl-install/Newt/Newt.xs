@@ -369,22 +369,13 @@ HCloseStacked(first, ...)
      CODE:
 	{
 	  int i;
-#define a(i) (newtComponent)SvIV((SV*)SvRV( ST(i) ))
-          RETVAL =
-	     newtGridHCloseStacked(
-                           items >  0 ? 1 : 0, items >  0 ? a( 0) : NULL, 
-			   items >  1 ? 1 : 0, items >  1 ? a( 1) : NULL, 
-			   items >  2 ? 1 : 0, items >  2 ? a( 2) : NULL, 
-			   items >  3 ? 1 : 0, items >  3 ? a( 3) : NULL, 
-			   items >  4 ? 1 : 0, items >  4 ? a( 4) : NULL, 
-			   items >  5 ? 1 : 0, items >  5 ? a( 5) : NULL, 
-			   items >  6 ? 1 : 0, items >  6 ? a( 6) : NULL, 
-			   items >  7 ? 1 : 0, items >  7 ? a( 7) : NULL, 
-			   items >  8 ? 1 : 0, items >  8 ? a( 8) : NULL, 
-			   items >  9 ? 1 : 0, items >  9 ? a( 9) : NULL, 
-			   items > 10 ? 1 : 0, items > 10 ? a(10) : NULL,  
-			   NULL);
-#undef a
+	  newtComponent *p = alloca(sizeof(newtComponent) * (2 * items + 1));
+	  for (i = 0; i < items; i++) {
+	    p[2 * i] = 1;
+	    p[2 * i + 1] = (newtComponent)SvIV((SV*)SvRV( ST(i) ));
+	  }
+	  p[2 * items] = NULL;
+          RETVAL = ((newtGrid (*)()) newtGridHCloseStacked)();
 	}
 OUTPUT:
 RETVAL
