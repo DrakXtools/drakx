@@ -29,6 +29,7 @@ use common;
 use detect_devices;
 use interactive;
 use network::network;
+use network::ethernet;
 use log;
 use c;
 use network::netconnect;
@@ -215,7 +216,7 @@ Examples:
 		eth0, or eth1 for cable connection, 
 		ippp+ for a isdn connection.
 "),
-      [ { label => N("Net Device"), val => \$card_netconnect, list => [ detect_devices::getNet() ], not_edit => 0 } ])
+      [ { label => N("Net Device"), val => \$card_netconnect, list => [ sort keys %net_devices ], format => sub { $net_devices{$_[0]} || $_[0] }, not_edit => 0 } ])
 		  or goto step_ask_confirm;
 
 my @cards = grep {
