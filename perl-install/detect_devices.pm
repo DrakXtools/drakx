@@ -787,8 +787,8 @@ sub dmidecode() {
 
 	foreach (run_program::get_stdout('dmidecode')) {
 	    if (/^\t\t(.*)/) {
-		$l[-1]->{string} .= "$1\n";
-		$l[-1]->{$1} = $2 if /^\t\t(.*): (.*)$/;
+		$l[-1]{string} .= "$1\n";
+		$l[-1]{$1} = $2 if /^\t\t(.*): (.*)$/;
 	    } elsif (my ($s) = /^\t(.*)/) {
 		next if $s =~ /^DMI type /;
 		$s =~ s/ Information$//;
@@ -799,7 +799,6 @@ sub dmidecode() {
 }
 
 sub computer_info() {
-	my $dmidecode_infos;
      my @l = dmidecode();
 	my $chassis = (find { $_->{name} eq 'Chassis' } @l) || { string => '' };
 	my $Chassis = $chassis->{string} =~ /^Type:\s*(\S+)/m && $1;
