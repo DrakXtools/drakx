@@ -183,6 +183,8 @@ sub hds {
     }
     $all_hds->{lvms} = \@lvms;
 
+    fs::get_major_minor(get_all_fstab($all_hds));
+
     $all_hds;
 }
 
