@@ -529,7 +529,7 @@ You have to enter some informations here.
      The printer having \"lp\" in its name(s) will be the default printer.
 
 
-   * Description: this optional but can be useful if several printers are connected to your computer or if you allow
+   * Description: this is optional but can be useful if several printers are connected to your computer or if you allow
      other computers to access to this printer.
 
 
