@@ -559,6 +559,7 @@ sub main {
 	(my $root = `/bin/pwd`) =~ s|(/[^/]*){5}$||;
 	symlinkf $root, "/tmp/rhimage" or die "unable to create link /tmp/rhimage";
 	$o->{method} ||= "cdrom";
+	$o->{mkbootdisk} = 0;
     }
 
     unless ($::testing) {

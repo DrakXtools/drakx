@@ -105,10 +105,14 @@ sub selectInstallClass1 {
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
     my %c = my @c = (
+      $::corporate ? () : (
 	_("Recommended") => "beginner",
+      ),
 	_("Customized")  => "specific",
 	_("Expert")	 => "expert",
     );
+
+    $o->set_help('selectInstallClassCorpo') if $::corporate;
 
     my $verifInstallClass = sub {
 	$::beginner = $c{$_[0]} eq "beginner";
@@ -618,6 +622,7 @@ sub printerConfig {
 sub setRootPassword {
     my ($o, $clicked) = @_;
     my $sup = $o->{superuser} ||= {};
+    my $nis = $o->{authentication}{NIS};
     $sup->{password2} ||= $sup->{password} ||= "";
 
     return if $o->{security} < 1 && !$clicked;
@@ -634,7 +639,7 @@ _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
 _("Use shadow file") => { val => \$o->{authentication}{shadow}, type => 'bool', text => _("shadow") },
 _("Use MD5 passwords") => { val => \$o->{authentication}{md5}, type => 'bool', text => _("MD5") },
   ) : (), $::beginner ? () : (
-_("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("yellow pages") },
+_("Use NIS") => { val => \$nis, type => 'bool', text => _("yellow pages") },
   )
 			 ],
 			 complete => sub {
@@ -645,14 +650,12 @@ _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("
 			 }
     ) or return;
 
-    if ($o->{authentication}{NIS}) {
-	$o->ask_from_entries_ref('',
-				 _("Authentification NIS"),
-				 [ _("NIS Domain"), _("NIS Server") ],
-				 [ \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}),
-				   { val => \$o->{authentication}{NIS_server}, list => ["broadcast"] },
-				 ]);
-    }
+    $o->ask_from_entries_ref('',
+			     _("Authentification NIS"),
+			     [ _("NIS Domain"), _("NIS Server") ],
+			     [ \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}),
+			       { val => \$o->{authentication}{NIS}, list => ["broadcast"] },
+			     ]) if $nis;    
     install_steps::setRootPassword($o);
 }
 

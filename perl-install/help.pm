@@ -34,6 +34,18 @@ selectInstallClass =>
     But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!
 "),
 
+selectInstallClassCorpo =>
+ __("Select:
+
+  - Customized: If you are familiar enough with GNU/Linux, you may then choose
+    the primary usage for your machine. See below for details.
+
+  - Expert: This supposes that you are fluent with GNU/Linux and want to
+    perform a highly customized installation. As for a \"Customized\"
+    installation class, you will be able to select the usage for your system.
+    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!
+"),
+
 selectInstallClass2 =>
 __("The different choices for your machine's usage (provided, hence, that you have
 chosen either \"Custom\" or \"Expert\" as an installation class) are the

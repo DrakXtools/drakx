@@ -537,7 +537,7 @@ sub load_thiskind($;&$) {
 
     if ($type eq 'scsi') {
 	foreach ("imm", "ppa") {
-	    eval { load($_, $type); push @devs, "imm" };
+	    eval { load($_, $type); push @devs, [ $_, $_ ] };
 	    last if !$@;
 	}
 	#- hey, we're allowed to pci probe :)   let's do a lot of probing!

@@ -412,14 +412,14 @@ sub write_ldsoconf {
 
 sub setAuthentication {
     my ($o) = @_;
-    my ($shadow, $md5, $nis, $nis_server) = @{$o->{authentication} || {}}{qw(shadow md5 NIS NIS_server)};
+    my ($shadow, $md5, $nis) = @{$o->{authentication} || {}}{qw(shadow md5 NIS)};
     my $p = $o->{prefix};
     enableMD5Shadow($p, $shadow, $md5);
     enableShadow() if $shadow;
     if ($nis) {
 	$o->pkg_install("ypbind");
 	my $domain = $o->{netc}{NISDOMAIN};
-	$domain || $nis_server ne "broadcast" or die _("Can't use broadcast with no NIS domain");
+	$domain || $nis ne "broadcast" or die _("Can't use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($nis_server ne "broadcast" && " server")
 	                : "ypserver";
 	substInFile {

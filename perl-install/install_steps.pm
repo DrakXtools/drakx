@@ -389,14 +389,14 @@ Consoles 1,3,4,7 may also contain interesting information";
     }
 
     my $hasttf;
-    my $dest = "$o->{prefix}/usr/X11R6/lib/X11/fonts/drakfont";
+    my $dest = "/usr/X11R6/lib/X11/fonts/drakfont";
     foreach my $d (map { $_->{mntpoint} } grep { isFat($_) } @{$o->{fstab}}) {
 	foreach my $D (map { "$d/$_" } grep { m|^win|i } all("$o->{prefix}$d")) {
 	    $D .= "/fonts";
 	    -d "$o->{prefix}$D" or next;
 	    log::l("found win font dir $D");
-	    $hasttf ||= mkdir $dest, 0755;
-	    /(.*)\.ttf/i and symlink "$D/$_", "$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
+	    $hasttf ||= mkdir "$o->{prefix}$dest", 0755;
+	    /(.*)\.ttf/i and symlink "$D/$_", "$o->{prefix}$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
 	}
     }
     run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir") if $hasttf;

@@ -1,3 +1,24 @@
+2000-05-02  Pixel  <pixel@mandrakesoft.com>
+
+	* g_auto_install: add $dir/lib to LD_LIBRARY_PATH (it was silly
+	not to have it)
+
+2000-05-01  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (setRootPassword): remove
+	NIS_server, use NIS instead
+	* install_any.pm (setAuthentication): remove NIS_server, use NIS instead
+
+	* standalone/rpmdrake (AddMedia): hdlist.cz2 instead of hdlist
+
+2000-04-28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (afterInstallPackages): fix yet another bug for
+	ttf from windobe handling
+
+	* install_steps_interactive.pm (selectInstallClass): hide beginner
+	mode in corporate. Display special help.
+
 2000-04-29  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* my_gtk.pm: added call to Gtk->init; that makes 16 bit locales
