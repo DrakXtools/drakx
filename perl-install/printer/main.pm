@@ -1435,7 +1435,7 @@ sub read_client_conf() {
 sub write_client_conf {
     my ($daemonless_cups, $remote_cups_server) = @_;
     # Create the directory for client.conf if needed
-    (-d "$::prefix/etc/cups/" ) || mkdir ("$::prefix/etc/cups/") || return 1;
+    (-d "$::prefix/etc/cups/" ) || mkdir("$::prefix/etc/cups/") || return 1;
     my (@client_conf) = cat_("$::prefix/etc/cups/client.conf");
     if ($daemonless_cups) {
 	handle_configs::set_directive(\@client_conf, 
