@@ -538,16 +538,18 @@ sub main {
     }
     $::o = $o = $o_;
 
-    if (-e "/tmp/network") {
+    if (-e '/tmp/network') {
 	require network;
 	#- get stage1 network configuration if any.
-	$o->{netc} ||= network::read_conf("/tmp/network");
+	log::l('found /tmp/network');
+	$o->{netc} ||= network::read_conf('/tmp/network');
 	if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	    log::l("found network config file $file");
 	    my $l = network::read_interface_conf($file);
 	    $o->{intf} ||= { $l->{DEVICE} => $l };
 	}
-	if (my ($file) = glob_('/etc/resolv.conf')) {
+	if (-e '/etc/resolv.conf') {
+	    my $file ='/etc/resolv.conf';
 	    log::l("found network config file $file");
 	    add2hash($o->{netc}, network::read_resolv_conf($file));
 	}
