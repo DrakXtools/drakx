@@ -27,6 +27,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use interactive;
 use ugtk2 qw(:create :dialogs :wrappers :helpers);
+use vars qw(*F);
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -220,7 +221,7 @@ sub search() {
     $log_text->window->freeze_updates;
     $log_buf->set_text('');
     if ($::isFile) {
-	parse_file($::File);
+	parse_file($::File, $::File);
     } else {
 	foreach (keys %files) {
 	    parse_file($files{$_}{file}, $files{$_}{desc}) if $toggle{$_}->get_active;
@@ -231,11 +232,9 @@ sub search() {
     gtkflush();
 }
 
-local *F;
 my $timer;
 
 sub parse_file {
-  local *F = *F;
   my ($file, $descr) = @_;
 
   $file =~ s/\.gz$//;
