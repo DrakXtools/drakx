@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-09-13 22:00+0200\n"
-"PO-Revision-Date: 2002-09-08 19:00+0200\n"
+"PO-Revision-Date: 2002-09-16 18:00+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -8766,11 +8766,11 @@ msgstr "Naam van printer op afstand"
 
 #: ../../printerdrake.pm_.c:699
 msgid "Remote host name missing!"
-msgstr "De naam van de host op afstand is afwezig!"
+msgstr "De naam van de host op afstand ontbreekt!"
 
 #: ../../printerdrake.pm_.c:703
 msgid "Remote printer name missing!"
-msgstr "De naam van de printer op afstand is afwezig!"
+msgstr "De naam van de printer op afstand ontbreekt!"
 
 #: ../../printerdrake.pm_.c:727 ../../printerdrake.pm_.c:1244
 #, c-format
@@ -10124,10 +10124,31 @@ msgid ""
 "be sent to this user (username or\n"
 "\t       email)"
 msgstr ""
+"Standaard: Dit is de standaardbeveiliging aangeraden voor een computer die "
+"gebruikt wordt om \n"
+"               als client met het internet te verbinden.\n"
+"\n"
+"Hoog:       Er zijn al enkele beperkingen, en meer automatische controles "
+"worden 's nachts uitgevoerd.\n"
+"\n"
+"Hoger:    De beveiliging is nu hoog genoeg om het systeem als server te "
+"gebruiken die verbindingen\n"
+"              van vele clients kan accpeteren. Als uw computer alleen een "
+"client is op het Internet, kunt\n"
+"\t      u beter een lager niveau kiezen.\n"
+"\n"
+"Paranoïde:  Dit is vergelijkbaar met het vorige niveau, maar het systeem is "
+"volledig op slot en\n"
+"                maximale beveiliginsmaatregelen zijn van kracht\n"
+"\n"
+"Beveiligingsbeheerder:\n"
+"               Als de 'Beveiligingswaarschuwingen'-optie is ingesteld, "
+"zullen waarschuwingen naar deze gebruiker (gebruikersnaam of\n"
+"\t       e-mail) worden gestuurd"
 
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
-msgstr "Veiligheidsniveau:"
+msgstr "Beveiligingsniveau:"
 
 #: ../../security/main.pm_.c:74
 msgid "Security Alerts:"
@@ -10135,7 +10156,7 @@ msgstr "Beveiligingswaarschuwingen:"
 
 #: ../../security/main.pm_.c:83
 msgid "Security Administrator:"
-msgstr "Beveiligings-beheerder:"
+msgstr "Beveiligingsbeheerder:"
 
 #: ../../security/main.pm_.c:114 ../../security/main.pm_.c:150
 #, c-format
@@ -10152,18 +10173,16 @@ msgstr ""
 "in te stellen. Indien u uitleg nodig heeft, kunt u op 'Hulp' klikken.\n"
 
 #: ../../security/main.pm_.c:226
-#, fuzzy
 msgid "Network Options"
-msgstr "Meer opties"
+msgstr "Netwerkopties"
 
 #: ../../security/main.pm_.c:235
-#, fuzzy
 msgid "System Options"
-msgstr "Meer opties"
+msgstr "Systeemopties"
 
 #: ../../security/main.pm_.c:242
 msgid "Periodic Checks"
-msgstr ""
+msgstr "Periodieke controles"
 
 #: ../../security/main.pm_.c:256
 msgid "Please wait, setting security level..."
@@ -13762,15 +13781,17 @@ msgstr ""
 "terminalvenster."
 
 #: ../../standalone/draksplash_.c:34
-#, fuzzy
 msgid ""
 "package 'ImageMagick' is required for correct working.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
-msgstr "pakket ImageMagick is vereist voor correct functioneren"
+msgstr ""
+"pakket 'ImageMagick' is vereist voor correct functioneren.\n"
+"Klik op \"Ok\" om 'ImageMagick' te installeren of op \"Annuleren\" om af te "
+"sluiten"
 
 #: ../../standalone/draksplash_.c:78
 msgid "first step creation"
-msgstr "creëren van eerste stap"
+msgstr "eerste stap creëren"
 
 #: ../../standalone/draksplash_.c:79
 msgid "final resolution"
@@ -13887,9 +13908,9 @@ msgstr "Bezig met genereren voorbeeld..."
 
 #. -PO  First %s is theme name, second %s (in parenthesis) is resolution
 #: ../../standalone/draksplash_.c:511
-#, fuzzy, c-format
+#, c-format
 msgid "%s BootSplash (%s) preview"
-msgstr "Kan opstartscherm-voorbeeld niet creëren"
+msgstr "%s opstartscherm (%s)-voorbeeld"
 
 #: ../../standalone/drakxtv_.c:49
 msgid ""
@@ -13923,7 +13944,7 @@ msgstr "Canada (kabel)"
 
 #: ../../standalone/drakxtv_.c:66
 msgid "USA (broadcast)"
-msgstr "USA (uitzending)"
+msgstr "VS (uitzending)"
 
 #: ../../standalone/drakxtv_.c:66
 msgid "USA (cable)"
