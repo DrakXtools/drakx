@@ -749,7 +749,8 @@ sub apply {
     my ($netc, $intf) = @_;
     my $dyn = $intf->{BOOTPROTO} ne 'static';
     my $lintf = $intf;
-    $dyn and $lintf->{$_} = undef foreach qw(NETMASK NETWORK IPADDR);
+    #- always delete NETWORK and BROADCAST fields so that they get automatically recomputed by write_interface_conf
+    delete $lintf->{$_} foreach qw(NETWORK BROADCAST), if_($dyn, qw(IPADDR NETMASK));
     network::network::sethostname($netc) if $dyn;
     network::network::configureNetwork2($in, $modules_conf, '', $netc, { $lintf->{DEVICE} => $lintf });
 }
