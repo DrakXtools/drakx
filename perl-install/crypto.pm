@@ -127,8 +127,10 @@ sub getPackages {
 					      log::l("read updates hdlist");
     #- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
     $update_medium->{prefix} = "ftp://$mirror" . dir($mirror);
-    #- (re-)enable the medium to allow install of package.
+    #- (re-)enable the medium to allow install of package,
+    #- make it an update medium (for install_any::install_urpmi).
     $update_medium->{selected} = 1;
+    $update_medium->{update} = 1;
 
     return $update_medium;
 }
