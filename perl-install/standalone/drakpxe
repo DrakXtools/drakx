@@ -214,7 +214,7 @@ Leave it blank if you do not want to set up automatic installation mode.
 my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
 		pxe => '/usr/sbin/pxe',
 		'tftp-server' => '/usr/sbin/in.tftpd',
-		'apache' => '/usr/sbin/httpd' );
+		'apache' => '/usr/sbin/httpd');
 
 #- first: try to install all in one step
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
@@ -244,7 +244,7 @@ mkdir "/var/lib/tftpboot/PXEClient/images";
 sys("cp", "-af", "$dir/isolinux/alt0", "/var/lib/tftpboot/PXEClient/images/");
 
 my $pxelinux_cfg = parse_pxelinux_cfg("/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
-my $label = undef;
+my $label;
 foreach my $i (0..99) {
     $label = undef;
     foreach my $e (@{$pxelinux_cfg->{entry}}) {
