@@ -2012,7 +2012,7 @@ ipcp_printpkt(p, plen, printer, arg)
  */
 #define IP_HDRLEN	20	/* bytes */
 #define IP_OFFMASK	0x1fff
-#define IPPROTO_TCP	6
+// #define IPPROTO_TCP	6
 #define TCP_HDRLEN	20
 #define TH_FIN		0x01
 

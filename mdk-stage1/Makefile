@@ -51,7 +51,7 @@ COMPILE = $(CC) $(DEFS) $(CFLAGS)
  #- stage1 "loader"
 ifeq (i386, $(ARCH))
 INITSRC = minilibc.c init.c
-INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\"
+INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
 else
 INITSRC = init.c
 ifeq (ia64, $(ARCH))

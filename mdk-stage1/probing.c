@@ -210,7 +210,7 @@ static void probe_that_type(enum driver_type type)
 			}
 		}
 		fclose(f);
-	end_pci_probe:
+	end_pci_probe:;
 	}
 
 
@@ -284,7 +284,7 @@ static void probe_that_type(enum driver_type type)
 			}
 		}
 		fclose(f);
-	end_usb_probe:
+	end_usb_probe:;
 	}
 #endif
 }
@@ -498,7 +498,7 @@ static void find_media(void)
 			start = next;
 		}
 		
-	end_scsi:
+	end_scsi:;
 	}
 
 	/* ----------------------------------------------- */
