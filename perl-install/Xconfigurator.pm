@@ -683,7 +683,17 @@ sub chooseResolutionsGtk($$;$) {
     while (my ($w, $h) = each %w2h) {
 	my $V = $w . "x" . $h;
 	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
-	&$set($r) if $chosen_w == $w;
+	if ($chosen_w == $w) {
+	    &$set($r);
+	    if ($::isEmbedded) {
+		$no_human=1;
+		$w2_combo->entry->set_text($w . "x" . $w2h{$w});
+		unless (member($chosen_depth, @{$w2depth{$w}})) {
+		    $chosen_depth = max(@{$w2depth{$w}});
+		    &$set_depth();
+		}
+	    }
+	}
 	$r->signal_connect("clicked" => sub {
 			       $ignore and return;
 			       $chosen_w = $w;
