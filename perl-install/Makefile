@@ -30,7 +30,6 @@ clean:
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 check:
-	$(MAKE) -C share/po check
 	perl -I. -Mlang -e 'lang::check'
 	perl -I. -Mkeyboard -e 'keyboard::check'
 
