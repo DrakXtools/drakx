@@ -1,3 +1,373 @@
+2004/09/07  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Down zapping rank
+
+2004/09/07  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - shift twice to get the correct function name
+
+2004/09/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm (get_interface_type) ethernet devices can be used as
+	adsl devices
+
+	* standalone/drakconnect (del_intf) use more detailled device names on
+	Fabrice Facorat suggestion
+	s/kind/name/
+	(manage) clean interface kind assignment
+
+	* network/adsl.pm: load modules for pppoe connections during install
+	(partial fix for #11189)
+
+	* mouse.pm: more synaptics fixes
+
+	* fs/mount_options.pm (set_default) use "users" options for removable
+	devices (so that users
+	can unmount them if the devices were mounted by root)
+
+	* network/netconnect.pm: I sux
+	pppoa shouldn't be selected by default for ethernet devices, fallback on
+	pppoe
+	use fctStartAdsl for eagle-usb in dhcp/static modes
+
+2004/09/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated BokmÃ¥l po file
+
+2004/09/07  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/bootloader-config: take care of symlink based bootloader
+	entries
+
+	* bootloader.pm: create get_kernels_and_labels_before_kernel_remove() used
+	by bootloader-config
+
+	* fs.pm: 
+	  - ignore first line of /proc/swaps
+	  - partially handle /udev/xxx device names in fstab
+	  - ignore rootfs "device"
+	  - don't warn for loopback files
+
+	* modules/modprobe_conf.pm, modules/modules_conf.pm: when installing on
+	kernel 2.4, do generate a valid modprobe.conf anyway
+
+2004/09/07  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Iran != Irak
+	Typo fix
+
+	* pkgs.pm: Code factorization
+	Skip packages that are found on a supplementary media but that are
+	already provided by the main media.
+
+	* install_any.pm: Remove unused variable
+
+2004/09/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: one more change for 10.1-0.23mdk
+	last minute change for 10.1-0.23mdk
+	10.1-0.23mdk
+
+	* standalone/service_harddrake: add/update a few comments
+	explicitely do not try to run configurator for AGP, ATA_STORAGE,
+	SATA_STORAGE,
+	SCSI_CONTROLLER and TV classes (some of them [eg: TV] do have a
+	configurator
+	for harddrake GUI and thus are not skiped by -x test)
+
+	* share/po/fr.po: typo fix
+	fix unclosed tag
+	update
+
+2004/09/06  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+	Updated Simplified Chinese translation
+
+	* share/po/DrakX.pot: Updated Simplified Chinese translation
+
+2004/09/06  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_conf_backend) explode sagem specific stuff to
+	sagem_set_parameters()
+
+	* install2.pm: always load mouse modules at beginning of install (should
+	fix X test
+	not working with synaptics during install)
+
+	* standalone/drakconnect: perl_checker fixes
+	(del_intf) update for adsl/modem/isdn connections
+	(build_tree) avoid code duplication, use network::modem::ppp_read_conf
+	(build_notebook) Authentication is used for modems only (better fix for
+	#11142)
+
+	* network/modem.pm (ppp_read_conf) override Authentication if it does not
+	contain a digit character,
+	the empty string exists ...
+	(ppp_read_conf) try to read kppp config from user dir
+	(ppp_read_conf) return modem configuration
+	(ppp_read_conf) use /dev/modem if no modem was detected (do not crash
+	when we edit a connection whose modem is unplugged)
+
+	* detect_devices.pm (getNet) fix detection in 2.4 kernel for net devices
+	with high traffic
+
+	* network/netconnect.pm: fix stupid error
+	adjust tests, dhcp/static adsl connections can now use non-ethernet
+	devices
+	write sagem specific stuff for dhcp/static connections
+	always ask adsl provider
+	keep linmodem message for Hcf and Hsf
+	remove wrong message about linmodems (#11224)
+
+	* share/po/fr.po: translate Zeroconf message
+
+2004/09/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/wa.po, share/po/fr.po: Mandrake --> Mandrakelinux
+	updated pot file
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/lv.po,
+	share/po/hu.po, share/po/fa.po, share/po/id.po, share/po/ru.po,
+	share/po/br.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/mn.po, share/po/uk.po,
+	share/po/am.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/cs.po, share/po/uz@Latn.po: updated pot file
+
+	* lang.pm: some more languages not supported on console
+
+	* any.pm: Changed "User name" to "Login name" (less ambiguous)
+
+2004/09/06  Pixel  <pixel at mandrakesoft.com>
+
+	* raid.pm: safer
+	fix typo
+	handle pt_type, not only fs_type
+	be more failsafe with half broken existing raids
+
+	* drakxtools.spec: need latest perl-MDK-Common
+
+	* detect_devices.pm: BIOS release date can have date DD/MM/YY (or maybe it
+	is MM/DD/YY), only YYYY was handled
+
+	* fs/type.pm: 
+	  - detect LVM2
+	  - don't even check_md magic when we don't have the size of the device
+	detect linux software raid magic
+
+	* share/rpmsrate: install xorg-x11-server when installing xorg-x11 (no
+	need to do it based on the hardware anymore (it used to be needed for
+	XF3))
+
+	* install_steps_interactive.pm: 
+	  - don't prompt package groups selection when the available size is
+	200MB (instead of 140MB)
+	  - when user unselect every groups (ie. the special minimal install
+	case), allow the available size to be lower than needed size
+
+	* fsedit.pm: some more logging
+	fix typo
+	detect linux software raid magic
+
+	* diskdrake/interactive.pm: fix displaying "mdmd0" instead of "md0"
+
+2004/09/06  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/09/06  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Supplementary media: don't forget to check for a new
+	rpmsrate too
+	Make the network supplementary media probe able to find an hdlists file
+	Override rpmsrate and compssUsers.pl by the ones found on a
+	supplementary CD
+
+	* pkgs.pm: Make the network supplementary media probe able to find an
+	hdlists file
+
+	* share/list: consolechars has moved
+
+2004/09/06  Thomas Backlund  <tmb at mandrake.org>
+
+	* share/po/fi.po: Merge translations by Taisto Kuikka.
+	 Update translations, not yet fully translated...
+
+2004/09/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: better looking for alternative drivers
+
+	* ugtk2.pm (_create_window) do not set border for wizards
+
+	* drakxtools.spec: 10.1-0.22mdk
+	10.1-0.21mdk
+
+	* install_steps.pm, standalone/localedrake, install_steps_interactive.pm:
+	drop lang::write()'s prefix parameter in favor of $::prefix (which was
+	already partially done)
+
+	* share/rpmsrate: do not install uim-applet for japanese since SCIM
+	already provides its
+	own applet
+
+	* harddrake/data.pm: 
+	  - do not run drakconnect for ethernet & ADSL
+	  - do not run diskdrake for hd
+	add module for storage controllers that are not compiled built-in in
+	kernel
+	add a few comments
+	add module for AGP controller
+	run drakconnect when an ADSL device is found (we should do so only when
+	device
+	is added, not when removed)
+	add module for TV cards (trainee sucks...)
+
+	* standalone/drakconnect: fix crashes
+
+	* log.pm (explanations) redirect log where appropriate at install time
+
+	* standalone/service_harddrake: typo fix
+	add module for storage controllers that are not compiled built-in in
+	kernel
+
+	* modules.pm: add module for storage controllers that are not compiled
+	built-in in kernel
+
+	* standalone/drakboot: ensure we do not enable autologin w/o any user
+
+	* lang.pm (write) fix log message when installing IM packages
+	drop lang::write()'s prefix parameter in favor of $::prefix (which was
+	already partially done)
+	(write, configure_kdeglobals) log quite more explanations
+	(write) really do nothing when no IM is set (harmfull but saner)
+	(write) package list was already computed
+	fix english name for breton
+	always set QT_IM_MODULE when setting GTK_IM_MODULE
+	remove uneeded quotes
+	  - install scim-m17n as well for generic SCIM configuration (more input
+	methods)
+	  - split am entry from generic one since we've choosen to use
+	  scim-tables for am on 2004-09-01
+	add specific packages to install for japanese when using SCIM
+	set QT_IM_MODULE too (UTUMI Hirosi)
+	we should probably set it for all IM that use gtk+ API since their API
+	is almost identical.
+
+	* share/po/fr.po: update
+
+2004/09/06  vljubovic
+
+	* share/po/bs.po: Small fixes
+
+2004/09/05  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po, share/po/DrakX.pot: Updated Simplified Chinese
+	translation
+
+2004/09/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/po/mn.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/hi.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/nl.po, share/po/tl.po, share/po/de.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* pixmaps/langs/lang-lb.png, pixmaps/langs/lang-km.png,
+	pixmaps/langs/lang-lo.png, pixmaps/langs/lang-ik.png,
+	pixmaps/langs/lang-ur.png, pixmaps/langs/lang-sc.png,
+	pixmaps/langs/lang-fy.png, pixmaps/langs/lang-ks.png,
+	pixmaps/langs/lang-lg.png, pixmaps/langs/lang-ug.png,
+	pixmaps/langs/lang-sw.png, pixmaps/langs/lang-ha.png,
+	pixmaps/langs/lang-tt@Cyrl.png, pixmaps/langs/lang-pa.png,
+	pixmaps/langs/lang-chr.png, pixmaps/langs/lang-csb.png,
+	pixmaps/langs/lang-fur.png, pixmaps/langs/lang-so.png,
+	pixmaps/langs/lang-ps.png, pixmaps/langs/lang-kl.png,
+	pixmaps/langs/lang-ks@Arab.png, pixmaps/langs/lang-kk.png: new lang
+	images
+
+	* lang.pm: * enabled some more languages in the selection list (Furlan,
+	Frisian,
+	Inuktitut, Greenlandic (Kalaallisut), Khmer, Luxembourguish, Punjabi,
+	  Sardinian and Uyghur).
+	  Those languages have either translations for Mandrakelinux tools,
+	  or for KDE, or Gnome, or any combination of the three;
+	  or there have been interest recently in starting a translation for
+	them.
+	* updated list of available locales (@locales)
+
+	* standalone/drakbackup: fixed typo
+
+2004/09/05  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/09/05  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Replace a XFree86 by X11 in the French messages
+
+2004/09/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po: fixed typo
+
+	* share/po/ja.po: updated Japanese file
+
+2004/09/03  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated
+
+2004/09/03  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: more
+
+2004/09/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* Xconfig/xfree.pm (set_synaptics) remove spurious space
+
+	* mouse.pm: perl_checker fix
+	(set_xfree_conf) synaptics fixes
+
+2004/09/03  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Umount supplementary CD immediately after having read
+	informations on it.
+
+2004/09/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/ja.po: update (Yukiko Bando <ybando@k6.dion.ne.jp>)
+
+	* detect_devices.pm (getModem) handle new winmodem low level driver for
+	VIA in ALSA
+
 2004/09/03  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/network.pm (findIntf, read_all_conf) use default DEVICE field
@@ -37579,7 +37949,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.958 2004/09/03 06:32:42 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.959 2004/09/03 08:39:32 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
