@@ -495,7 +495,7 @@ sub getECI() {
 
 sub getNet() {
     grep { !($::isStandalone && /plip/) && c::hasNetDevice($_) }
-      grep { /^(ath|eth|fddi|plip|tr|usb|wifi|wlan)/ }
+      grep { /^(ath|br|eth|fddi|plip|tap|tr|usb|wifi|wlan)/ }
         map_index {
             # skip headers
             if_(1 < $::i && /^\s*([a-z]*[0-9]*):/, $1)
