@@ -46,6 +46,7 @@ my %ignoreBadPkg = (
 
 sub packageMedium { my ($packages, $p) = @_; $p or die "invalid package from\n" . backtrace();
 		    foreach (values %{$packages->{mediums}}) {
+			defined $_->{start} && defined $_->{end} or next;
 			$p->id >= $_->{start} && $p->id <= $_->{end} and return $_;
 		    }
 		    return }
@@ -177,7 +178,7 @@ sub bestKernelPackage {
 
 sub packagesOfMedium {
     my ($packages, $medium) = @_;
-    $medium->{start} <= $medium->{end} ? @{$packages->{depslist}}[$medium->{start} .. $medium->{end}] : ();
+    defined $medium->{start} && defined $medium->{end} ? @{$packages->{depslist}}[$medium->{start} .. $medium->{end}] : ();
 }
 sub packagesToInstall {
     my ($packages) = @_;
