@@ -53,6 +53,9 @@ sub to_raw_X {
 	    # $default_ATI_fglrx_config need to be move in proprietary ?
 	    $_->{raw_LINES} ||= default_ATI_fglrx_config();
 	}
+	if (arch() =~ /ppc/ && ($_->{Driver} eq 'r128' || $_->{Driver} eq 'radeon')) {
+	    $_->{UseFBDev} = 1;
+	}
     }
 
     $raw_X->set_devices(@cards);
