@@ -258,7 +258,7 @@ sub selectMouse {
 }
 #------------------------------------------------------------------------------
 sub setupSCSI {
-    my ($o) = @_;
+    my ($o, $auto, $at_least_one) = @_;
 
     if ($o->{pcmcia} && !$::noauto) {
 	my $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards..."));
@@ -268,7 +268,7 @@ sub setupSCSI {
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
 	modules::load_ide();
     }
-    any::setup_thiskind($o, 'scsi|disk', $_[1], $_[2], $o->{pcmcia});
+    any::setup_thiskind($o, 'scsi|disk', $auto, $at_least_one, $o->{pcmcia});
 }
 
 sub ask_mntpoint_s {
@@ -747,10 +747,10 @@ sub summary {
      } modules::get_that_type('sound')),
     (map {
 { label => _("TV card"), val => \ (my $i = $_->{description}), clicked => {} } 
-     } { $_->{driver} eq 'bttv' } detect_devices::probeall()),
+     } grep { $_->{driver} eq 'bttv' } detect_devices::probeall()),
     (map {
 { label => _("ISDN card"), val => \ (my $i = $_->{description}), clicked => { $o->configureNetwork } }
-     } { $_->{driver} eq 'hisax' } detect_devices::probeall()),
+     } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
 ]);
 }
 
