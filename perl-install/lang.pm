@@ -88,7 +88,7 @@ my %languages = (
 				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1:vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh' ],
-'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN', 'zh_CN.gb2312:zh' ],	
+'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN', 'zh_CN:zh_CN.GB2312:zh_CN.gb2312:zh' ],	
 );
 
 my %xim = (
