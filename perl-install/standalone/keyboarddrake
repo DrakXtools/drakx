@@ -26,7 +26,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
     $in = 'interactive'->vnew('su', 'keyboard');
 
   begin:
-    $::isEmbedded and kill USR2, $::CCPID;
+    $::isEmbedded and kill 'USR2', $::CCPID;
   choose:
     $keyboard->{KEYBOARD} = $in->ask_from_listf(_("Keyboard"),
 						_("Please, choose your keyboard layout."),
@@ -59,7 +59,7 @@ keyboard::write($keyboard);
 
 end:
 if ($::isEmbedded) {
-    kill(USR1, $::CCPID);
+    kill('USR1', $::CCPID);
     $keyboard = '';
     goto begin;
 } else {

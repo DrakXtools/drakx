@@ -63,9 +63,9 @@ $commandline =~ /-pdq/ and
 }
 
 begin:
-$::isEmbedded and kill USR2, $::CCPID;
+$::isEmbedded and kill 'USR2', $::CCPID;
 
 printerdrake::main($printer, $in, 1);
 
-$::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+$::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
 goto begin;

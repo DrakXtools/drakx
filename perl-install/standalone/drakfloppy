@@ -69,7 +69,7 @@ my @titles = ( _("Module name"), _("Size") );
 my $list = new_with_titles Gtk::CList( @titles );
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-$window->signal_connect( 'delete_event', sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
+$window->signal_connect( 'delete_event', sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
 $window->set_title( _("drakfloppy") );
 $window->set_policy(1, 1, 1);
 $window->border_width (5);
@@ -79,7 +79,7 @@ $window->border_width (5);
 # but they provides shiny shortcut like C-q
 my @menu_items = ( 
 		  { path => _("/_File"), type => '<Branch>' },
-		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) } },
+		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
 		 );
 my $menubar = get_main_menu( $window );
 
@@ -233,7 +233,7 @@ $global_vbox->pack_start ($output_frame, 0, 0, 0);
 my $build_button = new Gtk::Button( _("Build the disk") );
 my $cancel_button = new Gtk::Button( _("Cancel") );
 my $fin_hbox = new Gtk::HBox( 0, 0 );
-$cancel_button->signal_connect( clicked=> sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
+$cancel_button->signal_connect( clicked=> sub {$::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0)});
 $build_button->signal_connect('clicked', \&build_it);
 $fin_hbox->pack_end($cancel_button, 0, 0, 0);
 $fin_hbox->pack_end($build_button,  0, 0, 10);
@@ -248,7 +248,7 @@ $expert_mod_frame->hide();
 $expert_button_frame->hide();
 
 Gtk->main_iteration while Gtk->events_pending;
-$::isEmbedded and kill USR2, $::CCPID;
+$::isEmbedded and kill 'USR2', $::CCPID;
 Gtk->main;
 
 

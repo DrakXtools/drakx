@@ -108,5 +108,5 @@ sub tryConfScanner {
 }
 
 sub quit {
-    $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+    $::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
 }

@@ -58,7 +58,7 @@ my $inmain = 0;
 my $lilogrub = chomp_(`detectloader -q`);
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
-$window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
+$window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
 $window->set_title(_("Boot Style Configuration"));
 $window->border_width(2);
 #$window->realize;
@@ -77,7 +77,7 @@ my $pixmap = new Gtk::Pixmap($h_pixmap, $h_mask);
 # the menus are not shown
 # but they provides shiny shortcut like C-q
 my @menu_items = ( { path => _("/_File"), type => '<Branch>' },
-		   { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback    => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) } },
+		   { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback    => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
 		 );
 my $menubar = get_main_menu($window);
 ######### menus end
@@ -324,8 +324,8 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				    )
 			 ),
 		 gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
-			 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub{ updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill(USR1,$::CCPID) : Gtk->exit(0) }),
-			 gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) })
+			 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub{ updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
+			 gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
 			)
 	       )
       );
@@ -345,7 +345,7 @@ if ($a_mode) {
 $window->show_all();
 $no_bootsplash and $thm_frame->hide();
 Gtk->main_iteration while Gtk->events_pending;
-$::isEmbedded and kill USR2, $::CCPID;
+$::isEmbedded and kill 'USR2', $::CCPID;
 $inmain=1;
 Gtk->main;
 Gtk->exit(0);

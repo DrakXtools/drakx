@@ -246,7 +246,7 @@ sub interactive_mode {
 							       gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
 										 sub { ${$central_widget}->destroy(); help() }),
 							       gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
-										     $::isEmbedded and kill "USR1", $::CCPID;
+										     $::isEmbedded and kill 'USR1', $::CCPID;
 										     Gtk->main_quit() }),
 							      ),
 						    ),
@@ -260,7 +260,7 @@ sub interactive_mode {
     $window1->show_all();    
 
     Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill "USR2", $::CCPID;
+    $::isEmbedded and kill 'USR2', $::CCPID;
     Gtk->main;
     Gtk->exit(0);
 }

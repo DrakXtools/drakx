@@ -37,7 +37,7 @@ $::direct = 1; #DEBUG
 my $in = 'interactive'->vnew('su', 'default');
 
 begin:
-$::isEmbedded and kill USR2, $::CCPID;
+$::isEmbedded and kill 'USR2', $::CCPID;
 
 my $imagefile = "/root/drakx/replay_install.img";
 -f $imagefile or $in->ask_okcancel(_("Error!"), 
@@ -213,7 +213,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 #  	  );
 #    $notebook->set_tab_pos('left');
 #    $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill (12, $::CCPID);
+    $::isEmbedded and kill ('USR2', $::CCPID);
     $W->main;
 #    $W->destroy();
 }
@@ -244,7 +244,7 @@ quit_global($in, 0);
 
 sub quit_global {
     my ($in, $exitcode) = @_;
-    $::isEmbedded ? kill USR1, $::CCPID : $in->exit($exitcode);
+    $::isEmbedded ? kill 'USR1', $::CCPID : $in->exit($exitcode);
     goto begin;
 }
 

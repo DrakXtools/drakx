@@ -592,17 +592,17 @@ Click on Configure to launch the setup wizard.", $setup_state));
     my $button_conf = new Gtk::Button _("Configure");
     $button_conf->signal_connect(clicked => sub {
 				       system("/usr/sbin/drakgw --wizard");
-				       kill(USR1, $::CCPID);
+				       kill('USR1', $::CCPID);
 				   });
     $bbox1->add($button_conf);
     my $button_cancel = new Gtk::Button _("Cancel");
     $button_cancel->signal_connect(clicked => sub {
-					 kill(USR1, $::CCPID);
+					 kill('USR1', $::CCPID);
 				     });
     $bbox1->add($button_cancel);
     $window1->show_all();
     Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill USR2, $::CCPID;
+    $::isEmbedded and kill 'USR2', $::CCPID;
     Gtk->main;
     Gtk->exit(0);
     

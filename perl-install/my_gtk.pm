@@ -98,7 +98,7 @@ sub new {
 	flush();
 	$::Plug->add($o->{window});
     }
-    $::CCPID and kill "USR2", $::CCPID;
+    $::CCPID and kill 'USR2', $::CCPID;
     $o;
 }
 sub main {
@@ -137,7 +137,7 @@ sub flush { gtkflush() }
 sub exit {
     gtkset_mousecursor_normal(); #- for restoring a normal in any case
     flush();
-    $::isEmbedded and kill USR1, $::CCPID;
+    $::isEmbedded and kill 'USR1', $::CCPID;
     c::_exit($_[1]) #- workaround 
 }
 

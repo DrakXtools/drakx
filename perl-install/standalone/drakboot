@@ -31,7 +31,7 @@ if ($in->isa('interactive::gtk')) {
 }
 
 !$::isEmbedded and $in->exit(0);
-kill(USR1, $::CCPID);
+kill('USR1', $::CCPID);
 goto ask;
 
 sub lilo_choice

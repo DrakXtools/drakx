@@ -18,9 +18,9 @@ $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^CLASS="?expert/m; #"
 my $in = 'interactive'->vnew('su', 'security');
 
 begin:
-$::isEmbedded and kill USR2, $::CCPID;
+$::isEmbedded and kill 'USR2', $::CCPID;
 
 security::main::main($prefix, $in);
 
-!$::isEmbedded ? $in->exit(0) : kill(USR1, $::CCPID);
+!$::isEmbedded ? $in->exit(0) : kill('USR1', $::CCPID);
 goto begin;

@@ -19,5 +19,5 @@ begin:
 my $l = services::ask($in);
 services::doit($in, $l) if $l;
 !$::isEmbedded and $in->exit(0);
-kill USR1, $::CCPID;
+kill 'USR1', $::CCPID;
 goto begin;

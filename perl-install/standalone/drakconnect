@@ -322,7 +322,7 @@ $combo1->entry->signal_connect('changed', sub {
 $window1->show_all();
 $_->hide foreach ($button1, $button3);
 Gtk->main_iteration while Gtk->events_pending;
-$::isEmbedded and kill USR2, $::CCPID;
+$::isEmbedded and kill 'USR2', $::CCPID;
 my $tag = Gtk->timeout_add(4000, \&update2);
 Gtk->main;
 Gtk->exit(0);
@@ -413,7 +413,7 @@ sub update2 {
 }
 
 sub quit_global {
-    $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
+    $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0);
 }
 
 sub configure_lan {
