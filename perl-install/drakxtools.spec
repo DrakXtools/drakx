@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.9mdk
+Release: 0.10mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.10mdk
+- drakconnect (oblin):
+  o do not write 'ifcfg-Manually load a driver' file
+  o fix sagem pty in pppd config
+  o prevent boot from timeoutingforever if modem can't be synchronized
+- localedrake: fix default IM setting when switching language
+- net_applet: fix tooltip's messages
+- harddrake: add a PCMCIA controllers class
+
 * Tue Aug 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.9mdk
 - drakboot:
   o install acpi and acpid if needed (pixel, #10760)
