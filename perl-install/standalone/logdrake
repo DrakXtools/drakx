@@ -100,7 +100,7 @@ my @menu_items = (
 		  { path => _("/File/_Save"), accelerator => _("<control>S"),callback => \&save },
 		  { path => _("/File/Save _As") },
 		  { path => _("/File/-"),type => '<Separator>' },
-		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
+		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => \&quit },
 		  { path => _("/_Options"), type => '<Branch>' },
 		  { path => _("/Options/Test") },
 		  { path => _("/_Help"),type => '<LastBranch>' },
@@ -205,7 +205,7 @@ gtkadd($window,
 			  createScrolledWindow(my $log_text = new Gtk::Text(undef, undef))
 			 ),
 		0, gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
-			   gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => \&alert_config),
+			   if_ (!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => \&alert_config)),
 			   gtksignal_connect(new Gtk::Button (_("Save")), clicked => \&save),
 			   gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => \&quit)
 			  )
@@ -273,6 +273,7 @@ sub parse_file {
       my @t, $t;
       while (@all) {
 	  $t = pop @all;
+	  next if ($t =~ /logdrake/);
 	  last if !($t =~ /$Explain/);
 	  push @t, $t;
       }
@@ -508,6 +509,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.6  2002/02/01 18:10:06  yduret
+# fix --explain=foo bug that prevent to show anything
+#
 # Revision 1.5  2002/02/01 10:01:39  pablo
 # changed some strings to make translation easier
 #
