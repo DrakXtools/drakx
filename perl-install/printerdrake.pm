@@ -656,7 +656,7 @@ sub get_db_entry {
 		$driverstr =
 		    "GhostScript + $printer->{configured}{$queue}{'driver'}";
 	    }
-	    my $make = $printer->{configured}{$queue}{'make'};
+	    my $make = uc($printer->{configured}{$queue}{'make'});
 	    my $model =
 		$printer->{configured}{$queue}{'model'};
 	    if ($::expert) {
@@ -682,7 +682,7 @@ sub get_db_entry {
 	    # Point the list cursor at least to manufacturer and model of the
 	    # printer
 	    $printer->{DBENTRY} = "";
-	    my $make = $printer->{configured}{$queue}{'make'};
+	    my $make = uc($printer->{configured}{$queue}{'make'});
 	    my $model = $printer->{configured}{$queue}{'model'};
 	    my $key;
 	    for $key (keys %printer::thedb) {
@@ -1032,15 +1032,21 @@ It may take some time before the printer starts.\n");
 sub copy_queues_from {
     my ($printer, $in, $oldspooler) = @_;
     my $newspooler = $printer->{SPOOLER};
-    my @oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
+    my @oldqueues;
     my @queueentries;
     my @queuesselected;
-    my $newspoolerstr = $printer::shortspooler_inv{$newspooler};
-    my $oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
-    for (@oldqueues) {
-	push (@queuesselected, 1);
-	push (@queueentries, { text => $_, type => 'bool', 
-			       val => \$queuesselected[$#queuesselected] });
+    my $newspoolerstr;
+    my $oldspoolerstr;
+    {
+	my $w = $in->wait_message('', _("Reading printer data ..."));
+	@oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
+	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
+	$oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
+	for (@oldqueues) {
+	    push (@queuesselected, 1);
+	    push (@queueentries, { text => $_, type => 'bool', 
+				   val => \$queuesselected[$#queuesselected] });
+	}
     }
     if ($in->ask_from_entries_refH_powered
 	({ title => _("Transfer printer configuration"),
