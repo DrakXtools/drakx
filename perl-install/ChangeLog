@@ -1,5 +1,22 @@
 2001/04/14  François Pons  <fpons@mandrakesoft.com>
 
+	* rescue/tree/etc/oem: changed priority level from 2 to 4 for rate
+	selection of packages.
+
+	* pkgs.pm: fixed absurd mismatch of use of <=> and cmp on versionCompare.
+
+2001/04/14  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm (load_po): s/!isStandalone/isInstall/ (mainly for XFdrake's
+	test)
+
+	* Xconfigurator.pm (use vars): fix stew sux
+	(testFinalConfig): nicer stderr handling
+
+	* interactive_gtk.pm, interactive_newt.pm (exit): fix the exit code
+
+2001/04/14  François Pons  <fpons@mandrakesoft.com>
+
 	* install_any.pm: fixed to gzip synthesis file.
 	safe guard generation of synthesis file.
 	fixed umask on urpmi list file and generate synthesis file for each
