@@ -262,6 +262,7 @@ sub ask_from_normalize {
 
     foreach my $e (@$l) {
 	if (my $li = $e->{list}) {
+	    ref $e->{val} eq 'SCALAR' or internal_error($e->{val} ? "field {val} must be a reference" : "field {val} is mandatory");
 	    if ($e->{sort} || @$li > 10 && !exists $e->{sort}) {
 		my @l2 = map { may_apply($e->{format}, $_) } @$li;
 		my @places = sort { $l2[$a] cmp $l2[$b] } 0 .. $#l2;
