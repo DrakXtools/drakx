@@ -61,4 +61,7 @@ char *realpath(const char *path, char *resolved_path) __THROW;
 
 int abs(int j) __THROW;
 
+long int random(void) __THROW;
+void srandom(unsigned int seed) __THROW;
+
 #endif

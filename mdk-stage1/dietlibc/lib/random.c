@@ -2,7 +2,7 @@
 
 static unsigned int seed=1;
 
-int random() {
+long int random() {
   return ((seed = seed * 1103515245 + 12345) % ((unsigned int)RAND_MAX + 1));
 }
 
