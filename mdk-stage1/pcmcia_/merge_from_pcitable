@@ -26,12 +26,15 @@ foreach my $k (sort keys %$drivers) {
     push @pcitable, { vendor => $1, device => $2, driver => $v->[0], name => $v->[1], vd => "$1$2" };
 }
 
+my @res;
 print "Missing in `probe.c':\n";
 foreach my $p (@pcitable) {
     next if $p->{driver} ne 'yenta_socket';
     member($p->{vd}, map { $_->{vd} } @probes) or
-      print "    { 0x$p->{vendor}, 0x$p->{device}, \"..\", \"$p->{name}\" },\n";
+      push @res, "    { 0x$p->{vendor}, 0x$p->{device}, \"..\", \"$p->{name}\" },\n";
 }
+print sort @res;
+@res = ();
 print "\n";
 
 print "Missing in pcitable:\n";
@@ -39,8 +42,10 @@ foreach my $p (@probes) {
     my @r = grep { $_->{vd} eq $p->{vd} } @pcitable;
     @r > 1 and die "duplicate entry in pcitable <$p->{vd}>\n";
     if (@r && $r[0]->{driver} ne 'yenta_socket') {
-	print "0x$p->{vendor}\t0x$p->{device}\t\"yenta_socket\"\t\"$r[0]->{name}\"\n";
-	$r[0]->{driver} ne 'unknown' and print STDERR "WARNING, driver was <$r[0]->{driver}>\n";
+	push @res, "0x$p->{vendor}\t0x$p->{device}\t\"yenta_socket\"\t\"$r[0]->{name}\"\n";
+	$r[0]->{driver} ne 'unknown' and print STDERR "WARNING, driver for <$p->{vd}> was <$r[0]->{driver}>\n";
     }
 }
+print sort @res;
+@res = ();
 print "\n";
