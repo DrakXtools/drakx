@@ -458,7 +458,6 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
-    modules::unload($_) foreach qw(vfat msdos fat);
     modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
     modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
     modules::read_already_loaded();
