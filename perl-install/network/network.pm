@@ -10,7 +10,6 @@ use Socket;
 use common;
 use detect_devices;
 use run_program;
-use network::tools;
 use any;
 use vars qw(@ISA @EXPORT);
 use log;
@@ -177,7 +176,7 @@ sub write_interface_conf {
     require network::ethernet;
     my %cards = map { $_->[0] => $_->[1] } network::ethernet::conf_network_card_backend($netc, $intf);
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), 
-                if_(is_wireless_intf($cards{$intf->{DEVICE}}), qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)),
+                qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV),
                 if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME))
                );
     log::explanations("written $intf->{DEVICE} interface configuration in $file");
