@@ -499,7 +499,7 @@ sub _ask_from_list {
     $list->set_column_auto_resize(0, 1);
 
     $o->{ok_clicked} = $leave;
-    $o->{cancel_clicked} = sub { die "ask_from_list cancel" };
+    $o->{cancel_clicked} = sub { $o->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
     gtkadd($o->{window},
 	   gtkpack($o->create_box_with_title(@$messages),
 		   gtkpack_(new Gtk::VBox(0,7),

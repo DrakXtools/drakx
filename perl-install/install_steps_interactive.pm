@@ -774,7 +774,7 @@ sub setupXfree {
     require Xconfigurator;
     #- by default do not use existing configuration, so new card will be detected.
     if ($o->{isUpgrade} && -r "$o->{prefix}/etc/X11/XF86Config") {
-	unless ($::beginner || !$o->ask_yesorno('', _("Use existing configuration for X11?"), 0)) {
+	if ($::beginner || $o->ask_yesorno('', _("Use existing configuration for X11?"), 1)) {
 	    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
 	}
     }
@@ -790,7 +790,7 @@ sub setupXfree {
       $::noauto = $::noauto; #- no warning
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
-         install_any::pkg_install($o, "XFree86-$_[0]");
+	  install_any::pkg_install($o, "XFree86-$_[0]");
       });
     }
     $o->setupXfreeAfter;

@@ -161,7 +161,7 @@ $o = $::o = {
                  QUEUE        => "lp",
                  SPOOLDIR     => "/var/spool/lpd/lp",
                  DBENTRY      => "PostScript",
-                 PAPERSIZE    => "legal",
+                 PAPERSIZE    => "letter",
                  CRLF         => 0,
                  AUTOSENDEOF  => 1,
 

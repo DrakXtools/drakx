@@ -540,7 +540,7 @@ sub kderc_largedisplay($) {
 	my ($inputfile, $outputfile) = ("$prefix$_/.kderc", "$prefix$_/.kderc.new");
 	my %subst = ( contrast => "Contrast=7\n",
 		      kfmiconstyle => "kfmIconStyle=Large\n",
-		      kpaneliconstyle => "kpanelIconStyle=Large\n",
+		      kpaneliconstyle => "kpanelIconStyle=Normal\n", #- to change to Large when icons looks better
 		      kdeiconstyle => "KDEIconStyle=Large\n",
 		    );
 
