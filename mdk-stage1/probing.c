@@ -512,7 +512,7 @@ static void find_media(void)
 	/* ----------------------------------------------- */
 	log_message("looking for Compaq Smart Array media");
 	{
-		char * procfiles[] = { "/proc/driver/array/ida0", "/proc/driver/cciss/cciss0", // 2.4 style
+		char * procfiles[] = { "/proc/driver/cpqarray/ida0", "/proc/driver/cciss/cciss0", // 2.4 style
 				       "/proc/array/ida", "/proc/cciss/cciss",                 // 2.2 style
 				       NULL };
 		static char cpq_descr[] = "Compaq RAID logical disk";
