@@ -229,15 +229,12 @@ sub findconfigfiles {
 		    $dir =~ s,/[^/]*$,,;
 		    next if -f $dir && ! -d $dir;
 		    if (! -d "$::prefix$dir") {
-                  mkdir_p("$::prefix$dir") or next;
-                  set_permissions("$::prefix$dir", "$uid.$gid") or next;
+			eval { mkdir_p("$::prefix$dir") } or next;
+			set_permissions("$::prefix$dir", "$uid.$gid") or next;
 		    }
 		    if (! -f "$::prefix$homedir/$file") {
-			local *F;
-			open F, "> $::prefix$homedir/$file" or next;
-			print F "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n";
-			close F;
-               set_permissions("$::prefix$homedir/$file", "$uid.$gid") or next;
+			eval { output("$::prefix$homedir/$file", "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n") } or next;
+			set_permissions("$::prefix$homedir/$file", "$uid.$gid") or next;
 		    }
 		    push @filestotreat, "$homedir/$file";
 		}
