@@ -654,6 +654,7 @@ sub summary_prompt {
     $set_entry_labels = sub {
 	foreach (@$l) {
 	    my $t = $_->{val}() || '<span foreground="red">' . N("not configured") . '</span>';
+	    $t =~ s/&/&amp;/g;
 	    $_->{widget}->set_markup($_->{label} . ' - ' . $t);
 	}
     };
