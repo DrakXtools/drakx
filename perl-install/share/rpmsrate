@@ -19,7 +19,7 @@ GNOME
 
 KDE
   5 kdebase kdebase-nsplugins
-  5 kde-i18n-ca kde-i18n-cs kde-i18n-da kde-i18n-de kde-i18n-el kde-i18n-es kde-i18n-et kde-i18n-fi kde-i18n-fr kde-i18n-he kde-i18n-hu kde-i18n-is kde-i18n-it kde-i18n-ja kde-i18n-ko kde-i18n-nl kde-i18n-no kde-i18n-no_NY kde-i18n-pl kde-i18n-pt kde-i18n-pt_BR kde-i18n-ro kde-i18n-ru kde-i18n-sk kde-i18n-sr kde-i18n-sv kde-i18n-tr kde-i18n-uk kde-i18n-zh_CN.GB2312 kde-i18n-zh_TW.Big5 
+  5 kde-i18n-de kde-i18n-fr 
   4 kdeaddutils kdeadmin kdegraphics kdemultimedia kdenetwork krozat
     kdepim kdetoys kdeutils quanta 
 
@@ -37,19 +37,16 @@ TV
 OFFICE
   4 staroffice-en staroffice-de staroffice-es staroffice-fr staroffice-it
     acroread acroread-nppdf
-  4 cbb gaddr ical xpdf moneydance pyDict
-  3 wv 
+  4 cbb gaddr xpdf moneydance
+  3 wv ical pyDict
   2 units lyx phpgroupware
   GNOME
-    4 abiword gnome-pim gnome-pim-conduits gnumeric Guppi mrproject
-    3 dia gnome-pilot-conduits
+    4 abiword gnome-pim gnome-pim-conduits gnumeric mrproject
+    3 dia gnome-pilot-conduits Guppi
     2 ggv gnucash
   KDE
     5 koffice
-    5 koffice-i18n-az koffice-i18n-hu koffice-i18n-ro koffice-i18n-cs koffice-i18n-it koffice-i18n-ru koffice-i18n-da 
-      koffice-i18n-ja koffice-i18n-sk koffice-i18n-de koffice-i18n-lt koffice-i18n-sl koffice-i18n-en_GB koffice-i18n-nl 
-      koffice-i18n-sv koffice-i18n-eo koffice-i18n-no koffice-i18n-ta koffice-i18n-es koffice-i18n-no_NY koffice-i18n-tr 
-      koffice-i18n-et koffice-i18n-pl koffice-i18n-fr koffice-i18n-pt
+    5 koffice-i18n-fr koffice-i18n-de
     2 klyx
 
 SOUND
@@ -58,28 +55,24 @@ SOUND
   4 KDE xmms-arts
 
 AUDIO
-  4 eMusic grip xmms xmms-skins
+  4 grip xmms xmms-skins
   4 GNOME gnome-audio gnome-media xmms-gnome
   4 KDE kdelibs-sound
   4 3D xmms-mesa
-  3 cdp cdparanoia cdrecord-cdda2wav mikmod mp3info mpg123
-    playmidi playmidi-X11 space_sounds timidity-instruments xmms-esd
-    xmms-kjofol-skins xmms-mikmod xmms-more-vis-plugins
+  3 cdp cdparanoia cdrecord-cdda2wav space_sounds timidity-instruments xmms-esd
+    xmms-kjofol-skins xmms-more-vis-plugins eMusic
   3 GNOME gnome-audio-extra 
+  2 mokmod mp3info mpg123 playmidi playmidi-X11 xmms-mikmod
 
   4 HW"Rio 500" rio500 grio500
-
-  1 viavoicemenu_de viavoicemenu_fr viavoicemenu_us
-  DEVELOPMENT
-    4 ViaVoice_sdk
 
 ACCESSIBILITY
   2 gtkeyboard
 
 PUBLISHING
-  5 enscript ghostscript-module-X nlpr
-  4 docbook-dtd31-sgml ghostscript-utils gv psutils texinfo
-  3 latex2html jadetex tetex-afm tetex-dvips tetex-latex tetex-xdvi tetex-latex-arab tetex-latex-heb
+  5 enscript ghostscript-module-X
+  4 ghostscript-utils gv psutils texinfo nlpr
+  2 latex2html jadetex tetex-afm tetex-dvips tetex-latex tetex-xdvi tetex-latex-arab tetex-latex-heb docbook-dtd31-sgml
   2 BOOKS tetex-doc
   1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB cttex
   1 BOOKS docbook-style-dsssl-doc
@@ -97,7 +90,7 @@ SHELLS
 
 SCIENCES
   5 3D openuniverse
-  4 gnuplot gtkgraph
+  4 gnuplot gtkgraphh
   3 xlispstat HDF
   2 mathplot octave
   1 xoscope
@@ -114,7 +107,7 @@ EDITORS
 TEXT_TOOLS
   5 words
   4 groff patch recode rgrep
-  4 ispell-af ispell-br ispell-ca ispell-cs ispell-da ispell-de ispell-el ispell-en ispell-eo ispell-es ispell-fi ispell-fr ispell-ga ispell-gd ispell-gv ispell-id ispell-it ispell-nl ispell-no ispell-pl ispell-pt ispell-pt_BR ispell-ro ispell-ru ispell-sk ispell-sl ispell-sv
+  4 ispell-de ispell-fr
   3 ed
   2 groff-gxditview lout
   BOOKS
@@ -123,8 +116,8 @@ TEXT_TOOLS
 
 COMMUNICATIONS
   4 efax
-  3 dip jpilot pilot-link
-  2 hylafax-server hylafax-client
+  3 jpilot pilot-link
+  2 hylafax-server hylafax-client dip
   2 lrzsz mgetty mgetty-contrib mgetty-sendfax mgetty-viewfax mgetty-voice minicom
   1 jpilot-Mail jpilot-syncmal statserial tkbabel
 
@@ -188,24 +181,24 @@ NETWORKING_MAIL_SERVER
 
 NETWORKING_NEWS
   5 GNOME pan
-  3 slrn tin trn 
+  2 slrn tin trn 
   1 slrn-pull xrn
 NETWORKING_NEWS_SERVER
   4 inn
   3 inews 
 
 NETWORKING_OTHER
-  3 finger fwhois ucd-snmp-utils
-  2 htdig macutils queso
+  2 finger fwhois ucd-snmp-utils
+    htdig macutils queso
 NETWORKING_OTHER_SERVER
   3 dhcp gated timed xntp3 
 
   3 intimed mcserv nscd imap pidentd
     rdate bootparamd 
     cleanfeed ucd-snmp leafnode
-    cvsweb finger-server mars-nwe 
+    cvsweb
     XFree86-Xvfb XFree86-Xnest
-  2 heartbeat diald
+  2 heartbeat diald finger-server mars-nwe cvsweb
 
 NIS
   5 ypbind
@@ -245,7 +238,7 @@ NETWORKING_FILE_SERVER
   3 squid squidGuard
 
 NETWORKING_WWW
-  5 lynx
+  3 lynx
   4 !LOCALES"eu" netscape-communicator netscape-plugins 
   4 wget links mozilla 
   4 GNOME 
@@ -262,8 +255,8 @@ NETWORKING_WWW_SERVER
 
 GRAPHICS
   4 blender
-  4 ImageMagick giftrans gimp gphoto gphoto2 qiv xli ac3d
-  3 gimp-data-extras gqview sketch xloadimage xpcd xwpick
+  4 ImageMagick giftrans gimp gphoto gphoto2 qiv ac3d
+  3 gimp-data-extras gqview sketch xloadimage xpcd xwpick xli
   2 gif2png gimp-perl xfig xpcd-gimp gd-utils cameleo VariCAD VariCAD_de VariCAD_it VariCAD_es 
   1 libgr-progs libungif-progs qcad transfig zgv xpaint xmorph
   1 3D Mesa-demos
@@ -272,10 +265,10 @@ GRAPHICS
     3 ee
 
 ARCHIVING
-  5 dump ncompress sharutils unzip mt-st
-  4 gtkzip
-  3 unarj unstuff
-  2 zip taper
+  5 dump ncompress sharutils unzip
+  4 gtkzip zip
+  3 unarj unstuff mt-st
+  2 taper
   1 lha
   GNOME
     4 gnozip
@@ -313,13 +306,14 @@ DATABASES
 
 GAMES
   4 sin-demo
-  4 clanbomber freeciv mures methane lbreakout2 toppler frozen-bubble
-  3 shogo-demo
-  3 cxhextris xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank nethack_falconseye rocksndiamonds tuxpuck teg powermanga
-  2 Maelstrom pingus ltris penguin-command pysol xtrojka bunnies xpilot trophy
+  4 clanbomber freeciv lbreakout2 toppler frozen-bubble
+  3 shogo-demo 
+  3 cxhextris nethack_falconseye rocksndiamonds tuxpuck teg powermanga mures methane
+  2 Maelstrom pingus ltris penguin-command pysol xtrojka bunnies xpilot trophy xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank
   1 7colors xrally fortune-mod nil
   GNOME
-    4 gnome-chess gnome-games
+    4 gnome-games
+    3 gnome-chess
     2 3D gtulpas
     1 gtkgo
     DEVELOPMENT
@@ -426,8 +420,8 @@ MONITORING
   5 procinfo psacct
   5 PCMCIA apmd
   4 lsof swatch tcpdump traceroute
-  3 iplog arpwatch lslk nmap nmap-frontend procps-X11 xcpustate xosview xsysinfo xtraceroute
-  2 cfengine gkrellm gps rusers mon
+  3 iplog arpwatch lslk nmap nmap-frontend procps-X11 xcpustate xsysinfo 
+  2 cfengine gkrellm gps rusers mon xosview xtraceroute
   1 logcheck bonnie
   GNOME
     4 gtop
@@ -435,15 +429,15 @@ MONITORING
 FILE_TOOLS
   5 file gnupg mkxauth mtools slocate
   4 symlinks
-  3 FileRunner dosfstools draksync mc tree
-  2 git gentoo sfm xwc
+  3 dosfstools draksync mc tree
+  2 git gentoo sfm xwc FileRunner
   1 xdelta
 
 CONFIG
   4 userdrake linuxconf linuxconf-lang-fr linuxconf-lang-de
   4 GNOME gnome-linuxconf
   3 webmin Bastille-Curses-module
-  3 ipvsadm quota timetool usernet
+  3 ipvsadm quota usernet
   2 gfcc control-panel adjtimex isicom xinput timeconfig Bastille-Tk-module 
     samba-swat
   1 ipxutils
@@ -509,7 +503,7 @@ SYSTEM
   BOOKS 
     5 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
     4 grub-doc lilo-doc
-      howto-html-de howto-html-el howto-html-en howto-html-es howto-html-fr howto-html-hr howto-html-hu howto-html-id howto-html-it howto-html-ja howto-html-ko howto-html-pl howto-html-ro howto-html-sl howto-html-sv howto-html-zh
+      howto-html-de howto-html-fr
 
   4 NIS yp-tools
   3 PCMCIA irda-utils
