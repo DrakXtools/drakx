@@ -227,8 +227,8 @@ arch() =~ /^sparc/ ? (
 # aren't automatically enabled when typing in kana
  "jp" => [ N_("Japanese 106 keys"), "jp106",        "jp",    0 ],
  "kan" => [ N_("Kannada"),        "us",              "kan",  1 ],
-#There is no XKB korean file yet; but using xmodmap one disables
-# some functioanlity; "us" used for XKB until this is fixed
+# There is no XKB korean file yet; but using xmodmap one disables
+# some functionality; "us" used for XKB until this is fixed
  "kr" => [ N_("Korean keyboard"), "us",             "us",    1 ],
  "ky" => [ N_("Kyrgyz keyboard"), "ru",             "ky",    1 ],
  "la" => [ N_("Latin American"), "la-latin1",       "la",    0 ],
@@ -294,6 +294,7 @@ my %grp_toggles = (
     shift_toggle => N_("Both Shift keys simultaneously"),
     ctrl_shift_toggle => N_("Control and Shift keys simultaneously"),
     caps_toggle => N_("CapsLock key"),
+    shift_caps_toggle => N_("Shift and CapsLock keys simultaneously"),
     ctrl_alt_toggle => N_("Ctrl and Alt keys simultaneously"),
     alt_shift_toggle => N_("Alt and Shift keys simultaneously"),
     menu_toggle => N_("\"Menu\" key"),
@@ -457,7 +458,7 @@ sub keyboard2full_xkb {
 	XkbModel => $XkbModel,
 	XkbOptions => join(',', 
 			   if_($keyboard->{GRP_TOGGLE},
-			       if_($keyboard->{GRP_TOGGLE} eq 'rwin_toggle', 'compose:rwin'), 
+			       if_($keyboard->{GRP_TOGGLE} ne 'rwin_toggle', 'compose:rwin'), 
 			       "grp:$keyboard->{GRP_TOGGLE}", 
 			       'grp_led:scroll'),
 			   if_(member($XkbLayout, 'az', 'tr', 'tr_f'), 'caps:shift')),
