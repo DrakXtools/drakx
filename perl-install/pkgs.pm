@@ -916,14 +916,19 @@ sub install($$$;$$) {
 	    } while (scalar(@transToInstall) == 0); #- avoid null transaction, it a nop that cost a bit.
 	}
 
-	#- reset file descriptor open too.
+	#- extract headers for parent as they are used by callback.
+	extractHeaders($prefix, \@transToInstall, $media->{$medium});
+
+	#- reset file descriptor open for main process but
+	#- make sure error trying to change from hdlist are
+	#- trown from main process too.
+	install_any::getFile(packageFile($transToInstall[0]));
+	#- and make sure there are no staling open file descriptor too!
 	install_any::getFile('XXX');
+
 	#- reset ftp handlers before forking, otherwise well ;-(
 	require ftp;
 	ftp::rewindGetFile();
-
-	#- extract headers for parent as they are used by callback.
-	extractHeaders($prefix, \@transToInstall, $media->{$medium});
 
 	local (*INPUT, *OUTPUT); pipe INPUT, OUTPUT;
 	if (my $pid = fork()) {
