@@ -100,7 +100,7 @@ sub choosePartitionsToFormat($$) {
 
     install_steps::choosePartitionsToFormat($o, $fstab);
 
-    my @l = grep { $_->{mntpoint} && isExt2($_) || isSwap($_) } @$fstab;
+    my @l = grep { $_->{mntpoint} && isExt2($_) || isSwap($_) && !$::beginner } @$fstab;
     my @r = $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"), 
 				       [ map { $_->{mntpoint} || type2name($_->{type}) . " ($_->{device})" } @l ],
 				       [ map { \$_->{toFormat} } @l ]);

@@ -585,7 +585,7 @@ sub main {
     modules::load_deps("/modules/modules.dep");
     $o->{modules} = modules::get_stage1_conf($o->{modules}, "/tmp/conf.modules");
     modules::read_already_loaded();
-    modparm::read_modparm_file("/usr/share/modparm.lst");
+    modparm::read_modparm_file(($::testing ? "/tmp" : "/usr/share") . "/modparm.lst");
 
     if ($o->{method} && $o->{method} eq "ftp") {
 	require 'ftp.pm';
