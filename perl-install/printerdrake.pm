@@ -44,7 +44,7 @@ sub setup_local($$$) {
     $printer->{DEVICE} = $port[0] if $port[0];
 
     if ($in) {
-	$::expert or $in->set_help('configurePrinterDev');
+	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
 	return if !$in->ask_from_entries_refH(_("Local Printer Device"),
 _("What device is your printer connected to 
 (note that /dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
@@ -182,7 +182,7 @@ sub setup_gsdriver_cups($$$;$) {
     my ($printer, $in, $install, $upNetwork) = @_;
     my $testpage = "/usr/share/cups/data/testprint.ps";
 
-    $in->set_help('configurePrinterType');
+    $in->set_help('configurePrinterType') if $::isInstall;
     while (1) {
 	$printer->{cupsDescr} ||= printer::get_descr_from_ppd($printer);
 	$printer->{cupsDescr} = $in->ask_from_treelist('', _("What type of printer do you have?"), '|',
@@ -373,7 +373,7 @@ You can add some more or change the existing ones."),
 	$printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue; #- keep in mind old name of queue (in case of changing)
 
 	while ($continue) {
-	    $in->set_help('configurePrinterConnected');
+	    $in->set_help('configurePrinterConnected') if $::isInstall;
 	    $printer::printer_type_inv{$printer->{TYPE}} or $printer->{TYPE} = printer::default_printer_type($printer);
 	    $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
 	    if ($printer->{mode} eq 'CUPS') {
@@ -395,7 +395,7 @@ In case of doubt, select \"Remote CUPS server\"."),
 		    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 		}
 		$printer->{TYPE} eq 'CUPS' and return; #- exit printer configuration.
-		$in->set_help('configurePrinterLocal');
+		$in->set_help('configurePrinterLocal') if $::isInstall;
 		$in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"),
 					    $::beginner || !$printer->{configured}{$printer->{QUEUE}} ? () : _("Remove queue")],
 _("Every printer need a name (for example lp).
@@ -415,7 +415,7 @@ _("Location") => { val => \$printer->{Location} },
 							       $printer->{str_type},
 							      );
 		} else {
-		    $in->set_help('configurePrinterLPR');
+		    $in->set_help('configurePrinterLPR') if $::isInstall;
 		    $in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"), $::beginner ? () : _("Remove queue")],
 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
