@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.24mdk
+Release: 0.25mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -357,6 +357,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 11 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.25mdk
+- harddrake service: fix removing PCMCIA controller
+- hardware support: detect & load modules for RNG (crypto hw)
+
 * Thu Feb 10 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.24mdk
 - drakxtv:
   o only offer to configure tv cards that (may) need to be configured
