@@ -1,3 +1,77 @@
+2001/09/19  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, network/netconnect.pm, network/ethernet.pm: network
+	restart at better place
+
+2001/09/19  fcrozat
+
+	* share/rpmsrate: Add mdk-eazel-engine
+
+	* share/po/fr.po: Fix french mistakes
+
+2001/09/19  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: added code to check if package are really installed.
+
+	* Xconfigurator.pm: Rage 128 doesn't like XF3 at all.
+	make only bad card Riva128 for testing XF4.
+	Riva128 is now a bad card.
+
+2001/09/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/init.c: raklet quoting
+
+	* share/rpmsrate: chromium and tuxracer don't work well with Riva
+
+2001/09/19  Pixel  <pixel@mandrakesoft.com>
+
+	* loopback.pm (create): don't use seek to create big files otherwise you
+	get hole and
+	swapon doesn't like it
+
+	* any.pm (ask_users): default icon "man"
+
+	* lang.pm: compatibility with older $o->{lang} names (for auto_installs)
+
+	* install2.pm: initial support for server install
+	compatibility with older $o->{lang} names (for auto_installs)
+
+	* install_steps_gtk.pm: initial support for server install
+
+	* printerdrake.pm: help perl_checker
+
+	* pkgs.pm, share/rpmsrate, install_any.pm: 
+	  - gmc instead of nautilus for non-latin1 installs
+	  - introduce CHARSET flag and use it
+
+2001/09/19  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Network is now only required (and checked) for remote
+	printers.
+	Several buglets fixed in remote CUPS server dialog.
+
+	* printerdrake.pm: Removed a forgotten debug help line from the code.
+	Fixed typo in dialog text of high/paranoid security.
+	Network is now only required (and checked) for remote printers.
+	Several buglets fixed in remote CUPS server dialog.
+
+2001/09/18  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: don't ask to connect if lan or dhcp
+
+2001/09/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install2.pm: don't create bootdisk by default
+
+	* share/po/fr.po: misc
+
+2001/09/18  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm (write_passwd_user): fix setting "pw" field (for auto_installs)
+
+	* install_steps_gtk.pm, pkgs.pm: tentative to correct install time for big
+	installs
+
 2001/09/18  dam's  <damien@mandrakesoft.com>
 
 	* network/adsl.pm, my_gtk.pm: corrected Speedtouch -> speedtouch
