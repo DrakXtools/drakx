@@ -335,12 +335,12 @@ Does it work properly?"), 1) ? 'done' : 'change';
 }
 
 #- Program entry point for configuration with lpr or cups (stored in $mode).
-sub main($$$;$) {
-    my ($printer, $in, $install, $upNetwork) = @_;
+sub main($$$$;$) {
+    my ($printer, $in, $ask_multiple_printer, $install, $upNetwork) = @_;
     my ($queue, $continue) = ('', 1);
 
     while ($continue) {
-	if (!$::isStandalone && (!$::expert || %{$printer->{configured} || {}} == ())) {
+	if (!$ask_multiple_printer && %{$printer->{configured} || {}} == ()) {
 	    $queue = $printer->{want} || $in->ask_yesorno(_("Printer"),
 							  _("Would you like to configure a printer?"), 0) ? 'lp' : 'Done';
 	} else {
