@@ -175,7 +175,7 @@ stage2:
 	$(SUDO) mount $(STAGE2) /mnt/stage2 -o loop
 
 #	hack to reduce the STAGE2 image
-	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_SVGA
+	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_VGA16
 	for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap; do \
 		name=`basename $$i` ; \
 		(cd $(STAGE2TMP)/$$i ; find * | cpio -o 2>/dev/null | bzip2 > ../$$name.cpio.bz2 ; cd .. ; rm -rf $$name) \

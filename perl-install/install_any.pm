@@ -24,8 +24,10 @@ use log;
 #- Functions
 #-######################################################################################
 sub relGetFile($) {
-    local $_ = member($_[0], qw(compss compssList depslist hdlist)) ? "base" : "RPMS";
-    $_ = "Mandrake/$_/$_[0]";
+    local $_ = $_[0];
+    my $dir = m|/| ? "mdkinst" : 
+      (member($_, qw(compss compssList depslist hdlist)) ? "base" : "RPMS");
+    $_ = "Mandrake/$dir/$_";
     s/i386/i586/;
     $_;
 }
