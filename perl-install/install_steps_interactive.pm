@@ -704,9 +704,9 @@ sub configureTimezone {
 
 #------------------------------------------------------------------------------
 sub configureServices { 
-    my ($o) = @_;
+    my ($o, $clicked) = @_;
     require services;
-    $o->{services} = services::ask($o, $o->{prefix});
+    $o->{services} = services::ask($o, $o->{prefix}) if $::expert || $clicked;
     install_steps::configureServices($o);
 }
 
