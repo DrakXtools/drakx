@@ -453,6 +453,8 @@ Consoles 1,3,4,7 may also contain interesting information";
     if ($o->{meta_class} eq 'desktop') {
 	run_program::rooted($o->{prefix}, "touch", "/etc/menu/do-not-create-menu-link");
 	run_program::rooted($o->{prefix}, "touch", "/etc/menu/enable_simplified");
+    } elsif (!$o->{isUpgrade}) {
+	run_program::rooted($o->{prefix}, "touch", "/etc/menu/do-not-create-menu-link");
     }
     #- call update-menus at the end of package installation
     run_program::rooted($o->{prefix}, "update-menus");
