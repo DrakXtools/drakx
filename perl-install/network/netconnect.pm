@@ -750,7 +750,8 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     },
                     complete => sub { 
                         if (!keys %eth_intf) {
-                            $in->ask_warn(N("Error"), N("No network adapter on your system!"));
+                            $in->ask_warn(N("Error"), $is_wireless ? N("No wireless network adapter on your system!")
+                                          : N("No network adapter on your system!"));
                             return 1;
                         };
                     },
