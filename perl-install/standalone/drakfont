@@ -537,7 +537,8 @@ sub interactive_mode {
     $window1->set_position(1);
     $window1->set_title(_("Fonts Importation"));
     $window1->set_border_width(5);
-    
+    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic-drakfont-48");    
+
     gtkadd($window1,
 	   gtkpack_(new Gtk::HBox(0,2),
 		    1, gtkpack_(new Gtk::VBox(0,2),
@@ -548,7 +549,8 @@ sub interactive_mode {
 				1, new Gtk::VBox(0,0)
 				),
 		    0, gtkpack_(new Gtk::VBox(0,5),
-				0, _("DrakFont"),
+				0, new Gtk::VBox(0,0),
+				0, new Gtk::Pixmap($pix_user_map, $pix_user_mask),
 				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 					  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
 							    sub { ${$central_widget}->destroy(); $windows = 1; license(\&appli_choice)}),
