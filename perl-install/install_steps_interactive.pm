@@ -182,6 +182,7 @@ sub selectKeyboard {
 	{ title => _("Keyboard"), 
 	  messages => _("Please, choose your keyboard layout."),
 	  advanced_messages => _("Here is the full list of keyboards available"),
+	  advanced_label => _("More"),
 	  callbacks => { changed => sub { $other = $_[0]==1 } },
 	},
 	  [ if_(@best > 1, { val => \$o->{keyboard}, type => 'list', format => $format,
