@@ -111,20 +111,17 @@ arch() =~ /^sparc/ ? (
   ],
 ) : (
   normal => [
-    { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
     { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 2500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/home", size => 300 << 11, type => 0x83, ratio => 2 },
   ],
   developer => [
-    { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>1500 << 11 },
     { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },
   ],
   server => [
-    { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
     { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 3, maxsize =>1500 << 11 },
@@ -141,7 +138,7 @@ arch() =~ /^sparc/ ? (
 #-the variable $default)
 #-#######################################################################################
 $o = $::o = {
-#    bootloader => { linear => 0, message => 1, timeout => 5, restricted => 0 },
+#    bootloader => { linear => 0, lba32 => 1, message => 1, timeout => 5, restricted => 0 },
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
@@ -267,8 +264,7 @@ sub selectPath {
 sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
    
-    $o->{partitions} ||= 
-      [ grep { arch() =~ /i386/ && $_->{mntpoint} ne "/boot" } @{$suggestedPartitions{$o->{installClass}}} ];
+    $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
 
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{doInstallStep}{done}) {
         $o->setPackages(\@install_classes);

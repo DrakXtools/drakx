@@ -1,5 +1,18 @@
 2000-02-23  Pixel  <pixel@mandrakesoft.com>
 
+	* install2.pm (%suggestedPartitions): remove any /boot entries
+	* install2.pm (selectInstallClass): removed the special code to
+	/boot entries from suggestedPartitions for on non-intel (and it
+	was buggy :)
+	* fsedit.pm (@suggestions): remove the /boot entry
+	* fsedit.pm (check_mntpoint): remove the 1024 cylinder check	
+	* fsedit.pm (suggest_part): remove the 1024 cylinder special case
+
+	* install_steps_interactive.pm (setupLILO): replace linear option
+	by lba32
+
+	* lilo.pm (suggest): add lba32 by default
+
 	* install_steps_interactive.pm (load_thiskind): moved the HPT
 	stuff to install_any::ultra66 and call it.
 	Add sound card configuration (3 lines :)
