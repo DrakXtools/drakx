@@ -105,8 +105,7 @@ sub init {
 
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
-
-    touch '/etc/mtab';  #- prevents from creating a link to the RO volume thus failing substInFile from fs::umount
+    symlinkf "/proc/mounts", "/etc/mtab";
 
     #- these files need be writable but we need a sensible first contents
     system("cp /image/etc/$_ /etc") foreach qw(passwd passwd- group sudoers fstab);
@@ -184,7 +183,6 @@ sub init {
 	install2::handleI18NClp();
     }
 
-    unlink('/etc/mtab'); output('/etc/mtab', '');
     touch '/var/run/rebootctl';
 
 drakx_stuff:
@@ -576,9 +574,6 @@ sub install2::startMove {
     $::WizardWindow->destroy if $::WizardWindow;
     require ugtk2;
     ugtk2::flush();
-
-    #- have a nice mtab (esp. for /cdrom)
-    system('mount', '-a', '-f');
 
     #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
