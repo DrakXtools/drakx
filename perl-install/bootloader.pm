@@ -148,6 +148,7 @@ sub suggest_onmbr {
 	} elsif (!member($type, qw(lilo grub))) {
 	    $onmbr = 0;
 	}
+	log::l("bootloader::suggest_onmbr: type $type, onmbr $onmbr, unsafe $unsafe");
     }
     ($onmbr, $unsafe);
 }
