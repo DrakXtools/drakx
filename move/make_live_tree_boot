@@ -49,8 +49,18 @@ sub create_totem_links {
 
     foreach my $dir (chomp_(`cd $light_prefix ; find usr -type d`)) {
 	foreach my $f (all("$prefix/$dir")) {
-	    my $file = "$prefix/$dir/$f";
-	    my $link = readlink($file) =~ /^\w/ ? readlink($file) : "/image/$dir/$f";
+	    my $link;
+	    my $fl = $f;
+	    while (my $l = readlink("$prefix/$dir/$fl")) {
+		if ($l =~ /^\w/) {
+		    $fl = $l;
+		    next;
+		} elsif ($l =~ m!^/!) {
+		    $link = $l;
+		}
+		last;
+	    }
+	    $link ||= "/image/$dir/$fl";
 	    symlink $link, "$light_prefix/$dir/$f";
 	}
     }
