@@ -702,7 +702,7 @@ sub selectCountry {
 				 list => \@best, sort => 1 }),
 		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
 		      list => [ difference2(\@countries, \@best) ], advanced => scalar(@best) },
-		    { val => \$locale->{IM}, type => 'list', label => N("Input method:"), 
+		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), 
 		      list => [ N_("None"), sort(lang::get_ims()) ], advanced => 1, format => sub { uc(translate($_[0])) }, },
 		  ]) or return;
 
