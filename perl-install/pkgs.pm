@@ -243,6 +243,7 @@ sub selectPackage { #($$;$$$)
 		    my $dep = packageById($packages, $_) or next;
 		    $preferred ||= $dep;
 		    packageFlagSelected($dep) and $preferred = $dep, last;
+		    packageName($dep) =~ /kernel-\d/ and $preferred = $dep; #- hard coded preference to simple kernel
 		    exists $preferred{packageName($dep)} and $preferred = $dep;
 		}
 		$preferred or die "unable to find a package for choice";
