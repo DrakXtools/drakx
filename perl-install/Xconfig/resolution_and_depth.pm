@@ -205,13 +205,13 @@ sub choose_gtk {
     my %x_res2depth; push @{$x_res2depth{$_->{X}}}, $_->{Depth} foreach @resolutions;
     my %depth2x_res; push @{$depth2x_res{$_->{Depth}}}, $_->{X} foreach @resolutions;
 
-    require my_gtk;
-    my_gtk->import(qw(:helpers :wrappers));
-    my $W = my_gtk->new(N("Resolution"));
+    require ugtk2;
+    ugtk2->import(qw(:create :helpers :wrappers));
+    my $W = ugtk2->new(N("Resolution"));
 
     my %monitor_images_x_res = do {
 	my @l = qw(640 800 1024 1152 1280 1400 1600 1920 2048);
-	my %h = map { $_ => [ gtkcreate_png("monitor-$_.png") ] } @l;
+	my %h = map { $_ => [ gtkcreate_img("monitor-$_.png") ] } @l;
 
 	#- for the other, use the biggest smaller
 	foreach my $x_res (uniq map { $_->{X} } @resolutions) {
@@ -223,11 +223,11 @@ sub choose_gtk {
 
     my ($depth_combo, $x_res_combo);
 
-    my $pix_colors = gtkpng("colors");
+    my $pix_colors = gtkcreate_img("colors");
     my $set_chosen_Depth_image = sub {
-	$pix_colors->set(gtkcreate_png(
+	$pix_colors = gtkcreate_img(
                $chosen_Depth >= 24 ? "colors.png" :
-	       $chosen_Depth >= 15 ? "colors16.png" : "colors8.png"));
+	       $chosen_Depth >= 15 ? "colors16.png" : "colors8.png");
     };
 
     my $set_chosen_Depth = sub {
@@ -247,7 +247,7 @@ sub choose_gtk {
 	    $chosen_y_res = $one->{Y};
 	}
 	my $image = $monitor_images_x_res{$chosen_x_res} or internal_error("no image for resolution $chosen_x_res");
-	$pixmap_mo ? $pixmap_mo->set($image->[0], $image->[1]) : ($pixmap_mo = new Gtk::Pixmap($image->[0], $image->[1]));
+	$pixmap_mo = $image;
     };
     $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
 
@@ -255,13 +255,13 @@ sub choose_gtk {
 	   gtkpack_($W->create_box_with_title(N("Choose the resolution and the color depth"),
 					      if_($card->{BoardName}, "(" . N("Graphics card: %s", $card->{BoardName}) . ")"),
 					     ),
-		    1, gtkpack2(new Gtk::VBox(0,0),
-				gtkpack2__(new Gtk::VBox(0, 15),
+		    1, gtkpack2(new Gtk2::VBox(0,0),
+				gtkpack2__(new Gtk2::VBox(0, 15),
 					   $pixmap_mo,
-					   gtkpack2(new Gtk::HBox(0,0),
+					   gtkpack2(new Gtk2::HBox(0,0),
 						    create_packtable({ col_spacings => 5, row_spacings => 5 },
-	     [ $x_res_combo = new Gtk::Combo, new Gtk::Label("") ],
-	     [ $depth_combo = new Gtk::Combo, gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'), $pix_colors) ],
+	     [ $x_res_combo = new Gtk2::Combo, new Gtk2::Label("") ],
+	     [ $depth_combo = new Gtk2::Combo, gtkadd(gtkset_shadow_type(new Gtk2::Frame, 'etched_out'), $pix_colors) ],
 							     ),
 						   ),
 					  ),
@@ -272,7 +272,7 @@ sub choose_gtk {
     $depth_combo->set_use_arrows_always(1);
     $depth_combo->entry->set_editable(0);
     $depth_combo->set_popdown_strings(map { translate($depth2text{$_}) } ikeys %depth2x_res);
-    $depth_combo->entry->set_usize(220, 0);
+    $depth_combo->entry->set_size_request(220, 0);
     $depth_combo->entry->signal_connect(changed => sub {
         my %txt2depth = reverse %depth2text;
 	my $s = $depth_combo->entry->get_text;
