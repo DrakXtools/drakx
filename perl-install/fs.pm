@@ -103,7 +103,7 @@ sub read_fstab {
 }
 
 sub merge_fstabs {
-    my ($fstab, @l) = @_;
+    my ($loose, $fstab, @l) = @_;
 
     foreach my $p (@$fstab) {
 	my ($p2) = grep { fsedit::is_same_hd($_, $p) } @l or next;
@@ -111,15 +111,12 @@ sub merge_fstabs {
 
 	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
 
-	$p->{type} ||= $p2->{type};
-	$p->{options} = $p2->{options} if $p->{type} eq 'defaults';
+	$p->{type} = $p2->{type} if $p2->{type} && !$loose;
+	$p->{options} = $p2->{options} if $p2->{options} && !$loose;
 	#- important to get isMounted property else DrakX may try to mount already mounted partitions :-(
 	add2hash($p, $p2);
 	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device} && $p2->{device} !~ m|/|;
 
-	#- for hd install, we may encounter problem as /tmp/hdimage is already mounted as ext2
-	#- and system may want to use it as ext3 for example (specific mount points).
-	#- this is problably not an error here but we may want to use existing type.
 	$p->{type} && $p2->{type} && $p->{type} ne $p2->{type} && type2fs($p) ne type2fs($p2) &&
 	  $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
 	    log::l("err, fstab and partition table do not agree for $p->{device} type: " .
@@ -131,7 +128,7 @@ sub merge_fstabs {
 sub add2all_hds {
     my ($all_hds, @l) = @_;
 
-    @l = merge_fstabs([ fsedit::get_really_all_fstab($all_hds) ], @l);
+    @l = merge_fstabs('', [ fsedit::get_really_all_fstab($all_hds) ], @l);
 
     foreach (@l) {
 	my $s = 
@@ -170,11 +167,12 @@ sub merge_info_from_mtab {
 	$_->{isMounted} = $_->{isFormatted} = 1;
 	delete $_->{options};
     } 
-    merge_fstabs($fstab, @l1, @l2);
+    merge_fstabs('loose', $fstab, @l1, @l2);
 }
 
+# - when using "$loose", it does not merge in type&options from the fstab
 sub merge_info_from_fstab {
-    my ($fstab, $prefix, $uniq) = @_;
+    my ($fstab, $prefix, $uniq, $loose) = @_;
 
     my @l = grep { 
 	if ($uniq) {
@@ -185,7 +183,7 @@ sub merge_info_from_fstab {
 	}
     } read_fstab($prefix, "/etc/fstab", 'all_options');
 
-    merge_fstabs($fstab, @l);
+    merge_fstabs($loose, $fstab, @l);
 }
 
 sub prepare_write_fstab {

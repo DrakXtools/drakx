@@ -905,7 +905,7 @@ sub suggest_mount_points {
 	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
-	fs::merge_info_from_fstab($fstab, $handle->{dir}, $uniq) if $mnt eq '/';
+	fs::merge_info_from_fstab($fstab, $handle->{dir}, $uniq, 'loose') if $mnt eq '/';
     }
     $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @$fstab;
 }
