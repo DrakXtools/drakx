@@ -254,6 +254,8 @@ sub ask_from__add_modify_remove {
     my ($o, $title, $message, $l, %callback) = @_;
     die "ask_from__add_modify_remove only handles one item" if @$l != 1;
 
+    $callback{$_} or internal_error("missing callback $_") foreach qw(Add Modify Remove);
+
     if ($o->can('ask_from__add_modify_removeW')) {
 	ask_from__add_modify_removeW($o, $title, $message, $l, %callback);
     } else {
