@@ -443,14 +443,15 @@ sub getUPS() {
         return $ret == $usage ? 1 : 0;
     };
 
-    map {
+    (grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
+    (map {
         open(my $f, $_);
         if_(!$hiddev_find_application->($f, $UPS_USAGE) && !$hiddev_find_application->($f, $POWER_USAGE),
             { port => $_,
               name => c::get_usb_ups_name(fileno($f))
             }
            );
-    } -e "/dev/.devfsd" ? glob("/dev/usb/hid/hiddev*") : glob("/dev/usb/hiddev*");
+    } -e "/dev/.devfsd" ? glob("/dev/usb/hid/hiddev*") : glob("/dev/usb/hiddev*"));
 }
 
 $pcitable_addons = <<'EOF';
