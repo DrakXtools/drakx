@@ -137,10 +137,8 @@ sync
 
                   speedtouch =>
                   {
-                   start => qq(
-modprobe speedtch
-/usr/bin/speedtouch-start
-),
+                   modules => [ qw(speedtch) ],
+                   start => '/usr/bin/speedtouch-start',
                    overide_script => 1,
                    server => {
                               pppoa => qq("/usr/sbin/pppoa3 -c")
@@ -163,10 +161,8 @@ noaccomp),
                   },
                   sagem =>
                   {
-                   start => qq(
-modprobe eagle-usb
-/usr/sbin/eaglectrl -d
-),
+                   modules => [ qw(eagle-usb) ],
+                   start => '/usr/sbin/eaglectrl -d',
                    stop =>  "/usr/bin/killall pppoa",
                    get_intf => "/usr/sbin/eaglectrl -i",
                    server => {
@@ -321,7 +317,10 @@ TYPE=$kind
     $netc->{NET_INTERFACE} = 'ppp0';
     write_cnx_script($netc);
 
-    $::isInstall && $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
+    unless ($::isStandalone) {
+        $modems{$adsl_device}{modules} and modules::load(@{$modems{$adsl_device}{modules}});
+        $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
+    }
 }
 
 1;
