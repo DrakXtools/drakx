@@ -870,16 +870,16 @@ sub new {
 	    $::WizardWindow = _create_window(
 		title => $title,
 		child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
+		if_(!$::isInstall, icon => wm_icon()),
+		if_(!$::isInstall && !$::isStandalone, position_policy => 'center_always'),
 	    );
 	    
 	    if ($::isInstall) {
 		require install_gtk; #- for perl_checker
 		$::WizardWindow->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
 	    } else {
-		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
 		$@ and log::l("ERROR: missing wizard banner");
-		may_set_icon($::WizardWindow, wm_icon());
 	    }
 	}
 	$::WizardWindow->show;
