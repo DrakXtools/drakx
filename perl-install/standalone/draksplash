@@ -496,7 +496,7 @@ sub show_prev {
 #-PO  First %s is theme name, second %s (in parenthesis) is resolution
  $prev_window->set_title(N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
  $prev_pic = gtkcreate_pixbuf($img_file);
- $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h},0);
+ $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h}, 'hyper');
  $prev_pix = $prev_pic->render_pixmap_and_mask($prev_pic);
  $prev_canvas && $prev_canvas->isa('Gtk2::Widget')
 	 or $prev_canvas = new Gtk2::DrawingArea() and $prev_window->add($prev_canvas);
