@@ -29,7 +29,16 @@ sub init {
     $::testing and goto drakx_stuff;
 
     #- rw things
-    mkdir "/$_" foreach qw(home mnt root root/tmp etc var);
+    mkdir "/$_" foreach qw(home mnt root root/tmp var);
+
+    system("cp -a /image/etc /");
+    symlinkf "/proc/mounts", "/etc/mtab";
+    system("find /etc -type f > /tmp/filelist");
+    touch '/dummy';
+    m|^/var| && !-d $_ and mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
+    sleep 2;
+    goto meuh;
+
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
@@ -37,7 +46,8 @@ sub init {
     #- these files need be writable but we need a sensible first contents
     system("cp /image/etc/$_ /etc") foreach qw(passwd group sudoers fstab);
 
-    mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_") foreach qw(cups profile.d sysconfig/network-scripts);
+    mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_")
+      foreach qw(cups profile.d sysconfig/network-scripts devfs/conf.d);
  
     #- for /etc/sysconfig/networking/ifcfg-lo
     mkdir "/etc/sysconfig/networking";
@@ -57,6 +67,7 @@ sub init {
     -d $_ or mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
 
 
+  meuh:
     #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
 
@@ -135,8 +146,9 @@ Continue at your own risk."), formatError($@) ]) if $@;
     $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
     ugtk2::gtkflush();
 
-    run_program::run('/sbin/service', 'syslog', 'start');  #- otherwise minilogd will strike
+    run_program::run('/sbin/service', 'syslog', 'start');
     run_program::run('killall', 'minilogd');  #- get rid of minilogd
+    run_program::run('/sbin/service', 'syslog', 'restart');  #- otherwise minilogd will strike back
 
     my $username = $o->{users}[0]{name};
     output('/var/run/console.lock', $username);
