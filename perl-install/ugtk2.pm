@@ -1656,7 +1656,7 @@ sub set_popdown_strings {
 
 sub new_with_strings {
     my ($class, $strs, $o_val) = @_;
-    my $w = $class->new;
+    my $w = $class->new_text;
     $w->set_popdown_strings(@$strs);
     $w->set_text($o_val) if $o_val;
     $w;
