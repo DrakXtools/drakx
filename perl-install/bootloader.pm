@@ -368,19 +368,33 @@ sub add_entry {
 	}
 	$to_add = $conflicting;
 
-	my $new_label = $v->{label} eq 'linux' && kernel_str2label(vmlinuz2kernel_str($to_add->{kernel_or_dev}), 'use_long_name');
-	$label = $new_label && $label ne $new_label ? $new_label : do {
+	if ($to_add->{label} eq 'linux') {
+	    expand_entry_symlinks($bootloader, $to_add);
+	    $label = kernel_str2label(vmlinuz2kernel_str($to_add->{kernel_or_dev}), 'use_long_name');
+	} else {
 	    $label =~ s/^alt\d*_//;
-	    'alt' . ($i++ ? $i : '') . "_$label";
-	};
+	    $label = 'alt' . ($i++ ? $i : '') . "_$label";
+	}
     }
     die 'add_entry';
 }
 
-sub _do_the_symlink {
-    my ($bootloader, $entry, $kind, $long_name) = @_;
+sub expand_entry_symlinks {
+    my ($bootloader, $entry) = @_;
 
-    my $existing_link = readlink("$::prefix$entry->{$kind}");
+    foreach my $kind ('kernel_or_dev', 'initrd') {
+	my $old_long_name = $bootloader->{old_long_names} && $bootloader->{old_long_names}{$entry->{$kind}} or next;
+
+	#- replace all the {$kind} using this symlink to the real file
+	log::l("replacing $entry->{$kind} with $old_long_name for bootloader label $entry->{label}");
+	$entry->{$kind} = $old_long_name;
+    }
+}
+
+sub _do_the_symlink {
+    my ($bootloader, $link, $long_name) = @_;
+
+    my $existing_link = readlink("$::prefix$link");
     if ($existing_link && $existing_link eq $long_name) {
 	#- nothing to do :)
 	return;
@@ -390,21 +404,14 @@ sub _do_the_symlink {
     #- replace all the {$kind} using this symlink to the real file
     my $old_long_name = $existing_link =~ m!^/! ? $existing_link : "/boot/$existing_link";
     if (-e "$::prefix$old_long_name") {
-	foreach (@{$bootloader->{entries}}) {
-	    if ($_->{$kind} eq $entry->{$kind}
-		#- we don't modify existing failsafe or linux-nonfb unless we overwrite them
-		&& ($_->{label} eq $entry->{label} || !member($_->{label}, 'failsafe', 'linux-nonfb'))) {
-		log::l("replacing $_->{$kind} with $old_long_name for bootloader label $_->{labe}");
-		$_->{$kind} = $old_long_name;
-	    }
-	}
+	$bootloader->{old_long_names}{$link} = $old_long_name;
     } else {
-	log::l("ERROR: $entry->{$kind} points to $old_long_name which doesn't exist");
+	log::l("ERROR: $link points to $old_long_name which doesn't exist");
     }
 
     #- changing the symlink
-    symlinkf($long_name, "$::prefix$entry->{$kind}")
-      or cp_af("$::prefix/boot/$long_name", "$::prefix$entry->{$kind}");
+    symlinkf($long_name, "$::prefix$link")
+      or cp_af("$::prefix/boot/$long_name", "$::prefix$link");
 }
 
 sub add_kernel {
@@ -427,7 +434,7 @@ sub add_kernel {
     -e "$::prefix$v->{kernel_or_dev}" or log::l("unable to find kernel image $::prefix$v->{kernel_or_dev}"), return;
     if (!$b_nolink) {
 	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
-	_do_the_symlink($bootloader, $v, 'kernel_or_dev', $vmlinuz_long);
+	_do_the_symlink($bootloader, $v->{kernel_or_dev}, $vmlinuz_long);
     }
     log::l("adding $v->{kernel_or_dev}");
 
@@ -437,7 +444,7 @@ sub add_kernel {
 	mkinitrd($kernel_str->{version}, $v) or undef $v->{initrd};
 	if ($v->{initrd} && !$b_nolink) {
 	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
-	    _do_the_symlink($bootloader, $v, 'initrd', $initrd_long);
+	    _do_the_symlink($bootloader, $v->{initrd}, $initrd_long);
 	}
     }
 
