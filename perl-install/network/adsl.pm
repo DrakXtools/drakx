@@ -111,6 +111,7 @@ sub adsl_detect() {
     require detect_devices;
     $adsl->{speedtouch} = detect_devices::getSpeedtouch();
     $adsl->{sagem} = detect_devices::getSagem();
+    $adsl->{eci} = detect_devices::getECI();
     return $adsl;
 }
 
