@@ -276,7 +276,7 @@ $vbox1->pack_start($bbox0,0,0,0);
 $bbox0->set_layout(-end);
 
 
-$bbox0->add(new Gtk::Label("Click here to launch the wizard ->"));
+$bbox0->add(new Gtk::Label(_("Click here to launch the wizard ->")));
 my $button_wizard = new Gtk::Button _("Configure");
 $button_wizard->signal_connect( clicked => sub {
 				     $::isWizard = 1;
