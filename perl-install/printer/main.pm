@@ -1483,20 +1483,61 @@ sub poll_ppd_base {
 		my $key = ppd_entry_str($mf, $descr, $lang);
 		$key =~ /^[^\|]+\|([^\|]+)\|(.*)$/;
 		my ($model, $driver) = ($1, $2);
+		# Remove language tag
+		$driver =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\s*$//;
+		# Remove trailing white space
 		$driver =~ s/\s+$//;
+		# Foomatic PPD? Extract driver name
+		my $isfoomatic = 
+		    ($driver =~ s/^\s*(GhostScript|Foomatic)\s*\+\s*//i);
+		# Recommended Foomatic PPD? Extract "(recommended)"
+		my $isrecommended = ($driver =~ s/^\s+\(rcommended\)$//i);
+		# Foomatic PostScript driver?
+		$isfoomatic ||= ($driver =~ /^PostScript$/i);
+		# Native CUPS?
+		my $isnativecups = ($driver =~ /CUPS/i);
+		# Native PostScript
+		my $isnativeps = (!$isfoomatic and !$isnativecups);
+		print "#####$key###|$driver|$isnativeps|$isrecommended|\n";
+		if (!$isfoomatic) {
+		    $driver = "PPD";
+		}
+		# Key without language tag (key as it was produced for the
+		# entries from the Foomatic XML database)
+		my $keynolang = $key;
+		$keynolang =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\s*$//;
 		if (!$::expert) {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
 		    $key =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
-		    # Only replace the printer entry when it uses a
-		    # "Foomatic + Postscript" driver
-		    next if (defined($thedb{$key}) &&
-			     ($thedb{$key}{driver} !~ /PostScript/i));
-		    # Remove the old entry
-		    delete $thedb{$key};
+		    # Only replace an existing printer entry if
+		    #  - its driver is not the same as the driver of the
+		    #    new one
+		    # AND if one of the following items is true
+		    #  - The existing entry uses a "Foomatic + Postscript" 
+		    #    driver and the new one is native PostScript
+		    #  - The existing entry is a Foomatic entry and the new 
+		    #    one is "recommended"
+		    #  - The existing entry is a native PostScript entry
+		    #    and the new entry is a "recommended" driver other
+		    #    then "Foomatic + Postscript"
+		    if (defined($thedb{$key})) {
+			next unless (lc($thedb{$key}{driver}) ne
+				     lc($driver));
+			next unless (($isnativeps &&
+				      ($thedb{$key}{driver} =~ 
+				       /^PostScript$/i)) ||
+				     (($thedb{$key}{driver} ne "PPD") &&
+				      $isrecommended) ||
+				     (($thedb{$key}{driver} eq "PPD") &&
+				      ($driver ne "PostScript") &&
+				      $isrecommended));
+			# Remove the old entry
+			delete $thedb{$key};
+		    }
 		} elsif (defined
 			 $thedb{"$mf|$model|PostScript (recommended)"} &&
-			 ($driver =~ /PostScript/i)) {
+			 ($isnativeps)) {
 		    # Expert mode: "Foomatic + Postscript" driver is
 		    # recommended and this is a PostScript PPD? Make
 		    # this PPD the recommended one
@@ -1508,6 +1549,27 @@ sub poll_ppd_base {
 		    delete
 			$thedb{"$mf|$model|PostScript (recommended)"};
 		    $key .= " (recommended)";
+		} elsif (($key =~ /PostScript\s*\(recommended\)/i) &&
+			 (my @nativepskeys = grep {
+			     /^$mf\|$model\|/ && !/CUPS/i &&
+			     $thedb{$_}{driver} eq "PPD" 
+			 } keys %thedb)) {
+		    # Expert mode: "Foomatic + Postscript" driver is
+		    # recommended and there was a PostScript PPD? Make
+		    # this PPD the recommended one
+		    my $firstnativeps = $nativepskeys[0];
+		    for (keys %{$thedb{$firstnativeps}}) {
+			$thedb{"$firstnativeps (recommended)"}{$_} =
+			  $thedb{$firstnativeps}{$_};
+		    }
+		    delete $thedb{$firstnativeps};
+		    $key =~ s/\s*\(recommended\)//;
+		} elsif (defined $thedb{"$keynolang"} && ($isfoomatic)) {
+		    # Expert mode: There is already an entry for the
+		    # same printer/driver combo produced by the
+		    # Foomatic XML database, so do not make a second
+		    # entry
+		    next;
 		}
 	        $thedb{$key}{ppd} = $ppd;
 		$thedb{$key}{make} = $mf;
@@ -1523,9 +1585,12 @@ sub poll_ppd_base {
 	scalar(keys %thedb) - $driversthere > 5 and last;
 	#- we have to try again running the program, wait here a little 
 	#- before.
-	sleep 1; 
+	sleep 1;
     }
-
+#   Only for debugging, will be removed before MDK 9.1
+#    print map {
+#	"##### |$_|$thedb{$_}{make}|$thedb{$_}{model}|$thedb{$_}{driver}|\n";
+#    } keys %thedb
     #scalar(keys %descr_to_ppd) > 5 or 
     #  die "unable to connect to cups server";
 

@@ -3390,7 +3390,12 @@ sub main {
 				  val => N("Change the printing system") } :
 			    ()),
 			  { clicked_may_quit =>
-				  sub { $menuchoice = "\@usermode"; 1 },
+				  sub {
+				      # Save the cursor position
+				      $cursorpos = $menuchoice;
+				      $menuchoice = "\@usermode";
+				      1 
+				  },
 				  val => ($::expert ? N("Normal Mode") :
 					  N("Expert Mode")) },
 			  { clicked_may_quit =>
@@ -3404,16 +3409,23 @@ sub main {
 			printer::main::set_usermode(!$::expert);
 			# Read printer database for the new user mode
 			%printer::main::thedb = ();
-			#my $_w = $in->wait_message(N("Printerdrake"), 
-			#                   N("Reading printer database..."));
-		        #printer::main::read_printer_db($printer->{SPOOLER});
-			# Re-read printer queues to switch the tree
+			# Modify menu entries to switch the tree
 			# structure between expert/normal mode.
-			my $_w = $in->wait_message(
-			     N("Printerdrake"), 
-			     N("Reading printer data..."));
-			printer::main::read_configured_queues($printer);
-			$cursorpos = "::";
+			my $spooler =
+			    $spoolers{$printer->{SPOOLER}}{short_name};
+			if ($::expert) {
+			    map { 
+				$printer->{configured}{$_}{queuedata}{menuentry} =~ 
+				    s/^/$spooler!/;
+			    } keys(%{$printer->{configured}});
+			    $cursorpos =~ s/^/$spooler!/;
+			} else {
+			    map { 
+				$printer->{configured}{$_}{queuedata}{menuentry} =~ 
+				    s/^$spooler!//;
+			    } keys(%{$printer->{configured}});
+			    $cursorpos =~ s/^$spooler!//;
+			}
 			next;
 		    }
 		} else {
