@@ -1687,12 +1687,12 @@ sub configurestaroffice {
 
 sub configureopenoffice {
     my ($printer) = @_;
-    # Do we have Open Office installed?
+    # Do we have OpenOffice.org installed?
     my $configfilename = findopenofficeconfigfile();
     return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
     my $configprefix = $1;
-    # Load Open Office printer config file
+    # Load OpenOffice.org printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (0 && ($printer->{SPOOLER} eq "cups") && 
@@ -1738,7 +1738,7 @@ sub configureopenoffice {
 	    makeopenofficeprinterentry($printer, $queue, $configprefix,
 				       $configfilecontent);
     }
-    # Write back Open Office configuration file
+    # Write back OpenOffice.org configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
@@ -1786,12 +1786,12 @@ sub addcupsremotetostaroffice {
 
 sub addcupsremotetoopenoffice {
     my ($printer, $queue) = @_;
-    # Do we have Open Office installed?
+    # Do we have OpenOffice.org installed?
     my $configfilename = findopenofficeconfigfile();
     return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
     my $configprefix = $1;
-    # Load Open Office printer config file
+    # Load OpenOffice.org printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (($printer->{SPOOLER} eq "cups") && 
@@ -1821,7 +1821,7 @@ sub addcupsremotetoopenoffice {
 	    }
 	}
     }
-    # Write back Open Office configuration file
+    # Write back OpenOffice.org configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
@@ -1844,18 +1844,18 @@ sub removeprinterfromstaroffice {
 
 sub removeprinterfromopenoffice {
     my ($printer, $queue) = @_;
-    # Do we have Open Office installed?
+    # Do we have OpenOffice.org installed?
     my $configfilename = findopenofficeconfigfile();
     return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
     my $configprefix = $1;
-    # Load Open Office printer config file
+    # Load OpenOffice.org printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Remove the printer entry
     $configfilecontent = 
 	removeopenofficeprinterentry($printer, $queue, $configprefix,
 				     $configfilecontent);
-    # Write back Open Office configuration file
+    # Write back OpenOffice.org configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
@@ -1880,12 +1880,12 @@ sub removelocalprintersfromstaroffice {
 
 sub removelocalprintersfromopenoffice {
     my ($printer) = @_;
-    # Do we have Open Office installed?
+    # Do we have OpenOffice.org installed?
     my $configfilename = findopenofficeconfigfile();
     return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
     my $configprefix = $1;
-    # Load Open Office printer config file
+    # Load OpenOffice.org printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Remove the printer entries
     for my $queue (keys(%{$printer->{configured}})) {
@@ -1893,7 +1893,7 @@ sub removelocalprintersfromopenoffice {
 	    removeopenofficeprinterentry($printer, $queue, $configprefix,
 					 $configfilecontent);
     }
-    # Write back Open Office configuration file
+    # Write back OpenOffice.org configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
