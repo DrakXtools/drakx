@@ -845,6 +845,7 @@ sub new {
     );
 
     $o->{rwindow} = $o->{window} = $window;
+    $o->{real_window} = $window->{real_window};
     $o->{pop_it} = $window->{pop_it};
 
     $o;
