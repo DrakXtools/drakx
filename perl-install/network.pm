@@ -257,7 +257,7 @@ sub configureNetwork {
 
   configureNetwork_step_1:
     my $n_card=0;
-    my $last; foreach ($::expert ? @l : $l[0]) {
+    my $last; foreach (@l) {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
