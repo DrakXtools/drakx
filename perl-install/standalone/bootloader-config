@@ -99,7 +99,7 @@ sub add_kernel() {
 
     my $kernel_str = bootloader::vmlinuz2kernel_str($image) or die "bad kernel name $image\n";
 
-    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]);
+    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]) or die "can't find root partition\n";
     my %opts = (
 		root => "/dev/$root_part->{device}", 
 		initrd_options => $initrd_options,
