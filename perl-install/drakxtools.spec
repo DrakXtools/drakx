@@ -314,7 +314,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Sun Jul  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.9mdk
 - increase gui coherency of drakxtools vs other gtk+ apps: use stock icons
+- drakbackup: (stew)
+  o show units for hard-drive allocation
+  o add "View Configuration" 1st screen.
+  o honor user defined limits for backup disk consumption
+  o log last backup and to enable view last backup log
+  o fix gui crash on restore. (Keld Jorn Simonsen/Cooker list)
 - drakconnect, drakfloppy, drakperm: let columns be sortable
+- drakconnect (isdn): virtual interface ippp0 is started at boot
+  (dam's)
+- harddrake2: colorize help
+- keyboard managment: added various new keyboard layouts (pablo)
 
 * Tue Jul  1 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.8mdk
 - drakbackup: try to better fit gui when embedded (fix #4111) (stew)
