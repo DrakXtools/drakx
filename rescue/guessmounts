@@ -59,6 +59,7 @@ M: foreach (@parts) {
 if ($root) {
     print "\nMounting other partitions from fstab on $target...\n";
     foreach (@fstab) {
+	next if /^\s*#/;
 	my ($dev, $where, $type, $opts) = split;
 	next if (!$type || $dev eq 'none' || $opts =~ /noauto/ ||
                  $type =~ /^(supermount|swap|nfs)$/ ||
@@ -80,6 +81,9 @@ if ($root) {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.5  2001/11/05 17:03:54  gc
+#- honours hash in /etc/fstab to disable lines
+#-
 #- Revision 1.4  2001/10/24 22:34:01  gc
 #- - add a GUI to the rescue
 #-   - provide guessmounts with better efficiency and output, go to console, and reboot
