@@ -198,9 +198,15 @@ sub key_installfiles {
         eval { rm_rf $sysconf };
         mkdir $sysconf;
         foreach (chomp_(cat_('/image/move/keyfiles'))) {
-            mkdir_p("$sysconf/" . dirname($_));
-            system("cp $_ $sysconf$_");
-            symlinkf("$sysconf$_", $_);
+            my $target_dir = "$sysconf/" . dirname($_);
+            mkdir_p($target_dir);
+            if (/\*$/) {
+                system("cp $_ $target_dir");
+                symlinkf("$sysconf$_", $_) foreach glob($_);
+            } else {
+                system("cp $_ $sysconf$_");
+                symlinkf("$sysconf$_", $_);
+            }
         }
         system("cp /image/move/README.adding.more.files /home/.sysconf");
     } else {
@@ -372,6 +378,9 @@ sub install2::startMove {
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
 
+    run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCR', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
+    output '/var/lib/machine_ident', machine_ident();
+    
     if (fork()) {
 	sleep 1;
         log::l("DrakX waves bye-bye");

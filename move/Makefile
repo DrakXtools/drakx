@@ -5,6 +5,7 @@ DEST_STAGE2 = $(DEST_LIVETREE)/usr/bin/stage2
 ISO = /BIG/mdkmove.iso
 
 DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles README.adding.more.files
+PROGRAM_FILES = etc-monitorer.pl
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
 STAGE1 = ../mdk-stage1
@@ -38,6 +39,7 @@ install: build
 	sudo mkdir -p $(DEST_STAGE2)
 	sudo cp -f *.pm $(DEST_STAGE2)
 	sudo cp -f $(addprefix $(INSTALL)/, $(INSTALL_FILES)) $(DEST_STAGE2)
+	sudo cp -f $(PROGRAM_FILES) $(DEST_LIVETREE)/usr/bin
 
 	sudo rm -rf $(DEST_LIVETREE)/usr/share/langs
 	sudo mkdir -p $(DEST_LIVETREE)/usr/share/langs
