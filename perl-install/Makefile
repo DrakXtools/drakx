@@ -11,7 +11,7 @@ BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)$(REP4PMS)
 STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
-LOCALFILES  = mouseconfig ddcxinfos
+LOCALFILES  = pnp_serial mouseconfig ddcxinfos
 DIRS        = c po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
@@ -138,7 +138,7 @@ get_needed_files: $(DIRS)
 
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
-	cp modparm.lst MonitorsDB $(DEST)/usr/share
+	cp kppprc.in modparm.lst MonitorsDB $(DEST)/usr/share
 	cp logo-mandrake.xpm $(DEST)/usr/share
 	cp -a themes $(DEST)/usr/share/gtk
 	cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base

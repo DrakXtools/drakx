@@ -210,6 +210,14 @@ sub whatPrinterPort() {
     grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2);
 }
 
+sub hasModem($) {
+    my ($device) = @_;
+    my %probe;
+    local *F; open F, "pnp_serial $device |";
+    foreach (<F>) { $probe{$1} = $2 if /^\s+(.*?)\s*:\s*\"(.*)\"\s*$/ }
+    $probe{CLASS} =~ /Modem/i && $probe{DESCRIPTION};
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################

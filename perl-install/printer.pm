@@ -354,27 +354,8 @@ sub create_spool_dir($) {
 #-Doesnt currently catch error exec'ing sed yet
 #------------------------------------------------------------------------------
 sub create_config_file($$%) {
-    my ($inputfile, $outpufile, %toreplace) = @_;
-    my ($in, $out) = ("$prefix/$inputfile", "$prefix/$outpufile");
-    local *OUT;
-    local *IN;
-
-    #-TODO my $oldmask = umask 0755;
-
-    open IN , $in  or die "Can't open $in $!";
-    if ($::testing) {
-	*OUT = *STDOUT
-    } else {
-	open OUT, ">$out" or die "Can't open $out $!";
-    }
-
-    while (<IN>) {
-	if (/@@@(.*)@@@/) {
-	    my $r = $toreplace{$1};
-	    s/@@@(.*)@@@/$r/g;
-	}
-	print OUT;
-    }
+    my ($inputfile, $outputfile, %toreplace) = @_;
+    install_any::translate_file("$prefix/$inputfile", "$prefix/$outputfile", %toreplace);
 }
 
 

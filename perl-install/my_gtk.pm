@@ -64,11 +64,16 @@ sub destroy($) {
 sub DESTROY { goto &destroy }
 sub sync($) {
     my ($o) = @_;
+
+    flush();
+
     show($o);
 
     my $h = Gtk->idle_add(sub { Gtk->main_quit; 1 });
     map { Gtk->main } (1..4);
     Gtk->idle_remove($h);
+
+    flush();
 }
 sub flush(;$) {
     Gtk->main_iteration while Gtk->events_pending;

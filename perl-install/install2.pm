@@ -48,6 +48,7 @@ my @installSteps = (
   doInstallStep      => [ __("Install system"), 1, -1 ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1 ],
   configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],
+#-  configureModem     => [ __("Configure modem"), 1, 1, "doInstallStep" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
 #-  configureServices => [ __("Configure services"), 0, 0 ],
   configurePrinter   => [ __("Configure printer"), 1, 0, "doInstallStep" ],
@@ -362,6 +363,11 @@ sub configureNetwork {
     }
 
     $o->configureNetwork($entered == 1 && !$clicked)
+}
+#------------------------------------------------------------------------------
+sub configureModem {
+    my ($clicked, $entered) = @_;
+    $o->modemConfig($clicked || $entered == 1);
 }
 #------------------------------------------------------------------------------
 sub configureTimezone {

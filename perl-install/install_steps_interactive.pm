@@ -253,6 +253,7 @@ sub configureNetwork($) {
 	    $r ||= "Don't";
 	}
     } else {
+#	$r = $o->ask_from_list(_("Network Configuration"),)
 	$o->ask_yesorno(_("Network Configuration"),
 			_("Do you want to configure LAN (not dialup) networking for your system?")) or $r = "Don't";
     }
@@ -329,6 +330,55 @@ You may also enter the IP address of the gateway if you have one"),
 			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)),
 			      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
 			    );
+}
+
+#------------------------------------------------------------------------------
+sub modemConfig {
+    my ($o, $clicked) = @_;
+    return unless $clicked;
+
+    if ($o->ask_yesorno('', _("Do you have a modem?"), 0)) {
+	my ($device, $desc) = '';
+	unless ($::expert && $o->ask_yesorno('', _("Skip modem autodetection?"), 1)) {
+	    foreach (0..3) {
+		next if readlink("$o->{prefix}/dev/mouse") =~ /ttyS$_/;
+		$desc = detect_devices::hasModem("$o->{prefix}/dev/ttyS$_");
+		$device = "ttyS$_" if $desc;
+		last if $device;
+	    }
+	}
+	$device = mouse::serial_ports_names2dev($o->ask_from_list('', _("Which serial port is your modem connected to?"),
+								  [ mouse::serial_ports_names() ])) unless $device;
+	log::l("using modem at /dev/$device");
+	$o->{modem}{device} = $device;
+    } else {
+	$o->{modem} = undef;
+    }
+
+    install_steps::modemConfig($o);
+
+    $o->pppConfig() if $o->{modem};
+}
+
+sub pppConfig {
+    my ($o) = @_;
+
+    my @l = (
+_("Connection name") => \$o->{modem}{connection},
+_("Phone number") => \$o->{modem}{phone},
+_("Login ID") => \$o->{modem}{login},
+_("Password") => { val => \$o->{modem}{passwd}, hidden => 1 },
+_("Authentication") => { val => \$o->{modem}{auth}, list => [ __("PAP"), __("CHAP"), __("Terminal-based"), __("Script-based") ] },
+_("Domain name") => \$o->{modem}{domain},
+_("First DNS Server") => \$o->{modem}{dns1},
+_("Second DNS Server") => \$o->{modem}{dns2},
+_("Disable existing DNS servers during connection") => { val => \$o->{modem}{exdnsdisabled}, type => 'bool', },
+	    );
+
+    install_steps::pppConfig($o) if $o->ask_from_entries_ref('',
+							     _("Dial-in options"),
+							     [ grep_index { even($::i) } @l ],
+							     [ grep_index {  odd($::i) } @l ]);
 }
 
 #------------------------------------------------------------------------------

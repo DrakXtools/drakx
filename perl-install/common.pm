@@ -239,11 +239,15 @@ sub translate {
     my ($s) = @_;
     my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || '', 0, 2);
 
-    require 'lang.pm';
-    lang::load_po ($lang) unless defined $po::I18N::{$lang}; #- the space if needed to mislead perl2fcalls (as lang is not included here)
-    $po::I18N::{$lang} or return $s;
-    my $l = *{$po::I18N::{$lang}};
-    $l->{$s} || $s;
+    if ($lang) {
+	require 'lang.pm';
+	lang::load_po ($lang) unless defined $po::I18N::{$lang}; #- the space if needed to mislead perl2fcalls (as lang is not included here)
+	$po::I18N::{$lang} or return $s;
+	my $l = *{$po::I18N::{$lang}};
+	$l->{$s} || $s;
+    } else {
+	$s; #- should avoid some strange behaviour if no lang defined.
+    }
 }
 
 sub untranslate($@) {

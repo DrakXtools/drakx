@@ -246,6 +246,24 @@ sub pcmciaConfig($) {
 }
 
 #------------------------------------------------------------------------------
+sub modemConfig {
+    my ($o) = @_;
+    symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem") if $o->{modem};
+}
+
+sub pppConfig {
+    my ($o) = @_;
+    my %toreplace;
+
+    $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain);
+    $toreplace{phone} =~ s/[^\d]//g;
+    $toreplace{dnsserver} = ($o->{modem}{dns1} && "$o->{modem}{dns1},") . ($o->{modem}{dns2} && "$o->{modem}{dns2},");
+    $toreplace{exdnsdisabled} = $o->{modem}{exdnsdisabled} ? 1 : 0;
+    install_any::translate_file("/usr/share/kppprc.in" ,"$o->{prefix}/root/.kde/share/config/kppprc", %toreplace);
+    install_any::translate_file("/usr/share/kppprc.in" ,"$o->{prefix}/etc/skel/.kde/share/config/kppprc", %toreplace);
+}
+
+#------------------------------------------------------------------------------
 sub timeConfig {
     my ($o, $f) = @_;
     timezone::write($o->{prefix}, $o->{timezone}, $f);
