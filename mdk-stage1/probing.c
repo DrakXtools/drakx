@@ -397,7 +397,7 @@ char ** get_net_devices(void)
 
 	while (ptr && *ptr) {
 		if (net_device_available(*ptr)) {
-			log_message("NET: interface %s available", *ptr);
+			log_message("NET: %s is available", *ptr);
 			tmp[i++] = strdup(*ptr);
 		}
 		ptr++;

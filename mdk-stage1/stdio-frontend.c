@@ -104,22 +104,21 @@ static int actually_drawn;
 
 void init_progression(char *msg, int size)
 {
+	int i;
 	size_progress = size;
 	actually_drawn = 0;
 	printf("%s\n[", msg);
+	for (i=0; i<40; i++)
+		printf(".");
+	printf("]\033[G[");		/* only works on ANSI-compatibles */
+	fflush(stdout);
 }
 
 void update_progression(int current_size)
 {
 	while ((int)((current_size*40)/size_progress) > actually_drawn) {
-		printf(".");
+		printf("*");
 		actually_drawn++;
-		if (actually_drawn == 10)
-			printf("(25%%)");
-		if (actually_drawn == 20)
-			printf("(50%%)");
-		if (actually_drawn == 30)
-			printf("(75%%)");
 	}
 	fflush(stdout);
 }
