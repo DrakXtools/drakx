@@ -212,16 +212,16 @@ sub read_grub {
 		$e->{kernel_or_dev} = grub2file($kernel, $grub2dev, $fstab);
             } elsif ($keyword eq 'root') {
                 $e->{type} = 'other';
-		if ($v =~ /,/) {
-		    $e->{table} = grub2dev($v, $grub2dev, 1);
-		} else {
+		if ($v !~ /,/) {
 		    $e->{unsafe} = 1;
 		}
                 $e->{kernel_or_dev} = grub2dev($v, $grub2dev);
                 $e->{append} = "";
             } elsif ($keyword eq 'initrd') {
                 $e->{initrd} = grub2file($v, $grub2dev, $fstab);
-            }
+            } elsif ($keyword eq 'map') {
+		$e->{mapdrive}{$2} = $1 if $v =~ m/\((.*)\) \((.*)\)/;
+	    }
         }
     }
     foreach (cat_("$::prefix/boot/grub/install.sh")) {
