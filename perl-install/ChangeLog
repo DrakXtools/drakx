@@ -1,3 +1,162 @@
+2004/08/18  Olivier Blin <oblin at mandrakesoft.com>
+
+	* harddrake/data.pm: use network::ethernet::get_eth_categories in ethernet
+	detector
+
+2004/08/18  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: restrict the wait message (so that it's dead when an error
+	message is displayed)
+	fix typo
+	fix typos
+	  - any::setupBootloader() used to call bootloader::install() whereas
+	install_steps_interactive::setupBootloader() could call it once again
+	(but this code seems dead though)
+	  - create any::installBootloader() out of what was done in the end of
+	any::setupBootloader() but also in  install_steps_interactive and
+	drakboot (which handled the error that could occur in
+	bootloader::install())
+	create install_acpi_pkgs() and use it for auto_installs
+
+	* standalone/drakboot, install_steps_interactive.pm: 
+	  - any::setupBootloader() used to call bootloader::install() whereas
+	install_steps_interactive::setupBootloader() could call it once again
+	(but this code seems dead though)
+	  - create any::installBootloader() out of what was done in the end of
+	any::setupBootloader() but also in  install_steps_interactive and
+	drakboot (which handled the error that could occur in
+	bootloader::install())
+
+	* install_steps_gtk.pm: hide $release_notes_scroll by default, it's
+	visually cleaner
+
+	* ugtk2.pm: fix blino sucks
+
+	* detect_devices.pm: perl_checker compliance
+	use dmidecode to detect isLaptop()
+
+	* .perl_checker: Getopt::Long is now faked
+
+	* install_steps.pm: force ACPI on a laptop with recent bios
+	create install_acpi_pkgs() and use it for auto_installs
+
+2004/08/18  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/08/18  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* ugtk2.pm: Make the status field optional in treeviews
+
+2004/08/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: add PCMCIA controllers class
+
+2004/08/17  Nicolas Planel  <nplanel at mandrakesoft.com>
+
+	* c/smp-dmi.c: rework smp-dmi, add dmi memory detection suppport
+
+	* c/stuff.xs.pl: revert my last bad commit
+	rework smp-dmi, add dmi memory detection suppport
+
+2004/08/17  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: get rid off the 'ifcfg-Manually load a driver'
+	file ...
+	use network::ethernet::get_eth_categories() when needed
+
+	* standalone/net_applet: fix titi sux, fix I sux
+	use network::tools::get_internet_connection
+
+	* network/adsl.pm: fix sagem pty quoting
+	sagem: don't run pppoa if the ethernet interface isn't created and use
+	a reduced timeout (1 second) so that boot doesn't take forever if
+	modem can't be synchronized (maxfail * timeout was equal to 25
+	minutes)
+
+	* network/tools.pm: add new functions to make internet connection tests
+	easier
+	drop network::tools::reread_net_conf
+
+	* network/ethernet.pm: use network::ethernet::get_eth_categories() when
+	needed
+	add network::ethernet::get_eth_categories
+	drop network::ethernet::conf_network_card_backend
+	(conf_network_card_backend) set NET_INTERFACE too
+
+	* network/network.pm: use network::ethernet::get_eth_categories() when
+	needed
+	(easy_dhcp) probe all network sub categories
+	(easy_dhcp) don't use network::ethernet::conf_network_card_backend
+	(easy_dhcp) sort devices and keep only eth[0-9]+ devices
+	(easy_dhcp) allow configured interface not to be eth0 and make sure it
+	uses ethernet
+	(write_interface_conf) use unspec descriptor in iftab if link isn't
+	ether
+	fix suckiness (write proper iftab)
+
+2004/08/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bs.po, share/po/cs.po: updated Bosnian and Czech files
+
+2004/08/17  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/bootloader-config: better error handling
+
+	* install2.pm, install_steps_interactive.pm: $::corporate is dead
+	get release_notes at beginning of
+	install_steps_interactive::acceptLicense(), even when
+	useless_thing_accepted
+
+	* tools/make_mdkinst_stage2: don't remove /usr/share/locale anymore, we
+	use the same locale for all langs
+
+	* bootloader.pm: 
+	  - fix short label with extension. eg: have "linux-smp" instead of
+	"linuxsmp"
+	  - this fixes choosing the default specialised kernel
+
+	* fs/type.pm: cleanly handle the case when {pt_type} is 0
+
+	* share/gen_locales.sh, share/gen_locales.pl, share/list, share/Makefile,
+	Makefile: 
+	  - don't generate locales.tar.bz2, do the same directly (since it's now
+	quite simple)
+	  - when using ramdisk, we now have all the locales, no need to handle
+	it specially
+
+	* crypto.pm: $::corporate is dead
+
+	* lang.pm: lang::list() is unused, dropping it
+	  - don't generate locales.tar.bz2, do the same directly (since it's now
+	quite simple)
+	  - when using ramdisk, we now have all the locales, no need to handle
+	it specially
+
+	* install_steps_gtk.pm: add release notes during install of packages
+	remove dead code
+
+2004/08/17  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Display the list of media already taken into accounts
+	when asking for
+	supplementary media
+	perl_checker fix
+	Supplementary cd-roms don't need to have a rpmsrate / compssUsers.pl
+
+	* pkgs.pm: Log the reason why the rpms aren't installed
+
+2004/08/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.9mdk
+
+	* network/network.pm (easy_dhcp) handle pcmci card too
+
+	* share/rpmsrate: fix rpmsrate regarding s2u
+
+	* share/po/fr.po: update
+
 2004/08/16  Olivier Blin <oblin at mandrakesoft.com>
 
 	* install_steps_interactive.pm: alsaconf is in alsa-utils package (bug
@@ -35416,7 +35575,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.947 2004/08/16 09:19:13 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.948 2004/08/17 01:34:48 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
