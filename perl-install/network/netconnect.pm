@@ -266,7 +266,6 @@ fi
     output_with_perm("$prefix$connect_prog", 0755, $connect_cmd) if $connect_cmd;
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
-    save_conf($netcnx);
 
     if ($::isInstall && $::o->{security} >= 3) {
 	require network::drakfirewall;
