@@ -477,10 +477,6 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	}
     }
 
-    if (!$::isStandalone && $card->{driver} eq 'i810') {
-	require modules;
-	eval { modules::load("agpgart"); };
-    }
     $card;
 }
 
