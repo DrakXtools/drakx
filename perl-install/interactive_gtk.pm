@@ -180,6 +180,7 @@ sub ask_from_entries_refW {
 	    foreach (@updates_inv) { &{$_};}
 	    $ignore = 0;
 	    if ($error) {
+		$focus ||= 0;
 		comb_entry($entries[$focus], $val->[$focus])->grab_focus();
 	    } else {
 		return 1;
