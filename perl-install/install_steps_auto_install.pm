@@ -31,4 +31,10 @@ sub errorInStep {
     c::_exit(0);
 }
 
+sub exitInstall {
+    print "Auto installation complete\n";
+    print "Press <enter> to reboot\n";
+    <STDIN>;
+}
+
 1;

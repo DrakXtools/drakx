@@ -268,21 +268,26 @@ sub doPartitionDisks($$) {
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
 
-    return if $::beginner;
-    chooseSizeToInstall(@_);
-    install_steps_interactive::choosePackages(@_) unless $::expert;
-    choosePackagesTree(@_) if $::expert;
+    if ($::beginner) {	
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
+    } else {
+	install_steps_interactive::choosePackages(@_);
+	chooseSizeToInstall(@_);
+	choosePackagesTree(@_) if $::expert;
+    }
 }
 sub chooseSizeToInstall {
     my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
     my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
-    my $default = pkgs::correctSize((sum map { $_->{size} } grep { $_->{selected} } values %$packages) / sqr(1024) || $availableSpace * 0.7);
+    my $current = pkgs::correctSize((sum map { $_->{size} } grep { $_->{selected} } values %$packages) / sqr(1024));
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($default, 75, $availableSpace);
+    my $adj = create_adjustment($current * 1.3, $current, $availableSpace);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
 
     gtkadd($w->{window},
 	  gtkpack(new Gtk::VBox(0,20),
+		  _("Going to install %d MB. You can choose to install more programs", $current) .
+		  ($::expert ? "\n" . _("You will be able to choose more precisely in next step") : ''),
 		 create_packtable({ col_spacings => 10 },
 				  [ _("Choose the size you want to install"), $spin, _("MB"), ],
 				  [ undef, new Gtk::HScrollbar($adj) ],
@@ -294,8 +299,10 @@ sub chooseSizeToInstall {
     $spin->grab_focus();
     $w->main or return;
 
-    $_->{selected} = 0 foreach values %$packages;
-    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), $o->{installClass}, $o->{lang}, $o->{isUpgrade});
+    ($o->{packages_}{ind}, $o->{packages_}{select_level}) = 
+      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 
+				      pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
+				      $o->{installClass}, $o->{lang}, $o->{isUpgrade});
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss, $compssUsers) = @_;
@@ -492,7 +499,7 @@ sub installPackages {
     my $w = my_gtk->new(_("Installing"), grab => 1);
     $w->{window}->set_usize($windowwidth * 0.8, $windowheight * 0.5);
     my $text = new Gtk::Label;
-    my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label } (1..3);
+    my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
     gtkadd($w->{window}, gtkadd(new Gtk::EventBox,
 				gtkpack(new Gtk::VBox(0,10),
@@ -514,7 +521,7 @@ sub installPackages {
 	    $nb = $_[0];
 	    $total_size = $_[1]; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set(_("%d packages", $nb) . _(", %U bytes", $total_size));
+	    $msg->set(_("%d packages", $nb) . _(", %U MB", $total_size / 1024 / 1024));
 	    $w->flush;
 	} elsif ($m =~ /^Starting installing package/) {
 	    $progress->update(0);
@@ -532,7 +539,7 @@ sub installPackages {
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
 	    $progress_total->update($ratio);
-	    if ($dtime != $last_dtime) {
+	    if ($dtime != $last_dtime && $current_total_size > 2 * 1024 * 1024) {
 		$msg_time_total->set(formatTime($total_time));
 		$msg_time_remaining->set(formatTime(max($total_time - $dtime, 0)));
 		$last_dtime = $dtime;
@@ -686,7 +693,10 @@ sub create_steps_window {
 
 			$reachableSteps{$_} = $b if $step->{reachable};
 			$b;
-		    } grep { !(($::beginner || !$o->{installClass}) && $o->{steps}{$_}{beginnerHidden}) } @{$o->{orderedSteps}}),
+		    } grep {
+			local $_ = $o->{steps}{$_}{hidden};
+			/^$/ or $o->{installClass} and /beginner/ && !$::beginner || /!expert/ && $::expert
+		    } @{$o->{orderedSteps}}),
 		    0, gtkpack(new Gtk::HBox(0,0), map {
 			my $t = $_;
 			my $w = new Gtk::Button('');

@@ -3,7 +3,7 @@ package install_steps_interactive;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA);
+use vars qw(@ISA $global_wait);
 
 @ISA = qw(install_steps);
 
@@ -23,6 +23,7 @@ use run_program;
 use commands;
 use fsedit;
 use network;
+use crypto;
 use raid;
 use mouse;
 use modules;
@@ -235,13 +236,16 @@ sub selectPackagesToUpgrade {
 #------------------------------------------------------------------------------
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers) = @_;
-    my %s;
 
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
 			       [ keys %$compssUsers ],
 			       [ map { \$o->{compssUsersChoice}{$_} } keys %$compssUsers ]
 			       );
+    while (my ($k, $v) = each %{$o->{compssUsersChoice}}) {
+	$v or next;
+	pkgs::select($packages, $_) foreach @{$o->{compssUsers}{$k}};
+    }
 }
 
 #------------------------------------------------------------------------------
@@ -403,6 +407,30 @@ _("Second DNS Server") => \$m->{dns2},
     ]);
 
     $o->miscellaneousNetwork();
+}
+
+#------------------------------------------------------------------------------
+sub installCrypto {
+    my ($o) = @_;
+    my $u = $o->{crypto} ||= {};
+    $::expert && $o->{intf} && $o->{netc}{NETWORKING} ne 'false' or return;
+    
+    is_empty_hash_ref($u) and $o->ask_yesorno('', 
+"Do you want to download cryptographic packages?
+(! !)
+  ") || return;
+    
+    $u->{mirror} = crypto::text2mirror($o->ask_from_list('', _("Choose a mirror from which to get the packages"), [ crypto::mirrorstext ], crypto::mirror2text($u->{mirror})));
+    
+    my @packages = do {
+      my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
+      crypto::packages($u->{mirror});
+    };
+
+    $o->ask_many_from_list_ref('', _("Which packages do you want to install"), \@packages, [ map { \$u->{packages}{$_} } @packages ]) or return;
+
+    my $w = $o->wait_message('', _("Downloading cryptographic packages"));
+    install_steps::installCrypto($o);
 }
 
 #------------------------------------------------------------------------------
@@ -706,30 +734,26 @@ sub miscellaneous {
     );
     delete @l{0,1,5} unless $::expert;
 
+    install_steps::miscellaneous($o);
     my $u = $o->{miscellaneous} ||= {};
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
     $s = $l{$s} || $s;
 
-    !$::beginner || $clicked and $o->ask_from_entries_ref('',
-	_("Miscellaneous questions"),
-	[ _("Is this machine a laptop?"), 
-	  _("Use hard drive optimisations?"), 
-	  _("Choose security level"),
-	  _("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3), #- add three for correction.
-	],
-	[ { val => \$u->{LAPTOP}, type => 'bool' },
-	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
-	  { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
-	  \$u->{memsize},
-	],
-        complete => sub {
+    !$::beginner || $clicked and $o->ask_from_entries_refH('',
+	_("Miscellaneous questions"), [
+_("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
+_("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
+_("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3) => \$u->{memsize}, #- add three for correction.
+     $u->{numlock} ? (
+_("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
+     ) : (),
+     ], complete => sub {
 	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in Mb")), return 1;
 	    0;
 	}
     ) || return;
-    my %m = reverse %l; $o->{security} = $m{$s};
-    install_steps::miscellaneous($o);
+    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
 }
 
 #------------------------------------------------------------------------------
@@ -779,6 +803,8 @@ consult the Errata available from http://www.linux-mandrake.com/.
 
 Information on configuring your system is available in the post
 install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install;
+
+    $global_wait = $o->wait_message('', _("Shutting down"));
 
     $o->SUPER::exitInstall;
 }

@@ -8,6 +8,7 @@ use detect_devices;
 use run_program;
 use commands;
 use modules;
+use network;
 use log;
 use printer;
 

@@ -65,16 +65,8 @@ Xtest(display)
       XSetCloseDownMode(d, RetainPermanent);
       XCloseDisplay(d);
     }
-    { 
-	char *args[2]; 
-	args[0] = d ? "false" : "true"; /* inverted on purpose! */
-        args[1] = NULL;
-        execvp(args[0], args);
-    }
-    printf("***************** SHOUDNT GET THERE ***************\n");
-    exit(d != NULL);
+    _exit(d != NULL);
   }
-
   waitpid(pid, &RETVAL, 0);
   OUTPUT:
   RETVAL
@@ -628,7 +620,7 @@ headerGetEntry_string_list(h, query)
        VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE CDROM_LOCKDOOR CDROMEJECT
        ) ],
 );
-push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_FILENAMES RPMTAG_OBSOLETES) ]
+push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_FILENAMES RPMTAG_OBSOLETES RPMTAG_REQUIRENAME) ]
   if $ENV{C_RPM};
 
 $\= "\n";

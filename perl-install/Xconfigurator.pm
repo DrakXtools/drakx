@@ -263,8 +263,8 @@ sub testConfig($) {
     ($resolutions, $clocklines);
 }
 
-sub testFinalConfig($;$) {
-    my ($o, $auto) = @_;
+sub testFinalConfig($;$$) {
+    my ($o, $auto, $skiptest) = @_;
 
     $o->{monitor}{hsyncrange} && $o->{monitor}{vsyncrange} or
       $in->ask_warn('', _("Monitor not configured")), return;
@@ -279,7 +279,7 @@ sub testFinalConfig($;$) {
 
     write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/etc/X11/XF86Config");
 
-    $o->{card}{server} eq 'FBDev' and return 1; #- avoid testing since untestable without reboot.
+    $skiptest || $o->{card}{server} eq 'FBDev' and return 1; #- avoid testing since untestable without reboot.
 
     $auto
       or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"), 1)
@@ -750,7 +750,7 @@ sub main {
     }
     my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
 
-    $ok &&= testFinalConfig($o, $::auto) unless $::skiptest;
+    $ok &&= testFinalConfig($o, $::auto, $::skiptest);
 
     my $quit;
     until ($ok || $quit) {

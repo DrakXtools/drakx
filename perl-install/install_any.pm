@@ -118,17 +118,17 @@ sub setPackages($) {
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
-	$o->{packages}{$_}{selected} = 1 foreach @{$o->{default_packages} || []};
+	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
+	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
+	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
+	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
+	push @{$o->{default_packages}}, "raidtools" if !is_empty_hash_ref($o->{raid});
 
 	pkgs::getDeps($o->{packages});
 
 	my $c; ($o->{compss}, $c) = pkgs::readCompss($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $c, $o->{lang});
 	$o->{compssUsers} = pkgs::readCompssUsers($o->{packages}, $o->{compss});
-	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
-	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
-	push @{$o->{base}}, "raidtools" if !is_empty_hash_ref($o->{raid});
-	push @{$o->{base}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 
 	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
     } else {
@@ -142,10 +142,11 @@ sub setPackages($) {
 	    my $p = $o->{packages}{$_} or log::l("missing base package $_"), next;
 	    pkgs::select($o->{packages}, $p, 1);
 	} foreach @{$o->{base}};
+	do {
+	    my $p = $o->{packages}{$_} or log::l("missing add-on package $_"), next;
+	    pkgs::select($o->{packages}, $p);
+	} foreach @{$o->{default_packages}};
     }
-    return if $::auto_install;
-
-    ($o->{packages_}{ind}, $o->{packages_}{select_level}) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
 }
 
 sub selectPackagesToUpgrade($) {
@@ -395,11 +396,11 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
-	$o->{X}{card}{resolution_wanted} = join "x", @{$card->{depth}{$card->{default_depth}}[0]};
+	$o->{X}{card}{resolution_wanted} ||= join "x", @{$card->{depth}{$card->{default_depth}}[0]} if $card->{depth};
     }
 
 #-    local $o->{partitioning}{clearall} = 1;

@@ -6,45 +6,53 @@ use install_any;
 use network;
 use log;
 
-# non-rentrant!!
-
-my $retr;
+my %hosts;
 
 1;
 
-
-sub new {
-    my %options = (Passive => 1);
-    $options{Firewall} = $ENV{PROXY} if $ENV{PROXY};
-    $options{Port} = $ENV{PROXYPORT} if $ENV{PROXYPORT};
-    my @l;
-    unless ($ENV{HOST}) {
-	# must be in kickstart, using URLPREFIX to find out information
-	($ENV{LOGIN}, $ENV{PASSWORD}, $ENV{HOST}, $ENV{PREFIX}) = @l =
-	  $ENV{URLPREFIX} =~ m|
+sub fromEnv() {
+    # using URLPREFIX to find out information if kickstart
+    ($ENV{LOGIN}, $ENV{PASSWORD}, $ENV{HOST}, $ENV{PREFIX}) =
+      $ENV{URLPREFIX} =~ m|
        ://
        (?: ([^:]*)              # login
            (?: :([^@]*))?       # password
        @)?
        ([^/]*)                	# host
        /?(.*)			# prefix
-      |x;
-    }
-    unless ($ENV{LOGIN}) {
-	$ENV{LOGIN} = 'anonymous';
-	$ENV{PASSWORD} = 'mdkinst@test';
-    }
-
-    my $ftp = Net::FTP->new(network::resolv($ENV{HOST}), %options) or die '';
-    $ftp->login($ENV{LOGIN}, $ENV{PASSWORD}) or die '';
-    $ftp->binary;
-
-    $ftp;
+      |x unless $ENV{HOST};
+    
+    @ENV{qw(HOST PREFIX LOGIN PASSWORD)};
 }
 
+sub new {
+    my ($host, $prefix, $login, $password) = @_;
+    my @l = do { if ($hosts{$host}) {
+	@{$hosts{$host}};
+    } else {
+	my %options = (Passive => 1);
+	$options{Firewall} = $ENV{PROXY} if $ENV{PROXY};
+	$options{Port} = $ENV{PROXYPORT} if $ENV{PROXYPORT};
+	unless ($login) {
+	    $login = 'anonymous';
+	    $password = 'DrakX@vivelinuxabaszindozs';
+	}
+
+	my $ftp = Net::FTP->new(network::resolv($host), %options) or die '';
+	$ftp->login($login, $password) or die '';
+	$ftp->binary;
+	$ftp->cwd($prefix);
+
+	my @l = ($ftp, \ (my $retr = undef));
+	$hosts{$host} = \@l;
+	@l;
+    }};
+    wantarray ? @l : $l[0];
+}
 
 sub getFile($) {
-    $ftp ||= new();
-    $retr->close if $retr;
-    $retr = $ftp->retr($ENV{PREFIX} . "/" . install_any::relGetFile($_[0]));
+    my $f = shift;
+    my ($ftp, $retr) = new(@_ ? @_ : fromEnv);
+    $$retr->close if $$retr;
+    $$retr = $ftp->retr(install_any::relGetFile($f));
 }

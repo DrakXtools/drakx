@@ -446,7 +446,7 @@ sub removeXiBSuffix($) {
 
 sub formatTime($) {
     my ($s, $m, $h) = gmtime($_[0]);
-    sprintf "%02d:%02d:%02d", $h, $m, $s;
+    sprintf "%02d:%02d:%02d", $h, $m, 10 * int (($s + 5) / 10);
 }
 
 

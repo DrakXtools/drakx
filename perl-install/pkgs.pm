@@ -18,7 +18,8 @@ XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs kernel-BOOT
 MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
 hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
-hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb autoirpm autoirpm-icons
+hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb 
+autoirpm autoirpm-icons numlock
 );
 
 my @preferred = qw(
@@ -124,8 +125,8 @@ sub unselect_all($) {
     $_->{selected} = $_->{base} foreach values %$packages;
 }
 
-sub psUsingDirectory() {
-    my $dirname = "/tmp/rhimage/Mandrake/RPMS";
+sub psUsingDirectory(;$) {
+    my $dirname = $_[0] || "/tmp/rhimage/Mandrake/RPMS";
     my %packages;
 
     log::l("scanning $dirname for packages");
@@ -216,15 +217,6 @@ sub readCompss($) {
 
 sub readCompssList($$$) {
     my ($packages, $compss_, $lang) = @_;
-    my ($r, $s) = ('', '');
-    if ($lang) { 
-	local $SIG{__DIE__} = 'none';
-	my ($l) = split ' ', lang::lang2text($lang);
-	$r = "($lang";
-	$r .= "|$1" if $lang =~ /(..)./;
-	$r .= "|$l" if $l;
-	$r .= ")";
-    }
     my $f = install_any::getFile("compssList") or die "can't find compssList";
     local $_ = <$f>;
     my $level = [ split ];
@@ -233,16 +225,21 @@ sub readCompssList($$$) {
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 
-	/^packages\s*$/ and do { $e = $packages; $s = '-'; next };
-	/^categories\s*$/ and do { $e = $compss_; $s = ':'; next };
+	/^packages\s*$/ and do { $e = $packages; next };
+	/^categories\s*$/ and do { $e = $compss_; next };
 
 	my ($name, @values) = split;
 
 	$e or log::l("neither packages nor categories");
 	my $p = $e->{$name} or log::l("unknown entry $name (in compssList)"), next;
-
-	@values = map { $_ + 68 } @values if $name =~ /$s$r$/i;
 	$p->{values} = \@values;
+    }
+    my $locales = "locales-" . substr($lang, 0, 2);
+    if (my $p = $packages->{$locales}) {
+	foreach ($locales, @{$p->{provides} || []}) {
+	    my $p = $packages->{$_} or next;
+	    $p->{values} = [ map { $_ + 70 } @{$p->{values}} ];
+	}
     }
     $level;
 }

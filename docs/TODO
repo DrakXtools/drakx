@@ -1,4 +1,12 @@
-move security question before isntallation of packages
+bug: CANON BJC 4X00 do not work with current rhs-printfilters
+(work with magicfilters (debian))
+(should be handled by ghostscript BJC600's driver)
+
+bug: mouse freeze just before network configuration (mouse primax)
+
+urpmi: have the error log in stdout (like /mnt/nfs/... not available)
+
+see what can be done with nvram (50 bytes to save information)
 
 i18n
 
@@ -8,8 +16,6 @@ diskdrake in text mode
 
 ability to add nfs/weird_fs entries in fstab
 
-language support: only choose the right locales and upmark the packages requiring it
-
 standalone applications for configuration (netdrake)
 
 is configureNetworkNet needed with dhcp/bootp?
@@ -18,8 +24,6 @@ is configureNetworkNet needed with dhcp/bootp?
 X configuration and bootloader in kickstart
 
 (pix)Tree -> CTree, ``all'' branch with all packages
-
-install ssh
 
 (fpons)verify the free space is big enough.
 
@@ -120,3 +124,9 @@ auto_partitions
 suggested partition tables must be better foreach installClass
 
 (done,pix) update the list of modules (in update_kernel)
+
+(done,pix) language support: only choose the right locales and upmark the packages requiring it
+
+(done,pix) move security question before isntallation of packages
+
+(done,pix) install ssh

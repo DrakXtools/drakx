@@ -33,32 +33,35 @@ use detect_devices;
 use modparm;
 use run_program;
 
+use install_steps;
+
 #-######################################################################################
 #- Steps table
 #-######################################################################################
-my @installStepsFields = qw(text redoable onError beginnerHidden needs entered reachable toBeDone help next done);
+my @installStepsFields = qw(text redoable onError hidden needs entered reachable toBeDone help next done);
 my @installSteps = (
-  selectLanguage     => [ __("Choose your language"), 1, 1, 0 ],
-  selectInstallClass => [ __("Select installation class"), 1, 1, 0 ],
-  setupSCSI          => [ __("Setup SCSI"), 1, 0, 0 ],
-  selectPath         => [ __("Choose install or upgrade"), 0, 0, 0, "selectInstallClass" ],
-  selectMouse        => [ __("Configure mouse"), 1, 1, 1, "selectPath" ],
-  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, 0, "selectPath" ],
-  partitionDisks     => [ __("Setup filesystems"), 1, 0, 0, "selectPath" ],
-  formatPartitions   => [ __("Format partitions"), 1, -1, 0, "partitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, 1, 1, "selectPath" ],
-  doInstallStep      => [ __("Install system"), 1, -1, 0, ["formatPartitions", "selectPath"] ],
-  miscellaneous      => [ __("Miscellaneous"), 1, 1, 1 , "formatPartitions" ],
-  configureNetwork   => [ __("Configure networking"), 1, 1, 1, "formatPartitions" ],
-  configureTimezone  => [ __("Configure timezone"), 1, 1, 0, "doInstallStep" ],
-#-  configureServices => [ __("Configure services"), 0, 0, 0 ],
-  configurePrinter   => [ __("Configure printer"), 1, 0, 0, "doInstallStep" ],
-  setRootPassword    => [ __("Set root password"), 1, 1, 0, "formatPartitions" ],
-  addUser            => [ __("Add a user"), 1, 1, 0, "doInstallStep" ],
-  createBootdisk     => [ __("Create a bootdisk"), 1, 0, 0, "doInstallStep" ],
-  setupBootloader    => [ __("Install bootloader"), 1, 1, 0, "doInstallStep" ],
-  configureX         => [ __("Configure X"), 1, 0, 0, ["formatPartitions", "setupBootloader"] ],
-  exitInstall        => [ __("Exit install"), 0, 0, 1 ],
+  selectLanguage     => [ __("Choose your language"), 1, 1, '' ],
+  selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
+  setupSCSI          => [ __("Setup SCSI"), 1, 0, '' ],
+  selectPath         => [ __("Choose install or upgrade"), 0, 0, '', "selectInstallClass" ],
+  selectMouse        => [ __("Configure mouse"), 1, 1, 'beginner', "selectPath" ],
+  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectPath" ],
+  miscellaneous      => [ __("Miscellaneous"), 1, 1, 'beginner' ],
+  partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectPath" ],
+  formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
+  choosePackages     => [ __("Choose packages to install"), 1, 1, 'beginner', "selectPath" ],
+  doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectPath"] ],
+  configureNetwork   => [ __("Configure networking"), 1, 1, 'beginner', "formatPartitions" ],
+  installCrypto      => [ __("Cryptographic"), 1, 1, '!expert', "configureNetwork" ],
+  configureTimezone  => [ __("Configure timezone"), 1, 1, '', "doInstallStep" ],
+#-  configureServices => [ __("Configure services"), 0, 0, '' ],
+  configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
+  setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
+  addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
+  createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
+  configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions", "setupBootloader"] ],
+  exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
 );
 
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
@@ -184,7 +187,7 @@ $o = $::o = {
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
-
+    crypto => { mirror => "leia" },
 
     base => [ qw(basesystem sed initscripts console-tools mkbootdisk utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec) ],
 #-GOLD    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
@@ -357,11 +360,7 @@ sub doInstallStep {
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
-    $o->{miscellaneous}{memsize} ||= $1 if first(cat_("/proc/cmdline")) =~ /mem=(\S+)/;
     $o->miscellaneous($_[0]); 
-    addToBeDone { 
-	install_any::fsck_option();
-    } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------
@@ -381,6 +380,9 @@ sub configureNetwork {
 
     $o->configureNetwork;
 }
+#------------------------------------------------------------------------------
+sub installCrypto { $o->installCrypto }
+
 #------------------------------------------------------------------------------
 sub configureTimezone {
     my ($clicked) = @_;
@@ -472,8 +474,9 @@ sub main {
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
-	    expert    => sub { $o->{installClass} = 'expert'; $::expert = 1 },
-	    beginner  => sub { $o->{installClass} = 'normal'; $::beginner = 1 },
+	    expert    => sub { $::expert = 1 },
+	    beginner  => sub { $::beginner = 1 },
+	    class     => sub { $o->{installClass} = $v },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },

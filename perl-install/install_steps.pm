@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:file :system :common);
+use common qw(:file :system :common :functional);
 use install_any qw(:all);
 use partition_table qw(:types);
 use detect_devices;
@@ -14,7 +14,9 @@ use timezone;
 use Xconfig;
 use Xconfigurator;
 use modules;
+use class_discard;
 use run_program;
+use crypto;
 use lilo;
 use lang;
 use raid;
@@ -197,11 +199,6 @@ sub beforeInstallPackages {
 sub installPackages($$) {
     my ($o, $packages) = @_;
 
-    while (my ($k, $v) = each %{$o->{compssUsersChoice}}) {
-	$v or next;
-	pkgs::select($packages, $_) foreach @{$o->{compssUsers}{$k}};
-    }
-
     #- hack to ensure proper ordering for installation of packages.
     my @firstToInstall = qw(basesystem sed);
     my %firstInstalled;
@@ -228,6 +225,16 @@ sub afterInstallPackages($) {
     run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
     $o->pcmciaConfig();
+
+    #- miscellaneous
+    addToBeDone {
+	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
+            HDPARM => $o->{miscellaneous}{HDPARM},
+            TYPE => $o->{installClass},
+            SECURITY => $o->{security},
+        });
+	install_any::fsck_option();
+    } 'doInstallStep';
 
     my $p = $o->{packages}{urpmi};
     install_any::install_urpmi($o->{prefix}, $o->{method}) if $p && $p->{selected};
@@ -309,13 +316,39 @@ sub pppConfig {
 }
 
 #------------------------------------------------------------------------------
+sub installCrypto {
+    my ($o) = @_;
+    my $u = $o->{crypto} or return; $u->{mirror} or return;
+    my ($packages, %done);
+    my $dir = "$o->{prefix}/tmp";
+
+    local *install_any::getFile = sub {
+	local *F;
+	open F, "$dir/$_[0]" or return;
+	*F;
+    };
+    while (crypto::get($u->{mirror}, $dir, 
+		       grep { !$done{$_} && ($done{$_} = $u->{packages}{$_}) } %{$u->{packages}})) {
+	$packages = pkgs::psUsingDirectory($dir);
+	foreach (values %$packages) {
+	    foreach (c::headerGetEntry(pkgs::getHeader($_), 'requires')) {
+		my $r = crypto::require2package($_);
+		/^$r-\d/ and $u->{packages}{$_} = 1 foreach keys %{$u->{packages}};
+	    }
+	}
+    }
+    foreach (values %$packages) {
+    }
+    pkgs::install($o->{prefix}, [ values %$packages ]);
+}
+
+#------------------------------------------------------------------------------
 sub pcmciaConfig($) {
     my ($o) = @_;
     my $t = $o->{pcmcia};
-    my $f = "$o->{prefix}/etc/sysconfig/pcmcia";
 
     #- should be set after installing the package above else the file will be renamed.
-    setVarsInSh($f, {
+    setVarsInSh("$o->{prefix}/etc/sysconfig/pcmcia", {
 	PCMCIA    => $t ? "yes" : "no",
 	PCIC      => $t,
 	PCIC_OPTS => "",
@@ -497,7 +530,7 @@ sub setupXfree {
     { local $::testing = 0; #- unset testing
       local $::auto = 1;
       local $::skiptest = 1;
-      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub {
+      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, sub {
          install_any::pkg_install($o, "XFree86-$_[0]");
       });
     }
@@ -522,13 +555,10 @@ sub miscellaneousNetwork {
 #------------------------------------------------------------------------------
 sub miscellaneous {
     my ($o) = @_;
-    setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
-	LAPTOP => bool2text($o->{miscellaneous}{LAPTOP}),
-        HDPARM => $o->{miscellaneous}{HDPARM},
-        TYPE => $o->{installClass},
-        SECURITY => $o->{security},
-    });
     $ENV{SECURE_LEVEL} = $o->{security};
+
+    cat_("/proc/cmdline") =~ /mem=(\S+)/;
+    add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1 + 3) : () });
 }
 
 #------------------------------------------------------------------------------

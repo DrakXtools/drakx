@@ -23,6 +23,7 @@ sub headerGetEntry {
     $q eq 'size' and return headerGetEntry_int($h, RPMTAG_SIZE());
     $q eq 'filenames' and return headerGetEntry_string_list($h, RPMTAG_FILENAMES());
     $q eq 'obsoletes' and return headerGetEntry_string_list($h, RPMTAG_OBSOLETES());
+    $q eq 'requires' and return headerGetEntry_string_list($h, RPMTAG_REQUIRENAME());
 }
 
 1;
