@@ -128,6 +128,10 @@ sub add($$$) {
       ($part->{mntpoint} = 'swap') :
       check_mntpoint($part->{mntpoint}, $hds);
 
+    $part->{mntpoint} eq '/boot' &&
+      $part->{start} + $part->{size} >= 1024 * partition_table::cylinder_size($hd) and
+	die "/boot on cylinder > 1024";
+
     partition_table::add($hd, $part);
 }
 

@@ -276,6 +276,11 @@ sub remove($$) {
 	    %{$last->{extended}} = $_->{extended} ? %{$_->{extended}} : ();
 	    splice(@{$hd->{extended}}, $i, 1);
 	    
+	    unless (@{$hd->{extended}}) {
+		%{$hd->{primary}->{extended}} = ();
+		delete $hd->{primary}->{extended};
+	    }
+
 	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
 	}
 	$last = $_;
