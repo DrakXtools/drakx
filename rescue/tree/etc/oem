@@ -5,7 +5,6 @@
 inst=1
 swap=2
 root=3
-langs=fr:en
 
 echo
 echo
@@ -26,6 +25,13 @@ echo "hd: $hd"
 echo "cdrom: $cd"
 
 mkdir /cdrom ; mount -r -t iso9660 $cd /cdrom
+
+if grep -q " fr" /cdrom/VERSION; then
+  lang=fr
+else
+  lang=en
+fi
+echo "Found lang $lang"
 
 echo "Installing new partition table and bootloader"
 dd if=/etc/part_and_bootloader of=$hd
@@ -48,20 +54,20 @@ echo "Copying installation on hard drive"
 cp -a /boot /cdrom/boot /hd
 mkdir -p /hd/Mandrake /hd/Mandrake/RPMS
 cp -a /cdrom/Mandrake/base /cdrom/Mandrake/mdkinst /hd/Mandrake
-for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList | grep C: | cut -d: -f2`; do
+for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList $lang | grep C: | cut -d: -f2`; do
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && cp -a /cdrom/Mandrake/RPMS/$i.*.rpm /hd/Mandrake/RPMS
 done
 
 echo "Installing packages"
 export DURING_INSTALL=1
-export RPM_INSTALL_LANG=$langs
+export RPM_INSTALL_LANG=$lang
 export LD_LIBRARY_PATH=/usr/X11R6/lib
 export SECURE_LEVEL=2
 for i in /etc /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
 mount -t proc proc /mnt/proc
 rpm --root /mnt --initdb
 echo >/mnt/etc/fstab "$hd$root / ext2 defaults 1 1"
-for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList | grep I: | cut -d: -f2`; do
+for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList $lang | grep I: | cut -d: -f2`; do
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && rpm --root /mnt -ivh /cdrom/Mandrake/RPMS/$i.*.rpm --nodeps --force
 done
 umount /mnt/proc
