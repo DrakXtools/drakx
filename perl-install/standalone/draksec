@@ -75,8 +75,7 @@ Security Administrator:
 
 sub new_editable_combo {
     my ($string_list, $o_default_value) = @_;
-    my $w = new Gtk2::Combo();
-    $w->entry->set_editable(0);
+    my $w = new Gtk2::OptionMenu();
     $w->set_popdown_strings(@$string_list) unless is_empty_array_ref $string_list;
     $w->entry->set_text($o_default_value) if $o_default_value;
     $w;

@@ -78,19 +78,16 @@ unless ($::isEmbedded) {
 }
 $window1->{rwindow}->set_border_width(10);
 
-my $combo1 = new Gtk2::Combo;
+my $combo1 = new Gtk2::OptionMenu;
 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 my $old_profile = $netcnx->{PROFILE};
-
 $combo1->entry->set_text($netcnx->{PROFILE} || "default");
-$combo1->entry->set_editable(0);
 my $button_del = new Gtk2::Button(N("Del profile..."));
 $button_del->signal_connect(clicked => sub {
 				my $dialog = _create_dialog(N("Delete profile"));
 				$dialog->vbox->pack_start(new Gtk2::Label(N("Profile to delete:")),1,1,0);
-				my $combo_dialog = new Gtk2::Combo;
+				my $combo_dialog = new Gtk2::Option_menu;
 				$combo_dialog->set_popdown_strings(grep { ! /default/ } network::netconnect::get_profiles());
-				$combo_dialog->entry->set_editable(0);
 				$dialog->vbox->pack_start($combo_dialog,1,1,0);
 				my $bbox_dialog = new Gtk2::HButtonBox;
 				$dialog->action_area->add($bbox_dialog);
@@ -421,10 +418,9 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $infos[2*$i]->pack_start($l,1,1,0);
 	    $vbox_local->pack_start($infos[2*$i],0,0,0);
 	    if (defined $j->[2]) {
-		my $c = new Gtk2::Combo();
+		my $c = new Gtk2::OptionMenu;
 		$c->set_popdown_strings(@{$j->[2]});
 		$infos[2*$i+1] = $c->entry;
-		$infos[2*$i+1]->set_editable(0);
 		$infos[2*$i]->pack_start($c,0,0,0);
 	    } else {
 		$infos[2*$i+1] = new Gtk2::Entry();
