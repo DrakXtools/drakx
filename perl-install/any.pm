@@ -78,6 +78,7 @@ sub setupBootloader {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
     my $hds = $all_hds->{hds};
 
+    require bootloader;
   general:
     setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
     setupBootloader__boot_bios_drive($in, $b, $hds) or goto general;
@@ -90,6 +91,7 @@ sub setupBootloader_simple {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
     my $hds = $all_hds->{hds};
 
+    require bootloader;
     my $mixed_kind_of_disks = bootloader::mixed_kind_of_disks($hds);
     #- full expert questions when there is 2 kind of disks
     #- it would need a semi_auto asking on which drive the bios boots...
@@ -297,7 +299,6 @@ if_(arch() !~ /sparc|ppc|ia64/,
 	       } } }, \@l) or return;
 
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
-	require bootloader;
 	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
 	1;
     };
