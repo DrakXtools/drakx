@@ -267,7 +267,7 @@ sub build_tree {
 	($intf->{dns1}, $intf->{dns2}) = split(',', $l{DNS});
 	$intf->{$_->[0]} = $l{$_->[1]} foreach [ 'connection' , 'Name' ], [ 'domain', 'Domain' ], [ 'login', 'Username' ], 
 	  [ 'Timeout', 'Timeout' ], [ 'UseLockFile', 'UseLockFile' ], [ 'BusyWait', 'BusyWait' ], 
-	    [ 'FlowControl', 'FlowControl' ], [ 'Speed', 'Speed' ];
+	    [ 'FlowControl', 'FlowControl' ], [ 'Speed', 'Speed' ], [ 'Authentication', 'Authentication' ];
 	/.*ATDT(\d*)/ and $intf->{phone} = $1 foreach cat_("/etc/sysconfig/network-scripts/chat-ppp0");
 	/NAME=(['"]?)(.*)\1/ and $intf->{login} ||= $2 foreach cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0");
 	$_->{login} eq $intf->{login} and $intf->{passwd} = $_->{passwd} foreach @{network::tools::read_secret_backend()};
@@ -440,7 +440,9 @@ sub build_notebook {
 		      if_($interface =~ /^(isdn|modem)$/, [ N("Provider phone number"), $1 eq 'modem' ? 'phone' : 'phone_out' ]),
 		     ),
 		);
-	$gui->{intf}{auth}->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"), N("PAP/CHAP"));
+	my %auth_methods = map_index { $::i => $_ } N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"), N("PAP/CHAP");
+	$gui->{intf}{auth}->set_popdown_strings(values %auth_methods);
+	$gui->{intf}{auth}->set_text($auth_methods{$intf->{Authentication}});
 	$gui->{intf}{passwd}->set_visibility(0);
     }
     
