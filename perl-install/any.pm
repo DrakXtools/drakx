@@ -752,7 +752,6 @@ sub selectCountry {
 	    $h->{country});
     } @lang::locales;
     @best == 1 and @best = ();
-    $locale->{IM} ||= lang::get_default_im($locale->{lang});
 
     my ($other, $ext_country);
     member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
