@@ -116,11 +116,11 @@ Do you prefer autodetect UPS devices connected to this machine or  ?"),
                                 name => N("UPS driver configuration")  . "\n\n" . N("Please select your UPS model."),
                                 data => [ { label => N("Manufacturer / Model:"), val => \$ups, list => $model_list,
                                             type => 'combo', sort => 1, separator => '|' }, ],
-                                next => "driver",
                                 post => sub {
                                     ($vendor, $model) = split(/\|/, $ups);
                                     ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model}{driver}, "");
                                     ($driver) = split(/\s*/, $driver);
+                                    "driver";
                                 },
                                },
                       driver => {
