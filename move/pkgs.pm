@@ -1,5 +1,31 @@
+package pkg;
+
+sub flag_available {
+    log::l("(dummy pkg::flag_available called)");
+    return 1;
+}
+
+
 package pkgs; # $Id$ $
+use log;
 
-#- dummy (use pkgs in perl-install/install_any.pm)
+sub rpmDbOpen {
+    #- install_steps:343
+}
 
+sub packageByName {
+    #- install_steps:344
+    return bless {}, 'pkg';
+}
+
+sub selectPackage {
+    #- install_steps:344
+}
+
+sub packagesToInstall {
+    #- install_steps:346
+    return ();
+}
+
+    
 1;
