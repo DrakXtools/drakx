@@ -37,7 +37,7 @@ for (@ARGV) {
 }
 
 $in = 'interactive'->vnew('su', 'default');
-$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+#$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
 if ($::Manual) {manual(); quit();}
 my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
 @f = scanner::findScannerUsbport();
@@ -57,9 +57,10 @@ sub auto {
 }
 
 sub manual {
-    my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [keys %$scanner::scannerDB]) or return;
+    my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '' ) or return;
     # DRIVER usb or scsi
     #print "$s\n";
+    return if $s eq ' None';
     tryConfScanner($s);
 }
 
@@ -89,6 +90,10 @@ sub tryConfScanner {
      	#$in->ask_warn('scannerdrake', _("This %s scanner uses parallel port, which is unsupported for the moment", $model));
      	#return;
     }
+    if ($scanner::scannerDB->{$model}{server} =~ /printerdrake/) {
+     	$in->ask_warn('scannerdrake', _("This %s scanner must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", $model));
+     	return;
+    }
     scanner::confScanner($model,$port);
 }
 
@@ -98,6 +103,9 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.7  2002/02/18 17:32:42  yduret
+# HP OfficeJet support
+#
 # Revision 1.6  2002/02/18 16:12:07  yduret
 # scsi/parport preliminary support
 #
