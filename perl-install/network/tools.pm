@@ -21,7 +21,7 @@ sub write_cnx_script {
 sub write_secret_backend {
     my ($a, $b) = @_;
     foreach my $i ("pap-secrets", "chap-secrets") {
-	substInFile { s/^$a.*\n//; $_ .= "\n'$a' * '$b' * \n" if eof  } "$prefix/etc/ppp/$i";
+	substInFile { s/^'$a'.*\n//; $_ .= "\n'$a' * '$b' * \n" if eof  } "$prefix/etc/ppp/$i";
     }
 }
 
