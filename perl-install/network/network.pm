@@ -433,7 +433,7 @@ sub read_all_conf {
 }
 
 sub easy_dhcp {
-    my ($_in, $netc, $intf) = @_;
+    my ($netc, $intf) = @_;
 
     return if text2bool($netc->{NETWORKING});
 

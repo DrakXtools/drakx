@@ -710,7 +710,7 @@ sub updateModulesFromFloppy {
 sub configureNetwork {
     my ($o) = @_;
     require network::network;
-    network::network::easy_dhcp($o, $o->{netc}, $o->{intf});
+    network::network::easy_dhcp($o->{netc}, $o->{intf});
     $o->SUPER::configureNetwork();
 }
 
