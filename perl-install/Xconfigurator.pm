@@ -241,11 +241,11 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$tc->{code} and $tc->{code}();
     } else {
 	#- only one head found, configure it as before.
-	add2hash($card, $cards[0]) unless $card->{server} || $noauto;
+	add2hash($card, $cards[0]) unless $noauto;
 	delete $card->{cards}; delete $card->{Xinerama};
     }
     $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{driver} || $card->{type} || $noauto;
-    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) unless $card->{type} || $card->{server} || $card->{driver};
+    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) or return unless $card->{type} || $card->{server} || $card->{driver};
     undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $cardOptions->{allowFB} ? \@allservers : \@allbutfbservers ) or return if $card->{type} eq 'Other|Unlisted';
 
     updateCardAccordingName($card, $card->{type}) if $card->{type};
@@ -263,24 +263,27 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
                          #- NOT WORKING $card->{type} =~ /Intel 810/);
     $card->{Utah_glx} = '' if arch() =~ /ppc/; #- No 3D XFree 3.3 for PPC
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
-    $card->{Utah_glx_EXPERIMENTAL} = ($card->{type} =~ /RIVA TNT/ || #- all RIVA/GeForce comes from NVIDIA and may freeze (gltron).
-				      #$card->{type} =~ /RIVA128/ ||
-				      $card->{type} =~ /GeForce 256/ ||
-				      $card->{type} =~ /S3 Savage3D/ || #- only this one is evoluting (expect a stable release ?)
-				      #- $card->{type} =~ /S3 ViRGE/ || #- 15bits only
+    $card->{Utah_glx_EXPERIMENTAL} = ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2?/ || #- all RIVA/GeForce comes from NVIDIA ...
+				      $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||   #- and may freeze (gltron).
+				      $card->{identifier} =~ /[nN]Vidia.*Vanta/ ||
+				      $card->{identifier} =~ /[nN]Vidia.*GeForce/ ||
+				      $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
+				      $card->{identifier} =~ /[nN]Vidia.*Quadro/ ||
+				      $card->{identifier} =~ /S3.*Savage.*3D/ || #- only this one is evoluting.
 				      $card->{identifier} =~ /Rage Mobility [PL]/ ||
-				      $card->{type} =~ /SiS/);
+				      $card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
+				      $card->{identifier} =~ /SiS.*6C?236/ ||
+				      $card->{identifier} =~ /SiS.*630/);
     #- 3D acceleration configuration for XFree 4 using DRI.
-    $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
+    $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]|Voodoo Banshee/ || #- 16bit only
 			$card->{identifier} =~ /Matrox.* G[245][05]0/ || #- prefer 16bit with AGP only
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
 			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
-			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
+			$card->{identifier} =~ /Rage 128|Rage Mobility M/); #- 16 and 32 bits, prefer 16bit as no DMA.
     #- 3D acceleration configuration for XFree 4 using DRI but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{DRI_glx_EXPERIMENTAL} = ($card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
 				     $card->{identifier} =~ /SiS.*6C?236/ ||
 				     $card->{identifier} =~ /SiS.*630/);
-				     #$card->{identifier} =~ /Radeon /); #- 16bits preferable ?
     #- 3D acceleration configuration for XFree 4 using NVIDIA driver (TNT, TN2 and GeForce cards only).
     $card->{NVIDIA_glx} = $cardOptions->{allowNVIDIA_rpms} && ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2/ || #- TNT2 cards
 							       $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||
@@ -306,11 +309,11 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				 log::l("Using XFree $xf3_ver") } };
     my $msg = _("Which configuration of XFree do you want to have?");
     my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
-				      if_(!$card->{prefer_xf3} || $::expert, 
+				      if_(!$card->{prefer_xf3} || $::expert || $noauto, 
 					  { text => _("XFree %s", $xf4_ver),
 					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = '';
 							  log::l("Using XFree $xf4_ver") } }),
-				      if_(!$card->{prefer_xf3} && !$card->{force_xf4} && $::expert, $xf3_tc)) : $xf3_tc;
+				      if_(!$card->{prefer_xf3} && !$card->{force_xf4} && ($::expert || $noauto), $xf3_tc)) : $xf3_tc;
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
     if ($card->{Utah_glx} && !$card->{force_xf4}) {
@@ -318,7 +321,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n\n" . $msg;
-	$::expert or @choices = (); #- keep it by default here as it is the only choice available.
+	$::expert || $noauto or @choices = (); #- keep it by default here as it is the only choice available.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
 			    code => sub { $card->{use_xf4} = '';
 					  log::l("Using XFree $xf3_ver with 3D hardware acceleration") } };
@@ -348,10 +351,10 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 				       log::l("Using XFree $xf3_ver with EXPERIMENTAL 3D hardware acceleration") } };
     }
 
-    #- ask the expert user to enable or not hardware acceleration support.
+    #- ask the expert or any user on second pass user to enable or not hardware acceleration support.
     if ($card->{use_xf4} && ($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{Xinerama}) {
 	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n\n" . $msg;
-	$::expert or @choices = (); #- keep all user by default with XFree 4 including 3D acceleration.
+	$::expert || $noauto or @choices = (); #- keep all user by default with XFree 4 including 3D acceleration.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
 			    code => sub { log::l("Using XFree $xf4_ver with 3D hardware acceleration") } };
     }
@@ -425,7 +428,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
     }
     $card->{options_xf3}{power_saver} = 1;
-    $card->{options_xf4}{DPMS} = 1;
+    $card->{options_xf4}{DPMS} = 'on';
 
     $card->{flags}{needVideoRam} and
       $card->{memory} ||= $videomemory{$in->ask_from_list_('', _("Select the memory size of your graphic card"),
@@ -434,13 +437,15 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 
     #- hack for ATI Mach64 cards where two options should be used if using Utah-GLX.
     if ($card->{identifier} =~ /Rage X[CL]/ ||
-	$card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
+	$card->{identifier} =~ /Rage Mobility [PL]/ ||
 	$card->{identifier} =~ /3D Rage (?:LT|Pro)/) {
 	$card->{options_xf3}{no_font_cache} = $card->{Utah_glx};
 	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
     }
     #- hack for SiS cards where an option should be used if using Utah-GLX.
-    if ($card->{type} =~ /SiS /) {
+    if ($card->{identifier} =~ /SiS.*6C?326/ ||
+	$card->{identifier} =~ /SiS.*6C?236/ ||
+	$card->{identifier} =~ /SiS.*630/) {
 	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
     }
 
@@ -449,6 +454,15 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     if ($card->{DRI_glx}) {
 	$card->{identifier} =~ /Matrox.* G[245][05]0/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
 	$card->{identifier} =~ /8281[05].* CGC/ and ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 16384);
+	#- always enable (as a reminder for people using a better AGP mode to change it at their own risk).
+	$card->{options_xf4}{AGPMode} = '1';
+	#- hack for ATI Rage 128 card using a bttv or peripheral with PCI bus mastering exchange
+	#- AND using DRI at the same time.
+	if ($card->{identifier} =~ /Rage 128|Rage Mobility M/) {
+	    $card->{options_xf4}{UseCCEFor2D} = (detect_devices::matching_desc('Bt8[47][89]') ||
+						 detect_devices::matching_desc('TV') ||
+						 detect_devices::matching_desc('AG GMV1')) ? 'true' : 'false';
+	}
     }
 
     if (!$::isStandalone && $card->{driver} eq 'i810') {
@@ -563,7 +577,7 @@ sub testFinalConfig {
     #- needed for bad cards not restoring cleanly framebuffer, according to which version of XFree are used.
     my $bad_card = ($o->{card}{use_xf4} ?
 		    $o->{card}{identifier} =~ /Matrox|SiS.*SG86C2.5|SiS.*559[78]|SiS.*300|SiS.*540|SiS.*6C?326|SiS.*6C?236|Tseng.*ET6\d00/ :
-		    $o->{card}{identifier} =~ /i740|ViRGE|Rage Mobility [PL]|3D Rage LT/);
+		    $o->{card}{identifier} =~ /i740|Rage Mobility [PL]|3D Rage LT/);
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $verybad_card = $o->{card}{driver} eq 'i810';
@@ -609,15 +623,27 @@ sub testFinalConfig {
 	local $_;
 	local *F; open F, $f_err;
       i: while (<F>) {
-	    if (/\b(error|not supported)\b/i) {
-		my @msg = !/error/ && $_ ;
-		while (<F>) {
-		    /not fatal/ and last i;
-		    /^$/ and last;
-		    push @msg, $_;
+	    if ($o->{card}{use_xf4}) {
+		if (/^\(EE\)/ && $_ !~ /Disabling/ || /^Fatal\b/) {
+		    my @msg = !/error/ && $_ ;
+		    while (<F>) {
+			/reporting a problem/ and last;
+			push @msg, $_;
+			$in->ask_warn('', [ _("An error has occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
+			return 0;
+		    }
 		}
-		$in->ask_warn('', [ _("An error has occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
-		return 0;
+	    } else {
+		if (/\b(error|not supported)\b/i) {
+		    my @msg = !/error/ && $_ ;
+		    while (<F>) {
+			/not fatal/ and last i;
+			/^$/ and last;
+			push @msg, $_;
+		    }
+		    $in->ask_warn('', [ _("An error has occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
+		    return 0;
+		}
 	    }
 	}
     }
@@ -661,20 +687,45 @@ sub testFinalConfig {
     $rc;
 }
 
+sub allowedDepth($) {
+    my ($card) = @_;
+    my %allowed_depth;
+
+    if ($card->{Utah_glx} || $card->{DRI_glx}) {
+	$allowed_depth{16} = 1; #- this is the default.
+	$card->{identifier} =~ /Voodoo 5/ and $allowed_depth{24} = undef;
+	$card->{identifier} =~ /Matrox.* G[245][05]0/ and $allowed_depth{24} = undef;
+	$card->{identifier} =~ /Rage 128/ and $allowed_depth{32} = undef;
+	$card->{identifier} =~ /Radeon/ and $allowed_depth{32} = undef;
+    }
+    
+    for ($card->{server}) {
+	#- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.
+	/FBDev/   and $allowed_depth{16} = 1;
+
+	#- Sun servers, Sun24 handles 24,8,2; Sun only 8 and 2; and SunMono only 2.
+	/^Sun24$/   and @allowed_depth{qw(24 8 2)} = (1);
+	/^Sun$/     and @allowed_depth{qw(8 2)} = (1);
+	/^SunMono$/ and @allowed_depth{qw(2)} = (1);
+    }
+
+    return %allowed_depth && \%allowed_depth; #- no restriction if false is returned.
+}
+
 sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
-    return 16 if $card->{Utah_glx} || $card->{DRI_glx}; #- assume 16bit as most of them need 16.
-    
-    for ($card->{server}) {
-	/FBDev/   and return 16; #- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.
-	/Sun24/   and return 24;
-	/SunMono/ and return 2;
-	/Sun/     and return 8;
+    #- check for forced depth according to current environment.
+    my $allowed_depth = allowedDepth($card);
+    if ($allowed_depth) {
+	foreach (keys %$allowed_depth) {
+	    $allowed_depth->{$_} and return $_; #- a default depth is given.
+	}
     }
 
     while (my ($d, $r) = each %{$card->{depth}}) {
+	$allowed_depth && ! exists $allowed_depth->{$d} and next; #- reject depth.
 	$depth = max($depth || 0, $d);
 
 	#- try to have resolution_wanted
@@ -708,8 +759,12 @@ sub chooseResolutionsGtk($$;$) {
     my ($r, $depth_combo, %w2depth, %w2h, %w2widget, $pix_monitor, $pix_colors, $w2_combo);
     $w2_combo = new Gtk::Combo;
     my $best_w;
+    my $allowed_depth = allowedDepth($card);
+    my %allowed_depth;
     while (my ($depth, $res) = each %{$card->{depth}}) {
+	$allowed_depth && ! exists $allowed_depth->{$depth} and next; #- reject depth.
 	foreach (@$res) {
+	    ++$allowed_depth{$depth};
 	    $w2h{$_->[0]} = $_->[1];
 	    push @{$w2depth{$_->[0]}}, $depth;
 
@@ -775,7 +830,7 @@ sub chooseResolutionsGtk($$;$) {
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);
     $depth_combo->entry->set_editable(0);
-    $depth_combo->set_popdown_strings(map { translate($depths{$_}) } ikeys(%{$card->{depth}}));
+    $depth_combo->set_popdown_strings(map { translate($depths{$_}) } grep { $allowed_depth{$_} } ikeys(%{$card->{depth}}));
     $depth_combo->entry->signal_connect(changed => sub {
         $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
         my $w = $card->{depth}{$chosen_depth}[0][0];
@@ -813,8 +868,11 @@ sub chooseResolutions($$;$) {
     my ($card, $chosen_depth, $chosen_w) = @_;
 
     my $best_w;
+    my $allowed_depth = allowedDepth($card);
+
     local $_ = $in->ask_from_list(_("Resolutions"), "", 
-				  [ map_each { map { "$_->[0]x$_->[1] ${main::a}bpp" } @$::b } %{$card->{depth}} ]) or return;
+				  [ if_(!$allowed_depth || exists $allowed_depth->{$::a},
+					map_each { map { "$_->[0]x$_->[1] ${main::a}bpp" } @$::b } %{$card->{depth}}) ]) or return;
     reverse /(\d+)x\S+ (\d+)/;
 }
 
@@ -1194,12 +1252,16 @@ EndSection
     #    Option      "sw_cursor"
 
 );
-    my $p = sub {
+    my $p_xf3 = sub {
 	my $l = $O->{$_[0]};
 	map { (!$l->{$_} && '#') . qq(    Option      "$_"\n) } keys %{$l || {}};
     };
-    print F $p->('options');
-    print F $p->('options_xf3');
+    my $p_xf4 = sub {
+	my $l = $O->{$_[0]};
+	map { (! defined $l->{$_} && '#') . qq(    Option      "$_"  "$l->{$_}"\n) } keys %{$l || {}};
+    };
+    print F $p_xf3->('options');
+    print F $p_xf3->('options_xf3');
     print F "EndSection\n\n\n";
 
     #- configure all drivers here!
@@ -1227,8 +1289,8 @@ EndSection
     #    Option      "sw_cursor"
 
 );
-	print G $p->('options'); #- keep $O for these!
-	print G $p->('options_xf4'); #- keep $O for these!
+	print G $p_xf3->('options'); #- keep $O for these!
+	print G $p_xf4->('options_xf4'); #- keep $O for these!
 	print G qq(    Screen $_->{screen}\n) if defined $_->{screen};
 	print G qq(    BusID       "$_->{busid}"\n) if $_->{busid};
 	print G "EndSection\n\n\n";
@@ -1293,6 +1355,9 @@ Section "Screen"
     Device      "$O->{type}"
     Monitor     "$o->{monitor}{type}"
 );
+    #- hack for DRI with Matrox card at 24 bpp, need another command.
+    $O->{DRI_glx} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $o->{default_depth} == 24 and
+      print G "    DefaultFbBpp      32\n";
     #- bpp 32 not handled by XF4
     $subscreen->(*G, "svga", min($o->{default_depth}, 24), $O->{depth});
     foreach (2..@{$O->{cards} || []}) {
@@ -1303,6 +1368,9 @@ Section "Screen"
     Device      "$device"
     Monitor     "monitor$_"
 );
+	#- hack for DRI with Matrox card at 24 bpp, need another command.
+	$O->{DRI_glx} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $o->{default_depth} == 24 and
+	  print G "    DefaultFbBpp      32\n";
 	#- bpp 32 not handled by XF4
 	$subscreen->(*G, "svga", min($o->{default_depth}, 24), $O->{depth});
     }
@@ -1359,6 +1427,9 @@ sub XF86check_link {
 sub info {
     my ($o) = @_;
     my $info;
+    my $xf_ver = $o->{card}{use_xf4} ? "4.1.0" : "3.3.6";
+    my $title = ($o->{card}{DRI_glx} || $o->{card}{NVIDIA_glx} || $o->{Utah_glx} ?
+		 _("XFree %s with 3D hardware acceleration", $xf_ver) : _("XFree %s", $xf_ver));
 
     $info .= _("Keyboard layout: %s\n", $o->{keyboard}{xkb_keymap});
     $info .= _("Mouse type: %s\n", $o->{mouse}{XMOUSETYPE});
@@ -1367,6 +1438,7 @@ sub info {
     $info .= _("Monitor HorizSync: %s\n", $o->{monitor}{hsyncrange}) if $::expert;
     $info .= _("Monitor VertRefresh: %s\n", $o->{monitor}{vsyncrange}) if $::expert;
     $info .= _("Graphic card: %s\n", $o->{card}{type});
+    $info .= _("Graphic card identification: %s\n", $o->{card}{identifier}) if $::expert;
     $info .= _("Graphic memory: %s kB\n", $o->{card}{memory}) if $o->{card}{memory};
     if ($o->{default_depth} and my $depth = $o->{card}{depth}{$o->{default_depth}}) {
 	$info .= _("Color depth: %s\n", translate($depths{$o->{default_depth}}));
@@ -1374,7 +1446,7 @@ sub info {
     }
     $info .= _("XFree86 server: %s\n", $o->{card}{server}) if $o->{card}{server};
     $info .= _("XFree86 driver: %s\n", $o->{card}{driver}) if $o->{card}{driver};
-    $info;
+    "$title\n\n$info";
 }
 
 sub show_info {
