@@ -418,7 +418,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     that they do not need anymore to be configured regarding print
     queues (till)
   o text fix for scanners in HP's multi-function devices (till)
-- service_harddrake: check usb controllers on boot (oblin)
+- service_harddrake: check usb controllers on boot (oblin, #9613)
 
 * Wed Aug 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.10mdk
 - drakconnect (oblin):
