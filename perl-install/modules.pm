@@ -640,8 +640,10 @@ sub load_thiskind {
     read_already_loaded();
 
     my @try_modules = (
-      'imm', 'ppa',
-      if_(detect_devices::usbZips(), 'usb-storage'),
+      if_($type =~ /scsi/,
+	  'imm', 'ppa',
+	  if_(detect_devices::usbZips(), 'usb-storage'),
+      ),
       if_(arch() =~ /ppc/, 
 	  'mesh', 'mac53c94',
 	  if_($type =~ /net/, 'bmac', 'gmac', 'pmac'),
