@@ -114,6 +114,7 @@ use common qw(:common);
 
 $good_default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
 $low_default_monitor = "Super VGA, 800x600 at 56 Hz";
+
 %standard_monitors = (
   __("Standard VGA, 640x480 at 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
   __("Super VGA, 800x600 at 56 Hz") 				   => [ '800x600@56',      "31.5-35.1"       , "55-60" ],
@@ -506,6 +507,46 @@ $keyboardsection_part3_v4 = '
     Option "XkbGeometry" "sun(type5)"
     Option "XkbSymbols"  "sun/us(sun5)"
 ';
+} elsif (arch() =~ /ppc/) {
+$keyboardsection_part3 = '
+# To customise the XKB settings to suit your keyboard, modify the
+# lines below (which are the defaults).  For example, for a non-U.S.
+# keyboard, you will probably want to use:
+#    XkbModel    "pc102"
+# If you have a US Microsoft Natural keyboard, you can use:
+#    XkbModel    "microsoft"
+#
+# Then to change the language, change the Layout setting.
+# For example, a german layout can be obtained with:
+#    XkbLayout   "de"
+# or:
+#    XkbLayout   "de"
+#    XkbVariant  "nodeadkeys"
+#
+# If you\'d like to switch the positions of your capslock and
+# control keys, use:
+#    XkbOptions  "ctrl:swapcaps"
+
+# These are the default XKB settings for XFree86
+#    XkbRules    "xfree86"
+#    XkbModel    "pc101"
+#    XkbLayout   "us"
+#    XkbVariant  ""
+#    XkbOptions  ""
+
+    XkbKeycodes     "xfree86"
+    XkbTypes        "default"
+    XkbCompat       "default"
+    XkbSymbols      "macintosh/us"
+    XkbGeometry     "macintosh"
+    XkbRules        "xfree86"
+    XkbModel        "macintosh"
+';
+
+$keyboardsection_part3_v4 = '
+    Option "XkbRules" "xfree86"
+    Option "XkbModel" "macintosh"
+';	
 } else {
 $keyboardsection_part3 = '
 # To customise the XKB settings to suit your keyboard, modify the
