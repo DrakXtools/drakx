@@ -127,6 +127,7 @@ sub init {
 
     $key_disabled = -e '/image/move/key_disabled';
 
+    run_program::run('/sbin/service', 'syslog', 'start');
     system('sysctl -w kernel.hotplug="/bin/true"');
     modules::load_category('bus/usb'); 
     eval { modules::load('usb-storage', 'sd_mod') };
@@ -389,8 +390,6 @@ sub install2::configMove {
     modules::load_category('multimedia/sound');
     enable_service('sound');
 
-    enable_service('syslog');
-
     $o->{useSupermount} = 1;
     fs::set_removable_mntpoints($o->{all_hds});    
     fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
@@ -494,8 +493,6 @@ sub install2::startMove {
     touch '/var/run/utmp';
     run_program::run('runlevel_set', '5');
     member($_, qw(xfs dm devfsd)) or run_program::run($_, 'start') foreach glob('/etc/rc.d/rc5.d/*');
-    run_program::run('killall', 'minilogd');
-    run_program::run('/sbin/service', 'syslog', 'restart');  #- otherwise minilogd will strike back
 
     #- allow user customisation of startup through /etc/rc.d/rc.local
     run_program::run('/etc/rc.d/rc.local');
