@@ -847,7 +847,7 @@ sub config_dvd {
 
     my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms__faking_ide_scsi() or return;
 
-    log::l("configuring DVD");
+    log::l("configuring DVD: " . join(" ", map { $_->{device} } @dvds));
     #- create /dev/dvd symlink
     each_index {
 	devfssymlinkf($_, 'dvd' . ($::i ? $::i + 1 : ''));
