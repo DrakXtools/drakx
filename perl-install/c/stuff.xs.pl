@@ -34,6 +34,15 @@ print '
 #include <net/if.h>
 #include <net/route.h>
 #include <netinet/in.h>
+#include <linux/sockios.h>
+
+// for ethtool structs:
+typedef unsigned long long u64;
+typedef __uint32_t u32;
+typedef __uint16_t u16;
+typedef __uint8_t u8;
+
+#include <linux/ethtool.h>
 
 /* for is_ext3 */
 #include <ext2fs/ext2_fs.h>
@@ -409,6 +418,26 @@ hasNetDevice(device)
     close(s);
   OUTPUT:
   RETVAL
+
+char*
+getNetDriver(char* device)
+  CODE:
+    struct ifreq ifr;
+    struct ethtool_drvinfo drvinfo;
+    int s = socket(AF_INET, SOCK_DGRAM, 0);
+
+    memset(&ifr, 0, sizeof(ifr));
+    strncpy(ifr.ifr_name, device, sizeof(ifr.ifr_name)-1);
+
+    drvinfo.cmd = ETHTOOL_GDRVINFO;
+    ifr.ifr_data = (caddr_t) &drvinfo;
+
+    if (ioctl(s, SIOCETHTOOL, &ifr) != -1)
+         RETVAL = strdup(drvinfo.driver);
+    else { perror("SIOCETHTOOL"); RETVAL = strdup(""); }
+  OUTPUT:
+  RETVAL
+
 
 int
 addDefaultRoute(gateway)
