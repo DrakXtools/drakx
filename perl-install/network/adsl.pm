@@ -264,7 +264,7 @@ INTERFACE=`$modems{$adsl_device}{get_intf}`
         # set vpi and vci parameters for sagem
         substInFile {
             s/VCI=.*\n/VCI=$l{vci}\n/;
-            s/VPI=.*\n/VCI=$l{vpi}\n/;
+            s/VPI=.*\n/VPI=$l{vpi}\n/;
             s/Encapsulation=.*\n/Encapsulation=$l{vpi}\n/;
         } "$::prefix/etc/analog/adiusbadsl.conf";
     } elsif ($adsl_device eq 'speedtouch') {
