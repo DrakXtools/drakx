@@ -66,14 +66,14 @@ my $mdk_app = {
 	       _("Mandrake Control Center") => 'drakconf',
 	       _("First Time Wizard") => 'drakfw',
 	       _("Synchronization tool") => 'draksync',  
-	       _("Standalone Tools") =>['adduserdrake','diskdrake','drakautoinst','drakbackup','drakboot','drakbug','drakfloppy','drakfont','drakgw','drakconnect','drakxservices','drakxtv','keyboardrake','logdrake','mousedrake','net_monitor','printerdrake','scannerdrake','tinyfirewall','XFdrake'],
+	       _("Standalone Tools") => ['adduserdrake','diskdrake','drakautoinst','drakbackup','drakboot','drakbug','drakfloppy','drakfont','drakgw','drakconnect','drakxservices','drakxtv','keyboardrake','logdrake','mousedrake','net_monitor','printerdrake','scannerdrake','tinyfirewall','XFdrake'],
 	       _("HardDrake") => 'harddrake2',
-	       _("Mandrake Online") => ['mdkonline','mdkupdate'],
+	       _("Mandrake Online") => 'mdkonline',
 	       _("Menudrake") => 'menudrake',
 	       _("Msec") => 'msec',
 	       _("Remote Control") => 'rfbdrake',
-	       _("Software Manager") => ['rpmdrake','MandrakeUpdate'],
-	       _("Urpmi") => ['urpmi','urpmq','urpme'],
+	       _("Software Manager") => 'rpmdrake',
+	       _("Urpmi") => 'urpmi',
 	       _("Windows Migration tool") => 'transfugdrake',
 	       _("Userdrake") => 'userdrake',
 	       _("Configuration Wizards") => 'wizdrake',
@@ -96,7 +96,7 @@ $table->attach(new Gtk::Label(_("Kernel:")), 0, 1, 2, 3, 'fill', 'fill',0,0);
 $table->attach(new Gtk::Label(_("Release: ")), 0, 1, 3, 4, 'fill', 'fill',0,0);
 $table->attach(my $comb_app = new Gtk::Combo(), 1, 2, 0, 1, 'fill', 'fill',0,0);
 $comb_app->set_usize(270,undef);
-$comb_app->set_popdown_strings("",@generic_tool);
+$comb_app->set_popdown_strings("",sort(@generic_tool));
 $table->attach(my $package = new Gtk::Entry(), 1, 2, 1, 2, 'fill', 'fill',0,0);
 $package->set_text("...");
 $table->attach(my $kernel_rel = new Gtk::Entry(), 1, 2, 2, 3, 'fill', 'fill',0,0);
@@ -114,8 +114,8 @@ gtkpack2__(
 		      
 		     ),
 	  );
-if (defined $prog && member($prog, @all_drakxtools)) {
-    $comb_app->entry->set_text($prog);
+
+if (defined $prog) {
     update_app($prog); 
 };
 
@@ -138,16 +138,28 @@ in->exit(0);
 
 sub update_app {
     my ($text) = @_;
-    if ($text ne '') {					 
-	$ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-	if (member($text,@all_drakxtools)) {
-	    chomp($app_choice = `rpm -q drakxtools`) 
-	} else {	
-	    exists $mdk_app->{$text}[1] ? $which_app =chomp_(`which '$mdk_app->{$text}[1]'`) : { $which_app = chomp_(`which '$mdk_app->{$text}'`) };
-	    $app_choice = chomp_(`rpm -qf '$which_app'`); 
+    my $app_choice;
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+    if (member($text,@all_drakxtools) || $text eq _("Standalone Tools")) {
+	$app_choice = chomp_(`rpm -q drakxtools`) ;
+    } elsif (member($text,keys %{$mdk_app}) && $text ne _("Standalone Tools")) {	
+	$which_app = chomp_(`which '$mdk_app->{$text}'`);
+	$app_choice = chomp_(`rpm -qf '$which_app' 2>1&`);
+    } else {
+	while (($key,$value) = each %{$mdk_app}) {
+	    next if $key eq _("Standalone Tools");
+	    if ($value eq $text) { 
+		$which_app = chomp_(`which '$text'`);
+		$app_choice = chomp_(`rpm -qf '$which_app' 2>1&`);
+		$text = $key; 
+		print ("*********** key is : $key **** text is : $text\n");
+		
+		last;
+	    }
 	}
-	$app_choice !~ m/ / ? $package->set_text("$app_choice") : $package->set_text(_("Not installed"));
     }
+    $app_choice ne '' ? $package->set_text("$app_choice") : $package->set_text(_("Not installed"));
+    $comb_app->entry->set_text("$text");
 }
 
 sub connect_bugzilla {
@@ -169,6 +181,3 @@ sub read_app_context {
 sub quit_global {
     Gtk->exit(0);
 }
-
-
-
