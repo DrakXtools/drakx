@@ -55,10 +55,9 @@ sub find_exports {
     my ($_class, $server) = @_;
 
     my @l;
-    run_program::raw({ timeout => 1 }, "showmount", '>', \@l, "-e", $server->{ip} || $server->{name});
+    run_program::raw({ timeout => 1 }, "showmount", '>', \@l, "--no-headers", "-e", $server->{ip} || $server->{name});
 
-    shift @l; #- drop first line
-    map { if_(/(\S+)\s*(\S+)/, { name => $1, comment => $2, server => $server }) } @l;
+    map { if_(/(\S+(\s*\S+)*)\s+(\S+)/, { name => $1, comment => $3, server => $server }) } @l;
 }
 
 1;
