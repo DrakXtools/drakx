@@ -15,7 +15,7 @@ msgstr ""
 
 #: ../../Xconfigurator.pm_.c:130 ../../Xconfigurator.pm_.c:242
 msgid "Generic"
-msgstr ""
+msgstr "Generisk"
 
 #: ../../Xconfigurator.pm_.c:179
 msgid "Graphic card"
@@ -153,14 +153,14 @@ msgid "Choose resolution and color depth"
 msgstr "Velg oppløsning og fargedybde"
 
 #: ../../Xconfigurator.pm_.c:492
-#, fuzzy, c-format
+#, c-format
 msgid "Graphic card: %s"
-msgstr "Grafikk-kort: %s\n"
+msgstr "Grafikk-kort: %s"
 
 #: ../../Xconfigurator.pm_.c:493
-#, fuzzy, c-format
+#, c-format
 msgid "XFree86 server: %s"
-msgstr "XFree86-tjener: %s\n"
+msgstr "XFree86-tjener: %s"
 
 #: ../../Xconfigurator.pm_.c:502
 msgid "Show all"
@@ -396,30 +396,28 @@ msgstr "Monitor som kan klare 1600x1200 ved 76 Hz"
 
 #: ../../any.pm_.c:15
 msgid "curly"
-msgstr ""
+msgstr "krøllet"
 
 #: ../../any.pm_.c:15
-#, fuzzy
 msgid "default"
-msgstr "Standard"
+msgstr "standard"
 
 #. -PO: names (tie, curly...) have corresponding icons for kdm
 #: ../../any.pm_.c:15
-#, fuzzy
 msgid "tie"
-msgstr "Aktiv"
+msgstr "bånd"
 
 #: ../../any.pm_.c:16
 msgid "brunette"
-msgstr ""
+msgstr "brunette"
 
 #: ../../any.pm_.c:16
 msgid "girl"
-msgstr ""
+msgstr "jente"
 
 #: ../../any.pm_.c:16
 msgid "woman-blond"
-msgstr ""
+msgstr "kvinneblond"
 
 #: ../../diskdrake.pm_.c:17 ../../diskdrake.pm_.c:406
 msgid "Create"
@@ -531,7 +529,7 @@ msgstr "Last igjen"
 
 #: ../../diskdrake.pm_.c:95
 msgid "loopback"
-msgstr ""
+msgstr "loopback"
 
 #: ../../diskdrake.pm_.c:108
 msgid "Empty"
@@ -562,14 +560,13 @@ msgid "Details"
 msgstr "Detaljer"
 
 #: ../../diskdrake.pm_.c:137
-#, fuzzy
 msgid ""
 "You have one big fat partition\n"
 "(generally used by MicroSoft Dos/Windows).\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"Du har en stor fat partisjon.\n"
+"Du har en stor fat partisjon\n"
 "(vanligvis brukt av Microsoft Dos/Windows).\n"
 "Jeg forslår at du først endrer størrelsen på denne partisjonen\n"
 "(klikk på den, klikk så på \"Endre størrelse\")"
@@ -590,10 +587,13 @@ msgid ""
 "enough)\n"
 "at the beginning of the disk"
 msgstr ""
+"Hvis du skal bruke aboot, være nøye med å la det være ledig plass (2048 "
+"sektorer er nok)\n"
+"ved begynnelsen av disken"
 
 #: ../../diskdrake.pm_.c:159
 msgid "Be careful: this operation is dangerous."
-msgstr ""
+msgstr "Vær forsiktig: denne operasjonen er farlig."
 
 # #: ../install_steps_interactive.pm_.c:37
 #: ../../diskdrake.pm_.c:196 ../../install_any.pm_.c:249
@@ -626,9 +626,9 @@ msgid "Start: sector %s\n"
 msgstr "Start: sektor %s\n"
 
 #: ../../diskdrake.pm_.c:225
-#, fuzzy, c-format
+#, c-format
 msgid "Size: %d MB"
-msgstr "Størrelse: %d MB\n"
+msgstr "Størrelse: %d MB"
 
 #: ../../diskdrake.pm_.c:227
 #, c-format
@@ -660,7 +660,7 @@ msgstr "RAID md%s\n"
 #: ../../diskdrake.pm_.c:234
 #, c-format
 msgid "Loopback file(s): %s\n"
-msgstr ""
+msgstr "Loopback-fil(s): %s\n"
 
 #: ../../diskdrake.pm_.c:235
 msgid ""
@@ -688,7 +688,7 @@ msgstr "RAID-disker %s\n"
 #: ../../diskdrake.pm_.c:241
 #, c-format
 msgid "Loopback file name: %s"
-msgstr ""
+msgstr "Loopback filnavn: %s"
 
 #: ../../diskdrake.pm_.c:258
 msgid "Please click on a partition"
@@ -705,9 +705,9 @@ msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Geometri: %s sylindere, %s hoder, %s sektorer\n"
 
 #: ../../diskdrake.pm_.c:266
-#, fuzzy, c-format
+#, c-format
 msgid "Partition table type: %s\n"
-msgstr "Root-partisjon"
+msgstr "Type partisjonstabell: %s\n"
 
 #: ../../diskdrake.pm_.c:267
 #, c-format
@@ -736,7 +736,7 @@ msgstr "Modifiser RAID"
 
 #: ../../diskdrake.pm_.c:285
 msgid "Use for loopback"
-msgstr ""
+msgstr "Bruk for loopback"
 
 #: ../../diskdrake.pm_.c:292
 msgid "Choose action"
@@ -777,10 +777,13 @@ msgid "Use ``Unmount'' first"
 msgstr "Bruk ``Demonter'' først"
 
 #: ../../diskdrake.pm_.c:412 ../../diskdrake.pm_.c:454
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
-msgstr "alle data på denne partisjonen vil gå tapt"
+msgstr ""
+"Etter endring av type på partisjon %s, vil alle data på denne partisjonen "
+"gå\n"
+"tapt"
 
 #: ../../diskdrake.pm_.c:424
 msgid "Continue anyway?"
@@ -803,9 +806,9 @@ msgid "Which partition type do you want?"
 msgstr "Hvilken partisjonstype ønsker du?"
 
 #: ../../diskdrake.pm_.c:474
-#, fuzzy, c-format
+#, c-format
 msgid "Where do you want to mount loopback file %s?"
-msgstr "Hvor vil du montere %s enheten?"
+msgstr "Hvor vil du montere loopback-filen %s?"
 
 #: ../../diskdrake.pm_.c:475
 #, c-format
@@ -817,20 +820,24 @@ msgid ""
 "Can't unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
+"Kan ikke fjerne monteringspunkt da denne partisjonen blir brukt til\n"
+"loopback. Fjern loopback først"
 
 #: ../../diskdrake.pm_.c:499
-#, fuzzy, c-format
+#, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "alle data på denne partisjonen vil gå tapt"
+msgstr ""
+"Etter formatering av partisjon %s, vil alle data på denne partisjonen\n"
+"gå tapt"
 
 #: ../../diskdrake.pm_.c:501
 msgid "Formatting"
 msgstr "Formatering"
 
 #: ../../diskdrake.pm_.c:502
-#, fuzzy, c-format
+#, c-format
 msgid "Formatting loopback file %s"
-msgstr "Formaterer partisjon %s"
+msgstr "Formaterer loopback-fil %s"
 
 #: ../../diskdrake.pm_.c:503 ../../install_steps_interactive.pm_.c:235
 #, c-format
@@ -888,14 +895,15 @@ msgid "Resizing"
 msgstr "Endrer størrelse"
 
 #: ../../diskdrake.pm_.c:576
-#, fuzzy
 msgid "All data on this partition should be backuped"
-msgstr "alle data på denne partisjonen vil gå tapt"
+msgstr "Alle data på denne partisjonen burde sikkerhetskopieres"
 
 #: ../../diskdrake.pm_.c:578
-#, fuzzy, c-format
+#, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "alle data på denne partisjonen vil gå tapt"
+msgstr ""
+"Etter endring av størrelse for partisjon %s, vil alle data på denne\n"
+"partisjonen vil gå tapt"
 
 #: ../../diskdrake.pm_.c:588
 msgid "Choose the new size"
@@ -928,15 +936,15 @@ msgstr "Valg: "
 
 #: ../../diskdrake.pm_.c:719
 msgid "This is partition can't be used for loopback"
-msgstr ""
+msgstr "Denne partisjonen kan ikke brukes for loopback"
 
 #: ../../diskdrake.pm_.c:727
 msgid "Loopback"
-msgstr ""
+msgstr "Loopback"
 
 #: ../../diskdrake.pm_.c:737
 msgid "Loopback file name: "
-msgstr ""
+msgstr "Loopback filnavn: "
 
 #: ../../diskdrake.pm_.c:778 ../../diskdrake.pm_.c:794
 msgid "Select file"
@@ -1014,14 +1022,14 @@ msgid "Mount points must begin with a leading /"
 msgstr "Monteringspunkter må begynne med /"
 
 #: ../../fsedit.pm_.c:244
-#, fuzzy, c-format
+#, c-format
 msgid "There is already a partition with mount point %s\n"
-msgstr "Det finnes allerede en partisjon med monteringspunkt %s"
+msgstr "Det finnes allerede en partisjon med monteringspunkt %s\n"
 
 #: ../../fsedit.pm_.c:252
 #, c-format
 msgid "Circular mounts %s\n"
-msgstr ""
+msgstr "Rund monterer %s\n"
 
 #: ../../fsedit.pm_.c:344
 #, c-format
@@ -1154,7 +1162,6 @@ msgstr ""
 "gi til driveren."
 
 #: ../../help.pm_.c:64
-#, fuzzy
 msgid ""
 "At this point, you may choose what partition(s) to use to install\n"
 "your Linux-Mandrake system if they have been already defined (from a\n"
@@ -1196,17 +1203,17 @@ msgstr ""
 "På dette punktet kan du velge hvilken partisjon(er) som skal brukes til å\n"
 "installere Linux-Mandrake systemet ditt hvis de allerede har blitt definert\n"
 "(Fra en tidligere installasjon av Linux eller fra andre "
-"partisjoneringsverktøy).\n"
-"I andre tilfeller må harddisk-partisjoner definereres. Denne operasjonen\n"
-"innebærer å logisk dele maskinens harddisk-kapasitet inn i separate\n"
-"områder for bruk.\n"
+"partisjoneringsverktøy).I andre tilfeller må harddisk-partisjoner "
+"defineres.\n"
+"Denne operasjonen innebærer å logisk dele maskinens harddisk-kapasitet inn\n"
+"i separate områder for bruk.\n"
 "\n"
 "\n"
-"Hvis du må opprette nye partisjoner, bruk \"Autoallokering\" til å opprette\n"
-"partisjoner automatisk for Linux. Du kan velge disken som skal "
-"partisjoneres\n"
-"ved å klikke på \"hda\" for den første IDE-disken,\n"
-"\"hdb\" for den andre eller \"sda\" for den første SCSI-disken osv.\n"
+"Hvis du må opprette nye partisjoner, bruk \"Autoallokering\" til å opprette "
+"partisjoner automatisk\n"
+"for Linux. Du kan velge disken som skal partisjoneres ved å klikke på\n"
+"\"hda\" for den første IDE-disken, \"hdb\" for den andre eller \"sda\" for\n"
+"den første SCSI-disken osv.\n"
 "\n"
 "\n"
 "To vanlige partisjoner er: root-partisjonen (/) som er punktet hvor\n"
@@ -1218,7 +1225,18 @@ msgstr ""
 "Fordi effekten av denne prosessen vanligvis er ugjenkallelig kan\n"
 "partisjonering være både stressende og skremmende for uerfarne brukere.\n"
 "DiskDrake forenkler prosessen så den ikke trenger å være det. Les\n"
-"dokumentasjonen og ta deg god tid før du begynner."
+"dokumentasjonen og ta deg god tid før du begynner.\n"
+"\n"
+"\n"
+"Du kan nå alle opsjonene ved å bruke tastaturet: naviger gjennom "
+"partisjonene\n"
+"ved å bruk Tab and opp/ned pilene. Når en partisjon er valgt kan du bruke:\n"
+"\n"
+"- Ctrl-c for å opprette en ny partisjon (når en tom partisjon er valgt)\n"
+"\n"
+"- Ctrl-d for å fjerne en partisjon\n"
+"\n"
+"- Ctrl-m for å sette monteringspunktet\n"
 
 #: ../../help.pm_.c:101
 msgid ""
@@ -1461,7 +1479,6 @@ msgid "Help"
 msgstr "Hjelp"
 
 #: ../../help.pm_.c:221
-#, fuzzy
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
 "types require a different setup. Note however that the print\n"
@@ -1492,7 +1509,12 @@ msgid ""
 "for a NetWare printer, except that you need no workgroup information."
 msgstr ""
 "Linux kan håndtere mange typer av skrivere. Hver av disse\n"
-"typene trenger forskjellige oppsett.\n"
+"typene trenger forskjellige oppsett. Merk at skriverspolen bruker\n"
+"'lp' som standard skrivernavn; så du må en skriver med et sådant navn;\n"
+"men du kan oppgi flere navn, delt av '|' tegn, for en skriver. Så,\n"
+"hvis du foretrekker å ha et mere meningsfylt navn så trenger du bare\n"
+"å sette det der først, f.eks: \"Min skriver|lp\".\n"
+"Skriveren som har \"lp\" i navnet sitt vil være standard skriver.\n"
 "\n"
 "\n"
 "Hvis skriveren din er direkte koblet til maskinen din, velg\n"
@@ -1900,9 +1922,8 @@ msgid "Configure timezone"
 msgstr "Konfigurer tidssone"
 
 #: ../../install2.pm_.c:57
-#, fuzzy
 msgid "Configure services"
-msgstr "Konfigurer skriver"
+msgstr "Konfigurer tjenester"
 
 #: ../../install2.pm_.c:58
 msgid "Configure printer"
@@ -1985,14 +2006,14 @@ msgid "Error reading file $f"
 msgstr "Feil ved lesing av fil $f"
 
 #: ../../install_any.pm_.c:762
-#, fuzzy
 msgid ""
 "Linux does not yet fully support ultra dma 66.\n"
 "As a work-around i can make a custom floppy giving access the hard drive on "
 "ide2 and ide3"
 msgstr ""
-"Linux støtter ennå ikke ultra dma 66 HPT fullt ut.\n"
-"Jeg kan lage en diskett som gir tilgang til harddisken på ide2 og ide3"
+"Linux støtter ennå ikke ultra dma 66 fullt ut.\n"
+"Som en løsning kan jeg lage en diskett som gir tilgang til harddisken på "
+"ide2 og ide3"
 
 #: ../../install_any.pm_.c:787
 msgid ""
@@ -2039,9 +2060,9 @@ msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
 #: ../../install_steps.pm_.c:296
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to %s"
-msgstr "Velkommen til Crackers"
+msgstr "Velkommen til %s"
 
 #: ../../install_steps.pm_.c:564
 msgid "No floppy drive available"
@@ -2171,6 +2192,9 @@ msgid ""
 "how many packages you want, ranging from minimal to full \n"
 "installation of each selected groups."
 msgstr ""
+"Nå som du har valgt ønskete grupper, vennligst velg \n"
+"hvor mange pakker du ønsker, fra minimal til full \n"
+"installasjon av hver valgte gruppe."
 
 #: ../../install_steps_gtk.pm_.c:334
 msgid "You will be able to choose more precisely in next step"
@@ -2183,21 +2207,20 @@ msgstr "Dårlig pakke"
 #: ../../install_steps_gtk.pm_.c:420
 #, c-format
 msgid "Importance: %s\n"
-msgstr ""
+msgstr "Viktighet: %s\n"
 
 #: ../../install_steps_gtk.pm_.c:441
-#, fuzzy, c-format
+#, c-format
 msgid "Total size: %d / %d MB"
-msgstr "Total størrelse: "
+msgstr "Total størrelse: %d / %d MB"
 
 #: ../../install_steps_gtk.pm_.c:453
-#, fuzzy
 msgid "The following packages are going to be install/removed"
-msgstr "Følgende pakker vil bli avinstallert"
+msgstr "Følgende pakker vil bli installert/fjernet"
 
 #: ../../install_steps_gtk.pm_.c:462
 msgid "This is a mandatory package, it can't be unselected"
-msgstr ""
+msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
 
 #: ../../install_steps_gtk.pm_.c:486
 msgid "Estimating"
@@ -2213,14 +2236,13 @@ msgid ", %U MB"
 msgstr ", %U MB"
 
 #: ../../install_steps_gtk.pm_.c:538
-#, fuzzy
 msgid "Installation CD /*1"
-msgstr "LILO-installasjon"
+msgstr "Installasjons-CD /*1"
 
 #: ../../install_steps_gtk.pm_.c:540
-#, fuzzy, c-format
+#, c-format
 msgid "Installation CD /*%s"
-msgstr "LILO-installasjon"
+msgstr "Installasjons-CD /*%s"
 
 #: ../../install_steps_gtk.pm_.c:543
 #, c-format
@@ -2243,6 +2265,13 @@ msgid ""
 "press Cancel\n"
 "to avoid installation from this Cd-Rom image."
 msgstr ""
+"Oppdater installasjonsbilde!\n"
+"\n"
+"Spør systemadministratoren din eller start maskinen på nytt for å oppdatere "
+"installasjonsbildet til å inkludere\n"
+"CD-rom bildet merket \"%s\". Trykk Ok hvis bildet har blitt oppdatert eller "
+"trykk Avbryt\n"
+"for å unngå installasjon fra dette CD-rom bildet."
 
 #: ../../install_steps_gtk.pm_.c:620 ../../install_steps_interactive.pm_.c:580
 #: ../../install_steps_interactive.pm_.c:800
@@ -2274,7 +2303,7 @@ msgstr "Hva er tastatur-oppsettet ditt?"
 
 #: ../../install_steps_interactive.pm_.c:81
 msgid "You can choose other languages that will be available after install"
-msgstr ""
+msgstr "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
 
 #: ../../install_steps_interactive.pm_.c:90
 msgid "Install/Upgrade"
@@ -2374,17 +2403,16 @@ msgstr "Velg de partisjonene du ønsker å formatere"
 
 #: ../../install_steps_interactive.pm_.c:222
 msgid "Check bad blocks?"
-msgstr ""
+msgstr "Sjekke dårlige blokker?"
 
 #: ../../install_steps_interactive.pm_.c:230
-#, fuzzy
 msgid "Formatting partitions"
-msgstr "Formaterer partisjon %s"
+msgstr "Formaterer partisjoner"
 
 #: ../../install_steps_interactive.pm_.c:234
 #, c-format
 msgid "Creating and formatting loopback file %s"
-msgstr ""
+msgstr "Oppretter og formaterer loopback-fil %s"
 
 #: ../../install_steps_interactive.pm_.c:237
 msgid "Not enough swap to fulfill installation, please add some"
@@ -2405,6 +2433,8 @@ msgid ""
 "You need %dMB for a full install of the groups you selected.\n"
 "You can go on anyway, but be warned that you won't get all packages"
 msgstr ""
+"Du trenger %dMB for en full installasjon av gruppene du har valgt.\n"
+"Du kan fortsette, men du vil ikke få plass til alle pakkene"
 
 #: ../../install_steps_interactive.pm_.c:298
 msgid "Package Group Selection"
@@ -2598,7 +2628,6 @@ msgid "Bringing up the network"
 msgstr "Henter opp nettverket"
 
 #: ../../install_steps_interactive.pm_.c:496
-#, fuzzy
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -2636,31 +2665,37 @@ msgid ""
 "Altadena California 91001\n"
 "USA"
 msgstr ""
-"Du har nå muligheten til å laste ned programvare for kryptering.\n"
+"Du har nå mulighet til å laste ned programvare for kryptering.\n"
 "\n"
 "ADVARSEL:\n"
 "\n"
-"Pga. forskjellige krav som er tillagt denne programvaren og pålagt\n"
-"av forskjellige myndigheter, bør kunde og/eller sluttbruker av denne\n"
-"programvaren forsikre seg om at lovene i sin/deres jurisdiksjon tillater\n"
-"han/dem å laste ned, ha i besittelse og/eller bruke denne programvaren.\n"
+"Pga. forskjellige krav som er tillagt denne programvaren og pålagt av "
+"forskjellige\n"
+"myndigheter, bør kunde og/eller sluttbruker av denne programvaren forsikre "
+"seg\n"
+"om at lovene i sin/deres jurisdiksjon tillater han/dem å laste ned, ha i "
+"besittelse\n"
+"og/eller bruke denne programvaren.\n"
 "\n"
-"I tillegg skal kunde og/eller sluttbruker spesielt være oppmerksom på å\n"
-"ikke bryte lovene i sin/deres jurisdiksjon. Skulle kunde og/eller\n"
-"sluttbruker ikke respektere bestemmelsene av disse lovene, vil han/de pådra\n"
-"seg alvorlige sanksjoner.\n"
+"I tillegg skal kunde og/eller sluttbruker spesielt være oppmerksom på å ikke "
+"bryte\n"
+"lovene i sin/deres jurisdiksjon. Skulle kunde og/eller sluttbruker ikke\n"
+"respektere bestemmelsene av disse lovene, vil han/de pådra seg alvorlige\n"
+"sanksjoner.\n"
 "\n"
-"Under ingen omstendighet skal Mandrakesoft og eller ikke sine produsenter\n"
-"og/eller leverandører bli holdt ansvarlige for særskilte, indirekte eller\n"
-"tilfeldige skader uansett hva som enn skulle (inkludert, men ikke begrenset\n"
-"til tap av fortjeneste, forretningsavbrudd, tap av kommersiell data og\n"
-"andre pengemessige tap, og endelige ansvarsforhold og erstatninger som skal\n"
-"betales ifølge en rettslig avgjørelse) oppstå ut av bruk, besittelse, eller\n"
-"ene og alene nedlastingen av denne programvaren, som kunde og/eller\n"
-"sluttbruker til slutt kan ha tilgang til etter å ha sagt seg enig i og\n"
-"undertegnet fremviste avtale.\n"
+"Under ingen omstendighet skal Mandrakesoft og eller ikke sine produsenter "
+"og/eller\n"
+"leverandører bli holdt ansvarlige for særskilte, indirekte eller tilfeldige\n"
+"skader uansett hva som enn skulle (inkludert, men ikke begrenset til tap av "
+"fortjeneste,\n"
+"forretningsavbrudd, tap av kommersiell data og andre pengemessige tap, og "
+"endelige\n"
+"ansvarsforhold og erstatninger som skal betales ifølge en rettslig\n"
+"avgjørelse) oppstå ut av bruk, besittelse, eller ene og alene nedlastingen\n"
+"av denne programvaren, som kunde og/eller sluttbruker til slutt kan ha\n"
+"tilgang til etter å ha sagt seg enig i og undertegnet fremviste avtale.\n"
 "\n"
-"For spørsmål angående denne avtalen, vennligst kontakt\n"
+"For spørsmål angående denne avtalen, vennligst kontakt \n"
 "Mandrakesoft, Inc.\n"
 "2400 N. Lincoln Avenue Suite 243\n"
 "Altadena California 91001\n"
@@ -2803,7 +2838,7 @@ msgstr "Skall"
 #: ../../install_steps_interactive.pm_.c:634
 #: ../../standalone/adduserdrake_.c:47
 msgid "Icon"
-msgstr ""
+msgstr "Ikon"
 
 #: ../../install_steps_interactive.pm_.c:644
 #: ../../standalone/adduserdrake_.c:57
@@ -2901,7 +2936,7 @@ msgstr "Oppstartsenhet"
 
 #: ../../install_steps_interactive.pm_.c:721
 msgid "LBA (doesn't work on old BIOSes)"
-msgstr ""
+msgstr "LBA (virker ikke på gamle BIOS'er)"
 
 #: ../../install_steps_interactive.pm_.c:722
 msgid "Compact"
@@ -3036,42 +3071,36 @@ msgid "Installation of LILO failed. The following error occured:"
 msgstr "Installasjon av LILO mislykket. Følgende feil oppsto:"
 
 #: ../../install_steps_interactive.pm_.c:840
-#, fuzzy
 msgid "Do you want to use SILO?"
-msgstr "Ønsker du å bruke LILO?"
+msgstr "Ønsker du å bruke SILO?"
 
 #: ../../install_steps_interactive.pm_.c:851
-#, fuzzy
 msgid "SILO main options"
-msgstr "LILO hovedopsjoner"
+msgstr "SILO hovedopsjoner"
 
 #: ../../install_steps_interactive.pm_.c:864
-#, fuzzy
 msgid ""
 "Here are the following entries in SILO.\n"
 "You can add some more or change the existing ones."
 msgstr ""
-"Her er følgende oppføringer i LILO.\n"
+"Her er følgende oppføringer i SILO.\n"
 "Du kan legge til flere eller endre de eksisterende."
 
 #: ../../install_steps_interactive.pm_.c:893
-#, fuzzy
 msgid "Partition"
-msgstr "Root-partisjon"
+msgstr "Partisjon"
 
 #: ../../install_steps_interactive.pm_.c:928
-#, fuzzy
 msgid "Installation of SILO failed. The following error occured:"
-msgstr "Installasjon av LILO mislykket. Følgende feil oppsto:"
+msgstr "Installasjon av SILO mislykket. Følgende feil oppsto:"
 
 #: ../../install_steps_interactive.pm_.c:938
 msgid "Preparing bootloader"
 msgstr "Klargjør oppstartslaster"
 
 #: ../../install_steps_interactive.pm_.c:946
-#, fuzzy
 msgid "Do you want to use aboot?"
-msgstr "Ønsker du å bruke LILO?"
+msgstr "Ønsker du å bruke aboot?"
 
 #: ../../install_steps_interactive.pm_.c:962
 msgid "Proxies configuration"
@@ -3144,7 +3173,7 @@ msgstr "Fjernbart media automontering"
 
 #: ../../install_steps_interactive.pm_.c:1005
 msgid "Clean /tmp at each boot"
-msgstr ""
+msgstr "Tøm /tmp ved hver oppstart"
 
 #: ../../install_steps_interactive.pm_.c:1008
 msgid "Enable num lock at startup"
@@ -3155,9 +3184,8 @@ msgid "Give the ram size in Mb"
 msgstr "Oppgi ram-størrelsen i Mb"
 
 #: ../../install_steps_interactive.pm_.c:1013
-#, fuzzy
 msgid "Can't use supermount in high security level"
-msgstr "Setter sikkerhetsnivå"
+msgstr "Kan ikke bruke supermount i høyt sikkerhetsnivå"
 
 #: ../../install_steps_interactive.pm_.c:1040
 #: ../../install_steps_interactive.pm_.c:1162
@@ -3428,7 +3456,7 @@ msgstr "Sveisisk (tysk oppsett)"
 
 #: ../../keyboard.pm_.c:112
 msgid "German (no dead keys)"
-msgstr ""
+msgstr "Tysk (ingen døde taster)"
 
 #: ../../keyboard.pm_.c:113
 msgid "Danish"
@@ -3491,14 +3519,12 @@ msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Litauisk \"phonétic\" QWERTY"
 
 #: ../../keyboard.pm_.c:133
-#, fuzzy
 msgid "Polish (qwerty layout)"
-msgstr "Sveisisk (tysk oppsett)"
+msgstr "Polsk (qwerty oppsett)"
 
 #: ../../keyboard.pm_.c:134
-#, fuzzy
 msgid "Polish (qwertz layout)"
-msgstr "Sveisisk (tysk oppsett)"
+msgstr "Polsk (qwertz oppsett)"
 
 #: ../../keyboard.pm_.c:135
 msgid "Portuguese"
@@ -3576,43 +3602,36 @@ msgstr ""
 "\n"
 
 #: ../../mouse.pm_.c:21
-#, fuzzy
 msgid "Sun - Mouse"
-msgstr "USB mus"
+msgstr "Sun-mus"
 
 #: ../../mouse.pm_.c:23
-#, fuzzy
 msgid "Apple ADB Mouse"
-msgstr "ATI Bus Mouse"
+msgstr "Apple ADB mus"
 
 #: ../../mouse.pm_.c:24
-#, fuzzy
 msgid "Apple ADB Mouse (2 Buttons)"
-msgstr "USB mus (3 knapper eller mer)"
+msgstr "Apple ADB mus (2 knapper)"
 
 #: ../../mouse.pm_.c:25
-#, fuzzy
 msgid "Apple ADB Mouse (3+ Buttons)"
-msgstr "USB mus (3 knapper eller mer)"
+msgstr "Apple ADB mus (3+ knapper)"
 
 #: ../../mouse.pm_.c:26
-#, fuzzy
 msgid "Apple USB Mouse"
-msgstr "USB mus"
+msgstr "Apple USB mus"
 
 #: ../../mouse.pm_.c:27
-#, fuzzy
 msgid "Apple USB Mouse (2 Buttons)"
-msgstr "USB mus (3 knapper eller mer)"
+msgstr "Apple USB mus (2 knapper)"
 
 #: ../../mouse.pm_.c:28
-#, fuzzy
 msgid "Apple USB Mouse (3+ Buttons)"
-msgstr "USB mus (3 knapper eller mer)"
+msgstr "Apple USB mus (3+ knapper)"
 
 #: ../../mouse.pm_.c:30
 msgid "Generic Mouse (PS/2)"
-msgstr "Generic mus (PS/2)"
+msgstr "Generisk mus (PS/2)"
 
 #: ../../mouse.pm_.c:31
 msgid "Logitech MouseMan/FirstMouse (ps/2)"
@@ -3620,7 +3639,7 @@ msgstr "Logitech MouseMan/FirstMouse (ps/2)"
 
 #: ../../mouse.pm_.c:32
 msgid "Generic 3 Button Mouse (PS/2)"
-msgstr "Generic 3-knappers mus (PS/2)"
+msgstr "Generisk 3-knappers mus (PS/2)"
 
 #: ../../mouse.pm_.c:33
 msgid "ALPS GlidePoint (PS/2)"
@@ -3765,54 +3784,51 @@ msgstr "Feil ved skriving til fil %s"
 
 #: ../../pkgs.pm_.c:19
 msgid "mandatory"
-msgstr ""
+msgstr "forvalgt"
 
 #: ../../pkgs.pm_.c:20
 msgid "must have"
-msgstr ""
+msgstr "må ha"
 
 #: ../../pkgs.pm_.c:21
 msgid "important"
-msgstr ""
+msgstr "viktig"
 
 #: ../../pkgs.pm_.c:23
 msgid "very nice"
-msgstr ""
+msgstr "veldig bra"
 
 #: ../../pkgs.pm_.c:24
-#, fuzzy
 msgid "nice"
-msgstr "enhet"
+msgstr "bra"
 
 #: ../../pkgs.pm_.c:25 ../../pkgs.pm_.c:26
-#, fuzzy
 msgid "interesting"
-msgstr "endrer størrelse"
+msgstr "interessant"
 
 #: ../../pkgs.pm_.c:27 ../../pkgs.pm_.c:28
-#, fuzzy
 msgid "maybe"
-msgstr "Bilde"
+msgstr "kanskje"
 
 #: ../../pkgs.pm_.c:29
 msgid "useless"
-msgstr ""
+msgstr "ubrukbar"
 
 #: ../../pkgs.pm_.c:30
 msgid "garbage"
-msgstr ""
+msgstr "søppel"
 
 #: ../../pkgs.pm_.c:32
 msgid "i18n (important)"
-msgstr ""
+msgstr "i18n (viktig)"
 
 #: ../../pkgs.pm_.c:33
 msgid "i18n (very nice)"
-msgstr ""
+msgstr "i18n (veldig bra)"
 
 #: ../../pkgs.pm_.c:34
 msgid "i18n (nice)"
-msgstr ""
+msgstr "i18n (bra)"
 
 #: ../../placeholder.pm_.c:5
 msgid "Show less"
@@ -3856,12 +3872,11 @@ msgid "Local Printer Device"
 msgstr "Lokal skriverenhet"
 
 #: ../../printerdrake.pm_.c:86
-#, fuzzy
 msgid ""
 "What device is your printer connected to \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
-"Hvilken enhet er skriveren din koblet til  \n"
+"Hvilken enhet er skriveren din koblet til \n"
 "(merk at /dev/lp0 er det samme som LPT1:)?\n"
 
 #: ../../printerdrake.pm_.c:88
@@ -3987,11 +4002,11 @@ msgstr "Kan ikke skrive fil $fil"
 
 #: ../../raid.pm_.c:131
 msgid "mkraid failed"
-msgstr ""
+msgstr "mkraid mislykket"
 
 #: ../../raid.pm_.c:131
 msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr ""
+msgstr "mkraid mislykket (kanskje raidtool mangler?)"
 
 #: ../../raid.pm_.c:145
 #, c-format
@@ -4000,19 +4015,24 @@ msgstr "Ikke nok partisjoner for RAID nivå %d\n"
 
 #: ../../services.pm_.c:14
 msgid "Anacron a periodic command scheduler."
-msgstr ""
+msgstr "Anacron en periodisk kommandoplanlegger."
 
 #: ../../services.pm_.c:15
 msgid ""
 "apmd is used for monitoring batery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
 msgstr ""
+"apmd blir brukt til overvåkning av batteristatus og logging av dette via "
+"syslog.\n"
+"Kan også brukes til å slå av maskinen når batteriet er dårlig."
 
 #: ../../services.pm_.c:17
 msgid ""
 "Runs commands scheduled by the at command at the time specified when\n"
 "at was run, and runs batch commands when the load average is low enough."
 msgstr ""
+"Kjører kommandoer planlagt av at kommandoen ved tidspunkt spesifisert når\n"
+"at ble kjørt, og kjører batch kommandoer når lastingsmengden er lav nok."
 
 #: ../../services.pm_.c:19
 msgid ""
@@ -4021,6 +4041,10 @@ msgid ""
 "basic\n"
 "UNIX cron, including better security and more powerful configuration options."
 msgstr ""
+"cron er et standard UNIX-program som kjører brukerspesifiserte programmer\n"
+"ved periodisk planlagte tider. vixie cron gir flere funksjoner til vanlig "
+"UNIX cron,\n"
+"inkludert bedre sikkerhet og mere kraftfulle konfigurasjonsopsjoner."
 
 #: ../../services.pm_.c:22
 msgid ""
@@ -4029,12 +4053,18 @@ msgid ""
 "operations,\n"
 "and includes support for pop-up menus on the console."
 msgstr ""
+"GPM gir musestøtte til tekstbaserte Linux applikasjoner som\n"
+"Midnight Commander. Den lar også musebaserte konsoller foreta klipp-og-lim "
+"operasjoner,\n"
+"og inkluderer støtte for pop-up menyer i konsollen."
 
 #: ../../services.pm_.c:25
 msgid ""
 "Apache is a World Wide Web server.  It is used to serve HTML files\n"
 "and CGI."
 msgstr ""
+"Apache er en World Wide Web tjener. Den blir brukt til å tjene HTML-filer\n"
+"og CGI."
 
 #: ../../services.pm_.c:27
 msgid ""
@@ -4045,6 +4075,12 @@ msgid ""
 "disables\n"
 "all of the services it is responsible for."
 msgstr ""
+"Internett supertjenerdaemonen (vanligvis kalt inetd) starter\n"
+"varierende Internett-tjenester ettersom det trengs. Den er ansvarlig for å "
+"starte\n"
+"mange tjenester, inkludert telnet, ftp, rsh, og rlogin. Stopping av inetd "
+"stopper\n"
+"alle tjenestene den er ansvarlig for."
 
 #: ../../services.pm_.c:31
 msgid ""
@@ -4052,30 +4088,42 @@ msgid ""
 "/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.\n"
 "You should leave this enabled for most machines."
 msgstr ""
+"Denne pakken laster det valgte tastaturkartet som er satt i\n"
+"/etc/sysconfig/keyboard. Dette kan bli valgt ved bruk av kbdconfig "
+"verktøyet.\n"
+"For de fleste maskiner bør dette være aktivert."
 
 #: ../../services.pm_.c:34
 msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
+"lpd er skriverdaemonen som behøves for at lpr skal virke ordentlig. Den er\n"
+"i hovedsak en tjener som fordeler utskriftsjobber til skriveren(e)."
 
 #: ../../services.pm_.c:36
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve\n"
 "host names to IP addresses."
 msgstr ""
+"named (BIND) er en Domain Name Server (DNS) som brukes til å bestemme\n"
+"vertsnavn til IP-adresser."
 
 #: ../../services.pm_.c:38
 msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
+"Monterer og demonterer alle Network File System (NFS), SMB (Lan\n"
+"Manager/Windows), og NCP (NetWare) monteringspunkter."
 
 #: ../../services.pm_.c:40
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
 msgstr ""
+"Aktiverer/deaktiverer alle nettverksgrensesnitt konfigurert til å starte\n"
+"ved oppstart."
 
 #: ../../services.pm_.c:42
 msgid ""
@@ -4083,12 +4131,17 @@ msgid ""
 "This service provides NFS server functionality, which is configured via the\n"
 "/etc/exports file."
 msgstr ""
+"NFS er en populær protokoll for fildeling over TCP/IP nettverk.\n"
+"Denne tjenesten tilbyr NFS-tjener funksjonalitet som er konfigurert via\n"
+"/etc/exports filen."
 
 #: ../../services.pm_.c:45
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
 "networks. This service provides NFS file locking functionality."
 msgstr ""
+"NFS er en populær protokoll for fildeling over TCP/IP nettverk.\n"
+"Denne tjenesten tilbyr NFS fillåsing funksjonalitet."
 
 #: ../../services.pm_.c:47
 msgid ""
@@ -4097,6 +4150,10 @@ msgid ""
 "have\n"
 "it installed on machines that don't need it."
 msgstr ""
+"PCMCIA støtte er vanligvis støtte for ting som ethernet og\n"
+"modem i bærbare PC'er. Den vil ikke starte uten konfigurasjon så det er "
+"trygt\n"
+"å ha denne installert på maskiner som ikke trenger det."
 
 #: ../../services.pm_.c:50
 msgid ""
@@ -4105,18 +4162,25 @@ msgid ""
 "machines\n"
 "which act as servers for protocols which make use of the RPC mechanism."
 msgstr ""
+"Portmapper håndterer RPC-tilknytninger, som brukes av protokoller\n"
+"som NFS og NIS. Portmap-tjeneren må kjøres på maskiner som brukes som\n"
+"tjenere for protokoller som bruker RPC-mekanismen."
 
 #: ../../services.pm_.c:53
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that\n"
 "moves mail from one machine to another."
 msgstr ""
+"Postfix er en posttransporteringsagent, som er et program som\n"
+"flytter post fra en maskin til en annen."
 
 #: ../../services.pm_.c:55
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
 msgstr ""
+"Lagrer og gjenoppretter system entropy pool for høyere kvalitet på\n"
+"tilfeldig nummergenerering."
 
 #: ../../services.pm_.c:57
 msgid ""
@@ -4124,53 +4188,61 @@ msgid ""
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
 "routing protocols are needed for complex networks."
 msgstr ""
+"Den rutete daemonen tillater automatisk oppdatering av IP rutertabell via\n"
+"RIP-protokollen. Mens RIP er mye brukt på små nettverk, trengs mere "
+"komplekse\n"
+"rutingprotokoller for komplekse nettverk."
 
 #: ../../services.pm_.c:60
 msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
 "performance metrics for any machine on that network."
 msgstr ""
+"rstat protokollen lar brukere på et nettverk finne ytelses-\n"
+"metrikser for alle maskinene på nettverket."
 
 #: ../../services.pm_.c:62
 msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
 "logged in on other responding machines."
 msgstr ""
+"rusers protokollen lar brukere på et nettverk identifisere hvem som\n"
+"er logget inn på andre maskiner."
 
 #: ../../services.pm_.c:64
 msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
 "logged into a machine running the rwho daemon (similiar to finger)."
 msgstr ""
+"rwho protokollen lar fjernbrukere motta en liste over alle brukerne\n"
+"som er logget på en maskin som kjører rwho-daemonen (lik finger)."
 
 #: ../../services.pm_.c:66
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
 "to various system log files.  It is a good idea to always run syslog."
 msgstr ""
+"Syslog er en fasilitet som mange daemoner bruker til å logge beskjeder\n"
+"til forskjellige systemloggfiler. Det er en god ide å alltid kjøre syslog."
 
 #: ../../services.pm_.c:68
 msgid "This startup script try to load your modules for your usb mouse."
-msgstr ""
+msgstr "Dette oppstartsscriptet prøver å laste modulene for usb-musen din."
 
 #: ../../services.pm_.c:69
 msgid "Starts and stops the X Font Server at boot time and shutdown."
 msgstr ""
+"Starter og stopper X-font tjeneren ved oppstart og stenging av maskinen."
 
 #: ../../services.pm_.c:92
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Velg hvilke tjenester som skal startes automatisk ved oppstart"
 
-# NOTE: this message will be displayed by lilo at boot time; that is
-# using the BIOS font; that means cp437 charset on 99.99% of PC computers
-# out there. It is then suggested that for non latin languages an ascii
-# transliteration be used; or maybe the english text be used; as it is best
-# When possible cp437 accentuated letters can be used too.
-#
-# '\206' is 'å' (aring) in cp437 encoding
+# NOTE: this message will be displayed by SILO at boot time; that is
+# only 7bit ascii is available
 #
 #: ../../silo.pm_.c:115
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Welcome to SILO the operating system chooser!\n"
 "\n"
@@ -4180,11 +4252,11 @@ msgid ""
 "wait %d seconds for default boot.\n"
 "\n"
 msgstr ""
-"Velkommen til LILO, operativsystem-velgeren!\n"
+"Velkommen til SILO, operativsystem-velgeren!\n"
 "\n"
-"For † se mulige valg, trykk <TAB>\n"
+"For aa se mulige valg, trykk <TAB>\n"
 "\n"
-"For † laste en av disse, skriv inn navnet og trykk <ENTER>\n"
+"For aa laste en av disse, skriv inn navnet og trykk <ENTER>\n"
 "eller vent %d sekunder for standard oppstart.\n"
 "\n"
 
@@ -4474,106 +4546,14 @@ msgstr "Finner tillatelser"
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
 
-#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
-#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
-
-#~ msgid "Going to install %d MB. You can choose to install more programs"
-#~ msgstr ""
-#~ "%d MB vil bli installert. Du kan velge å installere flere programmer"
-
-#~ msgid "Bad kickstart file %s (failed %s)"
-#~ msgstr "Dårlig kickstart-fil %s (mislykket %s)"
-
-#~ msgid "Size: %s MB"
-#~ msgstr "Størrelse: %s MB"
-
-#, fuzzy
-#~ msgid "US Keyboard"
-#~ msgstr "US-tastatur"
-
-#~ msgid "resizing"
-#~ msgstr "endrer størrelse"
-
-#~ msgid "formatting"
-#~ msgstr "formatering"
-
-#~ msgid "changing type of"
-#~ msgstr "endrer type av"
-
-#~ msgid "After %s partition %s,"
-#~ msgstr "Etter %s partisjon %s,"
-
-#~ msgid "linear"
-#~ msgstr "lineær"
-
-#~ msgid "Linear (needed for some SCSI drives)"
-#~ msgstr "Lineær (behøves av noen SCSI-disker)"
-
-#~ msgid "beginner"
-#~ msgstr "nybegynner"
-
-#~ msgid "developer"
-#~ msgstr "utvikler"
-
-#~ msgid "expert"
-#~ msgstr "ekspert"
-
-#~ msgid "server"
-#~ msgstr "tjener"
-
-#~ msgid "Printer"
-#~ msgstr "Skriver"
-
-#~ msgid "Would you like to configure a printer?"
-#~ msgstr "Ønsker du å konfigurere en skriver?"
-
-#~ msgid "Local Printer Options"
-#~ msgstr "Opsjoner for lokal skriver"
-
 #~ msgid ""
-#~ "Every print queue (which print jobs are directed to) needs a\n"
-#~ "name (often lp) and a spool directory associated with it. What\n"
-#~ "name and directory should be used for this queue?"
+#~ "Test page(s) have been sent to the printer daemon.\n"
+#~ "This may take a little time before printer start.\n"
+#~ "Does it work properly?"
 #~ msgstr ""
-#~ "Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
-#~ "(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
-#~ "navn og katalog skal brukes for denne køen?"
-
-#~ msgid "Name of queue:"
-#~ msgstr "Køens navn:"
-
-#~ msgid "Spool directory:"
-#~ msgstr "Spolingskatalog:"
-
-#~ msgid "Select Printer Connection"
-#~ msgstr "Velg skrivertilkobling"
-
-#~ msgid "How is the printer connected?"
-#~ msgstr "Hvordan er skriveren tilkoblet?"
-
-#~ msgid "Printer options"
-#~ msgstr "Opsjoner for skriver"
-
-#~ msgid "Paper Size"
-#~ msgstr "Papirstørrelse"
-
-#~ msgid "Eject page after job?"
-#~ msgstr "Kjør ut side etter jobb?"
-
-#~ msgid "Fix stair-stepping text?"
-#~ msgstr "Fikse trappestegs-tekst?"
-
-#~ msgid "Uniprint driver options"
-#~ msgstr "Opsjoner uniprint-driver"
-
-#~ msgid "Color depth options"
-#~ msgstr "Opsjoner fargedybde"
-
-#~ msgid "Do you want to test printing?"
-#~ msgstr "Vil du teste utskrift?"
-
-#~ msgid "Printing test page(s)..."
-#~ msgstr "Skriver ut testside(r)..."
+#~ "Testsiden(e) har blitt sendt til skriver-daemonen.\n"
+#~ "Det kan ta litt tid før skriveren starter.\n"
+#~ "Virker det ordentlig?"
 
 #~ msgid ""
 #~ "Test page(s) have been sent to the printer daemon.\n"
@@ -4590,11 +4570,84 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ "\n"
 #~ "Virker det ordentlig?"
 
+#~ msgid "Printing test page(s)..."
+#~ msgstr "Skriver ut testside(r)..."
+
+#~ msgid "Do you want to test printing?"
+#~ msgstr "Vil du teste utskrift?"
+
+#~ msgid "Color depth options"
+#~ msgstr "Opsjoner fargedybde"
+
+#~ msgid "Uniprint driver options"
+#~ msgstr "Opsjoner uniprint-driver"
+
+#~ msgid "Fix stair-stepping text?"
+#~ msgstr "Fikse trappestegs-tekst?"
+
+#~ msgid "Eject page after job?"
+#~ msgstr "Kjør ut side etter jobb?"
+
+#~ msgid "Paper Size"
+#~ msgstr "Papirstørrelse"
+
+#~ msgid "Printer options"
+#~ msgstr "Opsjoner for skriver"
+
+#~ msgid "How is the printer connected?"
+#~ msgstr "Hvordan er skriveren tilkoblet?"
+
+#~ msgid "Select Printer Connection"
+#~ msgstr "Velg skrivertilkobling"
+
+#~ msgid "Spool directory:"
+#~ msgstr "Spolingskatalog:"
+
+#~ msgid "Name of queue:"
+#~ msgstr "Køens navn:"
+
 #~ msgid ""
-#~ "Test page(s) have been sent to the printer daemon.\n"
-#~ "This may take a little time before printer start.\n"
-#~ "Does it work properly?"
+#~ "Every print queue (which print jobs are directed to) needs a\n"
+#~ "name (often lp) and a spool directory associated with it. What\n"
+#~ "name and directory should be used for this queue?"
 #~ msgstr ""
-#~ "Testsiden(e) har blitt sendt til skriver-daemonen.\n"
-#~ "Det kan ta litt tid før skriveren starter.\n"
-#~ "Virker det ordentlig?"
+#~ "Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
+#~ "(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
+#~ "navn og katalog skal brukes for denne køen?"
+
+#~ msgid "Local Printer Options"
+#~ msgstr "Opsjoner for lokal skriver"
+
+#~ msgid "Would you like to configure a printer?"
+#~ msgstr "Ønsker du å konfigurere en skriver?"
+
+#~ msgid "Printer"
+#~ msgstr "Skriver"
+
+#~ msgid "Linear (needed for some SCSI drives)"
+#~ msgstr "Lineær (behøves av noen SCSI-disker)"
+
+#~ msgid "linear"
+#~ msgstr "lineær"
+
+#~ msgid "After %s partition %s,"
+#~ msgstr "Etter %s partisjon %s,"
+
+#~ msgid "changing type of"
+#~ msgstr "endrer type av"
+
+#~ msgid "formatting"
+#~ msgstr "formatering"
+
+#~ msgid "resizing"
+#~ msgstr "endrer størrelse"
+
+#~ msgid "Bad kickstart file %s (failed %s)"
+#~ msgstr "Dårlig kickstart-fil %s (mislykket %s)"
+
+#~ msgid "Going to install %d MB. You can choose to install more programs"
+#~ msgstr ""
+#~ "%d MB vil bli installert. Du kan velge å installere flere programmer"
+
+#~ msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
+#~ msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
