@@ -1,3 +1,2597 @@
+2003/06/06  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/Makefile: we're in cooker now
+
+	* share/logo-mandrake.png: cooker
+
+2003/06/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* help.pm: "Country" -> "Country" . " / Region" in a few places still
+	missing that change
+
+2003/06/06  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: stricter regexp when looking /dev/xxx otherwise it is used also
+	for nfs names
+	and causes havoc
+
+	* standalone/fileshareset: fileshareset doesn't use MDK::Common
+
+	* any.pm: perl_checker compliance
+
+	* fsedit.pm: fix computeSize which took into account suggested partitions
+	on another drives
+	(which is especially bad for LVMs)
+
+	* network/nfs.pm: 
+	  - handle spaces in exported directories
+	  - simplify using --no-headers when calling showmount
+
+	* common.pm, ugtk2.pm: ensure N() is not called before ugtk2 is
+	initialised, otherwise
+	the gettext is not forced to utf8
+
+	* diskdrake/interactive.pm: fix typos + perl_checker fixes
+
+	* standalone.pm: don't use N() so early
+	(beware, this removes translation, some translate() calls must be
+	added!)
+
+2003/06/05  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* Makefile: fix install crashed X server because /usr/bin/true was no more
+	available :/
+
+2003/06/05  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/Makefile.common: fix build with new gcc
+
+	* fs.pm: make perl_checker a happy bot
+	don't use description of fstab options from manpage mount(8), inline
+	them in the source
+
+2003/06/05  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Bug 3647 - Chinese translations.  More
+	perl_checker fixes.
+
+2003/06/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/v4l.pm: support more tuners and tv cards
+
+2003/06/04  François Pons  <fpons at mandrakesoft.com>
+
+	* rescue/list: updated with rpm 4.2.
+
+	* tools/updatehdlist: update only RPMS1 and RPMS2 to keep other package in
+	RPMS3.
+
+	* tools/syncrpms: avoid updating kernel-BOOT (as kernel-BOOT of cooker is
+	pure shit).
+
+	* install_steps_gtk.pm: allow X server to use :9 (:1 seems to not working
+	?) and disable access control
+	(no clients can connect by default).
+
+	* pkgs.pm: updated for newer perl-URPM (0.90 series).
+
+2003/06/04  gbeauchesne
+
+	* mdk-stage1/dietlibc/include/termio.h,
+	mdk-stage1/dietlibc/i386/sendmsg.S, mdk-stage1/dietlibc/i386/asin.S,
+	mdk-stage1/dietlibc/libpthread/pthread_flockfile.c,
+	mdk-stage1/dietlibc/ia64/__longjmp.S, mdk-stage1/dietlibc/i386/strcmp.S,
+	mdk-stage1/dietlibc/libcruft/scan_ulong.c,
+	mdk-stage1/dietlibc/libdl/_dl_relocate.c,
+	mdk-stage1/dietlibc/i386/stpcpy.S, mdk-stage1/dietlibc/i386/ltostr.S,
+	mdk-stage1/dietlibc/libugly/utent.c, mdk-stage1/dietlibc/i386/connect.S,
+	mdk-stage1/dietlibc/i386/atan2.S,
+	mdk-stage1/dietlibc/syscalls.s/mlock.S,
+	mdk-stage1/dietlibc/ppc/syscalls.h, mdk-stage1/dietlibc/lib/__ptrace.c,
+	mdk-stage1/dietlibc/libstdio/scanf.c, mdk-stage1/dietlibc/i386/memcmp.S,
+	mdk-stage1/dietlibc/include/stdarg-cruft.h,
+	mdk-stage1/dietlibc/i386/fmod.S, mdk-stage1/dietlibc/i386/strrchr.S,
+	mdk-stage1/dietlibc/libcruft/bzero.c,
+	mdk-stage1/dietlibc/syscalls.s/sendfile64.S,
+	mdk-stage1/dietlibc/libugly/iconv.c,
+	mdk-stage1/dietlibc/libugly/getprotobyname.c,
+	mdk-stage1/dietlibc/include/asm/types.h,
+	mdk-stage1/dietlibc/i386/accept.S,
+	mdk-stage1/dietlibc/include/sys/fsuid.h,
+	mdk-stage1/dietlibc/syscalls.s/ftruncate64.S,
+	mdk-stage1/dietlibc/x86_64/socket.S,
+	mdk-stage1/dietlibc/libcruft/gethostbyaddr2_r.c,
+	mdk-stage1/dietlibc/lib/llabs.c, mdk-stage1/dietlibc/i386/memccpy.S,
+	mdk-stage1/dietlibc/libugly/getservbyname.c,
+	mdk-stage1/dietlibc/include/write12.h, mdk-stage1/dietlibc/i386/bind.S,
+	mdk-stage1/dietlibc/x86_64/listen.S,
+	mdk-stage1/dietlibc/alpha/errlist.S,
+	mdk-stage1/dietlibc/libcruft/setlocale.c,
+	mdk-stage1/dietlibc/x86_64/msgctl.S,
+	mdk-stage1/dietlibc/syscalls.s/setfsuid.S,
+	mdk-stage1/dietlibc/lib/tcflow.c,
+	mdk-stage1/dietlibc/syscalls.s/geteuid32.S,
+	mdk-stage1/dietlibc/libcruft/scandir.c,
+	mdk-stage1/dietlibc/syscalls.s/getuid32.S,
+	mdk-stage1/dietlibc/include/asm/ia64-sigcontext.h,
+	mdk-stage1/dietlibc/libcruft/getusershell.c,
+	mdk-stage1/dietlibc/i386/floor.S,
+	mdk-stage1/dietlibc/syscalls.s/alarm.S,
+	mdk-stage1/dietlibc/ia64/utime.S, mdk-stage1/dietlibc/x86_64/mmap.S,
+	mdk-stage1/dietlibc/ia64/README, mdk-stage1/dietlibc/libcruft/tmpnam.c,
+	mdk-stage1/dietlibc/libm/acosh.c,
+	mdk-stage1/dietlibc/libcruft/alphasort64.c,
+	mdk-stage1/dietlibc/syscalls.s/fchown32.S,
+	mdk-stage1/dietlibc/libcruft/getopt_long_only.c,
+	mdk-stage1/dietlibc/syscalls.s/munlock.S,
+	mdk-stage1/dietlibc/ppc/clone.S, mdk-stage1/dietlibc/libcruft/pwbuf.c,
+	mdk-stage1/dietlibc/i386/getpeername.S,
+	mdk-stage1/dietlibc/ia64/clone.S, mdk-stage1/dietlibc/x86_64/setjmp.S,
+	mdk-stage1/dietlibc/libpthread/pthread_fgetc.c,
+	mdk-stage1/dietlibc/ia64/listen.S,
+	mdk-stage1/dietlibc/include/net/if_ether.h,
+	mdk-stage1/dietlibc/lib/strtof.c,
+	mdk-stage1/dietlibc/x86_64/Makefile.add,
+	mdk-stage1/dietlibc/lib/errlistu.c,
+	mdk-stage1/dietlibc/libstdio/vfscanf.c,
+	mdk-stage1/dietlibc/syscalls.s/create_module.S,
+	mdk-stage1/dietlibc/alpha/syscalls.h,
+	mdk-stage1/dietlibc/x86_64/unified.S, mdk-stage1/dietlibc/lib/write12.c,
+	mdk-stage1/dietlibc/lib/__stime.c,
+	mdk-stage1/dietlibc/include/netpacket/packet.h,
+	mdk-stage1/dietlibc/i386/poly.S, mdk-stage1/dietlibc/libugly/netent.c,
+	mdk-stage1/dietlibc/ia64/msgrcv.S,
+	mdk-stage1/dietlibc/libcruft/seteuid.c,
+	mdk-stage1/dietlibc/syscalls.s/delete_module.S,
+	mdk-stage1/dietlibc/ia64/pipe.S, mdk-stage1/dietlibc/libcruft/setegid.c,
+	mdk-stage1/dietlibc/libpthread/pthread_getschedparam.c,
+	mdk-stage1/dietlibc/include/linux/nfs.h,
+	mdk-stage1/dietlibc/libugly/gai_strerror.c,
+	mdk-stage1/dietlibc/i386/rint.S,
+	mdk-stage1/dietlibc/include/asm/arm-sigcontext.h,
+	mdk-stage1/dietlibc/lib/ipv6constants.c,
+	mdk-stage1/dietlibc/lib/sigpending.c,
+	mdk-stage1/dietlibc/i386/syscalls.h,
+	mdk-stage1/dietlibc/include/float.h, mdk-stage1/dietlibc/i386/hypot.S,
+	mdk-stage1/dietlibc/i386/cosh.S, mdk-stage1/dietlibc/x86_64/semop.S,
+	mdk-stage1/dietlibc/libugly/strndup.c, mdk-stage1/dietlibc/libm/erf.c,
+	mdk-stage1/dietlibc/lib/memmem.c,
+	mdk-stage1/dietlibc/syscalls.s/setregid32.S,
+	mdk-stage1/dietlibc/libcruft/tempnam.c,
+	mdk-stage1/dietlibc/libcompat/syscall.S,
+	mdk-stage1/dietlibc/x86_64/recvfrom.S,
+	mdk-stage1/dietlibc/lib/strtold.c,
+	mdk-stage1/dietlibc/syscalls.s/setfsgid32.S,
+	mdk-stage1/dietlibc/libcruft/herror.c,
+	mdk-stage1/dietlibc/libcruft/bcopy.c,
+	mdk-stage1/dietlibc/libcruft/__parse_ws.c,
+	mdk-stage1/dietlibc/i386/sendto.S, mdk-stage1/dietlibc/ia64/sendmsg.S,
+	mdk-stage1/dietlibc/i386/sleep.S, mdk-stage1/dietlibc/i386/shutdown.S,
+	mdk-stage1/dietlibc/libugly/getservent.c,
+	mdk-stage1/dietlibc/libugly/putpwent.c, mdk-stage1/dietlibc/libm/sinh.c,
+	mdk-stage1/dietlibc/libcruft/getspent_r.c,
+	mdk-stage1/dietlibc/i386/send.S, mdk-stage1/dietlibc/ia64/msgget.S,
+	mdk-stage1/dietlibc/libcruft/killpg.c,
+	mdk-stage1/dietlibc/x86_64/__testandset.S,
+	mdk-stage1/dietlibc/syscalls.s/rt_sigqueueinfo.S,
+	mdk-stage1/dietlibc/libstdio/fsetpos.c,
+	mdk-stage1/dietlibc/i386/isleap.S, mdk-stage1/dietlibc/i386/PIC.h,
+	mdk-stage1/dietlibc/syscalls.s/rt_sigtimedwait.S,
+	mdk-stage1/dietlibc/lib/tcsendbreak.c,
+	mdk-stage1/dietlibc/x86_64/shmat.S,
+	mdk-stage1/dietlibc/libcruft/dnscruft3.c,
+	mdk-stage1/dietlibc/libugly/difftime.c,
+	mdk-stage1/dietlibc/libstdio/ftello.c,
+	mdk-stage1/dietlibc/x86_64/sendto.S,
+	mdk-stage1/dietlibc/x86_64/syscalls.h, mdk-stage1/dietlibc/ia64/send.S,
+	mdk-stage1/dietlibc/ia64/bind.S, mdk-stage1/dietlibc/x86_64/shmctl.S,
+	mdk-stage1/dietlibc/libcruft/clock.c,
+	mdk-stage1/dietlibc/syscalls.s/settimeofday.S,
+	mdk-stage1/dietlibc/libugly/protoent_buf.c,
+	mdk-stage1/dietlibc/libstdio/fgetpos.c,
+	mdk-stage1/dietlibc/libugly/getprotobynumber_r.c,
+	mdk-stage1/dietlibc/sparc/strlen.S,
+	mdk-stage1/dietlibc/lib/sigprocmask.c,
+	mdk-stage1/dietlibc/ia64/__nice.c,
+	mdk-stage1/dietlibc/syscalls.s/mmap2.S, mdk-stage1/dietlibc/i386/sqrt.S,
+	mdk-stage1/dietlibc/i386/strlen.S, mdk-stage1/dietlibc/ia64/shmget.S,
+	mdk-stage1/dietlibc/x86_64/bind.S,
+	mdk-stage1/dietlibc/syscalls.s/setreuid32.S,
+	mdk-stage1/dietlibc/include/net/ethernet.h,
+	mdk-stage1/dietlibc/include/linux/eventpoll.h,
+	mdk-stage1/dietlibc/syscalls.s/errlist.S,
+	mdk-stage1/dietlibc/i386/getenv.S, mdk-stage1/dietlibc/libm/bessel.c,
+	mdk-stage1/dietlibc/libm/ipow.c, mdk-stage1/dietlibc/libm/atanh.c,
+	mdk-stage1/dietlibc/libstdio/fdglue2.c,
+	mdk-stage1/dietlibc/libcruft/getgrent_r.c,
+	mdk-stage1/dietlibc/i386/strcpy.S,
+	mdk-stage1/dietlibc/include/linux/types.h,
+	mdk-stage1/dietlibc/include/asm/ppc-sigcontext.h,
+	mdk-stage1/dietlibc/libugly/unlockpt.c,
+	mdk-stage1/dietlibc/ia64/unified.S,
+	mdk-stage1/dietlibc/libugly/freeaddrinfo.c,
+	mdk-stage1/dietlibc/libcruft/getpwuid_r.c,
+	mdk-stage1/dietlibc/ia64/semget.S,
+	mdk-stage1/dietlibc/libcruft/hstrerror.c,
+	mdk-stage1/dietlibc/libcruft/grbuf.c,
+	mdk-stage1/dietlibc/sparc/syscalls.h,
+	mdk-stage1/dietlibc/libstdio/fseeko64.c,
+	mdk-stage1/dietlibc/libcruft/getgrnam_r.c,
+	mdk-stage1/dietlibc/i386/log.S, mdk-stage1/dietlibc/lib/sigsuspend.c,
+	mdk-stage1/dietlibc/ia64/getpeername.S,
+	mdk-stage1/dietlibc/i386/strncmp.S,
+	mdk-stage1/dietlibc/syscalls.s/setfsuid32.S,
+	mdk-stage1/dietlibc/syscalls.s/__pwrite.S,
+	mdk-stage1/dietlibc/ia64/shmdt.S, mdk-stage1/dietlibc/libm/rint.c,
+	mdk-stage1/dietlibc/libcruft/mktemp.c,
+	mdk-stage1/dietlibc/syscalls.s/rt_sigsuspend.S,
+	mdk-stage1/dietlibc/libcruft/__end_parse.c,
+	mdk-stage1/dietlibc/syscalls.s/adjtimex.S,
+	mdk-stage1/dietlibc/i386/exp2.S,
+	mdk-stage1/dietlibc/libcruft/alphasort.c,
+	mdk-stage1/dietlibc/libugly/openpty.c,
+	mdk-stage1/dietlibc/profiling/monitor.c,
+	mdk-stage1/dietlibc/ia64/recv.S,
+	mdk-stage1/dietlibc/syscalls.s/getresgid32.S,
+	mdk-stage1/dietlibc/lib/atoll.c,
+	mdk-stage1/dietlibc/libcruft/getopt_long.c,
+	mdk-stage1/dietlibc/ia64/connect.S,
+	mdk-stage1/dietlibc/include/linux/loop.h,
+	mdk-stage1/dietlibc/alpha/sigaction.c,
+	mdk-stage1/dietlibc/libstdio/vfprintf.c,
+	mdk-stage1/dietlibc/libugly/getservent_r.c,
+	mdk-stage1/dietlibc/ia64/recvmsg.S,
+	mdk-stage1/dietlibc/libcruft/mkdtemp.c,
+	mdk-stage1/dietlibc/ia64/Makefile.add,
+	mdk-stage1/dietlibc/libshell/basename.c,
+	mdk-stage1/dietlibc/x86_64/semget.S,
+	mdk-stage1/dietlibc/x86_64/getsockopt.S,
+	mdk-stage1/dietlibc/syscalls.s/fdatasync.S,
+	mdk-stage1/dietlibc/libcruft/spbuf.c,
+	mdk-stage1/dietlibc/syscalls.s/errno.S,
+	mdk-stage1/dietlibc/syscalls.s/setfsgid.S,
+	mdk-stage1/dietlibc/syscalls.s/n_sigpending.S,
+	mdk-stage1/dietlibc/ia64/semop.S, mdk-stage1/dietlibc/lib/sigaction.c,
+	mdk-stage1/dietlibc/libdl/_dl_main.c,
+	mdk-stage1/dietlibc/include/sys/alpha-ioctl.h,
+	mdk-stage1/dietlibc/x86_64/getpeername.S,
+	mdk-stage1/dietlibc/libpthread/pthread_internal.c,
+	mdk-stage1/dietlibc/i386/tan.S, mdk-stage1/dietlibc/lib/__isinf.c,
+	mdk-stage1/dietlibc/i386/strncpy.S,
+	mdk-stage1/dietlibc/lib/__v_printf.c,
+	mdk-stage1/dietlibc/syscalls.s/msync.S,
+	mdk-stage1/dietlibc/syscalls.s/epoll_ctl.S,
+	mdk-stage1/dietlibc/x86_64/clone.S,
+	mdk-stage1/dietlibc/libugly/getservbyport_r.c,
+	mdk-stage1/dietlibc/libcruft/getopt_data.c,
+	mdk-stage1/dietlibc/libcompat/stpcpy.c,
+	mdk-stage1/dietlibc/libcruft/getpwent_r.c,
+	mdk-stage1/dietlibc/include/linux/posix_types.h,
+	mdk-stage1/dietlibc/libstdio/fseeko.c,
+	mdk-stage1/dietlibc/libugly/getnameinfo.c,
+	mdk-stage1/dietlibc/include/dietref.h, mdk-stage1/dietlibc/libm/asinh.c,
+	mdk-stage1/dietlibc/include/pty.h, mdk-stage1/dietlibc/i386/exp.S,
+	mdk-stage1/dietlibc/include/sys/soundcard.h,
+	mdk-stage1/dietlibc/include/sys/klog.h,
+	mdk-stage1/dietlibc/libpthread/pthread_setschedparam.c,
+	mdk-stage1/dietlibc/i386/sqrtl.S,
+	mdk-stage1/dietlibc/syscalls.s/rt_sigaction.S,
+	mdk-stage1/dietlibc/i386/strcasecmp.S,
+	mdk-stage1/dietlibc/syscalls.s/setgid32.S,
+	mdk-stage1/dietlibc/i386/__half.S,
+	mdk-stage1/dietlibc/include/asm/sparc-sigcontext.h,
+	mdk-stage1/dietlibc/profiling/__mcount.c,
+	mdk-stage1/dietlibc/include/sys/arm-ioctl.h,
+	mdk-stage1/dietlibc/libugly/getprotobynumber.c,
+	mdk-stage1/dietlibc/i386/log2.S, mdk-stage1/dietlibc/ia64/mmap.S,
+	mdk-stage1/dietlibc/sparc/errlist.S,
+	mdk-stage1/dietlibc/ia64/__testandset.S,
+	mdk-stage1/dietlibc/include/sys/i386-ioctl.h,
+	mdk-stage1/dietlibc/libcruft/getpwent.c,
+	mdk-stage1/dietlibc/syscalls.s/environ.S,
+	mdk-stage1/dietlibc/libpthread/pthread_errno.c,
+	mdk-stage1/dietlibc/alpha/__alarm.c, mdk-stage1/dietlibc/i386/mmap64.S,
+	mdk-stage1/dietlibc/i386/vfork.S, mdk-stage1/dietlibc/ia64/vfork.S,
+	mdk-stage1/dietlibc/libugly/timezone.c,
+	mdk-stage1/dietlibc/libugly/servent_buf.c,
+	mdk-stage1/dietlibc/x86_64/getsockname.S,
+	mdk-stage1/dietlibc/include/sys/prctl.h,
+	mdk-stage1/dietlibc/x86_64/semctl.S, mdk-stage1/dietlibc/i386/write12.S,
+	mdk-stage1/dietlibc/libm/cosh.c, mdk-stage1/dietlibc/include/libgen.h,
+	mdk-stage1/dietlibc/syscalls.s/bdflush.S,
+	mdk-stage1/dietlibc/libcompat/re_bsd.c,
+	mdk-stage1/dietlibc/libdl/_dl_rel.c,
+	mdk-stage1/dietlibc/alpha/__testandset.S,
+	mdk-stage1/dietlibc/libstdio/vscanf.c, mdk-stage1/dietlibc/i386/atanh.S,
+	mdk-stage1/dietlibc/i386/copysign.S, mdk-stage1/dietlibc/i386/htons.S,
+	mdk-stage1/dietlibc/libugly/hasmntopt.c,
+	mdk-stage1/dietlibc/libm/gamma.c, mdk-stage1/dietlibc/ia64/msgctl.S,
+	mdk-stage1/dietlibc/i386/recvfrom.S,
+	mdk-stage1/dietlibc/libcompat/daemon.c,
+	mdk-stage1/dietlibc/profiling/PORTING,
+	mdk-stage1/dietlibc/libdl/_dl_load.c,
+	mdk-stage1/dietlibc/libcompat/getline.c,
+	mdk-stage1/dietlibc/include/sys/sparc-ioctl.h,
+	mdk-stage1/dietlibc/libstdio/vprintf.c,
+	mdk-stage1/dietlibc/include/asm/statfs.h,
+	mdk-stage1/dietlibc/x86_64/shmdt.S, mdk-stage1/dietlibc/libugly/dirfd.c,
+	mdk-stage1/dietlibc/i386/atoll.S, mdk-stage1/dietlibc/ia64/sendto.S,
+	mdk-stage1/dietlibc/syscalls.s/getegid32.S,
+	mdk-stage1/dietlibc/i386/getsockopt.S,
+	mdk-stage1/dietlibc/libpthread/pthread_sigmask.c,
+	mdk-stage1/dietlibc/libpthread/pthread_key.c,
+	mdk-stage1/dietlibc/x86_64/shmget.S,
+	mdk-stage1/dietlibc/libcruft/__parse_1.c,
+	mdk-stage1/dietlibc/alpha/socketpair.S,
+	mdk-stage1/dietlibc/sparc/sigaction.c,
+	mdk-stage1/dietlibc/x86_64/shutdown.S,
+	mdk-stage1/dietlibc/libdl/_dl_alloc.c,
+	mdk-stage1/dietlibc/lib/setlinebuf.c, mdk-stage1/dietlibc/lib/bcd.c,
+	mdk-stage1/dietlibc/libcruft/getgrent.c,
+	mdk-stage1/dietlibc/i386/mcount.S, mdk-stage1/dietlibc/i386/ceil.S,
+	mdk-stage1/dietlibc/libpthread/pthread_sys_fdatasync.c,
+	mdk-stage1/dietlibc/x86_64/recv.c, mdk-stage1/dietlibc/lib/adjtime.c,
+	mdk-stage1/dietlibc/i386/expm1.S, mdk-stage1/dietlibc/ia64/setjmp.S,
+	mdk-stage1/dietlibc/i386/cos.S, mdk-stage1/dietlibc/i386/fabs.S,
+	mdk-stage1/dietlibc/i386/htonl.S, mdk-stage1/dietlibc/i386/log10.S,
+	mdk-stage1/dietlibc/i386/pow.S,
+	mdk-stage1/dietlibc/include/linux/if_ether.h,
+	mdk-stage1/dietlibc/lib/cfsetospeed.c,
+	mdk-stage1/dietlibc/alpha/n_sigprocmask.S,
+	mdk-stage1/dietlibc/libcruft/localeconv.c,
+	mdk-stage1/dietlibc/ia64/shmat.S, mdk-stage1/dietlibc/libstdio/puts.c,
+	mdk-stage1/dietlibc/i386/memset.S, mdk-stage1/dietlibc/libm/poly.c,
+	mdk-stage1/dietlibc/include/libintl.h,
+	mdk-stage1/dietlibc/libugly/ftime.c,
+	mdk-stage1/dietlibc/ia64/socketpair.S, mdk-stage1/dietlibc/lib/rand_r.c,
+	mdk-stage1/dietlibc/i386/ilogb.S,
+	mdk-stage1/dietlibc/libpthread/pthread_equal.c,
+	mdk-stage1/dietlibc/libcrypt/md5.c, mdk-stage1/dietlibc/i386/cbrt.S,
+	mdk-stage1/dietlibc/syscalls.s/ptrace.S,
+	mdk-stage1/dietlibc/syscalls.s/pivot_root.S,
+	mdk-stage1/dietlibc/libdl/elf_hash.h, mdk-stage1/dietlibc/include/md5.h,
+	mdk-stage1/dietlibc/x86_64/__longjmp.S,
+	mdk-stage1/dietlibc/include/cpio.h,
+	mdk-stage1/dietlibc/syscalls.s/chown32.S,
+	mdk-stage1/dietlibc/x86_64/connect.S,
+	mdk-stage1/dietlibc/libugly/ptsname.c,
+	mdk-stage1/dietlibc/libstdio/fdprintf.c,
+	mdk-stage1/dietlibc/ia64/__waitpid.c,
+	mdk-stage1/dietlibc/i386/socketpair.S,
+	mdk-stage1/dietlibc/libstdio/fscanf.c,
+	mdk-stage1/dietlibc/ia64/getsockname.S,
+	mdk-stage1/dietlibc/lib/sigtimedwait.c,
+	mdk-stage1/dietlibc/syscalls.s/rt_sigpending.S,
+	mdk-stage1/dietlibc/include/sys/ppc-ioctl.h,
+	mdk-stage1/dietlibc/libstdio/vfdprintf.c,
+	mdk-stage1/dietlibc/i386/usleep.S, mdk-stage1/dietlibc/include/iconv.h,
+	mdk-stage1/dietlibc/ia64/semctl.S,
+	mdk-stage1/dietlibc/include/sys/timex.h,
+	mdk-stage1/dietlibc/include/asm/i386-sigcontext.h,
+	mdk-stage1/dietlibc/i386/dyn_syscalls.S,
+	mdk-stage1/dietlibc/libcruft/getgrgid_r.c,
+	mdk-stage1/dietlibc/libcruft/sysconf.c,
+	mdk-stage1/dietlibc/include/tar.h, mdk-stage1/dietlibc/x86_64/umount.S,
+	mdk-stage1/dietlibc/libugly/getprotoent_r.c,
+	mdk-stage1/dietlibc/syscalls.s/prctl.S, mdk-stage1/dietlibc/i386/acos.S,
+	mdk-stage1/dietlibc/libpthread/pthread_funlockfile.c,
+	mdk-stage1/dietlibc/libcruft/res_mkquery.c,
+	mdk-stage1/dietlibc/include/sys/timeb.h,
+	mdk-stage1/dietlibc/libugly/iconv_close.c,
+	mdk-stage1/dietlibc/ia64/__alarm.c,
+	mdk-stage1/dietlibc/x86_64/socketpair.S,
+	mdk-stage1/dietlibc/i386/sinh.S, mdk-stage1/dietlibc/libdl/test/test.c,
+	mdk-stage1/dietlibc/include/asm/alpha-sigcontext.h,
+	mdk-stage1/dietlibc/i386/memchr.S,
+	mdk-stage1/dietlibc/profiling/profil.c,
+	mdk-stage1/dietlibc/libdl/_dl_rel.h, mdk-stage1/dietlibc/i386/__ten.S,
+	mdk-stage1/dietlibc/lib/execle.c,
+	mdk-stage1/dietlibc/include/sys/s390-ioctl.h,
+	mdk-stage1/dietlibc/i386/recvmsg.S,
+	mdk-stage1/dietlibc/ia64/getsockopt.S,
+	mdk-stage1/dietlibc/i386/md5asm.S, mdk-stage1/dietlibc/i386/memcpy.S,
+	mdk-stage1/dietlibc/libcruft/__parse.c,
+	mdk-stage1/dietlibc/x86_64/setsockopt.S,
+	mdk-stage1/dietlibc/libcruft/getspnam_r.c,
+	mdk-stage1/dietlibc/syscalls.s/getgid32.S,
+	mdk-stage1/dietlibc/libpthread/pthread_fdglue2.c,
+	mdk-stage1/dietlibc/ia64/__time.c, mdk-stage1/dietlibc/i386/tanh.S,
+	mdk-stage1/dietlibc/lib/siginterrupt.c,
+	mdk-stage1/dietlibc/i386/strcat.S,
+	mdk-stage1/dietlibc/libugly/grantpt.c, mdk-stage1/dietlibc/lib/rand48.c,
+	mdk-stage1/dietlibc/syscalls.s/setresgid32.S,
+	mdk-stage1/dietlibc/syscalls.s/lchown32.S,
+	mdk-stage1/dietlibc/profiling/README, mdk-stage1/dietlibc/ia64/msgsnd.S,
+	mdk-stage1/dietlibc/libugly/getservbyname_r.c,
+	mdk-stage1/dietlibc/x86_64/send.c, mdk-stage1/dietlibc/i386/socket.S,
+	mdk-stage1/dietlibc/ia64/setsockopt.S,
+	mdk-stage1/dietlibc/include/asm/parisc-sigcontext.h,
+	mdk-stage1/dietlibc/include/sys/gmon.h,
+	mdk-stage1/dietlibc/i386/acosh.S, mdk-stage1/dietlibc/ia64/socket.S,
+	mdk-stage1/dietlibc/libcruft/dn_expand.c,
+	mdk-stage1/dietlibc/lib/binshstr.c,
+	mdk-stage1/dietlibc/include/netinet/udp.h,
+	mdk-stage1/dietlibc/x86_64/msgget.S,
+	mdk-stage1/dietlibc/libugly/getprotobyname_r.c,
+	mdk-stage1/dietlibc/libcruft/res_search.c,
+	mdk-stage1/dietlibc/libshell/dirname.c,
+	mdk-stage1/dietlibc/i386/exp10.S, mdk-stage1/dietlibc/libdl/_dl_queue.c,
+	mdk-stage1/dietlibc/lib/socketpair.c, mdk-stage1/dietlibc/i386/ldexp.S,
+	mdk-stage1/dietlibc/libstdio/ftello64.c,
+	mdk-stage1/dietlibc/libpthread/pthread_fputc.c,
+	mdk-stage1/dietlibc/libdl/test/test_so.c,
+	mdk-stage1/dietlibc/i386/strchr.S, mdk-stage1/dietlibc/lib/pwrite64.c,
+	mdk-stage1/dietlibc/include/netinet/tcp.h,
+	mdk-stage1/dietlibc/libm/pow.c,
+	mdk-stage1/dietlibc/libcruft/res_query.c,
+	mdk-stage1/dietlibc/include/asm/mips-sigcontext.h,
+	mdk-stage1/dietlibc/libstdio/fputc_unlocked.c,
+	mdk-stage1/dietlibc/libcruft/sysconf_cpus.c,
+	mdk-stage1/dietlibc/alpha/lseek64.S, mdk-stage1/dietlibc/i386/recv.S,
+	mdk-stage1/dietlibc/libcruft/getspent.c,
+	mdk-stage1/dietlibc/libugly/iconv_open.c,
+	mdk-stage1/dietlibc/lib/memrchr.c,
+	mdk-stage1/dietlibc/syscalls.s/epoll_wait.S,
+	mdk-stage1/dietlibc/x86_64/sendmsg.S,
+	mdk-stage1/dietlibc/libugly/wtent.c, mdk-stage1/dietlibc/i386/mmap.S,
+	mdk-stage1/dietlibc/syscalls.s/getgroups32.S,
+	mdk-stage1/dietlibc/i386/atol.S,
+	mdk-stage1/dietlibc/include/sys/ucontext.h,
+	mdk-stage1/dietlibc/libcruft/dnscruft4.c,
+	mdk-stage1/dietlibc/include/sys/mips-ioctl.h,
+	mdk-stage1/dietlibc/include/netinet/ip_icmp.h,
+	mdk-stage1/dietlibc/lib/sigqueueinfo.c,
+	mdk-stage1/dietlibc/libcruft/__prepare_parse.c,
+	mdk-stage1/dietlibc/x86_64/waitpid.S,
+	mdk-stage1/dietlibc/i386/setsockopt.S,
+	mdk-stage1/dietlibc/include/sys/gmon_out.h,
+	mdk-stage1/dietlibc/lib/cfsetispeed.c,
+	mdk-stage1/dietlibc/i386/socketcall.S,
+	mdk-stage1/dietlibc/include/asm/sigcontext.h,
+	mdk-stage1/dietlibc/x86_64/msgsnd.S, mdk-stage1/dietlibc/lib/labs.c,
+	mdk-stage1/dietlibc/x86_64/recvmsg.S,
+	mdk-stage1/dietlibc/libugly/getservbyport.c,
+	mdk-stage1/dietlibc/libugly/getaddrinfo.c,
+	mdk-stage1/dietlibc/ia64/syscalls.h,
+	mdk-stage1/dietlibc/libcompat/getdelim.c,
+	mdk-stage1/dietlibc/lib/__truncate64.c,
+	mdk-stage1/dietlibc/include/sys/hppa-ioctl.h,
+	mdk-stage1/dietlibc/libcrypt/md5crypt.c,
+	mdk-stage1/dietlibc/syscalls.s/n_sigsuspend.S,
+	mdk-stage1/dietlibc/i386/listen.S,
+	mdk-stage1/dietlibc/lib/if_nameindex.c,
+	mdk-stage1/dietlibc/syscalls.s/truncate64.S,
+	mdk-stage1/dietlibc/libcruft/__parse_nws.c,
+	mdk-stage1/dietlibc/lib/readdir64.c,
+	mdk-stage1/dietlibc/syscalls.s/setuid32.S,
+	mdk-stage1/dietlibc/libugly/gethostent.c,
+	mdk-stage1/dietlibc/syscalls.s/epoll_create.S,
+	mdk-stage1/dietlibc/include/sys/sysmacros.h,
+	mdk-stage1/dietlibc/syscalls.s/madvise.S,
+	mdk-stage1/dietlibc/lib/pwrite.c, mdk-stage1/dietlibc/i386/log1p.S,
+	mdk-stage1/dietlibc/ia64/shutdown.S,
+	mdk-stage1/dietlibc/lib/__v_scanf.c,
+	mdk-stage1/dietlibc/include/sys/epoll.h,
+	mdk-stage1/dietlibc/x86_64/start.S,
+	mdk-stage1/dietlibc/x86_64/sigaction.c,
+	mdk-stage1/dietlibc/i386/getsockname.S, mdk-stage1/dietlibc/i386/sin.S,
+	mdk-stage1/dietlibc/i386/sincos.S,
+	mdk-stage1/dietlibc/libcruft/scandir64.c,
+	mdk-stage1/dietlibc/lib/cfgetospeed.c, mdk-stage1/dietlibc/i386/asinh.S,
+	mdk-stage1/dietlibc/libstdio/tmpfile.c,
+	mdk-stage1/dietlibc/syscalls.s/n_sigprocmask.S,
+	mdk-stage1/dietlibc/ia64/recvfrom.S, mdk-stage1/dietlibc/i386/ipow.S,
+	mdk-stage1/dietlibc/syscalls.s/init_module.S,
+	mdk-stage1/dietlibc/lib/__ftruncate64.c,
+	mdk-stage1/dietlibc/i386/atan.S, mdk-stage1/dietlibc/libm/tanh.c,
+	mdk-stage1/dietlibc/syscalls.s/rt_sigprocmask.S,
+	mdk-stage1/dietlibc/x86_64/accept.S, mdk-stage1/dietlibc/ia64/start.S,
+	mdk-stage1/dietlibc/include/sysexits.h,
+	mdk-stage1/dietlibc/lib/signal.c, mdk-stage1/dietlibc/ia64/accept.S,
+	mdk-stage1/dietlibc/include/stddef.h,
+	mdk-stage1/dietlibc/include/stdarg.h,
+	mdk-stage1/dietlibc/libstdio/fgetc_unlocked.c,
+	mdk-stage1/dietlibc/syscalls.s/n_sigaction.S,
+	mdk-stage1/dietlibc/lib/strxfrm.c, mdk-stage1/dietlibc/ia64/shmctl.S,
+	mdk-stage1/dietlibc/x86_64/msgrcv.S,
+	mdk-stage1/dietlibc/libcruft/getpwnam_r.c,
+	mdk-stage1/dietlibc/i386/libm2.S, mdk-stage1/dietlibc/ia64/fork.S:
+	Import dietlibc 0.22 + other fixes for AMD64
+
+	* mdk-stage1/dns.c, mdk-stage1/dietlibc/lib/msgget.c,
+	mdk-stage1/dietlibc/lib/strerror.c,
+	mdk-stage1/insmod-modutils/obj/obj_s390.c,
+	mdk-stage1/dietlibc/libcruft/gethostbyname.c,
+	mdk-stage1/dietlibc/librpc/rpc_prot.c,
+	mdk-stage1/dietlibc/lib/iscntrl.c, mdk-stage1/dietlibc/include/stdint.h,
+	mdk-stage1/dietlibc/lib/atexit.c, mdk-stage1/dietlibc/include/stdlib.h,
+	mdk-stage1/dietlibc/libpthread/pthread_cancel.c,
+	mdk-stage1/dietlibc/libdl/dlopen.c, mdk-stage1/dietlibc/lib/isgraph.c,
+	mdk-stage1/dietlibc/lib/closedir.c,
+	mdk-stage1/insmod-modutils/obj/obj_alpha.c,
+	mdk-stage1/insmod-modutils/include/config.h,
+	mdk-stage1/dietlibc/lib/alloc.c, mdk-stage1/dietlibc/lib/tcsetpgrp.c,
+	mdk-stage1/dietlibc/i386/Makefile.add,
+	mdk-stage1/dietlibc/include/sys/mman.h,
+	mdk-stage1/dietlibc/include/fcntl.h, mdk-stage1/dietlibc/lib/memchr.c,
+	mdk-stage1/dietlibc/lib/isupper.c, mdk-stage1/dietlibc/lib/qsort.c,
+	mdk-stage1/dietlibc/lib/isxdigit.c,
+	mdk-stage1/dietlibc/librpc/svc_raw.c,
+	mdk-stage1/dietlibc/include/arpa/nameser.h,
+	mdk-stage1/dietlibc/lib/open64.c, mdk-stage1/newt/form.c,
+	mdk-stage1/dietlibc/include/sys/file.h,
+	mdk-stage1/insmod-modutils/obj/Makefile, mdk-stage1/dietlibc/lib/ftw.c,
+	mdk-stage1/insmod-modutils/obj/obj_hppa64.c,
+	mdk-stage1/insmod-modutils/obj/obj_hppa.c,
+	mdk-stage1/dietlibc/libstdio/ftell.c,
+	mdk-stage1/dietlibc/libstdio/fdopen.c,
+	mdk-stage1/dietlibc/libpthread/pthread_cond_signal.c,
+	mdk-stage1/dietlibc/include/pwd.h, mdk-stage1/dietlibc/lib/snprintf.c,
+	mdk-stage1/dietlibc/i386/unified.S, mdk-stage1/dietlibc/lib/msgrcv.c,
+	mdk-stage1/dietlibc/alpha/start.S,
+	mdk-stage1/insmod-modutils/include/kallsyms.h,
+	mdk-stage1/dietlibc/include/sys/ptrace.h,
+	mdk-stage1/dietlibc/lib/mkfifo.c, mdk-stage1/dietlibc/lib/send.c,
+	mdk-stage1/dietlibc/lib/execvp.c,
+	mdk-stage1/dietlibc/librpc/get_myaddress.c,
+	mdk-stage1/insmod-modutils/include/elf_m68k.h,
+	mdk-stage1/dietlibc/libugly/mktime.c,
+	mdk-stage1/dietlibc/sparc/__longjmp.S,
+	mdk-stage1/dietlibc/include/pthread.h,
+	mdk-stage1/dietlibc/libpthread/pthread_key_delete.c,
+	mdk-stage1/dietlibc/include/sys/socket.h,
+	mdk-stage1/dietlibc/syscalls.s/nice.S,
+	mdk-stage1/insmod-modutils/include/elf_mips.h,
+	mdk-stage1/dietlibc/syscalls.s/getdents64.S,
+	mdk-stage1/dietlibc/librpc/svc_run.c, mdk-stage1/dietlibc/lib/isblank.c,
+	mdk-stage1/dietlibc/syscalls.s/time.S,
+	mdk-stage1/dietlibc/libugly/gmtime_r.c,
+	mdk-stage1/dietlibc/include/sys/kd.h,
+	mdk-stage1/dietlibc/librpc/bindresvport.c,
+	mdk-stage1/dietlibc/libstdio/fdglue.c,
+	mdk-stage1/dietlibc/lib/ttyname.c,
+	mdk-stage1/dietlibc/libcruft/getspnam.c,
+	mdk-stage1/dietlibc/lib/strncat.c,
+	mdk-stage1/dietlibc/libugly/strsignal.c,
+	mdk-stage1/dietlibc/librpc/clnt_tcp.c,
+	mdk-stage1/insmod-modutils/util/sys_cm.c,
+	mdk-stage1/dietlibc/libcruft/initgroups.c,
+	mdk-stage1/dietlibc/lib/sendmsg.c,
+	mdk-stage1/dietlibc/include/sys/stat.h,
+	mdk-stage1/dietlibc/libshell/fnmatch.c,
+	mdk-stage1/dietlibc/syscalls.s/setresgid.S,
+	mdk-stage1/dietlibc/libstdio/feof.c, mdk-stage1/init-libc-headers.h,
+	mdk-stage1/dietlibc/include/dirent.h,
+	mdk-stage1/dietlibc/libpthread/thread_internal.h,
+	mdk-stage1/insmod-modutils/util/snap_shot.c,
+	mdk-stage1/dietlibc/include/shadow.h,
+	mdk-stage1/dietlibc/include/sys/select.h,
+	mdk-stage1/dietlibc/lib/strsep.c,
+	mdk-stage1/dietlibc/include/rpc/auth_unix.h,
+	mdk-stage1/dietlibc/lib/msgsnd.c,
+	mdk-stage1/dietlibc/libpthread/pthread_sys_alloc.c,
+	mdk-stage1/insmod-modutils/util/logger.c,
+	mdk-stage1/dietlibc/libpthread/Makefile,
+	mdk-stage1/dietlibc/libpthread/pthread_attr_setscope.c,
+	mdk-stage1/dietlibc/lib/__ltostr.c, mdk-stage1/dietlibc/lib/strlen.c,
+	mdk-stage1/dietlibc/libregex/rx.c,
+	mdk-stage1/insmod-modutils/util/xsystem.c,
+	mdk-stage1/dietlibc/liblatin1/latin1-islower.c,
+	mdk-stage1/dietlibc/lib/raise.c,
+	mdk-stage1/dietlibc/libpthread/pthread_setspecific.c,
+	mdk-stage1/dietlibc/lib/semget.c,
+	mdk-stage1/dietlibc/libcruft/inet_aton.c,
+	mdk-stage1/dietlibc/lib/sigismember.c, mdk-stage1/dietlibc/librpc/svc.c,
+	mdk-stage1/dietlibc/lib/sigemptyset.c,
+	mdk-stage1/dietlibc/include/sys/vfs.h,
+	mdk-stage1/insmod-modutils/include/elf_ppc.h,
+	mdk-stage1/dietlibc/libugly/getprotoent.c,
+	mdk-stage1/dietlibc/lib/__stat64.c, mdk-stage1/dietlibc/include/elf.h,
+	mdk-stage1/dietlibc/lib/strncmp.c,
+	mdk-stage1/dietlibc/lib/gethostname.c,
+	mdk-stage1/dietlibc/lib/vsscanf.c, mdk-stage1/dietlibc/lib/cfmakeraw.c,
+	mdk-stage1/dietlibc/lib/perror.c, mdk-stage1/dietlibc/include/time.h,
+	mdk-stage1/dietlibc/lib/strncasecmp.c,
+	mdk-stage1/dietlibc/lib/__lltostr.c,
+	mdk-stage1/dietlibc/libpthread/pthread_key_create.c,
+	mdk-stage1/dietlibc/include/fnmatch.h,
+	mdk-stage1/dietlibc/libugly/time_table_spd.c,
+	mdk-stage1/dietlibc/libstdio/stderr.c,
+	mdk-stage1/insmod-modutils/util/arch64.c,
+	mdk-stage1/dietlibc/libdl/dlerror.c,
+	mdk-stage1/dietlibc/libcruft/mkstemp.c,
+	mdk-stage1/dietlibc/libstdio/ungetc.c,
+	mdk-stage1/dietlibc/libugly/tzfile.c, mdk-stage1/log.c,
+	mdk-stage1/dietlibc/include/rpc/xdr.h,
+	mdk-stage1/dietlibc/include/rpc/key_prot.h,
+	mdk-stage1/insmod-modutils/include/elf_sparc.h,
+	mdk-stage1/dietlibc/sparc/start.S,
+	mdk-stage1/dietlibc/libcruft/getpwnam.c,
+	mdk-stage1/dietlibc/libpthread/pthread_spinlock.c,
+	mdk-stage1/dietlibc/include/sys/un.h,
+	mdk-stage1/dietlibc/libpthread/pthread_mutex_lock.c,
+	mdk-stage1/insmod-busybox/insmod.c,
+	mdk-stage1/insmod-modutils/include/elf_arm.h,
+	mdk-stage1/dietlibc/alpha/unified.S,
+	mdk-stage1/dietlibc/include/sys/io.h,
+	mdk-stage1/dietlibc/lib/getsockname.c,
+	mdk-stage1/dietlibc/i386/__testandset.S,
+	mdk-stage1/dietlibc/libcruft/dnscruft.c,
+	mdk-stage1/dietlibc/lib/sprintf.c, mdk-stage1/rp-pppoe/src/Makefile,
+	mdk-stage1/dietlibc/lib/tcdrain.c,
+	mdk-stage1/dietlibc/include/sys/time.h,
+	mdk-stage1/dietlibc/lib/errno_location.c,
+	mdk-stage1/dietlibc/liblatin1/latin1-isprint.c,
+	mdk-stage1/dietlibc/libshell/glob.c,
+	mdk-stage1/dietlibc/libpthread/pthread_cond_broadcast.c,
+	mdk-stage1/dietlibc/lib/_brk.c,
+	mdk-stage1/insmod-modutils/obj/obj_arm.c,
+	mdk-stage1/dietlibc/lib/sys_siglist.c,
+	mdk-stage1/dietlibc/libcruft/getgrnam.c,
+	mdk-stage1/dietlibc/lib/strtok.c, mdk-stage1/dietlibc/include/unistd.h,
+	mdk-stage1/dietlibc/lib/isascii.c,
+	mdk-stage1/dietlibc/librpc/xdr_reference.c,
+	mdk-stage1/dietlibc/sparc/urem.S, mdk-stage1/dietlibc/i386/__longjmp.S,
+	mdk-stage1/dietlibc/include/sys/syslog.h, mdk-stage1/Makefile,
+	mdk-stage1/dietlibc/lib/bind.c, mdk-stage1/dietlibc/libdl/Makefile,
+	mdk-stage1/dietlibc/librpc/svc_simple.c,
+	mdk-stage1/dietlibc/lib/lockf.c, mdk-stage1/dietlibc/lib/htons.c,
+	mdk-stage1/dietlibc/lib/shmdt.c, mdk-stage1/dietlibc/i386/setjmp.S,
+	mdk-stage1/dietlibc/syscalls.s/ioperm.S,
+	mdk-stage1/dietlibc/lib/getenv.c,
+	mdk-stage1/dietlibc/include/features.h,
+	mdk-stage1/dietlibc/libpthread/CHANGES,
+	mdk-stage1/dietlibc/include/arpa/inet.h,
+	mdk-stage1/dietlibc/lib/strtoul.c,
+	mdk-stage1/dietlibc/libstdio/fprintf.c,
+	mdk-stage1/dietlibc/include/regex.h,
+	mdk-stage1/dietlibc/lib/__stat64_cvt.c,
+	mdk-stage1/dietlibc/libcruft/inet_ntop.c,
+	mdk-stage1/dietlibc/include/getopt.h,
+	mdk-stage1/insmod-modutils/obj/obj_ia64.c, mdk-stage1/minilibc.c,
+	mdk-stage1/insmod-modutils/include/util.h,
+	mdk-stage1/insmod-modutils/include/version.h,
+	mdk-stage1/dietlibc/alpha/Makefile.add,
+	mdk-stage1/dietlibc/include/net/if.h,
+	mdk-stage1/dietlibc/lib/recvfrom.c, mdk-stage1/dietlibc/sparc/clone.S,
+	mdk-stage1/dietlibc/lib/memccpy.c, mdk-stage1/dietlibc/lib/strtoull.c,
+	mdk-stage1/dietlibc/libcruft/getgrgid.c,
+	mdk-stage1/dietlibc/librpc/auth_unix.c,
+	mdk-stage1/dietlibc/include/termios.h,
+	mdk-stage1/dietlibc/include/strings.h,
+	mdk-stage1/insmod-modutils/include/elf_alpha.h,
+	mdk-stage1/dietlibc/lib/execv.c,
+	mdk-stage1/dietlibc/include/sys/param.h,
+	mdk-stage1/dietlibc/libpthread/pthread_attr_setstacksize.c,
+	mdk-stage1/dietlibc/librpc/xdr_mem.c,
+	mdk-stage1/dietlibc/libcruft/res_init.c,
+	mdk-stage1/dietlibc/libpthread/pthread_detach.c,
+	mdk-stage1/dietlibc/libpthread/pthread_sys_tcdrain.c,
+	mdk-stage1/newt/Makefile, mdk-stage1/dietlibc/lib/isatty.c,
+	mdk-stage1/dietlibc/include/sys/mtio.h,
+	mdk-stage1/dietlibc/lib/memcmp.c,
+	mdk-stage1/dietlibc/include/sys/sysinfo.h,
+	mdk-stage1/dietlibc/librpc/clnt_simple.c,
+	mdk-stage1/dietlibc/lib/vfork.c, mdk-stage1/dietlibc/lib/isalpha.c,
+	mdk-stage1/dietlibc/lib/strncpy.c, mdk-stage1/dietlibc/lib/strcmp.c,
+	mdk-stage1/insmod-modutils/include/obj.h,
+	mdk-stage1/dietlibc/include/rpc/clnt.h, mdk-stage1/frontend.h,
+	mdk-stage1/dietlibc/libcruft/getpass.c, mdk-stage1/dietlibc/lib/abort.c,
+	mdk-stage1/dietlibc/syscalls.s/stime.S,
+	mdk-stage1/dietlibc/sparc/fork.S, mdk-stage1/dietlibc/lib/readdir.c,
+	mdk-stage1/dietlibc/lib/sbrk.c,
+	mdk-stage1/dietlibc/include/sys/reboot.h,
+	mdk-stage1/dietlibc/syscalls.s/getresuid.S,
+	mdk-stage1/dietlibc/liblatin1/latin1-iscntrl.c,
+	mdk-stage1/dietlibc/include/limits.h, mdk-stage1/dietlibc/lib/putenv.c,
+	mdk-stage1/dietlibc/include/paths.h,
+	mdk-stage1/dietlibc/librpc/pmap_prot2.c,
+	mdk-stage1/dietlibc/librpc/pmap_clnt.c,
+	mdk-stage1/dietlibc/lib/memcpy.c,
+	mdk-stage1/insmod-modutils/obj/obj_kallsyms.c,
+	mdk-stage1/dietlibc/syscalls.s/_llseek.S,
+	mdk-stage1/dietlibc/include/setjmp.h,
+	mdk-stage1/insmod-modutils/obj/obj_m68k.c,
+	mdk-stage1/dietlibc/lib/tcgetpgrp.c, mdk-stage1/dietlibc/lib/abs.c,
+	mdk-stage1/dietlibc/Makefile, mdk-stage1/dietlibc/include/net/route.h,
+	mdk-stage1/dietlibc/syscalls.s/fstat64.S, mdk-stage1/mar/Makefile,
+	mdk-stage1/dietlibc/include/rpc/auth.h, mdk-stage1/dietlibc/ppc/start.S,
+	mdk-stage1/dietlibc/lib/assert_fail.c,
+	mdk-stage1/insmod-modutils/obj/obj_sparc.c,
+	mdk-stage1/dietlibc/lib/if_nametoindex.c,
+	mdk-stage1/dietlibc/include/inttypes.h, mdk-stage1/dietlibc/lib/atoi.c,
+	mdk-stage1/dietlibc/librpc/svc_tcp.c,
+	mdk-stage1/dietlibc/alpha/setjmp.S,
+	mdk-stage1/dietlibc/include/net/if_arp.h, mdk-stage1/ppp/pppd/Makefile,
+	mdk-stage1/insmod-modutils/obj/obj_common.c,
+	mdk-stage1/dietlibc/librpc/authunix_prot.c,
+	mdk-stage1/dietlibc/lib/longjmp.c,
+	mdk-stage1/dietlibc/libugly/getmntent.c,
+	mdk-stage1/insmod-modutils/obj/obj_load.c, mdk-stage1/dietlibc/diet.c,
+	mdk-stage1/dietlibc/libstdio/fwrite.c,
+	mdk-stage1/insmod-modutils/obj/obj_mips.c,
+	mdk-stage1/dietlibc/libugly/asprintf.c,
+	mdk-stage1/dietlibc/librpc/clnt_udp.c,
+	mdk-stage1/dietlibc/lib/recvmsg.c, mdk-stage1/dietlibc/lib/sendto.c,
+	mdk-stage1/dietlibc/include/endian.h,
+	mdk-stage1/dietlibc/libstdio/stdin.c,
+	mdk-stage1/dietlibc/libdl/dlclose.c, mdk-stage1/bzlib/Makefile,
+	mdk-stage1/Makefile.common, mdk-stage1/dietlibc/dietdirent.h,
+	mdk-stage1/insmod-modutils/util/xstrcat.c,
+	mdk-stage1/dietlibc/libpthread/pthread_testcancel.c,
+	mdk-stage1/dietlibc/libshell/realpath.c, mdk-stage1/rescue-gui.c,
+	mdk-stage1/dietlibc/lib/tcsetattr.c,
+	mdk-stage1/dietlibc/libstdio/fgets.c,
+	mdk-stage1/dietlibc/include/rpc/netdb.h,
+	mdk-stage1/dietlibc/lib/sscanf.c, mdk-stage1/dietlibc/lib/creat.c,
+	mdk-stage1/dietlibc/lib/getdomainname.c,
+	mdk-stage1/dietlibc/libstdio/fclose.c,
+	mdk-stage1/dietlibc/lib/vsnprintf.c, mdk-stage1/dietlibc/lib/ispunct.c,
+	mdk-stage1/insmod-modutils/util/sys_oim.c,
+	mdk-stage1/dietlibc/libpthread/pthread_attr_setschedparam.c,
+	mdk-stage1/dietlibc/sparc/mmap.c, mdk-stage1/dietlibc/dietstdio.h,
+	mdk-stage1/dietlibc/librpc/xdr_array.c, mdk-stage1/init.c,
+	mdk-stage1/dietlibc/lib/__isnan.c,
+	mdk-stage1/dietlibc/include/sys/resource.h,
+	mdk-stage1/dietlibc/lib/tolower.c,
+	mdk-stage1/dietlibc/alpha/__longjmp.S,
+	mdk-stage1/dietlibc/libpthread/pthread_join.c,
+	mdk-stage1/dietlibc/libstdio/fopen.c,
+	mdk-stage1/dietlibc/syscalls.s/umount2.S,
+	mdk-stage1/dietlibc/include/signal.h,
+	mdk-stage1/dietlibc/librpc/rpc_callmsg.c,
+	mdk-stage1/dietlibc/libpthread/pthread_mutexattr_setkind_np.c,
+	mdk-stage1/dietlibc/i386/clone.S,
+	mdk-stage1/insmod-modutils/include/elf_i386.h,
+	mdk-stage1/dietlibc/lib/__dtostr.c,
+	mdk-stage1/dietlibc/syscalls.s/ipc.S,
+	mdk-stage1/dietlibc/include/sys/cdefs.h,
+	mdk-stage1/dietlibc/include/sys/types.h,
+	mdk-stage1/insmod-modutils/util/sys_gks.c,
+	mdk-stage1/insmod-modutils/util/xrealloc.c,
+	mdk-stage1/dietlibc/include/sys/shm.h,
+	mdk-stage1/dietlibc/libpthread/pthread_cond_timedwait.c,
+	mdk-stage1/dietlibc/libcruft/gethostbyname_r.c,
+	mdk-stage1/dietlibc/lib/lseek64.c,
+	mdk-stage1/dietlibc/libdl/_dl_search.c,
+	mdk-stage1/dietlibc/dietfeatures.h,
+	mdk-stage1/dietlibc/libcruft/gethostbyaddr.c,
+	mdk-stage1/dietlibc/librpc/svc_udp.c,
+	mdk-stage1/dietlibc/libcruft/gethostbyaddr_r.c,
+	mdk-stage1/dietlibc/libugly/localtime_r.c,
+	mdk-stage1/dietlibc/include/netdb.h, mdk-stage1/dietlibc/lib/semop.c,
+	mdk-stage1/insmod-modutils/obj/obj_i386.c,
+	mdk-stage1/dietlibc/lib/opendir.c, mdk-stage1/dietlibc/libugly/system.c,
+	mdk-stage1/dietlibc/i386/start.S, mdk-stage1/dietlibc/include/dlfcn.h,
+	mdk-stage1/dietlibc/lib/usleep.c, mdk-stage1/dietlibc/lib/strchr.c,
+	mdk-stage1/dietlibc/ppc/unified.S,
+	mdk-stage1/dietlibc/syscalls.s/waitpid.S,
+	mdk-stage1/dietlibc/libpthread/pthread_sys_fcntl.c,
+	mdk-stage1/dietlibc/lib/memset.c, mdk-stage1/dietlibc/lib/__fstat64.c,
+	mdk-stage1/dietlibc/include/sched.h,
+	mdk-stage1/dietlibc/libpthread/pthread_attr_setschedpolicy.c,
+	mdk-stage1/dietlibc/lib/accept.c, mdk-stage1/dietlibc/lib/pread.c,
+	mdk-stage1/dietlibc/.cvsignore, mdk-stage1/dietlibc/sparc/setjmp.S,
+	mdk-stage1/dietlibc/librpc/pmap_rmt.c,
+	mdk-stage1/insmod-modutils/util/xstrdup.c,
+	mdk-stage1/dietlibc/include/sys/ioctl.h,
+	mdk-stage1/dietlibc/libpthread/pthread_setcanceltype.c,
+	mdk-stage1/dietlibc/lib/exec_lib.c,
+	mdk-stage1/dietlibc/include/string.h,
+	mdk-stage1/dietlibc/libpthread/pthread_atfork.c,
+	mdk-stage1/insmod-modutils/include/elf_sparc64.h,
+	mdk-stage1/dietlibc/include/assert.h, mdk-stage1/dietlibc/lib/connect.c,
+	mdk-stage1/dietlibc/include/locale.h,
+	mdk-stage1/dietlibc/libpthread/pthread_attr_init.c,
+	mdk-stage1/dietlibc/lib/execl.c, mdk-stage1/dietlibc/lib/tcflush.c,
+	mdk-stage1/dietlibc/libstdio/setvbuf.c,
+	mdk-stage1/dietlibc/libpthread/README,
+	mdk-stage1/insmod-modutils/include/elf_s390.h,
+	mdk-stage1/dietlibc/libcruft/getlogin.c,
+	mdk-stage1/dietlibc/lib/__lstat64.c, mdk-stage1/dietlibc/lib/strcpy.c,
+	mdk-stage1/dietlibc/lib/strtod.c, mdk-stage1/dietlibc/libdl/_dl_open.c,
+	mdk-stage1/dietlibc/include/stdio.h,
+	mdk-stage1/insmod-modutils/util/sys_nim.c,
+	mdk-stage1/dietlibc/lib/sigdelset.c, mdk-stage1/dietlibc/libdl/dlsym.c,
+	mdk-stage1/dietlibc/lib/setsockopt.c,
+	mdk-stage1/dietlibc/libpthread/pthread_setcancelstate.c,
+	mdk-stage1/dietlibc/libcruft/inet_ntoa.c,
+	mdk-stage1/dietlibc/lib/vsprintf.c,
+	mdk-stage1/insmod-modutils/util/alias.h,
+	mdk-stage1/dietlibc/include/grp.h, mdk-stage1/pcmcia_/Makefile,
+	mdk-stage1/dietlibc/lib/isprint.c,
+	mdk-stage1/dietlibc/syscalls.s/setresuid.S,
+	mdk-stage1/dietlibc/syscalls.s/lstat64.S,
+	mdk-stage1/dietlibc/lib/__getcwd.c, mdk-stage1/dietlibc/lib/isdigit.c,
+	mdk-stage1/dietlibc/lib/semctl.c, mdk-stage1/dietlibc/include/rpc/rpc.h,
+	mdk-stage1/dietlibc/lib/strstr.c,
+	mdk-stage1/dietlibc/include/rpc/pmap_rmt.h,
+	mdk-stage1/dietlibc/include/rpc/types.h,
+	mdk-stage1/dietlibc/libcruft/inet_pton.c,
+	mdk-stage1/insmod-modutils/util/sys_qm.c,
+	mdk-stage1/dietlibc/include/utmp.h, mdk-stage1/dietlibc/lib/sleep.c,
+	mdk-stage1/dietlibc/libugly/asctime_r.c,
+	mdk-stage1/dietlibc/include/netinet/in.h,
+	mdk-stage1/dietlibc/syscalls.s/sendfile.S,
+	mdk-stage1/dietlibc/include/sys/msg.h,
+	mdk-stage1/dietlibc/include/rpc/svc.h,
+	mdk-stage1/dietlibc/include/netinet/ip.h,
+	mdk-stage1/dietlibc/libcruft/getpagesize.c,
+	mdk-stage1/dietlibc/sparc/unified.S,
+	mdk-stage1/insmod-modutils/util/Makefile,
+	mdk-stage1/dietlibc/lib/execlp.c, mdk-stage1/dietlibc/libstdio/fread.c,
+	mdk-stage1/dietlibc/librpc/xdr.c, mdk-stage1/ppp/include/net/ppp_defs.h,
+	mdk-stage1/dietlibc/lib/recv.c, mdk-stage1/dietlibc/lib/reboot.c,
+	mdk-stage1/dietlibc/librpc/svc_auth_unix.c,
+	mdk-stage1/insmod-modutils/obj/obj_sparc64.c,
+	mdk-stage1/dietlibc/include/errno.h,
+	mdk-stage1/dietlibc/syscalls.s/stat64.S,
+	mdk-stage1/dietlibc/include/sys/uio.h,
+	mdk-stage1/dietlibc/librpc/pmap_getport.c,
+	mdk-stage1/dietlibc/libstdio/printf.c,
+	mdk-stage1/dietlibc/include/sys/times.h,
+	mdk-stage1/dietlibc/lib/sigaddset.c, mdk-stage1/dietlibc/lib/sigjmp.c,
+	mdk-stage1/dietlibc/lib/getopt.c,
+	mdk-stage1/dietlibc/lib/if_indextoname.c,
+	mdk-stage1/dietlibc/libcrypt/crypt.c,
+	mdk-stage1/insmod-modutils/Makefile,
+	mdk-stage1/dietlibc/include/rpc/pmap_prot.h,
+	mdk-stage1/dietlibc/libstdio/fflush.c,
+	mdk-stage1/dietlibc/libugly/popen.c,
+	mdk-stage1/dietlibc/libpthread/pthread_mutex_trylock.c,
+	mdk-stage1/dietlibc/ppc/mmap.c, mdk-stage1/dietlibc/include/sys/poll.h,
+	mdk-stage1/dietlibc/librpc/getrpcport.c,
+	mdk-stage1/dietlibc/librpc/auth_none.c,
+	mdk-stage1/dietlibc/lib/pread64.c,
+	mdk-stage1/dietlibc/libpthread/pthread_attr_setinheritsched.c,
+	mdk-stage1/insmod-modutils/util/config.c,
+	mdk-stage1/dietlibc/lib/strtoll.c, mdk-stage1/dietlibc/include/resolv.h,
+	mdk-stage1/insmod-modutils/util/sys_dm.c,
+	mdk-stage1/dietlibc/lib/bsearch.c, mdk-stage1/dietlibc/lib/strcasecmp.c,
+	mdk-stage1/dietlibc/sparc/shmat.c,
+	mdk-stage1/dietlibc/librpc/pmap_getmaps.c,
+	mdk-stage1/dietlibc/ppc/__testandset.S,
+	mdk-stage1/dietlibc/libugly/setenv.c,
+	mdk-stage1/dietlibc/include/alloca.h, mdk-stage1/dietlibc/libdl/README,
+	mdk-stage1/dietlibc/libpthread/pthread_cond_wait.c,
+	mdk-stage1/insmod-busybox/Makefile,
+	mdk-stage1/dietlibc/librpc/clnt_generic.c,
+	mdk-stage1/dietlibc/lib/memmove.c, mdk-stage1/dietlibc/sparc/pipe.S,
+	mdk-stage1/dietlibc/include/daemon.h,
+	mdk-stage1/dietlibc/liblatin1/latin1-isgraph.c,
+	mdk-stage1/dietlibc/include/math.h, mdk-stage1/dietlibc/sparc/udiv.S,
+	mdk-stage1/dietlibc/lib/remove.c,
+	mdk-stage1/dietlibc/include/sys/sendfile.h,
+	mdk-stage1/dietlibc/libugly/isleap.c,
+	mdk-stage1/dietlibc/syscalls.s/syslog.S,
+	mdk-stage1/insmod-modutils/obj/obj_reloc.c,
+	mdk-stage1/dietlibc/lib/getpeername.c,
+	mdk-stage1/dietlibc/include/sys/ipc.h, mdk-stage1/dietlibc/lib/rand.c,
+	mdk-stage1/dietlibc/include/ftw.h,
+	mdk-stage1/dietlibc/libcruft/gethostbyname2_r.c,
+	mdk-stage1/dietlibc/lib/shmat.c,
+	mdk-stage1/insmod-modutils/include/module.h,
+	mdk-stage1/dietlibc/librpc/xdr_stdio.c,
+	mdk-stage1/insmod-modutils/util/xmalloc.c,
+	mdk-stage1/dietlibc/sparc/umul.S,
+	mdk-stage1/insmod-modutils/include/kerneld.h,
+	mdk-stage1/dietlibc/librpc/clnt_raw.c,
+	mdk-stage1/dietlibc/libpthread/pthread_mutex_init.c,
+	mdk-stage1/dietlibc/libstdio/stdout.c, mdk-stage1/dietlibc/README,
+	mdk-stage1/dietlibc/libcruft/herrno_location.c,
+	mdk-stage1/dietlibc/lib/shmctl.c,
+	mdk-stage1/dietlibc/libpthread/pthread_mutex_unlock.c,
+	mdk-stage1/dietlibc/librpc/xdr_rec.c,
+	mdk-stage1/dietlibc/libpthread/pthread_cond_destroy.c,
+	mdk-stage1/dietlibc/include/rpc/rpc_msg.h,
+	mdk-stage1/dietlibc/syscalls.h, mdk-stage1/dietlibc/lib/toupper.c,
+	mdk-stage1/dietlibc/libpthread/pthread_sys_open.c,
+	mdk-stage1/dietlibc/lib/sigfillset.c, mdk-stage1/dietlibc/lib/listen.c,
+	mdk-stage1/dietlibc/include/glob.h, mdk-stage1/dietlibc/libdl/_dl_int.h,
+	mdk-stage1/dietlibc/libpthread/pthread_mutex_destroy.c,
+	mdk-stage1/dietlibc/include/sys/mount.h, mdk-stage1/disk.c,
+	mdk-stage1/dietlibc/lib/socket.c,
+	mdk-stage1/dietlibc/libpthread/pthread_sys_waitpid.c,
+	mdk-stage1/dietlibc/libpthread/pthread_attr_setdetachstate.c,
+	mdk-stage1/dietlibc/libugly/strftime.c,
+	mdk-stage1/dietlibc/lib/shutdown.c, mdk-stage1/insmod-modutils/insmod.c,
+	mdk-stage1/dietlibc/lib/msgctl.c,
+	mdk-stage1/dietlibc/libcruft/gethostbyname2.c,
+	mdk-stage1/dietlibc/include/rpc/pmap_clnt.h,
+	mdk-stage1/dietlibc/syscalls.s/pause.S,
+	mdk-stage1/dietlibc/syscalls.s/socketcall.S,
+	mdk-stage1/dietlibc/libpthread/pthread_cond_init.c,
+	mdk-stage1/dietlibc/liblatin1/latin1-isupper.c,
+	mdk-stage1/dietlibc/lib/islower.c,
+	mdk-stage1/dietlibc/sparc/Makefile.add,
+	mdk-stage1/dietlibc/include/sys/wait.h,
+	mdk-stage1/dietlibc/lib/isalnum.c, mdk-stage1/dietlibc/libstdio/fseek.c,
+	mdk-stage1/slang/Makefile, mdk-stage1/minilibc.h,
+	mdk-stage1/dietlibc/librpc/getrpcent.c, mdk-stage1/dietlibc/AUTHOR,
+	mdk-stage1/dietlibc/lib/getsockopt.c,
+	mdk-stage1/dietlibc/libdl/_dl_jump.S, mdk-stage1/dietlibc/lib/atol.c,
+	mdk-stage1/dietlibc/lib/isspace.c,
+	mdk-stage1/dietlibc/syscalls.s/__pread.S,
+	mdk-stage1/dietlibc/lib/strtol.c, mdk-stage1/dietlibc/lib/htonl.c,
+	mdk-stage1/dietlibc/include/sys/sem.h,
+	mdk-stage1/insmod-modutils/obj/obj_ppc.c,
+	mdk-stage1/dietlibc/lib/shmget.c,
+	mdk-stage1/dietlibc/include/rpc/auth_des.h,
+	mdk-stage1/dietlibc/libcruft/getpwuid.c,
+	mdk-stage1/dietlibc/libugly/logging.c,
+	mdk-stage1/dietlibc/libcruft/dnscruft2.c,
+	mdk-stage1/dietlibc/libpthread/pthread_create.c,
+	mdk-stage1/dietlibc/alpha/clone.S,
+	mdk-stage1/dietlibc/libpthread/pthread_sys_logging.c: Merge from
+	R9_0-AMD64, most notably:
+	  - AMD64 support to insmod-busybox, minilibc, et al.
+	  - Sync with insmod-modutils 2.4.19 something but everyone should use
+	dietlibc nowadays
+	  - Factor out compilation and prefix with $(DIET) for dietlibc builds
+	  - 64-bit & varargs fixes
+
+	* mdk-stage1/stdio-frontend.c: typo from post-rereading
+	Merge from R9_0-AMD64, most notably:
+	  - AMD64 support to insmod-busybox, minilibc, et al.
+	  - Sync with insmod-modutils 2.4.19 something but everyone should use
+	dietlibc nowadays
+	  - Factor out compilation and prefix with $(DIET) for dietlibc builds
+	  - 64-bit & varargs fixes
+
+	* mdk-stage1/dietlibc/threadsafe.sh, mdk-stage1/dietlibc/findcflags.sh:
+	add missing scripts
+
+	* mdk-stage1/dietlibc/libpthread/thread_key.c,
+	mdk-stage1/dietlibc/lib/puts.c, mdk-stage1/dietlibc/lib/memccmp.c,
+	mdk-stage1/dietlibc/libcruft/entlib.c,
+	mdk-stage1/dietlibc/libcruft/grent.c, mdk-stage1/dietlibc/dirstream.h,
+	mdk-stage1/dietlibc/syscalls.s/ptrace.s,
+	mdk-stage1/dietlibc/lib/set_errno.c, mdk-stage1/dietlibc/lib/vprintf.c,
+	mdk-stage1/dietlibc/syscalls.s/sigaction.S,
+	mdk-stage1/dietlibc/libcruft/entlib.h, mdk-stage1/dietlibc/start.h,
+	mdk-stage1/dietlibc/lib/__xmknod.c, mdk-stage1/dietlibc/lib/alarm.c,
+	mdk-stage1/dietlibc/libcruft/pwent.c,
+	mdk-stage1/dietlibc/libstdio/fputc.c,
+	mdk-stage1/dietlibc/alpha/signal.S,
+	mdk-stage1/dietlibc/libdl/elf_hash.c, mdk-stage1/dietlibc/dietstdarg.h,
+	mdk-stage1/dietlibc/lib/speed.c,
+	mdk-stage1/dietlibc/syscalls.s/llseek.S,
+	mdk-stage1/dietlibc/lib/getservent.c,
+	mdk-stage1/dietlibc/syscalls.s/sigsuspend.S,
+	mdk-stage1/dietlibc/lib/errlist.c, mdk-stage1/dietlibc/lib/nop.c,
+	mdk-stage1/dietlibc/syscalls.s/signal.S,
+	mdk-stage1/dietlibc/libcruft/spent.c,
+	mdk-stage1/dietlibc/syscalls.s/sigprocmask.S,
+	mdk-stage1/dietlibc/libpthread/thread_internal.c,
+	mdk-stage1/dietlibc/alpha/sigprocmask.S,
+	mdk-stage1/dietlibc/lib/random.c,
+	mdk-stage1/dietlibc/syscalls.s/sigpending.S,
+	mdk-stage1/dietlibc/syscalls.s/exit.S,
+	mdk-stage1/dietlibc/syscalls.s/pwrite.S,
+	mdk-stage1/dietlibc/libugly/daemon.c,
+	mdk-stage1/dietlibc/libstdio/fgetc.c,
+	mdk-stage1/dietlibc/lib/vfprintf.c: even more removals
+
+	* mdk-stage1/dietlibc/dieticonv.h, mdk-stage1/dietlibc/dietlibm.h,
+	mdk-stage1/dietlibc/dyn_stop.c, mdk-stage1/dietlibc/binshstr.h,
+	mdk-stage1/dietlibc/linuxnet.h, mdk-stage1/dietlibc/parselib.h,
+	mdk-stage1/dietlibc/dietuglyweaks.h, mdk-stage1/dietlibc/dyn_start.c,
+	mdk-stage1/dietlibc/dietdns.h: latest missing files
+
+2003/06/04  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: allow specifying lv_name in auto_installs (not tested!)
+
+	* install_steps.pm: don't use framebuffer after install on i845 (even if
+	framebuffer works during install)
+	(this implies no graphical boot)
+
+	* diskdrake/interactive.pm, lvm.pm: allow choosing lv name (thanks to
+	Brian Murrell)
+
+2003/06/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po, share/po/ja.po, share/po/vi.po, share/po/sq.po: updated
+	Estonien, Japanese, Albanian and Vietnamese po files
+
+2003/06/02  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Update
+
+2003/06/02  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: updated Spanish translations
+
+2003/05/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/sr@Latn.po,
+	share/po/sq.po, keyboard.pm, share/po/it.po, share/po/nl.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/lv.po,
+	share/po/hu.po: changed the name of the russian phonetic layout
+
+2003/05/30  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* standalone/mousedrake, drakxtools.spec: add mouse test in non-embedded
+	mode (#2049)
+
+2003/05/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated Vietnamese file
+
+	* share/po/de.po: updated German file
+	updated Vietnamese file
+
+2003/05/28  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/isdn.pm: forgot to commit the new configuration step
+	  - remove isdn-light config (seen with isdn4net maintainer)
+	  - new step to keep old device configuration
+
+	* network/isdn_consts.pm: s/my/our/ to make perl_checker happy in isdn.pm
+
+2003/05/28  François Pons  <fpons at mandrakesoft.com>
+
+	* network/modem.pm: remove /dev/ttyS14 link by drakconnect.
+
+2003/05/28  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c: grow MAX_ARP_RETRIES from 4 to 7 after erwan's
+	suggestion
+
+2003/05/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tg.po, share/po/id.po, share/po/ru.po, share/po/ro.po,
+	share/po/th.po, share/po/is.po, share/po/no.po, share/po/hr.po,
+	share/po/tr.po, share/po/ta.po, share/po/mt.po, share/po/sq.po,
+	share/po/it.po, share/po/nl.po, share/po/fi.po, share/po/he.po,
+	share/po/lt.po, share/po/lv.po, share/po/hu.po: updated Albanian file
+
+2003/05/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/isdn_consts.pm: fix isdndata export in stripped package
+
+2003/05/27  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* any.pm: 
+	  - user name must begin with a letter but not with a number or - or _
+
+2003/05/27  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: updated Spanish translation
+
+2003/05/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/be.po, share/po/bs.po, share/po/gl.po, share/po/de.po,
+	share/po/br.po, share/po/cy.po, share/po/af.po, share/po/et.po,
+	share/po/az.po, share/po/da.po, share/po/ca.po, share/po/cs.po,
+	share/po/bg.po, share/po/ar.po, share/po/ga.po: updated Estonian file
+
+2003/05/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-0.5mdk
+	9.2-0.4mdk
+
+2003/05/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/uz.po, share/po/sk.po, share/po/wa.po, share/po/pt_BR.po,
+	share/po/sl.po, share/po/et.po, share/po/zh_TW.po, share/po/ja.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/uk.po, share/po/eu.po,
+	share/po/es.po, share/po/DrakX.pot, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/fi.po, share/po/pl.po, share/po/eo.po,
+	share/po/el.po: updated pot file
+
+2003/05/26  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: be perl_checker prototype compliant
+
+	* commands: use formatError to display the error message
+	(to have a better error message than "SCALAR(0x....) at ...")
+
+	* interactive/http.pm, interactive.pm, interactive/newt.pm: 
+	  - methods with no argument are not functions with no argument!
+	  - perl_checker fixes
+
+2003/05/24  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: Added new toggle possibilities to the menu; use "en_US" for
+	US layout
+
+2003/05/23  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/network.pm: #3628 /etc/resolv.conf explicit rights set (by titi)
+
+2003/05/23  gbeauchesne
+
+	* any.pm, bootloader.pm: Kernel and initrd are now in /boot/efi/mandrake
+	on IA-64
+
+	* drakxtools.spec: Update changelog
+
+	* mdk-stage1/insmod-modutils/obj/Makefile: 
+	  -Wno-error on IA-64 too for insmod-modutils/obj
+
+	* install_gtk.pm, share/list.ia64: Clean-ups. Remove
+	/var/log/XFree86.0.log from filelist
+
+2003/05/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/ja.po: updated Japanese file
+
+2003/05/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/draksplash, network/network.pm, network/modem.pm,
+	standalone/draksec, install_steps.pm, handle_configs.pm,
+	standalone/drakautoinst, standalone/drakpxe, my_gtk.pm,
+	partition_table/sun.pm, install_steps_interactive.pm,
+	standalone/harddrake2, standalone/drakboot, standalone/drakTermServ,
+	standalone/net_monitor, standalone/drakbackup, partition_table/raw.pm,
+	partition_table.pm, interactive/http.pm, printer/main.pm,
+	security/msec.pm, diskdrake/interactive.pm, partition_table/bsd.pm,
+	standalone/fileshareset, standalone/drakfloppy, standalone/drakfont,
+	standalone/drakconnect, standalone/drakgw, interactive/gtk.pm,
+	standalone/drakbug, standalone/drakperm, fsedit.pm, .perl_checker,
+	printer/printerdrake.pm: perl_checker fixes
+
+	* drakxtools.spec: next release
+
+	* standalone/drakfirewall: please perl_checker
+
+	* standalone/logdrake: perl_checker fixes
+	perl_checker fixes
+
+2003/05/22  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/05/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: updated
+	pot file
+
+2003/05/22  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix differntial user file naming.
+
+2003/05/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* printer/printerdrake.pm: better english (#1342)
+
+	* standalone/draksplash, standalone/logdrake: gtk+-2 specs prohibid
+	playing with policy
+
+	* drakxtools.spec: 9.2-0.3mdk
+	next 9.2-0.3mdk bits
+	fix #3485
+
+	* network/netconnect.pm: kill some warnings catched by diagnostics pragma
+
+	* standalone/drakconnect: gtk+-2 specs prohibid playing with policy
+	(build_list) simplify ip parsing
+	workaround #3341: display "Bad ip" instead of a blank field if ip
+	wasn't correctly parsed as an ip ?
+
+	* standalone/drakbug: do not mix interactive and ugtk2, let reusse
+	create_dialog()
+	do not set twice the title, ugtk2->new already do it for us
+	remove unused variable
+	gtk+-2 specs prohibid playing with policy
+	(quit_global) inline it
+	  - further clean gui construction through functionnal ugtk2
+	  - do not gratuitously add:
+	o " " around button labels
+	  o empty strings at end of kernel release
+	  - (parse_release) simplify
+	  - there's no need to keep a reference on field that we do not further
+	  use (distro release is parsed again when needed and kernel release
+	  is already stored in some variable)
+	  - do not pack nothing to widgets
+	  - simplify gui construction through create_packtable(), we really do
+	  not have to offuscate it like c programmers have to
+	  - one shall not be able to alter kernel or distribution release number
+
+	* harddrake/data.pm: do not fork usb module drivers list but reuse
+	list_modules one instead
+
+	* share/po/fr.po: update fr translation
+
+2003/05/21  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/network.pm: add some ip checking (#853)
+	remove old comments
+
+2003/05/21  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/05/21  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: fix gc sux in 1.117 modfiying function behaviour
+	gtktext_insert: fix indenting of one line, takes that as a
+	pretext to redo whole function identing without tabs
+	beautify titi
+
+2003/05/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/be.po, share/po/uk.po, share/po/bg.po, share/po/sr.po,
+	share/po/ru.po: put "yawerty" in cyrillic for languages using cyrillic
+	alphabet
+
+2003/05/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-0.3mdk's first bits (more to com tomorrow)
+
+	* standalone/drakboot: we already have fork()+exec() detect_loader, so
+	there's no need to do
+	it again
+
+	* standalone/harddrake2: remove unused function that should never have
+	come to live
+	  - help menu items are not checkable
+	  - do not display spurious "/" on menu buttons when embedded
+	  - (strip_first_underscore) let speedup the regexp
+
+	* printer/gimp.pm: please gc
+
+	* ugtk2.pm (gtktext_append) fix gtktext_insert() call
+
+2003/05/20  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Partially updated
+
+2003/05/20  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* modules/interactive.pm: fix BUG 2530, no more spurious window when
+	insmoding fail
+
+	* network/ethernet.pm: #763 #2336 fix alias in modules.conf
+	perl_checker compliant
+
+2003/05/20  keld
+
+	* share/po/da.po: Updates
+	gi/perl-install/share/po/da.po
+
+2003/05/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po, share/po/fi.po, share/po/de.po: updated pot file
+	updated German, Estonian and Finnish files
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/bs.po, share/po/uz.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/lv.po,
+	share/po/hu.po: updated pot file
+
+2003/05/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/scannerdrake (removeverticalbar) pixelate
+	perl_checker fixes
+
+	* Xconfig/xfreeX.pm: perl_checker fix
+
+	* common.pm (set_permissions): owner and group are optional parameters
+
+	* printer/gimp.pm: typo fix
+	(pop_spaces) prevent infinite loop
+	(addprinter,isprinterconfigured): remove temp variables
+
+	* drakxtools.spec: 9.1-0.2mdk
+	distriblint fix
+	one last fix
+	further bits for 9.2-0.1mdk
+	first bits of 9.2-0.1mdk
+
+	* printer/printerdrake.pm: 
+	  - perl_checker fixes, which show up the following bugs:
+	  - printer::printerdrake::{setup_smb,setup_socket}(): do not use undef
+	  values, but reuse those we just calculate
+	  - printer::printerdrake::main(): fix printer::default::printer_type()
+	  callee
+	
+	  - printer::printerdrake::check_network(): fix
+	  network::netconnect::main() callee
+
+	* network/nfs.pm (find_servers): chomp is uneeded
+	(find_exports) better behavior when regexp does not match
+
+	* standalone/harddrake2: better explanation of the wp field
+
+	* standalone/draksplash: perl_checker fixes
+
+	* printer/detect.pm, standalone/printerdrake: perl_checker fixes
+	printer::printerdrake::{setup_smb,setup_socket}(): do not use undef
+	values, but reuse those
+	we just calculate
+	printer::printerdrake::main(): fix printer::default::printer_type()
+	callee
+
+	* my_gtk.pm: fix #3952: do not pass extra argument (gc altered
+	common::take_screenshot() api in r1.172 but forget to alter all
+	callees)
+
+	* standalone/drakfont: try to simplify
+	(put_font_dir): $/variable is unlikely what was initially intended
+	(chk_empty_xfs_path): typo fix
+	(search_dir_font_uninstall): further simplify
+	(chk_empty_xfs_path):
+	  - any { !cdt} equals to every { cdt }
+	  - if_ is unneeded
+	
+	(search_dir_font_uninstall) map { if_(cdt, $_ } equals to grep { cdt }
+	(file_ok_sel) prevent potential crash in perl regexp engine if sg bad
+	happenned in the translation
+	fix #3960: divide by zero execption
+
+	* security/msec.pm: 
+	  - fix #3616 (draksec discarding changes)
+	  - add a end of line btw at the end of file to please cat
+
+	* standalone/drakedm: fix #1743: offer to restart the dm service
+
+	* printer/main.pm: perl_checker fixes
+	printer::printerdrake::{setup_smb,setup_socket}(): do not use undef
+	values, but reuse those
+	we just calculate
+	printer::printerdrake::main(): fix printer::default::printer_type()
+	callee
+	prevent set_usermode() vs set_cups_autoconf() conflict
+	restore service restart
+
+	* .perl_checker: check again printerdrake, this would have prevent whoever
+	altered
+	network::netconnect::main() to forget some calle when updating all
+	calle for new parameters signature :-(
+
+	* bootloader.pm: for whatever reason, the second part of
+	detect_bootloader()
+	consolidation didn't make up into the cvs
+
+	* modules.pm (probe_category): one regexp is enough for isdn
+
+	* share/po/fr.po: update french translation
+
+2003/05/19  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: updated Spanish translations
+
+2003/05/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* printer/gimp.pm (gimp::pop_spaces): consolidate skipping of lines that
+	are space ended
+	perl_checker fixes
+
+	* any.pm: in standalone drakboot, raise a wait message window so that the
+	user can figure
+	out what occurs (lilo installation being quite long)
+
+	* bootloader.pm: fix #3560 (drakboot not updating bootloader label): the
+	only confusing
+	bug is that when one come back to drakboot main window after having
+	altered the bootloader, the main window still list the old bootloader
+	as the current bootloader.
+	let update this label.
+	btw consolidate bootloader detection in bootloader::detect_bootloader()
+	further fix #2826 (lilo failling to handle entry with spaces): replace
+	spaces by underscores in labels (image names are not likely to contain
+	spaces) to prevent the error
+	when configuring to install grub bootloader, we first install lilo, then
+	grub.
+	
+	the logic is that we only reread /etc/lilo.conf[1], so we need to write
+	/etc/lilo.conf.  but when installing grub, we really do not need to run
+	lilo, we
+	only have to write its config file.
+	
+	[1] because grub/menu.lst lacks some data and because we do neither want
+	to
+	parse both config files nor to resolve conflicts between configuration
+	let further consolidate make_label_lilo_compatible()
+
+	* printer/main.pm: 
+	  - (read_location, rip_location): simplify loop condition since once we
+	get
+	$location_end, we exit it
+	  - (rip_location): simplify @location build when no existing one
+	  - (get_cups_autoconf, set_cups_autoconf, get_usermode, set_usermode):
+	simplify
+	  a lot through getVarsFromSh() and setVarsInSh()
+	
+	  - (set_jap_textmode) simplify a lot through substInFile()
+	
+	now all /etc/sysconfig/printing accesses get done by MDK::Common::File
+	(until
+	shell template from libconf is used)
+	perl_checker fixes
+
+	* standalone/logdrake: dialog window is already modal
+
+	* printer/cups.pm, printer/detect.pm, printer/office.pm,
+	printer/default.pm, printer/services.pm, printer/printerdrake.pm:
+	perl_checker fixes
+
+	* standalone/drakboot: fix #3560 (drakboot not updating bootloader label):
+	the only confusing
+	bug is that when one come back to drakboot main window after having
+	altered the bootloader, the main window still list the old bootloader
+	as the current bootloader.
+	let update this label.
+	btw consolidate bootloader detection in bootloader::detect_bootloader()
+
+	* network/network.pm: move expert stuff under the "advanced" button like
+	in all other drakx/drakxtools code
+
+	* network/nfs.pm: do not drop return values from regexp but use them to
+	ensure we do not
+	reuse capture buffers from previous one, which is really bad and
+	trully buggy
+
+	* lang.pm: %langs: first column is supposed to be localized in english
+
+	* standalone/drakconnect: some drakconnect cleanups
+
+	* standalone/lsnetdrake: simplify
+
+	* standalone/harddrake2: localize drive capabilites (aka burning, dvd
+	managment, ...)
+
+	* drakxtools.spec: add a bug reference
+	last 9.1-38mdk bits
+	update perl-gtk0 users list (drakcronat being ported to gtk+2)
+
+	* install_steps.pm: fix network::netconnect::save_conf() callee
+
+2003/05/16  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm: add a step to warn user before writing settings
+	(bug #852 and so)
+
+2003/05/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: updated
+	pot file
+
+2003/05/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: perl_checker fix
+
+	* network/isdn_consts.pm: let it work
+
+	* drakxtools.spec: first bits of 9.1-38mdk
+
+2003/05/15  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Typo fix
+
+2003/05/15  keld
+
+	* share/po/da.po: updates
+	gi/perl-install/share/po/da.po
+
+2003/05/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po, share/po/DrakX.pot: updated pot file
+
+2003/05/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk.pm: mark it as deprecated
+
+	* standalone/harddrake2: 
+	  - describe wp flag on ia32 cpus
+	  - make all field descriptions begin by a lower case letter
+	  - (create_dialog) :
+	o options are passed through a hash ref
+	  o wrap text
+	  o update caller list
+	  - harddrake2: convert to use create_dialog() instead of
+	interactive->warn
+	  (fix #3487)
+
+	* standalone/drakfont (create_dialog) :
+	  - update caller list
+	  - add title parameter and update callers
+	remove unused variable
+	do not use interactive to get root capabilties, directly use
+	require_root_capability()
+	fix #1352 : do not add buggy font directories
+	hide "mode switch" buttons to only enable to switch to the other mode,
+	not the current one
+
+	* ugtk2.pm (create_dialog) scroll window if needed
+	  - (create_dialog) :
+	o options are passed through a hash ref
+	  o wrap text
+	  o update caller list
+	  - harddrake2: convert to use create_dialog() instead of
+	interactive->warn
+	  (fix #3487)
+	(create_dialog) :
+	  - update caller list
+	  - add title parameter and update callers
+
+	* standalone/drakfloppy (create_dialog) :
+	  - update caller list
+	  - add title parameter and update callers
+
+	* harddrake/data.pm: bump version
+
+	* drakxtools.spec: 
+	  - 9.1-37mdk
+	  - bump require in order to help rpm to update for new autoreq
+
+2003/05/14  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Some fixes and so...
+	Updated partially
+
+2003/05/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* bootloader.pm: perl_checker fixes
+
+	* standalone/drakfont: 
+	  - uninline poulpy
+	  - use map instead of foreach in some places
+	  - (chk_empty_xfs_path): replacing foreach by map make obvious that we
+	  don't have to grep all items, grep will be enough
+	
+	  - (put_font_dir): consolidate some code into convert_fonts; this make
+	  obvious there were some bug due to $/varname typo; this also reduce
+	  the message to translate ammount
+
+2003/05/13  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakTermServ: perl_checker cleaning
+
+2003/05/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakedm: perl_checker fix
+
+	* .perl_checker: ignore URPM::Resolve until francois qiet it down
+
+	* standalone/drakperm: better use get instead of _get
+
+	* network/netconnect.pm: 
+	  - gtkcreate_img is exported by helpers tag in ugtk2
+	  - add a bug note: write_on_pixmap() is only in my_gtk, not in ugtk2 !
+
+	* standalone/drakbug: make option managment look like real perl
+
+	* standalone/drakgw: perl_checker fixes
+
+	* Xconfig/main.pm (configure_everything_or_configure_chooser) keyboard and
+	mouse
+	paremeters really are optional, Xconfig::default::configure() handle
+	the fact they're undefined for us
+
+	* standalone/drakboot: let ugtk2->new manage the title setting
+
+	* standalone/drakfont: better use s/_get/get/ and {get,set}_fraction
+	instead of ->fraction
+	helper
+
+	* standalone/drakconnect: 
+	  - remove 80% of perl_checker warnings
+	  - gtkbuttonset is not exported by ugtk2
+
+	* standalone/drakTermServ: cleanups
+
+	* standalone/drakfloppy: 
+	  - add empty prototypes to help perl_checker
+	  - has_sub_trees: better use ||
+
+	* standalone/drakxtv: help perl_checker by providing an empty prototype
+
+2003/05/12  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/isdn.pm: s/@isdn::isdndata/@isdndata/
+
+2003/05/12  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive.pm: have the "Ok" in ask_from__add_modify_remove return true
+	in default mode (eg: newt)
+
+	* standalone/diskdrake: add "--list-hd" to please gbeauchesne
+
+2003/05/12  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: perl_checker compliance, differential mode
+	option, explain adding directories
+
+2003/05/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm: use matched values only if matching did success
+
+	* drakxtools.spec: help auto-provides
+	9.1-36mdk
+
+	* standalone/drakboot: 
+	  - pass enough dummy parameters to fs::merge_info_from_fstab
+	  - add empty prototypes to help perl_checker catch miss writeen func
+	calls
+	  - do not log localized messages; what's more, this is supposed to be
+	  already logged by standalone
+	  - in testing mode:
+	  o do not enforce the need for bootsplash
+	  o do not really run mkinitrd
+	  - if bootsplash miss, we should just go back to main config window
+
+2003/05/10  keld
+
+	* share/po/da.po: updates
+	gi/perl-install/share/po/da.po
+
+2003/05/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/he.po: updated Hebrew file
+
+2003/05/07  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - follow new network::netconnect::save_conf signature
+	  - remove call to network::netconnect::set_net_conf, no longer exist
+
+	* network/netconnect.pm: 
+	  - configuration stuff
+	. rewrite sub save_conf, new signature is ($netcnx)
+	 . rewrite sub load_conf, connection type stored in
+	/etc/sysconfig/drakconnect
+	 . remove sub read_raw_net_conf
+	 . shrink sub read_net_conf
+	  - drop if ($nb < 1 ), useless
+	  - perl_checker
+
+	* network/isdn.pm: s|/sbin/isdnctrl|/usr/sbin/isdnctrl|
+
+2003/05/06  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: More entries
+
+2003/05/06  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/netconnect.pm: 
+	  - remove sub intro
+	  - change sub main signature
+	  - drop !$::isWizard code
+	  - perl_checker
+
+	* network/tools.pm: 
+	  - drop !$::isWizard code
+	  - perl_checker
+
+	* standalone/drakconnect: 
+	  - drop !$::isWizard code
+	  - change netconnect::main signature
+	  - change network::modem::ppp_configure signature
+	  - perl_checker
+	  - cleanup
+
+	* install_steps_interactive.pm: change network::netconnect::main signature
+
+2003/05/06  erwan
+
+	* drakxtools.spec: Fix changelog
+
+2003/05/06  gbeauchesne
+
+	* standalone/drakboot: Fix drakboot booloader methods for ia64 and amd64
+
+2003/05/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm, share/po/sp.po, pixmaps/langs/lang-sh.png, lang.pm,
+	share/po/sr.po, share/po/sr@Latn.po, pixmaps/langs/lang-sp.png: Renamed
+	Serbian po files to follow standard (sr -> cyrillic, sr@Latn -> latin).
+	'sh' is used internally by DrakX for identifier by DrakX; and 'sh_YU'
+	used as locale name, for latin Serbian, to avoid use of '@' character
+	which may be problematic in some cases.
+
+	* share/po/ru.po, share/po/he.po: updated Hebrew and Russian files
+
+2003/05/06  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: crash on add other files
+	fix disabled incremental other files checkbox
+	fix lack of incremental backups of other files
+	fix broken daemon mode
+	fix file remove issue
+	I know it fails perl_checker - require ugtk2 never returns on console
+
+2003/05/05  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/ethernet.pm: perl_checker fixes
+
+	* network/adsl.pm: 
+	  - remove unused $intf in adsl_probe_info and adsl_ask_info
+	  - perl_checker fixes
+
+	* network/netconnect.pm: 
+	  - change configure and winmodemConfigure args (due to $intf drop)
+
+	* network/modem.pm: 
+	  - drop unused $intf in configure and winmodemConfigure
+	  - fix winmodem configuration behavior
+	  - perl_checker
+
+2003/05/02  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/ethernet.pm: fix typo
+
+	* network/netconnect.pm, network/tools.pm, network/network.pm:
+	perl_checker fixes
+
+	* standalone/drakfont: fix sucky fonction (thanks to master guillaume)
+
+2003/04/30  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakfont: more perl_checker compliant
+
+2003/04/30  gbeauchesne
+
+	* partition_table.pm: Revert XFS support, not stable enough especially on
+	SMP
+
+2003/04/30  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* any.pm: have /etc/sysconfig/i18n in report.bug
+
+	* ugtk2.pm: remove export for two removed functions
+
+2003/04/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_CN.po: Changed charset encoding
+
+2003/04/30  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm, http.pm, detect_devices.pm, network/isdn.pm,
+	interactive.pm, Xconfig/resolution_and_depth.pm, c.pm,
+	partition_table/sun.pm, network/adsl.pm, swap.pm, pkgs.pm, lang.pm,
+	install2.pm: perl_checker compliance
+
+2003/04/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: perl_checker fix
+
+	* drakxtools.spec: 9.1-35mdk
+
+	* standalone/drakfont: 
+	  - no non empty prototypes
+	  - s/sub { one func call }/code ref/
+	perl_checker fixes
+
+	* ugtk2.pm (create_dialog):
+	  - second parameter really is optionnal
+	  - do not blindly set the title to logdrake, this is used elsewhere
+
+	* security/level.pm: fix #3618
+
+	* scanner.pm, standalone/drakperm, standalone/drakbug: perl_checker fixes
+
+2003/04/29  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated partially
+
+2003/04/29  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakfont: more perl_checker friendly
+	empty install list at cancel
+	prevent void list installation
+
+2003/04/29  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: perl_checker can parse me at last
+
+2003/04/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakboot: no doble module loading
+
+	* modules.pm (get_parameters) perl-ize
+
+	* drakxtools.spec: 9.1-34mdk
+
+	* standalone/drakedm: fix #3701: return back to the display managers menu
+	if one cancel the
+	installation of the required packages
+
+2003/04/28  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* rescue/list.i386: add resize_reiserfs
+
+2003/04/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bg.po, share/po/he.po: updated Hebrew and Bulgarian files
+
+2003/04/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+2003/04/24  gbeauchesne
+
+	* drakxtools.spec: 1.1.19-56mdk
+
+2003/04/24  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/various.pm, Xconfig/card.pm, standalone/draksec, scanner.pm,
+	install_steps.pm, diskdrake/removable.pm, network/isdn.pm,
+	interactive.pm, c.pm, partition_table/gpt.pm, resize_fat/directory.pm,
+	install_steps_interactive.pm, network/netconnect.pm, mouse.pm,
+	standalone/harddrake2, devices.pm, lang.pm, lvm.pm, install2.pm,
+	raid.pm, crypto.pm, diskdrake/smbnfs_gtk.pm, commands.pm, ugtk2.pm,
+	partition_table.pm, any.pm, loopback.pm, Xconfig/xfree3.pm,
+	sbus_probing/main.pm, interactive/http.pm, diskdrake/interactive.pm,
+	interactive/stdio.pm, pkgs.pm, interactive/newt.pm, harddrake/sound.pm,
+	services.pm, security/level.pm, fs.pm, install_messages.pm,
+	install_steps_auto_install.pm, harddrake/data.pm, keyboard.pm,
+	diskdrake/hd_gtk.pm, Xconfig/monitor.pm, fsedit.pm, modules.pm,
+	common.pm, detect_devices.pm, network/tools.pm, network/shorewall.pm,
+	install_any.pm, timezone.pm: perl_checker adaptations + fixes
+
+2003/04/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix conflict with perl-Locale-gettext
+
+2003/04/23  gbeauchesne
+
+	* share/list.x86_64, rescue/list.x86_64, partition_table.pm: add xfs for
+	amd64
+
+2003/04/23  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* rescue/list: file-4.02
+
+2003/04/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tg.po, share/po/uz.po, share/po/sk.po, share/po/ru.po,
+	share/po/ro.po, share/po/wa.po, share/po/pt_BR.po, share/po/th.po,
+	share/po/sl.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/tr.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/sq.po,
+	share/po/uk.po, share/po/pl.po, share/po/sr.po, share/po/sv.po,
+	share/po/sp.po, share/po/help-it.pot: updated pot file
+
+2003/04/23  Pixel  <pixel at mandrakesoft.com>
+
+	* help.pm: add prototypes
+
+	* share/po/help_xml2pm.pl: add prototypes to help.pm
+
+2003/04/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.1-32mdk
+	  - localedrake is part of drakxtools-newt, so does its menu entry (and
+	sanitize its entry btw)
+	  - drakxtools-newt: add the needed post and postun macros
+	  - sort provides'n obsoletes, add missing drakfloppy
+
+	* share/po/fr.po: update french translation
+
+2003/04/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated pot file
+	updated pot file
+
+	* share/po/bs.po, share/po/id.po, share/po/gl.po, share/po/br.po,
+	share/po/is.po, share/po/no.po, share/po/af.po, share/po/az.po,
+	share/po/ja.po, share/po/hr.po, share/po/mt.po, share/po/fr.po,
+	share/po/ga.po, share/po/nl.po, share/po/it.po, share/po/be.po,
+	share/po/eu.po, share/po/es.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/fi.po, share/po/de.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/eo.po,
+	share/po/lv.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/hu.po, share/po/ar.po: updated pot file
+
+2003/04/22  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix typos and cleanup syntax
+
+	* install_any.pm: perl_checker compliance for optional method arguments
+	fix bug #3652 (grub must be installed for a loopback install)
+
+	* share/po/help_xml2pm.pl, help.pm: fix typo (help.pm must return a true
+	value)
+	per Pablo's request:
+	  - create a mini header in the generated help-*.pot files
+	  - guilabel, guibutton and guimenu now uses %s to separate more cleanly
+	what
+	comes is doc and what is gui text
+	!! the new generated help.pm has a different interface, non-backward
+	compliant !!
+
+	* Xconfig/xfree3.pm, Xconfig/xfreeX.pm, install_steps_gtk.pm,
+	Xconfig/xfree.pm: perl_checker compliance for optional method arguments
+
+	* interactive.pm: perl_checker compliance for optional method arguments
+	adapt to new help.pm
+
+	* share/po/help-fr.pot, share/po/help-de.pot, share/po/help-ru.pot,
+	share/po/help-es.pot, share/po/help-it.pot: per Pablo's request:
+	  - create a mini header in the generated help-*.pot files
+	  - guilabel, guibutton and guimenu now uses %s to separate more cleanly
+	what
+	comes is doc and what is gui text
+	!! the new generated help.pm has a different interface, non-backward
+	compliant !!
+
+2003/04/22  tpittich
+
+	* share/po/sk.po: fixed slovak translation (thanks to Stanislav Visnovsky
+	and Zdenko Podobny)
+
+2003/04/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: array costs less than a hash
+
+	* drakxtools.spec: 9.1-31mdk
+
+2003/04/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po: updated Italian file
+
+2003/04/21  Pixel  <pixel at mandrakesoft.com>
+
+	* keyboard.pm: 'Option "XkbCompat" "group_led"' is no good because
+	it means that effectively NO other compatibility settings
+		  are included i.e. NONE of standard XFree86 keys work,
+		  including Ctrl-Alt-Fx, Ctrl-Alt-KP+, Ctrl-Alt-KP- etc.
+	'Option "XkbCompat" "default+group_led"' is much better
+	(thanks Andrey Borzenkov)
+
+	* share/rpmsrate: have bison and flex installed when DEVELOPMENT is chosen
+	(thanks to Adam
+	Williamson)
+
+2003/04/18  François Pons  <fpons at mandrakesoft.com>
+
+	* install_any.pm: make all CD as update (as it should have been to allow
+	updates to be resolved).
+
+2003/04/17  gbeauchesne
+
+	* share/list.x86_64: Add raid & reiserfs tools
+
+	* drakxtools.spec: Use RPM_OPT_FLAGS when compiling tools
+	(rpcinfo-flushed)
+	1.1.9-55mdk
+
+	* tools/Makefile: Compile rpcinfo-flushed/xhost+ with -Os so that code
+	size is reduced
+	and magically fixed on hammer. ;-)
+
+2003/04/17  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: another perl_checker optional parameter compliance
+	new perl_checker compliance
+
+	* Xconfig/various.pm, network/network.pm, network/modem.pm,
+	security/various.pm, standalone/draksec, partition_table/dos.pm,
+	scanner.pm, install_steps.pm, Xconfig/parse.pm, network/isdn.pm,
+	interactive.pm, resize_fat/directory.pm, install_steps_interactive.pm,
+	network/netconnect.pm, Xconfig/xfreeX.pm, mouse.pm, devices.pm, lang.pm,
+	resize_fat/boot_sector.pm, network/drakfirewall.pm,
+	modules/interactive.pm, standalone/diskdrake, crypto.pm,
+	Xconfig/main.pm, diskdrake/smbnfs_gtk.pm, install_interactive.pm,
+	partition_table/raw.pm, ugtk2.pm, partition_table.pm, any.pm,
+	install_steps_gtk.pm, partition_table/mac.pm, ftp.pm,
+	diskdrake/interactive.pm, pkgs.pm, interactive/newt.pm,
+	network/ethernet.pm, Xconfig/resolution_and_depth.pm, bootloader.pm,
+	diskdrake/hd_gtk.pm, Xconfig/monitor.pm, fsedit.pm,
+	partition_table/lvm_PV.pm, modules.pm, common.pm, detect_devices.pm,
+	standalone/drakupdate_fstab, install_any.pm, timezone.pm: new
+	perl_checker compliance
+
+2003/04/16  gbeauchesne
+
+	* mdk-stage1/insmod-busybox/Makefile: 
+	  - Update to busybox 0.65.0 version
+	  - Add support for x86-64
+	Use $(DIET) wrapper
+
+	* mdk-stage1/insmod-busybox/insmod.c, mdk-stage1/insmod-busybox/Config.h,
+	mdk-stage1/insmod-busybox/busybox.h: Fixes. Don't care about taint
+	stuff. Constify a little so that some dead
+	branches could be nuked. -> Reduce code size by 5 KB.
+	  - Update to busybox 0.65.0 version
+	  - Add support for x86-64
+	Merge back fixes from HEAD but don't use the init_module() et al. tricks
+	since correct dietlibc 0.22 is used on the branch.
+	  - Update to insmod from busybox 0.65.0
+	  - Add support for x86-64
+
+	* mdk-stage1/insmod-busybox/README: Update README
+
+	* mdk-stage1/Makefile: use insmod-busybox on x86-64, save around 50 KB.
+	;-)
+
+2003/04/16  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: comply to new each_index behaviour
+
+2003/04/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: fix #1675: swap the text and button widgets
+
+2003/04/15  gbeauchesne
+
+	* detect_devices.pm: Fix hasSMP()
+
+	* install_any.pm: CD-ROM installations use cdrom.img on x86-64 nowadays
+
+2003/04/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: add hint for translators
+
+2003/04/14  gbeauchesne
+
+	* harddrake/data.pm: fix harddrake doesn't display unknow hardware (tv,
+	9.0 updates)
+
+	* mdk-stage1/dhcp.c, docs/README, mdk-stage1/tools.c, mdk-stage1/stage1.h:
+	Handle "netauto" mode (gc, post 9.1)
+
+	* drakxtools.spec: Match current 9_0-64bit-branch state
+
+2003/04/14  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c, mdk-stage1/tools.c, mdk-stage1/stage1.h: put dhcp
+	bootfile under netauto parameter
+
+2003/04/11  dam's  <dams at idm.fr>
+
+	* standalone/drakconnect: corrected titi typo
+
+2003/04/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/th.po: changed "reboot" to latin letters, as requested.
+
+2003/04/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakboot: any::setupBootloader() already call
+	bootloader::install()
+
+	* standalone/drakedm: it was designed in 2003, not 2002
+
+2003/04/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: first bits of 9.1-31mdk
+	fix harddrake menu entry description
+
+	* standalone/drakboot: fix #2826 (aka pixel sucks):
+	pixel changed the booloader module api by throwing an exception
+	instead of using the ugly /tmp/.error temporary file and altered drakx
+	callers but forget to update standalone/* callers (aka drakboot).
+	now, with this patch, any error during lilo/grub installation is
+	catched and displayed, which is more generic than checking for spaces.
+
+2003/04/04  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* docs/README: some fixes and improvements
+
+	* docs/HACKING: some updates
+
+2003/04/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: bump gtk2-perl require because of #3633
+	9.1-30mdk
+
+	* scanner.pm: fix doble explanation logging of scannerdrake and harddrake
+	startup
+
+	* standalone/logdrake: 
+	  - perl_checker fixes
+	  - ensure only one callback do regular parsing
+
+	* standalone/drakfloppy: fix crash on floppy generation reported by
+	Francisco Alcaraz
+
+2003/04/03  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated
+
+2003/04/03  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: after adding gtk_text_buffer_place_cursor in gtk2-perl, use it
+	here :)
+	fix #3633 (cursor at the end of TextView after gtktext_insert)
+	remove a few memory leaks
+
+	* drakxtools.spec: after adding gtk_text_buffer_place_cursor in gtk2-perl,
+	use it here :)
+
+2003/04/02  gbeauchesne
+
+	* detect_devices.pm: Update to match IA-64 ACPI format string "XXX CPUs
+	available"
+
+2003/04/02  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* patch/9.1/patch-loopback.pl: Error scenario: When using a file for your
+	/ (a "loopback"), booting your newly
+	installed system will fail with a kernel panic with flashing keyboard
+	lights
+	Why: The initrd needs to load the loop.o module to mount your /
+	partition; but
+	since recently, loop.o depends on aes.o, and since mkinitrd doesn't
+	handle
+	dependencies automatically and we didn't notice that change, we didn't
+	update
+	mkinitrd accordingly
+	Solution: Format a floppy disk with a DOS filesystem (in Linux, you can
+	use the
+	command "mkdosfs /dev/fd0"). Copy patch.pl to the floppy disk. Remove
+	the floppy
+	and reboot using the Mandrake Linux 9.1 CD1 to do a CD-ROM installation.
+	During
+	boot, press F1 at the splash screen, then place your floppy disk that
+	contains
+	patch.pl in the floppy drive. At the prompt, type "patch", then follow
+	the
+	installation as usual.
+	
+	see bugzilla #3614
+
+2003/04/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nl.po: updated Dutch file
+
+2003/04/02  Pixel  <pixel at mandrakesoft.com>
+
+	* patch/9.1/patch-detectSMP-K6.pl: Error scenario: On a AMD-K6, install
+	fails after the formatting partitions steps with a strange "type read"
+	error
+	Why: in some cases, the SMP detection code fails and force the install
+	to exit
+	Solution: Use patch.pl which disables SMP detection
+	(thanks to Angela Bayley)
+
+2003/04/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake: remove unused variable
+	  - various perl_checker "fixes"
+	  - (logcolorize): make it saner regarding its arguments, thanks
+	perl_checker
+
+	* harddrake/sound.pm: hackism to shut up perl_checker
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, standalone/drakTermServ,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/lt.po, share/po/he.po, share/po/sp.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/bs.po, share/po/uz.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sq.po, share/po/it.po, share/po/nl.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/lv.po,
+	share/po/hu.po: s/initrdrd/initrd/ (Arpad Biro)
+
+	* standalone/harddrake2: fix pablo patch that broke two translations
+	(reported by Arkadiusz
+	Lipiec)
+
+2003/04/01  François Pons  <fpons at mandrakesoft.com>
+
+	* rescue/tree/etc/oem-all: added restore into boot_entries default value,
+	increased hd install size from
+	1500 MB to 2500 MB to include current ackbar cooker repository.
+
+2003/04/01  gbeauchesne
+
+	* bootloader.pm: Indentation fixes
+
+	* install_steps_gtk.pm: Pass $Driver to launchX in non /FB/ case
+	Pass $Driver to launchX in non /FB/ case
+	Backport from 9.1 xf4 fallbacking to fbdev driver
+
+	* install_steps.pm: Remove MAKEDEV workaround for ia64. Fixes must be
+	found, and kernel nowadays
+	have devfs support.
+
+	* install_gtk.pm: Backport from 9.1 xf4 fallbacking to fbdev driver
+
+2003/04/01  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* lang.pm: misc
+
+2003/04/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake (parse_file) pass explicit argument instead of
+	relying on lexical $_
+	being correct in that context (worked fine but this is bad)
+
+	* share/po/fr.po: 
+	  - fix fscking french translation
+	  - explain why it's bad to translate this way
+
+	* standalone/draksound, install_steps_interactive.pm: move
+	harddrake::sound $index param in hash and pass only the hash ref around
+	functions
+
+	* ugtk2.pm: perl_checker fixes
+
+	* standalone/harddrake2: 
+	  - fix fscking french translation
+	  - explain why it's bad to translate this way
+	  - prevent translators to do bad things (that is having badly
+	constructed
+	strings on screen)
+	  - reuse some translations instead of relying on extracting tools'
+	merge
+	  feature
+	  - give translators more control on about window text
+
+	* harddrake/sound.pm: propagate $in where needed
+	move harddrake::sound $index param in hash and pass only the hash ref
+	around
+	functions
+
+	* standalone/drakhelp: simplify
+
+2003/03/31  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Typo fix
+
+2003/03/31  François Pons  <fpons at mandrakesoft.com>
+
+	* bootloader.pm: copy kernel and stage1 in order to avoid remapping
+	/mnt/hd on the fly during
+	install for bootloader installation to complete correctly.
+	fixed regex for kernel options retrieved for restore bootloader entry.
+
+2003/03/31  keld
+
+	* share/po/da.po: spelling errors
+	po/po/da.po gi/perl-install/share/po/da.po
+
+2003/03/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/vi.po: updated Vietnamese file
+
+	* share/po/fr.po: fixed a bad grammatical error
+
+2003/03/30  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* lang.pm: clean
+
+2003/03/30  keld
+
+	* share/po/da.po: spelling errors
+	soft/menu-messages/da.po gi/perl-install/share/po/da.po
+	some spelling errors
+	soft/control-center/po/da.po gi/perl-install/share/po/da.po
+
+2003/03/29  keld
+
+	* share/po/da.po: Updates
+	soft/GtkMdkWidgets/po/da.po gi/perl-install/share/po/da.po
+
+2003/03/28  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* lang.pm: disable arabic whic doesn't work well after install
+
+	* patch/9.1/hp.diff: disable arabic
+
+2003/03/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: Special cases for KDE to recognize zh_HK and zh_SG
+
+2003/03/28  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/card.pm: fix typo, grr...
+	also have DontVTSwitch for i845 (and i85x)
+	use option DontVTSwitch for i865
+
+	* drakxtools.spec: use ServerFlags DontVTSwitch for i845, i865 and i85x
+	use ServerFlags DontVTSwitch for i865
+
+2003/03/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sq.po: updated Albanian file
+
+	* share/po/ja.po: updated Japanese file
+
+2003/03/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* docs/9.1_errata.txt: 
+	  - mcc erratas
+	  - lexical ordering
+
+2003/03/26  François Pons  <fpons at mandrakesoft.com>
+
+	* install_any.pm: moved hdInstallPath to any.pm.
+
+	* any.pm: removed acpi reference here (should already been have removed
+	earlier).
+	moved here hdInstallPath from install_any.
+
+	* standalone.pm: simplified code to allow parsing rpmdb instead of just
+	urpmi db.
+
+	* bootloader.pm: fixed another typo for adding restore entry (grub menu).
+	fixed wrong usage of any::hdInstallPath which is mapped as /tmp/image
+	during
+	installation.
+	fix typo on grub menu file read.
+
+	* rescue/tree/etc/oem-all: use fat32 instead of fat16, fixed
+	mandrake-release to install.
+	fix typo.
+	mandrake-release should be installed.
+	current parted does no more support fat fs but fat16 or fat32 fs.
+
+2003/03/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* docs/9.1_errata.txt: first drakxtools errata
+
+	* drakxtools.spec: fix harddrake menu entry
+
+2003/03/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sq.po: updated Albanian file
+
+2003/03/24  François Pons  <fpons at mandrakesoft.com>
+
+	* network/netconnect.pm: added modem configuration after LT Modem support.
+
+	* network/modem.pm: added login and password retrieval for ppp0 in
+	configure function.
+	propose /dev/modem before other device (as it will work for other most
+	case).
+	added modem configuration after LT Modem support.
+
+2003/03/24  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/bs.po,
+	share/po/uz.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: updated
+	Japanese file; updated pot file
+
+2003/03/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm, install_steps_interactive.pm: hp fix
+
+	* drakxtools.spec: 
+	  - fix changelog
+	  - 9.1-28mdk
+	first bits of 9.1-26mdk
+
+	* patch/9.1/hp.diff: more hp fixes
+	mdk9.1 changes for hp
+
+2003/03/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/sq.po: updated Italian and Albanian files
+
+2003/03/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/tr.po, share/po/pt.po: updated Italian,
+	Portuguese and Turkish files
+
+2003/03/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po: changed translation fo "mandrakesoft store"
+	changed "mandrakesoft-shouten" to "mandrakesoft-no shouten"
+	("store named mandrakesoft" -> "mandrakesoft's store")
+
+2003/03/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: increase timeout from 5 to 25 seconds
+
+2003/03/20  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps_interactive.pm: fixed typo.
+	add probe for netncx type in case of not already setted.
+
+2003/03/19  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: fix
+
+2003/03/19  François Pons  <fpons at mandrakesoft.com>
+
+	* rescue/tree/etc/oem, rescue/tree/etc/oem-all: added support for passing
+	kernel options to oem scrpit.
+
+	* lang.pm: silently use en_US for arabic.
+	removed Arabic language (no correct font during install).
+	avoid displaying Hong Kong as a country.
+
+2003/03/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* docs/mdk-9.2: update, sort
+
+	* standalone/harddrake2: properly *both* reap zombies and clear status bar
+	message
+
+	* share/po/fr.po: 
+	  - fix harddrake2 main window title broken by stupid translators
+	  - explain the problem
+	  - explain how to easily get « and » caracters
+
+	* docs/9.1_errata.txt: first errate: ntfs kernel bug (bug and fix reported
+	by Szakacsits
+	Szabolcs)
+
+2003/03/18  François Pons  <fpons at mandrakesoft.com>
+
+	* rescue/tree/etc/oem, rescue/tree/etc/oem-all: added lookup into
+	isolinux/alt0 if possible
+	updated ramdisk_size=128000 acpi=off
+
+2003/03/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po: updated Indonesian file
+
+	* share/po/wa.po: corrected small typo
+
+2003/03/18  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: s/mplayer-guimplayer-gui/mplayer-gui/
+
+2003/03/17  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* install_steps.pm: reverted to 1.604
+
+2003/03/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/da.po: updated Danish and Italian files
+
+	* share/po/pt.po: updated Portuguese file
+
+	* share/po/ja.po: updated Japanese file
+
+2003/03/17  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: Add NVIDIA_nforce for smp and secure kernel
+	Fix NVIDIA_nforce entry removing kernel version (added by cleanrpmsrate)
+	FlashPlayer with a capital P
+
+2003/03/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bs.po, share/po/ro.po: updated Bosnian and Romanian files
+
+2003/03/16  Warly  <warly at mandrakesoft.com>
+
+	* drakxtools.spec: 26mdk to fix drakperm
+
+2003/03/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bs.po, share/po/vi.po: updated Bosnian and Vietnamese files
+
+	* share/po/he.po: updated Hebrew file
+
+2003/03/15  Warly  <warly at mandrakesoft.com>
+
+	* install_steps.pm, share/rpmsrate, drakxtools.spec: fix a fatal error in
+	drakpem in editable mode
+
+	* standalone/drakperm: Fix fatal error in editable window when adding a
+	new entry
+
+2003/03/14  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: Fix typo in french ads
+
+2003/03/14  François Pons  <fpons at mandrakesoft.com>
+
+	* standalone.pm: fix checking for installed kernel modules (for nvidia)
+	(/me sux)
+	(fix & changelog by pixel)
+
+	* share/rpmsrate: fixed error mandrake_doc
+	fixed gnupg using multiple rates.
+	fixed synthax error.
+
+	* install_steps_gtk.pm: made desktop group centred.
+
+2003/03/14  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/modules.c: fix myself sux: don't unconditionnally fgets
+	/proc/modules, because fopen
+	may have failed (the libc, in its great search for speed, probably
+	doesn't
+	care to check if the FILE* given to fgets is valid and opened)
+
+2003/03/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+	* share/po/is.po, share/po/el.po, share/po/he.po: updated Greek file
+
+	* share/po/zh_CN.po: updated Chinese file
+
+	* share/po/tr.po: updated Turkish file
+
+2003/03/14  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: fix XFdrake handling NVidia proprietary drivers
+
+2003/03/14  Till Kamppeter  <till at mandrakesoft.com>
+
+	* drakxtools.spec: 9.1-23mdk
+
+2003/03/14  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: mandrake-galaxy doc link is broken if mandrake_doc is
+	not install. Waiting for a better solution install mandrake_doc via
+	rpmsrate in the same group as mandrake-galaxy.
+
+2003/03/13  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Fixed bug #417: '$' character in printer URI not
+	correctly handled.
+
 2003/03/13  Till Kamppeter  <till at mandrakesoft.com>
 
 	* printer/main.pm: Fixed bug #417: '$' character in printer URI not
@@ -14850,7 +17444,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.808 2003/03/13 18:59:05 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.809 2003/03/13 23:40:17 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
