@@ -321,11 +321,6 @@ static int save_netinfo(struct interface_info * intf) {
 		fprintf(f, "ACNAME=%s\n", intf->acname);
 	}
 
-	if (!streq(intf->http_proxy_host, "") && !streq(intf->http_proxy_port, "")) {
-		fprintf(f, "PROXY=%s\n", intf->http_proxy_host);
-		fprintf(f, "PROXYPORT=%s\n", intf->http_proxy_port);
-	}
-
 	fclose(f);
 
 	return 0;
@@ -610,7 +605,7 @@ static char * interface_select(void)
 }
 
 
-static enum return_type intf_get_http_proxy(struct interface_info * intf)
+static enum return_type get_http_proxy(char **http_proxy_host, char **http_proxy_port)
 {
 	char *questions[] = { "HTTP proxy host", "HTTP proxy port", NULL };
 	char *questions_auto[] = { "proxy_host", "proxy_port", NULL };
@@ -620,8 +615,8 @@ static enum return_type intf_get_http_proxy(struct interface_info * intf)
 	results = ask_from_entries_auto("Please enter HTTP proxy host and port if you need it, else leave them blank or cancel.",
 					questions, &answers, 40, questions_auto, NULL);
 	if (results == RETURN_OK) {
-		intf->http_proxy_host = strdup(answers[0]);
-		intf->http_proxy_port = strdup(answers[1]);
+		*http_proxy_host = answers[0];
+		*http_proxy_port = answers[1];
 	}
 
 	return results;
@@ -802,7 +797,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 /* -=-=-- */
 
 
-static enum return_type intf_select_and_up(char **http_proxy_host, char **http_proxy_port)
+static enum return_type intf_select_and_up()
 {
 	static struct interface_info intf[20];
 	static int num_interfaces = 0;
@@ -825,22 +820,10 @@ static enum return_type intf_select_and_up(char **http_proxy_host, char **http_p
 		num_interfaces++;
 	}
 	
-	sel_intf->http_proxy_host = "";
-	sel_intf->http_proxy_port = "";
-
 	results = bringup_networking(sel_intf);
 
-	if (results == RETURN_OK) {
-		if (http_proxy_host && http_proxy_port) {
-			results = intf_get_http_proxy(sel_intf);
-			if (results != RETURN_OK)
-				return results;
-			*http_proxy_host = sel_intf->http_proxy_host;
-			*http_proxy_port = sel_intf->http_proxy_port;
-		}
-
+	if (results == RETURN_OK)
 		save_netinfo(sel_intf);
-	}
 
 	return results;
 }
@@ -897,7 +880,7 @@ enum return_type ftp_prepare(void)
 	enum return_type results;
 	char modules_cz[500];
 	struct utsname kernel_uname;
-	char *http_proxy_host = "", *http_proxy_port = "";
+	char *http_proxy_host, *http_proxy_port;
 
 	if (!ramdisk_possible()) {
 		stg1_error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
@@ -905,11 +888,12 @@ enum return_type ftp_prepare(void)
 		return RETURN_ERROR;
 	}
 
-	results = intf_select_and_up(&http_proxy_host, &http_proxy_port);
+	results = intf_select_and_up();
 
 	if (results != RETURN_OK)
 		return results;
 
+        get_http_proxy(&http_proxy_host, &http_proxy_port);
 	uname(&kernel_uname);
 
 	do {
@@ -1045,7 +1029,7 @@ enum return_type http_prepare(void)
 	char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
-	char *http_proxy_host = "", *http_proxy_port = "";
+	char *http_proxy_host, *http_proxy_port;
 
 	if (!ramdisk_possible()) {
 		stg1_error_message("HTTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
@@ -1053,10 +1037,12 @@ enum return_type http_prepare(void)
 		return RETURN_ERROR;
 	}
 
-	results = intf_select_and_up(&http_proxy_host, &http_proxy_port);
+	results = intf_select_and_up();
 
 	if (results != RETURN_OK)
 		return results;
+
+        get_http_proxy(&http_proxy_host, &http_proxy_port);
 
 	do {
 		char location_full[500];

@@ -41,7 +41,6 @@ struct interface_info {
 	struct in_addr ip, netmask, broadcast, network;
 	enum boot_proto_type boot_proto;
 	char *user, *pass, *acname; /* for ADSL connection */
-	char *http_proxy_host, *http_proxy_port;
 };
 
 
