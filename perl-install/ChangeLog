@@ -1,3 +1,80 @@
+2002/09/10  alus
+
+	* share/po/pl.po: updated translation
+
+2002/09/10  David Baudens  <baudens@mandrakesoft.com>
+
+	* share/po/fr.po: Update
+
+2002/09/10  François Pons  <fpons@mandrakesoft.com>
+
+	* c/stuff.pm: removed old code no more used.
+
+	* mouse.pm: fixed pixel typo (strange, I was sure it was titi but not ?).
+
+	* pkgs.pm: consolidate unselectAllPackages.
+
+	* install_steps_interactive.pm: fixed test of chooseCD on nfs (always
+	enabled).
+	avoid removing all packages during upgrade (safe guard).
+
+2002/09/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile: tag version as 9.0
+
+	* rescue/tree/etc/rc.sysinit: don't drvinst SERIAL_USB when noauto (it
+	needs a lspcidrake -v)
+
+	* rescue/drvinst: drvinst <param> is broken when we don't -v
+
+2002/09/10  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/br.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/sp.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ro.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/ta.po, share/po/fr.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/bg.po, share/po/lv.po,
+	share/po/hu.po: updated pot file
+
+	* share/po/ru.po, share/po/pt.po, share/po/cs.po: updated pot file
+	updated Czech, Russian and Portuguese files
+
+	* security/main.pm: improved i18n handling
+
+	* standalone/drakTermServ: small i18n change
+
+2002/09/10  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: set mount point for nt partitions by default
+
+	* fs.pm: 
+	  - have ntfs "ro" by default
+	  - "umask=0" is a special option for ntfs
+
+2002/09/10  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Display issues in other locales.
+
+2002/09/10  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* security/libsafe.pm, standalone/draksec: move back draksec's files in
+	drakxtools
+
+	* drakxtools.spec: move back draksec to drakxtools
+
+	* Makefile.config: move back draksec's files in drakxtools
+	move back draksec to drakxtools
+
+	* security/main.pm, security/msec.pm: inline seclevel_explain (why using
+	functions to return a text label ?)
+	move back draksec's files in drakxtools
+
 2002/09/10  François Pons  <fpons@mandrakesoft.com>
 
 	* mouse.pm: fixed pixel typo (strange, I was sure it was titi but not ?).
@@ -2813,7 +2890,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.744 2002/09/10 08:19:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.745 2002/09/10 08:23:05 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
