@@ -1066,6 +1066,7 @@ sub install($$$;$$) {
 		$retry_pkg = shift @transToInstall;
 		$retry_count = 3;
 	    } else {
+		my $name;
 		if (!$retry_pkg->flag_installed && packageMedium($packages, $retry_pkg)->{selected} && !exists($ignoreBadPkg{$retry_pkg->name})) {
 		    if ($retry_count) {
 			log::l("retrying installing package ".$retry_pkg->fullname." alone in a transaction");
@@ -1074,10 +1075,17 @@ sub install($$$;$$) {
 			log::l("bad package ". $retry_pkg->fullname ." unable to be installed");
 			$retry_pkg->set_flag_requested(0);
 			$retry_pkg->set_flag_required(0);
-			cdie ("error installing package list: ". $retry_pkg->fullname);
+			#- keep name to display (problem of displaying ?).
+			$name = $retry_pkg->fullname;
+			$retry_pkg->free_header;
+			$retry_pkg = shift @transToInstall;
+			$retry_count = 3;
+			#- now it could be safe to display error message ?
+			cdie ("error installing package list: $name");
 		    }
 		}
-		if ($retry_pkg->flag_installed || !$retry_pkg->flag_selected) {
+		#- check if name has been set (so that the following code has been executed already).
+		if (!$name && ($retry_pkg->flag_installed || !$retry_pkg->flag_selected)) {
 		    $retry_pkg->free_header;
 		    $retry_pkg = shift @transToInstall;
 		    $retry_count = 3;
