@@ -1095,10 +1095,10 @@ sub install_loadlin_desktop {
     my ($lilo, $windrive) = @_;
     my $windir = lc(cat_("$windrive/msdos.sys") =~ /^WinDir=.:\\(\S+)/m ? $1 : "windows");
 
-#-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#-PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-    foreach (N_("Desktop"),
-#-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows 
+    foreach (#-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
+	     #-PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
+	     N_("Desktop"),
+	     #-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows 
 	     N_("Start Menu")) {
         my $d = "$windrive/$windir/" . translate($_);
         -d $d or $d = "$windrive/$windir/$_";

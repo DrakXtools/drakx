@@ -655,11 +655,11 @@ sub load_category__prompt_for_more {
 
 sub wait_load_module {
     my ($in, $category, $text, $module) = @_;
-#-PO: the first %s is the card type (scsi, network, sound,...)
-#-PO: the second is the vendor+model name
     $in->wait_message('',
-		     [ N("Installing driver for %s card %s", $category, $text),
-		       if_($::expert, N("(module %s)", $module))
+		     [ 
+		      #-PO: the first %s is the card type (scsi, network, sound,...)
+		      #-PO: the second is the vendor+model name
+		      N("Installing driver for %s card %s", $category, $text), if_($::expert, N("(module %s)", $module))
 		     ]);
 }
 
