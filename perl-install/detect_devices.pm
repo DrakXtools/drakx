@@ -56,9 +56,11 @@ sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } getIDE
 
 sub floppies() {
     require modules;
+    eval { modules::load("floppy") };
+    my @fds = grep { tryOpen($_) } qw(fd0 fd1);
     my @ide = map { $_->{device} } ls120s() and modules::load("ide-floppy");
     my @scsi = map { $_->{device} } usbfdus();
-    (@ide, @scsi, grep { tryOpen($_) } qw(fd0 fd1));
+    (@ide, @scsi, @fds);
 }
 sub floppy { first(floppies()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
