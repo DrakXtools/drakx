@@ -25,7 +25,7 @@ struct part {
   int size              # in sectors
   int type              # 0x82, 0x83, 0x6 ...
   string device         # 'hda5', 'sdc1' ...
-  string rootDevice     # 'sda', 'hdc' ...
+  string rootDevice     # 'sda', 'hdc' ... (can also be a VG_name)
   string real_mntpoint  # directly on real /, '/tmp/hdimage' ...
   string mntpoint       # '/', '/usr' ...
   string options        # 'defaults', 'noauto'
@@ -42,7 +42,7 @@ struct part {
     # !isFormatted && !notFormatted means we don't know which state we're in
 
   int raid          # for partitions of type isRawRAID and which isPartOfRAID, the raid device number
-  string lvm        # partition used as a PV for the VG with {lvm} as LVMname  #-#
+  string lvm        # partition used as a PV for the VG with {lvm} as VG_name  #-#
   loopback loopback[]   # loopback living on this partition
 
   # internal
@@ -125,7 +125,7 @@ struct hd {
 
 struct hd_lvm inherits hd {
   int PE_size           # block size (granularity, similar to cylinder size on x86)
-  string LVMname        # VG name
+  string VG_name        # VG name
 
   part_lvm disks[]
 
@@ -741,18 +741,18 @@ sub Add2LVM {
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
 
     my $lvm = $in->ask_from_listf_('', _("Choose an existing LVM to add to"),
-				  sub { ref $_[0] ? $_[0]{LVMname} : $_[0] },
+				  sub { ref $_[0] ? $_[0]{VG_name} : $_[0] },
 				  [ @$lvms, __("new") ]) or return;
     if (!ref $lvm) {
 	# create new lvm
 	my $name = $in->ask_from_entry('', _("LVM name?")) or return;
 	$name =~ s/\W/_/g;
 	$name = substr($name, 0, 63); # max length must be < NAME_LEN / 2  where NAME_LEN is 128
-	$lvm = bless { disks => [], LVMname => $name }, 'lvm';
+	$lvm = bless { disks => [], VG_name => $name }, 'lvm';
 	push @$lvms, $lvm;
     }
     raid::make($all_hds->{raids}, $part) if isRAID($part);
-    $part->{lvm} = $lvm->{LVMname};
+    $part->{lvm} = $lvm->{VG_name};
     push @{$lvm->{disks}}, $part;
     delete $part->{mntpoint};
 
@@ -773,7 +773,7 @@ sub RemoveFromLVM {
     my ($in, $hd, $part, $all_hds) = @_;
     my $lvms = $all_hds->{lvms};
     isPartOfLVM($part) or die;
-    my ($lvm) = grep { $_->{LVMname} eq $part->{lvm} } @$lvms;
+    my ($lvm) = grep { $_->{VG_name} eq $part->{lvm} } @$lvms;
     lvm::vg_destroy($lvm);
     @$lvms = grep { $_ != $lvm } @$lvms;
 }
