@@ -286,9 +286,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Tue Nov 12 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.12-1mdk
+* Thu Nov 14 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.12-1mdk
 - printerdrake cleanups
 - various perl lifting
+- harddrake:
+  o display floppy driver type as well as mouse type & network printer port
+  o fix vendor/model spliting for eide disks when there's neither
+    space nor separator
+  o v4l card lists : resync with latest bttv & saa7134 drivers
 
 * Mon Nov 11 2002 Pixel <pixel@mandrakesoft.com> 1.1.11-3mdk
 - bug fix (most drakxtools)
