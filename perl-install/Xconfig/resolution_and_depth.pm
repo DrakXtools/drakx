@@ -274,6 +274,7 @@ sub choose_gtk {
     $depth_combo->set_popdown_strings(map { translate($depth2text{$_}) } ikeys %depth2x_res);
     $depth_combo->entry->set_size_request(220, 0);
     $depth_combo->entry->signal_connect(changed => sub {
+	$depth_combo->entry->get_text eq '' and return;  #- FIXME temporarily workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
         my %txt2depth = reverse %depth2text;
 	my $s = $depth_combo->entry->get_text;
         $chosen_Depth = $txt2depth{untranslate($s, keys %txt2depth)};
@@ -288,6 +289,7 @@ sub choose_gtk {
     $x_res_combo->entry->set_editable(0);
     $x_res_combo->set_popdown_strings(uniq map { "$_->{X}x$_->{Y}" } sort { $a->{X} <=> $b->{X} } @resolutions);
     $x_res_combo->entry->signal_connect(changed => sub {
+	$x_res_combo->entry->get_text eq '' and return;  #- FIXME temporarily workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
 	$x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
 	$set_chosen_x_res->($1, $2);
 	
