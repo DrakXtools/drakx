@@ -224,7 +224,7 @@ sub load_perms() {
             } elsif (m/^(\S+)\s+current?\s+(\d+)/) {
                 push @rules, { if_($is_uneditable, editable => $pixbuf), path => $1, user => 'current', group => '', perms => $2, index => $index };
             } else {
-                warn "unparsed \"$_\"line";
+                warn "unparsable \"$_\"line";
             }
             $index++;
         }
