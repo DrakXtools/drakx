@@ -242,7 +242,6 @@ sub assure_device_is_available_for_cups {
 	"/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" ||
 	    die "Could not run \"lpinfo\"!";
     while (<F>) {
-	print "##### $device $_";
 	if ($_ =~ /$device/) { # Found a line containing the device name,
 	                       # so CUPS knows it.
 	    close F;
