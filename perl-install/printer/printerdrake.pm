@@ -551,6 +551,7 @@ sub first_time_dialog {
 	    my @printerlist = 
 	      map {
 		  my $entry = $_->{val}{DESCRIPTION};
+		  $entry ||= "$_->{val}{MANUFACTURER} $_->{val}{MODEL}";
 		  if_($entry, "  -  $entry\n");
 	      } @autodetected;
 	    my $unknown_printers = @autodetected - @printerlist;
@@ -925,7 +926,15 @@ sub setup_local_autoscan {
     if ($do_auto_detect) {
 	if (!$::testing &&
 	    !$expert_or_modify && $printer->{AUTODETECTSMB} && !files_exist('/usr/bin/smbclient')) {
-	    $in->do_pkgs->install('samba-client');
+	    $in->do_pkgs->install('samba-client') or do {
+		$in->ask_warn(N("Warning"),
+			      N("Could not install the %s packages!",
+				"Samba client") . " " .
+			      N("Skipping Windows/SMB server auto-detection"));
+		$printer->{AUTODETECTSMB} = 0;
+		return 0 if (!$printer->{AUTODETECTLOCAL} && 
+			     !$printer->{AUTODETECTNETWORK});
+	    };
 	}
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Detecting devices..."));
 	# When HPOJ is running, it blocks the printer ports on which it is
@@ -1132,7 +1141,13 @@ sub setup_local_autoscan {
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if (($printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng') &&
         !$::testing && $device =~ /^socket:/ && !files_exist('/usr/bin/nc')) {
-        $in->do_pkgs->install('nc');
+        $in->do_pkgs->install('nc') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "nc") . " " .
+		N("Aborting"));
+	    return 0;
+        };
     }
 
     # Do configuration of multi-function devices and look up model name
@@ -1186,8 +1201,15 @@ complete => sub {
 
     #- LPD does not support filtered queues to a remote LPD server by itself
     #- It needs an additional program as "rlpr"
-    if ($printer->{SPOOLER} eq 'lpd' && !$::testing && !files_exist('/usr/bin/rlpr')) {
-        $in->do_pkgs->install('rlpr');
+    if ($printer->{SPOOLER} eq 'lpd' && !$::testing &&
+        !files_exist('/usr/bin/rlpr')) {
+        $in->do_pkgs->install('rlpr') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "rlpr") . " " .
+		N("Aborting"));
+	    return 0;
+        };
     }
 
     # Auto-detect printer model (works if host is an ethernet-connected
@@ -1271,7 +1293,13 @@ sub setup_smb {
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
 	if (!$::testing && !files_exist('/usr/bin/smbclient')) {
-	    $in->do_pkgs->install('samba-client');
+	    $in->do_pkgs->install('samba-client') or do {
+		$in->ask_warn(N("Error"),
+			      N("Could not install the %s packages!",
+				"Samba client") . " " .
+			      N("Aborting"));
+		return 0;
+	    };
 	}
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
 	@autodetected = printer::detect::net_smb_detect();
@@ -1402,7 +1430,13 @@ Do you really want to continue setting up this printer as you are doing now?"), 
     ($smbserver || $smbserverip), "/$smbshare");
 
     if (!$::testing && !files_exist('/usr/bin/smbclient')) {
-	$in->do_pkgs->install('samba-client');
+	$in->do_pkgs->install('samba-client') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "Samba client") . " " .
+		N("Aborting"));
+	    return 0;
+        };
     }
     $printer->{SPOOLER} eq 'cups' and printer::main::restart_queue($printer);
     1;
@@ -1470,8 +1504,15 @@ complete => sub {
     ($ncppassword && ":$ncppassword") . '@')),
     "$ncpserver/$ncpqueue");
 
-	$in->do_pkgs->install('ncpfs') if !$::testing && !files_exist('/usr/bin/nprint');
-
+    if (!$::testing && !files_exist('/usr/bin/nprint')) {
+	$in->do_pkgs->install('ncpfs') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "ncpfs") . " " .
+		N("Aborting"));
+	    return 0;
+        };
+    } 
     1;
 }
 
@@ -1615,7 +1656,13 @@ sub setup_socket {
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if (($printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng') && 
         !$::testing && !files_exist('/usr/bin/nc')) {
-        $in->do_pkgs->install('nc');
+        $in->do_pkgs->install('nc') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "nc") . " " .
+		N("Aborting"));
+	    return 0;
+	}
     }
 
     # Auto-detect printer model
@@ -1676,26 +1723,48 @@ complete => sub {
     if ($printer->{currentqueue}{connect} !~ m!^(file|parallel|usb|serial|mtink|ptal://?mlc):/! &&
         !check_network($printer, $in, $upNetwork, 0)) { 
         return 0;
-    }
     # If the chosen protocol needs additional software, install it.
-
-    # LPD does not support filtered queues to a remote LPD server by itself
-    # It needs an additional program as "rlpr"
-    elsif ($printer->{currentqueue}{connect} =~ /^lpd:/ &&
-	$printer->{SPOOLER} eq 'lpd' && !$::testing && !files_exist('/usr/bin/rlpr')) {
-        $in->do_pkgs->install('rlpr');
+    } elsif ($printer->{currentqueue}{connect} =~ /^lpd:/ &&
+        $printer->{SPOOLER} eq 'lpd' &&
+        !$::testing && !files_exist('/usr/bin/rlpr')) {
+	# LPD does not support filtered queues to a remote LPD server by itself
+	# It needs an additional program as "rlpr"
+        $in->do_pkgs->install('rlpr') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "rlpr") . " " .
+		N("Aborting"));
+		return 0;
+            };
     } elsif ($printer->{currentqueue}{connect} =~ /^smb:/ &&
         !$::testing && !files_exist('/usr/bin/smbclient')) {
-	$in->do_pkgs->install('samba-client');
+	$in->do_pkgs->install('samba-client') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "Samba client") . " " .
+		N("Aborting"));
+		return 0;
+            };
     } elsif ($printer->{currentqueue}{connect} =~ /^ncp:/ &&
 	!$::testing && !files_exist('/usr/bin/nprint')) {
-	$in->do_pkgs->install('ncpfs');
-    }
-    #- LPD and LPRng need netcat ('nc') to access to socket printers
-    elsif ($printer->{currentqueue}{connect} =~ /^socket:/ &&
+	$in->do_pkgs->install('ncpfs') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "ncpfs") . " " .
+		N("Aborting"));
+		return 0;
+            };
+    } elsif ($printer->{currentqueue}{connect} =~ /^socket:/ &&
+	#- LPD and LPRng need netcat ('nc') to access to socket printers
 	($printer->{SPOOLER} eq 'lpd' || $printer->{SPOOLER} eq 'lprng') &&
         !$::testing && !files_exist('/usr/bin/nc')) {
-        $in->do_pkgs->install('nc');
+        $in->do_pkgs->install('nc') or do {
+            $in->ask_warn(N("Error"),
+		N("Could not install the %s packages!",
+		  "nc") . " " .
+		N("Aborting"));
+		return 0;
+            };
     }
 
     if ($printer->{currentqueue}{connect} =~ m!^socket://([^:/]+)! ||
@@ -1792,6 +1861,7 @@ sub setup_common {
 	    $makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
 	    $isHPOJ) {
 	    # Install HPOJ package
+	    my $hpojinstallfailed = 0;
 	    if (!$::testing &&
 		!files_exist(qw(/usr/sbin/ptal-mlcd
 				/usr/sbin/ptal-init
@@ -1800,7 +1870,15 @@ sub setup_common {
 		$w = $in->wait_message(N("Printerdrake"),
 					   N("Installing HPOJ package..."))
 		    if !$printer->{noninteractive};
-		$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils');
+		$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
+		    or do {
+			$in->ask_warn(N("Warning"),
+				      N("Could not install the %s packages!",
+					"HPOJ") . " " .
+				      N("Only printing will be possible on the %s.",
+					$makemodel));
+			$hpojinstallfailed = 1;
+		    };
 	    }
 	    # Configure and start HPOJ
 	    undef $w;
@@ -1809,7 +1887,7 @@ sub setup_common {
 		 N("Checking device and configuring HPOJ..."))
 		if !$printer->{noninteractive};
 	    $ptaldevice = printer::main::configure_hpoj
-		($device, @autodetected);
+		($device, @autodetected) if !$hpojinstallfailed;
 	    
 	    if ($ptaldevice) {
 		# Configure scanning with SANE on the MF device
@@ -1833,7 +1911,14 @@ sub setup_common {
 			$in->do_pkgs->install('sane-backends',
 					      'sane-frontends',
 					      'xsane', 'libsane-hpoj1',
-					      if_($in->do_pkgs->is_installed('gimp'), 'xsane-gimp'));
+					      if_($in->do_pkgs->is_installed('gimp'), 'xsane-gimp'))
+			    or do {
+				$in->ask_warn(N("Warning"),
+					      N("Could not install the %s packages!",
+						"SANE") . " " .
+					      N("Scanning on the %s will not be possible.",
+						$makemodel));
+			    };
 		    }
 		    # Configure the HPOJ SANE backend
 		    printer::main::config_sane();
@@ -1857,7 +1942,14 @@ sub setup_common {
 			    (N("Printerdrake"),
 			     N("Installing mtools packages..."))
 			    if !$printer->{noninteractive};
-			$in->do_pkgs->install('mtools', 'mtoolsfm');
+			$in->do_pkgs->install('mtools', 'mtoolsfm')
+			    or do {
+				$in->ask_warn(N("Warning"),
+					      N("Could not install the %s packages!",
+						"Mtools") . " " .
+					      N("Photo memory card access on the %s will not be possible.",
+						$makemodel));
+			    };
 		    }
 		    # Configure mtools/MToolsFM for photo card access
 		    printer::main::config_photocard();
@@ -2976,7 +3068,14 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	    # Install the filter to convert the photo test page to PS
 	    if ($printer->{SPOOLER} ne "cups" && $options{photo} && !$::testing &&
 		!files_exist('/usr/bin/convert')) {
-		$in->do_pkgs->install('ImageMagick');
+		$in->do_pkgs->install('ImageMagick')
+		    or do {
+			$in->ask_warn(N("Warning"),
+				      N("Could not install the %s package!",
+					"ImageMagick") . " " .
+				      N("Skipping photo test page."));
+			$options{photo} = 0;
+		    };
 	    }
 	    # set up list of pages to print
 	    $options{standard} and push @testpages, $stdtestpage;
@@ -2984,6 +3083,8 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	    $options{alta4} and push @testpages, $alta4testpage;
 	    $options{photo} and push @testpages, $phototestpage;
 	    $options{ascii} and push @testpages, $asciitestpage;
+	    # Nothing to print
+	    return 1 if $#testpages < 0;
 	    # print the stuff
 	    @lpq_output = printer::main::print_pages($printer, @testpages);
 	}
@@ -3479,14 +3580,26 @@ sub install_spooler {
     if ($packages && files_exist($packages->[1])) {
 	undef $w;
         $w = $in->wait_message(N("Printerdrake"), N("Removing %s ..."), $spoolers{$packages->[0]}{short_name});
-        $in->do_pkgs->remove_nodeps($packages->[0]);
+        $in->do_pkgs->remove_nodeps($packages->[0])
+	    or do {
+		$in->ask_warn(N("Error"),
+			      N("Could not remove the %s printing system!",
+				$spoolers{$packages->[0]}{short_name}));
+		return 0;
+	    };
     }
 
     $packages = $spoolers{$spooler}{packages2add};
     if ($packages && !files_exist(@{$packages->[1]})) {
 	undef $w;
         $w = $in->wait_message(N("Printerdrake"), N("Installing %s ..."), $spoolers{$spooler}{short_name});
-        $in->do_pkgs->install(@{$packages->[0]});
+        $in->do_pkgs->install(@{$packages->[0]})
+	    or do {
+		$in->ask_warn(N("Error"),
+			      N("Could not install the %s printing system!",
+				$spoolers{$spooler}{short_name}));
+		return 0;
+	    };
     }
 
     undef $w;
@@ -3618,8 +3731,15 @@ sub install_foomatic {
 			/usr/share/foomatic/db/source/driver/ljet4.xml))) {
 	my $_w = $in->wait_message(N("Printerdrake"),
 				   N("Installing Foomatic..."));
-	$in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
-			      'foomatic-db');
+	$in->do_pkgs->install('foomatic-db-engine',
+			      'foomatic-filters',
+			      'foomatic-db') 
+	    or do {
+		$in->ask_warn(N("Error"),
+			      N("Could not install %s packages, %s cannot be started!",
+				"Foomatic", "printerdrake"));
+		exit 1;
+	    };
     }
 }
 
@@ -3705,7 +3825,13 @@ sub init {
 				  'foomatic-db', 'printer-utils',
 				  'printer-testpages', 'nmap', 'scli',
 				  if_($in->do_pkgs->is_installed('gimp'),
-				      'gimpprint'));
+				      'gimpprint'))
+		or do {
+		    $in->ask_warn(N("Error"),
+				  N("Could not install necessary packages, %s cannot be started!",
+				    "printerdrake"));
+		    exit 1;
+		};
 	}
 	
 	# only experts should be asked for the spooler
