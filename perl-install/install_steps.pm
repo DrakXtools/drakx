@@ -234,7 +234,7 @@ sub installPackages($$) {
     }
 
     #- hack to ensure proper ordering for installation of packages.
-    my @firstToInstall = qw(setup basesystem chkconfig sed);
+    my @firstToInstall = qw(setup basesystem chkconfig sed ldconfig grep XFree86-libs freetype XFree86);
     my %firstInstalled;
     my @toInstall;
     foreach (@firstToInstall) {
