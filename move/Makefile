@@ -52,7 +52,7 @@ install: build
 	sudo mkdir -p $(DEST_LIVETREE)/move
 	sudo cp -f $(addprefix data/, $(DATA_FILES)) $(DEST_LIVETREE)/move
 
-	sudo install -m 600 tree/sudoers $(DEST_LIVETREE)/etc
+	sudo install -m 440 tree/sudoers $(DEST_LIVETREE)/etc
 	sudo install -m 644 tree/mdk_move_boot_loop.desktop $(DEST_LIVETREE)/usr/share/autostart
 	sudo install tree/mdk_move_boot_loop $(DEST_LIVETREE)/usr/bin
 
