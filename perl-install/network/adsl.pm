@@ -109,6 +109,7 @@ sub adsl_detect {
 
 sub adsl_conf {
     my ($adsl, $netc, $intf, $adsl_type) = @_;
+    $adsl ||= {};
 
   adsl_conf_step_1:
     adsl_ask_info($adsl, $netc, $adsl_type) or return;
