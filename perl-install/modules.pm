@@ -296,7 +296,7 @@ if_(arch() !~ /^sparc/,
   "3c574_cs" => "3c574_cs",
   "qlogic_cs" => "qlogic_cs",
   "nmclan_cs" => "nmclan_cs",
-#******(missing-2.4)   "ibmtr_cs" => "ibmtr_cs",
+  "ibmtr_cs" => "ibmtr_cs",
 #  "dummy_cs" => "dummy_cs",
 #  "memory_cs" => "memory_cs",
   "ftl_cs" => "ftl_cs",
@@ -397,6 +397,7 @@ my %type_aliases = (
 my @skip_big_modules_on_stage1 = (
 # dgrs e1000
 qw(
+olympic
 sk98lin acenic
 aironet4500_card com20020-pci hamachi starfire winbond-840
 
@@ -406,7 +407,7 @@ BusLogic seagate fdomain g_NCR5380 tmscsim
 ); #******(missing-2.4)  dpt_i2o aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
 
 my @skip_modules_on_stage1 = (
-  qw(olympic sktr tmspci ibmtr abyss), # token ring
+  qw(sktr tmspci ibmtr abyss), # alt token ring
   qw(old_tulip rtl8139), # doesn't exist in 2.4
   qw(kaweth pegasus), # usb net
   if_(arch() =~ /alpha|ppc/, qw(sb1000)),
