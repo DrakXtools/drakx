@@ -196,6 +196,7 @@ endif
 	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 
 	cp -f ../kernel/{modules.description,all.modules/modules.cz*} $(DEST)/lib/
+	ls $(DEST)/lib | sed -n 's/modules.cz-//p' > $(STAGE2_DEST)/mdkinst.kernels
 
 	$(MAKE) -C share/po install SUDO= NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
