@@ -77,6 +77,22 @@ sub lpstat_v() {
     } run_program::rooted_get_stdout($::prefix, 'lpstat', '-v');
 }
 
+sub lpinfo_v() {
+    map {
+	if (my ($type, $uri) = m/^\s*(\S+)\s+(\S+)\b/) {
+	    if ($uri =~ m!:/!) {
+		$uri;
+	    } elsif ($type =~ m/network/i) {
+		"$uri://";
+	    } else {
+		"$uri:/";
+	    }
+	} else {
+	    ();
+	}
+    } run_program::rooted_get_stdout($::prefix, 'lpinfo', '-v');
+}
+
 sub read_printer_list {
     my ($printer) = @_;
     # This function reads in a list of all printers which the local CUPS

@@ -512,7 +512,7 @@ Printers on remote CUPS servers do not need to be configured here; these printer
 		      list => \@printertypes, 
 		      not_edit => 1, sort => 0,
 		      type => 'list' },
-		    { text => N("Printer auto-detection (Local, TCP/Socket, and SMB printers)"),
+		    { text => N("Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"),
 		      type => 'bool', val => \$autodetect }
 		    ]
 		   ) or return 0;
@@ -1693,24 +1693,32 @@ sub setup_uri {
     my ($printer, $in, $upNetwork) = @_;
 
 #    $in->set_help('setupURI') if $::isInstall;
+    if ($printer->{AUTODETECT} and ($printer->{SPOOLER} eq 'cups')) {
+	my $_w = $in->wait_message(N("Printerdrake"), 
+				   N("Refreshing Device URI list..."));
+	printer::services::restart("cups");
+    }
     return if !$in->ask_from(N("Printer Device URI"),
 N("You can specify directly the URI to access the printer. The URI must fulfill either the CUPS or the Foomatic specifications. Note that not all URI types are supported by all the spoolers."), [
 { label => N("Printer Device URI"),
 val => \$printer->{currentqueue}{connect},
-list => [ $printer->{currentqueue}{connect},
-	  "parallel:/",
-	  "usb:/",
-	  "serial:/",
-	  "http://",
-	  "ipp://",
-	  "lpd://",
-	  "smb://",
-	  "ncp://",
-	  "socket://",
-	  "ptal:/mlc:",
-	  "ptal:/hpjd:",
-	  "file:/",
-	  'postpipe:""',
+list => [ if_($printer->{currentqueue}{connect},
+	      $printer->{currentqueue}{connect}),
+	  ($printer->{SPOOLER} eq 'cups' ?
+	   printer::cups::lpinfo_v() :
+	   ("parallel:/",
+	    "usb:/",
+	    "serial:/",
+	    "http://",
+	    "ipp://",
+	    "lpd://",
+	    "smb://",
+	    "ncp://",
+	    "socket://",
+	    "ptal:/mlc:",
+	    "ptal:/hpjd:",
+	    "file:/",
+	    'postpipe:""')),
 	  ], not_edit => 0, sort => 0 }, ],
 complete => sub {
     unless ($printer->{currentqueue}{connect} =~ /[^:]+:.+/) {
