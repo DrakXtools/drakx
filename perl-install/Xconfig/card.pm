@@ -356,7 +356,7 @@ sub install_server {
     #- and driver and GLX extension is present.
     if ($card->{Driver2} eq 'nvidia' &&
 	-e "$::prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
-	-e "$::prefix/usr/X11R6/lib/modules/extensions/libglx.so") {
+	-l "$::prefix/usr/X11R6/lib/modules/extensions/libglx.so") {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{Driver} = 'nvidia';
 	$card->{DRI_GLX_SPECIAL} = 1;
