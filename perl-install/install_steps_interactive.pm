@@ -1165,6 +1165,10 @@ sub setRootPassword {
 { label => N("Authentication"), val => \$authentication_kind, list => [ authentication::kinds() ], format => \&authentication::kind2description, advanced => 1 },
         ]) or delete $sup->{password};
 
+    #- keep only one authentication
+    delete $o->{authentication}{$_} foreach authentication::kinds();
+    $o->{authentication}{$authentication_kind} ||= '';
+
 	authentication::ask_parameters($o, $o->{netc}, $o->{authentication}, $authentication_kind) or goto &setRootPassword;
     }
     install_steps::setRootPassword($o);
