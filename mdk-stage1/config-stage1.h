@@ -24,7 +24,6 @@
 /* If we have more than that amount of memory (in Mbytes), we assume we can load the rescue as a ramdisk */
 #define MEM_LIMIT_RESCUE 40
 
-#define DISTRIB_NAME "Mandrake Linux"
 
 #define RAMDISK_COMPRESSION_RATIO 1.95
 
@@ -33,10 +32,12 @@
 #define STAGE2_LOCATION  "/tmp/stage2"
 
 #ifdef MANDRAKE_MOVE
+#define DISTRIB_NAME "Mandrake Move"
 #define IMAGE_LOCATION   "/sysroot/image"
 #define SLASH_LOCATION   "/sysroot"
 #define LIVE_LOCATION_REL "/image"
 #else
+#define DISTRIB_NAME "Mandrake Linux"
 #define IMAGE_LOCATION   "/tmp/image"
 #endif
 
