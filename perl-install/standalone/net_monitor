@@ -525,11 +525,11 @@ sub draw_monitor {
 	my ($gc2, $text);
 	my ($dif1, $dif2);
 	if ($last_a) {
-	    $dif1 = abs(150-@{$o->{stack_ra}}[$last_a]*150/$ech - $i);
-	    $dif2 = abs(@{$o->{stack_ta}}[$last_a]*150/$ech - $i);
+	    $dif1 = abs(150-(@{$o->{stack_ra}}[$last_a])*150/$ech - $i);
+	    $dif2 = abs((@{$o->{stack_ta}}[$last_a])*150/$ech - $i);
 	} else {
-	    $dif1 = abs(150-@{$o->{stack_r}}[@{$o->{stack_r}}-1]*150/$ech - $i);
-	    $dif2 = abs(@{$o->{stack_t}}[@{$o->{stack_t}}-1]*150/$ech - $i);
+	    $dif1 = abs(150-(@{$o->{stack_r}}[@{$o->{stack_r}}-1])*150/$ech - $i);
+	    $dif2 = abs((@{$o->{stack_t}}[@{$o->{stack_t}}-1])*150/$ech - $i);
 	}
 	if ($dif1 < $dif2) {
 	    $text = formatXiB((150-$i)*$ech/150);
