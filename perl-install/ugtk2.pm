@@ -515,7 +515,7 @@ sub gtkcreate_pixbuf {
     return Gtk2::Gdk::Pixbuf->new_from_file(_find_imgfile(@_));
 }
 
-sub gtktext_append { gtktext_insert(@_, { 'append' => 1 }) }
+sub gtktext_append { gtktext_insert(@_, ( 'append' => 1)) }
 
 # choose one of the two styles:
 # - gtktext_insert($textview, "My text..");
