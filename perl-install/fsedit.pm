@@ -424,6 +424,7 @@ sub computeSize {
 	    1;
 	} else { 0 } } @$suggestions;
 
+    my $cylinder_size_maxsize_adjusted;
     my $tot_ratios = 0;
     while (1) {
 	my $old_free_space = $free_space;
@@ -437,6 +438,9 @@ sub computeSize {
 		$_->{size} + $_->{ratio} / $tot_ratios * $old_free_space >= $_->{maxsize}) {
 		return min($max, $best->{maxsize}) if $best->{mntpoint} eq $_->{mntpoint};
 		$free_space -= $_->{maxsize} - $_->{size};
+		if (!$cylinder_size_maxsize_adjusted++) {
+		    eval { $free_space += part2hd($part, $all_hds)->cylinder_size - 1 };
+		}
 		0;
 	    } else {
 		$_->{ratio};
