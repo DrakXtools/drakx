@@ -50,19 +50,8 @@ sub read_file($$) {
     $buf;
 }
 
-sub check_mounted($) {
-    my ($f) = @_;
-
-    open(my $F, "/proc/mounts") or die "error opening /proc/mounts\n";
-    foreach (<$F>) {
-	/^$f\s/ and die "device is mounted";
-    }
-}
-
 sub open {
     my ($fs) = @_;
-
-    check_mounted($fs->{device});
 
     sysopen $fs->{fd}, $fs->{fs_name}, 2 or
       sysopen $fs->{fd}, $fs->{fs_name}, 0 or die "error opening device $fs->{fs_name} for writing\n";
