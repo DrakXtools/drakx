@@ -25,6 +25,7 @@ use lib qw(/usr/lib/libDrakX);
 use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
+use c;
 use interactive;
 use ugtk2 qw(:helpers :wrappers :create);
 use common;
@@ -281,12 +282,15 @@ sub get_val() {
     $a =~ s/^.*?\n.*?\n//;
     $a =~ s/^\s*lo:.*?\n//;
     my @line = split(/\n/, $a);
+    my @interfaces = c::get_netdevices();
     map {
 	s/\s*(\w*)://;
 	my $intf = $1;
-	$monitor->{$intf}{val} = [split()];
-	$monitor->{$intf}{intf} = $intf;
-	$intf;
+     if (member($intf, @interfaces)) {
+         $monitor->{$intf}{val} = [ split() ];
+         $monitor->{$intf}{intf} = $intf;
+         $intf;
+     } else { () }
     } @line;
 }
 
