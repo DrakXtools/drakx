@@ -148,10 +148,18 @@ void *malloc(size_t size)
       else
       {
 	alloc_head *tmp=(alloc_head*)(((char*)p)+need);
-
-	prev->ptr=tmp;
-	tmp->ptr=p->ptr;
-	tmp->size=p->size-need;	/* remaining size */
+	if ((p->size-need)<sizeof(alloc_head))
+	{ /* work around: if there is not enough space for freelist head.
+	   * this waste some bytes ( < sizeof(alloc_head) ) */
+	  need=p->size;
+	  prev->ptr=p->ptr;	/* relink freelist */
+	}
+	else
+	{
+	  prev->ptr=tmp;
+	  tmp->ptr=p->ptr;
+	  tmp->size=p->size-need;	/* remaining size */
+	}
 
 	p->size=need;	/* set size */
       }
