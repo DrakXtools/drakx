@@ -1,3 +1,57 @@
+2002/01/04  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: corrected minor bugs in network (among others bug "modifying
+	read only values")
+	recode upNetwork and downNetwork (it might work, at least if you are
+	lucky);
+	corrected font display : no useless font->height, but ascent + descent
+	updated
+
+	* network/isdn_consts.pm: changed asus isdn hisax identify
+
+	* network/adsl.pm, install_steps.pm, network/tools.pm,
+	network/netconnect.pm: corrected minor bugs in network (among others bug
+	"modifying read only values")
+	recode upNetwork and downNetwork (it might work, at least if you are
+	lucky);
+
+2002/01/04  François Pons  <fpons@mandrakesoft.com>
+
+	* http.pm, install2.pm, steps.pm, install_any.pm: added update
+	installation support to install (big modifs need testing).
+
+	* pkgs.pm: allow to use same identifier for security medium (1u).
+	re-install urpmi.
+	allow some error to be catched.
+	added update installation support to install (big modifs need testing).
+
+	* crypto.pm: removed test code.
+	allow to use same identifier for security medium (1u).
+	re-install urpmi.
+	allow some error to be catched.
+	added update installation support to install (big modifs need testing).
+
+	* install_steps_interactive.pm: removed obsoleted comment.
+	allow to use same identifier for security medium (1u).
+	re-install urpmi.
+	allow some error to be catched.
+	added update installation support to install (big modifs need testing).
+
+	* install_steps_gtk.pm: fixed empty flat package selection when giving a
+	limit to medium.
+	added update installation support to install (big modifs need testing).
+
+	* install_steps.pm: allow to use same identifier for security medium (1u).
+	re-install urpmi.
+	allow some error to be catched.
+	fix for auto updates.
+	added update installation support to install (big modifs need testing).
+
+2002/01/04  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm: enable easy patch-adding of pcitable and usbtable
+	entries
+
 2002/01/03  dam's  <damien@mandrakesoft.com>
 
 	* standalone/drakbackup: user can be equal to 500
