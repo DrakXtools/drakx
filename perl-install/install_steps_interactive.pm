@@ -246,7 +246,17 @@ sub selectMouse {
 			    \&mouse::serial_port2text,
 			    [ mouse::serial_ports ]) or return;
     }
-
+    if (arch() =~ /ppc/ && $o->{mouse}{nbuttons} == 1) {
+	#- set a sane default F11/F12
+	$o->{mouse}{button2_key} = 87;
+	$o->{mouse}{button3_key} = 88;
+	$o->ask_from_entries_refH('', _("Buttons emulation"),
+		[
+		{ label => _("Button 2 Emulation"), val => \$o->{mouse}{button2_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
+		{ label => _("Button 3 Emulation"), val => \$o->{mouse}{button3_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
+		]) or return;
+    }
+    
     any::setup_thiskind($o, 'usb', !$::expert, 0, $o->{pcmcia}) if $o->{mouse}{device} eq "usbmouse";
     eval { 
 	devices::make("usbmouse");

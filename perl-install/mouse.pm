@@ -107,6 +107,24 @@ sub xmouse2xId {
     my $i; map_index { $_ eq $id and $i = $::i } @xmousetypes; $i;
 }
 
+my %mouse_btn_keymap = (
+    0   => "NONE",
+    67  => "F9",
+    68  => "F10",
+    87  => "F11",
+    88  => "F12",
+    85  => "F13",
+    89  => "F14",
+    90  => "F15",
+    56  => "L-Option/Alt",
+    125 => "L-Command",
+    98  => "Num: /",
+    55  => "Num: *",
+    117 => "Num: =",
+);
+sub ppc_one_button_keys { keys %mouse_btn_keymap }
+sub ppc_one_button_key2text { $mouse_btn_keymap{$_[0]} }
+
 sub raw2mouse {
     my ($type, $raw) = @_;
     $raw or return;
@@ -163,6 +181,18 @@ sub write {
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
     symlinkf $mouse->{device}, "$prefix/dev/mouse" or log::l("creating $prefix/dev/mouse symlink failed");
+
+    if (arch() =~ /ppc/) {
+	my $s = join('',
+	  "dev.mac_hid.mouse_button_emulation = " . bool($mouse->{button2_key} || $mouse->{button3_key}) . "\n",
+	  if_($mouse->{button2_key}, "dev.mac_hid.mouse_button2_keycode = $mouse->{button2_key}\n"),
+	  if_($mouse->{button3_key}, "dev.mac_hid.mouse_button3_keycode = $mouse->{button3_key}\n"),
+	);
+	substInFile { 
+	    $_ = '' if /^\Qdev.mac_hid.mouse_button/;
+	    $_ .= $s if eof;
+	} "$prefix/etc/sysctl.conf";
+    }
 }
 
 sub mouseconfig {
