@@ -35,11 +35,11 @@ sub new($$) {
     unless ($::testing) {
 	$my_gtk::force_focus = $ENV{DISPLAY} eq ":0";
 
-	my $f = "/tmp/Xconf";
-	install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom});
-	devices::make("/dev/kbd");
+	if ($ENV{DISPLAY} eq ":0" && !$::live) {
+	    my $f = "/tmp/Xconf";
+	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom});
+	    devices::make("/dev/kbd");
 
-	if ($ENV{DISPLAY} eq ":0") {
 	    local (*T1, *T2);
 	    open T1, ">/dev/tty5";
 	    open T2, ">/dev/tty6";

@@ -199,10 +199,8 @@ sub create_logo_window {
 
 #------------------------------------------------------------------------------
 sub init_sizes() {
-#    my $maxheight = arch() eq "ppc" ? 1024 : 600;
-#    my $maxwidth = arch() eq "ppc" ? 1280 : 800;
-    ($::rootheight,  $::rootwidth)    = (480, 640);
     ($::rootheight,  $::rootwidth)    = my_gtk::gtkroot()->get_size;
+    $::live and $::rootheight -= 80;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
     ($::stepswidth,  $::stepsheight)  = (145, $::rootheight);
     ($::logowidth,   $::logoheight)   = ($::rootwidth - $::stepswidth, 40);

@@ -92,7 +92,7 @@ sub selectLanguage {
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
 	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
-	selectKeyboard($o);
+	selectKeyboard($o) unless $::live;
     }
 }
 #------------------------------------------------------------------------------
