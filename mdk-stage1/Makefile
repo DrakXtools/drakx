@@ -47,7 +47,7 @@ top_dir = .
 include $(top_dir)/Makefile.common
 
 
-DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL -DMANDRAKE_MOVE
+DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL $(ADDITIONAL_DEFS)
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
@@ -56,8 +56,8 @@ COMPILE = $(CC) $(DEFS) $(CFLAGS)
 ifeq (i386, $(ARCH))
 INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
-INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\" -DDO_KLOG
-INIT_DEFS_ADD_MANDRAKE_MOVE = -DBINARY=\"/usr/bin/install2\"
+INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\"
+INIT_DEFS_ADD_MANDRAKE_MOVE = -DBINARY=\"/usr/bin/runstage2\"
 else
 ifeq (x86_64, $(ARCH))
 INITSRC = minilibc.c init.c
@@ -164,7 +164,7 @@ endif
 endif
 
 
-BINS = init init-move stage1-full
+BINS = init stage1-full
 
 ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-disk stage1-network stage1-network-usb stage1-medias-usb
