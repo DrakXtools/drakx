@@ -3,6 +3,9 @@ package ugtk2;
 use diagnostics;
 use strict;
 use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus $force_position $grab $pop_it $border); #- leave it on one line, for automatic removal of the line at package creation
+use lang;
+
+$::o = { locale => lang::read() } if !$::isInstall;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (

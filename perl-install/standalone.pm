@@ -4,7 +4,6 @@ use c;
 use strict;
 use common qw(N N_ if_);
 use Config;
-use lang;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
 require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
@@ -139,7 +138,6 @@ foreach (@ARGV) {
 
 @ARGV = @new_ARGV;
 
-$::o = { locale => { lang => lang::read()->{lang} } };
 
 sub version {
     print STDERR "Drakxtools version 9.1.0
