@@ -381,7 +381,7 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 			*(entries[j].value) = NULL;
 	}
 
-	rc = mynewtWinEntries("Please fill entries...", msg, 52, 5, 5, entry_size, callback_func, entries, "Ok", "Cancel", NULL); 
+	rc = mynewtWinEntries("Please fill in entries...", msg, 52, 5, 5, entry_size, callback_func, entries, "Ok", "Cancel", NULL); 
 
 	if (rc == 3)
 		return RETURN_BACK;
