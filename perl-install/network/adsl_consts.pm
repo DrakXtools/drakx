@@ -25,6 +25,20 @@ our %adsl_data = (
                    method => 'pppoa',
                   },
 
+                  N("Austria") . "|Telstra" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                  },
+
+                  N("Belgium") . "|ADSL Office" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 3,
+                  },
+
                   N("Belgium") . "|Tiscali BE" =>
                   {
                    vpi => 8,
@@ -42,6 +56,70 @@ our %adsl_data = (
                    vci => 23,
                    Encapsulation => 6,
                    method => 'pppoa',
+                  },
+
+                  N("Belgium") . "|Turboline" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 5,
+                  },
+
+                  N("Brazil") . "|Speedy/Telefonica" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                   dnsServer2 => '200.204.0.10',
+                   dnsServer3 => '200.204.0.138',
+                  },
+
+                  N("Brazil") . "|Velox/Telemar" =>
+                  {
+                   vpi => 0,
+                   vci => 33,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Brazil") . "|Turbo/Brasil Telecom" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Brazil") . "|Rio Grande do Sul (RS)" =>
+                  {
+                   vpi => 1,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Bulgaria") . "|BTK ISDN" =>
+                  {
+                   vpi => 1,
+                   vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Bulgaria") . "|BTK POTS" =>
+                  {
+                   vpi => 0,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Denmark") . "|Any" =>
+                  {
+                   vpi => 0,
+                   vci => 65,
+                   Encapsulation => 3,
                   },
 
                   N("France") . "|Free non dégroupé 512/128 & 1024/128" =>
@@ -72,6 +150,16 @@ our %adsl_data = (
                    Encapsulation => 6,
                    dnsServer2 => '212.30.93.108',
                    dnsServer3 => '212.203.124.146',
+                   method => 'pppoa',
+                  },
+
+                  N("France") . "|Cegetel non dégroupé 512 IP/ADSL et dégroupé" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 6,
+                   dnsServer2 => '212.94.174.85',
+                   dnsServer3 => '212.94.174.86',
                    method => 'pppoa',
                   },
 
@@ -153,10 +241,28 @@ our %adsl_data = (
                    method => 'pppoe',
                   },
 
+                  N("Greece") . "|Any" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
                   N("Hungary") . "|Matav" =>
                   {
                    vpi => 1,
                    vci => 20,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Ireland") . "|Any" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
                   },
 
                   N("Italy") . "|Telecom Italia" =>
@@ -167,6 +273,13 @@ our %adsl_data = (
                    dnsServer2 => '195.20.224.234',
                    dnsServer3 => '194.25.2.129',
                    method => 'pppoa',
+                  },
+
+                  N("Italy") . "|Telecom Italia/Office Users (ADSL Smart X)" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 3,
                   },
 
                   N("Italy") . "|Tiscali.it" =>
@@ -239,6 +352,23 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
+                  },
+
+                  N("Switzerland") . "|Any" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 3,
+                  },
+
+                  N("Switzerland") . "|BlueWin / Swisscom" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 5,
+                   dnsServer2 => '195.186.4.108',
+                   dnsServer3 => '195.186.4.109',
+                   method => 'pppoa',
                   },
 
                   N("United Kingdom") . "|Tiscali UK " =>
