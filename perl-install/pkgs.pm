@@ -1026,7 +1026,7 @@ sub install($$$;$$) {
 		    install_any::getFile('XXX'); #- close still opened fd.
 
 		    @probs and die "installation of rpms failed:\n  ", join("\n  ", @probs);
-		}; $@ and print OUTPUT "die:$@\n"; }
+		}; $@ and print OUTPUT "die:$@\n" }
 		close OUTPUT;
 
 		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
