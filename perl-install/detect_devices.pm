@@ -109,6 +109,8 @@ sub getIDE() {
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
 	push @idi, { type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };
     }
+    #- test for zip
+    push @idi, { type => 'hd', device => 'hde', info => 'ZIP 100', bus => '1', id => 1 } if $::testing;
     @idi;
 }
 

@@ -196,18 +196,18 @@ sub write($$) {
        [ split ' ', '/dev/fd0 /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0' ],
        [ split ' ', 'none /proc proc defaults 0 0' ],
        [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ],
-       map_index {
+       (map_index {
 	   my $i = $::i ? $::i + 1 : '';
 	   mkdir "$prefix/mnt/cdrom$i", 0755 or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
 	   symlinkf $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
 	   [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
-       } detect_devices::cdroms(),
-       map_index { #- for zip drives, the right partition is the 4th.
+       } detect_devices::cdroms()),
+       (map_index { #- for zip drives, the right partition is the 4th.
 	   my $i = $::i ? $::i + 1 : '';
 	   mkdir "$prefix/mnt/zip$i", 0755 or log::l("failed to mkdir $prefix/mnt/zip$i: $!");
 	   symlinkf "$_->{device}4", "$prefix/dev/zip$i" or log::l("failed to symlink $prefix/dev/zip$i: $!");
 	   [ "/dev/zip$i", "/mnt/zip$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
-       } detect_devices::zips());
+       } detect_devices::zips()));
     write_fstab($fstab, $prefix, @to_add);
 }
 
