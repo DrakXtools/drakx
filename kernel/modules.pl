@@ -29,6 +29,7 @@ my @skip_modules_on_stage1 = (
   qw(old_tulip rtl8139),
   if_(arch() =~ /alpha|ppc/, qw(sb1000)),
   qw(
+  tg3
   apa1480_cb
   imm ppa plip
   3w-xxxx pci2220i qla2x00 i2o_block
