@@ -422,6 +422,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     touch "$o->{prefix}/var/lock/TMP_1ST";
 
     any::config_dvd($o->{prefix});
+    any::config_mtools($o->{prefix});
 
     any::writeandclean_ldsoconf($o->{prefix});
 
