@@ -37,7 +37,7 @@ init Gtk;
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
-$window1->set_title(_("Firewalling configuration", @all_cards));
+$window1->set_title(_("Firewalling configuration"));
 $window1->border_width(10);
 $::isEmbedded or $window1->set_usize(500, 400);
 my $vbox1 = new Gtk::VBox(0,0);
