@@ -20,7 +20,7 @@ my %languages = (
   "ro" => [ "Romanian",  "lat2-sun16",	"iso02",	"ro_RO" ],
   "sk" => [ "Slovak",    "lat2-sun16",	"iso02",	"sk_SK" ],
   "ru" => [ "Russian",   "Cyr_a8x16", 	"koi2alt",	"ru_SU" ],
-"uk_UA"=> [ "Ukrainian", "ruscii_8x16",	"koi2alt",	"uk_UA" ],
+  "uk" => [ "Ukrainian", "ruscii_8x16",	"koi2alt",	"uk_UA" ],
 );
 
 1;
