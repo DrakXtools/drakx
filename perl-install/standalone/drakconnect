@@ -245,9 +245,7 @@ $button_expert->signal_connect(clicked => sub {
 $bbox0->add($button_expert);
 
 my $button_apply = new Gtk2::Button(N("Apply"));
-$button_apply->signal_connect(clicked => sub {
-				 apply();
-			     });
+$button_apply->signal_connect(clicked => \&apply);
 $button_apply->set_sensitive(0);
 $bbox0->add($button_apply);
 
@@ -261,8 +259,7 @@ $bbox0->add($button_cancel);
 my $button_ok = new Gtk2::Button(N("OK"));
 $button_ok->signal_connect(clicked => sub {
 				 my $dialog = new_dialog();
-				 my $label = new Gtk2::Label(N("Please Wait... Applying the configuration"));
-				 $dialog->vbox->pack_start($label,1,1,20);
+				 $dialog->vbox->pack_start(new Gtk2::Label(N("Please Wait... Applying the configuration")),1,1,20);
 				 $dialog->show_all;
 				 gtkflush();
 				 apply();
