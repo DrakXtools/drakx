@@ -69,6 +69,7 @@ print "Making live in $::prefix directory.\n";
     system("chroot $::prefix fc-cache");  #- generate cache in all directories mentioned in config file
     system("chroot $::prefix kbuildsycoca --global");
     eval { rm_rf("$::prefix/dev") }; # we don't need it, we use devfs
+    eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
 
     unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
 }
