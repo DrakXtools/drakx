@@ -376,6 +376,7 @@ sub updateAutologin
     } else {
 	set_autologin('',undef) if ($x_no_button->get_active());
     }
+    $in->standalone::pkgs_install(q(autologin));
 }
  
 sub set_autologin {
