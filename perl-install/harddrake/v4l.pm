@@ -2,11 +2,11 @@ package harddrake::v4l;
 
 use strict;
 
+use common;
 use interactive;
 use detect_devices;
 use lang;
 use log;
-use common;
 use modules;
 
 # please update me on bttv update :
