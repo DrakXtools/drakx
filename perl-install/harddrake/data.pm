@@ -280,7 +280,7 @@ our @tree =
       string => N("Joystick"),
       icon => "joystick.png",
       configurator => "",
-      detector => sub { f(grep { $_->{description} =~ /Joystick/ }) },
+      detector => sub { f(grep { $_->{description} =~ /Joystick/ } @devices) },
       checked_on_boot => 0,
      },
 
