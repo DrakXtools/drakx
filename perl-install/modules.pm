@@ -449,12 +449,19 @@ sub load_raw {
     extract_modules('/tmp', map { $_->[0] } @l);
     my @failed = grep {
 	my $m = '/tmp/' . name2file($_->[0]);
-	if (-e $m && run_program::run(["/usr/bin/insmod_", "insmod"], '2>', '/dev/tty5', $m, @{$_->[1]})) {
-	    unlink $m;
-	    '';
+	if (-e $m) {
+            my $stdout;
+            my $rc = run_program::run(["/usr/bin/insmod_", "insmod"], '2>', \$stdout, $m, @{$_->[1]});
+            log::l(chomp_($stdout)) if $stdout;
+            if ($rc) {
+                unlink $m;
+                '';
+            } else {
+                -e $m;
+            }
 	} else {
 	    log::l("missing module $_->[0]") if !-e $m;
-	    -e $m;
+            -e $m;
 	}
     } @l;
 
