@@ -30,6 +30,7 @@ sub ppp_read_conf {
     }
     foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
         /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
+        /^METRIC=(.*)/ and $modem->{metric} = $1;
     }
     $modem->{login} ||= $l{Username};
     my $secret = network::tools::read_secret_backend();
