@@ -318,7 +318,9 @@ sub build_it() {
         info_dialog(N("Floppy creation completed"), N("The creation of the boot floppy has been successfully completed \n"));
         ugtk2->exit;
     } else {
-        err_dialog(N("Error"), N("Unable to properly close mkbootdisk:\n\n<span foreground=\"Red\"><tt>%s</tt></span>", $log), { use_markup => 1 });
+        err_dialog(N("Error"),
+                   #-PO: Do not alter the <span ..> and </span> tags
+                   N("Unable to properly close mkbootdisk:\n\n<span foreground=\"Red\"><tt>%s</tt></span>", $log), { use_markup => 1 });
     }
   
     return 0;
