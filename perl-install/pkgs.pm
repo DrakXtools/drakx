@@ -1477,30 +1477,8 @@ sub install($$$;$$) {
 		close OUTPUT;
 
 		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
-		my (@killpid, %tree, $pid);
-		local (*DIR, *F, $_);
-		opendir DIR, "/proc";
-		while ($pid = readdir DIR) {
-		    $pid =~ /^\d+$/ or next;
-		    open F, "/proc/$pid/status";
-		    while (<F>) {
-			/^Pid:\s+(\d+)/ and $pid == $1 || die "incorrect pid reported for $pid (found $1)";
-			if (/^PPid:\s+(\d+)/) {
-			    $tree{$pid} and die "PPID already found for $pid, previously $tree{$pid}, now $1";
-			    $tree{$pid} = $1;
-			}
-		    }
-		    close F;
-		}
-		closedir DIR;
-		foreach (keys %tree) {
-		    #- remove child of this process (which will terminate).
-		    $pid = $_; while ($pid = $tree{$pid}) { $pid == $$ and push @killpid, $_ }
-		    #- remove child of 1 direct that have a pid greater than current one.
-		    $_ > $$ && $tree{$_} == 1 and push @killpid, $_;
-		}
-		if (@killpid) {
-		    log::l("killing process ". join(", ", @killpid));
+		if (my @killpid = grep { $_ > $$ } all("/proc")) {
+		    log::l("ERROR: DrakX should not have to clean the packages shit. Killing ". join(", ", @killpid));
 		    kill 15, @killpid;
 		    sleep 2;
 		    kill 9, @killpid;
