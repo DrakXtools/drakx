@@ -68,7 +68,7 @@ sub readCardsDB {
 
 	my $f = $fs->{$cmd};
 
-	$f ? &$f() : log::l("unknown line $lineno ($_)");
+	$f ? $f->() : log::l("unknown line $lineno ($_)");
     }
     \%cards;
 }
@@ -223,12 +223,12 @@ sub cardConfiguration(;$$$) {
 		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
     my $msg = _("Which configuration of XFree do you want to have?");
-    my @choices = $card->{use_xf4} ? (($card->{prefer_xf3} ? ($xf3_tc) : ()),
-				      (!$card->{prefer_xf3} || $::expert ?
-				       ({ text => _("XFree %s", $xf4_ver),
-					  code => sub { $card->{Utah_glx} = $card->{DRI_glx} = '';
-							log::l("Using XFree $xf4_ver") } }) : (),),
-				      ($::expert && !$card->{prefer_xf3} ? ($xf3_tc) : ())) : ($xf3_tc);
+    my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
+				      if_(!$card->{prefer_xf3} || $::expert, 
+					  { text => _("XFree %s", $xf4_ver),
+					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = '';
+							  log::l("Using XFree $xf4_ver") } }),
+				      if_(!$card->{prefer_xf3} && $::expert, $xf3_tc)) : $xf3_tc;
 
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
@@ -458,7 +458,7 @@ sub testFinalConfig {
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
-	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($o->{card}{use_xf4} && "-4")) : ()),
+	  if_($o->{card}{prog} !~ /Xsun/, "-xf86config", ($::testing ? $tmpconfig : $f) . ($o->{card}{use_xf4} && "-4")),
 	  ":9" or c::_exit(0);
     }
 
@@ -1072,7 +1072,8 @@ sub main {
 	my %c = my @c = (
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) },
-           ($::expert ? (__("Change Server options") => sub { optionsConfiguration($o) }) : ()),
+                    if_($::expert, 
+           __("Change Server options") => sub { optionsConfiguration($o) }),
 	   __("Change Resolution") => sub { resolutionsConfiguration($o) },
 	   __("Show information") => sub { show_info($o) },
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
