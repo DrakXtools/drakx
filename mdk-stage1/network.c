@@ -565,7 +565,7 @@ static char * interface_select(void)
 
 	if (count == 0) {
 		stg1_error_message("No NET device found.\n"
-				   "Hint: if you're using a Laptop, most PCMCIA Network adapters are now supported with `network.img' rather than `pcmcia.img'.");
+				   "Hint: if you're using a Laptop, note that PCMCIA Network adapters are now supported either with `pcmcia.img' or `network.img', please try both these bootdisks.");
 		i = ask_insmod(NETWORK_DEVICES);
 		if (i == RETURN_BACK)
 			return NULL;
