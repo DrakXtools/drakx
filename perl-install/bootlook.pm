@@ -33,7 +33,7 @@ use any;
 use bootloader;
 use fs;
 use my_gtk qw(:helpers :wrappers :ask);
-
+use ugtk qw(:helpers :wrappers);
 if ($::isEmbedded) {
   print "EMBED\n";
   print "XID : $::XID\n";
@@ -139,11 +139,11 @@ foreach (keys (%combo)) {
 $combo{'thms'}->set_popdown_strings(@thms);
 $combo{'lilo'}->set_popdown_strings(@lilo_thms);
 $combo{'boot'}->set_popdown_strings(@boot_thms);
-my $lilo_pixbuf = new_from_file Gtk::Gdk::Pixbuf($themes{'def_thmb'});
-my $lilo_pic = new Gtk::Pixmap($lilo_pixbuf->render_pixmap_and_mask(0),'');#gtkcreate_png($themes{'def_thmb'}));
+my $lilo_pixbuf;
+my $lilo_pic = gtkpng($themes{'def_thmb'});
 
-my $boot_pixbuf = new_from_file Gtk::Gdk::Pixbuf($themes{'def_thmb'});
-my $boot_pic = new Gtk::Pixmap($boot_pixbuf->render_pixmap_and_mask(0),'');#gtkcreate_png($themes{'def_thmb'}));
+my $boot_pixbuf ;
+my $boot_pic = gtkpng($themes{'def_thmb'});
 
 my $thm_button = new Gtk::Button(_("Install themes"));
 my $logo_thm = new Gtk::CheckButton(_("Display theme under console"));
@@ -166,14 +166,14 @@ $combo{'thms'}->entry->signal_connect(changed => sub {
 $combo{'lilo'}->entry->signal_connect(changed => sub {
     my $new_file = $themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'thumb'};
     undef($lilo_pixbuf);
-    $lilo_pixbuf = new_from_file Gtk::Gdk::Pixbuf(-r $new_file ? $new_file : $themes{'def_thmb'});
+    $lilo_pixbuf = gtkcreate_png_pixbuf(-r $new_file ? $new_file : $themes{'def_thmb'});
     $lilo_pic->set($lilo_pixbuf->render_pixmap_and_mask(0),'');
 });
 
 $combo{'boot'}->entry->signal_connect( changed => sub {
     local $img_file = $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg";
     undef($boot_pixmap);
-    $boot_pixmap = new_from_file Gtk::Gdk::Pixbuf(-r $new_file ? $new_file : $img_file);
+    $boot_pixmap = gtkcreate_png_pixbuf( $img_file);
     $boot_pixmap = $boot_pixmap->scale_simple(159,119,0);
     $boot_pic->set($boot_pixmap->render_pixmap_and_mask(0),'');
 });
