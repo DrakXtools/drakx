@@ -169,7 +169,8 @@ installCrypto =>
 set up correctly. First choose a mirror where you wish to download packages and
 after that select the packages to install.
 
-Note you have to select mirror and cryptographic according to your legislation."),
+Note you have to select mirror and cryptographic packages according
+to your legislation."),
 
 configureTimezone =>
  __("You can now select your timezone according to where you live.
