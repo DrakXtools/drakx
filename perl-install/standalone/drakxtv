@@ -18,16 +18,16 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+use strict;
 use lib qw(/usr/lib/libDrakX);
 
+use common;
 use standalone; #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
-use strict;
 use detect_devices;
 use lang;
 use log;
-use common;
 
 my $in = 'interactive'->vnew;
 
