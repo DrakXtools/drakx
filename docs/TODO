@@ -27,6 +27,13 @@ rpmdrake and same name packages
 
 the XFdrake test does not handle the fontset
 
+
+replace
+	{ device => "loop7", type => 0x83, size => cat_('/dos/lnx4win/size.txt') * 2048, mntpoint => "/", isFormatted => 1, isMounted => 1 },
+by
+	{ device => "loop7", type => 0x83, size => ((cat_('/dos/lnx4win/size.txt'))[0]*2048), mntpoint => "/", isFormatted => 1, isMounted => 1 },
+
+
 --------------------------------------------------------------------------------
 mandrake_desk has not installed while kdebase it there on upgrade
 
