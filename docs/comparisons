@@ -104,3 +104,75 @@ redhat 7.3:
 dangerous (proposed to everyone, but not proposed especially to people having
 a dangerous combinaison)
 - why still asking about lba32!!
+
+redhat 8.0:
+
+Install steps difference
++ firewall wizard
++ md5sum check when booting install
+- no upgrade packages installation during install
+- no services configuration (chkconfig)
+- no printer configuration
+- no autologin
+- no real small installation
+/ still propose non-MD5 or non-shadow passwords
+/ post install tool (firstconfig)
+
+General install behaviour, eye-candiness
++ package selection a la Windows
++ in language selection languages displayed in native language
++ candy timezone selection
++ help uses bold/italic/big-font
+- no one CD install
+/ not using fb at install
+/ python + gtk2  vs  perl + gtk
+/ ask many things before doing anything (esp. delayed partitioning)
+- more width-hard-coded dialog boxes (harder for translations)
+/ use a loopback file from the CD then copied on system
+
+Partitioning
+- no diskdruid after install
+- no partitioning wizard
+- no devfs
+- no xfs (but now has reiserfs/jfs)
+- no loopback crypted fs
+- no file swap (?)
+- no supermount
++ LABELed entries in fstab
++ progress bar while formatting
+
+Bootloader
++ bootloader configuration less awkward
+- no automatic handling of bios ordering with many harddrives
+- propose to manually change bios ordering even with one harddrive
+- LBA32 checkbox
+/ defaults to grub
+
+Network
+- awkward question apropos hostname when using DHCP
+- no default choice for netmask/gateway/DNS based on IP
+
+XFree
+- no wacom configuration
+- no graphic card multi-head configuration
+- no ATI tvout configuration
+- no prompt for logout after changing X config
+- VideoRam prompted for everybody
+/ no XFree3
+/ no Utah GLX
+/ load module "fbdevhw" "record", but not "v4l"
+/ always load module "glx" and "dri"
+
+Keyboard
+- many non useful keyboard entries (eg: latin0)
+- no way to choose the toggle key to choose between latin/non-latin keyboard 
+- no loadkeys done during install for console
+
+Mouse
+- no way to test mouse choice
+- mouse choices include many non-useful choices, badly sorted
+  (Intellimouse must be sought in Microsoft whereas it's used by many others)
+
+Multimedia
+- no bttv configuration (including webcams)
+- missing audio modules (alsa, audigy...)
