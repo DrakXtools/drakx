@@ -588,7 +588,7 @@ sub testFinalConfig {
     $::live and $bad_card ||= $o->{card}{identifier} =~ /S3.*ViRGE/;
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
-    my $verybad_card = $o->{card}{driver} eq 'i810';
+    my $verybad_card = $o->{card}{driver} eq 'i810' || $o->{card}{driver} eq 'fbdev';
     $verybad_card ||= $o->{card}{driver} eq 'nvidia' && !$::isStandalone; #- avoid testing during install at any price.
     $bad_card || $verybad_card and return 1; #- deactivating bad_card test too.
 
