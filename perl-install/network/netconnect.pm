@@ -89,7 +89,8 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $adsl_type, $need_restart_network);
+      my ($adsl_type, @adsl_devices);
+      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -204,7 +205,6 @@ sub get_subwizard {
                     },
                     post => sub {
                         load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
-                        get_subwizard($wiz, 'adsl') if $connections{$cnx_type} eq 'adsl';
                         $type = $netcnx->{type} = $connections{$cnx_type};
                         if ($type eq 'cable') {
                             $auto_ip = 1;
@@ -508,8 +508,48 @@ killall pppd
                         $handle_multiple_cnx->();
                     },
                    },
+
+
+                   adsl => 
+                   {
+                    pre => sub {
+                        get_subwizard($wiz, 'adsl');
+                        $lan_detect->();
+                        detect($netc->{autodetect}, 'adsl');
+                        @adsl_devices = @cards;
+                        push @adsl_devices, N("Alcatel speedtouch USB modem") if $netc->{autodetect}{adsl}{speedtouch};
+                        push @adsl_devices, N("Sagem USB modem") if $netc->{autodetect}{adsl}{sagem};
+                        # we still need to detect those:
+                        N("Eagle USB modem");
+                        N("Bewan USB modem");
+                        N("Bewan PCI modem");
+                    },
+                    name => N("ADSL configuration" . "\n\n" . "Select the network interface to configure:"),
+                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
+                               list => \@adsl_devices, } ],
+                    next => "adsl_protocol",
+                   },
+
+
+                   adsl_protocol =>
+                   {
+                    name => N("Connect to the Internet") . "\n\n" .
+                    N("The most common way to connect with adsl is pppoe.
+Some connections use pptp, a few use dhcp.
+If you don't know, choose 'use pppoe'"),
+                    data =>  [
+                              { label => N("ADSL connection type :"), val => \$adsl_type, type => "list",
+                                list => [
+                                         N("Dynamic Host Configuration Protocol (DHCP)"),
+                                         N("Point to Point Tuneling Protocol (PPPTP)"),
+                                         N("PPP over Ethernet (PPPoE)"),
+                                         N("PPP over ATM (PPPoA)"),
+                                        ],
+                              },
+                             ],
+                   },
          
-         
+
                    lan => 
                    {
                     pre => $lan_detect,
