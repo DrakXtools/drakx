@@ -39,6 +39,17 @@ print '
 #undef max_colors
 
 #define SECTORSIZE 512
+
+char *prom_getopt();
+void prom_setopt();
+char *prom_getproperty();
+char *disk2PromPath();
+char *promRootName();
+
+';
+
+$ENV{C_DRAKX} && $Config{archname} =~ /i.86/ and print '
+char *pcmcia_probe(void);
 ';
 
 $ENV{C_RPM} and print '
@@ -50,6 +61,7 @@ $ENV{C_RPM} and print '
 #undef Mkdir
 #undef Stat
 #include <rpm/rpmlib.h>
+#include <rpm/rpmio.h>
 
 void rpmError_callback_empty(void) {}
 
@@ -657,43 +669,6 @@ rpmdepOrder(order)
   OUTPUT:
   RETVAL
 
-void
-rpmdepCheck(rpmdep)
-  void *rpmdep
-  PPCODE:
-  struct rpmDependencyConflict * conflicts;
-  int numConflicts, i;
-  rpmdepCheck(rpmdep, &conflicts, &numConflicts);
-  if (numConflicts) {
-    EXTEND(SP, numConflicts);
-    for (i = 0; i < numConflicts; i++)
-      if (conflicts[i].sense == RPMDEP_SENSE_CONFLICTS) {
-        fprintf(stderr, "%s conflicts with %s\n", conflicts[i].byName, conflicts[i].needsName);
-      } else {
- 	if (conflicts[i].suggestedPackage)
- 	  PUSHs(sv_2mortal(newSVpv((char *) conflicts[i].suggestedPackage, 0)));
- 	else {
- 	  char *p = malloc(100 + strlen(conflicts[i].needsName) + strlen(conflicts[i].byName));
- 	  sprintf(p, "%s needed but nothing provide it (%s)", conflicts[i].needsName, conflicts[i].byName);
- 	  PUSHs(sv_2mortal(newSVpv(p, 0)));
- 	  free(p);
-      }
-    }
-  }
-
-void
-rpmdepCheckFrom(rpmdep)
-  void *rpmdep
-  PPCODE:
-  struct rpmDependencyConflict * conflicts;
-  int numConflicts, i;
-  rpmdepCheck(rpmdep, &conflicts, &numConflicts);
-  if (numConflicts) {
-    EXTEND(SP, numConflicts);
-    for (i = 0; i < numConflicts; i++)
-        PUSHs(sv_2mortal(newSVpv(conflicts[i].byName, 0)));
-  }
-
 int
 rpmdbRebuild(root)
   char *root
@@ -743,7 +718,7 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   int force
   PPCODE:
   rpmProblemSet probs;
-  void *rpmRunTransactions_callback(const Header h, const rpmCallbackType what, const unsigned long amount, const unsigned long total, const void * pkgKey, void * data) {
+  void *rpmRunTransactions_callback(const void *h, const rpmCallbackType what, const unsigned long amount, const unsigned long total, const void * pkgKey, void * data) {
       static int last_amount;
       static FD_t fd = NULL;
       char *msg = NULL;
@@ -864,7 +839,7 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
     /* printf("rpmRunTransactions finished, errors occured %d\n", probs->numProblems); fflush(stdout); */
     EXTEND(SP, probs->numProblems);
     for (i = 0; i < probs->numProblems; i++) {
-      PUSHs(sv_2mortal(newSVpv(rpmProblemString(probs->probs[i]), 0)));
+      PUSHs(sv_2mortal(newSVpv(rpmProblemString(&probs->probs[i]), 0)));
     }
   }
 
