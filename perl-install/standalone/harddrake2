@@ -176,7 +176,7 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                                                   }
                                                                                               })
                                                      ),
-                                            ( 'resize1' => 1)
+                                            ( 'resize1' => 0, shrink1 => 1, resize2 => 0, shrink2 => 0)
                                             ),
                            0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
