@@ -211,7 +211,7 @@ our @tree =
                   ||  member($_->{driver}, @net_modules);
           } @devices);
       },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
