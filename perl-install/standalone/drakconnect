@@ -311,14 +311,14 @@ $in->exit(0);
 sub build_list {
     foreach my $i (0..$#all_cards) {
 	my ($ip, $state);
-	if (-e "/sbin/ifconfig") {
+	if (-x "/sbin/ifconfig") {
 	    local $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
 	    /inet addr\:$ip_regexp/;
-            $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
+         $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
 	    $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
 	    $state = /eth$i/ ? "up" : "down";
 	} else { 
-            $ip = $intf->{"eth$_"}{IPADDR};
+            $ip = $intf->{"eth$i"}{IPADDR};
             $state = "n/a";
         }
         $tree_model->append_set(undef, [ map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i][1], $state) ])->free;
