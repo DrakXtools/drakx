@@ -839,9 +839,7 @@ sub new {
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window(
 	    title => $title, 
-	    position_policy => !$::isInstall && !$::isStandalone ? 'center_always' : 'center-on-parent',
 	    modal => $grab || $o->{grab} || $o->{modal},
-	    if_(!$::isInstall, icon_no_error => wm_icon()),
 	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
 	);
 
@@ -855,7 +853,13 @@ sub new {
 	}
     } else {
 	if (!$::WizardWindow) {
-	    $::WizardTable = gtknew('VBox');
+	    my $banner;
+	    if (!$::isEmbedded && !$::isInstall) {
+		$banner = Gtk2::Banner->new(wm_icon(), $::Wizard_title) or log::l("ERROR: missing wizard banner");
+	    }
+	    $::WizardTable = gtknew('VBox', 
+				    if_($banner, children_tight => $banner),
+				);
 
 	    if ($::isEmbedded) {
 		$::Plug = $::WizardWindow = gtknew('Plug',
@@ -869,14 +873,7 @@ sub new {
 		$::WizardWindow = _create_window(
 		    title => $title,
 		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
-		    if_(!$::isInstall, icon_no_error => wm_icon()),
-		    if_(!$::isInstall && !$::isStandalone, position_policy => 'center_always'),
-		);
-	    
-		if (!$::isInstall) {
-		    eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
-		    $@ and log::l("ERROR: missing wizard banner");
-		}
+		);   
 		$::WizardWindow->show;
 	    }
 	}
@@ -944,6 +941,8 @@ sub _create_window {
     my $w = gtknew('Window', 
 		   if_(!$::isInstall && !$::isWizard, border_width => 5),
 		   widget_name => 'Title',
+		   position_policy => !$::isInstall && !$::isStandalone ? 'center_always' : 'center-on-parent',
+		   if_(!$::isInstall, icon_no_error => wm_icon()),
 		   %options);
 
     if ($force_focus) {
