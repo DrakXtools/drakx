@@ -102,8 +102,6 @@ drakxtv: auto configure tv card for xawtv grabber
 
 keyboarddrake: configure your keyboard (both console and X)
 
-liveupdate: live update software
-
 logdrake: show extracted information from the system logs
 
 lsnetdrake: display available nfs and smb shares
