@@ -255,24 +255,37 @@ sub wizard_welcome {
     my $autodetectsmb = 0;
     # If networking is configured, start it, but don't ask the user to
     # configure networking.
-    if (!check_network($printer, $in, $upNetwork, 1)) { return 0 };
-    my $havelocalnetworks = (printer::getIPsInLocalNetworks() != ());
-    $autodetectlocal = 1 if ($printer->{AUTODETECTLOCAL});
-    $autodetectnetwork = 1 if ($printer->{AUTODETECTNETWORK} &&
-			       $havelocalnetworks);
-    $autodetectsmb = 1 if ($printer->{AUTODETECTSMB} &&
-			   $havelocalnetworks);
+    my $havelocalnetworks;
+    if ($::expert) {
+	$havelocalnetworks = 0;
+	undef $printer->{AUTODETECTNETWORK};
+	undef $printer->{AUTODETECTSMB};
+    } else {
+	$havelocalnetworks = ((check_network($printer, $in, $upNetwork, 1)) &&
+			      (printer::getIPsInLocalNetworks() != ()));
+	if (!$havelocalnetworks) {
+	    undef $printer->{AUTODETECTNETWORK};
+	    undef $printer->{AUTODETECTSMB};
+	}
+	$autodetectlocal = 1 if $printer->{AUTODETECTLOCAL};
+	$autodetectnetwork = 1 if $printer->{AUTODETECTNETWORK};
+	$autodetectsmb = 1 if $printer->{AUTODETECTSMB};
+    }
     if ($in) {
 	eval {
 	    if ($::expert) {
-		$ret = $in->ask_okcancel
-		    (_("Add a new printer"),
-		     _("
+		if ($::isWizard) {
+		    $ret = $in->ask_okcancel
+			(_("Add a new printer"),
+			 _("
 Welcome to the Printer Setup Wizard
 
 This wizard allows you to install local or remote printers to be used from this machine and also from other machines in the network.
 
 It asks you for all necessary information to set up the printer and gives you access to all available printer drivers, driver options, and printer connection types."));
+		} else {
+		    $ret = 1;
+		}
 	    } else {
 		$ret = $in->ask_from_
 		    ({title => _("Add a new printer"),
@@ -345,7 +358,7 @@ If you have printer(s) connected to this machine, Please plug it/them in on this
 sub wizard_congratulations {
     my ($in) = @_;
     if ($in) {
-	$in->ask_okcancel(_("Local Printer"),
+	$in->ask_okcancel(_("Add a new printer"),
 			  _("
 Congratulations, your printer is now installed and configured!
 
@@ -708,7 +721,9 @@ complete => sub {
     # printer)
     my $modelinfo = printer::getSNMPModel ($remotehost);
     my $auto_hpoj;
-    if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
+    if ((defined($modelinfo)) &&
+	($modelinfo->{MANUFACTURER} ne "") &&
+	($modelinfo->{MODEL} ne "")) {
         $in->ask_warn('', _("Detected model: %s %s",
                             $modelinfo->{MANUFACTURER}, $modelinfo->{MODEL}));
         $auto_hpoj = 1;
@@ -1137,7 +1152,9 @@ sub setup_socket {
 	$modelinfo = printer::getSNMPModel ($remotehost);
     }
     my $auto_hpoj;
-    if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
+    if ((defined($modelinfo)) &&
+	($modelinfo->{MANUFACTURER} ne "") &&
+	($modelinfo->{MODEL} ne "")) {
         $auto_hpoj = 1;
     } else {
 	$auto_hpoj = 0;
@@ -1221,7 +1238,9 @@ complete => sub {
 	my $remotehost = $1;
 	my $modelinfo = printer::getSNMPModel ($remotehost);
         my $auto_hpoj;
-        if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
+        if ((defined($modelinfo)) &&
+            ($modelinfo->{MANUFACTURER} ne "") &&
+	    ($modelinfo->{MODEL} ne "")) {
             $in->ask_warn('', _("Detected model: %s %s",
                                 $modelinfo->{MANUFACTURER},
 				$modelinfo->{MODEL}));
@@ -1295,7 +1314,7 @@ sub setup_common {
 	    ($makemodel =~ /$searchunknown/i) ||
 	    ($makemodel =~ /^\s*$/)) {
 	    local $::isWizard = 0;
-	    $isHPOJ = $in->ask_yesorno(_("Local Printer"),
+	    $isHPOJ = $in->ask_yesorno(_("Add a new printer"),
 				       _("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
 	}
 	if (($makemodel =~ /HP\s+OfficeJet/i) ||
@@ -3349,7 +3368,7 @@ sub main {
 		wizard_close($in, 0) if ($@ =~ /wizcancel/);
 	    } else {
 		$::expert or $printer->{TYPE} = "LOCAL";
-		$::expert or wizard_welcome($printer, $in, $upNetwork) or next;
+		wizard_welcome($printer, $in, $upNetwork) or next;
 		!$::expert or choose_printer_type($printer, $in) or next;
 		#- Cancelling the printer connection type window
 		#- should not restart printerdrake in recommended mode,
