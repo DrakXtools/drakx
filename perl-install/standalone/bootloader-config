@@ -55,7 +55,6 @@ if ($image) {
 
 my $all_hds = fsedit::get_hds();
 fs::get_info_from_fstab($all_hds, '');
-my $hds = $all_hds->{hds};
 
 my $bootloader = bootloader::read([ fs::get::fstab($all_hds) ]) or die "Cannot find a boot loader installed\n";
 
@@ -120,8 +119,8 @@ sub add_kernel() {
 sub modify_bootloader() {
     !$no_entry or return;
 
-    bootloader::action($bootloader, 'write', $hds);
-    bootloader::action($bootloader, 'when_config_changed', $hds) if !$no_launch;
+    bootloader::action($bootloader, 'write', $all_hds);
+    bootloader::action($bootloader, 'when_config_changed') if !$no_launch;
 }
 
 #-###############################################################################
@@ -156,14 +155,14 @@ sub update_splash() {
     foreach (@{$bootloader->{entries}}) {
 	bootloader::add_boot_splash($_->{initrd}, $_->{vga}) if $_->{initrd};
     }
-    bootloader::action($bootloader, 'when_config_changed', $hds) if !$no_launch;
+    bootloader::action($bootloader, 'when_config_changed') if !$no_launch;
 }
 
 sub remove_splash() {
     foreach (@{$bootloader->{entries}}) {
 	bootloader::remove_boot_splash($_->{initrd}) if $_->{initrd};
     }
-    bootloader::action($bootloader, 'when_config_changed', $hds) if !$no_launch;
+    bootloader::action($bootloader, 'when_config_changed') if !$no_launch;
 }
 
 sub detectloader() {

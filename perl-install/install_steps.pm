@@ -840,7 +840,7 @@ sub setupBootloader {
     my ($o) = @_;
 
     require bootloader;
-    bootloader::install($o->{bootloader}, $o->{all_hds}{hds});
+    bootloader::install($o->{bootloader}, $o->{all_hds});
 }
 
 #------------------------------------------------------------------------------

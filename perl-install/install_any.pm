@@ -637,7 +637,7 @@ sub setupFB {
     foreach (@{$o->{bootloader}{entries}}) {
 	$_->{vga} = $vga if $_->{vga}; #- replace existing vga= with
     }
-    bootloader::install($o->{bootloader}, $o->{all_hds}{hds});
+    bootloader::install($o->{bootloader}, $o->{all_hds});
     1;
 }
 

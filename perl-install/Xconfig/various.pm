@@ -137,7 +137,7 @@ sub configure_FB_TVOUT {
 	
 	if (my $tvout = bootloader::duplicate_kernel_entry($bootloader, 'TVout')) {
 	    $tvout->{append} .= " XFree=tvout";
-	    bootloader::install($bootloader, $all_hds->{hds});
+	    bootloader::install($bootloader, $all_hds);
 	}
     }
 }

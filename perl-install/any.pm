@@ -80,7 +80,6 @@ sub hdInstallPath() {
 
 sub setupBootloader {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
-    my $hds = $all_hds->{hds};
 
     require bootloader;
   general:
@@ -88,7 +87,7 @@ sub setupBootloader {
 	local $::Wizard_no_previous = 1 if $::isStandalone;
 	setupBootloader__general($in, $b, $all_hds, $fstab, $security) or return 0;
     }
-    setupBootloader__boot_bios_drive($in, $b, $hds) or goto general;
+    setupBootloader__boot_bios_drive($in, $b, $all_hds->{hds}) or goto general;
     {
 	local $::Wizard_finished = 1 if $::isStandalone;
 	setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
@@ -99,7 +98,7 @@ sub setupBootloader {
 
     eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
-    bootloader::install($b, $hds);
+    bootloader::install($b, $all_hds);
 }
 
 
