@@ -469,23 +469,73 @@ sub read_cups_printer_list {
     return @printerlist;
 }
 
-sub get_cups_default_printer {
+sub set_cups_autoconf {
+    my $autoconf = $_[0];
+
+    # Read config file
     local *F;
-    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	"lpstat -d |" || return undef;
+    my $file = "$prefix/etc/sysconfig/printing";
+    if (!(-f $file)) {
+	@file_content = ();
+    } else {
+	open F, "< $file" or die "Cannot open $file!";
+	@file_content = <F>;
+	close F;
+    }
+
+    # Remove all valid "CUPS_CONFIG" lines
+    ($_ =~ /^\s*CUPS_CONFIG/ and $_="") foreach @file_content;
+ 
+    # Insert the new "Printcap" line
+    if ($autoconf) {
+	push @file_content, "CUPS_CONFIG=automatic\n";
+    } else {
+	push @file_content, "CUPS_CONFIG=manual\n";
+    }
+
+    # Write back modified file
+    open F, "> $file" or die "Cannot open $file!";
+    print F @file_content;
+    close F;
+
+    # Restart CUPS
+    restart_service("cups");
+
+    return 1;
+}
+
+sub get_cups_autoconf {
+    local *F;
+    open F, ("< $prefix/etc/sysconfig/printing") || return 1;
     my $line;
     while ($line = <F>) {
-	if ($line =~ /^\s*system\s*default\s*destination:\s*(\S*)$/) {
+	if ($line =~ m!^[^\#]*CUPS_CONFIG=manual!) {
+	    return 0;
+	}
+    }
+    return 1;
+}
+
+sub set_default_printer {
+    my ($printer, $default) = @_;
+    run_program::rooted($prefix, "foomatic-configure",
+			"-D", "-s", $printer->{SPOOLER},
+			"-n", $default) || return 0;
+    return 1;
+}
+
+sub get_default_printer {
+    my $printer = $_[0];
+    local *F;
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"foomatic-configure -Q -s $printer->{SPOOLER} |" || return undef;
+    my $line;
+    while ($line = <F>) {
+	if ($line =~ m!^\s*<defaultqueue>(.*)</defaultqueue>\s*$!) {
 	    return $1;
 	}
     }
     return undef;
-}
-
-sub set_default_printer {
-    my $default = $_[0];
-    run_program::rooted($prefix, "foomatic-configure",
-			"-D", "-n", $default) || return;
 }
 
 sub read_cupsd_conf {
@@ -507,7 +557,7 @@ sub write_cupsd_conf {
     close F;
 
     #- restart cups after updating configuration.
-    run_program::rooted($prefix, "/etc/rc.d/init.d/cups restart"); sleep 1;
+    restart_service("cups");
 }
 
 sub read_printers_conf {
@@ -607,7 +657,7 @@ sub poll_ppd_base {
     #- if cups continue to modify it (because it reads the ppd files available), the
     #- poll_ppd_base program simply cores :-)
     run_program::rooted($prefix, "ifconfig lo 127.0.0.1"); #- else cups will not be happy! and ifup lo don't run ?
-    run_program::rooted($prefix, "/etc/rc.d/init.d/cups start");
+    start_service("cups");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
 	local *PPDS; open PPDS, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
@@ -732,7 +782,7 @@ sub restart_queue($) {
     for ($printer->{SPOOLER}) {
 	/cups/ && do {
 	    #- restart cups.
-	    run_program::rooted($prefix, "/etc/rc.d/init.d/cups restart"); sleep 1;
+	    restart_service("cups"); sleep 1;
 	    last };
 	/lpr|lprng/ && do {
 	    #- restart lpd.
@@ -741,7 +791,7 @@ sub restart_queue($) {
 		kill 'TERM', $pidlpd if $pidlpd;
 		unlink "$prefix$_";
 	    }
-	    run_program::rooted($prefix, "lpd"); sleep 1;
+	    restart_service("lpd"); sleep 1;
 	    last };
     }
     # Kill the jobs

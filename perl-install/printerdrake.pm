@@ -40,7 +40,7 @@ sub setup_remote_cups_server {
     my $queue = $printer->{OLD_QUEUE};
     #- hack to handle cups remote server printing,
     #- first read /etc/cups/cupsd.conf for variable BrowsePoll address:port
-    my ($server, $port, $default);
+    my ($server, $port, $default, $autoconf);
     # Return value: 0 when nothing was changed ("Apply" never pressed), 1
     # when "Apply" was at least pressed once.
     my $retvalue = 0;
@@ -54,7 +54,7 @@ sub setup_remote_cups_server {
 	# Read printer list
 	my @queuelist = printer::read_cups_printer_list();
 	if ($#queuelist >=0) {
-	    $default = printer::get_cups_default_printer();
+	    $default = printer::get_default_printer($printer);
 	    my $queue;
 	    for $queue (@queuelist) {
 		if ($queue =~ /^\s*$default/) {
@@ -65,10 +65,13 @@ sub setup_remote_cups_server {
 	    push(@queuelist, "None");
 	    $default = "None";
 	}
-	#- Remember the server/port settings to check whether the user changed
-	#- them.
+	#- Did we have automatic or manual configuration mode for CUPS
+	my $autoconf = printer::get_cups_autoconf();
+	#- Remember the server/port/autoconf settings to check whether the user
+        #- has changed them.
 	my $oldserver = $server;
 	my $oldport = $port;
+	my $oldautoconf = $autoconf;
 
         #- then ask user for this combination and rewrite /etc/cups/cupsd.conf
 	#- according to new settings. There are no other point where such
@@ -76,7 +79,7 @@ sub setup_remote_cups_server {
 
 	if ($in->ask_from_
 	    ({ title => _("Remote CUPS server"),
-	       messages => _("With a remote CUPS server, you do not have to configure any 
+	       messages => _("With remote CUPS servers, you do not have to configure any 
 printer here; CUPS servers inform your machine automatically
 about their printers. All printers known to your machine
 currently are listed in the \"Default printer\" field. Choose
@@ -87,7 +90,14 @@ of CUPS until all remote printers are visible).
 When your CUPS server is in a different network, you have to 
 give the CUPS server IP address and optionally the port number
 to get the printer information from the server, otherwise leave
-these fields blank."),
+these fields blank.") .
+              ($::expert ? _("
+Normally, CUPS is automatically configured according to your
+network environment, so that you can access the printers on the
+CUPS servers in your local network. If this does not correctly,
+turn off \"Automatic CUPS configuration\" and edit your file
+/etc/cups/cupsd.conf manually. Do not forget to restart CUPS
+afterwards (command: \"service cups restart\").") : ()),
               cancel => _("Close"),
               ok => _("Apply/Re-read printers"),
 	      callbacks => { complete => sub {
@@ -111,7 +121,10 @@ these fields blank."),
 		#{ val => \$default,
 		#  format => \&translate, not_edit => 0, list => \@queuelist},
 		{ label => _("CUPS server IP"), val => \$server },
-		{ label => _("Port"), val => \$port }
+		{ label => _("Port"), val => \$port },
+		($::expert ?
+		{ text => _("Automatic CUPS configuration"), type => 'bool',
+		  val => \$autoconf } : ()),
 		]
 	     )) {
 	    # We have clicked "Apply/Re-read"
@@ -121,7 +134,7 @@ these fields blank."),
 		$default = $1;
 	    }
 	    if ($default ne "None") {
-	        printer::set_default_printer($default);
+	        printer::set_default_printer($printer, $default);
 	    }
 	    # Set BrowsePoll line
 	    if (($server ne $oldserver) || ($port ne $oldport)) {
@@ -140,6 +153,10 @@ these fields blank."),
 		}
 	        printer::write_cupsd_conf(@cupsd_conf);
 		sleep 3;
+	    }
+	    # Set auto-configuration state
+	    if ($autoconf != $oldautoconf) {
+	        printer::set_cups_autoconf($autoconf);
 	    }
 	} else {
 	    last;
@@ -876,6 +893,16 @@ can get substantially slower."),
     1;
 }
 
+sub setasdefault {
+    my ($printer, $in, $defaultprinter) = @_;
+    if (($defaultprinter eq '') || # We have no default printer,
+	                           # so set the current one as default
+	($in->ask_yesorno('', _("Do you want to set this printer (\"%s\")\nas the default printer?", $printer->{QUEUE}), 1))) { # Ask the user
+        printer::set_default_printer($printer, $printer->{QUEUE}) &&
+	    ($defaultprinter = $printer->{QUEUE});
+    }
+}
+	
 sub print_testpages {
     my ($printer, $in, $upNetwork) = @_;
     # print test pages
@@ -955,7 +982,7 @@ It may take some time before the printer starts.\n");
 }
 
 sub copy_queues_from {
-    my ($printer, $in, $oldspooler) = @_;
+    my ($printer, $in, $oldspooler, $defaultprinter) = @_;
     my $newspooler = $printer->{SPOOLER};
     my @oldqueues;
     my @queueentries;
@@ -966,6 +993,7 @@ sub copy_queues_from {
     {
 	my $w = $in->wait_message('', _("Reading printer data ..."));
 	@oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
+	@oldqueues = sort(@oldqueues);
 	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
 	$oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
 	for (@oldqueues) {
@@ -1044,11 +1072,25 @@ You can also type a new name or skip this printer.",
 			}}
 		    },
 		      [{label => _("New printer name"),val => \$newqueue}]))) {
-		    my $w = $in->wait_message('', 
-			        _("Transferring %s ...", $oldqueue));
-		    printer::copy_foomatic_queue($printer, $oldqueue,
-						 $oldspooler, $newqueue) and
-						     $queuecopied = 1;
+		    {
+			my $w = $in->wait_message('', 
+			   _("Transferring %s ...", $oldqueue));
+		        printer::copy_foomatic_queue($printer, $oldqueue,
+						   $oldspooler, $newqueue) and
+							 $queuecopied = 1;
+		    }
+		    if ($oldqueue eq $defaultprinter) {
+			# Make the former default printer the new default
+			# printer if the user does not reject
+			if (($noninteractive) ||
+			    ($in->ask_yesorno
+			     (_("Transfer printer configuration"),
+			      _("You have transferred your former default printer (\"%s\"),
+Should it be also the default printer under the
+new printing system %s?", $oldqueue, $newspoolerstr), 1))) {
+			    printer::set_default_printer($printer, $newqueue);
+			}
+		    }
 		}
             }
 	}
@@ -1059,7 +1101,7 @@ You can also type a new name or skip this printer.",
 }
 
 sub setup_default_spooler {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $defaultprinter) = @_;
     $printer->{SPOOLER} ||= 'cups';
     my $oldspooler = $printer->{SPOOLER};
     my $str_spooler = 
@@ -1075,7 +1117,10 @@ sub setup_default_spooler {
 	# Get the queues of this spooler
         printer::read_configured_queues($printer);
 	# Copy queues from former spooler
-	copy_queues_from($printer, $in, $oldspooler);
+	copy_queues_from($printer, $in, $oldspooler, $defaultprinter);
+	# Re-read the printer database (CUPS has additional drivers)
+	%printer::thedb = ();
+	printer::read_printer_db($printer->{SPOOLER});
     }
     return $printer->{SPOOLER};
 }
@@ -1150,6 +1195,11 @@ sub install_spooler {
 sub main {
     my ($printer, $in, $ask_multiple_printer, $upNetwork) = @_;
 
+    # Default printer name, we do not use "lp" so that one can switch the
+    # default printer under LPD without needing to rename another printer.
+    # Under LPD the alias "lp" will be given to the default printer.
+    my $defaultprname = _("Printer");
+
     # printerdrake does not work without foomatic, and for more convenience
     # we install some more stuff
     {
@@ -1177,7 +1227,7 @@ sub main {
 
     }
     # Control variables for the main loop
-    my ($queue, $continue, $newqueue, $editqueue, $expertswitch) = ('', 1, 0, 0, 0);
+    my ($queue, $continue, $newqueue, $editqueue, $expertswitch, $defaultprinter) = ('', 1, 0, 0, 0, '');
     # Cursor position in queue modification window
     my $modify = _("Printer options");
     while ($continue) {
@@ -1185,6 +1235,10 @@ sub main {
 	# When the queue list is not shown, cancelling the printer type
 	# dislog should leave the program
 	$continue = 0;
+	# Get the default printer
+	if (defined($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
+	    $defaultprinter = printer::get_default_printer($printer);
+	}
 	if ($editqueue) {
 	    # The user was either in the printer modification dialog and did
 	    # not close it or he had set up a new queue and said that the test
@@ -1201,7 +1255,7 @@ sub main {
 		$queue = $printer->{want} || 
 		    $in->ask_yesorno(_("Printer"),
 				    _("Would you like to configure printing?"),
-				    0) ? 'lp' : _("Done");
+				    0) ? $defaultprname : _("Done");
 		if ($queue ne _("Done")) {
 		    $printer->{SPOOLER} ||= 
 			setup_default_spooler ($printer, $in) ||
@@ -1212,7 +1266,7 @@ sub main {
 		$printer->{SPOOLER} ||=  setup_default_spooler ($printer, $in) || return;
 		# This entry and the check for this entry have to use
 		# the same translation to work properly
-		my $spoolerentry = _("Spooler: ");
+		my $spoolerentry = _("Printing system: ");
 		# Show a queue list window when there is at least one queue
 		# or when we are in expert mode
 		unless ((%{$printer->{configured} || {}} == ()) && 
@@ -1231,7 +1285,13 @@ sub main {
 			},
 			# List the queues
 			[ { val => \$queue, format => \&translate,
-		        list => [ (sort keys %{$printer->{configured} || {}}),
+			    sort => 0, 
+		        list => [ (sort(map {"$_" . ($_ eq $defaultprinter ?
+						     _(" (Default)") : ())}
+				   keys(%{$printer->{configured} || {}}))),
+			# CUPS makes available remote printers automatically
+			($printer->{SPOOLER} eq "cups" ?
+			 _("Printer(s) on remote CUPS server(s)") : ()),
 			# Button to add a new queue
 			_("Add printer"),
 		        # In expert mode we can change the spooler
@@ -1241,6 +1301,15 @@ sub main {
 		        # Bored by configuring your printers, get out of here!
 		        _("Done") ] } ]
 		    );
+		    # Toggle expert mode and standard mode
+		    if ($expertswitch) {
+			$expertswitch = 0;
+			$::expert = !$::expert;
+			# Read printer database for the new user mode
+			%printer::thedb = ();
+		      printer::read_printer_db($printer->{SPOOLER});
+			next;
+		    }
 		} else {
 		    #- as there are no printer already configured, Add one
 		    #- automatically.
@@ -1251,22 +1320,23 @@ sub main {
 		    $newqueue = 1;
 		    my %queues; 
 		    @queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
-		    my $i = ''; while ($i < 100) { last unless exists $queues{"lp$i"}; ++$i; }
-		    $queue = "lp$i";
+		    my $i = ''; while ($i < 100) { last unless exists $queues{"$defaultprname$i"}; ++$i; }
+		    $queue = "$defaultprname$i";
 		}
+		# Function to switch to another spooler chosen
 		if ($queue =~ /^$spoolerentry/) {
-		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in) || $printer->{SPOOLER};
+		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in, $defaultprinter) || $printer->{SPOOLER};
 		    next;
 		}
-	    }
-	    # Toggle expert mode and standard mode
-	    if ($expertswitch) {
-		$expertswitch = 0;
-		$::expert = !$::expert;
-		# Read printer database for the new user mode
-		%printer::thedb = ();
-	        printer::read_printer_db($printer->{SPOOLER});
-		next;
+		# Make available printers on remote CUPS servers (CUPS only).
+		if ($queue eq _("Printer(s) on remote CUPS server(s)")) {
+		    setup_remote_cups_server($printer, $in);
+		    next;
+		}
+		# Rip off the " (Default)" tag from the queue name
+		if ($queue =~ /^\s*(\S+)\s+/) {
+		    $queue = $1;
+		}
 	    }
 	    # Save the default spooler
 	    printer::set_default_spooler($printer);
@@ -1309,6 +1379,7 @@ sub main {
 	    $printer->{complete} = 1;
 	    printer::configure_queue($printer);
 	    $printer->{complete} = 0;
+	    setasdefault($printer, $in, $defaultprinter);
 	    if (print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) { 
 		$continue = ($::expert || !$::isInstall);
 	    } else {
@@ -1323,7 +1394,9 @@ sub main {
 What do you want to modify on this printer?",
 				    $queue,
 				    $printer->{configured}{$queue}{make},
-				    $printer->{configured}{$queue}{model}),
+				    $printer->{configured}{$queue}{model} . 
+				    ($queue eq $defaultprinter ?
+				     _(" (Default)") : ())),
 		     cancel => _("Close"),
 		     ok => _("Do it!")
 		     },
@@ -1338,6 +1411,8 @@ What do you want to modify on this printer?",
 				   ($printer->{configured}{$queue}{model} ne
 				    _("Unknown model")) ?
 				   _("Printer options") : ()),
+				  (($queue ne $defaultprinter) ?
+				   _("Set this printer as the default") : ()),
 				  _("Print test pages"),
 				  _("Remove printer") ] } ] ) ) {
 		# Stay in the queue edit window until the user clicks "Close"
@@ -1385,6 +1460,13 @@ What do you want to modify on this printer?",
 		    # Delete old queue when it was renamed
 		    if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
 		        printer::remove_queue($printer, $printer->{OLD_QUEUE});
+			# If the default printer was renamed, correct the
+			# the default printer setting of the spooler
+			if ($queue eq $defaultprinter) {
+			    $defaultprinter = $printer->{QUEUE};
+			    printer::set_default_printer($printer,
+							 $printer->{QUEUE});
+			}
 			$queue = $printer->{QUEUE};
 		    }
 		} elsif (($modify eq _("Printer manufacturer, model, driver")) ||
@@ -1435,13 +1517,37 @@ What do you want to modify on this printer?",
 			    $printer->{complete} = 0;
 			};
 		    }
+		} elsif ($modify eq _("Set this printer as the default")) {
+		    if (printer::set_default_printer($printer, $queue)) {
+			$in->ask_warn(_("Default printer"),
+				      _("The printer \"%s\" is set as the default printer now.", $queue));
+		    } else {
+			$in->ask_warn(_("Default printer"),
+				      _("Could not set \"%s\" as the default printer!", $queue));
+		    }
 		} elsif ($modify eq _("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
 		} elsif ($modify eq _("Remove printer")) {
-		    $in->ask_yesorno('',
-	   _("Do you really want to remove the printer \"%s\"?", $queue), 1) &&
-		      printer::remove_queue($printer, $queue) && 
-			  ($editqueue = 0);
+		    if ($in->ask_yesorno('',
+           _("Do you really want to remove the printer \"%s\"?", $queue), 1)) {
+			{
+			    if (printer::remove_queue($printer, $queue)) { 
+				$editqueue = 0;
+				# Define a new default printer if we have
+				# removed the default one
+				if ($queue eq $defaultprinter) {
+				    my @k = sort(keys(%{$printer->{configured}}));
+				    if (@k) {
+				        printer::set_default_printer($printer, 
+								     $k[0]);
+					$defaultprinter = $k[0];
+				    } else {
+					$defaultprinter = "";
+				    }
+				}
+			    }
+			}
+		    }		
 		}
 	    } else {
 		$editqueue = 0;
