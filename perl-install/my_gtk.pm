@@ -539,8 +539,9 @@ sub _create_window($$) {
     my $inner = gtkadd(my $f_ = gtkset_shadow_type(new Gtk::Frame(undef), 'out'),
 		       my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
 		      );
+    my $table;
     if ($::isStandalone) { gtkadd($w, $inner) } else {
-	gtkadd($w, my $table = new Gtk::Table(2, 2, 0));
+	gtkadd($w, $table = new Gtk::Table(2, 2, 0));
 	$table->attach( $inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
 	$table->attach( gtksignal_connect(gtkset_usize(new Gtk::DrawingArea, 7, 1), expose_event => sub {
 					      $_[0]->window->draw_rectangle($_[0]->style->bg_gc('normal'), 1, 0, 0, 7, 7);
