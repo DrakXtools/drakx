@@ -48,7 +48,7 @@ struct pci_module_map ${type}_pci_ids[] = {
 	printf qq|\t{0x%s  , 0x%s  , ( "%s" ), ( "%s" )} ,\n|,
 	   $1, $2, $v->[1], $v->[0];
 	if (defined($check_marfiles)) {
-	    ($absent{$v->[0]} = 1) if (!grep(/^$v->[0]\.o\s/, @{$modulez{$type}}));
+	    ($absent{$v->[0]} = 1) if (!grep(/^\t$v->[0]\.o\s/, @{$modulez{$type}}));
 	}
     }
 
