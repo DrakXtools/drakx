@@ -1,13 +1,13 @@
 #!/bin/sh
 
 type=$1
-#[ -z "$type" ] && { echo "usage: $0 <network card type> (eg: 3c59x)" ; exit 1; }
+[ -z "$type" ] && { echo "usage: $0 <network card type> (eg: 3c59x)" ; exit 1; }
 [ -z "$type" ] && type=3c90x
 
 [ -e menu.lst ] || { echo "missing file menu.lst, create one based on menu.lst.example"; exit 1; }
 
-ln -sf stage1.$type stage1
-ln -sf stage2.$type stage2
+ln -sf ${type}/stage1 stage1
+ln -sf ${type}/stage2 stage2
 
 mformat a:
 mcopy {stage1,stage2} a:
