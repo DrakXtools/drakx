@@ -174,7 +174,7 @@ sub fullnames() {
 sub fullname2mouse {
     my ($fname, %opts) = @_;
     my ($type, @l) = split '\|', $fname;
-    my ($name) = pop @l;
+    my $name = pop @l;
   search:
     $opts{device} ||= $mice{$type}[0][0];
     foreach (@{$mice{$type}[1]}) {

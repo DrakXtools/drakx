@@ -30,7 +30,8 @@ sub getFile {
 		     "", "");
 
     #- skip until empty line
-    my ($now, $last, $buf, $tmp) = 0;
+    my $now = 0;
+    my ($last, $buf, $tmp);
     my $read = sub { sysread($sock, $buf, 1) or die ''; $tmp .= $buf };
     do {
 	$last = $now;

@@ -218,7 +218,7 @@ sub ask_fromW_real {
 	    };
 	} elsif ($e->{type} =~ /list/) {
 	    $size = @{$e->{list}};
-	    my ($prefered_size) = @l == 1 && $height > 30 ? 10 : 5;
+	    my $prefered_size = @l == 1 && $height > 30 ? 10 : 5;
 	    my $scroll;
 	    if ($size > $prefered_size && !$o->{no_individual_scroll}) {
 		$has_scroll = $scroll = 1;

@@ -1194,7 +1194,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     type => "yesorno",
                     post => sub {
                         my ($a) = @_;
-                        my ($type) = $netc->{internet_cnx_choice};
+                        my $type = $netc->{internet_cnx_choice};
                         $up = 1;
                         if ($a) {
                             # local $::isWizard = 0;

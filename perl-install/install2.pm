@@ -103,7 +103,7 @@ sub selectMouse {
     my ($clicked, $ent_number, $auto) = @_;
 
     require pkgs;
-    my ($first_time) = $ent_number == 1;
+    my $first_time = $ent_number == 1;
 
     installStepsCall($o, $auto, 'selectMouse', !$first_time || $clicked);
 

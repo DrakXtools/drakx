@@ -1498,7 +1498,7 @@ package Gtk2::TreeStore;
 sub append_set {
     my ($model, $parent, @values) = @_;
     # compatibility:
-    @values = @{$values[0]} if $#values == 0 && ref($values[0]) eq 'ARRAY';
+    @values = @{$values[0]} if @values == 1 && ref($values[0]) eq 'ARRAY';
     my $iter = $model->append($parent);
     $model->set($iter, @values);
     return $iter;
@@ -1510,7 +1510,7 @@ package Gtk2::ListStore;
 sub append_set {
     my ($model, @values) = @_;
     # compatibility:
-    @values = @{$values[0]} if $#values == 0 && ref($values[0]) eq 'ARRAY';
+    @values = @{$values[0]} if @values == 1 && ref($values[0]) eq 'ARRAY';
     my $iter = $model->append;
     $model->set($iter, @values);
     return $iter;

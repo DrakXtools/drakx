@@ -801,7 +801,7 @@ sub set {
 	return;
     }
 
-    my ($lang) = $locale->{lang};
+    my $lang = $locale->{lang};
     exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I don't know it!"), return;
 
     my $dir = "$ENV{SHARE_PATH}/locale";

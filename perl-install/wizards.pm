@@ -136,7 +136,7 @@ sub process {
         die qq(inexistant "$next" wizard step) if is_empty_hash_ref($page);
         
         # FIXME or the displaying fails
-        my $data = defined $page->{data} ? (ref($page->{data}) eq 'CODE' ? $page->{data}->() : $page->{data}) : [ ];
+        my $data = defined $page->{data} ? (ref($page->{data}) eq 'CODE' ? $page->{data}->() : $page->{data}) : [];
         my $data2;
         foreach my $d (@$data) {
             $d->{val} = ${$d->{val_ref}} if $d->{val_ref};
