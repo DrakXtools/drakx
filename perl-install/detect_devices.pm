@@ -599,8 +599,12 @@ sub whatPrinterPort() {
 }
 
 sub probeSerialDevices {
-    #- make sure the device are created before probing.
-    foreach (0..3) { devices::make("/dev/ttyS$_") }
+    foreach (0..3) {
+	#- make sure the device are created before probing,
+	devices::make("/dev/ttyS$_");
+	#- and make sure the device is a real terminal (major is 4).
+	int((stat "/dev/ttyS$_")[6]/256) == 4 or $serialprobe{"/dev/ttyS$_"} = undef;
+    }
 
     #- for device already probed, we can safely (assuming device are
     #- not moved during install :-)
