@@ -174,7 +174,7 @@ sub configure_auto_install {
 
     my $resolution_wanted = { X => $old_X->{resolution_wanted}, Depth => $old_X->{default_depth} };
 
-    my ($default_resolution) = choices($raw_X, $raw_X->get_resolution, $card, $monitor);
+    my ($default_resolution) = choices($raw_X, $resolution_wanted, $card, $monitor);
     $default_resolution or die "you selected an unusable depth";
 
     $raw_X->set_resolution($default_resolution);
