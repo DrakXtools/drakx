@@ -34,7 +34,7 @@ sub partition_with_diskdrake {
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_fstab(@$hds);
 	
-	unless (fsedit::get_root(\@fstab)) {
+	unless (fsedit::get_root_(\@fstab)) {
 	    $ok = 0;
 	    $o->ask_okcancel('', _("You must have a root partition.
 For this, create a partition (or click on an existing one).

@@ -168,29 +168,24 @@ sub selectInstallClass1 {
 #------------------------------------------------------------------------------
 sub selectMouse {
     my ($o, $force) = @_;
-
-    my $set = sub {
-	my ($mouse) = @_;
-	symlinkf($mouse->{device}, "/dev/mouse");
-	c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($mouse->{XMOUSETYPE}));
-    };
-
     my %old = %{$o->{mouse}};
     $o->SUPER::selectMouse($force);
-    $old{type} eq $o->{mouse}{type} && $old{name} eq $o->{mouse}{name} && !$force and return;
+    my $mouse = $o->{mouse};
+    $old{type} eq $mouse->{type} && $old{name} eq $mouse->{name} && !$force and return;
 
     local $my_gtk::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
 
     while (1) {
 	log::l("telling X server to use another mouse");
-	eval { modules::load('serial') } if $o->{mouse}{device} =~ /ttyS/;
+	eval { modules::load('serial') } if $mouse->{device} =~ /ttyS/;
 
 	if (!$::testing) {
-	    symlinkf($o->{mouse}{device}, "/dev/mouse");
-	    c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($o->{mouse}{XMOUSETYPE}));
+	    symlinkf($mouse->{device}, "/dev/mouse");
+	    c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($mouse->{XMOUSETYPE}), $mouse->{nbuttons} < 3);
 	}
-	install_gtk::test_mouse($o->{mouse}) and return;
+	install_gtk::test_mouse($mouse) and return;
 	$o->SUPER::selectMouse(1);
+	$mouse = $o->{mouse};
     } 
 }
 

@@ -217,10 +217,11 @@ sub has_mntpoint {
     my ($mntpoint, $hds) = @_;
     mntpoint2part($mntpoint, [ get_fstab(@$hds) ]);
 }
-sub get_root {
+sub get_root_ {
     my ($fstab, $boot) = @_;
     $boot && mntpoint2part("/boot", $fstab) || mntpoint2part("/", $fstab);
 }
+sub get_root { &get_root_ || {} }
 
 #- do this before modifying $part->{mntpoint}
 #- $part->{mntpoint} should not be used here, use $mntpoint instead

@@ -145,7 +145,7 @@ sub doPartitionDisksAfter {
     }
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
-    fsedit::get_root($o->{fstab}) or die "Oops, no root partition";
+    fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
     if (my $s = delete $o->{stage1_hd}) {
 	my ($part) = grep { $_->{device} eq $s->{device} } @{$o->{fstab}};
@@ -170,7 +170,7 @@ sub doPartitionDisks {
 
     if ($o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
-	my $p = fsedit::get_root($o->{fstab}) || first(install_any::find_root_parts($o->{hds}, $o->{prefix})) or die;
+	my $p = fsedit::get_root_($o->{fstab}) || first(install_any::find_root_parts($o->{hds}, $o->{prefix})) or die;
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
     } elsif ($o->{partitioning}{auto_allocate}) {
 	fsedit::auto_allocate($o->{hds}, $o->{partitions});

@@ -98,9 +98,10 @@ Xtest(display)
   RETVAL
 
 void
-setMouseLive(display, type)
+setMouseLive(display, type, emulate3buttons)
   char *display
   int type
+  int emulate3buttons
   CODE:
   {
     XF86MiscMouseSettings mseinfo;
@@ -108,7 +109,8 @@ setMouseLive(display, type)
     if (d) {
       if (XF86MiscGetMouseSettings(d, &mseinfo) == True) {
         mseinfo.type = type;
-        mseinfo.flags |= 128;
+        mseinfo.flags |= MF_REOPEN;
+        mseinfo.emulate3buttons = emulate3buttons;
         XF86MiscSetMouseSettings(d, &mseinfo);
         XFlush(d);
         if (type == MTYPE_IMPS2) initIMPS2();

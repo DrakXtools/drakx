@@ -245,7 +245,7 @@ Continue at your own risk!"));
     if ($o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
 	my $p = 
-	  fsedit::get_root($o->{fstab}) ||
+	  fsedit::get_root_($o->{fstab}) ||
 	  $o->ask_from_listf(_("Root Partition"),
 			     _("What is the root partition (/) of your system?"),
 			     \&partition_table_raw::description, 
@@ -372,7 +372,7 @@ sub choosePackages {
 	    }
 	});
 	if (!$size2install) { #- special case for desktop
-	    $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual);
+	    $o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 	}
 	($o->{packages_}{ind}) =
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
@@ -394,8 +394,8 @@ sub chooseGroups {
 			       _("Package Group Selection"),
 			       [ @$compssUsersSorted, _("Miscellaneous") ],
 			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous" ],
-			       [  _("Individual package selection") ], [ $individual ],			       
-			       ) or goto &chooseGroups;
+			       $individual ? ([  _("Individual package selection") ], [ $individual ]) : (),
+			      ) or goto &chooseGroups;
 
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;

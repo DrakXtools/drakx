@@ -24,7 +24,7 @@ sub new() {
 }
 
 sub enter_console { Newt::Suspend }
-sub leave_console { Newt::Suspend }
+sub leave_console { Newt::Resume }
 sub suspend { Newt::Suspend }
 sub resume { Newt::Resume }
 sub end() { Newt::Finished }
