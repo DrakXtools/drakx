@@ -95,6 +95,7 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                    foreach my $ups_device (detect_devices::getUPS()) {
                                        my $str = $ups_device->{name} || $ups_device->{DESCRIPTION};
                                        $str =~ s/ /_/g;
+                                       $name = $str;
                                        
                                        if (!exists $struct->{$str}) {
                                            $struct->{$str}{port} = $ups_device->{port} || $ups_device->{DEVICE};
