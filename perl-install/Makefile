@@ -146,7 +146,7 @@ endif
 	perl -pi -e 's/\s*use\s+(warnings|diagnostics|vars|strict).*//g' $(DEST)/usr/*/*/*/utf8_heavy.pl
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
-	cd $(DEST)/usr/bin ; mv insmod insmod_
+	cd $(DEST)/usr/bin ; mv insmod insmod_; mv mkswap mkswap_
 	rmdir $(DEST)/bin $(DEST)/sbin
 
 	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' share/aliases
