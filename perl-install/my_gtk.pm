@@ -56,14 +56,11 @@ sub new {
 	    $::WizardTable = new Gtk::Table(2, 2, 0);
 	    $::WizardWindow->add($::WizardTable);
 	    my $draw1 = new Gtk::DrawingArea;
-	    $draw1->set_usize(50,50);
+	    $draw1->set_usize(400,100);
 	    my $draw2 = new Gtk::DrawingArea;
-	    $draw1->set_usize(50,50);
-	    my $draw3 = new Gtk::DrawingArea;
-	    $draw1->set_usize(50,50);
-	    $::WizardTable->attach($draw1, 0, 1, 0, 1, 'fill', 'fill', 0, 0);
+	    $draw2->set_usize(100,200);
+	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
-	    $::WizardTable->attach($draw3, 1, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    $::WizardWindow->show_all;
 	    flush();
 	}
