@@ -269,7 +269,7 @@ sub read_passwd {
     my @tmp1;
     my @tmp2;
     @user_and_path_list = map { 
-	(split(':', $_))[0] . ":" . (split(':', $_))[5] } grep {( split(':', $_))[2] > 500} split ('\n', cat_('/etc/passwd'));  
+	(split(':', $_))[0] . ":" . (split(':', $_))[5] } grep {( split(':', $_))[2] >= 500} split ('\n', cat_('/etc/passwd'));  
     $DEBUG and print "user_and_path_list: ".$_."\n" foreach (@user_and_path_list);
     @user_list = ();
     @all_user_list = ();
