@@ -69,7 +69,6 @@ function strip_module(object,
 		# d static variable, initialised
 		# r static array, initialised
 		# t static label/procedures
-		print $0 ":" $3 ":" $5 > "/dev/stderr";
 		if ($1 ~ /[bdrt]/)
 			to_strip[$2] = "";
 		else if ($2 ~ /R __ksymtab_/)
@@ -79,7 +78,6 @@ function strip_module(object,
 		else if ($0 ~ /D __parm_/)
 			keep_symbol[substr($2, 8)] = "";
 		else if ($3 ~ /__ksymtab/) {
-			print "keep " $5 > "/dev/stderr";
 			keep_symbol[$5] = "";
 		}
 		else if ($1 != "?")
