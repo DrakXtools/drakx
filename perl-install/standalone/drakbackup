@@ -431,7 +431,7 @@ sub all_user_list() {
     while (defined(my $line = <PASSWD>)) {
 		chomp($line);
 		($user, $uid) = (split(/:/, $line))[0, 2];
-		if ($uid >= 500 || $uid == 0) {
+		if ($uid >= 500 && $uid < 65000 || $uid == 0) {
 	    	push @user_list_all, $user;
 		}
     }
@@ -601,7 +601,15 @@ sub get_cd_info() {
 sub save_conf_file() {
     write_sitecopyrc() if $net_proto eq 'webdav';
     write_password_file() if $net_proto eq 'rsync' && $passwd_user;
-    
+	if (!$backup_daemon) {
+		$when_space = "";
+		$daemon_media = "";
+	}
+	if (@user_list == ()) {
+		$backup_user = 0;
+	} else {
+		$backup_user = 1;
+	}
     my @cfg_list = ("SYS_FILES=@sys_files\n",
 		    "HOME_FILES=@user_list\n", 
 		    "OTHER_FILES=@list_other\n",
@@ -624,7 +632,7 @@ sub save_conf_file() {
     $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n"; 
     $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n";
 	$sys_diff_mode and $backup_sys_versions and push @cfg_list, "SYS_DIFFERENTIAL_BACKUPS\n"; 
-    $user_diff_mode and $backup_user_versions and push @cfg_list, "USER_DIFFERENTIAL_BACKUPS\n"; 
+    $backup_user and $user_diff_mode and $backup_user_versions and push @cfg_list, "USER_DIFFERENTIAL_BACKUPS\n"; 
     $other_diff_mode  and $backup_other_versions and push @cfg_list, "OTHER_DIFFERENTIAL_BACKUPS\n"; 
     $media_erase and push @cfg_list, "MEDIA_ERASE\n"; 
     $media_eject and push @cfg_list, "MEDIA_EJECT\n"; 
@@ -655,6 +663,7 @@ sub save_conf_file() {
     $dvdram and push @cfg_list, "DVDRAM\n"; 
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n";
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
+	$backup_user or push @cfg_list, "NO_USER_FILES\n";
     if ($comp_mode) {
 		push @cfg_list, "OPTION_COMP=TAR.BZ2\n";
     } else { 
@@ -758,7 +767,7 @@ sub read_conf_file() {
 	    	next if /^#/;
 	    	chomp;
 			if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;    @sys_files = split(' ', $_) }
-			if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @user_list = split(' ', $_) }
+			if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @user_list = split(' ', $_); $backup_user = 1 }
 			if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @list_other = split(' ', $_) }
 			if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_ }
 			if (/^NO_SYS_FILES/)   { $backup_sys = 0 }
@@ -2537,7 +2546,7 @@ sub advanced_when() {
 		  'weekly' => N("weekly"),
 		  'monthly' => N("monthly"),
 		  'custom' => N("custom"));
-    $combo_when_space->set_popdown_strings(N("hourly"), N("daily"), N("weekly"), N("monthly"), N("custom"));    
+    $combo_when_space->set_popdown_strings("", N("hourly"), N("daily"), N("weekly"), N("monthly"), N("custom"));    
 	set_help_tip($combo_when_space, 'when_space');
 
 	#- custom setup - let user specify month, day of month, day of week, hour, minute
@@ -2578,7 +2587,7 @@ sub advanced_when() {
 	
 	#- drop down list of possible media - default to config value
     my $entry_media_type = new Gtk2::OptionMenu();
-    $entry_media_type->set_popdown_strings(@media_types, @net_methods);
+    $entry_media_type->set_popdown_strings("", @media_types, @net_methods);
 	$entry_media_type->entry->set_text($daemon_media);
 	
     gtkpack($advanced_box,
@@ -2877,7 +2886,12 @@ sub wizard()   {
 	my $box2;    
     my $user_string = N("Backup Users");
 	$user_string .= N(" (Default is all users)") if !$nonroot_user;
-	
+	if ($backup_user) {
+		@user_list = @user_list_all;
+	} else {
+		@user_list = ();
+	}
+
 	gtkpack($advanced_box,
 		$box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
 			1, new Gtk2::VBox(0, 5),	
@@ -2988,8 +3002,8 @@ sub system_state() {
 		}
 		
 		#- tape and CDRW share some features
-		my $erase_media = 'NO';
-		$erase_media = 'YES' if $media_erase && ($where_cd || $where_tape); 
+		my $erase_media = N("NO");
+		$erase_media = N("YES") if $media_erase && ($where_cd || $where_tape); 
 		$where_cd and $system_state .= N("\n- Burn to CD");
 		$where_cd and $cdrw and $system_state .= N("RW");
 		$where_cd and $system_state .= N(" on device: %s", $cd_device);
@@ -3012,7 +3026,7 @@ sub system_state() {
 		$system_state .= N("\tUse .backupignore files\n") if $backupignore;
 		$system_state .= N("\tSend mail to %s\n", $user_mail) if $user_mail;
 		
-		$daemon_media and $system_state .= N("\n- Daemon (%s) include:\n", $when_space);
+		$daemon_media and $system_state .= N("\n- Daemon, %s via:\n", $when_space);
 		$daemon_media eq 'hd' and $system_state .= N("\t-Hard drive.\n");    
 		$daemon_media eq 'cd' and $system_state .= N("\t-CD-R.\n");
 		$daemon_media eq 'tape' and $system_state .= N("\t-Tape \n");    
@@ -4957,6 +4971,7 @@ sub build_backup_box_see_conf {
 	my ($caller) = @_;
     my $box2;
     my $text = new Gtk2::TextView;
+	read_conf_file();
     system_state();
     gtktext_insert($text, [ [ $system_state ] ]);
     button_box_restore_main();
