@@ -238,7 +238,7 @@ sub set_type_subpart {
     } elsif (exists $subpart->{pt_type}) {
 	set_pt_type($part, $subpart->{pt_type});
     } elsif (exists $subpart->{fs_type}) {
-	set_pt_type($part, $subpart->{fs_type});
+	set_fs_type($part, $subpart->{fs_type});
     } else {
 	log::l("ERROR: (set_type_subpart) subpart has no type");
     }
