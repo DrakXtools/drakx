@@ -41,7 +41,7 @@ $::isWizard = "@ARGV" =~ /--wizard/;
 $::expert = "@ARGV" =~ /--expert/;
 local $_ = join '', @ARGV;
 
-#/-h/ and die "usage: draknet[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+#/-h/ and die "usage: drakconnect[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
 my $netcnx = {};
 my $netc = {};
@@ -52,7 +52,7 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 
 my $in = 'interactive'->vnew('su', 'network');
 !$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
-$::Wizard_pix_up = "wiz_draknet.png";
+$::Wizard_pix_up = "wiz_drakconnect.png";
 $::Wizard_title = "Network & Internet Configuration";
 
 MDK::Common::Globals::init(
@@ -120,7 +120,7 @@ $button_del->signal_connect( clicked => sub {
 				 $dialog->set_modal(1);
 				 Gtk->main();
 				 $dialog->destroy;
-				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
+				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
 				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 				 apply();
 			     });
@@ -152,7 +152,7 @@ $button_new->signal_connect( clicked => sub {
 				 $dialog->set_modal(1);
 				 Gtk->main();
 				 $dialog->destroy;
-				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $netcnx->{PROFILE}) ? $netcnx->{PROFILE} : "default");
+				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE}) ? $netcnx->{PROFILE} : "default");
 				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 });
 $hbox1->pack_start($button_new,0,0,5);
@@ -257,9 +257,9 @@ $bbox0->add(new Gtk::Label(_("Click here to launch the wizard ->")));
 my $button_wizard = new Gtk::Button _("Wizard...");
 $button_wizard->signal_connect( clicked => sub {
 				     $::isWizard = 1;
-				     system("draknet --wizard");
+				     system("drakconnect --wizard");
 # netconnect::intro('', $netcnx, $in);
-				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
+				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
 				     network::netconnect::load_conf($netcnx, $netc, $intf);
 				     update();
 				 });
