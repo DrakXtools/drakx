@@ -189,7 +189,11 @@ sub add_append {
     my ($b, $key, $val) = @_;
 
     foreach (\$b->{perImageAppend}, map { \$_->{append} } @{$b->{entries}}) {
-	$$_ =~ s/\b$key=\S*\s*//;
+	if ($key eq 'mem') {
+	    $$_ =~ s/\bmem=(\d+[KkMm]?)(\s.*)?$/$2/;
+	} else {
+	    $$_ =~ s/\b$key=\S*\s*//;
+	}
 	$$_ =~ s/\s*$/ $key=$val/ if $val;
 	log::l("add_append: $$_");
     }
@@ -335,7 +339,7 @@ wait %d seconds for default boot.
 	}
     }
 
-    add2hash_($lilo, { memsize => $1 }) if cat_("/proc/cmdline") =~ /mem=(\S+)/;
+    add2hash_($lilo, { memsize => $1 }) if cat_("/proc/cmdline") =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/;
     if (my ($s, $port, $speed) = cat_("/proc/cmdline") =~ /console=(ttyS(\d),(\d+)\S*)/) {
 	log::l("serial console $s $port $speed");
 	add_append($lilo, 'console' => $s);
