@@ -796,18 +796,4 @@ sub runlevel {
     }
 }
 
-sub set_security_level {
-    my ($prefix, $security) = @_;
-
-    my %bastille_levels = (
-	2 => "Lax",
-	3 => "Moderate",
-	4 => "Paranoia",
-    );
-    eval {
-	commands::cp("-f", "$prefix/usr/share/Bastille/Workstation" . $bastille_levels{$security} . ".config", "$prefix/etc/Bastille/config");
-	run_program::rooted($prefix, "/usr/sbin/BastilleBackEnd");
-    }
-}
-
 1;
