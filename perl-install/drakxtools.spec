@@ -6,7 +6,7 @@ Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.040-1mdk, perl-Glib >= 1.040-1mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.18-1mdk, gurpmi, mandrake-doc-common >= 9.2-5mdk
+Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.040-1mdk, perl-Glib >= 1.040-1mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.18-1mdk, mandrake-doc-common >= 9.2-5mdk
 Requires: foomatic-db-engine
 Conflicts: drakconf < 10.1-0.6mdk
 Conflicts: rpmdrake < 2.1-29mdk
@@ -22,7 +22,7 @@ Obsoletes: draksec
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 2:5.8.6-1mdk, urpmi >= 4.6.11, modutils >= 2.3.11, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
+Requires: perl-base >= 2:5.8.6-1mdk, urpmi >= 4.6.13, modutils >= 2.3.11, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
 Requires: %{name}-backend = %version-%release
 Requires: netprofile
 Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy

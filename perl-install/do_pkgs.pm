@@ -173,7 +173,7 @@ sub install {
     $do->in->suspend;
     log::explanations("installed packages @l");
     #- --expect-install added in urpmi 4.6.11
-    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--no-verify-rpm', '--expect-install', @l) == 0;
+    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--no-verify-rpm', '--gui', '--expect-install', @l) == 0;
     $do->in->resume;
     $ret;
 }
