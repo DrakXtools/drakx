@@ -147,7 +147,7 @@ sub getPackages {
     $update_medium->{update} = 1;
 
     #- search for packages to update.
-    $packages->{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
+    $packages->{rpmdb} ||= pkgs::rpmDbOpen($prefix);
     pkgs::selectPackagesToUpgrade($packages, $prefix, $update_medium);
 
     return $update_medium;
