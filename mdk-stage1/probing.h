@@ -19,17 +19,26 @@
  *
  */
 
+#ifndef _PROBING_H_
+#define _PROBING_H_
 
-#ifndef _LOG_H_
-#define _LOG_H_
+enum media_type { DISK, FLOPPY, CDROM, TAPE, UNKNOWN_MEDIA };
 
-#include <stdarg.h>
+enum bus_type { IDE, SCSI };
 
-void log_message(const char * s, ...);
-void vlog_message(const char * s, va_list args);
-void vlog_message_nobs(const char * s, va_list args);
-void log_perror(char *msg);
-void open_log(int useLocal);
-void close_log(void);
+struct media_info {
+	char * name;
+	char * model;
+	enum media_type type;
+	enum bus_type bus;
+};
+
+enum media_query_type { QUERY_NAME, QUERY_MODEL };
+
+enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES };
+
+
+char ** get_medias(enum media_type media, enum media_query_type qtype);
+
 
 #endif

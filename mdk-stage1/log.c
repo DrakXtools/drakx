@@ -19,26 +19,29 @@
  *
  */
 
-
+#include <stdlib.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <string.h>
+#include <time.h>
+#include <errno.h>
 
 #include "log.h"
 
 static FILE * logfile = NULL;
 
-
-void do_log_message(const char * s, va_list args)
+void vlog_message_nobs(const char * s, va_list args)
 {
-	if (!logfile) return;
-	
 	fprintf(logfile, "* ");
 	vfprintf(logfile, s, args);
+}
+
+void vlog_message(const char * s, va_list args)
+{
+	vlog_message_nobs(s, args);
 	fprintf(logfile, "\n");
-	
 	fflush(logfile);
 }
 
@@ -46,25 +49,34 @@ void do_log_message(const char * s, va_list args)
 void log_message(const char * s, ...)
 {
 	va_list args;
-	
+
+	if (!logfile) {
+		fprintf(stderr, "Log is not open!\n");
+		return;
+	}
+
 	va_start(args, s);
-	do_log_message(s, args);
+	vlog_message(s, args);
 	va_end(args);
 	
 	return;
 }
 
+void log_perror(char *msg)
+{
+	log_message("%s %s", strerror(errno), msg);
+}
+
 
 void open_log(int testing)
 {
-    if (!testing)
-    {
-	    logfile = fopen("/dev/tty3", "w");
-	    if (!logfile)
-		    logfile = fopen("/tmp/install.log", "a");
-    }
-    else
-	    logfile = fopen("debug.log", "w");
+	if (!testing) {
+		logfile = fopen("/dev/tty3", "w");
+		if (!logfile)
+			logfile = fopen("/tmp/install.log", "a");
+	}
+	else
+		logfile = fopen("debug.log", "w");
 }
 
 void close_log(void)

@@ -18,7 +18,7 @@
  #*****************************************************************************
 
 
-all: mar
+all: libmar.a mar
 
 clean:
 	rm -f *.o mar
@@ -26,11 +26,18 @@ clean:
 FLAGS = -Wall -Werror -Os -fomit-frame-pointer -c
 
 
-mar: mar-frontend.o mar-extract-only.o
-	gcc -o mar mar-frontend.o mar-extract-only.o -lz
+mar: mar-frontend.o mar-extract-only-standalone.o
+	gcc -o mar mar-frontend.o mar-extract-only-standalone.o -lz
+
+libmar.a: mar-extract-only.o
+	ar -cru $@ $^
+	ranlib $@
 
 mar-frontend.o: mar-frontend.c mar.h mar-extract-only.h
 	gcc $(FLAGS) mar-frontend.c
 
 mar-extract-only.o: mar-extract-only.c mar-extract-only.h mar.h
 	gcc $(FLAGS) mar-extract-only.c
+
+mar-extract-only-standalone.o: mar-extract-only.c mar-extract-only.h mar.h
+	gcc $(FLAGS) -o $@ -D_STANDALONE_ mar-extract-only.c

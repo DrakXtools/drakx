@@ -188,7 +188,7 @@ char * strchr(char * str, int ch)
 	return NULL;
 }
 
-void print_int(int i)
+void print_int(int fd, int i)
 {
 	char buf[10];
 	char * chptr = buf + 9;
@@ -207,12 +207,12 @@ void print_int(int i)
 		i = i / 10;
 	}
 	
-	write(1, chptr + 1, j);
+	write(fd, chptr + 1, j);
 }
 
-void print_str(char * string)
+void print_str(int fd, char * string)
 {
-	write(1, string, strlen(string));
+	write(fd, string, strlen(string));
 }
 
 /* Minimum printf which handles only characters, %d's and %s's */
@@ -235,18 +235,18 @@ void printf(char * fmt, ...)
 		if (*chptr == '%')
 		{
 			*chptr++ = '\0';
-			print_str(start);
+			print_str(1, start);
 			
 			switch (*chptr++)
 			{
 			case 's': 
 				strarg = va_arg(args, char *);
-				print_str(strarg);
+				print_str(1, strarg);
 				break;
 				
 			case 'd':
 				numarg = va_arg(args, int);
-				print_int(numarg);
+				print_int(1, numarg);
 				break;
 			}
 			
@@ -254,7 +254,7 @@ void printf(char * fmt, ...)
 		}
 		else
 		{
-			print_str(start);
+			print_str(1, start);
 			start = NULL;
 		}
 	}

@@ -19,17 +19,12 @@
  *
  */
 
+#ifndef _NETWORK_H_
+#define _NETWORK_H_
 
-#ifndef _LOG_H_
-#define _LOG_H_
+enum return_type nfs_prepare(void);
+enum return_type ftp_prepare(void);
+enum return_type http_prepare(void);
 
-#include <stdarg.h>
-
-void log_message(const char * s, ...);
-void vlog_message(const char * s, va_list args);
-void vlog_message_nobs(const char * s, va_list args);
-void log_perror(char *msg);
-void open_log(int useLocal);
-void close_log(void);
 
 #endif

@@ -12,24 +12,22 @@
  *
  */
 
-/*
- * Portions from Erik Troan (ewt@redhat.com)
- *
- * Copyright 1996 Red Hat Software 
- *
- */
+#ifndef _MODULES_H_
+#define _MODULES_H_
+
+#include "stage1.h"
+
+int load_modules_dependencies(void);
+int my_insmod(char * mod_name);
+
+enum return_type ask_scsi_insmod(void);
 
 
-#ifndef _LOG_H_
-#define _LOG_H_
+struct module_deps_elem {
+    char * name;
+    char ** deps;
+};
 
-#include <stdarg.h>
 
-void log_message(const char * s, ...);
-void vlog_message(const char * s, va_list args);
-void vlog_message_nobs(const char * s, va_list args);
-void log_perror(char *msg);
-void open_log(int useLocal);
-void close_log(void);
 
 #endif

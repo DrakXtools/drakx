@@ -19,17 +19,28 @@
  *
  */
 
+#include <stdlib.h>
+#include <unistd.h>
+#include "stage1.h"
+#include "frontend.h"
+#include "modules.h"
+#include "probing.h"
+#include "log.h"
 
-#ifndef _LOG_H_
-#define _LOG_H_
+#include "network.h"
 
-#include <stdarg.h>
 
-void log_message(const char * s, ...);
-void vlog_message(const char * s, va_list args);
-void vlog_message_nobs(const char * s, va_list args);
-void log_perror(char *msg);
-void open_log(int useLocal);
-void close_log(void);
+enum return_type nfs_prepare(void)
+{
+	return RETURN_ERROR;
+}
 
-#endif
+enum return_type ftp_prepare(void)
+{
+	return RETURN_ERROR;
+}
+
+enum return_type http_prepare(void)
+{
+	return RETURN_ERROR;
+}

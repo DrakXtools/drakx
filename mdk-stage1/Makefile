@@ -29,7 +29,7 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
  #- We can leave "-g" forever since stripping will remove everything
 CFLAGS = -Os -g -Wall -Werror -fomit-frame-pointer
 INCLUDES = -I.
-DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\" -DUSE_LOGDEV -DSPAWN_SHELL
+DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\"
 
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CFLAGS)
 
@@ -41,12 +41,12 @@ INITOBJS = $(subst .c,.o,$(INITSRC))
 
 
  #- stage1 itself (minus stage1.c)
-STAGE1SRC = log.c #cdrom.c devices.c
+STAGE1SRC = log.c tools.c modules.c probing.c newt-frontend.c cdrom.c disk.c network.c
 
-STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC))
+STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC)) insmod-busybox/libinsmod.a mar/libmar.a /usr/lib/libnewt.a /usr/lib/libslang.a /usr/lib/libz.a
 
 
-ALLSRC = $(INITSRC) $(STAGE1SRC)
+ALLSRC = $(INITSRC) $(STAGE1SRC) stage1.c
 
 
 ifeq (i386, $(ARCH))
@@ -81,13 +81,12 @@ BINS = init stage1-network
 #BINS += stage1-all
 #endif
 
-DIRS = mar
+DIRS = mar insmod-busybox
 
 
 all: dirs $(BINS)
 
 dirs:
-	@echo -e "*** BUILDING in all directories\n"
 	@for n in . $(DIRS); do \
 		[ "$$n" = "." ] || make -C $$n ;\
 	done
@@ -95,20 +94,24 @@ dirs:
 
 init: $(INITOBJS)
 	$(CC) $(LDFLAGS_INIT) -o $@ $(INITOBJS)
+	strip -s $@
 
-stage1-network: $(STAGE1OBJS) stage1-network.o $(NETOBJS)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS) stage1-network.o $(NETOBJS)
+stage1-network: stage1-network.o $(STAGE1OBJS) $(NETOBJS)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	strip -s $@
 
+stage1-network-diet: $(STAGE1OBJS) stage1-network.o $(NETOBJS)
+	gcc -nostdlib -o $@ ../../../tmp/dietlibc/start.o $^ ../../../tmp/dietlibc/dietlibc.a
+	strip -s $@
 
 .c.o:
 	$(COMPILE) -c $<
 
 stage1-network.o: stage1.c
-	$(COMPILE) -DNETWORK_INSTALL -o $@ -c $<
+	$(COMPILE) -c $< -o $@
 
 
 clean: 
-	@echo -e "*** CLEANING in all directories\n"
 	@for n in $(DIRS); do \
 		(cd $$n; make clean) \
 	done

@@ -34,12 +34,12 @@
 #define ENV_DEBUG		4
 
 char * env[] = {
-    "PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:"
-		   "/mnt/bin:/mnt/usr/bin",
-    "LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib",
-    "HOME=/",
-    "TERMINFO=/etc/linux-terminfo",
-    NULL
+	"PATH=/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/usr/sbin:/mnt/bin:/mnt/usr/bin",
+	"LD_LIBRARY_PATH=/lib:/usr/lib:/mnt/lib:/mnt/usr/lib:/usr/X11R6/lib:/mnt/usr/X11R6/lib",
+	"HOME=/",
+	"TERM=linux",
+	"TERMINFO=/etc/terminfo",
+	NULL
 };
 
 
@@ -73,7 +73,11 @@ void print_warning(char *msg)
 }
 
 
-void doklog(char * fn)
+/* fork to:
+ *   (1) watch /proc/kmsg and copy the stuff to /dev/tty4
+ *   (2) listens to /dev/log and copy also this stuff (log from programs)
+ */
+void doklog()
 {
 	fd_set readset, unixs;
 	int in, out, i;
@@ -86,28 +90,24 @@ void doklog(char * fn)
 
 	/* open kernel message logger */
 	in = open("/proc/kmsg", O_RDONLY,0);
-	if (in < 0)
-	{
+	if (in < 0) {
 		print_error("could not open /proc/kmsg");
 		return;
 	}
-
-	out = open(fn, O_WRONLY, 0);
+	
+	out = open("/dev/tty4", O_WRONLY, 0);
 	if (out < 0) 
 		print_warning("couldn't open tty for syslog -- still using /tmp/syslog\n");
-
+	
 	log = open("/tmp/syslog", O_WRONLY | O_CREAT, 0644);
 	
-	if (log < 0)
-	{
+	if (log < 0) {
 		print_error("error opening /tmp/syslog");
 		sleep(5);
 		return;
 	}
 
-	/* if we get this far, we should be in good shape */
-	if (fork())
-	{
+	if (fork()) {
 		/* parent */
 		close(in);
 		close(out);
@@ -116,7 +116,7 @@ void doklog(char * fn)
 		return;
 	}
 	
-	printf("logging process forked.\n");
+	printf("kernel logging process forked.\n");
 
 	close(0); 
 	close(1);
@@ -124,39 +124,38 @@ void doklog(char * fn)
 
 	dup2(1, log);
 
-#if defined(USE_LOGDEV)
 	/* now open the syslog socket */
 	sockaddr.sun_family = AF_UNIX;
-	strcpy(sockaddr.sun_path, "/dev/log");
+	strncpy(sockaddr.sun_path, "/dev/log", UNIX_PATH_MAX);
 	sock = socket(AF_UNIX, SOCK_STREAM, 0);
-	if (sock < 0)
-	{
+	if (sock < 0) {
 		printf("error creating socket: %d\n", errno);
 		sleep(5);
 	}
 
-	printf("got socket\n");
-	if (bind(sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr.sun_family) + 
-		 strlen(sockaddr.sun_path)))
-	{
-		printf("bind error: %d\n", errno);
+	print_str(log, "] got socket\n");
+	if (bind(sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr.sun_family) + strlen(sockaddr.sun_path)))	{
+		print_str(log, "] bind error: ");
+		print_int(log, errno);
+		print_str(log, "\n");
 		sleep(5);
 	}
 
-	printf("bound socket\n");
+	print_str(log, "] bound socket\n");
 	chmod("/dev/log", 0666);
-	if (listen(sock, 5))
-	{
-		printf("listen error: %d\n", errno);
+	if (listen(sock, 5)) {
+		print_str(log, "] listen error: ");
+		print_int(log, errno);
+		print_str(log, "\n");
 		sleep(5);
 	}
-#endif
 
+	/* disable on-console syslog output */
 	syslog(8, NULL, 1);
 
+	print_str(log, "] kernel/system logger ok\n");
 	FD_ZERO(&unixs);
-	while (1)
-	{
+	while (1) {
 		memcpy(&readset, &unixs, sizeof(unixs));
 
 		if (sock >= 0) FD_SET(sock, &readset);
@@ -164,59 +163,53 @@ void doklog(char * fn)
 		
 		i = select(20, &readset, NULL, NULL, NULL);
 		if (i <= 0) continue;
-		
-		if (FD_ISSET(in, &readset))
-		{
+
+		/* has /proc/kmsg things to tell us? */
+		if (FD_ISSET(in, &readset)) {
 			i = read(in, buf, sizeof(buf));
-			if (i > 0)
-			{
+			if (i > 0) {
 				if (out >= 0) write(out, buf, i);
 				write(log, buf, i);
 			}
 		} 
-		
-		for (readfd = 0; readfd < 20; ++readfd)
-		{
-			if (FD_ISSET(readfd, &readset) && FD_ISSET(readfd, &unixs))
-			{
-				i = read(readfd, buf, sizeof(buf));
-				if (i > 0)
-				{
-					if (out >= 0)
-					{
-						write(out, buf, i);
-						write(out, "\n", 1);
-					}
 
+		/* examine some fd's in the hope to find some syslog outputs from programs */
+		for (readfd = 0; readfd < 20; ++readfd) {
+			if (FD_ISSET(readfd, &readset) && FD_ISSET(readfd, &unixs)) {
+				print_str(log, "] one fd moves: ");
+				print_int(log, readfd);
+				print_str(log, "\n");
+				i = read(readfd, buf, sizeof(buf));
+				if (i > 0) {
+					if (out >= 0) {
+						write(out, buf, i);
+						write(out, "\n", 1); 
+					}
+					
 					write(log, buf, i);
 					write(log, "\n", 1);
+				} else if (i == 0) {
+					/* socket closed */
+					close(readfd);
+					FD_CLR(readfd, &unixs);
 				}
-				else
-					if (i == 0)
-					{
-						/* socket closed */
-						close(readfd);
-						FD_CLR(readfd, &unixs);
-					}
 			}
 		}
 
-		if (sock >= 0 && FD_ISSET(sock, &readset))
-		{
+		/* the socket has moved, new stuff to do */
+		if (sock >= 0 && FD_ISSET(sock, &readset)) {
+			print_str(log, "] syslog socket moved\n");
 			s = sizeof(sockaddr);
 			readfd = accept(sock, (struct sockaddr *) &sockaddr, &s);
-			if (readfd < 0)
-			{
-				char * msg_error = "error in accept\n";
+			if (readfd < 0) {
+				char * msg_error = "] error in accept\n";
 				if (out >= 0) write(out, msg_error, strlen(msg_error));
 				write(log, msg_error, strlen(msg_error));
 				close(sock);
 				sock = -1;
 			}
 			else
-			{
 				FD_SET(readfd, &unixs);
-			}
 		}
 	}
 }
@@ -225,14 +218,12 @@ void doklog(char * fn)
 void del_loop(char *device) 
 {
 	int fd;
-	if ((fd = open(device, O_RDONLY, 0)) < 0)
-	{
+	if ((fd = open(device, O_RDONLY, 0)) < 0) {
 		printf("del_loop open failed\n");
 		return;
 	}
 
-	if (ioctl(fd, LOOP_CLR_FD, 0) < 0)
-	{
+	if (ioctl(fd, LOOP_CLR_FD, 0) < 0) {
 		printf("del_loop ioctl failed");
 		return;
 	}
@@ -248,6 +239,7 @@ struct filesystem
 	int mounted;
 };
 
+/* attempt to unmount all filesystems in /proc/mounts */
 void unmount_filesystems(void)
 {
 	int fd, size;
@@ -260,8 +252,7 @@ void unmount_filesystems(void)
 	printf("unmounting filesystems...\n"); 
 	
 	fd = open("/proc/mounts", O_RDONLY, 0);
-	if (fd < 1)
-	{
+	if (fd < 1) {
 		print_error("failed to open /proc/mounts");
 		sleep(2);
 		return;
@@ -273,8 +264,7 @@ void unmount_filesystems(void)
 	close(fd);
 
 	p = buf;
-	while (*p)
-	{
+	while (*p) {
 		fs[numfs].mounted = 1;
 		fs[numfs].dev = p;
 		while (*p != ' ') p++;
@@ -293,14 +283,11 @@ void unmount_filesystems(void)
 	/* Pixel's ultra-optimized sorting algorithm:
 	   multiple passes trying to umount everything until nothing moves
 	   anymore (a.k.a holy shotgun method) */
-	do
-	{
+	do {
 		nb = 0;
-		for (i = 0; i < numfs; i++)
-		{
+		for (i = 0; i < numfs; i++) {
 			/*printf("trying with %s\n", fs[i].name);*/
-			if (fs[i].mounted && umount(fs[i].name) == 0)
-			{ 
+			if (fs[i].mounted && umount(fs[i].name) == 0) { 
 				if (strncmp(fs[i].dev + sizeof("/dev/") - 1, "loop",
 					    sizeof("loop") - 1) == 0)
 					del_loop(fs[i].dev);
@@ -311,16 +298,14 @@ void unmount_filesystems(void)
 			}
 		}
 	} while (nb);
-
+	
 	for (i = nb = 0; i < numfs; i++)
-		if (fs[i].mounted)
-		{
+		if (fs[i].mounted) {
 			printf("\t%s umount failed\n", fs[i].name);
 			if (strcmp(fs[i].fs, "ext2") == 0) nb++; /* don't count not-ext2 umount failed */
 		}
 	
-	if (nb)
-	{
+	if (nb) {
 		printf("failed to umount some filesystems\n");
 		while (1);
 	}
@@ -338,8 +323,7 @@ void disable_swap(void)
 	printf("disabling swap...\n");
 
 	fd = open("/proc/swaps", O_RDONLY, 0);
-	if (fd < 0)
-	{
+	if (fd < 0) {
 		print_warning("failed to open /proc/swaps");
 		return;
 	}
@@ -347,16 +331,14 @@ void disable_swap(void)
 	/* read all data at once */
 	i = read(fd, buf, sizeof(buf) - 1);
 	close(fd);
-	if (i < 0)
-	{
+	if (i < 0) {
 		print_warning("failed to read /proc/swaps");
 		return;
 	}
 	buf[i] = '\0';
 
 	start = buf;
-	while (*start)
-	{
+	while (*start) {
 		/* move to next line */
 		while (*start != '\n' && *start) start++;
 		if (!*start) return;
@@ -394,8 +376,7 @@ int main(int argc, char **argv)
 	/* getpid() != 1 should work, by linuxrc tends to get a larger pid */
 	testing = (getpid() > 50);
 
-	if (!testing)
-	{
+	if (!testing) {
 		/* turn off screen blanking */
 		printf("\033[9;0]");
 		printf("\033[8]");
@@ -408,8 +389,7 @@ int main(int argc, char **argv)
 	printf("VERSION: %s\n", VERSION);
 
 	
-	if (!testing)
-	{
+	if (!testing) {
 		printf("mounting /proc filesystem... "); 
 		if (mount("/proc", "/proc", "proc", 0, NULL))
 			fatal_error("Unable to mount proc filesystem");
@@ -422,8 +402,7 @@ int main(int argc, char **argv)
 	signal(SIGTSTP, SIG_IGN);
 
 
-	if (!testing)
-	{
+	if (!testing) {
 		fd = open("/dev/tty1", O_RDWR, 0);
 		if (fd < 0)
 			/* try with devfs */
@@ -444,8 +423,7 @@ int main(int argc, char **argv)
 	if (ioctl(0, TIOCSCTTY, NULL))
 		print_error("could not set new controlling tty");
 
-	if (!testing)
-	{
+	if (!testing) {
 		char * my_hostname = "localhost.localdomain";
 		sethostname(my_hostname, strlen(my_hostname));
 		/* the default domainname (as of 2.0.35) is "(none)", which confuses 
@@ -454,19 +432,19 @@ int main(int argc, char **argv)
 	}
 
 	if (!testing) 
-		doklog("/dev/tty4");
+		doklog();
 
 	/* Go into normal init mode - keep going, and then do a orderly shutdown
 	   when:
 	   
-	   1) /bin/install exits
+	   1) install exits
 	   2) we receive a SIGHUP 
 	*/
-	
+
+	printf("Remember what Warly said: drink white part of an egg each morning builds a man!\n");
 	printf("running stage1...\n"); 
 	
-	if (!(installpid = fork()))
-	{
+	if (!(installpid = fork())) {
 		/* child */
 		char * child_argv[2];
 		child_argv[0] = "/sbin/stage1";
@@ -478,20 +456,16 @@ int main(int argc, char **argv)
 		exit(0);
 	}
 
-	while (!end_stage2)
-	{
+	while (!end_stage2) {
 		childpid = wait4(-1, &wait_status, 0, NULL);
 		if (childpid == installpid)
 			end_stage2 = 1;
 	}
 
-	if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status))
-	{
+	if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status)) {
 		printf("install exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))
-		{
 			printf("-- received signal %d", WTERMSIG(wait_status));
-		}
 		printf("\n");
 		abnormal_termination = 1;
 	}
@@ -516,15 +490,13 @@ int main(int argc, char **argv)
 	disable_swap();
 	unmount_filesystems();
 
-	if (!abnormal_termination)
-	{
+	if (!abnormal_termination) {
 		printf("rebooting system\n");
 		sleep(2);
 		
+		                     printf("**temp** should be rebooting\n"); while(1);
 		reboot(0xfee1dead, 672274793, 0x1234567);
-	}
-	else
-	{
+	} else {
 		printf("you may safely reboot your system\n");
 		while (1);
 	}

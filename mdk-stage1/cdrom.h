@@ -19,17 +19,11 @@
  *
  */
 
+#ifndef _CDROM_H_
+#define _CDROM_H_
 
-#ifndef _LOG_H_
-#define _LOG_H_
+#include "stage1.h"
 
-#include <stdarg.h>
-
-void log_message(const char * s, ...);
-void vlog_message(const char * s, va_list args);
-void vlog_message_nobs(const char * s, va_list args);
-void log_perror(char *msg);
-void open_log(int useLocal);
-void close_log(void);
+enum return_type cdrom_prepare(void);
 
 #endif

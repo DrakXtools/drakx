@@ -136,7 +136,7 @@ int strncmp(const char * a, const char * b, int len);
 char * strchr(char * str, int ch);
 char * strncpy(char * dst, const char * src, int len);
 
-void print_str(char * string);
-void print_int(int i);
+void print_str(int fd, char * string);
+void print_int(int fd, int i);
 /* Minimum printf which handles only characters, %d's and %s's */
 void printf(char * fmt, ...);
