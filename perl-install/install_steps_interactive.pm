@@ -84,7 +84,7 @@ sub selectKeyboard($) {
 					     $o->{keyboard});
 	delete $o->{keyboard_unsafe};
     }
-    if ($::expert) {
+    if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
 	my %langs; $langs{$_} = 1 foreach @{$o->{langs}};
 	$o->ask_many_from_list_ref('', 
 		_("You can choose other languages that will be available after install"),
@@ -201,7 +201,7 @@ sub ask_mntpoint_s {
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
 				  [ map { partition_table_raw::description($_) => 
-				            { val => \$_->{mntpoint}, list => [ '', fsedit::suggestions_mntpoint([]) ] }
+				            { val => \$_->{mntpoint}, not_edit => 0, list => [ '', fsedit::suggestions_mntpoint([]) ] }
 					} @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
@@ -215,10 +215,14 @@ sub doPartitionDisks {
     install_any::getHds($o, sub {
 	my ($err) = @_;
 	$warned = 1;
-	if ($o->ask_okcancel(_("Error"), 
-[_("I can't read your partition table, it's too corrupted for me :(
-I'll try to go on blanking bad partitions and ALL DATA will be lost
-(%s)"), $err])) {
+	if ($o->ask_yesorno(_("Error"), 
+_("I can't read your partition table, it's too corrupted for me :(
+I can try to go on blanking bad partitions (ALL DATA will be lost!).
+The other solution is to disallow DrakX to modify the partition table.
+(the error is %s)
+
+Do you agree to loose all the partitions?
+", $err))) {
             0;
         } else {
             $o->{partitioning}{readonly} = 1;
@@ -338,7 +342,7 @@ sub choosePackages {
 		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
 		$l[1] > $l[0] + 100 or splice(@l, 0, 1);
 		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
-		$o->ask_from_listf('', 'TODOMESSAGE', sub { _ ($text[$_[1]], $_[0]) }, \@l) * sqr(1024);
+		$o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l) * sqr(1024);
 	    } else {
 		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	    }
@@ -651,6 +655,10 @@ sub configurePrinter {
         printerdrake::auto_detect($o) or return;
     }
 
+    #- bring interface up for installing ethernet packages but avoid ppp by default,
+    #- else the guy know what he is doing...
+    #install_interactive::upNetwork($o, 'pppAvoided');
+
     #- take default configuration, this include choosing the right system
     #- currently used by the system.
     eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
@@ -739,8 +747,8 @@ sub addUser {
          _("Password (again)") => {val => \$u->{password2}, hidden => 1},
 	   ), $::beginner ? () : (
          _("Shell") => {val => \$u->{shell}, list => [ any::shells($o->{prefix}) ], not_edit => !$::expert} 
-	   ), $o->{security} > 3 || $::beginner ? () : (
-	 _("Icon") => {val => \$u->{icon}, list => [ map { translate($_) } @any::users ], not_edit => 1 },
+	   ), $o->{security} > 3 ? () : (
+	 _("Icon") => {val => \$u->{icon}, list => [ @any::users ], icon2f => sub { any::icon2file($_[0], $o->{prefix}) } },
 	   ),
         ],
         focus_out => sub {
@@ -754,7 +762,6 @@ sub addUser {
 	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    member($u->{name}, map { $_->{name} } @{$o->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
-	    $u->{icon} = untranslate($u->{icon}, @any::users);
 	    return 0;
 	},
     )) {

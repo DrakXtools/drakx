@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-use lib qw(/usr/lib/libDrakX);
+use lib ".";# qw(/usr/lib/libDrakX);
 
 use common qw(:common :functional :system :file);
 use interactive;
@@ -44,7 +44,7 @@ if ($in->ask_from_entries_refH(
 	   ), $::beginner ? () : (
          _("Shell") => {val => \$u->{shell}, list => \@shells, not_edit => !$::expert} 
 	   ), $security > 3 ? () : (
-	 _("Icon") => {val => \$u->{icon}, list => [ map { translate($_) } @any::users ], not_edit => 1 },
+	 _("Icon") => {val => \$u->{icon}, list => [ @any::users ], icon2f => \&any::icon2file },
 	   ),
         ],
         focus_out => sub {
@@ -58,7 +58,7 @@ if ($in->ask_from_entries_refH(
 	    $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    member($u->{name}, map { $_->{name} } @users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
-	    $u->{icon} = untranslate($u->{icon}, @any::users);
+	    print $u->{icon}, "\n";
 	    return 0;
 	},
 )) {

@@ -52,10 +52,14 @@ sub partitionWizardSolutions {
 
     # each solution is a [ score, text, function ], where the function retunrs true if succeeded
 
-    if (fsedit::free_space(grep { partition_table::can_raw_add($_) } @$hds) > $min_linux and !$readonly) {
+    my @good_hds = grep { partition_table::can_raw_add($_) } @$hds;
+    if (fsedit::free_space(@good_hds) > $min_linux and !$readonly) {
 	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($hds, $o->{partitions}); 1 } ]
     } else { 
-	push @wizlog, _("Not enough free space to allocate new partitions");
+	push @wizlog, _("Not enough free space to allocate new partitions") . ": " .
+	  (@good_hds ? 
+	   fsedit::free_space(@good_hds) . " < $min_linux" :
+	   "no harddrive on which partitions can be added") if !$readonly;
     }
 
     if (@$fstab) {
@@ -269,10 +273,11 @@ sub setup_thiskind {
     }
     @l = map { $_->{description} } @l;
     while (1) {
+	my ($msg_type) = $type =~ /(.*)|/;
 	my $msg = @l ?
-	  [ _("Found %s %s interfaces", join(", ", @l), $type),
+	  [ _("Found %s %s interfaces", join(", ", @l), $msg_type),
 	    _("Do you have another one?") ] :
-	  _("Do you have any %s interfaces?", $type);
+	  _("Do you have any %s interfaces?", $msg_type);
 
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;

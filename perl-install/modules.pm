@@ -384,7 +384,7 @@ sub load {
 	load_raw([ $name, @options ]);
     }
     if ($name eq "usb-storage") {
-	sleep(2); 
+	sleep(2);
 	-d "/proc/scsi/usb" or return;
 	$conf{"usb-storage"}{"post-install"} = "modprobe usbkbd; modprobe keybdev";
     }

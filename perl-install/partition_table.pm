@@ -427,7 +427,7 @@ sub read_extended {
     @{$hd->{extended}} > 100 and die "oops, seems like we're looping here :(  (or you have more than 100 extended partitions!)";
 
     @{$pt->{normal}} <= 1 or die "more than one normal partition in extended partition";
-    @{$pt->{normal}} >= 1 or die "no normal partition in extended partition";
+    @{$pt->{normal}} >= 1 or cdie "no normal partition in extended partition";
     $pt->{normal} = $pt->{normal}[0];
     #- in case of extended partitions, the start sector is local to the partition or to the first extended_part!
     $pt->{normal}{start} += $pt->{start};
@@ -632,8 +632,8 @@ sub next_start($$) {
 
 sub can_raw_add {
     my ($hd) = @_;
-    $_->{size} || $_->{type} or return foreach @{$hd->{primary}{raw}};
-    1;
+    $_->{size} || $_->{type} or return 1 foreach @{$hd->{primary}{raw}};
+    0;
 }
 sub raw_add {
     my ($raw, $part) = @_;
@@ -663,7 +663,7 @@ sub load($$;$) {
 
     my %h; @h{@fields2save} = @$h;
 
-    $h{totalsectors} == $hd->{totalsectors} or $force or cdie("Bad totalsectors");
+    $h{totalsectors} == $hd->{totalsectors} or $force or cdie "bad totalsectors";
 
     #- unsure we don't modify totalsectors
     local $hd->{totalsectors};

@@ -30,6 +30,7 @@ use c;
   10 => __("maybe"),#__("useless"),
    0 => __("maybe"),#__("garbage"),
 #- if the package requires locales-LANG and LANG is chosen, rating += 90
+#- if the package is in %by_lang and the corresponding LANG is chosen, rating += 90   (see %by_lang below)
  -10 => __("i18n (important)"), #- every install in the corresponding lang have these packages
  -20 => __("i18n (very nice)"), #- every beginner/custom install in the corresponding lang have theses packages
  -30 => __("i18n (nice)"),
@@ -37,18 +38,6 @@ use c;
 #- HACK: rating += 50 for some packages (like kapm, cf install_any::setPackages)
 #- HACK: rating += 10 if the group is selected and it is not a kde package (aka name !~ /^k/)
 #- HACK: rating += 1  if the group is selected and it is     a kde package (aka name !~ /^k/)
-
-
-@skip_list = qw(
-XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
-XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
-XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs
-MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
-kernel-linus kernel-secure kernel-fb kernel-BOOT
-hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
-hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb 
-autoirpm autoirpm-icons numlock 
-);
 
 %by_lang = (
   'ar'	=> [ 'acon' ],
@@ -87,6 +76,17 @@ autoirpm autoirpm-icons numlock
   'zh'  => [ 'rxvt-CLE', 'taipeifonts', 'fonts-ttf-big5', 'fonts-ttf-gb2312' ],
   'zh_CN.GB2312' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
   'zh_TW.Big5' => [ 'rxvt-CLE', 'taipeifonts', 'fonts-ttf-big5' ],
+);
+
+@skip_list = qw(
+XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
+XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
+XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs
+MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
+kernel-linus kernel-secure kernel-fb kernel-BOOT
+hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
+hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb 
+autoirpm autoirpm-icons numlock 
 );
 
 @preferred = qw(perl-GTK postfix ghostscript-X vim-minimal kernel ispell-en);
@@ -197,7 +197,7 @@ sub extractHeaders($$$) {
 #- original size wich is absurd, this point is named D below.
 my $A = -1.922e-05;
 my $B = 1.18411;
-my $C = 23.2; #- doesn't take hdlist's into account as getAvailableSpace will do it.
+my $C = 13.2; #- doesn't take hdlist's into account as getAvailableSpace will do it.
 my $D = (-sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A; #- $A is negative so a positive solution is with - sqrt ...
 sub correctSize { $_[0] < $D ? ($A * $_[0] + $B) * $_[0] + $C : $_[0] } #- size correction in MB.
 sub invCorrectSize { $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0]; } #- size correction in MB.

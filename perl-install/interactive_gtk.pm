@@ -175,9 +175,25 @@ sub ask_from_entries_refW {
     my $ignore = 0; #-to handle recursivity
 
     my $w = my_gtk->new($title_, %$o);
+    $w->sync; # for XPM's creation
+
+    my $set_icon = sub {
+	my ($i, $button) = @_;
+	gtkdestroy($i->{icon});
+	my $f = $i->{icon2f}->(${$i->{val}});
+	$i->{icon} = -e $f ?  
+	  new Gtk::Pixmap(gtkcreate_xpm($w->{window}, $f)) :
+	  new Gtk::Label(translate(${$i->{val}}));
+	$button->add($i->{icon});
+	$i->{icon}->show;
+    };
+
     #-the widgets
     my @widgets = map {
 	my $i = $_;
+
+	$i->{type} = "iconlist" if $i->{type} eq "list" && $i->{not_edit} && $i->{icon2f};
+
 	if ($i->{type} eq "list") {
 	    my $w = new Gtk::Combo;
 	    $w->set_use_arrows_always(1);
@@ -185,6 +201,14 @@ sub ask_from_entries_refW {
 	    $w->set_popdown_strings(@{$i->{list}});
 	    $w->disable_activate;
 	    $w;
+	} elsif ($i->{type} eq "iconlist") {
+	    my $w = new Gtk::Button;
+	    $w->signal_connect(clicked => sub {
+		${$i->{val}} = next_val_in_array(${$i->{val}}, $i->{list});
+		$set_icon->($i, $w);
+	    });
+	    $set_icon->($i, $w);
+	    gtkpack_(new Gtk::HBox(0,10), 1, new Gtk::HBox(0,0), 0, $w, 1, new Gtk::HBox(0,0), );
 	} elsif ($i->{type} eq "bool") {
 	    my $w = Gtk::CheckButton->new($i->{text});
 	    $w->set_active(${$i->{val}});
@@ -209,7 +233,7 @@ sub ask_from_entries_refW {
     my @updates = mapn {
 	my ($w, $ref) = @_;
 	sub {
-	    $ref->{type} =~ /bool|range/ and return;
+	    $ref->{type} =~ /bool|range|iconlist/ and return;
 	    ${$ref->{val}} = widget($w, $ref)->get_text;
 	};
     } \@widgets, $val;
@@ -217,10 +241,9 @@ sub ask_from_entries_refW {
     my @updates_inv = mapn {
 	my ($w, $ref) = @_;
 	sub { 
+	    $ref->{type} =~ /iconlist/ and return;
 	    $ref->{type} eq "bool" ?
 	      $w->set_active(${$ref->{val}}) :
-	    $ref->{type} eq "bool" ?
-	      $w->get_adjustment->set_value(${$ref->{val}}) :
 	      widget($w, $ref)->set_text(${$ref->{val}})
 	};
     } \@widgets, $val;
@@ -298,7 +321,6 @@ sub ask_from_entries_refW {
 		return 1;
 	    }
 	};
-	#$w->{ok}->signal_connect(clicked => $callback)
 	$w->main($callback);
     } else {
 	$w->main();

@@ -16,13 +16,13 @@ local $_ = join '', @ARGV;
 $::expert = /-expert/;
 $::isStandalone = 1;
 
-my $in = vnew interactive('su');
+my $in = interactive->vnew('su');
 
-my $keyboard = keyboard::text2keyboard(
-      $in->ask_from_list_(_("Keyboard"),
-			  _("What is your keyboard layout?"),
-			  [ keyboard::list() ],
-			  keyboard::keyboard2text(keyboard::read(''))));
+my $keyboard = $o->ask_from_listf_(_("Keyboard"),
+				   _("Please, choose your keyboard layout."),
+				   \&keyboard::keyboard2text,
+				   [ keyboard::xmodmaps() ],
+				   keyboard::read());
 
 my $isNotDelete = $::expert && !$in->ask_yesorno("BackSpace", "Do you want the BackSpace to return Delete in console?", 1);
 

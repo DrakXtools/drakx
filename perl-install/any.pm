@@ -21,11 +21,16 @@ my @users_male = (__("tie"), __("default"), __("curly")); #- don't change the na
 my @users_female = (__("brunette"), __("girl"), __("woman-blond"));
 @users = (@users_male, @users_female, __("automagic"));
 
+sub icon2file {
+    my ($icon, $prefix) = @_;
+    "$prefix/usr/share/icons/user-$icon-mdk.xpm";
+}
+
 sub addKdmIcon {
     my ($prefix, $user, $icon, $force) = @_;
     my $dest = "$prefix/usr/share/apps/kdm/pics/users/$user.xpm";
     unlink $dest if $force;
-    eval { commands::cp("$prefix/usr/share/icons/user-$icon-mdk.xpm", $dest) } if $icon;
+    eval { commands::cp(icon2file($icon, $prefix), $dest) } if $icon;
 }
 
 sub allocUsers {

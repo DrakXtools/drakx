@@ -285,9 +285,10 @@ sub write {
 
 sub read {
     my ($prefix) = @_;
-
     my %keyf = getVarsFromSh("$prefix/etc/sysconfig/keyboard");
-    map { keyboard2kmap($_) eq $keyf{KEYTABLE} || $_ eq $keyf{KEYTABLE} ? $_ : (); } keys %keyboards;
+    my $keytable = $keyf{KEYTABLE};
+    keyboard2kmap($_) eq $keytable and return $_ foreach keys %keyboards;
+    $keyboards{$keytable} ? $keytable : 'us_intl';
 }
 
 #-######################################################################################

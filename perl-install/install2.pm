@@ -56,7 +56,7 @@ my (%installSteps, @orderedInstallSteps);
   configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages" ],
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "installPackages" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
-  addUser            => [ __("Add a user"), 1, 1, '' ],
+  addUser            => [ __("Add a user"), 1, 1, '', "installPackages" ],
 arch() !~ /alpha/ ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '$::o->{lnx4win} && !$::expert', "installPackages" ],
 ) : (),
@@ -238,7 +238,7 @@ sub selectKeyboard {
 
     return unless $o->{isUpgrade} || !$::beginner || $clicked;
 
-    $o->{keyboard} = (keyboard::read($o->{prefix}))[0] if $o->{isUpgrade} && !$clicked && $o->{keyboard_unsafe};
+    $o->{keyboard} = keyboard::read($o->{prefix}) if $o->{isUpgrade} && !$clicked && $o->{keyboard_unsafe};
     $o->selectKeyboard;
 
     #- if we go back to the selectKeyboard, you must rewrite

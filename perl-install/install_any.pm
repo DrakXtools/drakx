@@ -296,7 +296,7 @@ sub setPackages($) {
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	my @l = ();
-	push @l, "kapm", "kcmlaptop" if $o->{pcmcia};
+	push @l, "kapm", "kcmlaptop", "DrakProfile", "DrakSync" if $o->{pcmcia};
 	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
 	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
 	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo 3');
@@ -668,9 +668,9 @@ sub getHds {
     $o->{hds} = catch_cdie { fsedit::hds(\@drives, $flags) }
       sub {
 	  $ok = 0;
-	  log::l("error reading partition table: $@");
-	  my ($err) = $@ =~ /(.*) at /;
-	  $flags->{readonly} && $f_err and $f_err->($err);
+	  my $err = $@; $err =~ s/ at (.*?)$//;
+	  log::l("error reading partition table: $err");
+	  !$flags->{readonly} && $f_err and $f_err->($err);
       };
 
     if (is_empty_array_ref($o->{hds}) && $o->{autoSCSI}) {

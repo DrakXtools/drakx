@@ -475,7 +475,7 @@ sub autoDefaultDepth($$) {
 
     return 24 if $card->{identifier} =~ /SiS/;
 
-    return 16 if $card->{type} =~ /Voodoo/ && ! ($card->{type} =~ /Voodoo5/);
+    return 16 if $card->{type} =~ /Voodoo (?!5)/x;
     
     for ($card->{server}) {
 	/FBDev/   and return 16; #- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.

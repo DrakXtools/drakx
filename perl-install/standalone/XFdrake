@@ -43,7 +43,7 @@ my $f = "/usr/X11R6/lib/X11/Cards";
 -e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
 -e $f or die "install XFree86 first!\n";
 
-my $in = vnew interactive('su');
+my $in = interactive->vnew('su');
 
 `pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start");
 
