@@ -1717,7 +1717,7 @@ sub poll_ppd_base {
 		my $fullfoomaticdriver = $driver;
 		# Foomatic PPD? Extract driver name
 		my $isfoomatic = 
-		    $driver =~ s/^\s*(GhostScript|Foomatic)\s*\+\s*//i;
+		    $driver =~ s!^\s*(GhostScript|Foomatic)(\s*\+\s*|/)!!i;
 		# Foomatic PostScript driver?
 		$isfoomatic ||= $descr =~ /Foomatic/i;
 		# Native CUPS?
@@ -1736,6 +1736,7 @@ sub poll_ppd_base {
 		    # Foomatic
 		    $key = $keynolang;
 		}
+	        my ($devidmake, $devidmodel, $deviddesc, $devidcmdset);
 		if (!$printer->{expert}) {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
@@ -1758,6 +1759,11 @@ sub poll_ppd_base {
                             $thedb{$key}{driver} =~ /^PostScript$/i ||
                             $thedb{$key}{driver} ne "PPD" && $isrecommended ||
                             $thedb{$key}{driver} eq "PPD" && $isrecommended && $driver ne "PostScript") {
+			    # Save the autodetection data
+			    $devidmake = $thedb{$key}{devidmake};
+			    $devidmodel = $thedb{$key}{devidmodel};
+			    $deviddesc = $thedb{$key}{deviddesc};
+			    $devidcmdset = $thedb{$key}{devidcmdset};
                             # Remove the old entry
                             delete $thedb{$key};
                         } else {
@@ -1834,7 +1840,12 @@ sub poll_ppd_base {
 		$thedb{$key}{make} = $mf;
 		$thedb{$key}{model} = $model;
 		$thedb{$key}{driver} = $driver;
-		# Get auto-detection data
+		# Recover saved autodetection data
+		$thedb{$key}{devidmake} = $devidmake if $devidmake;
+		$thedb{$key}{devidmodel} = $devidmodel if $devidmodel;
+		$thedb{$key}{deviddesc} = $deviddesc if $deviddesc;
+		$thedb{$key}{devidcmdset} = $devidcmdset if $devidcmdset;
+		# Get autodetection data
 		#my ($devidmake, $devidmodel) = ppd_devid_data($ppd);
 		#$thedb{$key}{devidmake} = $devidmake;
 		#$thedb{$key}{devidmodel} = $devidmodel;
