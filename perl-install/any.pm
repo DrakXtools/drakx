@@ -623,11 +623,19 @@ sub selectLanguage {
 	my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
 	@langs = map { $_->[0] } sort { $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
 
+        my $last_utf8 = $in->{locale}{utf8};
 	add2hash($common, { cancel => '',
 			    advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
-			    callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 } } });
+			    callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 },
+                                           changed => sub {
+                                               if ($last_utf8 == $in->{locale}{utf8}) {
+                                                   $last_utf8 = $in->{locale}{utf8} = lang::utf8_should_be_needed({ lang => $listval2val->($lang), langs => $langs });
+                                               } else {
+                                                   $last_utf8 = -1;  #- disable auto utf8 once touched
+                                               }
+                                           } } });
 			    
 	$in->ask_from_($common,
 	[ { val => \$lang, separator => '|', 
