@@ -355,7 +355,7 @@ sub create_box_with_title {
 					       my $w = $new_label->($_);
 					       $::isWizard and $w->set_justify("left");
 					       (0, $w);
-					   } map { ref($_) ? $_ : warp_text($_) } @_),
+					   } @_),
 					   1, Gtk2::HBox->new(0,0),
 					  )
 			      ),
@@ -368,7 +368,7 @@ sub create_box_with_title {
 			  my $w = $new_label->($_);
 			  $::isWizard ? gtkpack__(Gtk2::HBox->new(0,0), gtkset_size_request(Gtk2::Label->new, 20, 0), $w)
 			              : $w
-		      } map { ref($_) ? $_ : warp_text($_) } @_),
+		      } @_),
 		      if_($::isWizard, gtkset_size_request(Gtk2::Label->new, 0, 15)),
 		      if_($a, Gtk2::HSeparator->new)
 		     )
