@@ -487,6 +487,29 @@ sub usb_probe() {
     } c::usb_probe());
 }
 
+sub firewire_probe() {
+    my ($e, @l);
+    foreach (cat_('/proc/bus/ieee1394/devices')) {
+	if (m!Vendor/Model ID: (.*) \[(\w+)\] / (.*) \[(\w+)\]!) {
+	    push @l, $e = { 
+			   vendor => hex($2), id => hex($4), 
+			   description => join('|', $1, $3),
+			   bus => 'Firewire',
+			  };
+	} elsif (/Software Specifier ID: (\w+)/) {
+	    $e->{specifier_id} = hex $1;
+	} elsif (/Software Version: (\w+)/) {
+	    $e->{specifier_version} = hex $1;	    
+	}
+    }
+    foreach (@l) {
+	if ($e->{specifier_id} == 0x00609e && $e->{specifier_version} == 0x010483) {
+	    add2hash($_, { driver => 'sbp2', description => "Generic Firewire Storage Controller" });
+	}
+    }
+    @l;
+}
+
 sub pcmcia_probe() {
     -e '/var/run/stab' || -e '/var/lib/pcmcia/stab' or return ();
 
@@ -508,7 +531,7 @@ sub probeall() {
     return if $::noauto;
 
     require sbus_probing::main;
-    pci_probe(), usb_probe(), pcmcia_probe(), sbus_probing::main::probe();
+    pci_probe(), usb_probe(), firewire_probe(), pcmcia_probe(), sbus_probing::main::probe();
 }
 sub matching_desc {
     my ($regexp) = @_;
