@@ -84,12 +84,9 @@
 #
 #
 # TODO:
+#		  - problem with ./drakbackup --defaufts
+#		  - test backup before to restore it.
 #		1 - do not remove all backup when user unselect bz2 or gzip !
-#		1 - replace tar --after-date by find / -mtime -1 \! -type d -print > /tmp/liste.jour
-#		during restore step catch the most recent date
-#		and put in list all backup between the fisrt date 
-#		and the select date.
-#		1bis - refaire en clist.
 #		3 - add port for ftp backup.
 #		4 - change NET::FTP to ftp cmds.  
 #		5 - add icons (win & lin) on adv_what_all.
@@ -98,6 +95,7 @@
 #               7 - ssh & rsync -> expect or .identity.pub/authorized_keys 
 #		8 - write on cd
 #		9 - cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
+#			/proc/sys/dev/cdrom/
 #		10- total backup.( all partitions wanted, windows partitions for example!)
 #		    dump use for total backup.
 #		11- send mail with results.
@@ -114,7 +112,8 @@
 #		18- boot floppy disk (with dialog)
 #		19- build autoboot with backup and install cd 
 #		20- use .backupignore like on CVS
-#
+#		21 - afficher les modif dans un fichier texte du meme nom 
+#			pour afficher durant le restore.
 #		               
 # DONE TODAY:
 #________________________________________________________________
@@ -439,6 +438,7 @@ sub ftp_client {
     $ftp->send("$save_path/*"); 
     $ftp->quit; 
 }
+
 
 sub build_backup_files {
     my $path_name;
@@ -1593,6 +1593,26 @@ sub select_sys_data_to_restore {
 	 else {  $var_eq and push @sys_list_to_restore, $var_exist; }
     }
     $DEBUG and print "sys list to restore: $_\n " foreach (@sys_list_to_restore);
+}
+
+sub valid_backup_test {
+    my (@files_list) = @_;
+#(seb@lutin)[~]-% gzip -l old_drakbackup.tar.gz 
+#compressed  uncompr. ratio uncompressed_name
+#   128662    174080  26.1% old_drakbackup.tar
+
+
+#### tester integrite archive
+
+# idem pour bzip2 -t
+# (seb@lutin)[~]-% gzip -t drakbackup.tar.gz
+#
+# gzip: drakbackup.tar.gz: invalid compressed data--crc error
+#
+# gzip: drakbackup.tar.gz: invalid compressed data--length error
+
+
+### -> renvoit liste des fichiers corrompus
 }
 
 
@@ -2915,6 +2935,14 @@ description:
 	/etc/drakconf/drakbackup/drakbakup.conf
 
 
+Restore Step:
+  
+  During the Restore Step DrakBackup will remove 
+  your original directory and verify that all 
+  backup files are not corrupted. But it is recommended 
+  to build a last backup before to do it.
+
+
 ")); }
     elsif ($custom_help eq "ftp") { gtktext_insert($text, 
 _("options description:
@@ -2972,6 +3000,13 @@ description:
   configuration file:
 	/etc/drakconf/drakbackup/drakbakup.conf
 
+Restore Step:
+  
+  During the Restore Step DrakBackup will remove 
+  your original directory and verify that all 
+  backup files are not corrupted. But it is recommended 
+  to build a last backup before to do it.
+ 
 
 "));}
 
@@ -3040,19 +3075,6 @@ Drakbacup allow to restore the system (etc, var files)
 
 ##### tester taille decompressee
 
-#(seb@lutin)[~]-% gzip -l old_drakbackup.tar.gz 
-#compressed  uncompr. ratio uncompressed_name
-#   128662    174080  26.1% old_drakbackup.tar
-
-
-#### tester integrite archive
-
-# idem pour bzip2 -t
-# (seb@lutin)[~]-% gzip -t drakbackup.tar.gz
-#
-# gzip: drakbackup.tar.gz: invalid compressed data--crc error
-#
-# gzip: drakbackup.tar.gz: invalid compressed data--length error
 
 
 
