@@ -11,7 +11,11 @@ use common;
 );
 @depths = ikeys(%depths);
 
+if (arch() =~ /ppc/) {
+@resolutions = qw(640x480 800x600 1024x768 1152x768 1280x1024 1400x1050 1600x1200 1920x1440 2048x1536);
+} else {
 @resolutions = qw(640x480 800x600 1024x768 1152x864 1280x1024 1400x1050 1600x1200 1920x1440 2048x1536);
+}
 
 %serversdriver = arch() =~ /^sparc/ ? (
     'Mach64'    => "accel",
