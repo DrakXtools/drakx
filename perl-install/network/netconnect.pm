@@ -1300,7 +1300,10 @@ It is not necessary on most networks."),
                     default => sub { bool2yesno(text2bool($intf->{$netc->{NET_INTERFACE}}{USERCTL})) },
                     post => sub {
                         my ($res) = @_;
-                        $intf->{$netc->{NET_INTERFACE}}{USERCTL} = bool2yesno($res);
+                        $res = bool2yesno($res);
+                        $intf->{$netc->{NET_INTERFACE}}{USERCTL} = $res;
+                        my $ifcfg_file = "$::prefix/etc/sysconfig/network-scripts/ifcfg-$netc->{NET_INTERFACE}";
+                        -f $ifcfg_file and substInFile { s/^USERCTL.*\n//; $_ .= qq(USERCTL=$res\n) if eof } $ifcfg_file;
                         return $goto_start_on_boot_ifneeded->();
                     },
                    },
