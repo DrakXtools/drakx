@@ -137,10 +137,10 @@ sub create_steps_window {
 			my $darea = new Gtk::DrawingArea;
 			my $in_button;
 			my $draw_pix = sub {
-			    my ($map, $mask) = gtkcreate_png($_[0]);
+			    my ($map, $mask) = gtkcreate_xpm($darea, $_[0]);
 			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 							 $map, 0, 0,
-							 ($darea->allocation->[2]-$PIX_W)/2 + ($o->{meta_class} eq 'firewall' ? 3 : 0),
+							 ($darea->allocation->[2]-$PIX_W)/2 + 3,
 							 ($darea->allocation->[3]-$PIX_H)/2,
 							 $PIX_W , $PIX_H );
 			};
@@ -148,9 +148,9 @@ sub create_steps_window {
 			my $f = sub { 
 			    my ($type) = @_;
 			    my $color = $step->{done} ? 'green' : $step->{entered} ? 'orange' : 'red';
-			    "$ENV{SHARE_PATH}/step-$color$type.png";
+			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
 			};
-			$darea->set_usize($PIX_W+($o->{meta_class} eq 'firewall' ? 3 : 0),$PIX_H);
+			$darea->set_usize($PIX_W+3,$PIX_H);
 			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
 			$darea->signal_connect(expose_event => sub { $draw_pix->($f->('')) });
 			if ($step->{reachable}) {
