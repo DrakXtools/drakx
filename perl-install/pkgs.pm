@@ -353,7 +353,21 @@ sub unselectAllPackagesIncludingUpgradable($) {
 }
 
 sub psUpdateHdlistsDeps {
-    my ($prefix, $method) = @_;
+    my ($prefix, $method, $packages) = @_;
+    my ($good_hdlists_deps, $mediums) = (0, 0);
+
+    #- check if current configuration is still up-to-date and do not need to be updated.
+    foreach (values %{$packages->{mediums}}) {
+	my $hdlistf = "$prefix/var/lib/urpmi/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
+	my $synthesisf = "$prefix/var/lib/urpmi/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
+	-s $hdlistf == $_->{hdlist_size} && -s $synthesisf == $_->{synthesis_hdlist_size} and ++$good_hdlists_deps;
+	++$mediums;
+    }
+    $good_hdlists_deps > 0 && $good_hdlists_deps == $mediums and return; #- nothing to do.
+
+    #- at this point, this means partition has problably be reformatted and hdlists should be retrieved.
+    install_any::useMedium($install_any::boot_medium);
+
     my $listf = install_any::getFile('Mandrake/base/hdlists') or die "no hdlists found";
 
     #- WARNING: this function should be kept in sync with functions
@@ -437,9 +451,13 @@ sub psUsingHdlist {
     my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
     install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
+    $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
-    install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist",
-				"$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2"));
+
+    #- copy existing synthesis file too.
+    my $newsf = "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
+    install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
+    $m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
