@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 # DrakxTV
 # $Id$
 
@@ -35,9 +35,9 @@ use lang;
 use log;
 use common;
 
-/-h/ and die "usage: drakxtv [-h] [--help] [--no-guess]\n";
+("@ARGV" =~ /--help|-h/) and die "usage: drakxtv [-h] [--help] [--no-guess]\n";
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+#$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 my $in = 'interactive'->vnew();
 
 sub scan4channels {
@@ -81,8 +81,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 
 	   # default to pal since most people use that
 	   $norm = "PAL";
-
-	   if(! /--no-guess/) {
+	   if("@ARGV" !~ /--help|-h/) {
 		  my %countries =
 			 (
 			  "ar" => [ "argentina" ],
@@ -144,7 +143,7 @@ my @devices = detect_devices::probeall(1);
 if (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } @devices) {
     if (($< == 0) && (grep { $_->{driver} eq 'bttv' } @devices)) {
 	   use harddrake::bttv;
-	   bttv::config($in);
+	   harddrake::bttv::config($in);
     }
     scan4channels();
     $in->exit(0);
