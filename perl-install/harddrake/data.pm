@@ -52,8 +52,8 @@ our @tree =
 #	["","FDDI cards", "Ethernetcard.png", "", \&detect_devices::getNet],
 	["MODEM","Modem", "modem.png", "", sub { require network::modem; 
 									 my $modem;
-									 modem_detect_backend($modem);
-									 $modem->{device} ?$modem : {};
+									 network::modem::modem_detect_backend($modem);
+									 grep {$modem->{device} } @{ $modem};
 								  } ],
 #	["","Isdn", "", "", \&detect_devices::getNet]
 
