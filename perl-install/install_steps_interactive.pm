@@ -636,12 +636,15 @@ sub chooseCD {
 	$mediumsDescr{$descr} ||= $packages->{mediums}{$_}{selected};
     }
 
-    #- if no other medium available or a poor beginner, we are choosing for him!
-    #- note first CD is always selected and should not be unselected!
-    return if @mediumsDescr == () || !$::expert;
+    if (install_any::method_is_from_ISO_images($o->{method})) {
+        $mediumsDescr{$_} = defined(install_any::find_ISO_image_labelled($_)) || 0 foreach (@mediumsDescr);
+    } elsif ($method eq "cdrom") {
+        #- if no other medium available or a poor beginner, we are choosing for him!
+        #- note first CD is always selected and should not be unselected!
+        return if @mediumsDescr == () || !$::expert;
 
-#    $o->set_help('chooseCD');
-    $o->ask_many_from_list('',
+        #    $o->set_help('chooseCD');
+        $o->ask_many_from_list('',
 N("If you have all the CDs in the list below, click Ok.
 If you have none of those CDs, click Cancel.
 If only some CDs are missing, unselect them, then click Ok."),
@@ -652,6 +655,7 @@ If only some CDs are missing, unselect them, then click Ok."),
 			   }) or do {
 			       $mediumsDescr{$_} = 0 foreach @mediumsDescr; #- force unselection of other CDs.
 			   };
+    }
 
     #- restore true selection of medium (which may have been grouped together)
     foreach (@mediums) {

@@ -76,12 +76,17 @@ sub askChangeMedium($$) {
     log::l($allow ? "accepting medium $medium" : "refusing medium $medium");
     $allow;
 }
+
+sub method_is_from_ISO_images($) {
+    my ($method) = @_;
+    $method eq "disk-iso" || $method eq "nfs-iso";
+}
 sub method_allows_medium_change($) {
     my ($method) = @_;
-    $method eq "cdrom" || $method eq "disk-iso" || $method eq "nfs-iso";
+    $method eq "cdrom" || method_is_from_ISO_images($method);
 }
 
-sub look_for_ISOs() {
+sub look_for_ISO_images() {
     $iso_images{media} = [];
 
     ($iso_images{loopdev}, $iso_images{mountpoint}) = cat_("/proc/mounts") =~ m|(/dev/loop\d+)\s+(/tmp/image) iso9660| or return;
@@ -112,12 +117,15 @@ sub look_for_ISOs() {
     1;
 }
 
+sub find_ISO_image_labelled($) {
+    %iso_images or look_for_ISO_images() or return;
+    my ($iso_label) = @_;
+    return find { $_->{app_id} eq $iso_label && $_->{cd_set} eq $iso_images{cd_set} } @{$iso_images{media}};
+}
+
 sub changeIso($) {
-    my ($iso_label) = @_;  
-
-    %iso_images or look_for_ISOs() or return;
-
-    my $iso_info = find { $_->{app_id} eq $iso_label && $_->{cd_set} eq $iso_images{cd_set} } @{$iso_images{media}} or return;
+    my ($iso_label) = @_;
+    my $iso_info = find_ISO_image_labelled($iso_label) or return;
 
     eval { fs::umount($iso_images{mountpoint}) };
     $@ and warnAboutFilesStillOpen();
