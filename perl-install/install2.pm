@@ -543,8 +543,7 @@ sub main {
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
-    log::l("second stage install running");
-    log::ld("extra log messages are enabled");
+    log::l("second stage install running (", any::drakx_version(), ")");
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     $o->{root}   = $::testing ? "/tmp/root-perl-install" : "/";
