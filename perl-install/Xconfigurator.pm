@@ -184,8 +184,8 @@ sub cardConfiguration(;$$$) {
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
-			 $card->{identifier} =~ /3D Rage Pro AGP/ || #- by default only such card are supported, with AGP ?
-			 $card->{type} =~ /Intel 810/);
+			 $card->{identifier} =~ /3D Rage Pro AGP/); #- by default only such card are supported, with AGP ?
+                         #- NOT WORKING $card->{type} =~ /Intel 810/);
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{Utah_glx_EXPERIMENTAL} = ($card->{type} =~ /RIVA TNT/ || #- all RIVA/GeForce comes from NVIDIA and may freeze (gltron).
 				      $card->{type} =~ /RIVA128/ ||
@@ -194,7 +194,7 @@ sub cardConfiguration(;$$$) {
 				      #- $card->{type} =~ /S3 ViRGE/ || #- 15bits only
 				      $card->{type} =~ /SiS /);
     #- 3D acceleration configuration for XFree 4.0 using DRI.
-    $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || #- 16bit only #- NOT YET $card->{identifier} =~ /Voodoo Banshee/ ||
+    $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
 			#- NOT WORKING $card->{identifier} =~ /Matrox.* G[24]00/ || #- prefer 16bit (24bit not well tested according to DRI)
 			$card->{type} =~ /Intel 810/ || #- 16bit
 			$card->{type} =~ /ATI Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.

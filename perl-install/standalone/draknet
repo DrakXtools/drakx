@@ -48,5 +48,5 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia");
+netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", sub { system("urpmi --auto " . join(' ', @_)) });
 $in->exit(0);
