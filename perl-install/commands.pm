@@ -159,13 +159,13 @@ sub chown_ {
 
 sub swapon {
     @_ == 1 or die "swapon <file>\n";
-    require swap;
-    swap::swapon($_[0]);
+    require fs;
+    fs::swapon($_[0]);
 }
 sub swapoff {
     @_ == 1 or die "swapoff <file>\n";
-    require swap;
-    swap::swapoff($_[0]);
+    require fs;
+    fs::swapoff($_[0]);
 }
 
 sub uncpio {

@@ -10,11 +10,11 @@ use log;
 use devices;
 use partition_table qw(:types);
 use run_program;
-use swap;
 use detect_devices;
 use modules;
 use fsedit;
 use loopback;
+use fs::format;
 
 
 sub read_fstab {
@@ -617,105 +617,6 @@ sub get_raw_hds {
     ];
 }
 
-################################################################################
-# formatting functions
-################################################################################
-sub disable_forced_fsck {
-    my ($dev) = @_;
-    run_program::run("tune2fs", "-c0", "-i0", devices::make($dev));
-}
-
-sub format_ext2($@) {
-    #- mke2fs -b (1024|2048|4096) -c -i(1024 > 262144) -N (1 > 100000000) -m (0-100%) -L volume-label
-    #- tune2fs
-    my ($dev, @options) = @_;
-    $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
-    push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
-    run_program::raw({ timeout => 60 * 60 }, 'mke2fs', '-F', @options, devices::make($dev)) or die N("%s formatting of %s failed", (any { $_ eq '-j' } @options) ? "ext3" : "ext2", $dev);
-}
-sub format_ext3 {
-    my ($dev, @options) = @_;
-    format_ext2($dev, "-j", @options);
-    disable_forced_fsck($dev);
-}
-sub format_reiserfs {
-    my ($dev, @options) = @_;
-    #TODO add -h tea
-    run_program::raw({ timeout => 60 * 60 }, "mkreiserfs", "-ff", @options, devices::make($dev)) or die N("%s formatting of %s failed", "reiserfs", $dev);
-}
-sub format_xfs {
-    my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "mkfs.xfs", "-f", "-q", @options, devices::make($dev)) or die N("%s formatting of %s failed", "xfs", $dev);
-}
-sub format_jfs {
-    my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "mkfs.jfs", "-f", @options, devices::make($dev)) or die N("%s formatting of %s failed", "jfs", $dev);
-}
-sub format_dos {
-    my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "mkdosfs", @options, devices::make($dev)) or die N("%s formatting of %s failed", "dos", $dev);
-}
-sub format_hfs {
-    my ($dev, @options) = @_;
-    run_program::raw({ timeout => 60 * 60 }, "hformat", @options, devices::make($dev)) or die N("%s formatting of %s failed", "HFS", $dev);
-}
-sub real_format_part {
-    my ($part) = @_;
-
-    $part->{isFormatted} and return;
-
-    if ($part->{encrypt_key}) {
-	set_loop($part);
-    }
-
-    my $dev = $part->{real_device} || $part->{device};
-
-    my @options = if_($part->{toFormatCheck}, "-c");
-    log::l("formatting device $dev (type ", pt_type2name($part->{pt_type}), ")");
-
-    if (isExt2($part)) {
-	push @options, "-F" if isLoopback($part);
-	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
-	format_ext2($dev, @options);
-    } elsif (isThisFs("ext3", $part)) {
-	push @options, "-m", "0" if $part->{mntpoint} =~ m|^/home|;
-        format_ext3($dev, @options);
-    } elsif (isThisFs("reiserfs", $part)) {
-        format_reiserfs($dev, @options);
-    } elsif (isThisFs("xfs", $part)) {
-        format_xfs($dev, @options);
-    } elsif (isThisFs("jfs", $part)) {
-        format_jfs($dev, @options);
-    } elsif (isDos($part)) {
-        format_dos($dev, @options);
-    } elsif (isWin($part) || isEfi($part)) {
-        format_dos($dev, @options, '-F', 32);
-    } elsif (isThisFs('hfs', $part)) {
-        format_hfs($dev, @options, '-l', "Untitled");
-    } elsif (isAppleBootstrap($part)) {
-        format_hfs($dev, @options, '-l', "bootstrap");
-    } elsif (isSwap($part)) {
-	my $check_blocks = any { /^-c$/ } @options;
-        swap::make($dev, $check_blocks);
-    } else {
-	die N("I don't know how to format %s in type %s", $part->{device}, pt_type2name($part->{pt_type}));
-    }
-    $part->{isFormatted} = 1;
-}
-sub format_part {
-    my ($raids, $part, $prefix, $wait_message) = @_;
-    if (isRAID($part)) {
-	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
-	require raid;
-	raid::format_part($raids, $part);
-    } elsif (isLoopback($part)) {
-	$wait_message->(N("Creating and formatting file %s", $part->{loopback_file})) if $wait_message;
-	loopback::format_part($part, $prefix);
-    } else {
-	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
-	real_format_part($part);
-    }
-}
 
 ################################################################################
 # mounting functions
@@ -723,6 +624,17 @@ sub format_part {
 sub set_loop {
     my ($part) = @_;
     $part->{real_device} ||= devices::set_loop(devices::make($part->{device}), $part->{encrypt_key}, $part->{options} =~ /encryption=(\w+)/);
+}
+
+sub swapon {
+    my ($dev) = @_;
+    log::l("swapon called with $dev");
+    syscall_('swapon', devices::make($dev), 0) or die "swapon($dev) failed: $!";
+}
+
+sub swapoff {
+    my ($dev) = @_;
+    syscall_('swapoff', devices::make($dev)) or die "swapoff($dev) failed: $!";
 }
 
 sub formatMount_part {
@@ -735,7 +647,7 @@ sub formatMount_part {
 	formatMount_part($p, $raids, $fstab, $prefix, $wait_message) unless loopback::carryRootLoopback($part);
     }
     if ($part->{toFormat}) {
-	format_part($raids, $part, $prefix, $wait_message);
+	fs::format::part($raids, $part, $prefix, $wait_message);
     }
     mount_part($part, $prefix, 0, $wait_message);
 }
@@ -868,7 +780,7 @@ sub mount_part {
     unless ($::testing) {
 	if (isSwap($part)) {
 	    $o_wait_message->(N("Enabling swap partition %s", $part->{device})) if $o_wait_message;
-	    swap::swapon($part->{device});
+	    swapon($part->{device});
 	} else {
 	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
 
@@ -893,7 +805,7 @@ sub umount_part {
 
     unless ($::testing) {
 	if (isSwap($part)) {
-	    swap::swapoff($part->{device});
+	    swapoff($part->{device});
 	} elsif (loopback::carryRootLoopback($part)) {
 	    umount("/initrd/loopfs");
 	} else {

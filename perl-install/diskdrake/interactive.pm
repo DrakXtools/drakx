@@ -582,7 +582,7 @@ sub Type {
 	    $part->{isFormatted} = 1; #- assume that if tune2fs works, partition is formatted
 
 	    #- disable the fsck (don't do it together with -j in case -j fails?)
-	    fs::disable_forced_fsck($part->{device});	    
+	    fs::format::disable_forced_fsck($part->{device});	    
 	    return;
 	}
     }
@@ -1083,7 +1083,7 @@ sub format_ {
     ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
     $part->{isFormatted} = 0; #- force format;
     my $w;
-    fs::format_part($all_hds->{raids}, $part, $::prefix, sub {
+    fs::format::part($all_hds->{raids}, $part, $::prefix, sub {
         	my ($msg) = @_;
         	$w ||= $in->wait_message('', $msg);
         	$w->set($msg);
