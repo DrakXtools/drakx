@@ -1,3 +1,61 @@
+2001/08/25  dam's  <damien@mandrakesoft.com>
+
+	* install2.pm, steps.pm: icon correction
+
+2001/08/25  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm (mount): accept mounting iso9660 filesystem as it should be
+	(write_fstab): enable mounting more than one swap :)
+
+	* bootlook.pm: fix deprecated call standalone::pkgs_install
+
+	* install_steps.pm: added the missing security parameter to
+	set_default_options
+
+	* diskdrake.pm: don't the grab flag propagate everywhere
+
+2001/08/24  dam's  <damien@mandrakesoft.com>
+
+	* pixmaps/mouse_3b_mini.xpm, pixmaps/mouse_3b+.xpm, pixmaps/mouse_3b.xpm,
+	pixmaps/mouse_3b+_mini.xpm: mini pixmaps, and lower color res for normal
+	pix
+
+	* standalone/mousedrake: updated mouse test
+
+2001/08/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/libstdio/fdglue.c: fix this dietlibc... hope the
+	uncompressing of ramdisk will rulz now
+
+	* mdk-stage1/network.c: allow unsetting of automatic mode if not enough
+	parameter provided in network steps
+
+	* mdk-stage1/probing.c: 
+	  - descr of proc files
+	  - fix small typo (segfault or not segfault? that's the question)
+	enable install from Compaq Smart Array
+
+	* mdk-stage1/dietlibc/Makefile, mdk-stage1/bzlib/Makefile: use CC rather
+	than gcc statically
+
+	* mdk-stage1/tools.c, mdk-stage1/mount.c: enable install from Compaq Smart
+	Array
+
+2001/08/24  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/pcmcia_config.patch: update the patch
+
+	* Makefile (test_pms): make perl_checker skip help.pm
+	ensure no .orig are generated when the pcmcia patch is applied
+
+	* tools/make_mdkinst_stage2: give a little more free space (esp. for
+	russian lang)
+
+	* lang.pm, share/gen_locales.sh: no need for UTF-8/LC_CTYPE
+
+	* share/po/help_xml2pm.pl, share/po/Makefile, help.pm: auto-generates
+	help.pm from xml doc done by doc team
+
 2001/08/24  dam's  <damien@mandrakesoft.com>
 
 	* network/adsl.pm: bugfix, speedtouch help
