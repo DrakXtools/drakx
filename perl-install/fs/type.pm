@@ -194,7 +194,8 @@ sub part2type_name {
     my ($part) = @_;
     my @names = keys %type_name2fs_type;
    
-    if (my $pt_type = $part->{pt_type} || $part->{fs_type} && $fs_type2pt_type{$part->{fs_type}}) {
+    my $pt_type = defined $part->{pt_type} ? $part->{pt_type} : $part->{fs_type} && $fs_type2pt_type{$part->{fs_type}};
+    if (defined $pt_type) {
 	@names = grep { $pt_type eq $type_name2pt_type{$_} } @names;
     }
     if (my $fs_type = $part->{fs_type} || $part->{pt_type} && $pt_type2fs_type{$part->{pt_type}}) {
