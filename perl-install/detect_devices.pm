@@ -245,7 +245,7 @@ sub getIDE() {
 
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
 	my ($vendor, $model) = map { 
-	    if_($info =~ /^$_\b\s*(.*)/, $eide_hds{$_}, $1);
+	    if_($info =~ /^$_\b(-|\s*)(.*)/, $eide_hds{$_}, $2);
 	} keys %eide_hds;
 
 	my ($channel, $id) = ($num / 2, $num % 2);
