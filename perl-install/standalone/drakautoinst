@@ -323,21 +323,29 @@ sub h2widget {
 
 sub create_entry_element {
     my ($text, $value, $label) = @_;
-    my $e = new Gtk::Entry;
-    $e->{value} = $value;
-    my $tag = Gtk->timeout_add(1000, sub { $e->set_text($text); 0 });
-    gtksignal_connect($e, changed => sub {
-			  my $exe = $e->{value} . "='" . $e->get_text() . "'";
-			  print "EXEC : $exe\n ";
-			  eval "$exe";
-		      });
-    [ "$label : ", $e ]
+    my $e;
+    if(ref ($text) =~ /HASH/) {
+	return ([ "$label : ", h2widget($text, $label) ]);
+    } elsif (ref ($text) =~ /ARRAY/) {
+	return ([ "$label : ", h2widget($text, $label) ]);
+    } else {
+	$e = new Gtk::Entry;
+	$e->{value} = $value;
+	my $tag = Gtk->timeout_add(1000, sub { $e->set_text($text); 0 });
+	gtksignal_connect($e, changed => sub {
+			      my $exe = $e->{value} . "='" . $e->get_text() . "'";
+			      print "EXEC : $exe\n ";
+			      eval "$exe";
+			  });
+    }
+    [ $label ? "$label : " : "" , $e ]
 }
 
 sub control_buttons {
     my ($ref_local_k, $local_gui, $vb, $j, $widget_list2) = @_;
     my @widget_list = @{$widget_list2};
     my $i = ${$j};
+    ref($ref_local_k) =~ /HASH/ or return();
     my (%local_k) = %{$ref_local_k};
     my ($button_add, $button_remove);
     0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'spread'), 5),
@@ -360,6 +368,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.18  2002/03/06 20:17:51  damien
+#- corrected HASH and ARRAY label
+#-
 #- Revision 1.17  2002/01/29 22:38:31  gc
 #- move /root/* files (ddebug.log, install.log, report.bug,
 #- auto_inst.cfg.pl, replay_install.img) to /root/drakx/,
