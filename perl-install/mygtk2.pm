@@ -684,6 +684,8 @@ sub _create_Window {
             $w->set_uposition(max(0, $::rootwidth - ($::windowwidth + $wi) / 2), 
 			      max(0, $::logoheight + ($::windowheight - $he) / 2));
 	});
+	#- without this, the focus is broken during install, though this is not needed during X test, why??
+	$w->show;
     }
 
     $w;
