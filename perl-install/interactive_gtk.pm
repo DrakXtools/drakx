@@ -455,11 +455,13 @@ sub ask_fromW {
 		$width = max(map { length } @{$e->{list}});
 	    } else {
                 $w = new Gtk::Entry;
+		$w->signal_connect(focus_in_event => sub { $w->select_region });
+		$w->signal_connect(focus_out_event => sub { $w->select_region(0,0) });
 	    }
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $w->signal_connect(changed => $changed);
 	    $w->set_visibility(0) if $e->{hidden};
-	    $set = sub { $w->set_text($_[0]) };
+	    $set = sub { $w->set_text($_[0]) if $_[0] ne $w->get_text };
 	    $get = sub { $w->get_text };
 	}
 	$w->signal_connect(focus_out_event => sub { 
