@@ -1,3 +1,346 @@
+2003/01/22  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, any.pm, install_any.pm, install2.pm, steps.pm,
+	install_steps_interactive.pm: 
+	  - remove createBootdisk step
+	  - add mkbootdisk option in setupBootloader__general()
+	  - move kernelVersion() from install_any to any
+
+2003/01/21  alus
+
+	* share/po/pl.po: utf-8 again
+	updated again...? And again UTF -> ISO
+	back from UTF-8 to ISO-8859-2 ... Why Why Why? It should work from
+	UTF-8...
+
+2003/01/21  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/drakpxe: latest fixes for having default file correctly
+	documented and make sure if
+	server boot using dhcp itself, server hostname is given instead of ip
+	address.
+	add daemons stop/start code.
+	update with something that look like running.
+
+2003/01/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mouse.pm: fix absence of scroll up and scroll down in mouse test
+
+	* interactive/gtk.pm, install_steps_gtk.pm: perl-GTK2 0.0.cvs.2003.01.21.1
+	should fix set_active(undef) misbehaviour
+
+	* ugtk2.pm: seems like gdk_window_foreign_new is leaking as well..
+	since gtkset_mousecursor is called by a timeout, don't leak
+	memory because it can lead to problems on the long term
+
+2003/01/21  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/vi.po: updated Vietnamese and Polish files
+	English proofreading (first pass)
+
+	* network/adsl.pm: English proofreading by Stew Beneditcs
+
+	* share/po/sk.po, share/po/DrakX.pot, share/po/zh_CN.po: English
+	proofreading (first pass)
+	updated Slovak and Chinese files
+
+	* network/isdn.pm: English proofreading (first pass)
+	English proofreading by Stew Benedicts
+
+	* share/po/pl.po: updated Vietnamese and Polish files
+
+	* network/network.pm, share/po/gl.po, share/po/pt_BR.po, share/po/th.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/be.po,
+	share/advertising/01-thanks.pl, share/po/ko.po, standalone/drakTermServ,
+	share/po/sv.po, share/po/sr.po, share/po/fi.po, share/po/he.po,
+	share/advertising/05-games.pl, share/po/da.po, share/po/ca.po,
+	share/po/ar.po, share/advertising/04-multimedia.pl, share/po/ro.po,
+	security/level.pm, share/po/zh_TW.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/advertising/07-desktop.pl,
+	network/shorewall.pm, network/tools.pm,
+	share/advertising/08-development.pl, share/advertising/06-mcc.pl,
+	share/po/lv.po, share/po/hu.po, printer/printerdrake.pm, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/no.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/advertising/03-internet.pl, share/po/lt.po, share/po/sp.po,
+	share/po/cy.po, partition_table/raw.pm, share/po/bs.po, share/po/wa.po,
+	share/po/is.po, standalone/drakfont, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/ta.po, share/po/fr.po, share/po/nl.po,
+	share/po/de.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po: English proofreading (first pass)
+
+	* bootlook.pm, install_steps_interactive.pm, network/netconnect.pm,
+	network/drakfirewall.pm, standalone/mousedrake,
+	diskdrake/interactive.pm, Xconfig/monitor.pm, install_any.pm,
+	harddrake/v4l.pm, modules/interactive.pm, any.pm, harddrake/sound.pm,
+	services.pm, network/ethernet.pm, bootloader.pm: English proofreading by
+	Stew Benedicts
+
+2003/01/21  Pixel  <pixel@mandrakesoft.com>
+
+	* steps.pm: on error in acceptLicense, go back to selectLanguage (ie.
+	handle "Previous ->" correctly)
+
+	* Xconfig/various.pm, Xconfig/card.pm: have Xfree version at only one
+	place
+	(nb: it would be better to parse available package and get version from
+	it.)
+
+	* install_interactive.pm: remove or fix some "Previous"
+
+	* help.pm: "license" is now step "acceptLicense"
+
+	* interactive.pm: when the return value of ask_from_ and ask_from is not
+	used, do not have a
+	"Previous ->" or "Cancel" button (beware, black magic here :)
+
+	* interactive/gtk.pm: remove unused variable
+	(ask_fromW): very smart code to know which widget to focus (dilemna is:
+	"Next" vs first widget). One can also force focusing of first widget
+	using $common->{focus_first}
+	(ask_fromW): have "advanced" widgets above buttons, not below
+	(create_list): fix old bug (nb: this code must be unused)
+	(create_boxradio): need to set {focus_w} to the selected widget (nb:
+	this is ugly)
+	(create_boxradio, $may_go_to_next): no special case for "tab", gtk2
+	handles things better than gtk1
+	($set_all): pass the full_struct to the setters (this allows modifying
+	{focus_w}) (nb: this is ugly)
+
+	* install_gtk.pm: enlarge "steps" window a little
+	small enhancement to know which step is currently done
+
+	* ugtk2.pm: enlarge "steps" window a little
+	(create_okcancel): rework to prepare next move, "Next" and "Previous" on
+	the left, and @other buttons on the right
+	(create_hbox): do handle the layout parameter
+
+	* install_steps_interactive.pm: replace "Next" button with "Reboot" at
+	exitInstall step
+	remove or fix some "Previous"
+	(acceptLicense): handle "Previous ->" correctly, and simplify code
+	(esp. don't set useless_thing_accepted)
+
+	* any.pm (setupBootloader__mbr_or_not): add ability to skip and to put on
+	floppy
+	rework autologin dialog box
+	(selectLanguage): no "Previous ->" during install
+
+	* diskdrake/interactive.pm (Mount_point): use uniq() on suggested mount
+	points (otherwise the suggested mount point appears twice) (fixes bug
+	#954)
+
+	* install2.pm: don't prompt for license when useless_thing_accepted
+	(this used to be done in install_steps_interactive::acceptLicense)
+
+	* install_steps_gtk.pm: workaround set_active on Gtk2::CheckButton widgets
+	thinking undef is true :-(
+	(hopefully, gc will fix perl-GTK2!)
+	replace some "Ok" with "Next ->"
+
+	* Xconfig/main.pm: replace some "Ok" with "Next ->"
+
+2003/01/21  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Support for manufacturer-supplied PostScript PPDs also in
+	recommended
+	mode.
+	  - If "Foomatic + Postscript" is recommended driver for a printer and a
+	  manufacturer-supplied PPD file exists for it, the PPD file gets the
+	  recommended driver.
+	  - Tried to extract IEEE-1284 auto-detection info from the PPD files
+	but
+	  this takes too long time (40 sec for 800 PPDs).
+	  - Fixed long-standing bug in activation of auto-load of the USB
+	"printer"
+	  kernel module.
+
+2003/01/21  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/TODO: update
+
+	* share/po/fr.po: update french translation
+
+	* harddrake/sound.pm: handle proprietary drivers
+	if there's no alternative driver or if the current setting does not
+	please the user, let he pick any driver among multimedia/sound modules
+	category
+
+2003/01/20  alus
+
+	* share/po/pl.po: updated
+
+2003/01/20  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/adsl.pm: little cleanup
+
+	* network/network.pm: void label removed
+	  - zero conf is avaible in drakconnect, with/without dhcp
+	  - install tmdns and zcip packages when needed
+
+	* network/tools.pm: get username back in menu
+
+	* network/ethernet.pm: 
+	  - zero conf is avaible in drakconnect, with/without dhcp
+	  - install tmdns and zcip packages when needed
+
+2003/01/20  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/drakpxe: initial revision with translation message.
+
+	* Makefile.config: added drakpxe
+
+2003/01/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* Xconfig/test.pm: use gtk rather than qiv to display the background tile
+	in X test
+	fix Gtk2 port
+
+2003/01/20  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sr.po, share/po/fi.po, share/po/sp.po, share/po/tr.po: updated
+	Finnish, Serbian and Turkish files
+
+	* share/po/et.po: updated Estonian file
+
+	* keyboard.pm: small keyboard name change
+
+	* share/po/es.po, share/po/ar.po: updated Spanish and Arabic files
+
+2003/01/20  Till Kamppeter  <till@mandrakesoft.com>
+
+	* share/rpmsrate: Make flphoto getting onto the CDs.
+
+	* printer/main.pm: Improved printer/driver list entries for PostScript PPD
+	files.
+	Improve association of printers with database entries (preparation for
+	non-interactive print queue generation):
+	  - Make use of device ID strings in the Foomatic database
+	 - Association of generic printers when PDL (PCL, PCL-XL, PostScript)
+	could
+	   be auto-detected
+	 - Cleaned up entries from manufacturer-supplied PPDs for PostScript
+	   printers to try to match model names of Foomatic entries
+	 - Bug fixes on previous association mechanism
+
+	* detect_devices.pm, printer/printerdrake.pm: Improve association of
+	printers with database entries (preparation for
+	non-interactive print queue generation):
+	  - Make use of device ID strings in the Foomatic database
+	 - Association of generic printers when PDL (PCL, PCL-XL, PostScript)
+	could
+	   be auto-detected
+	 - Cleaned up entries from manufacturer-supplied PPDs for PostScript
+	   printers to try to match model names of Foomatic entries
+	 - Bug fixes on previous association mechanism
+
+2003/01/20  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/sound.pm: make all chkconfig calls be chrooted
+
+	* services.pm: fix prefix usage
+
+	* mouse.pm: fix gtk+-2 port
+
+	* standalone/draksec: use new help scheme just added to msec (this *does*
+	need a newer msec
+	package!!)
+
+	* standalone.pm: fix breakage introduced when lowering warning level
+
+2003/01/19  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/da.po, share/po/sq.po: updated Danish and Albanian files
+
+2003/01/18  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* tools/ppc/mapping, tools/ppc/magic: Update magic, mapping files for PPC
+	from Christian Walther
+
+2003/01/17  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm, network/ethernet.pm: 
+	  - some changes to dhcp behavior for beta2 (not clean yet)
+
+	* drakxtools.spec: 0.12mdk
+
+2003/01/17  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ru.po: updated po file
+
+	* share/po/it.po: updated Italian file
+
+2003/01/17  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/make_mdkinst_stage2: do not remove mdk_10.pcf in the ramdisk
+	(or handle it in lang.pm since it seems to be needed for greek display)
+
+2003/01/17  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* modules.pm: airport support for ppc
+
+2003/01/17  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: add some applications on club voting
+
+2003/01/16  alus
+
+	* share/po/pl.po: updated
+
+2003/01/16  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* Makefile.drakxtools: 
+	  - drakhelp moved to /usr/bin/
+
+	* standalone/drakhelp: 
+	  - checker
+	  - support gnome help
+	  - warn if documentation is not installed
+	  - syntax : drakhelp relative_link
+	example: drakhelp Quick_Startup.html/drakx.html
+	  - drakhelp will check the running wm and will launch kdehelpcenter
+	  with the correct URL after localizing the link.
+	  Otherwise, it launch a default browser: mozilla konqueror or galeon.
+
+	* standalone.pm: 
+	  - remove help callback (moved into drakhelp)
+
+	* Makefile.config: 
+	  - add drakhelp
+
+2003/01/16  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: 
+	  - fix /etc/hosts localhost.localdomain in localhost
+
+2003/01/16  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fixed not to ask group instead of
+	individual package selection.
+
+2003/01/16  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* keyboard.pm, lang.pm: Added some more English locales; and changed all
+	locale names using xx
+	notation to xx_YY notation (so it's easier to just append a ".UTF-8" in
+	case we provide a way to let the user choose if he wants UTF-8 or not)
+
+2003/01/16  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: workaround ref count perl bug
+
+	* share/step-orange-click.xpm, share/step-red-on.xpm,
+	share/step-orange.xpm, share/step-red-click.xpm,
+	share/step-green-on.xpm, install2.pm, share/step-green.xpm,
+	install_steps.pm, install_gtk.pm, share/step-green-click.xpm,
+	share/step-red.xpm, install_steps_interactive.pm, steps.pm,
+	share/step-orange-on.xpm: new steps window layout
+
+2003/01/16  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/harddrake2, services.pm: fix embedding
+
 2003/01/16  Daouda Lo  <daouda@mandrakesoft.com>
 
 	* standalone.pm: 
@@ -8234,7 +8577,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.768 2003/01/16 00:11:28 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.769 2003/01/16 14:30:23 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
