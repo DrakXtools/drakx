@@ -661,7 +661,7 @@ sub ask_fromW {
 
     $pack->pack_start(gtkshow($always_pack), 1, 1, 0);
     $advanced_pack = create_scrolled_window($advanced_pack, [ 'never', 'automatic' ], 'none');
-    $pack->pack_start($advanced_pack, 1, 1, 0);
+    $pack->pack_start($advanced_pack, 1, 1, 0) if @widgets_advanced;
     if ($buttons_pack) {
 	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
 	    $buttons_pack->set_size_request($::windowwidth * 0.9 - 20, -1);
