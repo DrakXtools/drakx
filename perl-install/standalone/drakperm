@@ -67,28 +67,43 @@ sub edit_callback {
     row_setting_dialog($iter);
 }
 
+my @buttons;
+
 sub del_callback {
     my ($tree, $iter) = $permList->get_selection->get_selected();
     $tree->remove($iter);
+    sensitive_buttons(0);
     $modified++;
 }
 
 sub down_callback {
-    #- broken
-    # my $row = ${$CURENT{clicked}}{row};
-    # $permList->row_move($row, $row+1);
-    # $permList->unselect_all;
-    # $permList->select_row($row+1,0);
-    # $CURENT{clicked}{row} = $row+1;
+    my ($model, $iter) = $permList->get_selection->get_selected;
+    return unless $iter;
+    my $new_iter = $model->iter_next($iter);
+    return unless $new_iter;
+    $model->move_after($iter, $new_iter);
+    $model->move_after($iter, $new_iter);
+    $permList->get_selection->select_iter($iter);
+    $permList->queue_draw;
+    $new_iter->free;
+    $iter->free;
 }
 
 sub up_callback {
-    #- broken
-    # my $row = ${$CURENT{clicked}}{row};
-    # $permList->row_move($row, $row-1);
-    # $permList->unselect_all;
-    # $permList->select_row($row-1,0);
-    # $CURENT{clicked}{row} = $row-1;
+    my ($model, $iter) = $permList->get_selection->get_selected;
+    return unless $iter;
+    my $path = $model->get_path($iter);
+    return unless $path;
+    $path->prev;
+    my $prev_iter = $model->get_iter($path);
+    $path->free;
+    return unless $prev_iter;
+    $model->move_before($iter, $prev_iter);
+    $model->move_before($iter, $prev_iter);
+    $permList->get_selection->select_iter($iter);
+    $permList->queue_draw;
+    $prev_iter->free;
+    $iter->free;
 }
 
 my $combo_sig = $combo_perm->entry->signal_connect( changed => sub { display_perm($combo_perm->entry->get_text , @_) });
@@ -110,7 +125,7 @@ $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                                               $combo_perm
 					     ),
                                     1, create_scrolled_window($permList),
-                                    0, my $up_down_box = gtkadd(Gtk2::HBox->new(0, 5),
+                                    0, my $up_down_box = gtkadd(Gtk2::HBox->new(0, 5), @buttons =
                                                                 map {
                                                                     gtkset_tip($tips, 
                                                                                gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[2]),
@@ -133,6 +148,14 @@ $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
 display_perm($default_perm_level);
 $combo_perm->entry->set_text($default_perm_level);
+
+$permList->get_selection()->signal_connect('changed' => sub {
+                                               my ($select) = @_;
+                                               my ($model, $iter) = $select->get_selected();
+                                               my $editable = $editable;
+                                               $editable = 0 unless $model;
+                                               sensitive_buttons($editable);
+                                           });
 
 $w->main;
 ugtk2->exit;
@@ -173,6 +196,7 @@ sub display_perm {
     }
     close F;
     $up_down_box->set_sensitive($editable);
+    sensitive_buttons(0) if $editable;
 	
     $prec_txt = $perm_level;
     undef(%CURENT);
@@ -368,4 +392,10 @@ sub get_right {
     $right - 2 >= 0 and $rght{write}=1 and $right = $right-2;
     $right - 1 >= 0 and $rght{execute}=1 and $right = $right-1;
     return %rght;
+}
+
+sub sensitive_buttons {
+    foreach my $i (0, 1, 3, 4) {
+        $buttons[$i]->set_sensitive($_[0]);
+    }
 }
