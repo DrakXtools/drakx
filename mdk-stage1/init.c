@@ -139,30 +139,31 @@ void doklog()
 		print_warning("couldn't open tty for syslog -- still using /tmp/syslog\n");
 
 	/* now open the syslog socket */
-	sockaddr.sun_family = AF_UNIX;
-	strncpy(sockaddr.sun_path, "/dev/log", UNIX_PATH_MAX);
-	sock = socket(AF_UNIX, SOCK_STREAM, 0);
-	if (sock < 0) {
-		printf("error creating socket: %d\n", errno);
-		sleep(5);
-	}
-
-	print_str_init(log, "] got socket\n");
-	if (bind(sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr.sun_family) + strlen(sockaddr.sun_path)))	{
-		print_str_init(log, "] bind error: ");
-		print_int_init(log, errno);
-		print_str_init(log, "\n");
-		sleep(5);
-	}
-
-	print_str_init(log, "] bound socket\n");
-	chmod("/dev/log", 0666);
-	if (listen(sock, 5)) {
-		print_str_init(log, "] listen error: ");
-		print_int_init(log, errno);
-		print_str_init(log, "\n");
-		sleep(5);
-	}
+// ############# LINUX 2.4 /dev/log IS BUGGED! --> apparently the syslogs can't reach me, and it's full up after a while
+//	  sockaddr.sun_family = AF_UNIX;
+//	  strncpy(sockaddr.sun_path, "/dev/log", UNIX_PATH_MAX);
+//	  sock = socket(AF_UNIX, SOCK_STREAM, 0);
+//	  if (sock < 0) {
+//		  printf("error creating socket: %d\n", errno);
+//		  sleep(5);
+//	  }
+//
+//	  print_str_init(log, "] got socket\n");
+//	  if (bind(sock, (struct sockaddr *) &sockaddr, sizeof(sockaddr.sun_family) + strlen(sockaddr.sun_path)))	{
+//		  print_str_init(log, "] bind error: ");
+//		  print_int_init(log, errno);
+//		  print_str_init(log, "\n");
+//		  sleep(5);
+//	  }
+//
+//	  print_str_init(log, "] bound socket\n");
+//	  chmod("/dev/log", 0666);
+//	  if (listen(sock, 5)) {
+//		  print_str_init(log, "] listen error: ");
+//		  print_int_init(log, errno);
+//		  print_str_init(log, "\n");
+//		  sleep(5);
+//	  }
 
 	/* disable on-console syslog output */
 	syslog(8, NULL, 1);
