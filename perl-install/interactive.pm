@@ -294,7 +294,7 @@ sub ask_from {
 
 
 sub ask_from_normalize {
-    my ($_o, $common, $l) = @_;
+    my ($o, $common, $l) = @_;
 
     ref($l) eq 'ARRAY' or internal_error('ask_from_normalize');
     foreach my $e (@$l) {
@@ -350,6 +350,7 @@ sub ask_from_normalize {
     if (!$common->{title} && $::isStandalone) {
 	($common->{title} = $0) =~ s|.*/||;
     }
+    $common->{interactive_help} ||= $o->{interactive_help};
     $common->{advanced_label} ||= N("Advanced");
     $common->{advanced_label_close} ||= N("Basic");
     $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
