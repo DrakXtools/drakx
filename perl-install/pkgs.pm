@@ -151,25 +151,10 @@ sub extractHeaders($$$) {
 }
 
 #- size and correction size functions for packages.
-#- invCorrectSize corrects size in the range 0 to 3Gb approximately, so
-#- it should not be used outside these levels.
-#- but since it is an inverted parabolic curve starting above 0, we can
-#- get a solution where X=Y at approximately 9.3Gb. we use this point as
-#- a limit to change the approximation to use a linear one.
-#- for information above this point, we have the corrected size below the
-#- original size wich is absurd, this point is named D below.
-my $A = -121568/100000000000; # -1.21568e-05; #- because perl does like that on some language (TO BE FIXED QUICKLY)
-my $B = 121561/100000; # 1.21561
-my $C = -239889/10000; # -23.9889 #- doesn't take hdlist's into account as getAvailableSpace will do it.
-my $D = (-sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A; #- $A is negative so a positive solution is with - sqrt ...
-sub correctSize {
-    my $csz = ($A * $_[0] + $B) * $_[0] + $C;
-    $csz > $_[0] ? $csz : $_[0]; #- size correction (in MB) should be above input argument (as $A is negative).
-}
-sub invCorrectSize {
-    my $sz = $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0];
-    $sz < $_[0] ? $sz : $_[0];
-}
+my $B = 1.20873;
+my $C = 4.98663; #- doesn't take hdlist's into account as getAvailableSpace will do it.
+sub correctSize { $B * $_[0] + $C }
+sub invCorrectSize { ($_[0] - $C) / $B }
 
 sub selectedSize {
     my ($packages) = @_;
