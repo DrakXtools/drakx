@@ -39,13 +39,18 @@ int main(int argc, char **argv)
 	vbe_get_edid_ranges(edid, &hmin, &hmax, &vmin, &vmax);
 	modelines = vbe_get_edid_modelines(edid);
 
-	printf(hmin ? "%d-%d\n" : "\n", hmin, hmax);
-	printf(vmin ? "%d-%d\n" : "\n", vmin, vmax);
+	printf(hmin ? "%d-%d kHz HorizSync\n" : "\n", hmin, hmax);
+	printf(vmin ? "%d-%d Hz VertRefresh\n" : "\n", vmin, vmax);
 
 	{ 
+	  char manufacturer[4];
 	  double size = sqrt(SQR(edid->max_size_horizontal) + 
 			     SQR(edid->max_size_vertical)) / 2.54;
-	  printf(size ? "%3.2f inches monitor (truly %3.2f')\n" : "\n", size * 1.08, size);
+	  manufacturer[0] = edid->manufacturer_name.char1 + 'A' - 1;
+	  manufacturer[1] = edid->manufacturer_name.char2 + 'A' - 1;
+	  manufacturer[2] = edid->manufacturer_name.char3 + 'A' - 1;
+	  manufacturer[3] = '\0';
+	  printf(size ? "%3.2f inches monitor (truly %3.2f')  EISA ID=%s%04x\n" : "\n", size * 1.08, size, manufacturer, edid->product_code);
 	}
 
 	for(j=0; modelines && (modelines[j].refresh != 0); j++){

@@ -114,9 +114,8 @@ sub readMonitorsDB {
 	/^#/ and next;
 	/^$/ and next;
 
-	my @fields = qw(vendor type eisa hsyncrange vsyncrange);
+	my @fields = qw(vendor type eisa hsyncrange vsyncrange dpms);
 	my @l = split /\s*;\s*/;
-	@l == @fields or log::l("bad line $lineno ($_)"), next;
 
 	my %l; @l{@fields} = @l;
 	if ($monitors{$l{type}}) {
@@ -492,6 +491,13 @@ sub monitorConfiguration(;$$) {
     }
 
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
+
+    if ($monitor->{EISA_ID}) {
+	if (my ($mon) = grep { $_->{eisa} eq $monitor->{EISA_ID} } values %monitors) {
+	    add2hash($monitor, $mon);
+	    return $monitor;
+	}
+    }
 
     my $good_default = (arch() =~ /ppc/ ? 'Apple|' : 'Generic|') . translate($good_default_monitor);
     $monitor->{type} ||=

@@ -207,9 +207,10 @@ sub getinfoFromDDC {
     }
     my ($h, $v, $size, @m) = @l;
 
-    $O->{hsyncrange} ||= chomp_($h);
-    $O->{vsyncrange} ||= chomp_($v);
+    $O->{hsyncrange} ||= $h =~ /^(\S*)/;
+    $O->{vsyncrange} ||= $v =~ /^(\S*)/;
     $O->{size} ||= to_float($size);
+    $O->{EISA_ID} = $1 if $size =~ /EISA ID: (\S*)/;
     $O->{modelines} ||= join '', @m;
     $o;
 }
