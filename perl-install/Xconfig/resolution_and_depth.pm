@@ -211,7 +211,7 @@ sub choose_gtk {
 
     my %monitor_images_x_res = do {
 	my @l = qw(640 800 1024 1152 1280 1400 1600 1920 2048);
-	my %h = map { $_ => [ gtkcreate_img("monitor-$_.png") ] } @l;
+	my %h = map { $_ => gtkcreate_img("monitor-$_.png") } @l;
 
 	#- for the other, use the biggest smaller
 	foreach my $x_res (uniq map { $_->{X} } @resolutions) {
