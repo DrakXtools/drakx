@@ -1,3 +1,69 @@
+2002/02/07  dam's  <damien@mandrakesoft.com>
+
+	* share/logo-mandrake.png: beta 2
+
+	* printerdrake.pm: corrected wizard pb
+
+	* my_gtk.pm: wizard fixes
+
+2002/02/07  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm (mount): precise the type when mounting in standalone (for smb,
+	nfs would not need it)
+
+	* diskdrake/smbnfs_gtk.pm: 
+	  - don't pop the "do you want to install samba?"
+	  - rwindow is not a window when embedded, so set_default_size only if
+	possible
+
+	* interactive.pm: fix (causing XFdrake to use a combo instead of a list)
+
+	* my_gtk.pm: ensure no more than one child is in the Plug
+
+	* standalone/diskdrake: handle --embedded xxx xxx
+
+	* interactive_gtk.pm (exit): ensure USR1 is sent to mcc
+
+2002/02/06  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: removed ugly pink and ugly left bar for wizard mode
+
+2002/02/06  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem, tools/oem-prepare: better handling of group linked
+	to hardware or options.
+
+2002/02/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: have frozen-bubble in GAMES at level 4
+
+2002/02/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/fr.po, share/po/fi.po, share/po/DrakX.pot: updated French file
+
+2002/02/06  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: Automatic configuration of the scanning part of HP's
+	multi-function devices.
+
+	* printerdrake.pm: Added some stuff for the Wizard mode.
+	Automatic configuration of the scanning part of HP's multi-function
+	devices.
+	Updated automatic package installation in printerdrake, no "kups" and
+	"qtcups" any more, but "gpr", "a2ps", and "hpoj", updated also
+	"rpmsrate" and "rpmsrate.server" appropriately.
+
+	* share/rpmsrate.server, share/rpmsrate: Added scanning packages to
+	INSTALL section, for HP MF device installation by printerdrake.
+	Updated automatic package installation in printerdrake, no "kups" and
+	"qtcups" any more, but "gpr", "a2ps", and "hpoj", updated also
+	"rpmsrate" and "rpmsrate.server" appropriately.
+
+2002/02/05  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Added automatic configuration of HPOJ for
+	HP's multi-function devices.
+
 2002/02/05  dam's  <damien@mandrakesoft.com>
 
 	* standalone/logdrake: wizard updated
