@@ -2379,8 +2379,10 @@ sub configure_hpoj {
 		    # (kernel mode with "printer"/"usblp" module for USB).
 		    run_program::rooted($::prefix, 
 					"ptal-mlcd", "$bus:probe",
-					"-device", 
-					$device, split(' ',$address_arg));
+					(($bus ne "par") ||
+					 (!$address_arg) ?
+					 ("-device", $device) : ()), 
+					split(' ',$address_arg));
 		} else {
 		    # Start ptal-mlcd daemon for user-mode USB devices
 		    # (all LIDIL MF devices as HP PSC 1xxx and OfficeJet 
@@ -2566,7 +2568,8 @@ init.version=2
 	    # because ptal-mlcd currently does no globbing:
 	    print $CONFIG "-device /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9 /dev/usb/lp10 /dev/usb/lp11 /dev/usb/lp12 /dev/usb/lp13 /dev/usb/lp14 /dev/usb/lp15";
 	} elsif ($bus eq "par") {
-	    print $CONFIG "$address_arg -device $device";
+	    print $CONFIG "$address_arg" .
+		(!$address_arg ? " -device $device" : "");
 	}
 	print $CONFIG "\n" .
 	    "\n" .
