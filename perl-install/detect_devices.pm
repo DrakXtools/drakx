@@ -806,12 +806,10 @@ sub computer_info() {
 	my $BIOS_Year = $BIOS->{string} =~ m!^Release Date:.*?(\d{4})!m && $1 ||
 	                $BIOS->{string} =~ m!^Release Date:.*?\d\d/\d\d/(\d\d)!m && "20$1";
 	
-	$dmidecode_infos = { 
+	+{ 
 	    isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Sub Notebook', 'Docking Station'),
 	    if_($BIOS_Year, BIOS_Year => $BIOS_Year),
 	};
-
-    $dmidecode_infos;
 }
 
 #- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
