@@ -983,7 +983,8 @@ sub install_urpmi {
                 my $dest = "/mnt/inst_iso";
                 $dir = "removable:/$dest/$_->{rpmsdir}";
                 -d "$::prefix$dest" or mkdir_p("$::prefix$dest");
-                $removable_device = "$p->{mntpoint}/$iso_path";
+                #- FIXME: don't use /mnt/hd but really try to find the mount point
+                $removable_device = ($p->{mntpoint} || "/mnt/hd") . "/$iso_path";
             } elsif ($curmethod eq 'cdrom') {
                 $removable_device = '/dev/cdrom';
             }
