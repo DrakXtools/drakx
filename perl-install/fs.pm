@@ -18,7 +18,7 @@ use loopback;
 
 
 sub read_fstab {
-    my ($file, $all_options) = @_;
+    my ($prefix, $file, $all_options) = @_;
 
     map {
 	my ($dev, $mntpoint, $type, $options, $freq, $passno) = split;
@@ -40,25 +40,31 @@ sub read_fstab {
 		}
 	    } split(',', $options));
 	}
+	my $h = { device => $dev, mntpoint => $mntpoint, type => $type, options => $options, if_($all_options, freq => $freq, passno => $passno) };
+
+	($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
 
 	if ($dev =~ m,/(tmp|dev)/,) {
-	    if (readlink($dev) =~ m|^[^/]+$|) {
-		$dev = readlink($dev);
+	    my $symlink = readlink("$prefix$dev");
+	    $dev =~ s,/(tmp|dev)/,,;
+
+	    if ($symlink =~ m|^[^/]+$|) {
+		$h->{device_alias} = $dev;
+		$h->{device} = $symlink;
 	    } else {
-		$dev =~ s,/(tmp|dev)/,,;
+		$h->{device} = $dev;
 	    }
 	}
-
-	{ device => $dev, mntpoint => $mntpoint, type => $type, options => $options, if_($all_options, freq => $freq, passno => $passno) };
-    } cat_($file);
+	$h;
+    } cat_("$prefix$file");
 }
 
 sub merge_fstabs {
     my ($fstab, @l) = @_;
 
     foreach my $p (@$fstab) {
-	my ($p2) = grep { $_->{device} eq $p->{device} } @l or next;
-	@l       = grep { $_->{device} ne $p->{device} } @l;
+	my ($p2) = grep { fsedit::is_same_hd($_, $p) } @l or next;
+	@l       = grep { !fsedit::is_same_hd($_, $p) } @l;
 
 	$p->{type} ne $p2->{type} && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
 	  log::l("err, fstab and partition table do not agree for $p->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type}))), next;
@@ -68,6 +74,10 @@ sub merge_fstabs {
 	$p->{type} ||= $p2->{type};
 	$p->{options} = $p2->{options} if $p->{type} eq 'defaults';
 	add2hash($p, $p2);
+	if ($p->{device} ne $p2->{device}) {
+	    print "HERE\n";
+	}
+	$p->{device_alias} ||= $p2->{device_alias} || $p2->{device} if $p->{device} ne $p2->{device};
     }
     @l;
 }
@@ -89,8 +99,8 @@ sub add2all_hds {
 sub merge_info_from_mtab {
     my ($fstab) = @_;
 
-    my @l1 = map {; { device => $_->{device}, type => fs2type('swap') } } read_fstab('/proc/swaps');
-    my @l2 = map { read_fstab($_) } '/etc/mtab', '/proc/mounts';
+    my @l1 = map {; { device => $_->{device}, type => fs2type('swap') } } read_fstab('', '/proc/swaps');
+    my @l2 = map { read_fstab('', $_) } '/etc/mtab', '/proc/mounts';
 
     foreach (@l1, @l2) {
 	if ($::isInstall && $_->{mntpoint} eq '/tmp/hdimage') {
@@ -105,7 +115,7 @@ sub merge_info_from_mtab {
 
 sub merge_info_from_fstab {
     my ($fstab, $prefix, $uniq) = @_;
-    my @l = grep { !($uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab)) } read_fstab("$prefix/etc/fstab", 'all_options');
+    my @l = grep { !($uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab)) } read_fstab($prefix, "/etc/fstab", 'all_options');
     merge_fstabs($fstab, @l);
 }
 
@@ -114,7 +124,7 @@ sub write_fstab {
     $prefix ||= '';
 
     my @l1 = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
-    my @l2 = read_fstab("$prefix/etc/fstab", 'all_options');
+    my @l2 = read_fstab($prefix, "/etc/fstab", 'all_options');
 
     my %new;
     my @l = map { 
@@ -146,13 +156,15 @@ sub write_fstab {
 	    my $options = $_->{options};
 	    my $type = type2fs($_);
 
+	    my $dev = $_->{device_alias} ? "/dev/$_->{device_alias}" : $device;
+
 	    # handle bloody supermount special case
 	    if ($options =~ /supermount/) {
-		$options = join(",", "dev=$device", "fs=$type", grep { $_ ne 'supermount' } split(':', $options));
-		($device, $type) = ($mntpoint, 'supermount');
+		$options = join(",", "dev=$dev", "fs=$type", grep { $_ ne 'supermount' } split(':', $options));
+		($dev, $type) = ($mntpoint, 'supermount');
 	    }
 
-	    [ $device, $mntpoint, $type, $options || 'defaults', $freq, $passno ];
+	    [ $dev, $mntpoint, $type, $options || 'defaults', $freq, $passno ];
 	} else {
 	    ()
 	}
@@ -357,8 +369,7 @@ sub set_removable_mntpoints {
 	    if (detect_devices::isZipDrive($_)) {
 		$name = 'zip';
 	    } elsif ($name eq 'fd') {
-		# first floppy is valid, others may not be
-		$name = $names{floppy} ? '' : 'floppy';
+		$name = 'floppy';
 	    } else {
 		log::l("set_removable_mntpoints: don't know what to with hd $_->{device}");
 		next;
@@ -379,7 +390,9 @@ sub get_raw_hds {
        detect_devices::floppies(), detect_devices::cdroms(), 
        (map { $_->{device} .= '4'; $_ } detect_devices::zips())
       ];
-    my @fstab = read_fstab("$prefix/etc/fstab", 'all_options');
+    (undef, $_->{major}, $_->{minor}) = devices::entry($_->{device}) foreach @{$all_hds->{raw_hds}};
+
+    my @fstab = read_fstab($prefix, "/etc/fstab", 'all_options');
     $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
     $all_hds->{special} = [

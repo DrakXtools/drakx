@@ -574,7 +574,7 @@ sub kdeicons_postinstall {
 	     'floppy-ls' => [ 'floppy', 'LS-120' ],
 	     'floppy' => [ 'floppy', 'Floppy' ],
     );
-    foreach (fs::read_fstab("$prefix/etc/fstab")) {
+    foreach (fs::read_fstab($prefix, "/etc/fstab")) {
 
 	my ($name_, $nb) = $_->{mntpoint} =~ m|.*/(\S+?)(\d*)$/|;
 	my ($name, $text) = @{$l{$name_} || []};

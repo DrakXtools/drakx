@@ -213,7 +213,7 @@ sub readProcPartitions {
 	$part->{size} *= 2;	# from KB to sectors
 	$part->{type} = typeOfPart($dev); 
 
-	delete @$part{'major', 'minor', 'dev'}; # cleanup
+	delete $part->{dev}; # cleanup
     }
     @parts;
 }
@@ -226,6 +226,15 @@ sub part2hd {
     my ($part, $all_hds) = @_;
     my ($hd) = grep { $part->{rootDevice} eq $_->{device} } all_hds($all_hds);
     $hd;
+}
+
+sub is_same_hd {
+    my ($hd1, $hd2) = @_;
+    if ($hd1->{major} && $hd2->{major}) {
+	$hd1->{major} == $hd2->{major} && $hd1->{minor} == $hd2->{minor};
+    } else {
+	$hd1->{device} eq $hd2->{device};
+    }
 }
 
 sub is_same_part {
