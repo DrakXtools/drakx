@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 17mdk
+Release: 18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -313,6 +313,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jan 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-18mdk
+- drakedm: when offering to restart dm, offer yes/no as choice rather
+  than ok/cancel (#6810)
+- drakdisk: sanitize buttons when working on mount points (smb,
+  webdav, ...)
+- drakfloppy: handle both kernel 2.4.x and 2.6.x (before size field
+  was not properly when switching between threes b/c we looked for
+  module.ko instead of module.o.gz and the like)
+- drakfont: renew GUI through subdialogs
+- localedrake: update languages list (pablo)
+- printerdrake: do not push anymore help menu at right
+
+
 * Mon Jan 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-17mdk
 - drakfirewall: allow a range of ports (anthill bug #267) (pixel)
 - drakfont:
