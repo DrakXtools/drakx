@@ -375,12 +375,11 @@ sub remove_empty_extended {
 	}
 	$_->{normal};
     } @{$hd->{extended}};
-    adjust_main_extended($hd, 1);
+    adjust_main_extended($hd);
 }
 
 sub adjust_main_extended {
-    my ($hd, $no_auto_win_extended) = @_;
-    $no_auto_win_extended = 1;
+    my ($hd) = @_;
 
     if (!is_empty_array_ref $hd->{extended}) {
 	my ($l, @l) = @{$hd->{extended}};
@@ -397,7 +396,6 @@ sub adjust_main_extended {
 	}
 	$l->{start} = $hd->{primary}{extended}{start} = $start;
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
-	$hd->{primary}{extended}{type} = $only_linux ? 0x85 : $has_win_lba ? 0xf : 0x5 if !$::expert && !$no_auto_win_extended;
     }
     unless (@{$hd->{extended} || []} || !$hd->{primary}{extended}) {
 	%{$hd->{primary}{extended}} = (); #- modify the raw entry
