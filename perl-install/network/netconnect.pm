@@ -1087,7 +1087,7 @@ notation (for example, 1.2.3.4).")),
                     },
                     data =>  sub {
                         [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ sort keys %eth_intf ],
-                            format => sub { translate($eth_intf{$_[0]}) } } ];
+                            format => sub { translate($eth_intf{$_[0]}) }, allow_empty_list => 1 } ];
                     },
                     post => sub {
                         if ($ntf_name) {
