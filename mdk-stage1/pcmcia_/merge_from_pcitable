@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+# This program will show on stdout yenta_socket stuff from pcitable
+# which is not in probe.c
+
+use MDK::Common;
+
+my @probelines = cat_('probe.c');
+my $status = 0;
+foreach (@probelines) {
+    if ($status == 0) {
+	/^pci_id_t pci_id\[\] = {/ and $status = 1;
+    } elsif ($status == 1) {
+	/^\s*{\s*0x([\da-f]+),\s*0x([\da-f]+),\s*"([^"]*)",\s*"([^"]*)"\s*}/
+	  and push @probes, { vendor => $1, device => $2, tag => $3, name => $4, vd => "$1$2" };
+	/^};/ and last;
+    }
+}
+
+require '/usr/bin/merge2pcitable.pl';
+my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
+
+foreach my $k (sort keys %$drivers) {
+    $v = $drivers->{$k};
+    $k =~ /^(....)(....)/;
+    push @pcitable, { vendor => $1, device => $2, driver => $v->[0], name => $v->[1], vd => "$1$2" };
+}
+
+foreach my $p (@pcitable) {
+    next if $p->{driver} ne 'yenta_socket';
+    member($p->{vd}, map { $_->{vd} } @probes) or
+      print "    { 0x$p->{vendor}, 0x$p->{device}, \"..\", \"$p->{name}\" },\n";
+}
