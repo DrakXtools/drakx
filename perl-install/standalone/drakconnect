@@ -74,7 +74,7 @@ add_intf();
 
 my @all_cards;
 
-sub init {
+sub init() {
     require ugtk2;
     ugtk2->import(qw(:create :dialogs :helpers :wrappers));
     reread_net_conf();
@@ -195,7 +195,7 @@ gtkflush();
 $window1->main;
 ugtk2->exit(0);
 
-sub add_intf {
+sub add_intf() {
     $::Wizard_title = N("Network & Internet Configuration");
     $::isWizard = 1;
     network::netconnect::load_conf($netcnx, $netc, $intf);
@@ -203,7 +203,7 @@ sub add_intf {
     $in->exit(0);
 }
 
-sub del_intf {
+sub del_intf() {
     $::Wizard_title = N("Remove a network interface");
     $::isWizard = 1;
     $::Wizard_no_previous = 1;
