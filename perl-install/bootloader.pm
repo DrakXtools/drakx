@@ -1107,9 +1107,7 @@ sub write_grub {
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
     my $file2grub = sub {
-	warn "file2grub: fstab is ", join(' ', map { "$_->{device}:$_->{mntpoint}" } @$fstab), "\n";
 	my ($part, $file) = fsedit::file2part($fstab, $_[0], 'keep_simple_symlinks');
-	warn "file2grub: $part->{device}:$file\n";
 	device2grub($part, \@sorted_hds) . $file;
     };
     {
