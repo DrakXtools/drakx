@@ -31,6 +31,7 @@ sub new {
     Gtk->init;
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
+    while (my $e = shift @tempory::objects) { $e->DESTROY }
     push @interactive::objects, $o unless $opts{no_interactive_objects};
 
     top(@grabbed)->grab_remove if @grabbed;

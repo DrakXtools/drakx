@@ -225,6 +225,8 @@ sub wait_message_endW {
 sub kill {
     my ($o) = @_;
     $o->{before_killing} ||= 0;
+
+    while (my $e = shift @tempory::objects) { $e->DESTROY }
     while (@interactive::objects > $o->{before_killing}) {
 	my $w = pop @interactive::objects;
 	$w->destroy;
