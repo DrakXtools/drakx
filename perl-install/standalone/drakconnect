@@ -45,6 +45,7 @@ use POSIX ":sys_wait_h";
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
 #my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
 
+$ugtk2::wm_icon = "drakconnect";
 my $in = 'interactive'->vnew('su');
 if ($in->isa('interactive::gtk')) {
     require ugtk2;
@@ -79,7 +80,6 @@ unless ($::isEmbedded) {
     $window1->{rwindow}->set_position('center');
     $window1->{rwindow}->set_title(N("Network configuration (%d adapters)", scalar @all_cards));
     $window1->{rwindow}->set_size_request(-1, -1);
-    $window1->{rwindow}->set_icon(gtkcreate_pixbuf("drakconnect"));
 }
 $window1->{rwindow}->set_border_width(10);
 
@@ -195,7 +195,6 @@ sub manage {
     unless ($::isEmbedded) {
         $window->{rwindow}->set_position('center');
         $window->{rwindow}->set_title(N("Manage connections")); # translation availlable in mcc domain => we need merging
-        $window->{rwindow}->set_icon(gtkcreate_pixbuf("drakconnect"));
     }
 
     my $notebook = Gtk2::Notebook->new;

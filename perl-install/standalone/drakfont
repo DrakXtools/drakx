@@ -91,6 +91,8 @@ use common;
 
 require_root_capability();
 
+$ugtk2::wm_icon = "drakfont";
+
 #   global variables needed by each functions
 my $xlsfonts = 0;
 my $windows  = 0;
@@ -470,11 +472,9 @@ sub interactive_mode() {
     $window1 = ugtk2->new('drakfont');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     if ($::isEmbedded) {
-        $::Plug->set_icon(gtkcreate_pixbuf("drakfont"));
     } else {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("DrakFont"));
-        $window1->{window}->set_icon(gtkcreate_pixbuf("drakfont"));
     }
     
     my $button = {};

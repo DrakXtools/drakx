@@ -128,6 +128,7 @@ my @menu_items =
      ]
     );
 
+$ugtk2::wm_icon = "harddrake";
 $in = 'interactive'->vnew('su'); #require_root_capability();
 
 my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
@@ -148,7 +149,6 @@ if ($::isEmbedded) {
     $::main_window = $w->{rwindow};
     ($menubar, $factory) = create_factory_menu($w->{rwindow}, @menu_items);
     $w->{window}->set_size_request(805, 550);
-    $w->{window}->set_icon(gtkcreate_pixbuf("harddrake"));
 }
 
 my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String", "Glib::Int");

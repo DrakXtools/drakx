@@ -293,12 +293,12 @@ my @pages = (
 #$in = 'interactive'->vnew('su'); # require_root_capability();
 $in = 'interactive'->vnew;
 
+$ugtk2::wm_icon = "drakups";
 $w = ugtk2->new(N("DrakUPS"));
 if (!$::isEmbedded) {
     $::main_window = $w->{rwindow};
     $w->{window}->set_size_request(500, 550);
     $w->{rwindow}->set_title(N("DrakUPS"));
-    $w->{rwindow}->set_icon(gtkcreate_pixbuf("drakups"));
 }
 
 #------------------------------------------------------------------

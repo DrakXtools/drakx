@@ -47,13 +47,13 @@ my $isTail = 1 if $isFile;
 $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
+$ugtk2::wm_icon = "logdrake";
 my $explain_title = N("Mandrake Tools Logs");
 my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logdrake"));
 
 unless ($::isEmbedded) {
     $my_win->{window}->set_border_width(5);
     #$my_win->{window}->set_default_size(540,460);
-    $my_win->{window}->set_icon(gtkcreate_pixbuf("logdrake"));
 }
 $my_win->{window}->signal_connect(delete_event => \&quit);
 
