@@ -14,5 +14,5 @@ WriteMakefile(
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
-    'INC'	=> '-I/usr/include/rpm `gtk-config --cflags`',     # e.g., '-I/usr/include/other' 
+    'INC'	=> '-I/usr/include/rpm `gtk-config --cflags` `glib-config --cflags`',     # e.g., '-I/usr/include/other' 
 );
