@@ -38,7 +38,7 @@ our %alsa2oss =
      "snd-cmipci"  => [ "cmpci" ],
      "snd-cs4231"  => [ "unknown" ], # isa
      "snd-cs4232"  => [ "cs4232" ],  # isa
-     "snd-cs4236"  => [ "unknown" ], # isa
+     "snd-cs4236"  => [ "ad1848" ], # isa
      "snd-cs4281"  => [ "cs4281" ],
      "snd-cs46xx"  => [ "cs46xx" ],
      "snd-dt0197h" => [ "unknown" ], # isa
@@ -83,7 +83,7 @@ our %alsa2oss =
 our %oss2alsa = 
     (
      "ad1816"  => [ "snd-ad1816a" ],
-     "ad1848"  => [ "snd-ad1848" ],
+     "ad1848"  => [ "snd-ad1848", "snd-cs4236" ],
      "ad1889"  => [ "unknown" ],
      "ali5455" => [ "snd-intel8x0" ],
      "audigy"  => [ "snd-emu10k1" ],
