@@ -15,7 +15,7 @@ use c;
 #- lower bound on the left ( aka 90 means [90-100[ )
 my %compssList = (
   90 => __("must have"), #- every install have these packages (unless hand de-selected in expert, or not enough room)
-  80 => __("important"), #- every custom install have these packages (unless not enough space)
+  80 => __("important"), #- every beginner/custom install have these packages (unless not enough space)
 		         #- has minimum X install (XFree86 + icewm)(normal)
   70 => __("very nice"), #- KDE(normal)
   60 => __("nice"),      #- gnome(normal)
@@ -25,7 +25,13 @@ my %compssList = (
   20 => __("maybe"),
   10 => __("useless"),
    0 => __("garbage"),
+#- if the package requires locales-LANG and LANG is chosen, rating += 90
+ -10 => __("i18n (important)"), #- every install in the corresponding lang have these packages
+ -20 => __("i18n (very nice)"), #- every beginner/custom install in the corresponding lang have theses packages
+ -30 => __("i18n (nice)"),
 );
+#- HACK: rating += 10 if the group is selected and it is not a kde package (aka name !~ /^k/)
+
 
 my @skip_list = qw(
 XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono

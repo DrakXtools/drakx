@@ -224,8 +224,8 @@ sub verifyParts_ {
 	foreach (@_) {
 	    next if !$i || !$_ || $i == $_ || isWholedisk($i); #- avoid testing twice on whole disk for simplicity :-)
 	    isWholedisk($_) ?
-		verifyInside($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!", $i->{size} >> 9, $_->{size} >> 9:
-		verifyNotOverlap($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 9, $_->{size} >> 9;
+		verifyInside($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!", $i->{size} >> 11, $_->{size} >> 11:
+		verifyNotOverlap($i, $_) || cdie sprintf "partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 11, $_->{size} >> 11;
 	}
     }
 }
