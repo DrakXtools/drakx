@@ -973,7 +973,6 @@ sub write_XF86Config {
     print G $keyboardsection_part3_v4;
 
     $O->{xkb_model} ||= 
-      arch() =~ /ppc/ ? 'macintosh' :
       arch() =~ /sparc/ ? 'sun' :
       $O->{xkb_keymap} eq 'br' ? 'abnt2' : 'pc105';
     print F qq(    XkbModel        "$O->{xkb_model}"\n);

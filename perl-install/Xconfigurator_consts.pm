@@ -511,44 +511,6 @@ $keyboardsection_part3_v4 = '
     Option "XkbGeometry" "sun(type5)"
     Option "XkbSymbols"  "sun/us(sun5)"
 ';
-} elsif (arch() =~ /ppc/) {
-$keyboardsection_part3 = '
-# To customise the XKB settings to suit your keyboard, modify the
-# lines below (which are the defaults).  For example, for a non-U.S.
-# keyboard, you will probably want to use:
-#    XkbModel    "pc102"
-# If you have a US Microsoft Natural keyboard, you can use:
-#    XkbModel    "microsoft"
-#
-# Then to change the language, change the Layout setting.
-# For example, a german layout can be obtained with:
-#    XkbLayout   "de"
-# or:
-#    XkbLayout   "de"
-#    XkbVariant  "nodeadkeys"
-#
-# If you\'d like to switch the positions of your capslock and
-# control keys, use:
-#    XkbOptions  "ctrl:swapcaps"
-
-# These are the default XKB settings for XFree86
-#    XkbRules    "xfree86"
-#    XkbModel    "pc101"
-#    XkbLayout   "us"
-#    XkbVariant  ""
-#    XkbOptions  ""
-
-    XkbKeycodes     "xfree86"
-    XkbTypes        "default"
-    XkbCompat       "default"
-    XkbSymbols      "macintosh/us"
-    XkbGeometry     "macintosh"
-    XkbRules        "xfree86"
-';
-
-$keyboardsection_part3_v4 = '
-    Option "XkbRules" "xfree86"
-';	
 } else {
 $keyboardsection_part3 = '
 # To customise the XKB settings to suit your keyboard, modify the
@@ -688,6 +650,14 @@ Section "Modes"
     Modeline "832x624"    57      832  876  940 1152   624  625  628  667 -hsync -vsync
     # Apple PowerBook G3
     Modeline "800x600"    100     800  816  824  840   600  616  624  640 -hsync -vsync
+    # Apple TI Powerbook 
+    Modeline "1152x768"   78.741 1152 1173 1269 1440   768  769  772  800 +vsync +vsync
+    # Pismo Firewire G3   
+    Modeline "1024x768"   65     1024 1032 1176 1344   768  771  777  806 -hsync -vsync
+    # iBook2
+    Modeline "1024x768"   65     1024 1048 1184 1344   768  771  777  806 -hsync -vsync
+    # HiRes Apple Studio Display
+    Modeline "1280x1024"  135    1280 1288 1392 1664  1024 1027 1030 1064
 EndSection
 ';
 $modelines_text = '

@@ -151,11 +151,6 @@ arch() =~ /^sparc/ ? (
  "uk" => [ __("UK keyboard"),    "sunt5-uk",    "gb" ],
  "us" => [ __("US keyboard"),    "sunkeymap",   "us" ],
 ) : (
-arch() eq "ppc" ? (
- "de_nodeadkeys" => [ __("German"), "mac-de-latin1-nodeadkeys", "de(nodeadkeys)" ],
- "fr" => [ __("French"),         "mac-fr2-ext",   "fr" ],
- "us" => [ __("US keyboard"),    "mac-us-ext",  "us" ],
-) : (
  "al" => [ __("Albanian"), "al", "al" ],
  "am_old" => [ __("Armenian (old)"),	"am_old",	"am(old)" ],
  "am" => [ __("Armenian (typewriter)"),	"am-armscii8",	"am" ],
@@ -240,7 +235,7 @@ arch() eq "ppc" ? (
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
  "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn-tcvn", "vn(toggle)" ], 
  "yu" => [ __("Yugoslavian (latin)"), "yu", "hr" ],
-)),
+),
 );
 
 #-######################################################################################
@@ -394,6 +389,13 @@ sub write {
 		       });
     setVarsInSh("$prefix/etc/sysconfig/keyboard", $config);
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or log::l("dumpkeys failed");
+    if (arch() =~ /ppc/) {
+	my $s = "dev.mac_hid.keyboard_sends_linux_keycodes = 1";
+	substInFile { 
+            $_ = '' if /^\Qdev.mac_hid.keyboard_sends_linux_keycodes/;
+            $_ .= $s if eof;
+        } "$prefix/etc/sysctl.conf";
+    }
 }
 
 sub read_raw {
