@@ -84,7 +84,7 @@
 #		rsync
 #		perl Expect
 	
-# BUGS :
+# BUGS:
 #DONE		restore->other_media->next->previous => crash ...
 #DONE		selection des sources a inclure dans le backup cd. 
 #DONE		help -> ok after install_rpm
@@ -101,7 +101,7 @@
 #		6 - total backup.( all partitions wanted, windows partitions for example!)
 #		    dump use for total backup.
 #		7 - custom deamon
-#	    10- backend : --resore_all, --restore_sys, --restore_users
+#	    10- backend: --resore_all, --restore_sys, --restore_users
 #WHAT IS THIS?
 #			  --build_cd_autoinst 	
 #		12- cpio use !!
@@ -749,7 +749,7 @@ sub ftp_client {
     use Net::FTP; 
     my $ftp;
 
-    $DEBUG and print "file list to send : $_\n "  foreach @file_list_to_send_by_ftp;
+    $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
     if ($DEBUG && $interactive) { $ftp = Net::FTP->new($host_name, Debug => 1) or return(1) }
     elsif ($interactive)  {  $ftp = Net::FTP->new($host_name, Debug => 0) or return(1) }
     else {  $ftp = Net::FTP->new($host_name, Debug => 0) or return(1) }
@@ -865,7 +865,7 @@ return(1);
 }
 
 sub ssh_client {
-    $DEBUG and print "file list to send : $_\n "  foreach @file_list_to_send_by_ftp;
+    $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
 	my $command;
 	my $value;
 	
@@ -892,7 +892,7 @@ sub ssh_client {
 }
 
 sub webdav_client {
-    $DEBUG and print "file list to send : $_\n "  foreach @file_list_to_send_by_ftp;
+    $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
 	if (!(-e "$user_home/.sitecopy/drakbackup")) {
 		my $command = "sitecopy -f $host_path";
 		spawn_progress($command, "Initializing sitecopy");
@@ -911,7 +911,7 @@ sub webdav_client {
 }
 
 sub rsync_client {
-    $DEBUG and print "file list to send : $_\n "  foreach @file_list_to_send_by_ftp;
+    $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
 	my $rsync_cmd = "rsync -tv $save_path/* ";
 	$rsync_cmd = $rsync_cmd . "--password-file=$cfg_dir/rsync.user " if ($passwd_user ne '');
 	$rsync_cmd = $rsync_cmd . "$login_user\@" if ($login_user ne '');
@@ -1341,7 +1341,7 @@ sub build_backup_files {
 	#- leave this one alone for now - works well
 	#- integrate with other methods later
     if (($where_net && !$daemon && ($net_proto eq 'ftp')) || ($daemon && ($daemon_media eq 'ftp'))) {
-		$results .= _("file list sent by FTP : %s\n ", $_)  foreach @file_list_to_send_by_ftp;
+		$results .= _("file list sent by FTP: %s\n ", $_)  foreach @file_list_to_send_by_ftp;
 		$interactive and build_backup_ftp_status();
 		if (ftp_client()) { 
 	    	$results .= _("\n FTP connection problem: It was not possible to send your backup files by FTP.\n");
@@ -2323,7 +2323,7 @@ sub advanced_options{
 # 			 0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _("Use .backupignore files")), 0),
 				    0, new Gtk::VBox(0,10),
 				    0, gtkpack_(new Gtk::HBox(0,10),
-						0, my $check_mail = new Gtk::CheckButton(_("Send mail report after each backup to :")),
+						0, my $check_mail = new Gtk::CheckButton(_("Send mail report after each backup to:")),
 						1, new Gtk::HBox(0,10),
 						0, my $mail_entry = new Gtk::Entry(),
 					),
@@ -2588,7 +2588,7 @@ sub system_state {
         $backup_user and $system_state .= "\t\t$_\n" foreach @user_list;
         @list_other and $system_state .= _("\n- Other Files:\n"); 
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
-        $where_hd and $system_state .= _("\n- Save on Hard drive on path : %s\n", $save_path);
+        $where_hd and $system_state .= _("\n- Save on Hard drive on path: %s\n", $save_path);
 
 		if (($del_hd_files) && (($where_cd) || ($where_tape) || ($where_net)) && ($daemon_media ne 'hd'))  {
 			$system_state .= _("\n- Delete hard drive tar files after backup.\n");	
@@ -2599,13 +2599,13 @@ sub system_state {
 		$erase_media = 'YES' if (($media_erase) && ($where_cd || $where_tape)); 
 		$where_cd and $system_state .= _("\n- Burn to CD");
 		$where_cd and $cdrw and $system_state .= _("RW");
-		$where_cd and $system_state .= _(" on device : %s", $cd_device);
+		$where_cd and $system_state .= _(" on device: %s", $cd_device);
 		$where_cd and $multi_session and $system_state .= _(" (multi-session)");
-		$where_tape and $system_state .= _("\n- Save to Tape on device : %s", $tape_device);
+		$where_tape and $system_state .= _("\n- Save to Tape on device: %s", $tape_device);
 		(($where_cd || $where_tape) && $media_erase) and $system_state .= _("\t\tErase=%s", $erase_media);
 		($where_cd || $where_tape) and $system_state .= "\n";
 		
-		$where_net and $system_state .= _("\n- Save via %s on host : %s\n", $net_proto, $host_name);
+		$where_net and $system_state .= _("\n- Save via %s on host: %s\n", $net_proto, $host_name);
 		$where_net and $system_state .= _("\t\t user name: %s\n\t\t on path: %s \n", $login_user, $host_path);
 		$system_state .= _("\n- Options:\n");
 		$backup_sys or $system_state .= _("\tDo not include System Files\n");
@@ -2616,7 +2616,7 @@ sub system_state {
 			$system_state .= _("\tBackups use tar and gzip\n");
 		}   
 
-		$daemon_media and $system_state .= _("\n- Daemon (%s) include :\n", $when_space);
+		$daemon_media and $system_state .= _("\n- Daemon (%s) include:\n", $when_space);
 		($daemon_media eq 'hd') and $system_state .= _("\t-Hard drive.\n");    
 		($daemon_media eq 'cd') and $system_state .= _("\t-CDROM.\n");
 		($daemon_media eq 'tape') and $system_state .= _("\t-Tape \n");    
@@ -3633,7 +3633,7 @@ sub restore_ftp {
 	my ($cat_entry, $hostname, $hostpath, $username, $userpass, @restore_files) = @_;
 	my $indv_files = @restore_files;
 		
-    $DEBUG and print "file list to retrieve : $cat_entry\n ";
+    $DEBUG and print "file list to retrieve: $cat_entry\n ";
     if ($DEBUG && $interactive) { $ftp = Net::FTP->new($hostname, Debug => 1) or return(1) }
     elsif ($interactive)  {  $ftp = Net::FTP->new($hostname, Debug => 0) or return(1) }
     else {  $ftp = Net::FTP->new($hostname, Debug => 0) or return(1) }
