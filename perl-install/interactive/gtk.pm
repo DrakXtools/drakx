@@ -730,9 +730,15 @@ sub wait_messageW {
 			pop_it => !$::isInstall, 
 			modal => 1, 
 			if__($::main_window, transient_for => $::main_window),
-			child => gtknew('VBox', padding => 4, border_width => 10, children_loose => \@l));
+			child => 
+			  gtknew('VBox', padding => 4, border_width => 10, children => [ 
+			      0, $l[0],
+			      map { (1, $_) } @l[1..$#l],
+			  ])
+		      );
+    $Window->signal_connect(expose_event => sub { $Window->{displayed} = 1; 0 });
     $Window->{wait_messageW} = $l[-1];
-    mygtk2::sync($Window) if !$Window->{displayed};
+    mygtk2::sync($Window) while !$Window->{displayed};
     $Window;
 }
 sub wait_message_nextW {
@@ -741,7 +747,7 @@ sub wait_message_nextW {
     return if $msg eq $Window->{wait_messageW}->get_text; #- needed otherwise no expose_event :(
     $Window->{displayed} = 0;
     $Window->{wait_messageW}->set($msg);
-    mygtk2::sync($Window) if !$Window->{displayed};
+    mygtk2::sync($Window) while !$Window->{displayed};
 }
 sub wait_message_endW {
     my ($_o, $Window) = @_;
