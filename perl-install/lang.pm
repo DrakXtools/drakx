@@ -823,7 +823,7 @@ sub charset2kde_font {
 
 # this define pango name fonts (like "NimbusSans L") depending
 # on the "charset" defined by language array. This allows to selecting
-# an appropriate font for each language.
+# an appropriate font for each language for the installer only.
 my %charset2pango_font = (
   'tis620' =>      "Norasi 17",
   'utf_ar' =>      "Kacst-Qr 14",
