@@ -414,10 +414,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- for mandrake_firstime
     touch "$o->{prefix}/var/lock/TMP_1ST";
 
-    #- create /dev/dvd symlink
-    each_index {
-	any::devfssymlinkf($_->{device}, 'dvd' . ($::i ? $::i + 1 : ''), $o->{prefix});
-    } grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms__faking_ide_scsi();
+    any::config_dvd($o->{prefix});
 
     any::writeandclean_ldsoconf($o->{prefix});
 
@@ -782,7 +779,7 @@ sub setupBootloaderBefore {
     my ($o) = @_;
 
     require bootloader;
-    if (my @l = (grep { $_->{interface_type} eq 'ide' } detect_devices::burners(), detect_devices::zips())) {
+    if (my @l = (grep { $_->{interface_type} eq 'ide' } detect_devices::burners(), detect_devices::raw_zips())) {
 	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
     }
     if ($o->{miscellaneous}{HDPARM}) {

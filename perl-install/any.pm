@@ -917,7 +917,7 @@ sub devfssymlinkf {
     my ($if, $of, $prefix) = @_;
     symlinkf($if, "$prefix/dev/$of");
 
-    output_p("$prefix/etc/devfs/conf.d/$of", 
+    output_p("$prefix/etc/devfs/conf.d/$of.conf", 
 "REGISTER	^$if\$	CFUNCTION GLOBAL symlink $if $of
 UNREGISTER	^$if\$	CFUNCTION GLOBAL unlink $of
 ");
@@ -1075,6 +1075,34 @@ sub get_secure_level {
     cat_("/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.1 msec
       ${{ getVarsFromSh("$prefix/etc/sysconfig/msec") }}{SECURE_LEVEL}  || #- 8.2 msec
 	$ENV{SECURE_LEVEL};
+}
+
+sub alloc_raw_device {
+    my ($prefix, $device) = @_;
+    my $used = 0;
+    my $raw_dev;
+    substInFile {
+	$used = max($used, $1) if m|^\s*/dev/raw/raw(\d+)|;
+	if (eof) {
+	    $raw_dev = "raw/raw" . ($used + 1);
+	    $_ .= "/dev/$raw_dev /dev/$device\n";
+	}
+    } "$prefix/etc/sysconfig/rawdevices";
+    $raw_dev;
+}
+
+sub config_dvd {
+    my ($prefix) = @_;
+    if (my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms__faking_ide_scsi()) {
+	log::l("configuring DVD");
+	#- create /dev/dvd symlink
+	each_index {
+	    devfssymlinkf($_->{device}, 'dvd' . ($::i ? $::i + 1 : ''), $prefix);
+	} @dvds;
+	if (my $raw_dev = alloc_raw_device($prefix, 'dvd')) {
+	    devfssymlinkf($raw_dev, 'rdvd', $prefix);
+	}	
+    }
 }
 
 1;

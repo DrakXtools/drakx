@@ -38,9 +38,10 @@ sub hds         { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemo
 sub cdroms      { grep { $_->{media_type} eq 'cdrom' } get() }
 sub burners     { grep { isBurner($_) } cdroms() }
 sub dvdroms     { grep { isDvdDrive($_) } cdroms() }
-sub zips        { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
+sub raw_zips    { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
 #-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazDrive($_) } get() }
 sub ls120s      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
+sub zips        { map { $_->{device} .= 4; $_ } raw_zips() }
 
 sub cdroms__faking_ide_scsi {
     my @l = cdroms();
@@ -57,7 +58,7 @@ sub cdroms__faking_ide_scsi {
     @l;
 }
 sub zips__faking_ide_scsi {
-    my @l = zips();
+    my @l = raw_zips();
     return @l if $::isStandalone;
     if (my @l_ide = grep { $_->{interface_type} eq 'ide' } @l) {
 	require modules;
@@ -68,7 +69,7 @@ sub zips__faking_ide_scsi {
 	    $e->{device} = "sd" . chr(ord('a') + $nb++);
 	}
     }
-    @l;
+    map { $_->{device} .= 4; $_ } @l;
 }
 
 sub floppies() {
