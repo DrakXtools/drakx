@@ -12,43 +12,7 @@ use network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
-my	%conf;
-#- intro is called only in standalone.
-sub intro {
-    my ($prefix, $netcnx, $in) = @_;
-    my ($netc, $mouse, $intf) = ({}, {}, {});
-    my $text;
-    my $connected;
-    my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
-    my $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
-    my $connect_prog = "/etc/sysconfig/network-scripts/net_cnx_pg";
-    read_net_conf($prefix, $netcnx, $netc);
-    if (!$::isWizard) {
-	if (connected()) {
-	    $text = N("You are currently connected to the Internet.") . (-e $disconnect_file ? N("\nYou can disconnect or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
-	    $connected = 1;
-	} else {
-	    $text = N("You are not currently connected to the Internet.") . (-e $connect_file ? N("\nYou can connect to the Internet or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
-	    $connected = 0;
-	}
-	my @l = (
-	       if_(!$connected && -e $connect_file, { description => N("Connect"), c => 1 }),
-	       if_($connected && -e $disconnect_file, { description => N("Disconnect"), c => 2 }),
-	       { description => N("Configure the connection"), c => 3 },
-	       { description => N("Cancel"), c => 4 },
-	      );
-	my $e = $in->ask_from_listf(N("Internet connection & configuration"),
-				    translate($text),
-				    sub { $_[0]{description} },
-				    \@l);
-	run_program::rooted($prefix, $connect_prog) if $e->{c} == 1;
-	run_program::rooted($prefix, $disconnect_file) if $e->{c} == 2;
-	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if $e->{c} == 3;
-	$in->exit(0) if $e->{c} == 4;
-    } else {
-	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0);
-    }
-}
+my %conf;
 
 sub detect {
     my ($auto_detect, $net_install) = @_;
@@ -115,10 +79,15 @@ sub init_globals {
 }
 
 sub main {
-    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $_direct_fr, $o_noauto) = @_;
+    my ($prefix, $netcnx, $in, $o_netc, $o_mouse, $o_intf, $o_first_time, $o_noauto) = @_;
+    my $netc  = $o_netc  || {};
+    my $mouse = $o_mouse || {};
+    my $intf  = $o_intf  || {};
+    my $first_time = $o_first_time || 0;
+
     init_globals($in, $prefix);
     $netc->{minus_one} = 0; #When one configure an eth in dhcp without gateway
-    $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
+    $::isStandalone and read_net_conf($prefix, $netcnx, $netc);
     $netc->{NET_DEVICE} = $netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
     $netc->{NET_INTERFACE} = $netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
     network::network::read_all_conf($prefix, $netc, $intf);
@@ -255,14 +224,12 @@ The configuration will now be applied to your system.
 N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems.")) : 
       N("Problems occured during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
-    if ($::isWizard) {
-	$::Wizard_no_previous = 1;
-	$::Wizard_finished = 1;
-	eval { $in->ask_okcancel(N("Network Configuration"), $m, 1) }; $in->exit(0) if $@ =~ /wizcancel/;
-	undef $::Wizard_no_previous;
-	undef $::Wizard_finished;
-    } else { $::isStandalone and $in->ask_warn('', $m) }
-
+    $::Wizard_no_previous = 1;
+    $::Wizard_finished = 1;
+    eval { $in->ask_okcancel(N("Network Configuration"), $m, 1) }; $in->exit(0) if $@ =~ /wizcancel/;
+    undef $::Wizard_no_previous;
+    undef $::Wizard_finished;
+    
   step_5:
     $network_configured or network::configureNetwork2($in, $prefix, $netc, $intf);
 
