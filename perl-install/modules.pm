@@ -379,6 +379,19 @@ sub load {
     }
     $conf{$name}{options} = join " ", @options if @options;
 }
+sub load_multi {
+    my $f; $f = sub { map { $f->(@{$deps{$_}}), $_ } @_ };
+    my %l; my @l = 
+      grep { !$conf{$_}{loaded} }
+      grep { my $o = $l{$_}; $l{$_} = 1; !$o }
+      $f->(@_);
+
+    $::testing and log::l("i would install modules @l"), return;
+
+    run_program::run("extract_archive", "/lib/modules.cz2", "/tmp", map { "$_.o" } @l);
+    run_program::run(["insmod_", "insmod"], "/tmp/$_.o") and $conf{$_}{loaded} = 1 foreach @l;
+    unlink map { "/tmp/$_.o" } @l;
+}
 
 sub unload($;$) {
     my ($m, $remove_alias) = @_; 

@@ -76,10 +76,11 @@ sub get_geometry($) {
     my %geom; @geom{qw(heads sectors cylinders start)} = unpack "CCSL", $g;
 
     #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
-    my $total = c::total_sectors(fileno F);
-    $geom{totalcylinders} = $total / $geom{heads} * $geom{sectors};
+    if (my $total = c::total_sectors(fileno F)) {
+	$geom{cylinders} = $total / $geom{heads} / $geom{sectors};
+    }
 
-    { geom => \%geom, totalsectors => $total };
+    { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
 }
 
 sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }

@@ -619,11 +619,11 @@ sub main {
     }
 
     modules::unload($_) foreach qw(vfat msdos fat);
-    modules::load_deps("/modules/modules.dep");
+    modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
-    eval { modules::load($_, 'prereq') } foreach qw(ide-probe ide-disk ide-cd sd_mod af_packet);
+    modules::load_multi(qw(ide-probe ide-disk ide-cd sd_mod af_packet));
     install_any::lnx4win_preinstall() if $o->{lnx4win};
 
     #-the main cycle

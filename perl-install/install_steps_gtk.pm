@@ -178,11 +178,12 @@ sub new($$) {
 		unless (fork) {
 		    exec $_[0], "-dpms","-s" ,"240", "-allowMouseOpenFail", "-xf86config", $f or exit 1;
 		}
-		foreach (1..15) {
+		foreach (1..60) {
 		    sleep 1;
 		    return 0 if !$ok;
 		    return 1 if c::Xtest($ENV{DISPLAY});
 		}
+		log::l("Timeout!!");
 		0;
 	    };
 	    my @servers = qw(FBDev VGA16); #-)

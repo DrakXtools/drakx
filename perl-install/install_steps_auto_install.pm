@@ -26,14 +26,14 @@ sub ask_warn {
 sub errorInStep {
     print "error :(\n"; 
     print "switch to console f2 for a shell\n";
-    print "press to return to reboot\n";
+    print "Press <Enter> to reboot\n";
     <STDIN>;
     c::_exit(0);
 }
 
 sub exitInstall {
     print "Auto installation complete\n";
-    print "Press <enter> to reboot\n";
+    print "Press <Enter> to reboot\n";
     <STDIN>;
 }
 
