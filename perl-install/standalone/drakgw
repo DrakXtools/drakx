@@ -240,16 +240,20 @@ I am about to setup your Local Area Network with that adapter.", $format->($devi
 }
 log::explanations("Choosing network device: $device");
 
+my $lan_address = $conf->{NETWORK} ||= "192.168.1.0";
+my $server_ip = $conf->{IPADDR} ||= "192.168.1.1";
+my $nameserver_ip = network::network::read_dhcpd_conf_raw()->{domain_name_servers}[0] ||= "192.168.1.1";
+my $netmask = network::network::read_dhcpd_conf_raw()->{subnet_mask}[0] ||= "255.255.255.0";
+my $start_range = network::network::read_dhcpd_conf_raw()->{dynamic_bootp}[0] ||= "16";
+my $end_range = network::network::read_dhcpd_conf_raw()->{dynamic_bootp}[1] ||= "253";
+my $default_lease = network::network::read_dhcpd_conf_raw()->{max_lease_time}[0] ||= "21600";
+my $max_lease = network::network::read_dhcpd_conf_raw()->{default_lease_time}[0] ||= "43200";
+my $internal_domain_name = network::network::read_dhcpd_conf_raw()->{domain_name}[0] ||= network::network::read_resolv_conf_raw()->{nameserver}[0] ||= "homeland.net";
 
-my $lan_address = "192.168.1.0";
-my $server_ip = "192.168.1.1";
-my $nameserver_ip = "192.168.1.1";
-my $netmask = "255.255.255.0";
-my $start_range = "16";
-my $end_range = "253";
-my $default_lease = "21600";
-my $max_lease = "43200";
-my $internal_domain_name = "homeland.net";
+#use Data::Dumper;
+#print Dumper(network::network::read_resolv_conf_raw()->{nameserver})."\n";
+#print network::network::read_resolv_conf_raw()->{nameserver}[0]."\n";
+#print Dumper(network::network::read_dhcpd_conf_raw())."\n";
 
 my $reconf_dhcp_server_intf = 1;
 
@@ -277,7 +281,7 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
     if ($auto ne N("Yes")) {
 	$reconf_dhcp_server_intf = 0;
 	$server_ip = $conf->{IPADDR};
-	$nameserver_ip = $conf->{IPADDR};
+	$nameserver_ip = network::network::read_dhcpd_conf_raw()->{domain_name_servers}[0] ||= $conf->{IPADDR};
 	$lan_address = $conf->{NETWORK};
 	$in->ask_from('',
 		      N("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
