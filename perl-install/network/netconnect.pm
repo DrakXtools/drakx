@@ -1262,8 +1262,8 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                                 help => N("By default search domain will be set from the fully-qualified host name") },
                               { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
                               if_(@all_cards > 1,
-                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ sort keys %all_eth_intf ],
-                                    format => sub { $all_eth_intf{$_[0]} } },
+                                  { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => [ N("None"), sort keys %all_eth_intf ],
+                                    format => sub { $all_eth_intf{$_[0]} || $_[0] } },
                                  ),
                              ),
                         ];
@@ -1280,8 +1280,10 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                             return 1;
                         }
                     },
-                    #post => $handle_multiple_cnx,
-                    next => "zeroconf",
+                    post => sub {
+                        $netc->{GATEWAYDEV} eq N("None") and delete $netc->{GATEWAYDEV};
+                        return "zeroconf";
+                    }
                    },
 
 
