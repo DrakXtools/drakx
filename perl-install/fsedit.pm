@@ -19,11 +19,11 @@ use fs;
 
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize => 5500 << 11 },
+    { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize => 6000 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  250 << 11 },
     { mntpoint => "/home", size => 300 << 11, type =>0x483, ratio => 3 },
   ], N_("with /usr") => [
-    { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize => 1000 << 11 },
+    { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize => 2000 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  250 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize => 4000 << 11 },
     { mntpoint => "/home", size => 100 << 11, type =>0x483, ratio => 3 },
