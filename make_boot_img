@@ -95,12 +95,12 @@ sub msg_boot_img {
     initrd("${mnt}2", "$mnt/$type.rdz");
     
     my $timeout = $ks ? 1 : 72;
+    my $setmode = !($type eq 'hd') && "mode 0x101\n";
     output("$mnt/syslinux.cfg", "
 default linux
 prompt 1
 timeout $timeout
-mode 0x101
-display boot.msg
+${setmode}display boot.msg
 F1 help.msg
 F2 boot.msg
 label linux
