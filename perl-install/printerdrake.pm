@@ -161,7 +161,7 @@ _("Uniprint driver options") => { val => \$printer->{BITSPERPIXEL}, type => 'lis
 _("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', not_edit => 1, list => \@col } ), ) : (),
 $db_entry{GSDRIVER} ne 'TEXT' && $db_entry{GSDRIVER} ne 'POSTSCRIPT' && $db_entry{GSDRIVER} ne 'ppa' ? (
 _("Print text as PostScript?") => { val => \$printer->{ASCII_TO_PS}, type => 'bool' }, ) : (),
-_("Reverse page order") => { val => \$printer->{REVERSE_ORDER}, type => 'bool' },
+#+_("Reverse page order") => { val => \$printer->{REVERSE_ORDER}, type => 'bool' },
 $db_entry{GSDRIVER} ne 'POSTSCRIPT' ? (
 _("Fix stair-stepping text?") => { val => \$printer->{CRLF}, type => 'bool' },
 ) : (),
