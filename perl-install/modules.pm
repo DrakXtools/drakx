@@ -77,7 +77,7 @@ arch() =~ /^sparc/ ? (
 #******(missing-2.4)  "fmv18x" => "fmv18x",
 #******(missing-2.4)    "ibmtr" => "Token Ring Tropic",
 #******(missing-2.4)    "olympic" => "olympic",
-#obsolete  "plip" => "PLIP (parallel port)",
+  "plip" => "PLIP (parallel port)",
 #******(missing-2.4)  "rl100a" => "rl100a",
   "sb1000" => "sb1000",
 #******(missing-2.4)  "sbni" => "sbni",
@@ -94,8 +94,8 @@ arch() =~ /^sparc/ ? (
   "af_packet" => "packet socket",
   "nfs" => "Network File System (nfs)",
   "lockd" => "lockd",
-# was needed by plip  "parport" => "parport",
-# was needed by plip  "parport_pc" => "parport_pc",
+  "parport" => "parport",
+  "parport_pc" => "parport_pc",
   "sunrpc" => "sunrpc",
 }],
 [ 'isdn', {
@@ -163,8 +163,8 @@ arch() =~ /^sparc/ ? (
   "eata" => "EATA SCSI PM2x24/PM3224",
   "eata_pio" => "EATA PIO Adapters",
   "eata_dma" => "EATA DMA Adapters",
-# really needed??  "ppa" => "Iomega PPA3 (parallel port Zip)",
-# really needed??  "imm" => "Iomega Zip (new driver)",
+  "ppa" => "Iomega PPA3 (parallel port Zip)",
+  "imm" => "Iomega Zip (new driver)",
 ),
 }],
 [ 'disk_raw', {
@@ -340,6 +340,11 @@ gdth eata eata_pio eata_dma
 my @skip_modules_on_stage1 = (
   arch() =~ /alpha/ ? qw(sb1000) : (),
   "apa1480_cb",
+  "imm",
+  "ppa",
+  "parport",
+  "parport_pc",
+  "plip",
 );
 
 
