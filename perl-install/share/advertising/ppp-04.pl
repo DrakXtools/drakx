@@ -11,7 +11,7 @@ $title = "";
          N("   * Create, edit and share office documents with OpenOffice.org"),
 		 N("   * Take charge of your personal data with the integrated personal information suites: Kontact and Evolution"),
 		 N("   * Browse the Web with Mozilla and Konqueror"),
-		 N("   * Participate in online chat with Gaim"),
+		 N("   * Participate in online chat with Kopete"),
 		 N("   * Listen to audio CDs and music files with KsCD and Totem"),
 		 N("   * Edit images and photos with The Gimp"),
 		 N("   * Plus much more")); 
