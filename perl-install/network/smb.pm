@@ -3,14 +3,22 @@ package network::smb;
 use common;
 use network::network;
 
+
 sub check {
     my ($in) = @_;
+
+    my $pkg = 'samba-client';
     my $f = '/usr/bin/nmblookup';
-    -e $f or $in->do_pkgs->install('samba-client');
-    -e $f or $in->ask_warn('', "Mandatory package samba-client is missing"), return;
+    if (! -e $f) {
+	$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) or return;
+	$in->do_pkgs->install($pkg);
+    }
+    if (! -e $f) {
+	$in->ask_warn('', _("Mandatory package %s is missing", $pkg));
+	return;
+    }
     1;
 }
-
 
 sub find_servers() {
     my (undef, @l) = `nmblookup "*"`;

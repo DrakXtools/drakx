@@ -7,9 +7,16 @@ use log;
 sub check {
     my ($in) = @_;
 
+    my $pkg = 'nfs-utils-clients';
     my $f = '/usr/sbin/showmount';
-    -e $f or $in->do_pkgs->install('nfs-utils-clients');
-    -e $f or $in->ask_warn('', "Mandatory package nfs-utils-clients is missing"), return;
+    if (! -e $f) {
+	$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) or return;
+	$in->do_pkgs->install($pkg);
+    }
+    if (! -e $f) {
+	$in->ask_warn('', _("Mandatory package %s is missing", $pkg));
+	return;
+    }
     1;
 }
 
