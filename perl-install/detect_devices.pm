@@ -507,7 +507,7 @@ sub getSpeedtouch() {
 }
 
 sub getBewan() {
-    matching_desc__regexp('Bewan Systems\|.*ADSL|BEWAN ADSL USB');
+    matching_desc__regexp('Bewan Systems\|.*ADSL|BEWAN ADSL USB|\[Unicorn\]');
 }
 sub getSagem() {
     matching_driver('eagle-usb');
