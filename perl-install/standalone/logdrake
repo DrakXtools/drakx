@@ -1,0 +1,496 @@
+#! /usr/bin/perl
+# $Id$
+
+# Copyright (C) 2001 MandrakeSoft
+# Yves Duret <yduret at mandrakesoft.com>
+# some code is Copyright: (C) 1999, Michael T. Babcock <mikebabcock@pobox.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+
+use POSIX;
+use Gtk;
+use lib qw(/usr/lib/libDrakX);
+use interactive;
+use standalone;
+use any;
+use Config;
+init Gtk;
+Gtk->set_locale;
+use my_gtk qw(:helpers :wrappers);
+
+use MDK::Common;
+
+#-------------------------------------------------------------
+# i18n routines
+# IMPORTANT: next two routines have to be redefined here to
+#         get correct namespace (drakconf instead of libDrakX)
+#         (This version is now UTF8 compliant - Sg 2001-08-18)
+#-------------------------------------------------------------
+
+sub _ {
+    my $s = shift @_; my $t = translate($s);
+    sprintf $t, @_;
+}
+
+sub translate {
+    my ($s) = @_;
+    $s ? c::dgettext('drakconf', $s) : '';
+}
+
+$::isInstall and die "Not supported during install.\n";
+
+my $in = 'interactive'->vnew('su', 'default');
+
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+if ($::isEmbedded) {
+  print "EMBED\n";
+  print "parent XID\t$::XID\n";
+  print "mcc pid\t$::CCPID\n";
+}
+
+#- parse arguments list.
+for (@ARGV) {
+    /^--version$/ and die 'version: $Id$ '."\n";
+    /^--help$/ and die 'logdrake [--version] [--file=myfyle] [--word=myword]';
+    /^--file=(.*)$/ and do { $::isFile = ($::File) = $1; next };
+    /^--word=(.*)$/ and do { $::isWord = ($::Word) = $1; next };
+}
+
+$::isTail=1 if ($::isFile);
+$|= 1 if ($::isTail);
+my $h=chomp_(`hostname -s`);
+
+my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+$window->signal_connect( delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
+$window->set_title( _("logdrake") );
+$window->set_policy(1, 1, 1);
+$window->border_width (5) unless ($::isEmbedded);
+#$window->set_default_size( 540,460 );
+
+my $cal = gtkset_sensitive(new Gtk::Calendar(),0);
+my (undef,undef,undef,$mday) = localtime(time);
+$cal->select_day($mday);
+my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
+my $cal_mode=0;
+my $cal_butt = gtksignal_connect(new Gtk::CheckButton(_("Show only for this day")), clicked =>sub{$cal_mode =!$cal_mode; gtkset_sensitive($cal,$cal_mode);});
+
+### menus definition
+# the menus are not shown
+# but they provides shiny shortcut like C-q
+my @menu_items = ( 
+		  { path => _("/_File"), type => '<Branch>' },
+		  { path => _("/File/_New"), accelerator => _("<control>N"), callback => \&print_hello },
+		  { path => _("/File/_Open"), accelerator => _("<control>O"),callback => \&print_hello },
+		  { path => _("/File/_Save"), accelerator => _("<control>S"),callback => \&save },
+		  { path => _("/File/Save _As") },
+		  { path => _("/File/-"),type => '<Separator>' },
+		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
+		  { path => _("/_Options"), type => '<Branch>' },
+		  { path => _("/Options/Test") },
+		  { path => _("/_Help"),type => '<LastBranch>' },
+		  { path => _("/Help/_About...") } 
+		 );
+my $menubar = get_main_menu( $window );
+######### menus end
+
+
+########## font and colors
+my $n = Gtk::Gdk::Font->fontset_load(_("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"));
+my $b = Gtk::Gdk::Font->fontset_load(_("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"));
+
+#$black    = "\033[30m";
+#$red      = "\033[31m";
+#$green    = "\033[32m";
+#$yellow   = "\033[33m";
+#$blue     = "\033[34m";
+#$magenta  = "\033[35m";
+#$purple   = "\033[35m";
+#$cyan     = "\033[36m";
+#$white    = "\033[37m";
+#$darkgray = "\033[30m";
+
+my $white    = my_gtk::gtkcolor(50400, 655, 20000);
+my $black    = my_gtk::gtkcolor(0, 0, 0);
+my $red      = my_gtk::gtkcolor(0xFFFF, 655, 655);
+my $green    = my_gtk::gtkcolor(0x0, 0x9898,0x0);
+my $yellow   = my_gtk::gtkcolor(0xFFFF, 0xD7D7, 0);
+my $blue     = my_gtk::gtkcolor(655, 655, 0xFFFF);
+my $magenta  = my_gtk::gtkcolor(0xFFFF, 655, 0xFFFF);
+my $purple   = my_gtk::gtkcolor(0xA0A0, 0x2020, 0xF0F0);
+my $cyan     = my_gtk::gtkcolor(0x0, 0x9898, 0x9898);
+my $darkgray = my_gtk::gtkcolor(0x2F2F, 0x4F4F, 0x4F4F);
+
+    
+# Define global terms:
+# Define good notables:
+my @word_good=("starting\n", "Freeing", "Detected", "starting.", "accepted.\n", "authenticated.\n", "Ready", "active", "reloading", "saved;", "restarting", "ONLINE\n");
+my @word_warn=("dangling", "closed.\n", "Assuming", "root", "root\n", "exiting\n", "missing", "Ignored", "adminalert:", "deleting", "OFFLINE\n");
+my @word_bad=("bad");
+my @word_note=("LOGIN", "DHCP_OFFER", "optimized", "reset:", "unloaded", "disconnected", "connect", "Successful", "registered\n");
+my @line_good=("up", "DHCP_ACK", "Cleaned", "Initializing", "Starting", "success", "successfully", "alive", "found", "ONLINE\n");
+my @line_warn=("warning:", "WARNING:", "invalid", "obsolete", "bad", "Password", "detected", "timeout", "timeout:", "attackalert:", "wrong", "Lame", "FAILED", "failing", "unknown", "obsolete", "stopped.\n", "terminating.", "disabled\n", "disabled", "Lost");
+my @line_bad=("DENY", "lost", "shutting", "dead", "DHCP_NAK", "failure;", "Unable", "inactive", "terminating", "refused", "rejected", "down", "OFFLINE\n", "error\n", "ERROR\n", "ERROR:", "error", "ERROR", "error:", "failed:");
+
+# Define specifics:
+my @daemons=("named");
+
+# Now define what we want to use when:
+my $col_good = $green;
+my $col_warn = $yellow;
+my $col_bad = $red;
+my $col_note = $purple;
+my $col=$cyan;
+
+######### font and colors end
+
+my %files = (
+	     "auth" => { file => "/var/log/auth.log", desc => _("authentification") },
+	     "user" => { file => "/var/log/user.log", desc => _("user") },
+	     "messages" => { file => "/var/log/messages", desc => _("messages") },
+	     "syslog" => { file => "/var/log/syslog", desc => _("syslog") }
+);
+
+#### far from window
+gtkadd($window,
+       gtkpack_(new Gtk::VBox(0,5),
+		0, _("A tool to monitor your logs"),
+		if_ (!$::isFile, 0, gtkadd(new Gtk::Frame(_("Settings")),
+					   gtkpack__(new Gtk::VBox(0,2),
+						     gtkpack__(new Gtk::VBox(0,2),
+							       # _("Show lines"),
+							       gtkpack__(new Gtk::HBox(0,0),
+									 " " . _("matching") . " ", $e_yes = new Gtk::Entry(),
+									 " " . _("but not matching") . " ", $e_no = new Gtk::Entry()
+									)
+							      ),
+						     # _("tips: you can use OR"),
+						     gtkpack_(new Gtk::HBox(0,0),
+							      1, gtkadd(gtkset_border_width(new Gtk::Frame(_("Choose file")),2),
+									gtkpack (gtkset_border_width(new Gtk::VBox(0,0),0),
+										 map { ${"b_". $_} = new Gtk::CheckButton($files{$_}{desc}) } keys %files,
+										)
+								       ),
+							      0, gtkadd(gtkset_border_width(new Gtk::Frame(_("Calendar")),2),
+									gtkpack__(gtkset_border_width(new Gtk::VBox(0,0),5),
+										  $cal_butt, $cal
+										 )
+								       )
+							      ),
+						     gtksignal_connect(new Gtk::Button(_("search")), clicked => \&search)
+						    )
+					  )
+		    ),
+		1, gtkadd(new Gtk::Frame(_("Content of the file")),
+			  createScrolledWindow(my $log_text = new Gtk::Text(undef, undef))
+			 ),
+		0, gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
+			   gtksignal_connect(new Gtk::Button (_("Save")), clicked => \&save),
+			   gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => sub {$::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0)})
+			  )
+       
+	       )
+       
+      );
+
+$::isFile and gtkset_usize($log_text,400,500);
+$window->realize;
+$window->show_all();
+search() if ($::isFile);
+Gtk->main_iteration while Gtk->events_pending;
+$::isEmbedded and kill 'USR2', $::CCPID;
+Gtk->main;
+
+#-------------------------------------------------------------
+# search functions
+#-------------------------------------------------------------
+sub search {
+    $log_text->backward_delete($log_text->get_length());
+    $log_text->freeze();
+    if ($::isFile) {
+	parse_file($::File);
+    } else {
+	foreach (keys %files) {
+	    parse_file($files{$_}{file}) if ${$::{"b_". $_}}->active 
+	};
+    }
+    $log_text->thaw();
+    Gtk->main_iteration while Gtk->events_pending;    
+}
+
+sub parse_file {
+  my $file = $_[0];
+
+  $file =~ s/\.gz$//;
+  my $i=0;
+  gtkadd(my $win_pb = (gtkset_modal new Gtk::Window(), 1),
+	 gtkpack(new Gtk::VBox(5,0), 
+		 " " . _("please wait, parsing file: %s", $files{$_}{desc}) . " ",
+		 my $pbar = new Gtk::ProgressBar()
+		)
+	);
+  $win_pb->set_position('center');
+  $win_pb->realize();
+  $win_pb->show_all();
+  my $ey = $e_yes->get_chars(0, -1);
+  my $en = $e_no->get_chars(0, -1);
+  $ey =~ s/ OR /\|/;
+  $ey = $ey .($::Word) if ($::isWord);
+
+  if ($cal_mode) {
+      my ($year, $month, $day) = $cal->get_date();
+      $ey= $months[$month]."\\s{1,2}$day\\s.*$ey.*\n";
+  }
+
+  my @all=catMaybeCompressed ($file);
+  my $taille= @all;
+  foreach (@all) {
+      $i++;
+      if ($i % 10) { 
+	  $pbar->update($i/$taille);
+	  Gtk->main_iteration while Gtk->events_pending;
+      }
+      
+      if (($en eq "") and /$ey/i)     {logcolorize($_); next}
+      if ((! /$en/i) and /$ey/i)      {logcolorize($_); next}
+      if ((! /$en/i) and ($ey eq "")) {logcolorize($_); next}
+  }
+  $win_pb->destroy();
+
+  if ($::isTail) {
+      open F, $file or die "E: $!";
+      while (<F>) {}; #to prevent to output the file twice..
+      $log_text->set_point($log_text->get_length());
+      my $timer = Gtk->timeout_add( 1000, \&input_callback);
+  }     
+}
+
+sub input_callback  {
+    logcolorize($_) while <F>;
+    seek F, 0, 1;
+}
+
+
+##########################################################################################
+
+sub logcolorize {
+
+    # we get date & time if it is date & time (dmesg)
+    s/(\D{3} .. \d\d:\d\d:\d\d )//;
+    $timestamp=$1;
+    @rec = split;
+
+    log_output($cyan,$timestamp,$b); # date & time if any...
+    log_output(($rec[0] eq $h) ? $blue : $col,"$rec[0] ",$b);  # hostname
+    
+    if ($rec[1] eq "last") {
+	log_output($green," last message repeated ",$n);
+	log_output($green, $rec[4], $b);
+	log_output($green," times\n",$n);
+	return;
+    }
+    # Extract PID if present
+    if ($rec[1] =~ /\[(\d+)\]\:/) {
+	my($pid) = $1;
+	$rec[1]=~s/\[$1\]\:// ;
+	log_output ($green, $rec[1] ."[",$n);
+	log_output ($black, $pid,$b);
+	log_output ($green, "]: ",$n);
+    }
+    else {
+	log_output($green, $rec[1] ." ",$n);
+    }
+
+ 
+    for ($therest=(2); $therest<=$#rec; $therest++) {
+	$col=$cyan;
+
+	# Check for keywords to highlight
+	foreach (@word_good) { $col=$col_good if ($_ eq $rec[$therest]);}
+	foreach (@word_warn) { $col=$col_warn if ($_ eq $rec[$therest]);}
+	foreach (@word_bad)  { $col=$col_bad  if ($_ eq $rec[$therest]);}
+	foreach (@word_note) { $col=$col_note if ($_ eq $rec[$therest]);}
+	
+ 	# Watch for words that indicate entire lines should be highlighted
+ 	#foreach (@line_good) { $col=$col_good if ($_ eq $rec[$therest]);}
+ 	#foreach (@line_warn) { $col=$col_warn if ($_ eq $rec[$therest]);}
+	#foreach (@line_bad)  { $col=$col_bad  if ($_ eq $rec[$therest]);}
+ 	
+	log_output($col,"$rec[$therest] ",$n);
+    }
+    log_output($black,"\n",$n);
+}
+
+
+sub log_output {
+      $log_text->insert($_[2],$_[0], undef,$_[1]);
+}
+
+
+#-------------------------------------------------------------
+# menu callback functions
+#-------------------------------------------------------------
+
+
+sub save {
+    #$file_dialog = new Gtk::FileSelection(_("Save as.."));
+    #$file_dialog->show();
+    $yy= $in->ask_file(_("Save as.."),"/root") or return;
+    output($yy,$log_text->get_chars(0,$log_text->get_length()));
+}
+
+sub print_hello {
+  print( "mcdtg !\n" );
+}
+
+sub get_main_menu {
+  my ($window) = @_;
+
+  my $accel_group = new Gtk::AccelGroup();
+  my $item_factory = new Gtk::ItemFactory( 'Gtk::MenuBar', '<main>', $accel_group );
+  $item_factory->create_items( @menu_items );
+  $window->add_accel_group( $accel_group );
+  return ( $item_factory->get_widget( '<main>' ) );
+}
+
+sub create_dialog {
+    my ($label, $c) = @_;
+    my $ret = 0;
+    my $dialog = new Gtk::Dialog;
+    $dialog->signal_connect ( delete_event => sub {Gtk->main_quit();});
+    $dialog->set_title(_("logdrake"));
+    $dialog->border_width(10);
+    $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
+
+    my $button = new Gtk::Button _("OK");
+    $button->can_default(1);
+    $button->signal_connect(clicked => sub { $ret=1; $dialog->destroy(); Gtk->main_quit(); });
+    $dialog->action_area->pack_start($button, 1, 1, 0);
+    $button->grab_default;
+
+    if ($c) {
+	my $button2 = new Gtk::Button _("Cancel");
+	$button2->signal_connect(clicked => sub { $ret=0; $dialog->destroy(); Gtk->main_quit(); });
+	$button2->can_default(1);
+	$dialog->action_area->pack_start($button2, 1, 1, 0);
+    }
+
+    $dialog->show_all;
+    Gtk->main();
+    $ret;
+}
+
+sub destroy_window {
+	my($widget, $windowref, $w2) = @_;
+	$$windowref = undef;
+	$w2 = undef if defined $w2;
+	0;
+}
+
+
+# log
+# $Log$
+# Revision 1.1  2001/12/13 15:47:23  yduret
+# moving from soft/control-center to here, since there will be a console based version
+#
+# Revision 1.29  2001/09/15 15:44:22  siegel
+# added missing space in "matching" line
+#
+# Revision 1.28  2001/09/15 15:34:55  siegel
+# added missing _()
+#
+# Revision 1.27  2001/09/05 16:07:22  warly
+# fix regexp for day matching
+#
+# Revision 1.26  2001/09/03 20:34:37  yduret
+# remove ok boutton taht does nothing !
+#
+# Revision 1.25  2001/09/03 20:27:29  yduret
+# fix proper call to kill 'USRx'
+#
+# Revision 1.24  2001/09/03 20:26:25  yduret
+# fix
+#
+# Revision 1.23  2001/08/28 15:43:01  yduret
+# fix window size in embedded mode
+#
+# Revision 1.22  2001/08/27 12:22:03  yduret
+# back from chamonix
+#
+# Revision 1.21  2001/08/20 15:04:55  siegel
+# added "Gtk->set_locale;"
+#
+# Revision 1.20  2001/08/18 19:46:35  siegel
+# made i18n UTF8 compliant
+#
+# Revision 1.19  2001/08/13 09:57:55  yduret
+# added a timeout to watch file
+#
+# Revision 1.18  2001/08/10 10:36:17  yduret
+# fixes
+#
+# Revision 1.17  2001/08/10 10:20:53  yduret
+# calendar added more
+#
+# Revision 1.16  2001/08/10 09:28:35  yduret
+# added calendar functionnality
+#
+# Revision 1.15  2001/08/10 01:46:05  yduret
+# corrected vnew usage (thc gc)
+#
+# Revision 1.14  2001/08/06 14:58:12  yduret
+# added isFile mode for daminounet
+#
+# Revision 1.13  2001/08/03 05:49:10  yduret
+# really fixed bug when embeded in mcc
+# use plain english instead of bad french
+#
+# Revision 1.12  2001/08/02 08:28:18  pablo
+# update pot file, s/ :/:/ for English text
+#
+# Revision 1.11  2001/08/01 19:06:05  yduret
+# pour boblack
+#
+# Revision 1.10  2001/08/01 17:30:21  yduret
+# added mapping..
+#
+# Revision 1.9  2001/08/01 13:19:14  yduret
+# ask_many_from_list
+#
+# Revision 1.8  2001/07/19 13:24:54  pablo
+# updated Croatian file
+#
+# Revision 1.7  2001/07/16 16:48:21  yduret
+# update
+#
+# Revision 1.6  2001/07/03 19:40:48  pablo
+# updated Danish file,
+# i18n'd logdrake
+#
+# Revision 1.5  2001/07/03 08:54:43  yduret
+# powered by DrakX technologie
+#
+# Revision 1.4  2001/07/02 09:47:55  yduret
+# fix bug in regexp
+#
+# Revision 1.3  2001/06/29 16:14:01  yduret
+# great upgrade
+#
+# Revision 1.2  2001/06/28 10:50:27  yduret
+# full support of color
+#
+# Revision 1.1  2001/06/27 09:22:59  yduret
+# added it..
+#
