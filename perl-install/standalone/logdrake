@@ -381,7 +381,7 @@ sub alert_config() {
                                      N("Welcome to the mail configuration utility.\n\nHere, you'll be able to set up the alert system.\n"),
                                      no_back => 1,
                                      data => [
-                                              { val => \$mode, label => N("What do you wan to do?"),
+                                              { val => \$mode, label => N("What do you want to do?"),
                                                 list => [ keys %modes ], format => sub { $modes{$_[0]} },  },
                                               ],
 
