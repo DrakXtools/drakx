@@ -608,7 +608,7 @@ sub mount {
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
     if (member($fs, 'smb', 'smbfs', 'nfs') && $::isStandalone) {
-	system('mount', '-t', $fs, $dev, $where, '-o', $options) == 0 or die _("mount failed");
+	system('mount', '-t', $fs, $dev, $where, '-o', $options) == 0 or die _("mounting partition %s in directory %s failed", $dev, $where);
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
@@ -637,13 +637,13 @@ sub mount {
 	}
 	if ($fs eq 'ext3' && $::isInstall) {
 	    # ext3 mount to use the journal
-	    syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
+	    syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
 	    syscall_('umount', $where);
 	    # really mount as ext2 during install for speed up
 	    $fs = 'ext2';
 	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
-	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
+	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
     } else {
 	log::l("skipping mounting $fs partition");
 	return;
