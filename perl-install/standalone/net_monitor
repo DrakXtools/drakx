@@ -99,7 +99,7 @@ gtkadd($window1->{window},
                                                                       N("Profile "), $combo1)
                                                             )
                                                   ),
-                                        1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Statistics")), 'etched_out'),
+                                        1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Global statistics")), 'etched_out'),
                                                   gtkpack__(Gtk2::VBox->new(0,0),
                                                             create_packtable({ col_spacings => 1, row_spacings => 1 },
                                                                              [ "", "instantaneous" , "average" ],
