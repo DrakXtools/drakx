@@ -125,7 +125,7 @@ sub set {
 	my $ssl = { 
 		   anonymous => 'off', 
 		   simple => 'off', 
-		   ssl => 'start_tls' . "\n" . 'ssl on',
+		   tls => 'start_tls' . "\n" . 'ssl on',
 		   kerberos => 'on',
 		  }->{$authentication->{sub_kind}};
 
