@@ -4,6 +4,9 @@ my $dir = `pwd`;
 chomp $dir;
 $dir .= "/../../..";
 
+#- allow devfsd to enable a faster upgrade.
+system "killall devfsd >/dev/null 2>/dev/null";
+
 #- perl version of the install, we use directly the version we found,
 #- this means there SHOULD BE no module compiled for an older version of perl
 #- which will be used by DrakX.
@@ -18,7 +21,11 @@ $ENV{PERL5LIB} = join ":", map { "$dir/usr/lib/perl5/$_" } ("$version/$arch",
 							    "$version",
 							    "site_perl/$version/$arch",
 							    "site_perl/$version",
-							    "site_perl");
+							    "site_perl",
+							    "vendor_perl/$version/$arch",
+							    "vendor_perl/$version",
+							    "vendor_perl",
+							   );
 $ENV{LD_LIBRARY_PATH} = "$dir/usr/bin:$dir/bin:$dir/sbin:$dir/usr/sbin:$dir/usr/X11R6/bin:$dir/lib:$dir/usr/lib:$dir/usr/lib/perl5/$version/$arch/CORE";
 $ENV{PATH} = join(":", map { "$dir/$_" } split ":", "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin") . ":$ENV{PATH}";
 $ENV{SHARE_PATH} = "$dir/usr/share";
