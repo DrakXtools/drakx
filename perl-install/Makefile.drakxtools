@@ -26,7 +26,7 @@ $(DIRS):
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps} $(LIBDEST)/{network,security,harddrake,interactive,partition_table} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
@@ -35,20 +35,12 @@ install:
 	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)/lsnetdrake
 
 	install -m 644 *.pm $(LIBDEST)
-	for i in network harddrake security interactive partition_table; do install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
+	for i in $(PMS_DIRS); do install -d $$i ; install -m 644 $$i/*.pm $(LIBDEST)/$$i/;done
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(DATADIR)/$(NAME)
 
 	install -d $(PREFIX)/etc/security
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf
-
-	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
-	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
-	install -m 644 $(patsubst %,sbus_probing/%.pm,main) $(LIBDEST)/sbus_probing
-	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
-
-	install -d $(LIBDEST)/diskdrake
-	install -m 644 diskdrake/*.pm $(LIBDEST)/diskdrake
 
 	for i in $(HAVEINST_DIRS); do \
 		$(MAKE) -C $$i install PREFIX=$(PREFIX) DATADIR=$(DATADIR) NAME=$(NAME) ; \
