@@ -296,6 +296,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o add help for check cron 
   o fix "first notebook page do not show up"
   o do not be listed in drakxtools-http
+  o faster startup
 - sanitize draxktools-http service script
 - diskdrake: ntfs resizing bug fixes (pixel)
 
