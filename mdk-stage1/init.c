@@ -26,6 +26,7 @@
 #endif
 
 #include "config-stage1.h"
+#include <linux/cdrom.h>
 
 #if defined(__powerpc__)
 #define TIOCSCTTY     0x540E
@@ -329,6 +330,15 @@ void unmount_filesystems(void)
 			printf("\tumount failed: %s\n", fs[i].name);
 			if (strcmp(fs[i].fs, "ext2") == 0) nb++; /* don't count not-ext2 umount failed */
 		}
+
+#ifdef MANDRAKE_MOVE
+	fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
+        if (fd > 0) {
+		printf("ejecting cdrom\n");
+                ioctl(fd, CDROMEJECT, 0);
+                close(fd);
+        }
+#endif
 	
 	if (nb) {
 		printf("failed to umount some filesystems\n");
@@ -479,11 +489,13 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	sync(); sync();
 
 	if (!abnormal_termination) {
-                if (reboot_magic == 0x01234567)
+                if (reboot_magic == 0x01234567) {
                         printf("automatic reboot in 10 seconds\n");
-                else 
-                        printf("automatic poweroff in 10 seconds\n");
-                sleep(10);
+                        sleep(10);
+                } else {
+                        printf("automatic poweroff in 15 seconds\n");
+                        sleep(15);
+                }
 		reboot(0xfee1dead, 672274793, reboot_magic);
 	} else {
 		printf("you may safely reboot or halt your system\n");
