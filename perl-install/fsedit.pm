@@ -224,9 +224,10 @@ sub hds {
 	$_->{type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{type} == 0x100 } partition_table::get_normal_parts($hd);
 
 	#- special case for type overloading (eg: reiserfs is 0x183)
-	foreach (grep { isExt2($_) || $_->{type} == 0x7 } partition_table::get_normal_parts($hd)) {
+	foreach (grep { isExt2($_) || $_->{type} == 0x7 || $_->{type} == 0x17 } partition_table::get_normal_parts($hd)) {
+	    my $wanted_type = $_->{type} == 0x17 ? 0x7 : $_->{type};
 	    my $type = typeOfPart($_->{device});
-	    $_->{type} = $type if ($type & 0xff) == $_->{type} || $type && $hd->isa('partition_table::gpt');
+	    $_->{type} = $type if ($type & 0xff) == $wanted_type || $type && $hd->isa('partition_table::gpt');
 	}
 	push @hds, $hd;
     }

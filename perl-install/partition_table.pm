@@ -398,11 +398,11 @@ sub assign_device_numbers {
     #- isFat_or_NTFS isn't true for 0x7 partitions, only for 0x107.
     #- alas 0x107 is not set correctly at this stage
     #- solution: don't bother with 0x7 vs 0x107 here
-    my ($c, @others) = grep { isFat_or_NTFS($_) || $_->{type} == 0x7 } @{$hd->{primary}{normal}};
+    my ($c, @others) = grep { isFat_or_NTFS($_) || $_->{type} == 0x7 || $_->{type} == 0x17 } @{$hd->{primary}{normal}};
 
     $i = ord 'C';
     $c->{device_windobe} = chr($i++) if $c;
-    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) || $_->{type} == 0x7 } map { $_->{normal} } @{$hd->{extended}};
+    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) || $_->{type} == 0x7 || $_->{type} == 0x17 } map { $_->{normal} } @{$hd->{extended}};
     $_->{device_windobe} = chr($i++) foreach @others;
 }
 
