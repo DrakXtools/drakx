@@ -131,7 +131,7 @@ sub init {
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit xkb xserver xsm);
     symlinkf_short("/image/root/$_", "/root/$_") foreach qw(.bashrc);
 
-    mkdir_p(dirname("/var/$_")), symlinkf_short("/image/var/$_", "/var/$_") foreach qw(lib/samba cache/gstreamer-0.6);
+    mkdir_p(dirname("/var/$_")), symlinkf_short("/image/var/$_", "/var/$_") foreach qw(lib/samba lib/rpm cache/gstreamer-0.6);
 
     #- non-trivial files/directories that need be readable, files that will be overwritten
     handle_etcfiles('READ', 'OVERWRITE');
