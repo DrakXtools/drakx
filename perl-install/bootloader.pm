@@ -339,7 +339,13 @@ wait %d seconds for default boot.
 	     grub => bool(arch() !~ /sparc/ && availableRamMB() < 800), #- don't use grub if more than 800MB
 	     loadlin => bool(arch() !~ /sparc/) && -e "/initrd/loopfs/lnx4win",
 	    );
-    $lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
+    unless ($lilo->{methods}) {
+	$lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
+	if ($lilo->{methods}{lilo} && -e "$prefix/boot/boot-graphic.b") {
+	    $lilo->{methods}{lilo} = "boot-graphic.b";
+	    exists $lilo->{methods}{grub} and $lilo->{methods}{grub} = undef;
+	}
+    }
 }
 
 sub suggest_floppy {

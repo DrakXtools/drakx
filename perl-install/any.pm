@@ -94,7 +94,6 @@ sub setupBootloader {
 
     if (!$::expert && $more < 1) {
 	#- automatic
-	$b->{methods}{lilo} and $b->{methods}{lilo} = "boot-graphic.b";
     } elsif (!$::expert) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
@@ -126,7 +125,7 @@ sub setupBootloader {
 			       #- put lilo if grub is chosen, so that /etc/lilo.conf is generated
 			       __("Grub")                     => sub { $b->{methods}{grub} = 1;
 								       exists $b->{methods}{lilo}
-									 and $b->{methods}{lilo} = "boot-graphic.b" }),
+									 and $b->{methods}{lilo} = "boot-menu.b" }),
 			   if_(exists $b->{methods}{loadlin},
 			       __("Boot from DOS/Windows (loadlin)") => sub { $b->{methods}{loadlin} = 1 }),
 			  );
