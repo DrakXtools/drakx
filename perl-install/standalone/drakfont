@@ -480,7 +480,7 @@ sub interactive_mode() {
     local $::Wizard_no_previous = 1;
     gtkadd($window1->{window},
 	   gtkpack_(Gtk2::VBox->new(0, 2), 
-                 if_(!$::isEmbedded, 0, gtkcreate_img("drakfont.620x57")), 
+                 if_(!$::isEmbedded, 0, Gtk2::Banner->new("drakfont", N("DrakFont"))), 
                  0, Gtk2::WrappedLabel->new(N("Font List")),
                  1, create_fontsel(),
                  0, create_okcancel(my $oc = {
