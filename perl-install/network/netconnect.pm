@@ -88,6 +88,7 @@ sub real_main {
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
+      my ($ndiswrapper_driver, $ndiswrapper_inf_file);
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -916,7 +917,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ (sort keys %eth_intf), N_("Manually load a driver") ], 
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ (sort keys %eth_intf), N_("Manually load a driver"), if_($is_wireless, N_("Use a Windows driver (with ndiswrapper)")) ], 
                             allow_empty_list => 1, format => sub { translate($eth_intf{$_[0]} || $_[0]) } } ];
                     },
                     post => sub {
@@ -924,6 +925,8 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                             require network::ethernet;
                             modules::interactive::load_category__prompt($in, $modules_conf, list_modules::ethernet_categories());
                             return 'lan';
+                        } elsif ($ntf_name eq "Use a Windows driver (with ndiswrapper)") {
+                            return 'ndiswrapper';
                         }
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
@@ -1055,7 +1058,59 @@ notation (for example, 1.2.3.4).")),
                         return $is_wireless ? "wireless" : "static_hostname";
                     },
                    },
-                   
+
+                   ndiswrapper =>
+                   {
+                    data => sub {
+                        [ { label => N("Choose a ndiswrapper driver"), type => "list", val => \$ndiswrapper_driver,
+                            list => [ N("Install a new driver"), N("Use already installed driver (%s)", join(", ", network::tools::ndiswrapper_installed_drivers())) ] } ];
+                    },
+                    complete => sub {
+                        if ($ndiswrapper_driver eq N("Install a new driver")) {
+                            if ($ndiswrapper_inf_file = $in->ask_file(N("Please select the Windows driver (.inf file)"), "/mnt/cdrom")) {
+                                if ($in->do_pkgs->install("ndiswrapper")) {
+                                    return system("ndiswrapper -i $ndiswrapper_inf_file");
+                                }
+                            }
+                            return 1;
+                        }
+                    },
+                    post => sub { return 'ndiswrapper_intf' },
+                   },
+
+                   ndiswrapper_intf =>
+                   {
+                    pre => sub {
+                        undef $ntf_name;
+                    },
+                    data =>  sub {
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ sort keys %eth_intf ],
+                            format => sub { translate($eth_intf{$_[0]}) } } ];
+                    },
+                    post => sub {
+                        if ($ntf_name) {
+                            #- if another module is loaded for the wireless interface, unload it before using ndiswrapper
+                            my $eth = find { $_->[0] eq $ntf_name } @all_cards;
+                            $ntf_name and modules::unload($eth->[1]);
+                        }
+                        modules::load("ndiswrapper");
+
+                        #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
+                        #- find the first interface matching a ndiswrapper driver, try ethtool then sysfs
+                        my @available_drivers = network::tools::ndiswrapper_available_drivers();
+                        $ntf_name = find {
+                            my $drv = c::getNetDriver($_) || readlink("/sys/class/net/$_/driver");
+                            $drv =~ s!.*/!!;
+                            member($drv, @available_drivers);
+                        } detect_devices::getNet();
+                        #- fallback on wlan0
+                        $ntf_name ||= "wlan0";
+
+                        $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+                        return 'lan_protocol';
+                    },
+                   },
+
                    wireless =>
                    {
                     pre => sub {
