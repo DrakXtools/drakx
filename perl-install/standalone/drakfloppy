@@ -55,7 +55,7 @@ my ($output, @modules, @temp_modules, %buttons, %options, $tree_model, $tree, $l
 my $conffile = "/etc/sysconfig/drakfloppy";
 
 # we must be robust against config file parsing
-eval { %options = getVarsFromSh($conffile) } or warn N("Error while parsing \"MODULES\" line from %s", $conffile);
+eval { %options = getVarsFromSh($conffile) };
 @modules  = split(' ', $options{MODULES});
 
 
