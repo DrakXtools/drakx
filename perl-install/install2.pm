@@ -426,7 +426,7 @@ sub main {
 	$o->{method} ||= "cdrom";
 	$o->{mkbootdisk} = 0;
     }
-    unless ($::testing || $::live) {
+    if (!$::testing && !$::live) {
 	symlink "rhimage", "/tmp/image"; #- for compatibility with old stage1
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
@@ -516,7 +516,7 @@ sub main {
     } modules::probe_category('multimedia/sound');
 
     #- needed very early for install_steps_gtk
-    eval { $o->{mouse} = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
+    eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse};
 
     $o->{lang} = lang::set($o->{lang}) if $o->{lang} ne 'en_US'; #- mainly for defcfg
 

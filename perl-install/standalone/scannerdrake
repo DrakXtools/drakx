@@ -26,7 +26,7 @@ use interactive;
 use common;
 use scanner;
 
-for (@ARGV) {
+foreach (@ARGV) {
     /^--version$/ and die 'version: $Id$ '."\n";
     /^--help$/ and die 'logdrake [--version] [--help] [--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--dynamic=dev]';
     /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit };
@@ -40,7 +40,7 @@ $in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('
 if ($::Manual) { manual(); quit() }
 my $wait = $in->wait_message(N("Test ports"), N("Detecting devices ..."));
 @f = scanner::detect();
-$wait=undef;
+$wait = undef;
 (@f) ? auto() : manual();
 quit();
 
@@ -81,7 +81,7 @@ sub dynamic {
 		$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", $name));
 		return;
 	    }
-	    scanner::confScanner($name, $_->{port}) unless ($scanner::scannerDB->{$model}{flags}{unsupported});
+	    scanner::confScanner($name, $_->{port}) unless $scanner::scannerDB->{$model}{flags}{unsupported};
 	}
     }
 }

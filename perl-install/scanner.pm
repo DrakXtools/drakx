@@ -27,6 +27,7 @@ package scanner;
 use standalone;
 use common;
 use detect_devices;
+use log;
 
 
 my $_sanedir = "$prefix/etc/sane.d";
@@ -35,7 +36,7 @@ $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
-    $port = detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner" if (!$port);
+    $port = detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner" if !$port;
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     output("$_sanedir/$a.conf", (join "\n",@{$scannerDB->{$model}{lines}}));
@@ -88,7 +89,7 @@ sub readScannerDB {
         LINE => sub { push @{$card->{lines}}, $val },
 	NAME => sub {
 	    #$cards{$card->{type}} = $card if ($card and !$card->{flags}{unsupported});
-	    $cards{$card->{type}} = $card if ($card);
+	    $cards{$card->{type}} = $card if $card;
 	    $val =~ s/Seiko\s+Epson/Epson/i;
 	    $card = { type => $val };
 	},
@@ -127,7 +128,7 @@ sub updateScannerDBfromUsbtable {
     print F "# generated from usbtable by scannerdrake\n";
     foreach (cat_("$ENV{SHARE_PATH}/ldetect-lst/usbtable")) {
 	my ($vendor_id, $product_id, $mod, $name) = chomp_(split /\s/,$_,4);
-	next unless ($mod eq "\"scanner\"");
+	next if $mod ne '"scanner"';
 	$name =~ s/\"(.*)\"$/$1/;
 	if (member($name, keys %$scanner::scannerDB)) {
 	    print "#[$name] already in ScannerDB!\n";
@@ -186,7 +187,7 @@ sub updateScannerDBfromSane {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
 			  print Y "\nNAME $name\nSERVER $backend\nDRIVER $intf\n";
-			  print Y "COMMENT $comment\n" if ($comment);
+			  print Y "COMMENT $comment\n" if $comment;
 			  $comment = undef; 
 		      }
 		      $name = $val;

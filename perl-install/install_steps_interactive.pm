@@ -642,7 +642,7 @@ sub chooseGroups {
     #- do not try to deselect package (by default no groups are selected).
     $o->{isUpgrade} or $unselect_all and install_any::unselectMostPackages($o);
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
-    unless ($o->{isUpgrade} || grep { $val{$_} } keys %val) {
+    if (!$o->{isUpgrade} && !grep { $val{$_} } keys %val) {
 	my $docs = !$o->{excludedocs};	
 	my $minimal = !grep { $_ } values %{$o->{compssUsersChoice}};
 
