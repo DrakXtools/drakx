@@ -43,7 +43,6 @@ install: build
 
 	 #- overwrite /usr/lib/libDrakX files of the live tree with those in CVS
 	sudo cp -f $(addprefix $(INSTALL)/, $(shell cd $(DEST_LIVETREE)/usr/lib/libDrakX ; ls *.pm)) $(DEST_LIVETREE)/usr/lib/libDrakX || :
-	sudo cp -f $(addprefix $(INSTALL)/printer/, $(shell cd $(DEST_LIVETREE)/usr/lib/libDrakX/printer ; ls *.pm)) $(DEST_LIVETREE)/usr/lib/libDrakX/printer || :
 
 	 #- overwrite stuff.so of drakxtools because it doesn't contain C_DRAKX stuff
 	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff
