@@ -83,8 +83,9 @@ sub detect {
 
 sub pre_func {
     my ($text) = @_;
+    $in->isa('interactive_gtk') or return;
     $::Wizard_no_previous=1;
-    if ($in->isa('interactive_gtk') && $::isStandalone) {
+    if ($::isStandalone) {
 	$::Wizard_splash=1;
 	require my_gtk;
 	my_gtk->import(qw(:wrappers));
