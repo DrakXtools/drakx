@@ -730,9 +730,9 @@ sub mount {
 	log::l("skipping mounting $fs partition");
 	return;
     }
-    local *F;
-    open F, ">>/etc/mtab" or return; #- fail silently, /etc must be read-only
-    print F "$dev $where $fs defaults 0 0\n";
+    eval { #- fail silently, /etc must be read-only
+	append_to_file("/etc/mtab", "$dev $where $fs defaults 0 0\n");
+    };
 }
 
 #- takes the mount point to umount (can also be the device)
