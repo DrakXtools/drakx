@@ -408,9 +408,10 @@ int mandrake_move_post(void)
                                 return RETURN_ERROR;
                         boot__real_is_symlink_to_raw = 1;
                         goto live_tree_clp;
+                } else {
+                        log_message("move: can't find %s nor %s, proceeding with live_tree.clp hoping files will be there", clp, live);
+                        goto live_tree_clp;
                 }
-                log_message("move: panic, can't find %s nor %s", clp, live);
-                return RETURN_ERROR;
         }
 
         {
