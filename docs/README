@@ -77,11 +77,23 @@ Mandrake/base/mdkinst_stage2.gz
 
 images/*.img
 	boot images to use with DrakX. Use:
+	- all for everything, but need 2.88MB media (like el torito cdrom boot)
 	- hd for hard-disk install
 	- cdrom for cdrom install
 	- network for ftp/nfs install
 	- pcmcia for pcmcia install (see ``PCMCIA install'' below for more)
 
+  the following modules have been removed from:
+          network.img: acenic sk98lin de4x5
+          cdrom.img and hd.img: BusLogic seagate fdomain g_NCR5380 dc395x_trm tmscsim
+          hd.img: dpt_i2o eata eata_pio eata_dma
+          cdrom.img: aztcd gscd isp16 mcd mcdx optcd cm206 sjcd 
+          pcmcia.img: apa1480_cb
+  they are now in "other.img", 
+
+  if you think one of those modules is used a lot, tell me, i may find some room
+  to put it back on the main floppies.
+	
 
 ********************************************************************************
 * logs *************************************************************************

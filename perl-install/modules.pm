@@ -332,12 +332,12 @@ qw(
 acenic sk98lin de4x5
 BusLogic seagate fdomain g_NCR5380 dc395x_trm tmscsim
 dpt_i2o eata eata_pio eata_dma
-apa1480_cb
 aztcd gscd isp16 mcd mcdx optcd cm206 sjcd 
 );
 
 my @skip_modules_on_stage1 = (
   arch() =~ /alpha/ ? qw(sb1000) : (),
+  "apa1480_cb",
 );
 
 

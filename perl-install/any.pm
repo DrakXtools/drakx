@@ -489,9 +489,10 @@ sub load_module {
     my ($in, $type) = @_;
     my @options;
 
+    (my $msg_type = $type) =~ s/\|.*//;
     my $m = $in->ask_from_listf('',
 #-PO: the %s is the driver type (scsi, network, sound,...)
-			       _("Which %s driver should I try?", $type),
+			       _("Which %s driver should I try?", $msg_type),
 			       \&modules::module2text,
 			       [ modules::module_of_type($type) ]) or return;
     my $l = modules::module2text($m);

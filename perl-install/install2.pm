@@ -352,6 +352,7 @@ sub miscellaneous {
             CLASS => $::expert && "expert" || $::beginner && "beginner" || "medium",
             TYPE => $o->{installClass},
             SECURITY => $o->{security},
+	    LITTLE_OIGNONS_WELL_FRIED => 'PowerPack', # Desktop
         });
 
 	my $f = "$o->{prefix}/etc/sysconfig/usb";
