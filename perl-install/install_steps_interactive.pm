@@ -567,7 +567,7 @@ sub reallyChooseGroups {
 	   } @{$o->{compssUsersSorted}}),
 	 if_($o->{meta_class} eq 'desktop', { text => N("All"), val => \$all, type => 'bool' }),
 	 if_($individual, { text => N("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
-    ], changed => sub { $size_text = &$size_to_display }) or return;
+    ], changed => sub { $size_text = &$size_to_display });
 
     if ($all) {
 	$val->{$_} = 1 foreach keys %$val;
