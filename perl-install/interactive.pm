@@ -406,6 +406,13 @@ sub ask_from_real {
     my ($o, $common, $l) = @_;
     my ($l1, $l2) = partition { !$_->{advanced} } @$l;
     my $v = $o->ask_fromW($common, $l1, $l2);
+
+    foreach my $e (@$l1, @$l2) {
+	if ($e->{type} eq 'range') {
+	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
+	}
+    }
+
     %$common = ();
     $v;
 }
