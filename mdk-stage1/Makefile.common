@@ -29,9 +29,6 @@ F = NEWT
 ifeq (ia64, $(ARCH))
 L = GLIBC
 endif
-ifeq (x86_64, $(ARCH))
-#L = GLIBC
-endif
 
 ifeq (DIETLIBC, $(L))
 DIET = $(top_dir)/dietlibc/bin-$(ARCH)/diet
