@@ -648,9 +648,9 @@ sub save_conf_file() {
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n";
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
     if ($comp_mode) {
-	push @cfg_list, "OPTION_COMP=TAR.BZ2\n";
+		push @cfg_list, "OPTION_COMP=TAR.BZ2\n";
     } else { 
-	push @cfg_list, "OPTION_COMP=TAR.GZ\n";   
+		push @cfg_list, "OPTION_COMP=TAR.GZ\n";   
     }
     $del_hd_files and push @cfg_list, "DEL_HD_FILES\n";
     output_p($cfg_file, @cfg_list);
@@ -766,11 +766,8 @@ sub read_conf_file() {
 }
 
 sub check_valid_users() {
-	my @new_user_list;
 	all_user_list();
-	foreach my $user (@user_list) {
-		push @new_user_list, $user if any { /$user/ } @user_list_all;
-	}
+	my @new_user_list = intersection(\@user_list, \@user_list_all);
 	if (@user_list != @new_user_list) {
 		log::l(N("Valid user list changed, rewriting config file."));
 		if ($DEBUG) {
@@ -1079,10 +1076,9 @@ sub spawn_progress {
 	my ($command, $descr) = @_;
 	my $value;
 	my $timer;
-print "$descr\n";
 	$interactive and progress($pbar3, $plabel3, 0, translate($descr));
-	$interactive and $pbar3->set_fraction(0);
-	$interactive and $timer = Glib::Timeout->add(2, \&progress_timeout);
+	$interactive and $pbar3->set_pulse_step(0.1);
+	$interactive and $timer = Glib::Timeout->add(20, \&progress_timeout);
 
 	$log_buff .= "\n" . $descr . ":\n";
 	$log_buff .= $command . "\n\n";
@@ -1101,10 +1097,7 @@ print "$descr\n";
 }
 
 sub progress_timeout() {
-	my $new_val;
-	$new_val = $pbar3->get_fraction + 0.1;
-    if ($new_val > 1) { $new_val = 0 }
-	$pbar3->set_fraction($new_val);	
+	$pbar3->pulse;	
 	return 1;
 }
 
@@ -1257,6 +1250,7 @@ sub build_backup_files() {
     my $base_sys_exist = 0;
     my @dir_content;
 	my $incr;
+	my $find_args = "! -type d";
 	
 	local $_;
     $results = "";
@@ -1295,13 +1289,23 @@ sub build_backup_files() {
     $no_critical_sys and $tar_cmd_sys .= "--exclude passwd --exclude fstab --exclude group --exclude mtab";
     $what_no_browser and $tar_cmd_user .= "--exclude NewCache --exclude Cache --exclude cache";
 	$nonroot_user and $tar_cmd_user .= " --exclude .drakbackup";
-
+	$backupignore && -f "/etc/.backupignore" and $tar_cmd_sys .= " -X /etc/.backupignore";
+	
     -d $save_path and @dir_content = all($save_path);
     any { /^backup_base_sys/ } @dir_content and $base_sys_exist = 1;
 
     if ($where_hd && !$daemon || $daemon) {
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
-	  if ($backup_sys) { 
+	  if ($backup_sys) {
+	  	my $find_args_sys = $find_args;
+	  	if ($backupignore) {
+			my @ignore_files = cat_("/etc/.backupignore");
+			foreach (@ignore_files) {
+				chop;
+				$find_args_sys .= " ! -name '" . $_ . "'";
+			}
+		}
+		$find_args_sys .= " -print";	
 	    if ($backup_sys_versions) {
 			$incr = "incr_sys";
 			$incr =~ s/incr/diff/ if $sys_diff_mode;
@@ -1311,7 +1315,7 @@ sub build_backup_files() {
 		    	my @more_recent = grep { /^list_incr_sys/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-				system("find @sys_files -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_incr_sys$the_time.txt");
+				system("find @sys_files -cnewer $save_path/$more_recent $find_args_sys > $save_path/list_incr_sys$the_time.txt");
 		    	if (!cat_("$save_path/list_incr_sys$the_time.txt")) {
 					system("rm $save_path/list_incr_sys$the_time.txt");
 		    	} else {
@@ -1325,7 +1329,7 @@ sub build_backup_files() {
 		    	my @more_recent = grep { /^list_base_sys/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-  		  		system("find @sys_files -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_$incr$the_time.txt");
+  		  		system("find @sys_files -cnewer $save_path/$more_recent $find_args_sys > $save_path/list_$incr$the_time.txt");
 		    	if (!cat_("$save_path/list_$incr$the_time.txt")) {
 					system("rm $save_path/list_$incr$the_time.txt");
 		    	} else {
@@ -1337,7 +1341,7 @@ sub build_backup_files() {
 		    	}
 			} else {
 				#- need this for the first pass too, if we're offloading the backups to other media (sb)
-				system("find @sys_files ! -type d -print > $save_path/list_base_sys$the_time.txt"); 
+				system("find @sys_files $find_args_sys > $save_path/list_base_sys$the_time.txt"); 
 				system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); 
 				push @file_list_to_send_by_ftp, "$save_path/backup_base_sys$the_time.$tar_ext";
 				push @file_list_to_send_by_ftp, "$save_path/list_base_sys$the_time.txt";
@@ -1356,7 +1360,18 @@ sub build_backup_files() {
 	  if ($backup_user) {
 	    foreach (@user_list) {
 		  my $user = $_;
+		  my $tar_cmd_cuser = $tar_cmd_user;
 		  $path_name = return_path($user);
+		  $backupignore && -f "$path_name/.backupignore" and $tar_cmd_cuser .= " -X $path_name/.backupignore";
+		  my $find_args_user = $find_args;
+	  	  if ($backupignore) {
+			my @ignore_files = cat_("$path_name/.backupignore");
+			foreach (@ignore_files) {
+				chop;
+				$find_args_user .= " ! -name '" . $_ . "'";
+			}
+		  }
+		  $find_args_user .= " -print";	
 		  if ($backup_user_versions) {
 			$incr = "incr_user_";
 			$incr =~ s/incr/diff/ if $user_diff_mode;
@@ -1366,11 +1381,11 @@ sub build_backup_files() {
 				my @more_recent = grep { /^list_incr_user_$user/ } sort @dir_content; 
 				$more_recent = pop @more_recent;
 				$DEBUG and print "more recent file: $more_recent\n";
-				system("find $path_name -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
+				system("find $path_name -cnewer $save_path/$more_recent $find_args_user > $save_path/list_incr_user_$user$the_time.txt");
 				if (!cat_("$save_path/list_incr_user_$user$the_time.txt")) {
 			    	system("rm $save_path/list_incr_user_$user$the_time.txt");
 				} else {
-					system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
+					system("$tar_cmd_cuser -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
 					push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
 					push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
 					$results .= " \nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext\n";
@@ -1380,11 +1395,11 @@ sub build_backup_files() {
 				my @more_recent = grep { /^list_base_user_$user/ } sort @dir_content; 
 				$more_recent = pop @more_recent;			
 				$DEBUG and print "more recent file: $more_recent\n";
-				system("find $path_name -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_$incr$user$the_time.txt");
+				system("find $path_name -cnewer $save_path/$more_recent $find_args_user > $save_path/list_$incr$user$the_time.txt");
 				if (!cat_("$save_path/list_$incr$user$the_time.txt")) {
 			    	system("rm $save_path/list_$incr$user$the_time.txt");
 				} else {
-					system("$tar_cmd_user -f $save_path/backup_$incr$user$the_time.$tar_ext -T $save_path/list_$incr$user$the_time.txt");
+					system("$tar_cmd_cuser -f $save_path/backup_$incr$user$the_time.$tar_ext -T $save_path/list_$incr$user$the_time.txt");
 					push @file_list_to_send_by_ftp, "$save_path/backup_$incr$user$the_time.$tar_ext";
 					push @file_list_to_send_by_ftp, "$save_path/list_$incr$user$the_time.txt";
 					$results .= "\nfile: $save_path/backup_$incr$user$the_time.$tar_ext\n";
@@ -1392,15 +1407,15 @@ sub build_backup_files() {
 				}
 		    } else {
 				#- need this for the first pass too, if we're offloading the backups to other media (sb)
-				system("find $path_name ! -type d -print > $save_path/list_base_user_$user$the_time.txt");
-				system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
+				system("find $path_name $find_args_user > $save_path/list_base_user_$user$the_time.txt");
+				system("$tar_cmd_cuser -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
 				push @file_list_to_send_by_ftp, "$save_path/backup_base_user_$user$the_time.$tar_ext";
 				push @file_list_to_send_by_ftp, "$save_path/list_base_user_$user$the_time.txt";
 				$results .= "\nfile: $save_path/backup_base_user_$user$the_time.$tar_ext\n";
 		    }
 		  } else {
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
-		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
+		    system("$tar_cmd_cuser -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
 		    push @file_list_to_send_by_ftp, "$save_path/backup_user_$_$the_time.$tar_ext";
 		    $results .= "\nfile: $save_path/backup_user_$user$the_time.$tar_ext\n";
 		  }
@@ -1410,6 +1425,20 @@ sub build_backup_files() {
 	  $interactive and progress($pbar3, $plabel3, 0.4, N("Hard Disk Backup files..."));
 
 	  if (@list_other) {
+		my $find_args_other = $find_args;
+	  	if ($backupignore) {
+			foreach my $dir (@list_other) {
+				if (-d $dir) {
+					my @ignore_files = cat_("$dir/.backupignore");
+					-f "$dir/.backupignore" and $tar_cmd_other .= " -X $dir/.backupignore";
+					foreach (@ignore_files) {
+						chop;
+						$find_args_other .= " ! -name '" . $_ . "'";
+					}
+				}
+			}
+		}
+		$find_args_other .= " -print";	
 		if ($backup_other_versions) {
 			$incr = "incr_other";
 			$incr =~ s/incr/diff/ if $other_diff_mode;
@@ -1417,7 +1446,7 @@ sub build_backup_files() {
 		    	my @more_recent = grep { /^list_incr_other/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-				system("find @list_other -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_incr_other$the_time.txt");
+				system("find @list_other -cnewer $save_path/$more_recent $find_args_other > $save_path/list_incr_other$the_time.txt");
 		    	if (!cat_("$save_path/list_incr_other$the_time.txt")) {
 					system("rm $save_path/list_incr_other$the_time.txt");
 		    	} else {
@@ -1431,7 +1460,7 @@ sub build_backup_files() {
 		    	my @more_recent = grep { /^list_base_other/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-  		  		system("find @list_other -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_$incr$the_time.txt");
+  		  		system("find @list_other -cnewer $save_path/$more_recent $find_args_other > $save_path/list_$incr$the_time.txt");
 		    	if (!cat_("$save_path/list_$incr$the_time.txt")) {
 					system("rm $save_path/list_$incr$the_time.txt");
 		    	} else {
@@ -1443,7 +1472,7 @@ sub build_backup_files() {
 		    	}
 			} else {
 				#- need this for the first pass too, if we're offloading the backups to other media (sb)
-				system("find @list_other ! -type d -print > $save_path/list_base_other$the_time.txt"); 
+				system("find @list_other $find_args_other > $save_path/list_base_other$the_time.txt"); 
 				system("$tar_cmd_other -f $save_path/backup_base_other$the_time.$tar_ext @list_other"); 
 				push @file_list_to_send_by_ftp, "$save_path/backup_base_other$the_time.$tar_ext";
 				push @file_list_to_send_by_ftp, "$save_path/list_base_other$the_time.txt";
@@ -1559,7 +1588,6 @@ sub build_backup_files() {
 	#- clean up HD files if del_hd_files and media isn't hd
 	if ($del_hd_files && ($where_cd || $where_tape || $where_net) && $daemon_media ne 'hd')  {
 		foreach (@file_list_to_send_by_ftp) {
-#			unlink($_) if (/$tar_ext$/) && (!/backup_base/);
 			unlink($_) if /$tar_ext$/;
 		}
 	}
@@ -1577,12 +1605,8 @@ my @list_of_rpm_to_install;
 sub require_rpm {
     my $all_rpms_found = 1;
     my $res;
-#    my @file_cache =  cat_("/var/log/rpmpkgs");
     @list_of_rpm_to_install = ();
-#- reverted to old method - /var/log/rpmpkgs is not always accurate
-#    my($pkg) = @_;
     foreach my $pkg (@_) {
-#	   $res = grep /$pkg/, @file_cache;
 		$res = system("rpm -q $pkg > /dev/null");
 		if ($res == 256) { 
 			$all_rpms_found = 0; 
@@ -2821,6 +2845,9 @@ sub system_state() {
 			$system_state .= N("\tBackups use tar and gzip\n");
 		}   
 
+		$system_state .= N("\tUse .backupignore files\n") if $backupignore;
+		$system_state .= N("\tSend mail to %s\n", $user_mail) if $user_mail;
+		
 		$daemon_media and $system_state .= N("\n- Daemon (%s) include:\n", $when_space);
 		$daemon_media eq 'hd' and $system_state .= N("\t-Hard drive.\n");    
 		$daemon_media eq 'cd' and $system_state .= N("\t-CDROM.\n");
