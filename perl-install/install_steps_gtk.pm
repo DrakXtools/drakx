@@ -384,7 +384,7 @@ sub choosePackagesTree {
 					}
 				    }
 				    $error = [ N("You can't select/unselect this package"),
-					       common::formatList(20, map { my $rb = $state->{rejected}{$_}{backtrack};
+					       formatList(20, map { my $rb = $state->{rejected}{$_}{backtrack};
 									    my @froms = keys %{$rb->{closure} || {}};
 									    my @unsatisfied = @{$rb->{unsatisfied} || []};
 									    my $s = join ", ", ((map { N("due to missing %s", $_) } @froms),
@@ -400,7 +400,7 @@ sub choosePackagesTree {
 				    $o->ask_okcancel('', [ $isSelection ? 
 							   N("The following packages are going to be installed") :
 							   N("The following packages are going to be removed"),
-							       common::formatList(20, sort @l) ], 1) or $error = ''; #- defined
+							       formatList(20, sort @l) ], 1) or $error = ''; #- defined
 				}
 				$error and $o->ask_warn('', $error);
 				if (defined $error) {
