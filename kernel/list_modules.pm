@@ -121,7 +121,7 @@ our %l = (
         qw(snd-trident snd-ymfpci),
       ),
     ],
-    tv => [ qw(bttv cpia_usb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo cyber2000fb) ],
+    tv => [ qw(bttv cpia_usb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo cyber2000fb saa7134) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
