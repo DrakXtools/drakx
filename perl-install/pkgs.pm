@@ -708,7 +708,7 @@ sub setSelectedFromCompssList {
 	my ($rate, @flags) = packageRateRFlags($p);
 	next if 
 	  !$rate || $rate < $min_level || 
-	  !$compssUsersChoice->{ALL} && grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
+	  grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.
