@@ -375,7 +375,6 @@ sub get_raw_hds {
     $all_hds->{special} = [
        (grep { $_->{fs_type} eq 'tmpfs' } @fstab),
        { device => 'none', mntpoint => '/proc', fs_type => 'proc' },
-       { device => 'none', mntpoint => '/dev/pts', fs_type => 'devpts', options => 'mode=0620' },
     ];
 }
 
