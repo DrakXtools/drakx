@@ -111,21 +111,25 @@ sub assure_device_is_available_for_cups {
     # file:/dev/null instead. Restart CUPS if necessary to assure that
     # CUPS knows the device.
     my ($device) = @_;
+    my $sdevice = handle_configs::searchstr($device);
     my ($result, $i);
-    for ($i = 0; $i < 3; $i++) {
+    # USB printers get special model-dependent URLs in "lpinfo -v" here
+    # checking is complicated, so we simply restart CUPS then and ready.
+    my $maxattempts = ($device =~ /usb/ ? 1 : 3);
+    for ($i = 0; $i < $maxattempts; $i++) {
 	local *F; 
 	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
 	    "/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" or
 	    die "Could not run \"lpinfo\"!";
 	while (my $line = <F>) {
-	    if ($line =~ /$device/) { # Found a line containing the device
-		                      # name, so CUPS knows it.
+	    if ($line =~ /$sdevice/) { # Found a line containing the device
+		                       # name, so CUPS knows it.
 		close F;
 		return 1;
 	    }
 	}
 	close F;
-	$result = SIGHUP_daemon("cups");
+	$result = printer::services::restart("cups");
     }
     return $result;
 }
@@ -1939,14 +1943,20 @@ sub autodetectionentry_for_uri {
 	    $serial =~ s/\%20/ /g;
 	    $make =~ s/Hewlett[-\s_]Packard/HP/;
 	    $make =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	    my $smake = handle_configs::searchstr($make);
+	    my $smodel = handle_configs::searchstr($model);
 	    foreach my $p (@autodetected) {
-		next if (!$p->{val}{MANUFACTURER} or
-			 ($p->{val}{MANUFACTURER} ne $make));
-		next if (!$p->{val}{MODEL} or
-			 ($p->{val}{MODEL} ne $model));
-		next if ((!$p->{val}{SERIALNUMBER} and $serial) or
-			 ($p->{val}{SERIALNUMBER} and !$serial) or
-			 ($p->{val}{SERIALNUMBER} ne $serial));
+		next if ((!$p->{val}{MANUFACTURER} or
+			  ($p->{val}{MANUFACTURER} ne $make)) and
+			 (!$p->{val}{DESCRIPTION} or
+			  ($p->{val}{DESCRIPTION} !~ /^\s*$smake\s+/)));
+		next if ((!$p->{val}{MODEL} or
+			  ($p->{val}{MODEL} ne $model)) and
+			 (!$p->{val}{DESCRIPTION} or
+			  ($p->{val}{DESCRIPTION} !~ /\s+$smodel\s*$/)));
+		next if ($serial and
+			 (!$p->{val}{SERIALNUMBER} or
+			  ($p->{val}{SERIALNUMBER} ne $serial)));
 		return $p;
 	    }
 	}
