@@ -9,6 +9,8 @@ use common;
 use run_program;
 use network::tools;
 
+our @dhcp_clients = qw(dhcp-client dhcpcd pump dhcpxd);
+
 sub write_ether_conf {
     my ($in, $modules_conf, $netcnx, $netc, $intf) = @_;
     configureNetwork2($in, $modules_conf, $::prefix, $netc, $intf);
