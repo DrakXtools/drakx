@@ -330,7 +330,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- call update-menus at the end of package installation
     { 
-	local $ENV{DURING_INSTALL}; undef $ENV{DURING_INSTALL};
+	local $ENV{DURING_INSTALL}; delete $ENV{DURING_INSTALL};
 	run_program::rooted($o->{prefix}, "update-menus");
     }
 

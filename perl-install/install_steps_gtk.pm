@@ -299,7 +299,6 @@ sub chooseSizeToInstall {
     my $enough = $available > $max_size_;
     my $max_size = min($max_size_, $available * 0.9);
     my $percentage = int 100 * $max_size / $max_size_;
-    print "$min_size, $max_size_, $available, $max_size\n";
 
     #- don't ask anything if the difference between min and max is too small
 #    return $max_size if $min_size && $max_size / $min_size < 1.01;
@@ -459,8 +458,9 @@ sub choosePackagesTree {
 	} else {
 	    my $p = $packages->[0]{$curr} or return;
 	    if (pkgs::packageFlagBase($p)) {
-		$o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
-		return;
+		return $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
+	    } elsif (pkgs::packageFlagInstalled($p)) {
+		return $o->ask_warn('', _("You can't unselect this package. It is already installed"));
 	    }
 	    pkgs::togglePackageSelection($packages, $p, my $l = {});
 	    if (my @l = grep { $l->{$_} } keys %$l) {
@@ -473,7 +473,7 @@ sub choosePackagesTree {
 		}
 		&$update_size;
 	    } else {
-		$o->ask_warn('', _("You can't unselect this package"));
+		$o->ask_warn('', _("You can't select/unselect this package"));
 	    }
 	}
     };
