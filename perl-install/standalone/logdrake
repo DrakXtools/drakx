@@ -223,7 +223,7 @@ sub search {
 	parse_file($::File);
     } else {
 	foreach (keys %files) {
-	    parse_file($files{$_}{file}) if $toggle{$_}->active;
+	    parse_file($files{$_}{file}, $files{$_}{desc}) if $toggle{$_}->active;
 	}
     }
     $log_text->window->thaw_updates();
@@ -234,14 +234,14 @@ sub search {
 local *F;
 
 sub parse_file {
-  my ($file) = @_;#$_[0];
+  my ($file, $descr) = @_;;
 
   $file =~ s/\.gz$//;
   my ($pbar, $win_pb);
   unless ($::isEmbedded && $::isExplain) {
       gtkadd($win_pb = gtkset_modal(new Gtk2::Window('toplevel'), 1),
              gtkpack(new Gtk2::VBox(2,0),
-                     new Gtk2::Label(" " . N("please wait, parsing file: %s", $files{$_}{desc}) . " "),
+                     new Gtk2::Label(" " . N("please wait, parsing file: %s", $descr) . " "),
                      $pbar = new Gtk2::ProgressBar()
                      )
              );
