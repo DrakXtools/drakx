@@ -1,5 +1,39 @@
 2001/02/26  dam's  <damien@mandrakesoft.com>
 
+	* netconnect.pm: should correct bad resolv.conf when swithcinf in
+	standalone embedded mode. Not Certified
+	fixed standalone edition
+	corrected wizard mode.
+
+	* Makefile.drakxtools, Makefile, pixmaps/eth_card_mini.xpm: new pixmap
+	policy
+
+	* standalone/draknet: new pixmap policy
+	fixed standalone edition
+
+	* bootlook.pm: need to be merged with bootloader
+
+	* interactive_gtk.pm: if wizard, show the button
+
+	* standalone/drakboot: short-circuit to bootlook for the moment.
+
+2001/02/26  Pixel  <pixel@mandrakesoft.com>
+
+	* common.pm (if_): fix for use in scalar context
+
+	* install_steps_interactive.pm (summary): translate mouse description
+
+	* install_steps.pm: remove unneeded "use install_interactive"
+
+	* install_steps_gtk.pm (copy_advertising): fix changing for
+	advertising_images
+
+2001/02/26  warly
+
+	* share/compssUsers, share/rpmsrate: remove some packages
+
+2001/02/26  dam's  <damien@mandrakesoft.com>
+
 	* interactive_gtk.pm: if wizard, show the button
 
 	* netconnect.pm: corrected wizard mode.
