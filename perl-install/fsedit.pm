@@ -42,7 +42,7 @@ sub hds($$) {
 	eval { $rc = partition_table::read($hd, $flags->{clearall}) }; 
 	if ($@) {
 	    $@ =~ /bad magic number/ or die;
-	    $flags->{forcezero} && !$::testing ? partition_table_raw::zero_MBR($hd) : die;
+	    partition_table_raw::zero_MBR($hd) if $flags->{forcezero};
 	}
 	$rc ? push @hds, $hd : log::l("An error occurred reading the partition table for the block device $_->{device}");
     }

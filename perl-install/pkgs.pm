@@ -8,13 +8,23 @@ use log;
 use smp;
 use fs;
 
-my @skipList = qw(XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
-		  XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
-		  XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs kernel-boot
-		  metroess metrotmpl);
+my @skipThesesPackages = qw(XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 
+	XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-S3 XFree86-S3V
+	XFree86-SVGA XFree86-W32 XFree86-I128 XFree86-Sun XFree86-SunMono
+	XFree86-Sun24 XFree86-3DLabs kernel-boot metroess metrotmpl);
 
 1;
 
+sub skipThisPackage { member($_[0], @skipList) }
+
+sub addInfosFromHeader($$) {
+    my ($packages, $header) = @_;
+
+    $packages{c::headerGetEntry($header, 'name')} = {
+	header => $header, size => c::headerGetEntry($header, 'size'),
+	group => c::headerGetEntry($header, 'group') || "(unknown group)",
+    };
+}
 
 sub psUsingDirectory {
     my ($dirname) = @_;
@@ -27,13 +37,7 @@ sub psUsingDirectory {
 	open F, $_ or log::l("failed to open package $_: $!");
 	my $header = c::rpmReadPackageHeader($_) or log::l("failed to rpmReadPackageHeader $basename: $!");
 	my $name = c::headerGetEntry($header, 'name');
-
-	$packages{lc $name} = { 
-	    header => $header, selected => 0, manuallySelected => 0, name => $name,
-	    size => c::headerGetEntry($header, 'size'),
-	    group => c::headerGetEntry($header, 'group') || "(unknown group)",
-	    inmenu => skipPackage($name),
-	};
+	addInfosFromHeader($package, $header);
     }
     \%packages;
 }
@@ -57,9 +61,9 @@ sub psReadComponentsFile {
 
 	if ($inComp) { if (/^end$/) {
 		$inComp = 0;
-		$comps{lc $current{name}} = { %current };
+		$comps{$current{name}} = { %current };
 	    } else {
-		push @{$current{packages}}, $packages->{lc $_} || log::w "package $_ does not exist (line $n of comps file)";
+		push @{$current{packages}}, $packages->{$_} || log::w "package $_ does not exist (line $n of comps file)";
 	    }
 	} else {
 	    my ($selected, $hidden, $name) = /^([01])\s*(--hide)?\s*(.*)/ or die "bad comps file at line $n";
@@ -124,15 +128,7 @@ sub psFromHeaderListDesc {
 	    $noSeek and last;
 	    die "error reading header at offset ", sysseek($fd, 0, 1);
 	}
-	
-	my $name = c::headerGetEntry($header, 'name');
-
-	$packages{lc $name} = { 
-	    header => $header, size => c::headerGetEntry($header, 'size'),
-	    inmenu => skipPackage($name), name => $name, 
-	    group => c::headerGetEntry($header, 'group') || "(unknown group)",
-	};
-
+	addInfosFromHeader($packages, $header);
 	$noSeek or $end <= sysseek($fd, 0, 1) and last; 
     }
 
@@ -148,41 +144,29 @@ sub psFromHeaderListFile {
     psFromHeaderListDesc(\*F, 0);
 }
 
-sub skipPackage { member($_[0], @skipList) }
+sub init_db {
+    my ($prefix, $isUpgrade) = @_;
 
-sub printSize { } 
-sub printGroup { } 
-sub printPkg { } 
-sub selectPackagesByGroup { } 
-sub showPackageInfo { }
-sub queryIndividual { }
-
-
-sub install {
-    my ($rootPath, $method, $packages, $isUpgrade, $force) = @_;
-
-    my $f = "$rootPath/tmp/" . ($isUpgrade ? "upgrade" : "install") . ".log";
-    local *F;
-    open(F, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No upgrade log will be kept.");
+    my $f = "$prefix/tmp/" . ($isUpgrade ? "upgrade" : "install") . ".log";
+    open(F, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
     my $fd = fileno(F) || log::fd() || 2;
     c::rpmErrorSetCallback($fd);
 #    c::rpmSetVeryVerbose();
     
-    # FIXME: we ought to read /mnt/us/lib/rpmrc if we're in the midst of an upgrade, but it's not obvious how to get RPM to do that. 
-    # if we set netshared path to "" then we get no files installed 
-    # addMacro(&globalMacroContext, "_netsharedpath", NULL, netSharedPath ? netSharedPath : "" , RMIL_RPMRC);    
-    
-    $isUpgrade ? c::rpmdbRebuild($rootPath) : c::rpmdbInit($rootPath, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
+    $isUpgrade ? c::rpmdbRebuild($prefix) : c::rpmdbInit($prefix, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
+}
 
-    my $db = c::rpmdbOpen($rootPath) or die "error opening RPM database: ", c::rpmErrorString();
+sub install {
+    my ($prefix, $method, $toInstall, $isUpgrade, $force) = @_;
+
+    my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
     log::l("opened rpm database");
 
-    my $trans = c::rpmtransCreateSet($db, $rootPath);
+    my $trans = c::rpmtransCreateSet($db, $prefix);
 
     my ($total, $nb);
 
-    foreach my $p ($packages->{basesystem}, 
-	     grep { $_->{selected} && $_->{name} ne "basesystem" } values %$packages) {
+    foreach my $p (@$toInstall) {
 	my $fullname = sprintf "%s-%s-%s.%s.rpm", 
 	                       $p->{name},
 	                       map { c::headerGetEntry($p->{header}, $_) } qw(version release arch);
@@ -194,7 +178,7 @@ sub install {
     c::rpmdepOrder($trans) or c::rpmdbClose($db), c::rpmtransFree($trans), die "error ordering package list: ", c::rpmErrorString();
     c::rpmtransSetScriptFd($trans, $fd);
 
-    eval { fs::mount("/proc", "$rootPath/proc", "proc", 0) };
+    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
 
     log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
 

@@ -43,20 +43,17 @@ sub load($) {
 	my $key = 0;
 	foreach my $value (@keymap) {
 	    c::KTYP($value) != c::KT_SPEC() or next;
-	    ioctl(F, c::KDSKBENT(), pack("CCS", $_, $key++, $value)) or log::l("keymap ioctl failed: $!");
+	    ioctl(F, c::KDSKBENT(), pack("CCS", $_, $key++, $value)) or die "keymap ioctl failed: $!";
 	    $key++;
 	 }
 	$count++;
     }
     log::l("loaded $count keymap tables");
-    1;
 }
 
 sub setup($) {
     my ($defkbd) = @_;
     my $t; 
-
-    #$::testing and return 1;
 
     $defkbd ||= $defaultKeyboards{$ENV{LANG}} || "us";
 
@@ -77,23 +74,20 @@ sub setup($) {
     }
 
     foreach (@infoTable) {
-	read F, $t, $_->[0] or log::l("error reading $_->[0] bytes from file: $!"), return;
+	read F, $t, $_->[0] or die "error reading keymap data: $!";
 
 	if ($defkbd eq $_->[1]) {
 	    log::l("using keymap $_->[1]");
-	    load($t) or return;
-	    &write("/tmp", $_->[1]) or log::l("write keyboard config failed");
-	    return $_->[1];
+	    load($t);
+	    &write("/tmp", $_->[1]);
+	    return;
 	}
     }
-    undef;
+    die "keyboard $defkbd not found in /etc/keymaps";
 }
 
 sub write($$) {
     my ($prefix, $keymap) = @_;
-
-    $keymap or return 1;
-    $::testing and return 1;
 
     local *F;
     open F, ">$prefix/etc/sysconfig/keyboard" or die "failed to create keyboard configuration: $!";
@@ -102,7 +96,7 @@ sub write($$) {
     # write default keymap 
     if (fork) {
 	wait;
-	$? == 0 or log::l('dumpkeys failed');
+	$? == 0 or die "dumpkeys failed";
     } else  {
 	chroot $prefix;
 	CORE::system("/usr/bin/dumpkeys > /etc/sysconfig/console/default.kmap 2>/dev/null");
@@ -114,15 +108,13 @@ sub read($) {
     my ($file) = @_;
 
     local *F;
-    open F, "$file" or # fail silently -- old bootdisks won't create this 
-	log::l("failed to read keyboard configuration (probably ok)"), return;
+    open F, "$file" or die "failed to read keyboard configuration";
 
     foreach (<F>) {
-	($_) = /^KEYTABLE=(.*)/ or die "unrecognized entry in keyboard configuration file";
+	($_) = /^KEYTABLE=(.*)/ or log::l("unrecognized entry in keyboard configuration file ($_)"), next;
 	s/\"//g; 
 	s/\.[^.]*//; # remove extension
 	return basename($_);
     }
-    log::l("empty keyboard configuration file");
-    undef;
+    die "empty keyboard configuration file";
 }

@@ -262,8 +262,6 @@ sub write_conf {
     my ($file, $append) = @_;
     my ($tr, $eth, $scsi) = (0, 0, 0);
 
-    $::testing and return 1;
-
     $append or rename($file, "$file.orig"), log::l("backing up old conf.modules");
 
     local *F;

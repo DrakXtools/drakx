@@ -95,8 +95,6 @@ sub mount($$$;$) {
     my ($dev, $where, $fs, $rdonly) = @_; 
     log::l("mounting $dev on $where as type $fs");
   
-    $::testing and return;
-    
     -d $where or commands::mkdir_('-p', $where);
     
     if ($fs eq 'nfs') {
@@ -186,8 +184,6 @@ sub write($$) {
     # cd-rom rooted installs have the cdrom mounted on /dev/root which 
     # is not what we want to symlink to /dev/cdrom.                    
     my $cddev = first(grep { $_ ne 'root' } map { $_->{device} } @cd_drives);
-
-    $::testing and return 1;
 
     log::l("resetting /etc/mtab");
     local *F;

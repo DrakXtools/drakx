@@ -43,11 +43,11 @@ sub write {
     my ($prefix) = @_;
     my $lang = $ENV{LANG};
 
-    $::testing || !$lang and return 0;
+    $lang or return;
     local *F;
-    open F, "> $prefix/etc/sysconfig/i18n";
-
+    open F, "> $prefix/etc/sysconfig/i18n" or die "failed to reset $prefix/etc/sysconfig/i18n for writing";
     my $f = sub { $_[1] and print F "$_[0]=$_[1]\n"; };
+
     &$f("LANG", $lang);
     &$f("LINGUAS", $lang);
     if (my $l = $languages{$lang}) {
@@ -61,7 +61,6 @@ sub write {
 		     glob_("$p/consoletrans/$l->{map}*"), 
 		     "$prefix/etc/sysconfig/console");
     }
-    1;
 }
 
 sub load_font {

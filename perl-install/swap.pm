@@ -64,9 +64,6 @@ sub make($;$) {
     my $badpages = 0;
     my ($version, $maxpages);
 
-    $devicename or die "nowhere to set up swap on?";
-    $::testing and return;
-
     $devicename = devices::make($devicename);
 
     my $nbpages = divide(devices::size($devicename), $pagesize);

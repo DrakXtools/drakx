@@ -14,7 +14,8 @@ tags:
 
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
-	find . -name "*~" -name "TAGS" -name "*.old" | xargs rm -f
+	rm -f c/c.xs
+	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
 	cd .. ; tar cfy perl-install.tar.bz2 --exclude perl-install/perl perl-install
