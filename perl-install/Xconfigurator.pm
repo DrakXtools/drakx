@@ -208,7 +208,8 @@ sub cardConfiguration(;$$$) {
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
     $card->{prefer_xf3} = ($card->{type} =~ /RIVA TNT/ ||
 			   $card->{type} =~ /RIVA128/ ||
-			   $card->{type} =~ /GeForce/);
+			   $card->{type} =~ /GeForce/ ||
+			   $card->{type} =~ /NeoMagic /);
 
     #- basic installation, use of XFree 4.0 or XFree 3.3.
     my ($xf4_ver, $xf3_ver) = ("4.0.1", "3.3.6");
