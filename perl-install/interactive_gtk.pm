@@ -14,6 +14,7 @@ my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
     ($::windowheight, $::windowwidth) = my_gtk::gtkroot()->get_size if !$::isInstall;
+    ($::wantedheight, $::wantedwidth) = ($::windowheight * 0.8, $::windowwidth * 0.8);
     goto &interactive::new;
 }
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
@@ -494,10 +495,10 @@ sub ask_fromW {
 	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
 
 	my $width = max(250, $max_width * 5);
-	$mainw->{box_width} = min($::windowheight * 0.7, $width);
+	$mainw->{box_width} = min($::wantedwidth, $width);
 
 	my $height = max(200, my_gtk::n_line_size($always_total_size, 'various', $mainw->{rwindow}));
-	$mainw->{box_height} = min($::windowheight * 0.7, $height);
+	$mainw->{box_height} = min($::wantedheight, $height);
 
 	my $has = $width > $mainw->{box_width} || $height > $mainw->{box_height};
 	$has_scroll ||= $has;
