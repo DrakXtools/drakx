@@ -180,6 +180,9 @@ sub init {
     if (-f '/etc/X11/X') {
         print "using existing host configuration\n";
         $using_existing_host_config = 1;
+
+	#- so that /etc/devfsd/conf.d/mouse.conf is used and /dev/mouse created
+	run_program::run('/sbin/service', 'devfsd', 'reload');
     }
     if (-s '/etc/sysconfig/i18n') {
         lang::set($o->{locale} = lang::read('', 0)); #- read ~/.i18n first if it exists
@@ -692,7 +695,7 @@ sub automatic_xconf {
 	lomount_clp('nvidia', '/usr/lib/libGLcore.so.1');
     }
     my $lib = 'libGL.so.1';
-    symlinkf("/usr/lib/$lib.$Driver", "/etc/X11/$lib") if -e "/usr/lib/$lib.$Driver";
+    symlinkf_short(-e "/usr/lib/$lib.$Driver" ? "/usr/lib/$lib.$Driver" : "/usr/X11R6/lib/$lib", "/etc/X11/$lib");
 }
 
 
