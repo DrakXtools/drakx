@@ -494,13 +494,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     #-  why not? cuz weather is nice today :-) [pixel]
     common::sync(); common::sync();
 
-    my $have_devfsd = do {
-	my $p = pkgs::packageByName($o->{packages}, 'devfsd');
-	$p && $p->flag_installed;
-    };
-    require bootloader;
-    bootloader::may_append_with_key($o->{bootloader}, devfs => $have_devfsd ? 'mount' : 'nomount');
-
     #- generate /etc/lvmtab needed for rc.sysinit
     run_program::rooted($o->{prefix}, 'lvm2', 'vgscan') if -e '/etc/lvmtab';
 
