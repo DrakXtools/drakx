@@ -62,6 +62,17 @@ sub load_rc {
 	Gtk2::Rc->parse_string(join("\n", @contents));
     }
 
+    if ($::move) {
+        #- override selection color since we won't do inverse-video on the text when it's images
+	Gtk2::Rc->parse_string(q(
+style "galaxy-default"
+{
+    bg[SELECTED]      = "#CECECE"
+    base[ACTIVE]      = "#CECECE"
+    base[SELECTED]    = "#CECECE"
+}
+));
+    }
 }
 
 #------------------------------------------------------------------------------
