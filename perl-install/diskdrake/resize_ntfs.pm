@@ -20,7 +20,9 @@ sub min_size {
 
 sub resize {
     my ($o, $size) = @_;
-    run_program::run_or_die('ntfsresize', '-ff', '-s' . int($size / 2) . 'ki', $o->{dev});
+    my @l = ('-ff', '-s' . int($size / 2) . 'ki', $o->{dev});
+    run_program::run_or_die('ntfsresize', '-n', @l);
+    run_program::run_or_die('ntfsresize', @l);
 }
 
 1;
