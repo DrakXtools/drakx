@@ -31,7 +31,7 @@ sub install {
 }
 
 sub what_provides {
-    my ($o, $name) = @;
+    my ($o, $name) = @_;
     my ($what) = split '\n', `urpmq '$name' 2>/dev/null`;
     split '\|', $what;
 }
