@@ -750,10 +750,20 @@ sub rebuild_db_open_for_traversal {
 	    ($? & 0xff00) and die "rebuilding of rpm database failed";
 	} else {
 	    log::l("rebuilding rpm database");
-	    c::rpmdbRebuild($prefix) and c::_exit(0);
+	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";
+	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), commands::rm("-rf", $rebuilddb_dir);
 
-	    log::l("rebuilding of rpm database failed: ". c::rpmErrorString());
-	    c::_exit(2);
+	    c::rpmdbRebuild($prefix) or log::l("rebuilding of rpm database failed: ". c::rpmErrorString()), c::_exit(2);
+
+	    #-rebuilding has been successfull, so remove old rpm database if any.
+	    log::l("rebuilding rpm database completed successfully");
+	    foreach (qw(conflictsindex.rpm fileindex.rpm groupindex.rpm nameindex.rpm packages.rpm
+                        providesindex.rpm requiredby.rpm triggerindex.rpm)) {
+		-e "$prefix/var/lib/rpm/$_" or next;
+		log::l("removing old rpm file $_");
+		commands::rm("-f", "$prefix/var/lib/rpm/$_");
+	    }
+	    c::_exit(0);
 	}
 	$packages->{rebuild_db} = undef;
     }
