@@ -201,7 +201,7 @@ sub bestKernelPackage {
 	@kernels = @l;
     }
     my $prefered_ext = 
-      detect_devices::is_i586() || 1 ? 'i586-up-1GB' :
+      detect_devices::is_i586() ? 'i586-up-1GB' :
       c::dmiDetectMemory() > 4 * 1024 ? 'enterprise' : 
       detect_devices::hasSMP() ? 'smp' : 
       '';
