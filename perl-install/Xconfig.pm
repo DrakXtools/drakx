@@ -30,6 +30,7 @@ sub getinfo {
     my ($mouse) = mouse::detect();
     add2hash($o->{mouse}, $mouse) unless $o->{mouse}{XMOUSETYPE};
     add2hash($o->{mouse}{auxmouse}, $mouse->{auxmouse}) unless $o->{mouse}{auxmouse}{XMOUSETYPE};
+    $o->{mouse}{auxmouse}{XMOUSETYPE} or delete $o->{mouse}{auxmouse};
 
     $o->{mouse}{device} ||= "mouse" if -e "/dev/mouse";
     $o;
