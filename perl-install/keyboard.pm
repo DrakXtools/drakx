@@ -384,7 +384,7 @@ sub from_usb() {
 
 sub load {
     my ($keymap) = @_;
-    return if $::testing;
+    return if $::testing || c::kernel_version() =~ /^\Q2.6/;
 
     my ($magic, @keymaps) = unpack "I i" . c::MAX_NR_KEYMAPS() . "a*", $keymap;
     $keymap = pop @keymaps;
