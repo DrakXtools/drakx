@@ -95,7 +95,7 @@ sub initrd {
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
     if ($ftype eq "pcmcia" && $arch !~ /ppc/ && $arch !~ /ia64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
-	 _ "$sudo patch --no-backup-if-mismatch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
+	 _ "$sudo patch --no-backup-if-mismatch -p0 -d $mnt/etc < tools/pcmcia_config.patch";
     }
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
     $modz = "all.modules$I/$ext";
