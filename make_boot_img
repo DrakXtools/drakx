@@ -13,6 +13,7 @@ my $default_append = "ramdisk_size=128000";
 # full acpi support for x86_64, enough acpi support for x86 ht, no acpi for others
 my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "" : "acpi=off";
 my $default_vga = "vga=788 splash=silent";
+my $timeout = 150;
 
 my $instdir = "mdk-stage1";
 my $tmp_mnt = '/tmp/drakx_mnt';
@@ -114,7 +115,7 @@ sub syslinux_msg {
 		syslinux_color($type) . xml_tree2syslinux($type, $val) . syslinux_color($current_color);
 	    }
 	} group_by2(@l));
-    };
+    }
 
     print "parsing $msg_xml_file\n";
     my $tree = XML::Parser->new(Style => 'Tree')->parsefile($msg_xml_file);
@@ -127,7 +128,7 @@ sub syslinux_msg {
 }
 
 sub syslinux_cfg {
-    my ($timeout, $entries) = @_;
+    my (@entries) = @_;
 
     my $header = <<EOF;
 default linux
@@ -143,7 +144,7 @@ EOF
 	"label $_->{label}\n" .
 	"  kernel $_->{kernel}\n" .
 	($_->{initrd} ? "  append initrd=$_->{initrd} $_->{append}\n" : '');
-    } @$entries;
+    } @entries;
 
     $header . join('', @l);
 }
@@ -232,7 +233,7 @@ sub entries_append {
 sub syslinux_cfg_all {
     my ($type) = @_;
 
-    syslinux_cfg(150, [
+    syslinux_cfg(
 	(map {
 	    { kernel => 'alt0/vmlinuz', initrd => 'alt0/all.rdz', %$_ };
 	} entries_append($type)),
@@ -241,7 +242,7 @@ sub syslinux_cfg_all {
 	      append => "$default_append $default_acpi $default_vga" };
 	} @kernels),
 	{ label => 'memtest', kernel => 'test/memtest.bin' },
-    ]);
+    );
 }
 
 sub boot_img_i386 {
@@ -266,10 +267,9 @@ sub boot_img_i386 {
     my $short_type = substr($type, 0, 8);
 
     output("$mnt/syslinux.cfg", 
-	   syslinux_cfg(72, #- timeout
-			[ map {
+	   syslinux_cfg(map {
 			    { kernel => 'vmlinuz', initrd => "$short_type.rdz", %$_ };
-			} entries_append($type) ]));
+			} entries_append($type)));
 
     eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
     if ($@) {
