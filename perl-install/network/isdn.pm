@@ -121,7 +121,7 @@ sub get_info_providers_backend {
     }
 }
 
-sub read_providers_backend { map { /(.*?)=>/ } catMaybeCompressed($file) }
+sub read_providers_backend() { map { /(.*?)=>/ } catMaybeCompressed($file) }
 
 
 sub isdn_detect_backend() {
