@@ -583,6 +583,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	if (!IS_NOAUTO)
 		handle_pcmcia(&pcmcia_adapter);
 #endif
+        
+        // load usb interface as soon as possible, helps usb mouse detection in stage2 */
+	probe_that_type(USB_CONTROLLERS, BUS_USB);
 
 	if (IS_CHANGEDISK)
 		stg1_info_message("You are starting the installation with an alternate booting method. "
