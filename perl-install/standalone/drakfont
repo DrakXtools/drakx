@@ -296,13 +296,25 @@ sub put_font_dir {
 }
 
 
-# todo : finir supperssion fontes Types!
 sub remove_gs_fonts {
-      if (listlength all("$drakfont_dir/remove "))  {
-	system (" cd $drakfont_dir/remove && $type1inst ");
-	my @font_out = cat_("$drakfont_dir/remove/Fontmap");
-	my @font_out = cat_("$drakfont_dir/remove/Fontmap");
+    my @Fontmap_new;
+
+    if (all("$drakfont_dir/remove"))  {
+	system (" cd $drakfont_dir/remove && $type1inst && touch tttttttttt");
+	my @Fontmap_out = cat_("$drakfont_dir/remove/Fontmap");
+	my $FontmapGS = `rpm -ql ghostscript | grep Fontmap.GS`;
+	chomp ($FontmapGS);
+	my @FontmapGS_list = cat_($FontmapGS);
+	foreach my $font_gs (@FontmapGS_list) {
+	    my @tmp_list = split (' ',$font_gs);
+	    grep ( $_ =~ /$tmp_list[0]/ , @Fontmap_out) or  push @Fontmap_new, $font_gs;
+	}
+	print $_ foreach @Fontmap_new;
+	output($FontmapGS.".tmp2", @Fontmap_new );
+    }
 }
+
+
 
 sub remove_fonts {
     my @list_dir;
@@ -311,7 +323,7 @@ sub remove_fonts {
     foreach my $i (@font_list) {
       $_ = $i;
       if ( /.pfb$/ || /.pfm$/ || /.pfa$/ ) {
-	system ("mv $_ $drakfont_dir/remove ");
+	system ("cp $_ $drakfont_dir/remove ");
       }
       else {
 	rm_rf($i);
@@ -330,10 +342,11 @@ sub remove_fonts {
 	#	    # do type1inst in this path
 	system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
       }
-    }
-    -e "/usr/share/ghostscript" and  rm_rf("$drakfont_dir/remove");
   }
+    system ("/etc/rc.d/init.d/xfs restart");
+    -e "/usr/share/ghostscript" and  rm_rf("$drakfont_dir/remove");
 }
+
 
 
 $xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
