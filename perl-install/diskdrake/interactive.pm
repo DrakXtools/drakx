@@ -483,7 +483,10 @@ sub Create {
 	    check($in, $hd, $part, $all_hds) or return 1;
 	    $migrate_files = need_migration($in, $part->{mntpoint}) or return 1;
 
-	    eval { fsedit::add($hd, $part, $all_hds, { force => 1, primaryOrExtended => $primaryOrExtended }) };
+	    eval { 
+		catch_cdie { fsedit::add($hd, $part, $all_hds, { force => 1, primaryOrExtended => $primaryOrExtended }) }
+		  sub { $in->ask_warn('', formatError($@)); 1 };
+	    };
 	    if (my $err = $@) {
 		if ($err =~ /raw_add/ && $hd->hasExtended && !$hd->{primary}{extended}) {
 		    $in->ask_warn(N("Error"), N("You can't create a new partition
@@ -1013,7 +1016,10 @@ sub check_type {
 }
 sub check_mntpoint {
     my ($in, $mntpoint, $hd, $part, $all_hds) = @_;
-    eval { fsedit::check_mntpoint($mntpoint, $hd, $part, $all_hds) };
+    eval { 
+	catch_cdie { fsedit::check_mntpoint($mntpoint, $hd, $part, $all_hds) }
+	  sub { $in->ask_warn('', formatError($@)); 1 };
+    };
     if (my $err = $@) {
 	$in->ask_warn('', formatError($err));
 	return;
