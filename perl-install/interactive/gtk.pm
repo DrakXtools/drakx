@@ -46,8 +46,7 @@ sub create_boxradio {
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
 
 	$w->signal_connect(key_press_event => sub {
-            my ($w, $event) = @_;
-	    $may_go_to_next->($w, $event, 'tab');
+	    &$may_go_to_next;
 	    1;
 	});
 	$w->signal_connect(clicked => sub {
@@ -62,8 +61,11 @@ sub create_boxradio {
     } $e->{list}, \@radios;
 
     $boxradio, sub {
-	my ($v) = @_;
-	mapn { $_[0]->set_active($_[1] eq $v) } \@radios, $e->{list};
+	my ($v, $full_struct) = @_;
+	mapn { 
+	    $_[0]->set_active($_[1] eq $v);
+	    $full_struct->{focus_w} = $_[0] if $_[1] eq $v;
+	} \@radios, $e->{list};
     }, $radios[0];
 }
 
@@ -302,7 +304,7 @@ sub create_list {
 	$item->signal_connect(key_press_event => sub {
     	    my ($_w, $event) = @_;
     	    my $c = chr($event->keyval & 0xff);
-	    $may_go_to_next->($event) if $event->keyval < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
+	    &$may_go_to_next if $event->keyval < 0x100 ? $c eq ' ' : $c eq "\r" || $c eq "\x8d";
     	    1;
     	});
 	$list->append_items($item);
@@ -344,7 +346,7 @@ sub ask_fromW {
 
     my $set_all = sub {
 	$ignore = 1;
-	$_->{set}->(${$_->{e}{val}}) foreach @widgets_always, @widgets_advanced;
+	$_->{set}->(${$_->{e}{val}}, $_) foreach @widgets_always, @widgets_advanced;
 	$_->{real_w}->set_sensitive(!$_->{e}{disabled}()) foreach @widgets_always, @widgets_advanced;
 	$ignore = 0;
     };
@@ -363,23 +365,12 @@ sub ask_fromW {
 
 	my $may_go_to_next = sub {
 	    my ($w, $event, $kind) = @_;
-	    if ($kind eq 'tab') {
-		if (($event->keyval & 0x7f) == 0x9) {
-		    $w->signal_stop_emission_by_name('key_press_event');
-		    if ($ind == $#widgets) {
-			$mainw->{ok}->grab_focus;
-		    } else {
-			$widgets[$ind+1]{focus_w}->grab_focus;
-		    }
-		}
-	    } else {
-		if (!$event || ($event->keyval & 0x7f) == 0xd) {
-		    $w->signal_stop_emission_by_name('key_press_event') if $event;
-		    if ($ind == $#widgets) {
-			@widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
-		    } else {
-			$widgets[$ind+1]{focus_w}->grab_focus;
-		    }
+	    if (!$event || ($event->keyval & 0x7f) == 0xd) {
+		$w->signal_stop_emission_by_name('key_press_event') if $event;
+		if ($ind == $#widgets) {
+		    @widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
+		} else {
+		    $widgets[$ind+1]{focus_w}->grab_focus;
 		}
 	    }
 	};
@@ -613,11 +604,9 @@ sub ask_fromW {
 	$has ? create_scrolled_window($w) : $w;
     };
 
-    gtkpack_($pack,
-	     1, $create_widgets->($always_total_size, @widgets_always),
-	     if_($common->{ok} || !exists $common->{ok},
-		 0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_(@$l2, $advanced_button))));
+    my $always_pack = $create_widgets->($always_total_size, @widgets_always);
     my $has_scroll_always = $has_scroll;
+
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
     $advanced_pack = 
       gtkpack_(Gtk2::VBox->new(0,0),
@@ -626,11 +615,21 @@ sub ask_fromW {
 	       0, Gtk2::HSeparator->new,
 	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
 
+    my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_(@$l2, $advanced_button));
+
+    $pack->pack_start($always_pack, 1, 1, 0); $always_pack->show;
     $pack->pack_start($advanced_pack, 1, 1, 0);
+    $pack->pack_start($buttons_pack, 0, 0, 0) if $buttons_pack; $buttons_pack->show if $buttons_pack;
     gtkadd($mainw->{window}, $pack);
     $set_default_size->() if $has_scroll_always;
     $set_advanced->(0);
-    ($common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
+    
+    my $widget_to_focus =
+      $common->{focus_cancel} ? $mainw->{cancel} :
+	@widgets && ($common->{focus_first} || @widgets == 1 && member(ref $widgets[0]{focus_w}, "Gtk2::TreeView", "Gtk2::RadioButton")) ? 
+	  $widgets[0]{focus_w} : 
+	    $mainw->{ok};
+    $widget_to_focus->grab_focus();
 
     my $check = sub {
 	my ($f) = @_;
