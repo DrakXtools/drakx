@@ -67,15 +67,15 @@ sub test {
     my $b = before_leaving { unlink $f_err };
 
     if (!xtest(":9")) {
-	local *F; open F, $f_err;
+	open my $F, $f_err;
 
 	local $_;
-      i: while (<F>) {
+      i: while (<$F>) {
 	    if (Xconfig::card::using_xf4($card)) {
 		if (/^\(EE\)/ && !/Disabling/ || /^Fatal\b/) {
 		    my @msg = !/error/ && $_;
 		    local $_;
-		    while (<F>) {
+		    while (<$F>) {
 			/reporting a problem/ and last;
 			push @msg, $_;
 			$in->ask_warn('', [ N("An error occurred:"), " ", @msg, N("\ntry to change some parameters") ]);
@@ -86,7 +86,7 @@ sub test {
 		if (/\b(error|not supported)\b/i) {
 		    my @msg = !/error/ && $_;
 		    local $_;
-		    while (<F>) {
+		    while (<$F>) {
 			/not fatal/ and last i;
 			/^$/ and last;
 			push @msg, $_;
@@ -99,10 +99,9 @@ sub test {
     }
 
     $::noShadow = 1;
-    local *F;
-    open F, "|perl 2>/dev/null";
-    print F "use lib qw(", join(' ', @INC), ");\n";
-    print F q(
+    open my $F, "|perl 2>/dev/null";
+    print $F "use lib qw(", join(' ', @INC), ");\n";
+    print $F q(
         BEGIN { $::no_ugtk_init = 1 }
         require lang;
         require my_gtk; 
@@ -138,7 +137,7 @@ sub test {
         my $in = interactive::gtk->new;
 	$in->exit($in->ask_yesorno('', [ N("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     );
-    my $rc = close F;
+    my $rc = close $F;
     my $err = $?;
 
     $rc || $err == 222 << 8 or $in->ask_warn('', N("An error occurred, try to change some parameters"));

@@ -8,14 +8,14 @@ use run_program;
 use log;
 use c;
 
-sub size($) {
-    local *F;
-    sysopen F, $_[0], 0 or log::l("open $_[0]: $!"), return 0;
+sub size {
+    my ($dev) = @_;
+    sysopen(my $F, $dev, 0) or log::l("open $dev: $!"), return 0;
 
-    my $valid_offset = sub { sysseek(F, $_[0], 0) && sysread(F, my $a, 1) };
+    my $valid_offset = sub { sysseek($F, $_[0], 0) && sysread($F, my $a, 1) };
 
     #- first try getting the size nicely
-    if (my $size = c::total_sectors(fileno F)) {
+    if (my $size = c::total_sectors(fileno $F)) {
 	return $size * $common::SECTORSIZE;
     }
 
@@ -24,11 +24,11 @@ sub size($) {
     my ($high, $mid);
 
     #- first find n where 2^n < size <= 2^n+1
-    for ($high = 1; $high > 0 && &$valid_offset($high); $high *= 2) { $low = $high }
+    for ($high = 1; $high > 0 && $valid_offset->($high); $high *= 2) { $low = $high }
 
     while ($low < $high - 1) {
 	$mid = int(($low + $high) / 2);
-	&$valid_offset($mid) ? $low : $high = $mid;
+	$valid_offset->($mid) ? $low : $high = $mid;
     }
     $low + 1;
 }
@@ -40,10 +40,8 @@ sub del_loop {
 sub find_free_loop {
     foreach (0..7) {
 	my $dev = make("loop$_");
-	local *F;
-	sysopen F, $dev, 2 or next;
-	!ioctl(F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
-	close F;
+	sysopen(my $F, $dev, 2) or next;
+	!ioctl($F, c::LOOP_GET_STATUS(), my $tmp) && $! == 6 or next; #- 6 == ENXIO
 	return $dev;
     }
     die "no free loop found";
@@ -55,10 +53,9 @@ sub set_loop {
     if ($encrypt_key && $encryption) {
 	my $cmd = "losetup -p 0 -e $encryption $dev $file";
 	log::l("calling $cmd");
-	local *F;
-	open F, "|$cmd";
-	print F $encrypt_key;
-	close F or die "losetup failed";
+	open my $F, "|$cmd";
+	print $F $encrypt_key;
+	close $F or die "losetup failed";
     } else {
 	run_program::run("losetup", $dev, $file) or return;
     }
