@@ -10,7 +10,7 @@ Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.95-6mdk, /usr/X11R6/b
 Conflicts: drakconf < 9.1-14mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
-BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9-3mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
+BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.4.9-3mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
