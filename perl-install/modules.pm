@@ -329,7 +329,7 @@ my %type_aliases = (
 
 my @skip_big_modules_on_stage1 = 
 qw(
-sk98lin
+sk98lin dc395x_trm
 ); #******(missing-2.4)  dpt_i2o aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
 
 #acenic 
