@@ -73,7 +73,7 @@ and crontab(1))."),
 'enable_console_log' => N("Enable/Disable syslog reports to console 12"),
 
 'enable_dns_spoofing_protection' => N("Enable/Disable name resolution spoofing protection.  If
-\"alert\" is true, also reports to syslog."),
+\"%s\" is true, also reports to syslog.", N("Security Alerts:")),
 
 'enable_ip_spoofing_protection' => N("Enable/Disable IP spoofing protection."),
 
