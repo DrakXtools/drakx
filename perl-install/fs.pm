@@ -203,8 +203,8 @@ sub get_info_from_fstab {
 }
 
 sub prepare_write_fstab {
-    my ($fstab, $prefix, $keep_smb_credentials) = @_;
-    $prefix ||= '';
+    my ($fstab, $o_prefix, $b_keep_smb_credentials) = @_;
+    $o_prefix ||= '';
 
     my %new;
     my @smb_credentials;
@@ -212,10 +212,10 @@ sub prepare_write_fstab {
 	my $device = 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : $_->{loopback_device}{mntpoint}) . $_->{loopback_file} :
-	  part2device($prefix, $_->{device}, $_->{type});
+	  part2device($o_prefix, $_->{device}, $_->{type});
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
-	mkdir_p("$prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
+	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
 	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $real_mntpoint;
 
 	my ($freq, $passno) =
@@ -232,7 +232,7 @@ sub prepare_write_fstab {
 
 	    my $options = $_->{options};
 
-	    if (isThisFs('smbfs', $_) && $options =~ /password=/ && !$keep_smb_credentials) {
+	    if (isThisFs('smbfs', $_) && $options =~ /password=/ && !$b_keep_smb_credentials) {
 		require network::smb;
 		if (my ($opts, $smb_credentials) = network::smb::fstab_entry_to_credentials($_)) {
 		    $options = $opts;
