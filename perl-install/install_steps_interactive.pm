@@ -140,7 +140,7 @@ sub selectInstallClass {
 sub selectMouse {
     my ($o, $force) = @_;
 
-    $force ||= $o->{mouse}{unsafe} || $::expert;
+    $force ||= $o->{mouse}{unsafe};
 
     my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
     $o->{mouse} = mouse::fullname2mouse(
@@ -263,8 +263,6 @@ sub doPartitionDisks {
 			            \&partition_table::description, \@l) or die "setstep exitInstall\n";
         }
 	install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
-    } elsif ($::expert && $o->isa('interactive::gtk')) {
-        install_interactive::partition_with_diskdrake($o, $o->{all_hds});
     } else {
         install_interactive::partitionWizard($o);
     }
@@ -362,14 +360,14 @@ sub choosePackages {
     $o->chooseCD($packages) if $o->{method} eq 'cdrom' && !$::oem;
 
     my $availableC = install_steps::choosePackages(@_);
-    my $individual = $::expert;
+    my $individual;
 
     require pkgs;
 
     my $min_size = pkgs::selectedSize($packages);
     $min_size < $availableC or die N("Your system does not have enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
-    my $min_mark = $::expert ? 3 : 4;
+    my $min_mark = 4;
 
     my $b = pkgs::saveSelected($packages);
     my $_level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
@@ -516,10 +514,8 @@ sub chooseGroups {
 Please choose the minimal installation you want:"),
 		     [
 		      { val => \$o->{compssUsersChoice}{X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
-		        if_($::expert || $minimal,
 		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
 		      { val => \$minimal, type => 'bool', text => N("Truly minimal install (especially no urpmi)") },
-			),
 		     ],
 		     changed => sub { $o->{compssUsersChoice}{X} = $docs = 0 if $minimal },
 	) or return &chooseGroups;
@@ -816,7 +812,7 @@ sub summary {
 
     if ($first_time) {
 	#- auto-detection
-	$o->configurePrinter(0) if !$::expert;
+	$o->configurePrinter(0);
 	install_any::preConfigureTimezone($o);
     }
     my $mouse_name;
@@ -887,7 +883,6 @@ sub summary {
 #------------------------------------------------------------------------------
 sub configurePrinter {
     my ($o, $clicked) = @_;
-    $::corporate && !$clicked and return;
 
     require printer::main;
     require printer::printerdrake;
@@ -895,7 +890,7 @@ sub configurePrinter {
 
     #- try to determine if a question should be asked to the user or
     #- if he is autorized to configure multiple queues.
-    my $ask_multiple_printer = ($::expert || $clicked) && 2 || $o && printer::detect::local_detect();
+    my $ask_multiple_printer = $clicked ? 2 : $o && printer::detect::local_detect();
     $ask_multiple_printer-- or return;
 
     #- install packages needed for printer::getinfo()
