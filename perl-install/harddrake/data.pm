@@ -82,7 +82,7 @@ our @tree =
       icon => "harddisk.png",
       configurator => "$sbindir/diskdrake",
       detector => sub { f(detect_devices::hds()) },
-      checked_on_boot => 1,
+      checked_on_boot => 0,
      },
 
      {
@@ -209,7 +209,7 @@ our @tree =
           my @net_modules = list_modules::category2modules(network::ethernet::get_eth_categories());
           f(grep { member($_->{driver}, @net_modules) } @devices);
       },
-      checked_on_boot => 1,
+      checked_on_boot => 0,
      },
 
      {
@@ -231,7 +231,7 @@ our @tree =
           my $a = network::adsl::adsl_detect();
           $a ? f(grep { $_ } values %$a) : ();
       },
-      checked_on_boot => 1,
+      checked_on_boot => 0,
      },
 
      {
