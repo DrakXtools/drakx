@@ -2,6 +2,7 @@ package network::nfs;
 
 use common;
 use network::network;
+use log;
 
 sub check {
     my ($in) = @_;
