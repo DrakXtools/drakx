@@ -4,7 +4,7 @@
 
 use MDK::Common;
 
-my $prefix = $ARGV[0] || '/tmp/live_tree';
+my ($prefix) = @ARGV or die "usage: $0 <prefix>\n";
 
 my @conf = cat_("$prefix/etc/fonts/fonts.conf");
 
