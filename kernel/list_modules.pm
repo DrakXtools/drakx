@@ -22,11 +22,11 @@ our %l = (
         qw(b44 bcm4400 com20020-pci cs89x0 de2104x de600 de620),
         qw(defxx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
-        qw(ewrk3 farsync fealnx hamachi hp hp-plus hp100),
+        qw(ewrk3  fealnx hamachi hp hp-plus hp100),
         qw(iph5526), #- fibre channel
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
         qw(pcnet32 plip prism2_plx rcpci),
-        qw(sb1000 sdladrv sis900 skfp smc-ultra smc9194 starfire),
+        qw(sb1000 sis900 skfp smc-ultra smc9194 starfire),
         qw(tc35815 tlan tulip typhoon via-rhine),
         qw(wd winbond-840 forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
@@ -67,6 +67,7 @@ our %l = (
       qw(slamr slusb snd-atiixp-modem snd-intel8x0m snd-via82xx-modem),
     ],
     tokenring => [ qw(3c359 abyss ibmtr lanstreamer olympic proteon skisa smctr tms380tr tmspci) ],
+    wan => [ qw(c101 cosa cyclomx cycx_drv dlci farsync hdlc hostess_sv11 n2 pc300 pci200syn sbni sdla sdladrv sealevel syncppp wanxl z85230) ],
   },
 
   ################################################################################
