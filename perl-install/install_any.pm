@@ -316,7 +316,7 @@ sub setPackages {
 	$o->{compss} = pkgs::readCompss($o->{prefix}, $o->{packages});
 	#- must be done after getProvides
 	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
-	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
+	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{meta_class});
 
 	if ($::auto_install && !$o->{compssUsersChoice}) {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
