@@ -819,8 +819,8 @@ notation (for example, 1.2.3.4).")),
                     data => sub {
                         [ $auto_ip ? 
                           (
-                           { text => N("Assign host name from DHCP address"), val => \$needhostname, type => "bool", disabled => sub { ! $auto_ip } },
-                           { label => N("DHCP host name"), val => \$ethntf->{DHCP_HOSTNAME}, disabled => sub { ! ($auto_ip && $needhostname) } },
+                           { text => N("Assign host name from DHCP address"), val => \$needhostname, type => "bool" },
+                           { label => N("DHCP host name"), val => \$ethntf->{DHCP_HOSTNAME}, disabled => sub { !$needhostname } },
                           )
                           :
                           (
