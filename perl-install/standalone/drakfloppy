@@ -75,8 +75,6 @@ $kernel_combo->entry->set_text(chomp_(`uname -r`));
 
 ##########################################################
 
-my $tips = new Gtk2::Tooltips;
-
 ### main window
 $window->{window}->add(
                        gtkpack_(Gtk2::VBox->new,

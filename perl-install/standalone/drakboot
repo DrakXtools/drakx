@@ -97,7 +97,6 @@ my %themes = 	('path' => '/usr/share/bootsplash/themes/',
                );
 my $kernel_release = `uname -r`;
 chomp $kernel_release;
-my $initrd = "/boot/initrd-$kernel_release.img" if -f "/boot/initrd-$kernel_release.img";
 
 require Xconfig::resolution_and_depth;
 my $cur_res;
