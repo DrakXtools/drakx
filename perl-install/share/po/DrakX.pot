@@ -862,6 +862,16 @@ msgstr ""
 
 #: ../../common.pm:1
 #, c-format
+msgid "consolehelper missing"
+msgstr ""
+
+#: ../../common.pm:1
+#, c-format
+msgid "kdesu missing"
+msgstr ""
+
+#: ../../common.pm:1
+#, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr ""
 
@@ -2123,6 +2133,16 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#, c-format
+msgid "No"
+msgstr ""
+
+#: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Yes"
+msgstr ""
+
 #: ../../install_any.pm:1
 #, c-format
 msgid ""
@@ -2180,11 +2200,6 @@ msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid "You don't have enough free space on your Windows partition"
-msgstr ""
-
-#: ../../install_interactive.pm:1
-#, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, don't forget to save using `w'"
@@ -2222,12 +2237,22 @@ msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid "There is no FAT partition to resize or to use as loopback (or not enough space left)"
+msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "FAT resizing failed: %s"
+msgstr ""
+
+#: ../../install_interactive.pm:1
+#, c-format
+msgid "Resizing Windows partition"
+msgstr ""
+
+#: ../../install_interactive.pm:1 ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Resizing"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -2260,19 +2285,14 @@ msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid ""
-"The FAT resizer is unable to handle your partition, \n"
-"the following error occured: %s"
+msgid "Computing the size of the Windows partition"
 msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid "Resizing Windows partition"
-msgstr ""
-
-#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Resizing"
+msgid ""
+"The FAT resizer is unable to handle your partition, \n"
+"the following error occured: %s"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -2283,6 +2303,11 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
+msgstr ""
+
+#: ../../install_interactive.pm:1
+#, c-format
+msgid "There is no FAT partition to use as loopback (or not enough space left)"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -2937,7 +2962,7 @@ msgstr ""
 msgid "Bootloader"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer"
 msgstr ""
@@ -2952,7 +2977,7 @@ msgstr ""
 msgid "Keyboard"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
 #, c-format
 msgid "Mouse"
 msgstr ""
@@ -3393,26 +3418,6 @@ msgstr ""
 #: ../../interactive.pm:1
 #, c-format
 msgid "Choose a file"
-msgstr ""
-
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#, c-format
-msgid "No"
-msgstr ""
-
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Yes"
-msgstr ""
-
-#: ../../interactive.pm:1 ../../interactive.pm:1
-#, c-format
-msgid "consolehelper missing"
-msgstr ""
-
-#: ../../interactive.pm:1
-#, c-format
-msgid "kdesu missing"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -4622,7 +4627,7 @@ msgid ""
 "--config-info         : explain configuration file options (for non-X users).\n"
 "--daemon              : use daemon configuration. \n"
 "--help                : show this message.\n"
-"--version             : show version name.\n"
+"--version             : show version number.\n"
 ""
 msgstr ""
 
@@ -5288,8 +5293,7 @@ msgstr ""
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid ""
-"You have one big FAT partition\n"
-"(generally used by MicroSoft Dos/Windows).\n"
+"You have one big MicroSoft Windows partition.\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
@@ -6076,6 +6080,121 @@ msgstr ""
 msgid "cpu # "
 msgstr ""
 
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "SMBus controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "USB controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "SCSI controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "(E)IDE/ATA controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Joystick"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Scanner"
+msgstr ""
+
+#: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown/Others"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Bridges and system controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Modem"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Ethernetcard"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Processors"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Webcam"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Soundcard"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Other MultiMedia devices"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Tvcard"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Videocard"
+msgstr ""
+
+#: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
+#, c-format
+msgid "Tape"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "DVD-ROM"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "CD/DVD burners"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "CDROM"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Disk"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Zip"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Floppy"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
@@ -6202,7 +6321,7 @@ msgstr ""
 msgid "Switching between ALSA and OSS help"
 msgstr ""
 
-#: ../../harddrake/sound.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1 ../../standalone/drakfont:1
+#: ../../harddrake/sound.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #, c-format
 msgid "Help"
 msgstr ""
@@ -6615,6 +6734,11 @@ msgstr ""
 msgid "Web Server"
 msgstr ""
 
+#: ../../network/ethernet.pm:1
+#, c-format
+msgid "Zeroconf Host name"
+msgstr ""
+
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
@@ -6644,7 +6768,7 @@ msgstr ""
 msgid "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
 
-#: ../../network/ethernet.pm:1 ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Choose the network interface"
 msgstr ""
@@ -7563,6 +7687,11 @@ msgstr ""
 msgid ", multi-function device on parallel port \\#%s"
 msgstr ""
 
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", USB printer"
+msgstr ""
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", USB printer \\#%s"
@@ -7573,7 +7702,7 @@ msgstr ""
 msgid " on parallel port \\#%s"
 msgstr ""
 
-#: ../../printer/main.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
 msgstr ""
@@ -7628,7 +7757,7 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Printerdrake"
 msgstr ""
@@ -7785,11 +7914,6 @@ msgstr ""
 msgid "Add a new printer"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Reading printer data..."
-msgstr ""
-
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Normal Mode"
@@ -7852,7 +7976,17 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Failed to configure printer \"%s\"!"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Configuring printer \"%s\"..."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Reading printer data..."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -8733,32 +8867,57 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Here is a list of all auto-detected printers. Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."
+msgid "Please choose the printer to which the print jobs should go."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "The following printer was auto-detected. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."
+msgid "Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Here is a list of all auto-detected printers. "
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Here is a list of all auto-detected printers. Please choose the printer you want to set up or enter a device name/file name in the input line"
+msgid "There is currently no alternative possibiliy"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "The following printer was auto-detected, if it is not the one you want to configure, enter a device name/file name in the input line"
+msgid "The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The following printer was auto-detected. "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Please choose the printer to which the print jobs should go or enter a device name/file name in the input line"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Please choose the printer you want to set up or enter a device name/file name in the input line"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Alternatively, you can specify a device name/file name in the input line"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "If it is not the one you want to configure, enter a device name/file name in the input line"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Available printers"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Local Printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -8774,6 +8933,11 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "No local printer found! To manually install a printer enter a device name/file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Local Printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
@@ -8889,6 +9053,11 @@ msgid ""
 "This wizard allows you to install local or remote printers to be used from this machine and also from other machines in the network.\n"
 "\n"
 "It asks you for all necessary information to set up the printer and gives you access to all available printer drivers, driver options, and printer connection types."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Searching for new printers..."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10013,7 +10182,7 @@ msgid ""
 "  /var/lib/drakbackup directory\n"
 "\n"
 "  Configuration file:\n"
-"\t/etc/drakconf/drakbackup/drakbakup.conf\n"
+"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
 "\n"
 "Restore Step:\n"
 "  \n"
@@ -10887,11 +11056,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "hourly"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Tape"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -11957,60 +12121,10 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid ""
-"drakfont Future Overview\n"
-"        - Fonts import:\n"
-"                pfb ( Adobe Type 1 binary )\n"
-"                pfa ( Adobe Type 1 ASCII )\n"
-"                ttf ( True-Type  )\n"
-"                pcf.gz\n"
-"                Speedo\n"
-"                and Bitmap (PCF, BDF, and SNF)\n"
-"        - Features\n"
-"                - Install fonts from any directory\n"
-"                - Get windows fonts on any vfat partitions\n"
-"                - Get fonts on any partitions.\n"
-"                - UN-installation of any fonts (even if not installed through drakfont)\n"
-"        - Support\n"
-"              - Xfs\n"
-"              - ghostscript & printer\n"
-"              - Staroffice & printer\n"
-"              - abiword\n"
-"\t      - netscape\n"
-"              - Koffice, Gnumeric, ... studying\n"
-"              - all fonts supported by printer\n"
-"              - anti-aliases by RENDER in Xfree86 .... \n"
-"\t\t\t\tsupported by KDE.\n"
-"\t\t\t\twill be supported by gnome 1.2.\n"
-"Visual Interface:\n"
-"        Window interface:\n"
-"          - Fontselectiondialog widget\n"
-"          - Command buttons under Fontselectiondialog (like the actual frontend).\n"
-"        Commands buttons:\n"
-"          - import from windows partition.\n"
-"                import from all fat32 partitions and look for winnt/windows/font\n"
-"                and import all (delete doubles) but don't import if they already exist.\n"
-"          - import from directory\n"
-"                look to see if each font exists and do not delete the original.\n"
-"                (replace all, no, none)\n"
-"                expert options:\n"
-"                        specify the directory, and look to see if it exists before\n"
-"                        if it exists ask: (replace all, no, none)\n"
-"          - uninstall with list per font type\n"
-"        Expert additional switch\n"
-"          - option support:   ghostscript, Staroffice, etc...\n"
-"                check-button. (by default all check)\n"
-"          - Printer Application Fonts Support...\n"
-"\n"
-"\n"
-""
-msgstr ""
-
-#: ../../standalone/drakfont:1
-#, c-format
-msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
-"\tDUPONT Sebastien sdupont\\@mandrakesoft.com\n"
+"\tDUPONT Sebastien (initial version)\n"
+"        CHAUMETTE Damien dchaumette\\@mandrakesoft.com\n"
 "\n"
 " This program is free software; you can redistribute it and/or modify\n"
 " it under the terms of the GNU General Public License as published by\n"
@@ -12039,6 +12153,11 @@ msgid ""
 "\n"
 "\n"
 ""
+msgstr ""
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "About"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -12215,7 +12334,7 @@ msgid ""
 "You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Problems installing package %s"
 msgstr ""
@@ -12376,12 +12495,12 @@ msgstr ""
 msgid "Network interface"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "No network adapter on your system!"
 msgstr ""
@@ -13141,7 +13260,7 @@ msgstr ""
 msgid "/_About..."
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
 msgid "/_Help"
 msgstr ""
@@ -13176,7 +13295,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/_Help..."
+msgid "/_Fields description"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13985,98 +14104,6 @@ msgstr ""
 #: ../../standalone/drakhelp:1
 #, c-format
 msgid "No browser is installed on your system, Please install one if you want to browse the help system"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "Location of auto_install.cfg file"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the auto_install.cfg file is located.\n"
-"\n"
-"Leave it blank if you do not want to set up automatic installation mode.\n"
-"\n"
-""
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "No CD or DVD image found, please copy the installation program and rpm files."
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "No image found"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "Installation image directory"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the installation image will be available.\n"
-"\n"
-"If you do not have an existing directory, please copy the CD or DVD contents.\n"
-"\n"
-""
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "The DHCP end ip"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "The DHCP start ip"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"The DHCP server will allow other computer to boot using PXE in the given range of address.\n"
-"\n"
-"The network address is %s using a netmask of %s.\n"
-"\n"
-""
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "Interface %s (on network %s)"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"You are about to configure your computer to install a PXE server as a DHCP server\n"
-"and a TFTP server to build an installation server.\n"
-"With that feature, other computers on your local network will be installable using from this computer.\n"
-"\n"
-"Make sure you have configured your Network/Internet access using drakconnect before going any further.\n"
-"\n"
-"Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "Installation Server Configuration"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "PXE Server Configuration"
 msgstr ""
 
 

@@ -999,6 +999,16 @@ msgstr "Kонфигурацијa стила стартaњa"
 
 #: ../../common.pm:1
 #, c-format
+msgid "consolehelper missing"
+msgstr "consolehelper недостаје"
+
+#: ../../common.pm:1
+#, c-format
+msgid "kdesu missing"
+msgstr "недостаjе kdesu"
+
+#: ../../common.pm:1
+#, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Снимци ће бити доступни након инсталације у %s"
 
@@ -3256,6 +3266,18 @@ msgstr ""
 "\n"
 "Да ли заиста желите да уклоните ове пакете?\n"
 
+#: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#, c-format
+msgid "No"
+msgstr "Не"
+
+#: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
+#: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Yes"
+msgstr "Да"
+
 #: ../../install_any.pm:1
 #, fuzzy, c-format
 msgid ""
@@ -3327,11 +3349,6 @@ msgstr "Не могу да пронaђем слободан простор за инсталирaње"
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid "You don't have enough free space on your Windows partition"
-msgstr "Немате довољно слободног просторa на Windows партициjи"
-
-#: ../../install_interactive.pm:1
-#, c-format
 msgid ""
 "You can now partition %s.\n"
 "When you are done, don't forget to save using `w'"
@@ -3372,10 +3389,8 @@ msgid "Remove Windows(TM)"
 msgstr "Уклони Windows(TM)"
 
 #: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"There is no FAT partition to resize or to use as loopback (or not enough "
-"space left)"
+#, fuzzy, c-format
+msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "Не постоje FAT партициjе коjимa се може променити величинa или коjе се могу "
 "кориситити зa loopback (или нема довољно слободног просторa)"
@@ -3384,6 +3399,16 @@ msgstr ""
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "FAT измена величине неуспела: %s"
+
+#: ../../install_interactive.pm:1
+#, c-format
+msgid "Resizing Windows partition"
+msgstr "Прорачунавам границе Windows фајл-система"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid "Resizing"
+msgstr "Промена величине (resizing)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3425,6 +3450,11 @@ msgstr ""
 "Вaша Windows партициjа jе превише фрагментирана, прво покрените ``defrag''"
 
 #: ../../install_interactive.pm:1
+#, fuzzy, c-format
+msgid "Computing the size of the Windows partition"
+msgstr "Корисити слободан простор на Windows партициjи"
+
+#: ../../install_interactive.pm:1
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -3436,16 +3466,6 @@ msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
-msgid "Resizing Windows partition"
-msgstr "Прорачунавам границе Windows фајл-система"
-
-#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
-#, c-format
-msgid "Resizing"
-msgstr "Промена величине (resizing)"
-
-#: ../../install_interactive.pm:1
-#, c-format
 msgid "Which partition do you want to resize?"
 msgstr "Којоj партицији  желите да промените величину?"
 
@@ -3453,6 +3473,13 @@ msgstr "Којоj партицији  желите да промените величину?"
 #, c-format
 msgid "Use the free space on the Windows partition"
 msgstr "Корисити слободан простор на Windows партициjи"
+
+#: ../../install_interactive.pm:1
+#, fuzzy, c-format
+msgid "There is no FAT partition to use as loopback (or not enough space left)"
+msgstr ""
+"Не постоje FAT партициjе коjимa се може променити величинa или коjе се могу "
+"кориситити зa loopback (или нема довољно слободног просторa)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -4362,7 +4389,8 @@ msgstr "Графички интерфејс"
 msgid "Bootloader"
 msgstr "Стартер"
 
-#: ../../install_steps_interactive.pm:1 ../../printer/printerdrake.pm:1
+#: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer"
 msgstr "Штампач"
@@ -4377,7 +4405,7 @@ msgstr "Временска зонa"
 msgid "Keyboard"
 msgstr "Тастатурa"
 
-#: ../../install_steps_interactive.pm:1
+#: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
 #, c-format
 msgid "Mouse"
 msgstr "Миш"
@@ -4861,28 +4889,6 @@ msgstr "Додај"
 #, c-format
 msgid "Choose a file"
 msgstr "Изаберите фајл"
-
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "No"
-msgstr "Не"
-
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../modules/interactive.pm:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Yes"
-msgstr "Да"
-
-#: ../../interactive.pm:1
-#, c-format
-msgid "consolehelper missing"
-msgstr "consolehelper недостаје"
-
-#: ../../interactive.pm:1
-#, c-format
-msgid "kdesu missing"
-msgstr "недостаjе kdesu"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6232,7 +6238,7 @@ msgstr ""
 "  --incident        - програм треба да буде један од mandrake алата"
 
 #: ../../standalone.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
 "Backup and Restore application\n"
@@ -6244,7 +6250,7 @@ msgid ""
 "users).\n"
 "--daemon              : use daemon configuration. \n"
 "--help                : show this message.\n"
-"--version             : show version name.\n"
+"--version             : show version number.\n"
 msgstr ""
 "[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
 "Програм за Backup и враћање података\n"
@@ -6958,10 +6964,9 @@ msgid "Please click on a partition"
 msgstr "Кликните на партицију"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"You have one big FAT partition\n"
-"(generally used by MicroSoft Dos/Windows).\n"
+"You have one big MicroSoft Windows partition.\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
@@ -7771,6 +7776,121 @@ msgstr "Не могу да улогујем корисничко име %s (неисправна лозинка?)"
 msgid "cpu # "
 msgstr "cpu # "
 
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "SMBus controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "USB controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "SCSI controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "(E)IDE/ATA controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Joystick"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Scanner"
+msgstr "Изаберите скенер"
+
+#: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown/Others"
+msgstr "Непознати|Generic"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Bridges and system controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Modem"
+msgstr "Модел"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Ethernetcard"
+msgstr "Мрeжна картицa"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Processors"
+msgstr "ID процесора"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Webcam"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Soundcard"
+msgstr "Звучна картицa"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Other MultiMedia devices"
+msgstr "Други Медиј"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Tvcard"
+msgstr "TV катицa"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Videocard"
+msgstr "Видео мод"
+
+#: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
+#, c-format
+msgid "Tape"
+msgstr "Трака"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "DVD-ROM"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "CD/DVD burners"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "CDROM"
+msgstr "на ЦД уређају"
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Disk"
+msgstr "Дански"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "Zip"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "Floppy"
+msgstr "Boot Floppy"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
@@ -7947,7 +8067,6 @@ msgstr "Помоћ за промену између ALSA и OSS"
 
 #: ../../harddrake/sound.pm:1 ../../standalone/drakTermServ:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#: ../../standalone/drakfont:1
 #, c-format
 msgid "Help"
 msgstr "Помоћ"
@@ -8418,6 +8537,11 @@ msgstr "Domain Name Сервер"
 msgid "Web Server"
 msgstr "Веб Сервер"
 
+#: ../../network/ethernet.pm:1
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
+msgstr "Име хоста:"
+
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
@@ -8454,7 +8578,6 @@ msgstr ""
 "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
 
 #: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
-#: ../../standalone/drakpxe:1
 #, c-format
 msgid "Choose the network interface"
 msgstr "Изаберите мрeжни интерфejс"
@@ -9471,6 +9594,11 @@ msgstr ", мулти-функционални уређај на USB"
 msgid ", multi-function device on parallel port \\#%s"
 msgstr ", мулти-функционални уређај на паралелном порту \\#%s"
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", USB printer"
+msgstr ", USB штампач \\#%s"
+
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid ", USB printer \\#%s"
@@ -9481,7 +9609,7 @@ msgstr ", USB штампач \\#%s"
 msgid " on parallel port \\#%s"
 msgstr " на парелелном порту \\#%s"
 
-#: ../../printer/main.pm:1
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Local Printers"
 msgstr "Локални штампачи"
@@ -9702,11 +9830,6 @@ msgstr "Измена конфигурације штампача"
 msgid "Add a new printer"
 msgstr "Додајте нови штампач"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Reading printer data..."
-msgstr "Учитавам податке за штампач ..."
-
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Normal Mode"
@@ -9783,9 +9906,19 @@ msgid "Installing Foomatic..."
 msgstr "Инсталирам Foomatic ..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Failed to configure printer \"%s\"!"
+msgstr "Подешавам штампач \"%s\" ..."
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "Подешавам штампач \"%s\" ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Reading printer data..."
+msgstr "Учитавам податке за штампач ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11035,12 +11168,17 @@ msgstr ""
 "уређаја у линију за унос"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
+msgid "Please choose the printer to which the print jobs should go."
+msgstr "Изаберите порт на који је ваш рачунар повезан."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
 msgid ""
-"Here is a list of all auto-detected printers. Please choose the printer you "
-"want to set up. The configuration of the printer will work fully "
-"automatically. If your printer was not correctly detected or if you prefer a "
-"customized printer configuration, turn on \"Manual configuration\"."
+"Please choose the printer you want to set up. The configuration of the "
+"printer will work fully automatically. If your printer was not correctly "
+"detected or if you prefer a customized printer configuration, turn on "
+"\"Manual configuration\"."
 msgstr ""
 "Овде се налази листа свих ауто-детектованих штампача. Изаберите штампач који "
 "ћелите да подесите. Подешавање штампача ће бити потпуно аутоматско. Уколико "
@@ -11049,30 +11187,65 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Here is a list of all auto-detected printers. "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "There is currently no alternative possibiliy"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
 msgid ""
-"The following printer was auto-detected. The configuration of the printer "
-"will work fully automatically. If your printer was not correctly detected or "
-"if you prefer a customized printer configuration, turn on \"Manual "
-"configuration\"."
+"The configuration of the printer will work fully automatically. If your "
+"printer was not correctly detected or if you prefer a customized printer "
+"configuration, turn on \"Manual configuration\"."
 msgstr ""
 "Приказани штампач је ауто-детектован. Подешавање штампача ће бити потпуно "
 "аутоматско. Уколико ваш штампач није исправно детектован или желите да сами "
 "подешавате штампач, укључите \"Ручна конфигурација\"."
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"Here is a list of all auto-detected printers. Please choose the printer you "
-"want to set up or enter a device name/file name in the input line"
+#, fuzzy, c-format
+msgid "The following printer was auto-detected. "
 msgstr ""
-"Овде се налази листа свих ауто-детектованих штампача. Изаберите штампач који "
-"желите или унесите имеиме фајла уређаја у линији за унос"
+"Следећи штамач\n"
+"\n"
+"%s%s\n"
+"је директно повезан на ваш систем"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The following printer was auto-detected, if it is not the one you want to "
-"configure, enter a device name/file name in the input line"
+"Please choose the printer to which the print jobs should go or enter a "
+"device name/file name in the input line"
+msgstr ""
+"Изаберите порт на који је ваш штампач повезан или унесите име/име фајла "
+"уређаја у линију за унос"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please choose the printer you want to set up or enter a device name/file "
+"name in the input line"
+msgstr ""
+"Изаберите порт на који је ваш штампач повезан или унесите име/име фајла "
+"уређаја у линију за унос"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"Alternatively, you can specify a device name/file name in the input line"
+msgstr ""
+"Изаберите порт на који је ваш штампач повезан или унесите име/име фајла "
+"уређаја у линију за унос"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"If it is not the one you want to configure, enter a device name/file name in "
+"the input line"
 msgstr ""
 "Приказани штампач је ауто-детектован, а уколико то није онај који желите да "
 "подесите, унесите име/име фајла уређаја у линију за унос"
@@ -11081,11 +11254,6 @@ msgstr ""
 #, c-format
 msgid "Available printers"
 msgstr "Доступни штампачи"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Local Printer"
-msgstr "Локални штампач"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11109,6 +11277,11 @@ msgstr ""
 "уређаја/име фајла у линији за унос (Паралелни портови: /dev/lp0, /dev/"
 "lp1, ..., је еквивалентно LPT1:, LPT2:, ..., први USB штампач: /dev/usb/lp0, "
 "други USB штампач: /dev/usb/lp1, ...)."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Local Printer"
+msgstr "Локални штампач"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11312,6 +11485,11 @@ msgstr ""
 "Од вас ће бити тражене све неопходне информације за подешавање штампача а "
 "добићете приступ свим достyпним драјверима, њиховим опцијама, и типовима "
 "конекције штампача."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Searching for new printers..."
+msgstr "Дељење локалних штампача"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12690,7 +12868,7 @@ msgid ""
 "  /var/lib/drakbackup directory\n"
 "\n"
 "  Configuration file:\n"
-"\t/etc/drakconf/drakbackup/drakbakup.conf\n"
+"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
 "\n"
 "Restore Step:\n"
 "  \n"
@@ -12726,7 +12904,7 @@ msgstr ""
 "  /var/lib/drakbackup директоријум\n"
 "\n"
 "  Конфигурациони фајл:\n"
-"\t/etc/drakconf/drakbackup/drakbakup.conf\n"
+"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
 "\n"
 "\n"
 "Корак за обнављање:\n"
@@ -13715,11 +13893,6 @@ msgstr "дневно"
 #, c-format
 msgid "hourly"
 msgstr "на сат"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Tape"
-msgstr "Трака"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14861,67 +15034,12 @@ msgid "Choose the applications that will support the fonts:"
 msgstr "Изаберите апликације које ће подржавати фонтове :"
 
 #: ../../standalone/drakfont:1
-#, c-format
-msgid ""
-"drakfont Future Overview\n"
-"        - Fonts import:\n"
-"                pfb ( Adobe Type 1 binary )\n"
-"                pfa ( Adobe Type 1 ASCII )\n"
-"                ttf ( True-Type  )\n"
-"                pcf.gz\n"
-"                Speedo\n"
-"                and Bitmap (PCF, BDF, and SNF)\n"
-"        - Features\n"
-"                - Install fonts from any directory\n"
-"                - Get windows fonts on any vfat partitions\n"
-"                - Get fonts on any partitions.\n"
-"                - UN-installation of any fonts (even if not installed "
-"through drakfont)\n"
-"        - Support\n"
-"              - Xfs\n"
-"              - ghostscript & printer\n"
-"              - Staroffice & printer\n"
-"              - abiword\n"
-"\t      - netscape\n"
-"              - Koffice, Gnumeric, ... studying\n"
-"              - all fonts supported by printer\n"
-"              - anti-aliases by RENDER in Xfree86 .... \n"
-"\t\t\t\tsupported by KDE.\n"
-"\t\t\t\twill be supported by gnome 1.2.\n"
-"Visual Interface:\n"
-"        Window interface:\n"
-"          - Fontselectiondialog widget\n"
-"          - Command buttons under Fontselectiondialog (like the actual "
-"frontend).\n"
-"        Commands buttons:\n"
-"          - import from windows partition.\n"
-"                import from all fat32 partitions and look for winnt/windows/"
-"font\n"
-"                and import all (delete doubles) but don't import if they "
-"already exist.\n"
-"          - import from directory\n"
-"                look to see if each font exists and do not delete the "
-"original.\n"
-"                (replace all, no, none)\n"
-"                expert options:\n"
-"                        specify the directory, and look to see if it exists "
-"before\n"
-"                        if it exists ask: (replace all, no, none)\n"
-"          - uninstall with list per font type\n"
-"        Expert additional switch\n"
-"          - option support:   ghostscript, Staroffice, etc...\n"
-"                check-button. (by default all check)\n"
-"          - Printer Application Fonts Support...\n"
-"\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakfont:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
-"\tDUPONT Sebastien sdupont\\@mandrakesoft.com\n"
+"\tDUPONT Sebastien (initial version)\n"
+"        CHAUMETTE Damien dchaumette\\@mandrakesoft.com\n"
 "\n"
 " This program is free software; you can redistribute it and/or modify\n"
 " it under the terms of the GNU General Public License as published by\n"
@@ -14981,6 +15099,11 @@ msgstr ""
 "             Конвертује ttf фонт фајлове у afm и pfb фонтове\n"
 "\n"
 "\n"
+
+#: ../../standalone/drakfont:1
+#, fuzzy, c-format
+msgid "About"
+msgstr "Прекини"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -15165,7 +15288,7 @@ msgstr ""
 "Сада можете делити Интернет конекциjу са другим компjутерима на вaшоj "
 "локалноj мрeжи  (LAN), користећи аутоматску мрeжну конфигурациjу (DHCP)."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Проблеми при инсталациjи %s пакетa"
@@ -15361,7 +15484,7 @@ msgstr ""
 msgid "Network interface"
 msgstr "Мрeжни интерфejс"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
@@ -15370,7 +15493,7 @@ msgstr ""
 "Ниjе детектована ниjедна мрeжна картицa. Покренитe алат за конфигурисaње "
 "хардверa."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "No network adapter on your system!"
 msgstr "Нема мрeжног адаптера у вaшем систему !"
@@ -16273,9 +16396,9 @@ msgid "Harddrake help"
 msgstr "Harddrake помоћ"
 
 #: ../../standalone/harddrake2:1
-#, c-format
-msgid "/_Help..."
-msgstr "/_Помоћ..."
+#, fuzzy, c-format
+msgid "/_Fields description"
+msgstr "Опис"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17138,111 +17261,6 @@ msgstr ""
 "Ниједан претраживач није инсталиран. Молим Вас да инсталирате један да би "
 "могли да користите ситем ѕа помоћ"
 
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Location of auto_install.cfg file"
-msgstr "Креирам ауто инсталациону дискету"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the auto_install.cfg file is located.\n"
-"\n"
-"Leave it blank if you do not want to set up automatic installation mode.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"No CD or DVD image found, please copy the installation program and rpm files."
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "No image found"
-msgstr "Није пронађен штампач!"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Installation image directory"
-msgstr "Xpmac (Инсталациja дисплеj драjвер)"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the installation image will be available.\n"
-"\n"
-"If you do not have an existing directory, please copy the CD or DVD "
-"contents.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "The DHCP end ip"
-msgstr "DHCP крај распона"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "The DHCP start ip"
-msgstr "DHCP почетак распона"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"The DHCP server will allow other computer to boot using PXE in the given "
-"range of address.\n"
-"\n"
-"The network address is %s using a netmask of %s.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Interface %s (on network %s)"
-msgstr "Интерфеjс %s (користeћи модул %s)"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-"Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid ""
-"You are about to configure your computer to install a PXE server as a DHCP "
-"server\n"
-"and a TFTP server to build an installation server.\n"
-"With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
-"\n"
-"Make sure you have configured your Network/Internet access using drakconnect "
-"before going any further.\n"
-"\n"
-"Note: you need a dedicated Network Adapter to set up a Local Area Network "
-"(LAN)."
-msgstr ""
-"Вaш рачунар можете подесити за дeљeње његове Интернет конекциje.\n"
-"са овом опциjом, други компjутери на вaшоj локалноj мрeжи ће моћи да "
-"користeИнтернет конекциjу са овог рачунара.\n"
-"\n"
-"Проверите да ли је подешена ваша Мрежни/Интернет приступ преко drakconnect "
-"пре него што наставимо.\n"
-"\n"
-"Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу(LAN)."
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Installation Server Configuration"
-msgstr "dhcpd Сервер конфигурација"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "PXE Server Configuration"
-msgstr "dhcpd Сервер конфигурација"
-
 #: ../../share/compssUsers:999
 msgid "Office Workstation"
 msgstr "Радна(Office) станицa"
@@ -17485,6 +17503,81 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid "You don't have enough free space on your Windows partition"
+#~ msgstr "Немате довољно слободног просторa на Windows партициjи"
+
+#~ msgid ""
+#~ "Here is a list of all auto-detected printers. Please choose the printer "
+#~ "you want to set up or enter a device name/file name in the input line"
+#~ msgstr ""
+#~ "Овде се налази листа свих ауто-детектованих штампача. Изаберите штампач "
+#~ "који желите или унесите имеиме фајла уређаја у линији за унос"
+
+#~ msgid "/_Help..."
+#~ msgstr "/_Помоћ..."
+
+#, fuzzy
+#~ msgid "Location of auto_install.cfg file"
+#~ msgstr "Креирам ауто инсталациону дискету"
+
+#, fuzzy
+#~ msgid "No image found"
+#~ msgstr "Није пронађен штампач!"
+
+#, fuzzy
+#~ msgid "Installation image directory"
+#~ msgstr "Xpmac (Инсталациja дисплеj драjвер)"
+
+#, fuzzy
+#~ msgid "The DHCP end ip"
+#~ msgstr "DHCP крај распона"
+
+#, fuzzy
+#~ msgid "The DHCP start ip"
+#~ msgstr "DHCP почетак распона"
+
+#, fuzzy
+#~ msgid "Interface %s (on network %s)"
+#~ msgstr "Интерфеjс %s (користeћи модул %s)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please choose which network interface will be used for the dhcp server."
+#~ msgstr ""
+#~ "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
+
+#, fuzzy
+#~ msgid ""
+#~ "You are about to configure your computer to install a PXE server as a "
+#~ "DHCP server\n"
+#~ "and a TFTP server to build an installation server.\n"
+#~ "With that feature, other computers on your local network will be "
+#~ "installable using from this computer.\n"
+#~ "\n"
+#~ "Make sure you have configured your Network/Internet access using "
+#~ "drakconnect before going any further.\n"
+#~ "\n"
+#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
+#~ "(LAN)."
+#~ msgstr ""
+#~ "Вaш рачунар можете подесити за дeљeње његове Интернет конекциje.\n"
+#~ "са овом опциjом, други компjутери на вaшоj локалноj мрeжи ће моћи да "
+#~ "користeИнтернет конекциjу са овог рачунара.\n"
+#~ "\n"
+#~ "Проверите да ли је подешена ваша Мрежни/Интернет приступ преко "
+#~ "drakconnect пре него што наставимо.\n"
+#~ "\n"
+#~ "Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу"
+#~ "(LAN)."
+
+#, fuzzy
+#~ msgid "Installation Server Configuration"
+#~ msgstr "dhcpd Сервер конфигурација"
+
+#, fuzzy
+#~ msgid "PXE Server Configuration"
+#~ msgstr "dhcpd Сервер конфигурација"
 
 #~ msgid "Do you really want to leave the installation?"
 #~ msgstr "Да ли заиста хоћете да прекинете инсталацију?"
@@ -17758,7 +17851,7 @@ msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
 #~ "  /var/lib/drakbackup directory\n"
 #~ "\n"
 #~ "  Configuration file:\n"
-#~ "\t/etc/drakconf/drakbackup/drakbakup.conf\n"
+#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
 #~ "\n"
 #~ "Restore Step:\n"
 #~ "  \n"
@@ -17794,7 +17887,7 @@ msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
 #~ "  /var/lib/drakbackup директоријум\n"
 #~ "\n"
 #~ "  Конфигурациони фајл:\n"
-#~ "\t/etc/drakconf/drakbackup/drakbakup.conf\n"
+#~ "\t/etc/drakconf/drakbackup/drakbackup.conf\n"
 #~ "\n"
 #~ "Поступак обнављања:\n"
 #~ "  \n"
