@@ -147,7 +147,7 @@ my $notebook = create_notebook();
 my $common_opts = { col_spacings => 10, row_spacings => 5, homogenous => 1 };
 
 ######################## BASIC OPTIONS PAGE ################################
-my $seclevel_entry;
+my ($seclevel_entry, $secadmin_entry);
 
 $notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
                                        basic_seclevel_explanations(),
@@ -164,12 +164,18 @@ $notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
                                                           }
                                                           ],
                                                         [ new Gtk2::Label(N("Security Alerts:")), 
-                                                          my $secadmin_check = new Gtk2::CheckButton ],
+                                                          my $secadmin_check = gtksignal_connect(Gtk2::CheckButton->new, toggled => sub {
+                                                                                                     $secadmin_entry->set_sensitive($_[0]->get_active);
+                                                                                                 }) ],
                                                         [ new Gtk2::Label(N("Security Administrator:")),
-                                                          my $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]))),
+                                                          $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]))),
                                new Gtk2::Label(N("Basic")));
                        
-$secadmin_check->set_active(1) if $msec->get_check_value("MAIL_WARN") eq "yes";
+if ($msec->get_check_value("MAIL_WARN") eq "yes") {
+    $secadmin_check->set_active(1);
+} else {
+    $secadmin_entry->set_sensitive(0);
+ }
                        
 ######################### NETWORK & SYSTEM OPTIONS #########################
 my @yesno_choices    = qw(yes no default ignore);
