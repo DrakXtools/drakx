@@ -608,7 +608,7 @@ sub show_info {
     my ($o) = @_;
     my $info;
 
-    $info .= _("Keyboard language: %s\n", $o->{keyboard}{xkb_keymap});
+    $info .= _("Keyboard type: %s\n", $o->{keyboard}{xkb_keymap});
     $info .= _("Mouse type: %s\n", $o->{mouse}{xtype});
     $info .= _("Mouse device: %s\n", $o->{mouse}{device}) if $::expert;
     $info .= _("Monitor: %s\n", $o->{monitor}{type});
