@@ -170,6 +170,7 @@ sub init {
     eval { modules::load('usb-storage', 'sd_mod') };
     handle_virtual_key();
     $o->{pcmcia} ||= !$::noauto && c::pcmcia_probe();
+    cat_('/proc/cmdline') =~ /\bwaitkey\b/ and sleep 15;
     install_steps::setupSCSI($o);
     run_program::run('sysctl', '-w', 'kernel.hotplug=/sbin/hotplug');
 
