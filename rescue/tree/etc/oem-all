@@ -200,9 +200,9 @@ Type \`\`yes'' and [enter] to go on\n"
     } while (($yes = <STDIN>) !~ /^\s*yes\s*$/i);
     system "parted", "/dev/$hd", "mklabel", "msdos";
 }
-my $min_size = $options{min_size} || 4000;
-my $def_size = $options{def_size} || 3500;
-my $trigger_size = $options{trigger_size} || 4000;
+my $min_size = $options{min_size} || 9000;
+my $def_size = $options{def_size} || 8500;
+my $trigger_size = $options{trigger_size} || 9000;
 #my $inst_size = $options{inst_size} || 1500;
 my $inst_size = $options{inst_size} || 2500;
 my $swap_size = $options{swap_size} || 128;
@@ -537,6 +537,10 @@ if ($var) {
 if ($home) {
     print F "/dev/$hdp$home /home $fs defaults 1 2\n";
 }
+close F;
+#- stupid things for installer to work correctly.
+open F, ">/mnt/etc/mandrake-release";
+print F "Mandrake Linux release 9.1 (Bamboo) for i586";
 close F;
 
 #- keep in mind all the rpm files available (according to hdlists).
