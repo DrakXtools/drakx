@@ -22,6 +22,7 @@ sub get_options_result($@) {
 sub get_options_name($) {
   my ($module) = @_;
 
+  my @names;
   my @line = `/sbin/modinfo -p $module`;
   foreach (@line) {
       chomp;
@@ -29,9 +30,9 @@ sub get_options_name($) {
       s/string/string/;
       s/short/h/;
       s/long/l/;
-      s/(\S) array \(min = (\d+), max = (\d+))/$2-$3$1/;
+      s/(\S) array \(min = (\d+), max = (\d+)\)/$2-$3$1/;
       s/(\d)-\1i/$1i/;
-      if (/parm:\s+(*+)/) {
+      if (/parm:\s+(.+)/) {
 	  my ($name, $type) = split '\s', $1;
 	  push @names, "$name ($type)";
       }
