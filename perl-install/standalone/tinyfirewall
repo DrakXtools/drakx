@@ -26,7 +26,7 @@ use tinyfirewall;
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 $::Wizard_pix_up = "wiz_firewall.png";
-$::Wizard_title = "Firewalling Configuration";
+$::Wizard_title = _("Firewalling Configuration");
 
 local $_ = join '', @ARGV;
 
