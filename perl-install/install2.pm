@@ -555,7 +555,7 @@ sub main {
 	}
     }
 
-    $o->{locale}{lang} = lang::set($o->{locale}{lang}) if $o->{locale}{lang} ne 'en_US'; #- mainly for defcfg
+    $o->{locale}{lang} = lang::set($o->{locale}) if $o->{locale}{lang} ne 'en_US' && !$::move; #- mainly for defcfg
 
     start_i810fb();
 
