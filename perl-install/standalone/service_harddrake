@@ -65,7 +65,15 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
 my $is_globetrotter = -f '/usr/sbin/mdkmove';
 
 # first run ? if not read old hw config
-my $previous_config = -f $last_boot_config && -s $last_boot_config ? Storable::retrieve($last_boot_config) : {};
+my $previous_config;
+
+if (-f $last_boot_config && -s $last_boot_config) {
+    eval { $previous_config = Storable::retrieve($last_boot_config) };
+    log::explanations("resetting previous harware file ($@)") if $@;
+}
+
+$previous_config ||= {};
+
 $previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
 my (%config, $wait);
 my $in;
@@ -105,7 +113,13 @@ foreach my $hw_class (@harddrake::data::tree) {
 
     modules::load_and_configure($modules_conf, 'ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
     @added || @was_removed or next;
+
+    if (harddrake::data::is_removable($Ident)) {
+        modules::load_category('floppy') if $Ident eq 'FLOPPY';
+    }
+
     next if $Ident eq 'MOUSE' && $curr_kernel ne $prev_kernel;
+
     my @configurator_pool;
     if (harddrake::data::is_removable($Ident)) {
         foreach my $device (@ID{@added}) {
