@@ -80,6 +80,7 @@ sub ask_info2 {
 				if__ ($netc->{dnsServer3}, { label => _("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
 				if__ ($cnx->{dialing_mode}, { label => _("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
 				if__ ($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
+				if__ ($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
 				if__ ($cnx->{login}, { label => _("Account Login (user name)"), val => \$cnx->{login} }),
 				if__ ($cnx->{passwd}, { label => _("Account Password"),  val => \$cnx->{passwd} }),
 			      ]
