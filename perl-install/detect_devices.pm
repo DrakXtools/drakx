@@ -371,7 +371,7 @@ sub getSoundDevices() {
     (arch() =~ /ppc/ ? \&modules::load_category : \&modules::probe_category)->('multimedia/sound');
 }
 
-sub isTVcard { member($_[0]{driver} qw(bttv cx8800 saa7134 usbvision) }
+sub isTVcard { member($_[0]{driver}, qw(bttv cx8800 saa7134 usbvision)) }
 
 sub getTVcards() { 
     grep { isTVcard($_) } detect_devices::probeall();
