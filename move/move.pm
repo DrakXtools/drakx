@@ -89,6 +89,8 @@ sub init {
     fs::mount("none", "/dev", "devfs", 0);
     run_program::run('/sbin/devfsd', '/dev');
 
+    -d '/lib/modules/' . c::kernel_version() or warn("ERROR: kernel package " . c::kernel_version() . " not installed\n"), c::_exit(1);
+
     modules::load_category('multimedia/sound');
 
 drakx_stuff:
