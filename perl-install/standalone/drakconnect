@@ -583,7 +583,7 @@ sub build_notebook {
     }
 
     foreach (keys %{$gui->{intf}}) {
-        next if ref($gui->{intf}{$_}) ne 'Gtk2::ComboBox';
+        next if ref($gui->{intf}{$_}) !~ /Gtk2::(ComboBox|Entry)/;
         # skip unset fields:
         next if !$intf->{$_};
         # special case b/c of translation:
