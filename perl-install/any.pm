@@ -1118,12 +1118,14 @@ sub ask_window_manager_to_logout {
     my ($wm) = @_;
     
     my %h = (
-	'kwin' => "su $ENV{USER} -c 'dcop kdesktop default logout'",
+	'kwin' => "dcop kdesktop default logout",
 	'gnome-session' => "gnome-session-save -kill",
 	'icewm' => "killall -QUIT icewm",
 	'wmaker' => "killall -USR1 wmaker",
     );
-    system($h{$wm} || return);
+    my $cmd = $h{$wm} or return;
+    $cmd = "su $ENV{USER} -c '$cmd'" if $wm eq 'kwin' && $> == 0;
+    system($cmd);
     1;
 }
 
