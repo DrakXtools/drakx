@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 
 use MDK::Common::System;
+use MDK::Common::Various;
 use common;
 use log;
 use devices;
@@ -62,6 +63,21 @@ sub read_fstab {
 		$h->{device} = $dev;
 	    }
 	}
+
+	if ($h->{options} =~ /credentials=/) {
+	    require network::smb;
+	    #- remove credentials=file with username=foo,password=bar,domain=zoo
+	    #- the other way is done in fstab_to_string
+	    my ($options, $unknown) = mount_options_unpack($h);
+	    my $file = delete $options->{'credentials='};
+	    my $credentials = network::smb::read_credentials_raw("$prefix$file");
+	    if ($credentials->{username}) {
+		$options->{"$_="} = $credentials->{$_} foreach qw(username password domain);
+		mount_options_pack($h, $options, $unknown);
+	    }
+	}
+
+
 	$h;
     } cat_("$prefix$file");
 }
@@ -143,8 +159,8 @@ sub merge_info_from_fstab {
     merge_fstabs($fstab, @l);
 }
 
-sub fstab_to_string {
-    my ($all_hds, $prefix) = @_;
+sub prepare_write_fstab {
+    my ($all_hds, $prefix, $keep_smb_credentials) = @_;
     $prefix ||= '';
 
     my @l1 = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
@@ -160,6 +176,7 @@ sub fstab_to_string {
     }
 
     my %new;
+    my @smb_credentials;
     my @l = map { 
 	my $device = 
 	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smbfs)) ? 
@@ -189,6 +206,15 @@ sub fstab_to_string {
 	    $new{$mntpoint} = 1;
 
 	    my $options = $_->{options};
+
+	    if (isThisFs('smbfs', $_) && $options =~ /password=/ && !$keep_smb_credentials) {
+		require network::smb;
+		if (my ($opts, $smb_credentials) = network::smb::fstab_entry_to_credentials($_)) {
+		    $options = $opts;
+		    push @smb_credentials, $smb_credentials;
+		}
+	    }
+
 	    my $type = type2fs($_);
 
 	    my $dev = $_->{device_alias} ? "/dev/$_->{device_alias}" : $device;
@@ -211,13 +237,21 @@ sub fstab_to_string {
 	}
     } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} } (@l1, @l2);
 
-    join('', map { join(' ', @$_) . "\n" } sort { $a->[1] cmp $b->[1] } @l);
+    join('', map { join(' ', @$_) . "\n" } sort { $a->[1] cmp $b->[1] } @l), \@smb_credentials;
+}
+
+sub fstab_to_string {
+    my ($all_hds, $prefix) = @_;
+    my ($s, undef) = prepare_write_fstab($all_hds, $prefix, 'keep_smb_credentials');
+    $s;
 }
 
 sub write_fstab {
     my ($all_hds, $prefix) = @_;
     log::l("writing $prefix/etc/fstab");
-    output("$prefix/etc/fstab", fstab_to_string($all_hds, $prefix));
+    my ($s, $smb_credentials) = prepare_write_fstab($all_hds, $prefix, '');
+    output("$prefix/etc/fstab", $s);
+    network::smb::save_credentials($_) foreach @$smb_credentials;
 }
 
 sub auto_fs() {
@@ -290,7 +324,7 @@ sub mount_options_unpack {
     \%options, $unknown;
 }
 
-sub mount_options_pack {
+sub mount_options_pack_ {
     my ($part, $options, $unknown) = @_;
 
     my ($non_defaults, $user_implies) = mount_options();
@@ -308,7 +342,12 @@ sub mount_options_pack {
     push @l, map_each { if_($::b, $::a =~ /=$/ ? "$::a$::b" : $::a) } %$options;
     push @l, $unknown;
 
-    $part->{options} = join(",", uniq(grep { $_ } @l));
+    join(",", uniq(grep { $_ } @l));
+}
+sub mount_options_pack {
+    my ($part, $options, $unknown) = @_;
+    $part->{options} = mount_options_pack_($part, $options, $unknown);
+    MDK::Common::Various::noreturn();
 }
 
 sub mount_options_help {

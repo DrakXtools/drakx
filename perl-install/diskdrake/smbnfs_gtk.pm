@@ -151,10 +151,43 @@ sub import_ctree {
 	};
     };
 
+    my $find_exports; $find_exports = sub {
+	my ($server) = @_;
+	my @l = eval { $kind->find_exports($server) };
+	return @l if !$@;
+
+	if ($server->{username}) {
+	    $in->ask_warn('', _("Can't login using username %s (bad password?)", $server->{username}));
+	    network::smb::remove_bad_credentials($server);
+	} else {
+	    if (my @l = network::smb::authentifications_available($server)) {
+		my $user = $in->ask_from_list_(_("Domain Authentication Required"),
+					       _("Which username"), [ @l, __("Another one") ]) or return;
+		if ($user ne 'Another one') {
+		    network::smb::read_credentials($server, $user);
+		    goto $find_exports;
+		}
+	    }
+	}
+
+	if ($in->ask_from(_("Domain Authentication Required"),
+		      _("Please enter your username, password and domain name to access this host."),
+		      [ 
+		       { label => _("Username"), val => \$server->{username} },
+		       { label => _("Password"), val => \$server->{password} },
+		       { label => _("Domain"), val => \$server->{domain} },
+		      ])) {
+	    goto $find_exports;
+	} else {
+	    delete $server->{username};
+	    ();
+	}	
+    };
+
     my $add_exports = sub {
 	my ($node) = @_;
 	$tree->expand($node);
-	foreach ($kind->find_exports($wservers{$node->{_gtk}} || return)) { #- can't die here since insert_node provoque a tree_select_row before the %wservers is filled
+	foreach ($find_exports->($wservers{$node->{_gtk}} || return)) { #- can't die here since insert_node provoque a tree_select_row before the %wservers is filled
 	    my $w = $tree->insert_node($node, undef, [$kind->to_string($_)], 5, (undef) x 4, 1, 0);
 	    set_export_icon(find_fstab_entry($kind, $_), $w);
 	    $wexports{$w->{_gtk}} = $_;
@@ -187,9 +220,7 @@ sub import_ctree {
 	    if (!$curr->row->children) {
 		gtkset_mousecursor_wait($tree->window);
 		my_gtk::flush();
-		$tree->freeze;
 		$add_exports->($curr);		
-		$tree->thaw;
 		gtkset_mousecursor_normal($tree->window);
 	    }
 	    $current_entry = undef;

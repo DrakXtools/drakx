@@ -3,6 +3,8 @@ package network::smbnfs; # $Id$
 use strict;
 use diagnostics;
 
+use fs;
+
 
 sub new { 
     my ($class, $v) = @_;
