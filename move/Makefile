@@ -65,6 +65,7 @@ install: build
 	sudo cp -f /tmp/version $(DEST_LIVETREE)/usr/share/VERSION
 
 live_tree_boot:
+	rm -f /tmp/live_tree*.clp
 	./make_live_tree_boot
 	$(MAKE) /tmp/live_tree_always.clp
 	$(MAKE) /tmp/live_tree_boot.clp
