@@ -162,7 +162,7 @@ sub process {
             push @steps, $next if !$page->{ignore} && $steps[-1] ne $next;
             my $current = $next;
             $next = defined $page->{post} ? $page->{post}($a) : 0;
-            return if $current eq "end";
+            return if $page->{end};
             if (!$next) {
                 if (!defined $o->{pages}{$next}) {
                     $next = $page->{next};
