@@ -290,6 +290,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - printerdrake cleanups
 - various perl lifting
 
+* Mon Nov 11 2002 Pixel <pixel@mandrakesoft.com> 1.1.11-3mdk
+- bug fix (most drakxtools)
+
 * Sun Nov 10 2002 Pixel <pixel@mandrakesoft.com> 1.1.11-2mdk
 - bug fix (printerdrake, netconnect)
 
