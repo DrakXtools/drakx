@@ -175,15 +175,14 @@ sub ask_fromW_real {
 	#- options of a native PostScript printer in printerdrake)
 	#- !! works badly together with list's (lists are one widget, so a
 	#- big list window will not switch to scrollbar mode) :-(
-	if ((((grep { $_->{type} eq 'bool' } @$l) > 6) ||
-             ((@$l) > 3)) && $total_size > $height) {
+	if (@$l > 3 && $total_size > $height) {
 	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
 
-	    my $scroll = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10);
+	    my $scroll = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10); # 9=NEWT_COLORSET_CHECKBOX, 10=NEWT_COLORSET_ACTCHECKBOX
 	    my $subf = $scroll->Form('', 0);
 	    $subf->FormSetHeight($height);
 	    $subf->FormAddGrid($grid, 0);
-	    Newt::Grid::HCloseStacked($subf, separator(1, $height), $scroll);
+	    Newt::Grid::HCloseStacked3($subf, separator(1, $height-1), $scroll);
 	} else {
 	    $grid;
 	}

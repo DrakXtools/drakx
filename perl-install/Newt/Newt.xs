@@ -105,41 +105,6 @@ newtWinTernary(title,button1,button2,button3,message)
 	char * button3;
 	char * message;
 
-void
-newtWinMenu(title,text,suggestedWidth,flexDown,flexUp,maxListHeight,list,def,buttons, ...)
-	char * title;
-	char * text;
-	int suggestedWidth;
-	int flexDown;
-	int flexUp;
-	int maxListHeight;
-	char **list;
-	int def;
-	char *buttons;
-        PPCODE:
-	{
-	  int button;
-#define nb 8
-#define a(i) SvPV(ST(i + nb),PL_na)
-	  button = newtWinMenu(title, text, suggestedWidth, flexDown, flexUp, maxListHeight, list, &def,
-			       items > nb +  0 ? a( 0) : NULL,
-			       items > nb +  1 ? a( 1) : NULL,
-			       items > nb +  2 ? a( 2) : NULL,
-			       items > nb +  3 ? a( 3) : NULL,
-			       items > nb +  4 ? a( 4) : NULL,
-			       items > nb +  5 ? a( 5) : NULL,
-			       items > nb +  6 ? a( 6) : NULL,
-			       items > nb +  7 ? a( 7) : NULL,
-			       items > nb +  8 ? a( 8) : NULL,
-			       items > nb +  9 ? a( 9) : NULL,
-			       items > nb + 10 ? a(10) : NULL, 
-			       NULL);
-#undef a
-	  EXTEND(SP, 2);
- 	  PUSHs(sv_2mortal(newSViv(button)));
- 	  PUSHs(sv_2mortal(newSViv(def)));
-	}
-
 MODULE = Newt		PACKAGE = Newt::Component 	PREFIX = newt
 
 void
@@ -378,18 +343,13 @@ newtCreateGrid(cols,rows)
 	int rows;
 
 Newt::Grid
-HCloseStacked(first, ...)
-	Newt::Component first;
+HCloseStacked3(c1, c2, c3)
+	Newt::Component c1;
+	Newt::Component c2;
+	Newt::Component c3;
      CODE:
 	{
-	  int i;
-	  newtComponent *p = alloca(sizeof(newtComponent) * (2 * items + 1));
-	  for (i = 0; i < items; i++) {
-	    p[2 * i] = 1;
-	    p[2 * i + 1] = (newtComponent)SvIV((SV*)SvRV( ST(i) ));
-	  }
-	  p[2 * items] = NULL;
-          RETVAL = ((newtGrid (*)()) newtGridHCloseStacked)();
+	  RETVAL = newtGridHCloseStacked(NEWT_GRID_COMPONENT, c1, NEWT_GRID_COMPONENT, c2, NEWT_GRID_COMPONENT, c3);
 	}
 OUTPUT:
 RETVAL
