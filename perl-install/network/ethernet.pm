@@ -87,14 +87,13 @@ sub conf_network_card {
     my $interface;
     @all_cards == () and $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")) and return;
-    @all_cards == 1 and $interface = $all_cards[0][0] and goto l1;
-    again:
+    @all_cards == 1 and $interface = $all_cards[0][0];
+    while (!$interface) {
 	$interface = $in->ask_from_list(N("Choose the network interface"),
 					N("Please choose which network adapter you want to use to connect to Internet"),
 					[ map { $_->[0] . ($_->[1] ? " (using module $_->[1])" : "") } @all_cards ]
 				       ) or return;
-    defined $interface or goto again;
-  l1:
+    }
     $::isStandalone and modules::write_conf($prefix);
 
     my $device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
@@ -145,11 +144,11 @@ sub conf_network_card_backend {
 		$_->{device} eq $interface and $b = $_->{driver};
 	    }
 	    $a ||= $b;
-	    if ($a) { $saved_driver = $a }
+	    $a and $saved_driver = $a;
 	    [$interface, $saved_driver];
 	} @all_cards;
     }
-    my ($device) = $interface =~ /(eth[0-9]+)/ or die("the interface is not an ethx");
+    my ($device) = $interface =~ /(ADIModem|eth[0-9]+)/ or die("the interface is not an ethx or other (like ADIModem)");
     $netc->{NET_DEVICE} = $device; #- one consider that there is only ONE Internet connection device..
 
     @{$intf->{$device}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = 
