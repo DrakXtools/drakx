@@ -326,7 +326,7 @@ void unmount_filesystems(void)
 	
 	for (i = nb = 0; i < numfs; i++)
 		if (fs[i].mounted) {
-			printf("\t%s umount failed\n", fs[i].name);
+			printf("\tumount failed: %s\n", fs[i].name);
 			if (strcmp(fs[i].fs, "ext2") == 0) nb++; /* don't count not-ext2 umount failed */
 		}
 	
