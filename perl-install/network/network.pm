@@ -141,7 +141,7 @@ sub write_resolv_conf {
 sub write_interface_conf {
     my ($file, $intf, $netc, $prefix) = @_;
 
-    if ($::o->{miscellaneous}{track_network_id} && -e "$prefix/sbin/ip") {
+    if ($intf->{HWADDR} && -e "$prefix/sbin/ip") {
 	$intf->{HWADDR} = undef;
 	if (my $s = `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`) {
 	    if ($s =~ m|.*link/ether\s([0-9a-z:]+)\s|) {
@@ -166,9 +166,9 @@ sub write_interface_conf {
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
 		    });
 
-    $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/; #- TODO: avoid obfuscating BOOTPROTO, waiting for zeroconf conf details 
+    $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($intf->{DHCP_HOSTNAME}, 'DHCP_HOSTNAME'), if_(!$intf->{DHCP_HOSTNAME}, 'NEEDHOSTNAME'));
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($intf->{DHCP_HOSTNAME}, 'DHCP_HOSTNAME'), if_(!$intf->{DHCP_HOSTNAME}, 'NEEDHOSTNAME'));
 }
 
 sub add2hosts {
@@ -320,7 +320,9 @@ Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4).");
     }
     my $auto_ip = $intf->{BOOTPROTO} !~ /static/;
-    my ($zeroconf, $onboot) = (1, 1);
+    my $onboot = $intf->{ONBOOT} !~ /no/;
+    my $hotplug = $::isStandalone && !$intf->{MII_NOT_SUPPORTED} or 1;
+    my $track_network_id = $::isStandalone && $intf->{HWADDR} or detect_devices::isLaptop();
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
@@ -330,9 +332,9 @@ notation (for example, 1.2.3.4).");
 	          $text,
 	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $auto_ip } },
 	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $auto_ip } },
-	           if_(!$::expert, { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp/zeroconf)") }),
-	           if_($::expert, { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp)") },
-		       { val => \$zeroconf, type => "bool", text => N("zeroconf"), disabled => sub { !$auto_ip } },
+	           { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp/zeroconf)") },
+	           if_($::expert, { label => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
+		       { label => N("Network Hotplugging"), val => \$hotplug, type => "bool" },
 		       { label => N("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto" ] },
@@ -353,7 +355,6 @@ notation (for example, 1.2.3.4).");
 		     
 		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp")) : "static";
 		     $netc->{DHCP} = $auto_ip;
-		     $netc->{ZEROCONF} = $zeroconf;
 		     return 0 if $auto_ip;
 
 		     if (my @bad = map_index { if_(!is_ip($intf->{$_}), $::i) } @fields) {
@@ -376,6 +377,9 @@ notation (for example, 1.2.3.4).");
 	         }
     	    ) or return;
     $intf->{ONBOOT} = bool2yesno($onboot);
+    $intf->{MII_NOT_SUPPORTED} = !$hotplug && bool2yesno(!$hotplug) or delete $intf->{MII_NOT_SUPPORTED};
+    $intf->{HWADDR} = $track_network_id or delete $intf->{HWADDR};
+    1;
 }
 
 sub configureNetworkNet {
@@ -390,9 +394,12 @@ sub configureNetworkNet {
 N("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
-You may also enter the IP address of the gateway if you have one."),
+You may also enter the IP address of the gateway if you have one.") . N("
+
+Enter a Zeroconf host name without any dot if you don't
+want to use the default host name."),
 			       [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
-                                 if_($netc->{ZEROCONF}, { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} }),
+                                 { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
 				 { label => N("DNS server"), val => \$netc->{dnsServer} },
 				 { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
 				    if_(@devices > 1,
@@ -421,13 +428,10 @@ sub miscellaneous_choose {
     my ($in, $u, $clicked, $no_track_net) = @_;
     $in->set_help('configureNetworkProxy') if $::isInstall;
 
-    $u->{track_network_id} = detect_devices::isLaptop();
-
     $in->ask_from('',
        N("Proxies configuration"),
        [ { label => N("HTTP proxy"), val => \$u->{http_proxy} },
          { label => N("FTP proxy"),  val => \$u->{ftp_proxy} },
-	 if_(!$no_track_net, { label => N("Track network card id (useful for laptops)"), val => \$u->{track_network_id}, type => "bool" }),
        ],
        complete => sub {
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', N("Proxy should be http://...")), return 1,0;
@@ -450,7 +454,6 @@ sub read_all_conf {
     add2hash($netc, read_conf("$prefix/etc/sysconfig/network")) if -r "$prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf("$prefix/etc/resolv.conf")) if -r "$prefix/etc/resolv.conf";
     add2hash($netc, read_tmdns_conf("$prefix/etc/tmdns.conf")) if -r "$prefix/etc/tmdns.conf";
-    print "zcn=$netc->{ZEROCONF_HOSTNAME}\n";
     foreach (all("$prefix/etc/sysconfig/network-scripts")) {
 	if (/ifcfg-(\w+)/ && $1 ne 'lo') {
 	    my $intf = findIntf($intf, $1);
@@ -481,7 +484,6 @@ sub easy_dhcp {
 			FORWARD_IPV4 => "false",
 			DOMAINNAME => "localdomain",
 			DHCP => 1,
-			ZEROCONF => 1,
 		       });
     1;
 }
@@ -522,7 +524,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
     $netc->{DHCP} && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
-    $netc->{ZEROCONF} and $in->do_pkgs->install(qw(zcip tmdns));
+    $in->do_pkgs->install(qw(zcip tmdns));
     $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
             
