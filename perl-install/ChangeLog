@@ -1,3 +1,171 @@
+2004/01/12  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/01/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/nb.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/hi.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po: updated pot file
+
+2004/01/12  Pixel  <pixel at mandrakesoft.com>
+
+	* share/list: need insmod.old for kernel 2.4
+
+	* install_gtk.pm: wacom support should be re-added :-/
+	XFree4 during install
+
+	* install2.pm: used the ip from stage1 instead of using IPADDR which is
+	not given for dhcp
+	for auto_install file (as asked by Michael Riss)
+
+	* install_steps_gtk.pm, share/list.i386: XFree4 during install
+
+	* network/drakfirewall.pm: allow a range of ports (anthill bug #267)
+
+	* run_program.pm: don't print refs in log when output is redirected
+	(nice patch from blino :)
+
+	* do_pkgs.pm, install_steps.pm, interactive.pm: 
+	  - install_steps_auto_install is not a interactive but still needs
+	do_pkgs
+	  - so making do_pkgs a class, and interactive and install_steps will
+	inheritate from it
+	  - do_pkgs renamed into do_pkgs_common, containing the things common to
+	do_pkgs_during_install and do_pkgs_standalone
+
+	* docs/HACKING: update from sunny@opencurve.org
+
+2004/01/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: bump perl(Gtk2) require
+	9.3-17mdk
+
+	* standalone/drakfont: new layout with subdialogs
+	remove spurious minus at beginning of paragraph
+	make font removing working with --testing
+	fix unstalling fonts
+	kill unused variables
+	(put_font_dir) factorize some code into put_font_dir_real()
+	fix chkfontpath call in --testing mode (/usr/sbin) not in path
+	fix applications layout:
+	  - remove spurious empty boxes
+	  - fix layout (aka do not uselessly resize main window)
+	  - sanitize layout (put legal warning between title and application
+	list)
+	  - "[X] label" packing looks quite a less uglier than "label
+	[X]"
+	fix about layout:
+	  - sanitize horrible line breaking (let pango do it for now, it know
+	how to do
+	it quite a lot better than we)
+	  - add myself in author list
+	  - split about translation in three pieces (copyright holders, std fsf
+	header
+	  and thanks), enabling to share std fsf legal header among several
+	programs
+	prevent useless spacing above button bar
+	enforce class->new calling convention rather than "new class" one
+	style only change; "fix" gtkpacking so that expand arg always precede
+	the
+	widget it's about rather that following another widget
+
+	* Makefile: handle poulpy code
+
+	* standalone/drakedm: perl_checker cleanups
+	when offering to restart dm, offer yes/no as choice rather than
+	ok/cancel (#6810)
+
+	* interactive/gtk.pm: fix embedding:
+	  - prevent subwindows being too small
+	  - prevent subwindows breaking when canceled
+
+	* standalone/drakconnect: show a finish button on last step
+	exit once delete interface wizard has ended instead of then running the
+	std
+	add wizard...
+	list ppp interfaces too when offering to delete an interface
+
+	* diskdrake/smbnfs_gtk.pm (per_entry_action_box)
+	  - sanitieze buttons packing (do not eat extra space)
+	  - get rid of groupby2
+
+	* share/po/fr.po: typo fix
+	update
+	fix french translation: always translate "NONE" as "AUCUN" in draksec
+
+	* wizards.pm: rollback debug statements
+	only complain if a problem actually happened
+
+2004/01/10  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+	last messages updated
+
+2004/01/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* standalone/drakconnect, standalone/scannerdrake: fixed typos
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/nb.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/hi.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/hu.po: big pot file update
+
+2004/01/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix changelog
+	one more fix
+
+2004/01/09  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - apply and ok button now working
+	  - some clean up
+
+2004/01/09  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive.pm, do_pkgs.pm, standalone.pm: new do_pkgs package which get
+	rid of pkgs_interactive::* which was in install_any
+	and standalone, and partially duplicated
+
+2004/01/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake: fix wizard when logdrake is embeded
+
+	* ugtk2.pm: handle exceptions with Glib-1.020/Gtk2-1.022
+	(gtktext_insert) make it works with both Glib-0.95/Gtk2-0.95 and
+	Glib-1.020/Gtk2-1.022
+
+	* drakxtools.spec: 9.3-16mdk
+	9.3-15mdk
+
+	* standalone/drakboot: fix drakboot --boot embedding
+
 2004/01/09  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* standalone/drakconnect: information box fully fonctionnal for ethernet
@@ -22646,7 +22814,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.848 2004/01/08 18:17:01 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.849 2004/01/09 18:36:55 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
