@@ -299,6 +299,7 @@ sub deselectFoundMedia {
 }
 
 sub selectSupplMedia { '' }
+sub askSupplMirror { '' }
 
 sub choosePackages {
     my ($o, $packages, $_compssUsers, $first_time) = @_;

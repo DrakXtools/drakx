@@ -1,7 +1,6 @@
 package install_steps_interactive; # $Id$
 
 
-use diagnostics;
 use strict;
 use vars qw(@ISA $new_bootstrap);
 
@@ -396,6 +395,37 @@ sub deselectFoundMedia {
     my ($o, $p) = @_;
     install_any::deselectFoundMedia($o, $p);
 }
+
+sub mirror2text { $crypto::mirrors{$_[0]} ? $crypto::mirrors{$_[0]}[0] . '|' . $_[0] : "-|URL" }
+sub askSupplMirror {
+    my ($o, $message) = @_;
+    my $u = $o->{updates} ||= {};
+    require crypto;
+    my @mirrors = do {
+	my $_w = $o->wait_message('', N("Contacting Mandrakelinux web site to get the list of available mirrors..."));
+	crypto::mirrors($o->{distro_type});
+    };
+    push @mirrors, '-';
+    $o->ask_from_(
+	{
+	    messages => N("Choose a mirror from which to get the packages"),
+	    cancel => N("Cancel"),
+	},
+	[ { separator => '|',
+	    format => \&mirror2text,
+	    list => \@mirrors,
+	    val => \$u->{mirror},
+	}, ],
+    ) or $u->{mirror} = '';
+    if ($u->{mirror} eq '-') {
+	return $o->ask_from_entry('', $message) || '';
+    }
+    my $url = "ftp://$u->{mirror}$crypto::mirrors{$u->{mirror}}[1]";
+    $url =~ s/\bmedia\/?$//;
+    log::l("mirror chosen [$url]");
+    return $url;
+}
+
 sub selectSupplMedia {
     my ($o, $suppl_method) = @_;
     install_any::selectSupplMedia($o, $suppl_method);

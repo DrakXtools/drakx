@@ -199,7 +199,7 @@ sub getFile {
 	    crypto::getFile($f);
 	} elsif ($current_method eq "ftp") {
 	    require ftp;
-	    ftp::getFile($rel, @{ $::o->{packages}{mediums}{$asked_medium}{ftp_prefix} || [] });
+	    ftp::getFile($rel, @{ $::o->{packages}{mediums}{$asked_medium}{ftp_prefix} || our $global_ftp_prefix || [] });
 	} elsif ($current_method eq "http") {
 	    require http;
 	    http::getFile(($ENV{URLPREFIX} || $o_altroot) . "/$rel");
@@ -475,7 +475,15 @@ sub selectSupplMedia {
 		}
 	    }
 	} else {
-	    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
+	    my $url;
+	    local our $global_ftp_prefix;
+	    if ($suppl_method eq 'ftp') { #- mirrors are ftp only (currently)
+		$url = $o->askSupplMirror(N("URL of the mirror?")) or return '';
+		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
+		    and $global_ftp_prefix = [ $3, $4, $1, $2 ]; #- for getFile
+	    } else {
+		my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
+	    }
 	    useMedium($medium_name);
 	    require "$suppl_method.pm"; #- require http or ftp
 	    #- first, try to find an hdlists file
