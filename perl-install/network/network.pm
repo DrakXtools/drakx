@@ -306,7 +306,7 @@ notation (for example, 1.2.3.4).");
     my $onboot = 1;
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
-    my $retvalue = $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
+    $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
   	          (_("Configuring network device %s", $intf->{DEVICE}) . ($module ? _(" (driver %s)", $module) : '') ."\n\n") .
 	          $text,
 	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
@@ -350,9 +350,8 @@ notation (for example, 1.2.3.4).");
 	         focus_out => sub {
 	         	 $intf->{NETMASK} ||= netmask($intf->{IPADDR}) unless $_[0]
 	         }
-    	    );
+    	    ) or return;
     $intf->{ONBOOT} = bool2yesno($onboot);
-    return $retvalue;
 }
 
 sub configureNetworkNet {
@@ -383,7 +382,7 @@ sub miscellaneousNetwork {
     my $u = $::o->{miscellaneous} ||= {};
     $::isInstall and $in->set_help('configureNetworkProxy');
     $u->{track_network_id} = detect_devices::isLaptop();
-    $::expert || $clicked and $in->ask_from('',
+    $::expert || $clicked and ($in->ask_from('',
        _("Proxies configuration"),
        [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
          { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },
@@ -394,7 +393,8 @@ sub miscellaneousNetwork {
 	   $u->{ftp_proxy} =~ m,^($|ftp://), or $in->ask_warn('', _("Proxy should be ftp://...")), return 1,1;
 	   0;
        }
-    ) or 1;
+    ) or return);
+    1;
 }
 
 sub read_all_conf {
