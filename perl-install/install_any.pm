@@ -376,15 +376,16 @@ sub setPackages {
 	$o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
 	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
 	$o->{compssUsersChoice}{'3D'} = 1 if 
-	    detect_devices::matching_desc('Matrox.* G[24][05]0') ||
+	    detect_devices::matching_desc('Matrox.* G[245][05]0') ||
 	    detect_devices::matching_desc('Riva.*128') ||
 	    detect_devices::matching_desc('Rage X[CL]') ||
-	    detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
+	    detect_devices::matching_desc('Rage Mobility [PL]') ||
 	    detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
 	    detect_devices::matching_desc('Voodoo [35]') ||
 	    detect_devices::matching_desc('Voodoo Banshee') ||
 	    detect_devices::matching_desc('8281[05].* CGC') ||
 	    detect_devices::matching_desc('Rage 128') ||
+	    detect_devices::matching_desc('Radeon ') ||
 	    detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
 	    detect_devices::matching_desc('[nN]Vidia.*NV[56]') ||
 	    detect_devices::matching_desc('[nN]Vidia.*Vanta') ||
