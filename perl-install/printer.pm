@@ -93,16 +93,14 @@ sub get_default_spooler () {
 	my $spool = <DEFSPOOL>;
 	chomp $spool;
 	close DEFSPOOL;
-	if ($spool =~ /cups|lpd|lprng|pdq/) {
-	    return $spool;
-	}
+	return $spool if ($spool =~ /cups|lpd|lprng|pdq/); 
     }
 }
 
 sub set_default_spooler ($) {
     my ($printer) = @_;
     # Make Foomatic config directory if it does not exist yet
-    if (!(-d "$prefix$FOOMATICCONFDIR")) {mkdir "$prefix$FOOMATICCONFDIR";}
+    mkdir "$prefix$FOOMATICCONFDIR" if (!(-d "$prefix$FOOMATICCONFDIR"));
     # Mark the default driver in a file
     open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER" || 
 	die "Cannot create $prefix$FOOMATIC_DEFAULT_SPOOLER!";
@@ -133,17 +131,13 @@ sub set_permissions {
 sub restart_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    if (!(-x "$prefix/etc/rc.d/init.d/$service")) {
-	return 1;
-    }
+    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
     if (($? >> 8) != 0) {
 	return 0;
     } else {
 	# CUPS needs some time to come up.
-	if ($service eq "cups") {
-	    wait_for_cups();
-	}
+	wait_for_cups() if ($service eq "cups");
 	return 1;
     }
 }
@@ -151,17 +145,13 @@ sub restart_service ($) {
 sub start_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    if (!(-x "$prefix/etc/rc.d/init.d/$service")) {
-	return 1;
-    }
+    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
     if (($? >> 8) != 0) {
 	return 0;
     } else {
 	# CUPS needs some time to come up.
-	if ($service eq "cups") {
-	    wait_for_cups();
-	}
+	wait_for_cups() if ($service eq "cups");
 	return 1;
     }
 }
@@ -169,9 +159,7 @@ sub start_service ($) {
 sub stop_service ($) {
     my ($service) = @_;
     # Exit silently if the service is not installed
-    if (!(-x "$prefix/etc/rc.d/init.d/$service")) {
-	return 1;
-    }
+    return 1 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
     if (($? >> 8) != 0) {return 0;} else {return 1;}
 }
@@ -206,30 +194,25 @@ sub SIGHUP_daemon {
     # PDQ has no daemon, exit.
     if ($service eq "pdq") {return 1};
     # CUPS needs auto-configuration
-    if ($service eq "cups") {
-        run_program::rooted($prefix, "/usr/sbin/setcupsconfig");
-    }
+    run_program::rooted($prefix, "/usr/sbin/setcupsconfig") if ($service eq "cups");
     # Name of the daemon
-    my $daemon;
-    if (($service eq "lpr") || ($service eq "lpd") || ($service eq "lprng")) {
-	$daemon = "lpd";
-    } elsif ($service eq "cups") {
-	$daemon = "cupsd";
-    } elsif ($service eq "devfs") {
-	$daemon = "devfsd";
-    } else {
-	$daemon = $service;
-    }
+    my %daemons = (
+			    "lpr" => "lpd",
+			    "lpd" => "lpr",
+			    "lprng" => "lpd",
+			    "cups" => "cupsd",
+			    "devfs" => "devfsd",
+			    );
+    my $daemon = $deamons{$service};
+    $daemon = $service if (! defined $daemon);
     if ($service eq "cups") {
 	# The current CUPS (1.1.13) dies on SIGHUP, to the normal restart.
 	restart_service($service);
+	# CUPS needs some time to come up.
+	wait_for_cups();
     } else {
 	# Send the SIGHUP
 	run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
-    }
-    # CUPS needs some time to come up.
-    if ($service eq "cups") {
-	wait_for_cups();
     }
     return 1;
 }
@@ -320,11 +303,7 @@ sub spooler_in_security_level {
     # Was the current spooler already added to the current security level?
     my ($spooler, $level) = @_;
     my $sp;
-    if (($spooler eq "lpr") || ($spooler eq "lprng")) {
-	$sp = "lpd";
-    } else {
-	$sp = $spooler;
-    }
+    $sp = (($spooler eq "lpr") || ($spooler eq "lprng")) ? "lpd" : $spooler;
     $file = "$prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
@@ -343,11 +322,7 @@ sub spooler_in_security_level {
 sub add_spooler_to_security_level {
     my ($spooler, $level) = @_;
     my $sp;
-    if (($spooler eq "lpr") || ($spooler eq "lprng")) {
-	$sp = "lpd";
-    } else {
-	$sp = $spooler;
-    }
+    $sp = (($spooler eq "lpr") || ($spooler eq "lprng")) ? "lpd" : $spooler;
     $file = "$prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
@@ -361,7 +336,7 @@ sub add_spooler_to_security_level {
 sub files_exist {
     my @files = @_;
     for my $file (@files) {
-	if (! -f "$prefix$file") {return 0;}
+	   return 0 if (! -f "$prefix$file"),
     }
     return 1;
 }
