@@ -150,6 +150,7 @@ my %files = (
 
 my $yy = gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("search")) , clicked => \&search),0);
 my $log_text = new Gtk2::TextView;
+$log_text->set_property('editable', 0);
 my $log_buf = $log_text->get_buffer();
 my $refcount_search;
 #### far from window
@@ -361,6 +362,7 @@ sub logcolorize {
 #    log_output (Gtk2::TextView, [ [ ... ] ])
 sub log_output {
     gtktext_append($log_text, [ \@_ ]);
+#    $log_buf->insert($buf->get_end_iter(), @_, -1);
 }
 
 
