@@ -296,7 +296,7 @@ sub write_conf() {
 
     #- Substitute new aliases in modules.conf (if config has changed)
     substInFile {
-	my ($type, $module, $module) = split(/\s+/, chomp_($_), 3);
+	my ($type, $module, $val) = split(/\s+/, chomp_($_), 3);
 	if ($type eq 'post-install' && $module eq 'supermount') {	    
 	    #- remove the post-install supermount stuff.
 	    $_ = '';
@@ -309,7 +309,7 @@ sub write_conf() {
 	    s/snd-card/snd/g;
 	    s/snd-via686|snd-via8233/snd-via82xx/g;
 	    defined $conf{$module}{above} or $_ = '';
-	} elsif ($conf{$module}{$type} && $conf{$module}{$type} ne $module) {
+	} elsif ($conf{$module}{$type} && $conf{$module}{$type} ne $val) {
 	    my $v = join(' ', uniq(deref($conf{$module}{$type})));
 	    $_ = "$type $module $v\n";
 	} elsif ($type eq 'alias' && !defined $conf{$module}{alias}) { 
