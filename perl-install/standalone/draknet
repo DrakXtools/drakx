@@ -27,7 +27,7 @@ use netconnect;
 use common qw(:common :file :functional :system);
 use c;
 
-my $xpm_path="/home/damien/cvs2/gi/perl-install/standalone/pixmaps";
+my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 print "EMBED\n" if $::isEmbedded;
