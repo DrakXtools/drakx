@@ -37,12 +37,12 @@ Please choose \"Update\" if you wish to update an already installed version of L
 Depend of your knowledge in GNU/Linux, you can choose one of the following levels to install or update your
 Linux-Mandrake operating system:
 
-	* Recommanded: if you have never installed a GNU/Linux operating system choose this. Installation will be
+	* Recommended: if you have never installed a GNU/Linux operating system choose this. Installation will be
 	  be very easy and you will be asked only on few questions.
 
 
 	* Customized: if you are familiar enough with GNU/Linux, you may choose the primary usage (workstation, server,
-	  development) of your sytem. You will need to answer to more questions than in \"Recommanded\" installation
+	  development) of your system. You will need to answer to more questions than in \"Recommended\" installation
 	  class, so you need to know how GNU/Linux works to choose this installation class.
 
 

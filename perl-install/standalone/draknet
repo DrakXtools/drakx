@@ -383,7 +383,7 @@ sub configure_lan {
     my @eth_data;
     foreach (0..$#all_cards) {
 	my $vbox_local=new Gtk::VBox(0,0);
-	$vbox_local->pack_start(new Gtk::Label(_("Adapter %s: %s", $_+1 , "eth$_")),1,1,0);
+	$vbox_local->pack_start(new Gtk::Label( _("Adapter %s: %s", $_+1 , "eth$_")),1,1,0);
 	#	Eth${_}Hostname=$netc->{HOSTNAME}
 	#       Eth${_}HostAlias=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 	#	Eth${_}Driver=$all_cards[$_]->[1]
@@ -419,7 +419,7 @@ sub configure_lan {
 	my $hbox_local = new Gtk::HBox(0,0);
 	my $pix = new Gtk::Pixmap ($pix_eth_map, $pix_eth_mask);
 	$hbox_local->pack_start($pix,0,0,0);
-	$hbox_local->pack_start(new Gtk::Label(_("eth$_")),0,0,0);
+	$hbox_local->pack_start(new Gtk::Label("eth$_"),0,0,0);
 	$hbox_local->show_all;
 	$notebook->append_page($vbox_local, $hbox_local);
     }
@@ -434,7 +434,7 @@ sub configure_lan {
 				       $button_able->child->set($netc->{NETWORKING} eq "yes" ? _("Disable") : _("Enable"));
 				   } );
     $bbox1->add($button_able);
-    my $button_ok = new Gtk::Button "OK";
+    my $button_ok = new Gtk::Button( _("OK") );
     $button_ok->signal_connect ( clicked => sub {
 				     my $i=0;
 				     foreach (@conf_data) {
@@ -446,7 +446,7 @@ sub configure_lan {
 				     $window->destroy(); Gtk->main_quit;
 				 });
     $bbox1->add($button_ok);
-    my $button_cancel = new Gtk::Button "Cancel";
+    my $button_cancel = new Gtk::Button( _("Cancel") );
     $button_cancel->signal_connect ( clicked => sub { $netc->{NETWORKING}=$old_networking; $window->destroy(); Gtk->main_quit });
     $bbox1->add($button_cancel);
 
