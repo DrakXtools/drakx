@@ -373,7 +373,7 @@ sub ReadFromFile {
 
     my ($h, $file, $fh);
     if ($::isStandalone) {
-	$file = $in->ask_file(N("Select file")) or return;
+	$file = $in->ask_filename({ title => N("Select file") }) or return;
     } else {
 	undef $h; #- help perl_checker
 	my $name = $hd->{device}; $name =~ s!/!_!g;
@@ -399,7 +399,7 @@ sub SaveInFile {
 
     my ($h, $file) = ('', '');
     if ($::isStandalone) {
-	$file = $in->ask_file(N("Select file")) or return;
+	$file = $in->ask_filename({ save => 1, title => N("Select file") }) or return;
     } else {
 	undef $h; #- help perl_checker
 	my $name = $hd->{device}; $name =~ s!/!_!g;
