@@ -788,9 +788,6 @@ sub setupBootloaderBefore {
     if ($o->{miscellaneous}{HDPARM}) {
 	bootloader::add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
     }
-    if (grep { /Athlon|Duron/ } cat_("/proc/cpuinfo")) {
-	bootloader::add_append($o->{bootloader}, 'mem', 'nopentium');
-    }
 
     if (arch() =~ /alpha/) {
 	if (my $dev = fsedit::get_root($o->{fstab})) {
