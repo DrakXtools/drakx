@@ -133,7 +133,7 @@ sub real_main {
           detect($netc->{autodetect}, 'lan');
           modules::interactive::load_category($in, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 1);
           @all_cards = network::ethernet::get_eth_cards();
-	  %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
+          %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
           if ($is_wireless) {
               require list_modules;
               my @wmodules = list_modules::category2modules('network/wireless');
