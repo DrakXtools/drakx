@@ -14,10 +14,13 @@
 **** isapnp devices
 *** print "NOT LOADED" if module isn't loaded
 
-** soundrake
+** drakesoun
 *** add a dialog so that the user choose its wavetable.
 *** package'n patch alsaconf to prevent "alias sound-slot-0 snd-card-0"
-
+*** blacklist cs4236 and cs46xx
+*** list all availlables drivers, defaulting to first alternative, prepending old one with '*'
+*** add 'ALSA/OSS': tag to modules list
+*** black list cs4281 and cs46xx
 
 ** validation:
 *** see dadou (GUI)

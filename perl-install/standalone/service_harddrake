@@ -62,9 +62,7 @@ foreach (@harddrake::data::tree) {
     if (my $pid = fork) {
 		require POSIX;
 		POSIX::wait();
-		} else {
-		    exec("$configurator 2>/dev/null") or die "$configurator missing\n";
-		}
+    } else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
 }
 
 # output new hw config
