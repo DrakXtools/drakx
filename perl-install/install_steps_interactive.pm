@@ -1114,7 +1114,7 @@ sub setRootPassword {
 			 ]) or return;
 
     if ($auth eq __("LDAP")) {
-	$o->{authentication}{LDAP} ||= "localhost"; #- any better solution ?
+	$o->{authentication}{LDAP} ||= 'ldap.' . $o->{netc}{DOMAINNAME};
 	$o->{netc}{LDAPDOMAIN} ||= join (',', map { "dc=$_" } split /\./, $o->{netc}{DOMAINNAME});
 	$o->ask_from('',
 		     _("Authentication LDAP"),
