@@ -815,6 +815,10 @@ If you don't know, choose 'use pppoe'"),
                     post => sub {
                         $netc->{internet_cnx_choice} = 'adsl';
                         network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $ntf_name, $adsl_type, $netcnx); #FIXME
+                        set_cnx_script($netc, "adsl", "ifup ppp0",
+                                       q(ifdown ppp0
+killall pppd
+), $netcnx->{type});
                         $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
                         $handle_multiple_cnx->();
                     },
@@ -1232,6 +1236,7 @@ It is not necessary on most networks."),
                         if ($a) {
                             # local $::isWizard = 0;
                             my $_w = $in->wait_message('', N("Testing your connection..."), 1);
+                            # FIXME: drop cnx_scripts (still used for modem connexions), use ifup/ifdown instead
                             connect_backend();
                             my $s = 30;
                             $type =~ /modem/ and $s = 50;
