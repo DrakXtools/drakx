@@ -163,8 +163,8 @@ gtkadd($window,
                                                  }),
                                gtkpack__(gtkset_sensitive($x_box = Gtk2::VBox->new(0, 0), $x_mode),
                                          gtkpack__(Gtk2::VBox->new(0, 0),
-                                                   my @auto_buttons = gtkradio((N("Yes, I want autologin with this (user, desktop)")) x 2,
-                                                                               N("No, I don't want autologin")),
+                                                   my @auto_buttons = gtkradio((N("No, I don't want autologin")) x 2,
+                                                                               N("Yes, I want autologin with this (user, desktop)")),
                                                   ),
                                          gtkpack__(
                                                    my $auto_box = Gtk2::HBox->new,
@@ -198,10 +198,10 @@ gtkadd($window,
       );
 
 if (!$splash_working) {
-    $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active) });
-    $auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[1]->get_active) });
-    $auto_buttons[0]->set_active(1) if $auto_mode->{autologin};
-    $auto_buttons[1]->set_active(1) if !$auto_mode->{autologin};
+    $auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[1]->get_active) });
+    $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[0]->get_active) });
+    $auto_buttons[1]->set_active(1) if $auto_mode->{autologin};
+    $auto_buttons[0]->set_active(1) if !$auto_mode->{autologin};
     $x_box->set_sensitive($x_mode);
     $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
 }
@@ -249,7 +249,7 @@ sub lilo_choice() {
 sub updateAutologin() {
     my ($usern, $deskt) = ($user_combo->entry->get_text, $desktop_combo->entry->get_text);
     $::testing and return;
-    if ($auto_buttons[0]->get_active) {
+    if ($auto_buttons[1]->get_active) {
         any::set_autologin($usern, $deskt);
     } else {
         any::set_autologin();
