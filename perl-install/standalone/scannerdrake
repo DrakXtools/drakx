@@ -135,11 +135,13 @@ sub manual {
 			       if_($port && $name, N(", ")) .
 			       if_($port, N("Port: %s", $port)) .
 			       if_($port || $name, N(")")),
-			       '|', [' None', keys %$scanner::scannerDB],
+			       '|', [' None', map { $_ . if_($scanner::scannerDB->{$_}{flags}{unsupported}, N(" (UNSUPPORTED)")) } keys %$scanner::scannerDB],
 			       '') or return 0;
     return 0 if $s eq ' None';
+    my $unsuppstr = quotemeta(N(" (UNSUPPORTED)"));
+    $s =~ s/$unsuppstr$//;
     if ($scanner::scannerDB->{$s}{flags}{unsupported}) {
-	$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of %s.", removeverticalbar($s), $distroname));
+	$in->ask_warn('Scannerdrake', N("The %s is not supported under Linux.", removeverticalbar($s)));
 	return 0;
     }
     return tryConfScanner($s, $port, $vendor, $product);
@@ -153,6 +155,10 @@ sub dynamic() {
 	    $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
 	    next if ($scanner::scannerDB->{$name}{flags}{unsupported});
+	    if (my @modules = @{$scanner::scannerDB->{$name}{kernel}}) {
+		modules::load(@modules);
+		modules::append_to_modules_loaded_at_startup_for_all_kernels(@modules);
+	    }
 	    scanner::confScanner($name, $_->{port},
 				 $_->{val}{vendor}, $_->{val}{id}, "");
 	}
@@ -294,7 +300,7 @@ sub tryConfScanner {
 					removeverticalbar($model)));
 	return 0;
     }
-    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj)/i) {
+    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj|hpaio|hplip)/i) {
      	$in->ask_warn('Scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the %s Control Center in Hardware section.", removeverticalbar($model), $shortdistroname));
      	return 0;
     }
@@ -366,14 +372,39 @@ sub tryConfScanner {
     }
     ($vendor, $product) = scanner::get_usb_ids_for_port($port);
     my $firmware;
+    my $server = $scanner::scannerDB->{$model}{server};
     if (grep { /FIRMWARELINE/ } @{$scanner::scannerDB->{$model}{lines}} ) {
-	$firmware = installfirmware($model, 
-				    $scanner::scannerDB->{$model}{server});
+	$firmware = installfirmware($model, $server);
 	return 0 if $firmware eq "///";
     }
+    if (defined($scanner::scannerDB->{$model}{kernel})) {
+	my @modules = @{$scanner::scannerDB->{$model}{kernel}};
+	my $wait = $in->wait_message(N("Scannerdrake"),
+				     N("Setting up kernel modules..."));
+	modules::load(@modules);
+	modules::append_to_modules_loaded_at_startup_for_all_kernels(@modules);
+    }
     scanner::confScanner($model, $port, $vendor, $product, $firmware);
-    $in->ask_warn(N("Congratulations!"),
-		  N("Your %s has been configured.\nYou may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
+    if ($scanner::scannerDB->{$model}{flags}{manual} == 2) {
+	# MANUALREQUIRED in ScannerDB
+	$in->ask_warn(N("Attention!"),
+		      N("Your %s cannot be configured fully automatically.\n\nManual adjustments are required. Please edit the configuration file /etc/sane.d/%s.conf. ", removeverticalbar($model), $server) .
+		      N("More info in the driver's manual page. Run the command \"man sane-%s\" to read it.", $server) .
+		      "\n\n" .
+		      N("After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."));
+    } elsif ($scanner::scannerDB->{$model}{flags}{manual} == 1) {
+	# MANUAL in ScannerDB
+	$in->ask_warn(N("Attention!"),
+		      N("Your %s has been configured, but it is possible that additional manual adjustments are needed to get it to work. ", removeverticalbar($model)) .
+		      N("If it does not appear in the list of configured scanners in the main window of Scannerdrake or if it does not work correctly, ") .
+		      N("edit the configuration file /etc/sane.d/%s.conf. ", $server) .
+		      N("More info in the driver's manual page. Run the command \"man sane-%s\" to read it.", $server) .
+		      "\n\n" .
+		      N("After that you may scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu."));
+    } else {
+	$in->ask_warn(N("Congratulations!"),
+		      N("Your %s has been configured.\nYou may now scan documents using \"XSane\" or \"Kooka\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
+    }
     return 1;
 }
 
