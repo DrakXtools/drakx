@@ -175,7 +175,7 @@ sub add_kernel {
     mkinitrd($prefix, $version, $initrd) or undef $initrd;
     if ($initrd && $ext ne "-$version") {
 	$initrd = "/boot/initrd$ext.img";
-	symlinkf("initrd-$version.img", "$prefix$initrd");
+	symlinkf("initrd-$version.img", "$prefix$initrd") or cp_af("$prefix/boot/initrd-$version.img", "$prefix$initrd");
     }
 
     my $label = $ext =~ /-(default)/ ? $1 : "linux$ext";
