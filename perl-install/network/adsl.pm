@@ -326,7 +326,7 @@ TYPE=$kind
         } or log::l("failed to mount usbdevfs");
         my @modules = (@{$modems{$adsl_device}{modules}}, map { $_->[1] } @{$modems{$adsl_device}{aliases}});
         @modules && eval { modules::load(@modules) }
-          or log::l("failed to load " . join(' ', @modules), " modules: $@");
+          or log::l("failed to load " . join(',', @modules), " modules: $@");
         $modems{$adsl_device}{start} and run_program::rooted($::prefix, $modems{$adsl_device}{start});
     }
 }
