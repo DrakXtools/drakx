@@ -70,7 +70,7 @@ for (my $f = $st->{first}; $f; $f = $st->{$f}{next}) {
 $in->ask_from(_("Automatic Steps Configuration"),
 	      _("Please choose for each step whether it will replay like your install, or it will be manual"),
 	      \@choices
-	     ); or quit_global($in, 0);
+	     ) or quit_global($in, 0);
 
 ${$_->[1]} eq _('manual') and push @manual_steps, $_->[0] foreach @all_steps;
 
@@ -359,6 +359,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.14  2001/11/05 16:07:21  damien
+#- typo
+#-
 #- Revision 1.13  2001/10/30 20:11:31  damien
 #- corrected ref($in) =~ /gtk/
 #-
