@@ -832,6 +832,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
     setVarsInSh($file, \%conf);
     if ($r eq $l[2]) {
 	# custom
+	run_program::rooted($::prefix, 'groupadd', '-r', 'fileshare');
 	if ($in->ask_from_no_check(
 	{
 	 -e '/usr/bin/userdrake' ? (ok => N("Launch userdrake"), cancel => N("Cancel")) : (cancel => ''),
