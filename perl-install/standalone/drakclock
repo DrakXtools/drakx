@@ -33,18 +33,23 @@ $my_win->{window}->signal_connect(delete_event => sub { ugtk2->exit(0) });
 my $calendar = Gtk2::Calendar->new;
 $calendar->signal_connect($_ => \&cal_changed) foreach 'month-changed', 'day-selected', 'day-selected-double-click', 'prev-month', 'next-month', 'prev-year', 'next-year';
 
+$in->{timezone} = {};
+add2hash($in->{timezone}, timezone::read());
+
+my $label_timezone = Gtk2::Label->new(defined($in->{timezone}{timezone}) ? $in->{timezone}{timezone} : N("not defined"));
+
 my $button_time = Gtk2::Button->new(N("Change Time Zone"));
 $button_time->signal_connect(clicked => sub {
 				   local $::isEmbedded = 0; # to prevent sub window embedding
-				   $in->{timezone} = {};
-				   add2hash($in->{timezone}, timezone::read());
 				   my $timezone = $in->{timezone}{timezone};
 				   $in->{timezone}{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone);
 				   if (defined($in->{timezone}{timezone})) {
 					   $in->{timezone}{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $in->{timezone}{UTC});
 					   timezone::write($in->{timezone});
+                            $label_timezone->set_text($in->{timezone}{timezone});
 				   } else {
 					   $in->{timezone}{timezone} = $timezone;
+                            $label_timezone->set_text($timezone);    
                         }
 			       });
 #my $button_ntp = Gtk2::Button->new(N("Use NTP"));
@@ -67,7 +72,10 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new,
                                 1, gtkpack_(Gtk2::HBox->new,
                                             1, gtkpack_(Gtk2::VBox->new,
                                                         0, $calendar,
-                                                        0, $button_time,
+                                                        0, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Timezone")), 'etched_in'),
+                                                                  gtkpack__(Gtk2::VBox->new,
+                                                                            $label_timezone,
+                                                                            $button_time)),
                                                         1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
                                                                   gtkpack_(Gtk2::VBox->new,
                                                                            0, Gtk2::Label->new(N("Your computer can synchronize its clock\n with a remote time server using NTP")),
