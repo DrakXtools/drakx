@@ -398,7 +398,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     if ($card->{identifier} =~ /Matrox.* G[24][05]0/ && $card->{identifier} !~ /AGP/) {
 	log::l("disabling AGP mode for Matrox card, as it seems to be a PCI card");
 	log::l("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
-	substInFile { s/^\s*#?\s*mga_dma\s*=\s*\d+\s*/mga_dma = 0/ } "$prefix/etc/X11/glx.conf";
+	substInFile { s/^\s*#*\s*mga_dma\s*=\s*\d+\s*$/mga_dma = 0\n/ } "$prefix/etc/X11/glx.conf";
     }
     #- make sure everything is correct at this point, packages have really been installed
     #- and driver and GLX extension is present.
