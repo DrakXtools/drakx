@@ -176,6 +176,7 @@ sub write_smb_conf {
 	template shell = /bin/bash
 	winbind use default domain = yes
 ");
+}
 
 sub write_smb_ads_conf {
     my ($domain,$realm) = @_;
@@ -207,7 +208,4 @@ sub write_smb_ads_conf {
         winbind use default domain = yes
 ");
 }
-
-}
-
 1;
