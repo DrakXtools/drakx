@@ -27,7 +27,7 @@ use my_gtk qw(:helpers :wrappers);
 use common;
 use strict;
 use network::netconnect;
-use globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
 my ($connect, $default_intf);
 init Gtk;
@@ -57,12 +57,12 @@ my $combo1 = new Gtk::Combo;
 $combo1->set_popdown_strings (network::netconnect::get_profiles() );
 $combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 $combo1->entry->set_editable(0);
-globals::init(
-	      in => $in,
-	      prefix => '',
-	      connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
-	      disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
-	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
+MDK::Common::Globals::init(
+			   in => $in,
+			   prefix => '',
+			   connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
+			   disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
+			   connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg" );
 
 gtkadd($window1,
        gtkpack_(new Gtk::VBox(0,5),

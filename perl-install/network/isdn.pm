@@ -10,7 +10,7 @@ use log;
 use network::tools;
 use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix $install);
-
+use MDK::Common::File;
 @ISA = qw(Exporter);
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
 
@@ -52,14 +52,14 @@ sub isdn_write_config {
 We recommand the light configuration.
 
 "), [ __("New configuration (isdn-light)"), __("Old configuration (isdn4net)")]
-				   ) or return;
-    my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn4net', 'isdn-light');
+			       ) or return;
+    my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn-light', 'isdn4net');
     if (!$::isStandalone) {
 	my $p = pkgs::packageByName($in->{packages}, $rmpackage);
 	$p && pkgs::packageFlagSelected($p) and pkgs::unselectPackage($in->{packages}, $p);
     }
     run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
-    $install->($instpackage, 'isdn4k-utils');
+    $install->($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
     isdn_write_config_backend($isdn, $e =~ /light/, $netc);
     1;
 }
@@ -89,6 +89,9 @@ sub isdn_write_config_backend {
 	    } "$prefix/etc/isdn/$f";
 	    chmod 0600, $f;
 	}
+	my $bundle = $isdn->{speed} =~ /64/ ? "1B" : "2B";
+	symlinkf("isdn" . $bundle . ".conf", "$prefix/etc/isdn/isdnctrl.conf");
+	symlinkf("ioptions" . $bundle, "$prefix/etc/ppp/ioptions");
     } else {
 	my $f = "$prefix/etc/isdn/profile/link/myisp";
 	output $f,
@@ -161,7 +164,7 @@ sub isdn_ask_info {
 					   read_providers_backend($f)], 'Unlisted - edit manually')
       or return;
     get_info_providers_backend($isdn, $netc, $str || 'Unlisted - edit manually', $f);
-    $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl);
+    $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl speed);
     add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
     ask_info2($isdn, $netc);
 }

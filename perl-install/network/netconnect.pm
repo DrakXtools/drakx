@@ -147,7 +147,7 @@ ifdown eth0
 
     my $set_default;
     my %conf;
-    $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach qw(modem adsl cable lan);
+    $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1: 0;
     my @l = (
 	     [_("Normal modem connection"), $netc->{autodetect}{modem}, __("detected on port %s"), \$conf{modem}],
