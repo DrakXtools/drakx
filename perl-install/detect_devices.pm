@@ -538,7 +538,7 @@ sub getNet() {
 
 sub getUPS() {
     (map { $_->{driver} = "mge-shut"; $_->{media_type} = 'UPS'; $_ } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
-    (map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_->{port} = "/dev/"; $_->{media_type} = 'UPS'; $_} grep { $_->{driver} =~ /ups$/ }  usb_probe());
+    (map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_->{port} = "/dev/"; $_->{media_type} = 'UPS'; $_ } grep { $_->{driver} =~ /ups$/ }  usb_probe());
 }
 
 $pcitable_addons = <<'EOF';
