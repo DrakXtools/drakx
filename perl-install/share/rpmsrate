@@ -54,6 +54,7 @@ SOUND
     playmidi playmidi-X11 space_sounds timidity-instruments xmms-esd
     xmms-kjofol-skins xmms-mikmod xmms-more-vis-plugins
   3 GNOME gnome-audio-extra 
+  2 rio500
 
 ACCESSIBILITY
   2 gtkeyboard
@@ -265,6 +266,9 @@ SCANNER
 PHOTO
   5 gphoto
 
+HW"Rio 500"
+  4 rio500
+
 DATABASES
   5 postgresql
   3 MySQL-client MySQL-shared postgresql
@@ -297,7 +301,7 @@ GAMES
   3D
     4 spacecup chromium tuxracer csmash gltron
       
-    5 !PCI"Riva.*128" !PCI"Rage X[CL]" !PCI"Rage Mobility (?:P\/M|L) " !PCI"3D Rage (?:LT|Pro)" # XF3 3D
+    5 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" # XF3 3D
         bzflag
 
 DEVELOPMENT
@@ -439,9 +443,9 @@ SYSTEM
   4 NIS yp-tools
 
   3 PCMCIA irda-utils
-  4 PCI"Voodoo 5" Glide_V5
-    PCI"Voodoo (3|Banshee)" Glide_V3-DRI
-    PCI"Voodoo" XFree86-glide-module
+  4 HW"Voodoo 5" Glide_V5
+    HW"Voodoo (3|Banshee)" Glide_V3-DRI
+    HW"Voodoo" XFree86-glide-module
 
   4 LOCALES"ar" || LOCALES"fa" || LOCALES"he" || LOCALES"yi" acon
 

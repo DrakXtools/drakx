@@ -604,7 +604,7 @@ sub read_rpmsrate {
 	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {}
 	    my $ok = 0;
 	    $flag = join('||', grep { 
-		if (my ($inv, $p) = /^(!)?PCI"(.*)"/) {
+		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
 		    ($inv xor detect_devices::matching_desc($p)) and $ok = 1;
 		    0;
 		} else {
