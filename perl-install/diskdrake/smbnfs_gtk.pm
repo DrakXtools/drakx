@@ -12,7 +12,7 @@ use network::smb;
 use network::nfs;
 use ugtk2 qw(:helpers :wrappers :create);
 
-my ($all_hds, $in, $tree, $current_entry, $current_leaf, %icons);
+my ($all_hds, $in, $tree_model, $current_entry, $current_leaf, %icons);
 
 sub main {
     ($in, $all_hds, my $type) = @_;
@@ -60,13 +60,10 @@ sub raw_hd_mount_point {
 }
 
 sub per_entry_info_box {
-    my ($box, $_kind, $entry) = @_;
-    $_->isa('Gtk2::Button') or $_->destroy foreach map { $_->widget } $box->children;
-    my $info;
-    if ($entry) {
-	$info = diskdrake::interactive::format_raw_hd_info($entry);
-    }
-    gtkpack($box, gtkadd(Gtk2::Frame->new(N("Details")), gtkset_justify(Gtk2::Label->new($info), 'left')));
+    my ($box, $kind, $entry) = @_;
+    my $info = $entry ? diskdrake::interactive::format_raw_hd_info($entry) : '';
+    $kind->{per_entry_info_box}->destroy if $kind->{per_entry_info_box};
+    gtkpack($box, $kind->{per_entry_info_box} = gtkadd(Gtk2::Frame->new(N("Details")), gtkset_justify(Gtk2::Label->new($info), 'left')));
 }
 
 sub per_entry_action_box {
@@ -100,18 +97,17 @@ sub done {
     diskdrake::interactive::Done($in, $all_hds);
 }
 
-sub set_export_icon {
-    my ($entry, $w) = @_;
+sub export_icon {
+    my ($entry) = @_;
     $entry ||= {};
-    my $icon = $icons{$entry->{isMounted} ? 'mounted' : $entry->{mntpoint} ? 'has_mntpoint' : 'default'};
-    ugtk::ctree_set_icon($tree, $w, @$icon);
+    $icons{$entry->{isMounted} ? 'mounted' : $entry->{mntpoint} ? 'has_mntpoint' : 'default'};
 }
 
 sub update {
     my ($kind) = @_;
     per_entry_action_box($kind->{action_box}, $kind, $current_entry);
     per_entry_info_box($kind->{info_box}, $kind, $current_entry);
-    set_export_icon($current_entry, $current_leaf) if $current_entry;
+    $tree_model->set($current_leaf, [ 0 => export_icon($current_entry) ]) if $current_entry;
 }
 
 sub find_fstab_entry {
@@ -129,26 +125,33 @@ sub find_fstab_entry {
     }
 }
 
-sub import_ctree {
+sub import_tree {
     my ($kind, $info_box) = @_;
     my (%servers_displayed, %wservers, %wexports, $inside);
 
-    $tree = Gtk2::CTree->new(1, 0);
-    $tree->set_column_auto_resize(0, 1);
-    $tree->set_selection_mode('browse');
-    $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
+    $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
+    my $tree = Gtk2::TreeView->new_with_model($tree_model);
+    $tree->get_selection->set_mode('browse');
+
+    my $col = Gtk2::TreeViewColumn->new;
+    $col->pack_start(my $pixrender = Gtk2::CellRendererPixbuf->new, 0);
+    $col->add_attribute($pixrender, 'pixbuf', 0);
+    $col->pack_start(my $texrender = Gtk2::CellRendererText->new, 1);
+    $col->add_attribute($texrender, 'text', 1);
+    $tree->append_column($col);
+
+    $tree->set_headers_visible(0);
 
     foreach ('default', 'server', 'has_mntpoint', 'mounted') {
-	$icons{$_} = [ gtkcreate_png("smbnfs_$_") ];
+	$icons{$_} = gtkcreate_pixbuf("smbnfs_$_");
     }
 
     my $add_server = sub {
 	my ($server) = @_;
 	my $name = $server->{name} || $server->{ip};
 	$servers_displayed{$name} ||= do {
-	    my $w = $tree->insert_node(undef, undef, [$name], 5, (undef) x 4, 0, 0);
-	    ugtk::ctree_set_icon($tree, $w, @{$icons{server}});
-	    $wservers{$w->{_gtk}} = $server;
+	    my $w = $tree_model->append_set(undef, [ 0 => $icons{server}, 1 => $name ]);
+	    $wservers{$tree_model->get_path_str($w)} = $server;
 	    $w;
 	};
     };
@@ -188,11 +191,16 @@ sub import_ctree {
 
     my $add_exports = sub {
 	my ($node) = @_;
-	$tree->expand($node);
-	foreach ($find_exports->($wservers{$node->{_gtk}} || return)) { #- can't die here since insert_node provoque a tree_select_row before the %wservers is filled
-	    my $w = $tree->insert_node($node, undef, [$kind->to_string($_)], 5, (undef) x 4, 1, 0);
-	    set_export_icon(find_fstab_entry($kind, $_), $w);
-	    $wexports{$w->{_gtk}} = $_;
+
+	my $path = $tree_model->get_path($node);
+	$tree->expand_row($path, 0);
+	$path->free;
+
+	foreach ($find_exports->($wservers{$tree_model->get_path_str($node)} || return)) { #- can't die here since insert_node provoque a tree_select_row before the %wservers is filled
+	    my $s = $kind->to_string($_);
+	    my $w = $tree_model->append_set($node, [ 0 => export_icon(find_fstab_entry($kind, $_)), 
+						     1 => $s ]);
+	    $wexports{$tree_model->get_path_str($w)} = $_;
 	}
     };
 
@@ -211,15 +219,15 @@ sub import_ctree {
 	$add_exports->($node);
     }
 
-    $tree->signal_connect(tree_select_row => sub { 
-	my $curr = $_[1];
-	$inside and return;
-	$inside = 1;
-	if ($curr->row->is_leaf) {
+    $tree->get_selection->signal_connect(changed => sub {
+	my ($_model, $curr) = $_[0]->get_selected;
+	$curr or return;
+
+	if ($tree_model->iter_parent($curr)) {
 	    $current_leaf = $curr;
-	    $current_entry = find_fstab_entry($kind, $wexports{$curr->{_gtk}} || die(''), 'add');
+	    $current_entry = find_fstab_entry($kind, $wexports{$tree_model->get_path_str($curr)} || die(''), 'add');
 	} else {
-	    if (!$curr->row->children) {
+	    if (!$tree_model->iter_has_child($curr)) {
 		gtkset_mousecursor_wait($tree->window);
 		ugtk2::flush();
 		$add_exports->($curr);		
@@ -228,7 +236,6 @@ sub import_ctree {
 	    $current_entry = undef;
 	}
 	update($kind);
-	$inside = 0;
     });
     $tree;
 }
@@ -238,7 +245,7 @@ sub add_smbnfs {
     die if $kind->{main_box};
 
     $kind->{info_box} = Gtk2::VBox->new(0,0);
-    $kind->{display_box} = createScrolledWindow(import_ctree($kind, $kind->{info_box}));
+    $kind->{display_box} = create_scrolled_window(import_tree($kind, $kind->{info_box}));
     $kind->{action_box} = Gtk2::HBox->new(0,0);
     $kind->{main_box} =
       gtkpack_(Gtk2::VBox->new(0,7),
