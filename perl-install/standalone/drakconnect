@@ -616,6 +616,7 @@ sub del_intf() {
                              data =>  [ { label => N("Net Device"), val => \$intf2delete, list => [ keys %$intf ], allow_empty_list => 1 } ],
                              post => sub {
                                  !$::testing and eval {
+                                     system("ifdown $intf2delete");
                                      modules::mergein_conf('/etc/modules.conf');
                                      modules::remove_alias($intf2delete);
                                      modules::write_conf();
