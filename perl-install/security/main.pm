@@ -13,7 +13,7 @@ sub myexit { my_gtk::exit @_ }
 sub wait_msg {
     my $mainw = my_gtk->new('wait');
     my $label = new Gtk::Label($_[0]);
-    gtkadd($mainw->{window}, gtkpack(gtkadd(create_vbox(), $label)));
+    $mainw->{window}->add(gtkpack(gtkadd(create_vbox(), $label)));
     $label->signal_connect(expose_event => sub { $mainw->{displayed} = 1 });
     $mainw->sync until $mainw->{displayed};
     gtkset_mousecursor_wait($mainw->{rwindow}->window);

@@ -118,8 +118,8 @@ sub set_secure_level {
     my $word_level = $_[1];
 
     my %sec_levels = ("Dangerous" => 0,  "Poor" => 1, "Standard" => 2, "High" => 3,  "Higher" => 4, "Paranoid" => 5);
-    my $num_level = $sec_levels{$word_level};
-    system "/usr/sbin/msec", $num_level ? $run_level : 3;
+    my $run_level = $sec_levels{$word_level};
+    system "/usr/sbin/msec", $run_level ? $run_level : 3;
 }
 
 # ***********************************************
@@ -137,24 +137,22 @@ sub get_functions {
 
     ## TODO handle 3 last functions here so they can be removed from this list
     my @ignore_list = qw(indirect commit_changes closelog error initlog log set_secure_level
-                                       set_security_conf set_server_level print_changes get_translation
-                                       create_server_link);
+					set_security_conf set_server_level print_changes get_translation create_server_link);
 
-    my @network_list = qw(accept_bogus_error_responses accept_broadcasted_icmp_echo accept_icmp_echo
-                          enable_dns_spoofing_protection enable_ip_spoofing_protection
-                          enable_log_strange_packets enable_promisc_check no_password_aging_for);
-
-    my @system_list = qw(allow_autologin allow_issues allow_reboot allow_remote_root_login
+    my %options = (
+	    'network' => [qw(accept_bogus_error_responses accept_broadcasted_icmp_echo accept_icmp_echo
+					enable_dns_spoofing_protection enable_ip_spoofing_protection
+					enable_log_strange_packets enable_promisc_check no_password_aging_for)],
+	    'system' =>  [qw(allow_autologin allow_issues allow_reboot allow_remote_root_login
                          allow_root_login allow_user_list allow_x_connections allow_xserver_to_listen
                          authorize_services enable_at_crontab enable_console_log
                          enable_msec_cron enable_pam_wheel_for_su enable_password enable_security_check
                          enable_sulogin password_aging password_history password_length set_root_umask
-                         set_shell_history_size set_shell_timeout set_user_umask);
+                         set_shell_history_size set_shell_timeout set_user_umask)]);
 
     my $file = "$::prefix/usr/share/msec/mseclib.py";
     my $function = '';
 
-    print "$::prefix\n";
     # read mseclib.py to get each function's name and if it's
     # not in the ignore list, add it to the returned list.
     open F, $file;
@@ -163,8 +161,7 @@ sub get_functions {
             (undef, $function) = split(/ /, $_);
             ($function, undef) = split(/\(/, $function);
             if (!(member($function, @ignore_list))) {
-                if($category eq "network" && member($function, @network_list)) { push(@functions, $function) }
-                elsif($category eq "system" && member($function, @system_list)) { push(@functions, $function) }
+                push(@functions, $function) if (member($function, @{$options{$category}}));
             }
         }
     }
@@ -258,15 +255,16 @@ sub get_check_value {
 
     if (-e $check_file) {
         open F, $check_file;
-	while(<F>) {
+	   while(<F>) {
             if($_ =~ /^$check/) {
                 (undef, $value) = split(/=/, $_);
-		chop $value;
-		$found = 1;
+			 chop $value;
+			 $found = 1;
+			 close F;
             }
         }
-	close F;
-	if ($found == 0) { $value = "default" }
+	   close F;
+	   $value = "default" if ($found == 0);
     }
     else { $value = "default" }
 
