@@ -57,13 +57,13 @@
 #			backup_user_toto_date_hour.tar.*
 #			backup_other_date_hour.tar.*
 #
-#	first incremental backup: (if backup_base* does not exist )
+#	first incremental backup: (if backup_base* does not exist)
 #
 #			backup_base_sys_date_hour.tar.*
 #			backup_base_user_toto_date_hour.tar.*
 #			backup_base_other_date_hour.tar.*
 #			
-#	other incremental backup: (if backup_base* already exist )
+#	other incremental backup: (if backup_base* already exist)
 #
 #			backup_incr_sys_date_hour.tar.*
 #			backup_incr_user_toto_date_hour.tar.*
@@ -117,9 +117,8 @@
 # DONE TODAY:
 #________________________________________________________________
 
-use Gtk;
-use lib qw(/usr/lib/libDrakX);
 use strict;
+use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
@@ -199,7 +198,7 @@ my @sys_files = ("/etc");
 my @user_list;
 my @list_other;
 my $cfg_dir = "/etc/drakxtools/drakbackup/";
-my $config{PATH_TO_SAVE} = "/var/lib/drakbackup";
+my $save_path = "/var/lib/drakbackup";
 my $log_buff;
 my $comp_mode = 0;
 my $backup_sys = 1;
@@ -260,8 +259,8 @@ my $good_restore_path = 1;
 # allow not-root user with own config
 if ($ENV{USER} ne 'root') {
 	$cfg_dir = "$user_home/.drakbackup/";
-	$config{PATH_TO_SAVE} = $cfg_dir . "backups";
-	-d $config{PATH_TO_SAVE} or mkdir_p $config{PATH_TO_SAVE};
+	$save_path = $cfg_dir . "backups";
+	-d $save_path or mkdir_p $save_path;
 	$nonroot_user = 1;
 	$not_warned = 1;
 	$backup_sys = 0;
@@ -285,7 +284,7 @@ sub show_conf {
     print "DrakBackup configuration:\n\n";
     read_conf_file();
     system_state();
-    print $system_state . "\n";
+    print "$system_state\n";
     exit(0);
 }
 
@@ -377,7 +376,7 @@ sub all_user_list {
 	    	push @all_user_list, $user;
 		}
     }
-    close (PASSWD);
+    close(PASSWD);
     if ($DEBUG) {
 		print "/--  User list  --/ \n";
 		print " -> $_\n" foreach @all_user_list;
@@ -389,7 +388,7 @@ sub the_time {
     $the_time = "_";
     $the_time .= localtime->year() + 1900;
     if (localtime->mon() < 9) { $the_time .= "0" }
-    $the_time .= localtime->mon() +1;
+    $the_time .= localtime->mon() + 1;
     if (localtime->mday() < 10) { $the_time .= "0" }
     $the_time .= localtime->mday();
     $the_time .= "_";
@@ -423,7 +422,6 @@ sub get_cd_info {
 	my @line_data;
 	my @drive_names;
 	my $i;
-	my $key;
 	my $info;
 
      my %data => (
@@ -442,7 +440,7 @@ sub get_cd_info {
      my $cd_drives;
 	foreach (@cd_info) {
 		@line_data = split(/[:\t]+/, $_);
-          if ($line_data[0] =~ "drive name") {
+          if ($line_data[0] =~ /drive name/) {
               $cd_drives = @line_data-1;
               chop($line_data[$cd_drives]);
               @drive_names = @line_data;
@@ -483,7 +481,7 @@ sub get_cd_info {
 	
 	#- now just report the data if we called --cd-info from the command line
 	if (!$interactive) {
-		foreach $key (keys %cd_devices) {
+		foreach my $key (keys %cd_devices) {
 			print "\n{$key}->{rec_dev} = $cd_devices{$key}->{rec_dev}\n"; 
 			print "{$key}->{speed} = $cd_devices{$key}->{speed}\n";
 			print "{$key}->{chg_speed} = $cd_devices{$key}->{chg_speed}\n";
@@ -496,71 +494,70 @@ sub get_cd_info {
 	} else {
 		#- in non-interactive mode we just let all the devices through
 		#- as a general purpose probe - in reality we want only burners
-		foreach $key (keys %cd_devices) {
+		foreach my $key (keys %cd_devices) {
 			delete $cd_devices{$key} if $cd_devices{$key}{rec_dev} eq ''
    		}
 	}
 }
 
 sub save_conf_file {
-
-	write_sitecopyrc() if $net_proto eq 'webdav';
-	write_password_file() if $net_proto eq 'rsync' && $passwd_user;
-	
+    write_sitecopyrc() if $net_proto eq 'webdav';
+    write_password_file() if $net_proto eq 'rsync' && $passwd_user;
+    
     my @cfg_list = ("SYS_FILES=@sys_files\n",
-		     "HOME_FILES=@user_list\n", 
-		     "OTHER_FILES=@list_other\n",
-		     "PATH_TO_SAVE=$config{PATH_TO_SAVE}\n",
-		     "HOST_PATH=$host_path\n",
-		     "NET_PROTO=$net_proto\n",
-		     "CD_TIME=$cd_time\n",
-		     "USER_MAIL=$user_mail\n",		     
-		     "DAEMON_TIME_SPACE=$when_space\n",
-		     "CD_DEVICE=$cd_device\n",
-		     "LOGIN=$login_user\n",
-		     "TAPE_DEVICE=$tape_device\n",
-		     "HOST_NAME=$host_name\n"
-		     );
-    $no_critical_sys and push @cfg_list, "NO_CRITICAL_SYS\n" ; 
-    $no_critical_sys or push @cfg_list, "CRITICAL_SYS\n" ; 
+		    "HOME_FILES=@user_list\n", 
+		    "OTHER_FILES=@list_other\n",
+		    "PATH_TO_SAVE=$save_path\n",
+		    "HOST_PATH=$host_path\n",
+		    "NET_PROTO=$net_proto\n",
+		    "CD_TIME=$cd_time\n",
+		    "USER_MAIL=$user_mail\n",		     
+		    "DAEMON_TIME_SPACE=$when_space\n",
+		    "CD_DEVICE=$cd_device\n",
+		    "LOGIN=$login_user\n",
+		    "TAPE_DEVICE=$tape_device\n",
+		    "HOST_NAME=$host_name\n"
+		    );
+    $no_critical_sys and push @cfg_list, "NO_CRITICAL_SYS\n"; 
+    $no_critical_sys or push @cfg_list, "CRITICAL_SYS\n"; 
     $send_mail and push @cfg_list, "SEND_MAIL\n";
-    $backup_sys_versions and push @cfg_list, "SYS_INCREMENTAL_BACKUPS\n" ; 
-    $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n" ; 
-    $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n" ; 
-    $media_erase and push @cfg_list, "MEDIA_ERASE\n" ; 
-	$media_eject and push @cfg_list, "MEDIA_EJECT\n" ; 
-	$multi_session and push @cfg_list, "MULTI_SESSION\n" ; 
-    $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ; 
-    $remember_pass and push @cfg_list, "PASSWD=$passwd_user\n" ;
-    $remember_pass and push @cfg_list, "REMEMBER_PASS\n" ;
-	$user_keys and push @cfg_list, "USER_KEYS\n" ;
-	$xfer_keys and push @cfg_list, "DRAK_KEYS\n" ;
-	$use_expect and push @cfg_list, "USE_EXPECT\n" ;	
-    $cd_with_install_boot and push @cfg_list, "CD_WITH_INSTALL_BOOT\n" ;
-    ($daemon_media eq 'ssh') and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=ssh\n" ;
-    ($daemon_media eq 'ftp') and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=ftp\n" ;
-    ($daemon_media eq 'hd') and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=hd\n" ;
-    ($daemon_media eq 'cd') and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=cd\n" ;
-	($daemon_media eq 'tape') and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=tape\n" ;
-	($daemon_media eq 'webdav') and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=webdav\n" ;
-	($daemon_media eq 'rsync') and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=rsync\n" ;
-    $hd_quota and  push @cfg_list, "HD_QUOTA\n" ;
-    $where_hd and  push @cfg_list, "USE_HD\n" ;
-    $where_cd and  push @cfg_list, "USE_CD\n" ;
-	$where_tape and push @cfg_list, "USE_TAPE\n" ;
-	$tape_norewind and push @cfg_list, "TAPE_NOREWIND\n" ;
-    $where_net and  push @cfg_list, "USE_NET\n" ;
+    $backup_sys_versions and push @cfg_list, "SYS_INCREMENTAL_BACKUPS\n"; 
+    $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n"; 
+    $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n"; 
+    $media_erase and push @cfg_list, "MEDIA_ERASE\n"; 
+    $media_eject and push @cfg_list, "MEDIA_EJECT\n"; 
+    $multi_session and push @cfg_list, "MULTI_SESSION\n"; 
+    $remember_pass and push @cfg_list, "LOGIN=$login_user\n"; 
+    $remember_pass and push @cfg_list, "PASSWD=$passwd_user\n";
+    $remember_pass and push @cfg_list, "REMEMBER_PASS\n";
+    $user_keys and push @cfg_list, "USER_KEYS\n";
+    $xfer_keys and push @cfg_list, "DRAK_KEYS\n";
+    $use_expect and push @cfg_list, "USE_EXPECT\n";	
+    $cd_with_install_boot and push @cfg_list, "CD_WITH_INSTALL_BOOT\n";
+    $daemon_media eq 'ssh' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=ssh\n";
+    $daemon_media eq 'ftp' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=ftp\n";
+    $daemon_media eq 'hd' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=hd\n";
+    $daemon_media eq 'cd' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=cd\n";
+    $daemon_media eq 'tape' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=tape\n";
+    $daemon_media eq 'webdav' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=webdav\n";
+    $daemon_media eq 'rsync' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=rsync\n";
+    $hd_quota and  push @cfg_list, "HD_QUOTA\n";
+    $where_hd and  push @cfg_list, "USE_HD\n";
+    $where_cd and  push @cfg_list, "USE_CD\n";
+    $where_tape and push @cfg_list, "USE_TAPE\n";
+    $tape_norewind and push @cfg_list, "TAPE_NOREWIND\n";
+    $where_net and  push @cfg_list, "USE_NET\n";
     $cdrw and push @cfg_list, "CDRW\n"; 
     $dvdr and push @cfg_list, "DVDR\n"; 
     $dvdram and push @cfg_list, "DVDRAM\n"; 
-    $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
+    $what_no_browser or push @cfg_list, "BROWSER_CACHE\n";
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
     if ($comp_mode) {
-    	push @cfg_list, "OPTION_COMP=TAR.BZ2\n";
+	push @cfg_list, "OPTION_COMP=TAR.BZ2\n";
     } else { 
-    	push @cfg_list, "OPTION_COMP=TAR.GZ\n";   
+	push @cfg_list, "OPTION_COMP=TAR.GZ\n";   
     }
-	$del_hd_files and push @cfg_list, "DEL_HD_FILES\n" ;
+    $del_hd_files and push @cfg_list, "DEL_HD_FILES\n";
     output_p($cfg_file, @cfg_list);
     chmod(0600, $cfg_file);
     save_cron_files() if $backup_daemon;
@@ -602,22 +599,24 @@ sub save_cron_files {
 
 sub read_conf_file {
     if (-e $cfg_file) {
-        %config = getVarsFromSh($cfg_file) || print "You must be root to read configuration file. \n";
+#        %config = getVarsFromSh($cfg_file) || print "You must be root to read configuration file. \n";
+        open (CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
         local $_;
         while (<CONF_FILE>) {
 	    	next unless /\S/;
 	    	next if /^#/;
 	    	chomp;
-	    	if (/^SYS_FILES/)		{ s/^SYS_FILES=//gi;    @sys_files = split(' ', $_) }
-	    	if (/^HOME_FILES/)		{ s/^HOME_FILES=//gi;   @user_list = split(' ', $_) }
-	    	if (/^OTHER_FILES/)		{ s/^OTHER_FILES=//gi;  @list_other = split(' ', $_) }
+	    	if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;    @sys_files = split(' ', $_) }
+	    	if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @user_list = split(' ', $_) }
+	    	if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @list_other = split(' ', $_) }
+		if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_ }
 	    	if (/^NO_SYS_FILES/)   { $backup_sys = 0 }
 	    	if (/^NO_USER_FILES/)  { $backup_user = 0 }
 	    	if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1 }
 	    	if (/^BROWSER_CACHE/)  { $what_no_browser = 0 }
 	    	if (/^CDRW/)           { $cdrw = 1 }
 	    	if (/^DVDR/)           { $dvdr = 1 }
-	    	if (/^DVDRAM/)           { $dvdram = 1 }
+	    	if (/^DVDRAM/)         { $dvdram = 1 }
 	    	if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_ }
 	    	if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_ } 
 	    	if (/^DAEMON_MEDIA/)   { s/^DAEMON_MEDIA=//gi; $daemon_media = $_ }
@@ -626,33 +625,33 @@ sub read_conf_file {
 	    	if (/^USE_CD/)         { $where_cd = 1 }
 	    	if (/^USE_NET/)        { $where_net = 1 }
 	    	if (/^USE_TAPE/)       { $where_tape = 1 }
-			if (/^TAPE_NOREWIND/)       { $tape_norewind = 1 }
+		if (/^TAPE_NOREWIND/)  { $tape_norewind = 1 }
 	    	if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_ }
 	    	if (/^DAEMON_TIME_SPACE/) { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_ }
 	    	if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1 }
-	    	if (/^CD_DEVICE/)    { s/^CD_DEVICE=//gi; $cd_device = $_ }
+	    	if (/^CD_DEVICE/)      { s/^CD_DEVICE=//gi; $cd_device = $_ }
 	    	if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_ } 
 	    	if (/^REMEMBER_PASS/)  { $remember_pass = 1 }
-	    	if (/^USER_KEYS/)	   	{ $user_keys = 1 }
-			if (/^DRAK_KEYS/)		{ $xfer_keys = 1; $user_keys = 0 }
-			if (/^USE_EXPECT/)		{ $use_expect = 1; $user_keys = 0 }
-			if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_ }
+	    	if (/^USER_KEYS/)      { $user_keys = 1 }
+		if (/^DRAK_KEYS/)      { $xfer_keys = 1; $user_keys = 0 }
+		if (/^USE_EXPECT/)     { $use_expect = 1; $user_keys = 0 }
+		if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_ }
 	    	if (/^PASSWD/)         { s/^PASSWD=//gi; $passwd_user = $_; $remember_pass = 1 }
 	    	if (/^USER_MAIL/)      { s/^USER_MAIL=//gi; $user_mail = $_ }		     
 	    	if (/^SEND_MAIL/)      { $send_mail = 1 }
 	    	if (/^TAPE_DEVICE/)    { s/TAPE_DEVICE=//gi; $tape_device = $_ }
-	    	if (/^MEDIA_ERASE/)     { $media_erase = 1 }
-	    	if (/^MEDIA_EJECT/)     { $media_eject = 1 }
-	    	if (/^MULTI_SESSION/)     { $multi_session = 1 }
+	    	if (/^MEDIA_ERASE/)    { $media_erase = 1 }
+	    	if (/^MEDIA_EJECT/)    { $media_eject = 1 }
+	    	if (/^MULTI_SESSION/)  { $multi_session = 1 }
 	    	if (/^SYS_INCREMENTAL_BACKUPS/)   { $backup_sys_versions = 1 }
 	    	if (/^USER_INCREMENTAL_BACKUPS/)  { $backup_user_versions = 1 }
 	    	if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1 }
-	    	if (/^NO_CRITICAL_SYS/)  { $no_critical_sys = 1 }
-	    	if (/^CRITICAL_SYS/)  { $no_critical_sys = 0 }
-	    	if (/^DEL_HD_FILES/)  { $del_hd_files = 1 }
-		}
-		read_cron_files();
-		$cfg_file_exist = 1;
+	    	if (/^NO_CRITICAL_SYS/) { $no_critical_sys = 1 }
+	    	if (/^CRITICAL_SYS/)   { $no_critical_sys = 0 }
+	    	if (/^DEL_HD_FILES/)   { $del_hd_files = 1 }
+	    }
+	read_cron_files();
+	$cfg_file_exist = 1;
     } else { 
     	$cfg_file_exist = 0;
 		#- these were 1 by default, but that made it so the user could never save the 
@@ -675,7 +674,7 @@ sub write_sitecopyrc {
 			);
     output_p("$user_home/.sitecopyrc", @cfg_list);
     chmod(0600, "$user_home/.sitecopyrc");
-    -d "$user_home/.sitecopy" or mkdir_p ("$user_home/.sitecopy");
+    -d "$user_home/.sitecopy" or mkdir_p("$user_home/.sitecopy");
     chmod(0700, "$user_home/.sitecopy");
 }
 
@@ -692,7 +691,7 @@ sub show_warning {
 	$mode = N_("FATAL") if $mode eq "f";
 	$mode = N_("INFO") if $mode eq "i";
 	if ($interactive) {
-		$in->ask_warn('',translate($mode).": ".translate($warning));
+		$in->ask_warn('', translate($mode).": ".translate($warning));
 	} else {
 		warn "$mode: $warning\n";
 	}
@@ -722,7 +721,7 @@ sub ftp_client {
     $ftp->login($login_user, $passwd_user);
     $ftp->cwd($host_path); 
     foreach (@file_list_to_send_by_ftp) {
-		$interactive and $pbar->set_value(0);
+		$interactive and $pbar->set_fraction(0);
 		$interactive and progress($pbar, 0.5, $_);
 		$interactive and $pbar->set_show_text($_);
 		$ftp->put($_);
@@ -774,15 +773,15 @@ sub do_expect {
 	
 	@send_files = @file_list_to_send_by_ftp if $mode eq "backup";
 	
-	$interactive and $pbar->set_value(0);
-	$interactive and $pbar3->set_value(0);
+	$interactive and $pbar->set_fraction(0);
+	$interactive and $pbar3->set_fraction(0);
 	$interactive and progress($pbar, 0.5, "File Transfer...");
 
 	foreach (@send_files) {
 		$exp_command = "scp -P $scp_port $_ $login_user\@$host_name:$host_path" if $mode eq "backup";
 		$exp_command = "ssh-copy-id -i $_ $login_user\@$host_name" if $mode eq "sendkey";
 	
-		if ((-e $backup_key) && ($mode eq "sendkey")) {
+		if ((-e $backup_key) && $mode eq "sendkey") {
 			if ($in->ask_yesorno('', N("%s exists, delete?\n\nWarning: If you've already done this process you'll probably\n need to purge the entry from authorized_keys on the server.", $backup_key))) {
 				unlink($backup_key);
 				unlink($backup_key . '.pub');
@@ -791,15 +790,15 @@ sub do_expect {
 			}
 		}
 	
-		if (!(-e $backup_key) && ($mode eq "sendkey")) {	
-			$in->ask_warn('',N("This may take a moment to generate the keys."));
+		if (!(-e $backup_key) && $mode eq "sendkey") {	
+			$in->ask_warn('', N("This may take a moment to generate the keys."));
 			cursor_wait();
 			#- not using a passphrase for the moment
 			system("ssh-keygen -P '' -t dsa -f $backup_key");
 			cursor_norm();
 		}
 		
-		my $exp = Expect->spawn($exp_command) or $in->ask_warn('',N("ERROR: Cannot spawn %s.", $exp_command));
+		my $exp = Expect->spawn($exp_command) or $in->ask_warn('', N("ERROR: Cannot spawn %s.", $exp_command));
 
 		$interactive and progress($pbar3, 1/@send_files, N("Total progess"));
 		$interactive and $stext->set_text($_);
@@ -826,8 +825,8 @@ sub do_expect {
 		); 
 
 		my $exit_stat = $exp->exitstatus;
-		$in->ask_warn('',N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if ($exit_stat eq 0) && ($mode eq "sendkey");
-		$log_buff .= "$_\n" if ($exit_stat eq 0) && ($mode eq "backup");
+		$in->ask_warn('', N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if $exit_stat eq 0 && $mode eq "sendkey";
+		$log_buff .= "$_\n" if $exit_stat eq 0 && $mode eq "backup";
 		$exp->hard_close();
 	}
 	$interactive and progress($pbar, 0.5, "Done...");
@@ -845,7 +844,7 @@ sub ssh_client {
 		} else {
 			$command = "scp -P $scp_port -i $backup_key $_ $login_user\@$host_name:$host_path";
 		}
-		$interactive and $pbar->set_value(0);
+		$interactive and $pbar->set_fraction(0);
 		$interactive and progress($pbar, 0.5, "File Transfer...");
 		$interactive and $stext->set_text($_);
 		$log_buff .= $command . "\n\n";
@@ -903,7 +902,7 @@ sub check_for_cd {
 		show_warning("f", N_("Does not appear to be recordable media!"));
 		return(1);
 	}
-	if (($log_buff =~ /Is not erasable/) && ($media_erase)) {
+	if ($log_buff =~ /Is not erasable/ && $media_erase) {
 		show_warning("f", N_("Not erasable media!"));
 		return(1);
 	}
@@ -931,7 +930,7 @@ sub check_for_cd {
 sub write_on_cd {	
 	my $command = "cdrecord -v dev=$cd_device -data ";
 	#- only blank if it's the first session
-	$command .= "blank=fast " if ($media_erase) && ($session_offset eq '');
+	$command .= "blank=fast " if $media_erase && $session_offset eq '';
 	#- multi-session mode
 	$command .= "-multi -pad " if $multi_session;
 	$command .= "$save_path/drakbackup.iso"; 
@@ -943,7 +942,7 @@ sub write_on_cd {
 sub erase_cdrw {
 	#- we can only hit this via interactive
 	$interactive = 0;
-	$in->ask_warn('',N("This may take a moment to erase the media."));
+	$in->ask_warn('', N("This may take a moment to erase the media."));
 	cursor_wait();
 	my $command = "cdrecord dev=$cd_device -blank=fast";
 	spawn_progress($command, "Erasing CDRW...");
@@ -958,8 +957,8 @@ sub spawn_progress {
 
 	$interactive and progress($pbar3, 0, translate($descr));
 	$interactive and $pbar3->set_activity_mode(1);
-	$interactive and ($pbar3->set_value(0));
-	$interactive and ($timer = Gtk->timeout_add(2, \&progress_timeout));
+	$interactive and $pbar3->set_fraction(0);
+	$interactive and $timer = Gtk2->timeout_add(2, \&progress_timeout);
 
 	$log_buff .= "\n" . $descr . ":\n";
 	$log_buff .= $command . "\n\n";
@@ -970,12 +969,12 @@ sub spawn_progress {
 		$log_buff .= $value;
 		if ($interactive) {
 			$stext->set_text($value);
-			Gtk->main_iteration while (Gtk->events_pending);
+			gtkflush();
 		}			
 	}
 	close TMP;
 	$interactive and $pbar3->set_activity_mode(0);
-	$interactive and Gtk->timeout_remove($timer);
+	$interactive and Gtk2->timeout_remove($timer);
 }
 
 sub progress_timeout {
@@ -984,7 +983,7 @@ sub progress_timeout {
 	$new_val = $pbar3->get_value() + 1;
    	$adj = $pbar3->adjustment;
  	$new_val = $adj->lower if $new_val > $adj->upper;
-	$pbar3->set_value($new_val);	
+	$pbar3->set_fraction($new_val);	
 	return(1);
 }
 
@@ -1138,7 +1137,7 @@ sub build_backup_files {
     my $base_sys_exist = 0;
     my $base_user_exist = 0;
     my $base_other_exist = 0;
-    my @list_temp ;
+    my @list_temp;
     my @list_other_;
     my @dir_content;
     my $file_date;
@@ -1151,11 +1150,11 @@ sub build_backup_files {
     read_conf_file();
     the_time();    
     $send_mail and complete_results();
-    -d  $save_path or mkdir_p ($save_path);
+    -d  $save_path or mkdir_p($save_path);
     if ($comp_mode) { 
 		$DEBUG and $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 ";
 		$DEBUG or $tar_cmd = "tar c --use-compress-program /usr/bin/bzip2 "; 
-		$tar_ext = "tar.bz2" ;
+		$tar_ext = "tar.bz2";
     } else { 
 		$DEBUG and $tar_cmd = "tar cvpz "; 
 		$DEBUG or $tar_cmd = "tar cpz "; 
@@ -1171,7 +1170,7 @@ sub build_backup_files {
     -d $save_path and @dir_content = all($save_path);
     grep (/^backup\_base\_sys/, @dir_content) and $base_sys_exist = 1;
 
-    if (($where_hd && !$daemon) || ($daemon)) {
+    if ($where_hd && !$daemon || $daemon) {
 	  $interactive and progress($pbar, 0.5, N("Backup system files..."));
 	  if ($backup_sys) { 
 	    if ($backup_sys_versions) {
@@ -1305,18 +1304,18 @@ sub build_backup_files {
 #		ftp_client() if $ftp_daemon;
 		rsync_client() if $daemon_media eq 'rsync';
 		ssh_client() if $daemon_media eq 'ssh' && !$use_expect;
-		do_expect("backup", "") if ($daemon_media eq 'ssh') && $use_expect;
+		do_expect("backup", "") if $daemon_media eq 'ssh' && $use_expect;
 		webdav_client() if $daemon_media eq 'webdav';
 		build_cd() if $daemon_media eq 'cd';
 		build_tape() if $daemon_media eq 'tape';
 
-		$results .= N("\nDrakbackup activities via %s:\n\n", $daemon_media) ;
+		$results .= N("\nDrakbackup activities via %s:\n\n", $daemon_media);
 		$results .= $log_buff;
 	}
 	
 	#- leave this one alone for now - works well
 	#- integrate with other methods later
-    if (($where_net && !$daemon && ($net_proto eq 'ftp')) || ($daemon && ($daemon_media eq 'ftp'))) {
+    if (($where_net && !$daemon && $net_proto eq 'ftp') || $daemon && $daemon_media eq 'ftp') {
 		$results .= N("file list sent by FTP: %s\n ", $_)  foreach @file_list_to_send_by_ftp;
 		$interactive and build_backup_ftp_status();
 		if (ftp_client()) { 
@@ -1328,10 +1327,10 @@ sub build_backup_files {
 	#- consolidate all the other methods under here - interactive and --default should land here
 	if (!$daemon) {
 	
-		if ($where_net && $net_proto && ($net_proto ne 'ftp')) {
+		if ($where_net && $net_proto && $net_proto ne 'ftp') {
 			rsync_client() if $net_proto eq 'rsync';
-			ssh_client() if ($net_proto eq 'ssh') && !$use_expect;
-			do_expect("backup", "") if ($net_proto eq 'ssh') && ($use_expect);
+			ssh_client() if $net_proto eq 'ssh' && !$use_expect;
+			do_expect("backup", "") if $net_proto eq 'ssh' && $use_expect;
 			webdav_client() if $net_proto eq 'webdav';
 			$results .= N("\nDrakbackup activities via %s:\n\n", $net_proto);
 		}
@@ -1359,7 +1358,7 @@ sub build_backup_files {
 	#- write our catalog file
 	if (!$media_problem) {
 		my $catalog = substr($the_time, 1);
-		if ((!$where_net) && (!$where_tape) && (!$where_cd)) { 
+		if (!$where_net && !$where_tape && !$where_cd) { 
 			$catalog .= ":HD:localhost:$save_path";
 			$net_proto = '';
 		} 
@@ -1367,14 +1366,14 @@ sub build_backup_files {
 		$catalog .= ":CD:$vol_name:$cd_device" if $where_cd;
 		$catalog .= ":Tape:$vol_name:$tape_device" if $where_tape;
 		$catalog .= ":System" if $backup_sys;
-		$catalog .= ":I" if ($backup_sys_versions) && ($backup_sys);
-		$catalog .= ":F" if (!$backup_sys_versions) && ($backup_sys);
+		$catalog .= ":I" if $backup_sys_versions && $backup_sys;
+		$catalog .= ":F" if !$backup_sys_versions && $backup_sys;
 		$catalog .= ":Users=(@user_list)" if $backup_user;
-		$catalog .= ":I" if ($backup_user_versions) && ($backup_user);
-		$catalog .= ":F" if (!$backup_user_versions) && ($backup_user);
+		$catalog .= ":I" if $backup_user_versions && $backup_user;
+		$catalog .= ":F" if !$backup_user_versions && $backup_user;
 		$catalog .= ":Other=(@list_other)" if @list_other;
-		$catalog .= ":I" if ($backup_other_versions) && (@list_other);
-		$catalog .= ":F" if (!$backup_other_versions) && (@list_other);
+		$catalog .= ":I" if $backup_other_versions && @list_other;
+		$catalog .= ":F" if !$backup_other_versions && @list_other;
 		$catalog .= "\n";
 			
           local *CATALOG;
@@ -1384,7 +1383,7 @@ sub build_backup_files {
 	}
 	
 	#- clean up HD files if del_hd_files and media isn't hd
-	if (($del_hd_files) && (($where_cd) || ($where_tape) || ($where_net)) && ($daemon_media ne 'hd'))  {
+	if ($del_hd_files && ($where_cd || $where_tape || $where_net) && $daemon_media ne 'hd')  {
 		foreach (@file_list_to_send_by_ftp) {
 #			unlink($_) if (/$tar_ext$/) && (!/backup_base/);
 			unlink($_) if /$tar_ext$/;
@@ -1424,7 +1423,7 @@ sub check_pkg_needs {
 	if ($where_net) {
 		$extra_pkg = 'rsync' if $net_proto eq 'rsync';
 		$extra_pkg = 'sitecopy wget' if $net_proto eq 'webdav';
-		$extra_pkg = 'perl-Expect' if ($net_proto eq 'ssh') && (($use_expect) || ($xfer_keys));
+		$extra_pkg = 'perl-Expect' if $net_proto eq 'ssh' && ($use_expect || $xfer_keys);
 	}
 	$extra_pkg = 'mt-st' if $where_tape;
 	if ($extra_pkg) {
@@ -1442,31 +1441,28 @@ sub check_pkg_needs {
 
 sub cursor_wait {
 	# turn the cursor to a watch
-	$window1->window->set_cursor(new Gtk::Gdk::Cursor(150));    
-	Gtk->main_iteration while Gtk->events_pending;
+	$window1->window->set_cursor(new Gtk2::Gdk::Cursor(150));    
+	gtkflush();
 }
 
 sub cursor_norm {
 	# restore normal cursor
-	$window1->window->set_cursor(new Gtk::Gdk::Cursor(68));
-	Gtk->main_iteration while Gtk->events_pending;
+	$window1->window->set_cursor(new Gtk2::Gdk::Cursor(68));
+	gtkflush();
 }
 
 sub show_status {
-	#- just a generic routine to display an array of text in the GUI screen
-	
-	my $text = new Gtk::Text(undef, undef);
+    #- just a generic routine to display an array of text in the GUI screen
+    
+    my $text = new Gtk2::TextView;
 	
     $table->destroy();
 	
     gtkpack($advanced_box,
-	   $table = gtkpack_(new Gtk::VBox(0,10),
-			1, gtkpack_(new Gtk::HBox(0,0),
-        		1, gtktext_insert(gtkset_editable($text, 0), $results),
-				0, new Gtk::VScrollbar($text->vadj),
-			),
-		),
-	);
+	    $table = gtkpack_(new Gtk2::VBox(0,10),
+			      1, gtktext_insert(gtkset_editable($text, 0), [ [ $results ] ]),
+			      ),
+	    );
     $central_widget = \$table;
     $table->show_all();    
 }
@@ -1484,14 +1480,14 @@ sub file_ok_sel {
     my $file_name = $file_selection->get_filename();
     if (!member($file_name, @list_other)) {
 	push(@list_other, $file_name);
-	$list_other->add(gtkshow(new Gtk::ListItem($file_name)));
+	$list_other->add(gtkshow(new Gtk2::ListItem($file_name)));
     }
 }
 
 sub filedialog_where_hd {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() } );
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
 	$save_path_entry->set_text($file_dialog->get_filename()); 
 	$file_dialog->destroy() });
@@ -1502,7 +1498,7 @@ sub filedialog_where_hd {
 sub filedialog_restore_find_path {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() } );
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
 	$restore_find_path_entry->set_text($file_dialog->get_filename()); 
 	$file_dialog->destroy() });
@@ -1516,7 +1512,7 @@ sub filedialog_generic {
 	my ($fileops, $prompt, $widget, $set_var) = @_; 
 	my $file_dialog;
 	
-    $file_dialog = gtksignal_connect(new Gtk::FileSelection(translate($prompt)), destroy => sub { $file_dialog->destroy() } );
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(translate($prompt)), destroy => sub { $file_dialog->destroy() });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
 		${$set_var} = ($file_dialog->get_filename());
 		${$widget}->set_text(${$set_var}); 
@@ -1530,7 +1526,7 @@ sub filedialog_generic {
 sub filedialog {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk::FileSelection(N("Select the files or directories and click on 'Add'")), destroy => sub { $file_dialog->destroy() } );
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("Select the files or directories and click on 'Add'")), destroy => sub { $file_dialog->destroy() });
     $file_dialog->ok_button->signal_connect(clicked => \&file_ok_sel, $file_dialog);
     $file_dialog->ok_button->child->set(N("Add"));
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
@@ -1573,14 +1569,14 @@ sub advanced_what_sys {
     my $box_what_sys;
     
     gtkpack($advanced_box,
-	    $box_what_sys =  gtkpack_(new Gtk::VBox(0, 15),
+	    $box_what_sys =  gtkpack_(new Gtk2::VBox(0, 15),
 		     1, N("\nPlease check all options that you need.\n"),
 		     1, N("These options can backup and restore all files in your /etc directory.\n"),
-		     0, my $check_what_sys = new Gtk::CheckButton(N("Backup your System files. (/etc directory)")),
-		     0, my $check_what_versions = new Gtk::CheckButton(N("Use incremental backup  (do not replace old backups)")),
-		     0, my $check_what_critical = new Gtk::CheckButton(N("Do not include critical files (passwd, group, fstab)")),
+		     0, my $check_what_sys = new Gtk2::CheckButton(N("Backup your System files. (/etc directory)")),
+		     0, my $check_what_versions = new Gtk2::CheckButton(N("Use incremental backup  (do not replace old backups)")),
+		     0, my $check_what_critical = new Gtk2::CheckButton(N("Do not include critical files (passwd, group, fstab)")),
 		     0, N("With this option you will be able to restore any version\n of your /etc directory."),
-		     1, new Gtk::VBox(0, 15),
+		     1, new Gtk2::VBox(0, 15),
 		     ),
 	    );
     check_list([$check_what_sys, \$backup_sys], [$check_what_critical, \$no_critical_sys], [$check_what_versions, \$backup_sys_versions]);
@@ -1595,14 +1591,14 @@ sub advanced_what_user {
     
     all_user_list();
     gtkpack($advanced_box,
-	    $box_what_user = gtkpack_(new Gtk::VBox(0, 15),
+	    $box_what_user = gtkpack_(new Gtk2::VBox(0, 15),
 			0, N("Please check all users that you want to include in your backup."),
-			0, new Gtk::HSeparator,
-			1, createScrolledWindow( 
-				gtkpack__(new Gtk::VBox(0,0),
+			0, new Gtk2::HSeparator,
+			1, create_scrolled_window( 
+				gtkpack__(new Gtk2::VBox(0,0),
 					map { my $name = $_;
 						my @user_list_tmp;
-						my $b = new Gtk::CheckButton($name); 
+						my $b = new Gtk2::CheckButton($name); 
 						if (grep /^$name$/, @user_list) {
 							$check_what_user{$_}[1] = 1;
 							gtkset_active($b, 1);
@@ -1611,7 +1607,7 @@ sub advanced_what_user {
 							gtkset_active($b, 0);
 						}
 						$b->signal_connect(toggled => sub { 
-							if ($check_what_user{$name}[1] ) {
+							if ($check_what_user{$name}[1]) {
 								$check_what_user{$name}[1] = 0;
 								@user_list_tmp = grep(!/^$name$/, @user_list);
 								@user_list = @user_list_tmp;
@@ -1623,8 +1619,8 @@ sub advanced_what_user {
 					$b } (@all_user_list) 
 				),
 			),
-			0, my $check_what_browser = new Gtk::CheckButton(N("Do not include the browser cache")),
-	    	0, my $check_what_user_versions = new Gtk::CheckButton(N("Use Incremental Backups  (do not replace old backups)")),
+			0, my $check_what_browser = new Gtk2::CheckButton(N("Do not include the browser cache")),
+	    	0, my $check_what_user_versions = new Gtk2::CheckButton(N("Use Incremental Backups  (do not replace old backups)")),
 		),
 	);
     check_list([$check_what_browser, \$what_no_browser], [$check_what_user_versions, \$backup_user_versions]);
@@ -1635,20 +1631,20 @@ sub advanced_what_user {
 
 sub advanced_what_other {
     my $box_what_other;
-    $list_other = new Gtk::List();
-    $list_other->set_selection_mode(-extended);
-    $list_other->add(gtkshow(new Gtk::ListItem($_))) foreach @list_other;
+    $list_other = new Gtk2::List();
+    $list_other->set_selection_mode('extended');
+    $list_other->add(gtkshow(new Gtk2::ListItem($_))) foreach @list_other;
     
     gtkpack($advanced_box,
-	    $box_what_other = gtkpack_(new Gtk::VBox(0, 15),
-		     1, gtkpack_(new Gtk::HBox(0,4),
-				 1, createScrolledWindow($list_other),
+	    $box_what_other = gtkpack_(new Gtk2::VBox(0, 15),
+		     1, gtkpack_(new Gtk2::HBox(0,4),
+				 1, create_scrolled_window($list_other),
 				 ),
-		     0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-			       gtksignal_connect(new Gtk::Button(N("Add")), clicked => sub { filedialog() }),
-			       gtksignal_connect(new Gtk::Button(N("Remove Selected")), clicked => \&list_remove, $list_other),
+		     0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+			       gtksignal_connect(new Gtk2::Button(N("Add")), clicked => sub { filedialog() }),
+			       gtksignal_connect(new Gtk2::Button(N("Remove Selected")), clicked => \&list_remove, $list_other),
 			       ),
-		     0, gtkset_sensitive(my $check_what_other_versions = new Gtk::CheckButton(N("Use Incremental Backups  (do not replace old backups)") ), 0),
+		     0, gtkset_sensitive(my $check_what_other_versions = new Gtk2::CheckButton(N("Use Incremental Backups  (do not replace old backups)")), 0),
 		     ),
 	    );
     check_list([$check_what_other_versions, \$backup_other_versions]);
@@ -1656,85 +1652,77 @@ sub advanced_what_other {
     $up_box->show_all();
 }
 
-sub advanced_what_entire_sys{
+sub advanced_what_entire_sys {
     my $box_what;
     
-    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("user");
-    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("net_u");
-    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("bootloader");
-
     gtkpack($advanced_box,
-	    $box_what = gtkpack_(new Gtk::HBox(0, 15),
-		     1, new Gtk::VBox(0, 5),
-		     1, gtkpack_(new Gtk::VBox(0, 15),	
-				 1, new Gtk::VBox(0, 5),
-				 1, gtksignal_connect(my $button_what_other = new Gtk::Button(), 
+	    $box_what = gtkpack_(new Gtk2::HBox(0, 15),
+		     1, new Gtk2::VBox(0, 5),
+		     1, gtkpack_(new Gtk2::VBox(0, 15),	
+				 1, new Gtk2::VBox(0, 5),
+				 1, gtksignal_connect(my $button_what_other = new Gtk2::Button(), 
 						      clicked => sub { ${$central_widget}->destroy(); message_underdevel() }),
-				 1, gtksignal_connect(my $button_what_all = new Gtk::Button(), 
+				 1, gtksignal_connect(my $button_what_all = new Gtk2::Button(), 
 						      clicked => sub { ${$central_widget}->destroy(); message_underdevel() }),
-				 1, new Gtk::VBox(0, 5),
+				 1, new Gtk2::VBox(0, 5),
 				 ),
-		     1, new Gtk::VBox(0, 5),	
+		     1, new Gtk2::VBox(0, 5),	
 		     ),
 	    );
-    $button_what_other->add(gtkpack(new Gtk::HBox(0,10),
-				    new Gtk::Pixmap($pix_sys_map, $pix_sys_mask),
-				    new Gtk::Label(N("Linux")),
-				    new Gtk::HBox(0, 5)
+    $button_what_other->add(gtkpack(new Gtk2::HBox(0,10),
+				    gtkcreate_img("bootloader"),
+				    new Gtk2::Label(N("Linux")),
+				    new Gtk2::HBox(0, 5)
 				    ));
-    $button_what_all->add(gtkpack(new Gtk::HBox(0,10),
-				  new Gtk::Pixmap($pix_user_map, $pix_user_mask),
-				   new Gtk::Label(N("Windows (FAT32)")),
-				  new Gtk::HBox(0, 5)
+    $button_what_all->add(gtkpack(new Gtk2::HBox(0,10),
+				  gtkcreate_img("user"),
+				  new Gtk2::Label(N("Windows (FAT32)")),
+				  new Gtk2::HBox(0, 5)
 				  ));
     fonction_env(\$box_what, \&advanced_what_entire_sys, \&advanced_what, "");
     $up_box->show_all();
 }
 
-sub advanced_what{
+sub advanced_what {
     my $box_what;    
-    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic82-users-40");
-    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("ic82-others-40");
-    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("ic82-system-40");
-    my ($pix_sysp_map, $pix_sysp_mask) = gtkcreate_png("ic82-systemeplus-40");
 
     gtkpack($advanced_box,
-	    $box_what =  gtkpack_(new Gtk::HBox(0, 15),
-		     1, new Gtk::VBox(0, 5),
-		     1, gtkpack_(new Gtk::VBox(0, 15),	
-				 1, new Gtk::VBox(0, 5),
-				 1, gtksignal_connect(my $button_what_sys = new Gtk::Button(), 
+	    $box_what =  gtkpack_(new Gtk2::HBox(0, 15),
+		     1, new Gtk2::VBox(0, 5),
+		     1, gtkpack_(new Gtk2::VBox(0, 15),	
+				 1, new Gtk2::VBox(0, 5),
+				 1, gtksignal_connect(my $button_what_sys = new Gtk2::Button(), 
 						      clicked => sub { $box_what->destroy(); advanced_what_sys() }),
-				 1, gtksignal_connect(my $button_what_user = new Gtk::Button(), 
+				 1, gtksignal_connect(my $button_what_user = new Gtk2::Button(), 
 						      clicked => sub { ${$central_widget}->destroy(); advanced_what_user() }),
-				 1, gtksignal_connect(my $button_what_other = new Gtk::Button(), 
+				 1, gtksignal_connect(my $button_what_other = new Gtk2::Button(), 
 						      clicked => sub { ${$central_widget}->destroy(); advanced_what_other() }),
-#				 1, gtksignal_connect(my $button_what_all = new Gtk::Button(), 
+#				 1, gtksignal_connect(my $button_what_all = new Gtk2::Button(), 
 #						  clicked => sub { ${$central_widget}->destroy(); advanced_what_entire_sys(); }),
-				 1, new Gtk::VBox(0, 5),
+				 1, new Gtk2::VBox(0, 5),
 				 ),
-		     1, new Gtk::VBox(0, 5),	
+		     1, new Gtk2::VBox(0, 5),	
 				 ),
 	    );
-    $button_what_sys->add(gtkpack(new Gtk::HBox(0,10),
-				    new Gtk::Pixmap($pix_sys_map, $pix_sys_mask),
-				    new Gtk::Label(N("System")),
-				    new Gtk::HBox(0, 5)
+    $button_what_sys->add(gtkpack(new Gtk2::HBox(0,10),
+				    gtkcreate_img("ic82-system-40"),
+				    new Gtk2::Label(N("System")),
+				    new Gtk2::HBox(0, 5)
 				    ));
-    $button_what_user->add(gtkpack(new Gtk::HBox(0,10),
-				    new Gtk::Pixmap($pix_user_map, $pix_user_mask),
-				    new Gtk::Label(N("Users")),
-				    new Gtk::HBox(0, 5)
+    $button_what_user->add(gtkpack(new Gtk2::HBox(0,10),
+				    gtkcreate_img("ic82-users-40"),
+				    new Gtk2::Label(N("Users")),
+				    new Gtk2::HBox(0, 5)
 				    ));
-    $button_what_other->add(gtkpack(new Gtk::HBox(0,10),
-				    new Gtk::Pixmap($pix_other_map, $pix_other_mask),
-				    new Gtk::Label(N("Other")),
-				    new Gtk::HBox(0, 5)
+    $button_what_other->add(gtkpack(new Gtk2::HBox(0,10),
+				    gtkcreate_img("ic82-others-40"),
+				    new Gtk2::Label(N("Other")),
+				    new Gtk2::HBox(0, 5)
 				    ));
-#     $button_what_all->add(gtkpack(new Gtk::HBox(0,10),
-# 				    new Gtk::Pixmap($pix_sysp_map, $pix_sysp_mask),
-# 				    new Gtk::Label(N("An Entire System")),
-# 				    new Gtk::HBox(0, 5)
+#     $button_what_all->add(gtkpack(new Gtk2::HBox(0,10),
+# 				    gtkcreate_img("ic82-systemeplus-40"),
+# 				    new Gtk2::Label(N("An Entire System")),
+# 				    new Gtk2::HBox(0, 5)
 # 				    ));
 
     fonction_env(\$box_what, \&advanced_what, \&advanced_box, "");
@@ -1746,44 +1734,44 @@ sub advanced_where_net_types {
     my $box_where_net;
 	        
     gtkpack($advanced_box,
-	    $box_where_net = gtkpack_(new Gtk::VBox(0, 10),
-	 		0, new Gtk::HSeparator,
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	 			0, my $check_where_use_net = new Gtk::CheckButton(N("Use network connection to backup") ),
-				1, new Gtk::HBox(0,10),
-	 			0, new Gtk::Label(N("Net Method:")),
-	 			0, gtkset_sensitive(my $entry_net_type = new Gtk::Combo(), $where_net),
+	    $box_where_net = gtkpack_(new Gtk2::VBox(0, 10),
+	 		0, new Gtk2::HSeparator,
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	 			0, my $check_where_use_net = new Gtk2::CheckButton(N("Use network connection to backup")),
+				1, new Gtk2::HBox(0,10),
+	 			0, new Gtk2::Label(N("Net Method:")),
+	 			0, gtkset_sensitive(my $entry_net_type = new Gtk2::Combo(), $where_net),
 	 		),	 
-	 		0, gtkpack_(new Gtk::HBox(0,5),
-	   			0, gtkset_sensitive(my $check_use_expect = new Gtk::CheckButton(N("Use Expect for SSH")), ($where_net && ($net_proto eq 'ssh'))),
-	   			0, gtkset_sensitive(my $check_xfer_keys = new Gtk::CheckButton(N("Create/Transfer\nbackup keys for SSH")), ($where_net && ($net_proto eq 'ssh'))),
-				0, gtkset_sensitive(my $button_xfer_keys = new Gtk::Button(N("  Transfer  \nNow")), $xfer_keys),
-	   			0, gtkset_sensitive(my $check_user_keys = new Gtk::CheckButton(N("Other (not drakbackup)\nkeys in place already")), ($where_net && ($net_proto eq 'ssh'))),
+	 		0, gtkpack_(new Gtk2::HBox(0,5),
+	   			0, gtkset_sensitive(my $check_use_expect = new Gtk2::CheckButton(N("Use Expect for SSH")), ($where_net && $net_proto eq 'ssh')),
+	   			0, gtkset_sensitive(my $check_xfer_keys = new Gtk2::CheckButton(N("Create/Transfer\nbackup keys for SSH")), ($where_net && $net_proto eq 'ssh')),
+				0, gtkset_sensitive(my $button_xfer_keys = new Gtk2::Button(N("  Transfer  \nNow")), $xfer_keys),
+	   			0, gtkset_sensitive(my $check_user_keys = new Gtk2::CheckButton(N("Other (not drakbackup)\nkeys in place already")), ($where_net && $net_proto eq 'ssh')),
 			),
-	 		0, new Gtk::HSeparator,
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-		    	0, gtkset_sensitive(new Gtk::Label(N("Please enter the host name or IP.")), $where_net),
-		    	1, new Gtk::HBox(0,10),
-		    	0, gtkset_sensitive(my $host_name_entry = new Gtk::Entry(), $where_net),
+	 		0, new Gtk2::HSeparator,
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter the host name or IP.")), $where_net),
+		    	1, new Gtk2::HBox(0,10),
+		    	0, gtkset_sensitive(my $host_name_entry = new Gtk2::Entry(), $where_net),
 		    ),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	 			0, gtkset_sensitive(new Gtk::Label(N("Please enter the directory (or module) to\n put the backup on this host.")), $where_net),
-		     	1, new Gtk::HBox(0,10),
-		     	0, gtkset_sensitive(my $host_path_entry = new Gtk::Entry(), $where_net), 
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	 			0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory (or module) to\n put the backup on this host.")), $where_net),
+		     	1, new Gtk2::HBox(0,10),
+		     	0, gtkset_sensitive(my $host_path_entry = new Gtk2::Entry(), $where_net), 
 		    ),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-		    	0, gtkset_sensitive(new Gtk::Label(N("Please enter your login")), $where_net),
-				1, new Gtk::HBox(0,10),
-				0, gtkset_sensitive(my $login_user_entry = new Gtk::Entry(), $where_net),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter your login")), $where_net),
+				1, new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(my $login_user_entry = new Gtk2::Entry(), $where_net),
 			),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please enter your password")),  $where_net),
-				1, new Gtk::HBox(0,10),
-				0, gtkset_sensitive(my $passwd_user_entry = new Gtk::Entry(), $where_net),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter your password")),  $where_net),
+				1, new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(my $passwd_user_entry = new Gtk2::Entry(), $where_net),
 			),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-				1, new Gtk::HBox(0,10),
-				0, gtkset_sensitive(my $check_remember_pass = new Gtk::CheckButton(N("Remember this password")), $where_net),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+				1, new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(my $check_remember_pass = new Gtk2::CheckButton(N("Remember this password")), $where_net),
 	 		),
 	 	),   
 	);
@@ -1794,7 +1782,7 @@ sub advanced_where_net_types {
 		if ($passwd_user && $login_user && $host_name) {
 			do_expect("sendkey", $backup_key);
 		} else {
-			$in->ask_warn('',N("Need hostname, username and password!"));
+			$in->ask_warn('', N("Need hostname, username and password!"));
 		}
 	}); 	
     $passwd_user_entry->set_visibility(0);
@@ -1815,7 +1803,7 @@ sub advanced_where_net_types {
 		$button_xfer_keys->set_sensitive($sensitive);
 		$check_user_keys->set_sensitive($sensitive);
 	});
-    check_list ([$check_remember_pass, \$remember_pass]);
+    check_list([$check_remember_pass, \$remember_pass]);
     gtksignal_connect(gtkset_active($check_where_use_net, $where_net), toggled => sub { 
 		invbool \$where_net;
  		#- assure other methods disabled
@@ -1871,80 +1859,79 @@ sub advanced_where_cd {
 	
 	get_cd_info();
 	
-	my $combo_where_cd_device = new Gtk::Combo();
-    $combo_where_cd_device->set_popdown_strings (sort keys %cd_devices) if keys %cd_devices;  
+	my $combo_where_cd_device = new Gtk2::Combo();
+    $combo_where_cd_device->set_popdown_strings(sort keys %cd_devices) if keys %cd_devices;  
 	
-    my $combo_where_cd_time = new Gtk::Combo();
-    $combo_where_cd_time->set_popdown_strings ("650 Mb","700 Mb", "750 Mb", "800 Mb");    
+    my $combo_where_cd_time = new Gtk2::Combo();
+    $combo_where_cd_time->set_popdown_strings("650 Mb", "700 Mb", "750 Mb", "800 Mb");    
  
-	my $combo_where_cdrecord_device = new Gtk::Combo();
+	my $combo_where_cdrecord_device = new Gtk2::Combo();
 	my @dev_codes;
-	my $key;
 	
-	foreach $key (keys %cd_devices) {
+	foreach my $key (keys %cd_devices) {
 		push(@dev_codes, $cd_devices{$key}{rec_dev}); 
 	}
 	
-    $combo_where_cdrecord_device->set_popdown_strings (@dev_codes) if keys %cd_devices;  	 
+    $combo_where_cdrecord_device->set_popdown_strings(@dev_codes) if keys %cd_devices;  	 
 
     gtkpack($advanced_box,
-		$box_where_cd = gtkpack_(new Gtk::VBox(0, 6),
-			0, my $check_where_cd = new Gtk::CheckButton(N("Use CD/DVDROM to backup")),
-			0, new Gtk::HSeparator,
-			0, gtkpack_(new Gtk::HBox(0,10),
-			0, gtkset_sensitive(new Gtk::Label(N("Please choose your CD/DVD device\n(Press Enter to propogate settings to other fields.\nThis field isn't necessary, only a tool to fill in the form.)")), $where_cd),
-				1, new Gtk::VBox(0, 5),
-				0, gtkset_sensitive(gtkset_usize ($combo_where_cd_device, 200, 20), $where_cd),
+		$box_where_cd = gtkpack_(new Gtk2::VBox(0, 6),
+			0, my $check_where_cd = new Gtk2::CheckButton(N("Use CD/DVDROM to backup")),
+			0, new Gtk2::HSeparator,
+			0, gtkpack_(new Gtk2::HBox(0,10),
+			0, gtkset_sensitive(new Gtk2::Label(N("Please choose your CD/DVD device\n(Press Enter to propogate settings to other fields.\nThis field isn't necessary, only a tool to fill in the form.)")), $where_cd),
+				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(gtkset_size_request ($combo_where_cd_device, 200, 20), $where_cd),
 			),
-			0, gtkpack_(new Gtk::HBox(0,10),
-			0, gtkset_sensitive(new Gtk::Label(N("Please choose your CD/DVD media size (Mb)")), $where_cd),
-				1, new Gtk::VBox(0, 5),
-				0, gtkset_sensitive(gtkset_usize ($combo_where_cd_time, 200, 20), $where_cd),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+			0, gtkset_sensitive(new Gtk2::Label(N("Please choose your CD/DVD media size (Mb)")), $where_cd),
+				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(gtkset_size_request ($combo_where_cd_time, 200, 20), $where_cd),
 			),
-			0, new Gtk::VBox(0, 5),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please check for multisession CD")), $where_cd),
-				1, new Gtk::VBox(0, 5),
-				0, gtkset_sensitive(my $check_multisession = new Gtk::CheckButton(), $where_cd),
+			0, new Gtk2::VBox(0, 5),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please check for multisession CD")), $where_cd),
+				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(my $check_multisession = new Gtk2::CheckButton(), $where_cd),
 			),
-			0, new Gtk::VBox(0, 5),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please check if you are using CDRW media")), $where_cd),
-				1, new Gtk::VBox(0, 5),
-				0, gtkset_sensitive(my $check_cdrw = new Gtk::CheckButton(), $where_cd),
+			0, new Gtk2::VBox(0, 5),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please check if you are using CDRW media")), $where_cd),
+				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(my $check_cdrw = new Gtk2::CheckButton(), $where_cd),
 			),
-			0, new Gtk::VBox(0, 5),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	 			0, gtkset_sensitive(new Gtk::Label(N("Please check if you want to erase your RW media (1st Session)")), $cdrw && $where_cd),
-				0, gtkset_sensitive(my $button_erase_now = new Gtk::Button(N(" Erase Now ")), $cdrw),			
-	    		1, new Gtk::VBox(0, 5),
-	    		0, gtkset_sensitive(my $check_cdrw_erase = new Gtk::CheckButton(), $cdrw && $where_cd),
+			0, new Gtk2::VBox(0, 5),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	 			0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to erase your RW media (1st Session)")), $cdrw && $where_cd),
+				0, gtkset_sensitive(my $button_erase_now = new Gtk2::Button(N(" Erase Now ")), $cdrw),			
+	    		1, new Gtk2::VBox(0, 5),
+	    		0, gtkset_sensitive(my $check_cdrw_erase = new Gtk2::CheckButton(), $cdrw && $where_cd),
 			),
-			0, new Gtk::VBox(0, 5),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please check if you are using a DVDR device")), $where_cd),
-				1, new Gtk::VBox(0, 5),
-				0, gtkset_sensitive(my $check_dvdr = new Gtk::CheckButton(), $where_cd),
+			0, new Gtk2::VBox(0, 5),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please check if you are using a DVDR device")), $where_cd),
+				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(my $check_dvdr = new Gtk2::CheckButton(), $where_cd),
 			),
-			0, new Gtk::VBox(0, 5),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please check if you are using a DVDRAM device")), $where_cd),
-				1, new Gtk::VBox(0, 5),
-				0, gtkset_sensitive(my $check_dvdram = new Gtk::CheckButton(), $where_cd),
+			0, new Gtk2::VBox(0, 5),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please check if you are using a DVDRAM device")), $where_cd),
+				1, new Gtk2::VBox(0, 5),
+				0, gtkset_sensitive(my $check_dvdram = new Gtk2::CheckButton(), $where_cd),
 			),
 # don't know what this is about - hold off for now (SB)
-#			0, new Gtk::VBox(0, 5),
-#			0, gtkpack_(new Gtk::HBox(0,10),
-#				0, gtkset_sensitive(new Gtk::Label(N("Please check if you want to include\n install boot on your CD.")),  $where_cd),
-#				1, new Gtk::VBox(0, 5),
-#				0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk::CheckButton(), $where_cd),
+#			0, new Gtk2::VBox(0, 5),
+#			0, gtkpack_(new Gtk2::HBox(0,10),
+#				0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to include\n install boot on your CD.")),  $where_cd),
+#				1, new Gtk2::VBox(0, 5),
+#				0, gtkset_sensitive(my $check_cd_with_install_boot = new Gtk2::CheckButton(), $where_cd),
 #			),
-			0, new Gtk::VBox(0, 5),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please enter your CD Writer device name\n ex: 0,1,0")),  $where_cd),
-				1, new Gtk::VBox(0, 5),
-#				0, gtkset_usize (gtkset_sensitive($cd_device_entry = new Gtk::Entry(), $where_cd), 200, 20),
-				0, gtkset_sensitive(gtkset_usize ($combo_where_cdrecord_device, 200, 20), $where_cd),
+			0, new Gtk2::VBox(0, 5),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter your CD Writer device name\n ex: 0,1,0")),  $where_cd),
+				1, new Gtk2::VBox(0, 5),
+#				0, gtkset_size_request (gtkset_sensitive($cd_device_entry = new Gtk2::Entry(), $where_cd), 200, 20),
+				0, gtkset_sensitive(gtkset_size_request ($combo_where_cdrecord_device, 200, 20), $where_cd),
 			),
 		),
 	);
@@ -1974,7 +1961,7 @@ sub advanced_where_cd {
 		if ($cd_device) {
 			erase_cdrw();
 		} else {
-			$in->ask_warn('',N("No CD device defined!"));
+			$in->ask_warn('', N("No CD device defined!"));
 		}
 	}); 	
     $combo_where_cdrecord_device->entry->set_text($cd_device);
@@ -2011,49 +1998,49 @@ sub advanced_where_tape {
 	#- look for tape devices;
 	get_tape_info();
 
-	my $combo_where_tape_device = new Gtk::Combo();
-    $combo_where_tape_device->set_popdown_strings (@tape_devices) if @tape_devices;  
+	my $combo_where_tape_device = new Gtk2::Combo();
+    $combo_where_tape_device->set_popdown_strings(@tape_devices) if @tape_devices;  
 
     my $box_where_tape;
     my $button;
-    my $adj = new Gtk::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
-    #my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("filedialog");
+    my $adj = new Gtk2::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
+    #my ($pix_fs_map, $pix_fs_mask) = gtkcreate_img("filedialog");
     
     gtkpack($advanced_box,
-		$box_where_tape = gtkpack_(new Gtk::VBox(0, 6),
-			0, new Gtk::HSeparator,
-		 	0, my $check_where_tape = new Gtk::CheckButton(N("Use tape to backup") ),
-		 	0, new Gtk::HSeparator,
-		 	0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please enter the device name to use for backup")), $where_tape),
-				1, new Gtk::VBox(0, 6),
-				0, gtkset_sensitive(gtkset_usize ($combo_where_tape_device, 200, 20), $where_tape),
+		$box_where_tape = gtkpack_(new Gtk2::VBox(0, 6),
+			0, new Gtk2::HSeparator,
+		 	0, my $check_where_tape = new Gtk2::CheckButton(N("Use tape to backup")),
+		 	0, new Gtk2::HSeparator,
+		 	0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the device name to use for backup")), $where_tape),
+				1, new Gtk2::VBox(0, 6),
+				0, gtkset_sensitive(gtkset_size_request ($combo_where_tape_device, 200, 20), $where_tape),
 			),
-			0, new Gtk::VBox(0, 5),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk::Label(N("Please check if you want to use the non-rewinding device.")), $where_tape),
-	    		1, new Gtk::VBox(0, 5),
-	    		0, gtkset_sensitive(my $check_tape_rewind = new Gtk::CheckButton(), $where_tape),
+			0, new Gtk2::VBox(0, 5),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to use the non-rewinding device.")), $where_tape),
+	    		1, new Gtk2::VBox(0, 5),
+	    		0, gtkset_sensitive(my $check_tape_rewind = new Gtk2::CheckButton(), $where_tape),
 			),
-			0, new Gtk::VBox(0, 5),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk::Label(N("Please check if you want to erase your tape before the backup.")), $where_tape),
-	    		1, new Gtk::VBox(0, 5),
-	    		0, gtkset_sensitive(my $check_tape_erase = new Gtk::CheckButton(), $where_tape),
+			0, new Gtk2::VBox(0, 5),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to erase your tape before the backup.")), $where_tape),
+	    		1, new Gtk2::VBox(0, 5),
+	    		0, gtkset_sensitive(my $check_tape_erase = new Gtk2::CheckButton(), $where_tape),
 			),
-			0, new Gtk::VBox(0, 5),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk::Label(N("Please check if you want to eject your tape after the backup.")), $where_tape),
-	    		1, new Gtk::VBox(0, 5),
-	    		0, gtkset_sensitive(my $check_tape_eject = new Gtk::CheckButton(), $where_tape),
+			0, new Gtk2::VBox(0, 5),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to eject your tape after the backup.")), $where_tape),
+	    		1, new Gtk2::VBox(0, 5),
+	    		0, gtkset_sensitive(my $check_tape_eject = new Gtk2::CheckButton(), $where_tape),
 			),
-			0, new Gtk::VBox(0, 6),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please enter the maximum size\n allowed for Drakbackup")), $where_tape),
-				1, new Gtk::VBox(0, 6),
-				0, gtkset_usize (gtkset_sensitive(my $spinner = new Gtk::SpinButton($adj, 0, 0), $where_tape), 200, 20),
+			0, new Gtk2::VBox(0, 6),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")), $where_tape),
+				1, new Gtk2::VBox(0, 6),
+				0, gtkset_size_request (gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_tape), 200, 20),
 			),
-			0, gtkpack_(new Gtk::HBox(0,10),),
+			0, gtkpack_(new Gtk2::HBox(0,10),),
 		),
 	);
     gtksignal_connect(gtkset_active($check_where_tape, $where_tape), toggled => sub { 
@@ -2105,32 +2092,31 @@ sub advanced_where_hd {
     my ($previous_function) = @_,
     my $box_where_hd;
     my $button;
-    my $adj = new Gtk::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
-    my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("ic82-dossier-32");
+    my $adj = new Gtk2::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
     
     gtkpack($advanced_box,
-	    $box_where_hd = gtkpack_(new Gtk::VBox(0, 6),
-			0, new Gtk::HSeparator,
-#	 0, my $check_where_hd = new Gtk::CheckButton( N("Use Hard Disk to backup") ),
-#	 0, new Gtk::HSeparator,
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please enter the directory to save to:")), $where_hd),
-				1, new Gtk::VBox(0, 6),
-				0, gtkset_usize (gtkset_sensitive($save_path_entry = new Gtk::Entry(), $where_hd), 152, 20),
-				0, gtkset_sensitive($button = gtksignal_connect(new Gtk::Button(),  clicked => sub {
+	    $box_where_hd = gtkpack_(new Gtk2::VBox(0, 6),
+			0, new Gtk2::HSeparator,
+#	 0, my $check_where_hd = new Gtk2::CheckButton( N("Use Hard Disk to backup")),
+#	 0, new Gtk2::HSeparator,
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save to:")), $where_hd),
+				1, new Gtk2::VBox(0, 6),
+				0, gtkset_size_request (gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
+				0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
 					filedialog_where_hd() 
 				}), $where_hd),
 			),
-			0, new Gtk::VBox(0, 6),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
-				1, new Gtk::VBox(0, 6),
-				0, gtkset_usize (gtkset_sensitive(my $spinner = new Gtk::SpinButton($adj, 0, 0), $where_hd), 200, 20),
+			0, new Gtk2::VBox(0, 6),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
+				1, new Gtk2::VBox(0, 6),
+				0, gtkset_size_request (gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				1, new Gtk::VBox(0, 6),
-	   			0, gtkset_sensitive(my $check_where_hd_quota = new Gtk::CheckButton(N("Use quota for backup files.")), $where_hd),
-		    	0, new Gtk::VBox(0, 6),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				1, new Gtk2::VBox(0, 6),
+	   			0, gtkset_sensitive(my $check_where_hd_quota = new Gtk2::CheckButton(N("Use quota for backup files.")), $where_hd),
+		    	0, new Gtk2::VBox(0, 6),
 			),
 		),
 	);
@@ -2144,7 +2130,7 @@ sub advanced_where_hd {
 #	${$central_widget}->destroy();
 #	$current_widget->();
 #    });
-    $button->add(gtkpack(new Gtk::HBox(0,10), new Gtk::Pixmap($pix_fs_map, $pix_fs_mask)));
+    $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($save_path);
     $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text() });
     if ($previous_function) { 
@@ -2155,23 +2141,19 @@ sub advanced_where_hd {
     $up_box->show_all();
 }
 
-sub advanced_where{
+sub advanced_where {
     my $box_where;
-    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("ic82-network-40");
-    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("ic82-CD-40");
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("ic82-discdurwhat-40");
-    my ($pix_tape_map, $pix_tape_mask) = gtkcreate_png("ic82-tape-40");
 
     gtkpack($advanced_box,
-	    $box_where = gtkpack_(new Gtk::HBox(0, 15),
-				  1, new Gtk::VBox(0, 5),
-				  1, gtkpack_(new Gtk::VBox(0, 15),	
-					  1, new Gtk::VBox(0, 5),
-					  1, gtksignal_connect(my $button_where_net = new Gtk::Button(), clicked => sub { 
+	    $box_where = gtkpack_(new Gtk2::HBox(0, 15),
+				  1, new Gtk2::VBox(0, 5),
+				  1, gtkpack_(new Gtk2::VBox(0, 15),	
+					  1, new Gtk2::VBox(0, 5),
+					  1, gtksignal_connect(my $button_where_net = new Gtk2::Button(), clicked => sub { 
 					      ${$central_widget}->destroy();
 					      advanced_where_net_types(); 
 					  }),
-					  1, gtksignal_connect(my $button_where_cd = new Gtk::Button(),  clicked => sub { 
+					  1, gtksignal_connect(my $button_where_cd = new Gtk2::Button(),  clicked => sub { 
 					      ${$central_widget}->destroy(); 
 					      if (require_rpm("mkisofs", "cdrecord")) { 
 					      	advanced_where_cd();
@@ -2180,38 +2162,38 @@ sub advanced_where{
 						  	install_rpm(\&advanced_where);
 						  }
 					  }),
-					  1, gtksignal_connect(my $button_where_hd = new Gtk::Button(),  clicked => sub { 
+					  1, gtksignal_connect(my $button_where_hd = new Gtk2::Button(),  clicked => sub { 
 					      ${$central_widget}->destroy(); 
 					      advanced_where_hd();
 					  }),
-					  1, gtksignal_connect(my $button_where_tape = new Gtk::Button(),  clicked => sub { 
+					  1, gtksignal_connect(my $button_where_tape = new Gtk2::Button(),  clicked => sub { 
 					      ${$central_widget}->destroy(); 
 						  # message_underdevel();
 						  advanced_where_tape() }),
-					  1, new Gtk::VBox(0, 5),
+					  1, new Gtk2::VBox(0, 5),
 					     ),
-				  1, new Gtk::VBox(0, 5),	
+				  1, new Gtk2::VBox(0, 5),	
 				  ),
 	    );
-    $button_where_net->add(gtkpack(new Gtk::HBox(0,10),
-		new Gtk::Pixmap($pix_net_map, $pix_net_mask),
-		new Gtk::Label(N("Network")),
-		new Gtk::HBox(0, 5)
+    $button_where_net->add(gtkpack(new Gtk2::HBox(0,10),
+		gtkcreate_img("ic82-network-40"),
+		new Gtk2::Label(N("Network")),
+		new Gtk2::HBox(0, 5)
 	));
-    $button_where_cd->add(gtkpack(new Gtk::HBox(0,10),
-		new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
-		new Gtk::Label(N("CDROM / DVDROM")),
-		new Gtk::HBox(0, 5)
+    $button_where_cd->add(gtkpack(new Gtk2::HBox(0,10),
+		gtkcreate_img("ic82-CD-40"),
+		new Gtk2::Label(N("CDROM / DVDROM")),
+		new Gtk2::HBox(0, 5)
 	));
-    $button_where_hd->add(gtkpack(new Gtk::HBox(0,10),
-		new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
-		new Gtk::Label(N("HardDrive / NFS")),
-		new Gtk::HBox(0, 5)
+    $button_where_hd->add(gtkpack(new Gtk2::HBox(0,10),
+		gtkcreate_img("ic82-discdurwhat-40"),
+		new Gtk2::Label(N("HardDrive / NFS")),
+		new Gtk2::HBox(0, 5)
 	));
-    $button_where_tape->add(gtkpack(new Gtk::HBox(0,10),
- 		new Gtk::Pixmap($pix_tape_map, $pix_tape_mask),
- 		new Gtk::Label(N("Tape")),
- 		new Gtk::HBox(0, 5)
+    $button_where_tape->add(gtkpack(new Gtk2::HBox(0,10),
+ 		gtkcreate_img("ic82-tape-40"),
+ 		new Gtk2::Label(N("Tape")),
+ 		new Gtk2::HBox(0, 5)
  	));
     fonction_env(\$box_where, \&advanced_where, \&advanced_box, ""); 
     $up_box->show_all();
@@ -2219,11 +2201,10 @@ sub advanced_where{
 
 #- 7/7/2002 - S.Benedict reworked when - drop all the checkboxes and use a list
 #- chances that we want to do backups via multiple medias in cron are slim
-sub advanced_when{
+sub advanced_when {
     my $box_when;
 #   $daemon_media = '';
-    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("ic82-when-40");
-    my $combo_when_space = new Gtk::Combo();
+    my $combo_when_space = new Gtk2::Combo();
     my %trans = (N("hourly") => 'hourly',
 		 N("daily") => 'daily',
 		 N("weekly") => 'weekly',
@@ -2232,38 +2213,38 @@ sub advanced_when{
 		  'daily' => N("daily"),
 		  'weekly' => N("weekly"),
 		  'monthly' => N("monthly"));
-    $combo_when_space->set_popdown_strings (N("hourly"),N("daily"),N("weekly"),N("monthly"));    
+    $combo_when_space->set_popdown_strings(N("hourly"), N("daily"), N("weekly"), N("monthly"));    
 
 	#- drop down list of possible medias - default to config value
-    my $entry_media_type = new Gtk::Combo();
+    my $entry_media_type = new Gtk2::Combo();
     $entry_media_type->set_popdown_strings(@media_types, @net_methods);
 #    $entry_media_type->set_value_in_list(1, 0);   
 	$entry_media_type->entry->set_text($daemon_media);
 	
     gtkpack($advanced_box,
-		$box_when = gtkpack_(new Gtk::VBox(0, 15),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				1, new Gtk::HBox(0,10),
-				1, new Gtk::Pixmap($pix_time_map, $pix_time_mask),
-				0, my $check_when_daemon  = new Gtk::CheckButton(N("Use daemon") ), 
-				1, new Gtk::HBox(0,10),
+		$box_when = gtkpack_(new Gtk2::VBox(0, 15),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				1, new Gtk2::HBox(0,10),
+				1, gtkcreate_img("ic82-when-40"),
+				0, my $check_when_daemon  = new Gtk2::CheckButton(N("Use daemon")), 
+				1, new Gtk2::HBox(0,10),
 			),
-			0, new Gtk::HSeparator,
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please choose the time \ninterval between each backup")),  $backup_daemon),
-				1, new Gtk::HBox(0,10),
+			0, new Gtk2::HSeparator,
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please choose the time \ninterval between each backup")),  $backup_daemon),
+				1, new Gtk2::HBox(0,10),
 				0, gtkset_sensitive($combo_when_space, $backup_daemon),
 			),
-			0, new Gtk::HBox(0,10),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please choose the\nmedia for backup.")), $backup_daemon),
-				1, new Gtk::HBox(0,10),
-				0, gtkpack_(new Gtk::VBox(0,10),
+			0, new Gtk2::HBox(0,10),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please choose the\nmedia for backup.")), $backup_daemon),
+				1, new Gtk2::HBox(0,10),
+				0, gtkpack_(new Gtk2::VBox(0,10),
 					0, gtkset_sensitive($entry_media_type, $backup_daemon),
 				),
 			),
-			0, new Gtk::HSeparator,
-			1, gtkset_sensitive(new Gtk::Label(N("Please be sure that the cron daemon is included in your services. 
+			0, new Gtk2::HSeparator,
+			1, gtkset_sensitive(new Gtk2::Label(N("Please be sure that the cron daemon is included in your services. 
 \nNote that currently all 'net' medias also use the hard drive.")),  $backup_daemon),
 		),
 	);
@@ -2282,31 +2263,30 @@ sub advanced_when{
     $up_box->show_all();
 }
 
-sub advanced_options{
+sub advanced_options {
     my $box_options;
-    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("ic82-moreoption-40");
     
     gtkpack($advanced_box,
-	    $box_options = gtkpack_(new Gtk::VBox(0, 15),
-# 				 0, gtkpack_(new Gtk::HBox(0,10),
-# 					     1, new Gtk::VBox(0,10),
-# 					     1, new Gtk::Pixmap($pix_options_map, $pix_options_mask),
+	    $box_options = gtkpack_(new Gtk2::VBox(0, 15),
+# 				 0, gtkpack_(new Gtk2::HBox(0,10),
+# 					     1, new Gtk2::VBox(0,10),
+# 					     1, gtkcreate_img("ic82-moreoption-40"),
 # 					     1, N("Please choose correct options to backup."),
-# 					     1, new Gtk::VBox(0,10),
+# 					     1, new Gtk2::VBox(0,10),
 # 					     ),
-# 				 0, new Gtk::HSeparator,
-# 				 0, gtkpack_(new Gtk::VBox(0,10),
-# 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk::CheckButton( N("Use Tar and bzip2 (very slow) [Please be careful if you\n (un)select this option, as all your old backups will be deleted.]") ), 0),
-# 			 0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( N("Use .backupignore files")), 0),
-				    0, new Gtk::VBox(0,10),
-				    0, gtkpack_(new Gtk::HBox(0,10),
-						0, my $check_mail = new Gtk::CheckButton(N("Send mail report after each backup to:")),
-						1, new Gtk::HBox(0,10),
-						0, my $mail_entry = new Gtk::Entry(),
+# 				 0, new Gtk2::HSeparator,
+# 				 0, gtkpack_(new Gtk2::VBox(0,10),
+# 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk2::CheckButton( N("Use Tar and bzip2 (very slow) [Please be careful if you\n (un)select this option, as all your old backups will be deleted.]")), 0),
+# 			 0, gtkset_sensitive(my $check_backupignore = new Gtk2::CheckButton( N("Use .backupignore files")), 0),
+				    0, new Gtk2::VBox(0,10),
+				    0, gtkpack_(new Gtk2::HBox(0,10),
+						0, my $check_mail = new Gtk2::CheckButton(N("Send mail report after each backup to:")),
+						1, new Gtk2::HBox(0,10),
+						0, my $mail_entry = new Gtk2::Entry(),
 					),
 #					     ),
-				    0, gtkpack_(new Gtk::HBox(0,10),
-						0, my $check_del_hd_files = new Gtk::CheckButton(N("Delete Hard Drive tar files after backup to other media.")),
+				    0, gtkpack_(new Gtk2::HBox(0,10),
+						0, my $check_del_hd_files = new Gtk2::CheckButton(N("Delete Hard Drive tar files after backup to other media.")),
 					),
 		),
 	);
@@ -2318,50 +2298,46 @@ sub advanced_options{
     $up_box->show_all();
 }
 
-sub advanced_box{
+sub advanced_box {
     my $box_adv;
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("ic82-discdurwhat-40");
-    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("ic82-when-40");
-    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("ic82-where-40");
-    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("ic82-moreoption-40");
 
     gtkpack($advanced_box,
-		$box_adv = gtkpack_(new Gtk::HBox(0, 15),
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack_(new Gtk::VBox(0, 15),	
-				1, new Gtk::VBox(0, 5),	
-				1, gtksignal_connect(my $button_what = new Gtk::Button(), clicked => sub { 
+		$box_adv = gtkpack_(new Gtk2::HBox(0, 15),
+			1, new Gtk2::VBox(0, 5),	
+			1, gtkpack_(new Gtk2::VBox(0, 15),	
+				1, new Gtk2::VBox(0, 5),	
+				1, gtksignal_connect(my $button_what = new Gtk2::Button(), clicked => sub { 
 				    ${$central_widget}->destroy(); advanced_what() }),
-				1, gtksignal_connect(my $button_where = new Gtk::Button(), clicked => sub { 
+				1, gtksignal_connect(my $button_where = new Gtk2::Button(), clicked => sub { 
 				    ${$central_widget}->destroy();  advanced_where() }),
-				1, gtksignal_connect(my $button_when = new Gtk::Button(), clicked => sub { 
+				1, gtksignal_connect(my $button_when = new Gtk2::Button(), clicked => sub { 
 				    ${$central_widget}->destroy();  advanced_when() }),
-				1, gtksignal_connect(my $button_options = new Gtk::Button(), clicked => sub {
+				1, gtksignal_connect(my $button_options = new Gtk2::Button(), clicked => sub {
 					${$central_widget}->destroy(); advanced_options() }),
-				1, new Gtk::VBox(0, 5),	
+				1, new Gtk2::VBox(0, 5),	
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	);
-    $button_what->add(gtkpack(new Gtk::HBox(0,10),
-		new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
-		new Gtk::Label(N("What")),
-		new Gtk::HBox(0, 5)
+    $button_what->add(gtkpack(new Gtk2::HBox(0,10),
+		gtkcreate_img("ic82-discdurwhat-40"),
+		new Gtk2::Label(N("What")),
+		new Gtk2::HBox(0, 5)
 	));
-    $button_where->add(gtkpack(new Gtk::HBox(0,10),
-	    new Gtk::Pixmap($pix_net_map, $pix_net_mask),
-	    new Gtk::Label(N("Where")),
-	    new Gtk::HBox(0, 5)
+    $button_where->add(gtkpack(new Gtk2::HBox(0,10),
+	    gtkcreate_img("ic82-where-40"),
+	    new Gtk2::Label(N("Where")),
+	    new Gtk2::HBox(0, 5)
 	));
-    $button_when->add(gtkpack(new Gtk::HBox(0,10),
-	    new Gtk::Pixmap($pix_time_map, $pix_time_mask),
-	    new Gtk::Label(N("When")),
-	    new Gtk::HBox(0, 5)
+    $button_when->add(gtkpack(new Gtk2::HBox(0,10),
+	    gtkcreate_img("ic82-when-40"),
+	    new Gtk2::Label(N("When")),
+	    new Gtk2::HBox(0, 5)
 	));
-    $button_options->add(gtkpack(new Gtk::HBox(0,10),
-	    new Gtk::Pixmap($pix_options_map, $pix_options_mask),
-	    new Gtk::Label(N("More Options")),
-	    new Gtk::HBox(0, 5)
+    $button_options->add(gtkpack(new Gtk2::HBox(0,10),
+	    gtkcreate_img("ic82-moreoption-40"),
+	    new Gtk2::Label(N("More Options")),
+	    new Gtk2::HBox(0, 5)
 	));
     fonction_env(\$box_adv, \&advanced_box, \&interactive_mode_box, "");
     $up_box->show_all();
@@ -2371,16 +2347,16 @@ sub advanced_box{
 
 sub wizard_step3 {
     my $box2;    
-    my $text = new Gtk::Text(undef, undef);
+    my $text = new Gtk2::TextView;
     system_state();
-    gtktext_insert($text, $system_state);
+    gtktext_insert($text, [ [ $system_state ] ]);
     button_box_restore_main();
 
     gtkpack($advanced_box,
-		$box2 =  gtkpack_(new Gtk::HBox(0, 15),	
-			1, gtkpack_(new Gtk::VBox(0,10),
+		$box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
+			1, gtkpack_(new Gtk2::VBox(0,10),
 				0, N("Drakbackup Configuration"),
-				1, createScrolledWindow($text),
+				1, create_scrolled_window($text),
 			),
 		),
 	);
@@ -2393,50 +2369,50 @@ sub wizard_step2 {
     my $box2;    
     
     gtkpack($advanced_box,
-		$box2 =  gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack_(new Gtk::VBox(0, 15),	
-				1, new Gtk::VBox(0, 5),
+		$box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
+			1, new Gtk2::VBox(0, 5),	
+			1, gtkpack_(new Gtk2::VBox(0, 15),	
+				1, new Gtk2::VBox(0, 5),
 				0, N("Please choose where you want to backup"),
-				0, gtkpack_(new Gtk::HBox(0, 15),	      
-					0, my $check_wizard_hd = new Gtk::CheckButton(N("on Hard Drive")),
-					1, new Gtk::VBox(0, 5),
-					0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("Configure")), clicked => sub {
+				0, gtkpack_(new Gtk2::HBox(0, 15),	      
+					0, my $check_wizard_hd = new Gtk2::CheckButton(N("on Hard Drive")),
+					1, new Gtk2::VBox(0, 5),
+					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
 						${$central_widget}->destroy();
 						to_ok();
 						advanced_where_hd(\&wizard_step2);
 						to_normal();
 					}), $where_hd),
 				),
-				0, gtkpack_(new Gtk::HBox(0, 15),	      
-					0, my $check_wizard_net = new Gtk::CheckButton(N("across Network")),
-					1, new Gtk::VBox(0, 5),
-					0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("Configure")), clicked => sub {
+				0, gtkpack_(new Gtk2::HBox(0, 15),	      
+					0, my $check_wizard_net = new Gtk2::CheckButton(N("across Network")),
+					1, new Gtk2::VBox(0, 5),
+					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
 						${$central_widget}->destroy();
 						to_ok();
 						advanced_where_net_types(\&wizard_step2);
 						to_normal();
 					}), $where_net),
 				),
- 				0, gtkpack_(new Gtk::HBox(0, 15),	      
- 					0, my $check_wizard_cd = new Gtk::CheckButton(N("on CDROM")),
- 					1, new Gtk::VBox(0, 5),	
- 					0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("Configure")), clicked => sub {
+ 				0, gtkpack_(new Gtk2::HBox(0, 15),	      
+ 					0, my $check_wizard_cd = new Gtk2::CheckButton(N("on CDROM")),
+ 					1, new Gtk2::VBox(0, 5),	
+ 					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
  						${$central_widget}->destroy();
  						advanced_where_cd(\&wizard_step2);
  					}), $where_cd),
  				),
- 				0, gtkpack_(new Gtk::HBox(0, 15),	      
- 					0, my $check_wizard_tape = new Gtk::CheckButton(N("on Tape Device")),
- 					1, new Gtk::VBox(0, 5),
- 					0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("Configure")), clicked => sub {
+ 				0, gtkpack_(new Gtk2::HBox(0, 15),	      
+ 					0, my $check_wizard_tape = new Gtk2::CheckButton(N("on Tape Device")),
+ 					1, new Gtk2::VBox(0, 5),
+ 					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
  						${$central_widget}->destroy();
  						advanced_where_tape(\&wizard_step2);
  					}), $where_tape),
  				),
-				1, new Gtk::VBox(0, 5),
+				1, new Gtk2::VBox(0, 5),
 			),
-			1, new Gtk::VBox(0, 5),
+			1, new Gtk2::VBox(0, 5),
 		),
 	);
     foreach ([$check_wizard_hd, \$where_hd], 
@@ -2466,23 +2442,23 @@ sub wizard   {
 	my $box2;    
     
 	gtkpack($advanced_box,
-		$box2 =  gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack_(new Gtk::VBox(0, 15),	
-				1, new Gtk::VBox(0, 5),
+		$box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
+			1, new Gtk2::VBox(0, 5),	
+			1, gtkpack_(new Gtk2::VBox(0, 15),	
+				1, new Gtk2::VBox(0, 5),
 				0, N("Please choose what you want to backup"),
-				0, my $check_wizard_sys = new Gtk::CheckButton(N("Backup system")),
-				0, my $check_wizard_user = new Gtk::CheckButton(N("Backup Users")),
-				0, gtkpack_(new Gtk::HBox(0, 15),
-					1, new Gtk::VBox(0, 5),	
-					0, gtksignal_connect(new Gtk::Button(N("Select user manually")), clicked => sub {
+				0, my $check_wizard_sys = new Gtk2::CheckButton(N("Backup system")),
+				0, my $check_wizard_user = new Gtk2::CheckButton(N("Backup Users")),
+				0, gtkpack_(new Gtk2::HBox(0, 15),
+					1, new Gtk2::VBox(0, 5),	
+					0, gtksignal_connect(new Gtk2::Button(N("Select user manually")), clicked => sub {
 						${$central_widget}->destroy();
 						advanced_what_user(\&wizard);
 					}),
 				),
-				1, new Gtk::VBox(0, 5),	
+				1, new Gtk2::VBox(0, 5),	
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	);
     foreach ([$check_wizard_sys, \$backup_sys], [$check_wizard_user, \$backup_user]) {
@@ -2555,7 +2531,7 @@ sub find_backup_to_restore {
 }
 
 sub system_state {
-    $system_state = ();
+    $system_state;
 
     if ($cfg_file_exist) { 
 		$system_state .= N("\nBackup Sources: \n");
@@ -2567,20 +2543,20 @@ sub system_state {
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
         $where_hd and $system_state .= N("\n- Save on Hard drive on path: %s\n", $save_path);
 
-		if (($del_hd_files) && (($where_cd) || ($where_tape) || ($where_net)) && ($daemon_media ne 'hd'))  {
+		if ($del_hd_files && ($where_cd || $where_tape || $where_net) && $daemon_media ne 'hd')  {
 			$system_state .= N("\n- Delete hard drive tar files after backup.\n");	
 		}
 		
 		#- tape and CDRW share some features
 		my $erase_media = 'NO';
-		$erase_media = 'YES' if ($media_erase) && ($where_cd || $where_tape); 
+		$erase_media = 'YES' if $media_erase && ($where_cd || $where_tape); 
 		$where_cd and $system_state .= N("\n- Burn to CD");
 		$where_cd and $cdrw and $system_state .= N("RW");
 		$where_cd and $system_state .= N(" on device: %s", $cd_device);
 		$where_cd and $multi_session and $system_state .= N(" (multi-session)");
 		$where_tape and $system_state .= N("\n- Save to Tape on device: %s", $tape_device);
 		(($where_cd || $where_tape) && $media_erase) and $system_state .= N("\t\tErase=%s", $erase_media);
-		($where_cd || $where_tape) and $system_state .= "\n";
+		$where_cd || $where_tape and $system_state .= "\n";
 		
 		$where_net and $system_state .= N("\n- Save via %s on host: %s\n", $net_proto, $host_name);
 		$where_net and $system_state .= N("\t\t user name: %s\n\t\t on path: %s \n", $login_user, $host_path);
@@ -2594,13 +2570,13 @@ sub system_state {
 		}   
 
 		$daemon_media and $system_state .= N("\n- Daemon (%s) include:\n", $when_space);
-		($daemon_media eq 'hd') and $system_state .= N("\t-Hard drive.\n");    
-		($daemon_media eq 'cd') and $system_state .= N("\t-CDROM.\n");
-		($daemon_media eq 'tape') and $system_state .= N("\t-Tape \n");    
-		($daemon_media eq 'ftp') and $system_state .= N("\t-Network by FTP.\n");    
-		($daemon_media eq 'ssh') and $system_state .= N("\t-Network by SSH.\n");    
-		($daemon_media eq 'rsync') and $system_state .= N("\t-Network by rsync.\n");    
-		($daemon_media eq 'webdav') and $system_state .= N("\t-Network by webdav.\n");    
+		$daemon_media eq 'hd' and $system_state .= N("\t-Hard drive.\n");    
+		$daemon_media eq 'cd' and $system_state .= N("\t-CDROM.\n");
+		$daemon_media eq 'tape' and $system_state .= N("\t-Tape \n");    
+		$daemon_media eq 'ftp' and $system_state .= N("\t-Network by FTP.\n");    
+		$daemon_media eq 'ssh' and $system_state .= N("\t-Network by SSH.\n");    
+		$daemon_media eq 'rsync' and $system_state .= N("\t-Network by rsync.\n");    
+		$daemon_media eq 'webdav' and $system_state .= N("\t-Network by webdav.\n");    
     } else {
     	$system_state = N("No configuration, please click Wizard or Advanced.\n");
     }
@@ -2613,9 +2589,9 @@ sub restore_state {
 			$restore_state .= "   - from date: $tmp[0] $tmp[1]\n";
 	}
     if ($restore_user) { 
-		$restore_state .= "- Restore User Files: \n" ;
-		$restore_state .= "\t\t$_\n" foreach @user_list_to_restore2 ;
-		push @user_list_to_restore, (split(',', $_))[0] foreach @user_list_to_restore2 ;
+		$restore_state .= "- Restore User Files: \n";
+		$restore_state .= "\t\t$_\n" foreach @user_list_to_restore2;
+		push @user_list_to_restore, (split(',', $_))[0] foreach @user_list_to_restore2;
     }
     if ($restore_other) { 
 		$restore_state .= "- Restore Other Files: \n";
@@ -2704,7 +2680,7 @@ sub show_backup_details {
 	my ($function, $mode, $name) = @_;
 	my $archive_file_detail;
 	my $value;
-	my $fixed_font = Gtk::Gdk::Font->load("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*");
+	my $fixed_font = Gtk2::Gdk::Font->load("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*");
 	my $command2;
 	my $tarfile;
 	
@@ -2737,17 +2713,17 @@ sub show_backup_details {
 	}
 	close TMP;	
 
-    my $text = new Gtk::Text(undef, undef);
+    my $text = new Gtk2::Text;
     my $advanced_box_archive;
-    $text->insert($fixed_font, undef, undef,$archive_file_detail);
+    $text->insert($fixed_font, undef, undef, $archive_file_detail);
     gtkpack($advanced_box,
-	    $advanced_box_archive = gtkpack_(new Gtk::VBox(0,10),
-			1, gtkpack_(new Gtk::HBox(0,0),
+	    $advanced_box_archive = gtkpack_(new Gtk2::VBox(0,10),
+			1, gtkpack_(new Gtk2::HBox(0,0),
 				1, $text, 
-				0, new Gtk::VScrollbar($text->vadj),
+				0, new Gtk2::VScrollbar($text->vadj),
 			),
-			0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-				gtksignal_connect(new Gtk::Button(N("Done")), clicked => sub { 
+			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+				gtksignal_connect(new Gtk2::Button(N("Done")), clicked => sub { 
 					${$central_widget}->destroy(); 
 					$function->() }),
 			),
@@ -2774,25 +2750,24 @@ sub valid_backup_test {
 sub restore_aff_backup_problems {
     my $do_restore;
     my $button_restore;
-    my $text = new Gtk::Text(undef, undef);
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
+    my $text = new Gtk2::TextView;
     my $restore_pbs_state = N("List of data corrupted:\n\n");
-    $restore_pbs_state .= "\t\t$_\n" foreach @files_corrupted ;
+    $restore_pbs_state .= "\t\t$_\n" foreach @files_corrupted;
     $restore_pbs_state .= N("Please uncheck or remove it on next time.");
-    gtktext_insert($text, $restore_pbs_state);
+    gtktext_insert($text, [ [ $restore_pbs_state ] ]);
     button_box_restore_main();    
 
     gtkpack($advanced_box,
-	    $do_restore = gtkpack_(new Gtk::VBox(0,10),
-			0, new Gtk::VBox(0,10),
-			1, gtkpack_(new Gtk::HBox(0, 15),	
-				1, new Gtk::VBox(0, 5),	
-				0, new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+	    $do_restore = gtkpack_(new Gtk2::VBox(0,10),
+			0, new Gtk2::VBox(0,10),
+			1, gtkpack_(new Gtk2::HBox(0, 15),	
+				1, new Gtk2::VBox(0, 5),	
+				0, gtkcreate_img('warning'),
 				0, N("Backup files are corrupted"),
-				1, new Gtk::VBox(0, 5),	
+				1, new Gtk2::VBox(0, 5),	
 			),
-			0, new Gtk::VBox(0,10),
-			1, createScrolledWindow($text),
+			0, new Gtk2::VBox(0,10),
+			1, create_scrolled_window($text),
 		),
 	);
     button_box_restore_pbs_end();
@@ -2802,16 +2777,16 @@ sub restore_aff_backup_problems {
 
 sub restore_aff_result {
     my $do_restore;
-    my $text = new Gtk::Text(undef, undef);
-    gtktext_insert($text, $restore_state);
+    my $text = new Gtk2::TextView;
+    gtktext_insert($text, [ [ $restore_state ] ]);
     button_box_restore_main();
     
     gtkpack($advanced_box,
-		$do_restore = gtkpack_(new Gtk::VBox(0,10),
-			1, new Gtk::VBox(0,10),
+		$do_restore = gtkpack_(new Gtk2::VBox(0,10),
+			1, new Gtk2::VBox(0,10),
 			0, N("          All of your selected data have been          "),
 			0, N("          Successfuly Restored on %s       ", $restore_path),
-			1, new Gtk::VBox(0,10),
+			1, new Gtk2::VBox(0,10),
 		),
 	);
     button_box_build_backup_end();
@@ -2828,10 +2803,10 @@ sub return_path {
     open (PASSWD, $passwdfile) or exit 1; 
     while (defined(my $line = <PASSWD>)) {
 		chomp($line);
-		($usr,$home_dir) = (split(/:/, $line))[0,5];
+		($usr, $home_dir) = (split(/:/, $line))[0,5];
 		last if $usr eq $username; 
     }
-    close (PASSWD);
+    close(PASSWD);
     return $home_dir;
 }
 
@@ -2863,11 +2838,11 @@ sub restore_backend {
 				}
 
 				$user_dir = return_path($username);
-				-d $user_dir and rm_rf($user_dir) if ($remove_user_before_restore) ;
+				-d $user_dir and rm_rf($user_dir) if $remove_user_before_restore;
 
 		    	$DEBUG and print "user name to restore: $username, user directory: $user_dir\n";		    
-		    	$untar_cmd or system(" tar xfz  $path_to_find_restore/$_ -C $restore_path") ;
-		    	$untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ") ;
+		    	$untar_cmd or system(" tar xfz  $path_to_find_restore/$_ -C $restore_path");
+		    	$untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ");
 			}
 			#- flush this out for another cycle (SB)
 			@user_list_to_restore2 = ();
@@ -2921,15 +2896,15 @@ sub restore_do {
 sub restore_do2 {
     my $do_restore;
     my $button_restore;
-    my $text = new Gtk::Text(undef, undef);
+    my $text = new Gtk2::TextView;
     restore_state();
-    gtktext_insert($text, $restore_state);
+    gtktext_insert($text, [ [ $restore_state ] ]);
     button_box_restore_main();
     
 	gtkpack($advanced_box,
-		$do_restore = gtkpack_(new Gtk::VBox(0,10),
+		$do_restore = gtkpack_(new Gtk2::VBox(0,10),
 			0, N("         Restore Configuration       "),
-			1, createScrolledWindow($text),
+			1, create_scrolled_window($text),
 		),
 	);
     button_box_restore_end();
@@ -2939,15 +2914,15 @@ sub restore_do2 {
 
 sub restore_step_other {
     my $retore_step_other;
-    my $text = new Gtk::Text(undef, undef);
+    my $text = new Gtk2::TextView;
     my $other_rest = cat_("$path_to_find_restore/list_other");
-    gtktext_insert($text, $other_rest); 
+    gtktext_insert($text, [ [ $other_rest ] ]); 
     gtkpack($advanced_box,
-		$retore_step_other = gtkpack_(new Gtk::VBox(0,10),
-			1, new Gtk::VBox(0,10),
-			1, createScrolledWindow($text),
-			0, my $check_restore_other_sure = new Gtk::CheckButton(N("OK to restore the other files.")),
-			1, new Gtk::VBox(0,10),
+		$retore_step_other = gtkpack_(new Gtk2::VBox(0,10),
+			1, new Gtk2::VBox(0,10),
+			1, create_scrolled_window($text),
+			0, my $check_restore_other_sure = new Gtk2::CheckButton(N("OK to restore the other files.")),
+			1, new Gtk2::VBox(0,10),
 		),
 	);
     check_list([$check_restore_other_sure, \$restore_other]);
@@ -2961,21 +2936,21 @@ sub restore_step_user {
     my @tmp_list = sort @user_backuped;
     @user_backuped = @tmp_list;
     gtkpack($advanced_box,
-		$retore_step_user = gtkpack_(new Gtk::VBox(0,10),
-			0, new Gtk::VBox(0,10),
+		$retore_step_user = gtkpack_(new Gtk2::VBox(0,10),
+			0, new Gtk2::VBox(0,10),
 			0, N("User list to restore (only the most recent date per user is important)"),
-			1, createScrolledWindow(gtkpack__(new Gtk::VBox(0,0),
+			1, create_scrolled_window(gtkpack__(new Gtk2::VBox(0,0),
 				map { my $name;
 					my $var2;
 					my $name_complet = $_;
-					$name = (split(' ',$name_complet))[0];
+					$name = (split(' ', $name_complet))[0];
 					my @user_list_tmp;
-					my $restore_row = new Gtk::HBox(0,5);
-					my $b = new Gtk::CheckButton($name_complet);
-					my $details = new Gtk::Button(" Details ");
+					my $restore_row = new Gtk2::HBox(0,5);
+					my $b = new Gtk2::CheckButton($name_complet);
+					my $details = new Gtk2::Button(" Details ");
 					
 					$restore_row->pack_start($b, 1, 1, 0);
-					$restore_row->pack_end(new Gtk::VBox(1,5), 0, 0, 0);
+					$restore_row->pack_end(new Gtk2::VBox(1,5), 0, 0, 0);
 					$restore_row->pack_end($details, 0, 0, 0);
 					
 # this doesn't work - I don't understand why - but you end up with
@@ -3000,7 +2975,7 @@ sub restore_step_user {
 						}
 					}
 					$b->signal_connect(toggled => sub { 
-						if (!$check_user_to_restore{$name_complet}[1] ) {
+						if (!$check_user_to_restore{$name_complet}[1]) {
 							$check_user_to_restore{$name_complet}[1] = 1;
 							if (!grep (/$name/, @user_list_to_restore2)) {
 								push @user_list_to_restore2, $name_complet 
@@ -3008,7 +2983,7 @@ sub restore_step_user {
 						} else {
 							$check_user_to_restore{$name_complet}[1] = 0;
 							foreach (@user_list_to_restore2) {
-								$var2 =  (split(' ',$_))[0];
+								$var2 =  (split(' ', $_))[0];
 								if ($name ne $var2) {
 									push @user_list_tmp, $_;
 								}
@@ -3029,26 +3004,26 @@ sub restore_step_user {
 	);
     if ($restore_other) { fonction_env(\$retore_step_user, \&restore_step_user, "", "restore", \&restore_step_other) }
 	elsif ($restore_sys) { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step_sys, "restore", \&restore_step_other) }
-    else{ fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step2, "restore", \&restore_do) }
+    else { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step2, "restore", \&restore_do) }
     $up_box->show_all();
 }
 
 sub restore_step_sys {
     my $restore_step_sys;
-    my $combo_restore_step_sys = new Gtk::Combo();
-    $combo_restore_step_sys->set_popdown_strings (@sys_backuped);
+    my $combo_restore_step_sys = new Gtk2::Combo();
+    $combo_restore_step_sys->set_popdown_strings(@sys_backuped);
 
     gtkpack($advanced_box,
-		$restore_step_sys = gtkpack_(new Gtk::VBox(0,10),
-			1, new Gtk::VBox(0,10),
-			0, my $check_backup_before = new Gtk::CheckButton(N("Backup the system files before:")),
-			0, gtkpack_(new Gtk::HBox(0,10),
+		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
+			1, new Gtk2::VBox(0,10),
+			0, my $check_backup_before = new Gtk2::CheckButton(N("Backup the system files before:")),
+			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, N("please choose the date to restore"),
 				0, $combo_restore_step_sys,
-				0, my $details = new Gtk::Button(" Details "),
-				0, new Gtk::HBox(0,10),
+				0, my $details = new Gtk2::Button(" Details "),
+				0, new Gtk2::HBox(0,10),
 			),
-			1, new Gtk::VBox(0,10),
+			1, new Gtk2::VBox(0,10),
 			
 		),
 	);
@@ -3065,8 +3040,8 @@ sub restore_step_sys {
     $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
     fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore");
     if ($restore_user) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_step_user) }
-    elsif ($restore_other){ fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_step_other) }
-    else{ fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_do) }
+    elsif ($restore_other) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_step_other) }
+    else { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_do) }
     $up_box->show_all();
 }
 
@@ -3074,31 +3049,30 @@ sub restore_other_media_hd {
     my ($previous_function) = @_,
     my $box_where_hd;
     my $button;
-    my $adj = new Gtk::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
-    my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("ic82-dossier-32");
+    my $adj = new Gtk2::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
     
     gtkpack($advanced_box,
-	    $box_where_hd = gtkpack_(new Gtk::VBox(0, 6),
-			0, new Gtk::HSeparator,
-			0, my $check_where_hd = new Gtk::CheckButton(N("Use Hard Disk to backup") ),
-			0, new Gtk::HSeparator,
-			0, gtkpack_(new Gtk::HBox(0,10),
-		    	0, gtkset_sensitive(new Gtk::Label(N("Please enter the directory to save:")), $where_hd),
-		    	1, new Gtk::VBox(0, 6),
-		    	0, gtkset_usize (gtkset_sensitive($save_path_entry = new Gtk::Entry(), $where_hd), 152, 20),
-		    	0, gtkset_sensitive($button = gtksignal_connect(new Gtk::Button(),  clicked => sub {
+	    $box_where_hd = gtkpack_(new Gtk2::VBox(0, 6),
+			0, new Gtk2::HSeparator,
+			0, my $check_where_hd = new Gtk2::CheckButton(N("Use Hard Disk to backup")),
+			0, new Gtk2::HSeparator,
+			0, gtkpack_(new Gtk2::HBox(0,10),
+		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save:")), $where_hd),
+		    	1, new Gtk2::VBox(0, 6),
+		    	0, gtkset_size_request (gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
+		    	0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
 				filedialog_where_hd() }), $where_hd),
 			),
-	 		0, new Gtk::VBox(0, 6),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
-	    		1, new Gtk::VBox(0, 6),
-	    		0, gtkset_usize (gtkset_sensitive(my $spinner = new Gtk::SpinButton($adj, 0, 0), $where_hd), 200, 20),
+	 		0, new Gtk2::VBox(0, 6),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd),
+	    		1, new Gtk2::VBox(0, 6),
+	    		0, gtkset_size_request (gtkset_sensitive(my $spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-	    		1, new Gtk::VBox(0, 6),
-	    		0, gtkset_sensitive(my $check_where_hd_quota = new Gtk::CheckButton(N("Use quota for backup files.")), $where_hd),
-	    		0, new Gtk::VBox(0, 6),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	    		1, new Gtk2::VBox(0, 6),
+	    		0, gtkset_sensitive(my $check_where_hd_quota = new Gtk2::CheckButton(N("Use quota for backup files.")), $where_hd),
+	    		0, new Gtk2::VBox(0, 6),
 			),
 	 	),
 	);
@@ -3108,7 +3082,7 @@ sub restore_other_media_hd {
 		${$central_widget}->destroy();
 		$current_widget->();
     });
-    $button->add(gtkpack(new Gtk::HBox(0,10), new Gtk::Pixmap($pix_fs_map, $pix_fs_mask)));
+    $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($save_path);
     $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text() });
     if ($previous_function) { fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function, "") }
@@ -3121,28 +3095,28 @@ sub restore_find_net {
     my $box_where_net;
     
     gtkpack($advanced_box,
-	    $box_where_net = gtkpack_(new Gtk::HBox(0, 15),
-			1, new Gtk::VBox(0, 5),
-			1, gtkpack_(new Gtk::VBox(0, 15),	
-				1, new Gtk::VBox(0, 5),
-				1, new Gtk::VBox(0,10),
-				1, gtksignal_connect(new Gtk::Button(N("FTP Connection")), clicked => sub { 
+	    $box_where_net = gtkpack_(new Gtk2::HBox(0, 15),
+			1, new Gtk2::VBox(0, 5),
+			1, gtkpack_(new Gtk2::VBox(0, 15),	
+				1, new Gtk2::VBox(0, 5),
+				1, new Gtk2::VBox(0,10),
+				1, gtksignal_connect(new Gtk2::Button(N("FTP Connection")), clicked => sub { 
 					$box_where_net->destroy(); 
 					if ($previous_function) {
 						message_underdevel();
 					} else {
 					}
 				}),
-				1, gtksignal_connect(new Gtk::Button(N("Secure Connection")),  clicked => sub {
+				1, gtksignal_connect(new Gtk2::Button(N("Secure Connection")),  clicked => sub {
 					$box_where_net->destroy(); 
 					if ($previous_function) {
 					} else {
 					}
 				}),
-				1, new Gtk::VBox(0, 5),
-				1, new Gtk::VBox(0,10),
+				1, new Gtk2::VBox(0, 5),
+				1, new Gtk2::VBox(0,10),
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	);
     if ($previous_function) { fonction_env(\$box_where_net, \&advanced_where_net, \&$previous_function, "") }
@@ -3153,35 +3127,33 @@ sub restore_find_net {
 sub restore_other_media {
     my $box_find_restore;
     my $button;
-    my $adj = new Gtk::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
-    my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("ic82-dossier-32");
     
     gtkpack($advanced_box,
-		$box_find_restore = gtkpack_(new Gtk::VBox(0, 6),
-			0, new Gtk::HSeparator,
-			0, my $check_other_media_hd = new Gtk::CheckButton(N("Restore from Hard Disk.") ),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, gtkset_sensitive(new Gtk::Label(N("Please enter the directory where backups are stored")), $other_media_hd),
-				1, new Gtk::VBox(0, 6),
-				0, gtkset_usize (gtkset_sensitive($restore_find_path_entry = new Gtk::Entry(), $other_media_hd), 152, 20),
-				0, gtkset_sensitive($button = gtksignal_connect(new Gtk::Button(),  clicked => sub {
+		$box_find_restore = gtkpack_(new Gtk2::VBox(0, 6),
+			0, new Gtk2::HSeparator,
+			0, my $check_other_media_hd = new Gtk2::CheckButton(N("Restore from Hard Disk.")),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory where backups are stored")), $other_media_hd),
+				1, new Gtk2::VBox(0, 6),
+				0, gtkset_size_request (gtkset_sensitive($restore_find_path_entry = new Gtk2::Entry(), $other_media_hd), 152, 20),
+				0, gtkset_sensitive($button = gtksignal_connect(new Gtk2::Button(),  clicked => sub {
 				     filedialog_restore_find_path(); 
 				}), $other_media_hd),
 			),
-			1, new Gtk::VBox(0, 6),
-#					 0, new Gtk::HSeparator,
-# 					 0, my $check_other_media_net = new Gtk::CheckButton( N("Restore from Network") ),
-# 					 0, new Gtk::VBox(0, 6),
-# 					 1, gtkpack(new Gtk::HBox(0,10),
-# 						    new Gtk::VBox(0, 6),
-# 						    gtkset_sensitive(gtksignal_connect(new Gtk::Button("Network"),  clicked => sub {
+			1, new Gtk2::VBox(0, 6),
+#					 0, new Gtk2::HSeparator,
+# 					 0, my $check_other_media_net = new Gtk2::CheckButton( N("Restore from Network")),
+# 					 0, new Gtk2::VBox(0, 6),
+# 					 1, gtkpack(new Gtk2::HBox(0,10),
+# 						    new Gtk2::VBox(0, 6),
+# 						    gtkset_sensitive(gtksignal_connect(new Gtk2::Button("Network"),  clicked => sub {
 # 							${$central_widget}->destroy();
-# 							restore_find_net(\&restore_other_media);}), !$other_media_hd ),
-# 						    new Gtk::VBox(0, 6),
+# 							restore_find_net(\&restore_other_media);}), !$other_media_hd),
+# 						    new Gtk2::VBox(0, 6),
 # 						    ),
-# 					 1, new Gtk::VBox(0, 6),
-# 					 0, new Gtk::HSeparator,
-			0, new Gtk::VBox(0, 6),
+# 					 1, new Gtk2::VBox(0, 6),
+# 					 0, new Gtk2::HSeparator,
+			0, new Gtk2::VBox(0, 6),
 		),
 	);
 	gtksignal_connect(gtkset_active($check_other_media_hd, $other_media_hd), toggled => sub { 
@@ -3194,7 +3166,7 @@ sub restore_other_media {
 # 	${$central_widget}->destroy();
 # 	$current_widget->();
 #    });
-    $button->add(gtkpack(new Gtk::HBox(0,10), new Gtk::Pixmap($pix_fs_map, $pix_fs_mask)));
+    $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $restore_find_path_entry->set_text($path_to_find_restore);
     $restore_find_path_entry->signal_connect('changed', sub { $path_to_find_restore = $restore_find_path_entry->get_text() });
 #- not sure if this was the original intent - address the crash at "Next"
@@ -3209,9 +3181,9 @@ sub restore_step2 {
     my $user_exist;
 
 	my $restore_info_path = $save_path;
-	$restore_info_path = $path_to_find_restore if ($where_hd) || ($where_cd);
+	$restore_info_path = $path_to_find_restore if $where_hd || $where_cd;
 	my $info_prefix = "backup";
-	$info_prefix = "list" if ($where_net) || ($where_tape);
+	$info_prefix = "list" if $where_net || $where_tape;
 	
     if (-f "$restore_info_path/$info_prefix\_other*") { $other_exist = 1 } 
     else { my $other_exist = 0; $restore_other = 0 }
@@ -3225,29 +3197,29 @@ sub restore_step2 {
 #    $backup_sys_versions || $backup_user_versions and $backup_bef_restore = 1;
 
     gtkpack($advanced_box,
-		$retore_step2 = gtkpack_(new Gtk::VBox(0,10),
-			1, new Gtk::VBox(0,10),
-			1, new Gtk::VBox(0,10),
-			0, gtkpack_(new Gtk::HBox(0,10),
-				0, my $check_restore_other_src = new Gtk::CheckButton(N("Select another media to restore from")),
-				1, new Gtk::HBox(0,10),
-				0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("Other Media")), clicked => sub {
+		$retore_step2 = gtkpack_(new Gtk2::VBox(0,10),
+			1, new Gtk2::VBox(0,10),
+			1, new Gtk2::VBox(0,10),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, my $check_restore_other_src = new Gtk2::CheckButton(N("Select another media to restore from")),
+				1, new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Other Media")), clicked => sub {
 					${$central_widget}->destroy();
 					restore_other_media();
 				}), $restore_other_src),
 			),
-	 		0, gtkset_sensitive(my $check_restore_sys = new Gtk::CheckButton(N("Restore system")), $sys_exist),
-	 		0, gtkset_sensitive(my $check_restore_user = new Gtk::CheckButton(N("Restore Users")), $user_exist),
-	 		0, gtkset_sensitive(my $check_restore_other = new Gtk::CheckButton(N("Restore Other")), $other_exist),
-	 		0, gtkpack_(new Gtk::HBox(0,10),
-		     	0, my $check_restore_other_path = new Gtk::CheckButton(N("select path to restore (instead of /)")),
-		     	1, new Gtk::HBox(0,10),
-		    	0, gtkset_sensitive(my $restore_path_entry = new Gtk::Entry(), $restore_other_path),
+	 		0, gtkset_sensitive(my $check_restore_sys = new Gtk2::CheckButton(N("Restore system")), $sys_exist),
+	 		0, gtkset_sensitive(my $check_restore_user = new Gtk2::CheckButton(N("Restore Users")), $user_exist),
+	 		0, gtkset_sensitive(my $check_restore_other = new Gtk2::CheckButton(N("Restore Other")), $other_exist),
+	 		0, gtkpack_(new Gtk2::HBox(0,10),
+		     	0, my $check_restore_other_path = new Gtk2::CheckButton(N("select path to restore (instead of /)")),
+		     	1, new Gtk2::HBox(0,10),
+		    	0, gtkset_sensitive(my $restore_path_entry = new Gtk2::Entry(), $restore_other_path),
 			),
-	 		0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(N("Do new backup before restore (only for incremental backups.)")), 
+	 		0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk2::CheckButton(N("Do new backup before restore (only for incremental backups.)")), 
 				$backup_sys_versions || $backup_user_versions),
-	 		0, gtkset_sensitive(my $check_remove_user_dir = new Gtk::CheckButton(N("Remove user directories before restore.")), $user_exist),
-	 		1, new Gtk::VBox(0,10),
+	 		0, gtkset_sensitive(my $check_remove_user_dir = new Gtk2::CheckButton(N("Remove user directories before restore.")), $user_exist),
+	 		1, new Gtk2::VBox(0,10),
 	 	),
 	);
 	
@@ -3262,8 +3234,8 @@ sub restore_step2 {
 	    		if (!$restore_sys && !$restore_user && !$restore_other) { $next_widget = \&message_norestore_box }
 	    		elsif ($restore_sys && $backup_sys_versions) { $next_widget = \&restore_step_sys }
 	    		elsif ($restore_user) { $next_widget = \&restore_step_user }
-	    		elsif ($restore_other){ $next_widget = \&restore_step_other }
-	    		else{ $next_widget = \&restore_do }
+	    		elsif ($restore_other) { $next_widget = \&restore_step_other }
+	    		else { $next_widget = \&restore_do }
 			})
 	}
     gtksignal_connect(gtkset_active($check_restore_other_path, $restore_other_path), toggled => sub {
@@ -3280,8 +3252,8 @@ sub restore_step2 {
     if (!$restore_sys && !$restore_user && !$restore_other) { $next_widget = \&message_norestore_box }
     elsif ($restore_sys && $backup_sys_versions) { $next_widget = \&restore_step_sys }
     elsif ($restore_user) { $next_widget = \&restore_step_user }
-    elsif ($restore_other){ $next_widget = \&restore_step_other }
-    else{ $next_widget = \&restore_do }
+    elsif ($restore_other) { $next_widget = \&restore_step_other }
+    else { $next_widget = \&restore_do }
     $restore_path_entry->set_text($restore_path); 
     $restore_path_entry->signal_connect('changed', sub { $restore_path = $restore_path_entry->get_text() });
     $up_box->show_all();
@@ -3295,21 +3267,21 @@ sub catalog_restore {
 	my $restore_path_entry;
 		
 	#- catalog info in tree view
-	my $tree_catalog = new Gtk::Tree();
+	my $tree_catalog = new Gtk2::Tree();
 	
 	# file details in list widget
-	my $list_bu_files = new Gtk::List();
+	my $list_bu_files = new Gtk2::List();
 	$list_bu_files->set_selection_mode('extended');	
 	
 	#- read the catalog
 	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
 
-	foreach (@catalog){
+	foreach (@catalog) {
 		chop;
 		my $full_cat_entry = $_;
 		my @line_data = split(':', $_);
 		my $t = $line_data[0];
-		my $t_catalog = new_with_label Gtk::TreeItem($t);
+		my $t_catalog = new_with_label Gtk2::TreeItem($t);
 		gtksignal_connect($t_catalog, select => sub {
 		  	$cat_entry = $full_cat_entry;
 			@restore_files = ();
@@ -3319,7 +3291,7 @@ sub catalog_restore {
 				foreach (@contents) {
 					chop;
 					my $s = $_;
-					my $f_item = $list_bu_files->add(gtkshow(new Gtk::ListItem($s)));
+					my $f_item = $list_bu_files->add(gtkshow(new Gtk2::ListItem($s)));
 					gtksignal_connect($f_item, select => sub { push @restore_files, $s });
 					gtksignal_connect($f_item, deselect => sub { @restore_files = () });
 				}
@@ -3327,7 +3299,7 @@ sub catalog_restore {
 		});
 		$tree_catalog->append($t_catalog);
 		
-		my $c_detail = new Gtk::Tree();
+		my $c_detail = new Gtk2::Tree();
 		$t_catalog->set_subtree($c_detail);
 		
 		my $indexer = 0;
@@ -3339,8 +3311,8 @@ sub catalog_restore {
 				$m = "Device or Path: " if $indexer == 3;
 				$m = "Type: Incremental" if $_ eq "I";
 				$m = "Type: Full" if $_ eq "F";
-				$m .= $_ if ($_ ne "I") && ($_ ne "F");
-				my $c_det_cat = new_with_label Gtk::TreeItem($m);
+				$m .= $_ if $_ ne "I" && $_ ne "F";
+				my $c_det_cat = new_with_label Gtk2::TreeItem($m);
 #				gtksignal_connect($k_det_nic, select => sub { $nic = $m;
 #								$kernel = $t; });
 				$c_detail->append($c_det_cat);
@@ -3351,15 +3323,15 @@ sub catalog_restore {
 	}	
 		
 	gtkpack($advanced_box,
-		$catalog_box = gtkpack_(new Gtk::HBox(0,10),
-			0, new Gtk::VBox(0,10),
-			1, gtkpack_(new Gtk::VBox(0,5),
-				1, gtkpack_(new Gtk::VBox(0, 10),
-					1, createScrolledWindow($tree_catalog),
-					1, createScrolledWindow($list_bu_files),
+		$catalog_box = gtkpack_(new Gtk2::HBox(0,10),
+			0, new Gtk2::VBox(0,10),
+			1, gtkpack_(new Gtk2::VBox(0,5),
+				1, gtkpack_(new Gtk2::VBox(0, 10),
+					1, create_scrolled_window($tree_catalog),
+					1, create_scrolled_window($list_bu_files),
 				),
-				0, gtkpack_(new Gtk::HBox(1, 10),
-					1, gtksignal_connect(new Gtk::Button(N("Restore Selected\nCatalog Entry")), clicked => sub { 
+				0, gtkpack_(new Gtk2::HBox(1, 10),
+					1, gtksignal_connect(new Gtk2::Button(N("Restore Selected\nCatalog Entry")), clicked => sub { 
 						if ($cat_entry) {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if ($media_check) {
@@ -3369,7 +3341,7 @@ sub catalog_restore {
 							} 
 						} 
 					}),
-					1, gtksignal_connect(new Gtk::Button(N("Restore Selected\nFiles")), clicked => sub { 							
+					1, gtksignal_connect(new Gtk2::Button(N("Restore Selected\nFiles")), clicked => sub { 							
 						my $files = @restore_files;
 						#- grab the array before the widget clears it 
 						my @passed_files = @restore_files;
@@ -3382,17 +3354,17 @@ sub catalog_restore {
 							} 
 						}
 					}),
-					1, gtkpack_(new Gtk::VBox(0, 5),
-						0, new Gtk::Label("Restore To Path"),
-		    			0, $restore_path_entry = new Gtk::Entry(),
+					1, gtkpack_(new Gtk2::VBox(0, 5),
+						0, new Gtk2::Label("Restore To Path"),
+		    			0, $restore_path_entry = new Gtk2::Entry(),
 					),
-					1, gtksignal_connect(new Gtk::Button(N("Change\nRestore Path")), clicked => sub { 							
+					1, gtksignal_connect(new Gtk2::Button(N("Change\nRestore Path")), clicked => sub { 							
 						filedialog_generic(0, "Path To Restore To", \$restore_path_entry, \$restore_path);
 					}),						
 				),
-				0, new Gtk::VBox(0,10),
+				0, new Gtk2::VBox(0,10),
 			),
-			0, new Gtk::VBox(0,10),
+			0, new Gtk2::VBox(0,10),
 		),
 	);		
 	
@@ -3465,7 +3437,7 @@ sub restore_catalog_entry {
 	if ($media eq 'CD') {
 		#- we know the cdrecord device, and the label
 		#- prompt the user for the right CD
-		$in->ask_okcancel(N("Restore From CD"),N("Insert the CD with volume label %s\n in the CD drive under mount point /mnt/cdrom", $vol_host) ,1) ? $vol_name = get_cd_volname() : return(0);
+		$in->ask_okcancel(N("Restore From CD"), N("Insert the CD with volume label %s\n in the CD drive under mount point /mnt/cdrom", $vol_host) ,1) ? ($vol_name = get_cd_volname()) : return 0;
 		if ($vol_name ne $vol_host) {
 			show_warning("f", N("Not the correct CD label. Disk is labelled %s.", $vol_name));
 			return(0);
@@ -3477,7 +3449,7 @@ sub restore_catalog_entry {
 	if ($media eq 'Tape') {
 		#- a little more complicated, we need to check if other backups
 		#- were done on this tape, and try to find the offset to this one
-		$in->ask_okcancel(N("Restore From Tape"),N("Insert the tape with volume label %s\n in the tape drive device %s", $vol_host, $dev_path) ,1) ? $vol_name = get_tape_label($dev_path) : return(0);
+		$in->ask_okcancel(N("Restore From Tape"), N("Insert the tape with volume label %s\n in the tape drive device %s", $vol_host, $dev_path) ,1) ? ($vol_name = get_tape_label($dev_path)) : return(0);
 		if ($vol_name ne $vol_host) {
 			show_warning("f", N("Not the correct tape label. Tape is labelled %s.", $vol_name));
 			return(0);
@@ -3486,7 +3458,7 @@ sub restore_catalog_entry {
 		}			
 	}
 	
-	if (($media eq 'ftp') || ($media eq 'webdav') || ($media eq 'ssh') || ($media eq 'rsync')) { 
+	if ($media eq 'ftp' || $media eq 'webdav' || $media eq 'ssh' || $media eq 'rsync') { 
 		#- show the user what we know of the connection from the catalog 
 		#- and the config file, let them override if necessary
 		
@@ -3500,19 +3472,19 @@ sub restore_catalog_entry {
 		#- ftp needs all parameters entered
 		
 		$in->ask_from(N("Restore Via Network"), N("Restore Via Network Protocol: %s", $media),
-			[ { label => N("Host Name"), val => \$vol_host },
+			      [ { label => N("Host Name"), val => \$vol_host },
 				{ label => N("Host Path or Module"), val => \$dev_path },
 				{ label => N("Username"), val => \$username },
 				{ label => N("Password"), val => \$userpass, hidden => 1  },
-            ]) or goto return(0);
+				]) or goto return(0);
 		
-		if (($media eq 'ftp') || ($media eq 'rsync')) {
+		if ($media eq 'ftp' || $media eq 'rsync') {
 			if ($userpass eq '') {
 				show_warning("f", N_("Password required")); 
 				return(0);
 			}
 		} 
-		if (($media eq 'ftp') || ($media eq 'rsync') || ($media eq 'ssh')) {
+		if ($media eq 'ftp' || $media eq 'rsync' || $media eq 'ssh') {
 			if ($username eq '') {
 				show_warning("f", N_("Username required"));
 				return(0); 
@@ -3528,7 +3500,7 @@ sub restore_catalog_entry {
 			
 		$restore_result = restore_ftp($cat_entry, $vol_host, $dev_path, $username, $userpass, @restore_files) if $media eq 'ftp';
 		$restore_result = restore_rsync_ssh_webdav($cat_entry, $vol_host, $dev_path, $username, $userpass, $media, @restore_files) 
-			if ($media eq 'rsync') || ($media eq 'ssh') || ($media eq 'webdav');
+			if $media eq 'rsync' || $media eq 'ssh' || $media eq 'webdav';
 	}
 
 	# cleanup our restore dir - unlink fails here?
@@ -3771,12 +3743,12 @@ sub restore_box {
 
     if ($other_backuped || $sys_backuped || @user_backuped) {
 		gtkpack($advanced_box,
-			$retore_box = gtkpack_(new Gtk::HBox(0,1),
-				1, new Gtk::VBox(0,10),
-				1, gtkpack_(new Gtk::VBox(0,10),
-					1, new Gtk::VBox(0,10),
-					1, new Gtk::VBox(0,10),
-					1, gtksignal_connect(new Gtk::Button(N("Restore all backups")), clicked => sub { 
+			$retore_box = gtkpack_(new Gtk2::HBox(0,1),
+				1, new Gtk2::VBox(0,10),
+				1, gtkpack_(new Gtk2::VBox(0,10),
+					1, new Gtk2::VBox(0,10),
+					1, new Gtk2::VBox(0,10),
+					1, gtksignal_connect(new Gtk2::Button(N("Restore all backups")), clicked => sub { 
 						$retore_box->destroy();
 						button_box_restore();
 						@user_list_to_restore2 = sort @user_backuped; 
@@ -3785,15 +3757,15 @@ sub restore_box {
 						$restore_user = 1;
 						restore_do() 
 					}),
-					1, gtksignal_connect(new Gtk::Button(N("Custom Restore")), clicked => sub { 
+					1, gtksignal_connect(new Gtk2::Button(N("Custom Restore")), clicked => sub { 
 						$retore_box->destroy();
 						button_box_restore(); 
 						restore_step2();
 					}),
-					1, new Gtk::VBox(0,10),
-					1, new Gtk::VBox(0,10),
+					1, new Gtk2::VBox(0,10),
+					1, new Gtk2::VBox(0,10),
 				),
-				1, new Gtk::HBox(0,10),
+				1, new Gtk2::HBox(0,10),
 			),
 		);
     } else {
@@ -3806,48 +3778,46 @@ sub restore_box {
 }
 
 sub restore_find_media_box {
-
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
-	my $entry_new_path;
-	my $mount_media = 1;
-	$good_restore_path = 0;
+    my $entry_new_path;
+    my $mount_media = 1;
+    $good_restore_path = 0;
     my $message = "Unable to find backups to restore...\n";
-	$message .= "Verify that $path_to_find_restore is the correct path" if ($where_hd) && ($where_cd);
-	$message .= " and the CD is in the drive" if $where_cd;
-	if ($where_tape || $net_proto) {
-		$message .= "Backups on unmountable media - Use Catalog to restore";
-		$mount_media = 0;
-	}
-	$message .= ".";
-	
+    $message .= "Verify that $path_to_find_restore is the correct path" if $where_hd && $where_cd;
+    $message .= " and the CD is in the drive" if $where_cd;
+    if ($where_tape || $net_proto) {
+	$message .= "Backups on unmountable media - Use Catalog to restore";
+	$mount_media = 0;
+    }
+    $message .= ".";
+    
     gtkpack($advanced_box,
-		$box2 = gtkpack_(new Gtk::VBox(0, 5),	
-			1, gtkpack(new Gtk::HBox(0, 15),	
-				new Gtk::VBox(0, 5),	
-				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask), 
+		$box2 = gtkpack_(new Gtk2::VBox(0, 5),	
+			1, gtkpack(new Gtk2::HBox(0, 15),	
+				new Gtk2::VBox(0, 5),	
+				gtkcreate_img('warning'), 
 				translate($message),
-				new Gtk::VBox(0, 5),	
+				new Gtk2::VBox(0, 5),	
 			),
-			1, gtkpack(new Gtk::HBox(0, 15),
-				new Gtk::VBox(0, 5),
-				gtkpack(new Gtk::VBox(0, 10),
-					gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("CD in place - continue.")), clicked => sub {  
+			1, gtkpack(new Gtk2::HBox(0, 15),
+				new Gtk2::VBox(0, 5),
+				gtkpack(new Gtk2::VBox(0, 10),
+					gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("CD in place - continue.")), clicked => sub {  
 						$good_restore_path = 1;
 						$box2->destroy();
 						interactive_mode_box("restore");
 					}), $mount_media),
-					$new_path_entry = gtkset_sensitive(new Gtk::Entry(), $mount_media),
-					gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("Browse to new restore repository.")), clicked => sub {  
+					$new_path_entry = gtkset_sensitive(new Gtk2::Entry(), $mount_media),
+					gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Browse to new restore repository.")), clicked => sub {  
 						filedialog_generic(0, "Directory To Restore From", \$new_path_entry, \$path_to_find_restore);
 					}), $mount_media),
-					gtksignal_connect(new Gtk::Button(N("Restore From Catalog")), clicked => sub {  
+					gtksignal_connect(new Gtk2::Button(N("Restore From Catalog")), clicked => sub {  
 						$box2->destroy();
 						catalog_restore();
 					}),
 				),
-				new Gtk::VBox(0, 5),
+				new Gtk2::VBox(0, 5),
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	);
 	$new_path_entry->set_text($path_to_find_restore);
@@ -3858,11 +3828,11 @@ sub restore_find_media_box {
 
 sub restore_status {
 	${$central_widget}->destroy();
-    $pbar3 =  new Gtk::ProgressBar;
-    $stext = new Gtk::Label("");
+    $pbar3 =  new Gtk2::ProgressBar;
+    $stext = new Gtk2::Label("");
     gtkpack($advanced_box,
-		$table = gtkpack(new Gtk::VBox(0, 5),
-			new Gtk::HBox(0,5),
+		$table = gtkpack(new Gtk2::VBox(0, 5),
+			new Gtk2::HBox(0,5),
 	    	create_packtable({ col_spacings => 10, row_spacings => 5 },
 				[""],
 				[""],
@@ -3874,7 +3844,7 @@ sub restore_status {
 				[$pbar3],
 				[""],
 				[""],
-				[$pbar3->{label} = new Gtk::Label(' ') ],
+				[$pbar3->{label} = new Gtk2::Label(' ') ],
 				[""],
 			),
 			$stext,
@@ -3883,7 +3853,7 @@ sub restore_status {
     $custom_help = "options";
     $central_widget = \$table;
     $up_box->show_all();
-    Gtk->main_iteration while Gtk->events_pending;
+    gtkflush();
 }
 
 ################################################  BUTTON_BOX  ################################################  
@@ -3892,31 +3862,31 @@ sub restore_status {
 # # 1-n -  [button name, fonctions associated]
 #     $button_box_tmp->destroy();
 #     gtkpack($button_box,
-# 	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,				         
-# 				       0, gtksignal_connect(new Gtk::Button($_->[0]), clicked => sub {$_->[1]}) foreach (@_), 
-# 				       } ), );    
+# 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,				         
+# 				       0, gtksignal_connect(new Gtk2::Button($_->[0]), clicked => sub {$_->[1]}) foreach (@_), 
+# 				       }),);    
 # }
 
 sub button_box_adv {
     $button_box_tmp->destroy();
     gtkpack($button_box,
-		$button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			0, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy();
 				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
 				${$central_widget}->destroy();
-				adv_help(\&$current_widget,$custom_help);
+				adv_help(\&$current_widget, $custom_help);
 			}),
-			1, new Gtk::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 1),	
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				${$central_widget}->destroy();
 				$previous_widget->();
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Save")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Save")), clicked => sub { 
 				${$central_widget}->destroy();
-				if (!check_pkg_needs()) {
+				unless (check_pkg_needs()) {
 					save_conf_file();
 					$previous_widget->();
 				}
@@ -3933,21 +3903,21 @@ sub button_box_restore_main {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk::HButtonBox, 
-			0, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
+			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy(); 
-				interactive_mode_box() 
+				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub {
+			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
 				${$central_widget}->destroy(); 
 				adv_help(\&$current_widget, $custom_help);
 			}),
-			1, new Gtk::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 1),	
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				interactive_mode_box() 
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Ok")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				interactive_mode_box() }),
 			),
@@ -3959,21 +3929,21 @@ sub button_box_backup_end {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			0, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				interactive_mode_box() 
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
 				${$central_widget}->destroy(); 
-				adv_help(\&$current_widget,$custom_help) 
+				adv_help(\&$current_widget, $custom_help) 
 			}),
-			1, new Gtk::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 1),	
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				$previous_widget->() 
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Build Backup")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Build Backup")), clicked => sub { 
 				${$central_widget}->destroy();
 				build_backup_status();
 				build_backup_files(); 
@@ -3986,21 +3956,21 @@ sub button_box_wizard_end {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-		$button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			0, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy();
 				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
 				${$central_widget}->destroy();
-				adv_help(\&$current_widget,$custom_help);
+				adv_help(\&$current_widget, $custom_help);
 			}),
-			1, new Gtk::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 1),	
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				$previous_widget->();
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Save")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Save")), clicked => sub { 
 				${$central_widget}->destroy();
 				save_conf_file();
 				interactive_mode_box();
@@ -4013,21 +3983,21 @@ sub button_box_restore_end {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			0, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy();
 				interactive_mode_box();
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
 				${$central_widget}->destroy();
-				adv_help(\&$current_widget,$custom_help);
+				adv_help(\&$current_widget, $custom_help);
 			}),
-			1, new Gtk::HBox(0, 1),	
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 1),	
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				${$central_widget}->destroy();
 				$previous_widget->();
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Restore")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Restore")), clicked => sub { 
  				${$central_widget}->destroy();
 				restore_backend(); 
 			}),
@@ -4039,10 +4009,10 @@ sub button_box_build_backup_end {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox, 
-			1, new Gtk::HBox(0, 5),	
-			1, new Gtk::HBox(0, 5),	
-			0, gtksignal_connect(new Gtk::Button(N("Ok")), clicked => sub { 
+	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox, 
+			1, new Gtk2::HBox(0, 5),	
+			1, new Gtk2::HBox(0, 5),	
+			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
 				${$central_widget}->destroy();
 				interactive_mode_box();  
 			}),
@@ -4054,14 +4024,14 @@ sub button_box_restore_pbs_end {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-		$button_box_tmp = gtkpack_(new Gtk::HButtonBox, 
-			1, new Gtk::HBox(0, 5),	
-			1, new Gtk::HBox(0, 5),	
-			1, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub {
+		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox, 
+			1, new Gtk2::HBox(0, 5),	
+			1, new Gtk2::HBox(0, 5),	
+			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
 				${$central_widget}->destroy();
-				adv_help(\&$current_widget,$custom_help);
+				adv_help(\&$current_widget, $custom_help);
 			}),
-			0, gtksignal_connect(new Gtk::Button(N("Ok")), clicked => sub { 
+			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
 				${$central_widget}->destroy();
 				interactive_mode_box();
 			}),
@@ -4073,21 +4043,21 @@ sub button_box_build_backup {
     $button_box_tmp->destroy();
 
 	gtkpack($button_box,
-		$button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			1, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				interactive_mode_box();
 			}),
-			1, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
 				${$central_widget}->destroy();
-				adv_help(\&$current_widget,$custom_help); 
+				adv_help(\&$current_widget, $custom_help); 
 			}),
-			1, new Gtk::HBox(0, 0),
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 0),
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				${$central_widget}->destroy();
 				$previous_widget->();
 			}),
-			1, gtksignal_connect(new Gtk::Button(N("Next")), clicked => sub {
+			1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
 				${$central_widget}->destroy();
 				$next_widget->();
 			}),
@@ -4100,21 +4070,21 @@ sub button_box_restore {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			1, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				interactive_mode_box();  
 			}),
-			1, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
 				${$central_widget}->destroy(); 
-				adv_help(\&$current_widget,$custom_help);
+				adv_help(\&$current_widget, $custom_help);
 			}),
-			1, new Gtk::HBox(0, 0),
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 0),
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				$previous_widget->(); 
 			}),
-			1, gtksignal_connect(new Gtk::Button(N("Next")), clicked => sub {
+			1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
 				${$central_widget}->destroy(); 
 				$next_widget->();
 			}),
@@ -4130,21 +4100,21 @@ sub button_box_find_media {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			1, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				$box2->destroy();
 				interactive_mode_box();  
 			}),
-			1, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
 				$box2->destroy();
-				adv_help(\&$current_widget,$custom_help);
+				adv_help(\&$current_widget, $custom_help);
 			}),
-			1, new Gtk::HBox(0, 0),
-			0, gtksignal_connect(new Gtk::Button(N("Previous")), clicked => sub { 
+			1, new Gtk2::HBox(0, 0),
+			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
 				$box2->destroy();
 				interactive_mode_box();  
 			}),
-			1, gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("Next")), clicked => sub {
+			1, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
 				$box2->destroy();
 				interactive_mode_box("restore"); 
 			}), $mount_media),
@@ -4156,21 +4126,21 @@ sub button_box_wizard {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack_(new Gtk::HButtonBox,
-			1, gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { 
+	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
 				${$central_widget}->destroy(); 
 				interactive_mode_box() 
 			}),
-			1, gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub {
+			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
 				${$central_widget}->destroy(); 
-				adv_help(\&$current_widget,$custom_help) 
+				adv_help(\&$current_widget, $custom_help) 
 			}),
-			1, new Gtk::HBox(0, 0),
-			0, gtksignal_connect(new Gtk::Button($next_widget ? N("Previous") : N("OK")), clicked => sub { 
+			1, new Gtk2::HBox(0, 0),
+			0, gtksignal_connect(new Gtk2::Button($next_widget ? N("Previous") : N("OK")), clicked => sub { 
 				${$central_widget}->destroy();
 				$previous_widget ? $previous_widget->() : $next_widget->();
 			}),
-			if_($next_widget, 1, gtksignal_connect(new Gtk::Button(N("Next")), clicked => sub {
+			if_($next_widget, 1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
 				${$central_widget}->destroy();
 				$next_widget ? $next_widget->() : $previous_widget->();
 			})),
@@ -4182,13 +4152,11 @@ sub button_box_main {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack(gtkset_layout(new Gtk::HButtonBox, -start),
-			gtksignal_connect(new Gtk::Button(N("Close")), clicked => sub {  
-				Gtk->main_quit() 
-			}),
-			gtksignal_connect(new Gtk::Button(N("Help")), clicked => sub { 
+	    $button_box_tmp = gtkpack(gtkset_layout(new Gtk2::HButtonBox, 'start'),
+			gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub { ugtk2->exit(0) }),
+			gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
 				${$central_widget}->destroy(); 
-				adv_help(\&interactive_mode_box,$custom_help) 
+				adv_help(\&interactive_mode_box, $custom_help) 
 			}),
 		),
 	);
@@ -4199,17 +4167,16 @@ sub button_box_main {
 sub dialog_one {
     $table->destroy();
     my ($label) = @_;
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-           $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-                            1, new Gtk::VBox(0, 5),	
-                            0, gtkpack_(new Gtk::HBox(0, 15),	
-                                        0, new Gtk::VBox(0, 5),	
-                                        0, new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+           $box2 = gtkpack_(new Gtk2::HBox(0, 15),	
+                            1, new Gtk2::VBox(0, 5),	
+                            0, gtkpack_(new Gtk2::HBox(0, 15),	
+                                        0, new Gtk2::VBox(0, 5),	
+                                        0, gtkcreate_img('warning'),
                                         0, $label),
-                            0, new Gtk::VBox(0, 5),	
-                            1, new Gtk::VBox(0, 5),	
+                            0, new Gtk2::VBox(0, 5),	
+                            1, new Gtk2::VBox(0, 5),	
                             ),
            );
     button_box_restore_main();
@@ -4238,10 +4205,10 @@ sub install_rpm {
 	}
     my $box_what_user;
     gtkpack($advanced_box,
-	    $box_what_user = gtkpack_(new Gtk::VBox(0, 15),
+	    $box_what_user = gtkpack_(new Gtk2::VBox(0, 15),
 			0, N("The following packages need to be installed:\n @list_of_rpm_to_install"),
-				0, new Gtk::HSeparator,
-				0, gtksignal_connect(new Gtk::Button(N("Install")), clicked => sub {  
+				0, new Gtk2::HSeparator,
+				0, gtksignal_connect(new Gtk2::Button(N("Install")), clicked => sub {  
 					system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 
 					${$central_widget}->destroy();
 					$previous_widget->();		  
@@ -4255,18 +4222,17 @@ sub install_rpm {
 
 sub message_norestore_box {
     $box2->destroy();
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack(new Gtk::HBox(0, 15),	
-				new Gtk::VBox(0, 5),	
-				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
+			1, new Gtk2::VBox(0, 5),	
+			1, gtkpack(new Gtk2::HBox(0, 15),	
+				new Gtk2::VBox(0, 5),	
+				gtkcreate_img('warning'),
 				N("Please select data to restore..."),
-				new Gtk::VBox(0, 5),	
+				new Gtk2::VBox(0, 5),	
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	);
     button_box_restore_main();
@@ -4278,18 +4244,17 @@ sub message_norestore_box {
 sub message_common_box {
     $box2->destroy();
     my ($label) = @_;
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-           $box2 = gtkpack_(new Gtk::HBox(0, 15),	
-                            1, new Gtk::VBox(0, 5),	
-                            1, gtkpack(new Gtk::HBox(0, 15),	
-                                       new Gtk::VBox(0, 5),	
-                                       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+           $box2 = gtkpack_(new Gtk2::HBox(0, 15),	
+                            1, new Gtk2::VBox(0, 5),	
+                            1, gtkpack(new Gtk2::HBox(0, 15),	
+                                       new Gtk2::VBox(0, 5),	
+                                       gtkcreate_img('warning'),
                                        $label,
-                                       new Gtk::VBox(0, 5),	
+                                       new Gtk2::VBox(0, 5),	
                                        ),
-                            1, new Gtk::VBox(0, 5),	
+                            1, new Gtk2::VBox(0, 5),	
                             ),
            );
     $previous_widget = \&wizard;
@@ -4318,18 +4283,17 @@ sub message_common_box_2 {
     my ($label, $restore_main) = @_;
 
     $box2->destroy();
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
 
     gtkadd($advanced_box,
-		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack(new Gtk::HBox(0, 15),	
-				new Gtk::VBox(0, 5),	
-				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
+			1, new Gtk2::VBox(0, 5),	
+			1, gtkpack(new Gtk2::HBox(0, 15),	
+				new Gtk2::VBox(0, 5),	
+				gtkcreate_img('warning'),
 				N("No configuration file found \nplease click Wizard or Advanced."),
-				new Gtk::VBox(0, 5),	
+				new Gtk2::VBox(0, 5),	
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	);
     button_box_restore_main() if $restore_main;
@@ -4353,7 +4317,7 @@ sub progress {
     if ($new_val > 1) { $new_val = 1 }
     $progressbar->update($new_val);
     $progressbar->{label}->set($label_text);
-    Gtk->main_iteration while Gtk->events_pending;
+    gtkflush();
 }
 
 sub find_backup_to_put_on_cd {
@@ -4364,49 +4328,49 @@ sub find_backup_to_put_on_cd {
     foreach (grep /^backup_other/, @list_backup) {
 		$other_backuped = 1;
 		chomp;
-		my $tail  = (split(' ',`du $save_path/$_`))[0] ;
+		my $tail  = (split(' ', `du $save_path/$_`))[0];
 		s/^backup_other//gi;
 		s/.tar.gz$//gi;
 		s/.tar.bz2$//gi;
-		my @user_date = split(/\_20/,$_);
-		my @user_date2 = split(/\_/,$user_date[1]);
+		my @user_date = split /\_20/;
+		my @user_date2 = split(/\_/, $user_date[1]);
 		my $to_put = "  other_data,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 		push @data_backuped , $to_put;
     }
     foreach (grep /_sys_/, @list_backup) {
 		$sys_backuped = 1;
 		chomp;
-		my $tail  = (split(' ',`du $save_path/$_`))[0] ;
+		my $tail  = (split(' ', `du $save_path/$_`))[0];
 		s/^backup_other//gi;
 		s/.tar.gz$//gi;
 		s/.tar.bz2$//gi;
-		my @user_date = split(/\_20/,$_);
-		my @user_date2 = split(/\_/,$user_date[1]);
+		my @user_date = split /\_20/;
+		my @user_date2 = split(/\_/, $user_date[1]);
 		my $to_put = "  system,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 		push @data_backuped , $to_put;
     }
     foreach (grep /user_/, @list_backup) {
 		chomp;
-		my $tail  = (split(' ',`du $save_path/$_`))[0] ;
+		my $tail  = (split(' ', `du $save_path/$_`))[0];
 		s/^backup_user_//gi;
 		s/.tar.gz$//gi;
 		s/.tar.bz2$//gi;
-		my @user_date = split(/\_20/,$_);
-		my @user_date2 = split(/\_/,$user_date[1]);
+		my @user_date = split /\_20/;
+		my @user_date2 = split(/\_/, $user_date[1]);
 		my $to_put = "  $user_date[0],          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 		push @data_backuped , $to_put;
     }
 }
 
 sub build_backup_status {
-    $pbar =   new Gtk::ProgressBar;
-    $pbar1 =  new Gtk::ProgressBar;
-    $pbar2 =  new Gtk::ProgressBar;
-    $pbar3 =  new Gtk::ProgressBar;
-    $stext = new Gtk::Label("");
+    $pbar =   new Gtk2::ProgressBar;
+    $pbar1 =  new Gtk2::ProgressBar;
+    $pbar2 =  new Gtk2::ProgressBar;
+    $pbar3 =  new Gtk2::ProgressBar;
+    $stext = new Gtk2::Label("");
 	button_box_build_backup_end();
     gtkpack($advanced_box,
-		$table = gtkpack(new Gtk::VBox(0, 5),
+		$table = gtkpack(new Gtk2::VBox(0, 5),
 	    	create_packtable({ col_spacings => 10, row_spacings => 5 },
 				[""], 
 				[""], 
@@ -4416,13 +4380,13 @@ sub build_backup_status {
 				[""], 
 				[""], 
 				[N("Backup system files")],
-				[ $pbar, $pbar->{label} = new Gtk::Label(' ') ],
+				[ $pbar, $pbar->{label} = new Gtk2::Label(' ') ],
 				[N("Backup user files") ],
-				[$pbar1,$pbar1->{label} = new Gtk::Label(' ') ],
+				[$pbar1, $pbar1->{label} = new Gtk2::Label(' ') ],
 				[N("Backup other files")],
-				[ $pbar2, $pbar2->{label} = new Gtk::Label(' ') ],
+				[ $pbar2, $pbar2->{label} = new Gtk2::Label(' ') ],
 				[N("Total Progress")],
-				[$pbar3,$pbar3->{label} = new Gtk::Label(' ') ],
+				[$pbar3, $pbar3->{label} = new Gtk2::Label(' ') ],
 			),
 			$stext,
 		),
@@ -4430,63 +4394,63 @@ sub build_backup_status {
     $custom_help = "options";
     $central_widget = \$table;
     $up_box->show_all();
-    Gtk->main_iteration while Gtk->events_pending;
+    gtkflush();
 }
 
 
 sub build_backup_ftp_status {
-    $pbar =   new Gtk::ProgressBar;
-    $pbar3 =  new Gtk::ProgressBar;
+    $pbar =   new Gtk2::ProgressBar;
+    $pbar3 =  new Gtk2::ProgressBar;
     $table->destroy();
     button_box_build_backup_end();
-    $pbar->set_value(0);
-    $pbar3->set_value(0);
+    $pbar->set_fraction(0);
+    $pbar3->set_fraction(0);
 
 
     gtkpack($advanced_box,
-		$table =  gtkpack_(new Gtk::VBox(0, 15),
+		$table =  gtkpack_(new Gtk2::VBox(0, 15),
 			1, N("files sending by FTP"),
-			1, new Gtk::VBox(0, 15),
+			1, new Gtk2::VBox(0, 15),
 			1, create_packtable ({ col_spacings => 10, row_spacings => 5 },
-#						    [ $pbar->set_show_text( $show_text );
+#						    [ $pbar->set_show_text( $show_text);
 				[N("Sending files...")],
 				[""], 
-				[ $pbar->{label} = new Gtk::Label(' ') ],
+				[ $pbar->{label} = new Gtk2::Label(' ') ],
 				[ $pbar],
 				[""], 
 				[N("Total Progress")],
-				[ $pbar3->{label} = new Gtk::Label(' ') ],
+				[ $pbar3->{label} = new Gtk2::Label(' ') ],
 				[$pbar3],
 			),
-			1, new Gtk::VBox(0, 15),
+			1, new Gtk2::VBox(0, 15),
 		),
 	);
     $custom_help = "options";
     $central_widget = \$table;
     $up_box->show_all();
-    Gtk->main_iteration while Gtk->events_pending;
+    gtkflush();
 }
 
 sub build_backup_box_see_conf {
-    my $box2;    
-    my $text = new Gtk::Text(undef, undef);
+    my $box2;
+    my $text = new Gtk2::TextView;
     system_state();
-    gtktext_insert($text, $system_state);
+    gtktext_insert($text, [ [ $system_state ] ]);
     button_box_restore_main();
 
     gtkpack($advanced_box,
-	    $box2 =  gtkpack_(new Gtk::HBox(0, 15),	
-			1, gtkpack_(new Gtk::VBox(0,10),
-				0, N("Drakbackup Configuration"),
-				1, createScrolledWindow($text),
-			),
-		),
-	);
+	    $box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
+			      1, gtkpack_(new Gtk2::VBox(0,10),
+					  0, N("Drakbackup Configuration"),
+					  1, create_scrolled_window($text),
+					  ),
+			      ),
+	    );
     button_box_backup_end();
     $custom_help = "";
     $central_widget = \$box2;
     $current_widget = \&build_backup_box_see_conf;
-    $previous_widget =\&build_backup_box;
+    $previous_widget = \&build_backup_box;
     $up_box->show_all();
 }
 
@@ -4495,7 +4459,7 @@ sub build_backup_box_progress {
 }
 
 sub aff_total_tail {
-    my @toto ;
+    my @toto;
     my $total = 0;
     push @toto, (split (",", $_))[1]  foreach @list_to_build_on_cd;
     foreach (@toto) {
@@ -4509,44 +4473,42 @@ sub aff_total_tail {
 
 sub build_backup_box {
     $box2->destroy();
-    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("ic82-CD-40");
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("ic82-discdurwhat-40");
-    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("ic82-moreoption-40");
+#    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_img("ic82-CD-40");
 
     gtkadd($advanced_box,
-		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack_(new Gtk::VBox(0, 15),	
-				1, new Gtk::VBox(0, 5),	
-				1, gtksignal_connect(my $button_from_conf_file = new Gtk::Button(), clicked => sub { 
+		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
+			1, new Gtk2::VBox(0, 5),	
+			1, gtkpack_(new Gtk2::VBox(0, 15),	
+				1, new Gtk2::VBox(0, 5),	
+				1, gtksignal_connect(my $button_from_conf_file = new Gtk2::Button(), clicked => sub { 
 					${$central_widget}->destroy();
 					build_backup_box_see_conf();
 				}),
- 				0, new Gtk::VBox(0, 5),	
-				1, gtksignal_connect(my $button_see_conf = new Gtk::Button(), clicked => sub { 
+ 				0, new Gtk2::VBox(0, 5),	
+				1, gtksignal_connect(my $button_see_conf = new Gtk2::Button(), clicked => sub { 
 					${$central_widget}->destroy();
 					build_backup_box_see_conf();
 				}),
-				1, new Gtk::VBox(0, 5),	
+				1, new Gtk2::VBox(0, 5),	
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	 );
 
-    $button_from_conf_file->add(gtkpack(new Gtk::HBox(0,10),
-		new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
-		new Gtk::Label(N("Backup Now from configuration file")),
-		new Gtk::HBox(0, 5)
+    $button_from_conf_file->add(gtkpack(new Gtk2::HBox(0,10),
+		gtkcreate_img("ic82-discdurwhat-40"),
+		new Gtk2::Label(N("Backup Now from configuration file")),
+		new Gtk2::HBox(0, 5)
 	));
-    $button_see_conf->add(gtkpack(new Gtk::HBox(0,10),
-		new Gtk::Pixmap($pix_options_map, $pix_options_mask),
-		new Gtk::Label(N("View Backup Configuration.")),
-		new Gtk::HBox(0, 5)
+    $button_see_conf->add(gtkpack(new Gtk2::HBox(0,10),
+		gtkcreate_img("ic82-moreoption-40"),
+		new Gtk2::Label(N("View Backup Configuration.")),
+		new Gtk2::HBox(0, 5)
 	));
 
     button_box_restore_main();
     fonction_env(\$box2, \&build_backup_box, \&interactive_mode_box, "options");
-    $up_box->show_all();    
+    $up_box->show_all();
 }
 
 ################################################  INTERACTIVE  ################################################  
@@ -4557,21 +4519,21 @@ sub interactive_mode_box {
 	
     read_conf_file();
     gtkadd($advanced_box,
-		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack_(new Gtk::VBox(0, 15),	
-				1, new Gtk::VBox(0, 5),	
-				1, gtksignal_connect(new Gtk::Button(N("Wizard Configuration")), clicked => sub { 
+		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
+			1, new Gtk2::VBox(0, 5),	
+			1, gtkpack_(new Gtk2::VBox(0, 15),	
+				1, new Gtk2::VBox(0, 5),	
+				1, gtksignal_connect(new Gtk2::Button(N("Wizard Configuration")), clicked => sub { 
 					${$central_widget}->destroy();
 					read_conf_file();
 					wizard(); 
 				}),
-				1, gtksignal_connect(new Gtk::Button(N("Advanced Configuration")), clicked => sub { 
+				1, gtksignal_connect(new Gtk2::Button(N("Advanced Configuration")), clicked => sub { 
 					button_box_adv();
 					${$central_widget}->destroy();
 					advanced_box(); 
 				}),
-				1, gtksignal_connect(new Gtk::Button(N("Backup Now")), clicked => sub { 
+				1, gtksignal_connect(new Gtk2::Button(N("Backup Now")), clicked => sub { 
 					${$central_widget}->destroy();
 					if ($cfg_file_exist) { 
 						build_backup_box();
@@ -4579,13 +4541,13 @@ sub interactive_mode_box {
 						message_noconf_box();
 					}
 				}),
-				1, gtksignal_connect(new Gtk::Button(N("Restore")), clicked => sub {
+				1, gtksignal_connect(new Gtk2::Button(N("Restore")), clicked => sub {
 					${$central_widget}->destroy(); 
 					restore_box();
 				}),
-				1, new Gtk::VBox(0, 5),	
+				1, new Gtk2::VBox(0, 5),	
 			),
-			1, new Gtk::VBox(0, 5),	
+			1, new Gtk2::VBox(0, 5),	
 		),
 	);
     button_box_main();
@@ -4600,40 +4562,39 @@ sub interactive_mode_box {
 
 sub interactive_mode {
     $interactive = 1;
-    eval { require my_gtk };
-    die "Can't load my_gtk...\n" if $@;
-    my_gtk->import(qw(:helpers :wrappers));
+    eval { require ugtk2 };
+    die "Can't load ugtk2...\n" if $@;
+    ugtk2->import(qw(:helpers :wrappers :create));
 
     $in = 'interactive'->vnew('', 'default');
 
     my $box;
-    $my_win = my_gtk->new('drakbackup');
+    $my_win = ugtk2->new('drakbackup');
     $window1 = $my_win->{window};
     unless ($::isEmbedded) {
-	   $my_win->{rwindow}->set_position(1);
+	   $my_win->{rwindow}->set_position('center');
 	   $my_win->{rwindow}->set_title(N("Drakbackup"));
     }
-    $my_win->{rwindow}->signal_connect (delete_event => sub { my_gtk->exit(0) });
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakbackup.540x57");
+    $my_win->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     read_conf_file();     
 
     gtkadd($window1,
-		gtkpack(new Gtk::VBox(0,0),
-			gtkpack(gtkset_usize ($up_box = new Gtk::VBox(0, 5), 540, 400),
-				$box = gtkpack_(new Gtk::VBox(0, 3),
-					if_(!$::isEmbedded, 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask)),
-					1, gtkpack_(new Gtk::HBox(0, 3),
-				  		1, gtkpack_(new Gtk::HBox(0, 15),	
-							0, new Gtk::HBox(0, 5),	
-					    	1, $advanced_box = gtkpack_(new Gtk::HBox(0, 15),	
-								1, $box2 = gtkpack_(new Gtk::VBox(0, 15),),
+		gtkpack(new Gtk2::VBox(0,0),
+			gtkpack(gtkset_size_request($up_box = new Gtk2::VBox(0, 5), 540, 400),
+				$box = gtkpack_(new Gtk2::VBox(0, 3),
+					if_(!$::isEmbedded, 0, gtkcreate_img("drakbackup.540x57")),
+					1, gtkpack_(new Gtk2::HBox(0, 3),
+				  		1, gtkpack_(new Gtk2::HBox(0, 15),	
+							0, new Gtk2::HBox(0, 5),	
+					    	1, $advanced_box = gtkpack_(new Gtk2::HBox(0, 15),	
+								1, $box2 = gtkpack_(new Gtk2::VBox(0, 15),),
 							),
-					    	0, new Gtk::HBox(0, 5),	
+					    	0, new Gtk2::HBox(0, 5),	
 						),
 					),
-					0, new Gtk::HSeparator,
-					0, $button_box = gtkpack(new Gtk::VBox(0, 15),	
-						$button_box_tmp = gtkpack(new Gtk::VBox(0, 0),),
+					0, new Gtk2::HSeparator,
+					0, $button_box = gtkpack(new Gtk2::VBox(0, 15),	
+						$button_box_tmp = gtkpack(new Gtk2::VBox(0, 0),),
 					),
 				),
 			),
@@ -4655,8 +4616,6 @@ sub interactive_mode {
 
 sub adv_help {
     my ($function, $custom_help) = @_,
-    my $text = new Gtk::Text(undef, undef);
-    my $advanced_box_help;
 
 ################################################  help definition ##############################################
 
@@ -4829,20 +4788,19 @@ backup data files by hand.
 );
 
 ################################################  help function ##############################################
-
-	gtktext_insert($text, $custom_helps{$custom_help} || $custom_helps{main});
-	gtkpack($advanced_box,
-		$advanced_box_help = gtkpack_(new Gtk::VBox(0,10),
-			1, gtkpack_(new Gtk::HBox(0,0),
-				1, $text, 
-				0, new Gtk::VScrollbar($text->vadj),
-			),
-			0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-				gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { 
-				${$central_widget}->destroy(); $function->() }),
-			),
-		)
-	);
+    my $text = new Gtk2::TextView;
+    gtktext_insert($text, $custom_helps{$custom_help} || $custom_helps{main});
+    gtkpack($advanced_box,
+	    my $advanced_box_help = gtkpack_(new Gtk2::VBox(0,10),
+					     1, create_scrolled_window($text), 
+					     0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+						       gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { 
+							   $$central_widget->destroy(); 
+							   $function->();
+						       }),
+						       ),
+					     )
+	    );
     $central_widget = \$advanced_box_help;
     $up_box->show_all();
 }

@@ -4,17 +4,19 @@ use strict;
 
 use standalone;
 use common;
-use my_gtk qw(:helpers :wrappers :ask);
+use ugtk2 qw(:helpers :wrappers :ask :create);
 use run_program;
 
 use security::level;
 use security::msec;
 
+my $w;
+
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
-    my $mainw = my_gtk->new('wait');
-    my $label = new Gtk::Label($_[0]);
-    $mainw->{window}->add(gtkpack(gtkadd(create_vbox(), $label)));
+    my $mainw = ugtk2->new('wait', ( modal => 1, transient => $w->{rwindow} ));
+    my $label = new Gtk2::Label($_[0]);
+    $mainw->{window}->add($label);
     $mainw->{window}->show_all;
     $mainw->{window}->realize;
     $label->signal_connect(expose_event => sub { $mainw->{displayed} = 1 });
@@ -28,10 +30,10 @@ sub wait_msg {
 sub remove_wait_msg { $_[0]->destroy }
 
 sub basic_seclevel_explanations {
-	my $text = new Gtk::Text(undef, undef);
-	$text->set_editable(0);
-	$text->insert(undef, $text->style->black, undef,
-			    N("Standard: This is the standard security recommended for a computer that will be used to connect
+    my $text = new Gtk2::TextView;
+    $text->set_editable(0);
+    gtktext_insert($text,
+		   formatAlaTeX(N("Standard: This is the standard security recommended for a computer that will be used to connect
                to the Internet as a client.
 
 High:       There are already some restrictions, and more automatic checks are run every night.
@@ -45,9 +47,9 @@ Paranoid:  This is similar to the previous level, but the system is entirely clo
 
 Security Administrator:
                If the 'Security Alerts' option is set, security alerts will be sent to this user (username or
-	       email)"));
-
-	gtkpack_(gtkshow(new Gtk::HBox(0, 0)), 1, $text);
+	       email)")));
+    
+    gtkpack_(gtkshow(new Gtk2::HBox(0, 0)), 1, $text);
 }
 
 sub basic_seclevel_option {
@@ -61,56 +63,56 @@ sub basic_seclevel_option {
 	$$seclevel_entry->set_popdown_strings(@sec_levels);
 	$$seclevel_entry->entry->set_text($current_level);
 
-	new Gtk::Label(N("Security Level:")), $$seclevel_entry;
+	new Gtk2::Label(N("Security Level:")), $$seclevel_entry;
 }
 
 sub new_editable_combo {
-	my $w = new Gtk::Combo();
+	my $w = new Gtk2::Combo();
 	$w->entry->set_editable(0);
 	$w;
 }
 
 sub set_default_tip {
 	my ($entry, $default) = @_;
-	gtkset_tip(new Gtk::Tooltips, $entry, N(" (default value: %s)", $default));
+	gtkset_tip(new Gtk2::Tooltips, $entry, N(" (default value: %s)", $default));
 }
 
 sub draksec_main {
 	my $msec = new security::msec;
-	my $w = my_gtk->new('draksec');
+	$w = ugtk2->new('draksec');
 	my $window = $w->{window};
 
 	############################ MAIN WINDOW ###################################
-	# Set different options to Gtk::Window
+	# Set different options to Gtk2::Window
 	unless ($::isEmbedded) {
-	  $w->{rwindow}->set_policy(1, 1, 1);
-	  $w->{rwindow}->set_position(1);
+#	  $w->{rwindow}->set_policy(1, 1, 1);
+	  $w->{rwindow}->set_position('center');
 	  $w->{rwindow}->set_title("DrakSec");
-	  $window->set_usize(598, 590);
+	  $window->set_size_request(598, 590);
 	}
 
 	# Connect the signals
 	$window->signal_connect('delete_event', sub { $window->destroy() });
-	$window->signal_connect('destroy', sub { my_gtk->exit() });
+	$window->signal_connect('destroy', sub { ugtk2->exit() });
 
-	$window->add(my $vbox = gtkshow(new Gtk::VBox(0, 0)));
+	$window->add(my $vbox = gtkshow(new Gtk2::VBox(0, 0)));
 
 	# Create the notebook (for bookmarks at the top)
 	my $notebook = create_notebook();
 	$notebook->set_tab_pos('top');
 
 	######################## BASIC OPTIONS PAGE ################################
-	my $seclevel_entry = new Gtk::Combo();
+	my $seclevel_entry = new Gtk2::Combo();
 
-	$notebook->append_page(gtkpack__(gtkshow(my $basic_page = new Gtk::VBox(0, 0)),
+	$notebook->append_page(gtkpack__(gtkshow(my $basic_page = new Gtk2::VBox(0, 0)),
 							   basic_seclevel_explanations($msec),
 							   create_packtable ({ col_spacings => 10, row_spacings => 5 },
 											 [ basic_seclevel_option(\$seclevel_entry, $msec) ],
-											 [ new Gtk::Label(N("Security Alerts:")), 
-											   my $secadmin_check = new Gtk::CheckButton ],
-											 [ new Gtk::Label(N("Security Administrator:")),
-											   my $secadmin_entry = new Gtk::Entry ])),
-					   new Gtk::Label(N("Basic")));
+											 [ new Gtk2::Label(N("Security Alerts:")), 
+											   my $secadmin_check = new Gtk2::CheckButton ],
+											 [ new Gtk2::Label(N("Security Administrator:")),
+											   my $secadmin_entry = new Gtk2::Entry ])),
+					   new Gtk2::Label(N("Basic")));
 
 	$secadmin_entry->set_text($msec->get_check_value("MAIL_USER"));
 	$secadmin_check->set_active(1) if $msec->get_check_value("MAIL_WARN") eq "yes";
@@ -125,8 +127,8 @@ sub draksec_main {
 	    my ($domain, $label) = @$_;
 	    my %values;
 	    
-	    $notebook->append_page(gtkshow(createScrolledWindow(gtkpack(new Gtk::VBox(0, 0),
-		   new Gtk::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
+	    $notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
+		   new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
 		   create_packtable({ col_spacings => 10, row_spacings => 5 },
 						   map {
 		   my $i = $_;
@@ -142,39 +144,39 @@ sub draksec_main {
 				 $values{$i}->set_popdown_strings(@alllocal_choices);
 			  }
 		   } else {
-			  $values{$i} = new Gtk::Entry();
+			  $values{$i} = new Gtk2::Entry();
 			  $entry = $values{$i};
 		   }
 		   $entry->set_text($msec->get_function_value($i));
 		   set_default_tip($entry, $default);
-		   [ new Gtk::Label($i), $values{$i} ];
+		   [ new Gtk2::Label($i), $values{$i} ];
 	 } $msec->get_functions($domain))))),
-						  new Gtk::Label($label));
+						  new Gtk2::Label($label));
 	 $options_values{$domain} = \%values;
  }
 
 	######################## PERIODIC CHECKS ###################################
 	my %security_checks_value;
 
-	$notebook->append_page(gtkshow(createScrolledWindow(gtkpack(new Gtk::VBox(0, 0),
-		   new Gtk::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
+	$notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
+		   new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
 		   create_packtable({ col_spacings => 10, row_spacings => 5 },
 						map {
-						    my $i = $_;
-						    if (!member(qw(MAIL_WARN MAIL_USER), $i)) {
+						    if (!member(qw(MAIL_WARN MAIL_USER), $_)) {
+							my $i = $_;
 							   $security_checks_value{$i} = new_editable_combo();
 							   my $entry = $security_checks_value{$i}->entry;
 							   set_default_tip($entry, $msec->get_check_default);
 							   $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
 							   $entry->set_text($msec->get_check_value($i));
-							   [ gtkshow(new Gtk::Label(translate($i))), $security_checks_value{$i} ];
-							   }
+							   [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
+						       } else { undef }
 						} ($msec->get_default_checks))))),
-					   new Gtk::Label(N("Periodic Checks")));
+					   new Gtk2::Label(N("Periodic Checks")));
 
 
 	####################### OK CANCEL BUTTONS ##################################
-	my $bok = gtksignal_connect(new Gtk::Button(N("Ok")),
+	my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
 						   'clicked' => sub {
                   my $seclevel_value = $seclevel_entry->entry->get_text();
 		  my $secadmin_check_value = $secadmin_check->get_active();
@@ -218,21 +220,21 @@ sub draksec_main {
 
 		  remove_wait_msg($w);
 
-		  my_gtk->exit(0);
+		  ugtk2->exit(0);
 		  });
 
-	my $bcancel = gtksignal_connect(new Gtk::Button(N("Cancel")),
-							  'clicked' => sub { my_gtk->exit(0) });
+	my $bcancel = gtksignal_connect(new Gtk2::Button(N("Cancel")),
+							  'clicked' => sub { ugtk2->exit(0) });
 	gtkpack_($vbox,
 		    1, gtkshow($notebook),
-		    0, gtkadd(gtkadd(gtkshow(new Gtk::HBox(0, 0)),
+		    0, gtkadd(gtkadd(gtkshow(new Gtk2::HBox(0, 0)),
 						 $bok),
 				    $bcancel));
 	$bcancel->can_default(1);
 	$bcancel->grab_default();
 
 	$w->main;
-	my_gtk->exit(0);
+	ugtk2->exit(0);
 
 }
 
