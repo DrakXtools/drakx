@@ -263,7 +263,7 @@ sub cp {
 		open G, "> $dest" or $force or die "can't create $dest : $!\n";
 		local $_;
 		while (<F>) { print G $_ }
-		chmod (stat($src))[2], $dest;
+		chmod((stat($src))[2], $dest);
 	    }
 	}
     };
