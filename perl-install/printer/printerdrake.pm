@@ -2059,10 +2059,10 @@ sub setup_common {
 	    local $::isWizard = 0;
 	    if (!$printer->{noninteractive}) {
 		$isHPOJ = $in->ask_yesorno(N("Add a new printer"),
-					   N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner, DeskJet 450, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
+					   N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
 	    }
 	}
-	if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|3200|33.0)|(DeskJet|dj)\s*450)/i ||
+	if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|30(15|20|30)|3200|33.0|4345)|(DeskJet|dj)\s*450)/i ||
 	    $makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
 	    $isHPOJ) {
 	    # Install HPOJ package
@@ -2159,12 +2159,12 @@ sub setup_common {
 		# Configure photo card access with mtools and MToolsFM
 		if (($makemodel =~ /HP\s+PhotoSmart/i ||
 		     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
-		     $makemodel =~ /HP\s+PSC\s*135\d/i ||
-		     $makemodel =~ /HP\s+PSC\s*21[57]\d/i ||
-		     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
-		     $makemodel =~ /HP\s+PSC\s*2[45]\d\d/i ||
+		     $makemodel =~ /HP\s+PSC\s*13[15]\d/i ||
+		     $makemodel =~ /HP\s+PSC\s*161\d/i ||
+		     $makemodel =~ /HP\s+PSC\s*2\d\d\d/i ||
 		     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
 		     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
+		     $makemodel =~ /HP\s+OfficeJet\s+91\d\d/i ||
 		     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
 		    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
 		    # Install mtools and MToolsFM
@@ -3597,12 +3597,12 @@ sub photocard_help {
 	my $ptaldevice = $1;
 	if (($makemodel =~ /HP\s+PhotoSmart/i ||
 	     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
-	     $makemodel =~ /HP\s+PSC\s*135\d/i ||
-	     $makemodel =~ /HP\s+PSC\s*21[57]\d/i ||
-	     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
-	     $makemodel =~ /HP\s+PSC\s*2[45]\d\d/i ||
+	     $makemodel =~ /HP\s+PSC\s*13[15]\d/i ||
+	     $makemodel =~ /HP\s+PSC\s*161\d/i ||
+	     $makemodel =~ /HP\s+PSC\s*2\d\d\d/i ||
 	     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
 	     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
+	     $makemodel =~ /HP\s+OfficeJet\s+91\d\d/i ||
 	     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
 	    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
 	    # Models with built-in photo card drives
