@@ -20,7 +20,7 @@ sub carryRootLoopback {
 }
 
 sub check_circular_mounts {
-    my ($_hd, $part, $all_hds) = @_;
+    my ($part, $all_hds) = @_;
 
     my $fstab = [ fs::get::fstab($all_hds), $part ]; # no pb if $part is already in $all_hds
 

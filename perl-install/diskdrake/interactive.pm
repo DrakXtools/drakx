@@ -627,7 +627,7 @@ sub Mount_point {
 	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn('', 
 N("Can not unset mount point as this partition is used for loop back.
 Remove the loopback first")), return 1;
-	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $hd, $part, $all_hds) or return 1;
+	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $part, $all_hds) or return 1;
     	    $migrate_files = need_migration($in, $mntpoint) or return 1;
 	    0;
 	} },
@@ -655,7 +655,7 @@ sub Mount_point_raw_hd {
 	    list => [ if_($mntpoint, $mntpoint), '', @propositions ], 
 	    not_edit => 0 } ],
 	complete => sub {
-	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, {}, $part, $all_hds) or return 1;
+	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $part, $all_hds) or return 1;
 	    0;
 	}
     ) or return;
@@ -1033,10 +1033,10 @@ sub check_type {
     1;
 }
 sub check_mntpoint {
-    my ($in, $mntpoint, $hd, $part, $all_hds) = @_;
+    my ($in, $mntpoint, $part, $all_hds) = @_;
     my $seen;
     eval { 
-	catch_cdie { fsedit::check_mntpoint($mntpoint, $hd, $part, $all_hds) }
+	catch_cdie { fsedit::check_mntpoint($mntpoint, $part, $all_hds) }
 	  sub { $seen = 1; $in->ask_okcancel('', formatError($@)) };
     };
     if (my $err = $@) {
@@ -1048,7 +1048,7 @@ sub check_mntpoint {
 sub check {
     my ($in, $hd, $part, $all_hds) = @_;
     check_type($in, $part, $hd, $part) &&
-      check_mntpoint($in, $part->{mntpoint}, $hd, $part, $all_hds);
+      check_mntpoint($in, $part->{mntpoint}, $part, $all_hds);
 }
 
 sub check_rebootNeeded {

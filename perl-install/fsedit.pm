@@ -391,7 +391,7 @@ sub suggestions_mntpoint {
 #- you can do this before modifying $part->{mntpoint}
 #- so $part->{mntpoint} should not be used here, use $mntpoint instead
 sub check_mntpoint {
-    my ($mntpoint, $hd, $part, $all_hds) = @_;
+    my ($mntpoint, $part, $all_hds) = @_;
 
     $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return 0;
     $mntpoint =~ m|^/| or die N("Mount points must begin with a leading /");
@@ -402,7 +402,7 @@ sub check_mntpoint {
 No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds);
     die N("You can not use a LVM Logical Volume for mount point %s", $mntpoint)
-      if $mntpoint eq '/boot' && isLVM($hd);
+      if $mntpoint eq '/boot' && isLVM($part);
     cdie N("You've selected a LVM Logical Volume as root (/).
 The bootloader is not able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) && !fs::get::has_mntpoint("/boot", $all_hds);
@@ -421,7 +421,7 @@ Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) &&
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;
-    loopback::check_circular_mounts($hd, $part, $all_hds);
+    loopback::check_circular_mounts($part, $all_hds);
 }
 
 sub add {
@@ -429,7 +429,7 @@ sub add {
 
     isSwap($part) ?
       ($part->{mntpoint} = 'swap') :
-      $options->{force} || check_mntpoint($part->{mntpoint}, $hd, $part, $all_hds);
+      $options->{force} || check_mntpoint($part->{mntpoint}, $part, $all_hds);
 
     delete $part->{maxsize};
 
