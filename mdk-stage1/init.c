@@ -402,8 +402,6 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("init: running %s\n", BINARY); 
-	
 	if (!(installpid = fork())) {
 		/* child */
 		char * child_argv[2];
