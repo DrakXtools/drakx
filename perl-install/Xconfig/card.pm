@@ -9,7 +9,7 @@ use common;
 use log;
 
 
-my $force_xf4 = arch() =~ /ppc|ia64/;
+my $force_xf4 = arch() =~ /ppc|ia64|x86_64/;
 
 
 my %VideoRams = (
