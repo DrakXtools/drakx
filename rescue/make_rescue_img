@@ -46,7 +46,7 @@ foreach (keyboard::loadkeys_files) {
 }
 unlink "$tmp/usr/lib/kbd/keymaps/i386/qwertz/fr.kmap.gz";
 
-foreach (cat_("list")) {
+foreach (cat_("list"), cat_(`../tools/specific_arch list`)) {
     chomp;
     install($_);
     chomp, install_lib($_) foreach `ldd $_ 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//'`;

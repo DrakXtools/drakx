@@ -112,6 +112,9 @@ sub getSCSI() {
 sub getIDE() {
     my @idi;
 
+    #- what about a system with absolutely no IDE on it, like some sparc machine.
+    hasIDE() or return ();
+
     #- Great. 2.2 kernel, things are much easier and less error prone.
     foreach my $d (sort @{[glob_('/proc/ide/hd*')]}) {
 	my ($t) = chop_(cat_("$d/media"));

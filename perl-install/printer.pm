@@ -418,6 +418,7 @@ sub create_spool_dir($) {
 sub create_config_file($$%) {
     my ($inputfile, $outputfile, %toreplace) = @_;
     template2file("$prefix/$inputfile", "$prefix/$outputfile", %toreplace);
+    eval { commands::chown_("root.lp", "$prefix/$outputfile") };
 }
 
 
@@ -429,7 +430,8 @@ sub copy_master_filter($) {
     my $complete_path = "$prefix/$queue_path/filter";
     my $master_filter = "$prefix/$PRINTER_FILTER_DIR/master-filter";
 
-    eval { commands::cp('-f', $master_filter, $complete_path) }; #- -f for update.
+    eval { commands::cp('-f', $master_filter, $complete_path);
+           commands::cp("root.lp", $complete_path); }; #- -f for update.
     $@ and die "Can't copy $master_filter to $complete_path $!";
 }
 
@@ -641,13 +643,13 @@ sub configure_queue($) {
 	print F "user=$entry->{NCPUSER}\n";
 	print F "password=$entry->{NCPPASSWD}\n";
     }
+    eval { chmod 0640, "$prefix$queue_path/.config"; commands::chown_("root.lp", "$prefix$queue_path/.config") };
 
     copy_master_filter($queue_path);
 
     #-now the printcap file, note this one contains all the printer (use configured for that).
     local *PRINTCAP;
     open PRINTCAP, ">$prefix/etc/printcap" or die "Can't open printcap file $!";
-
     print PRINTCAP $intro_printcap_test;
     foreach (values %{$entry->{configured}}) {
 	$_->{DBENTRY} = $thedb_gsdriver{$_->{GSDRIVER}}{ENTRY} unless defined $_->{DBENTRY};
@@ -686,6 +688,7 @@ sub configure_queue($) {
 	print PRINTCAP "\t:if=$_->{IF}:\n";
 	print PRINTCAP "\n";
     }
+    eval { commands::chown_("root.lp", "$prefix/etc/printcap") };
 
     my $useUSB = 0;
     foreach (values %{$entry->{configured}}) {

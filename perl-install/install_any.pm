@@ -238,9 +238,11 @@ sub getAvailableSpace {
 sub getAvailableSpace_mounted {
     my ($prefix) = @_;
     my $buf = ' ' x 20000;
-    syscall_('statfs', "$prefix/usr", $buf) or return;
+    my $dir = -d "$prefix/usr" ? "$prefix/usr" : "$prefix";
+    syscall_('statfs', $dir, $buf) or return;
     my (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
-    ($free || 1) * $blocksize;
+    log::l("space free on $dir is $free blocks of $blocksize bytes");
+    $free * $blocksize || 1;
 }
 sub getAvailableSpace_raw {
     my ($fstab) = @_;

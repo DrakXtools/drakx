@@ -113,10 +113,11 @@ my %ignoreBadPkg = (
 #- following flags : selected, force, installed, base, skip.
 #- size and deps are grouped to save memory too and make a much
 #- simpler and faster depslist reader, this gets (sizeDeps).
-sub packageHeaderFile { my ($pkg) = @_; $pkg->{file} }
-sub packageName       { my ($pkg) = @_; $pkg->{file} =~ /(.*)-[^-]+-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
-sub packageVersion    { my ($pkg) = @_; $pkg->{file} =~ /.*-([^-]+)-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
-sub packageRelease    { my ($pkg) = @_; $pkg->{file} =~ /.*-[^-]+-([^-]+)/ ? $1 : die "invalid file `$pkg->{file}'" }
+sub packageHeaderFile   { my ($pkg) = @_; $pkg->{file} }
+sub packageName         { my ($pkg) = @_; $pkg->{file} =~ /([^\(]*)(?:\([^\)]*\))?-[^-]+-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
+sub packageSpecificArch { my ($pkg) = @_; $pkg->{file} =~ /[^\(]*(?:\(([^\)])*\))?-[^-]+-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
+sub packageVersion      { my ($pkg) = @_; $pkg->{file} =~ /.*-([^-]+)-[^-]+/ ? $1 : die "invalid file `$pkg->{file}'" }
+sub packageRelease      { my ($pkg) = @_; $pkg->{file} =~ /.*-[^-]+-([^-]+)/ ? $1 : die "invalid file `$pkg->{file}'" }
 
 sub packageSize   { my ($pkg) = @_; to_int($pkg->{sizeDeps}) }
 sub packageDepsId { my ($pkg) = @_; split ' ', ($pkg->{sizeDeps} =~ /^\d*\s*(.*)/)[0] }
@@ -143,7 +144,8 @@ sub packageProvides { my ($pkg) = @_; @{$pkg->{provides} || []} }
 sub packageFile { 
     my ($pkg) = @_; 
     $pkg->{header} or die "packageFile: missing header";
-    $pkg->{file} . "." . c::headerGetEntry($pkg->{header}, 'arch') . ".rpm";
+    $pkg->{file} =~ /([^\(]*)(?:\([^\)]*\))?(-[^-]+-[^-]+)/;
+    "$1$2." . c::headerGetEntry($pkg->{header}, 'arch') . ".rpm";
 }
 
 sub packageId {
@@ -418,10 +420,25 @@ sub psUsingHdlist {
 			flags  => 0,  #- flags
 			medium => $m,
 		      };
-	    if ($packages->[0]{packageName($pkg)}) {
-		log::l("ignoring package $1 already present in distribution");
+	    my $specific_arch = packageSpecificArch($pkg);
+	    if (!$specific_arch || compat_arch($specific_arch)) {
+		my $old_pkg = $packages->[0]{packageName($pkg)};
+		if ($old_pkg) {
+		    if (packageVersion($pkg) eq packageVersion($old_pkg) && packageRelease($pkg) eq packageRelease($old_pkg)) {
+			if (better_arch($specific_arch, packageSpecificArch($old_pkg))) {
+			    log::l("replacing old package with package $1 with better arch");
+			    $packages->[0]{packageName($pkg)} = $pkg;
+			} else {
+			    log::l("keeping old package against package $1 with worse arch");
+			}
+		    } else {
+		        log::l("ignoring package $1 already present in distribution with different version or release");
+		    }
+		} else {
+		    $packages->[0]{packageName($pkg)} = $pkg;
+		}
 	    } else {
-		$packages->[0]{packageName($pkg)} = $pkg;
+	        log::l("ignoring package $1 with incompatible arch");
 	    }
 	} else {
 	    die "bad hdlist file: $newf";

@@ -320,13 +320,15 @@ Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl Mandrake/RPMS/*.rpm\"
 ") if grep { m|read failed: Input/output error| } cat_("$o->{prefix}/root/install.log");
 
-    -x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
+    if (arch() !~ /^sparc/) { #- TODO restore it as may be needed for sparc
+	-x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
 "Some important packages didn't get installed properly.
 
 Please switch to console 2 (using ctrl-alt-f2)
 and look at the log file /tmp/ddebug.log
 
 Consoles 1,3,4,7 may also contain interesting information";
+    }
 
     pkgs::done_db();
 

@@ -2,15 +2,15 @@ package common;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int $cancel $SECTORSIZE);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int $cancel $SECTORSIZE %compat_arch);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ even odd arch min max sqr sum and_ or_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref) ],
+    common     => [ qw(__ even odd arch better_arch compat_arch min max sqr sum and_ or_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
     file       => [ qw(dirname basename touch all glob_ cat_ output symlinkf chop_ mode typeFromMagic expand_symlinks) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file formatTime unix2dos setVirtual) ],
-    constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
+    constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE %compat_arch) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -22,6 +22,22 @@ $printable_chars = "\x20-\x7E";
 $sizeof_int      = psizeof("i");
 $bitof_int       = $sizeof_int * 8;
 $SECTORSIZE      = 512;
+%compat_arch     = ( #- compatibilty arch mapping.
+		     'noarch'  => undef,
+		     'i386'    => 'noarch',
+		     'i486'    => 'i386',
+		     'i586'    => 'i486',
+		     'i686'    => 'i586',
+		     'i786'    => 'i686',
+		     'k6'      => 'i586',
+		     'k7'      => 'k6',
+		     'k8'      => 'k7',
+		     'ppc'     => 'noarch',
+		     'alpha'   => 'noarch',
+		     'sparc'   => 'noarch',
+		     'sparc32' => 'sparc',
+		     'sparc64' => 'sparc32',
+		   );
 
 #-#####################################################################################
 #- Functions
@@ -125,6 +141,12 @@ sub arch() {
     no strict;
     $Config{archname} =~ /(.*)-/ and $1;
 }
+sub better_arch {
+    my ($new, $old) = @_;
+    while ($new && $new != $old) { $new = $compat_arch{$_} }
+    $new;
+}
+sub compat_arch { better_arch(arch(), $_[0]) }
 
 sub touch {
     my ($f) = @_;

@@ -97,7 +97,7 @@ arch() =~ /^sparc/ ? (
  "ru" => [ __("Russian"),        "sunt5-ru",    "ru" ],
  "uk" => [ __("UK keyboard"),    "sunt5-uk",    "gb" ],
  "us" => [ __("US keyboard"),    "sunkeymap",   "us" ],
-) : (),
+) : (
 arch() =~ /^ppc/ ? (
  "us" => [ __("US keyboard"),    "mac-us-ext",  "us" ],
  "de_nodeadkeys" => [ __("German"), "mac-de-latin1-nodeadkeys", "de(nodeadkeys)" ],
@@ -158,7 +158,7 @@ arch() =~ /^ppc/ ? (
  "us" => [ __("US keyboard"),    "us",           "us" ],
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
  "yu" => [ __("Yugoslavian (latin layout)"), "sr", "yu" ],
-),
+)),
 );
 
 
@@ -179,22 +179,23 @@ sub text2keyboard {
 }
 
 sub loadkeys_files {
-    my $p = "/usr/lib/kbd/keymaps/i386/*";
+    my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /^i\d/ ? "i386" : arch();
+    my $p = "/usr/lib/kbd/keymaps/$archkbd";
     my $post = ".kmap.gz";
     my %trans = ("cz-latin2" => "cz-lat2");
     my (@l, %l);
     foreach (values %keyboards) {
 	local $_ = $trans{$_->[1]} || $_->[1];
-	my ($l) = glob_("$p/$_$post");
-	$l or /(..)/ and ($l) = glob_("$p/$1$post");
+	my ($l) = grep { -e $_ } ("$p/$_$post");
+	$l or /(..)/ and ($l) = grep { -e $_ } ("$p/$1$post");
 	print STDERR "unknown $_\n" if $_[0] && !$l; $l or next;
 	push @l, $l;
 	foreach (`zgrep include $l | grep "^include"`) {
 	    /include\s+"(.*)"/ or die "bad line $_";
-	    @l{glob_("$p/$1.inc.gz")} = ();
+	    @l{grep { -e $_ } ("$p/$1.inc.gz")} = ();
 	}
     }        
-    @l, keys %l, map { glob_("$p/$_.inc.gz") } qw(compose euro windowkeys linux-keys-bare);
+    @l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare);
 }
 
 sub lang2keyboard($) {

@@ -358,7 +358,9 @@ sub read_one($$) {
     my ($hd, $sector) = @_;
 
     my ($pt, $info);
-    foreach ('dos', 'bsd', 'sun', 'mac', 'unknown') {
+    #- SUN bioses may blank disk or refuse to load it if the partition is unknown.
+    my @parttype = arch() =~ /^sparc/ ? ('sun', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown');
+    foreach (@parttype) {
 	/unknown/ and die "unknown partition table format";
 	eval {
 	    bless $hd, "partition_table_$_";
@@ -516,6 +518,8 @@ sub add_primary($$) {
 }
 
 sub add_extended {
+    arch() =~ /^sparc/ and die _("Extended partition not supported on this platform");
+
     my ($hd, $part, $extended_type) = @_;
     $extended_type =~ s/Extended_?//;
 
@@ -576,7 +580,8 @@ sub add($$;$$) {
 
     my $e = $hd->{primary}{extended};
 
-    if ($primaryOrExtended eq 'Primary' ||
+    if (arch() =~ /^sparc/ ||
+	$primaryOrExtended eq 'Primary' ||
 	$primaryOrExtended !~ /Extended/ && is_empty_array_ref($hd->{primary}{normal})) {
 	eval { add_primary($hd, $part) };
 	return unless $@;
