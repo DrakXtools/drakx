@@ -6,7 +6,7 @@ package harddrake::sound;
 #    o isa cards: msnd_pinnacle, pas2, 
 #    o pci cards: ad1889,
 # No OSS for ALSA's
-#    o pci cards: snd-ali5451, snd-als4000, snd-es968, snd-hdsp
+#    o pci cards: snd-als4000, snd-es968, snd-hdsp
 #    o isa cards: snd-als100, snd-azt2320, snd-cmi8330, snd-cs4231,
 #      snd-cs4236, snd-dt0197h, snd-es18xx,snd-es1688,
 #      snd-korg1212, snd-rme32, snd-rme96
@@ -30,7 +30,7 @@ my %alsa2oss =
     (
      "snd-ad1816a" => [ "ad1816" ], # isa
      "snd-ad1848"  => [ "ad1848" ], # isa
-     "snd-ali5451" => [ "unknown" ],
+     "snd-ali5451" => [ "trident" ],
      "snd-als100"  => [ "unknown" ], # isa
      "snd-als4000" => [ "unknown" ],
      "snd-azt2320" => [ "unknown" ], # isa
@@ -119,7 +119,7 @@ my %oss2alsa =
      "sgalaxy" => [ "snd-sgalaxy" ],
      "sonicvibes" => [ "snd-sonicvibes" ],
      "sscape"  => [ "snd-sb16" ],
-     "trident" => [ "snd-trident" ],
+     "trident" => [ "snd-ali5451", "snd-trident" ],
      "via82cxxx_audio" => [ "snd-via82xx" ],
      "wavefront" => [ "snd-wavefront" ],
      "ymfpci"  => [ "snd-ymfpci" ]
