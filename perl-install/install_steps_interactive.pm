@@ -24,7 +24,7 @@ use raid;
 use mouse;
 use modules;
 use lang;
-use any;
+use services;
 use keyboard;
 use fs;
 use log;
@@ -554,7 +554,7 @@ sub timeConfig {
 #------------------------------------------------------------------------------
 sub servicesConfig { 
     my ($o) = @_;
-    any::drakxservices($o, $o->{prefix});
+    services::drakxservices($o, $o->{prefix});
 }
 
 #------------------------------------------------------------------------------

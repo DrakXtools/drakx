@@ -209,7 +209,7 @@ sub xmodmap_file {
 	run_program::run("extract_archive", "/usr/share/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
 	$f = "/tmp/xmodmap.$keyboard";
     }
-    $f;
+    -e $f && $f;
 }
 
 sub setup($) {

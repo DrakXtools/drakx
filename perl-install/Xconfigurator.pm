@@ -224,7 +224,7 @@ sub monitorConfiguration(;$$) {
 
 	readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/X11R6/lib/X11/MonitorsDB");
 
-	add2hash($monitor, { type => $in->ask_from_list(_("Monitor"), _("Choose a monitor"), ['Unlisted', keys %monitors], ' ' . translate($default_monitor)) }) unless $monitor->{type};
+	add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], ' ' . translate($default_monitor)) }) unless $monitor->{type};
 	if ($monitor->{type} eq 'Unlisted') {
 	    $in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate

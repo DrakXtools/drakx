@@ -325,6 +325,7 @@ sub _create_window($$) {
 	            65481 => 'next',
 		    65480 => 'previous' }}{$_[1]->{keyval}} or return;
 	if ($d eq "help") {
+	    require install_steps_gtk;
 	    install_steps_gtk::create_big_help();
 	} else {
 	    my $s = $::o->{step};

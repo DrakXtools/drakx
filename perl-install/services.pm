@@ -12,9 +12,8 @@ use run_program;
 
 my %services = (
 anacron => __("Anacron a periodic command scheduler."),
-apmd => __("apmd is used for monitoring batery status and logging it via
-syslog(8). It can also be used for shutting down the machine when the battery is
-low."),
+apmd => __("apmd is used for monitoring batery status and logging it via syslog.
+It can also be used for shutting down the machine when the battery is low."),
 atd => __("Runs commands scheduled by the at command at the time specified when
 at was run, and runs batch commands when the load average is low enough."),
 crond => __("cron is a standard UNIX program that runs user-specified programs

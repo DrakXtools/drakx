@@ -659,8 +659,8 @@ sub setupBootloader($) {
 sub setupXfreeBefore {
     my ($o) = @_;
     my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
-    unless (-e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb") {
-	commands::cp("-f", keyboard::xmodmap_file($o->{keyboard}), "$o->{prefix}/etc/X11/xinit/Xmodmap");	
+    if (!-e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb" && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
+	commands::cp("-f", $f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
 	$xkb = '';
     }
     $o->{X}{keyboard}{xkb_keymap} = $xkb;
