@@ -153,6 +153,8 @@ sub init {
 	install2::handleI18NClp();
     }
 
+    touch '/var/run/rebootctl';
+
 drakx_stuff:
     $o->{steps}{$_} = { reachable => 1, text => $_ }
       foreach qw(initGraphical autoSelectLanguage handleI18NClp verifyKey configMove startMove);
@@ -289,7 +291,7 @@ sub key_installfiles {
 }
 
 sub reboot {
-    touch '/tmp/reboot';  #- tell X_move to not respawn
+    output('/var/run/rebootctl', "reboot");  #- tell X_move to not respawn
     system("killall X");  #- kill it ourselves to be sure that it won't lock console when killed by our init
     exit 0;
 }
@@ -536,6 +538,8 @@ sub install2::startMove {
     output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
 
+    run_program::run('chown', "$username.root", '/var/run/rebootctl');
+
     touch '/var/run/utmp';
     run_program::run('runlevel_set', '5');
     member($_, qw(xfs dm devfsd syslog)) or run_program::run($_, 'start') foreach glob('/etc/rc.d/rc5.d/*');
@@ -560,6 +564,7 @@ sub install2::startMove {
 	$ENV{LOGNAME} = $ENV{USER} = $username;
 	$ENV{HOME} = $home;
 	$ENV{SHELL} = $shell;
+        $ENV{XDM_MANAGED} = '/var/run/rebootctl,maysd,mayfn,sched';  #- for reboot/halt availability of "logout" by kde
 	exec 'startkde_move';
     } else {
 	exec 'xwait' or c::_exit(0);

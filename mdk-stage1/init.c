@@ -336,6 +336,18 @@ void unmount_filesystems(void)
 	}
 }
 
+int in_reboot(void)
+{
+        int fd;
+        if ((fd = open("/var/run/rebootctl", O_RDONLY, 0)) > 0) {
+                char buf[1];
+                int i = read(fd, buf, sizeof(buf));
+                close(fd);
+                return i > 0;
+        }
+        return 0;
+}
+
 int exit_value_proceed = 66;
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)))
@@ -422,8 +434,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 			end_stage2 = 1;
 	}
 
-        if ((fd = open("/tmp/reboot", O_RDONLY, 0)) > 0) {
-                close(fd);
+        if (in_reboot()) {
+                // any exitcode is valid if we're in_reboot
         } else if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_proceed)) {
 		printf("exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))

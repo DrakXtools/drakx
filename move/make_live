@@ -90,7 +90,6 @@ print "Making live in $::prefix directory.\n";
     installPackages();
     run_program::rooted($::prefix, 'ldconfig');
     touch("$::prefix/etc/menu/enable_simplified");
-    cp_af('tree/Reboot.desktop', "$::prefix/usr/share/applnk-mdk-simplified");
     $ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
     run_program::rooted($::prefix, 'update-menus', '-n');
     run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directories mentioned in config file
