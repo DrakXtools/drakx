@@ -1,3 +1,47 @@
+2004/03/17  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: Update advertising translations
+
+	* share/compssUsers: Update
+	Update
+
+	* share/rpmsrate: Fix my mistake (forgot to cvs up before commit)
+	Update
+
+2004/03/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_TW.po: chinese names for countries
+
+2004/03/17  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/dos.pm, partition_table/raw.pm, partition_table.pm: add
+	set_best_geometry_for_the_partition_table to use the hd geometry instead
+	of the physical geometry returned by the kernel (since for now i can't
+	have bios geometry on 2.6)
+
+2004/03/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: misc perl_checker cleanup
+	remove debug statements
+	fix no information for drivers that do not support ethtool ioctl (eg:
+	sk98lin): try to match the device by interface name and driver name
+	(won't work for several cards managed by the same driver)
+
+	* share/po/fr.po: update
+
+	* share/rpmsrate: roll-back bogus dadou commit
+
+	* network/netconnect.pm: fix pci modem support:
+	  - handle manually installed drivers
+	  - removed urpmi sources
+	  - faster checking for driver presence
+
+2004/03/17  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: community install logo
+
+	* share/rpmsrate: s/glade/glade2/
+
 2004/03/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/eu.po: updated Basque file
@@ -29316,7 +29360,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.910 2004/03/15 13:19:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.911 2004/03/17 13:54:30 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
