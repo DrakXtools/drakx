@@ -150,6 +150,7 @@ sub get_subwizard {
                           sagem => N("Sagem USB modem"),
                           bewan_usb => N("Bewan USB modem"),
                           bewan_pci => N("Bewan PCI modem"),
+                          eci       => N("ECI Hi-Focus modem"), # this one needs eci agreement
                          );
 
     
@@ -519,8 +520,9 @@ killall pppd
                         detect($netc->{autodetect}, 'adsl');
                         # FIXME: we still need to detect bewan modems
                         @adsl_devices = @cards;
-                        push @adsl_devices, $adsl_devices{speedtouch}  if $netc->{autodetect}{adsl}{speedtouch};
-                        push @adsl_devices, $adsl_devices{sagem} if $netc->{autodetect}{adsl}{sagem};
+                        foreach my $modem (keys %adsl_devices) {
+                            push @adsl_devices, $adsl_devices{$modem} if $netc->{autodetect}{adsl}{$modem};
+                        }
                     },
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
@@ -532,7 +534,7 @@ killall pppd
                                         'speedtouch' => 'speedtouch',
                                        );
                         my $adsl_device = find { $adsl_devices{$_} eq $ntf_name } keys %adsl_devices;
-                        print "package: $ntf_name => $adsl_device => $packages{$adsl_device}\n";
+                        return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
                         $in->do_pkgs->install($packages{$adsl_device}) if $packages{$adsl_device};
                         return 'adsl_protocol';
@@ -558,6 +560,14 @@ If you don't know, choose 'use pppoe'"),
                               },
                              ],
                    },
+                    
+                    adsl_unsupported_eci => 
+                    {
+                     name => N("The ECI Hi-Focus modem cannot be supported due to binary driver distribution problem.
+
+You can find a driver on http://eciadsl.flashtux.org/"),
+                     end => 1,
+                    },
          
 
                    lan => 
