@@ -215,7 +215,7 @@ sub real_main {
               require Data::Dumper;
               output("$::prefix/etc/sysconfig/drakconnect", Data::Dumper->Dump([ $config ], [ '$p' ]));
           }
-          return $goto_start_on_boot_ifneeded->();
+          return "allow_user_ctl";
       };
 
       my $handle_multiple_cnx = sub {
@@ -1291,6 +1291,21 @@ It is not necessary on most networks."),
                    {
                     name => N("Configuration is complete, do you want to apply settings?"),
                     type => "yesorno",
+                   },
+
+
+                   allow_user_ctl =>
+                   {
+                    name => N("Do you want to allow users to start the connection?"),
+                    type => "yesorno",
+                    default => sub { bool2yesno(text2bool($intf->{$netc->{NET_INTERFACE}}{USERCTL})) },
+                    post => sub {
+                        my ($res) = @_;
+                        use Data::Dumper;
+                        print Dumper($intf, $netc);
+                        $intf->{$netc->{NET_INTERFACE}}{USERCTL} = bool2yesno($res);
+                        return $goto_start_on_boot_ifneeded->();
+                    },
                    },
 
 
