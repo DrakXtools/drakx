@@ -469,6 +469,36 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	# Configure and start HPOJ
 	$ptaldevice = printer::configure_hpoj($device, @parport);
 
+	# Configure scanning on the MF device
+	if (($menuchoice =~ /HP OfficeJet\s+[KVRGP]/i) ||
+	    ($menuchoice =~ /HP PSC\s+[579]/i)) {
+	    # Install SANE
+	    if ((!$::testing) &&
+		(!printer::files_exist((qw(/usr/bin/scanimage
+					   /usr/bin/xscanimage
+					   /usr/bin/xsane
+					   /etc/sane.d/dll.conf),
+					(printer::files_exist
+					 ('/usr/bin/gimp') ? 
+					 '/usr/bin/xsane-gimp' : ()))))) {
+		my $w = $in->wait_message('', _("Installing SANE package..."));
+		$in->do_pkgs->install('sane-backends', 'sane-frontends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+	    }
+	    # Configure the HP SANE backend
+	    printer::config_sane($ptaldevice);
+	    # Inform user about how to scan with SANE
+	    $in->ask_warn(_("Scanning on your HP multi-function device"),
+			  _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
+Do not use \"scannerdrake\" for this device!",
+			    $ptaldevice));
+	} else {
+	    # Inform user about how to scan with ptal-hp
+	    $in->ask_warn(_("Scanning on your HP multi-function device"),
+			  _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
+Do not use \"scannerdrake\" for this device!",
+			    $ptaldevice));
+	}
+
 	# make the DeviceURI from $device.
 	$printer->{currentqueue}{'connect'} = "ptal:/" . $ptaldevice;
     } else {
@@ -2295,7 +2325,8 @@ sub main {
 	    #- Do all the configuration steps for a new queue
 	    if (0 && (!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
 		($in->isa('interactive_gtk'))) {
-		$window = 'interactive'->vnew(0, 'printer');
+		#$window = 'interactive'->vnew(0, 'printer');
+		$window = $in;
 		# Enter wizard mode
 		$::Wizard_pix_up = "wiz_printerdrake.png";
 		$::Wizard_title = _("Add a new printer");
@@ -2338,6 +2369,7 @@ sub main {
 		    $::Wizard_finished = 1;
 		    wizard_congratulations($window);
 		    undef $::isWizard;
+		    $::WizardWindow->destroy if defined $::WizardWindow;
 		}
 		$continue = ($::expert || !$::isInstall || $menushown ||
 			 $in->ask_yesorno('',_("Do you want to configure another printer?")));

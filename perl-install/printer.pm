@@ -1418,6 +1418,12 @@ sub copy_foomatic_queue {
 			"-C", $oldspooler, $oldqueue);
 }
 
+# ------------------------------------------------------------------
+#
+# Configuration of HP multi-function devices
+#
+# ------------------------------------------------------------------
+
 sub configure_hpoj {
     my ($device, @autodetected) = @_;
     # Get the model ID as auto-detected
@@ -1520,6 +1526,21 @@ sub configure_hpoj {
     return $ptaldevice;
 }
 
+sub config_sane {
+    my ($ptaldevice) = @_;
+
+    # Create config file for HP backend
+    output("$prefix/etc/sane.d/hp.conf",
+	   "$ptaldevice\noption connect-ptal\n");
+
+    # Add HP backend to /etc/sane.d/dll.conf if needed
+    return if member("hp", chomp_(cat_("$prefix/etc/sane.d/dll.conf")));
+    local *F;
+    open F, ">> $prefix/etc/sane.d/dll.conf" or 
+	die "can't write SANE config in /etc/sane.d/dll.conf: $!";
+    print F "hp\n";
+    close F;
+}
 
 #-######################################################################################
 #- Wonderful perl :(
