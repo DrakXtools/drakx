@@ -15,7 +15,7 @@ foreach my $dir (@ARGV) {
             my $dest = "/home/.sysconf/$machine_ident$_";
             mkdir_p(dirname($dest));  #- case of newly created directories
             logit("restoring broken symlink $_ -> $dest");
-            system("mv $_ $dest");
+            system("mv $_ $dest 2>/dev/null");
             symlink($dest, $_);
         }
     }
