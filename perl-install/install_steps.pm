@@ -975,7 +975,9 @@ risk!
 #------------------------------------------------------------------------------
 sub hasNetwork {
     my ($o) = @_;
-    $o->{netcnx}{type} && $o->{netc}{NETWORKING} ne 'no'
+    $o->{netcnx}{type} && $o->{netc}{NETWORKING} ne 'no' and return 1;
+    log::l("no network seems to be configured for internet ($o->{netcnx}{type},$o->{netc}{NETWORKING})");
+    0;
 }
 
 #------------------------------------------------------------------------------
