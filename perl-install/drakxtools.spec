@@ -11,7 +11,7 @@ Requires: foomatic-db-engine
 Conflicts: drakconf < 10-0.6mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
-Conflicts: bootloader-utils < 1.8-1mdk, bootsplash < 2.1.7-1mdk
+Conflicts: bootloader-utils < 1.8-4mdk, bootsplash < 2.1.7-1mdk
 BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.5.2-1mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.8-3mdk
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
@@ -323,14 +323,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Fri Jul  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-52mdk
+* Mon Jul  5 2004 Pixel <pixel@mandrakesoft.com> 10-52mdk
 - ensure proper upgrade: explictly tell urpmi that old drakxtools-newt
   conflicts with drakxtools-backend
 - drakauth: more features (vincent guardiola)
 - drakconnect: pptp support (#6515) (olivier blin)
 - localedrake: configure menu-method's language too so that altering
   language is done for KDE menu entries too (instead of just programs'
-  messages)
+  messages) (Thierry Vignaud)
 
 * Thu Jul  1 2004 Pixel <pixel@mandrakesoft.com> 10-51mdk
 - create package drakxtools-backend
