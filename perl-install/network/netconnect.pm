@@ -188,7 +188,6 @@ sub real_main {
     
       my $after_start_on_boot_step = sub {
           if ($netc->{internet_cnx_choice}) {
-              write_cnx_script($netc);
               $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type} if $netc->{internet_cnx_choice};
           } else {
               undef $netc->{NET_DEVICE};
