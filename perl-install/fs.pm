@@ -447,7 +447,7 @@ sub set_default_options {
 			      });
     }
     if (isThisFs('smbfs', $part)) {
-	add2hash_($options, { 'username=' => '%' });
+	add2hash($options, { 'username=' => '%' }) if !$options->{'credentials='};
     }
     if (isFat($part) || $is_auto) {
 
