@@ -44,20 +44,22 @@ close F;
 
 
 #- keep in mind all the rpm files available (according to hdlists).
-my %rpms;
+my (%rpms, %files);
 
 require packdrake;
 foreach my $medium (@media) {
     my $packer = new packdrake("$dir/Mandrake/base/$medium->{hdlist}");
     foreach (@{$packer->{files}}) {
 	$packer->{data}{$_}[0] eq 'f' or next;
-	$rpms{"$_.rpm"} = $medium->{rpmsdir};
-	-e "$dir/$medium->{rpmsdir}/$_.rpm" and next; #- already exist in the right directory.
-	if (-e "$reject_dir/$_.rpm") {
-	    $mode eq 'rebuild' and system "mv", "-f", "$reject_dir/$_.rpm", "$dir/$medium->{rpmsdir}/";
+	my ($fullname, $file) = /([^:]*):(.*)/ ? ($1, "$2.rpm") : ($_, "$_.rpm");
+	$files{$fullname} = $file;
+	$rpms{$file} = $medium->{rpmsdir};
+	-e "$dir/$medium->{rpmsdir}/$file" and next; #- already exist in the right directory.
+	if (-e "$reject_dir/$file") {
+	    $mode eq 'rebuild' and system "mv", "-f", "$reject_dir/$file", "$dir/$medium->{rpmsdir}/";
 	    next;
 	}
-	print STDERR "unable to find package $_ listed in medium \"$medium->{descr}\"\n";
+	print STDERR "unable to find package $file listed in medium \"$medium->{descr}\"\n";
     }
 }
 
@@ -68,20 +70,21 @@ if ($mode eq 'clean') {
 
 	foreach my $pkg (@{$packages->{depslist}}) {
 	    $pkg->{closure} && !$pkg->{selected} or next;
-	    my $file = "$dir/$medium->{rpmsdir}/" . rpm_filename($pkg);
+	    my $file = "$dir/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
 	    if (-e $file) {
-		delete $rpms{rpm_filename($pkg)} or next;
+		delete $rpms{$files{rpm_fullname($pkg)}} or next;
 		print "  copying $file\n";
 		delete $pkg->{closure};
 	    }
 	}
 
 	if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
-	    if (delete $pkg->{selected}) {
-		delete $rpms{rpm_filename($pkg)} or next;
-		my $file = "$dir/$medium->{rpmsdir}/" . rpm_filename($pkg);
+	    if ($pkg->{selected}) {
+		my $file = "$dir/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
 		if (-e $file) {
+		    delete $rpms{$files{rpm_fullname($pkg)}} or next;
 		    print "  installing $file\n";
+		    delete $pkg->{selected};
 		}
 	    }
 	} else {
@@ -89,10 +92,11 @@ if ($mode eq 'clean') {
 	}
 	foreach my $pkg (@{$packages->{depslist}}) {
 	    $pkg->{selected} or next;
-	    delete $rpms{rpm_filename($pkg)} or next;
-	    my $file = "$dir/$medium->{rpmsdir}/" . rpm_filename($pkg);
+	    my $file = "$dir/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
 	    if (-e $file) {
+		delete $rpms{$files{rpm_fullname($pkg)}} or next;
 		print "  installing $file\n";
+		delete $pkg->{selected};
 	    }
 	}
 
@@ -167,7 +171,7 @@ sub select_packages {
     #- INSTALL class need to be copied as closure (unless installed after).
     #- but we have to remove kernel22 and kernel22-smp now obsolete for oem.
     foreach (@{$o->{packages}{needToCopy}}) {
-	/^(kernel22.*|raidtools|lvm|reiserfsprogs|xfsprogs|jfsprogs|XFree86-(Mach8|Mach32|Mono))$/ and next;
+	/^(kernel22.*|raidtools|lvm|reiserfsprogs|xfsprogs|jfsprogs|XFree86-(Mach8|Mach32|Mono|W32|3DLabs|P9000|8514|VGA16|I128|AGX))$/ and next;
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	pkgs::selectPackage($o->{packages}, $pkg);
     }
@@ -191,8 +195,8 @@ sub select_packages {
     }
 
     #- special packages that are to be move to closure always ...
-    foreach (qw(nfs-utils-client numlock usbd hotplug alsa alsa-utils),
-	     exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib bootsplash) : ()) {
+    foreach (qw(nfs-utils-client numlock usbd hotplug alsa alsa-utils
+	        Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib bootsplash)) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
 	    pkgs::selectPackage($o->{packages}, $pkg);
@@ -216,8 +220,8 @@ sub select_packages {
 sub chop_version {
     ($_[0] =~ /^([^:\s]*)-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*(?::\S*)?/)[0] || die "unable to parse $_[0]";
 }
-sub rpm_filename {
-    (($_[0]{name} =~ /^([^:\s]*-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*)(?::\S*)?/)[0] || die "unable to parse $_[0]") . ".rpm";
+sub rpm_fullname {
+    ($_[0]{name} =~ /^([^:\s]*-[^:\-\s]+-[^:\-\s]+\.[^:\.\-\s]*)(?::\S*)?/)[0] || die "unable to parse $_[0]";
 }
 
 sub read_depslist {
