@@ -91,6 +91,7 @@ our %l = (
     hardware_raid => [
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
+        # 3w-xxxx drivers ATA-RAID, 3w-9xxx drives SATA-RAID
         qw(3w-9xxx 3w-xxxx DAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
 	qw(cpqfc ipr it8212 iteraid mptscsih qla2100 qla2200 qla2300 qla2322 qla6312 qla6322 pdc-ultra),
         qw(ips ppa imm),
