@@ -297,7 +297,9 @@ sub setPackages($) {
 
 	my @l = ();
 	push @l, "kapm", "kcmlaptop" if $o->{pcmcia};
-	push @l, "Device3Dfx", "Glide_V3", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
+	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
+	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
+	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo 3');
 	require timezone;
 	require lang;
 	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;
