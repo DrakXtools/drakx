@@ -524,7 +524,7 @@ killall pppd
                         }
                     },
                     name => N("Select the network interface to configure:"),
-                    data =>  [ { label => N("Net Device"), val => \$ntf_name, list => [ detect_devices::getNet() ], allow_empty_list => 1 } ],
+                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ detect_devices::getNet() ], allow_empty_list => 1 } ],
                     post => sub {
                         delete $ethntf->{$_} foreach keys %$ethntf;
                         add2hash($ethntf, $intf->{$ntf_name});
