@@ -2,7 +2,7 @@ package Xconfigurator; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw($in $install @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4);
+use vars qw($in $install @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $good_default_monitor $low_default_monitor $layoutsection_v4);
 
 use common qw(:common :file :functional :system);
 use log;
@@ -844,37 +844,46 @@ sub write_XF86Config {
     print G $keyboardsection_end;
 
     #- Write pointer section.
-    $O = $o->{mouse};
-    print F $pointersection_text;
-    print G $pointersection_text_v4;
-    print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
-    print G qq(    Option "Protocol"    "$O->{XMOUSETYPE}"\n);
-    print F qq(    Device      "/dev/$O->{device}"\n);
-    print G qq(    Option "Device"      "/dev/$O->{device}"\n);
-    #- this will enable the "wheel" or "knob" functionality if the mouse supports it
-    print F "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
-    print F "    ZAxisMapping 6 7\n" if $O->{nbuttons} > 5;
-    print G qq(    Option "ZAxisMapping" "4 5"\n) if $O->{nbuttons} > 3;
-    print G qq(    Option "ZAxisMapping" "6 7"\n) if $O->{nbuttons} > 5;
+    my $pointer = sub {
+	my ($O, $id) = @_;
+	print F qq(Section "Pointer"\n);
+	print G qq(Section "InputDevice"\n\n);
+	print F qq(    DeviceName  "Mouse$id"\n);
+	print G qq(    Identifier  "Mouse$id"\n);
+	print G qq(    Driver      "mouse"\n);
+	print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
+	print G qq(    Option "Protocol"    "$O->{XMOUSETYPE}"\n);
+	print F qq(    Device      "/dev/$O->{device}"\n);
+	print G qq(    Option "Device"      "/dev/$O->{device}"\n);
+	#- this will enable the "wheel" or "knob" functionality if the mouse supports it
+	print F "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
+	print F "    ZAxisMapping 6 7\n" if $O->{nbuttons} > 5;
+	print G qq(    Option "ZAxisMapping" "4 5"\n) if $O->{nbuttons} > 3;
+	print G qq(    Option "ZAxisMapping" "6 7"\n) if $O->{nbuttons} > 5;
 
-    print F "#" unless $O->{nbuttons} < 3;
-    print G "#" unless $O->{nbuttons} < 3;
-    print F qq(    Emulate3Buttons\n);
-    print G qq(    Option "Emulate3Buttons"\n);
-    print F "#" unless $O->{nbuttons} < 3;
-    print G "#" unless $O->{nbuttons} < 3;
-    print F qq(    Emulate3Timeout    50\n\n);
-    print G qq(    Option "Emulate3Timeout"    "50"\n\n);
-    print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
-    print G "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
-    print F "#" unless $O->{chordmiddle};
-    print G "#" unless $O->{chordmiddle};
-    print F qq(    ChordMiddle\n\n);
-    print G qq(    Option "ChordMiddle"\n\n);
-    print F "    ClearDTR\n" if $O->{cleardtrrts};
-    print F "    ClearRTS\n\n"  if $O->{cleardtrrts};
-    print F "EndSection\n\n\n";
-    print G "EndSection\n\n\n";
+	print F "#" unless $O->{nbuttons} < 3;
+	print G "#" unless $O->{nbuttons} < 3;
+	print F qq(    Emulate3Buttons\n);
+	print G qq(    Option "Emulate3Buttons"\n);
+	print F "#" unless $O->{nbuttons} < 3;
+	print G "#" unless $O->{nbuttons} < 3;
+	print F qq(    Emulate3Timeout    50\n\n);
+	print G qq(    Option "Emulate3Timeout"    "50"\n\n);
+	print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
+	print G "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
+	print F "#" unless $O->{chordmiddle};
+	print G "#" unless $O->{chordmiddle};
+	print F qq(    ChordMiddle\n\n);
+	print G qq(    Option "ChordMiddle"\n\n);
+	print F "    ClearDTR\n" if $O->{cleardtrrts};
+	print F "    ClearRTS\n\n"  if $O->{cleardtrrts};
+	print F "EndSection\n\n\n";
+	print G "EndSection\n\n\n";
+    };
+    print F $pointersection_text;
+    print G $pointersection_text;
+    $pointer->($o->{mouse}, 1);
+    $o->{mouse}{auxmouse} and $pointer->($o->{mouse}{auxmouse}, 2);
 
     #- write module section for version 3.
     if (@{$o->{wacom}} || $o->{card}{Utah_glx}) {
@@ -893,21 +902,21 @@ sub write_XF86Config {
 	print F $dev =~ /input\/event/ ? qq(
 Section "XInput"
     SubSection "WacomStylus"
-        DeviceName "stylus$_"
+        DeviceName "Stylus$_"
         Port "$dev"
         USB
         AlwaysCore
         Mode Absolute
     EndSubSection
     SubSection "WacomCursor"
-        DeviceName "cursor$_"
+        DeviceName "Cursor$_"
         Port "$dev"
         USB
         AlwaysCore
         Mode Relative
     EndSubSection
     SubSection "WacomEraser"
-        DeviceName "eraser$_"
+        DeviceName "Eraser$_"
         Port "$dev"
         USB
         AlwaysCore
@@ -918,19 +927,19 @@ EndSection
 ) : qq(
 Section "XInput"
     SubSection "WacomStylus"
-        DeviceName "stylus$_"
+        DeviceName "Stylus$_"
         Port "$dev"
         AlwaysCore
         Mode Absolute
     EndSubSection
     SubSection "WacomCursor"
-        DeviceName "cursor$_"
+        DeviceName "Sursor$_"
         Port "$dev"
         AlwaysCore
         Mode Relative
     EndSubSection
     SubSection "WacomEraser"
-        DeviceName "eraser$_"
+        DeviceName "Eraser$_"
         Port "$dev"
         AlwaysCore
         Mode Absolute
@@ -944,7 +953,7 @@ EndSection
 	my $dev = "/dev/" . $o->{wacom}[$_-1];
 	print G $dev =~ /input\/event/ ? qq(
 Section "InputDevice"
-    Identifier	"stylus$_"
+    Identifier	"Stylus$_"
     Driver	"wacom"
     Option	"Type" "stylus"
     Option	"Device" "$dev"
@@ -952,7 +961,7 @@ Section "InputDevice"
     Option	"USB" "on"
 EndSection
 Section "InputDevice"
-    Identifier	"eraser$_"
+    Identifier	"Eraser$_"
     Driver	"wacom"
     Option	"Type" "eraser"
     Option	"Device" "$dev"
@@ -960,7 +969,7 @@ Section "InputDevice"
     Option	"USB" "on"
 EndSection
 Section "InputDevice"
-    Identifier	"cursor$_"
+    Identifier	"Cursor$_"
     Driver	"wacom"
     Option	"Type" "cursor"
     Option	"Device" "$dev"
@@ -969,21 +978,21 @@ Section "InputDevice"
 EndSection
 ) : qq(
 Section "InputDevice"
-    Identifier	"stylus$_"
+    Identifier	"Stylus$_"
     Driver	"wacom"
     Option	"Type" "stylus"
     Option	"Device" "$dev"
     Option	"Mode" "Absolute"
 EndSection
 Section "InputDevice"
-    Identifier	"eraser$_"
+    Identifier	"Eraser$_"
     Driver	"wacom"
     Option	"Type" "eraser"
     Option	"Device" "$dev"
     Option	"Mode" "Absolute"
 EndSection
 Section "InputDevice"
-    Identifier	"cursor$_"
+    Identifier	"Cursor$_"
     Driver	"wacom"
     Option	"Type" "cursor"
     Option	"Device" "$dev"
@@ -1221,11 +1230,14 @@ Section "ServerLayout"
     print G '
     InputDevice "Mouse1" "CorePointer"
 ';
+    $o->{mouse}{auxmouse} and print G '
+    InputDevice "Mouse2" "SendCoreEvents"
+';
     foreach (1..@{$o->{wacom}}) {
 	print G '
-    InputDevice "stylus$_" "AlwaysCore"
-    InputDevice "eraser$_" "AlwaysCore"
-    InputDevice "cursor$_" "AlwaysCore"
+    InputDevice "Stylus$_" "AlwaysCore"
+    InputDevice "Eraser$_" "AlwaysCore"
+    InputDevice "Cursor$_" "AlwaysCore"
 ';
     }
     print G '

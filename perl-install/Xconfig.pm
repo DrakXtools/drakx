@@ -58,8 +58,10 @@ sub getinfoFromXF86Config {
 	    if ($i =~ /E0/) {
 		@keyboard{qw(xkb_keymap)} = @c{qw(xkb_keymap)}
 		  if $c{driver} =~ /keyboard/i;
+		@{$mouse{auxmouse}}{qw(XMOUSETYPE device chordmiddle nbuttons)} = @c{qw(XMOUSETYPE device chordmiddle nbuttons)}
+		  if $c{driver} =~ /mouse/i && $mouse{device};
 		@mouse{qw(XMOUSETYPE device chordmiddle nbuttons)} = @c{qw(XMOUSETYPE device chordmiddle nbuttons)}
-		  if $c{driver} =~ /mouse/i;
+		  if $c{driver} =~ /mouse/i && !$mouse{device};
 		$wacom{$c{device}} = undef
 		  if $c{driver} =~ /wacom/i;
 	    }

@@ -205,17 +205,21 @@ sub detect() {
 
     my @wacom;
     my $fast_mouse_probe = sub {
+	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Standard", unsafe => 1);
+
 	if (modules::get_alias("usb-interface")) {
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
 		eval { modules::load("usbmouse"); modules::load("mousedev"); };
-		!$@ && detect_devices::tryOpen("usbmouse") and
-		  return fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic");
+		if (!$@ && detect_devices::tryOpen("usbmouse")) {
+		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic");
+		    $auxmouse and $mouse->{auxmouse} = $auxmouse; #- for laptop, we kept the PS/2 as secondary (symbolic).
+		    return $mouse;
+		}
 		eval { modules::unload("mousedev"); modules::unload("usbmouse"); };
 	    }
 	}
-        detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1);
-	undef;
+	$auxmouse;
     };
 
     if (modules::get_alias("usb-interface")) {
@@ -231,6 +235,8 @@ sub detect() {
 	}
     }
 
+    #- at this level, not all possible mice are detected so avoid invoking serial_probe
+    #- which takes a while for its probe.
     if ($::isStandalone) {
 	my $mouse = $fast_mouse_probe->();
 	$mouse and return ($mouse, @wacom);
@@ -238,11 +244,15 @@ sub detect() {
 
     #- probe serial device to make sure a wacom has been detected.
     eval { modules::load("serial") };
-    my ($r, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom; return ($r, @wacom) if $r;
+    my ($r, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom;
 
     if (!$::isStandalone) {
 	my $mouse = $fast_mouse_probe->();
+	$r && $mouse and $r->{auxmouse} = $mouse; #- we kept the auxilliary mouse as PS/2.
+	$r and return ($r, @wacom);
 	$mouse and return ($mouse, @wacom);
+    } else {
+	$r and return ($r, @wacom);
     }
 
     #- in case only a wacom has been found, assume an inexistant mouse (necessary).

@@ -596,18 +596,6 @@ $pointersection_text = '
 # Pointer section
 # **********************************************************************
 
-Section "Pointer"
-';
-
-$pointersection_text_v4 = '
-# **********************************************************************
-# Pointer section
-# **********************************************************************
-
-Section "InputDevice"
-
-    Identifier "Mouse1"
-    Driver      "mouse"
 ';
 
 $monitorsection_text1 = '
