@@ -52,6 +52,7 @@ my $nfs_mask;
 my $thin_clients = 0;
 my $cfg_dir = "/etc/drakxtools/draktermserv/";
 my $cfg_file = $cfg_dir . "draktermserv.conf";
+my $interface = get_net_interface();
 my $server_ip = get_ip_from_sys();
 my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
@@ -229,7 +230,7 @@ sub interactive_mode() {
 	
     $window1 = ugtk2->new('drakTermServ');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
-    unless ($::isEmbedded) {
+    unless (0 == 0) {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Terminal Server Configuration"));
 		my $pixbuf_icon = gtkcreate_pixbuf("ic82-network-40");
@@ -238,7 +239,7 @@ sub interactive_mode() {
 		$darea->modify_font(Gtk2::Pango::FontDescription->from_string('Sans Italic 24'));
 		my $layout = $darea->create_pango_layout(N("DrakTermServ"));
     	$darea->signal_connect(realize => sub { 
-			set_back_pixbuf($darea, gtkcreate_pixbuf('title-tile')) 
+			set_back_pixbuf($darea, gtkcreate_pixbuf('title-tile'))
 		});
     	$darea->signal_connect(expose_event => sub {
 			my (undef, undef, $dx, $dy) = $darea->allocation->values;
@@ -1228,10 +1229,24 @@ sub dhcpd_config() {
 	$dhcpd_box->show_all;	
 }
 
+sub get_net_interface() {
+	my @interfaces = `/sbin/route | grep -v lo | tail +3 | awk '{print \$8}' | uniq`;
+	chop @interfaces;
+	my $count = @interfaces;
+	if ($count == 1) {
+        return @interfaces[0];
+	} else {
+		foreach (@interfaces) {
+			my $is_default = `/sbin/route | grep $_ | grep default`;
+			return $_ if !$is_default;
+		}
+	}
+}
+
 sub get_mask_from_sys() {
 	my %netconfig;
-	if (-e "/etc/sysconfig/network-scripts/ifcfg-eth0") {
-		%netconfig = getVarsFromSh("/etc/sysconfig/network-scripts/ifcfg-eth0");
+	if (-e "/etc/sysconfig/network-scripts/ifcfg-$interface") {
+		%netconfig = getVarsFromSh("/etc/sysconfig/network-scripts/ifcfg-$interface");
 		$netconfig{NETMASK};
 	}
 }
@@ -1254,14 +1269,14 @@ sub get_subnet_from_sys {
 }
 
 sub get_broadcast_from_sys() {
-	my @ifconfig = grep { /inet/ } `/sbin/ifconfig eth0`;
+	my @ifconfig = grep { /inet/ } `/sbin/ifconfig $interface`;
 	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
 		
 	$ifvalues[5];
 }
 
 sub get_ip_from_sys() {
-	my @ifconfig = grep { /inet/ } `/sbin/ifconfig eth0`;
+	my @ifconfig = grep { /inet/ } `/sbin/ifconfig $interface`;
 	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
 		
 	$ifvalues[3];
@@ -1691,9 +1706,9 @@ sub change_gdm_xdmcp {
 
 sub update_hosts_allow {
 	my ($mode) = @_;
-	my $ip = get_ip_from_sys();
-	my @values = split(/\./, $ip);
-	my $subnet = $values[0] . "." . $values[1] . "." . $values[2] . ".";
+	my $mask = get_mask_from_sys();
+	my $subnet = `/sbin/ip route list dev $interface scope link | cut -f1 -d"/"`;
+	chop $subnet;
 	my $i;
 	if ($mode eq "enable") {
 		my $has_all = `grep ALL /etc/hosts.allow`;
@@ -1703,7 +1718,7 @@ sub update_hosts_allow {
 		}
 		if (!$has_all) {
 			log::explanations("Modified file /etc/hosts.allow");
-			append_to_file("/etc/hosts.allow", "ALL:\t$subnet\n");
+			append_to_file("/etc/hosts.allow", "ALL:\t$subnet/$mask 127.0.0.1\n");
 		}
 		$has_all = `grep ALL /etc/hosts.deny`;
 		if (!$has_all) {
