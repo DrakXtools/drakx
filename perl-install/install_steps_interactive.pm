@@ -973,6 +973,8 @@ Do you really want to quit now?"), 0);
 
     install_steps::exitInstall;
 
+    $o->exit unless $alldone;
+
     $o->ask_warn('',
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.

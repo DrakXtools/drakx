@@ -131,6 +131,9 @@ label expert
 label rescue
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $ftype rescue rw
+label lnx4win
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $ftype lnx4win vga=788
 label oem
   kernel vmlinuz
   append ramdisk_size=32000 initrd=cdrom.rdz cdrom rescue oem rw

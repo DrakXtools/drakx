@@ -1,9 +1,22 @@
+2000-09-20  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm (install_loadlin_config_sys,
+	install_loadlin_desktop): extracted from install_loadlin, do not
+	call them anymore (remove it?)
+	(suggest): put grub in lnx4win install
+
+	* common.pm (availableRamMB): fixed (round to a multiple of 4)	
+
 2000-09-20  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm (get_info_isdn_providers & read_isdn_providers):
 	read file in /usr/share and $prefix/usr/share 
 	(isdn_write_config): corrected file to be sh compliant.
 	(isdn_write_config): added default route settings for isdn.
+
+2000-09-20  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
 
 2000-09-20  Pixel  <pixel@mandrakesoft.com>
 

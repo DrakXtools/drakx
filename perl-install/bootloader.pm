@@ -312,7 +312,7 @@ wait %d seconds for default boot.
     my %l = (
 	     silo => bool(arch() =~ /sparc/),
 	     lilo => bool(arch() !~ /sparc/) && !isLoopback(fsedit::get_root($fstab)),
-	     grub => bool(arch() !~ /sparc/) && !$::o->{lnx4win}, #1,#!isReiserfs(fsedit::get_root($fstab, 'boot')),
+	     grub => bool(arch() !~ /sparc/), #!isReiserfs(fsedit::get_root($fstab, 'boot')),
 	     loadlin => bool(arch() !~ /sparc/) && -e "/initrd/loopfs/lnx4win",
 	    );
     $lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
@@ -642,12 +642,27 @@ sub install_loadlin {
     my $windrive = $winhandle->{dir};
     log::l("windrive is $windrive");
 
+    my ($label, $cmd) = loadlin_cmd($prefix, $lilo);
+
+    #install_loadlin_config_sys($lilo, $windrive, $label, $cmd);
+    #install_loadlin_desktop($lilo, $windrive);
+
+    output "/initrd/loopfs/lnx4win/linux.bat", unix2dos(
+'@echo off
+echo Linux Mandrake
+smartdrv /C
+' . "$cmd\n");
+
+}
+
+sub install_loadlin_config_sys {
+    my ($lilo, $windrive, $label, $cmd) = @_;
+
     my $config_sys = "$windrive/config.sys";
     local $_ = cat_($config_sys);
     output "$windrive/config.mdk", $_ if $_;
     
     my $timeout = $lilo->{timeout} || 1;
-    my ($label, $cmd) = loadlin_cmd($prefix, $lilo);
 
     $_ = "
 [Menu]
@@ -669,12 +684,10 @@ menudefault=Windows,$timeout
 shell=$cmd
 ";
     output $config_sys, unix2dos($_);
-    output "/initrd/loopfs/lnx4win/linux.bat", unix2dos(
-'@echo off
-echo Linux Mandrake
-smartdrv /C
-' . "$cmd\n");
+}
 
+sub install_loadlin_desktop {
+    my ($lilo, $windrive) = @_;
     my $windir = lc(cat_("$windrive/msdos.sys") =~ /^WinDir=.:\\(\S+)/m ? $1 : "windows");
 
 #-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows 
@@ -690,8 +703,8 @@ IconFile=%s
 IconIndex=0
 ), lnx4win_file($lilo, "/", "/lnx4win.ico"));
     }
-
 }
+
 
 sub install {
     my ($prefix, $lilo, $fstab, $hds) = @_;

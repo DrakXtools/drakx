@@ -564,7 +564,7 @@ sub typeFromMagic($@) {
 }
 
 sub availableMemory() { sum map { /(\d+)/ } grep { /^(MemTotal|SwapTotal):/ } cat_("/proc/meminfo"); }
-sub availableRamMB()  { divide((stat("/proc/kcore"))[7], 1024 * 1024) + 1 }
+sub availableRamMB()  { 4 * int ((stat("/proc/kcore"))[7] / 1024 / 1024 / 4 + 0.5) }
 
 sub setVirtual($) {
     my $vt = '';
