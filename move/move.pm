@@ -33,7 +33,7 @@ sub init {
       foreach qw(alternatives shadow man.config services shells pam.d security inputrc ld.so.conf 
                  DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
                  dynamic gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
-                 skel ld.so.cache openoffice);
+                 skel ld.so.cache openoffice xinetd.d);
     symlinkf "/image/etc/X11/$_", "/etc/X11/$_"
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
 
