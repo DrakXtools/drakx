@@ -803,7 +803,7 @@ sub getAndSaveAutoInstallFloppy {
 	getAndSaveInstallFloppy($o, $imagefile) or return;
 
 	my $dev = devices::set_loop($imagefile) or log::l("couldn't set loopback device"), return;
-        fs::mount($dev, $mountdir, 'vfat', 0);
+        eval { fs::mount($dev, $mountdir, 'vfat', 0); 1 } or return;
 
 	substInFile { 
 	    s/timeout.*/$replay ? 'timeout 1' : ''/e;
