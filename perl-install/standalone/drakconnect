@@ -252,11 +252,7 @@ $button_apply->set_sensitive(0);
 $bbox0->add($button_apply);
 
 my $button_cancel = new Gtk2::Button(N("Cancel"));
-$button_cancel->signal_connect(clicked => sub {
-				     $combo1->entry->set_text($old_profile);
-				     update();
-				     quit_global();
-				 });
+$button_cancel->signal_connect(clicked => \&quit_global);
 $bbox0->add($button_cancel);
 my $button_ok = new Gtk2::Button(N("OK"));
 $button_ok->signal_connect(clicked => sub {
