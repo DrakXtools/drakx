@@ -288,6 +288,7 @@ sub setup {
 		my $packer = new packdrake("$ENV{SHARE_PATH}/keymaps.cz2");
 		$packer->extract_archive(undef, "$o->[1].bkmap");
 	    };
+	    c::_exit(0);
 	}
     }
     my $f = xmodmap_file($keyboard);

@@ -387,6 +387,7 @@ sub load_po($) {
 		    my $packer = new packdrake($f);
 		    $packer->extract_archive(undef, "$lang.po");
 		};
+		c::_exit(0);
 	    }
 	}
     } else {
