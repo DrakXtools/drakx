@@ -111,6 +111,7 @@ sub installBootloader {
 
     eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
+  retry:
     eval { 
 	my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
 	bootloader::install($b, $all_hds);
@@ -121,8 +122,22 @@ sub installBootloader {
 	$err =~ s/^\w+ failed// or die;
 	$err = formatError($err);
 	while ($err =~ s/^Warning:.*//m) {}
-	$in->ask_warn('', [ N("Installation of bootloader failed. The following error occurred:"), $err ]);
-	return;
+	if (my ($dev) = $err =~ /^Reference:\s+disk\s+"(.*?)".*^Is the above disk an NT boot disk?/ms) {
+	    if ($in->ask_yesorno('',
+formatAlaTeX(N("LILO wants to assign a new Volume ID to drive %s.  However, changing
+the Volume ID of a Windows NT, 2000, or XP boot disk is a fatal Windows error.
+This caution does not apply to Windows 95 or 98, or to NT data disks.
+
+Assign a new Volume ID?", $dev)))) {
+		$b->{force_lilo_answer} = 'n';
+	    } else {
+		$b->{'static-bios-codes'} = 1;
+	    }
+	    goto retry;
+	} else {
+	    $in->ask_warn('', [ N("Installation of bootloader failed. The following error occurred:"), $err ]);
+	    return;
+	}
     } elsif (arch() =~ /ppc/) {
 	my $of_boot = cat_("$::prefix/tmp/of_boot_dev") || die "Can't open $::prefix/tmp/of_boot_dev";
 	chop($of_boot);
