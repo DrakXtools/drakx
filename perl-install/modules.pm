@@ -243,11 +243,6 @@ sub text2driver($) {
 sub load($;$@) {
     my ($name, $type, @options) = @_;
 
-    $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name 
-      if $type eq 'scsi';
-
-    $conf{$name}{options} = join " ", @options if @options;
-
     if ($::testing) {
 	log::l("i try to install $name module");
     } else {
@@ -258,6 +253,11 @@ sub load($;$@) {
 	load($_, 'prereq') foreach @{$deps{$name}};
 	load_raw($name, @options);
     }
+
+    $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name 
+      if $type eq 'scsi';
+
+    $conf{$name}{options} = join " ", @options if @options;
 }
 
 sub unload($) { 

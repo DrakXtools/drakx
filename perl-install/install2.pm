@@ -249,7 +249,9 @@ my %suggestedPartitions = (
     { mntpoint => "/var",  size => 600 << 11, type => 0x83 }, 
     { mntpoint => "/home", size => 500 << 11, type => 0x83 }, 
   ],
-  expert => [],
+  expert => [
+    { mntpoint => "/",     size => 200 << 11, type => 0x83 }, 
+  ],
 );
 
 #-#######################################################################################
