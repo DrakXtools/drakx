@@ -58,6 +58,7 @@ $::prefix = "/tmp/live_tree";
     output_p("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
     installPackages();
     system("chroot $::prefix ldconfig");
+    system("chroot $::prefix update-menus");
     rm_rf("$::prefix/dev"); # we don't need it, we use devfs
 }
 
