@@ -976,10 +976,13 @@ sub new {
 	    if ($::isInstall) {
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
-		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot' }}{$event->keyval};
+		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot', $Gtk2::Gdk::Keysyms{Delete} => 'restart' }}{$event->keyval};
 		    if ($d eq 'screenshot') {
 			common::take_screenshot();
-		    }
+		    } elsif ($d eq 'restart' && $event->state >= ['control-mask', 'mod1-mask']) {
+			log::l("restarting install");
+                        $o->exit(0x35);
+ 		    }
 		    0;
 		});
 	    } elsif (!$o->{isEmbedded}) {
