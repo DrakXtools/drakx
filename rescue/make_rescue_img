@@ -112,6 +112,22 @@ installown("../mdk-stage1/dhcp-client", "/usr/sbin");
 #- note that on biarch systems, we may need to have both /lib and /lib64
 __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
+if ($ENV{PARTIMAGE_DIR}) {
+    _ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
+    my $server = 'partimaged';
+    $server = 'leia';
+    substInFile {
+	$_ = <<EOF if /^\s*rescue-gui/;
+  if grep -q save_all /proc/cmdline; then
+      drvinst ; dhcp-client ; partimage -s $server -b save_all $ENV{PARTIMAGE_DIR}; reboot
+  fi
+  if grep -q rest_all /proc/cmdline; then
+      drvinst ; dhcp-client ; partimage -s $server -b rest_all $ENV{PARTIMAGE_DIR}; reboot
+  fi
+EOF
+    } "$tmp/etc/rc.sysinit";
+}
+
 exit 0 if $ARGV[0];
 
 _ "mkisofs -quiet -D -R $tmp | create_compressed_fs - 65536 $rescue 200 2>/dev/null";

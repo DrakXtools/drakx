@@ -1,0 +1,37 @@
+#!/bin/sh
+
+[ $# != 1 ] && { 
+    echo "usage: make_partimage_save_rest_all <partimage special rpm>" ; 
+    exit 1
+}
+
+rpm=$1
+where=/data/box
+
+rm -rf .tmp
+mkdir -p .tmp/isolinux
+cp -f /usr/lib/syslinux/isolinux.bin ../isolinux/alt0/* .tmp/isolinux
+
+PARTIMAGE_DIR="$where" PARTIMAGE_RPM=$rpm DISTRIB_DESCR="partimage save/restore all" ./make_rescue_img
+mkdir -p .tmp/install/stage2
+mv -f rescue.clp .tmp/install/stage2
+
+for action in save_all rest_all; do
+
+    cat <<EOF > .tmp/isolinux/isolinux.cfg
+default $action
+prompt 1
+timeout 150
+
+label save_all
+  kernel vmlinuz
+  append initrd=all.rdz rescue save_all automatic=method:cdrom
+label rest_all
+  kernel vmlinuz
+  append initrd=all.rdz rescue rest_all automatic=method:cdrom
+EOF
+
+    mkisofs -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandrakesoft -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
+done
+ 
+rm -rf .tmp
