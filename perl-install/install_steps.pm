@@ -352,7 +352,7 @@ sub readBootloaderConfigBeforeInstall {
 	if ($o->{bootloader}{entries}{"/boot/$image"} && $o->{packages}{$ofpkgs{$image}}{selected}) {
 	    $v = readlink "$o->{prefix}/boot/$image";
 	    if ($v) {
-		$v = "/boot/$v" if $v !~ m@/@;
+		$v = "/boot/$v" if $v !~ m|^/|;
 		if (-e "$o->{prefix}$v") {
 		    $o->{bootloader}{entries}{$v} = $o->{bootloader}{entries}{"/boot/$image"};
 		    delete $o->{bootloader}{entries}{"/boot/$image"};
