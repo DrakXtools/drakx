@@ -183,6 +183,9 @@ sub set_options {
     log::l(qq(set option "$new_option" for module "$name"));
     $conf{$name}{options} = $new_option;
 }
+sub get_parameters {
+    map { if_(/(.*)=(.*)/, $1 => $2) } split(' ', get_options($_[0]));
+}
 sub set_alias { 
     my ($alias, $module) = @_;
     $module =~ /ignore/ and return;
@@ -423,6 +426,9 @@ sub when_load_category {
     }
 }
 
+#-###############################################################################
+#- isInstall functions
+#-###############################################################################
 sub cz_file() { 
     "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz-" . c::kernel_version();
 }
@@ -468,10 +474,5 @@ sub load_raw {
     die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
 
 }
-
-sub get_parameters {
-    map { if_(/(.*)=(.*)/, $1 => $2) } split(' ', get_options($_[0]));
-}
-
 
 1;
