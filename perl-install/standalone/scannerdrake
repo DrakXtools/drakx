@@ -19,11 +19,11 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 use lib qw(/usr/lib/libDrakX);
-
+use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use common;
 
 use interactive;
-use common;
 use scanner;
 use handle_configs;
 use services;
@@ -45,6 +45,7 @@ if (!files_exist('/usr/bin/scanimage',
 			      'xsane-gimp'));
 }
 if ($::Manual) { manual(); quit() }
+$::CCPID and $0 !~ /logdrake/ and kill 'USR2', $::CCPID;
 my $wait = $in->wait_message(N("Scannerdrake"),
 			     N("Searching for configured scanners ..."));
 my @c = scanner::configured();
@@ -233,7 +234,7 @@ sub tryConfScanner {
 }
 
 sub quit {
-    $::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
+    $in->exit(0);
 }
 
 sub mainwindow {
