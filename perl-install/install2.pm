@@ -490,6 +490,7 @@ sub main {
 	log::l("brltty option $driver $device $table");
 	$o->{brltty} = { driver => $driver, device => $device, table => $table };
 	$o->{interactive} = 'newt';
+	$o->{nomouseprobe} = 1;
     }
 
     # perl_checker: require install_steps_gtk
