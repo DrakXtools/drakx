@@ -468,7 +468,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o fix missing banner title
 - net_applet: tell when internet connection is not configured (blino)
 - printerdrake: misc enhancements (till)
-- service_harddrake: ad modules to conf files if a tv card is detected (blino)
+- service_harddrake: add modules to conf files if a tv card is detected (blino)
 
 * Tue Aug 31 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.18mdk
 - drakclock (warly):
