@@ -177,8 +177,9 @@ noaccomp -am
 novjccomp),
                    aliases => [
                                ['char-major-108', 'ppp_generic'],
-                               ['tty-ldisc-14', 'ppp_synctty'],
-                               ['tty-ldisc-13', 'n_hdlc']
+                               ['tty-ldisc-3', 'ppp_async'],
+                               ['tty-ldisc-13', 'n_hdlc'],
+                               ['tty-ldisc-14', 'ppp_synctty']
                               ],
                   },
                   eci =>
