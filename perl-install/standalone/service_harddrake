@@ -27,7 +27,11 @@ my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
 my $curr_kernel = c::kernel_version();
 $curr_kernel =~ s/(^\d+\.\d+).*/\1/;
 setVarsInSh("$hw_sysconfdir/kernel", KERNEL => $curr_kernel);
-system("mousedrake --auto") if $curr_kernel ne $prev_kernel;
+if ($curr_kernel ne $prev_kernel) {
+    require class_discard;
+    require mouse;
+    mouse::write_conf(class_discard->new, mouse::detect(), 1);
+}
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
     if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
