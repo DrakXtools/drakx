@@ -284,7 +284,8 @@ sub create_okcancel {
     $::isWizard and $ok = _("Next ->");
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel || _("Cancel")), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
-    my @l = grep { $_ } ($b1, $b2);
+    $::isWizard and my $b3 = gtksignal_connect($w->{previous} = new Gtk::Button(_("<- Previous")), clicked => $w->{previous_clicked} || sub { log::l("default previous_clicked"); $w->{retval} = -1; Gtk->main_quit });
+    my @l = grep { $_ } $::isWizard ? ($b2, $b3, $b1): ($b1, $b2);
     push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
 
     $_->can_default($::isWizard) foreach @l;

@@ -267,7 +267,7 @@ sub ask_from_entries_refW {
 		$w->add($e->{icon});
 		$e->{icon}->show;
 	    };
-	    $w->signal_connect(clicked => sub {		
+	    $w->signal_connect(clicked => sub {
 		$set->(${$e->{val}} = next_val_in_array(${$e->{val}}, $e->{list}));
 		$changed->();
 	    });
