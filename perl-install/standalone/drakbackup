@@ -988,7 +988,7 @@ sub check_for_cd() {
 	}
 	 
 	if ($multi_session) {
-		$command = "cdrecord dev=$cd_device -msinfo";
+		$command = "cdrecord -s dev=$cd_device -msinfo";
 		spawn_progress($command, "Check for previous session status");
 		#- if we don't find a previous session, start fresh
 		if ($log_buff =~ /Cannot read session offset/) {
