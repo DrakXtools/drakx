@@ -190,7 +190,6 @@ sub selectInstallClass {
       ),
       if_($o->{meta_class} ne 'desktop',
 	_("Customized")  => "specific",
-	_("Expert")	 => "expert",
       ),
     );
     %c = @c = (_("Expert") => "expert") if $::expert && !$clicked;
@@ -213,7 +212,7 @@ are you ready to answer that kind of questions?"),
 					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
 					      [ __("Install"), __("Update") ], $o->{isUpgrade} ? "Update" : "Install") eq "Update";
 
-    if ($::corporate || $::beginner) {
+    if ($::corporate || !$::expert) {
 	delete $o->{installClass};
     } else {
 	my %c = (
