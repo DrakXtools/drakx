@@ -558,10 +558,11 @@ sub main {
 	eval {
 	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};
+	my $err = $@;
 	$o->kill_action;
 	$clicked = 0;
-	while ($@) {
-	    local $_ = $@;
+	if ($err) {
+	    local $_ = $err;
 	    $o->kill_action;
 	    if (/^setstep (.*)/) {
 		$o->{step} = $1;
@@ -572,7 +573,8 @@ sub main {
 	    /^theme_changed$/ and redo MAIN;
 	    unless (/^already displayed/) {
 		eval { $o->errorInStep($_) };
-		$@ and next;
+		$err = $@;
+		$err and next;
 	    }
 	    $o->{step} = $o->{steps}{$o->{step}}{onError};
 	    next MAIN unless $o->{steps}{$o->{step}}{reachable}; #- sanity check: avoid a step not reachable on error.
