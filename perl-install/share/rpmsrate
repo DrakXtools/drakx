@@ -631,11 +631,15 @@ SYSTEM
 
   5 GNOME || KDE magicdev
 
-  5 DRIVER"^ISDN:" ibod isdn4net isdn-light isdn4k-utils kernel-2.4
-  5 DRIVER"^Hcf:|^Hsf:|^LT:" kernel-2.4
+  5 DRIVER"^ISDN:" ibod isdn4net isdn-light isdn4k-utils
   5 DRIVER"adiusbadsl" eagle-usb
+  5 DRIVER"speedtch" speedtouch speedtouch_mgmt
+  5 DRIVER"^ISDN:|^Hcf:|^Hsf:|^LT:|speedtch"
+      kernel-2.4
+      SMP kernel-smp-2.4
+      BIGMEM kernel-enterprise-2.4
+
   5 HW"Intel Corp.|PRO/Wireless LAN" ndiswrapper
-  5 DRIVER"speedtch" speedtouch speedtouch_mgmt kernel-2.4
 
   4 ftp-client-krb5 hexedit strace sudo grub procmail hdparm coreutils-doc
   4 PCMCIA netprofile
