@@ -780,9 +780,10 @@ Do you want to install the updates ?")),
 	eval {
 	    my @mirrors = do {
 		my $_w = $o->wait_message('', N("Contacting Mandrake Linux web site to get the list of available mirrors..."));
-		crypto::mirrors() };
+		crypto::mirrors($o->{distro_type});
+	    };
 	    #- if no mirror have been found, use current time zone and propose among available.
-	    $u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone});
+	    $u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone}, $o->{distro_type});
 	    $o->ask_from_({ messages => N("Choose a mirror from which to get the packages"),
 			    cancel => N("Cancel"),
 			  }, [ { separator => '|',

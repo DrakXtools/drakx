@@ -3,7 +3,7 @@ package crypto; # $Id$
 use diagnostics;
 use strict;
 
-use vars qw($o %url2land %land2tzs %static_mirrors %mirrors);
+use vars qw(%url2land %land2tzs %static_mirrors %mirrors);
 
 use MDK::Common::System;
 use common;
@@ -45,7 +45,9 @@ use ftp;
 %mirrors = ();
 
 sub mirror2text { $mirrors{$_[0]} && $mirrors{$_[0]}[0] . '|' . $_[0] }
-sub mirrors() {
+sub mirrors {
+    my ($o_distro_type) = @_;
+
     unless (keys %mirrors) {
 	#- contact the following URL to retrieve list of mirror.
 	#- http://www.linux-mandrake.com/mirrorsfull.list
@@ -54,9 +56,9 @@ sub mirrors() {
 
 	local $SIG{ALRM} = sub { die "timeout" };
 	alarm 60;
-	my $type = $o->{distro_type} || 'updates';
+	my $distro_type = $o_distro_type || 'updates';
 	foreach (<$f>) {
-	    my ($arch, $url, $dir) = m|$type([^:]*):ftp://([^/]*)(/\S*)| or next;
+	    my ($arch, $url, $dir) = m|$distro_type([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
 		log::l("ignoring updates from $url because of incompatible arch: $arch"), next;
 	    my $land = N("United States");
@@ -76,12 +78,12 @@ sub mirrors() {
 }
 
 sub bestMirror {
-    my ($string) = @_;
+    my ($string, $o_distro_type) = @_;
     my %mirror2value;
 
-    foreach my $url (mirrors()) {
+    foreach my $url (mirrors($o_distro_type)) {
 	my $value = 0;
-	my $cvalue = mirrors();
+	my $cvalue = mirrors($o_distro_type);
 
 	$mirror2value{$url} ||= 1 + $cvalue;
 	foreach (@{$land2tzs{$mirrors{$url}[0]} || []}) {
