@@ -89,6 +89,9 @@ sub get_subwizard {
       my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
+      my $db_path = "/usr/share/apps/kppp/Provider";
+      my (%countries, @isp, $country, $provider, $old_provider);
+
 
       my %wireless_mode = (N("Ad-hoc") => "Ad-hoc", 
                            N("Managed") => "Managed", 
@@ -353,7 +356,7 @@ Take a look at http://www.linmodems.org"),
                     post => sub {
                         $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
 
-                        return "ppp_account" if $ntf_name =~ m!^/dev/!;
+                        return "ppp_provider" if $ntf_name =~ m!^/dev/!;
                         return "choose_serial_port" if !$ntf_name;
 
                         my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
@@ -375,7 +378,7 @@ Take a look at http://www.linmodems.org"),
                         #$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
 
                         #- fallback to modem configuration (beware to never allow test it).
-                        return "ppp_account";
+                        return "ppp_provider";
                     },
                    },
 
@@ -391,8 +394,43 @@ Take a look at http://www.linmodems.org"),
                         [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
                             list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
                         },
-                    next => "ppp_account",
+                    next => "ppp_provider",
                    },
+
+
+                   ppp_provider =>
+                   {
+                    pre => sub {
+                        @isp = map {
+                            my $country = $_;
+                            map { 
+                                s!$db_path/$country!!;
+                                s/%([0-9]{3})/chr(int($1))/eg;
+                                $countries{$country} ||= translate($country);
+                                join('', $countries{$country}, $_);
+                            } glob_("$db_path/$country/*")
+                        } map { s!$db_path/!!o; s!_! !g; $_ } glob_("$db_path/*");
+                        $old_provider = $provider;
+                    },
+                    name => N("Select your provider:"),
+                    data => sub {
+                        [ { label => N("Provider:"), type => "list", val => \$provider, separator => '/', list => \@isp } ]
+                    },
+                    post => sub {
+                        ($country, $provider) = split('/', $provider);
+                        $country = { reverse %countries }->{$country};
+                        my %l = getVarsFromSh("$db_path/$country/$provider");
+                        if ($old_provider ne $provider) {
+                            $modem->{connection} = $l{Name};
+                            $modem->{phone} = $l{Phonenumber};
+                            $modem->{auth} = $l{Authentication};
+                            $modem->{$_} = $l{$_} foreach qw(AutoName Domain Gateway IPAddr SubnetMask);
+                            ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
+                        }
+                        return "ppp_account";
+                    },
+                   },
+
 
                    ppp_account =>
                    {
