@@ -1886,9 +1886,15 @@ sub setup_common {
 		(N("Printerdrake"),
 		 N("Checking device and configuring HPOJ..."))
 		if !$printer->{noninteractive};
-	    $ptaldevice = printer::main::configure_hpoj
-		($device, @autodetected) if !$hpojinstallfailed;
 	    
+	    eval {$ptaldevice = printer::main::configure_hpoj
+		      ($device, @autodetected) if !$hpojinstallfailed;};
+
+	    if (my $err = $@) {
+		warn qq(HPOJ conf faillure: "$err");
+		log::l(qq(HPOJ conf faillure: "$err"));
+	    }
+
 	    if ($ptaldevice) {
 		# Configure scanning with SANE on the MF device
 		if ($makemodel !~ /HP\s+PhotoSmart/i &&
@@ -1926,7 +1932,10 @@ sub setup_common {
 		# Configure photo card access with mtools and MToolsFM
 		if (($makemodel =~ /HP\s+PhotoSmart/i ||
 		     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
+		     $makemodel =~ /HP\s+PSC\s*135\d/i ||
+		     $makemodel =~ /HP\s+PSC\s*21[57]\d/i ||
 		     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
+		     $makemodel =~ /HP\s+PSC\s*2[45]\d\d/i ||
 		     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
 		     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
 		     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
@@ -2547,6 +2556,17 @@ my %lexmarkinkjet_options = (
                              'file:/dev/usb/lp2' => " -o Port=USB3",
                              );
 
+my %drv_x125_options = (
+                             'usb:/dev/usb/lp0' => " -o Device=usb_lp1",
+                             'usb:/dev/usb/lp1' => " -o Device=usb_lp2",
+                             'usb:/dev/usb/lp2' => " -o Device=usb_lp3",
+                             'usb:/dev/usb/lp3' => " -o Device=usb_lp3",
+                             'file:/dev/usb/lp0' => " -o Device=usb_lp1",
+                             'file:/dev/usb/lp1' => " -o Device=usb_lp2",
+                             'file:/dev/usb/lp2' => " -o Device=usb_lp3",
+                             'file:/dev/usb/lp3' => " -o Device=usb_lp3",
+                             );
+
 sub get_printer_info {
     my ($printer, $in) = @_;
     my $queue = $printer->{OLD_QUEUE};
@@ -2685,6 +2705,31 @@ sub get_printer_info {
 		    $in->ask_warn(N("Lexmark inkjet configuration"),
 				  N("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Click on the \"Drivers\" link. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
 		}
+	    } elsif ($printer->{currentqueue}{driver} eq 'drv_x125') {
+		# Set "Device" option
+		my $opt =
+		    $drv_x125_options{$printer->{currentqueue}{connect}};
+		if ($opt) {
+		    $printer->{SPECIAL_OPTIONS} .= $opt;
+		} else {
+		    $in->ask_warn(N("Lexmark X125 configuration"),
+				  N("The driver for this printer only supports printers locally connected via USB, no printers on remote machines or print server boxes. Please connect your printer to a local USB port or configure it on the machine where it is connected to."));
+		    return 0;
+		}
+		# Set device permissions
+		if ($printer->{currentqueue}{connect} =~ 
+		    /^\s*(file|parallel|usb):(\S*)\s*$/) {
+              if ($printer->{SPOOLER} eq 'cups') {
+                  set_permissions($2, '660', 'lp', 'sys');
+              } elsif ($printer->{SPOOLER} eq 'pdq') {
+                  set_permissions($2, '666');
+              } else {
+                  set_permissions($2, '660', 'lp', 'lp');
+              }
+		}
+		# This is needed to have the device not blocked by the
+		# spooler backend.
+		$printer->{currentqueue}{connect} = 'file:/dev/null';
 	    } elsif ($printer->{currentqueue}{printer} eq 'HP-LaserJet_1000') {
 		$in->ask_warn(N("Firmware-Upload for HP LaserJet 1000"),
 			      $hp1000fwtext);
@@ -3255,7 +3300,10 @@ sub photocard_help {
 	my $ptaldevice = $1;
 	if (($makemodel =~ /HP\s+PhotoSmart/i ||
 	     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
+	     $makemodel =~ /HP\s+PSC\s*135\d/i ||
+	     $makemodel =~ /HP\s+PSC\s*21[57]\d/i ||
 	     $makemodel =~ /HP\s+PSC\s*22\d\d/i ||
+	     $makemodel =~ /HP\s+PSC\s*2[45]\d\d/i ||
 	     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
 	     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
 	     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
