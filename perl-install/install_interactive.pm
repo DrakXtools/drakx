@@ -61,7 +61,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 	if (!grep { isSwap($_) } @fstab) {
 	    $o->ask_warn('', _("You must have a swap partition")), $ok = 0 if !$::expert;
-	    $ok &&= $::expert || $o->ask_okcancel('', _("You don't have a swap partition.\n\nContinue anyway?"));
+	    $ok &&= $o->ask_okcancel('', _("You don't have a swap partition.\n\nContinue anyway?"));
 	}
 	if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $all_hds)) {
 	    $o->ask_warn('', _("You must have a FAT partition mounted in /boot/efi"));
