@@ -274,6 +274,7 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char 
 				sprintf(alias, "alias scsi_hostadapter %s", mod_name);
 			number_scsi++;
 			add_modules_conf(alias);
+			log_message("SCSI: %s", alias);
 		}
 #endif
 #ifndef DISABLE_NETWORK
