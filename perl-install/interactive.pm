@@ -122,7 +122,14 @@ sub leave_console {}
 sub suspend {}
 sub resume {}
 sub end {}
-sub exit { exit($_[0]) }
+sub exit {
+    if ($::isStandalone) {
+        require standalone;
+        standalone::exit($_[0]);
+    } else {
+        exit($_[0])
+    }
+}
 
 #-######################################################################################
 #- Interactive functions

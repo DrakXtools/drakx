@@ -883,7 +883,12 @@ sub shrink_topwindow {
 sub exit {
     gtkset_mousecursor_normal(); #- for restoring a normal in any case
     flush();
-    c::_exit($_[1]); #- workaround 
+    if ($::isStandalone) {
+        require standalone;
+        standalone::__exit($_[1]); #- workaround
+    } else {
+        c::_exit($_[1]); #- workaround
+    }
 }
 
 #- in case "exit" above was not called by the program
