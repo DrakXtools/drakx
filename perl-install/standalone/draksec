@@ -41,15 +41,10 @@ my $w;
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
     my $mainw = ugtk2->new('wait', (modal => 1, if_(!$::isEmbedded, transient => $w->{rwindow})));
-    my $label = new Gtk2::Label($_[0]);
-    $mainw->{window}->add($label);
-    $mainw->{window}->show_all;
-    $mainw->{window}->realize;
-    $label->signal_connect(expose_event => sub { $mainw->{displayed} = 1 });
-    $mainw->sync until $mainw->{displayed};
-    $mainw->show;
+    $mainw->{window}->add(new Gtk2::Label($_[0]));
+    $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
-    $mainw->flush;
+    gtkflush();
     $mainw;
 }
 
