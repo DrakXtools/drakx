@@ -210,7 +210,7 @@ sub initrd {
 sub entries_append {
     my ($type) = @_;
 
-    my $automatic = $type =~ /cdrom|^all/ ? 'automatic=method:cdrom ' : '';
+    my $automatic = $type =~ /cdrom/ ? 'automatic=method:cdrom ' : '';
     $automatic .= 'changedisk ' if $type =~ /changedisk/;
 
     my @simple_entries = (
@@ -229,6 +229,21 @@ sub entries_append {
 
     map { { label => $_->[0], append => "$default_append $_->[1]" } }
       group_by2(@entries);
+}
+
+sub syslinux_cfg_all {
+    my ($type) = @_;
+
+    syslinux_cfg(150, [
+	(map {
+	    { kernel => 'alt0/vmlinuz', initrd => 'alt0/all.rdz', %$_ };
+	} entries_append($type)),
+	(map_index {
+	    { label => "alt$::i", kernel => "alt$::i/vmlinuz", initrd => "alt$::i/all.rdz", 
+	      append => "$default_append $default_acpi $default_vga" };
+	} @kernels),
+	{ label => 'memtest', kernel => 'test/memtest.bin' },
+    ]);
 }
 
 sub boot_img_i386 {
@@ -704,17 +719,7 @@ sub isolinux {
 
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
     _ "install -m 644 -D /boot/memtest* isolinux/test/memtest.bin";
-    output("isolinux/isolinux.cfg", 
-	   syslinux_cfg(150, [
-	       (map {
-		   { kernel => 'alt0/vmlinuz', initrd => 'alt0/all.rdz', %$_ };
-	       } entries_append('all')),
-	       (map_index {
-		   { label => "alt$::i", kernel => "alt$::i/vmlinuz", initrd => "alt$::i/all.rdz", 
-		     append => "$default_append $default_acpi $default_vga" };
-	       } @kernels),
-	       { label => 'memtest', kernel => 'test/memtest.bin' },
-	   ]));
+    output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom'));
 
     output("isolinux/help.msg", syslinux_msg('help.msg.xml'));
     output("isolinux/advanced.msg", syslinux_msg('advanced.msg.xml', 
@@ -791,12 +796,7 @@ EOF
 sub boot_iso {
     my ($iso, $bootcdrom, $kernels) = @_;
 
-    my $cfg = cat_('isolinux/isolinux.cfg') or die 'isolinux missing';
-    if ($bootcdrom) {
-	$cfg =~ s/(automatic=method:\w+)/changedisk $1/gm;
-    } else {
-	$cfg =~ s/(automatic=method:\w+)//gm;
-    }
+    -e 'isolinux/isolinux.cfg' or die 'isolinux missing';
 
     eval { rm_rf('.boot_iso') };
     mkdir_p('.boot_iso/isolinux');
@@ -809,7 +809,7 @@ sub boot_iso {
    
     my $cfg_file = '.boot_iso/isolinux/isolinux.cfg';
     unlink $cfg_file;
-    output($cfg_file, $cfg);
+    output($cfg_file, syslinux_cfg_all('cdrom-changedisk'));
 
     _ "mkisofs -r -f -J -cache-inodes -V 'Mdk Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
     rm_rf('.boot_iso');
