@@ -222,7 +222,7 @@ sub spawnShell() {
     my @args; -e '/etc/bashrc' and @args = qw(--rcfile /etc/bashrc);
     foreach (qw(/bin/bash /usr/bin/busybox /bin/sh)) {
         -x $_ or next;
-        exec { $_ } $_ =~ /busybox/ ? "/bin/sh" : $_, @args or log::l("exec of $_ failed: $!");
+        exec { $_ } /busybox/ ? "/bin/sh" : $_, @args or log::l("exec of $_ failed: $!");
     }
     die "cannot open shell";
 }
