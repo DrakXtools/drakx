@@ -32,204 +32,161 @@ sub exit() { end; exit($_[0]) }
 END { end() }
 
 sub myTextbox {
-    my @l = map { split "\n" } @_;
-    my $mess = Newt::Component::Textbox(1, 0, my $w = max(map { length } @l) + 1, my $h = @l, 1 << 6);
+    my @l = map { /(.{1,$width})/g } map { split "\n" } @_;
+    my $h = min($height, int @l);
+    my $flag = 1 << 6; $flag |= 1 << 2 if $h < @l; #- NEWT_FLAG_SCROLL
+    my $mess = Newt::Component::Textbox(1, 0, my $w = max(map { length } @l) + 1, $h, $flag);
     $mess->TextboxSetText(join("\n", @_));
     $mess, $w + 1, $h;
 }
 
-sub separator($$) {
+sub separator {
     my $blank = Newt::Component::Form(\undef, '', 0);
     $blank->FormSetWidth ($_[0]);
     $blank->FormSetHeight($_[1]);
     $blank;
 }
-sub checkval($) { $_[0] && $_[0] ne ' '  ? '*' : ' ' }
-
-sub ask_from_listW {
-    my ($o, $title_, $messages, $l, $def) = @_;
-    my ($title, @okcancel) = ref $title_ ? @$title_ : ($title_, _("Ok"), _("Cancel"));
-
-    my $mesg = join("\n", @$messages);
-    my $len = 0; $len += length($_) foreach @$l;
-
-    if (@$l == 1) {
-	Newt::WinMessage($title, @$l, $mesg);
-	$l->[0];
-#- because newt will not try to remove window if bigger than screen !
-    } elsif (@$l == 2 && $len < 64) {
-	$l->[Newt::WinChoice($title, @$l, $mesg) - 1];
-#- because newt will not try to remove window if bigger than screen !
-    } elsif (@$l == 3 && $len < 64) {
-	$l->[Newt::WinTernary($title, @$l, $mesg) - 1];
-    } else {
-	my $special = !@okcancel;
-	if ($special) {
-	    $l = [ @$l ];
-	    @okcancel = pop @$l;
-	}
-	my $i; map_index { $i = $::i if $def eq $_ } @$l;
-	my ($r, $e) = Newt::WinMenu($title, $mesg, 40, 5, 5, 8, $l, $i, @okcancel);
-	$r > 1 and die "ask_from_list cancel";
-	if ($special) {
-	    $r ? $okcancel[0] : $l->[$e];
-	} else {
-	    $l->[$e];
-	}
-    }
-}
-
-sub ask_many_from_listW {
-    my ($o, $title, $messages, $l) = @_;
-    my ($list, $val) = ($l->{labels}, $l->{ref});
-    my $height = min(int @$list, 18);
-    
-    my $sb = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10);
-    my $checklist = $sb->Form('', 0);
-    $checklist->FormSetHeight($height);
-    $checklist->FormSetBackground(9);
-
-    my @l = map_index {	
-	Newt::Component::Checkbox(1, $::i + 1, $_, checkval(${$val->[$::i]} ||= ''), " *");
-    } @$list;
-    $checklist->FormAddComponent($_) foreach @l;
-
-    my $listg = Newt::Grid::HCloseStacked($checklist, $height < @$list ? (separator(1, $height), $sb) : ());
-
-    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar(_("Ok"), _("Cancel"));
-
-    my $form = Newt::Component::Form(\undef, '', 0);
-    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@$messages)), $listg, $buttons);
-    $window->GridWrappedWindow($title);
-    $window->GridAddComponentsToForm($form, 1);
-    my $r = $form->RunForm;
-
-    $form->FormDestroy;
-    Newt::PopWindow;
-
-    $$r == $$cancel and return;
-
-    mapn {
-	my ($a, $b) = @_;
-	$$a = $b->CheckboxGetValue == ord '*';
-    } $val, \@l;
-
-    1;
-}
-
+sub checkval { $_[0] && $_[0] ne ' '  ? '*' : ' ' }
 
 sub ask_from_entries_refW {
-    my ($o, $title, $messages, $l, $val, %hcallback) = @_;
-    my ($title_, @okcancel) = deref($title);
+    my ($o, $common, $l, $l2) = @_;
     my $ignore; #-to handle recursivity
     my $old_focus = -2;
 
     #-the widgets
-    my @widgets = map {
-#-	$_->{type} = "entry" if $_->{type} eq "list" && !$_->{not_edit};
-	${$_->{val}} ||= '';
-	if ($_->{type} eq "list") {
-	    my $w = Newt::Component::Listbox(-1, -1, 1, 0);
-	    $w->ListboxSetWidth(20);
-	    $w->ListboxAddEntry($_) foreach @{$_->{list}};
-	    $w;
-	} elsif ($_->{type} eq "bool") {
-	    Newt::Component::Checkbox(-1, -1, $_->{text} || '', checkval(${$_->{val}}), " *");
-	} else {
-	    Newt::Component::Entry(-1, -1, '', 20, ($_->{hidden} && 1 << 1) | 1 << 2);
-	}
-    } @$val;
+    my (@widgets, $total_size);
 
-    my @updates = mapn {
-	 my ($w, $ref) = @_;
-	 sub {
-	     ${$ref->{val}} = 
-	       $ref->{type} eq "bool" ?
-	         $w->CheckboxGetValue == ord '*' :
-	       $ref->{type} eq "list" ?
-	         $w->ListboxGetCurrent :
-		 $w->EntryGetValue;
-	 };
-    } \@widgets, $val;
+    my $set_all = sub {
+	$ignore = 1;
+	$_->{set}->(${$_->{e}{val}}) foreach @widgets;
+#	$_->{w}->set_sensitive(!$_->{e}{disabled}()) foreach @widgets;
+	$ignore = 0;
+    };
+    my $get_all = sub {
+	${$_->{e}{val}} = $_->{get}->() foreach @widgets;
+    };
+    my $create_widget = sub {
+	my ($e, $ind) = @_;
 
-    my @updates_inv = mapn {
-	 my ($w, $ref) = @_;
-	 sub {
-	     my $val = ${$ref->{val}};
-	     $ignore = 1;
-	     if ($ref->{type} eq "bool") {
-		 $w->CheckboxSetValue(checkval($val));
-	     } elsif ($ref->{type} eq "list") {
-		 map_index {
-		     $w->ListboxSetCurrent($::i) if $val eq $_;
-		 } @{$ref->{list}};
-	     } else {
-		 $w->EntrySet($val, 1);
-	     }
-	     $ignore = 0;
-	 };
-    } \@widgets, $val;
+	$e->{type} = 'list' if $e->{type} =~ /(icon|tree)list/;
 
-    &$_ foreach @updates_inv;
+	#- combo doesn't exist, fallback to a sensible default
+	$e->{type} = $e->{not_edit} ? 'list' : 'entry' if $e->{type} eq 'combo';
 
-    #- !! callbacks must be kept in a list otherwise perl will free them !!
-    #- (better handling of addCallback needed)
-    my @callbacks = map_index {
-	my $ind = $::i;
-	sub {
-	    return if $ignore; #-handle recursive deadlock
+	my $changed = sub {
+	    return if $ignore;
 	    return $old_focus++ if $old_focus == -2; #- handle special first case
-
-	    &$_ foreach @updates;
+	    $get_all->();
 
 	    #- TODO: this is very rough :(
-	    if ($old_focus == $ind) {
-		$hcallback{changed}->($ind) if $hcallback{changed};
-	    } else {
-		$hcallback{focus_out}->($ind) if $hcallback{focus_out};
-	    }
-	    &$_ foreach @updates_inv;
+	    $common->{callbacks}{$old_focus == $ind ? 'changed' : 'focus_out'}->($ind);
+
+	    $set_all->();
 	    $old_focus = $ind;
 	};
-    } @widgets;
-    map_index { $_->addCallback($callbacks[$::i]) } @widgets;
 
-    my $grid = Newt::Grid::CreateGrid(3, int @$l);
-    map_index {
-	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label(-1, -1, $_)}, 0, 0, 1, 0, 1, 0);
-	$grid->GridSetField(1, $::i, 1, ${$widgets[$::i]}, 0, 0, 0, 0, 1, 0);
-    } @$l;
-
-    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar(@okcancel);
-
-    my $form = Newt::Component::Form(\undef, '', 0) or die;
-    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@$messages)), $grid, $buttons);
-    $window->GridWrappedWindow($title_);
-    $window->GridAddComponentsToForm($form, 1);
-
-  run:
-    my $r = $form->RunForm;
-    &$_ foreach @updates;
-
-    if ($$r != $$cancel && $hcallback{complete}) {
-	my ($error, $focus) = $hcallback{complete}->();
-
-	if ($val->[$focus]{hidden}) {
-	    #-reset all hidden to null, newt doesn't display null entries, disturbing
-	    $_->{hidden} and ${$_->{val}} = '' foreach @$val;
+	my ($w, $real_w, $set, $get, $expand, $size);
+	if ($e->{type} eq 'bool') {
+	    $w = Newt::Component::Checkbox(-1, -1, $e->{text} || '', checkval(${$e->{val}}), " *");
+	    $set = sub { $w->CheckboxSetValue(checkval($_[0])) };
+	    $get = sub { $w->CheckboxGetValue == ord '*' };
+#	 } elsif ($e->{type} eq 'range') {
+#	     my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
+#	     $adj->signal_connect(value_changed => $changed);
+#	     $w = new Gtk::HScale($adj);
+#	     $w->set_digits(0);
+#	     $w->signal_connect(key_press_event => $may_go_to_next);
+#	     $set = sub { $adj->set_value($_[0]) };
+#	     $get = sub { $adj->get_value };
+	 } elsif ($e->{type} =~ /list/) {
+	    my ($h, $wi) = (5, 20);
+	    $w = Newt::Component::Listbox(-1, -1, $h, @{$e->{list}} > $h ? 1 << 2 : 0); #- NEWT_FLAG_SCROLL	    
+	    foreach (@{$e->{list}}) {
+		my $t = may_apply($e->{format}, $_);
+		$w->ListboxAddEntry($t, $_);
+		$wi = max($wi, length $t);
+	    }
+	    $w->ListboxSetWidth($wi + 3); # 3 added for the scrollbar (?)
+	    $get = sub { $w->ListboxGetCurrent };
+	    $set = sub {
+		my ($val) = @_;
+		map_index {
+		    $w->ListboxSetCurrent($::i) if $val eq $_;
+		} @{$e->{list}};
+	    };
+	} else {
+	    $w = Newt::Component::Entry(-1, -1, '', 20, ($e->{hidden} && 1 << 11) | 1 << 2);
+	    $get = sub { $w->EntryGetValue };
+	    $set = sub { $w->EntrySet($_[0], 1) };
 	}
+	$total_size += $size || 1;
 
-	#-update all the value
-	&$_ foreach @updates_inv;
-	goto run if $error;
-    }
+	#- !! callbacks must be kept otherwise perl will free them !!
+	#- (better handling of addCallback needed)
+
+	{ e => $e, w => $w, real_w => $real_w || $w, expand => $expand, callback => $changed,
+	  get => $get || sub { ${$e->{val}} }, set => $set || sub {} };
+    };
+    @widgets = map_index { $create_widget->($_, $::i) } @$l;
+
+    $_->{w}->addCallback($_->{callback}) foreach @widgets;
+
+    $set_all->();
+
+    my $grid = Newt::Grid::CreateGrid(3, max(1, int @$l));
+    map_index {
+	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label(-1, -1, $_->{e}{label})}, 0, 0, 1, 0, 1, 0);
+	$grid->GridSetField(1, $::i, 1, ${$_->{real_w}}, 0, 0, 0, 0, 1, 0);
+    } @widgets;
+
+    my $listg = do {
+	my $height = 18;
+	#- use a scrolled window if there is a lot of checkboxes (aka ask_many_from_list)
+	#- !! works badly together with list's :-(
+	if ((grep { $_->{type} eq 'bool' } @$l) > 6 && $total_size > $height) {
+	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
+
+	    my $scroll = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10);
+	    my $subf = $scroll->Form('', 0);
+	    $subf->FormSetHeight($height);
+	    $subf->FormAddGrid($grid, 0);
+	    Newt::Grid::HCloseStacked($subf, separator(1, $height), $scroll);
+	} else {
+	    $grid;
+	}
+    };
+    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($common->{ok} || '', if_($common->{cancel}, $common->{cancel}));
+
+    my $form = Newt::Component::Form(\undef, '', 0);
+    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@{$common->{messages}})), $listg, $buttons);
+    $window->GridWrappedWindow($common->{title} || '');
+    $form->FormAddGrid($window, 1);
+
+    my $check = sub {
+	my ($f) = @_;
+
+	$get_all->();
+	my ($error, $focus) = $f->();
+	
+	if ($error) {
+	    $set_all->();
+	}
+	!$error;
+    };
+
+    my $canceled;
+    do {
+	my $r = $form->RunForm;
+	$canceled = $cancel && $$r == $$cancel;
+    } until ($check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'}));
+
     $form->FormDestroy;
     Newt::PopWindow;
-    $$r != $$cancel;
+    !$canceled;
 }
 
 
-sub waitbox($$) {
+sub waitbox {
     my ($title, $messages) = @_;
     my ($t, $w, $h) = myTextbox(@$messages);
     my $f = Newt::Component::Form(\undef, '', 0);
@@ -243,7 +200,7 @@ sub waitbox($$) {
 }
 
 
-sub wait_messageW($$$) {
+sub wait_messageW {
     my ($o, $title, $messages) = @_;
     { form => waitbox($title, $messages), title => $title };
 }
