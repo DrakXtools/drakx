@@ -118,24 +118,6 @@ sub install_theme {
 }
 
 #------------------------------------------------------------------------------
-sub create_help_window {
-    my ($o) = @_;
-
-    my $w;
-    if ($w = $o->{help_window}) {
-	$w->{window}->foreach(sub { $_[0]->destroy }, undef);
-    } else {
-	$w = $o->{help_window} = bless {}, 'ugtk2';
-	$w->{rwindow} = $w->{window} = gtknew('Window');
-	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
-	$w->{rwindow}->set_size_request($::helpwidth, $::helpheight);
-	$w->{rwindow}->set_title('skip');
-    }
-    gtkadd($w->{window}, child => gtknew('ScrolledWindow', child => $o->{help_window_text} = gtknew('TextView')));
-    $w->show;
-}
-
-#------------------------------------------------------------------------------
 my %steps;
 sub create_steps_window {
     my ($o) = @_;
