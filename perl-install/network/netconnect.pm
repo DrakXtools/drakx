@@ -838,7 +838,7 @@ or skip and do it later."),
                     name => N("You need the Alcatel microcode.
 Download it at:
 %s
-and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'),
+and copy the mgmt.o in /usr/share/speedtouch", 'http://www.speedtouch.com/supuser.htm'),
                     next => "adsl_provider",
                    },
 
