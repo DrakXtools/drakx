@@ -236,12 +236,12 @@ $in->exit(0);
 
 
 sub lilo_choice() {
-    my $bootloader = bootloader::read(); 
-    
     my $all_hds = fsedit::get_hds();
     fs::get_raw_hds('', $all_hds);
     fs::get_info_from_fstab($all_hds, '');
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
+
+    my $bootloader = bootloader::read($fstab); 
 
   ask:
     eval {
@@ -257,7 +257,7 @@ sub lilo_choice() {
         # BUG: note that the following message won't speak about the right bootloader if user is currently switching between 
         # various bootloaders and if the error occured before boot sector get overwritten by bootloader installer
         $in->ask_warn(N("Error"), 
-                      [ N("Installation of %s failed. The following error occured:", bootloader::detect_bootloader()), $err ]);
+                      [ N("Installation of %s failed. The following error occured:", $bootloader->{method}), $err ]);
         goto ask;
     }
 }

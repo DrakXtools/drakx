@@ -99,7 +99,7 @@ sub setupBootloader {
 
     eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
-    bootloader::install($b, $fstab, $hds);
+    bootloader::install($b, $hds);
 }
 
 
@@ -183,7 +183,7 @@ sub setupBootloader__mbr_or_not {
 sub setupBootloader__general {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
-    ($b->{method}, my $method_choices) = bootloader::method_choices($fstab, $b);
+    my @method_choices = bootloader::method_choices($fstab);
     my $profiles = bootloader::has_profiles($b);
     my $prev_force_acpi = my $force_acpi = bootloader::get_append($b, 'acpi') !~ /off|ht/;
     my $prev_force_noapic = my $force_noapic = bootloader::get_append($b, 'noapic');
@@ -207,7 +207,7 @@ sub setupBootloader__general {
 			     },
 			 },
 		       }, [
-            { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
+            { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
                 if_(arch() !~ /ia64/,
             { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@{$all_hds->{hds}}, grep { !isFat_or_NTFS($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
 		),
@@ -233,7 +233,7 @@ sub setupBootloader__general {
 	$in->ask_from_({ messages => N("Bootloader main options"),
 			 interactive_help_id => 'setupYabootGeneral',
 		       }, [
-            { label => N("Bootloader to use"), val => \$b->{method}, list => [ keys %$method_choices ], format => sub { $method_choices->{$_[0]} } },
+            { label => N("Bootloader to use"), val => \$b->{method}, list => \@method_choices, format => \&bootloader::method2text },
             { label => N("Init Message"), val => \$b->{'init-message'} },
             { label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ], not_edit => !$::expert },
             { label => N("Open Firmware Delay"), val => \$b->{delay} },
@@ -286,13 +286,13 @@ sub setupBootloader__entries {
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-{ label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/vmlinuz*") ], not_edit => 0 },
+{ label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { "/boot/$_" } bootloader::installed_vmlinuz() ], not_edit => 0 },
 { label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => N("Append"), val => \$e->{append} },
   if_(arch() !~ /ppc|ia64/,
 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ], format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 ),
-{ label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/initrd*") ], not_edit => 0, advanced => 1 },
+{ label => N("Initrd"), val => \$e->{initrd}, list => [ map { if_(/^initrd/, "/boot/$_") } all("$::prefix/boot") ], not_edit => 0, advanced => 1 },
 	    );
 	} else {
 	    @l = ( 

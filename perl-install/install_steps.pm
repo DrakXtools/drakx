@@ -839,7 +839,7 @@ sub setupBootloaderBefore {
         my $p = pkgs::packageByName($o->{packages}, 'bootsplash');
         $p && $p->flag_installed;
     };
-    bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
+    bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds},
                         vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
                         quiet => $o->{meta_class} ne 'server');
     bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
@@ -851,7 +851,7 @@ sub setupBootloader {
     my ($o) = @_;
 
     require bootloader;
-    bootloader::install($o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
+    bootloader::install($o->{bootloader}, $o->{all_hds}{hds});
 }
 
 #------------------------------------------------------------------------------
