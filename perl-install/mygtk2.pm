@@ -415,9 +415,13 @@ sub _gtk_any_Window {
 	$w->set_border_width(delete $opts->{border_width}) if exists $opts->{border_width};
 	$w->set_shadow_type(delete $opts->{shadow_type}) if exists $opts->{shadow_type};
 	$w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
-	if (my $name = delete $opts->{icon}) {
-	    my $f = _find_imgfile($name) or internal_error("can not find $name");
-	    $w->set_icon(gtknew('Pixbuf', file => $f));
+	my $icon_no_error = $opts->{icon_no_error};
+	if (my $name = delete $opts->{icon} || delete $opts->{icon_no_error}) {
+	    if (my $f = _find_imgfile($name)) {
+		$w->set_icon(gtknew('Pixbuf', file => $f));
+	    } elsif (!$icon_no_error) {
+		internal_error("can not find $name");
+	    }
 	}
     }
     $w->set_title(delete $opts->{title}) if exists $opts->{title};
