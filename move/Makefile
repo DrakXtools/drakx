@@ -87,13 +87,13 @@ install: un_live_tree_boot
 	sudo cp -f /tmp/version $(DEST_LIVETREE)/usr/share/VERSION
 
 un_live_tree_boot:
-	./make_live_tree_boot -u $(DEST_LIVETREE)
-	tools/fix-fc-cache.pl $(DEST_LIVETREE)
+	sudo ./make_live_tree_boot -u $(DEST_LIVETREE)
+	sudo tools/fix-fc-cache.pl $(DEST_LIVETREE)
 
 live_tree_boot:
 	rm -f $(DEST)/live_tree*.clp
-	./make_live_tree_boot $(DEST_LIVETREE)
-	tools/fix-fc-cache.pl $(DEST_LIVETREE)
+	sudo ./make_live_tree_boot $(DEST_LIVETREE)
+	sudo tools/fix-fc-cache.pl $(DEST_LIVETREE)
 	$(MAKE) clps
 
 clps:
@@ -139,9 +139,9 @@ clean:
 
 %.clp: %
 	if [ -e $<.sort ]; then \
-	mkisofs -R -sort $<.sort $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
+	sudo mkisofs -R -sort $<.sort $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
 	else \
-	mkisofs -R $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
+	sudo mkisofs -R $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
 	fi
 
 check_dirs:
