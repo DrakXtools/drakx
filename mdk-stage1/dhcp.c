@@ -471,7 +471,6 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 			timeout = 5;
 	}
 	
-	stg1_error_message("No DHCP reply received.");
 	return -1;
 }
 
@@ -554,6 +553,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	remove_wait_message();
 
 	if (i != 0) {
+		stg1_error_message("No DHCP reply received.");
 		close(s);
 		return RETURN_ERROR;
 	}
