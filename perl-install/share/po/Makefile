@@ -9,7 +9,9 @@ LANGS = $(POFILES:%.po=%)
 LOCALEDIR=$(DATADIR)/locale
 
 
-all: help $(MOFILES)
+all: help mofiles
+
+mofiles: $(MOFILES)
 
 help:
 	@if [ ! -d doc ]; then \
@@ -37,8 +39,8 @@ DrakX.pot: $(PMSFILES)
 
 install:
 	for l in $(LANGS); do \
-		install -d $(LOCALEDIR)/$$l/LC_MESSAGES; \
-		install -m 644 $$l.mo $(LOCALEDIR)/$$l/LC_MESSAGES/$(NAME).mo; \
+		$(SUDO) install -d $(LOCALEDIR)/$$l/LC_MESSAGES; \
+		$(SUDO) install -m 644 $$l.mo $(LOCALEDIR)/$$l/LC_MESSAGES/$(NAME).mo; \
 	done
 
 clean:

@@ -48,7 +48,7 @@ install:
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf
 
 	for i in $(HAVEINST_DIRS); do \
-		$(MAKE) -C $$i install PREFIX=$(PREFIX) DATADIR=$(DATADIR) NAME=$(NAME) ; \
+		$(MAKE) -C $$i install PREFIX=$(PREFIX) SUDO= DATADIR=$(DATADIR) NAME=$(NAME) ; \
 	done
 
 	find auto -follow -name .exists -o -name "*.bs" | xargs rm -f

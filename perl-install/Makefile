@@ -80,7 +80,9 @@ install_pms: $(DIRS)
 	chmod a+x $(DESTREP4PMS)/g_auto_install
 	chmod a+x $(DESTREP4PMS)/live_install*
 
-get_needed_files: $(DIRS) $(MOFILES)
+mo_files : $(MOFILES)
+
+get_needed_files: $(DIRS) mo_files
 	$(MAKE) -C share
 
 	@if rpm -q XFree86-VGA16 | grep -q 29mdk; then echo "XFree86-VGA16 29mdk is bad, downgrade to 28mdk" ; exit 1 ; fi
@@ -183,7 +185,7 @@ endif
 
 	for i in ../kernel/modules.description ../kernel/all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
-	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
+	$(MAKE) -C share/po install SUDO= NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
 #	ar and fa are disabled as arabic font doesn't work on install 
 #	ga and sl are disabled because too few messages are translated
