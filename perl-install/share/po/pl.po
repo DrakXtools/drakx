@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX pl\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-26 14:27+0100\n"
+"Project-Id-Version: pl\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-03-02 23:19+0100\n"
 "Last-Translator: Arkadiusz Lipiec <alipiec@elka.pw.edu.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -653,7 +653,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"(OSTRZEŻENIE! Używasz systemu plików XFS dla głownej partycji (root),\n"
+"(OSTRZEŻENIE! Używasz systemu plików XFS dla głównej partycji (root),\n"
 "próba utworzenia dyskietki uruchomieniowej na dysku 1.44 Mb prawdopodobnie\n"
 "nie powiedzie się, gdyż XFS wymaga bardzo dużego sterownika)."
 
@@ -707,7 +707,7 @@ msgstr "brak miejsca na /boot"
 #: ../../bootloader.pm:1
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
-msgstr "Wyróżnony system zostanie uruchomiony po %d sekundach."
+msgstr "Wyróżniony system zostanie uruchomiony po %d sekundach."
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -949,7 +949,7 @@ msgstr "Brak wolnego miejsca dla automatycznego rozmieszczenia"
 #: ../../fsedit.pm:1
 #, c-format
 msgid "You can't use an encrypted file system for mount point %s"
-msgstr "Nie możn użyć zaszyfrowanego systemu plików dla puntku montowania %s"
+msgstr "Nie można użyć zaszyfrowanego systemu plików dla punktu montowania %s"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1128,93 +1128,66 @@ msgstr ""
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
-"W tym miejscu wyświetlone zostały różne parametry dotyczące komputera.\n"
-"W zależności od zainstalowanego sprzętu, można, chociaż nie zawsze \n"
-"ujrzeć poniższe wpisy:\n"
-"\n"
-" * \"Mysz\": sprawdzanie ustawień bieżącej myszy oraz po kliknięciu\n"
-"przycisku możliwość ich zmiany\n"
-"\n"
-" * \"Klawiatura\": sprawdzanie bieżącego układu klawiatury oraz po\n"
-"kliknięciu przycisku możliwość jego zmiany\n"
-"\n"
-" * \"Kraj\": zaznacz odpowiedni kraj. Jeśli nie znajdujesz się w tym\n"
-"kraju, kliknij przycisk i wybierz inny.\n"
-"\n"
-" * \"Strefa czasowa\": instalator domyślnie zgaduje strefę czasową na\n"
-"podstawie wybranego języka. Jednak tutaj ponownie, jak przy wyborze\n"
-"klawiatury niekoniecznie trzeba być w kraju związanym z wybranym\n"
-"językiem. Można zmienić strefę klikając przycisk \"Strefa czasowa\"\n"
-"w celu konfiguracji zegara w zależności od strefy przebywania.\n"
-"\n"
-" * \"Drukarka\": kliknięcie przycisku \"Brak drukarki\" spowoduje otwarcie\n"
-"druida konfiguracji drukarki.\n"
-"\n"
-" * \"Program rozruchowy\": jeśli chcesz zmienić konfigurację programu\n"
-"rozruchowego, kliknij ten przycisk. Ta czynność powinna być wykonywana\n"
-"tylko przez użytkowników zaawansowanych.\n"
-"\n"
-" * \"Interfejs graficzny\": domyślnie, instalator konfiguruje interfejs\n"
-"graficzny w rozdzielczości \"800x600\". Jeśli nie odpowiada ci to\n"
-"ustawienie, kliknij przycisk aby ponownie ustawić interfejs graficzny.\n"
-"\n"
-" * \"Sieć\": Jeśli chcesz skonfigurować swoje połączenie internetowe\n"
-"lub dostęp do sieci lokalnej, kliknij ten przycisk.\n"
-"\n"
-" * \"Karta dźwiękowa\": jeśli karta dźwiękowa została wykryta w systemie,\n"
-"zostanie ona tutaj wyświetlona.\n"
-"\n"
-" * \"Karta telewizyjna\": jeśli karta telewizyjna została wykryta,\n"
-"zostanie ona tutaj wyświetlona.\n"
-"\n"
-" * \"Karta ISDN\": jeśli karta ISDN została wykrywa w systemie,\n"
-"zostanie ona tutaj wyświetlona. Można kliknąć przycisk aby zmienić\n"
-"parametry z nią związane."
 
 #: ../../help.pm:1
 #, c-format
@@ -1264,7 +1237,7 @@ msgid ""
 "Firmware Delay expires."
 msgstr ""
 "Yaboot jest programem rozruchowym sprzętu NewWorld Macintosh. Można\n"
-"uruchamiać zarówno GNU/Linux, Mac OS lub MacOSX. Zazwtczaj MacOS\n"
+"uruchamiać zarówno GNU/Linux, Mac OS lub MacOSX. Zazwyczaj MacOS\n"
 "i MacOSX są poprawnie wykrywane i instalowane w menu programu\n"
 "rozruchowego. W innym przypadku można dodać wpis ręcznie na tym\n"
 "ekranie. Należy uważać aby podać poprawne parametry.\n"
@@ -1387,7 +1360,7 @@ msgstr ""
 "\n"
 " * Brak wideo: sprzęt video Apple jest problematyczny w użyciu.\n"
 "Można wybrać tą opcję aby uruchomić tryb \"novidep\" z\n"
-"natywną obsługą bufora ramek (ang. frame buffer)\n"
+"rodzimą obsługą bufora ramek (ang. frame buffer)\n"
 "\n"
 " * Domyślny: wybranie tego wpisu powoduje, że określony wybór staje się\n"
 "domyślny i można go wybrać poprzez wciśnięcie przycisku \"ENTER\".\n"
@@ -1401,13 +1374,8 @@ msgid ""
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1426,22 +1394,17 @@ msgstr ""
 "sterownik.\n"
 "\n"
 "Ponieważ proces wykrywania nie zawsze zakończy się znalezieniem\n"
-"całego sprzętu, instalator poprosi o potwierdzenie obecności karty\n"
-"PCI SCISI. Kliknięcie \"Tak\" spowoduje wyświetlenie listy kart SCSI,\n"
-"z których można jedną wybrać. Kliknij \"Nie\" jeśli sprzęt SCSI nie jest\n"
-"obecny w komputerze. Jeśli nie masz pewności, można sprawdzić listę\n"
-"sprzętu wykrytego na komputerze po kliknięciu przycisku \"Wyświetl\n"
-"informacje o sprzęcie\" oraz \"Dalej ->\". Sprawdź listę sprzętu a "
-"następnie\n"
-"kliknij przycisk \"Dalej ->\" aby wrócić do pytania o interfejs SCSI.\n"
-"\n"
+"całego sprzętu. Jeśli taki przypadek zajdzie, należy ręcznie wybrać\n"
+"odpowiednie urządzenie.\n"
 "Jeśli należy ręcznie wybrać kartę SCSI, instalator zapyta czy dla niej mają\n"
 "być ustawione jakiś opcje. Należy zezwolić na zbadanie sprzętu w celu\n"
-"ustawienia opcji specyficznych dla karty, które muszą zostać zainicjowane.\n"
+"ustawienia opcji specyficznych dla karty, które powinny zostać "
+"zainicjowane.\n"
 "Zazwyczaj działa to dobrze.\n"
 "\n"
-"Jeśli instalator nie będzie potrafił zbadać sprzętu w celu ustawienia\n"
-"odpowiednich opcji, trzeba je wpisać ręcznie"
+"Jeśli instalator nie będzie potrafił zbadać sprzętu w celu określenia,\n"
+"które z parametrów muszą zostać ustawione do poprawnego działania sprzętu,\n"
+"należy ręcznie skonfigurować sterownik."
 
 #: ../../help.pm:1
 #, c-format
@@ -1454,7 +1417,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1480,7 +1443,7 @@ msgstr ""
 "jeśli nie boisz się zatorów papieru w drukarce lub też nie posiadasz\n"
 "drukarki sieciowej. Obsługiwany jest tylko bardzo prosty system sieciowy,\n"
 "który czasem może spowodować spowolnienie sieci. Wybranie opcji \"pdq\"\n"
-"jest zalecane jeżli jest to twoje pierwsze doświadczenie z GU/Linux.\n"
+"jest zalecane jeżeli jest to twoje pierwsze doświadczenie z GU/Linux.\n"
 "\n"
 " * \"CUPS\" - \"Common Unix Printing System\"(zwykły system drukowania\n"
 "Unixa), jest niezastąpiony jeśli chodzi o drukowanie z drukarki lokalnej.\n"
@@ -1494,7 +1457,7 @@ msgstr ""
 "drukowania.\n"
 "\n"
 "Jeśli wybór zostanie dokonany w tymi miejscu, zaś później okaże się,\n"
-"że system wydruku nie odpowiada twoim optrzebom, można go zmienić\n"
+"że system wydruku nie odpowiada twoim potrzebom, można go zmienić\n"
 "uruchamiając program PrinterDrake z Centrum Sterowania Mandrake.\n"
 "Należy tam także kliknąć przycisk \"Zaawansowane\"."
 
@@ -1518,79 +1481,27 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
-"LILO i grub są programi rozruchowymi GNU/Linux. Zazwyczaj, ten etap\n"
-"jest całkowicie zautomatyzowany. Instalator przeanalizuje sektor rozruchowy\n"
-"dysku oraz wykona czynności zależne od tego co tam znajdzie:\n"
+"LILO i grub są programami rozruchowymi systemu GNU/Linux. Zazwyczaj ten\n"
+"krok jest całkowicie zautomatyzowany. Instalator zanalizuje sektor\n"
+"rozruchowy oraz wykona operacje zależne od tego co zostanie tam znalezione:\n"
 "\n"
-" * jeśli zostanie znaleziony sektor rozruchowy Windows, zostanie on\n"
-"zastąpiony sektorem rozruchowym grub/LILO. Dzięki temu, użytkownik\n"
-"będzie miał możliwość załadowanie zarówno system GNU/Linux jak i inne\n"
-"systemy operacyjne.\n"
+" * jeśli zostanie znaleziony sektor rozruchowy Windows zostanie on\n"
+"zastąpiony sektorem rozruchowym grub/LILO. Dzięki temu będzie możliwość\n"
+"uruchamiania zarówno systemu GNU/Linux jak i innego systemu operacyjnego.\n"
 "\n"
-" * jeśli zostanie znaleziony sektor rozruchowy grub lub LILO, zostanie on\n"
-"zastąpiony nowym sektorem.\n"
+" * jeśli zostanie znaleziony sektor rozruchowy grub lub LILO zostanie\n"
+"on zastąpiony nowym sektorem.\n"
 "\n"
-"\"Urządzenie rozruchowe\": w większości przypadków nie zostanie zmieniona\n"
-"domyślna wartość (\"Pierwszy sektor napędu (MBR)\"), lecz jeśli użytkownik\n"
-"sobie tego zażyczy, sektor może być zainstalowany na drugim dysku\n"
-"twardym (\"/dev/hdb\") lub nawet na dyskietce (\"Na dyskietce\").\n"
+"W przypadku, gdy nie będzie można okreslić sektora rozruchowego, instalator\n"
+"wyświetli pytanie gdzie należy go umieścić.\n"
 "\n"
-"Zaznaczenie opcji \"Tworzenie dyskietki startowej\" umożliwia utworzenie\n"
-"nośnika rozruchu awaryjnego.\n"
-"\n"
-"Płyta CD Linuksa Mandrake posiada wbudowany tryb ratunkowy. Można\n"
-"uzyskać do niego dostęp poprzez uruchomienie płyty CD, wciśnięcie\n"
-"klawisza >>F1<< w czasie uruchamiania oraz wpisanie >>rescue<<\n"
-"po wyświetleniu znaku zachęty. Jeśli komputer nie może być uruchamiany\n"
-"z płyty CD, są jeszcze co najmniej dwie sytuacje, gdy posiadanie\n"
-"dyskietki startowej jest krytyczne:\n"
-"\n"
-" * podczas instalacji programu rozruchowego, instalator nadpisze sektor\n"
-"rozruchowy (MBR) głównego dysku (chyba że jest wykorzystywany inny\n"
-"menedżer uruchamiania), aby umożliwić uruchamianie zarówno Windowsa\n"
-"jak GNU/Linux (zakładając, że zainstalowany jest także system Windows).\n"
-"Jeśli w jakimś momencie potrzebna jest ponowna instalacja Windows,\n"
-"proces instalacyjny Microsoftu nadpisze sektor rozruchowy i uniemożliwi\n"
-"uruchomienie Linuksa!\n"
-"\n"
-" * jeśli wystąpi problem i nie można uruchomić systemu GNU/Linux\n"
-"z twardego dysku, ta dyskietka będzie jedyną możliwością jego\n"
-"uruchomienia. Dyskietka zawiera pewną liczbę narzędzi systemowych\n"
-"służących do przywracania systemu uszkodzonego na wskutek awarii\n"
-"zasilania, nieszczęśliwego błędu wpisywania, zapomnienia hasła\n"
-"administratora lub innego powodu.\n"
-"\n"
-"Po wybraniu opcji \"Tak\", zostanie zadane prośba o włożenie dyskietki\n"
-"do napędu. Dyskietka powinna być czysta i nie może zawierać ważnych\n"
-"danych. Instalator sformatuje dyskietkę oraz zapisze na nią odpowiednie\n"
-"dane."
+"\"Urządzenie rozruchowe\": w większości przypadków, nie ma potrzeby zmiany\n"
+"domyślnego ustawienia (\"Pierwszy sektor dysku (MBR)\"), jednak można "
+"również\n"
+"zainstalować go a drugim dysku twardym (\"/dev/hdb\") lub nawet na\n"
+"dyskietce (opcja \"Na dyskietce\")."
 
 #: ../../help.pm:1
 #, c-format
@@ -1668,17 +1579,17 @@ msgstr ""
 "    * \"LILO z graficznym menu\": jeśli ma zostać użyty LILO\n"
 "z interfejsem graficznym.\n"
 "\n"
-" * \"Urządzenie rozruchowe\": w więkoszści przypadków, nie jest zmieniana\n"
+" * \"Urządzenie rozruchowe\": w większości przypadków, nie jest zmieniana\n"
 "domyślna lokalizacja (\"/dev/hda\"), lecz można zainstalować program\n"
 "rozruchowy na drugim twardym dysku (\"/dev/hdb\"), lub nawet na dyskietce\n"
 "(\"/dev/fd0\");\n"
 "\n"
 " * \"Wstrzymanie przed uruchomieniem z domyślnego obrazu\": w trakcie\n"
-"uruchamiania systemu określić można czas w któm użytkownik może zmienić\n"
+"uruchamiania systemu określić można czas w którym użytkownik może zmienić\n"
 "z menu domyślnie uruchamiany system operacyjny na inny.\n"
 "\n"
 "!! Należy być ostrożnym!! Uwaga, jeśli wybrano aby nie instalować programu\n"
-" rozruchowego (poprzez anulowanie w tym miejscu), nalezy się upewnić, że\n"
+" rozruchowego (poprzez anulowanie w tym miejscu), należy się upewnić, że\n"
 " istnieje sposób na uruchomienie systemu! Także należy być pewnym tego co\n"
 "się robi przed zmianą jakiejkolwiek opcji !!\n"
 "\n"
@@ -1743,7 +1654,7 @@ msgstr ""
 "\n"
 "Jednak zbyt długie lub zbyt skomplikowane hasło trudno jest zapamiętać,\n"
 "więc powinno uwzględniać zarówno względy bezpieczeństwa jak i łatwość\n"
-"jego zapiamiętania bez potrzeby jego dodatkowego zapisywania w innym\n"
+"jego zapamiętania bez potrzeby jego dodatkowego zapisywania w innym\n"
 "miejscu.\n"
 "\n"
 "Hasło nie będzie wyświetlane na ekranie podczas wpisywania. Dlatego też\n"
@@ -1753,10 +1664,10 @@ msgstr ""
 "właściwe.\n"
 "\n"
 "Jeśli chcesz uzyskać dostęp do komputera, który ma być kontrolowany\n"
-" prez serwer autentykacji, kliknij przycisk \"Zaawansowane\".\n"
+" przez serwer uwierzytelniania, kliknij przycisk \"Zaawansowane\".\n"
 "\n"
 "Można wybrać odpowiednią metodę \"uwierzytelniania\" spośród LDAP,\n"
-"NIS lub Domeny PDC Windows. Jeśli nie wierz, której opcji wybrać, zapytaj\n"
+"NIS lub Domeny PDC Windows. Jeśli nie wiesz, której opcji wybrać, zapytaj\n"
 "administratora sieci\n"
 "Jeśli masz problemy z zapamiętywaniem haseł, można wybrać opcję \"Bez\n"
 " hasła\", w przypadku, gdy komputer nie jest połączony z Internetem i ufasz\n"
@@ -1816,7 +1727,7 @@ msgstr ""
 "oraz wrócić do listy wyboru. \n"
 "Mysz z kółkiem czasem nie jest wykrywana automatycznie, więc należy\n"
 "wówczas wybrać odpowiednią wartość z listy. Upewnij się, żeby wybrać\n"
-"mysz podłączoną do odpwoiedniego portu. Po zakończeniu wybierania\n"
+"mysz podłączoną do odpowiedniego portu. Po zakończeniu wybierania\n"
 "i naciśnięciu przycisku \"Dalej ->\", zostanie wyświetlony na ekranie obraz\n"
 "myszy. Poruszaj kółkiem, aby upewnić się czy zostało ono poprawnie\n"
 "aktywowane. Jeśli mysz na ekranie będzie zmieniała ustawienie kółka\n"
@@ -1837,35 +1748,48 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Twój wybór preferownego języka będzie miało wpływ na język\n"
+"Twój wybór preferowanego języka będzie miało wpływ na język\n"
 "dokumentacji, instalatora oraz systemu w ogólności. Najpierw należy\n"
 "wybrać region, w którym znajduje się użytkownik a następnie język\n"
 "jakiego używa.\n"
 "\n"
 "Kliknięcie przycisku \"Zaawansowane\",  pozwoli na wybranie innych\n"
-"języków, które zostaną zinstalowane na twoim komputerze.\n"
+"języków, które zostaną zainstalowane na twoim komputerze.\n"
 "Wybranie innych języków spowoduje zainstalowanie plików zależnych\n"
 "od języka dla dokumentacji oraz aplikacji. Na przykład, jeśli na komputerze\n"
 "pracują użytkownicy z Hiszpanii należy wybrać angielski z widoku\n"
 "głównego drzewa zaś w sekcji \"Zaawansowane\" zaznaczyć opcję\n"
 "\"Hiszpański\".\n"
 "\n"
-"Można zainstalować więcej niż jeden język. Po wybraniu dodatkowych\n"
-"ustawień lokalnych, kliknij przycisk \"Dalej ->\" aby kontynuować. \n"
-"Aby przełączać się pomiędzy zainstalowanymi w systemie językami, można\n"
-"uruchomić polecenie \"/usr/sbin/localedrake\" jako \"root\". Spowoduje to\n"
-"zmianę języka wykorzystywanego przez cały system. Uruchomienie\n"
-"tego polecenia z konta zwykłego użytkownika, spowoduje zmianę\n"
-"ustawień językowych tylko tego użytkownika."
+"Przy wyborze nie ma ograniczenia dotyczącego liczby dodatkowych języków.\n"
+"Można zainstalować więcej niż jeden lub nawet wszystkie po wybraniu\n"
+"opcji \"Wszystkie języki\". Wybranie obsługi dla języka oznacza także\n"
+"instalację odpowiednich tłumaczeń, czcionek, programów do sprawdzania\n"
+"pisowni, itd. Dodatkowo opcja \"Domyślne używanie Unicode\" zezwala na\n"
+"wymuszenie aby system korzystał z unicode (UTF-8). Należy jednak\n"
+"zwrócić uwagę na fakt, że jest to funkcja eksperymentalna. Po wybraniu\n"
+"innych języków wymagających różnych kodowań, obsługa unicode także\n"
+"zostanie zainstalowana.\n"
+"\n"
+"Aby przełączać się pomiędzy różnymi językami zainstalowanymi w systemie,\n"
+"można uruchomić polecenie \"/usr/sbin/localedrake\" z poziomu\n"
+"użytkownika \"root\" co spowoduje zmianę języka używanego przez cały\n"
+"system. Uruchomienie polecenia z konta zwykłego użytkownika spowoduje\n"
+"zmianę ustawień językowych tylko dla tego użytkownika."
 
 #: ../../help.pm:1
 #, c-format
@@ -1951,10 +1875,14 @@ msgstr ""
 #, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
 "\"Kraj\": zaznacz odpowiedni kraj. Jeśli nie znajdujesz się w tym kraju,\n"
-"kliknij przycisk i wybierz inny."
+"kliknij przycisk \"Konfiguruj\" oraz wybierz inny kraj. Jeśli twój kraj\n"
+"nie jest wyświetlony na pierwszej liście, kliknij przycisk \"Więcej\"\n"
+"aby otrzymać pełną listę krajów."
 
 #: ../../help.pm:1
 #, c-format
@@ -1992,7 +1920,7 @@ msgstr ""
 "Na dysku wykryto więcej niż jedną partycję Windows. Wybierz, którą\n"
 "z nich chcesz zmniejszyć w celu zainstalowania Mandrake Linux\n"
 "\n"
-"Każda partycja jest określana za pomocą informacji: \"Nazwę linuksowa\",\n"
+"Każda partycja jest określana za pomocą informacji: \"Nazwa linuksowa\",\n"
 "\"Nazwa Windows\" i \"Rozmiar\".\n"
 "\n"
 "Nazwa linuksowa jest określana następująco: \"typ dysku\",\"numer dysku\",\n"
@@ -2118,7 +2046,7 @@ msgstr ""
 "     Opcja ta jest użyteczna w przypadku konieczności odzyskania tablicy\n"
 "     w późniejszym czasie. Zalecane jest wykonanie tego kroku.\n"
 "\n"
-"   * \"Przywróć tablicę partycji\": jeśli tablica partyzji została\n"
+"   * \"Przywróć tablicę partycji\": jeśli tablica partycji została\n"
 "     uszkodzona można spróbować ją naprawić. Należy pamiętać że opcja ta\n"
 "     może zakończyć się niepowodzeniem.\n"
 "\n"
@@ -2174,9 +2102,7 @@ msgid ""
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
@@ -2185,8 +2111,6 @@ msgstr ""
 "jest dostępny w sieci i dane przechowywane są ważniejsze, tym wyższy\n"
 "powinien być poziom bezpieczeństwa. Jednak wyższe bezpieczeństwo\n"
 "zazwyczaj okupione jest zwiększeniem poziomu trudności używania systemu.\n"
-"Zajrzyj do rozdziału \"msec\" podręcznika, aby użyskać więcej informacji\n"
-"na temat znaczenia poszczególnych poziomów.\n"
 "\n"
 "Jeśli nie wiesz co wybrać, użyj domyślnych opcji."
 
@@ -2196,16 +2120,16 @@ msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
-"W czasie instalowania Linuksa Madrake, być może niektóre pakiety\n"
+"Podczas instalacji Linuksa Mandrake, być może niektóre pakiety\n"
 "zostały zaktualizowane od wydania początkowego. Niektóre błędy mogą\n"
 "zostać naprawione, zaś problemy z bezpieczeństwem rozwiązane. Aby\n"
 "skorzystać z możliwości aktualizacji, dobrze jest pobrać część danych\n"
@@ -2254,7 +2178,8 @@ msgstr ""
 "partycje do sformatowania.\n"
 "\n"
 "Należy pamiętać, że nie jest konieczne formatowanie wszystkich istniejących\n"
-"już partycji. Sformatowne muszą być partycje zawierające system operacyjny:\n"
+"już partycji. Sformatowane muszą być partycje zawierające system "
+"operacyjny:\n"
 "\"/\", \"/usr\" oraz \"/var\", nie jest natomiast konieczne formatowanie\n"
 "partycji zawierających dane, które chcesz zachować (zazwyczaj \"/home\").\n"
 "\n"
@@ -2280,7 +2205,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -2307,7 +2232,7 @@ msgid ""
 msgstr ""
 "Tak więc instalacja zakończyła się, zaś system GNU/Linux jest gotowy do \n"
 "użycia. Kliknij przycisk \"Dalej ->\" aby ponownie uruchomić system.\n"
-"Pierwszą rzeczą jaką użytkownik zobaczy po zakończniu testów sprzętu\n"
+"Pierwszą rzeczą jaką użytkownik zobaczy po zakończeniu testów sprzętu\n"
 "jest menu programu rozruchowego, dające możliwość wybrania systemu,\n"
 "który powinien zostać uruchomiony.\n"
 "\n"
@@ -2339,7 +2264,7 @@ msgstr ""
 "oraz wpisać polecenie >>linux defcfg=\"floppy\"<<.\n"
 "\n"
 "(*) Dyskietka powinna być sformatowana przy użyciu systemu plików FAT\n"
-"(aby utworzyć taką dyskietkę pod linuksem wpisz \"mformat a:\")"
+"(aby utworzyć taką dyskietkę pod Linuksem wpisz \"mformat a:\")"
 
 #: ../../help.pm:1
 #, c-format
@@ -2373,7 +2298,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -2398,20 +2323,20 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
 "W tym etapie instalacji należy określić, gdzie na dysku zostanie "
 "zainstalowany\n"
 "Mandrake Linux. Jeśli dysk jest pusty lub istniejące systemy operacyjne\n"
 "zajmują całe dostępne miejsce, należy podzielić dysk na partycje\n"
 "Partycjonowanie to po prostu logiczny podział twardego dysku na oddzielne\n"
-"obszary w celu zainstalowania systemu Mandrake Linux\n"
+"obszary w celu zainstalowania systemu Mandrake Linux.\n"
 "\n"
 "Ponieważ efekt partycjonowania jest nieodwracalny, czynność wydaje się\n"
 "niebezpieczna i jest stresująca dla niedoświadczonych użytkowników.\n"
@@ -2419,7 +2344,7 @@ msgstr ""
 "Przedzdecydowaniem się na ten krok warto poświęcić nieco czasu na\n"
 "zapoznanie się z dokumentacją.\n"
 "\n"
-"Możliwych jest kilka rozwiąza zależnych od konfiguracji dysku twardego:\n"
+"Możliwych jest kilka rozwiązań zależnych od konfiguracji dysku twardego:\n"
 "\n"
 "* \"Użycie wolnego miejsca\": ta opcja po prostu oznacza automatyczne\n"
 "partycjonowanie niezapisanych dysków. Nie zostaną wyświetlone żadne\n"
@@ -2433,7 +2358,7 @@ msgstr ""
 "w większości przypadków lepiej ich nie zmieniać.\n"
 "\n"
 "* \"Użycie wolnego miejsca na partycji Windows\": jeśli na komputerze\n"
-"został zainstalowany Microsoft Windowsi zajmuje on całą przestrzeń\n"
+"został zainstalowany Microsoft Windows zajmuje on całą przestrzeń\n"
 "dyskową, należy utworzyć wolne miejsce dla Linuksa. Aby to zrobić, można\n"
 "usunąć partycję MS Windows wraz z danymi (zobacz rozwiązanie \"Kasowanie\n"
 "zawartości dysku\") lub też zmienić rozmiar partycji FAT Windows.\n"
@@ -2469,62 +2394,6 @@ msgstr ""
 "już doświadczenie w partycjonowaniu dysków. Aby uzyskać więcej informacji\n"
 "na temat tego, w jaki sposób korzystać z narzędzia DiskDrake, skonsultuj\n"
 "się z podręcznikiem (rozdział \"Zarządzanie partycjami\")."
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
-msgstr ""
-"Zaznaczenie opcji \"Tworzenie dyskietki rozruchowej\" umożliwia utworzenie\n"
-"nośnika uruchamiającego awaryjnie komputer.\n"
-"\n"
-"Płyta CD Mandrake Linux posiada wbudowany tryb ratunkowy. Można do niego\n"
-"wejść poprzez uruchomienie systemu z CD, naciśnięcie klawisza >>F1<<\n"
-"oraz wpisania >>rescue<< w wierszu poleceń. W przypadku gdy komputer\n"
-"nie posiada możliwości uruchamiania z płyty CD, istnieją co najmniej\n"
-"dwie sytuacje gdy posiadanie dyskietki rozruchowej jest krytyczne:\n"
-"\n"
-" * w trakcie instalacji programu rozruchowego, instalator nadpisze\n"
-"sektor rozruchowy (MBR) głównego dysku (chyba, że używany jest\n"
-"inny menedżer rozruchowy), umożliwiając uruchamianie zarówno Windows jak\n"
-"i GNU/Linux (zakładając że istnieje na komputerze Windows). Jeśli chcesz\n"
-"przeinstalować Windows, proces instalacji Windows zamaże zawartość\n"
-"sektora rozruchowego, więc użytkownik nie będzie miał możliwości\n"
-"uruchomienia GNU/Linux!\n"
-"\n"
-" * jeśli wystąpi problem i nie można uruchomić GNU/Linux z twardego dysku,\n"
-"ta dyskietka ratunkowa będzie jedyną możliwością uruchomienia systemu.\n"
-"Zawiera niewielką liczbę narzędzi systemowych do przywracania systemu,\n"
-"zastępując ewentualnie narzędzia zainstalowanego systemu po jego\n"
-"uszkodzeniu, nieszczęśliwym błędzie zapisywania lub zatwierdzenia\n"
-"niepoprawnego hasła lub z powodu innych przyczyn.\n"
-"\n"
-"Jeśli zdecydujesz się na ten krok, zostanie wyświetlona prośba o włożenie\n"
-"dyskietki do napędu. Musi być ona czysta oraz nie może zawierać potrzebnych\n"
-"danych. Instalator sformatuje odpowiednio dyskietkę i zapisze potrzebne dane."
 
 #: ../../help.pm:1
 #, c-format
@@ -2659,9 +2528,9 @@ msgstr ""
 "\n"
 "Monitor\n"
 "\n"
-"   The installer can normally automatically detect and configure the\n"
-"monitor connected to your machine. If it is not the case, you can choose in\n"
-"this list the monitor you actually own.\n"
+"   Instalator zazwyczaj automatycznie rozpoznaje i konfiguruje\n"
+"monitor podłączony do komputera. W innym przypadku należy\n"
+"ręcznie wybrać z listy posiadany monitor.\n"
 "\n"
 "\n"
 "\n"
@@ -2751,7 +2620,8 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2767,33 +2637,33 @@ msgid ""
 "enabled on a server. In general, select only the services you really need.\n"
 "!!"
 msgstr ""
-"Teraz można wybrać usługi, włączane przy uruchamianiu systemu.\n"
+"To okno dialogowe jest używane do wybrania usług włączanych podczas\n"
+"uruchamianiu systemu.\n"
 "\n"
 "Prezentowane są wszystkie dostępne usługi z bieżącej instalacji.\n"
 "Przejrzyj je uważnie i odznacz te z nich które nie są zawsze potrzebne\n"
 "przy uruchamianiu systemu.\n"
 "\n"
-"Po najechaniu myszą na element listy, pojawi się objaśnienie\n"
-"z opisem tej usługi. Jednak w przypadku braku pewności czy ta usługa jest\n"
+"Po zaznaczeniu elementu listy, pojawi się objaśnienie z opisem tej usługi.\n"
+"Jednak w przypadku braku pewności czy ta usługa jest\n"
 "potrzebna czy nie, bezpieczniej jest pozostawić domyślne zachowanie.\n"
 "\n"
 "!! Należy zachować szczególną ostrożność przy wyborze. Jeżeli maszyna\n"
 "ma pracować jako serwer - zazwyczaj nie będzie potrzeby uruchamiania\n"
 "niektórych usług. Należy pamiętać, że uruchomienie niektórych z nich na\n"
-"serwerze może być niebezpieczne.\n"
-"W ogólności, należy uruchamiać tylko te usługi, które naprawdę są "
-"potrzebne.\n"
+"serwerze może być niebezpieczne. W ogólności, należy uruchamiać tylko\n"
+"te usługi, które naprawdę są naprawdę potrzebne.\n"
 "!!"
 
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
-"\"Drukarka\": kliknięcie przycisku \"Brak drukarki\" spowoduje otwarcie\n"
+"\"Drukarka\": kliknięcie przycisku \"Konfiguruj\" spowoduje otwarcie\n"
 "druida konfiguracji drukarki. Skonsultuj się z odpowiednim rozdziałem\n"
 "podręcznika aby znaleźć więcej informacji na temat sposobu konfiguracji\n"
 "nowej drukarki. Interfejs wykorzystywany w tym miejscu jest podobny\n"
@@ -2899,7 +2769,7 @@ msgstr ""
 "informacji o tym do czego dana usługa jest przeznaczona lub też dlaczego\n"
 "jest instalowana, wówczas powinien kliknąć przycisk \"Nie\".\n"
 "Kliknięcie \"Tak\" spowoduje zainstalowanie wypisanych usług, które\n"
-"będa automatycznie uruchamiane w trakcie uruchamiania całego systemu. !!\n"
+"będą automatycznie uruchamiane w trakcie uruchamiania całego systemu. !!\n"
 "\n"
 "Opcja \"Automatyczne zależności\" po prostu blokuje okno ostrzeżeń\n"
 "pojawiające się w momencie automatycznego wyboru pakietów przez\n"
@@ -2969,7 +2839,7 @@ msgid ""
 msgstr ""
 "Nadszedł czas na określenie, jakie programy mają zostać zainstalowane w\n"
 "systemie. Dla Mandrake Linux są dostępne tysiące pakietów. Aby uczynić\n"
-"zarządzanie pakietami łatwiejszym, zpstały one uporządkowane na podstawie\n"
+"zarządzanie pakietami łatwiejszym, zostały one uporządkowane na podstawie\n"
 "podobieństwa aplikacji.\n"
 "\n"
 "Pakiety są podzielone na grupy tematyczne. Dostępne są cztery wstępnie\n"
@@ -2982,7 +2852,7 @@ msgstr ""
 "\n"
 " * \"Programowanie\": jeśli komputer będzie używany do programowania, "
 "należy\n"
-"wybrać odpowiednie grupy zwiazane z tą sekcją;\n"
+"wybrać odpowiednie grupy związane z tą sekcją;\n"
 "\n"
 " * \"Serwer\": jeśli komputer będzie pracował jako serwer, pojawi się\n"
 "możliwość wyboru różnych usług, które mogą być zainstalowane na komputerze;\n"
@@ -2992,7 +2862,7 @@ msgstr ""
 "ma pracować jako stacja z interfejsem graficznym!\n"
 "\n"
 "Przesuwając kursor myszy nad nazwą grupy, wyświetli się krótki tekst\n"
-"opisujący daną grupę. Jesli odznaczone zostaną wszystkie grupy w trakcie\n"
+"opisujący daną grupę. Jeśli odznaczone zostaną wszystkie grupy w trakcie\n"
 "przeprowadzania zwykłej instalacji (przeciwieństwo do aktualizacji),\n"
 "wyświetlone zostanie okienko z propozycjami grup określających\n"
 "inne opcje związane z instalacją minimalną:\n"
@@ -3006,10 +2876,10 @@ msgstr ""
 "\n"
 " * \"Naprawdę minimalna instalacja\": instalacja pakietów potrzebnych\n"
 "jedynie do uruchomienia systemu Linux, dostępny będzie tylko tryb tekstowy.\n"
-"Wielkośc tego typu instalacji to ok 65Mb.\n"
+"Wielkość tego typu instalacji to ok 65Mb.\n"
 "\n"
 "Można zaznaczyć \"Indywidualny wybór pakietów\", która to opcja jest\n"
-"użyteczna jeśli użytkownik zna przezneczenie pakietów i jeśli chce mieć\n"
+"użyteczna jeśli użytkownik zna przeznaczenie pakietów i jeśli chce mieć\n"
 "całkowitą kontrolę nad tym co zostanie zainstalowane w systemie.\n"
 "\n"
 "Jeśli została uruchomiona instalacji w trybie \"Aktualizacja\", można\n"
@@ -3064,7 +2934,7 @@ msgid ""
 msgstr ""
 "Powyżej pokazano wykryte na Twoim dysku istniejące partycje linuksowe.\n"
 "Można zastosować wybory określone przez druida, są one odpowiednie\n"
-"w większości przypadków. Jesli wprowadza się zmiany, należy określić "
+"w większości przypadków. Jeśli wprowadza się zmiany, należy określić "
 "przynajmniej partycję root (\"/\"). Nie należy wybierać zbyt małej \n"
 "partycji - nie będzie można wówczas zainstalować zbyt dużo \n"
 "oprogramowania. Jeśli dane mają być przechowywane na \n"
@@ -3144,7 +3014,7 @@ msgstr ""
 "zwykłego użytkownika dla siebie. Należy się logować do tego konta w trakcie\n"
 "normalnej pracy. Pomimo, że logowanie jako \"root\" jest bardzo praktyczne\n"
 "to jednak może być bardzo niebezpieczne! Najmniejsza pomyłka może\n"
-"spowodować nieodwracalne uszodzenie systemu. Jeśli z konta zwykłego\n"
+"spowodować nieodwracalne uszkodzenie systemu. Jeśli z konta zwykłego\n"
 "użytkownika zostanie wykonany nawet poważny błąd, utracona zostanie tylko\n"
 "część danych tego użytkownika a nie cały system.\n"
 "\n"
@@ -3153,20 +3023,20 @@ msgstr ""
 "wprowadzonego ciągu i przeniesie go do pola \"Nazwa użytkownika\"\n"
 "To jest nazwa, którą musi używać dany użytkownik przy logowaniu. Oczywiście\n"
 "można ją zmienić. Ważna jest wielkość liter - dla Linuksa \"a\" i \"A\" to\n"
-"dwe różne litery. Następnie należy ustawić dla tego użytkownika hasło.\n"
+"dwie różne litery. Następnie należy ustawić dla tego użytkownika hasło.\n"
 "Mimo, że hasło zwykłego użytkownika nie jest tak newralgiczne jak,\n"
 "hasło \"roota\", to jednak z powodów bezpieczeństwa nie należy go pomijać.\n"
 "\n"
 "Jeśli klikniesz \"Akceptuj użytkownika\", można dodać następnych, jeśli\n"
 "zachodzi taka potrzeba. Nie ma żadnych ograniczeń na ich liczbę. Dodaj np.\n"
-"konta dla wsystkich przyjaciół, dla ojca, siostry itd. Po zakończeniu\n"
+"konta dla wszystkich przyjaciół, dla ojca, siostry itd. Po zakończeniu\n"
 "dodawania wybierz \"Dalej ->\".\n"
 "\n"
 "Po kliknięciu \"Zaawansowane\" można zmienić domyślną \"powłokę\"\n"
 "dla użytkownika (domyślnie bash).\n"
 "\n"
 "Po zakończeniu dodawania wszystkich użytkowników, zostanie zadane\n"
-"pytanie o to, który użytkownik będzie mogł być automatycznie logowany\n"
+"pytanie o to, który użytkownik będzie mógł być automatycznie logowany\n"
 "podczas uruchamiania komputera. Jeśli masz ochotę używać tej funkcji\n"
 "(oraz nie dbasz za bardzo o bezpieczeństwo lokalne), wybierz żądanego\n"
 "użytkownika oraz menedżera okien, a następnie kliknij \"Dalej ->\". Jeśli "
@@ -3181,10 +3051,10 @@ msgid ""
 "terms in it, check the \"Accept\" box. If not, simply turn off your\n"
 "computer."
 msgstr ""
-"Przed kontynuacją, należy przeczytać uważnie warunki licencji. Dotyczy ona\n"
-"całej dystrybucji Linuksa Mandrake. Jeśli zgadzasz się z wszystkimi\n"
-"warunkami w niej zawartymi, kliknij przycisk \"Akceptuj\". Jeśli nie\n"
-"po prostu wyłącz komputer."
+"Przed kontynuowaniem, należy przeczytać uważnie warunki licencji.\n"
+"Dotyczy ona całej dystrybucji Linuksa Mandrake. Jeśli zgadzasz się\n"
+"z wszystkimi warunkami w niej zawartymi, zaznacz opcję \"Akceptuj\".\n"
+"Jeśli nie po prostu wyłącz komputer."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3248,7 +3118,7 @@ msgid ""
 "\n"
 "Do you really want to remove these packages?\n"
 msgstr ""
-"Następujące pakiety zostana usunięte, by umozliwić aktualizację systemu: %s\n"
+"Następujące pakiety zostaną usunięte, by umożliwić aktualizację systemu: %s\n"
 "\n"
 "\n"
 "czy naprawdę chcesz usunąć te pakiety?\n"
@@ -3631,7 +3501,7 @@ msgstr ""
 "używania tego nośnika.\n"
 "\n"
 "\n"
-"Niektóre komponenty zawarte na następnym mośniku nie podlegają\n"
+"Niektóre komponenty zawarte na następnym nośniku nie podlegają\n"
 "zasadom licencji GPL lub licencji pokrewnych. Każdy taki komponent\n"
 "podlega zasadom własnej licencji. Należy przeczytać uważnie\n"
 "licencję każdego komponentu przed jego rozpowszechnianiem lub\n"
@@ -3644,10 +3514,10 @@ msgstr ""
 "specyficznych dla danej licencji zasad, zazwyczaj nie można\n"
 "instalować programów, które im podlegają, na więcej niż jednym\n"
 "systemie, lub też adaptować go do wykorzystania w sieci.\n"
-"W razie wątpliwości należy skontaktować się z dystrybtorem lub\n"
+"W razie wątpliwości należy skontaktować się z dystrybutorem lub\n"
 "autorem danego komponentu.\n"
 "Przesyłanie do osób trzecich lub kopiowanie takich komponentów\n"
-"właczając dokumentację jest zazwyczaj zabronione.\n"
+"włączając dokumentację jest zazwyczaj zabronione.\n"
 "\n"
 "\n"
 "Wszelkie prawa do komponentów zawartych na kolejnym nośniku CD\n"
@@ -3878,10 +3748,10 @@ msgstr ""
 "\n"
 "Jeśli dowolna część tej umowy zostanie uznana za nielegalną lub "
 "nieakceptowaną w wyniku\n"
-"wyroku sądowego, ta część zostanie wyłączona z kontraktu. Wówczas "
-"zastosowanie znajdują\n"
+"wyroku sądowego, ta część zostanie wyłączona z umowy. Wówczas zastosowanie "
+"znajdują\n"
 "pozostałe części warunków umowy.\n"
-"Teminy i warunki tej licencji są zgodne z prawem francuskim.\n"
+"Terminy i warunki tej licencji są zgodne z prawem francuskim.\n"
 "Wszystkie ewentualne wątpliwości dotyczące warunków tej licencji będą "
 "rozpatrywane przez sąd.\n"
 "W ostateczności, wątpliwości będą rozpatrywane przez odpowiednie Sądy Prawa "
@@ -4288,7 +4158,7 @@ msgstr "Domena Windows"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Authentication Windows Domain"
-msgstr "Autentykacja domeny Windows"
+msgstr "Domena uwierzytelniania Windows"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4314,11 +4184,11 @@ msgstr ""
 "przyłączyć komputer do domeny Windows(TM).\n"
 "Jeśli sieć jeszcze nie jest włączona, Instalator spróbuje dołączyć komputer "
 "do domeny po kroku konfiguracji sieci.\n"
-"Jeśli ta instalacja nie powiedzie się z różnych powodów i autentykacja "
+"Jeśli ta instalacja nie powiedzie się z różnych powodów i uwierzytelnianie "
 "Windows PDC nie działa, uruchom 'smbpasswd -j DOMENA -U UŻYTKOWNIK%%HASŁO' "
 "wykorzystując swoją domenę Windows(tm), i nazwę administratora/hasło, po "
 "uruchomieniu systemu.\n"
-"Polecenie 'wbinfo -t' przetestuje czy autentykacja jest w porządku."
+"Polecenie 'wbinfo -t' przetestuje czy uwierzytelnianie jest w porządku."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4333,7 +4203,7 @@ msgstr "Domena NIS"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Authentication NIS"
-msgstr "Autentykacja NIS"
+msgstr "Uwierzytelnianie NIS"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4353,7 +4223,7 @@ msgstr "LDAP Base dn"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Authentication LDAP"
-msgstr "Autentykacja LDAP"
+msgstr "Uwierzytelnianie LDAP"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4369,7 +4239,7 @@ msgstr "Pliki lokalne"
 #: ../../standalone/drakconnect:1 ../../standalone/logdrake:1
 #, c-format
 msgid "Authentication"
-msgstr "Autentykacja"
+msgstr "Uwierzytelnianie"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4390,7 +4260,7 @@ msgstr "Hasło roota"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr "Nie masz skonfigurowanych X-ów. Czy na pewno chcesz tego?"
+msgstr "Nie masz skonfigurowanego systemu X Window. Czy na pewno chcesz tego?"
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -4407,6 +4277,12 @@ msgstr "Usługi"
 #, c-format
 msgid "System"
 msgstr "System"
+
+#. -PO: example: lilo-graphic on /dev/hda1
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "%s on %s"
+msgstr "%s na %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4549,14 +4425,14 @@ msgid "Which is your timezone?"
 msgstr "Wybierz strefę czasową."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Czy chcesz skonfigurować drukowanie?"
+msgstr "Czy chcesz spróbować jeszcze raz?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Nie można rozdzielić procesów: %s"
+msgstr "Nie można skontaktować się z serwerem zwierciadlanym %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4849,6 +4725,11 @@ msgstr "Wybierz typ myszy."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Encryption key for %s"
+msgstr "Klucz szyfrujący dla %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Upgrade %s"
 msgstr "Uaktualnienie %s"
 
@@ -5111,7 +4992,7 @@ msgstr "tamilski (ISCII)"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
-msgstr "serbski (cyrulica)"
+msgstr "serbski (cyrylica)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5196,7 +5077,7 @@ msgstr "maltański (UK)"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Mongolian (cyrillic)"
-msgstr "mongolski (cyrulica)"
+msgstr "mongolski (cyrylica)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6236,7 +6117,7 @@ msgstr "Gambia"
 #: ../../lang.pm:1
 #, c-format
 msgid "Greenland"
-msgstr "Granlandia"
+msgstr "Grenlandia"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8262,7 +8143,7 @@ msgstr "Wybierz klucz szyfrujący system plików"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Filesystem encryption key"
-msgstr "Klusz szyfrujący system plików"
+msgstr "Klucz szyfrujący system plików"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8441,7 +8322,7 @@ msgstr "Kopiowanie %s"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Moving files to the new partition"
-msgstr "Przesnoszenie plików do nowej partycji"
+msgstr "Przenoszenie plików do nowej partycji"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8933,7 +8814,7 @@ msgstr ""
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Domain Authentication Required"
-msgstr "Wymagana autentykacja domenowa"
+msgstr "Wymagane uwierzytelnianie domenowe"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -8943,7 +8824,7 @@ msgstr "Jeszcze jedna"
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Which username"
-msgstr "Jaka nazwa użytkowika"
+msgstr "Jaka nazwa użytkownika"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -8972,9 +8853,9 @@ msgid "SCSI controllers"
 msgstr "Kontrolery SCSI"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewire controllers"
-msgstr "Kontrolery USB"
+msgstr "Kontrolery fireware"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9096,7 +8977,7 @@ msgid ""
 "The current driver for your \"%s\" sound card is \"%s\" "
 msgstr ""
 "Jeśli naprawdę sądzisz, że wiesz który sterownik pasuje do twojej karty\n"
-"możnesz wybrać jeden z listy.\n"
+"możesz wybrać jeden z listy.\n"
 "\n"
 "Bieżącym sterownikiem dla twojej karty dźwiękowej \"%s\" jest \"%s\""
 
@@ -9266,7 +9147,7 @@ msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
 msgstr ""
-"Tutaj można wybrać alternatywany sterownik (OSS lub ALSA) dla twojej karty "
+"Tutaj można wybrać alternatywny sterownik (OSS lub ALSA) dla twojej karty "
 "dźwiękowej (%s)"
 
 #: ../../harddrake/sound.pm:1
@@ -9280,7 +9161,7 @@ msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"Brak alternetywnego sterownika OSS/ALSA dla twojej karty dźwiękowej (%s) "
+"Brak alternatywnego sterownika OSS/ALSA dla twojej karty dźwiękowej (%s) "
 "aktualnie wykorzystującej \"%s\""
 
 #: ../../harddrake/sound.pm:1
@@ -9301,7 +9182,7 @@ msgstr "Obsługa radia:"
 #: ../../harddrake/v4l.pm:1
 #, c-format
 msgid "PLL setting:"
-msgstr "Utawienia PLL:"
+msgstr "Ustawienia PLL:"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -9334,7 +9215,7 @@ msgstr ""
 "W przypadku większości kart telewizyjnych, moduł bttv jądra GNU/Linux "
 "automatycznie wykrywa poprawne parametry.\n"
 "Jeśli karta została wykryta niepoprawnie, można wymusić w tym miejscu "
-"poprawne typy tunera i karty. Wystarczy wybrać parametry swojej karty tv,"
+"poprawne typy tunera i karty. Wystarczy wybrać parametry swojej karty TV,"
 "jeśli są one wymagane"
 
 #: ../../harddrake/v4l.pm:1
@@ -9638,7 +9519,7 @@ msgid ""
 "The proper format is \"port/tcp\" or \"port/udp\", \n"
 "where port is between 1 and 65535."
 msgstr ""
-"Podano nieprawidłoy port: %s.\n"
+"Podano nieprawidłowy port: %s.\n"
 "Właściwy format to \"port/tcp\" lub \"port/udp\", \n"
 "gdzie port to cyfra pomiędzy 1 a 65535."
 
@@ -9649,14 +9530,14 @@ msgid ""
 "Valid examples are: 139/tcp 139/udp.\n"
 "Have a look at /etc/services for information."
 msgstr ""
-"Tutaj można wpisać rózne porty \n"
+"Tutaj można wpisać różne porty \n"
 "Oto prawidłowe przykłady: 139/tcp, 139/udp.\n"
-"Więcj informacji znajdziesz w /etc/services."
+"Więcej informacji znajdziesz w /etc/services."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr "Które usługi mają byc dostępne z Internetu?"
+msgstr "Które usługi mają być dostępne z Internetu?"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -9682,7 +9563,7 @@ msgid ""
 msgstr ""
 "Konfiguracja zapory sieciowej\n"
 "\n"
-"Narzędzie to umożliwia konfgurację prostej zapory ogniowej.\n"
+"Narzędzie to umożliwia konfigurację prostej zapory ogniowej.\n"
 "Jeśli potrzebujesz silnego dedykowanego rozwiązania,\n"
 "skorzystaj z dystrybucji Mandrake Security Firewall."
 
@@ -9743,11 +9624,6 @@ msgstr ""
 #, c-format
 msgid "Configuring network"
 msgstr "Konfiguracja sieci"
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid "no network card found"
-msgstr "nie znaleziono karty sieciowej"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -9881,7 +9757,7 @@ msgstr "Protokół europejski"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "European protocol (EDSS1)"
-msgstr "Europa (EDSS1)"
+msgstr "Protokół europejski (EDSS1)"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -10282,7 +10158,7 @@ msgid ""
 "You can connect to the Internet or reconfigure your connection."
 msgstr ""
 "\n"
-"Możesz połączyć się z Internetem lub zrekonfigurować połączenie."
+"Możesz połączyć się z Internetem lub ponownie skonfigurować połączenie."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10395,9 +10271,9 @@ msgid "Start at boot"
 msgstr "Uruchamianie przy starcie"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Należy podać nazwę komputera lub adres IP.\n"
+msgstr "Przypisywanie nazwy komputera z adresu DHCP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10410,9 +10286,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Śledzenie ID karty sieciowej (użyteczne przy laptopach)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Nazwa komputera"
+msgstr "Nazwa DHCP komputera"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -11044,19 +10920,6 @@ msgstr ""
 "Następujące drukarki zostały skonfigurowane. Kliknij dwukrotnie drukarkę aby "
 "zmienić jej ustawienia; uczynić drukarką domyślną; lub też zobaczyć "
 "informacje o niej."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-"Następujące drukarki zostały skonfigurowane. Kliknij dwukrotnie drukarkę aby "
-"zmienić jej ustawienia; aby uczynić ją drukarka domyślną; aby zobaczyć "
-"informacje o niej; lub też aby ustawić drukarkę na serwerze zdalnym CUPS dla "
-"Star Office/OpenOffice.org/GIMP."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11692,6 +11555,11 @@ msgstr "Opcja %s musi być liczbą!"
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "Opcja %s musi być liczbą całkowitą!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer default settings"
+msgstr "Domyślne ustawienia drukarki"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13721,8 +13589,8 @@ msgstr "Witajcie, włamywacze"
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 "Sukces MandrakeSoft jest oparty na zasadzie Oprogramowania Otwartego. Twój "
 "nowy system operacyjny jest wynikiem współpracy Społeczności Linuksa z "
@@ -13730,7 +13598,7 @@ msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "Witaj w świecie Otwartego Oprogramowania"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -13741,8 +13609,8 @@ msgstr "Dziękujemy za wybór dystrybucji Mandrake Linux"
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "By dzielić się swą wiedzą oraz pomóc w tworzeniu narzędzi linuksowych "
 "przyłącz się do naszych forów dyskusyjnych, które znajdziesz na naszych "
@@ -13750,218 +13618,179 @@ msgstr ""
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "Chcesz wiedzieć o społeczeństwie otwartego oprogramowania?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr ""
+"Chcesz wiedzieć o społeczeństwie otwartego oprogramowania? Dołącz do świata "
+"otwartego oprogramowania!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "Dołącz do świata otwartego oprogramowania"
+msgid "Build the future of Linux!"
+msgstr "Zbuduj przyszłość Linuksa!"
 
-#: ../../share/advertising/03-internet.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1 dostarcza najlepsze oprogramowanie, umożliwiając  dostęp "
-"do wszystkiego co oferuje Internet: przeglądanie sieci i oglądanie animacji "
-"za pomocą Mozilli, Konquerora, zarządzanie informacjami osobistymi przy "
-"użyciu Evolution oraz Kmail"
+"Oraz oczywiście, wyduś z multimediów wszystko co możliwe dzięki najnowszemu "
+"oprogramowaniu do odtwarzania filmów, plików dźwiękowych oraz do "
+"obsługi zdjęć i obrazów."
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "Pobierz wzystko z internetu"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
-"Mandrake Linux 9.1 pozwoli ci wykorzystać wszystkie możliwości multimedialne "
-"twojego komputera! Użyj najnowszego oprogramowania aby słuchać muzyki i "
-"plików audio, modyfikować i organizować zdjęcia i grafikę, oglądać telewizję "
-"i filmy wideo i dużo więcej"
+"Przeglądaj sieć WWW za pomocą Mozilli lub Konquerora, czytaj swoją pocztę "
+"posługując się programem Evolution lub Kmail, twórz dokumenty z użyciem "
+"pakietu OpenOffice.org."
 
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Push multimedia to its limits!"
-msgstr "Korzystaj z multimediów bez ograniczeń!"
+msgid "MandrakeSoft has selected the best software for you"
+msgstr "Firma MandrakeSoft wybrała dla Ciebie najlepsze oprogramowanie"
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr "Odkryj nabardziej aktualne programy graficzne i multimedialne!"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
-"Mandrake Linux 9.1 dostarcza najlepsze gry Open Source - logiczne, "
-"przygodowe, karciane, sportowe, strategiczne, ..."
+"Mandrake Linux 9.1 zawiera Centrum Sterowania Mandrake, wydajne narzędzie "
+"pozwalające na dostosowanie komputera do potrzeb użytkownika. Można "
+"z jego pomocą konfigurować i dostosowywać takie elementy jak "
+"poziom bezpieczeństwa, urządzenia zewnętrzne (ekran, mysz, klawiatura...), "
+"połączenie internetowe oraz wiele innych!"
 
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
-msgid "Games"
-msgstr "Gry"
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Wielozadaniowe narzędzie konfiguracyjne Mandrake"
 
-#: ../../share/advertising/06-mcc.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
-"Mandrake Linux 9.1 dostarcza silne narzędzie do konfiguracji komputera."
+"Perfekcyjnie dostosuj swój komputer do twoich potrzeb dzięki 11 dostępnych, "
+"w pełni modyfikowalnych interfejsów użytkownika: KDE 3.1, GNOME 2.2, "
+"Window Maker, ..."
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "Mandrake Control Center"
-msgstr "Centrum Sterowania Mandrake"
+msgid "A customizable environment"
+msgstr "Dostosowywalne środowisko"
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
-"Mandrake Linux 9.1 dostarcza 11 różnych w pełni modyfikowalnych interfejsów "
-"użytkownika: KDE 3, GNOME, Window Maker, ..."
+"Modyfikacja i tworzenie plików z użyciem różnych języków takich jak Perl, "
+"Python C i C++ nigdy nie były tak proste dzięki GNU gcc 3 oraz najlepszym "
+"środowiskom programistycznym Open Source."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "Interfejsy użytkownika"
-
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
-msgstr ""
-"Mandrake Linux to niezwykle wydajna platforma programistyczna. Odkryj siłę "
-"kompilatora GNU gcc 3 oraz środowisk tworzenia oprogramowania Open Source."
-
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr ""
 "Mandrake Linux 9.1 jest najlepsza platformą dla twórców oprogramowania."
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "Programowanie"
-
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "Zmień swój komputer w wydajny serwer linuksowy po kilku kliknięciach myszą "
 "uruchamiając serwer www, pocztowy, zaporę ogniowa, ruter, serwer plików i "
 "wydruków, ..."
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "Zamień swój komputer w niezawodny serwer."
 
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr "Produkt ten jest dostępny na stronach MandrakeStore"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-"Ta zapora sieciowa posiada unikalne cechy w pełni zaspokajające twoje "
-"potrzeby w zakresie bezpieczeństwa sieciowego"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-"W skład produktów z serii MandrakeSecurity wchodzi Multi Network Firewall (M."
-"N.F.)"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "Zadbaj o bezpieczeństwo"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 "Nasz pełen wybór rozwiązań linuksowych, oferty specjalne dotyczące produktów "
 "i \"dodatków\" są dostępne za pośrednictwem sieci w e-sklepie:"
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr "Oficjalny e-sklep MandrakeSoft"
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
-"MandrakeSoft współpracuje wraz z wybranymi firmami oferującymi profesjonalne "
-"rozwiązania zgodne z Mandrake Linux. Lista tych partnerów jest dostępna na "
-"stronach MandrakeStore"
+"Zwiększ wydajność komputera dzięki pomocy wybranych partnerów oferujących "
+"profesjonalne rozwiązania zgodne z Linuksem Mandrake."
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Strategic partners"
-msgstr "Partnerzy strategiczni"
+msgid "Get the best items with Mandrake Linux Strategic partners"
+msgstr "Otrzymaj nalepsze rozwiązania od partnerów strategicznych Mandrake"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
-"Niezależnie czy zdobywasz wiedzę samodzielnie online, czy też przez sieć "
-"partnerów szkoleniowych, zestaw szkoleń Linux-Campus przygotują cię do "
-"potwierdzenia twojej wiedzy przez program certyfikacji LPI (światowy "
-"profesjonalny system certyfikacji)"
+"Firma MandrakeSoft zaprojektowała wspaniałe narzędzia do tworzenia "
+"zabezpieczeń dla tej dystrybucji Linuksa: Draksec, narzędzie do zarządzania "
+"systemem zabezpieczeń oraz silna zapora sieciowa współpracują przy "
+"znacznym zmniejszaniu ryzyka włamania na serwer."
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
-msgstr "Certyfikuj się z Linuksa"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "Zadbaj o bezpieczeństwo Linuksa Mandrake"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
+msgstr "Produkt ten jest dostępny na stronach MandrakeStore."
+
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
 msgstr ""
-"Program szkoleń został utworzony w odpowiedzi na potrzeby zarówno "
-"użytkowników jak i ekspertów (administratorów sieci i systemów komputerowych)"
+"Zakończ konfigurację zabezpieczeń dzięki bardzo łatwym w używaniu "
+"programom, wśród których znajdują się takie komponenty jak zapora sieciowa, "
+"serwer i klient wirtualnej sieci prywatnej (VPN), system wykrywania włamań "
+"oraz menedżer sieci."
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr "Odkryj Linux-Campus - zestaw szkoleń MandrakeSoft "
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr "Zabezpiecz swoje sieci za pomocą produktu Multi Network Firewall"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -13972,21 +13801,21 @@ msgstr ""
 "społeczności linuksowej online by dzielić się swoją wiedzą i pomagać innym "
 "stając się uznanym  ekspertem na stronach pomocy technicznej:"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr ""
 "Znajdź rozwiązanie swoich problemów korzystając online z platformy wsparcia "
 "technicznego MandrakeSoft"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Zostań Ekspertem Mandrake"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -13995,40 +13824,17 @@ msgstr ""
 "Wszystkie przypadki są prowadzone przez wykwalifikowanego eksperta "
 "technicznego MandrakeSoft."
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr ""
 "Platforma online odpowiadająca na specyficzne dla firm potrzeby dotyczące "
 "wsparcia technicznego."
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corporate"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-"Klub Mandrake oraz Korporacyjny Klub Mandrake zostały utworzone dla biznesu "
-"oraz indywidualnych użytkowników Linuksa Mandrake, którzy potrzebują "
-"bezpośredniegowsparacia technicznego dla ich ulubionej dystrybucji Linuksa "
-"oraz otrzymują specjalne przywileje. Jeśli podoba Ci się nasz produkt, jeśli "
-"twoja firma zyskuje korzystając z niego, zwiększając swoją kokurencyjność, "
-"jeśli chcesz wesprzeć tworzenie Linuksa Mandrake, przyłącz się do Klubu "
-"Mandrake!"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr "Odkryj Klub Mandrake oraz Korporacyjny Klub Mandrake"
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -16552,6 +16358,11 @@ msgstr "Druid pierwszego uruchomienia"
 
 #: ../../standalone/drakbug:1
 #, c-format
+msgid "Mandrake Control Center"
+msgstr "Centrum Sterowania Mandrake"
+
+#: ../../standalone/drakbug:1
+#, c-format
 msgid "Mandrake Bug Report Tool"
 msgstr "Narzędzie raportowania błędów Mandrake"
 
@@ -17516,6 +17327,28 @@ msgstr "Interfejs %s (moduł %s)"
 
 #: ../../standalone/drakgw:1
 #, c-format
+msgid "Net Device"
+msgstr "Urządzenie sieciowe"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
+"Podaj nazwę interfejsu podłączonego do Internetu.\n"
+"\n"
+"Przykłady:\n"
+"\t\tppp+ w przypadku modemu lub połączeń DSL, \n"
+"\t\teth0 lub eth1 dla połączenia kablowego, \n"
+"\t\tippp+ dla połączenia isdn.\n"
+
+#: ../../standalone/drakgw:1
+#, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -17890,7 +17723,7 @@ msgid ""
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -18096,6 +17929,11 @@ msgstr "zapisywanie ekranu powitalnego tematu..."
 #, c-format
 msgid "choose image file"
 msgstr "wybierz plik obrazu"
+
+#: ../../standalone/draksplash:1
+#, c-format
+msgid "choose image"
+msgstr "wybierz obraz"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -18576,8 +18414,18 @@ msgstr "port drukarki sieciowej"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "the name of the CPU"
+msgstr "nazwa procesora"
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Name"
 msgstr "Nazwa"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "the number of buttons the mouse has"
+msgstr "liczba przycisków myszy"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18751,7 +18599,7 @@ msgstr "To pole opisuje urządzenie"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
@@ -19767,6 +19615,10 @@ msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr "Zestawy narzędzi dla poczty, WWW, przesyłania plików i chat"
 
 #: ../../share/compssUsers:999
+msgid "Games"
+msgstr "Gry"
+
+#: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
 msgstr "Multimedia - Grafika"
 
@@ -19822,165 +19674,112 @@ msgstr "Finanse osobiste"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programy do zarządzania finansami, np gnucash"
 
-#~ msgid ""
-#~ "Please enter your host name if you know it.\n"
-#~ "Some DHCP servers require the hostname to work.\n"
-#~ "Your host name should be a fully-qualified host name,\n"
-#~ "such as ``mybox.mylab.myco.com''."
-#~ msgstr ""
-#~ "Podaj nazwę komputera, jeśli ją znasz.\n"
-#~ "Niektóre serwery DHCP wymagają tej nazwy do działania.\n"
-#~ "Powinna być ona zapisana w pełnej postaci (bez polskich znaków),\n"
-#~ "np. \"mojkomputer.mojadomena.pl\"."
-
-#~ msgid "DrakFloppy Error: %s"
-#~ msgstr "Błąd DrakFloppy: %s"
-
-#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-
-#~ msgid "Launch Aurora at boot time"
-#~ msgstr "Uaktywnij graficzny start"
-
-#~ msgid "Traditional Gtk+ Monitor"
-#~ msgstr "Wygląd tradycyjny Gtk+"
-
-#~ msgid "Traditional Monitor"
-#~ msgstr "Wygląd tradycyjny"
-
-#~ msgid "NewStyle Monitor"
-#~ msgstr "Styl nowoczesny"
-
-#~ msgid "NewStyle Categorizing Monitor"
-#~ msgstr "Wygląd nowoczesny z kategoriami"
-
-#~ msgid "Secure Connection"
-#~ msgstr "Bezpieczne połączenie"
-
-#~ msgid "FTP Connection"
-#~ msgstr "Połączenie FTP"
-
-#~ msgid "Mail/Groupware/News"
-#~ msgstr "Poczta/Narzędzia pracy grupowej/News"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Serwer pocztowy Postfix, serwer grup dyskusyjnych Inn"
-
-#~ msgid "/Options"
-#~ msgstr "/Opcje"
-
-#~ msgid "/Autodetect jazz drives"
-#~ msgstr "/Automatycznie wykryj urządzenia jazz"
-
-#~ msgid "/Autodetect modems"
-#~ msgstr "/Automatycznie wykryj modemy"
-
-#~ msgid "/Autodetect printers"
-#~ msgstr "/Automatycznie wykryj drukarki"
+#~ msgid "no network card found"
+#~ msgstr "nie znaleziono karty sieciowej"
 
 #~ msgid ""
-#~ "The partition you've selected to add as root (/) is physically located "
-#~ "beyond\n"
-#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
-#~ "partition"
+#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "and view animations with Mozilla and Konqueror, or read your mail and "
+#~ "handle your personal information with Evolution and Kmail"
 #~ msgstr ""
-#~ "Dodano partycję root (/) na dysku poza cylindrem 1024, brak również\n"
-#~ "partycji /boot. Jeżeli więc chcesz używać programu rozruchowego lilo\n"
-#~ "dodaj partycję /boot poniżej cylindra 1024"
+#~ "Mandrake Linux 9.1 dostarcza najlepsze oprogramowanie, umożliwiając  "
+#~ "dostęp do wszystkiego co oferuje Internet: przeglądanie sieci i oglądanie "
+#~ "animacji za pomocą Mozilli, Konquerora, zarządzanie informacjami "
+#~ "osobistymi przy użyciu Evolution oraz Kmail"
+
+#~ msgid "Get the most from the Internet"
+#~ msgstr "Pobierz wzystko z internetu"
+
+#~ msgid "Push multimedia to its limits!"
+#~ msgstr "Korzystaj z multimediów bez ograniczeń!"
+
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr "Odkryj nabardziej aktualne programy graficzne i multimedialne!"
 
 #~ msgid ""
-#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
-#~ "> 1024).\n"
-#~ "Either you use LILO and it won't work, or you don't use LILO and you "
-#~ "don't need /boot"
+#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "strategy, ..."
 #~ msgstr ""
-#~ "Niestety, nie można utworzyć /boot tak daleko na dysku (poza cylindrem "
-#~ "1024)\n"
-#~ "Albo użyjesz LILO, (nie będzie działać), lub nie będziesz używać lilo\n"
-#~ "i nie potrzebujesz /boot"
-
-#~ msgid "Upgrade"
-#~ msgstr "Uaktualnienie"
-
-#~ msgid "Install system updates"
-#~ msgstr "Aktualizacja systemu"
+#~ "Mandrake Linux 9.1 dostarcza najlepsze gry Open Source - logiczne, "
+#~ "przygodowe, karciane, sportowe, strategiczne, ..."
 
 #~ msgid ""
-#~ "Standard: This is the standard security recommended for a computer that "
-#~ "will be used to connect\n"
-#~ "               to the Internet as a client.\n"
-#~ "\n"
-#~ "High:       There are already some restrictions, and more automatic "
-#~ "checks are run every night.\n"
-#~ "\n"
-#~ "Higher:    The security is now high enough to use the system as a server "
-#~ "which can accept\n"
-#~ "              connections from many clients. If your machine is only a "
-#~ "client on the Internet, you\n"
-#~ "           should choose a lower level.\n"
-#~ "\n"
-#~ "Paranoid:  This is similar to the previous level, but the system is "
-#~ "entirely closed and security\n"
-#~ "                features are at their maximum\n"
-#~ "\n"
-#~ "Security Administrator:\n"
-#~ "               If the 'Security Alerts' option is set, security alerts "
-#~ "will be sent to this user (username or\n"
-#~ "\t       email)"
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
 #~ msgstr ""
-#~ "Standardowy: To jest standardowy poziom bezpieczeństwa zalecany dla "
-#~ "komputera używanego jako\n"
-#~ "maszyna kliencka podłączona do Internetu.\n"
-#~ "\n"
-#~ "Wysoki:       Istnieją wciąż pewne ograniczenia. Kilka automatycznych "
-#~ "procesów\n"
-#~ "sprawdzających uruchamianych jest co noc.\n"
-#~ "\n"
-#~ "Wyższy: Poziom bezpieczeństwa jest wystarczający do wykorzystywania "
-#~ "komputera\n"
-#~ "jako serwera akceptującego połączenia od wielu klientów. Jeśli twoja "
-#~ "masztna jest tylko\n"
-#~ "klientem internetowym, należy wybrać niższy poziom bezpieczeństwa.\n"
-#~ "\n"
-#~ "Paranoidalny:  Poziom podobny do poprzedniego, lecz system jest "
-#~ "całkowicie zamknięty\n"
-#~ "zaś funkcje bezpieczeństwa są ustawione na maksimum.\n"
-#~ "\n"
-#~ "Administrator zabezpieczeń:\n"
-#~ "               Jeśli jest ustawiona opcja 'Alarmy bezpieczeństwa', "
-#~ "wysyłane będą wiadomości o naruszeniu bezpieczeństwa do tego użytkownika."
+#~ "Mandrake Linux 9.1 dostarcza silne narzędzie do konfiguracji komputera."
 
-#~ msgid "192.168.100.0/255.255.255.0\n"
-#~ msgstr "192.168.100.0/255.255.255.0\n"
-
-#~ msgid "192.168.100.0/24\n"
-#~ msgstr "192.168.100.0/24\n"
-
-#~ msgid "10.1.*\n"
-#~ msgstr "10.1.*\n"
-
-#~ msgid "10.0.0.*\n"
-#~ msgstr "10.0.0.*\n"
-
-#~ msgid "192.168.100.194\n"
-#~ msgstr "192.168.100.194\n"
-
-#~ msgid "Do you want to configure another printer?"
-#~ msgstr "Czy chcesz skonfigurować inną drukarkę?"
-
-#~ msgid "Know how to use this printer"
-#~ msgstr "Dowiedz się jak używać tą drukarkę"
-
-#~ msgid "Preparing Printerdrake..."
-#~ msgstr "Przygotowywanie Printerdrake..."
+#~ msgid "User interfaces"
+#~ msgstr "Interfejsy użytkownika"
 
 #~ msgid ""
-#~ "if set to yes, check for empty password, or a password while it should be "
-#~ "in /etc/shadow or other users with id 0."
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
 #~ msgstr ""
-#~ "jeśli ustawiono na tak, sprawdza puste hasła, lub hasła, które powinny "
-#~ "znajdować się w pliku /etc/shadow lub innych użytkowników z id 0."
+#~ "Mandrake Linux to niezwykle wydajna platforma programistyczna. Odkryj "
+#~ "siłę kompilatora GNU gcc 3 oraz środowisk tworzenia oprogramowania Open "
+#~ "Source."
 
-#~ msgid "Reading printer data ..."
-#~ msgstr "Odczyt danych drukarki ..."
+#~ msgid "Development simplified"
+#~ msgstr "Programowanie"
+
+#~ msgid ""
+#~ "This firewall product includes network features that allow you to fulfill "
+#~ "all your security needs"
+#~ msgstr ""
+#~ "Ta zapora sieciowa posiada unikalne cechy w pełni zaspokajające twoje "
+#~ "potrzeby w zakresie bezpieczeństwa sieciowego"
+
+#~ msgid ""
+#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
+#~ "N.F.)"
+#~ msgstr ""
+#~ "W skład produktów z serii MandrakeSecurity wchodzi Multi Network Firewall "
+#~ "(M.N.F.)"
+
+#~ msgid "Strategic partners"
+#~ msgstr "Partnerzy strategiczni"
+
+#~ msgid ""
+#~ "Whether you choose to teach yourself online or via our network of "
+#~ "training partners, the Linux-Campus catalogue prepares you for the "
+#~ "acknowledged LPI certification program (worldwide professional technical "
+#~ "certification)"
+#~ msgstr ""
+#~ "Niezależnie czy zdobywasz wiedzę samodzielnie online, czy też przez sieć "
+#~ "partnerów szkoleniowych, zestaw szkoleń Linux-Campus przygotują cię do "
+#~ "potwierdzenia twojej wiedzy przez program certyfikacji LPI (światowy "
+#~ "profesjonalny system certyfikacji)"
+
+#~ msgid "Certify yourself on Linux"
+#~ msgstr "Certyfikuj się z Linuksa"
+
+#~ msgid ""
+#~ "The training program has been created to respond to the needs of both end "
+#~ "users and experts (Network and System administrators)"
+#~ msgstr ""
+#~ "Program szkoleń został utworzony w odpowiedzi na potrzeby zarówno "
+#~ "użytkowników jak i ekspertów (administratorów sieci i systemów "
+#~ "komputerowych)"
+
+#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+#~ msgstr "Odkryj Linux-Campus - zestaw szkoleń MandrakeSoft "
+
+#~ msgid ""
+#~ "MandrakeClub and Mandrake Corporate Club were created for business and "
+#~ "private users of Mandrake Linux who would like to directly support their "
+#~ "favorite Linux distribution while also receiving special privileges. If "
+#~ "you enjoy our products, if your company benefits from our products to "
+#~ "gain a competititve edge, if you want to support Mandrake Linux "
+#~ "development, join MandrakeClub!"
+#~ msgstr ""
+#~ "Klub Mandrake oraz Korporacyjny Klub Mandrake zostały utworzone dla "
+#~ "biznesu oraz indywidualnych użytkowników Linuksa Mandrake, którzy "
+#~ "potrzebują bezpośredniegowsparacia technicznego dla ich ulubionej "
+#~ "dystrybucji Linuksa oraz otrzymują specjalne przywileje. Jeśli podoba Ci "
+#~ "się nasz produkt, jeśli twoja firma zyskuje korzystając z niego, "
+#~ "zwiększając swoją kokurencyjność, jeśli chcesz wesprzeć tworzenie Linuksa "
+#~ "Mandrake, przyłącz się do Klubu Mandrake!"
+
+#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
+#~ msgstr "Odkryj Klub Mandrake oraz Korporacyjny Klub Mandrake"
