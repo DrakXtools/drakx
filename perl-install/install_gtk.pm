@@ -176,15 +176,13 @@ sub create_logo_window {
 
     my $file = $o->{meta_class} eq 'firewall' ? "logo-mandrake-Firewall.png" : "logo-mandrake.png";
 
-    my $w = bless {}, 'ugtk2';
-    $w->{rwindow} = $w->{window} = 
+    $o->{logo_window} =
       gtknew('Window', 
 	     width => $::logowidth, height => $::logoheight, 
 	     widget_name => 'logo',
 	     child => gtknew('Image', file => $file),
 	 );
-    $w->show;
-    $o->{logo_window} = $w;
+    $o->{logo_window}->show;
 }
 
 #------------------------------------------------------------------------------
