@@ -122,6 +122,7 @@ $options{free_size} = 500;
 $options{free_primary} = 1;
 $options{free_fs} = 'fat16';
 $options{boot_entries} = 'linux,linux-nonfb,failsafe,floppy';
+$options{kernel} = "acpi=off";
 
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
@@ -490,7 +491,7 @@ if (defined $resize_fat_size) {
     print F "timeout 0\n\n";
     print F "title oem\n";
 }
-print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=128000 acpi=off automatic=method:disk,disk:$hd,partition:$hdp$inst,directory:/ hd vga=788 fbeginner oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
+print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=128000 $options{kernel} automatic=method:disk,disk:$hd,partition:$hdp$inst,directory:/ hd vga=788 fbeginner oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
 print F "initrd (hd0,$instz)/boot/all.rdz\n";
 #- if a windows partition is available, add an entrie for it.
 if (defined $resize_fat_size) {

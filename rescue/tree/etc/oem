@@ -117,6 +117,9 @@ unless (-e "/cdrom/VERSION") {
     system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
 }
 
+#- default options to be used.
+$options{kernel} = "acpi=off";
+
 #- detect language used and default options.
 my ($lang, $flang, $charset);
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
@@ -125,6 +128,7 @@ while (<F>) {
     /\[lang[=:]([^]]*)\]/ and $options{lang} = $1;
     /[\[\-]server[\]\-]/ and $options{server} = '';
     /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
+    /\[kernel[=:]([^]]*)\]/ and $options{kernel} = $1;
     /\[ext2\]/ and $options{fs} = "ext2";
     /\[ext3\]/ and $options{fs} = "ext3";
 }
@@ -477,7 +481,7 @@ if (defined $resize_fat_size) {
     print F "timeout 0\n\n";
     print F "title oem\n";
 }
-print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=128000 acpi=off automatic=method:disk,disk:$hd,partition:$hdp$inst,directory:/ hd vga=788 fbeginner flang=$lang oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
+print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=128000 $options{kernel} automatic=method:disk,disk:$hd,partition:$hdp$inst,directory:/ hd vga=788 fbeginner flang=$lang oem defcfg=/tmp/hdimage/Mandrake/oem_patch.pl\n";
 print F "initrd (hd0,$instz)/boot/all.rdz\n";
 #- if a windows partition is available, add an entrie for it.
 if (defined $resize_fat_size) {
