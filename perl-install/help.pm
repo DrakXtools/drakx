@@ -21,7 +21,7 @@ it may also be very dangerous! The slightest mistake could mean that your
 system would not work any more. If you make a serious mistake as a regular
 user, you may only lose some information, but not the entire system.
 
-First, you have to enter your real name. This is not mandatory, of course
+First, you have to enter your real name. This is not mandatory, of course -
 as you can actually enter whatever you want. DrakX will then take the first
 word you have entered in the box and will bring it over to the \"User
 name\". This is the name this particular user will use to log onto the
@@ -86,8 +86,8 @@ available for installation. Click \"OK\" when you are ready to continue.
 Packages are sorted in groups corresponding to a particular use of your
 machine. The groups themselves are sorted into four sections:
 
- * \"Workstation\": if you plan to use your machine as a workstation, select
-one or more of the corresponding groups;
+ * \"Workstation\": if you plan to use your machine as a workstation,
+select one or more of the corresponding groups;
 
  * \"Development\": if your machine is to be used for programming, choose
 the desired group(s);
@@ -253,7 +253,7 @@ act as a server, or if you were not successful in getting the display
 configured."),
 
 createBootdisk => 
-__("The Mandrake LinuxCD-ROM has a built-in rescue mode. You can access it by
+__("The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by
 booting from the CD-ROM, press the >>F1<< key at boot and type >>rescue<<
 at the prompt. But in case your computer cannot boot from the CD-ROM, you
 should come back to this step for help in at least two situations:
@@ -265,8 +265,8 @@ your system). If you need to reinstall Windows, the Microsoft install
 process will rewrite the boot sector, and then you will not be able to
 start GNU/Linux!
 
- * if a problem arises and you cannot start up GNU/Linux from the hard disk,
-this floppy disk will be the only means of starting up GNU/Linux. It
+ * if a problem arises and you cannot start up GNU/Linux from the hard
+disk, this floppy disk will be the only means of starting up GNU/Linux. It
 contains a fair number of system tools for restoring a system, which has
 crashed due to a power failure, an unfortunate typing error, a typo in a
 password, or any other reason.
@@ -310,20 +310,20 @@ partitioning of your blank drive(s). You will not be prompted further;
 Linux partitions on your hard drive. If you want to use them, choose this
 option;
 
- * \"Use the free space on the Windows; partition\": if MicrosoftWindows is
-installed on your hard drive and takes all the space available on it, you
-have to create free space for Linux data. To do so, you can delete your
-MicrosoftWindows partition and data (see ``Erase entire disk'' or ``Expert
-mode'' solutions) or resize your MicrosoftWindows partition. Resizing can
+ * \"Use the free space on the Windows; partition\": if Microsoft Windows
+is installed on your hard drive and takes all the space available on it,
+you have to create free space for Linux data. To do so, you can delete your
+Microsoft Windows partition and data (see ``Erase entire disk'' or ``Expert
+mode'' solutions) or resize your Microsoft Windows partition. Resizing can
 be performed without the loss of any data, provided you previously
 defragment the Windows partition. Backing up your data won't hurt either..
 This solution is recommended if you want to use both Mandrake Linux and
-MicrosoftWindows on the same computer.
+Microsoft Windows on the same computer.
 
-   Before choosing this option, please understand that after this procedure,
-the size of your MicrosoftWindows partition will be smaller than at the
-present time. You will have less free space under MicrosoftWindows to store
-your data or to install new software;
+   Before choosing this option, please understand that after this
+procedure, the size of your Microsoft Windows partition will be smaller
+than at the present time. You will have less free space under Microsoft
+Windows to store your data or to install new software;
 
  * \"Erase entire disk\": if you want to delete all data and all partitions
 present on your hard drive and replace them with your new Mandrake Linux
@@ -339,9 +339,9 @@ will be lost;
    !! If you choose this option, all data on your disk will be lost. !!
 
  * \"Expert mode\": choose this option if you want to manually partition
-your hard drive. Be careful it is a powerful but dangerous choice. You can
-very easily lose all your data. Hence, do not choose this unless you know
-what you are doing."),
+your hard drive. Be careful - it is a powerful but dangerous choice. You
+can very easily lose all your data. Hence, do not choose this unless you
+know what you are doing."),
 
 exitInstall => 
 __("There you are. Installation is now complete and your GNU/Linux system is
@@ -360,8 +360,8 @@ an operator, similar to the installation you just configured.
     * \"Replay\". This is a partially automated installation as the
 partitioning step (and only this one) remains interactive;
 
-    * \"Automated\". Fully automated installation: the hard disk is completely
-rewritten, all data is lost.
+    * \"Automated\". Fully automated installation: the hard disk is
+completely rewritten, all data is lost.
 
    This feature is very handy when installing a great number of similar
 machines. See the Auto install section on our web site;
@@ -459,32 +459,32 @@ and swap partitions in free space of your hard drive;
 
  * \"More\": gives access to additional features:
 
-    * \"Save partition table\": saves the partition table to a floppy. Useful
-for later partition-table recovery if necessary. It is strongly recommended
-to perform this step;
+    * \"Save partition table\": saves the partition table to a floppy.
+Useful for later partition-table recovery if necessary. It is strongly
+recommended to perform this step;
 
     * \"Restore partition table\": allows to restore a previously saved
 partition table from floppy disk;
 
-    * \"Rescue partition table\": if your partition table is damaged, you can
-try to recover it using this option. Please be careful and remember that it
-can fail;
+    * \"Rescue partition table\": if your partition table is damaged, you
+can try to recover it using this option. Please be careful and remember
+that it can fail;
 
-    * \"Reload partition table\": discards all changes and loads your initial
-partition table;
+    * \"Reload partition table\": discards all changes and loads your
+initial partition table;
 
-    * \"Removable media automounting\": unchecking this option will force users
-to manually mount and unmount removable medias such as floppies and
+    * \"Removable media automounting\": unchecking this option will force
+users to manually mount and unmount removable medias such as floppies and
 CD-ROMs.
 
- * \"Wizard\": use this option if you wish to use a wizard to partition your
-hard drive. This is recommended if you do not have a good knowledge of
+ * \"Wizard\": use this option if you wish to use a wizard to partition
+your hard drive. This is recommended if you do not have a good knowledge of
 partitioning;
 
  * \"Undo\": use this option to cancel your changes;
 
- * \"Toggle to normal/expert mode\": allows additional actions on partitions
-(type, options, format) and gives more information;
+ * \"Toggle to normal/expert mode\": allows additional actions on
+partitions (type, options, format) and gives more information;
 
  * \"Done\": when you are finished partitioning your hard drive, this will
 save your changes back to disk.
@@ -553,10 +553,11 @@ system:
 what currently holds your machine, you will be able to keep some old (Linux
 or other) partitions unchanged;
 
- * \"Upgrade\": this installation class allows to simply update the packages
-currently installed on your Mandrake Linux system. It keeps the current
-partitions of your hard drives as well as user configurations. All other
-configuration steps remain available with respect to plain installation;
+ * \"Upgrade\": this installation class allows to simply update the
+packages currently installed on your Mandrake Linux system. It keeps the
+current partitions of your hard drives as well as user configurations. All
+other configuration steps remain available with respect to plain
+installation;
 
  * \"Upgrade Packages Only\": this brand new class allows to upgrade an
 existing Mandrake Linux system while keeping all system configurations
@@ -629,16 +630,16 @@ system: you have to enter the \"root\" password. \"root\" is the system
 administrator and is the only one authorized to make updates, add users,
 change the overall system configuration, and so on. In short, \"root\" can
 do everything! That is why you must choose a password that is difficult to
-guess DrakX will tell you if it is too easy. As you can see, you can choose
-not to enter a password, but we strongly advise you against this if only
-for one reason: do not think that because you booted GNU/Linux that your
-other operating systems are safe from mistakes. Since \"root\" can overcome
-all limitations and unintentionally erase all data on partitions by
-carelessly accessing the partitions themselves, it is important for it to
-be difficult to become \"root\".
+guess - DrakX will tell you if it is too easy. As you can see, you can
+choose not to enter a password, but we strongly advise you against this if
+only for one reason: do not think that because you booted GNU/Linux that
+your other operating systems are safe from mistakes. Since \"root\" can
+overcome all limitations and unintentionally erase all data on partitions
+by carelessly accessing the partitions themselves, it is important for it
+to be difficult to become \"root\".
 
 The password should be a mixture of alphanumeric characters and at least 8
-characters long. Never write down the \"root\" password it makes it too
+characters long. Never write down the \"root\" password - it makes it too
 easy to compromise a system.
 
 However, please do not make the password too long or complicated because
@@ -680,14 +681,15 @@ If in doubt, DrakX will display a dialog with various options.
     * \"LILO with graphical menu\": if you prefer LILO with its graphical
 interface.
 
-    * \"LILO with text menu\": if you prefer LILO with its text menu interface.
+    * \"LILO with text menu\": if you prefer LILO with its text menu
+interface.
 
  * \"Boot device\": in most cases, you will not change the default
 (\"/dev/hda\"), but if you prefer, the bootloader can be installed on the
 second hard drive (\"/dev/hdb\"), or even on a floppy disk (\"/dev/fd0\");
 
  * \"Delay before booting the default image\": when rebooting the computer,
-this is the delay granted to the user to choose in the bootloader menu,
+this is the delay granted to the user to choose - in the bootloader menu,
 another boot entry than the default one.
 
 !! Beware that if you choose not to install a bootloader (by selecting
@@ -729,23 +731,23 @@ setupDefaultSpooler =>
 __("Here, we select a printing system for your computer. Other OSs may offer
 you one, but Mandrake Linux offers three.
 
- * \"pdq\" which means ``print, don't queue'', is the choice if you have a
-direct connection to your printer and you want to be able to panic out of
+ * \"pdq\" - which means ``print, don't queue'', is the choice if you have
+a direct connection to your printer and you want to be able to panic out of
 printer jams, and you do not have networked printers. It will handle only
 very simple network cases and is somewhat slow for networks. Pick \"pdq\"
 if this is your maiden voyage to GNU/Linux. You can change your choices
 after installation by running PrinterDrake from the Mandrake Control Center
 and clicking the expert button.
 
- * \"CUPS\"``Common Unix Printing System'', is excellent at printing to your
-local printer and also halfway-around the planet. It is simple and can act
-as a server or a client for the ancient \"lpd\" printing system. Hence, it
-is compatible with the systems that went before. It can do many tricks, but
-the basic setup is almost as easy as \"pdq\". If you need this to emulate
-an \"lpd\" server, you must turn on the \"cups-lpd\" daemon. It has
+ * \"CUPS\" - ``Common Unix Printing System'', is excellent at printing to
+your local printer and also halfway-around the planet. It is simple and can
+act as a server or a client for the ancient \"lpd\" printing system. Hence,
+it is compatible with the systems that went before. It can do many tricks,
+but the basic setup is almost as easy as \"pdq\". If you need this to
+emulate an \"lpd\" server, you must turn on the \"cups-lpd\" daemon. It has
 graphical front-ends for printing or choosing printer options.
 
- * \"lprNG\"``line printer daemon New Generation''. This system can do
+ * \"lprNG\" - ``line printer daemon New Generation''. This system can do
 approximately the same things the others can do, but it will print to
 printers mounted on a Novell Network, because it supports the IPX protocol,
 and it can print directly to shell commands. If you have need of Novell or
@@ -777,7 +779,7 @@ will need to provide options to the driver manually. Please review the
 ``User Guide'' (chapter 3, in the ``Collecting Information on Your
 Hardware'' section) for hints on retrieving the parameters required from
 hardware documentation, from the manufacturer's web site (if you have
-Internet access) or from MicrosoftWindows (if you used this hardware with
+Internet access) or from Microsoft Windows (if you used this hardware with
 Windows on your system)."),
 
 setupYabootAddEntry => 
@@ -789,8 +791,8 @@ partition.
 
 For Linux, there are a few possible options:
 
- * Label: this is simply the name you will have to type at the yaboot prompt
-to select this boot option;
+ * Label: this is simply the name you will have to type at the yaboot
+prompt to select this boot option;
 
  * Image: this would be the name of the kernel to boot. Typically, vmlinux
 or a variation of vmlinux with an extension;
@@ -802,7 +804,8 @@ to assist in initializing video hardware, or to enable keyboard mouse
 button emulation for the often lacking 2nd and 3rd mouse buttons on a stock
 Apple mouse. The following are some examples:
 
-         video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111 hda=autotune
+         video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111
+hda=autotune
 
          video=atyfb:vmode:12,cmode:24 adb_buttons=103,111
 
@@ -852,15 +855,15 @@ default kernel description is selected;
  * Enable CD Boot?: checking this option allows you to choose ``C'' for CD
 at the first boot prompt;
 
- * Enable OF Boot?: checking this option allows you to choose ``N'' for Open
-Firmware at the first boot prompt;
+ * Enable OF Boot?: checking this option allows you to choose ``N'' for
+Open Firmware at the first boot prompt;
 
  * Default OS: you can select which OS will boot by default when the Open
 Firmware Delay expires."),
 
 summary => 
 __("Here are presented various parameters concerning your machine. Depending on
-your installed hardware, you may or not, see the following entries:
+your installed hardware, you may - or not, see the following entries:
 
  * \"Mouse\": check the current mouse configuration and click on the button
 to change it if necessary;
@@ -868,11 +871,11 @@ to change it if necessary;
  * \"Keyboard\": check the current keyboard map configuration and click on
 the button to change that if necessary;
 
- * \"Timezone\": DrakX, by default, guesses your time zone from the language
-you have chosen. But here again, as for the choice of a keyboard, you may
-not be in the country for which the chosen language should correspond.
-Hence, you may need to click on the \"Timezone\" button in order to
-configure the clock according to the time zone you are in;
+ * \"Timezone\": DrakX, by default, guesses your time zone from the
+language you have chosen. But here again, as for the choice of a keyboard,
+you may not be in the country for which the chosen language should
+correspond. Hence, you may need to click on the \"Timezone\" button in
+order to configure the clock according to the time zone you are in;
 
  * \"Printer\": clicking on the \"No Printer\" button will open the printer
 configuration wizard;

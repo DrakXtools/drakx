@@ -50,7 +50,7 @@ install:
 	done
 
 clean:
-	@rm -rf drakx-help.xml .memdump help-*.po{t,} doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
+	@rm -rf drakx-help.xml .memdump doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
 
 check:
 	@grep -F '$$' DrakX.pot && { echo "bad translation strings (contains \$$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"; exit 1; } ||:
