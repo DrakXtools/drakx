@@ -593,7 +593,7 @@ sub installPackages {
 	my ($method, $medium) = @_;
 
 	#- if not using a cdrom medium, always abort.
-	$method eq 'cdrom' and do {
+	$method eq 'cdrom' && !$::oem and do {
 	    local $my_gtk::grab = 1;
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
