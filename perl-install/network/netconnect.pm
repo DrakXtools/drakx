@@ -1522,20 +1522,6 @@ sub get_profiles() {
     map { if_(m!([^/]*)/$!, $1) } glob("$::prefix/etc/netprofile/profiles/*/");
 }
 
-sub get_net_device() {
-    my $connect_file = $network::tools::connect_file;
-    my $network_file = "$::prefix/etc/sysconfig/network";
-		if (cat_("$::prefix$connect_file") =~ /ifup/) {
-		    if_(cat_($connect_file) =~ /^\s*ifup\s+(.*)/m, split(' ', $1));
-		} elsif (cat_("$::prefix$connect_file") =~ /network/) {
-			${{ getVarsFromSh("$::prefix$network_file") }}{GATEWAYDEV};
-    } elsif (cat_("$::prefix$connect_file") =~ /isdn/) {
-			"ippp+"; 
-    } else {
-			"ppp+";
-    }
-}
-
 sub read_net_conf {
     my ($netcnx, $netc, $intf) = @_;
     my $current = { getVarsFromSh("$::prefix/etc/netprofile/current") };
