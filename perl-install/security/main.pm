@@ -1,5 +1,4 @@
 use strict;
-use standalone;
 
 use standalone;
 use MDK::Common;
@@ -159,7 +158,7 @@ sub system_generate_page {
 sub checks_generate_page {
 	my ($rsecurity_checks_hash, $msec) = @_;
 	my @security_checks = $msec->get_checks('');
-	my @choices = qw(yes no default ignore);
+	my @choices = qw(yes no default);
 	my @ignore_list = qw(MAIL_WARN MAIL_USER);
 
 	my @items;
@@ -279,13 +278,13 @@ sub draksec_main {
 		  standalone::explanations("Setting msec functions related to networking");
 		  foreach my $key (keys %network_options_value) {
 		      if($network_options_value{$key} =~ /Combo/) { $msec->config_function('', $key, $network_options_value{$key}->entry->get_text()) }
-		      else { $msec->config_check('', $key, $network_options_value{$key}->get_text()) }
+		      else { $msec->config_function('', $key, $network_options_value{$key}->get_text()) }
 		  }
 
 		  standalone::explanations("Setting msec functions related to the system");
 		  foreach my $key (keys %system_options_value) {
 		      if($system_options_value{$key} =~ /Combo/) { $msec->config_function('', $key, $system_options_value{$key}->entry->get_text()) }
-		      else { $msec->config_check('', $key, $system_options_value{$key}->get_text()) }
+		      else { $msec->config_function('', $key, $system_options_value{$key}->get_text()) }
 		  }
 		  remove_wait_msg($w);
 

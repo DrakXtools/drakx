@@ -86,7 +86,6 @@ sub config_option {
     $options_hash{$option} = $value;
 
     open F, '>'.$options_file;
-    if ($category eq "functions") { print F "from mseclib import *\n\n"; }
     foreach $key (keys %options_hash) {
         if ($options_hash{$key} ne "default") {
             if($category eq "functions") { print F "$key"."($options_hash{$key})\n"; }
@@ -264,6 +263,7 @@ sub get_function_default {
 # config_function(prefix, function, value) -
 #   Apply the configuration to 'prefix'/etc/security/msec/level.local
 sub config_function {
+    shift @_;
     my ($prefix, $function, $value) = @_;
     config_option($prefix, $function, $value, "functions");
 }
