@@ -220,7 +220,7 @@ Leave it blank if you do not want to set up automatic installation mode.
 my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
 		'pxe' => '/usr/sbin/pxe',
 		'tftp-server' => '/usr/sbin/in.tftpd',
-		'apache2' => '/usr/sbin/httpd2');
+		if_(! -x '/usr/sbin/httpd' && ! -x '/usr/sbin/httpd-perl', 'apache2' => '/usr/sbin/httpd2'));
 
 #- first: try to install all in one step
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
