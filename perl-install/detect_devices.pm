@@ -35,7 +35,6 @@ sub zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } get(); }
 sub ide_zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } getIDE(); }
 #-sub jazzs() { grep { $_->{type} =~ /.d/ && isJazDrive($_) } get(); }
 sub ls120s() { grep { $_->{type} =~ /.d/ && isLS120Drive($_) } get(); }
-sub usbfdus() { grep { $_->{type} =~ /.d/ && isUSBFDUDrive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
     if (my @l2 = IDEburners()) {
@@ -63,9 +62,9 @@ sub floppies() {
     require modules;
     eval { modules::load("floppy") };
     my @fds = grep { tryOpen($_) } qw(fd0 fd1);
-    my @ide = map { $_->{device} } ls120s() and modules::load("ide-floppy");
-    my @scsi = map { $_->{device} } usbfdus();
-    (@ide, @scsi, @fds);
+    my @ide = ls120s() and modules::load("ide-floppy");
+    my @scsi = grep { $_->{type} eq 'fd' } getSCSI();
+    (map { $_->{device} } @ide, @scsi), @fds;
 }
 sub floppy { first(floppies()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
@@ -82,14 +81,13 @@ sub isBurner {
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
 sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
-sub isUSBFDUDrive { $_[0]->{info} =~ /USB-?FDU/ }
-sub isRemovableDrive { &isZipDrive || &isLS120Drive || &isUSBFDUDrive } #-or &isJazzDrive }
+sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]->{type} eq 'fd' } #-or &isJazzDrive }
 
 sub isFloppyOrHD {
     my ($dev) = @_;
     require partition_table_raw;
     my $geom = partition_table_raw::get_geometry(devices::make($dev));
-    $geom->{totalsectors} < 10 << 11 ? 'floppy' : 'hd';
+    $geom->{totalsectors} < 10 << 11 ? 'fd' : 'hd';
 }
 
 sub getSCSI() {
@@ -212,8 +210,14 @@ sub matching_desc {
     grep { $_->{description} =~ /$regexp/i } probeall();
 }
 sub stringlist { 
-    map { ($_->{description} eq '(null)' ? sprintf("Vendor=0x%04x Device=0x%04x", $_->{vendor}, $_->{id}) : $_->{description}) .
-	  " ($_->{type} $_->{driver})" . ($_->{subid} ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '') } probeall(1); 
+    map {
+	sprintf("%-16s: %s%s%s", 
+		$_->{driver} ? $_->{driver} : 'unknown', 
+		$_->{description} eq '(null)' ? sprintf("Vendor=0x%04x Device=0x%04x", $_->{vendor}, $_->{id}) : $_->{description},
+		$_->{type} ? sprintf(" [%s]", $_->{type}) : '',
+		$_->{subid} && $_->{subid} != 0xffff ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '',
+	       );
+    } probeall(1); 
 }
 sub check {
     my ($l) = @_;
