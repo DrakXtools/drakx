@@ -53,9 +53,11 @@ standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 
 Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
+
+begin:
 Xconfig::getinfo($i);
 
 Xconfigurator::main('', $i, $in, 0, sub { $in->standalone::pkgs_install(@_) });
 !$::isEmbedded and $in->exit(0);
 kill(USR1, $::CCPID);
-#goto begin;
+goto begin;
