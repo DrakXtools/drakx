@@ -512,11 +512,7 @@ such as ``mybox.mylab.myco.com''."),
     install_steps::configureNetwork($o);
 
     #- added internet configuration after ethernet one.
-    if ($o->ask_yesorno([ _("Internet Configuration") ],
-					_("Do you want to configure an internet connection ?"), 0)) {
-	$o->{netcnx} ||= {};
-      netconnect::intro($o->{prefix}, $o->{netcnx}, $o, bool($o->{pcmcia})); #-dam's
-    }
+    netconnect::net_connect($o->{prefix}, $o->{netcnx}, $o, bool($o->{pcmcia})); #-dam's
 }
 
 sub configureNetworkIntf {
