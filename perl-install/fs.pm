@@ -139,6 +139,15 @@ sub fstab_to_string {
     my @l1 = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
     my @l2 = read_fstab($prefix, "/etc/fstab", 'all_options');
 
+    {
+	#- remove entries from @l2 that are given by @l1
+	#- this is needed to allow to unset a mount point
+	my %new; 
+	$new{$_->{device}} = 1 foreach @l1;
+	delete $new{none}; #- special case for device "none" which can be _mounted_ more than once
+	@l2 = grep { !$new{$_->{device}} } @l2;
+    }
+
     my %new;
     my @l = map { 
 	my $device = 
