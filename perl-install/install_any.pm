@@ -362,9 +362,7 @@ sub setDefaultPackages {
 
     push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-    push @{$o->{default_packages}}, "kernel-enterprise" if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
     push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
-    push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @{$o->{default_packages}}, "usbd", "hotplug" if modules::get_alias("usb-interface");
@@ -389,10 +387,13 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
     $o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
     $o->{compssUsersChoice}{SYSTEM} = 1;
+    $o->{compssUsersChoice}{DOCS} = !$o->{excludedocs};
     $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
     $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
     $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
+    $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
+    $o->{compssUsersChoice}{SMP} = 1 if detect_devices::hasSMP();
     $o->{compssUsersChoice}{'3D'} = 1 if 
       detect_devices::matching_desc('Matrox.* G[245][05]0') ||
       detect_devices::matching_desc('Riva.*128') ||
