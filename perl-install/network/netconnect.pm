@@ -440,6 +440,7 @@ Take a look at http://www.linmodems.org")
                    modem =>
                    {
                     pre => sub {
+                        detect($netc->{autodetect}, 'modem') if !$::isInstall;
                         $netcnx->{type} = 'modem';
                         my $modem = $netcnx->{$netcnx->{type}};
                         $modem->{device} = $netc->{autodetect}{modem};
@@ -458,9 +459,12 @@ Take a look at http://www.linmodems.org")
                         foreach (@$secret) {
                             $modem->{passwd} = $_->{passwd} if $_->{login} eq $modem->{login};
                         }
-                        
-                        return $ppp_first_step->();
                     },
+                    name => N("Select the modem to configure:"),
+                    data => sub {
+                        [ { label => N("Modem"), type => "list", val => \$ntf_name, list => [ grep { $_ } $netc->{autodetect}{modem}, values %{$netc->{autodetect}{winmodem}} ], allow_empty_list => 1 } ],
+                    },
+                    post => $ppp_first_step,
                    },
 
                    # FIXME: only if $need_to_ask
