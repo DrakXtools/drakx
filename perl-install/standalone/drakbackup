@@ -1055,13 +1055,13 @@ sub advanced_where_net {
 						      } else {
 							  advanced_where_net_ftp();
 						      }}),
-						  1, gtksignal_connect(new Gtk::Button(_("Secure Connection")),  clicked => sub {
+						  if_(0, 1, gtksignal_connect(new Gtk::Button(_("Secure Connection")),  clicked => sub {
 						      $box_where_net->destroy(); 
 						      if ($previous_function ) {
 							  advanced_where_net_ssh(\&$previous_function);
 						      } else {
 							  advanced_where_net_ssh();
-						      }}),
+						      }})),
 						  1, new Gtk::VBox(0, 5),
 						  1, new Gtk::VBox(0,10),
 						  ),
@@ -1293,6 +1293,14 @@ sub advanced_when{
     my $check_where_ftp_daemon;
     my ($pix_time_map, $pix_time_mask) = gtkcreate_png("ic82-when-40");
     my $combo_when_space = new Gtk::Combo();
+    my %trans = (_("hourly") => 'hourly',
+		 _("daily") => 'daily',
+		 _("weekly") => 'weekly',
+		 _("monthly") => 'monthly');
+    my %trans2 = ('hourly' => _("hourly"),
+		  'daily' => _("daily"),
+		  'weekly' => _("weekly"),
+		  'monthly' => _("monthly"));
     $combo_when_space->set_popdown_strings (_("hourly"),_("daily"),_("weekly"),_("monthly"));    
 
     gtkpack($advanced_box,
@@ -1333,8 +1341,8 @@ sub advanced_when{
 	${$central_widget}->destroy();
 	advanced_when();
     });
-    $combo_when_space->entry->set_text( $when_space );
-    $combo_when_space->entry->signal_connect( 'changed', sub { 	$when_space = $combo_when_space->entry->get_text(); });
+    $combo_when_space->entry->set_text( $trans2{$when_space} );
+    $combo_when_space->entry->signal_connect( 'changed', sub { 	$when_space = $trans{$combo_when_space->entry->get_text()}; });
     fonction_env(\$box_when, \&advanced_when, \&advanced_box, "");
     $up_box->show_all();
 }
