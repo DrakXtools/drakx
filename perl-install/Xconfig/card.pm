@@ -295,7 +295,10 @@ sub configure {
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
-	return if $auto;
+	if ($auto) {
+	    log::l("Xconfig::card: auto failed (needVideoRam)");
+	    return;
+	}
 	$card->{VideoRam} = (find { $_ <= $options->{VideoRam_probed} } reverse ikeys %VideoRams) || 4096;
 	$in->ask_from('', N("Select the memory size of your graphics card"),
 		      [ { val => \$card->{VideoRam},
