@@ -16,6 +16,13 @@ sub rooted_or_die {
     my ($root, $name, @args) = @_;
     rooted($root, $name, @args) or die "$name failed\n";
 }
+sub rooted_get_stdout {
+    my ($root, $name, @args) = @_;
+    my @r;
+    rooted($root, $name, '>', \@r, @args) or return;
+    @r;
+}
+
 sub run { rooted('', @_) }
 
 sub rooted {
@@ -41,11 +48,19 @@ sub rooted {
 	waitpid $pid, 0;
 	$? == 0 or return;
 	if ($stdout_raw && ref($stdout_raw)) {
-	    $$stdout_raw = cat_($stdout);
+	    if (ref($stdout_raw) eq 'ARRAY') { 
+		@$stdout_raw = cat_($stdout);
+	    } else { 
+		$$stdout_raw = cat_($stdout);
+	    }
 	    unlink $stdout;
 	}
 	if ($stderr_raw && ref($stderr_raw)) {
-	    $$stderr_raw = cat_($stderr);
+	    if (ref($stderr_raw) eq 'ARRAY') { 
+		@$stderr_raw = cat_($stderr);
+	    } else { 
+		$$stderr_raw = cat_($stderr);
+	    }
 	    unlink $stderr;
 	}
 	1;
