@@ -1,6 +1,7 @@
 include ../../Makefile.config
 
-PMSFILES = $(wildcard $(ALLPMS:%=../../%) ../../../move/move.pm ../../../move/tree/mdk_totem)
+PMSFILES = $(ALLPMS) ../move/move.pm ../move/tree/mdk_totem
+PMSFILES_HERE = $(wildcard $(PMSFILES:%=../../%))
 
 POFILES = $(wildcard *.po)
 MOFILES = $(POFILES:%.po=%.mo)
@@ -33,8 +34,8 @@ $(POFILES): DrakX.pot
 	if [ -e help-$@t ]; then perl -pe 's|^#~ ||' -i $@t ; msgmerge -C $@t help-$@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
-DrakX.pot: $(PMSFILES)
-	perl_checker -q --generate-pot $@ $(PMSFILES)
+DrakX.pot: $(PMSFILES_HERE)
+	cd ../.. ; perl_checker -q --generate-pot share/po/$@ $(PMSFILES)
 	perl i18n_compssUsers 2>/dev/null >> $@
 
 install:
@@ -50,7 +51,7 @@ check:
 	@grep '[^\\]\$$' DrakX.pot && { echo 'bad translation strings (contains $$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^'; exit 1; } ||:
 
 verif:
-	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES)
+	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES_HERE)
 	perl -ne '$$i += my @l = /\.c:/g; END { print "$$i\n" }' DrakX.pot
 
 verif2: 
