@@ -61,7 +61,7 @@ sub new($$) {
           launch_X:
 	    if (!fork()) {
 		c::setsid();
-		exec $server, @options or exit 1;
+		exec $server, @options or c::_exit(1);
 	    }
 	    my $nb;
 	    foreach (1..60) {
