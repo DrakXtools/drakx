@@ -31,12 +31,14 @@ sub end() { Newt::Finished() }
 sub exit() { end(); exit($_[1]) }
 END { end() }
 
+sub messages { warp_text(join("\n", @_), $width - 9) }
+
 sub myTextbox {
     my ($allow_scroll, $free_height, @messages) = @_;
 
-    my $width = $width - 9;
-    my @l = warp_text(join("\n", @messages), $width);
+    my @l = messages(@messages);
     my $h = min($free_height - 13, int @l);
+
     my $want_scroll;
     if ($h < @l) {
 	if ($allow_scroll) {
@@ -46,6 +48,7 @@ sub myTextbox {
 	    @l = @l[0 .. $h-1];
 	}
     }
+
     my $mess = Newt::Component::Textbox(1, 0, my $w = max(map { length } @l) + 1, $h, $want_scroll);
     $mess->TextboxSetText(join("\n", @l));
     $mess, $w + 1, $h;
@@ -228,21 +231,23 @@ sub ask_fromW_real {
     } @widgets;
 
     my $listg = do {
-	my $height = 18;
+	my $wanted_header_height = min(8, listlength(messages(@{$common->{messages}})));
+	my $height_avail = $height - $wanted_header_height - 13;
 	#- use a scrolled window if there is a lot of checkboxes (aka 
 	#- ask_many_from_list) or a lot of widgets in general (aka
 	#- options of a native PostScript printer in printerdrake)
 	#- !! works badly together with list's (lists are one widget, so a
 	#- big list window will not switch to scrollbar mode) :-(
-	if (@$l > 3 && $total_size > $height) {
+	if (@$l > 3 && $total_size > $height_avail) {
 	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
 	    $has_scroll = 1;
+	    $total_size = $height_avail;
 
-	    my $scroll = Newt::Component::VerticalScrollbar($height, 9, 10); # 9=NEWT_COLORSET_CHECKBOX, 10=NEWT_COLORSET_ACTCHECKBOX
+	    my $scroll = Newt::Component::VerticalScrollbar($height_avail, 9, 10); # 9=NEWT_COLORSET_CHECKBOX, 10=NEWT_COLORSET_ACTCHECKBOX
 	    my $subf = $scroll->Form('', 0);
-	    $subf->FormSetHeight($height);
+	    $subf->FormSetHeight($height_avail);
 	    $subf->FormAddGrid($grid, 0);
-	    Newt::Grid::HCloseStacked3($subf, separator(1, $height-1), $scroll);
+	    Newt::Grid::HCloseStacked3($subf, separator(1, $height_avail-1), $scroll);
 	} else {
 	    $grid;
 	}
