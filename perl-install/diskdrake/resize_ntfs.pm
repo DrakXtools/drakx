@@ -14,15 +14,17 @@ sub new {
 
 sub min_size {
     my ($o) = @_;
-    my $r = run_program::get_stdout('ntfsresize', '-f', '-i', $o->{dev});
+    my $r;
+    run_program::run('ntfsresize', '>', \$r, '-f', '-i', $o->{dev}) or die "ntfsresize failed:\n$r\n";
     $r =~ /minimal size: (\d+) KiB/ && $1 * 2 
 }
 
 sub resize {
     my ($o, $size) = @_;
     my @l = ('-ff', '-s' . int($size / 2) . 'ki', $o->{dev});
-    run_program::run_or_die('ntfsresize', '-n', @l);
-    run_program::run_or_die('ntfsresize', @l);
+    my $r;
+    run_program::run('ntfsresize', '>', \$r, '-n', @l) or die "ntfsresize failed: $r\n";
+    run_program::run('ntfsresize', '>', \$r, @l) or die "ntfsresize failed: $r\n";
 }
 
 1;
