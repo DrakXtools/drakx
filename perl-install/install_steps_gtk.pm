@@ -210,6 +210,7 @@ sub new($$) {
 		    $o->{allowFB} = &$launchX("XF86_$_") #- keep in mind FB is used.
 		      and last;
 		} else {
+		    $o->{vga16} = 1 if /VGA16/;
 		    &$launchX("XF86_$_") and last;
 		}
 	    }
