@@ -10,6 +10,7 @@ use common;
 use log;
 
 my @drakgw_ports = qw(domain bootps http https 631 imap pop3 smtp nntp ntp);
+my @internal_ports = qw(631 137 138 139);
 
 sub check_iptables {
     my ($in) = @_;
@@ -117,6 +118,7 @@ sub write {
 		     { map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto }
 		      ('net', if_($conf->{masquerade}, 'masq'), if_($conf->{loc_interface}, 'loc'))),
 		    if_($conf->{masquerade}, map { [ 'ACCEPT', 'masq', 'fw', $_, join(',', @drakgw_ports), '-' ] } 'tcp', 'udp'),
+				if_($conf->{masquerade}, map { [ 'ACCEPT', 'fw', 'masq', $_, join(',', @internal_ports), '-' ] } 'tcp', 'udp'),
 		   );
     set_config_file('masq', 
 		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ]: (),
