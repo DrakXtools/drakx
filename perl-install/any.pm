@@ -20,7 +20,8 @@ use log;
 use c;
 
 sub drakx_version() { 
-    sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("$ENV{SHARE_PATH}/VERSION")))[2,3];
+    $::move ? sprintf "DrakX-move v%s", cat_('/usr/bin/stage2/move.pm') =~ /move\.pm,v (\S+ \S+ \S+)/
+            : sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("$ENV{SHARE_PATH}/VERSION")))[2,3];
 }
 
 sub facesdir() {
