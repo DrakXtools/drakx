@@ -405,12 +405,17 @@ Consoles 1,3,4,7 may also contain interesting information";
     log::l("before install packages, after writing ld.so.conf");
 
     #- make sure some services have been enabled (or a catastrophic restart will occur).
+    #- these are normally base package post install scripts or important services to start.
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "random");
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "netfs");
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "network");
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "rawdevices");
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "sound");
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "kheader");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "usb");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "keytable");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "syslog");
+    run_program::rooted($o->{prefix}, "chkconfig", "--add", "crond");
     run_program::rooted($o->{prefix}, "chkconfig", "--add", "portmap");
 
     #- call update-menus at the end of package installation
