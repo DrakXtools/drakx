@@ -79,7 +79,7 @@ system and the different components of the Linux-Mandrake distribution.
 1. License Agreement
 
 Please read carefully this document. This document is a license agreement between you and  
-MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France, which applies to the Software Products.
+MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to the Software Products.
 By installing, duplicating or using the Software Products in any manner, you explicitly 
 accept and fully agree to conform to the terms and conditions of this License. 
 If you disagree with any portion of the License, you are not allowed to install, duplicate or use 
@@ -169,7 +169,7 @@ All disputes on the terms of this license will preferably be settled out of cour
 resort, 
 the dispute will be referred to the appropriate Courts of Law of Paris - France.
 For any question on this document, please contact MandrakeSoft S.A.,  
-42, rue d'Aboukir, 75002 Paris - France
+43, rue d'Aboukir, 75002 Paris - France
 ")), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
     }
 }
