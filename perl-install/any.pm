@@ -911,7 +911,7 @@ Allowing this will permit users to simply click on "Share" in konqueror and naut
 	$in->ask_warn('', 
 'The per-user sharing uses the group "fileshare". 
 You can use userdrake to add a user in this group.
-Or on the command line use: "usermod -G fileshare user_name"');
+Or on the command line use: "usermod -G fileshare,previous_groups user_name"');
     }
 }
 
