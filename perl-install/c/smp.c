@@ -489,18 +489,21 @@ int detectSMP(void)
 #elif __powerpc__
     return isSMP = ppcDetectSMP();
 #elif __ia64__
+	/* TODO: Update to check against /proc/pal/cpuX */
     return isSMP = 1;
+#elif __x86_64__
+	/* TODO: Update when SMP machines are there */
+	return isSMP = 0;
 #else
     #error unknown architecture
 #endif
 }
 
-#if 0
-main() {
+#if TEST
+int main() {
   if (detectSMP())
     printf("has smp\n");
   else
     printf("no smp\n");
 }
-
 #endif
