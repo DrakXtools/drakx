@@ -118,7 +118,7 @@ sub write_interface_conf {
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
     my $hwaddr = -e $prefix/sbin/ip && `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE}`;
-    if($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/; }
+    if ($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/; }
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),

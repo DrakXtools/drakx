@@ -13,6 +13,7 @@ use run_program;
 use devices;
 use commands;
 use modules;
+use any;
 use log;
 
 my @mouses_fields = qw(nbuttons MOUSETYPE XMOUSETYPE name);
@@ -181,7 +182,7 @@ sub write {
     local $mouse->{XEMU3} = bool2yesno($mouse->{nbuttons} < 3);
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
-    symlinkf $mouse->{device}, "$prefix/dev/mouse" ? add_devfslink($prefix, "$prefix/dev/mouse") : log::l("creating $prefix/dev/mouse symlink failed");
+    symlinkf $mouse->{device}, "$prefix/dev/mouse" ? any::add_devfslink($prefix, "$prefix/dev/mouse") : log::l("creating $prefix/dev/mouse symlink failed");
 
     if (arch() =~ /ppc/) {
 	my $s = join('',
