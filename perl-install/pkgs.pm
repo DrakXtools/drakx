@@ -635,6 +635,8 @@ sub install($$$) {
     c::rpmtransFree($trans);
     c::rpmdbClose($db);
     log::l("rpm database closed");
+
+    install_any::rewindGetFile(); #- make sure to reopen the connection, usefull for ftp.
 }
 
 sub remove($$) {

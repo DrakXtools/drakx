@@ -56,3 +56,14 @@ sub getFile($) {
     $$retr->close if $$retr;
     $$retr = $ftp->retr(install_any::relGetFile($f));
 }
+
+sub rewindGetFile() {
+    #- close any existing connection.
+    foreach (values %hosts) {
+	my ($ftp) = @{$_ || []};
+	$ftp->close() if $ftp;
+    }
+
+    #- make sure to reconnect to server.
+    %hosts = ();
+}

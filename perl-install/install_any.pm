@@ -55,6 +55,12 @@ sub getFile($) {
     }
     goto &getFile;
 }
+sub rewindGetFile() {
+    if ($::o->{method} && $::o->{method} eq "ftp") {
+	require ftp;
+	ftp::rewindGetFile(); #- make sure to reopen connection.
+    }
+}
 
 sub kernelVersion {
     local $_ = readlink("$::o->{prefix}/boot/vmlinuz") || $::testing && "vmlinuz-2.2.testversion" or die "I couldn't find the kernel package!";
