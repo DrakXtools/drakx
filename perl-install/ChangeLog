@@ -1,3 +1,61 @@
+2001/03/25  fabman
+
+	* share/po/es.po: updated spanish .po file
+
+2001/03/25  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ko.po: Updated Korean file
+
+	* share/po/sv.po: Updated Swedish file
+
+2001/03/25  Pixel  <pixel@mandrakesoft.com>
+
+	* http.pm (getFile): verify the return value of the server. If not 200
+	(aka Ok),
+	return undef
+
+	* install_steps_interactive.pm (configurePrinter): add Mesa-common for xpp
+	and libqtcups2 for kups in
+	pkg_install_if_requires_satisfied
+
+	* any.pm (ask_users): fix dead-loop
+
+	* bootloader.pm (suggest): add entry for nt
+
+2001/03/25  siegel
+
+	* share/po/de.po: new german version
+
+2001/03/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/vi.po: Updated Vietnamese file
+
+2001/03/24  Pixel  <pixel@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: remove the "use common" which
+	is unneeded (and "member" of merge2pcitable
+	was clashing)
+
+	* any.pm (ask_users): when "Done" is pressed, do "Accept User" if a user
+	is given.
+
+	* install_steps.pm (addUser): disable_user_view (in kdm/gdm) if no users
+
+	* install_any.pm (disable_user_view): created, takes care of gdm too
+	(taken from msec)
+
+	* mouse.pm (detect): fix francois... uh, no too hard. easier to fix
+	francois's bugs ;pp
+
+	* timezone.pm (%l2t): fix for fuzzyChoice
+
+	* share/keyboards.tar.bz2: 
+	  - readding with -kb
+	  - fixing permissions on xmodmap.kr
+	remove before adding again with -kb
+
+	* modules.pm: have natsemi in network.img
+
 2001/03/24  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
