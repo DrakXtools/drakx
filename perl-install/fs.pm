@@ -77,11 +77,11 @@ sub read_fstab {
 		$dev = $h->{device} = $e->{device};
 	    }
         }
-	if ($dev =~ m,/(tmp|dev)/,) {
+	if ($dev =~ m,^/(tmp|dev)/,) {
 	    ($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
 
 	    my $symlink = readlink("$prefix$dev");
-	    $dev =~ s,/(tmp|dev)/,,;
+	    $dev =~ s,^/(tmp|dev)/,,;
 
 	    if ($symlink =~ m|^[^/]+$|) {
 		$h->{device_alias} = $dev;
