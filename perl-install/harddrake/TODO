@@ -5,34 +5,32 @@
 *** timeout on dialogs in service
 
 ** wishes
-*** more use of my_gtk/ugtk
 *** non needed stuff to run X must be posponed after X11 startup
 **** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
-*** different modes:
-**** expert mode (only if dadou agree with this idea) => run config tools
-**** neuneu => automatic config in service (ie for mouse/video card/...)
 
 ** validation:
 *** see dadou (GUI)
-*** & qa team (test cases)
+*** qa team (test cases)
 
 ** missing
-*** window with sliders so that we can resize
-*** check4modem
 *** config module (module options configuration button) => expert only
 *** embedded mode
 *** add updfstab as in kudzu
-*** enable the user to force a module (isa, isapnp, ...)
 *** detect pcimcia:
   	
     foreach (detect_devices::pcmcia_probe()) {
         printf "m: %-15s t: %-20s d: %-12s  d: %s\n",
               $_->{driver}, $_->{type}, $_->{device}, $_->{description}
     }
+*** detect isapnp devices
+*** window with sliders so that we can resize
+*** check4modem
+*** enable the user to force a module (isa, isapnp, ...)
 
 
 
 * Postponed
+** more use of my_gtk/ugtk
 ** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
 *** fpons, convert perl-GTK to gtk+2 :-)
 ** move all drakx tools into just a small one-liner that uses real <tool>.pm
@@ -48,6 +46,15 @@
 
 * ####################################################################
 * ####################################################################
+
+
+sub disconnect($$) {
+    my ($button, $sig) = @_;
+    if ($sig) {
+	   $button->signal_disconnect($sig);
+	   undef $sig;
+    }
+}
 
 * / no hope / useless :
 ** enable a string to be passed as detector; in that case, do ourself the =~
