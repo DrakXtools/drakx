@@ -20,6 +20,13 @@ sub unknown() {
 	   } @devices;
 }
 
+my @alrd_dected;
+sub f { 
+    my @devs = grep { !member(pciusb_id($_), @alrd_dected) } @_;
+    push @alrd_dected, map { pciusb_id($_) } @devs;
+    @devs;
+}
+
 
 # tree format ("CLASS_ID", "type", "type_icon", configurator, detect_sub)
 # NEVER, NEVER alter CLASS_ID or you'll see harddrake2 service detect changes
@@ -50,13 +57,13 @@ our @tree =
      [ "BURNER", , N("CD/DVD burners"), "cd.png", "", \&detect_devices::burners, 1 ],
      [ "DVDROM", , N("DVD-ROM"), "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms() }, 1 ],
      [ "TAPE", , N("Tape"), "tape.png", "", \&detect_devices::tapes, 0 ],
-     [ "VIDEO", , N("Videocard"), "video.png", "$sbindir/XFdrake",  sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices }, 1 ],
-     [ "TV", , N("Tvcard"), "tv.png", "/usr/bin/XawTV", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices }, 0 ],     
-     [ "MULTIMEDIA_OTHER", , N("Other MultiMedia devices"), "multimedia.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices }, 0 ],
-     [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices }, 0 ],
+     [ "VIDEO", , N("Videocard"), "video.png", "$sbindir/XFdrake",  sub { f(grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices) }, 1 ],
+     [ "TV", , N("Tvcard"), "tv.png", "/usr/bin/XawTV", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices) }, 0 ],     
+     [ "MULTIMEDIA_OTHER", , N("Other MultiMedia devices"), "multimedia.png", "", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices) }, 0 ],
+     [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices) }, 0 ],
      [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { 
-           grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || 
-                    member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo)) } @devices },
+           f(grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || 
+                      member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo)) } @devices) },
        0 ],
      [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
      [ "ETHERNET", , N("Ethernetcard"), "hw_network.png", "$sbindir/drakconnect", sub {
@@ -66,19 +73,15 @@ our @tree =
          require list_modules;
          my @usbnet = (list_modules::category2modules('network/usb'), "nvnet"); # rought hack for nforce2's nvet
          
-         grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices }, 1 ],
+         f(grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices) }, 1 ],
      [ "MODEM", , N("Modem"), "modem.png", "$sbindir/drakconnect", sub { detect_devices::getModem() }, 0 ],
      [ "ADSL", , N("ADSL adapters"), "modem.png", "$sbindir/drakconnect", sub { 
-           require network::adsl; my $a = network::adsl::adsl_detect(); $a ? grep { $_ } values %$a : () }, 0 ],
+           require network::adsl; my $a = network::adsl::adsl_detect(); $a ? f(grep { $_ } values %$a) : () }, 0 ],
      [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
                                                             if_(!is_empty_hash_ref($isdn), $isdn) }, 0 ],
-     [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
-     [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", \&unknown, 0 ],
-
+     [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices) }, 0 ],
      [ "PRINTER", , N("Printer"), "hw_printer.png", "$sbindir/printerdrake", sub { 
          require printer::detect; printer::detect::local_detect() }, 0 ],
-     [ "SCANNER", , N("Scanner"), "scanner.png", "$sbindir/scannerdrake", sub { 
-         require scanner; scanner::detect() }, 0 ],
      [ "MOUSE", , N("Mouse"), "hw_mouse.png", "$sbindir/mousedrake", sub { 
          require mouse;
          require modules;
@@ -86,12 +89,20 @@ our @tree =
          &mouse::detect() }, 1 ],
      [ "JOYSTICK", , N("Joystick"), "joystick.png", "", sub {}, 0 ],
 
-     [ "ATA_STORAGE", , N("(E)IDE/ATA controllers"), "ide_hd.png", "", sub { grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices }, 0 ],
-     [ "FIREWIRE_CONTROLLER", , N("Firewire controllers"), "usb.png", "", sub { grep { $_->{driver} =~ /ohci1394/ } @devices }, 1 ],
-     [ "SCSI_CONTROLLER", , N("SCSI controllers"), "scsi.png", "", sub { grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices }, 0 ],
-     [ "USB_CONTROLLER", , N("USB controllers"), "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices }, 0 ],
-     [ "SMB_CONTROLLER", , N("SMBus controllers"), "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices }, 0 ],
+     [ "ATA_STORAGE", , N("(E)IDE/ATA controllers"), "ide_hd.png", "", sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) }, 0 ],
+     [ "FIREWIRE_CONTROLLER", , N("Firewire controllers"), "usb.png", "", sub { f(grep { $_->{driver} =~ /ohci1394/ } @devices) }, 1 ],
+     [ "SCSI_CONTROLLER", , N("SCSI controllers"), "scsi.png", "", sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices) }, 0 ],
+     [ "USB_CONTROLLER", , N("USB controllers"), "usb.png", "", sub { f(grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices) }, 0 ],
+     [ "SMB_CONTROLLER", , N("SMBus controllers"), "usb.png", "", sub { f(grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices) }, 0 ],
+     [ "SCANNER", , N("Scanner"), "scanner.png", "$sbindir/scannerdrake", sub { 
+         require scanner; f(scanner::detect()) }, 0 ],
+     [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", sub { f(unknown()) }, 0 ]
      );
+
+sub pciusb_id {
+    my ($dev) = @_;
+    join(':', map { $dev->{$_} } qw(bus pci_bus pci_device vendor id subvendor subid description));
+}
 
 
 sub custom_id {
