@@ -11,7 +11,7 @@ use Gtk2::TrayIcon;
 use ugtk2 qw(:create :helpers :wrappers);
   
 my ($eventbox, $img);
-my ($menu, $_timeout);
+my ($menu, $timeout);
 my $raisedwindow = 0;
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
@@ -119,7 +119,7 @@ sub getIP {
     return wantarray() ? @ip : $ip[0];
 }
 sub cronNetwork() {
-    $_timeout = Glib::Timeout->add(60*1000, sub {
+    $timeout = Glib::Timeout->add(60*1000, sub {
                                       checkNetwork();
                                       1;
                                   });
@@ -146,6 +146,7 @@ sub setState {
     $menu
 }
 sub mainQuit() {
+     Glib::Source->remove($timeout) if $timeout;
      Gtk2->main_quit
 }
 sub setAutoStart {
