@@ -207,6 +207,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "eata_dma" => "EATA DMA Adapters",
 ),
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
+  "aic7xxx_old" => "Adaptec 2740, 2840, 2940",
   "ncr53c8xx" => "NCR 53C8xx PCI",
   "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicisp" => "Qlogic ISP",
