@@ -48,12 +48,11 @@ sub new($$) {
 	    } elsif ($::globetrotter || !$::move) {
 		install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
 
-		push @options, if_(!$::globetrotter, '-kb'), '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/ && arch() ne 'ppc';
+		push @options, if_(!$::globetrotter, '-kb'), '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/;
 		push @options, 'tty7', '-dpms', '-s', '240';
 
-		#- old weird servers: Xpmac and Xsun
-		push @options, cat_('/proc/cmdline') !~ /ofonly/ ? ('-mode', '17', '-depth', '32') : '-mach64' if $server =~ /Xpmac/;
-		push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun|Xpmac/;
+		#- old weird servers: Xsun
+		push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun/;
 	    }
 
 	    if (!fork()) {
@@ -96,8 +95,6 @@ sub new($$) {
 	    require Xconfig::card;
 	    my ($card) = Xconfig::card::probe();
 	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
-	} elsif (arch() eq "ppc") {
-	    @servers = qw(Xpmac);
         }
 
         if (($::move || $::globetrotter) && !$::testing) {
@@ -111,7 +108,7 @@ sub new($$) {
 	foreach (@servers) {
 	    log::l("Trying with server $_");
 	    my $dir = "/usr/X11R6/bin";
-	    my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xpmac|Xnest|^X_move$/ ? $_ : "XF86_$_";
+	    my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|^X_move$/ ? $_ : "XF86_$_";
 	    unless (-x "$dir/$prog") {
 		unlink $_ foreach glob_("$dir/X*");
 		install_any::getAndSaveFile("install/stage2/live$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
