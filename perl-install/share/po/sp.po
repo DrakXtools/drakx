@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-01-01 19:31+0100\n"
+"POT-Creation-Date: 2000-01-02 00:58+0100\n"
 "PO-Revision-Date: 1999-08-09 16:39+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -798,8 +798,9 @@ msgstr "промена величине"
 msgid "Choose the new size"
 msgstr "Изаберите нову величину"
 
-#: ../diskdrake.pm_.c:534 ../install_steps_gtk.pm_.c:329
-#: ../install_steps_gtk.pm_.c:378 ../unused/install_steps_graphical.pm_.c:314
+#: ../diskdrake.pm_.c:534 ../install_steps_graphical.pm_.c:287
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:329
+#: ../install_steps_gtk.pm_.c:378
 msgid "MB"
 msgstr "MB"
 
@@ -1852,6 +1853,91 @@ msgstr "Неприступачан floppy уређај"
 msgid "Entering step `%s'\n"
 msgstr "Покрећем корак `%s'\n"
 
+#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:293
+#, fuzzy
+msgid "You must have a swap partition"
+msgstr "Морате имати swap партицију да бисте наставили са инсталацијом."
+
+#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:295
+msgid ""
+"You don't have a swap partition\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+"Хм, нема swap партиције\n"
+"\n"
+"Свеједно наставити даље ?"
+
+#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:329
+msgid "Choose the size you want to install"
+msgstr "Изаберите величину компоненти за инсталацију"
+
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:378
+msgid "Total size: "
+msgstr "Укупна величина: "
+
+#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:390
+#, c-format
+msgid "Version: %s\n"
+msgstr "Верзия: %s\n"
+
+#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:391
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Величина: %d KB\n"
+
+#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:506
+msgid "Choose the packages you want to install"
+msgstr "Изабери пакете за инсталацију"
+
+#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:509
+msgid "Info"
+msgstr "Инфо"
+
+#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:517
+#: ../install_steps_interactive.pm_.c:81
+msgid "Install"
+msgstr "Инсталирај"
+
+#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:536
+#: ../install_steps_interactive.pm_.c:257
+msgid "Installing"
+msgstr "Инсталирам"
+
+#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:543
+msgid "Please wait, "
+msgstr "Молим сачекајте"
+
+#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:545
+msgid "Time remaining "
+msgstr "Преостало време"
+
+#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:546
+msgid "Total time "
+msgstr "Укупно време"
+
+#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:551
+#: ../install_steps_interactive.pm_.c:257
+msgid "Preparing installation"
+msgstr "Припремам инсталацију"
+
+#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:566
+#, c-format
+msgid "Installing package %s"
+msgstr "Инсталирам пакет %s"
+
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:591
+msgid "Go on anyway?"
+msgstr "Свеједно наставити даље ?"
+
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:591
+msgid "There was an error ordering packages:"
+msgstr "Грешка у листи пакета:"
+
+#: ../install_steps_graphical.pm_.c:577 ../install_steps_interactive.pm_.c:832
+msgid "Use existing configuration for X11?"
+msgstr "Да користим постојећу конфигурацију за X11 ?"
+
 #: ../install_steps_gtk.pm_.c:259
 msgid ""
 "WARNING!\n"
@@ -1875,21 +1961,6 @@ msgstr ""
 msgid "Automatic resizing failed"
 msgstr "Аутоматска измена величине неуспела"
 
-#: ../install_steps_gtk.pm_.c:293 ../unused/install_steps_graphical.pm_.c:255
-#, fuzzy
-msgid "You must have a swap partition"
-msgstr "Морате имати swap партицију да бисте наставили са инсталацијом."
-
-#: ../install_steps_gtk.pm_.c:295 ../unused/install_steps_graphical.pm_.c:258
-msgid ""
-"You don't have a swap partition\n"
-"\n"
-"Continue anyway?"
-msgstr ""
-"Хм, нема swap партиције\n"
-"\n"
-"Свеједно наставити даље ?"
-
 #: ../install_steps_gtk.pm_.c:326
 #, c-format
 msgid "Going to install %d MB. You can choose to install more programs"
@@ -1899,67 +1970,14 @@ msgstr "Инсталираћу %d MB. Можете изабрати да инсталирате још програма"
 msgid "You will be able to choose more precisely in next step"
 msgstr "Моћи ћете да прецизније бирате у следецем кораку"
 
-#: ../install_steps_gtk.pm_.c:329
-msgid "Choose the size you want to install"
-msgstr "Изаберите величину компоненти за инсталацију"
-
-#: ../install_steps_gtk.pm_.c:378 ../unused/install_steps_graphical.pm_.c:314
-msgid "Total size: "
-msgstr "Укупна величина: "
-
 #: ../install_steps_gtk.pm_.c:389
 #, fuzzy
 msgid "Bad package"
 msgstr "%d пакета"
 
-#: ../install_steps_gtk.pm_.c:390 ../unused/install_steps_graphical.pm_.c:284
-#, c-format
-msgid "Version: %s\n"
-msgstr "Верзия: %s\n"
-
-#: ../install_steps_gtk.pm_.c:391 ../unused/install_steps_graphical.pm_.c:285
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Величина: %d KB\n"
-
-#: ../install_steps_gtk.pm_.c:506 ../unused/install_steps_graphical.pm_.c:421
-msgid "Choose the packages you want to install"
-msgstr "Изабери пакете за инсталацију"
-
-#: ../install_steps_gtk.pm_.c:509 ../unused/install_steps_graphical.pm_.c:424
-msgid "Info"
-msgstr "Инфо"
-
-#: ../install_steps_gtk.pm_.c:517 ../install_steps_interactive.pm_.c:81
-#: ../unused/install_steps_graphical.pm_.c:432
-msgid "Install"
-msgstr "Инсталирај"
-
-#: ../install_steps_gtk.pm_.c:536 ../install_steps_interactive.pm_.c:257
-#: ../unused/install_steps_graphical.pm_.c:451
-msgid "Installing"
-msgstr "Инсталирам"
-
 #: ../install_steps_gtk.pm_.c:539
 msgid "Estimating"
 msgstr "Процењујем"
-
-#: ../install_steps_gtk.pm_.c:543 ../unused/install_steps_graphical.pm_.c:457
-msgid "Please wait, "
-msgstr "Молим сачекајте"
-
-#: ../install_steps_gtk.pm_.c:545 ../unused/install_steps_graphical.pm_.c:459
-msgid "Time remaining "
-msgstr "Преостало време"
-
-#: ../install_steps_gtk.pm_.c:546 ../unused/install_steps_graphical.pm_.c:460
-msgid "Total time "
-msgstr "Укупно време"
-
-#: ../install_steps_gtk.pm_.c:551 ../install_steps_interactive.pm_.c:257
-#: ../unused/install_steps_graphical.pm_.c:465
-msgid "Preparing installation"
-msgstr "Припремам инсталацију"
 
 #: ../install_steps_gtk.pm_.c:561
 #, c-format
@@ -1969,19 +1987,6 @@ msgstr "%d пакета"
 #: ../install_steps_gtk.pm_.c:561
 msgid ", %U MB"
 msgstr ", %U MB"
-
-#: ../install_steps_gtk.pm_.c:566 ../unused/install_steps_graphical.pm_.c:486
-#, c-format
-msgid "Installing package %s"
-msgstr "Инсталирам пакет %s"
-
-#: ../install_steps_gtk.pm_.c:591 ../unused/install_steps_graphical.pm_.c:511
-msgid "Go on anyway?"
-msgstr "Свеједно наставити даље ?"
-
-#: ../install_steps_gtk.pm_.c:591 ../unused/install_steps_graphical.pm_.c:511
-msgid "There was an error ordering packages:"
-msgstr "Грешка у листи пакета:"
 
 #: ../install_steps_interactive.pm_.c:37
 #, fuzzy
@@ -2383,7 +2388,7 @@ msgstr "Нема лозинке"
 #: ../interactive.pm_.c:84 ../interactive.pm_.c:163
 #: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:94
 #: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:192 ../my_gtk.pm_.c:425
-#: ../my_gtk.pm_.c:525 ../unused/install_steps_graphical.pm_.c:608
+#: ../my_gtk.pm_.c:525
 msgid "Ok"
 msgstr "У реду"
 
@@ -2769,13 +2774,8 @@ msgstr "Активирај Num Lock тастер при стартању"
 msgid "Give the ram size in Mb"
 msgstr "Прикажи величину RAM-а у Mb"
 
-#: ../install_steps_interactive.pm_.c:832
-#: ../unused/install_steps_graphical.pm_.c:535
-msgid "Use existing configuration for X11?"
-msgstr "Да користим постојећу конфигурацију за X11 ?"
-
 #: ../install_steps_interactive.pm_.c:844
-#: ../install_steps_interactive.pm_.c:999
+#: ../install_steps_interactive.pm_.c:1009
 msgid "Try to find PCI devices?"
 msgstr "Да ли да тражим PCI уређаје ?"
 
@@ -2895,46 +2895,62 @@ msgstr "Конфигуришем PCMCIA картице..."
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../install_steps_interactive.pm_.c:975
+#: ../install_steps_interactive.pm_.c:957
+msgid ""
+"Linux does not yet fully support ultra dma 66 HPT.\n"
+"As a work-around i can make a custom floppy giving access the hard drive on "
+"ide2 and ide3"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:978
 #, fuzzy
-msgid "Enter a floppy (all data will be lost)"
+msgid ""
+"Enter a floppy to create an HTP enabled boot\n"
+"(all data on floppy will be lost)"
 msgstr ""
 "Убаците дискету у уређај\n"
 "Сви подаци на дискети ће бити избрисани !"
 
-#: ../install_steps_interactive.pm_.c:989
+#: ../install_steps_interactive.pm_.c:994
 msgid "It is necessary to restart installation booting on the floppy"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:990
+#: ../install_steps_interactive.pm_.c:995
 msgid "It is necessary to restart installation with the new parameters"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:1003
+#: ../install_steps_interactive.pm_.c:999
+#, c-format
+msgid ""
+"Failed to create an HTP boot floppy.\n"
+"You may have to restart installation and give ``%s'' at the prompt"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:1013
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Пронађен %s %s интерфејс"
 
-#: ../install_steps_interactive.pm_.c:1004
+#: ../install_steps_interactive.pm_.c:1014
 msgid "Do you have another one?"
 msgstr "Да ли имате још један?"
 
-#: ../install_steps_interactive.pm_.c:1005
+#: ../install_steps_interactive.pm_.c:1015
 #, c-format
 msgid "Do you have any %s interface?"
 msgstr "Имате ли још %s интерфејса?"
 
-#: ../install_steps_interactive.pm_.c:1007 ../interactive.pm_.c:79
+#: ../install_steps_interactive.pm_.c:1017 ../interactive.pm_.c:79
 #: ../my_gtk.pm_.c:424 ../printerdrake.pm_.c:176
 msgid "No"
 msgstr "Не"
 
-#: ../install_steps_interactive.pm_.c:1007 ../interactive.pm_.c:79
+#: ../install_steps_interactive.pm_.c:1017 ../interactive.pm_.c:79
 #: ../my_gtk.pm_.c:424
 msgid "Yes"
 msgstr "Да"
 
-#: ../install_steps_interactive.pm_.c:1008
+#: ../install_steps_interactive.pm_.c:1018
 msgid "See hardware info"
 msgstr "Погледај информације о хардверу"
 
@@ -3332,6 +3348,15 @@ msgstr "Лосе backup-ован фајл"
 msgid "Error writing to file %s"
 msgstr "Грешка код уноса у фајл %s"
 
+#: ../placeholder.pm_.c:5
+#, fuzzy
+msgid "Show less"
+msgstr "Прикажи све"
+
+#: ../placeholder.pm_.c:6
+msgid "Show more"
+msgstr ""
+
 #: ../printer.pm_.c:244
 #, fuzzy
 msgid "Local printer"
@@ -3671,11 +3696,8 @@ msgstr "није пронађен serial_usb\n"
 msgid "Emulate third button?"
 msgstr "Да имитирам рад 3 тастера?"
 
-#: ../unused/install_steps_graphical.pm_.c:433
 #, fuzzy
-msgid "Show less"
-msgstr "Прикажи све"
-
-#: ../unused/install_steps_graphical.pm_.c:434
-msgid "Show more"
-msgstr ""
+#~ msgid "Enter a floppy (all data will be lost)"
+#~ msgstr ""
+#~ "Убаците дискету у уређај\n"
+#~ "Сви подаци на дискети ће бити избрисани !"
