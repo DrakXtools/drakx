@@ -102,7 +102,7 @@ my %images = (
     cdrom   => 'fs/cdrom disk/cdrom|raw|scsi',
     network  => 'bus/usb|usb_keyboard|pcmcia disk/raw|usb',
     network_drivers => 'fs/network network/main|pcmcia|usb|raw|gigabit',
-    all     => 'fs/cdrom disk/cdrom|raw bus/usb|usb_keyboard disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit bus/firewire disk/firewire',
+    all     => 'fs/cdrom disk/cdrom|raw bus/usb|usb_keyboard disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|sata|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit bus/firewire disk/firewire',
 );
 
 my $verbose = $ARGV[0] eq '-v' && shift;
