@@ -4,7 +4,7 @@ C_RPM = 1
 C_DRAKX = 1
 
 stuff: %: %.xs
-	test -e Makefile_c || C_RPM=$(C_RPM) perl Makefile.PL
+	test -e Makefile_c || C_RPM=$(C_RPM) C_DRAKX=$(C_DRAKX) perl Makefile.PL
 	$(MAKE) -f Makefile_c LD_RUN_PATH=
 	rm -f ../auto/c ; ln -s ../c/blib/arch/auto ../auto/c
 
@@ -14,7 +14,5 @@ clean:
 
 stuff.xs: %: %.pm
 	rm -f $@
-	export C_RPM=$(C_RPM)
-	export C_DRAKX=$(C_DRAKX)
-	perl $< > $@
+	C_RPM=$(C_RPM) C_DRAKX=$(C_DRAKX) perl $< > $@
 	chmod a-w $@
