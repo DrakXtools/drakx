@@ -551,8 +551,7 @@ sub configurePrinter {
 }
 
 #------------------------------------------------------------------------------
-my @etc_pass_fields = qw(name pw uid gid realname home shell);
-sub setRootPassword($) {
+sub setRootPassword {
     my ($o) = @_;
     my $p = $o->{prefix};
     my $u = $o->{superuser} ||= {};
@@ -565,10 +564,8 @@ sub setRootPassword($) {
     open F, "> $f" or die "failed to write file $f: $!\n";
     foreach (@lines) {
 	if (/^root:/) {
-	    chomp;
-	    my %l; @l{@etc_pass_fields} = split ':';
-	    add2hash($u, \%l);
-	    $_ = join(':', @$u{@etc_pass_fields}) . "\n";
+	    add2hash($u, any::unpack_passwd($_));
+	    $_ = any::pack_passwd($_);
 	}
 	print F $_;
     }
@@ -607,7 +604,7 @@ sub addUser($) {
 
     local *F;
     open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
-    print F join(':', @$_{@etc_pass_fields}), "\n" foreach @l;
+    print F any::pack_passwd($_) foreach @l;
 
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
     print F "$_->{name}:x:$_->{gid}:\n" foreach @l;
