@@ -693,7 +693,9 @@ Take a look at http://www.linmodems.org"),
                         }
                         $netcnx->{bus} = $netc->{autodetect}{adsl}{bewan}{bus} if $ntf_name eq 'bewan';
                         if ($ntf_name eq 'bewan' && !$::testing) {
-                            $in->do_pkgs->ensure_is_installed_if_available('unicorn', "/usr/bin/bewan_adsl_status");
+                            if (my @unicorn_packages = $in->do_pkgs->check_kernel_module_packages('unicorn-kernel', 'unicorn')) {
+                                $in->do_pkgs->install(@unicorn_packages);
+                            }
                         }
                         if (exists($isdn_cards{$ntf_name})) {
                             require network::isdn;
