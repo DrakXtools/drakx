@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 25mdk
+Release: 26mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Oct 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-26mdk
+- bootloader-config: in grub menu.lst, keep previous "serial ..." and
+  "terminal ..." lines (pixel, #12054)
+- drakconnect:
+  o fix crash in delete wizard
+  o workaround more buggy drivers that returns a bogus driver name for
+    the GDRVINFO command of the ETHTOOL ioctl
+
 * Mon Oct 11 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-25mdk
 - drakconnect: workaround buggy prism2_usb that returns a bogus driver
   name for the GDRVINFO command of the ETHTOOL ioctl
