@@ -291,6 +291,7 @@ sub ask_from {
 sub ask_from_normalize {
     my ($_o, $common, $l) = @_;
 
+    ref($l) eq 'ARRAY' or internal_error('ask_from_normalize');
     foreach my $e (@$l) {
 	if (my $li = $e->{list}) {
 	    ref($e->{val}) =~ /SCALAR|REF/ or internal_error($e->{val} ? "field {val} must be a reference (it is $e->{val})" : "field {val} is mandatory"); #-#
