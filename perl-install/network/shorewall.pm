@@ -67,12 +67,12 @@ sub default_interfaces {
 
 	my @l = detect_devices::getNet() or return;
 	$in->ask_from('',
-                      N("Please enter the name of the interface connected to the internet.              
-                
+                      N("Please enter the name of the interface connected to the internet.
+
 Examples:
-                ppp+ for modem or DSL connections, 
-                eth0, or eth1 for cable connection, 
-                ippp+ for a isdn connection.
+		ppp+ for modem or DSL connections, 
+		eth0, or eth1 for cable connection, 
+		ippp+ for a isdn connection.
 "),
                    [ { label => N("Net Device"), val => \$card_netconnect, list => \@l } ]);
 	$conf{net_interface} = $card_netconnect;
