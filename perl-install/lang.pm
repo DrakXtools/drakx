@@ -19,13 +19,18 @@ use log;
 #- languages, carefully choosen)
 my %languages = (
   'en'  => [ 'English',			undef,	      'en', 'en_US' ],
+  'hy'  => [ 'Armenian',                'armscii-8',  'hy', 'hy' ],
+'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5' ],
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR' ],
+  'ka'  => [ 'Georgian',                'georgian-academy', 'ka', 'ka' ],
 'de_DE' => [ 'German (Germany)',	'iso-8859-1', 'de', 'de_DE' ],
+  'el'  => [ 'Greek',                   'iso-8859-7', 'el', 'el' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
   'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id' ],
   'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis' ],
+  'ko'  => [ 'Korean',                  'ksc5601',    'ko', 'ko' ],
   'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:no@nynorsk' ],
 'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1','no', 'no@nynorsk' ],
 'pt_BR' => [ 'Portuguese (Brazil)',	'iso-8859-1', 'pt', 'pt_BR:pt_PT' ],
@@ -36,6 +41,10 @@ my %languages = (
 'es_ES' => [ 'Spanish (Spain)',		'iso-8859-1', 'es', 'es' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
   'uk'  => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk' ],
+  'vi'  => [ 'Vietnamese (TCVN)',       'tcvn',       'vi',
+					'vi_VN.tcvn:vi_VN.tcvn-5712' ],
+'vi_VN.viscii' => [ 'Vietnamese (VISCII)','viscii',   'vi',
+				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE' ],
 );
 
@@ -43,6 +52,10 @@ my %charsets = (
   "armscii-8"  => [ "arm8.fnt",			"armscii8",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-*helv*-medium-r-normal--14-*-*-*-*-armscii-8" ],
+#- chinese needs special console driver for text mode
+  "Big5"       => [ "?????",                    "????",
+        "*-helvetica-medium-r-normal--14-*-*-*-*-*-iso8859-1," .
+        "-taipei-*-medium-r-normal--16-*-*-*-*-*-big5-0" ],
   "iso-8859-1" => [ "lat0-sun16.psf",		"iso15", 
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1" ],
   "iso-8859-2" => [ "lat2-sun16.psf",		"iso02",
@@ -78,14 +91,19 @@ my %charsets = (
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-15" ],
 #- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ "????",			"????",
-	"-misc-fixed-medium-r-normal--14-130-75-75-c-70-jisx0201.1976-0"
-	 ],
+        "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
+        "-*-*-medium-r-normal--14-*-*-*-*-*-jisx0208.*-0," .
+        "-*-*-medium-r-normal--14-*-*-*-*-*-jisx0201.*-0" ],
   "koi8-r"     => [ "Cyr_a8x16.psf",		"koi2alt",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-koi8-r" ],
   "koi8-u"     => [ "ruscii_8x16.psf",		"koi2alt",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-koi8-u" ],
+#- korean needs special console driver for text mode
+  "ksc5601"    => [ "?????",                    "?????",
+        "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
+        "-*-*-medium-*-*--14-*-*-*-*-*-ksc5601.1987-*" ], 
   "tcvn"       => [ "tcvn8x16.psf",		"tcvn",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-tcvn-5712" ],
