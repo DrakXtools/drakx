@@ -1197,7 +1197,7 @@ sub is_installed {
     my ($do, @l) = @_;
     foreach (@l) {
 	my $p = pkgs::packageByName($do->{o}{packages}, $_);
-	$p && $p->flag_selected or return;
+	$p && $p->flag_available or return;
     }
     1;
 }
@@ -1206,7 +1206,7 @@ sub are_installed {
     my ($do, @l) = @_;
     grep {
 	my $p = pkgs::packageByName($do->{o}{packages}, $_);
-	$p && $p->flag_selected;
+	$p && $p->flag_available;
     } @l;
 }
 
