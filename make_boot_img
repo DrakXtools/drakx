@@ -86,15 +86,17 @@ sub boot_img_i386 {
     __ "$sudo umount $mnt 2>/dev/null";
     my $automatic = "";
 
-    if ($type eq "hd") {
+    if ($type eq "hd" || $type eq "network") {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
-	$automatic = "automatic=method:disk";
     } elsif ($type eq "all") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
     } else {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
-	$automatic = "automatic=method:cdrom" if ($type eq "cdrom");
     }
+
+    $automatic = "automatic=method:cdrom" if ($type eq "cdrom");
+    $automatic = "automatic=method:disk" if ($type eq "hd");
+
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
     -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
