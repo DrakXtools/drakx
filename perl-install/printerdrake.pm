@@ -350,7 +350,7 @@ sub main($$$$;$) {
 						    messages =>
 _("Here are the following print queues.
 You can add some more or change the existing ones."),
-						    ok => '',
+						    cancel => '',
 						   }, [ { val => \$queue, format => \&translate,
 							  list => [ (sort keys %{$printer->{configured} || {}}),
 								    __("Add"), __("Done") ] } ]
