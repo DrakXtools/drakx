@@ -3414,6 +3414,39 @@ sub restore_step2() {
     $up_box->show_all;
 }
 
+sub find_files_to_restore() {
+	local $_;
+	my $file_restore;
+	my $start_restore;
+	
+	#- file info in tree view
+	my $model = Gtk2::TreeStore->new(Gtk2::GType->STRING);
+    my $file_list = Gtk2::TreeView->new_with_model($model);
+	my $file_wildcard_entry = new Gtk2::Entry();
+	
+    gtkpack($advanced_box,
+		$file_restore = gtkpack_(new Gtk2::VBox(0,10),
+		    0, new Gtk2::Label(N("Filename to search for (wildcards allowed):")),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				1, $file_wildcard_entry,
+				0, gtksignal_connect(new Gtk2::Button(N("Search Backups")), clicked => sub {
+					# FIXME - search the file listings and offer a list of possible matches
+					my $wildcard = $file_wildcard_entry->get_text;
+					show_warning("w", N("Search For...\n%s", $wildcard));
+					gtkset_sensitive($start_restore, 1);
+				}),
+			),
+			1, create_scrolled_window($file_list),
+			0, gtkset_sensitive(gtksignal_connect($start_restore = new Gtk2::Button(N("Restore Selected")), clicked => sub {
+				# FIXME - search the file listings and offer a list of possible matches
+				show_warning("w", N("Start Search..."));
+			}), 0),
+		),
+	);
+
+	$central_widget = \$file_restore;
+}
+
 sub catalog_restore() {
 	my $catalog_box;
 	my $cat_entry;
@@ -3902,6 +3935,11 @@ sub restore_box() {
 				1, gtkpack_(new Gtk2::VBox(0,10),
 					1, new Gtk2::VBox(0,10),
 					1, new Gtk2::VBox(0,10),
+					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Search for files to restore")), clicked => sub { 
+						$retore_box->destroy;
+						button_box_file_restore();
+						find_files_to_restore() 
+					}),
 					1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore all backups")), clicked => sub { 
 						$retore_box->destroy;
 						button_box_restore();
@@ -4057,6 +4095,24 @@ sub button_box_restore_main() {
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() }),
+			),
+		),
+	);
+}
+
+sub button_box_file_restore() {
+    $button_box_tmp->destroy;
+
+    gtkpack($button_box,
+	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
+				destroy_widget(); 
+				restore_box();
+			}),
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+				adv_help(\&$current_widget, $custom_help);
+			}),
+			1, new Gtk2::HBox(0, 1),	
 			),
 		),
 	);
