@@ -382,11 +382,12 @@ sub mk_frame {
 	  $adj{$1} and $adj{$1}->set_value($theme{boot_conf}{$1});
 	  #- look for combo
        my @popdown;
-	  $ref->{widget}{combo}{$1} 
-	    and @popdown = @{$ref->{widget}{combo}{$1}}
-	    and $ref->{widgets}{combo}{$1} = new Gtk2::Combo
-	    and $hboxes{$key}->add($ref->{widgets}{combo}{$1})
-	    and $ref->{widgets}{combo}{$1}->set_popdown_strings(@popdown);
+	  if ($ref->{widget}{combo}{$1}) {
+                  @popdown = @{$ref->{widget}{combo}{$1}};
+                  $ref->{widgets}{combo}{$1} = new Gtk2::Combo;
+                  $hboxes{$key}->add($ref->{widgets}{combo}{$1});
+                  $ref->{widgets}{combo}{$1}->set_popdown_strings(@popdown);
+     }
 	  #- look for checkbox
 	  $ref->{widget}{check}{$1}
 	    and $ref->{widgets}{check}{$1} = new Gtk2::CheckButton($ref->{widget}{check}{$1})
