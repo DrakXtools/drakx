@@ -29,6 +29,12 @@
 # find / -mtime -1 \! -type d -print > /tmp/liste.jour
 # build iso fs with rescue.
 # configuration file on /etc/drakconf/drakbackup/drakbakup.conf
+#
+# todo: use .backupignore like on CVS
+#       backend : --resore_all, --restore_sys, --restore_users
+#		  --build_cd_autoinst 	
+#		  --backup_now --backup_default_now
+
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX );
@@ -78,6 +84,7 @@ my $cfg_file_exist = 0;
 my @user_and_path_list;
 my @all_user_list;
 my $list_other;
+my $label_cfg_file;
 my $mdk_cc = 0;
 my $DEBUG = 0;
 
@@ -111,6 +118,9 @@ my $where_hd = 1;
 my $where_cd =0;
 my $cd_time = 650;
 my $when_space = 'year';
+my $cd_with_install_boot = 0;
+my $cd_devive = '';
+my $host_name = '';
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -152,8 +162,11 @@ sub save_conf_file {
 		     "HOST_PATH=$host_path\n",
 		     "NET_PROTO=$net_proto\n",
 		     "CD_TIME=$cd_time\n",
-		     "DAEMON_TIME_SPACE=$when_space\n"
+		     "DAEMON_TIME_SPACE=$when_space\n",
+		     "CDRW_DEVICE=$cd_devive\n",
+		     "HOST_NAME=$host_name\n"
 		     );
+    $cd_with_install_boot and push @cfg_list, "CD_WITH_INSTALL_BOOT\n" ;
     $remember_pass and push @cfg_list, "LOGIN=$login_user\n" ;
     $remember_pass and push @cfg_list, "PASSWD=$passwd_user\n" ;
     $net_daemon and push @cfg_list, "NET_DAEMON\n" ;
@@ -206,7 +219,10 @@ sub read_conf_file {
 	    if (/^USE_CD/)         { $where_cd = 1;  }
 	    if (/^USE_NET/)        { $where_net = 1; }
 	    if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_; }
-	    if (/^DAEMON_TIME_SPACE/) { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; }
+	    if (/^DAEMON_TIME_SPACE/)    { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; }
+	    if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1; }
+	    if (/^CDRW_DEVICE/)    { s/^CDRW_DEVICE=//gi; $cd_devive = $_;}
+	    if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_;} 
 	}
 	$cfg_file_exist = 1;
     } 
@@ -338,16 +354,13 @@ sub wizard {
     my $backup_sys;
     my $backup_user;
     my $user;
-    my $text;
 
-  begin: 
     $::isWizard=1;
 
- step_what_backup:
-   $::Wizard_no_previous = 1;
-    $in->ask_from(_("Please choose that you want to backup"),
-  	          (_("Please choose that you want to backup") . "\n\n") .
-	          $text,
+  step_1:
+    $::Wizard_no_previous = 1;
+    $in->ask_from(_("Please choose what you want to backup"),
+  	          (_("Please choose that you want to backup") . "\n\n"),
 		  [ 
 		    { label => _("System Files"), val => \$backup_sys, type => "bool", text => _("  all files on your /etc directory.") },
 		    { label => _("User Files"), val => \$backup_user, type => "bool", text => _("  all user files on your system.") },
@@ -356,28 +369,33 @@ sub wizard {
 		  );
     
     undef $::Wizard_no_previous;
+  step_2:    
     my $res1 = $in->ask_from_list_(_("Backup Configuration wizard"),
 				_("Please choose what you need to backup from your system"),
-				[ __("Hard Drive or NFS file system"), __("Mandrake Online"), __("on CDROM") ]) 
-	or quit_global($in, 0);
+				[ __("on Hard Drive"), __("across Network"), __("on CDROM") ]) 
+	or goto step_1;
     
+    if ($res1 eq __("on Hard Drive")) {
+	print "Hard Drive\n";
+    } elsif ($res1 eq __("across Network")) {
+	print "across Network\n";
+    } elsif ($res1 eq __("on CDROM")) {
+    }
     
     $in->ask_from(_("Backup Configuration wizard"),
-  	          (_("Please choose when you want to backup") . "\n\n") .
-	          $text,
+  	          (_("Please choose when you want to backup") . "\n\n"),
 		  [ 
 		    { label => _("Daemon"), val => \$backup_daemon, type => "bool", text => _(" Select it if you want that backup run as daemon") },
 		    ],
-		  );
-    
+		  ) or goto step_2;
     $in->ask_from(_("Backup Configuration wizard"),
-  	          (_("Please choose that you want to do") . "\n\n") .
-	          $text,
+		  (_("Please choose that you want to do") . "\n\n"),
 		  [ 
 		    { label => _("Build Auto-Boot CDROM"), val => \$user, type => "bool", text => _("This option work only if you have\na CDR-W CDROM drive and allow\n you to restore all your system (data\n and your system variables)") },
 		    ],
-		  );
-} 
+		  ) or goto step_2;
+}
+
 
 sub advanced {
     my $notebook; 
@@ -455,9 +473,11 @@ sub advanced {
 
     my $box_what_sys =  gtkpack_(new Gtk::VBox(0,1),
 				 1, _("\nPlease check all options that you need.\n"),
-				 0, my $check_what_sys = new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)")),
-				 0, my $check_what_cvs = new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
-				 1, _("With this option you will be able to restore any version\n of your /etc directory like in CVS this solution seems to be\n more interesting because it allow you to restore at any\n moment any vercions of your /etc"),
+				 1, _("This options can backup and restore all files on your /etc directory.\n"),
+				 0, my $check_what_sys = new Gtk::CheckButton( _(" Backup your System files. (~ 2Mo)")),
+				 0, my $check_what_cvs = new Gtk::CheckButton( _(" Need to restore any versions.(~ 10Mo)") ),
+				 0, _("With this option you will be able to restore any version\n of your /etc directory."),
+				 1, " ",
 				 );
     my %check_what_user;
     my $box_what_user =  gtkpack_(new Gtk::VBox(0,0),
@@ -520,6 +540,12 @@ sub advanced {
 					      ),
 				  0, _(""),
 				  0, gtkpack_(new Gtk::HBox(0,10),
+					      1, _("please entrer the host name."),
+					      1, my $host_name_entry = new Gtk::Entry(),
+					      0, _(""),
+					      ),
+				  0, _(""),
+				  0, gtkpack_(new Gtk::HBox(0,10),
 					      1, _("please entrer the directory\n to put the backup on this host. "),
 					      1, my $host_path_entry = new Gtk::Entry(),
 					      0, _(""),
@@ -535,14 +561,20 @@ sub advanced {
 					      0, my $passwd_user_entry = new Gtk::Entry(),
 					      0, _(""),
 					      ),
-				  0, my $check_remember_pass = new Gtk::CheckButton( _(" remember this password") ),
+				  0, gtkpack_(new Gtk::HBox(0,10),
+					      1, " ",
+					      0, my $check_remember_pass = new Gtk::CheckButton( _(" remember this password") ),
+					      0, _(""),
+					      ),
 				  );
     $combo_where_net_proto->entry->set_text($net_proto);
     $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
     $passwd_user_entry->set_visibility(0);
     $host_path_entry->set_text( $host_path );
+    $host_name_entry->set_text( $host_name );
     $login_user_entry->set_text( $login_user );
     $passwd_user_entry->set_text( $passwd_user );
+    $host_name_entry->signal_connect( 'changed', sub { $host_name = $host_name_entry->get_text()});
     $host_path_entry->signal_connect( 'changed', sub { $host_path = $host_path_entry->get_text()});
     $login_user_entry->signal_connect( 'changed', sub { $login_user = $login_user_entry->get_text()});
     $passwd_user_entry->signal_connect( 'changed', sub { $passwd_user = $passwd_user_entry->get_text()});
@@ -594,12 +626,22 @@ sub advanced {
 					     0, my $check_cdrw = new Gtk::CheckButton(),
 					     0, _(""),
 					     ),
+				 0, _(""),
 				 0, gtkpack_(new Gtk::HBox(0,10),
-					     1, _("please enter your CDRW device name"),
-					     0, $combo_where_cd_time,
+					     1, _(" Please check if you want to include install boot on your CD."),
+					     0, my $check_cd_with_install_boot = new Gtk::CheckButton(),
+					     0, _(""),
+					     ),
+				 0, _(""),
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     1, _("please enter your CD Writer device name\n ex: 0,1,0"),
+					     0, my $cd_devive_entry = new Gtk::Entry(),
 					     0, _(""),
 					     ),
 				 );
+    $cd_devive_entry->set_text( $cd_devive );
+    $cd_devive_entry->signal_connect( 'changed', sub { $cd_devive = $cd_devive_entry->get_text()});
+
     $combo_where_cd_time->entry->set_text($cd_time);
     $combo_where_cd_time->entry->signal_connect( 'changed', sub { $cd_time = $combo_where_cd_time->entry->get_text()});	       
 
@@ -665,16 +707,19 @@ sub advanced {
 						     ),
 					     ),
 				  0, gtkadd(new Gtk::HButtonBox,
-					    gtksignal_connect(new Gtk::Button(_("Close")), clicked => 
-							      sub { save_conf_file();
-								    ${$central_widget}->destroy(); 
+					    gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => 
+							      sub { ${$central_widget}->destroy(); 
 								    $mdk_cc and interactive_mode();
 								    $mdk_cc or interactive_mode_my();
 								}),
 					    gtksignal_connect(new Gtk::Button(_("Help")), clicked => 
 							      sub { save_conf_file(); ${$central_widget}->destroy(); adv_help() }),
-					    gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { 
-						save_conf_file(); ${$central_widget}->destroy(); after_adv();    }),
+					    gtksignal_connect(new Gtk::Button(_("Ok")), clicked =>
+							      sub { save_conf_file();
+								    ${$central_widget}->destroy(); 
+								    $mdk_cc and interactive_mode();
+								    $mdk_cc or interactive_mode_my();
+								}),
 					    ),				  
 				  ),
 	    ),
@@ -688,7 +733,7 @@ sub advanced {
 
 
 
-    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw], [$check_where_net_daemon, \$net_daemon], [$check_where_hd_daemon, \$hd_daemon], [$check_where_cd_daemon, \$cd_daemon], [$check_where_hd_quota,  \$hd_quota], [$check_where_hd, \$where_hd], [$check_where_cd, \$where_cd], [$check_where_net, \$where_net], [$check_when_daemon, \$backup_daemon]) {
+    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw], [$check_where_net_daemon, \$net_daemon], [$check_where_hd_daemon, \$hd_daemon], [$check_where_cd_daemon, \$cd_daemon], [$check_where_hd_quota,  \$hd_quota], [$check_where_hd, \$where_hd], [$check_where_cd, \$where_cd], [$check_where_net, \$where_net], [$check_when_daemon, \$backup_daemon], [$check_cd_with_install_boot, \$cd_with_install_boot]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
@@ -697,6 +742,58 @@ sub advanced {
     $central_widget = \$about_box;
     $up_box->show_all();
 }
+
+sub restore_step2 {
+
+}
+
+sub restore {
+    my $retore_box;
+    my $retore_box2;
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left2.png");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot2.png");
+
+    gtkpack($up_box,
+	    $retore_box = gtkpack_(new Gtk::VBox(0,1),
+		0, new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+		1, gtkpack_(new Gtk::HBox(0, 0),
+		     0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
+		     1, gtkadd(new Gtk::Frame(_("Restoration Step.")),
+			       $retore_box2 = gtkpack_(new Gtk::VBox(0,10),
+				     1, _("Please choose that you want to restore."),
+				     0, gtkpack_(new Gtk::HBox(0,10),
+						 1, new Gtk::HBox(0,10),
+						 1, gtkpack_(new Gtk::VBox(0,10),
+						       0, gtksignal_connect(new Gtk::Button(_("Restore all backups")), clicked => sub {
+						       $retore_box2->destroy(); }),
+						       0, gtksignal_connect(new Gtk::Button(_("Custom Restore")), clicked => sub {
+						       $retore_box2->destroy(); restore_step2() }),
+							),
+						 1, new Gtk::HBox(0,10),
+						 ),
+				     1, new Gtk::HBox(0,10),
+						       ),),),
+		      0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
+		      0, new Gtk::HSeparator,
+		      0, gtkpack_(new Gtk::HBox(0, 0),
+				  1, gtkpack_(new Gtk::HButtonBox,	
+					      1, gtksignal_connect(new Gtk::Button(_(" Cancel ")),	clicked => sub { 
+						  ${$central_widget}->destroy(); 
+						  $mdk_cc and interactive_mode();
+						  $mdk_cc or interactive_mode_my();
+					      }),
+					      1, gtksignal_connect(new Gtk::Button(_("     Help      ")), clicked => sub {
+						  ${$central_widget}->destroy(); restore_help();}),
+					      ),
+				  ),
+				   )
+	    );
+    $central_widget = \$retore_box;
+    $up_box->show_all();
+}
+
+
 
 
 sub interactive_mode_my {
@@ -725,9 +822,9 @@ sub interactive_mode_my {
     $backup_sys or $box_cgf_state_sys = _("Do not include System Files");    
     if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
     } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
-    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
-    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
-    if ($cfg_file_exist) { my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gzip "),
+    } else { $box_cgf_state_comp = _("Backups use tar and bzip"),   }
+    if ($cfg_file_exist) { my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
 			   $box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
 						     gtkset_justify( $label_cfg_file , 'left'),
 						     ),
@@ -742,7 +839,7 @@ sub interactive_mode_my {
 					   1, gtkpack_(new Gtk::HBox(0, 3),
 						       0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
 						       1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
-											gtkadd(new Gtk::Frame(_("State of configuration file.")),
+											gtkadd(new Gtk::Frame(_("State of configuration.")),
 											       gtkpack(new Gtk::VBox(0,10),
 												       $box_cfg_state,
 												       ),),),),),
@@ -752,7 +849,7 @@ sub interactive_mode_my {
 								   1, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), 
 											clicked => sub {  Gtk->main_quit() }),
 								   1, gtksignal_connect(new Gtk::Button(_("     Restore      ")), 
-										  clicked => sub {  Gtk->main_quit() }),
+										  clicked => sub {${$central_widget}->destroy(); restore();}),
 								   ),
 						       ),
 					   0, new Gtk::HSeparator,
@@ -957,6 +1054,40 @@ configuration file:
 				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
 							      sub { ${$central_widget}->destroy(); advanced();  }),
+					    ),
+				  )
+	    );
+    $central_widget = \$about_box;
+    $up_box->show_all();
+}
+
+sub restore_help {
+    my $text = new Gtk::Text(undef, undef);
+    my $about_box;
+    gtkpack($up_box,
+	    $about_box = gtkpack_(new Gtk::VBox(0,10),
+				  1, gtkpack_(new Gtk::HBox(0,0),
+					      1, gtktext_insert(gtkset_editable($text, 1), _("
+Description: Drakbacup Restore Mode. 
+
+Drakbacup allow to restore the system (etc, var files)
+ from starup or on drakconf utility.
+
+	system backup:
+                   backup_sys_12102001.tar.gz 
+		   backup_sys_etc_var_proc_12102001.tar.gz
+	user backup
+		   backup_user_james_12102001.tar.gz      
+		   backup_user_james_documents_12102001.tar.gz
+	other directories
+                   backup_other_proc_12102001.tar.gz          
+
+")),
+					      0, new Gtk::VScrollbar($text->vadj),
+					      ),
+				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+							      sub { ${$central_widget}->destroy(); restore();  }),
 					    ),
 				  )
 	    );
