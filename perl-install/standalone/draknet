@@ -59,6 +59,7 @@ MDK::Common::Globals::init(
 $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 require Gtk;
 init Gtk;
+use my_gtk qw(:helpers :wrappers);
 my $expert_mode=0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
 any::setup_thiskind_backend('net', undef);
@@ -240,7 +241,7 @@ $vbox1->pack_start($frame2,1,1,0);
 my $vbox2 = new Gtk::VBox(0,0);
 $vbox2->set_border_width(5);
 $frame2->add($vbox2);
-my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocol"), _("Driver"));
+my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocol"), _("Driver"), _("State"));
 $clist1->set_column_auto_resize($_,1) foreach (0..4);
 $clist1->column_titles_passive();
 $clist1->set_shadow_type('etched_out');
@@ -248,14 +249,16 @@ $vbox2->pack_start($clist1, 0, 0, 5);
 #$scrolled1->add_with_viewport($table2);
 
 my $ip_regexp = qr/(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/;
-foreach (0..$#all_cards) {
+foreach my $i (0..$#all_cards) {
     my $ip;
     if (-e "/sbin/ifconfig") {
-	local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$_"`;
-	/inet addr\:$ip_regexp/; $ip = "$1.$2.$3.$4";
-    } else { $ip=$intf->{"eth$_"}{IPADDR} }
-    $clist1->append($_+1, "eth$_", $ip , $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
-    $clist1->set_selectable($_, 0);
+	local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
+	/inet addr\:$ip_regexp/; $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
+	$_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
+	$state = /eth$i/ ? "up" : "down";
+    } else { $ip=$intf->{"eth$_"}{IPADDR}; $state = "n/a"; }
+    $clist1->append($_+1, "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i]->[1], $state);
+    $clist1->set_selectable($i, 0);
 }
 
 my $hbox3 = new Gtk::HBox(0,0);
@@ -351,14 +354,22 @@ $in->exit(0);
 
 
 sub apply {
-
     $old_profile=$netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
     network::netconnect::save_conf($netcnx, $netc, $intf);
+
+    $netcnx->{type} eq 'modem' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '', sub { $in->standalone::pkgs_install(@_) });
+    $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc); #$light
+    $netcnx->{type} eq 'isdn_external' and any::pppConfig($in, $netcnx->{$netcnx->{type}}, '', sub { $in->standalone::pkgs_install(@_) });
+    $netcnx->{type} eq 'adsl_ppoe' and adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pppoe');
+    $netcnx->{type} eq 'adsl_pptp' and adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, 'pptp');;
+
     network::configureNetwork2($in, $prefix, $netc, $intf, sub { $in->standalone::pkgs_install(@_) });
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
-    system("$prefix/etc/rc.d/init.d/network $_") foreach "stop", "start";
+    system("$prefix/etc/rc.d/init.d/network restart");
     $button_apply->set_sensitive(0);
 }
+
+sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig` =~ /eth$_[0]/ }
 
 sub update {
     my $h = chomp_(`hostname`);
@@ -371,14 +382,15 @@ sub update {
     $button2->child->set($c ? _("Disconnect...") : _("Connect..."));
     $clist1->freeze();
     $clist1->clear();
-    foreach (0..$#all_cards) {
+    foreach my $i (0..$#all_cards) {
 	my $ip;
 	if (-e "/sbin/ifconfig") {
-	    local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$_"`;
-	    /inet addr\:$ip_regexp/; $ip = "$1.$2.$3.$4";
-	} else { $ip=$intf->{"eth$_"}{IPADDR} }
-	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
-	$clist1->set_selectable($_, 0);
+	    local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
+	    /inet addr\:$ip_regexp/; $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
+	    $state = ethisup($i) ? "up" : "down";
+	} else { $ip=$intf->{"eth$i"}{IPADDR}; $state = "n/a"; }
+	$clist1->append($i+1, "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i]->[1], $state);
+	$clist1->set_selectable($i, 0);
     }
     $clist1->thaw();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
@@ -400,16 +412,14 @@ sub configure_lan {
 	my $dialog = new Gtk::Dialog();
 	$dialog->set_position(1);
 	$dialog->vbox->set_border_width(10);
-	$dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
+	$dialog->signal_connect ( delete_event => sub { Gtk->main_quit() });
 	$dialog->vbox->pack_start(new Gtk::Label(_("You don't have any configured interface.
 Configure them first by clicking on 'Configure'")),1,1,0);
 	my $bbox_dialog = new Gtk::HButtonBox;
 	$dialog->action_area->add($bbox_dialog);
 	$bbox_dialog->set_layout(-end);
 	my $button_ok = new Gtk::Button _("OK");
-	$button_ok->signal_connect ( clicked => sub {
-					 Gtk->main_quit();
-				     });
+	$button_ok->signal_connect ( clicked => sub { Gtk->main_quit() });
 	$bbox_dialog->add($button_ok );
 	$dialog->show_all;
 	$dialog->set_modal(1);
@@ -428,7 +438,6 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $vbox1->pack_start(new Gtk::Label(_("LAN Configuration")),0,1,0);
     my $notebook = new Gtk::Notebook;
     $vbox1->pack_start($notebook,0,1,0);
-    $notebook->set_sensitive($netc->{NETWORKING} eq "yes");
     my @eth_data;
     foreach (0..$#all_cards) {
 	my $vbox_local=new Gtk::VBox(0,0);
@@ -463,8 +472,12 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $infos[2*$i+1]->set_text(${$_->[1]});
 	    $i++;
 	}
+#	$vbox_local->pack_start(gtksignal_connect(my $b = new Gtk::Button(ethisup($_) ? _("stop it") : _("start it")), clicked => 
+#	  sub {system("/sbin/if".(ethisup($_)?"up":"down")."eth$_");$_->[0]->set(ethisup($_)?_("stop it"):_("start it"));}),0,0,0);
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
+#	require Data::Dumper;
+#	print "------------\n" . Data::Dumper->Dump([$b],['b']) . "\n";
 	my $hbox_local = new Gtk::HBox(0,0);
 	my $pix = my_gtk::gtkpng("/usr/share/libDrakX/pixmaps/eth_card_mini.png");
 	$hbox_local->pack_start($pix,0,0,0);
@@ -475,14 +488,6 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     my $bbox1 = new Gtk::HButtonBox;
     $vbox1->pack_start($bbox1,0,0,10);
     $bbox1->set_layout(-end);
-    my $old_networking = $netc->{NETWORKING};
-    my $button_able = new Gtk::Button $netc->{NETWORKING} eq "yes" ? _("Disable network") : _("Enable network");
-    $button_able->signal_connect ( clicked => sub {
-				       $netc->{NETWORKING} eq "yes" ? ($netc->{NETWORKING} = "no") : ($netc->{NETWORKING} = "yes");
-				       $notebook->set_sensitive($netc->{NETWORKING} eq "yes");
-				       $button_able->child->set($netc->{NETWORKING} eq "yes" ? _("Disable network") : _("Enable network"));
-				   } );
-    $bbox1->add($button_able);
     my $button_ok = new Gtk::Button( _("OK") );
     $button_ok->signal_connect ( clicked => sub {
 				     my $i=0;
@@ -496,7 +501,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 				 });
     $bbox1->add($button_ok);
     my $button_cancel = new Gtk::Button( _("Cancel") );
-    $button_cancel->signal_connect ( clicked => sub { $netc->{NETWORKING}=$old_networking; $window->destroy(); Gtk->main_quit });
+    $button_cancel->signal_connect ( clicked => sub { $window->destroy(); Gtk->main_quit });
     $bbox1->add($button_cancel);
 
     $window->set_modal(1);
@@ -596,13 +601,11 @@ Create one first by clicking on 'Configure'")),1,1,0);
   	if (defined $_->[2]) {
 	    if ($_->[2] eq 'label') {
 		$infos[2*$i+1]=new Gtk::Entry();
-		$infos[2*$i+1]->set_editable(0);
 		$infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
 	    } else {
 		my $c=new Gtk::Combo();
 		$c->set_popdown_strings(@{$_->[2]});
 		$infos[2*$i+1]=$c->entry;
-		$infos[2*$i+1]->set_editable(0);
 		$infos[2*$i]->pack_start($c,0,0,0);
 	    }
 	} else {
