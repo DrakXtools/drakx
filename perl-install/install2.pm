@@ -462,8 +462,13 @@ sub main {
 	require install_steps_auto_install;
 	eval { $o = $::o = install_any::loadO($o, $::auto_install) };
 	if ($@) {
-	    log::l("error using auto_install, continuing");
-	    undef $::auto_install;
+	    if ($o->{useless_thing_accepted}) { #- Pixel's hack to be able to fail through
+		log::l("error using auto_install, continuing");
+		undef $::auto_install;
+	    } else {
+		print "Error using auto_install\n$@\n";
+		install_steps_auto_install::errorInStep();
+	    }
 	} else {
 	    log::l("auto install config file loaded successfully");
 	}
