@@ -48,6 +48,7 @@ several different X sessions on your local machine at the same time.")),
                                     )
    ) {
     $new_dm = { reverse %dm }->{$new_dm};
+    log::explanations("modified file $cfg_file");
     substInFile {
         s/^(DISPLAYMANAGER)=.*(\n|)//;
         s/^\n//g;
