@@ -254,7 +254,7 @@ sub choosePackages {
     #- not be able to start (xfs at least).
     my $available = install_any::getAvailableSpace($o);
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
-    log::l(sprintf "available size %dMB (corrected %dMB)", $available / sqr(1024), $availableCorrected / sqr(1024));
+    log::l(sprintf "available size %s (corrected %s)", formatXiB($available), formatXiB($availableCorrected));
 
     #- avoid destroying user selection of packages but only
     #- for expert, as they may have done individual selection before.
@@ -700,10 +700,16 @@ sub setupBootloader($) {
 sub configureXBefore {
     my ($o) = @_;
     my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
-    if (!-e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb" && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
+    $xkb = '' if !($xkb && -e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$xkb");
+    if (!$xkb && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
 	require commands;
 	commands::cp("-f", $f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
 	$xkb = '';
+
+    }
+    {
+	my $f = "$o->{prefix}/etc/sysconfig/i18n";
+	setVarsInSh($f, add2hash_({ XKB_IN_USE => $xkb ? '': 'no' }, { getVarsFromSh($f) }));
     }
     $o->{X}{keyboard}{xkb_keymap} = $xkb;
     $o->{X}{mouse} = $o->{mouse};
