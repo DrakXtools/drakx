@@ -168,6 +168,11 @@ sub configureNetwork {
     my @all_cards = conf_network_card_backend($netc, $intf);
     my @l = map { $_->[0] } @all_cards;
 
+    foreach (@all_cards) {
+	modules::remove_alias($_->[0]);
+	modules::add_alias($_->[0], $_->[1]);
+    }
+
   configureNetwork_step_1:
     $netc ||= {};
     my $last; foreach (@all_cards) {
