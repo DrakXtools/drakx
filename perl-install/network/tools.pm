@@ -211,7 +211,7 @@ sub connected2 {
     my $pid = open(KID_TO_READ, "-|");
     if ($pid) {   # parent
 	$kid_pid = $pid;
-	return \*KID_TO_READ;
+	return *KID_TO_READ;
     } else {      # child
 	my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
 	print $a;
