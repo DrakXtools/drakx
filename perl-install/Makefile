@@ -212,7 +212,7 @@ spec_test:
 tar:
 	cd ../$(PACKAGE)-$(PKGVERSION) && perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
 	cd ../$(PACKAGE)-$(PKGVERSION) && perl -pi -e 's/^all: help/all:/' share/po/Makefile
-	cd ../$(PACKAGE)-$(PKGVERSION) && rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm t.pm debug.log `find -name CVS`
+	cd ../$(PACKAGE)-$(PKGVERSION) && rm -rf install* pkgs.pm help.pm ftp.pm http.pm crypto.pm ugtk2.pm t.pm debug.log `find -name CVS`
 	cd ../$(PACKAGE)-$(PKGVERSION) && mv -f Makefile.drakxtools Makefile
 	cd ../$(PACKAGE)-$(PKGVERSION) && rm -f list_modules.pm && cp -f ../kernel/list_modules.pm .
 	cd ..; tar cfj $(PACKAGE)-$(PKGVERSION).tar.bz2 $(patsubst %,$(PACKAGE)-$(PKGVERSION)/%,$(DISTFILES))
