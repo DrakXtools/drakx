@@ -80,7 +80,7 @@ If you don't know, choose 'use pppoe'"),
               ethernet => {
                            #go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
                           },
-              end => {
+              adsl_old_end => {
                       post => sub {
                           $wiz->{var}{adsl}{type} =~ /speedtouch|eci/ or $netconnect::need_restart_network = 1;
                       },
