@@ -206,7 +206,9 @@ sub install_ntp() {
 						   Gtk2->main_quit; 
 						   ntp_widget_state(0);
 					       }))));
+    $my_win->{window}->set_sensitive(0);
     $w->main;
+    $my_win->{window}->set_sensitive(1);
 }
 sub get_server() {
     my ($servs, @sv);
