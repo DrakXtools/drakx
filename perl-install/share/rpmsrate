@@ -702,11 +702,15 @@ CAT_EMULATORS
   3 wine
 
 CAT_PRINTER
-  4 xpp nmap printer-testpages scli net-tools gimpprint foomatic-db-engine 
-    foomatic-filters foomatic-db ImageMagick ghostscript printer-filters mpage 
-    a2ps ppdfilt gpr groff lesstif
-    sane-backends sane-frontends scanner-gui 
-    libsnmp0 xojpanel libsane-hpoj1 printer-utils
+  4 xpp nmap printer-testpages scli net-tools foomatic-db-engine 
+    foomatic-filters foomatic-db foomatic-db-hpijs ImageMagick
+    ghostscript printer-filters printer-utils mpage 
+    a2ps ppdfilt groff lesstif
+    sane-backends sane-frontends scanner-gui xsane
+    libsnmp0 xojpanel libsane-hpoj1
+    hplip-hpijs hplip-hpijs-ppds postscript-ppds
+    gimpprint-ijs gimpprint-foomatic gimpprint-escputil
+    hplip libsane-hpaio1 libhpip0
 
 INSTALL
   NOCOPY
@@ -731,5 +735,5 @@ INSTALL
     kdenetwork-kppp-provider
     synaptics dkms-minimal
 
-  5 cups cups-drivers hpoj libhpojip0
+  5 cups cups-drivers hpoj libhpojip0 gimpprint-cups
   4 xorg-x11-glide-module Glide_V3-DRI Glide_V5 Mesa
