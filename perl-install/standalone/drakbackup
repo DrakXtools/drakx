@@ -2652,7 +2652,7 @@ sub wizard_step2() {
 				1, new Gtk2::VBox(0, 5),
 				0, N("Please choose where you want to backup"),
 				0, gtkpack_(new Gtk2::HBox(0, 15),	      
-					0, my $check_wizard_hd = new Gtk2::CheckButton(N("On Hard Drive")),
+					0, N("Hard Drive used to prepare backups for all media"),
 					1, new Gtk2::VBox(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
@@ -2709,9 +2709,6 @@ sub wizard_step2() {
 	gtksignal_connect(gtkset_active($check_wizard_tape, $where_tape), toggled => sub {
 		invbool \$where_tape;
 		if ($where_tape) { $where_cd = 0; $where_net = 0 };
-		refresh_wizard_step2();
-	});
-	gtksignal_connect(gtkset_active($check_wizard_hd, $where_hd), toggled => sub {
 		refresh_wizard_step2();
 	});
 	if (!$where_hd && !$where_cd && !$where_net) {
