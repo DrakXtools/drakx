@@ -706,7 +706,7 @@ complete => sub {
 
     # Auto-detect printer model (works if host is an ethernet-connected
     # printer)
-    my $modelinfo = detect_devices::getSNMPModel ($remotehost);
+    my $modelinfo = printer::getSNMPModel ($remotehost);
     my $auto_hpoj;
     if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
         $in->ask_warn('', _("Detected model: %s %s",
@@ -1131,11 +1131,10 @@ sub setup_socket {
         $in->do_pkgs->install('nc');
     }
 
-    # Auto-detect printer model (works if host is an ethernet-connected
-    # printer)
+    # Auto-detect printer model
     my $modelinfo = undef;
     if ($printer->{AUTODETECT}) {
-	$modelinfo = detect_devices::getSNMPModel ($remotehost);
+	$modelinfo = printer::getSNMPModel ($remotehost);
     }
     my $auto_hpoj;
     if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
@@ -1220,7 +1219,7 @@ complete => sub {
 	# Auto-detect printer model (works if host is an ethernet-connected
 	# printer)
 	my $remotehost = $1;
-	my $modelinfo = detect_devices::getSNMPModel ($remotehost);
+	my $modelinfo = printer::getSNMPModel ($remotehost);
         my $auto_hpoj;
         if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
             $in->ask_warn('', _("Detected model: %s %s",
@@ -1355,6 +1354,7 @@ sub setup_common {
 		# Configure photo card access with mtools and MToolsFM
 		if ((($makemodel =~ /HP\s+PhotoSmart/i) ||
 		     ($makemodel =~ /HP\s+PSC\s*9[05]0/i) ||
+		     ($makemodel =~ /HP\s+PSC\s*22\d\d/i) ||
 		     ($makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) &&
 		    ($makemodel !~ /HP\s+PhotoSmart\s+7150/i)) {
 		    # Install mtools and MToolsFM
@@ -2376,6 +2376,7 @@ sub photocard_help {
 	my $ptaldevice = $1;
 	if ((($makemodel =~ /HP\s+PhotoSmart/i) ||
 	     ($makemodel =~ /HP\s+PSC\s*9[05]0/i) ||
+	     ($makemodel =~ /HP\s+PSC\s*22\d\d/i) ||
 	     ($makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) &&
 	    ($makemodel !~ /HP\s+PhotoSmart\s+7150/i)) {
 	    # Models with built-in photo card drives
