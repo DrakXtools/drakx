@@ -2,7 +2,7 @@ Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
 Release: 0.34mdk
-Url: http://www.linux-mandrake.com/en/drakx.php3
+Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
