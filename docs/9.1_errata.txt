@@ -25,3 +25,25 @@
 
 	http://sourceforge.net/project/showfiles.php?group_id=13956
 
+
+ o DrakxTools:
+   ===========
+   - drakconnect:
+     o ltmodem support is missing from mdk9.1 [added in hp release]
+     o various other fixes came into mdk4hp release
+
+   - explanations: most common ones are not logged because of a
+     standalone.pm vs common.pm methods overloading bug [not yet
+     fixed]
+
+   - harddrake-ui:
+     o menu entry starts logdrake instead of harddrake's gui [fixed in
+       cvs]
+     o status bar is not cleared on config tool exit [fixed in cvs]
+     o title bar miss some spaces in french locale [fixed in cvs]
+
+   - harddrake service: 5 second timeout was too short so it was
+     increased up to 25 seconds [in hp release]
+
+   - localedrake/drakx: legal problem with rpc vs hong-kong||taiwan
+     [fixed in hp release]
