@@ -614,10 +614,10 @@ notation (for example, 1.2.3.4).")),
                         $netc->{DHCP} = $auto_ip;
                         return 0 if $auto_ip;
                         if (my @bad = map_index { if_(!is_ip($ethntf->{$_}), $::i) } @fields) {
-                            $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
+                            $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
                             return 1, $bad[0];
                         }
-                        $in->ask_warn('', N("Warning : IP address %s is usually reserved !", $ethntf->{IPADDR})) if is_ip_forbidden($ethntf->{IPADDR});
+                        $in->ask_warn(N("Error"), N("Warning : IP address %s is usually reserved !", $ethntf->{IPADDR})) if is_ip_forbidden($ethntf->{IPADDR});
                     },
                     focus_out => sub {
                         $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $_[0]
@@ -695,11 +695,11 @@ See iwpriv(8) man page for further information."),
                             ],
                     complete => sub {
                         if ($ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-                            $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
+                            $in->ask_warn(N("Error"), N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
                             return 1, 6;
                         }
                         if ($ethntf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-                            $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
+                            $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
                             return 1, 8;
                         }
                     },
@@ -717,7 +717,7 @@ See iwpriv(8) man page for further information."),
                         modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
                         @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr) or 
                           # FIXME: fix this
-                          $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
+                          $in->ask_warn(N("Error"), N("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")), return;
                         
                                          },
@@ -767,7 +767,7 @@ You may also enter the IP address of the gateway if you have one."),
                             }
                         }
                         if ($netc->{GATEWAY} && !is_ip($netc->{GATEWAY})) {
-                            $in->ask_warn('', N("Gateway address should be in format 1.2.3.4"));
+                            $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4"));
                             return 1;
                         }
                     },
@@ -784,7 +784,7 @@ You may also enter the IP address of the gateway if you have one."),
                     data => [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} } ],
                     complete => sub {
                         if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
-                            $in->ask_warn('', N("Zeroconf host name must not contain a ."));
+                            $in->ask_warn(N("Error"), N("Zeroconf host name must not contain a ."));
                             return 1;
                         }
                     },
