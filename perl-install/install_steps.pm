@@ -245,14 +245,14 @@ sub formatMountPartitions {
 
 #------------------------------------------------------------------------------
 sub setPackages {
-    my ($o) = @_;
-    install_any::setPackages($o);
-    pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix})
-	if !$o->{isUpgrade} && (-r "$o->{prefix}/var/lib/rpm/packages.rpm" || -r "$o->{prefix}/var/lib/rpm/Packages");
-}
-sub selectPackagesToUpgrade {
-    my ($o) = @_;
-    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
+    my ($o, $rebuild_needed) = @_;
+
+    install_any::setPackages($o, $rebuild_needed);
+    if ($rebuild_needed) {
+	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
+    } else {
+	pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
+    }
 }
 
 sub choosePackages {
@@ -313,6 +313,7 @@ sub pkg_install {
     if ($::testing) {
 	log::l("selecting package \"$_\"") foreach @l;
     } else {
+	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
     }
     my @toInstall = pkgs::packagesToInstall($o->{packages});
@@ -327,6 +328,7 @@ sub pkg_install {
 sub pkg_install_if_requires_satisfied {
     my ($o, @l) = @_;
     require pkgs;
+    $o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
     foreach (@l) {
 	my %newSelection;
 	my $pkg = pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found";
@@ -343,6 +345,9 @@ sub pkg_install_if_requires_satisfied {
 sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     my ($o) = @_;
     my $packages = $o->{packages};
+
+    #- this method is always called, go here to close still opened rpm db.
+    delete $packages->{rpmdb};
 
     if (@{$o->{toRemove} || []}) {
 	#- hack to ensure proper upgrade of packages from other distribution,
@@ -489,7 +494,7 @@ GridHeight=70
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
 	my $pkg = pkgs::packageByName($o->{packages}, 'rpm');
-	$pkg && ($pkg->flag_selected || $pkg->flag_installed) && $pkg->compare(">= 4.0") and pkgs::clean_old_rpm_db($o->{prefix});
+	$pkg && ($pkg->flag_selected || $pkg->flag_installed) && $pkg->compare(">= 4.0") and pkgs::cleanOldRpmDb($o->{prefix});
 
 	log::l("moving previous desktop files that have been updated to Trash of each user");
 	install_any::kdemove_desktop_file($o->{prefix});
