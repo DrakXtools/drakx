@@ -31,7 +31,6 @@ use standalone;
 use common qw(:common :file :functional :system);
 use my_gtk qw(:helpers :wrappers);
 use any;
-use Data::Dumper;
 
 setlocale (LC_ALL, "");
 Locale::GetText::textdomain ("Bootlookdrake");
@@ -408,16 +407,16 @@ sub lilo_choice
     fs::get_mntpoints_from_fstab($fstab);
  
     $::expert=1;
-# ask:
-    print Data::Dumper->Dump([$in],['$in']), "\n", Data::Dumper->Dump([$hds],['$hds']), "\n";
-    
+  ask:
+    $::isEmbedded = 0;
     any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
-#  eval { bootloader::install('', $bootloader, $fstab, $hds) };  
-#    if ($@) {
-#	$in->ask_warn('', 
-#		      [ _("Installation of LILO failed. The following error occured:"),
-#			grep { !/^Warning:/ } cat_("/tmp/.error") ]);
-#	unlink "/tmp/.error";
-#	goto ask;
-#    }
+    eval { bootloader::install('', $bootloader, $fstab, $hds) };  
+    if ($@) {
+	$in->ask_warn('', 
+		      [ _("Installation of LILO failed. The following error occured:"),
+			grep { !/^Warning:/ } cat_("/tmp/.error") ]);
+	unlink "/tmp/.error";
+	goto ask;
+    }
+    $::isEmbedded = 0;
 }
