@@ -16,6 +16,8 @@ OTHERFILES = tools/rpcinfo-flushed.c
 
 all: list_modules.pm TAGS $(DIRS)
 
+xs: $(DIRS)
+
 list_modules.pm:
 	ln -sf ../kernel/list_modules.pm
 
