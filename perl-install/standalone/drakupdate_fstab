@@ -75,12 +75,10 @@ sub device_name_to_entry {
 	} else {
 	    (my $prefix, $nb) = $name =~ m/^(.*?)(\d*)$/;
 	    $e = find { $prefix eq ($_->{prefix} || $_->{device}) } @l;
+	    $e->{device} = ($e->{prefix} || $e->{device}) . $nb;
 	}
     }
 
-    if ($nb) {
-	$e->{device} = ($e->{prefix} || $e->{device}) . $nb;
-    }
     $e ||= {};
     unless ($e->{devfs_device} eq $name) {
 	$e->{device} = $name; #- keeping the exact name given (often is the devfs name)
