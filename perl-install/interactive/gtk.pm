@@ -653,6 +653,10 @@ sub ask_fromW {
 			 my $message = $common->{interactive_help}->() or return;
 			 $o->ask_warn(N("Help"), $message);
 		     }, 1 ]);
+    if ($::isStandalone && $::expert) {
+        $common->{advanced_state} = 1;
+        $advanced_button->[0] = $common->{advanced_label_close};
+    }
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
 
     $pack->pack_start(gtkshow($always_pack), 1, 1, 0);
@@ -668,7 +672,6 @@ sub ask_fromW {
     gtkadd($mainw->{window}, $pack);
     $set_default_size->() if $has_scroll_always;
     $set_advanced->($common->{advanced_state});
-    $set_advanced_raw->($::expert) if $::isStandalone;
     
     my $widget_to_focus =
       $common->{focus_cancel} ? $mainw->{cancel} :
