@@ -197,6 +197,7 @@ sub syslog {
 
 sub hasSMP { c::detectSMP() }
 
+#- warning: hasHPT does a pci probe
 sub hasHPT {
     cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
 

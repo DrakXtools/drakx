@@ -326,73 +326,6 @@ $default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
     'ru' => [ 'XkbVariant "winkeys"', 'XkbOptions "grp:caps_toggle"' ],
 );
 
-#-#- * Screen/video card configuration.
-#-%ramdacs = (
-#-    __("No RAMDAC Setting (recommended)")               => '',
-#-    __("AT&T 20C490 (S3 and AGX servers, ARK driver)"), => 'att20c490',
-#-    __("AT&T 20C498/21C498/22C498 (S3, autodetected)"),	=> 'att20c498',
-#-    __("AT&T 20C409/20C499 (S3, autodetected)"),	=> 'att20c409',
-#-    __("AT&T 20C505 (S3)"),				=> 'att20c505',
-#-    __("BrookTree BT481 (AGX)"),			=> 'bt481',
-#-    __("BrookTree BT482 (AGX)"),			=> 'bt482',
-#-    __("BrookTree BT485/9485 (S3)"),			=> 'bt485',
-#-    __("Sierra SC15025 (S3, AGX)"),			=> 'sc15025',
-#-    __("S3 GenDAC (86C708) (autodetected)"),		=> 's3gendac',
-#-    __("S3 SDAC (86C716) (autodetected)"),		=> 's3_sdac',
-#-    __("STG-1700 (S3, autodetected)"),			=> 'stg1700',
-#-    __("STG-1703 (S3, autodetected)"),			=> 'stg1703',
-#-    __("TI 3020 (S3)"),					=> 'ti3020',
-#-    __("TI 3025 (S3, autodetected)"),			=> 'ti3025',
-#-    __("TI 3026 (S3, autodetected)"),			=> 'ti3026',
-#-    __("IBM RGB 514 (S3, autodetected)"),		=> 'ibm_rgb514',
-#-    __("IBM RGB 524 (S3, autodetected)"),		=> 'ibm_rgb524',
-#-    __("IBM RGB 525 (S3, autodetected)"),		=> 'ibm_rgb525',
-#-    __("IBM RGB 526 (S3)"),				=> 'ibm_rgb526',
-#-    __("IBM RGB 528 (S3, autodetected)"),		=> 'ibm_rgb528',
-#-    __("ICS5342 (S3, ARK)"),				=> 'ics5342',
-#-    __("ICS5341 (W32)"),				=> 'ics5341',
-#-    __("IC Works w30C516 ZoomDac (ARK)"),		=> 'zoomdac',
-#-    __("Normal DAC"),					=> 'normal',
-#-);
-#-
-#-@clockchip_name = (
-#-    __("No Clockchip Setting (recommended)")                         => '',
-#-    __("Chrontel 8391")                                              => 'ch8391',
-#-    __("ICD2061A and compatibles (ICS9161A => DCS2824)")	     => 'icd2061a',
-#-    __("ICS2595")                                                    => 'ics2595',
-#-    __("ICS5342 (similar to SDAC, but not completely compatible)")   => 'ics5342',
-#-    __("ICS5341")						     => 'ics5341',
-#-    __("S3 GenDAC (86C708) and ICS5300 (autodetected)")	             => 's3gendac',
-#-    __("S3 SDAC (86C716)")					     => 's3_sdac',
-#-    __("STG 1703 (autodetected)")				     => 'stg1703',
-#-    __("Sierra SC11412")					     => 'sc11412',
-#-    __("TI 3025 (autodetected)")				     => 'ti3025',
-#-    __("TI 3026 (autodetected)")				     => 'ti3026',
-#-    __("IBM RGB 51x/52x (autodetected)")			     => 'ibm_rgb5xx',
-#-);
-#-
-
-$intro_text = "
-This program will create a basic XF86Config file, based on menu selections you make.
-
-The XF86Config file usually resides in /usr/X11R6/lib/X11 or /etc/X11. A
-sample XF86Config file is supplied with XFree86; it is configured for a
-standard VGA card and monitor with 640x480 resolution.
-
-You can either take the sample XF86Config as a base and edit it for your
-configuration, or let this program produce a base XF86Config file for your
-configuration and fine-tune it. Refer to /usr/X11R6/lib/X11/doc/README.Config
-for a detailed overview of the configuration process.
-
-For accelerated servers (including accelerated drivers in the SVGA server),
-there are many chipset and card-specific options and settings. This program
-does not know about these. On some configurations some of these settings must
-be specified. Refer to the server man pages and chipset-specific READMEs.
-
-Before continuing with this program, make sure you know the chipset and
-amount of video memory on your video card. SuperProbe can help with this.
-It is also helpful if you know what server you want to run.";
-
 $s3_comment = '
 # Use Option "nolinear" if the server doesn\'t start up correctly
 # (this avoids the linear framebuffer probe). If that fails try
@@ -409,64 +342,21 @@ $cirrus_comment = '
 # address that the card maps the framebuffer to.
 ';
 
-$probeonlywarning_text = '
-It is possible that the hardware detection routines in the server some how
-cause the system to crash and the screen to remain blank. If this is the
-case, skip this step the next time. The server may need a
-Ramdac, ClockChip or special option (e.g. "nolinear" for S3) to probe
-and start-up correctly.
-';
-
-$monitorintro_text = __('
-Now we want to set the specifications of the monitor. The two critical
-parameters are the vertical refresh rate, which is the rate at which the
-the whole screen is refreshed, and most importantly the horizontal sync rate,
-which is the rate at which scanlines are displayed.
-
-The valid range for horizontal sync and vertical sync should be documented
-in the manual of your monitor. If in doubt, check the monitor database
-/usr/X11R6/lib/X11/doc/Monitors to see if your monitor is there.
-');
-
-$hsyncintro_text = __('
-You must indicate the horizontal sync range of your monitor. You can either
-select one of the predefined ranges below that correspond to industry-
-standard monitor types, or give a specific range.
-
-It is VERY IMPORTANT that you do not specify a monitor type with a horizontal
-sync range that is beyond the capabilities of your monitor. If in doubt,
-choose a conservative setting.
-');
-
-$vsyncintro_text = __('
-You must indicate the vertical sync range of your monitor. You can either
-select one of the predefined ranges below that correspond to industry-
-standard monitor types, or give a specific range. For interlaced modes,
-the number that counts is the high one (e.g. 87 Hz rather than 43 Hz).
-');
 
 $XF86firstchunk_text = '
-# File generated by XConfigurator.
+# File generated by XFdrake.
 
 # **********************************************************************
 # Refer to the XF86Config(4/5) man page for details about the format of
 # this file.
 # **********************************************************************
 
-# **********************************************************************
-# Files section.  This allows default font and rgb paths to be set
-# **********************************************************************
-
 Section "Files"
-
-# The location of the RGB database.  Note, this is the name of the
-# file minus the extension (like ".txt" or ".db").  There is normally
-# no need to change the default.
 
     RgbPath	"/usr/X11R6/lib/X11/rgb"
 
 # Multiple FontPath entries are allowed (they are concatenated together)
-# By default, Red Hat 6.0 and later now use a font server independent of
+# By default, Mandrake 6.0 and later now use a font server independent of
 # the X server to render fonts.
 
     FontPath   "unix/:-1"
@@ -516,28 +406,38 @@ Section "Keyboard"
     # following line
     #Protocol   "Xqueue"
 
-    AutoRepeat  0 0
+    AutoRepeat  250 30
 
     # Let the server do the NumLock processing.  This should only be
     # required when using pre-R6 clients
     #ServerNumLock
 
     # Specify which keyboard LEDs can be user-controlled (eg, with xset(1))
-    #Xleds      1 2 3
+    #Xleds      "1 2 3"
 
     #To set the LeftAlt to Meta, RightAlt key to ModeShift,
     #RightCtl key to Compose, and ScrollLock key to ModeLock:
 
     LeftAlt        Meta
-';
-
-$keyboardsection_part2 = '
-   ScrollLock      Compose
-   RightCtl        Control
+    RightAlt       Meta
+    ScrollLock     Compose
+    RightCtl       Control
 
 # To disable the XKEYBOARD extension, uncomment XkbDisable.
 
 #    XkbDisable
+';
+
+$keyboardsection_start_v4 = '
+# **********************************************************************
+# Keyboard section
+# **********************************************************************
+
+Section "InputDevice"
+
+    Identifier "Keyboard1"
+    Driver      "Keyboard"
+    Option "AutoRepeat"  "250 30"
 ';
 
 if (arch() =~ /^sparc/) {
@@ -578,6 +478,16 @@ if (arch() =~ /^sparc/) {
     XkbGeometry "sun(type5)"
     XkbSymbols  "sun/us(sun5)"
 ';
+$keyboardsection_part3_v4 = '
+    Option "XkbRules"    "sun"
+    Option "XkbModel"    "sun"
+    Option "XkbLayout"   "us"
+    Option "XkbCompat"   "compat/complete"
+    Option "XkbTypes"    "types/complete"
+    Option "XkbKeycodes" "sun(type5)"
+    Option "XkbGeometry" "sun(type5)"
+    Option "XkbSymbols"  "sun/us(sun5)"
+';
 } else {
 $keyboardsection_part3 = '
 # To customise the XKB settings to suit your keyboard, modify the
@@ -613,13 +523,18 @@ $keyboardsection_part3 = '
     XkbRules        "xfree86"
     XkbModel        "pc105"
 ';
+
+$keyboardsection_part3_v4 = '
+    Option "XkbRules" "xfree86"
+    Option "XkbModel" "pc105"
+';
 }
 
 $keyboardsection_end = '
 EndSection
 ';
 
-$pointersection_text1 = '
+$pointersection_text = '
 # **********************************************************************
 # Pointer section
 # **********************************************************************
@@ -627,20 +542,15 @@ $pointersection_text1 = '
 Section "Pointer"
 ';
 
-$pointersection_text2 = '
+$pointersection_text_v4 = '
+# **********************************************************************
+# Pointer section
+# **********************************************************************
 
-# When using XQUEUE, comment out the above two lines, and uncomment
-# the following line.
+Section "InputDevice"
 
-#    Protocol	"Xqueue"
-
-# Baudrate and SampleRate are only for some Logitech mice
-
-#    BaudRate	9600
-#    SampleRate	150
-
-# Emulate3Buttons is an option for 2-button Microsoft mice
-# Emulate3Timeout is the timeout in milliseconds (default is 50ms)
+    Identifier "Mouse1"
+    Driver      "mouse"
 ';
 
 $monitorsection_text1 = '
@@ -838,21 +748,23 @@ $devicesection_text = '
 # Graphics device section
 # **********************************************************************
 
-# Any number of graphics device sections may be present
-
 Section "Device"
-    Identifier        "Generic VGA"
-    VendorName        "Unknown"
-    BoardName "Unknown"
+    Identifier "Generic VGA"
     Chipset   "generic"
-
-#    VideoRam 256
-
-#    Clocks   25.2 28.3
-
 EndSection
 
-# Device auto configured:
+';
+
+$devicesection_text_v4 = '
+# **********************************************************************
+# Graphics device section
+# **********************************************************************
+
+Section "Device"
+    Identifier "Generic VGA"
+    Driver     "vga"
+EndSection
+
 ';
 
 $screensection_text1 = '
@@ -861,3 +773,12 @@ $screensection_text1 = '
 # **********************************************************************
 ';
 
+$layoutsection_v4 = '
+
+Section "ServerLayout"
+    Identifier "layout1"
+    Screen     "screen1"
+    InputDevice "Mouse1" "CorePointer"
+    InputDevice "Keyboard1" "CoreKeyboard"
+EndSection
+';

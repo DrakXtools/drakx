@@ -44,7 +44,6 @@ sub getinfoFromXF86Config {
     open F, "$prefix/etc/X11/XF86Config" or return {};
     foreach (<F>) {
 	if (/^Section "Keyboard"/ .. /^EndSection/) {
-	    $o->{keyboard}{altmeta} ||= ($1 eq "ModeShift" ? 1 : 0) if /^\s*RightAlt\s+"(.*?)"/;
 	    $o->{keyboard}{xkb_keymap} ||= $1 if /^\s*XkbLayout\s+"(.*?)"/;
 	} elsif (/^Section "Pointer"/ .. /^EndSection/) {
 	    $o->{mouse}{XMOUSETYPE} ||= $1 if /^\s*Protocol\s+"(.*?)"/;
@@ -60,6 +59,7 @@ sub getinfoFromXF86Config {
 	    $c{flags}{needVideoRam} ||= 1 if /^\s*VideoRam\s+/;
 	    $c{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
 	    $c{board} ||= $1 if /^\s*BoardName\s+"(.*?)"/;
+	    $c{driver} ||= $1 if /^\s*Driver\s+"(.*?)"/;
 	    $c{options}{$1} ||= 1 if /^\s*Option\s+"(.*?)"/;
 	    $c{options}{$1} ||= 0 if /^\s*#\s*Option\s+"(.*?)"/;
 

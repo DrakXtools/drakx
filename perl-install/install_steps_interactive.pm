@@ -749,14 +749,14 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 	my $c = $o->ask_from_list_([''], 
 _("Here are the following entries in LILO.
 You can add some more or change the existing ones."),
-		[ (sort @{[map_each { "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}]}), __("Add"), __("Done") ],
+		[ (sort @{[map { "$_->{label} ($_->{kernel_or_dev})" . ($b->{default} eq $_->{label} && "  *") } @{$b->{entries}}]}), __("Add"), __("Done") ],
 	);
 	$c eq "Done" and last;
 
-	my ($e, $name);
+	my ($e);
 
 	if ($c eq "Add") {
-	    my @labels = map { $_->{label} } values %{$b->{entries}};
+	    my @labels = map { $_->{label} } @{$b->{entries}};
 	    my $prefix;
 	    if ($o->ask_from_list_('', _("Which type of entry do you want to add"), [ __("Linux"), __("Other OS (windows...)") ]) eq "Linux") {
 		$e = { type => 'image' };
@@ -768,17 +768,16 @@ You can add some more or change the existing ones."),
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
 	} else {
-	    ($name) = $c =~ /\((.*?)\)/;
-	    $e = $b->{entries}{$name};
+	    $c =~ /(\S+)/;
+	    ($e) = grep { $_->{label} eq $1 } @{$b->{entries}};
 	}
-	my $old_name = $name;
 	my %old_e = %$e;
 	my $default = my $old_default = $e->{label} eq $b->{default};
 	    
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$name, list => [ eval { glob_("/boot/vmlinuz*") } ] },
+_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { glob_("/boot/vmlinuz*") } ] },
 _("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
 _("Append") => \$e->{append},
 _("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("/boot/initrd*") } ] },
@@ -787,7 +786,7 @@ _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    @l = @l[0..5] unless $::expert;
 	} else {
 	    @l = ( 
-_("Root") => { val => \$name, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+_("Root") => { val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
 _("Table") => { val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @{$o->{hds}} ], not_edit => !$::expert },
 _("Unsafe") => { val => \$e->{unsafe}, type => 'bool' }
 	    );
@@ -803,16 +802,14 @@ _("Default") => { val => \$default, type => 'bool' },
 	    '', \@l,
 	    complete => sub {
 		$e->{label} or $o->ask_warn('', _("Empty label not allowed")), return 1;
-		member($e->{label}, map { $_->{label} } grep { $_ != $e } values %{$b->{entries}}) and $o->ask_warn('', _("This label is already in use")), return 1;
-			    $name ne $old_name && $b->{entries}{$name} and $o->ask_warn('', _("A entry %s already exists", $name)), return 1;
-			   }
-		)) {
+		member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $o->ask_warn('', _("This label is already in use")), return 1;
+		0;
+	    })) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	    
-	    delete $b->{entries}{$old_name};
-	    $b->{entries}{$name} = $e;
+	    push @{$b->{entries}}, $e if $c eq "Add";
 	} else {
-	    delete $b->{entries}{$old_name};	    
+	    @{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
 	}
     }
     eval { $o->SUPER::setupBootloader };
@@ -865,14 +862,14 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 	my $c = $o->ask_from_list_([''], 
 _("Here are the following entries in SILO.
 You can add some more or change the existing ones."),
-		[ (sort @{[map_each { "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}]}), __("Add"), __("Done") ],
+		[ (sort @{[map { "$_->{label} ($_->{kernel_or_dev})" . ($b->{default} eq $_->{label} && "  *") } @{$b->{entries}}]}), __("Add"), __("Done") ],
 	);
 	$c eq "Done" and last;
 
-	my ($e, $name);
+	my ($e);
 
 	if ($c eq "Add") {
-	    my @labels = map { $_->{label} } values %{$b->{entries}};
+	    my @labels = map { $_->{label} } @{$b->{entries}};
 	    my $prefix;
 
 	    $e = { type => 'image' };
@@ -881,17 +878,16 @@ You can add some more or change the existing ones."),
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
 	} else {
-	    ($name) = $c =~ /\((.*?)\)/;
-	    $e = $b->{entries}{$name};
+	    $c =~ /(\S+)/;
+	    ($e) = grep { $_->{label} eq $1 } @{$b->{entries}};
 	}
-	my $old_name = $name;
 	my %old_e = %$e;
 	my $default = my $old_default = $e->{label} eq $b->{default};
 	    
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$name, list => [ eval { glob_("/boot/vmlinuz*") } ] },
+_("Image") => { val => \$e->{kernel_or_dev}, list => [ eval { glob_("/boot/vmlinuz*") } ] },
 _("Partition") => { val => \$e->{partition}, list => [ map { ("/dev/$_->{device}" =~ /\D*(\d*)/)[0] || 1} @{$o->{fstab}} ], not_edit => !$::expert },
 _("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
 _("Append") => \$e->{append},
@@ -912,16 +908,14 @@ _("Default") => { val => \$default, type => 'bool' },
 	    '', \@l,
 	    complete => sub {
 		$e->{label} or $o->ask_warn('', _("Empty label not allowed")), return 1;
-		member($e->{label}, map { $_->{label} } grep { $_ != $e } values %{$b->{entries}}) and $o->ask_warn('', _("This label is already in use")), return 1;
-			    $name ne $old_name && $b->{entries}{$name} and $o->ask_warn('', _("A entry %s already exists", $name)), return 1;
-			   }
-		)) {
+		member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $o->ask_warn('', _("This label is already in use")), return 1;
+		0;
+	    })) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	    
-	    delete $b->{entries}{$old_name};
-	    $b->{entries}{$name} = $e;
+	    push @{$b->{entries}}, $e if $c eq "Add";
 	} else {
-	    delete $b->{entries}{$old_name};	    
+	    @{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
 	}
     }
     eval { $o->SUPER::setupBootloader };

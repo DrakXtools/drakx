@@ -517,6 +517,8 @@ sub load_thiskind($;&$) {
 
     my @devs = (@pcidevs, @pcmciadevs);
 
+    load("sd_mod") if $type eq 'scsi' && @devs; 
+
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
 	pci_probing::main::check($mod) or next;

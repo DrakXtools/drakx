@@ -671,6 +671,8 @@ sub main {
     #- make sure failed upgrade will not hurt too much.
     install_steps::cleanIfFailedUpgrade($o);
 
+    -e "$o->{prefix}/usr/bin/urpmi" or eval { commands::rm("-rf", "$o->{prefix}/var/lib/urpmi") };
+
     #- have the really bleeding edge ddebug.log for this f*cking msec :-/
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
 

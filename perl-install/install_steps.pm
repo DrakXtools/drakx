@@ -262,6 +262,9 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     $o->pcmciaConfig();
 
+    #- for mandrake_firstime
+    output "$o->{prefix}/var/lock/TMP_1ST", "";
+
     #- remove the nasty acon...
     run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
 
@@ -612,15 +615,13 @@ sub readBootloaderConfigBeforeInstall {
 
     #- change the /boot/vmlinuz or /boot/vmlinuz-smp entries to follow symlink.
     foreach $image (keys %ofpkgs) {
-	if ($o->{bootloader}{entries}{"/boot/$image"} && pkgs::packageFlagSelected($ofpkgs{$image})) {
-	    $v = readlink "$o->{prefix}/boot/$image";
-	    if ($v) {
-		$v = "/boot/$v" if $v !~ m|^/|;
-		if (-e "$o->{prefix}$v") {
-		    $o->{bootloader}{entries}{$v} = $o->{bootloader}{entries}{"/boot/$image"};
-		    delete $o->{bootloader}{entries}{"/boot/$image"};
-		    log::l("renaming /boot/$image entry by $v");
-		}
+	pkgs::packageFlagSelected($ofpkgs{$image}) or next;
+	if (my $v = readlink "$o->{prefix}/boot/$image") {
+	    $v = "/boot/$v" if $v !~ m|^/|;
+	    if (-e "$o->{prefix}$v") {
+		my $e = lilo::get("/boot/$image", $o->{bootloader}) or next;
+		$e->{kernel} = $v;
+		log::l("renaming /boot/$image entry by $v");
 	    }
 	}
     }
@@ -640,6 +641,7 @@ sub setupBootloaderBefore {
     } else {
 	require lilo;
         lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+        lilo::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
 }
@@ -664,8 +666,8 @@ sub setupBootloader($) {
     } else {
         eval { lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
 	my $err = $@;
-        eval { lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
-	die if $err;
+        eval { lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds}) };
+	die $err if $err;
     }
 }
 
@@ -745,11 +747,14 @@ sub miscellaneous {
     if (my @l = detect_devices::getIDEBurners() and !/ide-scsi/) {
 	$_ .= " " . join(" ", map { "$_=ide-scsi" } @l);
     }
-    #- keep some given parameters
     if (my $m = modules::get_options("ide-mod")) {
-	/options="(.*)"/ and $_ .= " $1" if !/ide.=/;
+	$m =~ /options="(.*)"/ and $_ .= " $1" if !/ide.=/;
     }
 
+    #- keep some given parameters
+    #-TODO
+
+    log::l("perImageAppend: $_");
     $o->{bootloader}{perImageAppend} = $_;
 }
 

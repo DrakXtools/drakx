@@ -10,13 +10,9 @@ warning on diskdrake startup, made them as warning ?).
 -to test--------------------------------------------------------------------------------
 tree for choosing monitors (buggy?)
 
-configure services at install
-
 what happens if a module fails to insmod (scsi step), in beginner/normal/expert
 
 fstab must be sorted (/usr/local after /usr)
-
-diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 RAID upgrades
 
@@ -30,55 +26,35 @@ bug if ide-scsi, no more hdX, but scd0 (aka sr0)
 check on update for conf.modules and modules.conf !
 
 -features-------------------------------------------------------------------------------
-let diskdrake have dos/win partition automatically set up with mount point,
-this will help loopback too.
-
 handle NT (add entry for it in lilo, put it in fstab)
-
-(7.1) rewrite crypto stuff
 
 (NEED 7.1) auto-install for corporate, very important (need consolidation).
 
 (7.1 or later) clean SCSI CDROM autoboot.
+stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
+
 (7.1) sparc ehancement, avoid V7+ machine target (div and mul not in v7 standard)
 
-(7.1) improve printerdrake to at least have the same functionalities as printtool.
+(7.1)syslinux in graphical mode to be improved for heavily bogus BIOSes.
 
+(7.1)individual package selection: double click is tiring...
 (7.1)better help for partitioning in newbie
-
 (7.1 or later?)help in some configuration files.
 
+(7.1) rewrite crypto stuff
+crypto: add a cancel & progress bar while downloading
+error handling (like reading hdlist)
 (7.1)progression bar on crypto.
-
-(?)firewall configuration (instant firewalling?)
-
-(7.1)syslinux in graphical mode to be improved for heavily bogus BIOSes.
 
 (7.1)install in 800x600
 - need handling of both 640x480 (mostly for VGA16) and 800x600
 
-(7.1, other persons)rescue: 
-- small modification for stage1 to get the rescue stage2
-- create a stage2 with many tools (fdisk, bash...)
-the rescue could be on another cd (if multi-cd)
-! care must be taken about modules (if ide is in module...)
-
 (7.1)Improved network configuration (PPP and/or Ethernet)
 PPPoE install and configuration (SuSE includes it, DHCP-like)
 
-(7.1?)loopback partitions (even root one)
-
 (7.1)standalone applications for configuration (netdrake, timetool, authentificationconf, soundcard)
 
-(7.1)feature missing: cancel installation
-crypto: add a cancel & progress bar while downloading
-error handling (like reading hdlist)
-
-(7.1)Generally improved package selection /ergonmic issue.
-Tree -> CTree, ``all'' branch with all packages
-show the value associated (100->a must, 90->great, 80->nice, ... 10->useless, 0->do not install)
-
-(7.1?)grub, chos, gag
+(7.1) improve printerdrake to at least have the same functionalities as printtool.
 
 (?)enable the testing of the mouse type (under X) (wheel)
 possibility to specify the mouse
@@ -90,40 +66,31 @@ possibility to specify the mouse
 (7.1 or later)widget for displaying fdisk (dindinx)
 (see above)add fdisk using the zvt widget (taken in gnome-libs)
 
-(done,pix,7.1)manage a lot of language (ergonomic issue as it already exists)
-
-(done,pix,7.1)tree for choosing things like timezone, monitors, graphic cards, modules, mice, keyboard? ...
-
-(done,pix,7.1)sound config, although very simple, no dedicated steps and only PCI (or maybe ISA-PNP if time left ?)
-
-(done,pix,7.1)partitioning, keyboard shortcut.
-
-(done,fpons,7.1)index/compress hdlist? (for multi-cd)
-! for multi-cd live is mandatory, small transaction are mandatory too.
+(7.1, other persons)rescue: 
+- small modification for stage1 to get the rescue stage2
+- create a stage2 with many tools (fdisk, bash...)
+the rescue could be on another cd (if multi-cd)
+! care must be taken about modules (if ide is in module...)
 
 ----
 (?) paride in stage1
+stage1 & network: add ability to choose the network interface to use
 
 (?) msec custom
 
-stage1 & network: add ability to choose the network interface to use
-stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
+(?)firewall configuration (instant firewalling?)
 
 ability to add nfs/weird_fs entries in fstab
 
-(obsolete) pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
-
-auto ppp-configure with free provider
-
 
 -easy fixes-----------------------------------------------------------------------------
-in ok_cancel, focus has 3 states, should be 2 (ask dindinx)
-
 rpmdrake proposition for cdrom labels
 
 use option nocheck to mount for upgrades
 
 -fixes needing thinking-----------------------------------------------------------------
+bug: changing mem= in miscellaneous doesn't modify lilo conf if you backtrack
+
 ask_many_from_list can't keyboard scroll
 
 with /usr, /usr/local and /usr/local/e mount points i get an error at step mounting local filesystems
@@ -155,8 +122,6 @@ the XFdrake test does not handle the fontset
 > again.
 > ask_from_list cancel at /usr/lib/libDrakX/my_gtk.pm line 504.
 
-bug in ext2resizing (no sparse superbloc, don't finish properly)
-
 diskdrake: take from parted mklabel, hide(?)
 
 bug in kde desktop if keeps home but not an upgrade
@@ -182,6 +147,7 @@ bug keyboard focus: after switch in console at Xconfig step
 adduserdrake to remove/update users
 
 (???)free provider auto configuration facility (to be discussed).
+auto ppp-configure with free provider
 
 (?)on laptop, configure the MMU to use swap not very often
 
@@ -190,12 +156,6 @@ adduserdrake to remove/update users
 (?)see what can be done with nvram (50 bytes to save information)
 
 better wacom support
-
-(obsolete) bug in diskdrake: can in strange cases create a primary partition at sector #0
-
-(done,pix(partly, protection against bugging))bug in diskdrake:
-in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
-in the middle, remove the first one. Result hda5 at the end and bug.
 
 (fpons)bug: CANON BJC 4X00 do not work with current rhs-printfilters
   (work with magicfilters (debian))
@@ -208,8 +168,6 @@ partitioning? raid?
 X configuration and bootloader in kickstart
 
 XFdrake chooseResolutions with ask_from_list do not permit ``Show all''
-
-(obsolete) have a better time estimation of the remaining time in install packages
 
 (?) options in mkfs, progress bar when formatting
 
@@ -247,6 +205,9 @@ hibernation on laptop -> clock not restored
 
 
 -(?)---------------------------------------------------------------------------------
+(?) lilo-0.22-19mdk is buggy with boot=/dev/hde & root=/dev/sda13, it needs
+disk=/dev/hde bios=0x80 & disk=/dev/sda bios=0x81
+
 (?)using setxkb, enable the testing of the keyboard
 
 (?)XFdrake does not handle fbdev
@@ -496,3 +457,40 @@ eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
 
 (done,pix) Xconfiguration: if "can't open fixed font", relaunch xfs.
 
+(obsolete) pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
+
+(obsolete) bug in ext2resizing (no sparse superbloc, don't finish properly)
+
+(done,pix,7.1)manage a lot of language (ergonomic issue as it already exists)
+
+(done,pix,7.1)tree for choosing things like timezone, monitors, graphic cards, modules, mice, keyboard? ...
+
+(done,pix,7.1)sound config, although very simple, no dedicated steps and only PCI (or maybe ISA-PNP if time left ?)
+
+(done,pix,7.1)partitioning, keyboard shortcut.
+
+(done,fpons,7.1)index/compress hdlist? (for multi-cd)
+! for multi-cd live is mandatory, small transaction are mandatory too.
+
+(done,pix,7.1?)loopback partitions (even root one)
+
+(done,pix)in ok_cancel, focus has 3 states, should be 2 (ask dindinx)
+
+(done,pix,7.1)Generally improved package selection /ergonmic issue.
+Tree -> CTree, ``all'' branch with all packages
+show the value associated (100->a must, 90->great, 80->nice, ... 10->useless, 0->do not install)
+
+(done,pix)let diskdrake have dos/win partition automatically set up with mount point,
+this will help loopback too.
+
+(done,pix,7.1)grub
+
+(done,pix,7.1)feature missing: cancel installation
+
+(obsolete) bug in diskdrake: can in strange cases create a primary partition at sector #0
+
+(done,pix(partly, protection against bugging))bug in diskdrake:
+in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
+in the middle, remove the first one. Result hda5 at the end and bug.
+
+(obsolete) have a better time estimation of the remaining time in install packages

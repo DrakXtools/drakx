@@ -7,7 +7,7 @@ use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isMountableRW isApplePartMap isLoopback) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -48,7 +48,7 @@ arch() =~ /^sparc/ ? (
   0x4 => 'DOS 16-bit FAT (up to 32M)',
   0x5 => 'DOS 3.3+ Extended Partition',
   0x6 => 'DOS FAT16',
-  0x7 => 'OS/2 IFS (e.g., HPFS) / Windows NT NTFS / Advanced Unix / QNX2.x pre-1988 (see below under IDs 4d-4f)',
+  0x7 => 'NTFS (or HPFS)',
   0x8 => 'OS/2 (v1.0-1.3 only) / AIX boot partition / SplitDrive / Commodore DOS / DELL partition spanning multiple drives / QNX 1.x and 2.x ("qny")',
 ),
   0x9 => 'AIX data partition / Coherent filesystem / QNX 1.x and 2.x ("qnz")',
@@ -202,6 +202,7 @@ sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
+sub isNT($) { $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
 sub isMountableRW { isExt2($_[0]) || isFat($_[0]) }

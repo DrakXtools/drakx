@@ -1,3 +1,35 @@
+2000-03-25  Pixel  <pixel@mandrakesoft.com>
+
+	* lilo.pm: updated to the new format of entries. It was an hash.
+	Now the key is field kernel_or_dev, and entries is an array.
+	
+	(get): added, it returns the entry using a kernel
+	   (needed because entries is no more a hash)
+
+	* install_steps_interactive.pm (setupLILO): adapted to the new format
+
+	* Xconfigurator.pm (write_XF86Config): basic XF86Config-4 handling	
+
+	* fsedit.pm (suggest_part): if suggested part contains a field
+	"hd", ensure the partition is created on this hard drive
+
+	* install2.pm (main): before leaving installation, remove
+	/var/lib/urpmi if urpmi not installed	
+
+	* diskdrake.pm (Resize): ext2resize to size $part->{size} instead
+	of $size
+
+2000-03-24  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm (hasHPT): added. Now nice handling of hpt366
+	(ultra66) without rebooting and making special floppy :)
+
+	* lilo.pm (install_grub): much better grub configuration (better
+	than lilo's :pp)
+
+	* install_steps.pm (setupBootloaderBefore): remove entry floppy
+	for security > 3
+
 2000-03-23  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_gtk.pm (selectMouse): added, takes care of telling

@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options $default_monitor);
+use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $s3_comment $cirrus_comment $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -55,6 +55,7 @@ sub readCardsDB {
 	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128));
 	},
 	SERVER => sub { $card->{server} = $val; },
+	DRIVER => sub { $card->{driver} = $val; },
 	RAMDAC => sub { $card->{ramdac} = $val; },
 	DACSPEED => sub { $card->{dacspeed} = $val; },
 	CLOCKCHIP => sub { $card->{clockchip} = $val; $card->{flags}{noclockprobe} = 1; },
@@ -623,43 +624,58 @@ sub write_XF86Config {
     my ($o, $file) = @_;
     my $O;
 
-    local *F;
-    open F, ">$file" or die "can't write XF86Config in $file: $!";
+    local (*F, *G);
+    open F, ">$file"   or die "can't write XF86Config in $file: $!";
+    open G, ">$file-4" or die "can't write XF86Config in $file-4: $!";
 
     print F $XF86firstchunk_text;
+    print G $XF86firstchunk_text;
 
     #- Write keyboard section.
     $O = $o->{keyboard};
     print F $keyboardsection_start;
-
-    print F "    RightAlt        ", ($O->{altmeta} ? "ModeShift" : "Meta"), "\n";
-    print F $keyboardsection_part2;
-    print F "    XkbDisable\n" unless $O->{xkb_keymap};
+    print G $keyboardsection_start_v4;
+    print F qq(    XkbDisable\n) unless $O->{xkb_keymap};
+    print G qq(    Option "XkbDisable"\n) unless $O->{xkb_keymap};
     print F $keyboardsection_part3;
+    print G $keyboardsection_part3_v4;
     print F qq(    XkbLayout       "$O->{xkb_keymap}"\n);
+    print G qq(    Option "XkbLayout" "$O->{xkb_keymap}"\n);
     print F join '', map { "    $_\n" } @{$xkb_options{$O->{xkb_keymap}} || []};
+    print G join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$xkb_options{$O->{xkb_keymap}} || []};
     print F $keyboardsection_end;
+    print G $keyboardsection_end;
 
     #- Write pointer section.
     $O = $o->{mouse};
-    print F $pointersection_text1;
+    print F $pointersection_text;
+    print G $pointersection_text_v4;
     print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
+    print G qq(    Option "Protocol"    "$O->{XMOUSETYPE}"\n);
     print F qq(    Device      "/dev/$O->{device}"\n);
+    print G qq(    Option "Device"      "/dev/$O->{device}"\n);
     #- this will enable the "wheel" or "knob" functionality if the mouse supports it
     print F "    ZAxisMapping 4 5\n" if
       member($O->{XMOUSETYPE}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
 
-    print F $pointersection_text2;
     print F "#" unless $O->{XEMU3};
-    print F "    Emulate3Buttons\n";
+    print G "#" unless $O->{XEMU3};
+    print F qq(    Emulate3Buttons\n);
+    print G qq(    Option "Emulate3Buttons"\n);
     print F "#" unless $O->{XEMU3};
-    print F "    Emulate3Timeout    50\n\n";
+    print G "#" unless $O->{XEMU3};
+    print F qq(    Emulate3Timeout    50\n\n);
+    print G qq(    Option "Emulate3Timeout"    "50"\n\n);
     print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
+    print G "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
     print F "#" unless $O->{chordmiddle};
-    print F "    ChordMiddle\n\n";
+    print G "#" unless $O->{chordmiddle};
+    print F qq(    ChordMiddle\n\n);
+    print G qq(    Option "ChordMiddle"\n\n);
     print F "    ClearDTR\n" if $O->{cleardtrrts};
     print F "    ClearRTS\n\n"  if $O->{cleardtrrts};
     print F "EndSection\n\n\n";
+    print G "EndSection\n\n\n";
 
     print F qq(
 Section "Module"
@@ -686,71 +702,100 @@ EndSection
     #- Write monitor section.
     $O = $o->{monitor};
     print F $monitorsection_text1;
+    print G $monitorsection_text1;
     print F qq(    Identifier "$O->{type}"\n);
+    print G qq(    Identifier "$O->{type}"\n);
     print F qq(    VendorName "$O->{vendor}"\n);
-    print F qq(    ModelName  "$O->{model}"\n);
-    print F "\n";
+    print G qq(    VendorName "$O->{vendor}"\n);
+    print F qq(    ModelName  "$O->{model}"\n\n);
+    print G qq(    ModelName  "$O->{model}"\n\n);
     print F $monitorsection_text2;
-    print F qq(    HorizSync  $O->{hsyncrange}\n);
-    print F "\n";
+    print G $monitorsection_text2;
+    print F qq(    HorizSync  $O->{hsyncrange}\n\n);
+    print G qq(    HorizSync  $O->{hsyncrange}\n\n);
     print F $monitorsection_text3;
-    print F qq(    VertRefresh $O->{vsyncrange}\n);
-    print F "\n";
+    print G $monitorsection_text3;
+    print F qq(    VertRefresh $O->{vsyncrange}\n\n);
+    print G qq(    VertRefresh $O->{vsyncrange}\n\n);
     print F $monitorsection_text4;
     print F ($O->{modelines} || '') . ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
     print F "\nEndSection\n\n\n";
+    print G "\nEndSection\n\n\n";
 
     #- Write Device section.
     $O = $o->{card};
     print F $devicesection_text;
+    print G $devicesection_text_v4;
     print F qq(Section "Device"\n);
+    print G qq(Section "Device"\n);
     print F qq(    Identifier  "$O->{type}"\n);
+    print G qq(    Identifier  "$O->{type}"\n);
     print F qq(    VendorName  "$O->{vendor}"\n);
+    print G qq(    VendorName  "$O->{vendor}"\n);
     print F qq(    BoardName   "$O->{board}"\n);
+    print G qq(    BoardName   "$O->{board}"\n);
+
+    print G qq(    Driver   "$O->{driver}"\n);
 
     print F "#" if $O->{memory} && !$O->{flags}{needVideoRam};
+    print G "#" if $O->{memory} && !$O->{flags}{needVideoRam};
     print F "    VideoRam    $O->{memory}\n" if $O->{memory};
+    print G "    VideoRam    $O->{memory}\n" if $O->{memory};
 
     print F map { "    $_\n" } @{$O->{lines} || []};
+    print G map { "    $_\n" } @{$O->{lines} || []};
 
     print F qq(    Ramdac      "$O->{ramdac}"\n) if $O->{ramdac};
+    print G qq(    Ramdac      "$O->{ramdac}"\n) if $O->{ramdac};
     print F qq(    Dacspeed    "$O->{dacspeed}"\n) if $O->{dacspeed};
+    print G qq(    Dacspeed    "$O->{dacspeed}"\n) if $O->{dacspeed};
 
     if ($O->{clockchip}) {
 	print F qq(    Clockchip   "$O->{clockchip}"\n);
+	print G qq(    Clockchip   "$O->{clockchip}"\n);
     } else {
 	print F "    # Clock lines\n";
+	print G "    # Clock lines\n";
 	print F "    Clocks $_\n" foreach (@{$O->{clocklines}});
+	print G "    Clocks $_\n" foreach (@{$O->{clocklines}});
     }
 
     print F "\n";
+    print G "\n";
     print F map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};
+    print G map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};
     print F "EndSection\n\n\n";
+    print G "EndSection\n\n\n";
 
     #- Write Screen sections.
-    print F $screensection_text1;
+    print F $screensection_text1, "\n";
+    print G $screensection_text1, "\n";
+
+    my $subscreen = sub {
+	my ($f, $server, $defdepth, $depths) = @_;
+	print $f "    DefaultColorDepth $defdepth\n" if $defdepth;
+
+        foreach (ikeys(%$depths)) {
+	    my $m = $server ne "fbdev" ? join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}}) : qq("default");
+	    print $f qq(    Subsection "Display"\n);
+	    print $f qq(        Depth       $_\n) if $_;
+	    print $f qq(        Modes       $m\n);
+	    print $f qq(        ViewPort    0 0\n);
+	    print $f qq(    EndSubsection\n);
+	}
+	print $f "EndSection\n";
+    };
 
     my $screen = sub {
 	my ($server, $defdepth, $device, $depths) = @_;
 	print F qq(
-
 Section "Screen"
     Driver "$server"
     Device      "$device"
     Monitor     "$o->{monitor}{type}"
 );
-	print F "    DefaultColorDepth $defdepth\n" if $defdepth;
-
-        foreach (ikeys(%$depths)) {
-	    my $m = $server ne "fbdev" ? join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}}) : qq("default");
-	    print F qq(    Subsection "Display"\n);
-	    print F qq(        Depth       $_\n) if $_;
-	    print F qq(        Modes       $m\n);
-	    print F qq(        ViewPort    0 0\n);
-	    print F qq(    EndSubsection\n);
-	}
-	print F "EndSection\n";
-    }; #-"
+	$subscreen->(*F, $server, $defdepth, $depths);
+    };
 
     #- SVGA screen section.
     print F qq(
@@ -774,19 +819,30 @@ Section "Screen"
     &$screen("accel", $O->{default_depth}, $O->{type}, $O->{depth});
 
     &$screen("fbdev", $O->{default_depth}, $O->{type}, $O->{depth});
+
+
+    print G qq(
+Section "Screen"
+    Identifier "screen1"
+    Device      "$O->{type}"
+    Monitor     "$o->{monitor}{type}"
+);
+    $subscreen->(*G, "svga", $O->{default_depth}, $O->{depth});
+
+    print G $layoutsection_v4;
 }
 
 sub XF86check_link {
-    my ($void) = @_;
+    my ($ext) = @_;
 
-    my $f = "$prefix/etc/X11/XF86Config";
+    my $f = "$prefix/etc/X11/XF86Config$ext";
     touch($f);
 
-    my $l = "$prefix/usr/X11R6/lib/X11/XF86Config";
+    my $l = "$prefix/usr/X11R6/lib/X11/XF86Config$ext";
 
     if (-e $l && (stat($f))[1] != (stat($l))[1]) { #- compare the inode, must be the sames
 	-e $l and unlink($l) || die "can't remove bad $l";
-	symlinkf "../../../../etc/X11/XF86Config", $l;
+	symlinkf "../../../../etc/X11/XF86Config$ext", $l;
     }
 }
 
@@ -813,7 +869,8 @@ sub main {
     ($prefix, $o, $in, $allowFB, $isLaptop, $install) = @_;
     $o ||= {};
     
-    XF86check_link();
+    XF86check_link('');
+    XF86check_link('-4');
 
     {
 	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);
@@ -858,7 +915,9 @@ sub main {
 	    my $f = "$prefix/etc/X11/XF86Config";
 	    if (-e "$f.test") {
 		rename $f, "$f.old" or die "unable to make a backup of XF86Config";
+		rename "$f-4", "$f-4.old";
 		rename "$f.test", $f;
+		rename "$f.test-4", "$f-4";
 		symlinkf "../..$o->{card}{prog}", "$prefix/etc/X11/X";
 	    }
 	}

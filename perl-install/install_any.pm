@@ -258,6 +258,13 @@ I'll try to go on blanking bad partitions"), $err]) unless $o->{partitioning}{re
 _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
 
+    my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+    my @nt  = grep { isNT($_)  && isNT( { type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+    log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
+    log::l("nt parts: ",  join ",", map { $_->{device} } @nt) if @nt;
+    $_->{mntpoint} = @win == 1 ? "/mnt/windows" : "/mnt/win_$_->{device_windobe}" foreach @win;
+    $_->{mntpoint} = @nt  == 1 ? "/mnt/nt"      : "/mnt/nt_$_->{device_windobe}"  foreach @nt;
+
     $ok2;
 }
 
@@ -440,22 +447,21 @@ sub setupFB {
     #- a frame buffer kernel is used, in such case we use it instead
     #- with the right mode, nothing more to do.
     foreach (qw(secure smp)) {
-	if ($o->{bootloader}{entries}{"/boot/vmlinuz-$_"}) {
+	if (my $e = lilo::get("/boot/vmlinuz-$_", $o->{bootloader})) {
 	    if ($_ eq 'secure') {
 		log::l("warning: kernel-secure is not fb, using a kernel-fb instead");
 		#- nothing done, fall through linux-fb.
 	    } else {
-		$o->{bootloader}{entries}{"/boot/vmlinuz-$_"}{vga} = $vga;
+		$e->{vga} = $vga;
 		lilo::install($o->{prefix}, $o->{bootloader});
 		return 1;
 	    }
 	}
     }
-    my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
     if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
 			 {
 			  label => 'linux-fb',
-			  root => $root,
+			  root => lilo::get("/boot/vmlinuz", $o->{bootloader})->{root},
 			  vga => $vga,
 			 })) {
 	$o->{bootloader}{default} = 'linux-fb';
