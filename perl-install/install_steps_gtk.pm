@@ -297,8 +297,8 @@ _("Choose the sizes"),
 
 #------------------------------------------------------------------------------
 sub chooseSizeToInstall {
-    my ($o, $packages, $min_size, $max_size_, $available, $individual) = @_;
-    my $max_size = min($max_size_, $available * 0.9);
+    my ($o, $packages, $min_size, $max_size_, $availableC, $individual) = @_;
+    my $max_size = min($max_size_, $availableC);
     my $enough = $max_size == $max_size_;
     my $percentage = int 100 * $max_size / $max_size_;
 

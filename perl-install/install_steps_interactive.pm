@@ -275,13 +275,13 @@ sub choosePackages {
     #- selection of CD by user if using a cdrom.
     $o->chooseCD($packages) if $o->{method} eq 'cdrom';
 
-    my $available = install_steps::choosePackages(@_);
+    my $availableC = install_steps::choosePackages(@_);
     my $individual = $::expert;
 
     require pkgs;
 
     my $min_size = pkgs::selectedSize($packages);
-    $min_size < $available or die _("Your system has not enough space left for installation or upgrade");
+    $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade");
 
     $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
 
@@ -292,12 +292,12 @@ sub choosePackages {
     my $max_size = pkgs::selectedSize($packages);
     mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
 
-#-	  if (!$::beginner && $max_size > $available) {
+#-	  if (!$::beginner && $max_size > $availableC) {
 #-	      $o->ask_okcancel('', 
 #-_("You need %dMB for a full install of the groups you selected.
 #-You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 #-	  }
-    my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size, $available, $individual) or goto &choosePackages;
+    my $size2install = $::beginner && $first_time ? $availableC * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) or goto &choosePackages;
 
     ($o->{packages_}{ind}) = 
       pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
@@ -305,8 +305,8 @@ sub choosePackages {
 }
 
 sub chooseSizeToInstall {
-    my ($o, $packages, $min, $max, $available) = @_;
-    $available * 0.7;
+    my ($o, $packages, $min, $max, $availableC) = @_;
+    $availableC * 0.7;
 }
 sub choosePackagesTree {}
 

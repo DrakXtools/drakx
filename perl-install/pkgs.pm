@@ -171,7 +171,7 @@ sub extractHeaders($$$) {
 #- size and correction size functions for packages.
 my $A = -1.922e-05;
 my $B = 1.18411;
-my $C = 33.2;
+my $C = 33.2 + 18; #- 18 added cuz of hdlist's
 sub correctSize { max($_[0], ($A * $_[0] + $B) * $_[0] + $C) } #- size correction in MB.
 sub invCorrectSize { min($_[0], (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A) } #- size correction in MB.
 

@@ -1,5 +1,10 @@
 2000-05-07  Pixel  <pixel@mandrakesoft.com>
 
+	* install_steps.pm (choosePackages): return availableCorrected
+	instead of available
+
+	* pkgs.pm (correctSize): add 18MB for full multi-cd (many hdlist's)
+
 	* modules.pm (text2driver): same as text2lang below
 	* keyboard.pm (text2keyboard): same as text2lang below
 	* lang.pm (text2lang): replace the while (... each) by a foreach

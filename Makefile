@@ -50,6 +50,7 @@ autoboot:
 ifeq (i386,$(ARCH))
 	install -d $(ROOTDEST)/lnx4win
 	cp -f vmlinuz $(ROOTDEST)/lnx4win
+	cp -f cdrom.rdz $(ROOTDEST)/lnx4win/initrd.img
 
 	install -d $(AUTOBOOT)
 	cp -f vmlinuz $(AUTOBOOT)
@@ -98,6 +99,7 @@ upload: tar install
 	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/images ; mput $(ROOTDEST)/images/*.img"
 	lftp -c "open mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd $(UPLOAD_DEST)/Mandrake/base ; lcd $(ROOTDEST)/Mandrake/base ; put mdkinst_stage2.gz rescue_stage2.gz compss compssList compssUsers hdlists ; cd $(UPLOAD_DEST)/misc ; lcd ~/gi/tools/ ; put make_mdkinst_stage2" #,gendepslist,rpm2header"
 	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/dosutils/autoboot/mdkinst ; put $(ROOTDEST)/dosutils/autoboot/mdkinst/vmlinuz ; mput $(ROOTDEST)/dosutils/autoboot/mdkinst/initrd.*"
+	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/lnx4win ; lcd $(ROOTDEST)/lnx4win ; put initrd.gz vmlinuz"
 	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
 	rm -f /tmp/mdkinst_done
