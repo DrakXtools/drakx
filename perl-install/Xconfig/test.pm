@@ -107,7 +107,7 @@ sub test {
     print $F q(
         BEGIN { $::no_ugtk_init = 1 }
         require lang;
-        
+        require ugtk2; #- help perl_checker
         ugtk2->import(qw(:wrappers)); #- help perl_checker
 	use interactive::gtk;
         use run_program;
