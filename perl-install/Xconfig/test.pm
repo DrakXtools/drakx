@@ -100,6 +100,7 @@ sub test {
     open F, "|perl 2>/dev/null";
     print F "use lib qw(", join(' ', @INC), ");\n";
     print F q{
+        BEGIN { $::isInstall = 1 }
         require lang;
         require my_gtk; 
         my_gtk->import(qw(:wrappers)); #- help perl_checker
