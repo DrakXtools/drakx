@@ -42,7 +42,7 @@ foreach (@ARGV) {
     /^--alert$/ and do { alert_config(); quit() };
 }
 
-my $isTail = $isFile ? 1 : 0;
+my $isTail = $isFile;
 $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
