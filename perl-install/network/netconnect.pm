@@ -209,7 +209,8 @@ ifdown eth0
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
-    $netc->{at_boot} = $in->ask_yesorno(_("Network Configuration Wizard"), _("Do you want to start the connection at boot?"));
+    member($netc->{internet_cnx_choice}, ('modem', 'adsl', 'isdn')) and
+      $netc->{at_boot} = $in->ask_yesorno(_("Network Configuration Wizard"), _("Do you want to start the connection at boot?"));
     if ($netc->{internet_cnx_choice} ) {
 	write_cnx_script($netc);
     } else {
@@ -218,6 +219,7 @@ ifdown eth0
 	undef $netc->{NET_DEVICE};
     }
 
+    write_initscript();
     $::isStandalone and ask_connect_now();
 
   step_3:
@@ -406,6 +408,7 @@ DOMAINNAME2=$netc->{DOMAINNAME2}"
 	      ["$prefix/etc/ppp/ioptions2B", "iop2B"],
 	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
 	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
+	      ["$prefix/etc/resolv.com", "resolv"],
 	    ) {
 	my $file = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $a;
 	-e ($_->[0]) and commands::cp("-f", $_->[0], $file) and chmod 0755, $file;
@@ -428,6 +431,7 @@ sub set_profile {
 	      ["$prefix/etc/ppp/ioptions2B", "iop2B"],
 	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
 	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
+	      ["$prefix/etc/resolv.conf", "resolv"],
 	    ) {
 	my $c = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $profile;
 	-e ($c) and commands::cp("-f", $c, $_->[0]);
@@ -440,7 +444,7 @@ sub del_profile {
     $profile eq "default" and return;
     print "deleting $profile\n";
     commands::rm("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
-    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B}." . $profile));
+    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv}." . $profile));
 }
 
 sub add_profile {
