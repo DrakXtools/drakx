@@ -14,7 +14,9 @@ $ENV{LD_LIBRARY_PATH} = "$dir/usr/bin:$dir/bin:$dir/sbin:$dir/usr/sbin:$dir/usr/
 $ENV{PATH} = join(":", map { "$dir/$_" } split ":", "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin") . ":$ENV{PATH}";
 $ENV{SHARE_PATH} = "$dir/usr/share";
 $ENV{RPMRC_FILE} = "$dir/usr/lib/rpm/rpmrc";
+$ENV{GTK_DATA_PREFIX} = "$dir/usr";
 $ENV{GTK_EXE_PREFIX} = "$dir/usr";
+$ENV{GDK_IMLIB_PATH} = "$dir/usr/lib";
 
 system $ENV{LD_LOADER}, "../perl", "-i", "-pe", "s,^(.*macrofiles[^/]*)(.*),\$1$dir/usr/lib/rpm/macros:\$2,", $ENV{RPMRC_FILE};
 system $ENV{LD_LOADER}, "../perl", "./install2", "--live", @ARGV;
