@@ -509,7 +509,7 @@ sub kill {
 
 sub lspci {
     require detect_devices;
-    print join "\n", detect_devices::stringlist(), '';
+    print join "\n", detect_devices::stringlist(1), '';
 }
 *lssbus = *lspci;
 
