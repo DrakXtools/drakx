@@ -5,7 +5,7 @@ use common;
 use modules;
 use detect_devices;
 
-sub local_detect {
+sub local_detect() {
     modules::get_probeall("usb-interface") and eval { modules::load("printer") };
     eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
     eval { modules::load(qw(parport_pc lp parport_probe)) }; #- take care as not available on 2.4 kernel (silent error).
@@ -13,11 +13,11 @@ sub local_detect {
     whatPrinter();
 }
 
-sub net_detect { whatNetPrinter(1, 0) }
+sub net_detect() { whatNetPrinter(1, 0) }
 
-sub net_smb_detect { whatNetPrinter(0, 1) }
+sub net_smb_detect() { whatNetPrinter(0, 1) }
 
-sub detect {
+sub detect() {
     local_detect(), whatNetPrinter(1, 1);
 }
 
@@ -27,7 +27,7 @@ sub detect {
 #-MANUFACTURER:Hewlett-Packard;
 #-DESCRIPTION:HP LaserJet 1100 Printer;
 #-COMMAND SET:MLC,PCL,PJL;
-sub whatPrinter {
+sub whatPrinter() {
     my @res = (whatParport(), whatUsbport());
     grep { $_->{val}{CLASS} eq "PRINTER" } @res;
 }
@@ -242,7 +242,7 @@ sub whatNetPrinter {
     @res;
 }
 
-sub getNetworkInterfaces {
+sub getNetworkInterfaces() {
 
     # subroutine determines the list of all network interfaces reported
     # by "ifconfig", except "lo".
@@ -269,7 +269,7 @@ sub getNetworkInterfaces {
     @interfaces;
 }
 
-sub getIPsOfLocalMachine {
+sub getIPsOfLocalMachine() {
 
     # subroutine determines all IPs which point to the local machine,
     # except 127.0.0.1 (localhost).
@@ -311,7 +311,7 @@ sub getIPsOfLocalMachine {
     @local_ips;
 }
 
-sub getIPsInLocalNetworks {
+sub getIPsInLocalNetworks() {
 
     # subroutine determines the list of all hosts reachable in the local
     # networks by means of pinging the broadcast addresses.
@@ -475,7 +475,7 @@ sub getSNMPModel {
 	      };
 }
 
-sub network_running {
+sub network_running() {
     # If the network is not running return 0, otherwise 1.
     local *F; 
     open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 

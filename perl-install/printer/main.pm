@@ -42,7 +42,7 @@ our %thedb;
 
 #------------------------------------------------------------------------------
 
-sub spooler {
+sub spooler() {
     # LPD is taken from the menu for the moment because the classic LPD is
     # highly unsecure. Depending on how the GNU lpr development is going on
     # LPD support can be reactivated by uncommenting the following line.
@@ -610,7 +610,7 @@ sub set_cups_autoconf {
     return 1;
 }
 
-sub get_cups_autoconf { $sysconfig{CUPS_CONFIG} ne 'manual' ? 1 : 0 }
+sub get_cups_autoconf() { $sysconfig{CUPS_CONFIG} ne 'manual' ? 1 : 0 }
 
 sub set_usermode {
     my ($usermode) = @_;
@@ -629,7 +629,7 @@ sub set_jap_textmode {
     return 1;
 }
 
-sub get_jap_textmode {
+sub get_jap_textmode() {
     my @mimeconvs = cat_("$::prefix/etc/cups/mime.convs");
     (m!^\s*text/plain\s+\S+\s+\d+\s+(\S+)\s*$!m and
      $1 eq 'cjktexttops' and return 1) foreach @mimeconvs;
@@ -639,7 +639,7 @@ sub get_jap_textmode {
 #----------------------------------------------------------------------
 # Handling of /etc/cups/cupsd.conf
 
-sub read_cupsd_conf {
+sub read_cupsd_conf() {
     cat_("$::prefix/etc/cups/cupsd.conf");
 }
 sub write_cupsd_conf {
@@ -1250,7 +1250,7 @@ sub write_cups_config {
 		  } @{$printer->{cupsconfig}{clientnetworks}}) .
 	     "\n" : "") .
 	    "</Location>\n";
-	my ($location_start, @location) = 
+	my ($location_start, @_location) = 
 	    rip_location($printer->{cupsconfig}{cupsd_conf}, "/");
 	insert_location($printer->{cupsconfig}{cupsd_conf}, $location_start,
 			@{$printer->{cupsconfig}{rootlocation}});
@@ -1334,7 +1334,7 @@ sub read_printers_conf {
     $printer->{SPOOLER} ||= 'cups';
 }
 
-sub get_direct_uri {
+sub get_direct_uri() {
     #- get the local printer to access via a Device URI.
     my @direct_uri;
     local *F; open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/sbin/lpinfo -v |";
@@ -1502,7 +1502,7 @@ sub ppd_devid_data {
     return ($devidmake, $devidmodel);
 }
 
-sub poll_ppd_base {
+sub poll_ppd_base() {
     #- Before trying to poll the ppd database available to cups, we have 
     #- to make sure the file /etc/cups/ppds.dat is no more modified.
     #- If cups continue to modify it (because it reads the ppd files 
@@ -1629,7 +1629,7 @@ sub poll_ppd_base {
 		    $key =~ s/\s*\(recommended\)//;
 		} elsif ($driver !~ /PostScript/i &&
 			 $isrecommended && $isfoomatic &&
-			 (my @foundkeys = grep {
+			 (@foundkeys = grep {
 			     /^$mf\|$model\|.*\(recommended\)/ && 
 			     !/CUPS/i && $thedb{$_}{driver} eq "PPD" 
 			 } keys %thedb)) {
@@ -2007,7 +2007,6 @@ sub autodetectionentry_for_uri {
 	} else {
 	    my $model = $1 if $ptaldevice =~ /^usb:(.*)$/;
 	    $model =~ s/_/ /g;
-	    my $device = "";
 	    foreach my $p (@autodetected) {
 		next if !$p->{val}{MODEL} ||
 			 $p->{val}{MODEL} ne $model;
@@ -2347,7 +2346,7 @@ sub configure_hpoj {
     return $ptaldevice;
 }
 
-sub config_sane {
+sub config_sane() {
     # Add HPOJ backend to /etc/sane.d/dll.conf if needed (no individual
     # config file /etc/sane.d/hpoj.conf necessary, the HPOJ driver finds the
     # scanner automatically)
@@ -2356,7 +2355,7 @@ sub config_sane {
 	   die "can't write SANE config in /etc/sane.d/dll.conf: $!";
 }
 
-sub config_photocard {
+sub config_photocard() {
 
     # Add definitions for the drives p:. q:, r:, and s: to /etc/mtools.conf
     cat_("$::prefix/etc/mtools.conf") !~ m/^\s*drive\s+p:/m or return;
