@@ -279,7 +279,7 @@ sub read_lilo() {
 	next if /^\s*#/ || /^\s*$/;
 	($_, $v) = /^\s*([^=\s]+)\s*(?:=\s*(.*?))?\s*$/ or log::l("unknown line in $file: $_"), next;
 
-	if (/^(image|other|macos|macosx|bsd|darwin)$/) {
+	if (/^(?:image|other|macos|macosx|bsd|darwin)$/) {
 	    $v = yaboot2file($v) if arch() =~ /ppc/;
 	    push @{$b{entries}}, $e = { type => $_, kernel_or_dev => $v };
 	    $global = 0;
