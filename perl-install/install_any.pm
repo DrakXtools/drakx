@@ -628,8 +628,8 @@ sub install_urpmi {
 ";
 	} else {
 	    #- remove not selected media by removing hdlist and synthesis files copied.
-	    unlink "/var/lib/urpmi/hdlist.$name.cz";
-	    unlink "/var/lib/urpmi/synthesis.hdlist.$name.cz";
+	    unlink "$prefix/var/lib/urpmi/hdlist.$name.cz";
+	    unlink "$prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
 	}
     }
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
