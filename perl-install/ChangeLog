@@ -1,3 +1,26 @@
+2004/03/04  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/init.c: unmounting /sys is not needed (useful to have one
+	less line displayed after "unmounting filesystems...")
+
+	* install_steps.pm, install_steps_interactive.pm: fix & cleanup generating
+	replay & auto_install images
+	(thanks to David Eastcott)
+
+	* install_any.pm: oops, fix commit
+	fix & cleanup generating replay & auto_install images
+	(thanks to David Eastcott)
+
+2004/03/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: fix crash on modem configuration in installer
+	(standalone drakconnect
+	didn't had the bug because it has already loaded the network::modem
+	package at this stage)
+
+	* ugtk2.pm: enable exception managment even at install time (installer set
+	$::no_ugtk_init)
+
 2004/03/04  Florin Grad  <florin at mandrakesoft.com>
 
 	* standalone/drakgw: really enable the proxy squid, fix the proxy REDIRECT
@@ -28332,7 +28355,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.902 2004/03/03 15:17:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.903 2004/03/04 13:24:48 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
