@@ -25,7 +25,7 @@
 
 #include <stdarg.h>
 
-void log_message(const char * s, ...);
+void log_message(const char * s, ...) __attribute__ ((format (printf, 1, 2)));
 void vlog_message(const char * s, va_list args);
 void log_perror(char *msg);
 void open_log(void);

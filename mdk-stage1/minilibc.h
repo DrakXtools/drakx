@@ -140,5 +140,5 @@ char * strncpy(char * dst, const char * src, int len);
 void print_str_init(int fd, char * string);
 void print_int_init(int fd, int i);
 /* Minimum printf which handles only characters, %d's and %s's */
-void printf(char * fmt, ...);
+void printf(char * fmt, ...) __attribute__ ((format (printf, 1, 2)));
 

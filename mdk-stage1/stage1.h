@@ -47,6 +47,6 @@ extern char * interactive_fifo;
 #define IS_SPECIAL_STAGE2 (get_param(MODE_SPECIAL_STAGE2))
 #define IS_RAMDISK     (get_param(MODE_RAMDISK))
 
-void fatal_error(char *msg);
+void fatal_error(char *msg) __attribute__ ((noreturn));
 
 #endif

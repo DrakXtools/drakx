@@ -24,9 +24,9 @@
 
 void init_frontend(void);
 void finish_frontend(void);
-void error_message(char *msg, ...); /* blocking */
-void info_message(char *msg, ...); /* blocking */
-void wait_message(char *msg, ...); /* non-blocking */
+void error_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
+void info_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* blocking */
+void wait_message(char *msg, ...) __attribute__ ((format (printf, 1, 2))); /* non-blocking */
 void remove_wait_message(void);
 
 void init_progression(char *msg, int size);
