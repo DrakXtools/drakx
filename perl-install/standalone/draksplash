@@ -138,14 +138,14 @@ my %boot_conf_frame = ('frame' => new Gtk::Frame(N("Configure bootsplash picture
                                   ],
                        );
 #- var action is used to hide/show the correct frame
-my @action_frame = ( \%boot_conf_frame , \%first);
+my @action_frame = (\%boot_conf_frame , \%first);
 
 my $VB2 = new Gtk::VBox(0,5);
 my $first_vbox;
 &mk_frame(\$VB2, \%first);
 #****************************- Signal event actions
 #- change resolution 
-$first{widgets}{combo}{res}->entry->signal_connect( changed => sub {
+$first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	$theme{res}{res} = $first{widgets}{combo}{res}->entry->get_text;
 	($theme{res}{w}, $theme{res}{h}) = $theme{res}{res} =~ /([^x]+)x([^x]+)/;
 	&set_scale_size;
@@ -166,7 +166,7 @@ $first{widgets}{button}{file}->signal_connect(clicked => sub {
 	$file_dialog->show;
 });
 #- changing theme name
-$first{widgets}{combo}{name}->entry->signal_connect( changed => sub { &get_this_thm_res_conf; $theme{name} = $first{widgets}{combo}{name}->entry->get_text });
+$first{widgets}{combo}{name}->entry->signal_connect(changed => sub { &get_this_thm_res_conf; $theme{name} = $first{widgets}{combo}{name}->entry->get_text });
 #**************************************************
 
 
@@ -377,7 +377,7 @@ sub mk_frame {
 	    and ${$1.'hb'}->add($ref->{widgets}{label}{$1});
 	  #- look for scale
 	  $ref->{widget}{scale}{$1}
-	    and $ref->{widgets}{scale}{$1} = new Gtk::HScale( ${$1."_adj"} =  new Gtk::Adjustment(0, 0, $scale_size{$1}, 1, 10, 0))
+	    and $ref->{widgets}{scale}{$1} = new Gtk::HScale(${$1."_adj"} =  new Gtk::Adjustment(0, 0, $scale_size{$1}, 1, 10, 0))
 	    and ${$1."hb"}->add($ref->{widgets}{scale}{$1})
 	    and $ref->{widgets}{scale}{$1}->set_digits(0);
 	  ${$1.'_adj'} and ${$1.'_adj'}->set_value($theme{boot_conf}{$1});
@@ -432,7 +432,7 @@ sub make_boot_frame {
 		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
 		$color->ok_button->signal_connect(clicked => sub {
 			@rgb = $color->colorsel->get_color();
-			@rgb = map ( dec2hex($_*255)  , @rgb);
+			@rgb = map (dec2hex($_*255)  , @rgb);
 			$theme{boot_conf}{pc} =  "0x$rgb[0]$rgb[1]$rgb[2]";
 			$color->destroy;
 		});
