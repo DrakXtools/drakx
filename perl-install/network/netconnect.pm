@@ -162,7 +162,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 			 [
 			  if_(@profiles > 1, { label => N("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
 			  { label => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
-			  if_($::isStandalone, { label => N("Expert Mode"), val => \$::expert, type => 'bool' }),
+			  { label => N("Expert Mode"), val => \$::expert, type => 'bool' },
 			 ]
 			) or goto step_5 }; $in->exit(0) if $@ =~ /wizcancel/;
     undef $::Wizard_no_previous;
