@@ -76,6 +76,9 @@ foreach (@harddrake::data::tree) {
         require network::ethernet;
         network::ethernet::configure_eth_aliases();
         modules::write_conf();
+    } elsif ($Ident eq "AGP") {
+        # add agpgart modules to modprobe.preload if needed:
+        modules::write_conf();
     }
 
     next unless -x first(split /\s+/, $configurator_pool[0]);
