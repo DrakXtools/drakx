@@ -570,7 +570,7 @@ killall pppd
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
-                                        'sagem'      => [ 'eagle', '/usr/sbin/eaglectrl' ],
+                                        'sagem'      => [ 'eagle-usb',  '/usr/sbin/eaglectrl' ],
                                         'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
