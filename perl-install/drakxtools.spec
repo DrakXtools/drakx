@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 26mdk
+Release: 27mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jan 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-27mdk
+- drakconnect:
+  o wizard:
+    * fix configuring unconfigured eth interfaces
+    * ignore spurious .directory entries when loading kppp provider db
+  o manage: only show gateway for eth devices (poulpy)
+- diskdrake (pixel):
+  o fix overflows at 4GB when adding partitions
+  o tell kernel to remove the extended partition
+  o replace iocharset= with nls= for ntfs in /etc/fstab
+
 * Thu Jan 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-26mdk
 - drakconnect: use somewhat nicer interfaces name (eg: "eth0: 3com
   905") in manage interface (poulpy)
