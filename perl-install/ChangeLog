@@ -1,3 +1,74 @@
+2004/09/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm (findIntf, read_all_conf) use default DEVICE field
+	only at last
+	ressort, keep weird DEVICE fiels (i.e for sagem)
+	(write_interface_conf) remove quotes if DEVICE is the result of a
+	command
+	(configureNetwork2) use key from $intf hash to determine ifcfg
+	filename (to allow to use weird DEVICE fields, like
+	DEVICE=`/usr/sbin/eaglectrl -i`)
+	(write_interface_conf) allow TYPE field, will be used to recognize ADSL
+	interfaces
+
+	* mouse.pm (set_xfree_conf) synaptics fixes
+
+	* network/netconnect.pm: support DHCP and manual for sagem devices
+
+	* network/tools.pm: remove horrible and unneeded workaround
+	shut up perl_checker!
+	remove test_internet_connection(), use network::test instead
+	(get_interface_type) enhance detection for adsl devices
+
+2004/09/03  Pixel  <pixel at mandrakesoft.com>
+
+	* share/list, interactive/newt.pm: 
+	  - we need unicode_start, which need kbd_mode and a real "echo" command
+	  - initialize newt (and so slang) with a fake en_US.UTF-8 locale during
+	install
+	(and it works better when slang does its setlocale, i don't know why)
+
+	* Makefile: make dont_run_directly_stage2 keep runinstall2 as a symlink
+	(since mdkstage1 check it is a symlink)
+	  - we need unicode_start, which need kbd_mode and a real "echo" command
+	  - initialize newt (and so slang) with a fake en_US.UTF-8 locale during
+	install
+	(and it works better when slang does its setlocale, i don't know why)
+
+	* lang.pm: always use utf8 strings during install since our locale is
+	always utf8
+
+	* Newt/Newt.xs: 
+	  - we need unicode_start, which need kbd_mode and a real "echo" command
+	  - initialize newt (and so slang) with a fake en_US.UTF-8 locale during
+	install
+	(and it works better when slang does its setlocale, i don't know why)
+	don't let slang call setlocale(), we do it ourselves
+
+2004/09/03  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Umount supplementary CD immediately after having read
+	informations on it.
+	Make local copies of rpmsrate and compssUsers.pl from supplementary CD
+	Better handling of mounting/umounting supplementary CDs
+	Add a system error when no CD reader is found for a supplementary CD
+	Remove support for looking directly for a hdlist1s.cz file on
+	supplementary CDs.
+
+	* pkgs.pm: Better handling of mounting/umounting supplementary CDs
+
+2004/09/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: log a few more commits from blino for 10.1-0.20mdk
+	10.1-0.20mdk
+
+	* share/po/ja.po: update (Yukiko Bando <ybando@k6.dion.ne.jp>)
+
+	* tools/cvslog2changelog.pl: add one more translator
+
+	* detect_devices.pm (getModem) handle new winmodem low level driver for
+	VIA in ALSA
+
 2004/09/03  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* standalone/drakconnect: don't exclude Gtk2::Entry filling
@@ -37508,7 +37579,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.957 2004/09/03 03:27:29 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.958 2004/09/03 06:32:42 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
