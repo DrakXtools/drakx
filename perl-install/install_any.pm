@@ -363,15 +363,20 @@ sub preConfigureTimezone {
 
 sub ask_if_suppl_media {
     my ($o) = @_;
-    my $suppl = $o->ask_from_list_(
-	'', formatAlaTeX(
+    our $suppl_already_asked;
+    my $msg = $suppl_already_asked
+      ? N("Do you have further supplementary media?")
+      : formatAlaTeX(
 #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
-		N("The following media have been found and will be used during install: %s.
+	    N("The following media have been found and will be used during install: %s.
 
 
 Do you have a supplementary installation media to configure?",
-	    join ", ", uniq(map { $_->{descr} } values %{$o->{packages}{mediums}}))
-    ), [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None');
+	    join ", ", uniq(map { $_->{descr} } values %{$o->{packages}{mediums}})));
+    my $suppl = $o->ask_from_list_(
+	'', $msg, [ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None'
+    );
+    $suppl_already_asked = 1;
     return $suppl;
 }
 
@@ -389,7 +394,9 @@ sub selectSupplMedia {
 	    'Network (ftp)' => 'ftp',
 	}->{$suppl};
 	#- by convention, the media names for suppl. CDs match /^\d+s$/
-	my $medium_name = $suppl_method eq 'cdrom' ? '1s' : int(keys %{$o->{packages}{mediums}}) + 1;
+	my $medium_name = $suppl_method eq 'cdrom'
+	    ? (max(map { $_->{medium} =~ /^(\d+)s$/ ? $1 : 0 } values %{$o->{packages}{mediums}}) + 1) . "s"
+	    : int(keys %{$o->{packages}{mediums}}) + 1;
 	local $::isWizard = 0;
 	local $o->{method} = $suppl_method;
 	if ($suppl_method eq 'cdrom') {
