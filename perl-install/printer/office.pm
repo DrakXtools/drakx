@@ -98,7 +98,7 @@ sub configureoffice {
     # the "Generic Printer"
     my @parameters = $suites{$suite}{param};
     $configfilecontent = removeentry(@parameters, $configfilecontent);
-    $configfilecontent = addentry($parameters[0], $parameters[1] . $suites{$suite}{perl} . $spoolers{$printer->{SPOOLER}{print_command}}, $configfilecontent);
+    $configfilecontent = addentry($parameters[0], $parameters[1] . $suites{$suite}{perl} . $spoolers{$printer->{SPOOLER}}{print_command}, $configfilecontent);
     # Write back Star Office configuration file
     return eval { output("$::prefix$configfilename", $configfilecontent) };
 }
@@ -207,7 +207,7 @@ sub makestarofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry("ports", "$queue=", $configfile);
     $configfile = addentry("ports", 
-			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}{print_command}} . " -P $queue",
+			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}}{print_command} . " -P $queue",
 			   $configfile);
     # Make printer's section
     $configfile = addsection("$queue,PostScript,$queue", $configfile);
@@ -261,7 +261,7 @@ sub makeopenofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry($queue, "Command=", $configfile);
     $configfile = addentry($queue, 
-			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}{print_command}} . " -P $queue",
+			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}}{print_command} . " -P $queue",
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);
