@@ -29,8 +29,8 @@ use fs;
 
 $::isStandalone = 1; #- not using standalone.pm which generates too many logs for drakupdate_fstab purpose
 
-$::testing = $ARGV[0] eq '--test' && shift;
-$::auto = $ARGV[0] eq '--auto' && shift;
+$::testing = $ARGV[0] eq '--test' && shift @ARGV;
+$::auto = $ARGV[0] eq '--auto' && shift @ARGV;
 my ($raw_action, $device_name) = @ARGV;
 my ($action) = $raw_action =~ /^--(add|del)/;
 
