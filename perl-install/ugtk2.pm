@@ -1245,11 +1245,17 @@ sub ask_browse_tree_info_given_widgets {
 	} else {
 	    $curr = $iter;
 	}
-	$toggle->(1), $mouse_toggle_pending = 0 if $mouse_toggle_pending;
+	#- the following test for equality is because we can have a button_press_event first, then
+	#- two changed events, the first being on a different row :/ (is it a bug in gtk2?) - that
+	#- happens in rpmdrake when doing a "search" and directly trying to select a found package
+	$toggle->(1), $mouse_toggle_pending = 0 if $mouse_toggle_pending eq $model->get($iter, 0);
     });
     $w->{tree}->signal_connect(button_press_event => sub {  #- not too good, but CellRendererPixbuf doesn't have the needed signals :(
-	my ($x, $textw, $pixw) = ($_[1]->x, $w->{textcolumn}->get_width, $w->{pixcolumn}->get_width);
-	$mouse_toggle_pending = 1 if $x > $textw && $x < $textw + $pixw;
+	my ($returns, $path, $column) = $w->{tree}->get_path_at_pos($_[1]->x, $_[1]->y);
+	if ($returns) {
+	    Gtk2->equals($column, $w->{pixcolumn}) and $mouse_toggle_pending = $w->{tree_model}->get($path, 0);
+	    $path->free;
+	}
     });
     $common->{rebuild_tree}->();
     &$update_size;
