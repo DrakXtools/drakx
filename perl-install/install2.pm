@@ -521,7 +521,7 @@ sub main {
 	    mkdir '/tmp/stage2/etc/brltty';
 	    mkdir '/lib/brltty';
 	    foreach ($o->{brltty}{table}, "brltty-$o->{brltty}{driver}.hlp") {
-		install_any::getAndSaveFile("/etc/brltty/$_", "/tmp/stage2/etc/brltty/$_") if $_;
+		install_any::getAndSaveFile("/etc/brltty/$_") if $_;
 	    }
 	    install_any::getAndSaveFile("/lib/brltty/libbrlttyb$o->{brltty}{driver}.so") or do {
 		local $| = 1;
