@@ -1,6 +1,6 @@
 include Makefile.config
 
-DIRS = ddcprobe pnp_serial po Newt c pci_probing resize_fat
+DIRS = ddcprobe pnp_serial share/po Newt c pci_probing resize_fat
 PREFIX = 
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
@@ -20,16 +20,16 @@ $(DIRS):
 	$(MAKE) -C $@
 
 install:
-	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(DIRS:%=$(LIBDEST)/%)
+	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	mv -f $(SBINDEST)/lspcidrake $(BINDEST)
 	install -s ddcprobe/ddcxinfos pnp_serial/pnp_serial $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
-	install -m 644 MonitorsDB CardsNames $(LIBX11DEST)
-	install -m 644 diskdrake.rc $(ETCDEST)
-	install -m 644 po/*.po $(LIBDEST)/po
+	install -m 644 share/MonitorsDB share/CardsNames $(LIBX11DEST)
+	install -m 644 share/diskdrake.rc $(ETCDEST)
+	install -m 644 share/po/*.po $(LIBDEST)/po
 	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
 	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
 	install -m 644 $(patsubst %,pci_probing/%.pm,main pcitable pci_class) $(LIBDEST)/pci_probing

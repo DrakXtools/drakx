@@ -70,35 +70,44 @@ sub create {
     $f;
 }
 
-sub getFree {
+sub inspect {
     my ($part, $prefix) = @_;
 
-    if ($part->{isFormatted} || !$part->{notFormatted}) {
-	$part->{freespace} = $part->{size};
-    } elsif (!$part->{freespace}) {
-	isMountableRW($part) or return;
+    isMountableRW($part) or return;
 
-	my $dir = "/tmp/loopback_tmp";
-	if ($part->{isMounted}) {
-	    $dir = ($prefix || '') . $part->{mntpoint};
-	} else {
-	    mkdir $dir, 0700;
-	    fs::mount($part->{device}, $dir, type2fs($part->{type}), 'rdonly');
+    my $dir = "/tmp/loopback_tmp";
+
+    if ($part->{isMounted}) {
+	$dir = ($prefix || '') . $part->{mntpoint};
+    } else {
+	mkdir $dir, 0700;
+	fs::mount($part->{device}, $dir, type2fs($part->{type}), 'rdonly');
+    }
+    my $h = bless \$dir, "loopback::inspect";
+    common::add_f4before_leaving(sub {  
+	unless ($part->{isMounted}) {
+	    fs::umount($dir);
+	    unlink($dir)
 	}
+    }, $h, 'DESTROY');
+    $h;
+}
+
+sub getFree {
+    my ($dir, $part) = @_;
+    my ($freespace);
+
+    if ($part->{isFormatted} || !$part->{notFormatted}) {
+	$freespace = $part->{size};
+    } else {
 	my $buf = ' ' x 20000;
 	syscall_('statfs', $dir, $buf) or return;
 	my (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
-	$_ *= $blocksize / 512 foreach $size, $free;
-
+	$_ *= $blocksize / 512 foreach $free;
 	
-	unless ($part->{isMounted}) {
-	    fs::umount($dir);
-	    unlink $dir;
-	}
-
-	$part->{freespace} = $free;
+	$freespace = $free;
     }
-    $part->{freespace} - sum map { $_->{size} } @{$part->{loopback} || []};
+    $freespace - sum map { $_->{size} } @{$part->{loopback} || []};
 }
 
 1;

@@ -665,10 +665,11 @@ sub createBootdisk {
     my ($o, $first_time) = @_;
     my @l = detect_devices::floppies();
     my %l = (
-	     'fd0'  => __("First drive"),
-	     'fd1'  => __("Second drive"),
+	     'fd0'  => __("First floppy drive"),
+	     'fd1'  => __("Second floppy drive"),
 	     'Skip' => __("Skip"),
 	    );
+    $l{$_} ||= $_ foreach @l;
 
     if ($first_time || @l == 1) {
 	$o->ask_yesorno('',
@@ -682,7 +683,6 @@ failures. Would you like to create a bootdisk for your system?"),
 	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
     } else {
 	@l or die _("Sorry, no floppy drive available");
-	$l{$_} ||= $_ foreach @l;
 
 	$o->{mkbootdisk} = ${{reverse %l}}{$o->ask_from_list_('',
 							      _("Choose the floppy drive you want to use to make the bootdisk"),
@@ -690,7 +690,8 @@ failures. Would you like to create a bootdisk for your system?"),
 	return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Skip';
     }
 
-    $o->ask_warn('', _("Insert a floppy in drive %s", $o->{mkbootdisk}));
+    log::l(">>>> mkbootdisk $o->{mkbootdisk}, $l{$o->{mkbootdisk}}");
+    $o->ask_warn('', _("Insert a floppy in drive %s", $l{$o->{mkbootdisk}}));
     my $w = $o->wait_message('', _("Creating bootdisk"));
     install_steps::createBootdisk($o);
 }
@@ -1148,6 +1149,7 @@ sub load_thiskind {
 	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
 	install_any::ultra66($o);
 
+	require pci_probing::main;
 	if (my ($c) = pci_probing::main::probe('AUDIO')) {
 	    modules::add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
 	}

@@ -57,9 +57,6 @@ handle NT (add entry for it in lilo, put it in fstab)
 (7.1)install in 800x600
 - need handling of both 640x480 (mostly for VGA16) and 800x600
 
-(7.1)index/compress hdlist? (for multi-cd)
-! for multi-cd live is mandatory, small transaction are mandatory too.
-
 (7.1, other persons)rescue: 
 - small modification for stage1 to get the rescue stage2
 - create a stage2 with many tools (fdisk, bash...)
@@ -100,6 +97,9 @@ possibility to specify the mouse
 (done,pix,7.1)sound config, although very simple, no dedicated steps and only PCI (or maybe ISA-PNP if time left ?)
 
 (done,pix,7.1)partitioning, keyboard shortcut.
+
+(done,fpons,7.1)index/compress hdlist? (for multi-cd)
+! for multi-cd live is mandatory, small transaction are mandatory too.
 
 ----
 (?) paride in stage1

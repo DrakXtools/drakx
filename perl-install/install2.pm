@@ -62,7 +62,7 @@ arch() !~ /alpha/ ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
-  configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions", "setupBootloader"] ],
+  configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
   exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {

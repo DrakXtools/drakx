@@ -52,7 +52,7 @@ sub cdroms() {
 }
 sub floppies() {
     my @ide = map { $_->{device} } grep { $_->{type} eq 'fd' } get() and modules::load("ide-floppy");
-    (grep { tryOpen($_) } qw(fd0 fd1)), @ide;
+    (@ide, grep { tryOpen($_) } qw(fd0 fd1));
 }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 

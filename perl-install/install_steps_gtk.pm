@@ -13,7 +13,7 @@ use common qw(:common :file :functional :system);
 use partition_table qw(:types);
 use my_gtk qw(:helpers :wrappers);
 use Gtk;
-#use Gtk::XmHTML;
+#-use Gtk::XmHTML;
 use devices;
 use fsedit;
 use modules;
