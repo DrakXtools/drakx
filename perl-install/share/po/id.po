@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-17 17:53+0700\n"
+"PO-Revision-Date: 2005-03-18 20:23+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -6026,11 +6026,14 @@ msgid ""
 "Your Windows partition is too fragmented. Please reboot your computer under "
 "Windows, run the ``defrag'' utility, then restart the Mandrakelinux "
 "installation."
-msgstr "Partisi Windows Anda terlalu terfragmen, jalankan ``defrag'' dulu"
+msgstr ""
+"Partisi Windows Anda terlalu terfragmen. Harap reboot komputer Anda "
+"pada Windows, jalankan utilitas ``defrag'', lalu ulangi installasi "
+"Mandrakelinux."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_interactive.pm:166
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -6043,48 +6046,54 @@ msgid ""
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
-"AWAS!\n"
+"PERINGATAN!\n"
 "\n"
-"DrakX sekarang hendak mengubah ukuran partisi Windows Anda. Hati-hati:\n"
-"proses ini amat berbahaya. Bila Anda belum melakukannya, silakan\n"
-"keluar dari proses instalasi ini, lalu reboot ke windows\n"
-"jalankan scandisk (dan defrag juga) di partisi ini lalu backup datanya.\n"
-"Setelah yakin, tekan Ok."
+"DrakX sekarang akan mengubah ukuran partisi Windows Anda.\n"
+"Hati-hati: proses ini amat berbahaya. Bila Anda belum pernah\n"
+"melakukannya, Anda harus keluar dari proses instalasi ini,\n"
+"lalu reboot ke windows jalankan \"chkdsk c:\" dari Command\n"
+"Prompt (hati-hati, menjalankan program grafis \"scandisk\"\n"
+"tidaklah cukup, pastikan menggunakan \"chkdsk\" dari Command\n"
+"Prompt!), juga defrag, lalu ulangi installasi. Anda juga\n"
+"harus membackup data Anda.\n"
+"Jika yakin, tekan Ok."
 
 #: install_interactive.pm:178
 #, c-format
 msgid "Which size do you want to keep for Windows on"
-msgstr "Tentukan ukuran untuk menyimpan Windows"
+msgstr "Ukuran mana yang hendak Anda gunakan untuk Windows"
 
 #: install_interactive.pm:179
 #, c-format
 msgid "partition %s"
-msgstr "Partisi %s"
+msgstr "partisi %s"
 
 #: install_interactive.pm:188
 #, c-format
 msgid "Resizing Windows partition"
-msgstr "Sedang menghitung bound sistem file Windows"
+msgstr "Mengubah ukuran partisi Windows"
 
 #: install_interactive.pm:193
 #, c-format
 msgid "FAT resizing failed: %s"
-msgstr "Resize FAT gagal: %s"
+msgstr "Pengubahan ukuran FAT gagal: %s"
 
 #: install_interactive.pm:208
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
-msgstr "Tiada partisi FAT untuk diubah ukurannya (atau tak ada cukup ruangan)"
+msgstr "Tidak ada partisi FAT untuk diubah ukurannya (atau "
+"tidak ada ruangan tersisa)"
 
 #: install_interactive.pm:213
 #, c-format
 msgid "Remove Windows(TM)"
-msgstr "Buang Windows"
+msgstr "Hapus Windows(TM)"
 
 #: install_interactive.pm:215
 #, c-format
 msgid "You have more than one hard drive, which one do you install linux on?"
-msgstr "Anda punya beberapa harddisk, yang mana yang ingin di-instal linux?"
+msgstr "Anda memiliki lebih dari satu harddisk, mana yang akan Anda pakai "
+"untuk menginstall Linux?"
 
 #: install_interactive.pm:219
 #, c-format
@@ -6094,7 +6103,7 @@ msgstr "SEMUA partisi yang ada beserta data pada drive %s akan hilang"
 #: install_interactive.pm:232
 #, c-format
 msgid "Use fdisk"
-msgstr "gunakan fdisk"
+msgstr "Gunakan fdisk"
 
 #: install_interactive.pm:235
 #, c-format
@@ -6102,13 +6111,13 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, do not forget to save using `w'"
 msgstr ""
-"Anda kini dapat membuat partisi %s. \n"
-"Ketika selesai jangan lupa simpan dengan menekan tombol `w'"
+"Anda kini dapat mempartisi %s.\n"
+"Ketika selesai jangan lupa simpan dengan tombol `w'"
 
 #: install_interactive.pm:271
 #, c-format
 msgid "I can not find any room for installing"
-msgstr "Tiada ruang untuk instalasi"
+msgstr "Tidak ada ruang untuk installasi"
 
 #: install_interactive.pm:275
 #, c-format
@@ -6123,16 +6132,16 @@ msgstr "Proses partisi gagal: %s"
 #: install_interactive.pm:288
 #, c-format
 msgid "Bringing up the network"
-msgstr "Aktifkan jaringan"
+msgstr "Mengaktifkan jaringan"
 
 #: install_interactive.pm:293
 #, c-format
 msgid "Bringing down the network"
-msgstr "Matikan jaringan"
+msgstr "Menonaktifkan jaringan"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_messages.pm:10
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Introduction\n"
 "\n"
@@ -6381,6 +6390,12 @@ msgid ""
 "patent\n"
 "may be applicable to you, check your local laws."
 msgstr ""
+"Peringatan: Free Software mungkin tidak lepas dari paten, dan beberapa\n"
+"Free Software yang disertakan mungkin tercakup paten negara Anda.\n "
+"Misalnya dekoder MP3 yang disertakan mungkin membutuhkan lisensi untuk\n"
+"penggunaan lebih lanjut (lihat http://www.mp3licensing.com untuk detail).\n"
+"Jika Anda tidak yakin apakan paten berlaku pada Anda, periksa hukum lokal\n"
+"Anda."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_messages.pm:98
@@ -6418,40 +6433,34 @@ msgstr ""
 "\n"
 "Peringatan\n"
 "\n"
-"Mohon dibaca dulu semua ketentuan di bawah. Bila Anda tidak setuju dengan "
-"salah satu bagiannya\n"
-"Anda tidak dapat menginstal media CD berikutnya. Silakan tekan 'Tolak' untuk "
-"melanjutkan instalasi\n"
-"tanpa menggunakan media ini.\n"
+"Harap membaca semua ketentuan di bawah. Bila Anda tidak setuju dengan\n"
+"salah satu bagiannya, Anda tidak diijinkan menginstal media CD\n"
+"berikutnya. Silakan tekan 'Tolak' untuk melanjutkan instalasi tanpa\n"
+"menggunakan media ini.\n"
 "\n"
 "\n"
-"Ada beberapa komponen yang ada di media CD berikutnya tidak dilepas dalam "
-"lisensi GPL atau perjanjian\n"
-"sejenis. Komponen-komponen itu diatur dalam ketentuan dan kondisi dalam "
-"lisensi yang bersangkutan.\n"
-"Baca dengan hati-hati dan penuhi setiap lisensi sebelum Anda menyebarkan "
-"komponen tersebut.\n"
-"Model lisensi tersebut akan melarang proses transfer, duplikasi (kecuali "
-"untuk alasan backup), penyebaran\n"
-"kembali, rekayasa ulang, de-assembly, de-kompilasi, atau modifikasi pada "
-"komponen tersebut.\n"
-"Tiap pelanggaran pada perjanjian akan segera mengakhiri hak-hak Anda dalam "
-"lisensi tersebut.\n"
-"Kecuali bila dibolehkan, Anda tidak dapat menginstall program ini dalam "
-"lebih dari satu sistem\n"
-"atau menggunakannya di jaringan. Bila Anda masih ragu, silakan huibungi "
-"langsung distributor\n"
-"atau editor komponen ini. Anda dilarang mentransfer komponen ini ke pihak "
-"ketiga atau mengkopinya.\n"
+"Beberapa komponen yang ada di media CD berikutnya tidak diatur dalam\n"
+"lisensi GPL atau perjanjian sejenis. Komponen-komponen tersebut \n"
+"diatur dalam ketentuan dan kondisi dalam lisensi yang bersangkutan.\n"
+"Baca dengan hati-hati dan penuhi setiap lisensi sebelum Anda\n"
+"menggunakan atau mendistribusikan ulang komponen tersebut.\n"
+"Model lisensi tersebut akan melarang proses transfer, duplikasi\n"
+"(kecuali untuk alasan backup), distribusi ulang, rekayasa ulang,\n"
+"de-assembly, de-kompilasi, atau modifikasi komponen tersebut.\n"
+"Setiap pelanggaran pada perjanjian akan segera mengakhiri hak-hak\n"
+"Anda dalam lisensi tersebut, Anda tidak dapat menginstall program\n"
+"ini pada lebih dari satu sistem atau menggunakannya pada jaringan.\n"
+"Bila Anda masih ragu, silakan hubungi langsung distributor atau\n"
+"editor komponen ini. Anda dilarang mentransfer komponen ini ke pihak "
+"ketiga atau menyalinnya, termasuk dokumentasi.\n"
 "\n"
 "\n"
-"Semua hak pada komponen di media CD berikutnya dimiliki oleh pembuatnya "
-"masing-masing\n"
-"dan dilindungi oleh hukum hak cipta dan hak intelektual khusus untuk program "
-"komputer.\n"
+"Semua hak pada komponen di media CD berikutnya dimiliki oleh pembuat\n"
+"masing-masing dan dilindungi oleh hukum hak cipta dan hak intelektual\n"
+"yang berlaku untuk program komputer.\n"
 
 #: install_messages.pm:131
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -6469,18 +6478,18 @@ msgid ""
 "install chapter of the Official Mandrakelinux User's Guide."
 msgstr ""
 "Selamat, instalasi selesai.\n"
-"Cabut media boot dan tekan Return/Enter untuk reboot.\n"
+"Ambil media boot dan tekan Return/Enter untuk reboot.\n"
 "\n"
 "\n"
-"Untuk informasi perbaikan rilis Linux Mandrake ini,\n"
-"silakan lihat Errata di:\n"
+"Untuk informasi perbaikan yang tersedia untuk rilis Mandrakelinux\n"
+"ini, silakan lihat Errata yang tersedia pada:\n"
 "\n"
 "\n"
 "%s\n"
 "\n"
 "\n"
-"Informasi untuk konfigurasi sistem juga tersedia di \n"
-"bab Instalasi akhir di Buku Petunjuk Resmi Linux Mandrake."
+"Informasi tentang konfigurasi sistem tersedia pada bab Pasca\n"
+"Instalasi di Panduan Pengguna Resmi Linux Mandrakelinux."
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_messages.pm:144
@@ -6491,7 +6500,7 @@ msgstr "http://www.mandrakelinux.com/en/101errata.php3"
 #: install_steps.pm:246
 #, c-format
 msgid "Duplicate mount point %s"
-msgstr "Lokasi mount %s ada dua"
+msgstr "Duplikasi titik mount %s"
 
 #: install_steps.pm:479
 #, c-format
@@ -6501,9 +6510,9 @@ msgid ""
 "Check the cdrom on an installed computer using \"rpm -qpl media/main/*.rpm"
 "\"\n"
 msgstr ""
-"Ada paket penting yang tak benar diinstal.\n"
+"Beberapa paket penting tidak terinstall dengan benar.\n"
 "Mungkin drive cdrom atau cdromnya yang rusak.\n"
-"Cek dulu cdromnya di komputer yang sudah terinstal Linux dengan\n"
+"Periksa cdrom pada komputer yang sudah terinstal dengan\n"
 "perintah \"rpm -qpl media/main/*.rpm\"\n"
 
 #: install_steps.pm:599
@@ -6514,7 +6523,7 @@ msgstr "Tidak ada floppy drive"
 #: install_steps_auto_install.pm:76 install_steps_stdio.pm:27
 #, c-format
 msgid "Entering step `%s'\n"
-msgstr "Memulai langkah `%s'\n"
+msgstr "Memasuki langkah `%s'\n"
 
 #: install_steps_gtk.pm:177
 #, c-format
@@ -6524,9 +6533,10 @@ msgid ""
 "this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"Sumber daya sistem Anda rendah. Nantinya Anda akan sulit menginstal\n"
-"Linux-Mandrake. Cobalah instalasi text. Untuk hal ini silakan\n"
-"tekan `F1' saat booting pada CDROM, lalu ketikkan `text'."
+"Sumber daya sistem Anda rendah. Anda akan mengalami kesulitan\n"
+"menginstall Mandrakelinux. Jika terjadi, Anda bisa mencoba\n"
+"installasi berbasis teks. Untuk melakukannya, tekan `F1' saat\n"
+"booting pada CDROM, lalu ketikkan `text'."
 
 #: install_steps_gtk.pm:224 install_steps_interactive.pm:624
 #, c-format
@@ -6541,7 +6551,7 @@ msgstr "Ukuran total: %d / %d MB"
 #: install_steps_gtk.pm:295
 #, c-format
 msgid "Bad package"
-msgstr "Paket buruk"
+msgstr "Paket rusak"
 
 #: install_steps_gtk.pm:297
 #, c-format
@@ -6561,12 +6571,12 @@ msgstr "%d KB\n"
 #: install_steps_gtk.pm:299
 #, c-format
 msgid "Importance: "
-msgstr "Derajat kepentingan: "
+msgstr "Tingkat kepentingan: "
 
 #: install_steps_gtk.pm:332
 #, c-format
 msgid "You can not select/unselect this package"
-msgstr "Anda tak bisa pilih/buang paket ini"
+msgstr "Anda tidak bisa memilih/membuang paket ini"
 
 #: install_steps_gtk.pm:336
 #, c-format
@@ -6576,12 +6586,12 @@ msgstr "karena %s hilang"
 #: install_steps_gtk.pm:337
 #, c-format
 msgid "due to unsatisfied %s"
-msgstr "karena %s tak dipenuhi"
+msgstr "karena %s tidak dipenuhi"
 
 #: install_steps_gtk.pm:338
 #, c-format
 msgid "trying to promote %s"
-msgstr "promosikan %s"
+msgstr "mencoba mempromosikan %s"
 
 #: install_steps_gtk.pm:339
 #, c-format
@@ -6593,7 +6603,8 @@ msgstr "untuk menjaga %s"
 msgid ""
 "You can not select this package as there is not enough space left to install "
 "it"
-msgstr "Paket ini tak dapat dipilih sebab tak ada ruang untuk menginstalnya"
+msgstr ""
+"Anda tidak bisa memilih paket ini karena tidak ada ruang kosong yang tersisa"
 
 #: install_steps_gtk.pm:347
 #, c-format
@@ -6608,12 +6619,12 @@ msgstr "Paket berikut akan dihapus"
 #: install_steps_gtk.pm:372
 #, c-format
 msgid "This is a mandatory package, it can not be unselected"
-msgstr "Paket ini harus diinstal, tak bisa dibuang"
+msgstr "Ini merupakan paket wajib, tidak bisa dibuang"
 
 #: install_steps_gtk.pm:374
 #, c-format
 msgid "You can not unselect this package. It is already installed"
-msgstr "Anda tak bisa buang paket ini, sebab dia sudah diinstal"
+msgstr "Anda tidak bisa tidak memilih paket ini. Ia sudah terinstall"
 
 #: install_steps_gtk.pm:377
 #, c-format
@@ -6621,13 +6632,13 @@ msgid ""
 "This package must be upgraded.\n"
 "Are you sure you want to deselect it?"
 msgstr ""
-"Paket ini mesti diupgrade\n"
-"Benar tak mau dipilih?"
+"Paket ini harus diupgrade\n"
+"Apakah Anda yakin untuk tidak memilihnya?"
 
 #: install_steps_gtk.pm:380
 #, c-format
 msgid "You can not unselect this package. It must be upgraded"
-msgstr "Anda tak bisa buang paket ini. dia mesti diupgrade"
+msgstr "Anda tidak bisa tidak memilih paket. Paket harus diupgrade"
 
 #: install_steps_gtk.pm:385
 #, c-format
@@ -6635,14 +6646,14 @@ msgid "Show automatically selected packages"
 msgstr "Tunjukkan paket yang sudah dipilih secara otomatis"
 
 #: install_steps_gtk.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Load/Save selection"
-msgstr "Pilihan paket"
+msgstr "Pilihan Muat/Simpan"
 
 #: install_steps_gtk.pm:391
 #, c-format
 msgid "Updating package selection"
-msgstr "Update pilihan paket"
+msgstr "Mengupdate pilihan paket"
 
 #: install_steps_gtk.pm:396
 #, c-format
@@ -6657,17 +6668,17 @@ msgstr "Pilih paket yang akan diinstal"
 #: install_steps_gtk.pm:426 install_steps_interactive.pm:706
 #, c-format
 msgid "Installing"
-msgstr "Instalasi"
+msgstr "Menginstall"
 
 #: install_steps_gtk.pm:433
 #, c-format
 msgid "Estimating"
-msgstr "Perkiraan"
+msgstr "Memperkirakan"
 
 #: install_steps_gtk.pm:482
 #, c-format
 msgid "No details"
-msgstr "Tanpa Detil"
+msgstr "Tanpa Detail"
 
 #: install_steps_gtk.pm:490
 #, c-format
@@ -6677,7 +6688,7 @@ msgstr "Sisa waktu"
 #: install_steps_gtk.pm:497
 #, c-format
 msgid "Please wait, preparing installation..."
-msgstr "Tunggu, instalasi sedang disiapkan..."
+msgstr "Harap tunggu, mempersiapkan installasi..."
 
 #: install_steps_gtk.pm:512
 #, c-format
@@ -6687,7 +6698,7 @@ msgstr "%d paket"
 #: install_steps_gtk.pm:517
 #, c-format
 msgid "Installing package %s"
-msgstr "Instalasi paket %s"
+msgstr "Menginstall paket %s"
 
 #: install_steps_gtk.pm:552 install_steps_interactive.pm:92
 #: install_steps_interactive.pm:731
@@ -6703,32 +6714,32 @@ msgid ""
 "done.\n"
 "If you do not have it, press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
-"Ganti Cd-Rom!\n"
+"Ganti Cd-Rom Anda!\n"
 "\n"
-"Masukkan Cd-Rom berlabel \"%s\" ke drive dan tekan Ok. Jika Anda tak punya,\n"
-"tekan Batal untuk menghindari instalasi dari Cd-Rom ini."
+"Masukkan Cd-Rom berlabel \"%s\" pada drive dan tekan Ok. Jika Anda tidak \n"
+"punya, tekan Batal untuk menghindari instalasi dari Cd-Rom ini."
 
 #: install_steps_gtk.pm:571 install_steps_interactive.pm:746
 #, c-format
 msgid "There was an error ordering packages:"
-msgstr "Ada error menguruntukan paket:"
+msgstr "Terdapat kesalahan pengurutan paket:"
 
 #: install_steps_gtk.pm:571 install_steps_gtk.pm:575
 #: install_steps_interactive.pm:746 install_steps_interactive.pm:750
 #, c-format
 msgid "Go on anyway?"
-msgstr "Jalan terus?"
+msgstr "Lanjutkan?"
 
 #: install_steps_gtk.pm:575 install_steps_interactive.pm:750
 #, c-format
 msgid "There was an error installing packages:"
-msgstr "Ada error saat instalasi paket:"
+msgstr "Terdapat kesalahan penginstallan paket:"
 
 #: install_steps_gtk.pm:617 install_steps_interactive.pm:920
 #: install_steps_interactive.pm:1072
 #, c-format
 msgid "not configured"
-msgstr "tak dikonfigurasikan"
+msgstr "tidak dikonfigurasikan"
 
 #: install_steps_gtk.pm:680
 #, c-format
@@ -6736,6 +6747,8 @@ msgid ""
 "The following installation media have been found.\n"
 "If you want to skip some of them, you can unselect them now."
 msgstr ""
+"Media installasi berikut ditemukan. Jika Anda ingin\n"
+"melewati beberapa, Anda bisa tidak memilihnya sekarang."
 
 #: install_steps_gtk.pm:684
 #, c-format
@@ -6745,11 +6758,14 @@ msgid ""
 "It will then continue from the hard drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
+"Anda memiliki opsi untuk menyalin isi CD pada hard disk sebelum"
+"installasi. Proses akan dilanjutkan dari hard disk dan paket akan"
+"tetap tersedia setelah sistem terinstall."
 
 #: install_steps_gtk.pm:686
 #, c-format
 msgid "Copy whole CDs"
-msgstr ""
+msgstr "Salin seluruh CD"
 
 #: install_steps_interactive.pm:85
 #, c-format
@@ -6757,19 +6773,19 @@ msgid "License agreement"
 msgstr "Persetujuan Lisensi"
 
 #: install_steps_interactive.pm:89
-#, fuzzy, c-format
+#, c-format
 msgid "Release Notes"
-msgstr "Release: "
+msgstr "Catatan Rilis"
 
 #: install_steps_interactive.pm:119
 #, c-format
 msgid "Please choose your keyboard layout."
-msgstr "Pilih layout papanketik Anda"
+msgstr "Pilih layout keyboard Anda."
 
 #: install_steps_interactive.pm:121
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available keyboards"
-msgstr "Ini adalah daftar negara yang tersedia"
+msgstr "Berikut daftar keyboard yang tersedia"
 
 #: install_steps_interactive.pm:151
 #, c-format
@@ -6779,7 +6795,7 @@ msgstr "Instal/Upgrade"
 #: install_steps_interactive.pm:152
 #, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "Ini instalasi atau update?"
+msgstr "Installasi atau upgrade?"
 
 #: install_steps_interactive.pm:158
 #, c-format
@@ -6789,7 +6805,7 @@ msgstr "Upgrade %s"
 #: install_steps_interactive.pm:168
 #, c-format
 msgid "Encryption key for %s"
-msgstr "Kunci sandi untuk %s"
+msgstr "Kunci enkripsi untuk %s"
 
 #: install_steps_interactive.pm:185
 #, c-format
@@ -6804,7 +6820,7 @@ msgstr "Port Mouse"
 #: install_steps_interactive.pm:195 standalone/mousedrake:47
 #, c-format
 msgid "Please choose which serial port your mouse is connected to."
-msgstr "Di serial port mana mouse Anda dicolokkan ?"
+msgstr "Pilih serial port yang digunakan mouse Anda."
 
 #: install_steps_interactive.pm:205
 #, c-format
@@ -6829,7 +6845,7 @@ msgstr "PCMCIA"
 #: install_steps_interactive.pm:229
 #, c-format
 msgid "Configuring PCMCIA cards..."
-msgstr "Konfigurasikan card PCMCIA"
+msgstr "Mengkonfigurasi kartu PCMCIA..."
 
 #: install_steps_interactive.pm:236
 #, c-format
@@ -6839,7 +6855,7 @@ msgstr "IDE"
 #: install_steps_interactive.pm:236
 #, c-format
 msgid "Configuring IDE"
-msgstr "Konfigurasi IDE"
+msgstr "Mengkonfigurasi IDE"
 
 #: install_steps_interactive.pm:256 network/tools.pm:172
 #, c-format
@@ -6849,12 +6865,12 @@ msgstr "Tidak ada partisi"
 #: install_steps_interactive.pm:259
 #, c-format
 msgid "Scanning partitions to find mount points"
-msgstr "Mendeteksi partisi untuk mencari lokasi mount"
+msgstr "Mendeteksi partisi untuk mencari titik mount"
 
 #: install_steps_interactive.pm:266
 #, c-format
 msgid "Choose the mount points"
-msgstr "Pilih lokasi mount"
+msgstr "Pilih titik mount"
 
 #: install_steps_interactive.pm:312
 #, c-format
@@ -6862,18 +6878,18 @@ msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
-"Tiada ruang 1MB untuk bootstrap! Instal akan berlanjut, tetapi untuk mem-"
-"boot sistem, Anda perlu membuat partisi bootstrap di DiskDrake"
+"Tidak ada ruang 1MB untuk bootstrap! Installasi akan dilanjutkan, tetapi "
+"untuk boot sistem, Anda perlu membuat partisi bootstrap pada DiskDrake"
 
 #: install_steps_interactive.pm:317
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
 "to boot your system, you'll need to create the bootstrap partition in "
 "DiskDrake"
 msgstr ""
-"Tiada ruang 1MB untuk bootstrap! Instal akan berlanjut, tetapi untuk mem-"
-"boot sistem, Anda perlu membuat partisi bootstrap di DiskDrake"
+"Anda harus membuat PPC PReP Boot bootstrap! Installasi akan dilanjutkan, "
+"tetapi untuk boot sistem, Anda perlu membuat partisi bootstrap pada DiskDrake"
 
 #: install_steps_interactive.pm:353
 #, c-format
@@ -6883,7 +6899,7 @@ msgstr "Pilih partisi yang akan diformat"
 #: install_steps_interactive.pm:355
 #, c-format
 msgid "Check bad blocks?"
-msgstr "Periksa bad blok?"
+msgstr "Periksa blok rusak?"
 
 #: install_steps_interactive.pm:383
 #, c-format
@@ -6891,53 +6907,56 @@ msgid ""
 "Failed to check filesystem %s. Do you want to repair the errors? (beware, "
 "you can lose data)"
 msgstr ""
-"Gagal mencek sistem file %s. Ingin direparasi? (awas, data Anda bisa hilang)"
+"Gagal menguji sistem file %s. Apakah Anda ingin memperbaiki kesalahan? "
+"(hati-hati, data Anda bisa hilang)"
 
 #: install_steps_interactive.pm:386
 #, c-format
 msgid "Not enough swap space to fulfill installation, please add some"
-msgstr "Instalasi tak dapat diteruskan karena swap kurang, tambahkan"
+msgstr "Ruang swap tidak cukup untuk installasi. Harap ditambah"
 
 #: install_steps_interactive.pm:393
 #, c-format
 msgid "Looking for available packages and rebuilding rpm database..."
-msgstr "Sedang mencari paket yg tersedia dan membangun ulang database rpm..."
+msgstr "Mencari paket yang tersedia dan membangun ulang database rpm..."
 
 #: install_steps_interactive.pm:394 install_steps_interactive.pm:452
 #, c-format
 msgid "Looking for available packages..."
-msgstr "Sedang mencari paket yang tersedia..."
+msgstr "Mencari paket yang tersedia..."
 
 #: install_steps_interactive.pm:397
 #, c-format
 msgid "Looking at packages already installed..."
-msgstr "Paket terinstal sedang dicari..."
+msgstr "Mencari paket yang sudah terinstall..."
 
 #: install_steps_interactive.pm:401
 #, c-format
 msgid "Finding packages to upgrade..."
-msgstr "Sedang mencari paket untuk diupgrade"
+msgstr "Mencari paket untuk diupgrade..."
 
 #: install_steps_interactive.pm:421 install_steps_interactive.pm:825
 #, c-format
 msgid "Choose a mirror from which to get the packages"
-msgstr "Pilih mirror tempat Anda ingin mengambil paket program"
+msgstr "Pilih mirror tempat Anda ingin mengambil paket"
 
 #: install_steps_interactive.pm:461
 #, c-format
 msgid ""
 "Your system does not have enough space left for installation or upgrade (%d "
 "> %d)"
-msgstr "Tak cukup ruang untuk instalasi atau upgrade (%d > %d)"
+msgstr ""
+"Sistem Anda tidak memiliki cukup ruang untuk installasi atau upgrade (%d "
+"> %d)"
 
 #: install_steps_interactive.pm:495
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
-"Pilih muat/simpan seleksi paket di floppy.\n"
-"Formatnya sama dengan floppy buatan auto_install."
+"Pilih muat atau simpan pilihan paket.\n"
+"Formatnya sama dengan file auto_install."
 
 #: install_steps_interactive.pm:497
 #, c-format
@@ -6951,14 +6970,14 @@ msgid "Save"
 msgstr "Simpan"
 
 #: install_steps_interactive.pm:505
-#, fuzzy, c-format
+#, c-format
 msgid "Bad file"
-msgstr "Buka berkas"
+msgstr "File rusak"
 
 #: install_steps_interactive.pm:581
 #, c-format
 msgid "Selected size is larger than available space"
-msgstr "Ukuran terpilih melebihi area yg ada"
+msgstr "Ukuran terpilih melebihi ruang yang ada"
 
 #: install_steps_interactive.pm:596
 #, c-format
@@ -6972,7 +6991,7 @@ msgid ""
 "Please choose the minimal installation you want:"
 msgstr ""
 "Anda belum memilih grup paket.\n"
-"Pilih instalasi minimal yang Anda ingin:"
+"Pilih instalasi minimal yang Anda inginkan:"
 
 #: install_steps_interactive.pm:601
 #, c-format
@@ -6982,7 +7001,7 @@ msgstr "Dengan dokumentasi dasar (disarankan!)"
 #: install_steps_interactive.pm:602
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
-msgstr "Benar-benar instalasi minim (khususnya tanpa urpmi)"
+msgstr "Instalasi minimal sesungguhnya (khususnya tanpa urpmi)"
 
 #: install_steps_interactive.pm:641 standalone/drakxtv:52
 #, c-format
@@ -6996,19 +7015,19 @@ msgid ""
 "If you have none of those CDs, click Cancel.\n"
 "If only some CDs are missing, unselect them, then click Ok."
 msgstr ""
-"Kalau Anda punya semua CD pada daftar di bawah, tekan OK.\n"
-"Kalau tak punya sama sekali, click Cancel.\n"
-"Kalau cuma punya beberapa aja, pilih aja, trus klik Ok."
+"Jika Anda memiliki semua CD pada daftar di bawah, tekan OK.\n"
+"Jika tidak memiliki sama sekali, click Cancel.\n"
+"Jika beberapa CD tidak ada, jangan pilih, lalu klik Ok."
 
 #: install_steps_interactive.pm:685
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
-msgstr "Label CD-ROM \"%s\""
+msgstr "CD-ROM berlabel \"%s\""
 
 #: install_steps_interactive.pm:706
 #, c-format
 msgid "Preparing installation"
-msgstr "Sedang menyiapkan instalasi"
+msgstr "Mempersiapkan installasi"
 
 #: install_steps_interactive.pm:715
 #, c-format
@@ -7016,18 +7035,18 @@ msgid ""
 "Installing package %s\n"
 "%d%%"
 msgstr ""
-"Instalasi paket %s\n"
+"Menginstall paket %s\n"
 "%d%%"
 
 #: install_steps_interactive.pm:764
 #, c-format
 msgid "Post-install configuration"
-msgstr "Konfigurasi instalasi akhir"
+msgstr "Konfigurasi pascak installasi"
 
 #: install_steps_interactive.pm:770
 #, c-format
 msgid "Please insert the Update Modules floppy in drive %s"
-msgstr "Masukkan disket Update Modules ke drive %s"
+msgstr "Masukkan disket Update Modules pada drive %s"
 
 #: install_steps_interactive.pm:799
 #, c-format
@@ -7041,43 +7060,45 @@ msgid ""
 "\n"
 "Do you want to install the updates?"
 msgstr ""
-"Anda kini dapat men-download paket update yg mungkin dirilis setelah\n"
-"distribusi ini dirilis.\n"
+"Anda kini memiliki kesempatan untuk mendownload paket update. Paket ini\n"
+"telah diupdate setelah distribusi dirilis. Mereka mungkin berisi perbaikan\n"
+"keamanan atau cacat.\n"
 "\n"
-"Anda perlu koneksi Internet untuk men-download.\n"
+"Untuk mendownload paket, Anda perlu koneksi Internet.\n"
 "\n"
-"Ingin instal update?"
+"Apakah Anda ingin menginstall update?"
 
 #: install_steps_interactive.pm:820
 #, c-format
 msgid ""
 "Contacting Mandrakelinux web site to get the list of available mirrors..."
-msgstr "Mandrakelinux sedang dihubungi untuk mengambil daftar mirror"
+msgstr ""
+"Menghubungi situs Mandrakelinux untuk mengambil daftar mirror..."
 
 #: install_steps_interactive.pm:839
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
-msgstr "Saya sedang mencek mirror untuk mengambil daftar paket yang tersedia"
+msgstr "Menguhubungi mirror untuk mendapatkan daftar paket yang tersedia..."
 
 #: install_steps_interactive.pm:843
 #, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Gagal hubungi mirror %s"
+msgstr "Tidak mampu menghubungi mirror %s"
 
 #: install_steps_interactive.pm:843
 #, c-format
 msgid "Would you like to try again?"
-msgstr "Ingin coba lagi?"
+msgstr "Apakah Anda ingin mencoba lagi?"
 
 #: install_steps_interactive.pm:869 standalone/drakclock:45
 #, c-format
 msgid "Which is your timezone?"
-msgstr "Pilih zonawaktu Anda"
+msgstr "Pilih zona waktu Anda"
 
 #: install_steps_interactive.pm:874
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
-msgstr "sinkronisasi waktu otomatis (dg NTP)"
+msgstr "Sinkronisasi waktu otomatis (menggunakan NTP)"
 
 #: install_steps_interactive.pm:882
 #, c-format
@@ -7102,7 +7123,7 @@ msgstr "Sistem"
 #: install_steps_interactive.pm:1048
 #, c-format
 msgid "Hardware"
-msgstr "Piranti Keras"
+msgstr "Perangkat Keras"
 
 #: install_steps_interactive.pm:983 install_steps_interactive.pm:992
 #, c-format
@@ -7112,24 +7133,27 @@ msgstr "Server CUPS remote"
 #: install_steps_interactive.pm:983
 #, c-format
 msgid "No printer"
-msgstr "Tiada printer"
+msgstr "Tidak ada printer"
 
 #: install_steps_interactive.pm:1025
 #, c-format
 msgid "Do you have an ISA sound card?"
-msgstr "Anda punya kartu suara ISA?"
+msgstr "Apakah Anda memiliki kartu suara ISA?"
 
 #: install_steps_interactive.pm:1027
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Run \"alsaconf\" or \"sndconfig\" after installation to configure your sound "
 "card"
-msgstr "Jalankan \"sndconfig\" setelah instalasi untuk konfigurasi kartu suara"
+msgstr ""
+"Jalankan \"sndconfig\" atau \"sndconfig\" setelah instalasi untuk "
+"mengkonfigurasi kartu suara Anda"
 
 #: install_steps_interactive.pm:1029
 #, c-format
 msgid "No sound card detected. Try \"harddrake\" after installation"
-msgstr "Kartu suara tak terdeteksi. Coba \"harddrake\" setelah instalasi"
+msgstr "Tidak ada kartu suara yang terdeteksi. Coba \"harddrake\" "
+"setelah instalasi"
 
 #: install_steps_interactive.pm:1049
 #, c-format
@@ -7142,9 +7166,9 @@ msgid "Network & Internet"
 msgstr "Jaringan & Internet"
 
 #: install_steps_interactive.pm:1072
-#, fuzzy, c-format
+#, c-format
 msgid "configured"
-msgstr "konfigurasi ulang"
+msgstr "terkonfigurasi"
 
 #: install_steps_interactive.pm:1081 install_steps_interactive.pm:1095
 #: steps.pm:20
@@ -7160,7 +7184,7 @@ msgstr "telah diaktifkan"
 #: install_steps_interactive.pm:1100
 #, c-format
 msgid "disabled"
-msgstr "telah dimatikan"
+msgstr "telah dinonaktifkan"
 
 #: install_steps_interactive.pm:1109
 #, c-format
@@ -7171,40 +7195,40 @@ msgstr "Boot"
 #: install_steps_interactive.pm:1113
 #, c-format
 msgid "%s on %s"
-msgstr "%s di %s"
+msgstr "%s pada %s"
 
 #: install_steps_interactive.pm:1127 services.pm:175
 #, c-format
 msgid "Services: %d activated for %d registered"
-msgstr "Servis: %d diaktifkan untuk %d tercatat"
+msgstr "Layanan: %d diaktifkan untuk %d tercatat"
 
 #: install_steps_interactive.pm:1137
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr "Belum ada konfigurasi X. Cukup begini saja?"
+msgstr "Anda belum mengkonfigurasi X. Apakah Anda yakin?"
 
 #: install_steps_interactive.pm:1217
 #, c-format
 msgid "Preparing bootloader..."
-msgstr "Membuat bootloader"
+msgstr "Mempersiapkan bootloader..."
 
 #: install_steps_interactive.pm:1227
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
 "will not work for you. The install will continue, but you'll need to use "
 "BootX or some other means to boot your machine. The kernel argument for the "
 "root fs is: root=%s"
 msgstr ""
-"Nampaknya Anda punya komputer kuno/tak dikenal.\n"
-"Bootloader yaboot takkan bekerja.\n"
-"Instalasi akan berlanjut, tapi Anda perlu memakai\n"
-"BootX atau yg lain untuk mem-boot komputer Anda"
+"Nampaknya Anda memiliki komputer kuno/tidak dikenal, bootloader yaboot "
+"tidak akan bekerja. Installasi akan dilanjutkan, tetapi Anda harus "
+"menggunakan BootX atau cara lain untuk boot komputer Anda. Argumen "
+"kernel untuk fs root adalah: root=%s"
 
 #: install_steps_interactive.pm:1233
 #, c-format
 msgid "Do you want to use aboot?"
-msgstr "Ingin pakai aboot?"
+msgstr "Apakah Anda ingin menggunakan aboot?"
 
 #: install_steps_interactive.pm:1236
 #, c-format
@@ -7212,8 +7236,8 @@ msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr ""
-"Ada error saat install aboot,\n"
-"paksakan instalasi walau merusak partisi awal?"
+"Kesalahan menginstall aboot,\n"
+"paksakan instalasi meskipun merusak partisi pertama?"
 
 #: install_steps_interactive.pm:1257
 #, c-format
@@ -7221,21 +7245,23 @@ msgid ""
 "In this security level, access to the files in the Windows partition is "
 "restricted to the administrator."
 msgstr ""
+"Pada tingkat keamanan ini, akses pada file pada partisi Windows "
+"dibatasi hanya pada administrator."
 
 #: install_steps_interactive.pm:1286 standalone/drakautoinst:76
 #, c-format
 msgid "Insert a blank floppy in drive %s"
-msgstr "Masukkan disket kosong di drive %s"
+msgstr "Masukkan disket kosong pada drive %s"
 
 #: install_steps_interactive.pm:1291
-#, fuzzy, c-format
+#, c-format
 msgid "Please insert another floppy for drivers disk"
-msgstr "Masukkan floppy boot ke drive %s"
+msgstr "Masukkan disket lain untuk disket driver"
 
 #: install_steps_interactive.pm:1293
 #, c-format
 msgid "Creating auto install floppy..."
-msgstr "Lagi buat disket auto install"
+msgstr "Membuat disket installasi otomatis..."
 
 #: install_steps_interactive.pm:1305
 #, c-format
@@ -7244,14 +7270,14 @@ msgid ""
 "\n"
 "Do you really want to quit now?"
 msgstr ""
-"Ada tahapan yang tidak diselesaikan.\n"
+"Beberapa langkah tidak selesai.\n"
 "\n"
-"Anda ingin keluar sekarang?"
+"Apakah Anda ingin keluar sekarang?"
 
 #: install_steps_interactive.pm:1321
 #, c-format
 msgid "Generate auto install floppy"
-msgstr "Buat floppy instalasi otomatis"
+msgstr "Membuat disket instalasi otomatis"
 
 #: install_steps_interactive.pm:1323
 #, c-format
@@ -7262,16 +7288,16 @@ msgid ""
 "\n"
 "You may prefer to replay the installation.\n"
 msgstr ""
-"Bila Anda mau, auto install bisa dilakukan secara otomatis penuh,\n"
-"jadi instalasinya akan mengusai hard drive!\n"
-"(ini dimaksudkan untuk menginstall pada komputer lain)\n"
+"Installasi otomatis dapat dibuat otomatis penuh jika\n"
+"diinginkan, pada kasus ini akan mengambil hard disk!!\n"
+"(ini berarti untuk menginstall pada komputer lain).\n"
 "\n"
-"Mungkin Anda perlu mengulangi instalasinya.\n"
+"Anda mungkin perlu mengulangi instalasinya.\n"
 
 #: install_steps_newt.pm:20
 #, c-format
 msgid "Mandrakelinux Installation %s"
-msgstr "Instalasi Linux Mandrake %s"
+msgstr "Instalasi Mandrakelinux %s"
 
 #. -PO: This string must fit in a 80-char wide text screen
 #: install_steps_newt.pm:34
@@ -7279,7 +7305,7 @@ msgstr "Instalasi Linux Mandrake %s"
 msgid ""
 "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
-"  <Tab>/<Alt-Tab> untuk pindah | <Spasi> untuk pilih | <F12> Layar berikut"
+"  <Tab>/<Alt-Tab> antar elemen | <Spasi> untuk pilih | <F12> Layar berikut"
 
 #: interactive.pm:184
 #, c-format
@@ -7309,7 +7335,7 @@ msgstr "Hapus"
 #: interactive.pm:386
 #, c-format
 msgid "Basic"
-msgstr "Biasa"
+msgstr "Dasar"
 
 #: interactive.pm:424 interactive/newt.pm:317 ugtk2.pm:506
 #, c-format
@@ -7319,7 +7345,7 @@ msgstr "Selesai"
 #: interactive/newt.pm:92
 #, c-format
 msgid "Do"
-msgstr "Laksanakan"
+msgstr "Lakukan"
 
 #: interactive/stdio.pm:29 interactive/stdio.pm:148
 #, c-format
@@ -7337,7 +7363,7 @@ msgid ""
 "Entries you'll have to fill:\n"
 "%s"
 msgstr ""
-"Entri yang harus Anda penuhi:\n"
+"Entri yang harus Anda isi:\n"
 "%s"
 
 #: interactive/stdio.pm:70
@@ -7353,7 +7379,7 @@ msgstr "Tombol `%s': %s"
 #: interactive/stdio.pm:95
 #, c-format
 msgid "Do you want to click on this button?"
-msgstr "Anda ingin meng-klik tombol ini? "
+msgstr "Apakah Anda ingin klik pada tombol ini?"
 
 #: interactive/stdio.pm:104
 #, c-format
@@ -7363,7 +7389,7 @@ msgstr "Pilihan Anda? (default `%s'%s) "
 #: interactive/stdio.pm:104
 #, c-format
 msgid " enter `void' for void entry"
-msgstr "ketikkan `void' untuk entri kosong"
+msgstr " masukkan`void' untuk entri kosong"
 
 #: interactive/stdio.pm:122
 #, c-format
@@ -7377,7 +7403,7 @@ msgid ""
 "or just hit Enter to proceed.\n"
 "Your choice? "
 msgstr ""
-"Pilihlah nomor pertama dari 10-range yang ingin Anda edit,\n"
+"Pilihlah nomor pertama dari jangkauan 10 yang ingin Anda edit,\n"
 "atau tekan Enter untuk melanjutkan.\n"
 "Pilihan Anda? "
 
@@ -7400,70 +7426,90 @@ msgstr "Kirim ulang"
 msgid ""
 "_: keyboard\n"
 "Czech (QWERTZ)"
-msgstr "Ceko (QWERTZ)"
+msgstr ""
+"_: keyboard\n"
+"Ceko (QWERTZ)"
 
 #: keyboard.pm:171 keyboard.pm:206
 #, c-format
 msgid ""
 "_: keyboard\n"
 "German"
-msgstr "Jerman"
+msgstr ""
+"_: keyboard\n"
+"Jerman"
 
 #: keyboard.pm:172
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak"
-msgstr "Dvorak"
+msgstr ""
+"_: keyboard\n"
+"Dvorak"
 
 #: keyboard.pm:173 keyboard.pm:223
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Spanish"
-msgstr "Spanyol"
+msgstr ""
+"_: keyboard\n"
+"Spanyol"
 
 #: keyboard.pm:174 keyboard.pm:224
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Finnish"
-msgstr "Finland"
+msgstr ""
+"_: keyboard\n"
+"Finland"
 
 #: keyboard.pm:175 keyboard.pm:227
 #, c-format
 msgid ""
 "_: keyboard\n"
 "French"
-msgstr "Perancis"
+msgstr ""
+"_: keyboard\n"
+"Perancis"
 
 #: keyboard.pm:176 keyboard.pm:275
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Norwegian"
-msgstr "Norwegia"
+msgstr ""
+"_: keyboard\n"
+"Norwegia"
 
 #: keyboard.pm:177
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Polish"
-msgstr "Polandia"
+msgstr ""
+"_: keyboard\n"
+"Polandia"
 
 #: keyboard.pm:178 keyboard.pm:287
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Russian"
-msgstr "Rusia"
+msgstr ""
+"_: keyboard\n"
+"Rusia"
 
 #: keyboard.pm:180 keyboard.pm:293
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Swedish"
-msgstr "Swedia"
+msgstr ""
+"_: keyboard\n"
+"Swedia"
 
 #: keyboard.pm:181 keyboard.pm:320
 #, c-format
@@ -7480,273 +7526,351 @@ msgstr "Keyboard US"
 msgid ""
 "_: keyboard\n"
 "Albanian"
-msgstr "Albania"
+msgstr ""
+"_: keyboard\n"
+"Albania"
 
 #: keyboard.pm:185
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Armenian (old)"
-msgstr "Armenia (lama)"
+msgstr ""
+"_: keyboard\n"
+"Armenia (lama)"
 
 #: keyboard.pm:186
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Armenian (typewriter)"
-msgstr "Armenia (komputertik)"
+msgstr ""
+"_: keyboard\n"
+"Armenia (mesin ketik)"
 
 #: keyboard.pm:187
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Armenian (phonetic)"
-msgstr "Armenia (fonetik)"
+msgstr ""
+"_: keyboard\n"
+"Armenia (fonetik)"
 
 #: keyboard.pm:188
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Arabic"
-msgstr "Arab"
+msgstr ""
+"_: keyboard\n"
+"Arab"
 
 #: keyboard.pm:189
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Azerbaidjani (latin)"
-msgstr "Azerbaijan (latin)"
+msgstr ""
+"_: keyboard\n"
+"Azerbaijan (latin)"
 
 #: keyboard.pm:190
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Belgian"
-msgstr "Belgia"
+msgstr ""
+"_: keyboard\n"
+"Belgia"
 
 #: keyboard.pm:191
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bengali (Inscript-layout)"
-msgstr "Bengal (Inscript)"
+msgstr ""
+"_: keyboard\n"
+"Bengal (Inscript)"
 
 #: keyboard.pm:192
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bengali (Probhat)"
-msgstr "Bengal (Probhat)"
+msgstr ""
+"_: keyboard\n"
+"Bengal (Probhat)"
 
 #: keyboard.pm:193
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bulgarian (phonetic)"
-msgstr "Bulagaria (fonetik)"
+msgstr ""
+"_: keyboard\n"
+"Bulagaria (fonetik)"
 
 #: keyboard.pm:194
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bulgarian (BDS)"
-msgstr "Bulgaria (BDS)"
+msgstr ""
+"_: keyboard\n"
+"Bulgaria (BDS)"
 
 #: keyboard.pm:195
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Brazilian (ABNT-2)"
-msgstr "Brazil (ABNT-2)"
+msgstr ""
+"_: keyboard\n"
+"Brazil (ABNT-2)"
 
 #: keyboard.pm:196
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Bosnian"
-msgstr "Bosnia"
+msgstr ""
+"_: keyboard\n"
+"Bosnia"
 
 #: keyboard.pm:197
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Belarusian"
-msgstr "Belarusia"
+msgstr ""
+"_: keyboard\n"
+"Belarusia"
 
 #: keyboard.pm:199
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Swiss (German layout)"
-msgstr "Swis (layout Jerman)"
+msgstr ""
+"_: keyboard\n"
+"Swis (layout Jerman)"
 
 #: keyboard.pm:201
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Swiss (French layout)"
-msgstr "Swis (layout Prancis)"
+msgstr ""
+"_: keyboard\n"
+"Swis (layout Prancis)"
 
 #: keyboard.pm:203
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Cherokee syllabics"
-msgstr "Arab"
+msgstr ""
+"_: keyboard\n"
+"Cherokee silabis"
 
 #: keyboard.pm:205
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Czech (QWERTY)"
-msgstr "Ceko (QWERTY)"
+msgstr ""
+"_: keyboard\n"
+"Ceko (QWERTY)"
 
 #: keyboard.pm:207
 #, c-format
 msgid ""
 "_: keyboard\n"
 "German (no dead keys)"
-msgstr "Jerman (tanpa dead key)"
+msgstr ""
+"_: keyboard\n"
+"Jerman (tanpa dead key)"
 
 #: keyboard.pm:208
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Devanagari"
-msgstr "Devanagari"
+msgstr ""
+"_: keyboard\n"
+"Devanagari"
 
 #: keyboard.pm:209
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Danish"
-msgstr "Denmark"
+msgstr ""
+"_: keyboard\n"
+"Denmark"
 
 #: keyboard.pm:210
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (US)"
-msgstr "Dvorak (US)"
+msgstr ""
+"_: keyboard\n"
+"Dvorak (US)"
 
 #: keyboard.pm:212
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Esperanto)"
-msgstr "Dvorak (Norwegia)"
+msgstr ""
+"_: keyboard\n"
+"Dvorak (Esperanto)"
 
 #: keyboard.pm:214
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (French)"
-msgstr "Dvorak (Norwegia)"
+msgstr ""
+"_: keyboard\n"
+"Dvorak (Perancis)"
 
 #: keyboard.pm:216
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (UK)"
-msgstr "Dvorak (US)"
+msgstr ""
+"_: keyboard\n"
+"Dvorak (UK)"
 
 #: keyboard.pm:217
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Norwegian)"
-msgstr "Dvorak (Norwegia)"
+msgstr "D"
+"_: keyboard\n"
+"vorak (Norwegia)"
 
 #: keyboard.pm:219
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Polish)"
-msgstr "Dvorak (Swedia)"
+msgstr ""
+""_: keyboard\n"
+"Dvorak (Polandia)"
 
 #: keyboard.pm:220
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Swedish)"
-msgstr "Dvorak (Swedia)"
+msgstr ""
+"_: keyboard\n"
+"Dvorak (Swedia)"
 
 #: keyboard.pm:221
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dzongkha/Tibetan"
-msgstr "Bosnia"
+msgstr ""
+"_: keyboard\n"
+"Dzongkha/Tibet"
 
 #: keyboard.pm:222
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Estonian"
-msgstr "Estonia"
+msgstr ""
+"_: keyboard\n"
+"Estonia"
 
 #: keyboard.pm:226
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Faroese"
-msgstr "Yunani"
+msgstr ""
+"_: keyboard\n"
+"Faroese"
 
 #: keyboard.pm:228
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Georgian (\"Russian\" layout)"
-msgstr "Georgia (layout \"Rusia\")"
+msgstr ""
+"_: keyboard\n"
+"Georgia (layout \"Rusia\")"
 
 #: keyboard.pm:229
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Georgian (\"Latin\" layout)"
-msgstr "Georgia (layout \"Latin\")"
+msgstr ""
+"_: keyboard\n"
+"Georgia (layout \"Latin\")"
 
 #: keyboard.pm:230
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Greek"
-msgstr "Yunani"
+msgstr ""
+"_: keyboard\n"
+"Yunani"
 
 #: keyboard.pm:231
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Greek (polytonic)"
-msgstr "Yunani (politonik)"
+msgstr ""
+"_: keyboard\n"
+"Yunani (politonik)"
 
 #: keyboard.pm:232
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Gujarati"
-msgstr "Gujarat"
+msgstr ""
+"_: keyboard\n"
+"Gujarat"
 
 #: keyboard.pm:233
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Gurmukhi"
-msgstr "Gurmukh"
+msgstr ""
+"_: keyboard\n"
+"Gurmukh"
 
 #: keyboard.pm:235
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Hungarian"
-msgstr "Hungaria"
+msgstr ""
+"_: keyboard\n"
+"Hungaria"
 
 #: keyboard.pm:236
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Croatian"
-msgstr "Kroasia"
+msgstr ""
+"_: keyboard\n"
+"Kroasia"
 
 #: keyboard.pm:237
 #, c-format
@@ -7754,251 +7878,323 @@ msgid ""
 "_: keyboard\n"
 "Irish"
 msgstr ""
+"_: keyboard\n"
+"Irlandia"
 
 #: keyboard.pm:238
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Israeli"
-msgstr "Ibrani"
+msgstr ""
+"_: keyboard\n"
+"Israel"
 
 #: keyboard.pm:239
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Israeli (phonetic)"
-msgstr "Ibrani (fonetik)"
+msgstr ""
+"_: keyboard\n"
+"Israel (fonetik)"
 
 #: keyboard.pm:240
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Iranian"
-msgstr "Iran"
+msgstr ""
+"_: keyboard\n"
+"Iran"
 
 #: keyboard.pm:241
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Icelandic"
-msgstr "Islandia"
+msgstr ""
+"_: keyboard\n"
+"Islandia"
 
 #: keyboard.pm:242
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Italian"
-msgstr "Itali"
+msgstr ""
+"_: keyboard\n"
+"Italia"
 
 #: keyboard.pm:243
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Inuktitut"
-msgstr "Eskimo"
+msgstr ""
+"_: keyboard\n"
+"Inuktitut"
 
 #: keyboard.pm:248
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Japanese 106 keys"
-msgstr "Jepang 106 tombol"
+msgstr ""
+"_: keyboard\n"
+"Jepang 106 tombol"
 
 #: keyboard.pm:249
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Kannada"
-msgstr "Kannada (India)"
+msgstr ""
+"_: keyboard\n"
+"Kannada"
 
 #: keyboard.pm:252
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Korean"
-msgstr "Keyboard Korea"
+msgstr ""
+"_: keyboard\n"
+"Korea"
 
 #: keyboard.pm:254
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Kurdish (arabic script)"
-msgstr "Arab"
+msgstr ""
+"_: keyboard\n"
+"Kurdi (script Arab)"
 
 #: keyboard.pm:255
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Kyrgyz"
-msgstr "Keyboard UK"
+msgstr ""
+"_: keyboard\n"
+"Kirgiztan"
 
 #: keyboard.pm:256
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Latin American"
-msgstr "Amerika Latin"
+msgstr ""
+"_: keyboard\n"
+"Amerika Latin"
 
 #: keyboard.pm:257
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Laotian"
-msgstr "Laos"
+msgstr ""
+"_: keyboard\n"
+"Laos"
 
 #: keyboard.pm:259
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian AZERTY (old)"
-msgstr "Lithuania AZERTY (lama)"
+msgstr ""
+"_: keyboard\n"
+"Lithuania AZERTY (lama)"
 
 #: keyboard.pm:262
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian AZERTY (new)"
-msgstr "Lithuania AZERTY (baru)"
+msgstr ""
+"_: keyboard\n"
+"Lithuania AZERTY (baru)"
 
 #: keyboard.pm:264
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian \"number row\" QWERTY"
-msgstr "Lithuania \"number row\" QWERTY"
+msgstr ""
+"_: keyboard\n"
+"Lithuania \"jumlah baris\" QWERTY"
 
 #: keyboard.pm:266
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Lithuanian \"phonetic\" QWERTY"
-msgstr "Lithuania \"fonetik\" QWERTY"
+msgstr ""
+"_: keyboard\n"
+"Lithuania \"fonetik\" QWERTY"
 
 #: keyboard.pm:267
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Latvian"
-msgstr "Latvia"
+msgstr ""
+"_: keyboard\n"
+"Latvia"
 
 #: keyboard.pm:268
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Malayalam"
-msgstr "Malayalam"
+msgstr ""
+"_: keyboard\n"
+"Malayalam"
 
 #: keyboard.pm:269
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Macedonian"
-msgstr "Macedonia"
+msgstr ""
+"_: keyboard\n"
+"Makedonia"
 
 #: keyboard.pm:270
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Myanmar (Burmese)"
-msgstr "Myanmar (Burma)"
+msgstr ""
+"_: keyboard\n"
+"Myanmar (Burma)"
 
 #: keyboard.pm:271
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Mongolian (cyrillic)"
-msgstr "Mongol (cyrillic)"
+msgstr ""
+"_: keyboard\n"
+"Mongol (cyrillic)"
 
 #: keyboard.pm:272
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Maltese (UK)"
-msgstr "Malta (Inggris)"
+msgstr ""
+"_: keyboard\n"
+"Malta (Inggris)"
 
 #: keyboard.pm:273
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Maltese (US)"
-msgstr "Malta (Amerika)"
+msgstr ""
+"_: keyboard\n"
+"Malta (Amerika)"
 
 #: keyboard.pm:274
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Dutch"
-msgstr "Belanda"
+msgstr ""
+"_: keyboard\n"
+"Belanda"
 
 #: keyboard.pm:276
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Oriya"
-msgstr "Oriya"
+msgstr ""
+"_: keyboard\n"
+"Oriya"
 
 #: keyboard.pm:277
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Polish (qwerty layout)"
-msgstr "Polandia (layout qwerty)"
+msgstr ""
+"_: keyboard\n"
+"Polandia (layout qwerty)"
 
 #: keyboard.pm:278
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Polish (qwertz layout)"
-msgstr "Polandia (layout qwertz)"
+msgstr ""
+"_: keyboard\n"
+"Polandia (layout qwertz)"
 
 #: keyboard.pm:280
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Pashto"
-msgstr "Polandia"
+msgstr ""
+"_: keyboard\n"
+"Pashto"
 
 #: keyboard.pm:281
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Portuguese"
-msgstr "Portugis"
+msgstr ""
+"_: keyboard\n"
+"Portugis"
 
 #: keyboard.pm:283
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Canadian (Quebec)"
-msgstr "Kanada (Quebec)"
+msgstr ""
+"_: keyboard\n"
+"Kanada (Quebec)"
 
 #: keyboard.pm:285
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Romanian (qwertz)"
-msgstr "Romania (qwertz)"
+msgstr ""
+"_: keyboard\n"
+"Romania (qwertz)"
 
 #: keyboard.pm:286
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Romanian (qwerty)"
-msgstr "Romania (qwerty)"
+msgstr ""
+"_: keyboard\n"
+"Romania (qwerty)"
 
 #: keyboard.pm:288
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Russian (phonetic)"
-msgstr "Rusia (fonetik)"
+msgstr ""
+"_: keyboard\n"
+"Rusia (fonetik)"
 
 #: keyboard.pm:289
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Saami (norwegian)"
-msgstr "Saami (norwegia)"
+msgstr ""
+"_: keyboard\n"
+"Saami (norwegia)"
 
 #: keyboard.pm:290
 #, c-format
@@ -8006,146 +8202,188 @@ msgid ""
 "_: keyboard\n"
 "Saami (swedish/finnish)"
 msgstr ""
+"_: keyboard\n"
+"Saami (Swedia/Finlandia)"
 
 #: keyboard.pm:292
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Sindhi"
-msgstr "Papanketik Muangthai"
+msgstr ""
+"_: keyboard\n"
+"Sindhi"
 
 #: keyboard.pm:294
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovenian"
-msgstr "Slovenia"
+msgstr ""
+"_: keyboard\n"
+"Slovenia"
 
 #: keyboard.pm:295
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovakian (QWERTZ)"
-msgstr "Slovakia (QWERTZ)"
+msgstr ""
+"_: keyboard\n"
+"Slovakia (QWERTZ)"
 
 #: keyboard.pm:296
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Slovakian (QWERTY)"
-msgstr "Slovakia (QWERTY)"
+msgstr ""
+"_: keyboard\n"
+"Slovakia (QWERTY)"
 
 #: keyboard.pm:298
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Serbian (cyrillic)"
-msgstr "Serbia (cyrillic)"
+msgstr ""
+"_: keyboard\n"
+"Serbia (cyrillic)"
 
 #: keyboard.pm:299
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Syriac"
-msgstr "Syria"
+msgstr ""
+"_: keyboard\n"
+"Syria"
 
 #: keyboard.pm:300
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Syriac (phonetic)"
-msgstr "Syiria (fonetik)"
+msgstr ""
+"_: keyboard\n"
+"Syiria (fonetik)"
 
 #: keyboard.pm:301
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Telugu"
-msgstr "Telugu"
+msgstr ""
+"_: keyboard\n"
+"Telugu"
 
 #: keyboard.pm:303
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tamil (ISCII-layout)"
-msgstr "Tamil (layout ISCII)"
+msgstr ""
+"_: keyboard\n"
+"Tamil (layout ISCII)"
 
 #: keyboard.pm:304
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tamil (Typewriter-layout)"
-msgstr "Tamil (layout komputertik)"
+msgstr ""
+"_: keyboard\n"
+"Tamil (layout mesin ketik)"
 
 #: keyboard.pm:305
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Kedmanee)"
-msgstr "Papanketik Muangthai"
+msgstr ""
+"_: keyboard\n"
+"Thai (Kedmanee)"
 
 #: keyboard.pm:306
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (TIS-820)"
-msgstr "Papanketik Muangthai"
+msgstr ""
+"_: keyboard\n"
+"Thai (TIS-820)"
 
 #: keyboard.pm:308
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (Pattachote)"
-msgstr "Papanketik Muangthai"
+msgstr ""
+"_: keyboard\n"
+"Thai (Pattachote)"
 
 #: keyboard.pm:311
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Tifinagh (+latin/arabic)"
-msgstr "Yugoslavia (latin)"
+msgstr ""
+"_: keyboard\n"
+"Tifinagh (+Latin/Arab)"
 
 #: keyboard.pm:313
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Tajik"
-msgstr "Papanketik Tajik"
+msgstr ""
+"_: keyboard\n"
+"Tajik"
 
 #: keyboard.pm:315
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Turkmen"
-msgstr "Jerman"
+msgstr ""
+"_: keyboard\n"
+"Turkmenistan"
 
 #: keyboard.pm:316
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Turkish (traditional \"F\" model)"
-msgstr "Turki (model \"F\" tradisional)"
+msgstr ""
+"_: keyboard\n"
+"Turki (model \"F\" tradisional)"
 
 #: keyboard.pm:317
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Turkish (modern \"Q\" model)"
-msgstr "Turki (model \"Q\" modern)"
+msgstr ""
+"_: keyboard\n"
+"Turki (model \"Q\" modern)"
 
 #: keyboard.pm:319
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Ukrainian"
-msgstr "Ukraina"
+msgstr ""
+"_: keyboard\n"
+"Ukraina"
 
 #: keyboard.pm:322
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Urdu keyboard"
-msgstr "Oriya"
+msgstr ""
+"_: keyboard\n"
+"Keyboard Urdu"
 
 #: keyboard.pm:324
 #, c-format
@@ -8157,56 +8395,62 @@ msgstr "Keyboard US (internasional)"
 msgid ""
 "_: keyboard\n"
 "Uzbek (cyrillic)"
-msgstr "Uzbek (cyrillic)"
+msgstr ""
+"_: keyboard\n"
+"Uzbek (cyrillic)"
 
 #: keyboard.pm:327
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Vietnamese \"numeric row\" QWERTY"
-msgstr "Vietnam \"numeric row\" QWERTY"
+msgstr ""
+"_: keyboard\n"
+"Vietnam \"jumlah baris\" QWERTY"
 
 #: keyboard.pm:328
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Yugoslavian (latin)"
-msgstr "Yugoslavia (latin)"
+msgstr ""
+"_: keyboard\n"
+"Yugoslavia (latin)"
 
 #: keyboard.pm:335
 #, c-format
 msgid "Right Alt key"
-msgstr "kunci Alt Kanan"
+msgstr "Tombol Alt Kanan"
 
 #: keyboard.pm:336
 #, c-format
 msgid "Both Shift keys simultaneously"
-msgstr "Kedua Shift bersamaan"
+msgstr "Kedua tombol Shift bersamaan"
 
 #: keyboard.pm:337
 #, c-format
 msgid "Control and Shift keys simultaneously"
-msgstr "Control dan Shift bersamaan"
+msgstr "Tombol Control dan Shift bersamaan"
 
 #: keyboard.pm:338
 #, c-format
 msgid "CapsLock key"
-msgstr "CapsLock"
+msgstr "Tombol CapsLock"
 
 #: keyboard.pm:339
-#, fuzzy, c-format
+#, c-format
 msgid "Shift and CapsLock keys simultaneously"
-msgstr "Ctrl dan Alt bersamaan"
+msgstr "Tombol Shift dan CapsLock bersamaan"
 
 #: keyboard.pm:340
 #, c-format
 msgid "Ctrl and Alt keys simultaneously"
-msgstr "Ctrl dan Alt bersamaan"
+msgstr "Tombol Ctrl dan Alt bersamaan"
 
 #: keyboard.pm:341
 #, c-format
 msgid "Alt and Shift keys simultaneously"
-msgstr "Alt dan Shift bersamaan"
+msgstr "Tombol Alt dan Shift bersamaan"
 
 #: keyboard.pm:342
 #, c-format
@@ -8244,9 +8488,9 @@ msgid "Right Shift key"
 msgstr "Kunci Shift kanan"
 
 #: keyboard.pm:349
-#, fuzzy, c-format
+#, c-format
 msgid "Left Alt key"
-msgstr "kunci Alt Kanan"
+msgstr "kunci Alt Kiri"
 
 #: keyboard.pm:350
 #, c-format
