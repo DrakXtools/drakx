@@ -12,6 +12,7 @@ use devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 my @themes_vga16 = qw(blue blackwhite savane);
+my @themes_desktop = qw(mdk-Desktop DarkMarble marble3d blueHeart);
 my @themes = qw(mdk DarkMarble marble3d blueHeart);
 
 my (@background1, @background2);
@@ -34,6 +35,7 @@ sub load_rc {
 
 sub default_theme {
     my ($o) = @_;
+    @themes = @themes_desktop if $o->{meta_class} eq 'desktop';
     @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
     install_theme($o, $o->{theme} || $themes[0]);
 }
