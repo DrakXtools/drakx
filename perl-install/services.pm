@@ -337,7 +337,8 @@ sub starts_on_boot ($) {
 	    return 0;
     while (my $line = <F>) {
 	chomp $line;
-	if ($line =~ /:on/) {
+	if (($line =~ /:on/) || # service with init script
+	    ($line =~ /^\s*$service\s+on\s*$/)) { # xinetd service
 	    close F;
 	    return 1;
 	}
@@ -353,5 +354,11 @@ sub start_service_on_boot ($) {
     return 1;
 }
 
+sub do_not_start_service_on_boot ($) {
+    my ($service) = @_;
+    run_program::rooted($::prefix, "/sbin/chkconfig", "--del", $service)
+	or return 0;
+    return 1;
+}
 
 1;

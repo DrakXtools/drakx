@@ -32,7 +32,7 @@ use handle_configs;
 
 my $_sanedir = "$::prefix/etc/sane.d";
 my $_scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
-my $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
+$scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
@@ -54,33 +54,138 @@ sub add2dll {
     output("$_sanedir/dll.conf", @dllconf);
 }
 
-sub detect {
-    my ($i, @res) = 0;
-    foreach (grep { $_->{driver} =~ /scanner/ } detect_devices::usb_probe()) {
-	use Data::Dumper;
-	print Dumper($_);
-	#my ($manufacturer, $model) = split '\|', $_->{description};
-	#$_->{description} =~ s/Hewlett[-\s_]Packard/HP/;
-	$_->{description} =~ s/Seiko\s+Epson/Epson/i;
-	push @res, { port => "/dev/usb/scanner$i", val => { CLASS => 'SCANNER',
-							    MODEL => $model,
-							    MANUFACTURER => $manufacturer,
-							    DESCRIPTION => $_->{description},
-							    id => $_->{id},
-							    vendor => $_->{vendor},
-							  } };
-	++$i;
+sub configured {
+    my @res = ();
+    # Run "scanimage -L", to find the scanners which are already working
+    open LIST, "LC_ALL=C scanimage -L |";
+    while (my $line = <LIST>) {
+	if ($line =~ /^\s*device\s*\`([^\`\']+)\'\s+is\s+a\s+(\S.*)$/) {
+	    # Extract port and description
+	    my $port = $1;
+	    my $description = $2;
+	    # Remove duplicate scanners appearing through saned and the
+	    # "net" backend
+	    next if $port =~ /^net:(localhost|127.0.0.1):/;
+	    # Store collected data
+	    push @res, { 
+		port => $port, 
+		val => { 
+		    DESCRIPTION => $description,
+		} 
+	    };
+	}
     }
-    foreach (grep { $_->{media_type} =~ /scanner/ } detect_devices::getSCSI()) {
-	   $_->{info} =~ s/Seiko\s+Epson/Epson/i;
-	   push @res, { port => "/dev/sg", 
-				 val => { DESCRIPTION => $_->{info} },
-	   };
-	   ++$i;
-    }
-    @res;
+    close LIST;
+    return @res;
 }
 
+sub detect {
+    my @configured = @_;
+    my @res = ();
+    # Run "sane-find-scanner", this also detects USB scanners which only
+    # work with libusb.
+    open DETECT, "LC_ALL=C sane-find-scanner -q |";
+    while (my $line = <DETECT>) {
+	my $vendorid = undef;
+	my $productid = undef;
+	my $make = undef;
+	my $model = undef;
+	my $description = undef;
+	my $port = undef;
+	if ($line =~ /^\s*found\s+USB\s+scanner/i) {
+	    # Found an USB scanner
+	    if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\].*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\]/) {
+		# Scanner connected via libusb
+		$vendorid = $1;
+		$make = $2;
+		$productid = $4;
+		$model = $5;
+		$description = "$make|$model";
+	    } elsif ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f]+.*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f]+/) {
+		# Scanner connected via scanner.o kernel module
+		$vendorid = $1;
+		$productid = $3;
+	    }
+	    if ($vendorid and $productid) {
+		# We have vendor and product ID, look up the scanner in
+		# the usbtable
+		foreach $entry (cat_("$_scannerDBdir/usbtable")) {
+		    if ($entry =~ 
+			/^\s*$vendorid\s+$productid\s+.*\"([^\"]+)\"\s*$/) {
+			$description = $1;
+			$description =~ s/Seiko\s+Epson/Epson/i;
+			if ($description =~ /^([^\|]+)\|(.*)$/) {
+			    $make = $1;
+			    $model = $2;
+			}
+			last;
+		    }
+		}
+	    }
+	} elsif ($line =~ /^\s*found\s+SCSI/i) {
+	    # SCSI scanner
+	    if ($line =~ /\"([^\"\s]+)\s+([^\"]+?)\s+([^\"\s]+)\"/) {
+		$make = $1;
+		$model = $2;
+		$description = "$make|$model";
+	    }
+	} else {
+	    # Comment line in output of "sane-find-scanner"
+	    next;
+	}
+	# Extract port
+        $line =~ /\s+(\S+)\s*$/;
+	$port = $1;
+	# Check for duplicate (scanner.o/libusb)
+	if ($port =~ /^libusb/) {
+	    my $duplicate = 0;
+	    foreach (@res) {
+		if (($_->{val}{vendor} eq $vendorid) &&
+		    ($_->{val}{id} eq $productid) &&
+		    ($_->{port} =~ /dev.*usb.*scanner/) &&
+		    (!defined($_->{port2}))) {
+		    # Duplicate entry found, merge the entries
+		    $_->{port2} = $port;
+		    $_->{val}{MANUFACTURER} ||= $make;
+		    $_->{val}{MODEL} ||= $model;
+		    $_->{val}{DESCRIPTION} ||= $description;
+		    $duplicate = 1;
+		    last;
+		}
+	    }
+	    next if $duplicate;
+	}
+	# Store collected data
+	push @res, { 
+	    port => $port, 
+	    val => { 
+		CLASS => 'SCANNER',
+		MODEL => $model,
+		MANUFACTURER => $make,
+		DESCRIPTION => $description,
+		id => $productid,
+		vendor => $vendorid,
+	    } 
+	};
+    }
+    close DETECT;
+    if (@configured) {
+	# Remove scanners which are already working
+	foreach my $d (@res) {
+	    my $searchport1 = handle_configs::searchstr($d->{port});
+	    my $searchport2 = handle_configs::searchstr($d->{port2});
+	    foreach my $c (@configured) {
+		if (($c->{port} =~ /$searchport1$/) ||
+		    ($c->{port} =~ /$searchport2$/)) {
+		    $d->{configured} = 1;
+		    last;
+		}
+	    }
+	}
+	@res = map { $_->{configured} ? () : $_; } @res;
+    }
+    return @res;
+}
 
 sub readScannerDB {
     my ($file) = @_;

@@ -25,6 +25,8 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use common;
 use scanner;
+use handle_configs;
+use services;
 
 foreach (@ARGV) {
     /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit };
@@ -34,50 +36,178 @@ foreach (@ARGV) {
 }
 
 $in = 'interactive'->vnew('su', 'default');
-$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+if (!files_exist('/usr/bin/scanimage',
+		 '/usr/bin/xsane',
+		 if_(files_exist("/usr/bin/gimp"),
+		     "/usr/lib/gimp/*/plug-ins/xsane"))) {
+    $in->do_pkgs->install('sane-backends', 'xsane', 
+			  if_($in->do_pkgs->is_installed('gimp'),
+			      'xsane-gimp'));
+}
 if ($::Manual) { manual(); quit() }
-my $wait = $in->wait_message(N("Test ports"), N("Detecting devices ..."));
-@f = scanner::detect();
+my $wait = $in->wait_message(N("Scannerdrake"),
+			     N("Searching for configured scanners ..."));
+@c = scanner::configured();
+$wait = $in->wait_message(N("Scannerdrake"),
+			     N("Searching for new scanners ..."));
+@f = scanner::detect(@c);
 $wait = undef;
-(@f) ? auto() : manual();
+my $changed = 0;
+(@f) and $changed = auto();
+if ($changed) {
+    my $wait =
+	$in->wait_message(N("Scannerdrake"),
+			  N("Re-generating list of configured scanners ..."));
+    @c = scanner::configured();
+}
+mainwindow(@c);
 quit();
 
 sub removeverticalbar {
     my ($s) = @_;
     $s =~ s/\|/ /g;
+    $s =~ /^\s*(\S+)\s+/;
+    my $make = $1;
+    my $searchmake = handle_configs::searchstr($make);
+    $s =~ s/($searchmake)\s*$searchmake/$1/;
     return $s; 
 }
 
 sub auto {
     #use Data::Dumper;
     #print Dumper (@f);
+    my $changed = 0;
     foreach (@f) {
 	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
 	    my $name = $_->{val}{DESCRIPTION};
-	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
+	    $name =~ s/\s$//; # some HP entries have a trailing space, i will correct usbtable asap
 	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
-		$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
+		$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
 		next;
 	    }
-	    if ($in->ask_yesorno('scannerdrake',N("%s found on %s, configure it automatically?",removeverticalbar($name),$_->{port}),1)) {
-		tryConfScanner($name, $_->{port}) or manual();
+	    if ($in->ask_yesorno('Scannerdrake',N("%s found on %s, configure it automatically?",removeverticalbar($name),$_->{port}),1)) {
+		$changed ||= (tryConfScanner($name, $_->{port}) or 
+			      manual());
 	    } else {
-		manual();
+		$changed ||= manual();
 	    }
 	} else {
-	    $in->ask_yesorno('scannerdrake',N("%s is not in the scanner database, configure it manually?", removeverticalbar($_->{val}{DESCRIPTION})),1) and manual();
+	    $in->ask_yesorno('Scannerdrake',N("%s is not in the scanner database, configure it manually?", removeverticalbar($_->{val}{DESCRIPTION})),1) and manual();
 	}
     }
+    return changed;
 }
 
 sub manual {
-    my $s = $in->ask_from_treelist('scannerdrake', N("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '') or return;
-    return 1 if $s eq ' None';
+    my $s = $in->ask_from_treelist('Scannerdrake', N("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '') or return 0;
+    return 0 if $s eq ' None';
     if ($scanner::scannerDB->{$s}{flags}{unsupported}) {
-	$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($s)));
-	return 1;
+	$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($s)));
+	return 0;
     }
     return tryConfScanner($s);
+}
+
+sub mainwindow {
+    my @configured = @_;
+    # main loop
+    my $maindone;
+    while (!$maindone) {
+	# Generate list of configured scanners
+	my $msg = do {
+	    if (@configured) {
+		my @scannerlist = 
+		    map {
+			my $entry = $_->{val}{DESCRIPTION};
+			if_($entry, "  -  $entry\n");
+		    } @configured;
+		if (@scannerlist) {
+		    my $main_msg = 
+			@scannerlist > 1 ?
+			N_("The following scanners\n\n%s\nare available on your system.\n") :
+			N_("The following scanner\n\n%s\nis available on your system.\n");
+		    sprintf($main_msg, join('', @scannerlist));
+		} else {
+		    N("There are no scanners found which are available on your system.\n");
+		}
+	    } else {
+		N("There are no scanners found which are available on your system.\n");
+	    }
+	};
+	my $buttonclicked;
+	#- Show dialog
+	if ($in->ask_from_
+	    (
+	     { 
+		 title => N("Scannerdrake"),
+		 messages => $msg,
+		 ok => "",
+		 cancel => "",
+	     },
+	     [
+	      { val => N("Search for new scanners"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "autoadd";
+		    1;
+		} },
+	      { val => N("Add a scanner manually"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "manualadd";
+		    1;
+		} },
+	      { val => N("Scanner sharing"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "sharing";
+		    1;
+		} },
+	      { val => N("Quit"),
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "quit";
+		    1;
+		} },
+	      ]
+	     )
+	    ) {
+	    my $changed = 0;
+	    if ($buttonclicked eq "autoadd") {
+		# Do scanner auto-detection
+		my $wait =
+		    $in->wait_message(N("Scannerdrake"),
+				      N("Searching for configured scanners ..."));
+		@configured = scanner::configured();
+		$wait = 
+		    $in->wait_message(N("Scannerdrake"),
+				      N("Searching for new scanners ..."));
+		my @f = scanner::detect(@configured);
+		$wait = undef;
+		if (@f) { 
+		    $changed = auto();
+		}
+	    } elsif ($buttonclicked eq "manualadd") {
+		# Show dialogs to manually add a scanner
+		$changed = manual();
+	    } elsif ($buttonclicked eq "sharing") {
+		# Show dialog to set up scanner sharing
+		$changed = sharewindow(@configured);
+	    } elsif ($buttonclicked eq "quit") {
+		# We have clicked "Quit"
+		$maindone = 1;
+	    }
+	    if ($changed) {
+		my $wait =
+		    $in->wait_message(N("Scannerdrake"),
+				      N("Re-generating list of configured scanners ..."));
+		@configured = scanner::configured();
+	    }
+	} else {
+	    # Cancel clicked
+	    $maindone = 1;
+	}
+    }
 }
 
 sub dynamic {
@@ -87,12 +217,12 @@ sub dynamic {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
 	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
-		$in->ask_warn('scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
+		$in->ask_warn('Scannerdrake', N("The %s is not supported by this version of Mandrake Linux.", removeverticalbar($name)));
 		next;
 	    }
 	    scanner::confScanner($name, $_->{port});
 	} else {
-	    $in->ask_warn('scannerdrake', N("The %s is not known by this version of scannerdrake.", removeverticalbar($name)));
+	    $in->ask_warn('Scannerdrake', N("The %s is not known by this version of Scannerdrake.", removeverticalbar($name)));
 	}
     }
 }
@@ -101,13 +231,13 @@ sub tryConfScanner {
     # take care if interactive output is needed (unsupported, parallel..)
     my ($model, $port) = @_;
     if ($scanner::scannerDB->{$model}{flags}{unsupported}) {
-	$in->ask_warn('scannerdrake', N("The %s is unsupported", 
+	$in->ask_warn('Scannerdrake', N("The %s is unsupported", 
 					removeverticalbar($model)));
 	return 0;
     }
-    if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) {
+    if (($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) || (!$port)){
 	$port = '/dev/usb/scanner0';
-	$in->ask_from('scannerdrake',
+	$in->ask_from('Scannerdrake',
 		      N("Scannerdrake was not able to detect your %s.\nPlease select the device where your scanner is attached", removeverticalbar($model)),
 		      [
 		       { label => N("choose device"), 
@@ -137,10 +267,10 @@ sub tryConfScanner {
 				  '/dev/pt_drv'], 
 			 not_edit => 0, sort => 1 },
 		       ],
-		      ) or manual();
+		      ) or return 0;
     }
-    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj)/) {
-     	$in->ask_warn('scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", removeverticalbar($model)));
+    if ($scanner::scannerDB->{$model}{server} =~ /(printerdrake|hpoj)/i) {
+     	$in->ask_warn('Scannerdrake', N("The %s must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", removeverticalbar($model)));
      	return 0;
     }
     scanner::confScanner($model,$port);
@@ -151,4 +281,451 @@ sub tryConfScanner {
 
 sub quit {
     $::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
+}
+
+sub makeexportmenues {
+    my @exports = @_;
+    my %menuexports = map {
+	($_ eq '+' ? N("All remote machines") : $_) => $_;
+    } map {
+	# Remove comments and blank lines
+	($_ =~ /^\s*($|\#)/ ? () : chomp_($_));
+    } @exports;
+    my %menuexports_inv = reverse %menuexports;
+    return (\%menuexports, \%menuexports_inv);
+}
+
+sub makeimportmenues {
+    my @imports = @_;
+    my %menuimports = map {
+	($_ eq 'localhost' ? N("This machine") : $_) => $_;
+    } map {
+	# Remove comments and blank lines
+	($_ =~ /^\s*($|\#)/ ? () : chomp_($_));
+    } @imports;
+    my %menuimports_inv = reverse %menuimports;
+    return (\%menuimports, \%menuimports_inv);
+}
+
+sub sharewindow {
+    my @configured = @_;
+    # Read list of hosts to where to export the local scanners
+    my @exports = cat_("/etc/sane.d/saned.conf");
+    my ($menuexports, $menuexports_inv) =
+	makeexportmenues(@exports);
+    # Read list of hosts from where to import scanners
+    my @imports = cat_("/etc/sane.d/net.conf");
+    my ($menuimports, $menuimports_inv) =
+	makeimportmenues(@imports);
+    # Is saned running?
+    my $sanedrunning = services::starts_on_boot("saned");
+    my $oldsanedrunning = $sanedrunning;
+    # Is the "net" SANE backend active
+    my $netbackendactive = grep(/^\s*net\s*$/,
+				cat_("/etc/sane.d/dll.conf"));
+    my $oldnetbackendactive = $netbackendactive;
+    # Set this to 1 to tell the caller that the list of locally available
+    # scanners has changed (Here if the SANE client configuration has
+    # changed)
+    my $changed = 0;
+    my $importschanged = 0;
+    # main loop
+    my $maindone;
+    while (!$maindone) {
+	my $buttonclicked;
+	#- Show dialog
+	if ($in->ask_from_
+	    (
+	     { 
+		 title => N("Scannerdrake"),
+		 messages => N("Here you can choose whether the scanners connected to this machine should be accessable by remote machines and by which remote machines.") .
+                     N("You can also decide here whether scanners on remote machines should be made available on this machine."),
+	     },
+	     [
+	      { text => N("The scanners on this machine are available to other computers"), type => 'bool',
+		val => \$sanedrunning },
+	      { val => N("Scanner sharing to hosts: ") .
+		    (keys %{$menuexports} > 0 ?
+		     (keys %{$menuexports} > 2 ?
+		      join(", ", (keys %{$menuexports})[0,1]) . " ..." :
+		      join(", ", keys %{$menuexports})) :
+		     N("No remote machines")), 
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "exports";
+		    1;
+		},
+		disabled => sub {
+		    !$sanedrunning;
+		} },
+	      { text => N("Use scanners on remote computers"),
+		type => 'bool',
+		val => \$netbackendactive },
+	      { val => N("Use the scanners on hosts: ") .
+		    (keys %{$menuimports} > 0 ?
+		     (keys %{$menuimports} > 2 ?
+		      join(", ", (keys %{$menuimports})[0,1]) . " ..." :
+		      join(", ", keys %{$menuimports})) :
+		     N("No remote machines")), 
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "imports";
+		    1;
+		},
+		disabled => sub {
+		    !$netbackendactive;
+		} },
+	      ]
+	     )
+	    ) {
+	    if ($buttonclicked eq "exports") {
+		# Show dialog to add hosts to share scanners to
+		my $subdone = 0;
+		my $choice;
+		while (!$subdone) {
+		    my @list = keys %{$menuexports};
+		    # Entry should be edited when double-clicked
+		    $buttonclicked = "edit";
+		    $in->ask_from_
+			(
+			 { title => N("Sharing of local scanners"),
+			   messages => N("These are the machines on which the locally connected scanner(s) should be available:"),
+			   ok => "",
+			   cancel => "",
+		         },
+			 # List the hosts
+			 [ { val => \$choice, format => \&translate,
+			     sort => 0, separator => "####",
+			     tree_expanded => 1,
+			     quit_if_double_click => 1,
+			     allow_empty_list => 1,
+			     list => \@list },
+			   { val => N("Add host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "add";
+				 1; 
+			     } },
+			   { val => N("Edit selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "edit";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Remove selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "remove";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Done"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "";
+				 $subdone = 1;
+				 1; 
+			     } },
+			   ]
+			 );
+		    if ($buttonclicked eq "add" ||
+			$buttonclicked eq "edit") {
+			my ($hostchoice, $ip);
+			if ($buttonclicked eq "add") {
+			    # Use first entry as default for a new entry
+			    $hostchoice = 
+				N("Name/IP address of host:");
+			} else {
+			    if ($menuexports->{$choice} eq '+') {
+				# Entry is "All hosts"
+				$hostchoice = $choice;
+			    } else {
+				# Entry is a name/an IP address
+				$hostchoice = 
+				    N("Name/IP address of host:");
+				$ip = $choice;
+			    }
+			}
+			my @menu = (N("All remote machines"),
+			            N("Name/IP address of host:"));
+			# Show the dialog
+			my $address;
+			my $oldaddress = 
+			    ($buttonclicked eq "edit" ?
+			     $menuexports->{$choice} : "");
+			if ($in->ask_from_
+			    (
+			     { title => N("Sharing of local scanners"),
+			       messages => N("Choose the host on which the local scanners should be made available:"),
+			       callbacks => {
+				   complete => sub {
+				       if ($hostchoice eq $menu[0]) {
+					   $address = "+";
+				       } elsif ($hostchoice eq $menu[1]) {
+					   $address = $ip;
+				       }
+				       # Do not allow an empty address
+				       if ($address !~ /\S/) {
+					   $in->ask_warn(N("Scannerdrake"), 
+							 N("You must enter a host name or an IP address.\n"));
+					   return (1,0);
+				       }
+				       # Strip off leading and trailing
+				       # spaces
+				       $address =~ s/^\s*(.*?)\s*$/$1/;
+				       # Check whether item is duplicate
+				       if (($address ne $oldaddress) &&
+					   (member("$address\n",
+						   @exports))) {
+					   $in->ask_warn(N("Scannerdrake"), 
+							 N("This host is already in the list, it cannot be added again.\n"));
+					   return (1,1);
+				       }
+				       return 0;
+				   },
+			       },
+			   },
+			     # List the host types
+			     [ { val => \$hostchoice, format => \&translate,
+				 type => 'list',
+				 sort => 0,
+				 list => \@menu },
+			       { val => \$ip, 
+				 disabled => sub {
+				     $hostchoice ne 
+					 N("Name/IP address of host:");
+			         }},
+			       ],
+			     )) {
+			    # OK was clicked, insert new item into the list
+			    if ($buttonclicked eq "add") {
+				handle_configs::set_directive(\@exports,
+							      $address);
+			    } else {
+				handle_configs::replace_directive(\@exports,
+								  $oldaddress,
+								  $address);
+			    }
+			    # Refresh list of hosts
+			    ($menuexports, $menuexports_inv) =
+				makeexportmenues(@exports);
+			    # Position the list cursor on the new/modified
+			    # item
+			    $choice = $menuexports_inv->{$address};
+			}
+		    } elsif ($buttonclicked eq "remove") {
+			my $address = $menuexports->{$choice};
+			handle_configs::remove_directive(\@exports,
+							 $address);
+			# Refresh list of hosts
+			($menuexports, $menuexports_inv) =
+			    makeexportmenues(@exports);
+		    }
+		}
+	    } elsif ($buttonclicked eq "imports") {
+		# Show dialog to add hosts on which the scanners should be
+		# used
+		my $subdone = 0;
+		my $choice;
+		while (!$subdone) {
+		    my @list = keys %{$menuimports};
+		    # Entry should be edited when double-clicked
+		    $buttonclicked = "edit";
+		    $in->ask_from_
+			(
+			 { title => N("Usage of remote scanners"),
+			   messages => N("These are the machines from which the scanners should be used:"),
+			   ok => "",
+			   cancel => "",
+		         },
+			 # List the hosts
+			 [ { val => \$choice, format => \&translate,
+			     sort => 0, separator => "####",
+			     tree_expanded => 1,
+			     quit_if_double_click => 1,
+			     allow_empty_list => 1,
+			     list => \@list },
+			   { val => N("Add host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "add";
+				 1; 
+			     } },
+			   { val => N("Edit selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "edit";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Remove selected host"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "remove";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#list < 0);
+			     } },
+			   { val => N("Done"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "";
+				 $subdone = 1;
+				 1; 
+			     } },
+			   ]
+			 );
+		    if ($buttonclicked eq "add" ||
+			$buttonclicked eq "edit") {
+			my ($hostchoice, $ip);
+			if ($buttonclicked eq "add") {
+			    # Use first entry as default for a new entry
+			    $hostchoice = 
+				N("Name/IP address of host:");
+			} else {
+			    if ($menuimports->{$choice} eq 'localhost') {
+				# Entry is "This machine"
+				$hostchoice = $choice;
+			    } else {
+				# Entry is a name/an IP address
+				$hostchoice = 
+				    N("Name/IP address of host:");
+				$ip = $choice;
+			    }
+			}
+			my @menu = (N("This machine"),
+			            N("Name/IP address of host:"));
+			# Show the dialog
+			my $address;
+			my $oldaddress = 
+			    ($buttonclicked eq "edit" ?
+			     $menuimports->{$choice} : "");
+			if ($in->ask_from_
+			    (
+			     { title => N("Sharing of local scanners"),
+			       messages => N("Choose the host on which the local scanners should be made available:"),
+			       callbacks => {
+				   complete => sub {
+				       if ($hostchoice eq $menu[0]) {
+					   $address = 'localhost';
+				       } elsif ($hostchoice eq $menu[1]) {
+					   $address = $ip;
+				       }
+				       # Do not allow an empty address
+				       if ($address !~ /\S/) {
+					   $in->ask_warn(N("Scannerdrake"), 
+							 N("You must enter a host name or an IP address.\n"));
+					   return (1,0);
+				       }
+				       # Strip off leading and trailing
+				       # spaces
+				       $address =~ s/^\s*(.*?)\s*$/$1/;
+				       # Check whether item is duplicate
+				       if (($address ne $oldaddress) &&
+					   (member("$address\n",
+						   @imports))) {
+					   $in->ask_warn(N("Scannerdrake"), 
+							 N("This host is already in the list, it cannot be added again.\n"));
+					   return (1,1);
+				       }
+				       return 0;
+				   },
+			       },
+			   },
+			     # List the host types
+			     [ { val => \$hostchoice, format => \&translate,
+				 type => 'list',
+				 sort => 0,
+				 list => \@menu },
+			       { val => \$ip, 
+				 disabled => sub {
+				     $hostchoice ne 
+					 N("Name/IP address of host:");
+			         }},
+			       ],
+			     )) {
+			    # OK was clicked, insert new item into the list
+			    if ($buttonclicked eq "add") {
+				handle_configs::set_directive(\@imports,
+							      $address);
+			    } else {
+				handle_configs::replace_directive(\@imports,
+								  $oldaddress,
+								  $address);
+			    }
+			    $importschanged = 1;
+			    # Refresh list of hosts
+			    ($menuimports, $menuimports_inv) =
+				makeimportmenues(@imports);
+			    # Position the list cursor on the new/modified
+			    # item
+			    $choice = $menuimports_inv->{$address};
+			}
+		    } elsif ($buttonclicked eq "remove") {
+			my $address = $menuimports->{$choice};
+			handle_configs::remove_directive(\@imports,
+							 $address);
+			# Refresh list of hosts
+			($menuimports, $menuimports_inv) =
+			    makeimportmenues(@imports);
+			$importschanged = 1;
+		    }
+		}
+	    } else {
+		# We have clicked "OK"
+		$maindone = 1;
+		if ($importschanged) {
+		    $changed = 1;
+		}
+		# Write /etc/sane.d/saned.conf
+		output("/etc/sane.d/saned.conf", @exports);
+		# Write /etc/sane.d/net.conf
+		output("/etc/sane.d/net.conf", @imports);
+		# Turn on/off saned
+		if ($sanedrunning != $oldsanedrunning) {
+		    if ($sanedrunning) {
+			# Make sure saned and xinetd is installed and 
+			# running
+			if (!files_exist('/usr/sbin/xinetd',
+					 '/usr/sbin/saned')) {
+			    $in->do_pkgs->install('xinetd', 'saned');
+			}
+			# Start saned and make sure that it gets started on
+			# every boot
+			services::start_service_on_boot("saned");
+			services::start_service_on_boot("xinetd");
+			services::restart("xinetd");
+		    } else {
+			# Stop saned and make sure that it does not get
+			# started when booting
+			services::do_not_start_service_on_boot("saned");
+			services::restart("xinetd");
+		    }
+		}
+		# Turn on/off "net" SANE backend
+		if ($netbackendactive != $oldnetbackendactive) {
+		    my @dllconf = cat_("/etc/sane.d/dll.conf");
+		    if ($netbackendactive) {
+			handle_configs::set_directive(\@dllconf, "net");
+		    } else {
+			handle_configs::comment_directive(\@dllconf, "net");
+		    }
+		    output("/etc/sane.d/dll.conf", @dllconf);
+		    $changed = 1;
+		}
+	    }
+	} else {
+	    # Cancel clicked
+	    $maindone = 1;
+	}
+    }
+    return $changed;
 }
