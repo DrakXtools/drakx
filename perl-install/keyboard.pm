@@ -236,7 +236,7 @@ arch() eq "ppc" ? (
  "uk" => [ __("UK keyboard"),    "uk",           "gb" ],
  "us" => [ __("US keyboard"),    "us",           "us" ],
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
- "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn-tcvn", "vn" ], 
+ "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn-tcvn", "vn(toggle)" ], 
  "yu" => [ __("Yugoslavian (latin)"), "yu", "hr" ],
 )),
 );
