@@ -114,6 +114,7 @@ sub construct_dir_tree {
 
 sub min_size($) { &resize_fat::any::min_size }
 sub max_size($) { &resize_fat::any::max_size }
+sub used_size($) { &resize_fat::any::used_size }
 
 #- resize
 #- - size is in sectors
@@ -124,7 +125,6 @@ sub resize {
 
     my ($min, $max) = (min_size($fs), max_size($fs));
 
-
     $size += $min if $size =~ /^\+/;
 
     $size >= $min or die "Minimum filesystem size is $min sectors";
@@ -134,24 +134,30 @@ sub resize {
 
     my $new_data_size = $size * $SECTORSIZE - $fs->{cluster_offset};
     my $new_nb_clusters = divide($new_data_size, $fs->{cluster_size});
+    my $used_size = used_size($fs);
 
-    log::l("resize_fat: Allocating new clusters");
-    resize_fat::fat::allocate_remap($fs, $new_nb_clusters);
+    log::l("resize_fat: Break point for moving files is ". ($used_size * $SECTORSIZE >> 20) ." Mb ($used_size sectors)");
+    if ($size < $used_size) {
+	log::l("resize_fat: Allocating new clusters");
+	resize_fat::fat::allocate_remap($fs, $new_nb_clusters);
 
-    log::l("resize_fat: Copying files");
-    copy_clusters($fs, $new_nb_clusters);
+	log::l("resize_fat: Copying files");
+	copy_clusters($fs, $new_nb_clusters);
 
-    log::l("resize_fat: Copying directories");
-    construct_dir_tree($fs);
+	log::l("resize_fat: Copying directories");
+	construct_dir_tree($fs);
 
-    log::l("Writing new FAT...");
-    resize_fat::fat::update($fs);
-    resize_fat::fat::write($fs);
+	log::l("Writing new FAT...");
+	resize_fat::fat::update($fs);
+	resize_fat::fat::write($fs);
+    } else {
+	log::l("resize_fat: Nothing need to be moved");
+    }
 
     $fs->{nb_sectors} = $size;
     $fs->{nb_clusters} = $new_nb_clusters;
     $fs->{clusters}{count}->{free} =
-	$fs->{nb_clusters} - $fs->{clusters}{count}->{used} - $fs->{clusters}->{count}->{bad} - 2;
+      $fs->{nb_clusters} - $fs->{clusters}{count}->{used} - $fs->{clusters}->{count}->{bad} - 2;
 
     $fs->{system_id} = 'was here!';
     $fs->{small_nb_sectors} = 0;

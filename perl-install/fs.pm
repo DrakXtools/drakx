@@ -280,7 +280,7 @@ sub write_fstab($;$$) {
 	  mkdir "$prefix/$mntpoint", 0755 or log::l("failed to mkdir $prefix/$mntpoint: $!");
 	  eval { devices::make("$prefix/dev/$device") };
 
-	  [ "/dev/$device", $mntpoint, "vfat", "user,exec,conv=auto", 0, 0 ];
+	  [ "/dev/$device", $mntpoint, "vfat", "user,exec,conv=binary", 0, 0 ];
       } grep { isFat($_) &&
 		 ! exists $new{"/dev/$_->{device}"} } @$fstab;
 

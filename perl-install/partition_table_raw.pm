@@ -48,12 +48,20 @@ sub adjustStart($$) {
 sub adjustEnd($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
-    my $end2 = round_down($end, cylinder_size($hd));
-    unless ($part->{start} < $end2) {
-	$end2 = round_up($end, cylinder_size($hd));
-    }
+    my $end2 = round_up($end, cylinder_size($hd));
+    $end2 = $hd->{geom}{cylinders} * cylinder_size($hd) if $end2 > $hd->{geom}{cylinders} * cylinder_size($hd);
     $part->{size} = $end2 - $part->{start};
 }
+#- previous version of adjustEnd, should check for numbers about partition start/end.
+#sub adjustEnd($$) {
+#    my ($hd, $part) = @_;
+#    my $end = $part->{start} + $part->{size};
+#    my $end2 = round_down($end, cylinder_size($hd));
+#    unless ($part->{start} < $end2) {
+#	$end2 = round_up($end, cylinder_size($hd));
+#    }
+#    $part->{size} = $end2 - $part->{start};
+#}
 
 sub get_geometry($) {
     my ($dev) = @_;

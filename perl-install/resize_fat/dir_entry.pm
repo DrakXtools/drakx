@@ -5,6 +5,10 @@ use strict;
 
 
 my $DELETED_FLAG      = 0xe5;
+
+my $READ_ONLY_ATTR    = 0x01;
+my $HIDDEN_ATTR       = 0x02;
+my $SYSTEM_ATTR       = 0x04;
 my $VOLUME_LABEL_ATTR = 0x08;
 my $VFAT_ATTR         = 0x0f;
 my $DIRECTORY_ATTR    = 0x10;
@@ -19,6 +23,11 @@ sub set_cluster($$) {
     my ($entry, $val) = @_;
     $entry->{first_cluster} = $val & (1 << 16) - 1;
     $entry->{first_cluster_high} = $val >> 16 if $resize_fat::isFAT32;
+}
+
+sub is_unmoveable($) {
+    my ($entry) = @_;
+    $entry->{attributes} & $HIDDEN_ATTR || $entry->{attributes} & $SYSTEM_ATTR;
 }
 
 sub is_directory($) {
@@ -50,8 +59,9 @@ sub is_special_entry($) {
 
 
 #- return true if entry has been modified
+#- curr_dir_name is added to contains current directory name, "" for root.
 sub remap {
-    my ($entry) = @_;
+    my ($curr_dir_name, $entry) = @_;
 
     is_special_entry($entry) and return;
 

@@ -46,6 +46,10 @@ sub allocate_remap {
 
     resize_fat::c_rewritten::allocate_fat_remap($fs->{fat_size});
 
+    #- patch to reset contents of memory allocated by allocate_fat_remap
+    #- divide by 4 because fat_size is in bytes.
+    foreach (0..$fs->{fat_size}/4 - 1) { resize_fat::c_rewritten::set_fat_remap($_, 0) }
+
     $fs->{last_free_cluster} = 2;
     for ($cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
 	if ($cluster < $cut_point) {

@@ -124,7 +124,7 @@ checkFat(cluster, type, name)
   for (; cluster < bad_cluster_value; cluster = next(cluster)) {
     if (cluster == 0) croak("Bad FAT: unterminated chain for %s\n", name);
 
-    if (fat_flag_map[cluster]) croak("Bad FAT: cluster $cluster is cross-linked for %s\n", name);
+    if (fat_flag_map[cluster]) croak("Bad FAT: cluster %d is cross-linked for %s\n", cluster, name);
     fat_flag_map[cluster] = type;
     nb++;
   }
