@@ -451,7 +451,7 @@ from_utf8(s)
   RETVAL = s;
   if (cd != (iconv_t) (-1)) {
       int s_len = strlen(RETVAL);
-      char *buf = alloca(2 * s_len);
+      char *buf = alloca(s_len + 10); /* 10 for safety, it should not be needed, utf8 is *always* bigger than a special encoding */
       {
 	  char *ptr = buf;
 	  int ptr_len = s_len;
