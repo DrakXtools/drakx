@@ -131,7 +131,7 @@ sub test_connected {
 sub check_link_beat() {
     bg_command->new(sub {
                         require Net::Ping;
-                        print Net::Ping->new("icmp")->ping("mandrakesoft.com") ? 1 : 0;
+                        print Net::Ping->new($> ? "tcp" : "icmp")->ping("mandrakesoft.com") ? 1 : 0;
                     });
 }
 
