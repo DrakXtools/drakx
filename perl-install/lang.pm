@@ -299,7 +299,7 @@ sub set {
 sub pack_langs { 
     my ($l) = @_; 
     member('all', @$l) ? 'all' :
-      join ':', uniq(map { $languages{$_}[2] } @$l);
+      join ':', uniq(map { $languages{$_}[3] } @$l);
 }
 
 sub unpack_langs {
@@ -307,6 +307,15 @@ sub unpack_langs {
     [ 
      $langs eq 'all' ?
      map { $_->[2] } values %languages :
+     split(':', $langs)
+    ];
+}
+
+sub unpack_lang_codes {
+    my ($langs) = @_;
+    [ 
+     $langs eq 'all' ?
+     map { substr($_->[2], 0, 2) } values %languages :
      split(':', $langs)
     ];
 }
