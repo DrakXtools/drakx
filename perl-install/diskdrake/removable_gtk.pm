@@ -3,6 +3,7 @@ package diskdrake::removable_gtk; # $Id$
 use diagnostics;
 use strict;
 
+use common;
 use my_gtk qw(:helpers :wrappers :ask);
 
 
