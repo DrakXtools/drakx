@@ -235,7 +235,7 @@ ifdown eth0
 
     my $m = _("Congratulations, the network and internet configuration is finished.
 
-The configuration will now be applied to your system.\n") . if_($::isStandalone,
+The configuration will now be applied to your system.\n") . if_($::isStandalone && $in->isa('interactive_gtk'),
 _("After that is done, we recommend you to restart your X
 environnement to avoid hostname changing problem."));
     if ($::isWizard) {
@@ -432,7 +432,6 @@ sub set_profile {
     my $f = "$prefix/etc/sysconfig/network-scripts/draknet_conf";
     -e ($f . "." . $profile) or return;
     $netcnx->{PROFILE}=$profile;
-    print "changing to $profile\n";
     commands::cp("-f", $f . "." . $profile, $f);
     foreach ( ["$prefix$connect_file", "up"],
 	      ["$prefix$disconnect_file", "down"],
@@ -453,7 +452,6 @@ sub del_profile {
     my ($netcnx, $profile) = @_;
     $profile or return;
     $profile eq "default" and return;
-    print "deleting $profile\n";
     commands::rm("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
     commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv,speedtouch}." . $profile));
 }
@@ -462,7 +460,6 @@ sub add_profile {
     my ($netcnx, $profile) = @_;
     $profile or return;
     $profile eq "default" and return;
-    print "creating $profile\n";
     my $cmd1 = "$prefix/etc/sysconfig/network-scripts/draknet_conf." . ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
     my $cmd2 = "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile;
     commands::cp("-f", $cmd1, $cmd2);
