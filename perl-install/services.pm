@@ -10,7 +10,8 @@ use common qw(:common :functional :system :file);
 use commands;
 use run_program;
 
-my %services = (
+sub description {
+    my %services = (
 anacron => __("Anacron a periodic command scheduler."),
 apmd => __("apmd is used for monitoring batery status and logging it via syslog.
 It can also be used for shutting down the machine when the battery is low."),
@@ -67,33 +68,43 @@ syslog => __("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
 usb => __("This startup script try to load your modules for your usb mouse."),
 xfs => __("Starts and stops the X Font Server at boot time and shutdown."),
-);
+    );
+    my ($name, $prefix) = @_;
+    my $s = $services{$name};
+    if ($s) {
+	$s = translate($s);
+    } else {
+	($s = cat_("$prefix/etc/rc.d/init.d/$_")) =~ s/\\\s*\n#\s*//mg;
+	($s) = $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm;
+	$s =~ s/^#\s*//m;
+    }
+    $s =~ s/\n/ /gm; $s =~ s/\s+$//;
+    $s;
+}
 
-sub drakxservices {
-    my ($in, $prefix) = @_;
+sub services {
+    my ($prefix) = @_;
     my $cmd = $prefix ? "chroot $prefix" : "";
-    my @services = map { [/(\S+)/, /:on/ ] } sort `LANGUAGE=C $cmd chkconfig --list`;
-    my @l      = map { $_->[0] } @services;
-    my @before = map { $_->[1] } @services;
-    my @descr  = map {
-	my $s = $services{$_};
-	if ($s) {
-	    $s = translate($s);
-	} else {
-	    ($s = cat_("$prefix/etc/rc.d/init.d/$_")) =~ s/\\\s*\n#\s*//mg;
-	    ($s) = $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm;
-	    $s =~ s/^#\s*//m;
-	}
-	$s =~ s/\n/ /gm; $s =~ s/\s+$//;
-	$s;
-    } @l;
+    my @l = map { [ /(\S+)/, /:on/ ] } sort `LANGUAGE=C $cmd chkconfig --list`;
+    [ map { $_->[0] } @l ], [ map { $_->[1] } @l ];
+}
 
+sub ask {
+    my ($in, $prefix) = @_;
+    my ($l, $before) = services($prefix);
     my $after = $in->ask_many_from_list_with_help("drakxservices",
 						  _("Choose which services should be automatically started at boot time"),
-						  \@l, \@descr, \@before) or return;
+						  $l, [ map { description($_, $prefix) } @$l ], $before) or return;
+    [ grep_index { $after->[$::i] } @$l ];
+}
 
+sub doit {
+    my ($in, $on_services, $prefix) = @_;
+    my ($l, $before) = services($prefix);
+    
     mapn { 
-	my ($name, $before, $after) = @_;
+	my ($name, $before) = @_;
+	my $after = member($name, @$on_services);
 	if ($before != $after) {
 	    my $script = "/etc/rc.d/init.d/$name";
 	    run_program::rooted($prefix, "chkconfig", $after ? "--add" : "--del", $name);
@@ -104,5 +115,8 @@ sub drakxservices {
 		run_program::rooted($prefix, $script, "stop");
 	    }
 	}
-    } \@l, \@before, $after;
+    } $l, $before;
 }
+
+
+1;

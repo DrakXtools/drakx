@@ -24,7 +24,6 @@ use raid;
 use mouse;
 use modules;
 use lang;
-use services;
 use loopback;
 use keyboard;
 use any;
@@ -463,7 +462,17 @@ sub configureNetwork($) {
 	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
 	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
 	#-	  }
-	$o->configureNetworkNet($o->{netc}, $last ||= {}, @l) if $last->{BOOTPROTO} !~ /^(dhcp|bootp)$/;
+	if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+	    $o->ask_from_entries_ref(_("Configuring network"),
+_("Please enter your host name if you know it.
+Some DHCP servers require the hostname to work.
+Your host name should be a fully-qualified host name,
+such as ``mybox.mylab.myco.com''."),
+			     [_("Host name:")], [ \$o->{netc}{HOSTNAME} ]);
+	} else {
+	    $o->configureNetworkNet($o->{netc}, $last ||= {}, @l);
+	}
+	$o->miscellaneousNetwork();
     }
     install_steps::configureNetwork($o);
 
@@ -520,8 +529,6 @@ You may also enter the IP address of the gateway if you have one"),
 			     [(map { \$netc->{$_} } qw(HOSTNAME dnsServer GATEWAY)),
 			      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
 			    );
-
-    $o->miscellaneousNetwork();
 }
 
 #------------------------------------------------------------------------------
@@ -633,7 +640,9 @@ sub timeConfig {
 #------------------------------------------------------------------------------
 sub servicesConfig { 
     my ($o) = @_;
-    services::drakxservices($o, $o->{prefix});
+    require services;
+    $o->{services} = services::ask($o, $o->{prefix});
+    install_steps::servicesConfig($o);
 }
 
 #------------------------------------------------------------------------------
@@ -1053,8 +1062,6 @@ consult the Errata available from http://www.linux-mandrake.com/.
 
 Information on configuring your system is available in the post
 install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install && !$::oo->{oem};
-
-    $::global_wait = $o->wait_message('', _("Shutting down"));
 }
 
 

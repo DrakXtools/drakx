@@ -13,6 +13,8 @@ local $_ = join '', @ARGV;
 
 $::isStandalone = 1;
 
-services::drakxservices(my $in = vnew interactive('su'));
+my $in = vnew interactive('su');
+my $l = services::ask($in);
+services::doit($in, $l) if $l;
 
 $in->exit(0);

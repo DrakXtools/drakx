@@ -638,7 +638,11 @@ sub timeConfig {
 }
 
 #------------------------------------------------------------------------------
-sub servicesConfig {}
+sub servicesConfig {
+    my ($o) = @_;
+    require services;
+    services::doit($o, $o->{services}, $o->{prefix}) if $o->{services};
+}
 #------------------------------------------------------------------------------
 sub printerConfig {
     my($o) = @_;
