@@ -1,0 +1,158 @@
+#!/usr/bin/perl
+
+#use strict;
+use lib qw(/usr/lib/libDrakX);
+use common;
+use Digest::MD5;
+
+use Gtk2::TrayIcon;
+
+eval { require ugtk2; ugtk2->import(qw(:all)); require Gtk2::Pango; };
+if ($@) {
+    print "This program cannot be run in console mode.\n";
+    c::_exit(0);  #- skip ugtk2::END
+}                   
+  
+my ($eventbox, $img);
+my ($menu, $timeout);
+my $raisedwindow = 0;
+my $onstartupfile = "$ENV{HOME}/.net_applet";
+add_icon_path("/usr/share/libDrakX/pixmaps/");
+#don't launch it twice :)
+#my @pids = fuzzy_pidofs(qr/\bnet_applet\b/);
+#foreach (@pids) {
+#    print "pid = $_ \n"; 
+#}
+#@pids > 1 and die "net_applet already running\n";
+my $prog_name = "/usr/bin/net_applet";
+my $current_md5 = md5file($prog_name);
+
+my %appletstate = (
+             connected => {
+  		          colour => [ 'connected' ],
+			  changes => [ 'disconnected', 'error', 'busy' ],
+			  menu => [ 'confNetwork', 'refresh', 'help' ],
+			  tt => [ N("Network is up on interface ") ]
+			  },
+             disconnected => {
+			      colour => [ 'disconnected' ],
+			      changes => [ 'connected', 'error', 'busy' ],
+			      menu => [ 'confNetwork', 'refresh', 'help' ],
+			      tt => [ N("Network is down. Click on \"configure Network\"") ]
+                             }
+	    );
+
+my %actions = (
+               'confNetwork' => { name => N("Configure Network"), launch => sub { configNetwork() } },
+	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },
+               'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } }
+              );
+
+gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
+       gtkadd($eventbox = Gtk2::EventBox->new,
+              gtkpack($img = Gtk2::Image->new)
+             )
+      );
+$eventbox->signal_connect(button_press_event => sub {
+                              if (!$raisedwindow) {
+                                  if ($_[1]->button == 1) {
+                                      $raisedwindow = 1; netMonitor()
+                                  }
+                              }
+                              $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
+                          });
+my ($opt) = @ARGV;
+if ($opt eq '--force' || $opt eq '-f') { setAutoStart('TRUE') };
+
+shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
+
+checkNetwork();
+cronNetwork();
+
+$icon->show_all;
+Gtk2->main;
+
+ugtk2::exit(0);
+
+sub shouldStart() {
+    my %p = getVarsFromSh($onstartupfile);
+    my $ret = $p{AUTOSTART} eq 'FALSE' ? 0 : 1;
+    $ret
+}
+sub md5file {
+    my @md5;
+    foreach my $file (@_) {
+	open(FILE, $file) or do { print STDERR "Can't open '$file': $!"; push @md5, "" };
+	binmode(FILE);
+	push @md5, Digest::MD5->new->addfile(*FILE)->hexdigest;
+	close(FILE);
+    }
+    return wantarray() ? @md5 : $md5[0];
+}
+sub netMonitor {
+    system("/usr/sbin/net_monitor --testing");
+    checkNetwork()
+}
+sub checkNetwork {
+    my $gatewayconf = '/etc/sysconfig/network';
+    my %h = getVarsFromSh($gatewayconf);
+    my $new_md5 = md5file($prog_name);
+    #    print "NEW($newmd5) = OLD($oldmd5)\n"
+    if ($h{GATEWAYDEV}) {
+	my $addrgd = getIP($h{GATEWAYDEV});	
+	if ($addrgd) {
+	    go2State('connected', $h{GATEWAYDEV}) 
+	} else { go2State('disconnected', '') }
+    } else { die "No Gatewaydev defined" }
+    if ($new_md5 ne $current_md5) { exec("$prog_name") };
+}
+sub getIP {
+    my ($interface) = shift;
+    my @ip;
+    my $ifconfig = '/sbin/ifconfig';
+    my @lines = qx|$ifconfig $interface|;
+    foreach(@lines){
+        if(/inet adr:([\d.]+)/){
+	    push @ip, $1;
+	}
+    }
+    return wantarray() ? @ip : $ip[0];
+}
+sub cronNetwork {
+    $timeout = Glib::Timeout->add(60*1000, sub {
+                                      checkNetwork();
+                                      1;
+                                  });
+}
+sub go2State {
+    $menu && $menu->destroy;
+    $menu = setState(@_)
+}
+sub setState {
+    my ($state_type, $interface) = @_;
+    my $checkmi;
+    my $arr = $appletstate{$state_type}{menu};
+    my $tmp = gtkcreate_pixbuf($appletstate{$state_type}{colour}->[0]);
+    $img->set_from_pixbuf($tmp);
+    gtkset_tip(new Gtk2::Tooltips, $eventbox, formatAlaTeX($appletstate{$state_type}{tt}->[0] . $interface));
+    my $menu = Gtk2::Menu->new;
+    foreach (@$arr) {
+        my $l = $actions{$_}{name};
+        $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($actions{$_}{name})), activate => $actions{$_}{launch}));
+    }
+    $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
+    $menu->append(gtksignal_connect(gtkset_active($checkmi = Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()), toggled => sub { setAutoStart(uc(bool2text($checkmi->get_active))) }));
+    $checkmi->show;
+    $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label(N("Quit"))), activate => sub { mainQuit() }));
+    $menu
+}
+sub mainQuit() {
+     Gtk2->main_quit
+}
+sub setAutoStart {
+    my $state = shift;
+    output_p $onstartupfile,
+    qq(AUTOSTART=$state
+);
+} 
+

@@ -128,6 +128,7 @@ XFdrake: menu-driven program which walks you through setting up
 your X server; it autodetects both monitor and video card if
 possible
 
+net_applet: applet to check network connection
 
 %description newt
 See package %name
