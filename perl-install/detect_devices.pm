@@ -47,9 +47,10 @@ sub cdroms() {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
 	my $nb = 1 + max(-1, map { $_->{device} =~ /scd (\d+)/x } @l);
-	foreach (@l2) {
-	    log::l("IDEBurner: $_->{device}");
-	    $_->{device} = "scd" . $nb++;
+	foreach my $i (@l2) {	    
+	    log::l("IDEBurner: $i->{device}");
+	    my ($e) = grep { $_->{device} eq $i->{device} } @l;
+	    $e->{device} = "scd" . $nb++;
 	}
     }
     @l;
