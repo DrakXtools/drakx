@@ -15,27 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-#
-# first pass at an interactive tool to help setup/maintain the Mandrake 
-# Terminal Server implementation
-#
-#	Requires: etherboot (on x86), mkinitrd-net, terminal-server, dhcp-server
-#			clusternfs, tftp-server
-#
-#	Tasks:
-#		1) creation/management of boot images (kernel+initrd, etherboot enabled)
-#			mkinitrd-net is the command line interface for this
-#		2) create/modify /etc/dhcpd.conf for diskless clients
-#		3) create/modify /etc/exports for clusternfs export of "/"
-#		4) add/remove entries in /etc/shadow$$CLIENTS$$ to allow user access
-#		5) per client XF86Config-4, using /etc/XF86Config-4$$IP-ADDRESS$$
-#		6) other per client customizations (modules.conf, keyboard, mouse)
-#		7) enable/modify /etc/xinetd.d/tftp for etherboot
-#		8) create etherboot floppies for client machines
-#
-#	Thanks to the fine work of the folks involved in ltsp.org, and 
-#	Michael Brown <mbrown@fensystems.co.uk>
-#
 
 use lib qw(/usr/lib/libDrakX);
 
@@ -421,7 +400,7 @@ sub wizard_step {
 				if ($config_written == 1) {
 					wizard_step(\&make_nbis, 3);
 				} else {
-					$in->ask_warn('', N("Please save dhcpd config!"));
+					$in->ask_warn(N("Error"), N("Please save dhcpd config!"));
 					wizard_step(\&dhcpd_config, 2);
 				} 
 			}
@@ -464,7 +443,7 @@ sub client_type() {
 
 sub make_nbis() {
 	my $buff = N("Creating net boot images for all kernels");
-	$in->ask_warn('', N("This will take a few minutes."));
+	$in->ask_warn(N("Information"), N("This will take a few minutes."));
 	cursor_wait();
 	system("/usr/bin/mknbi-set");
 	cursor_norm();
@@ -763,7 +742,7 @@ sub make_nbi() {
 				gtkadd(new Gtk2::VBox(1,10),
 					gtksignal_connect(new Gtk2::Button(N("Build Whole Kernel -->")), clicked => sub { 
 						if ($kernel) {
-							$in->ask_warn('', N("This will take a few minutes."));
+							$in->ask_warn(N("Information"), N("This will take a few minutes."));
 							cursor_wait();
 							system("/usr/bin/mknbi-set -k /boot/$kernel");
 							$list_model->clear;
@@ -773,7 +752,7 @@ sub make_nbi() {
 							}
 							cursor_norm(); 
 						} else {
-							$in->ask_warn('', N("No kernel selected!")) if !($kernel); 
+							$in->ask_warn(N("Error"), N("No kernel selected!")) if !($kernel); 
 						}
 					}),
 					gtksignal_connect(new Gtk2::Button(N("Build Single NIC -->")), clicked => sub { 
@@ -785,11 +764,11 @@ sub make_nbi() {
     							$list_model->append_set($iter, $_);	
 							} 
 						} else {
-							$in->ask_warn('', N("No NIC selected!"));
+							$in->ask_warn(N("Error"), N("No NIC selected!"));
 						}
 					}),
 					gtksignal_connect(new Gtk2::Button(N("Build All Kernels -->")), clicked => sub {
-						$in->ask_warn('', N("This will take a few minutes."));
+						$in->ask_warn(N("Information"), N("This will take a few minutes."));
 						cursor_wait();
 						system("/usr/bin/mknbi-set");
 						$list_model->clear;
@@ -971,7 +950,7 @@ sub maintain_clients() {
 		unshift(@images, "");
 		$entry_nbi->set_popdown_strings(@images);
 	} else {
-		$in->ask_warn('', N("No net boot images created!"));		
+		$in->ask_warn(N("Error"), N("No net boot images created!"));		
 		make_nbi();
 		return 1;
 	}
@@ -1080,7 +1059,7 @@ sub maintain_clients() {
 		sub { invbool \$thin_clients;
 			$check_thin->set_sensitive($thin_clients);
 			client_set();
-			$in->ask_warn('', N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
+			$in->ask_warn(N("Warning"), N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
 		}
 	);
 	$button_edit->set_sensitive(0);
@@ -1356,12 +1335,12 @@ sub write_eb_image {
 			return if !($result);
 			$result = system("cat $rom_path/floppyload.bin $rom_path/start16.bin $rom_path/zimg/$nic > /dev/fd0") if $result;
 			if ($result) {
-				$in->ask_warn('', N("Couldn't access the floppy!"))
+				$in->ask_warn(N("Error"), N("Couldn't access the floppy!"))
 			} else {
-				$in->ask_warn('', N("Floppy can be removed now"))
+				$in->ask_warn(N("Information"), N("Floppy can be removed now"))
 			}
 		} else {
-			$in->ask_warn('', N("No floppy drive available!"));
+			$in->ask_warn(N("Error"), N("No floppy drive available!"));
 		}
 	} else {
 		mkdir_p("/tmp/eb");
@@ -1370,9 +1349,9 @@ sub write_eb_image {
 		system("mkisofs -b eb.img -o /tmp/$nic.iso /tmp/eb");
 		rm_rf("/tmp/eb");
 		if (-e "/tmp/$nic.iso") {
-			$in->ask_warn('', N("Etherboot ISO image is %s", "/tmp/$nic.iso"))
+			$in->ask_warn(N("Information"), N("Etherboot ISO image is %s", "/tmp/$nic.iso"))
 		} else { 
-			$in->ask_warn('', N("Something went wrong! - Is mkisofs installed?"))
+			$in->ask_warn(N("Error"), N("Something went wrong! - Is mkisofs installed?"))
 		}		
 	}
 }
@@ -1391,7 +1370,7 @@ sub enable_ts {
 			print("No /etc/dhcpd.conf built yet - use GUI to create!!\n");
 			return;
 		} else {
-			$in->ask_warn('', N("Need to create /etc/dhcpd.conf first!"));
+			$in->ask_warn(N("Error"), N("Need to create /etc/dhcpd.conf first!"));
 			#$central_widget->destroy;
 			dhcpd_config();
 			return;		
@@ -1710,7 +1689,7 @@ sub update_hosts_allow {
 	if ($mode eq "enable") {
 		my $has_all = `grep ALL /etc/hosts.allow`;
 		if ($has_all) {
-			$in->ask_warn('', N("/etc/hosts.allow and /etc/hosts.deny already configured - not changed"));
+			$in->ask_warn(N("Warning"), N("/etc/hosts.allow and /etc/hosts.deny already configured - not changed"));
 			return;
 		}
 		if (!$has_all) {
