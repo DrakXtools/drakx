@@ -190,12 +190,11 @@ sub UpdateAvailable() {
 	print("Running iwlist\n");
 	open(my $LIST, "$IWList scan 2>/dev/null |") or die("Can't run iwlist");
 	@{$AvailableList->{data}} = ();
-     my ($mode, $wep, $signal);
+     my ($mode, $wep, $signal, $essid);
      local $_;
 	while (<$LIST>) {
 		if (/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
 		elsif (/([^ ]+)([ \t]+)No scan results/) { $device = $1 }
-          my $essid;
 		if (/ESSID:"(\S*)"/) {
 			$essid = $1;
 			print("Found $essid.\n");
