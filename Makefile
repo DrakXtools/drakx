@@ -112,7 +112,6 @@ upload_only:
 	upload misc make_mdkinst_stage2 ;\
 	upload misc packdrake ;\
 	upload misc packdrake.pm ;\
-	upload misc rpmtools.pm ;\
 	upload misc auto ;\
 	upload '' live_update ;\
 	upload images MD5SUM ;\
