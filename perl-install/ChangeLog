@@ -1,3 +1,164 @@
+2005/01/18  Pixel  <pixel at mandrakesoft.com>
+
+	* install_any.pm: auto_install compatibility: CAT_SYSTEM used to be
+	selected by default
+
+2005/01/17  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/01/17  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: fix backward compatibility
+
+2005/01/17  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Bugzilla 13056 - custom cron configuration
+	Bugzilla 13056 - custom cron setup
+
+2005/01/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: require dmidecode in -backend subpackage
+
+2005/01/16  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/01/16  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/01/16  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo e jorge
+
+2005/01/16  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: if the window is not modal, the main
+	XFdrake window can block it :-(
+
+	* Xconfig/xfree.pm: don't be too picky on uppercase or lowercase sections
+
+	* mygtk2.pm: MagicWindow:
+	  - hide is done on the window if popped
+	  - show is done on both the window and the child
+	(to handle initial show on the window, and show after a hide on the
+	child)
+
+	* Xconfig/various.pm, install_steps.pm, install_any.pm: move setupFB() in
+	Xconfig, and do it when needed (including when standalone)
+
+	* bootloader.pm: fix syntax error
+	mapdrive should not bother same_entries()
+
+	* Xconfig/main.pm: when reading an existing X config file, ensure it is
+	not too bad, otherwise propose to start from scratch
+	(bugzilla #8548)
+	move setupFB() in Xconfig, and do it when needed (including when
+	standalone)
+	for Driver fbdev, rework to allow configuring vga= in bootloader and
+	telling to reboot instead of restarting X server (now i simply need to
+	configure bootloader in Xconfig::main::write() when need_reboot)
+
+	* install_steps_interactive.pm: for Driver fbdev, rework to allow
+	configuring vga= in bootloader and telling to reboot instead of
+	restarting X server (now i simply need to configure bootloader in
+	Xconfig::main::write() when need_reboot)
+
+	* standalone/XFdrake: make perl_checker happy
+	for Driver fbdev, rework to allow configuring vga= in bootloader and
+	telling to reboot instead of restarting X server (now i simply need to
+	configure bootloader in Xconfig::main::write() when need_reboot)
+
+	* Xconfig/card.pm: fix auto_install graphic card configuration (when one
+	specify the Driver)
+
+2005/01/15  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/01/15  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/gtk.pm: change packing for the widgets given
+	  - move set_main_window_size() from ugtk2 to mygtk2
+	  - call it in MagicWindow creation
+	allow passing gtk widgets to ->wait_message
+
+	* mdk-stage1/Makefile, mdk-stage1/config-stage1.h, mdk-stage1/stage1.c,
+	rescue/tree/etc/issue, rescue/Makefile, rescue/make_rescue_img:
+	factorize the distrib version
+
+	* bootloader.pm: in read_grub(), setting {table} cause write_grub to
+	create a {mapdrive} even when we didn't have one (bugzilla #12307)
+
+	* mygtk2.pm: 
+	  - move set_main_window_size() from ugtk2 to mygtk2
+	  - call it in MagicWindow creation
+	fix using gtkset with text => ... on a Button
+
+	* ugtk2.pm: 
+	  - move set_main_window_size() from ugtk2 to mygtk2
+	  - call it in MagicWindow creation
+
+	* fs/format.pm: gtk2 progress bar when formatting ext3
+
+2005/01/14  huftis
+
+	* share/po/nn.po: More translation
+
+2005/01/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fr.po: updated po file
+
+	* share/po/sv.po: updated Swedish file
+
+	* share/po/eo.po: updated Esperanto file
+
+2005/01/14  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: this warning is stupid during install
+
+	* tools/hd_grub.cgi: fix typo
+
+	* detect_devices.pm: since dmidecode can fail to properly detect a floppy
+	drive, don't use it during install (where we don't care if it's a bit
+	slow)
+
+	* mygtk2.pm: create wrapper object mygtk2::MagicWindow which handles the
+	{rwindow} vs {window} duality
+
+	* interactive/gtk.pm: 
+	  - fix displaying wait_message
+	  - restore previous display of the wait_message during install (is that
+	better ?)
+
+	* ugtk2.pm: MagicWindow is now really magic, {rwindow} and {window} can be
+	the same thing :)
+
+	* authentication.pm: fix switching back nsswitch.conf to local
+	authentication (bugzilla #13024)
+
+2005/01/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: fix crash on opening help windows
+
+2005/01/13  huftis
+
+	* share/po/nn.po: Updated translation.
+
+2005/01/13  Pixel  <pixel at mandrakesoft.com>
+
+	* network/shorewall.pm: fix bugzilla #12996
+
+2005/01/12  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/gtk.pm: have separate SizeGroup's for advanced and non
+	advanced entries
+
+2005/01/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-0.11mdk
+
 2005/01/12  Pixel  <pixel at mandrakesoft.com>
 
 	* ugtk2.pm: return the child when MagicWindow is using the $::WizardWindow
@@ -43503,7 +43664,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.998 2005/01/04 20:48:58 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.999 2005/01/12 17:36:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
