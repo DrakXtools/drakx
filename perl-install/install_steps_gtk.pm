@@ -142,7 +142,7 @@ press `F1' when booting on CDROM, then enter `text'.")) if $first_time && availa
 #------------------------------------------------------------------------------
 sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
-    $::live and $o->SUPER::selectInstallClass1(@_);
+    $::live and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
 
     my $w = my_gtk->new('');
     my ($radio, $focused);
@@ -238,7 +238,7 @@ a percentage of %d%% will install as many packages as possible.", $percentage, $
     }); &$changed();
     $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });
     $spin->grab_focus();
-    $w->main and $val;
+    $w->main and $val + 1; #- add a single byte (hack?) to make selection of 0 bytes ok.
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;

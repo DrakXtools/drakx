@@ -89,7 +89,6 @@ sub create_big_help {
 #------------------------------------------------------------------------------
 sub create_help_window {
     my ($o) = @_;
-    $::live and return;
 
     my $w;
     if ($w = $o->{help_window}) {
@@ -115,7 +114,6 @@ sub create_help_window {
 #------------------------------------------------------------------------------
 sub create_steps_window {
     my ($o) = @_;
-    $::live and return;
 
     my $PIX_H = my $PIX_W = 21;
 
@@ -127,7 +125,7 @@ sub create_steps_window {
     $w->{rwindow}->set_usize($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_events('button_press_mask');
-    $w->show;
+    #$w->show;
 
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
@@ -182,7 +180,6 @@ sub create_steps_window {
 #------------------------------------------------------------------------------
 sub create_logo_window {
     my ($o) = @_;
-    $::live and return;
 
     gtkdestroy($o->{logo_window});
     my $w = bless {}, 'my_gtk';

@@ -252,7 +252,7 @@ sub selectInstallClass {
         $o->selectPackagesToUpgrade if $o->{isUpgrade};
     }
     if ($o->{isUpgrade}) {
-	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ } 
+	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ }
 	                        grep { !/doPartitionDisks/ } @{$o->{orderedSteps}};
 	my $s; foreach (@{$o->{orderedSteps}}) {
 	    $s->{next} = $_ if $s;
@@ -545,11 +545,6 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     $o->{root}   = $::testing ? "/tmp/root-perl-install" : "/";
     if ($::live) {
-	@{$o->{orderedSteps}} = grep { /choosePackages/ || /installPackages/ } @{$o->{orderedSteps}};
-	my $s; foreach (@{$o->{orderedSteps}}) {
-	    $s->{next} = $_ if $s;
-	    $s = $o->{steps}{$_};
-	}
 	$o->{isUpgrade} = 1;
 	#$::beginner = 0; #- use custom by default.
     }

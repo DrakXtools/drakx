@@ -54,7 +54,7 @@ sub check_mounted($) {
     open H, "/proc/swaps";
     foreach (<F>, <G>, <H>) {
 	foreach my $p (@$fstab) {
-	    /$p->{device}\s+([^\s]*)\s+/ and $p->{realMntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1;
+	    /$p->{device}\s+([^\s]*)\s+/ and $p->{mntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1, print STDERR "ok for $p->{mntpoint} with mounted=$p->{isMounted}\n";
 	}
     }
 }
@@ -335,9 +335,11 @@ sub write($$$$) {
     my ($prefix, $fstab, $manualFstab, $useSupermount) = @_;
     $fstab = [ @{$fstab||[]}, @{$manualFstab||[]} ];
 
-    log::l("resetting /etc/mtab");
-    local *F;
-    open F, "> $prefix/etc/mtab" or die "error resetting $prefix/etc/mtab";
+    unless ($::live) {
+	log::l("resetting /etc/mtab");
+	local *F;
+	open F, "> $prefix/etc/mtab" or die "error resetting $prefix/etc/mtab";
+    }
 
     my ($floppy) = detect_devices::floppies();
 

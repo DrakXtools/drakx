@@ -1,3 +1,18 @@
+2000-09-25  François Pons  <fpons@mandrakesoft.com>
+
+	* fs.pm: updated for live upgrade.
+	* install2.pm: dropped unuseful steps filtering.
+	* install_gtk.pm: removed window restrictions of live upgrade.
+	* install_steps.pm: fixed initrd symlink following in case of
+	upgrade.
+	* install_steps_gtk.pm, install_steps_interactive.pm: keep always
+	upgrade on live upgrade.
+	* modules.pm: may fixed pcmcia lost driver (typically on network).
+	* pkgs.pm: fixed (uggly?) usage of floating perl data on perl
+	script :-)
+	* printerdrake.pm: make sure an expert can choose among available
+	devices.
+
 2000-09-25  dam's  <damien@mandrakesoft.com>
 
 	* network.pm (write_resolv_conf): write '# ppp temp entry adsl' in

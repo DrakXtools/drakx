@@ -602,7 +602,7 @@ sub get_that_type {
 
     grep {
 	my $l = $drivers{$_->{driver}};
-	$l && $l->{type} =~ /$type/ && detect_devices::check($_);
+	($_->{type} =~ /$type/ || $l && $l->{type} =~ /$type/) && detect_devices::check($_);
     } detect_devices::probeall('');
 }
 

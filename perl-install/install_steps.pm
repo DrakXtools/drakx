@@ -682,13 +682,17 @@ sub readBootloaderConfigBeforeInstall {
     #- since kernel or kernel-smp may not be upgraded, it should be checked
     #- if there is a need to update existing lilo.conf entries by following
     #- symlinks before kernel or other packages get installed.
+    #- update everything that could be a filename (for following symlink).
     foreach my $e (@{$o->{bootloader}{entries}}) {
 	while (my $v = readlink "$o->{prefix}/$e->{kernel_or_dev}") {
-	    $v = "/boot/$v" if $v !~ m|^/|;
-	    log::l("testing for presence of file $o->{prefix}$v");
-	    -e "$o->{prefix}$v" or last;
+	    $v = "/boot/$v" if $v !~ m|^/|; -e "$o->{prefix}$v" or last;
 	    log::l("renaming /boot/$e->{kernel_or_dev} entry by $v");
 	    $e->{kernel_or_dev} = $v;
+	}
+	while (my $v = readlink "$o->{prefix}/$e->{initrd}") {
+	    $v = "/boot/$v" if $v !~ m|^/|; -e "$o->{prefix}$v" or last;
+	    log::l("renaming /boot/$e->{initrd} entry by $v");
+	    $e->{initrd} = $v;
 	}
     }
 }

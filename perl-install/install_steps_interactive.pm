@@ -101,7 +101,7 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def));
 
-    $::live or $o->ask_from_list_(_("Install/Rescue"), _("Is this an install or a rescue?"), $l2, $def2);
+    $::live ? 'Rescue' : $o->ask_from_list_(_("Install/Rescue"), _("Is this an install or a rescue?"), $l2, $def2);
 }
 
 #------------------------------------------------------------------------------
@@ -134,6 +134,7 @@ are you ready to answer that kind of questions?"),
 					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
 					      [ __("Install"), __("Rescue") ], $o->{isUpgrade} ? "Rescue" : "Install") eq "Rescue";
 
+    print STDERR "isUpgrade=$o->{isUpgrade}\n";
     if ($::corporate || $::beginner) {
 	delete $o->{installClass};
     } else {
