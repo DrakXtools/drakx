@@ -371,7 +371,7 @@ sub psUpdateHdlistsDeps {
 sub psUsingHdlists {
     my ($prefix, $method) = @_;
     my $listf = install_any::getFile('Mandrake/base/hdlists') or die "no hdlists found";
-    my %packages = ( names => {}, depslist => [], mediums => {});
+    my %packages = ( names => {}, count => 0, depslist => [], mediums => {});
 
     #- parse hdlists file.
     my $medium = 1;
@@ -408,7 +408,7 @@ sub psUsingHdlist {
 					      rpmsdir    => $rpmsdir, #- where is RPMS directory.
 					      descr      => $descr,
 					      fakemedium => $fakemedium,
-					      min        => scalar keys %{$packages->{names}},
+					      min        => $packages->{count},
 					      max        => -1, #- will be updated after reading current hdlist.
 					      selected   => $selected, #- default value is only CD1, it is really the minimal.
 					    };
@@ -431,6 +431,7 @@ sub psUsingHdlist {
 	my $packer = new packdrake($newf, quiet => 1);
 	foreach (@{$packer->{files}}) {
 	    $packer->{data}{$_}[0] eq 'f' or next;
+	    ++$packages->{count}; #- take care of this one, so that desplist will be clean with index of package.
 	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $m;
 	    my $specific_arch = packageArch($pkg);
 	    if (!$specific_arch || compat_arch($specific_arch)) {
@@ -456,7 +457,7 @@ sub psUsingHdlist {
     };
 
     #- update maximal index.
-    $m->{max} = scalar(keys %{$packages->{names}}) - 1;
+    $m->{max} = $packages->{count} - 1;
     $m->{max} >= $m->{min} or die "nothing found while parsing $newf";
     log::l("read " . ($m->{max} - $m->{min} + 1) . " headers in $hdlist");
     1;
@@ -524,24 +525,26 @@ sub getDeps {
 	#- in case of only one medium taken into account during install, there should be
 	#- silent warning for package which are unknown at this point.
 	$pkg or
-	  log::l("ignoring $name-$version-$release.$arch in depslist is not in hdlist"), next;
-	$version eq packageVersion($pkg) or
-	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch version in hdlist"), next;
-	$release eq packageRelease($pkg) or
-	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch release in hdlist"), next;
-	$arch eq packageArch($pkg) or
-	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch arch in hdlist"), next;
+	  log::l("ignoring $name-$version-$release.$arch in depslist is not in hdlist");
+	$pkg && $version eq packageVersion($pkg) or
+	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch version in hdlist"), $pkg = undef;
+	$pkg && $release eq packageRelease($pkg) or
+	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch release in hdlist"), $pkg = undef;
+	$pkg && $arch eq packageArch($pkg) or
+	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch arch in hdlist"), $pkg = undef;
 
-	$epoch && $epoch > 0 and $pkg->[$EPOCH] = $epoch; #- only 5% of the distribution use epoch (serial).
-	$pkg->[$SIZE_DEPS] = $sizeDeps;
+	if ($pkg) {
+	    $epoch && $epoch > 0 and $pkg->[$EPOCH] = $epoch; #- only 5% of the distribution use epoch (serial).
+	    $pkg->[$SIZE_DEPS] = $sizeDeps;
 
-	#- check position of package in depslist according to precomputed
-	#- limit by hdlist, very strict :-)
-	#- above warning have chance to raise an exception here, but may help
-	#- for debugging.
-	my $i = scalar @{$packages->{depslist}};
-	$i >= $pkg->[$MEDIUM]{min} && $i <= $pkg->[$MEDIUM]{max} or
-	  log::l("inconsistency in position for $name-$version-$release.$arch in depslist and hdlist"), $mismatch = 1;
+	    #- check position of package in depslist according to precomputed
+	    #- limit by hdlist, very strict :-)
+	    #- above warning have chance to raise an exception here, but may help
+	    #- for debugging.
+	    my $i = scalar @{$packages->{depslist}};
+	    $i >= $pkg->[$MEDIUM]{min} && $i <= $pkg->[$MEDIUM]{max} or
+	      log::l("inconsistency in position for $name-$version-$release.$arch in depslist and hdlist"), $mismatch = 1;
+	}
 
 	#- package are already sorted in depslist to enable small transaction and multiple medium.
 	push @{$packages->{depslist}}, $pkg;
