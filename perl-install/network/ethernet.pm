@@ -54,7 +54,6 @@ qq(
 
 sub configure_lan {
     my ($netcnx, $netc, $intf, $first_time) = @_;
-#    $::isInstall and $in->set_help('configureNetworkIP');
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
@@ -122,9 +121,9 @@ I cannot set up this connection type.")) and return;
 #-  $all_cards : a list of a list ( [eth1, module1], ... , [ethn, modulen]). Pass the ethx as $interface in further call.
 #-  $device : only returned in case $interface was given it's $interface, but filtered by /eth[0-9+]/ : string : /eth[0-9+]/
 sub conf_network_card_backend {
-    my ($netc, $intf, $type, $interface, $ipadr, $o_netadr) = @_;
+    my ($netc, $intf, $o_type, $o_interface, $o_ipadr, $o_netadr) = @_;
     #-type =static or dhcp
-    if (!$interface) {
+    if (!$o_interface) {
 	my @all_cards = detect_devices::getNet();
 
 	my @devs = detect_devices::pcmcia_probe();
@@ -144,14 +143,14 @@ sub conf_network_card_backend {
 		[$interface, $saved_driver]);
 	} @all_cards;
     }
-    $interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
+    $o_interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
     
-    $netc->{NET_DEVICE} = $interface; #- one consider that there is only ONE Internet connection device..
+    $netc->{NET_DEVICE} = $o_interface; #- one consider that there is only ONE Internet connection device..
     
-    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $o_netadr, 'yes');
+    @{$intf->{$o_interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($o_interface, $o_type, '255.255.255.0', $o_netadr, 'yes');
     
-    $intf->{$interface}{IPADDR} = $ipadr if $ipadr;
-    $interface;
+    $intf->{$o_interface}{IPADDR} = $o_ipadr if $o_ipadr;
+    $o_interface;
 }
 
 sub go_ethernet {
