@@ -150,7 +150,6 @@ my $use_expect = 0;
 my $xfer_keys = 0;
 my $user_keys = 1;
 my $user_home = $ENV{HOME};
-my $backup_key = $user_home . "/.ssh/identity-drakbackup";
 my $nonroot_user = 0;
 my $media_problem = 0;
 my $vol_name = 'Drakbackup';
@@ -174,8 +173,11 @@ if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
 	$nonroot_user = 1;
 	$backup_sys = 0;
 	@user_list = $ENV{USER};
+} else {
+	$user_home = "/root";
 }
 $cfg_file = $cfg_dir . "drakbackup.conf";
+my $backup_key = $user_home . "/.ssh/identity-drakbackup";
 
 foreach (@ARGV) {
 
@@ -3351,7 +3353,6 @@ sub restore_step_sys() {
     gtkpack($advanced_box,
 		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
 			1, new Gtk2::VBox(0,10),
-			0, new Gtk2::CheckButton(N("Backup the system files before:")),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, N("please choose the date to restore"),
 				0, $combo_restore_step_sys,
