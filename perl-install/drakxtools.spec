@@ -376,6 +376,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - interactive layer: fix some nasty bug
 - localekdrake:
   o preserve utf-8 setting (#12308)
+  o properly set UTF-8 for HAL mount options if needed (#13833)
   o enable to enable/disable utf-8
   o install scim-input-pad when switching IM for japanese
   o ensure there's never a "previous" button on first step (even when
