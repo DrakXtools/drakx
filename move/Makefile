@@ -29,7 +29,7 @@ default: install
 get_dest_livetree:
 	@echo -n $(DEST_LIVETREE)
 
-iso: build install live_tree_boot only_iso
+iso: build install live_tree_boot big_clps only_iso
 
 
 build: stage1 xwait runlevel_set
@@ -106,6 +106,8 @@ clps:
 	$(MAKE) $(DEST)/live_tree_totem.clp
 	-$(MAKE) $(DEST)/live_tree_nvidia.clp
 	for i in en fr de it es; do $(MAKE) $(DEST)/live_tree_i18n_$$i.clp $(DEST)/live_tree_always_i18n_$$i.clp; done
+
+big_clps:
 	$(MAKE) $(DEST)/live_tree.clp
 
 
