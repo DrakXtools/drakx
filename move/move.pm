@@ -17,6 +17,7 @@ my ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
 my $virtual_key_part;
 my $key_mountopts = 'umask=077,uid=501,gid=501,shortname=mixed';
+my $rootwindow;  #- holds background image
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
@@ -142,13 +143,14 @@ sub init {
     }
 
 drakx_stuff:
-    $o->{steps}{$_} = { reachable => 1, text => $_ } foreach qw(autoSelectLanguage handleI18NClp verifyKey configMove startMove);
+    $o->{steps}{$_} = { reachable => 1, text => $_ }
+      foreach qw(displayBackground autoSelectLanguage handleI18NClp verifyKey configMove startMove);
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ $using_existing_host_config ?
-                           qw(handleI18NClp verifyKey startMove)
+                           qw(displayBackground handleI18NClp verifyKey startMove)
                          : $using_existing_user_config ?
-                           qw(autoSelectLanguage handleI18NClp verifyKey selectMouse selectKeyboard configMove startMove)
-                         : qw(selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
+                           qw(displayBackground autoSelectLanguage handleI18NClp verifyKey selectMouse selectKeyboard configMove startMove)
+                         : qw(displayBackground selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
@@ -442,17 +444,20 @@ sub install_TrueFS_in_home {
     }
 }
 
+sub install2::displayBackground {
+    require ugtk2;
+    $rootwindow = ugtk2::gtkroot();
+    my $pixbuf = eval { Gtk2::Gdk::Pixbuf->new_from_file("/image/move/BOOT-$::rootwidth-MOVE.jpg") };
+    $pixbuf ||= Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
+    my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
+    $rootwindow->draw_pixbuf(Gtk2::Gdk::GC->new($rootwindow), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
+    ugtk2::gtkflush();
+}
+
 sub install2::startMove {
     my $o = $::o;
 
     $::WizardWindow->destroy if $::WizardWindow;
-    require ugtk2;
-    my $root = ugtk2::gtkroot();
-    my $pixbuf = eval { Gtk2::Gdk::Pixbuf->new_from_file("/image/move/BOOT-$::rootwidth-MOVE.jpg") };
-    $pixbuf ||= Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
-    my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
-    $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
-    ugtk2::gtkflush();
 
     #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
@@ -484,6 +489,7 @@ sub install2::startMove {
 
     if (fork()) {
 	sleep 1;
+        undef $rootwindow;
         log::l("DrakX waves bye-bye");
 
 	my (undef, undef, $uid, $gid, undef, undef, undef, $home, $shell) = getpwnam($username);
