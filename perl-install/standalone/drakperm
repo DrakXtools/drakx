@@ -50,7 +50,7 @@ $combo_perm->entry->set_editable(0);
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
 sub add_callback {
-    row_setting_dialog($treeModel->append_set(undef, [ 0 => 'new', 1 => '-', 2 => '-', 3 => '-' ]));
+    row_setting_dialog();
     $modified++;
 }
 
@@ -165,8 +165,11 @@ sub display_perm {
     open F, $file;
     local $_;
     while (<F>) {
-	next unless m/^([^#]\S+)\s+([^.\s]+)(\.(\S+))?\s+(\d+)/;
-	$treeModel->append_set(undef, [ 0 => $1, 1 => $2, 2 => $4, 3 => $5 ]);
+        if (m/^([^#]\S+)\s+([^.\s]+)\.(\S+)?\s+(\d+)/) {
+            $treeModel->append_set(undef, [ 0 => $1, 1 => $2, 2 => $3, 3 => $4 ]);
+        } elsif (m/^([^#]\S+)\s+current?\s+(\d+)/) {
+            $treeModel->append_set(undef, [ 0 => $1, 1 => 'current', 2 => '', 3 => $2 ]);
+        }
     }
     close F;
     $up_down_box->set_sensitive($editable);
@@ -179,7 +182,7 @@ sub save_perm {
     $modified or return 0;
     my $val;
     local *F;
-    open F, '>'.$local_path.'perm.local' or die("Impssible to process \"", $local_path, "perm.local\"");
+    open F, '>' . $perm{editable} or die("Impssible to process \"", $perm{editable}, "\"");
     $treeModel->foreach(sub {
                              my ($model, $_path, $iter) = @_;
                              my $module = $model->get($iter, 0);
@@ -288,22 +291,26 @@ sub row_setting_dialog {
 								       });
 			     });
     $ok->signal_connect(clicked => sub {
-			    $treeModel->set($iter, [ 0 => $file->get_text ]);
-			    if ($usr_check->get_active) {
-				$treeModel->set($iter, [ 1 => 'current' ]);
-				$treeModel->set($iter, [ 2 => '' ]);
-			     } else {
-				 $treeModel->set($iter, [ 1 => $users->entry->get_text ]);
-				 $treeModel->set($iter, [ 2 => $groups->entry->get_text ]);
-			     }
-			     $user = ($perms{user}{read}->get_active ? 4 : 0)+($perms{user}{write}->get_active ? 2 : 0)+($perms{user}{execute}->get_active ? 1 : 0);
-			     $group = ($perms{group}{read}->get_active ? 4 : 0)+($perms{group}{write}->get_active ? 2 : 0)+($perms{group}{execute}->get_active ? 1 : 0);
-			     $other = ($perms{other}{read}->get_active ? 4 : 0)+($perms{other}{write}->get_active ? 2 : 0)+($perms{other}{execute}->get_active ? 1 : 0);
-			     my $s = ($sticky->get_active ? 1 : 0) + ($suid->get_active ? 4 : 0) + ($gid->get_active ? 2 : 0);
-			     $treeModel->set($iter, [ 3 => ($s || '') . $user . $group . $other ]);
-			     $dlg->destroy;
-			     $modified++;
-			 });
+                            unless ($iter) {
+                                $iter = Gtk2::TreeIter->new;
+                                $treeModel->append($iter, undef);
+                            }
+                            $treeModel->set($iter, [ 0 => $file->get_text ]);
+                            if ($usr_check->get_active) {
+                                $treeModel->set($iter, [ 1 => 'current' ]);
+                                $treeModel->set($iter, [ 2 => '' ]);
+                            } else {
+                                $treeModel->set($iter, [ 1 => $users->entry->get_text ]);
+                                $treeModel->set($iter, [ 2 => $groups->entry->get_text ]);
+                            }
+                            $user = ($perms{user}{read}->get_active ? 4 : 0)+($perms{user}{write}->get_active ? 2 : 0)+($perms{user}{execute}->get_active ? 1 : 0);
+                            $group = ($perms{group}{read}->get_active ? 4 : 0)+($perms{group}{write}->get_active ? 2 : 0)+($perms{group}{execute}->get_active ? 1 : 0);
+                            $other = ($perms{other}{read}->get_active ? 4 : 0)+($perms{other}{write}->get_active ? 2 : 0)+($perms{other}{execute}->get_active ? 1 : 0);
+                            my $s = ($sticky->get_active ? 1 : 0) + ($suid->get_active ? 4 : 0) + ($gid->get_active ? 2 : 0);
+                            $treeModel->set($iter, [ 3 => ($s || '') . $user . $group . $other ]);
+                            $dlg->destroy;
+                            $modified++;
+                        });
     $usr_check->signal_connect(clicked => sub {
 				    my $bool = $usr_check->get_active; 
 				    $groups->set_sensitive(!$bool);
