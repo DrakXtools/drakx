@@ -6,7 +6,7 @@ use modules;
 use detect_devices;
 use mouse;
 use network::tools;
-use MDK::Common::Globals "network", qw($in $prefix);
+use MDK::Common::Globals "network", qw($in);
 use Data::Dumper;
 
 sub configure {
@@ -18,7 +18,7 @@ sub configure {
 #  modem_step_1:
 #    $modem->{login} = ($modem->{auth} eq 'PAP' ||$modem->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
 #    $netcnx->{$netcnx->{type}}->{connection} = ($netcnx->{$netcnx->{type}}->{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
-#    $modem->{device} = readlink "$prefix/dev/modem";
+#    $modem->{device} = readlink "$::prefix/dev/modem";
     foreach (cat_("/usr/share/config/kppprc")) {
 	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split(',', $1);
     }
@@ -47,7 +47,7 @@ killall pppd
 
 #-----modem conf
 sub ppp_configure {
-    my ($in, $modem, $prefix) = @_;
+    my ($in, $modem) = @_;
     $modem or return;
 
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
@@ -95,7 +95,7 @@ RETRYTIMEOUT="60"
 BOOTPROTO="none"
 PEERDNS="$toreplace{peerdns}"
 END
-    output("$prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 
+    output("$::prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 
 	   $various,
 	   map { qq(DNS$_=$toreplace{"dns$_"}\n) } grep { $toreplace{"dns$_"} } 1..2);
 
@@ -128,12 +128,12 @@ END
 'TIMEOUT' '5'
 '~--' ''
 END
-    my $chat_file = "$prefix/etc/sysconfig/network-scripts/chat-ppp0";
+    my $chat_file = "$::prefix/etc/sysconfig/network-scripts/chat-ppp0";
     output_with_perm($chat_file, 0600, @chat);
 
     if ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') {
 	#- need to create a secrets file for the connection.
-	my $secrets = "$prefix/etc/ppp/" . lc($modem->{auth}) . "-secrets";
+	my $secrets = "$::prefix/etc/ppp/" . lc($modem->{auth}) . "-secrets";
 	my @l = cat_($secrets);
 	my $replaced = 0;
 	do { $replaced ||= 1
@@ -148,9 +148,9 @@ END
     }
 
     #- install kppprc file according to used configuration.
-    mkdir_p("$prefix/usr/share/config");
+    mkdir_p("$::prefix/usr/share/config");
 
-    output("$prefix/usr/share/config/kppprc", c::to_utf8(<<END));
+    output("$::prefix/usr/share/config/kppprc", c::to_utf8(<<END));
 # KDE Config File
 [Account0]
 ExDNSDisabled=0
@@ -214,7 +214,7 @@ sub ppp_choose {
     my ($netc, $modem, $mouse) = @_;
     $mouse ||= {};
 
-    $mouse->{device} ||= readlink "$prefix/dev/mouse";
+    $mouse->{device} ||= readlink "$::prefix/dev/mouse";
     $::isInstall and $in->set_help('selectSerialPort');
     $modem->{device} ||= $in->ask_from_listf('', N("Please choose which serial port your modem is connected to."),
 					     \&mouse::serial_port2text,
@@ -237,7 +237,7 @@ sub ppp_choose {
 { label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
     ]) or return;
     $netc->{DOMAINNAME2} = $modem->{domain};
-    ppp_configure($in, $modem, $prefix);
+    ppp_configure($in, $modem);
     $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
 }
