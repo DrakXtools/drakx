@@ -355,7 +355,7 @@ sub update_list() {
 }
 
 sub apply() {
-    network::sethostname($netc) if is_dynamic_ip($intf);
+    network::network::sethostname($netc) if is_dynamic_ip($intf);
 
     $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, $netc, $netcnx); #$light
@@ -365,7 +365,7 @@ sub apply() {
     $netcnx->{type} =~ /adsl/ and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, $a, $netcnx);
 
     $netcnx->{dhcp_client} and $netc->{dhcp_client} = $netcnx->{dhcp_client};
-    network::configureNetwork2($in, $prefix, $netc, $intf);
+    network::network::configureNetwork2($in, $prefix, $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     $netcnx->{type} !~ /adsl_p/ and system("$prefix/etc/rc.d/init.d/network restart");
 
