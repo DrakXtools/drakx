@@ -23,7 +23,7 @@
 
 #define DISTRIB_NAME "Linux-Mandrake"
 
-#define RAMDISK_COMPRESSION_RATIO 1.9
+#define RAMDISK_COMPRESSION_RATIO 1.95
 
 #define LIVE_LOCATION    "/Mandrake/mdkinst/"
 #define RAMDISK_LOCATION "/Mandrake/base/"
