@@ -201,14 +201,15 @@ int module_already_present(const char * name)
 {
 	FILE * f;
 	int answ = 0;
-	f = fopen("/proc/modules", "rb");
-	while (1) {
-		char buf[500];
-		if (!fgets(buf, sizeof(buf), f)) break;
-		if (!strncmp(name, buf, strlen(name)) && buf[strlen(name)] == ' ')
-			answ = 1;
-	}
-	fclose(f);
+	if ((f = fopen("/proc/modules", "rb"))) {
+                while (1) {
+                        char buf[500];
+                        if (!fgets(buf, sizeof(buf), f)) break;
+                        if (!strncmp(name, buf, strlen(name)) && buf[strlen(name)] == ' ')
+                                answ = 1;
+                }
+                fclose(f);
+        }
 	return answ;
 }
 
