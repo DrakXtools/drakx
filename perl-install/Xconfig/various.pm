@@ -53,11 +53,11 @@ sub various {
 }
 
 sub runlevel {
-    my ($runlevel) = @_;
+    my ($o_runlevel) = @_;
     my $f = "$::prefix/etc/inittab";
     -r $f or log::l("missing inittab!!!"), return;
-    if ($runlevel) {
-	substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } $f if !$::testing;
+    if ($o_runlevel) {
+	substInFile { s/^id:\d:initdefault:\s*$/id:$o_runlevel:initdefault:\n/ } $f if !$::testing;
     } else {
 	cat_($f) =~ /^id:(\d):initdefault:\s*$/m && $1;
     }
@@ -131,9 +131,8 @@ sub configure_FB_TVOUT {
 	require bootloader;
 	require fsedit;
 	require detect_devices;
-	my ($bootloader, $all_hds) =
-	  $::isInstall ? ($::o->{bootloader}, $::o->{all_hds}) : 
-	    (bootloader::read(), fsedit::get_hds());
+	my $all_hds = $::isInstall ? $::o->{all_hds} : fsedit::get_hds();
+	my $bootloader = $::isInstall ? $::o->{bootloader} : bootloader::read(fs::get::fstab($all_hds));
 	
 	if (my $tvout = bootloader::duplicate_kernel_entry($bootloader, 'TVout')) {
 	    $tvout->{append} .= " XFree=tvout";
