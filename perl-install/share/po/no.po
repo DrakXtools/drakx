@@ -1,4 +1,4 @@
-# translation of DrakX-no.po to 
+# translation of DrakX-no.po to
 # translation of DrakX-no.po to
 # translation of DrakX-no.po to Norsk Bokmål
 # KTranslator Generated File
@@ -12,13 +12,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-no\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-03-01 23:13-0500\n"
-"Last-Translator: \n"
-"Language-Team:  <C@li.org>\n"
+"PO-Revision-Date: 2003-03-05 22:11+0100\n"
+"Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
+"Language-Team: Norsk Bokmål <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.1\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -1329,7 +1329,7 @@ msgstr ""
 "valgene."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1349,32 +1349,26 @@ msgid ""
 "configure the driver."
 msgstr ""
 "DrakX vil nå oppdage alle IDE-enheter som er tilstede på ditt system. Det\n"
-"vil ogsåscanne etter en eller flere PCI SCSI-kort på systemet ditt. Hvis "
+"vil ogsåscanne etter en eller flere PCI SCSI-kort på systemet ditt. Hvis  "
 "ett\n"
-"SCSI-kort er tilstede,\n"
-" så vil DrakX automatisk installere den passende driveren.\n"
+"SCSI-kort er tilstede, så vil DrakX automatisk installere den passende "
+"driveren.\n"
 "\n"
-"På grunn av at maskinvareoppdagelse ikke alltid klarer å oppdage enkelte\n"
-"enheter, så vil DrakX spørre deg om du har ett PCI SCSI-kort tilstede. Velg "
-"\"Ja\"\n"
-"hvis du vet at du har ett SCSI-kort installert på din maskin. Velg \"Nei\" "
-"hvis du ikke har noe SCSI-maskinvare. Hvis du er usikker, kan du sjekke "
-"listen over\n"
-"maskinvare som er oppdaget på din maskin ved å velge \"Se "
-"maskinvareinformasjon\" og klikk \"Neste ->\". Utforsk maskinvarelisten og "
-"så velg \"Neste ->\"\n"
-"for å gå tilbake til SCSI-grensesnitt spørsmålet.\n"
+"På grunn av at maskinvareoppdagelse ikke er feilfritt, så kan det være at\n"
+"DrakX ikke klarer å oppdage dine harddisker. Hvis dette skjer, så må du\n"
+"spesifisere din maskinvare for hånd.\n"
 "\n"
-"Hvis du må spesifisere kontrolleren din manuelt, så vil DrakX spørre deg om\n"
-"å gjøre noen valg for det. Du burde tillate DrakX å teste maskinvaren for\n"
-"kort-spesifikke valg som maskinvaren trenger for å initialiseres. Dette\n"
-"pleier vanligvis å gå bra.\n"
+"Hvis du må spesifisere PCI SCSI-kontrolleren din manuelt, så vil DrakX\n"
+"spørre deg om å gjøre noen valg for det. Du burde tillate DrakX å teste\n"
+"maskinvaren for kort-spesifikke valg som trengs for å initialisere\n"
+"maskinvaren. Som regel så vil DrakX klare å gå igjennom dette steget uten\n"
+"problemer.\n"
 "\n"
-"Hvis DrakX ikke klarer å oppdage det riktige oppsettet som trengs, så må du\n"
-"manuelt sette det opp for driveren."
+"Hvis DrakX ikke er i stand til å oppdage de riktige parametrene som trengs\n"
+"for din maskinvare, så må du manuelt konfigurere driveren."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1401,28 +1395,35 @@ msgid ""
 "system you may change it by running PrinterDrake from the Mandrake Control\n"
 "Center and clicking the expert button."
 msgstr ""
-"Her velger vi printeren for din maskin. Andre operativsystemer tilbyr\n"
-"kanskje en, men Mandrake Linux tilbyr to. Hver av systemene er best\n"
-"for en spesiell type konfigurasjon.\n"
+"Nå er det på tide å velge printersystemet for din maskin. Andre\n"
+"operativsystemer tilbyr kanskje en, men Mandrake Linux tilbyr to.\n"
+"ver av systemene er best for en spesiell type konfigurasjon.\n"
 "\n"
 " * \"pdq\" -- som står for ``print, don't queue'', er valget hvis du har en\n"
 "direkte tilkobling til din printer og du vil ha muligheten til å flykte fra\n"
-"printerkræsj, og du ikke har nettverksprintere. Den vil håndtere veldig\n"
-"enkle nettverkstilfeller og er litt treg for nettverk. Velg \"pdq\" hvis "
-"dette\n"
-"er din første reise til GNU/Linux-land.\n"
+"printerkræsj, og du ikke har nettverksprintere. (\"pdq\" vil bare håndtere\n"
+"veldig enkle nettverkstilfeller og er nogenlunde treg for nettverk.) Det er\n"
+"anbefalt at du bruker \"pdq\" hvis dette er din første erfaring med GNU/"
+"Linux.\n"
 "\n"
 " * \"CUPS\" -- ``Common Unix Printing System'', er perfekt til å printe til\n"
-"din egne lokale printer, og også til printerene på andre siden av kloden.\n"
+"din egen lokale printer, og også til printerene på andre siden av kloden.\n"
 "Den er simpel og kan opptrå som både printer og klient for det "
 "forhistoriske\n"
-"\"lpd\"-utskriftssystemet. Den er kompatibel med de fleste eldre,\n"
-"populære utskriftssystemene. Den kan også gjøre mange triks, men\n"
-"standardoppsettet er nesten like enkelt som \"pdq\". Hvis du trenger å\n"
-"emulere en \"lpd\"-server, må du slå på \"cups-lpd\"-daemonen. Den har ett\n"
-"grafisk grensesnitt for utskrift eller skriveroppsett.\n"
+"\"lpd\"-utskriftssystemet, så den er kompatibel med de eldre "
+"operativsystemer\n"
+"som fortsatt trenger utskriftstjenester. Selv om den er ganske kraftig, så "
+"er\n"
+"basis-oppsettet nesten like enkelt som \"pdq\". Hvis du trenger åemulere en\n"
+"\"lpd\"-server, må du slå på \"cups-lpd\"-daemonen. \"CUPS\" inkluderer "
+"etgrafisk grensesnitt for utskrift eller oppsett av skriver og styring av "
+"skriver.\n"
 "\n"
-"Du kan gjøre egne valg selv etter installasjonen ved å kjøre PrinterDrake\n"
+"Hvis du gjør et valg nå, og så senere finne ut at du ikke liker ditt "
+"utskriftssystem,\n"
+"så kan du endre det ved å kjøre PrinterDrake fra Mandrake Control Center og\n"
+"klikke på ekspert-knappen.Du kan gjøre egne valg selv etter installasjonen "
+"ved å kjøre PrinterDrake\n"
 "fra Mandrake Control Center og klikke på expert-knappen."
 
 #: ../../help.pm:1
@@ -1693,7 +1694,7 @@ msgstr ""
 "og bevegelsene er riktig."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -1722,7 +1723,7 @@ msgid ""
 msgstr ""
 "Ditt valg av foretrukket språk vil påvirke språket til dokumentasjonen,\n"
 "installasjonsrutinen og systemet generelt. Velg først regionen du befinner\n"
-"deg i, og deretter språket du bruker. \n"
+"deg i, og deretter språket du bruker.\n"
 "\n"
 "Om du klikker på \"Avansert\" knappen får du mulighet til å velge andre\n"
 "språk som du ønsker å installere på din arbeidsstasjon. Du installerer da\n"
@@ -1731,8 +1732,18 @@ msgstr ""
 "ønsker å tilrettelegge for spanske brukere på maskinen, kan du velge\n"
 "Norsk som standardspråk, og Spansk under \"Avansert\". \n"
 "\n"
-"Legg merke til at du kan velge flere tilleggsspråk. Når du er ferdig med å\n"
-"velge språk, klikk \"Neste\" knappen for å fortsette.\n"
+"Legg merke til at du ikke er begrenset til et enkelt tilleggsspråk. Du\n"
+"kan velge flere, eller til og med all ved å sjekke av i \"Alle språk\"-"
+"boksen.\n"
+"Ved valg av språkstøtte så menes oversettelser, skrifttyper, "
+"stavekontroller,\n"
+"etc. for språket som vil bli installert.\n"
+"I tillegg så kan du tvinge systemet til å bruke unicode (UTF-8) ved å sjekke "
+"av\n"
+"for \"Bruk Unicode som standard\"-sjekkboksen. Uansett så bør du merke deg\n"
+"at dette er en eksperimentell finesse. Hvis du velger forskjellige som språk "
+"som\n"
+"krever forskjellig enkoding, så vil unicode-støtten bli installert uansett.\n"
 "\n"
 "For å bytte mellom de installerte språkene på systemet, kan du starte\n"
 "programmet \"/usr/sbin/localedrake\" som root for å bytte språket som\n"
@@ -2019,7 +2030,7 @@ msgstr ""
 "nødsituasjoner."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2029,13 +2040,12 @@ msgid ""
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
-"På dette punktet er det tid for å velge sikkerhetsnivået som passer for\n"
+"På dette punktet så vil DrakX la deg velge sikkerhetsnivået som er ønsket "
+"for\n"
 "maskinen. Som en tommelfingerregel, jo mere utsatt maskinen er, og jo mere\n"
 "viktig data som er lagret der, jo høyere bør sikkerhetsnivået være.\n"
 "Men, et høyere sikkerhetsnivå går gjerne på beskostning av "
-"brukvennligheten.\n"
-"Se i MSEC kapittelet i ``Reference Manual'' for å få mer informasjon om\n"
-"disse nivåene.\n"
+"brukervennligheten.\n"
 "\n"
 "Hvis du ikke vet hva du skal velge, behold standard valget."
 
@@ -2553,7 +2563,7 @@ msgstr ""
 "reparasjon eller oppdatering av et eksisterende system."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
@@ -2561,10 +2571,10 @@ msgid ""
 msgstr ""
 "Mandrake Linux installasjonen er spredd ut over flere CDROMer. DrakX \n"
 "vet om en pakke er på en annen CDROM og vil spytte ut den våværende\n"
-"CD og be deg sette i en annen en ved behov."
+"CD og be deg sette i en den rette CD'en som kreves."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -2596,47 +2606,42 @@ msgid ""
 "With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means\n"
 "\"second lowest SCSI ID\", etc."
 msgstr ""
-"Ovenfor nevnes de eksisterende Linux partisjonene oppdaget på\n"
-"harddisken din. Du kan beholde valg som er gjort av hjelperen, de er gode "
-"for vanlig\n"
-"bruk. Du kan endre disse valgene, du må i hvertfall definere en root\n"
-"partisjon (\"/\"). Ikke velg for liten partisjon ellers vil du ikke kunne\n"
-"installere nok programvare. Hvis du ønsker å lagre dine data på en separat "
-"partisjon\n"
-"må du også velge en \"/home\" (bare mulig hvis du har mer enn en\n"
+"Her er de eksisterende Linux partisjonene som ble oppdaget på din harddisk.\n"
+"Du kan beholde valgene som er gjort av veiviseren, de er gode for de fleste\n"
+"vanliege installasjoner. Hvis du endrer disse valgene, må du i hvertfall "
+"definere\n"
+"en root-partisjon (\"/\"). Ikke velg for liten partisjon ellers vil du ikke "
+"kunne\n"
+"installere nok programvare. Hvis du ønsker å lagre dine data på en separat\n"
+"partisjon må du også velge en \"/home\" (bare mulig hvis du har mer enn en\n"
 "Linux partisjon tilgjengelig).\n"
 "\n"
+"Hver partisjon er listet som følger: \"Navn\", \"Kapasitet\".\n"
 "\n"
-"For informasjon, hver partisjon er listet som følger: \"Navn\", \"Kapasitet"
-"\".\n"
-"\n"
-"\n"
-"\"Navn\" er kodet som følger: \"harddisk type\", \"harddisk nummer\",\n"
-"\"partisjon nummer\" (f.eks., \"hda1\").\n"
+"\"Navn\" er strukturert som følger: \"harddisktype\", \"harddisknummer\",\n"
+"\"partisjonsnummer\" (feks. \"hda1\").\n"
 "\n"
 "\n"
-"\"Harddisk type\" er \"hd\" hvis harddisken din er en IDE harddisk og \"sd"
-"\"\n"
-"hvis den er en SCSI harddisk.\n"
+"\"Harddisktype\" er \"hd\" hvis harddisken din er en IDE harddisk og \"sd\"\n"
+"hvis det er en SCSI harddisk.\n"
+"\n"
+"\"Harddisknummer\" er alltid en bokstav etter \"hd\" eller \"sd\". ForIDE "
+"harddisker:\n"
+"\n"
+" * \"a\" betyr \"master harddisk på primær IDE kontroller\",\n"
+"\n"
+" * \"b\" betyr \"slave harddisk på primær IDE kontroller\",\n"
+"\n"
+" * \"c\" betyr \"master harddisk på sekundær IDE kontroller\",\n"
+"\n"
+" * \"d\" betyr \"slave harddisk på sekundær IDE kontroller\".\n"
 "\n"
 "\n"
-"\"Hard drive nummer\" er alltid en bokstav etter \"hd\" eller \"sd\". Med "
-"IDE harddisker:\n"
-"\n"
-"   * \"a\" betyr \"master harddisk på primær IDE kontroller\",\n"
-"\n"
-"   * \"b\" betyr \"slave harddisk på primær IDE kontroller\",\n"
-"\n"
-"   * \"c\" betyr \"master harddisk på sekundær IDE kontroller\",\n"
-"\n"
-"   * \"d\" betyr \"slave harddisk på sekundær IDE kontroller\".\n"
-"\n"
-"\n"
-"Med SCSI harddisker, en \"a\" betyr \"primær harddisk\", en \"b\" betyr "
-"\"sekundær harddisk\", etc..."
+"Med SCSI harddisker, en \"a\" betyr \"laveste SCSI-ID\", en \"b\" betyr "
+"\"nest laveste SCSI-ID\", etc."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -2676,47 +2681,55 @@ msgid ""
 "->\". If you are not interested in this feature, uncheck the \"Do you want\n"
 "to use this feature?\" box."
 msgstr ""
-"GNU/Linux er ett multibrukersystem, og dette betyr at hver bruker kan ha "
-"sine\n"
-"instillinger, sine egne filer osv. Du kan lese brukerguiden for å få vite "
-"mer.\n"
-"Men i motsetning til root, som er administratoren, så vil brukerene du "
-"legger til\n"
-"her ikke ha rett til å forandre noe annet enn deres egne filer "
-"ogkonfigurasjon.\n"
-"Du må lage minst en bruker for deg selv.\n"
-"Denne kontoen bør du bruke for all rutinebruk. Selv om det er praktisk å "
-"logge\n"
-"inn som root hver dag, kan deg også være veldig farlig! Den minste feil "
-"kunne\n"
-"bety at systemet ditt ikke lenger virker. Hvis du gjør en stor feil som en "
-"vanlig\n"
-"bruker vil du kunne miste noe informasjon, men ikke hele systemet.\n"
+"GNU/Linux er ett flerbrukersystem, og dette betyr at hver bruker kan ha\n"
+"sine egne instillinger, sine egne filer osv. Du kan lese ``Starter "
+"Guide'''n\n"
+"for å lære mer.\n"
+" Men i motsetning til root, som er administratoren, så vil\n"
+"brukerne du legger til her ikke ha rett til å forandre noe annet enn deres\n"
+"egne filer og konfigurasjon, noe som beskytter systemet for uheldige\n"
+"eller skumle forandringer som endrer hele systemet. Du må lage minst en\n"
+"bruker for deg selv. Denne kontoen bør du bruke for all vanlig bruk. \n"
+"Selv om det er praktisk å logge inn som root for å gjøre alt mulig hver "
+"dag,\n"
+"kan det også være veldig farlig! Den minste feil kan bety at systemet ditt\n"
+"ikke lenger virker. Hvis du gjør en stor feil som en vanlig bruke, så er "
+"det\n"
+"verste som kan skje at du mister noe informasjon, men ikke hele systemet.\n"
 "\n"
-"Først må du skrive inn ditt virkelige navn. Dette er ikke nødvendig, da du "
-"kan\n"
-"skrive inn hva du vil. drakX vil ta det første ordet du legger inn og "
-"foreslå det som\n"
-"brukernavn. Dette er det brukernavnet den brukeren vil bruke for å logge seg "
-"på\n"
-"systemet. Du kan forandre det. Du må legge inn ett passord her. En "
-"ikkepriviligert\n"
-"brukers passord er ikke så viktig som root sitt sett i fra "
-"systemsikkerhetens side,\n"
-"men det er ingen grunn til ignorere det av den grunn, det er dine filer som "
-"er i \n"
-"faresonen.\n"
+"Det første felter spørr etter ditt virkelige navn. Dette er ikke nødvendig,\n"
+"du kan faktisk skrive inn hva du vil. DrakX vil ta det første ordet du "
+"legger inn\n"
+"og kopiere det til \"Brukernavn\" feltet, som er det navnet den brukeren vil "
+"bruke\n"
+"for å logge seg på systemet. Hvis du vil, så kan du endre brukernavnet. Det\n"
+"neste steget blir å sette et passord. Fra ett sikkerhetsmessig åsyn, så er "
+"ikke\n"
+"en upriviligiert (vanlig) brukers passord så kritisk som \"root\" sitt, men "
+"det er\n"
+"ingen grunn til å neglisere det ved å gjøre det blankt eller for enkelt: "
+"tross alt,\n"
+"dine filer som er i faresonen.\n"
 "\n"
-"Hvis du klikker på aksepter bruker kan du da legge til så mange brukere som "
-"du\n"
-"vil. Når du har lagt til alle de brukerene du ønsker, klikk på ferdig.\n"
+"Når du klikker på \"Aksepter bruker\", så kan du legge til flere brukere. "
+"Legg\n"
+"til en hver og for dine venner, din far eller din søster feks.\n"
+"Klikke \"Neste ->\" når du er ferdig med å legge til brukere.\n"
 "\n"
-"Ved å klikke på avansert kan du forandre hvilket shell brukeren har som "
-"standard.\n"
-"(Det vanlige er bash)"
+"Ved å klikke på avansert kan du forandre hvilket \"skall\" brukeren har som\n"
+"standard (det vanlige er bash).\n"
+"\n"
+"Når du er ferdig med å legge til alle brukerne så kan du velge en bruker "
+"som\n"
+"som automatisk kan logge seg på systemet når maskinen starter opp. Hvis\n"
+"du er interessert i denne finessen (og ikke bryr deg mye om lokal "
+"sikkerhet),\n"
+"velg den ønskede brukeren og vindubehandleren, så klikk på \"Neste ->\".\n"
+"Hvis du ikke er interessert i denne finessen, sjekk ut \"Vil du bruke denne\n"
+"finessen?\"-boksen."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
@@ -2724,10 +2737,10 @@ msgid ""
 "computer."
 msgstr ""
 "Før du går videre bør du lese lisensen nøye.\n"
-"Den dekker hele Mandrake Linux distribusjonen og hvis du ikke er enig\n"
-"med alt den sier, klikk på \"Jeg nekter\" knappensom øyeblikkelig\n"
-"avslutter installasjonen. For å fortsette installasjonen, klikk på\n"
-"\"Jeg aksepterer\" knappen."
+" Den dekker hele\n"
+"Mandrake Linux distribusjonen og hvis du ikke er enig med alt den sier,\n"
+" klikk på \"Jeg nekter\" knappen som øyeblikkelig avslutter installasjonen.\n"
+"For å fortsette installasjonen, klikk på \"Jeg aksepterer\" knappen."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3950,9 +3963,9 @@ msgstr "System"
 
 #. -PO: example: lilo-graphic on /dev/hda1
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s on %s"
-msgstr "Port"
+msgstr "%s på %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4092,14 +4105,14 @@ msgid "Which is your timezone?"
 msgstr "Hva er din tidsone?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Ønsker du å konfigurere en skriver?"
+msgstr "Ønsker du å prøve på nytt?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Kan ikke dele %s"
+msgstr "Kan ikke kontakte mirror %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4701,7 +4714,7 @@ msgstr "Romansk (qwertz)"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Canadian (Quebec)"
-msgstr "Canadisk (Quebec)"
+msgstr "Kanadisk (Quebec)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6571,13 +6584,13 @@ msgstr ""
 "rutingprotokoller for komplekse nettverk."
 
 #: ../../services.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
-"Tilordne rå enheter til blokkenheter (som harddisk-\n"
-"partisjoner) for bruk av applikasjoner som Oracle"
+"Tilordne rå enheter til blokkenheter (som harddisk-partisjoner),\n"
+"for bruk av applikasjoner som Oracle eller DVD-spillere"
 
 #: ../../services.pm:1
 #, c-format
@@ -6851,7 +6864,7 @@ msgstr ""
 "testing] [-v|--version] "
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " [everything]\n"
 "       XFdrake [--noauto] monitor\n"
@@ -6859,16 +6872,16 @@ msgid ""
 msgstr ""
 " [alt]\n"
 "       XFdrake [--noauto] monitor\n"
-"       XFdrake resolution"
+"       XFdrake oppløsning"
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -9879,9 +9892,9 @@ msgid "Start at boot"
 msgstr "Start ved oppstart"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Vennligst spesifiser vertsnavn eller IP."
+msgstr "Tilegn vertsnavn fra DHCP-adresse"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9894,9 +9907,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Spor id nettverkskort (nyttig for bærbare)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Vertsnavn"
+msgstr "DHCP vertsnavn"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10181,9 +10194,9 @@ msgid "Unknown model"
 msgstr "Ukjent modell"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s (Port %s)"
-msgstr "Port"
+msgstr "%s (Port %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10515,9 +10528,9 @@ msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "Frisker opp skriverliste (for å vise alle tilgjengelige CUPS skrivere)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Display all available remote CUPS printers"
-msgstr "Frisker opp skriverliste (for å vise alle tilgjengelige CUPS skrivere)"
+msgstr "Vis alle tilgjengelige fjerne CUPS-skrivere"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10571,9 +10584,9 @@ msgid "Select Printer Spooler"
 msgstr "Velg skrivertkøbehandler"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Setting Default Printer..."
-msgstr "Standardskriver"
+msgstr "Setter standardskriver..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11133,9 +11146,9 @@ msgid "Option %s must be an integer number!"
 msgstr "Valg %s må være ett helt tall!"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer default settings"
-msgstr "Skrivervalg"
+msgstr "Skriver standardoppsett"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11599,7 +11612,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "SECURITY WARNING!"
-msgstr ""
+msgstr "SIKKERHETS-ADVARSEL!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11755,12 +11768,12 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Here is a list of all auto-detected printers. "
-msgstr ""
+msgstr "Her er en liste over alle skrivere som har blitt automatisk oppdaget."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Currently, no alternative possibility is available"
-msgstr ""
+msgstr "For øyeblikket så er ingen alternative muligheter tilgjengelig"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12010,22 +12023,22 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid " on "
-msgstr ""
+msgstr " på "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring printer ..."
-msgstr "Konfigurerer skriver \"%s\"..."
+msgstr "Konfigurerer skriver ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12141,9 +12154,9 @@ msgid "Checking your system..."
 msgstr "Sjekker systemet ditt..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting CUPS..."
-msgstr "Fjerner LPD..."
+msgstr "Starter CUPS på nytt..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12156,14 +12169,14 @@ msgid "Examples for correct IPs:\n"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The entered IP is not correct.\n"
-msgstr "Modellen er riktig"
+msgstr "Den spesifiserte IP-adressene er ikke riktig.\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Server IP missing!"
-msgstr "NCP servernavn mangler!"
+msgstr "Tjener-IP mangler!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12171,24 +12184,24 @@ msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accessing printers on remote CUPS servers"
-msgstr "Skriver på fjern-CUPS tjener"
+msgstr "Går inn på skrivere på fjerne CUPS tjenere"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected server"
-msgstr "Fjern valgte vert/nettverk"
+msgstr "Fjern valgte tjener"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected server"
-msgstr "oppdaget %s"
+msgstr "Rediger valgte tjener"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add server"
-msgstr "Legg til bruker"
+msgstr "Legg til tjener"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12275,7 +12288,7 @@ msgid "Automatic correction of CUPS configuration"
 msgstr "Automatisk retting av CUPS-konfigurasjon"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
@@ -12287,22 +12300,23 @@ msgid ""
 "information from the server(s)."
 msgstr ""
 "For å få tilgang til fjern CUPS-tjenere i ditt lokale nettverk trenger du "
-"ikke å konfigurere noen ting; CUPS-tjenerene informerer maskinen din "
-"automatisk om skriverene. Alle skriverene som før øyeblikket er kjent for "
-"maskinen din er listet i \"Remote printers\" seksjonen i hovedvinduet til "
-"Printerdrake. Når CUPS-tjeneren din ikke er i ditt lokale nettverk, må du "
-"entre CUPS-tjenerens IP-adresse og evnt. portnummeret for å få skriver- "
-"informasjon fra tjeneren, ellers la disse feltene være tomme."
+"bare å slå på \"Finn automatisk tilgjengelige skrivere på fjerne maskiner\"-"
+"valget: CUPS-tjenerene informerer maskinen din automatisk om skriverene. "
+"Alle skriverene som før øyeblikket er kjent for maskinen din er listet i "
+"\"Fjern-skrivere\" seksjonen i hovedvinduet til Printerdrake. Hvis CUPS-"
+"tjeneren din ikke er i ditt lokale nettverk, må du entre CUPS-tjeneren(e)s "
+"IP-adresse(r) og evt. portnummeret for å få skriver-informasjon fra tjeneren"
+"(e)."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "None"
-msgstr "Ferdig"
+msgstr "Ingen"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Additional CUPS servers: "
-msgstr "På CUPS tjener \"%s\""
+msgstr "Andre CUPS tjenere i tilegg:"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -15897,19 +15911,19 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Generic Printers"
-msgstr "Skriver"
+msgstr "Generelle skrivere"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Abiword"
-msgstr "Avbryt"
+msgstr "Abiword"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "StarOffice"
-msgstr "Office"
+msgstr "StarOffice"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -15917,9 +15931,9 @@ msgid "Ghostscript"
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose the applications that will support the fonts:"
-msgstr "Velg partisjonene du ønsker å partisjonere"
+msgstr "Velg aplikasjonene som vil søtte skrifttypene:"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -15956,19 +15970,19 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "About"
-msgstr "Avbryt"
+msgstr "Om"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Font List"
-msgstr "Monteringspunkt"
+msgstr "Skrifttype liste"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced Options"
-msgstr "LAN-konfigurasjon"
+msgstr "Avanserte valg"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -15981,19 +15995,19 @@ msgid "Get Windows Fonts"
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Import Fonts"
-msgstr "Formater partisjoner"
+msgstr "Importer skrifttyper"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "done"
-msgstr "Ferdig"
+msgstr "ferdig"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "xfs restart"
-msgstr "begrense"
+msgstr "xfs omstart"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16046,14 +16060,14 @@ msgid "please wait during ttmkfdir..."
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "True Type fonts installation"
-msgstr "Forbereder installasjon"
+msgstr "True Type skrifttyper-installasjon"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Fonts copy"
-msgstr "Formater diskett"
+msgstr "Skrifttype-kopiering"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16076,9 +16090,9 @@ msgid "could not find any font in your mounted partitions"
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "no fonts found"
-msgstr "ingen nettverkskort funnet"
+msgstr "ingen skrifttyper funnet"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16192,19 +16206,19 @@ msgid "The DHCP start range"
 msgstr ""
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "The internal domain name"
-msgstr "Nytt skrivernavn"
+msgstr "Det internasjonale domenenavnet"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DNS Server IP"
-msgstr "CUPS tjener IP"
+msgstr "Navntjener tjener IP'en"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "(This) DHCP Server IP"
-msgstr "CUPS tjener IP"
+msgstr "(Denne) DHCP tjener IP'en"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16217,9 +16231,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Local Network adress"
-msgstr "ingen nettverkskort funnet"
+msgstr "Lokal nettverksadresse"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16249,14 +16263,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Current interface configuration"
-msgstr "Modifiser skriverkonfigurasjon"
+msgstr "Gjeldende grensesnittkonfigurasjon"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Show current interface configuration"
-msgstr "Modifiser skriverkonfigurasjon"
+msgstr "Vis gjeldende grensesnittkonfigurasjon"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16264,9 +16278,9 @@ msgid "No (experts only)"
 msgstr ""
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Automatic reconfiguration"
-msgstr "Konfigurasjon av automatiske skritt"
+msgstr "Automatisk omkonfigurasjon"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16279,9 +16293,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network interface already configured"
-msgstr "Monitor er ikke konfigurert"
+msgstr "Nettverksgrensesnitt allerede konfigurert"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16337,9 +16351,9 @@ msgid "Interface %s (using module %s)"
 msgstr "Grensesnitt %s (bruker modul %s)"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Net Device"
-msgstr "Xinetd-tjener"
+msgstr "Nett-enhet"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16353,7 +16367,7 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -16365,12 +16379,15 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Du er i ferd med å konfigurere maskinen din til å dele Internett-"
+"Du er i ferd med å konfigurere maskinen din til å dele dens Internett-"
 "tilkobling.\n"
-"Andre maskiner i nettverket ditt vil da kunne bruke denne maskinens "
-"Internett tilkobling.\n"
+"Med denne finessen så kan andre maskiner i nettverket ditt kunne bruke denne "
+"maskinens Internett tilkobling.\n"
 "\n"
-"Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
+"Vær sikker på at du konfigurert ditt Nettverk/Internett-tilgang ved hjelp av "
+"drakconnect før du går videre.\n"
+"\n"
+"Merk: du trenger en dedikert nettverksadapter for å sette opp et lokalt "
 "nettverk (LAN)."
 
 #: ../../standalone/drakgw:1
@@ -16404,15 +16421,15 @@ msgid "enable"
 msgstr "slå på"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
 "\n"
 "What would you like to do?"
 msgstr ""
-"Oppsett av deling av Internett tilkobling har allerede blitt gjort.\n"
-"Dette er for øyeblikket slått av.\n"
+"Oppsettet for deling av Internett tilkobling har allerede blitt gjort.\n"
+"Dette er for øyeblikket deaktivert.\n"
 "\n"
 "Hva vil du gjøre?"
 
@@ -16474,19 +16491,19 @@ msgid "Path"
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "group :"
-msgstr "Arbeidsgruppe"
+msgstr "gruppe :"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "user :"
-msgstr "Brukernavn"
+msgstr "bruker :"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Path selection"
-msgstr "Lagre pakkevalg"
+msgstr "Filbane valg"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16494,14 +16511,14 @@ msgid "when checked, owner and group won't be changed"
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use group id for execution"
-msgstr "Bruk automatisk detektering"
+msgstr "Bruke gruppeid for utføring"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use owner id for execution"
-msgstr "Bruk automatisk detektering"
+msgstr "Bruk eierid for utføring"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16526,19 +16543,19 @@ msgid "sticky-bit"
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Property"
-msgstr "Port"
+msgstr "Eiendom"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Permissions"
-msgstr "Versjon: %s\n"
+msgstr "Rettigheter"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Current user"
-msgstr "Godta bruker"
+msgstr "Gjeldende bruker"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16556,24 +16573,24 @@ msgid "edit"
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delete selected rule"
-msgstr "Fjern inngang"
+msgstr "Fjern vagte regel"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "delete"
-msgstr "Slett"
+msgstr "slett"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a new rule at the end"
-msgstr "Legg til en ny skriver"
+msgstr "Legg til ny regel på slutten"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "add a rule"
-msgstr "Legg til en modul"
+msgstr "legg til en regel"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16581,9 +16598,9 @@ msgid "Move selected rule down one level"
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Down"
-msgstr "Ferdig"
+msgstr "Ned"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16609,19 +16626,19 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "permissions"
-msgstr "partisjon %s"
+msgstr "rettigheter"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "group"
-msgstr "Arbeidsgruppe"
+msgstr "gruppe"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "user"
-msgstr "Brukernavn"
+msgstr "bruker"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16754,14 +16771,14 @@ msgid "PXE Server Configuration"
 msgstr "PXE-server konfigurasjon"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, setting security options..."
-msgstr "Vennligst vent, forbereder installasjon"
+msgstr "Vennligst vent, setter sikkerhetsopsjoner..."
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please wait, setting security level..."
-msgstr "Setter sikkerhetsnivå"
+msgstr "Vennligst vent, setter sikkerhetsnivå..."
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16769,14 +16786,14 @@ msgid "Periodic Checks"
 msgstr ""
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "System Options"
-msgstr "Modulopsjoner:"
+msgstr "Systemopsjoner"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Options"
-msgstr "Modulopsjoner:"
+msgstr "Nettverksopsjoner"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16786,24 +16803,24 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Administrator:"
-msgstr "Fjernadministrasjon"
+msgstr "Sikkerhetsadministrator"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Alerts:"
-msgstr "Sikkerhetsnivå"
+msgstr "Sikkerhetvarsler:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Level:"
-msgstr "Sikkerhetsnivå"
+msgstr "Sikkerhetsnivå:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "(default value: %s)"
-msgstr " (Standard)"
+msgstr "(standard verdi: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16855,9 +16872,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/draksound:1
-#, fuzzy, c-format
+#, c-format
 msgid "No Sound Card detected!"
-msgstr "Ikke tilkoblet"
+msgstr "Inget lydkort oppdaget!"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16865,19 +16882,19 @@ msgid "%s BootSplash (%s) preview"
 msgstr ""
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "Generating preview ..."
-msgstr "Finner enheter ..."
+msgstr "Genererer forhåndsvisning ..."
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must choose an image file first!"
-msgstr "Du må velge/entre en skriver/enhet!"
+msgstr "Du må velge en imagefil først!"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "ProgressBar color selection"
-msgstr "Skrivervalg"
+msgstr "Framgangsviser fargevalg"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16890,14 +16907,14 @@ msgid "saving Bootsplash theme..."
 msgstr ""
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose image file"
-msgstr "Velg en fil"
+msgstr "velg bildefil"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure bootsplash picture"
-msgstr "Konfigurer tjenester"
+msgstr "Konfigurer bootsplash bilde"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16910,19 +16927,19 @@ msgid "Display logo on Console"
 msgstr ""
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose color"
-msgstr "Velg en monitor"
+msgstr "Velg farge"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "Save theme"
-msgstr "Installer systemet"
+msgstr "Lagre tema"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "Preview"
-msgstr "enhet"
+msgstr "Forhåndsvisning"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16983,19 +17000,19 @@ msgid "Browse"
 msgstr ""
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "Theme name"
-msgstr "Navn deling"
+msgstr "Temanavn"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "final resolution"
-msgstr "Oppløsning"
+msgstr "endelige oppløsning"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "first step creation"
-msgstr "Lage oppstartsdiskett(er)"
+msgstr "første stegs opprettelse"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17038,9 +17055,9 @@ msgid "XawTV isn't installed!"
 msgstr ""
 
 #: ../../standalone/drakxtv:1
-#, fuzzy, c-format
+#, c-format
 msgid "There was an error while scanning for TV channels"
-msgstr "Det var en feil ved installering av pakkene:"
+msgstr "Det var en feil under søking etter TV-kanaler"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17075,14 +17092,14 @@ msgid "Australian Optus cable TV"
 msgstr ""
 
 #: ../../standalone/drakxtv:1
-#, fuzzy, c-format
+#, c-format
 msgid "Newzealand"
-msgstr "Netherlands"
+msgstr "Newzealand"
 
 #: ../../standalone/drakxtv:1
-#, fuzzy, c-format
+#, c-format
 msgid "France [SECAM]"
-msgstr "Frankrike"
+msgstr "Frankrike [SECAM]"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17110,9 +17127,9 @@ msgid "Japan (broadcast)"
 msgstr ""
 
 #: ../../standalone/drakxtv:1
-#, fuzzy, c-format
+#, c-format
 msgid "Canada (cable)"
-msgstr "Canadisk (Quebec)"
+msgstr "Kanada (Quebec)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17162,14 +17179,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown"
-msgstr "Ukjent modell"
+msgstr "Ukjent"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "unknown"
-msgstr "Ukjent modell"
+msgstr "ukjent"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17243,9 +17260,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select a device !"
-msgstr "Velg et grafikk-kort"
+msgstr "Velg en enhet !"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17262,9 +17279,9 @@ msgid "Harddrake help"
 msgstr "Harddrake hjelp"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Fields description"
-msgstr "Beskrivelse"
+msgstr "/_Felt beskrivelser"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
@@ -17277,19 +17294,19 @@ msgid "/_Quit"
 msgstr "/_Avslutt"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _jazz drives"
-msgstr "Utfør automatisk detektering"
+msgstr "/Oppdag automatisk _jazz enheter"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _modems"
-msgstr "Utfør automatisk detektering"
+msgstr "/Oppdag automatisk _modemer"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _printers"
-msgstr "Utfør automatisk detektering"
+msgstr "/Oppdag automatisk _skrivere"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
@@ -17337,19 +17354,19 @@ msgid "network printer port"
 msgstr "nettverksprinterport"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the name of the CPU"
-msgstr "leverandørnavnet til enheten"
+msgstr "navnet på prosessoren"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Name"
 msgstr "Navn"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the number of buttons the mouse has"
-msgstr "leverandørnavnet til prosessoren"
+msgstr "antall knapper som musen har"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17580,7 +17597,7 @@ msgid "Size of the (second level) cpu cache"
 msgstr "Størrelse på andrenivå prosessor-hurtigminne"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size"
 msgstr "Hurtigminnestørrelse"
 
@@ -17846,14 +17863,14 @@ msgid "Mandrake Tools Explanation"
 msgstr "Mandrakeverktøy-forklaringer"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syslog"
-msgstr "syslog"
+msgstr "Syslog"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Messages"
-msgstr "meldinger"
+msgstr "Meldinger"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -17989,9 +18006,9 @@ msgstr ""
 "Sjekk konfigurasjonen din i Mandrake Control Center."
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connection complete."
-msgstr "Koblet opp."
+msgstr "Oppkobling ferdig."
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -18024,9 +18041,9 @@ msgid "Logs"
 msgstr "Logger"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connection Time: "
-msgstr "Oppkoblingstype:"
+msgstr "Oppkoblingstid:"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -18034,7 +18051,7 @@ msgid "Receiving Speed:"
 msgstr "Nedlastningshastighet:"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sending Speed:"
 msgstr "Sendehastighet:"
 
@@ -18054,9 +18071,9 @@ msgid "Network Monitoring"
 msgstr "Nettverksovervåkning"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reading data of installed printers..."
-msgstr "Søker etter nye skrivere..."
+msgstr "Leser data fra installerte skrivere..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18069,14 +18086,14 @@ msgid "This host is already in the list, it cannot be added again.\n"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "Scanner"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Vennligst spesifiser vertsnavn eller IP."
+msgstr "Du må spesifisere vertsnavn eller en IP.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18084,29 +18101,29 @@ msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "Lokal skriver"
+msgstr "Deling av lokale scannere"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
-msgstr "(på denne maskin)"
+msgstr "Denne maskinen"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "Fjern valgte vert/nettverk"
+msgstr "Fjern valgte vert"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected host"
-msgstr "oppdaget %s"
+msgstr "Rediger valgte vert"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Legg til bruker"
+msgstr "Legg til vert"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18114,14 +18131,14 @@ msgid "These are the machines from which the scanners should be used:"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Bruk ledig plass"
+msgstr "Bruk av fjerne scannere"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "Ingen fjerne maskiner"
+msgstr "Alle fjerne maskiner"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18141,9 +18158,9 @@ msgid "Use scanners on remote computers"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "Fildeling"
+msgstr "Scanner deler til verter: "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18170,29 +18187,29 @@ msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for new scanners ..."
-msgstr "Lokal skriver"
+msgstr "Søker etter nye scannerer ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for configured scanners ..."
-msgstr "Søker etter nye skrivere..."
+msgstr "Søker etter konfigurerte scannere ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing"
-msgstr "Skriverdeling"
+msgstr "Scannerdeling"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a scanner manually"
-msgstr "Velg bruker manuelt"
+msgstr "Legg til scanner manuelt"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search for new scanners"
-msgstr "Lokal skriver"
+msgstr "Søk for nye scannere"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18200,30 +18217,30 @@ msgid "There are no scanners found which are available on your system.\n"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanner\n"
 "\n"
 "%s\n"
 "is available on your system.\n"
 msgstr ""
-"Den følgende skriveren\n"
+"Den følgende scanneren\n"
 "\n"
-"%s%s\n"
-"er koblet direkte til ditt system"
+"%s\n"
+"er tilgjengelig på ditt system.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanners\n"
 "\n"
 "%s\n"
 "are available on your system.\n"
 msgstr ""
-"De følgende skriverne\n"
+"De følgende scannerene\n"
 "\n"
-"%s%s\n"
-"er koblet direkte til ditt system"
+"%s\n"
+"er tilgjengelige på ditt system.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18242,21 +18259,19 @@ msgid "choose device"
 msgstr "velg enhet"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake var ikke i stand til å oppdage din %s.\n"
-"Vennligst velg enheten hvor scanneren din er tilkoblet"
+msgstr "Vennligst velg enheten hvor din %s er tilkoblet"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for scanners ..."
-msgstr "Lokal skriver"
+msgstr "Søker etter scannere ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Auto-detect available ports"
-msgstr "Utfør automatisk detektering"
+msgstr "Oppdag automisk tilgjengelige porter"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18279,9 +18294,9 @@ msgid "The %s is unsupported"
 msgstr "%s er ikke støttet"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s er ikke kjent av denne versjonen av scannerdrake."
+msgstr "%s er ikke kjent av denne versjonen av Scannerdrake."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18289,9 +18304,9 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s er ikke støttet i denne versjonen av Mandrake Linux."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Port: %s"
-msgstr "Port"
+msgstr "Port: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18299,9 +18314,9 @@ msgid ", "
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Detected model: %s"
-msgstr "Oppdaget modell %s %s"
+msgstr "Oppdaget modell %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18309,9 +18324,9 @@ msgid " ("
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select a scanner model"
-msgstr "Velg en scanner"
+msgstr "Velg en scannermodell"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18319,9 +18334,9 @@ msgid "%s is not in the scanner database, configure it manually?"
 msgstr "%s er ikke i skannerdatabasen, konfigurere den manuelt?"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "%s ble funnet på %s, vil du autokonfigurere den?"
+msgstr "%s ble funnet på %s, vil du konfigurere den automatisk?"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
