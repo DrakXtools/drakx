@@ -244,7 +244,7 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 sub translate {
     my ($s) = @_;
-    my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || 'us', 0, 2);
+    my ($lang) = substr($ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || $ENV{LANG} || 'us', 0, 2);
 
     require 'lang.pm';
     lang::load_po ($lang) unless defined $po::I18N::{$lang}; #- the space if needed to mislead perl2fcalls (as lang is not included here)
