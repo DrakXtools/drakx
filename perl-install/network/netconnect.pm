@@ -109,7 +109,7 @@ sub get_subwizard {
                               );
 
 
-      init_globals($in, $::prefix);
+      init_globals($in);
       $netc->{NET_DEVICE} = $netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
       $netc->{NET_INTERFACE} = $netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
       network::network::read_all_conf($::prefix, $netc, $intf);
