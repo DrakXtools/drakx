@@ -219,7 +219,7 @@ sub setupBootloader {
     while (1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 	my ($c, $e);
-	$in->ask_from_( 
+	$in->ask_from_(
 		{
 		 messages => 
 _("Here are the different entries.
@@ -231,8 +231,8 @@ You can add some more or change the existing ones."),
 		    ref $e ? 
 		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
 		      translate($e);
-		}, list => [ @{$b->{entries}} ] },
-		  (map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $c = $s; 1 } } } (__("Modify"), __("Add"), __("Done"))),
+		}, list => [ @{$b->{entries}} ], allow_empty_list => 1 },
+		  (map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $c = $s; 1 } } } (if_(@{$b->{entries}} > 0, __("Modify")), __("Add"), __("Done"))),
 		]
 	);
 	!$c || $c eq "Done" and last;
@@ -318,6 +318,7 @@ if (arch() !~ /ppc/) {
 
 	    push @{$b->{entries}}, $e if $c eq "Add";
 	} else {
+	    delete $b->{default} if $b->{default} eq $e->{label};
 	    @{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
 	}
     }
