@@ -64,14 +64,14 @@ $window->border_width(2);
 #$window->realize;
 
 # drakX mode
-my ($t_pixmap, $t_mask) = gtkcreate_png("tradi.png");
-my ($h_pixmap, $h_mask) = gtkcreate_png("hori.png");
-my ($v_pixmap, $v_mask) = gtkcreate_png("verti.png");
-my ($g_pixmap, $g_mask) = gtkcreate_png("gmon.png");
-my ($c_pixmap, $c_mask) = gtkcreate_png("categ.png");
+#my ($t_pixmap, $t_mask) = gtkcreate_png("tradi.png");
+#my ($h_pixmap, $h_mask) = gtkcreate_png("hori.png");
+#my ($v_pixmap, $v_mask) = gtkcreate_png("verti.png");
+#my ($g_pixmap, $g_mask) = gtkcreate_png("gmon.png");
+#my ($c_pixmap, $c_mask) = gtkcreate_png("categ.png");
 
 # a pixmap widget to contain the pixmap
-my $pixmap = new Gtk::Pixmap($h_pixmap, $h_mask);
+#my $pixmap = new Gtk::Pixmap($h_pixmap, $h_mask);
 
 ### menus definition
 # the menus are not shown
@@ -107,7 +107,6 @@ my %themes = 	('path'=>'/usr/share/bootsplash/themes/',
 			},
 		 );
 my ($cur_res) = cat_('/etc/lilo.conf') =~ /vga=(.*)/;
-
 #- verify that current resolution is ok
 if ( member( $cur_res, qw( 785 788 791 794) ) ) {
 	($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
@@ -117,10 +116,9 @@ if ( member( $cur_res, qw( 785 788 791 794) ) ) {
 
 #- and check that lilo is the correct loader
 $no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
-
 my @thms;
-my @lilo_thms = ($themes{'default'})?():qw(default);
-my @boot_thms = ($themes{'default'})?():qw(default);
+my @lilo_thms = (($themes{'default'})?():qw(default));
+my @boot_thms = (($themes{'default'})?():qw(default));
 chdir($themes{'path'}); #- we must change directory for correct @thms assignement
 foreach (all('.')) {
     if (-d $themes{'path'} . $_ && m/^[^.]/) {
@@ -138,7 +136,7 @@ foreach (keys (%combo)) {
 
 $combo{'thms'}->set_popdown_strings(@thms);
 $combo{'lilo'}->set_popdown_strings(@lilo_thms);
-$combo{'boot'}->set_popdown_strings(@boot_thms);
+$combo{'boot'}->set_popdown_strings(@boot_thms) if(! $no_bootsplash);
 my $lilo_pixbuf;
 my $lilo_pic = gtkpng($themes{'def_thmb'});
 
@@ -170,7 +168,8 @@ $combo{'lilo'}->entry->signal_connect(changed => sub {
     $lilo_pic->set($lilo_pixbuf->render_pixmap_and_mask(0),'');
 });
 
-$combo{'boot'}->entry->signal_connect( changed => sub {
+$no_bootsplash == 0 
+	and $combo{'boot'}->entry->signal_connect( changed => sub {
     local $img_file = $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg";
     undef($boot_pixmap);
     $boot_pixmap = gtkcreate_png_pixbuf( $img_file);
@@ -257,8 +256,7 @@ Launch \"lilo\" as root in command line to complete LiLo theme installation."));
 	}
 	$in->ask_warn(_(($error)?"Error":"Notice"),
 		      _($error?"Theme installation failed!":"LiLo and Bootsplash themes installation successfull"));
-    }
-);
+});
 
 gtkadd($window,
        gtkpack__ (my $global_vbox = new Gtk::VBox(0,0),
@@ -347,17 +345,17 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 	       )
       );
 
-$a_button->set_active($a_mode); # up == false == "0"
-if ($a_mode) {
-    my $a = readlink "/etc/aurora/Monitor";
-    $a =~ s#/lib/aurora/Monitors/##;
-    if ($a eq "NewStyle-Categorizing-WsLib") { $a_c_button->set_active(1); $pixmap->set($c_pixmap, $c_mask) }
-    if ($a eq "NewStyle-WsLib") { $a_h_button->set_active(1);  $pixmap->set($h_pixmap, $h_mask) }
-    if ($a eq "Traditional-WsLib") { $a_v_button->set_active(1); $pixmap->set($v_pixmap, $v_mask) }  
-    if ($a eq "Traditional-Gtk+") { $a_g_button->set_active(1); $pixmap->set($g_pixmap, $g_mask) }
-} else {
-    $pixmap->set($t_pixmap, $t_mask);
-}
+#$a_button->set_active($a_mode); # up == false == "0"
+#if ($a_mode) {
+#    my $a = readlink "/etc/aurora/Monitor";
+#    $a =~ s#/lib/aurora/Monitors/##;
+#    if ($a eq "NewStyle-Categorizing-WsLib") { $a_c_button->set_active(1); $pixmap->set($c_pixmap, $c_mask) }
+#    if ($a eq "NewStyle-WsLib") { $a_h_button->set_active(1);  $pixmap->set($h_pixmap, $h_mask) }
+#    if ($a eq "Traditional-WsLib") { $a_v_button->set_active(1); $pixmap->set($v_pixmap, $v_mask) }  
+#    if ($a eq "Traditional-Gtk+") { $a_g_button->set_active(1); $pixmap->set($g_pixmap, $g_mask) }
+#} else {
+##    $pixmap->set($t_pixmap, $t_mask);
+#}
 
 $window->show_all();
 $no_bootsplash and $thm_frame->hide();
