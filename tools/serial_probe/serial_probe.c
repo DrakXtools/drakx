@@ -1,4 +1,4 @@
-/* Copyright 1999 MandrakeSoft <fpons@mandrakesoft.com>
+/* Copyright 1999 Mandrakesoft <fpons@mandrakesoft.com>
  *
  * The following file used by this one are copyrighted by RedHat and
  * are taken from kudzu :

@@ -2,7 +2,7 @@ package scanner;
 # scanner.pm $Id$
 # Yves Duret <yduret at mandrakesoft.com>
 # Till Kamppeter <till at mandrakesoft.com>
-# Copyright (C) 2001-2004 MandrakeSoft
+# Copyright (C) 2001-2004 Mandrakesoft
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

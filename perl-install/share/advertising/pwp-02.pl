@@ -12,4 +12,4 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>PowerPack</b>"), center => 1 ],
         ' ',
-	N("PowerPack is MandrakeSoft's premier Linux desktop product. In addition to being the easiest and the most user-friendly Linux distribution, PowerPack includes thousands of applications - everything from the most popular to the most technical."));
+	N("PowerPack is Mandrakesoft's premier Linux desktop product. In addition to being the easiest and the most user-friendly Linux distribution, PowerPack includes thousands of applications - everything from the most popular to the most technical."));

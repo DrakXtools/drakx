@@ -154,7 +154,7 @@ foreach (@ARGV) {
 
 sub version {
     print 'Drakxtools version 10
-Copyright (C) 1999-2004 MandrakeSoft by <install@mandrakesoft.com>
+Copyright (C) 1999-2004 Mandrakesoft by <install@mandrakesoft.com>
 ',  $::license, "\n";
 }
 

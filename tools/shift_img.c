@@ -1,7 +1,7 @@
 /*
  * Guillaume Cottenceau (gc at mandrakesoft.com)
  *
- * Copyright 2002 MandrakeSoft
+ * Copyright 2002 Mandrakesoft
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.

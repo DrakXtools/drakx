@@ -2,7 +2,7 @@
  * Guillaume Cottenceau (gc@mandrakesoft.com)
  * Olivier Blin (oblin@mandrakesoft.com)
  *
- * Copyright 2000 MandrakeSoft
+ * Copyright 2000 Mandrakesoft
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.

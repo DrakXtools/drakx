@@ -12,6 +12,6 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>MandrakeStore</b>"), center => 1 ],
 	' ',
-	N("Find all MandrakeSoft products and services at <b>MandrakeStore</b> -- our full service e-commerce platform."),
+	N("Find all Mandrakesoft products and services at <b>MandrakeStore</b> -- our full service e-commerce platform."),
         ' ',
 	N("Stop by today at <b>www.mandrakestore.com</b>")); 

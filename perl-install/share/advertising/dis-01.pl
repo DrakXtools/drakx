@@ -14,6 +14,6 @@ $border = 10;  #- for leftish text
         ' ',
 	N("Welcome to the Open Source world!"),
 	' ',
-	N("Your new Mandrakelinux operating system and its many applications is the result of collaborative efforts between MandrakeSoft developers and Mandrakelinux contributors throughout the world."),
+	N("Your new Mandrakelinux operating system and its many applications is the result of collaborative efforts between Mandrakesoft developers and Mandrakelinux contributors throughout the world."),
 	' ',
 	N("We would like to thank everyone who participated in the development of this latest release.")); 

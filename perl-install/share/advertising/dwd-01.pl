@@ -14,6 +14,6 @@ $border = 10;  #- for leftish text
          ' ',
 		 N("Welcome to the Open Source world!"),
 		 ' ',
-         N("Mandrakelinux is committed to the Open Source Model and fully respects the General Public License. This new release is the result of collaboration between MandrakeSoft's team of developers and the worldwide community of Mandrakelinux contributors."),
+         N("Mandrakelinux is committed to the Open Source Model and fully respects the General Public License. This new release is the result of collaboration between Mandrakesoft's team of developers and the worldwide community of Mandrakelinux contributors."),
          ' ',
          N("We would like to thank everyone who participated in the development of this latest release."));
