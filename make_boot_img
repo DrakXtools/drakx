@@ -384,14 +384,14 @@ image = cd:,\\\\\\\\vmlinux
     root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
     initrd-size = 32000
-    append = \" text\"
+    append = \" text video=ofonly\"
 
 image = cd:,\\\\\\\\vmlinux
     label = rescue
     root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
     initrd-size = 32000
-    append = \" rescue\"    
+    append = \" rescue video=ofonly\"    
 ");
 	#- seem to need 2 yaboot.conf, one in the root, and one in boot
 	_ "cp -f $dir/boot/yaboot.conf $dir/yaboot.conf";		
