@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.30mdk
+Release: 0.31mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -358,6 +358,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.31mdk
+- drakconnect (blino):
+  o allow users to start the connection (#12837)
+  o pre-detect modem device
+- keyboarddrake: new default keyboard is "us" for Chinese (pablo)
+- printerdrake: driver "oki4w" was renamed to "oki4drv" (till)
+
 * Fri Feb 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.30mdk
 - drakconnect :allow to select "unlisted" provider in adsl provider
   list (blino)
