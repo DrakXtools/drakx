@@ -477,6 +477,8 @@ my @advertising_images;
 sub copy_advertising {
     my ($o) = @_;
 
+    return if $::rootwidth < 800;
+
     my $f = install_any::getFile('Mandrake/share/advertising/list');
     if (my @files = <$f>) {
 	my $dir = "$o->{prefix}/tmp/drakx-images";
