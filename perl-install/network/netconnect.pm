@@ -233,9 +233,7 @@ sub get_subwizard {
 
                  
                    hw_account => 
-                   { # ask_info2
-                    #my ($cnx, $netc) = @_;
-                    
+                   {
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
                     data => [ 
@@ -282,7 +280,6 @@ sub get_subwizard {
                    go_ethernet => 
                    {
                     pre => sub {
-                        # my ($netc, $intf, $type, $ipadr, $netadr, $first_time) = @_;
                         conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
                         $netc->{NET_INTERFACE} = $netc->{NET_DEVICE};
                         configureNetwork($netc, $intf, $first_time) or return;
@@ -850,7 +847,6 @@ See iwpriv(8) man page for further information."),
                    conf_network_card => 
                    {
                     pre => sub {
-                        # my ($netc, $intf, $type, $ipadr, $o_netadr) = @_;
                         #-type =static or dhcp
                         modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
                         @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr) or 
@@ -874,7 +870,6 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
-                        
                         $netc->{dnsServer} ||= dns($intf->{IPADDR});
                         $gateway_ex = gateway($intf->{IPADDR});
                         #-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
@@ -929,6 +924,7 @@ You may also enter the IP address of the gateway if you have one."),
                     },
                     post => $handle_multiple_cnx,
                    },
+                   
                    
                    multiple_internet_cnx => 
                    {
