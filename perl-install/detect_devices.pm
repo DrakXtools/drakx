@@ -384,16 +384,57 @@ sub usbKeyboards { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
 
 sub whatUsbport() {
-    my ($i, $elem, @res) = (0, {});
-    foreach (grep { $_->{media_type} =~ /Printer/ } usb_probe()) {
-	my ($manufacturer, $model) = split '\|', $_->{description};
-	$_->{description} =~ s/Hewlett[-\s_]Packard/HP/;
-	push @res, { port => "/dev/usb/lp$i", val => { CLASS => 'PRINTER',
-						       MODEL => $model,
-						       MANUFACTURER => $manufacturer,
-						       DESCRIPTION => $_->{description},
-						     }};
-	++$i;
+    # The printer manufacturer and model names obtained with the usb_probe()
+    # function were very messy, once there was a lot of noise around the
+    # manufacturers name ("Inc.", "SA", "International", ...) and second,
+    # all Epson inkjets answered with the name "Epson Stylus Color 760" which
+    # lead many newbies to install their Epson Stylus Photo XXX as an Epson
+    # Stylus Color 760 ...
+    #
+    # This routine based on an ioctl request gives very clean and correct
+    # manufacturer and model names, so that they are easily matched to the
+    # printer entries in the Foomatic database
+    my $i; 
+    my @res = ();
+    foreach $i (0..15) {
+	my $port = "/dev/usb/lp$i";
+	open PORT, "$port" or next;
+	my $idstr;
+	# Calculation of IOCTL function 0x84005001 (to get device ID string):
+	# len = 1024
+	# IOCNR_GET_DEVICE_ID = 1
+	# LPIOC_GET_DEVICE_ID(len) =
+	#     _IOC(_IOC_READ, 'P', IOCNR_GET_DEVICE_ID, len)
+	# _IOC(), _IOC_READ as defined in /usr/include/asm/ioctl.h
+	ioctl(PORT, 0x84005001, $idstr) or do {
+	    close PORT;
+	    next;
+	};
+	close PORT;
+	# Remove non-printable characters
+	$idstr =~ tr/[\x00-\x1f]/\./;
+	# Extract the printer data from the ID string
+	my ($manufacturer, $model, $description) = ("", "", "");
+	if ($idstr =~ /MFG:([^;]+);/) {
+	    $manufacturer = $1;
+	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
+	}
+	if ($idstr =~ /MDL:([^;]+);/) {
+	    $model = $1;
+	}
+	if ($idstr =~ /DES:([^;]+);/) {
+	    $description = $1;
+	    $description =~ s/Hewlett[-\s_]Packard/HP/;
+	}
+	# Was there a manufacturer and a model in the string?
+	if (($manufacturer eq "") && ($model eq "")) {
+	    next;
+	}
+	push @res, { port => $port, val => { CLASS => 'PRINTER',
+					     MODEL => $model,
+					     MANUFACTURER => $manufacturer,
+					     DESCRIPTION => $description,
+					     }};
     }
     @res;
 }
