@@ -586,6 +586,7 @@ sub font_choice() {
     my $file_dialog;
     $select_font_msg = N("Select the font file or directory and click on 'Add'");
     $file_dialog = Gtk2::FileSelection->new(N("File Selection"));
+    $file_dialog->set_select_multiple(1);
     $file_dialog->signal_connect(delete_event => sub { $file_dialog->response('close') });
     $file_dialog->ok_button->signal_connect(clicked => \&file_ok_sel, $file_dialog);
     $file_dialog->ok_button->set_label(N("Add"));
@@ -598,12 +599,12 @@ sub font_choice() {
 
 sub file_ok_sel {
     my ($_w, $file_selection) = @_;
-    my $file_name = $file_selection->get_filename;
-    if ($file_name =~ /\Q$select_font_msg/) {
+    if ($file_selection->get_filename =~ /\Q$select_font_msg/) {
         create_dialog(N("Error"), N("You've not selected any font"));
     } else {
         print "-- @install\n";
-        if (!member($file_name, @install)) {
+        my @files = $file_selection->get_selections;
+        foreach my $file_name (difference2(\@files, \@install)) {
             push @install, $file_name;
             $model->append_set(undef, [ 0 => $file_name ]);
         }
