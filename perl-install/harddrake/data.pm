@@ -63,7 +63,9 @@ our @tree =
          my @usbnet = (list_modules::category2modules('network/usb'), "nvnet"); # rought hack for nforce2's nvet
          
          grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices }, 1 ],
-     [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getSpeedtouch(), detect_devices::getSagem(), detect_devices::getModem() }, 0 ],
+     [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getModem() }, 0 ],
+     [ "ADSL", , N("ADSL adapters"), "modem.png", "", sub { 
+           require network::adsl; my $a = network::adsl::adsl_detect(); $a ? values %$a : () }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
      [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", \&unknown, 0 ],
 
