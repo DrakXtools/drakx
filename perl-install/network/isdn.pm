@@ -145,7 +145,7 @@ sub get_cards_by_type {
 }
 
 
-sub isdn_get_cards() {
+sub get_cards() {
     my %buses = (
                  isa => N("ISA / PCMCIA") . "/" . N("I don't know"),
                  pci => N("PCI"),
