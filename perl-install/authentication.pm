@@ -2,7 +2,8 @@ package authentication; # $Id$
 
 use common;
 use any;
-
+use Data::Dumper;
+use Net::DNS;
 
 sub kinds() { 
     ('local', 'LDAP', 'NIS', 'winbind', 'AD', 'SMBKRB');
@@ -62,10 +63,16 @@ sub ask_parameters {
 		     ]) or return;
     } elsif ($kind eq 'AD') {
 	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
-	$authentication->{AD_server} ||= 'kerberos.' . $authentication->{AD_domain};
+	#$authentication->{AD_server} ||= 'kerberos.' . $authentication->{AD_domain};
 	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
 	$authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain});
 
+	find_srv_name($domain);
+	foreach (@data) {
+		print $_."\n";
+	}
+
+	
 	my %sub_kinds = my @sub_kinds = (
 	    simple => N("simple"), 
 	    tls => N("TLS"),
@@ -79,7 +86,8 @@ sub ask_parameters {
 	$in->ask_from('',
 		     N("Authentication Active Directory"),
 		     [ { label => N("Domain"), val => \$authentication->{AD_domain} },
-		       { label => N("Server"), val => \$authentication->{AD_server} },
+		     #{ label => N("Server"), val => \$authentication->{AD_server} },
+		       { label => N("Server"), type => 'bool', val => \@data },
 		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
 		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
 		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
@@ -155,7 +163,8 @@ sub set {
 			);
     } elsif ($kind eq 'AD') {
 	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
-
+	my $port = "389";
+	
 	set_nsswitch_priority('ldap');
 	set_pam_authentication('krb5');
 
@@ -167,6 +176,12 @@ sub set {
 		   kerberos => 'off',
 		  }->{$authentication->{sub_kind}};
 
+	if ($ssl eq 'on') {
+		$port = '636';
+	};
+	
+	
+	
 	update_ldap_conf(
 			 host => $authentication->{AD_server},
 			 base => domain_to_ldap_domain($authentication->{AD_domain}),
@@ -176,6 +191,7 @@ sub set {
 
 			 ssl => $ssl,
 			 sasl_mech => $authentication->{sub_kind} eq 'kerberos' ? 'GSSAPI' : '',
+			 port => $port,
 
 			 binddn => $authentication->{AD_user},
 			 bindpw => $authentication->{AD_password},
@@ -242,20 +258,22 @@ sub set {
 	    run_program::rooted($::prefix, 'net','join', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     } elsif ($kind eq 'SMBKRB') {
-
+	 $authentication->{AD_server} ||= 'ads.' . $authentication->{AD_domain};
 	my $domain = uc $netc->{WINDOMAIN};
 	my $realm = $authentication->{AD_domain};
+	my $srvtime = $authentication->{AD_server};
 
 	configure_krb5_for_AD($authentication);
-	$in->do_pkgs->install('samba-winbind', 'pam_krb5','samba-server');
+	$in->do_pkgs->install('samba-winbind', 'pam_krb5','samba-server', 'samba-client');
 	set_nsswitch_priority('winbind');
 	set_pam_authentication('winbind');
 
-    
+		
 	require network::smb;
 	network::smb::write_smb_ads_conf($domain,$realm);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir_p("$::prefix/home/$domain");
+	run_program::rooted($::prefix, 'net','time','set','-S',$authentication->{AD_server});
 	run_program::rooted($::prefix, 'service', 'smb', 'restart');
 	run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	
@@ -500,6 +518,25 @@ sub krb5_conf_update {
 
     MDK::Common::File::output($file, $s);
 
+}
+
+sub find_srv_name {
+
+	my $domain = $_;
+	print "$domain\n";
+	print "coin coin \n";
+	print "pwet pwet \n";
+	my $res   = Net::DNS::Resolver->new;
+	#my $query = $res->query("_ldap._tcp.".$domain, "srv");
+	my $query = $res->query("_ldap._tcp.support.mandrakesoft.com", "srv");
+
+#print Data::Dumper::Dumper($query);
+foreach ($query->answer) {
+	my $srv = ($query->answer)[$_];
+	#print $_->target."\n";
+	push (@data,$_->target);
+	}
+	return @data;
 }
 1;
 
