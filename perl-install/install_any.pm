@@ -644,7 +644,17 @@ sub g_auto_install {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication printer mouse wacom netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall mkbootdisk); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication mouse wacom netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall mkbootdisk); #- TODO modules bootloader 
+
+    if (my $printer = $::o->{printer}) {
+	$o->{printer}{$_} = $::o->{printer}{$_} foreach qw(SPOOLER TYPE str_type OPTIONS DBENTRY);
+	$o->{printer}{configured} = {};
+	foreach my $queue (keys %{$::o->{printer}{configured}}) {
+	    my $val = $::o->{printer}{configured}{$queue};
+	    $val->{$_} and $o->{printer}{configured}{$queue}{$_} = $val->{$_} foreach qw(OPTIONS);
+	    add2hash($o->{printer}{configured}{$queue}{queuedata} = {}, $val->{queuedata});
+	}
+    }
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{$_} = $::o->{X}{$_} foreach qw(default_depth resolution_wanted);
