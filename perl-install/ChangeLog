@@ -1,5 +1,60 @@
 2001/04/12  dam's  <damien@mandrakesoft.com>
 
+	* netconnect.pm: if neuneu but explicited clicked, don't skip
+	corrected pcmcia driver
+
+2001/04/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: removed Cancel of Summary.
+	fixed ask printer configuration.
+
+	* common.pm: improved bestMatchSentence2.
+
+	* detect_devices.pm: fix Hewlett-Packard to HP in case.
+
+	* standalone/printerdrake: never ask to configure a printer in standalone.
+
+	* printerdrake.pm: automatically add a queue if nothing exists.
+	fixed ask to configure a printer.
+
+	* interactive.pm: removed strict die on empty list.
+
+	* modules.pm, commands.pm, lang.pm, keyboard.pm, pkgs.pm: fixed log of
+	packdrake.
+
+2001/04/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: add some rule so later on tinyfirewall will not
+	prevent everything from working
+
+	* share/po/fr.po: write some ppc translations
+	un-dadouize a problem
+
+2001/04/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/it.po: Updated Italian file
+
+2001/04/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (installPackages): fix no advertising with less
+	than 20MB of packages
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize):
+	  - when not_edit and empty list, die.
+	  - when not_edit and single element list, don't display that entry.
+
+	* install_steps_interactive.pm (configureX): fix for X test at install
+	with exotic fonts
+
+	* lang.pm (pack_langs): set RPM_INSTALL_LANG for package "menu"
+
+	* modules.pm (configure_pcmcia): better handling for not running cardmgr
+	many times
+	(configure_pcmcia): always run cardmgr so that it is run even if stage1
+	did create a /var/run/stab. This is just a try :-/
+
+2001/04/12  dam's  <damien@mandrakesoft.com>
+
 	* bootlook.pm: corrected typo
 	added use bootloader
 
