@@ -382,6 +382,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
     $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
     $o->{compssUsersChoice}{SMP} = 1 if detect_devices::hasSMP();
+    $o->{compssUsersChoice}{CDCOM} = 1 if grep { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
     $o->{compssUsersChoice}{'3D'} = 1 if 
       detect_devices::matching_desc('Matrox.* G[245][05]0') ||
       detect_devices::matching_desc('Rage X[CL]') ||
