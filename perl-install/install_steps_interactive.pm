@@ -845,12 +845,6 @@ sub configureX {
 	    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
 	}
     }
-    $::force_xf3 = $::force_xf3; #- for no warning
-    $::force_xf3 = $o->ask_yesorno('', 
-_("DrakX will generate config files for both XFree 3.3 and XFree 4.0.
-By default, the 4.0 server is used unless your card is not supported.
-
-Do you want to keep XFree 3.3?"), 0) if $::expert;
 
     #- strange, xfs must not be started twice...
     #- trying to stop and restart it does nothing good too...

@@ -771,7 +771,8 @@ sub configureX {
       local $::auto = 1;
       $o->{X}{skiptest} = 1;
       Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, bool($o->{pcmcia}), sub {
-         $o->pkg_install("XFree86-$_[0]");
+	  my ($server, @l) = @_;
+	  $o->pkg_install("XFree86-$server", @l);
       });
     }
     $o->configureXAfter;
