@@ -197,6 +197,7 @@ if (ref($in) =~ /gtk/) {
 			   ),
 		    1, $notebook,
 		   ),
+	    0, new Gtk::HSeparator,
 	    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'end'), 5),
 		      gtksignal_connect(new Gtk::Button(_("Accept")), clicked => sub { Gtk->main_quit;  }),
 		      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { $o = $o_old; Gtk->main_quit; quit_global($in, 0) }),
@@ -287,23 +288,22 @@ sub h2widget {
 					  $vb, \$i, \@widget_list)
 			 );
 	} else {
-	    $w = gtkpack__(create_packtable({ col_spacings => 10, row_spacings => 3 },
-					    map {
-						my $e;
-						my $t = ${$k}{$_}; $e = new Gtk::Entry;
-						$e->{value} = "$label\{$_\}";
-						my $tag = Gtk->timeout_add(1000, sub {
-									       $e->set_text($t);
-									       0;
-									   });
-						gtksignal_connect($e, changed => sub {
-								      my $exe = $e->{value} . "='" . $e->get_text() . "'";
+	    $w = create_packtable({ col_spacings => 10, row_spacings => 3 },
+				  map {
+				      my $e;
+				      my $t = ${$k}{$_}; $e = new Gtk::Entry;
+				      $e->{value} = "$label\{$_\}";
+				      my $tag = Gtk->timeout_add(1000, sub {
+								     $e->set_text($t);
+								     0;
+								 });
+				      gtksignal_connect($e, changed => sub {
+							    my $exe = $e->{value} . "='" . $e->get_text() . "'";
 #								      print "EXEC : $exe\n ";
-								      eval "$exe";
-								  });
-						[ "$_ : ", $e ] } @list_keys
-					   ),
-			  )
+							    eval "$exe";
+							});
+				      [ "$_ : ", $e ] } @list_keys
+				 )
 	}
     } elsif(ref($k) =~ /ARRAY/) {
 	my $vb;
@@ -355,6 +355,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.9  2001/10/25 11:17:03  damien
+#- The new and shiny drakautoinst is coming. P|-|34R
+#-
 #- Revision 1.8  2001/10/25 02:18:24  damien
 #- The new drakautoinst is coming. P|-|34R
 #-
