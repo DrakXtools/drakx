@@ -49,6 +49,12 @@ sub create_boxradio {
     mapn {
 	my ($txt, $w) = @_;
 	$w->signal_connect(button_press_event => $double_click) if $double_click;
+
+	$w->signal_connect(key_press_event => sub {
+            my ($w, $event) = @_;
+	    $may_go_to_next->($w, $event, 'tab');
+	    1;
+	});
 	$w->signal_connect(clicked => sub {
  	    ${$e->{val}} = $txt;
 	    &$changed;
@@ -63,7 +69,7 @@ sub create_boxradio {
     $boxradio, sub {
 	my ($v) = @_;
 	mapn { $_[0]->set_active($_[1] eq $v) } \@radios, $e->{list};
-    }
+    }, $radios[0];
 }
 
 sub create_clist {
@@ -344,19 +350,30 @@ sub ask_fromW {
 	my ($e, $ind) = @_;
 
 	my $may_go_to_next = sub {
-	    my ($w, $event) = @_;
-	    if (!$event || ($event->{keyval} & 0x7f) == 0xd) {
-		$w->signal_emit_stop("key_press_event") if $event;
-		if ($ind == $#widgets) {
-		    @widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
-		} else {
-		    $widgets[$ind+1]{w}->grab_focus;
+	    my ($w, $event, $kind) = @_;
+	    if ($kind eq 'tab') {
+		if (($event->{keyval} & 0x7f) == 0x9) {
+		    $w->signal_emit_stop("key_press_event");
+		    if ($ind == $#widgets) {
+			$mainw->{ok}->grab_focus;
+		    } else {
+			$widgets[$ind+1]{focus_w}->grab_focus;
+		    }
+		}
+	    } else {
+		if (!$event || ($event->{keyval} & 0x7f) == 0xd) {
+		    $w->signal_emit_stop("key_press_event") if $event;
+		    if ($ind == $#widgets) {
+			@widgets == 1 ? $mainw->{ok}->clicked : $mainw->{ok}->grab_focus;
+		    } else {
+			$widgets[$ind+1]{focus_w}->grab_focus;
+		    }
 		}
 	    }
 	};
 	my $changed = sub { $update->(sub { $common->{callbacks}{changed}($ind) }) };
 
-	my ($w, $real_w, $set, $get, $expand, $size, $width);
+	my ($w, $real_w, $focus_w, $set, $get, $expand, $size, $width);
 	if ($e->{type} eq 'iconlist') {
 	    $w = new Gtk::Button;
 	    $set = sub {
@@ -414,11 +431,11 @@ sub ask_fromW {
 
 	    if ($e->{help}) {
 		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
-		($w, $set) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
+		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
 	    } elsif ($e->{type} eq 'treelist') {
 		($w, $set, $size) = create_ctree(@para);
 	    } else {
-		($w, $set) = $use_boxradio ? create_boxradio(@para) : create_clist(@para);
+		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_clist(@para);
 	    }
 	    if (@{$e->{list}} > (@$l == 1 ? 10 : 4)) {
 		$has_scroll = 1;
@@ -453,7 +470,7 @@ sub ask_fromW {
 	$max_width = max($max_width, $width);
 	$total_size += $size || 1;
     
-	{ e => $e, w => $w, real_w => $real_w || $w, expand => $expand,
+	{ e => $e, w => $w, real_w => $real_w || $w, focus_w => $focus_w || $w, expand => $expand,
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
 	  icon_w => -e $e->{icon} ? gtkpng($e->{icon}) : '' };
     };
@@ -503,7 +520,7 @@ sub ask_fromW {
 	$mainw->{rwindow}->set_default_size($mainw->{box_width}, $mainw->{box_height});
     } 
     $set_advanced->(0);
-    (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
+    (@widgets ? $widgets[0]{focus_w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
     my $check = sub {
 	my ($f) = @_;
@@ -513,7 +530,7 @@ sub ask_fromW {
 	
 	    if ($error) {
 		$set_all->();
-		$widgets[$focus || 0]{w}->grab_focus();
+		$widgets[$focus || 0]{focus_w}->grab_focus();
 	    }
 	    !$error;
 	}
