@@ -31,6 +31,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use my_gtk qw(:helpers);
 use ugtk qw(:helpers);
+use detect_devices;
 
 #- languages that can't be displayed with gtk1, so we unset translations
 #- for them until this tool is ported to gtk2
@@ -74,7 +75,7 @@ my $dev_hbox = new Gtk::HBox(1, 0);
 my $device_combo = new Gtk::Combo();
 my $device_button = new Gtk::Button(N("default"));
 
-$device_combo->set_popdown_strings("/dev/fd0", "/dev/fd1");
+$device_combo->set_popdown_strings(map { "/dev/" . $_->{device} } detect_devices::floppies());
 $device_button->signal_connect(clicked => sub { $device_combo->entry->set_text("/dev/fd0") });
 
 $dev_hbox->pack_start(new Gtk::Label(N("device")), 0, 0, 0);
