@@ -437,8 +437,6 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 	sync(); sync();
 
-        while (1);
-
 	printf("sending termination signals...");
 	kill(-1, 15);
 	sleep(2);
