@@ -118,7 +118,6 @@ sub new($$) {
 
 	foreach (@servers) {
 	    log::l("Trying with server $_");
-	    my $dir = "/usr/X11R6/bin";
 	    my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xnest|^X_move$/ ? $_ : "XF86_$_";
 	    if (/FB/i) {
 		!$o->{vga16} && $o->{allowFB} or next;
