@@ -1809,7 +1809,7 @@ sub main {
     }
 
     # Control variables for the main loop
-    my ($queue, $continue, $newqueue, $editqueue, $expertswitch) = ('', 1, 0, 0, 0);
+    my ($queue, $continue, $newqueue, $editqueue, $expertswitch, $menushown) = ('', 1, 0, 0, 0, 0);
     # Cursor position in queue modification window
     my $modify = _("Printer options");
     while ($continue) {
@@ -1872,6 +1872,14 @@ sub main {
 		    # Cancelling the printer type dialog should leed to this
 		    # dialog
 		    $continue = 1;
+		    # This is for the "Recommended" installation. When one has
+		    # no printer queue printerdrake starts directly adding
+		    # a printer and in the end it asks whether one wants to
+		    # install another printer. If the user says "Yes", he
+		    # arrives in the main menu of printerdrake. From now
+		    # on the question is not asked any more but the menu
+		    # is shown directly after having done an operation.
+		    $menushown = 1;
 		    # $expertwitch gets one when the "Expert mode"/
 		    # "Standard mode" button is clicked.
 		    $expertswitch = !$in->ask_from_(
@@ -1973,6 +1981,8 @@ to get information about it or on
 	    choose_printer_type($printer, $in) or next;
 	    if ($printer->{TYPE} eq 'CUPS') {
 		setup_remote_cups_server($printer, $in);
+		$continue = ($::expert || !$::isInstall || $menushown ||
+			     $in->ask_yesorno('',_("Do you want to configure another printer?")));
 		next;
 	    }
 	    #- Cancelling one of the following dialogs should restart 
@@ -1987,7 +1997,7 @@ to get information about it or on
 	    configure_queue($printer, $in);
 	    setasdefault($printer, $in);
 	    if (print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) { 
-		$continue = ($::expert || !$::isInstall ||
+		$continue = ($::expert || !$::isInstall || $menushown ||
 			 $in->ask_yesorno('',_("Do you want to configure another printer?")));
 	    } else {
 		$editqueue = 1;
@@ -2121,7 +2131,9 @@ What do you want to modify on this printer?",
 	    } else {
 		$editqueue = 0;
 	    }
-	    $continue = ($editqueue || $::expert || !$::isInstall);
+	    $continue = ($editqueue || $::expert || !$::isInstall || 
+			 $menushown ||
+			 $in->ask_yesorno('',_("Do you want to configure another printer?")));
 	}
 	# Delete some variables
 	$printer->{OLD_QUEUE} = "";
