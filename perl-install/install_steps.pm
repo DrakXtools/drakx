@@ -95,7 +95,7 @@ sub selectLanguage {
 
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
-	$o->{keyboard} = keyboard::lang2keyboard($o->{lang});
+	$o->{keyboard} = keyboard::from_usb() || keyboard::lang2keyboard($o->{lang});
 	keyboard::setup($o->{keyboard}) if !$::live;
     }
 

@@ -348,11 +348,11 @@ sub pci_probe {
 }
 
 sub usb_probe {
-    -e "/proc/bus/usb/devices" or return ();
+    -e "/proc/bus/usb/devices" or return;
 
     add_addons($usbtable_addons, map {
 	my %l;
-	@l{qw(vendor id media_type driver description)} = split "\t";
+	@l{qw(vendor id media_type driver description pci_bus pci_device)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
 	\%l
@@ -489,6 +489,16 @@ sub usbMice      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tabl
 sub usbWacom     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
 sub usbKeyboards { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
 sub usbStorage   { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
+
+sub usbKeyboard2country_code {
+    my ($usb_kbd) = @_;
+    local *F;
+    my $tmp;
+    sysopen(F, sprintf("/proc/bus/usb/%03d/%03d", $usb_kbd->{pci_bus}, $usb_kbd->{pci_device}), 0) and
+      sysseek F, 0x28, 0 and
+      sysread F, $tmp, 1 and
+      unpack("C", $tmp);
+}
 
 sub whatUsbport() {
     # The printer manufacturer and model names obtained with the usb_probe()

@@ -197,14 +197,14 @@ For any question on this document, please contact MandrakeSoft S.A.
 sub selectKeyboard {
     my ($o, $clicked) = @_;
 
+    my $from_usb = keyboard::from_usb();
     my $l = keyboard::lang2keyboards(lang::langs($o->{langs}));
 
-    #- good guess, don't ask
+    #- good guess, don't ask ($o->{keyboard} already set)
     return install_steps::selectKeyboard($o) 
-      if !$::expert && !$clicked && $l->[0][1] >= 90 && listlength(lang::langs($o->{langs})) == 1;
+      if !$::expert && !$clicked && ($from_usb || $l->[0][1] >= 90) && listlength(lang::langs($o->{langs})) == 1;
 
-    my @best = map { $_->[0] } @$l;
-    push @best, 'us_intl' if !member('us_intl', @best);
+    my @best = uniq(if_($from_usb, $from_usb), (map { $_->[0] } @$l), 'us_intl');
 
     my $format = sub { translate(keyboard::keyboard2text($_[0])) };
     my $other;

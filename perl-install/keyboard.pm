@@ -148,44 +148,13 @@ my %lang2keyboard =
 
 # USB kbd table
 # The numeric values are the bCountryCode field (5th byte)  of HID descriptor
-my %usb2drakxkbd =
+my @usb2keyboard =
 (
-  0x00 => undef, #- the keyboard don't tell its layout
-#-0x01 => 'ar',
-  0x02 => 'be',
-#-0x03 => 'ca', #- "Canadian bilingual" ??
-  0x04 => 'qc', #- Canadian French
-  0x05 => 'cz',
-  0x06 => 'dk',
-  0x07 => 'fi',
-  0x08 => 'fr',
-  0x09 => 'de',
-  0x0a => 'gr',
-  0x0b => 'il',
-  0x0c => 'hu',
-  0x0d => 'us_intl', #- "international ISO" ??
-  0x0e => 'it',
-  0x0f => 'jp',
-  0x10 => 'kr', #- Korean
-  0x11 => 'la',
-  0x12 => 'nl',
-  0x13 => 'no',
-  0x14 => 'ir',
-  0x15 => 'pl',
-  0x16 => 'pt',
-  0x17 => 'ru',
-  0x18 => 'sk',
-  0x19 => 'es',
-  0x1a => 'se',
-  0x1b => 'ch_de',
-  0x1c => 'ch_de',
-  0x1d => 'ch_de', #- USB spec says just "Swiss"
-#-0x1e => 'tw', # Taiwan
-  0x1f => 'tr_q',
-  0x20 => 'uk',
-  0x21 => 'us',
-  0x22 => 'yu',
-  0x23 => 'tr_f',
+  qw(SKIP ar_SKIP be ca_SKIP qc cz dk fi fr de gr il hu us_intl it jp),
+#- 0x10
+  qw(kr la nl no ir pl pt ru sk es se ch_de ch_de ch_de tw_SKIP tr_q),
+#- 0x20
+  qw(uk us yu tr_f),
 #- higher codes not attribued as of 2002-02
 );
 
@@ -370,14 +339,13 @@ sub lang2keyboard {
     my $kb = lang2keyboards($l)->[0][0];
     $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboard mapping to us.
 }
-sub usb2drakxkbd {
-    my ($cc) = @_;
-    my $kb = $usb2drakxkbd{$cc};
-#- TODO: detect when undef is returned because it is actualy not defined
-#- ($cc == 0) and when it is because of an unknown/not listed number;
-#- in that last case it would be nice to display a dialog telling the
-#- user to report the number to us.
-    $kb;
+
+sub from_usb {
+    return if $::noauto;
+    my ($usb_kbd) = detect_devices::usbKeyboards() or return;
+    my $country_code = detect_devices::usbKeyboard2country_code($usb_kbd) or return;
+    my $keyboard = $usb2keyboard[$country_code];
+    $keyboard !~ /SKIP/ && $keyboard;
 }
 
 sub load {
@@ -520,7 +488,8 @@ sub check {
 	    $keyboards{$_->[0]} or $err->("invalid keyboard $_->[0] in $lang2keyboard{$lang} for $lang in \%lang2keyboard keyboard.pm");
 	}
     }
-    !$_ || $keyboards{$_} or $err->("invalid keyboard $_ in \%usb2drakxkbd keyboard.pm") foreach values %usb2drakxkbd;
+    /SKIP/ || $keyboards{$_} or $err->("invalid keyboard $_ in \@usb2keyboard keyboard.pm") foreach @usb2keyboard;
+    $usb2keyboard[0x21] eq 'us' or $err->("\@usb2keyboard is badly modified, 0x21 is not us keyboard");
 
     my @xkb_groups = map { if_(/grp:(\S+)/, $1) } cat_('/usr/lib/X11/xkb/rules/xfree86.lst');
     $err->("invalid xkb group toggle '$_' in \%kbdgrptoggle") foreach difference2([ keys %kbdgrptoggle ], \@xkb_groups);
