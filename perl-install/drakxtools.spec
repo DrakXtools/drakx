@@ -1,6 +1,6 @@
 %define name drakxtools
-%define version 1.1.7
-%define release 99mdk
+%define version 1.1.8
+%define release 1mdk
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name: %{name}
@@ -34,6 +34,13 @@ Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
 Summary: The drakxtools via http
 Group: System/Configuration/Other
 Requires: %{name}-newt = %{version}-%{release}, perl-Net_SSLeay, perl-Authen-PAM, perl-CGI
+
+%package -n harddrake
+Summary: Main Hardware Configuration/Information Tool
+Group: System/Configuration/Hardware
+Requires: %{name} = %{version}-%{release}
+Obsoletes: kudzu, libdetect0, libdetect0-devel
+Providese: kudzu, libdetect0, libdetect0-devel
 
 %description
 Contains XFdrake, diskdrake, keyboarddrake, lspcidrake, mousedrake,
@@ -79,6 +86,11 @@ See package %{name}
 %description http
 See package %{name}
 
+%description -n harddrake
+This is the main configuration tool for hardware that calls all the
+other configuration tools.
+
+
 %prep
 %setup -q
 
@@ -105,6 +117,19 @@ dirs2="$dirs1 usr/bin usr/sbin"
 perl -ni -e '/gtk|icons|pixmaps|XFdrake|bootlook|drakbackup|drakfont|logdrake|net_monitor/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 
+#mdk menu entry
+mkdir -p $RPM_BUILD_ROOT/%_menudir
+cat > $RPM_BUILD_ROOT%_menudir/%name <<EOF
+?package(harddrake):\
+	needs="X11"\
+	section="Configuration/Hardware"\
+	title="HardDrake"\
+	longtitle="Hardware Central Configuration/information tool"\
+	command="/usr/sbin/harddrake"\
+	icon="harddrake.png"
+EOF
+
+
 %find_lang libDrakX
 
 # can't give 2 list of files, so add mo's to the list
@@ -114,33 +139,36 @@ cat libDrakX.lang >> %{name}.list
 rm -rf $RPM_BUILD_ROOT
 
 %post
-cd 
-if [ ! -e /usr/X11R6/bin/Xconfigurator ];then
-   %{__ln_s} -f ../sbin/XFdrake /usr/X11R6/bin/Xconfigurator
-fi
-if [ ! -e %{_sbindir}/kbdconfig ];then
- %{__ln_s} -f keyboarddrake %{_sbindir}/kbdconfig
-fi
-if [ ! -e %{_sbindir}/setuptool ];then
- %{__ln_s} -f drakxconf %{_sbindir}/setuptool
-fi
-if [ ! -e %{_sbindir}/mouseconfig ];then
- %{__ln_s} -f mousedrake %{_sbindir}/mouseconfig
-fi
-if [ ! -e %{_bindir}/printtool ];then
- %{__ln_s} -f ../sbin/printerdrake %{_bindir}/printtool
-fi
+[[ ! -e /usr/X11R6/bin/Xconfigurator ]] && %__ln_s -f ../sbin/XFdrake /usr/X11R6/bin/Xconfigurator
+
+[[ ! -e %_sbindir/kbdconfig ]] && %__ln_s -f keyboarddrake %_sbindir/kbdconfig
+[[ ! -e %_sbindir/setuptool ]] && %__ln_s -f drakxconf %_sbindir/setuptool
+[[ ! -e %_sbindir/mouseconfig ]] && %__ln_s -f mousedrake %_sbindir/mouseconfig
+[[ ! -e %_bindir/printtool ]] && %__ln_s -f ../sbin/printerdrake %_bindir/printtool
 
 %postun
 for i in /usr/X11R6/bin/Xconfigurator %{_sbindir}/kbdconfig %{_sbindir}/mouseconfig %{_bindir}/printtool;do
     if [ -L $i ]; then %{__rm} -f $i; fi
 done
 
+
 %post http
 %_post_service drakxtools_http
 
 %preun http
 %_preun_service drakxtools_http
+
+
+%post -n harddrake
+%_post_service harddrake
+%update_menus
+
+%preun -n harddrake
+%_preun_service harddrake
+
+%postun -n harddrake
+%clean_menus
+
 
 %files newt -f %{name}.list
 %defattr(-,root,root)
@@ -155,6 +183,11 @@ done
 %config(noreplace) %{_sysconfdir}/security/console.apps/net_monitor
 /usr/X11R6/bin/*
 
+%files -n harddrake
+%defattr(-,root,root)
+%_sbindir/harddrake2
+%_initrddir/harddrake2
+
 %files http -f %{name}-http.list
 %defattr(-,root,root)
 %dir %{_sysconfdir}/drakxtools_http
@@ -165,6 +198,10 @@ done
 %config(noreplace) %{_sysconfdir}/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Jul  5 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
+- snapshot
+- add harddrake support
+
 * Tue Jun 18 2002 Frederic Lepied <flepied@mandrakesoft.com> 1.1.7-99mdk
 - added new draksec from Christian and a new way to build the packages (make rpm)
 
