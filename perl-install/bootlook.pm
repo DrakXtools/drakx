@@ -302,15 +302,20 @@ sub updateInit
 sub updateAurora
 {
     if ($a_mode) {
-	mapn { 
-	    if ($_[0]) {
-		symlinkf("/lib/aurora/Monitors/$_[1]", "/etc/aurora/Monitor");
-		$in->standalone::pkgs_install($_[2]) if !(-e "/lib/aurora/Monitors/$_[1]");
-	    }
+        if ($a_h_button->get_active()) {
+            symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");
+            $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
+        }
+ 
+        if ($a_v_button->get_active()) {
+            symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
+            $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
+        }
+ 
+        if ($a_g_button->get_active()) {
+            symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
+            $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
 	}
-	  [$a_h_button->get_active(), "NewStyle-WsLib",    q(Aurora-Monitor-NewStyle-WsLib)],
-	  [$a_v_button->get_active(), "Traditional-WsLib", q(Aurora-Monitor-Traditional-WsLib)],
-	  [$a_g_button->get_active(), "Traditional-Gtk+",  q(Aurora-Monitor-Traditional-Gtk+)];
     } else {
 	unlink "/etc/aurora/Monitor";
     }
