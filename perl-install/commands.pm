@@ -222,42 +222,8 @@ sub ls {
     }
 }
 sub cp {
-    my ($force) = getopts(\@_, qw(f));
-    @_ >= 2 or die "usage: cp [-f] <sources> <dest>\n(this cp does -Rl by default)\n";
-
-    my $cp; $cp = sub {
-	my $dest = pop @_;
-
-	@_ or return;
-	@_ == 1 || -d $dest or die "cp: copying multiple files, but last argument ($dest) is not a directory\n";
-
-	foreach my $src (@_) {
-	    my $dest = $dest;
-	    -d $dest and $dest .= "/" . basename($src);
-
-	    if (-e $dest) {
-		$force ? unlink $dest : die "file $dest already exist\n";
-	    }
-
-	    if (-d $src) {
-		-d $dest or mkdir $dest, (stat($src))[2] or die "mkdir: can't create directory $dest: $!\n";
-		&$cp(glob_($src), $dest);
-	    } elsif (-l $src) {
-		unless (symlink((readlink($src) || die "readlink failed: $!"), $dest)) {
-		    my $msg = "symlink: can't create symlink $dest: $!\n";
-		    $force ? warn $msg : die $msg;		    
-		}
-	    } else {
-		local (*F, *G);
-		open F, $src or die "can't open $src for reading: $!\n";
-		open G, "> $dest" or $force or die "can't create $dest : $!\n";
-		local $_;
-		while (<F>) { print G $_ }
-		chmod((stat($src))[2], $dest);
-	    }
-	}
-    };
-    &$cp(@_);
+    @_ >= 2 or die "usage: cp <sources> <dest>\n(this cp does -Rfl by default)\n";
+    cp_af(@_);
 }
 
 sub ps {
