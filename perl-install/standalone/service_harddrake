@@ -39,6 +39,9 @@ if ($curr_kernel ne $prev_kernel) {
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
     if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
+        # do not automatically switch from nv to nvidia (in order to handle
+        # cases where nvidia module crashes the system):
+        #
         # substInFile {
         #    log::explanations("switch XFree86 driver from nv to nvidia") if /Driver "nv"/;
         #    s!Driver "nv.*"!Driver "nvidia"!g;
@@ -120,7 +123,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         network::ethernet::configure_eth_aliases($modules_conf);
         $modules_conf->write;
     } elsif (member($Ident, qw(AGP ATA_STORAGE SATA_STORAGE SCSI_CONTROLLER TV))) {
-        # add agpgart modules to modprobe.preload if needed:
+        # add agpgart and the like modules to modprobe.preload if needed:
         $modules_conf->write;
         next;
     } elsif ($Ident eq "USB_CONTROLLER") {
