@@ -187,7 +187,7 @@ our %l = (
       qw(btaudio),
 
       #- these need checking
-      qw(tmspci rrunner meye buz paep),
+      qw(tmspci rrunner meye),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
