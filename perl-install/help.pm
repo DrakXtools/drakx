@@ -606,7 +606,7 @@ N_("\"Country\": check the current country selection. If you are not in this
 country, click on the button and choose another one."),
 
 selectInstallClass => 
-N_("This step is activated only if an ols GNU/Linux partition has been found on
+N_("This step is activated only if an old GNU/Linux partition has been found on
 your machine.
 
 DrakX now needs to know if you want to perform a new install or an upgrade
