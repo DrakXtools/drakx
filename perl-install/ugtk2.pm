@@ -749,6 +749,7 @@ sub new {
 
     if ($::isWizard && !$o->{pop_it}) {
 	$o->{isWizard} = 1;
+	$o->{window}->sink; $o->{rwindow}->sink;  #- free memory
 	$o->{window} = Gtk2::VBox->new(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	$o->{rwindow} = $o->{window};
