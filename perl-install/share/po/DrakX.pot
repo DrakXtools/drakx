@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-01-01 19:31+0100\n"
+"POT-Creation-Date: 2000-01-01 21:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -764,8 +764,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr ""
 
-#: ../diskdrake.pm_.c:534 ../install_steps_gtk.pm_.c:329
-#: ../install_steps_gtk.pm_.c:378 ../unused/install_steps_graphical.pm_.c:314
+#: ../diskdrake.pm_.c:534 ../install_steps_graphical.pm_.c:287
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:329
+#: ../install_steps_gtk.pm_.c:378
 msgid "MB"
 msgstr ""
 
@@ -1515,6 +1516,87 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
+#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:293
+msgid "You must have a swap partition"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:295
+msgid ""
+"You don't have a swap partition\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:329
+msgid "Choose the size you want to install"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:378
+msgid "Total size: "
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:390
+#, c-format
+msgid "Version: %s\n"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:391
+#, c-format
+msgid "Size: %d KB\n"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:506
+msgid "Choose the packages you want to install"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:509
+msgid "Info"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:517
+#: ../install_steps_interactive.pm_.c:81
+msgid "Install"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:536
+#: ../install_steps_interactive.pm_.c:257
+msgid "Installing"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:543
+msgid "Please wait, "
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:545
+msgid "Time remaining "
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:546
+msgid "Total time "
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:551
+#: ../install_steps_interactive.pm_.c:257
+msgid "Preparing installation"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:566
+#, c-format
+msgid "Installing package %s"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:591
+msgid "Go on anyway?"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:591
+msgid "There was an error ordering packages:"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:577 ../install_steps_interactive.pm_.c:832
+msgid "Use existing configuration for X11?"
+msgstr ""
+
 #: ../install_steps_gtk.pm_.c:259
 msgid ""
 "WARNING!\n"
@@ -1531,17 +1613,6 @@ msgstr ""
 msgid "Automatic resizing failed"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:293 ../unused/install_steps_graphical.pm_.c:255
-msgid "You must have a swap partition"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:295 ../unused/install_steps_graphical.pm_.c:258
-msgid ""
-"You don't have a swap partition\n"
-"\n"
-"Continue anyway?"
-msgstr ""
-
 #: ../install_steps_gtk.pm_.c:326
 #, c-format
 msgid "Going to install %d MB. You can choose to install more programs"
@@ -1551,65 +1622,12 @@ msgstr ""
 msgid "You will be able to choose more precisely in next step"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:329
-msgid "Choose the size you want to install"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:378 ../unused/install_steps_graphical.pm_.c:314
-msgid "Total size: "
-msgstr ""
-
 #: ../install_steps_gtk.pm_.c:389
 msgid "Bad package"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:390 ../unused/install_steps_graphical.pm_.c:284
-#, c-format
-msgid "Version: %s\n"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:391 ../unused/install_steps_graphical.pm_.c:285
-#, c-format
-msgid "Size: %d KB\n"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:506 ../unused/install_steps_graphical.pm_.c:421
-msgid "Choose the packages you want to install"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:509 ../unused/install_steps_graphical.pm_.c:424
-msgid "Info"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:517 ../install_steps_interactive.pm_.c:81
-#: ../unused/install_steps_graphical.pm_.c:432
-msgid "Install"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:536 ../install_steps_interactive.pm_.c:257
-#: ../unused/install_steps_graphical.pm_.c:451
-msgid "Installing"
-msgstr ""
-
 #: ../install_steps_gtk.pm_.c:539
 msgid "Estimating"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:543 ../unused/install_steps_graphical.pm_.c:457
-msgid "Please wait, "
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:545 ../unused/install_steps_graphical.pm_.c:459
-msgid "Time remaining "
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:546 ../unused/install_steps_graphical.pm_.c:460
-msgid "Total time "
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:551 ../install_steps_interactive.pm_.c:257
-#: ../unused/install_steps_graphical.pm_.c:465
-msgid "Preparing installation"
 msgstr ""
 
 #: ../install_steps_gtk.pm_.c:561
@@ -1619,19 +1637,6 @@ msgstr ""
 
 #: ../install_steps_gtk.pm_.c:561
 msgid ", %U MB"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:566 ../unused/install_steps_graphical.pm_.c:486
-#, c-format
-msgid "Installing package %s"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:591 ../unused/install_steps_graphical.pm_.c:511
-msgid "Go on anyway?"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:591 ../unused/install_steps_graphical.pm_.c:511
-msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:37
@@ -2021,7 +2026,7 @@ msgstr ""
 #: ../interactive.pm_.c:84 ../interactive.pm_.c:163
 #: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:94
 #: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:192 ../my_gtk.pm_.c:425
-#: ../my_gtk.pm_.c:525 ../unused/install_steps_graphical.pm_.c:608
+#: ../my_gtk.pm_.c:525
 msgid "Ok"
 msgstr ""
 
@@ -2394,13 +2399,8 @@ msgstr ""
 msgid "Give the ram size in Mb"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:832
-#: ../unused/install_steps_graphical.pm_.c:535
-msgid "Use existing configuration for X11?"
-msgstr ""
-
 #: ../install_steps_interactive.pm_.c:844
-#: ../install_steps_interactive.pm_.c:999
+#: ../install_steps_interactive.pm_.c:1009
 msgid "Try to find PCI devices?"
 msgstr ""
 
@@ -2499,43 +2499,59 @@ msgstr ""
 msgid "PCMCIA"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:975
-msgid "Enter a floppy (all data will be lost)"
+#: ../install_steps_interactive.pm_.c:957
+msgid ""
+"Linux does not yet fully support ultra dma 66 HPT.\n"
+"As a work-around i can make a custom floppy giving access the hard drive on "
+"ide2 and ide3"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:989
+#: ../install_steps_interactive.pm_.c:978
+msgid ""
+"Enter a floppy to create an HTP enabled boot\n"
+"(all data on floppy will be lost)"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:994
 msgid "It is necessary to restart installation booting on the floppy"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:990
+#: ../install_steps_interactive.pm_.c:995
 msgid "It is necessary to restart installation with the new parameters"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:1003
+#: ../install_steps_interactive.pm_.c:999
+#, c-format
+msgid ""
+"Failed to create an HTP boot floppy.\n"
+"You may have to restart installation and give ``%s'' at the prompt"
+msgstr ""
+
+#: ../install_steps_interactive.pm_.c:1013
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:1004
+#: ../install_steps_interactive.pm_.c:1014
 msgid "Do you have another one?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:1005
+#: ../install_steps_interactive.pm_.c:1015
 #, c-format
 msgid "Do you have any %s interface?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:1007 ../interactive.pm_.c:79
+#: ../install_steps_interactive.pm_.c:1017 ../interactive.pm_.c:79
 #: ../my_gtk.pm_.c:424 ../printerdrake.pm_.c:176
 msgid "No"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:1007 ../interactive.pm_.c:79
+#: ../install_steps_interactive.pm_.c:1017 ../interactive.pm_.c:79
 #: ../my_gtk.pm_.c:424
 msgid "Yes"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:1008
+#: ../install_steps_interactive.pm_.c:1018
 msgid "See hardware info"
 msgstr ""
 
@@ -3209,12 +3225,4 @@ msgstr ""
 
 #: ../standalone/mousedrake_.c:35
 msgid "Emulate third button?"
-msgstr ""
-
-#: ../unused/install_steps_graphical.pm_.c:433
-msgid "Show less"
-msgstr ""
-
-#: ../unused/install_steps_graphical.pm_.c:434
-msgid "Show more"
 msgstr ""
