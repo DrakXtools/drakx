@@ -241,9 +241,14 @@ $window1->{window}->add(
                                                              clicked => sub {
                                                                  $::isWizard = 1;
                                                                  system("drakconnect --wizard");
-                                                                 # netconnect::intro('', $netcnx, $in);
+								 #- reload everything...
+								 $netcnx = {}; $netc = {}; $intf = {};
+								 network::netconnect::read_net_conf('', $netcnx, $netc);
+								 modules::load_category('net');
+								 @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
+								 network::netconnect::load_conf($netcnx, $netc, $intf);
+								 network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
                                                                  $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . ($combo1->entry->get_text || "default"));
-                                                                 network::netconnect::load_conf($netcnx, $netc, $intf);
                                                                  update();
                                                              }),
                                            Gtk2::Label->new(N("Click here to launch the wizard ->"))
