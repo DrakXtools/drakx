@@ -27,7 +27,10 @@ is_running('net_applet') and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
 my $current_md5 = md5file($prog_name);
 
-my ($netcnx, $intf);
+my $netcnx = {};
+my $netc = {};
+my $intf = {};
+network::netconnect::read_net_conf($netcnx, $netc, $intf);
 my $watched_interface;
 
 my %appletstate = (
@@ -152,10 +155,6 @@ sub netMonitor() {
     checkNetwork();
 }
 sub checkNetwork() {
-    $netcnx = {};
-    my $netc = {};
-    $intf = {};
-    network::netconnect::read_net_conf($netcnx, $netc, $intf);
     my ($gw_intf, $is_up, $gw_address, $dns_server) = network::tools::get_internet_connection($netc, $intf);
     my ($gw_intf, $is_up, $gw_address) = $watched_interface ?
       ($watched_interface, network::tools::get_interface_status($watched_interface)) :
@@ -166,7 +165,8 @@ sub checkNetwork() {
     if ($new_md5 ne $current_md5) { exec($prog_name) }
 }
 sub checkNetworkForce() {
-    $current_state = "refresh";
+    network::netconnect::read_net_conf($netcnx, $netc, $intf);
+    undef $current_state;
     checkNetwork();
 }
 sub getIP {
@@ -177,7 +177,7 @@ sub getIP {
     return wantarray() ? @ip : $ip[0];
 }
 sub cronNetwork() {
-    $timeout = Glib::Timeout->add(5*1000, sub {
+    $timeout = Glib::Timeout->add(1000, sub {
                                       checkNetwork();
                                       1;
                                   });
