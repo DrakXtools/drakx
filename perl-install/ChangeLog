@@ -1,3 +1,68 @@
+2001/02/03  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (monitorConfiguration): ease use of {X}{type} in
+	auto_installs
+
+	* install_steps_gtk.pm (charsetChanged): created, takes care of setting to
+	the right charset the windows
+
+	* install_steps_interactive.pm (selectLanguage): call charsetChanged
+
+	* share/rpmsrate: fix ``LOCALES "zh_CN"'' with ``LOCALES"zh_CN"''
+	move ftp to SYSTEM so that it is installed
+
+	* Makefile: install cardmgr
+
+	* modules.pm (configure_pcmcia): cleanup
+
+2001/02/02  dam's  <damien@mandrakesoft.com>
+
+	* share/wizard.rc: added rc file for wizard mode
+
+2001/02/02  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (monitorConfiguration): better default for DDC probe
+	fails and
+	auto_install and not provided any info about the monitor
+
+	* my_gtk.pm (gtkcreate_xpm): error handling with error message
+
+	* share/rpmsrate: all GNOME and KDE moved out of GRAPHICAL_DESKTOP
+
+	* install_steps.pm (configureXBefore): set XKB_IN_USE=no if !$has_xkb in
+	/etc/sysconfig/i18n
+
+	* mdk-stage1/disk.c (try_with_device): bloody guillaume changed
+	/tmp/hdimage to /tmp/disk without even
+	telling, changing it back as i don't see any good reason for the move.
+
+	* install_any.pm (setPackages): in auto_installs, default to all groups
+	chosen, unless
+	compssUsersChoice exist. Won't change anything unless compssListLevel is
+	used of course
+
+	* Xconfigurator_consts.pm: add low_default_monitor for default of
+	auto_installs
+
+	* interactive_gtk.pm (ask_from_entries_refW): use gtkxpm
+
+	* Makefile, partition_table.pm, pkgs.pm, partition_table_raw.pm,
+	diskdrake.pm: using the new formatXiB
+
+	* detect_devices.pm (getCompaqSmartArray): adapted getCompaqSmartArray to
+	the fact that kernel
+	2.4 uses /proc/driver/array instead of /proc/array. Also adapted the
+	regexp now that ida/c0d0p? is no more at the beginning of the line.
+	(get): cleanup, remove hasIDE hasSCSI...
+
+	* common.pm (formatXiB): created, format a number in human readable format
+
+2001/02/02  Pixel  <pixel@mandrakesoft.com>
+
+	* mdk-stage1/disk.c (try_with_device): bloody guillaume changed
+	/tmp/hdimage to /tmp/disk without even
+	telling, changing it back as i don't see any good reason for the move.
+
 2001/02/02  dam's  <damien@mandrakesoft.com>
 
 	* interactive_gtk.pm, standalone/draknet, netconnect.pm, my_gtk.pm,
