@@ -189,15 +189,13 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
 	if (i != 0)
 		return INSMOD_FAILED;
 
-	strcat(final_name, mod_name);
+	strcat(final_name, module_name);
         if (kernel_version() <= 4) {
-                strcat(final_name, ".o");
                 rc = insmod_call(final_name, options);
         } else {
                 void *file;
                 unsigned long len;
 
-                strcat(final_name, ".ko");
                 file = grab_file(final_name, &len);
 
                 if (!file) {
