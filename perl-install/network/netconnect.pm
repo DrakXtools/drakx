@@ -751,15 +751,18 @@ Take a look at http://www.linmodems.org"),
                         $adsl_old_provider = $adsl_provider;
                     },
                     name => N("Please choose your ADSL provider"),
-                    data => sub { 
-                        [ { label => N("Provider:"), type => "list", val => \$adsl_provider, separator => '|', list => [ keys %adsl_data ] } ];
+                    data => sub {
+                        [ { label => N("Provider:"), type => "list", val => \$adsl_provider, separator => '|',
+                            list => [ N("Unlisted - edit manually"), keys %adsl_data ] } ];
                     },
                     post => sub {
-                        $adsl_data = $adsl_data{$adsl_provider};
                         $adsl_type = 'pppoa' if member($ntf_name, qw(bewan speedtouch));
-                        if ($adsl_provider ne $adsl_old_provider) {
-                            $netc->{$_} = $adsl_data->{$_} foreach qw(DOMAINNAME2 Encapsulation vpi vci);
-                              $adsl_type = $adsl_data->{method};
+                        if ($adsl_provider ne N("Unlisted - edit manually")) {
+                            $adsl_data = $adsl_data{$adsl_provider};
+                            if ($adsl_provider ne $adsl_old_provider) {
+                                $netc->{$_} = $adsl_data->{$_} foreach qw(DOMAINNAME2 Encapsulation vpi vci);
+                                $adsl_type = $adsl_data->{method};
+                            }
                         }
                         return 'adsl_protocol';
                     },
