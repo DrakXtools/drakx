@@ -727,36 +727,38 @@ sub new {
 	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
 	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
 	    $::WizardWindow->add($::WizardTable);
-	    my $draw1 = Gtk2::DrawingArea->new;
-	    $draw1->set_size_request(540, 100);
-	    my $draw2 = Gtk2::DrawingArea->new;
-	    $draw2->set_size_request(100, 300);
-	    my $pixbuf_up = gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png");
-	    my $pixbuf_left = gtkcreate_pixbuf($::Wizard_pix_left || "wiz_default_left.png");
-	    $draw1->modify_font(Gtk2::Pango::FontDescription->from_string(N("utopia 25")));
-	    $draw1->signal_connect(expose_event => sub {
-				       my $height = $pixbuf_up->get_height;
-				       for (my $i = 0; $i < 540/$height; $i++) {
-					   $pixbuf_up->render_to_drawable($draw1->window,
-									  $draw1->style->bg_gc('normal'),
-									  0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
-					   my $layout = $draw1->create_pango_layout($::Wizard_title);
-					   $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
-					   $layout->unref;
-				       }
-				   });
-	    $draw2->signal_connect(expose_event => sub {
-				       my $height = $pixbuf_left->get_height;
-				       for (my $i = 0; $i < 300/$height; $i++) {
-					   $pixbuf_left->render_to_drawable($draw2->window,
-									    $draw2->style->bg_gc('normal'),
-									    0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
-				       }
-				   });
+
 	    if ($::isInstall) {
 		$::WizardTable->set_size_request($::windowwidth * 0.9, $::windowheight * 0.7);
 		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.05, $::logoheight + $::windowheight * 0.15);
 	    } else {
+		my $draw1 = Gtk2::DrawingArea->new;
+		$draw1->set_size_request(540, 100);
+		my $draw2 = Gtk2::DrawingArea->new;
+		$draw2->set_size_request(100, 300);
+		my $pixbuf_up = gtkcreate_pixbuf($::Wizard_pix_up || "wiz_default_up.png");
+		my $pixbuf_left = gtkcreate_pixbuf($::Wizard_pix_left || "wiz_default_left.png");
+		$draw1->modify_font(Gtk2::Pango::FontDescription->from_string(N("utopia 25")));
+		$draw1->signal_connect(expose_event => sub {
+					   my $height = $pixbuf_up->get_height;
+					   for (my $i = 0; $i < 540/$height; $i++) {
+					       $pixbuf_up->render_to_drawable($draw1->window,
+									      $draw1->style->bg_gc('normal'),
+									      0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
+					       my $layout = $draw1->create_pango_layout($::Wizard_title);
+					       $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
+					       $layout->unref;
+					   }
+				       });
+		$draw2->signal_connect(expose_event => sub {
+					   my $height = $pixbuf_left->get_height;
+					   for (my $i = 0; $i < 300/$height; $i++) {
+					       $pixbuf_left->render_to_drawable($draw2->window,
+										$draw2->style->bg_gc('normal'),
+										0, 0, 0, $height*$i, -1, -1, 'none', 0, 0);
+					   }
+				       });
+
 		$::WizardWindow->set_position('center_always');
 		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 		$::WizardTable->set_size_request(540,420);
