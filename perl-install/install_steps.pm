@@ -610,7 +610,7 @@ sub configurePrinter {
     printerdrake::install_spooler($o->{printer}, $o); #- not interactive...
 
     foreach (values %{$o->{printer}{configured} || {}}) {
-	log::l("configuring printer queue $_->{queuedata}{queue} or $_->{QUEUE}");
+	log::l("configuring printer queue " . $_->{queuedata}{queue} || $_->{QUEUE});
 	#- when copy is so adulée (sorry french taste :-)
 	#- and when there are some configuration in one place and in another place...
 	$o->{printer}{currentqueue} = {};
