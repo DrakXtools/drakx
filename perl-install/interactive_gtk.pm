@@ -81,7 +81,7 @@ sub ask_from_treelistW {
 	    foreach my $nb (1 .. @$l) {
 		if ($tree->node_nth($nb) == $node) {
 		    $tree->focus_row($nb);
-		    Gtk->idle_add(sub { $tree->moveto($nb, 0, 0.5, 0); 0 });
+		    Gtk->idle_add(sub { $tree->node_moveto($node, 0, 0.5, 0); 0 });
 		    last;
 		}
 	    }

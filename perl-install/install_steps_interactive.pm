@@ -1148,19 +1148,22 @@ sub load_thiskind {
 	    modules::add_alias("sound", $c);
 	}
     }
-    my @l = eval { modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia) };
-    $@ and $o->errorInStep($@), return undef;
-    @l;
+    modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
 }
 
 #------------------------------------------------------------------------------
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
 
-    # load_thiskind returns undef in case of error
-    my @l = $o->load_thiskind($type) if !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
-    return if defined @l && $auto && (@l || !$at_least_one);
-
+    my @l;
+    if (!$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1)) {
+	eval { @l = $o->load_thiskind($type) };
+	if ($@) {
+	    $o->errorInStep($@);
+	} else {
+	    return if $auto && (@l || !$at_least_one);
+	}
+    }
     while (1) {
 	my $msg = @l ?
 	  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),

@@ -495,7 +495,7 @@ sub chooseResolutionsGtk($$;$) {
 		    1, gtkpack(new Gtk::HBox(0,20),
 			       $depth_combo = new Gtk::Combo,
 			       gtkpack_(new Gtk::VBox(0,0),
-					map { 0, $w2widget{$_} } ikeys(%w2widget),
+					map {; 0, $w2widget{$_} } ikeys(%w2widget),
 					),
 			       ),
 		    0, gtkadd($W->create_okcancel,

@@ -1,7 +1,13 @@
 2000-02-24  Pixel  <pixel@mandrakesoft.com>
 
+	* install2.pm (main): moved the ejectCdrom from install_steps::END
+	to here
+
 	* install_steps_interactive.pm (createBootdisk): fix an error for
 	non fdX choice of floppy drive
+	
+	* install_steps_interactive.pm (setup_thiskind): remove the
+	"defined @l"
 
 2000-02-23  Pixel  <pixel@mandrakesoft.com>
 

@@ -643,6 +643,8 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
+    install_any::ejectCdrom();
+
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
 
