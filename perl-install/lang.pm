@@ -20,7 +20,7 @@ my %languages = (
   'en'  => [ 'English (US)',		undef,	      'en', 'en_US:en' ],
 'en_GB' => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
-#-'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
+  'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
   'bg'  => [ 'Bulgarian',		'cp1251',     'bg', 'bg' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
   'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:es:fr_FR:fr' ],
@@ -39,14 +39,15 @@ my %languages = (
   'eu'  => [ 'Euskara (Basque)',	'iso-8859-1', 'eu', 'eu:es_ES:fr_FR:es:fr' ],
 #-'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
   'fi'  => [ 'Suomi (Finnish)',		'iso-8859-1', 'fi', 'fi' ],
+#-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo:??:??' ],
 'fr_CA' => [ 'French (Canada)',		'iso-8859-1', 'fr', 'fr_CA:fr' ],
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
-#-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo:??:??' ],
   'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
 #-'gd'  => [ 'Sottish gaelic',		'iso-8859-14','gd', 'gd:en_GB:en' ],
   'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
+#-'gv'	=> [ 'Manx gaelic',		'iso-8859-14','gv', 'gv:en_GB:en' ],
 #- 'iw' was the old code for hebrew language
-#-'he'  => [ 'Hebrew',			'iso-8859-8', 'he', 'he:iw_IL' ],
+  'he'  => [ 'Hebrew',			'iso-8859-8', 'he', 'he:iw_IL' ],
   'hr'  => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
   'hy'  => [ 'Armenian',                'armscii-8',  'hy', 'hy' ],
@@ -57,11 +58,12 @@ my %languages = (
   'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT:it' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
   'ka'  => [ 'Georgian',                'georgian-academy', 'ka', 'ka' ],
-#-'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
+  'kl'  => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
   'ko'  => [ 'Korean',                  'ksc5601',    'ko', 'ko' ],
+#-'kw'	=> [ 'Cornish gaelic',		'iso-8859-14','kw', 'kw:en_GB:en' ],
 #-'lo'  => [ 'Laotian',			'mulelao-1',  'lo', 'lo' ],
   'lt'  => [ 'Lithuanian',		'iso-8859-13','lt', 'lt' ],
-#-'lv'  => [ 'Latvian',			'iso-8859-13','lv', 'lv' ],   
+  'lv'  => [ 'Latvian',			'iso-8859-13','lv', 'lv' ],   
 #-'mk'  => [ 'Macedonian (Cyrillic)',	'iso-8859-5', 'mk', 'mk:sp:sr' ],
 #-'mk_latin'=> [ 'Macedonian (Latin)',	'iso-8859-2', 'mk_latin', 'mk_latin:sr' ],
 #-'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
@@ -69,7 +71,9 @@ my %languages = (
   'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:no@nynorsk' ],
 'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1', 'no', 'no@nynorsk:no' ],
 #-'oc'  => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
+#-'pd'	=> [ 'Plauttdietsch',		'iso-8859-1', 'pd', 'pd' ],
   'pl'  => [ 'Polish',			'iso-8859-2', 'pl', 'pl' ],
+#-'pp'	=> [ 'Papiamento',		'iso-8859-1', 'pp', 'pp' ],
 'pt_BR' => [ 'Portuguese (Brazil)',	'iso-8859-1', 'pt_BR', 'pt_BR:pt_PT:pt' ],
 'pt_PT' => [ 'Portuguese (Portugal)',	'iso-8859-1', 'pt', 'pt_PT:pt:pt_BR' ],
   'ro'  => [ 'Romanian',  		'iso-8859-2', 'ro', 'ro' ],
@@ -87,6 +91,7 @@ my %languages = (
 'vi_VN.viscii' => [ 'Vietnamese (VISCII)','viscii',   'vi',
 				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1:vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
+#-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh' ],
 'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN', 'zh_CN:zh_CN.GB2312:zh_CN.gb2312:zh' ],
 );
@@ -169,6 +174,10 @@ my %charsets = (
 	std("koi8-u") ],
   "cp1251"     => [ "iso05.f16",	"iso05",	"iso05_to_cp1251.trans",
 	std_("microsoft-cp1251") ],
+#- Yiddish needs special console driver for text mode (none yet)
+#- (and gtk support isn't done yet)
+  "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
+	std_("microsoft-cp1255") ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ undef,		undef,		undef,
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
@@ -244,9 +253,14 @@ sub write {
 
     $lang or return;
 
-    my $h = { LC_ALL => $lang };
+    my $h = { LC_CTYPE => $lang };
+    add2hash $h, { LC_COLLATE => $lang };
+    add2hash $h, { LC_MESSAGES => $lang };
+    add2hash $h, { LC_NUMERIC => $lang };
+    add2hash $h, { LC_MONETARY => $lang };
+    add2hash $h, { LC_TIME => $lang };
     if (my $l = $languages{$lang}) {
-	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[2], RPM_LANG_INSTALL => $l->[3] };
+	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], RPM_LANG_INSTALL => $l->[3] };
 
 	my $c = $charsets{$l->[1] || ''};
 	if ($c && $c->[0] && $c->[1]) {	    

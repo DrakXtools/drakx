@@ -50,20 +50,35 @@ autoirpm autoirpm-icons numlock
 );
 
 %by_lang = (
-  ar    => [ 'acon' ],
-  cs	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  hr	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  hu	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  ja    => [ 'rxvt-CLE', 'fonts-ttf-japanese', 'kterm' ],
-  ko    => [ 'rxvt-CLE', 'fonts-ttf-korean' ],
-  pl	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  ro	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  ru	=> [ 'XFree86-cyrillic-fonts' ],
-  sk	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  sl	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  sr	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  'ar'	=> [ 'acon' ],
+# 'bg'	=> cp1251 fonts
+  'cs'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+# 'cy'  => iso8859-14 fonts
+# 'el'	=> greek fonts
+# 'eo'	=> iso8859-3 fonts
+# 'fa'	=> farsi fonts
+# 'he'	=> hebrew fonts
+  'hr'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  'hu'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  'hy'	=> [ 'fonts-ttf-armenian' ],
+  'ja'	=> [ 'rxvt-CLE', 'fonts-ttf-japanese', 'kterm' ],
+# 'ka'	=> georgian fonts
+  'ko'	=> [ 'rxvt-CLE', 'fonts-ttf-korean' ],
+# 'lt'	=> iso8859-13 fonts
+# 'lv'	=> iso8859-13 fonts
+# 'mk'	=> iso8859-5 fonts
+  'pl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  'ro'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  'ru'	=> [ 'XFree86-cyrillic-fonts' ],
+  'sk'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+  'sl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+# 'sp'  => iso8859-5 fonts
+  'sr'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
+# 'th'	=> thai fonts
   'tr'	=> [ 'XFree86-ISO8859-9', 'XFree86-ISO8859-9-75dpi-fonts' ],
-  zh_CN => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
+# 'uk'	=> koi8-u fonts
+# 'vi'	=> vietnamese fonts
+  'zh_CN' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
 
