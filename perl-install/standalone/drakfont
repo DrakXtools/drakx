@@ -352,10 +352,10 @@ sub put_font_dir {
 	$interactive and progress($pbar1, 0.01, _("done"));
 	$interactive and progress($pbar2, 0.10, _("True Type fonts installation"));
   
-	system ("cd $drakfont_dir/tmp/tmp ; for i in *.TTF; do mv -f $i `basename $i .TTF`.ttf; done");
-	system ("cd $drakfont_dir/tmp/tmp  && cp *.ttf ../../ttf");
+	system ('cd '.$drakfont_dir.'/tmp/tmp ; for i in *.TTF; do mv -f $i `basename $i .TTF`.ttf; done');
+	system ('cd '.$drakfont_dir.'/tmp/tmp  && cp *.ttf ../../ttf');
 	$interactive and progress($pbar2, 0.20, _("please wait during ttmkfdir..."));
-	system ("cd $drakfont_dir/ttf && $ttmkfdir > fonts.dir" );
+	system ('cd '.$drakfont_dir.'/ttf && $ttmkfdir > fonts.dir' );
 	$interactive and progress($pbar2, 0.10, _("True Type install done"));
 	my $restart_xfs = "$chkfontpath -a $drakfont_dir/ttf";
 	
