@@ -52,7 +52,7 @@ localcopy: clean
 	rm -rf standalone/pixmaps
 	$(MAKE) -C ../tools clean || :
 	cd .. ; rm -rf $(PACKAGE)-$(PKGVERSION) ; cp -af perl-install $(PACKAGE)-$(PKGVERSION) ; cp -af $(OTHERS) $(PACKAGE)-$(PKGVERSION)
-	cd .. ; rm -f $(PACKAGE)-$(PKGVERSION)/probe.c; cp -a mdk-stage1/{log.h,pcmcia_/{probe.c,*.h}} $(PACKAGE)-$(PKGVERSION)/c/
+	cd .. ; rm -f $(PACKAGE)-$(PKGVERSION)/c/probe.c; cp -a mdk-stage1/{log.h,pcmcia_/{probe.c,*.h}} $(PACKAGE)-$(PKGVERSION)/c/
 	cd
 	@make nuke_perl
 
