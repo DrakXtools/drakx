@@ -179,20 +179,29 @@ sub load($) {
 	 }
 	$count++;
     }
-    log::l("loaded $count keymap tables");
+    #- log::l("loaded $count keymap tables");
 }
 
 sub setup($) {
     my ($keyboard) = @_;
     my $o = $keyboards{$keyboard} or return;
 
-    if (my $file = commands::install_cpio("/usr/share/keymaps", "$o->[1].kmap")) {
-	log::l("loading keymap $o->[1]");
-	load(cat_($file)) if -e $file;
+    log::l("loading keymap $o->[1]");
+    if (-e (my $f = "/usr/share/keymaps/$o->[1].kmap")) {
+	load(cat_($f));
+    } else {
+	local *F;
+	open F, "extract_archive /usr/share/keymaps '' $o->[1].kmap |";
+	local $/ = undef;
+	eval { load(<F>) };
     }
-    if (my $file = commands::install_cpio("/usr/share/xmodmap", "xmodmap.$keyboard")) {
-	eval { run_program::run('xmodmap', $file) } unless $::testing;
+
+    my $f = "/usr/share/xmodmap/xmodmap.$keyboard";
+    if (! -e $f) {
+	run_program::run("extract_archive", "/usr/share/xmodmap", '/tmp', "xmodmap.$keyboard");
+	$f = "/tmp/xmodmap.$keyboard";
     }
+    eval { run_program::run('xmodmap', $f) } unless $::testing;
 }
 
 sub write($$;$) {

@@ -16,6 +16,7 @@ my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeo
 
 my @MBR_signatures = (
     [ 'empty', 0, "\0\0\0\0" ],
+    [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],
     [ 'osbs', 0x2,  "OSBS" ], #- http://www.prz.tu-berlin.de/~wolf/os-bs.html
     [ 'pqmagic', 0xef, "PQV" ],

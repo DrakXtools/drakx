@@ -578,14 +578,9 @@ sub kderc_largedisplay($) {
 				      kdeiconstyle => "KDEIconStyle=Large\n",
 				     });
     foreach ("/etc/skel", "/root", list_home()) {
-	my $found;
 	substInFile {
-	    $found ||= /KFM Misc Defaults/;
-	    $_ .= 
-"[KFM Misc Defaults]
-GridWidth=78
-GridHeight=75
-" if eof && !$found;
+	    s/^(GridWidth)=85/$1=100/;
+	    s/^(GridWidth)=70/$1=75/;
 	} "$prefix$_/.kde/share/config/kfmrc" 
     }
 }
@@ -643,7 +638,7 @@ sub kdeicons_postinstall($) {
     foreach my $dir (map { "$prefix$_/Desktop" } qw(/etc/skel /root)) {
 	-d $dir or next;
 	foreach (grep { /\.kdelnk$/ } all($dir)) {
-	    cat_("$dir/$_") =~ /^Name\[$lang\]=(.*)/m
+	    cat_("$dir/$_") =~ /^Name\[$lang\]=(.{2,14})$/m
 	      and rename "$dir/$_", "$dir/$1.kdelnk";
 	}
     }

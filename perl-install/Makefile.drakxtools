@@ -22,7 +22,7 @@ install:
 	install $(STANDALONEPMS) $(SBINDEST)
 	mv -f $(SBINDEST)/lspcidrake $(BINDEST)
 	install -s ddcprobe/ddcxinfos pnp_serial/pnp_serial $(SBINDEST)
-	ln -s ../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
+	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
 	install -m 644 MonitorsDB $(LIBX11DEST)

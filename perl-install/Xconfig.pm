@@ -107,8 +107,7 @@ sub getinfoFromSysconfig {
     add2hash($o->{mouse} ||= {}, { getVarsFromSh("$prefix/etc/sysconfig/mouse") });
 
     if (my %keyboard = getVarsFromSh "$prefix/etc/sysconfig/keyboard") {
-	$keyboard{KEYTABLE} or last;
-	$o->{keyboard}{xkb_keymap} ||= keymap_translate($keyboard{KEYTABLE});
+	$o->{keyboard}{xkb_keymap} ||= keymap_translate($keyboard{KEYTABLE}) if $keyboard{KEYTABLE};
     }
     $o;
 }

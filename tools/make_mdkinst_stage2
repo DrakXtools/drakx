@@ -13,6 +13,13 @@ REP4PMS=/usr/bin/perl-install
 DEST=$1
 STAGE2=$2
 
+testandset() { [ -x $1/build_archive ] && BUILD_ARCHIVE=$1/build_archive; }
+testandset `pwd`/misc
+testandset `pwd`/.
+testandset /$DEST/../../misc
+testandset `pwd`/$DEST/../../misc
+[ -z "$BUILD_ARCHIVE" ] && { echo "can't find build_archive"; exit 1; }
+
 if [ $EUID != "0" ]; then
     SUDO="sudo"
     PATH="/sbin:/usr/sbin:$PATH"
@@ -24,19 +31,27 @@ $SUDO cp -a $DEST/* $STAGE2TMP
 
 mkdir -p $MNTPOINT 2>/dev/null
 for i in $MNTPOINT $STAGE2; do $SUDO umount $i 2>/dev/null ; done
-dd if=/dev/zero of=$STAGE2 bs=1k count=15700
+dd if=/dev/zero of=$STAGE2 bs=1k count=16000
 $MKE2FS -N 1000 $STAGE2
 $SUDO mount -t ext2 $STAGE2 $MNTPOINT -o loop
 
 # hack to reduce the STAGE2 image (do not edit without modifying in DrakX)
-rm $STAGE2TMP/usr/X11R6/bin/XF86_VGA16
-for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap $REP4PMS/po; do \
-	name=`basename $i` ; \
-	(cd $STAGE2TMP/$i ; find * | cpio -o 2>/dev/null | bzip2 > ../$name.cpio.bz2 ; cd .. ; rm -rf $name) \
+rm -f $STAGE2TMP/usr/X11R6/bin/XF86_VGA16
+rm -f $STAGE2TMP/$REP4PMS/po/DrakX.pot
+for i in /usr/share/locale; do \
+    name=`basename $i` ; \
+    (cd $STAGE2TMP/$i ; find * | cpio -o 2>/dev/null | bzip2 > ../$name.cpio.bz2 ; cd .. ; rm -rf $name) \
 done
+for i in /usr/share/keymaps /usr/share/xmodmap $REP4PMS/po; do
+    name=`basename $i`
+    (cd $STAGE2TMP/$i ; ls * | $BUILD_ARCHIVE ../$name 400000)
+    rm -rf $STAGE2TMP/$i
+done
+	
 $SUDO cp -a $STAGE2TMP/* $MNTPOINT
 $SUDO rm -rf $STAGE2TMP
 
+df $MNTPOINT
 $SUDO umount $STAGE2
 rmdir $MNTPOINT
 

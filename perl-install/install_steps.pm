@@ -269,6 +269,18 @@ sub afterInstallPackages($) {
     substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
+    foreach ("/etc/skel", "/root", install_any::list_home()) {
+	my $found;
+	substInFile {
+	    $found ||= /KFM Misc Defaults/;
+	    $_ .= 
+"[KFM Misc Defaults]
+GridWidth=85
+GridHeight=70
+" if eof && !$found;
+	} "$o->{prefix}$_/.kde/share/config/kfmrc" 
+    }
+
     #- move some file after an upgrade that may be seriously annoying.
     if ($o->{isUpgrade}) {
 	log::l("moving previous desktop files that have been updated to \$HOME/tmp of each user");

@@ -268,11 +268,19 @@ sub load_po($) {
     local *F;
     unless (-e $f) {
 	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
-	open F, "bzip2 -dc $f 2>/dev/null |";
+	if (-e $f) {
+	    open F, "bzip2 -dc $f 2>/dev/null |";
+	} else {
+	    -e ($f = "$_/po.cz2") and last foreach @INC;
+	    $f =~ s/\.cz2//;
+	    log::l("loading $lang.po from $f");
+	    open F, "extract_archive $f '' $lang.po 2>/dev/null |";
+	}
     } else {
 	open F, $f; #- not returning here help avoiding reading the same multiple times.
     }
     foreach (<F>) {
+	log::l("load_po: $_");
 	/^msgstr/ and $state = 1;
 	/^msgid/  && !$fuzzy and $state = 2;
 

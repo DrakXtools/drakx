@@ -201,9 +201,16 @@ sub choosePartitionsToFormat($$) {
     $_->{toFormat} ||= $_->{toFormatUnsure} foreach @l;
     log::l("preparing to format $_->{mntpoint}") foreach grep { $_->{toFormat} } @l;
 
+    my %label;
+    $label{$_} = (isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}) . " ($_->{device})" foreach @l;
+
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
-			       [ map { isSwap($_) ? type2name($_->{type}) . " ($_->{device})" : $_->{mntpoint} } @l ],
+			       [ map { $label{$_} } @l ],
 			       [ map { \$_->{toFormat} } @l ]) or die "cancel";
+    @l = grep { $_->{toFormat} } @l;
+    $o->ask_many_from_list_ref('', _("Check bad blocks?"),
+			       [ map { $label{$_} } @l ],
+			       [ map { \$_->{toFormatCheck} } @l ]) or die "cancel" if $::expert;
 }
 
 sub formatPartitions {
@@ -237,12 +244,14 @@ sub choosePackages {
     unless ($o->{isUpgrade}) {
 	my $available = pkgs::invCorrectSize(install_any::getAvailableSpace($o) / sqr(1024)) * sqr(1024);
 	
-	delete $_->{skip} foreach values %$packages;
+	foreach (values %$packages) {
+	    delete $_->{skip};
+	    delete $_->{unskip};
+	}
 	pkgs::unselect_all($packages);
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 95 : 80, $available, $o->{installClass});
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::size_selected($packages);
 
-	do { $o->{compssUsersChoice}{$_} = 1 foreach @$compssUsersSorted, 'Miscellaneous' } if $first_time;
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted) unless $::beginner;
 
 	my %save_selected; $save_selected{$_->{name}} = $_->{selected} foreach values %$packages;
@@ -250,7 +259,7 @@ sub choosePackages {
 	my $max_size = pkgs::size_selected($packages);
 	$_->{selected} = $save_selected{$_->{name}} foreach values %$packages;	
 
-	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size);
+	my $size2install = $::beginner ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size) or goto &choosePackages;
 
 	($o->{packages_}{ind}) = 
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
@@ -278,7 +287,6 @@ sub chooseGroups {
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
 	$l{@{$compssUsers->{$_}}} = () foreach @$compssUsersSorted;
-#	exists $l{$_} or print ">>$_\n" foreach keys %$packages;
 	exists $l{$_} or $packages->{$_}{skip} = 1 foreach keys %$packages;
     }
     foreach (@$compssUsersSorted) {
@@ -286,7 +294,10 @@ sub chooseGroups {
     }
     foreach (@$compssUsersSorted) {
 	$o->{compssUsersChoice}{$_} or next;
-	delete $_->{skip} foreach @{$compssUsers->{$_}};
+	foreach (@{$compssUsers->{$_}}) {
+	    $_->{unskip} = 1;
+	    delete $_->{skip};
+	}
     }
     my $f = "$o->{prefix}/etc/sysconfig/desktop";
     output($f, "KDE\n") if $o->{compssUsersChoice}{KDE};

@@ -73,7 +73,7 @@ get_needed_files: $(DIRS)
 	install -d $(DEST)/usr/X11R6/lib/X11
 	install -d $(ROOTDEST)/Mandrake/base
 	install -s $(LOCALFILES) $(DEST)/usr/bin
-	cp -f $(LOCALFILES2) $(DEST)/usr/bin
+#	cp -f $(LOCALFILES2) $(DEST)/usr/bin
 
 	for i in `cat /tmp/list`; do \
 		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
