@@ -112,7 +112,7 @@ sub write_fstab {
     my %new;
     my @l = map { 
 	my $device = 
-	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smb)) ? 
+	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smbfs)) ? 
 	      $_->{device} : 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : $_->{device}) :
@@ -327,7 +327,7 @@ sub set_default_options {
 	}
 
 	# have noauto when we have user
-	$options->{noauto} = $options->{user}; 
+	$options->{noauto} = 1 if $options->{user}; 
 
 	if ($options->{user}) {
 	    # ensure security  (user_implies - noexec as noexec is not a security matter)
@@ -348,14 +348,17 @@ sub set_removable_mntpoints {
 	    if (detect_devices::isZipDrive($_)) {
 		$name = 'zip';
 	    } elsif ($name eq 'fd') {
-		$name = 'floppy';
+		# first floppy is valid, others may not be
+		$name = $names{floppy} ? '' : 'floppy';
 	    } else {
 		log::l("set_removable_mntpoints: don't know what to with hd $_->{device}");
 		next;
 	    }
 	}
-	my $s = ++$names{$name};
-	$_->{mntpoint} ||= "/mnt/$name" . ($s == 1 ? '' : $s);
+	if ($name) {
+	    my $s = ++$names{$name};
+	    $_->{mntpoint} ||= "/mnt/$name" . ($s == 1 ? '' : $s);
+	}
     }
 }
 
@@ -505,7 +508,7 @@ sub mount {
     if ($fs eq 'nfs') {
 	log::l("calling nfs::mount($dev, $where)");
 #	nfs::mount($dev, $where) or die _("nfs mount failed");
-    } elsif ($fs eq 'smb') {
+    } elsif ($fs eq 'smbfs') {
 	die "no smb yet...";
     } else {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
