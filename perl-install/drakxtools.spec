@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.1mdk
+Release: 0.2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.2mdk
+- draconnect: preselect pppoa for speetouch again
+
 * Mon Feb  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.1mdk
 - harddrake: fix adsl modem detection
 - draksound: handle new aureal drivers
