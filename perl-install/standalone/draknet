@@ -79,7 +79,7 @@ $::isEmbedded or $window1->set_usize(500, 400);
 my $vbox1 = new Gtk::VBox(0,10);
 $window1->add($vbox1);
 my $hbox1 = new Gtk::HBox(0,0);
-$vbox1->pack_start($hbox1,1,1,0);
+$vbox1->pack_start($hbox1,0,0,0);
 $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 
 my $combo1 = new Gtk::Combo;
@@ -128,7 +128,7 @@ $button_new->signal_connect( clicked => sub {
 				 $dialog->set_position(1);
 				 $dialog->vbox->set_border_width(10);
 				 $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
-				 $dialog->vbox->pack_start(new Gtk::Label(_("Name of the profile to create:")),1,1,0);
+				 $dialog->vbox->pack_start(new Gtk::Label(_("Name of the profile to create (the new profile is created as a copy of the current one) :")),1,1,0);
 				 my $entry_dialog = new Gtk::Entry;
 				 $dialog->vbox->pack_start($entry_dialog,1,1,0);
 				 my $bbox_dialog = new Gtk::HButtonBox;
@@ -153,7 +153,7 @@ $button_new->signal_connect( clicked => sub {
 });
 $hbox1->pack_start($button_new,0,0,5);
 my $hbox2 = new Gtk::HBox(0,0);
-$vbox1->pack_start($hbox2,1,1,0);
+$vbox1->pack_start($hbox2,0,0,0);
 $hbox2->pack_start(new Gtk::Label(_("Hostname: ")),0,0,0);
 my $hostname = chomp_(`hostname`);
 my $label_host = new Gtk::Label($hostname);
@@ -262,7 +262,7 @@ $button3->signal_connect( clicked => [ \&configure_lan, '', $netcnx, $netc, $int
 $hbox3->pack_start($button3, 0, 0, 0);
 $vbox2->pack_start($hbox3, 0, 0, 0);
 
-$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
+#$vbox1->pack_start(new Gtk::HSeparator,0,0,5);
 
 my $bbox0 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox0,0,0,0);
@@ -281,7 +281,7 @@ $button_wizard->signal_connect( clicked => sub {
 				 });
 $bbox0->add($button_wizard );
 
-$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
+$vbox1->pack_start(new Gtk::HSeparator,0,0,5);
 
 my $bbox1 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox1,0,0,0);
@@ -327,6 +327,7 @@ $button_ok->signal_connect ( clicked => sub {
 			     });
 $bbox1->add($button_ok);
 $combo1->entry->signal_connect( 'changed', sub {
+#				    connected() and disconnect_backend();
 				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text());
 				    network::netconnect::load_conf($netcnx, $netc, $intf);
 				    $netcnx->{$_}=$netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
