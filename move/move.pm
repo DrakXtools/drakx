@@ -136,7 +136,7 @@ sub init {
         print "Using existing user configuration\n";
         $using_existing_user_config = 1;
     }
-    if (-f '/etc/X11/XF86Config') {
+    if (-f '/etc/X11/X') {
         print "Using existing host configuration\n";
         $using_existing_host_config = 1;
     }
