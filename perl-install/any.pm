@@ -199,4 +199,12 @@ _("Default") => { val => \$default, type => 'bool' },
     1;
 }
 
+sub setAutologin {
+  my ($prefix, $user, $wm) = @_;
+  my $f="$prefix/etc/X11/xdm/xdm_config";
+  substInFile { s/^(DisplayManager._0.autoUser).*\n//; $_ .= "DisplayManager._0.autoUser:\t$user\n" if eof } $f;
+  substInFile { s/^(DisplayManager._0.autoString).*\n//; $_ .= "DisplayManager._0.autoString:\t$wm\n" if eof } $f;
+  # (dam's) : a patch for gdm is being done.
+}
+
 1;
