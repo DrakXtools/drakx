@@ -1,3 +1,28 @@
+2002/01/08  François Pons  <fpons@mandrakesoft.com>
+
+	* Makefile: again fixed dam's sucking, please dam's check what you write
+	before commiting.
+
+2002/01/07  François Pons  <fpons@mandrakesoft.com>
+
+	* steps.pm: changed installUpdates after summary (to get corrected
+	timezone).
+
+	* install_any.pm: separated setDefaultPackages from setPackages because it
+	is used by allowing
+	only base system to be installed (allow remade a better package
+	selection).
+
+	* crypto.pm: added bestMirror method to retrieve a good mirror (according
+	to timezone) and
+	add salt with random number to avoid using always the same.
+
+	* install2.pm: added option to only upgrade packages.
+
+	* install_steps_interactive.pm: added minimal type of install support.
+
+	* share/list: fixed to match newer menu package.
+
 2002/01/07  François Pons  <fpons@mandrakesoft.com>
 
 	* steps.pm: changed installUpdates after summary (to get corrected
