@@ -473,44 +473,44 @@ sub read_configured_queues($) {
     my $i;
     my $N = $#QUEUES + 1;
     for ($i = 0;  $i < $N; $i++) {
-	$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}} = 
+	$printer->{configured}{$QUEUES[$i]{queuedata}{queue}} = 
 	    $QUEUES[$i];
-	if ((!$QUEUES[$i]->{make}) || (!$QUEUES[$i]->{model})) {
+	if ((!$QUEUES[$i]{make}) || (!$QUEUES[$i]{model})) {
 	    if ($printer->{SPOOLER} eq "cups") {
-		$printer->{OLD_QUEUE} = $QUEUES[$i]->{queuedata}{queue};
+		$printer->{OLD_QUEUE} = $QUEUES[$i]{queuedata}{queue};
 		my $descr = get_descr_from_ppd($printer);
 		$descr =~ m/^([^\|]*)\|([^\|]*)\|.*$/;
-		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{make} ||= $1;
-		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{model} ||= $2;
+		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= $1;
+		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= $2;
 		# Read out which PPD file was originally used to set up this
 		# queue
 		local *F;
-		if (open F, "< $prefix/etc/cups/ppd/$QUEUES[$i]->{queuedata}{queue}.ppd") {
+		if (open F, "< $prefix/etc/cups/ppd/$QUEUES[$i]{queuedata}{queue}.ppd") {
 		    while (my $line = <F>) {
 			if ($line =~ /^\*%MDKMODELCHOICE:(.+)$/) {
-			    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{ppd} = $1;
+			    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd} = $1;
 			}
 		    }
 		    close F;
 		}
 		# Mark that we have a CUPS queue but do not know the name
 		# the PPD file in /usr/share/cups/model
-		if (!$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{ppd}) {
-		    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{ppd} = '1';
+		if (!$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd}) {
+		    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{ppd} = '1';
 		}
-		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{driver} = 'CUPS/PPD';
+		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{driver} = 'CUPS/PPD';
 		$printer->{OLD_QUEUE} = "";
 		# Read out the printer's options
-		$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{args} = read_cups_options($QUEUES[$i]->{queuedata}{queue});
+		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{args} = read_cups_options($QUEUES[$i]{queuedata}{queue});
 	    }
-	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{make} ||= "";
-	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{model} ||= _("Unknown model");
+	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= "";
+	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= _("Unknown model");
 	} else {
-	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{make} = $QUEUES[$i]->{make};
-	    $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{model} = $QUEUES[$i]->{model};
+	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} = $QUEUES[$i]{make};
+	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} = $QUEUES[$i]{model};
 	}
 	# Fill in "options" field
-	if (my $args = $printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{args}) {
+	if (my $args = $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{args}) {
 	    my $arg;
 	    my @options;
 	    for $arg (@{$args}) {
@@ -518,11 +518,11 @@ sub read_configured_queues($) {
 		my $optstr = $arg->{name} . "=" . $arg->{default};
 		push(@options, $optstr);
 	    }
-	    @{$printer->{configured}{$QUEUES[$i]->{queuedata}{queue}}{queuedata}{options}} = @options;
+	    @{$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{options}} = @options;
 	}
 	# Construct an entry line for tree view in main window of
 	# printerdrake
-	make_menuentry($printer, $QUEUES[$i]->{queuedata}{queue});
+	make_menuentry($printer, $QUEUES[$i]{queuedata}{queue});
     }
 }
 
@@ -647,7 +647,7 @@ sub read_printer_db(;$) {
 			    $entry->{ENTRY} = "$entry->{make}|$entry->{model}|$driverstr";
 			    $entry->{driver} = $driver;
 			    # Duplicate contents of $entry because it is multiply entered to the database
-			    map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
+			    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
 			}
 		    } else {
 			# Recommended mode
@@ -656,7 +656,7 @@ sub read_printer_db(;$) {
 			$entry->{ENTRY} = "$entry->{make}|$entry->{model}";
 			if ($entry->{defaultdriver}) {
 			    $entry->{driver} = $entry->{defaultdriver};
-			    map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
+			    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
 			}
 		    }
 		    $entry = {};
@@ -696,7 +696,7 @@ sub read_printer_db(;$) {
 	$entry->{driver} = "raw";
 	$entry->{make} = "";
 	$entry->{model} = _("Unknown model");
-	map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
+	map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
     }
 
     #- Load CUPS driver database if CUPS is used as spooler

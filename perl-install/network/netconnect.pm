@@ -373,7 +373,7 @@ DNSThirdIP=$netc->{dnsServer3}
 AdminInterface=
 
 " . join ('', map {
-"Eth${_}Known=" . ($intf->{"eth$_"}->{DEVICE} eq "eth$_" ? 'true' : 'false') . "
+"Eth${_}Known=" . ($intf->{"eth$_"}{DEVICE} eq "eth$_" ? 'true' : 'false') . "
 Eth${_}IP=" . $intf->{"eth$_"}{IPADDR} . "
 Eth${_}Mask=" . $intf->{"eth$_"}{NETMASK} . "
 Eth${_}Mac=
@@ -381,7 +381,7 @@ Eth${_}BootProto=" . $intf->{"eth$_"}{BOOTPROTO} . "
 Eth${_}OnBoot=" . $intf->{"eth$_"}{ONBOOT} . "
 Eth${_}Hostname=$netc->{HOSTNAME}
 Eth${_}HostAlias=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
-Eth${_}Driver=$all_cards[$_]->[1]
+Eth${_}Driver=$all_cards[$_][1]
 Eth${_}Irq=
 Eth${_}Port=
 Eth${_}DHCPClient=" . ($intf->{"eth$_"}{BOOTPROTO} eq 'dhcp' ? $netcnx->{dhcp_client} : '') . "
@@ -528,13 +528,13 @@ sub load_conf {
 	    /^InternetGateway=(.*)$/ and $netc->{GATEWAY} = $1;
 	    /^SystemName=(.*)$/ and $system_name = $1;
 	    /^DomainName=(.*)$/ and $domain_name = $1;
-	    /^Eth([0-9])Known=true$/ and $intf->{"eth$1"}->{DEVICE} = "eth$1";
-	    /^Eth([0-9])IP=(.*)$/ && $intf->{"eth$1"}->{DEVICE} and $intf->{"eth$1"}{IPADDR} = $2;
-	    /^Eth([0-9])Mask=(.*)\n/ && $intf->{"eth$1"}->{DEVICE} and $intf->{"eth$1"}{NETMASK} = $2;
-	    /^Eth([0-9])BootProto=(.*)\n/ && $intf->{"eth$1"}->{DEVICE} and $intf->{"eth$1"}{BOOTPROTO} = $2;
-	    /^Eth([0-9])OnBoot=(.*)\n/ && $intf->{"eth$1"}->{DEVICE} and $intf->{"eth$1"}{ONBOOT} = $2;
-	    /^Eth([0-9])Hostname=(.*)\n/ && $intf->{"eth$1"}->{DEVICE} and $netc->{HOSTNAME} = $2;
-	    /^Eth([0-9])Driver=(.*)\n/ && $intf->{"eth$1"}->{DEVICE} and $intf->{"eth$1"}{driver} = $2;
+	    /^Eth([0-9])Known=true$/ and $intf->{"eth$1"}{DEVICE} = "eth$1";
+	    /^Eth([0-9])IP=(.*)$/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{IPADDR} = $2;
+	    /^Eth([0-9])Mask=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{NETMASK} = $2;
+	    /^Eth([0-9])BootProto=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{BOOTPROTO} = $2;
+	    /^Eth([0-9])OnBoot=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{ONBOOT} = $2;
+	    /^Eth([0-9])Hostname=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $netc->{HOSTNAME} = $2;
+	    /^Eth([0-9])Driver=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{driver} = $2;
 	    /^ISDNDriver=(.*)$/ and $isdn->{driver} = $1;
 	    /^ISDNDeviceType=(.*)$/ and $isdn->{type} = $1;
 	    /^ISDNIrq=(.*)/ and $isdn->{irq} = $1;

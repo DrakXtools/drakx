@@ -87,7 +87,7 @@ sub conf_network_card {
     my $interface;
     @all_cards == () and $in->ask_warn('', _("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")) and return;
-    @all_cards == 1 and $interface = $all_cards[0]->[0] and goto l1;
+    @all_cards == 1 and $interface = $all_cards[0][0] and goto l1;
     again :
 	$interface = $in->ask_from_list(_("Choose the network interface"),
 					_("Please choose which network adapter you want to use to connect to Internet"),
@@ -155,7 +155,7 @@ sub conf_network_card_backend {
     @{$intf->{$device}}{qw(DEVICE BOOTPROTO   NETMASK     NETWORK ONBOOT)} = 
                          ($device, $type, '255.255.255.0', $netadr, 'yes');
 
-    $intf->{$device}->{IPADDR} = $ipadr if $ipadr;
+    $intf->{$device}{IPADDR} = $ipadr if $ipadr;
     $device;
 }
 
@@ -185,7 +185,7 @@ sub configureNetwork {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card]->[1]) or return;
+	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card][1]) or return;
 
 	$last = $intf2;
 	$n_card++;

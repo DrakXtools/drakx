@@ -153,10 +153,10 @@ sub isDvdDrive {
     my $f = tryOpen($e->{device});
     $f && c::isDvdDrive(fileno($f));
 }
-sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
-sub isJazzDrive { $_[0]->{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
-sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
-sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]->{media_type} eq 'fd' } #-or &isJazzDrive }
+sub isZipDrive { $_[0]{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
+sub isJazzDrive { $_[0]{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
+sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
+sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]{media_type} eq 'fd' } #-or &isJazzDrive }
 
 sub isFloppyOrHD {
     my ($dev) = @_;
@@ -656,7 +656,7 @@ sub getSNMPModel {
 
 sub whatNetPrinter () {
     my $i; 
-    my @res = ();
+    my @res;
 
     # Scan network for printers (one of ports 9100-9199 open)
     local *F;

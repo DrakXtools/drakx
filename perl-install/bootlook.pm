@@ -98,7 +98,7 @@ my $x_box = new Gtk::VBox(0, 0);
 my $disp_mode = arch() =~ /ppc/ ? _("Yaboot mode") : _("Lilo/grub mode");
 gtkadd($window,
        gtkpack__ (my $global_vbox = new Gtk::VBox(0,0),
-		  gtkadd (new Gtk::Frame ("$disp_mode"),
+		  gtkadd (new Gtk::Frame ($disp_mode),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
 					      1,_("You are currently using %s as your boot manager.

@@ -1170,7 +1170,7 @@ sub what_provides {
 sub is_installed {
     my ($do, @l) = @_;
     foreach (@l) {
-	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
+	my $p = pkgs::packageByName($do->{o}{packages}, $_);
 	$p && $p->flag_selected or return;
     }
     1;
@@ -1180,25 +1180,25 @@ sub remove {
     my ($do, @l) = @_;
 
     @l = grep {
-	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
-	pkgs::unselectPackage($do->{o}->{packages}, $p) if $p;
+	my $p = pkgs::packageByName($do->{o}{packages}, $_);
+	pkgs::unselectPackage($do->{o}{packages}, $p) if $p;
 	$p;
     } @l;
-    run_program::rooted($do->{o}->{prefix}, 'rpm', '-e', @l);
+    run_program::rooted($do->{o}{prefix}, 'rpm', '-e', @l);
 }
 
 sub remove_nodeps {
     my ($do, @l) = @_;
 
     @l = grep {
-	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
+	my $p = pkgs::packageByName($do->{o}{packages}, $_);
 	if ($p) {
 	    $p->set_flag_requested(0);
 	    $p->set_flag_required(0);
 	}
 	$p;
     } @l;
-    run_program::rooted($do->{o}->{prefix}, 'rpm', '-e', '--nodeps', @l);
+    run_program::rooted($do->{o}{prefix}, 'rpm', '-e', '--nodeps', @l);
 }
 ################################################################################
 

@@ -147,8 +147,8 @@ sub resize {
 
     $fs->{nb_sectors} = $size;
     $fs->{nb_clusters} = $new_nb_clusters;
-    $fs->{clusters}{count}->{free} =
-      $fs->{nb_clusters} - $fs->{clusters}{count}->{used} - $fs->{clusters}->{count}->{bad} - 2;
+    $fs->{clusters}{count}{free} =
+      $fs->{nb_clusters} - $fs->{clusters}{count}{used} - $fs->{clusters}{count}{bad} - 2;
 
     $fs->{system_id} = 'was here!';
     $fs->{small_nb_sectors} = 0;

@@ -28,7 +28,7 @@ sub read($) {
 
 sub write($) {
     my ($fs) = @_;
-    $fs->{info_sector}{free_clusters} = $fs->{clusters}->{count}->{free};
+    $fs->{info_sector}{free_clusters} = $fs->{clusters}{count}{free};
     $fs->{info_sector}{next_cluster} = 2;
 
     my $info = pack $format, @{$fs->{info_sector}}{@fields};

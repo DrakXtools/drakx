@@ -1161,7 +1161,7 @@ sub format_raw_hd_info {
 #- get the minimal size of partition in sectors to help diskdrake on
 #- limit cases, include a cylinder + start of a eventually following
 #- logical partition.
-sub min_partition_size { $_[0]->cylinder_size() + 2*$_[0]->{geom}{sectors} }
+sub min_partition_size { $_[0]->cylinder_size() + 2*$_[0]{geom}{sectors} }
 
 
 sub choose_encrypt_key {

@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 
 use Xconfig::card;
+use Xconfig::default;
 use Xconfig::resolution_and_depth;
 use common;
 use any;
