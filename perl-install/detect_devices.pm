@@ -429,8 +429,27 @@ sub getNet() {
 #    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
 #}
 
+# heavily inspirated from hidups driver from nut:
 sub getUPS() {
-    grep { $_->{description} =~ /Ellipse UPS/ } usb_probe()
+    # nut/driver/hidups.h:
+    my $UPS_USAGE   = 0x840004;
+    my $POWER_USAGE = 0x840020;
+    my $hiddev_find_application = sub {
+        my ($fd, $usage) = @_;
+        my ($i, $ret) = 0;
+        # HIDIOCAPPLICATION from /usr/include/linux/hiddev.h:
+        do { $i++ } while ($ret = ioctl($fd, 0x4802, $i)) && $ret != $usage;
+        return $ret == $usage ? 1 : 0;
+    };
+
+    map {
+        open(my $f, $_);
+        if_(!$hiddev_find_application->($f, $UPS_USAGE) && !$hiddev_find_application->($f, $POWER_USAGE),
+            { port => $_,
+              name => c::get_usb_ups_name(fileno($f))
+            }
+           );
+    } -e "/dev/.devfsd" ? glob("/dev/usb/hid/hiddev*") : glob("/dev/usb/hiddev*");
 }
 
 $pcitable_addons = <<'EOF';
