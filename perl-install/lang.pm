@@ -27,7 +27,9 @@ my %languages = (
   'el'  => [ 'Greek',                   'iso-8859-7', 'el', 'el' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
-  'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id' ],
+#- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in
+#- we catch the few catalog files still using the wrong code
+  'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in' ],
   'it'  => [ 'Italian',   		'iso-8859-1', 'it', 'it_IT' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis' ],
   'ko'  => [ 'Korean',                  'ksc5601',    'ko', 'ko' ],
