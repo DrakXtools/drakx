@@ -159,7 +159,7 @@ sub create_ctree {
 	    $tree->expand($c);
 	}
 	$tree->select($node);
-	$tree->node_moveto($node, 0, 0.5, 0);
+	$tree->node_moveto($node, 0, 0.5, 0) if $tree->node_is_visible($node) ne 'full';
 
 	foreach (1 .. @l) {
 	    if ($tree->node_nth($_) == $node) {
