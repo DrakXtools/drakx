@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-09-10 13:30+0200\n"
+"POT-Creation-Date: 2002-09-11 13:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,7 +183,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm_.c:122 ../../diskdrake/dav.pm_.c:28
 #: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3155
-#: ../../standalone/draksplash_.c:85 ../../standalone/logdrake_.c:224
+#: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:224
 msgid "Quit"
 msgstr ""
 
@@ -879,7 +879,7 @@ msgstr ""
 msgid "No sharing"
 msgstr ""
 
-#: ../../any.pm_.c:988 ../../install_any.pm_.c:1190 ../../standalone.pm_.c:58
+#: ../../any.pm_.c:988 ../../install_any.pm_.c:1198 ../../standalone.pm_.c:58
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr ""
@@ -889,7 +889,7 @@ msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr ""
 
-#: ../../any.pm_.c:999 ../../install_any.pm_.c:1195 ../../standalone.pm_.c:63
+#: ../../any.pm_.c:999 ../../install_any.pm_.c:1203 ../../standalone.pm_.c:63
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr ""
@@ -1074,7 +1074,7 @@ msgid "You can't install the bootloader on a %s partition\n"
 msgstr ""
 
 #: ../../bootlook.pm_.c:46 ../../standalone/drakperm_.c:15
-#: ../../standalone/draksplash_.c:27
+#: ../../standalone/draksplash_.c:26
 msgid "no help implemented yet.\n"
 msgstr ""
 
@@ -1208,8 +1208,8 @@ msgstr ""
 msgid "Relaunch 'lilo'"
 msgstr ""
 
-#: ../../bootlook.pm_.c:257 ../../standalone/draksplash_.c:163
-#: ../../standalone/draksplash_.c:332 ../../standalone/draksplash_.c:456
+#: ../../bootlook.pm_.c:257 ../../standalone/draksplash_.c:165
+#: ../../standalone/draksplash_.c:329 ../../standalone/draksplash_.c:456
 msgid "Notice"
 msgstr ""
 
@@ -1655,7 +1655,7 @@ msgid ""
 "Still continue?"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:349 ../../harddrake/sound.pm_.c:199
+#: ../../diskdrake/interactive.pm_.c:349 ../../harddrake/sound.pm_.c:200
 msgid "Warning"
 msgstr ""
 
@@ -2188,23 +2188,23 @@ msgstr ""
 msgid "Search servers"
 msgstr ""
 
-#: ../../fs.pm_.c:544 ../../fs.pm_.c:554 ../../fs.pm_.c:558 ../../fs.pm_.c:562
-#: ../../fs.pm_.c:566 ../../fs.pm_.c:570
+#: ../../fs.pm_.c:545 ../../fs.pm_.c:555 ../../fs.pm_.c:559 ../../fs.pm_.c:563
+#: ../../fs.pm_.c:567 ../../fs.pm_.c:571
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr ""
 
-#: ../../fs.pm_.c:607
+#: ../../fs.pm_.c:608
 #, c-format
 msgid "I don't know how to format %s in type %s"
 msgstr ""
 
-#: ../../fs.pm_.c:681 ../../fs.pm_.c:724
+#: ../../fs.pm_.c:682 ../../fs.pm_.c:725
 #, c-format
 msgid "mounting partition %s in directory %s failed"
 msgstr ""
 
-#: ../../fs.pm_.c:739 ../../partition_table.pm_.c:598
+#: ../../fs.pm_.c:740 ../../partition_table.pm_.c:598
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr ""
@@ -2282,29 +2282,29 @@ msgstr ""
 msgid "Error opening %s for writing: %s"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:167
+#: ../../harddrake/sound.pm_.c:168
 msgid "No alternative driver"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:168
+#: ../../harddrake/sound.pm_.c:169
 #, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:170
+#: ../../harddrake/sound.pm_.c:171
 msgid "Sound configuration"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:171
+#: ../../harddrake/sound.pm_.c:172
 #, c-format
 msgid ""
 "Here you can select an alternative driver (either OSS or ALSA) for your "
 "sound card (%s)."
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:173
+#: ../../harddrake/sound.pm_.c:174
 #, c-format
 msgid ""
 "\n"
@@ -2313,11 +2313,11 @@ msgid ""
 "\"%s\")"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:175
+#: ../../harddrake/sound.pm_.c:176
 msgid "Driver:"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:180 ../../standalone/drakTermServ_.c:246
+#: ../../harddrake/sound.pm_.c:181 ../../standalone/drakTermServ_.c:246
 #: ../../standalone/drakbackup_.c:3932 ../../standalone/drakbackup_.c:3965
 #: ../../standalone/drakbackup_.c:3991 ../../standalone/drakbackup_.c:4018
 #: ../../standalone/drakbackup_.c:4045 ../../standalone/drakbackup_.c:4084
@@ -2327,20 +2327,20 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:182
+#: ../../harddrake/sound.pm_.c:183
 msgid "Switching between ALSA and OSS help"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:183
+#: ../../harddrake/sound.pm_.c:184
 msgid ""
-"OSS (Open Source Sound) was the firt sound API. It's an OS independant sound "
-"API (it's availlable on most unices systems) but it's a very basic and "
+"OSS (Open Sound System) was the first sound API. It's an OS independant "
+"sound API (it's available on most unices systems) but it's a very basic and "
 "limited API.\n"
 "What's more, OSS drivers all reinvent the wheel.\n"
 "\n"
 "ALSA (Advanced Linux Sound Architecture) is a modularized architecture "
 "which\n"
-"supports quite a large range of ISA and PCI cards.\n"
+"supports quite a large range of ISA, USB and PCI cards.\n"
 "\n"
 "It also provides a much higher API than OSS.\n"
 "\n"
@@ -2350,7 +2350,7 @@ msgid ""
 "the ALSA library.\n"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:199
+#: ../../harddrake/sound.pm_.c:200
 #, c-format
 msgid ""
 "The old \"%s\" driver is blacklisted.\n"
@@ -2360,20 +2360,29 @@ msgid ""
 "The new \"%s\" driver'll only be used on next bootstrap."
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:205
+#: ../../harddrake/sound.pm_.c:203 ../../standalone/drakconnect_.c:301
+msgid "Please Wait... Applying the configuration"
+msgstr ""
+
+#: ../../harddrake/sound.pm_.c:203 ../../harddrake/ui.pm_.c:111
+#: ../../interactive.pm_.c:391
+msgid "Please wait"
+msgstr ""
+
+#: ../../harddrake/sound.pm_.c:208
 msgid "No known driver"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:206
+#: ../../harddrake/sound.pm_.c:209
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:209
+#: ../../harddrake/sound.pm_.c:212
 msgid "Unkown driver"
 msgstr ""
 
-#: ../../harddrake/sound.pm_.c:210
+#: ../../harddrake/sound.pm_.c:213
 #, c-format
 msgid ""
 "The \"%s\" driver for your sound card is unlisted\n"
@@ -2553,10 +2562,6 @@ msgstr ""
 
 #: ../../harddrake/ui.pm_.c:111
 msgid "Detection in progress"
-msgstr ""
-
-#: ../../harddrake/ui.pm_.c:111 ../../interactive.pm_.c:391
-msgid "Please wait"
 msgstr ""
 
 #: ../../harddrake/ui.pm_.c:148
@@ -5747,9 +5752,8 @@ msgid "Which protocol do you want to use?"
 msgstr ""
 
 #: ../../network/isdn.pm_.c:200
-msgid ""
-"Found \"$netc->{autodetect}{isdn}{description}\" interface do you want to "
-"use it ?"
+#, c-format
+msgid "Found \"%s\" interface do you want to use it ?"
 msgstr ""
 
 #: ../../network/isdn.pm_.c:207
@@ -10000,8 +10004,8 @@ msgid "Synchronization tool"
 msgstr ""
 
 #: ../../standalone/drakbug_.c:72 ../../standalone/drakbug_.c:86
-#: ../../standalone/drakbug_.c:151 ../../standalone/drakbug_.c:153
-#: ../../standalone/drakbug_.c:157
+#: ../../standalone/drakbug_.c:156 ../../standalone/drakbug_.c:158
+#: ../../standalone/drakbug_.c:162
 msgid "Standalone Tools"
 msgstr ""
 
@@ -10073,19 +10077,19 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../standalone/drakbug_.c:136
+#: ../../standalone/drakbug_.c:134
 msgid "Report"
 msgstr ""
 
-#: ../../standalone/drakbug_.c:166
+#: ../../standalone/drakbug_.c:171
 msgid "Not installed"
 msgstr ""
 
-#: ../../standalone/drakbug_.c:183
+#: ../../standalone/drakbug_.c:189
 msgid "connecting to Bugzilla wizard ..."
 msgstr ""
 
-#: ../../standalone/drakbug_.c:190
+#: ../../standalone/drakbug_.c:196
 msgid "No browser available! Please install one"
 msgstr ""
 
@@ -10182,10 +10186,6 @@ msgstr ""
 
 #: ../../standalone/drakconnect_.c:282
 msgid "Apply"
-msgstr ""
-
-#: ../../standalone/drakconnect_.c:301
-msgid "Please Wait... Applying the configuration"
 msgstr ""
 
 #: ../../standalone/drakconnect_.c:383 ../../standalone/drakconnect_.c:406
@@ -10939,11 +10939,11 @@ msgstr ""
 msgid "group :"
 msgstr ""
 
-#: ../../standalone/draksound_.c:46
+#: ../../standalone/draksound_.c:47
 msgid "No Sound Card detected!"
 msgstr ""
 
-#: ../../standalone/draksound_.c:47
+#: ../../standalone/draksound_.c:48
 msgid ""
 "No Sound Card has been detected on your machine. Please verify that a Linux-"
 "supported Sound Card is correctly plugged in.\n"
@@ -10955,7 +10955,7 @@ msgid ""
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
 
-#: ../../standalone/draksound_.c:54
+#: ../../standalone/draksound_.c:55
 msgid ""
 "\n"
 "\n"
@@ -10965,7 +10965,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/draksplash_.c:34
-msgid "package ImageMagick is required for correct working"
+msgid ""
+"package 'ImageMagick' is required for correct working.\n"
+"Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:78
@@ -10984,92 +10986,88 @@ msgstr ""
 msgid "Theme name"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:83
-msgid "Make bootsplash step 2"
-msgstr ""
-
-#: ../../standalone/draksplash_.c:84
-msgid "Go to lilosplash configuration"
-msgstr ""
-
-#: ../../standalone/draksplash_.c:86
-msgid "Save theme"
-msgstr ""
-
-#: ../../standalone/draksplash_.c:87
+#: ../../standalone/draksplash_.c:85
 msgid "Browse"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:100 ../../standalone/draksplash_.c:161
+#: ../../standalone/draksplash_.c:99 ../../standalone/draksplash_.c:162
 msgid "Configure bootsplash picture"
 msgstr ""
 
+#: ../../standalone/draksplash_.c:100
+msgid ""
+"x coordinate of text box\n"
+"in number of character"
+msgstr ""
+
 #: ../../standalone/draksplash_.c:101
-msgid "x coordinate of text box in number of character"
+msgid ""
+"y coordinate of text box\n"
+"in number of character"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:102
-msgid "y coordinate of text box in number of character"
-msgstr ""
-
-#: ../../standalone/draksplash_.c:103
 msgid "text width"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:104
+#: ../../standalone/draksplash_.c:103
 msgid "text box height"
 msgstr ""
 
+#: ../../standalone/draksplash_.c:104
+msgid ""
+"the progress bar x coordinate\n"
+"of its upper left corner"
+msgstr ""
+
 #: ../../standalone/draksplash_.c:105
-msgid "the progress bar x coordinate of its upper left corner"
+msgid ""
+"the progress bar y coordinate\n"
+"of its upper left corner"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:106
-msgid "the progress bar y coordinate of its upper left corner"
-msgstr ""
-
-#: ../../standalone/draksplash_.c:107
 msgid "the width of the progress bar"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:108
+#: ../../standalone/draksplash_.c:107
 msgid "the heigth of the progress bar"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:109
+#: ../../standalone/draksplash_.c:108
 msgid "the color of the progress bar"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:121
-msgid "Go back"
-msgstr ""
-
-#: ../../standalone/draksplash_.c:122
 msgid "Preview"
 msgstr ""
 
 #: ../../standalone/draksplash_.c:123
+msgid "Save theme"
+msgstr ""
+
+#: ../../standalone/draksplash_.c:124
 msgid "Choose color"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:126
+#: ../../standalone/draksplash_.c:127
 msgid "Display logo on Console"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:127
+#: ../../standalone/draksplash_.c:128
 msgid "Make kernel message quiet by default"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:163 ../../standalone/draksplash_.c:332
+#: ../../standalone/draksplash_.c:165 ../../standalone/draksplash_.c:329
 #, c-format
 msgid "This theme haven't yet any bootsplash in %s !"
 msgstr ""
 
-#: ../../standalone/draksplash_.c:215
+#: ../../standalone/draksplash_.c:212
 msgid "saving Bootsplash theme..."
 msgstr ""
 
-#: ../../standalone/draksplash_.c:438
+#: ../../standalone/draksplash_.c:435
 msgid "ProgressBar color selection"
 msgstr ""
 
@@ -11079,6 +11077,12 @@ msgstr ""
 
 #: ../../standalone/draksplash_.c:465
 msgid "Generating preview ..."
+msgstr ""
+
+#. -PO  First %s is theme name, second %s (in parenthesis) is resolution
+#: ../../standalone/draksplash_.c:511
+#, c-format
+msgid "%s BootSplash (%s) preview"
 msgstr ""
 
 #: ../../standalone/drakxtv_.c:49
