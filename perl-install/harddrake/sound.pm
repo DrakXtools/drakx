@@ -174,7 +174,7 @@ sub switch {
                                N("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
                                [
                                 { label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1, format => sub {
-                                    my %des = category2modules_and_description('multimedia/sound');
+                                    my %des = modules::category2modules_and_description('multimedia/sound');
                                     "$_[0] (". $des{$_[0]} . ')'
                                     }, allow_empty_list => 1 },
                                 {
