@@ -253,7 +253,8 @@ sub real_main {
                    {
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
-                    data => [ 
+                    data => {
+                             [ 
                              (map {
                                  my ($dstruct, $field, $item) = @$_;
                                  $item->{val} = \$dstruct->{$field};
@@ -277,6 +278,7 @@ sub real_main {
                               { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
                              )
                             ],
+                            },
                     post => sub {
                         isdn_write_config($isdn, $netc); # or return 'isdn_protocol';
                         $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
