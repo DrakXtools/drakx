@@ -4353,11 +4353,11 @@ sub button_box_main() {
     $button_box_tmp->destroy;
 
     gtkpack($button_box,
-	    $button_box_tmp = gtkpack(gtkset_layout(new Gtk2::HButtonBox, 'start'),
-			gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub { ugtk2->exit(0) }),
+	    $button_box_tmp = gtkpack(Gtk2::HButtonBox->new,
 			gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
 				adv_help(\&interactive_mode_box, $custom_help) 
 			}),
+			gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub { ugtk2->exit(0) }),
 		),
 	);
 }
