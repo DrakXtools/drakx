@@ -268,6 +268,8 @@ sub miscellaneous {
             SECURITY => $o->{security},
 	    META_CLASS => $o->{meta_class} || 'PowerPack',
         });
+	substInFile { s/KEYBOARD=.*/KEYBOARD=yes/ } "$o->{prefix}/etc/sysconfig/usb" if detect_devices::usbKeyboards();
+
     } 'installPackages';
 }
 
