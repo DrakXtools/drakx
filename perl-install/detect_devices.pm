@@ -239,7 +239,7 @@ sub tryWrite($) {
 
 sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
-    `/bin/dmesg`;
+    `$ENV{LD_LOADER} /bin/dmesg`;
 }
 
 sub hasSMP { c::detectSMP() }
