@@ -442,6 +442,9 @@ sub install2::configMove {
     }
     install_steps_interactive::summaryBefore($o);
 
+    require timezone;
+    timezone::write($o->{prefix}, $o->{timezone});
+
     modules::load_category('multimedia/sound');
     enable_service('sound');
 
