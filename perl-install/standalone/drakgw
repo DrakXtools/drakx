@@ -34,7 +34,7 @@ local $_ = join '', @ARGV;
 /-version/ and die 'version: $Id$ '."\n";
 $::isEmbedded or $::isWizard = 1;
 $::Wizard_pix_up = "wiz_drakgw.png";
-$::Wizard_title = "Internet Connection Sharing";
+$::Wizard_title = _("Internet Connection Sharing");
 $::direct = /-direct/;
 
 
@@ -642,6 +642,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.40  2001/04/11 15:16:34  gc
+#- do i18n for title also
+#-
 #- Revision 1.39  2001/04/10 21:33:15  gc
 #- add INTERFACE param in sysconfig parameter for smooth interoperation with bastille-firewall
 #-
