@@ -222,11 +222,8 @@ sub connection() {
 
     gtkflush();
 
-    if ($wasconnected == 1) {
-        system("/etc/sysconfig/network-scripts/net_cnx_down &");
-    }  else  {
-        system("/etc/sysconfig/network-scripts/net_cnx_up &");
-    }
+    # ergh, our integrist common::system can't lie on the program name :-/
+    CORE::system { 'consolehelper' } ($wasconnected == 1 ? '/sbin/ifdown' : '/sbin/ifup', $default_intf) or die N("consolehelper missing");
 }
 
 sub graph_window_width() { $width - $left_border }
