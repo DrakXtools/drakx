@@ -101,7 +101,7 @@ your machine is only a client on the Internet, you should choose a lower level.
 <span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous
 level, but the system is entirely closed and security features are at their
 maximum")));
-    create_scrolled_window($text, [ 'never', 'automatic' ]);
+    create_scrolled_window(gtkset_alignment($text, 0.5, 0.5), [ 'never', 'automatic' ]);
 }
 
 sub new_nonedit_combo {
