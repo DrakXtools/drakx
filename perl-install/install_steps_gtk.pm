@@ -640,4 +640,4 @@ sub set_help {
     1;
 }
 
-__END__
+1;

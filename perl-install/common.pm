@@ -180,4 +180,4 @@ sub join_lines {
     @l, if_($s, $s);
 }
 
-__END__
+1;

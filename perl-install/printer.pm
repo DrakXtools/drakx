@@ -2483,4 +2483,4 @@ sub removesection {
     return join ("", @lines);
 }
 
-__END__
+1;

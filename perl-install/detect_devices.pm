@@ -918,4 +918,4 @@ sub is_a_recent_computer {
     $frequence > 600;
 }
 
-__END__
+1;

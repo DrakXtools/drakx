@@ -511,4 +511,4 @@ sub check {
     exit($ok ? 0 : 1);
 }
 
-__END__
+1;

@@ -47,4 +47,4 @@ if_((arch() !~ /alpha/) && (arch() !~ /ppc/),
 }
 
 
-__END__
+1;

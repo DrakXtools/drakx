@@ -581,4 +581,4 @@ sub loadkeys {
 
 sub sync { common::sync() }
 
-__END__
+1;

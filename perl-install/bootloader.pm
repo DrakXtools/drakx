@@ -1075,4 +1075,4 @@ sub install {
     die first(map { $_ } @rcs);
 }
 
-__END__
+1;

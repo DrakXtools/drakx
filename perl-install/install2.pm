@@ -627,4 +627,4 @@ sub main {
     print "\n" x 80;
 }
 
-__END__
+1;

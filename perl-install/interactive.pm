@@ -395,4 +395,4 @@ sub wait_message {
 
 sub kill {}
 
-__END__
+1;

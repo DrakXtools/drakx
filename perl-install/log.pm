@@ -54,4 +54,4 @@ sub closeLog() {
     } else { close LOG; close LOG2 }
 }
 
-__END__
+1;

@@ -1368,4 +1368,4 @@ You may prefer to replay the installation.
 #- Misc Steps Functions
 #-######################################################################################
 
-__END__
+1;

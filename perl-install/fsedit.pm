@@ -735,4 +735,4 @@ sub verifyHds {
     $ok;
 }
 
-__END__
+1;

@@ -450,4 +450,4 @@ sub configureNetwork2 {
 }
 
 
-__END__
+1;

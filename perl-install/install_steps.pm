@@ -1050,4 +1050,4 @@ sub cleanIfFailedUpgrade($) {
 }
 
 
-__END__
+1;
