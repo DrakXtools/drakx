@@ -26,7 +26,7 @@ sub get() {
     cat_("$::prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.0 msec
     cat_("$::prefix/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.1 msec
       ${{ getVarsFromSh("$::prefix/etc/sysconfig/msec") }}{SECURE_LEVEL}  || #- 8.2 msec
-	$ENV{SECURE_LEVEL};
+	$ENV{SECURE_LEVEL} || 2;
 }
 
 sub set {
