@@ -495,7 +495,6 @@ sub create_packtable {
     $w
 }
 
-my $wm_is_kde;
 sub create_okcancel {
     my ($w, $o_ok, $o_cancel, $o_spread, @other) = @_;
     # @other is a list of extra buttons (usually help (eg: XFdrake/drakx caller) or advanced (eg: interactive caller) button)
@@ -515,10 +514,6 @@ sub create_okcancel {
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     }
     $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
-    if (!defined $wm_is_kde) {
-        require any;
-        $wm_is_kde = !$::isInstall && any::running_window_manager() eq "kwin" || 0;
-    }
     my @l2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
     my @r2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
@@ -533,8 +528,8 @@ sub create_okcancel {
     } else { 
         # normal mode: cancel/ok button follow current desktop's HIG
         my @extras = (@l2, @r2, if_($ok && $cancel, Gtk2::Label->new)); # space buttons but if there's only one
-        @first = (($wm_is_kde ? $bok : $bprev), @extras);
-        @last = ($wm_is_kde ? $bprev : $bok);
+        @first = ($bprev, @extras);
+        @last = ($bok);
     }
 
     gtkpack(Gtk2::VBox->new,
