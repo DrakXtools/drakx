@@ -26,10 +26,10 @@ Instead, changing some .pm files is quite easy (nice interpreted language)
 ********************************************************************************
 If you have your own rpms you want to add, or make your own updated cdrom, you
 just have to update:
-- Mandrake/base/hdlist: use ``misc/genhdlist .''
-- Mandrake/base/depslist: use ``misc/gendepslist -h Mandrake/base/depslist Mandrake/base/hdlist''
+- Mandrake/base/hdlist: use ``misc/genhdlists --distrib .''
+- Mandrake/base/depslist: use ``misc/gendepslist2 -o Mandrake/base/depslist Mandrake/base/hdlist.cz2''
 
-Optionnally, you can modify Mandrake/base/compss, compssList and compssUsers.
+Optionnally, you can modify Mandrake/base/compssList and compssUsers.
 Also, mdkinst_stage2.gz must be remade if you modify files in Mandrake/mdkinst.
 See below for information about these files.
 
@@ -39,18 +39,23 @@ See below for information about these files.
 First he are the different things needed :
 
 Mandrake/base/hdlist
+	obsolete in 7.1
+
+Mandrake/base/hdlist.cz2
 	table of rpm's headers. 
-	! Need to be remade when Mandrake/RPMS changes (with ``misc/genhdlist .'') !
+	! Need to be remade when Mandrake/RPMS changes (with ``misc/genhdlists --distrib .'') !
 
 Mandrake/base/depslist
 	for each packages, tell which package it depends on. Also contains the
 	size for some (obscure) bloody reasons.
 	! Need to be remade when Mandrake/RPMS changes !
-	(with ``misc/gendepslist -h Mandrake/base/depslist Mandrake/base/hdlist'') 
+	(with ``misc/gendepslist2 -o Mandrake/base/depslist Mandrake/base/hdlist.cz2'')
+
+Mandrake/base/depslist.ordered
+	more compact depslist with closure done, internally indexed
 
 Mandrake/base/compss
-	obsoletes comps. It store packages in different categories, a bit like
-	the %{GROUP} field
+	obsolete in 7.1
 
 Mandrake/base/compssUsers
 	obsoletes comps. It contains the different user classes like ``Graphics
@@ -77,11 +82,6 @@ images/*.img
 	- network for ftp/nfs install
 	- pcmcia for pcmcia install (see ``PCMCIA install'' below for more)
 
-
-Some optional files :
-
-Mandrake/base/depslist.html
-	html formatted depslist
 
 ********************************************************************************
 * logs *************************************************************************
@@ -163,28 +163,23 @@ For pcmcia, it depends on the type of install.
 ********************************************************************************
 * modules **********************************************************************
 ********************************************************************************
-Modules can be found in at least 3 places:
+Modules can be found in at least 2 places:
 - in /modules/modules.cgz
-- in /lib/modules/
-- in /lib/modules/modules.cpio.bz2
+- in /lib/modules.cz2
 
 /modules/modules.cgz is used in stage1. It contains only modules interesting for
 one kind of install. For example in an hd install, it contains scsi modules.
 For an network install, it contains network card modules.
 
-/lib/modules/ contains modules that should be in /lib/modules/modules.cpio.bz2
-but are not for speed up. The serial.o module is there to speed up mouseconfig.
-
-/lib/modules/modules.cpio.bz2 contains every module except those of
-/lib/modules/
+/lib/modules.cz2 contains every module, it is used in stage2.
 
 
 To install a module, use modprobe which is in /usr/bin. It's a perl wrapper
 around /usr/bin/insmod. It uses the dependencies found in
-/lib/modules/modules.dep (stage1).
+/modules/modules.dep (stage1).
 
 /usr/bin/insmod is a wrapper around /usr/bin/insmod_. It just extracts the
-module out of /lib/modules/modules.cpio.bz2 in /tmp. Then it calls insmod_.
+module out of /lib/modules.cz2 in /tmp. Then it calls insmod_.
 
 /usr/bin/insmod_ is the real prog (which you usually find in /sbin/). You need
 to give it the complete path.

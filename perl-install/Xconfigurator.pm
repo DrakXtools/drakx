@@ -153,9 +153,9 @@ sub keepOnlyLegalModes {
 
 sub cardConfigurationAuto() {
     my $card;
-    if (my ($c) = pci_probing::main::probe("DISPLAY")) {
+    if (my (@c) = pci_probing::main::probe("DISPLAY")) {
 	local $_;
-	($card->{identifier}, $_) = @$c;
+	($card->{identifier}, $_) = @{$c[-1]};
 	$card->{type} = $1 if /Card:(.*)/;
 	$card->{server} = $1 if /Server:(.*)/;
 	$card->{flags}{needVideoRam} &&= /86c368/;
@@ -696,6 +696,48 @@ EndSection
 
 ) if $o->{wacom};
 
+    print G qq(
+Section "InputDevice"
+    Identifier	"stylus"
+    Driver	"wacom"
+    Option	"Type" "stylus"
+    Option	"Device" "/dev/$o->{wacom}"
+EndSection
+Section "InputDevice"
+    Identifier	"eraser"
+    Driver	"wacom"
+    Option	"Type" "eraser"
+    Option	"Device" "/dev/$o->{wacom}"
+EndSection
+Section "InputDevice"
+    Identifier	"cursor"
+    Driver	"wacom"
+    Option	"Type" "cursor"
+    Option	"Device" "/dev/$o->{wacom}"
+EndSection
+) if $o->{wacom};
+
+    print G qq(
+Section "Module"
+
+# This loads the DBE extension module.
+
+    Load	"dbe"
+
+# This loads the miscellaneous extensions module, and disables
+# initialisation of the XFree86-DGA extension within that module.
+
+    SubSection	"extmod"
+	Option	"omit xfree86-dga"
+    EndSubSection
+
+# This loads the Type1 and FreeType font modules
+
+    Load	"type1"
+    Load	"freetype"
+EndSection
+);
+
     #- Write monitor section.
     $O = $o->{monitor};
     print F $monitorsection_text1;
@@ -831,7 +873,22 @@ Section "Screen"
     #- bpp 32 not handled by XF4
     $subscreen->(*G, "svga", min($O->{default_depth}, 24), $O->{depth});
 
-    print G $layoutsection_v4;
+    print G '
+
+Section "ServerLayout"
+    Identifier "layout1"
+    Screen     "screen1"
+    InputDevice "Mouse1" "CorePointer"
+';
+    print G '
+    InputDevice "stylus" "AlwaysCore"
+    InputDevice "eraser" "AlwaysCore"
+    InputDevice "cursor" "AlwaysCore"
+' if $o->{wacom};
+    print G '
+    InputDevice "Keyboard1" "CoreKeyboard"
+EndSection
+';
 
     close F;
     close G;

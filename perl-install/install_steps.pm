@@ -553,6 +553,7 @@ sub addUser($) {
 	    $_->{uid} = $u; $uids{$u} = 1;
 	    $_->{gid} = $g; $gids{$g} = 1;
 	    $_->{pw} ||= $_->{password} && install_any::crypt($_->{password});
+	    $_->{shell} ||= "/bin/bash";
 	    $done{$_->{name}} = 1;
 	}
     } @{$o->{users} || []};
@@ -577,7 +578,6 @@ sub addUser($) {
 	}
 	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
-	any::addKdmIcon($p, $u->{name}, $u->{icon});
     }
     require any;
     any::addUsers($o->{prefix}, map { $_->{name} } @l);
@@ -654,6 +654,11 @@ sub setupBootloaderBefore {
     } else {
 	require lilo;
         lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o));
+	if ($o->{miscellaneous}{profiles}) {
+	    my $e = lilo::get_label("linux", $o->{bootloader});
+	    push @{$o->{bootloader}{entries}}, { %$e, label => "office", append => "$e->{append} prof=Office" };
+	    $e->{append} .= " prof=Home";
+	}
         lilo::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
@@ -698,8 +703,6 @@ sub setupXfreeBefore {
 
     require Xconfig;
     Xconfig::getinfoFromDDC($o->{X});
-
-    $::xf4 = 1;
 
     #- keep this here if the package has to be updated.
     install_any::pkg_install($o, "XFree86");
@@ -746,7 +749,7 @@ sub miscellaneous {
 
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
     $o->{miscellaneous}{HDPARM} ||= $s{HDPARM} if exists $s{HDPARM};
-    $o->{miscellaneous}{CLEAN_TMP} ||= $s{HDPARM} if exists $s{CLEAN_TMP};
+    $o->{miscellaneous}{CLEAN_TMP} ||= $s{CLEAN_TMP} if exists $s{CLEAN_TMP};
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
     $ENV{SECURE_LEVEL} = $o->{security};

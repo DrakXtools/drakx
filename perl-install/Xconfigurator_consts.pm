@@ -756,12 +756,3 @@ $screensection_text1 = '
 # **********************************************************************
 ';
 
-$layoutsection_v4 = '
-
-Section "ServerLayout"
-    Identifier "layout1"
-    Screen     "screen1"
-    InputDevice "Mouse1" "CorePointer"
-    InputDevice "Keyboard1" "CoreKeyboard"
-EndSection
-';

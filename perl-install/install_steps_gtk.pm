@@ -439,6 +439,7 @@ sub choosePackagesTree {
 	my ($leaf, $root) = @_;
 	my $node = $tree->insert_node($parent->($root), undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
 	my $p = $packages->[0]{$leaf} or return;
+	$p->{medium}{selected} or return;
 	my $pix = pkgs::packageFlagBase($p) ? $pix_base : pkgs::packageFlagSelected($p) ? $pix_selected : $pix_unselect;
 	$tree->node_set_pixmap($node, 1, $pix->[0], $pix->[1]);
 	push @{$ptree{$leaf}}, $node;

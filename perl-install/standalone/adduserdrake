@@ -31,7 +31,7 @@ my $in = vnew interactive('su');
 my @users; 
 
 new:
-$u = { icon => translate('default') };
+$u = { icon => translate('automagic') };
 if ($in->ask_from_entries_refH(
         [ _("Add user"), _("Accept user"), _("Done") ],
         _("Enter a user\n%s", $users ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @users)) : ''),
@@ -77,7 +77,7 @@ sub addusers {
     }
 
     system("adduser $_") foreach @u;
-    any::addUsers('', @u);
+    any::addUsers('', @_);
 
     substInFile {
 	foreach my $u (@users) {

@@ -651,10 +651,13 @@ _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("
 #------------------------------------------------------------------------------
 sub addUser {
     my ($o, $clicked) = @_;
-    my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", password => "mandrake", realname => "default" } : {};
+    my $u = $o->{user} ||= {};
+    if ($::beginner || $o->{security} < 1) {
+	add2hash_($u, { name => "mandrake", password => "mandrake", realname => "default" });
+	$o->{users} ||= [ $u ];
+    }
     $u->{password2} ||= $u->{password} ||= "";
     $u->{shell} ||= "/bin/bash";
-    $u->{icon} ||= translate('default');
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
@@ -929,9 +932,11 @@ _("Removable media automounting") => { val => \$o->{useSupermount}, type => 'boo
      $::expert ? (
 _("Clean /tmp at each boot") => { val => \$u->{CLEAN_TMP}, type => 'bool' },
      ) : (),
-     $u->{numlock} ? (
+     $o->{pcmcia} ? (
+_("Enable multi profiles") => { val => \$u->{profiles}, type => 'bool' },
+     ) : (
 _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
-     ) : (),
+     ),
      ], complete => sub {
 	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in Mb")), return 1;
 	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};

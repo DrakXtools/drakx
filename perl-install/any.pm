@@ -16,7 +16,7 @@ use run_program;
 #-PO: names (tie, curly...) have corresponding icons for kdm
 my @users_male = (__("tie"), __("default"), __("curly")); #- don't change the names, files correspond to them
 my @users_female = (__("brunette"), __("girl"), __("woman-blond"));
-@users = (@users_male, @users_female);
+@users = (@users_male, @users_female, __("automagic"));
 
 sub addKdmIcon {
     my ($prefix, $user, $icon, $force) = @_;
@@ -25,29 +25,30 @@ sub addKdmIcon {
     eval { commands::cp("$prefix/usr/share/icons/user-$icon-mdk.xpm", $dest) } if $icon;
 }
 
-sub addKdmUsers {
+sub allocUsers {
     my ($prefix, @users) = @_;
     require timezone;
     my @u1 = @users_male;
     my @u2 = @users_female;
-    foreach (@users) {
-	my $l = rand() < timezone::sexProb($_) ? \@u2 : \@u1;
-	my $u = splice(@$l, rand(@$l), 1); #- known biased (see cookbook for better)
-	addKdmIcon($prefix, $_, $u);
-	eval { commands::cp "$prefix/usr/share/icons/user-$u-mdk.xpm", "$prefix/usr/share/apps/kdm/pics/users/$_.xpm" };
+    foreach (grep { !$_->{icon} || $_->{icon} eq "automagic" } @users) {
+	my $l = rand() < timezone::sexProb($_->{name}) ? \@u2 : \@u1;
+	$_->{auto_icon} = splice(@$l, rand(@$l), 1); #- known biased (see cookbook for better)
 	@u1 = @users_male   unless @u1;
 	@u2 = @users_female unless @u2;
     }
-    addKdmIcon($prefix, 'root', 'hat', 'force');
 }
 
 sub addUsers {
     my ($prefix, @users) = @_;
     my $msec = "$prefix/etc/security/msec";
+
+    allocUsers($prefix, @users);
     foreach my $u (@users) {
 	substInFile { s/^$u\n//; $_ .= "$u\n" if eof } "$msec/user.conf" if -d $msec;
+	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon}, 'force');
     }
     run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh");
+    addKdmIcon($prefix, 'root', 'hat', 'force');
 }
 
 sub setupBootloader {

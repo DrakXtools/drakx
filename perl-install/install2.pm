@@ -600,12 +600,6 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
-#-    #- needed very early to switch bad cards in VGA16
-#-    foreach (pci_probing::main::probe('')) {
-#-	  log::l("Here: $_->[0]");
-#-	  $_->[0] =~ /i740|ViRGE/ and add2hash_($o, { vga16 => 1 }), log::l("switching to VGA16 as bad graphic card");
-#-    }
-
     #- needed very early for install_steps_gtk
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
