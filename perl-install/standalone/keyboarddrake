@@ -42,20 +42,17 @@ if ($::expert) {
     $keyboard->{BACKSPACE} = $isNotDelete ? "BackSpace" : "Delete";
 }
 
-system('loadkeys', keyboard::keyboard2kmap($keyboard));
-
-my $xkb = keyboard::keyboard2xkb($keyboard);
-system('setxkbmap', $xkb);
-
+my $xkb = keyboard::keyboard2full_xkb($keyboard);
+system('setxkbmap', '-option', '') if $xkb->{XkbOptions}; #- need re-initialised other toggles are cumulated
+system('setxkbmap', $xkb->{XkbLayout}, '-model', $xkb->{XkbModel}, '-option', $xkb->{XkbOptions} || '');
 eval {
     my $xfree_conf = Xconfig::xfree->read;
-    my $x_kbd_conf = $xfree_conf->get_keyboard;
-    $x_kbd_conf->{XkbLayout} = $xkb;
-    $xfree_conf->set_keyboard($x_kbd_conf);
+    $xfree_conf->set_keyboard($xkb);
     $xfree_conf->write;
 };
 
 keyboard::write($keyboard);
+system('/etc/init.d/keytable', 'restart');
 
 end:
 if ($::isEmbedded) {
