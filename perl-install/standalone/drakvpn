@@ -537,17 +537,17 @@ step_add_section_ipsec_conf_k26:
 N("Your %s file has several sections, or connections.\n
 You can now add a new section.
 Choose continue when you are done to write the data.\n", $ipsec_conf),
-	[	{ label => N("secure_policy = "), val => \$section->{secure_policy}, list => [ 'spdadd', 'spdadd' ]  },
-		{ label => N("src_range = "), val => \$section->{src_range}, type => 'entry' },
-		{ label => N("dst_range = "), val => \$section->{dst_range}, type => 'entry' },
-		{ label => N("upperspec = "), val => \$section->{upperspec}, list =>  [ 'any', 'any' ] },
-		{ label => N("flag = "), val => \$section->{flag}, list => [ '-P', '-P' ] },
-		{ label => N("direction = "), val => \$section->{direction}, list => [ 'in', 'out' ] },
-		{ label => N("ipsec = "), val => \$section->{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
-		{ label => N("protocol = "), val => \$section->{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
-		{ label => N("mode = "), val => \$section->{mode}, list => [ 'tunnel', 'transport', 'any' ] },
-		{ label => N("src_dest = "), val => \$section->{src_dest}, type => 'entry' },
-		{ label => N("level = "), val => \$section->{level}, list => [ 'required', 'default', 'use', 'unique' ] },
+	[	{ label => N("secure_policy"), val => \$section->{secure_policy}, list => [ 'spdadd', 'spdadd' ]  },
+		{ label => N("src_range"), val => \$section->{src_range}, type => 'entry' },
+		{ label => N("dst_range"), val => \$section->{dst_range}, type => 'entry' },
+		{ label => N("upperspec"), val => \$section->{upperspec}, list =>  [ 'any', 'any' ] },
+		{ label => N("flag"), val => \$section->{flag}, list => [ '-P', '-P' ] },
+		{ label => N("direction"), val => \$section->{direction}, list => [ 'in', 'out' ] },
+		{ label => N("ipsec"), val => \$section->{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
+		{ label => N("protocol"), val => \$section->{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
+		{ label => N("mode"), val => \$section->{mode}, list => [ 'tunnel', 'transport', 'any' ] },
+		{ label => N("src_dest"), val => \$section->{src_dest}, type => 'entry' },
+		{ label => N("level"), val => \$section->{level}, list => [ 'required', 'default', 'use', 'unique' ] },
 		  ]
 ) or goto step_configure_ipsec_conf;
 	
@@ -646,17 +646,17 @@ Choose continue when you are done to write the data.\n", $ipsec_conf),
 N("Your %s file has several sections, or connections.\n
 You can now edit the chosen section.
 Choose continue when you are done to write the data.\n", $ipsec_conf),
-	[	{ label => N("secure_policy = "), val => \$ipsec->{$number}{secure_policy}, list => [ 'spdadd', 'spdadd' ]  },
-		{ label => N("src_range = "), val => \$ipsec->{$number}{src_range}, type => 'entry' },
-		{ label => N("dst_range = "), val => \$ipsec->{$number}{dst_range}, type => 'entry' },
-		{ label => N("upperspec = "), val => \$ipsec->{$number}{upperspec}, list =>  [ 'any', 'any' ] },
-		{ label => N("flag = "), val => \$ipsec->{$number}{flag}, list => [ '-P', '-P' ] },
-		{ label => N("direction = "), val => \$ipsec->{$number}{direction}, list => [ 'in', 'out' ] },
-		{ label => N("ipsec = "), val => \$ipsec->{$number}{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
-		{ label => N("protocol = "), val => \$ipsec->{$number}{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
-		{ label => N("mode = "), val => \$ipsec->{$number}{mode}, list => [ 'tunnel', 'transport', 'any' ] },
-		{ label => N("src_dest = "), val => \$ipsec->{$number}{src_dest}, type => 'entry' },
-		{ label => N("level = "), val => \$ipsec->{$number}{level}, list => [ 'required', 'default', 'use', 'unique' ] },
+	[	{ label => N("secure_policy"), val => \$ipsec->{$number}{secure_policy}, list => [ 'spdadd', 'spdadd' ]  },
+		{ label => N("src_range"), val => \$ipsec->{$number}{src_range}, type => 'entry' },
+		{ label => N("dst_range"), val => \$ipsec->{$number}{dst_range}, type => 'entry' },
+		{ label => N("upperspec"), val => \$ipsec->{$number}{upperspec}, list =>  [ 'any', 'any' ] },
+		{ label => N("flag"), val => \$ipsec->{$number}{flag}, list => [ '-P', '-P' ] },
+		{ label => N("direction"), val => \$ipsec->{$number}{direction}, list => [ 'in', 'out' ] },
+		{ label => N("ipsec"), val => \$ipsec->{$number}{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
+		{ label => N("protocol"), val => \$ipsec->{$number}{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
+		{ label => N("mode"), val => \$ipsec->{$number}{mode}, list => [ 'tunnel', 'transport', 'any' ] },
+		{ label => N("src_dest"), val => \$ipsec->{$number}{src_dest}, type => 'entry' },
+		{ label => N("level"), val => \$ipsec->{$number}{level}, list => [ 'required', 'default', 'use', 'unique' ] },
 		  ]
 ) or goto step_configure_ipsec_conf;
 	
