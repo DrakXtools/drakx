@@ -161,7 +161,7 @@ sub doPartitionDisksAfter {
     $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
-    if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) {
+    if (arch() =~ /ppc/ && detect_devices::get_mac_generation() =~ /NewWorld/) {
 	die "Need bootstrap partition to boot system!" if !(defined $partition_table::mac::bootstrap_part);
     }
     
@@ -1003,7 +1003,7 @@ Beware that some Mandrake tools rely on the contents of some
 of these files... so remove any file from here at your own
 risk!
 " };
-    install_any::unlockCdrom;
+    install_any::unlockCdrom();
     install_any::log_sizes($o);
 }
 

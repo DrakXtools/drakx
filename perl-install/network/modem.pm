@@ -38,7 +38,7 @@ sub pppConfig {
     $::isInstall and $in->set_help('selectSerialPort');
     $modem->{device} ||= $in->ask_from_listf('', _("Please choose which serial port your modem is connected to."),
 					     \&mouse::serial_port2text,
-					     [ grep { $_ ne $mouse->{device} } (mouse::serial_ports, if_(-e '/dev/modem', '/dev/modem')) ]) || return;
+					     [ grep { $_ ne $mouse->{device} } (mouse::serial_ports(), if_(-e '/dev/modem', '/dev/modem')) ]) || return;
 
     $::isStandalone || $in->set_help('configureNetworkISP');
     $in->ask_from('', _("Dialup options"), [

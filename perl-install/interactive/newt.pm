@@ -15,19 +15,19 @@ my ($width, $height) = (80, 25);
 my @wait_messages;
 
 sub new() {
-    Newt::Init;
-    Newt::Cls;
-    Newt::SetSuspendCallback;
-    ($width, $height) = Newt::GetScreenSize;
+    Newt::Init();
+    Newt::Cls();
+    Newt::SetSuspendCallback();
+    ($width, $height) = Newt::GetScreenSize();
     open STDERR,">/dev/null" if $::isStandalone && !$::testing;
     bless {}, $_[0];
 }
 
-sub enter_console { Newt::Suspend }
-sub leave_console { Newt::Resume }
-sub suspend { Newt::Suspend }
-sub resume { Newt::Resume }
-sub end() { Newt::Finished }
+sub enter_console { Newt::Suspend() }
+sub leave_console { Newt::Resume() }
+sub suspend { Newt::Suspend() }
+sub resume { Newt::Resume() }
+sub end() { Newt::Finished() }
 sub exit() { end; exit($_[1]) }
 END { end() }
 
@@ -231,13 +231,13 @@ sub ask_fromW_real {
 		$button->{e}{clicked_may_quit}();
 	    };
 	    $form->FormDestroy;
-	    Newt::PopWindow;
+	    Newt::PopWindow();
 	    return $v || &ask_fromW;
 	}
     } until ($check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'}));
 
     $form->FormDestroy;
-    Newt::PopWindow;
+    Newt::PopWindow();
     !$canceled;
 }
 
@@ -249,7 +249,7 @@ sub waitbox {
     Newt::CenteredWindow($w, $h, $title);
     $f->FormAddComponent($t);
     $f->DrawForm;
-    Newt::Refresh;
+    Newt::Refresh();
     $f->FormDestroy;
     push @wait_messages, $f;
     $f;
@@ -270,7 +270,7 @@ sub wait_message_endW {
     my ($o, $w) = @_;
     my $wait = pop @wait_messages;
 #    log::l("interactive_newt does not handle none stacked wait-messages") if $w->{form} != $wait;
-    Newt::PopWindow;
+    Newt::PopWindow();
 }
 
 sub simplify_string {

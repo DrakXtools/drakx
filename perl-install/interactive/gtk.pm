@@ -19,7 +19,7 @@ sub new {
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
 sub leave_console { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 
-sub exit { my_gtk::exit @_ }
+sub exit { my_gtk::exit(@_) }
 
 sub ask_warn {
     local $my_gtk::pop_it = 1;

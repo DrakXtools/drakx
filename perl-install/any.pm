@@ -173,7 +173,7 @@ sub setupBootloader {
     ),
 { label => _("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
 { label => _("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
-    if_(detect_devices::isLaptop,
+    if_(detect_devices::isLaptop(),
 { label => _("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
     ),
 ],

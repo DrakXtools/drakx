@@ -280,7 +280,7 @@ sub selectMouse {
     my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
     $o->{mouse} = mouse::fullname2mouse(
 	$o->ask_from_treelist_('', _("Please choose the type of your mouse."), 
-			       '|', [ mouse::fullnames ], $prev) || return) if $force;
+			       '|', [ mouse::fullnames() ], $prev) || return) if $force;
 
     if ($force && $o->{mouse}{type} eq 'serial') {
 	$o->set_help('selectSerialPort');
@@ -288,7 +288,7 @@ sub selectMouse {
 	  $o->ask_from_listf(_("Mouse Port"),
 			    _("Please choose on which serial port your mouse is connected to."),
 			    \&mouse::serial_port2text,
-			    [ mouse::serial_ports ]) or return;
+			    [ mouse::serial_ports() ]) or return;
     }
     if (arch() =~ /ppc/ && $o->{mouse}{nbuttons} == 1) {
 	#- set a sane default F11/F12
@@ -369,7 +369,7 @@ sub doPartitionDisks {
 
     install_any::getHds($o, $o);
 
-    if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) { #- need to make bootstrap part if NewWorld machine - thx Pixel ;^)
+    if (arch() =~ /ppc/ && detect_devices::get_mac_generation() =~ /NewWorld/) { #- need to make bootstrap part if NewWorld machine - thx Pixel ;^)
 	if (defined $partition_table::mac::bootstrap_part) {
 	    #- don't do anything if we've got the bootstrap setup
 	    #- otherwise, go ahead and create one somewhere in the drive free space
