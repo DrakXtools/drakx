@@ -1662,7 +1662,7 @@ complete => sub {
     );
 
     # Non-local printer, check network and abort if no network available
-    if ($printer->{currentqueue}{connect} !~ m!^(file|ptal):/! &&
+    if ($printer->{currentqueue}{connect} !~ m!^(file|parallel|usb|serial|mtink|ptal://?mlc):/! &&
         !check_network($printer, $in, $upNetwork, 0)) { 
         return 0;
     }
@@ -3665,14 +3665,14 @@ sub mainwindow_interactive {
 	}
 	# Generate the list of available printers
 	my @printerlist = 
-	    sort((map { $printer->{configured}{$_}{queuedata}{menuentry} 
+	    (sort(map { $printer->{configured}{$_}{queuedata}{menuentry} 
 			. ($_ eq $printer->{DEFAULT} ?
 			   N(" (Default)") : "") }
 		  keys(%{$printer->{configured}
 			 || {}})),
-		 ($printer->{SPOOLER} eq "cups" ?
-		  printer::cups::get_formatted_remote_queues($printer) :
-		  ()));
+	     ($printer->{SPOOLER} eq "cups" ?
+	      sort(printer::cups::get_formatted_remote_queues($printer)) :
+	      ()));
 	my $noprinters = $#printerlist < 0;
 	# Position the cursor where it was before (in case
 	# a button was pressed).
@@ -3686,8 +3686,8 @@ sub mainwindow_interactive {
 	    # List the queues
 	    [ if_(!$noprinters,
 		  { val => \$menuchoice, format => \&translate,
-		    sort => 0, separator => "!",tree_expanded => 1,
-		    quit_if_double_click => 1,allow_empty_list =>1,
+		    sort => 0, separator => "!", tree_expanded => 1,
+		    quit_if_double_click => 1, allow_empty_list => 1,
 		    list => \@printerlist }),
 	      { clicked_may_quit =>
 		    sub { 

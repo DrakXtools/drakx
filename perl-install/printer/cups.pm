@@ -37,7 +37,7 @@ sub get_formatted_remote_queues {
     # CUPS daemon knows due to broadcasting of remote servers or 
     # "BrowsePoll" entries in the local /etc/cups/cupsd.conf/
     map {
-	join('!', if_($::expert, N("CUPS")), N("Remote Printers"), $_);
+	join('!', if_($::expert, N("CUPS")), N("Configured on other machines"), $_);
     } map {
 	my $comment = N("On CUPS server \"%s\"", $_->{ipp}) . ($_->{queuename} eq $printer->{DEFAULT} ? N(" (Default)") : "");
 	"$_->{queuename}: $comment";

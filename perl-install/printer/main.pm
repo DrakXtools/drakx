@@ -320,14 +320,7 @@ sub make_menuentry {
     my ($printer, $queue) = @_;
     my $spooler = $spoolers{$printer->{SPOOLER}}{short_name};
     my $connect = $printer->{configured}{$queue}{queuedata}{connect};
-    my $localremote;
-    if ($connect =~ m!^(file|parallel|usb|serial):! || 
-	$connect =~ m!^ptal://?mlc:! ||
-	$connect =~ m!^mtink:!) {
-	$localremote = N("Local Printers");
-    } else {
-	$localremote = N("Remote Printers");
-    }
+    my $localremote = N("Configured on this machine");
     my $make = $printer->{configured}{$queue}{queuedata}{make};
     my $model = $printer->{configured}{$queue}{queuedata}{model};
     my $connection;
