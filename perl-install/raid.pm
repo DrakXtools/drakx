@@ -221,11 +221,13 @@ sub inactivate_all() {
 sub prepare_prefixed {
     my ($raids) = @_;
 
+    @$raids or return;
+
     my @devices = uniq(map { devices::make($_->{device}) } map { @{$_->{disks}} } @$raids);
 
     output("$::prefix/etc/mdadm.conf",
 	   join(' ', 'DEVICE', @devices) . "\n",
-	   map { "ARRAY " . devices::make($_->{device}) . " UUID=" . $_->{UUID} . "\n" } @$raids);
+	   map { "ARRAY " . devices::make($_->{device}) . " UUID=$_->{UUID} auto=yes\n" } @$raids);
 }
 
 sub get_md_info {
