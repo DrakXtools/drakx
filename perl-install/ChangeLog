@@ -1,3 +1,256 @@
+2002/07/06  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm (ask_users): the user name length must be <= 32
+
+	* commands.pm: adapt to new modprobe.pm
+
+	* diskdrake/hd_gtk.pm: 
+	  - move diskdrake.rc from /etc/gtk to /usr/share/libDrakX
+	  - remove unused wizard.rc
+	(as suggested by Alexander Skwar)
+	  - in interactive::check_type, check if the package (like jfsprogs) is
+	installed
+	  - use interactive::check_type where usefull
+	  - cleanup
+
+	* diskdrake/interactive.pm (as suggested by Alexander Skwar)
+	  - in interactive::check_type, check if the package (like jfsprogs) is
+	installed
+	  - use interactive::check_type where usefull
+	  - cleanup
+	(Resize): resize2fs handles ext3 :)
+
+	* install_any.pm (setDefaultPackages): use
+	fsedit::package_needed_for_partition_type to get things like jfsprogs
+	when merge_fstabs, handle in a different way mtab and fstab (or
+	manualFstab)
+	=> this allows to force the type&options in manualFstab
+
+	* fsedit.pm (package_needed_for_partition_type): return the package needed
+	for a partition type
+	(check_type): cleanup
+
+	* docs/comparisons: various remarks about mandrake
+
+	* partition_table_lvm_PV.pm: Allows people having PVs on unpartitioned
+	disks to install
+	(but no way to create such beasts)
+
+	* Makefile.config: standalone/drakbug doesn't exist! (why did deush add
+	it???)
+	it is standalone/harddrake2, not standalone/harddrake (poor deush must
+	be loosing his brain :p)
+	add harddrake pm's
+
+	* partition_table.pm: Allows people having PVs on unpartitioned disks to
+	install
+	(but no way to create such beasts)
+	cleanup
+
+	* fs.pm: supermount now handles fs=auto, using it :)
+	when merge_fstabs, handle in a different way mtab and fstab (or
+	manualFstab)
+	=> this allows to force the type&options in manualFstab
+
+	* Makefile.drakxtools, my_gtk.pm, share/wizard.rc, drakxtools.spec: 
+	  - move diskdrake.rc from /etc/gtk to /usr/share/libDrakX
+	  - remove unused wizard.rc
+
+2002/07/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/lsnetdrake: simplify
+
+	* Makefile: add harddrake to DISTFILES
+
+	* printer.pm: try to simplify
+
+	* harddrake/TODO: add bits regarding eide and scsi
+
+	* standalone/harddrake2: add missing 'use lib' due to harddrak::ui changes
+
+	* harddrake/ui.pm: simplify: use reverse
+	  - help system:
+	  - add an help entry in help menu;
+	   - begin to describe information fields
+	
+	   - reformat license in about window
+	
+	  - information frame (mostly fixing incoherency between various hw
+	  classes fields)
+	
+	   - s/media type/media class/
+	
+	   - s/info/Hardware id/
+	
+	   - s/device/device file/
+	
+	   - split description into manufacturer/description
+	
+	   - eide devices:
+	
+		  - rename bus as bus_location
+	
+	       - set interface_type as bus
+	
+	   - scsi devices:
+	
+	       - set bus to SCSI
+	
+		  - set bus_location to bus:id fields
+	
+	   - don't print pci subids when non set
+	
+	   - remove fields that were already used above (vendor id subvendor
+	     subid pci_bus pci_device pci_function)
+	
+	  - no need to return window after program exit
+	
+	  - print usage if needed
+	
+	  - embed hardware tree in a "detected hardware" frame
+	
+	  - cleanups:
+	
+	   - rename widget2 as frame
+	
+	   - remove dead commented code
+
+	* harddrake/data.pm: add a configurator for sound
+
+	* standalone/icons/harddrake2/cable.png,
+	standalone/icons/harddrake2/tape.png,
+	standalone/icons/harddrake2/usb.png,
+	standalone/icons/harddrake2/hw_network.png,
+	standalone/icons/harddrake2/unknown.png,
+	standalone/icons/harddrake2/hw_printer.png,
+	standalone/icons/harddrake2/scanner.png,
+	standalone/icons/harddrake2/isdn.png,
+	standalone/icons/harddrake2/cd.png,
+	standalone/icons/harddrake2/scsi.png,
+	standalone/icons/harddrake2/hw_mouse.png,
+	standalone/icons/harddrake2/K7.png,
+	standalone/icons/harddrake2/webcam.png,
+	standalone/icons/harddrake2/harddrake.png,
+	standalone/icons/harddrake2/keyboard.png,
+	standalone/icons/harddrake2/ide_hd.png,
+	standalone/icons/harddrake2/harddisk.png,
+	standalone/icons/harddrake2/joystick.png,
+	standalone/icons/harddrake2/video.png,
+	standalone/icons/harddrake2/memory.png,
+	standalone/icons/harddrake2/scsi_hd.png,
+	standalone/icons/harddrake2/floppy.png,
+	standalone/icons/harddrake2/sound.png,
+	standalone/icons/harddrake2/tv.png, standalone/icons/harddrake2/cpu.png,
+	standalone/icons/harddrake2/modem.png: add harddrake2 icons
+
+2002/07/05  daouda
+
+	* Makefile.config: 
+	  - add harddrake drakbug drakTermServ to STANDALONEPMS_
+
+	* drakxtools.spec: 
+	  - snapshot
+	  - new entries:
+	o harddrake2 : new hardware detection && configuration tool
+		o drakbugreport: bug reporting tool a la Kde (not working!)
+		o drakTermServ : configuration tool for diskless stations.
+
+2002/07/05  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm (prepare_write_fstab): for supermount, have "none" as the device
+	(cleaner, and
+	more coherent with the "supermount" script (tx to FredC))
+
+2002/07/05  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* install_steps_interactive.pm: minimize startup: only load
+	harddrake::bttv if the user click on "tv
+	card" field in the hw summary window
+	use harddrake::bttv to let people configure their tv card if it's
+	misdetected
+
+	* harddrake/ui.pm: remove uneeded "#!/...", standalone, lib, ... (this is
+	a module)
+	POSIX is no more used too.
+
+	* harddrake/bttv.pm: remove device test: there're only two harddrake::bttv
+	users,
+	install_steps_interactive.pm and drakxtv which both have already
+	tested that a bttv managed tv card is there.
+	  - add more tv cards
+	  - enable users to select number of buffers for mmap()
+	  - better description for pll setting
+	
+	  - add tooltips help for some entries
+	tv cards list:
+	
+		- split multi-cards entries
+	
+	     - reverse the hash (needed since now bttv card types are not
+	       anymore unique)
+	
+		- complete the list from various sources
+	
+		- use a tree to display the list, it's clearer now since it's
+	       splitted by vendors
+	
+	  - longer message
+	  - remove uneeded stuff for modules ("#!/..", "use lib..", "use
+	  standalone", ...)
+	
+	  - simplify bttv options managment:
+	
+	   - use if_, thanks MDK::Common
+	
+	   - s/mapn/map by using a hash at first
+	
+	   - s/mapn{if}/map{if_}
+	
+	  - don't read/write modules.conf here, drakx take care of that for us
+	
+	thus, the test program became:
+	
+	#!/usr/bin/perl
+	
+	use strict;
+	use lib qw(/usr/lib/libDrakX);
+	
+	use standalone;
+	use bttv;
+	use interactive;
+	use modules;
+	
+	modules::read_conf;
+	bttv::config('interactive'->vnew());
+	modules::write_conf;
+	spec29: bttv configuration part of drakxtv.
+	it can be used by:
+	
+	#!/usr/bin/perl
+	
+	use strict;
+	use lib qw(/usr/lib/libDrakX);
+	
+	use standalone;
+	use harddrake::bttv;
+	use interactive;
+	
+	bttv::config('interactive'->vnew());
+
+	* drakxtools.spec: fix typo
+	fix dirs1/dirs2 mismatch
+	  - M-q descriptions
+	  - simplify file lists building
+	  - we can use several -f on one "%%files" line
+
+	* standalone/drakxtv: if we're root and there's a tv card managed by bttv,
+	offer to
+	configure bttv trough harddrake::bttv
+
+	* tools/cvslog2changelog.pl: typo fix
+
+	* harddrake/data.pm: remove uneeded "#!/.." and "use lib"
+
 2002/07/05  François Pons  <fpons@mandrakesoft.com>
 
 	* Makefile: 
