@@ -65,31 +65,31 @@ while (<F>) {
     };
 }
 close F;
-$hd_size > 1500 or die "hard disk is too small to contain oem install (${hd_size}MB found, need 1500 at least)";
+my ($min_size, $def_size, $trigger_size, $inst_size, $swap_size) = (1700, 2700, 4000, 200, 128);
+$hd_size > $min_size or die "hard disk is too small to contain oem install (${hd_size}MB found, need $min_size at least)";
 
-my ($fat_pos, $resize_fat_size, $inst_size, $swap_size, $root_size);
+my ($fat_pos, $resize_fat_size, $root_size);
 if (@hd_parts == 1 && $hd_parts[$fat_pos = 0]{fstype} eq 'FAT' ||
     @hd_parts == 2 && $hd_parts[0]{type} eq 'extended' && $hd_parts[$fat_pos = 1]{fstype} eq 'FAT') {
-    if ($hd_size - $hd_parts[$fat_pos]{end} > 1500) {
+    if ($hd_size - $hd_parts[$fat_pos]{end} > $min_size) {
 	#- check first if there are some available space left on the disk.
 	#- so we are using it, root_size is fixed to match hard disk size.
-	($resize_fat_size, $inst_size, $swap_size) = (0, 152, 128);
+	$resize_fat_size = 0;
 	$root_size = $hd_size - $hd_parts[$fat_pos]{end} - $inst_size - $swap_size;
-	$root_size > 4000 and $root_size = 2744;
-    } elsif ($hd_size > 3000) {
+	$root_size > $trigger_size and $root_size = $def_size;
+    } elsif ($hd_size > 2*$min_size) {
 	#- resize this fat partition.
 	$resize_fat_size = 0.5 * $hd_size;
-	($inst_size, $swap_size) = (152, 128);
 	$root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
-	$root_size > 4000 and $root_size = 2744;
+	$root_size > $trigger_size and $root_size = $def_size;
     }
 }
 unless ($inst_size + $swap_size + $root_size) {
     #- there have not been defined above, so remove everything and start from
     #- a blank partition.
-    ($resize_fat_size, $inst_size, $swap_size) = (undef, 152, 128);
+    $resize_fat_size = undef;
     $root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
-    $root_size > 4000 and $root_size = 2744;
+    $root_size > $trigger_size and $root_size = $def_size;
 }
 
 #- launch parted to edit partition table, start at minor.
@@ -276,19 +276,20 @@ sub select_packages {
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
     $o->{compssUsersChoice}{SYSTEM} = 1;
 
-    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, 4, 0);
-    pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
-
     my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
     if ($lang_pkg) {
 	pkgs::selectPackage($o->{packages}, $lang_pkg);
 	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
     }
 
+    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, 4, 0);
+    pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}} }, 2, 0);
+
     #- package that have to selected here as a bonus for oem install.
     foreach (qw(cups cups-drivers drakprofile draksync irda-utils numlock raidtools reiserfs-utils
 		Mesa Mesa-demos alsa alsa-utils
 		Aurora xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
+                glibc vim-minimal
                )) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
