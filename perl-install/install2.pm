@@ -296,10 +296,6 @@ sub exitInstall {
     installStepsCall($o, $auto, 'exitInstall', getNextStep($::o) eq 'exitInstall');
 }
 
-sub exitMove {
-    move::exit();
-}
-
 sub start_i810fb() {
 
     my ($vga) = cat_('/proc/cmdline') =~ /vga=(\S+)/;

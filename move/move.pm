@@ -45,20 +45,24 @@ sub init {
 
     modules::load_category('multimedia/sound');
 
-    $o->{steps}{exitMove} = { reachable => 1 };
-    $o->{orderedSteps} = [ qw(selectLanguage acceptLicense selectMouse selectKeyboard exitMove) ];
+    $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
+    $o->{orderedSteps} = [ qw(selectLanguage acceptLicense selectMouse selectKeyboard startMove) ];
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
-sub exit() {
+sub install2::startMove {
+    my ($_o) = @_;
     run_program::run('adduser', 'mdk');
 
     output('/var/run/console.lock', 'mdk');
     output('/var/run/console/mdk', 1);
     run_program::run('pam_console_apply');
 
-    run_program::run('su', 'mdk', 'startkde');
+    fork() or exec 'gmessage', '...' or c::_exit(0);
+
+    sleep 1;
+    exec 'su', 'mdk', 'startkde';
 }
 
 sub automatic_xconf {
