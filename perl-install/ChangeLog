@@ -1,3 +1,33 @@
+2004/03/02  Pixel  <pixel at mandrakesoft.com>
+
+	* crypto.pm: cooker updates are not in a per-version directory
+
+	* any.pm, standalone/drakboot: drakboot --boot is now a wizard
+
+	* diskdrake/interactive.pm: type "ext2:vfat" must not be the same as 0
+
+	* interactive/gtk.pm: small fix when clicking on an empty tree (when
+	allow_empty_list)
+
+2004/03/02  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Sometimes option default settings in the
+	printer options dialog were missing (e. g. "Dithering Pixels Per Inch"
+	in "pcl3" driver). Fixed.
+
+2004/03/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: bump version number
+
+	* any.pm (setupBootloader__general) fix wizard title now that drakboot
+	--boot
+	is a wizard like tool
+
+	* drakxtools.spec: 10-19mdk: last but not least
+	10-19mdk
+
+	* network/isdn.pm: fix doble ISDN detection (#6535)
+
 2004/03/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/tl.po: updated pot file
@@ -28134,7 +28164,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.897 2004/03/02 12:09:15 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.898 2004/03/02 15:59:40 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
