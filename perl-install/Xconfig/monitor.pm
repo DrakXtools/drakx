@@ -54,8 +54,11 @@ sub configure_auto_install {
     my ($raw_X, $old_X) = @_;
 
     my $old_monitor = $old_X->{monitor} || {};
-    $old_monitor->{VertRefresh} ||= $old_monitor->{vsyncrange};
-    $old_monitor->{HorizSync} ||= $old_monitor->{hsyncrange};
+    my %rename = (vsyncrange => 'VertRefresh', hsyncrange => 'HorizSync');
+    foreach (keys %rename) {
+	my $v = $old_monitor->{$_} or next;
+	$old_monitor->{$rename{$_}} = $v;
+    }
 
     my $monitor = from_raw_X($raw_X);
     put_in_hash($monitor, $old_monitor);
