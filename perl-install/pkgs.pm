@@ -1508,7 +1508,7 @@ sub selected_leaves {
 		}
 	    }
 	}
-    } until (%m = %l);
+    } until (%m == %l);
 
     [ map {
 	my @l; $l[$FILE] = $_;
