@@ -56,7 +56,7 @@ my $needed_processes = join('|', map { quotemeta }
 			'/sbin/devfsd',
 			);
 
-if (find { $_->{cmdline} =~ /^($needed_processes)/ } @busy) {
+if (!$ENV{DEBUG} && find { $_->{cmdline} =~ /^($needed_processes)/ } @busy) {
     exec 'totem' if $in->ask_okcancel('', N("You can only run with no CDROM support"));
     $in->exit(1);
 }
