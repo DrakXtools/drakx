@@ -126,7 +126,7 @@ only_iso:
 	find $(DEST)/iso/isolinux -type f -printf '%p 100\n' > $(DEST)/iso.sort ; echo '$(DEST)/iso/live_tree_boot.clp 5' >> $(DEST)/iso.sort
 #	download version: MOVE10DO
 #	complete version: MOVE10IN
-	mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -P Mandrakesoft -V 'Move' -volset MOVE10IN -b isolinux/isolinux.bin -c isolinux/boot.cat -sort $(DEST)/iso.sort -no-emul-boot -boot-load-size 4 -boot-info-table -o $(ISO) $(DEST)/iso
+	mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandrakesoft -V 'Move' -volset MOVE10IN -b isolinux/isolinux.bin -c isolinux/boot.cat -sort $(DEST)/iso.sort -no-emul-boot -boot-load-size 4 -boot-info-table -o $(ISO) $(DEST)/iso
 	mv $(DEST)/iso/*.clp $(DEST)
 	mkcd --addmd5 $(ISO)
 #	cdrecord -v -eject dev=0,0,0 blank=fast gracetime=2 speed=99 $(ISO)
