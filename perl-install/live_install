@@ -19,7 +19,7 @@ fi
 /bin/rm -rf /tmp/drakx
 /bin/mkdir -m 0700 /tmp/drakx || exit 2
 
-for i in Mandrake RPMS misc boot images
+for i in Mandrake RPMS misc boot images VERSION
 do
     /bin/ln -sf "$dir/../../$i" "/tmp/rhimage/$i" 
 done
