@@ -826,7 +826,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ N("Manual choice"), sort keys %eth_intf ], 
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ (sort keys %eth_intf), N("Manual choice") ], 
                             allow_empty_list => 1, format => sub { $eth_intf{$_[0]} || $_[0] } } ];
                     },
                     post => sub {
