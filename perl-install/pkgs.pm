@@ -524,7 +524,7 @@ sub read_rpmsrate {
 		    my $p = packageByName($packages, $_) or next;
 		    my @m2 = map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense;
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
-		    if (member('INSTALL', @m3)) {
+		    if (member('INSTALL', @m3) || member('PRINTER', @m3)) {
 			member('NOCOPY', @m3) or push @{$packages->{needToCopy} ||= []}, $_;
 			next; #- don't need to put INSTALL flag for a package.
 		    }
@@ -791,7 +791,7 @@ sub rpmDbOpen {
 	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";
 	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), rm_rf($rebuilddb_dir);
 
-	    URPM::DB::rebuild($prefix) or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
+	    URPM::DB::rebuild("$prefix/") or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
 
 	    c::_exit(0);
 	}
