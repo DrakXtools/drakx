@@ -104,8 +104,8 @@ sub setupBootloader {
 						      _("Where do you want to install the bootloader?"),
 						      \@l, $l[$b->{use_partition}]) or return;
 	} elsif (arch() =~ /ppc/) {
-		if (defined $partition_table_mac'bootstrap_part) {
-			$b->{boot} = $partition_table_mac'bootstrap_part;
+		if (defined $partition_table_mac::bootstrap_part) {
+			$b->{boot} = $partition_table_mac::bootstrap_part;
 			log::l("set bootstrap to $b->{boot}"); 
 		} else {
 			die "no bootstrap partition - yaboot.conf creation failed";
