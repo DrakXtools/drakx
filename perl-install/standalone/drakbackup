@@ -87,6 +87,7 @@ my $backup_choice = 0;
 my $cfg_file_exist = 0;
 my @user_and_path_list;
 my @user_list;
+my @all_user_list;
 my $list_other;
 my @list_other;
 my $mdk_cc = 0;
@@ -105,6 +106,9 @@ my $backup_mode = 0;
 my $backup_sys = 1;
 my $backup_sys_cvs = 1;
 my $what_no_browser = 1;
+my $remember_pass = 0;
+my $cdrw = 0;
+my $net_proto;
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -131,10 +135,10 @@ sub read_passwd {
     @user_and_path_list = map { (split(':', $_))[0] . ":" . (split(':', $_))[5] } grep {( split(':', $_))[2] > 500} split ('\n', cat_('/etc/passwd'));  
     $DEBUG and print "user_and_path_list: ".$_."\n" foreach (@user_and_path_list);
     @home_files = ();
-    @user_list = ();
+    @all_user_list = ();
     push @user_and_path_list, 'root:/root';
-    push @home_files, (split(':', $_))[1] foreach (@user_and_path_list);
-    push @user_list, (split(':', $_))[0] foreach (@user_and_path_list);
+    push @home_files, (split(':', $_))[0] foreach (@user_and_path_list);
+    push @all_user_list, (split(':', $_))[0] foreach (@user_and_path_list);
     $DEBUG and print "home_files: ".$_."\n" foreach (@home_files);
 }
 
@@ -143,8 +147,10 @@ sub save_conf_file {
 		     "HOME_FILES=@home_files\n", 
 		     "OTHER_FILES=@other_files\n",
 		     "PATH_TO_SAVE=$save_path\n",
+		     "NET_PROTO=$net_proto\n"
 		     );
-
+    $cdrw and push @cfg_list, "CDRW\n" ;
+    $remember_pass and push @cfg_list, "REMEMBER_PASS\n" ;
     $what_no_browser or push @cfg_list, "BROWSER_CACHE\n" ;
     $backup_sys_cvs or push @cfg_list, "NO_SYS_CVS\n" ;
     $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
@@ -174,6 +180,9 @@ sub read_conf_file {
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
 	    if (/^NO_SYS_CVS/)	   { $backup_sys_cvs = 0; }
 	    if (/^BROWSER_CACHE/)  { $what_no_browser = 0; }
+	    if (/^CDRW/)           { $cdrw = 1; }
+	    if (/^REMEMBER_PASS/)  { $remember_pass = 1; }
+	    if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_; }
 	}
 	$cfg_file_exist = 1;
     } else {
@@ -304,8 +313,6 @@ sub  filedialog {
     $file_dialog->show();
 }
 
-
-
 sub wizard {
     my $user = 1;
     my $user2;
@@ -349,7 +356,6 @@ sub wizard {
 		  );
 } 
 
-
 sub advanced {
     my $notebook; 
     my $notebook_what; 
@@ -366,8 +372,9 @@ sub advanced {
     my $choice_what_sys;
     $list_other = new Gtk::List();
     $list_other->set_selection_mode(-extended);
-
+    my $adj = new Gtk::Adjustment 1.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
     read_conf_file();
+
 
     my ($pix_net_map, $pix_net_mask) = gtkcreate_png("../pixmaps/backup_net.png");
     my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
@@ -412,19 +419,19 @@ sub advanced {
 			 _("Other", " ")
 			 ); 
 
-    my $label_where_network = gtkpack(new Gtk::HBox( 0, 2),
+    my $label_where_net = gtkpack(new Gtk::HBox( 0, 2),
 			 new Gtk::Pixmap($pix_net2_map, $pix_net2_mask),
 			 _(" Network ")
 			 );
 
     my $label_where_cd = gtkpack(new Gtk::HBox( 0, 2),
 			 new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
-			 _(" CDROM ")
+			 _(" CDROM\nDVDROM ")
 			 );
 
     my $label_where_hd = gtkpack(new Gtk::HBox( 0, 2),
 			 new Gtk::Pixmap($pix_hd2_map, $pix_hd2_mask),
-			 _(" Hard Drive ")
+			 _(" Hard Drive\n NFS ")
 			 );
 
     my $box_what_sys =  gtkpack_(new Gtk::VBox(0,1),
@@ -433,12 +440,17 @@ sub advanced {
 				 0, my $check_what_cvs = new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
 				 1, _("With this option you will be able to restore any version\n of your /etc directory like in CVS this solution seems to be\n more interesting because it allow you to restore at any\n moment any vercions of your /etc"),
 				 );
-    
+    my %check_what_user;
     my $box_what_user =  gtkpack_(new Gtk::VBox(0,0),
 				  0, _("Please check all user that you want to include inb your backup."),
 				  0, new Gtk::HSeparator,
 				  1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
-								   map {my $check_what_user = new Gtk::CheckButton("$_") } (@user_list) 
+								   map { my $b = new Gtk::CheckButton("$_"); 
+									 $check_what_user{$_} = $b;
+# 									 if(member($_, @user_list )) { 
+# 									     $check_what_user{$_}->set_active(1);
+# 									 } else { $check_what_user{$_}->set_active(0);}
+									 $b } (@all_user_list) 
 								   ),
 							   ),
 				  0, new Gtk::HSeparator,
@@ -455,22 +467,77 @@ sub advanced {
 					     ),
 				   );
     
-    my $box_where_mdkonline =  gtkpack_(new Gtk::VBox(0,1),
-					1, _("\nPlease check all options that you need.\n"),
-					0, new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)") ),
-					0, new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
-					);
+
+    my $combo_where_net_proto = new Gtk::Combo();
+    $combo_where_net_proto->set_popdown_strings ("scp","ftp", "sftp", "rsync");
+    my $box_where_net =  gtkpack_(new Gtk::VBox(0,1),
+				  0, new Gtk::HSeparator,
+				  0, my $check_where_net = new Gtk::CheckButton( _(" Use Network to backup") ),
+				  0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon") ),
+				  0, new Gtk::HSeparator,
+				  0, gtkpack_(new Gtk::HBox(0,10),
+					      1, _("please choose your protocol"),
+					      0, $combo_where_net_proto,
+					      0, _(""),
+					      ),
+				  0, _(""),
+				  0, gtkpack_(new Gtk::HBox(0,10),
+					      1, _("please entrer the directory\n to put the backup on thid host. "),
+					      1, my $host_directory= new Gtk::Entry(),
+					      0, _(""),
+					      ),
+				  0, _(""),
+				  0, gtkpack_(new Gtk::HBox(0,10),
+					      1, _("please entrer your login"),
+					      0, my $login_user= new Gtk::Entry(),
+					      0, _(""),
+					      ),
+				  0, gtkpack_(new Gtk::HBox(0,10),
+					      1, _("please entrer your passord"),
+					      0, my $passwd_user= new Gtk::Entry(),
+					      0, _(""),
+					      ),
+				  0, my $check_remember_pass = new Gtk::CheckButton( _(" remember this password") ),
+				  );
     
     my $box_where_hd =  gtkpack_(new Gtk::VBox(0,1),
-				 1, _("\nPlease check all options that you need.\n"),
-				 0, new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)") ),
-				 0, new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
+				 0, new Gtk::HSeparator,
+				 0, my $check_where_hd = new Gtk::CheckButton( _(" Use Hard Disk to backup") ),
+				 0, my $check_where_hd_daemon = new Gtk::CheckButton( _(" Use Hard Disk with daemon") ),
+				 0, new Gtk::HSeparator,
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     0, _(" "),
+					     0, _("Please entrer the directory to save: "),
+					     1, my $save_path = new Gtk::Entry(),
+					     0, _(""),
+					     ),
+				 0, _(""),
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     0, _(""),
+					     0, _("Please entrer the maximum size allowed for Drakbackup "),
+					     1, my $spinner = new Gtk::SpinButton( $adj, 0, 0),
+					     0, _(""),
+					     ),
 				 );
-    
+
+    my $combo_where_cd_time = new Gtk::Combo();
+    $combo_where_cd_time->set_popdown_strings ("650","700", "750", "800");    
     my $box_where_cd =  gtkpack_(new Gtk::VBox(0,1),
-				 1, _("\nPlease check all options that you need.\n"),
-				 0, new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)") ),
-				 0, new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
+				 0, new Gtk::HSeparator,
+				 0, my $check_where_cd = new Gtk::CheckButton( _(" Use CD/DVDROM to backup") ),
+				 0, my $check_where_cd_daemon = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon") ),
+				 0, new Gtk::HSeparator,
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     1, _("please choose your CD space"),
+					     0, $combo_where_cd_time,
+					     0, _(""),
+					     ),
+				 0, _(""),
+				 0, gtkpack_(new Gtk::HBox(0,10),
+					     1, _(" Please check if you are using CDRW media"),
+					     0, my $check_cdrw = new Gtk::CheckButton(),
+					     0, _(""),
+					     ),
 				 );
 	       
     my $box_what = gtkpack(new Gtk::VBox(0,1),
@@ -483,13 +550,34 @@ sub advanced {
     
     my $box_where =  gtkpack(new Gtk::VBox(0,1),
 			     $notebook_where = new Gtk::Notebook,
-			     $notebook_where->insert_page( $box_where_mdkonline, $label_where_network, 0 ),
+			     $notebook_where->insert_page( $box_where_net, $label_where_net, 0 ),
 			     $notebook_where->insert_page( $box_where_hd, $label_where_hd, 1 ),
 			     $notebook_where->insert_page( $box_where_cd, $label_where_cd, 1 ),
 			     );
-    my $box_when =  gtkpack(new Gtk::VBox(0,1),
-			    $notebook_when = new Gtk::Notebook,
-			    );
+
+    my $combo_when_space = new Gtk::Combo();
+    $combo_when_space->set_popdown_strings (_("daily"),_("week"),_("month"),_("year"),);    
+    my $box_when =  gtkpack_(new Gtk::VBox(0,1),
+			     0, new Gtk::Pixmap($pix_time_map, $pix_time_mask),
+			     0, new Gtk::HSeparator,
+			     0, gtkpack_(new Gtk::HBox(0,10),
+					 1, _("Please choose interval \nspace between each backup "),
+					 0, $combo_when_space,
+					 0, _(""),
+					 ),
+			     0, _(""),
+			     0, gtkpack_(new Gtk::HBox(0,10),
+					 1, _("Please choose media to backup. "),
+					 0, gtkpack_(new Gtk::VBox(0,10),
+						     0, $check_where_cd_daemon  = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon")  ),
+						     0, $check_where_hd_daemon  = new Gtk::CheckButton( _(" Use Hard Drive with daemon") ),
+						     0, $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon")    ),
+						     ),
+					 ),
+			     
+			     0, new Gtk::HSeparator,
+			     );
+
     my $box_options = gtkpack(new Gtk::VBox(0,1),
 			      $notebook_options = new Gtk::Notebook,
 			      );
@@ -502,7 +590,7 @@ sub advanced {
 						     $notebook->insert_page( $box_what, $label_what, 0),
 						     $notebook->insert_page( $box_where, $label_where, 1),
 						     $notebook->insert_page( $box_when, $label_when, 2),
-						     $notebook->insert_page( $box_options, $label_options, 3),
+#						     $notebook->insert_page( $box_options, $label_options, 3),
 						     $notebook->set_scrollable( 1 )
 						     ),
 					     ),
@@ -526,7 +614,26 @@ sub advanced {
 		  bottom => "left",
 		  left => "top"
 		  );
-    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser]) {
+#    my @checked_user_list;
+
+#    print $check_what_user{'seb'}->active."\n";
+#    @user_list = ();
+
+#    foreach (@all_user_list) {
+#	gtksignal_connect(gtkset_active($check_what_user{$_},$check_what_user{$_}), toggled => sub { $check_what_user{$_} = $check_what_user{$_} ? 0 : 1; });
+#	$check_what_user{$_}->active and push @user_list, $_;
+#	print $_ . "\n";# foreach @checked_user_list;
+#    }
+
+
+#     foreach (@user_list) {
+# 	gtkset_active($check_what_user{$_}, $check_what_user{$_}->active),
+# #	gtksignal_connect(gtkset_active($check_what_user{$_},$check_what_user{$_}), toggled => sub { $check_what_user{$_} = $check_what_user{$_} ? 0 : 1; })
+# 	}
+    $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
+
+
+    foreach ([$check_what_sys, \$backup_sys], [$check_what_cvs, \$backup_sys_cvs], [$check_what_browser, \$what_no_browser], [$check_remember_pass, \$remember_pass], [$check_cdrw, \$cdrw]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
