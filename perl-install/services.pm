@@ -25,6 +25,8 @@ at was run, and runs batch commands when the load average is low enough."),
 crond => N_("cron is a standard UNIX program that runs user-specified programs
 at periodic scheduled times. vixie cron adds a number of features to the basic
 UNIX cron, including better security and more powerful configuration options."),
+fam => N_("FAM is a file monitoring daemon. It is used to get reports when files change.
+It is used by GNOME and KDE"),
 gpm => N_("GPM adds mouse support to text-based Linux applications such the
 Midnight Commander. It also allows mouse-based console cut-and-paste operations,
 and includes support for pop-up menus on the console."),
