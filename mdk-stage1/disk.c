@@ -26,6 +26,7 @@
 #include <sys/mount.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
 #include "stage1.h"
 #include "frontend.h"
 #include "modules.h"
