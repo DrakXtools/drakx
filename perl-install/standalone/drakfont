@@ -701,7 +701,6 @@ sub font_choice() {
     $file_dialog->ok_button->set_label(N("Add"));
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
     $file_dialog->cancel_button->set_label(N("Close"));
-    $file_dialog->set_filename($select_font_msg);
     $file_dialog->show;
 }
 
