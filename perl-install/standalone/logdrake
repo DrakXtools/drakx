@@ -461,7 +461,7 @@ my $email = ) . "'$email';\n\n";
 
 	$cron .= q(my $F;
 open $F, '|/usr/sbin/sendmail -oi -t';
-print $F q(Subject: logdrake2 Mail Alert
+print $F q(Subject: logdrake Mail Alert
 From: root@localhost
 To: ), "$email\n";
 print $F $r;
