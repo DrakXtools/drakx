@@ -345,9 +345,9 @@ sub install_server {
     }
     #- 3D acceleration configuration for XFree 4 
     #- using NVIDIA driver (TNT, TN2 and GeForce cards only).
-    push @packages, @{$options->{allowNVIDIA_rpms}} if $card->{Driver2} eq 'nvidia' && $options->{allowNVIDIA_rpms};
+    push @packages, @{$options->{allowNVIDIA_rpms}} if $card->{Driver2} eq 'nvidia' && $options->{allowNVIDIA_rpms}->();
     #- using ATI fglrx driver (Radeon, Fire GL cards only).
-    push @packages, @{$options->{allowATI_rpms}} if $card->{Driver2} eq 'fglrx' && $options->{allowATI_rpms};
+    push @packages, @{$options->{allowATI_rpms}} if $card->{Driver2} eq 'fglrx' && $options->{allowATI_rpms}->();
 
     $do_pkgs->install(@packages) if @packages;
     -x "$::prefix$prog" or die "server $card->{server} is not available (should be in $::prefix$prog)";
