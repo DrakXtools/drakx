@@ -510,8 +510,8 @@ sub writeandclean_ldsoconf {
     my ($prefix) = @_;
     my $file = "$prefix/etc/ld.so.conf";
     output $file,
-      grep { !m|^(/usr)?/lib$| } #- no need to have /lib and /usr/lib in ld.so.conf
-	uniq cat_($file), "/usr/X11R6/lib\n";
+      grep { !m|^(/usr)?/lib(64)?$| } #- no need to have /lib and /usr/lib in ld.so.conf
+	uniq cat_($file), (if_(arch() =~ /x86_64/, "/usr/X11R6/lib64\n"), "/usr/X11R6/lib\n");
 }
 
 sub shells() {
