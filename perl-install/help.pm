@@ -16,7 +16,6 @@ selectLanguage =>
       <a href=\"http://www.infoseek.com\">infoseek</a>,
       <a href=\"http://www.altavista.com\">altavista</a>,
       <a href=\"http://www.excite.com\">excite</a>
-    <img src=\"t.xpm\">
 
 
 Choose preferred language for install and system usage."),

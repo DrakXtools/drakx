@@ -19,12 +19,6 @@ use my_gtk qw(:helpers :wrappers);
 #-    $o->SUPER::ask_warn(@_);
 #-}
 
-sub ask_from_entryW {
-    my ($o, $title, $messages, $def) = @_;
-    my $w = my_gtk->new($title, %$o);
-    $w->_ask_from_entry(@$messages);
-    $w->main;
-}
 sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
 

@@ -467,6 +467,7 @@ sub main {
 #	    ks        => sub { $::auto_install = 1; $cfg = $v; },
 #	    kickstart => sub { $::auto_install = 1; $cfg = $v; },
 	    auto_install => sub { $::auto_install = 1; $cfg = $v; },
+	    simple_themes => sub { $o->{simple_themes} = 1 },
 	    alawindows => sub { $o->{security} = $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	}}{lc $n}; &$f if $f;

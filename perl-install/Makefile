@@ -102,6 +102,7 @@ get_needed_files: $(DIRS)
 	install -d $(DEST)/usr/bin
 	install -d $(DEST)/usr/lib
 	install -d $(DEST)/usr/share
+	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
 	install -d $(ROOTDEST)/Mandrake/base
 	install -s $(LOCALFILES) $(DEST)/usr/bin
@@ -138,6 +139,7 @@ get_needed_files: $(DIRS)
 	cp -a consolefonts $(DEST)/usr/share
 	cp modparm.lst MonitorsDB $(DEST)/usr/share
 	cp logo-mandrake.xpm $(DEST)/usr/share
+	cp -a themes $(DEST)/usr/share/gtk
 	cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base
 
 	cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/

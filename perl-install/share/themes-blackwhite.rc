@@ -46,6 +46,12 @@ style "background"
   bg[PRELIGHT] = { 0.67, 0.67, 0.67 }
 }
 
+style "steps"
+{
+  bg[NORMAL] = { 0, 0, 0 }
+  fg[NORMAL] = { 1.0, 1.0, 1.0 }
+}
+
 widget_class "*" style "any"
 widget_class "*GtkSpin*" style "entry"
 widget_class "*GtkEntry*" style "entry"
@@ -53,3 +59,4 @@ widget_class "*Gtk*List*" style "entry"
 widget_class "*GtkNotebook*" style "notebook"
 widget "*GtkButton*" style "button"
 widget "*background*" style "background"
+widget "*Steps*" style "steps"

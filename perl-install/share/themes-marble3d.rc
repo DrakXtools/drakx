@@ -1,0 +1,139 @@
+style "button"
+{
+  engine "pixmap" 
+    {
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = NORMAL
+	detail          = "buttondefault"
+	shadow          = IN
+	file            = "marble3d-button_def.xpm"
+	border          = { 9, 9, 9, 9 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = NORMAL
+	shadow          = OUT
+	file            = "marble3d-button1.xpm"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = PRELIGHT
+	shadow          = OUT
+	file            = "marble3d-button2.xpm"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = NORMAL
+	shadow          = IN
+	file            = "marble3d-button4.xpm"
+	border          = { 2, 2, 2, 2 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = SELECTED
+	shadow          = IN
+	file            = "marble3d-button4.xpm"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = ACTIVE
+	shadow          = IN
+	file            = "marble3d-button4.xpm"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+   }
+}
+
+style "window" 
+{
+  engine "pixmap" {
+    image 
+      {
+	function        = FLAT_BOX
+	recolorable     = TRUE
+	file            = "marble3d-bg1.xpm"
+	stretch         = FALSE
+      }
+  }
+}
+
+
+style "any"
+{
+  fg[NORMAL]      = { 0.00, 0.00, 0.00 }
+  fg[PRELIGHT]    = { 0.25, 0.25, 0.25 }
+  fg[ACTIVE]      = { 0.00, 0.00, 0.00 }
+  fg[SELECTED]    = { 0.00, 0.00, 0.00 }
+  fg[INSENSITIVE] = { 0.50, 0.50, 0.50 }
+  
+  bg[NORMAL]      = { 0.80, 0.80, 0.80 }
+  bg[PRELIGHT]    = { 0.85, 0.85, 0.85 }
+  bg[ACTIVE]      = { 0.90, 0.90, 0.90 }
+  bg[SELECTED]    = { 0.90, 0.80, 0.70 }
+  bg[INSENSITIVE] = { 0.80, 0.75, 0.70 }
+}
+
+style "entry"
+{
+  base[NORMAL] = { 1.0, 1.0, 1.0 }
+  base[ACTIVE] = { 1.0, 1.0, 1.0 }
+  fg[NORMAL] = { 0.67, 0.67, 0.67 }
+}
+
+style "notebook"
+{
+  bg[NORMAL]	  = { 0.82, 0.8, 0.8 }
+  bg[ACTIVE]	  = { 0.72, 0.7, 0.7 }
+  fg[NORMAL]      = { 0, 0, 0 }
+}
+
+style "button" = "any"
+{
+  bg[NORMAL] = { 1.0, 1.0, 1.0 }
+  fg[NORMAL] = { 0, 0, 0 }
+  bg[PRELIGHT] = { 1.0, 1.0, 1.0 }
+  fg[PRELIGHT] = { 0.67, 0.67, 0.67 }
+}
+
+style "background"
+{
+  bg[NORMAL] = { 0.8, 0.8, 0.8 }
+  bg[PRELIGHT] = { 0.74, 0.72, 0.7 }
+}
+
+
+style "steps"
+{
+  fg[NORMAL] = { 0.40, 0.30, 0.20 }
+}
+
+widget_class "GtkWindow" style "window"
+widget_class "*" style "any"
+widget_class "*GtkSpin*" style "entry"
+widget_class "*GtkEntry*" style "entry"
+widget_class "*Gtk*List*" style "entry"
+widget_class "*GtkNotebook*" style "notebook"
+widget "*GtkButton" style "button"
+widget "*background*" style "background"

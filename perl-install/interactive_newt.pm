@@ -14,12 +14,6 @@ my $n = Term::Newt->new;
 $n->init;
 $n->cls;
 
-#sub ask_from_entryW {
-#    my ($o, $title, $messages, $def) = @_;
-#    my $w = my_gtk->new($title, %$o);
-#    $w->_ask_from_entry(@$messages);
-#    $w->main;
-#}
 sub ask_from_listW {
     my ($o, $title_, $messages, $l, $def) = @_;
     my ($title, @okcancel) = ref $title_ ? @$title_ : ($title_, _("Ok"), _("Cancel"));
