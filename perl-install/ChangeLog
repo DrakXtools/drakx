@@ -6,6 +6,109 @@
 
 2002/07/19  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
+	* network/adsl.pm: 
+	  - check if speedtouch_mgmt exist before installing it
+
+2002/07/19  François Pons  <fpons@mandrakesoft.com>
+
+	* any.pm: revert changes so that DrakX work again.
+
+	* install_any.pm: select default_packages directly during setPackages.
+	fix typo on what_provides (for pitchounette :-)).
+	added what_provides.
+
+	* standalone.pm: fix typo on last commit.
+	added what_provides.
+
+	* install_steps_interactive.pm: make sure unselectMostPackages is called
+	(so that changes in default_packages
+	are taken into account... but is may be any changes here ?).
+
+2002/07/19  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/pt.po: updated Portuguese file
+
+2002/07/19  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/XFdrake: rename $i in $X (to have the same as
+	Xconfigurator.pm)
+
+	* interactive.pm: nicer error message when {val} is not set for ask_from &
+	list
+
+	* Xconfigurator.pm: partly cleanup monitor re-configuration (work in
+	progress)
+	  - don't write XF86Config when no {card}{server}
+	  - don't write XF86Config-4 when no {card}{driver}
+	  - workaround mixing values from existing config and
+	cardConfigurationAuto()
+	  - fix asking VideoRam
+	  - fix device0 in XF86Config
+	  - use "device1", "device2"... for "Device" Identifier
+	  - restore having a nice VendorName + BoardName
+	(since Identifier is not very useful)
+	  - get {card}{Chipset} from existing XF86Config
+	  - use $::prefix
+	  - drop obsolete stuff: Ramdac, Dacspeed, Clockchip
+	  - drop {card}{flags}, the few flags are moved directly to {card}
+	  - force_xf4 is now a global in Xconfigurator
+	  - create new functions for better modularity: multi_head_config,
+	xfree_and_glx_choices, xfree_and_glx_choose
+	  - for ppc, allow choosing DRI or not
+	  - need flag {card}{use_DRI_GLX} and {card}{use_UTAH_GLX} deciding
+	wether
+	to use DRI_GLX or UTAH_GLX. That way, {card}{DRI_GLX}, {card}{UTAH_GLX}
+	are only flags allowing or not DRI/UTAH.
+	  - {card}{use_xf4} is dropped. New function using_xf4 has this
+	functionality. The flags are now:
+	  - using XF4 if {driver} && !{prefer_xf3} otherwise using XF3
+	  - error if $force_xf4 && !{driver} || !{driver} && !{server}
+	  - internal error if $force_xf4 && {prefer_xf3} || {prefer_xf3} &&
+	!{server}
+	  - {card}{description} contains what used to be {card}{identifier}
+	  - rename {card}{type} to {card}{card_name}
+	  - drop {monitor}{type}
+
+	* install_steps.pm: don't pass the prefix parameter, not needed/wanted
+	anymore
+
+	* Xconfigurator_consts.pm: fix default_monitors to adapt new MonitorsDB
+
+	* Xconfig.pm (readCardsDB): add handling BAD_FB_RESTORE &
+	BAD_FB_RESTORE_XF3
+	  - use "device1", "device2"... for "Device" Identifier
+	  - restore having a nice VendorName + BoardName
+	(since Identifier is not very useful)
+	  - get {card}{Chipset} from existing XF86Config
+	  - use $::prefix
+	  - drop obsolete stuff: Ramdac, Dacspeed, Clockchip
+	  - drop {card}{flags}, the few flags are moved directly to {card}
+	  - force_xf4 is now a global in Xconfigurator
+	  - create new functions for better modularity: multi_head_config,
+	xfree_and_glx_choices, xfree_and_glx_choose
+	  - for ppc, allow choosing DRI or not
+	  - need flag {card}{use_DRI_GLX} and {card}{use_UTAH_GLX} deciding
+	wether
+	to use DRI_GLX or UTAH_GLX. That way, {card}{DRI_GLX}, {card}{UTAH_GLX}
+	are only flags allowing or not DRI/UTAH.
+	  - {card}{use_xf4} is dropped. New function using_xf4 has this
+	functionality. The flags are now:
+	  - using XF4 if {driver} && !{prefer_xf3} otherwise using XF3
+	  - error if $force_xf4 && !{driver} || !{driver} && !{server}
+	  - internal error if $force_xf4 && {prefer_xf3} || {prefer_xf3} &&
+	!{server}
+	  - {card}{description} contains what used to be {card}{identifier}
+	  - rename {card}{type} to {card}{card_name}
+	  - drop {monitor}{type}
+
+2002/07/19  Christian Belisle  <cbelisle@mandrakesoft.com>
+
+	* any.pm: 
+	  - remove any msec related functions
+	  - remove 'use security::msec'
+
+2002/07/19  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
 	* standalone/drakconnect: 
 	  - any::setup_thiskind_backend changed in any::load_category_no_message
 
