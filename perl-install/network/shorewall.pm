@@ -61,11 +61,10 @@ sub get_net_device() {
     $default_dev;
 }
 
-sub default_interfaces_silent {
-	my ($_in) = @_;
-	my %conf;
-	my @l = detect_devices::getNet() or return;
-	if (@l == 1) {
+sub default_interfaces_silent() {
+    my %conf;
+    my @l = detect_devices::getNet() or return;
+    if (@l == 1) {
 	$conf{net_interface} = $l[0];
     } else {
 	$conf{net_interface} = get_net_device() || $l[0];
@@ -103,7 +102,7 @@ Examples:
 }
 
 sub read {
-    my ($in, $mode) = @_;
+    my ($o_in) = @_;
     my %conf = (disabled => !glob_("$::prefix/etc/rc3.d/S*shorewall"),
                 ports => join(' ', map {
                     my $e = $_;
@@ -114,11 +113,8 @@ sub read {
     if (my ($e) = get_config_file('masq')) {
 	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
     }
-    if ($mode eq 'silent') {
-	    put_in_hash(\%conf, default_interfaces_silent($in));
-    } else {
-	    put_in_hash(\%conf, default_interfaces($in));
-    }
+    put_in_hash(\%conf, $o_in ? default_interfaces($o_in) : default_interfaces_silent());
+
     $conf{net_interface} && \%conf;
 }
 

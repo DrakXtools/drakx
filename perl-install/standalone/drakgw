@@ -53,7 +53,7 @@ my $squid_port = network::network::read_squid_conf()->{http_port}[0] ||= "3128";
 my $cups_conf = "/etc/cups/cupsd.conf";
 
 my $in = 'interactive'->vnew('su');
-my $shorewall = network::shorewall::read($in, 'silent');
+my $shorewall = network::shorewall::read();
 
 $::Wizard_title = N("Internet Connection Sharing");
 
