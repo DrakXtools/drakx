@@ -264,13 +264,10 @@ sub ask_from__add_modify_remove {
 	while (1) {
 	    my $c;
 	    my @l = (@$l, 
-		     map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $c = $s; 1 } } } 
-		       N_("Add"), if_(@{$e->{list}} > 0, N_("Modify"), N_("Remove")));
-	    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback }, \@l);
-
-	    return 1 if $c eq 'Done';
-
-	    $callback{$c}->($chosen_element);
+		     map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $callback{$s}->($chosen_element); $c = 1 } } }
+		     N_("Add"), if_(@{$e->{list}} > 0, N_("Modify"), N_("Remove")));
+	    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback }, \@l) or return;
+	    return if !$c;
 	}
     }
 }
