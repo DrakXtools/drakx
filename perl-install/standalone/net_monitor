@@ -543,13 +543,12 @@ sub draw_monitor {
 	if ($i > $pix_maxt && $switch) {
             my $x_l = 5;
             my $y_l;
-            if ($i > $grid_interval) {
-                $y_l = $i-$grid_interval/2;
-                $pixmap->draw_line($gct, $x_l, 0, $x_l, $y_l);
-                $pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $y_l);
-                $pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $y_l);
-                $pixmap->draw_polygon($gct, 1, $x_l-5, $y_l, $x_l+5, $y_l, $x_l, $y_l+5);
-            }
+
+            $y_l = $i-$grid_interval/2;
+            $pixmap->draw_line($gct, $x_l, 0, $x_l, $y_l);
+            $pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $y_l);
+            $pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $y_l);
+            $pixmap->draw_polygon($gct, 1, $x_l-5, $y_l, $x_l+5, $y_l, $x_l, $y_l+5);
 
             $y_l = $i+$grid_interval/2;
             $pixmap->draw_line($gcr, $x_l, $height, $x_l, $y_l);
