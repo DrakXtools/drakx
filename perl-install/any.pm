@@ -147,7 +147,7 @@ sub setupBootloader {
 	my $bootloader = arch() =~ /sparc/ ? __("SILO") : arch() =~ /ppc/ ? __("Yaboot") : __("LILO with graphical menu");
 	my $profiles = bootloader::has_profiles($b);
 	my $memsize = bootloader::get_append($b, 'mem');
-	my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$hds->{special}};
+	my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
 
 	$b->{vga} ||= 'Normal';
 	if (arch !~ /ppc/) {
@@ -208,9 +208,9 @@ sub setupBootloader {
 
 	if ($prev_clean_tmp != $clean_tmp) {
 	    if ($clean_tmp) {
-		push @{$hds->{special}}, { device => 'none', mntpoint => '/tmp', type => 'tmpfs' };
+		push @{$all_hds->{special}}, { device => 'none', mntpoint => '/tmp', type => 'tmpfs' };
 	    } else {
-		@{$hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$hds->{special}};
+		@{$all_hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special}};
 	    }
 	}
     }
