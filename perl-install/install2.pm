@@ -228,11 +228,14 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub selectKeyboard {
-    my ($clicked) = @_;
+    my ($clicked, $first_time) = ($_[0], $_[1] == 1);
 
-    return if !$o->{isUpgrade} && $::beginner && !$clicked;
+    if ($o->{isUpgrade} && $first_time && $o->{keyboard_unsafe}) {
+	my $keyboard = keyboard::read($o->{prefix});
+	$keyboard and $o->{keyboard} = $keyboard;
+    }
+    return if $::beginner && !$clicked;
 
-    $o->{keyboard} = keyboard::read($o->{prefix}) if $o->{isUpgrade} && !$clicked && $o->{keyboard_unsafe};
     $o->selectKeyboard;
 
     #- if we go back to the selectKeyboard, you must rewrite
