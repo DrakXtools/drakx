@@ -546,12 +546,6 @@ sub main {
     log::l("second stage install running");
     log::ld("extra log messages are enabled");
 
-    #-  make sure we don't pick up any gunk from the outside world
-    my $remote_path = "$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$remote_path" unless $::g_auto_install;
-
-    eval { spawnShell() };
-
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     $o->{root}   = $::testing ? "/tmp/root-perl-install" : "/";
     if ($::live) {
@@ -560,6 +554,12 @@ sub main {
     }
     mkdir $o->{prefix}, 0755;
     mkdir $o->{root}, 0755;
+
+    #-  make sure we don't pick up any gunk from the outside world
+    my $remote_path = "$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$remote_path" unless $::g_auto_install;
+
+    eval { spawnShell() };
 
     $o->{interactive} ||= 'gtk';
     if ($o->{interactive} eq "gtk" && availableMemory < 22 * 1024) {
