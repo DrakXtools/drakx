@@ -1,3 +1,113 @@
+2001/08/01  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: write_on_text writes in blue instead of black
+
+	* network/isdn.pm: typo
+	added de-installation before installateion
+
+	* network/netconnect.pm: translation correction
+
+2001/08/01  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, fsedit.pm: handle auto_allocate_raids for
+	auto_installs
+
+	* raid.pm (new): now works with a list of partitions
+
+2001/07/31  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: added splash screen between different
+	configurations. Added splash wizard mode
+	added intro step for each configuration type.
+
+	* network/tools.pm: corrected ask_connect_now
+
+	* my_gtk.pm: added write_on pixmap : a function to write text on pixma,
+	using fonts.
+
+	* network/ethernet.pm: added intro step for each configuration type.
+
+2001/07/31  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps_interactive.pm: after copying the auto install floppy,
+	sync in case you shall remove the
+	floppy right after the LED switches off yet the kernel decides to not
+	flush
+	everything
+
+	* modules.pm, mdk-stage1/modules_descr.h: have "catc" driver for usbnet
+	installs
+
+	* bootloader.pm: load msdos and vfat before mkbootdisk (now using syslinux
+	so..)
+
+2001/07/31  Pixel  <pixel@mandrakesoft.com>
+
+	* common.pm (translate): empty string translation is an empty string
+
+	* install_gtk.pm (test_mouse): s/my (.*) = 0 if 0/my $1 if 0/
+
+	* share/rpmsrate: add cpio
+	lower gurpmi (5->4)
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2: chineese locale
+	support
+	better handling of locales
+
+	* Makefile.drakxtools (install): s/cp -rf/cp -rfL/   (-L = --dereference,
+	aka always follow symbolic links)
+
+	* install_steps_gtk.pm (installPackages): make $show_advertising a global
+	state (for Vincent Meyer)
+
+	* share/Makefile, Makefile: better handling of locales
+
+	* install_steps_auto_install.pm: remove bad prototype
+
+2001/07/30  dam's  <damien@mandrakesoft.com>
+
+	* network/ethernet.pm: added cable internet connection selection
+	added internet connection selection in case of multiple configurations
+
+	* network/netconnect.pm: corrected ask_connect_now behaviour
+	corrected ask_connect_now
+	debug
+	added internet connection selection in case of multiple configurations
+
+	* network/adsl.pm, network/tools.pm, network/modem.pm, network/isdn.pm:
+	corrected ask_connect_now
+	added internet connection selection in case of multiple configurations
+
+2001/07/30  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm (getDeps): ensure "depslist.ordered has not same package as
+	hdlist files"
+	occurs when the hdlists are in fact not available
+
+	* share/locales.tar.bz2.ppc, share/locales.tar.bz2,
+	share/locales.tar.bz2.sparc, share/.cvsignore, share/gen_locales.sh,
+	share/locales-skeleton.tar.bz2: automatic handling of locales.tar.bz2
+	based on installed glibc
+
+	* printer.pm, printerdrake.pm: use MDK::Common
+	i wonder why it was included and Till used an older version without
+	merging?
+
+	* resize_fat/main.pm: switch to MDK::Common (i wonder why it was not done
+	yet)
+
+	* share/rpmsrate: raise rxvt (4->5)
+	lower rpmdrake & harddrake (5->4)
+	remove rootfiles (unneeded)
+
+	* Makefile: use -excludeMDK::Common::Globals for perl_checker
+	automatic handling of locales.tar.bz2 based on installed glibc
+
+2001/07/30  tkamppeter
+
+	* printer.pm, printerdrake.pm: In beginners mode one chooses only the
+	printer, not the driver (default driver)
+
 2001/07/30  dam's  <damien@mandrakesoft.com>
 
 	* network/netconnect.pm: debug
