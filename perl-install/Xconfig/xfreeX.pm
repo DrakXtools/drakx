@@ -111,9 +111,13 @@ sub get_device {
     first(get_devices($raw_X));
 }
 
+sub get_screens {
+    my ($raw_X) = @_;
+    $raw_X->get_Sections('Screen');
+}
 sub get_default_screen {
     my ($raw_X) = @_;
-    my @l = $raw_X->get_Sections('Screen');
+    my @l = get_screens($raw_X);
     my @m = grep { $_->{Identifier} && val($_->{Identifier}) eq 'screen1' || 
 		   $_->{Driver} && val($_->{Driver}) =~ /svga|accel/ } @l;
     first(@m ? @m : @l);
@@ -174,24 +178,27 @@ sub get_resolution {
 }
 
 sub set_resolution {
-    my ($raw_X, $resolution, $Screen) = @_;
-    $Screen ||= $raw_X->get_default_screen or internal_error('no screen');
+    my ($raw_X, $resolution, $Screen_) = @_;
+    
+    foreach my $Screen ($Screen_ ? $Screen_ : $raw_X->get_screens) {
+	$Screen ||= $raw_X->get_default_screen or internal_error('no screen');
 
-    $Screen->{DefaultColorDepth} = { val => $resolution->{Depth} };
-    $Screen->{Display} = [ map {
-	my $modes = do {
-	    if ($resolution->{fbdev}) {
-		'"default"';
-	    } else {
-		my @Modes = grep { 
-		    /(\d+)x(\d+)/;
-		    $1 <= $resolution->{X} && (!$resolution->{Y} || $2 <= $resolution->{Y});
-		} reverse our @resolutions;
-		join(" ", map { qq("$_") } @Modes);
-	    }
-	};
-	{ l => { Depth => { val => $_ }, Modes => { val => $modes } } };
-    } $raw_X->depths ];
+	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} };
+	$Screen->{Display} = [ map {
+	    my $modes = do {
+		if ($resolution->{fbdev}) {
+		    '"default"';
+		} else {
+		    my @Modes = grep { 
+			/(\d+)x(\d+)/;
+			$1 <= $resolution->{X} && (!$resolution->{Y} || $2 <= $resolution->{Y});
+		    } reverse our @resolutions;
+		    join(" ", map { qq("$_") } @Modes);
+		}
+	    };
+	    { l => { Depth => { val => $_ }, Modes => { val => $modes } } };
+	} $raw_X->depths ];
+    }
 }
 
 
