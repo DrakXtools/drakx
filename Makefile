@@ -67,11 +67,11 @@ upload:
 	$(MAKE) upload_only
 
 upload_only:
-	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $$1/$$2 mandrake@ken:/c/cooker/$$1; } ;\
+	function upload() { rel=`echo $$1 | sed 's!$(ROOTDEST)/!!'`; rsync -qSavz --verbose --exclude '*~' -e ssh --delete $$1/$$2 mandrake@ken:/c/cooker/$$rel; } ;\
 	upload $(STAGE2_LIVE) '' ;\
 	upload $(MEDIA_INFO_DEST) 'compssUsers*' ;\
 	upload $(MEDIA_INFO_DEST) rpmsrate ;\
-	upload $(GENERIC_INSTALL_DEST) '*_stage2.bz2' ;\
+	upload $(STAGE2_DEST) '*_stage2.bz2' ;\
 	upload $(EXTRA_INSTALL_DEST)/advertising '' ;\
 	upload $(MISC_DEST) gendistrib ;\
 	upload $(MISC_DEST) make_mdkinst_stage2 ;\
