@@ -487,7 +487,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users installClass partitioning isUpgrade manualFstab nomouseprobe crypto security modem useSupermount); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
@@ -512,7 +512,7 @@ sub loadO {
     if ($f =~ /^(floppy|patch)$/) {
 	my $f = $f eq "floppy" ? "auto_inst.cfg" : "patch";
 	unless ($::testing) {
-	    fs::mount(devices::make("fd0"), "/mnt", "vfat", 0);
+	    fs::mount(devices::make("fd0"), "/mnt", "vfat", 'readonly');
 	    $f = "/mnt/$f";
 	}
 	-e $f or $f .= ".pl";
@@ -758,5 +758,28 @@ sub move_desktop_file($) {
     }
 }
 
+sub generate_ks_cfg {
+    my ($o) = @_;
+    
+    return if $o->{method} =~ /hd|cdrom/;
+
+    my $ks;
+    if ($o->{method} =~ /ftp|http/) {
+	$ks .= "url --url $ENV{URLPREFIX}\n";
+    } elsif ($o->{method} =~ /nfs/) {
+	cat_("/proc/mounts") =~ m|(\S+:\S+)\s+/tmp/rhimage nfs| or die;
+	$ks .= "nfs --server $1 --dir $2\n";
+    }
+    my %intf = %{$o->{intf}[0]};
+    if ($intf{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+	$ks .= "network --bootproto $intf{BOOTPROTO}\n";
+    } else {
+	my %l = (ip => $intf{IPADDR}, netmask => $intf{NETMASK}, gateway => $o->{netc}{GATEWAY});
+	$ks .= "network " . join(" ", map_each { $::b && "--$::a $::b" } %l);
+	$ks .= "--nameserver $_" foreach network::dnsServers($o->{netc});
+	$ks .= "\n";
+    }
+    $ks;
+}
 
 1;

@@ -113,7 +113,7 @@ sub selectInstallClass($@) {
 }
 #------------------------------------------------------------------------------
 sub setupSCSI { 
-    modules::load("ide-mod", 'prereq', 'options="' . detect_devices::hasHPT() . '"');
+    modules::load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
     modules::load_multi(qw(ide-probe ide-disk ide-cd));
     modules::load_thiskind('scsi');
 }
@@ -247,6 +247,8 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 sub afterInstallPackages($) {
     my ($o) = @_;
 
+    return if $::g_auto_install;
+
     -x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
 "Some important packages didn't get installed properly.
 
@@ -315,6 +317,19 @@ Consoles 1,3,4,7 may also contain interesting information";
 	    symlinkf("X11/rxvt.sh", $f) if -e $f;
 	}
     }
+
+    my $hasttf;
+    my $dest = "$o->{prefix}/usr/X11R6/lib/X11/fonts/drakfont";
+    foreach (map { $_->{mntpoint} } grep { isFat($_) } @{$o->{fstab}}) {
+	my $d = "$_/windows/fonts";
+	-d "$o->{prefix}$d" or next;
+	unless ($hasttf) {
+	    mkdir $dest, 0755;
+	    $hasttf = 1;
+	}
+	/(.*)\.ttf/i and symlink "$d/$_", "$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$d");
+    }
+    run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir") if $hasttf;
 
     foreach (install_any::list_skels()) {
 	my $found;
@@ -667,7 +682,7 @@ sub setupBootloader($) {
         eval { lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
 	my $err = $@;
         eval { lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds}) };
-	die $err if $err;
+	die $err if $@;
     }
 }
 
@@ -685,6 +700,8 @@ sub setupXfreeBefore {
 
     require Xconfig;
     Xconfig::getinfoFromDDC($o->{X});
+
+    $::xf4 = 1;
 
     #- keep this here if the package has to be updated.
     install_any::pkg_install($o, "XFree86");
@@ -756,6 +773,11 @@ sub miscellaneous {
 
     log::l("perImageAppend: $_");
     $o->{bootloader}{perImageAppend} = $_;
+}
+
+#------------------------------------------------------------------------------
+sub generateAutoInstFloppy($) {
+    my ($o) = @_;
 }
 
 #------------------------------------------------------------------------------

@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $s3_comment $cirrus_comment $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
+use vars qw($in $install $isLaptop $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -76,11 +76,6 @@ sub readCardsDB {
 
 	$f ? &$f() : log::l("unknown line $lineno ($_)");
     }
-    push @{$cards{S3}{lines}}, $s3_comment;
-    push @{$cards{'CL-GD'}{lines}}, $cirrus_comment;
-
-    #- this entry is broken in X11R6 cards db
-    $cards{I128}{flags}{noclockprobe} = 1;
     \%cards;
 }
 sub readCardsNames {
@@ -100,7 +95,7 @@ sub cardName2RealName {
 }
 sub cardName2card {
     my ($name) = @_;
-    readCardsDB("/usr/X11R6/lib/X11/Cards")->{$name};
+    readCardsDB("/usr/X11R6/lib/X11/Cards+")->{$name};
 }
 
 sub readMonitorsDB {
@@ -183,11 +178,12 @@ sub cardConfiguration(;$$$) {
     add2hash($card, cardName2card($card->{type})) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    $card->{prog} = "/usr/X11R6/bin/XF86_$card->{server}";
+    $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 ? 'XFree86' : "XF86_$card->{server}");
 
     -x "$prefix$card->{prog}" or $install && do {
 	$in->suspend;
 	&$install($card->{server});
+	&$install('server') if $::xf4;
 	$in->resume;
     };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
@@ -271,8 +267,9 @@ sub testConfig($) {
     unlink "/tmp/.X9-lock";
     #- restart_xfs;
 
+    my $f = $tmpconfig . ($::xf4 && "-4");
     local *F;
-    open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
+    open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $f 2>&1 |";
     foreach (<F>) {
 	$o->{card}{memory} ||= $2 if /(videoram|Video RAM):\s*(\d*)/;
 
@@ -335,7 +332,7 @@ sub testFinalConfig($;$$) {
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
-	  "-xf86config", $::testing ? $tmpconfig : $f, 
+	  "-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && "-4"), 
 	  ":9" or c::_exit(0);
     }
 
@@ -759,9 +756,13 @@ EndSection
 	print F "    Clocks $_\n" foreach (@{$O->{clocklines}});
 	print G "    Clocks $_\n" foreach (@{$O->{clocklines}});
     }
+    do { print F; print G } for qq(
 
-    print F "\n";
-    print G "\n";
+    # Uncomment following option if you see a big white block        
+    # instead of the cursor!                                          
+    #Option	"sw_cursor"
+
+); 
     print F map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};
     print G map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};
     print F "EndSection\n\n\n";
@@ -776,7 +777,7 @@ EndSection
 	print $f "    DefaultColorDepth $defdepth\n" if $defdepth;
 
         foreach (ikeys(%$depths)) {
-	    my $m = $server ne "fbdev" ? join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}}) : qq("default");
+	    my $m = $server ne "fbdev" ? join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}}) : qq("default"); #-"
 	    print $f qq(    Subsection "Display"\n);
 	    print $f qq(        Depth       $_\n) if $_;
 	    print $f qq(        Modes       $m\n);
@@ -793,7 +794,7 @@ Section "Screen"
     Driver "$server"
     Device      "$device"
     Monitor     "$o->{monitor}{type}"
-);
+); #-"
 	$subscreen->(*F, $server, $defdepth, $depths);
     };
 
@@ -827,9 +828,13 @@ Section "Screen"
     Device      "$O->{type}"
     Monitor     "$o->{monitor}{type}"
 );
-    $subscreen->(*G, "svga", $O->{default_depth}, $O->{depth});
+    #- bpp 32 not handled by XF4
+    $subscreen->(*G, "svga", min($O->{default_depth}, 24), $O->{depth});
 
     print G $layoutsection_v4;
+
+    close F;
+    close G;
 }
 
 sub XF86check_link {

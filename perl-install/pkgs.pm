@@ -11,6 +11,7 @@ use run_program;
 use log;
 use pkgs;
 use fs;
+use loopback;
 use lang;
 use c;
 
@@ -397,7 +398,6 @@ sub readCompss {
 	s/#.*//;
 
 	if (/^(\S+)/) {
-	    s|:|/|g;
 	    $p = $1 if /^(\S+)/;
 	} else {
 	    /(\S+)/;
@@ -729,7 +729,7 @@ sub install($$$;$$) {
     return if $::g_auto_install || !scalar(@$toInstall);
 
     #- for root loopback'ed /boot
-    my $loop_boot = readlink "$prefix/boot"; unlink "$prefix/boot"; mkdir "$prefix/boot", 0755;
+    my $loop_boot = loopback::prepare_boot($prefix);
 
     #- first stage to extract some important informations
     #- about the packages selected. this is used to select
@@ -834,12 +834,7 @@ sub install($$$;$$) {
 
     cleanHeaders($prefix);
 
-    if ($loop_boot) {
-	my @files = glob_("$prefix/boot/*");
-	commands::cp("-f", @files, $loop_boot) if @files;
-	commands::rm("-rf", "$prefix/boot");
-	symlink $loop_boot, "$prefix/boot";
-    }
+    loopback::save_boot($loop_boot);
 }
 
 sub remove($$) {

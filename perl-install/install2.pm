@@ -63,6 +63,7 @@ arch() !~ /alpha/ ? (
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '', "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"] ],
+  generateAutoInstFloppy => [ __("Auto install floppy"), 1, 1, '!corporate !expert', "doInstallStep" ],
   exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
@@ -473,6 +474,11 @@ sub configureX {
     $o->setupXfree if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
 }
 #------------------------------------------------------------------------------
+sub generateAutoInstFloppy { 
+    $o->generateAutoInstFloppy;
+}
+
+#------------------------------------------------------------------------------
 sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 
 
@@ -524,6 +530,7 @@ sub main {
 	    newt      => sub { $o->{interactive} = "newt" },
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio"},
+	    corporate => sub { $::corporate = 1 },
 	    ks        => sub { $::auto_install = 1 },
 	    kickstart => sub { $::auto_install = 1 },
 	    auto_install => sub { $::auto_install = 1 },
@@ -598,6 +605,8 @@ sub main {
 
     #- needed very early for install_steps_gtk
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
+
+    $o->{allowFB} = listlength(cat_("/proc/fb"));
 
     my $o_;
     while (1) {

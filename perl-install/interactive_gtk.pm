@@ -296,13 +296,13 @@ sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
 
     my $w = my_gtk->new($title, %$o, grab => 1);
-    my $W = pop @$messages;
-    gtkadd($w->{window},
-	   gtkpack(new Gtk::VBox(0,0),
-		   @$messages,
-		   $w->{wait_messageW} = new Gtk::Label($W)));
+    gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
+    $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
+    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label($_) } @$messages;
+
+    ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
     $w->{rwindow}->set_position('center') if $::isStandalone;
-    $w->{wait_messageW}->signal_connect(expose_event => sub { $w->{displayed} = 1 });
+    $w->{window}->show_all;
     $w->sync until $w->{displayed};
     $w;
 }

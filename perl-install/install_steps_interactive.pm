@@ -79,7 +79,7 @@ sub selectKeyboard($) {
     if ($::expert) {
 	my $langs = $o->ask_many_from_list('', 
 		_("You can choose other languages that will be available after install"),
-		[ lang::list() ]) or goto &selectLanguage if $::expert;
+		[ sort lang::list() ]) or goto &selectLanguage if $::expert;
 	$o->{langs} = [ $o->{lang}, grep_index { $langs->[$::i] } lang::list() ];
     }
 }
@@ -267,17 +267,17 @@ sub choosePackages {
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::selectedSize($packages);
 
-	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
+#	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
 	my $max_size = int (sum map { pkgs::packageSize($_) } values %{$packages->[0]});
 
-	 if (!$::beginner && $max_size > $available) {
+	 if (0 && !$::beginner && $max_size > $available) {
 	     $o->ask_okcancel('', 
 _("You need %dMB for a full install of the groups you selected.
 You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 	 }
 
-	 my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
+	 my $size2install = 1 || $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
 
 	 ($o->{packages_}{ind}) = 
 	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
@@ -1043,6 +1043,43 @@ sub setupXfree {
 }
 
 #------------------------------------------------------------------------------
+sub generateAutoInstFloppy($) {
+    my ($o) = @_;
+
+    my ($floppy) = detect_devices::floppies();
+
+    $o->ask_yesorno('', 
+"Do you want to generate an auto install floppy for linux replication?", $floppy) or return;
+
+    $o->ask_warn('', _("Insert a blank floppy in drive %s", $floppy));
+
+    my $dev = devices::make($floppy);
+
+    my $image = $o->{pcmcia} ? "pcmcia" :
+      ${{ hd => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+	
+    if (my $fd = install_any::getFile("$image.img")) {
+	my $w = $o->wait_message('', _("Creating auto install floppy"));
+	local *OUT;
+	open OUT, ">$dev" or log::l("failed to write $dev"), return;
+	local $/ = \ (16 * 1024);
+	print OUT foreach <$fd>;
+    }
+    fs::mount($dev, "/floppy", "vfat", 0);
+    substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";
+
+    local $o->{partitioning}{clearall} = 1;
+    install_any::g_auto_install("/floppy/auto_inst.cfg");
+
+    output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
+    output "/floppy/boot.msg", "0c",
+"!! If you press enter, an auto-install is going to start.
+   All data on this computer is going to be lost !!
+", "07";
+    fs::umount("/floppy");
+}
+
+#------------------------------------------------------------------------------
 sub exitInstall {
     my ($o, $alldone) = @_;
 
@@ -1150,7 +1187,7 @@ sub setup_thiskind {
 
     {
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
-	modules::load("ide-mod", 'prereq', $allow_probe && 'options="' . detect_devices::hasHPT() . '"');
+	modules::load("ide-mod", 'prereq', $allow_probe && 'options="' . detect_devices::hasUltra66() . '"');
 	modules::load_multi(qw(ide-probe ide-disk ide-cd));
     }
 

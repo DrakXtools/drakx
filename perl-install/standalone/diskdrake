@@ -34,7 +34,7 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: XFdrake [--expert] [--testing]\n";
+/-h/ and die "usage: diskdrake [--expert] [--testing]\n";
 
 $::expert = /-expert/;
 $::testing = /-testing/;

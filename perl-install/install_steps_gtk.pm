@@ -210,7 +210,7 @@ sub new($$) {
 		    chmod 0755, "$dir/XF86_$_";
 		}
 		if (/FB/) {
-		    !$o->{vga16} && listlength(cat_("/proc/fb")) or next;
+		    !$o->{vga16} && $o->{allowFB} or next;
 
 		    $o->{allowFB} = &$launchX("XF86_$_") #- keep in mind FB is used.
 		      and goto OK;
@@ -367,9 +367,9 @@ sub choosePackagesTree {
 
     my $w = my_gtk->new('');
     my $details = new Gtk::VBox(0,0);
-    my $tree = Gtk::CTree->new(2, 0);
+    my $tree = Gtk::CTree->new(3, 0);
     $tree->set_selection_mode('browse');
-    $tree->set_column_auto_resize($_, 1) foreach 0..1;
+    $tree->set_column_auto_resize($_, 1) foreach 0..2;
 
     gtkadd($w->{window}, 
 	   gtkpack_(new Gtk::VBox(0,5),
@@ -392,20 +392,20 @@ sub choosePackagesTree {
     my $dir = $::testing && $ENV{SHARE_PATH} || "/usr/share";
     my $pix_base     = [ Gtk::Gdk::Pixmap->create_from_xpm($w->{window}->window, $w->{window}->style->bg('normal'), "$dir/rpm-base.xpm") ];
     my $pix_selected = [ Gtk::Gdk::Pixmap->create_from_xpm($w->{window}->window, $w->{window}->style->bg('normal'), "$dir/rpm-selected.xpm") ];
-    my $pix_unselect = [ Gtk::Gdk::Pixmap->create_from_xpm_d($w->{window}->window, undef, "1 1 1 1", " c None", " ") ];
+    my $pix_unselect = [ Gtk::Gdk::Pixmap->create_from_xpm($w->{window}->window, $w->{window}->style->bg('normal'), "$dir/rpm-unselected.xpm") ];
 
     my $parent; $parent = sub {
 	if (my $w = $wtree{$_[0]}) { return $w }
 	my $s; foreach (split '/', $_[0]) {
 	    $wtree{"$s/$_"} ||= 
-	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, 0);
+	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_, '', ''], 5, (undef) x 4, 0, 0);
 	    $s = "$s/$_";
 	}
 	$wtree{$s};
     };
     my $add_node = sub {
 	my ($leaf, $root) = @_;
-	my $node = $tree->insert_node($parent->($root), undef, [$leaf], 5, (undef) x 4, 1, 0);
+	my $node = $tree->insert_node($parent->($root), undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
 	my $p = $packages->[0]{$leaf} or return;
 	my $pix = pkgs::packageFlagBase($p) ? $pix_base : pkgs::packageFlagSelected($p) ? $pix_selected : $pix_unselect;
 	$tree->node_set_pixmap($node, 1, $pix->[0], $pix->[1]);
@@ -439,16 +439,6 @@ sub choosePackagesTree {
 	0;
     };
 
-    $tree->signal_connect(tree_select_row => sub {
-	Gtk->timeout_remove($idle) if $idle;
-
-	if ($_[1]->row->is_leaf) {
-	    ($curr) = $tree->node_get_pixtext($_[1], 0);
-	    $idle = Gtk->timeout_add(100, $display_info);
-	} else {
-	    $curr = $_[1];
-	}
-    });
     my $update_size = sub {
 	my $size = 0;
 	foreach (values %{$packages->[0]}) {
@@ -486,6 +476,17 @@ sub choosePackagesTree {
 	&$toggle if $e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
 	1;
     });
+    $tree->signal_connect(tree_select_row => sub {
+	Gtk->timeout_remove($idle) if $idle;
+
+	if ($_[1]->row->is_leaf) {
+	    ($curr) = $tree->node_get_pixtext($_[1], 0);
+	    $idle = Gtk->timeout_add(100, $display_info);
+	} else {
+	    $curr = $_[1];
+	}
+	&$toggle if $_[2] == 1;
+    });
     &$update_size;
     $w->main;
 }
@@ -497,7 +498,7 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
     my $w = my_gtk->new(_("Installing"), grab => 1);
-    $w->{window}->set_usize($::windowwidth * 0.8, $::windowheight * 0.5);
+    $w->{window}->set_usize($::windowwidth * 0.8, 280);
     my $text = new Gtk::Label;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
@@ -747,7 +748,9 @@ sub create_steps_window {
 			$b;
 		    } grep {
 			local $_ = $o->{steps}{$_}{hidden};
-			/^$/ or $o->{installClass} and /beginner/ && !$::beginner || /!expert/ && $::expert
+			/^$/ or $o->{installClass} and !/!expert/ || $::expert
+			                           and !/beginner/ || !$::beginner 
+			                           and !/!corporate/ || $::corporate;
 		    } @{$o->{orderedSteps}}),
 		    0, gtkpack(new Gtk::HBox(0,0), map {
 			my $t = $_;

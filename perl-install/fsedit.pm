@@ -35,7 +35,7 @@ arch() =~ /^sparc/ ? (
   { mntpoint => "/tmp",     size =>  50 << 11, type => 0x83, ratio => 3, maxsize => 500 << 11 },
   { mntpoint => "/mnt/iso", size => 700 << 11, type => 0x83 },
 );
-my @suggestions_mntpoints = qw(/mnt/dos);
+my @suggestions_mntpoints = qw(/mnt/windows);
 
 
 my @partitions_signatures = (

@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+open F, "bzip2 -dc @ARGV 2>/dev/null | hdlist2groups - |";
+foreach (<F>) {
+    chop;
+    /(.*):(.*)/;
+    push @{$l{$2}}, $1;
+}
+close F or die;
+foreach (sort keys %l) {
+    print "$_\n";
+    print "\t$_\n" foreach sort @{$l{$_}};
+    print "\n";
+}

@@ -3,7 +3,7 @@ package resize_fat::boot_sector;
 use diagnostics;
 use strict;
 
-use common qw(:common :system :constant);
+use common qw(:common :system :constant :functional);
 use resize_fat::io;
 use resize_fat::any;
 use resize_fat::directory;
@@ -59,6 +59,7 @@ sub read($) {
     $fs->{boot_sign} == 0xAA55 or die "Invalid signature for a MS-based filesystem.";
     $fs->{nb_fats} == 2 or die "Weird number of FATs: $fs->{nb_fats}, not 2.",
     $fs->{nb_sectors} < 32 and die "Too few sectors for viable file system\n";
+    $fs->{sector_size} == 512 or cdie "Strange sector_size != 512\n";
 
     if ($fs->{fat16_fat_length}) {
 	#- asserting FAT16, will be verified later on

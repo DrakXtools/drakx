@@ -127,6 +127,25 @@ sub verifFile {
     undef;
 }
 
+sub prepare_boot {
+    my ($prefix) = @_;
+    my $r = readlink "$prefix/boot"; 
+    unlink "$prefix/boot"; 
+    mkdir "$prefix/boot", 0755;
+    [$r, $prefix];
+}
+
+sub save_boot {
+    my ($loop_boot, $prefix) = @{$_[0]};
+    
+    $loop_boot or return;
+
+    my @files = glob_("$prefix/boot/*");
+    commands::cp("-f", @files, $loop_boot) if @files;
+    commands::rm("-rf", "$prefix/boot");
+    symlink $loop_boot, "$prefix/boot";
+}
+
 
 1;
 

@@ -24,6 +24,9 @@ xhost+: %: %.c
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
+$(BASE)/compss: $(BASE)/hdlists $(BASE)/hdlist.cz2
+	./gencompss `cat $< | perl -pe 's|(.*)|'$(BASE)'/$$1|' ` > $@ 
+
 $(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz2
 	gendepslist2 -o $@ `cat $< | perl -pe 's|(.*)|'$(BASE)'/$$1|' `
 

@@ -63,7 +63,7 @@ sub isRemovableDrive() { &isZipDrive || &isLS120Drive } #-or &isJazzDrive }
 
 sub hasSCSI() {
     local *F;
-    open F, "/proc/scsi/scsi" or log::l("failed to open /proc/scsi/scsi: $!"), return 0;
+    open F, "/proc/scsi/scsi" or return 0;
     foreach (<F>) {
 	/devices: none/ and log::l("no scsi devices are available"), return 0;
     }
@@ -197,20 +197,18 @@ sub syslog {
 
 sub hasSMP { c::detectSMP() }
 
-#- warning: hasHPT does a pci probe
-sub hasHPT {
+#- warning: hasUltra66 does a pci probe
+sub hasUltra66 {
     cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
 
     require pci_probing::main;
     my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more') or return;
     
-    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", map_index { hex($_) + (odd($::i) ? 1 : -1) } do {
-	if (@l == 2) {
-	    map { (split ' ')[3..4] } @l
-	} else {
-	    map { (split ' ')[3..6] } @l
-	}
-    };
+    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x",
+      @l == 2 ?
+	(map_index { hex($_) + (odd($::i) ? 1 : -1) } map { (split ' ')[3..4] } @l) :
+	(map_index { hex($_) - 1                    } map { (split ' ')[3..6] } @l);
+
     log::l("HPT|Ultra66: found $ide");
     $ide;
 }

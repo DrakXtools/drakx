@@ -158,12 +158,16 @@ arch() =~ /^sparc/ ? (
 );
 
 my %type2fs = (
+arch() =~ /^ppc/ ? (
+  0x07 => 'hpfs',
+) : (
+  0x07 => 'ntfs',
+),
 arch() !~ /^sparc/ ? (
   0x01 => 'vfat',
   0x04 => 'vfat',
   0x05 => 'ignore',
   0x06 => 'vfat',
-  0x07 => 'hpfs',
 ) : (),
   0x0b => 'vfat',
   0x0c => 'vfat',

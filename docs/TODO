@@ -26,6 +26,8 @@ bug if ide-scsi, no more hdX, but scd0 (aka sr0)
 check on update for conf.modules and modules.conf !
 
 -features-------------------------------------------------------------------------------
+in 640x480 install box is to small (cuz of 'Cancel' button beeing added)
+
 handle NT (add entry for it in lilo, put it in fstab)
 
 (NEED 7.1) auto-install for corporate, very important (need consolidation).
@@ -33,13 +35,10 @@ handle NT (add entry for it in lilo, put it in fstab)
 (7.1 or later) clean SCSI CDROM autoboot.
 stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
 
-(7.1) sparc ehancement, avoid V7+ machine target (div and mul not in v7 standard)
-
 (7.1)syslinux in graphical mode to be improved for heavily bogus BIOSes.
 (7.1)install in 800x600
 - need handling of both 640x480 (mostly for VGA16) and 800x600
 
-(7.1)individual package selection: double click is tiring...
 (7.1)better help for partitioning in newbie
 (7.1 or later?)help in some configuration files.
 
@@ -84,7 +83,6 @@ use option nocheck to mount for upgrades
 
 -fixes needing thinking-----------------------------------------------------------------
 bug: changing mem= in miscellaneous doesn't modify lilo conf if you backtrack
-
 
 with /usr, /usr/local and /usr/local/e mount points i get an error at step mounting local filesystems
 
@@ -491,3 +489,7 @@ in the middle, remove the first one. Result hda5 at the end and bug.
 (obsolete) have a better time estimation of the remaining time in install packages
 
 (done,dindinx+pix)ask_many_from_list can't keyboard scroll
+
+(done,pix,7.1)individual package selection: double click is tiring...
+
+(done,fpons,7.1) sparc ehancement, avoid V7+ machine target (div and mul not in v7 standard)
