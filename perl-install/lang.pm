@@ -646,12 +646,12 @@ my %IM2packages = (
                    'scim' => {
                               generic => [ qw(scim scim-m17n scim-tables) ],
                               am => [ qw(scim scim-tables ) ],
-                              ja => [ qw(scim-anthy scim-uim) ],
+                              ja => [ qw(scim-anthy scim-uim uim-anthy) ],
                               ko => [ qw(scim-hangul) ],
                               zh => [ qw(scim-pinyin scim-tables scim-chewing) ],
                              },
                    'scim+uim' => { generic => [ qw(scim-uim) ] },
-                   'uim' => { generic => [ qw(uim-gtk) ] },
+                   'uim' => { generic => [ qw(uim-gtk uim-anthy) ] },
                    'vi' =>  { generic => [ 'x-unikey' ] },
                   );
 
