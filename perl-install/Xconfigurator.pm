@@ -204,7 +204,7 @@ sub cardConfiguration(;$$$) {
     $card ||= {};
 
     updateCardAccordingName($card, $card->{type}) if $card->{type}; #- try to get info from given type
-    undef $card->{type} unless $card->{server}; #- bad type as we can't find the server
+    undef $card->{type} unless $card->{server} || $card->{driver}; #- bad type as we can't find the server
     my @cards = cardConfigurationAuto();
     if (@cards > 1 && ($noauto || !$card->{server})) {#} && !$::isEmbedded) {
 	my (%single_heads, @choices, $tc);
@@ -244,8 +244,8 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	add2hash($card, $cards[0]) unless $card->{server} || $noauto;
 	delete $card->{cards}; delete $card->{Xinerama};
     }
-    $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{type} || $noauto;
-    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
+    $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{driver} || $card->{type} || $noauto;
+    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) unless $card->{type} || $card->{server} || $card->{driver};
     undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $cardOptions->{allowFB} ? \@allservers : \@allbutfbservers ) or return if $card->{type} eq 'Other|Unlisted';
 
     updateCardAccordingName($card, $card->{type}) if $card->{type};
@@ -256,7 +256,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$_->{memory} = 16384, delete $_->{depth} if $_->{chipset} =~ /PERMEDIA/ && $_->{memory} <= 1024;
     }
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
-    $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24][05]0/ || #- 8bpp does not work.
+    $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
 			 $card->{identifier} =~ /Riva.*128/ ||
 			 $card->{identifier} =~ /Rage X[CL]/ ||
 			 $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
@@ -272,7 +272,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				      $card->{type} =~ /SiS/);
     #- 3D acceleration configuration for XFree 4 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || $card->{identifier} =~ /Voodoo Banshee/ || #- 16bit only
-			$card->{identifier} =~ /Matrox.* G[24][05]0.*AGP/ || #- prefer 16bit with AGP only
+			$card->{identifier} =~ /Matrox.* G[24][05]0/ || #- prefer 16bit with AGP only
 			$card->{identifier} =~ /8281[05].* CGC/ || #- 16bits (Intel 810 & 815).
 			$card->{identifier} =~ /Radeon / || #- 16bits preferable ?
 			$card->{identifier} =~ /Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
@@ -290,7 +290,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 							       $card->{identifier} =~ /[nN]Vidia.*Quadro/);
     #- check to use XFree 4 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
-    $card->{force_xf4} = arch() =~ /ppc/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
+    $card->{force_xf4} ||= arch() =~ /ppc/; #- try to figure out ugly hack for PPC (recommend XF4 always so...)
     $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /NeoMagic /);
     #- take into account current environment in standalone to keep
     #- the XFree86 version.
@@ -403,7 +403,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
     #- check for Matrox G200 PCI cards, disable AGP in such cases, causes black screen else.
-    if ($card->{identifier} =~ /Matrox.* G[24][05]0/ && $card->{identifier} !~ /AGP/) {
+    if ($card->{identifier} =~ /Matrox.* G[24]00/ && $card->{identifier} !~ /AGP/) {
 	log::l("disabling AGP mode for Matrox card, as it seems to be a PCI card");
 	log::l("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
 	substInFile { s/^\s*#*\s*mga_dma\s*=\s*\d+\s*$/mga_dma = 0\n/ } "$prefix/etc/X11/glx.conf";
@@ -446,7 +446,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
     if ($card->{DRI_glx}) {
-	$card->{identifier} =~ /Matrox.* G[24]00/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
+	$card->{identifier} =~ /Matrox.* G[24][05]0/ and $card->{flags}{needVideoRam} = 'fakeVideoRam';
 	$card->{identifier} =~ /8281[05].* CGC/ and ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 16384);
     }
 
@@ -559,8 +559,10 @@ sub testFinalConfig {
 
     $skiptest || $o->{card}{server} =~ 'FBDev|Sun' and return 1; #- avoid testing with these.
 
-    #- needed for bad cards not restoring cleanly framebuffer
-    my $bad_card = $o->{card}{identifier} =~ /i740|Rage Mobility (?:P\/M|L) |3D Rage LT/;
+    #- needed for bad cards not restoring cleanly framebuffer, according to which version of XFree are used.
+    my $bad_card = ($o->{card}{use_xf4} ?
+		    $o->{card}{identifier} =~ /Matrox/ :
+		    $o->{card}{identifier} =~ /i740|ViRGE|Rage Mobility (?:P\/M|L) |3D Rage LT/);
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $verybad_card = $o->{card}{driver} eq 'i810';
