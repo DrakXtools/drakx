@@ -872,9 +872,8 @@ sub new {
     $o->{isEmbedded} ||= $::isEmbedded;
 
     $o->{pop_it} ||= $pop_it || !$o->{isWizard} && !$o->{isEmbedded} || $::WizardTable && do {
-	my @l = $::WizardTable->get_children;
-	pop @l if !$::isInstall && $o->{isWizard}; #- don't take into account the DrawingArea
-	any { $_->visible } @l;
+	#- don't take into account the DrawingArea
+	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
 
     if ($o->{pop_it}) {
