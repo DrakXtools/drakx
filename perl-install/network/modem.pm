@@ -259,7 +259,7 @@ Take a look at http://www.linmodems.org")) ? return 0 : $in->exit(0));
 	    unless ($::isInstall) {
 		#- fallback to modem configuration (beware to never allow test it).
 		$netcnx->{type} = 'modem';
-		$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
+		#$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
 		return configure($in, $netcnx, $mouse, $netc);
 	    }
 	} else {
