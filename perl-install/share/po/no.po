@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-04 13:46+0200\n"
+"POT-Creation-Date: 2000-10-05 09:35+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -478,7 +478,7 @@ msgstr "Hvor ønsker du installere oppstartslasteren?"
 msgid "LILO/grub Installation"
 msgstr "LILO/grub-installasjon"
 
-#: ../../any.pm_.c:111 ../../install_steps_interactive.pm_.c:746
+#: ../../any.pm_.c:111 ../../install_steps_interactive.pm_.c:724
 msgid "None"
 msgstr "Ingen"
 
@@ -514,15 +514,15 @@ msgstr "Skjermmodus"
 msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
-#: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:774
-#: ../../install_steps_interactive.pm_.c:825 ../../netconnect.pm_.c:529
+#: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:752
+#: ../../install_steps_interactive.pm_.c:803 ../../netconnect.pm_.c:529
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
 msgstr "Passord"
 
-#: ../../any.pm_.c:135 ../../install_steps_interactive.pm_.c:775
-#: ../../install_steps_interactive.pm_.c:826
+#: ../../any.pm_.c:135 ../../install_steps_interactive.pm_.c:753
+#: ../../install_steps_interactive.pm_.c:804
 #: ../../standalone/adduserdrake_.c:43
 msgid "Password (again)"
 msgstr "Passord (igjen)"
@@ -545,14 +545,14 @@ msgid ""
 msgstr ""
 "Opsjon ``Begrense kommandolinje-opsjoner'' kan ikke brukes uten et passord"
 
-#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:784
-#: ../../install_steps_interactive.pm_.c:839
+#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:762
+#: ../../install_steps_interactive.pm_.c:817
 #: ../../standalone/adduserdrake_.c:56
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:784
-#: ../../install_steps_interactive.pm_.c:839
+#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:762
+#: ../../install_steps_interactive.pm_.c:817
 #: ../../standalone/adduserdrake_.c:56
 msgid "The passwords do not match"
 msgstr "Passordene stemmer ikke overens"
@@ -571,7 +571,7 @@ msgid "Add"
 msgstr "Legg til"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:819 ../../netconnect.pm_.c:801
+#: ../../install_steps_interactive.pm_.c:797 ../../netconnect.pm_.c:803
 #: ../../printerdrake.pm_.c:353 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Ferdig"
@@ -629,7 +629,7 @@ msgid "Default"
 msgstr "Standard"
 
 #: ../../any.pm_.c:220 ../../install_gtk.pm_.c:81
-#: ../../install_steps_interactive.pm_.c:772 ../../interactive.pm_.c:76
+#: ../../install_steps_interactive.pm_.c:750 ../../interactive.pm_.c:76
 #: ../../interactive.pm_.c:86 ../../interactive.pm_.c:250
 #: ../../interactive_newt.pm_.c:51 ../../interactive_newt.pm_.c:99
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:243
@@ -759,13 +759,11 @@ msgstr ""
 # leave it in English, as it is the best for your language)
 # 
 #: ../../bootloader.pm_.c:234
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Welcome to %s the operating system chooser!\n"
 "\n"
-"To list the possible choices, press <TAB>.\n"
-"\n"
-"To load one of them, write its name and press <ENTER> or\n"
+"Choose an operating system in the list above or\n"
 "wait %d seconds for default boot.\n"
 "\n"
 msgstr ""
@@ -785,7 +783,7 @@ msgstr ""
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:598
+#: ../../bootloader.pm_.c:596
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 
@@ -797,7 +795,7 @@ msgstr "Velkommen til GRUB, operativsystem-velgeren!"
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:599
+#: ../../bootloader.pm_.c:597
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
@@ -810,7 +808,7 @@ msgstr "Bruk %c og %c tastene for å velge hvilken inngang som er markert."
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:600
+#: ../../bootloader.pm_.c:598
 msgid "Press enter to boot the selected OS, 'e' to edit the"
 msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 
@@ -822,7 +820,7 @@ msgstr "Trykk enter for † starte opp valgt OS, 'e' for † redigere"
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:601
+#: ../../bootloader.pm_.c:599
 msgid "commands before booting, or 'c' for a command-line."
 msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 
@@ -834,21 +832,21 @@ msgstr "kommandoer for oppstart, eller 'c' for en kommandolinje."
 # The lines must fit on screen, aka length < 80
 # and only one line per string for the GRUB messages
 #
-#: ../../bootloader.pm_.c:602
+#: ../../bootloader.pm_.c:600
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
 msgstr "Den markerte inngangen vil bli startet automatisk om %d sekunder."
 
-#: ../../bootloader.pm_.c:606
+#: ../../bootloader.pm_.c:604
 msgid "not enough room in /boot"
 msgstr "ikke nok plass i /boot"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
-#: ../../bootloader.pm_.c:698
+#: ../../bootloader.pm_.c:696
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: ../../bootloader.pm_.c:698
+#: ../../bootloader.pm_.c:696
 msgid "Start Menu"
 msgstr "Startmeny"
 
@@ -1050,7 +1048,7 @@ msgstr "Vær forsiktig: denne operasjonen er farlig."
 # #: ../install_steps_interactive.pm_.c:37
 #: ../../diskdrake.pm_.c:203 ../../install_steps.pm_.c:73
 #: ../../install_steps_interactive.pm_.c:38
-#: ../../install_steps_interactive.pm_.c:341 ../../standalone/diskdrake_.c:60
+#: ../../install_steps_interactive.pm_.c:319 ../../standalone/diskdrake_.c:60
 #: ../../standalone/rpmdrake_.c:294 ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr "Feil"
@@ -1304,7 +1302,7 @@ msgstr "Formatering"
 msgid "Formatting loopback file %s"
 msgstr "Formaterer loopback-fil %s"
 
-#: ../../diskdrake.pm_.c:519 ../../install_steps_interactive.pm_.c:428
+#: ../../diskdrake.pm_.c:519 ../../install_steps_interactive.pm_.c:406
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
@@ -1380,7 +1378,7 @@ msgstr "Velg den nye størrelsen"
 
 #: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334
-#: ../../install_steps_interactive.pm_.c:532
+#: ../../install_steps_interactive.pm_.c:510
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "MB"
@@ -3324,7 +3322,7 @@ msgstr "Konfigurer mus"
 msgid "Choose your keyboard"
 msgstr "Velg tastatur"
 
-#: ../../install2.pm_.c:45 ../../install_steps_interactive.pm_.c:525
+#: ../../install2.pm_.c:45 ../../install_steps_interactive.pm_.c:503
 msgid "Miscellaneous"
 msgstr "Forskjellig"
 
@@ -3360,8 +3358,8 @@ msgstr "Konfigurer tjenester"
 msgid "Configure printer"
 msgstr "Konfigurer skriver"
 
-#: ../../install2.pm_.c:55 ../../install_steps_interactive.pm_.c:772
-#: ../../install_steps_interactive.pm_.c:773
+#: ../../install2.pm_.c:55 ../../install_steps_interactive.pm_.c:750
+#: ../../install_steps_interactive.pm_.c:751
 msgid "Set root password"
 msgstr "Sett root-passord"
 
@@ -3389,19 +3387,19 @@ msgstr "Diskett autoinstallering"
 msgid "Exit install"
 msgstr "Avslutt installering"
 
-#: ../../install_any.pm_.c:580
+#: ../../install_any.pm_.c:583
 msgid "Error reading file $f"
 msgstr "Feil ved lesing av fil $f"
 
-#: ../../install_gtk.pm_.c:427
+#: ../../install_gtk.pm_.c:425
 msgid "Please test the mouse"
 msgstr "Vennligst test musen."
 
-#: ../../install_gtk.pm_.c:428
+#: ../../install_gtk.pm_.c:426
 msgid "To activate the mouse,"
 msgstr "For å aktivere musen,"
 
-#: ../../install_gtk.pm_.c:429
+#: ../../install_gtk.pm_.c:427
 msgid "MOVE YOUR WHEEL!"
 msgstr "BEVEG HJULET DITT!"
 
@@ -3676,12 +3674,12 @@ msgid "Info"
 msgstr "Info"
 
 #: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
-#: ../../install_steps_interactive.pm_.c:242 ../../standalone/rpmdrake_.c:161
+#: ../../install_steps_interactive.pm_.c:220 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "Installer"
 
 #: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
-#: ../../install_steps_interactive.pm_.c:608
+#: ../../install_steps_interactive.pm_.c:586
 msgid "Installing"
 msgstr "Installerer"
 
@@ -3698,7 +3696,7 @@ msgid "Total time "
 msgstr "Total tid "
 
 #: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
-#: ../../install_steps_interactive.pm_.c:608
+#: ../../install_steps_interactive.pm_.c:586
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
@@ -3707,17 +3705,17 @@ msgstr "Forbereder installasjon"
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:542
-#: ../../install_steps_gtk.pm_.c:546
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:542
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
 #: ../../install_steps_graphical.pm_.c:577
-#: ../../install_steps_interactive.pm_.c:1013
+#: ../../install_steps_interactive.pm_.c:991
 msgid "Use existing configuration for X11?"
 msgstr "Bruke eksisterende konfigurasjon for X11?"
 
@@ -3871,7 +3869,43 @@ msgstr "Avbryt"
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:526
+#: ../../install_steps_gtk.pm_.c:531
+msgid ""
+"\n"
+"Warning\n"
+"\n"
+"Please read carefully the terms below. If you disagree with any\n"
+"portion, you are not allowed to install the next CD media. Press 'Cancel' \n"
+"to continue the installation without using these media.\n"
+"\n"
+"\n"
+"Some components contained in the next CD media are not governed\n"
+"by the GPL License or similar agreements. Each such component is then\n"
+"governed by the terms and conditions of its own specific license. \n"
+"Please read carefully and comply with such specific licenses before \n"
+"you use or redistribute the said components. \n"
+"Such licenses will in general prevent the transfer,  duplication \n"
+"(except for backup purposes), redistribution, reverse engineering, \n"
+"de-assembly, de-compilation or modification of the component. \n"
+"Any breach of agreement will immediately terminate your rights under \n"
+"the specific license. Unless the specific license terms grant you such\n"
+"rights, you usually cannot install the programs on more than one\n"
+"system, or adapt it to be used on a network. In doubt, please contact \n"
+"directly the distributor or editor of the component. \n"
+"Transfer to third parties or copying of such components including the \n"
+"documentation is usually forbidden.\n"
+"\n"
+"\n"
+"All rights to the components of the next CD media belong to their \n"
+"respective authors and are protected by intellectual property and \n"
+"copyright laws applicable to software programs.\n"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:151
+msgid "Accept"
+msgstr "Godta"
+
+#: ../../install_steps_gtk.pm_.c:559
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -3886,7 +3920,11 @@ msgstr ""
 "ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
-#: ../../install_steps_gtk.pm_.c:546
+#: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:151
+msgid "Refuse"
+msgstr "Nekte"
+
+#: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
@@ -3904,7 +3942,7 @@ msgstr "License agreement"
 
 #: ../../install_steps_interactive.pm_.c:71
 msgid ""
-" Introduction\n"
+"Introduction\n"
 "\n"
 "The operating system and the different components available in the "
 "Linux-Mandrake distribution \n"
@@ -3919,8 +3957,7 @@ msgid ""
 "\n"
 "Please read carefully this document. This document is a license agreement "
 "between you and  \n"
-"MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to "
-"the Software Products.\n"
+"MandrakeSoft S.A. which applies to the Software Products.\n"
 "By installing, duplicating or using the Software Products in any manner, you "
 "explicitly \n"
 "accept and fully agree to conform to the terms and conditions of this "
@@ -3937,7 +3974,51 @@ msgid ""
 "Software Products.\n"
 "\n"
 "\n"
-"2. The GPL License and Related Licenses\n"
+"2. Limited Warranty\n"
+"\n"
+"The Software Products and attached documentation are provided \"as is\", "
+"with no warranty, to the \n"
+"extent permitted by law. Should the Software Products be defective, "
+"MandrakeSoft S.A. will at its \n"
+"own will either replace the Software Products, or reimburse the paid fee.\n"
+"This limited warranty is void if you fail to comply to the recommendations, "
+"instructions and \n"
+"conditions \n"
+"of use listed in the documentation or license agreements of the Software "
+"Products.\n"
+"To the extent permitted by law, MandrakeSoft S.A. will in no circumstances "
+"be liable for any special, \n"
+"incidental, direct or indirect damages whatsoever (including without "
+"limitation damages for loss of \n"
+"business, interruption of business, financial loss, legal fees and penalties "
+"resulting from a court \n"
+"judgment, or any other consequential loss) arising out of  the use or "
+"inability to use the Software \n"
+"Products, even if MandrakeSoft S.A. has been advised of the possibility or "
+"occurance of such \n"
+"damages.\n"
+"\n"
+"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+"COUNTRIES\n"
+"\n"
+"To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
+"in no circumstances, be \n"
+"liable for any special, incidental, direct or indirect damages whatsoever "
+"(including without \n"
+"limitation damages for loss of business, interruption of business, financial "
+"loss, legal fees \n"
+"and penalties resulting from a court judgment, or any other consequential "
+"loss) arising out \n"
+"of the possession and use of software components or arising out of  "
+"downloading software components \n"
+"from one of Linux-Mandrake sites  which are prohibited or restricted in some "
+"countries by local laws.\n"
+"This limited liability applies to, but is not restricted to, the strong "
+"cryptography components \n"
+"included in the Software Products.\n"
+"\n"
+"\n"
+"3. The GPL License and Related Licenses\n"
 "\n"
 "The Software Products consist of components created by different persons or "
 "entities.  Most \n"
@@ -3956,31 +4037,9 @@ msgid ""
 "by MandrakeSoft S.A. is governed by a specific license. Please refer to the "
 "documentation for \n"
 "further details.\n"
-"Some versions of the Software Products may contain components which are not "
-"governed by the GPL \n"
-"License or similar agreements. Each such component is then governed by the "
-"terms and conditions \n"
-"of its own specific license. Please read carefully and comply with such "
-"specific licenses before \n"
-"you install, use or redistribute the said components. Such licenses will in "
-"general prevent the \n"
-"transfer,  duplication (except for backup purposes), redistribution, reverse "
-"engineering, \n"
-"de-assembly, \n"
-"de-compilation or modification of the component. Any breach of agreement "
-"will immediately terminate \n"
-"your rights under the specific license. Unless the specific license terms "
-"grant you such rights, \n"
-"you usually cannot install the programs on more than one system, or adapt it "
-"to be used on a \n"
-"network. \n"
-"In doubt, please contact directly the distributor or editor of the "
-"component. Transfer to third \n"
-"parties or copying of such components including the documentation is usually "
-"forbidden.\n"
 "\n"
 "\n"
-"3. Intellectual Property Rights\n"
+"4. Intellectual Property Rights\n"
 "\n"
 "All rights to the components of the Software Products belong to their "
 "respective authors and are \n"
@@ -3988,68 +4047,15 @@ msgid ""
 "programs.\n"
 "MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
 "Products, as a whole or in \n"
-"parts,\n"
-"by all means and for all purposes.\n"
+"parts, by all means and for all purposes.\n"
 "\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of "
-"MandrakeSoft S.A.  All rights \n"
-"are \n"
-"reserved. The duplication is forbidden without prior written consent by "
-"MandrakeSoft S.A.\n"
-"\n"
-"\n"
-"4. Limited Warranty\n"
-"\n"
-"The Software Products and attached documentation are provided \"as is\", "
-"with no warranty, to the \n"
-"extent permitted by law. Should the Software Products be defective, "
-"MandrakeSoft S.A. will at its \n"
-"own will either replace the Software Products, or reimburse the paid fee.\n"
-"This limited warranty is void if you fail to comply to the recommendations, "
-"instructions and \n"
-"conditions \n"
-"of use listed in the documentation or license agreements of the Software "
-"Products.\n"
-"To the extent permitted by law, MandrakeSoft S.A. will in no circumstances "
-"be liable for any \n"
-"special, \n"
-"incidental, direct or indirect damages whatsoever (including without "
-"limitation damages for loss of \n"
-"business, interruption of business, financial loss, legal fees and penalties "
-"resulting from a court \n"
-"judgement, or any other consequential loss) arising out of  the use or "
-"inability to use the \n"
-"Software \n"
-"Products, even if MandrakeSoft S.A. has been advised of the possibility or "
-"occurance of such \n"
-"damages.\n"
-"\n"
-"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
-"COUNTRIES\n"
-"\n"
-"To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
-"in no circumstances, be \n"
-"liable for any special, incidental, direct or indirect damages whatsoever "
-"(including without \n"
-"limitation \n"
-"damages for loss of business, interruption of business, financial loss, "
-"legal fees and penalties \n"
-"resulting from a court judgement, or any other consequential loss) arising "
-"out of the possession \n"
-"and \n"
-"use of software components or arising out of  downloading software "
-"components from one of \n"
-"Linux-Mandrake \n"
-"sites  which are prohibited or restricted in some countries by local laws. "
-"This limited liability \n"
-"applies to, but is not restricted to, the strong cryptography components "
-"included in the Software \n"
-"Products.\n"
+"MandrakeSoft S.A.  \n"
 "\n"
 "\n"
 "5. Governing Laws \n"
 "\n"
 "If any portion of this agreement is held void, illegal or inapplicable by a "
-"court judgement, this \n"
+"court judgment, this \n"
 "portion is excluded from this contract. You remain bound by the other "
 "applicable sections of the \n"
 "agreement.\n"
@@ -4057,230 +4063,62 @@ msgid ""
 "France.\n"
 "All disputes on the terms of this license will preferably be settled out of "
 "court. As a last \n"
-"resort, \n"
-"the dispute will be referred to the appropriate Courts of Law of Paris - "
-"France.\n"
-"For any question on this document, please contact MandrakeSoft S.A.,  \n"
-"43, rue d'Aboukir, 75002 Paris - France\n"
+"resort, the dispute will be referred to the appropriate Courts of Law of "
+"Paris - France.\n"
+"For any question on this document, please contact MandrakeSoft S.A.  \n"
 msgstr ""
-" Introduction\n"
-"\n"
-"The operating system and the different components available in the "
-"Linux-Mandrake distribution \n"
-"shall be called the \"Software Products\" hereafter. The Software Products "
-"include, but are not \n"
-"restricted to, the set of programs, methods, rules and documentation related "
-"to the operating \n"
-"system and the different components of the Linux-Mandrake distribution.\n"
-"\n"
-"\n"
-"1. License Agreement\n"
-"\n"
-"Please read carefully this document. This document is a license agreement "
-"between you and  \n"
-"MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to "
-"the Software Products.\n"
-"By installing, duplicating or using the Software Products in any manner, you "
-"explicitly \n"
-"accept and fully agree to conform to the terms and conditions of this "
-"License. \n"
-"If you disagree with any portion of the License, you are not allowed to "
-"install, duplicate or use \n"
-"the Software Products. \n"
-"Any attempt to install, duplicate or use the Software Products in a manner "
-"which does not comply \n"
-"with the terms and conditions of this License is void and will terminate "
-"your rights under this \n"
-"License. Upon termination of the License,  you must immediately destroy all "
-"copies of the \n"
-"Software Products.\n"
-"\n"
-"\n"
-"2. The GPL License and Related Licenses\n"
-"\n"
-"The Software Products consist of components created by different persons or "
-"entities.  Most \n"
-"of these components are governed under the terms and conditions of the GNU "
-"General Public \n"
-"Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
-"licenses allow you to use, \n"
-"duplicate, adapt or redistribute the components which they cover. Please "
-"read carefully the terms \n"
-"and conditions of the license agreement for each component before using any "
-"component. Any question \n"
-"on a component license should be addressed to the component author and not "
-"to MandrakeSoft.\n"
-"The programs developed by MandrakeSoft S.A. are governed by the GPL License. "
-"Documentation written \n"
-"by MandrakeSoft S.A. is governed by a specific license. Please refer to the "
-"documentation for \n"
-"further details.\n"
-"Some versions of the Software Products may contain components which are not "
-"governed by the GPL \n"
-"License or similar agreements. Each such component is then governed by the "
-"terms and conditions \n"
-"of its own specific license. Please read carefully and comply with such "
-"specific licenses before \n"
-"you install, use or redistribute the said components. Such licenses will in "
-"general prevent the \n"
-"transfer,  duplication (except for backup purposes), redistribution, reverse "
-"engineering, \n"
-"de-assembly, \n"
-"de-compilation or modification of the component. Any breach of agreement "
-"will immediately terminate \n"
-"your rights under the specific license. Unless the specific license terms "
-"grant you such rights, \n"
-"you usually cannot install the programs on more than one system, or adapt it "
-"to be used on a \n"
-"network. \n"
-"In doubt, please contact directly the distributor or editor of the "
-"component. Transfer to third \n"
-"parties or copying of such components including the documentation is usually "
-"forbidden.\n"
-"\n"
-"\n"
-"3. Intellectual Property Rights\n"
-"\n"
-"All rights to the components of the Software Products belong to their "
-"respective authors and are \n"
-"protected by intellectual property and copyright laws applicable to software "
-"programs.\n"
-"MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
-"Products, as a whole or in \n"
-"parts,\n"
-"by all means and for all purposes.\n"
-"\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of "
-"MandrakeSoft S.A.  All rights \n"
-"are \n"
-"reserved. The duplication is forbidden without prior written consent by "
-"MandrakeSoft S.A.\n"
-"\n"
-"\n"
-"4. Limited Warranty\n"
-"\n"
-"The Software Products and attached documentation are provided \"as is\", "
-"with no warranty, to the \n"
-"extent permitted by law. Should the Software Products be defective, "
-"MandrakeSoft S.A. will at its \n"
-"own will either replace the Software Products, or reimburse the paid fee.\n"
-"This limited warranty is void if you fail to comply to the recommendations, "
-"instructions and \n"
-"conditions \n"
-"of use listed in the documentation or license agreements of the Software "
-"Products.\n"
-"To the extent permitted by law, MandrakeSoft S.A. will in no circumstances "
-"be liable for any \n"
-"special, \n"
-"incidental, direct or indirect damages whatsoever (including without "
-"limitation damages for loss of \n"
-"business, interruption of business, financial loss, legal fees and penalties "
-"resulting from a court \n"
-"judgement, or any other consequential loss) arising out of  the use or "
-"inability to use the \n"
-"Software \n"
-"Products, even if MandrakeSoft S.A. has been advised of the possibility or "
-"occurance of such \n"
-"damages.\n"
-"\n"
-"LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
-"COUNTRIES\n"
-"\n"
-"To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
-"in no circumstances, be \n"
-"liable for any special, incidental, direct or indirect damages whatsoever "
-"(including without \n"
-"limitation \n"
-"damages for loss of business, interruption of business, financial loss, "
-"legal fees and penalties \n"
-"resulting from a court judgement, or any other consequential loss) arising "
-"out of the possession \n"
-"and \n"
-"use of software components or arising out of  downloading software "
-"components from one of \n"
-"Linux-Mandrake \n"
-"sites  which are prohibited or restricted in some countries by local laws. "
-"This limited liability \n"
-"applies to, but is not restricted to, the strong cryptography components "
-"included in the Software \n"
-"Products.\n"
-"\n"
-"\n"
-"5. Governing Laws \n"
-"\n"
-"If any portion of this agreement is held void, illegal or inapplicable by a "
-"court judgement, this \n"
-"portion is excluded from this contract. You remain bound by the other "
-"applicable sections of the \n"
-"agreement.\n"
-"The terms and conditions of this License are governed by the Laws of "
-"France.\n"
-"All disputes on the terms of this license will preferably be settled out of "
-"court. As a last \n"
-"resort, \n"
-"the dispute will be referred to the appropriate Courts of Law of Paris - "
-"France.\n"
-"For any question on this document, please contact MandrakeSoft S.A.,  \n"
-"43, rue d'Aboukir, 75002 Paris - France\n"
 
-#: ../../install_steps_interactive.pm_.c:173
-msgid "Accept"
-msgstr "Godta"
-
-#: ../../install_steps_interactive.pm_.c:173
-msgid "Refuse"
-msgstr "Nekte"
-
-#: ../../install_steps_interactive.pm_.c:180
+#: ../../install_steps_interactive.pm_.c:158
 #: ../../standalone/keyboarddrake_.c:21
 msgid "Keyboard"
 msgstr "Tastatur"
 
-#: ../../install_steps_interactive.pm_.c:181
+#: ../../install_steps_interactive.pm_.c:159
 #: ../../standalone/keyboarddrake_.c:22
 msgid "Please, choose your keyboard layout."
 msgstr "Vennligst velg tastatur-oppsettet ditt."
 
-#: ../../install_steps_interactive.pm_.c:192
+#: ../../install_steps_interactive.pm_.c:170
 msgid "You can choose other languages that will be available after install"
 msgstr "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
 
-#: ../../install_steps_interactive.pm_.c:199
-#: ../../install_steps_interactive.pm_.c:534
+#: ../../install_steps_interactive.pm_.c:177
+#: ../../install_steps_interactive.pm_.c:512
 msgid "All"
 msgstr "Alle"
 
-#: ../../install_steps_interactive.pm_.c:207
-#: ../../install_steps_interactive.pm_.c:253
+#: ../../install_steps_interactive.pm_.c:185
+#: ../../install_steps_interactive.pm_.c:231
 msgid "Install Class"
 msgstr "Installeringsklasse"
 
-#: ../../install_steps_interactive.pm_.c:207
+#: ../../install_steps_interactive.pm_.c:185
 msgid "Which installation class do you want?"
 msgstr "Hvilken installasjonsklasse ønsker du?"
 
-#: ../../install_steps_interactive.pm_.c:209
+#: ../../install_steps_interactive.pm_.c:187
 msgid "Install/Update"
 msgstr "Installer/Oppdater"
 
-#: ../../install_steps_interactive.pm_.c:209
+#: ../../install_steps_interactive.pm_.c:187
 msgid "Is this an install or an update?"
 msgstr "Er dette en installering eller en oppdatering?"
 
-#: ../../install_steps_interactive.pm_.c:218
+#: ../../install_steps_interactive.pm_.c:196
 msgid "Recommended"
 msgstr "Anbefalt"
 
-#: ../../install_steps_interactive.pm_.c:221
-#: ../../install_steps_interactive.pm_.c:237
+#: ../../install_steps_interactive.pm_.c:199
+#: ../../install_steps_interactive.pm_.c:215
 msgid "Customized"
 msgstr "Egendefinert"
 
-#: ../../install_steps_interactive.pm_.c:222
-#: ../../install_steps_interactive.pm_.c:237
+#: ../../install_steps_interactive.pm_.c:200
+#: ../../install_steps_interactive.pm_.c:215
 msgid "Expert"
 msgstr "Ekspert"
 
-#: ../../install_steps_interactive.pm_.c:232
+#: ../../install_steps_interactive.pm_.c:210
 msgid ""
 "Are you sure you are an expert? \n"
 "You will be allowed to make powerful but dangerous things here.\n"
@@ -4294,67 +4132,67 @@ msgstr ""
 "Du vil bli spurt om ting som: ``Bruk skyggefil for passord?'',\n"
 "er du klar for å svare på denne type spørsmål?"
 
-#: ../../install_steps_interactive.pm_.c:242
+#: ../../install_steps_interactive.pm_.c:220
 msgid "Update"
 msgstr "Oppdater"
 
-#: ../../install_steps_interactive.pm_.c:248
+#: ../../install_steps_interactive.pm_.c:226
 msgid "Workstation"
 msgstr "Arbeidstasjon"
 
-#: ../../install_steps_interactive.pm_.c:249
+#: ../../install_steps_interactive.pm_.c:227
 msgid "Development"
 msgstr "Utvikling"
 
-#: ../../install_steps_interactive.pm_.c:250
+#: ../../install_steps_interactive.pm_.c:228
 msgid "Server"
 msgstr "Tjener"
 
-#: ../../install_steps_interactive.pm_.c:254
+#: ../../install_steps_interactive.pm_.c:232
 msgid "What is your system used for?"
 msgstr "Hva er systemet ditt brukt til?"
 
-#: ../../install_steps_interactive.pm_.c:270 ../../standalone/mousedrake_.c:24
+#: ../../install_steps_interactive.pm_.c:248 ../../standalone/mousedrake_.c:24
 msgid "Please, choose the type of your mouse."
 msgstr "Vennligst velg din musetype."
 
-#: ../../install_steps_interactive.pm_.c:277 ../../standalone/mousedrake_.c:40
+#: ../../install_steps_interactive.pm_.c:255 ../../standalone/mousedrake_.c:40
 msgid "Mouse Port"
 msgstr "Museport"
 
-#: ../../install_steps_interactive.pm_.c:278
+#: ../../install_steps_interactive.pm_.c:256
 msgid "Please choose on which serial port your mouse is connected to."
 msgstr "Vennligst velg hvilken serieport musen din koblet til."
 
-#: ../../install_steps_interactive.pm_.c:297
+#: ../../install_steps_interactive.pm_.c:275
 msgid "Configuring PCMCIA cards..."
 msgstr "Konfigurerer PCMCIA kort..."
 
-#: ../../install_steps_interactive.pm_.c:297
+#: ../../install_steps_interactive.pm_.c:275
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../../install_steps_interactive.pm_.c:301
+#: ../../install_steps_interactive.pm_.c:279
 msgid "Configuring IDE"
 msgstr "Konfigurerer IDE"
 
-#: ../../install_steps_interactive.pm_.c:301
+#: ../../install_steps_interactive.pm_.c:279
 msgid "IDE"
 msgstr "IDE"
 
-#: ../../install_steps_interactive.pm_.c:314
+#: ../../install_steps_interactive.pm_.c:292
 msgid "no available partitions"
 msgstr "ingen tilgjengelige partisjoner"
 
-#: ../../install_steps_interactive.pm_.c:317
+#: ../../install_steps_interactive.pm_.c:295
 msgid "Scanning partitions to find mount points"
 msgstr "Skanner partisjoner for å finne monteringspunkter"
 
-#: ../../install_steps_interactive.pm_.c:325
+#: ../../install_steps_interactive.pm_.c:303
 msgid "Choose the mount points"
 msgstr "Velg monteringspunktene"
 
-#: ../../install_steps_interactive.pm_.c:342
+#: ../../install_steps_interactive.pm_.c:320
 #, c-format
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
@@ -4371,7 +4209,7 @@ msgstr ""
 "\n"
 "Vil du miste alle partisjonene?\n"
 
-#: ../../install_steps_interactive.pm_.c:355
+#: ../../install_steps_interactive.pm_.c:333
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
@@ -4379,51 +4217,51 @@ msgstr ""
 "DiskDrake klarte ikke å lese partisjonstabellen korrekt.\n"
 "Fortsett på eget ansvar!"
 
-#: ../../install_steps_interactive.pm_.c:363
+#: ../../install_steps_interactive.pm_.c:341
 msgid "Root Partition"
 msgstr "Root-partisjon"
 
-#: ../../install_steps_interactive.pm_.c:364
+#: ../../install_steps_interactive.pm_.c:342
 msgid "What is the root partition (/) of your system?"
 msgstr "Hva er root-partisjonen (/) på systemet ditt?"
 
-#: ../../install_steps_interactive.pm_.c:378
+#: ../../install_steps_interactive.pm_.c:356
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen\n"
 "skal tre i kraft"
 
-#: ../../install_steps_interactive.pm_.c:402
+#: ../../install_steps_interactive.pm_.c:380
 msgid "Choose the partitions you want to format"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../../install_steps_interactive.pm_.c:412
+#: ../../install_steps_interactive.pm_.c:390
 msgid "Check bad blocks?"
 msgstr "Sjekke dårlige blokker?"
 
-#: ../../install_steps_interactive.pm_.c:423
+#: ../../install_steps_interactive.pm_.c:401
 msgid "Formatting partitions"
 msgstr "Formaterer partisjoner"
 
-#: ../../install_steps_interactive.pm_.c:427
+#: ../../install_steps_interactive.pm_.c:405
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Oppretter og formaterer fil %s"
 
-#: ../../install_steps_interactive.pm_.c:430
+#: ../../install_steps_interactive.pm_.c:408
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr ""
 "Ikke nok vekslingsplass til å fullføre installasjonen, vennligst legg til mer"
 
-#: ../../install_steps_interactive.pm_.c:436
+#: ../../install_steps_interactive.pm_.c:414
 msgid "Looking for available packages"
 msgstr "Ser etter tilgjengelige pakker"
 
-#: ../../install_steps_interactive.pm_.c:442
+#: ../../install_steps_interactive.pm_.c:420
 msgid "Finding packages to upgrade"
 msgstr "Finner pakker å oppgradere"
 
-#: ../../install_steps_interactive.pm_.c:459
+#: ../../install_steps_interactive.pm_.c:437
 #, c-format
 msgid ""
 "Your system has not enough space left for installation or upgrade (%d > %d)"
@@ -4431,38 +4269,38 @@ msgstr ""
 "Systemet ditt har ikke nok plass for installasjon eller oppgradering (%d > "
 "%d)"
 
-#: ../../install_steps_interactive.pm_.c:479
+#: ../../install_steps_interactive.pm_.c:457
 #, c-format
 msgid "Complete (%dMB)"
 msgstr "Ferdig (%dMB)"
 
-#: ../../install_steps_interactive.pm_.c:479
+#: ../../install_steps_interactive.pm_.c:457
 #, c-format
 msgid "Minimum (%dMB)"
 msgstr "Minimum (%dMB)"
 
-#: ../../install_steps_interactive.pm_.c:479
+#: ../../install_steps_interactive.pm_.c:457
 #, c-format
 msgid "Recommended (%dMB)"
 msgstr "Anbefalt (%dMB)"
 
-#: ../../install_steps_interactive.pm_.c:485
+#: ../../install_steps_interactive.pm_.c:463
 msgid "Custom"
 msgstr "Egendefinert"
 
-#: ../../install_steps_interactive.pm_.c:492
+#: ../../install_steps_interactive.pm_.c:470
 msgid "Select the size you want to install"
 msgstr "Velg størrelsen du ønsker å installere"
 
-#: ../../install_steps_interactive.pm_.c:527
+#: ../../install_steps_interactive.pm_.c:505
 msgid "Package Group Selection"
 msgstr "Valg pakkegruppe"
 
-#: ../../install_steps_interactive.pm_.c:535
+#: ../../install_steps_interactive.pm_.c:513
 msgid "Individual package selection"
 msgstr "Individuelt pakkevalg"
 
-#: ../../install_steps_interactive.pm_.c:584
+#: ../../install_steps_interactive.pm_.c:562
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
@@ -4472,12 +4310,12 @@ msgstr ""
 "Hvis du ikke har noen av CDene, klikk Avbryt.\n"
 "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
 
-#: ../../install_steps_interactive.pm_.c:589
+#: ../../install_steps_interactive.pm_.c:567
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr "CD-ROM merket \"%s\""
 
-#: ../../install_steps_interactive.pm_.c:617
+#: ../../install_steps_interactive.pm_.c:595
 msgid ""
 "Installing package %s\n"
 "%d%%"
@@ -4485,11 +4323,11 @@ msgstr ""
 "Installerer pakke %s\n"
 "%d%%"
 
-#: ../../install_steps_interactive.pm_.c:626
+#: ../../install_steps_interactive.pm_.c:604
 msgid "Post-install configuration"
 msgstr "Konfigurasjon postinstallering"
 
-#: ../../install_steps_interactive.pm_.c:651
+#: ../../install_steps_interactive.pm_.c:629
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -4563,92 +4401,92 @@ msgstr ""
 "Altadena California 91001\n"
 "USA"
 
-#: ../../install_steps_interactive.pm_.c:682
+#: ../../install_steps_interactive.pm_.c:660
 msgid "Choose a mirror from which to get the packages"
 msgstr "Velg et speil som pakkene kan hentes fra"
 
-#: ../../install_steps_interactive.pm_.c:690
+#: ../../install_steps_interactive.pm_.c:668
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
 
-#: ../../install_steps_interactive.pm_.c:693
+#: ../../install_steps_interactive.pm_.c:671
 msgid "Please choose the packages you want to install."
 msgstr "Vennligst velg pakkene du ønsker å installere."
 
-#: ../../install_steps_interactive.pm_.c:705
+#: ../../install_steps_interactive.pm_.c:683
 msgid "Which is your timezone?"
 msgstr "Hva er din tidsone?"
 
-#: ../../install_steps_interactive.pm_.c:707
+#: ../../install_steps_interactive.pm_.c:685
 msgid "Is your hardware clock set to GMT?"
 msgstr "Er maskinvareklokken din satt til GMT?"
 
-#: ../../install_steps_interactive.pm_.c:745
+#: ../../install_steps_interactive.pm_.c:723
 msgid "Which printing system do you want to use?"
 msgstr "Hvilket utskriftsystem ønsker du å bruke?"
 
-#: ../../install_steps_interactive.pm_.c:772
+#: ../../install_steps_interactive.pm_.c:750
 msgid "No password"
 msgstr "Intet passord"
 
-#: ../../install_steps_interactive.pm_.c:777
+#: ../../install_steps_interactive.pm_.c:755
 msgid "Use shadow file"
 msgstr "Bruk skyggefil"
 
-#: ../../install_steps_interactive.pm_.c:777
+#: ../../install_steps_interactive.pm_.c:755
 msgid "shadow"
 msgstr "skygge"
 
-#: ../../install_steps_interactive.pm_.c:778
+#: ../../install_steps_interactive.pm_.c:756
 msgid "MD5"
 msgstr "MD5"
 
-#: ../../install_steps_interactive.pm_.c:778
+#: ../../install_steps_interactive.pm_.c:756
 msgid "Use MD5 passwords"
 msgstr "Bruk MD5 passord"
 
-#: ../../install_steps_interactive.pm_.c:780
+#: ../../install_steps_interactive.pm_.c:758
 msgid "Use NIS"
 msgstr "Bruk NIS"
 
-#: ../../install_steps_interactive.pm_.c:780
+#: ../../install_steps_interactive.pm_.c:758
 msgid "yellow pages"
 msgstr "gule sider"
 
-#: ../../install_steps_interactive.pm_.c:786
+#: ../../install_steps_interactive.pm_.c:764
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
 
-#: ../../install_steps_interactive.pm_.c:793
+#: ../../install_steps_interactive.pm_.c:771
 msgid "Authentification NIS"
 msgstr "Autentifikasjon NIS"
 
-#: ../../install_steps_interactive.pm_.c:794
+#: ../../install_steps_interactive.pm_.c:772
 msgid "NIS Domain"
 msgstr "NIS-domene"
 
-#: ../../install_steps_interactive.pm_.c:794
+#: ../../install_steps_interactive.pm_.c:772
 msgid "NIS Server"
 msgstr "NIS-tjener"
 
-#: ../../install_steps_interactive.pm_.c:819
+#: ../../install_steps_interactive.pm_.c:797
 #: ../../standalone/adduserdrake_.c:36
 msgid "Accept user"
 msgstr "Godta bruker"
 
-#: ../../install_steps_interactive.pm_.c:819
+#: ../../install_steps_interactive.pm_.c:797
 #: ../../standalone/adduserdrake_.c:36
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: ../../install_steps_interactive.pm_.c:820
+#: ../../install_steps_interactive.pm_.c:798
 #: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid "(already added %s)"
 msgstr "(allerede lagt til %s)"
 
-#: ../../install_steps_interactive.pm_.c:820
+#: ../../install_steps_interactive.pm_.c:798
 #: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid ""
@@ -4658,48 +4496,48 @@ msgstr ""
 "Entre en bruker\n"
 "%s"
 
-#: ../../install_steps_interactive.pm_.c:822
+#: ../../install_steps_interactive.pm_.c:800
 #: ../../standalone/adduserdrake_.c:39
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../../install_steps_interactive.pm_.c:823 ../../printerdrake.pm_.c:93
+#: ../../install_steps_interactive.pm_.c:801 ../../printerdrake.pm_.c:93
 #: ../../printerdrake.pm_.c:127 ../../standalone/adduserdrake_.c:40
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../../install_steps_interactive.pm_.c:828
+#: ../../install_steps_interactive.pm_.c:806
 #: ../../standalone/adduserdrake_.c:45
 msgid "Shell"
 msgstr "Skall"
 
-#: ../../install_steps_interactive.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:808
 #: ../../standalone/adduserdrake_.c:47
 msgid "Icon"
 msgstr "Ikon"
 
-#: ../../install_steps_interactive.pm_.c:840
+#: ../../install_steps_interactive.pm_.c:818
 #: ../../standalone/adduserdrake_.c:57
 msgid "This password is too simple"
 msgstr "Dette passordet er for enkelt"
 
-#: ../../install_steps_interactive.pm_.c:841
+#: ../../install_steps_interactive.pm_.c:819
 #: ../../standalone/adduserdrake_.c:58
 msgid "Please give a user name"
 msgstr "Vennligst oppgi et brukernavn"
 
-#: ../../install_steps_interactive.pm_.c:842
+#: ../../install_steps_interactive.pm_.c:820
 #: ../../standalone/adduserdrake_.c:59
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde små bokstaver, tall, `-' og `_'"
 
-#: ../../install_steps_interactive.pm_.c:843
+#: ../../install_steps_interactive.pm_.c:821
 #: ../../standalone/adduserdrake_.c:60
 msgid "This user name is already added"
 msgstr "Denne brukeren er allerede lagt til"
 
-#: ../../install_steps_interactive.pm_.c:867
+#: ../../install_steps_interactive.pm_.c:845
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4730,19 +4568,19 @@ msgstr ""
 "en diskett\n"
 "i den første stasjonen og trykk \"Ok\"."
 
-#: ../../install_steps_interactive.pm_.c:883
+#: ../../install_steps_interactive.pm_.c:861
 msgid "First floppy drive"
 msgstr "Første diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:884
+#: ../../install_steps_interactive.pm_.c:862
 msgid "Second floppy drive"
 msgstr "Andre diskettstasjon"
 
-#: ../../install_steps_interactive.pm_.c:885
+#: ../../install_steps_interactive.pm_.c:863
 msgid "Skip"
 msgstr "Dropp"
 
-#: ../../install_steps_interactive.pm_.c:890
+#: ../../install_steps_interactive.pm_.c:868
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4767,32 +4605,32 @@ msgstr ""
 "etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
 "ditt?"
 
-#: ../../install_steps_interactive.pm_.c:899
+#: ../../install_steps_interactive.pm_.c:877
 msgid "Sorry, no floppy drive available"
 msgstr "Beklager, ingen diskettstasjon tilgjengelig"
 
-#: ../../install_steps_interactive.pm_.c:902
+#: ../../install_steps_interactive.pm_.c:880
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
 
-#: ../../install_steps_interactive.pm_.c:908
+#: ../../install_steps_interactive.pm_.c:886
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Sett inn en diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:911
+#: ../../install_steps_interactive.pm_.c:889
 msgid "Creating bootdisk"
 msgstr "Oppretter oppstartdiskett"
 
-#: ../../install_steps_interactive.pm_.c:918
+#: ../../install_steps_interactive.pm_.c:896
 msgid "Preparing bootloader"
 msgstr "Klargjør oppstartslaster"
 
-#: ../../install_steps_interactive.pm_.c:927
+#: ../../install_steps_interactive.pm_.c:905
 msgid "Do you want to use aboot?"
 msgstr "Ønsker du å bruke aboot?"
 
-#: ../../install_steps_interactive.pm_.c:930
+#: ../../install_steps_interactive.pm_.c:908
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -4800,80 +4638,80 @@ msgstr ""
 "Feil ved installasjon av aboot, \n"
 "prøve å installere selv om det ødelegger den første partisjonen?"
 
-#: ../../install_steps_interactive.pm_.c:939
+#: ../../install_steps_interactive.pm_.c:917
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
 
-#: ../../install_steps_interactive.pm_.c:953 ../../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:931 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr "Velkommen til Crackers"
 
-#: ../../install_steps_interactive.pm_.c:954 ../../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:932 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr "Dårlig"
 
-#: ../../install_steps_interactive.pm_.c:955 ../../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:933 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr "Lav"
 
-#: ../../install_steps_interactive.pm_.c:956 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:934 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr "Medium"
 
-#: ../../install_steps_interactive.pm_.c:957 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:935 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr "Høy"
 
-#: ../../install_steps_interactive.pm_.c:958 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:936 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr "Paranoid"
 
-#: ../../install_steps_interactive.pm_.c:972
+#: ../../install_steps_interactive.pm_.c:950
 msgid "Miscellaneous questions"
 msgstr "Forskjellige spørsmål"
 
-#: ../../install_steps_interactive.pm_.c:973
+#: ../../install_steps_interactive.pm_.c:951
 msgid "(may cause data corruption)"
 msgstr "(kan forårsake korrupsjon av data)"
 
-#: ../../install_steps_interactive.pm_.c:973
+#: ../../install_steps_interactive.pm_.c:951
 msgid "Use hard drive optimisations?"
 msgstr "Bruk harddisk-optimisering?"
 
-#: ../../install_steps_interactive.pm_.c:974 ../../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:952 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr "Velg sikkerhetsnivå"
 
-#: ../../install_steps_interactive.pm_.c:975
+#: ../../install_steps_interactive.pm_.c:953
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Presiser RAM-størrelse hvis det trengs (funnet %d MB)"
 
-#: ../../install_steps_interactive.pm_.c:977
+#: ../../install_steps_interactive.pm_.c:955
 msgid "Removable media automounting"
 msgstr "Fjernbart media automontering"
 
-#: ../../install_steps_interactive.pm_.c:979
+#: ../../install_steps_interactive.pm_.c:957
 msgid "Clean /tmp at each boot"
 msgstr "Tøm /tmp ved hver oppstart"
 
-#: ../../install_steps_interactive.pm_.c:982
+#: ../../install_steps_interactive.pm_.c:960
 msgid "Enable multi profiles"
 msgstr "Slå på multiprofiler"
 
-#: ../../install_steps_interactive.pm_.c:984
+#: ../../install_steps_interactive.pm_.c:962
 msgid "Enable num lock at startup"
 msgstr "Slå på num lock ved oppstart"
 
-#: ../../install_steps_interactive.pm_.c:987
+#: ../../install_steps_interactive.pm_.c:965
 msgid "Give the ram size in MB"
 msgstr "Oppgi ram-størrelsen i MB"
 
-#: ../../install_steps_interactive.pm_.c:989
+#: ../../install_steps_interactive.pm_.c:967
 msgid "Can't use supermount in high security level"
 msgstr "Kan ikke bruke supermount i høyt sikkerhetsnivå"
 
-#: ../../install_steps_interactive.pm_.c:991
+#: ../../install_steps_interactive.pm_.c:969
 msgid ""
 "beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
 "If you want to be root, you have to login as a user and then use \"su\".\n"
@@ -4887,7 +4725,7 @@ msgstr ""
 "Mere generelt, ikke forvent å bruke maskinen din til annet enn en tjener.\n"
 "Du har blitt advart."
 
-#: ../../install_steps_interactive.pm_.c:996
+#: ../../install_steps_interactive.pm_.c:974
 msgid ""
 "Be carefull, having numlock enabled causes a lot of keystrokes to\n"
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
@@ -4895,19 +4733,52 @@ msgstr ""
 "Vær forsiktig, å ha numlock slått på forårsaker at mange av tastene\n"
 "gir tall istedenfor vanlige bokstaver (f.eks: `p' gir `6')"
 
-#: ../../install_steps_interactive.pm_.c:1042
+#: ../../install_steps_interactive.pm_.c:1020
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
 "Ønsker du å generere en auto installeringsdiskett for linux replikasjon?"
 
-#: ../../install_steps_interactive.pm_.c:1044
+#: ../../install_steps_interactive.pm_.c:1022
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:1059
+#: ../../install_steps_interactive.pm_.c:1037
+#: ../../install_steps_interactive.pm_.c:1067
 msgid "Creating auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
+
+#: ../../install_steps_interactive.pm_.c:1092
+msgid ""
+"Some steps are not completed.\n"
+"\n"
+"Do you really want to quit now?"
+msgstr ""
+"Noen trinn er ikke fullført.\n"
+"\n"
+"Ønsker du virkelig å avslutte nå?"
+
+#: ../../install_steps_interactive.pm_.c:1101
+msgid ""
+"Congratulations, installation is complete.\n"
+"Remove the boot media and press return to reboot.\n"
+"\n"
+"For information on fixes which are available for this release of "
+"Linux-Mandrake,\n"
+"consult the Errata available from http://www.linux-mandrake.com/.\n"
+"\n"
+"Information on configuring your system is available in the post\n"
+"install chapter of the Official Linux-Mandrake User's Guide."
+msgstr ""
+"Gratulerer, installasjonen er fullført.\n"
+"Fjern oppstartsmediet og trykk return for å starte på nytt.\n"
+"\n"
+"For informasjon om endringer som er tilgjengelige for denne utgaven av "
+"Linux-Mandrake,\n"
+"sjekk errataen tilgjengelig fra http://www.linux-mandrake.com/.\n"
+"\n"
+"Informasjon om konfigurering av systemet ditt finnes i post\n"
+"install-kapittelet i Official Linux Mandrake User's Guide."
 
 #: ../../install_steps_newt.pm_.c:22
 #, c-format
@@ -5344,7 +5215,7 @@ msgid "Card IO_1"
 msgstr "Kort IO_1"
 
 #: ../../netconnect.pm_.c:154
-msgid "Your personnal phone number"
+msgid "Your personal phone number"
 msgstr "Ditt telefonnummer"
 
 #: ../../netconnect.pm_.c:156
@@ -5584,7 +5455,8 @@ msgid "Disconnect from Internet"
 msgstr "Koble ned fra Internett"
 
 #: ../../netconnect.pm_.c:575
-msgid "Configure Internet connection"
+#, fuzzy
+msgid "Configure network connection (LAN or Internet)"
 msgstr "Konfigurer Internett-tilkobling"
 
 #: ../../netconnect.pm_.c:578
@@ -5698,16 +5570,26 @@ msgstr "Konfigurer lokalt nettverk"
 msgid "Reconfigure local network"
 msgstr "Rekonfigurer lokalt nettverk"
 
-#: ../../netconnect.pm_.c:795
+#: ../../netconnect.pm_.c:791
+#, fuzzy
+msgid "Network configuration"
+msgstr "Nettverkskonfigurasjon"
+
+#: ../../netconnect.pm_.c:792
+#, fuzzy
+msgid "Do you want to restart the network"
+msgstr "Vil du teste konfigurasjonen?"
+
+#: ../../netconnect.pm_.c:797
 msgid "Disable networking"
 msgstr "slå av nettverk"
 
-#: ../../netconnect.pm_.c:805
+#: ../../netconnect.pm_.c:807
 #, fuzzy
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Koble opp mot Internett / Konfigurer lokalt nettverk"
 
-#: ../../netconnect.pm_.c:806
+#: ../../netconnect.pm_.c:808
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5715,15 +5597,15 @@ msgstr ""
 "Lokalt nettverk har allerede blitt konfigurert.\n"
 "Vil du:"
 
-#: ../../netconnect.pm_.c:807
+#: ../../netconnect.pm_.c:809
 msgid "How do you want to connect to the Internet?"
 msgstr "Hvordan vil du koble opp mot Internett?"
 
-#: ../../netconnect.pm_.c:828
+#: ../../netconnect.pm_.c:830
 msgid "Network Configuration"
 msgstr "Nettverkskonfigurasjon"
 
-#: ../../netconnect.pm_.c:829
+#: ../../netconnect.pm_.c:831
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6578,14 +6460,49 @@ msgstr "Installasjon av LILO mislykket. Følgende feil oppsto:"
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Deling av Internett tilkobling er slått på"
 
-#: ../../standalone/drakgw_.c:104 ../../standalone/drakgw_.c:123
-msgid "The setup of Internet connection sharing has already been done.\n"
+#: ../../standalone/drakgw_.c:104
+#, fuzzy
+msgid ""
+"The setup of Internet connection sharing has already been done.\n"
+"It's currently enabled.\n"
+"\n"
+"What would you like to do?"
 msgstr ""
 "Innstilling av deling av Internett tilkobling har allerede blitt gjort.\n"
+
+#: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:108
+#, fuzzy
+msgid "disable"
+msgstr "Tabell"
+
+#: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:118
+#: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:137
+msgid "dismiss"
+msgstr ""
+
+#: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:126
+#, fuzzy
+msgid "reconfigure"
+msgstr "Konfigurer X"
 
 #: ../../standalone/drakgw_.c:122
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Deling av Internett tilkobling er slått av"
+
+#: ../../standalone/drakgw_.c:123
+#, fuzzy
+msgid ""
+"The setup of Internet connection sharing has already been done.\n"
+"It's currently disabled.\n"
+"\n"
+"What would you like to do?"
+msgstr ""
+"Innstilling av deling av Internett tilkobling har allerede blitt gjort.\n"
+
+#: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:127
+#, fuzzy
+msgid "enable"
+msgstr "Tabell"
 
 #: ../../standalone/drakgw_.c:141
 msgid "Config file content could not be interpreted."
@@ -6596,12 +6513,26 @@ msgid "Internet Connection Sharing"
 msgstr "Deling av Internett tilkobling"
 
 #: ../../standalone/drakgw_.c:152
+#, fuzzy
 msgid ""
 "Your computer can be configured to share its Internet connection.\n"
 "\n"
-msgstr ""
-"Maskin din kan konfigureres til å dele dens Internett tilkobling.\n"
+"Note: you need a dedicated Network Adapter to set up a Local Area Network "
+"(LAN).\n"
 "\n"
+"Would you like to setup the Internet Connection Sharing?"
+msgstr ""
+"Nå når Internett-tilknytningen er konfigurert, kan\n"
+"maskinen din konfigureres til å dele Internett-tilknytningen.\n"
+"Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
+"nettverk (LAN).\n"
+"\n"
+"Ønsker du å sette opp deling av Internett-tilknytning?\n"
+
+#: ../../standalone/drakgw_.c:177
+#, fuzzy
+msgid "using module"
+msgstr "Oppringningsmodus"
 
 #: ../../standalone/drakgw_.c:210
 msgid "No network adapter on your system!"
@@ -6690,8 +6621,11 @@ msgid "Congratulations!"
 msgstr "Gratulerer!"
 
 #: ../../standalone/drakgw_.c:513
-msgid "Everything has been configured.\n"
-msgstr "Alt har blitt konfigurert.\n"
+msgid ""
+"Everything has been configured.\n"
+"You may now share Internet connection with other computers on your Local "
+"Area Network, using automatic network configuration (DHCP)."
+msgstr ""
 
 #: ../../standalone/draksec_.c:28
 msgid ""
@@ -6990,6 +6924,487 @@ msgstr "Finner tillatelser"
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
+
+# ../../share/compssUsers
+msgid "More Graphical Desktops (Gnome, IceWM)"
+msgstr ""
+
+# ../../share/compssUsers
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Tools to create and burn CD's"
+msgstr ""
+
+#, fuzzy
+msgid "Internet Tools"
+msgstr "Internett"
+
+msgid "Internet"
+msgstr "Internett"
+
+# ../../share/compssUsers
+msgid "Personnal Finance"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Graphics programs such as The Gimp"
+msgstr ""
+
+msgid "Office"
+msgstr "Office"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr ""
+
+#, fuzzy
+msgid "Multimedia - Graphics"
+msgstr "Multimedia"
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid ""
+"Chat (IRC or instant messaging) programs such as xchat, licq, gaim, and file "
+"transfer tools"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr ""
+
+# ../../share/compssUsers
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr ""
+
+#, fuzzy
+msgid "Multimedia - Video"
+msgstr "Multimedia"
+
+msgid "KDE"
+msgstr "KDE"
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr ""
+
+msgid "Multimedia"
+msgstr "Multimedia"
+
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr ""
+
+#, fuzzy
+msgid "Multimedia - Sound"
+msgstr "Multimedia"
+
+msgid "Gnome"
+msgstr "Gnome"
+
+msgid "Documentation"
+msgstr "Dokumentasjon"
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Graphics Manipulation"
+msgstr ""
+
+#, fuzzy
+msgid "Games"
+msgstr "Gnome"
+
+#, fuzzy
+msgid "Multimedia - CD Burning"
+msgstr "Multimedia"
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr ""
+
+# ../../share/compssUsers
+msgid "Databases"
+msgstr ""
+
+#~ msgid ""
+#~ " Introduction\n"
+#~ "\n"
+#~ "The operating system and the different components available in the "
+#~ "Linux-Mandrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software Products "
+#~ "include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation related "
+#~ "to the operating \n"
+#~ "system and the different components of the Linux-Mandrake distribution.\n"
+#~ "\n"
+#~ "\n"
+#~ "1. License Agreement\n"
+#~ "\n"
+#~ "Please read carefully this document. This document is a license agreement "
+#~ "between you and  \n"
+#~ "MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to "
+#~ "the Software Products.\n"
+#~ "By installing, duplicating or using the Software Products in any manner, you "
+#~ "explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a manner "
+#~ "which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy all "
+#~ "copies of the \n"
+#~ "Software Products.\n"
+#~ "\n"
+#~ "\n"
+#~ "2. The GPL License and Related Licenses\n"
+#~ "\n"
+#~ "The Software Products consist of components created by different persons or "
+#~ "entities.  Most \n"
+#~ "of these components are governed under the terms and conditions of the GNU "
+#~ "General Public \n"
+#~ "Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
+#~ "licenses allow you to use, \n"
+#~ "duplicate, adapt or redistribute the components which they cover. Please "
+#~ "read carefully the terms \n"
+#~ "and conditions of the license agreement for each component before using any "
+#~ "component. Any question \n"
+#~ "on a component license should be addressed to the component author and not "
+#~ "to MandrakeSoft.\n"
+#~ "The programs developed by MandrakeSoft S.A. are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by MandrakeSoft S.A. is governed by a specific license. Please refer to the "
+#~ "documentation for \n"
+#~ "further details.\n"
+#~ "Some versions of the Software Products may contain components which are not "
+#~ "governed by the GPL \n"
+#~ "License or similar agreements. Each such component is then governed by the "
+#~ "terms and conditions \n"
+#~ "of its own specific license. Please read carefully and comply with such "
+#~ "specific licenses before \n"
+#~ "you install, use or redistribute the said components. Such licenses will in "
+#~ "general prevent the \n"
+#~ "transfer,  duplication (except for backup purposes), redistribution, reverse "
+#~ "engineering, \n"
+#~ "de-assembly, \n"
+#~ "de-compilation or modification of the component. Any breach of agreement "
+#~ "will immediately terminate \n"
+#~ "your rights under the specific license. Unless the specific license terms "
+#~ "grant you such rights, \n"
+#~ "you usually cannot install the programs on more than one system, or adapt it "
+#~ "to be used on a \n"
+#~ "network. \n"
+#~ "In doubt, please contact directly the distributor or editor of the "
+#~ "component. Transfer to third \n"
+#~ "parties or copying of such components including the documentation is usually "
+#~ "forbidden.\n"
+#~ "\n"
+#~ "\n"
+#~ "3. Intellectual Property Rights\n"
+#~ "\n"
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to software "
+#~ "programs.\n"
+#~ "MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
+#~ "Products, as a whole or in \n"
+#~ "parts,\n"
+#~ "by all means and for all purposes.\n"
+#~ "\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of "
+#~ "MandrakeSoft S.A.  All rights \n"
+#~ "are \n"
+#~ "reserved. The duplication is forbidden without prior written consent by "
+#~ "MandrakeSoft S.A.\n"
+#~ "\n"
+#~ "\n"
+#~ "4. Limited Warranty\n"
+#~ "\n"
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law. Should the Software Products be defective, "
+#~ "MandrakeSoft S.A. will at its \n"
+#~ "own will either replace the Software Products, or reimburse the paid fee.\n"
+#~ "This limited warranty is void if you fail to comply to the recommendations, "
+#~ "instructions and \n"
+#~ "conditions \n"
+#~ "of use listed in the documentation or license agreements of the Software "
+#~ "Products.\n"
+#~ "To the extent permitted by law, MandrakeSoft S.A. will in no circumstances "
+#~ "be liable for any \n"
+#~ "special, \n"
+#~ "incidental, direct or indirect damages whatsoever (including without "
+#~ "limitation damages for loss of \n"
+#~ "business, interruption of business, financial loss, legal fees and penalties "
+#~ "resulting from a court \n"
+#~ "judgement, or any other consequential loss) arising out of  the use or "
+#~ "inability to use the \n"
+#~ "Software \n"
+#~ "Products, even if MandrakeSoft S.A. has been advised of the possibility or "
+#~ "occurance of such \n"
+#~ "damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+#~ "COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
+#~ "in no circumstances, be \n"
+#~ "liable for any special, incidental, direct or indirect damages whatsoever "
+#~ "(including without \n"
+#~ "limitation \n"
+#~ "damages for loss of business, interruption of business, financial loss, "
+#~ "legal fees and penalties \n"
+#~ "resulting from a court judgement, or any other consequential loss) arising "
+#~ "out of the possession \n"
+#~ "and \n"
+#~ "use of software components or arising out of  downloading software "
+#~ "components from one of \n"
+#~ "Linux-Mandrake \n"
+#~ "sites  which are prohibited or restricted in some countries by local laws. "
+#~ "This limited liability \n"
+#~ "applies to, but is not restricted to, the strong cryptography components "
+#~ "included in the Software \n"
+#~ "Products.\n"
+#~ "\n"
+#~ "\n"
+#~ "5. Governing Laws \n"
+#~ "\n"
+#~ "If any portion of this agreement is held void, illegal or inapplicable by a "
+#~ "court judgement, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out of "
+#~ "court. As a last \n"
+#~ "resort, \n"
+#~ "the dispute will be referred to the appropriate Courts of Law of Paris - "
+#~ "France.\n"
+#~ "For any question on this document, please contact MandrakeSoft S.A.,  \n"
+#~ "43, rue d'Aboukir, 75002 Paris - France\n"
+#~ msgstr ""
+#~ " Introduction\n"
+#~ "\n"
+#~ "The operating system and the different components available in the "
+#~ "Linux-Mandrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software Products "
+#~ "include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation related "
+#~ "to the operating \n"
+#~ "system and the different components of the Linux-Mandrake distribution.\n"
+#~ "\n"
+#~ "\n"
+#~ "1. License Agreement\n"
+#~ "\n"
+#~ "Please read carefully this document. This document is a license agreement "
+#~ "between you and  \n"
+#~ "MandrakeSoft S.A., 43, rue d'Aboukir, 75002 Paris - France, which applies to "
+#~ "the Software Products.\n"
+#~ "By installing, duplicating or using the Software Products in any manner, you "
+#~ "explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a manner "
+#~ "which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy all "
+#~ "copies of the \n"
+#~ "Software Products.\n"
+#~ "\n"
+#~ "\n"
+#~ "2. The GPL License and Related Licenses\n"
+#~ "\n"
+#~ "The Software Products consist of components created by different persons or "
+#~ "entities.  Most \n"
+#~ "of these components are governed under the terms and conditions of the GNU "
+#~ "General Public \n"
+#~ "Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
+#~ "licenses allow you to use, \n"
+#~ "duplicate, adapt or redistribute the components which they cover. Please "
+#~ "read carefully the terms \n"
+#~ "and conditions of the license agreement for each component before using any "
+#~ "component. Any question \n"
+#~ "on a component license should be addressed to the component author and not "
+#~ "to MandrakeSoft.\n"
+#~ "The programs developed by MandrakeSoft S.A. are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by MandrakeSoft S.A. is governed by a specific license. Please refer to the "
+#~ "documentation for \n"
+#~ "further details.\n"
+#~ "Some versions of the Software Products may contain components which are not "
+#~ "governed by the GPL \n"
+#~ "License or similar agreements. Each such component is then governed by the "
+#~ "terms and conditions \n"
+#~ "of its own specific license. Please read carefully and comply with such "
+#~ "specific licenses before \n"
+#~ "you install, use or redistribute the said components. Such licenses will in "
+#~ "general prevent the \n"
+#~ "transfer,  duplication (except for backup purposes), redistribution, reverse "
+#~ "engineering, \n"
+#~ "de-assembly, \n"
+#~ "de-compilation or modification of the component. Any breach of agreement "
+#~ "will immediately terminate \n"
+#~ "your rights under the specific license. Unless the specific license terms "
+#~ "grant you such rights, \n"
+#~ "you usually cannot install the programs on more than one system, or adapt it "
+#~ "to be used on a \n"
+#~ "network. \n"
+#~ "In doubt, please contact directly the distributor or editor of the "
+#~ "component. Transfer to third \n"
+#~ "parties or copying of such components including the documentation is usually "
+#~ "forbidden.\n"
+#~ "\n"
+#~ "\n"
+#~ "3. Intellectual Property Rights\n"
+#~ "\n"
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to software "
+#~ "programs.\n"
+#~ "MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
+#~ "Products, as a whole or in \n"
+#~ "parts,\n"
+#~ "by all means and for all purposes.\n"
+#~ "\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of "
+#~ "MandrakeSoft S.A.  All rights \n"
+#~ "are \n"
+#~ "reserved. The duplication is forbidden without prior written consent by "
+#~ "MandrakeSoft S.A.\n"
+#~ "\n"
+#~ "\n"
+#~ "4. Limited Warranty\n"
+#~ "\n"
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law. Should the Software Products be defective, "
+#~ "MandrakeSoft S.A. will at its \n"
+#~ "own will either replace the Software Products, or reimburse the paid fee.\n"
+#~ "This limited warranty is void if you fail to comply to the recommendations, "
+#~ "instructions and \n"
+#~ "conditions \n"
+#~ "of use listed in the documentation or license agreements of the Software "
+#~ "Products.\n"
+#~ "To the extent permitted by law, MandrakeSoft S.A. will in no circumstances "
+#~ "be liable for any \n"
+#~ "special, \n"
+#~ "incidental, direct or indirect damages whatsoever (including without "
+#~ "limitation damages for loss of \n"
+#~ "business, interruption of business, financial loss, legal fees and penalties "
+#~ "resulting from a court \n"
+#~ "judgement, or any other consequential loss) arising out of  the use or "
+#~ "inability to use the \n"
+#~ "Software \n"
+#~ "Products, even if MandrakeSoft S.A. has been advised of the possibility or "
+#~ "occurance of such \n"
+#~ "damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+#~ "COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
+#~ "in no circumstances, be \n"
+#~ "liable for any special, incidental, direct or indirect damages whatsoever "
+#~ "(including without \n"
+#~ "limitation \n"
+#~ "damages for loss of business, interruption of business, financial loss, "
+#~ "legal fees and penalties \n"
+#~ "resulting from a court judgement, or any other consequential loss) arising "
+#~ "out of the possession \n"
+#~ "and \n"
+#~ "use of software components or arising out of  downloading software "
+#~ "components from one of \n"
+#~ "Linux-Mandrake \n"
+#~ "sites  which are prohibited or restricted in some countries by local laws. "
+#~ "This limited liability \n"
+#~ "applies to, but is not restricted to, the strong cryptography components "
+#~ "included in the Software \n"
+#~ "Products.\n"
+#~ "\n"
+#~ "\n"
+#~ "5. Governing Laws \n"
+#~ "\n"
+#~ "If any portion of this agreement is held void, illegal or inapplicable by a "
+#~ "court judgement, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out of "
+#~ "court. As a last \n"
+#~ "resort, \n"
+#~ "the dispute will be referred to the appropriate Courts of Law of Paris - "
+#~ "France.\n"
+#~ "For any question on this document, please contact MandrakeSoft S.A.,  \n"
+#~ "43, rue d'Aboukir, 75002 Paris - France\n"
+
+#~ msgid ""
+#~ "Your computer can be configured to share its Internet connection.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Maskin din kan konfigureres til å dele dens Internett tilkobling.\n"
+#~ "\n"
+
+#~ msgid "Everything has been configured.\n"
+#~ msgstr "Alt har blitt konfigurert.\n"
 
 #~ msgid "Connect to Internet with a normal modem"
 #~ msgstr "Koble opp mot Internett med vanlig modem"
@@ -7740,36 +8155,6 @@ msgstr "Finne tillatelser vil ta litt tid"
 
 #~ msgid "Installation of SILO failed. The following error occured:"
 #~ msgstr "Installasjon av SILO mislykket. Følgende feil oppsto:"
-
-#~ msgid ""
-#~ "Some steps are not completed.\n"
-#~ "\n"
-#~ "Do you really want to quit now?"
-#~ msgstr ""
-#~ "Noen trinn er ikke fullført.\n"
-#~ "\n"
-#~ "Ønsker du virkelig å avslutte nå?"
-
-#~ msgid ""
-#~ "Congratulations, installation is complete.\n"
-#~ "Remove the boot media and press return to reboot.\n"
-#~ "\n"
-#~ "For information on fixes which are available for this release of "
-#~ "Linux-Mandrake,\n"
-#~ "consult the Errata available from http://www.linux-mandrake.com/.\n"
-#~ "\n"
-#~ "Information on configuring your system is available in the post\n"
-#~ "install chapter of the Official Linux-Mandrake User's Guide."
-#~ msgstr ""
-#~ "Gratulerer, installasjonen er fullført.\n"
-#~ "Fjern oppstartsmediet og trykk return for å starte på nytt.\n"
-#~ "\n"
-#~ "For informasjon om endringer som er tilgjengelige for denne utgaven av "
-#~ "Linux-Mandrake,\n"
-#~ "sjekk errataen tilgjengelig fra http://www.linux-mandrake.com/.\n"
-#~ "\n"
-#~ "Informasjon om konfigurering av systemet ditt finnes i post\n"
-#~ "install-kapittelet i Official Linux Mandrake User's Guide."
 
 #~ msgid "Shutting down"
 #~ msgstr "Stenger av"
