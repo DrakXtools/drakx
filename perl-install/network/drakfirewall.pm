@@ -62,7 +62,7 @@ my @all_servers =
    force_default_selection => 0,
   },
   {
-   name => "BitTorrent",
+   name => N_("BitTorrent"),
    ports => '6881:6999/tcp',
    hide => 1,
    pkg => 'bittorrent bittorrent-shadowsclient',
