@@ -1,3 +1,73 @@
+2001/03/05  dam's  <damien@mandrakesoft.com>
+
+	* Makefile: added pixmaps copying
+
+	* standalone/draknet: required gtk only if needed, added redirection to
+	newt if needed
+
+	* netconnect.pm: $mouse->{device} is set if it doesn't exists.
+	corrected short circuit if network install
+	corrected bad end message,
+	added copying of resolv.conf & modules.conf
+
+	* install2.pm: moved askrootpasswd and adduser before network conf
+
+	* network.pm: removed old NS0 fetching. /etc/resolv.conf is read in
+	install2.pm now
+	removed setdefaultroute and sethostname
+
+2001/03/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: Updated Latvian, Belarussian and Spanish files
+
+2001/03/05  Pixel  <pixel@mandrakesoft.com>
+
+	* lvm.pm (lv_create): fix typo
+
+	* bootloader.pm: add use devices
+	(install_grub): ensure the translated messages are not too big the hard
+	way
+
+	* install_any.pm (generate_automatic_stage1_params): replace
+	generate_ks_cfg
+	(install_urpmi): have "use hdlist ..." in any case
+
+	* my_gtk.pm: XSetInputFocus now done in perl-GTK
+	(_create_window): don't care about c::XSetInputFocus not existing
+
+	* any.pm (setupBootloader): pixelization
+	(setupBootloader): fix call to get_append
+
+	* interactive.pm (vnew): cleanup
+
+	* common.pm (salt): cleanup
+
+	* install_steps_interactive.pm (generateAutoInstFloppy): use
+	generate_automatic_stage1_params
+
+	* c/stuff.xs.pm: XSetInputFocus now done in perl-GTK
+
+	* c/Makefile.PL: compile fix
+
+	* diskdrake.pm (create_buttons4partitions_): fix for displaying LVM
+
+	* Xconfigurator.pm (xtest): use external xtest if standalone
+
+	* install2.pm (main): remove unloading vfat (not needed anymore with
+	mdk-stage1)
+
 2001/03/04  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
