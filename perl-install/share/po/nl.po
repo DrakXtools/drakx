@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-05 14:15+0100\n"
+"POT-Creation-Date: 2003-03-12 17:27+0100\n"
+"PO-Revision-Date: 2003-03-12 19:14+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +125,7 @@ msgstr "Alle talen"
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
-msgstr "Unicode in eerste instantie gebruiken"
+msgstr "Overal Unicode gebruiken"
 
 #: ../../any.pm:1
 #, c-format
@@ -146,7 +146,7 @@ msgstr "Kies de taal die u wenst te gebruiken."
 #: ../../any.pm:1
 #, c-format
 msgid "Choose the window manager to run:"
-msgstr "Selecteer de werkomgeving die u wilt gebruiken:"
+msgstr "Kies de te gebruiken werkomgeving:"
 
 #: ../../any.pm:1
 #, c-format
@@ -161,14 +161,12 @@ msgstr "Wilt u van deze mogelijkheid gebruik maken?"
 #: ../../any.pm:1
 #, c-format
 msgid "I can set up your computer to automatically log on one user."
-msgstr ""
-"Het is mogelijk uw computer zo in te stellen dat automatisch één gebruiker "
-"wordt aangemeld."
+msgstr "Automatische aanmelding van één gebruiker is instelbaar."
 
 #: ../../any.pm:1
 #, c-format
 msgid "Autologin"
-msgstr "Automatisch aanmelden"
+msgstr "Auto-aanmelden"
 
 #: ../../any.pm:1
 #, c-format
@@ -206,7 +204,7 @@ msgstr "Echte naam"
 #: ../../any.pm:1
 #, c-format
 msgid "Accept user"
-msgstr "Gebruiker aanvaarden"
+msgstr "Gebruiker OK"
 
 #: ../../any.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
@@ -222,7 +220,7 @@ msgid ""
 "Enter a user\n"
 "%s"
 msgstr ""
-"Geef een gebruiker in\n"
+"Voer gebruiker in\n"
 "%s"
 
 #: ../../any.pm:1
@@ -250,7 +248,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Please give a user name"
-msgstr "Gelieve een gebruikersnaam in te geven"
+msgstr "Geef een gebruikersnaam"
 
 #: ../../any.pm:1
 #, c-format
@@ -261,7 +259,7 @@ msgstr "Dit wachtwoord is te eenvoudig"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Please try again"
-msgstr "Gelieve opnieuw te proberen"
+msgstr "Probeert u het opnieuw"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -276,12 +274,12 @@ msgstr "(%s reeds toegevoegd)"
 #: ../../any.pm:1
 #, c-format
 msgid "access to compilation tools"
-msgstr "toegang tot compileer-gereedschappen"
+msgstr "toegang tot compileerprogrammatuur"
 
 #: ../../any.pm:1
 #, c-format
 msgid "access to network tools"
-msgstr "toegang tot netwerk-gereedschappen"
+msgstr "toegang tot netwerkprogrammatuur"
 
 #: ../../any.pm:1
 #, c-format
@@ -296,7 +294,7 @@ msgstr "\"su\" toestaan"
 #: ../../any.pm:1
 #, c-format
 msgid "access to rpm tools"
-msgstr "toegang tot rpm-gereedschappen"
+msgstr "toegang tot rpm-programmatuur"
 
 #: ../../any.pm:1
 #, c-format
@@ -309,7 +307,7 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
-"Hier zijn de waardes voor LILO.\n"
+"Hier zijn de waardes voor uw opstartmenu tot dusver.\n"
 "U kunt er enkele toevoegen of de bestaande wijzigen."
 
 #: ../../any.pm:1
@@ -340,12 +338,12 @@ msgstr "Welk type waarde wenst u toe te voegen?"
 #: ../../any.pm:1
 #, c-format
 msgid "This label is already used"
-msgstr "Deze naam wordt al gebruikt"
+msgstr "Dit label is al in gebruik"
 
 #: ../../any.pm:1
 #, c-format
 msgid "You must specify a root partition"
-msgstr "U dient een hoofdmap(root)-partitie aan te geven"
+msgstr "U dient een root-partitie aan te geven"
 
 #: ../../any.pm:1
 #, c-format
@@ -445,7 +443,7 @@ msgstr "Open Firmware-vertraging"
 #: ../../any.pm:1
 #, c-format
 msgid "Boot device"
-msgstr "Boot-apparaat"
+msgstr "Opstartapparaat"
 
 #: ../../any.pm:1
 #, c-format
@@ -592,7 +590,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Creating bootdisk..."
-msgstr "Bezig met het aanmaken van de opstart-diskette"
+msgstr "Aanmaken van de opstart-diskette..."
 
 #: ../../any.pm:1
 #, c-format
@@ -634,12 +632,13 @@ msgid ""
 "failures. Would you like to create a bootdisk for your system?\n"
 "%s"
 msgstr ""
-"Een bootdiskette zorgt ervoor dat u nog in uw Linux-systeem kan zonder\n"
-"afhankelijk te zijn van de normale bootloader. Dit is handig als u LILO\n"
+"Een opstartdiskette zorgt ervoor dat u nog in uw Linux-systeem kan zonder\n"
+"afhankelijk te zijn van de normale opstartlader. Dit is handig als u LILO\n"
 "(of grub) niet wil installeren op uw systeem, of als een ander "
 "besturingssysteem\n"
-"LILO verwijdert, of LILO werkt niet met uw hardware-configuratie.\n"
-"Een bootdiskette kan ook gebruikt worden met het Mandrake-reddings-image,\n"
+"LILO verwijdert, of LILO niet werkt met uw apparatuurconfiguratie.\n"
+"Een opstartdiskette kan ook gebruikt worden met het Mandrake-reddings-"
+"image,\n"
 "waardoor het veel makkelijker wordt om te herstellen van grote systeem-\n"
 "fouten. Wil u nu een opstartdiskette aanmaken voor uw systeem?\n"
 "%s"
@@ -1151,6 +1150,70 @@ msgid ""
 "be run on your machine. If you plan to use this machine as a server it's a\n"
 "good idea to review this setup."
 msgstr ""
+"Bij wijze van overzicht zal het installatieprogramma een lijstje tonen\n"
+"van diverse informatie die het heeft over uw computer.\n"
+"Afhankelijk van welke apparatuur u heeft, krijgt u enkele of alle van de\n"
+"onderstaande punten te zien. Elk punt bestaat uit het te configureren item,\n"
+"gevolgd door een korte samenvatting van de huidige configuratie. Klik op\n"
+"de corresponderende \"Configureren\"-knop om die aan te passen.\n"
+"\n"
+" * \"Toetsenbord\": de huidige toetsenbordindeling nagaan en zonodig\n"
+"aanpassen.\n"
+" * \"Land\": de huidige landselectie nagaan. Indien u zich niet in dit\n"
+"land bevindt, klik dan op de \"Configureren\"-knop om een ander land te\n"
+"kiezen. Als uw land niet in de eerste getoonde lijst staat, klik dan op\n"
+"de \"Meer\"-knop om de complete landenlijst te zien.\n"
+"\n"
+" * \"Tijdzone\": Normaal gesproken leidt DrakX uw tijdzone af aan de hand\n"
+"van het land dat u gekozen heeft. U kunt op de \"Configureren\" knop\n"
+"drukken als dit incorrect is.\n"
+"\n"
+" * \"Muis\": de huidige muisconfiguratie nagaan en zonodig op de knop "
+"klikken om hem aan te passen.\n"
+"\n"
+" * \"Printer\": klikken op de \"Configureren\"-knop zal de\n"
+"printerconfiguratie-wizard openen. Raadpleeg het corresponderende\n"
+"hoofdstuk van de ``Beginnershandleiding'' voor meer informatie over\n"
+"hoe u een nieuwe printer instelt. De daar getoonde interface\n"
+"lijkt op degene die tijdens de installatie gebruikt wordt.\n"
+"\n"
+" * \"Geluidskaart\": indien een geluidskaart gevonden is op uw systeem,\n"
+"wordt dat hier weergegeven. In het geval dat de aangegeven geluidskaart\n"
+"niet degene is die daadwerkelijk aanwezig is in uw computer, dan kunt u\n"
+"op deze knop klikken en een ander stuurprogramma uitkiezen.\n"
+"\n"
+" * \"Grafische interface\": normaal gesproken configureert DrakX uw\n"
+" grafische interface in een resolutie van \"800x600\" of \"1024x768\".\n"
+"Indien daarmee niet tevreden bent, klik dan op de \"Configureren\"-knop\n"
+"om uw grafische interface te herconfigureren.\n"
+"\n"
+" * \"TV-kaart\": indien een TV-kaart gevonden is op uw systeem, wordt\n"
+"dat hier weergegeven. In het geval dat u een TV-kaart heeft die niet is\n"
+"gevonden, klik dan op \"Configureren\" om te trachten deze handmatig te\n"
+"configureren.\n"
+"\n"
+"* \"ISDN-kaart\": indien een ISDN-kaart gevonden is op uw systeem, wordt\n"
+"dat hier weergegeven. U kunt op \"Configureren\" klikken om de parameters\n"
+"die erbij horen aan te passen.\n"
+"\n"
+" * \"Netwerk\": Indien u nu uw internettoegang of toegang tot het lokale\n"
+"netwerk wilt instellen.\n"
+"\n"
+" * \"Beveiligingsniveau\": dit item biedt u de mogelijkheid het \n"
+"beveiligingsniveau ingesteld in een eerdere stap, opnieuw te definiëren.\n"
+"\n"
+" * \"Firewall\": indien u van plan bent uw computer te verbinden met het\n"
+"Internet dan is het een goed idee om uzelf te beschermen tegen indringers\n"
+"door een firewall op te zetten. Raadpleeg het corresponderende hoofdstuk\n"
+"uit de ``Beginnershandleiding'' voor details over de firewall-instellingen.\n"
+"\n"
+" * \"Opstartlader\": indien u uw opstartlader-configuratie wenst te \n"
+"veranderen, klikt u op die knop. Alleen aankomen als u een gevorderde\n"
+"gebruiker bent.\n"
+"\n"
+" * \"Diensten\": U bent hier in staat om de diensten die op uw computer\n"
+"actief zullen zijn, fijn af te regelen. Indien u deze computer als server\n"
+"gaat inzetten dan is het een goed idee om deze instellingen na te lopen."
 
 #: ../../help.pm:1
 #, c-format
@@ -1338,7 +1401,7 @@ msgstr ""
 "te bekijken."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1362,27 +1425,22 @@ msgstr ""
 "SCSI-kaart(en) in uw systeem. Als een SCSI-kaart gevonden is, zal\n"
 "DrakX automatisch het geschikte stuurprogramma installeren.\n"
 "\n"
-"Omdat hardware-bespeuring niet altijd gegarandeerd foutloos werkt, zal\n"
-"DrakX u vragen of er een PCI SCSI-kaart aanwezig is in uw computer.\n"
-"Wanneer u op \"Ja\" klikt krijgt u een lijst van SCSI-kaarten te zien\n"
-"waaruit u kunt kiezen. Klik op \"Nee\" indien u geen SCSI-hardware heeft.\n"
-"In het geval dat u niet zeker bent dan kunt u de lijst van gevonden\n"
-"apparatuur in uw computer nagaan door \"Hardware-info bekijken\" te\n"
-"selecteren en op \"Volgende ->\" te klikken. Bekijk de lijst en klik\n"
-"vervolgens op de \"Volgende ->\"-knop om terug te gaan naar de\n"
-"SCSI-interface-vraag.\n"
+"Omdat hardware-bespeuring niet altijd gegarandeerd foutloos werkt,\n"
+"is het mogelijk dat DrakX uw harde schijven niet vindt. In dat geval\n"
+"zult u uw apparatuur handmatig moeten specificeren.\n"
 "\n"
-"Indien u uw PCI SCSI adapter handmatig heeft moeten opgeven zal DrakX\n"
-"vragen of u er opties voor wilt specificeren. U kunt het beste DrakX\n"
-"toestaan om de apparatuur te onderzoeken om na te gaan of er\n"
-"kaart-specifieke opties nodig zijn om de adapter te initialiseren.\n"
-"Deze stap verloopt normaal gesproken zonder problemen.\n"
+"In het geval dat u handmatig uw PCI SCSI-adapter heeft moeten specificeren,\n"
+"zal DrakX u vragen of u er opties aan wilt meegeven. Staat u DrakX toe om\n"
+"de apparatuur na te gaan voor kaartspecifieke opties die nodig zijn om de\n"
+"adapter te initialiseren. In de meeste gevallen zal DrakX deze stap\n"
+"probleemloos doorlopen.\n"
 "\n"
-"Als DrakX niet in staat is om te onderzoeken welke opties doorgegeven\n"
-"moeten worden, zult u handmatig het stuurprogramma moeten configureren."
+"Als DrakX niet in staat is om automatisch te onderzoeken welke opties\n"
+"doorgegeven moeten worden aan de apparatuur, zult u handmatig het\n"
+"stuurprogramma moeten configureren."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1410,9 +1468,10 @@ msgid ""
 "Center and clicking the expert button."
 msgstr ""
 "Het is nu tijd een afdruksysteem voor uw computer te selecteren. Andere\n"
-"besturingssystemen geven u er wellicht maar één, maar Mandrake\n"
+"besturingssystemen geven u er wellicht maar één, maar Mandrake Linux\n"
 "biedt er twee. Elk van deze afdruksystemen is het meest geschikt voor\n"
 "een bepaald type configuratie.\n"
+"\n"
 " * \"pdq\" - een afkorting van \"print, don't queue\", is de keuze indien\n"
 "u een directe verbinding tussen uw computer en uw printer heeft en u\n"
 "in staat wilt zijn om printtaken snel te stoppen in het geval van\n"
@@ -1458,6 +1517,24 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\")."
 msgstr ""
+"LILO en GRUB zijn opstartladers voor GNU/Linux.. Normaal gesproken gaat\n"
+"deze stap volkomen automatisch. DrakX zal de bootsector van de schijf\n"
+"analyseren en handelen naar bevind van zaken:\n"
+"\n"
+" * als een Windows-bootsector is gevonden, dan zal het deze vervangen door "
+"een GRUB/LILO bootsector. Op deze manier zult u de mogelijkheid hebben om "
+"ofwel GNU/Linux te starten, ofwel een ander besturingssysteem.\n"
+"\n"
+" * als een GRUB- of LILO-bootsector is gevonden, dan zal het deze vervangen "
+"door een nieuwe.\n"
+"\n"
+"Wanneer dit niet bepaald kan worden dan zal DrakX u vragen waar de\n"
+"opstartlader geplaatst dient te worden.\n"
+"\n"
+"\"Opstartapparaat\": in de meeste gevallen zult u de standaardinstelling\n"
+"(\"Eerste sector van station (MBR)\") niet veranderen, maar indien u dit\n"
+"prefereert kan de opstartlader geïnstalleerd worden op de tweede harde\n"
+"schijf (\"/dev/hdb\") of zelfs een diskette (\"Op diskette\")."
 
 #: ../../help.pm:1
 #, c-format
@@ -1696,7 +1773,7 @@ msgstr ""
 "over het scherm beweegt wanneer u uw muis beweegt."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -1732,15 +1809,21 @@ msgstr ""
 "andere talen zal de taalspecifieke bestanden voor systeemdocumentatie\n"
 "en toepassingen installeren. Als u bijvoorbeeld gastheer bent voor Spaanse\n"
 "gebruikers op uw machine, selecteert u Nederlands als eerste taal in het\n"
-"boom-overzicht en in de Geavanceerd-afdeling selecteert u \"Spaans\".\n"
+"boom-overzicht en in de Geavanceerd-afdeling selecteert u \"Espanol\".\n"
 "\n"
-"Merk op dat meerdere talen geïnstalleerd kunnen worden. Zodra u enige\n"
-"extra taalgebieden heeft geselecteerd, klikt u op de \"Volgende ->\"-knop\n"
-"om verder te gaan.\n"
+"Merk op dat er geen beperking is in het aantal extra talen. U kunt er\n"
+"meerdere kiezen of ze zelfs allemaal installeren door het \"Alle talen\"\n"
+"vakje aan te kruisen. Ondersteuning voor een taal selecteren betekent dat\n"
+"vertalingen, lettertypen, spellingscontrole etc. voor die taal zullen\n"
+"worden geïnstalleerd. Daarnaast kunt u met het vakje\n"
+"\"Overal Unicode gebruiken\" het systeem dwingen Unicode (UTF-8) te\n"
+"gebruiken. Merk echter op dat dit een experimentele functie is. Mocht u\n"
+"meerdere talen selecteren die verschillende coderingen vereisen dan zal\n"
+"Unicode-ondersteuning sowieso geïnstalleerd worden.\n"
 "\n"
 "Om te schakelen tussen de diverse talen die op uw computer zijn "
 "geïnstalleerd,\n"
-"kuny u de opdracht \"/usr/sbin/localedrake\" uitvoeren als \"root\" om de "
+"kunt u de opdracht \"/usr/sbin/localedrake\" uitvoeren als \"root\" om de "
 "taal\n"
 "voor het gehele systeem te veranderen. Het uitvoeren van deze opdracht als\n"
 "een gewone gebruiker zal slechts de taalinstellingen voor die individuele\n"
@@ -1832,7 +1915,7 @@ msgstr ""
 "afgeraden."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
 "country, click on the \"Configure\" button and choose another one. If your\n"
@@ -1840,7 +1923,9 @@ msgid ""
 "the complete country list."
 msgstr ""
 "\"Land\": de huidige landselectie nagaan. Indien u zich niet in dit land\n"
-"bevindt, klik dan op de knop en kies een ander land."
+"bevindt, klik dan op de \"Configureren\"-knop en kies een ander land.Als uw "
+"land niet in de eerste getoonde lijst staat, klik dan op de\n"
+"\"Meer\"-knop om de complete landenlijst te zien."
 
 #: ../../help.pm:1
 #, c-format
@@ -2075,7 +2160,7 @@ msgstr ""
 "en ramdisk beeldbestand in op te slaan voor opstart-noodgevallen."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -2090,14 +2175,12 @@ msgstr ""
 "het beveiligingsniveau hoger ingesteld zou moeten zijn als de computer\n"
 "cruciale gegevens bevat, of als hij direct is blootgesteld aan het\n"
 "internet. Een hoger beveiligingsniveau gaat meestal echter ten koste\n"
-"van gebruiksgemak. U zij verwezen naar het \"msec\"-hoofdstuk van de\n"
-"``Opdrachtregelhandleiding'' voor meer informatie over de betekenis van\n"
-"deze niveaus.\n"
+"van gebruiksgemak.\n"
 "\n"
 "Als u niet weet wat te kiezen, behoudt u de standaard optie."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2115,15 +2198,15 @@ msgstr ""
 "dat sommige pakketten vernieuwd zijn sinds het moment dat het werd\n"
 "uitgebracht. Sommige onvolkomenheden kunnen gerepareerd zijn en\n"
 "beveiligingsproblemen opgelost. Om u te kunnen laten profiteren van\n"
-"deze vernieuwingen kunt u ze nu downloaden van het internet.\n"
+"deze vernieuwingen kunt u ze nu ophalen van het internet.\n"
 "Kies \"Ja\" indien u een werkende internetverbinding heeft, of \"Nee\"\n"
 "als u liever later vernieuwde pakketten installeert.\n"
 "\n"
-"Wanneer u op \"Ja\" klikt verschijnt er een lijst van plaatsen waar\n"
+"Wanneer u \"Ja\" kiest, verschijnt er een lijst van plaatsen waar\n"
 "vernieuwingen van kunnen worden opgehaald. Kies degene waar\n"
 "u zich het dichtst bij in de buurt bevindt. Daarna verschijnt een\n"
 "pakketselectieboom: ga de selectie na en druk op \"Installeren\"\n"
-"om de geselecteerde pakketten op te halen en te installeren, of\n"
+"om de geselecteerde pakket(ten) op te halen en te installeren, of\n"
 "op \"Annuleren\" om af te breken."
 
 #: ../../help.pm:1
@@ -2181,7 +2264,7 @@ msgstr ""
 "onleesbare blokken gecontroleerd moeten worden."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2220,8 +2303,7 @@ msgstr ""
 "computer the apparatuurtests heeft afgerond is het opstartladermenu,\n"
 "dat u de keus geeft welk besturingssysteem te starten.\n"
 "\n"
-"De \"Geavanceerd\"-knop (alleen in Expert-modus) toont twee extra \n"
-"knoppen voor:\n"
+"De \"Geavanceerd\"-knop toont twee extra knoppen voor:\n"
 "\n"
 " * \"auto-installatiediskette aanmaken\": om een installatiediskette te\n"
 "creëren welke de gehele installatie automatisch zal uitvoeren zonder een\n"
@@ -2239,7 +2321,7 @@ msgstr ""
 "\n"
 "   Deze mogelijkheid is erg handig wanneer u een grote hoeveelheid\n"
 "soortgelijke computers installeert. Zie ook de Auto-installatie afdeling op\n"
-"onze website voor meer informatie.\n"
+"onze webstek voor meer informatie.\n"
 "\n"
 " * \"Pakketselectie opslaan\"(*) : slaat de pakketlijst op zoals "
 "geselecteerd\n"
@@ -2252,7 +2334,7 @@ msgstr ""
 "GNU/Linux te creëren, typt u \"mformat a:\")"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2324,10 +2406,11 @@ msgstr ""
 "nieuwe Mandrake Linux besturingssysteem.\n"
 "\n"
 "Omdat de effecten van het partitioneringsproces over het algemeen niet\n"
-"terug te draaien zijn, kan partitioneren intimiderend en spannend zijn voor\n"
-"een onervaren gebruiker. Gelukkig is er een wizard die dit proces\n"
-"vereenvoudigt. Raadpleegt u de rest van dit hoofdstukje voordat u verder\n"
-"gaat en neem vooral de tijd.\n"
+"terug te draaien zijn en kan leiden tot gegevensverlies als er reeds een\n"
+"besturingssysteem op de schijf geïnstalleerd is, kan partitioneren\n"
+"intimiderend en spannend zijn voor een onervaren gebruiker. Gelukkig is\n"
+"er een wizard die dit proces vereenvoudigt. Leest u de rest van dit\n"
+"hoofdstukje voordat u verder gaat en neem vooral de tijd.\n"
 "\n"
 "Afhankelijk van de configuratie van uw harde schijf, zijn er\n"
 "verscheidene opties beschikbaar:\n"
@@ -2353,8 +2436,8 @@ msgstr ""
 "verkleinen. Het aanpassen van de grootte kan bewerkstelligd worden zonder\n"
 "verlies van enige gegevens, vooropgesteld dat u eerst de Windows-partitie\n"
 "gedefragmenteerd heeft. Een reservekopie maken van uw gegevens kan\n"
-"ook geen kwaad. Deze oplossing is aanbevolen indien u zowel\n"
-"Mandrake Linux en Microsoft Windows op dezelfde computer wilt gebruiken.\n"
+"bepaald geen kwaad. Deze optie is aanbevolen indien u zowel\n"
+"Mandrake Linux als Microsoft Windows op dezelfde computer wilt gebruiken.\n"
 "\n"
 "   Laat het goed tot u doordringen, voordat u deze optie kiest, dat uw\n"
 "Microsoft Windows partitie na afloop van deze procedure minder groot\n"
@@ -2616,7 +2699,7 @@ msgstr ""
 "op uw lokale netwerk."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog is used to choose which services you wish to start at boot\n"
 "time.\n"
@@ -2635,18 +2718,18 @@ msgid ""
 "enabled on a server. In general, select only the services you really need.\n"
 "!!"
 msgstr ""
-"In deze stap kunt u kiezen welke diensten u wenst te starten\n"
+"In dit dialoogvenster kunt u kiezen welke diensten u wenst te starten\n"
 "tijdens de opstartfase van uw computer.\n"
 "\n"
-"In dit overzicht staan alle diensten die beschikbaar zijn in de huidige\n"
+"DrakX somt alle diensten op die beschikbaar zijn in de huidige\n"
 "installatie. Kijk ze aandachtig na en de-selecteer degenen die niet altijd\n"
 "nodig zijn bij het opstarten.\n"
 "\n"
-"U kunt een korte uitleg krijgen over een dienst door een specifieke dienst\n"
-"te selecteren. Wanneer u niet zeker bent of een dienst nuttig is of niet,\n"
-"dan is het veiliger om de standaard-instelling over te nemen.\n"
+"Een korte verklarende tekst wordt gegeven over een dienst bij de selectie\n"
+"ervan. Wanneer u niet zeker bent of een dienst nuttig is of niet,\n"
+"dan is het veiliger om de standaardinstelling over te nemen.\n"
 "\n"
-"!! Wees vooral voorzichtig in deze stap als u uw machine als een server \n"
+"!! Wees vooral voorzichtig in deze stap als u uw machine als server \n"
 "wilt gebruiken: u zult waarschijnlijk de diensten die u niet nodig heeft "
 "niet\n"
 "willen starten. Onthoudt alstublieft dat een aantal diensten riskant kunnen\n"
@@ -2655,19 +2738,19 @@ msgstr ""
 "!!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
-"\"Printer\": klikken op de \"Geen printer\"-knop zal de "
+"\"Printer\": klikken op de \"Configureren\"-knop zal de "
 "printerconfiguratie-\n"
 "wizard openen. Raadpleeg het overeenkomstige hoofdstuk uit de ``Beginners-\n"
 "handleiding'' voor meer informatie over het instellen van een nieuwe "
 "printer.\n"
-"De hier getoonde interface lijkt op degene gebruikt tijdens de installatie."
+"De daar getoonde interface lijkt op degene gebruikt tijdens de installatie."
 
 #: ../../help.pm:1
 #, c-format
@@ -4329,9 +4412,9 @@ msgstr "Systeem"
 
 #. -PO: example: lilo-graphic on /dev/hda1
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s on %s"
-msgstr "%s (Poort %s)"
+msgstr "%s op %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4772,12 +4855,12 @@ msgstr "Muispoort"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please choose your type of mouse."
-msgstr "Gelieve het type van uw muis te kiezen."
+msgstr "Kies uw type muis."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key for %s"
-msgstr "versleutelings sleutel"
+msgstr "Versleutelings-sleutel voor %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11003,11 +11086,6 @@ msgstr "Wijzig het printsysteem"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Printers delen"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "CUPS configuratie"
 
@@ -11418,7 +11496,7 @@ msgstr "Bezig met afdrukken van testpagina(s)..."
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Print option list"
-msgstr "Lijst van print-opties"
+msgstr "Lijst van printopties"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11444,12 +11522,12 @@ msgstr "Bezig met afdrukken/scannen/fotokaarten op \"%s\""
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Om de beschikbare opties voor de huidige printer te weten te komen, kunt u "
 "ofwel de lijst hieronder lezen, ofwel klikken op de knop \"Lijst van print-"
-"opties\".%s%s\n"
+"opties\".%s%s%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11696,51 +11774,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-"Uw printer behoort tot de groep van GDI laserprinters (winprinters) van "
-"verschillende fabrikanten die het Zenographics ZJ-stream rasterformaat "
-"gebruikt voor de gegevens die naar de printer worden gestuurd. Het "
-"stuurprogramma voor deze printers is nog in een vroeg ontwikkelingsstadium "
-"en zal daarom niet altijd goed werken. In het bijzonder is het mogelijk dat "
-"de printer slechts werkt wanneer u het A4-papierformaat kiest.\n"
-"\n"
-"Voor sommige van deze printers, zoals de HP LaserJet 1000 (waarvoor dit "
-"stuurprogramma aanvankelijk gecreëerd is), is het nodig dat hun firmware "
-"naar hen ge-upload wordt nadat ze aangezet zijn. In het geval van de HP "
-"LaserJet 1000 dient u op de Windows-stuurprogramma's-CD of uw Windows-"
-"partitie te zoeken naar het bestand \"sihp1000.img\" en dit bestand naar de "
-"printer uploaden met één van de volgende opdrachten:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"De eerste opdracht kan gegeven worden door iedere normale gebruiker, de "
-"tweede moet gegeven worden als root. Hierna kunt u gewoon afdrukken.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "GDI Laserprinter die het Zenographics ZJ-Stream-formaat gebruikt"
+msgid "Firmware-Upload for HP LaserJet 1000"
+msgstr "Uploaden van firmware voor HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11928,6 +11963,11 @@ msgstr "Bezig met beschikbaar maken van printerpoort voor CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Bezig met controleren en configureren van apparaat HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Toegang tot foto-geheugenkaart op uw HP multifunctioneel apparaat"
 
@@ -11945,11 +11985,6 @@ msgstr "Bezig met installeren van mtools-pakketten..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Bezig met installeren van SANE-pakketten..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Bezig met controleren en configureren van apparaat HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12417,7 +12452,7 @@ msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
 msgstr ""
-"Indien dit niet degene ia die u wilt configureren, geef dan een apparaatnaam/"
+"Indien dit niet degene is die u wilt configureren, geef dan een apparaatnaam/"
 "bestandsnaam op de invoerregel"
 
 #: ../../printer/printerdrake.pm:1
@@ -12842,6 +12877,11 @@ msgstr "IP van server ontbreekt!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr "Als geen poort is gegeven dan wordt 631 als standaardwaarde genomen."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 "Geef het IP-adres en de poort van de computer waarvan u de printers wilt "
@@ -12976,6 +13016,31 @@ msgstr "Automatische correctie van CUPS-configuratie"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+"Dit aanzetten stelt u in staat platte tekstbestanden in het Japans af te "
+"drukken. Gebruik deze functie slechts als u echt tekst in het Japans wilt "
+"afdrukken; wanneer hij is geactiveerd dan kunt u geen geaccentueerde tekens "
+"meer afdrukken in Latijnse lettertypen en zult u de kantlijnen, "
+"tekengrootte, etc. niet meer kunnen aanpassen. Deze instelling heeft slechts "
+"effect op printers aangesloten op deze computer. Mocht u Japanse tekst "
+"willen afdrukken naar een printer aan een computer op afstand dan dient u "
+"deze functie te activeren op die andere computer."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Japanese text printing mode"
+msgstr "Japanse tekstafdrukmodus"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -13050,8 +13115,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "CUPS printer sharing configuration"
-msgstr "Configuratie van printers delen met CUPS"
+msgid "CUPS printer configuration"
+msgstr "CUPS printerconfiguratie"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13078,6 +13143,26 @@ msgstr "Hoe is de printer aangesloten?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Selecteer Printer-verbinding"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
+"De HP LaserJet 1000 moet, na te zijn aangezet, zijn firmware ge-upload "
+"krijgen. Download het Windows-stuurprogramma van de HP website (de firmware "
+"op de CD bij de printer werkt niet) en extraheer het firmware bestand eruit "
+"door het zelf-uitpakkende '.exe'-bestand te decomprimeren met het 'unzip' "
+"hulpprogramma en te zoeken naar het bestand 'sihp1000.img'. Kopiëer dit "
+"bestand naar de '/etc/printer' map. Daar zal het te vinden zijn voor het "
+"script dat automatisch de firmware uploadt elke keer wanneer de printer is "
+"aangesloten en aangezet.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13962,7 +14047,7 @@ msgid "Boot Floppy"
 msgstr "Opstartdiskette"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "drakTermServ Overview\n"
 "\t\t\t   \n"
@@ -14096,7 +14181,7 @@ msgid ""
 "        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
 " \n"
 "\n"
-msgstr "\""
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -14727,11 +14812,6 @@ msgid ""
 msgstr ""
 "Kan geen instellingen-bestand vinden \n"
 "klikt u op Wizard of Geavanceerd."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17232,9 +17312,9 @@ msgid "Interface %s (using module %s)"
 msgstr "Interface %s (gebruikt module %s)"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Net Device"
-msgstr "Xinetd-dienst"
+msgstr "Netwerkapparaat"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17246,6 +17326,12 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
+"Voer de naam in van het netwerkapparaat verbonden met het internet.\n"
+"\n"
+"Voorbeelden:\n"
+"\t\tppp+ voor modem- of DSL-verbindingen, \n"
+"\t\teth0, of eth1 voor een kabelverbinding, \n"
+"\t\tippp+ voor een ISDN-verbinding.\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17830,9 +17916,9 @@ msgid "choose image file"
 msgstr "afbeeldingsbestand kiezen"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose image"
-msgstr "afbeeldingsbestand kiezen"
+msgstr "afbeelding kiezen"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -19326,7 +19412,7 @@ msgstr "Enkele apparaten zijn toegevoegd:\n"
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr "Bepaalde apparaten in de hardware klasse \"%s\" zijn verwijderd:\n"
+msgstr "Bepaalde apparaten in de apparatuurklasse \"%s\" zijn verwijderd:\n"
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
@@ -19347,7 +19433,7 @@ msgstr "Welkom in de Open Source-wereld"
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
 msgid "Thank you for choosing Mandrake Linux 9.1"
-msgstr "Bedankt dat u voor Mandrake Linux 9.1 gekozen hebt"
+msgstr "Dank u voor het kiezen van Mandrake Linux 9.1"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -19355,9 +19441,8 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
-"Sluit u aan bij de discussiefora die u vindt op onze \"Community\"-"
-"webpagina's om uw kennis te delen en te helpen met het bouwen van Linux-"
-"programmatuur."
+"Deel uw kennis en help met het bouwen van Linux-programmatuur door gebruik "
+"te maken van de discussiefora op onze \"Community\"-webpagina's"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -19371,7 +19456,7 @@ msgstr ""
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
-msgstr ""
+msgstr "Bouw aan de toekomst van Linux!"
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -19379,9 +19464,9 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1 stelt u in staat om met de allernieuwste "
-"softwareaudiobestanden af te spelen, uw plaatjes en foto's te bewerken en "
-"tebeheren en video's te bekijken"
+"En uiteraard, drijft u multimedia tot het uiterste met de allernieuwste "
+"software om video's en audiobestanden af te spelen en om te werken met uw "
+"plaatjes en foto's"
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -19389,11 +19474,13 @@ msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
 "Kmail, create your documents with OpenOffice.org."
 msgstr ""
+"Surf over het Web met Mozilla of Konqueror, lees uw e-mail met Evolution of "
+"Kmail, creëer uw documenten met OpenOffice.org"
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
-msgstr ""
+msgstr "MandrakeSoft heeft de beste software voor u geselecteerd"
 
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
@@ -19403,26 +19490,32 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
+"Mandrake Linux 9.1 voorziet u van het Mandrake Configuratiecentrum, een "
+"krachtig programma om uw computer aan te passen aan de manier waarop u hem "
+"gebruikt. U kunt elementen aanpassen zoals het beveiligingsniveau, de "
+"randapparatuur (scherm, muis, toetsenbord...), de internetverbinding en veel "
+"meer!"
 
 #: ../../share/advertising/04-configuration.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrake's multipurpose configuration tool"
-msgstr "Mandrake Terminal Server Configuratie"
+msgstr "Mandrakes multifunctionele configuratieprogramma"
 
 #: ../../share/advertising/05-desktop.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
 "Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
 "2.2, Window Maker, ..."
 msgstr ""
-"Mandrake Linux 9.1 geeft u de beschikking over elf gebruikersinterfaces "
-"dievolledig aangepast kunnen worden: KDE 3, Gnome 2, WindowMaker, ..."
+"Pas uw computer precies aan op uw wensen dankzij de 11 beschikbare, volledig "
+"door uzelf aan te passen Mandrake Linux-omgevingen: KDE 3.1, GNOME 2.2, "
+"Window Maker, ..."
 
 #: ../../share/advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
-msgstr ""
+msgstr "Een instelbare omgeving"
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
@@ -19431,11 +19524,14 @@ msgid ""
 "+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
 "development environments."
 msgstr ""
+"Het programmeren in verscheidene talen zoals Perl, Python, C en C++ is nog "
+"nooit zo makkelijk geweest dankzij GNU gcc 3 en de beste Open Source "
+"ontwikkelomgevingen."
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr "Mandrake Linux 9.1 is het ultieme ontwikkelplatform"
+msgstr "Mandrake Linux 9.1: het ultieme ontwikkelplatform"
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
@@ -19444,12 +19540,12 @@ msgid ""
 "firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "Transformeer uw computer naar een krachtige Linuxserver met slechts enkele "
-"muisklikken: Web server, e-mail, firewall, router, file- en printserver, ..."
+"muisklikken: Webserver, e-mail, firewall, router, file- en printserver, ..."
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
-msgstr "Verander uw computer in een betrouwbare server"
+msgstr "Maak van uw computer een betrouwbare server"
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
@@ -19458,7 +19554,7 @@ msgid ""
 "other \"goodies\", are available on our e-store:"
 msgstr ""
 "Ons volledige scala aan Linux-oplossingen, naast speciale aanbiedingen voor "
-"onze produkten en \"goodies\", is on-line beschikbaar in onze webwinkel:"
+"onze produkten en hebbedingetjes, is on-line beschikbaar in onze webwinkel:"
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
@@ -19466,19 +19562,18 @@ msgid "The official MandrakeSoft Store"
 msgstr "De officiële MandrakeSoft-winkel"
 
 #: ../../share/advertising/09-mdksecure.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
 "offering professional solutions compatible with Mandrake Linux"
 msgstr ""
-"MandrakeSoft werkt samen met een aantal bedrijven die professionele "
-"oplossingen bieden die compatibel zijn met Mandrake Linux. Een lijst van "
-"deze partners is beschikbaar op de MandrakeStore"
+"Verbeter uw computerprestaties met hulp van een select aantal partners die "
+"professionele oplossingen bieden, compatibel met Mandrake Linux"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
-msgstr ""
+msgstr "Pak de beste produkten met de strategische partners van Mandrake Linux"
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -19487,16 +19582,19 @@ msgid ""
 "version ever: Draksec, a system security management tool, and a strong "
 "firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
+"MandrakeSoft heeft exclusieve programmatuur ontworpen om de best beveiligde "
+"Linuxversie ooit te produceren: Draksec, voor systeembeveiligingbeheer, en "
+"een sterke firewall zijn samen ingezet om inbraakrisico's sterk te reduceren."
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
-msgstr "Optimaliseer uw beveiliging"
+msgstr "Optimaliseer uw beveiliging door Mandrake Linux te gebruiken"
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid "This product is available on the MandrakeStore Web site."
-msgstr "Dit produkt is beschikbaar op de MandrakeStore-website"
+msgstr "Dit produkt is beschikbaar op de MandrakeStore-webstek."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
@@ -19506,11 +19604,15 @@ msgid ""
 "network (VPN) server and client, an intrusion detection system and a traffic "
 "manager."
 msgstr ""
+"Vervolmaak uw beveiliging met deze gemakkelijk te gebruiken software die "
+"hoge prestatie-componenten combineert zoals een firewall, een virtual "
+"private network (VPN)-server en -client, een indringers-alarmsysteem en "
+"beheer van netwerkverkeer."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
-msgstr ""
+msgstr "Beveilig uw netwerken met de Multi Network Firewall"
 
 #: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
@@ -19543,8 +19645,8 @@ msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr ""
-"Alle incidenten zullen afgehandeld worden door een enkele gekwalificeerde "
-"technische expert van MandrakeSoft."
+"Alle incidenten zullen afgehandeld worden door één enkele gekwalificeerde "
+"technisch expert van MandrakeSoft."
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -19745,76 +19847,142 @@ msgstr "Netwerk-computer server"
 msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS server, SMB server, Proxy server, ssh server"
 
+#
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Kantoor"
+msgid "Audio station"
+msgstr "Audio-station"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgid "Sound playing/editing programs"
+msgstr "Programma's voor afspelen/bewerken van geluid"
+
+#
+#: ../../share/compssUsers:999
+msgid "Video station"
+msgstr "Video-station"
+
+#: ../../share/compssUsers:999
+msgid "Video playing programs"
+msgstr "Video-afspeelprogramma's"
+
+#
+#: ../../share/compssUsers:999
+msgid "Graphic station"
+msgstr "Grafisch station"
+
+#: ../../share/compssUsers:999
+msgid "Graphics programs"
+msgstr "Programma's voor grafisch werk"
+
+#: ../../share/compssUsers:999
+msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
-"Verzameling programma's voor post, nieuws, web, bestandsoverdracht en chatten"
+"Verzameling programma's om e-mail en usenet nieuws mee te lezen en te "
+"sturen, en om het Web mee door te bladeren"
 
-#: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Spelletjes"
+#~ msgid "Printer sharing"
+#~ msgstr "Printers delen"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - Grafisch"
+#~ msgid ""
+#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
+#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
+#~ "raster format for the data sent to the printer. The driver for these "
+#~ "printers is still in a very early development stage and so it will "
+#~ "perhaps not always work properly. Especially it is possible that the "
+#~ "printer only works when you choose the A4 paper size.\n"
+#~ "\n"
+#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
+#~ "was originally created, need their firmware to be uploaded to them after "
+#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
+#~ "search the printer's Windows driver CD or your Windows partition for the "
+#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
+#~ "following commands:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "The first command can be given by any normal user, the second must be "
+#~ "given as root. After having done so you can print normally.\n"
+#~ msgstr ""
+#~ "Uw printer behoort tot de groep van GDI laserprinters (winprinters) van "
+#~ "verschillende fabrikanten die het Zenographics ZJ-stream rasterformaat "
+#~ "gebruikt voor de gegevens die naar de printer worden gestuurd. Het "
+#~ "stuurprogramma voor deze printers is nog in een vroeg "
+#~ "ontwikkelingsstadium en zal daarom niet altijd goed werken. In het "
+#~ "bijzonder is het mogelijk dat de printer slechts werkt wanneer u het A4-"
+#~ "papierformaat kiest.\n"
+#~ "\n"
+#~ "Voor sommige van deze printers, zoals de HP LaserJet 1000 (waarvoor dit "
+#~ "stuurprogramma aanvankelijk gecreëerd is), is het nodig dat hun firmware "
+#~ "naar hen ge-upload wordt nadat ze aangezet zijn. In het geval van de HP "
+#~ "LaserJet 1000 dient u op de Windows-stuurprogramma's-CD of uw Windows-"
+#~ "partitie te zoeken naar het bestand \"sihp1000.img\" en dit bestand naar "
+#~ "de printer uploaden met één van de volgende opdrachten:\n"
+#~ "\n"
+#~ "     lpr -o raw sihp1000.img\n"
+#~ "     cat sihp1000.img > /dev/usb/lp0\n"
+#~ "\n"
+#~ "De eerste opdracht kan gegeven worden door iedere normale gebruiker, de "
+#~ "tweede moet gegeven worden als root. Hierna kunt u gewoon afdrukken.\n"
 
-#: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
-msgstr "Grafische programma's zoals The Gimp"
+#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
+#~ msgstr "GDI Laserprinter die het Zenographics ZJ-Stream-formaat gebruikt"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "Office"
+#~ msgstr "Kantoor"
+
+#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
+#~ msgstr ""
+#~ "Verzameling programma's voor post, nieuws, web, bestandsoverdracht en "
+#~ "chatten"
+
+#~ msgid "Games"
+#~ msgstr "Spelletjes"
+
+#~ msgid "Multimedia - Graphics"
+#~ msgstr "Multimedia - Grafisch"
 
 #
-#: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Geluid"
+#~ msgid "Multimedia - Sound"
+#~ msgstr "Multimedia - Geluid"
 
-#: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Audio-gerelateerde programma's: mp3- of midi afspelen, mengpanelen etc"
+#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+#~ msgstr ""
+#~ "Audio-gerelateerde programma's: mp3- of midi afspelen, mengpanelen etc"
 
 #
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedia - Video"
+#~ msgid "Multimedia - Video"
+#~ msgstr "Multimedia - Video"
 
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Video-afspeel- en bewerkingsprogramma's"
+#~ msgid "Video players and editors"
+#~ msgstr "Video-afspeel- en bewerkingsprogramma's"
 
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - CD branden"
+#~ msgid "Multimedia - CD Burning"
+#~ msgstr "Multimedia - CD branden"
 
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Programma's om CD's mee te creëren en te branden"
+#~ msgid "Tools to create and burn CD's"
+#~ msgstr "Programma's om CD's mee te creëren en te branden"
 
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Meer grafische bureaubladen (GNOME, IceWM)"
+#~ msgid "More Graphical Desktops (Gnome, IceWM)"
+#~ msgstr "Meer grafische bureaubladen (GNOME, IceWM)"
 
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
 
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Persoonlijk Gegevensbeheer"
+#~ msgid "Personal Information Management"
+#~ msgstr "Persoonlijk Gegevensbeheer"
 
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Gereedschappen voor uw Palm Pilot of uw Visor"
+#~ msgid "Tools for your Palm Pilot or your Visor"
+#~ msgstr "Gereedschappen voor uw Palm Pilot of uw Visor"
 
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Persoonlijke Financiën"
+#~ msgid "Personal Finance"
+#~ msgstr "Persoonlijke Financiën"
 
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programma's om uw financiën mee te beheren, zoals gnucash"
+#~ msgid "Programs to manage your finances, such as gnucash"
+#~ msgstr "Programma's om uw financiën mee te beheren, zoals gnucash"
 
 #~ msgid ""
 #~ "As a review, DrakX will present a summary of various information it has\n"
