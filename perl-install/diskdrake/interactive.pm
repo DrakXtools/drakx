@@ -652,13 +652,15 @@ sub Resize {
 	system "resize_reiserfs", "-f", "-q", "-s" . $part->{size}/2 . "K", devices::make($part->{device});
     } elsif ($nice_resize{xfs}) {
 	system "xfs_growfs", $part->{mntpoint};
+    }
+
+    if (%nice_resize) {
+	$part->{isFormatted} = 1;
     } else {
 	$part->{notFormatted} = 1;
 	$part->{isFormatted} = 0;
 	partition_table::verifyParts($hd);
-	return;
     }
-    $part->{isFormatted} = 1;
 
     if (isLVM($hd)) {
 	lvm::lv_resize($part, $oldsize) if $size < $oldsize;
