@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 #- CHANGE THIS! (dam's)
-# DrakFuck
+# DrakNet
 
 # Copyright (C) 1999 MandrakeSoft (damien@mandrakesoft.com)
 #
@@ -19,16 +19,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-use lib qw ".."; #(/usr/lib/libDrakX);
+use lib qw (/usr/lib/libDrakX); #..(/usr/lib/libDrakX);
 
 use interactive;
 use netconnect;
-#use Xconfig;
 use c;
 
 local $_ = join '', @ARGV;
 
-#/-h/ and die "usage: DrakFuck[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+#/-h/ and die "usage: draknet[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
 my $netcnx = {};
 
@@ -47,6 +46,6 @@ $::isStandalone = 1;
 
 my $in = vnew interactive('su');
 
-netconnect::net_connect('', $netcnx, $in, -e "/etc/pcmcia");
+netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia");
 
 $in->exit(0);
