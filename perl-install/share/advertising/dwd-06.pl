@@ -10,9 +10,9 @@ $border = 10;  #- for leftish text
 
 # @text = ([ N("text to display"), center => 1 ],
 
-@text = ([ N("<b>MandrakeStore</b>"), center => 1 ],
+@text = ([ N("<b>Mandrakestore</b>"), center => 1 ],
          ' ',
-         N("Find all Mandrakesoft products at <b>MandrakeStore</b> -- our full service e-commerce platform."),
+         N("Find all Mandrakesoft products and services at <b>Mandrakestore</b> -- our full service e-commerce platform."),
          ' ',
          N("Find out also support incidents if you have any problems, from standard to professional support, from 1 to 50 incidents, take the one which meets perfectly your needs!"),
 	' ',

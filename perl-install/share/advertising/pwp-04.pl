@@ -16,6 +16,6 @@ $border = 10;  #- for leftish text
 	 N("	- Take charge of your personal data with the integrated personal information suites <b>Kontact</b> and <b>Evolution</b>"),
 	 N("	- Browse the Web with <b>Mozilla</b> and <b>Konqueror</b>"),
 	 N("	- Participate in online chat with <b>Kopete</b>"),
-	 N("	- Listen to audio CDs and music files with KsCD and <b>Totem</b>"),
+	 N("	- Listen to audio CDs and music files with <b>KsCD</b> and <b>Totem</b>"),
 	 N("	- Edit images and photos with <b>The Gimp</b>"),
 	 N("	- Plus much more")); 
