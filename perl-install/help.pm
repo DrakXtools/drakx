@@ -108,12 +108,7 @@ Please note that some packages require the installation of others.
 These are referred to as package dependencies. The packages you select,
 and the packages they require will be automatically selected for
 install. It is impossible to install a package without installing all
-of its dependencies.
-
-
-Informations on specific package are available in the
-area titled \"Info\", located on the right of the list of
-packages."),
+of its dependencies."),
 
 doInstallStep =>
  __("The packages selected are now being installed. This operation
