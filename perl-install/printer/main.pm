@@ -419,7 +419,7 @@ sub connectionstr {
 	     $connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$! ||
 	     $connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!) {
 	$connection = N("Novell server \"%s\", printer \"%s\"", $1, $2);
-    n elsif ($connect =~ m!^postpipe:(.+)$!) {
+    } elsif ($connect =~ m!^postpipe:(.+)$!) {
 	$connection = N("Uses command %s", $1);
     } else {
 	$connection = N("URI: %s", $connect);
