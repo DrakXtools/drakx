@@ -93,7 +93,7 @@ my %themes = 	('path' => '/usr/share/bootsplash/themes/',
 		 	#'thumb'=>'/images/thumb.png',
 			},
 		 );
-my ($cur_res) = cat_('/etc/lilo.conf') =~ /vga=(.*)/;
+my $cur_res = top(cat_('/etc/lilo.conf') =~ /[^#]*vga=(.*)/);
 #- verify that current resolution is ok
 if (member( $cur_res, qw( 785 788 791 794))) {
 	($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
@@ -103,6 +103,7 @@ if (member( $cur_res, qw( 785 788 791 794))) {
 
 #- and check that lilo is the correct loader
 $no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
+$no_bootsplash = 0 if $::testing;
 my @thms;
 my @lilo_thms = if_(!$themes{default}, qw(default));
 my @boot_thms = if_(!$themes{default}, qw(default));
@@ -125,7 +126,7 @@ $combo{thms}->set_popdown_strings(@thms);
 $combo{lilo}->set_popdown_strings(@lilo_thms);
 $combo{boot}->set_popdown_strings(@boot_thms) if !$no_bootsplash;
 
-my ($lilo_pixbuf, $boot_pixmap);
+my $lilo_pixbuf;
 my $lilo_pic = gtkcreate_img($themes{def_thmb});
 
 my $boot_pixbuf;
@@ -160,10 +161,7 @@ $combo{lilo}->entry->signal_connect(changed => sub {
 $no_bootsplash == 0 
 	and $combo{boot}->entry->signal_connect( changed => sub {
     my $img_file = $themes{path}.$combo{boot}->entry->get_text().$themes{boot}{path}."bootsplash-$cur_res.jpg";
-    undef($boot_pixmap);
-    $boot_pixmap = gtkcreate_pixbuf( $img_file);
-    $boot_pixmap = $boot_pixmap->scale_simple(155, 116, 'nearest');
-    $boot_pic->set($boot_pixmap->render_pixmap_and_mask(0), '');
+    $boot_pic = gtkcreate_img( $img_file);
 });
 
 $combo{thms}->entry->set_text($themes{default});
