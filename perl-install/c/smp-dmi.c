@@ -133,81 +133,143 @@ static char *dmi_processor_family(u8 code)
 	return processor_family[code];
 }
 
-static int dmi_table(int fd, u32 base, int len, int num)
+typedef int (*dmi_decode)(u8 * data);
+
+static int decode_handle(int fd, u32 base, int len, int num, dmi_decode decode)
 {
-	char *buf=malloc(len);
+	u8 *buf = malloc(len);
 	struct dmi_header *dm;
 	u8 *data;
-	int i=0;
-	int processor=0;
+	int i = 0;
+	int ret = 0;
 	
-	if(lseek(fd, (long)base, 0)==-1)
-	{
+	if (lseek(fd, (long)base, 0) == -1) {
 		perror("dmi: lseek");
 		return;
 	}
-	if(read(fd, buf, len)!=len)
-	{
+	if (read(fd, buf, len)!=len) {
 		perror("dmi: read");
 		return;
 	}
 	data = buf;
-	while(i<num)
+	while(i<num && data+sizeof(struct dmi_header)<=buf+len)
 	{
-		u32 u;
-		u32 u2;
-		dm=(struct dmi_header *)data;
-		
-		if((dm->type == 4) && /*"Central Processor"*/(data[5] == 3)) {
-			if(/*Processor Manufacturer*/data[7] != 0) 
-				processor++;
-		}
+		u8 *next;
+		struct dmi_header *dm = (struct dmi_header *)data;
 
-		data+=dm->length;
-		while(*data || data[1])
-			data++;
-		data+=2;
+		/* look for the next handle */
+		next=data+dm->length;
+		while(next-buf+1<len && (next[0]!=0 || next[1]!=0))
+			next++;
+		next+=2;
+		if(next-buf<=len)
+			ret += decode(data);
+		else {
+			ret = 0; /* TRUNCATED */
+			break;
+		}
+		data=next;
 		i++;
 	}
 	free(buf);
-	return processor;
+	return ret;
 }
 
-int intelDetectSMP(void) {
+static int dmi_detect(dmi_decode decode) {
   	unsigned char buf[20];
-	int fd=open("/dev/mem", O_RDONLY);
-	long fp=0xE0000L;
-	int processor=0;
-	if(fd==-1)
-	{
+	int fd = open("/dev/mem", O_RDONLY);
+	long fp = 0xE0000L;
+	int ret = 0;
+
+	if (fd == -1) {
 		perror("/dev/mem");
 		exit(1);
 	}
-	if(lseek(fd,fp,0)==-1)
-	{
+	if (lseek(fd, fp, 0) == -1) {
 		perror("seek");
 		exit(1);
 	}
 	
-	
-	fp -= 16;
-	
-	while( fp < 0xFFFFF)
+	while (fp < 0xFFFFF)
 	{
-		fp+=16;
-		if(read(fd, buf, 16)!=16)
+		if (read(fd, buf, 16) != 16)
 			perror("read");
 		
-		if(memcmp(buf, "_DMI_", 5)==0)
-		{
-			u16 num=buf[13]<<8|buf[12];
-			u16 len=buf[7]<<8|buf[6];
-			u32 base=buf[11]<<24|buf[10]<<16|buf[9]<<8|buf[8];
+		if (memcmp(buf, "_DMI_", 5) == 0) {
+			u16 num = buf[13]<<8|buf[12];
+			u16 len = buf[7]<<8|buf[6];
+			u32 base = buf[11]<<24|buf[10]<<16|buf[9]<<8|buf[8];
 			
-			processor=dmi_table(fd, base,len, num);
+			ret = decode_handle(fd, base, len, num, decode);
 			break;
 		}
+		fp += 16;
 	}
 	close(fd);
-	return (processor > 1);
+	return ret;
+}
+
+static int processor(u8 *data) {
+	struct dmi_header *dm = (struct dmi_header *)data;
+
+	if((dm->type == 4) && /*"Central Processor"*/(data[5] == 3)) {
+		if(/*Processor Manufacturer*/data[7] != 0) 
+			return 1;
+	}
+	return 0;
+}
+
+static int memory_in_MB(u8 *data)
+{
+	struct dmi_header *dm;
+	
+	int form_factor_check(u8 code) {
+		/* 3.3.18.1 */
+		static const char form_factor[]={
+			0, /* "Other", */ /* 0x01 */
+			0, /* "Unknown", */
+			1, /* "SIMM", */
+			1, /* "SIP", */
+			0, /* "Chip", */
+			1, /* "DIP", */
+			0, /* "ZIP", */
+			0, /* "Proprietary Card", */
+			1, /* "DIMM", */
+			0, /* "TSOP", */
+			0, /* "Row Of Chips", */
+			1, /* "RIMM", */
+			1, /* "SODIMM", */
+			1, /* "SRIMM" *//* 0x0E */
+		};
+
+		if(code>=0x01 && code<=0x0E)
+			return form_factor[code-0x01];
+		return 0; /* out of spec */
+	}
+	int dmi_memory_device_size(u16 code) {
+		int mult = 1;
+
+		if (code == 0 || code == 0xFFFF)
+			return 0;
+		if (code & 0x8000) /* code is in KB */
+			mult = 1024;
+		return (code & 0x7FFF) * mult;
+	}
+
+	dm = (struct dmi_header *)data;
+		
+	if ((dm->type == 17) && (dm->length >= 0x15)) {
+		if (form_factor_check(data[0x0E]))
+			return dmi_memory_device_size((data[0x0D] << 8) + data[0x0C]);
+	}
+	
+	return 0;
+}
+
+int intelDetectSMP(void) {
+	return dmi_detect(processor) > 1;
+}
+
+int dmiDetectMemory(void) {
+	return dmi_detect(memory_in_MB);
 }
