@@ -407,8 +407,8 @@ sub pppConfig {
     my ($in, $modem, $prefix, $install) = @_;
     $modem or return;
 
-    if_($modem->{device} ne "$prefix/dev/modem",
-	symlinkf($modem->{device}, "$prefix/dev/modem") or log::l("creation of $prefix/dev/modem failed"));
+    symlinkf($modem->{device}, "$prefix/dev/modem") or log::l("creation of $prefix/dev/modem failed")
+      if $modem->{device} ne "/dev/modem";
     $install->(qw(ppp)) unless $::testing;
 
     my %toreplace;
