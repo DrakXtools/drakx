@@ -25,9 +25,8 @@ sub lpstat_lpv() {
     my @lpstat = run_program::rooted_get_stdout
 	($::prefix, 'lpstat', '-l', '-p', '-v');
     
-    my $line;
     my $currentitem = -1;
-    for $line (@lpstat) {
+    for my $line (@lpstat) {
 	chomp ($line);
 	if (!($line =~ m!^\s*$!)) {
 	    if ($line =~ m!^printer\s+(\S+)\s+(\S.*)$!) {
