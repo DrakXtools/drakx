@@ -823,7 +823,7 @@ enum return_type http_prepare(void)
 			return RETURN_ERROR;
 
 		method_name = strdup("http");
-		sprintf(location_full, "http://%s/%s", answers[0], answers[1]);
+		sprintf(location_full, "http://%s%s", answers[0], answers[1]);
 		add_to_env("URLPREFIX", location_full);
 	}
 	while (results == RETURN_BACK);
