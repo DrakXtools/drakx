@@ -1,3 +1,157 @@
+2002/02/12  dam's  <damien@mandrakesoft.com>
+
+	* share/step-red.xpm, share/step-orange.xpm, share/step-orange-click.xpm,
+	share/themes/mdk-check_on.png, share/step-green-click.xpm,
+	share/step-green.xpm, share/step-red-click.xpm,
+	share/themes/mdk-check_off.png: new gfx
+
+	* standalone/drakbackup, network/network.pm: bug correction
+
+2002/02/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+	updated pot file
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/cy.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/is.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/ca.po,
+	share/po/gl.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/ro.po, share/po/bs.po, share/po/da.po, share/po/zh_TW.po,
+	share/po/cs.po, share/po/af.po: updated pot file
+
+2002/02/12  Pixel  <pixel@mandrakesoft.com>
+
+	* devices.pm: i prefer /(.*?)(\d+)$/ to /(.*\D)(\d+)$/
+
+	* docs/README.pxe: cleanup the .cfg
+
+	* share/rpmsrate: 
+	  - move bootsplash from SYSTEM to X
+	  - lower Aurora
+
+2002/02/12  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Fixed:
+	  - Endless loop when entering printerdrake during installation in
+	recommended
+	mode without local printer
+	  - Printerdrake was not closed when one was in the "Add Printer"
+	sequence
+	  during installation and one clicked another installation item (entries
+	  on left hand side)
+	  - When configuring printing only after installation Printerdrake tried
+	to
+	  check the installed queues without Foomatic being installed (bug was
+	  already in 8.1, but noone discovered it).
+	  - CUPS died when one tried to add a (local) printer in recommended
+	mode
+	  after installation.
+	  - Improved text for the dialog telling that no local printer was
+	detected.
+	  - The list of auto-detected printers appeared as drop-down menu and
+	not as
+	  a list.
+
+	* detect_devices.pm: In the USB auto-detection checked whether and where
+	the device node was
+	created.
+	Fixes on device auto-detection:
+	  - Made USB printer auto-detection routine in "detect_devices.pm"
+	creating
+	the appropriate device nodes (needed for USB printers being recognized
+	  during installation).
+	  - Fixed "devices.pm" to be able to handle device files with numbers
+	geater
+	  than 9 (ex: /dev/usb/lp10).
+
+	* standalone/printerdrake: 
+	  - Assure that Foomatic is installed before checking existing printer
+	queues.
+
+	* devices.pm: Fixes on device auto-detection:
+	  - Made USB printer auto-detection routine in "detect_devices.pm"
+	creating
+	the appropriate device nodes (needed for USB printers being recognized
+	  during installation).
+	  - Fixed "devices.pm" to be able to handle device files with numbers
+	geater
+	  than 9 (ex: /dev/usb/lp10).
+
+	* printer.pm: Added forgotten '$prefix'es.
+	Fixed:
+	  - Endless loop when entering printerdrake during installation in
+	recommended
+	mode without local printer
+	  - Printerdrake was not closed when one was in the "Add Printer"
+	sequence
+	  during installation and one clicked another installation item (entries
+	  on left hand side)
+	  - When configuring printing only after installation Printerdrake tried
+	to
+	  check the installed queues without Foomatic being installed (bug was
+	  already in 8.1, but noone discovered it).
+	  - CUPS died when one tried to add a (local) printer in recommended
+	mode
+	  after installation.
+	  - Improved text for the dialog telling that no local printer was
+	detected.
+	  - The list of auto-detected printers appeared as drop-down menu and
+	not as
+	  a list.
+
+2002/02/11  dam's  <damien@mandrakesoft.com>
+
+	* share/list: added modinfo
+
+	* network/netconnect.pm: added cancel for first step
+
+2002/02/11  François Pons  <fpons@mandrakesoft.com>
+
+	* any.pm: fixed syntax error...
+
+	* Xconfigurator.pm: avoid testing fbdev driver.
+
+	* install_steps.pm: added Aurora or bootsplash for getting a need on frame
+	buffer.
+	added fbdev for GeForce Integrated.
+
+2002/02/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po, share/po/vi.po, share/po/hu.po: updated Danish,
+	Hungarian and Vietnamese files
+
+2002/02/11  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: booh, fpons was faster than me on "bootsplash wanting
+	fb". Keeping my solution ;p
+
+	* c/stuff.xs.pm: "standard_charset" and "iconv" are needed even when C_RPM
+	is undefined
+
+	* any.pm: allow to edit the initrd field (thx to randy.k.wilson)
+
+	* install_any.pm (@needToCopy): add "ntp"
+
+2002/02/11  warly
+
+	* share/rpmsrate: remove dev from INSTALL, the sun is rising, and there
+	are no more needs to have ppp in the INSTALL section, as the darkness is
+	going away...
+
+2002/02/10  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: in case there is both ata66 (hde) and ata33 hard drives, go to
+	expert
+	questions directly (it would need a semi_auto asking on which drive the
+	bios
+	boots...)
+
 2002/02/10  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/nl.po: updated Dutch file
