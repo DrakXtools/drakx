@@ -4,6 +4,64 @@
 	usefull for dhcp, because the network should be restarted after
 	configured
 
+	* network/adsl.pm: test if microcode is there
+
+	* bootlook.pm: removed blocking die
+
+2001/09/20  fcrozat
+
+	* share/rpmsrate: Add gnome-user-docs to GNOME install
+	Install Mdk eazel engine for gnome
+
+2001/09/20  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: take care not probing in /dev/ for finding package to upgrade,
+	this cause
+	problem in live_upgrade.
+
+	* Xconfigurator.pm: added VideoRam for ET 6x00 card.
+
+	* network/netconnect.pm: tried to fix damien sucking.
+
+2001/09/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: misc
+
+2001/09/20  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/tr.po: updated Turkish file
+
+	* share/po/cs.po: updated Czech file
+
+	* share/po/nl.po, share/po/da.po, share/po/zh_TW.po: updated Danish,
+	Chinese and Dutch files
+
+2001/09/20  Pixel  <pixel@mandrakesoft.com>
+
+	* install_interactive.pm (partition_with_diskdrake): ensure the $::expert
+	flag modifications in
+	diskdrake do not escape from diskdrake
+
+	* share/rpmsrate: raise i18n fonts
+
+	* fsedit.pm (hds): do a get_major_minor where needed
+
+	* lang.pm: replace xcin by chinput as per Alex request
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): do not propose
+	check bad blocks for xfs and jfs
+
+2001/09/20  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Fixed flow of the program for the "recommended" mode of
+	the installation.
+
+2001/09/20  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: don't reapply the conf, if already applied.
+	usefull for dhcp, because the network should be restarted after
+	configured
+
 	* mouse.pm: text positionning
 
 	* standalone/net_monitor: less gethostbyname
