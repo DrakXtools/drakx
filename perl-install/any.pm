@@ -230,12 +230,13 @@ _("Default") => { val => \$default, type => 'bool' },
 }
 
 sub setAutologin {
-  my ($prefix, $user, $wm) = @_; 
-  my $f = "$prefix/etc/X11/xdm/xdm-config";
-  my $t1 = "DisplayManager._0.autoUser:";
-  my $t2 = "DisplayManager._0.autoString:";
-  substInFile { s/^(\Q$t1\E|\Q$t2\E).*\n//; $_ .= "$t1\t$user\n$t2\t$wm\n" if eof && $user } $f;
-  # (dam's) : a patch for gdm is being done.
+  my ($prefix, $user, $exe, $flag) = @_; 
+  my $f = "$prefix/etc/sysconfig/autologin";
+  my $t1 = "USER=";
+  my $t2 = "EXEC=";
+  my $t3 = "AUTOLOGIN=";
+  substInFile { s/^(\Q$t1\E|\Q$t2\E|\Q$t3\E).*\n//; $_ .= "$t1$user\n$t2$exe\n$t3=$flag" if eof } $f;
+  `chmod 644 $f`;
 }
 
 
