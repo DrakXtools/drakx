@@ -741,13 +741,13 @@ sub summary {
 { label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
 { label => _("Printer"), val => \$o->{printer}{mode}, clicked => sub { $o->configurePrinter(1) }, format => sub { $_[0] || _("No printer") } },
     (map { 
-{ label => _("Sound card"), val => \ (my $i = $_->{description}), clicked => {} } 
+{ label => _("Sound card"), val => \ (my $i = $_->{description}), clicked => sub {} } 
      } modules::get_that_type('sound')),
     (map {
-{ label => _("TV card"), val => \ (my $i = $_->{description}), clicked => {} } 
+{ label => _("TV card"), val => \ (my $i = $_->{description}), clicked => sub {} } 
      } grep { $_->{driver} eq 'bttv' } detect_devices::probeall()),
     (map {
-{ label => _("ISDN card"), val => \ (my $i = $_->{description}), clicked => { $o->configureNetwork } }
+{ label => _("ISDN card"), val => \ (my $i = $_->{description}), clicked => sub { $o->configureNetwork } }
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
 ]);
 }
