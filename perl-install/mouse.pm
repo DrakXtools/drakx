@@ -292,8 +292,8 @@ sub detect {
         my $synaptics_mouse;
         if (my $mouse_nb = grep { /^H: Handlers=mouse/ } @input_devices) {
             my $univ_mouse = fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
-            $::isInstall && !$::o->{mouse} and return $univ_mouse; #- don't try to use synpatics at beginning of install
             if (any { m!^N: Name="(?:SynPS/2 Synaptics TouchPad|AlpsPS/2 ALPS TouchPad)"$! } @input_devices) {
+                $::isInstall && $synaptics->{alternate_install} = $univ_mouse; #- don't try to use synpatics at beginning of install
                 $synaptics_mouse = fullname2mouse('PS/2|Synaptics Touchpad');
                 $mouse_nb < 2 and return $synaptics_mouse;
                 $univ_mouse->{auxmouse} = $synaptics_mouse;
