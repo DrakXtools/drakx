@@ -185,7 +185,7 @@ sub set_resolution {
 	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} };
 	$Screen->{Display} = [ map {
 	    my $modes = do {
-		if ($resolution->{fbdev}) {
+		if ($raw_X->is_fbdev($Screen)) {
 		    '"default"';
 		} else {
 		    my @Modes = grep { 

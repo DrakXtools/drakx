@@ -87,11 +87,6 @@ sub set_resolution {
     my ($raw_X, $resolution, $Screen) = @_;
 
     $resolution = +{ %$resolution };
-    if (my $Screen_ = $Screen || $raw_X->get_default_screen) {
-	#- use framebuffer if corresponding Device has Driver framebuffer
-	my $Device = $raw_X->get_Section_by_Identifier('Device', val($Screen_->{Device})) or internal_error("no device named $Screen_->{Device}");
-	$resolution->{fbdev} = 1 if val($Device->{Driver}) eq 'fbdev';
-    }
     #- XFree4 doesn't like depth 32, silently replacing it with 24
     $resolution->{Depth} = 24 if $resolution->{Depth} eq '32';
 
@@ -120,6 +115,15 @@ sub new_screen_sections {
     ];
 
     @l;
+}
+
+sub is_fbdev {
+    my ($raw_X, $Screen) = @_;
+
+    my $Screen_ = $Screen || $raw_X->get_default_screen or return;
+
+    my $Device = $raw_X->get_Section_by_Identifier('Device', val($Screen_->{Device})) or internal_error("no device named $Screen_->{Device}");
+    val($Device->{Driver}) eq 'fbdev';
 }
 
 sub set_Option {

@@ -84,16 +84,6 @@ sub set_wacoms {
 }
 
 sub depths { 8, 15, 16, 24, 32 }
-sub set_resolution {
-    my ($raw_X, $resolution, $Screen) = @_;
-
-    $resolution = +{ %$resolution };
-    if (my $Screen_ = $Screen || $raw_X->get_default_screen) {
-	#- use framebuffer if Screen is
-	$resolution->{fbdev} = 1 if val($Screen_->{Driver}) eq 'fbdev';
-    }
-    $raw_X->SUPER::set_resolution($resolution, $Screen);
-}
 
 sub get_device_section_fields {
     qw(VendorName BoardName Chipset VideoRam); #-);
@@ -109,6 +99,14 @@ sub new_device_sections {
     my @l = $raw_X->SUPER::new_device_sections($nb_new);
     $_->{power_saver} = { Option => 1 } foreach @l;
     @l;
+}
+
+sub is_fbdev {
+    my ($raw_X, $Screen) = @_;
+
+    my $Screen_ = $Screen || $raw_X->get_default_screen or return;
+
+    val($Screen_->{Driver}) eq 'fbdev';
 }
 
 sub set_Option {}
