@@ -316,8 +316,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakboot, drakfont: use stock button
 - drakconnect, drakfloppy: grey widgest instead of hiding them when
   not in expert mode
+- drakconnect, draksec: fix crash
 - drakbackup: misc fixes (stew)
-- draksec: fix crash
 
 * Wed Jul  9 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.11mdk
 - more work on new perl binding for gtk+-2, especially for drakbug and
