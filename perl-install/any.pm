@@ -582,7 +582,10 @@ sub miscellaneousNetwork {
 sub setup_thiskind {
     my ($in, $type, $auto, $at_least_one) = @_;
 
-    my @l = setup_thiskind_backend ($type, $auto, $at_least_one, sub { my $w = wait_load_module($in, $type, @_); } );
+    my @l = do {
+	my $w;
+	setup_thiskind_backend ($type, $auto, $at_least_one, sub { $w = wait_load_module($in, $type, @_); } );
+    };
 
     if (!$::noauto) {
 	if (my @err = grep { $_ } map { $_->{error} } @l) {
