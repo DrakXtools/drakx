@@ -527,8 +527,12 @@ sub writeandclean_ldsoconf {
     my $file = "$prefix/etc/ld.so.conf";
     my @l = chomp_(cat_($file));
     @l = grep { !m|^(/usr)?/lib(64)?$| } @l; #- no need to have /lib and /usr/lib in ld.so.conf
-    push @l, '/usr/X11R6/lib', if_(arch() =~ /x86_64/, '/usr/X11R6/lib64');
-    push @l, grep { -d "$::prefix$_" } '/usr/lib/qt3/lib', if_(arch() =~ /x86_64/, '/usr/lib/qt3/lib64'); #- needed for upgrade where package renaming can cause this to disappear
+
+    my @suggest = ('/usr/X11R6/lib', '/usr/lib/qt3/lib'); #- needed for upgrade where package renaming can cause this to disappear
+    if (arch() =~ /x86_64/) {
+	push @suggest, map { $_ . '64' } @suggest;
+    }
+    push @l, grep { -d "$::prefix$_" } @suggest;
     output($file, map { "$_\n" } uniq(@l));
 }
 
