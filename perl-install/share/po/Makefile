@@ -1,21 +1,26 @@
-PMSFILES = $(shell find .. -name "*.pm" | grep -v "^../po")
-POFILES = $(wildcard *.po)
+PMSFILES = $(shell find .. -name "*.pm" | grep -v "^../po" | grep -v "^../c/")
+PMSCFILES = $(PMSFILES:%=%_.c)
+POFILES = $(shell ls *.po | grep -v empty.po)
 FROMPOFILES = $(POFILES:%.po=%.pm)
 
 all: $(FROMPOFILES)
 
 clean:
-	rm -f $(FROMPOFILES)
+	rm -f empty.po $(FROMPOFILES) $(POFILES:%=%t) $(PMSCFILES)
 
 $(FROMPOFILES): %.pm: %.po
 	./po2perl < $< > $@
 
-%.po: $(PMSFILES)
-	touch $@
-	for i in $(PMSFILES); do \
-		sed -e 's/#\(.*\)/\/*\1*\//' -e 's/$$/\\n\\/' < $$i > $${i}c; \
-		xgettext -j -F -Lc -n --omit-header --keyword=_ --keyword=__ -o $@ $${i}c; \
-		rm $${i}c; \
-	done
+$(POFILES): empty.po
+	cp -f $@ $@t
+	msgmerge $@t $< > $@
+	rm $@t
 
-FORCE:
+empty.po: $(PMSFILES)
+	$(MAKE) $(PMSCFILES);
+	xgettext -F -n --omit-header --keyword=_ --keyword=__ -o empty.po $(PMSCFILES)
+	rm $(PMSCFILES)
+
+$(PMSCFILES): %_.c: %
+	perl -pe 's|#(.*)|/*\1*\/|; s|$$|\\n\\|' $< > $@
+
