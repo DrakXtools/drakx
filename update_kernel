@@ -16,9 +16,10 @@ function create_marfile() {
         needed=`cat modules.dep | perl -ne "print "'$1'" if /^$j: (.*)/"`
         for k in $needed
 	do
-	    [ -z "`echo $* | grep $k`" ] \
-              && [ -z "`echo $PCMCIA_COREMODULES | grep $k`" ] \
-              && echo "WARNING! in $marfile, $k is missing (required by $i)"
+	  [ -z "`echo $* | grep $k`" ] \
+	      && [ -z "`echo $PCMCIA_COREMODULES | grep $k`" ] \
+	      && echo "ERROR: in $marfile, $k is missing (required by $i)" \
+	      && exit 1
         done
     done
     $GIBASEDIR/mdk-stage1/mar/mar -c $marfile $(ls $*)
