@@ -311,6 +311,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Thu Jul 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.16mdk
+- do not exit the whole application when one destroy a dialog
 - drop gtk+1 requires
 - renew drakconnect gui:
   o embedded mode:
