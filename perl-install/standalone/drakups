@@ -252,7 +252,7 @@ my @pages = (
                              add => sub {
                                  eval { add_device_wizard($in, $struct) };
                                  my $err = $@;
-                                 die $err if $err !~ /wizcancel/;
+                                 die $err if $err && $err !~ /wizcancel/;
                                  $::WizardWindow->destroy if defined $::WizardWindow;
                                  undef $::WizardWindow;
                              },
