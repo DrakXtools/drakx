@@ -192,7 +192,7 @@ $window->main;
 ugtk2->exit(0);
 
 
-sub toggle_expert_button {
+sub toggle_expert_button() {
     if ($expert_mode) {
         $expert_mod_frame->show();
         $expert_button->child->set(N("Normal Mode"));
@@ -275,7 +275,7 @@ sub expand_tree {
 #-------------------------------------------------------------
 # the function
 #-------------------------------------------------------------
-sub build_it {
+sub build_it() {
     my $y;
     my $co = "/sbin/mkbootdisk --noprompt --verbose --device " . $device_combo->entry->get_text();
     if ($expert_mode) {
@@ -325,8 +325,7 @@ sub has_sub_trees {
     my ($dir) = @_;
     
     foreach my $file (glob_("$dir/*")) {
-        return 1 if -d $file or $file =~ /\.o(\.gz)?$/;
-
+        return 1 if -d $file || $file =~ /\.o(\.gz)?$/;
     }
     
     return 0;
