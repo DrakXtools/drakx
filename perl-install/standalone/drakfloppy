@@ -95,7 +95,7 @@ $window->{window}->add(
                                                     gtkpack__(new Gtk2::HBox(1, 0),
                                                               Gtk2::Label->new(N("Kernel version")),
                                                               $kernel_combo,
-                                                              gtksignal_connect(Gtk2::Button->new("Default"),
+                                                              gtksignal_connect(Gtk2::Button->new(N("Default")),
                                                                                 clicked => sub { 
                                                                                     $kernel_combo->entry->set_text(chomp_(`uname -r`));
                                                                                 }),
