@@ -135,13 +135,13 @@ my ($x_box, $splash_box);
 gtkadd($window,
        gtkpack_(Gtk2::VBox->new(0,0),
                 ($splash_working ?
-                 (1, gtkpack(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
-                             gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $splash_mode), 
+                 (1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
+                              0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $splash_mode), 
                                                clicked => sub {
                                                    $splash_box->set_sensitive(!$splash_mode);
                                                    $splash_mode = !$splash_mode;
                                                }),
-                             gtkpack__(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $splash_mode),
+                              1, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $splash_mode),
                                        gtkpack__(Gtk2::VBox->new(0, 5),
                                                  N("Theme"),
                                                  $combo{boot},
