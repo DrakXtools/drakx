@@ -403,13 +403,8 @@ int main(int argc, char **argv)
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("Yavpoovoy says:\n");
-	printf("    Abraham leva les yeux et vit un belier, qui s'etait pris par les\n");
-	printf("    cornes dans un buisson, et Abraham alla prendre le belier et l'offrit\n");
-	printf("    en holocauste a la place de son fils. A ce lieu, Abraham donna le nom\n");
-	printf("    de \"Yahve pourvoit\", en sorte que l'on dit aujourd'hui: \"Sur la\n");
-	printf("    montagne. Yahve pourvoit.\"\n");
-	printf("                                               Gn 22, 13-14\n");
+	printf("If more people were to meet doing raklets, this planet\n");
+	printf("would be a safer place.\n");
 	printf("\n");
 	printf("Running install...\n"); 
 	
