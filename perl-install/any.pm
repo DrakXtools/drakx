@@ -443,7 +443,7 @@ Timeout=60
 UseCDLine=0
 UseLockFile=1
 Device=/dev/modem
-Speed=57600
+Speed=115200
 [Graph]
 InBytes=0,0,255
 Text=0,0,0
