@@ -125,7 +125,7 @@ sub real_main {
               return "multiple_internet_cnx";
           } else {
               $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
-              return $::isInstall ? "network_on_boot" : "apply_settings";
+              return "network_on_boot";
           }
       };
 
@@ -954,7 +954,7 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
-                        network::ethernet::write_ether_conf($in, $netcnx, $netc, $intf) if $netcnx->{type} = 'lan';
+                        network::ethernet::write_ether_conf($in, $netcnx, $netc, $intf) if $netcnx->{type} eq 'lan';
                         if ($ethntf->{IPADDR}) {
                             $netc->{dnsServer} ||= dns($ethntf->{IPADDR});
                             $gateway_ex = gateway($ethntf->{IPADDR});
@@ -1019,19 +1019,13 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                         [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, 
                             list => [ keys %{$netc->{internet_cnx}} ] } ];
                     },
-                    post => sub { $::isInstall ? "network_on_boot" : "apply_settings" },
-                   },
-                   
-                   apply_settings => 
-                   {
-                    name => N("Configuration is complete, do you want to apply settings ?"),
-                    type => "yesorno",
                     post => sub {
-			if (keys %$config) {
-			    require Data::Dumper;
-			    output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
-			}
-			"network_on_boot" },
+                        if (keys %$config) {
+                            require Data::Dumper;
+                            output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
+                        }
+                        return "network_on_boot";
+                    },
                    },
                    
                    network_on_boot => 
