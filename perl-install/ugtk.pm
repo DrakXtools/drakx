@@ -319,7 +319,9 @@ sub create_factory_menu_ {
     my $widget = new Gtk::ItemFactory($type, $name, my $accel_group = new Gtk::AccelGroup);
     $widget->create_items(@menu_items);
     $window->add_accel_group($accel_group); #$accel_group->attach($main_win);
-    $widget->get_widget($name); # return menu bar
+    my $menu = $widget->get_widget($name);
+    $menu->{factory} = $widget;
+    $menu; # return menu bar
 }
 
 sub create_factory_menu { create_factory_menu_('Gtk::MenuBar', '<main>', @_) }
@@ -496,7 +498,7 @@ sub get_text_coord {
 		if (ord($c[$i]) >= 128) { $el .= $c[$i+1]; $i++; push @t2, $el; $el = '' }
 		$i++;
 	    }
-	    $el ne '' and push @t2, $el;
+	    $el and push @t2, $el;
 	}
     } else {
 	@t2 = @t;
