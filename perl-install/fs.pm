@@ -80,6 +80,7 @@ sub format_ext2($@) {
     my ($dev, @options) = @_;
 
     $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
+    push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
 
     run_program::run("mke2fs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);
 }
@@ -365,6 +366,12 @@ sub write_fstab($;$$) {
     local *F;
     open F, "> $prefix/etc/fstab" or die "error writing $prefix/etc/fstab";
     print F join(" ", @$_), "\n" foreach sort { $a->[1] cmp $b->[1] } @to_add;
+}
+
+sub merge_fstabs {
+    my ($fstab, $manualFstab) = @_;
+    my %l; $l{$_->{device}} = $_ foreach @$manualFstab;
+    add2hash_($_, $l{$_->{device}} || next) foreach @$fstab;
 }
 
 #sub check_mount_all_fstab($;$) {

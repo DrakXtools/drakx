@@ -303,6 +303,7 @@ I'll try to go on blanking bad partitions"), $err]) unless $o->{partitioning}{re
     ($o->{hds}, $o->{fstab}, $ok2) = fsedit::verifyHds($o->{hds}, $o->{partitioning}{readonly}, $ok);
 
     fs::check_mounted($o->{fstab});
+    fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
 
     $o->{partitioning}{clearall} and return 1;
     $o->ask_warn('', 
@@ -624,6 +625,7 @@ sub install_urpmi {
 	local *FILES; open FILES, "bzip2 -dc /tmp/$_->{hdlist} 2>/dev/null | hdlist2names - |";
 	chop, print LIST "$dir/$_\n" foreach <FILES>;
 	close FILES or log::l("hdlist2names failed"), return;
+	close LIST;
 
 	$dir .= " with ../base/$_->{hdlist}" if $method =~ /ftp|http/;
 	"$name $dir\n";
