@@ -397,7 +397,8 @@ int mandrake_move_post(void)
         char rootdev[] = "0x0100"; 
         int boot__real_is_symlink_to_raw = 0;
         int main__real_is_symlink_to_raw = 0;
-        char* clp = IMAGE_LOCATION "/live_tree_boot.clp";
+        char* clp       = IMAGE_LOCATION "/live_tree_boot.clp";
+        char* clp_tmpfs = SLASH_LOCATION "/live_tree_boot.clp";
         char* live = IMAGE_LOCATION "/live_tree_boot/usr/bin/runstage2.pl";
 
         if (IS_LIVE || access(clp, R_OK)) {
@@ -412,8 +413,43 @@ int mandrake_move_post(void)
                 return RETURN_ERROR;
         }
 
-        if (lomount(clp, BOOT_LOCATION, NULL, 1))
-                stg1_error_message("Could not mount boot compressed loopback :(.");
+        {
+                FILE * from, * to;
+                size_t quantity __attribute__((aligned(16)));
+                size_t overall __attribute__((aligned(16))) = 0;
+                char buf[4096] __attribute__((aligned(4096)));
+
+                log_message("move: copying live_tree_boot.clp to tmpfs");
+                if (scall(!(from = fopen(clp, "rb")), "fopen"))
+                        return RETURN_ERROR;
+                if (scall(!(to = fopen(clp_tmpfs, "w")), "fopen"))
+                        return RETURN_ERROR;
+
+                init_progression("Loading startup program into memory...", file_size(clp));
+
+                do {
+                        if ((quantity = fread(buf, 1, sizeof(buf), from)) > 0) {
+                                if (fwrite(buf, 1, quantity, to) != quantity) {
+                                        log_message("short write (%s)", strerror(errno));
+                                        return RETURN_ERROR;
+                                }
+                        }
+                        overall += quantity;
+                        update_progression(overall);
+                } while (!feof(from) && !ferror(from) && !ferror(to));
+
+                end_progression();
+
+                if (ferror(from) || ferror(to)) {
+                        log_message("an error occured while copying live_tree_boot.clp (%s)", strerror(errno));
+                        return RETURN_ERROR;
+                }
+                fclose(from);
+                fclose(to);
+
+                if (lomount(clp_tmpfs, BOOT_LOCATION, NULL, 1))
+                        stg1_error_message("Could not mount boot compressed loopback :(.");
+        }
 
  live_tree_clp:
         clp = IMAGE_LOCATION "/live_tree.clp";
