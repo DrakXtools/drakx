@@ -38,7 +38,7 @@ use c;
 use modules;
 use network::isdn;
 use network::adsl;
-use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file);
+use MDK::Common::Globals "network", qw($in);
 use POSIX ":sys_wait_h";
 
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
@@ -53,13 +53,7 @@ reread_net_conf();
 $::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "wiz_drakconnect.png";
 
-MDK::Common::Globals::init(
-	      in => $in,
-	      prefix => '',
-	      connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
-	      disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
-	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg"
-	     );
+MDK::Common::Globals::init(in => $in);
 
 local $_ = join '', @ARGV;
 /--skip-wizard/ and manage($netc, $netcnx, $intf);
@@ -99,8 +93,8 @@ my $int_connect = Gtk2::Button->new(N("Wait please"));
 $int_connect->set_sensitive(0);
 $int_connect->signal_connect(clicked => sub {
     if (!$isconnected) {
-        if (cat_($connect_prog) =~ m|/usr/bin/kppp| && -e '/usr/bin/kppp') {
-            run_program::rooted($prefix, "/usr/bin/kppp &");
+        if (cat_($network::tools::connect_prog) =~ m|/usr/bin/kppp| && -e '/usr/bin/kppp') {
+            run_program::run("/usr/bin/kppp &");
           } else {
               connect_backend();
           } 
@@ -605,9 +599,9 @@ sub apply {
     
     network::network::sethostname($netc) if is_dynamic_ip($intf);
     
-    network::network::configureNetwork2($in, $prefix, $netc, $intf);
+    network::network::configureNetwork2($in, '', $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
-    $netcnx->{type} !~ /adsl_p/ and system("$prefix/etc/rc.d/init.d/network restart");
+    $netcnx->{type} !~ /adsl_p/ and system("/etc/rc.d/init.d/network restart");
 
     $button_apply->set_sensitive(0);
 }
