@@ -130,8 +130,8 @@ sub real_main {
           @all_cards = network::ethernet::get_eth_cards();
           %eth_intf = network::ethernet::get_eth_cards_names(@all_cards);
           require list_modules;
-          my @wmodules = list_modules::category2modules('network/wireless');
-          %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } grep { int(!$is_wireless) ^ member($_->[1], @wmodules) } @all_cards;
+          %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) }
+            grep { $is_wireless ^ !c::isNetDeviceWirelessAware($_->[0])  } @all_cards;
       };
 
       my $find_lan_module = sub { 
