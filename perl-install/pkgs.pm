@@ -655,7 +655,7 @@ sub saveCompssUsers {
     my ($packages, $compssUsers) = @_;
     my $flat;
     foreach (@$compssUsers) {
-	my %fl = map { $_ => 1 } @{$_->{flags}};
+	my %fl = map { ("CAT_$_" => 1) } @{$_->{flags}};
 	$flat .= "$_->{label} [icon=xxx] [path=$_->{path}]\n";
 	foreach my $p (@{$packages->{depslist}}) {
 	    my @flags = $p->rflags;
