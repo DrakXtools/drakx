@@ -547,7 +547,7 @@ sub ask_user_one {
           { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], not_edit => !$::expert, advanced => 1 },
 	    if_($security <= 3 && !$options{noicons} && @icons,
-	  { label => N("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => \&face2png, format => \&translate },
+	  { label => N("Icon"), val => \ ($u->{icon} ||= 'default'), list => \@icons, icon2f => \&face2png, format => \&translate },
 	    ),
 	    if_($security > 3,
                 map {
