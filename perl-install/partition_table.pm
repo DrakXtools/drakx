@@ -255,10 +255,20 @@ sub verifyInside($$) {
 sub verifyParts_ {
     foreach my $i (@_) {
 	foreach (@_) {
-	    next if !$i || !$_ || $i == $_ || isWholedisk($i); #- avoid testing twice on whole disk for simplicity :-)
-	    isWholedisk($_) ?
-		verifyInside($i, $_) || cdie sprintf("partitions sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!", $i->{size} >> 11, $_->{size} >> 11) :
-		verifyNotOverlap($i, $_) || cdie sprintf("partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!", $i->{size} >> 11, $_->{size} >> 11);
+	    next if !$i || !$_ || $i == $_ || isWholedisk($i) || isExtended($i); #- avoid testing twice for simplicity :-)
+	    if (isWholedisk($_)) {
+		verifyInside($i, $_) or
+		  cdie sprintf("partition sector #$i->{start} (%dMB) is not inside whole disk (%dMB)!",
+			       $i->{size} >> 11, $_->{size} >> 11);
+	    } elsif (isExtended($_)) {
+		verifyNotOverlap($i, $_) or
+		  log::l(sprintf("warning partition sector #$i->{start} (%dMB) is overlapping with extended partition!",
+				 $i->{size} >> 11)); #- only warning for this one is acceptable
+	    } else {
+		verifyNotOverlap($i, $_) or
+		  cdie sprintf("partitions sector #$i->{start} (%dMB) and sector #$_->{start} (%dMB) are overlapping!",
+			       $i->{size} >> 11, $_->{size} >> 11);
+	    }
 	}
     }
 }
