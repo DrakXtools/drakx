@@ -14,7 +14,7 @@ my $kernel_version = do {
     first(`rpm -qp --qf '%{name}' $l[0]` =~ /kernel-(.*)/);
 };
 
-sub installPackages {
+sub installPackages() {
     output_p("$::prefix/etc/rpm/macros", "%_install_langs all\n");
     rename '/etc/rpm/macros', '/etc/rpm/macros.';
     system('cp', "$::prefix/etc/rpm/macros", '/etc/rpm/macros');
@@ -98,7 +98,7 @@ sub installPackages {
     rename "/etc/rpm/macros.", "/etc/rpm/macros";
 }
 
-sub config_X_proprietary_drivers {
+sub config_X_proprietary_drivers() {
     unlink "$::prefix/usr/lib/libGL.so";
 
     my %name_to_Driver = (NVIDIA_GLX => 'nvidia', ATI_GLX => 'fglrx');
@@ -115,7 +115,7 @@ sub config_X_proprietary_drivers {
 
     #- remove the dirty hack done by NVIDIA_kernel-xxx proprietary package
     #- we do it by hand when needed
-    substInFile { $_ = '' if /^nvidia$/ } "$::prefix/etc/modules";
+    substInFile { $_ = '' if $_ eq 'nvidia' } "$::prefix/etc/modules";
 }
 
 $::prefix = `make get_dest_livetree`;
@@ -234,6 +234,7 @@ substInFile {
 } "$::prefix/etc/mandrake-release";
 
 #- fix mandrake galaxy version download
+my $next;
 substInFile {
     s/Mandrake%20Control%20Center\.desktop/Configure%20your%20computer.desktop/;
     s/logiciels\.// if $next;
