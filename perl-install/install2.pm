@@ -111,7 +111,7 @@ sub selectMouse {
 sub setupSCSI {
     my ($clicked, $ent_number, $auto) = @_;
 
-    if (!$::live && !$o->{blank}) {
+    if (!$::live && !$::g_auto_install && !$o->{blank}) {
 	-s modules::cz_file() or die _("Can't access kernel modules corresponding to your kernel (file %s is missing)", modules::cz_file());
     }
 
