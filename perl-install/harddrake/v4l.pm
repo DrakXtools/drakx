@@ -247,7 +247,9 @@ If your card is misdetected, you can force the right tuner and card types here. 
 #             log::explanations("modified file /etc/modules.conf ($options)") if $::isStandalone;
               modules::set_options("bttv", $options);
           }
+        return 1;
     }
+    return 0;
 }
 
 
