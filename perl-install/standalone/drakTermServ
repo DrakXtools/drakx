@@ -986,8 +986,8 @@ sub dhcpd_config {
 
 	my $label_ip_range_start = new Gtk2::Label(N("IP Range Start:"));
 	my $label_ip_range_end = new Gtk2::Label(N("IP Range End:"));
-	my $entry_ip_range_start = new Gtk2::Entry(15);
-	my $entry_ip_range_end = new Gtk2::Entry(15);
+	my $entry_ip_range_start = new Gtk2::Entry();
+	my $entry_ip_range_end = new Gtk2::Entry();
 	
 	#- grab some default entries from the running system
 	
