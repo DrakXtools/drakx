@@ -316,7 +316,7 @@ sub hd_possible_actions_interactive {
 
 sub Clear_all {
     my ($in, $hd, $all_hds) = @_;
-
+    return if is_xbox(); #- do not let them wipe the OS
     my @parts = partition_table::get_normal_parts($hd);
     foreach (@parts) {
 	RemoveFromLVM($in, $hd, $_, $all_hds) if isPartOfLVM($_);
@@ -457,6 +457,9 @@ sub part_possible_actions {
     );
     if (isEmpty($part)) {
 	if_(!$hd->{readonly}, N_("Create"));
+    } elsif ($part->{pt_type} == 0xbf) {
+        #- XBox OS partitions, do not allow anything
+        return;    
     } else {
         grep { 
     	    my $cond = $actions{$_};
