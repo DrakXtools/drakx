@@ -400,9 +400,7 @@ sub selectSupplMedia {
     my ($o, $suppl_method) = @_;
     #- ask whether there are supplementary media
     my $prev_asked_medium = $asked_medium;
-    if ($suppl_method && !$o->{isUpgrade}
-	&& (my $suppl = ask_if_suppl_media($o)) ne 'None')
-    {
+    if ($suppl_method && (my $suppl = ask_if_suppl_media($o)) ne 'None') {
 	#- translate to method name
 	$suppl_method = {
 	    'CD-ROM' => 'cdrom',
