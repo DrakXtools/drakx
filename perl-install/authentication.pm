@@ -118,7 +118,7 @@ sub set {
 			 nss_base_group => "ou=Group,$domain",
 			);
     } elsif ($kind eq 'AD') {
-	$in->do_pkgs->install(qw(nss_ldap pam_krb5));
+	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
 
 	set_nsswitch_priority('ldap');
 	set_pam_authentication('krb5');
