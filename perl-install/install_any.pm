@@ -775,6 +775,9 @@ sub getHds {
     $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)
         unless $flags->{clearall} || $flags->{clear};
 
+    #- try to figure out if the same number of hds is available, use them if ok.
+    $ok && $hds && @$hds > 0 && @{$o->{hds} || []} == @$hds and return $ok;
+
     $o->{hds} = $hds;
     $o->{lvms} = $lvms;
     $o->{fstab} = [ fsedit::get_fstab(@$hds, @$lvms) ];
