@@ -3,13 +3,16 @@
 use MDK::Common;
 use Getopt::Long;
 
-my $first_file = '/usr/bin/totem';
+my $first_file;
+my $log_file = '/var/log/kernel/warnings';
 
 GetOptions('no-link' => \ (my $no_link), 
 	   'no-dir' => \ (my $no_dir),
 	   'full-dirs=s', \ (my $full_dirs),
 	   'ip=s' => \ (my $wanted_ip),
-	   'first-file=s' => \$first_file,
+	   'log-file=s' => \$log_file,
+	   'first-file=s' => \ (my $first_file),
+	   'from-time=s', => \ (my $from_time),
 	  );
 
 my @skipped_dirs = (
@@ -28,11 +31,11 @@ if ($full_dirs) {
     $full_dirs = '/tmp/live_tree(' . join('|', map { quotemeta } @l) . ')/';
 }
 
-open(my $F, "tac /var/log/kernel/warnings |");
+open(my $F, "tac $log_file |");
 
 my @l;
 while (<$F>) {
-    my ($ip, $rfile) = /kernel: nfsd \((.*?)\): (.*)/ or next; 
+    my ($time, $ip, $rfile) = /(\d+:\d+:\d+).*kernel: nfsd \((.*?)\): (.*)/ or next; 
 
     if ($wanted_ip) {
 	$wanted_ip eq $ip or next;
@@ -43,6 +46,7 @@ while (<$F>) {
     my $file = join('/', '', reverse split('/', $rfile));
 
     last if $file =~ m!/tmp/live_tree/move/(devices|symlinks)!;
+    last if $from_time && $time le $from_time;
 
     if ($file !~ /^$skipped_dirs/) {
 	if (-l $file ? !$no_link : -d $file ? !$no_dir : 1) {
@@ -50,7 +54,7 @@ while (<$F>) {
 	    unshift @l, $s;
 	}
     }
-    last if $file eq "/tmp/live_tree$first_file" || $rfile eq $first_file;
+    last if $first_file && ($file eq "/tmp/live_tree$first_file" || $rfile eq $first_file);
 }
 
 print "$_\n" foreach sort(uniq(@l));
