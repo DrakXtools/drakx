@@ -83,6 +83,45 @@ foreach my $img (@images) {
     }
 }
 
+sub syslinux_color {
+    "0" . {
+	default => '7',
+	blue    => '9',
+	green   => 'a',
+	red     => 'c',
+	yellow  => 'e',
+	white   => 'f',
+    }->{$_[0]} || die "unknown color $_[0]\n";
+}
+
+sub syslinux_msg { 
+    my ($msg_xml_file, @more_text) = @_;
+
+    require XML::Parser;
+
+    sub xml_tree2syslinux {
+	my ($current_color, $tree) = @_;
+	my (undef, @l) = @$tree;
+	join('', map {
+	    my ($type, $val) = @$_;
+	    if ($type eq '0') {
+		$val;
+	    } else {
+		syslinux_color($type) . xml_tree2syslinux($type, $val) . syslinux_color($current_color);
+	    }
+	} group_by2(@l));
+    };
+
+    print "parsing $msg_xml_file\n";
+    my $tree = XML::Parser->new(Style => 'Tree')->parsefile($msg_xml_file);
+    $tree->[0] eq 'document' or die "bad file $msg_xml_file\n";
+    my $text = xml_tree2syslinux('default', $tree->[1]);
+
+    pack("C*", 0x0E, 0x80, 0x03, 0x00) . ""
+      . $text . join('', @more_text)
+      . "\n" . syslinux_color('red') . "[F1-Help] [F2-Advanced Help] [F3-Main]" . syslinux_color('default') . "\n";
+}
+
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
@@ -173,6 +212,9 @@ sub boot_img_i386 {
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
     _ "cat $kernel > $mnt/vmlinuz";
     bmp_to_msg('isolinux-graphic-simple.bmp', "$mnt/boot.msg", '397,190,14,6', 27, 27);
+
+    output("$mnt/help.msg", syslinux_msg('help.msg.xml'));
+    output("$mnt/advanced.msg", syslinux_msg('advanced.msg.xml'));
 
     (my $rdz = $img) =~ s/\.img/.rdz/;
     (my $initrd_type = $type) =~ s/-changedisk//;
@@ -661,54 +703,10 @@ F3 boot.msg
   kernel test/memtest.bin
 ";
 
-    output "isolinux/help.msg", pack("C*", 0x0E, 0x80, 0x03, 0x00) .
-"
-                  0aWelcome to 09Mandrake Linux0a install help07
-
-In most cases, the best way to get started is to simply press the 0e<Enter>07 key.
-If you experience problems with standard install, try one of the following 
-install types (type the highlighted text and press 0e<Enter>07):
-
- o  0fvgalo07 for low resolution graphical installation.
- o  0ftext07 for text installation instead of the graphical one.
- o  0flinux07 for standard graphical installation at normal resolution.
- o  0fexpert07 for expert graphical installation at normal resolution.
-
-
-To use this CD to repair an already installed system type 0frescue07
-followed by 0e<Enter>07.
-
-You can also pass some 0f<specific kernel options>07 to the Linux kernel. 
-For example, try 0flinux mem=128M07 if your system has 128Mb of RAM but the default
-kernel ($main) does not detect it correctly.
-0cNOTE07: You cannot pass options to modules (SCSI, ethernet card) or devices
-such as CD-ROM drives in this way. If you need to do so, use expert mode.
-
-0c[F1-Help] [F2-Advanced Help] [F3-Main]07
-";
-
-    output "isolinux/advanced.msg", pack("C*", 0x0E, 0x80, 0x03, 0x00) .
-"
-The following install types may be used instead of previously notified :
- o  0fvgahi07 for high resolution graphical installation.
- o  0fvga1607 for 640x480 in 16 colors graphical installation.
-
-The following options may be added on the command line :
- o  0freadonly=107 to disable editing disk partitions.
- o  0fdisplay=ackbar:007 to export display to 09ackbar07 machine screen 0 during
-    installation.
- o  0fnoauto07 to disable automatic detection (generally used with 0fexpert07).
- o  0fsecurity=n07 to set security level to value 09n07.
- o  0fupdatemodules07 to use the special update floppy containing modules updates.
- o  0fpatch07 to use a patch from the floppy (file named 09patch.pl07).
- o  0fauto_install=floppy07 to enable auto_install using 09auto_inst.cfg07 file on the
-    floppy.
- o  0fmemtest07 to test your computer RAM for faulty memory modules.
-
-You can choose the following kernels :
-" . join('', map_index { " o  0falt$::i07 is kernel $_\n" } @kernels) . "
-0c[F1-Help] [F2-Advanced Help] [F3-Main]07
-";
+    output("isolinux/help.msg", syslinux_msg('help.msg.xml'));
+    output("isolinux/advanced.msg", syslinux_msg('advanced.msg.xml', 
+						 "\nYou can choose the following kernels :\n",
+						 map_index { " o  " . syslinux_color('white') . "alt$::i" . syslinux_color('default') . " is kernel $_\n" } @kernels));
 }
 
 sub isolinux_move {   
