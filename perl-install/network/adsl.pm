@@ -375,6 +375,8 @@ METRIC=$metric
         run_program::rooted($::prefix, "/usr/sbin/drdsl");
     }
 
+    #- load modules and run modem-specific start programs
+    #- useful during install, or in case the packages have been installed after the device has been plugged
     my @modules = (@{$modems{$adsl_device}{modules}}, map { $_->[1] } @{$modems{$adsl_device}{aliases}});
     @modules or @modules = qw(ppp_synctty ppp_async ppp_generic n_hdlc); #- required for pppoe/pptp connections
     @modules && eval { modules::load(@modules) }
