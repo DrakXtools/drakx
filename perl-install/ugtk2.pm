@@ -512,7 +512,7 @@ sub create_okcancel {
     my @l; # buttons list
     if ($::isWizard) {
         # wizard mode: order is cancel/extras/white/prev/next
-        push @l, if_(!$::isInstall, $w->{wizcancel}), @extras, $bprev, if_($::isInstall, Gtk2::Label->new), $bok;
+        push @l, if_(!$::isInstall, $w->{wizcancel}), @extras, if_($::isInstall, Gtk2::Label->new), $bprev, $bok;
     } else { 
         # normal mode: cancel/ok button follow current desktop's HIG
         my @extras = (@l2, @r2, if_($ok && $cancel, Gtk2::Label->new)); # space buttons but if there's only one
