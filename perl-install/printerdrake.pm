@@ -410,8 +410,8 @@ In case of doubt, select \"Remote CUPS server\"."),
 		    if ($in->ask_from_entries_refH(_("Remote CUPS server"),
 _("With a remote CUPS server, you do not have to configure
 any printer here; printers will be automatically detected
-unless you have a server on a different network, in this
-later case, you have to give the CUPS server IP address
+unless you have a server on a different network; in the
+latter case, you have to give the CUPS server IP address
 and optionally the port number."), [
 _("CUPS server IP") => \$server,
 _("Port") => \$port ],
