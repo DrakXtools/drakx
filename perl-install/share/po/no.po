@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-04-19 23:58+0200\n"
+"POT-Creation-Date: 2000-04-20 21:13+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -123,9 +123,8 @@ msgid "Leaving in %d seconds"
 msgstr "Slutter om %d sekunder"
 
 #: ../../Xconfigurator.pm_.c:371
-#, fuzzy
 msgid "Is this the correct setting?"
-msgstr "Er dette riktig?"
+msgstr "Er dette den riktige innstillingen?"
 
 #: ../../Xconfigurator.pm_.c:379
 msgid "An error has occurred, try to change some parameters"
@@ -433,9 +432,8 @@ msgid "First sector of drive (MBR)"
 msgstr "Første sektor av disk (MBR)"
 
 #: ../../any.pm_.c:65
-#, fuzzy
 msgid "LILO/grub Installation"
-msgstr "LILO-installasjon"
+msgstr "LILO/grub-installasjon"
 
 #: ../../any.pm_.c:66
 msgid "Where do you want to install the bootloader?"
@@ -586,7 +584,7 @@ msgstr "Etikett"
 msgid "Default"
 msgstr "Standard"
 
-#: ../../any.pm_.c:158 ../../install_steps_gtk.pm_.c:650
+#: ../../any.pm_.c:158 ../../install_steps_gtk.pm_.c:652
 #: ../../install_steps_interactive.pm_.c:618
 #: ../../install_steps_interactive.pm_.c:844 ../../interactive.pm_.c:74
 #: ../../interactive.pm_.c:84 ../../interactive.pm_.c:224
@@ -605,7 +603,6 @@ msgid "Empty label not allowed"
 msgstr "Tom etikett er ikke tillatt"
 
 #: ../../any.pm_.c:162
-#, fuzzy
 msgid "This label is already used"
 msgstr "Denne etiketten er allerede i bruk"
 
@@ -1191,9 +1188,9 @@ msgid "%s formatting of %s failed"
 msgstr "%s formatering av %s mislykket"
 
 #: ../../fs.pm_.c:129
-#, fuzzy, c-format
+#, c-format
 msgid "I don't know how to format %s in type %s"
-msgstr "Vet ikke hvordan formatere %s i type %s"
+msgstr "Jeg vet ikke hvordan formatere %s i type %s"
 
 #: ../../fs.pm_.c:185
 msgid "nfs mount failed"
@@ -1266,7 +1263,7 @@ msgstr ""
 "\n"
 "Velg \"Oppdater\" hvis du ønsker å oppdatere en tidligere versjon av\n"
 "Mandrake Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen), 6.0 (Venus),\n"
-"6.1 (Helios), Gold 2000 eller 7.0 (Air)."
+"6.1 (Helios) eller Gold 2000."
 
 #: ../../help.pm_.c:22
 msgid ""
@@ -1313,6 +1310,42 @@ msgid ""
 "As\n"
 "    such, do not expect any gimmicks (KDE, GNOME...) to be installed.\n"
 msgstr ""
+"Velg:\n"
+"\n"
+"  - Anbefalt: Hvis du aldri har installert Linux før, velg denne. MERK:\n"
+"    nettverk vil ikke bli konfigurert under installasjonen, bruk "
+"\"LinuxConf\"\n"
+"    til å konfigurere dette etter at installasjonen er ferdig.\n"
+"\n"
+"  - Egendefinert: Hvis du er nok kjent med GNU/Linux, kan du velge\n"
+"    primært bruk for maskinen din. Se nedenfor for detaljer.\n"
+"\n"
+"  - Ekspert: Dette forutsetter at du er kjent med GNU/Linux og ønsker å\n"
+"    utføre en meget egendefinert installasjon. Som for en \"Egendefinert\"\n"
+"    installasjonsklasse vil du kunne velge bruk for systemet ditt.\n"
+"    Men vær så snill, IKKE VELG DETTE HVIS DU IKKE VET HVA DU GJØR!\n"
+"\n"
+"De forskjellige valgene for din maskin's bruk (hvis du har\n"
+"valgt enten \"Egendefinert\" eller \"Ekspert\" som en installasjonsklasse) "
+"er\n"
+"følgende:\n"
+"\n"
+"  - Normal: velg denne hvis du skal bruke maskinen din hovedsaklig til\n"
+"    hverdagsbruk (kontorarbeid, grafikkmanipulasjon osv.). Ikke forvent\n"
+"    at noen kompilatorer, utviklingsverktøy el. lign. blir installert.\n"
+"\n"
+"  - Utvikling: som navnet sier. Velg denne hvis du skal hovedsaklig skal "
+"bruke\n"
+"    maskinen din til utvikling av programvare. Du vil da ha en komplett\n"
+"    samling av programvare installert for å kompilere, debugge og formatere\n"
+"    kildekode, eller lage programvarepakker.\n"
+"\n"
+"  - Tjener: velg denne hvis maskinen som du installerer Linux-Mandrake\n"
+"    på skal brukes som en tjener. Enten en filtjener (NFS eller SMB),\n"
+"    en utskriftstjener (Unix' lp (Line Printer) protokoll eller Windows SMB "
+"stil\n"
+"    utskrift), en autentifikasjonstjener (NIS), en databasetjener osv. Som\n"
+"    så, ikke forvent at noe spesielt (KDE, GNOME...) vil bli installert.\n"
 
 #: ../../help.pm_.c:57
 msgid ""
@@ -1676,6 +1709,13 @@ msgid ""
 "server: you will probably want not to start any services which you don't\n"
 "want."
 msgstr ""
+"Du kan nå velge hvilke tjenester som skal startes ved oppstart.\n"
+"Når musen din kommer over et element, vil en liten ballonghjelp komme opp "
+"med\n"
+"en beskivelse av rollen til tjenesten.\n"
+"\n"
+"Vær spesielt forsiktig i dette trinnet hvis du skal bruke maskinen din som\n"
+"tjener: du vil antageligvis ikke starte noen tjenester som du ikke trenger."
 
 #: ../../help.pm_.c:244
 msgid ""
@@ -1855,13 +1895,12 @@ msgstr ""
 "disken (MBR)\"."
 
 #: ../../help.pm_.c:330
-#, fuzzy
 msgid ""
 "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
 " (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."
 msgstr ""
-"Hvis du ikke spesifikt ønsker annen måte, så er det vanlige valget\n"
-"\"/dev/hda\" (masterdisken på den primære kanalen)."
+"Hvis du ikke spesifikt vet en annen måte, så er det vanlige valget\n"
+"\"/dev/hda\" (primær IDE-disk) eller \"/dev/sda\" (første SCSI-disk)."
 
 #: ../../help.pm_.c:334
 msgid ""
@@ -1975,7 +2014,6 @@ msgstr ""
 "\"Nei\"."
 
 #: ../../help.pm_.c:386
-#, fuzzy
 msgid ""
 "You can now select some miscellaneous options for your system.\n"
 "\n"
@@ -2014,31 +2052,40 @@ msgid ""
 msgstr ""
 "Du kan nå velge noen forskjellige opsjoner for systemet ditt.\n"
 "\n"
-"  - Bruk harddisk-optimisering: Denne opsjonen kan forbedre harddisk\n"
-"tilgangen, men er bare for erfarne brukere. Den kan ødelegge harddisken din\n"
-"ved feil bruk. Bruk den bare hvis du vet hvordan.\n"
-"\n"
+"  - Bruk harddisk-optimisering: Denne opsjonen kan forbedre harddisk "
+"ytelse,\n"
+"    men er bare for erfarne brukere: noen ustabile chip-sett kan ødelegge "
+"dine data, så\n"
+"    vær forsiktig. Merk at kjernen har en innebygd svarteliste over disker "
+"og\n"
+"    chip-sett, men hvis du vil unngå leie overraskelser, la denne opsjonen "
+"være avslått.\n"
 "\n"
 "  - Velg sikkerhetsnivå: Du kan velge et sikkerhetsnivå for systemet\n"
-"ditt.\n"
-"    Vennligst se i manualen for mer informasjon.\n"
+"    ditt. Vennligst se i manualen for mer informasjon. Basis: hvis\n"
+"    du ikke vet, velg \"Medium\" ; hvis du virkelig ønsker å ha en sikker\n"
+"    maskin, velg \"Paranoid\" men vær klar over: I DETTE NIVÅET ER ROOT "
+"LOGIN I\n"
+"    KONSOLS IKKE TILLATT! Hvis du ønsker å være root må du logge inn som "
+"bruker\n"
+"    og så bruke \"su\". Mere generelt, ikke forvent å bruke maskinen din\n"
+"    til noe annet enn som tjener. Du har blitt advart.\n"
 "\n"
-"\n"
-"  - Presiser RAM-størrelse hvis nødvendig: I noen tilfeller klarer ikke\n"
-"Linux å oppdage all installert RAM på noen systemer. Hvis dette er "
-"tilfelle,\n"
-"spesifiser riktig størrelse. Merk: en differanse på 2 eller 4 Mb er\n"
-"normalt.\n"
-"\n"
+"  - Presiser RAM-størrelse ved behov: dessverre, i dagens PC-verden, er det "
+"ingen\n"
+"    standardmetode for å spørre BIOS om mengden av RAM i maskinen din.\n"
+"    Som en konsekvens, Linux kan mislykkes i finne hvor mye RAM\n"
+"    du har. Hvis dette er tilfelle, kan du spesifisere riktig RAM-mengde\n"
+"    her. Merk at en differanse på 2 eller 4 MB er normalt.\n"
 "\n"
 "  - Fjernbart media automontering: Hvis du ønsker å ikke montere fjernbare\n"
-"media manuelt (CD-ROM, diskett, Zip) ved å skrive \"mount\" og\n"
-"\"umount\", velg denne opsjonen. \n"
-"\n"
+"    media manuelt (CD-ROM, diskett, Zip) ved å skrive \"mount\" og\n"
+"    \"umount\", velg denne opsjonen. \n"
 "\n"
 "  - Slå på Num Lock ved oppstart: Hvis du ønsker Num Lock slått på etter\n"
-"oppstart, velg denne opsjonen (Merk: Num Lock vil fortsatt ikke virke under\n"
-"X)."
+"    oppstart, velg denne opsjonen (Merk: Num Lock vil kanskje/kanskje ikke "
+"virke\n"
+"    under X)."
 
 #: ../../help.pm_.c:415
 msgid ""
@@ -2063,9 +2110,8 @@ msgid "Select installation class"
 msgstr "Velg installasjonsklasse"
 
 #: ../../install2.pm_.c:45
-#, fuzzy
 msgid "Hard drive detection"
-msgstr "Bruk harddisk-optimisering?"
+msgstr "Oppdaging av harddisk"
 
 #: ../../install2.pm_.c:46
 msgid "Configure mouse"
@@ -2246,13 +2292,13 @@ msgstr "Velg størrelsen du ønsker å installere"
 msgid "Total size: "
 msgstr "Total størrelse: "
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:441
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:443
 #: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr "Versjon: %s\n"
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:442
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:444
 #: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
@@ -2271,39 +2317,39 @@ msgstr "Info"
 msgid "Install"
 msgstr "Installer"
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:512
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:514
 #: ../../install_steps_interactive.pm_.c:360
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:518
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:520
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:520
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:522
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:521
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:523
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:530
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:532
 #: ../../install_steps_interactive.pm_.c:360
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:545
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:547
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:583
-#: ../../install_steps_gtk.pm_.c:587
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:585
+#: ../../install_steps_gtk.pm_.c:589
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:583
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:585
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
@@ -2313,19 +2359,16 @@ msgid "Use existing configuration for X11?"
 msgstr "Bruke eksisterende konfigurasjon for X11?"
 
 #: ../../install_steps_gtk.pm_.c:154
-#, fuzzy
 msgid "Please, choose one of the following classes of installation:"
-msgstr "Vennligst gi følgende informasjon"
+msgstr "Vennligst velg en av følgende installasjonsklasser:"
 
 #: ../../install_steps_gtk.pm_.c:193
-#, fuzzy
 msgid "You don't have any windows partitions!"
-msgstr "Du har ingen partisjoner!"
+msgstr "Du har ingen windows-partisjoner!"
 
 #: ../../install_steps_gtk.pm_.c:195
-#, fuzzy
 msgid "You don't have any enough room for Lnx4win"
-msgstr "Du har ingen partisjoner!"
+msgstr "Du har ikke nok plass for Lnx4win"
 
 #: ../../install_steps_gtk.pm_.c:211
 msgid ""
@@ -2353,24 +2396,20 @@ msgid "Automatic resizing failed"
 msgstr "Automatisk endring av størrelse mislykket"
 
 #: ../../install_steps_gtk.pm_.c:259
-#, fuzzy
 msgid "Which partition do you want to use to put Linux4Win?"
-msgstr "Hvilken partisjon vil du bruke som din root-partisjon"
+msgstr "Hvilken partisjon vil du bruke til å plassere Linux4Win?"
 
 #: ../../install_steps_gtk.pm_.c:278
-#, fuzzy
 msgid "Choose the sizes"
-msgstr "Velg den nye størrelsen"
+msgstr "Velg størrelsene"
 
 #: ../../install_steps_gtk.pm_.c:280
-#, fuzzy
 msgid "Root partition size in MB: "
-msgstr "Root-partisjon"
+msgstr "Root-partisjonsstørrelse i MB: "
 
 #: ../../install_steps_gtk.pm_.c:282
-#, fuzzy
 msgid "Swap partition size in MB: "
-msgstr "Størrelse i MB: "
+msgstr "Veksel-partisjonsstørrelse i MB: "
 
 #: ../../install_steps_gtk.pm_.c:314
 #, c-format
@@ -2398,9 +2437,8 @@ msgid ""
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:327
-#, fuzzy
 msgid "You will be able to choose them more specifically in the next step."
-msgstr "Du vil kunne velge mere presist i neste trinn"
+msgstr "Du vil kunne velge disse mere spesifisert i neste trinn"
 
 #: ../../install_steps_gtk.pm_.c:329
 #, fuzzy
@@ -2411,70 +2449,69 @@ msgstr "Velg pakker for installering"
 msgid "Automatic dependencies"
 msgstr "Avhengigheter automatisk"
 
-#: ../../install_steps_gtk.pm_.c:420 ../../standalone/rpmdrake_.c:101
+#: ../../install_steps_gtk.pm_.c:422 ../../standalone/rpmdrake_.c:101
 msgid "Expand Tree"
 msgstr "Utvid tre"
 
-#: ../../install_steps_gtk.pm_.c:421 ../../standalone/rpmdrake_.c:102
+#: ../../install_steps_gtk.pm_.c:423 ../../standalone/rpmdrake_.c:102
 msgid "Collapse Tree"
 msgstr "Trekk sammen tre"
 
-#: ../../install_steps_gtk.pm_.c:422
+#: ../../install_steps_gtk.pm_.c:424
 msgid "Toggle between flat and group sorted"
 msgstr "Skift mellom flat og gruppesortert"
 
-#: ../../install_steps_gtk.pm_.c:440
+#: ../../install_steps_gtk.pm_.c:442
 msgid "Bad package"
 msgstr "Dårlig pakke"
 
-#: ../../install_steps_gtk.pm_.c:443
+#: ../../install_steps_gtk.pm_.c:445
 #, c-format
 msgid "Importance: %s\n"
 msgstr "Viktighet: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:454
+#: ../../install_steps_gtk.pm_.c:456
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
-#: ../../install_steps_gtk.pm_.c:465
+#: ../../install_steps_gtk.pm_.c:467
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
 
-#: ../../install_steps_gtk.pm_.c:467
+#: ../../install_steps_gtk.pm_.c:469
 msgid "You can't unselect this package. It is already installed"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:471
-#, fuzzy
+#: ../../install_steps_gtk.pm_.c:473
 msgid "The following packages are going to be installed/removed"
 msgstr "Følgende pakker vil bli installert/fjernet"
 
-#: ../../install_steps_gtk.pm_.c:480
+#: ../../install_steps_gtk.pm_.c:482
 msgid "You can't select/unselect this package"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:515
+#: ../../install_steps_gtk.pm_.c:517
 msgid "Estimating"
 msgstr "Beregner"
 
-#: ../../install_steps_gtk.pm_.c:527 ../../interactive.pm_.c:84
+#: ../../install_steps_gtk.pm_.c:529 ../../interactive.pm_.c:84
 #: ../../interactive.pm_.c:223 ../../interactive_newt.pm_.c:50
 #: ../../interactive_newt.pm_.c:99 ../../interactive_stdio.pm_.c:27
 #: ../../my_gtk.pm_.c:199 ../../my_gtk.pm_.c:457
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../../install_steps_gtk.pm_.c:540
+#: ../../install_steps_gtk.pm_.c:542
 #, c-format
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:540
+#: ../../install_steps_gtk.pm_.c:542
 msgid ", %U MB"
 msgstr ", %U MB"
 
-#: ../../install_steps_gtk.pm_.c:571
+#: ../../install_steps_gtk.pm_.c:573
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -2489,10 +2526,9 @@ msgstr ""
 "ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
-#: ../../install_steps_gtk.pm_.c:587
-#, fuzzy
+#: ../../install_steps_gtk.pm_.c:589
 msgid "There was an error installing packages:"
-msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
+msgstr "Det var en feil ved installering av pakkene:"
 
 #: ../../install_steps_interactive.pm_.c:40
 msgid "An error occurred"
@@ -2500,7 +2536,7 @@ msgstr "En feil oppsto"
 
 #: ../../install_steps_interactive.pm_.c:57
 msgid "Please, choose a language to use."
-msgstr ""
+msgstr "Vennligst velg språk som skal brukes."
 
 #: ../../install_steps_interactive.pm_.c:71
 #: ../../standalone/keyboarddrake_.c:22
@@ -2508,9 +2544,8 @@ msgid "Keyboard"
 msgstr "Tastatur"
 
 #: ../../install_steps_interactive.pm_.c:72
-#, fuzzy
 msgid "Please, choose your keyboard layout."
-msgstr "Hva er tastatur-oppsettet ditt?"
+msgstr "Vennligst velg tastatur-oppsettet ditt."
 
 #: ../../install_steps_interactive.pm_.c:81
 msgid "You can choose other languages that will be available after install"
@@ -2581,23 +2616,20 @@ msgid "Server"
 msgstr "Tjener"
 
 #: ../../install_steps_interactive.pm_.c:135
-#, fuzzy
 msgid "Which usage is your system used for ?"
-msgstr "Hvilken er din tidsone?"
+msgstr "Hva slags bruk er systemet ditt brukt til?"
 
 #: ../../install_steps_interactive.pm_.c:146
-#, fuzzy
 msgid "Please, choose the type of your mouse."
-msgstr "Hva slags type er musen din?"
+msgstr "Vennligst velg din musetype."
 
 #: ../../install_steps_interactive.pm_.c:154 ../../standalone/mousedrake_.c:38
 msgid "Mouse Port"
 msgstr "Museport"
 
 #: ../../install_steps_interactive.pm_.c:155
-#, fuzzy
 msgid "Please choose on which serial port your mouse is connected to."
-msgstr "Hvilken serieport er musen din koblet til?"
+msgstr "Vennligst velg hvilken serieport musen din koblet til."
 
 #: ../../install_steps_interactive.pm_.c:166
 msgid "Configuring IDE"
@@ -2617,9 +2649,8 @@ msgid "(%dMb)"
 msgstr "(%dMb)"
 
 #: ../../install_steps_interactive.pm_.c:185
-#, fuzzy
 msgid "Please choose a partition to use as your root partition."
-msgstr "Hvilken partisjon vil du bruke som din root-partisjon"
+msgstr "Vennligst velg en partisjon å bruke som din root-partisjon."
 
 #: ../../install_steps_interactive.pm_.c:192
 msgid "Choose the mount points"
@@ -2677,9 +2708,9 @@ msgid ""
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:347
-#, fuzzy, c-format
+#, c-format
 msgid "Cd-Rom labeled \"%s\""
-msgstr "CD-ROM Nr %s"
+msgstr "CD-ROM merket \"%s\""
 
 #: ../../install_steps_interactive.pm_.c:369
 msgid ""
@@ -2804,9 +2835,8 @@ msgid "Try to find a modem?"
 msgstr "Prøve å finne et modem?"
 
 #: ../../install_steps_interactive.pm_.c:499
-#, fuzzy
 msgid "Please choose which serial port your modem is connected to."
-msgstr "Hvilken serieport er modemet ditt koblet til?"
+msgstr "Vennligst velg hvilken serieport modemet ditt koblet til."
 
 #: ../../install_steps_interactive.pm_.c:504
 msgid "Dialup options"
@@ -2939,9 +2969,8 @@ msgid "Contacting the mirror to get the list of available packages"
 msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
 
 #: ../../install_steps_interactive.pm_.c:568
-#, fuzzy
 msgid "Please choose the packages you want to install."
-msgstr "Velg pakkene du ønsker å installere"
+msgstr "Vennligst velg pakkene du ønsker å installere."
 
 #: ../../install_steps_interactive.pm_.c:579
 msgid "Which is your timezone?"
@@ -3169,6 +3198,8 @@ msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
 msgstr ""
+"Feil ved installasjon av aboot, \n"
+"prøve å installere selv om det ødelegger den første partisjonen?"
 
 #: ../../install_steps_interactive.pm_.c:899
 msgid "Proxies configuration"
@@ -3392,35 +3423,35 @@ msgstr "Konfigurerer PCMCIA kort..."
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../../install_steps_interactive.pm_.c:1149
+#: ../../install_steps_interactive.pm_.c:1142
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Fant %s %s grensesnitt"
 
-#: ../../install_steps_interactive.pm_.c:1150
+#: ../../install_steps_interactive.pm_.c:1143
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../../install_steps_interactive.pm_.c:1151
+#: ../../install_steps_interactive.pm_.c:1144
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
-#: ../../install_steps_interactive.pm_.c:1153 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1146 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:456 ../../printerdrake.pm_.c:123
 msgid "No"
 msgstr "Nei"
 
-#: ../../install_steps_interactive.pm_.c:1153 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1146 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:456
 msgid "Yes"
 msgstr "Ja"
 
-#: ../../install_steps_interactive.pm_.c:1154
+#: ../../install_steps_interactive.pm_.c:1147
 msgid "See hardware info"
 msgstr "Se maskinvareinfo"
 
-#: ../../install_steps_interactive.pm_.c:1171
+#: ../../install_steps_interactive.pm_.c:1164
 msgid "Bringing up the network"
 msgstr "Henter opp nettverket"
 
@@ -3733,11 +3764,11 @@ msgstr "Den markerte inngangen vil bli startet automatisk om %d sekunder."
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #: ../../lilo.pm_.c:514
 msgid "Desktop"
-msgstr ""
+msgstr "Skrivebord"
 
 #: ../../lilo.pm_.c:514
 msgid "Start Menu"
-msgstr ""
+msgstr "Startmeny"
 
 #: ../../mouse.pm_.c:21
 msgid "Sun - Mouse"
@@ -4147,11 +4178,11 @@ msgstr "Opsjoner fargedybde"
 
 #: ../../printerdrake.pm_.c:168
 msgid "Print text as PostScript?"
-msgstr ""
+msgstr "Skrive ut tekst som PostScript?"
 
 #: ../../printerdrake.pm_.c:169
 msgid "Reverse page order"
-msgstr ""
+msgstr "Reversere siderekkefølge"
 
 #: ../../printerdrake.pm_.c:171
 msgid "Fix stair-stepping text?"
@@ -4159,24 +4190,23 @@ msgstr "Fikse trappestegs-tekst?"
 
 #: ../../printerdrake.pm_.c:174
 msgid "Number of pages per output pages"
-msgstr ""
+msgstr "Nummer av sider pr. sider ut"
 
 #: ../../printerdrake.pm_.c:175
 msgid "Right/Left margins in points (1/72 of inch)"
-msgstr ""
+msgstr "Høyre/venstre marginer i punkter (1/72 av inch)"
 
 #: ../../printerdrake.pm_.c:176
 msgid "Top/Bottom margins in points (1/72 of inch)"
-msgstr ""
+msgstr "Topp/bunn marginer i punkter (1/72 av inch)"
 
 #: ../../printerdrake.pm_.c:179
 msgid "Extra GhostScript options"
-msgstr ""
+msgstr "Ekstra GhostScript opsjoner"
 
 #: ../../printerdrake.pm_.c:182
-#, fuzzy
 msgid "Extra Text options"
-msgstr "Opsjoner fargedybde"
+msgstr "Ekstra tekstopsjoner"
 
 #: ../../printerdrake.pm_.c:193
 msgid "Do you want to test printing?"
@@ -4222,12 +4252,11 @@ msgid "Would you like to configure a printer?"
 msgstr "Ønsker du å konfigurere en skriver?"
 
 #: ../../printerdrake.pm_.c:237
-#, fuzzy
 msgid ""
 "Here are the following print queue.\n"
 "You can add some more or change the existing ones."
 msgstr ""
-"Her er følgende oppføringer i LILO.\n"
+"Her er følgende skriverkø.\n"
 "Du kan legge til flere eller endre de eksisterende."
 
 #: ../../printerdrake.pm_.c:260 ../../printerdrake.pm_.c:266
@@ -4239,12 +4268,10 @@ msgid "How is the printer connected?"
 msgstr "Hvordan er skriveren tilkoblet?"
 
 #: ../../printerdrake.pm_.c:266
-#, fuzzy
 msgid "Remove queue"
-msgstr "Fjern-kø"
+msgstr "Fjern kø"
 
 #: ../../printerdrake.pm_.c:267
-#, fuzzy
 msgid ""
 "Every print queue (which print jobs are directed to) needs a\n"
 "name (often lp) and a spool directory associated with it. What\n"
@@ -4252,23 +4279,20 @@ msgid ""
 "connected?"
 msgstr ""
 "Hver skriverkø (som skrivejobber sendes til) trenger et navn\n"
-"(ofte lp) og en spolingskatalog assosiert til denne. Hvilket\n"
-"navn og katalog skal brukes for denne køen?"
+"(ofte lp) og en spolingskatalog direkte assosiert med denne. Hvilket\n"
+"navn og katalog skal brukes for denne køen og hvordan er skriveren tilkoblet?"
 
 #: ../../printerdrake.pm_.c:270
-#, fuzzy
 msgid "Name of queue"
-msgstr "Køens navn:"
+msgstr "Køens navn"
 
 #: ../../printerdrake.pm_.c:271
-#, fuzzy
 msgid "Spool directory"
-msgstr "Spolingskatalog:"
+msgstr "Spolingskatalog"
 
 #: ../../printerdrake.pm_.c:272
-#, fuzzy
 msgid "Printer Connection"
-msgstr "Velg skrivertilkobling"
+msgstr "Skrivertilkobling"
 
 #: ../../raid.pm_.c:36
 #, c-format
@@ -4545,7 +4569,6 @@ msgid "Configure LILO/GRUB"
 msgstr "Konfigurer X"
 
 #: ../../standalone/drakboot_.c:24
-#, fuzzy
 msgid "Create a boot floppy"
 msgstr "Opprett en oppstartdiskett"
 
