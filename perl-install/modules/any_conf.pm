@@ -104,6 +104,10 @@ sub remove_alias_regexp_byname {
 sub remove_module {
     my ($conf, $module) = @_;
     $module = $conf->mapping($module);
+    substInFile {
+        undef $_ if /^$module/;
+    } $_  foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+    
     $conf->remove_alias($module);
     log::explanations("removing module $module");
     delete $conf->{$module};
