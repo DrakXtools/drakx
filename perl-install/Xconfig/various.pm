@@ -118,7 +118,7 @@ sub configure_FB_TVOUT {
 	require detect_devices;
 	my ($bootloader, $all_hds) =
 	  $::isInstall ? ($::o->{bootloader}, $::o->{all_hds}) : 
-	    (bootloader::read(), fsedit::hds([ detect_devices::hds() ], {}));
+	    (bootloader::read(), fsedit::get_hds());
 	
 	if (my $tvout = bootloader::duplicate_kernel_entry($bootloader, 'TVout')) {
 	    $tvout->{append} .= " XFree=tvout";

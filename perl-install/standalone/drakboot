@@ -40,7 +40,7 @@ sub lilo_choice
     local ($_) = `detectloader`;
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i, if_(arch() =~ /ppc/, yaboot => 1) };
     
-    my ($all_hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
+    my ($all_hds) = fsedit::get_hds();
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
     fs::merge_info_from_fstab($fstab);
  
