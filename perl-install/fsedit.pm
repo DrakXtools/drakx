@@ -36,7 +36,7 @@ use fs;
   ],
 );
 my @suggestions_mntpoints = (
-    "/root", "/var/ftp", "/var/www", 
+    "/root", "/var/ftp", "/var/www", "/boot",
     arch() =~ /sparc/ ? "/mnt/sunos" : "/mnt/windows",
 );
 
