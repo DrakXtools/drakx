@@ -354,9 +354,10 @@ sub return_path {
 sub ftp_client {
 use Net::FTP; 
 my $ftp = Net::FTP->new("$host_name"); 
-$ftp->login("anonymous","mon\@adresse.mail"); 
-$ftp->cwd("/pub"); 
-$ftp->get("/ce/repertoire/ce.fichier"); 
+$ftp->login("$login_user","$passwd_user"); 
+$ftp->cwd("$host_path"); 
+#$ftp->get("/ce/repertoire/ce.fichier"); 
+$ftp->send(""); 
 $ftp->quit; 
 }
 
@@ -1236,26 +1237,26 @@ sub system_state {
     $system_state = ();
 
     if ($cfg_file_exist) { 
-	$system_state .= _("Backup Sources: \n\n");
-        $system_state .= _("- System Files:\n"); 
-        $system_state .= _("\t\t$_\n") foreach @sys_files; 
-        $system_state .= _("- Users Files:\n");
-        $system_state .= _("\t\t$_\n") foreach @user_list;
-        $system_state .= _("- Other Files:\n"); 
-        $system_state .= _("\t\t$_\n") foreach @list_other;
-        $system_state .= _("- Path to save backups: $save_path\n");
-	$system_state .= _("Options:\n");
-	$backup_sys or $system_state .= _("Do not include System Files\n");
-	if ($option_replace) { $system_state .= _("Replace backups (do not update)\n"); } 
-	else { $system_state .= _("Update backups (do not replace)\n"); }
-	if ($comp_mode) { $system_state .= _("Backups use tar and bzip2\n "); }
-	else { $system_state .= _("Backups use tar and gzip\n"); }   
+	$system_state .= _("\n\t\t\t\t\t\t\t\t ___ Backup Sources ___ \n");
+        $backup_sys and $system_state .= _("\n- System Files:\n"); 
+        $backup_sys and $system_state .= _("\t\t$_\n") foreach @sys_files; 
+        $backup_user and $system_state .= _("\n- Users Files:\n");
+        $backup_user and $system_state .= _("\t\t$_\n") foreach @user_list;
+        @list_other and $system_state .= _("\n- Other Files:\n"); 
+        @list_other and $system_state .= _("\t\t$_\n") foreach @list_other;
+        $system_state .= _("\n- Path to save backups: $save_path\n");
+	$system_state .= _("\n- Options:\n");
+	$backup_sys or $system_state .= _("\tDo not include System Files\n");
+	if ($option_replace) { $system_state .= _("\tReplace backups (do not update)\n"); } 
+	else { $system_state .= _("\tUpdate backups (do not replace)\n"); }
+	if ($comp_mode) { $system_state .= _("\tBackups use tar and bzip2\n "); }
+	else { $system_state .= _("\tBackups use tar and gzip\n"); }   
     }
     else {$system_state = _("No configuration please click Wizard or Advanced.\n")}
 }
 
 sub restore_state {
-    $restore_state = _("list of data to restore:\n\n");
+    $restore_state = _("List of data to restore:\n\n");
     if ($restore_sys) { $restore_state .= "- Restore System Files.\n" }
     if ($restore_user) { 
 	$restore_state .= "- Restore Users Files: \n" ;
