@@ -475,7 +475,7 @@ $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no dev
         undef $wait;
         gtkset_mousecursor_normal();
         
-        if (@packages2install && $in->ask_yesorno(N("Warning"), N("The following packages need to be installed:\n" . join(', ', @packages2install)))) {
+        if (@packages2install && $in->ask_yesorno(N("Warning"), N("The following packages need to be installed:\n") . join(', ', @packages2install))) {
             $do_pkgs->install(@packages2install);
         }
     }
