@@ -472,14 +472,14 @@ sub helper_separator_tree_to_tree {
 
 sub interactive_help_has_id {
     my ($_o, $id) = @_;
-    exists $help::steps{$id};
+    exists $help::{$id};
 }
 
 sub interactive_help_get_id {
     my ($_o, @l) = @_;
     @l = map { 
-	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::steps{$_})))
-    } grep { exists $help::steps{$_} } @l;
+	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::{$_}->())))
+    } grep { exists $help::{$_} } @l;
     join("\n\n\n", @l);
 }
 
