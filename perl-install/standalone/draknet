@@ -473,8 +473,11 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $i++;
 	}
 	my $c = $_;
-	$vbox_local->pack_start(gtksignal_connect(my $b = new Gtk::Button(ethisup($c) ? _("desactivate") : _("activate")), clicked => 
-	  sub {system("/sbin/if".(ethisup($c)?"down":"up")." eth$c");gtkbuttonset($_[0], ethisup($c)?_("desactivate"):_("activate"));}),0,0,0);
+	$vbox_local->pack_start(gtkpack__(new Gtk::HBox(0,0),
+	  gtksignal_connect(my $b = new Gtk::Button(ethisup($c) ? _("desactivate now") : _("activate now")), clicked => sub {
+				system("/sbin/if".(ethisup($c)?"down":"up")." eth$c");
+				gtkbuttonset($_[0], ethisup($c)?_("desactivate now"):_("activate now"));
+			    })),0,0,0);
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
 #	require Data::Dumper;
