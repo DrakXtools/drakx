@@ -24,7 +24,9 @@ my %lang2keyboard =
 (
   'af' => 'us_intl',
   'be' => 'by',
+  'be_BY.CP1251' => 'by',
   'bg' => 'bg',
+'bg_BG'=> 'bg',
   'br' => 'fr',
   'ca' => 'es',
   'cs' => 'cz',
@@ -73,6 +75,7 @@ my %lang2keyboard =
 'pt_BR'=> 'br',
 'pt_PT'=> 'pt',
   'ru' => 'ru',
+  'ru_RU.KOI8-R' => 'ru',
   'sk' => 'sk',
   'sl' => 'si',
   'sr' => 'yu',
@@ -80,6 +83,7 @@ my %lang2keyboard =
   'th' => 'th',
   'tr' => 'tr_q',
   'uk' => 'ua',
+'uk_UA' => 'ua',
   'wa' => 'be',
 );
 
