@@ -67,7 +67,7 @@ sub mkinitrd($$$) {
     my $loop_boot = loopback::prepare_boot($prefix);
 
     modules::load('loop');
-    run_program::rooted($prefix, "mkinitrd", "-f", $initrdImage, "--ifneeded", $kernelVersion) or unlink("$prefix/$initrdImage");
+    run_program::rooted($prefix, "mkinitrd", "-v", "-f", $initrdImage, "--ifneeded", $kernelVersion) or unlink("$prefix/$initrdImage");
 
     loopback::save_boot($loop_boot);
 
