@@ -135,7 +135,7 @@ sub probe() {
 	else { internal_error() }
 
 	$_->{VideoRam} = 4096 if $_->{Driver} eq 'i810';
-	$_->{Options_xfree4}{UseFBDev} = "on" if arch =~ /ppc/ && $_->{Driver} eq 'r128';
+	$_->{Options_xfree4}{UseFBDev} = undef if arch =~ /ppc/ && $_->{Driver} eq 'r128';
 
 	$card;
     } @c;
@@ -459,12 +459,12 @@ sub set_glx_restrictions {
 
     #- hack for ATI Mach64 cards where two options should be used if using Utah-GLX.
     if (member($card->{card_name}, 'ATI Mach64 Utah', 'ATI Rage Mobility')) {
-	$card->{Options_xfree3}{no_font_cache} = $card->{use_UTAH_GLX};
-	$card->{Options_xfree3}{no_pixmap_cache} = $card->{use_UTAH_GLX};
+	$card->{Options_xfree3}{no_font_cache} = undef if $card->{use_UTAH_GLX};
+	$card->{Options_xfree3}{no_pixmap_cache} = undef if $card->{use_UTAH_GLX};
     }
     #- hack for SiS cards where an option should be used if using Utah-GLX.
     if (member($card->{card_name}, 'SiS 6326', 'SiS 630')) {
-	$card->{Options_xfree3}{no_pixmap_cache} = $card->{use_UTAH_GLX};
+	$card->{Options_xfree3}{no_pixmap_cache} = undef if $card->{use_UTAH_GLX};
     }
 
     #- 3D acceleration configuration for XFree 4 using DRI, this is enabled by default
