@@ -20,7 +20,7 @@ arch() =~ /^sparc/ ? (
   "sunbmac" => "Sun BigMac Ethernet",
   "sunhme" => "Sun Happy Meal Ethernet",
   "sunqe" => "Sun Quad Ethernet",
-) : (
+) : arch =~ /alpha/ ? () : (
   "3c509" => "3com 3c509",
   "3c501" => "3com 3c501",
   "3c503" => "3com 3c503",
@@ -97,7 +97,7 @@ arch() =~ /^sparc/ ? (
 [ 'scsi', {
 arch() =~ /^sparc/ ? (
   "qlogicpti" => "Performance Technologies ISP",
-) : (
+) : arch() =~ /alpha/ ? () : (
   "aha152x" => "Adaptec 152x",
   "aha1542" => "Adaptec 1542",
   "aha1740" => "Adaptec 1740",
@@ -142,7 +142,7 @@ arch() =~ /^sparc/ ? (
 [ 'disk', {
 arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
-) : (
+) : arch() =~ /alpha/ ? () : (
   "DAC960" => "Mylex DAC960",
 #  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "megaraid" => "AMI MegaRAID",
@@ -154,11 +154,11 @@ arch() =~ /^sparc/ ? (
   "eata_dma" => "EATA DMA Adapters",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "imm" => "Iomega Zip (new driver)",
-  "ide-disk" => "IDE disk",
 ),
+  "ide-disk" => "IDE disk",
 }],
 [ 'cdrom', {
-arch() !~ /^sparc/ ? (
+arch() !~ /^sparc|alpha/ ? (
   "sbpcd" => "SoundBlaster/Panasonic",
 #-  "aztcd" => "Aztech CD",
 #-  "gscd" => "Goldstar R420",
