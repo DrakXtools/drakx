@@ -943,7 +943,7 @@ sub _create_window {
 		   if_(!$::isInstall && !$::isWizard, border_width => 5),
 
 		   #- policy: during install, we need a special code to handle the weird centering, see below
-		   position_policy => $::isInstall ? '' : $no_Window_Manager ? 'center-always' : 'center-on-parent',
+		   position_policy => $::isInstall ? 'none' : $no_Window_Manager ? 'center-always' : 'center-on-parent',
 
 		   if_(!$::isInstall, icon_no_error => wm_icon()),
 
