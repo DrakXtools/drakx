@@ -2,7 +2,7 @@ package standalone; # $Id$
 
 use c;
 use strict;
-use common qw(N);
+use common qw(N if_);
 use Config;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
