@@ -23,6 +23,9 @@ use lib qw(/usr/lib/libDrakX);
 use interactive;
 use standalone;
 use network::netconnect;
+use network::ethernet;
+use network::tools;
+use network;
 use c;
 
 my $xpm_path="/usr/share/libDrakX/pixmaps";
@@ -44,14 +47,22 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 
 my $in = vnew interactive('su', 'network');
 
+globals::init(
+	      in => $in,
+	      prefix => '',
+	      connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
+	      disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
+	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg"
+	     );
+
 $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 require Gtk;
 init Gtk;
 my $expert_mode=0;
-netconnect::read_net_conf('', $netcnx, $netc);
+network::netconnect::read_net_conf('', $netcnx, $netc);
 any::setup_thiskind_backend('net', undef);
-my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
-netconnect::load_conf('', $netcnx, $netc, $intf);
+my @all_cards = network::ethernet::conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
+network::netconnect::load_conf($netcnx, $netc, $intf);
 
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
@@ -66,7 +77,7 @@ $vbox1->pack_start($hbox1,1,1,0);
 $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 
 my $combo1 = new Gtk::Combo;
-$combo1->set_popdown_strings (netconnect::get_profiles() );
+$combo1->set_popdown_strings (network::netconnect::get_profiles() );
 my $old_profile=$netcnx->{PROFILE};
 $combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 $combo1->entry->set_editable(0);
@@ -79,7 +90,7 @@ $button_del->signal_connect( clicked => sub {
 				 $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
 				 $dialog->vbox->pack_start(new Gtk::Label(_("Profile to delete:")),1,1,0);
 				 my $combo_dialog = new Gtk::Combo;
-				 $combo_dialog->set_popdown_strings ( grep { ! /default/ } netconnect::get_profiles() );
+				 $combo_dialog->set_popdown_strings ( grep { ! /default/ } network::netconnect::get_profiles() );
 				 $combo_dialog->entry->set_editable(0);
 				 $dialog->vbox->pack_start($combo_dialog,1,1,0);
 				 my $bbox_dialog = new Gtk::HButtonBox;
@@ -87,7 +98,7 @@ $button_del->signal_connect( clicked => sub {
 				 $bbox_dialog->set_layout(-end);
 				 my $button_ok = new Gtk::Button _("OK");
 				 $button_ok->signal_connect ( clicked => sub {
-								  netconnect::del_profile('', $netcnx, $combo_dialog->entry->get_text());
+								  network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text());
 								  $netcnx->{PROFILE} eq $combo_dialog->entry->get_text() and $netcnx->{PROFILE}="default";
 								  Gtk->main_quit();
 							      });
@@ -100,11 +111,11 @@ $button_del->signal_connect( clicked => sub {
 				 Gtk->main();
 				 $dialog->destroy;
 				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
-				 $combo1->set_popdown_strings(netconnect::get_profiles());
+				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 				 apply();
 			     });
 $hbox1->pack_start($button_del,0,0,5);
-$button_del->set_sensitive(netconnect::get_profiles() > 1);
+$button_del->set_sensitive(network::netconnect::get_profiles() > 1);
 my $button_new = new Gtk::Button(_("New profile..."));
 $button_new->signal_connect( clicked => sub {
 				 my $dialog = new Gtk::Dialog();
@@ -119,7 +130,7 @@ $button_new->signal_connect( clicked => sub {
 				 $bbox_dialog->set_layout(-end);
 				 my $button_ok = new Gtk::Button _("OK");
 				 $button_ok->signal_connect ( clicked => sub {
-								  netconnect::add_profile('', $netcnx, $entry_dialog->get_text());
+								  network::netconnect::add_profile($netcnx, $entry_dialog->get_text());
 								  $netcnx->{PROFILE} = $entry_dialog->get_text();
 								  Gtk->main_quit();
 							      });
@@ -132,7 +143,7 @@ $button_new->signal_connect( clicked => sub {
 				 Gtk->main();
 				 $dialog->destroy;
 				 $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $netcnx->{PROFILE}) ? $netcnx->{PROFILE} : "default");
-				 $combo1->set_popdown_strings(netconnect::get_profiles());
+				 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 });
 $hbox1->pack_start($button_new,0,0,5);
 my $hbox2 = new Gtk::HBox(0,0);
@@ -164,7 +175,7 @@ my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interf
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
-my $c=netconnect::connected('',$netc);
+my $c=network::tools::connected();
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
 my $label8 = new Gtk::Label($c ? _("Connected") : _("Not connected"));
@@ -187,20 +198,20 @@ $button2->signal_connect (clicked => sub {
 			      $bbox_dialog->add($button_ok );
 			      $dialog->show_all;
 			      $dialog->set_modal(1);
-			      if (!netconnect::connected('', $netc)) {
+			      if (!network::tools::connected()) {
 				  $l->set(_("Starting your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
-				  netconnect::connect_backend($prefix);
+				  network::tools::connect_backend();
 				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=netconnect::connected($prefix, $netc);
+				  my $up=network::tools::connected($netc);
 				  $l->set($up ? _("The system is now connected to Internet.") : _("The system doesn't seem to be connected to internet.
 Try to reconfigure your connection."));
 			      } else {
 				  $l->set(_("Closing your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
-				  netconnect::disconnect_backend($prefix);
+				  network::tools::disconnect_backend();
 				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=netconnect::connected($prefix, $netc);
+				  my $up=network::tools::connected();
 				  $l->set($up ? _("The connection is not closed.
 Try to do it manually by running
 /etc/sysconfig/network-scripts/net_cnx_down
@@ -265,7 +276,7 @@ $button_wizard->signal_connect ( clicked => sub {
 				     system("draknet --wizard");
 # netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
 				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
-				     netconnect::load_conf('', $netcnx, $netc, $intf);
+				     network::netconnect::load_conf($netcnx, $netc, $intf);
 				     update();
 				 });
 $bbox0->add($button_wizard );
@@ -316,10 +327,10 @@ $button_ok->signal_connect ( clicked => sub {
 			     });
 $bbox1->add($button_ok);
 $combo1->entry->signal_connect( 'changed', sub {
-				    netconnect::set_profile('', $netcnx, $combo1->entry->get_text());
-				    netconnect::load_conf('', $netcnx, $netc, $intf);
+				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text());
+				    network::netconnect::load_conf($netcnx, $netc, $intf);
 				    $netcnx->{$_}=$netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
-				    netconnect::set_net_conf('', $netcnx, $netc, $intf);
+				    network::netconnect::set_net_conf($netcnx, $netc);
 				    update();
 				    $button_apply->set_sensitive(1);
 				});
@@ -340,8 +351,8 @@ $in->exit(0);
 sub apply {
 
     $old_profile=$netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
-    netconnect::save_conf('', $netcnx, $netc, $intf);
-    network::configureNetwork2($in, $prefix, $netc, $intf, \&standalone::pkgs_install);
+    network::netconnect::save_conf($netcnx, $netc, $intf);
+    network::configureNetwork2($in, $prefix, $netc, $intf, sub { $in->standalone::pkgs_install(@_) });
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     system("$prefix/etc/rc.d/init.d/network $_") foreach "stop", "start";
     $button_apply->set_sensitive(0);
@@ -353,7 +364,7 @@ sub update {
     $label4->set($netcnx->{type});
     $label5->set($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
-    my $c = netconnect::connected('', $netc);
+    my $c = network::tools::connected();
     $label8->set($c ? _("Connected") : _("Not connected"));
     $button2->child->set($c ? _("Disconnect...") : _("Connect..."));
     $clist1->freeze();
@@ -368,7 +379,7 @@ sub update {
 	$clist1->set_selectable($_, 0);
     }
     $clist1->thaw();
-    $button_del->set_sensitive(netconnect::get_profiles() > 1);
+    $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
     $tag = Gtk->timeout_add(5000, \&update);
     0;
 }
