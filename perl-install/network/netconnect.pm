@@ -337,20 +337,6 @@ fi
 	require network::drakfirewall;
 	network::drakfirewall::main($in, $::o->{security} <= 3);
     }
-    
-#-    if ($netc->{NET_DEVICE} and $netc->{NETWORKING} ne 'no' and $::isStandalone and $::expert) {
-#-	  exists $netc->{nb_cards} or do {
-#-	      any::load_category($in, 'network/main|usb', !$::expert, 1);
-#-	      $netc->{nb_cards} = listlength(detect_devices::getNet());
-#-	  };
-#-	  ($netc->{nb_cards} - $netc->{minus_one} - (get_net_device($prefix) =~ /eth.+/ ? 1 : 0) > 0) and $in->ask_okcancel(N("Network Configuration"),
-#-N("Now that your Internet connection is configured,
-#-your computer can be configured to share its Internet connection.
-#-Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).
-#-
-#-Would you like to setup the Internet Connection Sharing?
-#-"), 1) and system("/usr/sbin/drakgw --direct");
-#-    }
 }
 
 sub save_conf {
