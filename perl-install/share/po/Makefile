@@ -1,6 +1,6 @@
-include ../Makefile.config
+include ../../Makefile.config
 
-PMSFILES = $(wildcard $(PMS:%=../%))
+PMSFILES = $(wildcard $(PMS:%=../../%))
 PMSCFILES = $(PMSFILES:%=%_.c)
 POFILES = $(shell ls *.po)
 
