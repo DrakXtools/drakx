@@ -41,6 +41,12 @@ my $splash_working = any { /^--splash$/ } @ARGV;
 
 my $in = 'interactive'->vnew('su');
 
+my $all_hds = fsedit::get_hds();
+fs::get_raw_hds('', $all_hds);
+fs::get_info_from_fstab($all_hds, '');
+my $fstab = [ fsedit::get_all_fstab($all_hds) ];
+my $bootloader = bootloader::read($fstab);
+
 if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
     $::isWizard = 1;
     lilo_choice();
@@ -92,10 +98,12 @@ my %themes = 	('path' => '/usr/share/bootsplash/themes/',
 my $kernel_release = `uname -r`;
 chomp $kernel_release;
 my $initrd = "/boot/initrd-$kernel_release.img" if -f "/boot/initrd-$kernel_release.img";
-my $cur_res = `/usr/share/bootsplash/scripts/detect-resolution $initrd`;
-$cur_res =~ m/(\d+x\d+)x\d+/ and $cur_res = $1;
-#- verify that current resolution is ok
-if (!$cur_res) {
+
+require Xconfig::resolution_and_depth;
+my $cur_res;
+if (my $x_res = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga})) {
+    $cur_res = $x_res->{X} . 'x' . $x_res->{Y};
+} else {
     $no_bootsplash = 1; #- we can't select any theme we're not in Framebuffer mode :-/
     $cur_res = '800x600'
 }
@@ -234,15 +242,7 @@ $w->main;
 $in->exit(0);
 
 
-
 sub lilo_choice() {
-    my $all_hds = fsedit::get_hds();
-    fs::get_raw_hds('', $all_hds);
-    fs::get_info_from_fstab($all_hds, '');
-    my $fstab = [ fsedit::get_all_fstab($all_hds) ];
-
-    my $bootloader = bootloader::read($fstab); 
-
   ask:
     eval {
 	my $before = fs::fstab_to_string($all_hds);
