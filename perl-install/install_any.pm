@@ -332,13 +332,14 @@ sub setDefaultPackages {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
 	}
 	if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
-	    #- by default, choose:
-	    if ($o->{meta_class} eq 'server') {
-		$o->{compssUsersChoice}{$_} = 1 foreach 'X', 'MONITORING', 'NETWORKING_REMOTE_ACCESS_SERVER';
-	    } else {
-		$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
-		$o->{compssUsersChoice}{$_} = 1
-		  foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+	    #- use default selection seen in compssUsers directly.
+	    foreach (keys %{$o->{compssUsers}}) {
+		$o->{compssUsers}{$_}{selected} or next;
+		log::l("looking for default selection on $_");
+		member($o->{meta_class} || 'default', @{$o->{compssUsers}{$_}{selected}}) ||
+		  member('all', @{$o->{compssUsers}{$_}{selected}}) or next;
+		log::l("   doing selection on $_");
+		$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsers}{$_}{flags}};
 	    }
 	}
     }
@@ -363,7 +364,7 @@ sub setDefaultPackages {
       detect_devices::matching_desc('Voodoo Banshee') ||
       detect_devices::matching_desc('8281[05].* CGC') ||
       detect_devices::matching_desc('Rage 128') ||
-      detect_devices::matching_desc('Radeon ') && !detect_devices::matching_desc('Radeon 8500') ||
+      detect_devices::matching_desc('Radeon ') || #- all Radeon card are now 3D with 4.3.0
       detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
       detect_devices::matching_desc('[nN][vV]idia.*NV[56]') ||
       detect_devices::matching_desc('[nN][vV]idia.*Vanta') ||
