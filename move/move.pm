@@ -70,6 +70,7 @@ sub install2::startMove {
 
     if (fork()) {
 	sleep 1;
+        log::l("DrakX waves bye-bye");
 	exec 'su', 'mdk', 'startkde';
     } else {
 	exec 'xwait' or c::_exit(0);
