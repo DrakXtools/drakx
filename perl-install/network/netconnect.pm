@@ -1294,47 +1294,6 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
     # install needed packages:
     $network_configured or network::network::configureNetwork2($in, $::prefix, $netc, $intf);
 
-    my $connect_cmd;
-    if ($netcnx->{type} =~ /modem/ || $netcnx->{type} =~ /isdn_external/) {
-	$connect_cmd = qq(
-#!/bin/bash
-if [ -n "\$DISPLAY" ]; then
-	if [ -e /usr/bin/kppp ]; then
-		/sbin/route del default
-		/usr/bin/kppp &
-	else
-		/usr/sbin/net_monitor --connect
-	fi
-	else
-	$network::tools::connect_file
-fi
-);
-    } elsif ($netcnx->{type}) {
-	$connect_cmd = qq(
-#!/bin/bash
-if [ -n "\$DISPLAY" ]; then
-	/usr/sbin/net_monitor --connect
-else
-	$network::tools::connect_file
-fi
-);
-    } else {
-	$connect_cmd = qq(
-#!/bin/bash
-/usr/sbin/drakconnect
-);
-    }
-    if ($direct_net_install) {
-	$connect_cmd = qq(
-#!/bin/bash
-if [ -n "\$DISPLAY" ]; then
-	/usr/sbin/net_monitor --connect
-else
-	$network::tools::connect_file
-fi
-);
-    }
-    output_with_perm("$::prefix$network::tools::connect_prog", 0755, $connect_cmd) if $connect_cmd;
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     $netcnx->{type} =~ /adsl/ or run_program::rooted($::prefix, "/chkconfig --del adsl 2> /dev/null");
 
