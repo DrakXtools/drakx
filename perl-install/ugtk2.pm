@@ -886,7 +886,7 @@ sub new {
 
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window($title);
-	$o->{rwindow}->set_icon(gtkcreate_pixbuf($o->{wm_icon});
+	$o->{rwindow}->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
 	$o->{rwindow}->set_position('center-on-parent');
 
 	if ($::isInstall) {
