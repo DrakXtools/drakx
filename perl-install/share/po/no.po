@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-09-09 03:31+0200\n"
+"POT-Creation-Date: 2000-09-11 16:05+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../Xconfigurator.pm_.c:123 ../../Xconfigurator.pm_.c:289
+#: ../../Xconfigurator.pm_.c:123 ../../Xconfigurator.pm_.c:335
 msgid "Generic"
 msgstr "Generisk"
 
@@ -34,35 +34,79 @@ msgstr "Velg en X-tjener"
 msgid "X server"
 msgstr "X-tjener"
 
-#: ../../Xconfigurator.pm_.c:204
-msgid "Do you want support for hardware 3D acceleration?"
-msgstr "Ønsker du støtte for maskinvare 3D akselerasjon"
+#: ../../Xconfigurator.pm_.c:207 ../../Xconfigurator.pm_.c:210
+#, fuzzy, c-format
+msgid "XFree %s"
+msgstr "XFree86-tjener: %s"
 
-#: ../../Xconfigurator.pm_.c:212
+#: ../../Xconfigurator.pm_.c:209
+#, fuzzy
+msgid "Which configuration of XFree do you want to have?"
+msgstr "Hvilken inngangstype vil du legge til"
+
+#: ../../Xconfigurator.pm_.c:218
+#, fuzzy, c-format
 msgid ""
-"Your card can have 3D acceleration but only with XFree 3.3.\n"
-"Do You want to use XFree 3.3 instead of XFree 4.0?"
+"Your card can have 3D hardware acceleration support but only with XFree %s.\n"
+"Your card is supported by XFree %s which may have a better support in 2D."
 msgstr ""
 "Kortet ditt kan ha 3D akselerasjon, men bare med XFree 3.3.\n"
 "Ønsker du å bruke XFree 3.3 istedet for XFree 4.0?"
 
-#: ../../Xconfigurator.pm_.c:236
+#: ../../Xconfigurator.pm_.c:220 ../../Xconfigurator.pm_.c:241
+#, c-format
+msgid "Your card can have 3D hardware acceleration support with XFree %s."
+msgstr ""
+
+#: ../../Xconfigurator.pm_.c:222 ../../Xconfigurator.pm_.c:243
+#, fuzzy, c-format
+msgid "XFree %s with 3D hardware acceleration"
+msgstr "Ønsker du støtte for maskinvare 3D akselerasjon"
+
+#: ../../Xconfigurator.pm_.c:230
+#, fuzzy, c-format
+msgid ""
+"Your card can have 3D hardware acceleration support but only with XFree %s,\n"
+"NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.\n"
+"Your card is supported by XFree %s which may have a better support in 2D."
+msgstr ""
+"Kortet ditt kan ha 3D akselerasjon, men bare med XFree 3.3.\n"
+"Ønsker du å bruke XFree 3.3 istedet for XFree 4.0?"
+
+#: ../../Xconfigurator.pm_.c:233
+#, c-format
+msgid ""
+"Your card can have 3D hardware acceleration support with XFree %s,\n"
+"NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER."
+msgstr ""
+
+#: ../../Xconfigurator.pm_.c:235
+#, c-format
+msgid "XFree %s with EXPERIMENTAL 3D hardware acceleration"
+msgstr ""
+
+#: ../../Xconfigurator.pm_.c:247
+#, fuzzy
+msgid "XFree configuration"
+msgstr "Konfigurasjon proxy"
+
+#: ../../Xconfigurator.pm_.c:282
 msgid "Select the memory size of your graphic card"
 msgstr "Velg minnestørrelsen til grafikk-kortet ditt"
 
-#: ../../Xconfigurator.pm_.c:278
+#: ../../Xconfigurator.pm_.c:324
 msgid "Choose options for server"
 msgstr "Velg opsjoner for tjener"
 
-#: ../../Xconfigurator.pm_.c:289
+#: ../../Xconfigurator.pm_.c:335
 msgid "Choose a monitor"
 msgstr "Velg en monitor"
 
-#: ../../Xconfigurator.pm_.c:289
+#: ../../Xconfigurator.pm_.c:335
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../../Xconfigurator.pm_.c:292
+#: ../../Xconfigurator.pm_.c:338
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -86,39 +130,39 @@ msgstr ""
 "skjermen din.\n"
 "Hvis du er usikker, velg en konservativ innstilling."
 
-#: ../../Xconfigurator.pm_.c:299
+#: ../../Xconfigurator.pm_.c:345
 msgid "Horizontal refresh rate"
 msgstr "Horisontal oppfrisknings-rate"
 
-#: ../../Xconfigurator.pm_.c:299
+#: ../../Xconfigurator.pm_.c:345
 msgid "Vertical refresh rate"
 msgstr "Vertikal oppfrisknings-rate"
 
-#: ../../Xconfigurator.pm_.c:338
+#: ../../Xconfigurator.pm_.c:384
 msgid "Monitor not configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../../Xconfigurator.pm_.c:341
+#: ../../Xconfigurator.pm_.c:387
 msgid "Graphic card not configured yet"
 msgstr "Grafikk-kort er ikke konfigurert ennå"
 
-#: ../../Xconfigurator.pm_.c:344
+#: ../../Xconfigurator.pm_.c:390
 msgid "Resolutions not chosen yet"
 msgstr "Oppløsninger er ikke valgt ennå"
 
-#: ../../Xconfigurator.pm_.c:357
+#: ../../Xconfigurator.pm_.c:403
 msgid "Do you want to test the configuration?"
 msgstr "Vil du teste konfigurasjonen?"
 
-#: ../../Xconfigurator.pm_.c:361
+#: ../../Xconfigurator.pm_.c:407
 msgid "Warning: testing is dangerous on this graphic card"
 msgstr "Advarsel: testing er farlig med dette grafikk-kortet"
 
-#: ../../Xconfigurator.pm_.c:364
+#: ../../Xconfigurator.pm_.c:410
 msgid "Test of the configuration"
 msgstr "Test konfigurasjon"
 
-#: ../../Xconfigurator.pm_.c:403
+#: ../../Xconfigurator.pm_.c:449
 msgid ""
 "\n"
 "try to change some parameters"
@@ -126,28 +170,28 @@ msgstr ""
 "\n"
 "prøv å endre noen parametere"
 
-#: ../../Xconfigurator.pm_.c:403
+#: ../../Xconfigurator.pm_.c:449
 msgid "An error has occurred:"
 msgstr "En feil oppsto:"
 
-#: ../../Xconfigurator.pm_.c:426
+#: ../../Xconfigurator.pm_.c:472
 #, c-format
 msgid "Leaving in %d seconds"
 msgstr "Slutter om %d sekunder"
 
-#: ../../Xconfigurator.pm_.c:430
+#: ../../Xconfigurator.pm_.c:476
 msgid "Is this the correct setting?"
 msgstr "Er dette den riktige innstillingen?"
 
-#: ../../Xconfigurator.pm_.c:438
+#: ../../Xconfigurator.pm_.c:484
 msgid "An error has occurred, try to change some parameters"
 msgstr "En feil oppsto, prøv å endre noen parametere"
 
-#: ../../Xconfigurator.pm_.c:446 ../../Xconfigurator.pm_.c:630
+#: ../../Xconfigurator.pm_.c:492 ../../Xconfigurator.pm_.c:676
 msgid "Automatic resolutions"
 msgstr "Automatiske oppløsninger"
 
-#: ../../Xconfigurator.pm_.c:447
+#: ../../Xconfigurator.pm_.c:493
 msgid ""
 "To find the available resolutions I will try different ones.\n"
 "Your screen will blink...\n"
@@ -157,33 +201,33 @@ msgstr ""
 "Skjermen din vil blinke...\n"
 "Du kan slå av hvis du vil, du vil høre et bipp når det er ferdig"
 
-#: ../../Xconfigurator.pm_.c:506 ../../printerdrake.pm_.c:274
+#: ../../Xconfigurator.pm_.c:552 ../../printerdrake.pm_.c:274
 msgid "Resolution"
 msgstr "Oppløsning"
 
-#: ../../Xconfigurator.pm_.c:541
+#: ../../Xconfigurator.pm_.c:587
 msgid "Choose the resolution and the color depth"
 msgstr "Velg oppløsning og fargedybde"
 
-#: ../../Xconfigurator.pm_.c:543
+#: ../../Xconfigurator.pm_.c:589
 #, c-format
 msgid "Graphic card: %s"
 msgstr "Grafikk-kort: %s"
 
-#: ../../Xconfigurator.pm_.c:544
+#: ../../Xconfigurator.pm_.c:590
 #, c-format
 msgid "XFree86 server: %s"
 msgstr "XFree86-tjener: %s"
 
-#: ../../Xconfigurator.pm_.c:553
+#: ../../Xconfigurator.pm_.c:599
 msgid "Show all"
 msgstr "Vis alle"
 
-#: ../../Xconfigurator.pm_.c:577
+#: ../../Xconfigurator.pm_.c:623
 msgid "Resolutions"
 msgstr "Oppløsninger"
 
-#: ../../Xconfigurator.pm_.c:631
+#: ../../Xconfigurator.pm_.c:677
 msgid ""
 "I can try to find the available resolutions (eg: 800x600).\n"
 "Sometimes, though, it may hang the machine.\n"
@@ -193,7 +237,7 @@ msgstr ""
 "Noen ganger kan dette forårsake at maskinen stopper opp.\n"
 "Ønsker du å prøve?"
 
-#: ../../Xconfigurator.pm_.c:636
+#: ../../Xconfigurator.pm_.c:682
 msgid ""
 "No valid modes found\n"
 "Try with another video card or monitor"
@@ -201,109 +245,109 @@ msgstr ""
 "Ingen gyldige modus funnet\n"
 "Prøv med et annet skjermkort eller monitor"
 
-#: ../../Xconfigurator.pm_.c:1008
+#: ../../Xconfigurator.pm_.c:1054
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "Tastatur-oppsett: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1009
+#: ../../Xconfigurator.pm_.c:1055
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "Type mus: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1010
+#: ../../Xconfigurator.pm_.c:1056
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "Enhet mus: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1011
+#: ../../Xconfigurator.pm_.c:1057
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Monitor: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1012
+#: ../../Xconfigurator.pm_.c:1058
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Monitor HorizSync: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1013
+#: ../../Xconfigurator.pm_.c:1059
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Monitor VertRefresh: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1014
+#: ../../Xconfigurator.pm_.c:1060
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "Grafikk-kort: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1015
+#: ../../Xconfigurator.pm_.c:1061
 #, c-format
 msgid "Graphic memory: %s kB\n"
 msgstr "Minne grafikk: %s kB\n"
 
-#: ../../Xconfigurator.pm_.c:1016
+#: ../../Xconfigurator.pm_.c:1062
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "XFree86-tjener: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1031
+#: ../../Xconfigurator.pm_.c:1077
 msgid "Preparing X-Window configuration"
 msgstr "Forbereder X-Window konfigurasjon"
 
-#: ../../Xconfigurator.pm_.c:1045
+#: ../../Xconfigurator.pm_.c:1091
 msgid "Change Monitor"
 msgstr "Endre monitor"
 
-#: ../../Xconfigurator.pm_.c:1046
+#: ../../Xconfigurator.pm_.c:1092
 msgid "Change Graphic card"
 msgstr "Endre grafikk-kort"
 
-#: ../../Xconfigurator.pm_.c:1047
+#: ../../Xconfigurator.pm_.c:1093
 msgid "Change Server options"
 msgstr "Endre opsjoner for tjener"
 
-#: ../../Xconfigurator.pm_.c:1048
+#: ../../Xconfigurator.pm_.c:1094
 msgid "Change Resolution"
 msgstr "Endre oppløsning"
 
-#: ../../Xconfigurator.pm_.c:1049
+#: ../../Xconfigurator.pm_.c:1095
 msgid "Automatical resolutions search"
 msgstr "Automatisk oppløsningssøk"
 
-#: ../../Xconfigurator.pm_.c:1053
+#: ../../Xconfigurator.pm_.c:1099
 msgid "Show information"
 msgstr "Vis informasjon"
 
-#: ../../Xconfigurator.pm_.c:1054
+#: ../../Xconfigurator.pm_.c:1100
 msgid "Test again"
 msgstr "Test igjen"
 
-#: ../../Xconfigurator.pm_.c:1055 ../../standalone/rpmdrake_.c:46
+#: ../../Xconfigurator.pm_.c:1101 ../../standalone/rpmdrake_.c:46
 msgid "Quit"
 msgstr "Avslutt"
 
-#: ../../Xconfigurator.pm_.c:1059 ../../standalone/drakboot_.c:40
+#: ../../Xconfigurator.pm_.c:1105 ../../standalone/drakboot_.c:40
 msgid "What do you want to do?"
 msgstr "Hva ønsker du å gjøre?"
 
-#: ../../Xconfigurator.pm_.c:1066
+#: ../../Xconfigurator.pm_.c:1112
 msgid "Forget the changes?"
 msgstr "Glem endringene?"
 
-#: ../../Xconfigurator.pm_.c:1084
+#: ../../Xconfigurator.pm_.c:1130
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr "Vennligst logg inn i %s på nytt for å aktivere endringene"
 
-#: ../../Xconfigurator.pm_.c:1100
+#: ../../Xconfigurator.pm_.c:1146
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Vennligst logg ut og bruk så Ctrl-Alt-BackSpace"
 
-#: ../../Xconfigurator.pm_.c:1103
+#: ../../Xconfigurator.pm_.c:1149
 msgid "X at startup"
 msgstr "X ved oppstart"
 
-#: ../../Xconfigurator.pm_.c:1104
+#: ../../Xconfigurator.pm_.c:1150
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -311,11 +355,11 @@ msgstr ""
 "Jeg kan sette opp maskinen din til å automatisk starte X ved oppstart.\n"
 "Vil du at X skal starte når du starter maskinen på nytt?"
 
-#: ../../Xconfigurator.pm_.c:1121
+#: ../../Xconfigurator.pm_.c:1167
 msgid "Autologin"
 msgstr "Autoinnlogg"
 
-#: ../../Xconfigurator.pm_.c:1122
+#: ../../Xconfigurator.pm_.c:1168
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
 "If you don't want to use this feature, click on the cancel button."
@@ -323,11 +367,11 @@ msgstr ""
 "Jeg kan sette opp maskinen din til å automatisk logge på en bruker.\n"
 "Ønsker du å bruke denne funksjonen?"
 
-#: ../../Xconfigurator.pm_.c:1124
+#: ../../Xconfigurator.pm_.c:1170
 msgid "Choose the default user:"
 msgstr "Velg standard bruker:"
 
-#: ../../Xconfigurator.pm_.c:1125
+#: ../../Xconfigurator.pm_.c:1171
 msgid "Choose the window_manager to run:"
 msgstr "Velg vinduhåndtereren du ønsker å kjøre:"
 
@@ -484,7 +528,7 @@ msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:605
-#: ../../install_steps_interactive.pm_.c:656 ../../netconnect.pm_.c:543
+#: ../../install_steps_interactive.pm_.c:656 ../../netconnect.pm_.c:531
 #: ../../printerdrake.pm_.c:91 ../../printerdrake.pm_.c:125
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -540,7 +584,7 @@ msgid "Add"
 msgstr "Legg til"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:45
-#: ../../install_steps_interactive.pm_.c:650 ../../netconnect.pm_.c:752
+#: ../../install_steps_interactive.pm_.c:650 ../../netconnect.pm_.c:741
 #: ../../printerdrake.pm_.c:350 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Ferdig"
@@ -597,7 +641,7 @@ msgstr "Etikett"
 msgid "Default"
 msgstr "Standard"
 
-#: ../../any.pm_.c:219 ../../install_steps_gtk.pm_.c:613
+#: ../../any.pm_.c:219 ../../install_steps_gtk.pm_.c:612
 #: ../../install_steps_interactive.pm_.c:603 ../../interactive.pm_.c:74
 #: ../../interactive.pm_.c:84 ../../interactive.pm_.c:234
 #: ../../interactive_newt.pm_.c:49 ../../interactive_newt.pm_.c:98
@@ -642,13 +686,13 @@ msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
 #: ../../any.pm_.c:436 ../../interactive.pm_.c:79 ../../my_gtk.pm_.c:444
-#: ../../netconnect.pm_.c:90 ../../netconnect.pm_.c:443
+#: ../../netconnect.pm_.c:90 ../../netconnect.pm_.c:431
 #: ../../printerdrake.pm_.c:231
 msgid "No"
 msgstr "Nei"
 
 #: ../../any.pm_.c:436 ../../interactive.pm_.c:79 ../../my_gtk.pm_.c:444
-#: ../../netconnect.pm_.c:88 ../../netconnect.pm_.c:441
+#: ../../netconnect.pm_.c:88 ../../netconnect.pm_.c:429
 msgid "Yes"
 msgstr "Ja"
 
@@ -2758,64 +2802,64 @@ msgstr "Velg størrelsen du ønsker å installere"
 msgid "Total size: "
 msgstr "Total størrelse: "
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:361
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:360
 #: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr "Versjon: %s\n"
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:362
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:361
 #: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Størrelse: %d KB\n"
 
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:267
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:271
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:270
 msgid "Info"
 msgstr "Info"
 
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:276
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:275
 #: ../../install_steps_interactive.pm_.c:132 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "Installer"
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:472
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:471
 #: ../../install_steps_interactive.pm_.c:442
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:478
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:477
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:480
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:479
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:481
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:480
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:490
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:489
 #: ../../install_steps_interactive.pm_.c:442
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:506
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:505
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:547
-#: ../../install_steps_gtk.pm_.c:551
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:546
+#: ../../install_steps_gtk.pm_.c:550
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:547
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:546
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
@@ -2824,7 +2868,7 @@ msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 msgid "Use existing configuration for X11?"
 msgstr "Bruke eksisterende konfigurasjon for X11?"
 
-#: ../../install_steps_gtk.pm_.c:158
+#: ../../install_steps_gtk.pm_.c:157
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
 "Linux-Mandrake. If that occurs, you can try a text install instead. For "
@@ -2836,17 +2880,17 @@ msgstr ""
 "installering\n"
 "i stedet. Trykk `F1' ved oppstart av CD-ROM, skriv så `text'."
 
-#: ../../install_steps_gtk.pm_.c:171
+#: ../../install_steps_gtk.pm_.c:170
 msgid "Please, choose one of the following classes of installation:"
 msgstr "Vennligst velg en av følgende installasjonsklasser:"
 
-#: ../../install_steps_gtk.pm_.c:224
+#: ../../install_steps_gtk.pm_.c:223
 #, c-format
 msgid ""
 "The total size for the groups you have selected is approximately %d MB.\n"
 msgstr "Den totale størrelsen for gruppene du har valgt er omtrent %d MB.\n"
 
-#: ../../install_steps_gtk.pm_.c:226
+#: ../../install_steps_gtk.pm_.c:225
 msgid ""
 "If you wish to install less than this size,\n"
 "select the percentage of packages that you want to install.\n"
@@ -2860,7 +2904,7 @@ msgstr ""
 "En lav prosentdel vil installere bare de mest viktige pakkene;\n"
 "en prosentdel på 100%% vil installere alle valgte pakker."
 
-#: ../../install_steps_gtk.pm_.c:231
+#: ../../install_steps_gtk.pm_.c:230
 msgid ""
 "You have space on your disk for only %d%% of these packages.\n"
 "\n"
@@ -2876,73 +2920,73 @@ msgstr ""
 "En lav prosentdel vil installere bare de mest viktige pakkene;\n"
 "en prosentdel på %d%% vil installere så mange pakker som mulig."
 
-#: ../../install_steps_gtk.pm_.c:237
+#: ../../install_steps_gtk.pm_.c:236
 msgid "You will be able to choose them more specifically in the next step."
 msgstr "Du vil kunne velge disse mere spesifisert i neste trinn."
 
-#: ../../install_steps_gtk.pm_.c:239
+#: ../../install_steps_gtk.pm_.c:238
 msgid "Percentage of packages to install"
 msgstr "Prosentdel av pakker å installere"
 
-#: ../../install_steps_gtk.pm_.c:280
+#: ../../install_steps_gtk.pm_.c:279
 msgid "Automatic dependencies"
 msgstr "Avhengigheter automatisk"
 
-#: ../../install_steps_gtk.pm_.c:340 ../../standalone/rpmdrake_.c:101
+#: ../../install_steps_gtk.pm_.c:339 ../../standalone/rpmdrake_.c:101
 msgid "Expand Tree"
 msgstr "Utvid tre"
 
-#: ../../install_steps_gtk.pm_.c:341 ../../standalone/rpmdrake_.c:102
+#: ../../install_steps_gtk.pm_.c:340 ../../standalone/rpmdrake_.c:102
 msgid "Collapse Tree"
 msgstr "Trekk sammen tre"
 
-#: ../../install_steps_gtk.pm_.c:342
+#: ../../install_steps_gtk.pm_.c:341
 msgid "Toggle between flat and group sorted"
 msgstr "Skift mellom flat og gruppesortert"
 
-#: ../../install_steps_gtk.pm_.c:359
+#: ../../install_steps_gtk.pm_.c:358
 msgid "Bad package"
 msgstr "Dårlig pakke"
 
-#: ../../install_steps_gtk.pm_.c:360
+#: ../../install_steps_gtk.pm_.c:359
 #, c-format
 msgid "Name: %s\n"
 msgstr "Navn: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:363
+#: ../../install_steps_gtk.pm_.c:362
 #, c-format
 msgid "Importance: %s\n"
 msgstr "Viktighet: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:371
+#: ../../install_steps_gtk.pm_.c:370
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
-#: ../../install_steps_gtk.pm_.c:390
+#: ../../install_steps_gtk.pm_.c:389
 msgid ""
 "You can't select this package as there is not enough space left to install it"
 msgstr ""
 "Du kan ikke velge denne pakken da det ikke er igjen nok plass til å "
 "installere denne"
 
-#: ../../install_steps_gtk.pm_.c:393
+#: ../../install_steps_gtk.pm_.c:392
 msgid "The following packages are going to be installed/removed"
 msgstr "Følgende pakker vil bli installert/fjernet"
 
-#: ../../install_steps_gtk.pm_.c:402
+#: ../../install_steps_gtk.pm_.c:401
 msgid "You can't select/unselect this package"
 msgstr "Du kan ikke velge/fjerne denne pakken"
 
-#: ../../install_steps_gtk.pm_.c:421
+#: ../../install_steps_gtk.pm_.c:420
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
 
-#: ../../install_steps_gtk.pm_.c:423
+#: ../../install_steps_gtk.pm_.c:422
 msgid "You can't unselect this package. It is already installed"
 msgstr "Du kan ikke fjerne denne pakken, den er allerede installert"
 
-#: ../../install_steps_gtk.pm_.c:427
+#: ../../install_steps_gtk.pm_.c:426
 msgid ""
 "This package must be upgraded\n"
 "Are you sure you want to deselect it?"
@@ -2950,15 +2994,15 @@ msgstr ""
 "Denne pakken må oppgraderes\n"
 "Er du sikker på at du ikke vil velge denne?"
 
-#: ../../install_steps_gtk.pm_.c:430
+#: ../../install_steps_gtk.pm_.c:429
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Du kan ikke fjerne denne pakken. Den må oppgraderes"
 
-#: ../../install_steps_gtk.pm_.c:475
+#: ../../install_steps_gtk.pm_.c:474
 msgid "Estimating"
 msgstr "Beregner"
 
-#: ../../install_steps_gtk.pm_.c:487 ../../install_steps_interactive.pm_.c:578
+#: ../../install_steps_gtk.pm_.c:486 ../../install_steps_interactive.pm_.c:578
 #: ../../interactive.pm_.c:84 ../../interactive.pm_.c:233
 #: ../../interactive_newt.pm_.c:49 ../../interactive_newt.pm_.c:98
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:211
@@ -2966,12 +3010,12 @@ msgstr "Beregner"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../../install_steps_gtk.pm_.c:501
+#: ../../install_steps_gtk.pm_.c:500
 #, c-format
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:532
+#: ../../install_steps_gtk.pm_.c:531
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -2986,7 +3030,7 @@ msgstr ""
 "ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
-#: ../../install_steps_gtk.pm_.c:551
+#: ../../install_steps_gtk.pm_.c:550
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
@@ -3639,29 +3683,17 @@ msgstr ""
 "Vær forsiktig, å ha numlock slått på forårsaker at mange av tastene\n"
 "gir tall istedenfor vanlige bokstaver (f.eks: `p' gir `6')"
 
-#: ../../install_steps_interactive.pm_.c:850
-msgid ""
-"DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
-"By default, the 4.0 server is used unless your card is not supported.\n"
-"\n"
-"Do you want to keep XFree 3.3?"
-msgstr ""
-"DrakX vil generere konfigurasjonsfiler for både XFree 3.3 og XFree 4.0.\n"
-"Som standard vil 4.0 tjeneren bli brukt hvis kortet ditt er støttet.\n"
-"\n"
-"Ønsker du å beholde XFree 3.3?"
-
-#: ../../install_steps_interactive.pm_.c:881
+#: ../../install_steps_interactive.pm_.c:875
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
 "Ønsker du å generere en auto installeringsdiskett for linux replikasjon?"
 
-#: ../../install_steps_interactive.pm_.c:883
+#: ../../install_steps_interactive.pm_.c:877
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Sett inn en tom diskett i stasjon %s"
 
-#: ../../install_steps_interactive.pm_.c:897
+#: ../../install_steps_interactive.pm_.c:891
 msgid "Creating auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
@@ -4109,13 +4141,13 @@ msgstr "Internett-konfigurasjon"
 msgid "Do you want to try to connect to the internet now?"
 msgstr "Vil du prøve å koble opp mot Internett nå?"
 
-#: ../../netconnect.pm_.c:128 ../../netconnect.pm_.c:149
+#: ../../netconnect.pm_.c:127 ../../netconnect.pm_.c:148
 #: ../../netconnect.pm_.c:205 ../../netconnect.pm_.c:225
 #: ../../netconnect.pm_.c:237 ../../netconnect.pm_.c:249
 msgid "ISDN Configuration"
 msgstr "ISDN-konfigurasjon"
 
-#: ../../netconnect.pm_.c:129
+#: ../../netconnect.pm_.c:127
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
@@ -4123,70 +4155,70 @@ msgstr ""
 "Velg din tilbyder.\n"
 " Hvis den ikke er i listen, velg ikke i listen"
 
-#: ../../netconnect.pm_.c:150
+#: ../../netconnect.pm_.c:149
 msgid "Please fill or check the field below"
 msgstr "Vennnligst fyll eller merk feltet under"
 
-#: ../../netconnect.pm_.c:152
+#: ../../netconnect.pm_.c:151
 msgid "Card IRQ"
 msgstr "Kort IRQ"
 
-#: ../../netconnect.pm_.c:153
+#: ../../netconnect.pm_.c:152
 msgid "Card mem (DMA)"
 msgstr "Kort mem (DMA)"
 
-#: ../../netconnect.pm_.c:154
+#: ../../netconnect.pm_.c:153
 msgid "Card IO"
 msgstr "Kort IO"
 
-#: ../../netconnect.pm_.c:155
+#: ../../netconnect.pm_.c:154
 msgid "Card IO_0"
 msgstr "Kort IO_0"
 
-#: ../../netconnect.pm_.c:156
+#: ../../netconnect.pm_.c:155
 msgid "Card IO_1"
 msgstr "Kort IO_1"
 
-#: ../../netconnect.pm_.c:158
+#: ../../netconnect.pm_.c:157
 msgid "Your personnal phone number"
 msgstr "Ditt telefonnummer"
 
-#: ../../netconnect.pm_.c:159
+#: ../../netconnect.pm_.c:158
 msgid "Provider name (ex provider.net)"
 msgstr "Navn tilbyder (f.eks. tilbyder.net)"
 
-#: ../../netconnect.pm_.c:160
+#: ../../netconnect.pm_.c:159
 msgid "Provider phone number"
 msgstr "Telefonnummer tilbyder"
 
-#: ../../netconnect.pm_.c:161
+#: ../../netconnect.pm_.c:160
 msgid "Provider dns 1"
 msgstr "Tilbyder dns 1"
 
-#: ../../netconnect.pm_.c:162
+#: ../../netconnect.pm_.c:161
 msgid "Provider dns 2"
 msgstr "Tilbyder dns 2"
 
-#: ../../netconnect.pm_.c:163
+#: ../../netconnect.pm_.c:162
 msgid "Dialing mode"
 msgstr "Oppringningsmodus"
 
-#: ../../netconnect.pm_.c:164
+#: ../../netconnect.pm_.c:163
 msgid ""
-"Time (secs) of inactivity after which it hangs up\n"
-"leave blank to disable it"
+"Time (secs) of inactivity after which\n"
+"it hangs up. (leave blank to disable it)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:165
+#: ../../netconnect.pm_.c:164
 #, fuzzy
 msgid "Account Login (user name)"
 msgstr "Logg inn"
 
-#: ../../netconnect.pm_.c:166
+#: ../../netconnect.pm_.c:165
 msgid "Account Password"
 msgstr "Passord"
 
-#: ../../netconnect.pm_.c:167
+#: ../../netconnect.pm_.c:166
 msgid "Confirm Password"
 msgstr "Bekreft passord"
 
@@ -4246,11 +4278,11 @@ msgstr ""
 msgid "Which is your ISDN card ?"
 msgstr "Hvilket er ditt ISDN-kort?"
 
-#: ../../netconnect.pm_.c:287
+#: ../../netconnect.pm_.c:275
 msgid "I have found an ISDN Card:\n"
 msgstr "Jeg har funnet et ISDN-kort:\n"
 
-#: ../../netconnect.pm_.c:295
+#: ../../netconnect.pm_.c:283
 msgid ""
 "I have detected an ISDN PCI Card, but I don't know the type. Please select "
 "one PCI card on the next screen."
@@ -4258,27 +4290,27 @@ msgstr ""
 "Jeg har oppdaget et ISDN PCI-kort, men jeg vet ikke hviklet type. Vennligst "
 "velg et PCI-kort i neste skjermbilde."
 
-#: ../../netconnect.pm_.c:302
+#: ../../netconnect.pm_.c:290
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Ingen ISDN PCI-kort funnet. Vennligst velg et i neste skjermbilde."
 
-#: ../../netconnect.pm_.c:342
+#: ../../netconnect.pm_.c:330
 msgid "Internet Configuration."
 msgstr "Internett-konfigurasjon."
 
-#: ../../netconnect.pm_.c:343
+#: ../../netconnect.pm_.c:331
 msgid ""
 "I need to configure your network adaptater to be able to connect to internet."
 msgstr ""
 "Jeg må konfigurere nettverksadapteret ditt for å kunne koble opp mot\n"
 "Internett."
 
-#: ../../netconnect.pm_.c:345 ../../netconnect.pm_.c:361
+#: ../../netconnect.pm_.c:333 ../../netconnect.pm_.c:349
 #: ../../standalone/drakgw_.c:198
 msgid "Choose the network interface"
 msgstr "Velg nettverksgrensesnitt"
 
-#: ../../netconnect.pm_.c:346
+#: ../../netconnect.pm_.c:334
 msgid ""
 "Please choose which network adaptater do you want to use to connect to "
 "internet.\n"
@@ -4288,11 +4320,11 @@ msgstr ""
 "mot Internett.\n"
 "Hvis du ikke vet hvilket, velg eth0.\n"
 
-#: ../../netconnect.pm_.c:357 ../../netconnect.pm_.c:386
+#: ../../netconnect.pm_.c:345 ../../netconnect.pm_.c:374
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
 
-#: ../../netconnect.pm_.c:358
+#: ../../netconnect.pm_.c:346
 msgid ""
 "There is only one configured network adapter on your system:\n"
 "\n"
@@ -4306,7 +4338,7 @@ msgstr ""
 "\n"
 "Ønsker du å sette opp Internett-tilkoblingen din med dette adapteret?"
 
-#: ../../netconnect.pm_.c:362
+#: ../../netconnect.pm_.c:350
 msgid ""
 "Please choose which network adaptater do you want to use to connect to "
 "internet"
@@ -4314,159 +4346,159 @@ msgstr ""
 "Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp "
 "mot Internett"
 
-#: ../../netconnect.pm_.c:387
+#: ../../netconnect.pm_.c:375
 msgid "I'm about to restart the network interface. Do you agree?"
 msgstr "Jeg er i ferd med å starte nettverksgrensesnittet på nytt. Er du enig?"
 
-#: ../../netconnect.pm_.c:446
+#: ../../netconnect.pm_.c:434
 msgid "ADSL configuration"
 msgstr "ADSL-konfigurasjon"
 
-#: ../../netconnect.pm_.c:447
+#: ../../netconnect.pm_.c:435
 msgid "Do you want to start your connection at boot?"
 msgstr "Ønsker du å starte tilkoblingen din ved oppstart?"
 
-#: ../../netconnect.pm_.c:524
+#: ../../netconnect.pm_.c:512
 msgid "Try to find a modem?"
 msgstr "Prøve å finne et modem?"
 
-#: ../../netconnect.pm_.c:534
+#: ../../netconnect.pm_.c:522
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Vennligst velg hvilken serieport modemet ditt koblet til."
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:527
 msgid "Dialup options"
 msgstr "Opsjoner oppringt"
 
-#: ../../netconnect.pm_.c:540
+#: ../../netconnect.pm_.c:528
 msgid "Connection name"
 msgstr "Navn tilknytning"
 
-#: ../../netconnect.pm_.c:541
+#: ../../netconnect.pm_.c:529
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: ../../netconnect.pm_.c:542
+#: ../../netconnect.pm_.c:530
 msgid "Login ID"
 msgstr "Login ID"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:532
 msgid "Authentication"
 msgstr "Autentifikasjon"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:532
 msgid "CHAP"
 msgstr "CHAP"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:532
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:532
 msgid "Script-based"
 msgstr "Scriptbasert"
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:532
 msgid "Terminal-based"
 msgstr "Terminalbasert"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:533
 msgid "Domain name"
 msgstr "Domenenavn"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:535
 msgid "First DNS Server"
 msgstr "Første DNS-tjener"
 
-#: ../../netconnect.pm_.c:548
+#: ../../netconnect.pm_.c:536
 msgid "Second DNS Server"
 msgstr "Andre DNS-tjener"
 
-#: ../../netconnect.pm_.c:563
+#: ../../netconnect.pm_.c:551
 msgid "Connect to internet"
 msgstr "Koble opp mot Internett"
 
-#: ../../netconnect.pm_.c:565
+#: ../../netconnect.pm_.c:553
 msgid "Disconnect from internet"
 msgstr "Koble ned fra Internett"
 
-#: ../../netconnect.pm_.c:567
+#: ../../netconnect.pm_.c:555
 msgid "Configure internet connection"
 msgstr "Konfigurer Internett-tilkobling"
 
-#: ../../netconnect.pm_.c:570
+#: ../../netconnect.pm_.c:558
 msgid "Internet connection & configuration"
 msgstr "Internett tilkobling & konfigurasjon"
 
-#: ../../netconnect.pm_.c:571
+#: ../../netconnect.pm_.c:559
 msgid "What do you wish to do?"
 msgstr "Hva ønsker du å gjøre?"
 
-#: ../../netconnect.pm_.c:603
+#: ../../netconnect.pm_.c:591
 msgid "Connect to internet with a normal modem"
 msgstr "Koble opp mot Internett med vanlig modem"
 
-#: ../../netconnect.pm_.c:609
+#: ../../netconnect.pm_.c:597
 msgid "Connect to internet using ISDN"
 msgstr "Koble opp mot Internett med ISDN"
 
-#: ../../netconnect.pm_.c:613
+#: ../../netconnect.pm_.c:601
 msgid "Internal ISDN card"
 msgstr "Internt ISDN-kort"
 
-#: ../../netconnect.pm_.c:615
+#: ../../netconnect.pm_.c:603
 msgid "External modem"
 msgstr "Eksternt modem"
 
-#: ../../netconnect.pm_.c:618 ../../netconnect.pm_.c:650
-#: ../../netconnect.pm_.c:661 ../../netconnect.pm_.c:687
-#: ../../netconnect.pm_.c:727
+#: ../../netconnect.pm_.c:606 ../../netconnect.pm_.c:638
+#: ../../netconnect.pm_.c:649 ../../netconnect.pm_.c:675
+#: ../../netconnect.pm_.c:715
 msgid "Connect to the Internet"
 msgstr "Koble opp mot Internett"
 
-#: ../../netconnect.pm_.c:619
+#: ../../netconnect.pm_.c:607
 msgid "What kind is your ISDN connection?"
 msgstr "Hva slags type er ISDN-tilknytningen din?"
 
-#: ../../netconnect.pm_.c:642
+#: ../../netconnect.pm_.c:630
 msgid "Connect to internet using DSL (or ADSL)"
 msgstr "Koble opp mot Internett med DSL (eller ADSL)"
 
-#: ../../netconnect.pm_.c:645
+#: ../../netconnect.pm_.c:633
 msgid "France"
 msgstr "Frankrike"
 
-#: ../../netconnect.pm_.c:647
+#: ../../netconnect.pm_.c:635
 msgid "Other countries"
 msgstr "Andre land"
 
-#: ../../netconnect.pm_.c:651
+#: ../../netconnect.pm_.c:639
 msgid "On which country are you located ?"
 msgstr "I hvilket land er du ?"
 
-#: ../../netconnect.pm_.c:656
+#: ../../netconnect.pm_.c:644
 #, fuzzy
 msgid "Alcatel modem"
 msgstr "alcatel modem"
 
-#: ../../netconnect.pm_.c:658
+#: ../../netconnect.pm_.c:646
 msgid "ECI modem"
 msgstr "ECI modem"
 
-#: ../../netconnect.pm_.c:662
+#: ../../netconnect.pm_.c:650
 #, fuzzy
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr "Hvis adsl modemet ditt er alcatel, velg alcatel. ellers, ECI."
 
-#: ../../netconnect.pm_.c:682
+#: ../../netconnect.pm_.c:670
 msgid "use pppoe"
 msgstr "bruk pppoe"
 
-#: ../../netconnect.pm_.c:684
+#: ../../netconnect.pm_.c:672
 msgid "don't use pppoe"
 msgstr "ikke bruk pppoe"
 
-#: ../../netconnect.pm_.c:688
+#: ../../netconnect.pm_.c:676
 #, fuzzy
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
@@ -4477,15 +4509,15 @@ msgstr ""
 "Men, det eksisterer noen tilkoblinger som bare bruker dhcp. Hvis du ikke "
 "vet, velg 'bruk pppoe'"
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:694
 msgid "Connect to internet using Cable"
 msgstr "Koble opp mot Internett med kabel"
 
-#: ../../netconnect.pm_.c:710
+#: ../../netconnect.pm_.c:698
 msgid "Cable connection"
 msgstr "Kabeltilkobling"
 
-#: ../../netconnect.pm_.c:711 ../../network.pm_.c:261
+#: ../../netconnect.pm_.c:699 ../../network.pm_.c:261
 msgid ""
 "Please enter your host name if you know it.\n"
 "Some DHCP servers require the hostname to work.\n"
@@ -4497,61 +4529,61 @@ msgstr ""
 "Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
 "som ``minboks.mittlab.mittfirma.no''."
 
-#: ../../netconnect.pm_.c:715 ../../network.pm_.c:265 ../../network.pm_.c:303
+#: ../../netconnect.pm_.c:703 ../../network.pm_.c:265 ../../network.pm_.c:303
 msgid "Host name:"
 msgstr "Vertsnavn:"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:706
 msgid "dhcpd"
 msgstr ""
 
-#: ../../netconnect.pm_.c:720
+#: ../../netconnect.pm_.c:708
 msgid "pump"
 msgstr ""
 
-#: ../../netconnect.pm_.c:722
+#: ../../netconnect.pm_.c:710
 msgid "dhcpxd"
 msgstr ""
 
-#: ../../netconnect.pm_.c:724
+#: ../../netconnect.pm_.c:712
 msgid "dhcp-client"
 msgstr ""
 
-#: ../../netconnect.pm_.c:728
+#: ../../netconnect.pm_.c:716
 #, fuzzy
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Hvilken protokoll ønsker du å bruke?"
 
-#: ../../netconnect.pm_.c:740
+#: ../../netconnect.pm_.c:729
 #, fuzzy
 msgid "Configure local network"
 msgstr "Konfigurer nettverk"
 
-#: ../../netconnect.pm_.c:740
+#: ../../netconnect.pm_.c:729
 #, fuzzy
 msgid "Reconfigure local network"
 msgstr "Rekonfigurer nettverket nå"
 
-#: ../../netconnect.pm_.c:746
+#: ../../netconnect.pm_.c:735
 #, fuzzy
 msgid "disable networking"
 msgstr "Konfigurer nettverk"
 
-#: ../../netconnect.pm_.c:756
+#: ../../netconnect.pm_.c:745
 #, fuzzy
 msgid "Connect to the Internet / Configure local Network"
 msgstr "Koble opp mot Internett / Konfigurer LAN"
 
-#: ../../netconnect.pm_.c:757
+#: ../../netconnect.pm_.c:746
 #, fuzzy
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
 msgstr "Lokalt nettverk har allerede blitt konfigurert. Vil du:"
 
-#: ../../netconnect.pm_.c:758
+#: ../../netconnect.pm_.c:747
 msgid "How do you want to connect to the Internet?"
 msgstr "Hvordan vil du koble opp mot Internett?"
 
@@ -5722,6 +5754,17 @@ msgstr "Finner tillatelser"
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
+
+#~ msgid ""
+#~ "DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
+#~ "By default, the 4.0 server is used unless your card is not supported.\n"
+#~ "\n"
+#~ "Do you want to keep XFree 3.3?"
+#~ msgstr ""
+#~ "DrakX vil generere konfigurasjonsfiler for både XFree 3.3 og XFree 4.0.\n"
+#~ "Som standard vil 4.0 tjeneren bli brukt hvis kortet ditt er støttet.\n"
+#~ "\n"
+#~ "Ønsker du å beholde XFree 3.3?"
 
 #~ msgid "Cryptographic"
 #~ msgstr "Kryptografikk"
