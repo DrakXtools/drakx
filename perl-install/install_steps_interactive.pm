@@ -591,18 +591,13 @@ sub reallyChooseGroups {
 				 $path = $o->{compssUsers}{$_}{path};
 				 if_($old ne $path, { val => $path }),
 				 {
-			     help => translate($o->{compssUsers}{$_}{descr}),
-			     val => \$val->{$_},
-			     type => 'bool',
-			     icon => do {
-				 my $f = "/usr/share/icons/" . ($o->{compssUsers}{$_}{icons} || 'default');
-				 -e "$f.png" or $f .= "_section";
-				 -e "$f.png" or $f = '/usr/share/icons/default_section';
-				 "$f.png";
-			     },
-			     disabled => sub { $all },
-			     text => translate($o->{compssUsers}{$_}{label}),# . sprintf(" (%d%s)", $compute_size->(@{$compssUsers->{$_}{flags}}) / sqr(1024), _("MB")),
-			   } } @{$o->{compssUsersSorted}}),
+				  val => \$val->{$_},
+				  type => 'bool',
+				  disabled => sub { $all },
+				  text => translate($o->{compssUsers}{$_}{label}),
+				  help => translate($o->{compssUsers}{$_}{descr}),
+				 }
+			     } @{$o->{compssUsersSorted}}),
 			   if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
 			   if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
 			  ], changed => sub { $size_text = &$size_to_display }) or return;
@@ -848,7 +843,7 @@ sub configurePrinter {
     $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
     printerdrake::main($printer, $o, sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
-    $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if %{$printer->{configured} || {}} == ();
+    $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if !is_empty_hash_ref($printer->{configured});
 }
 
 #------------------------------------------------------------------------------
