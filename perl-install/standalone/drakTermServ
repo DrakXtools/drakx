@@ -260,66 +260,67 @@ sub interactive_mode() {
 						$main_box = new Gtk2::VBox(0,10),
 					),
 					0, $wizard_buttons = gtkpack_(new Gtk2::HBox(1,2)),
-					1, gtkpack_($main_buttons = new Gtk2::HBox(0,2),
-						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-							gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
+					0, gtkpack_($main_buttons = new Gtk2::VBox(0,2),
+						1, gtkpack_(new Gtk2::HBox(1,2),
+						  1, gtkpack_(new Gtk2::VBox(1,0),
+							1, gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
 								destroy_widget();
 								cursor_wait(); 
 								enable_ts();
 								cursor_norm();
 							}),
-							gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
+							1, gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
 								destroy_widget();
 								cursor_wait();
 								disable_ts();
 								cursor_norm(); 
 							}),
-						),
-						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-							gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
+						  ),
+						  1, gtkpack_(new Gtk2::VBox(1,0),
+							1, gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
 								destroy_widget();
 								cursor_wait();	
 								start_ts();
 								cursor_norm();
 							}),
-							gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
+							1, gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
 								destroy_widget();
 								cursor_wait();
 								stop_ts();
 								cursor_norm();
 							}),
-						),
-						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-							gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
+						  ),
+						  1, gtkpack_(new Gtk2::VBox(1,0),
+							1, gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
 								destroy_widget();
 								make_boot();
 							}),
-							gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
+							1, gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
 								destroy_widget();
 								make_nbi();
 							}),
-						),
-						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-							gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
+						  ),
+						  1, gtkpack_(new Gtk2::VBox(1,0),
+							1, gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
 								destroy_widget();
 								maintain_users();
 							}),
-							gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { destroy_widget(); maintain_clients() }),
-						),
-						1, new Gtk2::HBox(0,2),
-						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-							gtksignal_connect(new Gtk2::Button(N("First Time Wizard")), clicked => sub {
-								destroy_widget();
-								start_wizard();
+							1, gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { 
+								destroy_widget(); 
+								maintain_clients() 
 							}),
-							new Gtk2::VBox(0,0),
+						  ),
 						),
-						0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
-							gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
+						1, gtkpack_(new Gtk2::HBox(1,2),
+							0, gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
 								destroy_widget();
 								help();
 							}),
-							gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
+							0, gtksignal_connect(new Gtk2::Button(N("First Time Wizard")), clicked => sub {
+								destroy_widget();
+								start_wizard();
+							}),
+							0, gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
 								write_conf_file();
 								restart_server() if $changes_made == 1;
 								Gtk2->main_quit;
