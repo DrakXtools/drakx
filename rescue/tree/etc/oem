@@ -1,89 +1,523 @@
-#!/bin/sh
+#!/usr/bin/perl
 
-[ "$1" = "-f" ] || { echo "Call it with option -f, but don't fear loosing all your data, this command is dangerous!"; exit 1; }
+if ($ARGV[0] ne '-f') {
+    print "Call it with option -f, but don't fear loosing all your data, this command is dangerous!";
+    exit 1;
+}
 
-inst=1
-swap=2
-root=3
+my ($yes, $hd, $cd);
+do {
+    print "
 
-yes=
-while [ "$yes" != "yes" ]; do
-    echo
-    echo
-    echo "I'm going to install the OEM version on your hard drive"
-    echo "[1;31;40m!!ALL DATA IS GOING TO BE LOST!![0m"
-    echo
-    echo "Type \`\`yes'' and [enter] to go on"
-    read yes
-done
+I'm going to install the OEM version on your hard drive
+[1;31;40m!!ALL DATA IS GOING TO BE LOST!![0m
 
-cd /proc/ide
-for i in hd*; do
-  grep -q disk  $i/media && hd=/dev/$i
-  grep -q cdrom $i/media && cd=/dev/$i
-done
+Type \`\`yes'' and [enter] to go on\n"
+} while (($yes = <STDIN>) !~ /^\s*yes\s*$/i);
 
-echo "hd: $hd"
-echo "cdrom: $cd"
+#- avoid globing as it is not available in rescue ramdisk.
+foreach my $device (split ' ', `/bin/ls -d /proc/ide/hd*`) {
+    open F, "$device/media" or next;
+    foreach (<F>) {
+	/disk/  and do { $hd = $device; $hd =~ s,/proc/ide/,,; };
+	/cdrom/ and do { $cd = $device; $cd =~ s,/proc/ide/,,; };
+    }
+    close F;
+}
+-e "/dev/$hd" && -e "/dev/$cd" or die "unable to access hard disk or local cdrom";
+print "hd: $hd\ncd: $cd\n";
 
-mkdir /cdrom ; mount -r -t iso9660 $cd /cdrom
+#- find a cdrom (like) image, normally a true cdrom but if nfs install is running, use it instead.
+mkdir "/cdrom";
+open F, "/proc/cmdline";
+while (<F>) {
+    /automatic=method:nfs,.*server:([^\s,]*),.*directory:([^\s,]*)/
+      and system "mount", "-r", "-t", "nfs", "$1:$2", "/cdrom";
+}
+close F;
+-e "/cdrom/VERSION"
+  or system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
 
-if grep -q "[ -]fr" /cdrom/VERSION; then
-  lang=fr
-  flang=fr_FR
-else
-  lang=en
-  flang=en_US
-fi
-echo "Found lang $lang"
+#- detect language used.
+my ($lang, $flang);
+open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
+while (<F>) {
+    /[\s-]fr/ and ($lang, $flang) = ("fr", "fr_FR");
+}
+close F;
+#- default language fall to english ?
+$lang or ($lang, $flang) = ("en", "en_US");
+print "Found lang $lang\n";
 
-echo "Installing new partition table and bootloader"
-dd if=/etc/part_and_bootloader of=$hd
-  
-echo "Asking kernel to take into account this new partition table"
-kernel_read_part $hd
+#- check for already existing partition table, if none are found
+#- create 3 partitions (one for install, one for swap and one for root).
+#- if only a fat partition is found, resize it do include the above partition.
+#- other combination are really dangerous and are not supported, ask
+#- the user that all data on the disk will be erased and go on.
+my ($hd_size, @hd_parts);
+open F, "parted /dev/$hd print |";
+while (<F>) {
+    /^Disk geometry [^:]*:\s*([\d\.]+)-([\d\.]+)/ and do { $hd_size = $2 - $1 };
+    #/^Disk label type:\s*msdos/ and do { $hd_type = 'msdos' };
+    /^(\d+)\s+([\d\.]+)\s+([\d\.]+)\s+(primary|logical|extended)\s*(\S*)/ and do {
+	#- this automatically drops extended partition here!
+	push @hd_parts, { minor => $1, start => $2, end => $3, type => $4, fstype => $5 };
+    };
+}
+close F;
+$hd_size > 1500 or die "hard disk is too small to contain oem install (${hd_size}MB found, need 1500 at least)";
 
-echo "Setting swap"
-mkswap $hd$swap
-swapon $hd$swap
+my ($fat_pos, $resize_fat_size, $inst_size, $swap_size, $root_size);
+if (@hd_parts == 1 && $hd_parts[$fat_pos = 0]{fstype} eq 'FAT' ||
+    @hd_parts == 2 && $hd_parts[0]{type} eq 'extended' && $hd_parts[$fat_pos = 1]{fstype} eq 'FAT') {
+    if ($hd_size - $hd_parts[$fat_pos]{end} > 1500) {
+	#- check first if there are some available space left on the disk.
+	#- so we are using it, root_size is fixed to match hard disk size.
+	($resize_fat_size, $inst_size, $swap_size) = (0, 152, 128);
+	$root_size = $hd_size - $hd_parts[$fat_pos]{end} - $inst_size - $swap_size;
+	$root_size > 4000 and $root_size = 2744;
+    } elsif ($hd_size > 3000) {
+	#- resize this fat partition.
+	$resize_fat_size = 0.5 * $hd_size;
+	($inst_size, $swap_size) = (152, 128);
+	$root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
+	$root_size > 4000 and $root_size = 2744;
+    }
+}
+unless ($inst_size + $swap_size + $root_size) {
+    #- there have not been defined above, so remove everything and start from
+    #- a blank partition.
+    ($resize_fat_size, $inst_size, $swap_size) = (undef, 152, 128);
+    $root_size = $hd_size - $resize_fat_size - $inst_size - $swap_size;
+    $root_size > 4000 and $root_size = 2744;
+}
 
-echo "Formatting $hd$inst partition" ; mkfs.ext2 $hd$inst
-echo "Formatting $hd$root partition" ; mkfs.ext2 $hd$root
+#- launch parted to edit partition table, start at minor.
+#- point define where we start.
+my $minor = defined $resize_fat_size && $fat_pos > 0 ? 6 : 5;
+my $point = 0.0;
 
-echo "Mounting partitions"
-mkdir -p /hd ; mount -t ext2 $hd$inst /hd
-mkdir -p /mnt; mount -t ext2 $hd$root /mnt
+open F, "| parted -s /dev/$hd";
+if (defined $resize_fat_size) {
+    #- keep the current partition table, and try to resize the fat partition
+    #- if the size is not 0.
+    #- KEEP IN MIND there is only one partition defined.
+    $point = $hd_parts[$fat_pos]{start} + $resize_fat_size;
+    printf F "resize %d %s %s\n", $hd_parts[$fat_pos]{minor}, $hd_parts[$fat_pos]{start}, $point;
+} else {
+    #- build a new disk label here.
+    print F "mklabel msdos\n";
+}
+#- all linux partition are stored inside an extended partition, this is easier to manipulate after.
+if ($minor == 5) {
+    print F "mkpart extended $point $hd_size\n";
+} else {
+    $hd_parts[0]{type} eq 'extended' or die "first partition assumed to be extended";
+    $point = $hd_parts[0]{start};
+    print F "resize $hd_parts[0]{minor} $point $hd_size\n";
+}
+printf F "mkpart logical ext2 %s %s\n", $point, $point+$inst_size; $point+=$inst_size;
+printf F "mkpart logical linux-swap %s %s\n", $point, $point+$swap_size; $point+=$inst_size;
+printf F "mkpart logical ext2 %s %s\n", $point, $point+$root_size < $hd_size ? $point+$root_size : $hd_size;
+print F "quit\n";
+close F or die "unable to partition the disk $hd";
 
-echo "Copying installation on hard drive"
-cp -a /boot /cdrom/boot /hd
-mkdir -p /hd/Mandrake /hd/Mandrake/RPMS
-cp -a /cdrom/Mandrake/base /cdrom/Mandrake/mdkinst /hd/Mandrake
+#- at this point, the partition are created.
+my ($instz, $inst, $swap, $root) = ($minor-1, $minor, $minor+1, $minor+2);
 
-perl -pi -e "s/^(kernel .*)/\1 flang=$flang/" /hd/boot/grub/menu.lst
+#- we have to build swap and mount it.
+print "Setting swap\n";
+system "mkswap", "/dev/$hd$swap";
+system "swapon", "/dev/$hd$swap";
 
-for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList $lang | grep C: | cut -d: -f2`; do
-    [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && cp -a /cdrom/Mandrake/RPMS/$i.*.rpm /hd/Mandrake/RPMS
-done
+#- we have 
+print "Formatting /dev/$hd$inst partition\n";
+system "mkfs.ext2", "/dev/$hd$inst";
+print "Formatting /dev/$hd$root partition\n";
+system "mkfs.ext2", "/dev/$hd$root";
 
-echo "Installing packages"
-export DURING_INSTALL=1
-export RPM_INSTALL_LANG=$lang
-export LD_LIBRARY_PATH=/usr/X11R6/lib
-export SECURE_LEVEL=2
-for i in /etc /var/lib/rpm /proc ; do mkdir -p /mnt$i; done
-mount -t proc proc /mnt/proc
-rpm --root /mnt --initdb
-echo >/mnt/etc/fstab "$hd$root / ext2 defaults 1 1"
-for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList $lang | grep I: | cut -d: -f2`; do
-    [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && rpm --root /mnt -ivh /cdrom/Mandrake/RPMS/$i.*.rpm --nodeps --force
-done
-umount /mnt/proc
-umount -a -f -t noproc
-eject $cd
+print "Mounting partitions\n";
+mkdir "/hd";
+system "mount", "-t", "ext2", "/dev/$hd$inst", "/hd";
+mkdir "/mnt";
+system "mount", "-t", "ext2", "/dev/$hd$root", "/mnt";
 
-echo
-echo "Done. OEM hard drive ready!"
-echo "The hard drive is now ready for a customer."
-echo "System is now halted."
-echo
-halt
+print "Copying installation on hard drive\n";
+system "cp", "-a", "/boot", "/cdrom/boot", "/hd";
+mkdir "/hd/Mandrake";
+mkdir "/hd/Mandrake/RPMS";
+system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandrake";
+
+print "Setting bootloader\n";
+open F, ">/hd/boot/grub/menu.lst";
+if (defined $resize_fat_size) {
+    print F "timeout 5\n";
+    print F "color black/cyan yellow/cyan\n\n";
+    print F "title linux\n";
+} else {
+    print F "timeout 0\n\n";
+    print F "title oem\n";
+}
+print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hd$inst,directory:/ hd vga=788 fbeginner oem\n";
+print F "initrd (hd0,$instz)/boot/hd.rdz\n";
+#- if a windows partition is available, add an entrie for it.
+if (defined $resize_fat_size) {
+    print F "\ntitle windows\n";
+    printf F "rootnoverify (hd0,%s)\n", $hd_parts[$fat_pos]{minor}-1;
+    print F "makeactive\n";
+    print F "chainloader +1\n";
+}
+close F;
+open F, "| grub --device-map=/hd/boot/grub/device.map --batch";
+print F "install (hd0,$instz)/boot/grub/stage1 d (hd0) (hd0,$instz)/boot/grub/stage2 p (hd0,$instz)/boot/grub/menu.lst\n";
+print F "quit\n";
+close F or die "error while executing grub";
+
+my $packages = select_packages("/cdrom", $lang);
+
+print "Copying packages\n";
+foreach my $pkg (@{$packages->{depslist}}) {
+    $pkg->{closure} && !$pkg->{selected} or next;
+    foreach (qw(i586 noarch)) {
+	my $file = "/cdrom/Mandrake/RPMS/$pkg->{name}.$_.rpm";
+	-e $file or next;
+	print "  copying $pkg->{name}.$_.rpm\n";
+	system "cp", "-a", $file, "/hd/Mandrake/RPMS";
+	delete $pkg->{closure};
+	last;
+    }
+}
+foreach my $pkg (@{$packages->{depslist}}) {
+    $pkg->{closure} && !$pkg->{selected} and print "package $pkg->{name} marked as closure but not copied!\n";
+}
+
+print "Installing packages\n";
+$ENV{DURING_INSTALL} = 1;
+$ENV{RPM_INSTALL_LANG} = $lang;
+$ENV{LD_LIBRARY_PATH} = "/usr/X11R6/lib";
+$ENV{SECURE_LEVEL} = 2;
+foreach (qw(/etc /var /var/lib /var/lib/rpm /proc)) {
+    mkdir "/mnt/$_";
+}
+system "mount", "-t", "proc", "proc", "/mnt/proc";
+open F, ">/mnt/etc/fstab";
+print F "/dev/$hd$root / ext2 defaults 1 1\n";
+close F;
+system "rpm", "--root", "/mnt", "--initdb";
+if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
+    delete $pkg->{selected} or die "glibc not selected";
+    foreach (qw(i586 noarch)) {
+	my $file = "/cdrom/Mandrake/RPMS/$pkg->{name}.$_.rpm";
+	-e $file or next;
+	system "rpm", "--root", "/mnt", "--nodeps", "--force", "--noscripts", "-ivh", $file;
+	last; #- update glibc twice, in case.
+    }
+} else {
+    die "no glibc package found";
+}
+my @files;
+foreach my $pkg (@{$packages->{depslist}}) {
+    $pkg->{selected} or next;
+    foreach (qw(i586 noarch)) {
+	my $file = "/cdrom/Mandrake/RPMS/$pkg->{name}.$_.rpm";
+	-e $file or next;
+	push @files, $file;
+	delete $pkg->{selected};
+	last;
+    }
+}
+foreach my $pkg (@{$packages->{depslist}}) {
+    $pkg->{selected} and print "package $pkg->{name} marked as selected but not installable!\n";
+}
+system "rpm", "--root", "/mnt", "--nodeps", "--force", "-ivh", @files;
+print "Installed " . scalar(@files) . " packages\n";
+
+system "umount", "/mnt/proc";
+system "umount", "-a", "-f", "-t", "noproc";
+system "eject", "/dev/$cd";
+
+print "
+Done. OEM hard drive ready!
+The hard drive is now ready for a customer.
+System is now halted.\n\n";
+
+system "halt";
+
+#- provide package fullname that have to be installed and copied.
+sub select_packages {
+    my ($dir, $lang) = @_;
+    my $o = { packages => read_depslist("$dir/Mandrake/base/depslist.ordered") };
+
+    #- DO NOT FORGET TO UPDATE HERE ACCORDING TO gi/perl-install/install_any.pm
+    my @pkgs = qw(XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
+		  dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
+		  rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils
+		  kernel-pcmcia-cs apmd cdrecord
+                 );
+    push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
+    foreach (@pkgs) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
+    }
+    foreach my $pkg (@{$o->{packages}{depslist}}) {
+	delete $pkg->{selected} and $pkg->{closure} = 1;
+    }
+    foreach (qw(xpp kups kisdn)) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and $pkg->{closure} = 1;
+    }
+
+    #- act as DrakX will do to select packages.
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die "no basesystem package found");
+    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate"));
+    ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
+      pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
+
+    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
+    $o->{compssUsersChoice}{SYSTEM} = 1;
+
+    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, 4, 0);
+    pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
+
+    my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
+    if ($lang_pkg) {
+	pkgs::selectPackage($o->{packages}, $lang_pkg);
+	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
+    }
+
+    #- package that have to selected here as a bonus for oem install.
+    foreach (qw(cups cups-drivers drakprofile draksync irda-utils numlock raidtools reiserfs-utils
+		Mesa Mesa-demos alsa alsa-utils
+		Aurora xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
+               )) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
+    }
+
+    #- special packages that are to be move to closure always ...
+    foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure
+		Aurora xawtv kwintv xscreensaver-gl xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
+		)) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and $pkg->{closure} = 1, delete $pkg->{selected};
+    }
+
+    $o->{packages};
+}
+
+sub chop_version($) {
+    ($_[0] =~ /(.*)-[^-]+-[^-]+/)[0] || $_[0];
+}
+
+sub read_depslist {
+    my ($file) = @_;
+    my $packages = { depslist => [], names => {} };
+
+    #- read depslist.oredered file.
+    my $id = 0;
+
+    open F, "$file" or die "unable to open ordered dependencies list file";
+    while (<F>) {
+	my ($name, $size, @deps) = split;
+	push @{$packages->{depslist}}, { id => $id++, name => $name, size => $size, deps => \@deps };
+    }
+    close F;
+
+    foreach (@{$packages->{depslist}}) {
+	$packages->{names}{chop_version($_->{name})} = $_;
+    }
+
+    print STDERR "read " . scalar(@{$packages->{depslist}}) . " package dependancies\n";
+    $packages;
+}
+
+#- compability method for the below ones, wrap DrakX code extracted.
+package log;
+sub l {}
+
+package detect_devices;
+sub matching_desc { 0 }
+
+package install_any;
+sub getFile { open FILE, "/cdrom/$_[0]" or return; \*FILE }
+
+package pkgs;
+sub formatXiB { $_[0] } #- NOP
+sub packageSize { $_[0]{size} }
+sub packageRate { $_[0]{values}[0] }
+sub packageByName {
+    my ($packages, $name) = @_;
+    $packages->{names}{$name};
+}
+sub selectedSize {
+    my ($packages) = @_;
+    my $size = 0;
+    foreach (@{$packages->{depslist}}) {
+	$_->{selected} and $size += $_->{size};
+    }
+    $size;
+}
+my @preferred = qw(perl-GTK postfix wu-ftpd ghostscript-X vim-minimal kernel ispell-en);
+sub selectPackage {
+    my ($packages, $pkg, $base, $otherOnly, $check_recursion) = @_;
+
+    #- avoid infinite recursion (mainly against badly generated depslist.ordered).
+    $check_recursion ||= {}; exists $check_recursion->{$pkg->{name}} and return; $check_recursion->{$pkg->{name}} = undef;
+
+    #- make sure base package are set even if already selected.
+    $base and $pkg->{base} = 1;
+
+    #- select package and dependancies, otherOnly may be a reference
+    #- to a hash to indicate package that will strictly be selected
+    #- when value is true, may be selected when value is false (this
+    #- is only used for unselection, not selection)
+    unless ($pkg->{selected}) {
+	foreach (@{$pkg->{deps}}) {
+	    my $preferred;	    
+	    if (/\|/) {
+		#- choice deps should be reselected recursively as no
+		#- closure on them is computed, this code is exactly the
+		#- same as pixel's one.
+		my %preferred; @preferred{@preferred} = ();
+		foreach (split '\|') {
+		    my $dep = $packages->{depslist}[$_] or next;
+		    $preferred ||= $dep;
+		    $dep->{selected} and $preferred = $dep, last;
+		    exists $preferred{::chop_version($dep->{name})} and $preferred = $dep;
+		}
+		selectPackage($packages, $preferred, $base, $otherOnly, $check_recursion) if $preferred;
+	    } else {
+		#- deps have been closed except for choices, so no need to
+		#- recursively apply selection, expand base on it.
+		my $dep = $packages->{depslist}[$_];
+		$base and $dep->{base} = 1;
+		$otherOnly and !$dep->{selected} and $otherOnly->{::chop_version($dep->{name})} = 1;
+		$otherOnly or $dep->{selected} += 1;
+	    }
+	}
+    }
+    $otherOnly and !$pkg->{selected} and $otherOnly->{::chop_version($pkg->{name})} = 1;
+    $otherOnly or $pkg->{selected} += 1;
+    1;
+}
+
+#- this code is extracted from DrakX and SHOULD NOT BE MODIFIED, wrapper method exists above to provide a good choice.
+sub read_rpmsrate {
+    my ($packages, $f) = @_;
+    my $line_nb = 0;
+    my (@l);
+    while (<$f>) {
+	$line_nb++;
+	/\t/ and die "tabulations not allowed at line $line_nb\n";
+	s/#.*//; 		 # comments
+
+	my ($indent, $data) = /(\s*)(.*)/;
+	next if !$data;		# skip empty lines
+
+	@l = grep { $_->[0] < length $indent } @l;
+
+	my @m = @l ? @{$l[$#l][1]} : ();
+	my ($t, $flag, @l2);
+	while ($data =~ 
+	       /^((
+                   [1-5]
+                   |
+                   (?:            (?: !\s*)? [0-9A-Z_]+(?:".*?")?)
+                   (?: \s*\|\|\s* (?: !\s*)? [0-9A-Z_]+(?:".*?")?)*
+                  )
+                  (?:\s+|$)
+                 )(.*)/x) {
+	    ($t, $flag, $data) = ($1,$2,$3);
+	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {
+	    }
+	    my $ok = 0;
+	    $flag = join('||', grep { 
+		if (my ($inv, $p) = /^(!)?PCI"(.*)"/) {
+		    ($inv xor detect_devices::matching_desc($p)) and $ok = 1;
+		    0;
+		} else {
+		    1;
+		}
+	    } split '\|\|', $flag);
+	    push @m, $ok ? 'TRUE' : $flag || 'FALSE';
+	    push @l2, [ length $indent, [ @m ] ];
+	    $indent .= $t;
+	}
+	if ($data) {
+	    # has packages on same line
+	    my ($rate) = grep { /^\d$/ } @m or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
+	    foreach (split ' ', $data) {
+		if ($packages) {
+		    my $p = packageByName($packages, $_) or next;
+		    #		    $p->[$VALUES] = join("\t", $rate, grep { !/^\d$/ } @m);
+		    $p->{values} = \@m; #- LOCALLY MODIFIED FOR OEM
+		} else {
+		    print "$_ = ", join(" && ", @m), "\n";
+		}
+	    }
+	    push @l, @l2;
+	} else {
+	    push @l, [ $l2[0][0], $l2[$#l2][1] ];
+	}
+    }
+}
+
+sub readCompssUsers {
+    my ($packages, $meta_class) = @_;
+    my (%compssUsers, %compssUsersIcons, , %compssUsersDescr, @sorted, $l);
+    my (%compss); 
+
+    my $file = 'Mandrake/base/compssUsers';
+    my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
+    local $_;
+    while (<$f>) {
+	/^\s*$/ || /^#/ and next;
+	s/#.*//;
+
+	if (/^(\S.*)/) {
+	    my ($icon, $descr);
+	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
+	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
+	    $compssUsersIcons{$_} = $icon; 
+	    $compssUsersDescr{$_} = $descr; 
+	    push @sorted, $_;
+	    $compssUsers{$_} = $l = [];
+	} elsif (/^\s+(.*?)\s*$/) {
+	    push @$l, $1;
+	}
+    }
+    \%compssUsers, \@sorted, \%compssUsersIcons, \%compssUsersDescr;
+}
+
+sub setSelectedFromCompssList {
+    my ($packages, $compssUsersChoice, $min_level, $max_size, $install_class) = @_;
+    $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
+    my $nb = selectedSize($packages);
+#    foreach my $p (sort { substr($a,0,1) <=> substr($b,0,1) } values %{$packages->{names}}) {
+    foreach my $p (sort { $a->{values}[0] <=> $b->{values}[0] } @{$packages->{depslist}}) { #- LOCALLY MODIFIED FOR OEM
+#	my ($rate, @flags) = split "\t", $p->[$VALUES];
+	my ($rate, @flags) = @{$p->{values}}; #- LOCALLY MODIFIED FOR OEM
+	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
+
+	#- determine the packages that will be selected when
+	#- selecting $p. the packages are not selected.
+	my %newSelection;
+	selectPackage($packages, $p, 0, \%newSelection);
+
+	#- this enable an incremental total size.
+	my $old_nb = $nb;
+	foreach (grep { $newSelection{$_} } keys %newSelection) {
+	    $nb += packageSize($packages->{names}{$_});
+	}
+	if ($max_size && $nb > $max_size) {
+	    $nb = $old_nb;
+	    $min_level = packageRate($p);
+	    last;
+	}
+
+	#- at this point the package can safely be selected.
+	selectPackage($packages, $p);
+    }
+    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
+    $min_level;
+}
