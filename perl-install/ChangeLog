@@ -2,6 +2,67 @@
 
 	* harddrake/data.pm: do not tag some ata raid controllers as unknown hw
 
+	* share/po/fr.po: fix french translation (upcase label)
+	fix french translation (upcase label)
+
+	* standalone/drakconnect: fix ability to set ip parameters broken by
+	localizing bootproto
+	handle and translate BOOTPROTO
+	read ppp auth method
+	handle new PAP/CHAP method
+	fix untranslated strings
+	do not complain about gateway format when it's not set
+
+	* any.pm (setupBootloader__entries) fix entry editing layout
+
+	* drakxtools.spec: 10-5mdk
+	10-4mdk
+
+	* network/netconnect.pm: handle unknown hardware: enable one to manually
+	load a driver like expert mode
+	in old pre-10.0 wizard
+	enable one to manually choose the serial port to use while configuring
+	modem
+	fix unreachable steps
+	read ppp config earlier and prevent provider choice to overwrite it (but
+	if
+	user select a *new* provider)
+	initialize modem data structure at one point only for serial/PCI modems
+	split kppp config reading into network::modem::ppp_read_conf() in order
+	to be
+	shared with manage interface
+	fix choosing betweeen '' and 'adsl connections when configuring adsl
+	(due to
+	write_cnx_scripts vivificating data structure)
+
+	* modules/interactive.pm (load_category__prompt_for_more) do not list
+	probed category in detected hardware list
+	(load_category__prompt_for_more) show quotes around detected hardware in
+	order
+	to more easily see thems
+
+	* network/modem.pm (ppp_read_conf) really default to dynamic dns, gateway
+	and ip (really fix #7705)
+	misc perl_checker cleanups
+	split kppp config reading into network::modem::ppp_read_conf() in order
+	to be
+	shared with manage interface
+
+	* network/ethernet.pm (conf_network_card_backend) update its doc now that
+	it has been splited in
+	get_eth_cards() and conf_network_card_backend()
+
+	* network/adsl_consts.pm: rollback bogus damien change, here vpi/vci
+	parameters are in hexa, not decimal
+
+	* network/adsl.pm (adsl_conf_backend) speedtouch config need vpi/vci as
+	decimal numbers
+	whereas sagem8xx wants hexa numbers
+
+2004/02/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: do not tag some ata raid controllers as unknown hw
+
 	* standalone/drakconnect: handle and translate BOOTPROTO
 	read ppp auth method
 	handle new PAP/CHAP method
@@ -27135,7 +27196,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.881 2004/02/20 19:03:15 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.882 2004/02/23 09:06:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
