@@ -130,11 +130,19 @@ sub write_initscript {
 
 	case "$1" in
 		start)
-		action "Checking internet connections to start at boot" "} . "$connect_file --boot_time" . q{"
+                if [ -e } . $connect_file . q{ ]; then
+			action "Checking internet connections to start at boot" "} . "$connect_file --boot_time" . q{"
+		else
+			action "No connection to start" "true"
+		fi
 		touch /var/lock/subsys/internet
 		;;
 	stop)
-		action "Stopping internet connection if needed: " "} . "$disconnect_file --boot_time" . q{"
+                if [ -e } . $disconnect_file . q{ ]; then
+			action "Stopping internet connection if needed: " "} . "$disconnect_file --boot_time" . q{"
+		else
+			action "No connection to stop" "true"
+		fi
 		rm -f /var/lock/subsys/internet
 		;;
 	restart)
