@@ -611,8 +611,7 @@ sub main {
     -e "$o->{prefix}/usr/bin/urpmi" or eval { commands::rm("-rf", "$o->{prefix}/var/lib/urpmi") };
 
     #- mainly for auto_install's
-    do { local $ENV{PATH} = $remote_path;
-	 run_program::run("bash", "-c", $o->{postInstallNonRooted}) } if $o->{postInstallNonRooted};
+    run_program::run("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
     run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
 
     #- have the really bleeding edge ddebug.log
