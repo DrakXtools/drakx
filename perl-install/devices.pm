@@ -122,6 +122,7 @@ sub entry {
 		   "nst"         => [ c::S_IFCHR(), 9, 128],
 		   "scd"         => [ c::S_IFBLK(), 11, 0 ],
 		   "ttyS"        => [ c::S_IFCHR(), 4, 64 ],
+		   "ubd/"        => [ c::S_IFBLK(), 98, 0 ],
 	       }}{$1}};
 	    $minor += $2;
     }
