@@ -123,8 +123,7 @@ sub conf_network_card_backend {
 	    }
 	    $a ||= $b;
 	    $a and $saved_driver = $a;
-	    if_($::isInstall || $interface_state =~ /inet addr|Bcast|Mask|Interrupt|Base address/ && $a,
-		[$interface, $saved_driver]);
+ 	    [ $interface, $saved_driver ]
 	} @all_cards;
     }
     $o_interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
