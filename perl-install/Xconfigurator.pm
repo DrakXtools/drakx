@@ -281,7 +281,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     if ($card->{DRI_glx}) {
 	push @l, 'Glide_V5' if $card->{identifier} =~ /Voodoo 5/;
 	push @l, 'Glide_V3-DRI' if $card->{identifier} =~ /Voodoo (3|Banshee)/;
-	push @l, 'Device3Dfx', 'XFree86-glide-module' if $card->{identifier} =~ /Voodoo/;
+	push @l, 'XFree86-glide-module' if $card->{identifier} =~ /Voodoo/;
     }
     if ($card->{Utah_glx}) {
 	push @l, 'Mesa' if !$card->{use_xf4};
