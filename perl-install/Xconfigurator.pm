@@ -616,6 +616,7 @@ sub testFinalConfig {
     my $f_err = "$prefix/tmp/Xoutput";
     my $pid;
     unless ($pid = fork) {
+	system("xauth add :9 . `mcookie`");
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
