@@ -447,7 +447,7 @@ sub err_dialog {
     create_dialog($title, $label, $o_options);
 }
 
-sub create_hbox { gtkset_layout(gtkset_border_width(Gtk2::HButtonBox->new, 3), $_[0] || 'spread') }
+sub create_hbox { gtkset_layout(Gtk2::HButtonBox->new, $_[0] || 'spread') }
 sub create_vbox { gtkset_layout(Gtk2::VButtonBox->new, $_[0] || 'spread') }
 
 sub create_factory_menu_ {
