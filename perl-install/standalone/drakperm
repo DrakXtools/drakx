@@ -48,12 +48,12 @@ my $combo_perm = new Gtk2::Combo;
 $combo_perm->entry->set_editable(0);
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
-sub add_callback {
+sub add_callback() {
     row_setting_dialog();
     $modified++;
 }
 
-sub edit_callback {
+sub edit_callback() {
     my (undef, $iter) = $permList->get_selection->get_selected;
     return unless $iter;
     row_setting_dialog($iter);
@@ -61,7 +61,7 @@ sub edit_callback {
 
 my @buttons;
 
-sub del_callback {
+sub del_callback() {
     my ($tree, $iter) = $permList->get_selection->get_selected();
     $tree->remove($iter);
     $iter->free;
@@ -69,7 +69,7 @@ sub del_callback {
     $modified++;
 }
 
-sub down_callback {
+sub down_callback() {
     my ($model, $iter) = $permList->get_selection->get_selected;
     return unless $iter;
     my $new_iter = $model->iter_next($iter);
@@ -83,7 +83,7 @@ sub down_callback {
   CLEAN1: $iter->free;
 }
 
-sub up_callback {
+sub up_callback() {
     my ($model, $iter) = $permList->get_selection->get_selected;
     return unless $iter;
     my $path = $model->get_path($iter);
@@ -161,7 +161,7 @@ $w->main;
 ugtk2->exit;
 
 
-sub check_save {
+sub check_save() {
     $modified or return 0;
     my $sav_ = $in->ask_okcancel('Warning', 'your changed will be lost do you wish to continue?');
     $sav_ 
@@ -201,7 +201,7 @@ sub display_perm {
     $prec_txt = $perm_level;
 }
 
-sub save_perm {
+sub save_perm() {
     $modified or return 0;
     my $val;
     local *F;

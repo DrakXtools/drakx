@@ -47,9 +47,11 @@ sub confScanner {
 	next if $line =~ /\$VENDOR/;
 	$line =~ s/\$PRODUCT/$product/g if $product;
 	next if $line =~ /\$PRODUCT/;
-	$line =~ /^(\S*)LINE\s+(.*?)$/;
-	my $linetype = $1;
-	$line = $2;
+	my $linetype;
+	if ($line =~ /^(\S*)LINE\s+(.*?)$/) {
+         $linetype = $1;
+         $line = $2;
+     }
 	next if !$line;
 	if (!$linetype ||
 	    ($linetype eq "USB" && ($port =~ /usb/i || $vendor)) ||
@@ -151,8 +153,7 @@ sub detect {
 	# SANE
 	next if $description =~ /Alcatel.*Speed.*Touch|Camera|ISDN|ADSL/i;
 	# Extract port
-        $line =~ /\s+(\S+)\s*$/;
-	$port = $1;
+	$port = $1 if $line =~ /\s+(\S+)\s*$/;
 	# Check for duplicate (scanner.o/libusb)
 	if ($port =~ /^libusb/) {
 	    my $duplicate = 0;
@@ -387,8 +388,7 @@ sub updateScannerDBfromSane {
 			  # this backend and add what is needed for the
 			  # interfaces of this scanner
 			  foreach my $line (@{$configlines{$backend}}) {
-			      $line =~ /^\s*(\S*?)LINE/;
-			      my $i = $1;
+			      my $i = $1 if $line =~ /^\s*(\S*?)LINE/;
 			      if (!$i || $intf =~ /$i/i) {
 				  $to_add .= "$line\n";
 			      }

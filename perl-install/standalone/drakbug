@@ -64,7 +64,7 @@ my $mdk_app = {
 	       N("Configuration Wizards") => 'wizdrake',
 	      };
 
-my @generic_tool = keys %{$mdk_app}; 
+my @generic_tool = keys %$mdk_app; 
 my @all_drakxtools = @{ $mdk_app->{N("Standalone Tools")} };
 push(@generic_tool,@all_drakxtools);
 
@@ -137,10 +137,10 @@ sub update_app {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
     if (member($text,@all_drakxtools) || $text eq N("Standalone Tools")) {
 	$app_choice = chomp_(`rpm -q drakxtools`);
-    } elsif (member($text, keys %{$mdk_app}) && $text ne N("Standalone Tools")) {	
+    } elsif (member($text, keys %$mdk_app) && $text ne N("Standalone Tools")) {	
 	$app_choice = get_package($mdk_app->{$text});
     } else {
-	LOOP: while (my ($key,$value) = each %{$mdk_app}) {
+	LOOP: while (my ($key, $value) = each %$mdk_app) {
 	    next if $key eq N("Standalone Tools");
 	    if ($value eq $text) { 
 		$app_choice = get_package($text);
@@ -168,14 +168,14 @@ sub get_package {
     $rpm_package;
 }
 
-sub parse_release {
+sub parse_release() {
     my ($rel) = mandrake_release() =~ /release\s(\S+\s\(.*\))/;
     $rel;
 }
 
 sub connect_bugzilla {
     my ($url) = @_;
-    my $w = $in->wait_message('', N("connecting to Bugzilla wizard ...")); 
+    my $_w = $in->wait_message('', N("connecting to Bugzilla wizard ...")); 
     sleep(3);
     exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
     my @browser = qw(mozilla konqueror galeon);
@@ -185,6 +185,6 @@ sub connect_bugzilla {
     $in->ask_warn('', N("No browser available! Please install one"));
 }
 
-sub quit_global {
+sub quit_global() {
     ugtk2->exit(0);
 }
