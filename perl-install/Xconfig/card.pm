@@ -225,7 +225,7 @@ sub card_config__not_listed {
 sub multi_head_choose {
     my ($in, @cards) = @_;
 
-    my @choices = multi_head_choices(@cards);
+    my @choices = multi_head_choices('', @cards);
 
     my $tc = $in->ask_from_listf(_("Multi-head configuration"),
 				 _("Your system support multiple head configuration.
@@ -249,7 +249,7 @@ sub configure_auto_install {
     }
 
     my @cards = probe();
-    my ($choice) = multi_head_choices(@cards) or log::l('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{server} or $o->{card}{card_name}'), return;
+    my ($choice) = multi_head_choices($old_X->{Xinerama}, @cards) or log::l('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{server} or $o->{card}{card_name}'), return;
     my $card = $choice->{code}();
 
     my ($glx_choice) = xfree_and_glx_choices($card);
@@ -355,7 +355,7 @@ sub xfree_and_glx_choose {
 }
 
 sub multi_head_choices {
-    my (@cards) = @_;
+    my ($want_Xinerama, @cards) = @_;
     my @choices;
 
     my $has_multi_head = @cards > 1 || $cards[0]{MULTI_HEAD} > 1;
@@ -378,8 +378,9 @@ sub multi_head_choices {
 	    $card->{Xinerama} = $_[0];
 	    $card;
 	};
-	push @choices, { text => _("Configure all heads independently"), code => sub { $configure_multi_head->('') } };
-	push @choices, { text => _("Use Xinerama extension"), code => sub { $configure_multi_head->(1) } };
+	my $independent = { text => _("Configure all heads independently"), code => sub { $configure_multi_head->('') } };
+	my $xinerama    = { text => _("Use Xinerama extension"),            code => sub { $configure_multi_head->(1) } };
+	push @choices, $want_Xinerama ? ($xinerama, $independent) : ($independent, $xinerama);
     }
 
     foreach my $c (@cards) {
