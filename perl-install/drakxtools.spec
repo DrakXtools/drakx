@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 6mdk
+Release: 7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-7mdk
+- drakconnect
+  o add wizard:
+    * always write up/down scripts
+    * only write initscript when starting at boot was choosen
+    * write ethX aliases and ifup/ifdown scripts when configuring a LAN
+    connection
+  o remove wizard:
+    * when no network configuration is configured, just report it
+    * only list configured interfaces when offering to delete them
+    * keep ethX aliases b/c in order to prevent ethX be renumbered on
+      next boot
+    * down the network interface when deleting it
+
 * Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-6mdk
 - drakconnect: fix sagem8xx && speedtouch adsl modem scripts
 
