@@ -572,6 +572,7 @@ sub g_auto_install(;$) {
     }
 
     local $o->{partitioning}{auto_allocate} = 1;
+    local $o->{autoExitInstall} = 1;
 
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
