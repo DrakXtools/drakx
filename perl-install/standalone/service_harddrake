@@ -25,7 +25,7 @@ if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
     if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
         substInFile { s!Driver "nv.*"!Driver "nvidia"!g; s!#*( Load.*glx)!\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     } else {
-        substInFile { s!Driver "nv.*"!Driver "nv"!g;s!([^#]Load.*glx)!#\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+        substInFile { s!Driver "nv.*"!Driver "nv"!g; s!([^#]Load.*glx)!#\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     }
 }
 
