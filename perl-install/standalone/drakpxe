@@ -438,8 +438,8 @@ shared-network "mynetwork" {
 	print F "    pool {
        range $_->{start_ip} $_->{end_ip};
 ";
-	print F "       allow members of \"$_\";\n" foreach keys %{$_->{allow}};
-	print F "       deny members of \"$_\";\n" foreach keys %{$_->{deny}};
+	print F qq(       allow members of "$_";\n) foreach keys %{$_->{allow}};
+	print F qq(       deny members of $_";\n) foreach keys %{$_->{deny}};
 	print F "    }\n";
     }
 print F qq(

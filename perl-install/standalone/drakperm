@@ -194,7 +194,7 @@ sub save_perm() {
     my $val;
     if ($modified) {
         local *F;
-        open F, '>' . $perm_files{editable} or die("Impossible to process \"", $perm_files{editable}, "\"");
+        open F, '>' . $perm_files{editable} or die(qq(Impossible to process "$perm_files{editable}"));
         $model->foreach(sub {
                             my ($model, $_path, $iter) = @_;
                             return 0 if $model->get($iter, 0);
@@ -224,7 +224,7 @@ sub load_perms() {
             } elsif (m/^(\S+)\s+current?\s+(\d+)/) {
                 push @rules, { @editable, path => $1, user => 'current', group => '', perms => $2, index => $index };
             } else {
-                warn "unparsable \"$_\"line";
+                warn qq(unparsable "$_"line);
             }
             $index++;
         }
