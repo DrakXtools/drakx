@@ -10479,7 +10479,15 @@ msgstr "连接超时(秒)"
 msgid "Get DNS servers from DHCP"
 msgstr "DNS 服务器 IP"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -16551,11 +16559,6 @@ msgstr "Mandrakesoft 向导"
 msgid "Wizards to configure server"
 msgstr "服务器配置向导"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "Mandrakesoft 向导"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -17160,7 +17163,7 @@ msgstr ""
 "        - 维护 %s:\n"
 "        \t\t对于那些想要从无盘工作站登录到系统的用户来说, 他们所对应的登录"
 "项\n"
-"        \t\t除了要在 /etc/shadow 中之外, 还应在 %s$\n"
+"        \t\t除了要在 /etc/shadow 中之外, 还应在 %s\n"
 "        \t\t中存有副本。drakTermServ 能够帮助您完成这一过程。"
 
 #: standalone/drakTermServ:570
@@ -19673,11 +19676,6 @@ msgstr "没有安装"
 msgid "Package not installed"
 msgstr "软件包未安装"
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr "没有可用的浏览器！请安装一个"
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -19846,16 +19844,6 @@ msgstr "静态"
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, c-format
@@ -20997,13 +20985,6 @@ msgid ""
 msgstr ""
 "无法显示 %s。\n"
 "此类型没有帮助主题\n"
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr "在您的系统上没有安装浏览器。如果您想要浏览帮助系统的话, 请先安装一个"
 
 #: standalone/drakperm:22
 #, c-format
@@ -24082,7 +24063,6 @@ msgstr "DVD"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
 #, c-format
 msgid "Account:"
@@ -25472,3 +25452,16 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "安装失败"
+
+#, fuzzy
+#~ msgid "MandrakeSoft Wizards"
+#~ msgstr "Mandrakesoft 向导"
+
+#~ msgid "No browser available! Please install one"
+#~ msgstr "没有可用的浏览器！请安装一个"
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "在您的系统上没有安装浏览器。如果您想要浏览帮助系统的话, 请先安装一个"

@@ -1611,7 +1611,7 @@ msgstr ""
 "Nếu mạng vẫn còn chưa chạy, DrakX sẽ cố gia nhập miền sau bước thiết lập "
 "mạng.\n"
 "Thiết lập này có thể không được bởi vài lý do và chứng thực miền không hoạt "
-"động, hãy chạy  'smbpasswd -j DOMAIN -U USER%%sPASSWORD' để dùng Miền Windows"
+"động, hãy chạy  'smbpasswd -j DOMAIN -U USER%%PASSWORD' để dùng Miền Windows"
 "(TM) và Tên Người Dùng/Mật Khẩu của nhà quản trị sau khi khởi động hệ "
 "thống.\n"
 "Lệnh 'wbinfo -t' sẽ kiểm tra việc bảo mật chứng thực đã tốt chưa."
@@ -10694,7 +10694,15 @@ msgstr "Hết thời gian kết nối (theo giây):"
 msgid "Get DNS servers from DHCP"
 msgstr "IP của máy chủ DHCP"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -17055,11 +17063,6 @@ msgstr "Đồ thuật Mandrakesoft"
 msgid "Wizards to configure server"
 msgstr "Đồ thuật cấu hình máy chủ"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "Đồ thuật Mandrakesoft"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -20162,11 +20165,6 @@ msgstr "Không được cài đặt"
 msgid "Package not installed"
 msgstr "Gói tin không được cài đặt"
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr "Hiện không có trình duyệt nào! Hãy cài đặt một trình duyệt."
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -20335,16 +20333,6 @@ msgstr "tĩnh"
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, c-format
@@ -21509,15 +21497,6 @@ msgid ""
 msgstr ""
 "%s không thể hiển thị \n"
 "Không có trợ giúp cho loại này\n"
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"Không có trình duyệt đã cài đặt trên hệ thống. Hãy thực hiện cài đặt trình "
-"duyệt nếu muốn duyệt hệ thống trợ giúp"
 
 #: standalone/drakperm:22
 #, c-format
@@ -24902,19 +24881,18 @@ msgstr "DVD"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
 #, fuzzy, c-format
 msgid "Account:"
 msgstr "Gắn kết"
 
 #: standalone/harddrake2:531
-#, fuzzy, c-format
+#, c-format
 msgid "Password:"
-msgstr "Mật khẩu"
+msgstr "Mật khẩu:"
 
 #: standalone/harddrake2:532
-#, fuzzy, c-format
+#, c-format
 msgid "Hostname:"
 msgstr "Tên máy chủ:"
 
@@ -25279,9 +25257,9 @@ msgid "Watched interface"
 msgstr "giao diện"
 
 #: standalone/net_applet:78
-#, fuzzy, c-format
+#, c-format
 msgid "Profiles"
-msgstr "Proxies"
+msgstr "Hồ sơ"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61 standalone/printerdrake:238
@@ -26324,6 +26302,20 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Không cài đặt được"
+
+#, fuzzy
+#~ msgid "MandrakeSoft Wizards"
+#~ msgstr "Đồ thuật Mandrakesoft"
+
+#~ msgid "No browser available! Please install one"
+#~ msgstr "Hiện không có trình duyệt nào! Hãy cài đặt một trình duyệt."
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "Không có trình duyệt đã cài đặt trên hệ thống. Hãy thực hiện cài đặt "
+#~ "trình duyệt nếu muốn duyệt hệ thống trợ giúp"
 
 #~ msgid ""
 #~ "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIAÂ®, ATIâ¢, "
