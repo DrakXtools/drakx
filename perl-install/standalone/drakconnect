@@ -240,7 +240,7 @@ $window1->{window}->add(
 
 my $button_expert = new Gtk2::Button(N("Expert Mode"));
 $button_expert->signal_connect(clicked => sub {
-				     foreach ($button_internet, $button_lan) { $expert_mode ? $_->hide : $_->show }
+				     foreach ($button_internet, $button_lan) { $expert_mode ? $_->set_sensitive(0) : $_->set_sensitive(1) }
 				     $button_expert->child->set($expert_mode ? N("Expert Mode") : N("Normal Mode"));
 				     $expert_mode = !$expert_mode;
 				 });
@@ -283,7 +283,7 @@ $combo1->signal_connect(realize => sub {
 });
 
 $window1->{rwindow}->show_all;
-$_->hide foreach $button_internet, $button_lan;
+$_->set_sensitive(0) foreach $button_internet, $button_lan;
 gtkflush();
 my $tag = Glib::Timeout->add(4000, \&update2);
 $window1->main;
