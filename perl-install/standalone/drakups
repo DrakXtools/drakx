@@ -47,7 +47,7 @@ sub readDriversList() {
     foreach (cat_(first(glob("/usr/share/doc/nut-*/docs/driver.list")))) {
         /^#/ and next;
         if (my ($vendor, $model, $extra, $driver) = /^"(.*)"\s+"(.*)"\s+"(.*)"\s+"(.*)"/) {
-            $ups{$vendor}{$model} = {
+            $ups{$vendor}{$model.$extra} = {
                                      driver => $driver,
                                      extra => $extra,
                                     };
@@ -64,7 +64,7 @@ sub add_device_wizard {
     my ($ups_models, $model_list) = readDriversList();
 
     use wizards;
-    my ($ups, $vendor, $model, $name, $driver, $port, @new_devices);
+    my ($ups, $vendor, $model, $extra, $name, $driver, $port, @new_devices);
     my $w = wizards->new;
     my $wiz;
     my %methods = (
@@ -129,8 +129,8 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                 data => [ { label => N("Manufacturer / Model:"), val => \$ups, list => $model_list,
                                             type => 'combo', sort => 1, separator => '|' }, ],
                                 post => sub {
-                                    ($vendor, $model) = ($1, $2) if $ups =~ /(.*)\|(.*) \(/;
-                                    ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model}{driver}, "");
+                                    ($vendor, $model, $extra) = ($1, $2, $3) if $ups =~ /(.*)\|(.*) \((.*)\)$/;
+                                    ($name, $driver, $port) = ("myups", $ups_models->{$vendor}{$model.$extra}{driver}, "");
                                     ($driver) = split(/\s+/, $driver);
                                     "driver";
                                 },
