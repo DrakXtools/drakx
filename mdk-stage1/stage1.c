@@ -403,7 +403,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		update_modules();
 
 #ifdef ENABLE_PCMCIA
-	handle_pcmcia(&pcmcia_adapter);
+	if (!IS_NOAUTO)
+		handle_pcmcia(&pcmcia_adapter);
 #endif
 
 	if (IS_CHANGEDISK)
