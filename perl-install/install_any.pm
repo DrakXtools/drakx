@@ -1023,16 +1023,21 @@ sub check_prog {
     chmod 0755, $f_;
 }
 
-sub remove_bigseldom_used {
-    log::l("remove_bigseldom_used");
+sub remove_unused {
     $::testing and return;
-    unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(DarkMarble marble3d);
     if ($::o->isa('interactive_gtk')) {
 	unlink glob_("/lib/lib$_*") foreach qw(slang newt);
 	unlink "/usr/bin/perl-install/auto/Newt/Newt.so";
     } else {
 	unlink glob_("/usr/X11R6/bin/XF*");
     }
+}
+
+sub remove_bigseldom_used {
+    log::l("remove_bigseldom_used");
+    $::testing and return;
+    remove_unused();
+    unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(DarkMarble marble3d);
     unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
       ((map { @$_ } @bigseldom_used_groups),
        qw(mkreiserfs resize_reiserfs),

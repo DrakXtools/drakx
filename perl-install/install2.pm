@@ -537,6 +537,7 @@ sub main {
 	    add2hash($o->{netc}, network::read_resolv_conf($file));
 	}
     }
+    install_any::remove_unused();
 
     #-the main cycle
     my $clicked = 0;
