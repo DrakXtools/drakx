@@ -179,7 +179,9 @@ my @menu_items =
      [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
        sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ $menus{help}, undef, undef, undef, '<Branch>' ],
-     [ $menus{help} . N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp --id harddrake") } }, undef, '<Item>' ],
+     if_(-x "/usr/sbin/drakhelp_inst",
+	 [ $menus{help} . N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp --id harddrake") } }, undef, '<Item>' ],
+	),
      [ $menus{help} . N("/_Fields description"), undef, sub {
            if ($current_device) {
                create_dialog(N("Harddrake help"), 
@@ -196,7 +198,9 @@ my @menu_items =
        },
        undef, '<Item>'
      ],
-     [ $menus{help} . N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<Item>' ],
+     if_(!-e "/etc/sysconfig/oem",
+	 [ $menus{help} . N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<Item>' ],
+	),
      [ $menus{help} . N("/_About..."), undef, sub {
            create_dialog(N("About Harddrake"), 
 #-PO: Do not alter the <span ..> and </span> tags
