@@ -8,6 +8,10 @@ use strict;
 #-######################################################################################
 use common qw(:common :system :functional :file);
 use modules;
+use pci_probing::main;
+use detect_devices;
+use run_program;
+use commands;
 use log;
 
 my @mouses_fields = qw(nbuttons device MOUSETYPE XMOUSETYPE FULLNAME);
@@ -80,8 +84,16 @@ sub write($;$) {
 }
 
 sub detect() {
+    detect_devices::hasMousePS2 and return name2mouse("Generic Mouse (PS/2)");
+
     my %l;
-    eval { modules::load("serial") };
-    @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
-    \%l;
+    eval { commands::modprobe("serial") };
+    @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
+    eval { run_program::run("rmmod", "serial") };
+
+    if (my ($c) = pci_probing::main::probe("SERIAL_USB")) {
+	eval { modules::load($c->[1]) };
+	return name2mouse("Generic Mouse (PS/2)") if !$@ && detect_devices::tryOpen("usbmouse");
+    }
+    die "mouseconfig failed";
 }

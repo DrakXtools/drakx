@@ -1,4 +1,4 @@
-BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img gi_pcmcia.img
+BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img gi_pcmcia.img gi_pcmcia_ks.img
 BINS = install/install install/local-install install/installinit/init
 DIRS = install install/installinit mouseconfig perl-install ddcprobe
 
