@@ -65,9 +65,7 @@ sub new($$) {
 		sleep 1;
 		log::l("Server died"), return 0 if !$ok;
 		if (c::Xtest($wanted_DISPLAY)) {
-		    if (-x '/usr/bin/aewm-drakx') {
-			fork() || exec("aewm-drakx") || c::_exit(0);
-		    }
+		    $ugtk2::force_focus = 1;
 		    return 1;
 		}
 	    }

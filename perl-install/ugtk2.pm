@@ -806,15 +806,18 @@ sub new {
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
-    push @interactive::objects, $o if !$opts{no_interactive_objects};
-    $o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
-    $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
 
     $o->{pop_it} ||= $pop_it || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
 	pop @l if !$::isInstall && $::isWizard; #- don't take into account the DrawingArea
 	any { $_->visible } @l;
     };
+
+    if ($o->{pop_it}) {
+	push @interactive::objects, $o if !$opts{no_interactive_objects};
+	$o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
+	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
+    }
 
     if ($::isWizard && !$o->{pop_it}) {
 	$o->{isWizard} = 1;
@@ -824,6 +827,8 @@ sub new {
 	if (!defined($::WizardWindow)) {
 	    $::WizardWindow = Gtk2::Window->new('toplevel');
 	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
+	    $::WizardWindow->signal_connect(expose_event => \&_XSetInputFocus) if $force_focus || $o->{force_focus};
+
 	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
 	    $::WizardWindow->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
 
@@ -916,6 +921,7 @@ sub show($) {
 sub destroy($) {
     my ($o) = @_;
     $o->{rwindow}->destroy if !$o->{destroyed};
+    @interactive::objects = grep { $o != $_ } @interactive::objects;
     gtkset_mousecursor_wait();
     flush();
 }
@@ -945,7 +951,7 @@ sub _create_window($$) {
     $w->set_name("Title");
     $w->set_title($title);
 
-    $w->signal_connect(expose_event => sub { eval { $interactive::objects[-1]{rwindow} == $w and $w->window->XSetInputFocus } }) if $force_focus || $o->{force_focus};
+    $w->signal_connect(expose_event => \&_XSetInputFocus) if $force_focus || $o->{force_focus};
     $w->signal_connect(delete_event => sub { if ($::isWizard) { $w->destroy; die 'wizcancel' } else { Gtk2->main_quit } });
     $w->set_uposition(@{$force_position || $o->{force_position}}) if $force_position || $o->{force_position};
 
@@ -973,6 +979,17 @@ sub _create_window($$) {
 
     $o->{window} = $::noBorder ? $w : $f;
     $o->{rwindow} = $w;
+}
+
+sub _XSetInputFocus {
+    my ($w) = @_;
+    log::l("_XSetInputFocus");
+    if (!@interactive::objects || $interactive::objects[-1]{rwindow} == $w) {
+	$w->window->XSetInputFocus;
+    } else {
+	log::l("not XSetInputFocus since already done and not on top");
+    }
+    0;
 }
 
 
