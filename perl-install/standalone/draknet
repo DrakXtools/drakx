@@ -19,6 +19,9 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #use Data::Dumper;
+
+use Gtk;
+init Gtk;
 use lib qw(/usr/lib/libDrakX);
 
 use interactive;
@@ -61,7 +64,7 @@ my $in = vnew interactive('su');
 
 $::isEmbedded or goto dd;
 netconnect::read_net_conf('', $netcnx, $netc);
-any::setup_thiskind($in, 'net', !$::expert, 1);
+any::setup_thiskind_backend('net', undef);
 my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
 netconnect::load_conf('', $netcnx, $netc, $intf);
 
@@ -70,12 +73,13 @@ $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
 $window1->set_title(_("Network configuration (%d adapters)", @all_cards));
 $window1->border_width(10);
-$window1->set_usize(500, 400);
+$::isEmbedded or $window1->set_usize(500, 400);
 my $vbox1 = new Gtk::VBox(0,0);
 $window1->add($vbox1);
 my $hbox1 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox1,1,1,0);
 $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
+
 my $combo1 = new Gtk::Combo;
 $combo1->set_popdown_strings (netconnect::get_profiles() );
 my $old_profile=$netcnx->{PROFILE};
