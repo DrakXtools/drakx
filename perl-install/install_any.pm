@@ -648,10 +648,14 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
-    my ($dmi) = grep { $_->{name} eq 'System' } detect_devices::dmidecode();
-    if ($dmi->{Manufacturer} eq "Dell Computer" && member($dmi->{'Product Name'}, qw(Inspiron Latitude))) {
+    my %dmi = map { $_->{name} => $_ } detect_devices::dmidecode();
+    if ($dmi{System}{Manufacturer} eq "Dell Computer" && member($dmi{System}{'Product Name'}, qw(Inspiron Latitude))) {
         modules::append_to_modules_loaded_at_startup($_, 'i8k') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
         push @{$o->{default_packages}}, "i8kutils"
+    }
+    if ($dmi{System}{Manufacturer} eq 'TOSHIBA' && $dmi{BIOS}{Vendor} eq 'TOSHIBA') {
+        modules::append_to_modules_loaded_at_startup($_, 'toshiba') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+        push @{$o->{default_packages}}, "toshutils";
     }
     push @{$o->{default_packages}}, "grub" if isLoopback(fs::get::root($o->{fstab}));
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
