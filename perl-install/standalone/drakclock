@@ -357,7 +357,7 @@ sub DrawPointAt {
     my ($pixmap, $black_gc, $nHour, $cx, $cy) = @_;
     my $dRadians = $nHour * $PI / 30;
 
-    Gtk2::Gdk::Drawable::draw_points($pixmap, $black_gc,
+    $pixmap->draw_points($black_gc,
 			$cx + 95/100 * $radius * sin($dRadians),
 			$cy - 95/100 * $radius * cos($dRadians))
 }
