@@ -930,7 +930,7 @@ Do you want to install the updates ?"))) || return;
 	} else {
 	    #- make sure to not try to install the packages (which are automatically selected by getPackage above).
 	    #- this is possible by deselecting the medium (which can be re-selected above).
-	    delete $update_medium->{select};
+	    delete $update_medium->{selected};
 	}
     }
  
