@@ -254,7 +254,7 @@ $bbox0->set_layout(-end);
 
 
 $bbox0->add(new Gtk::Label(_("Click here to launch the wizard ->")));
-my $button_wizard = new Gtk::Button _("Configure");
+my $button_wizard = new Gtk::Button _("Wizard...");
 $button_wizard->signal_connect( clicked => sub {
 				     $::isWizard = 1;
 				     system("draknet --wizard");
