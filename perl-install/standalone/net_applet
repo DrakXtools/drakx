@@ -17,7 +17,7 @@ my ($menu, $timeout);
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
-is_running('net_applet') > 1 and die "net_applet already running\n";
+is_running('net_applet') and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
 my $current_md5 = md5file($prog_name);
 
@@ -53,7 +53,7 @@ gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
       );
 $eventbox->signal_connect(button_press_event => sub {
 			      if ($_[1]->button == 1) {
-				  is_running('net_monitor') > 1 or netMonitor()
+				  is_running('net_monitor') or netMonitor()
 			      }
                               $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
                           });
