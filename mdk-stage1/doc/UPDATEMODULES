@@ -20,9 +20,9 @@ else using file within standard module repository ("marfile" on the boot
 floppy). It can contain comments, these are strictly defined by the
 presence of a hash (#) character on column 0 of any line.
 
-This disk may also contain some update modules for installed kernels. 
-Those modules must be placed in directory <kernel-version>. They can be
-gzipped or bzipped.
+This disk may also contain some update or new modules for installed kernels. 
+Those modules must be placed in directory <kernel-version>. They must be
+gzipped if the installed kernel modules are gzipped.
 
 
 
@@ -87,4 +87,4 @@ before "msdos" from the update floppy.
 
 
 4. When system is installed, update floppy is asked again so that update
-modules for the installed kernels can be copied.
+modules for the installed kernels can be copied. Then depmod is called.
