@@ -22,7 +22,9 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 use strict; 	 
+use warnings;
 use diagnostics;
+use Data::Dumper;
 
 use lib qw(/usr/lib/libDrakX);
 
@@ -65,7 +67,7 @@ MDK::Common::Globals::init(
 	     );
 
 local $_ = join '', @ARGV;
-/--skip-wizard/ and goto manage;
+/--skip-wizard/ and manage($netc, $netcnx, $intf);
 /--add/ and add_intf();
 /--del/ and del_intf();
 if (/--install/) {
@@ -79,7 +81,6 @@ add_intf();
 
 my @all_cards;
 
-manage:
 my $window1 = ugtk2->new('drakconnect');
 $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
 unless ($::isEmbedded) {
@@ -194,6 +195,170 @@ $window1->main;
 ugtk2->exit(0);
 
 
+
+sub manage {
+    my ($netc, $netcnx, $intf) = @_;
+
+    my $gui = {};
+    my ($interface_menu, $selected);
+    my $window = ugtk2->new('Manage Connection');
+    my $notebook = Gtk2::Notebook->new;
+    $notebook->set_property('show-tabs', 0);
+    $notebook->set_property('show-border', 0);
+    
+    each_index {
+	my $interface = $_;
+	$gui->{$interface}{index} = $::i;
+	build_notebook($window, $netc, $intf->{$interface}, $gui->{$interface}, $interface);
+	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
+    } (sort keys %$intf);
+    
+    $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
+				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
+									    changed => sub {
+										$selected = $interface_menu->get_text;
+										$notebook->set_current_page($gui->{$selected}{index});
+									    },
+									   ),
+				     1, $notebook,
+				     0, gtkpack(Gtk2::HButtonBox->new,
+						gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $window->destroy; Gtk2->main_quit }),
+						gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {}),
+						gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub { save($netc, $netcnx, $intf, $gui) }),
+						gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {}),
+					       ),
+				    ));
+    $interface_menu->set_popdown_strings(sort keys %$intf);
+    
+    $window->{rwindow}->show_all;
+    $window->main;
+    ugtk2->exit(0);
+}
+
+sub build_notebook {
+    my ($window, $netc, $intf, $gui, $interface) = @_;
+ 
+    #- tcp/ip box
+    gtkpack_($gui->{sheet}{'Tcp/ip'} = Gtk2::VBox->new(0,0),
+	     if_($interface =~ /eth/, 
+		 0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
+								changed => sub { $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK} },
+							       ),
+		),
+	     1, gtkpack(Gtk2::HBox->new(0,0),
+			gtkpack_(Gtk2::VBox->new(0,0),
+				 0, gtkpack_(Gtk2::VBox->new(0,0),
+					     1, Gtk2::Label->new(N("IP address")),
+					     0, $gui->{intf}{IPADDR} = Gtk2::Entry->new,
+					    ),
+				 0, gtkpack_(Gtk2::VBox->new(0,0),
+					     1, Gtk2::Label->new(N("Netmask")),
+					     0, $gui->{intf}{NETMASK} = Gtk2::Entry->new,
+					    ),
+				 0, gtkpack_(Gtk2::VBox->new(0,0),
+					     1, Gtk2::Label->new(N("Gateway")),
+					     0, $gui->{netc}{GATEWAY} = Gtk2::Entry->new,
+					    ),
+				),
+			Gtk2::VSeparator->new,
+			gtkpack_(Gtk2::VBox->new(0,0),
+				 1, gtkadd(Gtk2::Frame->new(N("DNS servers")), 
+					   gtkpack(Gtk2::VBox->new(0,0),
+						   Gtk2::Label->new($netc->{dnsServer}),
+						   Gtk2::Label->new($netc->{dnsServer2}),
+						  ),
+					  ),
+				 1, gtkadd(Gtk2::Frame->new(N("Search Domain")),
+					   Gtk2::Label->new($netc->{DOMAINNAME} || 'none'),
+					  ),
+				),
+		       ),
+	    );
+    $gui->{intf}{BOOTPROTO} and $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp"));
+    $interface !~ /eth/ and $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
+    $gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
+    $gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
+
+    if ($intf->{WIRELESS_MODE}) {
+	my @wireless_left = ([ N("Operating Mode"), "WIRELESS_MODE" ],
+			     [ N("Netwok name (ESSID)"), "WIRELESS_ESSID" ],
+			     [ N("Network ID"), "WIRELESS_NWID" ],
+			     [ N("Operating frequency"), "WIRELESS_FREQ" ],
+			     [ N("Sensitivity threshold"), "WIRELESS_SENS" ],
+			     [ N("Bitrate (in b/s)"), "WIRELESS_RATE" ]
+			    );
+	
+	my @wireless_right = ([ N("Encryption key"), 'WIRELESS_ENC_KEY' ],
+			      [ N("RTS/CTS"), 'WIRELESS_RTS' ],
+			      [ N("Fragmentation"), 'WIRELESS_FRAG' ],
+			      [ N("Iwconfig command extra arguments"),  'WIRELESS_IWCONFIG' ],
+			      [ N("Iwspy command extra arguments"), 'WIRELESS_IWSPY' ],
+			      [ N("Iwpriv command extra arguments"), 'WIRELESS_IWPRIV' ]
+			     );
+
+	gtkpack($gui->{sheet}{Wireless} = Gtk2::HBox->new(0,0),
+		gtkpack_(Gtk2::VBox->new(0,0),
+			 map {
+			     (0, gtkpack_(Gtk2::VBox->new(0,0),
+					  1, Gtk2::Label->new($_->[0]),
+					  0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+					 ));
+			 } @wireless_left,
+			),
+		Gtk2::VSeparator->new,
+		gtkpack_(Gtk2::VBox->new(0,0),
+			 map {
+			     (0, gtkpack_(Gtk2::VBox->new(0,0),
+					  1, Gtk2::Label->new($_->[0]),
+					  0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+					 ));
+			 } @wireless_right,
+			),
+	       );
+	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
+    }
+    
+    #- options box
+    gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),
+	    gtkpack__(Gtk2::VBox->new(0,0),
+                   $gui->{intf_bool}{ONBOOT} = Gtk2::CheckButton->new(N("Start at boot")),
+                   $gui->{intf_bool}{HWADDR} = Gtk2::CheckButton->new(N("Track network card id (useful for laptops)")),
+                   $gui->{intf_bool}{MII_NOT_SUPPORTED} = Gtk2::CheckButton->new(N("Network Hotplugging")),	    
+                  ));
+    $gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
+    
+    #- informations box
+    gtkpack($gui->{sheet}{Informations} = Gtk2::VBox->new(0,0),
+	    Gtk2::Label->new(N("Mac Address : %s", $intf->{HWADDR})),
+	   );
+    
+    $gui->{notebook} = Gtk2::Notebook->new;
+    populate_notebook($gui->{notebook}, $gui);
+}
+
+sub populate_notebook {
+    my ($notebook, $gui) = @_;
+    foreach ('Tcp/ip', 'Wireless', 'Options', 'Informations') {
+	!$gui->{sheet}{$_} and next;
+	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new($_));
+    }
+}
+
+sub save {
+    my ($netc, $netcnx, $intf, $gui) = @_;
+
+    save_notebook($netc, $intf->{$_}, $gui->{$_}) foreach keys %$intf;
+    apply($netc, $netcnx, $intf);
+}
+
+sub save_notebook {
+    my ($netc, $intf, $gui) = @_;
+    
+    $intf->{$_} = $gui->{intf}{$_}->get_text foreach keys %{$gui->{intf}};
+    $intf->{$_} = bool2yesno($gui->{intf_bool}{$_}->get_active) foreach keys %{$gui->{intf_bool}};
+    $netc->{$_} = $gui->{netc}{$_}->get_text foreach keys %{$gui->{netc}};
+}
+
 sub add_intf() {
     $::isWizard = 1;
     network::netconnect::load_conf($netcnx, $netc, $intf);
@@ -278,9 +443,13 @@ sub update_list() {
     }
 }
 
-sub apply() {
+sub apply {
+    my ($netc, $netcnx, $intf) = @_;
+    
+    print Dumper $intf;
+    
     network::network::sethostname($netc) if is_dynamic_ip($intf);
-
+    
     $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
     $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, $netc, $netcnx); #$light
     $netcnx->{type} eq 'isdn_external' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
@@ -293,8 +462,8 @@ sub apply() {
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     $netcnx->{type} !~ /adsl_p/ and system("$prefix/etc/rc.d/init.d/network restart");
 
-    network::netconnect::save_profile($netcnx);
-    $button_apply->set_sensitive(0);
+    #network::netconnect::save_profile($netcnx); #- profile use has been moved out of drakconnect
+    #$button_apply->set_sensitive(0);
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
