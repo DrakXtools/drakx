@@ -503,10 +503,7 @@ sub fs_options {
     my $l = $languages{$lang}  or return;
     my $c = $charsets{$l->[1]} or return;
     my ($iocharset, $codepage) = @$c[3..4];
-    +{
-      if_($iocharset, iocharset => $iocharset),
-      if_($codepage, codepage => $codepage),
-    };
+    $iocharset, $codepage;
 }
 
 sub charset {

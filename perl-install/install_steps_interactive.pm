@@ -393,12 +393,6 @@ sub choosePartitionsToFormat {
 
     return if @l == 0 || !$::expert && 0 == grep { ! $_->{toFormat} } @l;
 
-    my $name2label = sub { 
-        sprintf("%s   %s", 
-		isSwap($_) ? type2name($_->{type}) : $_->{mntpoint},
-		partition_table::description($_));
-    };
-
     #- keep it temporary until the guy has accepted
     $_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
 
@@ -409,10 +403,10 @@ sub choosePartitionsToFormat {
         [ map { 
 	    my $e = $_;
 	    ({
-	      text => $name2label->($e), type => 'bool',
+	      text => partition_table::description($e), type => 'bool',
 	      val => \$e->{toFormatTmp}
 	     }, if_(!isLoopback($_) && !isThisFs("reiserfs", $_), {
-	      text => $name2label->($e), type => 'bool', advanced => 1, 
+	      text => partition_table::description($e), type => 'bool', advanced => 1, 
 	      disabled => sub { !$e->{toFormatTmp} },
 	      val => \$e->{toFormatCheck}
         })) } @l ]
