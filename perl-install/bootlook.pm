@@ -109,33 +109,33 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				     
 			 ),
 		  # aurora
-		  gtkadd (new Gtk::Frame (_("Boot mode")),
-			  gtkpack__ (new Gtk::HBox(0,0),
-				     gtkpack__ (new Gtk::VBox(0, 5),
-						gtksignal_connect ($a_button, clicked => sub {
-								       if ($inmain) {
-									   $a_box->set_sensitive(!$a_mode);
-									   $a_mode = !$a_mode;
-									   if ($a_mode) {
-									       $pixmap->set($c_pixmap, $c_mask) if $a_c_button->get_active();
-									       $pixmap->set($h_pixmap, $h_mask) if $a_h_button->get_active();
-									       $pixmap->set($v_pixmap, $v_mask) if $a_v_button->get_active();
-									       $pixmap->set($g_pixmap, $g_mask) if $a_g_button->get_active();
-									   } else {
-									       $pixmap->set($t_pixmap, $t_mask);
-									   }
-										   }
-								   }),
-						gtkpack__ ( gtkset_sensitive ($a_box, $a_mode),
-							    gtksignal_connect ($a_c_button,clicked => sub{$pixmap->set($c_pixmap, $c_mask)}),
-							    gtksignal_connect ($a_h_button,clicked => sub{$pixmap->set($h_pixmap, $h_mask)}),
-							    gtksignal_connect ($a_v_button,clicked => sub{$pixmap->set($v_pixmap, $v_mask)}),
-							    gtksignal_connect ($a_g_button,clicked => sub{$pixmap->set($g_pixmap, $g_mask)})
-							  )
-					      ),
-				     gtkpack__ (new Gtk::HBox(0,0), $pixmap)
-				    )
-			 ),
+# 		  gtkadd (new Gtk::Frame (_("Boot mode")),
+# 			  gtkpack__ (new Gtk::HBox(0,0),
+# 				     gtkpack__ (new Gtk::VBox(0, 5),
+# 						gtksignal_connect ($a_button, clicked => sub {
+# 								       if ($inmain) {
+# 									   $a_box->set_sensitive(!$a_mode);
+# 									   $a_mode = !$a_mode;
+# 									   if ($a_mode) {
+# 									       $pixmap->set($c_pixmap, $c_mask) if $a_c_button->get_active();
+# 									       $pixmap->set($h_pixmap, $h_mask) if $a_h_button->get_active();
+# 									       $pixmap->set($v_pixmap, $v_mask) if $a_v_button->get_active();
+# 									       $pixmap->set($g_pixmap, $g_mask) if $a_g_button->get_active();
+# 									   } else {
+# 									       $pixmap->set($t_pixmap, $t_mask);
+# 									   }
+# 										   }
+# 								   }),
+# 						gtkpack__ ( gtkset_sensitive ($a_box, $a_mode),
+# 							    gtksignal_connect ($a_c_button,clicked => sub{$pixmap->set($c_pixmap, $c_mask)}),
+# 							    gtksignal_connect ($a_h_button,clicked => sub{$pixmap->set($h_pixmap, $h_mask)}),
+# 							    gtksignal_connect ($a_v_button,clicked => sub{$pixmap->set($v_pixmap, $v_mask)}),
+# 							    gtksignal_connect ($a_g_button,clicked => sub{$pixmap->set($g_pixmap, $g_mask)})
+# 							  )
+# 					      ),
+# 				     gtkpack__ (new Gtk::HBox(0,0), $pixmap)
+# 				    )
+# 			 ),
 		  # X
 		  gtkadd (new Gtk::Frame (_("System mode")),
 			  gtkpack__ (new Gtk::VBox(0, 5),
