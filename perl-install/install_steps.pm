@@ -922,10 +922,9 @@ sub miscellaneous {
     if ($o->{miscellaneous}{HDPARM}) {
 	$_ .= join('', map { " $_=autotune" } grep { /ide.*/ } all("/proc/ide")) if !/ide.=autotune/;
     }
-    #- Pixel don't want such things :-( kernel guys have to fix the kernel.
-    #- if (grep { /Athlon|Duron/ } cat_("/proc/cpuinfo")) {
-    #-     $_ .= " mem=nopentium";
-    #- }
+    if (grep { /Athlon|Duron/ } cat_("/proc/cpuinfo")) {
+        $_ .= " mem=nopentium";
+    }
     #- keep some given parameters
     #-TODO
 
