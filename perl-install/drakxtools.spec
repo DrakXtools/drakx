@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.29mdk
+Release: 0.30mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -358,6 +358,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.30mdk
+- drakconnect :allow to select "unlisted" provider in adsl provider
+  list (blino)
+- drakfont: fix uninstalling fonts (#9324)
+- drakproxy: do not update kde config file if kde isn't installed (blino)
+
 * Thu Feb 24 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.29mdk
 - drakconnect:
   o add norwegian ADSL providers (Eskild Hustvedt)
