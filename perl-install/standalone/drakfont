@@ -653,7 +653,7 @@ sub advanced_install() {
            [
             gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => \&font_choice),
             gtksignal_connect(Gtk2::Button->new(N("Remove Selected")), clicked => \&list_remove),
-            gtksignal_connect(Gtk2::Button->new(N("Install List")), 
+            gtksignal_connect(Gtk2::Button->new(N("Install fonts")), 
                               clicked => sub {
                                   $dialog->destroy;
                                   undef $dialog;
