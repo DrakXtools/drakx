@@ -44,7 +44,7 @@ sub enteringStep {
 
 sub exitInstall { 
     &install_steps_interactive::exitInstall;
-    interactive::newt::end;
+    interactive::newt::end();
 }
 
 #-######################################################################################
