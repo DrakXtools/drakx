@@ -163,8 +163,6 @@ int nfsmount_prepare(const char *spec, int *flags, char **mount_opts)
 
 
 	/* Set default options.
-	 * rsize/wsize (and bsize, for ver >= 3) are left 0 in order to
-	 * let the kernel decide.
 	 * timeo is filled in after we know whether it'll be TCP or UDP. */
 	memset(&data, 0, sizeof(data));
 	data.retrans	= 3;
@@ -172,6 +170,9 @@ int nfsmount_prepare(const char *spec, int *flags, char **mount_opts)
 	data.acregmax	= 60;
 	data.acdirmin	= 30;
 	data.acdirmax	= 60;
+	data.rsize = 8192;
+	data.wsize = 8192;
+	data.bsize = 8192;
 #if NFS_MOUNT_VERSION >= 2
 	data.namlen	= NAME_MAX;
 #endif
