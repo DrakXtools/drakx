@@ -1559,7 +1559,7 @@ sub poll_ppd_base() {
     #- If cups continue to modify it (because it reads the ppd files 
     #- available), the poll_ppd_base program simply cores :-)
     # else cups will not be happy! and ifup lo don't run ?
-    run_program::rooted($::prefix, "ifconfig lo 127.0.0.1");
+    run_program::rooted($::prefix, 'ifconfig', 'lo', '127.0.0.1');
     printer::services::start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
