@@ -115,8 +115,8 @@ sub selectInstallClass($@) {
 	$::expert   = $c{$_[0]} eq "expert" &&
 	  $o->ask_from_list_('',
 _("Are you sure you are an expert? 
-Hey no kidding, you will be allowed to make powerfull but dangerous things here."), 
-			 [ _("Expert"), _("Normal") ]) ne "Normal";
+You will be allowed to make powerfull but dangerous things here."), 
+			 [ _("Expert"), _("Customized") ]) ne "Customized";
     };      
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
