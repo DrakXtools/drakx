@@ -193,8 +193,7 @@ sub manage {
     $notebook->set_property('show-border', 0);
     my $apply_button;
   
-    my $config = { 'ethernet0' => { kind => 'eth0' },
-		 }; # testing
+    my $config = -f '/etc/sysconfig/drakconnect' ? Storable::retrieve('/etc/sysconfig/drakconnect') : {};
 
     #- duplicated from network::ethernet, to be factorized
     @all_cards = network::ethernet::get_eth_cards();
@@ -254,7 +253,7 @@ sub build_tree {
     if ($interface eq 'adsl') {
 	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1, N("Informations") => 1 };
 	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_kind);
-	$intf->{save} = sub { network::adsl::adsl_conf_backend($intf, $netc, $interface_kind, $protocol) };
+	$intf->{save} = sub { network::adsl::adsl_conf_backend($in, $intf, $netc, $interface_kind, $protocol) };
     }
     elsif ($interface eq 'modem') {
 	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1 };

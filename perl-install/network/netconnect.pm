@@ -11,6 +11,7 @@ use mouse;
 use network::network;
 use network::tools;
 use MDK::Common::Globals "network", qw($in);
+use Storable qw(store retrieve);
 
 sub detect {
     my ($auto_detect, $o_class) = @_;
@@ -89,7 +90,7 @@ sub get_subwizard {
       my $ethntf = {};
       my $db_path = "/usr/share/apps/kppp/Provider";
       my (%countries, @isp, $country, $provider, $old_provider);
-
+      my $config = -f '/etc/sysconfig/drakconnect' ? Storable::retrieve('/etc/sysconfig/drakconnect') : {};
 
       my %wireless_mode = (N("Ad-hoc") => "Ad-hoc", 
                            N("Managed") => "Managed", 
@@ -711,6 +712,7 @@ If you don't know, choose 'use pppoe'"),
                     },
                     post => sub {
                         network::adsl::adsl_conf_backend($in, $netcnx, $netc, $ntf_name, $adsl_type); #FIXME
+			$config->{adsl} = { kind => "$ntf_name", protocol => "$adsl_type" };
                         $handle_multiple_cnx->();
                     },
                    },
@@ -1007,7 +1009,7 @@ You may also enter the IP address of the gateway if you have one."),
                    {
                     name => N("Configuration is complete, do you want to apply settings ?"),
                     type => "yesorno",
-                    next => "network_on_boot",
+                    post => sub { Storable::store($config, '/etc/sysconfig/drakconnect'); "network_on_boot" },
                    },
                    
                    network_on_boot => 
