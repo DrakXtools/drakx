@@ -292,23 +292,32 @@ sub updateInit
 # aurora functions
 #-------------------------------------------------------------
 
+
+
 sub updateAurora
 {
     if ($a_mode) {
-	if ($a_h_button->get_active()) {
-	    symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");	    
-	    $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
+	mapn { if (_$_[0]->get_active()) {
+	    symlinkf("/lib/aurora/Monitors/$_[1]", "/etc/aurora/Monitor");
+	    $in->standalone::pkgs_install($_[2]) if !(-e "/lib/aurora/Monitors/$_[1]");
 	}
+	   },
+	  (["$a_h_button","NewStyle-WsLib",qw(Aurora-Monitor-NewStyle-WsLib)],
+	   ["$a_v_button","Traditional-WsLib", qw(Aurora-Monitor-Traditional-WsLib)],
+	   ["$a_g_button","Traditional-Gtk+", qw(Aurora-Monitor-Traditional-Gtk+)]);
 	
-	if ($a_v_button->get_active()) {
-	    symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
-	    $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
-	}    
-	
-	if ($a_g_button->get_active()) {
-	    symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
-	    $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
-	}
+# 	if ($a_h_button->get_active()) {
+# 	    symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");	    
+# 	    $in->standalone::pkgs_install(qw(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
+# 	}
+# 	if ($a_v_button->get_active()) {
+# 	    symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
+# 	    $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
+# 	}    
+# 	if ($a_g_button->get_active()) {
+# 	    symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
+# 	    $in->standalone::pkgs_install(qw(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
+# 	}
     } else {
 	unlink "/etc/aurora/Monitor";
     }
