@@ -173,7 +173,7 @@ $list->signal_connect(button_press_event => sub {
 
 update_list();
 
-my ($bbox0, $label_host, $int_state, $button_expert);
+my ($label_host, $int_state, $button_expert);
 
 my ($lan_button, $wiz_button, $int_button, $host_button, $button_apply);
 
@@ -247,28 +247,28 @@ $window1->{window}->add(
                                                                            }),
                                           ),
                                  0, Gtk2::HSeparator->new,
-                                 0, $bbox0 = gtkpack(Gtk2::HButtonBox->new,
-                                                     gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
-                                                                           exec("drakhelp Drakxtools-Guide.html/internet-connection.html") unless fork() }),
-                                                     $button_apply = gtksignal_connect(gtkset_sensitive(Gtk2::Button->new(N("Apply")), 0),
-                                                                                          clicked => \&apply),
-                                                     gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&quit_global),
-                                                     gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
-                                                                           if ($button_apply->get('sensitive')) {
-                                                                               my $dialog = _create_dialog(N("Please wait"));
-                                                                               gtkpack($dialog->vbox,
-                                                                                       Gtk2::Label->new(N("Please Wait... Applying the configuration")));
-                                                                               $dialog->show_all;
-                                                                               gtkflush();
-                                                                               apply();
-                                                                               $dialog->destroy;
-                                                                           }
-                                                                           update();
-                                                                           quit_global();
-                                                                       }),
-                                                    ),
-                                 ),
-                        );
+                                 0, gtkpack(Gtk2::HButtonBox->new,
+                                            gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
+                                                                  exec("drakhelp Drakxtools-Guide.html/internet-connection.html") unless fork() }),
+                                            $button_apply = gtksignal_connect(gtkset_sensitive(Gtk2::Button->new(N("Apply")), 0),
+                                                                              clicked => \&apply),
+                                            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => \&quit_global),
+                                            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+                                                                  if ($button_apply->get('sensitive')) {
+                                                                      my $dialog = _create_dialog(N("Please wait"));
+                                                                      gtkpack($dialog->vbox,
+                                                                              Gtk2::Label->new(N("Please Wait... Applying the configuration")));
+                                                                      $dialog->show_all;
+                                                                      gtkflush();
+                                                                      apply();
+                                                                      $dialog->destroy;
+                                                                  }
+                                                                  update();
+                                                                  quit_global();
+                                                              }),
+                                           ),
+                                ),
+                       );
 
 
 $profile_combo->signal_connect(realize => sub {
