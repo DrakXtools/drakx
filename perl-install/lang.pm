@@ -30,6 +30,7 @@ my %languages = (
 'de_AT' => [ 'German (Austria)',	'iso-8859-1', 'de', 'de_AT:de' ],
 'de_DE' => [ 'German (Germany)',	'iso-8859-1', 'de', 'de_DE:de' ],
   'el'  => [ 'Greek',                   'iso-8859-7', 'el', 'el' ],
+  'eo'  => [ 'Esperanto',		'iso-8859-3', 'eo', 'eo' ],
 'es_AR' => [ 'Spanish (Argentina)',	'iso-8859-1', 'es', 'es_AR:es_UY:es:es_ES' ],
 'es_ES' => [ 'Spanish (Spain, modern sorting)',	'iso-8859-1', 'es', 'es' ],
 'es@tradicional' => [ 'Spanish (Spain, traditional sorting)', 'iso-8859-1', 'es', 'es' ],
