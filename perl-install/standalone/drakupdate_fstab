@@ -1,0 +1,123 @@
+#!/usr/bin/perl
+
+# XFdrake
+# Copyright (C) 2002 MandrakeSoft (pixel@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use detect_devices;
+use common;
+use fsedit;
+use lang;
+use any;
+use fs;
+
+$::testing = $ARGV[0] eq '--test' && shift;
+my ($raw_action, $device_name) = @ARGV;
+my ($action) = $raw_action =~ /^--(add|del)/;
+
+@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--add | --del] <device>\n";
+
+main($action, $device_name);
+
+
+sub device_name_to_entry {
+    my ($name) = @_;
+    $name =~ s|/dev/||;
+    my @l = detect_devices::get();
+
+    my ($e, $nb);
+    if ((my $devfs_prefix, $nb) = $name =~ m,(.*)/(?:cd|disc|part(\d+))$,) {
+	($e) = grep { $_->{devfs_prefix} eq $devfs_prefix } @l or return;
+    } else {
+	if (($e) = grep { $name eq $_->{device} } @l) {
+	    $nb = '';
+	} else {
+	    (my $prefix, $nb) = $name =~ m/^(.*?)(\d*)$/;
+	    ($e) = grep { $prefix eq ($_->{prefix} || $_->{device}) } @l or return;
+	}
+    }
+
+    if ($nb) {
+	$e->{devfs_device} = $e->{devfs_prefix} . '/part' . $nb;
+	$e->{device} = ($e->{prefix} || $e->{device}) . $nb;
+    }
+    $e;
+}
+
+sub set_options {
+    my ($part) = @_;
+    my $use_supermount = cat_('/etc/fstab') =~ /supermount/;
+    my $security = any::get_secure_level();
+    my ($iocharset, $codepage) = lang::fs_options(lang::read());
+
+    fs::set_default_options($part, 1, $use_supermount, $security, $iocharset, $codepage);
+}
+
+sub set_mount_point {
+    my ($part, $fstab) = @_;
+    my $mntpoint = detect_devices::suggest_mount_point($part) or return;
+    $mntpoint = "/mnt/$mntpoint";
+
+    foreach ('', 2 .. 10) {
+	next if fsedit::mntpoint2part("$mntpoint$_", $fstab);
+	$part->{mntpoint} = "$mntpoint$_";
+	return 1;
+    }
+    0;
+}
+
+sub main {
+    my ($action, $device_name) = @_;
+    my $part = device_name_to_entry($device_name);
+    my $fstab_file = '/etc/fstab';
+    if (!$part) {
+	print STDERR "Can't find device $device_name\n" if $::testing;
+	return;
+    } elsif ($::testing) {
+	cp_af('/etc/fstab', $fstab_file = '/tmp/fstab');
+    }
+
+    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'verbatim_credentials') ];
+    my ($existing_fstab_entries, $fstab_) = partition { $_->{device} eq $part->{device} || $_->{device} eq $part->{devfs_device} } @$fstab;
+
+    if ($action eq 'add') {
+	if (@$existing_fstab_entries) {
+	    print STDERR "Already in fstab\n" if $::testing;
+	    return;
+	}
+	set_options($part);
+	set_mount_point($part, $fstab) or return;
+	
+	my ($line) = fs::prepare_write_fstab([$part]);
+	append_to_file($fstab_file, $line) if $line;
+    } else {
+	if (!@$existing_fstab_entries) {
+	    print STDERR "Not found in fstab\n" if $::testing;
+	    return;
+	}
+	my ($s) = fs::prepare_write_fstab($fstab_, '', 'keep_smb_credentials');
+	output($fstab_file, $s);
+    }
+
+    if ($::testing) {
+	print "fstab would have changed:\n";
+	system("diff -u /etc/fstab $fstab_file");
+    }
+}
