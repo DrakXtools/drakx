@@ -40,7 +40,7 @@ sub init {
     fs::mount("none", "/dev", "devfs", 0);
     run_program::run('/sbin/devfsd', '/dev');
 
-    modules::load_category->('multimedia/sound');
+    modules::load_category('multimedia/sound');
 }
 
 
