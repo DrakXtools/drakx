@@ -1,3 +1,70 @@
+2001/09/13  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet, network/isdn.pm: isdn timeout works now.
+
+2001/09/13  François Pons  <fpons@mandrakesoft.com>
+
+	* lang.pm: fixed bad $localedir in load_mo().
+
+	* g_auto_install: updated so that this scripts is running again.
+
+	* install2.pm: do not output error message for bad kernel if using
+	--g_auto_install.
+
+	* install_steps_interactive.pm: fixed Printer name reporting for a
+	specific printer.
+
+	* install_any.pm: updates 3D category according Matrox G550 and Radeon
+	card.
+
+	* services.pm: updated repartition of services into category, network
+	category are commented so
+	that service will to "Other" one.
+
+	* live_install2: updated #! as ../perl is not used.
+
+	* my_gtk.pm: synced with --g_auto_install mode.
+
+	* install_steps.pm: synced with Xconfigurator bad_card class of video card
+	to avoid using frame
+	buffer, added ET6\d00 style card which seems to have problem.
+
+	* Xconfigurator.pm: fix for Matrox G550 support, now add DRI support.
+	disable any question to user about XF3 if he choose a dual head
+	configuration.
+	disable DRI if Xinerama has been chosen.
+	updated Rage Mobility regexp for bad_card, added bad_card for XF4 as
+	Tseng ET6\d00.
+	avoid creating /etc/X11/XF86Config* file if --g_auto_install.
+	synced with --g_auto_install mode.
+	disable testing with all SiS card except SiS 630 under XF4.
+
+2001/09/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sp.po, share/po/pl.po, share/po/pt.po, share/po/no.po,
+	share/po/th.po, share/po/sr.po, share/po/sk.po, share/po/lt.po,
+	share/po/ru.po, share/po/pt_BR.po, share/po/ko.po, share/po/lv.po,
+	share/po/uk.po, share/po/nl.po, share/po/ja.po, share/po/sv.po,
+	share/po/id.po: updated pot file
+
+2001/09/13  Pixel  <pixel@mandrakesoft.com>
+
+	* keyboard.pm: filtered the list from lang2keyboard to display only valid
+	keyboards
+
+	* c/stuff.xs.pm: add partition adding on the fly trick
+
+	* partition_table.pm: BLKPG_ADD_PARTITION support (aka adding partition on
+	the fly without rebooting on a device with some already mounted
+	partitions)
+
+	* install2.pm (selectKeyboard): remove code causing
+	install_steps::selectKeyboard to be skipped
+
+	* install_steps.pm: do not translate kdm GreetString in ja|ko|zh (what
+	about ru?)
+	in kdmrc GreetString, magic string HOSTNAME replaced by %n
+
 2001/09/12  dam's  <damien@mandrakesoft.com>
 
 	* my_gtk.pm: typo
