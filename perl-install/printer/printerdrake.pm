@@ -637,26 +637,14 @@ sub setup_local_autoscan {
 	$printer->{currentqueue}{connect} =~ m/^file:/) {
 	# Non-HP or HP print-only device (HPOJ not used)
 	$device = $printer->{currentqueue}{connect};
-	$device =~ s/^file://;
-	foreach my $p (keys %{$menuentries}) {
-	    if ($device eq $menuentries->{$p}) {
-		$menuchoice = $p;
-		last;
-	    }
-	}
+	$menuchoice = { reverse %$menuentries }->{$device}
     } elsif ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m!^ptal:/mlc:!) {
 	# HP multi-function device (controlled by HPOJ)
 	my $ptaldevice = $printer->{currentqueue}{connect};
 	$ptaldevice =~ s!^ptal:/mlc:!!;
 	if ($ptaldevice =~ /^par:(\d+)$/) {
-	    $device = "/dev/lp$1";
-	    foreach my $p (keys %{$menuentries}) {
-		if ($device eq $menuentries->{$p}) {
-		    $menuchoice = $p;
-		    last;
-		}
-	    }
+	    $menuchoice = { reverse %$menuentries }->{"/dev/lp$1"}
 	} else {
 	    my $make = lc($printer->{currentqueue}{make});
 	    my $model = lc($printer->{currentqueue}{model});
@@ -674,13 +662,7 @@ sub setup_local_autoscan {
     } elsif ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m!^(socket|smb):/!) {
 	# Ethernet-(TCP/Socket)-connected printer or printer on Windows server
-	$device = $printer->{currentqueue}{connect};
-	foreach my $p (keys %{$menuentries}) {
-	    if ($device eq $menuentries->{$p}) {
-		$menuchoice = $p;
-		last;
-	    }
-	}
+	$menuchoice = { reverse %$menuentries }->{$printer->{currentqueue}{connect}}
     } else { $device = "" }
     if ($menuchoice eq "" && @menuentrieslist > -1) {
 	$menuchoice = $menuentrieslist[0];
