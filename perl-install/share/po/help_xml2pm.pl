@@ -10,7 +10,8 @@ my @langs = grep { /^..$/ && -e "$dir/$_/drakx-help.xml" } all($dir) or die "no 
 my %helps = map {
     my $lang = $_;
     my $p = new XML::Parser(Style => 'Tree');
-    my $tree = $p->parsefile("$dir/$lang/drakx-help.xml");
+    open F, "xsltproc id.xsl $dir/$lang/drakx-help.xml|";
+    my $tree = $p->parse(*F);
 
     $lang => rewrite2(rewrite1(@$tree), $lang);
 } @langs;
