@@ -100,6 +100,8 @@ sub install2::startMove {
     require install_steps;
     install_steps::addUser($o);
 
+    my $w = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
+
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
     install_steps_interactive::configureNetwork($o);
@@ -120,6 +122,8 @@ N("An error occurred, but I don't know how to handle it nicely.
 Continue at your own risk."), formatError($@) ]) if $@;
         }
     }
+
+    $w = undef;
 
     $::WizardWindow->destroy if $::WizardWindow;
     require ugtk2;
