@@ -455,12 +455,21 @@ sub main {
 
     eval { spawnShell() };
 
+    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
+    mkdir $o->{prefix}, 0755;
+
+    modules::unload($_) foreach qw(vfat msdos fat);
+    modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
+    modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
+    modules::read_already_loaded();
+
     $o->{interactive} ||= 'gtk';
     if ($o->{interactive} eq "gtk" && availableMemory < 22 * 1024) {
 	log::l("switching to newt install cuz not enough memory");
 	$o->{interactive} = "newt";
     }
 
+    #- done after module dependencies are loaded for "vfat depends on fat"
     if ($::auto_install) {
 	require install_steps_auto_install;
 	eval { $o = $::o = install_any::loadO($o, $::auto_install) };
@@ -476,15 +485,6 @@ sub main {
 	require"install_steps_$o->{interactive}.pm";
     }
 
-    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
-    mkdir $o->{prefix}, 0755;
-
-    modules::unload($_) foreach qw(vfat msdos fat);
-    modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
-    modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
-    modules::read_already_loaded();
-
-    #- done after module dependencies are loaded for "vfat depends on fat"
     eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
 
