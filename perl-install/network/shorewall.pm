@@ -123,7 +123,9 @@ sub write {
     set_config_file('masq', 
 		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : (),
 		   );
-
+		   system('uniq /etc/shorewall/masq > /etc/shorewall/masq.uniq');
+		   rename("/etc/shorewall/masq.uniq", "/etc/shorewall/masq");
+		   
     if ($conf->{disabled}) {
 	run_program::rooted($::prefix, 'chkconfig', '--del', 'shorewall');
 	run_program::run('service', '>', '/dev/null', 'shorewall', 'stop') if $::isStandalone;
