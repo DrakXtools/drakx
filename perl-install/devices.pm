@@ -52,7 +52,10 @@ sub entry {
     my ($type, $major, $minor);
     local ($_) = @_;
 
-    if (/^sd(.)(\d{0,2})/) {
+    if (/^([\da-f]{3,4})$/i) {
+	$type = c::S_IFBLK();
+	($major, $minor) = unmakedev(hex $1);
+    } elsif (/^sd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
 	$major = 8;
 	$minor = 16 * (ord($1) - ord('a')) + ($2 || 0);
