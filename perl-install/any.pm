@@ -945,8 +945,8 @@ sub devfssymlinkf {
     my $if = $o_if->{device};
 
     my $devfs_if = $o_if->{devfs_device};
-    $devsfs_if ||= devices::to_devfs($o_if->{device});
-    $devsfs_if ||= $o_if->{device};
+    $devfs_if ||= devices::to_devfs($o_if->{device});
+    $devfs_if ||= $o_if->{device};
 
     symlinkf($if, "$prefix/dev/$of");
 
