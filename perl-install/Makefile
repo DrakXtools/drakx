@@ -199,6 +199,8 @@ localrpm: localdist buildrpm
 
 localsrpm: localdist buildsrpm
 
+fastsrpm: cvstag localsrpm
+
 localdist: cleandist localcopy tar
 
 cleandist:
