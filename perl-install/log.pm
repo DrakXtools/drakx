@@ -1,4 +1,4 @@
-package log;
+package log; # $Id$
 
 use diagnostics;
 use strict;

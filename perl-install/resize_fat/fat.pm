@@ -1,4 +1,4 @@
-package resize_fat::fat;
+package resize_fat::fat; # $Id$
 
 use diagnostics;
 use strict;

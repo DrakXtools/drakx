@@ -1,4 +1,4 @@
-package resize_fat::boot_sector;
+package resize_fat::boot_sector; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package sbus_probing::main;
+package sbus_probing::main; # $Id$
 
 use c;
 use log;

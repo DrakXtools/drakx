@@ -1,4 +1,4 @@
-package interactive_gtk;
+package interactive_gtk; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package loopback;
+package loopback; # $Id$
 
 use diagnostics;
 use strict;

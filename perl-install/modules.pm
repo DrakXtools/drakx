@@ -1,4 +1,4 @@
-package modules;
+package modules; # $Id$
 
 use strict;
 use vars qw(%drivers);

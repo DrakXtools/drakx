@@ -1,5 +1,5 @@
 
-package keyboard;
+package keyboard; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package resize_fat::c_rewritten;
+package resize_fat::c_rewritten; # $Id$
 
 use strict;
 use vars qw($VERSION @ISA);

@@ -1,4 +1,4 @@
-package interactive;
+package interactive; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package mouse;
+package mouse; # $Id$
 
 use diagnostics;
 use strict;

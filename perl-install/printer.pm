@@ -1,4 +1,4 @@
-package printer;
+package printer; # $Id$
 
 use diagnostics;
 use strict;

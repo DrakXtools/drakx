@@ -1,4 +1,4 @@
-package install_steps_stdio;
+package install_steps_stdio; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package install_steps_newt;
+package install_steps_newt; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package install_steps;
+package install_steps; # $Id$
 
 use diagnostics;
 use strict;

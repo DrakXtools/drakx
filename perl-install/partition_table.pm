@@ -1,4 +1,4 @@
-package partition_table;
+package partition_table; # $Id$
 
 #use diagnostics;
 #use strict;

@@ -1,4 +1,4 @@
-package fsedit;
+package fsedit; # $Id$
 
 use diagnostics;
 use strict;

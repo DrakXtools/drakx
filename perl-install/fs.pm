@@ -1,4 +1,4 @@
-package fs;
+package fs; # $Id$
 
 use diagnostics;
 use strict;

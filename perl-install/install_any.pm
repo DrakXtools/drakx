@@ -1,4 +1,4 @@
-package install_any;
+package install_any; # $Id$
 
 use diagnostics;
 use strict;

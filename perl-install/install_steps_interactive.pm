@@ -1,4 +1,4 @@
-package install_steps_interactive;
+package install_steps_interactive; # $Id$
 
 
 use diagnostics;

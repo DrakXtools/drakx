@@ -1,4 +1,4 @@
-package lang;
+package lang; # $Id$
 
 use diagnostics;
 use strict;

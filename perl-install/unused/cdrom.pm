@@ -1,4 +1,4 @@
-package cdrom;
+package cdrom; # $Id$
 
 use diagnostics;
 use strict;

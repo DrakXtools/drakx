@@ -1,4 +1,4 @@
-package partition_table_mac;
+package partition_table_mac; # $Id$
 
 use diagnostics;
 use strict;

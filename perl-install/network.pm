@@ -1,4 +1,4 @@
-package network;
+package network; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,7 +1,7 @@
 #-########################################################################
 #- Pixel's implementation of Perl-GTK  :-)  [DDX]
 #-########################################################################
-package my_gtk;
+package my_gtk; # $Id$
 
 use diagnostics;
 use strict;

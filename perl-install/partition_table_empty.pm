@@ -1,4 +1,4 @@
-package partition_table_empty;
+package partition_table_empty; # $Id$
 
 #- this is a mainly dummy partition table. If we find it's empty, we just call -
 #- zero_MBR which will take care of bless'ing us to the partition table type best

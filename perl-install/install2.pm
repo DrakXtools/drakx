@@ -1,5 +1,5 @@
 
-package install2;
+package install2; # $Id$
 
 use diagnostics;
 use strict;

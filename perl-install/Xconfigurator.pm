@@ -1,4 +1,4 @@
-package Xconfigurator;
+package Xconfigurator; # $Id$
 
 use diagnostics;
 use strict;

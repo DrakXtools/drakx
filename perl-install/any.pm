@@ -1,4 +1,4 @@
-package any;
+package any; # $Id$
 
 use diagnostics;
 use strict;

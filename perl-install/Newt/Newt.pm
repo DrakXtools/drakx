@@ -1,4 +1,4 @@
-package Newt;
+package Newt; # $Id$
 
 use strict;
 use vars qw($VERSION @ISA);
@@ -9,8 +9,8 @@ use vars qw($VERSION @ISA);
 $VERSION = '0.01';
 bootstrap Newt $VERSION;
 
-package Newt::Component;
-package Newt::Grid;
+package Newt::Component; # $Id$
+package Newt::Grid; # $Id$
 
 
 1;

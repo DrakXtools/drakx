@@ -5,7 +5,7 @@
 #- swapoff, ls, cp, ps, dd, head, tail, strings, hexdump, more, insmod,
 #- modprobe, route, df, kill, lspci, lssbus, dmesg, sort, du, 
 #-########################################################################
-package commands;
+package commands; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package pkgs;
+package pkgs; # $Id$
 
 use diagnostics;
 use strict;

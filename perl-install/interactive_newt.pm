@@ -1,4 +1,4 @@
-package interactive_newt;
+package interactive_newt; # $Id$
 
 use diagnostics;
 use strict;

@@ -1,4 +1,4 @@
-package c;
+package c; # $Id$
 
 use vars qw($AUTOLOAD);
 

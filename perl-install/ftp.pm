@@ -1,4 +1,4 @@
-package ftp;
+package ftp; # $Id$
 
 use Net::FTP;
 

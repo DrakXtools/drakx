@@ -1,4 +1,4 @@
-package install_interactive;
+package install_interactive; # $Id$
 
 use diagnostics;
 use strict;

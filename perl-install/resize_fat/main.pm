@@ -19,7 +19,7 @@
 
 # This is mainly a perl rewrite of the work of Andrew Clausen (libresize)
 
-package resize_fat::main;
+package resize_fat::main; # $Id$
 
 use diagnostics;
 use strict;
