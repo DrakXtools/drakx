@@ -198,8 +198,9 @@ sub write($$) {
 	symlink $cddev, "$prefix/dev/cdrom" or log::l("failed to symlink $prefix/dev/cdrom: $!");
     }
     write_fstab($fstab, $prefix, $cddev);
-}
 
+    devices::make "$prefix/dev/$_->{device}" foreach grep { $_->{device} && !isNfs($_) } @$fstab;
+}
 
 sub write_fstab($;$$) {
     my ($fstab, $prefix, $cddev) = @_;
@@ -241,3 +242,5 @@ sub write_fstab($;$$) {
     }
     print F join(" ", @$_), "\n" foreach @to_add;
 }
+
+

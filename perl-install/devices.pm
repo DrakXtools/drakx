@@ -38,9 +38,11 @@ sub size($) {
 sub make($) {
     local $_ = my $file = $_[0];
     my ($type, $major, $minor);
+    my ($prefix);
 
-    unless (s,^/(dev|tmp)/,,) {
-	$file = -e "/dev/$file" ? "/dev/$file" : "/tmp/$file";
+    unless (s,^(.*)/(dev|tmp)/,,) {
+	$prefix = $1;
+	$file = -e "$prefix/dev/$file" ? "$prefix/dev/$file" : "$prefix/tmp/$file";
     }
 
     -e $file and return $file; # assume nobody takes fun at creating files named as device
@@ -94,7 +96,7 @@ sub make($) {
 		   "scd0"    => [ c::S_IFBLK(), 11, 0 ],
 		   "scd1"    => [ c::S_IFBLK(), 11, 1 ],
 		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
-	       }}{$_} or die "unknown device $type" };
+	       }}{$_} or die "unknown device $_" };
     }
     
     # make a directory for this inode if needed.

@@ -16,7 +16,7 @@ my @suggestions = (
   { mntpoint => "/boot",    minsize =>  10 << 11, size =>  16 << 11, type => 0x83 }, 
   { mntpoint => "/",        minsize =>  50 << 11, size => 100 << 11, type => 0x83 }, 
   { mntpoint => "swap",     minsize =>  30 << 11, size =>  60 << 11, type => 0x82 },
-  { mntpoint => "/usr",     minsize => 200 << 11, size => 500 << 11, type => 0x83 }, 
+  { mntpoint => "/usr",     minsize => 200 << 11, size => 600 << 11, type => 0x83 }, 
   { mntpoint => "/home",    minsize =>  50 << 11, size => 200 << 11, type => 0x83 }, 
   { mntpoint => "/var",     minsize => 200 << 11, size => 250 << 11, type => 0x83 }, 
   { mntpoint => "/tmp",     minsize =>  50 << 11, size => 100 << 11, type => 0x83 }, 

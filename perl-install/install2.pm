@@ -18,6 +18,7 @@ use detect_devices;
 use pkgs;
 use smp;
 use lang;
+use run_program;
 
 my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
 my @installSteps = (
@@ -205,11 +206,13 @@ sub finishNetworking { $o->finishNetworking }
 sub configureTimezone { $o->timeConfig }
 sub configureServices { $o->servicesConfig }
 sub setRootPassword { $o->setRootPassword }
-sub addUser { $o->addUser }
+sub addUser { 
+    $o->addUser;
+    run_program::rooted($o->{prefix}, "pwconv"); # use shadow passwords
+}
 
 sub createBootdisk {
-    $::testing and return;
-    $o->{isUpgrade} or fs::write($o->{prefix}, $o->{fstab});
+    fs::write($o->{prefix}, $o->{fstab}) unless $o->{isUpgrade};
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
     $o->createBootdisk;
 }

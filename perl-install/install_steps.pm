@@ -183,11 +183,11 @@ sub addUser($) {
     print F "$u{name}::$new_gid:\n";
 
     eval { commands::cp("-f", "$p/etc/skel", $homedir) }; $@ and log::l("copying of skel failed: $@"), mkdir($homedir, 0750);
-    commands::chown_("-r", "$new_uid.$new_gid", $homedir);
+    commands::chown_("-r", "$new_uid.$new_gid", $homedir);    
 }
 
 sub createBootdisk($) {
-    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->{default}->{mkbootdisk};
+    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->{default}->{mkbootdisk} && !$::testing;
 }
 
 sub setupBootloader($) {

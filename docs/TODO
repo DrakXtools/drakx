@@ -1,4 +1,14 @@
-shadow is not in base
+do not allow empty password for root, otherwise you can't login :(
+
+xmodmap needed even for english as the backspace is not what it should
+
+when we have /mnt mounted, check that all the devices of fstab are in /mnt/dev
+(otherwise it won't boot)
+
+remove the hack in pkgs.pm (search for hack)
+
+detect and propose to choose devices before diskdrake
+(cf scsi&ewok)
 
 /etc/sysconfig/mouse is not created
 
@@ -6,6 +16,8 @@ Xconfigurator:
   simplify Monitors
   possibility to show card autodetected
   use the VideoRam for skeeping some tests (not all the 32 24 16 15 8)
+
+add a waiting message while formatting
 
 does not reboot at the end of install
 
@@ -18,6 +30,8 @@ install2 sigsegv when leaving :(
 xmodmaps for every languages (maybe gnome-core xmodmaps can help)
 
 verify the free space is big enough.
+
+be able to add more than one normal user
 
 left window in the install (steps) should have a smaller font.
 

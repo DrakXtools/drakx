@@ -1,6 +1,6 @@
 SO_FILES = c/blib/arch/auto/c/c.so
 PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake
-ROOTDEST = /tmp/t
+ROOTDEST = /export
 DEST = $(ROOTDEST)/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
@@ -79,7 +79,7 @@ install_pms: all
 		perl -ne 'print #unless /^use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 
-	cp diskdrake.rc $(DESTREP4PMS)
+	cp diskdrake.rc install.rc $(DESTREP4PMS)
 	ln -sf perl-install/install2 $(DEST)/usr/bin
 	ln -sf perl-install/commands $(DEST)/usr/bin
 	chmod a+x $(DESTREP4PMS)/install2
@@ -161,6 +161,6 @@ stage2:
 
 # function f() { grep "$*" /usr/include/*.h /usr/include/*/*.h; }
 
-# dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cd ~pixel/gi/perl-install ; install -s install/local-install install1/bin/install ; cp -a install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
+# dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cd ~pixel/gi/perl-install ; install -s install/install install1/bin/install ; cp -a install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 # mount /tmp/initrd /mnt/disk/ -o loop ;  ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 

@@ -1,16 +1,7 @@
-binding "bind"
-{
-  bind "m" {
-     "clicked" ("Mount")
-  }
-}
-
 style "font"
 {
   font = "-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1"
 }
-
-
 
 style "red" = "font"
 {
@@ -32,8 +23,7 @@ style "white" = "font"
   bg[NORMAL] = { 1.0, 1.0, 1.0 }
 }
 
-widget "*PART_*" binding "bind"
 widget "*Linux*" style "red" 
-widget "*Linux swap" style "green"
+widget "GtkWindow.Gtk*Linux swap" style "green"
 widget "*FAT*" style "blue"
 widget "*Empty*" style "white"

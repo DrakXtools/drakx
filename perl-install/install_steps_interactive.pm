@@ -82,14 +82,18 @@ sub choosePartitionsToFormat($$) {
 sub createBootdisk($) {
     my ($o) = @_;
     
-    $o->SUPER::createBootdisk if 
-	$o->{default}->{mkbootdisk} = $o->ask_yesorno('',
+    $o->{default}->{mkbootdisk} = $o->ask_yesorno('',
  _("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 lilo on your system, or another operating system removes lilo, or lilo doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
 failures. Would you like to create a bootdisk for your system?"));
+
+    $o->ask_warn('',
+_("Insert a floppy in drive fd0 (aka A:)"));
+
+    $o->SUPER::createBootdisk;
 }
 
 sub setupBootloader($) {
@@ -104,12 +108,11 @@ sub setupBootloader($) {
 sub exitInstall { 
     my ($o) = @_;
     $o->ask_warn('',
-_"Congratulations, installation is complete.
+_("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 For information on fixes which are available for this release of Linux Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
 Information on configuring your system is available in the post
-install chapter of the Official Linux Mandrake User's Guide.");
+install chapter of the Official Linux Mandrake User's Guide."));
 }
-
 =cut

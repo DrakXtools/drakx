@@ -18,6 +18,7 @@ use c;
 use common qw(:common);
 
 my $forgetTime = 1000; # in milli-seconds
+my $border = 10;
 
 1;
 
@@ -29,30 +30,32 @@ sub new {
 
     Gtk->init;
     my $o = bless { @opts }, $type;
-    $o->{window} = $o->_create_window($title);
+    $o->_create_window($title);
     $o;
 }
 sub main($;$) {
     my ($o, $f) = @_;
     $o->show;
-    $o->{window}->grab_add;
+
+    $o->{rwindow}->grab_add;
     do { Gtk->main } while ($o->{retval} && $f && !&$f());
-    $o->{window}->grab_remove;
+    $o->{rwindow}->grab_remove;
     $o->destroy;
     $o->{retval}
 }
 sub show($) {
     my ($o) = @_;
     $o->{window}->show;
+    $o->{rwindow}->show;
 }
 sub destroy($) { 
     my ($o) = @_;
-    $o->{window}->destroy;
+    $o->{rwindow}->destroy;
     flush();
 }
 sub sync($) {
     my ($o) = @_;
-    $o->{window}->show;
+    $o->show;
 
     my $h = Gtk->idle_add(sub { Gtk->main_quit; 1 });
     map { Gtk->main } (1..4);
@@ -62,7 +65,7 @@ sub flush(;$) {
     Gtk->main_iteration while Gtk::Gdk->events_pending;
 }
 sub bigsize($) { 
-    $_[0]->{window}->set_usize(600,400); 
+    $_[0]->{rwindow}->set_usize(600,400); 
 }
 
 
@@ -118,26 +121,33 @@ sub gtkadd($@) {
     $w
 }
 
-sub gtkset_mousecursor($) {
-    my ($type) = @_;
+sub gtkroot {
     Gtk->init;
-
-    my $root = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
-    $root->set_cursor(Gtk::Gdk::Cursor->new($type));
+    Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
 }
 
-sub gtkset_background($$$) {
+sub gtkcolor($$$) {
     my ($r, $g, $b) = @_;
-
-    Gtk->init;
-    my $root = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
-    my $gc = Gtk::Gdk::GC->new($root);
 
     my $color = bless {}, 'Gtk::Gdk::Color';
     $color->red  ($r << 8);
     $color->green($g << 8);
     $color->blue ($b << 8);
-    $color = $root->get_colormap->color_alloc($color);
+    gtkroot()->get_colormap->color_alloc($color);
+}
+
+sub gtkset_mousecursor($) {
+    my ($type) = @_;
+    gtkroot()->set_cursor(Gtk::Gdk::Cursor->new($type));
+}
+
+sub gtkset_background($$$) {
+    my ($r, $g, $b) = @_;
+
+    my $root = gtkroot();
+    my $gc = Gtk::Gdk::GC->new($root);
+
+    my $color = gtkcolor($r, $g, $b);
     $gc->set_foreground($color);
     $root->set_background($color);
     
@@ -166,7 +176,11 @@ sub create_okcancel($;$$) {
 sub create_box_with_title($@) {
     my $o = shift;
     $o->{box} = gtkpack_(new Gtk::VBox(0,0),
-			 map({ 0, $_ } @_),
+			 map({ 
+			      my $w = ref $_ ? $_ : new Gtk::Label($_);
+			      $w->set_name("Title");
+			      0, $w;
+			     } @_),
 			 0, new Gtk::HSeparator,
 		       )
 }
@@ -240,12 +254,41 @@ sub create_vbox {
 
 sub _create_window($$) {
     my ($o, $title) = @_;
-    $o->{window} = new Gtk::Window;
-    $o->{window}->set_title($title);
-    $o->{window}->signal_connect("expose_event" => sub { c::XSetInputFocus($o->{window}->window->XWINDOW) }) if $my_gtk::force_focus;
-    $o->{window}->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
-    $o->{window}->set_uposition(@$my_gtk::force_position) if $my_gtk::force_position;
-    $o->{window}
+    my $w = new Gtk::Window;
+    my $f = new Gtk::Frame(undef);
+    $w->set_name("Title");
+
+    if ($::isStandalone) {
+	gtkadd($w, $f);
+    } else {
+	my $t = new Gtk::Table(0, 0, 0);
+
+	my $new = sub {
+	    my $w = new Gtk::DrawingArea;
+	    $w->set_usize($border, $border);
+	    $w->signal_connect_after(expose_event => 
+                sub { $w->window->draw_rectangle($w->style->black_gc, 1, 0, 0, @{$w->allocation}[2,3]); }
+            );
+	    $w->show;
+	    $w;
+	};
+
+	$t->attach(&$new(), 0, 1, 0, 3, [],              , ["expand","fill"], 0, 0);
+	$t->attach(&$new(), 1, 2, 0, 1, ["expand","fill"], [],                0, 0);
+	$t->attach($f,      1, 2, 1, 2, ["expand","fill"], ["expand","fill"], 0, 0);
+	$t->attach(&$new(), 1, 2, 2, 3, ["expand","fill"], [],                0, 0);
+	$t->attach(&$new(), 2, 3, 0, 3, [],                ["expand","fill"], 0, 0);
+
+	gtkadd($w, $t);
+    }
+
+    $w->set_title($title);
+    $w->signal_connect("expose_event" => sub { c::XSetInputFocus($w->window->XWINDOW) }) if $my_gtk::force_focus;
+    $w->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
+    $w->set_uposition(@$my_gtk::force_position) if $my_gtk::force_position;
+
+    $o->{window} = $f;
+    $o->{rwindow} = $w;
 }
 
 

@@ -23,12 +23,15 @@ sub skipThisPackage { member($_[0], @skipThesesPackages) }
 
 sub Package {
     my ($packages, $name) = @_;
-    $packages->{$name} or die "unknown package $name";
+    $packages->{$name} ;# or die "unknown package $name"; hack hack :(
 }
 
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
     $p->{selected} = -1; # selected by user
+    unless ($p->{deps}) {
+	1;
+    }
     my @l = @{$p->{deps}};
     while (@l) {
 	my $n = shift @l;
@@ -107,6 +110,7 @@ sub psUsingDirectory(;$) {
     log::l("scanning $dirname for packages");
     foreach (all("$dirname")) {
 	my ($name, $version, $release) = /(.*)-([^-]+)-([^-.]+)\.[^.]+\.rpm/ or log::l("skipping $_"), next;
+
 	$packages{$name} = {
             name => $name, version => $version, release => $release,
 	    file => "$dirname/$_", selected => 0, deps => [],
@@ -125,7 +129,7 @@ sub getDeps($) {
 	$packages->{$name} or next;
 	$packages->{$name}->{size} = $size;
 	$packages->{$name}->{deps} = \@deps;
-	map { push @{$packages->{$_}->{provides}}, $name } @deps;
+	map { push @{$packages->{$_}->{provides}}, $name if $packages->{$_} } @deps;
     }
 }
 
