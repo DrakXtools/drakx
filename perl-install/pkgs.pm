@@ -6,6 +6,7 @@ use strict;
 use MDK::Common::System;
 use URPM;
 use URPM::Resolve;
+use URPM::Signature;
 use common;
 use install_any;
 use run_program;
@@ -415,22 +416,7 @@ sub psUsingHdlist {
     #- get all keys corresponding in the right pubkey file,
     #- they will be added in rpmdb later if not found.
     my $pubkey = install_any::getFile("Mandrake/base/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
-    my ($block, $content);
-    foreach (<$pubkey>) {
-	my $inside_block = /^-----BEGIN PGP PUBLIC KEY BLOCK-----$/ ... /^-----END PGP PUBLIC KEY BLOCK-----$/;
-	if ($inside_block) {
-	    $block .= $_;
-	    if ($inside_block =~ /E/) {
-		push @{$m->{pubkey}}, { block => $block, content => $content };
-		$block = $content = undef;
-	    } else {
-		#- now compute content (for finding the right key).
-		chomp;
-		/^$/ and $content = '';
-		defined $content and $content .= $_;
-	    }
-	}
-    }
+    $m->{pubkey} = [ $packages->parse_armored_file($pubkey) ];
 
     #- integrate medium in media list, only here to avoid download error (update) to be propagated.
     $packages->{mediums}{$medium} = $m;
