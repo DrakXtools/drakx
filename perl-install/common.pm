@@ -164,6 +164,7 @@ sub sync { &MDK::Common::System::sync }
 BEGIN { undef *formatError };
 sub formatError {
     my ($err) = @_;
+    ref($err) eq 'SCALAR' and $err = $$err;
     log::l("error: $err");
     &MDK::Common::String::formatError($err);
 }
