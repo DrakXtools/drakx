@@ -594,6 +594,7 @@ sub main {
     install_any::remove_advertising($o);
     install_any::write_fstab($o);
     modules::write_conf($o->{prefix});
+    detect_devices::install_addons("$o->{prefix}/usr/share/ldetect-lst");
 
     #- mainly for auto_install's
     #- do not use run_program::xxx because it doesn't leave stdin/stdout unchanged
