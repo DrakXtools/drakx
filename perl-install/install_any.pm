@@ -770,7 +770,8 @@ sub getAndSaveAutoInstallFloppy {
 ", "07\n" if !$replay;
 
 	local $o->{partitioning}{clearall} = !$replay;
-	output("$mountdir/auto_inst.cfg", g_auto_install($replay));
+	eval { output("$mountdir/auto_inst.cfg", g_auto_install($replay)); };
+	$@ and log::l("Warning: <$@>");
 
 	fs::umount($mountdir);
 	rmdir $mountdir;
