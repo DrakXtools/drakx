@@ -79,19 +79,19 @@ my $tips = new Gtk2::Tooltips;
 ### main window
 $window->{window}->add(
                        gtkpack_(Gtk2::VBox->new,
-                                if_($::isEmbedded, 0, new Gtk2::Label(N("boot disk creation"))),
+                                if_($::isEmbedded, 0, new Gtk2::Label(N("Boot disk creation"))),
                                 0, gtkadd(Gtk2::Frame->new(N("General")),
                                           gtkpack__(new Gtk2::VBox(0, 0),
                                                     gtkpack__(new Gtk2::HBox(1, 0),
-                                                              Gtk2::Label->new(N("device")),
+                                                              Gtk2::Label->new(N("Device")),
                                                               $device_combo,
-                                                              gtksignal_connect(Gtk2::Button->new(N("default")),
+                                                              gtksignal_connect(Gtk2::Button->new(N("Default")),
                                                                                 clicked => sub { $device_combo->entry->set_text("/dev/fd0") }),
                                                              ),
                                                     gtkpack__(new Gtk2::HBox(1, 0),
-                                                              Gtk2::Label->new(N("kernel version")),
+                                                              Gtk2::Label->new(N("Kernel version")),
                                                               $kernel_combo,
-                                                              gtksignal_connect(Gtk2::Button->new("default"),
+                                                              gtksignal_connect(Gtk2::Button->new("Default"),
                                                                                 clicked => sub { 
                                                                                     $kernel_combo->entry->set_text(chomp_(`uname -r`));
                                                                                 }),
