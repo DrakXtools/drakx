@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 17mdk
+Release: 18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Oct  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-18mdk
+- drakconnect: do not lose GATEWAYDEV if it is a non wireless one and
+  a static wireless card is configured (and vice versa) (blino)
+
 * Mon Oct  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-17mdk
 - 64-bit fixes (gwenole)
 - drakconnect: write wlan-ng config files for prism2 drivers (blino)
