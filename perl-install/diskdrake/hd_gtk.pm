@@ -272,7 +272,7 @@ sub create_buttons4partitions {
     }
 
     foreach my $entry (@parts) {
-	my $w = Gtk2::Button->new($entry->{mntpoint} || '') or die '';
+	my $w = Gtk2::Button->new_with_label($entry->{mntpoint} || '') or die '';
 	$w->signal_connect(focus_in_event     => sub { current_entry_changed($kind, $entry); $w->grab_focus }); #- grab_focus is needed because gtk2 is buggy. Forcing an expose event would be enough
 	$w->signal_connect(button_press_event => sub { current_entry_changed($kind, $entry); $w->grab_focus }); #- grab_focus is needed because gtk2 is buggy. The creation of widgets causes the lost of the focus
 	$w->signal_connect(key_press_event => sub {

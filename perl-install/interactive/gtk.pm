@@ -420,7 +420,7 @@ sub ask_fromW {
 	    $set = sub { $w->set($_[0]) };
 	    $width = length ${$e->{val}};
 	} elsif ($e->{type} eq 'button') {
-	    $w = Gtk2::Button->new('');
+	    $w = Gtk2::Button->new_with_label('');
 	    $w->signal_connect(clicked => sub {
 		$get_all->();
 		$mainw->{rwindow}->hide;
