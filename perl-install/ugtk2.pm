@@ -354,11 +354,11 @@ sub create_box_with_title {
 
 # drakfloppy / logdrake
 sub create_dialog {
-    my ($label, $c) = @_;
+    my ($label, $o_c) = @_;
     my $ret = 0;
     my $dialog = Gtk2::Dialog->new;
     $dialog->signal_connect(delete_event => sub { Gtk2->main_quit });
-    $dialog->set_title(N("logdrake"));
+#    $dialog->set_title(N("logdrake"));
     $dialog->set_border_width(10);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
     $dialog->vbox->pack_start(Gtk2::Label->new($label), 1, 1, 0);
@@ -369,7 +369,7 @@ sub create_dialog {
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
-    if ($c) {
+    if ($o_c) {
 	my $button2 = Gtk2::Button->new(N("Cancel"));
 	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy; Gtk2->main_quit });
 	$button2->can_default(1);
@@ -527,7 +527,7 @@ sub gtktext_insert {
     if (ref($t) eq 'ARRAY') {
 	$opts{append} or $buffer->set_text('', -1);
 	foreach my $token (@$t) {
-            my ($iter1, $iter2);
+         my ($iter1, $iter2);
 	    my $c = $buffer->get_char_count;
 	    $buffer->insert($iter1 = $buffer->get_end_iter, $token->[0], -1);
             $iter1->free;
