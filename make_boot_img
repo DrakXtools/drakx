@@ -14,7 +14,7 @@ my ($arch) = $Config{archname} =~ /(.*?)-/;
 rename 'all.kernels', 'kernel/all.kernels';
 rename 'all.modules', 'kernel/all.modules';
 
-$default_append = "ramdisk_size=128000 root=/dev/ram3";
+$default_append = "ramdisk_size=128000 root=/dev/ram3 acpi=off";
 $default_vga = "vga=788";
 
 $instdir = "mdk-stage1";
