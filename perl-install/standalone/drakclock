@@ -26,8 +26,7 @@ $ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
 my $ntpfile = '/etc/ntp.conf';
 my $ntpdlock = '/var/lock/subsys/ntpd';
 
-my $my_win = ugtk2->new('print_launcher');
-$my_win->{rwindow}->set_title(N("DrakClock")) unless $::isEmbedded;
+my $my_win = ugtk2->new(N("DrakClock"));
 
 $my_win->{window}->signal_connect(delete_event => sub { ugtk2->exit(0) });
 
