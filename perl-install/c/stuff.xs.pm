@@ -29,6 +29,7 @@ print '
 #include <linux/fd.h>
 #include <linux/cdrom.h>
 #include <linux/loop.h>
+#include <linux/blkpg.h>
 #include <net/if.h>
 #include <net/route.h>
 
@@ -156,6 +157,23 @@ setMouseLive(display, type, emulate3buttons)
 ';
 
 print '
+
+int
+add_partition(hd, start_sector, size_sector, part_number)
+  int hd
+  unsigned long start_sector
+  unsigned long size_sector
+  int part_number
+  CODE:
+  {
+    long long start = start_sector * 512;
+    long long size = size_sector * 512;
+    struct blkpg_partition p = { start, size, part_number, "", "" };
+    struct blkpg_ioctl_arg s = { BLKPG_ADD_PARTITION, 0, sizeof(struct blkpg_partition), (void *) &p };
+    RETVAL = ioctl(hd, BLKPG, &s) == 0;
+  }
+  OUTPUT:
+  RETVAL
 
 int
 is_secure_file(filename)
