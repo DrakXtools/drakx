@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 18mdk
+Release: 19mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-19mdk
+- drakconnect: fix modem symlink (#7967)
+
 * Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-18mdk
 - drakboot (pixel):
   o if the default bootloader entry is invalid, choose another one
