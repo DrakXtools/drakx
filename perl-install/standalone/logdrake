@@ -26,7 +26,7 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 use common;
 use interactive;
-use ugtk2 qw(:wrappers :helpers :create);
+use ugtk2 qw(:create :dialogs :wrappers :helpers);
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -449,6 +449,10 @@ EOF
 		   { label => "" },
 		   { label => "Email", val => \$email },
 		  ]) or goto step_load;
+    if ($email !~ /[\w.-]*@[\w.-]/) {
+        err_dialog(N("Wrong email"), N("\"%s\" is not a valid email!"));
+        goto step_output;
+    }
 
     $cron .= q(#- report it
 
