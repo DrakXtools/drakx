@@ -67,7 +67,6 @@ use standalone;
 use my_gtk qw(:helpers :wrappers);
 use common;
 use strict;
-use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
 
 
 if ("@ARGV" =~ /--help|-h/) {
@@ -221,7 +220,7 @@ sub search_windows_font {
 	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
 	    foreach my $i (@{$_->[0]}) {
 		if($interactive) {
-		    if($nb_dir) { progress($pbar, 0.34/$nb_dir, "toto") } else {
+		    if($nb_dir) { progress($pbar, 0.34/$nb_dir, _("parse all fonts")) } else {
 			display_error(_("no fonts found"));
 			return 0;
 		    }
@@ -230,7 +229,7 @@ sub search_windows_font {
 		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_->[1]/fonts/$i";
 	    }
 	}
-	$interactive && $nb_dir and  progress($pbar, 100/3, "toto");
+	$interactive && $nb_dir and  progress($pbar, 1/3, _("done"));
     }
     1;
 }
@@ -308,7 +307,7 @@ sub put_font_dir {
 	$interactive and progress($pbar1, 1/@font_list, _("Fonts copy"));
     }
     $interactive and progress($pbar1, 0.01, _("done"));
-    $interactive and progress($pbar2, 0.25, _("True Type fonts installation"));
+    $interactive and progress($pbar2, 0.45, _("True Type fonts installation"));
     system ("cd $drakfont_dir/tmp/tmp   && cp *.ttf ../../ttf");
     system ("cd $drakfont_dir/ttf && $ttmkfdir > fonts.dir" );
     my $restart_xfs = "$chkfontpath -a $drakfont_dir/ttf";
@@ -356,13 +355,16 @@ sub put_font_dir {
 	system ("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
 	system ("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
 	system ("cd $drakfont_dir/Type1 && $type1inst");
-	$interactive and progress($pbar2, 0.1, _("type1inst building"));
+	$interactive and progress($pbar2, 0.15, _("type1inst building"));
 	$restart_xfs .= "; $chkfontpath -a $drakfont_dir/Type1";
     }
 
 
     
-    $interactive and  progress($pbar2, 0.25, _("done"));
+    $interactive and  progress($pbar2, 0.01, _("done"));
+#    $interactive and $pbar2->update( 100 );
+
+
     $interactive and  progress($pbar3, 0.25, _("Suppress temporary Files"));
     rm_rf("$drakfont_dir/tmp/");
     print "\n\nretarting xfs......\n";
@@ -722,6 +724,13 @@ sub advanced_install {
     $adv_box->show_all();
 }
 
+# sub list_remove {
+# 	my($widget, $list) = @_;
+# 	my @to_remove;
+# 	push @to_remove, $list->child_position($_) foreach($list->selection);
+# 	splice @install, $_, 1 foreach(reverse sort @to_remove);
+# 	$list->remove_items($list->selection);
+# }
 
 
 sub show_path_list {
@@ -737,8 +746,6 @@ sub show_path_list {
 # 	splice @install, $_, 1 foreach(reverse sort @to_remove);
 # 	$list->remove_items($list->selection);
 }
-
-
 
 sub uninstall {
     my $scrolled_window;
@@ -757,32 +764,33 @@ sub uninstall {
     gtkpack($font_box,
 	    $uninst_box = gtkpack_(new Gtk::VBox(0,10),
 				1, gtkpack_(new Gtk::HBox(0,4),
-					    1, gtkpack_(new Gtk::HBox(0,0),
+					    1, gtkpack_(new Gtk::VBox(0,0),
 							1, $scrolled_window2 =new Gtk::ScrolledWindow( undef, undef ),
 							$scrolled_window2->set_usize( 210, 300 ),
 							$scrolled_window2->add_with_viewport( $list_path ),
-#							$list_path->signal_connect( 'selection_changed' => sub { \&show_path_list} ),
 							$list_path->signal_connect( 'selection_changed'   => sub {
-										    $path_list->add(gtkshow(new Gtk::ListItem($list_path->selection()))) } ),
+							    $path_list->add(gtkshow(new Gtk::ListItem($list_path->selection()))  ); } ),
+#				     $path_list->add(gtkshow(new Gtk::ListItem($_)) ) foreach ($list_path->selection) } ),
 							),
-					    1, gtkpack_(new Gtk::HBox(0,2),
+					    1, gtkpack_(new Gtk::VBox(0,2),
 							1, $scrolled_window =new Gtk::ScrolledWindow( undef, undef ),
 							$scrolled_window->set_usize( 210, 300 ),
 							$scrolled_window->add_with_viewport( $path_list ),
 							),
 					    ),
-					    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					  gtksignal_connect(new Gtk::Button(_("Unselected All")), clicked => sub { }),
-					  gtksignal_connect(new Gtk::Button(_("Selected All")), clicked => \&list_remove, $path_list),
-					  gtksignal_connect(new Gtk::Button(_("Remove List")), clicked => sub { 
-					      ${$central_widget}->destroy(); import_status_uninstall() }),
-					  ),
-				)
+				   0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					     gtksignal_connect(new Gtk::Button(_("Unselected All")), clicked => 
+							       sub {$path_list->unselect_all (); }),
+					     gtksignal_connect(new Gtk::Button(_("Selected All")), clicked => 
+							       sub {$path_list->select_all (); } ),
+					     gtksignal_connect(new Gtk::Button(_("Remove List")), clicked => 
+							       sub { ${$central_widget}->destroy(); import_status_uninstall() }),
+					     ),
+				   )
 	    );
     $central_widget = \$uninst_box;
     $uninst_box->show_all();
 }
-
 
 sub import_status {
     my $table;
@@ -793,7 +801,7 @@ sub import_status {
     gtkpack($font_box,
 	    $table = create_packtable({ col_spacings => 10, row_spacings => 50},
    ["",""], 
-   [_("Initial tests"), $pbar, $pbar->{label} = new Gtk::Label(' ' )],
+   [_("Initials tests"), $pbar, $pbar->{label} = new Gtk::Label(' ' )],
    [_("Copy all fonts on your system"), $pbar1,$pbar1->{label} = new Gtk::Label(' ' ) ],
    [_("Install & convert Fonts"), $pbar2, $pbar2->{label} = new Gtk::Label(' ' ) ],
    [_("Post Install"), $pbar3,$pbar3->{label} = new Gtk::Label(' ' ) ],
@@ -813,7 +821,7 @@ sub import_status_uninstall {
     gtkpack($font_box,
 	    $table = create_packtable({ col_spacings => 10, row_spacings => 50},
    ["",""], ["",""],
-   [_("Initial tests"), $pbar, $pbar->{label} = new Gtk::Label(' ' )],
+   [_("Initials tests"), $pbar, $pbar->{label} = new Gtk::Label(' ' )],
    [_("Remove fonts on your system"), $pbar1,$pbar1->{label} = new Gtk::Label(' ' ) ],
    [_("Post Uinnstall"), $pbar2,$pbar2->{label} = new Gtk::Label(' ' ) ],
 			    ),
