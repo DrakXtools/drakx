@@ -44,7 +44,10 @@ clean:
 	rm -rf auto ../drakxtools.tar.bz2 *.bak
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
-check:
+check_pms_encoding:
+	@for i in $(ALLPMS); do charset=ascii; grep -q 'use utf8' $$i && charset=utf8; iconv -f $$charset -t $$charset $$i >/dev/null || { echo "bad $$charset character in $$i"; exit 1; }; done
+
+check: check_pms_encoding
 	perl -I. -Mlang -e 'lang::check'
 	perl -I. -Mkeyboard -e 'keyboard::check'
 
