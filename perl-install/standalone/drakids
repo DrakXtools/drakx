@@ -1,0 +1,76 @@
+#!/usr/bin/perl
+
+use strict;
+use lib qw(/usr/lib/libDrakX);
+use common;
+
+use Socket;
+use mygtk2 qw(gtknew);
+use POSIX qw(strftime);
+use network::activefw;
+
+use Gtk2::SimpleList;
+
+use ugtk2 qw(:create :helpers :wrappers);
+
+my $activefw = activefw->new(sub {
+    my ($con, $msg) = @_;
+    handle_blacklist($msg->get_args_list) if
+      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
+      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
+      $msg->get_member eq "Blacklist";
+});
+
+my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
+                                      N("Date") => 'text',
+                                      N("Attacker") => 'text',
+                                      N("Attack type") => 'text',
+                                      N("Service") => 'text',
+                                      N("Network interface") => 'text',
+                                      N("Protocol") => 'text',
+                                  );
+$blacklist->get_selection->set_mode ('multiple');
+
+my $w = ugtk2->new(N("Active Firewall : Blacklist"));
+gtkpack($w->{window},
+        gtknew('VBox', spacing => 5, children => [
+            1, gtknew('ScrolledWindow', width => 600, height => 400, child => $blacklist),
+            0, gtknew('HBox', children_tight => [
+                gtknew('Button', text => N("Remove from blacklist"),
+                       clicked => \&unblacklist)
+            ]),
+        ]));
+init_blacklist();
+$w->show;
+Gtk2->main;
+
+ugtk2::exit(0);
+
+
+sub init_blacklist {
+    my @packets = $activefw->get_blacklist;
+    while (my @blacklist = splice(@packets, 0, 8)) {
+        handle_blacklist(@blacklist);
+    }
+}
+
+sub handle_blacklist {
+    my ($timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
+    push @{$blacklist->{data}}, [
+        $addr,
+        activefw::format_date($timestamp),
+        activefw::resolve_address(activefw::get_ip_address($addr)),
+        $prefix eq 'SCAN' ? N("Port scanning") :
+        $prefix eq 'SERV' ? N("Service attack") :
+        $prefix eq 'PASS' ? N("Password cracking") :
+        '',
+        activefw::get_service($port) || '',
+        $indev,
+        $protocol || '',
+    ];
+}
+
+sub unblacklist {
+    my @addr = uniq(map { $blacklist->{data}->[$_]->[0] } $blacklist->get_selected_indices);
+    $activefw->unblacklist($_) foreach @addr;
+}
