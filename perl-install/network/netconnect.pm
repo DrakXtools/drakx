@@ -15,29 +15,20 @@ use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_fil
 my %conf;
 
 sub detect {
-    my ($auto_detect, $_net_install) = @_;
+    my ($auto_detect) = @_;
     my $isdn = {};
     require network::isdn;
-    network::isdn->import;
-    isdn_detect_backend($isdn);
+    network::isdn::isdn_detect_backend($auto_detect->{isdn});
     $auto_detect->{isdn}{$_} = $isdn->{$_} foreach qw(description vendor id driver card_type type);
     $auto_detect->{isdn}{description} =~ s/.*\|//;
 
     modules::load_category('network/main|gigabit|usb');
     require network::ethernet;
-    network::ethernet->import;
-    my @all_cards = conf_network_card_backend();
-    foreach (@all_cards) {
-        $auto_detect->{lan}{$_->[0]} = $_->[1];
-    }
+    $auto_detect->{lan} = { map { $_->[0] => $_->[1] } network::ethernet::conf_network_card_backend() };
 
-    my $adsl = {};
     require network::adsl;
-    network::adsl->import;
-    $auto_detect->{adsl} = adsl_detect($adsl);
+    $auto_detect->{adsl} = network::adsl::adsl_detect();
 
-    require network::modem;
-    network::modem->import;
     my ($modem, @pci_modems) = detect_devices::getModem();
     $modem->{device} and $auto_detect->{modem} = $modem->{device};
     @pci_modems and $auto_detect->{winmodem}{$_->{driver}} = $_->{description} foreach @pci_modems;
@@ -113,7 +104,7 @@ If you don't want to use the auto detection, deselect the checkbox.
     set_profile($netcnx);
     if ($netc->{autodetection}) {
 	my $_w = $in->wait_message(N("Network Configuration Wizard"), N("Detecting devices..."));
-	detect($netc->{autodetect}, $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs"));
+	detect($netc->{autodetect});
     }
 
     my %net_conf_callbacks = (adsl => sub { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) },
@@ -152,7 +143,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 			 }
 			) or goto step_1;
 	   load_conf($netcnx, $netc, $intf);
-        foreach my $type (qw(modem winmodem isdn adsl cable lan)) {
+        foreach my $type (keys %net_conf_callbacks) {
             $conf{$type} and do {
                 #-PO here, "forward" is the standard gtk+ button for "next"; check what is displayed in your language
                 $in->ask_okcancel(N("Network Configuration Wizard"), N("We are now going to configure the %s connection.\n\n\nPress \"%s\" to continue.", translate($type), N("Next")), 1) or goto step_2;
@@ -277,28 +268,28 @@ fi
 
 sub set_profile {
     my ($netcnx) = @_;
-    system("/sbin/set-netprofile \"$netcnx->{PROFILE}\"");
-    log::explanations("Switching to \"$netcnx->{PROFILE}\" profile");
+    system(qq(/sbin/set-netprofile "$netcnx->{PROFILE}"));
+    log::explanations(qq(Switching to "$netcnx->{PROFILE}" profile));
 }
 
 sub save_profile {
     my ($netcnx) = @_;
-    system("/sbin/save-netprofile \"$netcnx->{PROFILE}\"");
-    log::explanations("Saving \"$netcnx->{PROFILE}\" profile");
+    system(qq(/sbin/save-netprofile "$netcnx->{PROFILE}"));
+    log::explanations(qq(Saving "$netcnx->{PROFILE}" profile));
 }
 
 sub del_profile {
     my ($profile) = @_;
     return if !$profile || $profile eq "default";
     rm_rf("$::prefix/etc/netprofile/profiles/$profile");
-    log::explanations("Deleting \"$profile\" profile ");
+    log::explanations(qq(Deleting "$profile" profile));
 }
 
 sub add_profile {
     my ($netcnx, $profile) = @_;
     return if !$profile || $profile eq "default" || member($profile, get_profiles());
-    system("/sbin/clone-netprofile \"$netcnx->{PROFILE}\" \"$profile\"");
-    log::explanations("Creating \"$profile\" profile");
+    system(qq(/sbin/clone-netprofile "$netcnx->{PROFILE}" "$profile"));
+    log::explanations(qq("Creating "$profile" profile));
 }
 
 sub get_profiles() {

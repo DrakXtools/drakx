@@ -99,8 +99,8 @@ sub adsl_ask_info {
     ask_info2($adsl, $netc);
 }
 
-sub adsl_detect {
-    my ($adsl) = @_;
+sub adsl_detect() {
+    my ($adsl) = {};
     require detect_devices;
     $adsl->{speedtouch} = detect_devices::getSpeedtouch();
     $adsl->{sagem} = detect_devices::getSagem();
