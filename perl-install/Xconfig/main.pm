@@ -16,9 +16,14 @@ use any;
 sub configure_monitor {
     my ($in, $raw_X) = @_;
 
+    my $before = $raw_X->prepare_write;
     Xconfig::monitor::configure($in, $raw_X) or return;
-    $raw_X->write;
-    'config_changed';
+    if ($raw_X->prepare_write ne $before) {
+	$raw_X->write;
+	'config_changed';
+    } else {
+	'';
+    }
 }
 
 sub configure_resolution {
@@ -26,9 +31,14 @@ sub configure_resolution {
 
     my $card = Xconfig::card::from_raw_X($raw_X);
     my $monitor = Xconfig::monitor::from_raw_X($raw_X);
+    my $before = $raw_X->prepare_write;
     Xconfig::resolution_and_depth::configure($in, $raw_X, $card, $monitor) or return;
-    $raw_X->write;
-    'config_changed';
+    if ($raw_X->prepare_write ne $before) {
+	$raw_X->write;
+	'config_changed';
+    } else {
+	'';
+    }
 }
 
 
@@ -134,11 +144,15 @@ sub configure_chooser {
 	monitor => $raw_X->get_monitors && Xconfig::monitor::from_raw_X($raw_X),
 	resolution => scalar eval { $raw_X->get_resolution },
     };
-    my ($ok, $modified) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X);
+    my $before = $raw_X->prepare_write;
+    my ($ok) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X);
 
-    $modified && may_write($in, $raw_X, $X, $ok) or return;
-
-    'config_changed';
+    if ($raw_X->prepare_write ne $before) {
+	may_write($in, $raw_X, $X, $ok) or return;
+	'config_changed';
+    } else {
+	'';
+    }
 }
 
 sub configure_everything_or_configure_chooser {

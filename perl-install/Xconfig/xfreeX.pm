@@ -26,6 +26,10 @@ sub write {
     rename $file, "$file.old";
     Xconfig::parse::write_XF86Config($raw_X, $file);
 }
+sub prepare_write {
+    my ($raw_X) = @_;
+    join('', Xconfig::parse::prepare_write_XF86Config($raw_X));
+}
 
 
 my @monitor_fields = qw(VendorName ModelName HorizSync VertRefresh);

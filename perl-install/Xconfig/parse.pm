@@ -13,9 +13,14 @@ sub read_XF86Config {
     $raw_X;
 }
 
+sub prepare_write_XF86Config {
+    my ($raw_X) = @_;
+    map { raw_to_string(before_to_string({ %$_ }, 0)) } @$raw_X;
+}
+
 sub write_XF86Config {
     my ($raw_X, $file) = @_;
-    my @blocks = map { raw_to_string(before_to_string({ %$_ }, 0)) } @$raw_X;
+    my @blocks = prepare_write_XF86Config($raw_X);
     @blocks ? output($file, @blocks) : unlink $file;
 }
 

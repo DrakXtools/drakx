@@ -20,6 +20,10 @@ sub write {
     $both->{xfree3} ? $both->{xfree3}->write($o_xfree3_file) : unlink($o_xfree3_file);
     $both->{xfree4} ? $both->{xfree4}->write($o_xfree4_file) : unlink($o_xfree4_file);
 }
+sub prepare_write {
+    my ($both) = @_;
+    ($both->{xfree4} || $both->{xfree3})->prepare_write;
+}
 
 sub empty_config {
     my ($class) = @_;
