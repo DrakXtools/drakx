@@ -441,10 +441,11 @@ sub ask_fromW {
 	    $set = sub { $w->child->set(may_apply($e->{format}, $_[0])) };
 	    $width = length may_apply($e->{format}, ${$e->{val}});
 	} elsif ($e->{type} eq 'range') {
-	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
+	    my $want_scale = !$::expert;
+	    my $adj = Gtk2::Adjustment->new(${$e->{val}}, $e->{min}, $e->{max} + ($want_scale ? 1 : 0), 1, ($e->{max} - $e->{min}) / 10, 1);
 	    $adj->signal_connect(value_changed => $changed);
-	    $w = Gtk2::HScale->new($adj);
-	    $w->set_size_request(200, -1);
+	    $w = $want_scale ? Gtk2::HScale->new($adj) : Gtk2::SpinButton->new($adj, 10, 0);
+	    $w->set_size_request($want_scale ? 200 : 100, -1);
 	    $w->set_digits(0);
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $set = sub { $adj->set_value($_[0]) };
