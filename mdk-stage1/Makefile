@@ -39,7 +39,7 @@ INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\"
 else
 INITSRC = init.c
-INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\"
+INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(DIETLIBC_INCLUDES)
 endif
 
 INITOBJS = $(subst .c,.o,$(INITSRC))
@@ -175,7 +175,7 @@ $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
 	$(COMPILE) $(GLIBC_INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
 $(INITOBJS): %.o: %.c
-	$(COMPILE) $(INIT_DEFS) $(DIETLIBC_INCLUDES) -c $<
+	$(COMPILE) $(INIT_DEFS) -c $<
 
 .c.o: .depend
 	$(COMPILE) $(GLIBC_INCLUDES) $(PCMCIA_DEFS) -c $<
