@@ -450,8 +450,8 @@ sub selectSupplMedia {
 		log::l("read suppl hdlist (via $suppl_method)");
 		$supplmedium->{prefix} = $url; #- for install_urpmi
 		if ($suppl_method eq 'ftp') {
-		    $url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!;
-		    $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
+		    $url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
+			and $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
 		}
 		$supplmedium->{selected} = 1;
 		$supplmedium->{method} = $suppl_method;
