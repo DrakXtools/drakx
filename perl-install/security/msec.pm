@@ -200,7 +200,7 @@ sub get_functions {
 
     my @system_list = qw(allow_autologin allow_issues allow_reboot allow_remote_root_login
                          allow_root_login allow_user_list allow_x_connections allow_xserver_to_listen
-                         authorize_services enable_at_crontab enable_console_log enable_libsafe
+                         authorize_services enable_at_crontab enable_console_log
                          enable_msec_cron enable_pam_wheel_for_su enable_password enable_security_check
                          enable_sulogin password_aging password_history password_length set_root_umask
                          set_shell_history_size set_shell_timeout set_user_umask);
