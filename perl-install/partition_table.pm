@@ -25,7 +25,7 @@ sub description {
     my ($hd) = @_;
     my $win = $hd->{device_windobe};
 
-    sprintf "%s%s (%s%s%s%s)", 
+    sprintf "%s%s (%s)", 
       $hd->{device}, 
       $win && " [$win:]", 
 	join(', ', 
