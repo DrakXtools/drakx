@@ -283,15 +283,17 @@ step_configuration:
 
 my $c;
 
-my %messages = (ipsec => N("configure %s", $ipsec_conf), racoon => N("configure %s", $racoon_conf));
+my %messages = (ipsec => N("Security Policies"), racoon => N("IKE daemon racoon"));
 
 if ($kernel_version > 2.5) {
 	$in->ask_from(N("Configuration file"),
-N("Welcome to the configuration files step !
+N("Configuration step !
 
-You can now configure the sections of these files.
+You need to define the Security Policies and then to 
+configure the automatic key exchange (IKE) daemon. 
+The KAME IKE daemon we're using is called 'racoon'.
 
-Which file would you like to configure ?\n"),
+What would you like to configure ?\n"),
 		      [ { val => \$c, type => "list", list => [ keys %messages  ], format => sub { $messages{$_[0]} } } ]) or goto step_detectsetup;
 
 } else {
@@ -519,7 +521,7 @@ or change the name of the section.\n"));
 
 #- add ---- kernel 2.6 part -------------------------------
 
-	my $section = { secure_policy => 'spdadd',
+	my $section = { command => 'spdadd',
 			src_range => 'src_network_address',
 			dst_range => 'dest_network_address',
 			upperspec => 'any',
@@ -533,24 +535,11 @@ or change the name of the section.\n"));
 
 step_add_section_ipsec_conf_k26:
 
-	$in->ask_from('',
-N("Your %s file has several sections, or connections.\n
-You can now add a new section.
-Choose continue when you are done to write the data.\n", $ipsec_conf),
-	[	{ label => N("Secure policy"), val => \$section->{secure_policy}, list => [ 'spdadd' ], allow_empty_list => 1 },
-		{ label => N("Source IP range"), val => \$section->{src_range}, type => 'entry' },
-		{ label => N("Destination IP range"), val => \$section->{dst_range}, type => 'entry' },
-		{ label => N("Upper-layer protocol"), val => \$section->{upperspec}, list =>  [ 'any' ], allow_empty_list => 1 },
-		{ label => N("Flag"), val => \$section->{flag}, list => [ '-P' ], allow_empty_list => 1 },
-		{ label => N("Direction"), val => \$section->{direction}, list => [ 'in', 'out' ] },
-		{ label => N("IPsec policy"), val => \$section->{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
-		{ label => N("Protocol"), val => \$section->{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
-		{ label => N("Mode"), val => \$section->{mode}, list => [ 'tunnel', 'transport', 'any' ] },
-		{ label => N("Source/destination"), val => \$section->{src_dest}, type => 'entry' },
-		{ label => N("Level"), val => \$section->{level}, list => [ 'required', 'default', 'use', 'unique' ] },
-		  ]
-) or goto step_configure_ipsec_conf;
-	
+	ask_info3('',
+N("Add a Security Policy.\n
+You can now add a Secutiy Policy.\n
+Choose continue when you are done to write the data.\n"), $section)  or goto step_configure_ipsec_conf;
+
 	$existing_section = network::ipsec::already_existing_section_ipsec_conf($section->{src_dest}, $ipsec, $kernel_version);
 
 	if ($existing_section eq "already existing") {
@@ -565,8 +554,6 @@ or change the name of the section.\n"));
 	network::ipsec::add_section_ipsec_conf($section, $ipsec);
 
 	goto step_configure_ipsec_conf;
-
-
 };
 
 #- edit ---------------------
@@ -642,23 +629,10 @@ Choose continue when you are done to write the data.\n", $ipsec_conf),
 
 } else {
 
-	$in->ask_from('',
-N("Your %s file has several sections, or connections.\n
-You can now edit the chosen section.
-Choose continue when you are done to write the data.\n", $ipsec_conf),
-	[	{ label => N("Secure policy"), val => \$ipsec->{$number}{secure_policy}, list => [ 'spdadd' ], allow_empty_list => 1 },
-		{ label => N("Source IP range"), val => \$ipsec->{$number}{src_range}, type => 'entry' },
-		{ label => N("Destination IP range"), val => \$ipsec->{$number}{dst_range}, type => 'entry' },
-		{ label => N("Upper-layer protocol"), val => \$ipsec->{$number}{upperspec}, list =>  [ 'any' ], allow_empty_list => 1 },
-		{ label => N("Flag"), val => \$ipsec->{$number}{flag}, list => [ '-P' ], allow_empty_list => 1 },
-		{ label => N("Direction"), val => \$ipsec->{$number}{direction}, list => [ 'in', 'out' ] },
-		{ label => N("IPsec policy"), val => \$ipsec->{$number}{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
-		{ label => N("Protocol"), val => \$ipsec->{$number}{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
-		{ label => N("Mode"), val => \$ipsec->{$number}{mode}, list => [ 'tunnel', 'transport', 'any' ] },
-		{ label => N("Source/destination"), val => \$ipsec->{$number}{src_dest}, type => 'entry' },
-		{ label => N("Level"), val => \$ipsec->{$number}{level}, list => [ 'required', 'default', 'use', 'unique' ] },
-		  ]
-) or goto step_configure_ipsec_conf;
+	ask_info3('',
+N("Edit a Security Policy.\n
+You can now add a Secutiy Policy.\n
+Choose continue when you are done to write the data.\n"), $ipsec->{$number})  or goto step_configure_ipsec_conf;
 	
 goto step_configure_ipsec_conf;
 
@@ -971,3 +945,24 @@ sub ask_info2 {
                      { label => N("DH group"), val => \$proposal_remote_section->{5}[1], list => [ qw(modp768 modp1024 modp1536) ], },
                    ]);
 }
+
+sub ask_info3 {
+    my ($title, $text, $section) = @_;
+	$in->ask_from('',
+N("Add a Security Policy.\n
+You can now add a new Security Policy.\n
+Choose continue when you are done to write the data.\n"),
+	[	{ label => N("Command"), val => \$section->{command}, list => [ 'spdadd' ], allow_empty_list => 1 },
+		{ label => N("Source IP range"), val => \$section->{src_range}, type => 'entry' },
+		{ label => N("Destination IP range"), val => \$section->{dst_range}, type => 'entry' },
+		{ label => N("Upper-layer protocol"), val => \$section->{upperspec}, list =>  [ 'any' ], allow_empty_list => 1 },
+		{ label => N("Flag"), val => \$section->{flag}, list => [ '-P' ], allow_empty_list => 1 },
+		{ label => N("Direction"), val => \$section->{direction}, list => [ 'in', 'out' ] },
+		{ label => N("IPsec policy"), val => \$section->{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
+		{ label => N("Protocol"), val => \$section->{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
+		{ label => N("Mode"), val => \$section->{mode}, list => [ 'tunnel', 'transport', 'any' ] },
+		{ label => N("Source/destination"), val => \$section->{src_dest}, type => 'entry' },
+		{ label => N("Level"), val => \$section->{level}, list => [ 'require', 'default', 'use', 'unique' ] },
+		  ]);
+}
+
