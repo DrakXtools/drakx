@@ -5,6 +5,7 @@ use strict;
 
 use common;
 use devices;
+use detect_devices;
 use log;
 use c;
 

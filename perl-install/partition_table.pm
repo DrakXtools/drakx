@@ -1,8 +1,8 @@
 package partition_table; # $Id$
 
-#use diagnostics;
-#use strict;
-#use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fields2save);
+use diagnostics;
+use strict;
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fields2save @bad_types);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -13,6 +13,7 @@ package partition_table; # $Id$
 
 use common;
 use partition_table_raw;
+use detect_devices;
 use log;
 
 @important_types = ('Linux native', 'Linux swap', 
