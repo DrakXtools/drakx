@@ -152,3 +152,9 @@ if (!-e "$::prefix/usr/share/speedtouch/mgmt.o") {
     symlink '/etc/mgmt.o', "$::prefix/usr/share/speedtouch/mgmt.o";
 }
 
+#- CD-based applications
+substInFile {
+    foreach qw(kaudiocreator kscd) {
+        s|.*command="$_".*||;
+    }
+} "$::prefix/usr/lib/menu/simplified/mandrake_desk";
