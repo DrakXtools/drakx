@@ -643,70 +643,43 @@ sub help() {
 
 sub appli_choice() {
     my $choice_box;
-    my $text = Gtk2::TextView->new;
+    my %checks;
     gtkpack($font_box,
-            $choice_box = gtkpack_(Gtk2::HBox->new(0, 10), 
-                                   0, Gtk2::VBox->new(0, 10), 
-                                   0, Gtk2::VBox->new(0, 10), 
-                                   1, gtkpack_(Gtk2::VBox->new(0, 10), 
-                                               1, gtkpack_(Gtk2::VBox->new(0, 10), 
-                                                           1, gtkpack(Gtk2::HBox->new(0, 10), 
-                                                                      Gtk2::HBox->new(0, 10),
-                                                                      N("Choose the applications that will support the fonts:"),
-                                                                      Gtk2::HBox->new(0, 10),
-                                                                     ), 
-                                                           0, Gtk2::HBox->new(0, 10), 
-                                                           0, gtkpack_(Gtk2::HBox->new(0, 10), 
-                                                                       0, N("Ghostscript"), 
-                                                                       1, Gtk2::HBox->new(0, 10), 
-                                                                       0, my $check11 = Gtk2::CheckButton->new(),
-                                                                      ), 
-                                                           0, gtkpack_(Gtk2::HBox->new(0, 10), 
-                                                                       0, N("StarOffice"), 
-                                                                       1, Gtk2::HBox->new(0, 10), 
-                                                                       0, my $check22 = Gtk2::CheckButton->new(),
-                                                                      ), 
-                                                           0, gtkpack_(Gtk2::HBox->new(0, 10), 
-                                                                       0, N("Abiword"), 
-                                                                       1, Gtk2::HBox->new(0, 10), 
-                                                                       0, my $check33 = Gtk2::CheckButton->new(),
-                                                                      ), 
-                                                           0, gtkpack_(Gtk2::HBox->new(0, 10), 
-                                                                       0, N("Generic Printers"), 
-                                                                       1, Gtk2::HBox->new(0, 10), 
-                                                                       0, my $check44 = Gtk2::CheckButton->new(),
-                                                                      ),
-                                                          ), 
-                                               0, gtkpack_(Gtk2::HBox->new(0, 10), 
-                                                           1, gtktext_insert(gtkset_editable($text, 0),
-                                                                             [ [ N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.") ] ]
-                                                                            ), 
-                                                           0, Gtk2::VBox->new(0, 10),
-                                                          ), 
-                                               0, gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'spread'),
-                                                         gtksignal_connect(Gtk2::Button->new(N("OK")),
-                                                                           clicked => sub {
-                                                                               $$central_widget->destroy;
-                                                                               import_status();
-                                                                           }),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Cancel")),
-                                                                           clicked => sub {
-                                                                               @install = ();
-                                                                               $$central_widget->destroy;
-                                                                               create_fontsel();
-                                                                           }),
-                                                        ),
+            $choice_box = gtkpack__(Gtk2::VBox->new, 
+                                    N("Choose the applications that will support the fonts:"),
+                                    Gtk2::WrappedLabel->new(N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.")),
+                                    (map {
+                                        gtkpack_(Gtk2::HBox->new, 
+                                                 0, $_->[0], 
+                                                 1, Gtk2::HBox->new, 
+                                                 0, $checks{$_->[1]} = Gtk2::CheckButton->new,
+                                                ), 
+                                            } ([ N("Ghostscript"), "11" ],
+                                               [ N("StarOffice"), "22" ],
+                                               [ N("Abiword"), "33" ],
+                                               [ N("Generic Printers"), "44" ],
                                               ), 
-                                   0, Gtk2::VBox->new(0, 10), 
-                                   0, Gtk2::VBox->new(0, 10),
-                                  ),
+                                    ),
+                                    gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'spread'),
+                                           gtksignal_connect(Gtk2::Button->new(N("OK")),
+                                                             clicked => sub {
+                                                                 $$central_widget->destroy;
+                                                                 import_status();
+                                                             }),
+                                           gtksignal_connect(Gtk2::Button->new(N("Cancel")),
+                                                             clicked => sub {
+                                                                 @install = ();
+                                                                 $$central_widget->destroy;
+                                                                 create_fontsel();
+                                                             }),
+                                          ),
+                                   ),
            );
-    foreach ([ $check11, \$gs ], [ $check22, \$so ], [ $check33, \$abi ], [ $check44, \$printer ]) {
+    foreach ([ $checks{11}, \$gs ], [ $checks{22}, \$so ], [ $checks{33}, \$abi ], [ $checks{44}, \$printer ]) {
         my $ref = $_->[1];
         gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 });
     }
     $central_widget = \$choice_box;
-    $font_box->show_all;
 }
 
 my $select_font_msg;
