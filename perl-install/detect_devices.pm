@@ -791,11 +791,11 @@ sub hasSMP() {
 }
 sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
 
-my @dmis;
+my (@dmis, $dmidecode_already_runned);
 
 # we return a list b/c several DMIs have the same name:
 sub dmidecode() {
-	return @dmis if @dmis;
+	return @dmis if $dmidecode_already_runned;
 
 	foreach (run_program::get_stdout('dmidecode')) {
 	    if (/^\t\t(.*)/) {
@@ -807,6 +807,7 @@ sub dmidecode() {
 		push @dmis, { name => $s };
 	    }
 	}
+     $dmidecode_already_runned = 1;
     @dmis;
 }
 
