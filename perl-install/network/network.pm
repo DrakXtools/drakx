@@ -421,7 +421,7 @@ You may also enter the IP address of the gateway if you have one.") . N("
 Enter a Zeroconf host name without any dot if you don't
 want to use the default host name."),
 			       [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
-                                 { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
+                                 { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME}, disabled => sub { is_dynamic_ip($intf) } },
 				 { label => N("DNS server"), val => \$netc->{dnsServer} },
 				 { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
 				    if_(@devices > 1,
