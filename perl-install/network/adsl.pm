@@ -13,7 +13,7 @@ use MDK::Common::Globals "network", qw($in $prefix);
 
 
 sub get_wizard {
-    my ($wiz, $_type) = @_;
+    my ($wiz) = @_;
     my $netc = $wiz->{var}{netc};
 
     my %l = (
