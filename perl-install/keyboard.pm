@@ -500,21 +500,24 @@ sub setup {
     my $kmap = keyboard2kmap($keyboard) or return;
 
     log::l("loading keymap $kmap");
-    if (-x '/bin/loadkeys') {
-	run_program::run('loadkeys', $kmap);
-    } elsif (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
+    if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
 	load(scalar cat_($f));
-    } else {
+    } elsif (-e (my $packed_kmaps = "$ENV{SHARE_PATH}/keymaps.cz2")) {
 	my $kid = bg_command->new(sub {
 	    eval {
 		require packdrake;
-		my $packer = new packdrake("$ENV{SHARE_PATH}/keymaps.cz2", quiet => 1);
+		my $packer = new packdrake($packed_kmaps, quiet => 1);
 		$packer->extract_archive(undef, "$kmap.bkmap");
 	    };
 	});
 	local $/ = undef;
 	eval { my $fd = $kid->{fd}; load(join('', <$fd>)) };
+    } elsif (-x '/bin/loadkeys') {
+	run_program::run('loadkeys', $kmap);
+    } else {
+	log::l("ERROR: can't load keymap");
     }
+
     if (-x "/usr/X11R6/bin/setxkbmap") {
 	setxkbmap($keyboard);
     } else {
