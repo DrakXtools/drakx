@@ -30,7 +30,6 @@ use log;
 use lang;
 use Digest::MD5 qw(md5_hex);
 
-my @ALLOWED_LANGS = qw(en_US fr es it de nl);
 my $key_disabled;
 
 my ($using_existing_user_config, $using_existing_host_config);
@@ -214,7 +213,6 @@ drakx_stuff:
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
     delete $o->{authentication}{shadow};
 
-    member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
 sub lomount_clp {

@@ -3,8 +3,11 @@
 use lib qw(../perl-install);
 use common;
 use lang;
+use Getopt::Long;
 
-my $prefix = '/tmp/live_tree';
+GetOptions(u => \$un_build) or die '';
+
+my $prefix = $ARGV[0] || `make get_dest_livetree`;
 my @ALLOWED_LANGS = split(' ', first(cat_('move.pm') =~ /ALLOWED_LANGS = qw\((.*)\)/));
 
 sub create_light_tree {
@@ -14,9 +17,9 @@ sub create_light_tree {
     -e $light_prefix and die "you can't make_live_tree_boot since one already exists
 Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 
-    foreach my $orig (@$list) {
-	my $dest = $orig;
-	$dest =~ s|^$prefix|$light_prefix|;
+    foreach my $f (@$list) {
+	my $dest = "$light_prefix$f";
+	my $orig = "$prefix$f";
 
 	mkdir_p(dirname($dest));
 
@@ -37,9 +40,9 @@ sub create_totem_links {
     my $light_prefix = $prefix . '_' . $live_name;
 
     #- creating all the dirs, even when things are in the "always" tree
-    foreach my $orig (@$list) {
-	my $dest = $orig;
-	$dest =~ s|^$prefix|$light_prefix|;
+    foreach my $f (@$list) {
+	my $dest = "$light_prefix$f";
+	my $orig = "$prefix$f";
 	mkdir_p(dirname($dest)) if ! (-e $dest || -l $dest);
 
 	if (-l $orig) {
@@ -72,9 +75,9 @@ sub remove_light_tree {
 
     -d $light_prefix or return;
 
-    foreach my $dest (@$list) {
-	my $orig = $dest;
-	$orig =~ s|^$prefix|$light_prefix|;
+    foreach my $f (@$list) {
+	my $dest = "$prefix$f";
+	my $orig = "$light_prefix$f";
 
 	if (-l $orig) {
 	    unlink $orig;
@@ -136,7 +139,7 @@ foreach my $lang (@ALLOWED_LANGS) {
     remove_light_tree("always_i18n_$lang", []);
 }
 
-if (!@ARGV) {
+if (!$un_build) {
     create_light_tree('always', \@always_list);    
     create_light_tree('boot', \@boot_list);    
     create_light_tree('totem', \@totem_list);    

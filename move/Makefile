@@ -1,5 +1,5 @@
-
-DEST_LIVETREE = /tmp/live_tree
+DEST = /BIG/move
+DEST_LIVETREE = $(DEST)/live_tree
 DEST_STAGE2 = $(DEST_LIVETREE)/usr/lib/stage2
 
 ISO = /BIG/mdkmove.iso
@@ -26,6 +26,9 @@ endif
 
 default: install
 
+get_dest_livetree:
+	@echo -n $(DEST_LIVETREE)
+
 build: stage1 xwait runlevel_set
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
@@ -36,7 +39,6 @@ stage1:
 	cd .. ; ./make_boot_img move
 
 install:
-	 #- todo: make_boot_img alike to create boot volume from ../mdk-stage1/stage1-cdrom (isolinux mandatory since stock kernel is so big)
 	sudo cp -f $(STAGE1)/init-move $(DEST_LIVETREE)/sbin/init
 
 	$(MAKE) -C ../perl-install/share/po install NAME=libDrakX DATADIR=$(DEST_LIVETREE)/usr/share
@@ -57,7 +59,7 @@ install:
 
 	sudo rm -rf $(DEST_LIVETREE)/usr/share/langs
 	sudo mkdir -p $(DEST_LIVETREE)/usr/share/langs
-	sudo cp -f $(patsubst %, $(INSTALL)/pixmaps/langs/lang-%.png, $(LANG_FILES)) $(DEST_LIVETREE)/usr/share/langs
+	sudo cp -f $(INSTALL)/pixmaps/langs/lang-*.png $(DEST_LIVETREE)/usr/share/langs
 
 	 #- overwrite /usr/lib/libDrakX files of the live tree with those in CVS
 	(cd $(DEST_LIVETREE)/usr/lib/libDrakX ; find -name "*.pm") | egrep -v 'ctxhelp|drakfirsttime|xfree3|xfree4|xfreeX' | (cd $(INSTALL) ; sudo cpio -pLumd $(DEST_LIVETREE)/usr/lib/libDrakX/)
@@ -86,33 +88,33 @@ install:
 	sudo cp -f /tmp/version $(DEST_LIVETREE)/usr/share/VERSION
 
 live_tree_boot:
-	rm -f /tmp/live_tree*.clp
-	./make_live_tree_boot
+	rm -f $(DEST)/live_tree*.clp
+	./make_live_tree_boot $(DEST_LIVETREE)
 	tools/fix-fc-cache.pl $(DEST_LIVETREE)
-	$(MAKE) /tmp/live_tree_always.clp
-	$(MAKE) /tmp/live_tree_boot.clp
-	$(MAKE) /tmp/live_tree_totem.clp
-	-$(MAKE) /tmp/live_tree_nvidia.clp
-	$(MAKE) $(patsubst %, /tmp/live_tree_always_i18n_%.clp, $(LANG_FILES))
+	$(MAKE) $(DEST)/live_tree_always.clp
+	$(MAKE) $(DEST)/live_tree_boot.clp
+	$(MAKE) $(DEST)/live_tree_totem.clp
+	-$(MAKE) $(DEST)/live_tree_nvidia.clp
+	$(MAKE) $(patsubst %, $(DEST)/live_tree_always_i18n_%.clp, $(LANG_FILES))
 
 un_live_tree_boot:
 	./make_live_tree_boot -u
 	tools/fix-fc-cache.pl $(DEST_LIVETREE)
 
 iso: un_live_tree_boot build install live_tree_boot
-	rm -rf /tmp/iso /tmp/live_tree.clp
-	mkdir /tmp/iso
-	cp -a isolinux /tmp/iso
-	rm -rf /tmp/iso/isolinux/CVS
-	$(MAKE) /tmp/live_tree.clp
-	mv /tmp/*.clp /tmp/iso
+	rm -rf $(DEST)/iso $(DEST)/live_tree.clp
+	mkdir $(DEST)/iso
+	cp -a isolinux $(DEST)/iso
+	rm -rf $(DEST)/iso/isolinux/CVS
+	$(MAKE) $(DEST)/live_tree.clp
+	mv $(DEST)/*.clp $(DEST)/iso
 
-	touch /tmp/iso/isolinux/boot.cat
-	find /tmp/iso/isolinux -type f -printf '%p 100\n' > /tmp/iso.sort ; echo '/tmp/iso/live_tree_boot.clp 5' >> /tmp/iso.sort
+	touch $(DEST)/iso/isolinux/boot.cat
+	find $(DEST)/iso/isolinux -type f -printf '%p 100\n' > $(DEST)/iso.sort ; echo '$(DEST)/iso/live_tree_boot.clp 5' >> $(DEST)/iso.sort
 #	download version: MOVE10DO
 #	complete version: MOVE10IN
-	mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -P MandrakeSoft -V 'MandrakeMove' -volset MOVE10IN -b isolinux/isolinux.bin -c isolinux/boot.cat -sort /tmp/iso.sort -no-emul-boot -boot-load-size 4 -boot-info-table -o $(ISO) /tmp/iso
-	mv /tmp/iso/*.clp /tmp
+	mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -P MandrakeSoft -V 'MandrakeMove' -volset MOVE10IN -b isolinux/isolinux.bin -c isolinux/boot.cat -sort $(DEST)/iso.sort -no-emul-boot -boot-load-size 4 -boot-info-table -o $(ISO) $(DEST)/iso
+	mv $(DEST)/iso/*.clp $(DEST)
 	mkcd --addmd5 $(ISO)
 #	cdrecord -v -eject dev=0,0,0 blank=fast gracetime=2 speed=99 $(ISO)
 #	ftp://a:a@leia//BIG/mdkmove.iso
@@ -134,6 +136,6 @@ clean:
 	fi
 
 check_dirs:
-	for i in `cat data/*.dirs`; do grep /tmp/live_tree$$i/ data/*.list; done ||:
+	for i in `cat data/*.dirs`; do grep $(DEST_LIVETREE)$$i/ data/*.list; done ||:
 
 # perl tools/busy-files-accesses --no-link --no-dir --full-dirs 'data/always.dirs data/boot.dirs data/totem.dirs' --already-have data/always.list
