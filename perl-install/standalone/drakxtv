@@ -68,7 +68,7 @@ sub scan4channels() {
           );
 
         my $tbl;
-        my $locale = lang::read('', $>);
+        my $locale = lang::read($>);
         $locale->{country} =~ /$_/ and $tbl = $countries{$_} foreach keys %countries;
         if ($tbl) {
             $ftable_id = $tbl->[0];

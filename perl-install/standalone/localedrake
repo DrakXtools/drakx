@@ -21,7 +21,7 @@ if (defined $klang) {
     $klang or exit(-1);
     my $lang = member($klang, lang::list_langs()) ? $klang : 'en_US';
     my $country = member($kcountry, lang::list_countries()) ? $kcountry : 'US';
-    my $locale = lang::read('', $>);
+    my $locale = lang::read($>);
     $klang and $locale->{lang} = $lang;
     $kcountry and $locale->{country} = $country;
     lang::write('', $locale, $>, 'dont_touch_kde_files') if $apply;
@@ -31,7 +31,7 @@ if (defined $klang) {
     exit(0);
 }
 
-my $locale = lang::read('', $>);
+my $locale = lang::read($>);
 my $in = 'interactive'->vnew;
 
 sub select_language() {

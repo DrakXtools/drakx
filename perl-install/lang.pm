@@ -954,10 +954,9 @@ sub system_locales_to_ourlocale {
 }
 
 sub read {
-    my ($prefix, $user_only) = @_;
-    $prefix ||= "";
-    my ($f1, $f2) = ("$prefix$ENV{HOME}/.i18n", "$prefix/etc/sysconfig/i18n");
-    my %h = getVarsFromSh($user_only && -e $f1 ? $f1 : $f2);
+    my ($b_user_only) = @_;
+    my ($f1, $f2) = ("$::prefix$ENV{HOME}/.i18n", "$::prefix/etc/sysconfig/i18n");
+    my %h = getVarsFromSh($b_user_only && -e $f1 ? $f1 : $f2);
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
     
     if ($h{XIM_PROGRAM}) {
