@@ -358,8 +358,9 @@ sub choosePackagesTree {
 					      push(@firstchoice, pkgs::packageName($p)) :
 						push(@others,      pkgs::packageName($p));
 					}
-					$add_node->($_, $root                   ) foreach sort @firstchoice;
-					$add_node->($_, $root . '|' . _("Other")) foreach sort @others;
+					my $root2 = join('|', map { translate($_) } split('\|', $root));
+					$add_node->($_, $root2                   ) foreach sort @firstchoice;
+					$add_node->($_, $root2 . '|' . _("Other")) foreach sort @others;
 				    }
 				}
 			    },
