@@ -943,6 +943,7 @@ sub setRootPassword {
 	 title => N("Set root password"), 
 	 messages => N("Set root password"),
 	 cancel => ($o->{security} <= 2 && !$::corporate ? N("No password") : ''),
+	 focus_first => 1,
 	 callbacks => { 
 	     complete => sub {
 		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return (1,0);
