@@ -235,7 +235,6 @@ sub isRoamingRunning() {
 }
 
 sub UpdateRoaming() {
-	my $name = basename($roaming_daemon->{binary});
 	my $status = isRoamingRunning() ? "on" : "off";
 	$RoamStatus->set_text("Roaming: $status");
 	return FALSE; #- do not update again if launched on timeout
