@@ -60,7 +60,7 @@ sub configure_everything {
     $ok ||= $in->ask_yesorno('', _("Keep the changes?
 The current configuration is:
 
-%s", Xconfig::various::info($raw_X)));
+%s", Xconfig::various::info($raw_X, $card)));
 
     if ($ok) {
 	export_to_install_X($card, $monitor, $resolution);
