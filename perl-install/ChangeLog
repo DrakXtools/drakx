@@ -1,3 +1,47 @@
+2000-10-04  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (when_load): stricter regexp for $type is scsi or not
+	(so that scsi_mod with is scsi_raw doesn't get an alias
+	scsi_hostadapter)	
+
+	* detect_devices.pm (isLS120Drive): extend the regexp to include
+	"Caleb Technology - 144MB FDD UHD Floppy"
+
+	* detect_devices.pm (burners, IDEburners): reworked, renamed, now
+	works!	
+	* c/stuff.xs.pm (isBurner): created
+
+	* modules.pm (load_ide): make sure ide-cd is loaded!
+
+	* install_steps_interactive.pm (chooseGroups): the label and help
+	are now translated (at least will be), so use the translations
+
+2000-10-03  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile (DrakX.pot): added the to-be-translated from
+	compssUsers
+	* share/po/i18n_compssUsers: read the compssUsers's and output the
+	to-be-translated in po format
+
+	* log.pm (l): log to STDERR instead of STDOUT
+
+	* install_any.pm (loadO): use first floppy drive available (won't
+	help much though, as stage1 doesn't follow this...)
+
+2000-10-03  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
+
+2000-10-03  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (autologin): don't propose autologin in
+	security > 3
+
+	* common.pm (availableRamMB): HACK HACK if i810 and memsize,
+	returns 127
+
+	* bootloader.pm (suggest): don't use grub if more than 800MB
+
 2000-10-04  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* share/po/validate.pl: create this tool
@@ -23,6 +67,7 @@
 
 	* share/Cards+: fixed Savage2000 entry.
 
+>>>>>>> 1.300
 2000-10-03  DrakX <install@linux-mandrake.com>
 
 	* snapshot uploaded

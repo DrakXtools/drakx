@@ -43,30 +43,34 @@ sub ls120s() { grep { $_->{type} =~ /.d/ && isLS120Drive($_) } get(); }
 sub usbfdus() { grep { $_->{type} =~ /.d/ && isUSBFDUDrive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
-    if (my @l2 = getIDEBurners()) {
+    if (my @l2 = grep { isBurner($_->{device}) } @l) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
 	my $nb = 1 + max(-1, map { $_->{device} =~ /scd (\d+)/x } @l);
-	foreach my $b (@l2) {
-	    log::l("getIDEBurners: $b");
-	    my ($e) = grep { $_->{device} eq $b } @l or next;
-	    $e->{device} = "scd" . $nb++;
+	foreach (@l2) {
+	    log::l("IDEBurner: $_->{device}");
+	    $_->{device} = "scd" . $nb++;
 	}
     }
     @l;
 }
+sub burners { grep { isBurner($_->{device}) } cdroms() }
+sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } getIDE() }
+
 sub floppies() {
     my @ide = map { $_->{device} } ls120s() and modules::load("ide-floppy");
     my @scsi = map { $_->{device} } usbfdus();
     (@ide, @scsi, grep { tryOpen($_) } qw(fd0 fd1));
 }
+sub floppy { first(floppies()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
-sub isZipDrive() { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
-#-sub isJazzDrive() { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
-sub isLS120Drive() { $_[0]->{info} =~ /LS-?120/ }
-sub isUSBFDUDrive() { $_[0]->{info} =~ /USB-?FDU/ }
-sub isRemovableDrive() { &isZipDrive || &isLS120Drive || &isUSBFDUDrive } #-or &isJazzDrive }
+sub isBurner { my $f = tryOpen($_[0]); $f && c::isBurner(fileno($f)) }
+sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
+#-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
+sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
+sub isUSBFDUDrive { $_[0]->{info} =~ /USB-?FDU/ }
+sub isRemovableDrive { &isZipDrive || &isLS120Drive || &isUSBFDUDrive } #-or &isJazzDrive }
 
 sub hasSCSI() {
     local *F;
@@ -134,9 +138,6 @@ sub getIDE() {
     }
     @idi;
 }
-
-#- do not work if ide-scsi is built in the kernel (aka not in module)
-sub getIDEBurners() { uniq map { m!ATAPI.* CD(-R|/RW){1,2} ! ? /(\w+)/ : () } syslog() }
 
 sub getCompaqSmartArray() {
     my @idi;

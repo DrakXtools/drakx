@@ -142,6 +142,14 @@ lseek_sector(fd, sector, offset)
   OUTPUT:
   RETVAL
 
+int
+isBurner(fd)
+  int fd
+  CODE:
+  RETVAL = ioctl(fd, CDROM_GET_CAPABILITY) & CDC_CD_RW;
+  OUTPUT:
+  RETVAL
+
 unsigned int
 total_sectors(fd)
   int fd

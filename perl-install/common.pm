@@ -571,7 +571,13 @@ sub typeFromMagic($@) {
 }
 
 sub availableMemory() { sum map { /(\d+)/ } grep { /^(MemTotal|SwapTotal):/ } cat_("/proc/meminfo"); }
-sub availableRamMB()  { 4 * int ((stat("/proc/kcore"))[7] / 1024 / 1024 / 4 + 0.5) }
+sub availableRamMB()  { 
+    my $s = 4 * int ((stat("/proc/kcore"))[7] / 1024 / 1024 / 4 + 0.5);
+    #- HACK HACK: if i810 and memsize
+    require detect_devices;
+    return $s - 1 if $s == 128 && grep { $_->{driver} =~ /i810/ } detect_devices::probeall();
+    $s;
+}
 
 sub setVirtual($) {
     my $vt = '';

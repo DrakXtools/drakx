@@ -1131,7 +1131,7 @@ sub autologin {
 	my %l; @l{@etc_pass_fields} = split ':';
 	$l{uid} > 500, $l{name};
     } cat_("$prefix/etc/passwd");
-    unless (($::auto && $o->{skiptest}) || !@users || $o->{authentication}{NIS}) {
+    unless (($::auto && $o->{skiptest}) || !@users || $o->{authentication}{NIS} || $ENV{SECURE_LEVEL} > 3) {
 	my $cmd = $prefix ? "chroot $prefix" : "";
 	my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
 	my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");

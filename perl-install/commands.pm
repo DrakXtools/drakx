@@ -563,7 +563,7 @@ sub bug {
     $h and die "usage: bug\nput file report.bug on fat formatted floppy\n";
 
     require detect_devices;
-    mount devices::make(first(detect_devices::floppies())), "/fd0";
+    mount devices::make(detect_devices::floppy()), "/fd0";
 
     sub header { "
 ********************************************************************************

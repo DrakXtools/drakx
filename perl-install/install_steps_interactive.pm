@@ -526,10 +526,10 @@ sub chooseGroups {
     my $all;
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
-			     help => sub { $o->{compssUsersDescr}{$_} },
+			     help => sub { translate($o->{compssUsersDescr}{$_}) },
 			     ref => sub { \$o->{compssUsersChoice}{$_} },
 			     icon2f => sub { "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default') . "_section.xpm" },
-			     label => sub { $size{$_} ? sprintf "$_ (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : translate($_) }, 
+			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : '') }, 
 			   },
 			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),
 			   $individual ? { list => [ _("Individual package selection") ], ref => sub { $individual } } : (),
@@ -1037,7 +1037,7 @@ sub generateAutoInstFloppy($) {
     my ($o) = @_;
     $::expert || $::g_auto_install or return;
 
-    my ($floppy) = detect_devices::floppies();
+    my $floppy = detect_devices::floppy();
     $o->ask_yesorno('', 
 _("Do you want to generate an auto install floppy for linux replication?"), $floppy) or return;
 

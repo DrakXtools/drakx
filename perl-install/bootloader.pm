@@ -316,7 +316,7 @@ wait %d seconds for default boot.
     my %l = (
 	     silo => bool(arch() =~ /sparc/),
 	     lilo => bool(arch() !~ /sparc/) && !isLoopback(fsedit::get_root($fstab)),
-	     grub => bool(arch() !~ /sparc/), #!isReiserfs(fsedit::get_root($fstab, 'boot')),
+	     grub => bool(arch() !~ /sparc/ && availableRamMB() < 800), #- don't use grub if more than 800MB
 	     loadlin => bool(arch() !~ /sparc/) && -e "/initrd/loopfs/lnx4win",
 	    );
     $lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
@@ -582,7 +582,6 @@ sub install_grub {
 	    }
 	}
     }
-    my $fd = first(detect_devices::floppies());
     my $hd = fsedit::get_root($fstab, 'boot')->{rootDevice};
 
     my $dev = dev2grub($lilo->{boot}, \%dev2bios);

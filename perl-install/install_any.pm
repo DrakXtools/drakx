@@ -287,7 +287,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "apmd" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
+	push @{$o->{default_packages}}, "cdrecord" if detect_devices::burners();
 	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("snd-slot-0") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
@@ -564,7 +564,7 @@ sub loadO {
     if ($f =~ /^(floppy|patch)$/) {
 	my $f = $f eq "floppy" ? 'Mandrake/base/auto_inst.cfg' : "patch";
 	unless ($::testing) {
-	    fs::mount(devices::make("fd0"), "/mnt", (arch() =~ /sparc/ ? "romfs" : "vfat"), 'readonly');
+	    fs::mount(devices::make(detect_devices::floppy()), "/mnt", (arch() =~ /sparc/ ? "romfs" : "vfat"), 'readonly');
 	    $f = "/mnt/$f";
 	}
 	-e $f or $f .= '.pl';

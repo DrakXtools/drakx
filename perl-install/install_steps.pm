@@ -822,8 +822,9 @@ sub miscellaneous {
     if (my $ramsize = $o->{miscellaneous}{memsize} and !/mem=/) {
 	$_ .= " mem=$ramsize";
     }
-    if (my @l = detect_devices::getIDEBurners() and !/ide-scsi/) {
-	$_ .= " " . join(" ", (map { "$_=ide-scsi" } @l), 
+    if (my @l = detect_devices::IDEburners() and !/ide-scsi/) {
+	$_ .= " " . join(" ", (map { "$_->{device}=ide-scsi" } @l), 
+			 #- in that case, also add ide-floppy otherwise ide-scsi will be used!
 			 map { "$_->{device}=ide-floppy" } detect_devices::ide_zips());
     }
     if ($o->{miscellaneous}{HDPARM}) {

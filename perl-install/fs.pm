@@ -342,7 +342,7 @@ sub write($$$$) {
 	open F, "> $prefix/etc/mtab" or die "error resetting $prefix/etc/mtab";
     }
 
-    my ($floppy) = detect_devices::floppies();
+    my $floppy = detect_devices::floppy();
 
     my @to_add = (
        $useSupermount ?

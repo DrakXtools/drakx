@@ -408,7 +408,7 @@ sub remove_alias($) {
 
 sub when_load {
     my ($name, $type, @options) = @_;
-    if ($type =~ /scsi/ || $type eq $type_aliases{scsi}) {
+    if ($type =~ /\bscsi\b/ || $type eq $type_aliases{scsi}) {
 	add_alias('scsi_hostadapter', $name), eval { load('sd_mod') };
     }
     $conf{$name}{options} = join " ", @options if @options;
@@ -612,13 +612,15 @@ sub get_that_type {
 }
 
 sub load_ide {
-    return; #- add it back to support Ultra66 on ide modules.
-    eval {
-	load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
-	delete $conf{"ide-mod"}{options};
-	load_multi(qw(ide-probe ide-probe-mod ide-disk ide-cd));
+    if (1) { #- add it back to support Ultra66 on ide modules.
+	load("ide-cd");
+    } else {
+	eval {
+	    load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
+	    delete $conf{"ide-mod"}{options};
+	    load_multi(qw(ide-probe ide-probe-mod ide-disk ide-cd));
+	}
     }
-
 }
 
 sub configure_pcmcia {
