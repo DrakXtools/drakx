@@ -368,18 +368,24 @@ sub get_holes($) {
 
 sub read_one($$) {
     my ($hd, $sector) = @_;
-
     my ($pt, $info);
-    #- SUN bioses may blank disk or refuse to load it if the partition is unknown.
-    my @parttype = arch() =~ /^sparc/ ? ('sun', 'bsd', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown');
-    foreach ('empty', @parttype) {
-	/unknown/ and die "unknown partition table format";
-	eval {
-	    bless $hd, "partition_table_$_";
-	    ($pt, $info) = $hd->read($sector);
-	    log::l("found a $_ partition table on $hd->{file}");
-	};
-	$@ or last;
+
+    #- it can be safely considered that the first sector is used to probe the partition table
+    #- but other sectors (typically for extended partition ones) have to match this type!
+    if (!$sector) {
+	my @parttype = arch() =~ /^sparc/ ? ('sun', 'bsd', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown');
+	foreach ('empty', @parttype) {
+	    /unknown/ and die "unknown partition table format";
+	    eval {
+		bless $hd, "partition_table_$_";
+		($pt, $info) = $hd->read($sector);
+		log::l("found a $_ partition table on $hd->{file} at sector $sector");
+	    };
+	    $@ or last;
+	}
+    } else {
+	#- keep current blessed object for that, this means it is neccessary to read sector 0 before.
+	($pt, $info) = $hd->read($sector);
     }
 
     my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();

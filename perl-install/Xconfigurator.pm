@@ -207,6 +207,11 @@ sub cardConfiguration(;$$$) {
 			  $card->{type} =~ /SiS / ||
 			  $card->{type} =~ /S3 ViRGE/ ||
 			  $card->{type} =~ /Intel 810/));
+    #- hack for ATI Mach64 card where two options should be used if using Utah-GLX.
+    if ($card->{type} =~ /ATI Mach64/) {
+	$card->{options}{no_font_cache} = $card->{Utah_glx};
+	$card->{options}{no_pixmap_cache} = $card->{Utah_glx};
+    }
 
     #- 3D acceleration configuration for X version 4 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
