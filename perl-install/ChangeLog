@@ -1,3 +1,16 @@
+2001/01/18  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: fixed obligation of relative large install, now
+	minimum is lesser.
+
+	* install_steps_gtk.pm: make sure no ratio above 1 can occur, still need
+	to see why as it happens
+	on install-abort-choices-install or
+	install-abort-choices-fs-format(none)-choices-install
+
+	* live_install: update live install to match /tmp/image instead of
+	/tmp/rhimage.
+
 2001/01/17  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps.pm, install_any.pm: fixes with /tmp/rhimage and
