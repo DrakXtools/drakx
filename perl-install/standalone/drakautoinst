@@ -84,6 +84,7 @@ fs::mount($dev, $mountdir, 'vfat', 0);
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
 my $o_old = $o;
+my %struct_gui;
 
 if (!$::isEmbedded && $in->isa('interactive::gtk')) {
     require ugtk2;
@@ -120,7 +121,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 		wacom => '',
 	      );
 
-    member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [$_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_\}") ] foreach (keys %$o);
+    member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [ $_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_\}") ] foreach keys %$o;
 
     my $W = ugtk2->new('$o edition');
     my @box_to_hide;
@@ -153,7 +154,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 					 $box->{vis} = 0;
 					 my @button_to_hide;
 					 0, gtksignal_connect(new Gtk2::Button($_), clicked => sub {
-								if($box->{vis}) { $box->hide(); $box->{vis} = 0; $notebook->set_page(0); }
+								if ($box->{vis}) { $box->hide(); $box->{vis} = 0; $notebook->set_page(0) }
 								else {
 								    $_->hide, $_->{vis}=0 foreach @box_to_hide;
 								    $box->show; $box->{vis} = 1;
@@ -172,7 +173,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 										    $button->get_active() and $function->()
 										});
 							      my $b;
-							      if ($_->[1] ne "") { $b = gtkcreate_img($_->[1])} else { $b = ()};
+                                         if ($_->[1] ne "") { $b = gtkcreate_img($_->[1]) } else { $b = () };
 							      gtksignal_connect(gtkadd($button,
 										       gtkpack__(new Gtk2::VBox(0,3),
 												 $b,
@@ -194,7 +195,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 		   ),
 	    0, new Gtk2::HSeparator,
 	    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk2::HButtonBox, 'end'), 5),
-		      gtksignal_connect(new Gtk2::Button(N("Accept")), clicked => sub { Gtk2->main_quit;  }),
+		      gtksignal_connect(new Gtk2::Button(N("Accept")), clicked => sub { Gtk2->main_quit }),
 		      gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { $o = $o_old; Gtk2->main_quit; quit_global($in, 0) }),
 		     )
 	   )
@@ -209,7 +210,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 #  	  );
 #    $notebook->set_tab_pos('left');
 #    $::isEmbedded and gtkflush();
-    $::isEmbedded and kill ('USR2', $::CCPID);
+    $::isEmbedded and kill('USR2', $::CCPID);
     $W->main;
 #    $W->destroy();
 }
@@ -249,7 +250,7 @@ sub quit_global {
 sub h2widget {
     my ($k, $label) = @_;
     my $w;
-    if(ref($k) =~ /HASH/) {
+    if (ref($k) =~ /HASH/) {
 	my $vb;
 	my @widget_list;
 	my $i = -1;
@@ -274,7 +275,7 @@ sub h2widget {
 						$field eq '' and return undef;
 						gtkpack__($vb,
 							  $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
-										      [ "$field : ", h2widget($ref_local_k, "$label\{$field\}")])
+										      [ "$field : ", h2widget($ref_local_k, "$label\{$field\}") ])
 							 );
 						@{$widget_list2} = @widget_list;
 					    },
@@ -285,7 +286,7 @@ sub h2widget {
 				  map { create_entry_element(${$k}{$_}, "$label\{$_\}", $_) } @list_keys
 				 )
 	}
-    } elsif(ref($k) =~ /ARRAY/) {
+    } elsif (ref($k) =~ /ARRAY/) {
 	my $vb;
 	my @widget_list;
 	my $i = -1;
@@ -315,7 +316,7 @@ sub h2widget {
 sub create_entry_element {
     my ($text, $value, $label) = @_;
     my $e;
-    if(ref $text =~ /HASH/) {
+    if (ref $text =~ /HASH/) {
 	return ([ "$label : ", h2widget($text, $label) ]);
     } elsif (ref $text =~ /ARRAY/) {
 	return ([ "$label : ", h2widget($text, $label) ]);
@@ -326,7 +327,7 @@ sub create_entry_element {
 	gtksignal_connect($e, changed => sub {
 			      my $exe = $e->{value} . "='" . $e->get_text() . "'";
 			      print "EXEC : $exe\n ";
-			      eval "$exe";
+			      eval $exe;
 			  });
     }
     [ $label ? "$label : " : "" , $e ]
@@ -344,14 +345,14 @@ sub control_buttons {
 				    $local_k{$_} = undef foreach keys %local_k;
 				    $i++;
 				    $local_gui->($vb, \@widget_list, \%local_k, $i) or $i--, return;
-				    $i>=0 and $button_remove->set_sensitive(1);
+				    $i >= 0 and $button_remove->set_sensitive(1);
 				}
 			       ),
 	      gtksignal_connect($button_remove = new Gtk2::Button(N("Remove the last item")), clicked => sub {
-				    $i>=0 or return;
+				    $i >= 0 or return;
 				    $widget_list[$i]->destroy();
 				    $i--;
-				    $i>=0 or $button_remove->set_sensitive(0);
+				    $i >= 0 or $button_remove->set_sensitive(0);
 				}
 			       )
 	     )
