@@ -66,7 +66,7 @@ sub load_category__prompt_for_more {
 
 	my $r = 'No';
 	$in->ask_from_({ messages => $msg,
-			 if_($category =~ m!disk/.*(sata|scsi|hardware_raid|usb|firewire)!, interactive_help_id => 'setupSCSI'),
+			 if_($category =~ m!disk/.*(ide|sata|scsi|hardware_raid|usb|firewire)!, interactive_help_id => 'setupSCSI'),
 		       }, 
 		       [ { list => [ N_("Yes"), N_("No"), N_("See hardware info") ], val => \$r, type => 'list', format => \&translate } ]);
 	if ($r eq "No") { return @l }
