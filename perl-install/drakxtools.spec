@@ -322,8 +322,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Wed Mar 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-26mdk
-- diskdrake: tag removable medias as noauto in fstab (pixel)
-  file (#9076)
+- diskdrake: tag removable medias as noauto in fstab file (pixel, #9076)
 - drakboot: add nolapic support option (planel)
 - drakclock (Robert Vojta, #9141):
   o display current timezone
