@@ -287,7 +287,7 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 sub translate {
     my ($s) = @_;
-    my ($lang) = $ENV{LANG} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || 'en';
+    my ($lang) = $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || $ENV{LANG} || 'en';
 
     require lang;
     foreach (split ':', $lang) {

@@ -1,3 +1,11 @@
+2000-04-29  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* my_gtk.pm: added call to Gtk->init; that makes 16 bit locales
+	text to be properly aligned (reported by Craig Chang
+	<craig_chang@taipei.siscomm.com.tw>)
+	* common.pm: now that po handling is correct, I changed the order
+	of reading variables so that it follows the standards ($LANGUAGE first)
+
 2000-04-28  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps*.pm: added support for selection of package during
