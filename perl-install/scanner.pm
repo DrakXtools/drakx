@@ -47,7 +47,7 @@ sub add2dll {
     return if member($_[0], chomp_(cat_("$_sanedir/dll.conf")));
     local *F;
     open F, ">>$_sanedir/dll.conf" or die "can't write SANE config in $_sanedir/dll.conf: $!";
-    print F $_[0];
+    print F "$_[0]\n";
     close F;
 }
 
