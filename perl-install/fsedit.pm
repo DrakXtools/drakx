@@ -206,7 +206,7 @@ sub hds {
 		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
 		} elsif (exists $hd->{usb_description} && ($hd->{pt_type} ||= typeOfPart($hd->{device}))) {
-		    #- non partitioned device
+		    #- non partitioned drive
 		    push @raw_hds, $hd;
 		    next;
 		} elsif ($o_ask_before_blanking && $o_ask_before_blanking->($hd->{device}, $err)) {
