@@ -91,7 +91,8 @@ sub setupBootloader {
     my ($in, $b, $hds, $fstab, $security, $prefix, $more) = @_;
 
     $more++ if $b->{bootUnsafe};
-
+	$more = 2 if arch() =~ /ppc/; #- no auto for PPC yet
+	
     if (!$::expert && $more < 1) {
 	#- automatic
     } elsif (!$::expert) {
@@ -102,6 +103,13 @@ sub setupBootloader {
 	    $b->{use_partition} = $in->ask_from_list_(_("SILO Installation"),
 						      _("Where do you want to install the bootloader?"),
 						      \@l, $l[$b->{use_partition}]) or return;
+	} elsif (arch() =~ /ppc/) {
+		if (defined $partition_table_mac'bootstrap_part) {
+			$b->{boot} = $partition_table_mac'bootstrap_part;
+			log::l("set bootstrap to $b->{boot}"); 
+		} else {
+			die "no bootstrap partition - yaboot.conf creation failed";
+		}
 	} else {
 	    my $boot = $hds->[0]{device};
 	    my $onmbr = "/dev/$boot" eq $b->{boot};
@@ -111,7 +119,7 @@ sub setupBootloader {
 				    ? $boot : fsedit::get_root($fstab, 'boot')->{device});
 	}
     } else {
-	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" : "setupBootloaderGeneral") unless $::isStandalone; #- TO MERGE ?
+	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' :"setupBootloaderGeneral") unless $::isStandalone; #- TO MERGE ?
 
 	my @silo_install_lang = (_("First sector of drive (MBR)"), _("First sector of boot partition"));
 	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
@@ -128,12 +136,15 @@ sub setupBootloader {
 									 and $b->{methods}{lilo} = "boot-menu.b" }),
 			   if_(exists $b->{methods}{loadlin},
 			       __("Boot from DOS/Windows (loadlin)") => sub { $b->{methods}{loadlin} = 1 }),
+			   if_(exists $b->{methods}{yaboot},
+			       __("Yaboot") => sub { $b->{methods}{yaboot} = 1 }),
 			  );
-	my $bootloader = arch() =~ /sparc/ ? __("SILO") : __("LILO with graphical menu");
+	my $bootloader = arch() =~ /sparc/ ? __("SILO") : arch() =~ /ppc/ ? __("Yaboot") : __("LILO with graphical menu");
 	my $profiles = bootloader::has_profiles($b);
 	my $memsize = bootloader::get_append('mem');
 
 	$b->{vga} ||= 'Normal';
+	if (arch !~ /ppc/) {
 	$in->ask_from_entries_refH('', _("Bootloader main options"), [
 { label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], },
     arch() =~ /sparc/ ? (
@@ -164,6 +175,19 @@ sub setupBootloader {
 				     0;
 				 }
 				) or return 0;
+	} else {
+	$in->ask_from_entries_refH('', _("Bootloader main options"), [
+	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], },	
+	{ label => _("Init Message"), val => \$b->{initmsg} },
+	{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
+	{ label => _("Open Firmware Delay"), val => \$b->{delay} },
+	{ label => _("Kernel Boot Timeout"), val => \$b->{timeout} },
+	{ label => _("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
+	{ label => _("Enable OF Boot?"), val => \$b->{enableofboot}, type => "bool" },
+	{ label => _("Default OS?"), val=> \$b->{defaultos}, list => [ 'linux', 'macos', 'macosx', 'darwin' ] },
+	]) or return 0;				
+	}
+	
 	$b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
 	$bootloaders{$bootloader} and $bootloaders{$bootloader}->();
 	#- at least one method
@@ -177,7 +201,7 @@ sub setupBootloader {
     }
 
     while ($::expert || $more > 1) {
-	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
+	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 	my $c;
 	$in->ask_from_entries_refH_powered( 
 		{
@@ -201,7 +225,8 @@ You can add some more or change the existing ones."),
 	    my @labels = map { $_->{label} } @{$b->{entries}};
 	    my $prefix;
 	    if ($in->ask_from_list_('', _("Which type of entry do you want to add?"),
-				    [ __("Linux"), arch() =~ /sparc/ ? __("Other OS (SunOS...)") : __("Other OS (windows...)") ]
+				    [ __("Linux"), arch() =~ /sparc/ ? __("Other OS (SunOS...)") : arch() =~ /ppc/ ? 
+				   __("Other OS (MacOS...)") : __("Other OS (windows...)") ]
 				   ) eq "Linux") {
 		$e = { type => 'image',
 		       root => '/dev/' . fsedit::get_root($fstab)->{device}, #- assume a good default.
@@ -209,7 +234,7 @@ You can add some more or change the existing ones."),
 		$prefix = "linux";
 	    } else {
 		$e = { type => 'other' };
-		$prefix = arch() =~ /sparc/ ? "sunos" : "windows";
+		$prefix = arch() =~ /sparc/ ? "sunos" : arch() =~ /ppc/ ? "macos" : "windows";;
 	    }
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
@@ -222,10 +247,15 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-{ label => _("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
+arch =~ /ppc/ ?
+({ label => _("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinux*") ], not_edit => 0 })
+:
+({ label => _("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 }),
 { label => _("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => _("Append"), val => \$e->{append} },
+arch =~ /ppc/ ? () : (
 { label => _("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
+),
 { label => _("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
 { label => _("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
 	    );
@@ -233,18 +263,32 @@ You can add some more or change the existing ones."),
 	} else {
 	    @l = ( 
 { label => _("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
-arch() !~ /sparc/ ? (
+arch() !~ /sparc|ppc/ ? (
 { label => _("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
 { label => _("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
 ) : (),
 	    );
 	    @l = $l[0] unless $::expert;
 	}
+if (arch() !~ /ppc/) {
 	@l = (
 { label => _("Label"), val => \$e->{label} },
 @l,
 { label => _("Default"), val => \$default, type => 'bool' },
 	);
+} else {
+	@l = ({ label => _("Label"), val => \$e->{label}, list=> ['macos', 'macosx', 'darwin'] },
+	@l );
+	if ($e->{type} eq "image") {
+		@l = ({ label => _("Label"), val => \$e->{label} },
+		$::expert ? @l[1..4] : { label => _("Append"), val => \$e->{append} } ,
+		$::expert ? { label => _("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] } : (),
+		$::expert ? @l[5] : (),
+		{ label => _("NoVideo"), val => \$e->{novideo}, type => 'bool' },
+		{ label => _("Default"), val => \$default, type => 'bool' }
+		);
+	}
+}
 
 	if ($in->ask_from_entries_refH_powered(
 	    { 
