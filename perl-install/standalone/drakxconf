@@ -15,12 +15,32 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: drakxconf\n";
 
 my $in = vnew interactive('su');
-
-my $choice = $in->ask_from_list("drakxconf",
-_("Choose the tool you want to use"),
-[ grep { my $prog = $_; int grep { -x "$_/$prog" } split ":", $ENV{PATH} }
-  qw(XFdrake adduserdrake diskdrake drakxservices keyboarddrake mousedrake netdrake printerdrake draksec drakboot) ]) or c::_exit(0); #- workaround for perl-GTK
-
+my @l=(
+       { des => 'Display Configuration',
+	 cmd => 'XFdrake'},
+       { des => 'Add new users',
+	 cmd => 'adduserdrake'},
+       { des => 'Hard Drive Configuration',
+	 cmd => 'diskdrake'},
+       { des => 'Service Configuration',
+	 cmd => 'drakxservices'},
+       { des => 'KeyBoard Configuration',
+	 cmd => 'keyboarddrake'},
+       { des => 'Mouse Configuration',
+	 cmd => 'mousedrake'},
+       { des => 'Internet & Network',
+	 cmd => 'draknet'},
+       { des => 'Printer Configuration',
+	 cmd => 'printerdrake'},
+       { des => 'Security Levels',
+	 cmd => 'draksec'},
+       { des => 'Boot Configuration',
+	 cmd => 'drakboot'},
+      );
+my $choice = $in->ask_from_listf(_("Control Center"),
+			    _("Choose the tool you want to use"),
+			    sub { (int grep { -x "$_/" . $_[0]{cmd} } split (":", $ENV{PATH})) ? $_[0]{des} : ()  },#grep { my $prog = $_; int grep { -x "$_/$prog" } split ":", $ENV{PATH} } $_[0]{des} },
+			    \@l ) or $in->exit(1);
 $in->end;
 
-exec $choice, @ARGV or $in->exit(1);
+exec $choice->{cmd}, @ARGV or $in->exit(1);
