@@ -691,7 +691,7 @@ sub selectCountry {
     my ($other, $ext_country);
     member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
     $o->ask_from_(
-		  { title => N("Country") . N(" / Region"), 
+		  { title => N("Country / Region"), 
 		    messages => N("Please choose your country."),
 		    interactive_help_id => 'selectCountry',
 		    advanced_messages => N("Here is the full list of available countries"),
