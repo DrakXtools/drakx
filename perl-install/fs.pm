@@ -219,7 +219,8 @@ sub mount($$$;$) {
 	} elsif ($fs eq 'reiserfs') {
 	    #- could be better if we knew if there is a /boot or not
 	    #- without knowing it, / is forced to be mounted with notail
-	    #$mount_opt = 'notail' if $where =~ m|/(boot)?$|;
+	    # if $where =~ m|/(boot)?$|;
+	    $mount_opt = 'notail'; #- notail in any case
 	    eval { modules::load('reiserfs') };
 	} elsif ($fs eq 'romfs') {
 	    eval { modules::load('romfs') };
