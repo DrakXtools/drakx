@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.17mdk
+Release: 0.18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 31 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.18mdk
+- drakclock (warly):
+  o check if the ntpdate command succeed or not
+  o do not perform a date command when we use ntpdate
+  o fix hour setting though mouse on the clock
+  o make the hour tick shorter
+  o repaint the calendar (especially when the day changed)
+- drakconnect:
+  o fix crashes (#11100)
+  o misc fixes (blino)
+- drakfirewall: use the loc zone in sharewall policy only if the loc
+  interface exists (florin, #10539)
+- harddrake2:
+  o add UPS class (fredl)
+  o be more enable friendly regarding themes (eg font size properly
+    adapt to theme changes)
+- net_applet: make it start again
+
 * Mon Aug 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.17mdk
 - drakclock: fix layout so that NTP frame is not badly cut on small
   resolution (#10971)
