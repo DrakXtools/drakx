@@ -107,7 +107,7 @@ sub new($$) {
     }
   OK:
     install_gtk::init_sizes();
-    install_gtk::default_theme($o);
+    install_gtk::install_theme($o, install_gtk::default_theme($o));
     install_gtk::create_logo_window($o);
 
     $my_gtk::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];

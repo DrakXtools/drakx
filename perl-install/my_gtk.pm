@@ -222,6 +222,7 @@ sub _create_window($$) {
     $w->signal_connect(key_press_event => sub {
 	my $d = ${{ 0xffbe => 'help',
 		    0xffbf => 'screenshot',
+		    0xffc2 => 'set_theme',
 	            0xffc9 => 'next',
 		    0xffc8 => 'previous' }}{$_[1]{keyval}};
 
@@ -230,6 +231,8 @@ sub _create_window($$) {
 	    install_gtk::create_big_help($::o);
 	} elsif ($::isInstall && $d eq 'screenshot') {
 	    common::take_screenshot($o);
+	} elsif ($::isInstall && $d eq 'set_theme') {
+	    $::setstep and die "set_theme\n"; #- set_theme is similar to setstep, don't raise one when not allowed to
 	} elsif (chr($_[1]{keyval}) eq 'e' && $_[1]{state} & 8) {
 	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 	    $::expert = !$::expert;

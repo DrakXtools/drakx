@@ -11,10 +11,6 @@ use devices;
 #-#####################################################################################
 #-INTERN CONSTANT
 #-#####################################################################################
-my @themes_vga16 = qw(blue blackwhite savane);
-my @themes_desktop = qw(mdk-Desktop marble3d);
-my @themes_firewall = qw(mdk-Firewall);
-my @themes = qw(mdk marble3d);
 
 my (@background1, @background2);
 
@@ -36,10 +32,9 @@ sub load_rc {
 
 sub default_theme {
     my ($o) = @_;
-    @themes = @themes_desktop if $o->{meta_class} eq 'desktop';
-    @themes = @themes_firewall if $o->{meta_class} eq 'firewall';
-    @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
-    install_theme($o, $o->{theme} || $themes[0]);
+    $o->{meta_class} eq 'desktop' ? 'blue' :
+      $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
+      $o->{simple_themes} || $o->{vga16} ? 'blue' : 'mdk';
 }
 
 #------------------------------------------------------------------------------
@@ -156,17 +151,7 @@ sub create_steps_window {
 			gtkpack_(new Gtk::HBox(0,5), 0, $darea, 0, new Gtk::Label(translate($step->{text})));
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
-		    } @{$o->{orderedSteps}}),
-		    0, gtkpack(new Gtk::HBox(0,0), map {
-			my $t = $_;
-			my $w = new Gtk::Button('');
-			$w->set_name($t);
-			$w->set_usize(0, 7);
-			gtksignal_connect($w, clicked => sub {
-			    $::setstep or return; #- just as setstep s
-			    install_theme($o, $t); die "theme_changed\n" 
-			});
-		    } @themes)));
+		    } @{$o->{orderedSteps}})));
     $w->show;
     $o->{steps_window} = $w;
 }

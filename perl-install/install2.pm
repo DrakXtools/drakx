@@ -577,8 +577,12 @@ sub main {
 		$clicked = 1;
 		redo MAIN;
 	    }
-	    /^theme_changed$/ and redo MAIN;
-	    unless (/^already displayed/) {
+	    if (/^set_theme$/) {
+		require install_gtk;
+		install_gtk::install_theme($o, 'marble3d'); 
+		redo MAIN;
+	    }
+	    if (!/^already displayed/) {
 		eval { $o->errorInStep($_) };
 		$o->{steps}{$o->{step}}{auto} = 0;
 		$err = $@;
