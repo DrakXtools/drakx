@@ -21,7 +21,7 @@ my $force = member('--force', @ARGV);
 my $mode = $ARGV[0] eq 'stop' && 'stop';
 
 if ($mode eq 'stop') {
-    append_to_file('/etc/hotplug/blacklist', "\nsnd-usb-audio\n");
+    substInFile { $_ .= "snd-usb-audio\n" if eof } '/etc/hotplug/blacklist';
     c::_exit(0);
 }
 
