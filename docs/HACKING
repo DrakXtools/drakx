@@ -48,3 +48,26 @@ NEVER compile and/or execute DrakX as root!
  DindinX <odin@mandrakesoft.com>
  Last change: Mon Feb 21 12:47:06 CET 2000
 
+
+(dam's):
+
+Here is how I made it work on my computer.
+------------------------------------------
+
+- get the sources
+- install the librairies needed included newt-devel gtk+-devel popt-devel popt gtk-engines
+- cd path/to/gi
+- make
+- mkdir /usr/share/gtk
+- ln -s path/to/gi/perl-install/share/themes /usr/share/gtk
+- ln -s path/to/gi/perl-install/share/step-* /usr/share
+- have a cd architecture linked on /export
+- ln -s /export /tmp/rhimage
+- export PERL_INSTALL_TEST=1
+- cd path/to/gi/perl-install
+- ./install2 in root (dangerous) or chmod a+r /dev/hd* and ./install2 in user
+
+--
+ dam's
+ Last change : Thu Jul 20 14:15:30 CET 2000
+
