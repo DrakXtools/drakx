@@ -30,7 +30,7 @@ sub read_resolv_conf_raw {
     my ($file) = @_;
     $file ||= "$::prefix/etc/resolv.conf";
     { nameserver => [ cat_($file) =~ /^\s*nameserver\s+(\S+)/mg ],
-      search => [ cat_($file) =~ /^\s*search\s+(\S+)/mg ] };
+      search => [ if_(cat_($file) =~ /^\s*search\s+(.*)/m, split(' ', $1)) ] };
 }
 
 sub read_resolv_conf {
