@@ -1,3 +1,67 @@
+2001/04/15  fabman
+
+	* share/po/es.po: updates
+
+2001/04/15  fcrozat
+
+	* share/rpmsrate: Add mozilla-mail and mozilla-irc to correct categories
+
+2001/04/15  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: fix minor typo
+
+2001/04/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sv.po, share/po/ko.po: Updated Swedish and Korean files
+
+2001/04/15  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (reallyChooseGroups): translate path (eg:
+	Workstation, Server) to make gg happy
+
+	* printerdrake.pm (main): restore the "Ok" button for the queues
+	manipulation
+
+	* any.pm (write_passwd_user): fix use of local
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): add an eval
+	around "require log" to keep perl from going totally mad (getting things
+	like v18.843.482 required--this is only v5.6.0)
+
+2001/04/15  yduret
+
+	* bootlook.pm: bug fix: if cancel pressed in lilo/grub choice => return to
+	mcc normally
+	fix layout & size
+
+2001/04/14  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corrected isdn detect display
+
+	* standalone/net_monitor, standalone/draknet: wait 10 sec, instead of 7
+
+2001/04/14  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: changed priority level from 2 to 4 for rate
+	selection of packages.
+
+	* pkgs.pm: fixed absurd mismatch of use of <=> and cmp on versionCompare.
+
+2001/04/14  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm (naughtyServers): add apache
+
+	* install_gtk.pm (createXconf): ensure the mouse device is created (mainly
+	for auto_inst)
+
+	* install_steps_interactive.pm (exitInstall): fix bad i18n of Replay
+	button (thx2submarine)
+
+2001/04/14  warly
+
+	* share/rpmsrate: lower viavoicemenu to 1 to avoid error message for
+	powerpack boxes without ViaVoice
+
 2001/04/14  François Pons  <fpons@mandrakesoft.com>
 
 	* rescue/tree/etc/oem: changed priority level from 2 to 4 for rate
