@@ -41,7 +41,6 @@ sub new($$) {
 	}
 	my $launchX = sub {
 	    my ($server, $Driver) = @_;
-	    my $ok = 1;
 	    my $xpmac_opts = cat_('/proc/cmdline');
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
 
