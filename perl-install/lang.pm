@@ -477,9 +477,7 @@ my %im_xim_program =
                'zh_TW.UTF-8' => '"chinput -big5"',
               },
    xcin => {
-            'zh_TW' => {
-                        XMODIFIERS => '"@im=xcin-zh_TW"',
-                       },
+            'zh_TW' => '"@im=xcin-zh_TW"'
            },
   );
 
