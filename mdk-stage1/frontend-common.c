@@ -21,6 +21,7 @@
 void info_message(char *msg, ...)
 {
 	va_list args;
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 	va_start(args, msg);
 	vinfo_message(msg, args);
 	va_end(args);
@@ -37,6 +38,7 @@ void wait_message(char *msg, ...)
 void error_message(char *msg, ...)
 {
 	va_list args;
+	probe_that_type(USB_CONTROLLERS, BUS_USB); // we'd need the keyboard for interactions so...
 	va_start(args, msg);
 	verror_message(msg, args);
 	va_end(args);
