@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 41mdk
+Release: 42mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -279,6 +279,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Sat Sep  7 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-42mdk
+- cvs up before packaging (fix messy drakboot conf). 
+
 * Fri Sep  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-41mdk
 - fix harddrake service, run non essential checks after dm start
 
