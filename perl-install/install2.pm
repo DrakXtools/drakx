@@ -584,9 +584,10 @@ sub main {
 	};
 	$clicked = 0;
 	while ($@) {
-	    $@ =~ /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
-	    $@ =~ /^theme_changed$/ and redo MAIN;
-	    eval { $o->errorInStep($@) };
+	    local $_ = $@;
+	    /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
+	    /^theme_changed$/ and redo MAIN;
+	    eval { $o->errorInStep($_) };
 	    $@ and next;
 	    $o->{step} = $o->{steps}{$o->{step}}{onError};
 	    redo MAIN;

@@ -77,9 +77,8 @@ my %charsets = (
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-15" ],
 # japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ "????",			"????",
-	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
-	"-*-*-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0," .
-	"-*-*-medium-r-normal--14-*-*-*-*-*-jisx0201.1976-0" ],
+	"-misc-fixed-medium-r-normal--14-130-75-75-c-70-jisx0201.1976-0"
+	 ],
   "koi8-r"     => [ "Cyr_a8x16.psf",		"koi2alt",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-koi8-r" ],
@@ -115,7 +114,6 @@ sub set {
 	$ENV{LC_ALL}    = $lang;
 	$ENV{LANG}      = $languages{$lang}[2]; 
 	$ENV{LANGUAGES} = $languages{$lang}[3]; 
-	if (my $f = $languages{$lang}[1]) { load_font($f) }
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
@@ -152,25 +150,29 @@ sub write {
     }
 }
 
-sub load_font {
-    my ($charset) = @_;
-    my $fontFile = "lat0-sun16";
-    my $fontSet = "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1";
+#sub load_font {
+#    my ($charset) = @_;
+#    my $fontFile = "lat0-sun16";
+#
+#    if (my $c = $charsets{$charset}) {
+#	 log::l("loading $charset font");
+#	 $fontFile = $c->[0];
+#    }
+#
+#    # text mode font  
+#    log::l("loading font /usr/share/consolefonts/$fontFile");
+#    #c::loadFont("/tmp/$fontFile") or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
+#    #print STDERR "\033(K";
+#
+#}
 
-    if (my $c = $charsets{$charset}) {
-	log::l("loading $charset font");
-        $fontFile = $c->[0];
-	$fontSet  = $c->[2]; 
-    }
+sub get_x_fontset {
+    my ($lang) = @_;
+    my $def = "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1";
 
-    # text mode font  
-    log::l("loading font /usr/share/consolefonts/$fontFile");
-    #c::loadFont("/tmp/$fontFile") or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
-    #print STDERR "\033(K";
-
-    # X11 font
-    log::l("fontset: " . $fontSet);
-#    Gtk::Gdk::Font::fontset_load("*",$fontSet);
+    my $l = $languages{$lang}  or return $def;
+    my $c = $charsets{$l->[1]} or return $def;
+    $c->[2];
 }
 
 #-######################################################################################

@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -159,6 +159,14 @@ sub gtkset_background {
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
 
+sub gtkset_default_fontset($) {
+    my ($fontset) = @_;
+
+    my $style = Gtk::Widget->get_default_style;
+    my $f = Gtk::Gdk::Font->fontset_load($fontset) or die;
+    $style->font($f);
+    Gtk::Widget->set_default_style($style);
+}
 
 
 ################################################################################
