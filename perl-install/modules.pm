@@ -544,8 +544,11 @@ sub read_conf($;$) {
 
 sub mergein_conf {
     my ($file) = @_;
+#-    add2hash(\%conf, read_conf($file, \$scsi));
     my $modconfref = read_conf ($file, \$scsi);
-    map { my ($key, $value) = $_; $conf{$key}{alias} ||= $value->{alias} } %$modconfref;
+    while (my ($key, $value) = each %$modconfref) {
+	$conf{$key}{alias} = $value->{alias} unless exists $conf{$key}{alias};
+    }
 }
 
 sub write_conf {
