@@ -504,7 +504,7 @@ sub getSerialModem {
 sub getModem {
     my ($modules_conf) = @_;
     getSerialModem($modules_conf, {}), matching_driver__regexp('www\.linmodems\.org'),
-      matching_driver('ltmodem', list_modules::category2modules('network/slmodem'));
+      matching_driver(list_modules::category2modules('network/modem'), list_modules::category2modules('network/slmodem'));
 }
 
 sub getSpeedtouch() {
