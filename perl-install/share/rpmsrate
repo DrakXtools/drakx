@@ -37,10 +37,9 @@ TV
 OFFICE
   4 staroffice-en staroffice-de staroffice-es staroffice-fr staroffice-it
     acroread acroread-nppdf
+    !CDCOM OpenOffice.org OpenOffice.org-l10n-en OpenOffice.org-l10n-fr
   4 cbb gaddr xpdf moneydance
   3 wv ical pyDict
-  2 OpenOffice.org
-  2 OpenOffice.org-l10n-en OpenOffice.org-l10n-fr
   2 units lyx
   2 freegica-MDK-mdk-cdcom quasar-mdk-cdcom VShop-mdk-cdcom WXpaye-mdk-cdcom
   GNOME
@@ -63,7 +62,7 @@ AUDIO
   4 KDE kdelibs-sound
   4 3D xmms-mesa
   3 cdp cdparanoia cdrecord-cdda2wav space_sounds timidity-instruments xmms-esd
-    xmms-kjofol-skins xmms-more-vis-plugins eMusic
+    xmms-kjofol-skins xmms-more-vis-plugins
   3 GNOME gnome-audio-extra 
   2 mokmod mp3info mpg123 playmidi playmidi-X11 xmms-mikmod
 
@@ -164,7 +163,6 @@ NETWORKING_INSTANT_MESSAGING
     3 gtk+licq
 
 NETWORKING_IRC
-  4 KDE kvirc
   3 BitchX mozilla-irc
   3 GNOME xchat
   2 irssi
@@ -262,12 +260,13 @@ NETWORKING_WWW
       !LOCALES"eu" galeon 
   3 plugger opera bluefish
 NETWORKING_WWW_SERVER
-  5 apache apache-mod_perl mod_ssl
-  4 apache-suexec bwbserver_linux
+  5 apache apache-mod_perl mod_ssl mod_php 
+  4 apache-suexec 
+    CDCOM bwbserver_linux
   4 WIZARDS wizards_lib-web
   4 BOOKS apache-manual
   3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
-    php-pgsql php-readline php mod_php mod_sxnet auth_ldap HTML-Embperl
+    php-pgsql php-readline php mod_sxnet auth_ldap HTML-Embperl
   2 ApacheJServ
   1 Zope Zope-core Zope-pcgi Zope-zserver
 
@@ -326,7 +325,7 @@ GAMES
   4 sin-demo
   4 clanbomber freeciv lbreakout2 toppler frozen-bubble uplink-mdk-cdcom
   3 shogo-demo 
-  3 cxhextris nethack_falconseye rocksndiamonds tuxpuck teg powermanga mures methane
+  3 cxhextris rocksndiamonds powermanga mures methane
   2 Maelstrom pingus ltris penguin-command pysol xtrojka bunnies xpilot trophy xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank
   1 7colors xrally fortune-mod nil
   GNOME
@@ -346,7 +345,6 @@ GAMES
 
     3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" # XF3 3D
         bzflag
-    3 flightgear glaxium
 
 DEVELOPMENT
   5 autoconf automake m4 make 
