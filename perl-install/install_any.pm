@@ -113,7 +113,7 @@ sub errorOpeningFile($) {
 }
 sub getFile {
     my ($f, $method) = @_;
-    my $rel = install_any::relGetFile($f);
+    my $rel = relGetFile($f);
     log::l("getFile $f ($method) relGetFile $rel");
     do {
 	if ($method =~ /crypto/i) {
@@ -133,10 +133,9 @@ sub getFile {
 	    my $f2 = "$postinstall_rpms/$f";
 	    $f2 = "/tmp/rhimage/$rel" unless -e $f2;
 	    log::l("local getFile $f2");
-	    open GETFILE, $f2;
-	    *GETFILE;
+	    open GETFILE, $f2 and *GETFILE;
 	}
-    } or errorOpeningFile($f);
+    } || errorOpeningFile($f);
 }
 sub getAndSaveFile {
     my ($file, $local) = @_;

@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border @grabbed);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset gtkxpm gtkcreate_xpm) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -46,6 +46,7 @@ sub new {
 }
 sub main($;$) {
     my ($o, $f) = @_;
+    gtkset_mousecursor_normal();
     $o->show;
 
     do {
@@ -65,6 +66,7 @@ sub destroy($) {
     (pop @grabbed)->grab_remove if @grabbed;
     top(@grabbed)->grab_add if @grabbed;
     $o->{rwindow}->destroy;
+    gtkset_mousecursor_wait();
     flush();
 }
 sub DESTROY { goto &destroy }
@@ -73,7 +75,7 @@ sub sync($) {
     show($o);
     flush();
 }
-sub flush(;$) {
+sub flush {
     Gtk->main_iteration while Gtk->events_pending;
 }
 sub bigsize($) {
@@ -155,10 +157,12 @@ sub gtkcolor($$$) {
     gtkroot()->get_colormap->color_alloc($color);
 }
 
-sub gtkset_mousecursor($) {
-    my ($type) = @_;
-    gtkroot()->set_cursor(Gtk::Gdk::Cursor->new($type));
+sub gtkset_mousecursor {
+    my ($type, $w) = @_;
+    ($w || gtkroot())->set_cursor(Gtk::Gdk::Cursor->new($type));
 }
+sub gtkset_mousecursor_normal { gtkset_mousecursor(68, @_) }
+sub gtkset_mousecursor_wait   { gtkset_mousecursor(150, @_) }
 
 sub gtkset_background {
     my ($r, $g, $b) = @_;

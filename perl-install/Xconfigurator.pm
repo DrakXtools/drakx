@@ -225,7 +225,8 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '
     unless ($card->{type}) {
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
     }
-    $card->{options}{DPMS} = 1;
+    $card->{options_xf3}{power_saver} = 1;
+    $card->{options_xf4}{DPMS} = 1;
 
     $card->{flags}{needVideoRam} and
       $card->{memory} ||=
@@ -411,7 +412,7 @@ sub testFinalConfig($;$$) {
 
 	$ENV{DISPLAY} = ":9";
 
-        gtkset_mousecursor(68);
+        gtkset_mousecursor_normal();
         gtkset_background(200 * 257, 210 * 257, 210 * 257);
         my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
         $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
@@ -885,8 +886,14 @@ EndSection
     #    Option      "sw_cursor"
 
 ); 
-    print F map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};
-    print G map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};
+    my $p = sub {
+	my ($l) = @_;
+	map { (!$l->{$_} && '#') . qq(    Option      "$_"\n) } keys %{$l || {}};
+    };
+    print F $p->('options');
+    print F $p->('options_xf3');
+    print G $p->('options');
+    print G $p->('options_xf4');
     print F "EndSection\n\n\n";
     print G "EndSection\n\n\n";
 

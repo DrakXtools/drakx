@@ -449,11 +449,12 @@ sub installPackages {
 			       $progress_total,
 			       '',
 			       gtkadd(create_hbox(),
-				      gtksignal_connect(new Gtk::Button(_("Cancel")), 
-							clicked => sub { $pkgs::cancel_install = 1 })),
+				      my $cancel = new Gtk::Button(_("Cancel"))),
 			      ));
-    $msg->set(_("Preparing installation"));
     $w->sync;
+    $msg->set(_("Preparing installation"));
+    gtkset_mousecursor_normal($cancel->window);
+    $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
 
     my $oldInstallCallback = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
@@ -540,8 +541,6 @@ sub load_rc($) {
 sub install_theme {
     my ($o, $theme) = @_;    
     $o->{theme} = $theme || $o->{theme} || $themes[0];
-
-    gtkset_mousecursor(68);
 
     load_rc($_) foreach "themes-$o->{theme}", "install", "themes";
 

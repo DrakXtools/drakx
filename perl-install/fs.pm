@@ -291,7 +291,7 @@ sub mount_all($;$$) {
     log::l("mounting all filesystems");
 
     #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
-    foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} } grep { $_->{mntpoint} } @$fstab) {
+    foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} } grep { $_->{mntpoint} && isTrueFS($_) } @$fstab) {
 	mount_part($_, $prefix);
     }
 }
