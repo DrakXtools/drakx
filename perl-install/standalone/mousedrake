@@ -148,9 +148,9 @@ sub test_mouse2 {
     my_gtk::gtkpack($hbox, my_gtk::gtkset_border_width(my_gtk::gtkpack(new Gtk::VBox(0,10), my_gtk::gtksize(my_gtk::gtkset_usize($darea, $width+1, $height+1), $width, $height)),10));
 
 
-    my ($m3_image, $m3_mask) = my_gtk::gtkcreate_xpm($darea, '/usr/share/libDrakX/pixmaps/mouse_3b.xpm');
-    my ($m3_imagep, $m3_maskp) = my_gtk::gtkcreate_xpm($darea, '/usr/share/libDrakX/pixmaps/mouse_3b+.xpm');
-    my ($m3_middle, $m3_middle_mask) = my_gtk::gtkcreate_xpm($darea, '/usr/share/libDrakX/pixmaps/mouse_middle.xpm');
+    my ($m3_image, $m3_mask) = my_gtk::gtkcreate_xpm($darea, 'mouse_3b.xpm');
+    my ($m3_imagep, $m3_maskp) = my_gtk::gtkcreate_xpm($darea, 'mouse_3b+.xpm');
+    my ($m3_middle, $m3_middle_mask) = my_gtk::gtkcreate_xpm($darea, 'mouse_middle.xpm');
     $image = $m3_image;
     $mouse->{nbuttons} > 3 and $image = $m3_imagep;
     my $drawarea; $drawarea = sub { $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
