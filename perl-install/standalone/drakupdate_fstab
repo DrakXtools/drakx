@@ -44,7 +44,7 @@ sub check_hard_drives {
     #- do not do anything if there are many partitions
     #- otherwise we may add main extended partitions
     if ($name =~ s|/part\d+$||) {
-	! grep { /part[5-9]/ } all($name);
+	grep { /part/ } all($name) <= 1;
     } else {
 	1;
     }
@@ -75,8 +75,7 @@ sub device_name_to_entry {
 }
 
 sub set_options {
-    my ($part) = @_;
-    my $use_supermount = cat_('/etc/fstab') =~ /supermount/;
+    my ($part, $use_supermount) = @_;
     my $security = any::get_secure_level();
     my ($iocharset, $codepage) = lang::fs_options(lang::read());
 
@@ -85,6 +84,7 @@ sub set_options {
 
 sub set_mount_point {
     my ($part, $fstab) = @_;
+
     my $mntpoint = detect_devices::suggest_mount_point($part) or return;
     $mntpoint = "/mnt/$mntpoint";
 
@@ -120,11 +120,16 @@ sub main {
 	    print STDERR "Already in fstab\n" if $::testing;
 	    return;
 	}
-	set_options($part);
+	my $use_supermount = cat_('/etc/fstab') =~ /supermount/;
+	set_options($part, $use_supermount);
 	set_mount_point($part, $fstab) or return;
 	
 	my ($line) = fs::prepare_write_fstab([$part]);
 	append_to_file($fstab_file, $line) if $line;
+
+	if ($::auto) {
+	    print $part->{mntpoint}, " ", $use_supermount ? 'supermount' : 'user', "\n";
+	}
     } else {
 	if (!@$existing_fstab_entries) {
 	    print STDERR "Not found in fstab\n" if $::testing;
@@ -132,6 +137,10 @@ sub main {
 	}
 	my ($s) = fs::prepare_write_fstab($fstab_, '', 'keep_smb_credentials');
 	output($fstab_file, $s);
+
+	if ($::auto) {
+	    print "$_->{mntpoint}\n" foreach @$existing_fstab_entries;
+	}
     }
 
     if ($::testing) {
