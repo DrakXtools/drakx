@@ -1,3 +1,86 @@
+2002/02/28  dam's  <damien@mandrakesoft.com>
+
+	* share/themes-marble3d.rc: rechanged bg for camille
+
+	* standalone/drakbackup: corrected translation for crontab
+
+2002/02/28  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: fixed bad copy of install packages.
+
+	* tools/oem-prepare: fixed bad copy of INSTALL packages.
+
+	* Xconfigurator.pm: removed Radeon 8500 from DRI capable cards.
+
+2002/02/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/aliases, rescue/list: include /sbin/fsck.ext3 since our users are
+	so dumb
+
+2002/02/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/zh_TW.po: updated Chinese file
+
+2002/02/28  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/make_rescue_img: resolve conflicts for short keytable names (eg:
+	"no" could be either "no-dvorak" or "no-latin1")
+
+	* keyboard.pm (loadkeys_files): ensure each file appear only once
+
+	* bootloader.pm: add "nowarn" in lilo.conf
+
+	* install_steps.pm, fs.pm: use the "soft" option by default for /mnt/nfs
+	and for "diskdrake --nfs"
+
+2002/02/28  sdupont
+
+	* standalone/drakfont: including 'su' mode on drakfont.
+
+2002/02/28  siegel
+
+	* share/po/de.po: updated missing strings
+
+2002/02/28  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Re-activated function to specify a CUPS server in
+	another network and to switch to manual CUPS configuration.
+	  - Fixes/Improvements on Star Office/Open Office support:
+	o When one switches the spooler, the entries of the printers under the
+	     old spooler are removed from Star Office/Open Office
+	   o Printers on remote CUPS servers (which are known through
+	broadcasting)
+	     can be added to Star Office/Open Office
+
+	* share/rpmsrate.server, share/rpmsrate: Added "curl" to install section,
+	it is needed by printerdrake.
+
+	* printer.pm: 
+	  - Fixes/Improvements on Star Office/Open Office support:
+	o When one switches the spooler, the entries of the printers under the
+	     old spooler are removed from Star Office/Open Office
+	   o Printers on remote CUPS servers (which are known through
+	broadcasting)
+	     can be added to Star Office/Open Office
+
+2002/02/27  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+2002/02/27  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: 
+	  - Improved fully automatic adding of printer queue:
+	o Ask for a queue name if more than one printer is detected
+	   o Let user confirm the model automatically chosen from the database
+	   o Set correct paper size according to the language/country
+	  - When one chooses a "CUPS + GIMP-Print" driver now all important
+	options
+	  are displayed directly (without needing "Advanced" button).
+	  - Made less warning appearing on the console from where "printerdrake"
+	was
+	  called.
+
 2002/02/27  fabman
 
 	* share/po/es.po: converted to UTF-8
