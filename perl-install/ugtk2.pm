@@ -384,7 +384,7 @@ sub destroy_window {
     0;
 }
 
-sub create_hbox { gtkset_layout(gtkset_border_width(Gtk2::HButtonBox->new, 3), 'spread') }
+sub create_hbox { gtkset_layout(gtkset_border_width(Gtk2::HButtonBox->new, 3), $_[0] || 'spread') }
 sub create_vbox { gtkset_layout(Gtk2::VButtonBox->new, $_[0] || 'spread') }
 
 sub create_factory_menu_ {
@@ -444,10 +444,10 @@ sub create_okcancel {
     gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
     my @l = grep { $_ } $wizard_buttons ? (if_(!$::isInstall, $w->{wizcancel}), 
 				       if_(!$::Wizard_no_previous, $b2), $b1) : ($b1, $b2);
-    unshift @l, map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } @other;
+    my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } @other;
 
-    $_->can_default($wizard_buttons) foreach @l;
-    gtkadd(create_hbox($spread), @l);
+    $_->can_default($wizard_buttons) foreach @l2, @l;
+    gtkadd(create_hbox($spread), @l2, @l);
 }
 
 sub _setup_paned {
