@@ -1,3 +1,175 @@
+2003/08/21  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated to current pot
+
+2003/08/21  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/modem.pm: fix no winmodem message/behavior
+
+	* network/adsl.pm: 
+	  - allow user to copy firmware from a floppy
+	  - fix 'previous' behavior
+	  - change wrong url
+
+	* share/po/id.po, share/po/af.po, share/po/hr.po, share/po/eo.po,
+	share/po/de.po, share/po/ar.po, share/po/zh_TW.po, share/po/nb.po,
+	share/po/fr.po, share/po/ko.po, share/po/el.po, share/po/da.po,
+	share/po/sr@Latn.po, share/po/lt.po, share/po/eu.po, share/po/nl.po,
+	share/po/he.po, share/po/tr.po, share/po/wa.po, share/po/uz@Cyrl.po,
+	share/po/ta.po, share/po/pl.po, share/po/az.po, share/po/be.po,
+	share/po/mt.po, share/po/uk.po, share/po/hu.po, share/po/uz.po,
+	share/po/fa.po, share/po/ja.po, share/po/it.po, share/po/pt.po,
+	share/po/ro.po, share/po/sq.po, share/po/sk.po, share/po/ru.po,
+	share/po/fi.po, share/po/gl.po, share/po/cs.po, share/po/sv.po,
+	share/po/th.po, share/po/es.po, share/po/sl.po, share/po/lv.po,
+	share/po/ca.po, share/po/sr.po, share/po/pt_BR.po, share/po/vi.po,
+	share/po/tg.po, share/po/cy.po, share/po/zh_CN.po, share/po/bg.po,
+	share/po/is.po, share/po/ga.po, share/po/et.po, share/po/bs.po: fix
+	firmware url
+
+2003/08/21  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/21  François Pons  <fpons at mandrakesoft.com>
+
+	* pkgs.pm: use perl-URPM 0.94
+	really fixed bad content generated.
+	fixed next key block not taken into accound.
+
+	* install_any.pm: updated with new perl-URPM 0.94 (simplified code)
+	avoid 0 to be dumped in urpmi.cfg :(
+	added some log when importing pbukey block and when key id have been
+	found.
+	make sure other key are added to urpmi.cfg when imported.
+
+2003/08/21  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/pcmcia_/merge_from_pcitable: also display probe.c entries
+	that are completely missing from pcitable
+
+	* mdk-stage1/pcmcia_/probe.c: 0x1524 0x1411 is a yenta_socket on Asus
+	Pundit machine (laurent at pschit.net)
+
+	* share/rpmsrate: s/freeciv/freeciv-client/
+
+2003/08/21  keld
+
+	* share/po/da.po: updates
+	soft/GtkMdkWidgets/po/da.po soft/mdkkdm/po/da.po
+	soft/urpmi/po/da.po soft/userdrake2/po/da.po
+	gi/perl-install/share/po/da.po
+
+2003/08/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nl.po: updated Dutch file
+	updated pot file
+
+	* share/po/zh_CN.po: updated Chinese file
+	updated pot file
+
+	* standalone/drakbackup: fixed English typos
+
+	* share/po/fr.po: updated French file
+	updated pot file
+
+	* share/po/cs.po: updated Czech file
+	updated pot file
+
+	* standalone/logdrake: Changed back NC() to N() (functionality will be
+	merged)
+	definition and use of an NC() function (translation with context, kde
+	like)
+
+	* share/po/id.po, share/po/af.po, share/po/hr.po, share/po/eo.po,
+	share/po/de.po, share/po/ar.po, share/po/zh_TW.po, share/po/nb.po,
+	share/po/ko.po, share/po/el.po, share/po/da.po, share/po/sr@Latn.po,
+	share/po/lt.po, share/po/eu.po, share/po/he.po, share/po/tr.po,
+	share/po/wa.po, share/po/uz@Cyrl.po, share/po/ta.po, share/po/pl.po,
+	share/po/az.po, share/po/be.po, share/po/mt.po, share/po/uk.po,
+	share/po/hu.po, share/po/uz.po, share/po/fa.po, share/po/ja.po,
+	share/po/it.po, share/po/pt.po, share/po/ro.po, share/po/sq.po,
+	share/po/sk.po, share/po/ru.po, share/po/fi.po, share/po/gl.po,
+	share/po/sv.po, share/po/th.po, share/po/es.po, share/po/DrakX.pot,
+	share/po/sl.po, share/po/lv.po, share/po/ca.po, share/po/sr.po,
+	share/po/pt_BR.po, share/po/vi.po, share/po/tg.po, share/po/ms.po,
+	share/po/cy.po, share/po/bg.po, share/po/is.po, share/po/ga.po,
+	share/po/et.po, share/po/bs.po: updated pot file
+
+	* common.pm: perl_checker complain avout using N(@_) so NC() has been
+	rewritten as
+	a duplicate of N() plus one line
+	definition and use of an NC() function (translation with context, kde
+	like)
+
+2003/08/21  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: when umount fails, try killing fam and trying again
+
+	* diskdrake/resize_ntfs.pm: display the error returned by ntfsresize (need
+	i18n though)
+
+	* Xconfig/card.pm: don't propose XF3 when $force_xf4
+	fix typo ($::force_xf4 doesn't exist anymore)
+
+	* ugtk2.pm: only access $::o->{mouse}{unsafe} during install
+
+	* partition_table.pm: 
+	  - fix call to openit()
+	  - replace *F with $F
+
+	* fsedit.pm: simplify
+	allocatePartitions() resulted in a small unallocated area at the end of
+	the
+	drive when:
+	  - suggest_part() reserves some room for the other partitions which are
+	going to
+	be added next. For maxsize limited partition, it reserves maxsize (if
+	maxsize
+	is reached)
+	  - suggest_part() which adds the last partition limited by maxsize can
+	be
+	called on a partition a little bigger than maxsize due to cylinder
+	boundary
+	adjustments on previous partition creations. In that case, it doesn't
+	use the
+	full area.
+	It occured for example with the current $fsedit::suggestions{server}.
+	The fix chosen is to ensure the last suggest_part() is called with a
+	size
+	defined as maxsize <= size < maxsize + cylinder_size.
+
+	* modules.pm: don't care if insmod'ing ohci1394 fail (bug #1972)
+
+	* standalone/draksec: fix english (thanks to Reinout van Schouwen)
+
+	* Xconfig/test.pm: fix typo
+	  - use $TMPDIR before using $HOME/tmp
+	  - if $HOME doesn't exist, it will use /tmp which is safe when using
+	secured_file()
+
+	* common.pm: no need for NC(), doing it in translate() in any case
+
+2003/08/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakxtv: only offer to configure xawtv if bttv was configured
+	fix warnings with diagnostics pragma
+
+	* drakxtools.spec: 9.2-0.33mdk
+
+	* ugtk2.pm: move ugtk2 related language fixes into ugtk2 jail
+	chinese badly wrap with labels too
+	the scrolled text is correctly sized, so do not let it compete with
+	the options box and the advanced box for availlable space
+
+	* harddrake/sound.pm: typo fixes from Arpad Biro
+
+	* standalone.pm: move ugtk2 related language fixes into ugtk2 jail
+	set $::o in standalone mode too (because of guillaume fixes for "pango
+	vs cjk" match)
+
+	* harddrake/v4l.pm: return ok/cancel state
+
 2003/08/21  Pixel  <pixel at mandrakesoft.com>
 
 	* fsedit.pm: simplify
@@ -19231,7 +19403,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.820 2003/08/20 01:15:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.821 2003/08/21 01:10:11 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
