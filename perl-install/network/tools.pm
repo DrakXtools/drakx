@@ -9,25 +9,25 @@ use MDK::Common::Globals "network", qw($in);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected write_cnx_script write_initscript write_secret_backend);
+@EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip is_wireless_intf passwd_by_login read_providers_backend read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
 @EXPORT_OK = qw($in);
 
-our $connect_prog    = "/etc/sysconfig/network-scripts/net_cnx_pg";
+our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
 my $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
 my $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
 
+sub set_cnx_script {
+    my ($netc, $type, $up, $down, $type2) = @_;
+    $netc->{internet_cnx}{$type}{$_->[0]} = $_->[1] foreach [$connect_file, $up], [$disconnect_file, $down];
+    $netc->{internet_cnx}{$type}{type} = $type2;
+}
 sub write_cnx_script {
-    my ($netc, $o_type, $o_up, $o_down, $o_type2) = @_;
-    if ($o_type) {
-	$netc->{internet_cnx}{$o_type}{$_->[0]} = $_->[1] foreach [$connect_file, $o_up], [$disconnect_file, $o_down];
-	$netc->{internet_cnx}{$o_type}{type} = $o_type2;
-    } else {
-	foreach ($connect_file, $disconnect_file) {
-	    output_with_perm("$::prefix$_", 0755,
-'#!/bin/bash
+    my ($netc) = @_;
+    foreach ($connect_file, $disconnect_file) {
+        output_with_perm("$::prefix$_", 0755,
+                         '#!/bin/bash
 ' . if_(!$netc->{at_boot}, 'if [ "x$1" == "x--boot_time" ]; then exit; fi
 ') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_});
-	}
     }
 }
 
