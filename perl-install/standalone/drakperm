@@ -10,22 +10,12 @@ init Gtk;
 
 use interactive;
 
-#- this part is embedded management
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~/--embedded (\S*) (\S*)/;
-if ($::isEmbedded) {
-  print "EMBED\n";
-  print "XID : $::XID\n";
-  print "CCPID :  $::CCPID\n";
-}
-
 my $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
 /-h/ and die _("no help implemented yet.\n");
 /-version/ and die 'version: $Id$'."\n";
 
-my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
-$window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : &killapp });
 
 #- vars declaration
 my ($default_perm_level) = "level ".chomp_(`cat /etc/sysconfig/msec | grep SECURE_LEVEL= |cut -d= -f2`);
@@ -45,7 +35,8 @@ my $modified = 0;
 my $prec_txt = $default_perm_level;
 #my $bg = Gtk::Gdk::Color->parse_color('grey');
 #- Widget declaration
-my $W 				= new Gtk::Window('toplevel');
+my $W = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
+$W->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : &killapp });
 my $scroll 		= new Gtk::ScrolledWindow;
 my $Perm_list = new_with_titles Gtk::CList((_("path"),_("user"),_("group"),_("permissions")));
 my $vb				= new Gtk::VBox(0,5);
