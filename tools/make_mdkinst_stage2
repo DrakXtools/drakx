@@ -43,13 +43,13 @@ rm -f $STAGE2TMP/usr/bin/{pv*,vg*,lv*} $STAGE2TMP/lib/liblvm*
 rm -f $STAGE2TMP/usr/bin/{resize_reiserfs}
 rm -f $STAGE2TMP/usr/X11R6/lib/X11/fonts/{taipei16,gb16fs,k14,baekmuk_gulim_h_14,cu12}.pcf.gz
 rm -rf $STAGE2TMP/usr/share/locale_special
-for i in /usr/share/locale; do
-    name=`basename $i`
-    # LC_COLLATE and LC_CTYPE are getFile'd (cuz they are big, causing the .cz2 to be *big*)
-    find $STAGE2TMP/$i -name LC_COLLATE -o -name LC_CTYPE | xargs rm
-    (cd $STAGE2TMP/$i ; find * | $BUILD_ARCHIVE -b9s ../$name.cz2 4000000)
-    rm -rf $STAGE2TMP/$i
-done
+
+(   # only keeping UTF-8
+    cd $STAGE2TMP/usr/share/locale; 
+    mv UTF-8 ..
+    rm -rf *
+    mv ../UTF-8 .
+)
 for i in /usr/share/keymaps /usr/share/xmodmap; do
     name=`basename $i`
     (cd $STAGE2TMP/$i ; ls * | $BUILD_ARCHIVE -b9s ../$name.cz2 400000)
