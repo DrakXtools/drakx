@@ -168,7 +168,7 @@ sub isFloppyOrHD {
 sub getSCSI() {
     my $err = sub { log::l("ERROR: unexpected line in /proc/scsi/scsi: $_[0]"); };
 
-    my ($first, @l) = common::join_lines(cat_("/proc/scsi/scsi"));
+    my ($first, @l) = common::join_lines(cat_("/proc/scsi/scsi")) or return;
     $first =~ /^Attached devices:/ or $err->($first);
 
     @l = map_index {
