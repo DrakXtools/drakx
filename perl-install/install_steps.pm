@@ -460,8 +460,6 @@ Consoles 1,3,4,7 may also contain interesting information";
     } elsif (!$o->{isUpgrade}) {
 	run_program::rooted($o->{prefix}, "touch", "/etc/menu/do-not-create-menu-link");
     }
-    #- call update-menus at the end of package installation
-    push @{$o->{waitpids}}, run_program::raw({ root => $o->{prefix}, detach => 1 }, "update-menus", "-n");
 
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
@@ -529,6 +527,9 @@ GridHeight=70
 	run_program::rooted($o->{prefix}, "rpm", "-U", "/usr/share/oem-theme.rpm");
 	unlink "/usr/share/oem-theme.rpm";
     }
+
+    #- call update-menus at the end of package installation
+    push @{$o->{waitpids}}, run_program::raw({ root => $o->{prefix}, detach => 1 }, "update-menus", "-n");
 
     if ($o->{blank} || $o->{updatemodules}) {
 	my @l = detect_devices::floppies_dev();
