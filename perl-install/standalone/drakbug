@@ -31,7 +31,7 @@ Gtk::Gdk::ImlibImage->init;
 
 my $in = 'interactive'->vnew;
 
-my $bugzilla_url = "https://drakbug.mandrakesoft.com";
+my $bugzilla_url = "http://drakbug.mandrakesoft.com";
 my $version = "0.9.0";
 my $prog;
 my $incident=0;
@@ -133,12 +133,12 @@ $hbx->pack_start($Close_Button,0,0,0);
 
 my $Report_Button = new Gtk::Button(_("Report"));
 $Report_Button->signal_connect(clicked => sub { my $options = "mdkwizard=1";
-						$options.="?incident=1" if $incident;
+						$options.="&incident=1" if $incident;
 						$p = $package->get_text(); $k=$kernel_rel->get_text(); ($r =parse_release()) =~ s/\s//;
-						$options.="?package=$p" if $p =~ /rpm/;
-						$options.="?kernel=$k";
-						$options.="?mdkrelease=$r";
-						print "$bugzilla_url/wizard?"."$options" ."\n";
+						$options.="&package=$p" if $p =~ /rpm/;
+						$options.="&kernel=$k";
+						$options.="&mdkrelease=$r";
+						print "$bugzilla_url"."?"."$options" ."\n";
 						connect_bugzilla("$bugzilla_url/wizard?"."$options") });
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
