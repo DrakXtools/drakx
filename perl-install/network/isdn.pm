@@ -10,18 +10,13 @@ use log;
 use network::tools;
 use MDK::Common::Globals "network", qw($in);
 use MDK::Common::File;
+use services;
+use list_modules;
 
 
 sub write_config {
     my ($isdn, $netc) = @_;
     $in->do_pkgs->install('isdn4net', if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
-    write_config_backend($isdn, $netc);
-    1;
-}
-
-sub write_config_backend {
-    my ($isdn, $netc, $o_netcnx) = @_;
-    defined $o_netcnx and $netc->{isdntype} = $o_netcnx->{type};
 
     output_with_perm("$::prefix/etc/isdn/profile/link/myisp", 0600,
 	  qq(
@@ -51,11 +46,47 @@ I4L_PROTOCOL="$isdn->{protocol}"
 usepeerdns
 defaultroute
 ";
-	system "$::prefix/etc/rc.d/init.d/isdn4linux restart";
+
+    services::stop("isdn4linux"); #- to be stopped before capi is loaded
+    if ($isdn->{driver} eq "capidrv") {
+        setup_capi_conf($isdn);
+        services::start_service_on_boot("capi4linux");
+        services::restart("capi4linux");
+    } else {
+        services::stop("capi4linux");
+        services::do_not_start_service_on_boot("capi4linux");
+    }
+    services::start_service_on_boot("isdn4linux");
+    services::start("isdn4linux");
 
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
     1;
+}
+
+
+sub setup_capi_conf {
+    my ($isdn) = @_;
+
+    my $capi_card = get_capi_card($isdn);
+    is_module_installed($capi_card->{driver}) or $in->do_pkgs->install($capi_card->{driver});
+
+    my $capi_conf;
+    my $firmware = $capi_card->{firmware} || '-';
+    if ($capi_card->{driver} eq "fcclassic") {
+        $capi_conf = "fcclassic     -       -       0x300   5    -       -\n# adjust IRQ and IO !!        ^^^^^  ^^^\n";
+    } elsif ($capi_card->{driver} eq "fcpnp") {
+        $capi_conf = "fcpnp      -       -       0x300   5    -       -\n# adjust IRQ and IO !!     ^^^^^  ^^^\n";
+    } else {
+        $capi_conf = "$capi_card->{driver}        $firmware       -       -       -       -       -\n";
+    }
+    output("$::prefix/etc/capi.conf", $capi_conf);
+
+    #- install and run drdsl for dsl connections
+    if ($capi_card->{driver} =~ /dsl/i) {
+        $in->do_pkgs->ensure_is_installed_if_available("drdsl", "$::prefix/usr/sbin/drdsl");
+        run_program::rooted($::prefix, "/usr/sbin/drdsl");
+    }
 }
 
 sub read_config {
@@ -144,5 +175,27 @@ sub get_cards() {
     map { $buses{$_->{card}} . "|" . $_->{description} => $_ } @isdndata;
 }
 
+
+sub is_module_installed {
+    my ($driver) = @_;
+    find { m!/\Q$driver\E\.k?o! } cat_($::prefix . '/lib/modules/' . c::kernel_version() . '/modules.dep');
+}
+
+
+sub get_capi_card {
+    my ($isdn) = @_;
+
+    my $capi_card = find { 
+        hex($isdn->{vendor}) == $_->{vendor} && hex($isdn->{id}) == $_->{id}
+    } @isdn_capi or return;
+
+    #- check if the capi driver is available
+    unless (is_module_installed($capi_card->{driver}) || $in->do_pkgs->check_kernel_module_packages($capi_card->{driver})) {
+        log::explanations("a capi driver ($capi_card->{driver}) exists to replace $isdn->{driver}, but it isn't installed and no packages provide it");
+        return;
+    }
+
+    $capi_card;
+}
 
 1;
