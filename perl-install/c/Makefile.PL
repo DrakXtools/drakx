@@ -10,6 +10,7 @@ WriteMakefile(
     'NAME'	=> 'stuff',
     'OPTIMIZE'  => '-Os',
     'MAKEFILE'  => 'Makefile_c',
+    'OBJECT'    => 'stuff.o smp.o',
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 

@@ -106,6 +106,9 @@ lseek_sector(fd, sector, offset)
 void
 setsid()
 
+int
+detectSMP()
+
 unsigned int
 getpagesize()
 
