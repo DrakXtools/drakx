@@ -69,7 +69,9 @@ sub images {
 	    push @modules, category2modules($_);
 	}
 
-	@modules = difference2(\@modules, \@skip_modules_on_stage1);
+	if ($image !~ /all/) {
+	    @modules = difference2(\@modules, \@skip_modules_on_stage1);
+	}
 	if ($image !~ /other|all/) {
 	    @modules = difference2(\@modules, \@skip_big_modules_on_stage1)
 	}
