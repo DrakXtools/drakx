@@ -29,7 +29,7 @@ sub setup_local($$$) {
 
     my @port = ();
     my @str = ();
-    my @parport = auto_detect();
+    my @parport = auto_detect($in);
     foreach (@parport) {
 	push @str, _("A printer, model \"%s\", has been detected on ", $_->{val}{DESCRIPTION}) . $_->{port};
     }
