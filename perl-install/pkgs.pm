@@ -248,7 +248,10 @@ sub install {
     log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
 
     # !! do not translate these messages, they are used when catched (cf install_steps_graphical)
-    my $callbackOpen = sub { fileno install_any::getFile($_[0]) || log::l("bad file $_[0]") };
+    my $callbackOpen = sub { 
+	my $fd = install_any::getFile($_[0]) or log::l("bad file $_[0]");
+	$fd ? fileno $fd : -1;
+    };
     my $callbackClose = sub { };
     my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
     my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };

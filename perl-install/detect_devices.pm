@@ -5,6 +5,7 @@ use strict;
 
 use log;
 use common qw(:common :file);
+use devices;
 use c;
 
 
@@ -30,9 +31,8 @@ sub get {
 sub hds() { grep { $_->{type} eq 'hd' } get(); }
 sub cdroms() { grep { $_->{type} eq 'cdrom' } get(); }
 sub floppies() {
-    my @l = grep { $_->{type} eq 'fd' } get();
-    unshift @l, "fd0" if tryOpen("fd0");
-    @l;
+    (grep { tryOpen($_) } qw(fd0 fd1)),
+    (grep { $_->{type} eq 'fd' } get());
 }
 
 sub hasSCSI() {
@@ -134,7 +134,7 @@ sub getDAC960() {
 
 
 sub getNet() { 
-    grep { hasNetDevice($_) } qw(eth0 tr0 plip0 plip1 plip2 fddi0);
+    grep { hasNetDevice($_) } qw(eth0 eth1 eth2 eth3 tr0 plip0 plip1 plip2 fddi0);
 }
 sub getPlip() {
     foreach (0..2) {
@@ -151,5 +151,5 @@ sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 
 sub tryOpen($) {
     local *F;
-    sysopen F, "/dev/$_[0]", c::O_NONBLOCK();
+    sysopen F, devices::make($_[0]), c::O_NONBLOCK();
 }

@@ -101,7 +101,7 @@ sub write($$$) {
 
 sub clear_raw { { raw => [ ({}) x $nb_primary ] } }
 
-sub zero_MBR($) { 
+sub zero_MBR($) {
     my ($hd) = @_;
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
     $hd->{primary} = clear_raw();

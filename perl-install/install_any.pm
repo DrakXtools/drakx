@@ -87,8 +87,8 @@ sub shells($) {
 sub setPackages {
     my ($o) = @_;
 
-    eval { $o->{packages} = pkgs::psUsingHdlist() };
-    $@ and $o->{packages} = pkgs::psUsingDirectory();
+    eval { $o->{packages} = pkgs::psUsingHdlist() }  if $o->{method} ne "nfs";
+           $o->{packages} = pkgs::psUsingDirectory() if $o->{method} eq "nfs" || $@;
     pkgs::getDeps($o->{packages});
 
     $o->{compss} = pkgs::readCompss($o->{packages});

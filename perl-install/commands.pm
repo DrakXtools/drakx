@@ -387,3 +387,13 @@ sub unpack_ {
 	}
     }
 }
+
+sub insmod {
+    my $name = shift;
+    my $f = "/tmp/$name.o";
+    require 'run_program.pm';
+    run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $name.o");
+    -r $f or die "can't find module $name";
+    run_program::run("insmod_", $f, @_) or die("insmod $name failed");
+    unlink $f;
+}

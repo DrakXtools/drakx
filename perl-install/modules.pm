@@ -231,11 +231,7 @@ sub load_raw($$$@) {
     my ($name, $type, $minor, @options) = @_;
 
 #    @options or @options = guiGetModuleOptions($name);
-    my $f = "/tmp/$name.o";
-    run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $name.o");
-    -r $f or die "can't find module $name";
-    run_program::run("insmod", $f, @options) or die("insmod $name failed");
-    unlink $f;
+    run_program::run("insmod", $name, @options) or die("insmod $name failed");
 
     # this is a hack to make plip go
     if ($name eq "parport_pc") {
@@ -248,6 +244,13 @@ sub load_raw($$$@) {
 	}
     }
     $loaded{$name} = { type => $type, minor => $minor, options => \@options };
+}
+
+sub read_already_loaded() {
+    foreach (cat_("/proc/modules", "die")) {
+	my ($name) = split;
+	@{$loaded{$name}}{"type", "minor"} = @{$drivers{$name}}[3,4];
+    }
 }
 
 sub load_deps($) {

@@ -48,7 +48,7 @@ customized installation, this Install Class is for you."),
 
 setupSCSI => 
  __("The system did not detect a SCSI card. If you have one (or several)
-click on \"Yes\" and choose the module(s) to be tested. Otherwise, 
+click on \"Yes\" and choose the module\(s) to be tested. Otherwise, 
 select \"No\".
 
 If you don't know if your computer has SCSI interfaces, consult the
@@ -173,7 +173,7 @@ my @installSteps = (
   configureServices => [ __("Configure services"), 0, 0 ],
   configurePrinter => [ __("Configure printer"), 0, 0 ],
   setRootPassword => [ __("Set root password"), 1, 1, "formatPartitions" ],
-  addUser => [ __("Add a user"), 1, 1, "formatPartitions" ],
+  addUser => [ __("Add a user"), 1, 1, "doInstallStep" ],
   createBootdisk => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
   setupBootloader => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
   configureX => [ __("Configure X"), 1, 0, "doInstallStep" ],
@@ -319,6 +319,7 @@ sub configureMouse { $o->mouseConfig }
 sub configureNetwork { $o->configureNetwork($o->{steps}{$o->{step}}{entered} == 1 && !$_[0]) }
 sub configureTimezone { $o->timeConfig }
 sub configureServices { $o->servicesConfig }
+sub configurePrinter { $o->printerConfig }
 sub setRootPassword { $o->setRootPassword }
 sub addUser { 
     $o->addUser;
@@ -379,11 +380,12 @@ sub main {
 
     modules::load_deps("/modules/modules.dep");
     modules::read_conf("/tmp/conf.modules");
+    modules::read_already_loaded();
 
     while (@_) {
 	local $_ = shift;
 	if (/--method/) {
-	    $_ = shift;
+	    $o->{method} = $_ = shift;
 	    if (/ftp/) {
 		require 'ftp.pm';
 		local $^W = 0;

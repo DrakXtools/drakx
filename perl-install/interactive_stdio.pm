@@ -31,7 +31,7 @@ sub ask_from_listW {
 	my @l;
 	do {
 	    if (defined $i) {
-		@l ? print _("Ambiguity (%s) be more precise\n", join(", ", @l)) :
+		@l ? print _("Ambiguity (%s), be more precise\n", join(", ", @l)) :
 		     print _("Bad choice, try again\n");
 	    }
 	    @$list == 1 ? print @$list :

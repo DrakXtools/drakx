@@ -12,12 +12,12 @@ use my_gtk qw(:helpers :wrappers);
 
 1;
 
-# redefine ask_warn
-sub ask_warn {
-    my $o = shift;
-    local $my_gtk::grab = 1;
-    $o->SUPER::ask_warn(@_);
-}
+## redefine ask_warn
+#sub ask_warn {
+#    my $o = shift;
+#    local $my_gtk::grab = 1;
+#    $o->SUPER::ask_warn(@_);
+#}
 
 sub ask_from_entryW {
     my ($o, $title, $messages, $def) = @_;

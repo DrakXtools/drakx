@@ -176,7 +176,7 @@ sub cardConfiguration(;$$) {
     $card->{flags}{needVideoRam} and
       $card->{memory} ||= 
 	$videomemory{$in->ask_from_list_('', 
-					 _("Give your graphic card memory size"), 
+					 _("Select the memory size of your graphic card"), 
 					 [ sort { $videomemory{$a} <=> $videomemory{$b} } 
 					   keys %videomemory])};
     $card;
@@ -221,7 +221,7 @@ sub testFinalConfig($;$) {
     my ($o, $auto) = @_;
 
     $o->{monitor}{hsyncrange} && $o->{monitor}{vsyncrange} or
-      $in->ask_warn('', _("Monitor not configured yet")), return;
+      $in->ask_warn('', _("Monitor not configured")), return;
 
     $o->{card}{server} or
       $in->ask_warn('', _("Graphic card not configured yet")), return;
@@ -234,7 +234,7 @@ sub testFinalConfig($;$) {
     write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/etc/X11/XF86Config");
 
     $auto 
-      or $in->ask_yesorno(_("Test configuration"), _("Do you want to test configuration?"))
+      or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"))
       or return 1;
 
     my $pid; unless ($pid = fork) {

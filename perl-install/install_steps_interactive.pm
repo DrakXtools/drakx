@@ -35,7 +35,7 @@ sub chooseLanguage($) {
 sub selectInstallOrUpgrade($) {
     my ($o) = @_;
     $o->ask_from_list_(_("Install/Upgrade"), 
-		       _("Is it an install or an upgrade?"),
+		       _("Is this an install or an upgrade?"),
 		       [ __("Install"), __("Upgrade") ], 
 		       $o->default("isUpgrade") ? "Upgrade" : "Install") eq "Upgrade";
 }
@@ -124,7 +124,7 @@ sub configureNetwork($) {
     }
     
     if ($r !~ /^Keep/) {
-	my @l = first(network::getNet());
+	my @l = network::getNet() or return die _("no network card found");
 	@l = ($l[0]) unless $::expert; # keep only one
 
 	$o->configureNetworkIntf(network::findIntf($o->{intf}, $_)) foreach @l;
@@ -157,7 +157,7 @@ _("Choose the floppy drive you want to use to make the bootdisk"),
 					     \@l, $o->default("mkbootdisk"));
     }
 
-    $o->ask_warn('', _("Insert a floppy in floppy drive %s", $o->{mkbootdisk}));
+    $o->ask_warn('', _("Insert a floppy in drive %s", $o->{mkbootdisk}));
     my $w = $o->wait_message('', _("Creating bootdisk"));
     $o->SUPER::createBootdisk;
 }

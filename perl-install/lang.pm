@@ -164,5 +164,5 @@ sub load_font {
 
     # X11 font
     log::l("fontset: " . $fontSet);
-    Gtk::Gdk::Font::fontset_load("*",$fontSet);
+#    Gtk::Gdk::Font::fontset_load("*",$fontSet);
 }

@@ -160,12 +160,14 @@ sub configureNetwork($) {
     network::write_resolv_conf("$etc/resolv.conf", $o->{netc});
     network::write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach @{$o->{intf}};
     network::add2hosts("$etc/hosts", $o->{netc}{HOSTNAME}, map { $_->{IPADDR} } @{$o->{intf}});
-#    syscall_('sethostname', $hostname, length $hostname) or warn "sethostname failed: $!";
+    network::sethostname($o->{netc}) unless $::testing;
+    network::addDefaultRoute($o->{netc}) unless $::testing;
     #res_init();		# reinit the resolver so DNS changes take affect     
 }
 
 sub timeConfig {}
 sub servicesConfig {}
+sub printerConfig {}
 
 sub setRootPassword($) {
     my ($o) = @_;
@@ -231,7 +233,7 @@ sub createBootdisk($) {
 
     return if $::testing;
 
-    lilo::mkbootdisk($o->{prefix}, versionString(), "/dev/$dev");
+    lilo::mkbootdisk($o->{prefix}, versionString(), $dev);
     $o->{mkbootdisk} = $dev;
 }
 

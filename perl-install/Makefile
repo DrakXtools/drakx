@@ -124,6 +124,7 @@ get_needed_files: $(SO_FILES)
 	done
 
 	mv -f $(DEST)/bin/* $(DEST)/sbin/* $(DEST)/usr/bin
+	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
 
 	ln -sf ash $(DEST)/usr/bin/sh

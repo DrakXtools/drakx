@@ -1,8 +1,13 @@
+style "default-font" 
+{
+  font = "-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1"
+}
+
 style "steps"
 {
   bg[NORMAL] = { 0, 0, 0 }
   fg[NORMAL] = { 1.0, 1.0, 1.0 }
-  font = "-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1"	
+  font = "-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1"
 }
 
 style "logo"
@@ -30,5 +35,6 @@ style "logo"
   base[INSENSITIVE] = { 1.0, 1.0, 1.0 }
 }
 
+widget "*" style "default-font"
 widget "*Steps*" style "steps"
 widget "*logo*" style "logo"

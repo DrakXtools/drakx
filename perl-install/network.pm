@@ -120,7 +120,12 @@ sub guessHostname {
 
 sub addDefaultRoute {
     my ($netc) = @_;
-    c::addDefaultRoute($netc->{gateway}) if $netc->{gateway} || !$::testing;
+    c::addDefaultRoute($netc->{GATEWAY}) if $netc->{GATEWAY};
+}
+
+sub sethostname {
+    my ($netc) = @_;
+    syscall_('sethostname', $netc->{HOSTNAME}, length $netc->{HOSTNAME}) or log::l("sethostname failed: $!");
 }
 
 sub dnsServers {
@@ -129,12 +134,8 @@ sub dnsServers {
 }
 
 sub getNet() {
-    my @l = detect_devices::getNet();
-    unless (@l) {
-	modules::load_thiskind('net') or return;
-	@l = detect_devices::getNet();
-    }
-    @l;
+    modules::load_thiskind('net');
+    detect_devices::getNet();
 }
 
 sub findIntf {
