@@ -360,7 +360,7 @@ sub formatMountPartitions {
         });
     } sub { 
 	$@ =~ /fsck failed on (\S+)/ or return;
-	$o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can loose data)", $1), 1);
+	$o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can lose data)", $1), 1);
     };
     undef $w; #- help perl (otherwise wait_message stays forever in newt)
     die \N("Not enough swap space to fulfill installation, please add some") if availableMemory() < 40 * 1024;
