@@ -1422,7 +1422,10 @@ extern void *xmalloc(size_t size)
 
 extern void *xrealloc(void *old, size_t size)
 {
-	void *ptr = realloc(old, size);
+	void *ptr;
+	if (!size)
+			size = 1;
+	ptr = realloc(old, size);
 	if (!ptr)
 		fatalError("memory_exhausted");
 	return ptr;
