@@ -333,7 +333,7 @@ my %charsets = (
 #-	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
 #- Tamil uses pseudo iso-8859-1 fonts
   "tscii" => [ "tamil",		undef,		"trivial.trans",
-	undef, undef, "-mdk-tsc_helv-*-*-*-*-*-*-*-*-*-*-iso8859-1" ],
+	undef, undef, "-tamil-tscakaram-medium-r-normal--12-120-75-75-p-92-tscii-0" ],
   "unicode" => [ undef,			undef,		"trivial.trans",
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );

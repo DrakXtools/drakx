@@ -27,11 +27,9 @@ do
     (cd usr/share/locale/$i ; ln -s ../UTF-8/* . 2>/dev/null)
 done
 
-# "ta" should be added to the locale list, but the locales-ta rpm
-# is not ready yet
 # lc_ctype for non common encodings
 rm -rf .tmp2 ; mkdir .tmp2 ; cd .tmp2
-for i in ja ko    th ; do
+for i in ja ko ta th ; do
     ii=locales-`echo $i | sed 's/\(..\).*/\1/'`
     rpm2cpio /RPMS/$ii-*.rpm | cpio -id --quiet
     f=usr/share/locale/$i/LC_CTYPE
