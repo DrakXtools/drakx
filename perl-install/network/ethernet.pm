@@ -122,7 +122,7 @@ sub conf_network_card_backend {
 		$_->{device} eq $interface and $b = $_->{driver};
 	    }
 	    $a ||= $b;
-	    $a and $saved_driver = $a;
+	    $a and $saved_driver = $a; # handle multiple cards managed by the same driver
  	    [ $interface, $saved_driver ]
 	} @all_cards;
     }
