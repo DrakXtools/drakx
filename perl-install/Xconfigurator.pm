@@ -105,8 +105,7 @@ sub readMonitorsDB {
 	$monitors{$l{type}} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {
-	$monitors{$k} =
-	  $monitors{$v->[0]} =
+	$monitors{" " . translate($k)} =
 	    { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
 }

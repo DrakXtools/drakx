@@ -18,6 +18,7 @@ my $in = vnew interactive('su');
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
 my @shells = map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
 my $isMD5 = cat_("/etc/pam.d/passwd") =~ /md5/;
+my $isShadow = cat_("/etc/pam.d/passwd") =~ /shadow/;
 my $security = $ENV{SECURITY_LEVEL};
 
 new:
@@ -59,7 +60,9 @@ if ($in->ask_from_entries_refH(
 	    $_ = join(':', @$u{@etc_pass_fields}) . "\n";
 	}
     } "/etc/passwd";
-	     
+
+    system("pwconv") if $isShadow;
+     
     $u = {};
     goto new;
 }

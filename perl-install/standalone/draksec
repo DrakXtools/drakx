@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+use common qw(:system);
+use interactive;
+use mouse;
+use c;
+
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: draksec [--expert]\n";
+
+$::expert = /--expert/;
+$::isStandalone = 1;
+
+my $in = vnew interactive('su');
+
+my %m = reverse (my %l = (
+  0 => _("Windows(TM)"),
+  1 => _("Poor"),
+  2 => _("Low"),
+  3 => _("Medium"),
+  4 => _("High"),
+  5 => _("Paranoid"),
+));
+delete @l{0,1,5} unless $::expert;
+
+if (my $level = $in->ask_from_list('', _("Choose security level"), [ values %l ], $l{$ENV{SECURE_LEVEL}})) {
+    my $w = $in->wait_message('', _("Setting security level"));
+    system("/etc/security/msec/init.sh ". $m{$level});
+}
+
+$in->exit(0);
