@@ -587,18 +587,19 @@ sub Mount_point {
         isLoopback($part) ? N("Where do you want to mount the loopback file %s?", $part->{loopback_file}) :
 			    N("Where do you want to mount device %s?", $part->{device}),
 		     focus_first => 1,
-	},
-	[ { label => N("Mount point"), val => \$mntpoint, 
-	    list => [ uniq(if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '') ], 
-	    not_edit => 0 } ],
-	complete => sub {
+		     callbacks => {
+		         complete => sub {
 	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn('', 
 N("Can't unset mount point as this partition is used for loop back.
 Remove the loopback first")), return 1;
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $hd, $part, $all_hds) or return 1;
     	    $migrate_files = need_migration($in, $mntpoint) or return 1;
 	    0;
-	}
+	} },
+	},
+	[ { label => N("Mount point"), val => \$mntpoint, 
+	    list => [ uniq(if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '') ], 
+	    not_edit => 0 } ],
     ) or return;
     $part->{mntpoint} = $mntpoint;
 
@@ -1013,27 +1014,11 @@ sub check_type {
 sub check_mntpoint {
     my ($in, $mntpoint, $hd, $part, $all_hds) = @_;
     eval { fsedit::check_mntpoint($mntpoint, $hd, $part, $all_hds) };
-    local $_ = $@;
-    if (m|/boot ending on cylinder > 1024|) {
-	$in->ask_warn('',
-N("Sorry I won't accept to create /boot so far onto the drive (on a cylinder > 1024).
-Either you use LILO and it won't work, or you don't use LILO and you don't need /boot"));
-    } elsif (m|/ ending on cylinder > 1024|) {
-	$in->ask_warn('',
-N("The partition you've selected to add as root (/) is physically located beyond
-the 1024th cylinder of the hard drive, and you have no /boot partition.
-If you plan to use the LILO boot manager, be careful to add a /boot partition"));
-	undef $_;
-    } elsif (m|raid / with no /boot|) {
-	$in->ask_warn('',
-N("You've selected a software RAID partition as root (/).
-No bootloader is able to handle this without a /boot partition.
-Please be sure to add a /boot partition"));
-	undef $_;
-    } elsif ($_) {
-	$in->ask_warn('', formatError($_));
+    if (my $err = $@) {
+	$in->ask_warn('', formatError($err));
+	return;
     }
-    !$_;
+    1;
 }
 sub check {
     my ($in, $hd, $part, $all_hds) = @_;
