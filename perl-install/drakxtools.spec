@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 5mdk
+Release: 6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.95-6mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk, gurpmi
 Requires: foomatic-db-engine
-Conflicts: drakconf < 9.1-14mdk
+Conflicts: drakconf < 9.3-2mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
 BuildRequires: gettext, gtk+2-devel, ldetect-devel >= 0.4.9-3mdk, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.3-1mdk
@@ -315,6 +315,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Nov 14 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-6mdk
+- drakconnect: fix speedtouch start/stop scripts when firmware is
+  already there or when firmware installation is canceled
+- harddrake2: do not show module if unknow for system bridges since
+  it's normal
+- harddrake service: remove net aliases if needed
+- move clock.pl from mcc into drakxtools package
+- provide drakclock, drakdisk, drakhardware, drakkeyboard, draklocale,
+  draklog, drakmouse, draknet_monitor, drakprinter, drakx11 new names
+- XFdrake: choose a not-to-bad default when X auto config fails in
+  auto install
+
 * Sat Nov  8 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-5mdk
 - drakconnect:
   o fix lan always marked as detected even
