@@ -209,21 +209,17 @@ sub init_sizes() {
 
 #------------------------------------------------------------------------------
 sub createXconf {
-    my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
+    my ($file, $mouse_type, $mouse_dev, $wacom_dev, $Driver) = @_;
 
     $mouse_type = 'IMPS/2' if $mouse_type eq 'ExplorerPS/2';
-    devices::make("/dev/kbd") if arch() =~ /^sparc/; #- used by Xsun style server.
     symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
 
     #- needed for imlib to start on 8-bit depth visual.
     symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
     symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
 
-if (arch() =~ /^ia64/) {
-     require Xconfig::card;
-     my ($card) = Xconfig::card::probe();
-     Xconfig::card::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
-     output($file, sprintf(<<'END', $mouse_type, $card->{driver}));
+if ($Driver) {
+     output($file, sprintf(<<'END', $mouse_type, $Driver));
 
 Section "Files"
    FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"

@@ -37,13 +37,14 @@ sub new($$) {
     if ($ENV{DISPLAY} =~ /^:\d/ && !$::testing || $ENV{DISPLAY} ne $wanted_DISPLAY) { #- is the display local or distant?
 	my $f = "/tmp/Xconf";
 	if (!$::testing) {
-	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0]);
 	    devices::make("/dev/kbd");
 	}
 	my $launchX = sub {
-	    my ($server) = @_;
+	    my ($server, $Driver) = @_;
 	    my $ok = 1;
 	    my $xpmac_opts = cat_('/proc/cmdline');
+	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
+
 	    mkdir '/var/log' if !-d '/var/log';
 	    local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 
@@ -92,7 +93,9 @@ sub new($$) {
 		@servers = qw(Xsun24);
 	    }
 	} elsif (arch() =~ /ia64/) {
-	    @servers = 'XFree86';
+	    require Xconfig::card;
+	    my ($card) = Xconfig::card::probe();
+	    @servers = map { if_($_, "Driver:$_") } $card && $card->{Driver}, 'fbdev';
 	} elsif (arch() eq "ppc") {
 	    @servers = qw(Xpmac);
 	}
@@ -100,7 +103,7 @@ sub new($$) {
 	foreach (@servers) {
 	    log::l("Trying with server $_");
 	    my $dir = "/usr/X11R6/bin";
-	    my $prog = /Xsun|Xpmac|XFree86|Xnest/ ? $_ : "XF86_$_";
+	    my ($prog, $Driver) = /Driver:(.*)/ ? ('XFree86', $1) : /Xsun|Xpmac|Xnest/ ? $_ : "XF86_$_";
 	    unless (-x "$dir/$prog") {
 		unlink $_ foreach glob_("$dir/X*");
 		install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
@@ -109,7 +112,7 @@ sub new($$) {
 	    if (/FB/) {
 		!$o->{vga16} && $o->{allowFB} or next;
 
-		$o->{allowFB} = &$launchX($prog) #- keep in mind FB is used.
+		$o->{allowFB} = &$launchX($prog, $Driver) #- keep in mind FB is used.
 		  and goto OK;
 	    } else {
 		$o->{vga16} = 1 if /VGA16/;
