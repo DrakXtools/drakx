@@ -129,7 +129,7 @@ sub test {
         my $time = 12;
         Gtk2->timeout_add(1000, sub {
 	    $text->set(N("Leaving in %d seconds", $time));
-	    $time-- or Gtk->main_quit;
+	    $time-- or Gtk2->main_quit;
             1;
 	});
 
