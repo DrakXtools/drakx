@@ -42,6 +42,13 @@ sub info {
     "$title\n\n$info";
 }
 
+sub various {
+    my ($in, $card, $options, $auto) = @_;
+
+    tvout($in, $card, $options);
+    choose_xdm($in, $auto);
+}
+
 sub choose_xdm {
     my ($in, $auto) = @_;
     my $xdm = $::isStandalone ? any::runlevel($::prefix) : 1;
@@ -54,6 +61,50 @@ _("I can setup your computer to automatically start the graphical interface (XFr
 Would you like XFree to start when you reboot?"), $xdm) or return
     }
     any::runlevel($::prefix, $xdm ? 5 : 3);
+}
+
+sub tvout {
+    my ($in, $card, $options) = @_;
+
+    $card->{FB_TVOUT} && Xconfig::card::using_xf4($card) && $options->{allowFB} or return;
+
+    $in->ask_yesorno('', _("Your graphic card seems to have a TV-OUT connector.
+It can be configured to work using frame-buffer.
+
+For this you have to plug your graphic card to your TV before booting your computer.
+Then choose the \"TVout\" entry in the bootloader
+
+Do you have this feature?")) or return;
+
+    my $norm = $in->ask_from_list('', _("What norm is your TV using?"), [ 'NTSC', 'PAL' ]) or return;
+
+    configure_FB_TVOUT({ norm => $norm });
+}
+
+sub configure_FB_TVOUT {
+    my ($use_FB_TVOUT) = @_;
+
+    my $raw_X = Xconfig::default::configure();
+    my $xfree4 = $raw_X->{xfree4};
+
+    $xfree4->set_monitors({ HorizSync => '30-50', VertRefresh => ($use_FB_TVOUT->{norm} eq 'NTSC' ? 60 : 50) });
+    $xfree4->set_devices({ Driver => 'fbdev' });
+
+    my ($device) = $xfree4->get_devices;
+    my ($monitor) = $xfree4->get_monitors;
+    $xfree4->set_screens({ Device => $device->{Identifier}, Monitor => $monitor->{Identifier} });
+
+    $xfree4->write("$::prefix/etc/X11/XF86Config-4.tvout");
+
+    check_XF86Config_symlink();
+}
+
+sub check_XF86Config_symlink {
+    my $f = "$::prefix/etc/X11/XF86Config-4";
+    if (!-l $f && -e "$f.tvout") {
+	rename $f, "$f.standard";
+	symlink "XF86Config-4.standard", $f;
+    }
 }
 
 1;

@@ -25,6 +25,7 @@ use Xconfig::main;
 use Xconfig::xfree;
 use Xconfig::default;
 use interactive;
+use common;
 use any;
 use c;
 
@@ -58,11 +59,15 @@ begin:
 	if ($configure_this eq 'everything') {
 	    check_XFree($in);
 	    my $raw_X = Xconfig::xfree->read;
+	    my $default = Xconfig::default::configure();
+	    my $has_conf = @{$raw_X->{xfree3}} || @{$raw_X->{xfree4}};
+	    $raw_X->{xfree3} = $default->{xfree3} if !@{$raw_X->{xfree3}};
+	    $raw_X->{xfree4} = $default->{xfree4} if !@{$raw_X->{xfree4}};
 
-	    if (@{$raw_X->{xfree3}} || @{$raw_X->{xfree4}}) {
+	    if ($has_conf) {
 		Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
 	    } else {
-		Xconfig::main::configure_everything($in, Xconfig::default::configure(), $in->do_pkgs, $auto, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
+		Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $auto, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
 	    }
 	} elsif ($configure_this eq 'auto_install') {
 	    Xconfig::main::configure_everything_auto_install(Xconfig::default::configure(), $in->do_pkgs, {}, { allowNVIDIA_rpms => allowNVIDIA_rpms() });
@@ -82,6 +87,12 @@ begin:
 
 sub check_XFree {
     my ($in) = @_;
+
+    #- set the standard configuration
+    foreach ('XF86Config', 'XF86Config-4') {
+	my $f = "/etc/X11/$_";
+	symlinkf("$_.standard", $f) if -l $f && -e "$f.standard";
+    }
 
     my $f = "/usr/X11R6/lib/X11/rgb.txt"; #- this one is on all platform
     -e $f or $in->do_pkgs->install('XFree86', 'XFree86-75dpi-fonts');

@@ -478,7 +478,7 @@ sub set_glx_restrictions {
 
 	#- hack for ATI Rage 128 card using a bttv or peripheral with PCI bus mastering exchange
 	#- AND using DRI at the same time.
-	if (member($card->{card_name}, 'ATI Rage 128', 'ATI Rage 128 Mobility')) {
+	if (member($card->{card_name}, 'ATI Rage 128', 'ATI Rage 128 TVout', 'ATI Rage 128 Mobility')) {
 	    $card->{Options_xfree4}{UseCCEFor2D} = bool2text(modules::probe_category('multimedia/tv'));
 	}
     }
@@ -549,6 +549,7 @@ sub readCardsDB {
 	MULTI_HEAD => sub { $card->{MULTI_HEAD} = $val if $card->{Driver} },
 	BAD_FB_RESTORE => sub { $card->{BAD_FB_RESTORE} = 1 },
 	BAD_FB_RESTORE_XF3 => sub { $card->{BAD_FB_RESTORE_XF3} = 1 },
+	FB_TVOUT => sub { $card->{FB_TVOUT} = 1 },
 	UNSUPPORTED => sub { delete $card->{Driver} },
 
 	COMMENT => sub {},
