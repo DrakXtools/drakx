@@ -1045,11 +1045,11 @@ sub ask_browse_tree_info {
 
     my $w = ugtk2->new($common->{title});
 
-    my $tree_model = Gtk2::TreeStore->new("Glib::String", "Glib::Boolean", "Glib::String", ("Glib::Boolean") x 2);
+    my $tree_model = Gtk2::TreeStore->new("Glib::String", "Gtk2::Gdk::Pixbuf", "Glib::String");
     my $tree = Gtk2::TreeView->new_with_model($tree_model);
     $tree->get_selection->set_mode('browse');
     $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
-    $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererToggle->new, 'activatable' => 3, 'active' => 1));
+    $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 1));
     $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
     $tree->set_headers_visible(0);
     $tree->set_rules_hint(1);
@@ -1122,8 +1122,6 @@ sub ask_browse_tree_info {
 sub ask_browse_tree_info_given_widgets {
     my ($common) = @_;
     my $w = $common->{widgets};
-    $w->{pixcolumn}->set_clickable(1);
-    $w->{renderer}->set_data(column => 1) if $w->{renderer};
 
     my ($curr, $prev_label, $idle, $mouse_toggle_pending);
     my (%wtree, %ptree, %pix, %node_state, %state_stats);
@@ -1131,26 +1129,18 @@ sub ask_browse_tree_info_given_widgets {
 	my $new_label = $common->{get_status}();
 	$prev_label ne $new_label and $w->{status}->set($prev_label = $new_label);
     };
-    my $set_state = sub {
-        my ($iter, $state) = @_;
-        if ($state eq 'semiselected') {
-            my $toggle = $w->{tree_model}->get($iter, 1);
-            $w->{tree_model}->set($iter, 4 => 1);
-        } else {
-            $w->{tree_model}->set($iter, 4 => 0);
-            $w->{tree_model}->set($iter, 1 => ($state eq 'selected'));
-        }
-    };
     
     my $set_node_state_flat = sub {
 	my ($iter, $state) = @_;
 	$state eq 'XXX' and return;
-     &$set_state($iter, $state);
+        $pix{$state} ||= gtkcreate_pixbuf($state);
+        $w->{tree_model}->set($iter, 1 => $pix{$state});
     };
     my $set_node_state_tree; $set_node_state_tree = sub {
 	my ($iter, $state) = @_;
 	my $iter_str = $w->{tree_model}->get_path_str($iter);
 	$state eq 'XXX' and return;
+        $pix{$state} ||= gtkcreate_pixbuf($state);
 	if ($node_state{$iter_str} ne $state) {
 	    my $parent;
 	    if (!$w->{tree_model}->iter_has_child($iter) && ($parent = $w->{tree_model}->iter_parent($iter))) {
@@ -1160,7 +1150,7 @@ sub ask_browse_tree_info_given_widgets {
 		my $new_state = @list == 1 ? $list[0] : 'semiselected';
 		$node_state{$parent_str} ne $new_state and $set_node_state_tree->($parent, $new_state);
 	    }
-	    &$set_state($iter, $state);
+            $w->{tree_model}->set($iter, 1 => $pix{$state});
 	    $node_state{$iter_str} = $state;  #- cache for efficiency
 	}
     };
@@ -1177,7 +1167,7 @@ sub ask_browse_tree_info_given_widgets {
 	my $s; foreach (split '\|', $root) {
 	    my $s2 = $s ? "$s|$_" : $_;
 	    $wtree{$s2} ||= do {
-		my $iter = $w->{tree_model}->append_set($s ? $add_parent->($s, $state) : undef, [ 0 => $_, 3 => 1 ]);
+		my $iter = $w->{tree_model}->append_set($s ? $add_parent->($s, $state) : undef, [ 0 => $_ ]);
 		$iter;
 	    };
 	    $s = $s2;
@@ -1189,7 +1179,7 @@ sub ask_browse_tree_info_given_widgets {
 	my ($leaf, $root, $options) = @_;
 	my $state = $common->{node_state}($leaf) or return;
 	if ($leaf) {
-	    my $iter = $w->{tree_model}->append_set($add_parent->($root, $state), [ 0 => $leaf, 3 => 1 ]);
+	    my $iter = $w->{tree_model}->append_set($add_parent->($root, $state), [ 0 => $leaf ]);
 	    $set_node_state->($iter, $state);
 	    push @{$ptree{$leaf}}, $iter;
 	} else {
@@ -1198,7 +1188,7 @@ sub ask_browse_tree_info_given_widgets {
 	    #- if leaf is void, we may create the parent and one child (to have the [+] in front of the parent in the ctree)
 	    #- though we use '' as the label of the child; then rpmdrake will connect on tree_expand, and whenever
 	    #- the first child has '' as the label, it will remove the child and add all the "right" children
-	    $options->{nochild} or $w->{tree_model}->append_set($parent, [ 0 => '', 3 => 1 ]);
+	    $options->{nochild} or $w->{tree_model}->append_set($parent, [ 0 => '' ]);
 	}
     };
     my $clear_all_caches = sub {
@@ -1292,18 +1282,6 @@ sub ask_browse_tree_info_given_widgets {
 	}
     };
 
-    $w->{renderer} and $w->{renderer}->signal_connect(toggled => sub {
-							  my ($cell, $path_str) = @_;
-							  my $path = Gtk2::TreePath->new_from_string($path_str);
-
-							  # get toggled iter
-							  my $iter = $w->{tree_model}->get_iter($path);
-
-							  # set new value
-							  #                                  $set_state->($iter, $w->{tree_model}->get($iter, 1) ^ 1);
-							  $toggle->(0);
-						      });
-
     $w->{tree}->signal_connect(key_press_event => sub {
 	my $c = chr($_[1]->keyval & 0xff);
 	if ($_[1]->keyval >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
@@ -1311,7 +1289,7 @@ sub ask_browse_tree_info_given_widgets {
 	}
 	0;
     });
-# Got on key/button press
+
     $w->{tree}->get_selection->signal_connect(changed => sub {
 	my ($model, $iter) = $_[0]->get_selected;
 	$model && $iter or return;
