@@ -3,7 +3,7 @@ package timezone; # $Id$
 use diagnostics;
 use strict;
 
-use common qw(:common :system);
+use common qw(:common :system :file);
 use commands;
 use log;
 
@@ -25,8 +25,28 @@ sub read {
     (timezone => $t{ZONE}, UTC => text2bool($t{UTC}));
 }
 
+sub ntp_server {
+    my ($prefix, $server) = @_;
+
+    my $f = "$prefix/etc/ntp.conf";
+    -e $f or return;
+
+    if (@_ > 1) {
+	substInFile {
+	    if (/^#?\s*server\s+(\S*)/ && $1 ne '127.127.1.0') {
+		$_ = $server ? "server $server\n" : "#server $1\n";
+	    }
+	} $f;
+    } else {
+	($server) = grep { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($f);
+    }
+    $server;
+}
+
 sub write {
     my ($prefix, $t) = @_;
+
+    ntp_server($prefix, $t->{ntp});
 
     eval { commands::cp("-f", "$prefix/usr/share/zoneinfo/$t->{timezone}", "$prefix/etc/localtime") };
     $@ and log::l("installing /etc/localtime failed");

@@ -523,6 +523,8 @@ sub configureTimezone {
     my ($o) = @_;
     install_any::preConfigureTimezone($o);
 
+    $o->pkg_install('ntp') if $o->{timezone}{ntp};
+
     require timezone;
     timezone::write($o->{prefix}, $o->{timezone});
 }

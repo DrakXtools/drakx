@@ -308,7 +308,10 @@ sub preConfigureTimezone {
     add2hash($o->{timezone}, { timezone::read($o->{prefix}) }) if $o->{isUpgrade};
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
-    add2hash_($o->{timezone}, { UTC => $::expert && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} });
+
+    my $utc = $::expert && !grep { isFat($_) || isNT($_) } @{$o->{fstab}};
+    my $ntp = timezone::ntp_server($o->{prefix});
+    add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
 
 sub setPackages {

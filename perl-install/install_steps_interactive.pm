@@ -775,7 +775,19 @@ sub configureTimezone {
     require timezone;
     $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     $o->set_help('configureTimezoneGMT');
-    $o->{timezone}{UTC} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{UTC}) if $::expert || $clicked;
+
+    my $ntp = bool($o->{timezone}{ntp});
+    $o->ask_from_entries_refH('', '', [
+	  { text => _("Hardware clock set to GMT"), val => \$o->{timezone}{UTC}, type => 'bool' },
+	  { text => _("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },
+    ]) or goto &configureTimezone
+	    if $::expert || $clicked;
+    if ($ntp) {
+	$o->ask_from_entries_refH('', '',
+	    [ { label => _("NTP Server"), val => \$o->{timezone}{ntp} } ]) or goto &configureTimezone;
+    } else {
+	$o->{timezone}{ntp} = '';
+    }
     install_steps::configureTimezone($o);
 }
 
@@ -789,6 +801,7 @@ sub configureServices {
 
 sub summary {
     my ($o, $first_time) = @_;
+    require pkgs;
 
     if ($first_time) {
 	#- auto-detection
