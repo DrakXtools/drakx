@@ -166,8 +166,7 @@ $window->{window}->add(
                                                                                            Gtk2::HBox->new(0, 0),
                                                                                            5),
                                                                        30, 75),
-                                                   1, $output = new Gtk2::Text(undef, undef),
-                                                   0, Gtk2::VScrollbar->new($output->vadj),
+                                                   1, $output = Gtk2::TextView->new,
                                                   ),
                                          ),
                                 0, gtkpack__(new Gtk2::HBox(0, 0),
@@ -308,7 +307,7 @@ sub build_it {
     open STATUS, $co or do { create_dialog(N("Unable to fork: %s", $!), 0); return };
     local $_;
     while (<STATUS>) {
-        $output->insert(undef, undef, undef, $_);
+        gtktext_append($output, [ [ $_ ] ]);
     }
     close STATUS or create_dialog(N("Unable to properly close mkbootdisk: \n %s \n %s", $!, $?), 0);
   
