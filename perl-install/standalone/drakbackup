@@ -10,23 +10,17 @@
 #  from starup or on drakconf utility.
 #
 #backup name format: all the time from the /
-#                    backup_sys_12102001.tar.gz                    -> default system backup
-#		     backup_sys_etc_var_proc_12102001.tar.gz       -> specific system directories
-#		     backup_user_james_12102001.tar.gz             -> default user backup
-#		     backup_user_james_documents_12102001.tar.gz   -> specific user directories
-#                    backup_other_proc_12102001.tar.gz             -> specific other directories
+#                    backup_sys.tar.gz                    -> default system backup
+#		     backup_user_james.tar.gz             -> default user backup
+#		     backup_user_seb.tar.gz   
+#                    backup_other.tar.gz                  -> other directories
 #
-# backup name rules: system: begin by sys
-#                    user:   begin by user
-#                    other:   begin by other
-#                    end of all `date`.tar.gz
 #
 # seems to be good idea to have a txt file where user explain the differences
 # between all the backup
 #
 # save only the differences...
 #
-# find / -mtime -1 \! -type d -print > /tmp/liste.jour
 # build iso fs with rescue.
 # configuration file on /etc/drakconf/drakbackup/drakbakup.conf
 #
@@ -129,8 +123,6 @@ my $cd_with_install_boot = 0;
 my $cd_devive = '';
 my $host_name = '';
 my $backupignore = 0; 
-
-
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -276,7 +268,6 @@ sub status_report {
 
 }
 
-
 sub return_path {
     my $name = $_; 
     foreach (@user_and_path_list) {
@@ -388,8 +379,6 @@ sub interactive_mode {
     Gtk->exit(0);
 }
 
-
-
 sub list_remove {
     my($widget, $list) = @_;
     my @to_remove;
@@ -397,7 +386,6 @@ sub list_remove {
     splice @list_other, $_, 1 foreach(reverse sort @to_remove);
     $list->remove_items($list->selection);
 }
-
 
 sub file_ok_sel { 
     my ( $widget, $file_selection ) = @_;     
@@ -434,7 +422,7 @@ sub wizard {
 		  [ 
 		    { label => _("System Files"), val => \$backup_sys, type => "bool", text => _("  all files on your /etc directory.") },
 		    { label => _("User Files"), val => \$backup_user, type => "bool", text => _("  all user files on your system.") },
-#		    map { { label => _("$_"), val => \$user, type => "bool", text => _("all data contained on $_ directory") } } @user_list,
+
 		    ],
 		  );
     
@@ -465,7 +453,6 @@ sub wizard {
 		    ],
 		  ) or goto step_2;
 }
-
 
 sub advanced {
     my $notebook; 
@@ -843,7 +830,6 @@ sub advanced {
     $up_box->show_all();
 }
 
-
 sub find_backup_to_restore {
     my @list_backup_tmp;
     my @user_backuped_tmp;
@@ -934,7 +920,7 @@ sub restore_step_other {
 
 my %check_user_to_restore;
 sub restore_step_user {
-#    @user_list_to_restore = @user_backuped;
+
     my $retore_step_user;
     gtkpack($retore_box2,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
@@ -978,7 +964,6 @@ sub restore_step_user {
     $central_widget = \$retore_step_user;
     $up_box->show_all();
 }
-
 
 sub restore_step_sys {
     my $retore_step_sys;
@@ -1132,9 +1117,6 @@ sub restore {
     $up_box->show_all();
 }
 
-
-
-
 sub interactive_mode_my {
     $interactive = 1;
     my $box_cfg_state;
@@ -1214,7 +1196,6 @@ sub interactive_mode_my {
     Gtk->main;
     Gtk->exit(0);
 }
-
 
 sub after_adv {
     $interactive = 1;
@@ -1366,22 +1347,12 @@ description:
 backup name format: all the time from the / dir.
 
 	system backup:
-                   backup_sys_12102001.tar.gz 
-		   backup_sys_etc_var_proc_12102001.tar.gz
+                   backup_sys.tar.gz 
 	user backup
-		   backup_user_james_12102001.tar.gz      
-		   backup_user_james_documents_12102001.tar.gz
+		   backup_user_james.tar.gz      
+		   backup_user_seb.tar.gz
 	other directories
-                   backup_other_proc_12102001.tar.gz          
-
-backup name rules: system:   begin by sys
-                   user:     begin by user
-                   other:    begin by other
-                   end of all `date`.tar.gz
-
-
-save only the differences...
-find / -mtime -1 \! -type d -print > /tmp/liste.jour
+                   backup_other.tar.gz          
 
 build iso fs with rescue.
 
@@ -1415,13 +1386,12 @@ Drakbacup allow to restore the system (etc, var files)
  from starup or on drakconf utility.
 
 	system backup:
-                   backup_sys_12102001.tar.gz 
-		   backup_sys_etc_var_proc_12102001.tar.gz
+                   backup_sys.tar.gz 
 	user backup
-		   backup_user_james_12102001.tar.gz      
-		   backup_user_james_documents_12102001.tar.gz
+		   backup_user_james.tar.gz      
+		   backup_user_seb.tar.gz
 	other directories
-                   backup_other_proc_12102001.tar.gz          
+                   backup_other.tar.gz          
 
 ")),
 					      0, new Gtk::VScrollbar($text->vadj),
