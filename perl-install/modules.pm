@@ -363,7 +363,7 @@ sub when_load {
     $conf{$name}{options} = join " ", @options if @options;
 
     if (my $category = module2category($name)) {
-	if ($category =~ m,disk/(scsi|hardware_raid|usb),) {
+	if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
 	    add_probeall('scsi_hostadapter', $name);
 	    eval { load('sd_mod') };
 	}
