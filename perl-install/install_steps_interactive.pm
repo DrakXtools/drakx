@@ -539,14 +539,18 @@ sub chooseGroups {
 	$val{$_} = ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}};
     }
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
-    my ($all, $size_text);
+    my ($all, $size_text, $path);
     my $update_size = sub { 
 	my $size = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
 	$size_text = _("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
     }; &$update_size;
     $o->ask_from_entries_refH('', _("Package Group Selection"), [
-                           { val => \$size_text, type => 'label' },
-			   (map {; {
+                           { val => \$size_text, type => 'label' }, {},
+			   (map {; 
+				 my $old = $path;
+				 $path = $o->{compssUsers}{$_}{path};
+				 if_($old ne $path, { val => $path }),
+				 {
 			     help => translate($o->{compssUsers}{$_}{descr}),
 			     val => \$val{$_},
 			     type => 'bool',
@@ -557,7 +561,7 @@ sub chooseGroups {
 				 "$f.png";
 			     },
 			     disabled => sub { $all },
-			     text => translate($_) . sprintf(" (%d%s)", $compute_size->(@{$compssUsers->{$_}{flags}}) / sqr(1024), _("MB")),
+			     text => translate($o->{compssUsers}{$_}{label}) . sprintf(" (%d%s)", $compute_size->(@{$compssUsers->{$_}{flags}}) / sqr(1024), _("MB")),
 			   } } @groups),
 			   if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
 			   if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
