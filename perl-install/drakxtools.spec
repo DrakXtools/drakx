@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.8mdk
+Release: 0.9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.9mdk
+- drakconnect wizard:
+  o fix unability to select gateway (#7585)
+  o detect athX interfaces too (#7531)
+- drakfont: fix crash on option toggling (#7248)
+
 * Mon Feb  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.8mdk
 - drakconnect wizard:
   o blacklist forcedeth for network hotplug (#7389)
