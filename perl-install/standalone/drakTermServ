@@ -61,6 +61,7 @@ my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 my $tftpboot = "/var/lib/tftpboot";
 my @kernels = bootloader::installed_vmlinuz();
+my $cmd_line = 1;
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -q terminal-server > /dev/null");
@@ -78,67 +79,57 @@ if ($ts == 256) {
 }
 
 if ("@ARGV" =~ /--enable/) {
-	my $cmd_line = 1;
-	enable_ts($cmd_line);
+	enable_ts();
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--disable/) {
-	my $cmd_line = 1;
-	disable_ts($cmd_line);
+	disable_ts();
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--restart/) {
-	my $cmd_line = 1;
-	stop_ts($cmd_line);
-	start_ts($cmd_line);
+	stop_ts();
+	start_ts();
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--start/) {
-	my $cmd_line = 1;
-	start_ts($cmd_line);
+	start_ts();
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--stop/) {
-	my $cmd_line = 1;
-	stop_ts($cmd_line);
+	stop_ts();
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--adduser/) {
 	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $#ARGV < 1;
-	my $cmd_line = 1;
-	adduser($cmd_line, $ARGV[1]);
+	adduser($ARGV[1]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--deluser/) {
 	die N("%s: %s requires a username...\n", $0, $ARGV[0]) if $#ARGV < 1;
-	my $cmd_line = 1;
-	deluser($cmd_line, $ARGV[1]);
+	deluser($ARGV[1]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--syncusers/) {
-	my $cmd_line = 1;
-	sync_users($cmd_line);
+	sync_users();
 	exit(0);
 }
 
 if ("@ARGV" =~ /--addclient/) {
 	die N("%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, 0/1 for Local Config...\n", $0, $ARGV[0]) if $#ARGV < 6;
-	my $cmd_line = 1;
-	addclient($cmd_line, @ARGV[1..6]);
+	addclient(@ARGV[1..6]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--delclient/) {
 	die N("%s: %s requires hostname...\n", $0, $ARGV[0]) if $#ARGV < 1;
-	my $cmd_line = 1;
-	delclient($cmd_line, $ARGV[1]);
+	delclient($ARGV[1]);
 	exit(0);	
 }
 
@@ -199,18 +190,6 @@ x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 	output_p($inittab_file, $inittab);	
 }
 
-sub cursor_wait() {
-	# turn the cursor to a watch
-	$window1->{rwindow}->window->set_cursor(Gtk2::Gdk->new::Cursor("GDK_WATCH"));	
-	gtkflush();
-}
-
-sub cursor_norm() {
-	# restore normal cursor
-	$window1->{rwindow}->window->set_cursor(Gtk2::Gdk->new::Cursor("GDK_LEFT_PTR"));
-	gtkflush();
-}
-
 sub display_error {
     my ($message) = @_;
     my $error_box;
@@ -229,6 +208,7 @@ sub display_error {
 }
 
 sub interactive_mode() {
+	$cmd_line = 0;
     $in = 'interactive'->vnew;
 	$::Wizard_title = N("Terminal Server Configuration");
 	$::Wizard_pix_up = "ic82-network-40.png";
@@ -250,29 +230,29 @@ sub interactive_mode() {
 						  1, gtkpack_(Gtk2::VBox->new(1,0),
 							1, gtksignal_connect(Gtk2::Button->new(N("Enable Server")), clicked => sub {
 								destroy_widget();
-								cursor_wait(); 
+								gtkset_mousecursor_wait(); 
 								enable_ts();
-								cursor_norm();
+								gtkset_mousecursor_normal();
 							}),
 							1, gtksignal_connect(Gtk2::Button->new(N("Disable Server")), clicked => sub {
 								destroy_widget();
-								cursor_wait();
+								gtkset_mousecursor_wait();
 								disable_ts();
-								cursor_norm(); 
+								gtkset_mousecursor_normal(); 
 							}),
 						  ),
 						  1, gtkpack_(Gtk2::VBox->new(1,0),
 							1, gtksignal_connect(Gtk2::Button->new(N("Start Server")), clicked => sub { 
 								destroy_widget();
-								cursor_wait();	
+								gtkset_mousecursor_wait();	
 								start_ts();
-								cursor_norm();
+								gtkset_mousecursor_normal();
 							}),
 							1, gtksignal_connect(Gtk2::Button->new(N("Stop Server")), clicked => sub {
 								destroy_widget();
-								cursor_wait();
+								gtkset_mousecursor_wait();
 								stop_ts();
-								cursor_norm();
+								gtkset_mousecursor_normal();
 							}),
 						  ),
 						  1, gtkpack_(Gtk2::VBox->new(1,0),
@@ -325,8 +305,7 @@ sub interactive_mode() {
     ugtk2->exit(0);
 }
 
-sub check_gdm {
-	my ($cmd_line) = @_;
+sub check_gdm() {
 	#- gdm now needs gdm user in /etc/passwd$$CLIENT$$
 	my %desktop = getVarsFromSh("/etc/sysconfig/desktop");
 	my $dm = $desktop{DISPLAYMANAGER}; 
@@ -335,7 +314,7 @@ sub check_gdm {
 	if ($dm =~ /GNOME|GDM/ && !$gdm) {
 		$in->ask_warn(N("Warning"), N("%s defined as dm, adding gdm user to /etc/passwd\$\$CLIENT\$\$", $dm)) if !$cmd_line;
 		warn(N("%s defined as dm, adding gdm user to /etc/passwd\$\$CLIENT\$\$", $dm)) if $cmd_line;
-		adduser($cmd_line, "gdm");
+		adduser("gdm");
 	}
 }
 
@@ -448,15 +427,14 @@ sub client_type() {
 sub make_nbis() {
 	my $buff = N("Creating net boot images for all kernels");
 	$in->ask_warn(N("Information"), N("This will take a few minutes."));
-	cursor_wait();
+	gtkset_mousecursor_wait();
 	system("/usr/bin/mknbi-set -k /boot/$_") foreach @kernels;
-	cursor_norm();
+	gtkset_mousecursor_normal();
 	$buff .= "\n\n\t" . N("Done!");	
 	text_view($buff, "wizard");
 }
 
-sub sync_users {
-	my ($cmd_line) = @_;
+sub sync_users() {
 	my $buff = N("Syncing server user list with client list, including root.");
 	my @active_users = cat_("/etc/shadow");
 
@@ -746,9 +724,9 @@ sub make_nbi() {
 					gtksignal_connect(Gtk2::Button->new(N("Build Whole Kernel -->")), clicked => sub { 
 						if ($kernel) {
 							$in->ask_warn(N("Information"), N("This will take a few minutes."));
-							cursor_wait();
+							gtkset_mousecursor_wait();
 							build_n_update($list_model, "-k /boot/$kernel");
-							cursor_norm(); 
+							gtkset_mousecursor_normal(); 
 						} else {
 							$in->ask_warn(N("Error"), N("No kernel selected!")) if !($kernel); 
 						}
@@ -762,9 +740,9 @@ sub make_nbi() {
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Build All Kernels -->")), clicked => sub {
 						$in->ask_warn(N("Information"), N("This will take a few minutes."));
-						cursor_wait();
+						gtkset_mousecursor_wait();
 						build_n_update($list_model, "-k /boot/$_") foreach @kernels;
-						cursor_norm(); 
+						gtkset_mousecursor_normal(); 
 					}),
 					$combo_default_kernel,
 					Gtk2::HBox->new(1,1),
@@ -776,13 +754,13 @@ sub make_nbi() {
 						}
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Delete All NBIs")), clicked => sub { 
-						cursor_wait();
+						gtkset_mousecursor_wait();
 						foreach (grep { /\.nbi/ } all($tftpboot)) {
 							my $nbi = $tftpboot . "/" . $_;
 							unlink($nbi) || warn("Can't delete $nbi...");
 						}
 						$list_model->clear;
-						cursor_norm();
+						gtkset_mousecursor_normal();
 					}),	
 					Gtk2::HBox->new(1,1),
 				),
@@ -802,7 +780,7 @@ sub update_list {
 
 sub build_n_update {
     my ($list_model, $command) = @_;
-    system("/usr/bin/mknbi-set $command");
+    system("/usr/bin/mknbi-set -v $command");
     update_list($list_model);
 }
 
@@ -868,13 +846,13 @@ sub maintain_users() {
 				gtkadd(Gtk2::VBox->new(1,10),
 					Gtk2::HBox->new(0,10),
 					gtksignal_connect(Gtk2::Button->new(N("Add User -->")), clicked => 
-						sub { my $result = adduser(0, $sys_user);
+						sub { my $result = adduser($sys_user);
 							if ($result == 0) {
     							$list_model->append_set(0, $sys_user);
 							}
 						}),
 					gtksignal_connect(Gtk2::Button->new(N("<-- Del User")), clicked => 
-						sub { deluser(0, $ts_user);
+						sub { deluser($ts_user);
 							$list_model->remove($titer);
 						}),
 					Gtk2::HBox->new(0,10),
@@ -982,7 +960,7 @@ sub maintain_clients() {
 							my $nbi = $entry_nbi->entry->get_text;
 							if ($hostname && $mac && $ip) {
 	
-								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin, $local_config);
+								my $result = addclient($hostname, $mac, $ip, $nbi, $is_thin, $local_config);
 								
 								if ($result == 0) {
     								my $t_client = $model->append_set(undef, [ 0 => $hostname ]);
@@ -1024,7 +1002,7 @@ sub maintain_clients() {
 								$check_hdw_config->set_active(0);
 							}	
 								
-							my $result = delclient(0, $client);
+							my $result = delclient($client);
 							if ($result == 0) {
 								$model->remove($citer);
 								$button_edit->set_sensitive(0);
@@ -1040,7 +1018,7 @@ sub maintain_clients() {
 							}	
 						}),	
 					gtksignal_connect($button_delete = Gtk2::Button->new(N("Delete Client")), clicked => 
-						sub { my $result = delclient(0, $client);
+						sub { my $result = delclient($client);
 							if ($result == 0) {
 								$model->remove($citer);
 								$button_edit->set_sensitive(0);
@@ -1450,11 +1428,10 @@ sub write_eb_image {
 	}
 }
 
-sub enable_ts {
+sub enable_ts() {
 	#- setup default config files for terminal server
 
-	my $cmd_line = @_;
-	check_gdm($cmd_line);
+	check_gdm();
 
 	@buff = ();
 	$buff[0] = "Enabling Terminal Server...\n\n";
@@ -1486,7 +1463,6 @@ sub enable_ts {
 	$squash = "no_root_squash" if $msec{SECURE_LEVEL} > 2;
 	my $exports = "#/etc/exports - generated by drakTermServ\n\n";
 	if ($nfs_subnet eq '') {
-		$nfs_subnet = get_subnet_from_sys();
 		$nfs_mask = get_mask_from_sys();
 		my $sys_broadcast = get_broadcast_from_sys();
 		$nfs_subnet = get_subnet_from_sys($sys_broadcast, $nfs_mask);
@@ -1507,9 +1483,8 @@ sub enable_ts {
     show_status(@buff);
 }
 
-sub disable_ts {
+sub disable_ts() {
 	#- restore pre-terminal server configs 
-	my $cmd_line = @_;
 
 	@buff = ();
 	$buff[0] = "Disabling Terminal Server...\n\n";
@@ -1553,9 +1528,8 @@ sub service_change {
 	$buff_index;		
 }
 	
-sub start_ts {
+sub start_ts() {
 	#- start the terminal server
-	my $cmd_line = @_;
 	my $pcimap = "/etc/dhcpd.conf.etherboot-pcimap.include";
 	
 	@buff = ();
@@ -1576,9 +1550,8 @@ sub start_ts {
 	show_status(@buff);
 }
 
-sub stop_ts {
+sub stop_ts() {
 	#- stop the terminal server
-	my $cmd_line = @_;
 
 	@buff = ();
 	$buff[0] = "Stopping Terminal Server...\n\n";
@@ -1608,7 +1581,7 @@ sub show_status() {
 }
 
 sub adduser {
-	my ($cmd_line, $username) = @_;
+	my ($username) = @_;
 	my @active_users = cat_("/etc/shadow");
 	my @passwd_users = cat_("/etc/passwd");
 	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
@@ -1627,8 +1600,8 @@ sub adduser {
 			} else {
 				#in but password changed
 				print N("%s passwd bad in Terminal Server - rewriting...\n", $username);
-				deluser($cmd_line, $username);				
-				adduser($cmd_line, $username);				
+				deluser($username);				
+				adduser($username);				
 			}
 		} else {
 			# new ts user
@@ -1654,7 +1627,7 @@ sub adduser {
 
 sub deluser {
 	# del a user from the shadow$$CLIENT$$ file
-	my ($cmd_line, $username) = @_;
+	my ($username) = @_;
 	my $i;
 	my $user_deleted;
 	my @ts_users = cat_('/etc/shadow$$CLIENT$$');
@@ -1700,7 +1673,7 @@ sub deluser {
 
 sub addclient {
 	#- add a new client entry after checking for dups
-	my ($cmd_line, $hostname, $mac, $ip, $nbi, $is_thin, $local_config) = @_;
+	my ($hostname, $mac, $ip, $nbi, $is_thin, $local_config) = @_;
 
 	my $host_in_use = 0;
 	my $mac_in_use = 0;
@@ -1748,7 +1721,7 @@ sub addclient {
 	
 sub delclient {
 	#- find a client and delete the entry in dhcpd.conf
-	my ($cmd_line, $hostname) = @_;
+	my ($hostname) = @_;
 	my $host_found;
 	
 	my %ts_clients = read_dhcpd_conf();
