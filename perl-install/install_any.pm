@@ -176,11 +176,7 @@ sub setup_postinstall_rpms($$) {
 	my $pkg = pkgs::packageByName($packages, $_);
 	pkgs::selectPackage($packages, $pkg, 0, \%toCopy) if $pkg;
     }
-    foreach (@needToCopyIfRequiresSatisfied) {
-	my $pkg = pkgs::packageByName($packages, $_);
-	my %newSelection; pkgs::selectPackage($packages, $pkg, 0, \%newSelection) if $pkg;
-	scalar(keys %newSelection) == 1 and @toCopy{keys %newSelection} = ();
-    }
+    @toCopy{@needToCopyIfRequiresSatisfied} = ();
 
     my @toCopy = map { pkgs::packageByName($packages, $_) } keys %toCopy;
 
