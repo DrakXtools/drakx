@@ -1,5 +1,0 @@
-#!/bin/sh
-
-make DEST_LIVETREE=/opt/live_tree || exit 1
-./hack_boot_img all.rdz all
-cp -f all.rdz /tftpboot/gc/network.rdz
