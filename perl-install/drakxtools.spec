@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 14mdk
+Release: 13mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -263,11 +263,34 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-
+* Mon Jul 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-13mdk
+- updated XFdrake (gtk resolution chooser work, i810 fixes, ...)
+- fix harddrake config file conversion
 - remove "Requires: groff" (nobody know why it's there) (Pixel)
-
-* Fri Jul 26 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-13mdk
-- put right version for conversion trigger (plain perl -> storable)
+- updated translations (nl/id/vi)
+- standalone/logdrake: (deush)
+	o don't display services that are not installed
+	o word wrap string correctly
+	o cleanup
+- bootloader.pm: let the bootloader::mkinitrd error be seen by the GUI
+  (pixel)
+- interactive.pm: error messages fixes (pixel)
+- diskdrake: add 0x35 partition table id meaning JFS (under OS/2)
+  (thank to Mika Laitio)
+- printerdrake: first step of automatic HP multi-function device
+  configuration with HPOJ 0.9. (till)
+- drakTermServ (stew)
+	o Check for/install terminal-server and friends.
+	o More intelligent error message when mkisofs fails.
+	o  Cleanup code for use strict.
+	o Fix crash when no backup dhcpd.conf.
+- drakbackup: (stew)
+	o Numerous GUI crash fixes, oddities. 
+	o Install	needed packages.
+	o Fix email, daemon modes.
+	o Add rsync, webdav, cd, tape capabilities. 
+	o Consolidate net method setup screens.
+	o Add CD device capability query.
 
 * Thu Jul 25 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-12mdk
 - simplify harddrake service:
