@@ -21,11 +21,13 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
     $in = 'interactive'->vnew('su');
 
   choose:
-    $keyboard->{KEYBOARD} = $in->ask_from_listf(N("Keyboard"),
-						N("Please, choose your keyboard layout."),
-						sub { translate(keyboard::KEYBOARD2text($_[0])) },
-						[ keyboard::KEYBOARDs() ],
-						$keyboard->{KEYBOARD}) or goto end;
+    $in->ask_from(N("Keyboard"),
+		  N("Please, choose your keyboard layout."),
+		  [ { val => \$keyboard->{KEYBOARD},
+		      format => sub { translate(keyboard::KEYBOARD2text($_[0])) },
+		      list => [ keyboard::KEYBOARDs() ],
+		      type => 'list',
+		  } ]) or goto end;
 
     keyboard::group_toggle_choose($in, $keyboard) or goto choose;
 }
