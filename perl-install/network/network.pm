@@ -26,14 +26,9 @@ sub read_conf {
 
 sub read_resolv_conf {
     my ($file) = @_;
-    my @l = qw(dnsServer dnsServer2 dnsServer3);
-    my %netc;
+    my @l = map { if_(/^\s*nameserver\s+(\S+)/, $1) } cat_($file);
 
-    local *F; open F, $file or die "cannot open $file: $!";
-    local $_;
-    while (<F>) {
-	/^\s*nameserver\s+(\S+)/ and $netc{shift @l} = $1;
-    }
+    my %netc = mapn { $_[0] => $_[1] } [ qw(dnsServer dnsServer2 dnsServer3) ], \@l;
     \%netc;
 }
 
