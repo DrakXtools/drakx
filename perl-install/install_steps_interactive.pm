@@ -901,6 +901,11 @@ sub configurePrinter {
     require printer;
     require printerdrake;
 
+    if (!$::testing) {
+	$o->do_pkgs->install('foomatic', 'printer-utils','printer-testpages',
+			      if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
+    }
+
     #- try to determine if a question should be asked to the user or
     #- if he is autorized to configure multiple queues.
     my $ask_multiple_printer = !$::expert && !$clicked ? scalar(printerdrake::auto_detect($o)) : 2;
