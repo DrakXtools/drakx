@@ -44,12 +44,13 @@ sub isdn_write_config {
     my $e = $in->ask_from_list_(_("Network Configuration Wizard"),
 				    _("Which ISDN configuration do you prefer?
 
-* The Old configuration uses isdn4net. It contains powerfull tools, but is tricky to configure for a newbie, and not standard.
+* The Old configuration uses isdn4net. It contains powerfull
+  tools, but is tricky to configure, and not standard.
 
-* The New configuration is easier to understand, more standard, but with less tools.
+* The New configuration is easier to understand, more
+  standard, but with less tools.
 
 We recommand the light configuration.
-
 "), [ __("New configuration (isdn-light)"), __("Old configuration (isdn4net)")]
 			       ) or return;
     my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn-light', 'isdn4net');
@@ -178,9 +179,9 @@ sub isdn_ask_info {
 
 sub isdn_ask_protocol {
     my @toto=(
-	      { description => $::expert ? _("Europe (EDSS1)") : _("Europe"),
+	      { description => $::expert ? _("Europe protocol (EDSS1)") : _("Europe protocol"),
 		protokol => 2},
-	      { description => $::expert ? _("Rest of the world \n no D-Channel (leased lines)") : _("Rest of the world"),
+	      { description => $::expert ? _("Protocol for the rest of the world \n no D-Channel (leased lines)") : _("Protocol for the rest of the world"),
 		protokol => 3}
 	     );
     my $e = $in->ask_from_listf(_("ISDN Configuration"),
