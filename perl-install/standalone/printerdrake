@@ -121,7 +121,7 @@ my $error = 0;
 my $GetValue = -65533;
 my $stringsearch = '';
 
-sub HelpSystem { system("drakhelp Drakxtools-Guide.html/printerdrake.html &") };
+sub HelpSystem { exec("drakhelp --id printerdrake") unless fork(); };
 
 $us->{wnd} = ugtk2->new(N("Mandrake Linux Printer Management Tool") . " " . $us->{VERSION});
 gtkset_size_request($us->{wnd}{rwindow}, 660, 460);
