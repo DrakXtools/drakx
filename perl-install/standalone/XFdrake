@@ -53,9 +53,9 @@ $configure_this ||= 'everything';
 	    Xconfig::main::configure_resolution($in, Xconfig::xfree->read);
 	}
     };
-    ask_for_X_restart($in) if $rc;
+    ask_for_X_restart($in) if $rc && !$::auto;
 
-    $in->exit(0);
+    $in->exit($rc ? 0 : 1);
 }
 
 sub check_XFree {
