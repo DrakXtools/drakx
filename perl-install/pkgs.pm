@@ -955,11 +955,14 @@ sub cleanOldRpmDb {
 sub selectPackagesAlreadyInstalled {
     my ($packages, $prefix) = @_;
 
+    log::l("computing installed flags only");
     $packages->compute_installed_flags($packages->{rpmdb});
 }
 
 sub selectPackagesToUpgrade {
     my ($packages, $prefix, $base, $toRemove, $toSave) = @_;
+
+    log::l("selecting packages to upgrade");
 
     my $state = $packages->{state} ||= {};
     $state->{selected} = {};
