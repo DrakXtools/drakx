@@ -358,6 +358,7 @@ our %adsl_data = (
                    Encapsulation => 4,
                    dnsServer2 => '213.228.0.23',
                    dnsServer3 => '212.27.32.176',
+                   method => 'dhcp',
                    DOMAINNAME2 => 'free.fr',
                   },
 
@@ -510,6 +511,7 @@ our %adsl_data = (
                    vpi => 8,
                    vci => 23,
                    Encapsulation => 3,
+                   method => 'manual',
                   },
 
                   N("Italy") . "|Tiscali.it, Alice" =>
