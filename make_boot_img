@@ -288,7 +288,7 @@ sub boot_img_i386 {
 	my $pcitable = cat_('/usr/share/ldetect-lst/pcitable');
 	my @l = sort { $a <=> $b } map {
 	    my ($name) = /(\S+)\.k?o$/ or die "bad file in .mar";
-	    my $gz_size = chomp_(`gzip -c $dir/$_ | wc -c`);
+	    my $gz_size = chomp_(`tar xOf $dir/all_modules.tar $_ | gzip | wc -c`);
 	    sprintf "%7d  %6d      %s\n", $gz_size, listlength($pcitable =~ /"$name"/g), $name;
 	} split(' ', `mdk-stage1/mar/mar -l $dir/${initrd_type}_modules.mar`);
 	output('.not-enough-room', "gz size - pcitable - name\n", @l);
