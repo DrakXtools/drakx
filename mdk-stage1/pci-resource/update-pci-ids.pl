@@ -1,8 +1,5 @@
 #!/usr/bin/perl
 
-use lib "../../perl-install";
-
-use common qw(:common);
 require '/usr/bin/merge2pcitable.pl';
 
 my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
