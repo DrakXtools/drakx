@@ -222,7 +222,7 @@ sub getinfoFromDDC {
     $O->{vsyncrange} ||= first($v =~ /^(\S*)/);
     $O->{size} ||= to_float($size);
     $O->{EISA_ID} = lc($1) if $size =~ /EISA ID=(\S*)/;
-    $O->{ModeLines_xf3} ||= join '', @m;
+    $O->{ModeLines_xf3} ||= join '', map { "    $_" } @m;
     $X;
 }
 

@@ -38,7 +38,7 @@ sub cardName2RealName {
     my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
     foreach (catMaybeCompressed($file)) {
 	chop;
-	next if /^#/;	  
+	next if /^#/;
 	my ($name_, $real) = split '=>';
 	return $real if $name eq $name_;
     }
@@ -49,7 +49,7 @@ sub realName2CardName {
     my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
     foreach (catMaybeCompressed($file)) {
 	chop;
-	next if /^#/;	  
+	next if /^#/;
 	my ($name, $real_) = split '=>';
 	return $name if $real eq $real_;
     }
@@ -222,7 +222,7 @@ sub multi_head_config {
 		map_index { { screen => $::i, %$_ } } ($_) x ($_->{MULTI_HEAD} || 1);
 	    } @cards;
 
-	    delete $_->{server} foreach @cards;	#- XFree 3 doesn't handle multi head (?)
+	    delete $_->{server} foreach @cards; #- XFree 3 doesn't handle multi head (?)
 	    my $card = shift @cards; #- assume good default.
 	    $card->{cards} = \@cards;
 	    $card->{Xinerama} = $_[0];
@@ -345,7 +345,7 @@ sub cardConfiguration {
     }
 
     if (!$card->{server} && !$card->{driver} && !$noauto) {
-	my @cards = cardConfigurationAuto();	
+	my @cards = cardConfigurationAuto();
 
 	my $card_ = multi_head_config($noauto, @cards);
 	put_in_hash($card, $card_);
@@ -531,6 +531,7 @@ sub finalize_config {
 	    !/^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+(.*)/ || !$seen{"$1 $2"}++;
 	} @l;
 	$_ = join("\n", reverse @l);
+	s/^\n*/\n/; s/\n*$/\n/; #- have exactly one CR at beginning and end
     }
 
     $X->{keyboard}{XkbModel} ||= 
@@ -958,39 +959,39 @@ sub write_XF86Config {
 
     print F '
 Section "Keyboard"
-    Protocol    "Standard"
+    Protocol "Standard"
 ';
     print G '
 Section "InputDevice"
     Identifier "Keyboard1"
-    Driver      "Keyboard"
+    Driver "Keyboard"
 ';
 
     print F qq(    XkbDisable\n) if !$O->{XkbLayout};
     print G qq(    Option "XkbDisable"\n) if !$O->{XkbLayout};
 
-    print F qq(    XkbModel        "$O->{XkbModel}"\n);
+    print F qq(    XkbModel "$O->{XkbModel}"\n);
     print G qq(    Option "XkbModel" "$O->{XkbModel}"\n);
-    print F qq(    XkbLayout       "$O->{XkbLayout}"\n);
+    print F qq(    XkbLayout "$O->{XkbLayout}"\n);
     print G qq(    Option "XkbLayout" "$O->{XkbLayout}"\n);
     print F join '', map { "    $_\n" } @{$Xconfigurator_consts::XkbOptions{$O->{XkbLayout}} || []};
     print G join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$Xconfigurator_consts::XkbOptions{$O->{XkbLayout}} || []};
-    print F "\nEndSection\n\n";
-    print G "\nEndSection\n\n";
+    print F "EndSection\n";
+    print G "EndSection\n";
 
     #- Write pointer section.
     my $pointer = sub {
 	my ($O, $id) = @_;
-	print F $id > 1 ? qq(Section "XInput"\n) : qq(Section "Pointer"\n);
+	print F $id > 1 ? qq(\nSection "XInput"\n) : qq(\nSection "Pointer"\n);
 	$id > 1 and print F qq(    SubSection "Mouse"\n);
-	print G qq(Section "InputDevice"\n\n);
+	print G qq(\nSection "InputDevice"\n);
 	$id > 1 and print F qq(        DeviceName "Mouse$id"\n);
-	print G qq(    Identifier  "Mouse$id"\n);
-	print G qq(    Driver      "mouse"\n);
-	print F ($id > 1 && "    ") . qq(    Protocol    "$O->{XMOUSETYPE}"\n);
-	print G qq(    Option "Protocol"    "$O->{XMOUSETYPE}"\n);
-	print F ($id > 1 && "    ") . qq(    Device      "/dev/$O->{device}"\n);
-	print G qq(    Option "Device"      "/dev/$O->{device}"\n);
+	print G qq(    Identifier "Mouse$id"\n);
+	print G qq(    Driver "mouse"\n);
+	print F ($id > 1 && "    ") . qq(    Protocol "$O->{XMOUSETYPE}"\n);
+	print G qq(    Option "Protocol" "$O->{XMOUSETYPE}"\n);
+	print F ($id > 1 && "    ") . qq(    Device "/dev/$O->{device}"\n);
+	print G qq(    Option "Device" "/dev/$O->{device}"\n);
 	print F "        AlwaysCore\n" if $id > 1;
 	#- this will enable the "wheel" or "knob" functionality if the mouse supports it
 	print F ($id > 1 && "    ") . "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
@@ -1004,21 +1005,21 @@ Section "InputDevice"
 	print G qq(    Option "Emulate3Buttons"\n);
 	print F "#" if $O->{nbuttons} >= 3;
 	print G "#" if $O->{nbuttons} >= 3;
-	print F ($id > 1 && "    ") . qq(    Emulate3Timeout    50\n\n);
-	print G qq(    Option "Emulate3Timeout"    "50"\n\n);
+	print F ($id > 1 && "    ") . qq(    Emulate3Timeout 50\n);
+	print G qq(    Option "Emulate3Timeout" "50"\n);
 	$id > 1 and print F qq(    EndSubSection\n);
-	print F "EndSection\n\n";
-	print G "EndSection\n\n";
+	print F "EndSection\n";
+	print G "EndSection\n";
     };
     $pointer->($X->{mouse}, 1);
     $pointer->($X->{mouse}{auxmouse}, 2) if $X->{mouse}{auxmouse};
 
     #- write module section for version 3.
     if (@{$X->{wacom}} || $X->{card}{use_UTAH_GLX}) {
-	print F qq(Section "Module"\n);
+	print F qq(\nSection "Module"\n);
 	print F qq(    Load "xf86Wacom.so"\n) if @{$X->{wacom}};
 	print F qq(    Load "glx-3.so"\n) if $X->{card}{use_UTAH_GLX}; #- glx.so may clash with server version 4.
-	print F qq(EndSection\n\n);
+	print F qq(EndSection\n);
     }
 
     #- write wacom device support.
@@ -1048,7 +1049,6 @@ Section "XInput"
         Mode Absolute
     EndSubSection
 EndSection
-
 ) : qq(
 Section "XInput"
     SubSection "WacomStylus"
@@ -1070,7 +1070,6 @@ Section "XInput"
         Mode Absolute
     EndSubSection
 EndSection
-
 );
     }
 
@@ -1078,89 +1077,76 @@ EndSection
 	my $dev = "/dev/" . $X->{wacom}[$_-1];
 	print G $dev =~ m|input/event| ? qq(
 Section "InputDevice"
-    Identifier	"Stylus$_"
-    Driver	"wacom"
-    Option	"Type" "stylus"
-    Option	"Device" "$dev"
-    Option	"Mode" "Absolute"
-    Option	"USB" "on"
+    Identifier "Stylus$_"
+    Driver "wacom"
+    Option "Type" "stylus"
+    Option "Device" "$dev"
+    Option "Mode" "Absolute"
+    Option "USB" "on"
 EndSection
 Section "InputDevice"
-    Identifier	"Eraser$_"
-    Driver	"wacom"
-    Option	"Type" "eraser"
-    Option	"Device" "$dev"
-    Option	"Mode" "Absolute"
-    Option	"USB" "on"
+    Identifier "Eraser$_"
+    Driver "wacom"
+    Option "Type" "eraser"
+    Option "Device" "$dev"
+    Option "Mode" "Absolute"
+    Option "USB" "on"
 EndSection
 Section "InputDevice"
-    Identifier	"Cursor$_"
-    Driver	"wacom"
-    Option	"Type" "cursor"
-    Option	"Device" "$dev"
-    Option	"Mode" "Relative"
-    Option	"USB" "on"
+    Identifier "Cursor$_"
+    Driver "wacom"
+    Option "Type" "cursor"
+    Option "Device" "$dev"
+    Option "Mode" "Relative"
+    Option "USB" "on"
 EndSection
 ) : qq(
 Section "InputDevice"
-    Identifier	"Stylus$_"
-    Driver	"wacom"
-    Option	"Type" "stylus"
-    Option	"Device" "$dev"
-    Option	"Mode" "Absolute"
+    Identifier "Stylus$_"
+    Driver "wacom"
+    Option "Type" "stylus"
+    Option "Device" "$dev"
+    Option "Mode" "Absolute"
 EndSection
 Section "InputDevice"
-    Identifier	"Eraser$_"
-    Driver	"wacom"
-    Option	"Type" "eraser"
-    Option	"Device" "$dev"
-    Option	"Mode" "Absolute"
+    Identifier "Eraser$_"
+    Driver "wacom"
+    Option "Type" "eraser"
+    Option "Device" "$dev"
+    Option "Mode" "Absolute"
 EndSection
 Section "InputDevice"
-    Identifier	"Cursor$_"
-    Driver	"wacom"
-    Option	"Type" "cursor"
-    Option	"Device" "$dev"
-    Option	"Mode" "Relative"
+    Identifier "Cursor$_"
+    Driver "wacom"
+    Option "Type" "cursor"
+    Option "Device" "$dev"
+    Option "Mode" "Relative"
 EndSection
 );
     }
 
     #- write modules section for version 4.
-    print G qq(
-Section "Module"
-
-# This loads the DBE extension module.
-    Load	"dbe"
-);
-    if (!($X->{card}{use_DRI_GLX} && $X->{card}{driver} eq 'r128')) {
-	print G qq(
-# This loads the Video for Linux module.
-    Load        "v4l"
-);
-    }
+    print G qq(\nSection "Module"\n);
+    print G qq(    Load "dbe" # Double-Buffering Extension\n);
+    print G qq(    Load "v4l" # Video for Linux\n) if !($X->{card}{use_DRI_GLX} && $X->{card}{driver} eq 'r128');
 
     #- For example, this loads the NVIDIA GLX extension module.
     #- When DRI_GLX_SPECIAL is set, use_DRI_GLX is also set
     if ($X->{card}{DRI_GLX_SPECIAL}) {
 	print G $X->{card}{DRI_GLX_SPECIAL};
     } elsif ($X->{card}{use_DRI_GLX}) {
-	print G qq(
-    Load	"glx"
-    Load	"dri"
-);
+	print G qq(    Load "dri" # direct rendering\n);
+	print G qq(    Load "glx" # 3D layer\n);
     }
-    print G qq(
-    Load	"type1"
-    Load	"freetype"
-EndSection
-);
-    print G qq(
+    print G qq(    Load "type1"\n);
+    print G qq(    Load "freetype"\n);
 
+    print G qq(EndSection\n);
+
+    print G qq(
 Section "DRI"
-    Mode	0666
+    Mode 0666
 EndSection
-
 ) if $X->{card}{use_DRI_GLX};
 
     #- Write monitor section.
@@ -1169,85 +1155,77 @@ EndSection
     print G qq(\nSection "Monitor"\n);
     print F qq(    Identifier "monitor1"\n);
     print G qq(    Identifier "monitor1"\n);
-    print F qq(    VendorName  "$O->{VendorName}"\n) if $O->{VendorName};
-    print G qq(    VendorName  "$O->{VendorName}"\n) if $O->{VendorName};
-    print F qq(    ModelName   "$O->{ModelName}"\n) if $O->{ModelName};
-    print G qq(    ModelName   "$O->{ModelName}"\n) if $O->{ModelName};
-    print F qq(    HorizSync  $O->{hsyncrange}\n\n);
-    print G qq(    HorizSync  $O->{hsyncrange}\n\n);
-    print F qq(    VertRefresh $O->{vsyncrange}\n\n);
-    print G qq(    VertRefresh $O->{vsyncrange}\n\n);
+    print F qq(    VendorName "$O->{VendorName}"\n) if $O->{VendorName};
+    print G qq(    VendorName "$O->{VendorName}"\n) if $O->{VendorName};
+    print F qq(    ModelName "$O->{ModelName}"\n) if $O->{ModelName};
+    print G qq(    ModelName "$O->{ModelName}"\n) if $O->{ModelName};
+    print F qq(    HorizSync $O->{hsyncrange}\n);
+    print G qq(    HorizSync $O->{hsyncrange}\n);
+    print F qq(    VertRefresh $O->{vsyncrange}\n);
+    print G qq(    VertRefresh $O->{vsyncrange}\n);
     print F $O->{ModeLines_xf3} if $O->{ModeLines_xf3};
     print G $O->{ModeLines} if $O->{ModeLines};
-    print F "\nEndSection\n\n\n";
-    print G "\nEndSection\n\n\n";
+    print F "EndSection\n";
+    print G "EndSection\n";
     foreach (1..@{$X->{card}{cards} || []}) {
-	print G qq(Section "Monitor"\n);
+	print G qq(\nSection "Monitor"\n);
 	print G qq(    Identifier "monitor), $_+1, qq("\n);
-	print G qq(    HorizSync   $O->{hsyncrange}\n);
+	print G qq(    HorizSync $O->{hsyncrange}\n);
 	print G qq(    VertRefresh $O->{vsyncrange}\n);
-	print G qq(EndSection\n\n\n);
+	print G qq(EndSection\n);
     }
 
     #- Write Device section.
     $O = $X->{card};
     print F $Xconfigurator_consts::devicesection_text;
-    print F qq(Section "Device"\n);
-    print F qq(    Identifier  "device1"\n);
-    print F qq(    VendorName  "$O->{VendorName}"\n) if $O->{VendorName};
-    print F qq(    BoardName   "$O->{BoardName}"\n) if $O->{BoardName};
-    print F qq(    Chipset     "$O->{Chipset}"\n) if $O->{Chipset};
+    print F qq(\nSection "Device"\n);
+    print F qq(    Identifier "device1"\n);
+    print F qq(    VendorName "$O->{VendorName}"\n) if $O->{VendorName};
+    print F qq(    BoardName "$O->{BoardName}"\n) if $O->{BoardName};
+    print F qq(    Chipset "$O->{Chipset}"\n) if $O->{Chipset};
 
     print F "#" if $O->{VideoRam} && !$O->{needVideoRam};
-    print F "    VideoRam    $O->{VideoRam}\n" if $O->{VideoRam};
+    print F "    VideoRam $O->{VideoRam}\n" if $O->{VideoRam};
+    print F "\n";
 
     print F map { "    $_\n" } @{$O->{lines} || []};
 
-    print F qq(
+    print F qq(    #Option "sw_cursor" # Uncomment following option if you see a big white block instead of the cursor!\n);
 
-    # Uncomment following option if you see a big white block        
-    # instead of the cursor!                                          
-    #    Option      "sw_cursor"
-
-);
     my $p_xf3 = sub {
 	my $l = $O->{$_[0]};
-	map { (!$l->{$_} && '#') . qq(    Option      "$_"\n) } keys %{$l || {}};
+	map { (!$l->{$_} && '#') . qq(    Option "$_"\n) } keys %{$l || {}};
     };
     my $p_xf4 = sub {
 	my $l = $O->{$_[0]};
-	map { (! defined $l->{$_} && '#') . qq(    Option      "$_"  "$l->{$_}"\n) } keys %{$l || {}};
+	map { (! defined $l->{$_} && '#') . qq(    Option "$_" "$l->{$_}"\n) } keys %{$l || {}};
     };
     print F $p_xf3->('options');
     print F $p_xf3->('options_xf3');
-    print F "EndSection\n\n\n";
+    print F "EndSection\n";
 
     #- configure all drivers here!
     each_index {
-	print G qq(Section "Device"\n);
-	print G qq(    Identifier  "device), $::i+1, qq("\n);
-	print G qq(    VendorName  "$_->{VendorName}"\n) if $_->{VendorName};
-	print G qq(    BoardName   "$_->{BoardName}"\n) if $_->{BoardName};
-	print G qq(    Driver      "$_->{driver}"\n);
+	print G qq(\nSection "Device"\n);
+	print G qq(    Identifier "device), $::i+1, qq("\n);
+	print G qq(    VendorName "$_->{VendorName}"\n) if $_->{VendorName};
+	print G qq(    BoardName "$_->{BoardName}"\n) if $_->{BoardName};
+	print G qq(    Driver "$_->{driver}"\n);
 	print G "#" if $_->{VideoRam} && !$_->{needVideoRam};
-	print G "    VideoRam    $_->{VideoRam}\n" if $_->{VideoRam};
+	print G "    VideoRam $_->{VideoRam}\n" if $_->{VideoRam};
+	print G "\n";
 	print G map { "    $_\n" } @{$_->{lines} || []};
 
-	print G qq(
+	print G qq(    #Option "sw_cursor" # Uncomment following option if you see a big white block instead of the cursor!\n);
 
-    # Uncomment following option if you see a big white block        
-    # instead of the cursor!                                          
-    #    Option      "sw_cursor"
-
-);
 	print G $p_xf3->('options'); #- keep $O for these!
 	print G $p_xf4->('options_xf4'); #- keep $O for these!
 	print G qq(    Screen $_->{screen}\n) if defined $_->{screen};
-	print G qq(    BusID       "$_->{busid}"\n) if $_->{busid};
+	print G qq(    BusID "$_->{busid}"\n) if $_->{busid};
         if ((arch =~ /ppc/) && ($_->{driver} eq "r128")) {
-            print G qq(    Option    "UseFBDev"\n);
+            print G qq(    Option "UseFBDev"\n);
         }
-	print G "EndSection\n\n\n";
+	print G "EndSection\n";
     } $O, @{$O->{cards} || []};
 
     my $subscreen = sub {
@@ -1256,10 +1234,10 @@ EndSection
 
         foreach (ikeys(%$depths)) {
 	    my $m = $server ne "fbdev" ? join(" ", map { qq("$_->[0]x$_->[1]") } @{$depths->{$_}}) : qq("default"); #-"
+	    print $f qq(\n);
 	    print $f qq(    Subsection "Display"\n);
-	    print $f qq(        Depth       $_\n) if $_;
-	    print $f qq(        Modes       $m\n);
-	    print $f qq(        ViewPort    0 0\n);
+	    print $f qq(        Depth $_\n) if $_;
+	    print $f qq(        Modes $m\n);
 	    print $f qq(    EndSubsection\n);
 	}
 	print $f "EndSection\n";
@@ -1270,8 +1248,8 @@ EndSection
 	print F qq(
 Section "Screen"
     Driver "$server"
-    Device      "$device"
-    Monitor     "monitor1"
+    Device "$device"
+    Monitor "monitor1"
 ); #-"
 	$subscreen->(*F, $server, $defdepth, $depths);
     };
@@ -1290,28 +1268,27 @@ Section "Screen"
 	print G qq(
 Section "Screen"
     Identifier "screen$_"
-    Device      "device$_"
-    Monitor     "monitor$_"
+    Device "device$_"
+    Monitor "monitor$_"
 );
 	#- bpp 32 not handled by XF4
 	$subscreen->(*G, "svga", min($X->{default_depth}, 24), $O->{depth});
     }
 
     print G qq(
-
 Section "ServerLayout"
     Identifier "layout1"
-    Screen     "screen1"
+    Screen "screen1"
 );
     foreach (1..@{$O->{cards} || []}) {
 	my ($curr, $prev) = ($_ + 1, $_);
-	print G qq(    Screen     "screen$curr" RightOf "screen$prev"\n);
+	print G qq(    Screen "screen$curr" RightOf "screen$prev"\n);
     }
     print G '#' if defined $O->{Xinerama} && !$O->{Xinerama};
-    print G qq(    Option     "Xinerama" "on"\n) if defined $O->{Xinerama};
+    print G qq(    Option "Xinerama" "on"\n) if defined $O->{Xinerama};
 
-    print G qq(\n    InputDevice "Mouse1" "CorePointer"\n);
-    print G qq(\n    InputDevice "Mouse2" "SendCoreEvents"\n) if $X->{mouse}{auxmouse};
+    print G qq(    InputDevice "Mouse1" "CorePointer"\n);
+    print G qq(    InputDevice "Mouse2" "SendCoreEvents"\n) if $X->{mouse}{auxmouse};
 
     foreach (1..@{$X->{wacom}}) {
 	print G qq(
@@ -1321,7 +1298,7 @@ Section "ServerLayout"
 );
     }
     print G qq(    InputDevice "Keyboard1" "CoreKeyboard"\n);
-    print G "\nEndSection\n\n";
+    print G "EndSection\n";
 
     close F;
     close G;
