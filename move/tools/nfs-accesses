@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+use Getopt::Long;
+
+GetOptions('no-link' => \ (my $no_link), 'no-dir' => \ (my $no_dir), 'full-dirs=s', \ (my $full_dirs));
+
+my @skipped_dirs = (
+		    '/usr/share/fonts', 
+		    '/lib/modules/2.4.22-18mdk',
+		    '/usr/X11R6/lib/modules/extensions',
+		    '/usr/X11R6/lib/X11/fonts',
+		    '/usr/lib/kbd/keymaps',
+		    '/usr/share/locale',
+		    '/etc/skel',
+		    );
+
+my $skipped_dirs = '/tmp/live_tree(' . join('|', map { quotemeta } @skipped_dirs) . ')/';
+if ($full_dirs) {
+    my @l = chomp_(MDK::Common::File::cat_or_die($full_dirs));
+    $full_dirs = '/tmp/live_tree(' . join('|', map { quotemeta } @l) . ')/';
+}
+
+open(my $F, "tac /var/log/kernel/warnings |");
+
+my $wanted_ip;
+
+my @l;
+while (<$F>) {
+    my ($ip, $file) = /kernel: nfsd (.*?): (.*)/ or next; 
+
+    if ($wanted_ip) {
+	$wanted_ip eq $ip or next;
+    } else {
+	warn "choosing $ip\n";
+	$wanted_ip = $ip;
+    }
+    $file = join('/', '', reverse split('/', $file));
+
+    last if $file =~ m!/tmp/live_tree/move/(devices|symlinks)!;
+
+    if ($file !~ /^$skipped_dirs/) {
+	if (-l $file ? !$no_link : -d $file ? !$no_dir : 1) {
+	    my $s = $full_dirs && $file =~ /^$full_dirs/ ? "/tmp/live_tree$1" : $file;
+	    unshift @l, $s;
+	}
+    }
+    last if $file eq '/tmp/live_tree/usr/bin/totem';
+}
+
+print "$_\n" foreach uniq(@l);
