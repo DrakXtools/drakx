@@ -21,6 +21,8 @@ my %VideoRams = (
    65536 => N_("64 MB or more"),
 );
 
+my $lib = (arch() =~ /x86_64/) ? "lib64" : "lib";
+ 
 my @xfree4_Drivers = ((arch() =~ /^sparc/ ? qw(sunbw2 suncg14 suncg3 suncg6 sunffb sunleo suntcx) :
 		    qw(apm ark chips cirrus cyrix glide i128 i740 i810 imstt 
                        mga neomagic newport nv rendition r128 radeon vesa
@@ -60,9 +62,9 @@ sub to_raw_X {
     # This loads the NVIDIA GLX extension module.
     # IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
     # IT WILL LOAD XFree86 glx module and the server will crash.
-    $raw_X->set_load_module('/usr/X11R6/lib/modules/extensions/libglx.so', $card->{DRI_GLX_SPECIAL}); 
+    $raw_X->set_load_module("/usr/X11R6/$lib/modules/extensions/libglx.so", $card->{DRI_GLX_SPECIAL}); 
     if ($card->{Driver2} ne 'nvidia') {
-        $raw_X->set_load_module('/usr/X11R6/lib/modules/extensions/libglx.a', 1);
+        $raw_X->set_load_module("/usr/X11R6/$lib/modules/extensions/libglx.a", 1);
     }
 
     $raw_X->remove_Section('DRI');
@@ -308,8 +310,8 @@ sub install_server {
     #- make sure everything is correct at this point, packages have really been installed
     #- and driver and GLX extension is present.
     if ($card->{Driver2} eq 'nvidia' &&
-	-e "$::prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
-	-l "$::prefix/usr/X11R6/lib/modules/extensions/libglx.so") {
+	-e "$::prefix/usr/X11R6/$lib/modules/drivers/nvidia_drv.o" &&
+	-l "$::prefix/usr/X11R6/$lib/modules/extensions/libglx.so") {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{Driver} = 'nvidia';
 	$card->{DRI_GLX_SPECIAL} = 1;
@@ -328,8 +330,8 @@ sub install_server {
     }
     system("/sbin/ldconfig") if $::isStandalone;
     if ($card->{Driver2} eq 'fglrx' &&
-	-e "$::prefix/usr/X11R6/lib/modules/dri/fglrx_dri.so" &&
-	-e "$::prefix/usr/X11R6/lib/modules/drivers/fglrx_drv.o") {
+	-e "$::prefix/usr/X11R6/$lib/modules/dri/fglrx_dri.so" &&
+	-e "$::prefix/usr/X11R6/$lib/modules/drivers/fglrx_drv.o") {
 	log::l("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
