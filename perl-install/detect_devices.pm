@@ -187,6 +187,16 @@ sub may_be_a_hd {
     );
 }
 
+sub get_scsi_driver {
+    my (@l) = @_;
+    my %host2driver = map { if_(m!.*/(.*)/(.*)!, $2, $1) } glob("/proc/scsi/*/*");
+    foreach (@l) {
+	if (my $driver = $host2driver{$_->{host}}) {
+	    $_->{driver} = $driver;
+	}
+    }
+}
+
 sub getSCSI_24() {
     my $err = sub { log::l("ERROR: unexpected line in /proc/scsi/scsi: $_[0]") };
 
@@ -226,6 +236,7 @@ sub getSCSI_24() {
 
     get_devfs_devices(@l);
     get_sys_cdrom_info(@l);
+    get_scsi_driver(@l);
     @l;
 }
 
@@ -284,6 +295,7 @@ sub getSCSI_26() {
 
     get_devfs_devices(@l);
     get_sys_cdrom_info(@l);
+    get_scsi_driver(@l);
     @l;
 }
 sub getSCSI() { c::kernel_version() =~ /^\Q2.6/ ? getSCSI_26() : getSCSI_24() }
