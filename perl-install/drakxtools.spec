@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.14mdk
+Release: 0.15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,25 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Feb 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.15mdk
+- drakbackup: (stew)
+  o FTP restore failure feedback
+  o allow multiple catalog/file restore selection
+- drakconnect:
+  o fix automatically found "...2" dns server
+  o fix crash on canceling "already configured net device"
+    configuration (#7679)
+  o by default do not start connection at boot for modems (#7705)
+  o prevent displaying dummy empty fields in text mode (#7593)
+- harddrake:
+  o fix ISDN detection (#6535)
+  o prevent detecting twice the same devices (#4906)
+  o workaround sane-find-scanner detecting too much usb scanners
+- center popup windows (pixel)
+- don't have a wait_message above another empty wait_message when
+  probing hardware (pixel)
+- add support for embedding rpmdrake
+
 * Fri Feb 13 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.14mdk
 - drakboot: better grub support, esp. when /boot is a separate
   partition (pixel)
