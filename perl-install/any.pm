@@ -25,10 +25,6 @@ sub facesdir {
     my ($prefix) = @_;
     "$prefix/usr/share/mdk/faces/";
 }
-sub face2xpm {
-    my ($face, $prefix) = @_;
-    facesdir($prefix) . $face . ".xpm";
-}
 sub face2png {
     my ($face, $prefix) = @_;
     facesdir($prefix) . $face . ".png";
@@ -37,7 +33,7 @@ sub facesnames {
     my ($prefix) = @_;
     my $dir = facesdir($prefix);
     my @l = grep { /^[A-Z]/ } all($dir);
-    grep { -e "$dir/$_.png" } map { /(.*)\.xpm/ } (@l ? @l : all($dir));
+    map { if_(/(.*)\.png/, $1) } (@l ? @l : all($dir));
 }
 
 sub addKdmIcon {
