@@ -40,7 +40,6 @@ sub ask_from_list_with_helpW {
     my $w = my_gtk->new(first(deref($title)), %$o);
 #gtkset_usize(createScrolledWindow($tree), 300, min(350, $::windowheight - 60)),
     $w->{retval} = $def || $l->[0]; #- nearly especially for the X test case (see timeout in Xconfigurator.pm)
-    $w->{rwindow}->set_position('center_always') if $::isStandalone;
     $w->{rwindow}->set_policy(0, 0, 1)  if $::isWizard;
     if (@$l < 5 or $::isWizard) {
 	my $defW;

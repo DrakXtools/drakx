@@ -38,7 +38,7 @@ sub new {
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
     push @interactive::objects, $o unless $opts{no_interactive_objects};
-
+    $o->{rwindow}->set_position('center_always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
     $o;
 }
