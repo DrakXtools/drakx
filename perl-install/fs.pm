@@ -209,7 +209,7 @@ sub mount($$$;$) {
 	} elsif ($fs eq 'reiserfs') {
 	    #- could be better if we knew if there is a /boot or not
 	    #- without knowing it, / is forced to be mounted with notail
-	    $mount_opt = 'notail' if $where =~ m|/(boot)?$|;
+	    #$mount_opt = 'notail' if $where =~ m|/(boot)?$|;
 	    eval { modules::load('reiserfs') };
 	} elsif ($fs eq 'romfs') {
 	    eval { modules::load('romfs') };
@@ -373,7 +373,7 @@ sub write {
     write_fstab($fstab, $prefix, $options, @to_add);
 }
 
-sub write_fstab($;$$) {
+sub write_fstab($;$$@) {
     my ($fstab, $prefix, $options, @to_add) = @_;
     $prefix ||= '';
 
@@ -390,7 +390,7 @@ sub write_fstab($;$$) {
 	isNfs($_) and $dir = '', $options = $_->{options} || $format_options->('ro,nosuid,rsize=8192,wsize=8192', 'iocharset');
 	isFat($_) and $options = $_->{options} || $format_options->("user,exec,umask=0", 'codepage', 'iocharset');
 	
-	isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
+	#isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
 	
 	my $dev = isLoopback($_) ?
 	  ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : loopback::file($_)) :
