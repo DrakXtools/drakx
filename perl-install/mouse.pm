@@ -233,7 +233,7 @@ sub probe_wacom_devices() {
     @wacom;
 }
 
-sub mouseconfig() {
+sub detect_serial() {
     my ($t, $mouse, @wacom);
 
     #- Whouah! probing all devices from ttyS0 to ttyS3 once a time!
@@ -306,7 +306,7 @@ sub detect() {
 
     #- probe serial device to make sure a wacom has been detected.
     eval { modules::load("serial") };
-    my ($serial_mouse, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom;
+    my ($serial_mouse, @serial_wacom) = detect_serial(); push @wacom, @serial_wacom;
     if ($serial_mouse) {
 	{ wacom => \@wacom, %$serial_mouse };
     } elsif (@wacom) {
