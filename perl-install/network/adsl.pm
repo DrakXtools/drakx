@@ -13,7 +13,6 @@ use MDK::Common::Globals "network", qw($in $prefix);
 
 sub configure {
     my ($netcnx, $netc, $intf, $first_time) = @_;
-#    $::isInstall and $in->set_help('configureNetworkADSL');
 
   conf_adsl_step1:
     my $l = [ N_("use pppoe"),
@@ -70,7 +69,7 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 }
 
 sub adsl_probe_info {
-    my ($adsl, $netc, $_intf, $adsl_type) = @_;
+    my ($adsl, $netc, $adsl_type) = @_;
     my $pppoe_file = "$prefix/etc/ppp/pppoe.conf";
     my $pptp_file = "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
     my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type =~ /pppoe/) && -f $pppoe_file;
@@ -87,8 +86,8 @@ sub adsl_probe_info {
 }
 
 sub adsl_ask_info {
-    my ($adsl, $netc, $intf, $adsl_type) = @_;
-    adsl_probe_info($adsl, $netc, $intf, $adsl_type);
+    my ($adsl, $netc, $adsl_type) = @_;
+    adsl_probe_info($adsl, $netc, $adsl_type);
     ask_info2($adsl, $netc);
 }
 
@@ -104,7 +103,7 @@ sub adsl_conf {
     my ($adsl, $netc, $intf, $adsl_type) = @_;
 
   adsl_conf_step_1:
-    adsl_ask_info($adsl, $netc, $intf, $adsl_type) or return;
+    adsl_ask_info($adsl, $netc, $adsl_type) or return;
   adsl_conf_step_2:
     $adsl_type =~ /sagem|speedtouch|eci/ or conf_network_card($netc, $intf, 'static', '10.0.0.10') or goto adsl_conf_step_1;
     adsl_conf_backend($adsl, $netc, $adsl_type);
@@ -112,8 +111,8 @@ sub adsl_conf {
 }
 
 sub adsl_conf_backend {
-    my ($adsl, $netc, $adsl_type, $netcnx) = @_;
-    defined $netcnx and $netc->{adsltype} = $netcnx->{type};
+    my ($adsl, $netc, $adsl_type, $o_netcnx) = @_;
+    defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
     mkdir_p("$prefix/etc/ppp");
     output("$prefix/etc/ppp/options",
