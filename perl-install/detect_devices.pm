@@ -49,8 +49,8 @@ sub cdroms() {
     }
     @l;
 }
-sub burners    { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } get() }
-sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_->{device}) } getIDE() }
+sub burners    { grep { $_->{type} eq 'cdrom' && isBurner($_) } get() }
+sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_) } getIDE() }
 sub dvdroms    { grep { $_->{type} eq 'cdrom' && isDvdDrive($_) } get() }
 
 sub get_mac_model() {
@@ -71,23 +71,13 @@ sub floppy { first(floppies()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub isBurner { 
-    my ($dev) = @_;
-    if (my ($nb) = $dev =~ /scd (.*)/x) {	
-	grep { /^(scd|sr)$nb:.*writer/ } syslog();
-    } else {
-	my $f = tryOpen($dev); 
-	$f && c::isBurner(fileno($f));
-    }
+    my $f = tryOpen($_[0]{device}); #- SCSI burner seems to be detected this way.
+    $f && c::isBurner(fileno($f));
 }
-sub isDvdDrive { 
-    my ($dev) = @_;
-    if (my ($nb) = $dev =~ /scd (.*)/x) {	
-	# can't detect SCSI DVD
-	undef;
-    } else {
-	my $f = tryOpen($dev); 
-	$f && c::isDvdDrive(fileno($f));
-    }
+sub isDvdDrive {
+    $_[0]{info} =~ /DVD/; #- SCSI DVD seems not to be detected correctly, so use another probe after.
+    my $f = tryOpen($_[0]{device});
+    $f && c::isDvdDrive(fileno($f));
 }
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
