@@ -560,7 +560,7 @@ sub shells() {
 sub inspect {
     my ($part, $o_prefix, $b_rw) = @_;
 
-    isMountableRW($part) or return;
+    isMountableRW($part) || !$b_rw && isOtherAvailableFS($part) or return;
 
     my $dir = $::isInstall ? "/tmp/inspect_tmp_dir" : "/root/.inspect_tmp_dir";
 
