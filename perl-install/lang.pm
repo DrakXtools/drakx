@@ -779,6 +779,7 @@ sub bindtextdomain() {
 
     c::setlocale();
     c::bind_textdomain_codeset('libDrakX', 'UTF-8');
+    $::need_utf8_i18n = 1;
     c::bindtextdomain('libDrakX', $localedir);
 
     $localedir;
@@ -828,7 +829,10 @@ sub load_console_font {
 
     #- in console mode install, ensure we'll get translations in the right codeset
     #- (charset of locales reported by the glibc are UTF-8 during install)
-    $acm and c::bind_textdomain_codeset('libDrakX', lang2charset($lang));
+    if ($acm) {
+	c::bind_textdomain_codeset('libDrakX', lang2charset($lang));
+	$::need_utf8_i18n = 0;
+    }
 }
 
 sub get_x_fontset {

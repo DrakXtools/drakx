@@ -179,21 +179,6 @@ setMouseLive(display, type, emulate3buttons)
 ';
 
 print '
-SV *
-dgettext_utf8(domainname, msgid)
-   char * domainname
-   char * msgid
-
-   CODE:
-   /* always convert to UTF8, because perl will fail to do it correctly
-    * during install (and it needs to be done for gtk2-perl) - presumably
-    * due to incorrect locales */
-   RETVAL = iconv_(dgettext(domainname, msgid), nl_langinfo(CODESET), "UTF-8");
-   SvUTF8_on(RETVAL);
-
-   OUTPUT:
-   RETVAL
-
 char *
 dgettext(domainname, msgid)
    char * domainname

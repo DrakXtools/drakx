@@ -105,6 +105,8 @@ sub vnew {
 	if (!$@) {
 	    my $o = interactive::gtk->new;
 	    if ($icon && $icon ne 'default' && !$::isWizard) { $o->{icon} = $icon } else { undef $o->{icon} }
+	    c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
+	    $::need_utf8_i18n = 1;
 	    return $o;
 	}
     } else {

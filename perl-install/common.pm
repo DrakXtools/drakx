@@ -51,15 +51,22 @@ sub salt {
 sub makedev { ($_[0] << 8) | $_[1] }
 sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
-sub translate {
+sub translate_real {
     my ($s) = @_;
     $s or return '';
     foreach ('libDrakX', @::textdomains) {
-	my $s2 = $::isInstall && eval { $::o->isa('interactive::gtk') } ? c::dgettext_utf8($_, $s) : c::dgettext($_, $s);
+	my $s2 = c::dgettext($_, $s);
 	return $s2 if $s ne $s2;
     }
     $s;
 }
+
+sub translate {
+    my $s = translate_real(@_);
+    $::need_utf8_i18n and c::set_tagged_utf8($s);
+    $s;
+}
+
 
 sub untranslate {
     my $s = shift || return;
