@@ -163,7 +163,11 @@ our @tree =
       string => N("Soundcard"),
       icon => "sound.png",
       configurator => "$sbindir/draksound",
-      detector => sub { f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices) },
+      detector => sub { 
+          require list_modules;
+          my @modules = list_modules::category2modules('multimedia/sound');
+          f(grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/  || member($_->{driver}, @modules) } @devices);
+      },
       checked_on_boot => 1,
      },
 
