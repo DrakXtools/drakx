@@ -456,7 +456,7 @@ sub backend_mod() {
         print "\nUninstall Specifics Fonts.........\n";
         search_installed_fonts_full_path();
         if ($interactive) { search_dir_font_uninstall_gi() }
-        else { search_dir_font_uninstall() foreach @uninstall }
+        else { search_dir_font_uninstall($_) foreach @uninstall }
         remove_fonts();
         print "\nThe End............................\n";
     }
