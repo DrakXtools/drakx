@@ -1736,7 +1736,8 @@ sub update_hosts_allow {
 sub format_client_entry {
 	#- create a client entry, in proper format
 	my ($client, %ts_clients) = @_;
-	my $pxe_img = $ts_clients{$client}{filename} =~ /boot-(.*?)\./ . ".zimg.pxe";
+	my ($pxe_img) = $ts_clients{$client}{filename} =~ /boot-(.*?)\./; 
+	$pxe_img .= ".zimg.pxe";
 	my $pxe = -f "$tftpboot/$pxe_img";
 	my $entry = "host $client {\n";
 	$entry .= "\thardware ethernet\t$ts_clients{$client}{hardware};\n";
@@ -1748,7 +1749,7 @@ sub format_client_entry {
 \t\tfilename\t\t"$pxe_img";
 \t}
 \telse if substring (option vendor-class-identifier, 0, 9) = "Etherboot"
-\t{\n\t)), 
+\t{)), 
 qq(\tfilename\t\t"$ts_clients{$client}{filename}";), 
 		if_($pxe,  qq(\t}))) . "\n";   
 	}
