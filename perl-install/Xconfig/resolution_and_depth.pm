@@ -225,8 +225,9 @@ sub configure_auto_install {
 }
 
 sub resolution2ratio {
-    my ($resolution) = @_;
-    $Xconfig::xfree::resolution2ratio{$resolution->{X} . 'x' . $resolution->{Y}};
+    my ($resolution, $b_non_strict) = @_;
+    my $res = $resolution->{X} . 'x' . $resolution->{Y};
+    $res eq '1280x1024' && $b_non_strict ? '4/3' : $Xconfig::xfree::resolution2ratio{$res};
 }
 
 sub choose_gtk {
@@ -235,12 +236,13 @@ sub choose_gtk {
     $_->{ratio} ||= resolution2ratio($_) foreach @resolutions;
 
     my $chosen_Depth = $default_resolution->{Depth};
-    my $chosen_res = { X => $default_resolution->{X} || 640, Y => $default_resolution->{Y} };
-    my $chosen_ratio = resolution2ratio($chosen_res) || '4/3';
+    my $chosen_res = { X => $default_resolution->{X} || 1024, Y => $default_resolution->{Y} };
+    my $chosen_ratio = resolution2ratio($chosen_res, 'non-strict') || '4/3';
 
     my $filter_on_ratio = sub {
-	grep { 
-	    $_->{ratio} eq $chosen_ratio 
+	grep {
+	    !$chosen_ratio
+	      || $_->{ratio} eq $chosen_ratio 
 	      || $chosen_ratio eq '4/3' && "$_->{X}x$_->{Y}" eq '1280x1024';
 	} @_;
     };
@@ -250,6 +252,8 @@ sub choose_gtk {
     my $filter_on_res = sub {
 	grep { $_->{X} == $chosen_res->{X} && $_->{Y} == $chosen_res->{Y} } @_;
     };
+    #- $chosen_res must be one of @resolutions, so that it has a correct {ratio} field
+    $chosen_res = first($filter_on_res->(@resolutions)) || $resolutions[0];
 
     require ugtk2;
     mygtk2->import;
@@ -268,26 +272,22 @@ sub choose_gtk {
 	%h;
     };
 
-    my $res2text = sub { "$_[0]{X}x$_[0]{Y}" };
+    my $res2text = sub { "$_[0]{X}x$_[0]{Y}" . ($chosen_ratio || $_[0]{ratio} =~ /other/ ? '' : "  ($_[0]{ratio})") };
     my @matching_ratio;
     my $proposed_resolutions = [];
     my $set_proposed_resolutions = sub {
+	my ($suggested_res) = @_;
 	@matching_ratio = $filter_on_ratio->(@resolutions);
-	gtkval_modify(\$proposed_resolutions, 
-		      [ reverse uniq_ { $res2text->($_) } @matching_ratio ]);
-	if (!$filter_on_res->(@matching_ratio)) {	    
-	    my $res = find { $_->{X} == $chosen_res->{X} } @matching_ratio;
+	gtkval_modify(\$proposed_resolutions, [ 
+	    (reverse uniq_ { $res2text->($_) } @matching_ratio),
+	    if_($chosen_ratio, { text => N_("Other") }),
+	]);
+	if (!$filter_on_res->(@matching_ratio)) {
+	    my $res = $suggested_res || find { $_->{X} == $chosen_res->{X} } @matching_ratio;
 	    gtkval_modify(\$chosen_res, $res || $matching_ratio[0]);
 	}
     };
     $set_proposed_resolutions->();
-
-    my $ratio_combo = gtknew('ComboBox',
-			     text_ref => \$chosen_ratio,
-			     format => \&translate,
-			     list => [ keys %Xconfig::xfree::ratio2resolutions ],
-			     changed => $set_proposed_resolutions,
-			     );
 
     my $depth_combo = gtknew('ComboBox', width => 220, 
 			     text_ref => \$chosen_Depth,
@@ -299,14 +299,21 @@ sub choose_gtk {
 				     gtkval_modify(\$chosen_res, $matching_Depth[0]);
 				 }
 			     });
+    my $previous_res = $chosen_res;
     my $res_combo = gtknew('ComboBox', 
 			   text_ref => \$chosen_res,
-			   format => $res2text,
+			   format => sub { $_[0]{text} ? translate($_[0]{text}) : &$res2text },
 			   list_ref => \$proposed_resolutions,
 			   changed => sub {
-			       my @matching_res = $filter_on_res->(@matching_ratio);
-			       if (!$filter_on_Depth->(@matching_res)) {
-				   gtkval_modify(\$chosen_Depth, $matching_res[0]{Depth});
+			       if ($chosen_res->{text}) {
+				   undef $chosen_ratio;
+				   $set_proposed_resolutions->($previous_res);
+			       } else {
+				   my @matching_res = $filter_on_res->(@matching_ratio);
+				   if (!$filter_on_Depth->(@matching_res)) {
+				       gtkval_modify(\$chosen_Depth, $matching_res[0]{Depth});
+				   }
+				   $previous_res = $chosen_res;
 			       }
 			   });
     my $pix_colors = gtknew('Image', 
@@ -331,7 +338,6 @@ sub choose_gtk {
 			  1, '',
 			  0, gtknew('Table', col_spacings => 5, row_spacings => 5, 
 				    children => [
-						 [ $ratio_combo, gtknew('Label', text => "") ],
 						 [ $res_combo, gtknew('Label', text => "") ],
 						 [ $depth_combo, gtknew('Frame', shadow_type => 'etched_out', child => $pix_colors) ],
 						]),
