@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 15mdk
+Release: 16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Oct  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-16mdk
+- drakconnect (blino):
+  o only write TYPE field in ifcfg files for xDSL connection
+  o do not lose ONBOOT setting for manual/DHCP DSL connections
+  o fix the "IP %s address is usually reserved" warning
+  o sagem modems:
+    * fix again DHCP/static connections with sagem
+    * write static IP in eagle-usb.conf if needed
+    * load specific modules/programs before config is written
+    * do not reset IP address when configuring
+    * automatically guess gateway for static connections
+
 * Fri Oct  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-15mdk
 - fix serial UPS detection
 
