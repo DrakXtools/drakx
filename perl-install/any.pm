@@ -844,22 +844,24 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
     my $custom = $r eq $l[2];
     if ($r ne $l[0]) {
 	#- verify we can export in $type
-	my %type2file = (nfs => [ 'nfs-utils', '/etc/init.d/nfs' ], smb => [ 'samba-server', '/etc/init.d/smb' ]);
+	my %type2service = (nfs => [ 'nfs-utils', 'nfs' ], smb => [ 'samba-server', 'smb' ]);
 	my %l;
 	if ($type) {
 	    %l = ($type => 1);
 	} else {
-	    %l = map_each { $::a => -e $::b->[1] } %type2file;
+	    %l = map_each { $::a => -e $::b->[1] } %type2service;
 	    $in->ask_from('', N("You can export using NFS or Samba. Please select which you'd like to use."),
 			  [ map { { text => $_, val => \$l{$_}, type => 'bool' } } keys %l ]) or return;
 	}
 	foreach (keys %l) {
-	    my ($pkg, $file) = @{$type2file{$_}} or die "unknown type $_\n";
+	    my ($pkg, $service) = @{$type2service{$_}} or die "unknown type $_\n";
+	    my $file = "/etc/init.d/$service";
+	    require services;
 	    if ($l{$_}) {
 		$in->do_pkgs->ensure_is_installed($pkg, $file) or return;
+		services::start($service);
 	    } elsif (-e $file) {
-		$in->ask_okcancel('', N("The package %s is going to be removed.", $pkg), 1) or return;
-		$in->do_pkgs->remove($pkg);
+		services::stop($service);
 	    }
 	}
     }
