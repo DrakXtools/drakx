@@ -176,15 +176,17 @@ ifdown eth0
     $conf{lan} and do { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
 
   step_2_1:
-    if (keys %{$netc->{internet_cnx}} > 1) {
+    my $nb = keys %{$netc->{internet_cnx}};
+    if ($nb < 1) {
+    } elsif ($nb > 1) {
 	$in->ask_from_entries_refH(_("Network Configuration Wizard"),
   				   _("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
   				   [
   				    { label => _("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ]}
   				   ]
   				  ) or goto step_2;
-    } elsif (keys %{$netc->{internet_cnx}} == 1) {
-	$netc->{internet_cnx_choice} = $netc->{internet_cnx}[1];
+    } elsif ($nb == 1) {
+	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
     $netc->{internet_cnx_choice} and write_cnx_script($netc);
 
