@@ -409,7 +409,7 @@ my $adj;
 my $adj1;
 my $adj2;
 my $adj3;
-
+my $font_box;
 
 my $check4;
 my $check1;
@@ -449,7 +449,7 @@ sub result_gi {
 
 
 
-sub install_gi {
+sub import_status {
     my $window2 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
     my $align;
 
@@ -503,21 +503,29 @@ sub main_gi {
     $window1->set_policy(1, 1, 1);
     $window1->set_border_width(5);
     
-    gtkadd($window1,
-	   gtkpack_(new Gtk::HBox(0,6),
-		1, my $notebook =  new Gtk::FontSelection,		
+
+ gtkadd($window1,
+	   gtkpack_(new Gtk::HBox(0,2),
+		    0, gtkpack_(new Gtk::HBox(0,5),
+				0, gtkpack($font_box = new Gtk::VBox(0,5),
+					   my $font_sel =  new Gtk::FontSelection,
+					  )
+			       ),
 		    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 			      _("DrakFont"),
 			      gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $windows = 1; backend_mod(); }),
-			      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub { $window1->destroy(); install_gi(); }),
+			      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub {
+						  gtkdestroy($font_box); import_status(); 
+						}),
 			      gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked 	=> sub { Gtk->main_quit() }),
 			      gtksignal_connect(new Gtk::Button(_("Close")), clicked 		=> sub { Gtk->main_quit() }),
-			      )
-		    ),
-	   );
+			     ),
+		   ),
+	  );
     $window1->show_all;
     $window1->realize;
     $window1->show_all();
+
 }
 
 main_gi;
@@ -606,3 +614,33 @@ sub progress_timeout3   {
 # 		destroy $window1;
 # 	}
 # }
+
+
+
+
+
+
+
+
+
+
+
+
+#     gtkadd($window1,
+# 	   gtkpack_(new Gtk::HBox(0,6),
+# 		1, my $notebook =  new Gtk::FontSelection,		
+# 		    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+# 			      _("DrakFont"),
+# 			      gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $windows = 1; backend_mod(); }),
+# 			      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub { 
+# 				  gtkdestroy($);
+# #				  $window1->destroy(); 
+# 				  install_gi(); }),
+# 			      gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked 	=> sub { Gtk->main_quit() }),
+# 			      gtksignal_connect(new Gtk::Button(_("Close")), clicked 		=> sub { Gtk->main_quit() }),
+# 			      )
+# 		    ),
+# 	   );
+#     $window1->show_all;
+#     $window1->realize;
+#     $window1->show_all();
