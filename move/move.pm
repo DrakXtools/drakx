@@ -141,11 +141,7 @@ sub init {
     }
 
 drakx_stuff:
-    $o->{steps}{autoSelectLanguage} = { reachable => 1, text => "Automatic Language Selection" };
-    $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
-    $o->{steps}{verifyKey} = { reachable => 1, text => "Verify Key" };
-    $o->{steps}{configMove} = { reachable => 1, text => "Configure Move" };
-    $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
+    $o->{steps}{$_} = { reachable => 1, text => $_ } foreach qw(autoSelectLanguage handleI18NClp verifyKey configMove startMove);
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ $using_existing_host_config ?
                            qw(handleI18NClp verifyKey startMove)
