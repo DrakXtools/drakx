@@ -439,7 +439,6 @@ sub create_packtable {
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
     my $wizard_buttons = $::isWizard && !$w->{pop_it};
-    $spread ||= $wizard_buttons ? "end" : "spread";
     $cancel = $wizard_buttons ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
     $ok = $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok") if !defined $ok;
     my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
@@ -447,10 +446,19 @@ sub create_okcancel {
     gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
     my @l = grep { $_ } $wizard_buttons ? (if_(!$::isInstall, $w->{wizcancel}), 
 				       if_(!$::Wizard_no_previous, $b2), $b1) : ($b1, $b2);
-    my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } @other;
+    my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
+    my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
 
-    $_->can_default($wizard_buttons) foreach @l2, @l;
-    gtkadd(create_hbox($spread), @l2, @l);
+    my $box = create_hbox($spread || "edge");
+    
+    $box->pack_start($_, 0, 0, 1) foreach @l2;
+    gtkpack($box, '');
+    $box->pack_end($_, 0, 0, 1) foreach @r2, @l;
+    foreach (@l2, @r2, @l) {
+	$_->show;
+	$_->can_default($wizard_buttons);
+    }
+    $box;
 }
 
 sub _setup_paned {
