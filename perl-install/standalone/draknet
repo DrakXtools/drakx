@@ -87,7 +87,7 @@ $vbox1->pack_start($hbox1,0,0,0);
 $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 
 my $combo1 = new Gtk::Combo;
-$combo1->set_popdown_strings (network::netconnect::get_profiles() );
+$combo1->set_popdown_strings (network::netconnect::get_profiles());
 my $old_profile=$netcnx->{PROFILE};
 $combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 $combo1->entry->set_editable(0);
@@ -99,7 +99,7 @@ $button_del->signal_connect( clicked => sub {
 				 $dialog->vbox->set_border_width(10);
 				 $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
 				 $dialog->vbox->pack_start(new Gtk::Label(_("Profile to delete:")),1,1,0);
-				 my $combo_dialog = new Gtk::Combo;
+ 				 my $combo_dialog = new Gtk::Combo;
 				 $combo_dialog->set_popdown_strings ( grep { ! /default/ } network::netconnect::get_profiles() );
 				 $combo_dialog->entry->set_editable(0);
 				 $dialog->vbox->pack_start($combo_dialog,1,1,0);
@@ -646,6 +646,8 @@ Create one first by clicking on 'Configure'")),1,1,0);
 	} else {
 	    $infos[2*$i+1]=new Gtk::Entry();
 	    $infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
+	    #hide password if Entry Password
+	    if ($_->[0] eq _("Account Password") || $_->[0] eq _("Password")) { $infos[2*$i+1]->set_visibility(0)};
 	}
 	$infos[2*$i+1]->set_text(${$_->[1]});
   	$i++;
