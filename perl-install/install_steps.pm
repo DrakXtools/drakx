@@ -823,19 +823,22 @@ sub setupBootloaderBefore {
 
     require bootloader;
     if (my @l = (grep { $_->{bus} eq 'ide' } detect_devices::burners(), detect_devices::raw_zips())) {
-	bootloader::add_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
+	bootloader::set_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
     }
     if ($o->{miscellaneous}{HDPARM}) {
-	bootloader::add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
+	bootloader::set_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
     }
     if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
-	bootloader::add_append($o->{bootloader}, 'mem', 'nopentium');
+	bootloader::set_append($o->{bootloader}, 'mem', 'nopentium');
     }
     if (cat_("/proc/cmdline") =~ /\b(pci)=(\S+)/) {
-	bootloader::add_append($o->{bootloader}, $1, $2);
+	bootloader::set_append($o->{bootloader}, $1, $2);
     }
-    if (my ($acpi) = cat_("/proc/cmdline") =~ /\bacpi=(\S+)/) {
-	bootloader::add_append($o->{bootloader}, acpi => $acpi);
+    if (cat_("/proc/cmdline") =~ /\bacpi=off/) {
+	bootloader::set_append($o->{bootloader}, acpi => 'off');
+    }
+    if (cat_("/proc/cmdline") =~ /\bnoapic/) {
+	bootloader::set_append($o->{bootloader}, 'noapic');
     }
 
     if (arch() =~ /alpha/) {

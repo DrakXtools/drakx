@@ -239,8 +239,8 @@ sub setupBootloader__general {
 
     ($b->{method}, my $method_choices) = bootloader::method_choices($fstab);
     my $profiles = bootloader::has_profiles($b);
-    my $previous_acpi_val = bootloader::get_append($b, 'acpi');
-    my $force_acpi = $previous_acpi_val eq 'on';
+    my $prev_force_acpi = my $force_acpi = bootloader::get_append($b, 'acpi') ne 'off';
+    my $prev_force_noapic = my $force_noapic = bootloader::get_append($b, 'noapic');
     my $memsize = bootloader::get_append($b, 'mem');
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
@@ -261,9 +261,8 @@ sub setupBootloader__general {
             { label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
 		),
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
-	        if_($previous_acpi_val,
             { label => N("Force ACPI"), val => \$force_acpi, type => 'bool' },
-		),
+            { label => N("Force No APIC"), val => \$force_noapic, type => 'bool' },
 		if_($security >= 4 || $b->{password} || $b->{restricted},
             { label => N("Password"), val => \$b->{password}, hidden => 1 },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
@@ -309,10 +308,12 @@ sub setupBootloader__general {
     }
 
     bootloader::set_profiles($b, $profiles);
-    bootloader::add_append($b, "mem", $memsize);
-    if ($previous_acpi_val) {
-	my $s = $force_acpi ? 'on' : 'off';
-	bootloader::add_append($b, acpi => $s) if $s ne $previous_acpi_val;
+    bootloader::set_append($b, "mem", $memsize);
+    if ($prev_force_acpi != $force_acpi) {
+	bootloader::set_append($b, acpi => ($force_acpi ? '' : 'off'));
+    }
+    if ($prev_force_noapic != $force_noapic) {
+	($force_noapic ? \&bootloader::set_append : \&bootloader::remove_append_simple)->($b, 'noapic');
     }
 
     if ($prev_clean_tmp != $clean_tmp) {

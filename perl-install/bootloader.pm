@@ -270,7 +270,10 @@ sub append__mem_is_memsize { $_[0] =~ /^\d+[kM]?$/i }
 
 sub get_append {
     my ($b, $key) = @_;
-    my (undef, $dict) = unpack_append($b->{perImageAppend});
+    my ($simple, $dict) = unpack_append($b->{perImageAppend});
+    if (member($key, @$simple)) {
+	return 1;
+    }
     my @l = map { $_->[1] } grep { $_->[0] eq $key } @$dict;
 
     #- suppose we want the memsize
@@ -279,20 +282,41 @@ sub get_append {
     log::l("more than one $key in $b->{perImageAppend}") if @l > 1;
     $l[0];
 }
-sub add_append {
-    my ($b, $key, $val) = @_;
+sub modify_append {
+    my ($b, $f) = @_;
 
     foreach (\$b->{perImageAppend}, map { \$_->{append} } grep { $_->{type} eq 'image' } @{$b->{entries}}) {
 	my ($simple, $dict) = unpack_append($$_);
-	@$dict = grep { $_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val) } @$dict;
-	push @$dict, [ $key, $val ] if $val;
+	$f->($simple, $dict);
 	$$_ = pack_append($simple, $dict);
-	log::l("add_append: $$_");
+	log::l("modify_append: $$_");
     }
+}
+sub remove_append_simple {
+    my ($b, $key) = @_;
+    modify_append($b, sub {
+	my ($simple, $_dict) = @_;
+	@$simple = grep { $_ ne $key } @$simple;
+    });
+}
+sub set_append {
+    my ($b, $key, $val) = @_;
+    my $has_val = @_ > 2;
+
+    modify_append($b, sub {
+	my ($simple, $dict) = @_;
+	if ($has_val) {
+	    @$dict = grep { $_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val) } @$dict;
+	    push @$dict, [ $key, $val ] if $val;
+	} else {
+	    @$simple = grep { $_ ne $key } @$simple;
+	    push @$simple, $key;
+	}
+    });
 }
 sub may_append {
     my ($b, $key, $val) = @_;
-    add_append($b, $key, $val) if !get_append($b, $key);
+    set_append($b, $key, $val) if !get_append($b, $key);
 }
 
 sub configure_entry {
@@ -472,7 +496,7 @@ wait %d seconds for default boot.
     add2hash_($bootloader, { memsize => $1 }) if cat_("/proc/cmdline") =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/;
     if (my ($s, $port, $speed) = cat_("/proc/cmdline") =~ /console=(ttyS(\d),(\d+)\S*)/) {
 	log::l("serial console $s $port $speed");
-	add_append($bootloader, 'console' => $s);
+	set_append($bootloader, 'console' => $s);
 	any::set_login_serial_console($port, $speed);
     }
 
