@@ -419,7 +419,7 @@ sub ask_fromW {
 	    if ($e->{image}) {
 		$w = gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
 	    } else {
-		$w = Gtk2::CheckButton->new_from_stock($e->{text});
+		$w = Gtk2::CheckButton->new($e->{text});
 	    }
 	    $w->signal_connect(clicked => $changed);
 	    $set = sub { $w->set_active($_[0]) };
