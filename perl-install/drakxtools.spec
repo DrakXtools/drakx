@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.2mdk
+Release: 0.3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.3mdk
+- drakconnect wizard:
+  o support more wireless cards
+  o split out "wireless connection" configuration out of "lan
+    connections" path
+- logdrake: (arnaud)
+  o make cron script be able to use either local smtp server or a
+    remote one
+  o add "remove cron entry" on arnaud request
+
 * Mon Feb  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.2mdk
 - draconnect: preselect pppoa for speetouch again
 
