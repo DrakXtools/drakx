@@ -501,17 +501,22 @@ F1 help.msg" : "display help.msg") . "
 " . join('', map { 
 "label $_->[0]
   kernel alt0/vmlinuz
-  append changedisk initrd=alt0/all.rdz $_->[1]
+  append initrd=alt0/all.rdz $_->[1] automatic=method:cdrom
 " } entries_append('all'))
   . join('', map_index { 
 "label alt$::i
   kernel alt$::i/vmlinuz
-  append changedisk initrd=alt$::i/all.rdz $default_append $default_vga
+  append initrd=alt$::i/all.rdz $default_append $default_vga
 " } @kernels);
 
     output "isolinux/help.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x03, 0x00) .
-"This is a special bootable CDROM giving you a choice between various kernels.
+"Welcome to Mandrake Linux Installation.
 
-The default is kernel $main.
-" . join('', map_index { $::i ? "\"alt$::i\" is kernel $_\n" : '' } @kernels);
+If you want more installations options (install from hard
+disk, network, etc), select the kernel you wish to use for
+this installation. Or you may just type Enter, so that the
+automatic CDROM installation will proceed, with the default
+kernel ($main).
+
+" . join('', map_index { "\"alt$::i\" is kernel $_\n" } @kernels);
 }
