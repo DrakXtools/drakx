@@ -223,7 +223,6 @@ sub setSelectedFromCompssList($$$$$) {
     foreach (@places) {
 	my $p = $packages[$_];
 	verif_lang($p, $lang) or next;
-	print "selecting $p->{name}\n";
 	&select($packages, $p);
 
 	my $nb = 0; foreach (@packages) {
@@ -231,13 +230,6 @@ sub setSelectedFromCompssList($$$$$) {
 	}
 	if ($nb > $size) {
 	    unselect($packages, $p, $nb - $size);
-	    print "leaving auto selection (zsize was $nb > $size)\n";
-
-	    my $nb = 0; foreach (@packages) {
-		$nb += $_->{size} if $_->{selected};
-	    }
-	    print "leaving auto selection (zsize was $nb > $size)\n";
-
 	    last;
 	}
     }
