@@ -435,7 +435,7 @@ sub part_possible_actions {
         N_("Mount point")      => '$part->{real_mntpoint} || (!isBusy && !isSwap && !isNonMountable)',
         N_("Type")             => '!isBusy && $::expert && (!readonly || $part->{pt_type} == 0x83)',
         N_("Options")          => '$::expert',
-        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && $part->{fs_type} eq "xfs"',
+        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && ($part->{fs_type} eq "xfs" || $part->{fs_type} eq "reiserfs")',
         N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
         N_("Add to RAID")      => '!isBusy && isRawRAID && (!isSpecial || isRAID)',
@@ -718,7 +718,10 @@ sub Resize {
 	    $min = $nice_resize{ntfs}->min_size or delete $nice_resize{ntfs};
 	} elsif ($part->{fs_type} eq 'reiserfs') {
 	    write_partitions($in, $hd) or return;
-	    if (defined(my $free = fs::df($part))) {
+	    if ($part->{isMounted}) {
+		$nice_resize{reiserfs} = 1;		  
+		$min = $part->{size}; #- ensure the user can only increase
+	    } elsif (defined(my $free = fs::df($part))) {
 		$nice_resize{reiserfs} = 1;		  
 		$min = max($min, $part->{size} - $free);
 	    }
