@@ -116,131 +116,116 @@ TERMINALS
   4 LOCALES"ja" kterm 
 
 NETWORKING_CHAT
-  CLIENT
-    3 talk ytalk
-    2 GNOME gabber gaim
-  SERVER
-    4 jabber 
-    3 talk-server
+  3 talk ytalk
+  2 GNOME gabber gaim
+NETWORKING_CHAT_SERVER
+  4 jabber 
+  3 talk-server
     
 NETWORKING_FILE_TRANSFER
-  CLIENT
-    5 lftp mirrordir rsync uucp
-    4 gftp rdist
-    3 fmirror ncftp tftp
-    3 GNOME dpsftp
-  SERVER
-    4 proftpd
-    2 wu-ftpd anonftp
+  5 lftp mirrordir rsync uucp
+  4 gftp rdist
+  3 fmirror ncftp tftp
+  3 GNOME dpsftp
+NETWORKING_FILE_TRANSFER_SERVER
+  4 proftpd
+  2 wu-ftpd anonftp
 
 NETWORKING_INSTANT_MESSAGING
-  CLIENT
-    4 licq
-    3 everybuddy licq-autoreply licq-console licq-forwarder licq-rms licq-update-hosts
-    GNOME
-      4 gnomeicu
-      3 gtk+licq
+  4 licq
+  3 everybuddy licq-autoreply licq-console licq-forwarder licq-rms licq-update-hosts
+  GNOME
+    4 gnomeicu
+    3 gtk+licq
 
 NETWORKING_IRC
-  CLIENT
-    4 KDE kvirc
-    3 BitchX 
-    3 GNOME xchat
-    2 irssi
-    1 eggdrop
+  4 KDE kvirc
+  3 BitchX 
+  3 GNOME xchat
+  2 irssi
+  1 eggdrop
 
-NETWORKING_FIREWALLING
-  SERVER
-    5 iproute2 routed 
-    4 portsentry 
+NETWORKING_FIREWALLING_SERVER
+  5 iproute2 routed 
+  4 portsentry 
 
 NETWORKING_MAIL
-  CLIENT
-    5 mailx metamail
-    4 faces
-    3 fetchmail urlview
-    3 !GNOME !KDE xmailbox
-    2 FaxMail comsat elm faces-xface
-    1 exmh mutt fetchmail-daemon fetchmailconf
-  SERVER
-    5 postfix 
-    4 sympa 
+  5 mailx metamail
+  4 faces
+  3 fetchmail urlview
+  3 !GNOME !KDE xmailbox
+  2 FaxMail comsat elm faces-xface
+  1 exmh mutt fetchmail-daemon fetchmailconf
+NETWORKING_MAIL_SERVER
+  5 postfix 
+  4 sympa 
 
 NETWORKING_NEWS
-  CLIENT
-    5 GNOME pan
-    3 slrn tin trn 
-    1 slrn-pull xrn
-  SERVER
-    4 inn
-    3 inews 
+  5 GNOME pan
+  3 slrn tin trn 
+  1 slrn-pull xrn
+NETWORKING_NEWS_SERVER
+  4 inn
+  3 inews 
 
 NETWORKING_OTHER
-  SERVER
-    4 webmin
-    3 dhcp gated timed xntp3 
-  CLIENT
-    3 finger fwhois ucd-snmp-utils
-    2 htdig macutils queso
+  3 finger fwhois ucd-snmp-utils
+  2 htdig macutils queso
+NETWORKING_OTHER_SERVER
+  4 webmin
+  3 dhcp gated timed xntp3 
 
-SERVER_OTHER
-  SERVER
-    3 intimed mcserv nscd imap pidentd
-      rdate bootparamd 
-      cleanfeed ucd-snmp leafnode vnc-server
-      cvsweb finger-server mars-nwe 
-      XFree86-Xvfb XFree86-Xnest
-    2 heartbeat
+  3 intimed mcserv nscd imap pidentd
+    rdate bootparamd 
+    cleanfeed ucd-snmp leafnode vnc-server
+    cvsweb finger-server mars-nwe 
+    XFree86-Xvfb XFree86-Xnest
+  2 heartbeat
 
 NIS
-  SERVER
-    5 ypserv
-  CLIENT
-    5 ypbind
+  5 ypbind
+NIS_SERVER
+  5 ypserv
 
 NETWORKING_REMOTE_ACCESS
-  CLIENT
-    5 openssh-clients
-    3 vnc vnc-SVGALIB
-    2 rsh telnet vnc-java
-    2 BOOKS vnc-doc
-    1 sftp
-  SERVER
-    5 openssh-server
-    1 telnet-server rsh-server 
+  5 openssh-clients
+  3 vnc vnc-SVGALIB
+  2 rsh telnet vnc-java
+  2 BOOKS vnc-doc
+  1 sftp
+NETWORKING_REMOTE_ACCESS_SERVER
+  5 openssh-server
+  1 telnet-server rsh-server 
 
 NETWORKING_DNS
-  SERVER
-    5 bind 
-    4 caching-nameserver
-    1 nslint
-  CLIENT
-    4 bind-utils 
+  4 bind-utils 
+NETWORKING_DNS_SERVER
+  5 bind 
+  4 caching-nameserver
+  1 nslint
 
 NETWORKING_FILE
-  SERVER 
-    5 nfs-utils
-    4 samba
-    3 squid
-  CLIENT  
-    4 nfs-utils-clients samba-client 
-    3 am-utils 
-    2 GNOME gnomba
+  4 nfs-utils-clients samba-client 
+  3 am-utils 
+  2 GNOME gnomba
+NETWORKING_FILE_SERVER 
+  5 nfs-utils
+  4 samba
+  3 squid
 
 NETWORKING_WWW
-  CLIENT
-    5 lynx
-    4 bluefish netscape-communicator wget links
-    4 GNOME screem
-    3 plugger
-    4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
-  SERVER
-    5 apache apache-mod_perl mod_ssl
-    4 apache-suexec 
-    4 BOOKS apache-manual
-    3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
-      php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl
-    1 Zope Zope-core Zope-pcgi Zope-zserver
+  5 lynx
+  4 bluefish netscape-communicator wget links
+  4 GNOME screem
+  3 plugger
+  4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
+NETWORKING_WWW_SERVER
+  5 apache apache-mod_perl mod_ssl
+  4 apache-suexec 
+  4 BOOKS apache-manual
+  3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
+    php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl
+  1 Zope Zope-core Zope-pcgi Zope-zserver
 
 GRAPHICS
   4 ImageMagick giftrans gimp gphoto qiv xli
@@ -269,10 +254,9 @@ BURNER
   2 eroaster gcombust
 
 DATABASES
-  CLIENT
-    5 postgresql
-    3 MySQL-client MySQL-shared postgresql postgresql-server
-  SERVER
+  5 postgresql
+  3 MySQL-client MySQL-shared postgresql
+  DATABASES_SERVER
     4 postgresql-server
     3 MySQL
     3 postgresql-perl postgresql-python

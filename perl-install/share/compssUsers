@@ -15,7 +15,6 @@ Multimedia station [icon=multimedia] [path=Workstation] [descr=Sound and video p
 	GRAPHICS
 
 Internet station [icon=networking] [path=Workstation] [descr=Set of tools to read and send mail and news (pine, mutt, tin..) and to browse the Web]
-	CLIENT
 	NETWORKING_WWW
 	NETWORKING_MAIL
 	NETWORKING_FILE
@@ -30,7 +29,6 @@ Scientific Workstation [icon=sciences] [path=Workstation] [descr=Scientific appl
 	SCIENCES
 
 Network Computer, X client [icon=terminals] [path=Workstation] [descr=toot]
-	CLIENT
 	NETWORKING_REMOTE_ACCESS
 
 KDE Workstation [icon=kde] [path=Graphical Environment] [descr=The K Desktop Environment, the basic graphical environment with a collection of accompanying tools]
@@ -59,35 +57,28 @@ Database [icon=] [path=Developement] [descr=]
 	DATABASE
 
 Web/FTP  [icon=] [path=Server] [descr=]
-	SERVER
-	NETWORKING_WWW
-	NETWORKING_FILE_TRANSFER
+	NETWORKING_WWW_SERVER
+	NETWORKING_FILE_TRANSFER_SERVER
 
 Mail/Groupware/News [icon=] [path=Server] [descr=]
-	SERVER
-	NETWORKING_MAIL
-	NETWORKING_NEWS
+	NETWORKING_MAIL_SERVER
+	NETWORKING_NEWS_SERVER
 
 Database [icon=] [path=Server] [descr=]
-	SERVER
-	DATABASE
+	DATABASE_SERVER
 
 Firewall/Router [icon=] [path=Server] [descr=]
-	SERVER
-	NETWORKING_FIREWALL
+	NETWORKING_FIREWALL_SERVER
 
 File/Print/Samba [icon=] [path=Server] [descr=]
-	SERVER
-	NETWORKING_FILE
+	NETWORKING_FILE_SERVER
 
 DNS/DHCP [icon=] [path=Server] [descr=] 
-	SERVER
-	NIS
-	NETWORKING_DNS
+	NIS_SERVER
+	NETWORKING_DNS_SERVER
 
 Network Computer server [icon=] [path=Server] [descr=]
-	SERVER
-	NETWORKING_FILE
+	NETWORKING_FILE_SERVER
 
 Documentation [icon=documentation] [path=Workstation] [descr=Books and Howto's on Linux and Free Software]
 	BOOKS
