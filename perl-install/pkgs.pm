@@ -649,8 +649,8 @@ sub readCompssUsers {
 	    /^(.*?)\s*\[path=(.*?)\](.*)/  and $_ = "$1$3", $path  = $2;
 	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
 	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
-	    $compssUsers{$_} = { verbatim => $verbatim, path => $path, icons => $icon, descr => $descr, flags => $l=[] };
-	    push @sorted, $_;
+	    $compssUsers{"$path|$_"} = { label => $_, verbatim => $verbatim, path => $path, icons => $icon, descr => $descr, flags => $l=[] };
+	    push @sorted, "$path|$_";
 	} elsif (/^\s+(.*?)\s*$/) {
 	    push @$l, $1;
 	}
@@ -763,7 +763,7 @@ sub computeGroupSize {
 	next if !$rate || $rate < $min_level;
 
 	my $flags = join("\t", @flags = or_ify(@flags));
-	$group{$_} = $flags =~ /SYSTEM/ ? 'SYSTEM' : ($memo{$flags} ||= or_clean(@flags));
+	$group{packageName($p)} = $flags =~ /SYSTEM/ ? 'SYSTEM' : ($memo{$flags} ||= or_clean(@flags));
 
 	#- determine the packages that will be selected when selecting $p. the packages are not selected.
 	my %newSelection;
