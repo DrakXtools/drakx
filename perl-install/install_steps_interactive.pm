@@ -456,7 +456,7 @@ sub choosePackages {
 		}
 		$o->set_help('empty');
 		$o->ask_from_listf('', _("Select the size you want to install"),
-				   sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
+				   sub { _ ($text[$_[0]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 	    }
 	} else {
 	    $o->chooseSizeToInstall($packages, $min_size, $def_size, $max_size, $availableC, $individual) || goto &choosePackages;

@@ -204,14 +204,16 @@ sub partitionWizard {
     my $level = $::expert ? -9999 : 0;
     my @sol = grep { $_->[0] >= $level } @solutions;
 
-    log::l("solutions found: " . join('', map {$_->[1]} @sol) . " (all solutions found: " . join('', map {$_->[1]} @solutions) . ")");
+    log::l(      "solutions found: " . join('', map {$_->[1]} @sol) . 
+	   " (all solutions found: " . join('', map {$_->[1]} @solutions) . ")");
 
     @solutions = @sol if @sol > 1;
     log::l("solutions: ", int @solutions);
     @solutions or $o->ask_warn('', _("I can't find any room for installing")), die 'already displayed';
 
     my $ok; while (!$ok) {
-	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;
+	log::l('HERE: ', join(',', map { $_->[1] } @solutions));
+	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_[0][1] }, \@solutions) or redo;
 	log::l("partitionWizard calling solution $sol->[1]");
 	eval { $ok = $sol->[2]->() };
 	die if $@ =~ /setstep/;
