@@ -108,7 +108,8 @@ drakx_stuff:
     $o->{steps}{handleMoveKey} = { reachable => 1, text => "Handle Move Key" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ qw(setupSCSI handleMoveKey selectLanguage handleI18NClp acceptLicense selectMouse selectKeyboard startMove) ];
-    
+    $o->{steps}{first} = $o->{orderedSteps}[0];
+
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
