@@ -152,9 +152,6 @@ sub doPartitionDisksAfter {
     $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
-    require bootloader;
-    bootloader::may_append($o->{bootloader}, devfs => 'mount');
-    
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) {
 	die "Need bootstrap partition to boot system!" if !(defined $partition_table_mac::bootstrap_part);
     }
@@ -396,6 +393,14 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #-  why not? cuz weather is nice today :-) [pixel]
     common::sync(); common::sync();
+
+    if (do {
+	my $p = pkgs::packageByName($o->{packages}, 'devfsd');
+	$p && pkgs::packageFlagInstalled($p)
+    }) {
+        require bootloader;
+	bootloader::may_append($o->{bootloader}, devfs => 'mount');
+    }
 
     #- generate /etc/lvmtab needed for rc.sysinit
     run_program::rooted($o->{prefix}, 'vgscan') if -e '/etc/lvmtab';
