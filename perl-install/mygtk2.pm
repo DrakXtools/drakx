@@ -816,7 +816,13 @@ sub main {
     my $destroyed;
     $window->signal_connect(destroy => sub { $destroyed = 1 });
     $window->show;
-    do { Gtk2->main } while (!$destroyed && $o_verif && !$o_verif->());
+    do { 
+        if ($window->isa('Gtk2::FileSelection')) {
+            $window->run;
+        } else {
+            Gtk2->main;
+        }
+    } while (!$destroyed && $o_verif && !$o_verif->());
     may_destroy($window);
     flush();
 }
