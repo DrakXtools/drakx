@@ -831,7 +831,7 @@ sub new {
     while (my $e = shift @tempory::objects) { $e->destroy }
 
     $o->{pop_it} ||= !$::isWizard && !$::isEmbedded || $::WizardTable && do {
-	#- do not take into account the DrawingArea
+	#- do not take into account the wizard banner
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
 
