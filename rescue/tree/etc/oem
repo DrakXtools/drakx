@@ -229,7 +229,7 @@ close F;
 
 #- initialize installation.
 $ENV{DURING_INSTALL} = 1;
-$ENV{RPM_INSTALL_LANG} = $lang;
+$ENV{RPM_INSTALL_LANG} = "$lang:$flang";
 $ENV{LD_LIBRARY_PATH} = "/usr/X11R6/lib";
 $ENV{SECURE_LEVEL} = 2;
 foreach (qw(/etc /var /var/lib /var/lib/rpm /proc)) {
