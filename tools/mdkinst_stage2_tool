@@ -1,0 +1,44 @@
+#!/bin/sh
+
+[ $# != 1 ] && { 
+    echo "usage: mdkinst_stage2_tool <stage2 dir>" ; 
+    echo "  example: misc/mdkinst_stage2_tool install/stage2"
+    exit
+}
+
+STAGE2_DIR="$1"
+LIVE_DIR="$STAGE2_DIR/live"
+CLP="$STAGE2_DIR/mdkinst.clp"
+
+if [ -d $LIVE_DIR ]; then
+    echo "Creating $CLP from $LIVE_DIR"
+    rm -f $STAGE2_DIR/.room
+    mkisofs -quiet -D -R $LIVE_DIR | create_compressed_fs - 65536 $CLP 200 2>/dev/null
+    echo foo > $STAGE2_DIR/.room
+    if [ -s $STAGE2_DIR/.room ]; then
+	rm -rf $LIVE_DIR $STAGE2_DIR/.room
+    else
+	echo "not enough space"
+	rm -f $CLP
+	exit 1
+    fi
+else
+    echo "Creating $LIVE_DIR from $CLP"
+
+    TMPDIR=${TMPDIR=/tmp}
+    MNTPOINT=$TMPDIR/stage2_img
+
+    if [ $EUID != "0" ]; then
+	SUDO="sudo"
+	PATH="/sbin:/usr/sbin:$PATH"
+    fi
+
+    $SUDO umount $MNTPOINT 2>/dev/null
+    mkdir -p $MNTPOINT
+    extract_compressed_fs $CLP > $CLP.iso 2>/dev/null
+    mkdir $LIVE_DIR || { echo "not enough space"; exit 1; }
+    $SUDO mount -o loop $CLP.iso $MNTPOINT || { echo "can not loopback mount $CLP"; exit 1; }
+    cp -a $MNTPOINT/* $LIVE_DIR/ || { rm -rf $LIVE_DIR; exit 1; }
+    $SUDO umount $MNTPOINT
+    rm -f $CLP.iso $CLP
+fi
