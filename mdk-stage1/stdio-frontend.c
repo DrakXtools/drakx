@@ -230,11 +230,12 @@ void init_progression(char *msg, int size)
 void update_progression(int current_size)
 {
 	if (size_progress) {
-		if (current_size <= size_progress)
-			while ((int)((current_size*PROGRESS_SIZE)/size_progress) > actually_drawn) {
-				printf("*");
-				actually_drawn++;
-			}
+		if (current_size > size_progress)
+			current_size = size_progress;
+		while ((int)((current_size*PROGRESS_SIZE)/size_progress) > actually_drawn) {
+			printf("*");
+			actually_drawn++;
+		}
 	} else
 		printf("\033[GStatus: [%8d] bytes loaded...", current_size);
 	
@@ -253,20 +254,41 @@ void end_progression(void)
 
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
 {
+	int justify_number = 1;
+	void print_choice_number(int i) {
+		char tmp[500];
+		snprintf(tmp, sizeof(tmp), "[%%%dd]", justify_number);
+		printf(tmp, i);
+	}
 	char ** sav_elems = elems;
 	int i = 1;
 	int j = 0;
 
-	printf("> %s\n[ 0] Cancel", msg);
+	while (elems && *elems) {
+		elems++;
+		i++;
+	}
+	if (i >= 10)
+		justify_number = 2;
+
+	elems = sav_elems;
+	i = 1;
+
+	printf("> %s\n", msg);
+	print_choice_number(0);
+	printf(" Cancel");
 
 	while (elems && *elems) {
 		if (elems_comments && *elems_comments) {
-			printf("\n[%2d] %s (%s)", i, *elems, *elems_comments);
+			printf("\n");
+			print_choice_number(i);
+			printf(" %s (%s)", *elems, *elems_comments);
 			j = 0;
 		} else {
 			if (j == 0)
 				printf("\n");
-			printf("[%2d] %-14s ", i, *elems);
+			print_choice_number(i);
+			printf(" %-14s ", *elems);
 			j++;
 		}
 		if (j == 4)
@@ -304,7 +326,7 @@ enum return_type ask_yes_no(char *msg)
 {
 	int j;
 
-	printf("> %s\n(0) Yes\n(1) No\n(2) Back\n? ", msg);
+	printf("> %s\n[0] Yes  [1] No  [2] Back\n? ", msg);
 
 	j = get_int_response();
 
@@ -345,7 +367,7 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 				(*answers)[j] = get_string_response(NULL);
 
 		}
-		printf("(0) Cancel (1) Accept (2) Re-enter answers\n? ");
+		printf("[0] Cancel  [1] Accept  [2] Re-enter answers\n? ");
 		r = get_int_response();
 		if (r == 0)
 			return RETURN_BACK;
