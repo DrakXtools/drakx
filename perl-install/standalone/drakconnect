@@ -194,11 +194,13 @@ sub manage {
   
     eval(cat_('/etc/sysconfig/drakconnect'));
 
-    @all_cards = network::ethernet::get_eth_cards();
-    my %name = network::ethernet::get_eth_cards_names(@all_cards);
-    
+    my %name = network::ethernet::get_eth_cards_names(network::ethernet::get_eth_cards);
     $config->{$_} = { kind => $_ } foreach keys %name;
-
+    foreach (keys %$intf) {
+	/^ippp/ and $config->{isdn} = { kind => $_ };
+	/^ppp0/ and $config->{modem} = { kind => $_ };
+    };
+        
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
 									    changed => sub {
@@ -229,7 +231,7 @@ sub manage {
     each_index {
 	my ($name, $interface, $protocol) = ($_, $config->{$_}{kind}, $config->{$_}{protocol});
 	$gui->{$interface}{index} = $::i;
-	$interface =~ /eth/ and $config->{$name{$interface}} = $interface && delete $config->{$name};
+	$interface =~ /eth|ath|wlan/ and $config->{$name{$interface}} = $interface && delete $config->{$name};
 	build_tree($netc, $intf->{$interface} ||= {}, $name, $interface, $protocol);
 	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $apply_button, $name, $interface);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
