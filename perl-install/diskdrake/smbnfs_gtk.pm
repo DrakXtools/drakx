@@ -154,7 +154,7 @@ sub import_ctree {
     my $add_exports = sub {
 	my ($node) = @_;
 	$tree->expand($node);
-	foreach ($kind->find_exports($wservers{$node->{_gtk}} || die '')) {
+	foreach ($kind->find_exports($wservers{$node->{_gtk}} || return)) { #- can't die here since insert_node provoque a tree_select_row before the %wservers is filled
 	    my $w = $tree->insert_node($node, undef, [$kind->to_string($_)], 5, (undef) x 4, 1, 0);
 	    set_export_icon(find_fstab_entry($kind, $_), $w);
 	    $wexports{$w->{_gtk}} = $_;
