@@ -140,7 +140,11 @@ $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
 $combo_perm->entry->set_text($perm_l10n{all});
 display_perm('all');
-my $_combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($rev_perm_l10n{$combo_perm->entry->get_text} , @_) });
+my $_combo_sig = $combo_perm->entry->signal_connect(changed => sub {
+                                                        my $class = $rev_perm_l10n{$combo_perm->entry->get_text};
+                                                        $permList->set_reorderable($class eq 'editable');
+                                                        display_perm($class , @_);
+                                                    });
 
 $permList->get_selection->signal_connect('changed' => sub {
                                                my ($select) = @_;
