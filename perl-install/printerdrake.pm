@@ -2349,8 +2349,8 @@ sub check_network {
 
     $in->set_help('checkNetwork') if $::isInstall;
 
-    # First check: Does /etc/sysconfig/network-scripts/drakconnet_conf exist
-    # (otherwise the network is not configured yet and drakconnet has to be
+    # First check: Does /etc/sysconfig/network-scripts/drakconnect_conf exist
+    # (otherwise the network is not configured yet and drakconnect has to be
     # started)
 
     if (!printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
@@ -2372,7 +2372,7 @@ sub check_network {
 			     $in->{lang} eq "fr_FR" && 
 			     $in->{keyboard}{KEYBOARD} eq "fr", 0);
 		    } else {
-			system("/usr/sbin/drakconnet");
+			system("/usr/sbin/drakconnect");
 		    }
 		    if (printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
 			$go_on = 1;
