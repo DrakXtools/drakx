@@ -1,3 +1,63 @@
+2001/04/30  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stdio-frontend.c: nicer layout for progressbar and
+	statusreport, when update_progression
+	Provide some description of the drivers
+
+	* docs/HACKING: fix
+	pserver -> ext
+
+	* mdk-stage1/tools.c, mdk-stage1/Makefile, mdk-stage1/tools.h,
+	mdk-stage1/newt-frontend.c, mdk-stage1/modules_descr.h,
+	mdk-stage1/modules.c: Provide some description of the drivers
+
+2001/04/30  Pixel  <pixel@mandrakesoft.com>
+
+	* docs/README: s/gi.tar.bz2/DrakX-*.src.rpm/
+
+	* docs/advocacy: fuck'em all
+
+2001/04/26  François Pons  <fpons@mandrakesoft.com>
+
+	* docs/README.devel, docs/README: added some more comments for DrakX code
+	source and usage.
+
+2001/04/25  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/oem-prepare: fixed use of VERSION file to find language.
+	prepare a oem disk to be used by moving all files that will not be
+	installed by oem (oem-master disk preparation).
+
+	* rescue/tree/etc/closurepkgs, rescue/tree/etc/part_and_bootloader: fixed
+	usage of free space on disk, added NVIDIA packages to install.
+
+	* rescue/tree/etc/oem-server: added missing VERSION file.
+	fixed usage of free space on disk, added NVIDIA packages to install.
+
+	* rescue/tree/etc/oem: added missing autologin package.
+	added option to enable oem mode.
+	added missing VERSION file.
+	fixed usage of free space on disk, added NVIDIA packages to install.
+
+2001/04/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile: version is labelled "cooker"
+
+2001/04/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/serial_probe/serial.c, tools/serial_probe/serial_probe.c:
+	integrate fg's fixes for includes
+
+2001/04/19  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* rescue/list.sparc, rescue/list.i386, rescue/list.ppc, rescue/list.alpha,
+	rescue/list: move /sbin/sfdisk to list.arch, update both list.ppc
+
+2001/04/18  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/network.c: fix bug that trashes the network config of stage1
+	during stage2, when no DNS is provided
+
 2001/04/18  dam's  <damien@mandrakesoft.com>
 
 	* standalone/net_monitor: last corrections
