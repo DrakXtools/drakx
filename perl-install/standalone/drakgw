@@ -395,6 +395,7 @@ network::shorewall::write($shorewall);
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
 
+log::explanations("Enabling IPV4 forwarding");
 substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network;
 
 
@@ -424,6 +425,7 @@ my $update_dhcp = '/usr/sbin/update_dhcp.pl';
 
 #- put the interface for the dhcp server in the sysconfig-dhcp config, for the /etc/init.d script of dhcpd
 
+log::explanations("Update network interfaces list for dhcpd server");
 substInFile { s/^INTERFACES\n//; $_ .= qq(INTERFACES="$device"\n) if eof } $sysconf_dhcpd;
 
 
