@@ -135,20 +135,22 @@ sub rewrite2 {
 	fr => "« ",
 	de => "„",
 	es => "\\\"",
-	it => "''",
+	it => "\\\"",
+	zh_CN => "“"
 	}}{$lang};
     our $i18ned_close_text_quote = $ {{ 
 	fr => " »",
 	de => "“",
 	es => "\\\"",
-	it => "''",
+	it => "\\\"",
+	zh_CN => "”"
 	}}{$lang};
-    our $i18ned_open_label_quote  = $ {{ fr => "« ", de => "„"}}{$lang};
-    our $i18ned_close_label_quote = $ {{ fr => " »", de => "“"}}{$lang};
-    our $i18ned_open_command_quote  = $ {{ fr => "« ", de => "„"}}{$lang};
-    our $i18ned_close_command_quote = $ {{ fr => " »", de => "“"}}{$lang};
-    our $i18ned_open_input_quote  = $ {{ fr => "« ", de => "»"}}{$lang};
-    our $i18ned_close_input_quote = $ {{ fr => " »", de => "«"}}{$lang};
+    our $i18ned_open_label_quote  = $ {{ fr => "« ", de => "„", zh_CN => "“"}}{$lang};
+    our $i18ned_close_label_quote = $ {{ fr => " »", de => "“", zh_CN => "”"}}{$lang};
+    our $i18ned_open_command_quote  = $ {{ fr => "« ", de => "„", zh_CN => "“"}}{$lang};
+    our $i18ned_close_command_quote = $ {{ fr => " »", de => "“", zh_CN => "”"}}{$lang};
+    our $i18ned_open_input_quote  = $ {{ fr => "« ", de => "»", zh_CN => "“"}}{$lang};
+    our $i18ned_close_input_quote = $ {{ fr => " »", de => "«", zh_CN => "”"}}{$lang};
     our $i18ned_open_key_quote  = $ {{ de => "["}}{$lang};
     our $i18ned_close_key_quote = $ {{ de => "]"}}{$lang};
     # rewrite2_ fills in $help
