@@ -373,7 +373,7 @@ You may also enter the IP address of the gateway if you have one"),
 }
 
 sub miscellaneousNetwork {
-    my ($in, $clicked) = @_;
+    my ($in, $clicked, $no_track_net) = @_;
     my $u = $::o->{miscellaneous} ||= {};
     $::isInstall and $in->set_help('configureNetworkProxy');
     $u->{track_network_id} = detect_devices::isLaptop();
@@ -381,7 +381,7 @@ sub miscellaneousNetwork {
        _("Proxies configuration"),
        [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
          { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },
-	 { label => _("Track network card id (usefull for laptops)"), val => \$u->{track_network_id}, type => "bool" },
+	 if_(!$no_track_net, { label => _("Track network card id (usefull for laptops)"), val => \$u->{track_network_id}, type => "bool" }),
        ],
        complete => sub {
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', _("Proxy should be http://...")), return 1,0;
