@@ -23,7 +23,7 @@ msec - Perl functions to handle msec configuration files
     foreach @functions { %defaults{$_} = $msec->get_function_default($_) }
     foreach @functions { $msec->config_function($_, %options{$_}) }
 
-    @checks = $msec->get_checks;
+    @checks = $msec->get_default_checks;
     foreach @checks { %options{$_} = $msec->get_check_value($_) }
     foreach @checks { %defaults{$_} = $msec->get_check_default($_) }
     foreach @checks { $msec->config_check($_, %options{$_}) }
@@ -81,14 +81,45 @@ sub get_default {
 
     open F, $default_file;
     while(<F>) {
-	   if ($_ =~ /^$option/) { (undef, $default_value) = split(/$category eq "functions" ? ' ' : '=' /o, $_); }
+	   if ($category eq 'functions') {
+		  if ($_ =~ /^$option/) { (undef, $default_value) = split(/ /, $_) }
+	   } elsif ($category eq 'checks') {
+		  if ($_ =~ /^$option/) { (undef, $default_value) = split(/=/, $_) }
+	   }
     }
     close F;
     chop $default_value;
-
     $default_value;
 }
 
+sub get_value {
+    my ($item, $category) = @_;
+    my $value = '';
+    my $found = 0;
+    my $item_file;
+    $item_file = "$::prefix/etc/security/msec/level.local" if $category eq 'functions';
+    $item_file = $check_file if $category eq 'checks';
+
+    if (-e $item_file) {
+        open F, $item_file;
+        while(<F>) {
+            if($_ =~ /^$item/) {
+			 if ($category eq 'functions') {
+				(undef, $value) = split(/ /, $_);
+			 } elsif ($category eq 'checks') {
+                (undef, $value) = split(/=/, $_);
+			 }
+                chop $value;
+                $found = 1;
+			 close F;
+            }
+        }
+        close F;
+	   $value = "default" if $found == 0;
+    }
+    else { $value = "default" }
+    $value;
+}
 
 # ***********************************************
 #               SPECIFIC OPTIONS
@@ -174,34 +205,15 @@ sub get_functions {
 #   return the value of the function passed in argument. If no value is set,
 #   return "default".
 sub get_function_value {
-    my ($function) = @_;
-    my $value = '';
-    my $msec_options = "$::prefix/etc/security/msec/level.local";
-    my $found = 0;
-
-    if (-e $msec_options) {
-        open F, $msec_options;
-        while(<F>) {
-            if($_ =~ /^$function/) {
-                (undef, $value) = split(/\(/, $_);
-                chop $value; chop $value;
-                $found = 1;
-            }
-        }
-        close F;
-	if ($found == 0) { $value = "default" }
-    }
-    else { $value = "default" }
-
-    $value;
+    shift;
+    get_value(@_, 'functions');
 }
 
 # get_function_default(function) -
 #   return the default value of the function according to the security level
 sub get_function_default {
     shift;
-    my ($function) = @_;
-    return get_default($function, "functions");
+    return get_default(@_, "functions");
 }
 
 # config_function(function, value) -
@@ -223,9 +235,9 @@ sub config_function {
 #     PERIODIC CHECKS (security.conf) RELATED
 # ***********************************************
 
-# get_checks() -
+# get_default_checks() -
 #   return a list of periodic checks handled by security.conf
-sub get_checks {
+sub get_default_checks {
     my $check;
     my @checks = ();
 
@@ -236,11 +248,10 @@ sub get_checks {
         open F, $check_file;
         while (<F>) {
             ($check, undef) = split(/=/, $_);
-            if(!(member($check, @ignore_list))) { push(@checks, $check) }
+            push @checks, $check if (!(member($check, @ignore_list)))
         }
         close F;
     }
-
     @checks;
 }
 
@@ -248,34 +259,14 @@ sub get_checks {
 #   return the value of the check passed in argument
 sub get_check_value {
     shift;
-    my ($check) = @_;
-    my $check_file = $check_file;
-    my $value = '';
-    my $found = 0;
-
-    if (-e $check_file) {
-        open F, $check_file;
-	   while(<F>) {
-            if($_ =~ /^$check/) {
-                (undef, $value) = split(/=/, $_);
-			 chop $value;
-			 $found = 1;
-			 close F;
-            }
-        }
-	   close F;
-	   $value = "default" if ($found == 0);
-    }
-    else { $value = "default" }
-
-    $value;
+    get_value(@_, 'checks');
 }
 
 # get_check_default(check)
 #   Get the default value according to the security level
 sub get_check_default {
     my ($check) = @_;
-    return get_default($check, "checks");
+    return get_default($check, 'checks');
 }
 
 # config_check(check, value)

@@ -26,9 +26,9 @@
 		     };
 
 use lib qw(/usr/lib/libDrakX);
-
+use standalone;
 use strict;
-use vars qw($MODE %options $XID $CCPID);
+use vars qw($MODE %options);
 
 use security::main;
 
@@ -38,9 +38,4 @@ $0 =~ '/draksec-perms$' and $MODE = 'perms';
 
 /^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
 
-$::isStandalone = 1;
-Gtk->init;
-
-draksec_main();
-
-myexit 0;
+security::main::draksec_main();
