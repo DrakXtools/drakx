@@ -230,7 +230,7 @@ sub interactive_mode() {
 	
     $window1 = ugtk2->new('drakTermServ');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
-    unless (0 == 0) {
+    unless ($::isEmbedded) {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Terminal Server Configuration"));
 		my $pixbuf_icon = gtkcreate_pixbuf("ic82-network-40");
@@ -238,9 +238,7 @@ sub interactive_mode() {
 		$darea->set_size_request(540, 45);
 		$darea->modify_font(Gtk2::Pango::FontDescription->from_string('Sans Italic 24'));
 		my $layout = $darea->create_pango_layout(N("DrakTermServ"));
-    	$darea->signal_connect(realize => sub { 
-			set_back_pixbuf($darea, gtkcreate_pixbuf('title-tile'))
-		});
+		$darea->modify_bg("normal", gtkcolor(0.13 * 65535, 0.27 * 65535, 0.61 * 65535));
     	$darea->signal_connect(expose_event => sub {
 			my (undef, undef, $dx, $dy) = $darea->allocation->values;
 			$darea->window->draw_pixbuf($darea->style->white_gc, $pixbuf_icon, 0, 0, $dx - $pixbuf_icon->get_width, $dy - $pixbuf_icon->get_height, -1, -1, 'none', 0, 0);
