@@ -82,7 +82,7 @@ sub load {
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
 	  or die "insmod'ing module $_ failed" foreach @l;
     } else {
-	load_raw(map { [ $_ => $options{$_} ] } @l);
+	load_raw_install(\@l, \%options);
     }
     sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @l;
 
@@ -449,15 +449,15 @@ sub extract_modules {
     };
 }
 
-sub load_raw {
-    my @l = @_;
+sub load_raw_install {
+    my ($l, $options) = @_;
 
-    extract_modules('/tmp', map { $_->[0] } @l);
+    extract_modules('/tmp', @$l);
     my @failed = grep {
-	my $m = '/tmp/' . name2file($_->[0]);
+	my $m = '/tmp/' . name2file($_);
 	if (-e $m) {
             my $stdout;
-            my $rc = run_program::run(["/usr/bin/insmod_", "insmod"], '2>', \$stdout, $m, @{$_->[1]});
+            my $rc = run_program::run(["/usr/bin/insmod_", "insmod"], '2>', \$stdout, $m, @{$options->{$_}});
             log::l(chomp_($stdout)) if $stdout;
             if ($rc) {
                 unlink $m;
@@ -466,12 +466,12 @@ sub load_raw {
 		'error';
             }
 	} else {
-	    log::l("missing module $_->[0]");
+	    log::l("missing module $_");
 	    'error';
 	}
-    } @l;
+    } @$l;
 
-    die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
+    die "insmod'ing module " . join(", ", @failed) . " failed" if @failed;
 
 }
 
