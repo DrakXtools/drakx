@@ -937,7 +937,7 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 	run_program::rooted($::prefix, 'groupadd', '-r', 'fileshare');
 	if ($in->ask_from_no_check(
 	{
-	 -e '/usr/sbin/userdrake' ? (ok => N("Launch userdrake"), cancel => N("Cancel")) : (cancel => ''),
+	 -e '/usr/sbin/userdrake' ? (ok => N("Launch userdrake"), cancel => N("Close")) : (cancel => ''),
 	 messages =>
 N("The per-user sharing uses the group \"fileshare\". 
 You can use userdrake to add a user to this group.")
