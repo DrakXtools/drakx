@@ -85,8 +85,8 @@ my %xim = (
   },
   'ko' => {
 	ENC => 'kr',
-	XIM => 'ami',
-	XMODIFIERS => '"@im=ami"',
+	XIM => 'Ami',
+	XMODIFIERS => '"@im=Ami"',
   },
   'ja' => {
 	ENC => 'eucj',
