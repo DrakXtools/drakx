@@ -188,28 +188,6 @@ EOF
     };
 }
 
-sub copy_firmware {
-    my ($device, $destination, $file) = @_;
-    my ($source, $failed, $mounted);
-
-    $device eq 'floppy'  and do { $mounted = 1; ($source, $failed) = use_floppy($file) };
-    $device eq 'windows' and ($source, $failed) = use_windows();
-    
-    $source eq $failed and return;
-    $mounted and my $_b = before_leaving { fs::umount('/mnt') };
-    if ($failed) {
-	eval { $in->ask_warn('', $failed) }; $in->exit if $@ =~ /wizcancel/;
-	return;
-    }
-
-    if (-e "$source/$file") { cp_af("$source/$file", $destination) }
-    else { $failed = N("Firmware copy failed, file %s not found", $file) }
-    eval { $in->ask_warn('', $failed || N("Firmware copy succeeded")) }; $in->exit if $@ =~ /wizcancel/;
-    log::explanations($failed || "Firmware copy $file in $destination succeeded");
-
-    $failed ? 0 : 1;  
-}
-
 sub use_windows() {
     my $all_hds = fsedit::get_hds({}, undef); 
     fs::get_info_from_fstab($all_hds, '');
