@@ -64,11 +64,14 @@ sub hds($$) {
 	# for RAID arrays of format c0d0p1
 	$hd->{prefix} .= "p" if $hd->{prefix} =~ m,(rd|ida)/,;
 
-	eval { partition_table::read($hd, $flags->{clearall}) };
+	eval { partition_table::read($hd, $flags->{clearall} || member($_->{device}, @{$flags->{clear} || []})) };
 	if ($@) {
 	    cdie($@) unless $flags->{eraseBadPartitions};
 	    partition_table_raw::zero_MBR($hd);
 	}
+	member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)
+	  foreach partition_table::get_normal_parts($hd);
+
 	#- special case for type overloading (eg: reiserfs is 0x183)
 	foreach (grep { isExt2($_) } partition_table::get_normal_parts($hd)) {
 	    my $type = typeOfPart($_->{device});

@@ -143,10 +143,16 @@ sub leavingStep {
 #- Steps Functions
 #-######################################################################################
 sub selectLanguage {
-    my ($o) = @_;
+    my ($o, $first_time) = @_;
     $o->SUPER::selectLanguage;
     Gtk->set_locale;
     install_theme($o);
+    
+    $o->ask_warn('',
+_("Your system is low on resource. You may have some problem installing
+Linux-Mandrake. If that occurs, you can try a text install instead. For this,
+press `F1' when booting on CDROM, then enter `text'.")) if $first_time && availableRam < 60 * 1024; # 60MB
+
 }
 
 #------------------------------------------------------------------------------

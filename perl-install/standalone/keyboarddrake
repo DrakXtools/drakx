@@ -33,6 +33,8 @@ my $xkb = keyboard::keyboard2xkb($keyboard);
 `setxkbmap $xkb`;
 
 my $f = "/etc/X11/XF86Config";
+my $g = "/etc/X11/XF86Config-4";
+
 substInFile {
     if (/^Section "Keyboard"/ .. /^EndSection/) {
 	s|^(\s*XkbLayout\s+).*|$1"$xkb"| 
@@ -40,6 +42,14 @@ substInFile {
 	s,^(\s*(XkbVariant|XkbOptions)\s+).*,,; # remove existing one
     }
 } $f if -e $f && !$::testing;
+
+substInFile {
+    if (/^Identifier "Keyboard1"/ .. /^EndSection/) {
+	s|^(\s*Option\s+"XkbLayout"\s+).*|$1"$xkb"| 
+	  and $_ .= join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$xkb_options{$xkb} || []};
+	s,^(\s*Option\s+"(XkbVariant|XkbOptions)"\s+).*,,; # remove existing one
+    }
+} $g if -e $g && !$::testing;
 
 keyboard::write('', $keyboard, $isNotDelete);
 

@@ -79,8 +79,8 @@ sub selectKeyboard($) {
 	my %langs; $langs{$_} = 1 foreach @{$o->{langs}};
 	$o->ask_many_from_list_ref('', 
 		_("You can choose other languages that will be available after install"),
-		[ lang::list() ], [ map { \$langs{lang::text2lang($_)} } lang::list() ] ) or goto &selectKeyboard;
-	$o->{langs} = [ grep { $langs{$_} } keys %langs ];
+		[ lang::list(), 'All' ], [ map { \$langs{$_} } (map { lang::text2lang($_) } lang::list()), 'all' ] ) or goto &selectKeyboard;
+	$o->{langs} = $langs{all} ? [ 'all' ] : [ grep { $langs{$_} } keys %langs ];
     }
     install_steps::selectKeyboard($o);
 }

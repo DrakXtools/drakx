@@ -316,15 +316,16 @@ sub adjust_main_extended($) {
 	# the first is a special case, must recompute its real size
 	my $start = round_down($l->{normal}{start} - 1, $hd->{geom}{sectors});
 	my $end = $l->{normal}{start} + $l->{normal}{size};
-	my $only_linux = 1;
+	my $only_linux = 1; my $has_win_lba = 0;
 	foreach (map $_->{normal}, $l, @l) {
 	    $start = min($start, $_->{start});
 	    $end = max($end, $_->{start} + $_->{size});
 	    $only_linux &&= isTrueFS($_) || isSwap($_);
+	    $has_win_lba ||= $_->{type} == 0xc || $_->{type} == 0xe;
 	}
 	$l->{start} = $hd->{primary}{extended}{start} = $start;
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
-	$hd->{primary}{extended}{type} = $only_linux ? 0x85 : 0x5 if !$::expert;
+	$hd->{primary}{extended}{type} = $only_linux ? 0x85 : $has_win_lba ? 0xf : 0x5 if !$::expert;
     }
     unless (@{$hd->{extended} || []} || !$hd->{primary}{extended}) {
 	%{$hd->{primary}{extended}} = (); #- modify the raw entry

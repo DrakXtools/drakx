@@ -47,17 +47,24 @@ my $g = "/etc/X11/XF86Config-4";
 
 my $zaxis = "\n    ZAxisMapping 4 5" if $mouse->{nbuttons} > 3;
   $zaxis .= "\n    ZAxisMapping 6 7" if $mouse->{nbuttons} > 5;
+  $zaxis  = "
+    Emulate3Buttons
+    Emulate3Timeout    50" if $mouse->{nbuttons} < 3;
+
 substInFile {
     if (/^Section "Pointer"/ .. /^EndSection/) {
-	$_ = '' if /ZAxisMapping/; #- remove existing line
+	$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
 	s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
 	s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
     }
 } $f if -e $f && !$::testing;
+
+$zaxis =~ s/(ZAxisMapping|Emulate3\w+)/Option "$1"/g;
 substInFile {
     if (/^Identifier "Mouse1"/ .. /^EndSection/) {
+	$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
 	s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
-	s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"|;
+	s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$zaxis|;
     }
 } $g if -e $g && !$::testing;
 

@@ -234,7 +234,7 @@ $::oo = {};
 
 #------------------------------------------------------------------------------
 sub selectLanguage {
-    $o->selectLanguage;
+    $o->selectLanguage($_[1] == 1);
 
     addToBeDone {
 	lang::write($o->{prefix});
