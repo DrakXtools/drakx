@@ -90,6 +90,7 @@ sub get_lvs {
 	   my $fs_type = -e "/dev/$device" && fs::type::fs_type_from_magic({ device => $device });
 
 	   { device => $device, 
+	     lv_name => $_,
 	     fs_type => $fs_type || 'ext2',
 	     size => get_lv_size($device) };
        } @l
