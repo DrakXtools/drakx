@@ -411,7 +411,7 @@ sub build_notebook {
                                                                 toggled => $apply),
                   if_($is_ethernet,
                       map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
-                                                                            toggled => $apply))
+                                                                            toggled => $apply));
                         } ([ "HWADDR", N("Track network card id (useful for laptops)") ],
                            [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
                           ),
@@ -489,7 +489,7 @@ sub build_notebook {
 					       gtkpack__(Gtk2::HBox->new, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::ComboBox->new_text,
                                                                                                                     changed => $apply)),
 					      ),
-                                   )
+                                   );
                                   } ([ N("Flow control"), 'FlowControl' ],
                                      [ N("Line termination"), 'Enter' ],
                                      [ N("Connection speed"), 'Speed' ],
@@ -971,7 +971,7 @@ sub configure_net {
                     N("Warning"),
                     #-PO: here "Add Connection" should be translated the same was as in control-center
                     N("You do not have any configured Internet connection.
-Run the \"%s\" assistant from the Mandrakelinux Control Center"), N("Set up a new network interface (LAN, ISDN, ADSL, ...)"));
+Run the \"%s\" assistant from the Mandrakelinux Control Center", N("Set up a new network interface (LAN, ISDN, ADSL, ...)")));
         $in->exit;
     }
     my $cnx = {};
