@@ -25,7 +25,7 @@ foreach my $lang (keys %helps) {
     print F "\n";
     foreach my $id (keys %{$helps{$lang}}) {
 	$base->{$id} or die "$lang:$id doesn't exist in english\n";
-	print F qq(# DO NOT BOTHER TO MODIFY HERE, SEE cvs.mandrakesoft.com:/cooker doc/manual/literal/drakx/$lang/drakx-help.xml\n);
+	print F qq(# DO NOT BOTHER TO MODIFY HERE, SEE:\n# cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/$lang/drakx-help.xml\n);
 	print F qq(msgid ""\n");
 	print F join(qq(\\n"\n"), split "\n", $base->{$id});
 	print F qq("\nmsgstr ""\n");
@@ -138,9 +138,7 @@ sub rewrite2_ {
     } elsif (member($tree->{tag}, 'footnote')) {
 	'(*)'
     } elsif ($tree->{tag} eq 'keycap') {
-	$text =~ s/^(\s+)/$1]/;
-	$text =~ s/(\s+)$/[$1/;
-	$text;
+	"[" . $text . "]";
     } elsif ($tree->{tag} eq 'warning') {
 	$text =~ s/^(\s+)/$1!! /;
 	$text =~ s/(\s+)$/ !!$1/;
