@@ -615,7 +615,7 @@ sub ask_fromW {
 	       0, Gtk2::HSeparator->new,
 	       1, $create_widgets->($advanced_total_size, @widgets_advanced));
 
-    my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_(@$l2, $advanced_button));
+    my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_($o->{interactive_help}, [ N("Help"), $o->{interactive_help}, 1 ]), if_(@$l2, $advanced_button));
 
     $pack->pack_start($always_pack, 1, 1, 0); $always_pack->show;
     $pack->pack_start($advanced_pack, 1, 1, 0);
