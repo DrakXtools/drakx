@@ -417,17 +417,17 @@ sub advanced {
 
     my $label_what_sys = gtkpack(new Gtk::HBox(0,10),
 			 new Gtk::Pixmap($pix_sys_map, $pix_sys_mask),
-			 _("System ")
+			 _("System", " ")
 			 );
     my $label_what_user = gtkpack(new Gtk::HBox(0,10),
 			 new Gtk::Pixmap($pix_user_map, $pix_user_mask),
-			 _("Users ")
+			 _("Users", " ")
 			 );
 
     my $label_what_other = gtkpack(new Gtk::HBox(0,10),
 			 new Gtk::Pixmap($pix_other_map, $pix_other_mask),
-			 _("Other ")
-			 );
+			 _("Other", " ")
+			 ); 
 
 
 
