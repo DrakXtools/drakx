@@ -99,7 +99,7 @@ my @menu_items =
      {   path => N("/_Help").N("/_About..."), 
          callback => sub {
              $in->ask_warn(N("About Harddrake"), 
-                           join ("", N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion:"), " $harddrake::data::version\n", 
+                           join("", N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion:"), " $harddrake::data::version\n", 
                                  N("Author:"), " Thierry Vignaud <tvignaud\@mandrakesoft.com> \n\n",
                                  formatAlaTeX($::license)));
          }

@@ -505,7 +505,7 @@ sub installPackages {
 				   foreach (@data) {
 				       my ($text, $x, $y, $area_width, $area_height, $bold) = @$_;
 				       my ($width, $height, $lines, $widths, $heights, $ascents, $descents) =
-					 get_text_coord ($text, $darea, $area_width, $area_height, 1, 0, 1, 1);
+					 get_text_coord($text, $darea, $area_width, $area_height, 1, 0, 1, 1);
 				       if ($first && $icon) {
 					   my $iconx = ($dx-$width)/2 + $x + ${$widths}[0] - $icon_dx;
 					   my $icony = $y + ${$heights}[0] - $icon_dy/2;

@@ -403,7 +403,7 @@ sub read_printer_db(;$) {
 		    # End of drivers block
 		    $indrivers = 0;
 		} elsif (m!^\s*<driver>(.+)</driver>\s*$!) {
-		    push (@{$entry->{drivers}}, $1);
+		    push @{$entry->{drivers}}, $1;
 		}
 	    } elsif ($inautodetect) {
 		# We are inside the autodetect block of a printers entry
@@ -654,7 +654,7 @@ sub read_cups_printer_list {
 	    } else {
 		$comment = N("(on this machine)");
 	    }
-	    push (@printerlist, "$queuename $comment");
+	    push @printerlist, "$queuename $comment";
 	}
     }
     close F;
@@ -679,11 +679,11 @@ sub get_cups_remote_queues {
 		!$printer->{configured}{$queuename}) {
 		$comment = N("On CUPS server \"%s\"", $1);
 		my $sep = "!";
-		push (@printerlist,
+		push @printerlist,
 		      ($::expert ? N("CUPS") . $sep : "") .
 		      N("Remote Printers") . "$sep$queuename: $comment"
 		      . ($queuename eq $printer->{DEFAULT} ?
-			 N(" (Default)") : ""));
+			 N(" (Default)") : "");
 	    }
 	}
     }
@@ -1237,7 +1237,7 @@ sub configure_hpoj {
 		    s!varLock=\"/var/lock\"!varLock=\"$::prefix/var/lock\"!g;
 		    s!varRunPrefix=\"/var/run\"!varRunPrefix=\"$::prefix/var/run\"!g;
 		}
-		push (@ptalinitfunctions, $_);
+		push @ptalinitfunctions, $_;
 	    }
 	}
 	close PTALINIT;
@@ -1357,7 +1357,7 @@ sub configure_hpoj {
 		my $line = <F>;
 		if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
 		    my $pid = $1;
-		    kill (15, $pid);
+		    kill 15, $pid;
 		}
 		close F;
 	    }
@@ -1371,7 +1371,7 @@ sub configure_hpoj {
     # Determine the ptal device name from already existing config files
     my $ptalprefix =
 	($bus eq "hpjd" ? "hpjd:" : "mlc:$bus:");
-    my $ptaldevice = printer::hpoj::lookupDevname ($ptalprefix, $model_long, 
+    my $ptaldevice = printer::hpoj::lookupDevname($ptalprefix, $model_long, 
 				    $serialnumber_long, $base_address);
 
     # It's all done for us, the device is already configured
@@ -1390,7 +1390,7 @@ sub configure_hpoj {
     printer::hpoj::deleteDevice($ptaldevice);
     if ($bus eq "par") {
 	while (1) {
-	    my $oldDevname = printer::hpoj::lookupDevname ("mlc:par:",undef,undef,$base_address);
+	    my $oldDevname = printer::hpoj::lookupDevname("mlc:par:",undef,undef,$base_address);
 	    last unless defined($oldDevname);
 	    printer::hpoj::deleteDevice($oldDevname);
 	}

@@ -18,7 +18,7 @@ sub write_cnx_script {
 	$netc->{internet_cnx}{$type}{type} = $type2;
     } else {
 	foreach ($connect_file, $disconnect_file) {
-	    output ("$prefix$_",
+	    output("$prefix$_",
 '#!/bin/bash
 ' . if_(!$netc->{at_boot}, 'if [ "x$1" == "x--boot_time" ]; then exit; fi
 ') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_});
@@ -223,7 +223,7 @@ sub disconnected {}
 
 
 sub write_initscript {
-    output ("$prefix/etc/rc.d/init.d/internet", sprintf(<<'EOF', $connect_file, $connect_file, $disconnect_file, $disconnect_file));
+    output("$prefix/etc/rc.d/init.d/internet", sprintf(<<'EOF', $connect_file, $connect_file, $disconnect_file, $disconnect_file));
 #!/bin/bash
 #
 # internet       Bring up/down internet connection
@@ -269,7 +269,7 @@ exit 0
 EOF
     chmod 0755, "$prefix/etc/rc.d/init.d/internet";
     $::isStandalone ? system("/sbin/chkconfig --add internet") : do {
-	symlinkf ("../init.d/internet", "$prefix/etc/rc.d/rc$_") foreach
+	symlinkf("../init.d/internet", "$prefix/etc/rc.d/rc$_") foreach
 	  '0.d/K11internet', '1.d/K11internet', '2.d/K11internet', '3.d/S89internet', '5.d/S89internet', '6.d/K11internet';
     };
 }

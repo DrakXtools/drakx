@@ -43,7 +43,7 @@ sub read_file($$) {
     my ($fs, $cluster) = @_;
     my $buf = '';
 
-    for (; !resize_fat::fat::is_eof($cluster); $cluster = resize_fat::fat::next ($fs, $cluster)) {
+    for (; !resize_fat::fat::is_eof($cluster); $cluster = resize_fat::fat::next($fs, $cluster)) {
 	$cluster == 0 and die "Bad FAT: unterminated chain\n";
 	$buf .= read_cluster($fs, $cluster);
     }

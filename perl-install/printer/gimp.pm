@@ -43,7 +43,7 @@ sub configure {
 		}
 	    }
 	    # Add the printer entry
-	    if (!isprinterconfigured ($queue, $configfilecontent)) {
+	    if (!isprinterconfigured($queue, $configfilecontent)) {
 		# Remove the old printer entry
 		$configfilecontent = 
 		    removeprinter($queue, $configfilecontent);
@@ -60,7 +60,7 @@ sub configure {
 		    s/\n/\nCurrent-Printer: $printer->{DEFAULT}\n/s;
 	    } else {
 		$configfilecontent =~ /^\s*Current\-Printer\s*:\s*(\S+)\s*$/m;
-		if (!isprinterconfigured ($1, $configfilecontent)) {
+		if (!isprinterconfigured($1, $configfilecontent)) {
 		    $configfilecontent =~
 			s/(Current\-Printer\s*:\s*)\S+/$1$printer->{DEFAULT}/;
 		}
@@ -114,7 +114,7 @@ sub addcupsremoteto {
 	# Load GIMP's printer config file
 	my $configfilecontent = readconfigfile($configfilename);
 	# Add the printer entry
-	if (!isprinterconfigured ($queue, $configfilecontent)) {
+	if (!isprinterconfigured($queue, $configfilecontent)) {
 	    # Remove the old printer entry
 	    $configfilecontent = removeprinter($queue, $configfilecontent);
 	    # Add the new printer entry
@@ -213,8 +213,8 @@ sub makeprinterentry {
 
 sub findconfigfiles {
     my @configfilenames;
-    push (@configfilenames, ".gimp-1.2/printrc") if -d "$::prefix/usr/lib/gimp/1.2";
-    push (@configfilenames, ".gimp-1.3/printrc") if -d "$::prefix/usr/lib/gimp/1.3";
+    push @configfilenames, ".gimp-1.2/printrc" if -d "$::prefix/usr/lib/gimp/1.2";
+    push @configfilenames, ".gimp-1.3/printrc" if -d "$::prefix/usr/lib/gimp/1.3";
     my @filestotreat;
     local *PASSWD;
     open PASSWD, "< $::prefix/etc/passwd" or die "Cannot read /etc/passwd!\n";
@@ -239,7 +239,7 @@ sub findconfigfiles {
 			close F;
                set_permissions("$::prefix$homedir/$file", "$uid.$gid") or next;
 		    }
-		    push (@filestotreat, "$homedir/$file");
+		    push @filestotreat, "$homedir/$file";
 		}
 	    }
 	}
@@ -282,7 +282,7 @@ sub addentry {
 	}
     }
     push(@lines, $entry) if $sectionfound && !$entryinserted;
-    return join ("\n", @lines);
+    return join("\n", @lines);
 }
 
 sub addprinter {
@@ -317,7 +317,7 @@ sub removeentry {
 	    }
 	}
     }
-    return join ("", @lines);
+    return join "", @lines;
 }
 
 sub removeprinter {
@@ -341,7 +341,7 @@ sub removeprinter {
 	    }
 	}
     }
-    return join ("", @lines);
+    return join "", @lines;
 }
 
 sub isprinterconfigured {

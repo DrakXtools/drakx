@@ -324,7 +324,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 							   $x_box->set_sensitive(!$x_mode);
 							   $x_mode = !$x_mode;
 						       }),
-				     gtkpack__(gtkset_sensitive ($x_box, $x_mode),
+				     gtkpack__(gtkset_sensitive($x_box, $x_mode),
 						gtkset_active(my $x_no_button  = new Gtk::RadioButton(N("No, I don't want autologin")), !$l_mode),
 						gtkpack__(new Gtk::HBox(0, 10),
 							   gtkset_active(my $x_yes_button = new Gtk::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $l_mode),
@@ -336,7 +336,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 					       )
 				    )
 			 ),
-		 gtkadd (gtkset_layout(new Gtk::HButtonBox, 'end'),
+		 gtkadd(gtkset_layout(new Gtk::HButtonBox, 'end'),
 			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
 			 gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
 			)
@@ -373,12 +373,12 @@ sub parse_etc_passwd {
     do {
 	@user_info = getpwent();
 	($uname, $uid) = @user_info[0,2];
-	push (@usernames, $uname) if $uid > 500 and !($uname eq "nobody");
+	push @usernames, $uname if $uid > 500 and !($uname eq "nobody");
     } while @user_info;
 }
 
 sub get_wm {
-    @winm = (split (' ', `/usr/sbin/chksession -l`));
+    @winm = split(' ', `/usr/sbin/chksession -l`);
 }
 
 #-------------------------------------------------------------

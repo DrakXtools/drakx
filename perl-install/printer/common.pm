@@ -24,7 +24,7 @@ sub addentry {
 	}
     }
     push(@lines, $entry) if $sectionfound && !$entryinserted;
-    return join ("\n", @lines);
+    return join "\n", @lines;
 }
 
 sub addsection {
@@ -57,7 +57,7 @@ sub removeentry {
 	    }
 	}
     }
-    return join ("", @lines);
+    return join "", @lines;
 }
 
 sub removesection {
@@ -81,7 +81,7 @@ sub removesection {
 	    }
 	}
     }
-    return join ("", @lines);
+    return join "", @lines;
 }
 
 1;

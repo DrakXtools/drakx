@@ -19,7 +19,7 @@ sub get_remote_queues {
 	    if ($2 =~ m!^ipp://([^/:]+)[:/]! &&
 		!$printer->{configured}{$queuename}) {
 		my $server = $1;
-		push (@printerlist, "$queuename|$server");
+		push @printerlist, "$queuename|$server";
 	    }
 	}
     }

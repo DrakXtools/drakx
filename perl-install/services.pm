@@ -250,7 +250,7 @@ sub ask_standalone_gtk {
 						    $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy });
     $b->signal_connect(button_press_event => sub { $nopop->() });
     $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill (12, $::CCPID);
+    $::isEmbedded and kill 12, $::CCPID;
     $W->main or return;
     $on_services;
 }

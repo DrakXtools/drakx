@@ -611,7 +611,7 @@ END
 }
 
 sub miscellaneousNetwork {
-    setExportedVarsInSh ("$::prefix/etc/profile.d/proxy.sh",  $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
+    setExportedVarsInSh( "$::prefix/etc/profile.d/proxy.sh",  $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
     setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
 }
 

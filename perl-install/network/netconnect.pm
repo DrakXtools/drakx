@@ -67,7 +67,7 @@ sub detect {
     modules::load_category('network/main|usb');
     require network::ethernet;
     network::ethernet->import;
-    my @all_cards = conf_network_card_backend (undef, undef, undef, undef, undef, undef);
+    my @all_cards = conf_network_card_backend(undef, undef, undef, undef, undef, undef);
     map { $auto_detect->{lan}{$_->[0]} = $_->[1] } @all_cards if !$net_install;
 
     my $adsl = {};
@@ -121,7 +121,7 @@ sub init_globals {
 
 sub main {
     my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $direct_fr, $noauto) = @_;
-    init_globals ($in, $prefix);
+    init_globals($in, $prefix);
     $netc->{minus_one} = 0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
     $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
@@ -350,7 +350,7 @@ sub save_conf {
     modules::load_category('network/main|usb');
     require network::ethernet;
     network::ethernet->import;
-    my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
+    my @all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 
     $intf = { %$intf };
 
@@ -560,7 +560,7 @@ sub load_conf {
 	    /^DOMAINNAME2=(.*)$/ and $netc->{DOMAINNAME2} = $1;
 	}
     }
-    $system_name && $domain_name and $netc->{HOSTNAME} = join ('.', $system_name, $domain_name);
+    $system_name && $domain_name and $netc->{HOSTNAME} = join '.', $system_name, $domain_name;
     $adsl_pptp->{$_} = $adsl_pppoe->{$_} foreach 'login', 'passwd', 'passwd2';
     $isdn_external->{$_} = $modem->{$_} foreach 'device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth';
     $netcnx->{adsl_pptp} = $adsl_pptp;
@@ -609,13 +609,13 @@ sub set_net_conf {
 
 sub start_internet {
     my ($o) = @_;
-    init_globals ($o, $o->{prefix});
+    init_globals($o, $o->{prefix});
     run_program::rooted($prefix, $connect_file);
 }
 
 sub stop_internet {
     my ($o) = @_;
-    init_globals ($o, $o->{prefix});
+    init_globals($o, $o->{prefix});
     run_program::rooted($prefix, $disconnect_file);
 }
 

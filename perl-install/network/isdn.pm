@@ -101,7 +101,7 @@ sub isdn_write_config_backend {
 	symlinkf("ioptions" . $bundle, "$prefix/etc/ppp/ioptions");
     } else {
 	my $f = "$prefix/etc/isdn/profile/link/myisp";
-	output ($f,
+	output($f,
 	  qq(
 I4L_USERNAME="$isdn->{login}"
 I4L_SYSNAME=""

@@ -141,13 +141,13 @@ sub setup_printer_connection {
     # Choose the appropriate connection config dialog
     my $done = 1;
     for ($printer->{TYPE}) {
-	/LOCAL/    and setup_local_autoscan ($printer, $in, $upNetwork) and last;
-	/LPD/      and setup_lpd      ($printer, $in, $upNetwork) and last;
-	/SOCKET/   and setup_socket   ($printer, $in, $upNetwork) and last;
-	/SMB/      and setup_smb      ($printer, $in, $upNetwork) and last;
-	/NCP/      and setup_ncp      ($printer, $in, $upNetwork) and last;
-	/URI/      and setup_uri      ($printer, $in, $upNetwork) and last;
-	/POSTPIPE/ and setup_postpipe ($printer, $in) and last;
+	/LOCAL/    and setup_local_autoscan($printer, $in, $upNetwork) and last;
+	/LPD/      and setup_lpd(      $printer, $in, $upNetwork) and last;
+	/SOCKET/   and setup_socket(   $printer, $in, $upNetwork) and last;
+	/SMB/      and setup_smb(      $printer, $in, $upNetwork) and last;
+	/NCP/      and setup_ncp(      $printer, $in, $upNetwork) and last;
+	/URI/      and setup_uri(      $printer, $in, $upNetwork) and last;
+	/POSTPIPE/ and setup_postpipe( $printer, $in) and last;
 	$done = 0; last;
     }
     return $done;
@@ -166,40 +166,40 @@ sub first_time_dialog {
     my $localprinterspresent;
     if (@autodetected == ()) {
 	$localprinterspresent = 0;
-	push (@printerlist, N("There are no printers found which are directly connected to your machine"));
+	push @printerlist, N("There are no printers found which are directly connected to your machine");
     } else {
 	$localprinterspresent = 1;
 	foreach my $printer (@autodetected) {
 	    my $entry = $printer->{val}{DESCRIPTION};
-	    if ($entry) { push (@printerlist, "  -  $entry\n") }
+	    if ($entry) { push @printerlist, "  -  $entry\n" }
 	}
 	my $morethanoneprinters = $#printerlist > 0;
 	my $unknown_printers = $#autodetected - $#printerlist;
 	if (@printerlist != ()) {
-	    unshift (@printerlist, 
+	    unshift @printerlist, 
 		     ($morethanoneprinters ?
 		      N("The following printers\n\n") :
-		      N("The following printer\n\n")));
+		      N("The following printer\n\n"));
 	    if ($unknown_printers == 1) {
-		push (@printerlist, N("\nand one unknown printer are "));
+		push @printerlist, N("\nand one unknown printer are ");
 	    } elsif ($unknown_printers > 1) {
-		push (@printerlist, N("\nand %d unknown printers are ",
-				      $unknown_printers));
+		push @printerlist, N("\nand %d unknown printers are ",
+				      $unknown_printers);
 	    } else {
-		push (@printerlist, ($morethanoneprinters ? N("\nare ") : N("\nis ")));
+		push @printerlist, ($morethanoneprinters ? N("\nare ") : N("\nis "));
 	    }
-	    push (@printerlist, N("directly connected to your system"));
+	    push @printerlist, N("directly connected to your system");
 	} else {
 	    if ($unknown_printers == 1) {
-		push (@printerlist, N("\nThere is one unknown printer directly connected to your system"));
+		push @printerlist, N("\nThere is one unknown printer directly connected to your system");
 	    } elsif ($unknown_printers > 1) {
-		push (@printerlist, N("\nThere are %d unknown printers directly connected to your system",
-				      $unknown_printers));
+		push @printerlist, N("\nThere are %d unknown printers directly connected to your system",
+				      $unknown_printers);
 	    }
 	}
     }
-    push (@printerlist,
-	  N(" (Make sure that all your printers are connected and turned on).\n"));
+    push @printerlist,
+	  N(" (Make sure that all your printers are connected and turned on).\n");
     my $localprinters = join('', @printerlist);
 
     # Do we have a local network?
@@ -607,7 +607,7 @@ sub setup_local_autoscan {
 
     # Do configuration of multi-function devices and look up model name
     # in the printer database
-    setup_common ($printer, $in, $menuchoice, $device, $do_auto_detect,
+    setup_common($printer, $in, $menuchoice, $device, $do_auto_detect,
 		  @autodetected);
 
     1;
@@ -675,7 +675,7 @@ complete => sub {
 
     # Do configuration of multi-function devices and look up model name
     # in the printer database
-    setup_common ($printer, $in,
+    setup_common($printer, $in,
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		  $printer->{currentqueue}{connect}, $auto_hpoj,
                   ({port => $printer->{currentqueue}{connect},
@@ -1098,7 +1098,7 @@ sub setup_socket {
 
     # Do configuration of multi-function devices and look up model name
     # in the printer database
-    setup_common ($printer, $in,
+    setup_common($printer, $in,
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		  $printer->{currentqueue}{connect}, $auto_hpoj,
                   ({port => $printer->{currentqueue}{connect},
@@ -1183,7 +1183,7 @@ complete => sub {
 
         # Do configuration of multi-function devices and look up model name
         # in the printer database
-        setup_common ($printer, $in,
+        setup_common($printer, $in,
 		      "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		      $printer->{currentqueue}{connect}, $auto_hpoj,
                       ({port => $printer->{currentqueue}{connect},
@@ -1417,7 +1417,7 @@ sub setup_common {
 		$printer->{DBENTRY} = $entry;
 	    }
 	}
-     $printer->{DBENTRY} ||= bestMatchSentence ($descr, keys %printer::main::thedb);
+     $printer->{DBENTRY} ||= bestMatchSentence($descr, keys %printer::main::thedb);
         # If the manufacturer was not guessed correctly, discard the
         # guess.
         $printer->{DBENTRY} =~ /^([^\|]+)\|/;
@@ -2153,11 +2153,11 @@ Note: the photo test page can take a rather long time to get printed and on lase
 		$in->do_pkgs->install('ImageMagick');
 	    }
 	    # set up list of pages to print
-	    $standard && push (@testpages, $stdtestpage);
-	    $altletter && push (@testpages, $altlttestpage);
-	    $alta4 && push (@testpages, $alta4testpage);
-	    $photo && push (@testpages, $phototestpage);
-	    $ascii && push (@testpages, $asciitestpage);
+	    $standard && push @testpages, $stdtestpage;
+	    $altletter && push @testpages, $altlttestpage;
+	    $alta4 && push @testpages, $alta4testpage;
+	    $photo && push @testpages, $phototestpage;
+	    $ascii && push @testpages, $asciitestpage;
 	    # print the stuff
 	    @lpq_output = printer::main::print_pages($printer, @testpages);
 	}
@@ -2354,9 +2354,9 @@ sub copy_queues_from {
 	$newspoolerstr = $printer::shortspooler_inv{$newspooler};
 	$oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
 	foreach (@oldqueues) {
-	    push (@queuesselected, 1);
-	    push (@queueentries, { text => $_, type => 'bool', 
-				   val => \$queuesselected[$#queuesselected] });
+	    push @queuesselected, 1;
+	    push @queueentries, { text => $_, type => 'bool', 
+				   val => \$queuesselected[$#queuesselected] };
 	}
 	# LPRng and LPD use the same config files, therefore one sees the 
 	# queues of LPD when one uses LPRng and vice versa, but these queues
@@ -2854,12 +2854,12 @@ sub main {
 				    0) ? "\@addprinter" : "\@quit";
 		if ($menuchoice ne "\@quit") {
 		    $printer->{SPOOLER} ||= 
-			setup_default_spooler ($printer, $in, $upNetwork) ||
+			setup_default_spooler($printer, $in, $upNetwork) ||
 			    return;
 		}
 	    } else {
 		# Ask for a spooler when none is defined
-		$printer->{SPOOLER} ||=  setup_default_spooler ($printer, $in, $upNetwork) || return;
+		$printer->{SPOOLER} ||= setup_default_spooler($printer, $in, $upNetwork) || return;
 		# This entry and the check for this entry have to use
 		# the same translation to work properly
 		my $spoolerentry = N("Printing system: ");
@@ -3022,7 +3022,7 @@ sub main {
 		}
 		# Function to switch to another spooler
 		if ($menuchoice eq "\@spooler") {
-		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in, $upNetwork) || $printer->{SPOOLER};
+		    $printer->{SPOOLER} = setup_default_spooler($printer, $in, $upNetwork) || $printer->{SPOOLER};
 		    next;
 		}
 		# Rip the queue name out of the chosen menu entry

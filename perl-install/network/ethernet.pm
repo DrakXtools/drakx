@@ -174,7 +174,7 @@ sub configureNetwork {
     local $_;
     any::load_category($in, 'network/main|usb|pcmcia', !$::expert, 1) or return;
     my @l = detect_devices::getNet() or die N("no network card found");
-    my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
+    my @all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 
   configureNetwork_step_1:
     my $n_card = 0;

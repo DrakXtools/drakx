@@ -76,7 +76,7 @@ sub update {
 
 	     is_eof($old_next) ?
 		 set_eof($fs, $new) :
-		 set_next ($fs, $new, $new_next);
+		 set_next($fs, $new, $new_next);
 	 }
     }
 }
@@ -113,7 +113,7 @@ sub is_eof($) {
 }
 sub set_eof($$) {
     my ($fs, $cluster) = @_;
-    set_next ($fs, $cluster, $resize_fat::bad_cluster_value + 1);
+    set_next($fs, $cluster, $resize_fat::bad_cluster_value + 1);
 }
 
 #-    returns true if <cluster> is empty.  Note that this includes bad clusters.
@@ -129,7 +129,7 @@ sub is_available($) {
 }
 sub set_available($$) {
     my ($fs, $cluster) = @_;
-    set_next ($fs, $cluster, 0);
+    set_next($fs, $cluster, 0);
 }
 
 1;

@@ -32,7 +32,7 @@ sub whatNetPrinter {
     push @portstoscan, "4010", "4020", "4030", "5503", "9100-9104" if $network;
     
     return () if $#portstoscan < 0;
-    my $portlist = join (",", @portstoscan);
+    my $portlist = join ",", @portstoscan;
     
     # Which hosts should be scanned?
     # (Applying nmap to a whole network is very time-consuming, because nmap
@@ -41,7 +41,7 @@ sub whatNetPrinter {
     #  hosts and then scanning only them, which is much faster)
     my @hostips = getIPsInLocalNetworks();
     return () if $#hostips < 0;
-    my $hostlist = join (" ", @hostips);
+    my $hostlist = join " ", @hostips;
 
     # Scan network for printers, the timeout settings are there to avoid
     # delays caused by machines blocking their ports with a firewall
@@ -190,7 +190,7 @@ sub getSMBPrinterShares {
 	    my $name = $1;
 	    my $description = $2;
 	    $description =~ s/^(\s*)//;
-	    push (@shares, { name => $name, description => $description });
+	    push @shares, { name => $name, description => $description };
 	}
     }
     close F;

@@ -1116,7 +1116,7 @@ sub setRootPassword {
 
     if ($auth eq N_("LDAP")) {
 	$o->{authentication}{LDAP} ||= 'ldap.' . $o->{netc}{DOMAINNAME};
-	$o->{netc}{LDAPDOMAIN} ||= join (',', map { "dc=$_" } split /\./, $o->{netc}{DOMAINNAME});
+	$o->{netc}{LDAPDOMAIN} ||= join(',', map { "dc=$_" } split /\./, $o->{netc}{DOMAINNAME});
 	$o->ask_from('',
 		     N("Authentication LDAP"),
 		     [ { label => N("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },

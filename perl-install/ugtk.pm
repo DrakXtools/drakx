@@ -667,7 +667,7 @@ sub create_pix_text {
 	$font and $style->font(Gtk::Gdk::Font->fontset_load($font));
     }
     $fake_darea->set_style($style);
-    my ($width, $height, $lines, $widths, $heights) = get_text_coord (
+    my ($width, $height, $lines, $widths, $heights) = get_text_coord(
         $text, $fake_darea, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy);
     my $pix;
     my $j = 0;
