@@ -231,7 +231,7 @@ sub setupBootloader__general {
     my $prev_force_acpi = my $force_acpi = bootloader::get_append_with_key($b, 'acpi') !~ /off|ht/;
     my $prev_force_noapic = my $force_noapic = bootloader::get_append_simple($b, 'noapic');
     my $prev_force_nolapic = my $force_nolapic = bootloader::get_append_simple($b, 'nolapic');
-    my $memsize = bootloader::get_append_with_key($b, 'mem');
+    my $memsize = bootloader::get_append_memsize($b);
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
 
@@ -297,7 +297,7 @@ sub setupBootloader__general {
 	$in->do_pkgs->ensure_binary_is_installed('grub', "grub", 1) or return 0;
     }
 
-    bootloader::set_append_with_key($b, mem => $memsize || 0);
+    bootloader::set_append_memsize($b, $memsize);
     if ($prev_force_acpi != $force_acpi) {
 	bootloader::set_append_with_key($b, acpi => ($force_acpi ? '' : 'ht'));
     }

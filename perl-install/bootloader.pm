@@ -535,9 +535,6 @@ sub get_append_with_key {
     my ($_simple, $dict) = unpack_append($b->{perImageAppend});
     my @l = map { $_->[1] } grep { $_->[0] eq $key } @$dict;
 
-    #- suppose we want the memsize
-    @l = grep { append__mem_is_memsize($_) } @l if $key eq 'mem';
-
     log::l("more than one $key in $b->{perImageAppend}") if @l > 1;
     $l[0];
 }
@@ -554,19 +551,11 @@ sub set_append_with_key {
     modify_append($b, sub {
 	my ($_simple, $dict) = @_;
 
-	my $to_add = $key eq 'mem' ? $val : $val ne '';
-	@$dict = map {
-	    if ($_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val)) {
-		$_;
-	    } elsif ($to_add) {
-		$to_add = 0;
-		[ $key, $val ];
-	    } else {
-		();
-	    }
-	} @$dict;
-
-	push @$dict, [ $key, $val ] if $to_add;
+	if ($val eq '') {
+	    @$dict = grep { $_ ne $key } @$dict;
+	} else {
+	    push @$dict, [ $key, $val ];
+	}
     });
 }
 sub set_append_simple {
@@ -580,6 +569,23 @@ sub set_append_simple {
 sub may_append_with_key {
     my ($b, $key, $val) = @_;
     set_append_with_key($b, $key, $val) if !get_append_with_key($b, $key);
+}
+
+sub get_append_memsize {
+    my ($b) = @_;
+    my ($_simple, $dict) = unpack_append($b->{perImageAppend});
+    find { $_->[0] eq 'mem' && append__mem_is_memsize($_->[1]) } @$dict;
+}
+
+sub set_append_memsize {
+    my ($b, $memsize) = @_;
+
+    modify_append($b, sub {
+	my ($_simple, $dict) = @_;
+
+	@$dict = grep { $_->[0] ne 'mem' || !append__mem_is_memsize($_->[1]) } @$dict;
+	push @$dict, [ mem => $memsize ] if $memsize;
+    });
 }
 
 sub get_append_netprofile {
