@@ -1,3 +1,49 @@
+2001/03/13  dam's  <damien@mandrakesoft.com>
+
+	* share/help.png: changed
+
+2001/03/13  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm, install_steps_gtk.pm: compss is deprecated. use compssUsers
+	for the tree
+
+	* standalone/drakgw: pixelization
+
+	* share/rpmsrate: HDF can't be at the beginning of the line or it will be
+	taken as a flag
+	moved icewm to SYSTEM with !KDE !GNOME
+
+	* pkgs.pm: compss is deprecated. use compssUsers for the tree
+	(readCompssUsers): get the "path"
+
+	* install_steps.pm: compss is deprecated. use compssUsers for the tree
+	renamef created and used
+
+	* detect_devices.pm (burners): don't use cdroms() which return scdX for
+	ide burners, and
+	isBurner don't use the same technique. so use get() and grep for type
+	"cdrom"
+
+	* install_any.pm: compss is deprecated. use compssUsers for the tree
+	(setPackages): set {compssUsersChoice}{PCMCIA} if hasPCMCIA
+	renamef created and used
+
+	* install_steps_interactive.pm: compss is deprecated. use compssUsers for
+	the tree
+	(chooseGroups): fix to get back the icons
+	(chooseGroups): size computed should work
+
+	* common.pm: renamef created and used
+
+2001/03/13  siegel
+
+	* share/po/de.po: new german translation
+
+2001/03/13  warly
+
+	* share/compssUsers: fix {W,w}orkstation
+	remove ^Server and ^Development
+
 2001/03/13  Pixel  <pixel@mandrakesoft.com>
 
 	* standalone/drakgw: pixelization
