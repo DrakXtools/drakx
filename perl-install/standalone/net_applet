@@ -99,8 +99,6 @@ $eventbox->signal_connect(button_press_event => sub {
 			      }
                               $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
                           });
-my ($opt) = @ARGV;
-if ($opt eq '--force' || $opt eq '-f') { setAutoStart('TRUE') }
 
 shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
 
@@ -136,9 +134,11 @@ sub is_running {
     } `ps -o '%P %p %c' -u $ENV{USER}`;
 }
 sub shouldStart() {
-    my %p = getVarsFromSh($onstartupfile);
-    my $ret = $p{AUTOSTART} eq 'FALSE' ? 0 : 1;
-    $ret;
+    my ($opt) = @ARGV;
+    if ($opt eq '--force' || $opt eq '-f') {
+        return 1;
+    }
+    return getAutoStart();
 }
 sub md5file {
     my @md5;
@@ -219,7 +219,7 @@ sub setState {
                                                                                 $activefw->get_interactive),
                                                                   toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) })));
     }
-    $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()),
+    $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), getAutoStart()),
                                             toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) })));
     $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label(N("Quit"))), activate => sub { mainQuit() }));
     $menu;
@@ -227,6 +227,10 @@ sub setState {
 sub mainQuit() {
      Glib::Source->remove($timeout) if $timeout;
      Gtk2->main_quit;
+}
+sub getAutoStart {
+    my %p = getVarsFromSh($onstartupfile);
+    return to_bool($p{AUTOSTART} ne 'FALSE');
 }
 sub setAutoStart {
     my $state = shift;
