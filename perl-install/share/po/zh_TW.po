@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-04 03:54+0800\n"
+"PO-Revision-Date: 2005-03-04 23:36+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,6 +40,9 @@ msgid ""
 "Make sure that the selected device is the USB key you want to format. \n"
 "We advise you to unplug all other USB storage devices while doing this operation."
 msgstr ""
+"您正要格式化 USB 裝置 \"%s\"。這將會刪除它裡面所有的資料。\n"
+"請確認這個選取的裝置是您要格式化的 USB 隨身碟。\n"
+"我們建議您在進行這個動作的時候移除所有其它的 USB 儲存裝置。"
 
 #: ../move/move.pm:448
 #: ../move/move.pm:460
@@ -77,6 +80,11 @@ msgid ""
 "Click the button to reboot the machine, unplug it, remove write protection,\n"
 "plug the key again, and launch Mandrake Move again."
 msgstr ""
+"您的 USB 隨身碟似乎有防寫保護，但是我們現在無法安全的移除它。\n"
+"\n"
+"\n"
+"請按下此按鈕來重新開機，移除隨身碟並解除它的寫入保護，接著重\n"
+"新插入隨身碟，最後重新啟動 Mandrake Move。"
 
 #: ../move/move.pm:468
 #: help.pm:409
@@ -356,11 +364,13 @@ msgid ""
 "You can not use another CDROM when the following programs are running: \n"
 "%s"
 msgstr ""
+"您可以在下列程式執行時使用別台光碟機：\n"
+"%s"
 
 #: ../move/tree/mdk_totem:101
 #, c-format
 msgid "Copying to memory to allow removing the CDROM"
-msgstr ""
+msgstr "正在複製到記憶體中以便退出光碟"
 
 #: Xconfig/card.pm:13
 #, c-format
@@ -760,7 +770,7 @@ msgstr "取消"
 #: ugtk2.pm:1032
 #, c-format
 msgid "Help"
-msgstr "求助"
+msgstr "輔助說明"
 
 #: Xconfig/test.pm:30
 #, c-format
@@ -770,12 +780,12 @@ msgstr "設定值測試"
 #: Xconfig/test.pm:31
 #, c-format
 msgid "Do you want to test the configuration?"
-msgstr "您想要測試設定值嗎?"
+msgstr "您想要測試設定值嗎？"
 
 #: Xconfig/test.pm:31
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr "警告: 測試這張顯示卡時可能會冰凍您的系統"
+msgstr "警告：測試這張顯示卡時可能會凍結您的系統"
 
 #: Xconfig/test.pm:69
 #, c-format
@@ -784,9 +794,9 @@ msgid ""
 "%s\n"
 "Try to change some parameters"
 msgstr ""
-"一個錯誤發生了:\n"
+"發生了一個錯誤：\n"
 "%s\n"
-"試著改變某些參數"
+"請試著改變某些參數"
 
 #: Xconfig/test.pm:129
 #, c-format
@@ -796,62 +806,62 @@ msgstr "%d 秒後離開"
 #: Xconfig/test.pm:129
 #, c-format
 msgid "Is this the correct setting?"
-msgstr "這是正確設定值嗎?"
+msgstr "這是正確的設定值嗎？"
 
 #: Xconfig/various.pm:29
 #, c-format
 msgid "Keyboard layout: %s\n"
-msgstr "鍵盤布局: %s\n"
+msgstr "鍵盤布局： %s\n"
 
 #: Xconfig/various.pm:30
 #, c-format
 msgid "Mouse type: %s\n"
-msgstr "滑鼠種類: %s\n"
+msgstr "滑鼠種類： %s\n"
 
 #: Xconfig/various.pm:31
 #, c-format
 msgid "Mouse device: %s\n"
-msgstr "滑鼠裝置: %s\n"
+msgstr "滑鼠裝置： %s\n"
 
 #: Xconfig/various.pm:33
 #, c-format
 msgid "Monitor: %s\n"
-msgstr "監視器: %s\n"
+msgstr "螢幕： %s\n"
 
 #: Xconfig/various.pm:34
 #, c-format
 msgid "Monitor HorizSync: %s\n"
-msgstr "監視器水平更新頻率: %s\n"
+msgstr "螢幕水平更新頻率： %s\n"
 
 #: Xconfig/various.pm:35
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
-msgstr "監視器垂直更新頻率: %s\n"
+msgstr "螢幕垂直更新頻率： %s\n"
 
 #: Xconfig/various.pm:37
 #, c-format
 msgid "Graphics card: %s\n"
-msgstr "顯示卡: %s\n"
+msgstr "顯示卡： %s\n"
 
 #: Xconfig/various.pm:38
 #, c-format
 msgid "Graphics memory: %s kB\n"
-msgstr "顯示卡繪圖記憶體: %s kB\n"
+msgstr "顯示卡繪圖記憶體： %s kB\n"
 
 #: Xconfig/various.pm:40
 #, c-format
 msgid "Color depth: %s\n"
-msgstr "顏色深度: %s\n"
+msgstr "色深： %s\n"
 
 #: Xconfig/various.pm:41
 #, c-format
 msgid "Resolution: %s\n"
-msgstr "解析度: %s\n"
+msgstr "解析度： %s\n"
 
 #: Xconfig/various.pm:43
 #, c-format
 msgid "Xorg driver: %s\n"
-msgstr "Xorg 驅動程式: %s\n"
+msgstr "Xorg 驅動程式： %s\n"
 
 #: Xconfig/various.pm:72
 #, c-format
@@ -864,8 +874,8 @@ msgid ""
 "I can setup your computer to automatically start the graphical interface (Xorg) upon booting.\n"
 "Would you like Xorg to start when you reboot?"
 msgstr ""
-"我可以設定您的電腦在開機時自動開始圖形介面(Xorg).\n"
-"您希望在重新開機時開始 Xorg?"
+"我可以設定您的電腦在開機時自動啟動圖形介面 (Xorg)，\n"
+"您希望在重新開機時啟動 Xorg？"
 
 #: Xconfig/various.pm:87
 #, c-format
@@ -878,18 +888,18 @@ msgid ""
 "\n"
 "Do you have this feature?"
 msgstr ""
-"您的顯示卡似乎有支援 TV-OUT 連接裝置.\n"
-"所以這張顯示卡能用 frame-buffer 工作.\n"
+"您的顯示卡似乎有支援 TV-OUT 連接裝置。\n"
+"所以這張顯示卡能用 frame-buffer 工作。\n"
 "\n"
-"若是要使用的話, 您需要在你重新開機之前插入你的顯示卡到您的電視.\n"
+"若是要使用的話，您需要在重新開機之前連接您的顯示卡與電視。\n"
 "然後選擇 \"TVout\" 這個開機載入項目\n"
 "\n"
-"您要使用這項功能嗎?"
+"您要使用這項功能嗎？"
 
 #: Xconfig/various.pm:99
 #, c-format
 msgid "What norm is your TV using?"
-msgstr "您的電視用什麼標準?"
+msgstr "您的電視用什麼標準？"
 
 #: any.pm:140
 #: harddrake/sound.pm:191
@@ -2324,9 +2334,6 @@ msgid ""
 "Otherwise no entry for mount point %s will be written in fstab.\n"
 "Quit anyway?"
 msgstr ""
-"您應該將磁區 %s 格式化。\n" 	 
- "否則，掛載點 %s 的設定將不會寫入 fstab 中。\n" 	 
- "您仍然要離開嗎？"
 
 #: diskdrake/interactive.pm:282
 #, c-format
@@ -3498,7 +3505,6 @@ msgid "Here you can select an alternative driver (either OSS or ALSA) for your s
 msgstr "您可以選擇使用另外的 (OSS 或者 ALSA) 的驅動程式給您的音效卡 (%s)"
 
 #. -PO: here the first %s is either "OSS" or "ALSA",
-#. -PO: and the third %s is the name of the default driver
 #: harddrake/sound.pm:241
 #, c-format
 msgid ""
@@ -4329,6 +4335,10 @@ msgid ""
 "monitor connected to your machine. If it is not correct, you can choose\n"
 "from this list the monitor which is connected to your computer."
 msgstr ""
+"螢幕\n"
+"\n"
+"    一般來說，安裝程式會自動偵測並設定連接到您電腦的螢幕。如果它不正確\n"
+"，您可以由此列表中選取連結到您電腦的螢幕。"
 
 #: help.pm:295
 #, c-format
@@ -4340,6 +4350,10 @@ msgid ""
 "able to make changes after the installation). A sample of the chosen\n"
 "configuration is shown in the monitor picture."
 msgstr ""
+"解析度\n"
+"\n"
+"    在這裡您可以選擇您顯示卡可以使用的解析度與色深。請選取最適合您的設定值\n"
+"(您可以在安裝完成之後更改)。您選取的設定值的樣本將顯示在螢幕圖片上。"
 
 #: help.pm:303
 #, c-format
@@ -5644,6 +5658,10 @@ msgid ""
 "\n"
 "Do you really want to remove these packages?\n"
 msgstr ""
+"下列套件將被移除以升級您的系統：%s\n"
+"\n"
+"\n"
+"您確定要移除這些套件嗎？\n"
 
 #: install_any.pm:1214
 #: partition_table.pm:603
@@ -7931,7 +7949,6 @@ msgid ""
 msgstr ""
 
 #. -PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
-#. -PO: left to right, or from right to left; any other string is wrong.
 #: lang.pm:173
 #, c-format
 msgid "default:LTR"
@@ -10363,18 +10380,20 @@ msgid ""
 "You can provide it now via a floppy or your windows partition,\n"
 "or skip and do it later."
 msgstr ""
+"您需要 Alcatel 的微碼。\n"
+"您可以立即由磁碟片或 Windows 磁區安裝，或者先跳過等日後再執行。"
 
 #: network/netconnect.pm:777
 #: network/netconnect.pm:782
 #, c-format
 msgid "Use a floppy"
-msgstr "使用一個軟片"
+msgstr "由磁片安裝"
 
 #: network/netconnect.pm:777
 #: network/netconnect.pm:786
 #, c-format
 msgid "Use my Windows partition"
-msgstr "使用我的 Windows 分割"
+msgstr "由我的 Windows 磁區安裝"
 
 #: network/netconnect.pm:777
 #: network/netconnect.pm:789
@@ -10385,12 +10404,12 @@ msgstr "稍後再執行"
 #: network/netconnect.pm:796
 #, c-format
 msgid "Firmware copy failed, file %s not found"
-msgstr ""
+msgstr "韌體複製失敗，找不到檔案 %s"
 
 #: network/netconnect.pm:803
 #, c-format
 msgid "Firmware copy succeeded"
-msgstr ""
+msgstr "韌體複製成功"
 
 #: network/netconnect.pm:818
 #, c-format
@@ -10400,6 +10419,10 @@ msgid ""
 "%s\n"
 "and copy the mgmt.o in /usr/share/speedtouch"
 msgstr ""
+"您需要 Alcatel 的微碼。\n"
+"請到下述網站下載：\n"
+"%s\n"
+"並複製檔案 mgmt.o 到 /usr/share/speedtouch"
 
 #: network/netconnect.pm:889
 #, c-format
@@ -10452,7 +10475,7 @@ msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
 "\n"
 msgstr ""
-"恭喜 ! 網路與網際網路設定組態已經設定完成了.\n"
+"恭喜！網路與網際網路組態已經設定完成了。\n"
 "\n"
 
 #: network/netconnect.pm:971
@@ -10469,7 +10492,7 @@ msgstr "正在設定網路裝置 %s (驅動程式 %s)"
 #: network/netconnect.pm:973
 #, c-format
 msgid "The following protocols can be used to configure an ethernet connection. Please choose the one you want to use"
-msgstr ""
+msgstr "下列的通訊協定可以用來設定區域網路連線。請選擇您要使用的協定"
 
 #: network/netconnect.pm:1006
 #, c-format
@@ -10478,9 +10501,9 @@ msgid ""
 "Each item should be entered as an IP address in dotted-decimal\n"
 "notation (for example, 1.2.3.4)."
 msgstr ""
-"請輸入這台機器的 IP 設定.\n"
+"請輸入這台機器的 IP 設定。\n"
 "每個項目都應該用小數點間隔的 IP 位址來輸入\n"
-"(例如 1.2.3.4)."
+"(例如 1.2.3.4)。"
 
 #: network/netconnect.pm:1013
 #, c-format
@@ -10504,7 +10527,7 @@ msgstr "網路遮罩"
 #: standalone/drakconnect:415
 #, c-format
 msgid "Track network card id (useful for laptops)"
-msgstr "紀錄網路卡的 id (對於筆記型電腦相當有用)"
+msgstr "紀錄網路卡的 ID (對於筆記型電腦相當有用)"
 
 #: network/netconnect.pm:1022
 #: standalone/drakconnect:416
@@ -13336,6 +13359,8 @@ msgid ""
 "Note that this is very slow, reading the pictures from the camera or a USB card reader is usually faster.\n"
 "\n"
 msgstr ""
+"請注意這將花費許多時間，由數位相機或 USB 讀卡機讀取圖片通常會較快。\n"
+"\n"
 
 #: printer/printerdrake.pm:3842
 #, c-format
@@ -15986,19 +16011,19 @@ msgid "SSH Server"
 msgstr "NIS 伺服主機"
 
 #: share/compssUsers.pl:186
-#, fuzzy, c-format
+#, c-format
 msgid "Webmin"
-msgstr "Webcam"
+msgstr "Webmin"
 
 #: share/compssUsers.pl:187
-#, fuzzy, c-format
+#, c-format
 msgid "Webmin Remote Configuration Server"
-msgstr "Mandrake Terminal Server 設定"
+msgstr "Webmin 遠端設定伺服器"
 
 #: share/compssUsers.pl:191
-#, fuzzy, c-format
+#, c-format
 msgid "Network Utilities/Monitoring"
-msgstr "網路設定"
+msgstr "網路工具/監控"
 
 #: share/compssUsers.pl:192
 #, c-format
@@ -16006,14 +16031,14 @@ msgid "Monitoring tools, processes accounting, tcpdump, nmap, ..."
 msgstr ""
 
 #: share/compssUsers.pl:196
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrakesoft Wizards"
-msgstr "Mandrakelinux 控制中心"
+msgstr "Mandrakelinux 精靈"
 
 #: share/compssUsers.pl:197
-#, fuzzy, c-format
+#, c-format
 msgid "Wizards to configure server"
-msgstr "正在設定「%s」印表機中 ..."
+msgstr "用來設定伺服器的精靈"
 
 #: standalone.pm:21
 #, c-format
@@ -20411,7 +20436,6 @@ msgid "Ignore"
 msgstr "忽略"
 
 #. -PO: Do not alter the <span ..> and </span> tags.
-#. -PO: keep the double empty lines between sections, this is formatted a la LaTeX.
 #: standalone/draksec:101
 #, c-format
 msgid ""
@@ -23262,47 +23286,47 @@ msgid "Emulate third button?"
 msgstr "模擬三鍵式滑鼠？"
 
 #: standalone/mousedrake:61
-#, fuzzy, c-format
+#, c-format
 msgid "Mouse test"
-msgstr "Mouse Systems"
+msgstr "滑鼠測試"
 
 #: standalone/mousedrake:64
-#, fuzzy, c-format
+#, c-format
 msgid "Please test your mouse:"
-msgstr "請測試滑鼠"
+msgstr "請測試您的滑鼠："
 
 #: standalone/net_applet:34
-#, fuzzy, c-format
+#, c-format
 msgid "Network is up on interface %s"
-msgstr "網路介面"
+msgstr "網路已經由介面 %s 啟動"
 
 #. -PO: keep the "Configure Network" substring synced with the "Configure Network" message below
 #: standalone/net_applet:42
 #, c-format
 msgid "Network is down on interface %s. Click on \"Configure Network\""
-msgstr ""
+msgstr "網路介面 %s 是關閉的。請點選 \"設定網路\""
 
 #: standalone/net_applet:57
 #: standalone/net_monitor:473
-#, fuzzy, c-format
+#, c-format
 msgid "Connect %s"
-msgstr "已連線"
+msgstr "連線到 %s"
 
 #: standalone/net_applet:58
 #: standalone/net_monitor:473
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnect %s"
-msgstr "斷線..."
+msgstr "中斷與 %s 的連線"
 
 #: standalone/net_applet:59
-#, fuzzy, c-format
+#, c-format
 msgid "Monitor Network"
-msgstr "使用網路回存檔案"
+msgstr "監控網路"
 
 #: standalone/net_applet:60
 #, c-format
 msgid "Configure Network"
-msgstr "設定網路連線"
+msgstr "設定網路"
 
 #. -PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/net_applet:61
@@ -23314,7 +23338,7 @@ msgstr "重新載入"
 #: standalone/net_applet:62
 #, c-format
 msgid "Get Online Help"
-msgstr ""
+msgstr "取得線上說明"
 
 #: standalone/net_applet:177
 #, fuzzy, c-format
@@ -23329,17 +23353,17 @@ msgstr "總是在啟動時執行"
 #: standalone/net_applet:230
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr ""
+msgstr "%s 試圖發動通訊埠掃描攻擊未遂。"
 
 #: standalone/net_applet:231
 #, c-format
 msgid "The %s service has been attacked by %s."
-msgstr ""
+msgstr "%s 服務被 %s 攻擊。"
 
 #: standalone/net_applet:232
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr ""
+msgstr "%s 試圖發動密碼破解攻擊未遂。"
 
 #: standalone/net_applet:240
 #, fuzzy, c-format
@@ -23347,70 +23371,70 @@ msgid "Active Firewall: intrusion detected"
 msgstr "防火牆設定已經偵測到了!"
 
 #: standalone/net_applet:251
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to blacklist the attacker?"
-msgstr "您想要使用這個功能嗎?"
+msgstr "您要將攻擊者列入黑名單嗎？"
 
 #: standalone/net_applet:265
 #, c-format
 msgid "Always blacklist (do not ask again)"
-msgstr ""
+msgstr "總是自動列入黑名單 (不要再問)"
 
 #: standalone/net_applet:268
-#, fuzzy, c-format
+#, c-format
 msgid "Attack details"
-msgstr "沒有詳細資訊"
+msgstr "詳細的攻擊資訊"
 
 #: standalone/net_applet:272
 #, c-format
 msgid "Attack time: %s"
-msgstr ""
+msgstr "攻擊時間： %s"
 
 #: standalone/net_applet:273
-#, fuzzy, c-format
+#, c-format
 msgid "Network interface: %s"
-msgstr "網路介面"
+msgstr "網路介面： %s"
 
 #: standalone/net_applet:274
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type: %s"
-msgstr "格式： "
+msgstr "攻擊型態： %s"
 
 #: standalone/net_applet:275
-#, fuzzy, c-format
+#, c-format
 msgid "Protocol: %s"
-msgstr "通訊協定"
+msgstr "通訊協定： %s"
 
 #: standalone/net_applet:276
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker IP address: %s"
-msgstr "閘道 IP 位址"
+msgstr "攻擊者 IP 位址： %s"
 
 #: standalone/net_applet:277
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker hostname: %s"
-msgstr "Loopback 檔案名稱:  %s"
+msgstr "攻擊者主機名稱： %s"
 
 #: standalone/net_applet:278
-#, fuzzy, c-format
+#, c-format
 msgid "Service attacked: %s"
-msgstr "服務程式"
+msgstr "被攻擊的服務： %s"
 
 #: standalone/net_applet:279
-#, fuzzy, c-format
+#, c-format
 msgid "Port attacked: %s"
-msgstr "連接埠"
+msgstr "被攻擊的連接埠： %s"
 
 #: standalone/net_applet:280
 #, c-format
 msgid "Type of ICMP attack: %s"
-msgstr ""
+msgstr "ICMP 的攻擊型態： %s"
 
 #: standalone/net_monitor:61
 #: standalone/net_monitor:66
-#, fuzzy, c-format
+#, c-format
 msgid "Network Monitoring"
-msgstr "網路設定"
+msgstr "網路監控"
 
 #: standalone/net_monitor:104
 #, c-format
@@ -23418,14 +23442,14 @@ msgid "Global statistics"
 msgstr ""
 
 #: standalone/net_monitor:107
-#, fuzzy, c-format
+#, c-format
 msgid "Instantaneous"
-msgstr "移除字型"
+msgstr "瞬間"
 
 #: standalone/net_monitor:107
 #, c-format
 msgid "Average"
-msgstr "平均值"
+msgstr "平均"
 
 #: standalone/net_monitor:108
 #, c-format
@@ -23433,6 +23457,8 @@ msgid ""
 "Sending\n"
 "speed:"
 msgstr ""
+"上傳\n"
+"速度："
 
 #: standalone/net_monitor:109
 #, c-format
@@ -23440,50 +23466,54 @@ msgid ""
 "Receiving\n"
 "speed:"
 msgstr ""
+"下載\n"
+"速度："
 
 #: standalone/net_monitor:113
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Connection\n"
 "time: "
-msgstr "連線項目： "
+msgstr ""
+"連線\n"
+"時間： "
 
 #: standalone/net_monitor:120
 #, c-format
 msgid "Use same scale for received and transmitted"
-msgstr ""
+msgstr "對接收與傳送使用相同的度量"
 
 #: standalone/net_monitor:139
-#, fuzzy, c-format
+#, c-format
 msgid "Wait please, testing your connection..."
-msgstr "正在測試您的連線..."
+msgstr "請稍候，正在測試您的連線..."
 
 #: standalone/net_monitor:188
 #: standalone/net_monitor:201
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from Internet "
-msgstr "連線到 Internet"
+msgstr "正在中斷與網際網路的連線"
 
 #: standalone/net_monitor:188
 #: standalone/net_monitor:201
-#, fuzzy, c-format
+#, c-format
 msgid "Connecting to Internet "
-msgstr "連線到 Internet"
+msgstr "連線到網際網路"
 
 #: standalone/net_monitor:232
 #, c-format
 msgid "Disconnection from Internet failed."
-msgstr ""
+msgstr "中斷與網際網路的連線失敗。"
 
 #: standalone/net_monitor:233
 #, c-format
 msgid "Disconnection from Internet complete."
-msgstr ""
+msgstr "成功的中斷與網際網路的連線。"
 
 #: standalone/net_monitor:235
-#, fuzzy, c-format
+#, c-format
 msgid "Connection complete."
-msgstr "連線速度"
+msgstr "連線完成。"
 
 #: standalone/net_monitor:236
 #, c-format
@@ -23491,28 +23521,30 @@ msgid ""
 "Connection failed.\n"
 "Verify your configuration in the Mandrakelinux Control Center."
 msgstr ""
+"連線失敗。\n"
+"請檢查您在 Mandrakelinux 控制中心的設定。"
 
 #: standalone/net_monitor:340
-#, fuzzy, c-format
+#, c-format
 msgid "Color configuration"
-msgstr "Xorg 設定"
+msgstr "顏色設定"
 
 #: standalone/net_monitor:388
 #: standalone/net_monitor:408
 #, c-format
 msgid "sent: "
-msgstr ""
+msgstr "傳送："
 
 #: standalone/net_monitor:395
 #: standalone/net_monitor:412
 #, c-format
 msgid "received: "
-msgstr ""
+msgstr "接收："
 
 #: standalone/net_monitor:402
 #, c-format
 msgid "average"
-msgstr ""
+msgstr "平均"
 
 #: standalone/net_monitor:405
 #, fuzzy, c-format
@@ -23522,22 +23554,22 @@ msgstr "LocaleDrake"
 #: standalone/net_monitor:466
 #, fuzzy, c-format
 msgid "Warning, another internet connection has been detected, maybe using your network"
-msgstr "警告, 偵測到您系統已經有現成的網路連線, 也許正在存取您的網路服務"
+msgstr "警告，偵測到您系統上有其他的網路連線，也許正在使用您的網路服務"
 
 #: standalone/net_monitor:477
-#, fuzzy, c-format
+#, c-format
 msgid "No internet connection configured"
-msgstr "Internet 連線設定"
+msgstr "沒有設定好的網路連線設定"
 
 #: standalone/printerdrake:68
-#, fuzzy, c-format
+#, c-format
 msgid "Reading data of installed printers..."
-msgstr "正在尋找新的印表機..."
+msgstr "正在讀取已安裝的印表機的資料..."
 
 #: standalone/printerdrake:116
 #, c-format
 msgid "%s Printer Management Tool"
-msgstr ""
+msgstr "%s 印表機管理工具"
 
 #: standalone/printerdrake:130
 #: standalone/printerdrake:131
@@ -23559,17 +23591,17 @@ msgstr "/新增印表機 (_A)"
 #: standalone/printerdrake:131
 #, c-format
 msgid "/Set as _Default"
-msgstr "/指定為預設值 (_D)"
+msgstr "/指定為預設印表機 (_D)"
 
 #: standalone/printerdrake:132
 #, c-format
 msgid "/_Edit"
-msgstr "/編輯(_E)"
+msgstr "/編輯 (_E)"
 
 #: standalone/printerdrake:133
 #, c-format
 msgid "/_Delete"
-msgstr "/刪除(_D)"
+msgstr "/刪除 (_D)"
 
 #: standalone/printerdrake:134
 #, c-format
@@ -23579,7 +23611,7 @@ msgstr "/專家模式 (_E)"
 #: standalone/printerdrake:139
 #, c-format
 msgid "/_Refresh"
-msgstr "/更新(_R)"
+msgstr "/更新 (_R)"
 
 #: standalone/printerdrake:146
 #, c-format
@@ -23600,7 +23632,7 @@ msgstr "套用過濾器"
 #: standalone/printerdrake:218
 #, c-format
 msgid "Def."
-msgstr ""
+msgstr "預設"
 
 #: standalone/printerdrake:211
 #: standalone/printerdrake:218
@@ -23620,35 +23652,35 @@ msgstr "伺服器名稱"
 
 #. -PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/printerdrake:226
-#, fuzzy, c-format
+#, c-format
 msgid "Add Printer"
-msgstr "印表機"
+msgstr "新增"
 
 #: standalone/printerdrake:226
-#, fuzzy, c-format
+#, c-format
 msgid "Add a new printer to the system"
-msgstr "於結尾新增一項規則"
+msgstr "新增一台印表機到系統"
 
 #. -PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
 #: standalone/printerdrake:229
 #, c-format
 msgid "Set as default"
-msgstr "設為預設值"
+msgstr "設為預設"
 
 #: standalone/printerdrake:229
-#, fuzzy, c-format
+#, c-format
 msgid "Set selected printer as the default printer"
 msgstr "使用這台印表機為預設印表機"
 
 #: standalone/printerdrake:232
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected printer"
-msgstr "編輯選取的伺服器"
+msgstr "編輯選取的印表機"
 
 #: standalone/printerdrake:235
-#, fuzzy, c-format
+#, c-format
 msgid "Delete selected printer"
-msgstr "刪除所選取的規則"
+msgstr "刪除選取的印表機"
 
 #: standalone/printerdrake:238
 #, c-format
@@ -23662,9 +23694,9 @@ msgid "Configure CUPS"
 msgstr "設定 CUPS"
 
 #: standalone/printerdrake:241
-#, fuzzy, c-format
+#, c-format
 msgid "Configure CUPS printing system"
-msgstr "變更列印系統"
+msgstr "設定 CUPS 列印系統"
 
 #: standalone/printerdrake:299
 #: standalone/printerdrake:337
@@ -23685,70 +23717,73 @@ msgstr "作者："
 
 #. -PO: here %s is the version number
 #: standalone/printerdrake:570
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Management %s"
-msgstr "列印至 %s"
+msgstr "列印機管理 %s"
 
 #: standalone/scannerdrake:51
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "SANE packages need to be installed to use scanners.\n"
 "\n"
 "Do you want to install the SANE packages?"
-msgstr "這個套件 %s 需要安裝上, 您要安裝它嗎?"
+msgstr ""
+"要使用掃描器需要安裝套件 SANE。\n"
+"\n"
+"您要安裝它嗎？"
 
 #: standalone/scannerdrake:55
-#, fuzzy, c-format
+#, c-format
 msgid "Aborting Scannerdrake."
-msgstr "選取您的掃描器"
+msgstr "略過 Scannerdrake。"
 
 #: standalone/scannerdrake:60
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
-msgstr "無法安裝分享掃描器所需的套件。"
+msgstr "無法安裝使用 Scannerdrake 設定掃描器所需的套件。"
 
 #: standalone/scannerdrake:61
 #, c-format
 msgid "Scannerdrake will not be started now."
-msgstr ""
+msgstr "Scannerdrake 將不會啟動。"
 
 #: standalone/scannerdrake:67
 #: standalone/scannerdrake:491
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for configured scanners..."
-msgstr "正在尋找新的印表機..."
+msgstr "正在尋找已經設定好的掃描器..."
 
 #: standalone/scannerdrake:71
 #: standalone/scannerdrake:495
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for new scanners..."
-msgstr "正在尋找新的印表機..."
+msgstr "正在尋找新的掃描器..."
 
 #: standalone/scannerdrake:79
 #: standalone/scannerdrake:517
 #, c-format
 msgid "Re-generating list of configured scanners..."
-msgstr ""
+msgstr "重新產生設定好的掃描器的列單..."
 
 #: standalone/scannerdrake:101
 #, c-format
 msgid "The %s is not supported by this version of %s."
-msgstr ""
+msgstr "%s 不被這個版本的 %s 所支援。"
 
 #: standalone/scannerdrake:104
 #, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr ""
+msgstr "找到了在 %2$s 上的 %1$s，要自動設定它嗎？"
 
 #: standalone/scannerdrake:116
 #, c-format
 msgid "%s is not in the scanner database, configure it manually?"
-msgstr "在掃描器資料庫內找不到此型號 - %s, 您要手動設定嗎？"
+msgstr "在掃描器資料庫內找不到此型號 - %s，您要手動設定嗎？"
 
 #: standalone/scannerdrake:131
-#, fuzzy, c-format
+#, c-format
 msgid "Select a scanner model"
-msgstr "手動選取使用者"
+msgstr "選取掃描器型號"
 
 #: standalone/scannerdrake:132
 #, c-format
@@ -23756,82 +23791,82 @@ msgid " ("
 msgstr " ("
 
 #: standalone/scannerdrake:133
-#, fuzzy, c-format
+#, c-format
 msgid "Detected model: %s"
-msgstr "偵測到的型號：%s %s"
+msgstr "偵測到的型號： %s"
 
 #: standalone/scannerdrake:136
-#, fuzzy, c-format
+#, c-format
 msgid "Port: %s"
-msgstr "連接埠"
+msgstr "連接埠： %s"
 
 #: standalone/scannerdrake:138
 #: standalone/scannerdrake:141
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (不支援)"
 
 #: standalone/scannerdrake:144
 #, c-format
 msgid "The %s is not supported under Linux."
-msgstr ""
+msgstr "%s 不被 Linux 所支援。"
 
 #: standalone/scannerdrake:171
 #: standalone/scannerdrake:185
 #, c-format
 msgid "Do not install firmware file"
-msgstr ""
+msgstr "不要安裝韌體檔"
 
 #: standalone/scannerdrake:175
 #: standalone/scannerdrake:227
 #, c-format
 msgid "It is possible that your %s needs its firmware to be uploaded everytime when it is turned on."
-msgstr ""
+msgstr "您的 %s 可能每次啟動時都需要下載它的韌體檔。"
 
 #: standalone/scannerdrake:176
 #: standalone/scannerdrake:228
 #, c-format
 msgid "If this is the case, you can make this be done automatically."
-msgstr ""
+msgstr "如果是這種情況，您可以自動的完成這個工作。"
 
 #: standalone/scannerdrake:177
 #: standalone/scannerdrake:231
 #, c-format
 msgid "To do so, you need to supply the firmware file for your scanner so that it can be installed."
-msgstr ""
+msgstr "要這樣作的話，請提供您掃描器的韌體檔以供安裝。"
 
 #: standalone/scannerdrake:178
 #: standalone/scannerdrake:232
 #, c-format
 msgid "You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."
-msgstr ""
+msgstr "您可以在隨著您掃描器附上的光碟或磁片、廠商的網頁、或者是您的 Windows 磁區上找到這個檔案。"
 
 #: standalone/scannerdrake:180
 #: standalone/scannerdrake:239
-#, fuzzy, c-format
+#, c-format
 msgid "Install firmware file from"
-msgstr "安裝"
+msgstr "安裝韌體檔，由"
 
 #: standalone/scannerdrake:200
-#, fuzzy, c-format
+#, c-format
 msgid "Select firmware file"
-msgstr "選擇檔案"
+msgstr "選擇韌體案"
 
 #: standalone/scannerdrake:203
 #: standalone/scannerdrake:262
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
-msgstr ""
+msgstr "韌體檔 %s 不存在或者無法讀取！"
 
 #: standalone/scannerdrake:226
 #, c-format
 msgid "It is possible that your scanners need their firmware to be uploaded everytime when they are turned on."
-msgstr ""
+msgstr "這可能是因為您的掃描器每次啟動時都需要下載它的韌體檔。"
 
 #: standalone/scannerdrake:230
 #, c-format
 msgid "To do so, you need to supply the firmware files for your scanners so that it can be installed."
-msgstr ""
+msgstr "要這樣作的話，請提供您掃描器的韌體檔以供安裝。"
 
 #: standalone/scannerdrake:233
 #, c-format
@@ -23846,22 +23881,22 @@ msgstr "安裝"
 #: standalone/scannerdrake:258
 #, c-format
 msgid "Select firmware file for the %s"
-msgstr ""
+msgstr "選取 %s 的韌體檔"
 
 #: standalone/scannerdrake:276
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the firmware file for the %s!"
-msgstr "正在安裝 %s 套件"
+msgstr "無法安裝 %s 的韌體檔！"
 
 #: standalone/scannerdrake:289
 #, c-format
 msgid "The firmware file for your %s was successfully installed."
-msgstr ""
+msgstr "%s 的韌體檔安裝成功。"
 
 #: standalone/scannerdrake:299
 #, c-format
 msgid "The %s is unsupported"
-msgstr ""
+msgstr "不支援 %s"
 
 #: standalone/scannerdrake:304
 #, c-format
@@ -23886,7 +23921,7 @@ msgstr ""
 #: standalone/scannerdrake:311
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
-msgstr ""
+msgstr "(注意：平行埠無法自動偵測)"
 
 #: standalone/scannerdrake:313
 #: standalone/scannerdrake:358
@@ -23895,20 +23930,20 @@ msgid "choose device"
 msgstr "選取裝置"
 
 #: standalone/scannerdrake:347
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for scanners..."
-msgstr "正在尋找新的印表機..."
+msgstr "正在尋找掃描器..."
 
 #: standalone/scannerdrake:383
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up kernel modules..."
-msgstr "移除一模組"
+msgstr "正在設定核心模組..."
 
 #: standalone/scannerdrake:390
 #: standalone/scannerdrake:397
-#, fuzzy, c-format
+#, c-format
 msgid "Attention!"
-msgstr "自動偵測"
+msgstr "注意！"
 
 #: standalone/scannerdrake:391
 #, c-format
@@ -23943,7 +23978,7 @@ msgstr ""
 #: standalone/scannerdrake:400
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr ""
+msgstr "編輯設定檔 /etc/sane.d/%s.conf。"
 
 #: standalone/scannerdrake:406
 #, c-format
@@ -23953,66 +23988,68 @@ msgid ""
 msgstr ""
 
 #: standalone/scannerdrake:431
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanners\n"
 "\n"
 "%s\n"
 "are available on your system.\n"
 msgstr ""
-"下列印表機\n"
+"下列掃描器\n"
 "\n"
-"%s%s直接連結到您的系統"
+"%s\n"
+"可以在您的系統上使用。\n"
 
 #: standalone/scannerdrake:432
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanner\n"
 "\n"
 "%s\n"
 "is available on your system.\n"
 msgstr ""
-"下列印表機\n"
+"下列掃描器\n"
 "\n"
-"%s%s直接連結到您的系統"
+"%s\n"
+"可以在您的系統上使用。\n"
 
 #: standalone/scannerdrake:435
 #: standalone/scannerdrake:438
-#, fuzzy, c-format
+#, c-format
 msgid "There are no scanners found which are available on your system.\n"
-msgstr "目前沒有找到直接連結在您電腦上的印表機"
+msgstr "沒有找到可以在您系統上使用的掃描器。\n"
 
 #: standalone/scannerdrake:452
-#, fuzzy, c-format
+#, c-format
 msgid "Search for new scanners"
-msgstr "搜尋新的伺服器"
+msgstr "搜尋新的掃描器"
 
 #: standalone/scannerdrake:458
-#, fuzzy, c-format
+#, c-format
 msgid "Add a scanner manually"
-msgstr "手動選取使用者"
+msgstr "手動加入掃描器"
 
 #: standalone/scannerdrake:465
 #, c-format
 msgid "Install/Update firmware files"
-msgstr ""
+msgstr "安裝/更新韌體"
 
 #: standalone/scannerdrake:471
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing"
-msgstr "檔案分享"
+msgstr "掃描器分享"
 
 #: standalone/scannerdrake:530
 #: standalone/scannerdrake:695
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "沒有遠端機器"
+msgstr "所有的遠端機器"
 
 #: standalone/scannerdrake:542
 #: standalone/scannerdrake:845
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
-msgstr "(位於這個機器上)"
+msgstr "本機"
 
 #: standalone/scannerdrake:582
 #, c-format
@@ -24025,31 +24062,31 @@ msgid "You can also decide here whether scanners on remote machines should be ma
 msgstr ""
 
 #: standalone/scannerdrake:586
-#, fuzzy, c-format
+#, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr "本機的列表機可以被其他的電腦使用"
+msgstr "本機的掃描器可以被其他的電腦使用"
 
 #: standalone/scannerdrake:588
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "印表機分享於主機/網路："
+msgstr "分享掃描器給主機："
 
 #: standalone/scannerdrake:602
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr ""
+msgstr "使用遠端電腦上的掃描器"
 
 #: standalone/scannerdrake:605
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr ""
+msgstr "使用掃描器於主機："
 
 #: standalone/scannerdrake:632
 #: standalone/scannerdrake:704
 #: standalone/scannerdrake:854
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "本地端印表機分享"
+msgstr "本地端掃描器分享"
 
 #: standalone/scannerdrake:633
 #, c-format
@@ -24058,9 +24095,9 @@ msgstr ""
 
 #: standalone/scannerdrake:644
 #: standalone/scannerdrake:794
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "新增主機/網路"
+msgstr "新增主機"
 
 #: standalone/scannerdrake:650
 #: standalone/scannerdrake:800
@@ -24070,9 +24107,9 @@ msgstr "編輯選擇的主機"
 
 #: standalone/scannerdrake:659
 #: standalone/scannerdrake:809
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "移除選取的主機/網路"
+msgstr "移除選取的主機"
 
 #: standalone/scannerdrake:683
 #: standalone/scannerdrake:691
@@ -24082,9 +24119,9 @@ msgstr "移除選取的主機/網路"
 #: standalone/scannerdrake:841
 #: standalone/scannerdrake:846
 #: standalone/scannerdrake:892
-#, fuzzy, c-format
+#, c-format
 msgid "Name/IP address of host:"
-msgstr "主機/網路的IP 位址"
+msgstr "主機的名稱/IP 位址："
 
 #: standalone/scannerdrake:705
 #: standalone/scannerdrake:855
