@@ -13,6 +13,7 @@ use lang;
 use Digest::MD5 qw(md5_hex);
 
 my @ALLOWED_LANGS = qw(en_US fr es it de);
+our $using_existing_config;
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
@@ -109,14 +110,22 @@ sub init {
     eval { modules::load('usb-storage', 'sd_mod') };
     install_steps::setupSCSI($o);
     system('sysctl -w kernel.hotplug="/sbin/hotplug"');
-    handleMoveKey($o);
+    key_mount($o);
+    key_installfiles('simple');
+    if (`getent passwd 501` =~ /([^:]+):/) {
+        $o->{users} = [ { name => $1 } ];
+        $using_existing_config = 1;
+    }
 
 drakx_stuff:
     $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
     $o->{steps}{verifyKey} = { reachable => 1, text => "Verify Key" };
+    $o->{steps}{configMove} = { reachable => 1, text => "Configure Move" };
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ qw(selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard startMove) ];
+    $o->{orderedSteps} = [ $using_existing_config ?
+                           qw(handleI18NClp startMove)
+                         : qw(selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
@@ -144,52 +153,13 @@ sub lomount_clp {
     run_program::run('mount', '-r', $dev, $dir);
 }
 
-sub install_TrueFS_in_home {
-    my ($o) = @_;
-
-    require fsedit;
-    my $home = fsedit::mntpoint2part('/home', $o->{fstab}) or return;
-
-    my %loopbacks = map {
-	my $part = { 
-		type => 0x483, 
-		device => "/home/.mdkmove-$_",
-	        loopback_file => "/.mdkmove-$_", loopback_device => $home,
-		mntpoint => "/home/$_/.mdkmove-truefs", size => 5 << 11,
-		toFormat => ! -e "/home/.mdkmove-$_",
-	};
-	$_ => $part;
-    } list_users();
-    $home->{loopback} = [ values %loopbacks ];
-    fsedit::recompute_loopbacks($o->{all_hds});
-
-    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
-    install_steps_interactive::formatMountPartitions($o);
-
-    foreach my $user (keys %loopbacks) {
-	my $dir = $loopbacks{$user}{mntpoint};
-        run_program::run("/bin/chown", "$user.$user", $dir);
-
-	foreach (qw(.kde)) {
-	    if (-d "/home/$user/$_" && ! -d "$dir/$_") {
-		run_program::run('mv', "/home/$user/$_", "$dir/$_");
-	    }
-	    mkdir $_ and run_program::run("/bin/chown", "$user.$user", $_)
-	      foreach "/home/$user/$_", "$dir/$_";
-
-	    run_program::run('mount', '-o', 'bind', "$dir/$_", "/home/$user/$_");
-	}
-	$ENV{ICEAUTHORITY} = "$dir/.ICEauthority";
-    }
-}
-
 sub install2::handleI18NClp {
     my $o = $::o;
 
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
 }
 
-sub keys_parts {
+sub key_parts {
     my ($o) = @_;
 
     my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } @{$o->{all_hds}{hds}};
@@ -200,7 +170,7 @@ sub keys_parts {
     } fsedit::get_fstab(@keys);
 }
     
-sub handleMoveKey {
+sub key_mount {
     my ($o, $o_reread) = @_;
 
     if ($o_reread) {
@@ -209,13 +179,42 @@ sub handleMoveKey {
     }
 
     require fs;
-    fs::mount_part($_) foreach keys_parts($o);
+    fs::mount_part($_) foreach key_parts($o);
 }
 
 sub machine_ident {
     #- , c::get_hw_address('eth0');       before detect of network :(
     md5_hex(join '', (map { (split)[1] } cat_('/proc/bus/pci/devices')));
 }
+
+sub key_installfiles {
+    my ($mode) = @_;
+
+    mkdir '/home/.sysconf';
+    my $sysconf = '/home/.sysconf/' . machine_ident();
+
+    if (!-d $sysconf || cat_('/proc/cmdline') =~ /\bcleankey\b/) {
+        $mode eq 'full' or return;
+        eval { rm_rf $sysconf };
+        mkdir $sysconf;
+        foreach (chomp_(cat_('/image/move/keyfiles'))) {
+            mkdir_p("$sysconf/" . dirname($_));
+            system("cp $_ $sysconf$_");
+            symlinkf("$sysconf$_", $_);
+        }
+        system("cp /image/move/README.adding.more.files /home/.sysconf");
+    } else {
+        foreach (chomp_(`find $sysconf -type f`)) {
+            my ($path) = /^\Q$sysconf\E(.*)/;
+            mkdir_p(dirname($path));
+            symlinkf($_, $path);
+        }
+    }
+
+    #- /etc/sudoers can't be a link
+    unlink($_), system("cp /image/$_ $_") foreach qw(/etc/sudoers);
+}
+
 
 sub install2::verifyKey {
     my ($o) = $::o;
@@ -238,13 +237,13 @@ Operating System.")),
                             ok => N("Detect again USB key"),
                             cancel => N("Continue without USB key") }) or return;
 
-        handleMoveKey($o, 'reread');
+        key_mount($o, 'reread');
     }
 
     local *F;
     while (!open F, '>/home/.touched') {
 
-        fs::umount_part($_) foreach keys_parts($o);
+        fs::umount_part($_) foreach key_parts($o);
         modules::unload('usb-storage');  #- it won't notice change on write protection otherwise :/
 
         $o->ask_okcancel_({ title => N("Key isn't writable"), 
@@ -256,57 +255,33 @@ unplug it, remove write protection, and then plug it again.")),
 
         modules::load('usb-storage');
         sleep 2;
-        handleMoveKey($o, 'reread');
+        key_mount($o, 'reread');
     }
     close F;
     unlink '/home/.touched';
 
     my $wait = $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
-
-    mkdir '/home/.sysconf';
-    my $sysconf = '/home/.sysconf/' . machine_ident();
-    if (!-d $sysconf || cat_('/proc/cmdline') =~ /\bcleankey\b/) {
-        rm_rf $sysconf;
-        mkdir $sysconf;
-        foreach (chomp_(cat_('/image/move/keyfiles'))) {
-            mkdir_p("$sysconf/" . dirname($_));
-            system("cp $_ $sysconf$_");
-            symlinkf("$sysconf$_", $_);
-        }
-        system("cp /image/move/README.adding.more.files /home/.sysconf");
-    } else {
-        foreach (chomp_(`find $sysconf -type f`)) {
-            my ($path) = /^\Q$sysconf\E(.*)/;
-            mkdir_p(dirname($path));
-            symlinkf($_, $path);
-        }
-    }
-    #- /etc/sudoers can't be a link
-    unlink($_), system("cp /image/$_ $_") foreach qw(/etc/sudoers);
-
+    key_installfiles('full');
     $wait = undef;
-
 }
 
-sub install2::startMove {
+sub install2::configMove {
     my $o = $::o;
-    
+
     #- just in case
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
 
     if (cat_('/proc/cmdline') =~ /\buser=(\w+)/) {
-	$o->{users} = [ { name => $1 } ];
+        $o->{users} = [ { name => $1 } ];
     } else {
-	require any;
-	any::ask_user_one($o, $o->{users} ||= [], $o->{security},
-			  additional_msg => N("BLA BLA user for move, password for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
+        require any;
+        any::ask_user_one($o, $o->{users} ||= [], $o->{security},
+                          additional_msg => N("BLA BLA user for move, password for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
     }
     #- force uid/gid to 501 as it was used when mounting key, addUser may choose 502 when key already holds user data
     put_in_hash($o->{users}[0], { uid => 501, gid => 501 });
     require install_steps;
     install_steps::addUser($o);
-
-    install_TrueFS_in_home($o);
 
     my $wait = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
 
@@ -335,8 +310,49 @@ N("An error occurred, but I don't know how to handle it nicely.
 Continue at your own risk."), formatError($@) ]) if $@;
         }
     }
+}
 
-    $wait = undef;
+sub install_TrueFS_in_home {
+    my ($o) = @_;
+
+    require fsedit;
+    my $home = fsedit::mntpoint2part('/home', $o->{fstab}) or return;
+
+    my %loopbacks = map {
+	my $part = { 
+		type => 0x483, 
+		device => "/home/.mdkmove-$_",
+	        loopback_file => "/.mdkmove-$_", loopback_device => $home,
+		mntpoint => "/home/$_/.mdkmove-truefs", size => 5 << 11,
+		toFormat => ! -e "/home/.mdkmove-$_",
+	};
+	$_ => $part;
+    } list_users();
+    $home->{loopback} = [ values %loopbacks ];
+    fsedit::recompute_loopbacks($o->{all_hds});
+
+    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
+    install_steps::formatMountPartitions($o);
+
+    foreach my $user (keys %loopbacks) {
+	my $dir = $loopbacks{$user}{mntpoint};
+        run_program::run("/bin/chown", "$user.$user", $dir);
+
+	foreach (qw(.kde)) {
+	    if (-d "/home/$user/$_" && ! -d "$dir/$_") {
+		run_program::run('mv', "/home/$user/$_", "$dir/$_");
+	    }
+	    mkdir $_ and run_program::run("/bin/chown", "$user.$user", $_)
+	      foreach "/home/$user/$_", "$dir/$_";
+
+	    run_program::run('mount', '-o', 'bind', "$dir/$_", "/home/$user/$_");
+	}
+	$ENV{ICEAUTHORITY} = "$dir/.ICEauthority";
+    }
+}
+
+sub install2::startMove {
+    my $o = $::o;
 
     $::WizardWindow->destroy if $::WizardWindow;
     require ugtk2;
@@ -345,7 +361,8 @@ Continue at your own risk."), formatError($@) ]) if $@;
     my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
     $root->draw_pixbuf(Gtk2::Gdk::GC->new($root), $pixbuf, 0, 0, ($::rootwidth - $w) / 2, ($::rootheight - $h)/2, $w, $h, 'none', 0, 0);
     ugtk2::gtkflush();
-
+    
+    install_TrueFS_in_home($o);
     run_program::run('/sbin/service', 'syslog', 'start');
     run_program::run('killall', 'minilogd');  #- get rid of minilogd
     run_program::run('/sbin/service', 'syslog', 'restart');  #- otherwise minilogd will strike back
@@ -373,15 +390,21 @@ Continue at your own risk."), formatError($@) ]) if $@;
 
 sub automatic_xconf {
     my ($o) = @_;
-    log::l('automatic XFree configuration');
 
-    require Xconfig::default;
-    $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
+    if ($using_existing_config) {
+        print "MandrakeMove is using existing host configuration\n";
 
-    require Xconfig::main;
-    require class_discard;
-    Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
-                                                     { allowNVIDIA_rpms => [], allowATI_rpms => [], allowFB => $o->{allowFB} });
+    } else {
+        log::l('automatic XFree configuration');
+        
+        require Xconfig::default;
+        $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
+        
+        require Xconfig::main;
+        require class_discard;
+        Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
+                                                         { allowNVIDIA_rpms => [], allowATI_rpms => [], allowFB => $o->{allowFB} });
+    }
 }
 
 

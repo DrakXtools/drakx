@@ -41,5 +41,8 @@ have not the necessary packages and we don't want to provide)
 
         usb key
 
+/etc/X11/X
+        is a link but vfat doesn't handle links :(
+
 /etc/X11/XF86Config-4
-    - needs to mount the key even before drakx opens xfree
+        changing screen resolution doesn't get saved because file is re-created in /etc/X11, loosing link to usb-key
