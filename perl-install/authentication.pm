@@ -152,8 +152,8 @@ sub ask_root_password_and_authentication {
     my $kind = to_kind($authentication);
 
     $in->ask_from_({
-	 title => N("Set root password and network authentication methods"), 
-	 messages => N("Set root password"),
+	 title => N("Set administrator (root) password and network authentication methods"), 
+	 messages => N("Set administrator (root) password"),
 	 advanced_messages => kind2description(),
 	 interactive_help_id => "setRootPassword",
 	 cancel => ($security <= 2 ? 
