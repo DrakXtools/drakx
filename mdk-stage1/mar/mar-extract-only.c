@@ -52,6 +52,24 @@ gzerr(gzFile f) /* decrease code size */
 #endif /* _STANDALONE_ */
 
 
+char **
+mar_list_contents(struct mar_stream *s)
+{
+	struct mar_element * elem = s->first_element;
+	char * tmp_contents[500];
+	char ** answ;
+	int i = 0;
+	while (elem)
+	{
+		tmp_contents[i++] = strdup(elem->filename);
+		elem = elem->next_element;
+	}
+	tmp_contents[i++] = NULL;
+	answ = (char **) malloc(sizeof(char *) * i);
+	memcpy(answ, tmp_contents, sizeof(char *) * i);
+	return answ;
+}
+
 int
 mar_calc_integrity(struct mar_stream *s)
 {

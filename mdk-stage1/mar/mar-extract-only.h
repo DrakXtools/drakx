@@ -31,5 +31,6 @@
 int mar_open_file(char *filename, struct mar_stream *s);
 int mar_extract_file(struct mar_stream *s, char *filename, char *dest_dir);
 int mar_calc_integrity(struct mar_stream *s);
+char ** mar_list_contents(struct mar_stream *s);
 
 #endif
