@@ -167,7 +167,9 @@ sub set_default {
 
     my ($options, $unknown) = &unpack($part);
 
-    if (!$opts{ignore_is_removable} && $part->{is_removable} && !member($part->{mntpoint}, qw(/ /usr /var /boot))) {
+    if (!$opts{ignore_is_removable} && $part->{is_removable} 
+	  && !member($part->{mntpoint}, qw(/ /usr /var /boot)) 
+	  && (!$part->{fs_type} || $part->{fs_type} eq 'auto' || $part->{fs_type} =~ /:/)) {
 	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
 	$part->{fs_type} = !$options->{supermount} ? 'auto' :
 		    $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
