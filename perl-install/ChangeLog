@@ -4,6 +4,30 @@
 
 2002/09/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
+	* install_steps_interactive.pm: fix titisucks making cards choice in bttv
+	dialog unavailable
+
+2002/09/19  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm: prefer cups for lpddaemon
+
+2002/09/19  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Catch non-existant config files on copy.
+
+2002/09/19  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: Fixed bug of printerdrake installing LPRng when it is
+	started for the
+	first time and CUPS is already installed without local queues but with
+	remote CUPS servers broadcasting in their printer info.
+
+2002/09/19  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: try to avoid infinite loop on error to install package.
+
+2002/09/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
 	* standalone.pm: when in install mode, log when a **** does a "use
 	standalone"
 
@@ -3834,7 +3858,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.754 2002/09/19 13:41:32 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.755 2002/09/19 15:18:48 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
