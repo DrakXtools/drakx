@@ -466,7 +466,7 @@ sub Create {
          { label => N("Preference: "), val => \$primaryOrExtended, list => [ '', "Extended", "Primary", if_($::expert, "Extended_0x85") ] },
            ),
 	   if_($::expert && isLVM($hd),
-	 { label => _("Logical volume name "), val => \$part->{lv_name}, list => [ qw(root swap usr home var), '' ], sort => 0, not_edit => 0 },
+	 { label => N("Logical volume name "), val => \$part->{lv_name}, list => [ qw(root swap usr home var), '' ], sort => 0, not_edit => 0 },
            ),
         ], changed => sub {
 	    if ($part->{start} + ($mb_size << 11) > $max) {
@@ -892,7 +892,7 @@ sub Options {
 
     my (undef, $user_implies) = fs::mount_options();
     my ($options, $unknown) = fs::mount_options_unpack($part);
-    my %help = fs::mount_options_help(keys %$options);
+    my %help = fs::mount_options_help();
 
     my $prev_user = $options->{user};
     $in->ask_from(N("Mount options"),
@@ -1233,8 +1233,8 @@ sub choose_encrypt_key {
 	 messages => N("Choose your filesystem encryption key"),
 	 callbacks => { 
 	     complete => sub {
-		 length $encrypt_key < 20 and $in->ask_warn('', N("This encryption key is too simple (must be at least %d characters long)", 20)), return (1,0);
-		 $encrypt_key eq $encrypt_key2 or $in->ask_warn('', [ N("The encryption keys do not match"), N("Please try again") ]), return (1,1);
+		 length $encrypt_key < 20 and $in->ask_warn('', N("This encryption key is too simple (must be at least %d characters long)", 20)), return 1,0;
+		 $encrypt_key eq $encrypt_key2 or $in->ask_warn('', [ N("The encryption keys do not match"), N("Please try again") ]), return 1,1;
 		 return 0
         } } }, [
 { label => N("Encryption key"), val => \$encrypt_key,  hidden => 1 },
