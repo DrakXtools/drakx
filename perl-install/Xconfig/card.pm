@@ -298,6 +298,7 @@ sub configure {
 	}
     }
     if (!$auto) {
+      card_config__not_listed:
 	card_config__not_listed($in, $cards[0], $options) or return;
     }
 
@@ -305,7 +306,12 @@ sub configure {
 
     xfree_and_glx_choose($in, $card, $auto) or return;
 
-    $card->{prog} = install_server($card, $options, $do_pkgs);
+    eval {
+	$card->{prog} = install_server($card, $options, $do_pkgs);
+    } or do {
+	$in->ask_warn('', N("Can't install XFree package: %s", $@));
+	goto card_config__not_listed;
+    };
     
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
 	if ($auto) {
