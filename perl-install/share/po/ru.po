@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drakfloppy 0.30\n"
-"POT-Creation-Date: 2002-09-13 22:00+0200\n"
+"POT-Creation-Date: 2002-09-20 11:43+0200\n"
 "PO-Revision-Date: 2000-08-01 16:24+0200\n"
 "Last-Translator: Pavel Maryanov <acid_jack@ukr.net>\n"
 "Language-Team: Russian \n"
@@ -113,10 +113,10 @@ msgid ""
 "Your card can have 3D hardware acceleration support but only with XFree %s.\n"
 "Your card is supported by XFree %s which may have a better support in 2D."
 msgstr ""
-"Ваша видеокарта имеет аппаратную поддержку 3D-ускорения, но толькос XFree %"
+"Ваша видеокарта имеет аппаратную поддержку 3D-ускорения, но только с XFree %"
 "s.\n"
 "Ваша видеокарта поддерживается XFree %s, который может иметь лучшую "
-"поддержкув 2D."
+"поддержку в 2D."
 
 #: ../../Xconfig/card.pm_.c:416 ../../Xconfig/card.pm_.c:439
 #, c-format
@@ -141,7 +141,7 @@ msgstr ""
 "ПОМНИТЕ, ЭТО ЭКСПЕРИМЕНТАЛЬНАЯ ПОДДЕРЖКА И ВОЗМОЖНО ЗАВИСАНИЕ ВАШЕГО "
 "КОМПЬЮТЕРА.\n"
 "Ваша видеокарта поддерживается XFree %s, который может иметь лучшую "
-"поддержкув 2D."
+"поддержку в 2D."
 
 #: ../../Xconfig/card.pm_.c:430 ../../Xconfig/card.pm_.c:447
 #, c-format
@@ -179,7 +179,7 @@ msgid "Test"
 msgstr "Проверить"
 
 #: ../../Xconfig/main.pm_.c:118 ../../diskdrake/dav.pm_.c:67
-#: ../../diskdrake/interactive.pm_.c:381 ../../diskdrake/removable.pm_.c:25
+#: ../../diskdrake/interactive.pm_.c:385 ../../diskdrake/removable.pm_.c:25
 #: ../../diskdrake/removable_gtk.pm_.c:16 ../../diskdrake/smbnfs_gtk.pm_.c:86
 msgid "Options"
 msgstr "Параметры"
@@ -191,14 +191,14 @@ msgstr "Параметры"
 #: ../../interactive/newt.pm_.c:195 ../../interactive/newt.pm_.c:197
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../interactive/stdio.pm_.c:144 ../../my_gtk.pm_.c:159
-#: ../../my_gtk.pm_.c:287 ../../my_gtk.pm_.c:310 ../../security/main.pm_.c:246
+#: ../../my_gtk.pm_.c:287 ../../my_gtk.pm_.c:310 ../../security/main.pm_.c:166
 #: ../../standalone/drakbackup_.c:3974 ../../standalone/drakbackup_.c:4069
 #: ../../standalone/drakbackup_.c:4088
 msgid "Ok"
 msgstr "ОК"
 
 #: ../../Xconfig/main.pm_.c:122 ../../diskdrake/dav.pm_.c:28
-#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3203
+#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3207
 #: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:225
 msgid "Quit"
 msgstr "Выход"
@@ -309,7 +309,7 @@ msgstr "Видеокарта: %s"
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:162 ../../my_gtk.pm_.c:287
 #: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2169
-#: ../../security/main.pm_.c:295 ../../standalone/drakautoinst_.c:203
+#: ../../security/main.pm_.c:216 ../../standalone/drakautoinst_.c:203
 #: ../../standalone/drakbackup_.c:3928 ../../standalone/drakbackup_.c:3961
 #: ../../standalone/drakbackup_.c:3987 ../../standalone/drakbackup_.c:4014
 #: ../../standalone/drakbackup_.c:4041 ../../standalone/drakbackup_.c:4101
@@ -318,7 +318,7 @@ msgstr "Видеокарта: %s"
 #: ../../standalone/drakconnect_.c:147 ../../standalone/drakconnect_.c:289
 #: ../../standalone/drakconnect_.c:537 ../../standalone/drakconnect_.c:679
 #: ../../standalone/drakfloppy_.c:235 ../../standalone/drakfont_.c:970
-#: ../../standalone/drakgw_.c:532 ../../standalone/logdrake_.c:225
+#: ../../standalone/drakgw_.c:560 ../../standalone/logdrake_.c:225
 #: ../../ugtk.pm_.c:296
 msgid "Cancel"
 msgstr "Отмена"
@@ -432,7 +432,7 @@ msgstr ""
 
 #: ../../Xconfig/various.pm_.c:85
 msgid "What norm is your TV using?"
-msgstr "Какой формат использует ваш телевизр?"
+msgstr "Какой формат использует ваш телевизор?"
 
 #: ../../any.pm_.c:108 ../../any.pm_.c:133
 msgid "First sector of boot partition"
@@ -512,7 +512,7 @@ msgstr "Задержка перед загрузкой образа по умолчанию"
 
 #: ../../any.pm_.c:170 ../../any.pm_.c:789
 #: ../../diskdrake/smbnfs_gtk.pm_.c:179
-#: ../../install_steps_interactive.pm_.c:1094 ../../network/modem.pm_.c:48
+#: ../../install_steps_interactive.pm_.c:1097 ../../network/modem.pm_.c:48
 #: ../../printerdrake.pm_.c:865 ../../printerdrake.pm_.c:980
 #: ../../standalone/drakbackup_.c:3530 ../../standalone/drakconnect_.c:624
 #: ../../standalone/drakconnect_.c:649
@@ -520,7 +520,7 @@ msgid "Password"
 msgstr "Пароль"
 
 #: ../../any.pm_.c:171 ../../any.pm_.c:790
-#: ../../install_steps_interactive.pm_.c:1095
+#: ../../install_steps_interactive.pm_.c:1098
 msgid "Password (again)"
 msgstr "Пароль (еще раз)"
 
@@ -556,13 +556,13 @@ msgstr ""
 "Опция ``Ограничить параметры командной строки'' не используется без пароля"
 
 #: ../../any.pm_.c:184 ../../any.pm_.c:765
-#: ../../diskdrake/interactive.pm_.c:1191
-#: ../../install_steps_interactive.pm_.c:1089
+#: ../../diskdrake/interactive.pm_.c:1195
+#: ../../install_steps_interactive.pm_.c:1092
 msgid "Please try again"
 msgstr "Попробуйте еще раз, пожалуйста"
 
 #: ../../any.pm_.c:184 ../../any.pm_.c:765
-#: ../../install_steps_interactive.pm_.c:1089
+#: ../../install_steps_interactive.pm_.c:1092
 msgid "The passwords do not match"
 msgstr "Пароли не совпадают"
 
@@ -621,7 +621,7 @@ msgstr "Добавить"
 #: ../../any.pm_.c:258 ../../any.pm_.c:777 ../../diskdrake/dav.pm_.c:68
 #: ../../diskdrake/hd_gtk.pm_.c:153 ../../diskdrake/removable.pm_.c:27
 #: ../../diskdrake/smbnfs_gtk.pm_.c:88 ../../interactive/http.pm_.c:153
-#: ../../printerdrake.pm_.c:3203 ../../standalone/drakbackup_.c:2774
+#: ../../printerdrake.pm_.c:3207 ../../standalone/drakbackup_.c:2774
 msgid "Done"
 msgstr "Готово"
 
@@ -681,7 +681,7 @@ msgstr "Небезопасный"
 msgid "Label"
 msgstr "Метка"
 
-#: ../../any.pm_.c:311 ../../any.pm_.c:321 ../../harddrake/v4l.pm_.c:201
+#: ../../any.pm_.c:311 ../../any.pm_.c:321 ../../harddrake/v4l.pm_.c:200
 msgid "Default"
 msgstr "По умолчанию"
 
@@ -951,7 +951,7 @@ msgstr "Разрешить всех пользователей"
 msgid "No sharing"
 msgstr "Без совместного использования"
 
-#: ../../any.pm_.c:988 ../../install_any.pm_.c:1199 ../../standalone.pm_.c:59
+#: ../../any.pm_.c:988 ../../install_any.pm_.c:1199 ../../standalone.pm_.c:66
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Пакет %s должен быть установлен. Хотите установить его?"
@@ -963,7 +963,7 @@ msgstr ""
 "Вы можете экспортировать при помощи NFS или Samba. Пожалуйста, выберите, "
 "который из них вы желаете использовать."
 
-#: ../../any.pm_.c:999 ../../install_any.pm_.c:1204 ../../standalone.pm_.c:64
+#: ../../any.pm_.c:999 ../../install_any.pm_.c:1204 ../../standalone.pm_.c:71
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Обязательный пакет %s отсутствует"
@@ -1107,7 +1107,7 @@ msgid ""
 "(eg: latin and non latin)"
 msgstr ""
 "здесь вы можете выбрать клавишу или комбинацию клавиш, которые\n"
-"позволят переключаться между различными расклдками клавматуры\n"
+"позволят переключаться между различными раскладками клавиатуры\n"
 "(например: латинская и русская)"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
@@ -1247,36 +1247,27 @@ msgstr ""
 msgid "Create new theme"
 msgstr "Создать новую тему"
 
-#: ../../bootlook.pm_.c:193
+#: ../../bootlook.pm_.c:192
 #, c-format
 msgid "Backup %s to %s.old"
 msgstr "Резервировать %s в %s.old"
 
-#: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
-#: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
-#: ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
-#: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
-#: ../../diskdrake/interactive.pm_.c:340 ../../diskdrake/interactive.pm_.c:355
-#: ../../diskdrake/interactive.pm_.c:469 ../../diskdrake/interactive.pm_.c:474
-#: ../../diskdrake/smbnfs_gtk.pm_.c:45 ../../fsedit.pm_.c:239
-#: ../../install_steps.pm_.c:75 ../../install_steps_interactive.pm_.c:67
-#: ../../interactive/http.pm_.c:119 ../../interactive/http.pm_.c:120
-#: ../../standalone/draksplash_.c:34
-msgid "Error"
-msgstr "Ошибка"
-
-#: ../../bootlook.pm_.c:194
-msgid "unable to backup lilo message"
-msgstr "невозможно зарезервировать сообщение lilo"
-
-#: ../../bootlook.pm_.c:196
+#: ../../bootlook.pm_.c:195
 #, c-format
 msgid "Copy %s to %s"
 msgstr "Копировать %s в %s"
 
-#: ../../bootlook.pm_.c:197
-msgid "can't change lilo message"
-msgstr "невозможно изменить сообщение lilo"
+#: ../../bootlook.pm_.c:200 ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232
+#: ../../bootlook.pm_.c:242 ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
+#: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
+#: ../../diskdrake/interactive.pm_.c:213 ../../diskdrake/interactive.pm_.c:344
+#: ../../diskdrake/interactive.pm_.c:359 ../../diskdrake/interactive.pm_.c:473
+#: ../../diskdrake/interactive.pm_.c:478 ../../diskdrake/smbnfs_gtk.pm_.c:45
+#: ../../fsedit.pm_.c:239 ../../install_steps.pm_.c:75
+#: ../../install_steps_interactive.pm_.c:67 ../../interactive/http.pm_.c:119
+#: ../../interactive/http.pm_.c:120 ../../standalone/draksplash_.c:34
+msgid "Error"
+msgstr "Ошибка"
 
 #: ../../bootlook.pm_.c:200
 msgid "Lilo message not found"
@@ -1314,7 +1305,7 @@ msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
 msgstr ""
-"Невозможно переазпустить LiLo!\n"
+"Невозможно перезапустить LiLo!\n"
 "Запустите \"lilo\" под root'ом из командной строки, чтобы завершить "
 "установку темы LiLo."
 
@@ -1346,7 +1337,7 @@ msgstr ""
 
 #: ../../bootlook.pm_.c:269 ../../standalone/drakbackup_.c:2429
 #: ../../standalone/drakbackup_.c:2439 ../../standalone/drakbackup_.c:2449
-#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:526
+#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:554
 msgid "Configure"
 msgstr "Настройка"
 
@@ -1524,12 +1515,12 @@ msgstr ""
 msgid "New"
 msgstr "Новая"
 
-#: ../../diskdrake/dav.pm_.c:63 ../../diskdrake/interactive.pm_.c:388
+#: ../../diskdrake/dav.pm_.c:63 ../../diskdrake/interactive.pm_.c:392
 #: ../../diskdrake/smbnfs_gtk.pm_.c:81
 msgid "Unmount"
 msgstr "Размонтировать"
 
-#: ../../diskdrake/dav.pm_.c:64 ../../diskdrake/interactive.pm_.c:385
+#: ../../diskdrake/dav.pm_.c:64 ../../diskdrake/interactive.pm_.c:389
 #: ../../diskdrake/smbnfs_gtk.pm_.c:82
 msgid "Mount"
 msgstr "Монтировать"
@@ -1538,8 +1529,8 @@ msgstr "Монтировать"
 msgid "Server"
 msgstr "Сервер"
 
-#: ../../diskdrake/dav.pm_.c:66 ../../diskdrake/interactive.pm_.c:379
-#: ../../diskdrake/interactive.pm_.c:568 ../../diskdrake/interactive.pm_.c:595
+#: ../../diskdrake/dav.pm_.c:66 ../../diskdrake/interactive.pm_.c:383
+#: ../../diskdrake/interactive.pm_.c:572 ../../diskdrake/interactive.pm_.c:599
 #: ../../diskdrake/removable.pm_.c:24 ../../diskdrake/removable_gtk.pm_.c:15
 #: ../../diskdrake/smbnfs_gtk.pm_.c:85
 msgid "Mount point"
@@ -1557,13 +1548,13 @@ msgstr "URL должен начинаться с  http:// или https://"
 msgid "Server: "
 msgstr "Сервер: "
 
-#: ../../diskdrake/dav.pm_.c:110 ../../diskdrake/interactive.pm_.c:440
-#: ../../diskdrake/interactive.pm_.c:1089
-#: ../../diskdrake/interactive.pm_.c:1164
+#: ../../diskdrake/dav.pm_.c:110 ../../diskdrake/interactive.pm_.c:444
+#: ../../diskdrake/interactive.pm_.c:1093
+#: ../../diskdrake/interactive.pm_.c:1168
 msgid "Mount point: "
 msgstr "Точка монтирования:"
 
-#: ../../diskdrake/dav.pm_.c:111 ../../diskdrake/interactive.pm_.c:1170
+#: ../../diskdrake/dav.pm_.c:111 ../../diskdrake/interactive.pm_.c:1174
 #, c-format
 msgid "Options: %s"
 msgstr "Параметры: %s"
@@ -1572,9 +1563,9 @@ msgstr "Параметры: %s"
 msgid "Please make a backup of your data first"
 msgstr "Пожалуйста, сделайте резервную копию данных сначала"
 
-#: ../../diskdrake/hd_gtk.pm_.c:94 ../../diskdrake/interactive.pm_.c:934
-#: ../../diskdrake/interactive.pm_.c:943
-#: ../../diskdrake/interactive.pm_.c:1009
+#: ../../diskdrake/hd_gtk.pm_.c:94 ../../diskdrake/interactive.pm_.c:938
+#: ../../diskdrake/interactive.pm_.c:947
+#: ../../diskdrake/interactive.pm_.c:1013
 msgid "Read carefully!"
 msgstr "Прочтите внимательно!"
 
@@ -1619,7 +1610,7 @@ msgstr "Подробности"
 
 #: ../../diskdrake/hd_gtk.pm_.c:252
 msgid "No hard drives found"
-msgstr "Жесткие дискы не найдены"
+msgstr "Жесткие диски не найдены"
 
 #: ../../diskdrake/hd_gtk.pm_.c:323
 msgid "Ext2"
@@ -1645,7 +1636,7 @@ msgstr "SunOS"
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../diskdrake/hd_gtk.pm_.c:324 ../../diskdrake/interactive.pm_.c:1105
+#: ../../diskdrake/hd_gtk.pm_.c:324 ../../diskdrake/interactive.pm_.c:1109
 msgid "Empty"
 msgstr "Пусто"
 
@@ -1659,12 +1650,12 @@ msgstr "Другие"
 msgid "Filesystem types:"
 msgstr "Типы файловых систем:"
 
-#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:402
+#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:406
 msgid "Create"
 msgstr "Создать"
 
-#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:380
-#: ../../diskdrake/interactive.pm_.c:531 ../../diskdrake/removable.pm_.c:26
+#: ../../diskdrake/hd_gtk.pm_.c:345 ../../diskdrake/interactive.pm_.c:384
+#: ../../diskdrake/interactive.pm_.c:535 ../../diskdrake/removable.pm_.c:26
 #: ../../diskdrake/removable.pm_.c:49 ../../diskdrake/removable_gtk.pm_.c:17
 msgid "Type"
 msgstr "Тип"
@@ -1674,7 +1665,7 @@ msgstr "Тип"
 msgid "Use ``%s'' instead"
 msgstr "Вместо этого используйте ``%s'' "
 
-#: ../../diskdrake/hd_gtk.pm_.c:347 ../../diskdrake/interactive.pm_.c:389
+#: ../../diskdrake/hd_gtk.pm_.c:347 ../../diskdrake/interactive.pm_.c:393
 msgid "Delete"
 msgstr "Удалить"
 
@@ -1682,7 +1673,7 @@ msgstr "Удалить"
 msgid "Use ``Unmount'' first"
 msgstr "Используйте сначала ``Размонтировать''"
 
-#: ../../diskdrake/hd_gtk.pm_.c:352 ../../diskdrake/interactive.pm_.c:518
+#: ../../diskdrake/hd_gtk.pm_.c:352 ../../diskdrake/interactive.pm_.c:522
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1701,60 +1692,60 @@ msgstr "Выберите другой раздел"
 msgid "Exit"
 msgstr "Выход"
 
-#: ../../diskdrake/interactive.pm_.c:221
+#: ../../diskdrake/interactive.pm_.c:225
 msgid "Toggle to expert mode"
 msgstr "Переключиться в режим эксперта"
 
-#: ../../diskdrake/interactive.pm_.c:221
+#: ../../diskdrake/interactive.pm_.c:225
 msgid "Toggle to normal mode"
 msgstr "Переключиться в нормальный режим"
 
-#: ../../diskdrake/interactive.pm_.c:221
+#: ../../diskdrake/interactive.pm_.c:225
 msgid "Undo"
 msgstr "Возврат"
 
-#: ../../diskdrake/interactive.pm_.c:240
+#: ../../diskdrake/interactive.pm_.c:244
 msgid "Continue anyway?"
 msgstr "Все-таки продолжить?"
 
-#: ../../diskdrake/interactive.pm_.c:245
+#: ../../diskdrake/interactive.pm_.c:249
 msgid "Quit without saving"
 msgstr "Выйти без сохранения"
 
-#: ../../diskdrake/interactive.pm_.c:245
+#: ../../diskdrake/interactive.pm_.c:249
 msgid "Quit without writing the partition table?"
 msgstr "Выйти без записи таблицы разделов?"
 
-#: ../../diskdrake/interactive.pm_.c:250
+#: ../../diskdrake/interactive.pm_.c:254
 msgid "Do you want to save /etc/fstab modifications"
 msgstr "Хотите сохранить /etc/fstab modifications"
 
-#: ../../diskdrake/interactive.pm_.c:263
+#: ../../diskdrake/interactive.pm_.c:267
 msgid "Auto allocate"
 msgstr "Разместить автоматически"
 
-#: ../../diskdrake/interactive.pm_.c:263
+#: ../../diskdrake/interactive.pm_.c:267
 msgid "Clear all"
 msgstr "Очистить все"
 
-#: ../../diskdrake/interactive.pm_.c:263
+#: ../../diskdrake/interactive.pm_.c:267
 #: ../../install_steps_interactive.pm_.c:214
 msgid "More"
 msgstr "Дополнительно"
 
-#: ../../diskdrake/interactive.pm_.c:267
+#: ../../diskdrake/interactive.pm_.c:271
 msgid "Hard drive information"
 msgstr "Информация о жестком диске"
 
-#: ../../diskdrake/interactive.pm_.c:298
+#: ../../diskdrake/interactive.pm_.c:302
 msgid "All primary partitions are used"
 msgstr "Все первичные разделы уже использованы"
 
-#: ../../diskdrake/interactive.pm_.c:299
+#: ../../diskdrake/interactive.pm_.c:303
 msgid "I can't add any more partition"
 msgstr "Добавление новых разделов невозможно"
 
-#: ../../diskdrake/interactive.pm_.c:300
+#: ../../diskdrake/interactive.pm_.c:304
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
@@ -1762,31 +1753,31 @@ msgstr ""
 "Чтобы получить больше разделов, удалите один, чтобы получить возможность "
 "создать расширенный раздел"
 
-#: ../../diskdrake/interactive.pm_.c:310
+#: ../../diskdrake/interactive.pm_.c:314
 msgid "Save partition table"
 msgstr "Сохранить таблицу разделов"
 
-#: ../../diskdrake/interactive.pm_.c:311
+#: ../../diskdrake/interactive.pm_.c:315
 msgid "Restore partition table"
 msgstr "Восстановить таблицу разделов"
 
-#: ../../diskdrake/interactive.pm_.c:312
+#: ../../diskdrake/interactive.pm_.c:316
 msgid "Rescue partition table"
 msgstr "Спасти таблицу разделов"
 
-#: ../../diskdrake/interactive.pm_.c:314
+#: ../../diskdrake/interactive.pm_.c:318
 msgid "Reload partition table"
 msgstr "Перезагрузить таблицу разделов"
 
-#: ../../diskdrake/interactive.pm_.c:319
+#: ../../diskdrake/interactive.pm_.c:323
 msgid "Removable media automounting"
 msgstr "Автомонтирование съемных накопителей"
 
-#: ../../diskdrake/interactive.pm_.c:328 ../../diskdrake/interactive.pm_.c:348
+#: ../../diskdrake/interactive.pm_.c:332 ../../diskdrake/interactive.pm_.c:352
 msgid "Select file"
 msgstr "Выберите файл"
 
-#: ../../diskdrake/interactive.pm_.c:335
+#: ../../diskdrake/interactive.pm_.c:339
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -1794,11 +1785,11 @@ msgstr ""
 "Резервная таблица разделов диска имеет другой размер\n"
 "Все-таки продолжить?"
 
-#: ../../diskdrake/interactive.pm_.c:349 ../../harddrake/sound.pm_.c:200
+#: ../../diskdrake/interactive.pm_.c:353 ../../harddrake/sound.pm_.c:200
 msgid "Warning"
 msgstr "Внимание"
 
-#: ../../diskdrake/interactive.pm_.c:350
+#: ../../diskdrake/interactive.pm_.c:354
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -1806,107 +1797,107 @@ msgstr ""
 "Вставьте дискету в дисковод\n"
 "Все данные на этой дискете будут потеряны"
 
-#: ../../diskdrake/interactive.pm_.c:361
+#: ../../diskdrake/interactive.pm_.c:365
 msgid "Trying to rescue partition table"
 msgstr "Выполняется попытка спасти таблицу разделов"
 
-#: ../../diskdrake/interactive.pm_.c:367
+#: ../../diskdrake/interactive.pm_.c:371
 msgid "Detailed information"
 msgstr "Подробная информация"
 
-#: ../../diskdrake/interactive.pm_.c:382 ../../diskdrake/interactive.pm_.c:662
+#: ../../diskdrake/interactive.pm_.c:386 ../../diskdrake/interactive.pm_.c:666
 msgid "Resize"
 msgstr "Изменить размер"
 
-#: ../../diskdrake/interactive.pm_.c:383 ../../diskdrake/interactive.pm_.c:715
+#: ../../diskdrake/interactive.pm_.c:387 ../../diskdrake/interactive.pm_.c:719
 msgid "Move"
 msgstr "Переместить"
 
-#: ../../diskdrake/interactive.pm_.c:384
+#: ../../diskdrake/interactive.pm_.c:388
 msgid "Format"
 msgstr "Форматировать"
 
-#: ../../diskdrake/interactive.pm_.c:386
+#: ../../diskdrake/interactive.pm_.c:390
 msgid "Add to RAID"
 msgstr "Добавить в RAID"
 
-#: ../../diskdrake/interactive.pm_.c:387
+#: ../../diskdrake/interactive.pm_.c:391
 msgid "Add to LVM"
 msgstr "Добавить в LVM"
 
-#: ../../diskdrake/interactive.pm_.c:390
+#: ../../diskdrake/interactive.pm_.c:394
 msgid "Remove from RAID"
 msgstr "Удалить из RAID"
 
-#: ../../diskdrake/interactive.pm_.c:391
+#: ../../diskdrake/interactive.pm_.c:395
 msgid "Remove from LVM"
 msgstr "Удалить из LVM"
 
-#: ../../diskdrake/interactive.pm_.c:392
+#: ../../diskdrake/interactive.pm_.c:396
 msgid "Modify RAID"
 msgstr "Изменить RAID"
 
-#: ../../diskdrake/interactive.pm_.c:393
+#: ../../diskdrake/interactive.pm_.c:397
 msgid "Use for loopback"
 msgstr "Использовать для loopback"
 
-#: ../../diskdrake/interactive.pm_.c:433
+#: ../../diskdrake/interactive.pm_.c:437
 msgid "Create a new partition"
 msgstr "Создать новый раздел"
 
-#: ../../diskdrake/interactive.pm_.c:436
+#: ../../diskdrake/interactive.pm_.c:440
 msgid "Start sector: "
 msgstr "Начальный сектор: "
 
-#: ../../diskdrake/interactive.pm_.c:438 ../../diskdrake/interactive.pm_.c:815
+#: ../../diskdrake/interactive.pm_.c:442 ../../diskdrake/interactive.pm_.c:819
 msgid "Size in MB: "
 msgstr "Размер в МБ: "
 
-#: ../../diskdrake/interactive.pm_.c:439 ../../diskdrake/interactive.pm_.c:816
+#: ../../diskdrake/interactive.pm_.c:443 ../../diskdrake/interactive.pm_.c:820
 msgid "Filesystem type: "
 msgstr "Тип файловой системы: "
 
-#: ../../diskdrake/interactive.pm_.c:444
+#: ../../diskdrake/interactive.pm_.c:448
 msgid "Preference: "
 msgstr "Предпочтение: "
 
-#: ../../diskdrake/interactive.pm_.c:469
+#: ../../diskdrake/interactive.pm_.c:473
 msgid ""
 "You can't create a new partition\n"
 "(since you reached the maximal number of primary partitions).\n"
 "First remove a primary partition and create an extended partition."
 msgstr ""
 "Вы не можете создать новый раздел\n"
-"(вы достигнули максимального количества первичных разделов).\n"
+"(вы достигли максимального количества первичных разделов).\n"
 "Сначала удалите первичный раздел и создайте расширенный раздел."
 
-#: ../../diskdrake/interactive.pm_.c:499
+#: ../../diskdrake/interactive.pm_.c:503
 msgid "Remove the loopback file?"
 msgstr "Удалить файл loopback %s"
 
-#: ../../diskdrake/interactive.pm_.c:529
+#: ../../diskdrake/interactive.pm_.c:533
 msgid "Change partition type"
 msgstr "Изменить тип раздела"
 
-#: ../../diskdrake/interactive.pm_.c:530 ../../diskdrake/removable.pm_.c:48
+#: ../../diskdrake/interactive.pm_.c:534 ../../diskdrake/removable.pm_.c:48
 msgid "Which filesystem do you want?"
 msgstr "Какую файловую систему желаете?"
 
-#: ../../diskdrake/interactive.pm_.c:536
+#: ../../diskdrake/interactive.pm_.c:540
 msgid "Switching from ext2 to ext3"
 msgstr "переключение с ext2 на ext3"
 
-#: ../../diskdrake/interactive.pm_.c:566
+#: ../../diskdrake/interactive.pm_.c:570
 #, c-format
 msgid "Where do you want to mount loopback file %s?"
 msgstr "Куда вы хотите примонтировать файл loopback %s?"
 
-#: ../../diskdrake/interactive.pm_.c:567
+#: ../../diskdrake/interactive.pm_.c:571
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Куда вы хотите примонтировать устройство %s?"
 
-#: ../../diskdrake/interactive.pm_.c:573
+#: ../../diskdrake/interactive.pm_.c:577
 msgid ""
 "Can't unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
@@ -1914,136 +1905,136 @@ msgstr ""
 "Невозможно снять точку монтирования, поскольку этот раздел используется для "
 "loop back. Удалите сначала loopback"
 
-#: ../../diskdrake/interactive.pm_.c:594
+#: ../../diskdrake/interactive.pm_.c:598
 #, c-format
 msgid "Where do you want to mount %s?"
 msgstr "Куда вы хотите примонтировать %s?"
 
-#: ../../diskdrake/interactive.pm_.c:618
+#: ../../diskdrake/interactive.pm_.c:622
 msgid "Computing FAT filesystem bounds"
 msgstr "Вычисляются границы файловой системы FAT"
 
-#: ../../diskdrake/interactive.pm_.c:618 ../../diskdrake/interactive.pm_.c:677
+#: ../../diskdrake/interactive.pm_.c:622 ../../diskdrake/interactive.pm_.c:681
 #: ../../install_interactive.pm_.c:133
 msgid "Resizing"
 msgstr "Изменение размера"
 
-#: ../../diskdrake/interactive.pm_.c:650
+#: ../../diskdrake/interactive.pm_.c:654
 msgid "This partition is not resizeable"
 msgstr "Размер этого раздела нельзя изменить"
 
-#: ../../diskdrake/interactive.pm_.c:655
+#: ../../diskdrake/interactive.pm_.c:659
 msgid "All data on this partition should be backed-up"
 msgstr "Для всех данных в этом разделе должна быть сделана резервная копия"
 
-#: ../../diskdrake/interactive.pm_.c:657
+#: ../../diskdrake/interactive.pm_.c:661
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "После изменения размера раздела %s все данные в этом разделе будут потеряны"
 
-#: ../../diskdrake/interactive.pm_.c:662
+#: ../../diskdrake/interactive.pm_.c:666
 msgid "Choose the new size"
 msgstr "Выбрать новый размер"
 
-#: ../../diskdrake/interactive.pm_.c:663
+#: ../../diskdrake/interactive.pm_.c:667
 msgid "New size in MB: "
 msgstr "Новый размер в МБ: "
 
-#: ../../diskdrake/interactive.pm_.c:716
+#: ../../diskdrake/interactive.pm_.c:720
 msgid "Which disk do you want to move it to?"
 msgstr "На какой диск хотите его переместить?"
 
-#: ../../diskdrake/interactive.pm_.c:717
+#: ../../diskdrake/interactive.pm_.c:721
 msgid "Sector"
 msgstr "Сектор"
 
-#: ../../diskdrake/interactive.pm_.c:718
+#: ../../diskdrake/interactive.pm_.c:722
 msgid "Which sector do you want to move it to?"
 msgstr "На какой сектор хотите его переместить?"
 
-#: ../../diskdrake/interactive.pm_.c:721
+#: ../../diskdrake/interactive.pm_.c:725
 msgid "Moving"
 msgstr "Перемещение"
 
-#: ../../diskdrake/interactive.pm_.c:721
+#: ../../diskdrake/interactive.pm_.c:725
 msgid "Moving partition..."
 msgstr "Перемещается раздел..."
 
-#: ../../diskdrake/interactive.pm_.c:738
+#: ../../diskdrake/interactive.pm_.c:742
 msgid "Choose an existing RAID to add to"
 msgstr "Выберите существующий RAID для добавления"
 
-#: ../../diskdrake/interactive.pm_.c:739 ../../diskdrake/interactive.pm_.c:756
+#: ../../diskdrake/interactive.pm_.c:743 ../../diskdrake/interactive.pm_.c:760
 msgid "new"
 msgstr "новый"
 
-#: ../../diskdrake/interactive.pm_.c:754
+#: ../../diskdrake/interactive.pm_.c:758
 msgid "Choose an existing LVM to add to"
 msgstr "Выберите существующий LVM для добавления"
 
-#: ../../diskdrake/interactive.pm_.c:759
+#: ../../diskdrake/interactive.pm_.c:763
 msgid "LVM name?"
 msgstr "Имя LVM?"
 
-#: ../../diskdrake/interactive.pm_.c:800
+#: ../../diskdrake/interactive.pm_.c:804
 msgid "This partition can't be used for loopback"
 msgstr "Этот раздел не может быть использован для loopback"
 
-#: ../../diskdrake/interactive.pm_.c:813
+#: ../../diskdrake/interactive.pm_.c:817
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../diskdrake/interactive.pm_.c:814
+#: ../../diskdrake/interactive.pm_.c:818
 msgid "Loopback file name: "
 msgstr "Имя файла loopback: "
 
-#: ../../diskdrake/interactive.pm_.c:819
+#: ../../diskdrake/interactive.pm_.c:823
 msgid "Give a file name"
 msgstr "Укажите имя файла"
 
-#: ../../diskdrake/interactive.pm_.c:822
+#: ../../diskdrake/interactive.pm_.c:826
 msgid "File already used by another loopback, choose another one"
 msgstr "Файл уже используется другим loopback, выберите другой."
 
-#: ../../diskdrake/interactive.pm_.c:823
+#: ../../diskdrake/interactive.pm_.c:827
 msgid "File already exists. Use it?"
 msgstr "Файл уже существует. Использовать его?"
 
-#: ../../diskdrake/interactive.pm_.c:846
+#: ../../diskdrake/interactive.pm_.c:850
 msgid "Mount options"
 msgstr "Параметры монтирования"
 
-#: ../../diskdrake/interactive.pm_.c:853
+#: ../../diskdrake/interactive.pm_.c:857
 msgid "Various"
 msgstr "Различные"
 
-#: ../../diskdrake/interactive.pm_.c:917 ../../standalone/drakfloppy_.c:104
+#: ../../diskdrake/interactive.pm_.c:921 ../../standalone/drakfloppy_.c:104
 msgid "device"
 msgstr "устройство"
 
-#: ../../diskdrake/interactive.pm_.c:918
+#: ../../diskdrake/interactive.pm_.c:922
 msgid "level"
 msgstr "уровень"
 
-#: ../../diskdrake/interactive.pm_.c:919
+#: ../../diskdrake/interactive.pm_.c:923
 msgid "chunk size"
 msgstr "размер chunk"
 
-#: ../../diskdrake/interactive.pm_.c:934
+#: ../../diskdrake/interactive.pm_.c:938
 msgid "Be careful: this operation is dangerous."
 msgstr "Осторожно: эта операция опасна."
 
-#: ../../diskdrake/interactive.pm_.c:949
+#: ../../diskdrake/interactive.pm_.c:953
 msgid "What type of partitioning?"
 msgstr "Какой тип разбиения на разделы?"
 
-#: ../../diskdrake/interactive.pm_.c:965
+#: ../../diskdrake/interactive.pm_.c:969
 #, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Нужен пакет %s. Установить его?"
 
-#: ../../diskdrake/interactive.pm_.c:979
+#: ../../diskdrake/interactive.pm_.c:983
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -2055,7 +2046,7 @@ msgstr ""
 "Либо вы будете использовать LILO и /boot не заработает, либо вы не будете "
 "использовать LILO, и тогда /boot вообще не понадобится."
 
-#: ../../diskdrake/interactive.pm_.c:983
+#: ../../diskdrake/interactive.pm_.c:987
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -2069,7 +2060,7 @@ msgstr ""
 "добавить\n"
 "раздел /boot"
 
-#: ../../diskdrake/interactive.pm_.c:989
+#: ../../diskdrake/interactive.pm_.c:993
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -2079,45 +2070,45 @@ msgstr ""
 "Никакой загрузчик не в состоянии обработать его без раздела /boot.\n"
 "Поэтому не забудьте добавить раздел /boot"
 
-#: ../../diskdrake/interactive.pm_.c:1009
+#: ../../diskdrake/interactive.pm_.c:1013
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Таблица разделов устройства %s будет записана на диск!"
 
-#: ../../diskdrake/interactive.pm_.c:1013
+#: ../../diskdrake/interactive.pm_.c:1017
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Вам необходимо перегрузиться, чтобы изменения вступили в силу"
 
-#: ../../diskdrake/interactive.pm_.c:1024
+#: ../../diskdrake/interactive.pm_.c:1028
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "После форматирования раздела %s, все данные на этом разделе будут потеряны"
 
-#: ../../diskdrake/interactive.pm_.c:1026
+#: ../../diskdrake/interactive.pm_.c:1030
 msgid "Formatting"
 msgstr "Форматирование"
 
-#: ../../diskdrake/interactive.pm_.c:1027
+#: ../../diskdrake/interactive.pm_.c:1031
 #, c-format
 msgid "Formatting loopback file %s"
 msgstr "Форматируется файл loopback %s"
 
-#: ../../diskdrake/interactive.pm_.c:1028
+#: ../../diskdrake/interactive.pm_.c:1032
 #: ../../install_steps_interactive.pm_.c:459
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Форматируется раздел %s"
 
-#: ../../diskdrake/interactive.pm_.c:1039
+#: ../../diskdrake/interactive.pm_.c:1043
 msgid "Hide files"
 msgstr "Скрыть файлы"
 
-#: ../../diskdrake/interactive.pm_.c:1039
+#: ../../diskdrake/interactive.pm_.c:1043
 msgid "Move files to the new partition"
 msgstr "Переместить файлы на новый раздел"
 
-#: ../../diskdrake/interactive.pm_.c:1040
+#: ../../diskdrake/interactive.pm_.c:1044
 #, c-format
 msgid ""
 "Directory %s already contains data\n"
@@ -2126,83 +2117,83 @@ msgstr ""
 "В директории %s уже содержатся данные\n"
 "(%s)"
 
-#: ../../diskdrake/interactive.pm_.c:1051
+#: ../../diskdrake/interactive.pm_.c:1055
 msgid "Moving files to the new partition"
 msgstr "Недостаточно свободного места для размещения новых разделов"
 
-#: ../../diskdrake/interactive.pm_.c:1055
+#: ../../diskdrake/interactive.pm_.c:1059
 #, c-format
 msgid "Copying %s"
 msgstr "Копируется %s"
 
-#: ../../diskdrake/interactive.pm_.c:1059
+#: ../../diskdrake/interactive.pm_.c:1063
 #, c-format
 msgid "Removing %s"
 msgstr "Удаляется: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1069
+#: ../../diskdrake/interactive.pm_.c:1073
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr "раздел %s теперь известен как %s"
 
-#: ../../diskdrake/interactive.pm_.c:1090
-#: ../../diskdrake/interactive.pm_.c:1149
+#: ../../diskdrake/interactive.pm_.c:1094
+#: ../../diskdrake/interactive.pm_.c:1153
 msgid "Device: "
 msgstr "Устройство: "
 
-#: ../../diskdrake/interactive.pm_.c:1091
+#: ../../diskdrake/interactive.pm_.c:1095
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "буква диска DOS: %s (наугад)\n"
 
-#: ../../diskdrake/interactive.pm_.c:1095
-#: ../../diskdrake/interactive.pm_.c:1103
-#: ../../diskdrake/interactive.pm_.c:1168
+#: ../../diskdrake/interactive.pm_.c:1099
+#: ../../diskdrake/interactive.pm_.c:1107
+#: ../../diskdrake/interactive.pm_.c:1172
 msgid "Type: "
 msgstr "Тип: "
 
-#: ../../diskdrake/interactive.pm_.c:1099
+#: ../../diskdrake/interactive.pm_.c:1103
 msgid "Name: "
 msgstr "Имя: "
 
-#: ../../diskdrake/interactive.pm_.c:1107
+#: ../../diskdrake/interactive.pm_.c:1111
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Начало: сектор %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1108
+#: ../../diskdrake/interactive.pm_.c:1112
 #, c-format
 msgid "Size: %s"
 msgstr "Размер: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1110
+#: ../../diskdrake/interactive.pm_.c:1114
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s секторов"
 
-#: ../../diskdrake/interactive.pm_.c:1112
+#: ../../diskdrake/interactive.pm_.c:1116
 #, c-format
 msgid "Cylinder %d to %d\n"
 msgstr "Цилиндр %d до %d\n"
 
-#: ../../diskdrake/interactive.pm_.c:1113
+#: ../../diskdrake/interactive.pm_.c:1117
 msgid "Formatted\n"
 msgstr "Отформатирован\n"
 
-#: ../../diskdrake/interactive.pm_.c:1114
+#: ../../diskdrake/interactive.pm_.c:1118
 msgid "Not formatted\n"
 msgstr "Не отформатирован\n"
 
-#: ../../diskdrake/interactive.pm_.c:1115
+#: ../../diskdrake/interactive.pm_.c:1119
 msgid "Mounted\n"
 msgstr "Примонтирован\n"
 
-#: ../../diskdrake/interactive.pm_.c:1116
+#: ../../diskdrake/interactive.pm_.c:1120
 #, c-format
 msgid "RAID md%s\n"
 msgstr "RAID md%s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1118
+#: ../../diskdrake/interactive.pm_.c:1122
 #, c-format
 msgid ""
 "Loopback file(s):\n"
@@ -2211,7 +2202,7 @@ msgstr ""
 "Файл(ы) loopback:\n"
 "   %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1119
+#: ../../diskdrake/interactive.pm_.c:1123
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -2219,27 +2210,27 @@ msgstr ""
 "Загрузочный раздел по умолчанию\n"
 "    (для загрузки MS-DOS, не для lilo)\n"
 
-#: ../../diskdrake/interactive.pm_.c:1121
+#: ../../diskdrake/interactive.pm_.c:1125
 #, c-format
 msgid "Level %s\n"
 msgstr "Уровень %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1122
+#: ../../diskdrake/interactive.pm_.c:1126
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "Размер сhunk %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1123
+#: ../../diskdrake/interactive.pm_.c:1127
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-диски %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1125
+#: ../../diskdrake/interactive.pm_.c:1129
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Имя файла loopback: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1128
+#: ../../diskdrake/interactive.pm_.c:1132
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -2251,7 +2242,7 @@ msgstr ""
 "является разделом драйвера, возможно,\n"
 "вам не следует его трогать.\n"
 
-#: ../../diskdrake/interactive.pm_.c:1131
+#: ../../diskdrake/interactive.pm_.c:1135
 msgid ""
 "\n"
 "This special Bootstrap\n"
@@ -2263,63 +2254,63 @@ msgstr ""
 "Bootstrap предназначен\n"
 "для двойной загрузки вашей системы.\n"
 
-#: ../../diskdrake/interactive.pm_.c:1150
+#: ../../diskdrake/interactive.pm_.c:1154
 msgid "Read-only"
 msgstr "Только для чтения"
 
-#: ../../diskdrake/interactive.pm_.c:1151
+#: ../../diskdrake/interactive.pm_.c:1155
 #, c-format
 msgid "Size: %s\n"
 msgstr "Размер: %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1152
+#: ../../diskdrake/interactive.pm_.c:1156
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Геометрия: %s цилиндров, %s головок, %s секторов\n"
 
-#: ../../diskdrake/interactive.pm_.c:1153
+#: ../../diskdrake/interactive.pm_.c:1157
 msgid "Info: "
 msgstr "Информация: "
 
-#: ../../diskdrake/interactive.pm_.c:1154
+#: ../../diskdrake/interactive.pm_.c:1158
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-диски %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1155
+#: ../../diskdrake/interactive.pm_.c:1159
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Тип таблицы разделов: %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1156
+#: ../../diskdrake/interactive.pm_.c:1160
 #, c-format
 msgid "on channel %d id %d\n"
 msgstr "на канале %d id %d\n"
 
-#: ../../diskdrake/interactive.pm_.c:1186
+#: ../../diskdrake/interactive.pm_.c:1190
 msgid "Filesystem encryption key"
 msgstr "Ключ шифрования файловой системы: "
 
-#: ../../diskdrake/interactive.pm_.c:1187
+#: ../../diskdrake/interactive.pm_.c:1191
 msgid "Choose your filesystem encryption key"
 msgstr "Выберите ключ шифрования вашей файловой системы"
 
-#: ../../diskdrake/interactive.pm_.c:1190
+#: ../../diskdrake/interactive.pm_.c:1194
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr ""
 "Этот ключ шифрования слишком прост (должен быть длиной по крайней мере в %d "
 "символов)"
 
-#: ../../diskdrake/interactive.pm_.c:1191
+#: ../../diskdrake/interactive.pm_.c:1195
 msgid "The encryption keys do not match"
 msgstr "Ключи шифрования не совпадают"
 
-#: ../../diskdrake/interactive.pm_.c:1194
+#: ../../diskdrake/interactive.pm_.c:1198
 msgid "Encryption key"
 msgstr "Ключ шифрования"
 
-#: ../../diskdrake/interactive.pm_.c:1195
+#: ../../diskdrake/interactive.pm_.c:1199
 msgid "Encryption key (again)"
 msgstr "Ключ шифрования (еще раз)"
 
@@ -2820,23 +2811,23 @@ msgstr "первичный"
 msgid "secondary"
 msgstr "вторичный"
 
-#: ../../harddrake/v4l.pm_.c:15 ../../harddrake/v4l.pm_.c:65
+#: ../../harddrake/v4l.pm_.c:14 ../../harddrake/v4l.pm_.c:64
 msgid "Auto-detect"
 msgstr "Автоматическое определение"
 
-#: ../../harddrake/v4l.pm_.c:66 ../../harddrake/v4l.pm_.c:186
+#: ../../harddrake/v4l.pm_.c:65 ../../harddrake/v4l.pm_.c:185
 msgid "Unknown|Generic"
 msgstr "Неизвестный|Обычный"
 
-#: ../../harddrake/v4l.pm_.c:98
+#: ../../harddrake/v4l.pm_.c:97
 msgid "Unknown|CPH05X (bt878) [many vendors]"
 msgstr "Неизвестный|CPH05X (bt878) [большинство производителей]"
 
-#: ../../harddrake/v4l.pm_.c:99
+#: ../../harddrake/v4l.pm_.c:98
 msgid "Unknown|CPH06X (bt878) [many vendors]"
 msgstr "Неизвестный|CPH06X (bt878) [большинство производителей]"
 
-#: ../../harddrake/v4l.pm_.c:210
+#: ../../harddrake/v4l.pm_.c:209
 msgid ""
 "For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-"
 "detect the rights parameters.\n"
@@ -2849,31 +2840,31 @@ msgstr ""
 "использование правильных типов тюнера и карты. Если необходимо, просто "
 "выберите параметры своей ТВ-карты"
 
-#: ../../harddrake/v4l.pm_.c:213
+#: ../../harddrake/v4l.pm_.c:212
 msgid "Card model:"
 msgstr "Модель карты :"
 
-#: ../../harddrake/v4l.pm_.c:214
+#: ../../harddrake/v4l.pm_.c:213
 msgid "Tuner type:"
 msgstr "Тип тюнера :"
 
-#: ../../harddrake/v4l.pm_.c:215
+#: ../../harddrake/v4l.pm_.c:214
 msgid "Number of capture buffers:"
 msgstr "Количество буферов захвата :"
 
-#: ../../harddrake/v4l.pm_.c:215
+#: ../../harddrake/v4l.pm_.c:214
 msgid "number of capture buffers for mmap'ed capture"
 msgstr "количество буферов захвата для mmap'ингового захвата"
 
-#: ../../harddrake/v4l.pm_.c:217
+#: ../../harddrake/v4l.pm_.c:216
 msgid "PLL setting:"
 msgstr "Настройка PLL :"
 
-#: ../../harddrake/v4l.pm_.c:218
+#: ../../harddrake/v4l.pm_.c:217
 msgid "Radio support:"
 msgstr "Поддержка радио :"
 
-#: ../../harddrake/v4l.pm_.c:218
+#: ../../harddrake/v4l.pm_.c:217
 msgid "enable radio support"
 msgstr "включить поддержку радио"
 
@@ -2941,7 +2932,7 @@ msgstr ""
 "друзей: своего отца или сестры, например. Когда вы закончите добавление\n"
 "всех нужных вам пользователей, выберите \"Готово\"./nЩелкнув по кнопке "
 "\"Дополнительно\", вам будет позволено изменить\n"
-"\"командный процессор\", ипользуемый по умолчанию для этого пользователя\n"
+"\"командный процессор\", используемый по умолчанию для этого пользователя\n"
 "(по умолчанию это bash)."
 
 #: ../../help.pm_.c:48
@@ -3118,7 +3109,7 @@ msgstr ""
 "\n"
 "Вы можете установить флажок \"Самостоятельный выбор пакетов\", который\n"
 "полезен, если знакомы с предлагаемыми пакетами, или, если вы желаете\n"
-"получить полный контроль над тем, что будет устанавлено.\n"
+"получить полный контроль над тем, что будет установлено.\n"
 "\n"
 "Если вы начали установку в режиме \"Обновление\", вы можете снять выделение\n"
 "со всех групп, чтобы избежать установки каких-либо новых пакетов.\n"
@@ -3183,7 +3174,7 @@ msgstr ""
 "выпуска финальной версии Mandrake Linux. Если вы не знаете, для чего\n"
 "предназначен тот или иной сервис, или зачем он устанавливается, тогда жмите\n"
 "\"Нет\". Щелкнув на \"Да\", вы установите перечисленные сервисы и они по\n"
-"умолчанию запустятся автоматически. !!\n"
+"умолчанию будут запускаться автоматически. !!\n"
 "\n"
 "Опция \"Автоматические зависимости\" просто отключает сообщение\n"
 "с предупреждением, которое появляется всякий раз, когда инсталлятор\n"
@@ -3499,7 +3490,7 @@ msgstr ""
 "Если ваша установка запущена в режиме Эксперта, вы войдете в DiskDrake -\n"
 "сервисную программу разметки Mandrake Linux -, которая позволит вам тонко\n"
 "настроить свои разделы. Смотрите раздел DiskDrake в ``Руководстве\n"
-"пользователя''. В интерфейсе установки вы можете использовать мастеры,\n"
+"пользователя''. В интерфейсе установки вы можете использовать мастера,\n"
 "как здесь описано, нажав на кнопку диалога \"Мастер\".\n"
 "\n"
 "Если разделы уже были определены из предыдущей установки или из другой\n"
@@ -3520,7 +3511,7 @@ msgstr ""
 "выбраны унаследованные точки монтирования, и, как правило, вы должны их\n"
 "оставить.\n"
 "\n"
-" * \"Использовать свободное пространство на разделе Windows\": если навашем "
+" * \"Использовать свободное пространство на разделе Windows\": если на вашем "
 "жестком диске установлена Microsoft Windows, и она занимает все\n"
 "доступное на нем место, вы должны создать раздел для данных Linux. Для\n"
 "этого вы можете удалить свой раздел Microsoft Windows и данные (смотрите\n"
@@ -3702,7 +3693,7 @@ msgstr ""
 "некоторые ошибки и решены вопросы по безопасности. Чтобы вы могли получить\n"
 "выгоду от этих обновлений, сейчас вам предлагается скачать их из Интернета.\n"
 "Выберите \"Да\", если у вас есть действующее подключение к Интернету, или\n"
-"\"Нет\", если пы предпочтитаете установить эти обновления позже.\n"
+"\"Нет\", если вы предпочитаете установить эти обновления позже.\n"
 "\n"
 "При выборе \"Да\" будет показан список мест, из которых могут быть получены\n"
 "обновления. Затем появится дерево выбора пакетов: выберите необходимые\n"
@@ -3991,7 +3982,7 @@ msgid ""
 "select this installation class."
 msgstr ""
 "Для DrakX теперь необходимо знать хотите ли вы выполнить установку по "
-"умолчанию (\"Рекмондуемую\"), или вы хотите получить больший контроль "
+"умолчанию (\"Рекомендуемую\"), или вы хотите получить больший контроль "
 "(\"Эксперт\"). Вы также можете выбрать новую установку или обновление "
 "существующей системы Mandrake Linux:\n"
 "\n"
@@ -4367,7 +4358,7 @@ msgstr ""
 "\n"
 " * \"PDQ\" - что означает ``печатать, не ставить в очередь'' - это вариант,\n"
 "если у вы напрямую подключены к своему принтеру, и вы хотите иметь\n"
-"возможность избежать проблем с замятием бумаги, и у вас нет сетевых\n"
+"возможность избежать проблем с зажевыванием бумаги, и у вас нет сетевых\n"
 "принтеров. Он сможет справиться только с очень простыми реализациями сетей,\n"
 "и является для них довольно медленным. Выберите \" PDQ\", если это ваше\n"
 "первая встреча с GNU/Linux. вы можете изменить свой выбор после установки,\n"
@@ -4584,7 +4575,7 @@ msgstr ""
 "\n"
 " * Загрузочное устройство: показывает, куда вы хотите поместить информацию,\n"
 "требующуюся для загрузки GNU/Linux. Обычно сначала вы устанавливаете раздел\n"
-"bootstrap, содержащий эту инфомарцию.\n"
+"bootstrap, содержащий эту информацию.\n"
 "\n"
 " * Задержка Open Firmware: в отличие от LILO у yaboot имеются две\n"
 "задержки. Первая задержка измеряется в секундах, и на этом этапе вы можете\n"
@@ -4867,7 +4858,7 @@ msgstr "Размер какого из разделов вы хотите изменить?"
 
 #: ../../install_interactive.pm_.c:133
 msgid "Resizing Windows partition"
-msgstr "Измененяется размер раздела Windows"
+msgstr "Изменяется размер раздела Windows"
 
 #: ../../install_interactive.pm_.c:136
 #, c-format
@@ -5254,7 +5245,7 @@ msgstr ""
 "\n"
 "Предупреждение\n"
 "Пожалуйста, внимательно прочтите условия, приведенные ниже. Если вы\n"
-"не согласны с каой-любой частью, вам не разрешается устанавливать \n"
+"не согласны с какой-либо частью, вам не разрешается устанавливать \n"
 "следующий накопитель CD. Нажмите 'Отказаться' для продолжения установки\n"
 "без этого накопителя.\n"
 "\n"
@@ -5263,7 +5254,7 @@ msgstr ""
 "Лицензией GPL или подобными соглашениями. Каждый такой компонент\n"
 "ограничен условиями его собственного лицензионного соглашения. \n"
 "Пожалуйста, внимательно прочтите и соблюдайте правила таких особых\n"
-"лицензионных соглашений перед использованием или дальнешем\n"
+"лицензионных соглашений перед использованием или дальнейшем\n"
 "распространением оговоренных компонентов. \n"
 "Такие лицензионные соглашения в основном будут предупреждать передачу,\n"
 "копирование (за исключением создания резервных копий), дальнейшее\n"
@@ -5419,7 +5410,7 @@ msgstr ""
 "\n"
 "Операционная система и различные компоненты, доступные на дистрибутиве\n"
 "Mandrake Linux далее будут называться \"Программными Продуктами\".\n"
-"Программные Продукты включают, но не органичиваются, набор программ, \n"
+"Программные Продукты включают, но не ограничиваются, набор программ, \n"
 "методы, правила и документацию, связанную с операционной системой\n"
 "и различными компонентами дистрибутива Mandrake Linux.\n"
 "\n"
@@ -5963,8 +5954,8 @@ msgstr "Мышь"
 msgid "Timezone"
 msgstr "Часовой пояс"
 
-#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2985
-#: ../../printerdrake.pm_.c:3074
+#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2989
+#: ../../printerdrake.pm_.c:3078
 msgid "Printer"
 msgstr "Принтер"
 
@@ -5977,78 +5968,78 @@ msgstr "Карта ISDN"
 msgid "Sound card"
 msgstr "Звуковая карта"
 
-#: ../../install_steps_interactive.pm_.c:1032
+#: ../../install_steps_interactive.pm_.c:1033
 msgid "TV card"
 msgstr "TV-карта"
 
-#: ../../install_steps_interactive.pm_.c:1072
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1101
+#: ../../install_steps_interactive.pm_.c:1075
+#: ../../install_steps_interactive.pm_.c:1100
+#: ../../install_steps_interactive.pm_.c:1104
 msgid "LDAP"
 msgstr "LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1073
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1110
+#: ../../install_steps_interactive.pm_.c:1076
+#: ../../install_steps_interactive.pm_.c:1100
+#: ../../install_steps_interactive.pm_.c:1113
 msgid "NIS"
 msgstr "NIS"
 
-#: ../../install_steps_interactive.pm_.c:1074
-#: ../../install_steps_interactive.pm_.c:1097
-#: ../../install_steps_interactive.pm_.c:1118
-#: ../../install_steps_interactive.pm_.c:1124
+#: ../../install_steps_interactive.pm_.c:1077
+#: ../../install_steps_interactive.pm_.c:1100
+#: ../../install_steps_interactive.pm_.c:1121
+#: ../../install_steps_interactive.pm_.c:1127
 msgid "Windows Domain"
 msgstr "Домен Windows"
 
-#: ../../install_steps_interactive.pm_.c:1075
-#: ../../install_steps_interactive.pm_.c:1097
+#: ../../install_steps_interactive.pm_.c:1078
+#: ../../install_steps_interactive.pm_.c:1100
 msgid "Local files"
 msgstr "Локальные файлы"
 
-#: ../../install_steps_interactive.pm_.c:1084
-#: ../../install_steps_interactive.pm_.c:1085 ../../steps.pm_.c:24
+#: ../../install_steps_interactive.pm_.c:1087
+#: ../../install_steps_interactive.pm_.c:1088 ../../steps.pm_.c:24
 msgid "Set root password"
 msgstr "Установка пароля root"
 
-#: ../../install_steps_interactive.pm_.c:1086
+#: ../../install_steps_interactive.pm_.c:1089
 msgid "No password"
 msgstr "Пароль отсутствует"
 
-#: ../../install_steps_interactive.pm_.c:1091
+#: ../../install_steps_interactive.pm_.c:1094
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Этот пароль слишком прост (его длина должна быть не менее %d символов)"
 
-#: ../../install_steps_interactive.pm_.c:1097 ../../network/modem.pm_.c:49
+#: ../../install_steps_interactive.pm_.c:1100 ../../network/modem.pm_.c:49
 #: ../../standalone/drakconnect_.c:625 ../../standalone/logdrake_.c:173
 msgid "Authentication"
 msgstr "Аутентификация"
 
-#: ../../install_steps_interactive.pm_.c:1105
+#: ../../install_steps_interactive.pm_.c:1108
 msgid "Authentication LDAP"
 msgstr "Аутентификация LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1106
+#: ../../install_steps_interactive.pm_.c:1109
 msgid "LDAP Base dn"
 msgstr "LDAP Base dn"
 
-#: ../../install_steps_interactive.pm_.c:1107
+#: ../../install_steps_interactive.pm_.c:1110
 msgid "LDAP Server"
 msgstr "Сервер LDAP"
 
-#: ../../install_steps_interactive.pm_.c:1113
+#: ../../install_steps_interactive.pm_.c:1116
 msgid "Authentication NIS"
 msgstr "Аутентификация NIS"
 
-#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1117
 msgid "NIS Domain"
 msgstr "Домен NIS"
 
-#: ../../install_steps_interactive.pm_.c:1115
+#: ../../install_steps_interactive.pm_.c:1118
 msgid "NIS Server"
 msgstr "Сервер NIS"
 
-#: ../../install_steps_interactive.pm_.c:1121
+#: ../../install_steps_interactive.pm_.c:1124
 msgid ""
 "For this to work for a W2K PDC, you will probably need to have the admin "
 "run: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /"
@@ -6065,7 +6056,7 @@ msgid ""
 msgstr ""
 "Чтобы это заработало для W2K PDC, вам, возможно, понадобится выполнить под "
 "админом: C:\\>net localgroup \"Pre-Windows 2000 Compatible Access\" "
-"everyone /add и перезагрузить серверВам также понадобится имя_пользователя/"
+"everyone /add и перезагрузить сервер, вам также понадобится имя_пользователя/"
 "пароль администратора домена, чтобы\n"
 "подключиться к машине в домене NT.\n"
 "Если сеть еще не включена, DrakX попытается подключиться к домену после\n"
@@ -6076,19 +6067,19 @@ msgstr ""
 "Windows(tm), после загрузки системы.\n"
 "Команда 'wbinfo -t' проверит правильность вашей секретной аутентификации."
 
-#: ../../install_steps_interactive.pm_.c:1123
+#: ../../install_steps_interactive.pm_.c:1126
 msgid "Authentication Windows Domain"
 msgstr "Аутентификация домена Windows"
 
-#: ../../install_steps_interactive.pm_.c:1125
+#: ../../install_steps_interactive.pm_.c:1128
 msgid "Domain Admin User Name"
 msgstr "Имя пользователя - администратора домена"
 
-#: ../../install_steps_interactive.pm_.c:1126
+#: ../../install_steps_interactive.pm_.c:1129
 msgid "Domain Admin Password"
 msgstr "Пароль администратора домена"
 
-#: ../../install_steps_interactive.pm_.c:1161
+#: ../../install_steps_interactive.pm_.c:1164
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -6106,7 +6097,7 @@ msgid ""
 "drive and press \"Ok\"."
 msgstr ""
 "Специальная загрузочная дискета обеспечивает загрузку вашей системы Linux\n"
-"независимо от стандарного начального загрузчика. Это полезно, если вы не\n"
+"независимо от стандартного начального загрузчика. Это полезно, если вы не\n"
 "хотите устанавливать на свою систему SILO, или если другая операционная\n"
 "система удалит SILO, или если SILO не работает с конфигурацией вашего\n"
 "аппаратного обеспечения. Специальная загрузочная дискета также может быть\n"
@@ -6116,19 +6107,19 @@ msgstr ""
 "Если хотите создать загрузочный диск для своей системы, вставьте дискету\n"
 "в первый дисковод и нажмите \"ОК\"."
 
-#: ../../install_steps_interactive.pm_.c:1177
+#: ../../install_steps_interactive.pm_.c:1180
 msgid "First floppy drive"
 msgstr "Первый дисковод"
 
-#: ../../install_steps_interactive.pm_.c:1178
+#: ../../install_steps_interactive.pm_.c:1181
 msgid "Second floppy drive"
 msgstr "Второй дисковод"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2515
+#: ../../install_steps_interactive.pm_.c:1182 ../../printerdrake.pm_.c:2515
 msgid "Skip"
 msgstr "Пропустить"
 
-#: ../../install_steps_interactive.pm_.c:1184
+#: ../../install_steps_interactive.pm_.c:1187
 #, c-format
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
@@ -6144,7 +6135,7 @@ msgid ""
 "%s"
 msgstr ""
 "Специальная загрузочная дискета обеспечивает загрузку вашей системы Linux\n"
-"независимо от стандарного начального загрузчика. Это полезно, если вы не\n"
+"независимо от стандартного начального загрузчика. Это полезно, если вы не\n"
 "хотите устанавливать на свою систему SILO, или если другая операционная\n"
 "система удалит SILO, или если SILO не работает с конфигурацией вашего\n"
 "аппаратного обеспечения. Специальная загрузочная дискета также может быть\n"
@@ -6152,7 +6143,7 @@ msgstr ""
 "восстановление системы после критических сбоев. Хотите создать загрузочный\n"
 "диск для своей системы?%s"
 
-#: ../../install_steps_interactive.pm_.c:1190
+#: ../../install_steps_interactive.pm_.c:1193
 msgid ""
 "\n"
 "\n"
@@ -6166,30 +6157,30 @@ msgstr ""
 "создание загрузочной дискеты на 1.44 Мб, скорее всего, завершится\n"
 "неудачей, потому что для XFS нужен очень большой драйвер)."
 
-#: ../../install_steps_interactive.pm_.c:1198
+#: ../../install_steps_interactive.pm_.c:1201
 msgid "Sorry, no floppy drive available"
 msgstr "Извините, дисковод недоступен"
 
-#: ../../install_steps_interactive.pm_.c:1202
+#: ../../install_steps_interactive.pm_.c:1205
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 "Выберите дисковод, который вы хотите использовать для создания загрузочной "
 "дискеты"
 
-#: ../../install_steps_interactive.pm_.c:1206
+#: ../../install_steps_interactive.pm_.c:1209
 #, c-format
 msgid "Insert a floppy in %s"
 msgstr "Вставьте дискету в %s"
 
-#: ../../install_steps_interactive.pm_.c:1209
+#: ../../install_steps_interactive.pm_.c:1212
 msgid "Creating bootdisk..."
 msgstr "Создается загрузочная дискета..."
 
-#: ../../install_steps_interactive.pm_.c:1216
+#: ../../install_steps_interactive.pm_.c:1219
 msgid "Preparing bootloader..."
 msgstr "Подготавливается начальный загрузчик..."
 
-#: ../../install_steps_interactive.pm_.c:1227
+#: ../../install_steps_interactive.pm_.c:1230
 msgid ""
 "You appear to have an OldWorld or Unknown\n"
 " machine, the yaboot bootloader will not work for you.\n"
@@ -6201,11 +6192,11 @@ msgstr ""
 "продолжена, но вам потребуется использовать BootX,\n"
 "чтобы загрузить свою машину."
 
-#: ../../install_steps_interactive.pm_.c:1233
+#: ../../install_steps_interactive.pm_.c:1236
 msgid "Do you want to use aboot?"
 msgstr "Вы хотите использовать aboot?"
 
-#: ../../install_steps_interactive.pm_.c:1236
+#: ../../install_steps_interactive.pm_.c:1239
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -6213,17 +6204,17 @@ msgstr ""
 "Ошибка установки aboot, \n"
 "попытаться форсировать установку, даже если это разрушит первый раздел?"
 
-#: ../../install_steps_interactive.pm_.c:1243
+#: ../../install_steps_interactive.pm_.c:1246
 msgid "Installing bootloader"
 msgstr "Устанавливается начальный загрузчик"
 
-#: ../../install_steps_interactive.pm_.c:1249
+#: ../../install_steps_interactive.pm_.c:1252
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr ""
 "Установка начального загрузчика завершилась неудачей.\n"
 "Произошла следующая ошибка:"
 
-#: ../../install_steps_interactive.pm_.c:1257
+#: ../../install_steps_interactive.pm_.c:1260
 #, c-format
 msgid ""
 "You may need to change your Open Firmware boot-device to\n"
@@ -6241,17 +6232,17 @@ msgstr ""
 " Затем введите: shut-down\n"
 "При следующей загрузке вы должны увидеть приглашение начального загрузчика."
 
-#: ../../install_steps_interactive.pm_.c:1291
+#: ../../install_steps_interactive.pm_.c:1294
 #: ../../standalone/drakautoinst_.c:79
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Вставьте чистую дискету в дисковод %s"
 
-#: ../../install_steps_interactive.pm_.c:1295
+#: ../../install_steps_interactive.pm_.c:1298
 msgid "Creating auto install floppy..."
 msgstr "Создается дискета автоматической установки..."
 
-#: ../../install_steps_interactive.pm_.c:1306
+#: ../../install_steps_interactive.pm_.c:1309
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -6261,7 +6252,7 @@ msgstr ""
 "\n"
 "Вы действительно хотите сейчас выйти?"
 
-#: ../../install_steps_interactive.pm_.c:1317
+#: ../../install_steps_interactive.pm_.c:1320
 #, c-format
 msgid ""
 "Congratulations, installation is complete.\n"
@@ -6293,15 +6284,15 @@ msgstr ""
 "Информация о настройке вашей системы доступна в главе Post Install\n"
 "Официального Руководства Пользователя Mandrake Linux."
 
-#: ../../install_steps_interactive.pm_.c:1330
+#: ../../install_steps_interactive.pm_.c:1333
 msgid "http://www.mandrakelinux.com/en/90errata.php3"
 msgstr " http://www.mandrakelinux.com/en/90errata.php3"
 
-#: ../../install_steps_interactive.pm_.c:1335
+#: ../../install_steps_interactive.pm_.c:1338
 msgid "Generate auto install floppy"
 msgstr "Создать дискету автоматической установки"
 
-#: ../../install_steps_interactive.pm_.c:1337
+#: ../../install_steps_interactive.pm_.c:1340
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -6316,15 +6307,15 @@ msgstr ""
 "\n"
 "Вы можете захотеть повторить установку.\n"
 
-#: ../../install_steps_interactive.pm_.c:1342
+#: ../../install_steps_interactive.pm_.c:1345
 msgid "Automated"
 msgstr "Автоматический"
 
-#: ../../install_steps_interactive.pm_.c:1342
+#: ../../install_steps_interactive.pm_.c:1345
 msgid "Replay"
 msgstr "Повторить"
 
-#: ../../install_steps_interactive.pm_.c:1345
+#: ../../install_steps_interactive.pm_.c:1348
 msgid "Save packages selection"
 msgstr "Сохранить выбор пакетов"
 
@@ -6356,7 +6347,7 @@ msgstr "Выберите файл"
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:220
+#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:103
 msgid "Basic"
 msgstr "Основной"
 
@@ -7054,17 +7045,29 @@ msgid ""
 "For a powerful dedicated firewall solution, please look to the\n"
 "specialized MandrakeSecurity Firewall distribution."
 msgstr ""
-"конфигуратор drakfirewall\n"
+"Конфигуратор drakfirewall\n"
 "\n"
 "Он настраивает персональный файервол для этой машины Mandrake Linux.\n"
 "Для создания специализированного мощного файервола, пожалуйста, загляните\n"
 "в специализированный дистрибутив MandrakeSecurity Firewall."
 
-#: ../../network/drakfirewall.pm_.c:147
+#: ../../network/drakfirewall.pm_.c:135
+msgid ""
+"drakfirewall configurator\n"
+"\n"
+"Make sure you have configured your Network/Internet access with\n"
+"drakconnect before going any further."
+msgstr ""
+"Конфигуратор drakfirewall\n"
+"\n"
+"Перед тем, как продолжить, убедитесь, что вы настроили свой доступ к\n"
+"Интернету/локальной сети при помощи drakconnect."
+
+#: ../../network/drakfirewall.pm_.c:152
 msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "Каким сервисам вы хотите разрешить доступ в Интернет?"
 
-#: ../../network/drakfirewall.pm_.c:148
+#: ../../network/drakfirewall.pm_.c:153
 msgid ""
 "You can enter miscellaneous ports. \n"
 "Valid examples are: 139/tcp 139/udp.\n"
@@ -7074,7 +7077,7 @@ msgstr ""
 "Действительные примеры: 139/tcp 139/udp.\n"
 "Информацию можно найти в /etc/services."
 
-#: ../../network/drakfirewall.pm_.c:154
+#: ../../network/drakfirewall.pm_.c:159
 #, c-format
 msgid ""
 "Invalid port given: %s.\n"
@@ -7085,11 +7088,11 @@ msgstr ""
 "Правильный формат - \"порт/tcp\" или \"порт/udp\",\n"
 "где порт должен быть между 1 и 65535."
 
-#: ../../network/drakfirewall.pm_.c:162
+#: ../../network/drakfirewall.pm_.c:167
 msgid "Everything (no firewall)"
 msgstr "Все (файервол отсутствует)"
 
-#: ../../network/drakfirewall.pm_.c:164
+#: ../../network/drakfirewall.pm_.c:169
 msgid "Other ports"
 msgstr "Другие порты"
 
@@ -7109,7 +7112,7 @@ msgstr ""
 "В вашей системе не был обнаружен сетевой адаптер ethernet.\n"
 "Я не могу установить такой тип соединения."
 
-#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:236
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:238
 msgid "Choose the network interface"
 msgstr "Выберите сетевой интерфейс"
 
@@ -7449,7 +7452,7 @@ msgstr "Выберите профиль для настройки"
 msgid "Use auto detection"
 msgstr "Использовать автоматическое определение"
 
-#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3199
+#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3203
 #: ../../standalone/drakconnect_.c:274 ../../standalone/drakconnect_.c:277
 #: ../../standalone/drakfloppy_.c:146
 msgid "Expert Mode"
@@ -7609,6 +7612,7 @@ msgid "IP address"
 msgstr "IP-адрес"
 
 #: ../../network/network.pm_.c:310 ../../standalone/drakconnect_.c:468
+#: ../../standalone/drakgw_.c:295
 msgid "Netmask"
 msgstr "Сетевая маска"
 
@@ -7685,11 +7689,11 @@ msgstr "Прокси должен быть http://..."
 msgid "Url should begin with 'ftp:' or 'http:'"
 msgstr "Url должен начинаться с 'ftp:' или 'http:'"
 
-#: ../../network/shorewall.pm_.c:24
+#: ../../network/shorewall.pm_.c:25
 msgid "Firewalling configuration detected!"
 msgstr "Обнаружена конфигурация файервола!"
 
-#: ../../network/shorewall.pm_.c:25
+#: ../../network/shorewall.pm_.c:26
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fix after installation."
@@ -7880,7 +7884,7 @@ msgstr "LPD - Демон построчно печатающего принтера"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Печатать, не ставить в очередь"
 
-#: ../../printer.pm_.c:34 ../../printer.pm_.c:1144
+#: ../../printer.pm_.c:34 ../../printer.pm_.c:1181
 msgid "CUPS"
 msgstr "CUPS"
 
@@ -7932,102 +7936,102 @@ msgstr "Введите URI устройства печати"
 msgid "Pipe job into a command"
 msgstr "Загонять задание в команду"
 
-#: ../../printer.pm_.c:328 ../../printer.pm_.c:370 ../../printer.pm_.c:552
+#: ../../printer.pm_.c:346 ../../printer.pm_.c:388 ../../printer.pm_.c:570
 msgid "Unknown Model"
 msgstr "Неизвестная модель"
 
-#: ../../printer.pm_.c:754 ../../printer.pm_.c:945 ../../printer.pm_.c:1337
-#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:3462
+#: ../../printer.pm_.c:791 ../../printer.pm_.c:982 ../../printer.pm_.c:1374
+#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:3471
 msgid "Unknown model"
 msgstr "Неизвестная модель"
 
-#: ../../printer.pm_.c:782
+#: ../../printer.pm_.c:819
 msgid "Local Printers"
 msgstr "Локальные принтеры"
 
-#: ../../printer.pm_.c:784 ../../printer.pm_.c:1145
+#: ../../printer.pm_.c:821 ../../printer.pm_.c:1182
 msgid "Remote Printers"
 msgstr "Удаленные принтеры"
 
-#: ../../printer.pm_.c:791 ../../printerdrake.pm_.c:417
+#: ../../printer.pm_.c:828 ../../printerdrake.pm_.c:417
 #, c-format
 msgid " on parallel port \\/*%s"
 msgstr " на параллельном порту \\/*%s"
 
-#: ../../printer.pm_.c:794 ../../printerdrake.pm_.c:419
+#: ../../printer.pm_.c:831 ../../printerdrake.pm_.c:419
 #, c-format
 msgid ", USB printer \\/*%s"
 msgstr ", принтер USB \\/*%s"
 
-#: ../../printer.pm_.c:799
+#: ../../printer.pm_.c:836
 #, c-format
 msgid ", multi-function device on parallel port \\/*%s"
 msgstr ", многофункциональное устройство на параллельном порту \\/*%s"
 
-#: ../../printer.pm_.c:802
+#: ../../printer.pm_.c:839
 msgid ", multi-function device on USB"
 msgstr ", многофункциональное устройство на USB"
 
-#: ../../printer.pm_.c:804
+#: ../../printer.pm_.c:841
 msgid ", multi-function device on HP JetDirect"
 msgstr ", многофункциональное устройство на HP JetDirect"
 
-#: ../../printer.pm_.c:806
+#: ../../printer.pm_.c:843
 msgid ", multi-function device"
 msgstr ", многофункциональное устройство"
 
-#: ../../printer.pm_.c:809
+#: ../../printer.pm_.c:846
 #, c-format
 msgid ", printing to %s"
 msgstr ", печатающий %s"
 
-#: ../../printer.pm_.c:811
+#: ../../printer.pm_.c:848
 #, c-format
 msgid " on LPD server \"%s\", printer \"%s\""
 msgstr " на сервере LPD \"%s\", принтер \"%s\""
 
-#: ../../printer.pm_.c:813
+#: ../../printer.pm_.c:850
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
 msgstr ", хост TCP/IP \"%s\", порт %s "
 
-#: ../../printer.pm_.c:817
+#: ../../printer.pm_.c:854
 #, c-format
 msgid " on SMB/Windows server \"%s\", share \"%s\""
 msgstr " на сервере SMB/Windows \"%s\", ресурс \"%s\""
 
-#: ../../printer.pm_.c:821
+#: ../../printer.pm_.c:858
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " на сервере Novell \"%s\", принтер \"%s\""
 
-#: ../../printer.pm_.c:823
+#: ../../printer.pm_.c:860
 #, c-format
 msgid ", using command %s"
 msgstr ", используя команду %s"
 
-#: ../../printer.pm_.c:942 ../../printerdrake.pm_.c:1701
+#: ../../printer.pm_.c:979 ../../printerdrake.pm_.c:1701
 msgid "Raw printer (No driver)"
 msgstr "Принтер печати необработанных данных (без драйвера)"
 
-#: ../../printer.pm_.c:1114
+#: ../../printer.pm_.c:1151
 #, c-format
 msgid "(on %s)"
 msgstr "(на %s)"
 
-#: ../../printer.pm_.c:1116
+#: ../../printer.pm_.c:1153
 msgid "(on this machine)"
 msgstr "(на этой машине)"
 
-#: ../../printer.pm_.c:1141
+#: ../../printer.pm_.c:1178
 #, c-format
 msgid "On CUPS server \"%s\""
 msgstr "на сервере CUPS \"%s\""
 
-#: ../../printer.pm_.c:1147 ../../printerdrake.pm_.c:3119
-#: ../../printerdrake.pm_.c:3130 ../../printerdrake.pm_.c:3351
-#: ../../printerdrake.pm_.c:3403 ../../printerdrake.pm_.c:3429
-#: ../../printerdrake.pm_.c:3604 ../../printerdrake.pm_.c:3606
+#: ../../printer.pm_.c:1184 ../../printerdrake.pm_.c:3123
+#: ../../printerdrake.pm_.c:3134 ../../printerdrake.pm_.c:3360
+#: ../../printerdrake.pm_.c:3412 ../../printerdrake.pm_.c:3438
+#: ../../printerdrake.pm_.c:3613 ../../printerdrake.pm_.c:3615
 msgid " (Default)"
 msgstr " (По умолчанию)"
 
@@ -8054,11 +8058,11 @@ msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr ""
 "Автоматическое определение принтера (локальные, TCP/Socket и SMB-принтеры)"
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3183
+#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3187
 msgid "CUPS configuration"
 msgstr "Настройка CUPS"
 
-#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3184
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3188
 msgid "Specify CUPS server"
 msgstr "Укажите сервер CUPS"
 
@@ -8122,15 +8126,15 @@ msgstr "Автоматическая настройка CUPS"
 #: ../../printerdrake.pm_.c:1696 ../../printerdrake.pm_.c:2248
 #: ../../printerdrake.pm_.c:2401 ../../printerdrake.pm_.c:2460
 #: ../../printerdrake.pm_.c:2533 ../../printerdrake.pm_.c:2554
-#: ../../printerdrake.pm_.c:2747 ../../printerdrake.pm_.c:2788
-#: ../../printerdrake.pm_.c:2793 ../../printerdrake.pm_.c:2827
-#: ../../printerdrake.pm_.c:2832 ../../printerdrake.pm_.c:2869
-#: ../../printerdrake.pm_.c:2922 ../../printerdrake.pm_.c:2942
-#: ../../printerdrake.pm_.c:2956 ../../printerdrake.pm_.c:2990
-#: ../../printerdrake.pm_.c:3036 ../../printerdrake.pm_.c:3054
-#: ../../printerdrake.pm_.c:3143 ../../printerdrake.pm_.c:3217
-#: ../../printerdrake.pm_.c:3519 ../../printerdrake.pm_.c:3574
-#: ../../printerdrake.pm_.c:3627 ../../standalone/printerdrake_.c:57
+#: ../../printerdrake.pm_.c:2747 ../../printerdrake.pm_.c:2792
+#: ../../printerdrake.pm_.c:2797 ../../printerdrake.pm_.c:2831
+#: ../../printerdrake.pm_.c:2836 ../../printerdrake.pm_.c:2873
+#: ../../printerdrake.pm_.c:2926 ../../printerdrake.pm_.c:2946
+#: ../../printerdrake.pm_.c:2960 ../../printerdrake.pm_.c:2994
+#: ../../printerdrake.pm_.c:3040 ../../printerdrake.pm_.c:3058
+#: ../../printerdrake.pm_.c:3147 ../../printerdrake.pm_.c:3226
+#: ../../printerdrake.pm_.c:3528 ../../printerdrake.pm_.c:3583
+#: ../../printerdrake.pm_.c:3636 ../../standalone/printerdrake_.c:57
 msgid "Printerdrake"
 msgstr "Printerdrake"
 
@@ -8247,8 +8251,8 @@ msgstr ""
 "установлено до %d МБ дополнительного программного обеспечения."
 
 #: ../../printerdrake.pm_.c:279 ../../printerdrake.pm_.c:291
-#: ../../printerdrake.pm_.c:361 ../../printerdrake.pm_.c:3165
-#: ../../printerdrake.pm_.c:3290
+#: ../../printerdrake.pm_.c:361 ../../printerdrake.pm_.c:3169
+#: ../../printerdrake.pm_.c:3299
 msgid "Add a new printer"
 msgstr "Добавить новый принтер"
 
@@ -9007,7 +9011,7 @@ msgid ""
 msgstr ""
 "Ваш принтер принадлежит к группе лазерных принтеров GDI (win-принтеры), "
 "продаваемых различными производителями, которые используют для данных, "
-"оправляемых на печать, растровый формат Zenographics ZJ-stream. Драйвер для "
+"отправляемых на печать, растровый формат Zenographics ZJ-stream. Драйвер для "
 "этого принтера все еще находится на ранней стадии разработки, и поэтому, "
 "возможно, он не всегда работает корректно. Кроме того, возможно, что эти "
 "принтеры будут работать только, если вы выберете размер бумаги А4.\n"
@@ -9141,7 +9145,7 @@ msgstr ""
 msgid "Did it work properly?"
 msgstr "Он работал правильно?"
 
-#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:3464
+#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:3473
 msgid "Raw printer"
 msgstr "Принтер печати необработанных данных"
 
@@ -9251,7 +9255,7 @@ msgstr ""
 "Если вы используете графическую оболочку KDE, у вас есть \"аварийная кнопка"
 "\" - значок на рабочем столе, с названием \"ОСТАНОВИТЬ принтер!\", который "
 "немедленно останавливает все задания печати, когда вы щелкаете по нему. Это "
-"полезно, например, при замятии бумаги.\n"
+"полезно, например, при зажевывании бумаги.\n"
 
 #: ../../printerdrake.pm_.c:2378
 #, c-format
@@ -9288,7 +9292,7 @@ msgstr "Печать на принтере \"%s\""
 
 #: ../../printerdrake.pm_.c:2395 ../../printerdrake.pm_.c:2398
 #: ../../printerdrake.pm_.c:2399 ../../printerdrake.pm_.c:2400
-#: ../../printerdrake.pm_.c:3448 ../../standalone/drakTermServ_.c:248
+#: ../../printerdrake.pm_.c:3457 ../../standalone/drakTermServ_.c:248
 #: ../../standalone/drakbackup_.c:1562 ../../standalone/drakbackup_.c:4210
 #: ../../standalone/drakbug_.c:130 ../../standalone/drakfont_.c:705
 #: ../../standalone/drakfont_.c:1014
@@ -9346,8 +9350,8 @@ msgstr ""
 "между именами дисков в поле, расположенном в правом верхнем углу списка "
 "файлов."
 
-#: ../../printerdrake.pm_.c:2461 ../../printerdrake.pm_.c:2923
-#: ../../printerdrake.pm_.c:3218
+#: ../../printerdrake.pm_.c:2461 ../../printerdrake.pm_.c:2927
+#: ../../printerdrake.pm_.c:3227
 msgid "Reading printer data..."
 msgstr "Читается база данных принтеров..."
 
@@ -9602,59 +9606,59 @@ msgstr ""
 "\n"
 "Желаете, чтобы автоматический запуск системы печати был снова включен?"
 
-#: ../../printerdrake.pm_.c:2748 ../../printerdrake.pm_.c:2789
-#: ../../printerdrake.pm_.c:2828 ../../printerdrake.pm_.c:2870
-#: ../../printerdrake.pm_.c:2991
+#: ../../printerdrake.pm_.c:2748 ../../printerdrake.pm_.c:2793
+#: ../../printerdrake.pm_.c:2832 ../../printerdrake.pm_.c:2874
+#: ../../printerdrake.pm_.c:2995
 msgid "Checking installed software..."
 msgstr "Проверяется установленное программное обеспечение..."
 
-#: ../../printerdrake.pm_.c:2794
+#: ../../printerdrake.pm_.c:2798
 msgid "Removing LPRng..."
 msgstr "Удаляется LPRng..."
 
-#: ../../printerdrake.pm_.c:2833
+#: ../../printerdrake.pm_.c:2837
 msgid "Removing LPD..."
 msgstr "Удаляется LPD..."
 
-#: ../../printerdrake.pm_.c:2906
+#: ../../printerdrake.pm_.c:2910
 msgid "Select Printer Spooler"
 msgstr "Выберите спулер принтера"
 
-#: ../../printerdrake.pm_.c:2907
+#: ../../printerdrake.pm_.c:2911
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Какую систему печати (спулер) вы хотите использовать?"
 
-#: ../../printerdrake.pm_.c:2943
+#: ../../printerdrake.pm_.c:2947
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "Настраивается принтер \"%s\"..."
 
-#: ../../printerdrake.pm_.c:2957
+#: ../../printerdrake.pm_.c:2961
 msgid "Installing Foomatic..."
 msgstr "Устанавливается Foomatic..."
 
-#: ../../printerdrake.pm_.c:3027 ../../printerdrake.pm_.c:3068
-#: ../../printerdrake.pm_.c:3465 ../../printerdrake.pm_.c:3538
+#: ../../printerdrake.pm_.c:3031 ../../printerdrake.pm_.c:3072
+#: ../../printerdrake.pm_.c:3474 ../../printerdrake.pm_.c:3547
 msgid "Printer options"
 msgstr "Параметры принтера"
 
-#: ../../printerdrake.pm_.c:3037
+#: ../../printerdrake.pm_.c:3041
 msgid "Preparing Printerdrake..."
 msgstr "Подготавливается Printerdrake..."
 
-#: ../../printerdrake.pm_.c:3055 ../../printerdrake.pm_.c:3628
+#: ../../printerdrake.pm_.c:3059 ../../printerdrake.pm_.c:3637
 msgid "Configuring applications..."
 msgstr "Настраиваются приложения..."
 
-#: ../../printerdrake.pm_.c:3075
+#: ../../printerdrake.pm_.c:3079
 msgid "Would you like to configure printing?"
 msgstr "Хотите настроить печать?"
 
-#: ../../printerdrake.pm_.c:3087
+#: ../../printerdrake.pm_.c:3091
 msgid "Printing system: "
 msgstr "Система печати: "
 
-#: ../../printerdrake.pm_.c:3147
+#: ../../printerdrake.pm_.c:3151
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; to view information about it; "
@@ -9666,7 +9670,7 @@ msgstr ""
 "о нем; или сделать принтер на удаленном сервере CUPS доступным для Star "
 "Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3148
+#: ../../printerdrake.pm_.c:3152
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -9676,29 +9680,29 @@ msgstr ""
 "его настройки; сделать его принтером по умолчанию; просмотреть информацию о "
 "нем"
 
-#: ../../printerdrake.pm_.c:3175
+#: ../../printerdrake.pm_.c:3179
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 "Обновить список принтеров (отобразить все доступные удаленные принтеры CUPS)"
 
-#: ../../printerdrake.pm_.c:3193
+#: ../../printerdrake.pm_.c:3197
 msgid "Change the printing system"
 msgstr "Изменить систему печати"
 
-#: ../../printerdrake.pm_.c:3198 ../../standalone/drakconnect_.c:277
+#: ../../printerdrake.pm_.c:3202 ../../standalone/drakconnect_.c:277
 msgid "Normal Mode"
 msgstr "Нормальный режим"
 
-#: ../../printerdrake.pm_.c:3358 ../../printerdrake.pm_.c:3408
-#: ../../printerdrake.pm_.c:3621
+#: ../../printerdrake.pm_.c:3367 ../../printerdrake.pm_.c:3417
+#: ../../printerdrake.pm_.c:3630
 msgid "Do you want to configure another printer?"
 msgstr "Хотите настроить другой принтер?"
 
-#: ../../printerdrake.pm_.c:3443
+#: ../../printerdrake.pm_.c:3452
 msgid "Modify printer configuration"
 msgstr "Изменить конфигурацию принтера"
 
-#: ../../printerdrake.pm_.c:3445
+#: ../../printerdrake.pm_.c:3454
 #, c-format
 msgid ""
 "Printer %s\n"
@@ -9707,93 +9711,93 @@ msgstr ""
 "Принтер %s\n"
 "Хотите изменить этот принтер?"
 
-#: ../../printerdrake.pm_.c:3449
+#: ../../printerdrake.pm_.c:3458
 msgid "Do it!"
 msgstr "Выполнить!"
 
-#: ../../printerdrake.pm_.c:3454 ../../printerdrake.pm_.c:3509
+#: ../../printerdrake.pm_.c:3463 ../../printerdrake.pm_.c:3518
 msgid "Printer connection type"
 msgstr "Тип подключения принтера"
 
-#: ../../printerdrake.pm_.c:3455 ../../printerdrake.pm_.c:3513
+#: ../../printerdrake.pm_.c:3464 ../../printerdrake.pm_.c:3522
 msgid "Printer name, description, location"
 msgstr "Имя принтера, описание, расположение"
 
-#: ../../printerdrake.pm_.c:3457 ../../printerdrake.pm_.c:3531
+#: ../../printerdrake.pm_.c:3466 ../../printerdrake.pm_.c:3540
 msgid "Printer manufacturer, model, driver"
 msgstr "Производитель принтера, модель, драйвер"
 
-#: ../../printerdrake.pm_.c:3458 ../../printerdrake.pm_.c:3532
+#: ../../printerdrake.pm_.c:3467 ../../printerdrake.pm_.c:3541
 msgid "Printer manufacturer, model"
 msgstr "Производитель принтера, модель"
 
-#: ../../printerdrake.pm_.c:3467 ../../printerdrake.pm_.c:3542
+#: ../../printerdrake.pm_.c:3476 ../../printerdrake.pm_.c:3551
 msgid "Set this printer as the default"
 msgstr "Сделать этот принтер используемым по умолчанию"
 
-#: ../../printerdrake.pm_.c:3469 ../../printerdrake.pm_.c:3547
+#: ../../printerdrake.pm_.c:3478 ../../printerdrake.pm_.c:3556
 msgid "Add this printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Добавить этот принтер в Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3470 ../../printerdrake.pm_.c:3556
+#: ../../printerdrake.pm_.c:3479 ../../printerdrake.pm_.c:3565
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Удалить этот принтер из Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3565
+#: ../../printerdrake.pm_.c:3480 ../../printerdrake.pm_.c:3574
 msgid "Print test pages"
 msgstr "Напечатать тестовые страницы..."
 
-#: ../../printerdrake.pm_.c:3472 ../../printerdrake.pm_.c:3567
+#: ../../printerdrake.pm_.c:3481 ../../printerdrake.pm_.c:3576
 msgid "Know how to use this printer"
 msgstr "Узнать, как использовать этот принтер"
 
-#: ../../printerdrake.pm_.c:3474 ../../printerdrake.pm_.c:3569
+#: ../../printerdrake.pm_.c:3483 ../../printerdrake.pm_.c:3578
 msgid "Remove printer"
 msgstr "Удалить принтер"
 
-#: ../../printerdrake.pm_.c:3520
+#: ../../printerdrake.pm_.c:3529
 #, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "Удаляется старый принтер \"%s\"..."
 
-#: ../../printerdrake.pm_.c:3545
+#: ../../printerdrake.pm_.c:3554
 msgid "Default printer"
 msgstr "Принтер по умолчанию"
 
-#: ../../printerdrake.pm_.c:3546
+#: ../../printerdrake.pm_.c:3555
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr "Принтер \"%s\" сделан теперь используемым по умолчанию."
 
-#: ../../printerdrake.pm_.c:3550 ../../printerdrake.pm_.c:3553
+#: ../../printerdrake.pm_.c:3559 ../../printerdrake.pm_.c:3562
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Добавляется принтер в Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3551
+#: ../../printerdrake.pm_.c:3560
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
 msgstr "Принтер \"%s\" был успешно добавлен в Star Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3554
+#: ../../printerdrake.pm_.c:3563
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Добавление принтера \"%s\" в Star Office/OpenOffice.org/GIMP завершилось "
 "неудачей."
 
-#: ../../printerdrake.pm_.c:3559 ../../printerdrake.pm_.c:3562
+#: ../../printerdrake.pm_.c:3568 ../../printerdrake.pm_.c:3571
 msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Удаляется принтер из Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3560
+#: ../../printerdrake.pm_.c:3569
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/"
 "GIMP."
 msgstr "Принтер \"%s\" был успешно удален из Star Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3563
+#: ../../printerdrake.pm_.c:3572
 #, c-format
 msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
@@ -9801,12 +9805,12 @@ msgstr ""
 "Удаление принтера \"%s\" из Star Office/OpenOffice.org/GIMP завершилось "
 "неудачей."
 
-#: ../../printerdrake.pm_.c:3571
+#: ../../printerdrake.pm_.c:3580
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Вы действительно хотите удалить принтер \"%s\"?"
 
-#: ../../printerdrake.pm_.c:3575
+#: ../../printerdrake.pm_.c:3584
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Удаляется принтер \"%s\"..."
@@ -9931,7 +9935,7 @@ msgid ""
 "be sent to this user (username or\n"
 "\t       email)"
 msgstr ""
-"Стандартный: это стандарный уровнь безопасности, рекомендуемый для\n"
+"Стандартный: это стандартный уровень безопасности, рекомендуемый для\n"
 "             компьютера, который будет использоваться для подключения\n"
 "             к Интернету в качестве клиента.\n"
 "\n"
@@ -9953,25 +9957,27 @@ msgstr ""
 "             предупреждения о безопасности будут отправляться этому\n"
 "             пользователю (имя пользователя или \temail)"
 
-#: ../../security/main.pm_.c:66
+#: ../../security/main.pm_.c:65
 msgid "Security Level:"
 msgstr "Уровень безопасности:"
 
-#: ../../security/main.pm_.c:74
+#: ../../security/main.pm_.c:99
 msgid "Security Alerts:"
 msgstr "Предупреждения о безопасности:"
 
-#: ../../security/main.pm_.c:83
+#: ../../security/main.pm_.c:101
 msgid "Security Administrator:"
 msgstr "Администратор по безопасности:"
 
-#: ../../security/main.pm_.c:114 ../../security/main.pm_.c:150
-#, c-format
-msgid " (default: %s)"
-msgstr " (По умолчанию: %s)"
+#: ../../security/main.pm_.c:114
+msgid "Network Options"
+msgstr "Сетевые опции"
 
-#: ../../security/main.pm_.c:118 ../../security/main.pm_.c:154
-#: ../../security/main.pm_.c:179
+#: ../../security/main.pm_.c:114
+msgid "System Options"
+msgstr "Системные опции"
+
+#: ../../security/main.pm_.c:119 ../../security/main.pm_.c:148
 msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need explanations, click on Help.\n"
@@ -9979,23 +9985,24 @@ msgstr ""
 "Следующие параметры могут быть установлены, чтобы выборочно настроить\n"
 "безопасность вашей системы. Если вам нужны пояснения, нажмите на Справку.\n"
 
-#: ../../security/main.pm_.c:226
-msgid "Network Options"
-msgstr "Сетевые опции"
+#: ../../security/main.pm_.c:137
+#, c-format
+msgid " (default: %s)"
+msgstr " (По умолчанию: %s)"
 
-#: ../../security/main.pm_.c:235
-msgid "System Options"
-msgstr "Системные опции"
+#: ../../security/main.pm_.c:161
+msgid "Periodic Checks 2"
+msgstr "Периодические проверки 2"
 
-#: ../../security/main.pm_.c:242
+#: ../../security/main.pm_.c:162
 msgid "Periodic Checks"
 msgstr "Периодические проверки"
 
-#: ../../security/main.pm_.c:256
+#: ../../security/main.pm_.c:176
 msgid "Please wait, setting security level..."
 msgstr "Подождите, пожалуйста, настраивается уровень безопасности..."
 
-#: ../../security/main.pm_.c:262
+#: ../../security/main.pm_.c:182
 msgid "Please wait, setting security options..."
 msgstr "Подождите, пожалуйста, настраиваются параметры безопасности..."
 
@@ -10056,7 +10063,7 @@ msgid ""
 "new/changed hardware."
 msgstr ""
 "HardDrake выполняет проверку аппаратного обеспечения и при необходимости\n"
-"настраивает новое/изменившиееся оборудование."
+"настраивает новое/изменившееся оборудование."
 
 #: ../../services.pm_.c:28
 msgid ""
@@ -10122,7 +10129,8 @@ msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
-"lpd является демоном печати, требующимся для нормальной работы lpr. Это\n"
+"lpd является демоном печати, который необходим для нормальной работы lpr. "
+"Это\n"
 "в основном сервер, распределяющий по принтерам задания на печать."
 
 #: ../../services.pm_.c:45
@@ -10631,15 +10639,15 @@ msgstr ""
 "извлекает выгоду из наших продуктов в борьбе с конкурентами, если вы\n"
 "хотите поддержать разработку Mandrake Linux, вступайте в MandrakeClub!"
 
-#: ../../standalone.pm_.c:42
+#: ../../standalone.pm_.c:49
 msgid "Installing packages..."
 msgstr "Устанавливаются пакеты..."
 
-#: ../../standalone/XFdrake_.c:147
+#: ../../standalone/XFdrake_.c:148
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Пожалуйста, выйдите из системы, а затем используйте Ctrl-Alt-BackSpace"
 
-#: ../../standalone/XFdrake_.c:151
+#: ../../standalone/XFdrake_.c:152
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr "Пожалуйста, войдите еще раз в %s, чтобы применить изменения"
@@ -10850,7 +10858,7 @@ msgstr ""
 "\n"
 "Параметры автоматической установки доступны в разделах слева"
 
-#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:480
+#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:508
 #: ../../standalone/scannerdrake_.c:119
 msgid "Congratulations!"
 msgstr "Поздравляем!"
@@ -11643,7 +11651,7 @@ msgid ""
 "List of data to restore:\n"
 "\n"
 msgstr ""
-"Список данных для восстанвления:\n"
+"Список данных для восстановления:\n"
 "\n"
 
 #: ../../standalone/drakbackup_.c:2803
@@ -11791,7 +11799,7 @@ msgstr ""
 
 #: ../../standalone/drakbackup_.c:3492
 msgid "Restore From CD"
-msgstr "Восстановить с комакт-диска"
+msgstr "Восстановить с компакт-диска"
 
 #: ../../standalone/drakbackup_.c:3494
 #, c-format
@@ -12345,7 +12353,7 @@ msgstr ""
 "Проблемы при восстановлении резервных копий:\n"
 "\n"
 "На этапе восстановления Drakbackup проверит все ваши\n"
-"резервные файлы перед их восстановленим.\n"
+"резервные файлы перед их восстановлением.\n"
 "Перед восстановлением Drakbackup удалит вашу оригинальную\n"
 "директорию и вы потеряете все свои данные. Будьте осторожны\n"
 "и не изменяйте резервные файлы вручную.\n"
@@ -12445,7 +12453,7 @@ msgstr ""
 "drakbug версия %s\n"
 "Copyright (C) 2002 MandrakeSoft.\n"
 "Это открытое программное обеспечение и может распространяться дальше\n"
-"на основании условияй GNU GPL.\n"
+"на основании условий GNU GPL.\n"
 "\n"
 "использование: drakbug [ОПЦИИ] [НАЗВАНИЕ_ПРОГРАММЫ]\n"
 "\n"
@@ -12861,7 +12869,7 @@ msgstr "Создать диск"
 #: ../../standalone/drakfloppy_.c:377
 #, c-format
 msgid "Be sure a media is present for the device %s"
-msgstr "Убедитсь, что накопитель находится в устройстве %s"
+msgstr "Убедитесь, что накопитель находится в устройстве %s"
 
 #: ../../standalone/drakfloppy_.c:382
 #, c-format
@@ -13166,32 +13174,37 @@ msgid ""
 "With that feature, other computers on your local network will be able to use "
 "this computer's Internet connection.\n"
 "\n"
+"Make sure you have configured your Network/Internet access using drakconnect "
+"before going any further.\n"
+"\n"
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Вы собираетесь настроить свой компьютер для совместного использования "
-"подключения к Интернету.\n"
-"Благодаря этой возможности, другие компьютеры в вашей локальной сети смогут "
-"использовать подключение этого компьютера к Интернету.\n"
+"Вы собираетесь настроить свой компьютер для совместного использования\n"
+"подключения к Интернету. Благодаря этой возможности, другие компьютеры в\n"
+"вашей локальной сети смогут использовать подключение этого компьютера\n"
+"к Интернету.\n"
 "\n"
-"Запомните: вам потребуется отдельный сетевой адаптер для подключения к "
+"Перед тем, как продолжить, убедитесь, что вы настроили свой доступ к\n"
+"Интернету/локальной сети при помощи drakconnect.\n"
+"Примечание: вам потребуется отдельный сетевой адаптер для подключения к\n"
 "локальной сети (LAN)."
 
-#: ../../standalone/drakgw_.c:211
+#: ../../standalone/drakgw_.c:213
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Интерфейс %s (использующий модуль %s)"
 
-#: ../../standalone/drakgw_.c:212
+#: ../../standalone/drakgw_.c:214
 #, c-format
 msgid "Interface %s"
 msgstr "Интерфейс %s"
 
-#: ../../standalone/drakgw_.c:220
+#: ../../standalone/drakgw_.c:222
 msgid "No network adapter on your system!"
 msgstr "В вашей системе отсутствует сетевой адаптер!"
 
-#: ../../standalone/drakgw_.c:221
+#: ../../standalone/drakgw_.c:223
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -13199,11 +13212,11 @@ msgstr ""
 "В вашей системе был обнаружен сетевой адаптер. Пожалуйста, запустите "
 "сервисную программу настройки оборудования."
 
-#: ../../standalone/drakgw_.c:227
+#: ../../standalone/drakgw_.c:229
 msgid "Network interface"
 msgstr "Сетевой интерфейс"
 
-#: ../../standalone/drakgw_.c:228
+#: ../../standalone/drakgw_.c:230
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -13218,7 +13231,7 @@ msgstr ""
 "\n"
 "Я собираюсь настроить вашу локальную сеть, используя этот адаптер."
 
-#: ../../standalone/drakgw_.c:237
+#: ../../standalone/drakgw_.c:239
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
@@ -13226,11 +13239,11 @@ msgstr ""
 "Пожалуйста, выберите сетевой адаптер, который будет подключен к вашей "
 "локальной сети."
 
-#: ../../standalone/drakgw_.c:255
+#: ../../standalone/drakgw_.c:265
 msgid "Network interface already configured"
 msgstr "Сетевой интерфейс уже настроен"
 
-#: ../../standalone/drakgw_.c:256
+#: ../../standalone/drakgw_.c:266
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -13245,15 +13258,15 @@ msgstr ""
 "\n"
 "Вы можете сделать это вручную, но вы должны знать, что вы делаете."
 
-#: ../../standalone/drakgw_.c:261
+#: ../../standalone/drakgw_.c:271
 msgid "Automatic reconfiguration"
 msgstr "Автоматическая перенастройка"
 
-#: ../../standalone/drakgw_.c:262
+#: ../../standalone/drakgw_.c:272
 msgid "Show current interface configuration"
 msgstr "Показать текущую настройку интерфейса"
 
-#: ../../standalone/drakgw_.c:264
+#: ../../standalone/drakgw_.c:274
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -13270,12 +13283,15 @@ msgstr ""
 "IP-атрибуты: %s\n"
 "Драйвер: %s"
 
-#: ../../standalone/drakgw_.c:276
+#: ../../standalone/drakgw_.c:287
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
-"server; in that case please verify I correctly read the C-Class Network that "
-"you use for your local network; I will not reconfigure it and I will not "
-"touch your DHCP server configuration.\n"
+"server; in that case please verify I correctly read the Network that you use "
+"for your local network; I will not reconfigure it and I will not touch your "
+"DHCP server configuration.\n"
+"\n"
+"The default DNS entry is the Caching Nameserver configured on the firewall. "
+"You can replace that with your ISP DNS IP, for example.\n"
 "\n"
 "Else, I can reconfigure your interface and (re)configure a DHCP server for "
 "you.\n"
@@ -13286,48 +13302,90 @@ msgstr ""
 "прочитал сеть класса С, которую вы используете в своей локальной сети; я не "
 "буду перенастраивать ее и не буду трогать настройки вашего сервера DHCP.\n"
 "\n"
+"Сервером DNS по умолчанию является кэширующий сервер имен, настроенный через "
+"файервол. Вы можете заменить этот сервер IP-адресом DNS вашего провайдера "
+"услуг Интернета, например.\n"
+"\n"
 "Или я могу перенастроить ваш интерфейс и (пере)настроить для вас сервер "
 "DHCP.\n"
 "\n"
 
-#: ../../standalone/drakgw_.c:281
-msgid "C-Class Local Network"
-msgstr "Локальная сеть класса С"
+#: ../../standalone/drakgw_.c:294
+msgid "Local Network adress"
+msgstr "Адрес локальной сети"
 
-#: ../../standalone/drakgw_.c:282
+#: ../../standalone/drakgw_.c:298
+msgid ""
+"DHCP Server Configuration.\n"
+"\n"
+"Here you can select different options for the DHCP server configuration.\n"
+"If you don't know the meaning of an option, simply leave it as it is.\n"
+"\n"
+msgstr ""
+"Настройка сервера DHCP.\n"
+"\n"
+"Здесь вы можете выбрать различные опции для настройки сервера DHCP.\n"
+"Если вы не знаете, что означает та или иная опция, просто оставьте ее\n"
+"как есть.\n"
+
+#: ../../standalone/drakgw_.c:304
 msgid "(This) DHCP Server IP"
 msgstr "IP (этого) сервера DHCP"
 
-#: ../../standalone/drakgw_.c:283
+#: ../../standalone/drakgw_.c:305
+msgid "The DNS Server IP"
+msgstr "IP-адрес сервера DNS"
+
+#: ../../standalone/drakgw_.c:306
+msgid "The internal domain name"
+msgstr "Имя внутреннего домена"
+
+#: ../../standalone/drakgw_.c:307
+msgid "The DHCP start range"
+msgstr "Начальный диапазон DHCP"
+
+#: ../../standalone/drakgw_.c:308
+msgid "The DHCP end range"
+msgstr "Конечный диапазон DHCP"
+
+#: ../../standalone/drakgw_.c:309
+msgid "The default lease (in seconds)"
+msgstr "Владение адресом по умолчанию (в секундах)"
+
+#: ../../standalone/drakgw_.c:310
+msgid "The maximum lease (in seconds)"
+msgstr "Максимальное владение адресом по умолчанию (в секундах)"
+
+#: ../../standalone/drakgw_.c:311
 msgid "Re-configure interface and DHCP server"
 msgstr "Перенастроить интерфейс и сервер DHCP"
 
-#: ../../standalone/drakgw_.c:290
+#: ../../standalone/drakgw_.c:318
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "Локальная сеть не заканчивается на `.0', требуется помощь."
 
-#: ../../standalone/drakgw_.c:301
+#: ../../standalone/drakgw_.c:329
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr ""
 "Обнаружен возможный конфликт адреса локальной сети в текущей конфигурации %"
 "s!\n"
 
-#: ../../standalone/drakgw_.c:311
+#: ../../standalone/drakgw_.c:339
 msgid "Configuring..."
 msgstr "Настройка..."
 
-#: ../../standalone/drakgw_.c:312
+#: ../../standalone/drakgw_.c:340
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr ""
 "Настраиваются скрипты, устанавливаются программы, запускаются серверы..."
 
-#: ../../standalone/drakgw_.c:348
+#: ../../standalone/drakgw_.c:376
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Проблемы при установке пакета %s"
 
-#: ../../standalone/drakgw_.c:481
+#: ../../standalone/drakgw_.c:509
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -13338,23 +13396,23 @@ msgstr ""
 "другими компьютерами вашей локальной сети, используя автоматическую "
 "настройку сети (DHCP)."
 
-#: ../../standalone/drakgw_.c:500
+#: ../../standalone/drakgw_.c:528
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "Настройка уже была выполнена, но сейчас она отключена."
 
-#: ../../standalone/drakgw_.c:501
+#: ../../standalone/drakgw_.c:529
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "Настройка уже была выполнена и сейчас она включена."
 
-#: ../../standalone/drakgw_.c:502
+#: ../../standalone/drakgw_.c:530
 msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Совместное использование подключения к Интернету еще не настривалось."
+msgstr "Совместное использование подключения к Интернету еще не настраивалось."
 
-#: ../../standalone/drakgw_.c:507
+#: ../../standalone/drakgw_.c:535
 msgid "Internet connection sharing configuration"
 msgstr "Настройка совместного использования подключения к Интернету"
 
-#: ../../standalone/drakgw_.c:514
+#: ../../standalone/drakgw_.c:542
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -13692,7 +13750,7 @@ msgstr ""
 "\n"
 "\n"
 "Если у вас есть ТВ-карта, но DrakX не обнаружил ее (нет bttv и в \"/etc/"
-"modules\" нет модуля saa7134) и не установил xawtv, пожалуйста, оправьте "
+"modules\" нет модуля saa7134) и не установил xawtv, пожалуйста, поправьте "
 "результаты выполнения команды \"lspcidrake -v -f\" на \"install"
 "\\@mandrakesoft.com\" с темой \"undetected TV card\".\n"
 "\n"
@@ -14258,7 +14316,7 @@ msgstr "Рабочая станция"
 
 #: ../../share/compssUsers:999
 msgid "Firewall/Router"
-msgstr "Брандмауэер/Маршрутизатор"
+msgstr "Файервол/Маршрутизатор"
 
 #: ../../share/compssUsers:999
 msgid "Domain Name and Network Information Server"
@@ -14456,7 +14514,7 @@ msgstr "Другие графические оболочки"
 
 #: ../../share/compssUsers:999
 msgid "Editors, shells, file tools, terminals"
-msgstr "Редкаторы, командные процессоры, файловые утилиты, терминалы"
+msgstr "Редакторы, командные процессоры, файловые утилиты, терминалы"
 
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finance, such as gnucash"
@@ -14473,3 +14531,9 @@ msgstr "Мультимедиа - Запись CD"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Научная рабочая станция"
+
+#~ msgid "unable to backup lilo message"
+#~ msgstr "невозможно зарезервировать сообщение lilo"
+
+#~ msgid "can't change lilo message"
+#~ msgstr "невозможно изменить сообщение lilo"
