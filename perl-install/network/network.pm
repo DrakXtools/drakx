@@ -167,6 +167,8 @@ sub write_interface_conf {
                 if_($intf->{DEVICE} =~ /^ippp\d+$/, qw(DIAL_ON_IFUP))
                );
     substInFile { s/^DEVICE='(`.*`)'/DEVICE=$1/g } $file; #- remove quotes if DEVICE is the result of a command
+
+    chmod $intf->{WIRELESS_ENC_KEY} ? 0700 : 0755, $file; #- hide WEP key for non-root users
     log::explanations("written $intf->{DEVICE} interface configuration in $file");
 }
 
