@@ -1,3 +1,102 @@
+2002/03/06  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: corrected font stuff
+
+	* standalone/drakautoinst: corrected HASH and ARRAY label
+
+2002/03/06  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: no 3D with Utah GLX (XF 3.3) if more than 800 MB.
+
+	* pkgs.pm: fixed error when using multiple removable media and user
+	aborted installation
+	(for some other error) and hdlists cannot be retrieved.
+	add save of synthesis too when partitions are reformated, so that urpmi
+	is happy after.
+	fixed when hdlist gives no new package (new name) but only obsoleted
+	package or
+	updated package, ie security updates may appreciate.
+
+	* install_any.pm: update for newer pkgs module (fix for abort during
+	installation).
+
+	* rescue/tree/etc/oem: allow oem script to be executable from standard cd
+	set (powerpack or other).
+
+2002/03/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ja.po: updated po file
+	updated pot file
+
+	* share/po/fr.po, share/po/cy.po, share/po/id.po, share/po/zh_TW.po:
+	updated pot file
+	updated some po files
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/nl.po, share/po/wa.po,
+	share/po/sv.po, share/po/is.po, share/po/hu.po, share/po/it.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po, share/po/th.po,
+	share/po/el.po, share/po/sk.po, share/po/lt.po, share/po/ar.po,
+	share/po/sl.po, share/po/vi.po, share/po/br.po, share/po/ca.po,
+	share/po/gl.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/ro.po, share/po/bs.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+2002/03/06  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm: add @preferred libxpm4
+
+	* lang.pm: fix typo in %xim (for chineese)
+	  - create the kde share/config's directory, so that kde config files
+	are created in any case
+	  - in user_only localedrake, ensure the /etc/sysconfig/i18n is taken
+	into account when ~/.i18n doesn't exist (thanks to F.Crozat)
+
+	* install_any.pm: ensure the fstab is kept on upgrade
+	(g_auto_install): use "interactiveSteps" field instead of pushing in
+	@install_steps_auto_install::graphical_steps
+
+	* standalone/localedrake: when called by kcontrol with --apply, don't
+	modify kde config files, kcontrol takes care of it more nicely
+
+	* diskdrake/interactive.pm: translate the actions
+	choose to activate crypto. type password. unselect encryption. Select
+	encryption again, you were not asked for password. Fixed
+	use formatError
+
+	* bootloader.pm (add_append): don't add to entries of type 'other'
+
+	* devices.pm (find_free_loop): fix
+
+	* install_steps_interactive.pm, install_steps.pm: ensure the fstab is kept
+	on upgrade
+
+	* fsedit.pm: do not allow encrypted /var
+
+2002/03/06  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* standalone/drakxtv: print an error message if xawtv isn't installed
+	fix conflict between i18n and complete signal handler (ie return key
+	and not value)
+
+2002/03/06  warly
+
+	* share/rpmsrate: remove abiword
+
+2002/03/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pcmcia_/probe.c: an old sucking PCI card needs oldskool
+	i82365 :-((, ugly patch
+
+2002/03/05  warly
+
+	* share/rpmsrate: add Fred Bastok modif
+	remove too many duplicate in i18n packages that are now automatically
+	added
+
 2002/03/05  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
 
 	* modules.pm: Add USB2 controller
