@@ -1,4 +1,3 @@
-# translation of DrakX-sl.po to 
 # translation of DrakX-sl.po to Slovenščina
 # Copyright (C) 2004, 2005 Free Software Foundation, Inc.
 # Matjaž Kaše <matjaz.kase@g-kabel.si>, 2004.
@@ -9,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-sl\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-02-28 13:38+0100\n"
+"PO-Revision-Date: 2005-03-08 15:38+0100\n"
 "Last-Translator: Gregor Pirnaver <gregor.pirnaver@sdm-si.org>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -11490,24 +11489,24 @@ msgid ", USB printer"
 msgstr ", USB tiskalnik"
 
 #: printer/main.pm:364
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on a parallel port"
-msgstr "Tiskalnik na vzporednih vratih #%s"
+msgstr ", tiskalnik HP na vzporednih vratih"
 
 #: printer/main.pm:366
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on USB"
-msgstr ", USB tiskalnik"
+msgstr ", tiskalnik HP na USB-ju"
 
 #: printer/main.pm:368
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on HP JetDirect"
-msgstr ", HP JetDirect večnamenska naprava"
+msgstr ", tiskalnik HP na HP JetDirect-u"
 
 #: printer/main.pm:370
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer"
-msgstr ", USB tiskalnik"
+msgstr ", tiskalnik HP"
 
 #: printer/main.pm:376
 #, c-format
@@ -11581,24 +11580,24 @@ msgid "USB printer"
 msgstr "USB tiskalnik"
 
 #: printer/main.pm:432
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on a parallel port"
-msgstr "Tiskalnik na vzporednih vratih #%s"
+msgstr "Tiskalnik HP na vzporednih vratih"
 
 #: printer/main.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on USB"
-msgstr "Ne najdem nobenega tiskalnika!"
+msgstr "Tiskalnik HP na USB-ju"
 
 #: printer/main.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on HP JetDirect"
-msgstr ", HP JetDirect večnamenska naprava"
+msgstr "Tiskalnik HP na HP JetDirect-u"
 
 #: printer/main.pm:438
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer"
-msgstr "Tiskalnik"
+msgstr "Tiskalnik HP"
 
 #: printer/main.pm:444
 #, c-format
@@ -12096,12 +12095,14 @@ msgstr ""
 #: printer/printerdrake.pm:623
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
+msgstr "Sprememba časovne omejitve za samo-zaznavo omrežnih tiskalnikov"
 
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
 msgstr ""
+"Sem vnesite časovno omejitev (v milisekundah) za samodejno zaznavo omrežnih "
+"tiskalnikov."
 
 #: printer/printerdrake.pm:631
 #, c-format
@@ -12110,11 +12111,14 @@ msgid ""
 "network printers will be, but the scan can take longer then, especially if "
 "there are many machines with local firewalls in the network. "
 msgstr ""
+"Daljša kot je časovna omejitev, zanesljivejše bo zaznavanje omrežnih "
+"tiskalnikov. Lahko pa iskanje traja dlje, še posebej, če je v omrežju veliko "
+"računalnikov s krajevnim požarnim zidom."
 
 #: printer/printerdrake.pm:635
-#, fuzzy, c-format
+#, c-format
 msgid "The timeout must be a positive integer number!"
-msgstr "Možnost %s mora biti številka!"
+msgstr "Časovna omejitev mora biti pozitivno, celo število!"
 
 #: printer/printerdrake.pm:673
 #, c-format
@@ -13055,6 +13059,10 @@ msgid ""
 "inkjets, scanning on multi-function devices, and memory card access on "
 "printers with card readers. "
 msgstr ""
+"Na mnogih tiskalnikih HP so na voljo posebne funkcije: vzdrževanje "
+"(preverjanje količine črnila, čiščenje šob, poravnava glave, ...) na vseh "
+"novejših brizgalnikih, skeniranje na večfunkcijskih napravah in dostop do "
+"spominske kartice na napravah z čitalnikom zanje. "
 
 #: printer/printerdrake.pm:2106
 #, c-format
@@ -13062,6 +13070,8 @@ msgid ""
 "To access these extra functions on your HP printer, it must be set up with "
 "the appropriate software: "
 msgstr ""
+"Za dostop do teh posebnih funkcij na tiskalnikih HP je potrebno nastavljanje "
+"z ustreznimi programi: "
 
 #: printer/printerdrake.pm:2107
 #, c-format
@@ -13070,6 +13080,8 @@ msgid ""
 "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
 "newer PhotoSmart models "
 msgstr ""
+"Z novejšim HPLIP, ki omogoča vzdrževanje tiskalnika z uporabo zbirke "
+"grafičnih orodij in tiskanje do roba papirja na novejših modelih PhotoSmart "
 
 #: printer/printerdrake.pm:2108
 #, c-format
@@ -13077,25 +13089,27 @@ msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
 msgstr ""
+"ali s starejšim HPOJ, ki omogoča le dostop do skenerja in spominskih kartic, "
+"a lahko pomaga v primeru nedelovanja HPLIP-a. "
 
 #: printer/printerdrake.pm:2110
 #, c-format
 msgid "What is your choice (choose \"None\" for non-HP printers)? "
-msgstr ""
+msgstr "Kakšna je vaša izbira? Za tiskalnike, ki niso HP izberite »Brez«. "
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2112
 #: printer/printerdrake.pm:2138 printer/printerdrake.pm:2144
 #: printer/printerdrake.pm:2170
 #, c-format
 msgid "HPLIP"
-msgstr ""
+msgstr "HPLIP"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2114
 #: printer/printerdrake.pm:2270 printer/printerdrake.pm:2276
 #: printer/printerdrake.pm:2287
 #, c-format
 msgid "HPOJ"
-msgstr ""
+msgstr "HPOJ"
 
 #: printer/printerdrake.pm:2119
 #, c-format
@@ -13121,12 +13135,12 @@ msgstr "Na %s bo mogoče samo tiskanje."
 #: printer/printerdrake.pm:2160
 #, c-format
 msgid "Could not remove your old HPOJ configuration file %s for your %s! "
-msgstr ""
+msgstr "Ni moč odstraniti stare datoteke %s z nastavitvami za HPOJ za %s! "
 
 #: printer/printerdrake.pm:2162
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "Prosim, ročno odstranite datoteko in ponovno zaženite HPOJ."
 
 #: printer/printerdrake.pm:2170 printer/printerdrake.pm:2287
 #, c-format
@@ -13134,9 +13148,9 @@ msgid "Checking device and configuring %s..."
 msgstr "Preizkušanje naprave in nastavljanje %s..."
 
 #: printer/printerdrake.pm:2189
-#, fuzzy, c-format
+#, c-format
 msgid "Which printer do you want to set up with HPLIP?"
-msgstr "Kateri protokol želite uporabljati?"
+msgstr "Kateri tiskalnik želite nastaviti s HPLIP?"
 
 #: printer/printerdrake.pm:2218 printer/printerdrake.pm:2331
 #, c-format
@@ -13151,7 +13165,7 @@ msgstr "Optično čitanje na %s ne bo mogoče."
 #: printer/printerdrake.pm:2246
 #, c-format
 msgid "Using and Maintaining your %s"
-msgstr ""
+msgstr "Uporaba in vzdrževanje tiskalnika %s"
 
 #: printer/printerdrake.pm:2371
 #, c-format
@@ -13174,9 +13188,9 @@ msgid "Photo memory card access on your HP multi-function device"
 msgstr "Dostop do spominske kartice fotoaparata na vaši večnamenski napravi HP"
 
 #: printer/printerdrake.pm:2421
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring device..."
-msgstr "Prikrojevanje..."
+msgstr "Nastavljanje naprave ..."
 
 #: printer/printerdrake.pm:2455
 #, c-format
@@ -13783,7 +13797,7 @@ msgstr ""
 #: printer/printerdrake.pm:3793
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
-msgstr "Tiskanje/Optično čitanje/Foto kartice na \"%s\""
+msgstr "Tiskanje/optično čitanje/foto kartice na »%s«"
 
 #: printer/printerdrake.pm:3794
 #, c-format
@@ -13796,9 +13810,9 @@ msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Tiskanje/Foto kartice na \"%s\""
 
 #: printer/printerdrake.pm:3798
-#, fuzzy, c-format
+#, c-format
 msgid "Using/Maintaining the printer \"%s\""
-msgstr "Tiskanje na tiskalniku \"%s\""
+msgstr "Uporaba/nastavljanje tiskalnika »%s«"
 
 #: printer/printerdrake.pm:3799
 #, c-format
@@ -13817,6 +13831,9 @@ msgid ""
 "features of your printer are supported.\n"
 "\n"
 msgstr ""
+"Vaš %s je nastavljen z HP-jevo HPLIP programsko opremo. Na ta način so "
+"podprte mnoge posebne funkcije vašega tiskalnika.\n"
+"\n"
 
 #: printer/printerdrake.pm:3830
 #, c-format
@@ -13824,6 +13841,8 @@ msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
 msgstr ""
+"Optični čitalnik lahko uporabljate z običajno programsko opremo SANE. Na "
+"primer s Kooka ali XSane. Oba sta v meniju Večpredstavnost > Grafika. "
 
 #: printer/printerdrake.pm:3831
 #, c-format
@@ -13832,6 +13851,9 @@ msgid ""
 "your scanner on the network.\n"
 "\n"
 msgstr ""
+"Za deljenje optičnega čitalca na omrežju požanite Scannerdrake (Nadzorno "
+"središče Mandrakelinux > Strojna oprema > Nastavite optični čitalec).\n"
+"\n"
 
 #: printer/printerdrake.pm:3835
 #, c-format
@@ -13839,6 +13861,8 @@ msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
 msgstr ""
+"Do čitalnika spominskih kartic na vašem tiskalniku lahko dostopate kot do "
+"katerekoli druge naprave USB za shranjevanje podatkov. "
 
 #: printer/printerdrake.pm:3836
 #, c-format
@@ -13847,6 +13871,9 @@ msgid ""
 "your desktop.\n"
 "\n"
 msgstr ""
+"Ko vstavite kartico bi se morala na namizju pojaviti ustrezna ikona za "
+"dostop do kartice.\n"
+"\n"
 
 #: printer/printerdrake.pm:3838
 #, c-format
@@ -13855,6 +13882,9 @@ msgid ""
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
 msgstr ""
+"Čitalnik spominskih kartic na vašem tiskalniku je dosegljiv z uporabo orodij "
+"za tiskalnike HP (meni: Sistem > Nadzorovanje > HP Printer Toolbox). "
+"Uporabite gumb »Access Photo Cards...« na zavihku »Functions«."
 
 #: printer/printerdrake.pm:3839
 #, c-format
@@ -13863,6 +13893,9 @@ msgid ""
 "card reader is usually faster.\n"
 "\n"
 msgstr ""
+"Pomnite, da je to počasno. Branje slik s fotoaparata oziroma z čitalnikom "
+"kartic za USB je običajno hitrejše.\n"
+"\n"
 
 #: printer/printerdrake.pm:3842
 #, c-format
@@ -13871,26 +13904,28 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
+"Orodja za tiskalnike HP (meni: Sistem > Nadzorovanje > HP Printer Toolbox) "
+"ponujajo veliko možnosti za nadzor in vzdrževanje vašega %s:\n"
 
 #: printer/printerdrake.pm:3843
 #, c-format
 msgid " - Ink level/status info\n"
-msgstr ""
+msgstr " - količina črnila/stanje\n"
 
 #: printer/printerdrake.pm:3844
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr ""
+msgstr " - čiščenje šob\n"
 
 #: printer/printerdrake.pm:3845
 #, c-format
 msgid " - Print head alignment\n"
-msgstr ""
+msgstr " - poravnavo glave za tiskanje\n"
 
 #: printer/printerdrake.pm:3846
-#, fuzzy, c-format
+#, c-format
 msgid " - Color calibration\n"
-msgstr "Nastavitev barv"
+msgstr " - nastavitev barv\n"
 
 #: printer/printerdrake.pm:3861
 #, c-format
@@ -22422,12 +22457,12 @@ msgstr "Dobrodošli v Orodju za nastavitve UPS"
 #: standalone/drakvpn:73
 #, c-format
 msgid "DrakVPN"
-msgstr ""
+msgstr "DrakVPN"
 
 #: standalone/drakvpn:95
-#, fuzzy, c-format
+#, c-format
 msgid "The VPN connection is enabled."
-msgstr "Izberite strežnik"
+msgstr "VPN povezava je omogočena."
 
 #: standalone/drakvpn:96
 #, c-format
@@ -22438,21 +22473,26 @@ msgid ""
 "\n"
 "What would you like to do?"
 msgstr ""
+"Nastavitev VPN povezave ste že naredili.\n"
+"\n"
+"Povezava je omogočena.\n"
+"\n"
+"Kaj bi radi storili?"
 
 #: standalone/drakvpn:105
-#, fuzzy, c-format
+#, c-format
 msgid "Disabling VPN..."
-msgstr "Nameščanje paketa %s"
+msgstr "Onemogočam VPN..."
 
 #: standalone/drakvpn:114
-#, fuzzy, c-format
+#, c-format
 msgid "The VPN connection is now disabled."
-msgstr "Izberite strežnik"
+msgstr "VPN povezava je onemogočena."
 
 #: standalone/drakvpn:121
 #, c-format
 msgid "VPN connection currently disabled"
-msgstr ""
+msgstr "VPN povezava je onemogočena"
 
 #: standalone/drakvpn:122
 #, c-format
@@ -22463,21 +22503,26 @@ msgid ""
 "\n"
 "What would you like to do?"
 msgstr ""
+"Nastavitev VPN povezave ste že naredili.\n"
+"\n"
+"Povezava je onemogočena.\n"
+"\n"
+"Kaj bi radi storili?"
 
 #: standalone/drakvpn:135
-#, fuzzy, c-format
+#, c-format
 msgid "Enabling VPN..."
-msgstr "Nameščanje paketa %s"
+msgstr "Omogočam VPN..."
 
 #: standalone/drakvpn:141
-#, fuzzy, c-format
+#, c-format
 msgid "The VPN connection is now enabled."
-msgstr "Izberite strežnik"
+msgstr "VPN povezava je omogočena."
 
 #: standalone/drakvpn:155 standalone/drakvpn:183
 #, c-format
 msgid "Simple VPN setup."
-msgstr ""
+msgstr "Enostavna nastavitev VPN."
 
 #: standalone/drakvpn:156
 #, c-format
@@ -22494,6 +22539,18 @@ msgid ""
 "Make sure you have configured your Network/Internet access using\n"
 "drakconnect before going any further."
 msgstr ""
+"Nastavili boste računalnik za uporabo VPN povezave.\n"
+"\n"
+"S to možnostjo bodo računalniki na vašem zasebnem omrežju in\n"
+"na nekaterih drugih oddaljenih zasebnih omrežjih varno delili svoja "
+"sredstva\n"
+"preko požarnih zidov in interneta .\n"
+"\n"
+"Komunikacija preko spleta je zakodirana. Lokalni in oddaljeni računalniki\n"
+"izgledajo kot da bi bili v istem omrežju.\n"
+"\n"
+"Preden nadljujete se prepričajte, da ste vaš dostop do Omrežja/Spleta\n"
+"nastavili z drackconnect orodjem."
 
 #: standalone/drakvpn:184
 #, c-format
@@ -22510,11 +22567,22 @@ msgid ""
 "Please read AT LEAST the ipsec-howto docs\n"
 "before going any further."
 msgstr ""
+"VPN povezava.\n"
+"\n"
+"Ta program temelji na sledečih projektih:\n"
+" - FreeSwan: \t\t\thttp://www.freeswan.org/\n"
+" - Super-FreeSwan: \t\thttp://www.freeswan.ca/\n"
+" - ipsec-tools: \t\t\thttp://ipsec-tools.sourceforge.net\n"
+" - ipsec-howto: \t\thttp://www.ipsec-howto.org\n"
+" - dokumenti in man strani priloženi paketu %s package\n"
+"\n"
+"Preden nadaljujete, preberite prosim vsaj ipsec-howto\n"
+"dokumentacijo."
 
 #: standalone/drakvpn:196
-#, fuzzy, c-format
+#, c-format
 msgid "Kernel module."
-msgstr "Odstrani modul"
+msgstr "Modul jedra"
 
 #: standalone/drakvpn:197
 #, c-format
@@ -22525,21 +22593,26 @@ msgid ""
 "\n"
 "This kernel has '%s' support."
 msgstr ""
+"Jedro mora podpirati ipsec.\n"
+"\n"
+"Vaš sistem teče na %s kernel version.\n"
+"\n"
+"To jedro podpira '%s'."
 
 #: standalone/drakvpn:292
-#, fuzzy, c-format
+#, c-format
 msgid "Security Policies"
-msgstr "Privzeto"
+msgstr "Varnostni pravilniki"
 
 #: standalone/drakvpn:292
 #, c-format
 msgid "IKE daemon racoon"
-msgstr ""
+msgstr "IKE demon rakun"
 
 #: standalone/drakvpn:295 standalone/drakvpn:306
-#, fuzzy, c-format
+#, c-format
 msgid "Configuration file"
-msgstr "Nastavitev zaslona"
+msgstr "Nastavitvena datoteka"
 
 #: standalone/drakvpn:296
 #, c-format
@@ -22552,6 +22625,11 @@ msgid ""
 "\n"
 "What would you like to configure?\n"
 msgstr ""
+"Stopnja nastavitve!\n"
+"Najprej morate določiti Varnostni pravilnik, nato ustvarite demona\n"
+"za avtomatsko izmenjavo ključev (IKE). KAME IKE demon,\n"
+"ki ga uporabljamo, se imenuje 'rakun'.~n\n"
+"Kaj boste nastavljali?\n"
 
 #: standalone/drakvpn:307
 #, c-format
@@ -22561,11 +22639,15 @@ msgid ""
 "\n"
 "Simply click on Next.\n"
 msgstr ""
+"Nstavljali bomo %s datoteko.\n"
+"\n"
+"\n"
+"Pritisni Naprej.\n"
 
 #: standalone/drakvpn:325 standalone/drakvpn:685
-#, fuzzy, c-format
+#, c-format
 msgid "%s entries"
-msgstr ", %s sektorjev"
+msgstr "%s vnosi"
 
 #: standalone/drakvpn:326
 #, c-format
@@ -22580,26 +22662,39 @@ msgid ""
 "\n"
 "What would you like to do?\n"
 msgstr ""
+"Vsebina %s  datoteke\n"
+"je razbita na razdelke.\n"
+"\n"
+"Lahko:\n"
+"\n"
+"  - prikažete, dodajate, edit, or remove sections, then\n"
+"  - commit the changes\n"
+"\n"
+"What would you like to do?\n"
 
 #: standalone/drakvpn:333 standalone/drakvpn:694
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_:display here is a verb\n"
 "Display"
-msgstr "dnevno"
+msgstr ""
+"_:prikaži tu je glagol\n"
+"Prikazovalnik"
 
 #: standalone/drakvpn:333 standalone/drakvpn:694
 #, c-format
 msgid "Commit"
-msgstr "Udejani"
+msgstr "Izvedi"
 
 #: standalone/drakvpn:347 standalone/drakvpn:351 standalone/drakvpn:709
 #: standalone/drakvpn:713
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_:display here is a verb\n"
 "Display configuration"
-msgstr "Nastavitev zaslona"
+msgstr ""
+"_:prikaži tu je glagol\n"
+"Prikaži nastavitve"
 
 #: standalone/drakvpn:352
 #, c-format
@@ -22610,11 +22705,16 @@ msgid ""
 "\n"
 "You'll have to go back and choose 'add'.\n"
 msgstr ""
+"Ta %s datoteka ne obstaja.\n"
+"\n"
+"To mora biti nova configuracija.\n"
+"\n"
+"Morali boste nazaj in izbrati 'dodaj'.\n"
 
 #: standalone/drakvpn:368
 #, c-format
 msgid "ipsec.conf entries"
-msgstr ""
+msgstr "vnosi ipsec.conf"
 
 #: standalone/drakvpn:369
 #, c-format
@@ -22630,26 +22730,36 @@ msgid ""
 "\n"
 "Choose the section you would like to add.\n"
 msgstr ""
+"ta %s datoteka vsebuje different sections.\n"
+"\n"
+"Here is its skeleton:\t'config setup' \n"
+"\t\t\t\t\t'conn default' \n"
+"\t\t\t\t\t'normal1'\n"
+"\t\t\t\t\t'normal2' \n"
+"\n"
+"You can now add one of these sections.\n"
+"\n"
+"Choose the section you would like to add.\n"
 
 #: standalone/drakvpn:376
-#, fuzzy, c-format
+#, c-format
 msgid "config setup"
-msgstr "Nastavitev X"
+msgstr "nastavitev postavitve"
 
 #: standalone/drakvpn:376
-#, fuzzy, c-format
+#, c-format
 msgid "conn %default"
-msgstr "privzeto"
+msgstr "konzola %default"
 
 #: standalone/drakvpn:376
-#, fuzzy, c-format
+#, c-format
 msgid "normal conn"
-msgstr "Običajni DAC"
+msgstr "Običajna konzola"
 
 #: standalone/drakvpn:382 standalone/drakvpn:423 standalone/drakvpn:510
-#, fuzzy, c-format
+#, c-format
 msgid "Exists!"
-msgstr "Ext2"
+msgstr "Obstaja!"
 
 #: standalone/drakvpn:383 standalone/drakvpn:424
 #, c-format
@@ -22660,6 +22770,11 @@ msgid ""
 "You'll have to go back and add another section\n"
 "or change its name.\n"
 msgstr ""
+"Razdelek s tem imenom že obstaja.\n"
+"Imena razdelkov morajo biti enkratna.\n"
+"\n"
+"Vrni se nazaj in dodaj drug razdelek\n"
+"ali pa spremeni njegovo ime.\n"
 
 #: standalone/drakvpn:400
 #, c-format
@@ -22672,36 +22787,41 @@ msgid ""
 "\n"
 "Choose continue or previous when you are done.\n"
 msgstr ""
+"Ta razdelek mora biti na vrhu tvoje\n"
+"%s datoteke.\n"
+"Prepričaj se, da ostali razdelki sledijo\n"
+"configuraciji nastavitvenega razdelka.\n"
+"Za nadaljevanje izberi naprej ali prejšnji.\n"
 
 #: standalone/drakvpn:405
-#, fuzzy, c-format
+#, c-format
 msgid "interfaces"
-msgstr "Nastavitev zaslona"
+msgstr "vmesniki"
 
 #: standalone/drakvpn:406
 #, c-format
 msgid "klipsdebug"
-msgstr ""
+msgstr "klips razhroščevalnik"
 
 #: standalone/drakvpn:407
 #, c-format
 msgid "plutodebug"
-msgstr ""
+msgstr "pluto razhroščevalnik"
 
 #: standalone/drakvpn:408
 #, c-format
 msgid "plutoload"
-msgstr ""
+msgstr "pluto nalagalnik"
 
 #: standalone/drakvpn:409
 #, c-format
 msgid "plutostart"
-msgstr ""
+msgstr "pluto zagon"
 
 #: standalone/drakvpn:410
 #, c-format
 msgid "uniqueids"
-msgstr ""
+msgstr "uniqueids"
 
 #: standalone/drakvpn:444
 #, c-format
@@ -22715,26 +22835,34 @@ msgid ""
 "them here, globally, you can define them in each\n"
 "section.\n"
 msgstr ""
+"To je prvi razdelek za konfiguracijo\n"
+"nastavitvenga razdelka.\n"
+"\n"
+"Tu boš določil prizete nastavitve. \n"
+"Vsi ostali razdelki se bodo ravnali po njem.\n"
+"Leve nastvitve so opcijske. Če jih ne določiš tu\n"
+"globalno, se lahko določajo v vsakem razdelku\n"
+"posebej.\n"
 
 #: standalone/drakvpn:451
-#, fuzzy, c-format
+#, c-format
 msgid "PFS"
-msgstr "HFS"
+msgstr "PFS"
 
 #: standalone/drakvpn:452
 #, c-format
 msgid "keyingtries"
-msgstr ""
+msgstr "keyingtries"
 
 #: standalone/drakvpn:453
 #, c-format
 msgid "compress"
-msgstr ""
+msgstr "skrči"
 
 #: standalone/drakvpn:454
 #, c-format
 msgid "disablearrivalcheck"
-msgstr ""
+msgstr "disablearrivalcheck"
 
 #: standalone/drakvpn:455 standalone/drakvpn:494
 #, c-format
@@ -22744,22 +22872,22 @@ msgstr "levo"
 #: standalone/drakvpn:456 standalone/drakvpn:495
 #, c-format
 msgid "leftcert"
-msgstr ""
+msgstr "leftcert"
 
 #: standalone/drakvpn:457 standalone/drakvpn:496
 #, c-format
 msgid "leftrsasigkey"
-msgstr ""
+msgstr "leftrsasigkey"
 
 #: standalone/drakvpn:458 standalone/drakvpn:497
 #, c-format
 msgid "leftsubnet"
-msgstr ""
+msgstr "leftsubnet"
 
 #: standalone/drakvpn:459 standalone/drakvpn:498
 #, c-format
 msgid "leftnexthop"
-msgstr ""
+msgstr "leftnexthop"
 
 #: standalone/drakvpn:488
 #, c-format
@@ -22769,16 +22897,20 @@ msgid ""
 "You can now add a new section.\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"Tvoja %s datoteka ima več razdelkov ali povezav.\n"
+"\n"
+"Sedaj lahko dodaš nov razdelek.\n"
+"Izberi nadaljuj, ko si zaključil zapisovanje podatkov.\n"
 
 #: standalone/drakvpn:491
-#, fuzzy, c-format
+#, c-format
 msgid "section name"
-msgstr "Nastavitev zaslona"
+msgstr "ime razdelka"
 
 #: standalone/drakvpn:492
-#, fuzzy, c-format
+#, c-format
 msgid "authby"
-msgstr "Pot"
+msgstr "authby"
 
 #: standalone/drakvpn:493
 #, c-format
@@ -22788,27 +22920,27 @@ msgstr "samodejno"
 #: standalone/drakvpn:499
 #, c-format
 msgid "right"
-msgstr "desno"
+msgstr "pravica"
 
 #: standalone/drakvpn:500
-#, fuzzy, c-format
+#, c-format
 msgid "rightcert"
-msgstr "visoka"
+msgstr "certifikat s pravicami"
 
 #: standalone/drakvpn:501
 #, c-format
 msgid "rightrsasigkey"
-msgstr ""
+msgstr "rightrsasigkey"
 
 #: standalone/drakvpn:502
 #, c-format
 msgid "rightsubnet"
-msgstr ""
+msgstr "rightsubnet"
 
 #: standalone/drakvpn:503
 #, c-format
 msgid "rightnexthop"
-msgstr ""
+msgstr "rightnexthop"
 
 #: standalone/drakvpn:511
 #, c-format
@@ -22819,6 +22951,11 @@ msgid ""
 "You'll have to go back and add another section\n"
 "or change the name of the section.\n"
 msgstr ""
+"Razdelek s tem imenom že obstaja.\n"
+"Imena razdelkov morajo biti enkratna.\n"
+"\n"
+"Pojdi nazaj in dodaj drug razdelek\n"
+"ali pa spremeni ime tega razdelka.\n"
 
 #: standalone/drakvpn:543
 #, c-format
@@ -22829,11 +22966,16 @@ msgid ""
 "\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
+"Dodaj varnostni pravilnik.\n"
+"\n"
+"Sedaj lahko dodaš varnostni pravilnik.\n"
+"\n"
+"Izberi nadaljevanje, ko končas z zapisovanjem podatkov.\n"
 
 #: standalone/drakvpn:576 standalone/drakvpn:826
-#, fuzzy, c-format
+#, c-format
 msgid "Edit section"
-msgstr "Izberite strežnik"
+msgstr "Urejaj razdelek"
 
 #: standalone/drakvpn:577
 #, c-format
@@ -22843,17 +22985,21 @@ msgid ""
 "You can choose here below the one you want to edit \n"
 "and then click on next.\n"
 msgstr ""
+"Tvoja %s datoteka ima več razdelkov ali povezav.\n"
+"\n"
+"Spodaj lahko izbereš tisto, ki jo boš urejal\n"
+"nato klikni na nadaljevanje.\n"
 
 #: standalone/drakvpn:580 standalone/drakvpn:660 standalone/drakvpn:831
 #: standalone/drakvpn:877
-#, fuzzy, c-format
+#, c-format
 msgid "Section names"
-msgstr "Nastavitev zaslona"
+msgstr "Imena razdelkov"
 
 #: standalone/drakvpn:590
-#, fuzzy, c-format
+#, c-format
 msgid "Can not edit!"
-msgstr "Napaka pri odpiranju %s za pisanje: %s"
+msgstr "Ne morete urejati!"
 
 #: standalone/drakvpn:591
 #, c-format
@@ -22865,6 +23011,12 @@ msgid ""
 "of the %s file, and eventually, disable or\n"
 "enable the opportunistic encryption.\n"
 msgstr ""
+"Tega razdelka ne moraš urejati.\n"
+"\n"
+"Ta razdelek je obvezen za Freeswan 2.X.\n"
+"Treba je specificirati verzijo 2.0 na začetku\n"
+"%s datoteke in končno, omogočiti ali\n"
+"onemogočiti preračunljivo šifriranje.\n"
 
 #: standalone/drakvpn:600
 #, c-format
@@ -22905,9 +23057,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:656 standalone/drakvpn:873
-#, fuzzy, c-format
+#, c-format
 msgid "Remove section"
-msgstr "Odstrani vnos"
+msgstr "Odstrani razdelek"
 
 #: standalone/drakvpn:657 standalone/drakvpn:874
 #, c-format
@@ -22971,9 +23123,9 @@ msgid "remote"
 msgstr "oddaljen"
 
 #: standalone/drakvpn:735
-#, fuzzy, c-format
+#, c-format
 msgid "sainfo"
-msgstr "Informacije"
+msgstr "sainfo"
 
 #: standalone/drakvpn:743
 #, c-format
@@ -22986,9 +23138,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:746
-#, fuzzy, c-format
+#, c-format
 msgid "path type"
-msgstr "Spremeni tip razdelka"
+msgstr "vrsta poti"
 
 #: standalone/drakvpn:750
 #, c-format
@@ -23015,9 +23167,9 @@ msgid ""
 msgstr ""
 
 #: standalone/drakvpn:770 standalone/drakvpn:863
-#, fuzzy, c-format
+#, c-format
 msgid "real file"
-msgstr "Izberite datoteko"
+msgstr "prava datoteka"
 
 #: standalone/drakvpn:793
 #, c-format
@@ -23184,7 +23336,7 @@ msgstr ""
 #: standalone/drakvpn:974
 #, c-format
 msgid "Sainfo destination protocol"
-msgstr ""
+msgstr "Sainfo protokol cilja"
 
 #: standalone/drakvpn:975
 #, c-format
@@ -23205,11 +23357,26 @@ msgid ""
 "sainfo address 203.178.141.209 any address 203.178.141.218 any\n"
 "\tthe last 'any' allows any protocol for the destination"
 msgstr ""
+"sainfo (source_id destination_id | anonymous) { statements }\n"
+"določa parametre IKE faze 2\n"
+"(IPsec-SA establishment).\n"
+"\n"
+"source_id and destination_id so sestavljeni kot:\n"
+"\n"
+"\taddress address [/ prefix] [[port]] ul_proto\n"
+"\n"
+"Primeri: \n"
+"\n"
+"sainfo anonymous (sprejema povezave od kjerkoli)\n"
+"\tpusti prazno, če želiš anonymous\n"
+"\n"
+"sainfo naslov 203.178.141.209 vsak naslov 203.178.141.218 \n"
+"\tzadnji 'any' omogoča kakršenkoli protocol za cilj"
 
 #: standalone/drakvpn:989
 #, c-format
 msgid "PFS group"
-msgstr ""
+msgstr "PFS skupina"
 
 #: standalone/drakvpn:991
 #, c-format
@@ -23220,11 +23387,16 @@ msgid ""
 "group is one of the following: modp768, modp1024, modp1536.\n"
 "Or you can define 1, 2, or 5 as the DH group number."
 msgstr ""
+"Določi skupino Diffie-Hellmanove exponentiations.\n"
+"To navodilo lahko opustiš, če ne potrebuješ PFS.\n"
+"Če ne navedeš nič, bo sprejet vsak predlog.\n"
+"skupine so lahko: modp768, modp1024, modp1536.\n"
+"Ali pa določiš 1, 2 ali 5 kot DH številko skupine."
 
 #: standalone/drakvpn:996
 #, c-format
 msgid "Lifetime number"
-msgstr ""
+msgstr "številka časa trajanja"
 
 #: standalone/drakvpn:997
 #, c-format
@@ -23246,11 +23418,26 @@ msgid ""
 "\n"
 "So, here, the lifetime numbers are 1, 1, 30, 30, 60 and 12.\n"
 msgstr ""
+"določi čas trajanja v , ki bo predlagan v fazi 1\n"
+"povezovanja. Vsak predlog bo sprejet, vendar last-\n"
+"nosti ne bodo predložene enakovrednim napravam,\n"
+"če jih ne boste navedli. Lahko se jih navaja posebej v\n"
+"vsakem predlogu.\n"
+"\n"
+"Primeri: \n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 60 sec;\n"
+"\tlifetime time 12 hour;\n"
+"\n"
+"Torej številke trajanja so:  1, 1, 30, 30, 60 and 12.\n"
 
 #: standalone/drakvpn:1013
 #, c-format
 msgid "Lifetime unit"
-msgstr ""
+msgstr "Enota trajanja"
 
 #: standalone/drakvpn:1015
 #, c-format
@@ -23273,31 +23460,47 @@ msgid ""
 "So, here, the lifetime units are 'min', 'min', 'sec', 'sec', 'sec' and "
 "'hour'.\n"
 msgstr ""
+"določi čas trajanja, ki bo predlagan\n"
+"za fazo 1 povezovanja. Vsak predlog bo sprejet,\n"
+"vendar lastnosti ne bodo predložene enakovrenim napravam,\n"
+"če jih ne boš navedel. Lahko se jih nevede posebej\n"
+"v vsakem predlogu.\n"
+"\n"
+"Primeri: \n"
+"\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 1 min;    # sec,min,hour\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 30 sec;\n"
+"        lifetime time 60 sec;\n"
+"\tlifetime time 12 hour;\n"
+"\n"
+"Torej enote trajanaja so:  'min', 'min', 'sec', 'sec', 'sec' and 'hour'.\n"
 
 #: standalone/drakvpn:1031 standalone/drakvpn:1116
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption algorithm"
-msgstr "Nastavitev zaslona"
+msgstr "Algoritem za šifriranje"
 
 #: standalone/drakvpn:1033
-#, fuzzy, c-format
+#, c-format
 msgid "Authentication algorithm"
-msgstr "Nastavitev zaslona"
+msgstr "Autentikacijski algoritem"
 
 #: standalone/drakvpn:1035
 #, c-format
 msgid "Compression algorithm"
-msgstr ""
+msgstr "Algoritem za stiskanje"
 
 #: standalone/drakvpn:1036
-#, fuzzy, c-format
+#, c-format
 msgid "deflate"
-msgstr "privzeto"
+msgstr "skrči"
 
 #: standalone/drakvpn:1043
 #, c-format
 msgid "Remote"
-msgstr "Oddaljeno"
+msgstr "Oddaljen"
 
 #: standalone/drakvpn:1044
 #, c-format
@@ -23313,11 +23516,21 @@ msgid ""
 "remote anonymous\n"
 "remote ::1 [8000]"
 msgstr ""
+"oddaljen  (address | anonymous) [[port]] { statements }\n"
+"speccificira vrednosti za IKE fazo 1 za vsako oddaljeno vozlišče.\n"
+"Privzeto se uporablja port 500. Če se navede anonymous, se le to\n"
+"aplicira na vse enakovredne naprave, ki jim ne ustreza nobeno drugo\n"
+"oddaljeno navodilo.\n"
+"\n"
+"Primeri: \n"
+"\n"
+"oddaljen anonymous\n"
+"oddaljen ::1 [8000]"
 
 #: standalone/drakvpn:1052
-#, fuzzy, c-format
+#, c-format
 msgid "Exchange mode"
-msgstr "Uporabniško ime"
+msgstr "Izmenjevalni način"
 
 #: standalone/drakvpn:1054
 #, c-format
@@ -23329,16 +23542,22 @@ msgid ""
 "modes are acceptable. The first exchange mode is what\n"
 "racoon uses when it is the initiator.\n"
 msgstr ""
+"določa način izmenjevanja za fazo 1, takrat ko je racoon\n"
+"pobudnik. Poleg tega pomeni sprejemljiv način izmenjave,\n"
+"ko je racoon odzivnik. Obstaja lahko več kot 1 način, ki jih\n"
+"medsebojno ločiš z vejico. Vsi načini so sprejemljivi.\n"
+"Prvi način izmenjave je tisti, ki ga racoon uporablja,\n"
+"kadar je pobudnik.\n"
 
 #: standalone/drakvpn:1060
-#, fuzzy, c-format
+#, c-format
 msgid "Generate policy"
-msgstr "Varnost"
+msgstr "Ustvari varnostni pravilnik"
 
 #: standalone/drakvpn:1061 standalone/drakvpn:1077 standalone/drakvpn:1090
 #, c-format
 msgid "off"
-msgstr "ne"
+msgstr "izključeno"
 
 #: standalone/drakvpn:1061 standalone/drakvpn:1077 standalone/drakvpn:1090
 #, c-format
@@ -23363,11 +23582,24 @@ msgid ""
 "tiator and the responder.  This directive is ignored in\n"
 "the initiator case.  The default value is off."
 msgstr ""
+"To navodilo je za odzivnik. Zaradi tega moraš\n"
+"vključiti pasivno, zato da bo samo racoon(8) postal\n"
+"odzivnik. Če odzvinik nima določenih pravil v SPD med\n"
+"drugo fazo povezovanja, navodilo pa je vključeno, potem\n"
+"bo racoon(8) izbral prvo predlogo v SA prometu od pobudnika,\n"
+"nato bo ustvaril pravilnik vnosov od pobudnika. Koristno se je\n"
+"povezovati z odjemalcem, ki ima dinamično dololčen\n"
+"IP naslov. Pozoren bodi na to, da se v odzivnikov SPD lahko\n"
+"namesti neprimeren pravilnik pobudnika. Zaradi neskladja\n"
+"pravilnikov pobudnika in odzivnika lahko pride do\n"
+"izgube ostale komunikacije, če je tak pravilnik\n"
+"nameščen. To navodilo v primeru pobudnika\n"
+"ni upoštevano. Privzeta vrednost je izključeno."
 
 #: standalone/drakvpn:1076
 #, c-format
 msgid "Passive"
-msgstr "Trpnik"
+msgstr "Pasivno"
 
 #: standalone/drakvpn:1078
 #, c-format
@@ -23376,46 +23608,49 @@ msgid ""
 "to on.  The default value is off.  It is useful for a\n"
 "server."
 msgstr ""
+"Če ne želite začeti povezovanje, nastavite\n"
+"to možnost na vključeno. Privzeto je izključeno.\n"
+"To je koristno za strežnik."
 
 #: standalone/drakvpn:1081
 #, c-format
 msgid "Certificate type"
-msgstr ""
+msgstr "Vrsta certifikata"
 
 #: standalone/drakvpn:1083
-#, fuzzy, c-format
+#, c-format
 msgid "My certfile"
-msgstr "Izberite datoteko"
+msgstr "Moja certifikacijska datoteka"
 
 #: standalone/drakvpn:1084
 #, c-format
 msgid "Name of the certificate"
-msgstr ""
+msgstr "Ime certifikata"
 
 #: standalone/drakvpn:1085
 #, c-format
 msgid "My private key"
-msgstr ""
+msgstr "Moj zasebni ključ"
 
 #: standalone/drakvpn:1086
 #, c-format
 msgid "Name of the private key"
-msgstr ""
+msgstr "Ime zasebnega ključa"
 
 #: standalone/drakvpn:1087
-#, fuzzy, c-format
+#, c-format
 msgid "Peers certfile"
-msgstr "Izberite datoteko"
+msgstr "Certifikacijska datoteka enakovrednih naprav"
 
 #: standalone/drakvpn:1088
 #, c-format
 msgid "Name of the peers certificate"
-msgstr ""
+msgstr "Ime certifikata enakovredne naprave"
 
 #: standalone/drakvpn:1089
-#, fuzzy, c-format
+#, c-format
 msgid "Verify cert"
-msgstr "visoka"
+msgstr "Preveri certifikat"
 
 #: standalone/drakvpn:1091
 #, c-format
@@ -23423,11 +23658,14 @@ msgid ""
 "If you do not want to verify the peer's certificate for\n"
 "some reason, set this to off.  The default is on."
 msgstr ""
+"Izključite to orodje, če zaradi nekega razloge ne želite\n"
+"preverjati certifikatov enakovrednih naprav. Privzeto je orodje\n"
+"vključeno."
 
 #: standalone/drakvpn:1093
 #, c-format
 msgid "My identifier"
-msgstr ""
+msgstr "Moj določevalec, identifikator"
 
 #: standalone/drakvpn:1094
 #, c-format
@@ -23455,16 +23693,38 @@ msgid ""
 "\n"
 "my_identifier user_fqdn \"myemail@mydomain.com\""
 msgstr ""
+"specifies the identifier sent to the remote host and the\n"
+"type to use in the phase 1 negotiation.  address, FQDN,\n"
+"user_fqdn, keyid and asn1dn can be used as an idtype.\n"
+"they are used like:\n"
+"\tmy_identifier address [address];\n"
+"\t\tthe type is the IP address.  This is the default\n"
+"\t\ttype if you do not specify an identifier to use.\n"
+"\tmy_identifier user_fqdn string;\n"
+"\t\tthe type is a USER_FQDN (user fully-qualified\n"
+"\t\tdomain name).\n"
+"\tmy_identifier FQDN string;\n"
+"\t\tthe type is a FQDN (fully-qualified domain name).\n"
+"\tmy_identifier keyid file;\n"
+"\t\tthe type is a KEY_ID.\n"
+"\tmy_identifier asn1dn [string];\n"
+"\t\tthe type is an ASN.1 distinguished name.  If\n"
+"\t\tstring is omitted, racoon(8) will get DN from\n"
+"\t\tSubject field in the certificate.\n"
+"\n"
+"Examples: \n"
+"\n"
+"my_identifier user_fqdn \"myemail@mydomain.com\""
 
 #: standalone/drakvpn:1114
-#, fuzzy, c-format
+#, c-format
 msgid "Peers identifier"
-msgstr "Izberite strežnik"
+msgstr "Identifikator enakovrednih naprav"
 
 #: standalone/drakvpn:1115
-#, fuzzy, c-format
+#, c-format
 msgid "Proposal"
-msgstr "Protokol"
+msgstr "Predlog"
 
 #: standalone/drakvpn:1117
 #, c-format
@@ -23477,66 +23737,73 @@ msgid ""
 "\n"
 "For other transforms, this statement should not be used."
 msgstr ""
+"navedi algoritem za kodiranje, ki bo v uporabi\n"
+"za prvo stopnjo povezovanja. To navodilo mora biti določeno. \n"
+"lahko se izbere naslednje algoritne: \n"
+"\n"
+"DES, 3DES, blowfish, cast128 za oakley.\n"
+"\n"
+"Za ostale pretvorbe se ta stvek ne uporablja."
 
 #: standalone/drakvpn:1124
 #, c-format
 msgid "Hash algorithm"
-msgstr ""
+msgstr "Hash algoritem"
 
 #: standalone/drakvpn:1126
-#, fuzzy, c-format
+#, c-format
 msgid "DH group"
-msgstr "Skupina"
+msgstr "DH skupina"
 
 #: standalone/drakvpn:1133
 #, c-format
 msgid "Command"
-msgstr "Ukaz"
+msgstr "Ukaz, ukazna vrstica"
 
 #: standalone/drakvpn:1134
 #, c-format
 msgid "Source IP range"
-msgstr ""
+msgstr "Obseg vrednosti izvornega IP"
 
 #: standalone/drakvpn:1135
 #, c-format
 msgid "Destination IP range"
-msgstr ""
+msgstr "Obseg vrednosti ciljenega IP."
 
 #: standalone/drakvpn:1136
 #, c-format
 msgid "Upper-layer protocol"
-msgstr ""
+msgstr "Protokol zgornjega sloja"
 
 #: standalone/drakvpn:1136 standalone/drakvpn:1143
-#, fuzzy, c-format
+#, c-format
 msgid "any"
-msgstr "Dan"
+msgstr "katerikoli"
 
 #: standalone/drakvpn:1138
 #, c-format
 msgid "Flag"
-msgstr "Zastava"
+msgstr "Zastavica"
 
 #: standalone/drakvpn:1139
 #, c-format
 msgid "Direction"
-msgstr "Smer"
+msgstr "Usmeritev"
 
 #: standalone/drakvpn:1140
 #, c-format
 msgid "IPsec policy"
-msgstr ""
+msgstr "IPsec pravilnik"
 
 #: standalone/drakvpn:1140
-#, fuzzy, c-format
+#, c-format
 msgid "ipsec"
-msgstr "Premakni"
+msgstr "ipsec"
 
 #: standalone/drakvpn:1140
-#, fuzzy, c-format
+#, c-format
 msgid "discard"
-msgstr "Tabela"
+msgstr "Opusti"
 
 #: standalone/drakvpn:1143
 #, c-format
@@ -23544,24 +23811,24 @@ msgid "Mode"
 msgstr "Način"
 
 #: standalone/drakvpn:1143
-#, fuzzy, c-format
+#, c-format
 msgid "tunnel"
-msgstr "Prekliči"
+msgstr "tunel"
 
 #: standalone/drakvpn:1143
-#, fuzzy, c-format
+#, c-format
 msgid "transport"
-msgstr "Drugo"
+msgstr "prenos"
 
 #: standalone/drakvpn:1145
-#, fuzzy, c-format
+#, c-format
 msgid "Source/destination"
-msgstr "Nastavitev zaslona"
+msgstr "Izvor/cilj"
 
 #: standalone/drakvpn:1146
 #, c-format
 msgid "require"
-msgstr ""
+msgstr "zahteva"
 
 #: standalone/drakvpn:1146
 #, c-format
@@ -23569,14 +23836,14 @@ msgid "default"
 msgstr "privzeto"
 
 #: standalone/drakvpn:1146
-#, fuzzy, c-format
+#, c-format
 msgid "use"
-msgstr "Premakni"
+msgstr "uporabi"
 
 #: standalone/drakvpn:1146
-#, fuzzy, c-format
+#, c-format
 msgid "unique"
-msgstr "Martinique"
+msgstr "enkraten"
 
 #: standalone/drakxtv:45
 #, c-format
