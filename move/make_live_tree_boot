@@ -130,7 +130,7 @@ if (!@ARGV) {
     create_light_tree('always', \@always_list);    
     create_light_tree('boot', \@boot_list);    
     create_light_tree('totem', \@totem_list);    
-    create_light_tree('nvidia', \@nvidia_list);    
+    create_light_tree('nvidia', \@nvidia_list) if -e $nvidia_list[0];
     foreach my $lang (@ALLOWED_LANGS) {
 	my $full_lang = lang::l2locale($lang);
 	my ($short_lang) = $full_lang =~ /(..)/;
