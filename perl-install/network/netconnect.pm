@@ -254,7 +254,8 @@ ifdown eth0
     }
 
     write_initscript();
-    $::isStandalone && member($netc->{internet_cnx_choice}, ('modem', 'adsl', 'isdn')) and $success = ask_connect_now();
+    $::isStandalone && member($netc->{internet_cnx_choice}, ('modem', 'adsl', 'isdn')) and
+      $success = ask_connect_now($netc->{internet_cnx_choice});
 
   step_3:
 
