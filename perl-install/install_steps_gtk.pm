@@ -529,6 +529,7 @@ sub installPackages {
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
     $details->signal_connect(clicked => sub {
 	invbool \$show_advertising;
+	$details->set_label($show_advertising ? N("Details") : N("No details"));
 	$advertize->(1);
     });
     $advertize->();
