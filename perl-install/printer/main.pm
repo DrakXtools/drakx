@@ -52,7 +52,7 @@ sub spooler {
     my @res;
     my @spoolers = qw(cups pdq);
     push @spoolers, 'lprng' if files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd));
-    push @res, $spooler_inv{$_}{long_name} foreach @spoolers;
+    push @res, $spoolers{$_}{long_name} foreach @spoolers;
     return @res;
 }
 
