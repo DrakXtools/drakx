@@ -56,7 +56,7 @@ sub floppies() {
     my @fds;
     my @dmis = dmidecode();
     # do not try to load floppy if there's no floppy drive:
-    if ($::isInstall || !@dmis || find { $_->{'Internal Reference Designator'} =~ /^(FLOPPY|FDD)$/ && $_->{name} eq 'Port Connector' } @dmis) {
+    if (!is_xbox() && ($::isInstall || !@dmis || find { $_->{'Internal Reference Designator'} =~ /^(FLOPPY|FDD)$/ && $_->{name} eq 'Port Connector' } @dmis)) {
         eval { modules::load("floppy") if $::isInstall };
         if (!$@) {
             @fds = map {
@@ -782,6 +782,10 @@ sub get_mac_model() {
 
 sub get_mac_generation() {
     cat_('/proc/cpuinfo') =~ /^pmac-generation\s*:\s*(.*)/m ? $1 : "Unknown Generation";	
+}
+
+sub is_xbox() {
+    return any { $_->{vendor} . $_->{id} == hex('10de') . hex('02a5') } detect_devices::pci_probe();                                                 
 }
 
 sub hasSMP() { 
