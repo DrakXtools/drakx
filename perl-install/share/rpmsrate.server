@@ -1,22 +1,23 @@
 GRAPHICAL_DESKTOP
-  4 WindowMaker
-  3 Epplets WMRack blackbox enlightenment ethemes gtk-themes icepref
+  4 WindowMaker icewm
+  3 Epplets WMRack blackbox enlightenment ethemes icepref
     wmakerconf xlockmore
   2 wmnet
-  2 GNOME icewm
   1 lesstif-mwm xbanner xfce
 
 GNOME
-  4 gnome-tiles gnome-users-guide gdm gnome-applets gnome-user-docs
-    gnome-network gnome-utils xscreensaver mdk-eazel-engine-capplet
+  5 gnome-core
+  4 gnome-tiles gnome-users-guide gdm gnome-applets gnome-user-docs gtk-themes sawfish-themes
+    gnome-network gnome-utils xscreensaver mdk-eazel-engine-capplet 
+    gnome-control-center gnome-control-center-plus
   4 CHARSET"iso-8859-1" || CHARSET"iso-8859-15" nautilus
   5 !CHARSET"iso-8859-1" !CHARSET"iso-8859-15" gmc
-  3 gnome-pilot sawfish-themes
+  3 gnome-pilot
   2 bug-buddy eog g-print
   1 sawfish-themer
 
 KDE
-  5 kdebase
+  5 kdebase kdebase-nsplugins
   5 kde-i18n-ca kde-i18n-cs kde-i18n-da kde-i18n-de kde-i18n-el kde-i18n-es kde-i18n-et kde-i18n-fi kde-i18n-fr kde-i18n-he kde-i18n-hu kde-i18n-is kde-i18n-it kde-i18n-ja kde-i18n-ko kde-i18n-nl kde-i18n-no kde-i18n-no_NY kde-i18n-pl kde-i18n-pt kde-i18n-pt_BR kde-i18n-ro kde-i18n-ru kde-i18n-sk kde-i18n-sr kde-i18n-sv kde-i18n-tr kde-i18n-uk kde-i18n-zh_CN.GB2312 kde-i18n-zh_TW.Big5 
   4 kdeaddutils kdeadmin kdegraphics kdemultimedia kdenetwork krozat
     kdepim kdetoys kdeutils quanta 
@@ -35,13 +36,12 @@ TV
 OFFICE
   4 staroffice-en staroffice-de staroffice-es staroffice-fr staroffice-it
     acroread acroread-nppdf
-  4 GNOME abiword 
   4 cbb gaddr ical xpdf moneydance
   3 wv 
   4 LOCALES"zh" pyDict
   2 units lyx phpgroupware
   GNOME
-    4 gnome-pim gnome-pim-conduits gnumeric
+    4 abiword gnome-pim gnome-pim-conduits gnumeric
     3 dia gnome-pilot-conduits
     2 ggv gnucash
   KDE
@@ -146,10 +146,12 @@ NETWORKING_CHAT_SERVER
   3 talk-server
     
 NETWORKING_FILE_TRANSFER
-  5 lftp mirrordir rsync uucp
+  5 lftp mirrordir rsync
   4 gftp rdist
   3 fmirror ncftp tftp
   3 GNOME dpsftp
+  2 uucp
+
 NETWORKING_FILE_TRANSFER_SERVER
   4 wu-ftpd anonftp wizards_lib-ftp
   2 proftpd
@@ -315,10 +317,10 @@ DATABASES
 
 GAMES
   4 sin-demo
-  4 clanbomber freeciv mures methane
+  4 clanbomber freeciv mures methane lbreakout2 toppler
   3 shogo-demo
-  3 cxhextris xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank nethack_falconseye rocksndiamonds trophy
-  2 Maelstrom lbreakout pingus ltris penguin-command pysol xtrojka bunnies powermanga xpilot xplanet
+  3 cxhextris xboard xgammon xkobo xpat2 xpuzzles xsoldier xfishtank nethack_falconseye rocksndiamonds tuxpuck teg
+  2 Maelstrom pingus ltris penguin-command pysol xtrojka bunnies powermanga xpilot trophy
   1 7colors xrally fortune-mod nil
   GNOME
     4 gnome-chess gnome-games
@@ -334,7 +336,7 @@ GAMES
     4 csmash armagetron
       !HW"Riva.*128" chromium tuxracer
 
-    3 !HW"Riva.*128" !HW"Rage X[CL]" Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" 
+    3 !HW"Riva.*128" !HW"Rage X[CL]" !HW"Rage Mobility (?:P\/M|L) " !HW"3D Rage (?:LT|Pro)" 
         bzflag
     3 FlightGear spacecup gltron
 
@@ -346,7 +348,7 @@ DEVELOPMENT
   2 gperf cdecl cproto indent ElectricFence
   1 egcs glibc-profile xxgdb
 
-  4 gcc-c++ libstdc++2.10-devel
+  4 gcc-c++ libstdc++-devel
   2 libsigc++-examples
   1 egcs-c++ 
 
@@ -403,25 +405,25 @@ DEVELOPMENT
     1 gnucash-devel rep-gtk-libglade
 
   DEVELOPMENT_OTHER
-    2 ImageMagick-devel Mesa-common-devel libXaw3d7-devel detect-devel
-      libgd1-devel p2c-devel libgmp3-devel libguile9-devel libgr-devel libjpeg62-devel libpng2-devel
-      libtermcap2-devel libtiff3-devel libungif4-devel libxml2-devel
-      linuxconf-devel libslang1-devel sox-devel zlib1-devel XFree86-devel dev86-devel
-      gdk-pixbuf-devel gimp-devel libgpm1-devel kudzu-devel libghttp1-devel libgtop1-devel
-      libmikmod2-devel librep-devel libunicode-devel popt-devel pwdb-devel t1lib1-devel
-      ucd-snmp-devel mpeg_lib-devel WindowMaker-devel aalib-devel libadns1-devel
-      alsa-lib-devel audiofile-devel libcups1-devel e2fsprogs-devel egcs-objc-devel
-      g-wrap-devel gkrellm-devel ibtk libPropList-devel licq-devel openldap-devel
-      libparted1.4-devel pciutils-devel pilot-link-devel svgalib-devel
-      recode-devel libaspell10-devel cracklib-devel faces-devel fnlib-devel
-      freetype2-devel gtk+mdk-devel libgtkglarea5-devel XFree86-static-libs imap-devel
-      php-devel libpth14-devel libsane1-devel swig-devel xdelta-devel isapnptools-devel
-      pango-devel readline-devel
+    2 ImageMagick-devel Mesa-common-devel libXaw3d7-devel Xaw3d-devel detect-devel
+      libgd1-devel gd-devel p2c-devel libgmp3-devel gmp-devel libguile9-devel guile-devel libgr-devel libjpeg62-devel libjpeg-devel libpng3-devel libpng-devel
+      libtermcap2-devel libtermcap-devel libtiff3-devel libtiff-devel libungif4-devel libungif-devel libxml2-devel libxml-devel
+      linuxconf-devel libslang1-devel slang-devel sox-devel zlib1-devel zlib-devel XFree86-devel dev86-devel
+      libgdk-pixbuf2-devel gdk-pixbuf-devel libgimp1.2_1-devel gimp-devel libgpm1-devel gpm-devel kudzu-devel libghttp1-devel libghttp-devel libgtop1-devel libgtop-devel
+      libmikmod2-devel libmikmod-devel librep9-devel librep-devel libunicode-devel popt-devel pwdb-devel t1lib1-devel t1lib-devel
+      ucd-snmp-devel mpeg_lib-devel WindowMaker-devel aalib-devel libadns1-devel adns-devel
+      alsa-lib-devel audiofile-devel libcups1-devel cups-devel e2fsprogs-devel egcs-objc-devel
+      libg-wrap2-devel g-wrap-devel gkrellm-devel ibtk libPropList-devel licq-devel openldap-devel
+      libparted14-devel parted-devel pciutils-devel pilot-link-devel libsvgalib1-devel svgalib-devel
+      recode-devel libaspell10-devel aspell-devel cracklib-devel faces-devel fnlib-devel
+      freetype2-devel freetype-devel libgtk+mdk0.1_6-devel gtk+mdk-devel libgtkglarea5-devel gtkglarea-devel XFree86-static-libs imap-devel
+      php-devel libpth14-devel pth-devel libsane1-devel sane-devel swig-devel xdelta-devel isapnptools-devel
+      libpango23-devel pango-devel readline-devel
 
 MONITORING
   5 procinfo psacct
   5 PCMCIA apmd
-  4 lsof swatch tcpdump
+  4 lsof swatch tcpdump traceroute
   3 iplog arpwatch lslk nmap nmap-frontend procps-X11 xcpustate xosview xsysinfo xtraceroute
   2 cfengine gkrellm gps rusers mon
   1 logcheck bonnie
@@ -438,7 +440,7 @@ FILE_TOOLS
 CONFIG
   4 userdrake linuxconf
   4 GNOME gnome-linuxconf
-  3 Bastille-Curses-module
+  3 webmin Bastille-Curses-module
   3 ipvsadm quota timetool usernet
   2 gfcc control-panel adjtimex isicom xinput timeconfig Bastille-Tk-module
   1 ipxutils
@@ -451,10 +453,11 @@ X
   5 !GNOME !KDE icewm-light
 
   4 gurpmi rpmdrake drakconf fonts-ttf-decoratives harddrake fonts-ttf-west_european
-    menudrake drakfloppy drakfont mandrake_desk mdkonline drakfirsttime mdk-eazel-engine
+    mandrake-mime menudrake drakfloppy drakfont mandrake_desk mdkonline drakfirsttime mdk-eazel-engine
+  4 !LOCALES"ru" Aurora-Monitor-NewStyle-Categorizing-WsLib
   4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK 
 
-  3 XFree86-100dpi-fonts drakprofile
+  3 XFree86-100dpi-fonts draksync drakprofile
   2 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" jmcce 
   2 tksysv imlib-cfgeditor
   1 DrakeLogo Mesa xtoolwait usbview X11R6-contrib 
@@ -476,17 +479,22 @@ X
     LOCALES"zh_CN" || LOCALES"zh" fonts-ttf-gb2312
     LOCALES"zh_TW" || LOCALES"zh" taipeifonts fonts-ttf-big5
 
+DOCS
+  5 man info man-pages
+
 SYSTEM
-  5 at MAKEDEV anacron eject kudzu ldetect
-    linux_logo locales man-pages iputils 
-    urpmi cpio
+  5 at MAKEDEV anacron eject kudzu ldetect devfsd
+    locales iputils urpmi cpio msec
 
-  5 HIGH_SECURITY libsafe kernel22-secure
+  5 HIGH_SECURITY libsafe kernel-secure
+  5 BIGMEM kernel-enterprise
+  5 SMP kernel-smp
+  5 PCMCIA pcmcia-cs
 
-  4 sndconfig ftp ftp-client-krb5 gpm hexedit strace mandrake-mime
+  4 ftp ftp-client-krb5 gpm hexedit strace sudo
 
   3 bc
-  2 kernel-utils sane acpid adns audiofile freeswan awesfx fbset sudo vlan-utils
+  2 sndconfig kernel-utils sane acpid adns audiofile freeswan awesfx fbset vlan-utils
   1 fdutils genromfs mailcap pinfo
 
   BOOKS 
