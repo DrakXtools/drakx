@@ -533,12 +533,20 @@ sub auto_allocate {
     my ($all_hds, $suggestions) = @_;
     my $before = listlength(fsedit::get_all_fstab($all_hds));
 
-    allocatePartitions($all_hds, $suggestions || $suggestions{simple});
+    my $suggestions_ = $suggestions || $suggestions{simple};
+    allocatePartitions($all_hds, $suggestions_);
     auto_allocate_raids($all_hds, $suggestions) if $suggestions;
 
     partition_table::assign_device_numbers($_) foreach @{$all_hds->{hds}};
 
-    $before != listlength(fsedit::get_all_fstab($all_hds));
+    if ($before == listlength(fsedit::get_all_fstab($all_hds))) {
+	# find out why auto_allocate failed
+	if (my @l = grep { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
+	    die _("Not enough free space for auto-allocating");
+	} else {
+	    die _("Nothing to do");
+	}
+    }
 }
 
 sub auto_allocate_raids {
