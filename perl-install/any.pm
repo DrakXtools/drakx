@@ -816,7 +816,8 @@ Do you want to use this feature?"),
 }
 
 sub selectLanguage {
-    my ($in, $lang, $langs) = @_;
+    my ($in, $lang, $langs_) = @_;
+    my $langs = $langs_ || {};
     $in->ask_from_(
 	{ messages => _("Please choose a language to use."),
 	  title => 'language choice',
@@ -827,12 +828,12 @@ sub selectLanguage {
 	},
 	[ { val => \$lang, separator => '|', 
 	    format => \&lang::lang2text, list => [ lang::list() ] },
-	  (map {;
+	    if_($langs_, (map {;
 	       { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
 		 text => $_->[1], advanced => 1,
 	       } 
 	   } sort { $a->[1] cmp $b->[1] } map { [ $_, lang::lang2text($_) ] } lang::list()),
-	  { val => \$langs->{all}, type => 'bool', text => _("All"), advanced => 1 }
+	  { val => \$langs->{all}, type => 'bool', text => _("All"), advanced => 1 }),
 	]) or return;
     $lang;
 }
@@ -1027,6 +1028,30 @@ Security features are at their maximum.")),
 		      )
 		  ]
 		 );
+}
+
+sub running_window_manager {
+    my @window_managers = (
+	'kdeinit: kwin', 
+	qw(gnome-session icewm wmaker kwm afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish olvwm),
+    );
+    foreach (@window_managers) {
+	return $_ if `/sbin/pidof "$_"` > 0;
+    }
+    '';
+}
+
+sub ask_window_manager_to_logout {
+    my ($wm) = @_;
+    
+    my %h = (
+	'kwm' => "kwmcom logout",
+	'kdeinit: kwin' => "dcop kdesktop default logout",
+	'gnome-session' => "save-session --kill",
+	'icewm' => "killall -QUIT icewm",
+    );
+    system($h{$wm} || return);
+    1;
 }
 
 1;
