@@ -1,3 +1,81 @@
+2002/01/29  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: icons placements are better
+
+2002/01/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakbug_report, standalone/drakautoinst, install2.pm,
+	install_any.pm, install_steps.pm, log.pm, docs/README, pkgs.pm: move
+	/root/* files (ddebug.log, install.log, report.bug,
+	auto_inst.cfg.pl, replay_install.img) to /root/drakx/,
+	and also save stage1.log there
+
+	* partition_table_raw.pm: add new pixel-made grub signature
+
+	* crypto.pm: update land2tzs accordingly to new url2land
+	Add url2land entries for nl, it, at
+
+	* any.pm: move /root/* files (ddebug.log, install.log, report.bug,
+	auto_inst.cfg.pl, replay_install.img) to /root/drakx/,
+	and also save stage1.log there
+	rephrase a little bit highest level
+	to not refer to "level 4" anymore
+	use formatAlaTeX for describing security levels
+
+	* install_steps_interactive.pm: fix thanks to chipaux msg about mkbootdisk
+
+2002/01/29  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/fr.po, share/po/sv.po, share/po/hr.po, share/po/de.po,
+	share/po/DrakX.pot, help.pm, share/po/it.po, share/po/eu.po,
+	share/po/es.po: updated pot file with help messages from manual
+
+2002/01/29  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm: handle "format" for combo's
+
+	* bootloader.pm: use the new format for combo's to clean code handling
+	{vga} field
+
+	* diskdrake/hd_gtk.pm: look diskdrake.rc in another directory
+
+	* any.pm: use the new format for combo's to clean code handling {vga}
+	field
+	handle the case where samba and/or nfs-utils are not installed
+
+	* install_steps.pm: move the various bootloader::add_append's in
+	setupBootloaderBefore
+
+	* diskdrake/smbnfs_gtk.pm: handle the case where samba and/or nfs-utils
+	are not installed
+
+	* install_steps_interactive.pm: visually unselect X and docs when minimal
+	install
+	"With X" choice is now working
+	handle "Cancel" on language selection
+
+2002/01/29  Till Kamppeter <till@mandrakesoft.com>
+
+	* pixmaps/wiz_printerdrake.png: Added logo for the "Add Printer" wizard of
+	printerdrake.
+
+	* printer.pm, printerdrake.pm: Prepared printerdrake for the "Add printer"
+	wizard.
+	Improvements for the selection of a local printer, especially when no or
+	one printer was detected.
+
+2002/01/29  tvignaud
+
+	* interactive.pm: fix pixel's minimal example using interactive.
+
+2002/01/29  yduret
+
+	* docs/interactive/ask_from_list, docs/interactive/wait_message,
+	docs/interactive/ask_from_treelist, docs/interactive/ask_from_listf,
+	docs/interactive/ask_from: added some snipet coe for example
+
+	* standalone/logdrake: logdrake is now under gi/perl-install/standalone
+
 2002/01/29  Pixel  <pixel@mandrakesoft.com>
 
 	* diskdrake/hd_gtk.pm: look diskdrake.rc in another directory
