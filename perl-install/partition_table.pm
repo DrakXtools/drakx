@@ -316,7 +316,7 @@ sub adjust_main_extended($) {
 	my $start = round_down($l->{normal}{start} - 1, $hd->{geom}{sectors});
 	my $end = $l->{normal}{start} + $l->{normal}{size};
 	my $only_linux = 1;
-	foreach (map $_->{normal}, @l) {
+	foreach (map $_->{normal}, $l, @l) {
 	    $start = min($start, $_->{start});
 	    $end = max($end, $_->{start} + $_->{size});
 	    $only_linux &&= isTrueFS($_) || isSwap($_);

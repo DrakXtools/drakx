@@ -96,17 +96,14 @@ clean:
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
-upload: tar install
-	touch /tmp/mdkinst_done
-	cd $(ROOTDEST)/Mandrake ; tar cfz mdkinst.tgz mdkinst
-
-	lftp -c "open mandrakesoft.com; cd ~/tmp ; put $(ROOTDEST)/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd $(UPLOAD_DEST)/Mandrake/base ; lcd $(ROOTDEST)/Mandrake/base ; put mdkinst_stage2.gz rescue_stage2.gz compss compssList compssUsers hdlists ; cd $(UPLOAD_DEST)/misc ; lcd ~/gi/tools/ ; put make_mdkinst_stage2" #,gendepslist,rpm2header"
-#	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/images ; mput $(ROOTDEST)/images/*.img"
-#	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/dosutils/autoboot/mdkinst ; put $(ROOTDEST)/dosutils/autoboot/mdkinst/vmlinuz ; mput $(ROOTDEST)/dosutils/autoboot/mdkinst/initrd.*"
-#	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/lnx4win ; lcd $(ROOTDEST)/lnx4win ; put initrd.gz vmlinuz"
-#	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
-	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
-	rm -f /tmp/mdkinst_done
+upload: clean install
+	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
+	upload Mandrake/mdkinst '' ;\
+	upload Mandrake/base {compss*,mdkinst_stage2.gz,rescue_stage2.gz} ;\
+	upload dosutils/autoboot/mdkinst {initrd.*,vmlinuz} ;\
+	upload lnx4win {initrd.gz,vmlinuz} ;\
+	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
+	echo 
 
 upload_sparc:
 	touch /tmp/mdkinst_done

@@ -32,7 +32,7 @@ while (my ($k, $v) = each %l) {
     foreach (@$v) {
 	-x $_ and $l{$k} = $_, last;
     }
-    -x $l{$k} or delete $l{$_};
+    -x $l{$k} or delete $l{$k};
 }
 
 if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {

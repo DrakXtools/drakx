@@ -84,7 +84,7 @@ sub mount {
 sub umount {
     @_ == 1 or die "umount expects a single argument\n";
 
-    require 'fs.pm';
+    require fs;
     fs::umount($_[0]);
 }
 
@@ -108,10 +108,10 @@ sub mkdir_ {
 
 sub mknod {
     if (@_ == 1) {
-	require 'devices.pm';
+	require devices;
 	eval { devices::make($_[0]) }; $@ and die "mknod: failed to create $_[0]\n";
     } elsif (@_ == 4) {
-	require 'c.pm';
+	require c;
 	my $mode = $ {{"b" => c::S_IFBLK(), "c" => c::S_IFCHR()}}{$_[1]} or die "unknown node type $_[1]\n";
 	syscall_('mknod', my $a = $_[0], $mode | 0600, makedev($_[2], $_[3])) or die "mknod failed: $!\n";
     } else { die "usage: mknod <path> [b|c] <major> <minor> or mknod <path>\n"; }
@@ -361,7 +361,7 @@ sub hexdump {
 
 sub more {
     @ARGV = @_;
-    require 'devices.pm';
+    require devices;
     my $tty = devices::make('tty');
     local *IN; open IN, "<$tty" or die "can't open $tty\n";
     my $n = 0; while (<>) {
@@ -415,7 +415,7 @@ sub insmod {
     $h || @_ == 0 and die "usage: insmod <module> [options]\n";
     my $f = local $_ = shift;
 
-    require 'run_program.pm';
+    require run_program;
 
     #- try to install the module if it exist else extract it from archive.
     #- needed for cardmgr.
@@ -442,7 +442,7 @@ sub modprobe {
     my ($h) = getopts(\@_, qw(h));
     $h || @_ == 0 and die "usage: modprobe <module> [options]\n";
     my $name = shift;
-    require 'modules.pm';
+    require modules;
     modules::load_deps("/modules/modules.dep");
     modules::load($name, '', @_);
 }
@@ -514,11 +514,11 @@ sub kill {
 }
 
 sub lspci {
-    require 'pci_probing/main.pm';
+    require pci_probing::main;
     print join "\n", pci_probing::main::list (), '';
 }
 sub lssbus {
-    require 'sbus_probing/main.pm';
+    require sbus_probing::main;
     print join "\n", sbus_probing::main::list (), '';
 }
 sub dmesg { print cat_("/tmp/syslog"); }
@@ -557,12 +557,41 @@ sub  install_cpio($$;@) {
 
     eval { rm("-r", $dir) };
     mkdir $dir, 0755;
-    require 'run_program.pm';
+    require run_program;
     
     my $more = join " ", map { $_ && "$_ $_/*" } @more;
     run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/* $more");
 
     "$dir/$name";
+}
+
+sub bug {
+    my ($h) = getopts(\@_, "h");
+    $h and die "usage: bug\nput file report.bug on fat formatted floppy\n";
+    mount "/dev/fd0", "/fd0";
+
+    sub header { "
+********************************************************************************
+* $_[0]
+********************************************************************************";
+    }
+    require pci_probing::main;
+
+    local $\ = "\n";
+    output "/fd0/report.bug", map { chomp; $_ }
+      header("lspci"), pci_probing::main::list(),
+      header("pci_devices"), cat_("/proc/bus/pci/devices"),
+      header("fdisk"), `fdisk -l`,
+      header("scsi"), cat_("/proc/scsi/scsi"),
+      header("lsmod"), cat_("/proc/modules"),
+      header("cmdline"), cat_("/proc/cmdline"),
+      header("cpuinfo"), cat_("/proc/cpuinfo"),
+      header("syslog"), cat_("/tmp/syslog"),
+      header("ddebug.log"), cat_("/tmp/ddebug.log"),
+      header("install.log"), cat_("/mnt/root/install.log"),
+      ;
+    umount "/fd0";
+    sync;
 }
 
 

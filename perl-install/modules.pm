@@ -92,6 +92,8 @@ arch() =~ /^sparc/ ? (
   "af_packet" => "packet socket",
   "nfs" => "Network File System (nfs)",
   "lockd" => "lockd",
+  "parport" => "parport",
+  "parport_pc" => "parport_pc",
   "sunrpc" => "sunrpc",
 }],
 [ 'scsi', {
@@ -488,9 +490,9 @@ sub read_conf($;$) {
 
 sub write_conf {
     my ($prefix) = @_;
-    #- my $file = "$prefix/etc/modules.conf"; TODO RESTORE FOR AFTER 7.1
-    #- rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
-    my $file = "$prefix/etc/conf.modules";
+
+    my $file = "$prefix/etc/modules.conf";
+    rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
     #- remove the post-install supermount stuff. We may have to add some more
     substInFile { $_ = '' if /^post-install supermount/ } $file;
