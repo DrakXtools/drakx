@@ -1,4 +1,4 @@
-#!/usr/bin/perl 
+#!/usr/bin/perl -w
 
 # Drak Bug Report 
 # Copyright (C) 2002 MandrakeSoft (daouda@mandrakesoft.com)
@@ -67,7 +67,7 @@ gtkpack2__(
 			     ),
 		      gtkpack(new Gtk::HBox(0,5),
 			      gtkpack(new Gtk::Label(_("Package: "))),
-			      gtkpack(gtkset_text(my $version = new Gtk::Entry(50),"fetching ...")),
+			      gtkpack(gtkset_text(my $version = new Gtk::Entry(50),"...")),
 			     ),
 		      gtkpack(new Gtk::HBox(0,5),
 			      gtkpack(new Gtk::Label(_("Kernel:"))),
@@ -78,7 +78,7 @@ gtkpack2__(
 			      gtkpack(gtkset_text(my $compiler = new Gtk::Entry(50),"$mdk_release")),
 			     ),
 		      gtkpack(new Gtk::HBox(0,0),
-			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open a web browser window  on https://www.mandrakebugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
+			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open a web browser window  on https://www.bugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
 			     ),
 		      gtkpack(new Gtk::HSeparator),
 		      
@@ -87,9 +87,11 @@ gtkpack2__(
 my $app_choice;
 
 $comb_app->entry->signal_connect('changed', sub {
-				     if (my $text = $comb_app->entry->get_text() ne '') {
-					 chomp($which_app = `which '$mdk_app->{$text}'`);
+				     if ((my $text = $comb_app->entry->get_text()) ne '') {
+ #					 wantarray ? 
+					 exists $mdk_app->{$text}[1] ? chomp($which_app =`which '$mdk_app->{$text}[1]'`) : chomp($which_app = `which '$mdk_app->{$text}'`);
 					 chomp($app_choice = `rpm -qf '$which_app'`); 
+					 $app_choice ne '' ? $version->set_text("$app_choice") : $version->set_text(_("Not installed"));
 				     }
 				 }
 				);
@@ -99,13 +101,16 @@ my $Close_Button = new Gtk::Button(_("Close"));
 $Close_Button->signal_connect(clicked => sub { Gtk->exit(0)});
 $hbx->pack_start($Close_Button,0,0,0);
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { connect_bugzilla("https://qa.mandrakesoft.com");});
+$Report_Button->signal_connect(clicked => sub { connect_bugzilla("https://qa.mandrakesoft.com/wizard.php/");});
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
 
 $window_g->show_all();
 Gtk->main();
+Gtk->exit(0);
+in->exit(0);
+
 
 sub connect_bugzilla {
     my($url) = @_;
@@ -116,7 +121,7 @@ sub connect_bugzilla {
 
 sub read_app_context {
     my ($name) = @_;
-    
+    $na
 }
 
 sub quit_global {
