@@ -2467,11 +2467,13 @@ sub main {
 				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
 				       /usr/bin/escputil
 				       /usr/share/printer-testpages/testprint.ps
+				       /usr/bin/nmap
+				       /usr/bin/scli
 				       ),
 				    (printer::files_exist("/usr/bin/gimp") ?
 				     "/usr/lib/gimp/1.2/plug-ins/print" : ())
 				    )))) {
-	    $in->do_pkgs->install('foomatic','printer-utils','printer-testpages',
+	    $in->do_pkgs->install('foomatic','printer-utils','printer-testpages','nmap','scli',
 				  if_($in->do_pkgs->is_installed('gimp'), 'gimpprint'));
 	}
 
