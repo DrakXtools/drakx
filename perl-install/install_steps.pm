@@ -258,7 +258,6 @@ sub choosePackages {
 
     foreach (values %{$packages->[0]}) {
 	pkgs::packageSetFlagSkip($_, 0);
-	pkgs::packageSetFlagUnskip($_, 0);
     }
 
     #- avoid destroying user selection of packages. TOCHECK

@@ -120,7 +120,7 @@ sub readMonitorsDB {
 	$monitors{"$l{vendor}|$l{type}"} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {
-	$monitors{"Generic|" . translate($k)} =
+	$monitors{'Generic|' . translate($k)} =
 	    { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
 }
@@ -349,7 +349,7 @@ sub monitorConfiguration(;$$) {
 
     readMonitorsDB("/usr/X11R6/lib/X11/MonitorsDB");
 
-    add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], _("Generic") . '|' . translate($default_monitor)) }) unless $monitor->{type};
+    add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], 'Generic|' . translate($default_monitor)) }) unless $monitor->{type};
     if ($monitor->{type} eq 'Unlisted') {
 	$in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
@@ -654,7 +654,7 @@ sub resolutionsConfiguration {
     my $wres = first(split 'x', $res);
 
     #- take the first available resolution <= the wanted resolution
-    $wres ||= max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}};
+    $wres = max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}};
     my $depth = eval { $o->{default_depth} || autoDefaultDepth($card, $wres) };
 
     $auto or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;

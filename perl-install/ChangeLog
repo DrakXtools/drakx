@@ -1,3 +1,24 @@
+2000-09-27  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (configureX): if `clicked' don't go
+	to auto mode
+
+	* Xconfigurator.pm (monitorConfiguration): fix the translated
+	'Generic' which is not so (and must not be so) anymore
+
+2000-09-26  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm: remove all Unskip code
+
+	* my_gtk.pm (_create_window): add shortcut alt-e to switch to
+	expert
+
+	* Xconfigurator.pm (resolutionsConfiguration): fix for setting
+	legal resolution
+
+	* install_steps_interactive.pm (selectLanguage): use formatAlaTeX
+	on the license
+
 2000-09-26  François Pons  <fpons@mandrakesoft.com>
 
 	* fs.pm: added mounting of swap partition when mounting them

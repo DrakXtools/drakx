@@ -366,23 +366,26 @@ sub _create_window($$) {
     $w->signal_connect(key_press_event => sub {
 	my $d = ${{ 65470 => 'help',
 	            65481 => 'next',
-		    65480 => 'previous' }}{$_[1]->{keyval}} or return;
+		    65480 => 'previous' }}{$_[1]{keyval}};
 
-	#- previous field is created here :(
-	my $s; foreach (reverse @{$::o->{orderedSteps}}) {
-	    $s->{previous} = $_ if $s;
-	    $s = $::o->{steps}{$_};
-	}
-
-	if ($d eq "help" && !$::isStandalone) {
+	if ($d eq "help") {
 	    require install_gtk;
 	    install_gtk::create_big_help($::o);
-	} else {
-	    my $s = $::o->{step};
+	} elsif ($_[1]{keyval} eq ord('e') && $_[1]{state} & 8) {
+	    log::l("Switching to expert");
+	    $::expert = 1;
+	    $::beginner = 0;
+	} elsif ($d) {
+	    #- previous field is created here :(
+	    my $s; foreach (reverse @{$::o->{orderedSteps}}) {
+		$s->{previous} = $_ if $s;
+		$s = $::o->{steps}{$_};
+	    }
+	    $s = $::o->{step};
 	    do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};
 	    $::setstep && $s and die "setstep $s\n";
 	}
-    }) unless $::isStandalone;
+    });# if $::isInstall;
 
     $w->signal_connect(size_allocate => sub {
 	my ($wi, $he) = @{$_[1]}[2,3];

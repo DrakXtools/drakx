@@ -67,73 +67,9 @@ translated etc. that varies from language to language).") if $o->{lang} !~ /^en/
     
     unless ($o->{useless_thing_accepted}) {
 	$o->set_help('license');
-	$o->{useless_thing_accepted} = $o->ask_from_list_('', formatAlaTeX(
-"Introduction
-
-\"Linux-Mandrake\" designates the operating system and the different
-components of the Linux-Mandrake distribution. The operating system and the
-different components available in the Linux-Mandrake distribution are
-called the \"Software Product\" hereafter. The Software Product includes, but
-is not restricted to, the set of programs, methods, rules, documentation,
-related to the operating system and the different components of the
-Linux-Mandrake distribution.
-
-
-1.License Agreement
-
-
-Please read carefully this document. This document is a license agreement
-between you and MandrakeSoft S.A., 43, rue d'Aboukir 75002 Paris - France,
-which applies to the Software Product.
-
-You must agree with the terms and conditions of the present License before
-you install, copy or use the Software Product. If you disagree with any
-portion of the License, you are not allowed to install, duplicate or use
-the Software.  By installing, duplicating or using the Software Product in
-any manner, you explicitly accept and fully agree to conform to the terms
-and conditions of the present License. The License agreement is personal,
-non exclusive and non transferable.
-
-Any attempt to install, duplicate or use the Software Product in a manner
-which does not comply with the terms and conditions of the present License
-is void and will terminate your rights under the present License. Upon
-termination of the License, you must immediately destroy all copies of the
-Software Product.
-
-
-2. The GPL license and related licenses
-
-
-The Software product consists of components created by different persons
-or entities.
-
-Most of these components are governed under the terms and conditions of the
-GNU General Public License, hereafter called \"GPL\", or of similar
-licenses. Most of these licenses allow you to use, duplicate and adapt the
-components which they cover. Please read carefully the terms and conditions
-of the license agreement for each component before using the component. Any
-question on a component license should be addressed to the component author
-and not to MandrakeSoft.
-
-The programs and components developed by MandrakeSoft are usually governed
-by the GPL License. Please refer to the documentation of these components
-for further details.
-
-Some versions of the Software Product may contain components which are not
-governed by the GPL License or similar agreements. Each such component is
-then governed by the terms and conditions of its specific license. Please
-read carefully and comply with such specific licenses before you install,
-duplicate or use the said components. Such licenses will in general prevent
-the transfer, the duplication (except for backup purpose), the reverse
-engineering, de-assembly, de-compilation or modification of the
-component. Any breach of agreement will immediately terminate your rights
-under the specific license. Unless the specific license terms grant you
-such rights, you usually cannot install the programs on more than one
-system, or use it on a network. In doubt, please contact directly the
-distributor or editor of the component. Transfer to third parties or
-copying of such components including the documentation is strictly
-forbidden.
-"), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
+	$o->{useless_thing_accepted} = $o->ask_from_list_('', 
+							  "License - no warranty", 
+							  [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
     }
 }
 #------------------------------------------------------------------------------
@@ -506,7 +442,6 @@ sub chooseGroups {
     foreach (@{$o->{compssUsersSorted}}) {
 	$o->{compssUsersChoice}{$_} or next;
 	foreach (@{$compssUsers->{$_}}) {
-	    pkgs::packageSetFlagUnskip($_, 1);
 	    pkgs::packageSetFlagSkip($_, 0);
 	}
     }
@@ -960,7 +895,7 @@ give digits instead of normal letters (eg: pressing `p' gives `6')")) || return;
 
 #------------------------------------------------------------------------------
 sub configureX {
-    my ($o) = @_;
+    my ($o, $clicked) = @_;
     $o->configureXBefore;
 
     require Xconfig;
@@ -979,7 +914,7 @@ sub configureX {
     $xfs_started = 1;
 
     { local $::testing = 0; #- unset testing
-      local $::auto = $::beginner;
+      local $::auto = $::beginner && !$clicked;
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
 	  my ($server, @l) = @_;

@@ -2,7 +2,7 @@ package pkgs; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP $PKGS_UPGRADE);
+use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UPGRADE);
 
 use common qw(:common :file :functional);
 use install_any;
@@ -36,8 +36,6 @@ use c;
  -30 => __("i18n (nice)"),
 );
 #- HACK: rating += 50 for some packages (like kapm, cf install_any::setPackages)
-#- HACK: rating += 10 if the group is selected and it is not a kde package (aka name !~ /^k/)
-#- HACK: rating += 1  if the group is selected and it is     a kde package (aka name !~ /^k/)
 
 %by_lang = (
   'ar'	=> [ 'acon' ],
@@ -100,7 +98,6 @@ $PKGS_FORCE     = 0x01000000;
 $PKGS_INSTALLED = 0x02000000;
 $PKGS_BASE      = 0x04000000;
 $PKGS_SKIP      = 0x08000000;
-$PKGS_UNSKIP    = 0x10000000;
 $PKGS_UPGRADE   = 0x20000000;
 
 #- package to ignore, typically in Application CD.
@@ -134,7 +131,6 @@ sub packageFlagForce     { my ($pkg) = @_; $pkg->{flags} & $PKGS_FORCE }
 sub packageFlagInstalled { my ($pkg) = @_; $pkg->{flags} & $PKGS_INSTALLED }
 sub packageFlagBase      { my ($pkg) = @_; $pkg->{flags} & $PKGS_BASE }
 sub packageFlagSkip      { my ($pkg) = @_; $pkg->{flags} & $PKGS_SKIP }
-sub packageFlagUnskip    { my ($pkg) = @_; $pkg->{flags} & $PKGS_UNSKIP }
 sub packageFlagUpgrade   { my ($pkg) = @_; $pkg->{flags} & $PKGS_UPGRADE }
 
 sub packageSetFlagSelected  { my ($pkg, $v) = @_; $pkg->{flags} &= ~$PKGS_SELECTED; $pkg->{flags} |= $v & $PKGS_SELECTED; }
@@ -143,7 +139,6 @@ sub packageSetFlagForce     { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_F
 sub packageSetFlagInstalled { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_INSTALLED) : ($pkg->{flags} &= ~$PKGS_INSTALLED); }
 sub packageSetFlagBase      { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_BASE)      : ($pkg->{flags} &= ~$PKGS_BASE); }
 sub packageSetFlagSkip      { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_SKIP)      : ($pkg->{flags} &= ~$PKGS_SKIP); }
-sub packageSetFlagUnskip    { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_UNSKIP)    : ($pkg->{flags} &= ~$PKGS_UNSKIP); }
 sub packageSetFlagUpgrade   { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_UPGRADE)   : ($pkg->{flags} &= ~$PKGS_UPGRADE); }
 
 sub packageProvides { my ($pkg) = @_; @{$pkg->{provides} || []} }
@@ -707,7 +702,7 @@ sub setSelectedFromCompssList {
     my @packages = allPackages($packages);
     my @places = do {
 	#- special case for /^k/ aka kde stuff
-	my @values = map { $_->{values}[$ind] + (packageFlagUnskip($_) && packageName($_) !~ /^k/ ? 10 : 1) } @packages;
+	my @values = map { $_->{values}[$ind] } @packages;
 	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
     foreach (@places) {

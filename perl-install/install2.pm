@@ -220,7 +220,7 @@ sub selectMouse {
 
 #------------------------------------------------------------------------------
 sub setupSCSI {
-    my ($clicked) = $_[0];
+    my ($clicked) = @_;
     $o->{autoSCSI} ||= $::beginner;
 
     $o->setupSCSI($o->{autoSCSI} && !$clicked, $clicked);
@@ -228,7 +228,7 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub selectKeyboard {
-    my ($clicked) = $_[0];
+    my ($clicked) = @_;
 
     return if !$o->{isUpgrade} && $::beginner && !$clicked;
 
@@ -424,13 +424,13 @@ sub setupBootloader {
 }
 #------------------------------------------------------------------------------
 sub configureX {
-    my ($clicked) = $_[0];
+    my ($clicked) = @_;
 
     #- done here and also at the end of install2.pm, just in case...
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf($o->{prefix});
 
-    $o->configureX if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked;
+    $o->configureX($clicked) if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked;
 }
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy { $o->generateAutoInstFloppy }
