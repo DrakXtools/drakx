@@ -468,6 +468,8 @@ sub set_default_options {
     }
     if (isThisFs('reiserfs', $part)) {
 	$options->{notail} = 1;
+    } else {
+	$options->{notail} = 0;
     }
     if (isLoopback($part) && !isSwap($part)) { #- no need for loop option for swap files
 	$options->{loop} = 1;
