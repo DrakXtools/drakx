@@ -1024,6 +1024,21 @@ sub summary {
 	return _("Remote CUPS server"); #- fall back in case of something wrong.
     };
 
+    my @sound_cards = arch() !~ /ppc/ ? modules::get_that_type('sound') : modules::load_thiskind('sound');
+
+    #- if no sound card are detected AND the user selected things needing a sound card,
+    #- propose a special case for ISA cards
+    my $isa_sound_card = 
+      !@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO}) &&
+	sub {
+	    if ($o->ask_yesorno('', _("Do you have an ISA sound card?"))) {
+		$o->do_pkgs->install('sndconfig');
+		$o->ask_warn('', _("Run \"sndconfig\" after installation to configure your sound card"));
+	    } else {
+		$o->ask_warn('', _("No sound card detected. Try \"harddrake\" after installation"));
+	    }
+	};
+
     $o->ask_from_({
 		   messages => _("Summary"),
 		   cancel   => '',
@@ -1037,7 +1052,8 @@ sub summary {
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
     (map { 
 { label => _("Sound card"), val => $_->{description} } 
-     } arch() !~ /ppc/ ? modules::get_that_type('sound') : modules::load_thiskind('sound')),
+     } @sound_cards),
+    if_($isa_sound_card, { label => _("Sound card"), clicked => $isa_sound_card }), 
     (map {
 { label => _("TV card"), val => $_->{description} } 
      } grep { $_->{driver} eq 'bttv' } detect_devices::probeall()),
