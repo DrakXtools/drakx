@@ -148,6 +148,7 @@ sub set {
     sshd_config_UsePAM($kind ne 'local');
 
     if ($kind eq 'SmartCard') {
+	$in->do_pkgs->install('castella-pam');
 	set_pam_authentication('castella');
     } elsif ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
