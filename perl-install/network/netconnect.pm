@@ -200,7 +200,7 @@ sub real_main {
       };
 
       my $handle_multiple_cnx = sub {
-          $need_restart_network = 1 if $netcnx->{type} =~ /lan|cable/;
+          $need_restart_network = 1 if $netcnx->{type} =~ /adsl|cable|lan/;
           my $nb = keys %{$netc->{internet_cnx}};
           if (1 < $nb) {
               return "multiple_internet_cnx";
@@ -648,7 +648,6 @@ killall pppd
                                         'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
-                        $need_restart_network = member($ntf_name, qw(speedtouch eci));
                         $in->do_pkgs->install($packages{$ntf_name}->[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
                         if ($ntf_name eq 'speedtouch') {
                             $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "$::prefix/usr/share/speedtouch/mgmt.o");
