@@ -166,12 +166,9 @@ sub boot_img_i386 {
 
     __ "$sudo umount $mnt 2>/dev/null";
 
-    if ($type eq "all") {
-	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
-    } else {
-	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
-    }
-
+    _ "dd if=/dev/zero of=$img bs=1k count=" . ($type eq 'all' ? 2880 : 1440);
+    _ "mkdosfs -f 1 -r 16 -s 2 $img"; # keep the FAT bookkeeping as small as possible
+    _ "$sudo syslinux-graphic $img";
 
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
     _ "cat $kernel > $mnt/vmlinuz";
