@@ -947,6 +947,23 @@ sub install_urpmi {
 	    #- use list file only if visible password or macro.
 	    my $need_list = $dir =~ m,^(?:[^:]*://[^/:\@]*:[^/:\@]+\@|.*%{),; #- }
 
+            my $removable_device;
+
+            if ($curmethod eq 'disk-iso') {
+                my $p = find { $_->{real_mntpoint} eq '/tmp/hdimage' } @{$::o->{fstab}} or
+                  log::l("unable to find ISO image mountpoint, not adding urpmi media"), next;
+                my $iso_info = find_ISO_image_labelled($_->{descr}) or
+                  log::l("unable to find ISO image labelled $name, not adding urpmi media"), next;
+                my ($iso_path) = $iso_info->{file} =~ m,^/tmp/hdimage/+(.*), or
+                  log::l("unable to find ISO image file name ($iso_info->{file}), not adding urpmi media"), next;
+                my $dest = "/mnt/inst_iso";
+                $dir = "removable:/$dest";
+                -d "$::prefix/$dest" or mkdir_p($dest);
+                $removable_device = "$p->{mntpoint}/$iso_path";
+            } elsif ($curmethod eq 'cdrom') {
+                $removable_device = '/dev/cdrom';
+            }
+
 	    #- build a list file if needed.
 	    if ($need_list) {
 		my $mask = umask 077;
@@ -1017,8 +1034,8 @@ sub install_urpmi {
   hdlist: hdlist.$name.cz
   with_hdlist: $with" . ($need_list ? "
   list: list.$name" : "") . (keys(%{$_->{key_ids}}) ? "
-  key-ids: " . join(',', keys(%{$_->{key_ids}})) : "") . ($dir =~ /removable:/ && "
-  removable: /dev/cdrom") . ($_->{update} ? "
+  key-ids: " . join(',', keys(%{$_->{key_ids}})) : "") . (defined $removable_device && "
+  removable: $removable_device") . ($_->{update} ? "
   update" : "") . "
 }
 
