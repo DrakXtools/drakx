@@ -13,6 +13,7 @@ use Data::Dumper;
 
 
 use common qw(:common :system :functional);
+use partition_table_empty;
 use partition_table_raw;
 use partition_table_dos;
 use partition_table_bsd;
@@ -371,18 +372,12 @@ sub read_one($$) {
     my ($pt, $info);
     #- SUN bioses may blank disk or refuse to load it if the partition is unknown.
     my @parttype = arch() =~ /^sparc/ ? ('sun', 'bsd', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown');
-    foreach (@parttype) {
+    foreach ('empty', @parttype) {
 	/unknown/ and die "unknown partition table format";
 	eval {
 	    bless $hd, "partition_table_$_";
 	    ($pt, $info) = $hd->read($sector);
 	    log::l("found a $_ partition table on $hd->{file}");
-	    {
-		foreach my $e (@$pt) {
-		    my $logtext = join(" ", map { "$_=$e->{$_}" } keys %$e);
-		    log::l("$logtext");
-		}
-	    }
 	};
 	$@ or last;
     }
