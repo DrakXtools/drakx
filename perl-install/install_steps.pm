@@ -151,7 +151,10 @@ sub doPartitionDisksAfter {
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
-    fs::mount_all($fstab, $prefix);
+    if ($o->{partitioning}{use_existing_root}) {
+	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
+	fs::mount_part($_, $o->{prefix}) foreach grep { $_->{mntpoint} && !$_->{notFormatted} } @{$o->{fstab}};
+    }
 
     if (my $s = delete $o->{stage1_hd}) {
 	my ($part) = grep { $_->{device} eq $s->{device} } @{$o->{fstab}};
@@ -224,7 +227,7 @@ sub choosePartitionsToFormat($$) {
 	    my $t = isLoopback($_) ? 
 	      eval { fsedit::typeOfPart($o->{prefix} . loopback::file($_)) } :
 	      fsedit::typeOfPart($_->{device});
-	    $_->{toFormatUnsure} = $_->{mntpoint} eq "/" && !$o->{doNotFormatRootByDefault} ||
+	    $_->{toFormatUnsure} = $_->{mntpoint} eq "/" ||
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
 	      (!$t || isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
 	}
