@@ -21,27 +21,20 @@ use modules;
 
 
 %vga_modes = (
- "Ask at boot" => 'ask',
- "Normal" => 'normal',
- "80x50" => '0x0f01',
- "80x43" => '0x0f02',
- "80x28" => '0x0f03',
- "80x30" => '0x0f04',
- "80x34" => '0x0f05',
- "80x60" => '0x0f06',
- "100x30" => '0x0122',
- "640x480 in 16 bits (FrameBuffer only)" => 785,
- "800x600 in 16 bits (FrameBuffer only)" => 788,
- "1024x768 in 16 bits (FrameBuffer only)" => 791,
- "1280x1024 in 16 bits (FrameBuffer only)" => 794,
+'ask' => "Ask at boot",
+'normal' => "Normal",
+'0x0f01' => "80x50",
+'0x0f02' => "80x43",
+'0x0f03' => "80x28",
+'0x0f04' => "80x30",
+'0x0f05' => "80x34",
+'0x0f06' => "80x60",
+'0x0122' => "100x30",
+ 785 => "640x480 in 16 bits (FrameBuffer only)",
+ 788 => "800x600 in 16 bits (FrameBuffer only)",
+ 791 => "1024x768 in 16 bits (FrameBuffer only)",
+ 794 => "1280x1024 in 16 bits (FrameBuffer only)",
 );
-
-my %vga_modes2nb = (
- 'ask'    => -3,
- 'normal' => -1,
-#- other entries are identity
-);
-
 
 #-#####################################################################################
 #- Functions

@@ -155,7 +155,7 @@ sub setupBootloader {
 	my $memsize = bootloader::get_append($b, 'mem');
 	my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
 
-	$b->{vga} ||= 'Normal';
+	$b->{vga} ||= 'normal';
 	if (arch !~ /ppc/) {
 	$in->ask_from('', _("Bootloader main options"), [
 { label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
@@ -165,7 +165,7 @@ sub setupBootloader {
 { label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
 { label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba", advanced => 1 },
 { label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact"), advanced => 1 },
-{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, advanced => 1 },
+{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
 ),
 { label => _("Delay before booting default image"), val => \$b->{timeout} },
     if_($security >= 4,
@@ -210,7 +210,6 @@ sub setupBootloader {
 	grep_each { $::b } %{$b->{methods}} or return 0;
 
 	$b->{use_partition} = $silo_install_lang eq _("First sector of drive (MBR)") ? 0 : 1;
-	$b->{vga} = $bootloader::vga_modes{$b->{vga}} || $b->{vga};
 
 	bootloader::set_profiles($b, $profiles);
 	bootloader::add_append($b, "mem", $memsize);
@@ -275,7 +274,7 @@ You can add some more or change the existing ones."),
 { label => _("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => _("Append"), val => \$e->{append} },
   if_(arch !~ /ppc|ia64/,
-{ label => _("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
+{ label => _("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert },
 ),
 { label => _("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
 { label => _("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
@@ -322,7 +321,6 @@ if (arch() !~ /ppc/) {
 		   0;
 	       } } }, \@l)) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
-	    $e->{vga} = $bootloader::vga_modes{$e->{vga}} || $e->{vga};
 	    require bootloader;
 	    bootloader::configure_entry($prefix, $e); #- hack to make sure initrd file are built.
 
