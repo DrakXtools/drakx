@@ -18,7 +18,7 @@ sub net_detect { whatNetPrinter(1, 0) }
 sub net_smb_detect { whatNetPrinter(0, 1) }
 
 sub detect {
-    local_detect(), net_detect(), net_smb_detect();
+    local_detect(), whatNetPrinter(1, 1);
 }
 
 sub whatNetPrinter {
