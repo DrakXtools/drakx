@@ -1,3 +1,216 @@
+2004/03/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+2004/03/17  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/raw.pm, partition_table.pm: add
+	set_best_geometry_for_the_partition_table to use the hd geometry instead
+	of the physical geometry returned by the kernel (since for now i can't
+	have bios geometry on 2.6)
+
+	* partition_table/dos.pm: add set_best_geometry_for_the_partition_table to
+	use the hd geometry instead of the physical geometry returned by the
+	kernel (since for now i can't have bios geometry on 2.6)
+	  - sector2CHS() now gives sector number starting at 0
+	  - CHS2rawCHS() takes care of giving sector number starting at 1
+
+2004/03/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: split out agp controllers out of bridges
+
+	* standalone/drakups: use std banner
+	use new $ugtk2::wm_icon for x11 icon
+
+	* network/ethernet.pm (get_eth_cards) if SIOCETHTOOL ioctl is not
+	supported by driver, try
+	to lookup card by driver in devices list (if there's only one physical
+	card managed by this driver)
+
+	* standalone/logdrake, standalone/drakfont: use new $ugtk2::wm_icon for
+	x11 icon
+
+	* network/adsl.pm: do not pass eth interface and user to adsl-start,
+	they're already
+	provided in pppoe.conf (#2004)
+
+	* network/adsl_consts.pm: update wanadoo dns according to
+	
+	http://www.wanadoo.fr/bin/frame2.cgi?u=http%3A//assistance.wanadoo.fr/reponse791.asp
+
+	* standalone/service_harddrake: add agpgart modules to modprobe.preload if
+	needed
+
+	* standalone/harddrake2: use new $ugtk2::wm_icon for x11 icon
+	show module for system bridges if it's not unknown (aka not managed by
+	kernel core)
+	blacklist agp controllers class (they're still visible in the bridges
+	one)
+
+	* ugtk2.pm (_create_dialog) set x11 icon for dialogs too
+	(new) fix x11 icon for Gtk2::Plug
+	(_find_imgfile) prevent matching subdirectory (eg: harddrake)
+
+	* network/netconnect.pm: fix SmartLink modem managment (#8959)
+
+	* standalone/drakconnect: misc perl_checker cleanup
+	remove debug statements
+	fix no information for drivers that do not support ethtool ioctl (eg:
+	sk98lin): try to match the device by interface name and driver name
+	(won't work for several cards managed by the same driver)
+	use new $ugtk2::wm_icon for x11 icon
+
+2004/03/16  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: transl.in progress
+
+2004/03/16  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/compssUsers.server: Add NETWORKING_FILE support for PowerPackPlus
+
+	* standalone/icons/harddrake2/ide_hd.png,
+	standalone/icons/harddrake2/scanner.png,
+	standalone/icons/harddrake2/hw_mouse.png,
+	standalone/icons/harddrake2/joystick.png,
+	standalone/icons/harddrake2/hw_printer.png,
+	standalone/icons/harddrake2/tv.png,
+	standalone/icons/harddrake2/memory.png,
+	standalone/icons/harddrake2/multimedia.png,
+	standalone/icons/harddrake2/floppy.png,
+	standalone/icons/harddrake2/video.png,
+	standalone/icons/harddrake2/scsi_hd.png,
+	standalone/icons/harddrake2/unknown.png,
+	standalone/icons/harddrake2/harddisk.png,
+	standalone/icons/harddrake2/sound.png,
+	standalone/icons/harddrake2/cd.png,
+	standalone/icons/harddrake2/hw_network.png: Update images
+
+2004/03/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* pixmaps/langs/lang-ku.png, pixmaps/langs/lang-hy.png,
+	pixmaps/langs/lang-tt.png: updated and added pictures for language
+	selection list.
+	enabled choice for Filipino (we have quite good translations),
+	Low-Saxon and Kyrgyz.
+
+	* pixmaps/langs/lang-gn.png, pixmaps/langs/lang-nds.png,
+	pixmaps/langs/lang-ky.png, pixmaps/langs/lang-tk.png,
+	pixmaps/langs/lang-ph.png: readding images in binary mode
+	removed pixmaps to readd them in binary mode
+	updated and added pictures for language selection list.
+	enabled choice for Filipino (we have quite good translations),
+	Low-Saxon and Kyrgyz.
+
+	* lang.pm: changed order of LANGUAGE value for Filipino so monolingual
+	windowmanagers
+	can have translated menus
+	updated and added pictures for language selection list.
+	enabled choice for Filipino (we have quite good translations),
+	Low-Saxon and Kyrgyz.
+
+	* share/po/it.po: updated Italian file
+
+2004/03/16  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/drakupdate_fstab: choose wether to use supermount is now
+	based on variable SUPERMOUNT in /etc/sysconfig/dynamic
+
+	* ugtk2.pm: fix typo
+	  - add $ugtk2::wm_icon (esp. for park-rpmdrake)
+	  - cleanup, correct indentation
+
+2004/03/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake (alert_config) fix wizard when logdrake is embedded
+	(alert_config) fix wizard on second run
+	(alert_config) make it a wizard again (that is, with banner,
+	"previous"/"next" buttons and the like)
+	set x11 ico
+
+	* share/rpmsrate: wireless-tools is listed twice!
+	speedtouch was listed two times in the old days!
+	install speedtouch firmware too
+	automatically install speedtouch for Alcatel USB ADSL modems
+	automatically install eagle-usb for sagem ADSL modems
+	install kernel-2.4.x for internal ISDN devices
+
+	* ugtk2.pm (new) set x11 icon for non wizard tools
+	(new) set default x11 icon
+
+	* standalone/harddrake2, standalone/drakups: set x11 ico
+
+	* standalone/drakclock: fix server lookup (#8846)
+
+	* standalone/icons/drakups.png: add drakups icon
+	"Copyright (C) 2004 MGE UPS SYSTEMS / Luc Descotils
+	This graphic is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	at your option) any later version..."
+
+	* network/netconnect.pm: bewan support
+	only show encapsulation parameter for sagem modem
+	preselect pppoa for bewan too
+	make it clear these checks are only for pci modems
+	pci modem: only take care of selected one
+	warn that we only support kernel 2.4.x for pci modems
+	remove debug statement
+	for ADSL Bewan and ISDN modem, warn that only 2.4.x kernels are
+	supported
+
+	* network/adsl.pm: bewan support
+	(adsl_conf_backend) fix adsl stop on pppoa links
+
+	* network/modem.pm (ppp_configure) really fix modem symlink (#7967)
+
+	* standalone/drakconnect: set x11 ico
+	(configure_net) do not offer to alter domain name since this is
+	achievable through FQDN
+
+	* standalone/drakfont (interactive_mode) better style
+	(interactive_mode, dialog) let's have nice icon in sub dialogs when
+	embedded too
+	(dialog) make subdialogs be transcient for main window when not embedded
+	set x11 ico
+
+2004/03/16  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: clean majors introduced into the CVS by mistake
+
+2004/03/15  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Replace xsane by scanner-gui (allows to install kooka or
+	xsane)
+	Readd Audacity (needs to be moved from Contrib to Main; it should be
+	installed by default for all products)
+
+2004/03/15  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Fix misnamed inittab\$\$IP=xxx.xxx.xxx.xxx\$\$.
+
+2004/03/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect (configure_net) enable to alter hostname
+	(configure_net) fix unlisted first dns server
+
+	* drakxtools.spec: 10-23mdk
+
+	* standalone/logdrake: fix explanations in mcc that got broken by #8412
+	speedup
+
+	* network/netconnect.pm: always write scripts like in the old days but
+	when there's no cnx
+	skip "start on boot" step for LAN (already managed by network scripts)
+	perl_checker fix
+	write ether conf later on QA request
+	do not list anymore wireless cards in LAN connection, only in wireless
+	connections
+	fix ADSL modems not listed unless one try to manually pick a network
+	card (#8611): prevent module::interactive from offering to pick a
+	module when there's no network cards
+
+	* share/po/fr.po: update
+
 2004/03/15  Florin Grad  <florin at mandrakesoft.com>
 
 	* standalone/drakgw: add ppp+ and ippp+ at the interfaces list
@@ -29103,7 +29316,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.909 2004/03/12 16:40:36 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.910 2004/03/15 13:19:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
