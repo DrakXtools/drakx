@@ -28,7 +28,7 @@ sub configure {
 Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
 				   [ sort values %l ],
-				   $l{ find { defined $netc->{autodetect}{adsl}{$_} } keys %l }
+				   $l{ find { $netc->{autodetect}{adsl}{$_} } keys %l }
 				  ) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
