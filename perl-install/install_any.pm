@@ -53,8 +53,8 @@ sub useMedium($) {
     $asked_medium = $_[0];
 }
 sub changeMedium($$) {
-    my ($method, $medium) = @_;
-    log::l("change to medium $medium for method $method (refused by default)");
+    my ($method, $medium_name) = @_;
+    log::l("change to medium $medium_name for method $method (refused by default)");
     0;
 }
 sub relGetFile($) {
@@ -66,13 +66,13 @@ sub relGetFile($) {
     $_;
 }
 sub askChangeMedium($$) {
-    my ($method, $medium) = @_;
+    my ($method, $medium_name) = @_;
     my $allow;
     do {
-	local $::o->{method} = $method = 'cdrom' if $medium =~ /^\d+s$/; #- Suppl CD
-	eval { $allow = changeMedium($method, $medium) };
+	local $::o->{method} = $method = 'cdrom' if $medium_name =~ /^\d+s$/; #- Suppl CD
+	eval { $allow = changeMedium($method, $medium_name) };
     } while $@; #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
-    log::l($allow ? "accepting medium $medium" : "refusing medium $medium");
+    log::l($allow ? "accepting medium $medium_name" : "refusing medium $medium_name");
     $allow;
 }
 
@@ -371,7 +371,7 @@ sub setPackages {
 	        && $o->ask_yesorno('', N("Do you have a supplementary CD to install?"), 0))
 	    {
 		#- by convention, the media names for suppl. CDs match /^\d+s$/
-		my $medium = '1s'; #- supplement 1
+		my $medium_name = '1s'; #- supplement 1
 		local $::isWizard = 0;
 		local $o->{method} = 'cdrom';
 		(my $cdromdev) = detect_devices::cdroms();
@@ -382,17 +382,17 @@ sub setPackages {
 		if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
 		    mountCdrom("/mnt/cdrom", $cdrom);
 		    log::l($@) if $@;
-		    useMedium($medium);
+		    useMedium($medium_name);
 		    my $supplmedium = pkgs::psUsingHdlist(
 			$o->{prefix}, # /mnt
 			'cdrom',
 			$o->{packages},
-			"hdlist$medium.cz",
-			$medium,
+			"hdlist$medium_name.cz",
+			$medium_name,
 			'media/main',
-			"Supplementary CD $medium",
+			"Supplementary CD $medium_name",
 			1, # selected
-			"/mnt/cdrom/media/main/media_info/hdlist$medium.cz",
+			"/mnt/cdrom/media/main/media_info/hdlist$medium_name.cz",
 		    );
 		    if ($supplmedium) {
 			log::l("read suppl hdlist");
@@ -403,7 +403,7 @@ sub setPackages {
 			log::l("no suppl hdlist");
 		    }
 		    #- TODO loop if there are several supplementary CDs
-		    # ++$medium; $medium .= "s";
+		    # ++$medium_name; $medium_name .= "s";
 		}
 	    } else {
 		$suppl_CDs = 0;

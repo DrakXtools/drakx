@@ -228,8 +228,8 @@ sub allMediums {
     sort { $a <=> $b } keys %{$packages->{mediums}};
 }
 sub mediumDescr {
-    my ($packages, $medium) = @_;
-    $packages->{mediums}{$medium}{descr};
+    my ($packages, $medium_name) = @_;
+    $packages->{mediums}{$medium_name}{descr};
 }
 
 sub packageRequest {
@@ -387,7 +387,7 @@ sub psUsingHdlists {
     @$packages{qw(count mediums)} = (0, {});
 
     #- parse hdlists file.
-    my $medium = 1;
+    my $medium_name = 1;
     foreach (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
@@ -399,9 +399,9 @@ sub psUsingHdlists {
 
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	psUsingHdlist($prefix, $method, $packages, $2, $medium, $3, $4, !$1);
+	psUsingHdlist($prefix, $method, $packages, $2, $medium_name, $3, $4, !$1);
 
-	++$medium;
+	++$medium_name;
     }
 
     log::l("psUsingHdlists read " . int(@{$packages->{depslist}}) .
@@ -411,17 +411,17 @@ sub psUsingHdlists {
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey) = @_;
-    my $fakemedium = "$descr ($method$medium)";
+    my ($prefix, $method, $packages, $hdlist, $medium_name, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey) = @_;
+    my $fakemedium = "$descr ($method$medium_name)";
     my $urpmidir = urpmidir($prefix);
-    log::l("trying to read $hdlist for medium $medium");
+    log::l("trying to read $hdlist for medium $medium_name");
 
     #- if the medium already exist, use it.
-    $packages->{mediums}{$medium} and return $packages->{mediums}{$medium};
+    $packages->{mediums}{$medium_name} and return $packages->{mediums}{$medium_name};
 
     my $m = { hdlist     => $hdlist,
 	      method     => $method,
-	      medium     => $medium,
+	      medium     => $medium_name,
 	      rpmsdir    => $rpmsdir, #- where is RPMS directory.
 	      descr      => $descr,
 	      fakemedium => $fakemedium,
@@ -458,13 +458,13 @@ sub psUsingHdlist {
     }
 
     #- integrate medium in media list, only here to avoid download error (update) to be propagated.
-    $packages->{mediums}{$medium} = $m;
+    $packages->{mediums}{$medium_name} = $m;
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
     $m->{ignored} ||= (
-	install_any::method_allows_medium_change($method) && $medium > 1    #- first cdrom
-	&& $medium !~ /^\d+s/			#- not a suppl. CD
+	install_any::method_allows_medium_change($method) && $medium_name > 1    #- first cdrom
+	&& $medium_name !~ /^\d+s/			#- not a suppl. CD
 	&& !common::usingRamdisk());
 
     #- parse synthesis (if available) of directly hdlist (with packing).
@@ -476,12 +476,12 @@ sub psUsingHdlist {
 	} elsif (-s $newf) {
 	    ($m->{start}, $m->{end}) = $packages->parse_hdlist($newf, 1);
 	} else {
-	    delete $packages->{mediums}{$medium};
+	    delete $packages->{mediums}{$medium_name};
 	    unlink $newf;
 	    $o_fhdlist or unlink $newsf;
 	    die "fatal: no hdlist nor synthesis to read for $fakemedium";
 	}
-	$m->{start} > $m->{end} and do { delete $packages->{mediums}{$medium};
+	$m->{start} > $m->{end} and do { delete $packages->{mediums}{$medium_name};
 					 unlink $newf;
 					 $o_fhdlist or unlink $newsf;
 					 die "fatal: nothing read in hdlist or synthesis for $fakemedium" };
