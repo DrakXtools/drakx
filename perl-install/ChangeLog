@@ -1,3 +1,109 @@
+2001/04/04  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: typo
+
+2001/04/04  daouda
+
+	* share/rpmsrate: add gatos for ati tv card .
+	reput klyx but in lower weight (2)
+	removed klyx from rpmsrate (bad idea according to pixel )
+	add klyx in install "Office KDE"
+
+2001/04/04  François Pons  <fpons@mandrakesoft.com>
+
+	* live_install: unset locale environment for safety
+
+	* detect_devices.pm: added missing LD_LOADER reference for /bin/dmesg
+	(needed for live upgrade so
+	that error message are not printed)
+
+	* install_steps_gtk.pm: fixed to use SHARE_PATH instead of /usr/share
+
+	* any.pm, netconnect.pm: use SHARE_PATH instead of /usr/share
+
+	* install2.pm: added selectPackagesToUpgrade the first time choosePackages
+	is called.
+
+	* install_steps.pm: disable frame buffer for Matrox cards.
+
+	* install_any.pm: fixed multiple wait message (looking+finding packages)
+
+2001/04/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (setPackages): better handling for tv, photo and scanner
+
+	* modules.pm (@skip_modules_on_stage1): kaweth and pegasus doesn't work on
+	stage1, so skip them
+	  - add photo, tv and scanner
+	  - add pegasus and kaweth modules
+
+	* share/compssUsers: remove TV (it is a hardware flag)
+
+2001/04/03  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: keep mount point configuration trhough multi-passes of
+	diskdrake and others.
+
+	* Xconfigurator.pm: prefer XF3 for SiS card.
+
+2001/04/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sr.po, share/po/sp.po, share/po/ko.po: Updated Korean file
+
+2001/04/03  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm: do not use isSpecial which should only be used on
+	partitions
+	(main): do not have loopback pseudo hd in hds out of diskdrake
+
+	* modules.pm (load_raw): add the require install_any
+
+	* share/rpmsrate: restore Aurora (i really don't understand what i've done
+	with flag AURORA a month ago) to a simple behaviour
+
+	* install_steps_interactive.pm (choosePackages): do not make a special
+	case for upgrades (was: select the
+	min size, which was on contradiction with profile selection)
+
+	* fs.pm (real_format_part): give "-v 1" to mkreiserfs if kernel is 2.2
+
+	* standalone/mousedrake: fix horrible error (using an undefined $o)
+
+	* share/list: add back mkreiserfs
+
+	* standalone/XFdrake: don't start xfs if skiptest
+
+	* fsedit.pm (get_fstab): restore loopback::loopbacks because hds contains
+	only true
+	hard drives (not pseudo one like raid, loopback and lvm)
+
+	* bootloader.pm (suggest): trap strange error. Should not really fix the
+	pb
+
+	* install_steps.pm (setupBootloaderBefore): nicer Aurora presence
+	detetection
+
+	* lang.pm (charset): fix for chineese which have charset in the name
+
+	* Makefile: no more special case for mkreiserfs (can be done via -v 1)
+
+	* install_steps_gtk.pm (choosePackagesTree): better name than "Automatic
+	dependencies"
+
+	* install_any.pm (setPackages): don't preselect profiles in upgrade
+	(setPackages): handle Flag:<theflag>
+	(setPackages): install kernel22 if install kernel is a 2.2
+
+	* lvm.pm (get_lvs): remove the setting of flag isFormatted which was wrong
+	(didn't
+	propose to format it)
+	protect the loading of module lvm-mod
+
+2001/04/03  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_steps_interactive.pm, mouse.pm: PPC keyboard/mouse button
+	emulation
+
 2001/04/03  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: a lot of bugfixs
