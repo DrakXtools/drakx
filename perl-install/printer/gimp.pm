@@ -213,7 +213,7 @@ sub makeprinterentry {
 
 sub findconfigfiles {
     my @configfilenames = (if_(-d "$::prefix/usr/lib/gimp/1.2", ".gimp-1.2/printrc"),
-                           if_( -d "$::prefix/usr/lib/gimp/1.3", ".gimp-1.3/printrc"));
+                           if_(-d "$::prefix/usr/lib/gimp/1.3", ".gimp-1.3/printrc"));
     return () unless @configfilenames;
     my @filestotreat;
     foreach (&list_passwd()) {
@@ -264,8 +264,7 @@ sub addentry {
 	if (!$sectionfound) {
 	    $sectionfound = 1 if /^\s*Printer\s*:\s*($section)\s*$/;
 	} else {
-	    if (!/^\s*$/ && !/^\s*;/) { #-#
-		$_ = "$entry\n$_";
+	    if (!/^\s*$/ && !/^\s*;/) {
 		$entryinserted = 1;
 		last;
 	    }
@@ -287,23 +286,15 @@ sub addprinter {
 
 sub removeentry {
     my ($section, $entry, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $done = 0;
+    my $sectionfound;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	$_ = "$_\n";
-	next if $done;
 	if (!$sectionfound) {
-	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
-		$sectionfound = 1;
-	    }
+	    $sectionfound = /^\s*Printer\s*:\s*($section)\s*$/;
 	} else {
-	    if (/^\s*Printer\s*:\s*.*\s*$/) { # Next section
-		$done = 1;
-	    } elsif (/^\s*$entry/) {
-		$_ = "";
-		$done = 1;
-	    }
+	    last if /^\s*Printer\s*:\s*.*\s*$/; # Next section
+         last if /^\s*$entry/;
 	}
     }
     return join "", @lines;
@@ -311,23 +302,14 @@ sub removeentry {
 
 sub removeprinter {
     my ($section, $filecontent) = @_;
-    my $sectionfound = 0;
-    my $done = 0;
+    my $sectionfound;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	$_ = "$_\n";
-	next if $done;
 	if (!$sectionfound) {
-	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
-		$_ = "";
-		$sectionfound = 1;
-	    }
+	    $sectionfound = /^\s*Printer\s*:\s*($section)\s*$/;
 	} else {
-	    if (/^\s*Printer\s*:\s*.*\s*$/) { # Next section
-		$done = 1;
-	    } else {
-		$_ = "";
-	    }
+	    last if /^\s*Printer\s*:\s*.*\s*$/; # Next section
 	}
     }
     return join "", @lines;
@@ -342,7 +324,6 @@ sub isprinterconfigured {
     my $nonrawprinting = 0;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
-	last if $done;
 	if (!$sectionfound) {
 	    if (/^\s*Printer\s*:\s*($queue)\s*$/) {
 		$sectionfound = 1;
@@ -350,6 +331,7 @@ sub isprinterconfigured {
 	} else {
 	    if (/^\s*Printer\s*:\s*.*\s*$/) { # Next section
 		$done = 1;
+          last;
 	    } elsif (/^\s*Driver:\s*(\S+)\s*$/) {
 		$drivernotps2 = $1 ne "ps2";
 	    } elsif (/^\s*PPD\-File:\s*(\S+)\s*$/) {
@@ -359,7 +341,7 @@ sub isprinterconfigured {
 	    } 
 	}
     }
-    return 0 if $done && !$sectionfound;
+    return 0 if $done && !$sectionfound; # FIXME: IMPOSSIBLE; should be just $done
     return 1 if $ppdfileset || $drivernotps2 || $nonrawprinting;
     return 0;
 }
