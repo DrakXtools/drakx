@@ -256,8 +256,9 @@ sub choosePackages {
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
     log::l(sprintf "available size %dMB (corrected %dMB)", $available / sqr(1024), $availableCorrected / sqr(1024));
 
-    #- avoid destroying user selection of packages. TOCHECK
-    if ($first_time) {
+    #- avoid destroying user selection of packages but only
+    #- for expert, as they may have done individual selection before.
+    if ($first_time || !$::expert) {
 	pkgs::unselectAllPackages($packages);
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
