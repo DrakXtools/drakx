@@ -2,6 +2,8 @@
 
 	* fs.pm: updated for live upgrade.
 	* install2.pm: dropped unuseful steps filtering.
+	* install_any.pm: fixed wrong Device3Dfx package name and clean
+	postinstall rpms directory on upgrade before filling it.
 	* install_gtk.pm: removed window restrictions of live upgrade.
 	* install_steps.pm: fixed initrd symlink following in case of
 	upgrade.
@@ -10,6 +12,7 @@
 	* modules.pm: may fixed pcmcia lost driver (typically on network).
 	* pkgs.pm: fixed (uggly?) usage of floating perl data on perl
 	script :-)
+	* printer.pm: back to "Generic PostScript" for default printer (jloup).
 	* printerdrake.pm: make sure an expert can choose among available
 	devices.
 

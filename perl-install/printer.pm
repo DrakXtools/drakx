@@ -384,7 +384,7 @@ sub poll_ppd_base {
     scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
 
     #- assume a default printer not using any ppd at all.
-    $descr_to_ppd{"Raw queue (no filtering)"} = '';
+    $descr_to_ppd{"Generic PostScript"} = '';
 }
 
 #-******************************************************************************
