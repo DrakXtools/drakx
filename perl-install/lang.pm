@@ -996,30 +996,34 @@ sub write {
 	my $p = "$prefix/usr/lib/kbd";
 	if ($name) {
 	    eval {
+		log::explanations(qq(Set system font to "$name"));
 		my $font = "$p/consolefonts/$name.psf";
 		$font .= ".gz" if ! -e $font;
 		cp_af($font, "$prefix/etc/sysconfig/console/consolefonts");
 		add2hash $h, { SYSFONT => $name };
 	    };
-	    $@ and log::l("missing console font $name");
+	    $@ and log::explanations("missing console font $name");
 	}
 	if ($sfm) {
 	    eval {
+		log::explanations(qq(Set screen font map (Unicode mapping table) to "$name"));
 		cp_af(glob_("$p/consoletrans/$sfm*"), "$prefix/etc/sysconfig/console/consoletrans");
 		add2hash $h, { UNIMAP => $sfm };
 	    };
-	    $@ and log::l("missing console unimap file $sfm");
+	    $@ and log::explanations("missing console unimap file $sfm");
 	}
 	if ($acm) {
 	    eval {
+		log::explanations(qq(Set application-charset map (Unicode mapping table) to "$name"));
 		cp_af(glob_("$p/consoletrans/$acm*"), "$prefix/etc/sysconfig/console/consoletrans");
 		add2hash $h, { SYSFONTACM => $acm };
 	    };
-	    $@ and log::l("missing console acm file $acm");
+	    $@ and log::explanations("missing console acm file $acm");
 	}
 	
     }
     if ($locale->{IM} && $locale->{IM} ne 'None') {
+        log::explanations(qq(Configuring "$locale->{IM}" IM));
         delete @$h{qw(GTK_IM_MODULE QT_IM_MODULE XIM XIM_PROGRAM XMODIFIERS)};
         add2hash($h, $gtkqt_im{$locale->{IM}});
         $h->{QT_IM_MODULE} = $h->{GTK_IM_MODULE} if $h->{GTK_IM_MODULE};
@@ -1036,6 +1040,7 @@ sub write {
                                         )
                                       );
         } elsif (@packages) {
+            log::explanations("Installing IM packages: ", join(', '), @packages);
             do_pkgs_standalone->new->install(@packages);
         }
     }
@@ -1044,13 +1049,20 @@ sub write {
     if (member($locale->{lang}, qw(ar bn fa he hi ko ur yi zh_TW zh_CN))) {
         #- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
         #-	it is needed for languages not supported by the linux console
+        log::explanations(qq(Disabling tranlsation on console since "$locale->{lang}" is not supported by the console));
         add2hash($h, { CONSOLE_NOT_LOCALIZED => 'yes' });
     }
 
-    setVarsInSh($prefix . ($b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
-    substInFile {
-        s!^function lang\b.*!function lang()="$h->{LANG}"!g;
-    } "$::prefix/etc/menu-methods/lang.h" if !$b_user_only;
+    my $file = $b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n';
+    log::explanations(qq(Setting l10n configuration in "$file"));
+    setVarsInSh($prefix . $file, $h);
+
+    if (!$b_user_only) {
+        log::explanations("Set default menu language");
+        substInFile {
+            s!^function lang\b.*!function lang()="$h->{LANG}"!g;
+        } "$::prefix/etc/menu-methods/lang.h" if !$b_user_only;
+    }
 
     eval {
 	my $confdir = $prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
@@ -1061,12 +1073,14 @@ sub write {
 
 	my %qt_xim = (zh => 'Over The Spot', ko => 'On The Spot', ja => 'On The Spot');
 	if ($b_user_only && (my $qt_xim = $qt_xim{locale_to_main_locale($locale->{lang})})) {
+         log::explanations(qq(Setting XIM input style to "$qt_xim"));
 	    update_gnomekderc("$ENV{HOME}/.qt/qtrc", General => (XIMInputStyle => $qt_xim));
 	}
 
 	if (!$b_user_only) {
 	    my $kde_charset = charset2kde_charset(l2charset($locale->{lang}));
 	    my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
+         log::explanations(qq(Configuring KDM/MdkKDM));
 	    substInFile { 
 		s/^(GreetString)=.*/$1=$welcome/;
 		s/^(Language)=.*/$1=$locale->{lang}/;
@@ -1096,13 +1110,16 @@ sub configure_kdeglobals {
 
     mkdir_p($confdir);
 
+    my $lang = get_kde_lang($locale);
+    log::explanations("Configuring KDE regarding charset ($kde_charset), language ($lang) and country ($locale->{country})");
     update_gnomekderc($kdeglobals, Locale => (
     	      Charset => $kde_charset,
     	      Country => lc($locale->{country}),
-    	      Language => get_kde_lang($locale),
+    	      Language => $lang,
     	  ));
 
     if ($prev_kde_charset ne $kde_charset) {
+    log::explanations("Configuring KDE regarding fonts");
         update_gnomekderc($kdeglobals, WM => (
        		      activeFont => charset2kde_font($charset,0),
        		  ));
