@@ -2282,6 +2282,11 @@ sub configure_hpoj {
     }
     # No, it is not an HP multi-function device.
     return "" if !$device_ok;
+	
+    # If $model_long and $serialnumber_long stay empty, fill them with
+    # $model and $serialnumber
+    $model_long ||= $model;
+    $serialnumber_long ||= $serialnumber;
 
     # Determine the ptal device name from already existing config files
     my $ptalprefix =
