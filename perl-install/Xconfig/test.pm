@@ -108,7 +108,7 @@ sub test {
         BEGIN { $::no_ugtk_init = 1 }
         require lang;
         require ugtk2; #- help perl_checker
-        ugtk2->import(qw(:wrappers)); #- help perl_checker
+        ugtk2->import(qw(:wrappers :helpers)); #- help perl_checker
 	use interactive::gtk;
         use run_program;
         use common;
@@ -119,6 +119,7 @@ sub test {
         lang::bindtextdomain();
 
 	$ENV{DISPLAY} = ":9";
+        Gtk2->init([]);
 
         gtkset_background(200 * 257, 210 * 257, 210 * 257);
         my ($h, $w) = gtkroot()->get_size;
@@ -126,7 +127,7 @@ sub test {
 	$ugtk2::force_focus = 1;
         my $text = Gtk2::Label->new;
         my $time = 12;
-        Gtk->timeout_add(1000, sub {
+        Gtk2->timeout_add(1000, sub {
 	    $text->set(N("Leaving in %d seconds", $time));
 	    $time-- or Gtk->main_quit;
             1;
