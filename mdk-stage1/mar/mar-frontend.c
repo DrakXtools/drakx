@@ -56,30 +56,22 @@ mar_create_file(char *dest_file, char **files)
 	int current_delta_rawdata = 0;
 	int filetable_size;
 	char * temp_marfile_buffer;
-	int total_length;
+	int total_length = 0;
 
-	/* calculate offset of ``raw_files_data'' */
-	total_length = sizeof(char); /* ``char 0'' */
-	while (files[filenum])
-	{
-		total_length += 2*sizeof(int) /* file_length, data_offset */ + strlen(files[filenum]) + 1;
-		filenum++;
-	}
-	DEBUG_MAR(printf("D: mar::create_marfile number-of-files %d offset-data-start %d\n", filenum, current_offset_rawdata););
-
-	filetable_size = total_length;
-
-	/* calculate length of final uncompressed marfile, for malloc */
-	filenum = 0;
+	filetable_size = sizeof(char); /* ``char 0'' */
 	while (files[filenum])
 	{
 		int fsiz = file_size(files[filenum]);
 		if (fsiz == -1)
 			files[filenum] = fnf_tag;
-		else
+		else {
+			filetable_size += 2*sizeof(int) /* file_length, data_offset */ + strlen(files[filenum]) + 1;
 			total_length += fsiz;
+		}
 		filenum++;
 	}
+
+	total_length += filetable_size;
 
 	temp_marfile_buffer = (char *) malloc(total_length); /* create the whole file in-memory (not with alloca! it can be bigger than typical limit for stack of programs (ulimit -s) */
 	DEBUG_MAR(printf("D: mar::create_marfile total-length %d\n", total_length););
