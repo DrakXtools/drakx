@@ -1,3 +1,106 @@
+2003/02/14  alus
+
+	* share/po/pl.po: fixed
+
+2003/02/14  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* drakxtools.spec: 0.30mdk
+
+	* standalone/drakperm: o Gtk2
+	o 'add a rule' works again
+	o 'edit rule' too
+	o get_rights get all rights, not just a few
+	o little cleanup (more to come)
+
+2003/02/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: okcehc lrep (hebrew feeling)
+	wizard: free memory
+	add a frame to the wizard's outline
+	honour 9.1 theme title of windows: no icon, text to the left
+
+	* share/themes-galaxy.rc: adapt theme: grey for selection's background, no
+	inverse video on the selected text
+
+	* pixmaps/services.png, pixmaps/X.png, pixmaps/bootloader.png,
+	pixmaps/language.png, pixmaps/summary.png, pixmaps/security.png,
+	pixmaps/partition.png, pixmaps/keyboard.png, pixmaps/mouse.png,
+	pixmaps/rootpasswd.png, steps.pm, pixmaps/bootdisk.png,
+	pixmaps/harddrive.png, install2.pm, pixmaps/user.png, pixmaps/exit.png,
+	pixmaps/network.png: honour 9.1 theme title of windows: no icon, text to
+	the left
+
+	* install_gtk.pm: cleanup
+	fix default_theme always responding 'galaxy'
+	  - update steps window to 9.1 theme (blue/white bullets)
+	  - don't destroy steps window between each step => better looking
+
+	* install_steps_gtk.pm, pixmaps/steps_off.png, pixmaps/steps_on.png: 
+	  - update steps window to 9.1 theme (blue/white bullets)
+	  - don't destroy steps window between each step => better looking
+
+	* install_any.pm: install the locales-xx package for the selected country
+
+	* share/po/fr.po: fix misc
+
+2003/02/14  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/no.po, share/po/DrakX.pot: updated pot file
+
+2003/02/14  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/draksec: cleanup security::level, hopefully the **** draksec
+	still works
+
+	* security/level.pm: cleanup security::level, hopefully the **** draksec
+	still works
+	fix errors (due to previous commit)
+	create security::level::to_string()
+
+	* install_steps.pm: remove unneeded msec related actions (those are done
+	in msec)
+	simpler way to detect broken alternatives. It works for symlinks to
+	symlinks,
+	eg: rvi -> /bin/vi -> /etc/alternatives/vi -> /bin/vim-minimal
+	use $::prefix
+
+	* install_steps_interactive.pm: add "Security level" in summary
+	  - re-indent summary entries
+	  - add group for summary entries
+	(acceptLicense): do translate "Accept" and "Refuse"
+	  - add "Services" and "Firewall" in summary
+	  - rework a little summary & summary_prompt
+	use $::prefix
+	change order of entries in summary
+
+	* install_steps_gtk.pm: toggle Details / No details (as suggested by Prabu
+	Anand)
+
+	* interactive.pm: in ask_browse_tree_info, have Next instead of Ok,
+	Previous instead of Cancel when isWizard
+
+	* install_any.pm, install2.pm: create install_any::set_security() and use
+	it
+
+	* network/drakfirewall.pm: install package shorewall only when the user
+	wants a firewall
+
+	* services.pm: use $::prefix
+
+	* Makefile: themes/* is gone, no need to copy those files
+
+2003/02/14  Till Kamppeter  <till@mandrakesoft.com>
+
+	* scanner.pm, standalone/scannerdrake: Improved manual scanner
+	configuration, bug fixes.
+
+	* standalone.pm: Updated "Usage:" message for Scannerdrake.
+
+2003/02/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/network.c: when detected too little memory in ftp/http,
+	inform user that he/she may try an nfs install
+
 2003/02/13  alus
 
 	* share/po/pl.po: updated
@@ -10539,7 +10642,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.780 2003/02/12 00:25:21 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.781 2003/02/14 00:04:41 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
