@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-16 08:40+0700\n"
+"PO-Revision-Date: 2005-03-17 17:53+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -4640,7 +4640,7 @@ msgid "Save packages selection"
 msgstr "Simpan pilihan paket"
 
 #: help.pm:412
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you chose to reuse some legacy GNU/Linux partitions, you may wish to\n"
 "reformat some of them and erase any data they contain. To do so, please\n"
@@ -4664,28 +4664,27 @@ msgid ""
 "Click on \"%s\" if you wish to select partitions which will be checked for\n"
 "bad blocks on the disk."
 msgstr ""
-"Tiap-tiap partisi yang telah dibuat harus diformat agar dapat digunakan\n"
-"(format berarti membuat filesystem).\n"
+"Jika Anda memilih untuk menggunakan beberapa partisi GNU/Linux, Anda\n"
+"mungkin akan memformat dan menghapus data. Untuk melakukannya\n"
+"pilih juga partisi tersebut.\n"
 "\n"
-"Sekarang Anda dapat mem-format ulang partisi yg ada untuk dihapus datanya.\n"
-"BIla ini hendak Anda lakukan, pilihlah partisi yang hendak diformat.\n"
+"Perhatikan bahwa format ulang semua partisi tidak diperlukan.\n"
+"Anda harus memformat ulang partisi yang berisi sistem operasi\n"
+"(seperti \"/\", \"/usr\" atau \"/var\") tetapi Anda tidak harus "
+"memformat ulang\n"
+"partisi berisi data yang akan Anda simpan (biasanya \"/home\").\n"
 "\n"
-"Ingat, Anda tak perlu melakukan format ulang pada semua partisi yg ada.\n"
-"Anda perlu mem-format ulang partisi yg akan diisi sistem operasi (misalnya\n"
-"pada partisi \"/\", \"./usr\", atau \"/var\"), tapi tak perlu melakukannya\n"
-"pada partisi berisi data yang masih akan digunakan (misalnya \"/home\").\n"
+"Harap berhati-hati ketika memilih partisi. Setelah format selesai\n"
+", semua data pada partisi akan dihapus dan Anda tidak akan bisa\n"
+"mengembalikannya kembali.\n"
 "\n"
-"Hati-hati dalam memilih partisi. Setelah diformat semua data akan hilang\n"
-"dan tak dapat dikembalikan ke kondisi semula.\n"
+"Klik pada \"%s\" ketika Anda siap memformat partisi.\n"
 "\n"
-"Klik \"Lanjut ->\" bila Anda siap mem-format partisi.\n"
+"Klik pada \"%s\" jika Anda hendak memilih partisi lain untuk \n"
+"installasi sistem operasi Mandrakelinux baru Anda.\n"
 "\n"
-"Klik \"<- Kembali\" jika Anda ingin memilih partisi lain untuk instalasi "
-"sistem\n"
-"operasi Mandrakelinux baru Anda.\n"
-"\n"
-"Klik \"Tambahan\" jika ingin memilih partisi yg akan dicek blok rusaknya\n"
-"di disk."
+"Klik pada \"%s\" jika Anda hendak memilih partisi yang hendak \n"
+"diperiksa untuk block rusak pada disk."
 
 #: help.pm:431 install_steps_gtk.pm:388 interactive.pm:425
 #: interactive/newt.pm:316 printer/printerdrake.pm:3579
@@ -4694,10 +4693,10 @@ msgstr ""
 #: standalone/drakbackup:4071 ugtk2.pm:504
 #, c-format
 msgid "Previous"
-msgstr "Kembali"
+msgstr "Sebelumnya"
 
 #: help.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "By the time you install Mandrakelinux, it's likely that some packages will\n"
 "have been updated since the initial release. Bugs may have been fixed,\n"
@@ -4714,12 +4713,12 @@ msgstr ""
 "Saat Mandrakelinux diinstal, mungkin beberapa paket telah diupdate sejak\n"
 "rilis awal. Beberapa kesalahan mungkin telah diperbaiki / masalah keamanan\n"
 "dipecahkan. Untuk memanfaatkan update ini Anda dapat men-download-nya dari\n"
-"Internet. Pilih \"Ya\" jika ada koneksi Internet aktif, atau \"Tidak\" jika\n"
+"Internet. Pilih \"%s\" jika Anda memiliki koneksi Internet, atau \"%s\" jika\n"
 "ingin mengupdate paket lain waktu.\n"
 "\n"
-"Jika \"Ya\", daftar sumber download update akan ditampilkan. Pilih yang\n"
-"terdekat. Lalu muncul daftar paket: lihat lagi pilihan Anda, tekan\n"
-"\"Instal\" untuk mengambil/nstal paket atau \"Batal\" jika tak jadi."
+"Memilih \"%s\" akan menampilkan daftar lokasi dimana update bisa didownload.\n"
+"Pilih yang terdekat. Daftar paket akan muncul: periksa pilihan Anda,\n"
+"tekan \"%s\" untuk mengambil/menginstall paket atau \"%s\" untuk membatalkan."
 
 #: help.pm:444 help.pm:588 install_steps_gtk.pm:387
 #: install_steps_interactive.pm:156 standalone/drakbackup:4103
@@ -4728,7 +4727,7 @@ msgid "Install"
 msgstr "Instal"
 
 #: help.pm:447
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level you desire\n"
 "for your machine. As a rule of thumb, the security level should be set\n"
@@ -4743,20 +4742,25 @@ msgid ""
 "Fill the \"%s\" field with the e-mail address of the person responsible for\n"
 "security. Security messages will be sent to that address."
 msgstr ""
-"Kini waktunya memilih tingkat keamanan komputer. Makin terbuka suatu "
-"komputer,\n"
-"dan makin penting data di dalamnya, tingkat keamanannya harus makin tinggi.\n"
-"Tapi, level keamanan yang tinggi umumnya mengorbankan kemudahan pemakaian.\n"
+"Saat ini, DrakX akan mengijinkan Anda memilih tingkat keamanan komputer.\n"
+"Sebagai acuan, tingkat keamanan harus semakin tinggi jika berisi data\n"
+"penting, atau langsung terhubung ke Internet. Level keamanan yang \n"
+"tinggi umumnya mengorbankan kemudahan pemakaian.\n"
 "\n"
-"Jika Anda tak tahu apa yg dipilih, biarkan aslinya."
+"Jika Anda tidak tahu apa yang akan dipilih, gunakan opsi default. Anda\n"
+"mampu mengubahnya menggunakan perkakas draksec, yang merupakan bagian\n"
+"dari dari Pusat Kontrol Mandrakelinux.\n"
+"\n"
+"Isi field \"%s\" dengan alamat email dari orang yang bertanggung jawab\n"
+"atas keaman. Pesan keamanan akan dikirimkan pada alamat tersebut."
 
 #: help.pm:458
-#, fuzzy, c-format
+#, c-format
 msgid "Security Administrator"
-msgstr "Admin Keamanan:"
+msgstr "Administrator Keamanan"
 
 #: help.pm:461
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrakelinux system. If partitions have already been\n"
@@ -4829,77 +4833,80 @@ msgid ""
 "may find it a useful place to store a spare kernel and ramdisk images for\n"
 "emergency boot situations."
 msgstr ""
-"Kini Anda perlu menentukan partisi yg akan dipakai untuk instalasi sistem\n"
-"Mandrakelinux. Jika partisi telah didefinisikan, pada instalasi\n"
-"GNU/Linux sebelumnya atau dg alat partisi lain, Anda dapat memakai partisi\n"
-"yang ada. Jika tidak, partisi harddisk harus didefinisikan.\n"
+"Saat ini, Anda harus memilih partisi yang akan digunakan untuk installasi\n"
+"sistem Mandrakelinux Anda. Jika partisi telah didefinisikan, baik dari\n"
+"installasi GNU/Linux sebelumnya atau melalui perkakas partisi lainnya,\n"
+"Anda bisa menggunakan partisi yang ada. Jika tidak, partisi harddisk \n"
+"harus didefinisikan.\n"
 "\n"
-"Utk membuat partisi, pertama pilihlah harddisk. Anda dapat memilih disk "
-"untuk\n"
-"dipartisi dg mengklik \"hda\" untuk harddisk IDE pertama, \"hdb\" untuk "
-"disk\n"
-"kedua, \"sda\" untuk drive SCSI pertama dst.\n"
+"Untuk membuat partisi, Anda harus memilih harddisk dahulu. Anda bisa \n"
+"memilih disk untuk dipartisi dengan memilih ``hda'' untuk drive IDE\n"
+"pertama, ``hdb'' untuk kedua, ``sda'' untuk drive SCSI pertama, dst.\n"
 "\n"
-"Untuk mempartisi harddisk terpilih, opsi berikut dapat digunakan:\n"
+"Untuk mempartisi drive terpilih, Anda bisa menggunakan opsi berikut:\n"
 "\n"
-" * \"Hapus semua\": opsi ini menghapus semua partisi pd harddisk terpilih.\n"
+" * \"%s\": opsi ini menghapus seluruh partisi pada drive terpilih\n"
 "\n"
-" * \"Alokasi otomatis\": opsi ini memungkinkan Anda secara otomatis membuat\n"
-"partisi ext3 dan swap di ruang kosong hard drive Anda.\n"
+" * \"%s\": opsi ini memungkinkan Anda membuat partisi ext3 dan swap\n"
+"secara otomatis pada ruang kosong dari hard disk Anda.\n"
 "\n"
-"\"Lainnya\": berikan fitur tambahan:\n"
+"\"%s\": memberi akses pada fitur tambahan:\n"
 "\n"
-" * \"Simpan tabel partisi\": simpan tabel partisi ke disket. Berguna\n"
-"untuk pemulihan tabel-partisi di kemudian hari bila perlu. Amat disarankan.\n"
+" * \"%s\": menyimpan tabel partisi pada disket. Berguna untuk proses\n"
+"pengembalian tabel partisi. Anda disarankan untuk melakukan langkah\n"
+"ini.\n"
 "\n"
-" * \"Pulihkan tabel partisi\": mengembalikan tabel partisi yg disimpan\n"
-"sebelumnya dari floppy.\n"
+" * \"%s\": mengijinkan Anda mengembalikan tabel partisi yang tersimpan\n"
+"sebelumnya dari disket.\n"
 "\n"
-" * \"Selamatkan tabel partisi\": jika tabel partisi Anda rusak, cobalah\n"
-"mengembalikannya dg opsi ini. Hati-hati dan ingat bhw ini bisa gagal.\n"
+" * \"%s\": jika tabel partisi Anda rusak, Anda bisa mencoba untuk\n"
+"mengembalikannya menggunakan opsi ini. Harap hati-hati dan perlu\n"
+"diingat bahwa proses ini tidak selalu bekerja.\n"
 "\n"
-" * \"Muat ulang tabel partisi\": buang semua perubahan dan muat tabel\n"
-"partisi semula.\n"
+" * \"%s\": batalkan semua perubahan dan muat ulang tabel partisi\n"
+"orisinal pada hard disk.\n"
 "\n"
-" * \"Mount otomatis media lepas\": Jika tak dipilih, pengguna harus\n"
-"secara manual me-mount/unmount media lepas seperti disket dan CD-ROM.\n"
+" * \"%s\": tanpa opsi ini akan memaksa pengguna melakukan proses \n"
+"mount dan unmount manual pada media seperti disket dan CD-ROM.\n"
 "\n"
-" * \"Wizard\": pilih ini jika ingin memakai wizard untuk mempartisi "
-"harddisk.\n"
-"Disarankan jika Anda tak faham ttg partisi.\n"
+" * \"%s\": gunakan opsi ini jika Anda hendak menggunakan wizard\n"
+"untuk mempartisi hard disk Anda. Opsi ini disarankan jika Anda\n"
+"tidak memahami cara mempartisi.\n"
 "\n"
-" * \"Kembali\": untuk membatalkan perubahan.\n"
+" * \"%s\": gunakan opsi ini untuk membatalkan perubahan Anda.\n"
 "\n"
-" * \"Ubah ke mode normal/ahli\": aksi tambahan proses partisi (tipe, opsi,\n"
-"format) dan informasi lebih.\n"
+" * \"%s\": mengijinkan aksi tambahan pada partisi (jenis, opsi,\n"
+"format) dan memberikan informasi lebih tentang hard disk.\n"
 "\n"
-" * \"Selesai\": simpan perubahan ke harddisk bila Anda selesai mempartisi.\n"
+" * \"%s\": ketika selesai mempartisi, opsi ini akan menyimpan\n"
+"perubahan pada disk.\n"
 "\n"
-"Catatan: Anda dapat meraih semua opsi dg memakai papanketik. Gunakan [Tab]\n"
-"dan panah [Up/Down]. Ukuran partisi juga bisa diubah dg tombol panah.\n"
+"Ketika mendefinisikan ukuran partisi, Anda bisa menggunakan tombol\n"
+"panah dari keyboard Anda.\n"
 "\n"
-"Saat partisi dipilih, Anda dapat menggunakan:\n"
+"Catatan: Anda bisa mencapai sembarang opsi menggunakan keyboard.\n"
+"Navigasi pada partisi menggunakan [Tab] dan panah [Up/Down].\n"
 "\n"
-" * Ctrl-c untuk membuat partisi baru (bila partisi kosong dipilih);\n"
+"Ketika partisi dipilih, Anda bisa menggunakan:\n"
 "\n"
-" * Ctrl-d untuk menghapus partisi;\n"
+" * Ctrl-c untuk membuat partisi baru (ketika partisi kosong dipilih)\n"
 "\n"
-" * Ctrl-m untuk menset titik mount\n"
+" * Ctrl-d untuk menghapus partisi\n"
 "\n"
-"Info sistem file lain yg tersedia dapat dibaca di \"Manual Referensi\" bab\n"
-"ext2fs.\n"
+" * Ctrl-m untuk menentukan titik mount\n"
 "\n"
-"Jika Anda menginstal komputer PPC Anda perlu membuat partisi \"bootstrap\" "
-"HFS\n"
-"kecil setidaknya 1MB yg akan dipakai oleh bootloader yaboot. Jika dibuat\n"
-"lebih besar, katakan 50MB, Anda dapat memanfaatkannya untuk menyimpan "
-"kernel\n"
-"cadangan dan image ramdisk untuk situasi boot darurat."
+"Untuk mendapatkan informasi tentang jenis sistem file yang ada, \n"
+"silahkan membaca bab ext2FS dari ``Referensi Manual''.\n"
+"\n"
+"Jika Anda menginstall pada komputer PPC, Anda harus membuat partisi\n"
+"``bootstrap'' HFS kecil paling tidak 1 MB yang akan digunakan oleh\n"
+"bootloader yaboot. Jika Anda membuatnya lebih besar, misalkan 50MB\n"
+"Anda bisa menyimpan kernel dan citra ramdisk untuk situasi darurat."
 
 #: help.pm:530
-#, fuzzy, c-format
+#, c-format
 msgid "Removable media auto-mounting"
-msgstr "Mount otomatis media lepas"
+msgstr "Mount otomatis media lepas (removable)"
 
 #: help.pm:530
 #, c-format
@@ -4907,7 +4914,7 @@ msgid "Toggle between normal/expert mode"
 msgstr "Ubah ke modus normal/ahli"
 
 #: help.pm:533
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "More than one Microsoft partition has been detected on your hard drive.\n"
 "Please choose the one which you want to resize in order to install your new\n"
@@ -4939,11 +4946,11 @@ msgid ""
 "\"Windows name\" is the letter of your hard drive under Windows (the first\n"
 "disk or partition is called \"C:\")."
 msgstr ""
-"Ada lebih dari satu partisi wicrosoft mindows terdeteksi pada harddisk\n"
+"Terdapat lebih dari satu partisi Microsoft yang terdeteksi pada harddisk\n"
 "Anda. Pilih partisi yang hendak Anda ubah ukurannya untuk instalasi sistem\n"
 "operasi Linux Mandrake.\n"
 "\n"
-"Tiap partisi terdaftar sbb: \"Nama Linux\",\"Nama windows\",\"Kapasitas\".\n"
+"Tiap partisi terdaftar sebagai: \"Nama Linux\",\"Nama windows\",\"Kapasitas\".\n"
 "\n"
 "\"Nama Linux\" berstruktur: \"tipe hard drive\", \"nomor hard drive\",\n"
 "\"nomor partisi\" (misalnya \"hda1\").\n"
@@ -4965,23 +4972,23 @@ msgstr ""
 "Pada drive SCSI, \"a\" berarti \"ID SCSI terkecil, \"b\" berarti \"ID SCSI\n"
 "terkecil kedua\", dst.\n"
 "\n"
-"\"Nama windows\" adalah huruf hard drive Anda pada windows (disk pertama\n"
+"\"Nama windows\" adalah huruf hard drive Anda pada Windows (disk pertama\n"
 "pada partisi disebut \"C:\")."
 
 #: help.pm:564
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\": check the current country selection. If you're not in this country,\n"
 "click on the \"%s\" button and choose another. If your country is not in "
 "the\n"
 "list shown, click on the \"%s\" button to get the complete country list."
 msgstr ""
-"\"%s\": cek pilihan negara saat ini. Jika tak berada di sini, klik\n"
-"\"%s\" dan pilih yg lain. Jika negara Anda tak ada di daftar,\n"
-"klik \"%s\" untuk mendapatkan daftar lengkap."
+"\"%s\": periksa pilihan negara saat ini. Jika tidak berada di sini, klik\n"
+"\"%s\" dan pilih yang lain. Jika negara Anda tidak ada pada daftar,\n"
+"klik tombol \"%s\" untuk mendapatkan daftar lengkap."
 
 #: help.pm:569
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This step is activated only if an existing GNU/Linux partition has been\n"
 "found on your machine.\n"
@@ -5006,22 +5013,26 @@ msgid ""
 msgstr ""
 "Tahap ini hanya aktif jika partisi GNU/Linux lama ditemukan.\n"
 "\n"
-"DrakX perlu tahu Anda ingin instalasi baru ataukah upgrade Linux Mandrake\n"
-"yg telah ada:\n"
+"DrakX perlu tahu Anda ingin melakukan instalasi baru atau upgrade sistem\n"
+"Mandrakelinux yang sudah ada:\n"
 "\n"
-"* \"Instal\": Hapus (hampir) semua sistem lama. Jika ingin mengubah "
-"partisi \n"
-"harddisk atau sistem file, gunakan opsi ini. Penindihan data dapat dicegah\n"
-"tergantung skema partisi saat ini.\n"
+"* \"%s\": Untuk sebagian besar bagian, opsi ini menghapus sistem lama.\n"
+"Namun, bergantung pada skema partisi Anda, Anda bisa mencegah data Anda\n"
+"(biasanya direktori \"home\") untuk ditimpa. Jika Anda hendak mengubah\n"
+"bagaimana hard disk dipartisi, atau untuk mengubah sistem file, Anda\n"
+"harus menggunakan opsi ini.\n"
 "\n"
-"* \"Upgrade\": Perbarui paket. Skema partisi dan data pengguna tak diubah.\n"
-"Sebagian besar tahapan konfigurasi tetap ada seperti instalasi standar.\n"
+"* \"%s\": Kelas installasi ini akan mengupdate paket yang terinstall\n"
+"pada sistem Mandrakelinux Anda. Skema partisi dan data pengguna Anda\n"
+"tidak akan diubah. Sebagian besar langkah konfigurasi yang tersisa\n"
+"serupa pada installasi standar.\n"
 "\n"
-"Opsi ``upgrade'' harus berjalan normal pada sistem Linux Mandrake versi\n"
-"\"8.1\" atau lebih. Upgrade dari versi sebelum \"8.1\" tak dianjurkan."
+"Menggunakan opsi ``Upgrade'' seharusnya berjalan pada Mandrakelinux\n"
+"versi \"8.1\" keatas. Melakukan upgrade pada versi sebelum \"8.1\"\n"
+"tidak dianjurkan."
 
 #: help.pm:591
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the language you chose (), DrakX will automatically select a\n"
 "particular type of keyboard configuration. Check that the selection suits\n"
@@ -5040,22 +5051,26 @@ msgid ""
 "dialog will allow you to choose the key binding which will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
-"Normalnya, DrakX memilih papanketik untuk Anda (sesuai bahasa yg Anda "
-"pilih).\n"
-"Tapi Anda mungkin tak punya papanketik yg persis cocok dg bhs Anda:\n"
-"misalnya, jika Anda orang Swis berbahasa Inggris, Anda mungkin masih ingin\n"
-"papanketik Swis. Atau jika Anda berbahasa Inggris tapi tinggal di Quebec,\n"
-"Anda mungkin menghadapi masalah sama. Dalam kedua kasus, Anda akan harus\n"
-"kembali ke tahap instalasi ini dan memilih papanketik yg sesuai dari\n"
-"daftar.\n"
+"Bergantung pada bahasa yang Anda pilih (), DrakX akan memilih tipe\n"
+"keyboard yang sesuai. Periksa apakah pilihan sudah sesuai atau pilih\n"
+"layout keyboard yang lain.\n"
 "\n"
-"Klik \"Lainnya\" untuk menampilkan daftar lengkap papanketik ter-support.\n"
+"Juga, Anda mungkin tidak memiliki keyboard yang sesuai dengan bahasa\n"
+"Anda: misalnya jika Anda orang Swiss yang berbahasa Inggris, Anda\n"
+"mungkin memilih keyboard Swiss. Atau jika Anda berbahasa Inggris\n"
+"tapi tinggal di Quebec, Anda mungkin menghadapi situasi yang sama\n"
+"dengan bahasa Anda dan country-set keyboard tidak sesuai. Pada\n"
+"kedua kasus, langkah installasi ini akan mengijinkan Anda untuk\n"
+"memilih keyboard yang sesuai dari daftar.\n"
 "\n"
-"Jika Anda memilih papanketik berbasis alphabet non-Latin, dialog berikut\n"
-"memungkinkan Anda men-switch antara layout Latin dan non-Latin."
+"Klik tombol \"%s\" untuk menampilkan daftar keyboard yang didukung.\n"
+"\n"
+"Jika Anda memilih keyboard berbasis alphabet non-Latin, dialog\n"
+"selanjutnya memungkinkan Anda memilih kunci untuk berpindah keyboard\n"
+"antara layout Latin dan non-Latin."
 
 #: help.pm:609
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The first step is to choose your preferred language.\n"
 "\n"
@@ -5097,27 +5112,46 @@ msgid ""
 "by the entire system. Running the command as a regular user will only\n"
 "change the language settings for that particular user."
 msgstr ""
-"Pilihan bahasa mempengaruhi bahasa dokumentasi, instalasi dan sistem pada\n"
-"umumnya. Pilih daerah tempat Anda berada, lalu bahasa yg Anda ucapkan.\n"
+"Langkah pertama adalah menentukan bahasa pilihan Anda.\n"
 "\n"
-"Klik \"Tambahan\" untuk memilih bahasa-bahasa lain yg akan diinstal di\n"
-"workstation Anda. Hal ini akan menginstal file spesifik-bahasa dokumentasi\n"
-"sistem dan aplikasi. Misalnya jika Anda menginapkan pengguna dari Spanyol\n"
-"di komputer Anda, pilih bhs Indonesia sbg bahasa utama di tampilan pohon "
-"dan\n"
-"di bagian Tambahan pilih \"Spanyol\".\n"
+"Pilihan bahasa Anda akan mempengaruhi installer, dokumentasi\n"
+"dan juga sistem secara umum. Pertama pilih wilayah Anda, lalu bahasa\n"
+"yang Anda gunakan.\n"
 "\n"
-"Anda dapat menginstal banyak, bahkan semua bahasa dg menandai kotak \"Semua\n"
-"bahasa\". Terjemahan, font, tes ejaan, dll. yg terkait dg suatu bahasa akan\n"
-"diinstal. Sbg tambahan, unicode (UTF-8) akan dijadikan standar sistem jika\n"
-"\"Pakai Unicode sebagai standar\" ditandai. Awas, ini masih dalam tahap\n"
-"percobaan. Jika Anda memilih bahasa lain yg memerlukan encoding lain,\n"
-"support unicode akan diinstal.\n"
+"Klik pada tombol \"%s\" akan mengijinkan Anda memilih bahasa lain\n"
+"untuk diinstall pada workstation Anda, juga menginstall file bahasa\n"
+"khusus untuk dokumentasi sistem dan aplikasi. Misalnya jika pengguna\n"
+"Spanyol menggunakan komputer Anda, pilih Inggris sebagai bahasa default\n"
+"pada pohon view dan \"%s\" pada bagian Advanced.\n"
 "\n"
-"Utk men-switch bahasa, sbg \"root\" luncurkan \"/usr/sbin/localedrake\" "
-"untuk\n"
-"mengganti bahasa yg digunakan oleh keseluruhan sistem. Jika dijalankan\n"
-"sbg pengguna normal, bahasa yg diubah hanyalah bagi pengguna tersebut."
+"Tentang dukungan UTF-8 (unicode): Unicode adalah enkoding karakter yang\n"
+"baru yang ditujukan untuk mencakup seluruh bahasa yang ada. Namun \n"
+"dukungan penuh pada GNU/Linux sedang dalam pengembangan. Untuk alasan\n"
+"tersebut, penggunaan UTF-8 pada Mandrakelinux bergantung pada pilihan\n"
+"pengguna:\n"
+"\n"
+" * Jika Anda memilih menggunakan bahasa dengan enkoding yang kuat (bahasa\n"
+"latin, Rusia, Jepang, China, Korea, Thai, Yunani, Turki, sebagian besar\n"
+"bahasa iso-8859-2), enkoding akan digunakan secara default;\n"
+"\n"
+" * Bahasa lain akan menggunakan unicode sebagai default;\n"
+"\n"
+" * Jika dua atau lebih bahasa diperlukan, dan bahasa tersebut tidak\n"
+"memakai enkoding yang sama, maka unicode akan digunakan pada sistem;\n"
+"\n"
+" * Terakhir, unicode juga bisa dipaksa untuk digunakan melalui\n"
+"permintaan pengguna dengan memilih opsi \"%s\" secara terpisah\n"
+"pada bahasa yang dipilih.\n"
+"\n"
+"Perhatikan bahwa Anda tidak terbatas pada satu bahasa tambahan. Anda\n"
+"bisa memilih beberapa, atau semua dengan memilih kotak \"%s\".\n"
+"Memilih dukungan untuk sebuah bahasa berarti translasi, font, penguji\n"
+"ejaan, dll juga akan diinstal untuk bahasa tersebut.\n"
+"\n"
+"Untuk berpindah antar bahasa yang diinstall pada sistem, Anda bisa\n"
+"menjalankan perintah \"localedrake\" sebagai \"root\" untuk merubah\n"
+"bahasa yang digunakan sistem. Menjalankan perintah sebagai pengguna\n"
+"hanya akan merubah setting untuk pengguna tersebut."
 
 #: help.pm:647
 #, c-format
@@ -5125,7 +5159,7 @@ msgid "Espanol"
 msgstr "Spanyol"
 
 #: help.pm:650
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -5160,33 +5194,46 @@ msgid ""
 "Test the buttons and check that the mouse pointer moves on-screen as you\n"
 "move your mouse about."
 msgstr ""
-"Biasanya DrakX dapat mendeteksi jumlah tombol mouse Anda. Jika gagal, ia\n"
-"akan berasumsi mouse Anda bertombol dua dan akan menset-up emulasi tombol\n"
-"ketiga. DrakX otomatis tahu itu mouse PS/2, serial atau USB.\n"
+"Umumnya, DrakX bisa mendeteksi jumlah tombol mouse Anda. Jika gagal,\n"
+"akan diasumsikan mouse Anda bertombol dua dan akan mengkonfigurasikan\n"
+"emulasi tombol ketiga. Tombol ketiga dari sebuah mouse bertombol dua\n"
+"bisa didapatkan dengan memilih tombol kanan dan kiri bersamaan. DrakX\n"
+"mengetahui mouse menggunakan antarmuka PS/2, serial atau USB secara\n"
+"otomatis."
 "\n"
-"Jika Anda ingin menunjuk tipe mouse lain, pilih tipe yg sesuai dari daftar\n"
-"yang disediakan.\n"
+"Jika Anda memiliki mouse 3 tombol tanpa roda, Anda bisa memilih mouse\n"
+"\"%s\". DrakX akan mengkonfigurasi mouse Anda sehingga bisa ia bisa\n"
+"mensimulasikan roda: untuk melakukannya, tekan tombol tengah dan\n"
+"gerakkan pointer mouse Anda keatas dan kebawah.\n"
 "\n"
-"Jika Anda memilih mouse bukan standar, Anda akan dihadapkan pada layar tes\n"
-"mouse. Gunakan tombol dan roda untuk verifikasi setting. Jika mouse tak\n"
-"bekerja baik tekan spasi atau [Enter] untuk membatalkan dan pilih lagi.\n"
+"Jika Anda ingin menunjuk tipe mouse lain, pilih tipe yang sesuai dari\n"
+"daftar yang disediakan.\n"
 "\n"
-"Mouse beroda kadang tak otomatis terdeteksi, jadi Anda perlu memilihnya "
-"dari\n"
-"daftar. Cek port-nya. Setelah memilih mouse dan menekan \"Lanjut ->\", "
-"image\n"
-"mouse akan tampak di layar. Gerakkan rodanya, tekan tombolnya, dan periksa\n"
-"apakah gerakan pointer di layar selaras dg gerakan mouse."
+"Anda bisa memilih \"%s\" untuk memilih jenis mouse ``generik'' yang\n"
+"akan bekerja pada sebagian besar mouse.\n"
+"\n"
+"Jika Anda memilih mouse bukan standar, layar pengujian akan ditampilkan.\n"
+"Gunakan tombol dan roda untuk verifikasi setting. Jika mouse tidak \n"
+"bekerja baik tekan spasi atau [Enter] untuk membatalkan dan Anda akan\n"
+"kembali ke daftar mouse.\n"
+"\n"
+"Mouse dengan roda kadang tidak terdeteksi secara otomatis, sehingga Anda\n"
+"harus memilih mouse dari daftar. Pastikan memilih yang sesuai dengan port\n"
+"yang digunakan. Setelah memilih mouse dan menekan tombol \"%s\", sebuah\n"
+"citra mouse akan tampak di layar. Gerakkan rodanya untuk memastikan ia\n"
+"bekerja dengan baik. Ketika Anda menggerakan roda, Anda akan melihat roda\n"
+"pada layar juga bergerak. Ujilah tombol dan pastikan pointer mouse pada\n"
+"layar ikut bergerak."
 
 #: help.pm:681
-#, fuzzy, c-format
+#, c-format
 msgid "with Wheel emulation"
-msgstr "Emulasi tombol"
+msgstr "Dengan emulasi roda"
 
 #: help.pm:681
 #, c-format
 msgid "Universal | Any PS/2 & USB mice"
-msgstr ""
+msgstr "Universal | Sembarang mouse PS/2 & USB"
 
 #: help.pm:684
 #, c-format
@@ -5194,11 +5241,11 @@ msgid ""
 "Please select the correct port. For example, the \"COM1\" port under\n"
 "Windows is named \"ttyS0\" under GNU/Linux."
 msgstr ""
-"Pilih port yang benar. Misalnya \"COM1\" di Windows bernama \"ttyS0\" di \n"
-"GNU/Linux."
+"Pilih port yang benar. Misalnya \"COM1\" di Windows akan bernama\n"
+"\"ttyS0\" di GNU/Linux."
 
 #: help.pm:688
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you must enter the \"root\" password. \"Root\" is the system\n"
@@ -5237,40 +5284,38 @@ msgid ""
 "computer will never be connected to the Internet and you absolutely trust\n"
 "everybody who uses your computer, you can choose to have \"%s\"."
 msgstr ""
-"Ini adalah poin terpenting penentuan sekuriti sistem GNU/Linux Anda: Anda\n"
+"Ini adalah poin terpenting penentuan keamanan sistem GNU/Linux Anda: Anda\n"
 "harus mengisi katasandi \"root\". \"Root\" adalah administrator sistem dan\n"
-"hanya dia yg berhak melakukan update, menambah pengguna, mengubah "
-"konfigurasi\n"
-"sistem, dll. Singkatnya, \"root\" dapat melakukan apapun! Karena itu Anda\n"
+"yang berhak melakukan update, menambah pengguna, mengubah konfigurasi\n"
+"sistem. Singkatnya, \"root\" dapat melakukan apapun! Karena itu Anda\n"
 "harus memilih katasandi yang sulit ditebak - DrakX akan memberitahu jika\n"
-"terlalu mudah. Seperti Anda lihat, Anda dapat memilih untuk tak memasukkan\n"
-"katasandi, tapi amat kami anjurkan tidak melakukannya jika alasannya hanya:\n"
-"tidak mengira bhw jika GNU/Linux di-boot, sistem operasi lain aman dari\n"
-"kesalahan. Karena \"root\" dapat melampaui semua batasan dan secara tidak\n"
-"sengaja menghapus semua data di partisi, menjadi \"root\" harus dipersulit.\n"
+"terlalu mudah. Seperti Anda lihat, Anda tidak dipaksa untuk memasukkan\n"
+"katasandi, tapi sangat tidak dianjurkan. GNU/Linux juga rawan kesalahan\n"
+"operator seperti sistem operasi lain. Karena \"root\" bisa melewati\n"
+"semua batasan dan secara tidak sengaja menghapus semua data di partisi,\n"
+"sangatlah penting untuk memperketat usaha menjadi \"root\".\n"
 "\n"
 "Katasandi harus berupa campuran nomor dan huruf minimal 8 karakter. Jangan\n"
 "pernah mencatat katasandi \"root\" - itu membuat sistem mudah dibajak.\n"
 "\n"
-"Tapi katasandi juga jangan terlalu panjang/rumit karena Anda harus ingat\n"
-"tanpa banyak usaha.\n"
+"Katasandi juga jangan terlalu panjang/rumit karena Anda harus mampu \n"
+"mengingatnya."
 "\n"
-"Katasandi takkan muncul di layar seperti yg diketikkan. Anda harus dua kali\n"
-"mengisi katasandi untuk mengurangi kemungkinan salah ketik. Jika Anda 2 "
-"kali\n"
-"melakukan kesalahan yg sama, katasandi \"salah\" ini akan dipakai pertama\n"
-"kali anda login.\n"
+"Katasandi tidak muncul di layar ketika diketikkan. Untuk mengurangi kesalahan\n"
+"pengetikkan Anda harus menuliskan katasandi sebanyak dua kali. Jika Anda\n"
+"melakukan kesalahan penulisan kasatandi sebanyak dua kali, Anda harus memakai\n"
+"katasandi yang ``salah'' ini untuk login sebagai \"root\".\n"
 "\n"
-"Jika ingin komputer ini dikontrol oleh server otentikasi, klik \"Tambahan"
-"\".\n"
+"Jika Anda ingin sebuah server otentikasi mengontrol akses ke komputer Anda,\n"
+"klik pada tombol \"%s\".\n"
 "\n"
 "Jika jaringan Anda memakai protokol otentikasi LDAP/NIS/PDC Windows Domain,\n"
-"pilih yg cocok untuk \"otentikasi\". Tanyalah admin jaringan Anda jika tak "
-"tahu.\n"
+"pilih yang cocok untuk \"%s\". Jika Anda tidak tahu yang harus digunakan,\n"
+"tanyalah admin jaringan Anda.\n"
 "\n"
-"Jika ada masalah dlm mengingat katasandi, Anda dapat memilih \"Tanpa\n"
-"katasandi\", jika komputer Anda tak berhubungan dg Internet dan Anda\n"
-"mempercayai semua orang untuk mengaksesnya."
+"Jika Anda mengalami masalah untuk mengingat katasandi, atau jika komputer\n"
+"Anda tidak akan terhubung ke Internet dan Anda mempercayai semua orang\n"
+"yang menggunakan komputer Anda, Anda bisa memilih \"%s\"."
 
 #: help.pm:722
 #, c-format
@@ -5278,7 +5323,7 @@ msgid "authentication"
 msgstr "otentikasi"
 
 #: help.pm:725
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A boot loader is a little program which is started by the computer at boot\n"
 "time. It's responsible for starting up the whole system. Normally, the boot\n"
@@ -5297,19 +5342,23 @@ msgid ""
 "you\n"
 "know what you're doing."
 msgstr ""
-"LILO dan grub adalah pemuat boot GNU/Linux. DrakX akan menganalisa sektor\n"
-"boot disk dan bekerja menurut apa yg ditemukannya di sana:\n"
+"Bootloader adalah program kecil yang dijalankan ketika komputer boot. Ia\n"
+"bertanggung jawab untuk memulai seluruh sistem. Normalnya, installasi boot\n"
+"loader dilakukan secara otomatis. DrakX akan menganalisa sektor boot disk\n"
+"dan bekerja menurut apa yang ditemukannya:\n"
 "\n"
-" * jika ditemukan sektor boot Windows, ia akan menggantinya dg sektor boot\n"
-"grub/LILO. Dg demikian Anda akan dapat memuat GNU/Linux atau OS lain.\n"
+" * jika ditemukan sektor boot Windows, ia akan menggantinya dengan sektor boot\n"
+"grub/LILO. Dengan demikian Anda akan dapat memuat GNU/Linux atau OS lain.\n"
 "\n"
-" * jika ditemukan sektor boot grub/LILO, ia akan menggantinya dg yg baru.\n"
+" * jika ditemukan sektor boot grub/LILO, akan diganti dengan yang baru.\n"
 "\n"
-"Jika DrakX tak dapat mengambil keputusan, ia akan menanyakan tempat menaruh\n"
-"bootloader."
+"Jika DrakX tidak dapat mengambil keputusan, ia akan menanyakan tempat menaruh\n"
+"bootloader. Umumnya, \"%s\" adalah tempat teraman. Memilih \"%s\" tidak akan\n"
+"menginstall sembarang boot loader. Gunakan opsi ini jika Anda tahu apa yang\n"
+"Anda lakukan."
 
 #: help.pm:742
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other\n"
 "operating systems may offer you one, but Mandrakelinux offers two. Each of\n"
@@ -5336,25 +5385,29 @@ msgid ""
 "system you may change it by running PrinterDrake from the Mandrakelinux\n"
 "Control Center and clicking on the \"%s\" button."
 msgstr ""
-"Kini kita pilih sistem cetak komputer Anda. OS lain mungkin punya satu,\n"
-"Mandrake menyediakan dua.\n"
+"Sekarang, waktunya memilih sistem pencetakan untuk komputer Anda. Sistem\n"
+"operasi lain mungkin menawarkan satu, tetapi Mandrakelinux menawarkan dua.\n"
+"Setiap sistem pencetakan sesuai untuk jenis konfigurasi tertentu.\n"
 "\n"
-" * \"pdq\" - artinya ``Print, Djangan nQantri'', adalah pilihan jika Anda\n"
-"punya koneksi langsung ke printer Anda dan ingin bebas dari panik kemacetan\n"
-"printer, serta tak punya printer jaringan. Ia akan meng-handle hanya kasus\n"
-"jaringan yg amat mudah dan agak lambat untuk kerja jaringan. Ambil \"pdq\" "
-"jika\n"
-"ini kali pertama Anda mengenal GNU/Linux.\n"
+" * \"%s\" - yang merupakan akronim untuk ``print, tidak ada antrian'',\n"
+"adalah pilihan jika Anda memiliki koneksi langsung ke printer Anda dan\n"
+"ingin bebas dari masalah kemacetan printer, serta tidak punya printer\n"
+"jaringan. (\"%s\" akan menangani kasus jaringan sederhana sehingga\n"
+"lambat ketika digunakan dalam jaringan. Anda direkomendasikan untuk\n"
+"menggunakan \"pdq\" jika ini pertama kali Anda mengenal GNU/Linux.\n"
 "\n"
-" * \"%s\" - ``Sistem Cetak Unix Umum'' canggih untuk mencetak ke printer\n"
-"lokal dan juga separuh planet. Mudah dan berfungsi spt server/klien untuk\n"
-"sistem cetak kuno \"lpd\" jadi kompatibel dg sistem lama. Banyak trik dapat\n"
-"dilakukan, tapi setup awalnya hampir semudah \"pdq\". Jika Anda perlu ini\n"
-"untuk emulasi server \"lpd\", Anda harus menyalakan daemon \"cups-lpd\".\n"
-"Front-end grafis disediakan untuk pencetakan/pemilihan opsi printer.\n"
+" * \"%s\" - kependekan dari ``Common Unix Printing System'' adalah pilihan\n"
+"yang canggih untuk mencetak ke printer lokal dan juga separuh planet. Opsi\n"
+"ini mudah dikonfigurasikan dan bisa berfungsi sebagai server/klien untuk\n"
+"sistem cetak \"lpd\" yang kuno, sehingga kompatibel dengan sistem lama yang\n"
+"mungkin masih membutuhkan layanan pencetakan. Meskipun cukup handal, setup\n"
+"dasar hampir semudah \"pdq\". Jika Anda perlu mengemulasikan server \"lpd\"\n"
+"pastikan Anda mengaktifkan daemon \"cups-lpd\". %s menyertakan tampilan\n"
+"grafis untuk pencetakan atau memilih opsi printer dan mengelola printer.\n"
 "\n"
-"Jika nanti Anda tidak menyukai sistem cetak yg Anda pilih saat ini,\n"
-"jalankan PrinterDrake dari Pusat Kontrol Mandrake dan klik tombol Ahli."
+"Jika Anda membuat pilihan sekarang dan nanti Anda tidak menyukai sistem \n"
+"cetak yang Anda pilih saat ini, Anda bisa merubahnya dengan menjalankan\n"
+"PrinterDrake dari Pusat Kontrol Mandrake dan klik tombol \"%s\"."
 
 #: help.pm:765
 #, c-format
@@ -5372,7 +5425,7 @@ msgid "Expert"
 msgstr "Ahli"
 
 #: help.pm:768
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -5391,33 +5444,33 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
-"DrakX mendeteksi perangkat IDE komputer Anda, juga men-scan kartu\n"
-"SCSI PCI di sistem Anda. Jika kartu SCSI ditemukan DrakX akan otomatis\n"
-"meng-instal driver yang sesuai.\n"
+"DrakX akan mencoba mendeteksi perangkat IDE yang ada pada komputer Anda.\n"
+"Ia juga mencari kartu SCSI PCI di sistem Anda. Jika kartu SCSI ditemukan\n"
+"DrakX akan otomatis meng-instal driver yang sesuai.\n"
 "\n"
 "Karena perangkat keras terkadang tak terdeteksi, DrakX mungkin gagal\n"
-"mendeteksi harddisk Anda. Jika demikian, tentukan sendiri hardware Anda.\n"
+"mendeteksi harddisk Anda. Jika demikian, Anda harus menentukan sendiri.\n"
 "\n"
 "Jika Anda harus menentukan adaptor SCSI PCI secara manual, DrakX akan\n"
-"menanyakan opsi konfigurasinya. DrakX akan mem-probe hardware untuk "
-"menentukan\n"
-"opsi spesifik hardware yg diperlukan untuk menyalakan adaptor. DrakX "
-"biasanya\n"
-"melakukan ini tanpa banyak basa-basi.\n"
+"menanyakan opsi konfigurasinya. Anda harus mengijinkan DrakX untuk\n"
+"mendeteksi perangkat keras untuk opsi khusus yang diperlukan untuk\n"
+"menginisialisasi adapter. Pada banyak kasus, DrakX biasanya melalui\n"
+"tahap ini tanpa ada masalah.\n"
 "\n"
-"Jika DrakX gagal mem-probe opsi yang harus diberikan, Anda perlu memberikan\n"
-"opsi ke driver secara manual."
+"Jika DrakX gagal mendeteksi opsi untuk menentukan parameter yang harus\n"
+"dikirimkan ke perangkat keras secara otomatis, Anda harus mengkonfigurasi\n"
+"driver secara manual."
 
 #: help.pm:786
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\": if a sound card is detected on your system, it'll be displayed\n"
 "here. If you notice the sound card is not the one actually present on your\n"
 "system, you can click on the button and choose a different driver."
 msgstr ""
-"\"%s\": jika kartu suara terdeteksi di sistem Anda, ia ditampilkan\n"
-"di sini. Jika kartu suara yg tampil tak sesuai dg yg ada di sistem, pilih\n"
-"driver lain."
+"\"%s\": jika kartu suara terdeteksi di sistem Anda, akan ditampilkan\n"
+"di sini. Jika kartu suara yang tampil tidak sesuai dengan yang ada pada\n"
+"sistem, Anda bisa klik pada tombol dan pilih driver lain."
 
 #: help.pm:788 help.pm:855 install_steps_interactive.pm:1005
 #: install_steps_interactive.pm:1022
@@ -5426,7 +5479,7 @@ msgid "Sound card"
 msgstr "Kartu suara"
 
 #: help.pm:791
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of information it has gathered\n"
 "about your system. Depending on the hardware installed on your machine, you\n"
@@ -5494,58 +5547,76 @@ msgid ""
 "on your machine. If you plan to use this machine as a server it's a good\n"
 "idea to review this setup."
 msgstr ""
-"DrakX menyajikan aneka informasi komputer Anda. Jika ingin mengubah entri,\n"
-"klik \"Konfigurasikan\":\n"
+"Sebagai review, DrakX akan menampilkan ringkasan informasi yang dikumpulkan\n"
+"tentang sistem Anda. Bergantung pada perangkat keras yang terpasang pada\n"
+"komputer Anda, Anda mungkin memiliki beberapa atau semua daftar berikut.\n"
+"Setiap daftar terdiri dari daftar perangkat keras yang harus dikonfigurasi,\n"
+"diikuti dengan ringkasan singkat dari konfigurasi aktual. Klik pada tombol\n"
+"\"%s\" untuk melakukan perubahan.\n"
 "\n"
-" * \"Papanketik\": cek konfigurasi map papanketik, ubah bila perlu.\n"
+" * \"%s\": periksa konfigurasi peta keyboard aktual dan lakukan perubahan ubah\n"
+"jika diperlukan.\n"
 "\n"
-" * \"Negara\": negara saat ini. Jika tak berada di negara ini, pilih yg "
-"lain.\n"
+" * \"%s\": periksa pilihan negara aktual. Jika Anda tidak berada pada negara\n"
+"ini, klik pada tombol \"%s\" dan pilih yang lain. Jika negara Anda tidak ada\n"
+"pada daftar berikut, klik tombol \"%s\" untuk mendapatkan daftar lengkap.\n"
 "\n"
-" * \"Zona waktu\": DrakX menerka zona waktu Anda dari bahasa yg Anda pilih.\n"
-"Jika tak benar, klik \"Konfigurasikan\".\n"
+" * \"%s\": secara default, DrakX menyesuaikan zona waktu berdasarkan negara\n"
+"yang Anda pilih. Anda bisa klik pada tombol \"%s\" jika tidak benar.\n"
 "\n"
-" * \"Mouse\": cek konfigurasi mouse, klik tombol untuk mengubahnya bila "
-"perlu\n"
+" * \"%s\": verifikasi konfigurasi mouse aktual dan klik pada tombol untuk\n"
+"mengubahnya jika diperlukan.\n"
 "\n"
-" * \"Printer\": klik \"Konfigurasikan\" untuk membuka konfigurator printer.\n"
+" * \"%s\": klik pada tombol \"%s\" akan membuka wizard konfigurasi printer.\n"
+"Lihat bab ``Panduan Pemula'' untuk informasi lebih lanjut tentang cara\n"
+"setting printer baru. Antarmuka yang ada pada manual serupa dengan yang\n"
+"digunakan selama installasi.\n"
 "\n"
-" * \"Kartu suara\": kartu suara terdeteksi di sistem Anda akan ditampilkan\n"
-"di sini. Jika tak cocok, klik tombol dan pilih driver lain.\n"
+" * \"%s\": jika kartu suara terdeteksi pada sistem Anda, akan ditampilkan\n"
+"disini. Jika Anda menyadari kartu suara yang ditampilkan bukan yang ada\n"
+"pada sistem Anda, Anda bisa klik pada tombol dan pilih driver lain.\n"
 "\n"
-" * \"Antarmuka Grafis\": Awalnya DrakX mengkonfigurasikan antarmuka grafis "
-"pada\n"
-"resolusi \"800x600\". Jika tak cocok, klik tombol untuk mengonfigurasikannya "
-"lagi.\n"
+" * \"%s\": Jika Anda memiliki kartu TV, informasi konfigurasinya akan\n"
+"ditampilkan disini. Jika Anda memiliki kartu TV dan tidak terdeteksi\n"
+"klik pada \"%s\" untuk mencoba mengkonfigurasinya secara manual.\n"
 "\n"
-" * \"Kartu TV\": kartu TV yg terdeteksi di sistem Anda akan ditampilkan di\n"
-"sini. Jika Anda punya kartu TV dan tak terdeteksi, klik tombol untuk\n"
-"mengkonfigurasikannya.\n"
+" * \"%s\": Anda bisa klik pada \"%s\" untuk merubah parameter yang \n"
+"berhubungan dengan kartu jika Anda merasa konfigurasinya salah.\n"
 "\n"
-" * \"Kartu ISDN\": kartu ISDN yg terdeteksi di sistem Anda akan ditampilkan\n"
-"di sini. Anda dapat meng-klik tombol untuk mengubah parameternya.\n"
+" * \"%s\": secara default, DrakX mengkonfigurasi antarmuka grafis Anda\n"
+"dalam resolusi \"800x600\" atau \"1024x768\". Jika tidak sesuai, klik\n"
+"pada \"%s\" untuk mengkonfigurasi ulang antarmuka grafis Anda.\n"
 "\n"
-" * \"Jaringan\": Jika Anda ingin mengkonfigurasikan akses Internet atau "
-"jaringan\n"
-"lokal sekarang, klik tombol ini.\n"
+" * \"%s\": jika Anda hendak mengkonfigurasi akses jaringan Internet\n"
+"atau lokal Anda, Anda bisa melakukannya sekarang. Lihat dokumentasi\n"
+"cetak atau gunakan Pusat Kontrol Mandrakelinux setelah installasi\n"
+"selesai untuk mengambil keuntungan dari bantuannya.\n"
 "\n"
-" * \"Tingkat Keamanan\": Tingkat keamanan dapat didefinisikan ulang di "
-"sini.\n"
+" * \"%s\": mengijinkan Anda mengkonfigurasi alamat proxy HTTP dan\n"
+"FTP jika komputer yang Anda install berada dibelakang server proxy.\n"
 "\n"
-" * \"Firewall\": Jika ingin berhubungan dg Internet, sebaiknya Anda berjaga\n"
-"diri dari penyusupan dg memasang firewall (tembok api).\n"
+" * \"%s\": daftar ini mengijinkan Anda mendefinisikan ulang tingkat\n"
+"keamanan seperti yang ditentukan pada langkah sebelumnya ().\n"
 "\n"
-" * \"Bootloader\": Jika Anda ingin mengganti konfigurasi bootloader, klik "
-"tombol\n"
-"tersebut. Ini diperuntukkan pengguna ahli.\n"
+" * \"%s\": jika Anda berencana untuk menghubungkan komputer Anda ke\n"
+"Internet, merupakan ide bagus untuk menjaga dari intrusi dengan \n"
+"memasang firewall. Lihat bab dari ``Panduan Pengguna'' untuk detail\n"
+"tentang setting firewall.\n"
 "\n"
-" * \"Servis\": Anda dpt mengatur servis mana yg akan dijalankan. Jika ingin\n"
-"menjalankan komputer sbg server periksalah setup-nya sekali lagi."
+" * \"%s\": jika Anda hendak merubah konfigurasi bootloader Anda, klik\n"
+"tombol ini. Opsi ini ditujukan untuk pengguna tingkat lanjut. Lihat\n"
+"dokumentasi cetak atau bantuan tentang konfigurasi bootloader pada \n"
+"Pusat Kontrol Mandrakelinux.\n"
+"\n"
+" * \"%s\": melalui daftar ini Anda bisa menentukan layanan apa yang\n"
+"akan dijalankan pada komputer Anda. Jika Anda berencana untuk memakai\n"
+"komputer ini sebagai server, merupakan ide bagus untuk mereview setup\n"
+"ini."
 
 #: help.pm:855 install_steps_interactive.pm:964 standalone/drakclock:100
 #, c-format
 msgid "Timezone"
-msgstr "Zonawaktu"
+msgstr "Zona waktu"
 
 #: help.pm:855 install_steps_interactive.pm:1038
 #, c-format
@@ -5569,9 +5640,9 @@ msgid "Network"
 msgstr "Jaringan"
 
 #: help.pm:855 install_steps_interactive.pm:1071
-#, fuzzy, c-format
+#, c-format
 msgid "Proxies"
-msgstr "Profil "
+msgstr "Proxy "
 
 #: help.pm:855 install_steps_interactive.pm:1082
 #, c-format
@@ -5591,21 +5662,21 @@ msgstr "Bootloader"
 #: help.pm:855 install_steps_interactive.pm:1123 services.pm:193
 #, c-format
 msgid "Services"
-msgstr "Servis"
+msgstr "Layanan"
 
 #: help.pm:858
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Choose the hard drive you want to erase in order to install your new\n"
 "Mandrakelinux partition. Be careful, all data on this drive will be lost\n"
 "and will not be recoverable!"
 msgstr ""
-"Pilih harddrive yg akan dihapus untuk disediakan bagi partisi\n"
-"Linux Mandrake. Hati-hati, semua data di situ akan hilang dan\n"
-"tak dapat dikembalikan seperti semula!"
+"Pilih harddrive yang akan dihapus untuk menginstall partisi Mandrakelinux\n"
+"baru Anda. Hati-hati, semua data pada drive ini akan hilang dan\n"
+"tidak dapat dikembalikan seperti semula!"
 
 #: help.pm:863
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"%s\" if you want to delete all data and partitions present on\n"
 "this hard drive. Be careful, after clicking on \"%s\", you will not be able\n"
@@ -5615,22 +5686,22 @@ msgid ""
 "Click on \"%s\" to quit this operation without losing data and partitions\n"
 "present on this hard drive."
 msgstr ""
-"Klik \"%s\" jika Anda ingin menghapus semua data dan partisi yang ada \n"
-"di harddisk ini. Awas, setelah mengklik \"%s\" Anda tak dapat \n"
-"mengembalikan data dan partisi di drive ini termasuk data Windows.\n"
+"Klik pada \"%s\" jika Anda ingin menghapus semua data dan partisi yang ada\n"
+"pada harddisk ini. Hati-hati, setelah mengklik \"%s\" Anda tidak dapat\n"
+"mengembalikan data dan partisi pada drive ini termasuk data Windows.\n"
 "\n"
-"Pilih \"%s\" untuk membatalkan aksi ini tanpa kehilangan data dan partisi\n"
-"yang ada dalam harddisk ini."
+"Klik pada \"%s\" untuk keluar dari operasi ini tanpa kehilangan data dan\n"
+"partisi yang ada pada harddisk ini."
 
 #: help.pm:869
 #, c-format
 msgid "Next ->"
-msgstr "Lanjutkan ->"
+msgstr "Berikutnya ->"
 
 #: help.pm:869
 #, c-format
 msgid "<- Previous"
-msgstr "<- Kembali"
+msgstr "<- Sebelumnya"
 
 #: install2.pm:117
 #, c-format
@@ -5639,18 +5710,19 @@ msgid ""
 "missing), this generally means your boot floppy in not in sync with the "
 "Installation medium (please create a newer boot floppy)"
 msgstr ""
-"Akses modul kernel gagal (file %s hilang), ini umumnya dikarenakan disket "
-"boot Anda tak sinkron dengan media instalasi (buatlah disket boot baru)"
+"Tidak bisa mengakses modul kernel yang berhubungan dengan kernal Anda "
+(file %s hilang), ini biasanya berarti disket boot tidak sinkron dengan "
+"media instalasi (buatlah disket boot baru)"
 
 #: install2.pm:167
 #, c-format
 msgid "You must also format %s"
-msgstr "Anda harus juga memformat %s"
+msgstr "Anda juga harus memformat %s"
 
 #: install_any.pm:376
-#, fuzzy, c-format
+#, c-format
 msgid "Do you have further supplementary media?"
-msgstr "Anda punya lagi?"
+msgstr "Apakah Anda memiliki media tambahan lagi?"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_any.pm:379
@@ -5660,7 +5732,11 @@ msgid ""
 "\n"
 "\n"
 "Do you have a supplementary installation media to configure?"
-msgstr "Punya antarmuka %s?"
+msgstr ""
+"Media berikut ditemukan dan akan digunakan selama installasi: %s\n"
+"\n"
+"\n"
+"Apakah Anda memiliki media tambahan untuk dikonfigurasikan?"
 
 #: install_any.pm:388 printer/printerdrake.pm:2929
 #: printer/printerdrake.pm:2936 standalone/scannerdrake:182
@@ -5671,46 +5747,48 @@ msgid "CD-ROM"
 msgstr "CD-ROM"
 
 #: install_any.pm:388
-#, fuzzy, c-format
+#, c-format
 msgid "Network (http)"
-msgstr "Jaringan %s"
+msgstr "Jaringan (http)"
 
 #: install_any.pm:388
-#, fuzzy, c-format
+#, c-format
 msgid "Network (ftp)"
-msgstr "Jaringan %s"
+msgstr "Jaringan (ftp)"
 
 #: install_any.pm:436 standalone/drakbackup:112
-#, fuzzy, c-format
+#, c-format
 msgid "No device found"
-msgstr "Image tak ditemukan"
+msgstr "Tidak ada divais yang ditemukan"
 
 #: install_any.pm:440
 #, c-format
 msgid "Insert the CD"
-msgstr ""
+msgstr "Masukkan CD"
 
 #: install_any.pm:445
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to mount CD-ROM"
-msgstr "Fork gagal: %s"
+msgstr "Gagal me-mount CD-ROM"
 
 #: install_any.pm:468
 #, c-format
 msgid "Insert the CD 1 again"
-msgstr ""
+msgstr "Masukkan CD 1 kembali"
 
 #: install_any.pm:478 install_any.pm:482
 #, c-format
 msgid "URL of the mirror?"
-msgstr ""
+msgstr "URL dari mirror?"
 
 #: install_any.pm:515
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Can't find a package list file on this mirror. Make sure the location is "
 "correct."
-msgstr "%s di %s tak tercari"
+msgstr ""
+"Tidak dapat menemukan file daftar paket pada mirror ini. Pastikan "
+"lokasinya benar."
 
 #: install_any.pm:633
 #, c-format
@@ -5721,12 +5799,12 @@ msgid ""
 msgstr ""
 "Ganti Cd-Rom!\n"
 "\n"
-"Masukkan Cd-Rom berlabel \"%s\" ke drive dan tekan Ok."
+"Masukkan Cd-Rom berlabel \"%s\" pada drive dan tekan Ok ketika selesai."
 
 #: install_any.pm:652
-#, fuzzy, c-format
+#, c-format
 msgid "Copying in progress"
-msgstr "Pendeteksian sedang berjalan"
+msgstr "Penyalinan sedang berjalan"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_any.pm:783
@@ -5742,14 +5820,15 @@ msgid ""
 "\n"
 "Do you really want to install these servers?\n"
 msgstr ""
-"Anda memilih server berikut: %s\n"
+"Anda telah memilih server berikut: %s\n"
 "\n"
 "\n"
-"Server ini aktif jika dibiarkan. Sementara ini tiada kabar ttg sekuritas,\n"
-"tapi jika ada yg baru ditemukan, upgrade-lah selekas mungkin.\n"
+"Server ini aktif secara default. Mereka tidak memiliki masalah keamanan,\n"
+"tetapi bisa saja ditemukan. Pada kasus tersebut, Anda harus memastikan\n"
+"untuk melakukan upgrade secepat mungkin.\n"
 "\n"
 "\n"
-"Jadi instal server ini?\n"
+"Apakah Anda hendak menginstall server ini?\n"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_any.pm:806
@@ -5763,22 +5842,22 @@ msgstr ""
 "Paket berikut akan dihapus agar sistem Anda dapat di-upgrade: %s\n"
 "\n"
 "\n"
-"Benarkah Anda ingin menghapus paket tersebut?\n"
+"Apakah Anda ingin menghapus paket tersebut?\n"
 
 #: install_any.pm:1214 partition_table.pm:603
 #, c-format
 msgid "Error reading file %s"
-msgstr "Error saat membaca file %s"
+msgstr "Kesalahan membaca file %s"
 
 #: install_any.pm:1425
-#, fuzzy, c-format
+#, c-format
 msgid "The following disk(s) were renamed:"
-msgstr "Paket berikut perlu diinstal:\n"
+msgstr "Disk berikut telah diubah namanya:"
 
 #: install_any.pm:1427
 #, c-format
 msgid "%s (previously named as %s)"
-msgstr ""
+msgstr "%s (sebelumnya bernama %s)"
 
 #: install_any.pm:1465
 #, c-format
@@ -5786,13 +5865,14 @@ msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
-"Error - tidak ada device yang valid untuk membuat filesystem baru. Periksa "
-"kembali hardware untuk mencari penyebabnya"
+"Kesalahan terjadi - tidak ada divais valid yang ditemukan untuk membuat "
+"sistem file baru. Periksa kembali perangkat keras Anda untuk mencari "
+"penyebabnya"
 
 #: install_any.pm:1509
 #, c-format
 msgid "HTTP"
-msgstr ""
+msgstr "HTTP"
 
 #: install_any.pm:1509
 #, c-format
@@ -5800,39 +5880,39 @@ msgid "FTP"
 msgstr "FTP"
 
 #: install_any.pm:1509
-#, fuzzy, c-format
+#, c-format
 msgid "NFS"
 msgstr "HFS"
 
 #: install_any.pm:1532
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose a media"
-msgstr "Silahkan pilih"
+msgstr "Silahkan pilih media"
 
 #: install_any.pm:1564
-#, fuzzy, c-format
+#, c-format
 msgid "Bad media %s"
-msgstr "media %s ditambahkan"
+msgstr "Media rusak %s"
 
 #: install_any.pm:1576
-#, fuzzy, c-format
+#, c-format
 msgid "File already exists. Overwrite it?"
-msgstr "File sudah ada. Gunakan file ini ?"
+msgstr "File sudah ada. Timpa file ini ?"
 
 #: install_any.pm:1627
 #, c-format
 msgid "Can not make screenshots before partitioning"
-msgstr "Gagal membuat screenshot sebelum buat partisi"
+msgstr "Tidak bisa membuat screenshot sebelum buat partisi"
 
 #: install_any.pm:1634
 #, c-format
 msgid "Screenshots will be available after install in %s"
-msgstr "Screenshot akan tersedia setelah instal di %s"
+msgstr "Screenshot akan tersedia setelah installasi pada %s"
 
 #: install_gtk.pm:136
 #, c-format
 msgid "System installation"
-msgstr "Instalasi sistem"
+msgstr "Installasi sistem"
 
 #: install_gtk.pm:139
 #, c-format
@@ -5845,8 +5925,8 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
-"Ada hardware di komputer ini yang membutuhkan driver ``proprietary''.\n"
-"Anda bisa mencari informasinya di: %s"
+"Beberapa perangkat keras pada komputer Anda memerlukan driver \n"
+"``proprietary'' agar bekerja. Anda bisa mencarinya pada : %s"
 
 #: install_interactive.pm:62
 #, c-format
@@ -5855,9 +5935,9 @@ msgid ""
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
-"Pilih dulu partisi rootnya.\n"
-"Caranya, buatlah partisi (atau pilih di yang sudah ada).\n"
-"Lalu pilih ``Mount point'' dan set ke `/'"
+"Anda harus memiliki partisi root.\n"
+"Caranya, buatlah sebuah partisi (atau pilih yang sudah ada).\n"
+"Lalu pilih aksi ``Mount point'' dan set ke `/'"
 
 #: install_interactive.pm:67
 #, c-format
@@ -5866,24 +5946,24 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
-"Anda belum punya partisi swap\n"
+"Anda belum memiliki partisi swap\n"
 "\n"
-"Jalan terus?"
+"Lanjutkan?"
 
 #: install_interactive.pm:70 install_steps.pm:211
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr "Anda harus punya partisi FAT termount pada /boot/efi"
+msgstr "Anda harus memiliki partisi FAT termount pada /boot/efi"
 
 #: install_interactive.pm:97
 #, c-format
 msgid "Not enough free space to allocate new partitions"
-msgstr "Tidak ada cukup ruangan untuk mengalokasikan partisi baru"
+msgstr "Tidak cukup ruangan kosong untuk alokasi partisi baru"
 
 #: install_interactive.pm:105
 #, c-format
 msgid "Use existing partitions"
-msgstr "Pakai partisi yang sudah ada"
+msgstr "Gunakan partisi yang sudah ada"
 
 #: install_interactive.pm:107
 #, c-format
@@ -5918,13 +5998,12 @@ msgstr "Ukuran partisi swap dalam MB: "
 #: install_interactive.pm:130
 #, c-format
 msgid "There is no FAT partition to use as loopback (or not enough space left)"
-msgstr ""
-"Tiada partisi FAT untuk digunakan sbg loopback (atau tiada ruang cukup)"
+msgstr "Tidak ada partisi FAT untuk loopback (atau tidak ada ruang tersisa)"
 
 #: install_interactive.pm:139
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr "partisi mana yang mau Anda ubah ukurannya?"
+msgstr "partisi mana yang hendak Anda ubah ukurannya?"
 
 #: install_interactive.pm:153
 #, c-format
@@ -5932,13 +6011,13 @@ msgid ""
 "The FAT resizer is unable to handle your partition, \n"
 "the following error occurred: %s"
 msgstr ""
-"Saya tidak dapat mengubah ukuran partisi FAT ini,\n"
-"Ada error ini yang terjadi: %s"
+"Pengubah FAT tidak mampu menangani partisi Anda, \n"
+"Kesalahan berikut muncul: %s"
 
 #: install_interactive.pm:156
 #, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Hitung ukuran partisi Windows"
+msgstr "Menghitung ukuran partisi Windows"
 
 #: install_interactive.pm:163
 #, c-format
