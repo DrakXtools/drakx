@@ -323,11 +323,20 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jul  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-52mdk
 - ensure proper upgrade: explictly tell urpmi that old drakxtools-newt
   conflicts with drakxtools-backend
+- drakauth: more features (vincent guardiola)
+- drakconnect: pptp support (#6515) (olivier blin)
+- localedrake: configure menu-method's language too so that altering
+  language is done for KDE menu entries too (instead of just programs'
+  messages)
 
 * Thu Jul  1 2004 Pixel <pixel@mandrakesoft.com> 10-51mdk
 - create package drakxtools-backend
+- bootloader configuration: misc fixes (pixel)
+- XFdrake: fix typo causing multiple "Keyboard" entries in XF86Config
+  (pixel, #10163)
 
 * Thu Jul  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-50mdk
 - drakupdate_fstab (oblin): fix moving mount point (#6982, #10175)
