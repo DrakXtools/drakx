@@ -44,28 +44,28 @@ $install = $ {{
     hd64 => "stage1-disk",
 }}{$type} or die;
 
-if ($img =~ /rdz$/) {
-    foreach (glob('all.modules/*')) {
-	-f $_ and next;
-	initrd($mnt, $img, $_) ;
-    }
+mkdir "images";
+chomp($main = `cat all.kernels/.main`);
+
+if ($img =~ /blank|other|pcmcia/) {
+    @kernels = $main;
 } else {
-    foreach (glob('all.kernels/*')) {
-	$_ =~ 'cardmgr' and next;
-	my ($kern) = $_ =~ /all.kernels\/([^\/]+)/;
-	if ($arch !~ /ppc/) {
-	    _ "$sudo cp -f all.kernels/$kern/boot/vmlinuz* all.kernels/$kern/vmlinuz";
-	} else {
-	    _ "$sudo cp -f all.kernels/$kern/boot/vmlinux* all.kernels/$kern/vmlinux";
-	}
-	$::{"boot_img_$arch"}->($mnt, $img, "all.kernels/$kern/", "all.modules/$kern");
+    @kernels = map { m|all.kernels/(.*)| } glob('all.kernels/*');
+}
+
+foreach (@kernels) {
+    if ($img =~ /rdz$/) {
+	initrd($mnt, "$img-$_");
+    } else {
+	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("all.kernels/$_/boot/vmlinu*"));
     }
 }
+rename("$img-$main", "$img");
 
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
-    my ($mnt, $img, $modz) = @_;
+    my ($mnt, $img) = @_;
     my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
     my $tmp = "$ENV{HOME}/tmp/initrd";
     my $tar = "$instdir/stage1-data/stage1.tar.bz2";
@@ -84,50 +84,49 @@ sub initrd {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 _ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
     }
-    $modz ||= "modules$I";
+    my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
+    $modz = "all.modules$I/$ext";
     _ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar" if $type !~ /blank/;
     _ "$sudo cp -f $modz/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
 
 
-    my ($extension) = $modz =~ /.*\/([^\/]+)/;
 # Workaround for vfat-loop bug (quite touchy)
     _ "gzip -9f $tmp";
-    _ "cp -f $tmp.gz $img$extension";
+    _ "cp -f $tmp.gz $img";
     _ "rm -f $tmp.gz";
 #    _ "gzip -9 -c $tmp > $img";
 #    _ "rm -f $tmp";
 }
 
 sub boot_img_i386 {
-    my ($mnt, $img, $kern, $modz) = @_;
+    my ($mnt, $img, $kernel) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
     my $automatic = "";
 
-    my ($imgext) = $modz =~ /.*\/([^\/]+)/;
     if ($type eq "hd") {
-	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img$imgext";
+	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
     } elsif ($type eq "all") {
-	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img$imgext";
+	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
     } else {
-	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img$imgext";
+	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
     }
 
     $automatic = "automatic=method:cdrom" if ($type eq "cdrom");
     $automatic = "automatic=method:disk" if ($type eq "hd");
 
-    _ "$sudo mount -t vfat -o umask=0 $img$imgext $mnt -o loop";
-    _ "cat $kern"."vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
+    _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
+    _ "cat $kernel > $mnt/vmlinuz" if $type !~ /blank/;
 
-    my ($extension) = $modz =~ /.*\/([^\/]+)/;
-    initrd("${mnt}2", "$type.rdz", $modz) if !-f "$type.rdz$extension";
-    eval { _ "cp -f $type.rdz$extension $mnt/$type.rdz" };
+    my $rdz = $img; $rdz =~ s/\.img/.rdz/;
+    initrd("${mnt}2", $rdz) if !-e $rdz;
+    eval { _ "cp -f $rdz $mnt/$type.rdz" };
     if ($@) {
 	unlink "$mnt/$type.rdz";
 	my $avail = (split ' ', `df $mnt`)[-3];
-	my $s = int((-s "$type.rdz$extension") / 1024);
-	die sprintf("not enough room for $type.rdz$extension: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
+	my $s = int((-s $rdz) / 1024);
+	die sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
     }
 
 #    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
