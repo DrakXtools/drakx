@@ -319,7 +319,7 @@ sub convert_fonts {
 
 sub convert_ttf_fonts {
     my ($fonts, $o_generate_pfb) = @_;
-    convert_fonts($fonts, $o_generate_pfb, "TTF", $ttf2pt1);
+    convert_fonts($fonts, $ttf2pt1, "TTF", $o_generate_pfb);
 }
 
 
