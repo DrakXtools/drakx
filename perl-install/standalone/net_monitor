@@ -53,8 +53,8 @@ my $disconnect = "@ARGV" =~ /--disconnect/;
 my ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
 
 if ($force) {
-    $connect and system("/etc/sysconfig/network-scripts/net_cnx_up &");
-    $disconnect and system("/etc/sysconfig/network-scripts/net_cnx_down &");
+    $connect and system("/etc/sysconfig/network-scripts/net_cnx_up");
+    $disconnect and system("/etc/sysconfig/network-scripts/net_cnx_down");
     $connect = $disconnect = 0;
 }
 $quiet and exit(0);
