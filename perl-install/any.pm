@@ -642,15 +642,15 @@ when your installation is complete and you restart your system.")),
 	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
 	    format => sub { $_[0] =~ /(.*\|)(.*)/; $1.lang::l2name($2) },
 	    list => \@langs, sort => 0 },
-	    if_($langs_, (map {
-		{ val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
-		  text => $_->[1], advanced => 1,
-		  image => "langs/lang-$_->[0]",
-		} 
-	    } sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs()),
-		{ val => \$langs->{all}, type => 'bool', text => N("All"), advanced => 1 },
-		if_($::isInstall,
-		    { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }))
+	    if_($langs_, if_($::isInstall,
+			     { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }),
+		{ val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
+	        map {
+		  { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
+		    text => $_->[1], advanced => 1,
+		    image => "langs/lang-$_->[0]",
+		  } 
+	      } sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs())
 	]) or return;
     $langs->{$listval2val->($lang)} = 1;
     $langs->{$_} or delete $langs->{$_} foreach keys %$langs;  #- clean hash
