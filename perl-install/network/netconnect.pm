@@ -567,7 +567,7 @@ killall pppd
                     post => sub {
                         $adsl_data = $adsl_data{$adsl_provider};
                         if ($adsl_provider ne $adsl_old_provider) {
-                            $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 vpi vci);
+                            $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 vpi vci);
                               $adsl_protocol = $adsl_types{$adsl_data->{method}};
                         }
                         return 'adsl_protocol';

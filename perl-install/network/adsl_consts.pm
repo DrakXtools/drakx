@@ -17,6 +17,7 @@ our %adsl_data = (
                    vci => 23,
                    dnsServer2 => '212.35.2.1',
                    dnsServer3 => '212.35.2.2',
+                   DOMAINNAME2 => 'tiscali.be',
                   },
 
                   N("Belgium") . "|Belgacom" =>
@@ -32,6 +33,7 @@ our %adsl_data = (
                    dnsServer2 => '213.228.0.68',
                    dnsServer3 => '212.27.32.176',
                    method => 'pppoa',
+                   DOMAINNAME2 => 'free.fr',
                   },
 
                   N("France") . "|Free dégroupé 1024/256 (mini)" =>
@@ -40,6 +42,7 @@ our %adsl_data = (
                    vci => 24,
                    dnsServer2 => '213.228.0.68',
                    dnsServer3 => '212.27.32.176',
+                   DOMAINNAME2 => 'free.fr',
                   },
 
                   N("France") . "|9online 512" =>
@@ -58,6 +61,7 @@ our %adsl_data = (
                    dnsServer2 => '194.117.200.10',
                    dnsServer3 => '194.117.200.15',
                    method => 'pppoa',
+                   DOMAINNAME2 => 'club-internet.fr',
                   },
 
                   N("France") . "|Wanadoo" =>
@@ -67,6 +71,7 @@ our %adsl_data = (
                    dnsServer2 => '193.252.19.3',
                    dnsServer3 => '193.252.19.4',
                    method => 'pppoa',
+                   DOMAINNAME2 => 'wanadoo.fr',
                   },
 
                   N("France") . "|Télé2 128k " =>
