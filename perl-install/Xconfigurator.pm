@@ -394,6 +394,12 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     -x "$prefix$card->{prog}" or $install && $install->($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
+    #- check for Matrox G200 PCI cards, disable AGP in such cases, causes black screen else.
+    if ($card->{identifier} =~ /Matrox.* G[24][05]0/ && $card->{identifier} !~ /AGP/) {
+	log::l("disabling AGP mode for Matrox card, as it seems to be a PCI card");
+	log::l("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
+	substInFile { s/^\s*#?\s*mga_dma\s*=\s*\d+\s*/mga_dma = 0/ } "$prefix/etc/X11/glx.conf";
+    }
     #- make sure everything is correct at this point, packages have really been installed
     #- and driver and GLX extension is present.
     if ($card->{NVIDIA_glx} && !$card->{DRI_glx} && (-e "$prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
