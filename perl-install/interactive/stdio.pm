@@ -75,7 +75,7 @@ ask_fromW_begin:
 	    }
 	} elsif ($e->{type} =~ /list/) {
 	    $e->{text} || $e->{label} and print "=> $e->{label} $e->{text}\n";
-	    my $n = 0; my $size = 0; my $def_n = 0;
+	    my $n = 0; my $size = 0;
 	    foreach (@{$e->{list}}) {
 		$n++;
 		my $t = "$n: " . may_apply($e->{format}, $_) . "\t";
@@ -85,7 +85,6 @@ ask_fromW_begin:
 		}
 		print $t;
 		$size += length($t);
-		${$e->{val}} eq $_ and $def_n = $n;
 	    }
 	    print "\n";
 	    my $i = good_choice(may_apply($e->{format}, ${$e->{val}}), $n);
