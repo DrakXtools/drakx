@@ -15,12 +15,18 @@ my %deps = ();
 
 my @drivers_by_category = (
 [ 'net', {
-arch() =~ /^sparc/ ? (
+if_(arch() =~ /ppc/,
+  "mace" => "Apple PowerMac Ethernet",
+  "bmac" => "Apple G3 Ethernet",
+  "gmac" => "Apple G4/iBook Ethernet",
+),
+if_(arch() =~ /^sparc/,
   "myri_sbus" => "MyriCOM Gigabit Ethernet",
   "sunbmac" => "Sun BigMac Ethernet",
   "sunhme" => "Sun Happy Meal Ethernet",
   "sunqe" => "Sun Quad Ethernet",
-) : arch =~ /alpha/ ? () : (
+),
+if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "3c509" => "3com 3c509",
   "3c501" => "3com 3c501",
   "3c503" => "3com 3c503",
@@ -84,10 +90,6 @@ arch() =~ /^sparc/ ? (
   "de4x5" => "Digital 425,434,435,450,500",
   "rtl8139" => "RealTek RTL8129/8139",
   "8139too" => "Realtek RTL-8139",
-arch() =~ /ppc/ ? (
-  "mace" => "Apple PowerMac Ethernet",
-  "bmac" => "Apple G3 Ethernet",
-  "gmac" => "Apple G4/iBook Ethernet") : (),
 }],
 [ 'net_raw', {
   "8390" => "8390",
@@ -104,9 +106,14 @@ arch() =~ /ppc/ ? (
    "b1pci" => "b1pci",
 }],
 [ 'scsi', {
-arch() =~ /^sparc/ ? (
+if_(arch() =~ /ppc/,
+  "mesh" => "Apple Internal SCSI",
+  "mac53c94" => "Apple External SCSI",
+),
+if_(arch() =~ /^sparc/,
   "qlogicpti" => "Performance Technologies ISP",
-) : arch() =~ /alpha/ ? () : (
+),
+if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "aha152x" => "Adaptec 152x",
   "aha1542" => "Adaptec 1542",
   "aha1740" => "Adaptec 1740",
@@ -142,9 +149,6 @@ arch() =~ /^sparc/ ? (
   "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
-arch() =~ /ppc/ ? (
-  "mesh" => "Apple Internal SCSI",
-  "mac53c94" => "Apple External SCSI") : (),
 }],
 [ 'scsi_raw', {
   "scsi_mod" => "scsi_mod",
@@ -154,9 +158,10 @@ arch() =~ /ppc/ ? (
 #-  "ide-probe-mod" => "ide-probe-mod",
 }],
 [ 'disk', {
-arch() =~ /^sparc/ ? (
+if_(arch() =~ /^sparc/,
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
-) : arch() =~ /alpha/ ? () : (
+),
+if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "DAC960" => "Mylex DAC960",
   "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
   "megaraid" => "AMI MegaRAID",
@@ -176,7 +181,7 @@ arch() =~ /^sparc/ ? (
 #-  "ide-disk" => "IDE disk",
 }],
 [ 'cdrom', {
-arch() !~ /^sparc|alpha/ ? (
+if_(arch() !~ /alpha/ && arch() !~ /sparc/,
 #******(missing-2.4)  "sbpcd" => "SoundBlaster/Panasonic",
 #******(missing-2.4)  "aztcd" => "Aztech CD",
 #******(missing-2.4)  "gscd" => "Goldstar R420",
@@ -188,7 +193,7 @@ arch() !~ /^sparc|alpha/ ? (
 #******(missing-2.4)  "sjcd" => "Sanyo",
 #******(missing-2.4)  "cdu31a" => "Sony CDU-31A",
 #******(missing-2.4) "sonycd535" => "Sony CDU-5xx",
-) : (),
+),
 }],
 [ 'cdrom_raw', {
   "isofs" => "iso9660",
@@ -197,7 +202,10 @@ arch() !~ /^sparc|alpha/ ? (
   "cdrom" => "cdrom",
 }],
 [ 'sound', {
-arch() !~ /^sparc/ ? (
+if_(arch() =~ /ppc/,
+  "dmasound" => "Amiga or PowerMac DMA sound",
+),
+if_(arch() !~ /^sparc/,
   "cmpci" => "C-Media Electronics CMI8338A CMI8338B CMI8738",
   "es1370" => "Ensoniq ES1370 [AudioPCI]",
   "es1371" => "Ensoniq ES1371 [AudioPCI-97]",
@@ -220,12 +228,10 @@ arch() !~ /^sparc/ ? (
   "snd-card-trident" => "Silicon Integrated Systems [SiS]|7018 PCI Audio",
   "snd-card-via686a" => "VIA Technologies|VT82C686 [Apollo Super AC97/Audio]",
   "snd-card-ymfpci" => "Yamaha Corporation|YMF-740",
-) : arch() =~ /ppc/ ? (
-  "dmasound" => "Amiga or PowerMac DMA sound",
-) : (),
+),
 }],
 [ 'pcmcia', {
-arch() !~ /^sparc/ ? (
+if_(arch() !~ /^sparc/,
   "ide_cs" => "ide_cs",
   "fmvj18x_cs" => "fmvj18x_cs",
   "fdomain_cs" => "fdomain_cs",
@@ -256,18 +262,18 @@ arch() !~ /^sparc/ ? (
 #  "sram_mtd" => "sram_mtd",
   "tulip_cb" => "tulip_cb",
 
-) : (),
+),
 }],
 [ 'pcmcia_everywhere', {
-arch() !~ /^sparc/ ? (
+if_(arch() !~ /^sparc/,
   "pcmcia_core" => "PCMCIA core support",
   "tcic" => "PCMCIA tcic controller",
   "ds" => "PCMCIA card support",
   "i82365" => "PCMCIA i82365 controller",
-) : (),
+),
 }],
 [ 'paride', {
-arch() !~ /^sparc/ ? (
+if_(arch() !~ /^sparc/,
   "aten" => "ATEN EH-100",
   "bpck" => "Microsolutions backpack",
   "comm" => "DataStor (older type) commuter adapter",
@@ -286,7 +292,7 @@ arch() !~ /^sparc/ ? (
   "pcd"  => "Parallel port CD-ROM",
   "pf"   => "Parallel port ATAPI disk",
   "paride" => "Main parallel port module",
-) : (),
+),
 }],
 [ 'raid', {
   "linear" => "linear",
@@ -295,13 +301,13 @@ arch() !~ /^sparc/ ? (
   "raid5" => "raid5",
 }],
 [ 'mouse', {
-arch() !~ /^sparc/ ? (
+if_(arch() !~ /^sparc/,
   "busmouse" => "busmouse",
   "msbusmouse" => "msbusmouse",
   "serial" => "serial",
   "qpmouse" => "qpmouse",
   "atixlmouse" => "atixlmouse",
-) : (),
+),
 }],
 [ 'usb', {
   "usb-uhci" => "USB (uhci)",
@@ -347,7 +353,7 @@ sk98lin dc395x_trm
 
 
 my @skip_modules_on_stage1 = (
-  arch() =~ /alpha|ppc/ ? qw(sb1000) : (),
+  if_(arch() =~ /alpha|ppc/, qw(sb1000)),
   "apa1480_cb",
   "imm",
   "ppa",
@@ -451,7 +457,7 @@ sub load {
     }
 
     if ($type eq 'sound' && arch() =~ /ppc/) {
-    add_alias($type, $name);
+	add_alias($type, $name);
     }
         	
     when_load($name, $type, @options);
@@ -633,20 +639,23 @@ sub load_thiskind {
     #- loaded, so:
     read_already_loaded();
 
+    my @try_modules = (
+      'imm', 'ppa',
+      if_(detect_devices::usbZips(), 'usb-storage'),
+      if_(arch() =~ /ppc/, 
+	  'mesh', 'mac53c94',
+	  if_($type =~ /net/, 'bmac', 'gmac', 'pmac'),
+	  if_($type =~ /sound/, 'dmasound'),
+      ),
+    );
     grep {
 	$f->($_->{description}, $_->{driver}) if $f;
 	eval { load($_->{driver}, $type) };
 	$_->{error} = $@;
 
 	!($@ && $_->{try});
-    } get_that_type($type),
-      $type =~ /scsi/ && arch() !~ /sparc/ ? 
-	(map { +{ driver => $_, description => $_, try => 1 } }
-	 detect_devices::usbZips() ? "usb-storage" : (), arch() =~ /ppc/ ? ("mesh", "mac53c94",) : ("imm", "ppa",)) :
-      $type =~ /net/ && arch() =~ /ppc/ ?
-	(map { +{ driver => $_, description => $_, try => 1 } } ("bmac", "gmac", "pmac",)) :
-      $type =~ /sound/ && arch() =~ /ppc/ ?
-	(map { +{ driver => $_, description => $_, try => 1 } } "dmasound") : ();
+    } get_that_type($type), 
+      map {; { driver => $_, description => $_, try => 1 } } @try_modules;
 }
 
 sub get_that_type {
