@@ -253,11 +253,12 @@ ifdown eth0
 
   step_3:
 
-    my $m = $success ? _("Congratulations, the network and internet configuration is finished.
+    my $m = $success ? _("Congratulations, the network and Internet configuration is finished.
+The configuration will now be applied to your system.
 
-The configuration will now be applied to your system.\n") . if_($::isStandalone && $in->isa('interactive_gtk'),
-_("After that is done, we recommend you to restart your X
-environnement to avoid hostname changing problem.")) : _("Problems occur during configuration.
+") . if_($::isStandalone && $in->isa('interactive_gtk'),
+_("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))
+      : _("Problems occured during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration");
     if ($::isWizard) {
 	$::Wizard_no_previous=1;

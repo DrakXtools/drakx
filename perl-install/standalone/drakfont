@@ -555,9 +555,9 @@ sub interactive_mode {
 					 0, new Gtk::VBox(0,0),
 					 0, new Gtk::Pixmap($pix_user_map, $pix_user_mask),
 					 0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-						   gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
+						   gtksignal_connect(new Gtk::Button(_("Get Windows Fonts")), clicked 	=>
 						       sub { ${$central_widget}->destroy(); $windows = 1; appli_choice();}),
-						   gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
+						   gtksignal_connect(new Gtk::Button(_("Advanced Options")), clicked =>
 						       sub {  ${$central_widget}->destroy(); $windows = 0; advanced_install();}),
 						   gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
 								     sub { ${$central_widget}->destroy(); uninstall() }),

@@ -219,7 +219,7 @@ sub ask_standalone_gtk {
                 my ($started, $action) = $update_service->($service, gtkset_justify($l, 0));
 		[ gtkpack__(new Gtk::HBox(0,0), $_),
 		  gtkpack__(new Gtk::HBox(0,0), $l),
-		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_("Infos")), clicked => sub { $display->($infos) })),
+		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_("Info")), clicked => sub { $display->($infos) })),
                   gtkpack__(new Gtk::HBox(0,0), gtkset_active(gtksignal_connect(
                           new Gtk::CheckButton(_("On boot")),
                           clicked => sub { if ($_[0]->active) {
