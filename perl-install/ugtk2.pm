@@ -286,7 +286,7 @@ sub create_scrolled_window {
     my ($W, $policy, $viewport_shadow) = @_;
     my $w = Gtk2::ScrolledWindow->new(undef, undef);
     $policy ||= [ 'automatic', 'automatic' ];
-    $w->set_policy(@{$policy});
+    $w->set_policy(@$policy);
     if (member(ref($W), qw(Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
 	$w->add($W)
     } else {
@@ -908,7 +908,7 @@ sub _create_window($$) {
 	my (undef, $event) = @_;
 	my $w_size = $event->values;
 	return if $w_size->[2] == $wi && $w_size->[3] == $he;
-	(undef, undef, $wi, $he) = @{$w_size};
+	(undef, undef, $wi, $he) = @$w_size;
 
 	my ($X, $Y, $Wi, $He) = @{$force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
