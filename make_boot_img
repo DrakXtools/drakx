@@ -59,9 +59,9 @@ foreach (@kernels) {
 	initrd($mnt, "$img-$_");
     } else {
 	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("all.kernels/$_/boot/vmlinu*"));
+	rename("$img-$main", "$img");
     }
 }
-rename("$img-$main", "$img");
 
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
