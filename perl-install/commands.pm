@@ -3,7 +3,7 @@ package commands; # $Id$
 #-########################################################################
 #- This file implement many common shell commands:
 #- true, false, cat, which, dirname, basename, rmdir, lsmod, grep, tr,
-#- mount, umount, mkdir, mknod, ln, rm, chmod, chown, mkswap, swapon,
+#- mount, umount, mkdir, mknod, ln, rm, chmod, chown, swapon,
 #- swapoff, ls, cp, ps, dd, head, tail, strings, hexdump, more, insmod,
 #- modprobe, route, df, kill, lspci, lssbus, dmesg, sort, du, 
 #-########################################################################
@@ -160,12 +160,6 @@ sub chown_ {
 	}
     };
     &$chown(@_);
-}
-
-sub mkswap {
-    @_ == 1 or die "mkswap <device>\n";
-    require swap;
-    swap::enable($_[0], 0);
 }
 
 sub swapon {
