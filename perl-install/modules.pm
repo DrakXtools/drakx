@@ -115,7 +115,7 @@ sub probe_category {
 	    }
 	    $b;
 	} else {
-	    detect_devices::check($_) && member($_->{driver}, @modules);
+	    member($_->{driver}, @modules);
 	}
     } detect_devices::probeall($probe_type);
 }

@@ -332,13 +332,6 @@ sub stringlist {
 	       );
     } probeall(@_); 
 }
-sub check {
-    my ($l) = @_;
-    my $ok = $l->{driver} !~ /(unknown|ignore)/;
-    $ok or log::l("skipping $l->{description}, no module available (if you know one, please mail cooker\@mandrakesoft.com)");
-    $ok
-}
-
 
 sub tryOpen($) {
     local *F;
