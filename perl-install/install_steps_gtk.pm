@@ -537,8 +537,8 @@ sub installPackages {
 		   eval(cat_($pl));
 		   my ($pix, undef) = gtkcreate_png($f);
 		   my $dbl_area;
-		   my $darea = new Gtk::DrawingArea
-		   gtkpack($box, $advertising = gtksignal_connect(gtkset_usize($darea, $width, eight), expose_event => sub { 
+		   my $darea = new Gtk::DrawingArea;
+		   gtkpack($box, $advertising = gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub { 
 			      if (!defined($dbl_area)) {
 				  $dbl_area = new Gtk::Gdk::Pixmap($darea->window, $width, $height);
 				  $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
