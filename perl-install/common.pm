@@ -59,8 +59,8 @@ sub uniq { my %l; @l{@_} = (); keys %l }
 sub to_int { $_[0] =~ /(\d*)/; $1 }
 sub to_float { $_[0] =~ /(\d*(\.\d*)?)/; $1 }
 sub ikeys { my %l = @_; sort { $a <=> $b } keys %l }
-sub add2hash($$)  { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } }
-sub add2hash_($$) { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { exists $a->{$k} or $a->{$k} = $v } }
+sub add2hash($$)  { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } $a }
+sub add2hash_($$) { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { exists $a->{$k} or $a->{$k} = $v } $a }
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
 sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }
 sub basename { @_ == 1 or die "usage: basename <name>\n"; local $_ = shift; s|/*\s*$||; s|.*/||; $_ }

@@ -84,7 +84,18 @@ computer is first turned on.
 Because the effects of this process are usually irreversible, partitioning
 can be intimidating and stressful to the unexperienced user. DiskDrake
 simplifies the process so that it need not be. Consult the documentation
-and take your time before proceeding."),
+and take your time before proceeding.
+
+
+You can reach any option using the keyboard: navigate through the partitions
+using Tab and Up/Down arrows. When a partition is selected, you can use:
+
+- Ctrl-c  to create a new partition (when an empty partition is selected)
+
+- Ctrl-d  to delete a partition
+
+- Ctrl-m  to set the mount point
+"),
 
 formatPartitions =>
  __("Any partitions that have been newly defined must be formatted for

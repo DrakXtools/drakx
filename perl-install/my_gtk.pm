@@ -321,12 +321,17 @@ sub _create_window($$) {
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
     $w->signal_connect("key_press_event" => sub {
-	my $d = ${{ 65481 => 'next',
+	my $d = ${{ 65470 => 'help',
+	            65481 => 'next',
 		    65480 => 'previous' }}{$_[1]->{keyval}} or return;
-	my $s = $::o->{step};
-	do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};
-	$::setstep && $s and die "setstep $s\n";
-    });
+	if ($d eq "help") {
+	    install_steps_gtk::create_big_help();
+	} else {
+	    my $s = $::o->{step};
+	    do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};
+	    $::setstep && $s and die "setstep $s\n";
+	}
+    }) unless $::isStandalone;
 
     $w->signal_connect(size_allocate => sub {
 	my ($wi, $he) = @{$_[1]}[2,3];

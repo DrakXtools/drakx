@@ -639,6 +639,19 @@ widget "*Steps*" style "steps"
 }
 
 #------------------------------------------------------------------------------
+sub create_big_help {
+    my $w = my_gtk->new('', grab => 1, force_position => [ $stepswidth, $logoheight ]);
+    $w->{rwindow}->set_usize($logowidth, $height - $logoheight);
+    gtkadd($w->{window},
+	   gtkpack_(new Gtk::VBox(0,0),
+		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, 
+							   formatAlaTeX(translate($help::steps{$::o->{step}})))),
+		    0, gtksignal_connect(new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
+		   ));
+    $w->main;
+}
+
+#------------------------------------------------------------------------------
 sub create_help_window {
     my ($o) = @_;
 
