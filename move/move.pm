@@ -143,7 +143,8 @@ sub init {
     foreach (cat_('/image/move/directories-to-create')) {
 	my ($mode, $uid, $gid, $name) = split;
 	next if -d $name;
-	mkdir($name, oct($mode));
+	mkdir($name);
+	chmod(oct($mode), $name);
 	chown($uid, $gid, $name);
     }
 
