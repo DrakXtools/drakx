@@ -1,3 +1,170 @@
+2004/09/09  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Up kpilot
+	compssUsers.pl and rpmsrate for 10.1 Community
+
+	* share/compssUsers.pl: compssUsers.pl and rpmsrate for 10.1 Community
+
+2004/09/09  Nicolas Planel  <nplanel at mandrakesoft.com>
+
+	* c/smp-dmi.c: add dmi type 6 in detection memory size
+
+2004/09/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/be.po: cyrillic fixes
+
+	* share/po/tg.po, share/po/ltg.po, share/po/ru.po, share/po/ro.po,
+	share/po/mt.po, share/po/sr@Latn.po, share/po/it.po, share/po/tl.po,
+	share/po/de.po, share/po/sr.po, share/po/cy.po, share/po/da.po,
+	share/po/ca.po, share/po/el.po, share/po/bg.po, share/po/lv.po: fixed
+	media paths
+
+	* share/po/uk.po: cyrillic fixes
+	fixed media paths
+
+2004/09/09  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: 
+	  - handle lilo "static-bios-codes" option
+	  - call lilo with a forced stdin (so that it doesn't read from tty)
+	  - enable calling lilo with a special stdin value
+	help emacs mode
+	fix regexp to work with "linux-2.6.8.1-10mdk"
+	instead of expanding symlinks in any case, only do it when renaming
+	"linux"
+	into the kernel version based label (eg: "2681-10")
+	that way "linux" like entries won't be modified, the way the "linux" is
+	already handled
+
+	* any.pm: handles the lilo case where it wants to assign a new Volume ID:
+	prompt the user, then
+	  - if it doesn't want to modify the Volume ID, use static-bios-codes to
+	be able to install lilo
+	  - otherwise call lilo with answer "n" to the question "Is the above
+	disk an NT boot disk?"
+	so that it assigns a new Volume ID
+
+	* run_program.pm: don't check_prog when the prog is a complex command
+	(containing a pipe)
+	simplify
+	rename $str into $real_name
+	remove redundant code
+
+2004/09/09  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_interactive.pm: Fix regexp
+
+	* share/po/fr.po: Grammar fixes
+
+2004/09/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/network.pm (read_all_conf) remove spurous character from regexp
+	(read_all_conf) ignore rpm's backups (#10816)
+
+2004/09/08  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Slow mdkkdm, up kdm, add accessibility softwares
+
+2004/09/08  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* detect_devices.pm: added slamr, slusb and ltmodem modules for getModem
+
+2004/09/08  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/09/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot: update splash when removed too, use Mandrakelinux
+	theme by default,
+	don't give theme name to remove-theme
+
+	* network/network.pm (configureNetwork2) update iftab when config is
+	written
+
+	* standalone/drakconnect: fix #11287
+
+	* network/ethernet.pm: remove update_eth_card_iftab(), add update_iftab()
+
+2004/09/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/de.po (tm) -> â„¢
+	updated po file
+
+	* share/po/it.po: updated Italian file
+
+	* keyboard.pm: added (commented) new keyboard for tibetan script, so I
+	remember it later
+
+2004/09/08  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/get.pm: fix comment
+
+	* any.pm: replace "Cancel" with "Close" when prompting to launch userdrake
+	(as suggested by Fabian Mandelbaum)
+	disable "Ok" when neither NFS nor SMB is selected (as suggested by
+	Fabian Mandelbaum)
+
+2004/09/08  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/09/08  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* http.pm, install_any.pm: Better version of the reload-IO::Socket patch
+
+	* install_steps_interactive.pm: Don't suggest lost+found as a user name
+	(bug #11298)
+
+	* install_steps.pm: Don't require installation of foomatic-db-engine when
+	installing from the
+	mini CD (bug #11292)
+
+	* pkgs.pm: Add a count of skipped packages after having read an hdlist
+	Always return a hashref from pkgs::packageMedium()
+	Remove debug logs
+
+2004/09/08  Thomas Backlund  <tmb at mandrake.org>
+
+	* share/po/fi.po: updated translations...
+
+2004/09/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.24mdk
+
+	* standalone/drakupdate_fstab: handle options in any order
+
+	* harddrake/autoconf.pm (xconf) fix X11 autoconfiguration
+
+	* standalone/drakperm (get_user_or_group) fix freeze (#11274)
+
+	* standalone/service_harddrake: log which tools are runned
+	fix log message when we cannot run a configurator
+
+	* any.pm (set_window_manager) ensure ~/.dmrc is owned by user else GDM
+	complains about (spoted by frederic crozat)
+
+	* share/rpmsrate: install slmodem for winmodem managed by ALSA (there're
+	more out not
+	managed by ALSA that need to be added here)
+
+2004/09/07  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Add kphone
+
+2004/09/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/adsl.c (perform_adsl) ppp module doesn't exist, don't try to
+	load it
+
+2004/09/07  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* http.pm, install_any.pm: Install from a CD with a networked HTTP media :
+	force reloading of
+	IO::Socket::INET after having brought up the network interface. It
+	won't work otherwise (for mysterious reasons.)
+
 2004/09/07  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/rpmsrate: Add kphone
@@ -38009,7 +38176,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.960 2004/09/07 08:05:01 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.961 2004/09/07 11:51:04 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
