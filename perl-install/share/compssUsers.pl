@@ -11,7 +11,7 @@ my $server = $meta_class eq 'server';
 my $h = {
 
 $desktop ? (
-("Discovery") => 
+"Discovery" => 
 [
   { label => ("Discovery"),
     descr => (""),
