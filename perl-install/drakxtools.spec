@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 5mdk
+Release: 6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -338,6 +338,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Sep 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-6mdk
+- drakconnect: install firmware if needed for CAPI devices (blino)
+- harddrake:
+  o detect not yet supported ethernnet cards too
+  o detect more bridges and the like
+- scannerdrake: try harder not to detect non scanner USB devices (#7057)
+
 * Tue Sep 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-5mdk
 - drakbackup:
   o fix crashes in CD/Tape setup (stew)
