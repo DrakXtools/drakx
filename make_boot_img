@@ -99,13 +99,10 @@ sub msg_boot_img {
 default linux
 prompt 1
 timeout $timeout
+mode 0x101
 display boot.msg
-F1 boot.msg
-F2 general.msg
-F3 expert.msg
-F4 rescue.msg
-F5 kickit.msg
-F6 param.msg
+F1 help.msg
+F2 boot.msg
 label linux
   kernel vmlinuz
   append $ks ramdisk=32000 initrd=$type.rdz mdkinst $type
