@@ -33,7 +33,7 @@ $curr_kernel =~ s/(^\d+\.\d+).*/$1/;
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel });
 if ($curr_kernel ne $prev_kernel) {
     log::explanations("Autoconfiguring mouse since we switched between 2.4.x and 2.6.x kernels");
-    harddrake::autoconf::mouse_conf($modules_conf) ;
+    harddrake::autoconf::mouse_conf($modules_conf);
 }
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
