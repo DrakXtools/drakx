@@ -421,7 +421,6 @@ sub main {
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
     }
 
-    print STDERR "in second stage\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (", any::drakx_version(), ")");
 
