@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ even odd min max sqr sum sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
+    common     => [ qw(__ even odd min max sqr sum sign product bool invbool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ symlinkf chop_ mode typeFromMagic) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
@@ -280,6 +280,22 @@ sub formatAlaTeX($) {
 	}
     }
     $t . ($t && $tmp && "\n") . $tmp;
+}
+
+sub formatLines($) {
+    my ($t, $tmp);
+    foreach (split "\n", $_[0]) {
+	if (/^$/) {
+	    $t .= "$tmp\n";
+	    $tmp = "";
+	} elsif (/^\s/) {
+	    $t .= "$tmp\n";
+	    $tmp = $_;
+	} else {
+	    $tmp = ($tmp ? "$tmp " : ($t && "\n") . $tmp) . $_;
+	}
+    }
+    "$t$tmp\n";
 }
 
 sub getVarsFromSh($) {
