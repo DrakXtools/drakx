@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -19,6 +19,7 @@ use log;
 @important_types = ('Linux native', 'Linux swap', 
 		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'FAT32'),
 			if_(arch() =~ /ia64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: XFS', 'FAT32'),
+			if_(arch() =~ /x86_64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'FAT32'),
 		    if_(arch() =~ /ppc/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'Apple HFS Partition', 'Apple Bootstrap'));
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
@@ -46,6 +47,9 @@ if_(arch() =~ /^ppc/,
   0x100 => 'Various',
   0x183 => 'Journalised FS: ReiserFS',
   0x283 => 'Journalised FS: XFS',
+  0x483 => 'Journalised FS: ext3',
+), if_(arch() =~ /^x86_64/,
+  0x183 => 'Journalised FS: ReiserFS',
   0x483 => 'Journalised FS: ext3',
 ), if_(arch() =~ /^sparc/,
   0x1 => 'SunOS boot',
@@ -200,6 +204,7 @@ arch() !~ /sparc/ ? (
   0x1e => 'vfat',
   0x82 => 'swap',
   0x83 => 'ext2',
+  0xef => 'vfat',
   0x107 => 'ntfs',
   0x183 => 'reiserfs',
   0x283 => 'xfs',
@@ -228,6 +233,7 @@ sub name2type {
     /0x(.*)/ ? hex $1 : $types_rev{$_} || $_;
 }
 
+sub isEfi { arch() =~ /ia64/ && $_[0]{type} == 0xef }
 sub isWholedisk { arch() =~ /^sparc/ && $_[0]{type} == 5 }
 sub isExtended { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
 sub isRawLVM { $_[0]{type} == 0x8e }
@@ -246,7 +252,7 @@ sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isThisFs { type2fs($_[1]) eq $_[0] }
 sub isTrueFS { member(type2fs($_[0]), qw(ext2 reiserfs xfs jfs ext3)) }
 
-sub isOtherAvailableFS { isFat_or_NTFS($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
+sub isOtherAvailableFS { isEfi($_[0]) || isFat_or_NTFS($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
 sub isMountableRW { (isTrueFS($_[0]) || isOtherAvailableFS($_[0])) && !isThisFs('ntfs', $_[0]) }
 sub isNonMountable { 
     my ($part) = @_;
