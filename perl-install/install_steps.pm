@@ -379,9 +379,6 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     my ($o) = @_;
     my $packages = $o->{packages};
 
-    #- this method is always called, go here to close still opened rpm db.
-    delete $packages->{rpmdb};
-
     if (%{$packages->{state}{ask_remove} || {}}) {
 	log::l("removing : ", join ', ', keys %{$packages->{state}{ask_remove}});
 	pkgs::remove($o->{prefix}, [ keys %{$packages->{state}{ask_remove}} ], $packages);
@@ -468,7 +465,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 	run_program::rooted($o->{prefix}, "touch", "/etc/menu/do-not-create-menu-link");
     }
     #- call update-menus at the end of package installation
-    run_program::rooted($o->{prefix}, "update-menus");
+    push @{$o->{waitpids}}, run_program::raw({ root => $o->{prefix}, detach => 1 }, "update-menus", "-n");
 
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
@@ -1065,6 +1062,10 @@ Beware that some Mandrake tools rely on the contents of some
 of these files... so remove any file from here at your own
 risk!
 " };
+    #- wait for remainging processes.
+    foreach (@{$o->{waitpids}}) {
+	waitpid $_, 0;
+    }
     install_any::unlockCdrom();
     install_any::log_sizes($o);
 }
