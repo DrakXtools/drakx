@@ -37,7 +37,9 @@ use Gtk2::Gdk::Keysyms;
 use modules;
 use c;
 
-my $distroname = "Mandrakelinux";
+my %sysh = distrib();
+my $distroname = $sysh{system};
+
 my $domainname = "mandrakesoft.com";
 
 my $pixdir = '/usr/share/libDrakX/pixmaps/';
@@ -175,8 +177,12 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
 						      ();
                                               }, undef, '<CheckItem>' ],
                                             [ N("/_Help"), undef, undef, undef, '<Branch>' ],
-                                            [ N("/_Help") . N("/_Help"), undef, sub { HelpSystem() }, undef, '<StockItem>', 'gtk-help' ],
-                                            [ N("/_Help") . N("/_Report Bug"), undef, sub { system("$ENV{BROWSER} https://qa.$domainname &") }, undef, '<StockItem>', 'gtk-stop' ],
+					    if_(-x "/usr/sbin/drakhelp_inst",
+						[ N("/_Help") . N("/_Help"), undef, sub { HelpSystem() }, undef, '<StockItem>', 'gtk-help' ],
+					       ),
+					    if_(!-e "/etc/sysconfig/oem",
+						[ N("/_Help") . N("/_Report Bug"), undef, sub { system("$ENV{BROWSER} https://qa.$domainname &") }, undef, '<StockItem>', 'gtk-stop' ],
+					       ),
                                             [ N("/_Help") . N("/_About..."), undef, \&About, undef, '<StockItem>', 'gtk-preferences' ]
 					   )
 					  );
