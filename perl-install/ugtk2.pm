@@ -304,7 +304,7 @@ sub create_scrolled_window {
 
 sub n_line_size {
     my ($nbline, $type, $widget) = @_;
-    my $spacing = ${{ text => 0, various => 17 }}{$type};
+    my $spacing = ${{ text => 3, various => 17 }}{$type};
     my %fontinfo = gtkfontinfo($widget);
     round($nbline * ($fontinfo{ascent} + $fontinfo{descent} + $spacing) + 8);
 }
