@@ -427,9 +427,11 @@ my $initdir = "/etc/init.d";
 
   step_load:
     undef $::Wizard_finished;
-    $in->ask_from(N("load setting"),
+#PO- Here "load" is a noun; that is load refers to the system/CPU) load
+    $in->ask_from(N("Load setting"),
 		  N("You will receive an alert if the load is higher than this value"),
 		  [
+
 		   { label => N("Load"), val => \$load, type => 'range', min => 1, max => 50 },
 		  ]) or goto step_service;
 
