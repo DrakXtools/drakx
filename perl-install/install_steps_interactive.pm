@@ -3,9 +3,39 @@ package install_steps_interactive; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@ISA $new_bootstrap);
+use vars qw(@ISA $new_bootstrap $com_license);
 
 @ISA = qw(install_steps);
+
+$com_license = _("
+Warning
+
+Please read carefully the terms below. If you disagree with any
+portion, you are not allowed to install the next CD media. Press 'Refuse' 
+to continue the installation without using these media.
+
+
+Some components contained in the next CD media are not governed
+by the GPL License or similar agreements. Each such component is then
+governed by the terms and conditions of its own specific license. 
+Please read carefully and comply with such specific licenses before 
+you use or redistribute the said components. 
+Such licenses will in general prevent the transfer,  duplication 
+(except for backup purposes), redistribution, reverse engineering, 
+de-assembly, de-compilation or modification of the component. 
+Any breach of agreement will immediately terminate your rights under 
+the specific license. Unless the specific license terms grant you such
+rights, you usually cannot install the programs on more than one
+system, or adapt it to be used on a network. In doubt, please contact 
+directly the distributor or editor of the component. 
+Transfer to third parties or copying of such components including the 
+documentation is usually forbidden.
+
+
+All rights to the components of the next CD media belong to their 
+respective authors and are protected by intellectual property and 
+copyright laws applicable to software programs.
+");
 
 #-######################################################################################
 #- misc imports
@@ -705,7 +735,45 @@ sub installPackages {
 	    $current += pkgs::packageSize(pkgs::packageByName($o->{packages}, $name));
 	} else { unshift @_, $m; goto $old }
     };
-    $o->SUPER::installPackages($packages);
+
+    #- the modification is not local as the box should be living for other package installation.
+    #- BEWARE this is somewhat duplicated (but not exactly from gtk code).
+    undef *install_any::changeMedium;
+    *install_any::changeMedium = sub {
+	my ($method, $medium) = @_;
+
+	#- if not using a cdrom medium, always abort.
+	$method eq 'cdrom' and do {
+	    local $my_gtk::grab = 1; #- only used with install_step_gtk or safely ignored.
+	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
+	    local $| = 1; print "\a";
+	    my $r = $name !~ /Application/ || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($com_license), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept");
+            $r &&= $o->ask_okcancel('', _("Change your Cd-Rom!
+
+Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
+If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
+            $r;
+	};
+    };
+    my $install_result;
+    catch_cdie { $install_result = $o->install_steps::installPackages($packages); }
+      sub {
+	  if ($@ =~ /^error ordering package list: (.*)/) {
+	      $o->ask_yesorno('', [
+_("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and return 1;
+	      ${$_[0]} = "already displayed";
+	  } elsif ($@ =~ /^error installing package list: (.*)/) {
+	      $o->ask_yesorno('', [
+_("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and return 1;
+	      ${$_[0]} = "already displayed";
+	  }
+	  0;
+      };
+    if ($pkgs::cancel_install) {
+	$pkgs::cancel_install = 0;
+	die "setstep choosePackages\n";
+    }
+    $install_result;
 }
 
 sub afterInstallPackages($) {
