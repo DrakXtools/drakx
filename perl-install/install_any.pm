@@ -259,3 +259,16 @@ sub write_ldsoconf {
 	print F "/usr/lib\n";
     }
 }
+
+sub enableMD5 {
+    my ($prefix) = @_;
+    local @ARGV = map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd);
+    local $^I = '';
+    while (<>) {
+	if (/^password.*pam_pwdb.so/) {
+	    /\s*shadow/ or s/$/ shadow/;
+	    /\s*md5/ or s/$/ md5/;
+	}
+	print;
+    }
+}

@@ -63,6 +63,7 @@ my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
 for (my $i = 0; $i < @installSteps; $i += 2) {
     my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
     $h{help}    = $help::steps{$installSteps[$i]} || __("Help");
+    $h{previous}= $installSteps[$i - 2] if $i >= 2;
     $h{next}    = $installSteps[$i + 2];
     $h{entered} = 0;
     $h{onError} = $installSteps[$i + 2 * $h{onError}];
@@ -379,6 +380,7 @@ sub addUser {
     $o->addUser;
 
     addToBeDone {
+	install_any::enableMD5($o->{prefix});
 	run_program::rooted($o->{prefix}, "pwconv") or log::l("pwconv failed"); #- use shadow passwords
     } 'doInstallStep';
 }

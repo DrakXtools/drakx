@@ -713,8 +713,10 @@ Do you really want to quit now?"), 0);
     $o->ask_warn('',
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
+
 For information on fixes which are available for this release of Linux-Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
+
 Information on configuring your system is available in the post
 install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone;
 }
@@ -745,7 +747,7 @@ sub load_module {
 
     my @names = modparm::get_options_name($m);
 
-    if ((@names != 0) && $o->ask_from_list('',
+    if ((@names != 0) && $o->ask_from_list_('',
 _("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the

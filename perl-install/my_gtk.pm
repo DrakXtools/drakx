@@ -324,6 +324,14 @@ sub _create_window($$) {
     $w->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
+    $w->signal_connect("key_press_event" => sub {
+	my $d = ${{ 65481 => 'next',
+		    65480 => 'previous' }}{$_[1]->{keyval}} or return;
+	my $s = $::o->{step};
+	do { $s = $::o->{steps}{$s}{$d} } until !$s || $::o->{steps}{$s}{reachable};
+	$::setstep && $s and die "setstep $s\n";
+    });
+
     $w->signal_connect(size_allocate => sub {
 	my ($wi, $he) = @{$_[1]}[2,3];
 	my ($X, $Y, $Wi, $He) = @{$my_gtk::force_center || $o->{force_center}};

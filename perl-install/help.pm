@@ -60,23 +60,26 @@ on your system), as suggested by the installation guide. These
 are the options you will need to provide to the driver."),
 
 partitionDisks =>
- __("At this point, hard drive partitions must be defined. (Unless you
-are overwriting a previous install of Linux and have already defined
-your hard drive partitions as desired.) This operation consists of
-logically dividing the computer's hard drive capacity into separate
-areas for use.
+ __("In this stage, you may choose what partition(s) use to install your
+Linux-Mandrake system."),
 
-
-Two common partition are: the root partition (/), which is the starting
-point of the filesystem's directory hierarchy, and /boot, which contains
-all files necessary to start the operating system when the
-computer is first turned on.
-
-
-Because the effects of this process are usually irreversible, partitioning
-can be intimidating and stressful to the unexperienced. DiskDrake
-simplifies the process so that it need not be. Consult the documentation
-and take your time before proceeding."),
+#At this point, hard drive partitions must be defined. (Unless you
+#are overwriting a previous install of Linux and have already defined
+#your hard drive partitions as desired.) This operation consists of
+#logically dividing the computer's hard drive capacity into separate
+#areas for use.
+#
+#
+#Two common partition are: the root partition (/), which is the starting
+#point of the filesystem's directory hierarchy, and /boot, which contains
+#all files necessary to start the operating system when the
+#computer is first turned on.
+#
+#
+#Because the effects of this process are usually irreversible, partitioning
+#can be intimidating and stressful to the unexperienced. DiskDrake
+#simplifies the process so that it need not be. Consult the documentation
+#and take your time before proceeding."),
 
 formatPartitions =>
  __("Any partitions that have been newly defined must be formatted for
@@ -226,6 +229,7 @@ you must configure your video card and monitor. Most of these
 steps are automated, though, therefore your work may only consist
 of verifying what has been done and accept the settings :)
 
+
 When the configuration is over, X will be started (unless you
 ask DrakX not to) so that you can check and see if the
 settings suit you. If they don't, you can come back and
@@ -291,23 +295,26 @@ it on your system), as suggested by the installation guide.
 These are the options you will need to provide to the driver."),
 
 partitionDisks =>
- __("At this point, hard drive partitions must be defined. (Unless you
-are overwriting a previous install of Linux and have already defined
-your hard drive partitions as desired.) This operation consists of
-logically dividing the computer's hard drive capacity into separate
-areas for use.
+ __("In this stage, you may choose what partition(s) use to install your
+Linux-Mandrake system."),
 
-
-Two common partition are: the root partition (/), which is the starting
-point of the filesystem's directory hierarchy, and /boot, which contains
-all files necessary to start the operating system when the
-computer is first turned on.
-
-
-Because the effects of this process are usually irreversible, partitioning
-can be intimidating and stressful to the unexperienced. DiskDrake
-simplifies the process so that it need not be. Consult the documentation
-and take your time before proceeding."),
+#At this point, hard drive partitions must be defined. (Unless you
+#are overwriting a previous install of Linux and have already defined
+#your hard drive partitions as desired.) This operation consists of
+#logically dividing the computer's hard drive capacity into separate
+#areas for use.
+#
+#
+#Two common partition are: the root partition (/), which is the starting
+#point of the filesystem's directory hierarchy, and /boot, which contains
+#all files necessary to start the operating system when the
+#computer is first turned on.
+#
+#
+#Because the effects of this process are usually irreversible, partitioning
+#can be intimidating and stressful to the unexperienced. DiskDrake
+#simplifies the process so that it need not be. Consult the documentation
+#and take your time before proceeding."),
 
 formatPartitions =>
  __("Any partitions that have been newly defined must be formatted for
@@ -456,6 +463,7 @@ core of the Linux GUI (Graphical User Interface). For this purpose,
 you must configure your video card and monitor. Most of these
 steps are automated, though, therefore your work may only consist
 of verifying what has been done and accept the settings :)
+
 
 When the configuration is over, X will be started (unless you
 ask DrakX not to) so that you can check and see if the
