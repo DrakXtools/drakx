@@ -619,11 +619,11 @@ killall pppd
                         $need_restart_network = member($ntf_name, qw(speedtouch eci));
                         $in->do_pkgs->install($packages{$ntf_name}->[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
                         if ($ntf_name eq 'speedtouch') {
-                            $in->do_pkgs->ensure_is_installed_if_availlable('speedtouch_mgmt', "$::prefix/usr/share/speedtouch/mgmt.o");
+                            $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "$::prefix/usr/share/speedtouch/mgmt.o");
                             return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
                         }
                         if ($ntf_name eq 'bewan' && !$::testing) {
-                            $in->do_pkgs->ensure_is_installed_if_availlable('unicorn', "$::prefix/usr/bin/bewan_adsl_status");
+                            $in->do_pkgs->ensure_is_installed_if_available('unicorn', "$::prefix/usr/bin/bewan_adsl_status");
                         }
                         return 'adsl_provider' if $adsl_devices{$ntf_name};
                         return 'adsl_protocol';
