@@ -118,13 +118,16 @@ quit_global($in, 0);
 
 sub quit_global {
     my ($in, $exitcode) = @_;
-    $::isEmbedded ? kill USR1, $::CCPID : $in->exit(0);
+    $::isEmbedded ? kill USR1, $::CCPID : $in->exit($exitcode);
     goto begin;
 }
 
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.5  2001/08/29 21:58:24  gc
+#- quit_global
+#-
 #- Revision 1.4  2001/08/26 14:34:10  gc
 #- require -> use
 #-
