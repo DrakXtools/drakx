@@ -428,7 +428,7 @@ sub install2::startMove {
 	sleep 1;
         log::l("DrakX waves bye-bye");
 
-	(undef, undef, my $uid, my $gid, undef, undef, undef, my $home, my $shell) = getpwnam($username);
+	my (undef, undef, $uid, $gid, undef, undef, undef, $home, $shell) = getpwnam($username);
 	$( = $) = "$gid $gid";
 	$< = $> = $uid;
 	$ENV{LOGNAME} = $ENV{USER} = $username;
