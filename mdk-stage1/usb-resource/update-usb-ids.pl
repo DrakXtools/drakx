@@ -61,7 +61,7 @@ struct usb_module_map ${type}_usb_ids[] = {
 ";
     foreach my $usbentry (@usbtable) {
 	grep(/^\t$usbentry->{'module'}\.o\s/, @$modulez) or next;
-	printf qq|\t{ %s, %s, ( "%s" ), ( "%s" ) },\n|,
+	printf qq|\t{ %s, %s, "%s", "%s" },\n|,
 	   $usbentry->{'vendor'}, $usbentry->{'id'}, $usbentry->{'description'}, $usbentry->{'module'};
     }
 
