@@ -36,7 +36,7 @@ my %dm = ('GNOME' => 'GDM (GNOME Display Manager)',
 my $dm = 'KDE';
 
 foreach (cat_($cfg_file)) {
-    $dm = $1 if /^DISPLAYMANAGER=(.*)$/; 
+    $dm = uc($1) if /^DISPLAYMANAGER=(.*)$/; 
 }
 
 if (my $new_dm = $in->ask_from_list_(N("Choosing a display manager"),
