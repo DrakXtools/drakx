@@ -942,10 +942,9 @@ sub _ask_okcancel($@) {
 sub _ask_file {
     my ($o, $title, $path) = @_;
     my $f = Gtk2::FileSelection->new($title);
-    if ($o->{rwindow}->isa('Gtk2::Window')) {
-	my ($modality, $position) = ($o->{rwindow}->get_modal, $o->{rwindow}->get('window-position'));
-	$f->set_modal($modality);
-	$f->set_position($position);
+    if ($o->{rwindow}->isa('mygtk2::MagicWindow')) {
+	$f->set_modal($o->{rwindow}->get_modal);
+	$f->set_position($o->{rwindow}->get('window-position'));
     }
     my $bg = $o->{window};
     $o->{rwindow} = $o->{window} = $f;
