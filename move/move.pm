@@ -8,7 +8,9 @@ use common;
 use fs;
 use run_program;
 use log;
+use lang;
 
+my @ALLOWED_LANGS = qw(en_US fr es it de);
 
 #- run very soon at stage2 start, setup things on tmpfs rw / that
 #- were not necessary to start stage2 itself (there were setup
@@ -41,6 +43,8 @@ sub init {
     run_program::run('/sbin/devfsd', '/dev');
 
     modules::load_category('multimedia/sound');
+    
+    member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
 

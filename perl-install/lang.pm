@@ -19,7 +19,7 @@ use log;
 #-      of 'll_CC:ll_DD:ll' (ll_CC: locale (if exist) resulting of the
 #-      combination of chosen lang (ll) and country (CC), ll_DD: the
 #-      default locale shown here (field [2]) and ll: the language (the key))
-my %langs = (
+our %langs = (
 'af' =>    [ 'Afrikaans',           'Afrikaans',         'af_ZA', '  3  ', 'iso-8859-1' ],
 'am' =>    [ 'Amharic',             'ZZ emarNa',         'am_ET', '  3  ', 'utf_am' ],
 'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],

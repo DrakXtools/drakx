@@ -4,7 +4,7 @@ use lib "../perl-install";
 use common;
 use pkgs;
 
-my @langs = qw(fr en es it de);
+my @langs = map { /^../; $& } split /\s/, (cat_('move.pm') =~ /ALLOWED_LANGS = qw\((.*)\)/)[0];
 
 @ARGV == 0 or die "usage: make_live\n";
 
