@@ -40,86 +40,6 @@ sub test_embedded {
     $w->{window}->add($w->{rwindow});
 }
 
-sub ask_from_treelistW {
-    my ($o, $title, $messages, $separator, $l, $def) = @_;
-    my $sep = quotemeta $separator;
-    my $w = my_gtk->new($title);
-    test_embedded($w);
-    my $tree = Gtk::CTree->new(1, 0);
-
-    my %wtree;
-    my $parent; $parent = sub {
-	if (my $w = $wtree{"$_[0]$separator"}) { return $w }
-	my $s;
-	foreach (split $sep, $_[0]) {
-	    $wtree{"$s$_$separator"} ||= 
-	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, 0);
-	    $s .= "$_$separator";
-	}
-	$wtree{$s};
-    };
-    my ($root, $leaf, $wdef, $ndef);
-    foreach (@$l) {
-	($root, $leaf) = /(.*)$sep(.+)/ or ($root, $leaf) = ('', $_);
-	my $node = $tree->insert_node($parent->($root), undef, [$leaf], 5, (undef) x 4, 1, 0);
-
-	if ($def eq $_) {
-	    $wdef = $node;
-	    my $s; $tree->expand($wtree{$s .= "$_$separator"}) foreach split $sep, $root;
-	    foreach my $nb (1 .. @$l) {
-		if ($tree->node_nth($nb) == $node) {
-		    $tree->set_focus_row($ndef = $nb);
-		    last;
-		}
-	    }
-	}
-    }
-    undef %wtree;
-
-    my $curr;
-    my $leave = sub { 
-	$curr->row->is_leaf or return;
-	my @l; for (; $curr; $curr = $curr->row->parent) { 
-	    unshift @l, first $tree->node_get_pixtext($curr, 0);
-	}
-	$w->{retval} = join $separator, @l;
-	Gtk->main_quit;
-    };
-    $w->{ok_clicked} = $leave;
-    $w->{cancel_clicked} = sub { $w->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
-    gtkadd($w->{window},
-	   gtkpack($w->create_box_with_title(@$messages),
-		   gtkpack_(new Gtk::VBox(0,7),
-			    1, gtkset_usize(createScrolledWindow($tree), 300, min(350, $::windowheight - 60)),
-			    0, $w->create_okcancel)));
-    $tree->set_column_auto_resize(0, 1);
-    $tree->set_selection_mode('browse');
-    $tree->signal_connect(tree_select_row => sub { $curr = $_[1]; });
-    $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
-    $tree->signal_connect(key_press_event => sub {
-        my ($w, $event) = @_;
-	my $c = chr($event->{keyval} & 0xff);
-	$curr or return;
-	if ($event->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
-	    if ($curr->row->is_leaf) { &$leave }
-	    else { $tree->toggle_expansion($curr) }
-	}
-	1;
-    });
-
-    $tree->grab_focus;
-    $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
-    $w->{rwindow}->show;
-
-    if ($wdef) {
-	$tree->select($wdef);
-	$tree->node_moveto($wdef, 0, 0.5, 0);
-    }
-
-
-    $w->main or die "ask_from_list cancel";
-}
-
 sub create_clist {
     my ($e, $may_go_to_next) = @_;
     my ($first_time, $starting_word, $start_reg) = (1, '', "^");
@@ -134,9 +54,6 @@ sub create_clist {
 	$list->set_focus_row($_[0]);
 	$list->select_row($_[0], 0);
 	$list->moveto($_[0], 0, 0.5, 0);
-    };
-    my $select_val = sub { 
-	eval { $select->(find_index { $_ eq ${$e->{val}} } @{$e->{list}}) };
     };
 
 #    ref $title && !@okcancel ?
@@ -183,8 +100,77 @@ sub create_clist {
 
     $list->append($_) foreach @l;
 
-    &$select_val;
-    $list, $select_val;
+    $list, sub {
+	eval { 
+	    $select->(find_index { $_ eq ${$e->{val}} } @{$e->{list}}) 
+	};
+    };
+}
+
+sub create_ctree {
+    my ($e, $may_go_to_next) = @_;
+    my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
+
+    my $sep = quotemeta $e->{separator};
+    my $tree = Gtk::CTree->new(1, 0);
+
+    my (%wtree, %wleaves);
+    my $parent; $parent = sub {
+	if (my $w = $wtree{"$_[0]$e->{separator}"}) { return $w }
+	my $s;
+	foreach (split $sep, $_[0]) {
+	    $wtree{"$s$_$e->{separator}"} ||= 
+	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, 0);
+	    $s .= "$_$e->{separator}";
+	}
+	$wtree{$s};
+    };
+    foreach (@l) {
+	my ($root, $leaf) = /(.*)$sep(.+)/ ? ($1, $2) : ('', $_);
+	$wleaves{$_} = $tree->insert_node($parent->($root), undef, [$leaf], 5, (undef) x 4, 1, 0);
+    }
+    undef %wtree;
+
+    my $curr;
+    $tree->set_column_auto_resize(0, 1);
+    $tree->set_selection_mode('browse');
+    $tree->signal_connect(tree_select_row => sub { 
+	$curr = $_[1]; 
+	$curr->row->is_leaf or return;
+	my @l; for (my $c = $curr; $c; $c = $c->row->parent) { 
+	    unshift @l, first $tree->node_get_pixtext($c, 0);
+	}
+	${$e->{val}} = join $e->{separator}, @l;
+    });
+#    $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
+    $tree->signal_connect(key_press_event => sub {
+        my ($w, $event) = @_;
+	my $c = chr($event->{keyval} & 0xff);
+	$curr or return;
+	if ($event->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
+	    if ($curr->row->is_leaf) { &$may_go_to_next }
+	    else { $tree->toggle_expansion($curr) }
+	}
+	1;
+    });
+    $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
+
+    $tree, sub {
+	my $node = $wleaves{${$e->{val}}} or return;
+
+	for (my $c = $node; $c; $c = $c->row->parent) { 
+	    $tree->expand($c);
+	}
+	$tree->select($node);
+	$tree->node_moveto($node, 0, 0.5, 0);
+
+	foreach (1 .. @l) {
+	    if ($tree->node_nth($_) == $node) {
+		$tree->set_focus_row($_);
+		last;
+	    }
+	}
+    };
 }
 
 sub create_list {
@@ -195,9 +181,6 @@ sub create_list {
 
     my $select = sub {
 	$list->select_item($_[0]);
-    };
-    my $select_val = sub { 
-	eval { $select->(find_index { $_ eq ${$e->{val}} } @$l) };
     };
 
     my $tips = new Gtk::Tooltips;
@@ -220,14 +203,16 @@ sub create_list {
 	$item->grab_focus if ${$e->{val}} && $_ eq ${$e->{val}};
     } @$l;
 
-    &$select_val;
-
     #- signal_connect'ed after append_items otherwise it is called and destroys the default value
     $list->signal_connect(select_child => sub {
 	my ($w, $row) = @_;
 	${$e->{val}} = $l->[$list->child_position($row)];
     });
-    $list, $select_val;
+    $list, sub { 
+	eval { 
+	    $select->(find_index { $_ eq ${$e->{val}} } @$l) 
+	};
+    };
 }
 
 sub ask_from_entries_refW {
@@ -301,10 +286,12 @@ sub ask_from_entries_refW {
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $set = sub { $adj->set_value($_[0]) };
 	    $get = sub { $adj->get_value };
-	} elsif ($e->{type} eq "list") {
-	    #- use only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
+	} elsif ($e->{type} =~ /list/) {
 	    if ($e->{help}) {
+		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
 		($w, $set) = create_list($e, $may_go_to_next);
+	     } elsif ($e->{type} eq 'treelist') {
+		($w, $set) = create_ctree($e, $may_go_to_next);
 	     } else {
 		($w, $set) = create_clist($e, $may_go_to_next);
 	     }
