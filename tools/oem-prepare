@@ -119,10 +119,16 @@ sub select_packages {
     eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
 
     #- first select closure, package that will be selected for closure at least.
-    $o->{compssUsersChoice}{$_} = 1 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND INSTALL);
+    $o->{compssUsersChoice}{$_} = 1 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND);
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
-    $o->{compssUsersChoice}{$_} = 0 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND INSTALL);
+    $o->{compssUsersChoice}{$_} = 0 foreach qw(BURNER DVD PCMCIA HIGH_SECURITY BIGMEM SMP 3D TV SCANNER PHOTO SOUND);
 
+    #- INSTALL class need to be copied as closure (unless installed after).
+    foreach (@{$o->{packages}{needToCopy}}) {
+	my $pkg = pkgs::packageByName($packages, $_);
+	pkgs::selectPackage($packages, $pkg);
+    }
+	
     #- first select package that have to go to closure according to their names.
     foreach my $pkg (@{$o->{packages}{depslist}}) {
 	$pkg->{name} =~ /kernel-(\d|smp|enterprise|secure)/ and pkgs::selectPackage($o->{packages}, $pkg);
@@ -358,15 +364,16 @@ sub read_rpmsrate {
 	    foreach (split ' ', $data) {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
-		    
 		    my @m2 = 
 		      map { if_($_ && packageName($_) =~ /locales-(.*)/, qq(LOCALES"$1")) }
 		      map { packageById($packages, $_) } packageDepsId($p);
 
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
+		    if (@m3 == 1 && $m3[0] eq 'INSTALL') {
+			push @{$packages->{needToCopy} ||= []}, $_;
+			next; #- don't need to put INSTALL flag for a package.
+		    }
 		    if (packageRate($p)) {
-			next if @m3 == 1 && $m3[0] eq 'INSTALL';
-
 			my ($rate2, @m4) = packageRateRFlags($p);
 			if (@m3 > 1 || @m4 > 1) {
 			    log::l("can't handle complicate flags for packages appearing twice ($_)");
