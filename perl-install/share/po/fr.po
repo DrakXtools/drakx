@@ -52,8 +52,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for MDK 8.1\n"
-"POT-Creation-Date: 2002-09-11 13:59+0200\n"
-"PO-Revision-Date: 2002-08-31 13:28+0200\n"
+"POT-Creation-Date: 2002-09-12 13:54+0200\n"
+"PO-Revision-Date: 2002-09-12 17:03+0200\n"
 "Last-Translator: David Baudens <baudens@mandrakesoft.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -248,7 +248,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: ../../Xconfig/main.pm_.c:122 ../../diskdrake/dav.pm_.c:28
-#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3155
+#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3184
 #: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:224
 msgid "Quit"
 msgstr "Quitter"
@@ -352,13 +352,13 @@ msgid "Graphics card: %s"
 msgstr "Carte graphique : %s"
 
 #: ../../Xconfig/resolution_and_depth.pm_.c:268 ../../any.pm_.c:1019
-#: ../../bootlook.pm_.c:343 ../../diskdrake/smbnfs_gtk.pm_.c:87
+#: ../../bootlook.pm_.c:344 ../../diskdrake/smbnfs_gtk.pm_.c:87
 #: ../../install_steps_gtk.pm_.c:406 ../../install_steps_gtk.pm_.c:464
 #: ../../interactive.pm_.c:142 ../../interactive.pm_.c:354
 #: ../../interactive/http.pm_.c:105 ../../interactive/newt.pm_.c:195
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:162 ../../my_gtk.pm_.c:287
-#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2124
+#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2150
 #: ../../security/main.pm_.c:295 ../../standalone/drakautoinst_.c:203
 #: ../../standalone/drakbackup_.c:3928 ../../standalone/drakbackup_.c:3961
 #: ../../standalone/drakbackup_.c:3987 ../../standalone/drakbackup_.c:4014
@@ -368,7 +368,7 @@ msgstr "Carte graphique : %s"
 #: ../../standalone/drakconnect_.c:147 ../../standalone/drakconnect_.c:289
 #: ../../standalone/drakconnect_.c:537 ../../standalone/drakconnect_.c:679
 #: ../../standalone/drakfloppy_.c:234 ../../standalone/drakfont_.c:970
-#: ../../standalone/drakgw_.c:536 ../../standalone/logdrake_.c:224
+#: ../../standalone/drakgw_.c:532 ../../standalone/logdrake_.c:224
 #: ../../ugtk.pm_.c:296
 msgid "Cancel"
 msgstr "Annuler"
@@ -669,7 +669,7 @@ msgstr "Ajouter"
 #: ../../any.pm_.c:258 ../../any.pm_.c:777 ../../diskdrake/dav.pm_.c:68
 #: ../../diskdrake/hd_gtk.pm_.c:153 ../../diskdrake/removable.pm_.c:27
 #: ../../diskdrake/smbnfs_gtk.pm_.c:88 ../../interactive/http.pm_.c:153
-#: ../../printerdrake.pm_.c:3155 ../../standalone/drakbackup_.c:2774
+#: ../../printerdrake.pm_.c:3184 ../../standalone/drakbackup_.c:2774
 msgid "Done"
 msgstr "Terminer"
 
@@ -1295,23 +1295,25 @@ msgid "Install themes"
 msgstr "Installation de thèmes"
 
 #: ../../bootlook.pm_.c:147
-msgid "Display theme\n"
+msgid ""
+"Display theme\n"
 "under console"
-msgstr "Affiche le thème\n"
+msgstr ""
+"Affiche le thème\n"
 "dans la console"
 
 #: ../../bootlook.pm_.c:148
 msgid "Create new theme"
 msgstr "Créer un nouveau thème"
 
-#: ../../bootlook.pm_.c:192
+#: ../../bootlook.pm_.c:193
 #, c-format
 msgid "Backup %s to %s.old"
 msgstr "Sauvegarde de %s vers %s.old"
 
-#: ../../bootlook.pm_.c:193 ../../bootlook.pm_.c:196 ../../bootlook.pm_.c:199
-#: ../../bootlook.pm_.c:229 ../../bootlook.pm_.c:231 ../../bootlook.pm_.c:241
-#: ../../bootlook.pm_.c:250 ../../bootlook.pm_.c:257
+#: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
+#: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
 #: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
 #: ../../diskdrake/interactive.pm_.c:340 ../../diskdrake/interactive.pm_.c:355
 #: ../../diskdrake/interactive.pm_.c:469 ../../diskdrake/interactive.pm_.c:474
@@ -1322,33 +1324,33 @@ msgstr "Sauvegarde de %s vers %s.old"
 msgid "Error"
 msgstr "Erreur"
 
-#: ../../bootlook.pm_.c:193
+#: ../../bootlook.pm_.c:194
 msgid "unable to backup lilo message"
 msgstr "Impossible de conserver le message de LILO"
 
-#: ../../bootlook.pm_.c:195
+#: ../../bootlook.pm_.c:196
 #, c-format
 msgid "Copy %s to %s"
 msgstr "Copie de %s vers %s"
 
-#: ../../bootlook.pm_.c:196
+#: ../../bootlook.pm_.c:197
 msgid "can't change lilo message"
 msgstr "Impossible de changer le message de LILO"
 
-#: ../../bootlook.pm_.c:199
+#: ../../bootlook.pm_.c:200
 msgid "Lilo message not found"
 msgstr "Message de LILO non trouvé"
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 msgid "Can't write /etc/sysconfig/bootsplash."
 msgstr "Impossible d'écrire dans /etc/sysconfig/bootsplash."
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 #, c-format
 msgid "Write %s"
 msgstr "Ecriture de %s"
 
-#: ../../bootlook.pm_.c:231
+#: ../../bootlook.pm_.c:232
 msgid ""
 "Can't write /etc/sysconfig/bootsplash\n"
 "File not found."
@@ -1356,17 +1358,17 @@ msgstr ""
 "Impossible d'écrire dans /etc/sysconfig/bootsplash\n"
 "Fichier non trouvé"
 
-#: ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:243
 #, c-format
 msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
 msgstr "Impossible de lancer mkinitrd -f /boot/initrd-%s.img %s."
 
-#: ../../bootlook.pm_.c:245
+#: ../../bootlook.pm_.c:246
 #, c-format
 msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 msgstr "construisez le RAMdisk avec 'mkinitrd -f /boot/initrd-%s.img %s'."
 
-#: ../../bootlook.pm_.c:251
+#: ../../bootlook.pm_.c:252
 msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
@@ -1375,24 +1377,24 @@ msgstr ""
 "Lancez « lilo » dans une ligne de commande en étant root pour terminer "
 "l'installation du thème de LILO."
 
-#: ../../bootlook.pm_.c:255
+#: ../../bootlook.pm_.c:256
 msgid "Relaunch 'lilo'"
 msgstr "Relancez « lilo »"
 
-#: ../../bootlook.pm_.c:257 ../../standalone/draksplash_.c:165
+#: ../../bootlook.pm_.c:258 ../../standalone/draksplash_.c:165
 #: ../../standalone/draksplash_.c:329 ../../standalone/draksplash_.c:456
 msgid "Notice"
 msgstr "Mode d'emploi"
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "Installation réussie des thèmes pour l'image d'amorçage et pour LILO."
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "Theme installation failed!"
 msgstr "Echec d'installation du thème"
 
-#: ../../bootlook.pm_.c:266
+#: ../../bootlook.pm_.c:267
 #, c-format
 msgid ""
 "You are currently using %s as your boot manager.\n"
@@ -1401,24 +1403,24 @@ msgstr ""
 "Le choix du système d'exploitation est actuellement géré par %s.\n"
 "Vous pouvez ici modifier la liste du menu d'amorçage."
 
-#: ../../bootlook.pm_.c:268 ../../standalone/drakbackup_.c:2429
+#: ../../bootlook.pm_.c:269 ../../standalone/drakbackup_.c:2429
 #: ../../standalone/drakbackup_.c:2439 ../../standalone/drakbackup_.c:2449
-#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:530
+#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:526
 msgid "Configure"
 msgstr "Configurer"
 
-#: ../../bootlook.pm_.c:275
+#: ../../bootlook.pm_.c:276
 msgid "Splash selection"
 msgstr "Sélection de l'image"
 
-#: ../../bootlook.pm_.c:278
+#: ../../bootlook.pm_.c:279
 msgid "Themes"
 msgstr "Thèmes"
 
-#: ../../bootlook.pm_.c:280
+#: ../../bootlook.pm_.c:281
 msgid ""
 "\n"
-"Select a theme for\n"
+"Select theme for\n"
 "lilo and bootsplash,\n"
 "you can choose\n"
 "them separatly"
@@ -1429,31 +1431,31 @@ msgstr ""
 "vous pouvez les choisir \n"
 "séparément"
 
-#: ../../bootlook.pm_.c:283
+#: ../../bootlook.pm_.c:284
 msgid "Lilo screen"
 msgstr "Ecran de LILO"
 
-#: ../../bootlook.pm_.c:288
+#: ../../bootlook.pm_.c:289
 msgid "Bootsplash"
 msgstr "Image pendant l'amorçage"
 
-#: ../../bootlook.pm_.c:323
+#: ../../bootlook.pm_.c:324
 msgid "System mode"
 msgstr "Choix pour l'interface utilisateur"
 
-#: ../../bootlook.pm_.c:325
+#: ../../bootlook.pm_.c:326
 msgid "Launch the graphical environment when your system starts"
 msgstr "Lancer l'interface graphique au démarrage"
 
-#: ../../bootlook.pm_.c:330
+#: ../../bootlook.pm_.c:331
 msgid "No, I don't want autologin"
 msgstr "Ne pas connecter automatiquement un utilisateur"
 
-#: ../../bootlook.pm_.c:332
+#: ../../bootlook.pm_.c:333
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Connexion automatique (choisir utilisateur et environnement)"
 
-#: ../../bootlook.pm_.c:342 ../../network/netconnect.pm_.c:97
+#: ../../bootlook.pm_.c:343 ../../network/netconnect.pm_.c:97
 #: ../../standalone/drakTermServ_.c:173 ../../standalone/drakTermServ_.c:300
 #: ../../standalone/drakTermServ_.c:405 ../../standalone/drakbackup_.c:4193
 #: ../../standalone/drakbackup_.c:4956 ../../standalone/drakconnect_.c:108
@@ -1466,46 +1468,46 @@ msgstr "Connexion automatique (choisir utilisateur et environnement)"
 msgid "OK"
 msgstr "OK"
 
-#: ../../bootlook.pm_.c:402
+#: ../../bootlook.pm_.c:403
 #, c-format
 msgid "can not open /etc/inittab for reading: %s"
 msgstr "Impossible de lire le fichier /etc/inittab  : %s"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "GB"
 msgstr "Go"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "KB"
 msgstr "Ko"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "MB"
 msgstr "Mo"
 
-#: ../../common.pm_.c:102
+#: ../../common.pm_.c:107
 msgid "TB"
 msgstr "To"
 
-#: ../../common.pm_.c:110
+#: ../../common.pm_.c:115
 #, c-format
 msgid "%d minutes"
 msgstr "%d minutes"
 
-#: ../../common.pm_.c:112
+#: ../../common.pm_.c:117
 msgid "1 minute"
 msgstr "1 minute"
 
-#: ../../common.pm_.c:114
+#: ../../common.pm_.c:119
 #, c-format
 msgid "%d seconds"
 msgstr "%d secondes"
 
-#: ../../common.pm_.c:159
+#: ../../common.pm_.c:164
 msgid "Can't make screenshots before partitioning"
 msgstr "Impossible de faire des captures d'écran avant le partitionnement"
 
-#: ../../common.pm_.c:166
+#: ../../common.pm_.c:171
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Les captures d'écran seront disponibles après l'installation dans %s"
@@ -2724,7 +2726,7 @@ msgstr "Classe de matériel"
 msgid "class of hardware device"
 msgstr "classe de matériel"
 
-#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1517
+#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1543
 msgid "Description"
 msgstr "Description"
 
@@ -6143,8 +6145,8 @@ msgstr "Souris"
 msgid "Timezone"
 msgstr "Fuseau horaire"
 
-#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2937
-#: ../../printerdrake.pm_.c:3026
+#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2966
+#: ../../printerdrake.pm_.c:3055
 msgid "Printer"
 msgstr "Imprimante"
 
@@ -6311,7 +6313,7 @@ msgstr "Premier lecteur de disquette"
 msgid "Second floppy drive"
 msgstr "Second lecteur de disquette"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2470
+#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2496
 msgid "Skip"
 msgstr "Abandonner"
 
@@ -6554,12 +6556,12 @@ msgstr "Choisissez un fichier"
 msgid "Advanced"
 msgstr "Avancé"
 
-#: ../../interactive.pm_.c:321
+#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:220
 msgid "Basic"
 msgstr "Basique"
 
 #: ../../interactive/newt.pm_.c:195 ../../my_gtk.pm_.c:158
-#: ../../printerdrake.pm_.c:2124
+#: ../../printerdrake.pm_.c:2150
 msgid "<- Previous"
 msgstr "<- Précédent"
 
@@ -7168,7 +7170,7 @@ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 msgid "Finish"
 msgstr "Terminer"
 
-#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2126
+#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2152
 msgid "Next ->"
 msgstr "Suivant ->"
 
@@ -7311,7 +7313,7 @@ msgstr ""
 "Aucune carte réseau n'a été détectée sur votre système.\n"
 "La connexion ne peut donc pas être configurée."
 
-#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:240
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:236
 msgid "Choose the network interface"
 msgstr "Choisissez la carte réseau"
 
@@ -7652,7 +7654,7 @@ msgstr "Choisissez le profil à configurer"
 msgid "Use auto detection"
 msgstr "Utiliser la détection automatique"
 
-#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3151
+#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3180
 #: ../../standalone/drakconnect_.c:274 ../../standalone/drakconnect_.c:277
 #: ../../standalone/drakfloppy_.c:145
 msgid "Expert Mode"
@@ -8092,7 +8094,7 @@ msgstr "LPD - Line Printer Daemon"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue"
 
-#: ../../printer.pm_.c:34 ../../printer.pm_.c:1125
+#: ../../printer.pm_.c:34 ../../printer.pm_.c:1134
 msgid "CUPS"
 msgstr "CUPS"
 
@@ -8144,102 +8146,102 @@ msgstr "Indiquer l'adresse du périphérique d'impression"
 msgid "Pipe job into a command"
 msgstr "Impression vers une commande shell"
 
-#: ../../printer.pm_.c:324 ../../printer.pm_.c:366 ../../printer.pm_.c:533
+#: ../../printer.pm_.c:328 ../../printer.pm_.c:370 ../../printer.pm_.c:542
 msgid "Unknown Model"
 msgstr "Modèle inconnu"
 
-#: ../../printer.pm_.c:735 ../../printer.pm_.c:926 ../../printer.pm_.c:1318
-#: ../../printerdrake.pm_.c:2260 ../../printerdrake.pm_.c:3414
+#: ../../printer.pm_.c:744 ../../printer.pm_.c:935 ../../printer.pm_.c:1327
+#: ../../printerdrake.pm_.c:2286 ../../printerdrake.pm_.c:3443
 msgid "Unknown model"
 msgstr "Modèle inconnu"
 
-#: ../../printer.pm_.c:763
+#: ../../printer.pm_.c:772
 msgid "Local Printers"
 msgstr "Imprimantes locales"
 
-#: ../../printer.pm_.c:765 ../../printer.pm_.c:1126
+#: ../../printer.pm_.c:774 ../../printer.pm_.c:1135
 msgid "Remote Printers"
 msgstr "Imprimantes distantes"
 
-#: ../../printer.pm_.c:772 ../../printerdrake.pm_.c:404
+#: ../../printer.pm_.c:781 ../../printerdrake.pm_.c:404
 #, c-format
 msgid " on parallel port \\/*%s"
 msgstr " sur port parallèle \\/*%s"
 
-#: ../../printer.pm_.c:775 ../../printerdrake.pm_.c:406
+#: ../../printer.pm_.c:784 ../../printerdrake.pm_.c:406
 #, c-format
 msgid ", USB printer \\/*%s"
 msgstr ", imprimante USB \\/*%s"
 
-#: ../../printer.pm_.c:780
+#: ../../printer.pm_.c:789
 #, c-format
 msgid ", multi-function device on parallel port \\/*%s"
 msgstr ", périphérique multi-fonctions sur le port parallèle \\/*%s"
 
-#: ../../printer.pm_.c:783
+#: ../../printer.pm_.c:792
 msgid ", multi-function device on USB"
 msgstr ", périphérique  USB multi-fonctions"
 
-#: ../../printer.pm_.c:785
+#: ../../printer.pm_.c:794
 msgid ", multi-function device on HP JetDirect"
 msgstr ", périphérique HP JetDirect multi-fonctions"
 
-#: ../../printer.pm_.c:787
+#: ../../printer.pm_.c:796
 msgid ", multi-function device"
 msgstr ", périphérique multi-fonctions"
 
-#: ../../printer.pm_.c:790
+#: ../../printer.pm_.c:799
 #, c-format
 msgid ", printing to %s"
 msgstr ", impression sur %s"
 
-#: ../../printer.pm_.c:792
+#: ../../printer.pm_.c:801
 #, c-format
 msgid " on LPD server \"%s\", printer \"%s\""
 msgstr " sur serveur d'impression LPD « %s », imprimante « %s »"
 
-#: ../../printer.pm_.c:794
+#: ../../printer.pm_.c:803
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
 msgstr ", hôte TCP/IP « %s », port « %s »"
 
-#: ../../printer.pm_.c:798
+#: ../../printer.pm_.c:807
 #, c-format
 msgid " on SMB/Windows server \"%s\", share \"%s\""
 msgstr " sur serveur Windows « %s », partage « %s »"
 
-#: ../../printer.pm_.c:802
+#: ../../printer.pm_.c:811
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " sur serveur Novell « %s », imprimante « %s »"
 
-#: ../../printer.pm_.c:804
+#: ../../printer.pm_.c:813
 #, c-format
 msgid ", using command %s"
 msgstr ", en utilisant la commande %s"
 
-#: ../../printer.pm_.c:923 ../../printerdrake.pm_.c:1656
+#: ../../printer.pm_.c:932 ../../printerdrake.pm_.c:1682
 msgid "Raw printer (No driver)"
 msgstr "Imprimante à accès direct (pas de pilote)"
 
-#: ../../printer.pm_.c:1095
+#: ../../printer.pm_.c:1104
 #, c-format
 msgid "(on %s)"
 msgstr "(sur %s)"
 
-#: ../../printer.pm_.c:1097
+#: ../../printer.pm_.c:1106
 msgid "(on this machine)"
 msgstr "(sur cette machine)"
 
-#: ../../printer.pm_.c:1122
+#: ../../printer.pm_.c:1131
 #, c-format
 msgid "On CUPS server \"%s\""
 msgstr "Sur serveur CUPS « %s »"
 
-#: ../../printer.pm_.c:1128 ../../printerdrake.pm_.c:3071
-#: ../../printerdrake.pm_.c:3082 ../../printerdrake.pm_.c:3303
-#: ../../printerdrake.pm_.c:3355 ../../printerdrake.pm_.c:3381
-#: ../../printerdrake.pm_.c:3556 ../../printerdrake.pm_.c:3558
+#: ../../printer.pm_.c:1137 ../../printerdrake.pm_.c:3100
+#: ../../printerdrake.pm_.c:3111 ../../printerdrake.pm_.c:3332
+#: ../../printerdrake.pm_.c:3384 ../../printerdrake.pm_.c:3410
+#: ../../printerdrake.pm_.c:3585 ../../printerdrake.pm_.c:3587
 msgid " (Default)"
 msgstr " (Défaut)"
 
@@ -8265,11 +8267,11 @@ msgstr ""
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr "Autodétection d'imprimante (locale, réseau, et SMB)"
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3135
+#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3164
 msgid "CUPS configuration"
 msgstr "Configuration de CUPS"
 
-#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3136
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3165
 msgid "Specify CUPS server"
 msgstr "Specifiez le serveur CUPS"
 
@@ -8334,19 +8336,19 @@ msgid "Automatic CUPS configuration"
 msgstr "Configuration automatique du serveur CUPS"
 
 #: ../../printerdrake.pm_.c:177 ../../printerdrake.pm_.c:247
-#: ../../printerdrake.pm_.c:1529 ../../printerdrake.pm_.c:1533
-#: ../../printerdrake.pm_.c:1651 ../../printerdrake.pm_.c:2203
-#: ../../printerdrake.pm_.c:2356 ../../printerdrake.pm_.c:2415
-#: ../../printerdrake.pm_.c:2488 ../../printerdrake.pm_.c:2509
-#: ../../printerdrake.pm_.c:2699 ../../printerdrake.pm_.c:2740
-#: ../../printerdrake.pm_.c:2745 ../../printerdrake.pm_.c:2779
-#: ../../printerdrake.pm_.c:2784 ../../printerdrake.pm_.c:2821
-#: ../../printerdrake.pm_.c:2874 ../../printerdrake.pm_.c:2894
-#: ../../printerdrake.pm_.c:2908 ../../printerdrake.pm_.c:2942
-#: ../../printerdrake.pm_.c:2988 ../../printerdrake.pm_.c:3006
-#: ../../printerdrake.pm_.c:3095 ../../printerdrake.pm_.c:3169
-#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3526
-#: ../../printerdrake.pm_.c:3579 ../../standalone/printerdrake_.c:57
+#: ../../printerdrake.pm_.c:1555 ../../printerdrake.pm_.c:1559
+#: ../../printerdrake.pm_.c:1677 ../../printerdrake.pm_.c:2229
+#: ../../printerdrake.pm_.c:2382 ../../printerdrake.pm_.c:2441
+#: ../../printerdrake.pm_.c:2514 ../../printerdrake.pm_.c:2535
+#: ../../printerdrake.pm_.c:2728 ../../printerdrake.pm_.c:2769
+#: ../../printerdrake.pm_.c:2774 ../../printerdrake.pm_.c:2808
+#: ../../printerdrake.pm_.c:2813 ../../printerdrake.pm_.c:2850
+#: ../../printerdrake.pm_.c:2903 ../../printerdrake.pm_.c:2923
+#: ../../printerdrake.pm_.c:2937 ../../printerdrake.pm_.c:2971
+#: ../../printerdrake.pm_.c:3017 ../../printerdrake.pm_.c:3035
+#: ../../printerdrake.pm_.c:3124 ../../printerdrake.pm_.c:3198
+#: ../../printerdrake.pm_.c:3500 ../../printerdrake.pm_.c:3555
+#: ../../printerdrake.pm_.c:3608 ../../standalone/printerdrake_.c:57
 msgid "Printerdrake"
 msgstr "Printerdrake"
 
@@ -8465,7 +8467,7 @@ msgstr ""
 "logiciels additionnels seront installés."
 
 #: ../../printerdrake.pm_.c:269 ../../printerdrake.pm_.c:278
-#: ../../printerdrake.pm_.c:3117 ../../printerdrake.pm_.c:3242
+#: ../../printerdrake.pm_.c:3146 ../../printerdrake.pm_.c:3271
 msgid "Add a new printer"
 msgstr "Ajouter une nouvelle imprimante"
 
@@ -9049,7 +9051,7 @@ msgstr ""
 msgid "A valid URI must be entered!"
 msgstr "Une adresse valide doit être entrée !"
 
-#: ../../printerdrake.pm_.c:1515
+#: ../../printerdrake.pm_.c:1541
 msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
 "Location fields do not need to be filled in. They are comments for the users."
@@ -9059,27 +9061,27 @@ msgstr ""
 "Les champs « Description » et « Emplacement » n'ont pas besoin d'être "
 "remplis. Ce sont de simples commentaires pour les utilisateurs."
 
-#: ../../printerdrake.pm_.c:1516
+#: ../../printerdrake.pm_.c:1542
 msgid "Name of printer"
 msgstr "Nom de l'imprimante"
 
-#: ../../printerdrake.pm_.c:1518
+#: ../../printerdrake.pm_.c:1544
 msgid "Location"
 msgstr "Emplacement"
 
-#: ../../printerdrake.pm_.c:1530 ../../printerdrake.pm_.c:1652
+#: ../../printerdrake.pm_.c:1556 ../../printerdrake.pm_.c:1678
 msgid "Reading printer database..."
 msgstr "Lecture de la base de données des imprimantes..."
 
-#: ../../printerdrake.pm_.c:1534
+#: ../../printerdrake.pm_.c:1560
 msgid "Preparing printer database..."
 msgstr "Préparation de la base de données des imprimantes..."
 
-#: ../../printerdrake.pm_.c:1631
+#: ../../printerdrake.pm_.c:1657
 msgid "Your printer model"
 msgstr "Le modèle de votre imprimante"
 
-#: ../../printerdrake.pm_.c:1632
+#: ../../printerdrake.pm_.c:1658
 #, c-format
 msgid ""
 "Printerdrake has compared the model name resulting from the printer auto-"
@@ -9103,24 +9105,24 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../../printerdrake.pm_.c:1637 ../../printerdrake.pm_.c:1640
+#: ../../printerdrake.pm_.c:1663 ../../printerdrake.pm_.c:1666
 msgid "The model is correct"
 msgstr "Le modèle est correct"
 
-#: ../../printerdrake.pm_.c:1638 ../../printerdrake.pm_.c:1639
-#: ../../printerdrake.pm_.c:1642
+#: ../../printerdrake.pm_.c:1664 ../../printerdrake.pm_.c:1665
+#: ../../printerdrake.pm_.c:1668
 msgid "Select model manually"
 msgstr "Sélectionner manuellement le modèle"
 
-#: ../../printerdrake.pm_.c:1659
+#: ../../printerdrake.pm_.c:1685
 msgid "Printer model selection"
 msgstr "Sélection du modèle de l'imprimante"
 
-#: ../../printerdrake.pm_.c:1660
+#: ../../printerdrake.pm_.c:1686
 msgid "Which printer model do you have?"
 msgstr "Quel modèle d'imprimante possédez-vous ?"
 
-#: ../../printerdrake.pm_.c:1661
+#: ../../printerdrake.pm_.c:1687
 msgid ""
 "\n"
 "\n"
@@ -9134,7 +9136,7 @@ msgstr ""
 "modèle correct dans la liste si le curseur se situe sur un modèle erroné ou "
 "sur « Imprimante à accès direct »."
 
-#: ../../printerdrake.pm_.c:1664
+#: ../../printerdrake.pm_.c:1690
 msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
 "similar one."
@@ -9142,11 +9144,11 @@ msgstr ""
 "Si votre imprimante n'est pas listée, choisissez-en une compatible (voir le "
 "manuel de l'imprimante) ou similaire."
 
-#: ../../printerdrake.pm_.c:1741
+#: ../../printerdrake.pm_.c:1767
 msgid "OKI winprinter configuration"
 msgstr "Configuration de l'imprimante OKI winprinter"
 
-#: ../../printerdrake.pm_.c:1742
+#: ../../printerdrake.pm_.c:1768
 msgid ""
 "You are configuring an OKI laser winprinter. These printers\n"
 "use a very special communication protocol and therefore they work only when "
@@ -9163,11 +9165,11 @@ msgstr ""
 "l'impression de la page de test. Sans cela, l'imprimante ne fonctionnera pas "
 "Vos paramètres de type de connexion seront ignorés par le pilote."
 
-#: ../../printerdrake.pm_.c:1785 ../../printerdrake.pm_.c:1812
+#: ../../printerdrake.pm_.c:1811 ../../printerdrake.pm_.c:1838
 msgid "Lexmark inkjet configuration"
 msgstr "Configuration de l'imprimante Lexmark inkjet"
 
-#: ../../printerdrake.pm_.c:1786
+#: ../../printerdrake.pm_.c:1812
 msgid ""
 "The inkjet printer drivers provided by Lexmark only support local printers, "
 "no printers on remote machines or print server boxes. Please connect your "
@@ -9179,7 +9181,7 @@ msgstr ""
 "des serveurs d'impression. Veuillez connecter votre imprimante sur un port "
 "local ou configurez-la sur la machine à laquelle elle est connectée."
 
-#: ../../printerdrake.pm_.c:1813
+#: ../../printerdrake.pm_.c:1839
 msgid ""
 "To be able to print with your Lexmark inkjet and this configuration, you "
 "need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
@@ -9202,11 +9204,11 @@ msgstr ""
 "d'impression avec « lexmarkmaintain » et ajustez les paramètres de ces têtes "
 "avec ce programme."
 
-#: ../../printerdrake.pm_.c:1816
+#: ../../printerdrake.pm_.c:1842
 msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
 msgstr "Imprimante Laser GDI avec le format Zenographics ZJ-Stream"
 
-#: ../../printerdrake.pm_.c:1817
+#: ../../printerdrake.pm_.c:1843
 msgid ""
 "Your printer belongs to the group of GDI laser printers (winprinters) sold "
 "by different manufacturers which uses the Zenographics ZJ-stream raster "
@@ -9249,7 +9251,7 @@ msgstr ""
 "ne peut être lancée que par root.Aprés cela vous pourrez imprimer "
 "normalement.\n"
 
-#: ../../printerdrake.pm_.c:2040
+#: ../../printerdrake.pm_.c:2066
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -9264,22 +9266,22 @@ msgstr ""
 "sont correctement indiqués. Notez que la vitesse d'impression peut diminuer "
 "si vous augmentez la qualité d'impression."
 
-#: ../../printerdrake.pm_.c:2049
+#: ../../printerdrake.pm_.c:2075
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "L'option %s doit être un nombre entier !"
 
-#: ../../printerdrake.pm_.c:2053
+#: ../../printerdrake.pm_.c:2079
 #, c-format
 msgid "Option %s must be a number!"
 msgstr "L'option %s être un nombre !"
 
-#: ../../printerdrake.pm_.c:2058
+#: ../../printerdrake.pm_.c:2084
 #, c-format
 msgid "Option %s out of range!"
 msgstr "L'option %s est en dehors des limites !"
 
-#: ../../printerdrake.pm_.c:2097
+#: ../../printerdrake.pm_.c:2123
 #, c-format
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
@@ -9288,11 +9290,11 @@ msgstr ""
 "Désirez-vous que l'imprimante « %s » soit l'imprimante\n"
 "par défaut ?"
 
-#: ../../printerdrake.pm_.c:2120
+#: ../../printerdrake.pm_.c:2146
 msgid "Test pages"
 msgstr "Pages de test"
 
-#: ../../printerdrake.pm_.c:2121
+#: ../../printerdrake.pm_.c:2147
 msgid ""
 "Please select the test pages you want to print.\n"
 "Note: the photo test page can take a rather long time to get printed and on "
@@ -9305,39 +9307,39 @@ msgstr ""
 "même ne pas sortir.\n"
 "Dans la plupart des cas, l'impression de la page de test standard suffit."
 
-#: ../../printerdrake.pm_.c:2125
+#: ../../printerdrake.pm_.c:2151
 msgid "No test pages"
 msgstr "Pas de page de test"
 
-#: ../../printerdrake.pm_.c:2126
+#: ../../printerdrake.pm_.c:2152
 msgid "Print"
 msgstr "Imprimer"
 
-#: ../../printerdrake.pm_.c:2183
+#: ../../printerdrake.pm_.c:2209
 msgid "Standard test page"
 msgstr "Page de test standard"
 
-#: ../../printerdrake.pm_.c:2186
+#: ../../printerdrake.pm_.c:2212
 msgid "Alternative test page (Letter)"
 msgstr "Page de test alternative (Letter)"
 
-#: ../../printerdrake.pm_.c:2189
+#: ../../printerdrake.pm_.c:2215
 msgid "Alternative test page (A4)"
 msgstr "Page de test alternative (A4)"
 
-#: ../../printerdrake.pm_.c:2191
+#: ../../printerdrake.pm_.c:2217
 msgid "Photo test page"
 msgstr "Page de test photo"
 
-#: ../../printerdrake.pm_.c:2195
+#: ../../printerdrake.pm_.c:2221
 msgid "Do not print any test page"
 msgstr "Ne pas imprimer de page de test"
 
-#: ../../printerdrake.pm_.c:2204 ../../printerdrake.pm_.c:2357
+#: ../../printerdrake.pm_.c:2230 ../../printerdrake.pm_.c:2383
 msgid "Printing test page(s)..."
 msgstr "Impression des pages de test..."
 
-#: ../../printerdrake.pm_.c:2229
+#: ../../printerdrake.pm_.c:2255
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -9352,7 +9354,7 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2233
+#: ../../printerdrake.pm_.c:2259
 msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
@@ -9360,15 +9362,15 @@ msgstr ""
 "Les pages de test ont été envoyées à l'imprimante.\n"
 "Il peut se passer un certain temps avant le début effectif de l'impression.\n"
 
-#: ../../printerdrake.pm_.c:2240
+#: ../../printerdrake.pm_.c:2266
 msgid "Did it work properly?"
 msgstr "Êtes-vous satisfait du résultat ?"
 
-#: ../../printerdrake.pm_.c:2262 ../../printerdrake.pm_.c:3416
+#: ../../printerdrake.pm_.c:2288 ../../printerdrake.pm_.c:3445
 msgid "Raw printer"
 msgstr "Imprimante à accès direct"
 
-#: ../../printerdrake.pm_.c:2288
+#: ../../printerdrake.pm_.c:2314
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) you can either use "
@@ -9382,7 +9384,7 @@ msgstr ""
 "<fichier> ». Les utilitaires graphiques vous permettent de choisir "
 "l'imprimante et de modifier les paramètres d'impression facilement.\n"
 
-#: ../../printerdrake.pm_.c:2290
+#: ../../printerdrake.pm_.c:2316
 msgid ""
 "These commands you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications, but here do not supply the file name "
@@ -9393,8 +9395,8 @@ msgstr ""
 "applications. Dans ce cas n'indiquez pas le nom du fichier puisqu'il sera "
 "fourni par l'application elle-même.\n"
 
-#: ../../printerdrake.pm_.c:2293 ../../printerdrake.pm_.c:2310
-#: ../../printerdrake.pm_.c:2320
+#: ../../printerdrake.pm_.c:2319 ../../printerdrake.pm_.c:2336
+#: ../../printerdrake.pm_.c:2346
 #, c-format
 msgid ""
 "\n"
@@ -9407,7 +9409,7 @@ msgstr ""
 "pour une impression particulière. Il suffit pour cela d'ajouter les "
 "paramètres voulus sur la ligne de commande. Par exemple, « %s <fichier> ». "
 
-#: ../../printerdrake.pm_.c:2296 ../../printerdrake.pm_.c:2336
+#: ../../printerdrake.pm_.c:2322 ../../printerdrake.pm_.c:2362
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
@@ -9418,7 +9420,7 @@ msgstr ""
 "lisez la liste ci-dessous ou cliquez sur le bouton « imprimer la liste des "
 "options ».%s%s\n"
 
-#: ../../printerdrake.pm_.c:2300
+#: ../../printerdrake.pm_.c:2326
 msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
@@ -9427,7 +9429,7 @@ msgstr ""
 "courante:\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:2315
+#: ../../printerdrake.pm_.c:2331 ../../printerdrake.pm_.c:2341
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -9436,8 +9438,8 @@ msgstr ""
 "Pour imprimer un fichier depuis la ligne de commande (une fenêtre de "
 "terminal), utilisez la commande « %s <fichier>».\n"
 
-#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:2317
-#: ../../printerdrake.pm_.c:2327
+#: ../../printerdrake.pm_.c:2333 ../../printerdrake.pm_.c:2343
+#: ../../printerdrake.pm_.c:2353
 msgid ""
 "This command you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications. But here do not supply the file name "
@@ -9448,7 +9450,7 @@ msgstr ""
 "applications. Dans ce cas, n'indiquez pas le nom du fichier à imprimer "
 "puisque celui-ci sera fourni par l'application elle-même.\n"
 
-#: ../../printerdrake.pm_.c:2312 ../../printerdrake.pm_.c:2322
+#: ../../printerdrake.pm_.c:2338 ../../printerdrake.pm_.c:2348
 msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
@@ -9456,7 +9458,7 @@ msgstr ""
 "Pour obtenir la liste des paramètres disponibles pour l'imprimante courante, "
 "cliquez sur le bouton « liste des options d'impression »."
 
-#: ../../printerdrake.pm_.c:2325
+#: ../../printerdrake.pm_.c:2351
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -9465,7 +9467,7 @@ msgstr ""
 "Pour imprimer un fichier depuis la ligne de commande (une fenêtre de "
 "terminal), utilisez la commande « %s <fichier> » ou « %s <fichier> ».\n"
 
-#: ../../printerdrake.pm_.c:2329
+#: ../../printerdrake.pm_.c:2355
 msgid ""
 "You can also use the graphical interface \"xpdq\" for setting options and "
 "handling printing jobs.\n"
@@ -9482,7 +9484,7 @@ msgstr ""
 "les travaux d'impression. Ceci peut être utile en cas de bourrage papier, "
 "par exemple.\n"
 
-#: ../../printerdrake.pm_.c:2333
+#: ../../printerdrake.pm_.c:2359
 #, c-format
 msgid ""
 "\n"
@@ -9496,40 +9498,40 @@ msgstr ""
 "cela d'ajouter les paramètres voulus sur la ligne de commande, par exemple "
 "« %s <fichier> ».\n"
 
-#: ../../printerdrake.pm_.c:2343
+#: ../../printerdrake.pm_.c:2369
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Impression/Acquisition/Cartes photo sur « %s »"
 
-#: ../../printerdrake.pm_.c:2344
+#: ../../printerdrake.pm_.c:2370
 #, c-format
 msgid "Printing/Scanning on \"%s\""
 msgstr "Impression/Acquisition sur l'imprimante « %s »"
 
-#: ../../printerdrake.pm_.c:2346
+#: ../../printerdrake.pm_.c:2372
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Impression/Accès aux cartes photos sur « %s »"
 
-#: ../../printerdrake.pm_.c:2347
+#: ../../printerdrake.pm_.c:2373
 #, c-format
 msgid "Printing on the printer \"%s\""
 msgstr "Impression sur l'imprimante « %s »"
 
-#: ../../printerdrake.pm_.c:2350 ../../printerdrake.pm_.c:2353
-#: ../../printerdrake.pm_.c:2354 ../../printerdrake.pm_.c:2355
-#: ../../printerdrake.pm_.c:3400 ../../standalone/drakTermServ_.c:248
+#: ../../printerdrake.pm_.c:2376 ../../printerdrake.pm_.c:2379
+#: ../../printerdrake.pm_.c:2380 ../../printerdrake.pm_.c:2381
+#: ../../printerdrake.pm_.c:3429 ../../standalone/drakTermServ_.c:248
 #: ../../standalone/drakbackup_.c:1562 ../../standalone/drakbackup_.c:4210
 #: ../../standalone/drakbug_.c:130 ../../standalone/drakfont_.c:705
 #: ../../standalone/drakfont_.c:1014
 msgid "Close"
 msgstr "Fermer"
 
-#: ../../printerdrake.pm_.c:2353
+#: ../../printerdrake.pm_.c:2379
 msgid "Print option list"
 msgstr "Liste des options d'impression"
 
-#: ../../printerdrake.pm_.c:2373
+#: ../../printerdrake.pm_.c:2399
 #, c-format
 msgid ""
 "Your multi-function device was configured automatically to be able to scan. "
@@ -9553,7 +9555,7 @@ msgstr ""
 "\n"
 "N'utilisez pas « scannerdrake » pour cet appareil ! "
 
-#: ../../printerdrake.pm_.c:2394
+#: ../../printerdrake.pm_.c:2420
 msgid ""
 "Your printer was configured automatically to give you access to the photo "
 "card drives from your PC. Now you can access your photo cards using the "
@@ -9576,17 +9578,17 @@ msgstr ""
 "plusieurs lecteurs grâce au champ situé dans le coin supérieur droit de la "
 "liste de fichiers."
 
-#: ../../printerdrake.pm_.c:2416 ../../printerdrake.pm_.c:2875
-#: ../../printerdrake.pm_.c:3170
+#: ../../printerdrake.pm_.c:2442 ../../printerdrake.pm_.c:2904
+#: ../../printerdrake.pm_.c:3199
 msgid "Reading printer data..."
 msgstr "Lecture des données de l'imprimante..."
 
-#: ../../printerdrake.pm_.c:2436 ../../printerdrake.pm_.c:2464
-#: ../../printerdrake.pm_.c:2499
+#: ../../printerdrake.pm_.c:2462 ../../printerdrake.pm_.c:2490
+#: ../../printerdrake.pm_.c:2525
 msgid "Transfer printer configuration"
 msgstr "Transfert de la configuration de l'imprimante"
 
-#: ../../printerdrake.pm_.c:2437
+#: ../../printerdrake.pm_.c:2463
 #, c-format
 msgid ""
 "You can copy the printer configuration which you have done for the spooler %"
@@ -9603,7 +9605,7 @@ msgstr ""
 "Toutes les files d'attente n'ont pas pu être transférées à cause des raisons "
 "suivantes :\n"
 
-#: ../../printerdrake.pm_.c:2440
+#: ../../printerdrake.pm_.c:2466
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
@@ -9611,7 +9613,7 @@ msgstr ""
 "CUPS ne supporte pas les imprimantes sur les serveurs Novell ni les "
 "impressions vers des commandes shell.\n"
 
-#: ../../printerdrake.pm_.c:2442
+#: ../../printerdrake.pm_.c:2468
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
@@ -9619,11 +9621,11 @@ msgstr ""
 "PDQ ne supporte que les imprimantes locales, les imprimantes LPD distantes, "
 "et les imprimantes réseau autonomes.\n"
 
-#: ../../printerdrake.pm_.c:2444
+#: ../../printerdrake.pm_.c:2470
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD et LPRng ne supportent pas les imprimantes IPP.\n"
 
-#: ../../printerdrake.pm_.c:2446
+#: ../../printerdrake.pm_.c:2472
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
@@ -9631,7 +9633,7 @@ msgstr ""
 "De plus, les files d'attente qui n'ont pas été créées avec ce programme ou "
 "avec «foomatic-configure» ne peuvent pas être transférées."
 
-#: ../../printerdrake.pm_.c:2447
+#: ../../printerdrake.pm_.c:2473
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by their manufacturers "
@@ -9641,7 +9643,7 @@ msgstr ""
 "Aussi, les imprimantes configurées avec les fichiers PPD fournis par leur "
 "fabriquant ou avec des pilotes CUPS natifs ne peuvent pas être transférées."
 
-#: ../../printerdrake.pm_.c:2448
+#: ../../printerdrake.pm_.c:2474
 msgid ""
 "\n"
 "Mark the printers which you want to transfer and click \n"
@@ -9651,15 +9653,15 @@ msgstr ""
 "Cochez les imprimantes que vous voulez transférer, et\n"
 "cliquez sur « Transfert »."
 
-#: ../../printerdrake.pm_.c:2451
+#: ../../printerdrake.pm_.c:2477
 msgid "Do not transfer printers"
 msgstr "Ne pas transférer les imprimantes"
 
-#: ../../printerdrake.pm_.c:2452 ../../printerdrake.pm_.c:2469
+#: ../../printerdrake.pm_.c:2478 ../../printerdrake.pm_.c:2495
 msgid "Transfer"
 msgstr "Transfert"
 
-#: ../../printerdrake.pm_.c:2465
+#: ../../printerdrake.pm_.c:2491
 #, c-format
 msgid ""
 "A printer named \"%s\" already exists under %s. \n"
@@ -9671,13 +9673,13 @@ msgstr ""
 "Vous pouvez également taper un nouveau nom ou\n"
 "simplement ignorer cette imprimante."
 
-#: ../../printerdrake.pm_.c:2473
+#: ../../printerdrake.pm_.c:2499
 msgid "Name of printer should contain only letters, numbers and the underscore"
 msgstr ""
 "Le nom de l'imprimante ne devrait contenir que des lettres, des nombres et "
 "des tirets bas (_)"
 
-#: ../../printerdrake.pm_.c:2478
+#: ../../printerdrake.pm_.c:2504
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
@@ -9686,16 +9688,16 @@ msgstr ""
 "L'imprimante « %s » existe déjà,\n"
 "souhaitez-vous vraiment écraser sa configuration ?"
 
-#: ../../printerdrake.pm_.c:2486
+#: ../../printerdrake.pm_.c:2512
 msgid "New printer name"
 msgstr "Nouveau nom de l'imprimante"
 
-#: ../../printerdrake.pm_.c:2489
+#: ../../printerdrake.pm_.c:2515
 #, c-format
 msgid "Transferring %s..."
 msgstr "Transfert de %s..."
 
-#: ../../printerdrake.pm_.c:2500
+#: ../../printerdrake.pm_.c:2526
 #, c-format
 msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
@@ -9705,29 +9707,29 @@ msgstr ""
 "elle être également l'imprimante par défaut de votre nouveau système "
 "d'impression %s ?"
 
-#: ../../printerdrake.pm_.c:2510
+#: ../../printerdrake.pm_.c:2536
 msgid "Refreshing printer data..."
 msgstr "Mise à jour des données de l'imprimante..."
 
-#: ../../printerdrake.pm_.c:2518 ../../printerdrake.pm_.c:2590
-#: ../../printerdrake.pm_.c:2602
+#: ../../printerdrake.pm_.c:2544 ../../printerdrake.pm_.c:2619
+#: ../../printerdrake.pm_.c:2631
 msgid "Configuration of a remote printer"
 msgstr "Configuration d'une imprimante distante"
 
-#: ../../printerdrake.pm_.c:2519
+#: ../../printerdrake.pm_.c:2545
 msgid "Starting network..."
 msgstr "Démarrage du réseau..."
 
-#: ../../printerdrake.pm_.c:2554 ../../printerdrake.pm_.c:2558
-#: ../../printerdrake.pm_.c:2560
+#: ../../printerdrake.pm_.c:2580 ../../printerdrake.pm_.c:2584
+#: ../../printerdrake.pm_.c:2586
 msgid "Configure the network now"
 msgstr "Configurez le réseau maintenant"
 
-#: ../../printerdrake.pm_.c:2555
+#: ../../printerdrake.pm_.c:2581
 msgid "Network functionality not configured"
 msgstr "Les fonctionnalités du réseau ne sont pas configurées"
 
-#: ../../printerdrake.pm_.c:2556
+#: ../../printerdrake.pm_.c:2582
 msgid ""
 "You are going to configure a remote printer. This needs working network "
 "access, but your network is not configured yet. If you go on without network "
@@ -9739,11 +9741,11 @@ msgstr ""
 "voulez continuer sans configurer le réseau, vous ne pourez pas utiliser "
 "l'imprimante que vous êtes en train de configurer. Que souhaitez-vous faire ?"
 
-#: ../../printerdrake.pm_.c:2559
+#: ../../printerdrake.pm_.c:2585
 msgid "Go on without configuring the network"
 msgstr "Continuer sans configurer le réseau"
 
-#: ../../printerdrake.pm_.c:2592
+#: ../../printerdrake.pm_.c:2621
 msgid ""
 "The network configuration done during the installation cannot be started "
 "now. Please check whether the network gets accessable after booting your "
@@ -9759,7 +9761,7 @@ msgstr ""
 "essayez à nouveau de configurer l'imprimante dans la section « Matériel / "
 "Imprimante »."
 
-#: ../../printerdrake.pm_.c:2593
+#: ../../printerdrake.pm_.c:2622
 msgid ""
 "The network access was not running and could not be started. Please check "
 "your configuration and your hardware. Then try to configure your remote "
@@ -9769,24 +9771,24 @@ msgstr ""
 "de votre matériel et de votre accès réseau grâce au « Centre de Contrôle "
 "Mandrake » puis essayez à nouveau de configurer l'imprimante distante."
 
-#: ../../printerdrake.pm_.c:2603
+#: ../../printerdrake.pm_.c:2632
 msgid "Restarting printing system..."
 msgstr "Redémarrage du système d'impression..."
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2670
 msgid "high"
 msgstr "élevé"
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2670
 msgid "paranoid"
 msgstr "paranoïaque"
 
-#: ../../printerdrake.pm_.c:2642
+#: ../../printerdrake.pm_.c:2671
 #, c-format
 msgid "Installing a printing system in the %s security level"
 msgstr "Installation du système d'impression sous le niveau de sécurité « %s »"
 
-#: ../../printerdrake.pm_.c:2643
+#: ../../printerdrake.pm_.c:2672
 #, c-format
 msgid ""
 "You are about to install the printing system %s on a system running in the %"
@@ -9812,11 +9814,11 @@ msgstr ""
 "\n"
 "Souhaitez-vous réellement installer un système d'impression ?"
 
-#: ../../printerdrake.pm_.c:2675
+#: ../../printerdrake.pm_.c:2704
 msgid "Starting the printing system at boot time"
 msgstr "Activation du système d'impression au démarrage"
 
-#: ../../printerdrake.pm_.c:2676
+#: ../../printerdrake.pm_.c:2705
 #, c-format
 msgid ""
 "The printing system (%s) will not be started automatically when the machine "
@@ -9838,59 +9840,59 @@ msgstr ""
 "\n"
 "Souhaitez-vous rétablir l'activation automatique du système d'impression ?"
 
-#: ../../printerdrake.pm_.c:2700 ../../printerdrake.pm_.c:2741
-#: ../../printerdrake.pm_.c:2780 ../../printerdrake.pm_.c:2822
-#: ../../printerdrake.pm_.c:2943
+#: ../../printerdrake.pm_.c:2729 ../../printerdrake.pm_.c:2770
+#: ../../printerdrake.pm_.c:2809 ../../printerdrake.pm_.c:2851
+#: ../../printerdrake.pm_.c:2972
 msgid "Checking installed software..."
 msgstr "Vérification du logiciel installé..."
 
-#: ../../printerdrake.pm_.c:2746
+#: ../../printerdrake.pm_.c:2775
 msgid "Removing LPRng..."
 msgstr "Suppression de LPRng..."
 
-#: ../../printerdrake.pm_.c:2785
+#: ../../printerdrake.pm_.c:2814
 msgid "Removing LPD..."
 msgstr "Suppression de LPD..."
 
-#: ../../printerdrake.pm_.c:2858
+#: ../../printerdrake.pm_.c:2887
 msgid "Select Printer Spooler"
 msgstr "Choisissez le gestionnaire d'impression"
 
-#: ../../printerdrake.pm_.c:2859
+#: ../../printerdrake.pm_.c:2888
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Quel système d'impression désirez-vous utiliser ?"
 
-#: ../../printerdrake.pm_.c:2895
+#: ../../printerdrake.pm_.c:2924
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "Configuration en cours de l'imprimante « %s »..."
 
-#: ../../printerdrake.pm_.c:2909
+#: ../../printerdrake.pm_.c:2938
 msgid "Installing Foomatic..."
 msgstr "Installation de Foomatic ..."
 
-#: ../../printerdrake.pm_.c:2979 ../../printerdrake.pm_.c:3020
-#: ../../printerdrake.pm_.c:3417 ../../printerdrake.pm_.c:3490
+#: ../../printerdrake.pm_.c:3008 ../../printerdrake.pm_.c:3049
+#: ../../printerdrake.pm_.c:3446 ../../printerdrake.pm_.c:3519
 msgid "Printer options"
 msgstr "Options de l'imprimante"
 
-#: ../../printerdrake.pm_.c:2989
+#: ../../printerdrake.pm_.c:3018
 msgid "Preparing Printerdrake..."
 msgstr "Préparation de PrinterDrake..."
 
-#: ../../printerdrake.pm_.c:3007 ../../printerdrake.pm_.c:3580
+#: ../../printerdrake.pm_.c:3036 ../../printerdrake.pm_.c:3609
 msgid "Configuring applications..."
 msgstr "Configuration des applications...."
 
-#: ../../printerdrake.pm_.c:3027
+#: ../../printerdrake.pm_.c:3056
 msgid "Would you like to configure printing?"
 msgstr "Désirez-vous configurer l'impression ?"
 
-#: ../../printerdrake.pm_.c:3039
+#: ../../printerdrake.pm_.c:3068
 msgid "Printing system: "
 msgstr "Système d'impression : "
 
-#: ../../printerdrake.pm_.c:3099
+#: ../../printerdrake.pm_.c:3128
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; to view information about it; "
@@ -9902,7 +9904,7 @@ msgstr ""
 "consulter les informations à son propos ou pour rendre une imprimante d'un "
 "serveur CUPS distant utilisable par Star Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3100
+#: ../../printerdrake.pm_.c:3129
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -9912,30 +9914,30 @@ msgstr ""
 "pour modifier ses paramètres, en faire l'imprimante par défaut ou consulter "
 "les informations à son propos."
 
-#: ../../printerdrake.pm_.c:3127
+#: ../../printerdrake.pm_.c:3156
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 "Rafraîchir la liste des imprimantes (pour afficher toutes les imprimantes "
 "CUPS distantes)"
 
-#: ../../printerdrake.pm_.c:3145
+#: ../../printerdrake.pm_.c:3174
 msgid "Change the printing system"
 msgstr "Changer le système d'impression"
 
-#: ../../printerdrake.pm_.c:3150 ../../standalone/drakconnect_.c:277
+#: ../../printerdrake.pm_.c:3179 ../../standalone/drakconnect_.c:277
 msgid "Normal Mode"
 msgstr "Mode normal"
 
-#: ../../printerdrake.pm_.c:3310 ../../printerdrake.pm_.c:3360
-#: ../../printerdrake.pm_.c:3573
+#: ../../printerdrake.pm_.c:3339 ../../printerdrake.pm_.c:3389
+#: ../../printerdrake.pm_.c:3602
 msgid "Do you want to configure another printer?"
 msgstr "Désirez-vous configurer une autre imprimante ?"
 
-#: ../../printerdrake.pm_.c:3395
+#: ../../printerdrake.pm_.c:3424
 msgid "Modify printer configuration"
 msgstr "Modifier la configuration de l'imprimante"
 
-#: ../../printerdrake.pm_.c:3397
+#: ../../printerdrake.pm_.c:3426
 #, c-format
 msgid ""
 "Printer %s\n"
@@ -9944,102 +9946,102 @@ msgstr ""
 "Imprimante %s\n"
 "Que souhaitez-vous modifier sur cette imprimante ?"
 
-#: ../../printerdrake.pm_.c:3401
+#: ../../printerdrake.pm_.c:3430
 msgid "Do it!"
 msgstr "Faire"
 
-#: ../../printerdrake.pm_.c:3406 ../../printerdrake.pm_.c:3461
+#: ../../printerdrake.pm_.c:3435 ../../printerdrake.pm_.c:3490
 msgid "Printer connection type"
 msgstr "Type de connexion"
 
-#: ../../printerdrake.pm_.c:3407 ../../printerdrake.pm_.c:3465
+#: ../../printerdrake.pm_.c:3436 ../../printerdrake.pm_.c:3494
 msgid "Printer name, description, location"
 msgstr "Nom, description, emplacement"
 
-#: ../../printerdrake.pm_.c:3409 ../../printerdrake.pm_.c:3483
+#: ../../printerdrake.pm_.c:3438 ../../printerdrake.pm_.c:3512
 msgid "Printer manufacturer, model, driver"
 msgstr "Marque, modèle, pilote"
 
-#: ../../printerdrake.pm_.c:3410 ../../printerdrake.pm_.c:3484
+#: ../../printerdrake.pm_.c:3439 ../../printerdrake.pm_.c:3513
 msgid "Printer manufacturer, model"
 msgstr "Marque, modèle"
 
-#: ../../printerdrake.pm_.c:3419 ../../printerdrake.pm_.c:3494
+#: ../../printerdrake.pm_.c:3448 ../../printerdrake.pm_.c:3523
 msgid "Set this printer as the default"
 msgstr "Choisir comme imprimante par défaut"
 
-#: ../../printerdrake.pm_.c:3421 ../../printerdrake.pm_.c:3499
+#: ../../printerdrake.pm_.c:3450 ../../printerdrake.pm_.c:3528
 msgid "Add this printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Ajouter cette imprimante à StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3422 ../../printerdrake.pm_.c:3508
+#: ../../printerdrake.pm_.c:3451 ../../printerdrake.pm_.c:3537
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Retirer cette imprimante de StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3423 ../../printerdrake.pm_.c:3517
+#: ../../printerdrake.pm_.c:3452 ../../printerdrake.pm_.c:3546
 msgid "Print test pages"
 msgstr "Imprimer des pages de test"
 
-#: ../../printerdrake.pm_.c:3424 ../../printerdrake.pm_.c:3519
+#: ../../printerdrake.pm_.c:3453 ../../printerdrake.pm_.c:3548
 msgid "Know how to use this printer"
 msgstr "Savoir comment utiliser cette imprimante"
 
-#: ../../printerdrake.pm_.c:3426 ../../printerdrake.pm_.c:3521
+#: ../../printerdrake.pm_.c:3455 ../../printerdrake.pm_.c:3550
 msgid "Remove printer"
 msgstr "Désinstaller l'imprimante"
 
-#: ../../printerdrake.pm_.c:3472
+#: ../../printerdrake.pm_.c:3501
 #, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "Désinstallation de l'ancienne imprimante « %s »..."
 
-#: ../../printerdrake.pm_.c:3497
+#: ../../printerdrake.pm_.c:3526
 msgid "Default printer"
 msgstr "Imprimante par défaut"
 
-#: ../../printerdrake.pm_.c:3498
+#: ../../printerdrake.pm_.c:3527
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr "L'imprimante « %s » est maintenant celle par défaut."
 
-#: ../../printerdrake.pm_.c:3502 ../../printerdrake.pm_.c:3505
+#: ../../printerdrake.pm_.c:3531 ../../printerdrake.pm_.c:3534
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Ajout de l'imprimante à StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3503
+#: ../../printerdrake.pm_.c:3532
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
 msgstr "L'imprimante « %s » a été ajoutée avec succès à StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3506
+#: ../../printerdrake.pm_.c:3535
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr "Impossible d'ajouter l'imprimante « %s » à StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3511 ../../printerdrake.pm_.c:3514
+#: ../../printerdrake.pm_.c:3540 ../../printerdrake.pm_.c:3543
 msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Retrait de l'imprimante de StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3512
+#: ../../printerdrake.pm_.c:3541
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/"
 "GIMP."
 msgstr "L'imprimante « %s » a été retirée avec succès de StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3515
+#: ../../printerdrake.pm_.c:3544
 #, c-format
 msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr "Impossible de retirer l'imprimante « %s » de StarOffice/OpenOffice"
 
-#: ../../printerdrake.pm_.c:3523
+#: ../../printerdrake.pm_.c:3552
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Désirez-vous vraiment désinstaller l'imprimante « %s »?"
 
-#: ../../printerdrake.pm_.c:3527
+#: ../../printerdrake.pm_.c:3556
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Suppression de l'imprimante « %s »..."
@@ -10143,6 +10145,31 @@ msgstr "« mkraid » a échoué (les « raidtools » sont-ils installés ?)"
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Trop peu de partitions pour du RAID de niveau %d\n"
 
+#: ../../security/main.pm_.c:35
+msgid ""
+"Standard: This is the standard security recommended for a computer that will "
+"be used to connect\n"
+"               to the Internet as a client.\n"
+"\n"
+"High:       There are already some restrictions, and more automatic checks "
+"are run every night.\n"
+"\n"
+"Higher:    The security is now high enough to use the system as a server "
+"which can accept\n"
+"              connections from many clients. If your machine is only a "
+"client on the Internet, you\n"
+"\t      should choose a lower level.\n"
+"\n"
+"Paranoid:  This is similar to the previous level, but the system is entirely "
+"closed and security\n"
+"                features are at their maximum\n"
+"\n"
+"Security Administrator:\n"
+"               If the 'Security Alerts' option is set, security alerts will "
+"be sent to this user (username or\n"
+"\t       email)"
+msgstr ""
+
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
 msgstr "Niveau de sécurité:"
@@ -10169,6 +10196,18 @@ msgstr ""
 "Les options suivantes permettent de paramétrer finement votre système de "
 "sécurité.\n"
 "Si vous avez besoin d'explications, cliquez sur le bouton d'aide.\n"
+
+#: ../../security/main.pm_.c:226
+msgid "Network Options"
+msgstr "Options réseau"
+
+#: ../../security/main.pm_.c:235
+msgid "System Options"
+msgstr "Options système"
+
+#: ../../security/main.pm_.c:242
+msgid "Periodic Checks"
+msgstr "Vérifications périodiques"
 
 #: ../../security/main.pm_.c:256
 msgid "Please wait, setting security level..."
@@ -10699,8 +10738,8 @@ msgstr "La puissance de Linux au profit des serveurs"
 
 #: ../../share/advertising/09-server.pl_.c:10
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of your "
-"mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your machine into a powerful Linux server with a few clicks of "
+"your mouse: Web server, mail, firewall, router, file and print server, ..."
 msgstr ""
 "En quelques clics, Mandrake Linux 9.0 transforme votre ordinateur en un "
 "puissant serveur : serveur Web, mail, pare-feu, routeur, partage de fichiers "
@@ -11077,7 +11116,7 @@ msgstr ""
 "Les paramètres de l'installation automatique sont disponibles dans les "
 "sections sur la gauche."
 
-#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:484
+#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:480
 #: ../../standalone/scannerdrake_.c:119
 msgid "Congratulations!"
 msgstr "Félicitations !"
@@ -13306,19 +13345,19 @@ msgstr "Retirer des polices de votre système"
 msgid "Post Uninstall"
 msgstr "Post-désinstallation"
 
-#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:188
+#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:184
 msgid "Internet Connection Sharing"
 msgstr "Partage de la connexion internet"
 
-#: ../../standalone/drakgw_.c:119
+#: ../../standalone/drakgw_.c:115
 msgid "Sorry, we support only 2.4 kernels."
 msgstr "Désolé, nous ne prenons en charge que les noyaux (kernel) 2.4 ."
 
-#: ../../standalone/drakgw_.c:130
+#: ../../standalone/drakgw_.c:126
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Le partage de la connexion internet est activé"
 
-#: ../../standalone/drakgw_.c:131
+#: ../../standalone/drakgw_.c:127
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
@@ -13330,31 +13369,31 @@ msgstr ""
 "\n"
 "Que souhaitez-vous faire ?"
 
-#: ../../standalone/drakgw_.c:135
+#: ../../standalone/drakgw_.c:131
 msgid "disable"
 msgstr "désactiver"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "dismiss"
 msgstr "ne rien faire"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "reconfigure"
 msgstr "reconfigurer"
 
-#: ../../standalone/drakgw_.c:138
+#: ../../standalone/drakgw_.c:134
 msgid "Disabling servers..."
 msgstr "Désactivation des serveurs..."
 
-#: ../../standalone/drakgw_.c:146
+#: ../../standalone/drakgw_.c:142
 msgid "Internet connection sharing is now disabled."
 msgstr "Le partage de la connexion à Internet est maintenant désactivé."
 
-#: ../../standalone/drakgw_.c:155
+#: ../../standalone/drakgw_.c:151
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Le partage de la connexion à Internet est désactivé"
 
-#: ../../standalone/drakgw_.c:156
+#: ../../standalone/drakgw_.c:152
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -13366,19 +13405,19 @@ msgstr ""
 "\n"
 "Que souhaitez-vous faire ?"
 
-#: ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:156
 msgid "enable"
 msgstr "activer"
 
-#: ../../standalone/drakgw_.c:167
+#: ../../standalone/drakgw_.c:163
 msgid "Enabling servers..."
 msgstr "Activation des serveurs..."
 
-#: ../../standalone/drakgw_.c:172
+#: ../../standalone/drakgw_.c:168
 msgid "Internet connection sharing is now enabled."
 msgstr "Le partage de la connexion internet est maintenant activé."
 
-#: ../../standalone/drakgw_.c:189
+#: ../../standalone/drakgw_.c:185
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -13395,21 +13434,21 @@ msgstr ""
 "Veuillez noter que vous avez besoin d'une carte réseau dédiée à votre réseau "
 "local."
 
-#: ../../standalone/drakgw_.c:215
+#: ../../standalone/drakgw_.c:211
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Interface %s (utilisant le module %s)"
 
-#: ../../standalone/drakgw_.c:216
+#: ../../standalone/drakgw_.c:212
 #, c-format
 msgid "Interface %s"
 msgstr "Interface %s"
 
-#: ../../standalone/drakgw_.c:224
+#: ../../standalone/drakgw_.c:220
 msgid "No network adapter on your system!"
 msgstr "Aucune carte réseau n'est présente dans votre système"
 
-#: ../../standalone/drakgw_.c:225
+#: ../../standalone/drakgw_.c:221
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -13417,11 +13456,11 @@ msgstr ""
 "Aucune carte réseau n'a été détectée sur votre système. Veuillez utiliser "
 "l'outil de configuration du matériel."
 
-#: ../../standalone/drakgw_.c:231
+#: ../../standalone/drakgw_.c:227
 msgid "Network interface"
 msgstr "Carte réseau"
 
-#: ../../standalone/drakgw_.c:232
+#: ../../standalone/drakgw_.c:228
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -13436,18 +13475,18 @@ msgstr ""
 "\n"
 "Je vais configurer votre réseau local avec cette carte réseau."
 
-#: ../../standalone/drakgw_.c:241
+#: ../../standalone/drakgw_.c:237
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr ""
 "Veuillez choisir quelle carte réseau sera connectée à votre réseau local"
 
-#: ../../standalone/drakgw_.c:259
+#: ../../standalone/drakgw_.c:255
 msgid "Network interface already configured"
 msgstr "Interface réseau déjà configurée"
 
-#: ../../standalone/drakgw_.c:260
+#: ../../standalone/drakgw_.c:256
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -13462,15 +13501,15 @@ msgstr ""
 "\n"
 "Vous pouvez le faire manuellement, mais vous devez savoir ce que vous faites."
 
-#: ../../standalone/drakgw_.c:265
+#: ../../standalone/drakgw_.c:261
 msgid "Automatic reconfiguration"
 msgstr "Reconfiguration automatique"
 
-#: ../../standalone/drakgw_.c:266
+#: ../../standalone/drakgw_.c:262
 msgid "Show current interface configuration"
 msgstr "Montrer la configuration actuelle"
 
-#: ../../standalone/drakgw_.c:268
+#: ../../standalone/drakgw_.c:264
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -13487,7 +13526,7 @@ msgstr ""
 "Attribution de l'adresse : %s\n"
 "Pilote : %s"
 
-#: ../../standalone/drakgw_.c:280
+#: ../../standalone/drakgw_.c:276
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the C-Class Network that "
@@ -13512,45 +13551,45 @@ msgstr ""
 "DHCP.\n"
 "\n"
 
-#: ../../standalone/drakgw_.c:285
+#: ../../standalone/drakgw_.c:281
 msgid "C-Class Local Network"
 msgstr "Réseau Local de classe C"
 
-#: ../../standalone/drakgw_.c:286
+#: ../../standalone/drakgw_.c:282
 msgid "(This) DHCP Server IP"
 msgstr "Adresse IP du serveur DHCP"
 
-#: ../../standalone/drakgw_.c:287
+#: ../../standalone/drakgw_.c:283
 msgid "Re-configure interface and DHCP server"
 msgstr "Re-configurer l'interface et le serveur DHCP"
 
-#: ../../standalone/drakgw_.c:294
+#: ../../standalone/drakgw_.c:290
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "Le réseau local ne finissait pas par `.0', j'abandonne."
 
-#: ../../standalone/drakgw_.c:305
+#: ../../standalone/drakgw_.c:301
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr ""
 "Conflit potentiel d'adresses du réseau local trouvé dans la configuration de "
 "%s !\n"
 
-#: ../../standalone/drakgw_.c:315
+#: ../../standalone/drakgw_.c:311
 msgid "Configuring..."
 msgstr "Configuration en cours..."
 
-#: ../../standalone/drakgw_.c:316
+#: ../../standalone/drakgw_.c:312
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr ""
 "Configuration des scripts, installation des logiciels, démarrage des "
 "serveurs..."
 
-#: ../../standalone/drakgw_.c:352
+#: ../../standalone/drakgw_.c:348
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Des problèmes sont apparus en installant le paquetage %s"
 
-#: ../../standalone/drakgw_.c:485
+#: ../../standalone/drakgw_.c:481
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -13561,25 +13600,25 @@ msgstr ""
 "ordinateurs sur votre réseau local, en utilisant la configuration réseau "
 "automatique (DHCP)."
 
-#: ../../standalone/drakgw_.c:504
+#: ../../standalone/drakgw_.c:500
 msgid "The setup has already been done, but it's currently disabled."
 msgstr ""
 "La configuration a déjà été effectuée, mais elle est actuellement désactivée."
 
-#: ../../standalone/drakgw_.c:505
+#: ../../standalone/drakgw_.c:501
 msgid "The setup has already been done, and it's currently enabled."
 msgstr ""
 "La configuration a déjà été effectuée, et elle est actuellement activée."
 
-#: ../../standalone/drakgw_.c:506
+#: ../../standalone/drakgw_.c:502
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Le partage de la connexion internet n'a encore jamais été configuré."
 
-#: ../../standalone/drakgw_.c:511
+#: ../../standalone/drakgw_.c:507
 msgid "Internet connection sharing configuration"
 msgstr "Configuration du partage de la connexion internet"
 
-#: ../../standalone/drakgw_.c:518
+#: ../../standalone/drakgw_.c:514
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
