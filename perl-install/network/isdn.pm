@@ -195,12 +195,11 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 }
 
 sub isdn_detect_backend() {
-    my $isdn = { };
+    my @isdn;
     require detect_devices;
      each_index {
  	my $c = $_;
- 	$isdn->{$::i} = { map { $_ => $c->{$_} } qw(description vendor id driver card_type type) };
- 	my $isdn = $isdn->{$::i};
+ 	my $isdn = { map { $_ => $c->{$_} } qw(description vendor id driver card_type type) };
         $isdn->{intf_id} = $::i;
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
 	$isdn->{card_type} = $c->{bus} eq 'USB' ? 'usb' : 'pci';
@@ -211,8 +210,9 @@ sub isdn_detect_backend() {
 	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
 	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
+	push @isdn, $isdn;
     } modules::probe_category('network/isdn');
-    $isdn;
+    \@isdn;
 }
 
 sub isdn_get_list() {
