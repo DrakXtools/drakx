@@ -679,35 +679,30 @@ Create one first by clicking on 'Configure'")),1,1,0);
         $i++;
     }
 
-
-    $dialog->vbox->pack_start(gtkpack__(new Gtk2::VBox(0, 0),
-                                        new Gtk2::Label(N("Internet Connection Configuration")),
-                                        new Gtk2::HSeparator,
-                                        create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
-                                                         [ Gtk2::Label->new(N("Profile: ")), 
-                                                           Gtk2::Label->new(translate($netcnx->{PROFILE})) ],
-                                                         [ Gtk2::Label->new(N("Connection type: ")), 
-                                                           Gtk2::Label->new(translate($netcnx->{type})) ],
-                                                        ),
-                                        new Gtk2::HSeparator,
-                                        gtkadd(Gtk2::Frame->new(N("Parameters")), $vbox2),
-                                       ),
-                              1, 1, 0
-                             );
-    $dialog->action_area->pack_start(gtkpack(Gtk2::HButtonBox->new,
-                                             gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
-                                                                   each_index {
-                                                                       ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text if $_;
-                                                                   } @mask;
-                                                                   update();
-                                                                   $button_apply->set_sensitive(1);
-                                                                   $exit_dialogsub->();
-                                                                   $dialog->destroy; Gtk2->main_quit;
-                                                               }),
-                                             gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub)
-                                            ),
-                                     1, 1, 0
-                                    );
+    gtkpack(new Gtk2::VBox(0, 0),
+            new Gtk2::Label(N("Internet Connection Configuration")),
+            new Gtk2::HSeparator,
+            create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
+                             [ Gtk2::Label->new(N("Profile: ")), 
+                               Gtk2::Label->new(translate($netcnx->{PROFILE})) ],
+                             [ Gtk2::Label->new(N("Connection type: ")), 
+                               Gtk2::Label->new(translate($netcnx->{type})) ],
+                            ),
+            new Gtk2::HSeparator,
+            gtkadd(Gtk2::Frame->new(N("Parameters")), $vbox2),
+           );
+    gtkpack($dialog->action_area,
+            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+                                  each_index {
+                                      ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text if $_;
+                                  } @mask;
+                                  update();
+                                  $button_apply->set_sensitive(1);
+                                  $exit_dialogsub->();
+                                  $dialog->destroy; Gtk2->main_quit;
+                              }),
+            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub)
+           );
 
     $dialog->show_all;
     $dialog->run;
