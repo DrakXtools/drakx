@@ -132,7 +132,7 @@ sub merge_info_from_fstab {
     merge_fstabs($fstab, @l);
 }
 
-sub write_fstab {
+sub fstab_to_string {
     my ($all_hds, $prefix) = @_;
     $prefix ||= '';
 
@@ -188,8 +188,13 @@ sub write_fstab {
 	}
     } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} } (@l1, @l2);
 
+    join('', map { join(' ', @$_) . "\n" } sort { $a->[1] cmp $b->[1] } @l);
+}
+
+sub write_fstab {
+    my ($all_hds, $prefix) = @_;
     log::l("writing $prefix/etc/fstab");
-    output("$prefix/etc/fstab", map { join(' ', @$_) . "\n" } sort { $a->[1] cmp $b->[1] } @l);
+    output("$prefix/etc/fstab", fstab_to_string($all_hds, $prefix));
 }
 
 sub auto_fs() {
