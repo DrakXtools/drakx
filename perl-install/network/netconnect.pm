@@ -151,6 +151,12 @@ sub get_subwizard {
               $module = $dev->[1];
           } else { $module = "" }
       };
+
+      my $offer_to_connect = sub {
+          return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && $adsl_devices{$ntf_name};
+          return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn));
+          return "end";
+      };
       
       my %adsl_devices = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
@@ -1065,14 +1071,14 @@ You may also enter the IP address of the gateway if you have one."),
                         
                         network::network::configureNetwork2($in, $::prefix, $netc, $intf);
                         $network_configured = 1;
-                        $::isInstall ? "restart" : "ask_connect_now";
+                        return "restart" if $netconnect::need_restart_network && $::isStandalone && !$::expert;
+                        return $offer_to_connect->();
                     },
                    },
 
                    restart => 
                    {
-                    # FIXME: condition is "if ($netconnect::need_restart_network && $::isStandalone && (!$::expert || $in->ask_yesorno(..."
-                               name => N("The network needs to be restarted. Do you want to restart it ?"),
+                    name => N("The network needs to be restarted. Do you want to restart it ?"),
                     # data => [ { label => N("Connection:"), val => \$type, type => 'list', list => [ sort values %l ] }, ],
                     post => sub {
                         if (!$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
@@ -1081,7 +1087,7 @@ You may also enter the IP address of the gateway if you have one."),
                                               N("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
                         }
                         write_initscript();
-                        return $::isStandalone && member($netc->{internet_cnx_choice}, qw(modem adsl isdn)) ? "ask_connect_now" : "end";
+                        return $offer_to_connect->();
                     },
                    },
                    
