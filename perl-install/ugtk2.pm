@@ -964,10 +964,7 @@ sub _create_window {
     });
 
     if ($no_Window_Manager) {
-	#- force keyboard focus instead of mouse focus
-	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
-	$w->signal_connect(expose_event => \&_XSetInputFocus);
-	$w->signal_connect(destroy => sub { $ugtk2::current_window = $previous_current_window });
+	force_keyboard_focus($w);
     }
 
     if ($::isInstall) {
@@ -992,16 +989,26 @@ sub _create_window {
     $w;
 }
 
-sub _XSetInputFocus {
+my $current_window;
+sub force_keyboard_focus {
     my ($w) = @_;
-    if ($ugtk2::current_window == $w) {
-	$w->window->XSetInputFocus;
-    } else {
-	log::l("not XSetInputFocus since already done and not on top");
-    }
-    0;
-}
 
+    sub _XSetInputFocus {
+	my ($w) = @_;
+	if ($current_window == $w) {
+	    $w->window->XSetInputFocus;
+	} else {
+	    log::l("not XSetInputFocus since already done and not on top");
+	}
+	0;
+    }
+
+    #- force keyboard focus instead of mouse focus
+    my $previous_current_window = $current_window;
+    $current_window = $w;
+    $w->signal_connect(expose_event => \&_XSetInputFocus);
+    $w->signal_connect(destroy => sub { $current_window = $previous_current_window });
+}
 
 # -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
 #                 ask
