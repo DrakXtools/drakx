@@ -35,7 +35,7 @@ sub set_removable_configurator {
 
 sub set_removable_remover {
     my ($class, $device) = @_;
-    return "/usr/sbin/drakupdate_fstab --auto --no-flag --del $device->{device}" if is_removable($class);
+    return "/usr/sbin/drakupdate_fstab --no-flag --del $device->{device}" if is_removable($class);
 }
 
 our @tree =
