@@ -92,7 +92,7 @@ print "Making live in $::prefix directory.\n";
 
 {
     eval { fs::umount("$::prefix/proc") };
-#    eval { rm_rf($::prefix) };
+    eval { rm_rf($::prefix) };
     output_p("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
     installPackages();
     run_program::rooted($::prefix, 'ldconfig');
@@ -169,3 +169,6 @@ unlink "$::prefix/usr/X11R6/bin/drakfw";
 substInFile {
     s|startkde\b|startkde_move|;
 } "$::prefix/etc/X11/wmsession.d/01KDE";
+
+#- drakxtools contains a broken unneeded file
+unlink "$::prefix/usr/lib/libDrakX/modem.pm";
