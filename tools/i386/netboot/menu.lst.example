@@ -3,5 +3,5 @@ timeout 0
 title linux
 dhcp
 tftpserver 192.168.1.9
-kernel (nd)/var/lib/tftpboot/vmlinuz ramdisk=32000 vga=788 kickstart=Mandrake/base/auto_inst.cfg.pl useless_thing_accepted
+kernel (nd)/var/lib/tftpboot/vmlinuz ramdisk=32000 vga=788 kickstart=Mandrake/base/auto_inst.cfg.pl useless_thing_accepted automatic=method:ftp,network:static,ip:192.168.100.25,dns:192.168.100.11,server:192.168.100.39,directory:/export,user:a,pass:a
 initrd (nd)/var/lib/tftpboot/network.rdz
