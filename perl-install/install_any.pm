@@ -323,7 +323,7 @@ sub setPackages {
 	if ($::auto_install && !$o->{compssUsersChoice}) {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
 	}
-	if (!$::auto_install) {
+	if (!$::auto_install && !$o->{isUpgrade}) {
 	    #- by default, choose:
 	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG';
 	    $o->{compssUsersChoice}{$_} = 1 
