@@ -39,11 +39,11 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
 		]) or goto end;
 
     keyboard::group_toggle_choose($in, $keyboard) or goto choose;
-}
 
-if ($::expert) {
-    my $isNotDelete = !$in->ask_yesorno("BackSpace", N("Do you want the BackSpace to return Delete in console?"), 1);
-    $keyboard->{BACKSPACE} = $isNotDelete ? "BackSpace" : "Delete";
+    if ($::expert) {
+	my $isNotDelete = !$in->ask_yesorno("BackSpace", N("Do you want the BackSpace to return Delete in console?"), 1);
+	$keyboard->{BACKSPACE} = $isNotDelete ? "BackSpace" : "Delete";
+    }
 }
 
 keyboard::setxkbmap($keyboard);
