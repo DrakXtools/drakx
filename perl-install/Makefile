@@ -12,7 +12,7 @@ OTHERS     = $(OTHERDIRS) $(OTHERFILES)
 OTHERDIRS  = tools/ddcprobe tools/serial_probe
 OTHERFILES = tools/rpcinfo-flushed.c
 
-.PHONY: all $(DIRS) install clean stage2 full_stage2 verify_c 
+.PHONY: all $(DIRS) install clean stage2 full_stage2
 
 all: list_modules.pm TAGS $(DIRS)
 
@@ -44,12 +44,8 @@ $(DIRS):
 	install -d auto
 	$(MAKE) -C $@
 
-test_pms: verify_c
-	for i in install2 install_steps_*.pm standalone/keyboarddrake standalone/XFdrake standalone/drakboot; do perl_checker -I. -no_cw $$i; done
-	for i in install2 install_steps_*.pm; do perl -cw -I. $$i; done
-
-verify_c:
-	./verify_c $(ALLPMS)
+test_pms:
+	perl_checker install2.pm install_steps_gtk.pm install_steps_stdio.pm partition_table/*.pm standalone/{harddrake2,diskdrake,draksec}
 
 %.mo: %.po
 	msgfmt -o $@ $<
