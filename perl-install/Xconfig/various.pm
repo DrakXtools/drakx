@@ -76,8 +76,12 @@ For this you have to plug your graphic card to your TV before booting your compu
 Then choose the \"TVout\" entry in the bootloader
 
 Do you have this feature?")) or return;
+    
+    #- rough default value (rationale: http://download.nvidia.com/XFree86_40/1.0-2960/README.txt)
+    require timezone;
+    my $norm = timezone::read()->{timezone} =~ /America/ ? 'NTSC' : 'PAL';
 
-    my $norm = $in->ask_from_list('', _("What norm is your TV using?"), [ 'NTSC', 'PAL' ]) or return;
+    $norm = $in->ask_from_list('', _("What norm is your TV using?"), [ 'NTSC', 'PAL' ], $norm) or return;
 
     configure_FB_TVOUT({ norm => $norm });
 }
