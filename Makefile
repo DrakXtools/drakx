@@ -60,9 +60,6 @@ endif
 
 	install live_update $(ROOTDEST)/live_update
 	make -C perl-install full_stage2
-	make install-ads
-
-install-ads:
 	make -C perl-install/share/advertising install
 
 build: $(FBOOT_RDZ) $(FBOOT_IMG)
