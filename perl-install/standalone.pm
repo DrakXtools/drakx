@@ -49,12 +49,24 @@ Backup and Restore application
 --help                : show this message.
 --version             : show version number.
 "),
+
+           'drakboot' => N_("[--boot] [--splash]
+OPTIONS:
+  --boot            - enable to configure boot loader
+  --splash          - enable to configure boot theme
+default mode: offer to configure autologin feature"),
            'drakbug' => N_("[OPTIONS] [PROGRAM_NAME]
 
 OPTIONS:
   --help            - print this help message.
   --report          - program should be one of mandrake tools
   --incident        - program should be one of mandrake tools"),
+           'drakconnect' => N_("[--add]
+  --add             - \"add a network interface\" wizard
+  --del             - \"delete a network interface\" wizard
+  --skip-wizard     - manage connections
+  --internet        - configure internet
+  --wizard          - like --add"),
            'drakfont' => N_("Font Importation and monitoring application                                     
 --windows_import : import from all available windows partitions.
 --xls_fonts      : show all fonts that already exist from xls
