@@ -219,8 +219,7 @@ sub create_treeview_tree {
 	    ${$e->{val}} = $precomp{$path->to_string}{listvalue};
 	    &$changed;
 	} else {
-	    print STDERR "TODO: Gtk2::TreeView::expand_row scrolls the tree and make the expanded row invisible, disable it for now\n";
-#	    $tree->expand_row($path, 0) if $selected_via_click;
+	    $tree->expand_row($path, 0) if $selected_via_click;
 	}
 	$path->free;
     });
