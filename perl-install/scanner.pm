@@ -32,7 +32,7 @@ use handle_configs;
 
 my $_sanedir = "$::prefix/etc/sane.d";
 my $_scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
-$scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
+my $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
@@ -41,8 +41,8 @@ sub confScanner {
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     my @driverconf = cat_("$_sanedir/$a.conf");
     my @configlines = @{$scannerDB->{$model}{lines}};
-    (s/\$DEVICE/$port/) foreach @configlines;
-    (handle_configs::set_directive(\@driverconf, $_)) foreach @configlines;
+    s/\$DEVICE/$port/ foreach @configlines;
+    handle_configs::set_directive(\@driverconf, $_) foreach @configlines;
     output("$_sanedir/$a.conf", @driverconf);
     add2dll($a);
 }
@@ -58,7 +58,7 @@ sub detect {
     my ($i, @res) = 0;
     foreach (grep { $_->{driver} =~ /scanner/ } detect_devices::usb_probe()) {
 	use Data::Dumper;
-	print Dumper ($_);
+	print Dumper($_);
 	#my ($manufacturer, $model) = split '\|', $_->{description};
 	#$_->{description} =~ s/Hewlett[-\s_]Packard/HP/;
 	$_->{description} =~ s/Seiko\s+Epson/Epson/i;
