@@ -628,7 +628,7 @@ sub get_kde_lang {
 
     #- get it using 
     #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
-    my @valid_kde_langs = qw(C af ar az bg bs ca cs da de el en_GB eo es et eu fa fi fr he hr hu is it ja ko lt lv mk mt nb nl nn pl pt pt_BR ro ru se sk sl sr sv ta th tr uk vi xh zh_CN.GB2312 zh_TW.Big5 zu);
+    my @valid_kde_langs = qw(C af ar az bg bs ca cs da de el en_GB eo es et eu fa fi fr he hr hu is it ja ko lt lv mk mt nb nl nn pl pt pt_BR ro ru se sk sl sr sv ta th tr uk vi xh zh_CN zh_TW zu);
     my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
 
     my $valid_lang = sub {
@@ -637,7 +637,7 @@ sub get_kde_lang {
         my %fixlangs = (en => 'C', en_US => 'C',
                         'sr@Latn' => 'sr',
                         st => 'nso', ve => 'ven',
-                        zh_CN => 'zh_CN.GB2312', zh_SG => 'zh_CN.GB2312', zh_TW => 'zh_TW.Big5', zh_HK => 'zh_TW.Big5');
+                        zh_CN => 'zh_CN', zh_SG => 'zh_CN', zh_TW => 'zh_TW', zh_HK => 'zh_TW');
         exists $fixlangs{$lang} ? $fixlangs{$lang} :
 	  exists $valid_kde_langs{$lang} ? $lang :
 	  exists $valid_kde_langs{substr($lang, 0, 2)} ? substr($lang, 0, 2) : '';
