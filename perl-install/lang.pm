@@ -141,16 +141,16 @@ my %xim = (
   # kind, only XIM_PROGRAM needs to be defined
   'vi' => {
 	XIM_PROGRAM => 'xvnkb',
-  }
+  },
   'vi_VN.TCVN' => {
 	XIM_PROGRAM => 'xvnkb',
-  }
+  },
   'vi_VN.VISCII' => {
 	XIM_PROGRAM => 'xvnkb',
-  }
+  },
   'vi_VN.UTF-8' => {
 	XIM_PROGRAM => 'xvnkb',
-  }
+  },
   # right to left languages only work properly on console
   'ar' => {
 	X11_NOT_LOCALIZED => "yes",
