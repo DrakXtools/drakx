@@ -432,8 +432,8 @@ sub test_mouse_standalone {
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
     gtkpack($hbox,
-            gtkpack(gtkset_border_width(Gtk2::VBox->new(0,10), 10),
-                    gtksize(gtkset_size_request($darea, $width+1, $height+1), $width, $height)));
+	    gtkpack(gtkset_border_width(Gtk2::VBox->new(0,10), 10),
+		    gtksize(gtkset_size_request($darea, $width+1, $height+1), $width, $height)));
     test_mouse($mouse, $hbox, $darea, $width, $height);
 }
 
@@ -443,7 +443,6 @@ sub test_mouse {
 #    $darea->realize;  IS IT REALLY NEEDED? generates a Gtk-CRITICAL when run..
     require ugtk2;
     ugtk2->import(qw(:wrappers));
-    my $wait = 0;
     my %xpms;
     $xpms{$_} = ugtk2::gtkcreate_pixbuf("mouse_$_.xpm") foreach qw(3b 3b+ left right middle);
     $xpms{au} = ugtk2::gtkcreate_pixbuf('arrow_up.xpm');
@@ -478,7 +477,7 @@ sub test_mouse {
     };
 
     my $paintButton = sub {
-	my ($nb, $_pressed) = @_;
+	my ($nb) = @_;
 	my $x = 60 + $nb*33;
 	$drawarea->();
 	if ($nb == 0) {
@@ -493,20 +492,20 @@ sub test_mouse {
   					  1, ($darea->allocation->width-$width)/2 + $x, ($darea->allocation->height-$height)/2 + 90, 20, 25,
   					  0, 360*64);
 	    }
-	} elsif ($nb == 3) {
-	    $draw_pixbuf->($xpms{au}, 102, 57, 6, 8);
-	} elsif ($nb == 4) {
-	    $draw_pixbuf->($xpms{ad}, 102, 131, 6, 8);
-	}
-	if (member($nb, 3..4)) {
-	    $wait = 1;
+	} else {
+	    if ($nb == 3) {
+		$draw_pixbuf->($xpms{au}, 102, 57, 6, 8);
+	    } elsif ($nb == 4) {
+		$draw_pixbuf->($xpms{ad}, 102, 131, 6, 8);
+	    }
 	    $draw_pixbuf->($xpms{middle}, 98, 67, 13, 62);
-	    Gtk2->timeout_add(200, sub { $wait = 0 });
+	    Gtk2->timeout_add(200, sub { $drawarea->(); 0 });
 	}
     };
     
     $darea->signal_connect(button_press_event => sub { $paintButton->($_[1]->button - 1) });
-    $darea->signal_connect(button_release_event => sub { ugtk2::flush() while $wait; $drawarea->() });
+    $darea->signal_connect(scroll_event => sub { $paintButton->($_[1]->direction eq 'up' ? 3 : 4) });
+    $darea->signal_connect(button_release_event => sub { $drawarea->() });
     $darea->signal_connect(expose_event => sub { $drawarea->() });
     $darea->set_size_request($width, $height);
 }
