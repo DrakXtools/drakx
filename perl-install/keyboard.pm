@@ -219,7 +219,7 @@ arch() =~ /^sparc/ ? (
  "lt" => [ __("Lithuanian AZERTY (old)"), "lt-latin7", "lt_a", 0 ],
 #- TODO: write a console kbd map for lt_new
  "lt_new" => [ __("Lithuanian AZERTY (new)"), "lt-latin7", "lt_std", 0 ],
- "lt_b" => [ __("Lithuanian \"number row\" QWERTY"), "ltb-latin7", "lt", 0 ],
+ "lt_b" => [ __("Lithuanian \"number row\" QWERTY"), "ltb-latin7", "lt", 1 ],
  "lt_p" => [ __("Lithuanian \"phonetic\" QWERTY"), "ltp-latin7", "lt_p", 0 ],
  "lv" => [ __("Latvian"),	 "lv-latin7",       "lv",    0 ],
  "mk" => [ __("Macedonian"),	 "mk",              "mk",    1 ],
