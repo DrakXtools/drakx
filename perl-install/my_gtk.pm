@@ -7,8 +7,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset gtkroot) ],
-    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset gtkroot gtkentry) ],
+    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -106,7 +106,6 @@ sub main {
     gtkset_mousecursor_normal();
     my $timeout = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
     my $b = MDK::Common::Func::before_leaving { Gtk->timeout_remove($timeout) };
-    $o->{rwindow}->window->set_events(['key_press_mask', 'key_release_mask', 'exposure_mask']) if $o->{rwindow}->window;
     $o->show;
 
     do {
@@ -124,7 +123,7 @@ sub show($) {
 }
 sub destroy($) {
     my ($o) = @_;
-    $o->{rwindow}->destroy;
+    $o->{rwindow} and $o->{rwindow}->destroy;
     gtkset_mousecursor_wait();
     flush();
 }
@@ -171,7 +170,7 @@ sub _create_window($$) {
 		       my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
 		      );
     my $table;
-    if ($::isStandalone || $::live || $::g_auto_install || $::noShadow) { gtkadd($w, $inner) } else {
+    if ($::isStandalone || $::live || $::g_auto_install || $::noShadow) { gtkadd($w, $inner) if !$::noBorder } else {
 	my $sqw = $my_gtk::shape_width;
 	gtkadd($w, $table = new Gtk::Table(2, 2, 0));
 	$table->attach($inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
@@ -259,7 +258,7 @@ sub _create_window($$) {
 	}
     }) if ($my_gtk::force_center || $o->{force_center}) && !($my_gtk::force_position || $o->{force_position}) ;
 
-    $o->{window} = $f;
+    $o->{window} = $::noBorder ? $w : $f;
     $o->{rwindow} = $w;
     $table and $table->draw(undef);
 }
@@ -274,6 +273,7 @@ sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w) 
 sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w) }
 sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is this correct?"), _("Ok"), _("Cancel")); main($w) }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w) }
+sub ask_dir        { my $w = my_gtk->new(shift @_); $w->_ask_dir(@_); main($w); }
 
 sub _ask_from_entry($$@) {
     my ($o, @msgs) = @_;
@@ -317,9 +317,16 @@ sub _ask_file {
     my ($o, $title, $path) = @_;
     my $f = $o->{rwindow} = new Gtk::FileSelection $title;
     $f->set_filename($path);
-    $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename ; Gtk->main_quit });
+    $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename; Gtk->main_quit });
     $f->cancel_button->signal_connect(clicked => sub { Gtk->main_quit });
     $f->hide_fileop_buttons;
+    $f;
+}
+
+sub _ask_dir {
+    my $f = _ask_file(@_);
+    $f->file_list->parent->hide;
+    $f->selection_entry->parent->hide;
 }
 
 sub ask_browse_tree_info {
@@ -349,7 +356,7 @@ sub ask_browse_tree_info {
 
     if ($common->{auto_deps}) {
 	gtkpack__($l, gtksignal_connect(gtkset_active(new Gtk::CheckButton($common->{auto_deps}), $common->{state}{auto_deps}),
-					clicked => sub { invbool $common->{state}{auto_deps} }));
+					clicked => sub { invbool \$common->{state}{auto_deps} }));
     }
     $l->pack_end(my $status = new Gtk::Label, 0, 1, 20);
 
@@ -392,28 +399,13 @@ sub ask_browse_tree_info_given_widgets {
     
     my $set_node_state_flat = sub {
 	my ($node, $state) = @_;
-	unless ($pix{$state}) {
-	    foreach ("$ENV{SHARE_PATH}/$state.png", "$ENV{SHARE_PATH}/rpm-$state.png") {
-		if (-e $_) {
-		    $pix{$state} = [ gtkcreate_png($_) ];
-		    last;
-		}
-	    }
-	    $pix{$state} or die "unable to find a pixmap for state $state";
-	}
+	$pix{$state} ||= [ gtkcreate_png($state) ];
 	$w->{tree}->node_set_pixmap($node, 1, $pix{$state}[0], $pix{$state}[1]);
     };
     my $set_node_state_tree; $set_node_state_tree = sub {
 	my ($node, $state) = @_;
-	unless ($pix{$state}) {
-	    foreach ("$ENV{SHARE_PATH}/$state.png", "$ENV{SHARE_PATH}/rpm-$state.png") {
-		if (-e $_) {
-		    $pix{$state} = [ gtkcreate_png($_) ];
-		    last;
-		}
-	    }
-	    $pix{$state} or die "unable to find a pixmap for state $state";
-	}
+	$state eq 'XXX' and return;
+	$pix{$state} ||= [ gtkcreate_png($state) ];
 	if ($node->{state} ne $state) {
 	    if ($node->row->is_leaf) {
 		my $parent = $node->row->parent;
@@ -450,11 +442,15 @@ sub ask_browse_tree_info_given_widgets {
     my $add_node = sub {
 	my ($leaf, $root) = @_;
 	my $state = $common->{node_state}($leaf) or return;
-	my $node = $w->{tree}->insert_node($add_parent->($root, $state), undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
-	$set_node_state->($node, $state);
-	push @{$ptree{$leaf}}, $node;
+	if ($leaf) {
+	    my $node = $w->{tree}->insert_node($add_parent->($root, $state), undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
+	    $set_node_state->($node, $state);
+	    push @{$ptree{$leaf}}, $node;
+	} else {
+	    $add_parent->($root, $state);
+	}
     };
-    $common->{rebuild_tree} = sub {
+    $common->{delete_all} = sub {
 	foreach (values %ptree) {
 	    delete $_->{state} foreach @$_;
 	}
@@ -463,17 +459,50 @@ sub ask_browse_tree_info_given_widgets {
 	    delete $_->{state_stats};
 	}
 	%ptree = %wtree = ();
-
-	$w->{tree}->freeze;
-	while (1) { $w->{tree}->remove_node($w->{tree}->node_nth(0) || last) }
-
+	$w->{tree}->freeze; $w->{tree}->clear; $w->{tree}->thaw;
+    };
+    $common->{rebuild_tree} = sub {
+	$common->{delete_all}->();
 	$set_node_state = $common->{state}{flat} ? $set_node_state_flat : $set_node_state_tree;
+	$w->{tree}->freeze;
 	$common->{build_tree}($add_node, $common->{state}{flat}, $common->{tree_mode});
-
 	$w->{tree}->thaw;
 	&$update_size;
     };
-    $common->{rebuild_tree}->();
+    $common->{delete_category} = sub {
+	my ($cat) = @_;
+	exists $wtree{$cat} or return;
+	$w->{tree}->freeze;
+	foreach (keys %ptree) {
+	    my @to_remove;
+	    foreach my $node (@{$ptree{$_}}) {
+		my $category;
+		my $parent = $node;
+		while ($parent->row->parent) {
+		    $parent = $parent->row->parent;
+		    my $parent_name = ($w->{tree}->node_get_pixtext($parent, 0))[0];
+		    $category = $category ? "$parent_name|$category" : $parent_name;
+		}
+		$cat eq $category and push @to_remove, $node;
+	    }
+	    delete $_->{state} foreach @to_remove;
+	    @{$ptree{$_}} = difference2($ptree{$_}, \@to_remove);
+	}
+	if (exists $wtree{$cat}) {
+	    delete $wtree{$cat}->{$_} foreach qw(state state_stats);
+	    $w->{tree}->remove_node($wtree{$cat});
+	    delete $wtree{$cat};
+	}
+	$w->{tree}->thaw;
+	&$update_size;
+    };
+    $common->{add_nodes} = sub {
+	my (@nodes) = @_;
+	$w->{tree}->freeze;
+	$add_node->($_->[0], $_->[1], $_->[2]) foreach @nodes;
+	$w->{tree}->thaw;
+	&$update_size;
+    };
     
     my $display_info = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
     my $children = sub { map { ($w->{tree}->node_get_pixtext($_, 0))[0] } gtkctree_children($_[0]) };
@@ -515,6 +544,7 @@ sub ask_browse_tree_info_given_widgets {
 	}
 	$toggle->(1) if $_[2] == 1;
     });
+    $common->{rebuild_tree}->();
     &$update_size;
     my $b = before_leaving { #- ensure cleaning here.
 	foreach (values %ptree) {

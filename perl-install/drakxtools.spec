@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 1.1.8
-Release: 17mdk
+Version: 1.1.9
+Release: 1mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -263,14 +263,28 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Thu Aug  1 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-17mdk
-- harddrake :
+* Thu Aug  1 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-1mdk
+- integrate patches in my_gtk and ugtk for new rpmdrake:
+  - [ugtk] add "gtkentry" so that we can create an entry and set
+    initial value in one call
+  - [my_gtk::main] don't set the events, to fix keyboard focus
+    problem in entries when embedded
+  - [my_gtk::_create_window] add $::noBorder, to not have a frame
+    in the main window, so that it's possible to end up with
+    windows with no border
+  - [my_gtk] add ask_dir which is a ask_file with only the dir list
+  - [my_gtk] add ask_browse_tree_info to the export tags, and:
+    - add support for parents with no leaves, so that then we can
+      partially build the trees (for speedup)
+    - add "delete_all" and "delete_category" callbacks
+    - use Gtk::CList::clear when removing all the nodes, much
+      speedup
+- Titi, harddrake :
 	o workaround for the busy mouse cursor set by
 	  gtkset_mousecursor_wait() in my_gtk::destroy
 	o remove debugging prints
 	o cleanups
-- drakx: various cleanups
-
+    - drakx: various cleanups
 
 * Thu Aug  1 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-16mdk
 - my_gtk:
