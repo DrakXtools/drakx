@@ -318,7 +318,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-19mdk
+- fix doble ISDN detection (#6535)
 - drakconnect: fix modem symlink (#7967)
+- drakboot --boot is now a wizard
+- printerdrake: fix missing "default settings" option in the printer
+  options dialog (till)
 
 * Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-18mdk
 - drakboot (pixel):
