@@ -49,7 +49,7 @@ When you have finished adding users, you will be asked to choose a user who
 can automatically log into the system when the computer boots up. If you
 are interested in that feature (and do not care much about local security),
 choose the desired user and window manager, then click \"%s\". If you are
-not interested in this feature, uncheck the \"%s\" box.", N("User name"), N("Accept user"), N("Next ->"), N("Advanced"), N("Next ->"), N("Do you want to use this feature?"));
+not interested in this feature, uncheck the \"%s\" box.", N("User name"), N("Accept user"), N("Next"), N("Advanced"), N("Next"), N("Do you want to use this feature?"));
 }
 sub ask_mntpoint_s() {
     N("Listed here are the existing Linux partitions detected on your hard drive.
@@ -194,7 +194,7 @@ can consult the list of supported modems at LinModems.
 
 You can consult the ``Starter Guide'' chapter about Internet connections
 for details about the configuration, or simply wait until your system is
-installed and use the program described there to configure your connection.", N("Next ->"), N("Use auto detection"), N("Cancel"));
+installed and use the program described there to configure your connection.", N("Next"), N("Use auto detection"), N("Cancel"));
 }
 sub configurePrinter() {
     N("\"%s\": clicking on the \"%s\" button will open the printer configuration
@@ -441,7 +441,7 @@ Click on \"%s\" if you want to choose another partition for your new
 Mandrake Linux operating system installation.
 
 Click on \"%s\" if you wish to select partitions that will be checked for
-bad blocks on the disk.", N("Next ->"), N("<- Previous"), N("Advanced"));
+bad blocks on the disk.", N("Next"), N("Previous"), N("Advanced"));
 }
 sub installUpdates() {
     N("At the time you are installing Mandrake Linux, it is likely that some
@@ -688,7 +688,7 @@ pressing the \"%s\" button, a mouse image is displayed on-screen. Scroll
 the mouse wheel to ensure that it is activated correctly. Once you see the
 on-screen scroll wheel moving as you scroll your mouse wheel, test the
 buttons and check that the mouse pointer moves on-screen as you move your
-mouse.", N("with Wheel emulation"), N("Next ->"));
+mouse.", N("with Wheel emulation"), N("Next"));
 }
 sub selectSerialPort() {
     N("Please select the correct port. For example, the \"COM1\" port under
@@ -781,7 +781,7 @@ You may also not want to give access to these other operating systems to
 anyone who goes to the console and reboots the machine. You can delete the
 corresponding entries for the operating systems to remove them from the
 bootloader menu, but you will need a boot disk in order to boot those other
-operating systems!", N("Add"), N("Modify"), N("Remove"), N("Next->"));
+operating systems!", N("Add"), N("Modify"), N("Remove"), N("Next"));
 }
 sub setupBootloaderBeginner() {
     N("LILO and GRUB are GNU/Linux bootloaders. Normally, this stage is totally
@@ -1002,5 +1002,5 @@ to recover any data and partitions present on this hard drive, including
 any Windows data.
 
 Click on \"%s\" to quit this operation without losing data and partitions
-present on this hard drive.", N("Next ->"), N("Next ->"), N("<- Previous"));
+present on this hard drive.", N("Next"), N("Next"), N("Previous"));
 }
