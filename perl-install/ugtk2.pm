@@ -134,9 +134,9 @@ sub gtkappenditems {
 
 # append page to a notebook
 sub gtkappend_page {
-    my $w = shift;
-    $w->append_page(@_);
-    $w
+    my ($notebook, $page, $title) = @_;
+    $notebook->append_page($page, $title);
+    $notebook;
 }
 
 sub gtkentry {
