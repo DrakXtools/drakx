@@ -405,7 +405,7 @@ sub create_pix_text {
 	$style->font($font);
     } else {
 	$font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
-	$style->font(Gtk::Gdk::Font->fontset_load($font));
+#-	$style->font(Gtk::Gdk::Font->fontset_load($font));
     }
 
     my ($width, $height, $lines, $widths, $heights) = get_text_coord (
