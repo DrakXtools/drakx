@@ -383,7 +383,7 @@ sub skipSetWithProvides {
 
 sub psUpdateHdlistsDeps {
     my ($prefix, $method) = @_;
-    my $listf = install_any::getFile('hdlists') or die "no hdlists found";
+    my $listf = install_any::getFile('Mandrake/base/hdlists') or die "no hdlists found";
 
     #- WARNING: this function should be kept in sync with functions
     #- psUsingHdlists and psUsingHdlist.
@@ -403,20 +403,20 @@ sub psUpdateHdlistsDeps {
 	my $fakemedium = $method . $medium;
 	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2" . ($hdlist =~ /\.cz2/ && "2");
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
-	install_any::getAndSaveFile($hdlist, $newf) or die "no $hdlist found";
+	install_any::getAndSaveFile("Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
 	symlinkf $newf, "/tmp/$hdlist";
 	++$medium;
     }
 
     #- this is necessary for urpmi.
-    install_any::getAndSaveFile("depslist.ordered", "$prefix/var/lib/urpmi/depslist.ordered");
-    install_any::getAndSaveFile("provides", "$prefix/var/lib/urpmi/provides");
-    install_any::getAndSaveFile("compss", "$prefix/var/lib/urpmi/compss");
+    install_any::getAndSaveFile('Mandrake/base/depslist.ordered', "$prefix/var/lib/urpmi/depslist.ordered");
+    install_any::getAndSaveFile('Mandrake/base/provides', "$prefix/var/lib/urpmi/provides");
+    install_any::getAndSaveFile('Mandrake/base/compss', "$prefix/var/lib/urpmi/compss");
 }
 
 sub psUsingHdlists {
     my ($prefix, $method) = @_;
-    my $listf = install_any::getFile('hdlists') or die "no hdlists found";
+    my $listf = install_any::getFile('Mandrake/base/hdlists') or die "no hdlists found";
     my @packages = ({}, [], {});
     my @hdlists;
 
@@ -466,7 +466,7 @@ sub psUsingHdlist {
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
-    install_any::getAndSaveFile($fhdlist || $hdlist, $newf) or die "no $hdlist found";
+    install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
     symlinkf $newf, "/tmp/$hdlist";
 
     #- extract filename from archive, this take advantage of verifying
@@ -553,8 +553,8 @@ sub getDeps($) {
     my ($prefix, $packages) = @_;
 
     #- this is necessary for urpmi.
-    install_any::getAndSaveFile("depslist.ordered", "$prefix/var/lib/urpmi/depslist.ordered");
-    install_any::getAndSaveFile("provides", "$prefix/var/lib/urpmi/provides");
+    install_any::getAndSaveFile('Mandrake/base/depslist.ordered', "$prefix/var/lib/urpmi/depslist.ordered");
+    install_any::getAndSaveFile('Mandrake/base/provides', "$prefix/var/lib/urpmi/provides");
 
     #- beware of heavily mismatching depslist.ordered file against hdlist files.
     my $mismatch = 0;
@@ -619,7 +619,7 @@ sub readCompss {
     my ($p, @compss);
 
     #- this is necessary for urpmi.
-    install_any::getAndSaveFile("compss", "$prefix/var/lib/urpmi/compss");
+    install_any::getAndSaveFile('Mandrake/base/compss', "$prefix/var/lib/urpmi/compss");
 
     local *F;
     open F, "$prefix/var/lib/urpmi/compss" or die "can't find compss";
@@ -640,7 +640,7 @@ sub readCompss {
 
 sub readCompssList {
     my ($packages, $langs) = @_;
-    my $f = install_any::getFile("compssList") or die "can't find compssList";
+    my $f = install_any::getFile('Mandrake/base/compssList') or die "can't find compssList";
     my @levels = split ' ', <$f>;
 
     foreach (<$f>) {
@@ -675,7 +675,7 @@ sub readCompssUsers {
 	$l or return;
 	$_ = $packages->[0]{$_} or log::l("unknown package $1 (in compssUsers)") foreach @$l;
     };
-    my $f = install_any::getFile("compssUsers") or die "can't find compssUsers";
+    my $f = install_any::getFile('Mandrake/base/compssUsers') or die "can't find compssUsers";
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
@@ -794,7 +794,7 @@ sub selectPackagesToUpgrade($$$;$$) {
     #- get filelist of package to avoid getting all header into memory.
     my %filelist;
     my $current;
-    my $f = install_any::getFile("filelist") or log::l("unable to get filelist of packages");
+    my $f = install_any::getFile('Mandrake/base/filelist') or log::l("unable to get filelist of packages");
     foreach (<$f>) {
 	chomp;
 	if (/^#(.*)/) {

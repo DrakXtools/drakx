@@ -640,7 +640,9 @@ sub main {
 	push @auto, 'selectInstallClass';
     }
     if ($oem) {
-	push @auto, 'selectInstallClass', 'selectMouse', 'configureTimezone', 'exitInstall';
+	$o->{partitioning}{auto_allocate} = 1;
+	$o->{compssListLevel} = 50;
+	push @auto, 'selectInstallClass', 'selectMouse', 'doPartitionDisks', 'choosePackages', 'configureTimezone', 'exitInstall';
     }
     foreach (@auto) {
 	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;

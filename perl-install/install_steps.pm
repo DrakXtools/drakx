@@ -432,6 +432,9 @@ Consoles 1,3,4,7 may also contain interesting information";
 	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
 
+    install_any::getAndSaveFile('RPM-GPG-KEYS', '/root/tmp/RPM-GPG-KEYS');
+    run_program::rooted($o->{prefix}, qw(gpg --fast-import --keyring /etc/rpm/pubring.gpg /root/tmp/RPM-GPG-KEYS));
+
 #    #- update language and icons for KDE.
 #    update_userkderc($o->{prefix}, 'Locale', Language => "");
 #    log::l("updating kde icons according to available devices");

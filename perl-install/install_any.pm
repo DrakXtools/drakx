@@ -63,11 +63,7 @@ sub changeMedium($$) {
 }
 sub relGetFile($) {
     local $_ = $_[0];
-    m,^(Mandrake|lnx4win)/, and return $_;
-    /\.img$/ and return "images/$_";
-    my $dir = m|/| ? "Mandrake/mdkinst" : /^(?:compss|compssList|compssUsers|provides|filelist|depslist.*|hdlist.*|auto_inst.*)$/ ?
-      "Mandrake/base/": "$::o->{packages}[2]{$asked_medium}{rpmsdir}/";
-    "$dir$_";
+    m|\.rpm$| ? "$::o->{packages}[2]{$asked_medium}{rpmsdir}/$_" : $_;
 }
 sub askChangeMedium($$) {
     my ($method, $medium) = @_;
@@ -541,7 +537,7 @@ sub loadO {
     my ($O, $f) = @_; $f ||= auto_inst_file;
     my $o;
     if ($f =~ /^(floppy|patch)$/) {
-	my $f = $f eq "floppy" ? "auto_inst.cfg" : "patch";
+	my $f = $f eq "floppy" ? 'Mandrake/base/auto_inst.cfg' : "patch";
 	unless ($::testing) {
 	    fs::mount(devices::make("fd0"), "/mnt", (arch() =~ /sparc/ ? "romfs" : "vfat"), 'readonly');
 	    $f = "/mnt/$f";

@@ -2,28 +2,30 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-use common qw(:system);
+use common qw(:common :system);
 use interactive;
 use mouse;
 use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: mousedrake [--auto] [--noauto] [--testing]\n";
+/-h/ and die "usage: mousedrake [--auto] [--testing]\n";
 
 $::auto = /-auto/;
-$::noauto = /-noauto/;
 $::testing = /-testing/;
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
 
-my $mouse = eval { mouse::detect() } unless $::noauto;
+my ($mouse) = mouse::detect() unless $::noauto;
 
-if (!(my $name = $mouse && $mouse->{FULLNAME}) || !$::auto) {
-    $name ||= "Generic Mouse (serial)";
-    $name = $in->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $name);
-    $mouse = mouse::name2mouse($name);
+if (!$mouse || !$::auto) {
+    $mouse ||= mouse::fullname2mouse("serial|Generic 2 Button Mouse");
+    my $name = $in->ask_from_treelistf('', _("Please, choose the type of your mouse."), '|',
+				       sub { join '|', map { translate($_) } split '\|', $_[0] },
+				       [ mouse::fullnames ], 
+				       $mouse->{type} . '|' . $mouse->{name});
+    $mouse = mouse::fullname2mouse($name);
 
     if ($mouse->{device} eq "usbmouse") {
 	require pci_probing::main;
@@ -45,23 +47,24 @@ modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 my $f = "/etc/X11/XF86Config";
 my $g = "/etc/X11/XF86Config-4";
 
-my $zaxis = "\n    ZAxisMapping 4 5" if $mouse->{nbuttons} > 3;
-  $zaxis .= "\n    ZAxisMapping 6 7" if $mouse->{nbuttons} > 5;
-  $zaxis  = "
-    Emulate3Buttons
-    Emulate3Timeout    50" if $mouse->{nbuttons} < 3;
+my @zaxis = (
+  $mouse->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
+  $mouse->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
+  $mouse->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
+);
 
+my $zaxis = join('', map { qq(\n    $_->[0]) . ($_->[1] && qq( $_->[1])) } @zaxis);
 substInFile {
-    if (/^Section "Pointer"/ .. /^EndSection/) {
+    if (/^Section\s+"Pointer"/ .. /^EndSection/) {
 	$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
 	s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
 	s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
     }
 } $f if -e $f && !$::testing;
 
-$zaxis =~ s/(ZAxisMapping|Emulate3\w+)/Option "$1"/g;
+$zaxis = join('', map { qq(\n    Option "$_->[0]") . ($_->[1] && qq( "$_->[1]")) } @zaxis);
 substInFile {
-    if (/^Identifier "Mouse1"/ .. /^EndSection/) {
+    if (/Identifier\s+"Mouse1"/ .. /^EndSection/) {
 	$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
 	s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
 	s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$zaxis|;

@@ -202,12 +202,18 @@ sub detect() {
 			      # find one whether or not I had one installed!  So..  default to it.
 			      "busmouse|2 buttons");
     }
+    
+    if ($::isStandalone) {
+        detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1);
+    }
 
     #- probe serial device to make sure a wacom has been detected.
     eval { commands::modprobe("serial") };
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
 
-    detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1), $wacom;
+    if (!$::isStandalone) {
+        detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1), $wacom;
+    }
 
     if (modules::get_alias("usb-interface") && detect_devices::hasUsbMouse()) {
 	eval { 

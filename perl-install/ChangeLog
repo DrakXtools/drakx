@@ -1,5 +1,18 @@
 2000-09-21  Pixel  <pixel@mandrakesoft.com>
 
+	* Xconfigurator.pm (write_XF86Config): comment the omit
+	xfree86-dga	
+
+	* install_steps.pm (afterInstallPackages): configure GPG public
+	keyring with mandrake key	
+
+	* standalone/mousedrake: updated/fixed for new mouse handling	
+
+	* install2.pm (main): update for handling oem installs
+
+	* many files: relGetFile cleanup, updated calls to getFile and
+	getAndSaveFile accordingly
+
 	* Xconfigurator.pm (testFinalConfig): new XFdrake-image-test.jpg
 
 	* detect_devices.pm (@netdevices): plip removed in standalone,

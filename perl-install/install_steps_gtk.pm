@@ -82,7 +82,7 @@ sub new($$) {
 		my $prog = /Xsun|Xpmac/ ? $_ : "XF86_$_";
 		unless (-x "$dir/$prog") {
 		    unlink $_ foreach glob_("$dir/X*");
-		    install_any::getAndSaveFile("$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
+		    install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
 		    chmod 0755, "$dir/$prog";
 		}
 		if (/FB/) {

@@ -913,7 +913,7 @@ _("Do you want to generate an auto install floppy for linux replication?"), $flo
 	my $workdir = "$o->{prefix}/tmp/work"; -d $workdir or rmdir $workdir;
 
 	my $w = $o->wait_message('', _("Creating auto install floppy"));
-        install_any::getAndSaveFile("$image.img", $imagefile) or log::l("failed to write $dev"), return;
+        install_any::getAndSaveFile("images/$image.img", $imagefile) or log::l("failed to write $dev"), return;
         devices::make($_) foreach qw(/dev/loop6 /dev/ram);
 
         run_program::run("losetup", "/dev/loop6", $imagefile);
@@ -943,7 +943,7 @@ _("Do you want to generate an auto install floppy for linux replication?"), $flo
     } else {
 	{
 	    my $w = $o->wait_message('', _("Creating auto install floppy"));
-	    install_any::getAndSaveFile("$image.img", $dev) or log::l("failed to write $dev"), return;
+	    install_any::getAndSaveFile("images/$image.img", $dev) or log::l("failed to write $dev"), return;
 	}
         fs::mount($dev, "/floppy", "vfat", 0);
 	substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";

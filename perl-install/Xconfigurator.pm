@@ -801,7 +801,7 @@ Section "Module"
 # initialisation of the XFree86-DGA extension within that module.
 
     SubSection	"extmod"
-	Option	"omit xfree86-dga"
+	#Option	"omit xfree86-dga"
     EndSubSection
 
 # This loads the Type1 and FreeType font modules

@@ -2,8 +2,10 @@
 
 [ "$1" = "-f" ] || { echo "Call it with option -f, but don't fear loosing all your data, this command is dangerous!"; exit 1; }
 
-echo "I'm going to install the oem version on your hard drive"
-echo "!!ALL DATA IS GOING TO BE LOST!!"
+echo
+echo
+echo "I'm going to install the OEM version on your hard drive"
+echo "[1;31;40m!!ALL DATA IS GOING TO BE LOST!![0m"
 echo
 echo "Press enter to go on"
 
@@ -36,6 +38,8 @@ echo "Copying cdrom on hard drive"
 cp -a /boot /cdrom/boot /cdrom/Mandrake /hd
 rm /hd/Mandrake/mdkinst/usr/bin/runinstall2
 
-echo "Done, oem hard drive ready! Press enter to reboot"
+echo
+echo "Done. OEM hard drive ready!"
+echo "Press enter to reboot"
 read
 reboot
