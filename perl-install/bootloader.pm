@@ -11,6 +11,7 @@ use common;
 use partition_table qw(:types);
 use log;
 use any;
+use pkgs;
 use fsedit;
 use devices;
 use loopback;
@@ -143,25 +144,25 @@ sub add_entry($$) {
     push @$entries, $v;
 }
 
-sub add_kernel($$$$$) {
-    my ($prefix, $lilo, $kernelVersion, $specific, $v) = @_;
-    my $ext = $specific && "-$specific"; $specific =~ s/\d+\.\d+|hack//;
-    my ($vmlinuz, $image, $initrdImage) = ("vmlinuz-$kernelVersion$specific", "/boot/vmlinuz$ext", "/boot/initrd$ext.img");    
-    -e "$prefix/boot/$vmlinuz" or log::l("unable to find kernel image $prefix/boot/$vmlinuz"), return;
-    {
-	my $f = "initrd-$kernelVersion$specific.img";
-	eval { mkinitrd($prefix, "$kernelVersion$specific", "/boot/$f") };
-	undef $initrdImage if $@;
-	symlinkf $f, "$prefix$initrdImage" or $initrdImage = "/boot/$f"
-	  if $initrdImage;
-    }
-    symlinkf "$vmlinuz", "$prefix/$image" or $image = "/boot/$vmlinuz";
+sub add_kernel {
+    my ($prefix, $lilo, $version, $ext, $root, $v) = @_;
+
+    -e "$prefix/boot/vmlinuz-$version" or log::l("unable to find kernel image $prefix/boot/vmlinuz-$version"), return;
+    my $image = "/boot/vmlinuz" . (symlinkf("vmlinuz-$version", "$prefix/boot/vmlinuz$ext") ? $ext : "-$version");
+
+    my $initrd = eval { 
+	mkinitrd($prefix, $version, "/boot/initrd-$version.img");
+	"/boot/initrd" . (symlinkf("initrd-$version.img", "$prefix/boot/initrd$ext.img") ? $ext : "-$version") . ".img";
+    };
+    my $label = $ext =~ /-(default)/ ? $1 : "linux$ext";
+
     add2hash($v,
 	     {
 	      type => 'image',
-	      label => 'linux',
+	      root => "/dev/$root",
+	      label => $label,
 	      kernel_or_dev => $image,
-	      initrd => $initrdImage,
+	      initrd => $initrd,
 	      append => $lilo->{perImageAppend},
 	     });
     add_entry($lilo->{entries}, $v);
@@ -207,8 +208,51 @@ sub dev2prompath { #- SPARC only
     $dev;
 }
 
+sub get_kernels_and_labels {
+    my ($prefix) = @_;
+    my $dir = "$prefix/boot";
+    my @l = grep { /^vmlinuz-/ } all($dir);
+    my @kernels = grep { ! -l "$dir/$_" } @l;
+
+    my @prefered = ('', 'secure', 'enterprise', 'smp');
+    my %weights = map_index { $_ => $::i } @prefered;
+    
+    @kernels = 
+      sort { pkgs::versionCompare($b->[1], $a->[1]) || $weights{$a->[2]} <=> $weights{$b->[2]} } 
+      map {
+	  if (my ($version, $ext) = /vmlinuz-((?:[\-.\d]*(?:mdk)?)*)(.*)/) {
+	      [ "$version$ext", $version, $ext ];
+	  } else {
+	      log::l("non recognised kernel name $_");
+	      ();
+	  }
+      } @kernels;
+
+    my %majors;
+    foreach (@kernels) {
+	push @{$majors{$1}}, $_ if $_->[1] =~ /^(2\.\d+)/
+    }
+    while (my ($major, $l) = each %majors) {
+	$l->[0][1] = $major if @$l == 1;
+    }
+
+    my %labels;
+    foreach (@kernels) {
+	my ($complete_version, $version, $ext) = @$_;
+	my $label = '';
+	if (exists $labels{$label}) {
+	    $label = "-$ext";
+	    if (!$ext || $labels{$label}) {
+		$label = "-$version$ext";
+	    }
+	}
+	$labels{$label} = $complete_version;
+    }
+    %labels;
+}
+
 sub suggest {
-    my ($prefix, $lilo, $hds, $fstab, $kernelVersion, $vga_fb) = @_;
+    my ($prefix, $lilo, $hds, $fstab, $vga_fb) = @_;
     my $root_part = fsedit::get_root($fstab);
     my $root = isLoopback($root_part) ? "loop7" : $root_part->{device};
     my $boot = fsedit::get_root($fstab, 'boot')->{device};
@@ -273,76 +317,22 @@ wait %d seconds for default boot.
     add2hash_($lilo, { getVarsFromSh("$prefix/etc/sysconfig/system") }); #- for CLEAN_TMP
     add2hash_($lilo, { memsize => $1 }) if cat_("/proc/cmdline") =~ /mem=(\S+)/;
 
-    #- give more priority to secure kernel because if the user want security, he will got it...
-    my $isSecure = -e "$prefix/boot/vmlinuz-${kernelVersion}secure";
-    my $isEnterprise = -e "$prefix/boot/vmlinuz-${kernelVersion}enterprise";
+    my %labels = get_kernels_and_labels($prefix);
+    $labels{''} or die "no kernel installed";
 
-    my $isSMP = detect_devices::hasSMP();
-    if ($isSMP && !-e "$prefix/boot/vmlinuz-${kernelVersion}smp") {
-	log::l("SMP machine, but no SMP kernel found") unless $isSecure;
-	$isSMP = 0;
-    }
-    my $entry = add_kernel($prefix, $lilo, $kernelVersion,
-			   $isSecure ? 'secure' : $isEnterprise ? 'enterprise' : $isSMP ? 'smp' : '',
+    while (my ($ext, $version) = each %labels) {
+	my $entry = add_kernel($prefix, $lilo, $version, $ext, $root,
 	       {
-		label => 'linux',
-		root  => "/dev/$root",
-		if_($vga_fb, vga => $vga_fb), #- using framebuffer
+		if_($vga_fb && $ext eq '', vga => $vga_fb), #- using framebuffer
 	       });
-    add_kernel($prefix, $lilo, $kernelVersion, '',
-	       {
-		label => $isSecure || $isEnterprise || $isSMP ? 'linux-up' : 'linux-nonfb',
-		root  => "/dev/$root",
-	       }) if $isSecure || $isEnterprise || $isSMP || $vga_fb;
-    my $failsafe = add_kernel($prefix, $lilo, $kernelVersion, '',
-	       {
-		label => 'failsafe',
-		root  => "/dev/$root",
-	       });
-    $entry->{append} .= " quiet" if $vga_fb && !$isSMP && !$isEnterprise;
-    $failsafe->{append} .= " failsafe" if $failsafe && !$lilo->{password};
+	$entry->{append} .= " quiet" if $vga_fb && $version !~ /smp|enterprise/;
 
-    #- manage prioritary default kernel (given as /boot/vmlinuz-default).
-    if (-e "$prefix/boot/vmlinuz-default") {
-	#- we use directly add_entry as no initrd should be done.
-	add_entry($lilo->{entries},
-		  {
-		   type => 'image',
-		   label => 'default',
-		   root  => "/dev/$root",
-		   kernel_or_dev => '/boot/vmlinuz-default',
-		   append => $lilo->{perImageAppend},
-		  });
-	$lilo->{default} = 'default'; #- this one should be booted by default now.
-    }
-
-    #- manage older kernel if installed.
-    foreach (qw(2.2 hack)) {
-	my $f = "$prefix/boot/vmlinuz-$_";
-	if (-e $f) {
-	    my $oldVersion = first(readlink($f) =~ /vmlinuz-(.*mdk)/);
-	    my $oldSecure = -e "$prefix/boot/vmlinuz-${oldVersion}secure";
-	    my $oldSMP = -e "$prefix/boot/vmlinuz-${oldVersion}smp";
-
-	    add_kernel($prefix, $lilo, $oldVersion, $_ . ($oldSecure ? 'secure' : $oldSMP ? 'smp' : ''),
-		       {
-			label => "linux-$_",
-			root  => "/dev/$root",
-			$vga_fb ? ( vga => $vga_fb) : (), #- using framebuffer
-		       });
-	    add_kernel($prefix, $lilo, $oldVersion, $_,
-		       {
-			label => $oldSecure || $oldSMP ? "linux-${_}up" : "linux-${_}nonfb",
-			root  => "/dev/$root",
-		       }) if $oldSecure || $oldSMP || $vga_fb;
-	    my $entry = add_kernel($prefix, $lilo, $oldVersion, $_,
-		       {
-			label => "failsafe-$_",
-			root  => "/dev/$root",
-		       });
-	    $entry->{append} .= " failsafe" if $entry && !$lilo->{password};
+	if ($vga_fb && $ext eq '') {
+	    add_kernel($prefix, $lilo, $version, $ext, $root, { label => 'linux-nonfb' });
 	}
     }
+    my $failsafe = add_kernel($prefix, $lilo, $labels{''}, '', $root, { label => 'failsafe' });
+    $failsafe->{append} .= " failsafe";
 
     if (arch() =~ /sparc/) {
 	#- search for SunOS, it could be a really better approach to take into account
