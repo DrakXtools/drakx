@@ -89,6 +89,11 @@ sub read_fstab {
 	    } else {
 		$h->{device} = $dev;
 	    }
+
+	    if ($h->{device} =~ m!/(disc|part\d+)$!) {
+		$h->{devfs_device} = $h->{device};
+		$h->{prefer_devfs_name} = 1;
+	    }
 	}
 
 	if ($h->{options} =~ /credentials=/ && !member('verbatim_credentials', @reading_options)) {
@@ -214,7 +219,7 @@ sub prepare_write_fstab {
 	my $device = 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : $_->{loopback_device}{mntpoint}) . $_->{loopback_file} :
-	  part2device($o_prefix, $_->{device}, $_->{type});
+	  part2device($o_prefix, $_->{prefer_devfs_name} ? $_->{devfs_device} : $_->{device}, $_->{type});
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;

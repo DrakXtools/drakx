@@ -320,7 +320,8 @@ sub is_same_hd {
 	my ($s2) = $hd2->{device} =~ m|https?://(.+?)/*$|;
 	$s1 eq $s2;
     } else {
-	$hd1->{device} eq $hd2->{device};
+	$hd1->{devfs_device} && $hd2->{devfs_device} && $hd1->{devfs_device} eq $hd2->{devfs_device}
+	  || $hd1->{device} eq $hd2->{device};
     }
 }
 

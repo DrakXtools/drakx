@@ -78,7 +78,11 @@ sub device_name_to_entry {
 	$e->{device} = ($e->{prefix} || $e->{device}) . $nb;
     }
     $e ||= {};
-    $e->{device} = $name; #- keeping the exact name given (often is the devfs name)
+    if ($e->{devfs_device} eq $name) {
+	$e->{prefer_devfs_name} = 1;
+    } else {
+	$e->{device} = $name; #- keeping the exact name given (often is the devfs name)
+    }
     $e;
 }
 
