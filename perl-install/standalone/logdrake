@@ -341,6 +341,7 @@ sub log_output {
 #-------------------------------------------------------------
 
 sub alert_config() {
+    local $::isEmbedded = 0;
     my $conffile = "/etc/sysconfig/mail_alert";
     my %options = getVarsFromSh($conffile);
     $options{LOAD} ||= 3;
