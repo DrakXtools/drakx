@@ -836,7 +836,7 @@ sub new {
 	    $::WizardWindow->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
 
 	    if ($::isInstall) {
-		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.73 : 0.9));
+		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.8 : 0.9));
 		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04 + ($::move && 50), $::logoheight + $::windowheight * ($::logoheight ? 0.12 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
