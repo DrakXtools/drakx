@@ -153,7 +153,7 @@ sub write_resolv_conf {
 }
 
 sub write_interface_conf {
-    my ($file, $intf, $_netc, $prefix) = @_;
+    my ($file, $intf, $netc, $prefix) = @_;
 
     if ($intf->{HWADDR} && -e "$prefix/sbin/ip") {
 	$intf->{HWADDR} = undef;
@@ -174,7 +174,11 @@ sub write_interface_conf {
 
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/;
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME)));
+    my %cards = map { $_->[0] => $_->[1] } network::ethernet::conf_network_card_backend($netc, $intf);
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR MII_NOT_SUPPORTED), 
+                if_(is_wireless_intf($intf, $cards{$intf->{DEVICE}}), qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)),
+                if_($intf->{BOOTPROTO} eq "dhcp", qw(DHCP_HOSTNAME NEEDHOSTNAME))
+               );
     log::explanations("written $intf->{DEVICE} interface configuration in $file");
 }
 
