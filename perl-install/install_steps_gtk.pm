@@ -364,7 +364,7 @@ sub choosePackagesTree {
 		    0, _("Choose the packages you want to install"),
 		    1, gtkpack(new Gtk::HBox(0,0),
 			       createScrolledWindow($tree),
-			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), 150, 0),
+			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), $::windowwidth - 490, 0),
 				      createScrolledWindow($info_widget = new Gtk::Text),
 				     )),
 		    0, my $l = new Gtk::HBox(0,15),
