@@ -47,9 +47,10 @@ my $isTail = 1 if $isFile;
 $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
-my $my_win = ugtk2->new('logdrake');
+my $explain_title = N("Mandrake Tools Explanation");
+my $my_win = ugtk2->new($isExplain ? $explain_title : N("Logdrake"));
+
 unless ($::isEmbedded) {
-    $my_win->{rwindow}->set_title(N("logdrake"));
     $my_win->{window}->set_border_width(5);
     #$my_win->{window}->set_default_size(540,460);
 }
@@ -111,7 +112,7 @@ my %files = (
 	     "user" => { file => "/var/log/user.log", desc => N("User") },
 	     "messages" => { file => "/var/log/messages", desc => N("Messages") },
 	     "syslog" => { file => "/var/log/syslog", desc => N("Syslog") },
-	     "explanations" => { file => "/var/log/explanations", desc => N("Mandrake Tools Explanation") }
+	     "explanations" => { file => "/var/log/explanations", desc => $explain_title }
 );
 
 my $yy = gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("search")) , clicked => \&search),0);
