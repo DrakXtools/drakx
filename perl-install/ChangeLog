@@ -1,3 +1,76 @@
+2005/04/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* detect_devices.pm: getNet(): only up wireless devices
+
+2005/04/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/fr.po: updated French and Italian files
+
+	* share/po/de.po: updated German file
+
+2005/04/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: /me sux
+	Don't ask for the same cd to be reinserted when copying rpms on disk
+	Introduce the new utility function getCDNumber()
+
+	* install_steps_gtk.pm: Introduce the new utility function getCDNumber()
+
+2005/04/04  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: small fix in /boot/message-text
+
+2005/04/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* pixmaps/langs/lang-qu.png, lang.pm: Enabled choice of Guarani, Quichua
+	and Berber (tifinagh) at install time;
+	changed various encoding names internally used for font choosing from
+	language based to encoding based (following iso-15924 naming)
+
+2005/04/03  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: add /usr/local and /opt to suggestions_mntpoints
+
+2005/04/03  Thomas Backlund  <tmb at mandrake.org>
+
+	* share/po/fi.po: Updated Translations, fully translated, was 93 fuzzy, 67
+	untranslated.
+
+2005/04/02  mareklaane
+
+	* share/po/et.po: Updated translation (supermount=automaatne haakimine).
+
+2005/04/02  mbukovjan
+
+	* share/po/cs.po: Updated Czech translation.
+
+2005/04/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sl.po, share/po/es.po, share/po/vi.po, share/po/wa.po: updated
+	Spanish, Slovenian, Vietnamese and Walloon files
+
+	* share/po/ja.po: updated Japanese file
+
+2005/04/02  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/04/02  willysr
+
+	* share/po/id.po: Updated
+
+2005/04/01  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/04/01  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2005/04/01  tsdgeos
+
+	* share/po/ca.po: small update
+
 2005/04/01  José JORGE <jjorge at free.fr>
 
 	* share/po/pt.po: jorge
@@ -48052,7 +48125,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1026 2005/03/31 15:50:28 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1027 2005/04/01 21:41:54 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
