@@ -968,15 +968,15 @@ sub upNetwork {
 
 #------------------------------------------------------------------------------
 sub downNetwork {
-    my ($o, $pppOnly) = @_;
+    my ($o, $costlyOnly) = @_;
 
     modules::write_conf($o->{prefix});
     if (hasNetwork($o)) {
-	if (!$pppOnly && $o->{netc}{type} =~ /adsl|lan|cable/) {
+	if (!$costlyOnly) {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    return 1;
-	} else {
+	} elsif ($o->{netc}{type} !~ /adsl|lan|cable/) {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");
