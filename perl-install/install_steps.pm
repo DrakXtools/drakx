@@ -10,19 +10,11 @@ use common qw(:file :system :common :functional);
 use install_any qw(:all);
 use partition_table qw(:types);
 use detect_devices;
-use timezone;
-use Xconfig;
-use Xconfigurator;
 use modules;
-use class_discard;
 use run_program;
-use crypto;
-use lilo;
 use lang;
 use raid;
 use keyboard;
-use printer;
-use pkgs;
 use log;
 use fsedit;
 use commands;
@@ -193,6 +185,7 @@ sub beforeInstallPackages {
     my ($o) = @_;
 
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
+    require pkgs;
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
@@ -327,6 +320,8 @@ sub installCrypto {
 	open F, "$dir/$_[0]" or return;
 	*F;
     };
+    require crypto;
+    require pkgs;
     while (crypto::get($u->{mirror}, $dir, 
 		       grep { !$done{$_} && ($done{$_} = $u->{packages}{$_}) } %{$u->{packages}})) {
 	$packages = pkgs::psUsingDirectory($dir);
@@ -359,6 +354,7 @@ sub pcmciaConfig($) {
 #------------------------------------------------------------------------------
 sub timeConfig {
     my ($o, $f) = @_;
+    require timezone;
     timezone::write($o->{prefix}, $o->{timezone}, $f);
 }
 
@@ -368,7 +364,8 @@ sub servicesConfig {}
 sub printerConfig {
     my($o) = @_;
     if ($o->{printer}{complete}) {
-
+	require printer;
+	require pkgs;
 	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
 	$o->installPackages($o->{packages});
 
@@ -465,6 +462,7 @@ sub createBootdisk($) {
 
     return if $::testing;
 
+    require lilo;
     lilo::mkbootdisk($o->{prefix}, install_any::kernelVersion(), $dev);
     $o->{mkbootdisk} = $dev;
 }
@@ -473,6 +471,7 @@ sub createBootdisk($) {
 sub readBootloaderConfigBeforeInstall {
     my ($o) = @_;
     my ($image, $v);
+    require lilo;
     add2hash($o->{bootloader} ||= {}, lilo::read($o->{prefix}, "/etc/lilo.conf"));
 
     #- since kernel or kernel-smp may not be upgraded, it should be checked
@@ -502,6 +501,7 @@ sub readBootloaderConfigBeforeInstall {
 sub setupBootloaderBefore {
     my ($o) = @_;
     $o->{bootloader}{perImageAppend} = "mem=$o->{miscellaneous}{memsize}" if $o->{miscellaneous}{memsize};
+    require lilo;
     lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
     $o->{bootloader}{keytable} ||= keyboard::kmap($o->{keyboard});
 }
@@ -518,6 +518,7 @@ sub setupXfreeBefore {
     $o->{X}{keyboard}{xkb_keymap} ||= keyboard::keyboard2xkb($o->{keyboard});
     $o->{X}{mouse} = $o->{mouse};
 
+    require Xconfig;
     Xconfig::getinfoFromDDC($o->{X});
 
     #- keep this here if the package has to be updated.
@@ -527,6 +528,8 @@ sub setupXfree {
     my ($o) = @_;
     $o->setupXfreeBefore;
 
+    require Xconfigurator;
+    require class_discard;
     { local $::testing = 0; #- unset testing
       local $::auto = 1;
       local $::skiptest = 1;

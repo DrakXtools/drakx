@@ -10,18 +10,15 @@ use common qw(:common :functional);
 use log;
 
 
-#-#####################################################################################
-#- Globals
-#-#####################################################################################
-my %modparm_hash;
 
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub read_modparm_file($) {
-  my ($file) = @_;
+sub read_modparm_file {
+  my $file = -e "modparm.lst" ? "modparm.lst" : "/usr/share/modparm.lst";
   my @line;
 
+  my %modparm_hash;
   local *F;
   open F, $file or log::l("missing $file: $!"), return;
   foreach (<F>) {
@@ -34,24 +31,25 @@ sub read_modparm_file($) {
 					 desc => $line [4],
 					};
   }
+  \%modparm_hash;
 }
 
 sub get_options_result($@) {
   my ($module, @value) = @_;
+  my $modparm_hash = modparm::read_modparm_file;
 
   mapn {
       my ($a, $b) = @_;
       $a ? "$b=$a" : ()
-  } \@value, [ keys %{$modparm_hash{$module}} ];
+  } \@value, [ keys %{$modparm_hash->{$module}} ];
 }
 
 sub get_options_name($) {
   my ($module) = @_;
   my @names;
+  my $modparm_hash = modparm::read_modparm_file;
 
-  %modparm_hash or return;
-
-  while (my ($k, $v) = each %{$modparm_hash{$module} || {}}) {
+  while (my ($k, $v) = each %{$modparm_hash->{$module} || {}}) {
        my $opttype = $v->{type};
        my $default = $v->{default};
        push @names, "$k ($v->{type})" . (defined($v->{default}) && "[$v->{default}]");

@@ -18,19 +18,14 @@ use commands;
 use network;
 use lang;
 use keyboard;
-use lilo;
 use mouse;
 use fs;
 use raid;
-use timezone;
 use fsedit;
 use devices;
 use partition_table qw(:types);
-use pkgs;
-use printer;
 use modules;
 use detect_devices;
-use modparm;
 use run_program;
 
 use install_steps;
@@ -38,8 +33,12 @@ use install_steps;
 #-######################################################################################
 #- Steps table
 #-######################################################################################
-my @installStepsFields = qw(text redoable onError hidden needs entered reachable toBeDone help next done);
-my @installSteps = (
+
+my (%installSteps, @orderedInstallSteps);
+{    
+    my @installStepsFields = qw(text redoable onError hidden needs); 
+    #entered reachable toBeDone help next done;
+    my @installSteps = (
   selectLanguage     => [ __("Choose your language"), 1, 1, '' ],
   selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
   setupSCSI          => [ __("Setup SCSI"), 1, 0, '' ],
@@ -63,23 +62,19 @@ my @installSteps = (
   configureX         => [ __("Configure X"), 1, 0, '', ["formatPartitions", "setupBootloader"] ],
   exitInstall        => [ __("Exit install"), 0, 0, 'beginner' ],
 );
-
-my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
-
-for (my $i = 0; $i < @installSteps; $i += 2) {
-    my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
-    $h{help}    = $help::steps{$installSteps[$i]} || __("Help");
-    $h{previous}= $installSteps[$i - 2] if $i >= 2;
-    $h{next}    = $installSteps[$i + 2];
-    $h{entered} = 0;
-    $h{onError} = $installSteps[$i + 2 * $h{onError}];
-    $h{reachable} = !$h{needs};
-    $installSteps{ $installSteps[$i] } = \%h;
-    push @orderedInstallSteps, $installSteps[$i];
+    for (my $i = 0; $i < @installSteps; $i += 2) {
+	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
+	$h{help}    = $help::steps{$installSteps[$i]} || __("Help");
+	$h{previous}= $installSteps[$i - 2] if $i >= 2;
+	$h{next}    = $installSteps[$i + 2];
+	$h{entered} = 0;
+	$h{onError} = $installSteps[$i + 2 * $h{onError}];
+	$h{reachable} = !$h{needs};
+	$installSteps{ $installSteps[$i] } = \%h;
+	push @orderedInstallSteps, $installSteps[$i];
+    }
+    $installSteps{first} = $installSteps[0];
 }
-
-$installSteps{first} = $installSteps[0];
-
 #-#####################################################################################
 #-INTERN CONSTANT
 #-#####################################################################################
@@ -92,7 +87,7 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #-#####################################################################################
 #- partition layout
 my %suggestedPartitions = (
-  normal => my $b = [
+  normal => [
     { mntpoint => "/boot", size =>  10 << 11, type => 0x83, maxsize => 30 << 11 },
     { mntpoint => "/",     size => 300 << 11, type => 0x83, ratio => 5, maxsize => 1500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
@@ -186,8 +181,6 @@ $o = $::o = {
 #-    display => "192.168.1.19:1",
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
-
-    crypto => { mirror => "leia" },
 
     base => [ qw(basesystem sed initscripts console-tools mkbootdisk utempter ldconfig chkconfig ntsysv setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep gzip hdparm info initscripts isapnptools kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setserial shadow-utils sh-utils stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which perl-base msec) ],
 #-GOLD    base => [ qw(basesystem sed initscripts console-tools mkbootdisk anacron utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash ash setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
@@ -334,6 +327,7 @@ sub formatPartitions {
 
 #------------------------------------------------------------------------------
 sub choosePackages {
+    require pkgs;
     $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
     unless ($o->{isUpgrade}) {
@@ -388,6 +382,7 @@ sub configureTimezone {
     my ($clicked) = @_;
     my $f = "$o->{prefix}/etc/sysconfig/clock";
 
+    require timezone;
     if ($o->{isUpgrade} && -r $f && -s $f > 0) {
 	return if $_[1] == 1 && !$clicked;
 	#- can't be done in install cuz' timeconfig %post creates funny things
@@ -523,13 +518,14 @@ sub main {
     #-  make sure we don't pick up any gunk from the outside world
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin" unless $::g_auto_install;
 
+    $o->{interactive} ||= 'gtk';
     if ($o->{interactive} eq "gtk" && availableMemory < 24 * 1024) {
 	log::l("switching to newt install cuz not enough memory");
 	$o->{interactive} = "newt";
     }
 
     if ($::auto_install) {
-	require 'install_steps_auto_install.pm';
+	require install_steps_auto_install;
 	eval { $o = $::o = install_any::loadO($o, "floppy") };
 	if ($@) {
 	    log::l("error using auto_install, continuing");
@@ -570,7 +566,6 @@ sub main {
     modules::load_deps("/modules/modules.dep");
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
-    modparm::read_modparm_file(-e "modparm.lst" ? "modparm.lst" : "/usr/share/modparm.lst");
 
     #-the main cycle
     my $clicked = 0;

@@ -22,9 +22,7 @@ use devices;
 use fsedit;
 use network;
 use modules;
-use lilo;
 use detect_devices;
-use pkgs;
 use fs;
 use log;
 
@@ -43,10 +41,10 @@ sub relGetFile($) {
 sub getFile($) {
     local $^W = 0;
     if ($::o->{method} && $::o->{method} eq "ftp") {
-	require 'ftp.pm';
+	require ftp;
 	*install_any::getFile = \&ftp::getFile;
     } elsif ($::o->{method} && $::o->{method} eq "http") {
-	require 'http.pm';
+	require http;
 	*install_any::getFile = \&http::getFile;
     } else {
 	*install_any::getFile = sub($) {
@@ -113,6 +111,7 @@ sub getAvailableSpace {
 sub setPackages($) {
     my ($o) = @_;
 
+    require pkgs;
     if (is_empty_hash_ref($o->{packages})) {
 	my $useHdlist = $o->{method} !~ /nfs|hd/ || $o->{isUpgrade};
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
@@ -120,7 +119,8 @@ sub setPackages($) {
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
+	push @{$o->{default_packages}}, "kernel-secure" if $o->{security} > 3;
+	push @{$o->{default_packages}}, "kernel-smp" if $o->{security} <= 3 && detect_devices::hasSMP(); #- no need for kernel-smp if we have kernel-secure which is smp
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if !is_empty_hash_ref($o->{raid});
 
@@ -152,6 +152,7 @@ sub setPackages($) {
 sub selectPackagesToUpgrade($) {
     my ($o) = @_;
 
+    require pkgs;
     pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base});
 }
 
@@ -355,32 +356,36 @@ sub setupFB {
     my ($o, $vga) = @_;
 
     #- install needed packages for frame buffer.
+    require pkgs;
     pkgs::select($o->{packages}, $o->{packages}{'kernel-fb'});
     pkgs::select($o->{packages}, $o->{packages}{'XFree86-FBDev'});
     $o->installPackages($o->{packages});
 
     $vga ||= 785; #- assume at least 640x480x16.
 
+    require lilo;
     #- update lilo entries with a new fb label. a bit hack unless
     #- a frame buffer kernel is used, in such case we use it instead
     #- with the right mode, nothing more to do.
-    if ($o->{bootloader}{entries}{'/boot/vmlinuz-smp'}) {
-	$o->{bootloader}{entries}{'/boot/vmlinuz-smp'}{vga} = $vga;
+    foreach (qw(secure smp)) {
+	if ($o->{bootloader}{entries}{"/boot/vmlinuz-$_"}) {
+	    $o->{bootloader}{entries}{"/boot/vmlinuz-$_"}{vga} = $vga;
+	    lilo::install($o->{prefix}, $o->{bootloader});
+	    return 1;
+	}
+    }
+    my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
+    if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
+			 {
+			  label => 'linux-fb',
+			  root => $root,
+			  vga => $vga,
+			 })) {
+	$o->{bootloader}{default} = 'linux-fb';
 	lilo::install($o->{prefix}, $o->{bootloader});
     } else {
-	my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
-	if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
-			     {
-			      label => 'linux-fb',
-			      root => $root,
-			      vga => $vga,
-			     })) {
-	    $o->{bootloader}{default} = 'linux-fb';
-	    lilo::install($o->{prefix}, $o->{bootloader});
-	} else {
-	    log::l("unable to install kernel with frame buffer support, disabling");
-	    return 0;
-	}
+	log::l("unable to install kernel with frame buffer support, disabling");
+	return 0;
     }
     1;
 }
@@ -396,7 +401,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
@@ -446,6 +451,7 @@ sub loadO {
 
 sub pkg_install {
     my ($o, $name) = @_;
+    require pkgs;
     pkgs::select($o->{packages}, $o->{packages}{$name} || die "$name rpm not found");
     install_steps::installPackages ($o, $o->{packages});
 }

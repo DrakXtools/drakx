@@ -3,7 +3,6 @@ package modules;
 use vars qw(%loaded %drivers);
 
 use common qw(:common :file);
-use pci_probing::main;
 use detect_devices;
 use run_program;
 use log;
@@ -399,6 +398,7 @@ sub read_stage1_conf {
 sub load_thiskind($;&$) {
     my ($type, $f, $pcic) = @_;
 
+    require pci_probing::main;
     my @pcidevs = pci_probing::main::probe($type);
     log::l("pci probe found " . scalar @pcidevs . " $type devices");
 

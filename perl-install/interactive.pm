@@ -40,12 +40,12 @@ sub new($) {
 
 sub vnew {
     if (c::Xtest($ENV{DISPLAY} ||= ":0")) {
-	require 'interactive_gtk.pm';
+	require interactive_gtk;
 	interactive_gtk->new;
     } else {
 	undef *log::l;
 	*log::l = sub {}; # otherwise, it will bother us :(
-	require 'interactive_newt.pm';
+	require interactive_newt;
 	interactive_newt->new;
     }
 }

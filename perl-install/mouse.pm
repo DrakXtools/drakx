@@ -8,7 +8,6 @@ use strict;
 #-######################################################################################
 use common qw(:common :system :functional :file);
 use modules;
-use pci_probing::main;
 use detect_devices;
 use run_program;
 use devices;
@@ -117,6 +116,7 @@ sub detect() {
     #- @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
     #- modules::unload("serial");
 
+    require pci_probing::main;
     if (my ($c) = pci_probing::main::probe("serial_usb")) {
 	eval { modules::load($c->[1], "serial_usb") };
 	sleep(1);

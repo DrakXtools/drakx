@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isRAID) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -174,6 +174,7 @@ sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1 }}{$_[0]{type}} }
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
+sub isSupermount($) { $_[0]{type} eq 'supermount' }
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;

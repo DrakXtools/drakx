@@ -13,28 +13,20 @@ use vars qw(@ISA $global_wait);
 use common qw(:common :file :functional :system);
 use partition_table qw(:types);
 use install_steps;
-use pci_probing::main;
-use Xconfig;
-use Xconfigurator;
 use install_any;
 use detect_devices;
-use timezone;
 use run_program;
 use commands;
 use fsedit;
 use network;
-use crypto;
 use raid;
 use mouse;
 use modules;
 use lang;
-use pkgs;
 use keyboard;
 use fs;
-use modparm;
 use log;
-use printerdrake;
-use lilo;
+
 #-######################################################################################
 #- In/Out Steps Functions
 #-######################################################################################
@@ -237,6 +229,7 @@ sub selectPackagesToUpgrade {
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers) = @_;
 
+    require pkgs;
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
 			       [ keys %$compssUsers ],
@@ -262,7 +255,7 @@ sub installPackages {
 	    $total = $_[2];
 	} elsif ($m =~ /^Starting installing package/) {
 	    my $name = $_[0];
-	    $w->set(_("Installing package %s\n%d%%", $name, 100 * $current / $total));
+	    $w->set(_("Installing package %s\n%d%%", $name, $total && 100 * $current / $total));
 	    $current += c::headerGetEntry($o->{packages}{$name}{header}, 'size');
 	} else { unshift @_, $m; goto $old }
     };
@@ -419,8 +412,9 @@ sub installCrypto {
 "Do you want to download cryptographic packages?
 (! !)
   ") || return;
-    
-    $u->{mirror} = crypto::text2mirror($o->ask_from_list('', _("Choose a mirror from which to get the packages"), [ crypto::mirrorstext ], crypto::mirror2text($u->{mirror})));
+
+    require crypto;
+    $u->{mirror} = crypto::text2mirror($o->ask_from_list('', _("Choose a mirror from which to get the packages"), [ crypto::mirrorstext() ], crypto::mirror2text($u->{mirror})));
     
     my @packages = do {
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
@@ -437,6 +431,7 @@ sub installCrypto {
 sub timeConfig {
     my ($o, $f, $clicked) = @_;
 
+    require timezone;
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{timezone} = $o->ask_from_list('', _("Which is your timezone?"), [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT}) if $::expert || $clicked;
@@ -454,6 +449,7 @@ sub printerConfig($) {
 		      $o->{printer}{want});
     return if !$o->{printer}{want};
 
+    require printerdrake;
     printerdrake::main($o->{prefix}, $o->{printer}, $o, sub { install_any::pkg_install($o, $_[0]) });
 }
 
@@ -761,6 +757,8 @@ sub setupXfree {
     my ($o) = @_;
     $o->setupXfreeBefore;
 
+    require Xconfig;
+    require Xconfigurator;
     #- by default do not use existing configuration, so new card will be detected.
     if ($o->{isUpgrade} && -r "$o->{prefix}/etc/X11/XF86Config") {
 	unless ($::beginner || !$o->ask_yesorno('', _("Use existing configuration for X11?"), 0)) {
@@ -833,6 +831,7 @@ sub load_module {
 			      [ modules::text_of_type($type) ]) or return;
     my $m = modules::text2driver($l);
 
+    require modparm;
     my @names = modparm::get_options_name($m);
 
     if ((@names != 0) && $o->ask_from_list_('',
@@ -903,6 +902,7 @@ sub setup_thiskind {
 	    push @l, \@r;
 	} else {
 	    eval { commands::modprobe("isapnp") };
+	    require pci_probing::main;
 	    $o->ask_warn('', [ pci_probing::main::list(), scalar cat_("/proc/isapnp") ]);
 	}
     }

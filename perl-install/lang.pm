@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:file);
+use common qw(:common :file :system);
 use commands;
 use log;
 
@@ -67,6 +67,23 @@ my %languages = (
 'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN', 'zh_CN.gb2312:zh' ],	
 );
 
+my %xim = (
+  'zh_TW.Big5' => { 
+	ENC => 'big5',
+	XIM => 'xcin',
+	XMODIFIERS => '"@im=xcin"',
+  },
+  'zh_CN' => {
+	ENC => 'gb',
+	XIM => 'xcin-zh_CN.GB2312',
+	XMODIFIERS => '"@im=xcin-zh_CN.GB2312"',
+  },
+  'ko' => {
+	XIM => 'ami',
+	XMODIFIERS => '"@im=ami"',
+  },
+);
+
 sub std2 { "-mdk-helvetica-medium-r-normal-*-*-$_[1]-*-*-*-*-$_[0]" }
 sub std_ { std2($_[0], 100), std2($_[0], 100) }
 sub std  { std2($_[0], 100), std2($_[0],  80) }
@@ -74,9 +91,9 @@ sub std  { std2($_[0], 100), std2($_[0],  80) }
 my %charsets = (
   "armscii-8"  => [ "arm8",		"armscii8", std_("armscii-8") ],
 #- chinese needs special console driver for text mode
-  "Big5"       => [ "?????",            "????",
+  "Big5"       => [ undef,            undef,
 	"-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
-  "gb2312"     => [ "?????",            "????",
+  "gb2312"     => [ undef,            undef,
         "-isas-song ti-medium-r-normal--16-*-*-*-*-*-gb2312.1980-0" ],
   "iso-8859-1" => [ "lat0-sun16",	"iso15", std("iso8859-1") ],
   "iso-8859-2" => [ "lat2-sun16",	"iso02", std("iso8859-2") ],
@@ -91,18 +108,18 @@ my %charsets = (
 #- (and gtk support isn't done yet)
   "iso-8859-8" => [ "iso08.f16",	"iso08", std_("iso8859-8") ],
   "iso-8859-9" => [ "lat5-16",		"iso09", std("iso8859-9") ],
-  "iso-8859-13" => [ "??????",		"?????", std_("iso8859-13") ],
-  "iso-8859-14" => [ "??????",		"?????", std_("iso8859-14") ],
+  "iso-8859-13" => [ "??????",		undef,   std_("iso8859-13") ],
+  "iso-8859-14" => [ "??????",		undef,   std_("iso8859-14") ],
   "iso-8859-15" => [ "lat0-sun16",	"iso15", std("iso8859-15") ],
 #- japanese needs special console driver for text mode [kon2]
-  "jisx0208"   => [ "????",		"????", 
+  "jisx0208"   => [ undef,		undef, 
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
   "koi8-r"     => [ "Cyr_a8x16",	"koi2alt", std("koi8-r") ],
   "koi8-u"     => [ "ruscii_8x16",	"koi2alt", std("koi8-u") ],
 #- korean needs special console driver for text mode
-  "ksc5601"    => [ "?????",            "?????",
+  "ksc5601"    => [ undef,            undef,
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
-  "tis620"     => [ "????",		"????", std2("tis620.2533-1",120) ],
+  "tis620"     => [ undef,		undef,  std2("tis620.2533-1",120) ],
   "tcvn"       => [ "tcvn8x16",		"tcvn", std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
   "viscii"     => [ "viscii10-8x16",	"viscii",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
@@ -144,20 +161,14 @@ sub write {
     my $lang = $ENV{LC_ALL};
 
     $lang or return;
-    local *F;
-    open F, "> $prefix/etc/sysconfig/i18n" or die "failed to reset $prefix/etc/sysconfig/i18n for writing";
-    my $f = sub { $_[1] and print F "$_[0]=$_[1]\n"; };
 
-    &$f("LC_ALL", $lang);
+    my $h = { LC_ALL => $lang };
     if (my $l = $languages{$lang}) {
-	&$f("LANG", $l->[2]);
-	&$f("LANGUAGE", $l->[3]);
-	&$f("LINGUAS", $l->[3]);
+	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[2], LINGUAS => $l->[3] };
 
-	$l->[1] or return;
-	if (my $c = $charsets{$l->[1]}) {
-	    &$f("SYSFONT", $c->[0]);
-	    &$f("SYSFONTACM", $c->[1]);
+	my $c = $charsets{$l->[1] || ''};
+	if ($c && $c->[0] && $c->[1]) {	    
+	    add2hash $h, { SYSFONT => $c->[0], SYSFONTACM => $c->[1] };
 
 	    my $p = "$prefix/usr/lib/kbd";
 	    commands::cp("-f",
@@ -165,7 +176,9 @@ sub write {
 		     glob_("$p/consoletrans/$c->[1]*"),
 		     "$prefix/etc/sysconfig/console");
 	}
+	add2hash $h, $xim{$lang};
     }
+    setVarsInSh("$prefix/etc/sysconfig/i18n", $h);
 }
 
 sub load_po($) {

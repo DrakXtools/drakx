@@ -19,16 +19,12 @@ use fsedit;
 use keyboard;
 use network;
 use modules;
-use printer;
 use install_steps;
 use run_program;
 use install_steps_interactive;
-use Xconfigurator;
-use Xconfig;
 use interactive_gtk;
 use install_any;
 use diskdrake;
-use pkgs;
 use log;
 use help;
 use lang;
@@ -269,6 +265,7 @@ sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
 
     if ($::beginner) {	
+	require pkgs;
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
     } else {
 	install_steps_interactive::choosePackages(@_);
@@ -499,7 +496,7 @@ sub installPackages {
     my $w = my_gtk->new(_("Installing"), grab => 1);
     $w->{window}->set_usize($windowwidth * 0.8, $windowheight * 0.5);
     my $text = new Gtk::Label;
-    my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label } '', (_("Estimating")) x 2;
+    my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
     gtkadd($w->{window}, gtkadd(new Gtk::EventBox,
 				gtkpack(new Gtk::VBox(0,10),
@@ -540,8 +537,8 @@ sub installPackages {
 
 	    $progress_total->update($ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 2 * 1024 * 1024) {
-		$msg_time_total->set(formatTime($total_time));
-		$msg_time_remaining->set(formatTime(max($total_time - $dtime, 0)));
+		$msg_time_total->set(formatTime(10 * round($total_time / 10)));
+		$msg_time_remaining->set(formatTime(10 * round(max($total_time - $dtime, 0) / 10)));
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;
