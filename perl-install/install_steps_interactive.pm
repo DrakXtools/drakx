@@ -267,17 +267,17 @@ sub choosePackages {
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::selectedSize($packages);
 
-#	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
+	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
 	my $max_size = int (sum map { pkgs::packageSize($_) } values %{$packages->[0]});
 
-	 if (0 && !$::beginner && $max_size > $available) {
+	 if (!$::beginner && $max_size > $available) {
 	     $o->ask_okcancel('', 
 _("You need %dMB for a full install of the groups you selected.
 You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 	 }
 
-	 my $size2install = 1 || $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
+	 my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
 
 	 ($o->{packages_}{ind}) = 
 	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
