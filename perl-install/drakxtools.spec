@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.34mdk
+Release: 0.35mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,37 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar  2 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.35mdk
+- drakboot (pixel):
+  o fix  corrupted "Precise RAM size" field (#13874)
+  o handle boot-as and master-boot (#13846)
+- drakconnect:
+  o workaround buggy kernel (#12609)
+- net_applet: refresh every second, and do not reread network conf on
+  each refresh (blino, #11467)
+- printerdrake:
+  o add possibility to add a remote LPD printer in beginner's mode (#13734)
+  o fix incorrect display of accentuated characters in PPD options
+    also for boolean options (#13928)
+  o let detected LPD printer model be shown in a pop-up window and not
+    in the add printer wizard
+  o let detected socket printer model be shown if the IP/port was
+    manually entered
+  o fix selection of test pages
+  o ensure that recommended driver is preselected in expert mode, even
+    if the recommended driver is a manufacturer-supplied PPD with
+    language tag
+- ugtk2 layer: misc fixes
+- XFdrake (pixel):
+  o add a ratio choice, and restrict the resolutions to this choice
+  o add 1280x600 for VAIO PCG-C1M (#5192)
+  o fix section with only comments
+  o "keyboard" InputDevice can also be called "kbd"
+  o do not only add modelines not defined in xorg, otherwise xorg will
+    prefer the modelines we provide (eg: it will use 1024x768@50
+    whereas it could have used 1024x768@60)
+- configure iocharset and codepage option for hal (pixel, #13833)
+
 * Tue Mar  1 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.34mdk
 - diskdrake: allow to choose encryption algorithm (blino, #13472)
 - drakhelp, drakbug: use www-browser (daouda)
@@ -377,7 +408,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakconnect: enhance "wrong network mask format" message (blino, #10712)
 - drakTermServ: sort list of nbis (stew, #13998)
 - keyboardrake: set compose key as "rwin" if not set (pablo)
-- XFdrake:
+- XFdrake (pixel):
   o replaced by use monitor-edid instead of ddcxinfos
   o add many resolutions
   o set the "Monitor preferred modeline" from EDID in xorg.conf
