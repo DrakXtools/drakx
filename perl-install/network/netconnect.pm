@@ -1034,7 +1034,6 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
-                        network::ethernet::write_ether_conf($in, $netcnx, $netc, $intf) if $netcnx->{type} eq 'lan';
                         if ($ethntf->{IPADDR}) {
                             $netc->{dnsServer} ||= dns($ethntf->{IPADDR});
                             $gateway_ex = gateway($ethntf->{IPADDR});
@@ -1148,6 +1147,7 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     type => "yesorno",
                     post => sub {
                         my ($a) = @_;
+                        network::ethernet::write_ether_conf($in, $netcnx, $netc, $intf) if $netcnx->{type} eq 'lan';
                         if ($a && !$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
                             $success = 0;
                             $in->ask_okcancel(N("Network Configuration"), 
