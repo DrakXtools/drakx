@@ -87,7 +87,6 @@ sub check {
     while (my ($t1, $l) = each %list_modules::l) {
 	while (my ($t2, $l) = each %$l) {
 	    ref $l or die "bad $l in $t1/$t2";
-	    print "MODULE: $_\n" foreach @$l;
 	    foreach (@$l) {
 		$listed{$_} = 1; 
 		push @{$big_modules_categories{$t1}{$t2}}, $_ if member($_, @skip_modules_on_stage1);
