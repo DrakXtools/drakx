@@ -440,7 +440,7 @@ sub get_of_dev($$) {
 	open(FILE, "$prefix/tmp/ofpath") || die "Can't open $prefix/tmp/ofpath";
 	my $of_dev = "";
 	local $_ = "";
-	while(<FILE>){
+	while (<FILE>){
 		$of_dev = $_;
 	}
 	chop($of_dev);

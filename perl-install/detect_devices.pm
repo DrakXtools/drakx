@@ -65,7 +65,7 @@ sub floppy { first(floppies()) }
 
 sub isBurner { 
     my ($dev) = @_;
-    if (my ($nb) = $dev =~ /scd(.*)/) {	
+    if (my ($nb) = $dev =~ /scd (.*)/x) {	
 	grep { /^(scd|sr)$nb:.*writer/ } syslog();
     } else {
 	my $f = tryOpen($dev); 
