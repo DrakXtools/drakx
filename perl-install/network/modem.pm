@@ -7,7 +7,7 @@ use detect_devices;
 use mouse;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $install);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(pppConfig modem_detect_backend);
@@ -19,17 +19,14 @@ sub configure{
     $netcnx->{modem}{device}=$netc->{autodetect}{modem};
   modem_step_1:
     pppConfig($netcnx->{$netcnx->{type}}, $mouse, $netc) or return;
-    output "$prefix$connect_file",
-      q(#!/bin/bash
+    write_cnx_script($netc, "modem",
+q(#!/bin/bash
 ifup ppp0
-);
-    output "$prefix$disconnect_file",
-      q(#!/bin/bash
+),
+q(#!/bin/bash
 ifdown ppp0
 killall pppd
-);
-    chmod 0755, "$prefix$disconnect_file";
-    chmod 0755, "$prefix$connect_file";
+));
     if ($::isStandalone) { ask_connect_now($netcnx->{$netcnx->{type}}, 'ppp0') or goto modem_step_1 }
     1;
 }

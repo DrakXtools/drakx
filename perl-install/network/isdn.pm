@@ -7,7 +7,7 @@ use modules;
 use log;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $install; $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $install);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
@@ -38,7 +38,7 @@ sub configure {
 }
 
 sub isdn_write_config {
-    my ($isdn) = @_;
+    my ($isdn, $netc) = @_;
   isdn_write_config_step_1:
     my $e = $in->ask_from_list_(_("Network Configuration Wizard"),
 				    _("Which ISDN configuration do you prefer?
@@ -52,15 +52,15 @@ We recommand the light configuration.
 "), [ __("New configuration (isdn-light)"), __("Old configuration (isdn4net)")]
 				   ) or return;
     #FIXME debug only
-    system('urpmi --auto --best-output ' . join(' ', $e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils'));
-    #$install->($e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils');
-    isdn_write_config_backend($isdn, $e =~ /light/);
+    #system('urpmi --auto --best-output ' . join(' ', $e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils'));
+    $install->($e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils');
+    isdn_write_config_backend($isdn, $e =~ /light/, $netc);
     $::isStandalone and ask_connect_now($isdn, 'ippp0');
     1;
 }
 
 sub isdn_write_config_backend {
-    my ($isdn, $light) = @_;
+    my ($isdn, $light, $netc) = @_;
     if ($light) {
 	modules::mergein_conf("$prefix/etc/modules.conf");
 	if ($isdn->{id}) {
@@ -121,20 +121,16 @@ defaultroute
 
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
-    output "$prefix$connect_file",
-      "#!/bin/bash
+    write_cnx_script($netc, "isdn",
+"#!/bin/bash
 /sbin/route del default
 /sbin/ifup ippp0
 /sbin/isdnctrl dial ippp0
-";
-
-    output "$prefix$disconnect_file",
-      "#!/bin/bash
+",
+"#!/bin/bash
 /sbin/isdnctrl hangup ippp0
 /sbin/ifdown ippp0
-";
-    chmod 0755, "$prefix$disconnect_file";
-    chmod 0755, "$prefix$connect_file";
+");
     1;
 }
 
@@ -203,13 +199,13 @@ If you have a PCMCIA card, you have to know the irq and io of your card.
 			     _("Which is your ISDN card ?"),
 			     sub { $_[0]{description} },
 			     [ grep {$_->{card} eq $isdn->{card_type}; } @isdndata ] ) or goto isdn_ask_step_1;
-    $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq);
+    $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
 
   isdn_ask_step_3:
     $isdn->{protocol} = isdn_ask_protocol() or goto isdn_ask_step_2;
   isdn_ask_step_4:
     isdn_ask_info($isdn, $netc) or goto isdn_ask_step_3;
-    isdn_write_config($isdn) or goto isdn_ask_step_4;
+    isdn_write_config($isdn, $netc) or goto isdn_ask_step_4;
     1;
 }
 
@@ -225,7 +221,7 @@ sub isdn_detect {
 	    $isdn->{protocol}=isdn_ask_protocol() or return;
 	  isdn_detect_step_2:
 	    isdn_ask_info($isdn, $netc) or goto isdn_detect_step_1;
-	    isdn_write_config($isdn) or goto isdn_detect_step_2;
+	    isdn_write_config($isdn, $netc) or goto isdn_detect_step_2;
 	}
     } else {
 	isdn_ask($isdn, $netc, _("No ISDN PCI card found. Please select one on the next screen.")) or return;

@@ -83,20 +83,6 @@ sub adsl_conf {
     1;
 }
 
-#- adsl_conf_backend : write adsl configuration
-#- input :
-#-  $adsl
-#-  $netc
-#-  $adsl_type : type of cnx : string : "pptp" or "pppoe"
-#- $adsl input:
-#-  $adsl->{login}, $adsl->{passwd}, $adsl->{atboot}
-#- $netc input:
-#-  $netc->{NET_DEVICE}
-#-  $netc->{dnsServer2}
-#-  $netc->{dnsServer3}
-#-  $netc->{DOMAINNAME2}
-#- $netc output:
-#-  $netc->{NET_INTERFACE} is set to "ppp0"
 sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type) = @_;
 
@@ -125,8 +111,8 @@ lock
 	} "$prefix/etc/ppp/pppoe.conf";
     }
 
-    output ("$prefix$connect_file", 
-	    $adsl_type eq 'pptp' ?
+    write_cnx_script($netc, "adsl",
+		      $adsl_type eq 'pptp' ?
 "#!/bin/bash
 /sbin/route del default
 /usr/bin/pptp 10.0.0.138 name $adsl->{login}
@@ -135,10 +121,9 @@ lock
 "#!/bin/bash
 /sbin/route del default
 LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE} $adsl->{login}
-");
-    output ("$prefix$disconnect_file", 
-    $adsl_type eq 'pptp' ?
-	"#!/bin/bash
+",
+		      $adsl_type eq 'pptp' ?
+"#!/bin/bash
 /usr/bin/killall pptp pppd
 "
 :
@@ -146,8 +131,6 @@ LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE
 /usr/sbin/adsl-stop
 /usr/bin/killall pppoe pppd
 ");
-    chmod 0755, "$prefix$disconnect_file";
-    chmod 0755, "$prefix$connect_file";
 
     if ($adsl->{atboot}) {
 	output ("$prefix/etc/rc.d/init.d/adsl",

@@ -144,12 +144,15 @@ ifdown eth0
     }
 
   step_2:
+
     my $set_default;
     my %conf;
+    $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach qw(modem adsl cable lan);
+    $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1: 0;
     my @l = (
 	     [_("Normal modem connection"), $netc->{autodetect}{modem}, __("detected on port %s"), \$conf{modem}],
 	     [_("ISDN connection"), $netc->{autodetect}{isdn}{description}, __("detected %s"), \$conf{isdn}],
-	     [_("DSL (or ADSL) connection"), $netc->{autodetect}{adsl}, __("detected on interface %s"), \$conf{adsl}],
+	     [_("ADSL connection"), $netc->{autodetect}{adsl}, __("detected on interface %s"), \$conf{adsl}],
 	     [_("Cable connection"), $netc->{autodetect}{cable}, __("cable connection detected"), \$conf{cable}],
 	     [_("LAN connection"), $netc->{autodetect}{lan}, __("ethernet card(s) detected"), \$conf{lan}]
 	);
@@ -171,6 +174,19 @@ ifdown eth0
     $conf{adsl} and do { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
     $conf{cable} and do { require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
     $conf{lan} and do { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
+
+    if (keys %{$netc->{internet_cnx}} > 1) {
+	$in->ask_from_entries_refH(_("Network Configuration Wizard"),
+				   _("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
+			       [
+				{ label => _("Internet connection"), val => [$netc->{internet_cnx_choice}], list => [ keys %{$netc->{internet_cnx}}]},
+			       ]
+			      ) or goto step_2;
+    } elsif (keys %{$netc->{internet_cnx}} == 1) {
+	$netc->{internet_cnx_choice} = $netc->{internet_cnx}[1];
+    }
+    print " - --------- -- - -------\n" . $netc->{internet_cnx_choice} . "------------\n";
+    $netc->{internet_cnx_choice} and write_cnx_script($netc);
 
   step_3:
 

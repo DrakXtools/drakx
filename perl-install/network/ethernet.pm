@@ -6,8 +6,9 @@ use any;
 use detect_devices;
 use common;
 use run_program;
+use network::tools;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $install);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(configureNetwork conf_network_card conf_network_card_backend go_ethernet);
@@ -66,19 +67,16 @@ sub configure_lan {
 	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
     }
-    output "$prefix$connect_file",
-      qq(
+    write_cnx_script($netc, "local network",
+qq(
 #!/bin/bash
 /etc/rc.d/init.d/network restart
-);
-    output "$prefix$disconnect_file",
-      qq(
+),
+qq(
 #!/bin/bash
 /etc/rc.d/init.d/network stop
 /sbin/ifup lo
-);
-    chmod 0755, "$prefix$disconnect_file";
-    chmod 0755, "$prefix$connect_file";
+));
     $::isStandalone and modules::write_conf($prefix);
     1;
 }
@@ -168,18 +166,15 @@ sub go_ethernet {
     conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
     $netc->{NET_INTERFACE}=$netc->{NET_DEVICE};
     configureNetwork($netc, $intf, $first_time) or return;
-    output "$prefix$connect_file",
-      qq(
+    write_cnx_script($netc, "Local network",
+qq(
 #!/bin/bash
 ifup $netc->{NET_DEVICE}
-);
-    output "$prefix$disconnect_file",
-      qq(
+),
+qq(
 #!/bin/bash
 ifdown $netc->{NET_DEVICE}
-);
-    chmod 0755, "$prefix$disconnect_file";
-    chmod 0755, "$prefix$connect_file";
+));
     if ( $::isStandalone and $netc->{NET_DEVICE}) {
 	$in->ask_yesorno(_("Network interface"),
 			 _("I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");

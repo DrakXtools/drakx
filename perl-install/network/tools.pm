@@ -3,11 +3,20 @@ package network::tools;
 use common;
 use run_program;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in $prefix $install $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in $prefix $install $disconnect_file $connect_prog $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(write_secret_backend ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 connected disconnected);
+@EXPORT = qw(write_cnx_script write_secret_backend ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 connected disconnected);
 @EXPORT_OK = qw($in);
+
+sub write_cnx_script {
+    my($netc, $type, $up, $down) = @_;
+    $type or output ("$prefix$_", $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_}) foreach ($connect_file, $disconnect_file);
+    foreach ([$connect_file, $up], [$disconnect_file, $down]) {
+	$netc->{internet_cnx}{$type}{$_->[0]}=$_->[1];
+	chmod 0755, "$prefix" . $_->[0];
+    }
+}
 
 sub write_secret_backend {
     my ($a, $b) = @_;
