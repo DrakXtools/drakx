@@ -70,13 +70,17 @@ ${$_->[1]} eq N("manual") and push @manual_steps, $_->[0] foreach @all_steps;
 my $mountdir = "/root/tmp/drakautoinst-mountdir"; -d $mountdir or mkdir $mountdir, 0755;
 my $floppy = detect_devices::floppy();
 my $dev = devices::make($floppy);
-$in->ask_okcancel('', N("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
-{
+my $again;
+do {
+    $in->ask_okcancel('', N("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
     log::explanations(N("Creating auto install floppy"));
     my $_w = $in->wait_message('', N("Creating auto install floppy"));
-    commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
-    common::sync();
-}
+    eval {
+	commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
+	common::sync();
+    };
+    $again = $@; #- grrr... $@ is localized in code block :-(
+} while ($again);
 fs::mount($dev, $mountdir, 'vfat', 0);
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
