@@ -116,11 +116,8 @@ sub conf_network_card_backend {
 	return map {
 	    my $interface = $_;
 	    my $a = modules::get_alias($interface);
-	    my $b;
-	    foreach (@devs) {
-		$_->{device} eq $interface and $b = $_->{driver};
-	    }
-	    $a ||= $b;
+	    my $b = find { $_->{device} eq $interface } @devs;
+	    $a ||= $b->{driver};
 	    $a and $saved_driver = $a; # handle multiple cards managed by the same driver
  	    [ $interface, $saved_driver ]
 	} @all_cards;
