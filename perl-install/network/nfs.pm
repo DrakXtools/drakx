@@ -14,6 +14,10 @@ sub to_fstab_entry {
     my ($class, $e) = @_;
     $class->to_fstab_entry_raw($e, 'nfs');
 }
+sub comment_to_string {
+    my ($class, $comment) = @_;
+    member($comment, qw(* 0.0.0.0/0.0.0.0 (everyone))) ? '' : $comment;
+}
 sub from_dev { 
     my ($class, $dev) = @_;
     $dev =~ m|(.*?):(.*)|;

@@ -13,18 +13,24 @@ sub server_to_string {
     my ($class, $server) = @_;
     $server->{name} || $server->{ip};
 }
+sub comment_to_string {
+    my ($class, $comment) = @_;
+    $comment;
+}
 sub to_dev {
     my ($class, $e) = @_;
     $class->to_dev_raw($class->server_to_string($e->{server}), $e->{name} || $e->{ip});
 }
 sub to_string {
     my ($class, $e) = @_;
-    ($e->{name} || $e->{ip}) . ($e->{comment} ? " ($e->{comment})" : '');
+    my $comment = $class->comment_to_string($e->{comment});
+    ($e->{name} || $e->{ip}) . ($comment ? " ($comment)" : '');
 }
 
 sub to_fullstring {
     my ($class, $e) = @_;
-    $class->to_dev($e) . ($e->{comment} ? " ($e->{comment})" : '');
+    my $comment = $class->comment_to_string($e->{comment});
+    $class->to_dev($e) . ($comment ? " ($comment)" : '');
 }
 sub to_fstab_entry_raw {
     my ($class, $e, $type) = @_;
