@@ -292,8 +292,8 @@ sub getHeader($) {
     $p->{header};
 }
 
-sub selectPackagesToUpgrade($$) {
-    my ($packages, $prefix) = @_;
+sub selectPackagesToUpgrade($$$) {
+    my ($packages, $prefix, $base) = @_;
 
     log::l("reading /usr/lib/rpm/rpmrc");
     c::rpmReadConfigFiles() or die "can't read rpm config files";
@@ -304,11 +304,13 @@ sub selectPackagesToUpgrade($$) {
 
     #- mark all files which are not in /etc/rc.d/ for packages which are already installed but which
     #- are not in the packages list to upgrade.
+    #- the 'installed' property will make a package unable to be selected, look at select.
     c::rpmdbTraverse($db, sub {
 			 my ($header) = @_;
 			 my $p = $packages->{c::headerGetEntry($header, 'name')};
 			 if ($p) {
-			     $p->{installed} = 1 if c::headerGetEntry($header, 'version') ge $p->{version};
+			     eval { getHeader($p) }; $@ && log::l("cannot get the header for package $p->{name}"); #- not having a header will cause using a bad test for version, should change but a header should always be available.
+			     $p->{installed} = 1 if $p->{header} ? c::rpmVersionCompare($header, $p->{header}) >= 0 : c::headerGetEntry($header, 'version') ge $p->{version};
 			 } else {
 			     my @installedFiles = c::headerGetEntry($header, 'filenames');
 			     @installedFilesForUpgrade{grep { $_ !~ m@^/etc/rc.d/@ } @installedFiles} = ();
@@ -319,13 +321,18 @@ sub selectPackagesToUpgrade($$) {
     foreach (values %$packages) {
 	my $p = $_;
 	my $skipThis = 0;
-	$skipThis ||= 1 if c::rpmdbNameTraverse($db, $p->{name}, sub {
-						    my ($header) = @_;
-						    $skipThis ||= (c::headerGetEntry($header, 'version') ge $p->{version});
-						}) == 0; #- skip if not installed (package not found in current install).
+	my $count = c::rpmdbNameTraverse($db, $p->{name}, sub {
+					     my ($header) = @_;
+					     $skipThis ||= $p->{installed};
+					 });
+
+	#- skip if not installed (package not found in current install).
+	$skipThis ||= ($count == 0);
 
 	#- select the package if it is already installed with a lower version or simply not installed.
 	unless ($skipThis) {
+	    my $cumulSize;
+
 	    pkgs::select($packages, $p) unless $p->{selected};
 
 	    #- keep in mind installed files which are not being updated. doing this costs in
@@ -333,11 +340,17 @@ sub selectPackagesToUpgrade($$) {
 	    #- all file for package marked for upgrade.
 	    c::rpmdbNameTraverse($db, $p->{name}, sub {
 				     my ($header) = @_;
+				     $cumulSize += c::headerGetEntry($header, 'size'); #- all these will be deleted on upgrade.
 				     my @installedFiles = c::headerGetEntry($header, 'filenames');
 				     @installedFilesForUpgrade{ grep { $_ !~ m@^/etc/rc.d/@ } @installedFiles} = ();
 				 });
+	    eval { getHeader($p) };
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
 	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+
+	    #- keep in mind the cumul size of installed package since they will be deleted
+	    #- on upgrade.
+	    $p->{installedCumulSize} = $cumulSize;
 	}
     }
 
@@ -347,6 +360,7 @@ sub selectPackagesToUpgrade($$) {
 	my $p = $_;
 
 	if ($p->{selected}) {
+	    eval { getHeader($p) };
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
 	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
 	}
@@ -357,6 +371,7 @@ sub selectPackagesToUpgrade($$) {
 	my $p = $_;
 
 	unless ($p->{selected}) {
+	    eval { getHeader($p) };
 	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
 	    my $toSelect = 0;
 	    map { if (exists $installedFilesForUpgrade{$_}) {
@@ -370,22 +385,16 @@ sub selectPackagesToUpgrade($$) {
     foreach (values %$packages) {
 	my $p = $_;
 
-	my @obsoletes = $p->{header} ? c::headerGetEntry($p->{header}, 'obsoletes') : ();
+	eval { getHeader($p) };
+	my @obsoletes = $p->{header} ? c::headerGetEntry(getHeader($p), 'obsoletes'): ();
 	map { pkgs::select($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
     }
 
-    #- consistency check: deselect all packages with a version lower to already existing.
-    foreach (values %$packages) {
-	my $p = $_;
-	my $skipThis = 0;
-	if ($p->{selected}) {
-	    c::rpmdbNameTraverse($db, $p->{name}, sub {
-				     my ($header) = @_;
-				     $skipThis ||= (c::headerGetEntry($header, 'version') ge $p->{version});
-				 });
-	    #- unselect the package if it is already installed with a greater or equal version.
-	    pkgs::unselect($packages, $p) if ($skipThis);
-	}
+    #- select all base packages which are not installed and not selected.
+    foreach (@$base) {
+	my $p = $packages->{$_} or log::l("missing base package $_"), next;
+	log::l("base package $_ is not installed") unless $p->{installed} || $p->{selected}; #- installed not set on upgrade.
+	pkgs::select($packages, $p, 1) unless $p->{selected}; #- if installed it cannot be selected.
     }
 
     #- close db, job finished !
@@ -412,6 +421,7 @@ sub install($$) {
 	                       $p->{name}, $p->{version}, $p->{release},
 			       c::headerGetEntry(getHeader($p), 'arch');
 	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
+#	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, 1); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
 	$total += $p->{size};
     }

@@ -82,7 +82,7 @@ sub selectRootPartition($@) {
     $o->{upgradeRootPartition} =
       $o->ask_from_list_(_("Root Partition"),
 			 _("What is the root partition (/) of your system?"),
-			 [ @partitions ], $o->{upgradeRootPartitions});
+			 [ @partitions ]);
 #- TODO check choice, then mount partition in $o->{prefix} and autodetect.
 #-    install_steps::selectRootPartition($o);
 }
@@ -552,6 +552,7 @@ sub setupBootloaderBefore {
     $o->SUPER::setupBootloaderBefore($o);
 }
 
+#------------------------------------------------------------------------------
 sub setupBootloader {
     my ($o, $more) = @_;
     my $b = $o->{bootloader};
@@ -725,13 +726,13 @@ Do you want to try again with other parameters?", $l), 1) or return;
 #------------------------------------------------------------------------------
 sub load_thiskind {
     my ($o, $type) = @_;
-    my $w;
+    my ($pcmcia, $w) = $o->{pcmcia} unless $::expert && modules::pcmcia_need_config($o->{pcmcia}) && $o->ask_yesorno('', _("Skip PCMCIA probing", 1));
     modules::load_thiskind($type, sub {
 			       $w = $o->wait_message('',
 						     [ _("Installing driver for %s card %s", $type, $_->[0]),
 						       $::beginner ? () : _("(module %s)", $_->[1])
 						     ]);
-			   });
+			   }, $pcmcia);
 }
 
 #------------------------------------------------------------------------------

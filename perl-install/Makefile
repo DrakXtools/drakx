@@ -160,6 +160,8 @@ get_needed_files: $(SO_FILES)
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
 #	chmod a+x $(DEST)/usr/bin/runinstall2
 
+	cp -a ../install/install1_pcmcia/etc/pcmcia $(DEST)/etc
+
 as_root:
 	/bin/dd if=/dev/zero of=/tmp/initrd bs=1k count=4000
 	echo y | /sbin/mke2fs /tmp/initrd

@@ -285,9 +285,35 @@ sub createBootdisk($) {
 }
 
 #------------------------------------------------------------------------------
+sub readBootloaderConfigBeforeInstall {
+    my ($o) = @_;
+    my ($image, $v);
+    add2hash($o->{bootloader} ||= {}, lilo::read($o->{prefix}, "/etc/lilo.conf"));
+
+    #- since kernel or kernel-smp may not be upgraded, it should be checked
+    #- if there is a need to update existing lilo.conf entries by using that
+    #- hash.
+    my %ofpkgs = (
+		  'vmlinuz' => 'kernel',
+		  'vmlinuz-smp' => 'kernel-smp',
+		 );
+
+    #- change the /boot/vmlinuz or /boot/vmlinuz-smp entries to follow symlink.
+    foreach $image (keys %ofpkgs) {
+	if ($o->{bootloader}{entries}{"/boot/$image"} && $o->{packages}{$ofpkgs{$image}}{selected}) {
+	    $v = readlink "$o->{prefix}/boot/$image";
+	    if ($v) {
+		$v = "/boot/$v" if $v !~ m@/@;
+		$o->{bootloader}{entries}{$v} = $o->{bootloader}{entries}{"/boot/$image"};
+		delete $o->{bootloader}{entries}{"/boot/$image"};
+		log::l("renaming /boot/$image entry by $v");
+	    }
+	}
+    }
+}
+
 sub setupBootloaderBefore {
     my ($o) = @_;
-    add2hash($o->{bootloader} ||= {}, lilo::read($o->{prefix}, "/etc/lilo.conf"));
     lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
     $o->{bootloader}{keytable} ||= keyboard::kmap($o->{keyboard});
 }

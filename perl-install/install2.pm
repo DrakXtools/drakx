@@ -75,6 +75,7 @@ $installSteps{first} = $installSteps[0];
 #-#####################################################################################
 #-INTERN CONSTANT
 #-#####################################################################################
+
 #- these strings are used in quite a lot of places and must not be changed!!!!!
 my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
 
@@ -412,6 +413,8 @@ sub choosePackages {
 
 #------------------------------------------------------------------------------
 sub doInstallStep {
+    $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
+
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
@@ -423,8 +426,8 @@ sub configureNetwork {
 
     if ($o->{isUpgrade} && !$clicked) {
 	$o->{netc} or $o->{netc} = {};
-	add2hash($o->{netc}, { network::read_conf("$o->{prefix}/etc/sysconfig/network") });
-	add2hash($o->{netc}, { network::read_resolv_conf("$o->{prefix}/etc/resolv.conf") });
+	add2hash($o->{netc}, { network::read_conf("$o->{prefix}/etc/sysconfig/network") }) if -r "$o->{prefix}/etc/sysconfig/network";;
+	add2hash($o->{netc}, { network::read_resolv_conf("$o->{prefix}/etc/resolv.conf") }) if -r "$o->{prefix}/etc/resolv.conf";
 	foreach (all("$o->{prefix}/etc/sysconfig/network-scripts")) {
 	    if (/ifcfg-(\w*)/) {
 		push @{$o->{intf}}, { network::read_conf("$o->{prefix}/etc/sysconfig/network-scripts/$_") };
@@ -518,7 +521,13 @@ sub main {
 
     #-  if this fails, it's okay -- it might help with free space though
     unlink "/sbin/install" unless $::testing;
+    unlink "/sbin/cardmgr" unless $::testing;
     unlink "/sbin/insmod"  unless $::testing;
+    unlink "/sbin/rmmod"  unless $::testing;
+    unlink "/modules/pcmcia_core.o" unless $::testing;
+    unlink "/modules/i82365.o" unless $::testing;
+    unlink "/modules/tcic.o" unless $::testing;
+    unlink "/modules/ds.o" unless $::testing;
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');

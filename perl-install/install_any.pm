@@ -99,8 +99,8 @@ sub getAvailableSpace {
     do { $_->{mntpoint} eq '/'    and return $_->{size} * 512 } foreach @{$o->{fstab}};
 
     if ($::testing) {
-	log::l("taking 2000MB for testing");
-	return 2000 << 20;
+	log::l("taking 200MB for testing");
+	return 200 << 20;
     }
     die "missing root partition";
 }
@@ -124,6 +124,8 @@ sub setPackages($$) {
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
     }
 
+    #- this will be done if necessary in the selectPackagesToUpgrade,
+    #- move the selection here ? this will remove the little window.
     unless ($o->{isUpgrade}) {
 	do {
 	    my $p = $o->{packages}{$_} or log::l("missing base package $_"), next;
@@ -138,7 +140,7 @@ sub setPackages($$) {
 sub selectPackagesToUpgrade($) {
     my ($o) = @_;
 
-    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
+    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base});
 }
 
 sub addToBeDone(&$) {
@@ -149,7 +151,7 @@ sub addToBeDone(&$) {
     push @{$::o->{steps}{$step}{toBeDone}}, $f;
 }
 
-sub install_cpio {
+sub install_cpio($$) {
     my ($dir, $name) = @_;
 
     return "$dir/$name" if -e "$dir/$name";

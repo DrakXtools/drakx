@@ -268,13 +268,13 @@ sub get_stage1_conf {
     \%conf;
 }
 
-sub load_thiskind($;&) {
-    my ($type, $f) = @_;
+sub load_thiskind($;&$) {
+    my ($type, $f, $pcic) = @_;
 
     my @pcidevs = pci_probing::main::probe($type);
     log::l("pci probe found " . scalar @pcidevs . " $type devices");
 
-    my @pcmciadevs = get_pcmcia_devices($type);
+    my @pcmciadevs = get_pcmcia_devices($type, $pcic);
     log::l("pcmcia probe found " . scalar @pcmciadevs . " $type devices");
 
     my @devs = (@pcidevs, @pcmciadevs);
@@ -290,9 +290,27 @@ sub load_thiskind($;&) {
     @devs;
 }
 
-sub get_pcmcia_devices($) {
-    my ($type) = @_;
+sub pcmcia_need_config($) {
+    return $_[0] && ! -s "/var/run/stab";
+}
+
+sub get_pcmcia_devices($$) {
+    my ($type, $pcic) = @_;
     my (@devs, $module, $desc);
+
+    #- try to setup pcmcia if cardmgr is not running.
+    if (pcmcia_need_config($pcic)) {
+	log::l("i try to configure pcmcia services");
+
+	symlink("/tmp/rhimage/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
+
+	load("pcmcia_core");
+	load($pcic);
+	load("ds");
+
+	#- run cardmgr in foreground while it is configuring the card.
+	run_program::run("cardmgr", "-f", "-m" ,"/modules");
+    }
 
     foreach (cat_("/var/run/stab")) {
 	$desc = $1 if /^Socket\s+\d+:\s+(.*)/;

@@ -71,10 +71,11 @@ sub getinfoFromXF86Config {
 	    $o->{monitor}{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
 	    $o->{monitor}{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
 	    $o->{monitor}{model} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
+	    $o->{monitor}{modelines} .= $_ if /^\s*Mode[lL]ine\s+/;
 	} elsif (my $s = /^Section "Screen"/ .. /^EndSection/) {
 	    $driver = undef if $s == 1;
 	    $driver = $1 if /^\s*Driver\s+"(.*?)"/;
-	    print "($driver eq $Xconfigurator::serversdriver{$o->{card}{server}})";
+	    #- print "($driver eq $Xconfigurator::serversdriver{$o->{card}{server}})";
 	    if ($driver eq $Xconfigurator::serversdriver{$o->{card}{server}}) { #- take into account the right screen section for the server.
 		$o->{card}{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
 		if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
