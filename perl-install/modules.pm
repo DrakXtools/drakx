@@ -62,6 +62,7 @@ sub load {
     } else {
 	load_raw(map { [ $_ => $options{$_} ] } @l);
     }
+    post_load(@l);
     sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @l;
 
     if ($network_module) {
@@ -407,15 +408,18 @@ sub load_raw {
 
     die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
 
-    foreach (@l) {
-	if ($_->[0] =~ /usb-[uo]hci/) {
-	    eval {
-		require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
-		#- ensure keyboard is working, the kernel must do the job the BIOS was doing
-		sleep 4;
-		load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
-	    }
-	}
+}
+
+sub post_load {
+    my @modules = @_;
+
+    if (any { /usb-[uo]hci/ } @modules) {
+        eval {
+            require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
+            #- ensure keyboard is working, the kernel must do the job the BIOS was doing
+            sleep 4;
+            load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
+        }
     }
 }
 
