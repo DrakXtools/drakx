@@ -58,8 +58,13 @@ sub raw {
     }
     
     $ENV{HOME} || $::isInstall or $ENV{HOME} = '/root';
-    my $stdout = $stdout_raw && (ref($stdout_raw) ? "$ENV{HOME}/tmp/.drakx-stdout.$$" : "$root$stdout_raw");
-    my $stderr = $stderr_raw && (ref($stderr_raw) ? "$ENV{HOME}/tmp/.drakx-stderr.$$" : "$root$stderr_raw");
+    my $tmpdir = sub {
+	my $dir = "$ENV{HOME}/tmp";
+	-d $dir or mkdir($dir, 0700);
+	$dir;
+    };
+    my $stdout = $stdout_raw && (ref($stdout_raw) ? $tmpdir->() . "/.drakx-stdout.$$" : "$root$stdout_raw");
+    my $stderr = $stderr_raw && (ref($stderr_raw) ? $tmpdir->() . "/.drakx-stderr.$$" : "$root$stderr_raw");
 
     if (my $pid = fork()) {
 	if ($options->{detach}) {
