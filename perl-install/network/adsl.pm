@@ -72,22 +72,22 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 sub adsl_ask_info {
     my ($adsl, $netc, $_intf, $adsl_type) = @_;
     my $pppoe_file = "/etc/ppp/pppoe.conf";
-    my $pppoe_conf = { getVarsFromSh($pppoe_file) } if $adsl_type =~ /pppoe/ && -f $pppoe_file;
-    my $login = $pppoe_conf->{USER};
+    my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if $adsl_type =~ /pppoe/ && -f $pppoe_file;
+    my $login = $pppoe_conf{USER};
     foreach (qw(/etc/ppp/peers/adsl /etc/ppp/options)) {
 	next if $login && ! -r $_;
 	($login) = map { if_(/^user\s+\"([^\"]+)\"/, $1) } cat_($_);
     }
-    my $passwd = passwd_by_login($pppoe_conf->{USER});
+    my $passwd = passwd_by_login($pppoe_conf{USER});
     foreach (qw(/etc/ppp/pap-secrets /etc/ppp/chap-secrets)) {
 	next if $passwd && ! -r $_;
 	my $qlogin = quotemeta $login;
 	($passwd) = map { if_(/^(['"]?)$qlogin\1\s+\S+\s+(['"]?)(\S*)\2/, $3) } cat_($_);
     }
-    $pppoe_conf->{DNS1} ||= '';
-    $pppoe_conf->{DNS2} ||= '';
-    add2hash($netc, { dnsServer2 => $pppoe_conf->{DNS1}, dnsServer3 => $pppoe_conf->{DNS2}, DOMAINNAME2 => '' });
-    add2hash($adsl, { login => $user, passwd => $passwd, passwd2 => '' });
+    $pppoe_conf{DNS1} ||= '';
+    $pppoe_conf{DNS2} ||= '';
+    add2hash($netc, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
+    add2hash($adsl, { login => $login, passwd => $passwd, passwd2 => '' });
     ask_info2($adsl, $netc);
 }
 
