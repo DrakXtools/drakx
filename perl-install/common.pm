@@ -224,7 +224,7 @@ sub syscall_ {
 
 
 sub crypt_ {
-    local $_ = (gettimeofday())[1] % 0x40;
+    local $_ = sprintf("%2d", (gettimeofday())[1] % 0x40); #- make sure it is 2 char long.
     tr [\0-\x3f] [0-9a-zA-Z./];
     crypt($_[0], $_)
 }

@@ -181,10 +181,18 @@ sub beforeInstallPackages {
 
 sub installPackages($$) {
     my ($o, $packages) = @_;
-    #-    my $toInstall = [ grep { $_->{selected} && !$_->{installed} } values %$packages ];
-    my @toInstall = $packages->{basesystem}{selected} && !$packages->{basesystem}{installed} ? ($packages->{basesystem}) : ();
-    push @toInstall, grep { $_->{base} && $_->{selected} && !$_->{installed} } values %$packages;
-    push @toInstall, grep { !$_->{base} && $_->{selected} && !$_->{installed} } values %$packages;
+    #- hack to ensure proper ordering for installation of packages.
+    my @firstToInstall = qw(basesystem sed);
+    my %firstInstalled;
+    my @toInstall;
+    foreach (@firstToInstall) {
+	if ($packages->{$_}{selected} && !$packages->{$_}{installed}) {
+	    push @toInstall, $packages->{$_};
+	    $firstInstalled{$_} = 1; #- avoid installing twice a package.
+	}
+    }
+    push @toInstall, grep { $_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
+    push @toInstall, grep { !$_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
     pkgs::install($o->{prefix}, \@toInstall);
 }
 

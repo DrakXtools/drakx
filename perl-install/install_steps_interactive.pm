@@ -58,7 +58,7 @@ sub selectLanguage($) {
 
     $o->{useless_thing_accepted} = $o->ask_from_list_('', 
 "Wanring no wrranty, be carfull it's gonna explose ytou romcpature", 
-		       [ _("Accept"), _("Refuse") ], "Accept") eq "Accept" or exit(1) unless $o->{useless_thing_accepted};
+		       [ _("Accept"), _("Refuse") ], _("Accept")) eq _("Accept") or exit(1) unless $o->{useless_thing_accepted};
 
 }
 #------------------------------------------------------------------------------

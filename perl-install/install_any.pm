@@ -247,3 +247,15 @@ sub searchAndMount4Upgrade {
 	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
     }
 }
+
+sub write_ldsoconf {
+    my ($prefix) = @_;
+    my $file = "$prefix/etc/ld.so.conf";
+
+    #- write a minimal ld.so.conf file unless it already exists.
+    unless (-s "$file") {
+	local *F;
+	open F, ">$file" or die "unable to open for writing $file";
+	print F "/usr/lib\n";
+    }
+}

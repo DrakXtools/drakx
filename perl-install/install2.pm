@@ -320,6 +320,10 @@ sub choosePackages {
 sub doInstallStep {
     $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
 
+    #- some packages need such files for proper installation.
+    install_any::write_ldsoconf($o->{prefix});
+    fs::write($o->{prefix}, $o->{fstab});
+
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
@@ -378,7 +382,6 @@ sub addUser {
 #------------------------------------------------------------------------------
 #-PADTODO
 sub createBootdisk {
-    fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
     $o->createBootdisk($_[1] == 1);
 }
