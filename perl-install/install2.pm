@@ -186,6 +186,10 @@ sub formatPartitions {
     devices::make("$o->{prefix}/dev/null");
     chmod 0666, "$o->{prefix}/dev/null";
 
+    eval { fs::mount('none', "$o->{prefix}/proc", 'proc') };
+    eval { fs::mount('none', "$o->{prefix}/proc/bus/usb", 'usbdevfs') };
+    eval { fs::mount('none', "$o->{prefix}/sys", 'sysfs') };
+
     common::screenshot_dir__and_move();
 
     any::rotate_logs($o->{prefix});

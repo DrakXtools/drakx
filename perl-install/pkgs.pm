@@ -1016,7 +1016,6 @@ sub install($$$;$$) {
 
     log::l("pkgs::install $prefix");
     log::l("pkgs::install the following: ", join(" ", map { $_->name } values %packages));
-    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     URPM::read_config_files();
     my $LOG = openInstallLog($prefix);
@@ -1235,8 +1234,6 @@ sub remove {
 	#- stuff remove all packages that matches $p, not a problem since $p has name-version-release format.
 	$trans->remove($p);
     }
-
-    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     #- we are not checking depends since it should come when
     #- upgrading a system. although we may remove some functionalities ?

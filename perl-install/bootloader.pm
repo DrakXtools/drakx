@@ -828,7 +828,6 @@ sub set_profiles {
 sub get_of_dev {
     my ($unix_dev) = @_;
 
-    eval { fs::mount('none', '$::prefix/sys', 'sysfs', 0) } if -d "$::prefix/sys/devices";
     devices::make("$::prefix$unix_dev");
 
     my $of_dev;

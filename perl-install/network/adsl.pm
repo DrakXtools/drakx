@@ -319,12 +319,6 @@ TYPE=$kind
     write_cnx_script($netc);
 
     unless ($::isStandalone) {
-        #- proc and usbdevfs need to be mounted for external start commands
-        $::isInstall && eval {
-            require fs;
-            fs::mount("/proc", "$::prefix/proc", 'proc') if !-f "$::prefix/proc/mounts";
-            fs::mount('none', "$::prefix/proc/bus/usb", 'usbdevfs');
-        } or log::l("failed to mount usbdevfs");
         my @modules = (@{$modems{$adsl_device}{modules}}, map { $_->[1] } @{$modems{$adsl_device}{aliases}});
         @modules && eval { modules::load(@modules) }
           or log::l("failed to load " . join(',', @modules), " modules: $@");
