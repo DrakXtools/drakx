@@ -1,8 +1,6 @@
 package http; # $Id$
 
 use IO::Socket;
-
-use install_any;
 use network;
 
 

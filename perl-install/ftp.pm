@@ -2,7 +2,6 @@ package ftp; # $Id$
 
 use Net::FTP;
 
-use install_any;
 use network;
 use log;
 
