@@ -181,6 +181,8 @@ mar_extract_file(char *mar_filename, char *filename_to_extract, char *dest_dir)
 				int to_read = i > sizeof(garb_buf) ? sizeof(garb_buf) : i;
 				if (BZ2_bzread(s.mar_zfile, garb_buf, to_read) != to_read) {
 					log_message("MAR: unexpected EOF in stream");
+                                        close(fd);
+                                        unlink(dest_file);
 					return -1;
 				}
 				i -= to_read;
