@@ -476,23 +476,7 @@ EOF
 
     $o->install_urpmi;
 
-    if ($o->{locale}{lang} =~ /^(zh_TW|th|vi|be|bg)/) {
-	#- skip since we don't have the right font (it badly fails at least for zh_TW)
-    } else {
-	my $kde_charset = lang::charset2kde_charset(lang::l2charset($o->{locale}{lang}));
-	my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
-	substInFile { 
-	    s/^(GreetString)=.*/$1=$welcome/;
-	    s/^(Language)=.*/$1=$o->{locale}{lang}/;
-	    if (!member($kde_charset, 'iso8859-1', 'iso8859-15')) { 
-		#- don't keep the default for those
-		s/^(StdFont)=.*/$1=*,12,5,$kde_charset,50,0/;
-		s/^(FailFont)=.*/$1=*,12,5,$kde_charset,75,0/;
-		s/^(GreetFont)=.*/$1=*,24,5,$kde_charset,50,0/;
-	    }
-	} "$o->{prefix}/usr/share/config/kdm/kdmrc";
 
-    }
     install_any::disable_user_view() if $o->{security} >= 3 || $o->{authentication}{NIS};
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 

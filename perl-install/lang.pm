@@ -932,13 +932,14 @@ sub write {
 
     eval {
 	my $charset = l2charset($locale->{lang});
+	my $kde_charset = charset2kde_charset($charset);
 	my $confdir = $prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
 	my ($prev_kde_charset) = cat_("$confdir/kdeglobals") =~ /^Charset=(.*)/mi;
 
 	-d $confdir or die 'not configuring kde config files since it is not installed/used';
 
 	update_gnomekderc("$confdir/kdeglobals", Locale => (
-			      Charset => charset2kde_charset($charset),
+			      Charset => $kde_charset,
 			      Country => lc($locale->{country}),
 			      Language => get_kde_lang($locale),
 			  ));
@@ -948,7 +949,7 @@ sub write {
 	    update_gnomekderc("$ENV{HOME}/.qt/qtrc", General => (XIMInputStyle => $qt_xim));
 	}
 
-        if ($prev_kde_charset ne charset2kde_charset($charset)) {
+        if ($prev_kde_charset ne $kde_charset) {
 	    update_gnomekderc("$confdir/kdeglobals", WM => (
 	    		      activeFont => charset2kde_font($charset,0),
 	    		  ));
@@ -966,6 +967,21 @@ sub write {
 	    		      StandardFont => charset2kde_font($charset, 0),
 	    		  ));
 	}
+
+	if (!$b_user_only && $locale->{lang} !~ /^(zh_TW|th|vi|be|bg)/) { #- skip since we don't have the right font (it badly fails at least for zh_TW)
+	    my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
+	    substInFile { 
+		s/^(GreetString)=.*/$1=$welcome/;
+		s/^(Language)=.*/$1=$locale->{lang}/;
+		if (!member($kde_charset, 'iso8859-1', 'iso8859-15')) { 
+		    #- don't keep the default for those
+		    s/^(StdFont)=.*/$1=*,12,5,$kde_charset,50,0/;
+		    s/^(FailFont)=.*/$1=*,12,5,$kde_charset,75,0/;
+		    s/^(GreetFont)=.*/$1=*,24,5,$kde_charset,50,0/;
+		}
+	    } "$::prefix/usr/share/config/kdm/kdmrc";
+	}
+
     } if !$b_dont_touch_kde_files;
 }
 
