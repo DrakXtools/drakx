@@ -95,32 +95,26 @@ void doklog()
 		print_error("could not open /proc/kmsg");
 		return;
 	}
-	
-	out = open("/dev/tty4", O_WRONLY, 0);
-	if (out < 0) 
-		print_warning("couldn't open tty for syslog -- still using /tmp/syslog\n");
-	
-	log = open("/tmp/syslog", O_WRONLY | O_CREAT, 0644);
-	
-	if (log < 0) {
+
+	if ((log = open("/tmp/syslog", O_WRONLY | O_CREAT, 0644)) < 0) {
 		print_error("error opening /tmp/syslog");
 		sleep(5);
 		return;
 	}
 
 	if ((klog_pid = fork())) {
-		/* parent */
 		close(in);
-		close(out);
 		close(log);
 		return;
+	} else {
+		close(0); 
+		close(1);
+		close(2);
 	}
 	
-	close(0); 
-	close(1);
-	close(2);
-
-	dup2(1, log);
+	out = open("/dev/tty4", O_WRONLY, 0);
+	if (out < 0) 
+		print_warning("couldn't open tty for syslog -- still using /tmp/syslog\n");
 
 	/* now open the syslog socket */
 	sockaddr.sun_family = AF_UNIX;
@@ -156,17 +150,20 @@ void doklog()
 	while (1) {
 		memcpy(&readset, &unixs, sizeof(unixs));
 
-		if (sock >= 0) FD_SET(sock, &readset);
+		if (sock >= 0)
+			FD_SET(sock, &readset);
 		FD_SET(in, &readset);
 		
 		i = select(20, &readset, NULL, NULL, NULL);
-		if (i <= 0) continue;
+		if (i <= 0)
+			continue;
 
 		/* has /proc/kmsg things to tell us? */
 		if (FD_ISSET(in, &readset)) {
 			i = read(in, buf, sizeof(buf));
 			if (i > 0) {
-				if (out >= 0) write(out, buf, i);
+				if (out >= 0)
+					write(out, buf, i);
 				write(log, buf, i);
 			}
 		} 
@@ -174,18 +171,11 @@ void doklog()
 		/* examine some fd's in the hope to find some syslog outputs from programs */
 		for (readfd = 0; readfd < 20; ++readfd) {
 			if (FD_ISSET(readfd, &readset) && FD_ISSET(readfd, &unixs)) {
-				print_str(log, "] one fd moves: ");
-				print_int(log, readfd);
-				print_str(log, "\n");
 				i = read(readfd, buf, sizeof(buf));
 				if (i > 0) {
-					if (out >= 0) {
+					if (out >= 0)
 						write(out, buf, i);
-						write(out, "\n", 1); 
-					}
-					
 					write(log, buf, i);
-					write(log, "\n", 1);
 				} else if (i == 0) {
 					/* socket closed */
 					close(readfd);
@@ -196,12 +186,12 @@ void doklog()
 
 		/* the socket has moved, new stuff to do */
 		if (sock >= 0 && FD_ISSET(sock, &readset)) {
-			print_str(log, "] syslog socket moved\n");
 			s = sizeof(sockaddr);
 			readfd = accept(sock, (struct sockaddr *) &sockaddr, &s);
 			if (readfd < 0) {
 				char * msg_error = "] error in accept\n";
-				if (out >= 0) write(out, msg_error, strlen(msg_error));
+				if (out >= 0)
+					write(out, msg_error, strlen(msg_error));
 				write(log, msg_error, strlen(msg_error));
 				close(sock);
 				sock = -1;
