@@ -606,11 +606,10 @@ sub write {
 
     if ($hd->{needKernelReread} && ref($hd->{needKernelReread}) eq 'ARRAY' && $::isStandalone) {
 	#- we've only been adding partitions. Try special add_partition (using BLKPG_ADD_PARTITION)
-	local *F;
-	partition_table::raw::openit($hd, *F) or goto force_reread;
+	my $F = partition_table::raw::openit($hd) or goto force_reread;
 
 	foreach (@{$hd->{needKernelReread}}) {
-	    c::add_partition(fileno F, $_->{start}, $_->{size}, $_->{device} =~ /(\d+)$/)
+	    c::add_partition(fileno $F, $_->{start}, $_->{size}, $_->{device} =~ /(\d+)$/)
 		or goto force_reread;
 	}
     } elsif ($hd->{needKernelReread}) {
@@ -787,13 +786,12 @@ sub next_start {
 sub load {
     my ($hd, $file, $b_force) = @_;
 
-    local *F;
-    open F, $file or die \N("Error reading file %s", $file);
+    open(my $F, $file) or die \N("Error reading file %s", $file);
 
     my $h;
     {
 	local $/ = "\0";
-	eval <F>;
+	eval <$F>;
     }
     $@ and die \N("Restoring from file %s failed: %s", $file, $@);
 
