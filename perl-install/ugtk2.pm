@@ -37,6 +37,8 @@ use Gtk2;
 
 unless ($::no_ugtk_init) {
     !check_for_xserver() and die "Cannot be run in console mode.\n";
+    $::one_message_has_been_translated and warn("N() was called from $::one_message_has_been_translated BEFORE gtk2 initialisation, replace it with a N_() AND a translate() later.\n"), c::_exit(1);
+
     Gtk2->init(\@ARGV);
     c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
     $::need_utf8_i18n = 1;
