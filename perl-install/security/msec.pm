@@ -35,7 +35,7 @@ that can be set in msec's configuration files.
 
 =head1 COPYRIGHT
 
-Copyright (C) 2000,2001,2002 MandrakeSoft <cbelisle@mandrakesoft.com>
+Copyright (C) 2000-2002 MandrakeSoft <tvignaud@mandrakesoft.com>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

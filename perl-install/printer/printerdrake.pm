@@ -2757,10 +2757,8 @@ sub configure_queue {
 sub install_foomatic {
     my ($in) = @_;
     if (!$::testing &&
-	!files_exist(qw(/usr/bin/foomatic-configure
-				       /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm))) {
-	my $w = $in->wait_message(N("Printerdrake"),
-				  N("Installing Foomatic..."));
+	!files_exist(qw(/usr/bin/foomatic-configure /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm))) {
+	my $w = $in->wait_message(N("Printerdrake"), N("Installing Foomatic..."));
 	$in->do_pkgs->install('foomatic');
     }
 }

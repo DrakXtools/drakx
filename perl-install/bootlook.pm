@@ -2,7 +2,7 @@
 
 # Control-center
 
-# Copyright (C) 2001 MandrakeSoft
+# Copyright (C) 2001-2002 MandrakeSoft
 # Yves Duret <yduret at mandrakesoft.com>
 #
 # This program is free software; you can redistribute it and/or modify
