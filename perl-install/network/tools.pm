@@ -234,13 +234,13 @@ sub test_connected {
 
 sub connected2() {
     if ($kid_pid = open(my $kid_to_read, "-|")) {
-	#- parent
-	$kid_to_read;
-    } else {      
-	#- child
-	my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
-	print $a;
-	c::_exit(0);
+        #- parent
+        $kid_to_read;
+    } else {
+        #- child
+        require Net::Ping;
+        print Net::Ping->new("icmp")->ping("mandrakesoft.com") ? 1 : 0;
+        c::_exit(0);
     }
 }
 
