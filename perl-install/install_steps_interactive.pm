@@ -668,7 +668,6 @@ Please choose the minimal installation you want"), [ __("Base system only"), __(
 
 	#- reselect according to user selection.
 	if ($type eq __("Base system only")) {
-	    $o->{default_packages} = [];
 	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
 	} else {
 	    install_any::setDefaultPackages($o, 'clean');
