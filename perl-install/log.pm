@@ -25,7 +25,7 @@ sub l {
 	print LOG "* ", @_, "\n";
 	print LOG2 "* ", @_, "\n";
     } else {
-	print @_, "\n";
+	print STDERR @_, "\n";
     }
 }
 sub ld { $logDebugMessages and &l }
