@@ -120,7 +120,7 @@ install_kernel() {
  v=2.4.2-BOOT5
  scp kenobi:~chmou/work/kernel/archive/kernel-$v.tar.bz2 /tmp
  cd ~/gi/all.kernels ; rm -rf $v ; mkdir $v ; cd $v ; tar xfj /tmp/kernel-$v.tar.bz2 
- cd ~/gi ; ./update_kernel ; rm -f network.rdz ; ./make_boot_img network.rdz network ; 
+ cd ~/gi ; ./update_kernel ; rm -f images/network.rdz ; ./make_boot_img images/network.rdz network 
  scp all.kernels/$v/boot/vmlinu* kenobi:/tftpboot/vmlinuz
  scp images/network.rdz kenobi:/tftpboot
  cp -f ~/gi/all.modules/modules.cz-$v /export/Mandrake/mdkinst/lib/modules.cz
