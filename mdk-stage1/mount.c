@@ -40,6 +40,7 @@ int ensure_dev_exists(char *dev)
 	int type = S_IFBLK; /* my default type is block. don't forget to change for chars */
 	char * name;
 	struct stat buf;
+	char * ptr;
 	
 	name = &dev[5]; /* we really need that dev be passed as /dev/something.. */
 
@@ -85,13 +86,21 @@ int ensure_dev_exists(char *dev)
 		minor = name[2] - '0';
 	} else if (ptr_begins_static_str(name, "ida/") ||
 		   ptr_begins_static_str(name, "cciss/")) {
-		/* Compaq Smart Array */
-		char * ptr = strchr(name, '/');
+		/* Compaq Smart Array "ida/c0d0{p1}" */
+		ptr = strchr(name, '/');
 		mkdir("/dev/ida", 0755);
 		mkdir("/dev/cciss", 0755);
 		major = ptr_begins_static_str(name, "ida/") ? 72 : 104 + charstar_to_int(ptr+2);
 		ptr = strchr(ptr, 'd');
 		minor = 16 * charstar_to_int(ptr+1);
+		ptr = strchr(ptr, 'p');
+		minor += charstar_to_int(ptr+1);
+	} else if (ptr_begins_static_str(name, "rd/")) {
+		/* DAC960 "rd/cXdXXpX" */
+		mkdir("/dev/rd", 0755);
+		major = 48 + charstar_to_int(name+4);
+		ptr = strchr(name+4, 'd');
+		minor = 8 * charstar_to_int(ptr+1);
 		ptr = strchr(ptr, 'p');
 		minor += charstar_to_int(ptr+1);
 	} else {

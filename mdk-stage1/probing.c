@@ -53,13 +53,10 @@
 #include "probing.h"
 
 
-enum bus_type { IDE, SCSI, CPQ };
-
 struct media_info {
 	char * name;
 	char * model;
 	enum media_type type;
-	enum bus_type bus;
 };
 
 
@@ -379,7 +376,6 @@ static void find_media(void)
 		close(fd);
 
 		log_message("IDE/%d: %s is a %s", tmp[count].type, tmp[count].name, tmp[count].model);
-		tmp[count].bus = IDE;
 		count++;
     	}
 
@@ -496,7 +492,6 @@ static void find_media(void)
 				if (*tmp_name) {
 					tmp[count].name = strdup(tmp_name);
 					log_message("SCSI/%d: %s is a %s", tmp[count].type, tmp[count].name, tmp[count].model);
-					tmp[count].bus = SCSI;
 					count++;
 				}
 				
@@ -530,13 +525,43 @@ static void find_media(void)
 						tmp[count].type = DISK;
 						tmp[count].model = cpq_descr;
 						log_message("CPQ: found %s", tmp[count].name);
-						tmp[count].bus = CPQ;
 						count++;
 					}
 				}
 			}
 			fclose(f);
 			procfile++;
+		}
+	}
+
+	/* ----------------------------------------------- */
+	log_message("looking for DAC960");
+	{
+		FILE * f;
+		if ((f = fopen("/tmp/syslog", "rb"))) {
+			while (fgets(buf, sizeof(buf), f)) {
+				char * start;
+				if ((start = strstr(buf, "/dev/rd/"))) {
+					char * end = strchr(start, ':');
+					if (!end)
+						log_message("Inconsistency in syslog, line:\n%s", buf);
+					else {
+						*end = '\0';
+						tmp[count].name = strdup(start+5);
+						tmp[count].type = DISK;
+						start = end + 2;
+						end = strchr(start, ',');
+						if (end) {
+							*end = '\0';
+							tmp[count].model = strdup(start);
+						} else
+							tmp[count].model = "(unknown)";
+						log_message("DAC960: found %s (%s)", tmp[count].name, tmp[count].model);
+						count++;
+					}
+				}
+			}
+			fclose(f);
 		}
 	}
 
