@@ -661,7 +661,7 @@ sub selectMouse($) {
 sub configureNetwork {
     my ($o) = @_;
     require network::network;
-    network::network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
+    network::network::configureNetwork2($o, $o->{modules_conf}, $o->{prefix}, $o->{netc}, $o->{intf});
     if ($o->{method} =~ /ftp|http|nfs/) {
 	$o->{netcnx}{type} = 'lan';
 	$o->{netcnx}{$_} = $o->{netc}{$_} foreach qw(NET_DEVICE NET_INTERFACE);
