@@ -77,6 +77,9 @@ my $netc = {};
 my $intf = {};
 my $c_time = 0;
 my $ct_tag;
+my $style= new Gtk::Style;
+$style->font(Gtk::Gdk::Font->fontset_load("-adobe-times-medium-r-normal-*-12-*-75-75-p-*-iso8859-*,*-r-*"));
+
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
 my $combo1 = new Gtk::Combo;
@@ -374,8 +377,8 @@ sub update {
 	$button_connect->set_sensitive(0);
 	$label_c->set("No internet connection configured");
     }
-    $time_tag2 = Gtk->timeout_add(5000, \&update);
-    0;
+    #$time_tag2 = Gtk->timeout_add(5000, \&update);
+    1;
 }
 
 sub draw_monitor {
@@ -429,8 +432,6 @@ sub draw_monitor {
     my $gcl = new Gtk::Gdk::GC($o->{darea}->window);
     $gcl->set_foreground($o->{darea}->window->get_colormap->color_white());
     $gcl->set_line_attributes (1, 'on-off-dash', 'not-last', 'round');
-    my $style= new Gtk::Style;
-    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-times-medium-r-normal-*-12-*-75-75-p-*-iso8859-*,*-r-*"));
     for (my $i = 30;$i<=120;$i+=30) {
 	$o->{pixmap_db}->draw_line($gcl, 50, $i, 300, $i);
 	my ($gc2, $text);
