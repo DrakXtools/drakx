@@ -134,7 +134,10 @@ my %groups = (
               },
              );
 
-$groups{$_} = $groups{HARDDISK} foreach qw(BURNER CDROM DVDROM);
+foreach my $class (qw(BURNER CDROM DVDROM)) {
+    $groups{$class} = $groups{HARDDISK};
+    $fields{$class} = $fields{HARDDISK};
+}
 
 
 my ($in, $pid, $w);
