@@ -1,6 +1,6 @@
 %define name drakxtools
 %define version 1.1.8
-%define release 1mdk
+%define release 2mdk
 
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name: %{name}
@@ -39,8 +39,8 @@ Requires: %{name}-newt = %{version}-%{release}, perl-Net_SSLeay, perl-Authen-PAM
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
 Requires: %{name} = %{version}-%{release}
-Obsoletes: kudzu, libdetect0, libdetect0-devel
-Provides: kudzu, libdetect0, libdetect0-devel
+Obsoletes: kudzu, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+Provides: kudzu, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
 %description
 Contains XFdrake, diskdrake, keyboarddrake, lspcidrake, mousedrake,
@@ -156,11 +156,7 @@ done
 
 
 %post -n harddrake
-%_post_service harddrake
 %update_menus
-
-%preun -n harddrake
-%_preun_service harddrake
 
 %postun -n harddrake
 %clean_menus
@@ -195,6 +191,13 @@ done
 %config(noreplace) %{_sysconfdir}/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Jul  8 2002 tve <tv@vador.mandrakesoft.com> 1.1.8-2mdk
+- harddrake2 :
+  o obsoletes/provides libdetect-lst, libdetect-lst-devel, detect, detect-lst
+  o cache detect_devices::probeall(1) so that hw probe is run once
+  o enhanced help
+  o 
+
 * Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
 - new entries: 
