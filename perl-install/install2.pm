@@ -288,7 +288,9 @@ sub formatPartitions {
     $o->formatMountPartitions($o->{fstab}) unless $::testing;
 
     mkdir "$o->{prefix}/$_", 0755 foreach 
-      qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
+      qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console 
+	etc/sysconfig/network-scripts etc/sysconfig/console/consolefonts 
+	etc/sysconfig/consoletrans
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp);
 

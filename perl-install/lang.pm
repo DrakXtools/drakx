@@ -340,7 +340,7 @@ sub write {
 		eval {
 		    commands::cp("-f",
 			"$p/consolefonts/$c->[0].psf.gz",
-			"$prefix/etc/sysconfig/console");
+			"$prefix/etc/sysconfig/console/consolefonts");
 		};
 		$@ and log::l("missing console font $c->[0]");
 	    }
@@ -349,7 +349,7 @@ sub write {
 		eval {
 		    commands::cp("-f",
 			glob_("$p/consoletrans/$c->[1]*"),
-			"$prefix/etc/sysconfig/console");
+			"$prefix/etc/sysconfig/console/consoletrans");
 		};
 		$@ and log::l("missing console unimap file $c->[1]");
 	    }
@@ -358,7 +358,7 @@ sub write {
 		eval {
 		    commands::cp("-f",
 			glob_("$p/consoletrans/$c->[2]*"),
-			"$prefix/etc/sysconfig/console");
+			"$prefix/etc/sysconfig/console/consoletrans");
 		};
 		$@ and log::l("missing console acm file $c->[2]");
 	    }
