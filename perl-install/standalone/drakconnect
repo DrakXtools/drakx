@@ -68,7 +68,7 @@ local $_ = join '', @ARGV;
 /--old/ and goto old;
 if (/--install/) {
     $::isInstall = 1;
-    add_intf()
+    add_intf();
 }
 /--internet/ and configure_net($netcnx, $netc, $intf);
 
@@ -275,7 +275,7 @@ sub build_tree {
 	$intf->{save} = sub {
             $netc->{internet_cnx_choice} = 'adsl';
             $netc->{at_boot} = $intf->{ONBOOT} eq 'yes' ? 1 : 0;
-            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $interface_name, $protocol)
+            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $interface_name, $protocol);
           };
     }
     elsif ($interface eq 'modem') {
@@ -309,13 +309,15 @@ sub build_notebook {
 						  Gtk2::Label->new(N("Protocol")),
                                                   $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::ComboBox->new_text,
                                                                             changed => sub {
-                                                                            return if !$_[0]->realized;
-                                                                            my $proto = $gui->{intf}{BOOTPROTO};
-                                                                            my $protocol = $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
+                                                                                return if !$_[0]->realized;
+                                                                                my $proto = $gui->{intf}{BOOTPROTO};
+                                                                                my $protocol = $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
 
-                                                                            foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
-                                                                                $_->set_sensitive($protocol eq "static" ? 1 : 0)
-                                                                            }; $apply->() },
+                                                                                foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
+                                                                                    $_->set_sensitive($protocol eq "static" ? 1 : 0);
+                                                                                }
+                                                                                $apply->();
+                                                                            },
                                                                                              ),
                                                  ),
                                     ),
@@ -359,8 +361,8 @@ sub build_notebook {
             $proto->set_popdown_strings(values %{$proto->{protocols}});
             $proto->set_text($proto->{protocols}{$intf->{BOOTPROTO} || 'none'});
             foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
-                $_->set_sensitive($intf->{BOOTPROTO} eq 'static' ? 1 : 0)
-            };
+                $_->set_sensitive($intf->{BOOTPROTO} eq 'static' ? 1 : 0);
+            }
 	} else {
 	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
 	    delete $gui->{intf}{BOOTPROTO};
@@ -487,7 +489,7 @@ sub build_notebook {
 					       gtkpack__(Gtk2::HBox->new, $gui->{intf}{$_->[1]} = gtksignal_connect(Gtk2::ComboBox->new_text,
                                                                                                                     changed => $apply)),
 					      ),
-                                      ),
+                                   )
                                   } ([ N("Flow control"), 'FlowControl' ],
                                      [ N("Line termination"), 'Enter' ],
                                      [ N("Connection speed"), 'Speed' ],
@@ -684,7 +686,7 @@ sub del_intf() {
                                           list => [ keys %$intf ],
                                           format => sub {
                                               my $type = network::tools::get_interface_type($intf->{$_[0]});
-                                              $ethernet_names{$_[0]} || ($type ? "$type ($_[0])" : $_[0])
+                                              $ethernet_names{$_[0]} || ($type ? "$type ($_[0])" : $_[0]);
                                             }
                                         }
                                       ],
@@ -710,11 +712,9 @@ sub del_intf() {
                             },
                  end => {
                          name => sub {
-                             ($faillure ?
-                              N("An error occurred while deleting the \"%s\" network interface:\n\n%s",
-                                $intf2delete, $faillure) :
-                              N("Congratulations, the \"%s\" network interface has been successfully deleted", $intf2delete)
-                             )
+                             $faillure ?
+                               N("An error occurred while deleting the \"%s\" network interface:\n\n%s", $intf2delete, $faillure)
+                             : N("Congratulations, the \"%s\" network interface has been successfully deleted", $intf2delete);
                          },
                          end => 1,
                         },
@@ -771,7 +771,7 @@ sub apply {
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
-sub chk_internet() { `LC_ALL=C LANGUAGE=C /sbin/chkconfig --list | grep internet` =~ /:on/ ? 1 : 0 };
+sub chk_internet() { `LC_ALL=C LANGUAGE=C /sbin/chkconfig --list | grep internet` =~ /:on/ ? 1 : 0 }
 
 sub update_intbutt() {
     $int_state->set($isconnected ? N("Connected") : N("Not connected"));
@@ -836,7 +836,7 @@ sub quit_global() {
 
 sub get_intf_status {
     my ($c) = @_;
-    ethisup($c) ? N("Deactivate now") : N("Activate now")
+    ethisup($c) ? N("Deactivate now") : N("Activate now");
 }
 
 sub configure_lan() {
@@ -1036,7 +1036,7 @@ Run the \"Add Connection\" assistant from the Mandrakelinux Control Center"));
                                                 gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
                                                                           foreach my $i (0..$#conf_data) {
                                                                               ${$conf_data[$i][1]} = $infos[2*$i+1]->get_text;
-                                                                          };
+                                                                          }
                                                                           # called from old GUI?
                                                                           if ($label_host) {
                                                                               update();

@@ -275,11 +275,11 @@ sub get_default_metric {
     $idx * 10;
 }
 
-sub ndiswrapper_installed_drivers {
+sub ndiswrapper_installed_drivers() {
     `ndiswrapper -l` =~ /(\w+)\s+driver present/mg;
 }
 
-sub ndiswrapper_available_drivers {
+sub ndiswrapper_available_drivers() {
     `ndiswrapper -l` =~ /(\w+)\s+driver present, hardware present/mg;
 }
 

@@ -81,7 +81,6 @@ sub start_daemons () {
     system("/etc/rc.d/init.d/squid status >/dev/null") == 0 and sys("/etc/rc.d/init.d/squid stop");
     system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
 
-    my $netscripts = '/etc/sysconfig/network-scripts';
     sys("/etc/rc.d/init.d/network restart >/dev/null");
 
     sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'squid';
@@ -130,7 +129,7 @@ What would you like to do?"),
 	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
 		rename($_, "$_.old") if -f $_;
 		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
-	    };
+	    }
 	    {
 		my $_wait_enabl = $in->wait_message('', N("Enabling servers..."));
 		start_daemons();
@@ -159,7 +158,7 @@ What would you like to do?"),
 		stop_daemons();
 	    }
 	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
-		if (-f $_) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" };
+		if (-f $_) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" }
 	    }
 			print "remove rules entries\n";
 			substInFile {
@@ -227,7 +226,7 @@ Examples:
 
 my @cards = grep {
     log::l("[drakgw] Have network card: $_");
-    $_ ne $card_netconnect
+    $_ ne $card_netconnect;
 } detect_devices::getNet();
 push @cards, $card_netconnect if $::testing;
 log::l("[drakgw] Available network cards: ", join(", ", @cards));
@@ -607,5 +606,5 @@ quit_global($in, 0);
 sub quit_global {
     my ($in, $exitcode) = @_;
     $in->exit($exitcode);
-    goto begin
+    goto begin;
 }
