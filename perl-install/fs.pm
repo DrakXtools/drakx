@@ -126,25 +126,36 @@ sub merge_fstabs {
     @l;
 }
 
+sub analyze_wild_device_name {
+    my ($dev) = @_;
+
+    if ($dev =~ m!^/(tmp|u?dev)/(.*)!) {
+	'dev', $dev;
+    } elsif ($dev !~ m!^/! && -e "$::prefix/dev/$dev") {
+	'dev', "/dev/$dev";
+    } elsif ($dev =~ /^LABEL=(.*)/) {
+	'label', $1;
+    } elsif ($dev eq 'none' || $dev eq 'rootfs') {
+	'virtual';
+    } elsif ($dev =~ m!^(\S+):/\w!) {
+	'nfs';
+    } elsif ($dev =~ m!^//\w!) {
+	'smb';
+    } elsif ($dev =~ m!^http://!) {
+	'dav';
+    }
+}
+
 sub subpart_from_wild_device_name {
     my ($dev) = @_;
 
-    if ($dev =~ /^LABEL=(.*)/) {
-	return { device_LABEL => $1 };
-    } elsif ($dev eq 'none') {
-    } elsif ($dev eq 'rootfs') {
-    } elsif ($dev =~ m!^(\S+):/\w!) {
-	#- nfs
-    } elsif ($dev =~ m!^//\w!) {
-	#- smb
-    } elsif ($dev =~ m!^http://!) {
-	#- http
-    } else {
-	if ($dev !~ m!^/! && -e "$::prefix/dev/$dev") {
-	    $dev = "/dev/$dev";
-	}
-	if ($dev =~ m!^/(tmp|u?dev)/(.*)!) {
-	    my %part;
+    my $part = { device => $dev, faked_device => 1 }; #- default
+
+    if (my ($kind, $val) = analyze_wild_device_name($dev)) {
+	if ($kind eq 'label') {	    
+	    $part->{device_LABEL} = $val;
+	} elsif ($kind eq 'dev') {
+	    my %part = (faked_device => 0);
 	    if (my $rdev = (stat "$::prefix$dev")[6]) {
 		($part{major}, $part{minor}) = unmakedev($rdev);
 	    }
@@ -161,19 +172,47 @@ sub subpart_from_wild_device_name {
 		$part{part_number} = $part_number if $part_number;
 		$part{devfs_device} = $dev;
 	    } else {
-		$part{device} = $dev;
 		my $part_number = devices::part_number(\%part);
 		$part{part_number} = $part_number if $part_number;
 	    }
+	    $part{device} = $dev;
 	    return \%part;
-	} elsif ($dev =~ m!^/! && -f "$::prefix$dev") {
-	    #- loopback file or directory to bind
+	}
+    } else {
+	if ($dev =~ m!^/! && -f "$::prefix$dev") {
+	    #- it must be a loopback file or directory to bind
 	} else {
 	    log::l("part_from_wild_device_name: unknown device $dev");
 	}
     }
-    #- default
-    { device => $dev };
+    $part;
+}
+
+sub part2wild_device_name {
+    my ($prefix, $part) = @_;
+
+    if ($part->{prefer_device_LABEL}) {
+	'LABEL=' . $part->{device_LABEL};
+    } elsif ($part->{prefer_devfs_name}) {
+	"/dev/$part->{devfs_device}";
+    } elsif ($part->{device_alias}) {
+	"/dev/$part->{device_alias}";
+    } else {
+	my $faked_device = exists $part->{faked_device} ? 
+	    $part->{faked_device} : 
+	    do {
+		#- in case $part has been created without using subpart_from_wild_device_name()
+		my ($kind) = analyze_wild_device_name($part->{device});
+		$kind ? $kind ne 'dev' : $part->{device} =~ m!^/!;
+	    };
+	if ($faked_device) {
+	    $part->{device};
+	} else {
+	    my $dev = "/dev/$part->{device}";
+	    eval { devices::make("$prefix$dev") };
+	    $dev;
+	}
+    }
 }
 
 sub add2all_hds {
@@ -258,7 +297,7 @@ sub prepare_write_fstab {
 	my $device = 
 	  isLoopback($_) ? 
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : $_->{loopback_device}{mntpoint}) . $_->{loopback_file} :
-	  part2device($o_prefix, $_->{prefer_devfs_name} ? $_->{devfs_device} : $_->{device}, $_->{fs_type});
+	  part2wild_device_name($o_prefix, $_);
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir_p("$o_prefix$real_mntpoint") if $real_mntpoint =~ m|^/|;
@@ -288,28 +327,26 @@ sub prepare_write_fstab {
 
 	    my $fs_type = $_->{fs_type} || 'auto';
 
-	    my $dev = 
-	      $_->{prefer_device_LABEL} ? 'LABEL=' . $_->{device_LABEL} :
-	      $_->{device_alias} ? "/dev/$_->{device_alias}" : $device;
+	    my $dev = $device;
 
 	    $mntpoint =~ s/ /\\040/g;
-	    $dev =~ s/ /\\040/g;
+	    $device =~ s/ /\\040/g;
 
 	    # handle bloody supermount special case
 	    if ($options =~ /supermount/) {
 		my @l = grep { $_ ne 'supermount' } split(',', $options);
 		my ($l1, $l2) = partition { member($_, 'ro', 'exec') } @l;
-		$options = join(",", "dev=$dev", "fs=$fs_type", @$l1, if_(@$l2, '--', @$l2));
-		($dev, $fs_type) = ('none', 'supermount');
+		$options = join(",", "dev=$device", "fs=$fs_type", @$l1, if_(@$l2, '--', @$l2));
+		($device, $fs_type) = ('none', 'supermount');
 	    } else {
 		#- if we were using supermount, the type could be something like ext2:vfat
 		#- but this can't be done without supermount, so switching to "auto"
 		$fs_type = 'auto' if $fs_type =~ /:/;
 	    }
 
-	    my $file_dep = $options =~ /\b(loop|bind)\b/ ? $dev : '';
+	    my $file_dep = $options =~ /\b(loop|bind)\b/ ? $device : '';
 
-	    [ $file_dep, $mntpoint, $_->{comment} . join(' ', $dev, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
+	    [ $file_dep, $mntpoint, $_->{comment} . join(' ', $device, $mntpoint, $fs_type, $options || 'defaults', $freq, $passno) . "\n" ];
 	} else {
 	    ();
 	}
@@ -349,17 +386,6 @@ sub write_fstab {
     my ($s, $smb_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
     output("$o_prefix/etc/fstab", $s);
     network::smb::save_credentials($_) foreach @$smb_credentials;
-}
-
-sub part2device {
-    my ($prefix, $dev, $fs_type) = @_;
-    $dev eq 'none' || member($fs_type, qw(nfs smbfs davfs)) ? 
-      $dev : 
-      do {
-	  my $dir = $dev =~ m!^(/|LABEL=)! ? '' : '/dev/';
-	  eval { devices::make("$prefix$dir$dev") };
-	  "$dir$dev";
-      };
 }
 
 sub auto_fs() {
@@ -454,7 +480,7 @@ sub mount {
 
     -d $where or mkdir_p($where);
 
-    $dev = part2device('', $dev, $fs);
+    $dev = part2wild_device_name('', { device => $dev });
 
     $fs or log::l("not mounting $dev partition"), return;
 
