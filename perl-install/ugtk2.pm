@@ -395,14 +395,6 @@ sub create_dialog {
     $ret;
 }
 
-# drakfloppy / logdrake
-sub destroy_window {
-    my ($_widget, $windowref, $w2) = @_;
-    $$windowref = undef;
-    $w2 = undef if defined $w2;
-    0;
-}
-
 sub create_hbox { gtkset_layout(gtkset_border_width(Gtk2::HButtonBox->new, 3), $_[0] || 'spread') }
 sub create_vbox { gtkset_layout(Gtk2::VButtonBox->new, $_[0] || 'spread') }
 
