@@ -77,12 +77,13 @@ sub vnew {
 	return interactive_http->new;
     }
     require c;
+    if ($su) {
+	$ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+	$su = '' if $::testing;
+    }
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
-	if ($su) {
-	    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-	    if ($> && !$::testing) {
-		exec("kdesu", "-c", "$0 @ARGV") or die _("kdesu missing");
-	    }
+	if ($su && $>) {
+	    exec("kdesu", "-c", "$0 @ARGV") or die _("kdesu missing");
 	}
 	eval { require interactive_gtk };
 	if (!$@) {
@@ -265,6 +266,7 @@ sub ask_from_normalize {
 	    ${$e->{val}} = $li->[0] if ($e->{type} ne 'combo' || $e->{not_edit}) && !member(${$e->{val}}, @$li);
 	    if ($e->{type} eq 'combo' && $e->{format}) {
 		my @l = map { $e->{format}->($_) } @{$e->{list}};
+		delete $e->{format};
 		each_index {
 		    ${$e->{val}} = $l[$::i] if $_ eq ${$e->{val}};
 		} @{$e->{list}};
