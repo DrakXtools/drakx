@@ -242,52 +242,59 @@ int ramdisk_possible(void)
 }
 
 
-enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall))
+enum return_type save_fd(int from_fd, char * to, void (*callback_func)(int overall))
 {
-        FILE * f_from, * f_to;
+        FILE * f_to;
         size_t quantity __attribute__((aligned(16))), overall = 0;
         char buf[4096] __attribute__((aligned(4096)));
         int ret = RETURN_ERROR;
 
-        log_message("copy_file: %s -> %s", from, to);
-
-        if (!(f_from = fopen(from, "rb"))) {
-                log_perror(from);
-                return RETURN_ERROR;
-        }
-
         if (!(f_to = fopen(to, "w"))) {
                 log_perror(to);
                 goto close_from;
-                return RETURN_ERROR;
         }
 
         do {
-                if ((quantity = fread(buf, 1, sizeof(buf), f_from)) > 0) {
+		quantity = read(from_fd, buf, sizeof(buf));
+		if (quantity > 0) {
                         if (fwrite(buf, 1, quantity, f_to) != quantity) {
                                 log_message("short write (%s)", strerror(errno));
                                 goto cleanup;
                         }
-                }
+                } else if (quantity == -1) {
+			log_message("an error occured: %s", strerror(errno));
+			goto cleanup;
+		}
+
                 if (callback_func) {
                         overall += quantity;
                         callback_func(overall);
                 }
-        } while (!feof(f_from) && !ferror(f_from) && !ferror(f_to));
-
-        if (ferror(f_from) || ferror(f_to)) {
-                log_message("an error occured: %s", strerror(errno));
-                goto cleanup;
-        }
+        } while (quantity);
 
         ret = RETURN_OK;
 
  cleanup:
         fclose(f_to);
  close_from:
-        fclose(f_from);
+        fclose(from_fd);
 
         return ret;
+}
+
+enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall))
+{
+        int from_fd;
+
+	log_message("copy_file: %s -> %s", from, to);
+
+	from_fd = open(from, O_RDONLY);
+	if (from_fd != -1) {
+		return save_fd(from_fd, to, callback_func);
+	} else {
+                log_perror(from);
+                return RETURN_ERROR;
+        }
 }
 
 #ifndef MANDRAKE_MOVE
