@@ -373,13 +373,14 @@ sub setPackages {
 	    my $prev_asked_medium = $asked_medium;
 	    if ($suppl_method && !$o->{isUpgrade}
 	        && (my $suppl = $o->ask_from_list_('', N("Do you have a supplementary installation media to configure?"),
-			[ N_("None"), N_("CD-ROM"), N_("Network (http)") ], 'None')
+			[ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None')
 		   ) ne 'None')
 	    {
 		#- translate to method name
 		$suppl_method = {
 		    'CD-ROM' => 'cdrom',
 		    'Network (http)' => 'http',
+		    'Network (ftp)' => 'ftp',
 		}->{$suppl};
 		#- by convention, the media names for suppl. CDs match /^\d+s$/
 		my $medium_name = $suppl_method eq 'cdrom' ? '1s' : int(keys %{$o->{packages}{mediums}}) + 1;
@@ -420,8 +421,14 @@ sub setPackages {
 		} else {
 		    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or $suppl_method = '', last SUPPL;
 		    useMedium($medium_name);
-		    require http;
-		    my $f = eval { http::getFile("$url/media_info/hdlist.cz") };
+		    require "$suppl_method.pm";
+		    my $f = eval {
+			if ($suppl_method eq 'http') {
+			    http::getFile("$url/media_info/hdlist.cz");
+			} elsif ($suppl_method eq 'ftp') {
+			    ftp::getFile("$url/media_info/hdlist.cz");
+			} else { undef }
+		    };
 		    if (!defined $f) {
 			log::l($@) if $@;
 			$o->ask_warn('', N("Can't find hdlist file on this mirror"));
