@@ -76,18 +76,16 @@ sub patch_pcmcia_config {
     my @conf_contents = cat_("$pcmcia_root/pcmcia/config");
     die "$pcmcia_root/pcmcia/config seems short\n" if listlength(@conf_contents) < 10;
 
-    #- remove all modules with directories since we don't support that during install
-    /\s+class.*module.*/ and s|"[^"]+/([^"]+)"|"$1"|g foreach @conf_contents;
-
     #- adjust deps
     foreach (cat_("all.modules/$main/modules.dep")) {
 	/^(\S+): (.*)/ and $deps{$1} = [ split ' ', $2 ] or die "could not understand `$_' in all.modules/$main/modules.dep\n";
     }
     foreach my $confline (@conf_contents) {
 	$confline =~ /class.*\s+module\s+(.*)/ or next;
-	my @modules = map { /^\s*"([^"]+)"\s*$/ ? $1 : $_ } split ',', $1;
-	my @modules_with_deps = map { @{$deps{$_}}, $_ } @modules;
-	my $new_modz = join ', ', map { "\"$_\"" } uniq(difference2(\@modules_with_deps, \@ignore_modules_in_deps));
+	my @modules = map { /"([^"]+)"(.*)/ && [ $1, $2 ] } split ',', $1;
+	$_->[0] =~ s|.*/([^/]+)$|$1|g foreach @modules;  #- remove directories since we don't support that during install
+	my @deps = grep { !member($_, @ignore_modules_in_deps, map { $_->[0] } @modules) } map { @{$deps{$_->[0]}} } @modules;
+	my $new_modz = join ', ', (map { "\"$_\"" } @deps), (map { "\"$_->[0]\"$_->[1]" } @modules);
 	$confline =~ s/(class.*\s+module\s+).*/$1$new_modz/;
     }
 
