@@ -173,13 +173,24 @@ perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 
 #mdk menu entry
 mkdir -p $RPM_BUILD_ROOT/%_menudir
+
+cat > $RPM_BUILD_ROOT%_menudir/localedrake <<EOF
+?package(harddrake-ui):\
+	needs="X11"\
+	section="Configuration/Other"\
+	title="LocaleDrake"\
+	longtitle="Language configurator"\
+	command="/usr/bin/localedrake"\
+	icon="harddrake.png"
+EOF
+
 cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 ?package(harddrake-ui):\
 	needs="X11"\
 	section="Configuration/Hardware"\
 	title="HardDrake"\
-	longtitle="Hardware Central Configuration/information tool"\
-	command="/usr/sbin/harddrake2"\
+	longtitle="Show extracted information from the system logs"\
+	command="/usr/sbin/logdrake"\
 	icon="harddrake.png"
 EOF
 
@@ -258,6 +269,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)
+%_menudir/localedrake
 %config(noreplace) %_sysconfdir/pam.d/net_monitor
 %config(noreplace) %_sysconfdir/security/console.apps/net_monitor
 /usr/X11R6/bin/*
@@ -294,7 +306,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Sat Mar  8 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-19mdk
 - ugtk2.pm: fix still seldom happening #1445 (clicking two times too
   fast)
-- drakxservices: fix embedding and packing in standalone mode
+- drakxservices: fix embedding and packing in standalone mode (tv)
+- localedrake: add menu entry (fix #1461) (tv)
+- draksec: fix wait messages displaying (label was not displayed) in
+  both standalone and embedded modes (tv)
 
 * Fri Mar  7 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-18mdk
 - ugtk2.pm: fix rpmdrake dumping core when multiple searchs in some
