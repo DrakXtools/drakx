@@ -67,13 +67,19 @@ sub remove_light_tree {
 
 my @always_list = chomp_(cat_('data/always.list'));
 my @boot_list = chomp_(cat_('data/boot.list'));
+my @totem_list = chomp_(cat_('data/totem.list'));
+
+@always_list = uniq(@always_list, intersection(\@boot_list, \@totem_list));
 
 @boot_list = difference2(\@boot_list, \@always_list);
+@totem_list = difference2(\@totem_list, \@always_list);
 
 remove_light_tree('always', \@always_list);
 remove_light_tree('boot', \@boot_list);
+remove_light_tree('totem', \@totem_list);
 
 if (!@ARGV) {
     create_light_tree('always', \@always_list);    
     create_light_tree('boot', \@boot_list);    
+    create_light_tree('totem', \@totem_list);    
 }
