@@ -194,14 +194,19 @@ $x_main_frame->add($x_dedans);
 $global_vbox->pack_start ($x_main_frame, 1, 1, 0);
 
 ### final buttons
+my $bbox = new Gtk::HButtonBox;
+$global_vbox->pack_start($bbox, 0, 0, 0);
+$bbox->set_layout(-end);
 my $build_button = new Gtk::Button _("OK");
-my $cancel_button = new Gtk::Button _("Quit");
+$bbox->add($build_button);
+my $apply_button = new Gtk::Button _("Apply");
+$bbox->add($apply_button);
+my $cancel_button = new Gtk::Button $::isEmbedded ? _("Cancel") : _("Quit");
+$bbox->add($cancel_button);
 my $fin_hbox = new Gtk::HBox( 0, 0 );
 $cancel_button->signal_connect( clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
-$build_button->signal_connect(clicked => sub {updateInit(); updateAutologin(); updateAurora();});
-$fin_hbox->pack_end($cancel_button, 0, 0, 0);
-$fin_hbox->pack_end($build_button,  0, 0, 10);
-$global_vbox->pack_start($fin_hbox, 0, 0, 0);
+$build_button->signal_connect(clicked => sub{updateInit();updateAutologin();updateAurora();$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
+$apply_button->signal_connect(clicked => sub{updateInit();updateAutologin();updateAurora(); });
 
 ### back to window
 $window->add($global_vbox);
