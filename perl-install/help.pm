@@ -41,7 +41,7 @@ Linux-Mandrake operating system:
 	  be very easy and you will be asked only on few questions.
 
 
-	* Customized: if you are familiar enough with GNU/Linux, you may choose the primary usge (workstation, server,
+	* Customized: if you are familiar enough with GNU/Linux, you may choose the primary usage (workstation, server,
 	  development) of your sytem. You will need to answer to more questions than in \"Recommanded\" installation
 	  class, so you need to know how works GNU/Linux to choose this installation class.
 
@@ -114,7 +114,7 @@ dividing it to create space to install your new Linux-Mandrake system.
 
 Because the effects of the partitioning process are usually irreversible,
 partitioning can be intimidating and stressful if you are an inexperienced user.
-This wizard simplifies this process. Before begining, please consult the manual
+This wizard simplifies this process. Before beginning, please consult the manual
 and take your time.
 
 
