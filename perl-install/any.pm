@@ -76,7 +76,7 @@ sub enableShadow {
     run_program::rooted($prefix, "pwconv")  or log::l("pwconv failed");
     run_program::rooted($prefix, "grpconv") or log::l("grpconv failed");
 }
-sub enableMD5Shadow {
+sub enableMD5Shadow { #- NO MORE USED
     my ($prefix, $shadow, $md5) = @_;
     substInFile {
 	if (/^password.*pam_pwdb.so/) {
@@ -342,11 +342,12 @@ sub set_autologin {
   if ($user) {
       my %l = getVarsFromSh("$prefix/etc/sysconfig/desktop");
       $l{DESKTOP} = uc($desktop);
-      setVarsInSh("$prefix/etc/sysconfig/desktop", %l);
+      setVarsInSh("$prefix/etc/sysconfig/desktop", \%l);
+      log::l("cat $prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$prefix/etc/sysconfig/desktop"));
   }
   setVarsInSh("$prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
-  log::l("cat $prefix/etc/sysconfig/autologin: ", cat_("$prefix/etc/sysconfig/autologin"));
+  log::l("cat $prefix/etc/sysconfig/autologin ($user):\n", cat_("$prefix/etc/sysconfig/autologin"));
 }
 
 sub rotate_log {
@@ -764,7 +765,8 @@ sub autologin {
 				   _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
 				   [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
-				     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
+				     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ])
+	  or delete $o->{autologin};
     }
 }
 
