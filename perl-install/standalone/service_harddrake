@@ -112,7 +112,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif ($Ident eq "VIDEO") {
         require harddrake::autoconf;
         harddrake::autoconf::xconf();
-        undef @configurator_pool;
+        next;
     }
 
     next if $is_globetrotter && !$hw_class->{automatic};
