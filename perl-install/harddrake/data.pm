@@ -229,7 +229,7 @@ our @tree =
           my $a = network::adsl::adsl_detect();
           $a ? f(grep { $_ } values %$a) : ();
       },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
