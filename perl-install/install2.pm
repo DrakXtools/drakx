@@ -455,8 +455,9 @@ sub main {
     #- done after module dependencies are loaded for "vfat depends on fat"
     if ($::auto_install) {
 	if ($::auto_install =~ /-IP(\.pl)?$/) {
-	    my $ip = join('', map { sprintf "%02X", $_ } split '\.', $o->{intf}{IPADDR});
-	    $::auto_install =~ s/-IP(\.pl)?$/-$ip$1/;
+	    my ($ip) = cat_('/tmp/stage1.log') =~ /configuring device (?!lo)\S+ ip: (\S+)/;
+	    my $normalized_ip = join('', map { sprintf "%02X", $_ } split('\.', $ip)); 
+	    $::auto_install =~ s/-IP(\.pl)?$/-$normalized_ip$1/;
 	}
 	require install_steps_auto_install;
 	eval { $o = $::o = install_any::loadO($o, $::auto_install) };
