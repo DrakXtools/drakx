@@ -427,7 +427,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		abnormal_termination = 1;
 	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_proceed) {
 		kill(klog_pid, 9);
-		printf("exiting init -- proceeding\n");
+		printf("proceeding\n");
 		return 0;
         } else
 		printf("install succeeded\n");
