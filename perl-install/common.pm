@@ -136,7 +136,7 @@ sub grep_each(&%) {
     while (($::a, $::b) = each %h) { $l{$::a} = $::b if &$f($::a, $::b) }
     %l;
 }
-sub list2kv { [ grep_index { even($::i) } @_ ], [ grep_index { odd($::i) } @_ ] }
+sub list2kv(@) { [ grep_index { even($::i) } @_ ], [ grep_index { odd($::i) } @_ ] }
 
 #- pseudo-array-hash :)
 sub map_tab_hash(&$@) {

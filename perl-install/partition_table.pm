@@ -14,6 +14,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @fields2save);
 use common qw(:common :system :functional);
 use partition_table_dos;
 use partition_table_bsd;
+use partition_table_sun;
 use Data::Dumper;
 
 
@@ -231,7 +232,7 @@ sub verifyParts($) {
 }
 sub verifyPrimary($) {
     my ($pt) = @_;
-    $_->{start} > 0 || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
+    $_->{start} > 0 || arch() eq "sparc" || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
     verifyParts_(@{$pt->{normal}}, $pt->{extended});
 }
 
@@ -328,7 +329,8 @@ sub read_one($$) {
     my ($hd, $sector) = @_;
 
     my ($pt, $info);
-    foreach ('dos', 'bsd') {
+    foreach ('dos', 'bsd', 'sun', 'unknown') {
+	/unknown/ and die "unknown partition table format";
 	eval {
 	    bless $hd, "partition_table_$_";
 	    ($pt, $info) = $hd->read($sector);
@@ -337,7 +339,8 @@ sub read_one($$) {
 	$@ or last;
     }
 
-    my @extended = grep { isExtended($_) } @$pt;
+
+    my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();
     my @normal = grep { $_->{size} && $_->{type} && !isExtended($_) } @$pt;
 
     @extended > 1 and die "more than one extended partition";

@@ -55,7 +55,7 @@ sub kernel_read($) {
 sub zero_MBR($) {
     my ($hd) = @_;
 #    unless (ref($hd) =~ /partition_table/) {
-	my $type = arch() eq "alpha" ? "bsd" : "dos";
+	my $type = arch() eq "alpha" ? "bsd" : arch() eq "sparc" ? "sun" : "dos";
 	bless $hd, "partition_table_$type";
 #    }
     $hd->{isDirty} = $hd->{needKernelReread} = 1;

@@ -66,16 +66,20 @@ sub read($$) {
     sysread F, $tmp, psizeof($main_format) or die "error while reading partition table in sector $sector";
     my %info; @info{@$main_fields} = unpack $main_format, $tmp;
 
+    $info{npartitions} <= $nb_primary or die "too many partitions ($info{npartitions} > $nb_primary) for a bsd disklabel";
+
+    #- check magic number
+    $info{magic}  == $magic or die "bad magic number";
+    $info{magic2} == $magic or die "bad magic number";
+
+    #- TODO verify checksum
+
     my @pt = map {
 	sysread F, $tmp, psizeof($format) or die "error while reading partition table in sector $sector";
 	my %h; @h{@fields} = unpack $format, $tmp;
 	$h{type} = $typeToDos{$h{type}} || $h{type};
 	\%h;
-    } (1..$nb_primary);
-
-    #- check magic number
-    $info{magic}  == $magic or die "bad magic number";
-    $info{magic2} == $magic or die "bad magic number";
+    } (1..$info{npartitions});
 
     [ @pt ], \%info;
 }
@@ -85,9 +89,10 @@ sub read($$) {
 sub write($$$;$) {
     my ($hd, $sector, $pt, $info) = @_;
 
-    print "Her\n";
     local *F; partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
     c::lseek_sector(fileno(F), $sector, $offset) or return 0;
+
+    #- TODO compute checksum
 
     $info->{npartitions} = $nb_primary; #- is it ok?
 
