@@ -974,18 +974,19 @@ sub write_lilo {
 
     foreach (@{$bootloader->{entries}}) {
 	push @conf, "$_->{type}=" . $file2fullname->($_->{kernel_or_dev});
-	push @conf, "\tlabel=" . make_label_lilo_compatible($_->{label});
+	my @entry_conf;
+	push @entry_conf, "label=" . make_label_lilo_compatible($_->{label});
 
 	if ($_->{type} eq "image") {		
-	    push @conf, "\troot=$_->{root}" if $_->{root};
-	    push @conf, "\tinitrd=" . $file2fullname->($_->{initrd}) if $_->{initrd};
-	    push @conf, qq(\tappend="$_->{append}") if $_->{append};
-	    push @conf, "\tvga=$_->{vga}" if $_->{vga};
-	    push @conf, "\tread-write" if $_->{'read-write'};
-	    push @conf, "\tread-only" if !$_->{'read-write'};
+	    push @entry_conf, "root=$_->{root}" if $_->{root};
+	    push @entry_conf, "initrd=" . $file2fullname->($_->{initrd}) if $_->{initrd};
+	    push @entry_conf, qq(append="$_->{append}") if $_->{append};
+	    push @entry_conf, "vga=$_->{vga}" if $_->{vga};
+	    push @entry_conf, "read-write" if $_->{'read-write'};
+	    push @entry_conf, "read-only" if !$_->{'read-write'};
 	} else {
-	    push @conf, "\ttable=$_->{table}" if $_->{table};
-	    push @conf, "\tunsafe" if $_->{unsafe} && !$_->{table};
+	    push @entry_conf, "table=$_->{table}" if $_->{table};
+	    push @entry_conf, "unsafe" if $_->{unsafe} && !$_->{table};
 		
 	    if ($_->{table}) {
 		my $hd = fs::device2part($_->{table}, $hds);
@@ -995,11 +996,11 @@ sub write_lilo {
 		    $_->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
 		}
 	    }
-	    while (my ($from, $to) = each %{$_->{mapdrive} || {}}) {
-		push @conf, "\tmap-drive=$from";
-		push @conf, "\t   to=$to";
+	    if ($_->{mapdrive}) {
+		push @entry_conf, map_each { "map-drive=$::a", "   to=$::b" } %{$_->{mapdrive}};
 	    }
 	}
+	push @conf, map { "\t$_" } @entry_conf;
     }
     my $f = arch() =~ /ia64/ ? "$::prefix/boot/efi/elilo.conf" : "$::prefix/etc/lilo.conf";
 
