@@ -91,7 +91,7 @@ sub new {
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, [-fill, -expand], [-fill, -expand], 0, 0);
     }
 
-    if ($::isEmbedded && !$my_gtk::pop_it && !eval { $::Plug->child }) {
+    if ($::isEmbedded && !$my_gtk::pop_it && !eval { $::Plug && $::Plug->child }) {
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk::HBox(0,0);
 	$o->{rwindow} = $o->{window};
