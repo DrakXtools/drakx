@@ -910,6 +910,7 @@ sub new {
 
 	if (!$::Plug && $o->{isEmbedded}) {
 	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
+	    $::Plug->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
 	    flush();
 	    gtkadd($::Plug, $::WizardTable);
 	} elsif (!$::WizardWindow) {
@@ -932,8 +933,6 @@ sub new {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title));
 		$::WizardWindow->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
-	    } else {
-		$::Plug->set_icon(gtkcreate_pixbuf($o->{wm_icon}));
 	    }
 	    $::WizardWindow->show;
 	}
