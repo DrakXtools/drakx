@@ -520,13 +520,13 @@ my %xim = (
   },
   'ja_JP' => {
 	ENC => 'eucj',
-	XIM => 'uim-xim',
+	XIM => 'uim-anthy',
 	XIM_PROGRAM => 'uim-xim',
 	XMODIFIERS => '"@im=uim-anthy"',
   },
   'ja_JP.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'uim-xim',
+	XIM => 'uim-anthy',
 	XIM_PROGRAM => 'uim-xim',
 	XMODIFIERS => '"@im=uim-anthy"',
   },
