@@ -454,11 +454,12 @@ sub install_urpmi {
 sub kderc_largedisplay {
     my ($prefix) = @_;
 
-    update_userkderc($prefix, 'KDE', 
+    update_userkderc($_, 'KDE', 
 		     Contrast => 7,
 		     kfmIconStyle => "Large",
 		     kpanelIconStyle => "Normal", #- to change to Large when icons looks better
-		     KDEIconStyle => "Large");
+		     KDEIconStyle => "Large") foreach list_skels($prefix, '.kderc');
+
     substInFile {
 	s/^(GridWidth)=85/$1=100/;
 	s/^(GridHeight)=70/$1=75/;
@@ -565,7 +566,7 @@ sub loadO {
     my ($O, $f) = @_; $f ||= auto_inst_file;
     my $o;
     if ($f =~ /^(floppy|patch)$/) {
-	my $f = $f eq "floppy" ? 'Mandrake/base/auto_inst.cfg' : "patch";
+	my $f = $f eq "floppy" ? 'auto_inst.cfg' : "patch";
 	unless ($::testing) {
 	    fs::mount(devices::make(detect_devices::floppy()), "/mnt", (arch() =~ /sparc/ ? "romfs" : "vfat"), 'readonly');
 	    $f = "/mnt/$f";

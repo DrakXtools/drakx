@@ -506,7 +506,12 @@ sub chooseGroups {
 			   { list => \@groups, 
 			     help => sub { translate($o->{compssUsersDescr}{$_}) },
 			     ref => sub { \$o->{compssUsersChoice}{$_} },
-			     icon2f => sub { "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default') . "_section.xpm" },
+			     icon2f => sub { 
+				 my $f = "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default');
+				 -e "$f.xpm" or $f .= "_section";
+				 -e "$f.xpm" or $f = '/usr/share/icons/default_section';
+				 "$f.xpm";
+			     },
 			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : '') }, 
 			   },
 			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),

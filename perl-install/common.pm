@@ -466,27 +466,25 @@ sub template2userfile {
     }
 }
 sub update_userkderc {
-    my ($prefix, $category, %subst) = @_;
+    my ($file, $category, %subst) = @_;
 
-    foreach my $file (list_skels($prefix, '.kderc')) {
-	output $file,
-	  (map {
-	      my $l = $_;
-	      s/^\s*//;
-	      if (my $i = /^\[$category\]/i ... /^\[/) {
-		  if ($i =~ /E/) { #- for last line of category
-		      $l = join('', values %subst) . $l;
-		      %subst = ();
-		  } elsif (/^(\w*?)=/) {
-		      if (my $e = delete $subst{lc($1)}) {
-			  $l = "$1=$e\n";
-		      }
+    output $file,
+      (map {
+	  my $l = $_;
+	  s/^\s*//;
+	  if (my $i = /^\[$category\]/i ... /^\[/) {
+	      if ($i =~ /E/) { #- for last line of category
+		  $l = join('', map_each { "$::a=$::b\n" } %subst) . $l;
+		  %subst = ();
+	      } elsif (/^(\w*?)=/) {
+		  if (my $e = delete $subst{lc($1)}) {
+		      $l = "$1=$e\n";
 		  }
 	      }
-	      $l;
-	  } cat_($file)),
-	  (%subst && "[$category]\n", values %subst); #- if category has not been found above.
-    }
+	  }
+	  $l;
+      } cat_($file)),
+	(%subst && "[$category]\n", map_each { "$::a=$::b\n" } %subst); #- if category has not been found above.
 }
 
 sub substInFile(&@) {

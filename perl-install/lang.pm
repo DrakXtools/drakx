@@ -433,6 +433,14 @@ sub get_x_fontset {
     ($big, $small);
 }
 
+sub charset {
+    my ($lang, $prefix) = @_;
+    my $l = $languages{$lang} && $languages{$lang}[2];
+    foreach (cat_("$prefix/usr/X11R6/lib/X11/locale/locale.alias")) {
+	/$l:\s+.*\.(\S+)/ and return $1;
+    }
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################

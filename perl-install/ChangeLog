@@ -1,3 +1,28 @@
+2000-10-06  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (afterInstallPackages): put the Charset in
+	kdeglobals, otherwise kde uses charset iso8859-1 :(
+
+	* lang.pm (charset): created
+
+	* common.pm (update_userkderc): fix it, change the argument
+	passing	
+
+2000-10-05  Pixel  <pixel@mandrakesoft.com>
+
+	* share/compssList: raise kde-i18n-*, should be installed whenever
+	kdebase is installed
+
+	* pci_probing/pcitable: integrate patch from viet (concerns
+	sym53c8xx cards)
+
+	* share/compssUsers: use "documentation" as the database icon
+
+	* install_steps_interactive.pm (chooseGroups): fix to accept icons
+	not in the format "*_section.xpm"
+
+	* install2.pm (miscellaneous): put yes/no in sysconfig/usb entries	
+
 2000-10-05  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm (adsl_conf): updated pppoe conf.

@@ -349,9 +349,9 @@ sub miscellaneous {
 	my $f = "$o->{prefix}/etc/sysconfig/usb";
 	output $f,
 "USB=yes
-MOUSE=
-KEYBOARD=
-STORAGE=
+MOUSE=" . bool2yesno(hasUsbMouse()) . "
+KEYBOARD=" . bool2yesno(hasUsbKeyboard()) . "
+STORAGE=" . bool2yesno(hasUsbZip()) . "
 VISOR=no
 " if modules::get_alias("usb-interface") && ! -e $f;
 

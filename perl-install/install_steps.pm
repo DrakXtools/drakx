@@ -439,9 +439,12 @@ Consoles 1,3,4,7 may also contain interesting information";
 #- simply disable it :-(
 #	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
+    if (my $charset = lang::charset($o->{lang}, $o->{prefix})) {
+	update_userkderc("$o->{prefix}/usr/share/config/kdeglobals", 'Locale', Charset => $charset);
+    }
 
 #    #- update language and icons for KDE.
-#    update_userkderc($o->{prefix}, 'Locale', Language => "");
+#    update_userkderc($_, 'Locale', Language => "") foreach list_skels($o->{prefix}, '.kderc');
 #    log::l("updating kde icons according to available devices");
 #    install_any::kdeicons_postinstall($o->{prefix});
 
