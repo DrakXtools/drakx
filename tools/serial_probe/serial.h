@@ -1,4 +1,4 @@
-/* Copyright 1999 Red Hat, Inc.
+/* Copyright 1999-2003 Red Hat, Inc.
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
@@ -18,7 +18,7 @@ struct serialDevice {
 	/* common fields */
 	struct device *next;	/* next device in list */
 	int index;
-	enum deviceClass class;	/* type */
+	enum deviceClass type;	/* type */
 	enum deviceBus bus;		/* bus it's attached to */
 	char * device;		/* device file associated with it */
 	char * driver;		/* driver to load, if any */

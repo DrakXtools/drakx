@@ -39,9 +39,9 @@ struct device *newDevice(struct device *old, struct device *new) {
 	    new = malloc(sizeof(struct device));
 	    memset(new,'\0',sizeof(struct device));
 	}
-	    new->class = CLASS_UNSPEC;
+     new->type = CLASS_UNSPEC;
     } else {
-	    new->class = old->class;
+	    new->type = old->type;
 	    if (old->device) new->device = strdup(old->device);
 	    if (old->driver) new->driver = strdup(old->driver);
 	    if (old->desc) new->desc = strdup(old->desc);
@@ -74,7 +74,7 @@ int main () {
   while (devices) {
     serialDevice = (struct serialDevice*)devices;
 
-    printf("CLASS=%s\n", classStrings[serialDevice->class]);
+    printf("CLASS=%s\n", classStrings[serialDevice->type]);
     printf("BUS=SERIAL\n");
     printf("DEVICE=/dev/%s\n", serialDevice->device);
     printf("DRIVER=%s\n", serialDevice->driver);

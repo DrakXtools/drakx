@@ -1,5 +1,4 @@
-
-/* Copyright 1999 Red Hat, Inc.
+/* Copyright 1999-2003 Red Hat, Inc.
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
@@ -24,6 +23,9 @@ enum deviceClass {
 	CLASS_CAPTURE, CLASS_KEYBOARD, CLASS_PCMCIA
 };
 
+/* Update this if needed */
+#define CLASS_LAST CLASS_IDE
+
 enum deviceBus {
     /* 'bus' that a device is attached to... this is also ad-hoc */
     /* BUS_SBUS is sort of a misnomer - it's more or less Sun */
@@ -32,16 +34,21 @@ enum deviceBus {
     BUS_OTHER = (1 << 0),
     BUS_PCI = (1 << 1),
     BUS_SBUS = (1 << 2),
-    BUS_PSAUX = (1 << 3),
-    BUS_SERIAL = (1 << 4),
+    BUS_SERIAL = (1 << 3),
+    BUS_PSAUX = (1 << 4),
     BUS_PARALLEL = (1 << 5),
     BUS_SCSI = (1 << 6),
     BUS_IDE = (1 << 7),
     /* Again, misnomer */
     BUS_KEYBOARD = (1 << 8),
-#ifdef _i_wanna_build_this_crap_
-    BUS_ISAPNP = (1 << 9),
-#endif
+    BUS_DDC = (1 << 9),
+    BUS_USB = (1 << 10),
+    BUS_ISAPNP = (1 << 11),
+    BUS_MISC = (1 << 12),
+    BUS_FIREWIRE = (1 << 13),
+    BUS_PCMCIA = (1 << 14),
+    BUS_ADB = (1 << 15),
+    BUS_MACIO = (1 << 16)
 };
 
 struct device {
@@ -50,7 +57,7 @@ struct device {
 	struct device *next;
 	/* Used for ordering, and for aliasing (modem0, modem1, etc.) */
 	int index;
-	enum deviceClass class;	/* type */
+	enum deviceClass type;	/* type */
 	enum deviceBus bus;		/* bus it's attached to */
 	char * device;		/* device file associated with it */
 	char * driver;		/* driver to load, if any */
@@ -75,6 +82,5 @@ struct device *readDevice(FILE *file);
 #define PROBE_SAFE (1<<1)
 /* Stop at first device found */
 #define PROBE_ONE       (1<<2)
-
 
 #endif

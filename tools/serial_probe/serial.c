@@ -1,6 +1,4 @@
-/* probe serial port for PnP/Legacy devices
- *
- * Copyright 1999 Red Hat, Inc.
+/* Copyright 1999-2003 Red Hat, Inc.
  *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
@@ -9,6 +7,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
+ * probe serial port for PnP/Legacy devices
  */
 
 
@@ -26,9 +25,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <sys/sysmacros.h>
 
+#include <asm/types.h>
 #include <linux/serial.h>
+
 #include "serial.h"
+#include "kudzu.h"
 
 /* character strings ARE null-terminated in the following structure    */
 /* these elements are marked with a (string) in the comment            */
@@ -75,10 +78,6 @@ struct pnp_com_id {
 #define PNP_COM_OTHER      4       /* device is there, cant tell what kind */
 #define PNP_COM_NOEXIST    8       /* no device seen */
 #define PNP_COM_PNPDEV     512     /* its a PNP device */
-
-/* level of debugging output */
-/* current any value > 0 dumps all available debugging output */
-static int debug_level=0;
 
 static void serialFreeDevice(struct serialDevice *dev) {
 	if (dev->pnpmfr) free(dev->pnpmfr);
@@ -151,50 +150,13 @@ struct serialDevice * serialNewDevice(struct serialDevice *dev) {
         return ret;
 }
 
-/* UNUSED */
-void print_status_lines( int fd ) {
-    int modem_lines;
-    
-   ioctl(fd, TIOCMGET, &modem_lines);
-    
-   printf("DTR : %s\n",(modem_lines & TIOCM_DTR ? "On" : "Off"));
-   printf("RTS : %s\n",(modem_lines & TIOCM_RTS ? "On" : "Off"));
-   printf("CTS : %s\n",(modem_lines & TIOCM_CTS ? "On" : "Off"));
-   printf("DSR : %s\n",(modem_lines & TIOCM_DSR ? "On" : "Off"));
-   printf("CD  : %s\n",(modem_lines & TIOCM_CD  ? "On" : "Off"));
-   printf("RI  : %s\n",(modem_lines & TIOCM_RI  ? "On" : "Off"));
-    
-}
-
-
-/* UNUSED except in debug */
-/* outputs data in a hex table, 8 values per row */
-void print_hex_data( unsigned char *data, int len ) {
-        int i, j, pos;
-    
-        if (len == 0) {
-	            printf("No data to print.\n");
-	            return;
-	}
-    
-        pos = 0;
-        for (i=0; i< len; i+=8) {
-	            printf("0x%.4x ", i);
-	            for (j=i; j < len && j < i+8; j++) {
-			            printf("0x%.2x ",data[pos++]);
-		    }
-	            printf("\n");
-	}
-}
-
-
 /*
  * wait_input - wait until there is data available on fd,
  * for the length of time specified by *timo (indefinite
  * if timo is NULL).
  */
 
-int wait_for_input (int fd, struct timeval *timo) {
+static int wait_for_input (int fd, struct timeval *timo) {
     fd_set ready;
     int n;
     
@@ -205,64 +167,23 @@ int wait_for_input (int fd, struct timeval *timo) {
     return n;
 }
 
-/* UNUSED */
-/* read characters into the buffer buf, until one of: */
-/*      char_timeout expired before next character arrives */
-/*      total_timeout expires                             */
-/*      maxlen characters are retrieved                   */
-/*                                                        */
-/* returns < 0 if it fails                                */
-/* otherwise the # of characters received is returned     */
-/* char_timeout is in microseconds (millionths of a sec)  */
-/* total_timeout is in seconds                            */
-int timed_serial_read(int fd, int char_timeout, int total_timeout,
-		      unsigned char *buf, int maxlen ) {
-
-    int done, pos, starttime, temp;
-    struct timeval timo;
-    unsigned char intbuf[2];
-    
-    /* start reading */
-    done = 0;
-    pos  = 0;
-    starttime=time(NULL);
-    memset(buf, 0, maxlen);
-    while (!done) {
-	timo.tv_sec=0;
-	timo.tv_usec=char_timeout;
-	if (wait_for_input(fd, &timo) > 0) {
-	    temp = read( fd, intbuf, 1 );
-	    if (temp < 0) {
-		if (errno != EAGAIN)
-		    return -1;
-	    } else {
-		buf[pos++] = intbuf[0];
-		buf[pos] = 0;
-	    }
-	} else
-	    done = 1;
-
-	/* shouldnt run more than 5 seconds */
-	if (time(NULL)-starttime > total_timeout )
-	    done = 1;
-
-	if (pos > maxlen)
-	    done = 1;
-    }
-    return pos;
-}
-    
-
-int open_serial_port( char *port ) {
+static int open_serial_port( char *port ) {
     int fd;
 
+    DEBUG("opening serial port %s...", port);
+    
     fd = open( port, O_RDWR | O_NONBLOCK);
-    if (fd < 0)
+    if (fd < 0) {
+	DEBUG("failed.\n");
 	return -1;
+    } else {
+	DEBUG("successful.\n");
+    }
 
     /* reset file so it is no longer in non-blocking mode */
     if (fcntl(fd, F_SETFL, 0) < 0) {
 	close(fd);
+	DEBUG("Failed to set port to non-blocking mode\n");
 	return -1;
     }
 	
@@ -270,7 +191,7 @@ int open_serial_port( char *port ) {
 }
 
 /* <0 means ioctl error occurred */    
-int get_serial_lines( int fd ) {
+static int get_serial_lines( int fd ) {
     int modem_lines;
     
     ioctl(fd, TIOCMGET, &modem_lines);
@@ -278,13 +199,15 @@ int get_serial_lines( int fd ) {
 }
 
 /* <0 means ioctl error occurred */    
-int set_serial_lines( int fd, int modem_lines ) {
+static int set_serial_lines( int fd, int modem_lines ) {
     return ioctl(fd, TIOCMSET, &modem_lines);
 }
 
 /* set serial port to 1200 baud, 'nbits' bits, 1 stop, no parity */
-int setup_serial_port( int fd, int nbits, struct termios *attr ) {
+static int setup_serial_port( int fd, int nbits, struct termios *attr ) {
 	
+    DEBUG("setting up serial port\n");
+    
     attr->c_iflag = IGNBRK | IGNPAR;
     attr->c_cflag = 0;
     attr->c_cflag &= ~(CSIZE | CSTOPB | PARENB | PARODD | PARENB);
@@ -299,8 +222,10 @@ int setup_serial_port( int fd, int nbits, struct termios *attr ) {
     attr->c_cc[VMIN] = 1;
     attr->c_cc[VTIME] = 5;
 
-    cfsetospeed( attr, B1200);
-    cfsetispeed( attr, B1200);
+    if (cfsetospeed( attr, B1200))
+         return -1;
+    if (cfsetispeed( attr, B1200))
+         return -1;
     return tcsetattr(fd, TCSANOW, attr);
 }
 
@@ -309,7 +234,7 @@ int setup_serial_port( int fd, int nbits, struct termios *attr ) {
  * to respond to PnP probes after they've been opened by gpm or XFree.
  */
 
-int init_port(int fd) {
+static int init_port(int fd) {
 	struct termios attr;
 	
 	if (tcgetattr(fd,&attr))
@@ -331,15 +256,14 @@ int init_port(int fd) {
 /*                                                              */
 /* PNP_COM_FATAL      - error, errno has reason                 */
 /* PNP_COM_OK         - probe initiated successfully            */
-/* PNP_COM_FAIL       - DSR never came on - try alterntives     */
-/*                          means (ATI9?) to get PnP string     */
-int init_pnp_com_seq1( int fd ) {
+static int init_pnp_com_seq1( int fd ) {
     int modem_lines;
     int temp;
     int dsr_status;
     int rc = PNP_COM_OK;
     struct termios portattr;
 
+    DEBUG("initializing 1st PNP sequence\n");
     if (init_port(fd))
 	  return PNP_COM_FATAL;
 
@@ -382,7 +306,7 @@ int init_pnp_com_seq1( int fd ) {
     set_serial_lines(fd, modem_lines);
     usleep(200000);
 
-    /* now entering next phase */
+    /* Wait for response, 1st phase */
     modem_lines |= TIOCM_RTS;
     set_serial_lines(fd, modem_lines);
     usleep(200000);
@@ -399,7 +323,7 @@ int init_pnp_com_seq1( int fd ) {
 /* PNP_COM_OK         - probe initiated successfully            */
 /* PNP_COM_FAIL       - DSR never came on - try alterntives     */
 /*                          means (ATI9?) to get PnP string     */
-int init_pnp_com_ati9( int fd ) {
+static int init_pnp_com_ati9( int fd ) {
     int modem_lines;
     int temp;
     int done;
@@ -409,6 +333,7 @@ int init_pnp_com_ati9( int fd ) {
     struct timeval timo;
     struct termios portattr;
 
+    DEBUG("Querying ATI9 info from modem\n");
     modem_lines = get_serial_lines(fd);
 
     /* turn off RTS */
@@ -441,8 +366,7 @@ int init_pnp_com_ati9( int fd ) {
     usleep(200000);
 
     /* send the 'AT' command */
-    if (debug_level > 0)
-	printf("Sending ATI9 command to modem\n");
+    DEBUG("Sending ATI9 command to modem\n");
     
     write(fd, "ATI9\r", 5);
     
@@ -476,8 +400,7 @@ int init_pnp_com_ati9( int fd ) {
 	if (strstr(resp, "ATI9\r"))
 	    done = 1;
 
-	if (debug_level > 0)
-	    printf("ATI9 probe ->%d \"%s\"\n",respindex, resp);
+	DEBUG("ATI9 probe ->%d \"%s\"\n",respindex, resp);
     }
     
     /* see if we saw the 'OK' response */
@@ -501,7 +424,7 @@ int init_pnp_com_ati9( int fd ) {
 /* PNP_COM_OK        - probe saw 'M'                            */
 /* PNP_COM_FAIL      - Never saw the 'M' response               */
 
-int find_legacy_mouse( int fd ) {
+static int find_legacy_mouse( int fd ) {
     int modem_lines;
     int temp;
     int done;
@@ -510,6 +433,8 @@ int find_legacy_mouse( int fd ) {
     struct timeval timo;
     struct termios portattr;
 
+    DEBUG("looking for a legacy mouse\n");
+    
     /* now we set port to be 1200 baud, 7 bits, no parity, 1 stop bit */
     temp = tcgetattr(fd, &portattr);
     if (temp < 0) 
@@ -552,9 +477,10 @@ int find_legacy_mouse( int fd ) {
 	if (time(NULL)-starttime > 2 )
 	    done = 1;
     }
-    if (*resp == 'M') 
+    if (*resp == 'M') {
+	DEBUG("Found legacy mouse\n");
 	return PNP_COM_OK;
-    else
+    } else
 	return PNP_COM_FAIL;
 }
 
@@ -567,7 +493,7 @@ int find_legacy_mouse( int fd ) {
 /* PNP_COM_FATAL     - error, errno has reason                  */
 /* PNP_COM_OK        - probe saw 'OK'                           */
 /* PNP_COM_FAIL      - Never saw the 'OK' response              */
-int find_legacy_modem( int fd ) {
+static int find_legacy_modem( int fd ) {
     int modem_lines;
     int temp;
     int done;
@@ -577,6 +503,8 @@ int find_legacy_modem( int fd ) {
     struct timeval timo;
     struct termios portattr;
 
+    DEBUG("looking for a legacy modem\n");
+    
     /* now we set port to be 1200 baud, 8 bits, no parity, 1 stop bit */
     temp = tcgetattr(fd, &portattr);
     if (temp < 0) 
@@ -594,8 +522,7 @@ int find_legacy_modem( int fd ) {
     usleep(200000);
 
     /* send the 'AT' command */
-    if (debug_level > 0)
-	printf("Sending AT command to modem\n");
+    DEBUG("Sending AT command to modem\n");
     
     write(fd, "AT\r", 3);
     
@@ -637,7 +564,7 @@ int find_legacy_modem( int fd ) {
 /* timeout after 3 seconds   */
 /* should probably set a 200 msec timeout per char, as spec says */
 /* if no char received, we're done                              */
-int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int pnp_stringbuf_size ) {
+static int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int pnp_stringbuf_size ) {
     int     pnp_index;
     int     temp, done, counter;
     int     seen_start;
@@ -645,6 +572,8 @@ int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int pnp_st
     struct timeval timo;
     unsigned char buf[80];
     unsigned char end_char;
+    
+    DEBUG("Attempting to read PNP ID string\n");
     
     /* see if we have any input waiting */
     pnp_index  =0;
@@ -691,21 +620,11 @@ int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int pnp_st
     }
     pnp_string[pnp_index] = 0;
    *pnp_len=pnp_index;
-    return 0;
+    return PNP_COM_OK;
 }
 
-/* UNUSED */
-/* simple little helper function */
-void xlate_memcpy( void *dest, void *src, int len, int xlate_flag ) {
-  unsigned char *d, *s;
-  int i;
-
-  for (i=0,d=dest,s=src; i<len; i++, d++, s++) 
-   *d = (*s) + ((xlate_flag) ? 0x20 : 0 );
-}   
-
 /* parse the PnP ID string into components */
-int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
+static int parse_pnp_string( unsigned char *pnp_id_string, int pnp_len,
 		     struct pnp_com_id *pnp_id ) {
     unsigned char *p1, *p2;
     unsigned char *start;
@@ -909,14 +828,10 @@ void print_pnp_id( struct pnp_com_id id ) {
     }
 }
 
-int attempt_pnp_retrieve(int fd, char *pnp_string, int *pnp_strlen, int pnp_stringbuf_size) {
+static int attempt_pnp_retrieve(int fd, char *pnp_string, int *pnp_strlen, int pnp_stringbuf_size) {
     int pnp_probe_status;
-    int tried_at_prodding;
-    int give_up;
     struct pnp_com_id pnp_id;
-
-    tried_at_prodding=0;
-    give_up=0;
+    int tried_at_prodding=0,  give_up=0;
 
     while (!give_up) {
 	pnp_probe_status = init_pnp_com_seq1(fd);
@@ -925,10 +840,7 @@ int attempt_pnp_retrieve(int fd, char *pnp_string, int *pnp_strlen, int pnp_stri
 	} else if (pnp_probe_status == PNP_COM_OK) {
 	    read_pnp_string(fd, pnp_string, pnp_strlen, pnp_stringbuf_size );
 	
-	    if (debug_level > 0) {
-		printf("\nPNP string = |%s|\n\n",pnp_string);
-		print_hex_data(pnp_string, *pnp_strlen);
-	    }
+	    DEBUG("\nPNP string = |%s|\n\n",pnp_string);
 	    
 	    if (*pnp_strlen == 1 && pnp_string[0] == 'M') /* legacy mouse */
 	      return PNP_COM_OK;
@@ -946,6 +858,7 @@ int attempt_pnp_retrieve(int fd, char *pnp_string, int *pnp_strlen, int pnp_stri
 	    give_up = 1;
     }
 
+    /* normal PNP detection has failed. */
     /* try sending a ATI9 code to the modem to see if we get PnP id back */
     init_pnp_com_ati9(fd);
     read_pnp_string(fd, pnp_string, pnp_strlen, pnp_stringbuf_size );
@@ -974,6 +887,8 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
     int stdin_line=-1;
     struct serial_struct si;
 	
+    DEBUG("Probing for serial ports\n");
+    
     if (probeFlags & PROBE_SAFE) return devlist;
 
     /* Are we on a serial console? */
@@ -1035,15 +950,21 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 
 	    /* Make sure it's not in use */
 	    snprintf(lockfile,32,"/var/lock/LCK..ttyS%d",x);
-	    if (!stat(lockfile,&sbuf)) 
+	    if (!stat(lockfile,&sbuf)) {
+		DEBUG("Port %s in use, skipping probe.\n",
+		      port);
 		 continue;
+	    }
 	    memset(lockfile,'\0',32);
 	    if (readlink("/dev/modem",lockfile,32)>0) {
 		    if (!strcmp(basename(port),basename(lockfile))) {
 			    snprintf(lockfile,32,"/var/lock/LCK..modem");
-			    if (!stat(lockfile,&sbuf))
+			if (!stat(lockfile,&sbuf)) {
+			    DEBUG("Port %s in use, skipping probe.\n",
+				  port);
 			      continue;
 		    }
+	    }
 	    }
 	    
 	    if ((fd=open_serial_port(port)) < 0) {
@@ -1066,7 +987,7 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 		if (*pnp_string == 'M') { /* Legacy mouse */
 			if (probeClass == CLASS_MOUSE || probeClass == CLASS_UNSPEC) {
 				serdev = serialNewDevice(NULL);
-				serdev->class=CLASS_MOUSE;
+				serdev->type=CLASS_MOUSE;
 				serdev->device=strdup(port+5);
 				serdev->desc=strdup("Generic Serial Mouse");
 				serdev->driver=strdup("generic");
@@ -1091,10 +1012,7 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 		    char *foo;
 		    int len;
 
-		    if (debug_level > 0) {
-			printf("PnP ID string for serial device on port %s\n",port);
-			print_pnp_id( pnp_id );
-		    }
+		    DEBUG("PnP ID string for serial device on port %s\n",port);
 		    serdev = serialNewDevice(NULL);
 		    if (pnp_id.user_name[0]) {
 			    serdev->pnpdesc = strdup(pnp_id.user_name);
@@ -1120,14 +1038,14 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 			    serdev->pnpcompat = strdup(pnp_id.driver_id);
 		    }
 		    if (!strncmp(foo, "0F", 2))
-		      serdev->class = CLASS_MOUSE;
+		      serdev->type = CLASS_MOUSE;
 		    else if (!strncmp(foo, "C", 1))
-		      serdev->class = CLASS_MODEM;
+		      serdev->type = CLASS_MODEM;
 		    else if (!strncmp(pnp_id.class_name, "Modem", 5))
-		      serdev->class = CLASS_MODEM;
+		      serdev->type = CLASS_MODEM;
 		    else
-		      serdev->class = CLASS_OTHER;
-		    if (serdev->class == probeClass || probeClass == CLASS_UNSPEC) {
+		      serdev->type = CLASS_OTHER;
+		    if (serdev->type == probeClass || probeClass == CLASS_UNSPEC) {
 		      if (devlist)
 			serdev->next = devlist;
 		      devlist = (struct device *)serdev;
@@ -1143,6 +1061,7 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 		    goto endprobe;
 		}
 	    } else {
+		DEBUG("No PNP data received.\n");
 		/* try to find a legacy device */
 
 		temp = find_legacy_mouse(fd);
@@ -1151,7 +1070,7 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 		} else if (temp == PNP_COM_OK) {
 			if (probeClass == CLASS_UNSPEC || probeClass == CLASS_MOUSE) {
 				serdev=serialNewDevice(NULL);
-				serdev->class = CLASS_MOUSE;
+				serdev->type = CLASS_MOUSE;
 				serdev->device = strdup(port+5);
 				serdev->driver= strdup("generic");
 				serdev->desc = strdup("Generic Serial Mouse");
@@ -1167,18 +1086,16 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 			}
 			goto endprobe;
 		} else {
-		    if (debug_level > 0)
-		      printf("Didnt see a legacy mouse, need to ATI it now.\n");
+		    DEBUG("Didn't see a legacy mouse.\n");
 
 		    temp = find_legacy_modem(fd);
 		    if (temp == PNP_COM_FATAL) {
 			    goto endprobe;
 		    } else if (temp == PNP_COM_OK) {
-			if (debug_level > 0)
-			  printf("\nLegacy modem signature seen.\n\n");
+			DEBUG("Legacy modem signature seen.\n");
 			if (probeClass == CLASS_UNSPEC || probeClass == CLASS_MODEM) {
 				serdev=serialNewDevice(NULL);
-				serdev->class = CLASS_MODEM;
+				serdev->type = CLASS_MODEM;
 				serdev->device = strdup(port+5);
 				serdev->driver= strdup("ignore");
 				serdev->desc = strdup("Generic Serial Modem");
@@ -1194,12 +1111,12 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 			}
 			    goto endprobe;
 		    } else {
-			if (debug_level > 0)
-			  printf("Didnt see a legacy modem, game over.\n");
+			DEBUG("Didnt see a legacy modem, game over.\n");
 		    }
 		}
 	    }
 endprobe:
+	    DEBUG("Restoring original port attributes\n");
 	    tcsetattr(fd, TCSANOW, &origattr);
 	    tcflush(fd, TCIOFLUSH);
 	    close(fd);
