@@ -20,7 +20,7 @@ crond => __("cron is a standard UNIX program that runs user-specified programs
 at periodic scheduled times. vixie cron adds a number of features to the basic
 UNIX cron, including better security and more powerful configuration options."),
 gpm => __("GPM adds mouse support to text-based Linux applications such the
-Midnight Commander. Is also allows mouse-based console cut-and-paste operations,
+Midnight Commander. It also allows mouse-based console cut-and-paste operations,
 and includes support for pop-up menus on the console."),
 httpd => __("Apache is a World Wide Web server.  It is used to serve HTML files
 and CGI."),
@@ -29,8 +29,8 @@ variety of other internet services as needed. It is responsible for starting
 many services, including telnet, ftp, rsh, and rlogin. Disabling inetd disables
 all of the services it is responsible for."),
 keytable => __("This package loads the selected keyboard map as set in
-/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.  You
-should leave this enabled for most machines."),
+/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.
+You should leave this enabled for most machines."),
 lpd => __("lpd is the print daemon required for lpr to work properly. It is
 basically a server that arbitrates print jobs to printer(s)."),
 named => __("named (BIND) is a Domain Name Server (DNS) that is used to resolve
