@@ -643,7 +643,9 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     my $total = $o->{mediumsize};
     log::l("totalsize=$total");
     my $pid;
-    if (!method_allows_medium_change($o->{method}) || $o->{method} =~ /-iso$/) {
+    #- will we show a progress bar?
+    my $copy_has_progress_bar = !method_allows_medium_change($o->{method}) || $o->{method} =~ /-iso$/;
+    if ($copy_has_progress_bar) {
 	#- display the progress bar only for non-cdrom installation methods
 	$pid = fork();
 	if (!$pid && defined $pid) { #- child
@@ -677,9 +679,12 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	    $current_medium = $k;
 	}
 	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
+	my $wait_w;
+	unless ($copy_has_progress_bar) { $wait_w = $o->wait_message(N("Please wait"), N("Copying in progress")) }
 	eval {
 	    cp_af("/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media");
 	};
+	undef $wait_w;
 	log::l($@) if $@;
 	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrakelinux";
 	$m->{method} = 'disk';
