@@ -116,13 +116,13 @@ gtkadd($window1->{window},
                                                                      ),
                                                            )
                                                  ),
-                                        0, gtkpack(Gtk2::HBox->new(0,5),
-                                                   gtksignal_connect(my $button_connect = gtkset_sensitive(Gtk2::Button->new(N("Wait please")), 0), clicked => \&connection),
-                                                   gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
-                                                   )
                                        )
                            ),
                 0, gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Use same scale for received and transmitted")), $use_same_scale), clicked => sub { $use_same_scale = !$use_same_scale }),
+                0, gtkpack(create_hbox('edge'),
+                           gtksignal_connect(my $button_connect = gtkset_sensitive(Gtk2::Button->new(N("Wait please")), 0), clicked => \&connection),
+                           gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
+                          ),
                 0, my $statusbar = Gtk2::Statusbar->new
                ),
       );
