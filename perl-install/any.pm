@@ -1096,8 +1096,8 @@ connections from many clients. Note: if your machine is only a client on the Int
     delete $l{5} if !$::expert;
 
     $in->ask_from(
-            ("DrakSec Basic Options"),
-            ("Please choose the desired security level") . "\n\n" .
+            _("DrakSec Basic Options"),
+            _("Please choose the desired security level") . "\n\n" .
             join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } keys %l),
             [
               { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
