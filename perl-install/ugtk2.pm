@@ -25,7 +25,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 
     ask => [ qw(ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir ask_from_entry ask_okcancel ask_warn
                 ask_yesorno ) ],
-    dialogs => [ qw(err_dialog warn_dialog) ],
+    dialogs => [ qw(err_dialog info_dialog warn_dialog) ],
 
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -394,6 +394,13 @@ sub create_dialog {
     $dialog->show_all;
     Gtk2->main;
     $ret;
+}
+
+sub info_dialog {
+    my ($title, $label, $o_options) = @_;
+    $o_options ||= { };
+    add2hash_($o_options, { small => 1, stock => 'gtk-dialog-info' });
+    create_dialog($title, $label, $o_options);
 }
 
 sub warn_dialog {
