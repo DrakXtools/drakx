@@ -1206,7 +1206,7 @@ complete => sub {
 	# Auto-detect printer model (works if host is an ethernet-connected
 	# printer)
 	my $remotehost = $1;
-	my $modelinfo = printer::main::getSNMPModel($remotehost);
+	my $modelinfo = printer::detect::getSNMPModel($remotehost);
         my $auto_hpoj;
         if ((defined($modelinfo)) &&
             ($modelinfo->{MANUFACTURER} ne "") &&
