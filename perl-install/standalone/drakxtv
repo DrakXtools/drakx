@@ -133,7 +133,7 @@ if (@devices = @$devices) {
 		  $modules_conf->write;
 	   }
 	   scan4channels() if $not_canceled;
-    } @devices
+    } @devices;
 }
 
 # handle TV cards that do not require any driver configuration:
