@@ -1,4 +1,4 @@
-DEST = /BIG/move
+DEST = /tmp
 DEST_LIVETREE = $(DEST)/live_tree
 DEST_STAGE2 = $(DEST_LIVETREE)/usr/lib/stage2
 
@@ -35,7 +35,10 @@ iso: build install live_tree_boot clps only_iso
 build: stage1 xwait runlevel_set
 	$(MAKE) -C ../perl-install mo_files
 
-install: un_live_tree_boot
+data/i18n_en.list:
+	cd data ; ./make_i18n_list $(DEST_LIVETREE)
+
+install: un_live_tree_boot data/i18n_en.list
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
 
@@ -68,7 +71,7 @@ install: un_live_tree_boot
 	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff
 
 	 #- overwrite MDK-Common
-	sudo cp -f ../../soft/perl-MDK-Common/MDK/Common/*.pm $(DEST_LIVETREE)/usr/$(LIB_NAME)/perl5/vendor_perl/*/MDK/Common
+#	sudo cp -f ../../soft/perl-MDK-Common/MDK/Common/*.pm $(DEST_LIVETREE)/usr/$(LIB_NAME)/perl5/vendor_perl/*/MDK/Common
 
 	 #- duplicated :(
 	sudo perl -pi -e 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $(DEST_STAGE2)/*.pm `find $(DEST_LIVETREE)/usr/lib/libDrakX -name "*.pm"`
@@ -79,7 +82,7 @@ install: un_live_tree_boot
 	sudo install -m 440 tree/sudoers $(DEST_LIVETREE)/etc
 	sudo install -m 644 tree/mdk_move_boot_loop.desktop $(DEST_LIVETREE)/usr/share/autostart
 	sudo install tree/{mdk_move_loop,mdk_totem,mdk_behind_totem} $(DEST_LIVETREE)/usr/bin
-	sudo install -m 644 -D tree/mdk_totem.desktop $(DEST_LIVETREE)/etc/skel/Desktop/mdk_totem.desktop
+	sudo install -m 644 -D tree/mdk_totem.desktop $(DEST_LIVETREE)/usr/share/apps/kdesktop/DesktopLinks/mdk_totem.desktop
 	sudo install -m 644 tree/{kdedrc,konsolerc} $(DEST_LIVETREE)/usr/share/config
 	sudo install -m 644 img/Mandrake.png $(DEST_LIVETREE)/usr/share/mdk/backgrounds
 	sudo install -m 644 img/FE* $(DEST_LIVETREE)/usr/share/wallpapers
