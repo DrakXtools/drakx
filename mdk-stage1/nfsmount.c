@@ -541,14 +541,13 @@ retry_mount:
                                         goto succeeded;
 
                                 if (prevt == 0)
-                                        log_message(clnt_sperror(mclient, "mount"));
+                                        log_message("could not call server: probably protocol or version error");
                                 auth_destroy(mclient->cl_auth);
                                 clnt_destroy(mclient);
                                 mclient = 0;
                                 close(msock);
 			} else {
-				if (prevt == 0)
-					log_message(clnt_spcreateerror("mount"));
+                                log_message("could not create rpc client: host probably not found or NFS server is down");
 			}
 			prevt = t;
 
