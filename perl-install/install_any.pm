@@ -516,7 +516,7 @@ sub kdemove_desktop_file {
 sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::o->{prefix}/root") . "/auto_inst.cfg.pl" }
 
 sub g_auto_install {
-    my ($f) = @_; $f ||= auto_inst_file;
+    my ($f, $replay) = @_; $f ||= auto_inst_file;
     my $o = {};
 
     require pkgs;
@@ -536,8 +536,8 @@ sub g_auto_install {
 	}
     }
 
-    local $o->{partitioning}{auto_allocate} = 1;
-    local $o->{autoExitInstall} = 1;
+    local $o->{partitioning}{auto_allocate} = !$replay;
+    local $o->{autoExitInstall} = $replay;
 
     #- deep copy because we're modifying it below
     $o->{users} = [ @{$o->{users} || []} ];
@@ -547,7 +547,11 @@ sub g_auto_install {
     require Data::Dumper;
     output($f, 
 	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
-	   Data::Dumper->Dump([$o], ['$o']), "\0");
+	   Data::Dumper->Dump([$o], ['$o']), if_($replay, q(
+package install_steps_auto_install;
+$graphical = 1;
+push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat';
+)), "\0");
 }
 
 
