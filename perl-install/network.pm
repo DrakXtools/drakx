@@ -321,7 +321,7 @@ notation (for example, 1.2.3.4).");
 			     [ { label => _("IP address"), val => \$intf->{IPADDR} }, 
 			       { label => _("Netmask"),     val => \$intf->{NETMASK} },
 			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
-#			       if_(member($module, @wireless_modules),
+			       if_($intf->{wireless_eth},
 			       { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
 			       { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
 			       { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
@@ -334,7 +334,7 @@ notation (for example, 1.2.3.4).");
 			       { label => "WIRELESS_IWCONFIG", val => \$intf->{WIRELESS_IWCONFIG} },
 			       { label => "WIRELESS_IWSPY", val => \$intf->{WIRELESS_IWSPY} },
 			       { label => "WIRELESS_IWPRIV", val => \$intf->{WIRELESS_IWPRIV} }
-			       #),
+			       ),
 			     ],
 			     complete => sub {
 				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
