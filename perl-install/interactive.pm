@@ -57,7 +57,7 @@ sub vnew {
     my ($type, $su) = @_;
     $su = $su eq "su";
     require c;
-    if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest', '') == 0) {
+    if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if ($su) {
 	    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 	    $> and exec "kdesu", "-c", "$0 @ARGV";	    
