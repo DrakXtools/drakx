@@ -569,22 +569,22 @@ sub auto_allocate_raids {
     my ($all_hds, $suggestions) = @_;
 
     my @raids = grep { isRawRAID($_) } get_all_fstab($all_hds) or return;
-    if (@raids) {
-	require raid;
-	my @mds = grep { $_->{hd} =~ /md/ } @$suggestions;
-	foreach my $md (@mds) {
-	    my @raids_ = grep { !$md->{parts} || $md->{parts} =~ /\Q$_->{mntpoint}/ } @raids;
-	    @raids = difference2(\@raids, \@raids_);
-	    my $nb = raid::new($all_hds->{raids}, @raids_);
-	    my $part = $all_hds->{raids}[$nb];
 
-	    my %h = %$md;
-	    delete @h{'hd', 'parts'};
-	    put_in_hash($part, \%h); # mntpoint, level, chunk-size, type
-	    raid::updateSize($part);
-	}
+    require raid;
+    my @mds = grep { $_->{hd} =~ /md/ } @$suggestions;
+    foreach my $md (@mds) {
+	my @raids_ = grep { !$md->{parts} || $md->{parts} =~ /\Q$_->{mntpoint}/ } @raids;
+	@raids = difference2(\@raids, \@raids_);
+	my $nb = raid::new($all_hds->{raids}, @raids_);
+	my $part = $all_hds->{raids}[$nb];
+
+	my %h = %$md;
+	delete @h{'hd', 'parts'};
+	put_in_hash($part, \%h); # mntpoint, level, chunk-size, type
+	raid::updateSize($part);
     }
 }
+
 
 sub undo_prepare {
     my ($all_hds) = @_;
