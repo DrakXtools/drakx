@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 
 use Xconfig::card;
+use Xconfig::resolution_and_depth;
 use common;
 use any;
 
@@ -33,7 +34,7 @@ sub info {
     $info .= _("Graphics card: %s\n", $device->{VendorName} . ' '. $device->{BoardName});
     $info .= _("Graphics memory: %s kB\n", $device->{VideoRam}) if $device->{VideoRam};
     if (my $resolution = eval { $raw_X->get_resolution }) {
-	$info .= _("Color depth: %s\n", translate($Xconfig::xfreeX::depths{$resolution->{Depth}}));
+	$info .= _("Color depth: %s\n", translate($Xconfig::resolution_and_depth::depth2text{$resolution->{Depth}}));
 	$info .= _("Resolution: %s\n", join('x', @$resolution{'X', 'Y'}));
     }
     $info .= _("XFree86 server: %s\n", $card->{server}) if $card->{server};
