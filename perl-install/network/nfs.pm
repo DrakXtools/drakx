@@ -35,20 +35,26 @@ sub check {
 }
 
 sub find_servers {
-    my $pid = open(my $F, "rpcinfo-flushed -b mountd 2 |");
-    $SIG{ALRM} = sub { kill(15, $pid) };
-    alarm 1;
+    my $pid2 = open(my $F2, "rpcinfo-flushed -b mountd 2 |");
+    my $pid3 = open(my $F3, "rpcinfo-flushed -b mountd 3 |");
 
+    common::nonblock($F2);
+    common::nonblock($F3);
     my $domain = chomp_(`domainname`);
-    my @servers;
-    local $_;
-    while (<$F>) {
-	my ($ip, $name) = /(\S+)\s+(\S+)/ or log::explanations("bad line in rpcinfo output"), next;
-	$name =~ s/\Q.$domain//; 
-	$name =~ s/\.$//;
-	push @servers, { ip => $ip, if_($name ne '(unknown)', name => $name) };
+    my ($s, %servers);
+    my $quit;
+    while (!$quit) {
+	$quit = 1;
+	sleep 1;
+	while ($s = <$F2> || <$F3>) {
+	    $quit = 0;
+	    my ($ip, $name) = $s =~ /(\S+)\s+(\S+)/ or log::explanations("bad line in rpcinfo output"), next;
+	    $name =~ s/\Q.$domain//; 
+	    $name =~ s/\.$//;
+	    $servers{$ip} ||= { ip => $ip, if_($name ne '(unknown)', name => $name) };
+	}
     }
-    @servers;
+    values %servers;
 }
 
 sub find_exports {
