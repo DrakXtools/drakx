@@ -12,13 +12,20 @@ use run_program;
 #- were not necessary to start stage2 itself (there were setup
 #- by stage1 of course)
 sub init {
+    #- rw things
     mkdir "/$_" foreach qw(home mnt root etc var);
     mkdir_p "/var/$_" foreach qw(log run spool lib/xkb lock/subsys);
- 
-    symlinkf "/image/etc/$_", "/etc/$_" foreach qw(alternatives passwd group shadow man.config services shells pam.d security inputrc ld.so.conf DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf devfs gtk-2.0 pango fonts);
+    mkdir_p "/etc/$_" foreach qw(X11);
+    touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
+ 
+    #- ro things
+    symlinkf "/image/etc/$_", "/etc/$_" foreach qw(alternatives passwd group shadow man.config services shells pam.d security inputrc ld.so.conf DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf devfs gtk-2.0 pango fonts modules.devfs dynamic);
 
+    #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
+
+    #- devfsd needed for devices accessed by old names
     fs::mount("none", "/dev", "devfs", 0);
     run_program::rooted('', '/sbin/devfsd', '/dev');
 }
