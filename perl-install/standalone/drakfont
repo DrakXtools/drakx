@@ -144,40 +144,17 @@ sub search_windows_font {
 	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
 	    return 0;
 	}
-	# TODO : handle replace like on the other function
-#			!$replace && grep(/$i/, @installed_fonts) and next;
-
-#	if (!$replace) {
 	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
-#	    print "totoottoootototo  (@{$_[0]}) \n";
-	    foreach my $i (@{$_[0]}) {
-		print "result__________ : $i \n";
+	    foreach my $i (@{$_->[0]}) {
 		!$replace && grep(/$i/, @installed_fonts) and next;
-		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_[1]/fonts/$i";
+		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_->[1]/fonts/$i";
 	    }
 	}
-#		    foreach my $i (@list_fonts_win) {
-#			grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/windows/fonts/$i";
-#	      foreach my $i (@list_fonts_winnt) {
-#		  grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/winnt/fonts/$i";
-#	      }
-#	} else {
-#	    foreach ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
-	    #TODO : add a foreach to factorize
-#	    foreach my $i (@list_fonts_win) {
-#		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/windows/fonts/$i";
-#	    }
-#	    foreach my $i (@list_fonts_winnt) {
-#		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/winnt/fonts/$i";
-#	    }
-#	}
     }
     1;
 }
 
 
-
-#TODO : replace ($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i) || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i) by a function
 
 sub is_a_font {
     local $_ = $_[0];
@@ -202,8 +179,8 @@ sub search_dir_font {
 		}
 	    }
 	} else {
-	    # TODO: add replace handling, and @font_list_tmp filling.
-	    if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i) || ($fn =~ /.pcf.gz$/i)) {
+	    if (is_a_font($fn)) {
+		!$replace && grep(/$fn/, @installed_fonts) and next;
 		!grep /$fn/, (@installed_fonts) and push @font_list, "$fn";
 	    }
 	}
@@ -238,14 +215,15 @@ sub search_dir_font_uninstall {
 sub print_list { print "Font(s) to Install :\n\n"; print "$_\n" foreach (@font_list) }
 
 sub put_font_dir {
-#    mkdir_p($drakfont_dir);
-#    cp_af(@font_list, $drakfont_dir);
-#    system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
+    mkdir_p($drakfont_dir);
+    cp_af(@font_list, $drakfont_dir);
+    system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
+    
     # xlsfonts | less pour verifier l'installation des polices.
 }
 
 
-$xlsfonts || $windows || $install[0] || $uninstall[0] ? backend_mod() : interactive_mode();
+$xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
 
 sub backend_mod {
     if ($xlsfonts) {
@@ -262,7 +240,7 @@ sub backend_mod {
     }
 
     #TODO : test directly @install
-    if ($install[0]) {
+    if (@install) {
 	print ".......Install Specifics Fonts...........\n\n";
 	search_installed_fonts();
 	search_dir_font $_ foreach (@install);
@@ -272,7 +250,7 @@ sub backend_mod {
 	print "\n...............The End...................\n";
     }
 
-    if ($uninstall[0]) {
+    if (@uninstall) {
 	print "........Uninstall Specifics Fonts........\n\n";
 	search_installed_fonts_full_path();
 	search_dir_font_uninstall $_ foreach (@uninstall);
@@ -287,4 +265,4 @@ sub interactive_mode {
 
 
 #   faire la gestion des applications + printer
-#   faire une valeure de retour pour toutes les fonctions
+
