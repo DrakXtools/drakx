@@ -299,7 +299,7 @@ sub setup_thiskind {
 	}
 	return if $auto && (@l || !$at_least_one);
     }
-    @l = map { $_->{driver} } @l;
+    @l = map { $_->{description} } @l;
     while (1) {
 	my $msg = @l ?
 	  [ _("Found %s %s interfaces", join(", ", @l), $type),

@@ -350,7 +350,7 @@ sub add_alias($$) {
     $alias .= $scsi++ || '' if $alias eq 'scsi_hostadapter';
     log::l("adding alias $alias to $name");
     $conf{$alias}{alias} ||= $name;
-    if ($alias eq "sound" && $name =~ /^snd-card-/) {
+    if ($name =~ /^snd-card-/) {
 	$conf{$name}{"post-install"} = "modprobe snd-pcm-oss";
     }
     $alias;
