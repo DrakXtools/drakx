@@ -3,8 +3,10 @@ package authentication; # $Id$
 use common;
 use any;
 
-sub kinds() { 
-    ('local', 'LDAP', 'NIS', 'winbind', 'AD', 'SMBKRB');
+sub kinds { 
+    my ($meta_class) = @_;
+    my $allow_AD = $meta_class =~ /corporate/;
+    ('local', 'LDAP', 'NIS', 'winbind', if_($allow_AD, 'AD', 'SMBKRB'));
 }
 
 sub kind2name {

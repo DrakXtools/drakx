@@ -19,11 +19,12 @@ my $in = 'interactive'->vnew('su');
 my $authentication = {}; # TODO
 
 my $kind = authentication::to_kind($authentication);
+my $meta_class = { getVarsFromSh("/etc/sysconfig/system") }->{META_CLASS};
 
 main:
 $in->ask_from(N("Authentication"), authentication::kind2description(),
 	      [ 
-	       { label => N("Authentication"), val => \$kind, type => 'list' , list => [ authentication::kinds() ], format => \&authentication::kind2name },
+	       { label => N("Authentication"), val => \$kind, type => 'list' , list => [ authentication::kinds($meta_class) ], format => \&authentication::kind2name },
 	      ]) or $in->exit;
 
 authentication::ask_parameters($in, $netc, $authentication, $kind) or goto main;
