@@ -525,9 +525,9 @@ sub keyboard2full_xkb {
 	XkbModel => $XkbModel,
 	XkbOptions => join(',', 
 			   if_($keyboard->{GRP_TOGGLE},
-			       if_($keyboard->{GRP_TOGGLE} ne 'rwin_toggle', 'compose:rwin'), 
 			       "grp:$keyboard->{GRP_TOGGLE}", 
 			       'grp_led:scroll'),
+			   if_($keyboard->{GRP_TOGGLE} ne 'rwin_toggle', 'compose:rwin'), 
 			   ),
     };
 }
