@@ -693,7 +693,7 @@ enum return_type ftp_prepare(void)
 	enum return_type results;
 
 	if (!ramdisk_possible()) {
-		stg1_error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
+		stg1_error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
 				   MEM_LIMIT_RAMDISK, total_memory());
 		return RETURN_ERROR;
 	}
@@ -780,7 +780,7 @@ enum return_type http_prepare(void)
 	enum return_type results;
 
 	if (!ramdisk_possible()) {
-		stg1_error_message("HTTP install needs more than %d Mbytes of memory (detected %d Mbytes).",
+		stg1_error_message("HTTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
 				   MEM_LIMIT_RAMDISK, total_memory());
 		return RETURN_ERROR;
 	}
