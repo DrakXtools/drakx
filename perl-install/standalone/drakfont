@@ -551,7 +551,7 @@ sub interactive_mode() {
 					       new Gtk2::HBox(0, 2), 0,
 					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
 						      gtksignal_connect(new Gtk2::Button(N("About")), clicked => \&help),
-						      gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub { Gtk2->main_quit }),
+						      gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub { Gtk2->main_quit }),
 						     ),
 					      ),
 				     ),
