@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-07-09 14:16+0200\n"
+"POT-Creation-Date: 2003-07-10 18:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -355,6 +355,11 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Soundcard"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Search for files to restore"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
@@ -2876,7 +2881,7 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-#: ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
+#: ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Next ->"
 msgstr ""
@@ -5601,6 +5606,11 @@ msgstr ""
 msgid "HardDrive / NFS"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Search Backups"
+msgstr ""
+
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "a number"
@@ -6835,6 +6845,46 @@ msgstr ""
 msgid "Uzbek (cyrillic)"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Options Description:\n"
+"\n"
+" In this step Drakbackup allow you to change:\n"
+"\n"
+" - the .backupignore mode:\n"
+"\n"
+"      Like with cvs, drakbackup will ignore all references\n"
+"      included in .backupignore files in each directory.\n"
+"      \n"
+"\t  Example: \n"
+"         #> cat .backupignore\n"
+"         *.o\n"
+"         *~\n"
+"         ...\n"
+" \n"
+" - The user(s) to whom drakbackup reports should be mailed to.\n"
+"      \n"
+"      This can be a comma sperated lists of local users, or\n"
+"      internet email addresses if your system is setup to\n"
+"      do internet mail.\n"
+"  \n"
+" - The compression mode (not enabled):\n"
+"    \n"
+"      If you check bzip2 compression, you will compress\n"
+"      your data better than gzip (about 2-10 %%).\n"
+"      This option is not checked by default because\n"
+"      this compression mode needs more time (about 1000%% more).\n"
+" \n"
+" - The update mode (not enabled):\n"
+"\n"
+"      This option will update your backup, but this\n"
+"      option is not really useful because you need to\n"
+"      decompress your backup before you can update it.\n"
+"      \n"
+""
+msgstr ""
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid ""
@@ -7223,12 +7273,12 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Andorra"
+msgid "Sierra Leone"
 msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Sierra Leone"
+msgid "Andorra"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -7433,14 +7483,14 @@ msgstr ""
 msgid "Auto-detect available ports"
 msgstr ""
 
-#: ../../standalone/drakgw:1
-#, c-format
-msgid "Internet Connection Sharing currently disabled"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "San Marino"
+msgstr ""
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid "Internet Connection Sharing currently disabled"
 msgstr ""
 
 #: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1
@@ -8341,11 +8391,6 @@ msgid ""
 "Please be sure to add a /boot partition"
 msgstr ""
 
-#: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Previous"
-msgstr ""
-
 #: ../../any.pm:1
 #, c-format
 msgid "Other OS (MacOS...)"
@@ -8510,7 +8555,7 @@ msgstr ""
 msgid "Unselect fonts installed"
 msgstr ""
 
-#: ../../any.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/draksec:1 ../../standalone/net_monitor:1
+#: ../../any.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/draksec:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr ""
@@ -9177,9 +9222,14 @@ msgid ""
 "When you are done, don't forget to save using `w'"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Close"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Filename to search for (wildcards allowed):"
 msgstr ""
 
 #: ../../help.pm:1
@@ -9569,40 +9619,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
-"Options Description:\n"
-"\n"
-" In this step Drakbackup allow you to change:\n"
-"\n"
-" - The compression mode:\n"
-"    \n"
-"      If you check bzip2 compression, you will compress\n"
-"      your data better than gzip (about 2-10 %%).\n"
-"      This option is not checked by default because\n"
-"      this compression mode needs more time (about 1000%% more).\n"
-" \n"
-" - The update mode:\n"
-"\n"
-"      This option will update your backup, but this\n"
-"      option is not really useful because you need to\n"
-"      decompress your backup before you can update it.\n"
-"      \n"
-" - the .backupignore mode:\n"
-"\n"
-"      Like with cvs, Drakbackup will ignore all references\n"
-"      included in .backupignore files in each directories.\n"
-"      ex: \n"
-"         #> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-"      \n"
-"\n"
-""
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
 "Restore Selected\n"
 "Files"
 msgstr ""
@@ -9778,6 +9794,11 @@ msgstr ""
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Restore Selected"
+msgstr ""
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Search for fonts in installed list"
@@ -9860,6 +9881,11 @@ msgstr ""
 msgid ""
 "You don't have an Internet connection.\n"
 "Create one first by clicking on 'Configure'"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Start Search..."
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -10459,7 +10485,7 @@ msgstr ""
 msgid "permissions"
 msgstr ""
 
-#: ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
+#: ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "<- Previous"
 msgstr ""
@@ -10942,6 +10968,11 @@ msgstr ""
 msgid "Can't create log file!"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use .backupignore files"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Guinea"
@@ -11420,38 +11451,6 @@ msgstr ""
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Software Manager"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Restore Description:\n"
-" \n"
-"Only the most recent date will be used, because with incremental \n"
-"backups it is necessary to restore one by one each older backup.\n"
-"\n"
-"So if you don't want to restore a user please unselect all their\n"
-"check boxes.\n"
-"\n"
-"Otherwise, you are able to select only one of these.\n"
-"\n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-""
 msgstr ""
 
 #: ../../interactive/stdio.pm:1
@@ -12201,7 +12200,7 @@ msgstr ""
 msgid "Choose the mount points"
 msgstr ""
 
-#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "OK"
 msgstr ""
@@ -12446,7 +12445,7 @@ msgstr ""
 msgid "Philippines"
 msgstr ""
 
-#: ../../interactive.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../interactive.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "Ok"
 msgstr ""
@@ -13484,7 +13483,7 @@ msgstr ""
 msgid "Optimize your security by using Mandrake Linux"
 msgstr ""
 
-#: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakfont:1
+#: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1
 #, c-format
 msgid "Help"
 msgstr ""
@@ -14064,11 +14063,6 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid " (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
-msgstr ""
-
-#: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Next"
 msgstr ""
 
 #: ../../bootloader.pm:1
@@ -14753,6 +14747,44 @@ msgstr ""
 msgid "SCSI controllers"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Restore Description:\n"
+"\n"
+"Drakbackup now allows you to search the backup lists for a particular\n"
+"file or files to restore.  If the search is successful, you will be \n"
+"presented with a list of matches, along with backup media and dates.\n"
+"You can then select individual files to restore from your backup media.\n"
+" \n"
+"For 'normal' restores, only the most recent date will be used, \n"
+"because with incremental  backups it is necessary to restore \n"
+"one by one each older backup.\n"
+"\n"
+"So if you don't want to restore a user please unselect all their\n"
+"check boxes.\n"
+"\n"
+"Otherwise, you are able to select only one of these.\n"
+"\n"
+" - Incremental Backups:\n"
+"\n"
+"\tThe incremental backup is the most powerful option for \n"
+"\tbackup. This option allows you to backup all your data \n"
+"\tthe first time, and only the changed data afterward.\n"
+"\tThen you will be able, during the restore step, to restore \n"
+"\tyour data from a specified date. If you have not selected \n"
+"\tthis option all old backups are deleted before each backup.    \n"
+"\n"
+" - Differential Backups:\n"
+" \n"
+"\tThe differential backup, rather than comparing changes in the\n"
+"\tdata to the previous incremental backup, always compares the\n"
+"\tdata to the initial base backup. This method allows one to\n"
+"\trestore the base and then the differential from a certain date.\n"
+"\n"
+""
+msgstr ""
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid " on LPD server \"%s\", printer \"%s\""
@@ -15267,11 +15299,6 @@ msgstr ""
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid "Mandrake's multipurpose configuration tool"
-msgstr ""
-
-#: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Save"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -16040,6 +16067,13 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Papua New Guinea"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Search For...\n"
+"%s"
 msgstr ""
 
 #: ../../keyboard.pm:1
