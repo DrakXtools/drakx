@@ -118,8 +118,8 @@ sub to_raw_X {
 
 sub probe() {
 #-for Pixel tests
-    my @c = { driver => 'Card:Matrox Millennium G400 DualHead', description => 'Matrox|Millennium G400 Dual HeadCard' };
-#-    my @c = grep { $_->{driver} =~ /(Card|Server|Driver):/ } detect_devices::probeall();
+#-    my @c = { driver => 'Card:Matrox Millennium G400 DualHead', description => 'Matrox|Millennium G400 Dual HeadCard' };
+    my @c = grep { $_->{driver} =~ /(Card|Server|Driver):/ } detect_devices::probeall();
 
     my @cards = map {
 	my @l = $_->{description} =~ /(.*?)\|(.*)/;
