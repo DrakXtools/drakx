@@ -546,7 +546,7 @@ wait %d seconds for default boot.
     #- add a restore entry if installation is done from disk, in order to allow redoing it.
     if (my $hd_install_path = any::hdInstallPath()) {
 	my ($cmdline, $vga);
-	if (-e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" &&
+	if ($::restore && -e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" &&
 	    ($cmdline = cat_("/tmp/image/boot/grub/menu.lst") =~ m|kernel \S+/boot/vmlinuz (.*)$|m)) {
 	    #- cmdline should'n have any reference to vga=...
 	    $cmdline =~ s/vga=(\S+)//g and $vga = $1;
