@@ -576,6 +576,8 @@ sub read_ppd_options ($) {
     return $COMBODATA->{args};
 }
 
+my %sysconfig = getVarsFromSh("$::prefix/etc/sysconfig/printing");
+
 sub set_cups_special_options {
     my ($queue) = $_[0];
     # Set some special CUPS options
@@ -600,95 +602,34 @@ sub set_cups_special_options {
 }
 
 sub set_cups_autoconf {
-    my $autoconf = $_[0];
-
-    # Read config file
-    my $file = "$::prefix/etc/sysconfig/printing";
-    my @file_content = cat_($file);
-
-    # Remove all valid "CUPS_CONFIG" lines
-    /^\s*CUPS_CONFIG/ and $_ = "" foreach @file_content;
- 
-    # Insert the new "CUPS_CONFIG" line
-    if ($autoconf) {
-	push @file_content, "CUPS_CONFIG=automatic\n";
-    } else {
-	push @file_content, "CUPS_CONFIG=manual\n";
-    }
-
-    output($file, @file_content);
-
-    # Restart CUPS
-    if ($autoconf) {
-	printer::services::restart("cups");
-    }
-
+    my ($autoconf) = @_;
+    $sysconfig{CUPS_CONFIG} = $autoconf ? "automatic" : "manual";
+    setVarsInSh("$::prefix/etc/sysconfig/printing", \%sysconfig);
     return 1;
 }
 
-sub get_cups_autoconf {
-    local *F;
-    open F, "< $::prefix/etc/sysconfig/printing" or return 1;
-    while (my $line = <F>) {
-	return 0 if $line =~ m!^[^\#]*CUPS_CONFIG=manual!;
-    }
-    return 1;
-}
+sub get_cups_autoconf { $sysconfig{CUPS_CONFIG} ne 'manual' ? 1 : 0 }
 
 sub set_usermode {
-    my $usermode = $_[0];
-    $::expert = $usermode;
-
-    # Read config file
-    local *F;
-    my $file = "$::prefix/etc/sysconfig/printing";
-    my @file_content;
-    if (!(-f $file)) {
-	@file_content = ();
-    } else {
-	open F, "< $file" or die "Cannot open $file for reading!";
-	@file_content = <F>;
-	close F;
-    }
-
-    # Remove all valid "USER_MODE" lines
-    (/^\s*USER_MODE/ and $_ = "") foreach @file_content;
- 
-    # Insert the new "USER_MODE" line
-    if ($usermode) {
-	push @file_content, "USER_MODE=expert\n";
-    } else {
-	push @file_content, "USER_MODE=recommended\n";
-    }
-
-    # Write back modified file
-    open F, "> $file" or die "Cannot open $file for writing!";
-    print F @file_content;
-    close F;
-
+    my ($usermode) = @_;
+    setVarsInSh("$::prefix/etc/sysconfig/printing", { "USER_MODE" => $usermode ? "expert" : "recommended" });
     return 1;
 }
 
-sub get_usermode {
-    my %cfg = getVarsFromSh("$::prefix/etc/sysconfig/printing");
-    $::expert = $cfg{USER_MODE} eq 'expert' ? 1 : 0;
-    return $::expert;
-}
+sub get_usermode() { $::expert = $sysconfig{USER_MODE} eq 'expert' ? 1 : 0 }
 
 sub set_jap_textmode {
     my $textmode = ($_[0] ? 'cjk' : '');
-    my $file = "$::prefix/etc/cups/mime.convs";
-    my @mimeconvs = cat_($file) or die "Cannot open $file for reading!";
-    (s!^(\s*text/plain\s+\S+\s+\d+\s+)\S+(\s*$)!$1${textmode}texttops$2!)
-	foreach @mimeconvs;
-    output($file, @mimeconvs) or die "Cannot open $file for writing!";
+    substInFile {
+        s!^(\s*text/plain\s+\S+\s+\d+\s+)\S+(\s*$)!$1${textmode}texttops$2!        
+    } "$::prefix/etc/cups/mime.convs";
     return 1;
 }
 
 sub get_jap_textmode {
     my @mimeconvs = cat_("$::prefix/etc/cups/mime.convs");
     (m!^\s*text/plain\s+\S+\s+\d+\s+(\S+)\s*$!m and
-     ($1 eq 'cjktexttops') and return 1) foreach @mimeconvs;
+     $1 eq 'cjktexttops' and return 1) foreach @mimeconvs;
     return 0;
 }
 
