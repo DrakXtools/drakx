@@ -222,71 +222,56 @@ sub createXconf {
 
 if (arch() =~ /^ia64/) {
      require Xconfigurator;
-     my ($card) = Xconfigurator::cardConfigurationAuto();
-     Xconfigurator::updateCardAccordingName($card, $card->{type}) if $card && $card->{type};
-    local *F;
-    open F, ">$file" or die "can't create X configuration file $file";
-    print F <<END;
+     my ($card) = Xconfigurator::probe_cards();
+     Xconfigurator::add_to_card__using_Cards($card, $card->{type}) if $card && $card->{type};
+     output($file, <<END);
 
 Section "Files"
    FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
 EndSection
 
 Section "InputDevice"
-    Identifier "Keyboard1"
-    Driver      "Keyboard"
-    Option "AutoRepeat"  "250 30"
+    Identifier "Keyboard"
+    Driver "Keyboard"
     Option "XkbDisable"
-
-    Option "XkbRules" "xfree86"
     Option "XkbModel" "pc105"
     Option "XkbLayout" ""
 EndSection
 
 Section "InputDevice"
-    Identifier  "Mouse1"
-    Driver      "mouse"
-    Option "Protocol"    "$mouse_type"
-    Option "Device"      "/dev/mouse"
+    Identifier "Mouse"
+    Driver "mouse"
+    Option "Protocol" "$mouse_type"
+    Option "Device" "/dev/mouse"
 EndSection
 
 Section "Monitor"
-    Identifier "Generic|High Frequency SVGA, 1024x768 at 70 Hz"
-    VendorName "Unknown"
-    ModelName  "Unknown"
-    HorizSync  31.5-35.5
+    Identifier "monitor"
+    HorizSync 31.5-35.5
     VertRefresh 50-70
 EndSection
 
 Section "Device"
-    Identifier "Generic VGA"
-    Driver     "vga"
-EndSection
-
-Section "Device"
-    Identifier  "device1"
-    VendorName  "Unknown"
-    BoardName   "Unknown"
+    Identifier  "device"
     Driver      "$card->{driver}"
 EndSection
 
 Section "Screen"
-    Identifier "screen1"
-    Device      "device1"
-    Monitor     "Generic|High Frequency SVGA, 1024x768 at 70 Hz"
+    Identifier "screen"
+    Device "device"
+    Monitor "monitor"
     DefaultColorDepth 16
     Subsection "Display"
-        Depth       16
-        Modes       "800x600" "640x480"
-        ViewPort    0 0
+        Depth 16
+        Modes "800x600" "640x480"
     EndSubsection
 EndSection
 
 Section "ServerLayout"
-    Identifier "layout1"
-    Screen     "screen1"
-    InputDevice "Mouse1" "CorePointer"
-    InputDevice "Keyboard1" "CoreKeyboard"
+    Identifier "layout"
+    Screen "screen"
+    InputDevice "Mouse" "CorePointer"
+    InputDevice "Keyboard" "CoreKeyboard"
 EndSection
 
 END
@@ -296,10 +281,9 @@ END
 else
   {
 
-
     my $wacom;
     if ($wacom_dev) {
-	$wacom_dev = devices::make($wacom_dev);
+	my $dev = devices::make($wacom_dev);
 	$wacom = <<END;
 Section "Module"
    Load "xf86Wacom.so"
@@ -307,54 +291,29 @@ EndSection
 
 Section "XInput"
     SubSection "WacomStylus"
-        Port "$wacom_dev"
+        Port "$dev"
         AlwaysCore
     EndSubSection
     SubSection "WacomCursor"
-        Port "$wacom_dev"
+        Port "$dev"
         AlwaysCore
     EndSubSection
     SubSection "WacomEraser"
-        Port "$wacom_dev"
+        Port "$dev"
         AlwaysCore
     EndSubSection
 EndSection
 END
     }
 
-    local *F;
-    open F, ">$file" or die "can't create X configuration file $file";
-    print F <<END;
+    output($file, <<END);
 Section "Files"
    FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
 EndSection
 
 Section "Keyboard"
    Protocol    "Standard"
-   AutoRepeat  0 0
-
-   LeftAlt         Meta
-   RightAlt        Meta
-   ScrollLock      Compose
-   RightCtl        Control
-END
-
-    if (arch() =~ /^sparc/) {
-	print F <<END;
-   XkbRules    "sun"
-   XkbModel    "sun"
-   XkbLayout   "us"
-   XkbCompat   "compat/complete"
-   XkbTypes    "types/complete"
-   XkbKeycodes "sun(type5)"
-   XkbGeometry "sun(type5)"
-   XkbSymbols  "sun/us(sun5)"
-END
-    } else {
-	print F "    XkbDisable\n";
-    }
-
-    print F <<END;
+   XkbDisable
 EndSection
 
 Section "Pointer"
@@ -366,9 +325,7 @@ EndSection
 $wacom
 
 Section "Monitor"
-   Identifier  "My Monitor"
-   VendorName  "Unknown"
-   ModelName   "Unknown"
+   Identifier  "monitor"
    HorizSync   31.5-35.5
    VertRefresh 50-70
    ModeLine "640x480"     25.175 640  664  760  800   480  491  493  525
@@ -379,62 +336,53 @@ EndSection
 
 Section "Device"
    Identifier "Generic VGA"
-   VendorName "Unknown"
-   BoardName "Unknown"
    Chipset "generic"
 EndSection
 
 Section "Device"
    Identifier "svga"
-   VendorName "Unknown"
-   BoardName "Unknown"
 EndSection
 
 Section "Screen"
     Driver      "vga16"
     Device      "Generic VGA"
-    Monitor     "My Monitor"
+    Monitor     "monitor"
     Subsection "Display"
-        Modes       "640x480"
-        ViewPort    0 0
+        Modes "640x480"
     EndSubsection
 EndSection
 
 Section "Screen"
     Driver      "fbdev"
     Device      "Generic VGA"
-    Monitor     "My Monitor"
+    Monitor     "monitor"
     Subsection "Display"
-        Depth       16
-        Modes       "default"
-        ViewPort    0 0
+        Depth 16
+        Modes "default"
     EndSubsection
 EndSection
 
 Section "Screen"
     Driver "svga"
-    Device      "svga"
-    Monitor     "My Monitor"
+    Device "svga"
+    Monitor "monitor"
     Subsection "Display"
-        Depth       16
-        Modes       "800x600" "640x480"
-        ViewPort    0 0
+        Depth 16
+        Modes "800x600" "640x480"
     EndSubsection
 EndSection
 
 Section "Screen"
-    Driver      "accel"
-    Device      "svga"
-    Monitor     "My Monitor"
+    Driver "accel"
+    Device "svga"
+    Monitor "monitor"
     Subsection "Display"
-        Depth       16
-        Modes       "800x600" "640x480"
-        ViewPort    0 0
+        Depth 16
+        Modes "800x600" "640x480"
     EndSubsection
 EndSection
 END
 }
 }
-#-   ModeLine "640x480"     28     640  672  768  800   480  490  492  525
 
 1;
