@@ -73,11 +73,10 @@ so the messages will be displayed in english during installation") if $ENV{LANGU
 sub acceptLicense {
     my ($o) = @_;
 
-    $o->{release_notes} = do {
-	my  $f = install_any::getFile('release-notes.txt');
-	my $af = install_any::getFile("release-notes." . arch() . ".txt");
-	join('', <$f>, $af ? ("\n\n", <$af>) : ());
-    };
+    $o->{release_notes} = join("\n\n", map { 
+	my $f = install_any::getFile($_);
+	$f && cat__($f);
+    } 'release-notes.txt', 'release-notes.' . arch() . '.txt');
 
     return if $o->{useless_thing_accepted};
 
