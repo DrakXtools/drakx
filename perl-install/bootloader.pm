@@ -1195,21 +1195,25 @@ sub update_for_renumbered_partitions {
 		 );
 
     my %configs = map {
-	my $f = cat_("$::prefix/$files{$_}");
-	$_ => { orig => $f, new => $f, file => $files{$_} };
+	my $file = "$::prefix/$files{$_}";
+	if (-e $file) {
+	    my $f = cat_($file);
+	    $_ => { orig => $f, new => $f, file => $files{$_} };
+	} else { () }
     } keys %files;
 
-    my $grub2dev = read_grub_device_map();
-    my %dev2grub = reverse %$grub2dev;
+    my %dev2grub = $configs{grub} ? do {
+	my $grub2dev = read_grub_device_map();
+	reverse %$grub2dev;
+    } : ();
 
     foreach (@$renumbering) {
 	my ($old, $new) = @$_;
-	my $old_grub = dev2grub($old, \%dev2grub);
-	my $new_grub = dev2grub($new, \%dev2grub);
+	my ($old_grub, $new_grub) = eval { map { dev2grub($_, \%dev2grub) } $old, $new };
 	log::l("renaming $old -> $new  and $old_grub -> $new_grub");
 	foreach (values %configs) {
 	    $_->{new} =~ s/\b$old/$new/g;
-	    $_->{new} =~ s/\Q$old_grub/$new_grub/g;
+	    $_->{new} =~ s/\Q$old_grub/$new_grub/g if $old_grub;
 	}
     }
 
@@ -1220,8 +1224,8 @@ sub update_for_renumbered_partitions {
     foreach (values %configs) {
 	output("$::prefix/$_->{file}", $_->{new}) if $_->{new} ne $_->{orig};
     }
-    if ($configs{lilo}{orig} ne $configs{lilo}{new} && detect_bootloader() =~ /LILO/ ||
-	$configs{grub_install}{orig} ne $configs{grub_install}{new} && detect_bootloader() =~ /GRUB/) {
+    if ($configs{lilo} && $configs{lilo}{orig} ne $configs{lilo}{new} && detect_bootloader() =~ /LILO/ ||
+	$configs{grub_install} && $configs{grub_install}{orig} ne $configs{grub_install}{new} && detect_bootloader() =~ /GRUB/) {
 	$in->ask_warn('', N("The bootloader can't be installed correctly. You have to boot rescue and choose \"%s\"", 
 			    N("Re-install Boot Loader")));
     }
