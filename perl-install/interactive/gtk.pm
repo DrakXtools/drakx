@@ -656,6 +656,7 @@ sub ask_fromW {
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
 
     $pack->pack_start(gtkshow($always_pack), 1, 1, 0);
+    $advanced_pack = create_scrolled_window($advanced_pack, [ 'never', 'automatic' ], 'none');
     $pack->pack_start($advanced_pack, 1, 1, 0);
     if ($buttons_pack) {
 	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
