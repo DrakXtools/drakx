@@ -870,7 +870,7 @@ If you do not know, choose 'use PPPoE'"),
                    },
 
 
-                   adsl_account => 
+                   adsl_account =>
                    {
                     pre => sub {
                         network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
@@ -906,7 +906,7 @@ If you do not know, choose 'use PPPoE'"),
                    },
 
 
-                    adsl_unsupported_eci => 
+                    adsl_unsupported_eci =>
                     {
                      name => N("The ECI Hi-Focus modem cannot be supported due to binary driver distribution problem.
 
@@ -915,7 +915,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     },
 
 
-                   lan => 
+                   lan =>
                    {
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
@@ -950,7 +950,7 @@ Do you really want to reconfigure this device?"),
                    },
 
 
-                   alrd_end => 
+                   alrd_end =>
                    {
                     name => N("Congratulations, the network and Internet configuration is finished.
 
@@ -985,7 +985,7 @@ Do you really want to reconfigure this device?"),
 
                    # FIXME: is_install: no return for each card "last step" because of manual popping
                    # better construct an hash of { current_netintf => next_step } which next_step = last_card ? next_eth_step : next_card ?
-                   lan_intf => 
+                   lan_intf =>
                    {
                     pre => sub  {
                         $onboot = $ethntf->{ONBOOT} ? $ethntf->{ONBOOT} =~ /yes/ : bool2yesno(!member($ethntf->{DEVICE}, 
