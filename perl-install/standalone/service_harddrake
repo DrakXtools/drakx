@@ -3,7 +3,7 @@
 
 use lib qw(/usr/lib/libDrakX);
 
-#use strict;
+use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use MDK::Common;
@@ -35,6 +35,9 @@ my $w = $in->wait_message(_("Please wait"), _("Hardware probing in progress"));
 my $previous_config = -f $last_boot_config ? do $last_boot_config : {};
 
 my %config;
+
+$SIG{SIGALRM} = sub { die "time out elapsed"; };
+alarm 200;
 
 # For each hw, class, detect device, compare and offer to reconfigure if
 # needed
@@ -87,6 +90,8 @@ foreach (@harddrake::data::tree) {
 		}
     }
 }
+
+alarm 0;
 
 
 $Data::Dumper::Terse = 1;          # don't output names where feasible
