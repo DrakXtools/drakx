@@ -175,15 +175,15 @@ sub isDvdDrive {
 sub isZipDrive { $_[0]{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 sub isJazzDrive { $_[0]{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
 sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
-sub isRemovableUsb { $_[0]{usb_media_type} && begins_with($_[0]{usb_media_type}, 'Mass Storage') && usb2removable($_[0]) }
-sub isKeyUsb { $_[0]{usb_media_type} && begins_with($_[0]{usb_media_type}, 'Mass Storage') && $_[0]{media_type} eq 'hd' }
+sub isRemovableUsb { begins_with($_[0]{usb_media_type} || '', 'Mass Storage') && usb2removable($_[0]) }
+sub isKeyUsb { begins_with($_[0]{usb_media_type} || '', 'Mass Storage') && $_[0]{media_type} eq 'hd' }
 sub isFloppyUsb { $_[0]{usb_driver} && $_[0]{usb_driver} eq 'Removable:floppy' }
 sub isRemovableDrive { 
     my ($e) = @_;
     isZipDrive($e) || isLS120Drive($e)
       || $e->{media_type} && $e->{media_type} eq 'fd' 
       || isRemovableUsb($e)
-      || $e->{usb_media_type} && begins_with($e->{usb_media_type}, 'Mass Storage|Floppy (UFI)');
+      || begins_with($e->{usb_media_type} || '', 'Mass Storage|Floppy (UFI)');
 }
 
 sub getSCSI_24() {
