@@ -621,11 +621,9 @@ sub printerConfig {
     require printer;
     require printerdrake;
 
-    log::l("clicked=$clicked\n");
     if ($::beginner && !$clicked) {
         printerdrake::auto_detect($o) or return;
     }
-    log::l("after clicked=$clicked\n");
 
     #- bring interface up for installing ethernet packages but avoid ppp by default,
     #- else the guy know what he is doing...

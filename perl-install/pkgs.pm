@@ -911,7 +911,6 @@ sub install($$$;$$) {
     #- one or many transaction.
     my ($total, $nb);
     foreach my $pkg (@$toInstall) {
-	print packageName($pkg), "\n";
 	$packages{packageName($pkg)} = $pkg;
 	$nb++;
 	$total += packageSize($pkg);
