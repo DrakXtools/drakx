@@ -49,7 +49,7 @@ sub partition_with_diskdrake {
 	require diskdrake::interactive;
 	{
 	    local $::expert = $::expert;
-	    diskdrake::interactive::main($o, $all_hds, $nowizard, $do_force_reload, sub { $o->interactive_help_get_id('partition_with_diskdrake') });
+	    diskdrake::interactive::main($o, $all_hds, $nowizard, $do_force_reload, $o->interactive_help_sub_display_id('partition_with_diskdrake'));
 	}
 	if (delete $o->{wizard}) {
 	    partitionWizard($o, 'nodiskdrake') or redo;

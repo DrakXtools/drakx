@@ -260,7 +260,7 @@ sub reallyChooseGroups {
 			   )),
 		   1, '',
 		   0, gtkadd(Gtk2::HBox->new(0, 0),
-			  gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { $o->ask_warn(N("Help"), $o->interactive_help_get_id('choosePackages')) }),
+			  gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => $o->interactive_help_sub_display_id('choosePackages')),
 			  $w_size,
 			  if_($individual, do {
 			      my $check = Gtk2::CheckButton->new(N("Individual package selection"));

@@ -253,6 +253,7 @@ sub choose_gtk {
     };
     $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
 
+    my $help_sub = $in->interactive_help_sub_display_id('configureX_resolution');
     gtkadd($W->{window},
 	   gtkpack_($W->create_box_with_title(N("Choose the resolution and the color depth"),
 					      if_($card->{BoardName}, "(" . N("Graphics card: %s", $card->{BoardName}) . ")"),
@@ -268,11 +269,7 @@ sub choose_gtk {
 						   ),
 					  ),
 			       ),
-		    0, gtkadd($W->create_okcancel(N("Ok"), N("Cancel"), '',
-						  [ N("Help"), sub { 
-							my $message = $in->interactive_help_get_id('configureX_resolution') or return;
-							$in->ask_warn(N("Help"), $message);
-						    }, 1 ])),
+		    0, gtkadd($W->create_okcancel(N("Ok"), N("Cancel"), '', if_($help_sub, [ N("Help"), $help_sub, 1 ]))),
 		    ));
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);

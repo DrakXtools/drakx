@@ -364,7 +364,7 @@ sub ask_from_normalize {
 	($common->{title} = $0) =~ s|.*/||;
     }
     $common->{interactive_help} ||= $o->{interactive_help};
-    $common->{interactive_help} ||= $common->{interactive_help_id} && sub { $o->interactive_help_get_id($common->{interactive_help_id}) };
+    $common->{interactive_help} ||= $common->{interactive_help_id} && $o->interactive_help_sub_get_id($common->{interactive_help_id});
     $common->{advanced_label} ||= N("Advanced");
     $common->{advanced_label_close} ||= N("Basic");
     $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
@@ -394,7 +394,7 @@ sub ask_from_real {
 
 sub ask_browse_tree_info {
     my ($o, $title, $message, $common) = @_;
-    $common->{interactive_help} ||= $common->{interactive_help_id} && sub { $o->interactive_help_get_id($common->{interactive_help_id}) };
+    $common->{interactive_help} ||= $common->{interactive_help_id} && $o->interactive_help_sub_get_id($common->{interactive_help_id});
     add2hash_($common, { ok => $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok"), 
 			 cancel => $::isWizard ? N("<- Previous") : N("Cancel") });
     add2hash_($common, { title => $title, message => $message });
@@ -470,11 +470,27 @@ sub helper_separator_tree_to_tree {
 }
 
 
+sub interactive_help_has_id {
+    my ($_o, $id) = @_;
+    exists $help::steps{$id};
+}
+
 sub interactive_help_get_id {
-    my @l = map { 
+    my ($_o, @l) = @_;
+    @l = map { 
 	join("\n\n", map { s/\n/ /mg; $_ } split("\n\n", translate($help::steps{$_})))
-    } grep { exists $help::steps{$_} } @_;
+    } grep { exists $help::steps{$_} } @l;
     join("\n\n\n", @l);
+}
+
+sub interactive_help_sub_get_id {
+    my ($o, $id) = @_;
+    $o->interactive_help_has_id($id) && sub { $o->interactive_help_get_id($id) };
+}
+
+sub interactive_help_sub_display_id {
+    my ($o, $id) = @_;
+    $o->interactive_help_has_id($id) && sub { $o->ask_warn(N("Help"), $o->interactive_help_get_id($id)) };
 }
 
 1;
