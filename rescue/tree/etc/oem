@@ -663,7 +663,7 @@ sub select_packages {
 
     #- package that have to selected here as a bonus for oem install.
     foreach (qw(cups cups-drivers a2ps drakprofile draksync numlock raidtools icewm-light
-		Mesa Mesa-demos alsa alsa-utils Mesa-demos
+		Mesa Mesa-demos alsa alsa-utils Mesa-demos curl
                 glibc vim-minimal kernel
 	       ), exists $options{server} ? qw(kernel22 openldap-migration openldap-clients pam_ldap) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
