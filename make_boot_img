@@ -63,7 +63,7 @@ sub initrd {
     install_s("$instdir/$install", "$mnt/sbin/install");
 
     _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
-    _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz" if $ltype ne "blank";
+    _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz" if $type !~ /blank/;
     _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
 
@@ -85,7 +85,7 @@ sub boot_img_i386 {
 	_ "bunzip2 -c $instdir/installinit/msgboot-graphicallogo.img.bz2 > $img";
     }
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
-    _ "cat vmlinuz > $mnt/vmlinuz";
+    _ "cat vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
     -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
     
     my $timeout = 72;
@@ -259,7 +259,7 @@ To Build a Bootable CD-ROM, try:
 	_ "rm -rf $dir";
 	_ "mkdir -p $dir";
 	_ "cp -f /boot/fd.b /boot/second.b $dir";
-	_ "cp -f vmlinuz$I $dir/vmlinux$I.gz";
+	_ "cp -f vmlinuz$I $dir/vmlinux$I.gz" if $type !~ /blank/;
 	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd("${mnt}2", "$dir/$type.rdz");
 
 	output("$dir/boot.msg", "
