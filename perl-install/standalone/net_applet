@@ -55,7 +55,7 @@ gtkadd(my $icon = Gtk2::TrayIcon->new("Net_Applet"),
 $eventbox->signal_connect(button_press_event => sub {
 			      if ($_[1]->button == 1) {
 				  my @nm_pid =  `ps -u $ENV{USER}` =~ /net_monitor/;
-				  @nm_pid > 1 and netMonitor()
+				  @nm_pid > 1 or netMonitor()
 			      }
                               $_[1]->button == 3 && $menu and $menu->popup(undef, undef, undef, undef, $_[1]->button, $_[1]->time);
                           });
