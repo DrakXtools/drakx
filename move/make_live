@@ -9,7 +9,12 @@ my @langs = map { /^../; $& } @ALLOWED_LANGS;
 
 @ARGV <= 1 or die "usage: make_live [live_location=/tmp/live_tree]\n";
 
-my $kernel_version = '2.4.22.21.1mdk';
+my $kernel_version = do {
+    my @l = glob_('/export/Mandrake/RPMS/kernel-2.*');
+    @l >= 1 or die "can't find kernel";
+    @l <= 1 or die "too many kernels";
+    first(`rpm -qp --qf '%{name}' $l[0]` =~ /kernel-(.*)/);
+};
 
 sub installPackages {
     output_p("$::prefix/etc/rpm/macros", "%_install_langs " . join(":", @langs) . "\n");
