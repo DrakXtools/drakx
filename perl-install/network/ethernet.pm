@@ -92,7 +92,7 @@ I cannot set up this connection type.")) and return;
     }
     $::isStandalone and modules::write_conf($prefix);
 
-    my $_device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
+    my $_device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr);
 #      if ( $::isStandalone and !($type eq "dhcp")) {
 #  	$in->ask_yesorno(N("Network interface"),
 #  			  N("I'm about to restart the network device:\n") . $device . N("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
