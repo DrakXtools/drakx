@@ -926,6 +926,7 @@ sub write_XF86Config {
 	print G qq(    Option "Protocol"    "$O->{XMOUSETYPE}"\n);
 	print F ($id > 1 && "    ") . qq(    Device      "/dev/$O->{device}"\n);
 	print G qq(    Option "Device"      "/dev/$O->{device}"\n);
+	print F "        AlwaysCore\n" if $id > 1;
 	#- this will enable the "wheel" or "knob" functionality if the mouse supports it
 	print F ($id > 1 && "    ") . "    ZAxisMapping 4 5\n" if $O->{nbuttons} > 3;
 	print F ($id > 1 && "    ") . "    ZAxisMapping 6 7\n" if $O->{nbuttons} > 5;
