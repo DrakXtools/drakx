@@ -8,7 +8,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw(arch $SECTORSIZE __ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt isCdNotEjectable compat_arch better_arch);
+@EXPORT = qw($SECTORSIZE __ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt isCdNotEjectable);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -29,19 +29,6 @@ sub _ {
     sprintf $t, @_;
 }
 sub __ { $_[0] }
-
-sub arch() {
-    require c;
-    c::kernel_arch();
-}
-sub better_arch {
-    my ($new, $old) = @_;
-    while ($new && $new ne $old) { $new = $compat_arch{$new} }
-    $new;
-}
-sub compat_arch { better_arch(arch(), $_[0]) }
-
-
 
 sub salt {
     my ($nb) = @_;
