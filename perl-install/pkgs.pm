@@ -25,8 +25,18 @@ autoirpm autoirpm-icons numlock
 
 my %by_lang = (
   ar    => [ 'acon' ],
+  cs	=> [ 'XFree86-ISO8859-2' ],
+  hr	=> [ 'XFree86-ISO8859-2' ],
+  hu	=> [ 'XFree86-ISO8859-2' ],
   ja    => [ 'rxvt-CLE', 'fonts-ttf-japanese' ],
   ko    => [ 'rxvt-CLE', 'fonts-ttf-korean' ],
+  pl	=> [ 'XFree86-ISO8859-2' ],
+  ro	=> [ 'XFree86-ISO8859-2' ],
+  ru	=> [ 'XFree86-cyrillic-fonts' ],
+  sk	=> [ 'XFree86-ISO8859-2' ],
+  sl	=> [ 'XFree86-ISO8859-2' ],
+  sr	=> [ 'XFree86-ISO8859-2' ],
+  tr	=> [ 'XFree86-ISO8859-9' ],
   zh_CN => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
