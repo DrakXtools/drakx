@@ -500,14 +500,7 @@ sub add_profile {
 }
 
 sub get_profiles {
-    my @a;
-    my $i = 0;
-    foreach (glob("/etc/sysconfig/network-scripts/drakconnect_conf.*")) {
-	s/.*\.//;
-	$a[$i] = $_;
-	$i++;
-    }
-    @a;
+    map { if_(/drakconnect_conf\.(.*)/, $1) } all("$::prefix/etc/sysconfig/network-scripts");
 }
 
 sub load_conf {
