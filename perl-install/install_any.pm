@@ -85,7 +85,7 @@ sub errorOpeningFile($) {
 
     my $max = 32; #- always refuse after $max tries.
     if ($::o->{method} eq "cdrom") {
-	cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/image| and $cdrom = $1;
+	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+/tmp/image, and $cdrom = $1;
 	return unless $cdrom;
 	ejectCdrom($cdrom);
 	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
