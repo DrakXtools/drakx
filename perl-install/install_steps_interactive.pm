@@ -1166,7 +1166,7 @@ Do you really want to quit now?"), 0);
     $o->ask_from_no_check(
 	{
 	 messages => formatAlaTeX(install_messages::install_completed()),
-	 cancel => '',
+	 ok => N("Reboot"),
 	},      
 	[
 	 if_($::expert,
