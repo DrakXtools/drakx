@@ -38,16 +38,13 @@ sub new($$) {
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0]);
 	    devices::make("/dev/kbd");
 
-	    local *T1; open T1, ">/dev/tty5";
-	    local *T2; open T2, ">/dev/tty6";
-
 	    my $launchX = sub {
 		my $ok = 1;
 		my $xpmac_opts = cat_("/proc/cmdline");
 		unless (-d "/var/log") { mkdir("/var/log") }
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork()) {
-		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : "-kb"), "-dpms", "-s", "240",
+		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : "-kb"), 'tty7', "-dpms", "-s", "240",
 		      ($_[0] =~ /Xpmac/ ? $xpmac_opts !~ /ofonly/ ? ("-mode", "17", "-depth", "32") : "-mach64" : ()),
 		      ($_[0] =~ /Xsun/ || $_[0] =~ /Xpmac/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
 		       ("-allowMouseOpenFail", "-xf86config", $f)) or exit 1;
