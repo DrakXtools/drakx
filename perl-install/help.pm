@@ -380,7 +380,7 @@ normal.
 
 
   - Removable media automounting: If you would prefer not to manually
-mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount and
+mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount\" and
 \"umount\", select this option. 
 
 
