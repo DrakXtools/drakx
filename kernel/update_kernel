@@ -77,6 +77,32 @@ function create_modules_mar() {
     echo
 }
 
+function install_kernel() {
+    rpm=$1
+
+    ver=$(rpm -qp --qf '%{name}' $rpm 2>/dev/null | perl -pe 's/kernel(-(BOOT))?-((\.?[0-9]+){3})\.(.*)/$3-$5$2/')
+    [ -n "$ver" ] || return
+    
+    if [ -n "$2" ]; then
+        [ -d $ALL_KERNELS/$ver ] && return
+        main_ver=$2
+	echo Removing previous kernel $ALL_KERNELS/$main_ver*
+        rm -rf $ALL_KERNELS/$main_ver*
+    fi
+    
+    rm -rf $ALL_KERNELS/$ver
+    echo "Installing kernel $ver"
+    mkdir -p $ALL_KERNELS/$ver
+    rpm2cpio $rpm | (cd $ALL_KERNELS/$ver ; cpio -id)
+    
+    find $ALL_KERNELS/$ver -type f -name "*.o.gz" -o -name "*.ko.gz" | xargs gunzip
+    
+    # will get back when make_boot_img is called
+    for dir in /tftpboot /var/lib/tftpboot; do
+        rm -f $dir/{vmlinuz,network.rdz,all.rdz}
+    done
+}
+
 [ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
 
 if [ "$1" = "--move" ]; then
@@ -84,34 +110,19 @@ if [ "$1" = "--move" ]; then
     shift
 fi
 
-#- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm 2.4.22-10mdk)
-if [ -n "$1" ]; then
-    rpm=$1
-    [ $rpm = ${rpm#/} ] && rpm=`pwd`/$rpm
-elif [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
-    rpm=$RPMS/kernel-[0-9]*.rpm
+if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
+    name=kernel
 else 
-    rpm=$RPMS/kernel-BOOT-*.rpm
+    name=kernel-BOOT
 fi
-ver=$(rpm -qp --qf '%{name}' $rpm | perl -pe 's/kernel(-(BOOT))?-((\.?[0-9]+){3})\.(.*)/$3-$5$2/')
 
-if [ -n "$ver" -a ! -e $ALL_KERNELS/$ver ]; then
-    [ -n "$main" ] && rm -rf $ALL_KERNELS/$main
-    cd $ALL_KERNELS
-    rm -rf $ver ; mkdir $ver
-    cd $ver
-    if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
-      rpm2cpio $RPMS/kernel-[0-9]*.rpm | cpio -id
-    else
-      rpm2cpio $rpm | cpio -id
-    fi
-    find -type f -name "*.o.gz" -o -name "*.ko.gz" | xargs gunzip
-    cd ../..
-
-    for dir in /tftpboot /var/lib/tftpboot; do
-	rm -f $dir/{vmlinuz,network.rdz,all.rdz}
-    done
-fi 
+if [ -n "$1" ]; then
+    #- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm)
+    install_kernel $1
+else
+    install_kernel $RPMS/kernel-BOOT-2.4*.rpm 2.4
+    install_kernel $RPMS/kernel-BOOT-2.6*.rpm 2.6
+fi
 
 [ -n "$main" -a -e $ALL_KERNELS/$main ] || {
     cd $ALL_KERNELS
