@@ -12,7 +12,7 @@
 all: insmod libinsmod.a
 
 clean:
-	rm -f *.o insmod
+	rm -f *.o insmod libinsmod.a
 
 FLAGS = -c -Wall -Os -fomit-frame-pointer -D_GNU_SOURCE -DBB_VER='"0.47"' -DBB_BT='"2000.12.06-14:02+0000"'
 

@@ -21,7 +21,7 @@
 all: libmar.a mar
 
 clean:
-	rm -f *.o mar
+	rm -f *.o libmar.a mar
 
 FLAGS = -Wall -Werror -Os -fomit-frame-pointer -c
 
