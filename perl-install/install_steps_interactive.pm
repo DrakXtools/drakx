@@ -394,7 +394,7 @@ sub choosePartitionsToFormat {
 	    ({
 	      text => partition_table::description($e), type => 'bool',
 	      val => \$e->{toFormatTmp}
-	     }, if_(!isLoopback($_) && !isThisFs("reiserfs", $_), {
+	     }, if_(!isLoopback($_) && !isThisFs("reiserfs", $_) && !isThisFs("xfs", $_) && !isThisFs("jfs", $_), {
 	      text => partition_table::description($e), type => 'bool', advanced => 1, 
 	      disabled => sub { !$e->{toFormatTmp} },
 	      val => \$e->{toFormatCheck}
