@@ -125,7 +125,6 @@ $window->add(my $vbox = gtkshow(new Gtk2::VBox(0, 0)));
 
 # Create the notebook (for bookmarks at the top)
 my $notebook = create_notebook();
-$notebook->set_tab_pos('top');
 
 my $common_opts = { col_spacings => 10, row_spacings => 5 };
 
