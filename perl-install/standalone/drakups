@@ -49,17 +49,17 @@ sub update_all_gnomekderc {
 my $file = "/etc/ups/ups.conf";
 my ($sections, $sec_contents) = read_all_gnomekderc($file);
 
-my @ups_devices = map { $_->[0] } @$sections; #sort values %$sec_contents
+my @ups_devices = sort values %$sec_contents;
 
 foreach my $ups_device (detect_devices::getUPS()) {
-    if (!member($ups_device, @ups_devices)) {
-	my $str = $ups_device->{description};
-	$str =~ s/ /_/g;
-	push @$sections, [ $str, [ qw(driver port) ] ];
-	$sec_contents->{$str} = {
-	    port => 1,
-	    driver => $ups_device->{bus} eq 'USB' ? "/dev/usb/hid/hiddev0" : $ups_device->{device},
-	};
+    my $str = $ups_device->{description};
+    if (!find { $str eq $_->{port} } @ups_devices) {
+        $str =~ s/ /_/g;
+        push @$sections, [ $str, [ qw(driver port) ] ];
+        $sec_contents->{$str} = {
+                                 port => $ups_device->{bus} eq 'USB' ? "/dev/usb/hid/hiddev0" : $ups_device->{device},
+                                 driver => $ups_device->{bus} eq 'USB' ? "hidups" : "",
+                                };
     }
 }
 
