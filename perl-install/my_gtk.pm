@@ -307,9 +307,15 @@ sub create_box_with_title($@) {
     $o->{box} = new Gtk::VBox(0,0);
     if (@_ <= 2 && $nb_lines > 4) {
 	my $font = $o->{box}->style->font;
+	my $wanted = $nb_lines * ($font->ascent + $font->descent) + 7;
+	my $height = min(250, $wanted);
+	my $has_scroll = $height < $wanted;
+
+	my $wtext = new Gtk::Text;
+	$wtext->can_focus($has_scroll);
 	chomp(my $text = join("\n", @_));
-	my $scroll = createScrolledWindow(gtktext_insert(new Gtk::Text, $text));
-	$scroll->set_usize(400, min(250, $nb_lines * ($font->ascent + $font->descent) + 7));
+	my $scroll = createScrolledWindow(gtktext_insert($wtext, $text));
+	$scroll->set_usize(400, $height);
 	gtkpack__($o->{box}, $scroll);
     } else {
 	gtkpack__($o->{box},
