@@ -1078,7 +1078,7 @@ sub write {
     }
     
     my $charset = l2charset($locale->{lang});
-    my $qtglobals = $b_user_only ? "$ENV{HOME}/.qt/qtrc" : "/etc/qtrc";
+    my $qtglobals = $b_user_only ? "$ENV{HOME}/.qt/qtrc" : "$::prefix/etc/qtrc";
     update_gnomekderc($qtglobals, General => (
        		      font => charset2kde_font($charset, 0),
        	          ));
