@@ -110,8 +110,8 @@ cp pam.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/pam.d/net_monitor
 cp apps.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps/net_monitor
 
 dirs1="usr/lib/libDrakX usr/share/libDrakX"
-(cd $RPM_BUILD_ROOT ; find $dirs2 ! -type d -printf "/%%p\n") > %{name}.list
-(cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin -type d -printf "%%%%dir /%%p\n") >> %{name}.list
+(cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n") > %{name}.list
+(cd $RPM_BUILD_ROOT ; find $dirs1 -type d -printf "%%%%dir /%%p\n") >> %{name}.list
 
 perl -ni -e '/gtk|icons|pixmaps|XFdrake|bootlook|drakbackup|drakfont|logdrake|net_monitor/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
