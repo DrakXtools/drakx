@@ -1,0 +1,265 @@
+#!/usr/bin/perl -w
+
+
+# drakfont Future Overview
+#         - Fonts import :
+#                 pfb ( Adobe Type 1 binary )
+#                 pfa ( Adobe Type 1 ASCII )
+#                 ttf ( True-Type  )
+#                 pcf.gz
+#                 Speedo
+#                 and Bitmap (PCF, BDF, and SNF)
+#         - Features
+#                 - Install fonts from any directory
+#                 - Get windows fonts on any vfat partitions
+#                 - UN-installation of any fonts (even if not installed through drakfont)
+#         - Support
+#               - Xfs
+#               - ghostscript & printer
+#               - Staroffice & printer
+#               - abiword
+#               - Koffice, Gnumeric, ... studying
+#               - all fonts supported by printer
+#                          ( aliases by RENDER in Xfree86 .... -> later )
+# Visual Interface:
+#         Window interface:
+#           - Fontselectiondialog widget
+#           - Command buttons under Fontselectiondialog (like the actual frontend).
+#         Commands buttons:
+#           - import from windows partition.
+#                 import from all fat32 partitions and look for winnt/windows/font
+#                 and import all (delete doublon) but don't import if already exist.
+#           - import from directory
+#                 look for if it exist before for each font and not delete the original.
+#                 (replace all, no, none)
+#                 expert options:
+#                         ask the directory, and look for if it exist before
+#                         if it exist ask: (replace all, no, none)
+#           - uninstall with list per font type
+#         Expert additional switch
+#           - option support:   ghostscript, Staroffice, etc...
+#                 check-button. (by default all check)
+#           - Printer Application Fonts Support...
+#                 check-button. (by default all check)
+
+use Gtk;
+use lib qw(/usr/lib/libDrakX);
+#use interactive;
+#use standalone;
+use my_gtk qw(:helpers :wrappers);
+use common;
+use strict;
+use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
+
+
+if ("@ARGV" =~ /--help|-h/) {
+    print q(Font Importation and monitoring application
+--windows_import : import from all available windows partitions.
+--xls_fonts      : show all fonts already exist from xls
+--strong         : strong verification of font.
+--install        : accept any font file and any directry.
+--uninstall      : uninstall any font or any directory of font.
+--replace        : replace all font if already exist
+--application    : 0 none application.
+                 : 1 all application available supported.
+                 : name_of_application" like  staroffice for only this one.
+);
+    exit(0);
+}
+my $xlsfonts      = "@ARGV" =~ /--xls_fonts/;
+my $windows       = "@ARGV" =~ /--windows_import|-wi/;
+my $strong        = "@ARGV"  =~ /--strong|-s/;
+my $replace       = "@ARGV"  =~ /--replace|-r/;
+my ($application) = "@ARGV"  =~ /--application (\w+)/;
+my ($install)     = "@ARGV"  =~ /--install (\w*)/;
+my ($uninstall)   = "@ARGV"  =~ /--uninstall (\w+)/;
+
+my $xfs_conffile = '/etc/X11/fs/config';
+my $drakfont_dir = '/home/seb/new_drackfont';
+my $chkfontpath = '/usr/sbin/chkfontpath';
+
+my $part;
+my @list_part;
+my @test;
+my @font_list = ();
+my @installed_fonts = ();
+my @installed_fonts_path = ();
+my @fontsdir_to_install= ();
+my @fontsdir_to_uninstall= ();
+my @installed_fonts_full_path = (); 
+
+
+sub search_installed_fonts {
+    foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
+	chomp;
+	s/\d+:\s//gi;
+	s/:\w*$//gi;
+	push @installed_fonts_path, $_;
+    }
+    push @installed_fonts, all($_) foreach @installed_fonts_path;
+}
+
+sub search_installed_fonts_full_path {
+    my $j;
+    foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
+	chomp;
+	s/\d+:\s//gi;
+	s/:\w*$//gi;
+	push @installed_fonts_path, $_;
+    }
+    foreach my $i (@installed_fonts_path) {
+	foreach $j (all($i)) {
+	    push @installed_fonts_full_path, "$i/$j";
+	}
+    }
+}
+
+sub search_windows_font {
+    foreach my $fstab_line (grep { /ext2/ } cat_('/etc/mtab') ) {
+	my $win_dir = (split('\s', $fstab_line))[1];
+	my @list_fonts_win = all("$win_dir/windows/fonts");
+	my @list_fonts_winnt = all("$win_dir/winnt/fonts");
+	if(!@list_fonts_win && !@list_fonts_winnt) {
+	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
+	    return 0;
+	}
+	foreach my $i (@list_fonts_win) {
+	    grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/windows/fonts/$i";
+	}
+	foreach my $i (@list_fonts_winnt) {
+	    grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/winnt/fonts/$i";
+	}
+    }
+    1;
+}
+
+sub search_dir_font {
+    my @font_list_tmp = ();
+    my @font_list_tmpp = ();
+    my $fn = $_;
+    if (!(-e $fn )) { print "$_ :: no such file or directory \n";}
+    else {
+	if ( -d $fn ) { 
+	    foreach my $i (all($fn)) { if (($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i)
+		    || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
+		    push @font_list_tmp, "$fn$i";
+		}
+	    }
+	}
+	else {
+	    if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i)
+		|| ($fn =~ /.pcf.gz$/i)) {
+		push @font_list_tmp, "$fn";
+	    }
+	}
+
+	print "Fonts in directory  : ".$_."\n" foreach (@font_list_tmp);
+#	@font_list = grep !$_, @font_list_tmp foreach @installed_fonts;
+
+
+	foreach my $i (@installed_fonts) {
+	    foreach my $j (@font_list_tmp) {
+		if ( $i =~ /$j/) { push @font_list, "$i" ;}
+	    }
+	}
+
+	print "Font to install : ".$_."\n" foreach (@font_list);
+
+    }
+}
+
+
+
+# Probleme: reperage des fontes de3ja existantes
+#
+#
+#
+
+
+sub search_dir_font_uninstall {
+    my @font_list_tmp = ();
+    my $fn = $_;
+    if ( -d $fn ) { 
+	foreach my $i (all($fn)) { if (($i =~ /.ttf$/i)	|| ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i)
+		|| ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
+	    push @font_list_tmp, "$i";
+	    }
+	}
+    }
+    else {
+	if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i)
+	    || ($fn =~ /.pcf.gz$/i)) {
+	    push @font_list_tmp, "$fn";
+	}
+    }
+    foreach my $i (@installed_fonts_full_path) {
+	foreach my $j (@font_list_tmp) {
+	    if ( $i =~ /$j/) { push @font_list, "$i" ;}
+	}
+    }
+    print "Fonts to uninstal : ".$_."\n" foreach (@font_list);
+}
+
+
+sub print_list { print "Font(s) to Install :\n\n"; print "$_\n" foreach (@font_list) }
+
+sub put_font_dir {
+#    mkdir_p($drakfont_dir);
+#    cp_af(@font_list, $drakfont_dir);
+#    system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
+    # xlsfonts | less pour verifier l'installation des polices.
+}
+
+$xlsfonts || $windows || $install || $uninstall ? backend_mod() : interactive_mode();
+
+sub backend_mod {
+    if ($xlsfonts) {
+	system ("xlsfonts");
+    }
+    if ($windows) {
+	print "........Windows fonts Installation........\n\n";
+	search_installed_fonts();
+	if(search_windows_font()) {
+	    print_list();
+	    put_font_dir();
+	}
+	print "\n...............The End...................\n";
+    }
+
+    if ($install) {
+	print ".......Install Specifics Fonts...........\n\n";
+	search_installed_fonts();
+	foreach my $tmp (@ARGV) {
+	    if (!($tmp =~ /^-/ ))  {
+		print "parse : $tmp \n";
+		push @fontsdir_to_install, $tmp;
+	    }
+	}
+	search_dir_font $_ foreach (@fontsdir_to_install);
+	#put_font_dir();
+	print "\n...............The End...................\n";
+    }
+
+    if ($uninstall) {
+	print "........Uninstall Specifics Fonts........\n\n";
+	search_installed_fonts_full_path();
+	foreach my $tmp (@ARGV) {
+	    if (!($tmp =~ /^-/ ))  {
+		print "parse : $tmp \n";
+		push @fontsdir_to_uninstall, $tmp;
+	    }
+	}
+	search_dir_font_uninstall $_ foreach (@fontsdir_to_uninstall);
+	print "\n...............The End...................\n";
+    }
+}
+
+sub interactive_mode {
+    #gtk
+}
+
+
+#   install & uninstall a revoir 
+#   au niveau du passage de paramettre
+#   un grep comme avant (qui ne sert pas a rien)
+#   faire une valeure de retour pour toutes les fonctions
