@@ -79,6 +79,8 @@ sub choose {
 
 	    if (!exists $monitors->{$merged_name}) {
 		$merged_name = $monitor->{HorizSync} ? 'Custom' : $good_default_monitor;
+	    } else {
+		$merged_name;
 	    }
 	}
     };
