@@ -406,7 +406,7 @@ ADSLModem=" .  q( # Obsolete information. Please don't use it.) . "
 ADSLType=" . ($netcnx->{type} =~ /adsl/ ? $netcnx->{type} : '') . "
 ADSLProviderDomain=$netc->{DOMAINNAME2}
 ADSLLogin=$adsl->{login}
-".#ADSLPassword=$adsl->{passwd}
+" . #ADSLPassword=$adsl->{passwd}
 "DOMAINNAME2=$netc->{DOMAINNAME2}" if ($conf{adsl});
 
     output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600, $str);
