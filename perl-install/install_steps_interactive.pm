@@ -322,6 +322,20 @@ Do you agree to loose all the partitions?
 _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!"));
 
+	if (arch() =~ /ppc/ && !$::expert) {	#- need to make bootstrap part if recommended install - thx Pixel ;^)
+		if (defined $partition_table_mac'bootstrap_part) {
+			#- don't do anything if we've got the bootstrap setup
+			#- otherwise, go ahead and create one somewhere in the drive free space
+		} else {
+			if (defined $partition_table_mac'freepart_start && $partition_table_mac'freepart_size >= 1) {
+				my ($hd) = $partition_table_mac'freepart_device;
+				log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table_mac'freepart_start");
+    			fsedit::add($hd, { start => $partition_table_mac'freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{hds}, { force => 1, primaryOrExtended => 'Primary' });    
+			} else {
+				die "no free space for 1MB bootstrap";
+			}
+		}
+	}
 
     if ($o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
