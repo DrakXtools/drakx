@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 26mdk
+Release: 27mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+
+* Thu Oct 28 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-27mdk
+- bootloader: run grub chrooted (gwenole)
+- diskdrake:
+  o show older partition types (eg: ntfs) on x86_64 (gwenole)
+  o newly created raids must have a fs_type (pixel)
+- drakconnect:
+  o add support for freebox v4 ADSL modem with USB link
+  o show correct strings for freebox and n9box ADSL modems
+- drakups: fix again MGE USB UPSes
+
 * Tue Oct 12 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-26mdk
 - bootloader-config: in grub menu.lst, keep previous "serial ..." and
   "terminal ..." lines (pixel, #12054)
