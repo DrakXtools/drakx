@@ -87,6 +87,7 @@ my %languages = (
   'mi'	=> [ 'Maori',			'iso-8859-13','mi', 'mi' ],
   'mk'  => [ 'Macedonian (Cyrillic)',	'iso-8859-5', 'mk', 'mk' ],
 #-'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
+  'mt'  => [ 'Maltese',			'iso-8859-3', 'mt', 'mt' ],
 'nl_BE@euro'=> [ 'Dutch|Belgium',	'iso-8859-15', 'nl', 'nl_BE:nl' ],
 'nl_NL@euro'=> [ 'Dutch|Netherlands','iso-8859-15', 'nl', 'nl_NL:nl' ],
 # 'nb' is the new locale name in glibc 2.2
