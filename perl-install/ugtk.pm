@@ -537,23 +537,23 @@ sub get_text_coord {
 
 sub gtkicons_labels_widget {
     my ($args, $_w, $widget_for_font, $background,  $back_pixbuf, $_xback, $_yback, $x_round,
-	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
+	$y_round, $x_back2, $y_back2, $_icon_width, $_icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
     my $cursor_hand = new Gtk::Gdk::Cursor(60);
-    my $cursor_normal = new Gtk::Gdk::Cursor(68);
+    my $_cursor_normal = new Gtk::Gdk::Cursor(68);
 	my @args = @$args;
     foreach (@args) {
 	my ($label, $tag) = ($_->[0], $_->[1]);
 	die "$label 's icon is missing" unless $exec_hash->{$label};
 	my ($dbl_area, $pix, $width, $height); # initialized in call back
 	my $darea = new Gtk::DrawingArea;
-	my ($icon, undef) = gtkcreate_png($tag);
+	my ($_icon, undef) = gtkcreate_png($tag);
 	my $pixbuf = compose_with_back($tag, $back_pixbuf);
 	my $pixbuf_h = compose_with_back($tag, $back_pixbuf, 170);
 
 	my $draw = sub {
-	    my ($_widget, $event) = @_;
+	    my ($_widget, $_event) = @_;
 	    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
 	    my $state = $darea->{state};
 	    if (!defined($dbl_area)) {
