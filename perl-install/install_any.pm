@@ -1025,6 +1025,9 @@ sub copy_advertising {
 	foreach (@files) {
 	    chomp;
 	    getAndSaveFile("$source_dir/$_", "$dir/$_");
+	    s/\.png/\.pl/;
+	    getAndSaveFile("$source_dir/$_", "$dir/$_");
+	    s/\.pl/\.png/;
 	}
 	@advertising_images = map { "$dir/$_" } @files;
     }
