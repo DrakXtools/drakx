@@ -1066,7 +1066,7 @@ sub when_config_changed_lilo {
 	log::l("Installing boot loader on $bootloader->{boot}...");
 	my $error;
 	my $answer = $bootloader->{force_lilo_answer} || '';
-	my $ok = run_program::rooted($::prefix, "echo $answer | lilo", '2>', \$error) or die "lilo failed: $error";
+	run_program::rooted($::prefix, "echo $answer | lilo", '2>', \$error) or die "lilo failed: $error";
     }
 }
 
