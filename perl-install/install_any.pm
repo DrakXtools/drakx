@@ -345,21 +345,30 @@ sub setupFB {
     pkgs::select($o->{packages}, $o->{packages}{'XFree86-FBDev'});
     $o->installPackages($o->{packages});
 
-    #- update lilo entries with a new fb label. a bit hack.
-    my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
-    if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
-			 {
-			  label => 'linux-fb',
-			  root => $root,
-			  vga => $vga || 785,
-			 })) {
-	$o->{bootloader}{default} = 'linux-fb';
+    $vga ||= 785; #- assume at least 640x480x16.
+
+    #- update lilo entries with a new fb label. a bit hack unless
+    #- a frame buffer kernel is used, in such case we use it instead
+    #- with the right mode, nothing more to do.
+    if ($o->{bootloader}{entries}{'/boot/vmlinuz-smp'}) {
+	$o->{bootloader}{entries}{'/boot/vmlinuz-smp'}{vga} = $vga;
 	lilo::install($o->{prefix}, $o->{bootloader});
     } else {
-	#- should deactivate X11 in such case.
-	#- TODO
-	die _("I can't access the kernel with frame buffer support.\nDisabling automatic X11 startup if any.");
+	my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
+	if (lilo::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion(), 'fb',
+			     {
+			      label => 'linux-fb',
+			      root => $root,
+			      vga => $vga,
+			     })) {
+	    $o->{bootloader}{default} = 'linux-fb';
+	    lilo::install($o->{prefix}, $o->{bootloader});
+	} else {
+	    log::l("unable to install kernel with frame buffer support, disabling");
+	    return 0;
+	}
     }
+    1;
 }
 
 sub auto_inst_file() { "$::o->{prefix}/root/auto_inst.cfg.pl" }

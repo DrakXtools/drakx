@@ -14,7 +14,6 @@ use common qw(:common :file :system :constant);
 #-#####################################################################################
 my $BUFFER_SIZE = 1024;
 
-
 #-######################################################################################
 #- Functions
 #-######################################################################################
@@ -403,7 +402,13 @@ sub insmod {
 	$_ = $1 if m@.*/([^/]*)\.o@;
 	unless (-r ($f = "/lib/modules/$_.o")) {
 	    $f = "/tmp/$_.o";
-	    run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");
+	    if (-e "/lib/modules.cz2") {
+		run_program::run("extract_archive /lib/modules /tmp $_.o");
+	    } elsif (-e "/lib/modules.cpio.bz2") {
+		run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");
+	    } else {
+		die "unable to find an archive for modules";
+	    }
 	}
     }
     -r $f or die "can't find module $_";
@@ -510,6 +515,63 @@ sub  install_cpio($$) {
 
     #- not found, cache result
     $cached_failed_install_cpio{"$dir $name"} = 1;
+}
+
+sub catsksz($$$$) {
+    my ($input, $seek, $siz, $output) = @_;
+    my ($buf, $sz);
+
+    while (($sz = sysread($input, $buf, $seek > 4096 ? 4096 : $seek))) {
+	$seek -= $sz;
+	last unless $seek > 0;
+    }
+    while (($sz = sysread($input, $buf, $siz > 4096 ? 4096 : $siz))) {
+	$siz -= $sz;
+	syswrite($output, $buf);
+	last unless $siz > 0;
+    }
+}
+
+sub extract_from_archive($$$) {
+    my ($archive, $dir, $file) = @_;
+
+    require 'log.pm';
+
+    log::l("data=$archive->{data}");
+    unless (-r $archive->{archive}) {
+	log::l($_) foreach keys %{$archive};
+	log::l("unable to access archive $archive->{archive} from $archive");
+	return;
+    }
+    unless ($archive->{data}) {
+	my %data;
+
+	log::l("loading archive description file $archive->{data_file}");
+	eval `cat $archive->{data_file}`;
+	$archive->{data} = { %data };
+    }
+    my $data_of_file = $archive->{data}{$file};
+    unless ($data_of_file) {
+	log::l("unable to find file $file in archive $archive->{archive}");
+	return;
+    }
+    unless ($data_of_file->[0] >= 0 && $data_of_file->[1] > 0 &&
+	    $data_of_file->[2] >= 0 && $data_of_file->[3] > 0) {
+	log::l("bad entry of file $file in archive $archive->{archive}");
+	return;
+    }
+
+    local *OUTPUT;
+    if (open OUTPUT, "-|") { #- parent create file from child extraction from archive.
+	local *FILE; open FILE, ">$dir/$file";
+	catsksz(\*OUTPUT, $data_of_file->[2], $data_of_file->[3], \*FILE);
+    } else { #- child execute bzip2 -d on its stdout which is OUTPUT.
+	local *BUNZIP2;	open BUNZIP2, "| bzip2 -d >&STDOUT";
+	local *ARCHIVE;	open ARCHIVE, "<$archive->{archive}" or exec 'false';
+	catsksz(\*ARCHIVE, $data_of_file->[0], $data_of_file->[1], \*BUNZIP2);
+	exec 'true';
+    }
+    1;
 }
 
 #-######################################################################################

@@ -11,7 +11,7 @@ BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)$(REP4PMS)
 STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
-LOCALFILES  = pnp_serial mouseconfig ddcxinfos
+LOCALFILES  = pnp_serial mouseconfig ddcxinfos extract_archive
 DIRS        = c po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
@@ -105,7 +105,7 @@ get_needed_files: $(DIRS)
 	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
 	install -d $(ROOTDEST)/Mandrake/base
-	install -s $(LOCALFILES) $(DEST)/usr/bin
+	cp -af $(LOCALFILES) $(DEST)/usr/bin
 
 	for i in `cat /tmp/list`; do \
 		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
@@ -143,9 +143,14 @@ get_needed_files: $(DIRS)
 	cp -a themes $(DEST)/usr/share/gtk
 	cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base
 
-	cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/
-	install -d $(DEST)/lib/modules
-	cp -f ../modules/pristine/* $(DEST)/lib/modules
+	if [ -f "../modules/modules.cz2" ]; then \
+		cp -f ../modules/modules.cz2 $(DEST)/lib/; \
+		cp -f ../modules/modules.cz2.pl $(DEST)/lib/; \
+	else \
+		cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/; \
+		install -d $(DEST)/lib/modules; \
+		cp -f ../modules/pristine/* $(DEST)/lib/modules; \
+	fi
 
 	ln -s install2 $(DEST)/usr/bin/runinstall2
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2

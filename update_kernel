@@ -48,6 +48,7 @@ MISCMODULES="lp.o parport_pc.o parport.o loop.o"
 FSMODULES="vfat.o fat.o"
 
 NETWORK_MODULES="$MISCMODULES $FSMODULES $NETWORK_DRIVERS"
+LOCAL_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $CD_DRIVERS $BLOCK_DRIVERS isofs.o"
 CDROM_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $CD_DRIVERS isofs.o"
 HD_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $BLOCK_DRIVERS"
 PCMCIA_MODULES="$PCMCIA_DRIVERS $MISCMODULES $FSMODULES"
@@ -68,8 +69,10 @@ rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
     cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
     mkdir pristine ; cp $PRISTINE_MODULES pristine
     /sbin/depmod -m ../System.map -i -e *.o | grep ': ' | sed 's/\.o//g' > modules.dep
+    ls *.o              | ../perl-install/build_archive modules 400000
     ls *.o              | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
     ls $NETWORK_MODULES | cpio --quiet -H crc -o | gzip -9 > network_modules.cgz
+    ls $LOCAL_MODULES   | cpio --quiet -H crc -o | gzip -9 > local_modules.cgz	
     ls $CDROM_MODULES   | cpio --quiet -H crc -o | gzip -9 > cdrom_modules.cgz	
     ls $HD_MODULES      | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
     ls $PCMCIA_MODULES  | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
