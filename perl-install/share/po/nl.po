@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-02-27 16:23+0200\n"
+"PO-Revision-Date: 2005-03-13 15:20+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -808,6 +808,8 @@ msgid ""
 "_:weird aspect ratio\n"
 "other"
 msgstr ""
+"_:ongebruikelijke verhoudingen\n"
+"overige"
 
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
@@ -9914,9 +9916,9 @@ msgid "Any PS/2 & USB mice"
 msgstr "Iedere PS/2 & USB-muis"
 
 #: mouse.pm:89
-#, fuzzy, c-format
+#, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr "Microsoft Explorer"
+msgstr "Microsoft Xbox Controller S"
 
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
@@ -10927,35 +10929,35 @@ msgid "DHCP client"
 msgstr "DHCP client"
 
 #: network/netconnect.pm:1041 standalone/drakconnect:389
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP timeout (in seconds)"
-msgstr "Maximale wachttijd voor verbinding (in seconden)"
+msgstr "DHCP-wachttijd (in seconden)"
 
 #: network/netconnect.pm:1042 standalone/drakconnect:392
-#, fuzzy, c-format
+#, c-format
 msgid "Get DNS servers from DHCP"
-msgstr "Het IP-adres van de DNS-server"
+msgstr "DNS-servers van DHCP ophalen"
 
 #: network/netconnect.pm:1043
 #, c-format
 msgid "Get YP servers from DHCP"
-msgstr ""
+msgstr "YP-server van DHCP ophalen"
 
 #: network/netconnect.pm:1044
 #, c-format
 msgid "Get NTPD servers from DHCP"
-msgstr ""
+msgstr "NTPD-servers van DHCP ophalen"
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
-msgstr "Het IP-adres moet het formaat 1.2.3.4 hebben"
+msgstr "Het IP-adres behoort het formaat 1.2.3.4 te hebben"
 
 #: network/netconnect.pm:1057 standalone/drakconnect:686
-#, fuzzy, c-format
+#, c-format
 msgid "Netmask should be in format 255.255.224.0"
-msgstr "Het gateway-adres moet in het formaat 1.2.3.4 staan"
+msgstr "Netmasker behoort het formaat 255.255.224.0 te hebben"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -11031,7 +11033,7 @@ msgstr "Bitsnelheid (in b/s)"
 #: network/netconnect.pm:1141
 #, c-format
 msgid "Use Wi-Fi Protected Access (WPA)"
-msgstr ""
+msgstr "Wi-Fi beschermde toegang (WPA) gebruiken"
 
 #: network/netconnect.pm:1168
 #, c-format
@@ -11284,9 +11286,9 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Configuratie is voltooid, wilt u de instellingen toepassen?"
 
 #: network/netconnect.pm:1336
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to allow users to start the connection?"
-msgstr "Wenst u bij het opstarten uw verbinding te openen?"
+msgstr "Wilt u gebruikers toestaan de verbinding te openen?"
 
 #: network/netconnect.pm:1345
 #, c-format
@@ -12728,9 +12730,9 @@ msgstr ""
 "Windows draaien"
 
 #: printer/printerdrake.pm:1108
-#, fuzzy, c-format
+#, c-format
 msgid "No auto-detection"
-msgstr "Automatisch bespeuren"
+msgstr "Geen auto-bespeuring"
 
 #: printer/printerdrake.pm:1173
 #, c-format
@@ -14154,6 +14156,9 @@ msgid ""
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
 msgstr ""
+"De geheugenkaartlezers in uw printer kunnen benaderd worden via de Printer "
+"Toolbox van HP (Menu: Systeem/Observatie/HP Printer Toolbox) door op de "
+"knop \"Access Photo Cards...\" te klikken in het tabblad \"Functions\". "
 
 #: printer/printerdrake.pm:3839
 #, c-format
@@ -14173,6 +14178,9 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
+"HP's Printer Toolbox (Menu: Systeem/Observatie/HP Printer Toolbox) biedt "
+"een groot aantal statusobservatie- en onderhoudsfuncties voor uw %s:\n"
+"\n"
 
 #: printer/printerdrake.pm:3843
 #, c-format
@@ -23381,7 +23389,7 @@ msgstr "Sectienamen"
 #: standalone/drakvpn:590
 #, c-format
 msgid "Can not edit!"
-msgstr "Kan niet bewerken!"
+msgstr "Kan dit niet bewerken!"
 
 #: standalone/drakvpn:591
 #, c-format
@@ -23393,6 +23401,12 @@ msgid ""
 "of the %s file, and eventually, disable or\n"
 "enable the opportunistic encryption.\n"
 msgstr ""
+"U kunt deze sectie niet bewerken.\n"
+"\n"
+"Deze sectie is verplicht voor Freeswan 2.X.\n"
+"Men dient versie 2.0 te specificeren bovenaan\n"
+"het bestand %s, en eventueel de opportunistische\n"
+"vercijfering in- of uitschakelen.\n"
 
 #: standalone/drakvpn:600
 #, c-format
@@ -24920,7 +24934,7 @@ msgstr "/_Jaz-stations automatisch bespeuren"
 #: standalone/harddrake2:188
 #, c-format
 msgid "/_Upload the hardware list"
-msgstr ""
+msgstr "/Apparatuurlijst _versturen"
 
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
@@ -25045,7 +25059,7 @@ msgstr "DVD"
 #: standalone/harddrake2:525
 #, c-format
 msgid "Upload the hardware list"
-msgstr ""
+msgstr "Apparatuurlijst versturen"
 
 #: standalone/harddrake2:530
 #, c-format
@@ -25065,12 +25079,12 @@ msgstr "Hostnaam:"
 #: standalone/keyboarddrake:29
 #, c-format
 msgid "Please, choose your keyboard layout."
-msgstr "Wat is uw toetsenbord-layout?"
+msgstr "Kies uw toetsenbordindeling."
 
 #: standalone/keyboarddrake:45
 #, c-format
 msgid "Do you want the BackSpace to return Delete in console?"
-msgstr "Wenst u dat de BackSpace toets Delete geeft in het terminalvenster?"
+msgstr "Wilt u dat de BackSpace toets Delete geeft in de console?"
 
 #: standalone/localedrake:38
 #, c-format
@@ -25421,9 +25435,9 @@ msgid "Configure Network"
 msgstr "Netwerk configureren"
 
 #: standalone/net_applet:69
-#, fuzzy, c-format
+#, c-format
 msgid "Watched interface"
-msgstr "interfaces"
+msgstr "Gevolgde interface"
 
 #: standalone/net_applet:78
 #, c-format
