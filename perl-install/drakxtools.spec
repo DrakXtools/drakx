@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.13mdk
+Release: 0.14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 13 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.14mdk
+- drakboot: better grub support, esp. when /boot is a separate
+  partition (pixel)
+- diskdrake: reconfigure boot loader on partition renumbering
+- wizards: add relief around trees and lists
+
 * Fri Feb 13 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.13mdk
 - all tools: new banner style
 - add drakvpn (florin)
