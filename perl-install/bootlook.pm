@@ -31,12 +31,14 @@ use standalone;
 use common qw(:common :file :functional :system);
 use my_gtk qw(:helpers :wrappers);
 use any;
+#use Data::dumper;
 
 setlocale (LC_ALL, "");
 Locale::GetText::textdomain ("Bootlookdrake");
 
 import Locale::GetText I_;
 *_ = *I_;
+
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~/--embedded (\S*) (\S*)/;
 if ($::isEmbedded) {
@@ -111,14 +113,15 @@ my $global_vbox = new Gtk::VBox();
 #$global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0);
 
 # lilo/grub
-my $lilo_dedans = new Gtk::VBox(0, 10);
+my $lilo_dedans = new Gtk::HBox(0, 10);
 $lilo_dedans->border_width (5);
-my $lilo_vbox = new Gtk::VBox(0, 0);
-$lilo_vbox->border_width (10);
-my $lilo_frame = new Gtk::Frame _("Lilo/grub mode");
-$lilo_frame->add($lilo_vbox);
-$global_vbox->pack_start ($lilo_frame, 0, 0, 0);
+my $lilo_button = new Gtk::Button _("Configuration de Lilo/Grub");
+$lilo_dedans->pack_end($lilo_button,0,0,0);
+$lilo_button->signal_connect(clicked => sub { lilo_choice(); });
 
+my $lilo_frame = new Gtk::Frame _("Lilo/grub mode");
+$lilo_frame->add($lilo_dedans);
+$global_vbox->pack_start ($lilo_frame, 0, 0, 0);
 
 
 ######## aurora part
@@ -396,4 +399,32 @@ sub set_autologin {
   setVarsInSh("$prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
 #  log::l("cat $prefix/etc/sysconfig/autologin: ", cat_("$prefix/etc/sysconfig/autologin"));
+}
+
+
+############################
+sub lilo_choice
+{
+    my $bootloader = bootloader::read('', '/etc/lilo.conf');
+    local ($_) = `detectloader`;
+    $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
+       
+    my ($hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
+    my $fstab = [ fsedit::get_fstab(@$hds) ];
+    fs::get_mntpoints_from_fstab($fstab);
+ 
+    $::expert=1;
+ # ask:
+    
+    any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
+    #  #eval { bootloader::install('', $bootloader, $fstab, $hds) };
+    print "ici\n";
+    
+#    if ($@) {
+#	$in->ask_warn('', 
+#		      [ _("Installation of LILO failed. The following error occured:"),
+#			grep { !/^Warning:/ } cat_("/tmp/.error") ]);
+#	unlink "/tmp/.error";
+#	goto ask;
+#    }
 }
