@@ -108,7 +108,7 @@ my @menu_items =
            if ($current_device) {
                create_dialog(N("Harddrake help"), 
                              N("Description of the fields:\n\n")
-                             . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]") } sort keys %$current_device))
+                             . join("\n\n", map { if_($fields{$_}[0], "<span foreground=\"royalblue3\">$fields{$_}[0]:</span> $fields{$_}[1]") } sort keys %$current_device), { use_markup => 1 })
            } else {
                create_dialog(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"))
            }
@@ -118,9 +118,9 @@ my @menu_items =
      [ $menus{help}.N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<Item>' ],
      [ $menus{help}.N("/_About..."), undef, sub {
            create_dialog(N("About Harddrake"), 
-                         N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion: %s
-Author: Thierry Vignaud <tvignaud\@mandrakesoft.com>\n\n", $harddrake::data::version) .
-                         formatAlaTeX($::license));
+                         N("This is HardDrake, a Mandrake hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
+<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n", $harddrake::data::version) .
+                         formatAlaTeX($::license), { use_markup => 1 });
        }, undef, '<Item>'
      ]
     );
