@@ -1,0 +1,34 @@
+********************************************************************************
+diskdrake
+
+taken directly from diskdrake.pm:
+
+		"a" => \&Active,
+		"b" => \&Move,
+		"c" => \&Create,
+		"d" => \&Delete,
+		"f" => \&Format,
+		"m" => \&Mount_point,
+		"M" => \&Mount,
+		"n" => \&Create,
+		"o" => \&ReadFromFile,
+		"s" => \&SaveInFile,
+		"q" => \&Exit,
+		"r" => \&Resize,
+		"t" => \&Type,
+		"u" => \&Unmount,
+		"w" => \&WritePartitions,
+		"W" => \&WriteFstab,
+
+hopefully it is explicit enough :)
+
+********************************************************************************
+list choice
+
+- acceleration a la windows (default): enter a letter and the selection will move to the
+first entry beginning with that letter. If you enter another letter it will try
+to find the entry beginning with the 2 letters you have given. In case it fails
+the starting_word is reset.
+- incremental search a la emacs: searches trough the list
+
+Use control-s to switch between the possibilities
