@@ -420,7 +420,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                     pre => sub {
                         $isdn_name = "capidrv";
                     },
-                    name => N("A capi driver is available for this modem. This capi driver can offer more capabilities than the free driver (like sending faxes). Which driver do you want to use ?"),
+                    name => N("A CAPI driver is available for this modem. This CAPI driver can offer more capabilities than the free driver (like sending faxes). Which driver do you want to use ?"),
                     data => sub { [
                                    { label => N("Driver"), type => "list", val => \$isdn_name,
                                      list => [ $isdn->{driver}, "capidrv" ] }
