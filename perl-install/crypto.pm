@@ -135,10 +135,17 @@ sub getPackages {
 
     $crypto::host = $mirror;
 
+    #- check first if there is something to get...
+    my $fhdlist = getFile("base/hdlist.cz", $mirror);
+    unless ($fhdlist) {
+	log::l("no updates available, bailing out");
+	return;
+    }
+    
     #- extract hdlist of crypto, then depslist.
     require pkgs;
     my $update_medium = pkgs::psUsingHdlist($prefix, 'ftp', $packages, "hdlist-updates.cz", "1u", "RPMS",
-					    "Updates for Mandrake Linux " . version(), 1, getFile("base/hdlist.cz", $mirror)) and
+					    "Updates for Mandrake Linux " . version(), 1, $fhdlist) and
 					      log::l("read updates hdlist");
     #- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
     $update_medium->{prefix} = "ftp://$mirror" . dir($mirror);
