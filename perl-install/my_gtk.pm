@@ -621,8 +621,9 @@ sub create_box_with_title($@) {
 
     $o->{box_size} = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
     $o->{box} = new Gtk::VBox(0,0);
-    $o->{icon} && !$::isWizard and eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
     if (@_ <= 2 && $o->{box_size} > 4) {
+	$o->{icon} && !$::isWizard and 
+	  eval { gtkpack__($o->{box}, gtkset_border_width(gtkpack_(new Gtk::HBox(0,0), 1, gtkpng($o->{icon})),5)); };
 	my $wanted = n_line_size($o->{box_size}, 'text', $o->{box});
 	my $height = min(250, $wanted);
 	my $has_scroll = $height < $wanted;
@@ -636,15 +637,36 @@ sub create_box_with_title($@) {
     } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
-	gtkpack__($o->{box},
-		  (map {
-		      my $w = ref $_ ? $_ : new Gtk::Label($_);
-		      $::isWizard and $w->set_justify("left");
-		      $w->set_name("Title");
-		      $w;
-		  } map { ref $_ ? $_ : warp_text($_) } @_),
-		  if_($a, new Gtk::HSeparator)
-		 );
+	if ($o->{icon} && !$::isWizard) {
+	    gtkpack__($o->{box},
+		      gtkpack_(new Gtk::HBox(0,0),
+			       0, gtkset_usize(new Gtk::VBox(0,0), 15, 0),
+			       0, eval { gtkpng($o->{icon}) },
+			       0, gtkset_usize(new Gtk::VBox(0,0), 15, 0),
+			       1, gtkpack_($o->{box_title} = new Gtk::VBox(0,0),
+					   1, new Gtk::HBox(0,0),
+					   (map {
+					       my $w = ref $_ ? $_ : new Gtk::Label($_);
+					       $::isWizard and $w->set_justify("left");
+					       $w->set_name("Title");
+					       (0, $w);
+					   } map { ref $_ ? $_ : warp_text($_) } @_),
+					   1, new Gtk::HBox(0,0),
+					  )
+			      ),
+		      if_($a, new Gtk::HSeparator)
+		     )
+	} else {
+	    gtkpack__($o->{box},
+		      (map {
+			  my $w = ref $_ ? $_ : new Gtk::Label($_);
+			  $::isWizard and $w->set_justify("left");
+			  $w->set_name("Title");
+			  $w;
+		      } map { ref $_ ? $_ : warp_text($_) } @_),
+		      if_($a, new Gtk::HSeparator)
+		     )
+	}
     }
 }
 
