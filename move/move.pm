@@ -15,6 +15,7 @@ use Digest::MD5 qw(md5_hex);
 my @ALLOWED_LANGS = qw(en_US fr es it de);
 our ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
+my $virtual_key_part;
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
@@ -38,6 +39,20 @@ sub handle_etcfiles {
         }
     }
 
+}
+
+sub handle_virtual_key {
+    if (my ($device, $file) = cat_('/proc/cmdline') =~ /\bvirtual_key=(\S+),(\S+)/) {
+        log::l("using device=$device file=$file as a virtual key");
+        my $dir = '/virtual_key_mount';
+        mkdir $dir;
+        run_program::run('mount', $device, $dir);
+        require devices;
+        my $loop = devices::find_free_loop();
+        run_program::run('losetup', $loop, "$dir$file");
+        run_program::run('mount', $loop, '/home', '-o', 'umask=077,uid=501,gid=501,shortname=mixed');
+	$virtual_key_part = { device => $loop, mntpoint => '/home', type => 0xc, isMounted => 1 };
+    }
 }
 
 #- run very soon at stage2 start, setup things on tmpfs rw / that
@@ -108,6 +123,7 @@ sub init {
     system('sysctl -w kernel.hotplug="/bin/true"');
     modules::load_category('bus/usb'); 
     eval { modules::load('usb-storage', 'sd_mod') };
+    handle_virtual_key();
     install_steps::setupSCSI($o);
     system('sysctl -w kernel.hotplug="/sbin/hotplug"');
 
@@ -193,6 +209,10 @@ sub key_mount {
     if ($o_reread) {
         $o->{all_hds} = fsedit::empty_all_hds();
         install_any::getHds($o, $o);
+    }
+    if ($virtual_key_part) {
+        #- :/ merge_from_mtab didn't got my virtual key, need to add it manually
+        push @{$o->{fstab}}, $virtual_key_part;
     }
 
     require fs;
