@@ -376,6 +376,7 @@ ONBOOT=yes
 #- install and setup the RPM packages
 
 my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
+		squid => '/usr/sbin/squid',
 		bind => '/usr/sbin/named',
 		shorewall => '/sbin/shorewall',
 		'caching-nameserver' => '/var/named/named.local');
