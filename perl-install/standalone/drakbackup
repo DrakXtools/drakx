@@ -1500,10 +1500,21 @@ sub restore_step_sys {
 
 sub restore_step2 {
     my $retore_step2;
+    my $restore_other_src;# = 0;
 
     gtkpack($advanced_box,
 	    $retore_step2 = gtkpack_(new Gtk::VBox(0,10),
 				     1, new Gtk::VBox(0,10),
+				     1, new Gtk::VBox(0,10),
+				     0, gtkpack_(new Gtk::HBox(0,10),
+					0, my $check_restore_other_src = new Gtk::CheckButton(_("select an other media to find backups")),
+					1, new Gtk::HBox(0,10),
+					0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Other Media")),
+									      clicked => sub {
+										  ${$central_widget}->destroy();
+#										  advanced_where_hd(\&wizard_step2);
+									      }), $restore_other_src ),
+						 ),
 				     0, my $check_restore_sys = new Gtk::CheckButton(_("Restore system")),
 				     0, my $check_restore_user = new Gtk::CheckButton(_("Restore Users")),
 				     0, my $check_restore_other = new Gtk::CheckButton(_("Restore Other")),
@@ -1517,6 +1528,7 @@ sub restore_step2 {
 	    );
     foreach  ([$check_restore_sys, \$restore_sys], 
 	      [$check_restore_user, \$restore_user],
+	      [$check_restore_other_src, \$restore_other_src],
 	      [$check_restore_other, \$restore_other]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
@@ -1530,10 +1542,14 @@ sub restore_step2 {
 	}
     gtksignal_connect(gtkset_active($check_restore_other_path, $restore_other_path), toggled => sub {
 	$restore_other_path = $restore_other_path ? 0 : 1;
-
 	${$central_widget}->destroy();
 	$current_widget->();
     });
+#     gtksignal_connect(gtkset_active($check_restore_other_src, $restore_other_src), toggled => sub {
+# 	$restore_other_src = $restore_other_src ? 0 : 1;
+# 	${$central_widget}->destroy();
+# 	$current_widget->();
+#     });
     if (!$restore_sys && !$restore_user && !$restore_other) { $next_widget = \&message_norestore_box; }
     elsif ($restore_sys && $backup_sys_versions) { $next_widget = \&restore_step_sys; }
     elsif ($restore_user) { $next_widget = \&restore_step_user;}
@@ -1556,9 +1572,7 @@ sub restore_box {
     my $check_restore_other;
     find_backup_to_restore();
     button_box_restore_main();
-#    @user_list_to_restore = @user_backuped;
 
-    $DEBUG and print "other_backuped : $other_backuped \nsys_backuped : $sys_backuped \nuser_backuped : @user_backuped\n";
     if ($other_backuped || $sys_backuped || @user_backuped) {
 	gtkpack($advanced_box,
 		$retore_box = gtkpack_(new Gtk::HBox(0,1),
