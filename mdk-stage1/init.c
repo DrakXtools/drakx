@@ -432,6 +432,10 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		kill(klog_pid, 9);
 		printf("proceeding, please wait...\n");
 		return 0;
+        } else {
+                int i;
+                for (i=0; i<50; i++)
+                        printf("\n");  /* cleanup startkde messages */
         }
 
 	if (testing)
