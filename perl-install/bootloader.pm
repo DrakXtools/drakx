@@ -711,13 +711,23 @@ sub write_lilo_conf {
 	print F "serial=", $1 if get_append($lilo, 'console') =~ /ttyS(.*)/;
 
 	my $dev = $hds->[0]{device};
-	my %dev2bios = map_index { $_ => $::i } dev2bios($hds, $lilo->{boot});
+	my %bios2dev = map_index { $::i => $_ } dev2bios($hds, $lilo->{boot});
+	my %dev2bios = reverse %bios2dev;
+	my %done;
 	if ($dev2bios{$dev}) {
-	    my %bios2dev = reverse %dev2bios;
 	    print  F "disk=/dev/$bios2dev{0} bios=0x80";
 	    printf F "disk=/dev/$dev bios=0x%x\n", 0x80 + $dev2bios{$dev};
-	} elsif ($dev =~ /hd[bde]/) {
-	    print F "disk=/dev/$dev bios=0x80";
+	    $done{0} = $done{$dev2bios{$dev}} = 1;
+	}
+	foreach (0 .. 3) {
+	    my ($letter) = $bios2dev{$_} !~ /hd([^ac])/; #- at least hda and hdc are handled correctly :-/
+	    next if $done{$_} || !$letter;
+	    next if 
+	      $_ > 0 #- always print if first disk is hdb, hdd, hde...
+		&& $bios2dev{$_ - 1} eq "hd" . chr(ord($letter) - 1);
+		  #- no need to help lilo with hdb (resp. hdd, hdf...)
+	    $done{$_} = 1;
+	    printf F "disk=/dev/$bios2dev{1} bios=0x%x\n", 0x80 + $_;
 	}
 
 	print F "message=/boot/message" if (arch() !~ /ia64/);
