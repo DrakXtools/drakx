@@ -44,6 +44,6 @@ $printer->{mode} ||= 'cups'; #- assume this default if nothing found.
 
 my $in = vnew interactive('su');
 
-printerdrake::main(eval { printer::getinfo('') } || {}, $in, sub { $in->suspend; system("urpmi --auto --best-output " . join(' ', @_)); $in->resume; });
+printerdrake::main($printer, $in, sub { $in->suspend; system("urpmi --auto --best-output " . join(' ', @_)); $in->resume; });
 
 $in->exit(0);
