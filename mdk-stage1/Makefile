@@ -21,16 +21,19 @@
 
 VERSION = cooker
 
+top_dir = .
+
+include $(top_dir)/Makefile.common
+
 
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
+CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
 
-CFLAGS = -Os -Wall -Werror -fomit-frame-pointer
-INCLUDES = -I.
 DEFS = -DVERSION=\"$(VERSION)\"
 
-COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CFLAGS)
+COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
 
  #- stage1 "loader"
@@ -49,19 +52,30 @@ STDIO_FRONTEND_LIBS =
 WSLIB_FRONTEND_SRC = wslib-frontend.c
 WSLIB_FRONTEND_LIBS = /usr/lib/libwslib.a
 
- #- default frontend is newt
-F = NEWT
 
 FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
 FRONTEND_LIBS = $($(F)_FRONTEND_LIBS)
 
+FRONTEND_LINK = $(FRONTEND_OBJS) $(FRONTEND_LIBS)
+MEDIAS_FRONTEND_LINK = $(FRONTEND_LINK)
 
-STAGE1_OWN_LIBS = insmod-busybox/libinsmod.a mar/libmar.a
+ifeq (DIETLIBC, $(L))
+ifeq (NEWT, $(F))
+MEDIAS_FRONTEND_LINK = $(subst .c,.o,$(STDIO_FRONTEND_SRC)) $(STDIO_FRONTEND_LIBS)
+else
+MEDIAS_FRONTEND_LINK = $(FRONTEND_LINK)
+endif
+endif
+
+
+GLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod.a mar/libmar.a
+DIETLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod-DIET.a mar/libmar-DIET.a
+STAGE1_OWN_LIBS = $($(L)_STAGE1_OWN_LIBS)
+
 
 STAGE1_OTHER_LIBS = /usr/lib/libz.a
 
 STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
-
 
  #- stage1 itself
 STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c
@@ -73,8 +87,6 @@ ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)
 
 
 STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
-
-STAGE1OBJS_UTILS = $(FRONTEND_OBJS) $(STAGE1_OWN_LIBS) $(FRONTEND_LIBS) $(STAGE1_OTHER_LIBS)
 
 
 STAGE1OBJS-CDROM = $(subst .c,-CDROM.o,$(STAGE1SRC) $(CDROMSRC))
@@ -92,14 +104,9 @@ STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
 NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 
 
-
-
-
 ifeq (i386, $(ARCH))
 MINILIC=minilibc.o
 LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
-LDFLAGS_STAGE1 = -static
-STATIC=-static
 endif
 ifeq (sparc, $(ARCH))
 MINILIBC=minilibc.o /usr/lib/libc.a
@@ -108,7 +115,7 @@ LDFLAGS_STAGE1 = -static
 endif
 
 
-BINS = init stage1-full stage1-cdrom stage1-network stage1-disk
+BINS = init stage1-cdrom stage1-disk stage1-network stage1-full
 
 
 #ifeq (i386, $(ARCH))
@@ -127,7 +134,7 @@ BINS = init stage1-full stage1-cdrom stage1-network stage1-disk
 #BINS += stage1-all
 #endif
 
-DIRS = mar insmod-busybox pci-resource
+DIRS = dietlibc mar insmod-busybox pci-resource
 
 
 all: dirs $(BINS)
@@ -137,48 +144,42 @@ dirs:
 		[ "$$n" = "." ] || make -C $$n ;\
 	done
 
-
 init: $(INITOBJS)
 	$(CC) $(LDFLAGS_INIT) -o $@ $(INITOBJS)
-	strip -s $@
+	$(STRIPCMD) $@
 
-stage1-cdrom: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-CDROM) $(STAGE1OBJS_UTILS)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-CDROM) $(STAGE1OBJS_UTILS)
-	strip -s $@
+stage1-cdrom: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-CDROM) $(MEDIAS_FRONTEND_LINK)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-CDROM) $(MEDIAS_FRONTEND_LINK) $(STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_LIBC)
+	$(STRIPCMD) $@
 
-stage1-network: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-NETWORK) $(STAGE1OBJS_UTILS)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-NETWORK) $(STAGE1OBJS_UTILS) $(STAGE1_NETWORK_LIBS)
-	strip -s $@
+stage1-disk: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-DISK) $(MEDIAS_FRONTEND_LINK)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-DISK) $(MEDIAS_FRONTEND_LINK) $(STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_LIBC)
+	$(STRIPCMD) $@
 
-stage1-disk: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-DISK) $(STAGE1OBJS_UTILS)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-DISK) $(STAGE1OBJS_UTILS)
-	strip -s $@
+stage1-network: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-NETWORK) $(FRONTEND_LINK)
+	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-NETWORK) $(FRONTEND_LINK) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_NETWORK_LIBS)
+	$(STRIPCMD) $@
 
-stage1-pcmcia: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-PCMIA) $(STAGE1OBJS_UTILS)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-PCMIA) $(STAGE1OBJS_UTILS)
-	strip -s $@
+stage1-pcmcia: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-PCMIA) $(FRONTEND_LINK)
+	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-PCMIA) $(FRONTEND_LINK) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_LIBC)
+	$(STRIPCMD) $@
 
-stage1-full: $(STAGE1_OWN_LIBS) $(STAGE1OBJS) $(STAGE1OBJS_UTILS)
-	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS) $(STAGE1OBJS_UTILS) $(STAGE1_NETWORK_LIBS)
-	strip -s $@
-
-
-#stage1-network-diet: $(STAGE1OBJS) stage1-network.o $(NETOBJS)
-#	 gcc -nostdlib -o $@ ../../../tmp/dietlibc/start.o $^ ../../../tmp/dietlibc/dietlibc.a
-#	 strip -s $@
+stage1-full: $(STAGE1_OWN_LIBS) $(STAGE1OBJS) $(FRONTEND_LINK)
+	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS) $(FRONTEND_LINK) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_NETWORK_LIBS)
+	$(STRIPCMD) $@
 
 
 $(STAGE1OBJS-CDROM): %-CDROM.o: %.c
-	$(COMPILE) $(CDROM_DEFS) -c $< -o $@
+	$(COMPILE) $(INCLUDES) $(CDROM_DEFS) -c $< -o $@
 
 $(STAGE1OBJS-DISK): %-DISK.o: %.c
-	$(COMPILE) $(DISK_DEFS) -c $< -o $@
+	$(COMPILE) $(INCLUDES) $(DISK_DEFS) -c $< -o $@
 
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
-	$(COMPILE) $(NETWORK_DEFS) -c $< -o $@
+	$(COMPILE) $(GLIBC_INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
 .c.o:
-	$(COMPILE) -c $<
+	$(COMPILE) $(GLIBC_INCLUDES) -c $<
 
 
 clean: 

@@ -269,7 +269,10 @@ enum return_type load_ramdisk(void)
 /* pixel's */
 void * memdup(void *src, size_t size)
 {
-	void * r = malloc(size);
+	void * r;
+	if (size < 8)
+		size = 16;
+	r = malloc(size);
 	memcpy(r, src, size);
 	return r;
 }

@@ -37,8 +37,6 @@
 #include <errno.h>
 #include <sys/stat.h>
 #include <sys/param.h>
-#include <mntent.h>
-#include <regex.h>
 /* for the _syscall() macros */
 #include <sys/syscall.h>
 #include <linux/unistd.h>
@@ -394,7 +392,7 @@ extern void print_file(FILE *file);
 extern int print_file_by_name(char *filename);
 extern char process_escape_sequence(char **ptr);
 extern char *get_last_path_component(char *path);
-extern void xregcomp(regex_t *preg, const char *regex, int cflags);
+// extern void xregcomp(regex_t *preg, const char *regex, int cflags);
 
 #ifndef DMALLOC 
 extern void *xmalloc (size_t size);

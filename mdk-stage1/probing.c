@@ -89,7 +89,9 @@ void probe_that_type(enum driver_type type)
 		
 			if (!fgets(buf, sizeof(buf), f)) break;
 		
-			sscanf(buf, "%x %04x%04x", &garb, &vendor, &device);
+			sscanf(buf, "%x %x", &garb, &vendor);
+			device = vendor & 0xFFFF; /* because scanf from dietlibc does not support %4f */
+			vendor = (vendor >> 16) & 0xFFFF;
  
 			for (i = 0; i < len; i++) {
 				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {

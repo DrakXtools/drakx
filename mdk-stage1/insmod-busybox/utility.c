@@ -78,30 +78,30 @@ const char mtab_file[] = "/dev/mtab";
 #endif
 
 #ifdef _STANDALONE_
-extern void errorMsg(const char *s, ...)
+void errorMsg(const char *s, ...)
 {
 	va_list p;
 
-	va_start(p, s);
 	fflush(stdout);
-	fprintf(stderr, "busybox: ");
-	vfprintf(stderr, s, p);
-	fprintf(stderr, "\n");
+	printf("busybox: ");
+	va_start(p, s);
+	vprintf(s, p);
 	va_end(p);
-	fflush(stderr);
+	printf("\n");
+	fflush(stdout);
 }
 
-extern void fatalError(const char *s, ...)
+void fatalError(const char *s, ...)
 {
 	va_list p;
 
-	va_start(p, s);
 	fflush(stdout);
-	fprintf(stderr, "busybox: ");
-	vfprintf(stderr, s, p);
-	fprintf(stderr, "\n");
+	fprintf(stdout, "busybox: ");
+	va_start(p, s);
+	vfprintf(stdout, s, p);
 	va_end(p);
-	fflush(stderr);
+	fprintf(stdout, "\n");
+	fflush(stdout);
 	exit(FALSE);
 }
 #else /* _STANDALONE_ */

@@ -45,7 +45,6 @@
 #include <dirent.h>
 #include <ctype.h>
 #include <assert.h>
-#include <getopt.h>
 #include <sys/utsname.h>
 
 //----------------------------------------------------------------------------
@@ -2926,13 +2925,11 @@ extern int insmod_main( int argc, char **argv)
 	}
 	obj_allocate_commons(f);
 
-	if (optind < argc) {
-		if (m_has_modinfo
-			? !new_process_module_arguments(f, argc - optind, argv + optind) 
-			: !old_process_module_arguments(f, argc - optind, argv + optind)) 
-		{
-			goto out;
-		}
+	if (m_has_modinfo
+	    ? !new_process_module_arguments(f, argc-1, argv+1)
+	    : !old_process_module_arguments(f, argc-1, argv+1)) 
+	{
+		goto out;
 	}
 
 	arch_create_got(f);

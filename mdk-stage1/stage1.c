@@ -177,7 +177,7 @@ enum return_type method_select_and_prepare(void)
 }
 
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	enum return_type ret;
 	char ** argptr;
@@ -226,7 +226,7 @@ int main(int argc, char **argv)
 	*argptr++ = method_name;
 	*argptr++ = NULL;
 
-	execv(stage2_args[0], stage2_args);
+	execve(stage2_args[0], stage2_args, env);
 
 	printf("error in exec of stage2 :-(\n");
 	fatal_error(strerror(errno));

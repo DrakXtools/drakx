@@ -53,10 +53,18 @@ static void get_any_response(void)
 	
 static int get_int_response(void)
 {
-	int i = 0; /* (0) tied to Cancel */
+	char s[50];
+	int j = 0, i = 0; /* (0) tied to Cancel */
 	fflush(stdout);
-	scanf(" %d", &i);
-	return i;
+	read(0, &(s[i++]), 1);
+	fcntl(0, F_SETFL, O_NONBLOCK);
+	do {
+		int v = s[i-1];
+		if (v >= '0' && v <= '9')
+			j = j*10 + (v - '0');
+	} while (read(0, &(s[i++]), 1) > 0 && i < sizeof(s));
+	fcntl(0, F_SETFL, 0);
+	return j;
 }
 
 static char * get_string_response(void)
