@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-09-13 22:00+0200\n"
-"PO-Revision-Date: 2002-09-12 02:46+0300\n"
+"PO-Revision-Date: 2002-09-17 14:02+0300\n"
 "Last-Translator: Ömer Fadıl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -9891,6 +9891,27 @@ msgid ""
 "be sent to this user (username or\n"
 "\t       email)"
 msgstr ""
+"Standart: Bu standart güvenlik seviyesi internete bağlanan her makine için "
+"önerilir.\n"
+"\n"
+"Yüksek:   Bu seviye bazı sınırlayan kurallar getirir ve her akşam daha fazla "
+"otomatik denetim yapar.\n"
+"\n"
+"Daha Yüksek:    Sistemin bir güvenli sunucu olarak kullanılabilmesi için "
+"hertürlü önlemi alır.\n"
+"                 Eğer sisteminizi bir sunucu olarak degilde bir internet "
+"istemci (yani sadece internete\n"
+"                 bağlanacak bir sistem) olarak düşünüyorsanız daha alçak bir "
+"seviye seçin.\n"
+"\n"
+"Paranoyak:     \"Daha Yüksek\" seçeneğindekinin tüm özellikleri ile birlikte "
+"sistem tüm girişlere kapatılır\n"
+"                 ve sistem maksimum bir güvenlik seviyesine alınır.\n"
+"\n"
+"Güvenlik Yöneticisi:\n"
+"                Eğer 'Güvenlik Alarmları' seçenekleri belirlendiyse gerekli "
+"güvenlik alarmları kullanıcılara\n"
+"/t   yollanacaktır. ( kullanıcı adı ve email )"
 
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
@@ -9920,18 +9941,16 @@ msgstr ""
 "Yardım tuşuna basınız.\n"
 
 #: ../../security/main.pm_.c:226
-#, fuzzy
 msgid "Network Options"
-msgstr "Diğer Seçenekler"
+msgstr "Ağ Seçenekleri"
 
 #: ../../security/main.pm_.c:235
-#, fuzzy
 msgid "System Options"
-msgstr "Diğer Seçenekler"
+msgstr "Sistem Seçenekleri"
 
 #: ../../security/main.pm_.c:242
 msgid "Periodic Checks"
-msgstr ""
+msgstr "Periyodik Denetlemeler"
 
 #: ../../security/main.pm_.c:256
 msgid "Please wait, setting security level..."
