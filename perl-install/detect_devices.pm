@@ -291,6 +291,7 @@ sub whatUsbport() {
 						       MANUFACTURER => $manufacturer,
 						       DESCRIPTION => $_->{description},
 						     }};
+	++$i;
     }
     @res;
 }
