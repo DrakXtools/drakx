@@ -312,6 +312,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Tue Jul 22 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.20mdk
 - drakconnect: fix "lan config" dialog where fields were not filled
+- draksec: vertically align OptionMenus
 
 * Mon Jul 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.19mdk
 - diskdrake, drakconnect: add an help button in standalone mode
