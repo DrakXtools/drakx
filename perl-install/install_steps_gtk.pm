@@ -270,8 +270,8 @@ sub doPartitionDisksLnx4winSize {
     
     my $w = my_gtk->new('');
 
-    my $root_adj = create_adjustment($max_root_size >> 11, 1, $$root_size >> 11);
-    my $swap_adj = create_adjustment($max_swap_size >> 11, 1, $$swap_size >> 11);
+    my $root_adj = create_adjustment($max_root_size >> 11, 250, $$root_size >> 11);
+    my $swap_adj = create_adjustment($max_swap_size >> 11, 32, $$swap_size >> 11);
     my $root_spin = new Gtk::SpinButton($root_adj, 0, 0);
     my $swap_spin = new Gtk::SpinButton($swap_adj, 0, 0);
 
@@ -453,7 +453,7 @@ sub choosePackagesTree {
     };
 
     my $update_size = sub {
-	my $size = pkgs::selectedSize();
+	my $size = pkgs::selectedSize($packages);
 	$w_size->set(_("Total size: %d / %d MB", 
 		       pkgs::correctSize($size / sqr(1024)),
 		       install_any::getAvailableSpace($o) / sqr(1024)));
@@ -476,8 +476,19 @@ sub choosePackagesTree {
 		    return $o->ask_warn('', _("You can't unselect this package. It must be upgraded"));
 		}
 	    }
+
 	    pkgs::togglePackageSelection($packages, $p, my $l = {});
 	    if (my @l = grep { $l->{$_} } keys %$l) {
+		#- check for size before trying to select.
+		my $size = pkgs::selectedSize($packages);
+		foreach (@l) {
+		    my $p = $packages->[0]{$_};
+		    pkgs::packageFlagSelected($p) or $size += pkgs::packageSize($p);
+		}
+		if (pkgs::correctSize($size / sqr(1024)) > install_any::getAvailableSpace($o) / sqr(1024)) {
+		    return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
+		}
+
 		@l > 1 && !$auto_deps and $o->ask_okcancel('', [ _("The following packages are going to be installed/removed"), join(", ", sort @l) ], 1) || return;
 		pkgs::togglePackageSelection($packages, $p);
 		foreach (@l) {

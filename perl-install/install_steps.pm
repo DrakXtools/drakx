@@ -933,6 +933,10 @@ sub hasNetwork {
 sub upNetwork {
     my ($o, $pppAvoided) = @_;
 
+    foreach (qw(resolv.conf protocols services)) {
+	symlinkf("$o->{prefix}/etc/$_", "/etc/$_");
+    }
+
     modules::write_conf("$o->{prefix}/etc/conf.modules");
     if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	network::up_it($o->{prefix}, $o->{intf});
