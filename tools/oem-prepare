@@ -1,0 +1,391 @@
+#!/usr/bin/perl
+
+my ($mode, $dir, $reject_dir, $lang, $flang) = @ARGV;
+$mode =~ s/^--(rebuild|clean)$/$1/ or die "mode should be --rebuild or --clean\n";
+-e "$dir/Mandrake/base/hdlists" && -d $reject_dir or die "usage: oem-prepare <--rebuild|--clean> <top_dir> <reject_dir> <lang>\n";
+
+$lang eq "fr" and $flang = "fr_FR";
+#- default language fall to english ?
+$lang or ($lang, $flang) = ("en", "en_US");
+print "Found lang $lang (flang is $flang)\n";
+
+my $packages = select_packages($dir, $lang);
+
+my @media;
+open F, "$dir/Mandrake/base/hdlists";
+foreach (<F>) {
+    chomp;
+    s/\s*#.*$//;
+    /^\s*$/ and next;
+    m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
+
+    push @media, { hdlist => $1, rpmsdir => $2, descr => $3 };
+}
+close F;
+
+#- keep in mind all the rpm files available (according to hdlists).
+my %rpms;
+
+require packdrake;
+foreach my $medium (@media) {
+    my $packer = new packdrake("$dir/Mandrake/base/$medium->{hdlist}");
+    foreach (@{$packer->{files}}) {
+	$packer->{data}{$_}[0] eq 'f' or next;
+	$rpms{$_} = $medium->{rpmsdir};
+	-e "$dir/$medium->{rpmsdir}/$_.rpm" and next; #- already exist in the right directory.
+	if (-e "$reject_dir/$_.rpm") {
+	    $mode eq 'rebuild' and system "mv", "-f", "$reject_dir/$_.rpm", "$dir/$medium->{rpmsdir}";
+	    next;
+	}
+	print STDERR "unable to find package $_ listed in medium \"$medium->{descr}\"\n";
+    }
+}
+
+if ($mode eq 'clean') {
+    #- copy and install from each cd image.
+    foreach my $medium (@media) {
+	foreach my $pkg (@{$packages->{depslist}}) {
+	    $pkg->{closure} && !$pkg->{selected} or next;
+	    foreach (qw(i586 i486 i386 ppc sparc64 sparc alpha noarch)) {
+		delete $rpms{"$pkg->{name}.$_"} or next;
+		my $file = "$dir/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
+		-e $file or print STDERR "package $pkg->{name} should be available in [$dir/$medium->{rpmsdir}]", next;
+		print "copying $file\n";
+		delete $pkg->{closure};
+	    }
+	}
+
+	if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
+	    if (delete $pkg->{selected}) {
+		foreach (qw(i586 i486 i386 ppc sparc64 sparc alpha noarch)) {
+		    delete $rpms{"$pkg->{name}.$_"} or next;
+		    my $file = "$dir/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
+		    -e $file or next;
+		    print "  installing $file\n";
+		}
+	    }
+	} else {
+	    die "no glibc package found";
+	}
+	my @files;
+	foreach my $pkg (@{$packages->{depslist}}) {
+	    $pkg->{selected} or next;
+	    foreach (qw(i586 i486 i386 ppc sparc64 sparc alpha noarch)) {
+		delete $rpms{"$pkg->{name}.$_"} or next;
+		my $file = "$dir/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
+		-e $file or next;
+		print "  installing $file\n";
+		delete $pkg->{selected};
+	    }
+	}
+
+	scalar(grep { $_->{selected} || $_->{closure} } @{$packages->{depslist}}) == 0 and last;
+    }
+
+    #- at this point, everything left in %rpms has to be moved to $reject_dir.
+    foreach (keys %rpms) {
+	-e "$reject_dir/$_.rpm" and next; #- already cleaned.
+	-e "$dir/$rpms{$_}/$_.rpm" or print STDERR "file \"$_.rpm\" should be in [$dir/$rpms{$_}]\n", next;
+	system "mv", "-f", "$dir/$rpms{$_}/$_.rpm", $reject_dir;
+    }
+}
+
+#- provide package fullname that have to be installed and copied.
+sub select_packages {
+    my ($dir, $lang) = @_;
+    my $o = { packages => read_depslist("$dir/Mandrake/base/depslist.ordered") };
+
+    #- DO NOT FORGET TO UPDATE HERE ACCORDING TO gi/perl-install/install_any.pm
+    my @pkgs = qw(XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
+		  dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
+		  rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils
+		  kernel-pcmcia-cs apmd cdrecord rio500
+                 );
+    push @pkgs, "XFree86-$_" foreach qw(3DLabs 3dfx 8514 AGX FBDev I128 Mach8 Mach32 Mach64 Mono P9000 Rage128 S3 S3V SVGA VGA16 W32);
+    foreach (@pkgs) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
+    }
+    foreach my $pkg (@{$o->{packages}{depslist}}) {
+	$pkg->{name} =~ /NVIDIA/ and pkgs::selectPackage($o->{packages}, $pkg);
+    }
+    foreach my $pkg (@{$o->{packages}{depslist}}) {
+	delete $pkg->{selected} and $pkg->{closure} = 1;
+    }
+    foreach (qw(Mesa-common xpp libqtcups2 qtcups kups)) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and $pkg->{closure} = 1;
+    }
+
+    #- act as DrakX will do to select packages.
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die "no basesystem package found");
+    pkgs::read_rpmsrate($o->{packages}, install_any::getFile("Mandrake/base/rpmsrate") || die "unable to read rpmsrate");
+    ($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
+      pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
+    eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
+
+    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
+    $o->{compssUsersChoice}{SYSTEM} = 1;
+#- prepare a oem disk for both oem and oem-server (so keep oem-server list of packages).
+#    @{$o->{compssUsersChoice}}{grep { /SERVER/ } keys %{$o->{compssUsersChoice}}} = ();
+
+    my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
+    if ($lang_pkg) {
+	pkgs::selectPackage($o->{packages}, $lang_pkg);
+	$o->{compssUsersChoice}{qq(LOCALES"$lang")} = 1;
+	$o->{compssUsersChoice}{qq(LOCALES"$flang")} = 1;
+    }
+
+    pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
+
+    #- package that have to selected here as a bonus for oem install.
+    foreach (qw(cups cups-drivers drakprofile draksync irda-utils numlock raidtools reiserfs-utils
+		Mesa Mesa-demos alsa alsa-utils
+		Aurora xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
+                glibc vim-minimal kernel kernel22
+               )) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
+    }
+
+    #- special packages that are to be move to closure always ...
+    foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure
+		Aurora xawtv kwintv xscreensaver-gl xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
+		kernel22-smp kernel22-secure alsa imwheel nfs-utils-clients lvm usbd reiserfsprogs
+		)) {
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	$pkg and $pkg->{closure} = 1, delete $pkg->{selected};
+    }
+
+    $o->{packages};
+}
+
+sub chop_version($) {
+    ($_[0] =~ /(.*)-[^-]+-[^-]+/)[0] || $_[0];
+}
+
+sub read_depslist {
+    my ($file) = @_;
+    my $packages = { depslist => [], names => {} };
+
+    #- read depslist.oredered file.
+    my $id = 0;
+
+    open F, "$file" or die "unable to open ordered dependencies list file";
+    while (<F>) {
+	my ($name, $size, @deps) = split;
+	push @{$packages->{depslist}}, { id => $id++, name => $name, size => $size, deps => \@deps };
+    }
+    close F;
+
+    foreach (@{$packages->{depslist}}) {
+	$packages->{names}{chop_version($_->{name})} = $_;
+    }
+
+    print STDERR "read " . scalar(@{$packages->{depslist}}) . " package dependancies\n";
+    $packages;
+}
+
+#- compability method for the below ones, wrap DrakX code extracted.
+package log;
+sub l {}
+
+package detect_devices;
+sub matching_desc { 0 }
+
+package install_any;
+sub getFile { open FILE, "/cdrom/$_[0]" or return; \*FILE }
+
+package pkgs;
+sub formatXiB { $_[0] } #- NOP
+sub packageName { ::chop_version($_[0]{name}) }
+sub packageSize { $_[0]{size} }
+sub packageDepsId { @{$_[0]{deps}} }
+sub packageRate { $_[0]{values}[0] }
+sub packageRateRFlags { @{$_[0]{values}} }
+sub packageSetRateRFlags {
+    my ($pkg, @rate_rflags) = @_;
+    $pkg->{values} = [ @rate_rflags ];
+}
+sub packageByName {
+    my ($packages, $name) = @_;
+    $packages->{names}{$name};
+}
+sub packageById {
+    my ($packages, $id) = @_;
+    $packages->{depslist}[$id];
+}
+sub selectedSize {
+    my ($packages) = @_;
+    my $size = 0;
+    foreach (@{$packages->{depslist}}) {
+	$_->{selected} and $size += $_->{size};
+    }
+    $size;
+}
+my @preferred = qw(perl-GTK postfix wu-ftpd ghostscript-X vim-minimal kernel ispell-en);
+sub selectPackage {
+    my ($packages, $pkg, $base, $otherOnly, $check_recursion) = @_;
+
+    #- avoid infinite recursion (mainly against badly generated depslist.ordered).
+    $check_recursion ||= {}; exists $check_recursion->{$pkg->{name}} and return; $check_recursion->{$pkg->{name}} = undef;
+
+    #- make sure base package are set even if already selected.
+    $base and $pkg->{base} = 1;
+
+    #- select package and dependancies, otherOnly may be a reference
+    #- to a hash to indicate package that will strictly be selected
+    #- when value is true, may be selected when value is false (this
+    #- is only used for unselection, not selection)
+    unless ($pkg->{selected}) {
+	foreach (@{$pkg->{deps}}) {
+	    my $preferred;	    
+	    if (/\|/) {
+		#- choice deps should be reselected recursively as no
+		#- closure on them is computed, this code is exactly the
+		#- same as pixel's one.
+		my %preferred; @preferred{@preferred} = ();
+		foreach (split '\|') {
+		    my $dep = $packages->{depslist}[$_] or next;
+		    $preferred ||= $dep;
+		    $dep->{selected} and $preferred = $dep, last;
+		    exists $preferred{::chop_version($dep->{name})} and $preferred = $dep;
+		}
+		selectPackage($packages, $preferred, $base, $otherOnly, $check_recursion) if $preferred;
+	    } else {
+		#- deps have been closed except for choices, so no need to
+		#- recursively apply selection, expand base on it.
+		my $dep = $packages->{depslist}[$_];
+		$base and $dep->{base} = 1;
+		$otherOnly and !$dep->{selected} and $otherOnly->{::chop_version($dep->{name})} = 1;
+		$otherOnly or $dep->{selected} += 1;
+	    }
+	}
+    }
+    $otherOnly and !$pkg->{selected} and $otherOnly->{::chop_version($pkg->{name})} = 1;
+    $otherOnly or $pkg->{selected} += 1;
+    1;
+}
+
+#- this code is extracted from DrakX and SHOULD NOT BE MODIFIED, wrapper method exists above to provide a good choice.
+sub read_rpmsrate {
+    my ($packages, $f) = @_;
+    my $line_nb = 0;
+    my (@l);
+    while (<$f>) {
+	$line_nb++;
+	/\t/ and die "tabulations not allowed at line $line_nb\n";
+	s/#.*//; 		 # comments
+
+	my ($indent, $data) = /(\s*)(.*)/;
+	next if !$data;		# skip empty lines
+
+	@l = grep { $_->[0] < length $indent } @l;
+
+	my @m = @l ? @{$l[$#l][1]} : ();
+	my ($t, $flag, @l2);
+	while ($data =~ 
+	       /^((
+                   [1-5]
+                   |
+                   (?:            (?: !\s*)? [0-9A-Z_]+(?:".*?")?)
+                   (?: \s*\|\|\s* (?: !\s*)? [0-9A-Z_]+(?:".*?")?)*
+                  )
+                  (?:\s+|$)
+                 )(.*)/x) {
+	    ($t, $flag, $data) = ($1,$2,$3);
+	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {
+	    }
+	    my $ok = 0;
+	    $flag = join('||', grep { 
+		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
+		    ($inv xor detect_devices::matching_desc($p)) and $ok = 1;
+		    0;
+		} else {
+		    1;
+		}
+	    } split '\|\|', $flag);
+	    push @m, $ok ? 'TRUE' : $flag || 'FALSE';
+	    push @l2, [ length $indent, [ @m ] ];
+	    $indent .= $t;
+	}
+	if ($data) {
+	    # has packages on same line
+	    my ($rate) = grep { /^\d$/ } @m or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
+	    foreach (split ' ', $data) {
+		if ($packages) {
+		    my $p = packageByName($packages, $_) or next;
+		    
+		    my @m2 = map { packageName(packageById($packages, $_)) =~ /locales-(.*)/ ? qq(LOCALES"$1") : () } packageDepsId($p);
+		    packageSetRateRFlags($p, $rate, (grep { !/^\d$/ } @m), @m2);
+		} else {
+		    print "$_ = ", join(" && ", @m), "\n";
+		}
+	    }
+	    push @l, @l2;
+	} else {
+	    push @l, [ $l2[0][0], $l2[$#l2][1] ];
+	}
+    }
+    $line_nb > 0 or die "nothing read in rpmsrate";
+}
+
+sub readCompssUsers {
+    my ($packages, $meta_class) = @_;
+    my (%compssUsers, %compssUsersIcons, , %compssUsersDescr, @sorted, $l);
+    my (%compss); 
+
+    my $file = 'Mandrake/base/compssUsers';
+    my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
+    local $_;
+    while (<$f>) {
+	/^\s*$/ || /^#/ and next;
+	s/#.*//;
+
+	if (/^(\S.*)/) {
+	    my ($icon, $descr);
+	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
+	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
+	    $compssUsersIcons{$_} = $icon; 
+	    $compssUsersDescr{$_} = $descr; 
+	    push @sorted, $_;
+	    $compssUsers{$_} = $l = [];
+	} elsif (/^\s+(.*?)\s*$/) {
+	    push @$l, $1;
+	}
+    }
+    \%compssUsers, \@sorted, \%compssUsersIcons, \%compssUsersDescr;
+}
+
+sub setSelectedFromCompssList {
+    my ($packages, $compssUsersChoice, $min_level, $max_size, $install_class) = @_;
+    $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
+    my $nb = selectedSize($packages);
+#    foreach my $p (sort { substr($a,0,1) <=> substr($b,0,1) } values %{$packages->{names}}) {
+    foreach my $p (sort { $b->{values}[0] <=> $a->{values}[0] } @{$packages->{depslist}}) { #- LOCALLY MODIFIED FOR OEM
+#	my ($rate, @flags) = split "\t", $p->[$VALUES];
+	my ($rate, @flags) = packageRateRFlags($p);
+	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
+
+	#- determine the packages that will be selected when
+	#- selecting $p. the packages are not selected.
+	my %newSelection;
+	selectPackage($packages, $p, 0, \%newSelection);
+
+	#- this enable an incremental total size.
+	my $old_nb = $nb;
+	foreach (grep { $newSelection{$_} } keys %newSelection) {
+	    $nb += packageSize($packages->{names}{$_});
+	}
+	if ($max_size && $nb > $max_size) {
+	    $nb = $old_nb;
+	    $min_level = packageRate($p);
+	    last;
+	}
+
+	#- at this point the package can safely be selected.
+	selectPackage($packages, $p);
+    }
+    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
+    $min_level;
+}
