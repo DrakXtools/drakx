@@ -801,7 +801,7 @@ enum return_type http_prepare(void)
 		strcpy(location_full, answers[1]);
 		strcat(location_full, get_ramdisk_realname());
 
-		log_message("HTTP: trying to retrieve %s", location_full);
+		log_message("HTTP: trying to retrieve %s from %s", location_full, answers[0]);
 		
 		fd = http_download_file(answers[0], location_full, &size);
 		if (fd < 0) {
