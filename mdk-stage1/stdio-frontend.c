@@ -146,10 +146,11 @@ void init_progression(char *msg, int size)
 void update_progression(int current_size)
 {
 	if (size_progress) {
-		while ((int)((current_size*PROGRESS_SIZE)/size_progress) > actually_drawn) {
-			printf("*");
-			actually_drawn++;
-		}
+		if (current_size <= size_progress)
+			while ((int)((current_size*PROGRESS_SIZE)/size_progress) > actually_drawn) {
+				printf("*");
+				actually_drawn++;
+			}
 	} else
 		printf("\033[G%d bytes read", current_size);
 	

@@ -147,7 +147,8 @@ void init_progression(char *msg, int size)
 void update_progression(int current_size)
 {
 	if (size_progress) {
-		newtScaleSet(scale, current_size);
+		if (current_size <= size_progress)
+			newtScaleSet(scale, current_size);
 		newtRefresh();
 	}
 	else {
