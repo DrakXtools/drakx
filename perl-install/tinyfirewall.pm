@@ -133,6 +133,7 @@ my $popimap = sub {
     my $quit = sub {
 	$_[0] or $in->exit(0);
 	SaveConfig();
+	$in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables");
 	system($_) foreach ("/bin/cp /usr/share/Bastille/bastille-ipchains /usr/share/Bastille/bastille-netfilter /sbin",
 			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
 			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",
@@ -170,7 +171,7 @@ my $popimap = sub {
     if (!Kernel22()) { 
 	pop @struct; pop @struct; pop @struct;
 	@struct = ( @struct, [undef , "Don't Save", "Save & Quit", $quit ] );
-	@messages[9]=@messages[11];
+	$messages[9]=$messages[11];
     }
     for (my $i=0;$i<@struct;$i++) {
 	$::Wizard_no_previous = $i == 0;
