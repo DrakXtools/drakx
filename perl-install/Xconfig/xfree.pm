@@ -257,9 +257,9 @@ sub set_synaptics {
                   $opt->("MaxTapTime", 180),
                   $opt->("MaxTapMove", 220),
                   $opt->("VertScrollDelta", 100),
-                  $opt->("MinSpeed", '0.06'),
-                  $opt->("MaxSpeed", '0.12'),
-                  $opt->("AccelFactor", '0.0010'),
+                  $opt->("MinSpeed", '0.09'),
+                  $opt->("MaxSpeed", '0.18'),
+                  $opt->("AccelFactor", '0.0015'),
                   $opt->("SHMConfig", "on"),
                 };
         $raw_X->add_Section('InputDevice', $h);
