@@ -1,4 +1,4 @@
-package draksec::libsafe;
+package security::libsafe;
 
 use diagnostics;
 use strict;
