@@ -46,7 +46,8 @@ sub new($$) {
 
 	    my $launchX = sub {
 		my $ok = 1;
-		my $xpmac_opts = cat_("/proc/cmdline");        		
+		my $xpmac_opts = cat_("/proc/cmdline");
+		unless (-d "/var/log" ) { mkdir("/var/log"); }
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork) {
 		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : ("-kb")), "-dpms","-s" ,"240",
