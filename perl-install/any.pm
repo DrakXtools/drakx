@@ -151,6 +151,8 @@ sub setupBootloader {
     setupBootloader__entries($in, $b, $all_hds, $fstab) or goto general;
 
     #- somewhere should bootloader really installed ?
+    $::isStandalone and my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
+
     bootloader::install($b, $fstab, $hds);
 }
 
