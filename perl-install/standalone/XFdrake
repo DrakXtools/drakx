@@ -115,7 +115,7 @@ sub allowNVIDIA_rpms {
 	    $urpm->parse_synthesis($_);
 	}
 	foreach (@{$urpm->{depslist} || []}) {
-	    $_->name =~ /NVIDIA/ and $list->{$_->name} = 1;
+	    $_->name =~ /NVIDIA/ and $list{$_->name} = 1;
 	}
     };
     if ($list{NVIDIA_GLX}) {
