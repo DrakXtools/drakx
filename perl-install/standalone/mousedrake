@@ -52,7 +52,7 @@ if (!$mouse || !$::auto) {
     Gtk->timeout_remove($time_tag2) if $::isEmbedded  && ref($in) =~ /gtk/;
     $name or $::isEmbedded ? do { kill(USR1, $::CCPID); goto begin } : $in->exit(0);
     my $mouse_chosen = mouse::fullname2mouse($name);
-    $mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{type} or $mouse = $mouse_chosen;
+    $mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name} or $mouse = $mouse_chosen;
 
     if ($mouse->{device} eq "usbmouse") {
 	my ($c) = grep { $_->{driver} =~ /usb-[ou]hci/ } detect_devices::pci_probe(0) or die _("no serial_usb found\n");
