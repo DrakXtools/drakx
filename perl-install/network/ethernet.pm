@@ -76,10 +76,10 @@ qq(
 }
 
 sub conf_network_card {
-    my ($netc, $intf, $type, $ipadr, $netadr) = @_;
+    my ($netc, $intf, $type, $ipadr, $o_netadr) = @_;
     #-type =static or dhcp
     modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
-    my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr);
+    my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $o_netadr);
     my $interface;
     @all_cards == () and $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")) and return;
@@ -92,7 +92,7 @@ I cannot set up this connection type.")) and return;
     }
     $::isStandalone and modules::write_conf($prefix);
 
-    my $_device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr);
+    my $_device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $o_netadr);
 #      if ( $::isStandalone and !($type eq "dhcp")) {
 #  	$in->ask_yesorno(N("Network interface"),
 #  			  N("I'm about to restart the network device:\n") . $device . N("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
@@ -122,7 +122,7 @@ I cannot set up this connection type.")) and return;
 #-  $all_cards : a list of a list ( [eth1, module1], ... , [ethn, modulen]). Pass the ethx as $interface in further call.
 #-  $device : only returned in case $interface was given it's $interface, but filtered by /eth[0-9+]/ : string : /eth[0-9+]/
 sub conf_network_card_backend {
-    my ($netc, $intf, $type, $interface, $ipadr, $netadr) = @_;
+    my ($netc, $intf, $type, $interface, $ipadr, $o_netadr) = @_;
     #-type =static or dhcp
     if (!$interface) {
 	my @all_cards = detect_devices::getNet();
@@ -148,7 +148,7 @@ sub conf_network_card_backend {
     
     $netc->{NET_DEVICE} = $interface; #- one consider that there is only ONE Internet connection device..
     
-    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $netadr, 'yes');
+    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $o_netadr, 'yes');
     
     $intf->{$interface}{IPADDR} = $ipadr if $ipadr;
     $interface;
