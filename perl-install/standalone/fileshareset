@@ -12,7 +12,7 @@ my $authorisation_group = 'fileshare';
 
 ########################################
 # fileshare utility $Id$
-# Copyright (C) 2001 MandrakeSoft (pixel@mandrakesoft.com)
+# Copyright (C) 2001-2002 MandrakeSoft (pixel@mandrakesoft.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -64,7 +64,10 @@ my %exit_codes = reverse (
 ################################################################################
 # correct PATH needed to call /etc/init.d/... ? seems not, but...
 %ENV = ();#(PATH => '/bin:/sbin:/usr/bin:/usr/sbin');
-authorisation::check();
+
+my $modify = $0 =~ /fileshareset/;
+
+authorisation::check($modify);
 
 my @exports = (
 	       -e $nfs_exports::conf_file ? nfs_exports::read() : (),
@@ -72,7 +75,7 @@ my @exports = (
 	      );
 @exports or error($no_export_method);
 
-if ($0 =~ /fileshareset/) {
+if ($modify) {
     my ($cmd, $dir) = @ARGV;
     $< = $>;
     @ARGV == 2 && ($cmd eq '--add' || $cmd eq '--remove') or error($usage);
@@ -121,10 +124,11 @@ sub uniq { my %l; $l{$_} = 1 foreach @_; grep { delete $l{$_} } @_ }
 package authorisation;
 
 sub read_conf {
-    local *F;
-    open F, $authorisation_file; # don't care if it's missing
+    my ($exclusive_lock) = @_;
+    open F_lock, $authorisation_file; # don't care if it's missing
+    flock(F_lock, $exclusive_lock ? 2 : 1) or die "can't lock";
     my %conf;
-    foreach (<F>) {
+    foreach (<F_lock>) {
 	s/#.*//; # remove comments
 	s/^\s+//; 
 	s/\s+$//;
@@ -132,11 +136,13 @@ sub read_conf {
 	my ($cmd, $value) = split('=', $_, 2);
 	$conf{$cmd} = $value || warn qq(suspicious line "$_" in $authorisation_file\n);
     }
+    # no close F_lock, keep it locked
     \%conf
 }
 
 sub check {
-    my $conf = read_conf();
+    my ($exclusive_lock) = @_;
+    my $conf = read_conf($exclusive_lock);
 
     if (lc($conf->{RESTRICT}) eq 'no') {
 	# ok, access granted for everybody
