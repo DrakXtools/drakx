@@ -871,8 +871,9 @@ sub chooseResolutions($$;$) {
     my $allowed_depth = allowedDepth($card);
 
     local $_ = $in->ask_from_list(_("Resolutions"), "", 
-				  [ if_(!$allowed_depth || exists $allowed_depth->{$::a},
-					map_each { map { "$_->[0]x$_->[1] ${main::a}bpp" } @$::b } %{$card->{depth}}) ]) or return;
+				  [ map_each { if_(!$allowed_depth || exists $allowed_depth->{$::a},
+						   map { "$_->[0]x$_->[1] ${main::a}bpp" } @$::b) } %{$card->{depth}} ])
+      or return;
     reverse /(\d+)x\S+ (\d+)/;
 }
 
