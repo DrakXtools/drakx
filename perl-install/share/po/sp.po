@@ -6695,6 +6695,16 @@ msgid "256 colors (8 bits)"
 msgstr "256 боја (8-битна палета)"
 
 #: ../../Xconfig/test.pm:1
+#, fuzzy, c-format
+msgid "Is this the correct setting?"
+msgstr "Да ли је ово исправно ?"
+
+#: ../../Xconfig/test.pm:1
+#, fuzzy, c-format
+msgid "Leaving in %d seconds"
+msgstr "%d секунди"
+
+#: ../../Xconfig/test.pm:1
 #, c-format
 msgid ""
 "An error occurred:\n"
@@ -8388,11 +8398,6 @@ msgstr "%d одвојени бројеви са зарезом"
 msgid "a number"
 msgstr "број"
 
-#: ../../modules/parameters.pm:1
-#, c-format
-msgid "modinfo is not available"
-msgstr "modinfo није доступан"
-
 #: ../../network/adsl.pm:1
 #, c-format
 msgid ""
@@ -8578,6 +8583,7 @@ msgstr ""
 "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
 
 #: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/drakpxe:1
 #, c-format
 msgid "Choose the network interface"
 msgstr "Изаберите мрeжни интерфejс"
@@ -9214,13 +9220,6 @@ msgstr "IP адреса треба да буде у формату 1.2.3.4"
 
 #: ../../network/network.pm:1
 #, c-format
-msgid ""
-"For an Automatic IP you have to select at least one protocol : dhcp or "
-"zeroconf"
-msgstr ""
-
-#: ../../network/network.pm:1
-#, c-format
 msgid "Start at boot"
 msgstr "Покрени при стартaњу"
 
@@ -9231,7 +9230,7 @@ msgstr ""
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "bootp/dhcp"
+msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
 #: ../../network/network.pm:1
@@ -11796,6 +11795,349 @@ msgstr "Како је штампач повезан?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Избор повезаности штампача"
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (umask)\n"
+"Set the user umask."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (val)\n"
+"Set the shell timeout. A value of zero means no timeout."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (size)\n"
+"Set shell commands history size. A value of -1 means unlimited."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, check additions/removals of sgid files."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, check open ports."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"if set, send the mail report to this email address else send it to root."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, report check result by mail."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, check files/directories writable by everybody."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, reports check result to tty."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, run some checks against the rpm database."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, check if the network devices are in promiscuous mode."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, run chkrootkit checks."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, check permissions of files in the users' home."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, check additions/removals of suid root files."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, report check result to syslog."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"if set to yes, check for empty password, or a password while it should be "
+"in /etc/shadow or other users with id 0."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, run the daily security checks."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, verify checksum of the suid/sgid files."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, check empty password in /etc/shadow."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid "if set to yes, report unowned files."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (umask)\n"
+"Set the root umask."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (length, ndigits=0, nupper=0)\n"
+"Set the password minimum length and minimum number of digit and minimum "
+"number of capitalized letters."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Set the password history length to prevent password reuse."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (max, inactive=-1)\n"
+"Set password aging to \\fImax\\fP days and delay to change to \\fIinactive"
+"\\fP."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (name)\n"
+"Add the name as an exception to the handling of password aging by msec."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+" Enable/Disable sulogin(8) in single user level."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+" Activate/Disable daily security check."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Activate/Disable ethernet cards promiscuity check."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Use password to authenticate users."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+" Enabling su only from members of the wheel group or allow su from any user."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Enable/Disable msec hourly security check."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Enable/Disable the logging of IPv4 strange packets."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Enable/Disable libsafe if libsafe is found on the system."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg, alert=1)\n"
+"Enable/Disable IP spoofing protection."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg, alert=1)\n"
+"Enable/Disable name resolution spoofing protection.  If\n"
+"\\fIalert\\fP is true, also reports to syslog."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg, expr='*.*', dev='tty12')\n"
+"Enable/Disable syslog reports to console 12. \\fIexpr\\fP is the\n"
+"expression describing what to log (see syslog.conf(5) for more details) and\n"
+"dev the device to report the log."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Enable/Disable crontab and at for users. Put allowed users in /etc/cron."
+"allow and /etc/at.allow\n"
+"(see man at(1) and crontab(1))."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: ()\n"
+"If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3\n"
+"in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/"
+"server\n"
+"to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/"
+"server\n"
+"is used by chkconfig --add to decide to add a service if it is present in "
+"the file\n"
+"during the installation of packages."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Authorize all services controlled by tcp_wrappers (see hosts.deny(5)) if "
+"\\fIarg\\fP = ALL. Only local ones\n"
+"if \\fIarg\\fP = LOCAL and none if \\fIarg\\fP = NONE. To authorize the "
+"services you need, use /etc/hosts.allow\n"
+"(see hosts.allow(5))."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"The argument specifies if clients are authorized to connect\n"
+"to the X server on the tcp port 6000 or not."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg, listen_tcp=None)\n"
+"Allow/Forbid X connections. First arg specifies what is done\n"
+"on the client side: ALL (all connections are allowed), LOCAL (only\n"
+"local connection) and NONE (no connection)."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Allow/Forbid the list of users on the system on display managers (kdm and "
+"gdm)."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Allow/Forbid direct root login."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Allow/Forbid remote root login."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Allow/Forbid reboot by the console user."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"If \\fIarg\\fP = ALL allow /etc/issue and /etc/issue.net to exist. If \\fIarg"
+"\\fP = NONE no issues are\n"
+"allowed else only /etc/issue is allowed."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Allow/Forbid autologin."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+" Accept/Refuse icmp echo."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+" Accept/Refuse broadcasted icmp echo."
+msgstr ""
+
+#: ../../security/help.pm:1
+#, c-format
+msgid ""
+"Arguments: (arg)\n"
+"Accept/Refuse bogus IPv4 error messages."
+msgstr ""
 
 #: ../../security/level.pm:1
 #, c-format
@@ -15288,7 +15630,7 @@ msgstr ""
 "Сада можете делити Интернет конекциjу са другим компjутерима на вaшоj "
 "локалноj мрeжи  (LAN), користећи аутоматску мрeжну конфигурациjу (DHCP)."
 
-#: ../../standalone/drakgw:1
+#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Проблеми при инсталациjи %s пакетa"
@@ -15484,7 +15826,7 @@ msgstr ""
 msgid "Network interface"
 msgstr "Мрeжни интерфejс"
 
-#: ../../standalone/drakgw:1
+#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
@@ -15493,7 +15835,7 @@ msgstr ""
 "Ниjе детектована ниjедна мрeжна картицa. Покренитe алат за конфигурисaње "
 "хардверa."
 
-#: ../../standalone/drakgw:1
+#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid "No network adapter on your system!"
 msgstr "Нема мрeжног адаптера у вaшем систему !"
@@ -15799,15 +16141,6 @@ msgstr "Периодичне провере"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid ""
-"The following options can be set to customize your\n"
-"system security. If you need an explanation, click on Help.\n"
-msgstr ""
-"СЛедеће опције се могу поставити да подесе ваш\n"
-"сигурносни систем. Уколико вам треба објашњење, кликните на помоћ.\n"
-
-#: ../../standalone/draksec:1
-#, c-format
 msgid "System Options"
 msgstr "Сиситемске опције"
 
@@ -15815,6 +16148,15 @@ msgstr "Сиситемске опције"
 #, c-format
 msgid "Network Options"
 msgstr "Мрежне опције"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid ""
+"The following options can be set to customize your\n"
+"system security. If you need an explanation, look at the help tooltip.\n"
+msgstr ""
+"СЛедеће опције се могу поставити да подесе ваш\n"
+"сигурносни систем. Уколико вам треба објашњење, кликните на помоћ.\n"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17261,6 +17603,111 @@ msgstr ""
 "Ниједан претраживач није инсталиран. Молим Вас да инсталирате један да би "
 "могли да користите ситем ѕа помоћ"
 
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Location of auto_install.cfg file"
+msgstr "Креирам ауто инсталациону дискету"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"Please indicate where the auto_install.cfg file is located.\n"
+"\n"
+"Leave it blank if you do not want to set up automatic installation mode.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"No CD or DVD image found, please copy the installation program and rpm files."
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "No image found"
+msgstr "Није пронађен штампач!"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Installation image directory"
+msgstr "Xpmac (Инсталациja дисплеj драjвер)"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"Please indicate where the installation image will be available.\n"
+"\n"
+"If you do not have an existing directory, please copy the CD or DVD "
+"contents.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "The DHCP end ip"
+msgstr "DHCP крај распона"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "The DHCP start ip"
+msgstr "DHCP почетак распона"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"The DHCP server will allow other computer to boot using PXE in the given "
+"range of address.\n"
+"\n"
+"The network address is %s using a netmask of %s.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Interface %s (on network %s)"
+msgstr "Интерфеjс %s (користeћи модул %s)"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Please choose which network interface will be used for the dhcp server."
+msgstr ""
+"Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid ""
+"You are about to configure your computer to install a PXE server as a DHCP "
+"server\n"
+"and a TFTP server to build an installation server.\n"
+"With that feature, other computers on your local network will be installable "
+"using from this computer.\n"
+"\n"
+"Make sure you have configured your Network/Internet access using drakconnect "
+"before going any further.\n"
+"\n"
+"Note: you need a dedicated Network Adapter to set up a Local Area Network "
+"(LAN)."
+msgstr ""
+"Вaш рачунар можете подесити за дeљeње његове Интернет конекциje.\n"
+"са овом опциjом, други компjутери на вaшоj локалноj мрeжи ће моћи да "
+"користeИнтернет конекциjу са овог рачунара.\n"
+"\n"
+"Проверите да ли је подешена ваша Мрежни/Интернет приступ преко drakconnect "
+"пре него што наставимо.\n"
+"\n"
+"Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу(LAN)."
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Installation Server Configuration"
+msgstr "dhcpd Сервер конфигурација"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "PXE Server Configuration"
+msgstr "dhcpd Сервер конфигурација"
+
 #: ../../share/compssUsers:999
 msgid "Office Workstation"
 msgstr "Радна(Office) станицa"
@@ -17504,6 +17951,9 @@ msgstr "Личне финансиje"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
 
+#~ msgid "modinfo is not available"
+#~ msgstr "modinfo није доступан"
+
 #~ msgid "You don't have enough free space on your Windows partition"
 #~ msgstr "Немате довољно слободног просторa на Windows партициjи"
 
@@ -17516,68 +17966,6 @@ msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
 
 #~ msgid "/_Help..."
 #~ msgstr "/_Помоћ..."
-
-#, fuzzy
-#~ msgid "Location of auto_install.cfg file"
-#~ msgstr "Креирам ауто инсталациону дискету"
-
-#, fuzzy
-#~ msgid "No image found"
-#~ msgstr "Није пронађен штампач!"
-
-#, fuzzy
-#~ msgid "Installation image directory"
-#~ msgstr "Xpmac (Инсталациja дисплеj драjвер)"
-
-#, fuzzy
-#~ msgid "The DHCP end ip"
-#~ msgstr "DHCP крај распона"
-
-#, fuzzy
-#~ msgid "The DHCP start ip"
-#~ msgstr "DHCP почетак распона"
-
-#, fuzzy
-#~ msgid "Interface %s (on network %s)"
-#~ msgstr "Интерфеjс %s (користeћи модул %s)"
-
-#, fuzzy
-#~ msgid ""
-#~ "Please choose which network interface will be used for the dhcp server."
-#~ msgstr ""
-#~ "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
-
-#, fuzzy
-#~ msgid ""
-#~ "You are about to configure your computer to install a PXE server as a "
-#~ "DHCP server\n"
-#~ "and a TFTP server to build an installation server.\n"
-#~ "With that feature, other computers on your local network will be "
-#~ "installable using from this computer.\n"
-#~ "\n"
-#~ "Make sure you have configured your Network/Internet access using "
-#~ "drakconnect before going any further.\n"
-#~ "\n"
-#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-#~ "(LAN)."
-#~ msgstr ""
-#~ "Вaш рачунар можете подесити за дeљeње његове Интернет конекциje.\n"
-#~ "са овом опциjом, други компjутери на вaшоj локалноj мрeжи ће моћи да "
-#~ "користeИнтернет конекциjу са овог рачунара.\n"
-#~ "\n"
-#~ "Проверите да ли је подешена ваша Мрежни/Интернет приступ преко "
-#~ "drakconnect пре него што наставимо.\n"
-#~ "\n"
-#~ "Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу"
-#~ "(LAN)."
-
-#, fuzzy
-#~ msgid "Installation Server Configuration"
-#~ msgstr "dhcpd Сервер конфигурација"
-
-#, fuzzy
-#~ msgid "PXE Server Configuration"
-#~ msgstr "dhcpd Сервер конфигурација"
 
 #~ msgid "Do you really want to leave the installation?"
 #~ msgstr "Да ли заиста хоћете да прекинете инсталацију?"
