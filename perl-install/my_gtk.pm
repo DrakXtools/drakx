@@ -518,7 +518,7 @@ sub create_packtable($@) {
 }
 
 sub create_hbox {
-    my $w = new Gtk::HButtonBox;
+    my $w = gtkset_border_width(new Gtk::HButtonBox, 3);
     $w->set_layout($_[0] || "spread");
     $w;
 }
