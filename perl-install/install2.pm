@@ -376,8 +376,6 @@ sub main {
 	    vga       => sub { $o->{vga} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    expert    => sub { $::expert = $v },
-	    fbeginner => sub { $::expert = 0; push @auto, 'selectInstallClass' },
-	    fexpert   => sub { $::expert = 1; push @auto, 'selectInstallClass' },
 	    meta_class => sub { $o->{meta_class} = $v },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
