@@ -72,9 +72,7 @@ foreach my $img (@images) {
 	    system("/bin/cp -f move/isolinux/* $tftpboot/move 2>/dev/null");
 	}
     } elsif ($img =~ /boot.iso/) {
-	boot_iso($img, 0, \@kernels);
-    } elsif ($img =~ /bootcdrom.iso/) {
-	boot_iso($img, 1, \@kernels);
+	boot_iso($img, \@kernels);
     } elsif ($img =~ /drivers/) {
 	drivers($type, $I, "$img-$_") foreach @kernels_BOOT;
 	rename("$img-$main_BOOT", $img);
@@ -698,33 +696,60 @@ rescue-net:             boots the rescue image from a network server
 
 }
 
-sub isolinux {
-    my ($main, @kernels) = @_;
-    @kernels = ($main, grep { $_ ne $main } @kernels);
-    _ "rm -rf isolinux"; mkdir "isolinux", 0777;
+sub syslinux_all_files {
+    my ($dir, $kernels) = @_;
+
+    eval { rm_rf($dir) }; mkdir_p($dir);
+
+    @$kernels or die "syslinux_all_files: no kernel\n";
 
     $default_vga =~ /788/ or die 'we rely on vga=788 for bootsplash';
     my $bootspash_cfg = '/etc/bootsplash/themes/Mandrakelinux/config/bootsplash-800x600.cfg';
     -e $bootspash_cfg or die "can't find $bootspash_cfg";
 
     each_index {
-	mkdir "isolinux/alt$::i", 0777;
-	_ "cp kernel/all.kernels/$_/vmlinuz isolinux/alt$::i";
+	mkdir "$dir/alt$::i", 0777;
+	_ "cp kernel/all.kernels/$_/vmlinuz $dir/alt$::i";
 	initrd($tmp_mnt_initrd, 'all', '', "images/all.rdz-$_");
 	_ "splash -s -f $bootspash_cfg >> images/all.rdz-$_" if !/BOOT/;
-	_ "mv images/all.rdz-$_ isolinux/alt$::i/all.rdz";
-    } @kernels;
+	rename("images/all.rdz-$_", "$dir/alt$::i/all.rdz");
+    } @$kernels;
 
-    _ "lilo-bmp2mdk file:isolinux-graphic.bmp >isolinux/boot.msg";
+    _ "lilo-bmp2mdk file:isolinux-graphic.bmp >$dir/boot.msg";
+
+    _ "install -m 644 -D /boot/memtest* $dir/test/memtest.bin";
+
+    output("$dir/help.msg", syslinux_msg('help.msg.xml'));
+    output("$dir/advanced.msg", syslinux_msg('advanced.msg.xml', 
+					     "\nYou can choose the following kernels :\n",
+					     map_index { " o  " . syslinux_color('white') . "alt$::i" . syslinux_color('default') . " is kernel $_\n" } @$kernels));
+}
+
+sub isolinux {
+    my ($main, @kernels) = @_;
+    @kernels = ($main, grep { $_ ne $main } @kernels);
+
+    syslinux_all_files('isolinux', \@kernels);
 
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
-    _ "install -m 644 -D /boot/memtest* isolinux/test/memtest.bin";
     output("isolinux/isolinux.cfg", syslinux_cfg_all('cdrom'));
+}
 
-    output("isolinux/help.msg", syslinux_msg('help.msg.xml'));
-    output("isolinux/advanced.msg", syslinux_msg('advanced.msg.xml', 
-						 "\nYou can choose the following kernels :\n",
-						 map_index { " o  " . syslinux_color('white') . "alt$::i" . syslinux_color('default') . " is kernel $_\n" } @kernels));
+sub boot_iso {
+    my ($iso, $kernels) = @_;
+
+    syslinux_all_files('.boot_iso/isolinux', $kernels);
+
+    output('.boot_iso/VERSION', map { "$_\n" }
+	   $ENV{DISTRIB_DESCR},
+	   scalar gmtime(),
+	   '', @$kernels);	   
+   
+    _ "cp /usr/lib/syslinux/isolinux.bin .boot_iso/isolinux/isolinux.bin";
+    output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all('cdrom-changedisk'));
+
+    _ "mkisofs -r -f -J -cache-inodes -V 'Mdk Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
+    rm_rf('.boot_iso');
 }
 
 sub isolinux_move {   
@@ -791,28 +816,6 @@ quit
 EOF
     close $G;
     unlink $mapfile;
-}
-
-sub boot_iso {
-    my ($iso, $bootcdrom, $kernels) = @_;
-
-    -e 'isolinux/isolinux.cfg' or die 'isolinux missing';
-
-    eval { rm_rf('.boot_iso') };
-    mkdir_p('.boot_iso/isolinux');
-    _ "cd .boot_iso/isolinux ; ln -s ../../isolinux/* .";
-
-    output('.boot_iso/VERSION', map { "$_\n" }
-	   $ENV{DISTRIB_DESCR},
-	   scalar gmtime(),
-	   '', @$kernels);	   
-   
-    my $cfg_file = '.boot_iso/isolinux/isolinux.cfg';
-    unlink $cfg_file;
-    output($cfg_file, syslinux_cfg_all('cdrom-changedisk'));
-
-    _ "mkisofs -r -f -J -cache-inodes -V 'Mdk Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
-    rm_rf('.boot_iso');
 }
 
 sub drivers {
