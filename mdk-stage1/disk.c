@@ -191,6 +191,7 @@ static int try_mount(char * dev, char * location)
 
 	if (my_mount(device_fullname, location, "ext2", 0) == -1 &&
 	    my_mount(device_fullname, location, "vfat", 0) == -1 &&
+	    my_mount(device_fullname, location, "ntfs", 0) == -1 &&
 	    my_mount(device_fullname, location, "reiserfs", 0) == -1) {
                 return 1;
         }
@@ -233,7 +234,7 @@ static enum return_type try_with_device(char *dev_name)
         }
 	
         if (try_mount(choice, disk_own_mount)) {
-		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, reiserfs).");
+		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, ntfs, reiserfs).");
 		return try_with_device(dev_name);
 	}
 

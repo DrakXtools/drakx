@@ -196,6 +196,10 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 		opts = "check=relaxed";
 	}
 
+	if (!strcmp(fs, "ntfs")) {
+		my_insmod("ntfs", ANY_DRIVER_TYPE, NULL, 1);
+	}
+
 	if (!strcmp(fs, "reiserfs"))
 		my_insmod("reiserfs", ANY_DRIVER_TYPE, NULL, 1);
 
