@@ -103,7 +103,7 @@ sub selectKeyboard {
 #------------------------------------------------------------------------------
 sub selectPath {}
 #------------------------------------------------------------------------------
-sub selectInstallClass($@) {
+sub selectInstallClass {
     my ($o) = @_;
     $o->{installClass} ||= $::corporate ? "corporate" : "normal";
     $o->{security} ||= ${{

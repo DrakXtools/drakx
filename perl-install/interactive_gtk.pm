@@ -252,7 +252,7 @@ sub ask_from_entries_refW {
 	} else {
 	    new Gtk::Entry;
 	}
-    } @{$val};
+    } @$val;
     my $ok = $w->create_okcancel(@okcancel);
 
     sub widget {
