@@ -556,16 +556,15 @@ N("Examples for correct IPs:\n") .
 			    ($daemonless_cups, $remote_cups_server);
 			$printer->{remote_cups_server} =
 			    $remote_cups_server;
-			if ($printer->{SPOOLER} ne "rcups") {
-			    # Get the queues of this spooler
-			    my $_w = $in->wait_message
-				(N("Printerdrake"),
-				 N("Reading printer data..."));
-			    printer::main::read_configured_queues($printer);
-			    # Re-read the printer database next time
-			    %printer::main::thedb = ();
-			    assure_default_printer_is_set($printer, $in);
-			}
+			# Get the queues of this spooler
+			my $_w = $in->wait_message
+			    (N("Printerdrake"),
+			     N("Reading printer data..."));
+			printer::main::read_configured_queues($printer);
+			undef $_w;
+			# Re-read the printer database next time
+			%printer::main::thedb = ();
+			assure_default_printer_is_set($printer, $in);
 		    } else {
 			$printer->{SPOOLER} = $oldspooler;
 		    }
@@ -708,14 +707,22 @@ sub first_time_dialog {
     # Close wait message
     undef $w;
 
-    # Show dialog
+    while (1) {
+	# Show dialog
+	my $do_it = N("Yes");
+	my $quit = N("Quit");
+	my @choices = ($do_it, $quit);
+	my $choice = $in->ask_from_list(N("Printerdrake"), $dialogtext, 
+					\@choices, $quit);
+	return 0 if $choice ne $do_it;
     
-    my $do_it = N("Yes");
-    my $quit = N("Quit");
-    my @choices = ($do_it, $quit);
-    my $choice = $in->ask_from_list(N("Printerdrake"), $dialogtext, 
-				    \@choices, $quit);
-    return $choice eq $do_it;
+	if ($havelocalnetworks && !@autodetected ) {
+	    return set_cups_daemon_mode($printer, $in);
+	} else {
+	    $printer->{SPOOLER} = "cups";
+	    return 1;
+	}
+    }
 }
 
 sub configure_new_printers {
@@ -3887,6 +3894,13 @@ sub install_spooler {
         # Avoid unnecessary restarting of CUPS, this blocks the
         # startup of printerdrake for several seconds.
         printer::services::start_not_running_service("cups");
+	# Remove a remote CUPS server setting from the client.conf
+	# file, otherwise the local CUPS daemon gets overridden.
+	my ($daemonless_cups, $remote_cups_server) =
+	    printer::main::read_client_conf();
+	if ($daemonless_cups) {
+	    printer::main::write_client_conf(0, $remote_cups_server);
+	}
     } elsif ($spooler eq "rcups") {
 	# Stop CUPS daemon, we want to run daemon-less
 	services::stop("cups") if services::is_service_running("cups");
@@ -3915,6 +3929,45 @@ sub install_spooler {
     1;
 }
 
+sub assure_remote_server_is_set {
+    my ($printer, $in) = @_;
+    # Check if a remote CUPS server is specified
+    if (!$printer->{remote_cups_server}) {
+	my ($daemonless_cups, $remote_cups_server) =
+	    printer::main::read_client_conf();
+	if (!$daemonless_cups) {
+	    if (!$in->ask_from_
+		({ title => N("Remote CUPS server and no local CUPS daemon"),
+		   messages => N("In this mode there is no local printing system, all printing requests go directly to the server specified below. Note that it is not possible to define local print queues then and if the specified server is down it cannot be printed at all from this machine.") .
+		       "\n\n". 
+		       N("Enter the host name or IP of your CUPS server and click OK if you want to use this mode, click \"Quit\" otherwise."),
+		   cancel => N("Quit"),
+		   callbacks => {
+		       complete => sub {
+			   if ($remote_cups_server =~ /^\s*$/) {
+			       
+			       $in->ask_warn(N("Error"), N("CUPS server name or IP address missing."));
+			       return 1, 1;
+			   }
+			   return 0;
+		       },
+		   },
+	       },
+		 # Show the widgets
+		 [ { label => N("Name or IP of remote server:"),
+		     val => \$remote_cups_server, 
+		 } ],
+		 )) {
+		# Cancel was clicked
+		exit 1;
+	    }
+	    printer::main::write_client_conf(1, $remote_cups_server);
+	    $printer->{remote_cups_server} = $remote_cups_server;
+	}
+    }
+    1;
+}
+
 sub assure_default_printer_is_set {
     my ($printer, $in) = @_;
     if (defined($printer->{SPOOLER}) && $printer->{SPOOLER} &&
@@ -3935,28 +3988,96 @@ sub assure_default_printer_is_set {
     }
 }
 
+sub set_cups_daemon_mode {
+    my ($printer, $in) = @_;
+    my ($modechoice, $daemonless_cups, $remote_cups_server);
+
+    if ($in->ask_from_
+	({ title => N("Local CUPS printing system or remote CUPS server?"),
+	   messages => N("The CUPS printing system can be used in two ways: ") .
+	       "\n\n" .
+	       N("1. The CUPS printing system can run locally. ") .
+	       N("Then locally connected printers can be used and remote printers on other CUPS servers in the same network are automatically discovered. ") .
+	       N("Disadvantage of this approach is, that more resources on the local machine are needed: Additional software packages need to be installed, the CUPS daemon has to run in the background and needs some memory, and the IPP port (port 631) is opened. ") .
+	       "\n\n" .
+	       N("2. All printing requests are immediately sent to a remote CUPS server. ") .
+	       N("Here local resource occupation is reduced to a minimum. No CUPS daemon is started or port opened, no software infrastructure for setting up local print queues is installed, so less memory and disk space is used. ") .
+	       N("Disadvantage is that it is not possible to define local printers then and if the specified server is down it cannot be printed at all from this machine. ") .
+	       "\n\n" .
+	       N("How should CUPS be set up on your machine?"),
+	   callbacks => {
+	       complete => sub {
+		   if ($modechoice eq 
+		       N("Remote server, specify Name or IP here:") &&
+		       $remote_cups_server =~ /^\s*$/) {
+		       
+		       $in->ask_warn(N("Error"), N("CUPS server name or IP address missing."));
+		       return 1, 1;
+		   }
+		   return 0;
+	       },
+	   },
+       },
+	 # Show the widgets
+	 [ { val => \$modechoice, format => \&translate,
+	     type => 'list',
+	     sort => 0,
+	     list => [ N("Local CUPS printing system"),
+		       N("Remote server, specify Name or IP here:") ]},
+	   { val => \$remote_cups_server, 
+	     disabled => sub {
+		 $modechoice ne 
+		     N("Remote server, specify Name or IP here:");
+	     } },
+	   ],
+	 )) {
+	# OK was clicked, update the data
+	$daemonless_cups = 
+	    ($modechoice eq N("Remote server, specify Name or IP here:"));
+	if ($daemonless_cups) {
+	    $printer->{SPOOLER} = "rcups";
+	    $printer->{remote_cups_server} = $remote_cups_server;
+	} else {
+	    $printer->{SPOOLER} = "cups";
+	    undef $printer->{remote_cups_server};
+	}
+	printer::main::write_client_conf($daemonless_cups,
+					 $remote_cups_server);
+	return 1;
+    } else {
+	# Cancel was clicked
+	return 0;
+    }
+}
+
+
 sub setup_default_spooler {
     my ($printer, $in, $upNetwork) = @_;
-    $printer->{SPOOLER} ||= 'cups';
     my $oldspooler = $printer->{SPOOLER};
-
-    my $str_spooler = 
-	$in->ask_from_listf_raw({ title => N("Select Printer Spooler"),
-				  messages => N("Which printing system (spooler) do you want to use?"),
-				  interactive_help_id => 'setupDefaultSpooler',
-				},
-				sub { translate($_[0]) },
-			    [ printer::main::spooler() ],
-			    $spoolers{$printer->{SPOOLER}}{long_name},
-			    ) or return;
-    $printer->{SPOOLER} = $spooler_inv{$str_spooler};
+    $printer->{SPOOLER} ||= 'cups';
+    my @spoolerlist = printer::main::spooler();
+    if ($#spoolerlist == 1) {
+	set_cups_daemon_mode($printer, $in) || return;
+    } else {
+	my $str_spooler = 
+	    $in->ask_from_listf_raw({ title => N("Select Printer Spooler"),
+				      messages => N("Which printing system (spooler) do you want to use?"),
+				      interactive_help_id => 'setupDefaultSpooler',
+				  },
+				    sub { translate($_[0]) },
+				    \@spoolerlist,
+				    $spoolers{$printer->{SPOOLER}}{long_name},
+				    ) or return;
+	$printer->{SPOOLER} = $spooler_inv{$str_spooler};
+    }
     # Install the spooler if not done yet
     if (!install_spooler($printer, $in, $upNetwork)) {
 	$printer->{SPOOLER} = $oldspooler;
 	return;
     }
-    if (($printer->{SPOOLER} ne $oldspooler) &&
-	($printer->{SPOOLER} ne 'rcups')) {
+    assure_remote_server_is_set($printer, $in)
+	if ($printer->{SPOOLER} eq "rcups");
+    if ($printer->{SPOOLER} ne $oldspooler) {
 	# Get the queues of this spooler
 	{
 	    my $_w = $in->wait_message(N("Printerdrake"),
@@ -3964,7 +4085,8 @@ sub setup_default_spooler {
 	    printer::main::read_configured_queues($printer);
 	}
 	# Copy queues from former spooler
-	copy_queues_from($printer, $in, $oldspooler);
+	copy_queues_from($printer, $in, $oldspooler)
+	    if ($oldspooler && ($oldspooler ne "rcups"));
 	# Re-read the printer database (CUPS has additional drivers, PDQ
 	# has no raw queue)
 	%printer::main::thedb = ();
@@ -4040,7 +4162,14 @@ sub main {
     # screen is clicked. If the button is clicked after an automatic
     # installation of local printers or if it is clicked for the
     # second time, these steps are not repeated.
+
+    # Set the spooler to CUPS if we arrive here during the preparation
+    # of the "Summary" screen of the installation, as we have local
+    # printers then (if we do not have local printers, this function
+    # is not called during the preparation of the "Summary" screen).
     if (!$::isInstall || !$::printerdrake_initialized) {
+	$printer->{SPOOLER} ||= 'cups'
+	    if ($::isInstall && $install_step == 0 && !$printer->{expert});
 	init($printer, $in, $upNetwork) or return;
     }
 
@@ -4094,7 +4223,7 @@ sub init {
     # installation of print it should not be asked for the spooler,
     # as this feature is only supported for CUPS.
     $printer->{SPOOLER} ||= 'cups'
-	if !$printer->{expert} || $::noX;
+	if (!$printer->{expert} || $::noX) && !$::isInstall;
     
     # If we have chosen a spooler, install it and mark it as default 
     # spooler. Spooler installation is ommitted on background queue
@@ -4102,23 +4231,28 @@ sub init {
     if ($printer->{SPOOLER}) {
 	return 0 unless ($::noX || 
 			 install_spooler($printer, $in, $upNetwork));
+	assure_remote_server_is_set($printer, $in)
+	    if ($printer->{SPOOLER} eq "rcups") && !$::noX;
+	printer::main::read_configured_queues($printer)
+	    if (($printer->{SPOOLER} ne "rcups") &&
+		(keys(%{$printer->{configured}}) == 0));
 	printer::default::set_spooler($printer);
-    }
     
-    # Get the default printer (Done before non-interactive queue setup,
-    # so that former default is not lost)
-    assure_default_printer_is_set($printer, $in);
-    my $nodefault = !$printer->{DEFAULT};
+	# Get the default printer (Done before non-interactive queue setup,
+	# so that former default is not lost)
+	assure_default_printer_is_set($printer, $in);
+	my $nodefault = !$printer->{DEFAULT};
+
+	# Non-interactive setup of newly detected printers (This is done
+	# only when not in expert mode, so we always have a spooler defined
+	# here)
+	configure_new_printers($printer, $in, $upNetwork)
+	    if $printer->{SPOOLER} ne "rcups";
     
-    # Non-interactive setup of newly detected printers (This is done
-    # only when not in expert mode, so we always have a spooler defined
-    # here)
-    configure_new_printers($printer, $in, $upNetwork)
-	if $printer->{SPOOLER} ne "rcups";
-    
-    # Make sure that default printer is registered
-    if ($nodefault && $printer->{DEFAULT}) {
-	printer::default::set_printer($printer);
+	# Make sure that default printer is registered
+	if ($nodefault && $printer->{DEFAULT}) {
+	    printer::default::set_printer($printer);
+	}
     }
 
     # Turn on printer autodetection by default

@@ -49,9 +49,8 @@ my $printer;
 
 my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
 
-my $commandline = $_;
 
-exit 0 unless printer::printerdrake::first_time_dialog($printer, $in);
+my $commandline = $_;
 
 # Data structure for GTK2 main window
 my $us = {};
@@ -88,6 +87,10 @@ my $w = $in->wait_message(N("Printerdrake"),
 # Get what was installed before
 eval { $printer = printer::main::getinfo('') };
 
+undef $w;
+
+exit 0 unless printer::printerdrake::first_time_dialog($printer, $in);
+
 # Were we in expert mode last time?
 $printer->{expert} = printer::main::get_usermode();
 
@@ -105,8 +108,6 @@ $commandline =~ /-lprng/ and
     $printer->{SPOOLER} = 'lprng' and printer::main::read_configured_queues($printer);
 $commandline =~ /-pdq/ and 
     $printer->{SPOOLER} = 'pdq'  and printer::main::read_configured_queues($printer);
-
-undef $w;
 
 if ($::isInstall) {
     # Interactive main window for installation
