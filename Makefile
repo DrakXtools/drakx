@@ -2,7 +2,7 @@ include Makefile.config
 
 DIRS = tools kernel mdk-stage1 perl-install rescue
 
-.PHONY: dirs install isolinux-graphic.bmp.parameters isolinux-graphic-simple.bmp.parameters
+.PHONY: dirs install isolinux-graphic.bmp.parameters isolinux-graphic-simple.bmp.parameters images
 
 install: dirs images rescue install_only
 
