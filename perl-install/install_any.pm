@@ -1152,6 +1152,8 @@ use run_program;
 use common;
 use pkgs;
 
+our @ISA = qw(); #- tell perl_checker this is a class
+
 sub install_steps::do_pkgs {
     my ($o) = @_;
     bless { o => $o }, 'pkgs_interactive';

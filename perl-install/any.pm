@@ -596,14 +596,6 @@ sub miscellaneousNetwork {
     setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
 }
 
-sub load_category_no_message {
-    my ($category, $at_least_one) = @_;
-    my @l;
-    @l = modules::load_category($category, undef);
-    @l = modules::load_category($category, undef, 'force') if !@l && $at_least_one;
-    @l;
-}
-
 sub load_category {
     my ($in, $category, $auto, $at_least_one) = @_;
 
