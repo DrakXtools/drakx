@@ -360,7 +360,7 @@ none of those CDs, click Cancel. If only some CDs are missing, unselect them,
 then click Ok."),
 
 installPackages => 
- __("Your new Linux-Mandrake operating system is currently
+ __("Your new Linux-Mandrake operating system is currently being
 installed. This operation should take a few minutes (it depends on size you
 choose to install and the speed of your computer).
 
