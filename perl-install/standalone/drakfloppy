@@ -38,7 +38,7 @@ if ($ENV{LANGUAGE} =~ /\b(ar|he|hi|ta)/) { $ENV{LANGUAGE} = "C" };
 
 require_root_capability();
 
-my $expert_mode = 0;
+my $expert_mode = $::expert;
 # we have put here the list in order to do $list->clear() when we have to do
 my $fixed_font = Gtk::Gdk::Font->fontset_load(N("-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"));
 my $list = new_with_titles Gtk::CList(N("Module name"), N("Size"));
@@ -107,7 +107,7 @@ $up_vbox->pack_start($ker_hbox, 0, 0, 5);
 # vbox part
 my $up_frame = new Gtk::Frame(N("General"));
 $up_frame->add($up_vbox);
-$global_vbox->pack_start($up_frame, 1, 1, 0);
+$global_vbox->pack_start($up_frame, 0, 0, 0);
 
 ### expert mode
 my $expert_main_frame = new Gtk::Frame(N("Expert Area"));
@@ -204,7 +204,7 @@ $output_hbox->set_usize(30, 75);
 $output_hbox->pack_start($output, 1, 1, 0);
 $output_hbox->pack_start($vscrollbar, 0, 0, 0);
 $output_frame->add($output_hbox);
-$global_vbox->pack_start($output_frame, 0, 0, 0);
+$global_vbox->pack_start($output_frame, 1, 10, 0);
 
 ### final buttons
 my $build_button = new Gtk::Button(N("Build the disk"));
@@ -221,8 +221,10 @@ $global_vbox->pack_start($fin_hbox, 0, 0, 0);
 $window->{window}->add($global_vbox);
 
 $window->{rwindow}->show_all();
-$expert_mod_frame->hide();
-$expert_button_frame->hide();
+if (!$expert_mode) {
+    $expert_mod_frame->hide();
+    $expert_button_frame->hide();
+}
 
 $window->main;
 my_gtk->exit(0);
