@@ -642,10 +642,7 @@ sub deselectFoundMedia {
     my $i = 0;
     my $totalsize = 0;
     foreach (@$hdlists) {
-	(my $cd) = $_->[3] =~ /\b(?:CD|DVD) ?(\d+)\b/i;
-	if (!$cd) { #- test for mini-ISO
-	    $cd = 1 if $_->[3] =~ /\bmini.?cd\b/i;
-	}
+	my $cd = install_any::getCDNumber($_->[3]);
 	if (!$cd || !@{$cdlist{$cd} || []}) {
 	    push @hdlist2, $_;
 	    $corresp[$i] = [ $i ];

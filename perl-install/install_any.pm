@@ -85,6 +85,16 @@ sub askChangeMedium($$) {
     $allow;
 }
 
+#- guess the CD number from a media description
+sub getCDNumber {
+    my ($description) = @_;
+    (my $cd) = $description =~ /\b(?:CD|DVD) ?(\d+)\b/i;
+    if (!$cd) { #- test for mini-ISO
+	$cd = 1 if $description =~ /\bmini.?cd\b/i;
+    }
+    $cd;
+}
+
 sub method_is_from_ISO_images($) {
     my ($method) = @_;
     $method eq "disk-iso" || $method eq "nfs-iso";
