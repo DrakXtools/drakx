@@ -311,7 +311,7 @@ sub add_gtf_ModeLines {
 	    chomp $val;
 	    $name =~ s/\.00//;	#- nicer that way
 	    { val => qq("${name}"$val), pre_comment => "# $banner\n" };
-	} @Xconfig::xfree::vfreqs;
+	} reverse(sort_numbers(@Xconfig::xfree::vfreqs));
     }
 
     $raw_X->set_monitors(map {
