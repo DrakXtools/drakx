@@ -11,7 +11,7 @@ use common;
     my @installStepsFields = qw(text redoable onError hidden needs); 
     #entered reachable toBeDone next done;
     my @installSteps = (
-  selectLanguage     => [ N_("Choose your language"), 1, 1, '', '' ],
+  selectLanguage     => [ N_("Language"), 1, 1, '', '' ],
   acceptLicense      => [ N_("License"), 1, -1, '', '' ],
   selectMouse        => [ N_("Configure mouse"), 1, 1, '1', '' ],
   setupSCSI          => [ N_("Hard drive detection"), 1, 0, '1', '' ],
