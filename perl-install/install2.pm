@@ -555,6 +555,7 @@ sub main {
 	}}{lc $n}; &$f if $f;
     } %cmdline;    
 
+    undef $::auto_install if $cfg;
     if ($::g_auto_install) {
 	(my $root = `/bin/pwd`) =~ s|(/[^/]*){5}$||;
 	symlinkf $root, "/tmp/rhimage" or die "unable to create link /tmp/rhimage";
@@ -621,6 +622,8 @@ sub main {
 
     #- needed very early for install_steps_gtk
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
+
+    lang::set($o->{lang}) if $o->{lang} ne 'en'; #- mainly for defcfg
 
     $o->{allowFB} = listlength(cat_("/proc/fb"));
 

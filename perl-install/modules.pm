@@ -438,7 +438,7 @@ sub load_raw {
 	    /^irq=(\d+)/ and eval { output "/proc/parport/0/irq", $1 };
 	}
     }
-    die "insmod'ing modules " . join(", ", @failed) . " failed" if @failed;
+    die "insmod'ing module " . join(", ", map { $_->[0] } @failed) . " failed" if @failed;
 }
 
 sub read_already_loaded() {

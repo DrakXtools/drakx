@@ -144,6 +144,7 @@ sub gtktext_insert($$) {
 
 sub gtkroot {
     Gtk->init;
+    Gtk->set_locale;
     Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
 }
 

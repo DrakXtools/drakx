@@ -1,5 +1,16 @@
 2000-05-02  Pixel  <pixel@mandrakesoft.com>
 
+	* Xconfigurator_consts.pm: Rage128 and 3dfx are not available any
+	more	
+
+	* install_steps_interactive.pm (setup_thiskind): make insmod'ing
+	fail a simple warning.
+
+	* Xconfigurator.pm (readMonitorsDB): adapt to new MonitorsDB
+	* share/MonitorsDB: take new one from RedHat
+
+	* standalone/drakboot: added kfloppy
+
 	* g_auto_install: add $dir/lib to LD_LIBRARY_PATH (it was silly
 	not to have it)
 

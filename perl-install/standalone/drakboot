@@ -21,10 +21,16 @@ my $in = vnew interactive('su');
 
 my %l = (
 	 _("Configure LILO/GRUB") => '',
-	 _("Create a boot floppy") => '/usr/X11R6/bin/drakfloppy',
-	 _("Format floppy") => '/usr/bin/gfloppy',
+	 _("Create a boot floppy") => ['/usr/X11R6/bin/drakfloppy'],
+	 _("Format floppy") => [ '/usr/bin/kfloppy', '/usr/bin/gfloppy' ],
 );
--x $l{$_} or delete $l{$_} foreach grep { $l{$_} } keys %l;
+while (my ($k, $v) = each %l) {
+    $v or next;
+    foreach (@$v) {
+	-x $_ and $l{$k} = $_, last;
+    }
+    -x $l{$k} or delete $l{$_};
+}
 
 if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {
     my $cmd = $l{$in->ask_from_list(_("Choice"), _("What do you want to do?"), [ keys %l ])};

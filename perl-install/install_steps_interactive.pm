@@ -1148,11 +1148,8 @@ sub setup_thiskind {
 
     if ($allow_probe) {
 	eval { @l = $o->load_thiskind($type) };
-	if ($@) {
-	    $o->errorInStep($@);
-	} else {
-	    return if $auto && (@l || !$at_least_one);
-	}
+	$o->ask_warn('', $@) if $@;
+	return if $auto && (@l || !$at_least_one);
     }
     while (1) {
 	my $msg = @l ?

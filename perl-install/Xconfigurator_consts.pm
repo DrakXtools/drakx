@@ -23,8 +23,8 @@ use common qw(:common);
     'FBDev'     => "fbdev",
 ) : (
     'SVGA'      => "svga",
-    'Rage128'   => "svga",
-    '3dfx'      => "svga",
+#-    'Rage128'   => "svga",
+#-    '3dfx'      => "svga",
     'S3'        => "accel",
     'Mach32'    => "accel",
     'Mach8'     => "accel",

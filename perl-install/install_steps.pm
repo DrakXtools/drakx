@@ -399,8 +399,10 @@ Consoles 1,3,4,7 may also contain interesting information";
 	    /(.*)\.ttf/i and symlink "$D/$_", "$o->{prefix}$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
 	}
     }
-    run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir") if $hasttf;
-
+    if ($hasttf) {
+	run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir");
+	run_program::rooted($o->{prefix}, "chkfontpath", "--add", $dest);
+    }
     foreach (install_any::list_skels()) {
 	my $found;
 	substInFile {

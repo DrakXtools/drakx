@@ -101,7 +101,7 @@ sub readMonitorsDB {
 	/^#/ and next;
 	/^$/ and next;
 
-	my @fields = qw(type bandwidth hsyncrange vsyncrange);
+	my @fields = qw(vendor type eisa hsyncrange vsyncrange);
 	my @l = split /\s*;\s*/;
 	@l == @fields or log::l("bad line $lineno ($_)"), next;
 
@@ -110,7 +110,7 @@ sub readMonitorsDB {
 	    my $i; for ($i = 0; $monitors{"$l{type} ($i)"}; $i++) {}
 	    $l{type} = "$l{type} ($i)";
 	}
-	$monitors{$l{type}} = \%l;
+	$monitors{"$l{vendor}|$l{type}"} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {
 	$monitors{_("Generic") . "|" . translate($k)} =
@@ -298,6 +298,7 @@ sub testFinalConfig($;$$) {
 
     #- needed for bad cards not restoring cleanly framebuffer
     my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
+    $bad_card ||= $o->{card}{identifier} eq "ATI|3D Rage P/M Mobility AGP 2x";
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $mesg = _("Do you want to test the configuration?");
