@@ -249,6 +249,6 @@ our %adsl_data = (
                   },
                  );
 
-$adsl_data{N("France") . "|Free non dégroupé 1024/256"} = $adsl_data{N("France") . "|Free non dégroupé 512/128"};
+$adsl_data{N("France") . "|Free non dégroupé 1024/128"} = $adsl_data{N("France") . "|Free non dégroupé 512/128"};
 
 1;
