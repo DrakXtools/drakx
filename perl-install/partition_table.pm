@@ -735,10 +735,12 @@ sub add {
 	eval { add_primary($hd, $part) };
 	goto success if !$@;
     }
-    eval { add_extended($hd, $part, $primaryOrExtended) } if $hd->hasExtended; #- try adding extended
-    if ($@ || !$hd->hasExtended) {
-	eval { add_primary($hd, $part) };
-	die $@ if $@; #- send the add extended error which should be better
+    if ($hd->hasExtended) {
+	eval { add_extended($hd, $part, $primaryOrExtended) };
+	goto success if !$@;
+    }
+    {
+	add_primary($hd, $part);
     }
   success:
     assign_device_numbers($hd);
