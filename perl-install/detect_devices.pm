@@ -81,6 +81,13 @@ sub hasIDE() { -e "/proc/ide" }
 sub hasDAC960() { 1 }
 sub hasCompaqSmartArray() { -r "/proc/array/ida0" }
 
+sub isFloppyOrHD {
+    my ($dev) = @_;
+    require partition_table_raw;
+    my $geom = partition_table_raw::get_geometry(devices::make($dev));
+    $geom->{totalsectors} < 10 << 11 ? 'floppy' : 'hd';
+}
+
 sub getSCSI() {
     my @drives;
     my ($driveNum, $cdromNum, $tapeNum) = qw(0 0 0);
@@ -96,14 +103,14 @@ sub getSCSI() {
 	$_ = <F>; my ($type) = /^\s*Type:\s*(.*)/ or &$err();
 	my $device;
 	if ($type =~ /Direct-Access/) { #- what about LS-120 floppy drive, assuming there are Direct-Access...
-	    $type = 'hd';
 	    $device = "sd" . chr($driveNum++ + ord('a'));
+	    $type = isFloppyOrHD($device);
 	} elsif ($type =~ /Sequential-Access/) {
-	    $type = 'tape';
 	    $device = "st" . $tapeNum++;
+	    $type = 'tape';
 	} elsif ($type =~ /CD-ROM/) {
-	    $type = 'cdrom';
 	    $device = "scd" . $cdromNum++;
+	    $type = 'cdrom';
 	}
 	$device and push @drives, { device => $device, type => $type, info => "$vendor $model", id => $id, bus => 0 };
     }

@@ -1,3 +1,7 @@
+2000-09-20  Pixel  <pixel@mandrakesoft.com>
+
+	* pci_probing/pcitable: replace es1371 by snd-card-ens1371
+
 2000-09-20  dam's  <damien@mandrakesoft.com>
 
 	* Xconfigurator.pm (autologin): for urpmi, added `--best-output' and suspend/resume 
@@ -13,6 +17,9 @@
 	* standalone/draknet: used new package install function.
 
 2000-09-20  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm (isFloppyOrHD): detects wether a device is a
+	floppy or not based on its size (for scsi floppy)
 
 	* Xconfigurator.pm (testFinalConfig): check if "server" OR
 	"driver" field is set (otherwise XF4 only card won't pass)
