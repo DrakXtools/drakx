@@ -65,7 +65,7 @@ our %adsl_data = (
                    DOMAINNAME2 => 'free.fr',
                   },
 
-                  N("France") . "|n9uf tel9com 512 & 1024" =>
+                  N("France") . "|n9uf tel9com 512 & dégroupé 1024" =>
                   {
                    vpi => 8,
                    vci => 23,
