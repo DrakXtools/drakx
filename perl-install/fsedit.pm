@@ -773,6 +773,7 @@ sub change_pt_type {
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
     fs::rationalize_options($part);
+    1;
 }
 
 sub rescuept($) {
