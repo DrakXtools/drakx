@@ -14,7 +14,7 @@ use Gtk2::TrayIcon;
 use ugtk2 qw(:create :helpers :wrappers);
   
 my ($eventbox, $img);
-my ($menu, $timeout);
+my ($current_state, $menu, $timeout);
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
@@ -131,8 +131,11 @@ sub cronNetwork() {
 }
 sub go2State {
     my ($state_type, $interface) = @_;
-    $menu and $menu->destroy;
-    $menu = setState($state_type, $interface);
+    if ($current_state ne $state_type) {
+        $current_state = $state_type;
+        $menu and $menu->destroy;
+        $menu = setState($state_type, $interface);
+    }
 }
 sub setState {
     my ($state_type, $interface) = @_;
