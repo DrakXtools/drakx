@@ -117,7 +117,6 @@ sub real_main {
 
       $netc->{autodetect} = {};
 
-      my $first_modem = sub { first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}}) };
 
       my $handle_multiple_cnx = sub {
           $need_restart_network = 1 if $netcnx->{type} =~ /lan|cable/;
@@ -309,7 +308,7 @@ sub real_main {
                         } else {
                             detect($netc->{autodetect}, 'modem');
                             $netc->{isdntype} = 'isdn_external';
-                            $netcnx->{isdn_external}{device} = $first_modem->();
+                            $netcnx->{isdn_external}{device} = modem::first_modem($netc);
                             $netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
@@ -450,35 +449,8 @@ Take a look at http://www.linmodems.org"),
                                          q(ifdown ppp0
 killall pppd
 ), $netcnx->{type});
-                        return if $modem_conf_read;
+                        network::modem::ppp_read_conf($netcnx, $netc) if !$modem_conf_read;
                         $modem_conf_read = 1;
-                        $netcnx->{$netcnx->{type}} ||= {};
-                        $modem ||= $netcnx->{$netcnx->{type}};
-                        $modem->{device} ||= $first_modem->()->{device};
-                        my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
-                        $l{Authentication} = 4 if !exists $l{Authentication};
-                        $modem->{$_} ||= $l{$_} foreach qw(Authentication Gateway IPAddr SubnetMask);
-                        $modem->{connection} ||= $l{Name};
-                        $modem->{domain} ||= $l{Domain};
-                        ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
-
-                        foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
-                            /.*ATDT(\d*)/ and $modem->{phone} ||= $1;
-                        }
-                        foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
-                            /NAME=([\'\"]?)(.*)\1/ and $modem->{login} ||= $2;
-                        }
-                        $modem->{login} ||= $l{Username};
-                        my $secret = network::tools::read_secret_backend();
-                        foreach (@$secret) {
-                            $modem->{passwd} ||= $_->{passwd} if $_->{login} eq $modem->{login};
-                        }
-                        #my $secret = network::tools::read_secret_backend();
-                        #my @cnx_list = map { $_->{server} } @$secret;
-                        $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
-                        $modem->{auto_gateway} ||= $modem->{Gateway} ne '0.0.0.0' ? N("Manual") : N("Automatic");
-                        $modem->{auto_ip} ||=  $modem->{IPAdddr} ne '0.0.0.0' ? N("Manual") : N("Automatic");
-                        $modem->{auto_dns} ||= defined $modem->{dns1} || defined $modem->{dns2} ? N("Manual") : N("Automatic");
                     },
                     name => N("Dialup: account options"), 
                     data => sub {

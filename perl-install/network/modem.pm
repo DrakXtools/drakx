@@ -8,6 +8,41 @@ use detect_devices;
 use mouse;
 use network::tools;
 
+sub first_modem {
+    my ($netc) = @_;
+    first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}});
+}
+
+
+sub ppp_read_conf {
+    my ($netcnx, $netc) = @_;
+    my $modem = $netcnx->{$netcnx->{type}} ||= {};
+    $modem->{device} ||= first_modem($netc)->{device};
+    my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
+    $l{Authentication} = 4 if !exists $l{Authentication};
+    $modem->{$_} ||= $l{$_} foreach qw(Authentication Gateway IPAddr SubnetMask);
+    $modem->{connection} ||= $l{Name};
+    $modem->{domain} ||= $l{Domain};
+    ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
+    
+    foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
+        /.*ATDT(\d*)/ and $modem->{phone} ||= $1;
+    }
+    foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
+        /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
+    }
+    $modem->{login} ||= $l{Username};
+    my $secret = network::tools::read_secret_backend();
+    foreach (@$secret) {
+        $modem->{passwd} ||= $_->{passwd} if $_->{login} eq $modem->{login};
+    }
+    #my $secret = network::tools::read_secret_backend();
+    #my @cnx_list = map { $_->{server} } @$secret;
+    $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
+    $modem->{auto_gateway} ||= $modem->{Gateway} ne '0.0.0.0' ? N("Manual") : N("Automatic");
+    $modem->{auto_ip} ||=  $modem->{IPAdddr} ne '0.0.0.0' ? N("Manual") : N("Automatic");
+    $modem->{auto_dns} ||= defined $modem->{dns1} || defined $modem->{dns2} ? N("Manual") : N("Automatic");
+}
 
 #-----modem conf
 sub ppp_configure {
