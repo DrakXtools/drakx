@@ -1113,7 +1113,7 @@ sub summary {
 	    N("%s on %s", $o->{bootloader}{method}, $o->{bootloader}{boot});
 	},
 	clicked => sub { 
-	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security});
+	    any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
 	    any::installBootloader($o, $o->{bootloader}, $o->{all_hds});
 	},
     };
