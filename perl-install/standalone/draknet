@@ -393,7 +393,7 @@ sub configure_lan {
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
 	my $hbox_local = new Gtk::HBox(0,0);
-	my $pix = my_gtk::gtkpng ("eth_card_mini");
+	my $pix = my_gtk::gtkxpm ("/usr/share/libDrakX/pixmaps/eth_card_mini.xpm");
 	$hbox_local->pack_start($pix,0,0,0);
 	$hbox_local->pack_start(new Gtk::Label("eth$_"),0,0,0);
 	$hbox_local->show_all;
