@@ -290,6 +290,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog 
 * Thu Sep 12 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-45mdk
 - try to fix drakgw & drakfirewall thx to pixel and florin
+- fix drakfloppy and logdrake (tv)
 
 * Wed Sep 11 2002 Damien Chaumette <dchaumette@mandrakesoft.com> 1.1.9-44mdk
 - drakconnect :
