@@ -12,7 +12,7 @@ clean:
 	test ! -e Makefile_c || $(MAKE) -f Makefile_c clean
 	rm -f *~ *.o stuff.xs pcmcia_probe.c
 
-stuff.xs: %: %.pm
+stuff.xs: %: %.pl
 	rm -f $@
 	C_RPM=$(C_RPM) C_DRAKX=$(C_DRAKX) perl $< > $@
 	chmod a-w $@
