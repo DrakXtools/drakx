@@ -616,7 +616,7 @@ sub mount {
 
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
-    if (member($fs, 'smb', 'smbfs', 'nfs') && $::isStandalone) {
+    if (member($fs, 'smb', 'smbfs', 'nfs', 'ntfs') && $::isStandalone) {
 	system('mount', '-t', $fs, $dev, $where, '-o', $options) == 0 or die _("mounting partition %s in directory %s failed", $dev, $where);
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
