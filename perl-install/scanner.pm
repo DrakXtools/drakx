@@ -174,7 +174,7 @@ sub updateScannerDBfromSane {
 		  model => sub {
 		      unless ($name) { $name = $val; next }
 		      $name = (member($mfg, keys %$sane2DB))
-			? (ref $sane2DB->{ $mfg}) ? $sane2DB->{ $mfg }($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
+			? (ref $sane2DB->{ $mfg }) ? $sane2DB->{ $mfg }($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
 		      if (member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
@@ -208,6 +208,9 @@ sub updateScannerDBfromSane {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.9  2002/08/01 16:31:14  tvignaud
+# perl_checker fixes
+#
 # Revision 1.8  2002/08/01 16:20:15  tvignaud
 # perl_checker fixes
 #
