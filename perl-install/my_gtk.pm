@@ -1081,6 +1081,212 @@ sub _ask_file {
     $f->hide_fileop_buttons;
 }
 
+sub ask_browse_tree_info {
+    my ($common) = @_;
+
+    my $w = my_gtk->new($common->{title});
+    my $tree = Gtk::CTree->new(3, 0);
+    $tree->set_selection_mode('browse');
+    $tree->set_column_auto_resize($_, 1) foreach 1..2;
+    $tree->set_column_width(0, 200);
+
+    gtkadd($w->{window}, 
+	   gtkpack_(new Gtk::VBox(0,5),
+		    0, $common->{message},
+		    1, gtkpack(new Gtk::HBox(0,0),
+			       createScrolledWindow($tree),
+			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), $::windowwidth - 490, 0),
+				      createScrolledWindow(my $info = new Gtk::Text),
+				     )),
+		    0, my $l = new Gtk::HBox(0,15),
+		    0, gtkpack(new Gtk::HBox(0,10),
+			       my $go = gtksignal_connect(new Gtk::Button($common->{ok}), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
+			       $common->{cancel} ? (gtksignal_connect(new Gtk::Button($common->{cancel}), "clicked" => sub { $w->{retval} = 0; Gtk->main_quit })) : (),
+			      )
+    ));
+    gtkpack__($l, my $toolbar = new Gtk::Toolbar('horizontal', 'icons'));
+
+    if ($common->{auto_deps}) {
+	gtkpack__($l, gtksignal_connect(gtkset_active(new Gtk::CheckButton($common->{auto_deps}), $common->{state}{auto_deps}),
+					clicked => sub { invbool \$common->{state}{auto_deps} }));
+    }
+    $l->pack_end(my $status = new Gtk::Label, 0, 1, 20);
+
+    $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
+    $go->grab_focus;
+    $w->{rwindow}->show_all;
+
+    my @toolbar = (ftout  =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
+		   ftin   =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
+		   reload =>  [ _("Toggle between flat and group sorted"), sub { invbool(\$common->{state}{flat}); $common->{rebuild_tree}->() } ]);
+    foreach my $ic (@{$common->{icons} || []}) {
+	push @toolbar, ( $ic->{icon} => [ $ic->{help}, sub {
+					     if ($ic->{code}) {
+						 my $w = $ic->{wait_message} && $common->{wait_message}->('', $ic->{wait_message});
+						 $ic->{code}();
+						 $common->{rebuild_tree}->();
+					     }
+					 } ]);
+    }
+    my %toolbar = @toolbar;
+    $toolbar->set_button_relief("none");
+    foreach (grep_index { $::i % 2 == 0 } @toolbar) {
+	gtksignal_connect($toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkpng("$ENV{SHARE_PATH}/$_.png")),
+			  clicked => $toolbar{$_}[1]);
+    }
+    $toolbar->set_style("icons");
+
+    my $widgets = { w => $w, tree => $tree, info => $info, status => $status};
+    ask_browse_tree_info_given_widgets($common, $widgets);
+}
+
+sub ask_browse_tree_info_given_widgets {
+    my ($common, $w) = @_;
+    my ($curr, $parent, $prev_label, $idle);
+    my (%wtree, %ptree, %pix);
+    my $update_size = sub {
+	my $new_label = $common->{get_status}();
+	$prev_label ne $new_label and $w->{status}->set($prev_label = $new_label);
+    };
+    
+    my $set_node_state_flat = sub {
+	my ($node, $state) = @_;
+	unless ($pix{$state}) {
+	    foreach ("$ENV{SHARE_PATH}/$state.png", "$ENV{SHARE_PATH}/rpm-$state.png") {
+		if (-e $_) {
+		    $pix{$state} = [ gtkcreate_png($_) ];
+		    last;
+		}
+	    }
+	    $pix{$state} or die "unable to find a pixmap for state $state";
+	}
+	$w->{tree}->node_set_pixmap($node, 1, $pix{$state}[0], $pix{$state}[1]);
+    };
+    my $set_node_state_tree; $set_node_state_tree = sub {
+	my ($node, $state) = @_;
+	unless ($pix{$state}) {
+	    foreach ("$ENV{SHARE_PATH}/$state.png", "$ENV{SHARE_PATH}/rpm-$state.png") {
+		if (-e $_) {
+		    $pix{$state} = [ gtkcreate_png($_) ];
+		    last;
+		}
+	    }
+	    $pix{$state} or die "unable to find a pixmap for state $state";
+	}
+	if ($node->{state} ne $state) {
+	    if ($node->row->is_leaf) {
+		my $parent = $node->row->parent;
+		my $stats = $parent->{state_stats} ||= {}; --$stats->{$node->{state}}; ++$stats->{$state};
+		my @list = grep { $stats->{$_} > 0 } keys %$stats;
+		my $new_state = @list == 1 ? $list[0] : 'semiselected';
+		$parent->{state} ne $new_state and $set_node_state_tree->($parent, $new_state);
+	    }
+	    $w->{tree}->node_set_pixmap($node, 1, $pix{$state}[0], $pix{$state}[1]);
+	    $node->{state} = $state; #- hack to to get this features efficiently.
+	}
+    };
+    my $set_node_state = $common->{state}{flat} ? $set_node_state_flat : $set_node_state_tree;
+
+    my $set_leaf_state = sub {
+	my ($leaf, $state) = @_;
+	$set_node_state->($_, $state) foreach @{$ptree{$leaf}};
+    };
+    my $add_parent; $add_parent = sub {
+	my ($root, $state) = @_;
+	$root or return undef;
+	if (my $w = $wtree{$root}) { return $w }
+	my $s; foreach (split '\|', $root) {
+	    my $s2 = $s ? "$s|$_" : $_;
+	    $wtree{$s2} ||= do {
+		my $n = $w->{tree}->insert_node($s ? $add_parent->($s, $state) : undef, undef, [$_, '', ''], 5, (undef) x 4, 0, 0);
+		$n;
+	    };
+	    $s = $s2;
+	}
+	$set_node_state->($wtree{$s}, $state); #- use this state by default as tree is building.
+	$wtree{$s};
+    };
+    my $add_node = sub {
+	my ($leaf, $root) = @_;
+	my $state = $common->{node_state}($leaf) or return;
+	my $node = $w->{tree}->insert_node($add_parent->($root, $state), undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
+	$set_node_state->($node, $state);
+	push @{$ptree{$leaf}}, $node;
+    };
+    $common->{rebuild_tree} = sub {
+	foreach (values %ptree) {
+	    delete $_->{state} foreach @$_;
+	}
+	foreach (values %wtree) {
+	    delete $_->{state};
+	    delete $_->{state_stats};
+	}
+	%ptree = %wtree = ();
+
+	$w->{tree}->freeze;
+	while (1) { $w->{tree}->remove_node($w->{tree}->node_nth(0) || last) }
+
+	$set_node_state = $common->{state}{flat} ? $set_node_state_flat : $set_node_state_tree;
+	$common->{build_tree}($add_node, $common->{state}{flat}, $common->{tree_mode});
+
+	$w->{tree}->thaw;
+	&$update_size;
+    };
+    $common->{rebuild_tree}->();
+    
+    my $display_info = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
+    my $children = sub { map { ($w->{tree}->node_get_pixtext($_, 0))[0] } gtkctree_children($_[0]) };
+    my $toggle = sub {
+	if (ref $curr && ! $_[0]) {
+	    $w->{tree}->toggle_expansion($curr);
+	} else {
+	    if (ref $curr) {
+		my @l = $common->{grep_allowed_to_toggle}($children->($curr)) or return;
+		my @unsel = $common->{grep_unselected}(@l);
+		my @p = @unsel ?
+		  @unsel : # not all is selected, select all
+		    @l;
+		$common->{toggle_nodes}($set_leaf_state, @p);
+		&$update_size;
+		$parent = $curr;
+	    } else {
+		$common->{check_interactive_to_toggle}($curr) and $common->{toggle_nodes}($set_leaf_state, $curr);
+		&$update_size;
+	    }
+	}
+    };
+
+    $w->{tree}->signal_connect(key_press_event => sub {
+        my ($w, $e) = @_;
+	my $c = chr($e->{keyval} & 0xff);
+	$toggle->(0) if $e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
+	1;
+    });
+    $w->{tree}->signal_connect(tree_select_row => sub {
+	Gtk->timeout_remove($idle) if $idle;
+
+	if ($_[1]->row->is_leaf) {
+	    ($curr) = $w->{tree}->node_get_pixtext($_[1], 0);
+	    $parent = $_[1]->row->parent;
+	    $idle = Gtk->timeout_add(100, $display_info);
+	} else {
+	    $curr = $_[1];
+	}
+	$toggle->(1) if $_[2] == 1;
+    });
+    &$update_size;
+    my $b = before_leaving { #- ensure cleaning here.
+	foreach (values %ptree) {
+	    delete $_->{state} foreach @$_;
+	}
+	foreach (values %wtree) {
+	    delete $_->{state};
+	    delete $_->{state_stats};
+	}
+    };
+    $w->{w}->main;
+}
+
 1;
 
 #-###############################################################################
