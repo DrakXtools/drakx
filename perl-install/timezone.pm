@@ -7,9 +7,8 @@ use common;
 use log;
 
 
-sub getTimeZones {
-    my ($prefix) = @_;
-    $::testing and $prefix = '';
+sub getTimeZones() {
+    my $prefix = $::testing ? '' : $::prefix;
     open(my $F, "cd $prefix/usr/share/zoneinfo && find [A-Z]* -type f |");
     my @l = difference2([ chomp_(<$F>) ], [ 'ROC', 'PRC' ]);
     close $F or die "cannot list the available zoneinfos";
@@ -23,9 +22,9 @@ sub read() {
 
 sub ntp_server {
     my $setting = @_ > 1;
-    my ($prefix, $server) = @_;
+    my ($server) = @_;
 
-    my $f = "$prefix/etc/ntp.conf";
+    my $f = "$::prefix/etc/ntp.conf";
     -e $f or return;
 
     if ($setting) {
@@ -36,7 +35,7 @@ sub ntp_server {
 		$added = 1;
 	    }
 	} $f;
-	output_p("$prefix/etc/ntp/step-tickers", "$server\n");
+	output_p("$::prefix/etc/ntp/step-tickers", "$server\n");
     } else {
 	$server = find { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($f);
     }
@@ -44,13 +43,13 @@ sub ntp_server {
 }
 
 sub write {
-    my ($prefix, $t) = @_;
+    my ($t) = @_;
 
-    ntp_server($prefix, $t->{ntp});
+    ntp_server($t->{ntp});
 
-    eval { cp_af("$prefix/usr/share/zoneinfo/$t->{timezone}", "$prefix/etc/localtime") };
+    eval { cp_af("$::prefix/usr/share/zoneinfo/$t->{timezone}", "$::prefix/etc/localtime") };
     $@ and log::l("installing /etc/localtime failed");
-    setVarsInSh("$prefix/etc/sysconfig/clock", {
+    setVarsInSh("$::prefix/etc/sysconfig/clock", {
 	ZONE => $t->{timezone},
 	UTC  => bool2text($t->{UTC}),
 	ARC  => "false",

@@ -278,7 +278,7 @@ sub preConfigureTimezone {
     $o->{timezone}{timezone} ||= timezone::bestTimezone($o->{locale}{country});
 
     my $utc = every { !isFat_or_NTFS($_) } @{$o->{fstab}};
-    my $ntp = timezone::ntp_server($o->{prefix});
+    my $ntp = timezone::ntp_server();
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
 

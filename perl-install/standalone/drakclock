@@ -39,10 +39,10 @@ $button_time->signal_connect(clicked => sub {
 				   $in->{timezone} = {};
 				   add2hash($in->{timezone}, timezone::read());
 				   my $timezone = $in->{timezone}{timezone};
-				   $in->{timezone}{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', [ timezone::getTimeZones('') ], $timezone);
+				   $in->{timezone}{timezone} = $in->ask_from_treelist(N("Timezone - DrakClock"), N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $timezone);
 				   if (defined($in->{timezone}{timezone})) {
 					   $in->{timezone}{UTC} = $in->ask_yesorno(N("GMT - DrakClock"), N("Is your hardware clock set to GMT?"), $in->{timezone}{UTC});
-					   timezone::write('', $in->{timezone});
+					   timezone::write($in->{timezone});
 				   } else {
 					   $in->{timezone}{timezone} = $timezone;
                         }
@@ -111,7 +111,7 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
 									   if ($check_ntp->get_active) {
 									       my $choosed_serv = $combo_ntpserver->entry->get_text;
 									       $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
-									       timezone::ntp_server('', $1);
+									       timezone::ntp_server($1);
 									       system("/sbin/chkconfig --level 35 ntpd on");
 									       system("service ntpd restart");
 									   } else {
@@ -135,7 +135,7 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
 my $servers = get_server();
 $combo_ntpserver->set_popdown_strings(@$servers);
 if (-e $ntpfile && -e $ntpdlock) {
-    $ntp = timezone::ntp_server('');
+    $ntp = timezone::ntp_server();
     $ntp and ntp_widget_state(1);
     foreach my $s (@$servers) {
 	$s =~ /\Q$ntp/ and $fullntp = $s;

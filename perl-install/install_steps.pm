@@ -664,7 +664,7 @@ sub configureTimezone {
     $o->pkg_install('ntp') if $o->{timezone}{ntp};
 
     require timezone;
-    timezone::write($o->{prefix}, $o->{timezone});
+    timezone::write($o->{timezone});
 }
 
 #------------------------------------------------------------------------------

@@ -821,7 +821,7 @@ sub configureTimezone {
     my ($o, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} = $o->ask_from_treelist('', N("Which is your timezone?"), '/', [ timezone::getTimeZones($o->{prefix}) ], $o->{timezone}{timezone}) || return;
+    $o->{timezone}{timezone} = $o->ask_from_treelist('', N("Which is your timezone?"), '/', [ timezone::getTimeZones() ], $o->{timezone}{timezone}) || return;
 
     my $ntp = to_bool($o->{timezone}{ntp});
     $o->ask_from_({ interactive_help_id => 'configureTimezoneGMT' }, [
