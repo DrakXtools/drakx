@@ -299,6 +299,7 @@ static enum return_type try_with_device(char *dev_name)
 			}
 
  			umount(IMAGE_LOCATION);
+			del_loop(loopdev);
 		}
 
 		stage2_isos[stage2_iso_number] = NULL;
