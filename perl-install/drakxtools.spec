@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.33mdk
+Release: 0.34mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar  1 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.34mdk
+- diskdrake: allow to choose encryption algorithm (blino, #13472)
+- drakhelp, drakbug: use www-browser (daouda)
+- printerdrake: fix "add printer" wizard chen embedded in the MCC (#13929)
+- XFdrake: further monitor fixes (pixel)
+
 * Tue Mar  1 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.33mdk
 - drakconnect: enhance "wrong network mask format" message (blino, #10712)
 - drakTermServ: sort list of nbis (stew, #13998)
