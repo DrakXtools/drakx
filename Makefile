@@ -89,7 +89,7 @@ upload:
 	upload Mandrake/mdkinst '' ;\
 	upload Mandrake/base compss* ;\
 	upload Mandrake/base rpmsrate ;\
-	upload Mandrake/base *_stage2.gz ;\
+	upload Mandrake/base *_stage2.bz2 ;\
 	upload boot '' ;\
 	upload misc genbasefiles ;\
 	upload misc genhdlist_cz2 ;\
@@ -107,7 +107,7 @@ upload_sparc:
 	cp -a $(ROOTDEST)/misc/* $(UPLOAD_SPARC_DEST)/misc; true
 	rm -rf $(UPLOAD_SPARC_DEST)/Mandrake/mdkinst
 	cp -a $(ROOTDEST)/Mandrake/mdkinst $(UPLOAD_SPARC_DEST)/Mandrake/mdkinst; true
-	( cd $(ROOTDEST)/Mandrake/base; cp mdkinst_stage2.gz rescue_stage2.gz compss compssList compssUsers compssUsers.desktop $(UPLOAD_SPARC_DEST)/Mandrake/base ); true
+	( cd $(ROOTDEST)/Mandrake/base; cp mdkinst_stage2.bz2 rescue_stage2.bz2 compss compssList compssUsers compssUsers.desktop $(UPLOAD_SPARC_DEST)/Mandrake/base ); true
 	rm -f /tmp/mdkinst_done
 
 # mkisofs -r -J -b images/cdrom.img -c images/boot.cat /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
