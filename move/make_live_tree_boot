@@ -127,7 +127,15 @@ if (!@ARGV) {
     create_light_tree('boot', \@boot_list);    
     create_light_tree('totem', \@totem_list);    
     foreach my $lang (@ALLOWED_LANGS) {
-	my @list = map { my $s = $_; $s =~ s/__LANG__/$lang/; if_(-e $s, $s) } @always_i18n_list;
+	my @list = map { 
+	    my $s = $_;
+	    $s =~ s/__LANG__/$lang/;
+	    if (readlink($s) =~ m!^[^/]!) {
+		system('cp', $s, "$s-");
+		rename "$s-", $s;
+	    }
+	    if_(-e $s, $s);
+	} @always_i18n_list;
 	create_light_tree("always_i18n_$lang", \@list);
     }
     create_totem_links('totem', \@totem_list_orig);
