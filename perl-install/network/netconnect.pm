@@ -857,7 +857,8 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{WIRELESS_ESSID} = "any";
                     },
                     name => N("Please enter the wireless parameters for this card:"),
-                    data => [
+                    data => sub {
+                            [
                              { label => N("Operating Mode"), val => \$ethntf->{WIRELESS_MODE}, 
                                list => [ keys %wireless_mode ] },
                              { label => N("Network name (ESSID)"), val => \$ethntf->{WIRELESS_ESSID} },
@@ -903,6 +904,7 @@ those interface specific commands and their effect.
 See iwpriv(8) man page for further information."),
                              }
                             ],
+                    },
                     complete => sub {
                         if ($ethntf->{WIRELESS_FREQ} && $ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
                             $in->ask_warn(N("Error"), N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
