@@ -536,6 +536,9 @@ sub read_rpmsrate {
                 } elsif (($inv, $p) = /^(!)?DRIVER"(.*)"/) {
 		    ($inv xor detect_devices::matching_driver($p)) and $ok = 1;
 		    0;
+                } elsif (($inv, $p) = /^(!)?TYPE"(.*)"/) {
+		    ($inv xor detect_devices::matching_type($p)) and $ok = 1;
+		    0;
 		} else {
 		    1;
 		}
