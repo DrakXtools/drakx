@@ -61,7 +61,7 @@ MDK::Common::Globals::init(
 	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg"
 	     );
 
-($::isEmbedded || /--gui/) && ref($in) =~ /gtk/ or goto dd;
+($::isEmbedded || /--skip-wizard/) && ref($in) =~ /gtk/ or goto dd;
 
 require ugtk2;
 ugtk2->import(qw(:create :dialogs :helpers :wrappers));
