@@ -12,53 +12,52 @@ use Storable qw(store retrieve);
 my $hw_sysconfdir = "/etc/sysconfig/harddrake2";
 my $last_boot_config = $hw_sysconfdir."/previous_hw";
 
-# first run ? if not read old hw config
-my %previous_config = (-f $last_boot_config && -s $last_boot_config) ? retrieve($last_boot_config) : {};
+my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
+$last_boot_config .= '_X11' if $invert_do_it;
 
+# first run ? if not read old hw config
+my $previous_config = (-f $last_boot_config && -s $last_boot_config) ? retrieve($last_boot_config) : {};
 my (%config, $in);
 
 # For each hw, class, detect device, compare and offer to reconfigure if needed
 foreach (@harddrake::data::tree) {
     my ($Ident, $item, undef, $configurator, $detector, $do_it) = @$_;
-    next unless $do_it;
+    next unless $do_it ^ $invert_do_it;
     # No detector ? (should never happen but who know ?)
     ref($detector) eq 'CODE' or next;
 
     my %ID = map {
 	   my $i = $_;
-	   my $name = if_(defined $i->{device}, [$i->{device}, join ':', map { $i->{$_} } qw(vendor id subvendor subid)]);
-	   $name => $i;
+	   my $id = defined $i->{device} ? $i->{device} : join(':', map { $i->{$_} } qw(vendor id subvendor subid));
+	   $id => $i;
     } &$detector;
     $config{$Ident} = \%ID;
+    next if is_empty_hash_ref $previous_config; # don't fsck on first run
 
-    next if is_empty_hash_ref %previous_config;
-    my $oldconfig = $previous_config{$Ident};
+    my $oldconfig = $previous_config->{$Ident};
 
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
     $msg .= _("Some devices in the \"%s\" hardware class were removed:\n", $item) if @was_removed;
-    $msg .= "- $_ was removed\n" foreach @was_removed;
-    
+    $msg .= "- ". harddrake::data::custom_id($oldconfig->{$_}, $item) ." was removed\n" foreach @was_removed;
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
     $msg .= _("\nSome devices in the %s class were added:\n", $item) if @added;
-    $msg .= "- $_ was added\n" foreach @added;
+    $msg .= "- ". harddrake::data::custom_id($ID{$_}, $item) ." was added\n" foreach (@added);
     @added || @was_removed or next;
-   
     next unless (-x $configurator);
 
     my $res;
-    $SIG{ALRM} = sub { die "TIMED OUT\n" };
+    $SIG{ALRM} = sub { undef $in; undef $res; next }; #die "TIMED OUT\n" };
     undef $@;
     eval {
-	alarm (5);
+	alarm (5) unless $invert_do_it;
 	$in = 'interactive'->vnew('su') unless defined $in;
 	$res = $in->ask_okcancel("Hardware changes in $Ident class (5 seconds to answer)",
 				 $msg . "\nDo you want to run the appropriate config tool ?", 1)
 	    or $in->wait_message(_('Please wait'), _('Hardware probing in progress'));
-	alarm (0);
+	alarm (0) unless $invert_do_it;
     };
-
-    next unless ($@ && $res);     # timed out || canceled
+    next if ($@ || !$res);     # timed out || canceled
     if (my $pid = fork) {
 		require POSIX;
 		POSIX::wait();

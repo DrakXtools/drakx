@@ -82,4 +82,9 @@ our @tree =
 	);
 
 
+sub custom_id {
+    my ($device, $str) = @_;
+    defined($device->{device}) ? $device->{device} : (defined($device->{description}) ? $device->{description} : $str);
+}
+
 1;

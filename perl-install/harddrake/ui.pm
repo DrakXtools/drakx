@@ -209,7 +209,7 @@ sub new {
 		  }
 		  foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} }
 		  $_->{device} = '/dev/'.$_->{device} if exists $_->{device};
-		  my $custom_id = defined($_->{device}) ? $_->{device} : (defined($_->{description}) ? $_->{description} : $title);
+		  my $custom_id = harddrake::data::custom_id($_, $title);
 		  my $hw_item = $tree->insert_node($hw_class_tree, $prev_item, [$custom_id ], 5, (undef) x 4, 1, 0);
 		  $tree->set_row_data($hw_item, [data => $_, configurator => $configurator ]);
 		  $tree->{data}{$custom_id} = $_;

@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 40mdk
+Release: 41mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -155,7 +155,7 @@ hardware classes.
 rm -rf $RPM_BUILD_ROOT
 
 %make PREFIX=$RPM_BUILD_ROOT install
-mkdir -p $RPM_BUILD_ROOT/{%_initrddir,etc/sysconfig/harddrake2}
+mkdir -p $RPM_BUILD_ROOT/{%_initrddir,%_sysconfdir/{X11/xinit.d,sysconfig/harddrake2}}
 touch $RPM_BUILD_ROOT/etc/sysconfig/harddrake2/previous_hw
 
 mv $RPM_BUILD_ROOT%_sbindir/net_monitor \
@@ -193,7 +193,12 @@ my \$last_boot_config = "/etc/sysconfig/harddrake2/previous_hw";
 my \$config = do \$last_boot_config;
 store \$config, \$last_boot_config;
 EOF
-chmod +x $RPM_BUILD_ROOT%_sbindir/convert-harddrake
+
+cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2 <<EOF
+#!/bin/sh
+exec /usr/share/harddrake/service_harddrake X11
+EOF
+chmod +x $RPM_BUILD_ROOT{%_sbindir/convert-harddrake,%_sysconfdir/X11/xinit.d/harddrake2}
 
 %find_lang libDrakX
 cat libDrakX.lang >> %name.list
@@ -252,6 +257,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) /etc/sysconfig/harddrake2/previous_hw
 %_datadir/harddrake/service_harddrake
 %_sbindir/convert-harddrake
+%_sysconfdir/X11/xinit.d/harddrake2
 
 %files -n harddrake-ui
 %defattr(-,root,root)
@@ -273,6 +279,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Sep  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-41mdk
+- fix harddrake service, run non essential checks after dm start
+
 * Fri Sep  6 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-40mdk
 - harddrake:
   o fix usb mouse detection
