@@ -36,8 +36,8 @@ sub write_conf {
 		     NETWORKING => "yes", 
 		     FORWARD_IPV4 => "false", 
 		     HOSTNAME => "localhost.localdomain",
-		     DOMAINNAME => "localdomain",
 		     });
+    add2hash($netc, { DOMAINNAME => $netc->{HOSTNAME} =~ /\.(.*)/ });
 		     
     setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV));
 }
@@ -109,12 +109,11 @@ sub guessHostname {
 
     write_resolv_conf("$prefix/etc/resolv.conf", $netc);
 
-#    winStatus(40, 3, _("Hostname"), _("Determining host name and domain..."));
     my $name = gethostbyaddr(Socket::inet_aton($intf->{IPADDR}), AF_INET) or log::l("reverse name lookup failed"), return 0;
 
     log::l("reverse name lookup worked");
 
-    add2hash($netc, { HOSTNAME => $name, DOMAINNAME => $name =~ /\.(.*)/ });
+    add2hash($netc, { HOSTNAME => $name });
     1;
 }
 
@@ -143,4 +142,8 @@ sub findIntf {
     my ($l) = grep { $_->{DEVICE} eq $device } @$intf;
     push @$intf, $l = { DEVICE => $device } unless $l;
     $l;
+}
+
+sub is_ip {
+    $_[0] =~ /^(\d{1,3}\.){3}\d{1,3}$/;
 }

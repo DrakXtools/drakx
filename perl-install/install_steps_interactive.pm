@@ -14,6 +14,7 @@ use detect_devices;
 use network;
 use modules;
 use lang;
+use keyboard;
 use fs;
 use log;
 
@@ -28,8 +29,17 @@ sub errorInStep($$) {
 sub chooseLanguage($) {
     my ($o) = @_;
     lang::text2lang($o->ask_from_list("Language",
-				      __("Which language do you want?"), # the translation may be used for the help
-				      [ lang::list() ], lang::lang2text($o->default("lang"))));
+		__("Which language do you want?"), # the translation may be used for the help
+                [ lang::list() ], 
+		lang::lang2text($o->default("lang"))));
+}
+
+sub chooseKeyboard($) {
+    my ($o) = @_;
+    keyboard::text2keyboard($o->ask_from_list_("Keyboard",
+               _("Which keyboard do you have?"),
+               [ keyboard::list() ],
+               keyboard::keyboard2text($o->default("keyboard"))));
 }
 
 sub selectInstallOrUpgrade($) {
@@ -82,7 +92,7 @@ sub rebootNeeded($) {
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
-    $o->SUPER::choosePartitionsToFormat($fstab) if $o->{steps}{$o->{step}}{entered} == 1;
+    $o->SUPER::choosePartitionsToFormat($fstab);
 
     my @l = grep { $_->{mntpoint} && isExt2($_) || isSwap($_) } @$fstab;
     my @r = $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"), 
@@ -116,24 +126,42 @@ sub configureNetwork($) {
 	    $r = $o->ask_from_list_(_("Network Configuration"), 
 				    _("LAN networking has already been configured. Do you want to:"),
 				    [ @l ]);
-	    !$r || $r =~ /^Don't/ and return;
+	    $r ||= "Don't";
 	}
     } else {
 	$o->ask_yesorno(_("Network Configuration"),
-			_("Do you want to configure LAN (not dialup) networking for your installed system?")) or return;
+			_("Do you want to configure LAN (not dialup) networking for your installed system?")) or $r = "Don't";
     }
     
-    if ($r !~ /^Keep/) {
+    if ($r =~ /^Don't/) {
+	$o->{netc}{NETWORKING} = "false";
+    } elsif ($r !~ /^Keep/) {
 	my @l = network::getNet() or return die _("no network card found");
 	@l = ($l[0]) unless $::expert; # keep only one
 
-	$o->configureNetworkIntf(network::findIntf($o->{intf}, $_)) foreach @l;
+	my $last; foreach (@l) {
+	    my $intf = network::findIntf($o->{intf}, $_);
+	    add2hash($intf, $last);
+	    $o->configureNetworkIntf($intf);
+	    $last = $intf;
+	}
+	{ 
+	    my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+	    network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
+	}
 	$o->configureNetworkNet($o->{netc} ||= {});
     }
     $o->SUPER::configureNetwork;
 }
 	
+sub timeConfig {
+    my ($o, $f) = @_;
+    add2hash($o->{timezone} ||= {}, $o->default("timezone"));
 
+    $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT});
+    $o->{timezone}{timezone} = $o->ask_from_list('', _("In which timezone are you"), [ install_any::getTimeZones() ], $o->{timezone}{timezone});
+    $o->SUPER::timeConfig($f);
+}
 
 sub createBootdisk {
     my ($o, $first_time) = @_;

@@ -29,11 +29,8 @@ sub getFile($) {
 }
 
 sub versionString {
-    my $kernel = $::o->{packages}{kernel};
-    $kernel && $kernel->{header} or die "I couldn't find the kernel package!";
-    
-    c::headerGetEntry($kernel->{header}, 'version') . "-" .
-    c::headerGetEntry($kernel->{header}, 'release');
+    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") or die "I couldn't find the kernel package!";
+    first(/vmlinuz-(.*)/);
 }
 
 
@@ -105,6 +102,14 @@ sub addToBeDone(&$) {
     return &$f() if $::o->{steps}{$step}{done};
 
     push @{$::o->{steps}{$step}{toBeDone}}, $f;
+}
+
+sub getTimeZones {
+    local *F;
+    open F, "cd /usr/share/zoneinfo && find [A-Z]* -type f |";
+    my @l = sort map { chop; $_ } <F>;
+    close F or die "cannot list the available zoneinfos";
+    @l;
 }
 
 sub upgrFindInstall {

@@ -26,6 +26,9 @@ my %stepsHelp = (
 selectLanguage => 
  __("Choose preferred language for install and system usage."),
 
+selectKeyboard =>
+ __("Choose on the list of keyboards, the one corresponding to yours"),
+
 selectPath => 
  __("Choose \"Installation\" if there are no previous versions of Linux
 installed, or if you wish use to multiple distributions or versions.
@@ -162,15 +165,15 @@ my @installSteps = (
   selectLanguage => [ __("Choose your language"), 1, 1 ],
   selectPath => [ __("Choose install or upgrade"), 0, 0 ],
   selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
-  setupSCSI => [ __("Setup SCSI"), 1, 0 ],	
+  setupModules => [ __("Setup SCSI"), 1, 0 ],	
   partitionDisks => [ __("Setup filesystems"), 1, 0 ],
   formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
   choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
   doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
-  configureMouse => [ __("Configure mouse"), 1, 1, "formatPartitions" ],
+#  configureMouse => [ __("Configure mouse"), 1, 1, "formatPartitions" ],
   configureNetwork => [ __("Configure networking"), 1, 1, "formatPartitions" ],
-  configureTimezone => [ __("Configure timezone"), 0, 0 ],
-  configureServices => [ __("Configure services"), 0, 0 ],
+  configureTimezone => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
+#  configureServices => [ __("Configure services"), 0, 0 ],
   configurePrinter => [ __("Configure printer"), 0, 0 ],
   setRootPassword => [ __("Set root password"), 1, 1, "formatPartitions" ],
   addUser => [ __("Add a user"), 1, 1, "doInstallStep" ],
@@ -207,6 +210,7 @@ my $default = {
 #    display => "192.168.1.9:0",
 
     bootloader => { onmbr => 1, linear => 0 },
+#    keyboard => 'de',
     autoSCSI => 0,
     mkbootdisk => "fd0", # no mkbootdisk if 0 or undef,   find a floppy with 1
     packages => [ qw() ],
@@ -239,14 +243,20 @@ $o = $::o = {
 
 sub selectLanguage {
     lang::set($o->{lang} = $o->chooseLanguage);
-    $o->{keyboard} = keyboard::setup();
+    $o->{keyboard} = keyboard::setup($o->default("keyboard") || keyboard::lang2keyboard($o->{lang}));
 
     addToBeDone {
 	unless ($o->{isUpgrade}) {
-	    keyboard::write($o->{prefix}, $o->{keyboard});
 	    lang::write($o->{prefix});
-	} 
+            keyboard::write($o->{prefix}, $o->{keyboard});
+	}
     } 'doInstallStep';
+
+    goto &selectKeyboard if $_[0];
+}
+
+sub selectKeyboard {
+    $o->{keyboard} = keyboard::setup($o->chooseKeyboard);
 }
 
 sub selectPath {
@@ -303,21 +313,25 @@ sub formatPartitions {
 }
 
 sub choosePackages {
-    install_any::setPackages($o) if $o->{steps}{$o->{step}}{entered} == 1;
+    install_any::setPackages($o) if $_[1] == 1;
     $o->choosePackages($o->{packages}, $o->{compss}); 
     $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
 }
 
 sub doInstallStep {
-    install_any::setPackages($o) unless $o->{steps}{choosePackages}{entered};
+    install_any::setPackages($o) unless $_[1];
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
 }
 
 sub configureMouse { $o->mouseConfig }
-sub configureNetwork { $o->configureNetwork($o->{steps}{$o->{step}}{entered} == 1 && !$_[0]) }
-sub configureTimezone { $o->timeConfig }
+sub configureNetwork { $o->configureNetwork($_[1] == 1 && !$_[0]) }
+sub configureTimezone { 
+    my $f = "$o->{prefix}/etc/sysconfig/clock";
+    return if -e $f && $_[1] == 1 && !$_[0];
+    $o->timeConfig($f);
+}
 sub configureServices { $o->servicesConfig }
 sub configurePrinter { $o->printerConfig }
 sub setRootPassword { $o->setRootPassword }
@@ -331,7 +345,7 @@ sub addUser {
 sub createBootdisk {
     fs::write($o->{prefix}, $o->{fstab}) unless $o->{isUpgrade};
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
-    $o->createBootdisk($o->{steps}{$o->{step}}{entered} == 1);
+    $o->createBootdisk($_[1] == 1);
 }
 
 sub setupBootloader {
@@ -404,7 +418,7 @@ sub main {
 	$o->enteringStep($o->{step});
 	$o->{steps}{$o->{step}}{entered}++;
 	eval { 
-	    &{$install2::{$o->{step}}}($clicked);
+	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};
 	$clicked = 0;
 	$@ =~ /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo;

@@ -82,6 +82,9 @@ sub errorInStep($$) {}
 sub chooseLanguage($) {
     $o->default("lang");
 }
+sub chooseKeyboard($) {
+    $o->default("keyboard");
+}
 sub selectInstallOrUpgrade($) {
     $o->default("isUpgrade") || 0;
 }
@@ -165,7 +168,17 @@ sub configureNetwork($) {
     #res_init();		# reinit the resolver so DNS changes take affect     
 }
 
-sub timeConfig {}
+sub timeConfig {
+    my ($o, $f) = @_;
+    my $t = $o->default("timezone");
+
+    setVarsInSh($f, { 
+	ZONE => $t->{timezone},
+	GMT  => bool2text($t->{GMT}),
+	ARC  => "false",
+    });
+}
+
 sub servicesConfig {}
 sub printerConfig {}
 

@@ -7,6 +7,8 @@ use log;
 
 # non-rentrant!!
 
+my $retr;
+
 1;
 
 
@@ -45,7 +47,6 @@ sub new {
 }
 
 
-my $retr;
 sub getFile($) {
     $ftp ||= new();
     $retr->close if $retr;
