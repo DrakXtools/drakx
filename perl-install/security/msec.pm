@@ -98,7 +98,7 @@ sub list_functions {
 					enable_dns_spoofing_protection enable_ip_spoofing_protection
 					enable_log_strange_packets enable_promisc_check no_password_aging_for)],
 	    'system' =>  [qw(allow_autologin allow_issues allow_reboot allow_remote_root_login
-                         allow_root_login allow_user_list allow_x_connections allow_xserver_to_listen
+                         allow_root_login allow_user_list allow_xauth_from_root allow_x_connections allow_xserver_to_listen
                          authorize_services enable_at_crontab enable_console_log
                          enable_msec_cron enable_pam_wheel_for_su enable_password enable_security_check
                          enable_sulogin password_aging password_history password_length set_root_umask

@@ -17,6 +17,7 @@ sub fields() {
             'allow_remote_root_login' => N("Allow remote root login"),
             'allow_root_login' => N("Direct root login"),
             'allow_user_list' => N("List users on display managers (kdm and gdm)"),
+            'allow_xauth_from_root' => N("Export display when passing from root to the other users"),
             'allow_x_connections' => N("Allow X Window connections"),
             'allow_xserver_to_listen' => N("Authorize TCP connections to X Window"),
             'authorize_services' => N("Authorize all services controlled by tcp_wrappers"),

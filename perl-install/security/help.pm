@@ -30,6 +30,11 @@ Else only /etc/issue is allowed."),
 
 'allow_user_list' => N("Allow/Forbid the list of users on the system on display managers (kdm and gdm)."),
 
+'allow_xauth_from_root' => N("Allow/forbid to export display when
+passing from the root account to the other users.
+
+See pam_xauth(8) for more details.'"),
+
 'allow_x_connections' => N("Allow/Forbid X connections:
 
 - ALL (all connections are allowed),
