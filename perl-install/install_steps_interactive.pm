@@ -778,14 +778,14 @@ _("Append") => \$e->{append},
 _("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("/boot/initrd*") } ] },
 _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	    );
-	    @l = @l[0..5] if $::beginner;
+	    @l = @l[0..5] unless $::expert;
 	} else {
 	    @l = ( 
 _("Root") => { val => \$name, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
 _("Table") => { val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @{$o->{hds}} ], not_edit => !$::expert },
 _("Unsafe") => { val => \$e->{unsafe}, type => 'bool' }
 	    );
-	    @l = @l[0..1] if $::beginner;
+	    @l = @l[0..1] unless $::expert;
 	}
 	@l = (
 _("Label") => \$e->{label},

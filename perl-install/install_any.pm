@@ -244,6 +244,12 @@ sub searchAndMount4Upgrade {
     }
 }
 
+sub remount_readonly {
+    my ($o, $dir) = @_;
+    my $device = first(grep { $_->{mntpoint} eq $dir } @{$o->{fstab}});
+    eval { fs::mount_part($device, $device, 'readonly', 'remount') };
+}
+
 sub write_ldsoconf {
     my ($prefix) = @_;
     my $file = "$prefix/etc/ld.so.conf";

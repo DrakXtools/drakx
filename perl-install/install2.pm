@@ -574,6 +574,12 @@ sub main {
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
 
+    #- ala pixel? :-) [fpons]
+    sync(); sync();
+
+    #- remounting read-only may avoid error if kernel is unable to umount fs.
+    install_any::remount_readonly($o, $o->{prefix});
+
     log::l("installation complete, leaving");
     print "\n" x 30;
 }

@@ -490,9 +490,6 @@ sub miscellaneous {
 sub exitInstall { 
     install_any::unlockCdroms;
     install_any::ejectCdrom;
-
-    #-  ala pixel? :-) [fpons]
-    sync(); sync();
 }
 
 #-######################################################################################
