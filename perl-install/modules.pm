@@ -121,6 +121,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "ppp_generic" => "Point to Point generic driver",
   "ppp_async" => "ppp_async",
   "slhc" => "slhc",
+  "aironet4500_core" => "aironet4500_core",
 }],
 [ 'usbnet', {
   "pegasus" => "pegasus",
@@ -424,7 +425,7 @@ qw(
 olympic
 sk98lin acenic
 3c90x
-aironet4500_card com20020-pci hamachi starfire winbond-840
+aironet4500_card aironet4500_core com20020-pci hamachi starfire winbond-840
 
 dc395x_trm
 BusLogic seagate fdomain g_NCR5380
