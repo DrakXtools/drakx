@@ -1258,7 +1258,7 @@ sub choose_encrypt_key {
 	 messages => N("Choose your filesystem encryption key"),
 	 callbacks => { 
 	     complete => sub {
-		 length $encrypt_key < 20 and $in->ask_warn('', N("This encryption key is too simple (must be at least %d characters long)", 20)), return 1,0;
+		 length $encrypt_key < 6 and $in->ask_warn('', N("This encryption key is too simple (must be at least %d characters long)", 6)), return 1,0;
 		 $encrypt_key eq $encrypt_key2 or $in->ask_warn('', [ N("The encryption keys do not match"), N("Please try again") ]), return 1,1;
 		 return 0
         } } }, [
