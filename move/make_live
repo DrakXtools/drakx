@@ -33,6 +33,7 @@ sub installPackages {
                                  qw(XFree86-server XFree86-xfs XFree86-FBDev),
                                  qw(acpi acpid), #- so that removing acpi=ht will work
 				 qw(mountloop),	#- crypted folders
+				 qw(dnotify),	#- notification of /etc changes
 				 qw(zcip dhcpcd ppp kdenetwork-kppp rp-pppoe pptp-adsl speedtouch speedtouch_mgmt nfs-utils-clients samba-client tmdns wireless-tools adiusbadsl), #- network conf
                                                                  ],
 					    });
