@@ -828,15 +828,33 @@ sub setupBootloader($) {
 	    run_program::rooted($o->{prefix}, "swriteboot", "-f1", $b->{boot}, "/boot/bootlx");
 	};
 	run_program::rooted($o->{prefix}, "abootconf", $b->{boot}, $b->{part_nb});
+<<<<<<< install_steps.pm
+
+
+        modules::load('loop');
+=======
  
         modules::load('loop');
+>>>>>>> 1.216
 	output "$o->{prefix}/etc/aboot.conf", 
+<<<<<<< install_steps.pm
+	map_index { -e "$o->{prefix}/boot/initrd-$_->[1]" ? 
+			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} initrd=/boot/initrd-$_->[1] $b->{perImageAppend}\n" :
+			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} $b->{perImageAppend}\n" }
+	map { run_program::rooted($o->{prefix}, "mkinitrd", "-f", "/boot/initrd-$_->[1]", "--ifneeded", $_->[1]) ;#or
+		  -s "$o->{prefix}/boot/initrd-$_->[1]" or unlink "$o->{prefix}/boot/initrd-$_->[1]";$_ } grep { $_->[0] && $_->[1] }
+	map { [ m|$o->{prefix}(/boot/vmlinux-(.*))| ] } eval { glob_("$o->{prefix}/boot/vmlinux-*") };
+#	output "$o->{prefix}/etc/aboot.conf", 
+#	  map_index { "$::i:$b->{part_nb}$_ root=$b->{root} $b->{perImageAppend}\n" }
+#	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
+=======
 	map_index { -e "$o->{prefix}/boot/initrd-$_->[1]" ? 
 			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} initrd=/boot/initrd-$_->[1] $b->{perImageAppend}\n" :
 			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} $b->{perImageAppend}\n" }
 	map { run_program::rooted($o->{prefix}, "mkinitrd", "-f", "/boot/initrd-$_->[1]", "--ifneeded", $_->[1]) or
 		  unlink "$o->{prefix}/boot/initrd-$_->[1]" } grep { $_->[0] && $_->[1] }
 	map { [ m|$o->{prefix}(/boot/vmlinux-(.*))| ] } eval { glob_("$o->{prefix}/boot/vmlinux-*") };
+>>>>>>> 1.216
     } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
