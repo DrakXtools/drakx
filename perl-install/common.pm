@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(min max bool member divide is_empty_array_ref round_up round_down first top) ],
+    common => [ qw(_ __ min max bool member divide is_empty_array_ref round_up round_down first top translate) ],
     file => [ qw(dirname basename all glob_ cat_ chop_ mode) ],
     system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_) ],
     constant => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
@@ -20,6 +20,8 @@ $SECTORSIZE = 512;
 
 1;
 
+sub _ { my $s = shift; sprintf translate($s), @_ }
+sub __ { $_[0] }
 sub min { my $min = shift; grep { $_ < $min and $min = $_; } @_; $min }
 sub max { my $max = shift; grep { $_ > $max and $max = $_; } @_; $max }
 sub first { $_[0] }
@@ -29,7 +31,7 @@ sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]
 sub basename { @_ == 1 or die "usage: basename <name>\n"; local $_ = shift; s|/*\s*$||; s|.*/||; $_ }
 sub bool { $_[0] ? 1 : 0 }
 sub strcpy { substr($_[0], $_[2] || 0, length $_[1]) = $_[1] }
-sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; @l }
+sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
 sub chop_ { map { my $l = $_; chomp $l; $l } @_ }
 sub divide { my $d = int $_[0] / $_[1]; wantarray ? ($d, $_[0] % $_[1]) : $d }
 sub round_up { my ($i, $r) = @_; $i += $r - ($i + $r - 1) % $r - 1; }
@@ -37,7 +39,7 @@ sub round_down { my ($i, $r) = @_; $i -= $i % $r; }
 sub is_empty_array_ref { my $a = shift; !defined $a || @$a == 0 }
 
 sub sync { syscall_('sync') }
-sub gettimeofday { my $t = pack "LL"; syscall_('gettimeofday', $t, 0) or die "gettimeofday: $!\n"; unpack("LL", $t) }
+sub gettimeofday { my $t = pack "LL"; syscall_('gettimeofday', $t, 0) or die "gettimeofday failed: $!\n"; unpack("LL", $t) }
 
 sub remove_spaces { local $_ = shift; s/^ +//; s/ +$//; $_ }
 sub mode { my @l = stat $_[0] or die "unable to get mode of file $_[0]: $!\n"; $l[2] }
@@ -78,3 +80,13 @@ sub crypt_ {
 
 sub makedev { ($_[0] << 8) | $_[1] }
 sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
+
+sub translate {
+    my ($s) = @_;
+    unless (defined %po::I18N::I18N) {
+	if (my ($lang) = ($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG}) =~ /(..)/) {
+	    eval { require "po/$lang.pm" }; $@ and warn "no translation in $lang available\n";
+	}
+    }
+    $po::I18N::I18N{$s} || $s;
+}

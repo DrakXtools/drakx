@@ -7,12 +7,14 @@ use vars qw($KMAP_MAGIC %defaultKeyboards %loadKeymap);
 use common qw(:system :file);
 use run_program;
 use log;
+use c;
 
 
 $KMAP_MAGIC = 0x8B39C07F;
 
 %defaultKeyboards = (
   "de" => "de-latin1",
+  "fr" => "fr-latin1",
   "fi" => "fi-latin1",
   "se" => "se-latin1",
   "no" => "no-latin1",
@@ -24,12 +26,12 @@ $KMAP_MAGIC = 0x8B39C07F;
 
 
 sub load($) {
-    my ($keymap_raw) = @_;
+    my ($keymap) = @_;
 
-    my ($magic, @keymaps) = unpack "i i" . c::MAX_NR_KEYMAPS() . "a*", $keymap_raw;
-    $keymap_raw = pop @keymaps;
+    my ($magic, @keymaps) = unpack "I i" . c::MAX_NR_KEYMAPS() . "a*", $keymap;
+    $keymap = pop @keymaps;
 
-    $magic != $KMAP_MAGIC and die "failed to read kmap magic: $!";
+    $magic != $KMAP_MAGIC and die "failed to read kmap magic";
 
     local *F;
     sysopen F, "/dev/console", 2 or die "failed to open /dev/console: $!";
@@ -38,53 +40,59 @@ sub load($) {
     foreach (0 .. c::MAX_NR_KEYMAPS() - 1) {
 	$keymaps[$_] or next;
 
-	my @keymap = unpack "s" . c::NR_KEYS() . "a*", $keymap_raw;
-	$keymap_raw = pop @keymap;
+	my @keymap = unpack "s" . c::NR_KEYS() . "a*", $keymap;
+	$keymap = pop @keymap;
 
-	my $key = 0;
+	my $key = -1;
 	foreach my $value (@keymap) {
-	    c::KTYP($value) != c::KT_SPEC() or next;
-	    ioctl(F, c::KDSKBENT(), pack("CCS", $_, $key++, $value)) or die "keymap ioctl failed: $!";
 	    $key++;
+	    c::KTYP($value) != c::KT_SPEC() or next;
+	    ioctl(F, c::KDSKBENT(), pack("CCS", $_, $key, $value)) or die "keymap ioctl failed ($_ $key $value): $!";
 	 }
 	$count++;
     }
     log::l("loaded $count keymap tables");
 }
 
-sub setup($) {
+sub setup(;$) {
     my ($defkbd) = @_;
     my $t; 
 
     $defkbd ||= $defaultKeyboards{$ENV{LANG}} || "us";
 
-    local *F;
-    open F, "/etc/keymaps" or die "cannot open /etc/keymaps: $!";
-
-    my $format = "i2";
-    read F, $t, psizeof($format) or die "failed to read keymaps header: $!";
-    my ($magic, $numEntries) = unpack $format, $t;
-
-    log::l("%d keymaps are available", $numEntries);
-
-    my @infoTable;
-    my $format2 = "i Z40";
-    foreach (1..$numEntries) {
-	read F, $t, psizeof($format2) or die "failed to read keymap information: $!";
-	push @infoTable, [ unpack $format2, $t ];
+    my $file = "/usr/share/keymaps/$defkbd.kmap";
+    if (-e $file) {
+	log::l("loading keymap $defkbd");
+	load(cat_($file));
     }
 
-    foreach (@infoTable) {
-	read F, $t, $_->[0] or die "error reading keymap data: $!";
-
-	if ($defkbd eq $_->[1]) {
-	    log::l("using keymap $_->[1]");
-	    load($t);
-	    &write("/tmp", $_->[1]);
-	    return;
-	}
-    }
-    die "keyboard $defkbd not found in /etc/keymaps";
+#    local *F;
+#    open F, "/usr/etc/keymaps" or die "cannot open /usr/etc/keymaps: $!";
+#
+#    my $format = "i2";
+#    read F, $t, psizeof($format) or die "failed to read keymaps header: $!";
+#    my ($magic, $numEntries) = unpack $format, $t;
+#
+#    log::l("%d keymaps are available", $numEntries);
+#
+#    my @infoTable;
+#    my $format2 = "i Z40";
+#    foreach (1..$numEntries) {
+#	 read F, $t, psizeof($format2) or die "failed to read keymap information: $!";
+#	 push @infoTable, [ unpack $format2, $t ];
+#    }
+#
+#    foreach (@infoTable) {
+#	 read F, $t, $_->[0] or die "error reading keymap data: $!";
+#
+#	 if ($defkbd eq $_->[1]) {
+#	     log::l("using keymap $_->[1]");
+#	     load($t);
+#	     &write("/tmp", $_->[1]);
+#	     return;
+#	 }
+#    }
+#    die "keyboard $defkbd not found in /usr/etc/keymaps";
 }
 
 sub write($$) {

@@ -65,13 +65,13 @@ sub format_ext2($;$) {
     $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); # For RAID only.
     $bad_blocks and push @options, "-c";
 
-    run_program::run("mke2fs", devices::make($dev), @options) or die "ext2 formatting of $dev failed";
+    run_program::run("mke2fs", devices::make($dev), @options) or die _("%s formatting of %s failed", "ext2", $dev);
 }
 
 sub format_dos($;$@) {
     my ($dev, $bad_blocks, @options) = @_;
 
-    run_program::run("mkdosfs", devices::make($dev), @options, $bad_blocks ? "-c" : ()) or die "dos formatting of $dev failed";
+    run_program::run("mkdosfs", devices::make($dev), @options, $bad_blocks ? "-c" : ()) or die _("%s formatting of %s failed", "dos", $dev);
 }
 
 sub format_part($;$) {
@@ -90,7 +90,7 @@ sub format_part($;$) {
     } elsif (isSwap($part)) {
         swap::make($part->{device}, $bad_blocks);
     } else {
-	die "don't know how to format $_->{device} in type " . type2name($_->{type});
+	die _("don't know how to format %s in type %s", $_->{device}, type2name($_->{type}));
     }
     $part->{isFormatted} = 1;
 }
@@ -103,7 +103,7 @@ sub mount($$$;$) {
     
     if ($fs eq 'nfs') {
 	log::l("calling nfs::mount($dev, $where)");
-	nfs::mount($dev, $where) or die "nfs mount failed";
+	nfs::mount($dev, $where) or die _("nfs mount failed");
     } elsif ($fs eq 'smb') {
 	die "no smb yet...";
     } else {
@@ -114,7 +114,7 @@ sub mount($$$;$) {
 	my $mount_opt = $fs eq 'vfat' ? "check=relaxed" : "";
   
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
-	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die "mount failed: $!";
+	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
     }
     local *F;
     open F, ">>/etc/mtab" or return; # fail silently, must be read-only /etc
@@ -124,7 +124,7 @@ sub mount($$$;$) {
 # takes the mount point to umount (can also be the device)
 sub umount($) { 
     my ($mntpoint) = @_;
-    syscall_('umount', $mntpoint) or die "error unmounting $mntpoint: $!";;
+    syscall_('umount', $mntpoint) or die _("error unmounting %s: %s", $mntpoint, "$!");
 
     my @mtab = cat_('/etc/mtab'); # don't care about error, if we can't read, we won't manage to write... (and mess mtab)
     local *F;

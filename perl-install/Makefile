@@ -1,20 +1,21 @@
 SO_FILES = c/blib/arch/auto/c/c.so
-PMS = *.pm c/*.pm resize_fat/*.pm commands diskdrake
+PMS = *.pm c/*.pm resize_fat/*.pm commands install2 diskdrake
 DEST = /tmp/t/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
-LOCALFILES = $(PERL) mouseconfig fr.map
-EXCLUDE = $(LOCALFILES) boot-hd.img
+LOCALFILES = $(PERL) mouseconfig
+EXCLUDE = $(LOCALFILES) boot-hd.img keymaps xmodmaps
 
-.PHONY: all tags install clean verify_c
+.PHONY: all po tags install clean verify_c
 
-all: $(SO_FILES) install1_hd
+all: $(SO_FILES) po install1_hd
 
 tags:
 	etags -o - $(PMS) | perl2etags > TAGS
 
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
+	$(MAKE) -C po clean
 	rm -f c/c.xs install1_hd
 	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
@@ -25,7 +26,7 @@ tar-diskdrake: clean
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
 
 	l=`perl2fcalls -uses -excludec diskdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/diskdrake\//' -e 's/$$/.pm/'` ; \
-	cd .. ; tar cfz diskdrake.tgz --exclude CVS diskdrake/c diskdrake/diskdrake* $$l
+	cd .. ; tar cfz diskdrake.tgz --exclude CVS $(patsubst %,diskdrake/%,c po diskdrake*) $$l
 
 c/c.xs: c/c.xs.pm
 	rm -f $@
@@ -39,8 +40,11 @@ $(SO_FILES): c/c.xs
 install1_hd: install1_hd.c
 	$(CC) -static -Wall -o $@ $<
 
+po:
+	$(MAKE) -C po
+
 test_pms: verify_c
-	perl2fcalls -excludec install2.pm
+	perl2fcalls -excludec install2
 	(for i in $(PMS); do perl -cw -I. -Ic -Ic/blib/arch $$i || exit 1 ; done)
 
 verify_c:
@@ -57,16 +61,16 @@ install_pms: $(SO_FILES)
 	done
 
 	cp diskdrake.rc $(DESTREP4PMS)
-	ln -sf perl-install/install2.pm $(DEST)/usr/bin/install2
-	ln -sf perl-install/commands $(DEST)/usr/bin/commands
-	chmod a+x $(DESTREP4PMS)/install2.pm
+	ln -sf perl-install/install2 $(DEST)/usr/bin
+	ln -sf perl-install/commands $(DEST)/usr/bin
+	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
 
 	cp -af */blib/arch/auto $(DESTREP4PMS)
 	find $(DESTREP4PMS) -name "*.so" | xargs strip
 
 get_needed_files: $(SO_FILES)
-#	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2.pm < /dev/null
+#	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	cp -f list /tmp/list
 	for i in c/blib/arch/auto/c/c.so $(LOCALFILES) `cat /tmp/list` ; do \
 		ldd $$i 2>/dev/null | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
@@ -76,6 +80,7 @@ get_needed_files: $(SO_FILES)
 	install -d $(DEST)/bin
 	install -d $(DEST)/usr/bin
 	install -d $(DEST)/usr/lib
+	install -d $(DEST)/usr/share
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 
 	for i in `cat /tmp/list`; do \
@@ -100,6 +105,9 @@ get_needed_files: $(SO_FILES)
 
 	install -d $(DEST)/usr/X11R6/lib/X11/fonts/
 	cp -a /usr/X11R6/lib/X11/fonts/misc $(DEST)/usr/X11R6/lib/X11/fonts/
+
+	cp -a xmodmaps $(DEST)/usr/share
+	cp -a keymaps $(DEST)/usr/share
 
 	echo -e "#!/usr/bin/perl\n\nsymlink '/tmp/rhimage/usr/lib/perl5', '/usr/lib/perl5';\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
 	chmod a+x $(DEST)/usr/bin/runinstall2

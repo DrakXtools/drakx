@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+use diagnostics;
+use strict;
+
+use lib qw(. c c/blib/arch);
+use install2;
+
+install2::main(@ARGV);

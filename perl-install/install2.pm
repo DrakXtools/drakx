@@ -1,10 +1,9 @@
-#!/usr/bin/perl
+package install2;
 
 use diagnostics;
 use strict;
 use vars qw($testing $INSTALL_VERSION $o);
 
-use lib qw(/usr/bin/perl-install . c c/blib/arch);
 use common qw(:common :file :system);
 use install_any qw(:all);
 use log;
@@ -18,47 +17,48 @@ use partition_table qw(:types);
 use detect_devices;
 use pkgs;
 use smp;
+use lang;
 
-$testing = 1;#$ENV{PERL_INSTALL_TEST};
+$::testing = 1;#$ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
 my @installSteps = (
-  selectLanguage => [ "Choose your language", "aide", 0, 0 ],
-  selectPath => [ "Choose install or upgrade", "aide", 0, 0 ],
-  selectInstallClass => [ "Select installation class", "aide", 0, 0 ],
-  setupSCSI => [ "Setup SCSI", "aide", 0, 1 ],	
-  partitionDisks => [ "Setup filesystems", "aide", 0, 1 ],
-  formatPartitions => [ "Format partitions", "aide", 0, 1 ],
-  findInstallFiles => [ "Find installation files", "aide", 1, 0 ],
-  choosePackages => [ "Choose packages to install", "aide", 0, 0 ],
-  doInstallStep => [ "Install system", "aide", 0, 0 ],
-#  configureMouse => [ "Configure mouse", "aide", 0, 0 ],
-  finishNetworking => [ "Configure networking", "aide", 0, 0 ],
-#  configureTimezone => [ "Configure timezone", "aide", 0, 0 ],
-#  configureServices => [ "Configure services", "aide", 0, 0 ],
-#  configurePrinter => [ "Configure printer", "aide", 0, 0 ],
-  setRootPassword => [ "Set root password", "aide", 0, 0 ],
-  addUser => [ "Add a user", "aide", 0, 0 ],
-  createBootdisk => [ "Create bootdisk", "aide", 0, 1 ],
-  setupBootloader => [ "Install bootloader", "aide", 0, 1 ],
-#  configureX => [ "Configure X", "aide", 0, 0 ],
-  exitInstall => [ "Exit install", "aide", 0, 0, undef, 'done' ],
+  selectLanguage => [ "Choose your language", "help", 0, 0 ],
+  selectPath => [ __("Choose install or upgrade"), __("help"), 0, 0 ],
+  selectInstallClass => [ __("Select installation class"), __("help"), 0, 0 ],
+  setupSCSI => [ __("Setup SCSI"), __("help"), 0, 1 ],	
+  partitionDisks => [ __("Setup filesystems"), __("help"), 0, 1 ],
+  formatPartitions => [ __("Format partitions"), __("help"), 0, 1 ],
+  findInstallFiles => [ __("Find installation files"), __("help"), 1, 0 ],
+  choosePackages => [ __("Choose packages to install"), __("help"), 0, 0 ],
+  doInstallStep => [ __("Install system"), __("help"), 0, 0 ],
+#  configureMouse => [ __("Configure mouse"), __("help"), 0, 0 ],
+  finishNetworking => [ __("Configure networking"), __("help"), 0, 0 ],
+#  configureTimezone => [ __("Configure timezone"), __("help"), 0, 0 ],
+#  configureServices => [ __("Configure services"), __("help"), 0, 0 ],
+#  configurePrinter => [ __("Configure printer"), __("help"), 0, 0 ],
+  setRootPassword => [ __("Set root password"), __("help"), 0, 0 ],
+  addUser => [ __("Add a user"), __("help"), 0, 0 ],
+  createBootdisk => [ __("Create bootdisk"), __("help"), 0, 1 ],
+  setupBootloader => [ __("Install bootloader"), __("help"), 0, 1 ],
+#  configureX => [ __("Configure X"), __("help"), 0, 0 ],
+  exitInstall => [ __("Exit install"), __("help"), 0, 0, undef, 'done' ],
 );
 
 # this table is translated at run time
 my @upgradeSteps = (
-  selectLanguage => [ "Choose your language", "aide", 0, 0 ],
-  selectPath => [ "Choose install or upgrade", "aide", 0, 0 ],
-  selectInstallClass => [ "Select installation class", "aide", 0, 0 ],
-  setupSCSI => [ "Setup SCSI", "aide", 0, 0 ],
-  upgrFindInstall => [ "Find current installation", "aide", 0, 0 ],
-  findInstallFiles => [ "Find installation files", "aide", 1, 0 ],
-  upgrChoosePackages => [ "Choose packages to upgrade", "aide", 0, 0 ],
-  doInstallStep => [ "Upgrade system", "aide", 0, 0 ],
-  createBootdisk => [ "Create bootdisk", "aide", 0, 0 , 'none' ],
-  setupBootloader => [ "Install bootloader", "aide", 0, 0 ],
-  exitInstall => [ "Exit install", "aide", 0, 0 , undef, 'done' ],
+  selectLanguage => [ "Choose your language", "help", 0, 0 ],
+  selectPath => [ __("Choose install or upgrade"), __("help"), 0, 0 ],
+  selectInstallClass => [ __("Select installation class"), __("help"), 0, 0 ],
+  setupSCSI => [ __("Setup SCSI"), __("help"), 0, 0 ],
+  upgrFindInstall => [ __("Find current installation"), __("help"), 0, 0 ],
+  findInstallFiles => [ __("Find installation files"), __("help"), 1, 0 ],
+  upgrChoosePackages => [ __("Choose packages to upgrade"), __("help"), 0, 0 ],
+  doInstallStep => [ __("Upgrade system"), __("help"), 0, 0 ],
+  createBootdisk => [ __("Create bootdisk"), __("help"), 0, 0 , 'none' ],
+  setupBootloader => [ __("Install bootloader"), __("help"), 0, 0 ],
+  exitInstall => [ __("Exit install"), __("help"), 0, 0 , undef, 'done' ],
 );
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
 for (my $i = 0; $i < @installSteps; $i += 2) {
@@ -100,11 +100,11 @@ my $default = {
     mkbootdisk => 0,
     base => [ qw(basesystem mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools cpio crontabs dev diffutils e2fsprogs ed eject etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup mailcap mailx man mkinitrd mingetty modutils mount mouseconfig net-tools passwd kernel-pcmcia-cs procmail procps psmisc pump mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
     comps => [ 
-	      [ 1, 'X Window System' => qw(XFree86 XFree86-xfs XFree86-75dpi-fonts) ],
-	      [ 1, 'KDE' => qw(kdeadmin kdebase kthememgr kdegames kjumpingcube kdegraphics kdelibs kdemultimedia kdenetwork kdesupport kdeutils kBeroFTPD kdesu kdetoys kpilot kcmlaptop kdpms kpppload kmpg) ],
-	      [ 0, 'Console Multimedia' => qw(aumix audiofile esound sndconfig awesfx rhsound cdp mpg123 svgalib playmidi sox mikmod) ],
-	      [ 0, 'CD-R burning and utilities' => qw(mkisofs cdrecord cdrecord-cdda2wav cdparanoia xcdroast) ],
-	      [ 0, 'Games' => qw(xbill xboard xboing xfishtank xgammon xjewel xpat2 xpilot xpuzzles xtrojka xkobo freeciv) ],
+	      [ 1, __('X Window System') => qw(XFree86 XFree86-xfs XFree86-75dpi-fonts) ],
+	      [ 1, __('KDE') => qw(kdeadmin kdebase kthememgr kdegames kjumpingcube kdegraphics kdelibs kdemultimedia kdenetwork kdesupport kdeutils kBeroFTPD kdesu kdetoys kpilot kcmlaptop kdpms kpppload kmpg) ],
+	      [ 0, __('Console Multimedia') => qw(aumix audiofile esound sndconfig awesfx rhsound cdp mpg123 svgalib playmidi sox mikmod) ],
+	      [ 0, __('CD-R burning and utilities') => qw(mkisofs cdrecord cdrecord-cdda2wav cdparanoia xcdroast) ],
+	      [ 0, __('Games') => qw(xbill xboard xboing xfishtank xgammon xjewel xpat2 xpilot xpuzzles xtrojka xkobo freeciv) ],
 	     ],
     packages => [ qw() ],
     partitionning => { clearall => 0, eraseBadPartitions => 1, autoformat => 1 },
@@ -116,11 +116,13 @@ my $default = {
 	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash) ],
 };
-$o = { default => $default, steps => \%installSteps, orderedSteps => \@orderedInstallSteps };
+$o = $::o = { default => $default, steps => \%installSteps, orderedSteps => \@orderedInstallSteps };
 
 
 sub selectLanguage {
     $o->{lang} = $o->chooseLanguage;
+    lang::set($o->{lang});
+    keyboard::setup();
 }
 
 sub selectPath {
@@ -156,12 +158,12 @@ sub setupSCSI {
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
     $o->{hds} = fsedit::hds($o->{drives}, $o->{default}->{partitionning});
-    @{$o->{hds}} > 0 or die "An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem";
+    @{$o->{hds}} > 0 or die _"An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem";
 
     unless ($o->{isUpgrade}) {
 	$o->doPartitionDisks($o->{hds});
 
-	unless ($testing) {
+	unless ($::testing) {
 	    # Write partitions to disk 
 	    my $need_reboot = 0;
 	    foreach (@{$o->{hds}}) { 
@@ -175,14 +177,14 @@ sub partitionDisks {
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
 
     my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};
-    $root_fs or die "partitionning failed: no root filesystem";
+    $root_fs or die _"partitionning failed: no root filesystem";
 
 }
 
 sub formatPartitions {
     $o->choosePartitionsToFormat($o->{fstab});
 
-    $testing and return;
+    $::testing and return;
 
     foreach (@{$o->{fstab}}) {
 	fs::format_part($_) if $_->{toFormat};
@@ -191,6 +193,10 @@ sub formatPartitions {
 }
 
 sub findInstallFiles {
+    log::l("reading /usr/lib/rpm/rpmrc");
+    c::rpmReadConfigFiles() or die "can't read rpm config files";
+    log::l("\tdone");
+
     $o->{packages} = pkgs::psFromHeaderListFile(install_any::imageGetFile("hdlist"));
 }
  
@@ -217,7 +223,7 @@ sub setRootPassword { $o->setRootPassword }
 sub addUser { $o->addUser }
 
 sub createBootdisk {
-    $testing and return;
+    $::testing and return;
     $o->{isUpgrade} or fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
     $o->createBootdisk;
@@ -232,7 +238,7 @@ sub configureX { $o->setupXfree; }
 
 sub exitInstall { 
     $o->warn( 
-"Congratulations, installation is complete.
+_"Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 For information on fixes which are available for this release of Linux Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
@@ -245,12 +251,14 @@ sub main {
 
     #  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install";
-    symlink '/tmp/rhimage/usr/X11R6', '/usr/X11R6';
 
     print STDERR "in second stage install\n";
-    log::openLog(($testing || $o->{localInstall}) && 'debug.log');
+    log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (version $INSTALL_VERSION)");
     log::ld("extra log messages are enabled");
+
+    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
+    mkdir $o->{prefix}, 0755;
 
     #  make sure we don't pick up any gunk from the outside world 
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
@@ -258,9 +266,6 @@ sub main {
 
     spawnSync();
     eval { spawnShell() };
-
-    $o->{prefix} = $testing ? "/tmp/test-perl-install" : "/mnt";
-    mkdir $o->{prefix}, 0755;
 
     $o = install_steps_graphical->new($o);
 
@@ -270,30 +275,22 @@ sub main {
 	$o->{intf} = net::readNetInterfaceConfig($file);
     }
 
-    log::l("reading /usr/lib/rpm/rpmrc");
-    c::rpmReadConfigFiles() or die "can't read rpm config files";
-    log::l("\tdone");
-
     modules::load_deps("/modules/modules.dep");
     modules::read_conf("/tmp/conf.modules");
 
-    $o->{keyboard} = eval { keyboard::read("/tmp/keyboard") } || $default->{keyboard};
-
     for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
 	$o->enteringStep($step);
-	&{$main::{$step}}() and $o->{steps}->{$step}->{completed} = 1;
+	&{$install2::{$step}}() and $o->{steps}->{$step}->{completed} = 1;
 	$o->leavingStep($step);
     }
     killCardServices();
 
     log::l("installation complete, leaving");
 
-    <STDIN> unless $testing;
+    <STDIN> unless $::testing;
 }
 
 sub killCardServices { 
-    my $pid = cat_("/tmp/cardmgr.pid");
-    $pid and kill(15, chop_($pid)); # send SIGTERM
+    my $pid = chop_(cat_("/tmp/cardmgr.pid"));
+    $pid and kill(15, $pid); # send SIGTERM
 }
-
-main(@ARGV);
