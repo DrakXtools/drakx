@@ -1,4 +1,4 @@
-package network::modem; # $Id$
+package network::modem;	# $Id$
 
 use strict;
 use common;
@@ -9,15 +9,11 @@ use mouse;
 use network::tools;
 
 sub configure {
-    my ($in, $netcnx, $mouse, $netc, $_intf) = @_;
+    my ($in, $netcnx, $mouse, $netc) = @_;
     $netcnx->{type} = 'modem';
     my $modem = $netcnx->{$netcnx->{type}};
-#    $netcnx->{$netcnx->{type}} = {};
     $modem->{device} = $netc->{autodetect}{modem};
-#  modem_step_1:
-#    $modem->{login} = ($modem->{auth} eq 'PAP' ||$modem->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
-#    $netcnx->{$netcnx->{type}}->{connection} = ($netcnx->{$netcnx->{type}}->{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
-#    $modem->{device} = readlink "$::prefix/dev/modem";
+
     foreach (cat_("/usr/share/config/kppprc")) {
 	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split(',', $1);
     }
@@ -34,11 +30,11 @@ sub configure {
 
     ppp_choose($in, $netc, $modem, $mouse) or return;
     write_cnx_script($netc, "modem",
-q(
+		     q(
 /sbin/route del default
 ifup ppp0
 ),
-q(ifdown ppp0
+		     q(ifdown ppp0
 killall pppd
 ), $netcnx->{type});
     1;
@@ -222,34 +218,32 @@ sub ppp_choose {
     $modem->{device} ||= $in->ask_from_listf_raw({ messsages => N("Please choose which serial port your modem is connected to."),
 						   interactive_help_id => 'selectSerialPort',
 						 },
-					     \&mouse::serial_port2text,
-					     [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ]) || return;
+						 \&mouse::serial_port2text,
+						 [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ]) || return;
 
     my @cnx_list;
     my $secret = network::tools::read_secret_backend();
     foreach (@$secret) {
 	push @cnx_list, $_->{server};
     }
-#    $::isStandalone || $in->set_help('configureNetworkISP');
     $in->ask_from('', N("Dialup options"), [
-{ label => N("Connection name"), val => \$modem->{connection} },
-{ label => N("Phone number"), val => \$modem->{phone} },
-{ label => N("Login ID"), val => \$modem->{login} },
-{ label => N("Password"), val => \$modem->{passwd}, hidden => 1 },
-{ label => N("Authentication"), val => \$modem->{auth}, list => [ N_("PAP"), N_("Terminal-based"), N_("Script-based"), N_("CHAP") ] },
-{ label => N("Domain name"), val => \$modem->{domain} },
-{ label => N("First DNS Server (optional)"), val => \$modem->{dns1} },
-{ label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
-    ]) or return;
+					    { label => N("Connection name"), val => \$modem->{connection} },
+					    { label => N("Phone number"), val => \$modem->{phone} },
+					    { label => N("Login ID"), val => \$modem->{login} },
+					    { label => N("Password"), val => \$modem->{passwd}, hidden => 1 },
+					    { label => N("Authentication"), val => \$modem->{auth}, list => [ N_("PAP"), N_("Terminal-based"), N_("Script-based"), N_("CHAP") ] },
+					    { label => N("Domain name"), val => \$modem->{domain} },
+					    { label => N("First DNS Server (optional)"), val => \$modem->{dns1} },
+					    { label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
+					   ]) or return;
     $netc->{DOMAINNAME2} = $modem->{domain};
     ppp_configure($in, $modem);
     $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
 }
 
-#- TODO: add choice between hcf/hsf/lt ?
 sub winmodemConfigure {
-    my ($in, $netcnx, $mouse, $netc, $intf) = @_;
+    my ($in, $netcnx, $mouse, $netc) = @_;
     my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
     my $type;
     
@@ -259,9 +253,9 @@ sub winmodemConfigure {
 	/LT/  and $type = "ltmodem";
 	$relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
     }
-    
-    $type || $in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
-Take a look at http://www.linmodems.org")) && return 1;
+
+    $type or ($in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
+Take a look at http://www.linmodems.org")) ? return 0 : $in->exit(0));
     my $e = $in->ask_from_list(N("Title"), N("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [N("Install rpm"), N("Do nothing")]) or return 0;
     if ($e =~ /rpm/) {
 	if ($in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type)) {
@@ -269,7 +263,7 @@ Take a look at http://www.linmodems.org")) && return 1;
 		#- fallback to modem configuration (beware to never allow test it).
 		$netcnx->{type} = 'modem';
 		$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
-		return configure($in, $netcnx, $mouse, $netc, $intf);
+		return configure($in, $netcnx, $mouse, $netc);
 	    }
 	} else {
 	    return 0;
