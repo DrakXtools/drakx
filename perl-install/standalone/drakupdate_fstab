@@ -31,10 +31,11 @@ $::isStandalone = 1; #- not using standalone.pm which generates too many logs fo
 
 $::testing = $ARGV[0] eq '--test' && shift @ARGV;
 $::auto = $ARGV[0] eq '--auto' && shift @ARGV;
+my $no_flag = $ARGV[0] eq '--no-flag' && shift @ARGV;
 my ($raw_action, $device_name) = @ARGV;
 my ($action) = $raw_action =~ /^--(add|del)/;
 
-@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--auto] [--add | --del] <device>\n";
+@ARGV == 2 && $action or die "usage: drakupdate_fstab [--test] [--auto] [--no-flag] [--add | --del] <device>\n";
 
 main($action, $device_name);
 
@@ -84,7 +85,7 @@ sub set_options {
     fs::set_default_options($part, 1, $use_supermount, $security, $iocharset, $codepage);
 
     my ($options, $unknown) = fs::mount_options_unpack($part);
-    $options->{kudzu} = 1;
+    $options->{kudzu} = 1 if !$no_flag;
     fs::mount_options_pack($part, $options, $unknown);
 }
 
@@ -142,7 +143,7 @@ sub main {
 	    return;
 	}
 	foreach (@$existing_fstab_entries) {
-	    if ($_->{options} !~ /\bkudzu\b/) {
+	    if (!$no_flag && $_->{options} !~ /\bkudzu\b/) {
 		print STDERR "Not a 'kudzu'-flagged entry\n" if $::testing;
 		return;
 	    }
