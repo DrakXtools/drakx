@@ -255,6 +255,10 @@ sub read_conf {
     foreach (cat_($file)) {
 	next if /^\s*#/;
 	s/#.*$//;
+
+	s/\b(snd-card-)/snd-/g;
+	s/\b(snd-via686|snd-via8233)\b/snd-via82xx/g;
+
 	my ($type, $module, $val) = split(/\s+/, chomp_($_), 3) or next;
 	$val =~ s/\s+$//;
 
@@ -279,13 +283,6 @@ sub read_conf {
 	    push @{$c{$name}{probeall} ||= []}, delete $c{$alias}{alias};
 	}
     }
-    # Convert alsa driver from old naming system to new one (snd-card-XXX => snd-XXX)
-    # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
-    foreach my $alias (sort keys %c) {
-        $c{$alias}{alias} =~ s/^snd-card/snd/;
-        $c{$alias}{alias} = 'snd-via82xx' if $c{$alias}{alias} =~ /^snd-via686|^snd-via8233/;
-    }
-
     \%c;
 }
 
@@ -317,17 +314,13 @@ sub write_conf() {
 	} elsif ($type eq 'alias' && $module =~ /scsi_hostadapter|usb-interface/) {
 	    #- remove old aliases which are replaced by probeall
 	    $_ = '';
-	} elsif ($type eq 'above') {
-	    # Convert alsa driver from old naming system to new one (snd-card-XXX => snd-XXX)
-	    # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
-	    s/snd-card/snd/g;
-	    s/snd-via686|snd-via8233/snd-via82xx/g;
-	    defined $conf{$module}{above} or $_ = '';
+	} elsif ($type eq 'above' && !defined $conf{$module}{above}) {
+	    $_ = '';
+	} elsif ($type eq 'alias' && !defined $conf{$module}{alias}) { 
+	    $_ = '';
 	} elsif ($conf{$module}{$type} && $conf{$module}{$type} ne $val) {
 	    my $v = join(' ', uniq(deref($conf{$module}{$type})));
 	    $_ = "$type $module $v\n";
-	} elsif ($type eq 'alias' && !defined $conf{$module}{alias}) { 
-	    $_ = '';
 	}
     } $file;
 
