@@ -150,7 +150,7 @@ sub detect {
 	}
 	# The Alcatel Speed Touch internet scanner is not supported by
 	# SANE
-	next if $description =~ /Alcatel.*Speed.*Touch/i;
+	next if $description =~ /Alcatel.*Speed.*Touch|Camera/i ;
 	# Extract port
         $line =~ /\s+(\S+)\s*$/;
 	$port = $1;
