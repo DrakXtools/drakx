@@ -45,7 +45,7 @@ my @all_servers =
    hide => 1,
   },
   {
-   name => N_("Samba server"),
+   name => N_("Windows Files Sharing (SMB)"),
    pkg => 'samba-server',
    ports => '137/tcp 137/udp 138/tcp 138/udp 139/tcp 139/udp 1024-1100/tcp 1024-1100/udp',
    hide => 1,
