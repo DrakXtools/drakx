@@ -693,7 +693,7 @@ sub g_auto_install {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication mouse wacom netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall mkbootdisk); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall mkbootdisk X); #- TODO modules bootloader 
 
     if (my $printer = $::o->{printer}) {
 	$o->{printer}{$_} = $::o->{printer}{$_} foreach qw(SPOOLER DEFAULT BROWSEPOLLADDR BROWSEPOLLPORT MANUALCUPSCONFIG);
@@ -701,15 +701,6 @@ sub g_auto_install {
 	foreach my $queue (keys %{$::o->{printer}{configured}}) {
 	    my $val = $::o->{printer}{configured}{$queue}{queuedata};
 	    exists $val->{$_} and $o->{printer}{configured}{$queue}{queuedata}{$_} = $val->{$_} foreach keys %{$val || {}};
-	}
-    }
-
-    if (my $card = $::o->{X}{card}) {
-	$o->{X}{$_} = $::o->{X}{$_} foreach qw(default_depth resolution_wanted);
-	if ($o->{X}{default_depth} and my $depth = $card->{depth}{$o->{X}{default_depth}}) {
-	    $depth ||= [];
-	    $o->{X}{resolution_wanted} ||= join "x", @{$depth->[0]} unless is_empty_array_ref($depth->[0]);
-	    $o->{X}{monitor} = $::o->{X}{monitor} if $::o->{X}{monitor}{manual};
 	}
     }
 
