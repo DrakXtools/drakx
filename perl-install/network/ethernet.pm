@@ -63,9 +63,9 @@ sub configure_lan {
     configureNetwork2($in, $prefix, $netc, $intf);
     if ($::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
 							  _("Do you want to restart the network"), 1))) {
-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
-	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network start")) {
-	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network start`), 0) or return;
+#-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
+	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
+	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0) or return;
 	}
     }
     $netc->{NETWORKING} = "yes";
@@ -181,7 +181,7 @@ sub go_ethernet {
 sub configureNetwork {
     my ($netc, $intf, $first_time) = @_;
     local $_;
-    any::setup_thiskind($in, 'net', !$::expert, 1);
+    any::setup_thiskind($in, 'net', !$::expert, 1) if $netc->{autodetection};
     my @l = detect_devices::getNet() or die _("no network card found");
     my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
 

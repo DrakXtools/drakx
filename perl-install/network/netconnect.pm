@@ -188,7 +188,15 @@ ifdown eth0
 [_("LAN connection") . if_($netc->{autodetect}{lan}, " - " . _("ethernet card(s) detected")), \$conf{lan}]
 );
     my $e = $in->ask_from(_("Network Configuration Wizard"), _("Choose the connection you want to configure"),
-			  [ map { { label => $_->[0], val => $_->[1], type => 'bool'} } @l ]
+			  [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
+			  changed => sub {
+			      return if !$netc->{autodetection};
+			      my $c = 0;
+			      $conf{adsl} and $c++;
+			      $conf{cable} and $c++;
+			      my $a = keys(%{$netc->{autodetect}{lan}});
+			      0 < $a && $a <= $c and $conf{lan} = undef;
+			  }
 			 ) or goto step_1;
 
 #    load_conf ($netcnx, $netc, $intf);
