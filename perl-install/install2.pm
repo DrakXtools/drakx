@@ -40,7 +40,7 @@ $o = $::o = {
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
     authentication => { md5 => 1, shadow => 1 },
     lang         => 'en_US',
-    isUpgrade    => 0,
+#-    isUpgrade    => 0,
     toRemove     => [],
     toSave       => [],
 #-    simple_themes => 1,
@@ -135,9 +135,6 @@ sub selectInstallClass {
 
     installStepsCall($o, $auto, 'selectInstallClass', $clicked);
 
-    if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{installPackages}{done}) {
-	installStepsCall($o, $auto, 'setPackages', $o->{isUpgrade} && $ent_number == 1);
-    }
     if ($o->{isUpgrade}) {
 	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ }
 	                        grep { !/doPartitionDisks/ } @{$o->{orderedSteps}};

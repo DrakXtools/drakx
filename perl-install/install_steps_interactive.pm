@@ -231,6 +231,8 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def) || die 'already displayed');
 
+    return if !@$l2;
+
     $::live ? 'Update' : $o->ask_from_list_(_("Install/Update"), _("Is this an install or an update?"), $l2, $def2);
 }
 
@@ -253,12 +255,12 @@ sub selectInstallClass {
     my $verifInstallClass = sub { $::expert = $c{$_[0]} eq "expert" };
     my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? __("Upgrade packages only") : __("Upgrade") : __("Install");
 
-    $installMode = $o->selectInstallClass1($verifInstallClass,
-					   first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
-					   [ __("Install"), __("Upgrade"), __("Upgrade packages only") ], $installMode);
-
-    $o->{isUpgrade} = $installMode =~ /Upgrade/;
-    $o->{keepConfiguration} = $installMode =~ /packages only/;
+    if ($installMode = $o->selectInstallClass1($verifInstallClass,
+					       first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
+					       exists $o->{isUpgrade} ? [] : [ __("Install"), __("Upgrade"), __("Upgrade packages only") ], $installMode)) {
+	$o->{isUpgrade} = $installMode =~ /Upgrade/;
+	$o->{keepConfiguration} = $installMode =~ /packages only/;
+    }
 
     install_steps::selectInstallClass($o);
 }
