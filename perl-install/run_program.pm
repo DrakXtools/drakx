@@ -48,7 +48,7 @@ sub raw {
     ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
 
     my $args = $options->{sensitive_arguments} ? '<hidden arguments>' : join(' ', @args);
-    log::l("running: $real_name $args" . ($root ? " with root $root" : ""));
+    log::explanations("running: $real_name $args" . ($root ? " with root $root" : ""));
 
     return 1 if $root && $<;
 
