@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-09-13 22:00+0200\n"
-"PO-Revision-Date: 2002-09-14 10:27+0200\n"
-"Last-Translator: Vitauts Stochka <vit@dau.lv>\n"
+"PO-Revision-Date: 2002-09-15 14:28+0200\n"
+"Last-Translator: Raivo Saars <spaiks@inbox.lv>\n"
 "Language-Team: Latvian <ll10nt@listes.murds.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-13\n"
@@ -168,7 +168,7 @@ msgstr "Izðíirtspçja"
 
 #: ../../Xconfig/main.pm_.c:113
 msgid "Test"
-msgstr ""
+msgstr "Pârbaude"
 
 #: ../../Xconfig/main.pm_.c:118 ../../diskdrake/dav.pm_.c:67
 #: ../../diskdrake/interactive.pm_.c:381 ../../diskdrake/removable.pm_.c:25
@@ -577,6 +577,11 @@ msgid ""
 "\n"
 "On which drive are you booting?"
 msgstr ""
+"Jûs nolçmât sâknçtâju instalçt uz diska sadaïas.\n"
+"Tas paredz, ka jums jau ir sâknçtâjs uz tâ sâknçjamâ cietâ diska (piem.: "
+"System Commander).\n"
+"\n"
+"Kurð ir jûsu sâknçjamais disks?"
 
 #: ../../any.pm_.c:248
 msgid ""
@@ -677,7 +682,7 @@ msgstr "Tukðs nosaukums nav atïauts"
 
 #: ../../any.pm_.c:332
 msgid "You must specify a kernel image"
-msgstr ""
+msgstr "Jums jânorâda kodola attçls"
 
 #: ../../any.pm_.c:332
 msgid "You must specify a root partition"
@@ -733,6 +738,8 @@ msgid ""
 "You may now provide its options to module %s.\n"
 "Note that any address should be entered with the prefix 0x like '0x123'"
 msgstr ""
+"Tagad jûs varat norâdît moduïa %s opcijas.\n"
+"Atcerieties, ka visas adreses jâievada ar 0x prefiksu, piemçram, '0x123'"
 
 #: ../../any.pm_.c:696
 #, c-format
@@ -927,6 +934,8 @@ msgstr "Nepiecieðams instalçt pakotni %s. Vai vçlaties to instalçt?"
 msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
 msgstr ""
+"Jûs varat eksportçt, lietojot NFS vai Samba. Lûdzu izvçlieties, kuru "
+"vçlaties lietot."
 
 #: ../../any.pm_.c:999 ../../install_any.pm_.c:1204 ../../standalone.pm_.c:64
 #, c-format
@@ -934,6 +943,7 @@ msgid "Mandatory package %s is missing"
 msgstr "Iztrûkst obligâtâ pakotne %s."
 
 #: ../../any.pm_.c:1005
+#, fuzzy
 msgid ""
 "Would you like to allow users to share some of their directories?\n"
 "Allowing this will permit users to simply click on \"Share\" in konqueror "
@@ -941,6 +951,12 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
+"Vai vçlaties ïaut lietotâjies dalîties ar saviem direktorijiem?\n"
+"Atïaujot ðo, lietotâjiem bûs atïauts vienkârði noklikðíinât uz \"Dalîties\" "
+"konqueror\n"
+"vai nautilus programmâs.\n"
+"\n"
+"\"Custom\" atïauj individuâlu tiesîbu pieðíirðanu.\n"
 
 #: ../../any.pm_.c:1019
 msgid "Launch userdrake"
@@ -951,6 +967,8 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user in this group."
 msgstr ""
+"Lietotâju koplietojumi izmanto grupu \"fileshare\". \n"
+"Jûs varat izmantot userdrake, lai ðai grupai pievienotu lietotâjus."
 
 #: ../../any.pm_.c:1072
 msgid "Welcome To Crackers"
@@ -1051,10 +1069,12 @@ msgstr "Lietot libsafe priekð serveriem"
 msgid ""
 "A library which defends against buffer overflow and format string attacks."
 msgstr ""
+"Bibliotçka, kas aizsargâ pret bufera pârpildîðanas un rindas formâta "
+"uzbrukumiem."
 
 #: ../../any.pm_.c:1103
 msgid "Security Administrator (login or email)"
-msgstr ""
+msgstr "Droðîbas administrators (lietotâju vai pasta)"
 
 #: ../../any.pm_.c:1192
 msgid ""
@@ -1247,9 +1267,9 @@ msgid "Create new theme"
 msgstr "Izveidot jaunu tçmu"
 
 #: ../../bootlook.pm_.c:193
-#, c-format
+#, fuzzy, c-format
 msgid "Backup %s to %s.old"
-msgstr ""
+msgstr "Dublçt %s uz %s.old"
 
 #: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
 #: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
@@ -1286,9 +1306,9 @@ msgid "Can't write /etc/sysconfig/bootsplash."
 msgstr "Nav iespçjams rakstît /etc/sysconfig/bootsplash."
 
 #: ../../bootlook.pm_.c:230
-#, fuzzy, c-format
+#, c-format
 msgid "Write %s"
-msgstr "XFree %s"
+msgstr "Rakstît %s"
 
 #: ../../bootlook.pm_.c:232
 msgid ""
@@ -1301,12 +1321,12 @@ msgstr ""
 #: ../../bootlook.pm_.c:243
 #, c-format
 msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
+msgstr "Nav iespçjams izpildît mkinitrd -f /boot/initrd-%s.img %s."
 
 #: ../../bootlook.pm_.c:246
-#, c-format
+#, fuzzy, c-format
 msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
+msgstr "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 
 #: ../../bootlook.pm_.c:252
 msgid ""
@@ -1315,8 +1335,9 @@ msgid ""
 msgstr ""
 
 #: ../../bootlook.pm_.c:256
+#, fuzzy
 msgid "Relaunch 'lilo'"
-msgstr ""
+msgstr "Izpildiet atkârtoti 'lilo'"
 
 #: ../../bootlook.pm_.c:258 ../../standalone/draksplash_.c:165
 #: ../../standalone/draksplash_.c:329 ../../standalone/draksplash_.c:456
@@ -1325,7 +1346,7 @@ msgstr "Brîdinâjums"
 
 #: ../../bootlook.pm_.c:259
 msgid "LiLo and Bootsplash themes installation successfull"
-msgstr ""
+msgstr "LiLo un Bootsplash tçmu instalçðana ir veiksmîga"
 
 #: ../../bootlook.pm_.c:259
 msgid "Theme installation failed!"
@@ -1347,9 +1368,8 @@ msgid "Configure"
 msgstr "Konfigurçt"
 
 #: ../../bootlook.pm_.c:276
-#, fuzzy
 msgid "Splash selection"
-msgstr "Saglabât pakotòu izvçli"
+msgstr ""
 
 #: ../../bootlook.pm_.c:279
 msgid "Themes"
@@ -1452,7 +1472,7 @@ msgstr "Francija"
 
 #: ../../crypto.pm_.c:15
 msgid "Costa Rica"
-msgstr ""
+msgstr "Kostarika"
 
 #: ../../crypto.pm_.c:16 ../../crypto.pm_.c:29 ../../network/tools.pm_.c:104
 #: ../../network/tools.pm_.c:116
@@ -1624,9 +1644,8 @@ msgid "HFS"
 msgstr "HFS"
 
 #: ../../diskdrake/hd_gtk.pm_.c:323
-#, fuzzy
 msgid "Journalised FS"
-msgstr "montçðana neizdevâs"
+msgstr "Þurnalçta FS"
 
 #: ../../diskdrake/hd_gtk.pm_.c:323
 msgid "SunOS"
@@ -2600,11 +2619,11 @@ msgstr ""
 
 #: ../../harddrake/ui.pm_.c:22
 msgid "Media class"
-msgstr ""
+msgstr "Mçdiju klase"
 
 #: ../../harddrake/ui.pm_.c:22
 msgid "class of hardware device"
-msgstr ""
+msgstr "Aparatûras iekârtas klase"
 
 #: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1562
 msgid "Description"
@@ -2612,7 +2631,7 @@ msgstr "Apraksts"
 
 #: ../../harddrake/ui.pm_.c:23
 msgid "this field describe the device"
-msgstr ""
+msgstr "ðis lauks apraksta iekârtu"
 
 #: ../../harddrake/ui.pm_.c:25
 msgid "Bus identification"
@@ -2743,7 +2762,7 @@ msgstr "Notiek noteikðana"
 
 #: ../../harddrake/ui.pm_.c:148
 msgid "You can configure each parameter of the module here."
-msgstr ""
+msgstr "Ðeit Jûs varat konfigurçt katru moduïa parametru."
 
 #: ../../harddrake/ui.pm_.c:166
 #, c-format
@@ -2797,16 +2816,16 @@ msgstr "Uztvçrçja tips:"
 
 #: ../../harddrake/v4l.pm_.c:215
 msgid "Number of capture buffers:"
-msgstr ""
+msgstr "Uztverðanas buferu skaits:"
 
 #: ../../harddrake/v4l.pm_.c:215
 msgid "number of capture buffers for mmap'ed capture"
-msgstr ""
+msgstr "Uztverðanas buferu skaits mmap-çtai uztverðanai"
 
 #: ../../harddrake/v4l.pm_.c:217
 #, fuzzy
 msgid "PLL setting:"
-msgstr "Formatçju"
+msgstr "PLL setting:"
 
 #: ../../harddrake/v4l.pm_.c:218
 msgid "Radio support:"
@@ -3121,6 +3140,11 @@ msgid ""
 "act as a server, or if you were not successful in getting the display\n"
 "configured."
 msgstr ""
+"Visbeidzot, Jums tiks uzdots jautâjums vai Jûs vçlaties grafisko saskarni\n"
+"pie ielâdes. Ðis jautâjums tiks Jums uzdots, pat ja Jûs neizvçlçjâties\n"
+"pârbaudît konfigurâciju. Acîmredzot, Jûs vçlaties atbildet \"Nç\" ja ðis\n"
+"dators darbosies kâ serveris, vai arî neizdevâs veiksmîgi paveikt ekrâna\n"
+"konfigurçðanu."
 
 #: ../../help.pm_.c:253
 msgid ""
@@ -4201,7 +4225,7 @@ msgstr ""
 
 #: ../../install_any.pm_.c:471
 msgid "Can't use broadcast with no NIS domain"
-msgstr ""
+msgstr "Neva izmantot apraidi bez NIS domçna"
 
 #: ../../install_any.pm_.c:870
 #, c-format
@@ -5002,15 +5026,16 @@ msgid ""
 "Failed to check filesystem %s. Do you want to repair the errors? (beware, "
 "you can loose data)"
 msgstr ""
+"Neizdevâs pârbaudît failsistçmu %s. Vai vçlaties labot kïûdas? (uzmanieties, "
+"jûs varat zaudçt datus)"
 
 #: ../../install_steps_interactive.pm_.c:465
 msgid "Not enough swap space to fulfill installation, please add some"
 msgstr "Instalçðanas pabeigðanai nepietiek swap, palieliniet swap"
 
 #: ../../install_steps_interactive.pm_.c:472
-#, fuzzy
 msgid "Looking for available packages and rebuilding rpm database..."
-msgstr "Meklçju pieejamâs pakotnes"
+msgstr "Meklçju pieejamâs pakotnes un pârbûvçju rpm datubâzi..."
 
 #: ../../install_steps_interactive.pm_.c:473
 msgid "Looking for available packages..."
@@ -5204,6 +5229,14 @@ msgid ""
 "\n"
 "Do you want to install the updates ?"
 msgstr ""
+"Jums ir iespçja lejuplâdçt atjauninâtas pakotnes. Ðîs pakotnes tika "
+"izlaistas\n"
+"pçc distribûcijas izlaiðanas. Tâs var saturçt droðîbas vai kïûdu labojumus.\n"
+"\n"
+"Lai lejuplâdçtu ðîs pakotnes, Jums jabût darbojoðamies Interneta "
+"pieslçgumam.\n"
+"\n"
+"Vai Jûs vçlaties instalçt jauninâjumus?"
 
 #: ../../install_steps_interactive.pm_.c:901
 msgid ""
@@ -5251,7 +5284,7 @@ msgstr "Vai Jums ir ISA skaòas karte?"
 
 #: ../../install_steps_interactive.pm_.c:1010
 msgid "Run \"sndconfig\" after installation to configure your sound card"
-msgstr ""
+msgstr "Pçc instalçðanas palaidiet \"sndconfig\", lai konfigurçtu skaòu karti"
 
 #: ../../install_steps_interactive.pm_.c:1012
 msgid "No sound card detected. Try \"harddrake\" after installation"
@@ -5380,7 +5413,7 @@ msgstr "Domçna administratora lietotâja vârds"
 
 #: ../../install_steps_interactive.pm_.c:1126
 msgid "Domain Admin Password"
-msgstr ""
+msgstr "Domçna administratora parole"
 
 #: ../../install_steps_interactive.pm_.c:1161
 msgid ""
@@ -5569,7 +5602,7 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:1330
 msgid "http://www.mandrakelinux.com/en/90errata.php3"
-msgstr ""
+msgstr "http://www.mandrakelinux.com/en/90errata.php3"
 
 #: ../../install_steps_interactive.pm_.c:1335
 msgid "Generate auto install floppy"
@@ -5626,7 +5659,7 @@ msgstr "Izvçrsta"
 
 #: ../../interactive.pm_.c:321 ../../security/main.pm_.c:220
 msgid "Basic"
-msgstr ""
+msgstr "Pamata"
 
 #: ../../interactive/newt.pm_.c:195 ../../my_gtk.pm_.c:158
 #: ../../printerdrake.pm_.c:2169
@@ -5814,8 +5847,9 @@ msgid "German (no dead keys)"
 msgstr "Vâcijas (bez mçmajiem taustiòiem)"
 
 #: ../../keyboard.pm_.c:191
+#, fuzzy
 msgid "Devanagari"
-msgstr ""
+msgstr "Devanagari"
 
 #: ../../keyboard.pm_.c:192
 msgid "Danish"
@@ -5850,12 +5884,14 @@ msgid "Greek"
 msgstr "Grieíijas"
 
 #: ../../keyboard.pm_.c:203
+#, fuzzy
 msgid "Gujarati"
-msgstr ""
+msgstr "Gujarati"
 
 #: ../../keyboard.pm_.c:204
+#, fuzzy
 msgid "Gurmukhi"
-msgstr ""
+msgstr "Gurmukhi"
 
 #: ../../keyboard.pm_.c:205
 msgid "Hungarian"
@@ -5886,8 +5922,9 @@ msgid "Italian"
 msgstr "Itâlijas"
 
 #: ../../keyboard.pm_.c:212
+#, fuzzy
 msgid "Inuktitut"
-msgstr ""
+msgstr "Inuktitut"
 
 #: ../../keyboard.pm_.c:213
 msgid "Japanese 106 keys"
@@ -5902,9 +5939,8 @@ msgid "Latin American"
 msgstr "Latîòamerikas"
 
 #: ../../keyboard.pm_.c:218
-#, fuzzy
 msgid "Laotian"
-msgstr "Atraðanâs vieta"
+msgstr "Laoieðu"
 
 #: ../../keyboard.pm_.c:219
 msgid "Lithuanian AZERTY (old)"
@@ -5931,20 +5967,23 @@ msgid "Macedonian"
 msgstr "Maíedonijas"
 
 #: ../../keyboard.pm_.c:226
+#, fuzzy
 msgid "Myanmar (Burmese)"
-msgstr ""
+msgstr "Myanmar (Burmese)"
 
 #: ../../keyboard.pm_.c:227
 msgid "Mongolian (cyrillic)"
 msgstr "Mongoïu (kirilica)"
 
 #: ../../keyboard.pm_.c:228
+#, fuzzy
 msgid "Maltese (UK)"
-msgstr ""
+msgstr "Maltese (UK)"
 
 #: ../../keyboard.pm_.c:229
+#, fuzzy
 msgid "Maltese (US)"
-msgstr ""
+msgstr "Maltese (US)"
 
 #: ../../keyboard.pm_.c:230
 msgid "Dutch"
@@ -5995,12 +6034,14 @@ msgid "Serbian (cyrillic)"
 msgstr "Serbu (kirilica)"
 
 #: ../../keyboard.pm_.c:248
+#, fuzzy
 msgid "Tamil (Unicode)"
-msgstr ""
+msgstr "Tamil (Unicode)"
 
 #: ../../keyboard.pm_.c:249
+#, fuzzy
 msgid "Tamil (TSCII)"
-msgstr ""
+msgstr "Tamil (TSCII)"
 
 #: ../../keyboard.pm_.c:250
 msgid "Thai keyboard"
@@ -6316,7 +6357,7 @@ msgstr ""
 
 #: ../../network/drakfirewall.pm_.c:147
 msgid "Which services would you like to allow the Internet to connect to?"
-msgstr ""
+msgstr "Kâdiem servisiem Jûs vçlaties atïaut piekïuvi no Interneta?"
 
 #: ../../network/drakfirewall.pm_.c:148
 msgid ""
@@ -6324,6 +6365,10 @@ msgid ""
 "Valid examples are: 139/tcp 139/udp.\n"
 "Have a look at /etc/services for information."
 msgstr ""
+"Jûs varat ievadît daþâdus portus.\n"
+"Derîgi piemçri ir: 139/tcp 139/udp.\n"
+"Aplûkojiet /etc/services lai iegûtu vairâ\n"
+"informâcijas."
 
 #: ../../network/drakfirewall.pm_.c:154
 #, c-format
@@ -6838,9 +6883,8 @@ msgid "Automatic IP"
 msgstr "Automâtisks IP"
 
 #: ../../network/network.pm_.c:312
-#, fuzzy
 msgid "Start at boot"
-msgstr "Sistçmdisketes radîðana"
+msgstr "Sâkt pie ielâdes"
 
 #: ../../network/network.pm_.c:333 ../../printerdrake.pm_.c:875
 msgid "IP address should be in format 1.2.3.4"
@@ -6893,7 +6937,7 @@ msgstr "FTP proxy"
 
 #: ../../network/network.pm_.c:397
 msgid "Track network card id (useful for laptops)"
-msgstr ""
+msgstr "Sekot tîkla kartes id (noder klçpjdatoriem)"
 
 #: ../../network/network.pm_.c:400
 msgid "Proxy should be http://..."
@@ -7379,12 +7423,16 @@ msgid ""
 "\n"
 "are "
 msgstr ""
+"\n"
+"ir"
 
 #: ../../printerdrake.pm_.c:208
 msgid ""
 "\n"
 "is "
 msgstr ""
+"\n"
+"ir"
 
 #: ../../printerdrake.pm_.c:210
 msgid "directly connected to your system"
@@ -7757,7 +7805,7 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:889
 msgid "SECURITY WARNING!"
-msgstr ""
+msgstr "DROÐÎBAS BRÎDINÂJUMS!"
 
 #: ../../printerdrake.pm_.c:890
 #, c-format
@@ -8338,19 +8386,24 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:2493
+#, fuzzy
 msgid ""
 "\n"
 "Mark the printers which you want to transfer and click \n"
 "\"Transfer\"."
 msgstr ""
+"\n"
+"Atzîmçjiet printerus, kurus vçlaties pârcelt, un\n"
+"klikðíiniet uz \"Pârcelt\"."
 
 #: ../../printerdrake.pm_.c:2496
+#, fuzzy
 msgid "Do not transfer printers"
-msgstr ""
+msgstr "Nepârcelt printerus."
 
 #: ../../printerdrake.pm_.c:2497 ../../printerdrake.pm_.c:2514
 msgid "Transfer"
-msgstr ""
+msgstr "Pârcelðana"
 
 #: ../../printerdrake.pm_.c:2510
 #, c-format
@@ -8393,14 +8446,12 @@ msgstr "Atsvaidzinu printera datus..."
 
 #: ../../printerdrake.pm_.c:2563 ../../printerdrake.pm_.c:2638
 #: ../../printerdrake.pm_.c:2650
-#, fuzzy
 msgid "Configuration of a remote printer"
-msgstr "Konfigurâcija"
+msgstr "Attâlinâta printera konfigurâcija"
 
 #: ../../printerdrake.pm_.c:2564
-#, fuzzy
 msgid "Starting network..."
-msgstr "Izmçìinu pieslçgumu..."
+msgstr "tiek sâkts tîkls..."
 
 #: ../../printerdrake.pm_.c:2599 ../../printerdrake.pm_.c:2603
 #: ../../printerdrake.pm_.c:2605
@@ -8728,14 +8779,12 @@ msgid "port"
 msgstr "ports"
 
 #: ../../proxy.pm_.c:44
-#, fuzzy
 msgid "Url should begin with 'http:'"
-msgstr "Proxy bûtu jâbût http://..."
+msgstr "Url jâsâkas ar http://..."
 
 #: ../../proxy.pm_.c:48 ../../proxy.pm_.c:69
-#, fuzzy
 msgid "The port part should be numeric"
-msgstr "Porta numuram ir jâbût skaitlim"
+msgstr "Porta daïai ir jâbût skaitlim"
 
 #: ../../proxy.pm_.c:59
 msgid ""
@@ -8758,9 +8807,8 @@ msgid "password"
 msgstr "parole"
 
 #: ../../proxy.pm_.c:84
-#, fuzzy
 msgid "re-type password"
-msgstr "Bez paroles"
+msgstr "vçlreiz ierakstiet paroli"
 
 #: ../../proxy.pm_.c:88
 msgid "The passwords don't match. Try again!"
@@ -8827,9 +8875,9 @@ msgid "Security Administrator:"
 msgstr "Droðîbas administrators:"
 
 #: ../../security/main.pm_.c:114 ../../security/main.pm_.c:150
-#, fuzzy, c-format
+#, c-format
 msgid " (default: %s)"
-msgstr " (Noklusçts)"
+msgstr " (noklusçts: %s)"
 
 #: ../../security/main.pm_.c:118 ../../security/main.pm_.c:154
 #: ../../security/main.pm_.c:179
@@ -8848,17 +8896,16 @@ msgstr "Sistçmas opcijas"
 
 #: ../../security/main.pm_.c:242
 msgid "Periodic Checks"
-msgstr ""
+msgstr "Periodiskas pârbaudes"
 
 #: ../../security/main.pm_.c:256
-#, fuzzy
 msgid "Please wait, setting security level..."
-msgstr "Uzstâdu droðîbas lîmeni"
+msgstr "Lûdzu uzgaidiet, uzstâdu droðîbas lîmeni"
 
 #: ../../security/main.pm_.c:262
 #, fuzzy
 msgid "Please wait, setting security options..."
-msgstr "Lûdzu gaidiet, gatavoju instalâciju"
+msgstr "Lûdzu uzgaidiet, gatavoju instalâciju"
 
 #: ../../services.pm_.c:14
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -9058,13 +9105,12 @@ msgstr ""
 "darbojas kâ RPC protokolus izmantojoðu protokolu serveri."
 
 #: ../../services.pm_.c:66
-#, fuzzy
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
 msgstr ""
-"Postfix ir Pasta Transporta Aìents, un tâ ir programma, kas pârvieto\n"
-"pastu no viena datora uz citu."
+"Postfix ir Pasta transporta aìents, un tâ ir programma, kas pârvieto pastu "
+"no viena datora uz citu."
 
 #: ../../services.pm_.c:67
 msgid ""
@@ -9116,9 +9162,8 @@ msgstr ""
 "sesiju sarakstu no datora, kurâ darbojas rwho demons (lîdzîgi finger)."
 
 #: ../../services.pm_.c:80
-#, fuzzy
 msgid "Launch the sound system on your machine"
-msgstr "Palaist X-Window sistçmu startçðanas laikâ"
+msgstr "Palaist skaòusistçmu uz Jûsu datora"
 
 #: ../../services.pm_.c:81
 msgid ""
@@ -9133,9 +9178,8 @@ msgid "Load the drivers for your usb devices."
 msgstr "Ielâdç draiverus jûsu usb ierîcçm."
 
 #: ../../services.pm_.c:84
-#, fuzzy
 msgid "Starts the X Font Server (this is mandatory for XFree to run)."
-msgstr "Startç un aptura X Fontu Serveri sâknçðanas un aizvçrðanas laikâ."
+msgstr "Startç X fontu serveri (obligâti, lai izpildîtu XFree)."
 
 #: ../../services.pm_.c:110 ../../services.pm_.c:152
 msgid "Choose which services should be automatically started at boot time"
@@ -9192,6 +9236,8 @@ msgid ""
 "No additional information\n"
 "about this service, sorry."
 msgstr ""
+"Nav papildus informâcijas\n"
+"par ðo servisu."
 
 #: ../../services.pm_.c:224
 msgid "On boot"
@@ -9221,19 +9267,20 @@ msgid ""
 msgstr ""
 
 #: ../../share/advertising/02-community.pl_.c:9
-#, fuzzy
 msgid "Get involved in the Free Software world"
-msgstr "Citur pasaulç"
+msgstr "Iesaistieties Brîvâs Programmatûras pasaulç"
 
 #: ../../share/advertising/02-community.pl_.c:10
 msgid "Want to know more about the Open Source community?"
-msgstr ""
+msgstr "Gribat uzzinât vairâk par Atvçrtâ Koda kopienu?"
 
 #: ../../share/advertising/02-community.pl_.c:11
 msgid ""
 "To share your own knowledge and help build Linux tools, join the discussion "
 "forums you'll find on our \"Community\" webpages"
 msgstr ""
+"Lai dalîtos ar pieredzi un palîdzçtu veidot Linux rîkus, pievienojieties "
+"diskusiju forumiem, kurus varat atrast \"Kopienas\" web lapâs."
 
 #: ../../share/advertising/03-internet.pl_.c:9
 #, fuzzy
@@ -9246,6 +9293,9 @@ msgid ""
 "view animations with Mozilla and Konqueror, or read your mail and handle "
 "your personal information with Evolution and Kmail"
 msgstr ""
+"Mandrake Linux 9.0 ir izvçlçjies labâko programmatûru priekð Jums. Sçrfojiet "
+"Web un apskatiet animâcijas ar Mozilla un Konqueror, jeb lasiet pastu un "
+"uzturiet personâlo informâciju ar Evolution un Kmail"
 
 #: ../../share/advertising/04-multimedia.pl_.c:9
 msgid "Discover the most up-to-date graphical and multimedia tools!"
@@ -9260,6 +9310,9 @@ msgid ""
 "Mandrake Linux 9.0 enables you to use the very latest software to play audio "
 "files, edit and handle your images or photos, and play videos"
 msgstr ""
+"Mandrake Lunux 9.0 ïauj Jums lietot paðu pçdçjo programmnodroðinâjumu, lai "
+"atskaòotu audio failus, rediìçtu un uzturçtu attçlus jeb fotogrâfijas, un "
+"apskatîtu video"
 
 #
 #: ../../share/advertising/05-games.pl_.c:9
@@ -9271,17 +9324,20 @@ msgid ""
 "Mandrake Linux 9.0 provides the best Open Source games - arcade, action, "
 "strategy, ..."
 msgstr ""
+"Mandrake Linux 9.0 nodroðina labâkâs Atvçrtâ Koda spçles - arkâdes. "
+"darbîbas, stratçìijas, ..."
 
 #: ../../share/advertising/06-mcc.pl_.c:9 ../../standalone/drakbug_.c:69
-#, fuzzy
 msgid "Mandrake Control Center"
-msgstr "Pieslçgties Internetam"
+msgstr "Mandrake kontroles centrs"
 
 #: ../../share/advertising/06-mcc.pl_.c:10
 msgid ""
 "Mandrake Linux 9.0 provides a powerful tool to fully customize and configure "
 "your machine"
 msgstr ""
+"Mandrake Linux 9.0 nodroðina spçcîgu rîku, lai pilnîbâ pielâgotu un "
+"konfigurçtu Jûsu datoru"
 
 #: ../../share/advertising/07-desktop.pl_.c:9
 msgid "User interfaces"
@@ -9292,52 +9348,63 @@ msgid ""
 "Mandrake Linux 9.0 provides you with 11 user interfaces that can be fully "
 "modified: KDE 3, Gnome 2, WindowMaker, ..."
 msgstr ""
+"Mandrake Linux 9.0 nodroðina Jûs ar 11 lietotâja saskarnçm, kas var tikt "
+"pilnîbâ izmainîtas: KDE 3, Gnome 2, WindowMaker, ..."
 
 #
 #: ../../share/advertising/08-development.pl_.c:9
-#, fuzzy
 msgid "Development simplified"
-msgstr "Izstrâde, Tîmeklis"
+msgstr "Vienkârðota izstrâde"
 
 #: ../../share/advertising/08-development.pl_.c:10
 msgid "Mandrake Linux 9.0 is the ultimate development platform"
-msgstr ""
+msgstr "Mandrake Linux 9.0 ir maksimâla izstrâdâðanas platforma"
 
 #: ../../share/advertising/08-development.pl_.c:11
 msgid ""
 "Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
 "development environments"
 msgstr ""
+"Izmantojiet GNU gcc 3 compilçtâja un citu labâko Atvçrtâ Koda izstrâdâðanas "
+"vidu pilnu spçku"
 
 #: ../../share/advertising/09-server.pl_.c:9
 msgid "Turn your machine into a reliable server"
-msgstr ""
+msgstr "Pârvçrtiet Jûsu datoru par droðu serveri"
 
 #: ../../share/advertising/09-server.pl_.c:10
+#, fuzzy
 msgid ""
 "Transform your machine into a powerful Linux server with a few clicks of "
 "your mouse: Web server, mail, firewall, router, file and print server, ..."
 msgstr ""
+"Pârveidojiet Jûsu datoru par spçcîgu Linux serveri ar daþiem peles "
+"klikðíiem. Web serveris, pasts, ugunsmûris, rûteris, filu un printeru "
+"serveris, ..."
 
 #: ../../share/advertising/10-mnf.pl_.c:9
 msgid "Optimize your security"
-msgstr ""
+msgstr "Optimizçt droðîbu"
 
 #: ../../share/advertising/10-mnf.pl_.c:10
 msgid ""
 "The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
 "F.)"
 msgstr ""
+"MandrakeSecurity diapazons ietver Multi Network Firewall (M.N.F.) produktu"
 
 #: ../../share/advertising/10-mnf.pl_.c:11
 msgid ""
 "This firewall product includes network features that allow you to fulfill "
 "all your security needs"
 msgstr ""
+"Ugunsmûra produkts ietver tîkla iespçjas, kas ïauj Jums îstenot Jûsu "
+"droðîbas vajadzîbas"
 
 #: ../../share/advertising/10-mnf.pl_.c:12
+#, fuzzy
 msgid "This product is available on MandrakeStore website"
-msgstr ""
+msgstr "Ðis produkts ir pieejams MandrakeStore Web vietâ"
 
 #: ../../share/advertising/11-mdkstore.pl_.c:9
 msgid "The official MandrakeSoft store"
@@ -9351,7 +9418,7 @@ msgstr ""
 
 #: ../../share/advertising/12-mdkstore.pl_.c:9
 msgid "Strategic partners"
-msgstr ""
+msgstr "Stratçìiskie partneri"
 
 #: ../../share/advertising/12-mdkstore.pl_.c:10
 msgid ""
@@ -9401,7 +9468,7 @@ msgstr ""
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:9
 #, fuzzy
 msgid "MandrakeExpert Corporate"
-msgstr "Eksperta"
+msgstr "Korporatîvais MandrakeExpert"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:10
 msgid "An online platform to respond to company's specific support needs"
@@ -9412,10 +9479,11 @@ msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr ""
+"Visiem incidentiem sekos viens kvalificçts MandrakeSoft tehniskais eksperts."
 
 #: ../../share/advertising/17-mdkclub.pl_.c:9
 msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr ""
+msgstr "Atkâjiet MandrakeClub un Mandrake korporatîvo klubu"
 
 #: ../../share/advertising/17-mdkclub.pl_.c:10
 msgid ""
@@ -9445,14 +9513,12 @@ msgid "Mandrake Terminal Server Configuration"
 msgstr "Mandrake terminâïu servera konfigurâcija"
 
 #: ../../standalone/drakTermServ_.c:203
-#, fuzzy
 msgid "Enable Server"
-msgstr "Serveris, Datubâzes"
+msgstr "Atïaut serveri"
 
 #: ../../standalone/drakTermServ_.c:210
-#, fuzzy
 msgid "Disable Server"
-msgstr "Serveris, Datubâzes"
+msgstr "Aizliegt serveri"
 
 #: ../../standalone/drakTermServ_.c:218
 msgid "Start Server"
@@ -9488,15 +9554,15 @@ msgstr ""
 
 #: ../../standalone/drakTermServ_.c:507
 msgid "Build Whole Kernel -->"
-msgstr ""
+msgstr "Bûvçt visu kodolu -->"
 
 #: ../../standalone/drakTermServ_.c:509 ../../standalone/drakTermServ_.c:539
 msgid "This will take a few minutes."
-msgstr ""
+msgstr "Tas aizòems daþas minûtes."
 
 #: ../../standalone/drakTermServ_.c:521
 msgid "No kernel selected!"
-msgstr ""
+msgstr "Kodols nav izvçlçts!"
 
 #: ../../standalone/drakTermServ_.c:524
 msgid "Build Single NIC -->"
@@ -9509,26 +9575,23 @@ msgstr "Nav pieslçgts"
 
 #: ../../standalone/drakTermServ_.c:538
 msgid "Build All Kernels -->"
-msgstr ""
+msgstr "Bûvçt visus kodolus -->"
 
 #: ../../standalone/drakTermServ_.c:552
-#, fuzzy
 msgid "<-- Delete"
-msgstr "Izdzçst"
+msgstr "<-- Izdzçst"
 
 #: ../../standalone/drakTermServ_.c:559
-#, fuzzy
 msgid "Delete All NBIs"
-msgstr "Izvçlieties failu"
+msgstr "Izdzçst visus NBI"
 
 #: ../../standalone/drakTermServ_.c:621
-#, fuzzy
 msgid "Add User -->"
-msgstr "Pievienot lietotâju"
+msgstr "Pievienot lietotâju -->"
 
 #: ../../standalone/drakTermServ_.c:629
 msgid "<-- Del User"
-msgstr ""
+msgstr "<-- Dzçst lietotâju"
 
 #: ../../standalone/drakTermServ_.c:694
 msgid "No net boot images created!"
@@ -9536,22 +9599,19 @@ msgstr ""
 
 #: ../../standalone/drakTermServ_.c:710
 msgid "Add Client -->"
-msgstr ""
+msgstr "Pievienot klientu -->"
 
 #: ../../standalone/drakTermServ_.c:742
-#, fuzzy
 msgid "<-- Del Client"
-msgstr "DHCP klients"
+msgstr "<-- Dzçst klientu"
 
 #: ../../standalone/drakTermServ_.c:748
-#, fuzzy
 msgid "dhcpd Config..."
-msgstr "Konfigurçju..."
+msgstr "Konfigurçju dhcpd..."
 
 #: ../../standalone/drakTermServ_.c:873
-#, fuzzy
 msgid "dhcpd Server Configuration"
-msgstr "LAN konfigurâcija"
+msgstr "dhcpd servera konfigurâcija"
 
 #: ../../standalone/drakTermServ_.c:874
 msgid ""
@@ -9560,27 +9620,24 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakTermServ_.c:875
-#, fuzzy
 msgid "Write Config"
-msgstr "pârkonfigurçt"
+msgstr "Ierakstît konfigurâciju"
 
 #: ../../standalone/drakTermServ_.c:965
-#, fuzzy
 msgid "Please insert floppy disk:"
-msgstr "Ielieciet disketi iekârtâ %s"
+msgstr "Lûdzu, ievietojiet disketi:"
 
 #: ../../standalone/drakTermServ_.c:969
 msgid "Couldn't access the floppy!"
-msgstr ""
+msgstr "Nevarçju piekïût disketei!"
 
 #: ../../standalone/drakTermServ_.c:971
 msgid "Floppy can be removed now"
-msgstr ""
+msgstr "Diskete tagad var tikt izòemta"
 
 #: ../../standalone/drakTermServ_.c:974
-#, fuzzy
 msgid "No floppy drive available!"
-msgstr "Nav nevienas diskeðu iekârtas"
+msgstr "Diskeðu iekârta nav pieejama!"
 
 #: ../../standalone/drakTermServ_.c:983
 #, c-format
@@ -9593,7 +9650,7 @@ msgstr ""
 
 #: ../../standalone/drakTermServ_.c:1004
 msgid "Need to create /etc/dhcpd.conf first!"
-msgstr ""
+msgstr "Vispirms jâizveido /etc/dhcpd.conf!"
 
 #: ../../standalone/drakautoinst_.c:43
 msgid "Error!"
@@ -9636,9 +9693,8 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakautoinst_.c:81 ../../standalone/drakautoinst_.c:82
-#, fuzzy
 msgid "Creating auto install floppy"
-msgstr "Sagatavoju auto instalçðanas disketi"
+msgstr "Creating auto install floppy"
 
 #: ../../standalone/drakautoinst_.c:144
 msgid ""
@@ -9660,19 +9716,16 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakautoinst_.c:278
-#, fuzzy
 msgid "Auto Install"
-msgstr "Instalçt"
+msgstr "Automâtiska instalçðana"
 
 #: ../../standalone/drakautoinst_.c:348
-#, fuzzy
 msgid "Add an item"
-msgstr "Lietotâju pievienoðana"
+msgstr "Pievienot vienîbu"
 
 #: ../../standalone/drakautoinst_.c:355
-#, fuzzy
 msgid "Remove the last item"
-msgstr "Formatçju loopback failu %s"
+msgstr "Noòemt pçdçjo vienîbu"
 
 #: ../../standalone/drakbackup_.c:617
 msgid "Cron not available yet as non-root"
@@ -9683,9 +9736,8 @@ msgid "WARNING"
 msgstr "BRÎDINÂJUMS"
 
 #: ../../standalone/drakbackup_.c:724
-#, fuzzy
 msgid "FATAL"
-msgstr "FAT"
+msgstr "FATÂLS"
 
 #: ../../standalone/drakbackup_.c:725
 msgid "INFO"
@@ -9697,6 +9749,9 @@ msgid ""
 "                      DrakBackup Report \n"
 "\n"
 msgstr ""
+"\n"
+"                      DrakBackup ziòojums \n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:738
 msgid ""
@@ -9705,6 +9760,10 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"\n"
+"                      DrakBackup dçmona ziòojums\n"
+"\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:742
 msgid ""
@@ -9713,6 +9772,10 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"\n"
+"                    DrakBackup ziòojuma detaïas\n"
+"\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:763 ../../standalone/drakbackup_.c:836
 #: ../../standalone/drakbackup_.c:891
@@ -9743,9 +9806,9 @@ msgid "No password prompt on %s at port %s"
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:852
-#, fuzzy, c-format
+#, c-format
 msgid "Bad password on %s"
-msgstr "Bez paroles"
+msgstr "SLikta parole uz %s"
 
 #: ../../standalone/drakbackup_.c:853
 #, c-format
@@ -9753,14 +9816,14 @@ msgid "Permission denied transferring %s to %s"
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:854
-#, fuzzy, c-format
+#, c-format
 msgid "Can't find %s on %s"
-msgstr "Adapteris %s: %s"
+msgstr "Nevar atrast %s uz %s"
 
 #: ../../standalone/drakbackup_.c:857
 #, c-format
 msgid "%s not responding"
-msgstr ""
+msgstr "%s neatsaucas"
 
 #: ../../standalone/drakbackup_.c:861
 #, c-format
@@ -9811,9 +9874,8 @@ msgid "Backup system files..."
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:1251 ../../standalone/drakbackup_.c:1318
-#, fuzzy
 msgid "Hard Disk Backup files..."
-msgstr "Slikts rezerves kopijas fails"
+msgstr "Cietòe dublçjuma faili..."
 
 #: ../../standalone/drakbackup_.c:1263
 #, fuzzy
@@ -9841,6 +9903,9 @@ msgid ""
 "Drakbackup activities via %s:\n"
 "\n"
 msgstr ""
+"\n"
+"Drakbackup aktivitâtes caur %s:\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:1346
 #, c-format
@@ -9862,6 +9927,9 @@ msgid ""
 "Drakbackup activities via CD:\n"
 "\n"
 msgstr ""
+"\n"
+"Drakbackup aktivitâtes caur CD:\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:1372
 msgid ""
@@ -9869,11 +9937,13 @@ msgid ""
 "Drakbackup activities via tape:\n"
 "\n"
 msgstr ""
+"\n"
+"Drakbackup aktivitâtes caur tape:\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:1381
-#, fuzzy
 msgid " Error during mail sending. \n"
-msgstr "Kïûda, nolasot failu %s"
+msgstr " Kïûda pasta sûtîðanas laikâ. \n"
 
 #: ../../standalone/drakbackup_.c:1406
 msgid "Can't create catalog!"
@@ -9881,13 +9951,12 @@ msgstr "Nevar izveidot katalogu!"
 
 #: ../../standalone/drakbackup_.c:1519 ../../standalone/drakbackup_.c:1530
 #: ../../standalone/drakfont_.c:1004
-#, fuzzy
 msgid "File Selection"
-msgstr "Pakotòu grupu izvçle"
+msgstr "Failu izvçle"
 
 #: ../../standalone/drakbackup_.c:1558
 msgid "Select the files or directories and click on 'Add'"
-msgstr ""
+msgstr "Atzîmçjiet failus vai direktorijus un klikðíiniet uz 'Pievienot'"
 
 #: ../../standalone/drakbackup_.c:1602
 msgid ""
@@ -9898,7 +9967,7 @@ msgstr ""
 #: ../../standalone/drakbackup_.c:1603
 msgid ""
 "These options can backup and restore all files in your /etc directory.\n"
-msgstr ""
+msgstr "Ðîs opcijas var dublçt un atjaunot visus failus /etc direktorijâ.\n"
 
 #: ../../standalone/drakbackup_.c:1604
 #, fuzzy
@@ -9907,17 +9976,19 @@ msgstr "Slikts rezerves kopijas fails"
 
 #: ../../standalone/drakbackup_.c:1605
 msgid "Use incremental backup  (do not replace old backups)"
-msgstr ""
+msgstr "Lietot pieaugoðu dublçðanu (neaizvietot iepriekðçjâs dublçðanas)"
 
 #: ../../standalone/drakbackup_.c:1606
 msgid "Do not include critical files (passwd, group, fstab)"
-msgstr ""
+msgstr "Neiekïaut kritiskos failus (passwd, group, fstab)"
 
 #: ../../standalone/drakbackup_.c:1607
 msgid ""
 "With this option you will be able to restore any version\n"
 " of your /etc directory."
 msgstr ""
+"Ar ðo opciju Jums bûs iespçja atjaunot jebkuru /etc\n"
+"direktorijas versiju."
 
 #: ../../standalone/drakbackup_.c:1624
 #, fuzzy
@@ -9930,12 +10001,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup_.c:1652 ../../standalone/drakbackup_.c:1676
 msgid "Use Incremental Backups  (do not replace old backups)"
-msgstr ""
+msgstr "Lietot Pieaugoðas Dublçðanas (neaizvietot iepriekðçjâs dublçðanas)"
 
 #: ../../standalone/drakbackup_.c:1674 ../../standalone/drakfont_.c:1058
-#, fuzzy
 msgid "Remove Selected"
-msgstr "Noòemt rindu"
+msgstr " Noòemt atzîmçtos"
 
 #: ../../standalone/drakbackup_.c:1712
 msgid "Windows (FAT32)"
@@ -9956,7 +10026,7 @@ msgstr "Tîkla metode:"
 
 #: ../../standalone/drakbackup_.c:1783
 msgid "Use Expect for SSH"
-msgstr ""
+msgstr "Priekð SSH lietot Expect"
 
 #: ../../standalone/drakbackup_.c:1784
 msgid ""
@@ -9988,19 +10058,16 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:1800
-#, fuzzy
 msgid "Please enter your login"
-msgstr "Lûdzu mçìiniet vçlreiz"
+msgstr "Lûdzu, ievadiet Jûsu lietotâja vârdu"
 
 #: ../../standalone/drakbackup_.c:1805
-#, fuzzy
 msgid "Please enter your password"
-msgstr "Lûdzu mçìiniet vçlreiz"
+msgstr "Lûdzu, ievadie Jûsu paroli"
 
 #: ../../standalone/drakbackup_.c:1811
-#, fuzzy
 msgid "Remember this password"
-msgstr "Bez paroles"
+msgstr "Atcerieties ðo paroli"
 
 #: ../../standalone/drakbackup_.c:1822
 msgid "Need hostname, username and password!"
@@ -10060,9 +10127,8 @@ msgstr ""
 "piemçram: 0,1,0"
 
 #: ../../standalone/drakbackup_.c:2002
-#, fuzzy
 msgid "No CD device defined!"
-msgstr "Izvçlieties failu"
+msgstr "Nav nodefinçta CD iekârta!"
 
 #: ../../standalone/drakbackup_.c:2050
 #, fuzzy
@@ -10096,9 +10162,8 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:2142
-#, fuzzy
 msgid "Please enter the directory to save to:"
-msgstr "Lûdzu notestçjiet peli"
+msgstr "Lûdzu, iezvçlieties direktoriju, kurâ saglabât:"
 
 #: ../../standalone/drakbackup_.c:2157 ../../standalone/drakbackup_.c:3124
 #, fuzzy
@@ -10142,9 +10207,8 @@ msgid "monthly"
 msgstr "ik mçnesi"
 
 #: ../../standalone/drakbackup_.c:2273
-#, fuzzy
 msgid "Use daemon"
-msgstr "Lietotâja vârds"
+msgstr "Lietot dçmonu"
 
 #: ../../standalone/drakbackup_.c:2278
 #, fuzzy
@@ -10192,9 +10256,8 @@ msgid "More Options"
 msgstr "Vairâk opciju"
 
 #: ../../standalone/drakbackup_.c:2407 ../../standalone/drakbackup_.c:4532
-#, fuzzy
 msgid "Drakbackup Configuration"
-msgstr "Tîkla konfigurâcija"
+msgstr "Drakbackup konfigurçðana"
 
 #: ../../standalone/drakbackup_.c:2425
 #, fuzzy
@@ -10318,11 +10381,12 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:2612
-#, fuzzy
 msgid ""
 "\n"
 "- Options:\n"
-msgstr "Opcijas"
+msgstr ""
+"\n"
+"- Opcijas:\n"
 
 #: ../../standalone/drakbackup_.c:2613
 msgid "\tDo not include System Files\n"
@@ -10412,9 +10476,8 @@ msgid "          Successfuly Restored on %s       "
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:2955
-#, fuzzy
 msgid "         Restore Configuration       "
-msgstr "Tîkla konfigurâcija"
+msgstr "         Atjaunot konfigurâciju       "
 
 #: ../../standalone/drakbackup_.c:2973
 msgid "OK to restore the other files."
@@ -10445,14 +10508,12 @@ msgid "Please enter the directory to save:"
 msgstr "Lûdzu notestçjiet peli"
 
 #: ../../standalone/drakbackup_.c:3153
-#, fuzzy
 msgid "FTP Connection"
-msgstr "LAN pieslçgums"
+msgstr "FTP pieslçgums"
 
 #: ../../standalone/drakbackup_.c:3160
-#, fuzzy
 msgid "Secure Connection"
-msgstr "Izvçlieties printera pieslçgumu"
+msgstr "Droðs pieslçgums"
 
 #: ../../standalone/drakbackup_.c:3186
 #, fuzzy
@@ -10587,7 +10648,7 @@ msgstr "Nepiecieðams resursa vârds"
 
 #: ../../standalone/drakbackup_.c:3549
 msgid "Path or Module required"
-msgstr ""
+msgstr "Nepiecieðams ceïð vai modulis"
 
 #: ../../standalone/drakbackup_.c:3562
 msgid "Files Restored..."
@@ -10608,7 +10669,7 @@ msgstr "Pielâgota"
 
 #: ../../standalone/drakbackup_.c:3858
 msgid "CD in place - continue."
-msgstr ""
+msgstr "CD savâ vietâ - turpinu."
 
 #: ../../standalone/drakbackup_.c:3864
 msgid "Browse to new restore repository."
@@ -10627,9 +10688,8 @@ msgstr "Atjaunoðanas progress"
 #: ../../standalone/drakbackup_.c:4050 ../../standalone/drakbackup_.c:4110
 #: ../../standalone/drakbackup_.c:4137 ../../standalone/drakbackup_.c:4167
 #: ../../standalone/drakbackup_.c:4193
-#, fuzzy
 msgid "Previous"
-msgstr "<- Atpakaï"
+msgstr "Iepriekðçjais"
 
 #: ../../standalone/drakbackup_.c:3941 ../../standalone/drakbackup_.c:4027
 #: ../../standalone/logdrake_.c:224
@@ -10653,11 +10713,12 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:4257
-#, fuzzy
 msgid ""
 "The following packages need to be installed:\n"
 " @list_of_rpm_to_install"
-msgstr "Tiks instalçtas sekojoðas pakotnes"
+msgstr ""
+"Nepiecieðams instalçt sekojoðas pakotnes:\n"
+" @list_of_rpm_to_install"
 
 #: ../../standalone/drakbackup_.c:4280
 msgid ""
@@ -10708,7 +10769,7 @@ msgstr "Kopçjais progress"
 
 #: ../../standalone/drakbackup_.c:4500
 msgid "files sending by FTP"
-msgstr ""
+msgstr "failu sûtîðana pa FTP"
 
 #: ../../standalone/drakbackup_.c:4504
 msgid "Sending files..."
@@ -10781,6 +10842,12 @@ msgid ""
 " set myhostname or mydomain in /etc/postfix/main.cf\n"
 "\n"
 msgstr ""
+"\n"
+" daþas kïûdas pasta sûtîðanas laikâ notiek sliktas\n"
+" postfix konfigurâcijas dçï. Lai to atrisinâtu, Jums\n"
+" jâiestâda myhostname jeb mydomain failâ\n"
+" /etc/postfix/main.cf\n"
+"\n"
 
 #: ../../standalone/drakbackup_.c:4749
 msgid ""
@@ -11026,9 +11093,8 @@ msgstr "Sinhronizçðanas rîks"
 #: ../../standalone/drakbug_.c:72 ../../standalone/drakbug_.c:86
 #: ../../standalone/drakbug_.c:156 ../../standalone/drakbug_.c:158
 #: ../../standalone/drakbug_.c:162
-#, fuzzy
 msgid "Standalone Tools"
-msgstr "Konsoles rîki"
+msgstr "Nesaistîti rîki"
 
 #: ../../standalone/drakbug_.c:73
 msgid "HardDrake"
@@ -11043,14 +11109,12 @@ msgid "Menudrake"
 msgstr "Menudrake"
 
 #: ../../standalone/drakbug_.c:76
-#, fuzzy
 msgid "Msec"
-msgstr "Pele"
+msgstr "Msec"
 
 #: ../../standalone/drakbug_.c:77
-#, fuzzy
 msgid "Remote Control"
-msgstr "Attâls printeris"
+msgstr "Attâlinâta kontrole"
 
 #: ../../standalone/drakbug_.c:78
 #, fuzzy
@@ -11116,9 +11180,8 @@ msgid "connecting to Bugzilla wizard ..."
 msgstr "pieslçdzos Bugzilla meistaram ..."
 
 #: ../../standalone/drakbug_.c:196
-#, fuzzy
 msgid "No browser available! Please install one"
-msgstr "Jûs varat izvçlçties citas valodas, kas bûs pieejamas pçc instalçðanas"
+msgstr "Pârlûks nav pieejams. Lûdzu, instalçjiet kâdu"
 
 #: ../../standalone/drakconnect_.c:79
 #, c-format
@@ -11208,7 +11271,7 @@ msgstr "Konfigurçt lokâlo datortîklu..."
 
 #: ../../standalone/drakconnect_.c:255
 msgid "Click here to launch the wizard ->"
-msgstr ""
+msgstr "Klikðíiniet ðeit, lai sâktu vedni ->"
 
 #: ../../standalone/drakconnect_.c:256
 msgid "Wizard..."
@@ -11229,11 +11292,11 @@ msgstr "Nav pieslçgts"
 
 #: ../../standalone/drakconnect_.c:384 ../../standalone/drakconnect_.c:407
 msgid "Connect..."
-msgstr ""
+msgstr "Pieslçgties..."
 
 #: ../../standalone/drakconnect_.c:384 ../../standalone/drakconnect_.c:407
 msgid "Disconnect..."
-msgstr ""
+msgstr "Atslçgties..."
 
 #: ../../standalone/drakconnect_.c:403
 msgid ""
@@ -11258,7 +11321,7 @@ msgstr "Adapteris %s: %s"
 
 #: ../../standalone/drakconnect_.c:469
 msgid "Boot Protocol"
-msgstr ""
+msgstr "Sâknçðanas protokols"
 
 #: ../../standalone/drakconnect_.c:470
 msgid "Started on boot"
@@ -11269,14 +11332,12 @@ msgid "DHCP client"
 msgstr "DHCP klients"
 
 #: ../../standalone/drakconnect_.c:496 ../../standalone/drakconnect_.c:499
-#, fuzzy
 msgid "activate now"
-msgstr "Aktîva"
+msgstr "aktivizçt"
 
 #: ../../standalone/drakconnect_.c:496 ../../standalone/drakconnect_.c:499
-#, fuzzy
 msgid "deactivate now"
-msgstr "Aktîva"
+msgstr "deaktivizçt"
 
 #: ../../standalone/drakconnect_.c:502
 msgid ""
@@ -11431,7 +11492,7 @@ msgstr ""
 
 #: ../../standalone/drakfont_.c:231
 msgid "Search installed fonts"
-msgstr ""
+msgstr "Meklçt instalçtos fontus"
 
 #: ../../standalone/drakfont_.c:233
 msgid "Unselect fonts installed"
@@ -11454,7 +11515,7 @@ msgstr "izdarîts"
 
 #: ../../standalone/drakfont_.c:275
 msgid "could not find any font in your mounted partitions"
-msgstr ""
+msgstr "nevarçju atrast nekâdus fontus montçtajâs diska sadaïâs"
 
 #: ../../standalone/drakfont_.c:321
 msgid "Reselect correct fonts"
@@ -11462,11 +11523,11 @@ msgstr ""
 
 #: ../../standalone/drakfont_.c:325
 msgid "could not find any font.\n"
-msgstr ""
+msgstr "netika atrasts neviens fonts.\n"
 
 #: ../../standalone/drakfont_.c:349
 msgid "Search fonts in installed list"
-msgstr ""
+msgstr "Meklçt instalçto fontu sarakstâ"
 
 #: ../../standalone/drakfont_.c:377
 #, fuzzy
@@ -11479,7 +11540,7 @@ msgstr "True Type fontu instalçðana"
 
 #: ../../standalone/drakfont_.c:389
 msgid "please wait during ttmkfdir..."
-msgstr ""
+msgstr "uzgaidiet ttmkfdir laikâ..."
 
 #: ../../standalone/drakfont_.c:394
 msgid "True Type install done"
@@ -11492,7 +11553,7 @@ msgstr "Fontu konvertçðana"
 #: ../../standalone/drakfont_.c:409 ../../standalone/drakfont_.c:433
 #: ../../standalone/drakfont_.c:464
 msgid "type1inst building"
-msgstr ""
+msgstr "type1inst uzbûve"
 
 #: ../../standalone/drakfont_.c:419 ../../standalone/drakfont_.c:442
 msgid "Ghostscript referencing"
@@ -11530,6 +11591,11 @@ msgid ""
 "-You can install the fonts using the normal way. In rare cases, bogus fonts "
 "may hang up your X Server."
 msgstr ""
+"Pirms instalçt fontus, pârliecinieties vai Jums ir tiesîbas tos lietot un "
+"instalçt uz sistçmas.\n"
+"\n"
+"-Jûs varat instalçt fontus normâlâ veidâ. Retos gadîjumos dîvaini fonti var "
+"uzkârt X serveri."
 
 #: ../../standalone/drakfont_.c:630
 msgid "Fonts Importation"
@@ -11541,7 +11607,7 @@ msgstr "Paòemt Windows fontus"
 
 #: ../../standalone/drakfont_.c:668
 msgid "Uninstall Fonts"
-msgstr ""
+msgstr "Atinstalçt fontus"
 
 #: ../../standalone/drakfont_.c:679
 #, fuzzy
@@ -11576,29 +11642,27 @@ msgstr "Printeris"
 
 #: ../../standalone/drakfont_.c:1016
 msgid "Select the font file or directory and click on 'Add'"
-msgstr ""
+msgstr "Atzîmçjiet fonta failu vai direktoriju un klikðíiniet uz \"Pievienot\""
 
 #: ../../standalone/drakfont_.c:1063
-#, fuzzy
 msgid "Install List"
-msgstr "Sistçmas instalçðana"
+msgstr "Instalçðanas saraksts"
 
 #: ../../standalone/drakfont_.c:1106
 msgid "click here if you are sure."
-msgstr ""
+msgstr "klikðíiniet ðeit, ja esat pârlecinâts."
 
 #: ../../standalone/drakfont_.c:1113
 msgid "here if no."
-msgstr ""
+msgstr "ðeit, ja nç."
 
 #: ../../standalone/drakfont_.c:1174
 msgid "Unselected All"
 msgstr ""
 
 #: ../../standalone/drakfont_.c:1178
-#, fuzzy
 msgid "Selected All"
-msgstr "Izvçlieties failu"
+msgstr "Atzîmçti visi"
 
 #: ../../standalone/drakfont_.c:1182
 #, fuzzy
@@ -11607,7 +11671,7 @@ msgstr "Attâls printeris"
 
 #: ../../standalone/drakfont_.c:1204 ../../standalone/drakfont_.c:1237
 msgid "Initials tests"
-msgstr ""
+msgstr "Sâkotnçjâs pârbaudes"
 
 #: ../../standalone/drakfont_.c:1207
 #, fuzzy
@@ -11616,12 +11680,11 @@ msgstr "Jûsu sistçmâ nav tîkla adaptera!"
 
 #: ../../standalone/drakfont_.c:1211
 msgid "Install & convert Fonts"
-msgstr ""
+msgstr "Instalçt un pârveidot fontus"
 
 #: ../../standalone/drakfont_.c:1215
-#, fuzzy
 msgid "Post Install"
-msgstr "Instalçt"
+msgstr "Pçcinstalâcijas"
 
 #: ../../standalone/drakfont_.c:1240
 #, fuzzy
@@ -11629,9 +11692,8 @@ msgid "Remove fonts on your system"
 msgstr "Jûsu sistçmâ nav tîkla adaptera!"
 
 #: ../../standalone/drakfont_.c:1244
-#, fuzzy
 msgid "Post Uninstall"
-msgstr "Instalçðanas beigas"
+msgstr "Pçc atinstalçðanas"
 
 #: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:184
 msgid "Internet Connection Sharing"
@@ -11675,9 +11737,8 @@ msgid "Disabling servers..."
 msgstr "Noskaidroju ierîces..."
 
 #: ../../standalone/drakgw_.c:142
-#, fuzzy
 msgid "Internet connection sharing is now disabled."
-msgstr "Interneta pieslçguma koplietoðana paðlaik ir atslçgta"
+msgstr "Internet pieslçguma koplietoðana tagad ir atslçgta."
 
 #: ../../standalone/drakgw_.c:151
 msgid "Internet Connection Sharing currently disabled"
@@ -11704,9 +11765,8 @@ msgid "Enabling servers..."
 msgstr ""
 
 #: ../../standalone/drakgw_.c:168
-#, fuzzy
 msgid "Internet connection sharing is now enabled."
-msgstr "Interneta pieslçguma koplietoðana paðlaik ir ieslçgta"
+msgstr "Internet pieslçguma koplietoðana tagad ir ieslçgta."
 
 #: ../../standalone/drakgw_.c:185
 #, fuzzy
@@ -11728,7 +11788,7 @@ msgstr ""
 #: ../../standalone/drakgw_.c:211
 #, c-format
 msgid "Interface %s (using module %s)"
-msgstr ""
+msgstr "Saskarne %s (lietojot moduli %s)"
 
 #
 #: ../../standalone/drakgw_.c:212
@@ -11798,7 +11858,7 @@ msgid "Show current interface configuration"
 msgstr "Parâdît paðreizçjo interfeisa konfigurâciju"
 
 #: ../../standalone/drakgw_.c:264
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Current configuration of `%s':\n"
 "\n"
@@ -11807,6 +11867,12 @@ msgid ""
 "IP attribution: %s\n"
 "Driver: %s"
 msgstr ""
+"Patreizçjâ `%s' konfigurâcija:\n"
+"\n"
+"Tîkls: %s\n"
+"IP adrese: %s\n"
+"IP atribûtika: %s\n"
+"Draiveris: %s"
 
 #: ../../standalone/drakgw_.c:276
 msgid ""
@@ -11830,11 +11896,12 @@ msgstr "(Ðî) DHCP servera IP"
 
 #: ../../standalone/drakgw_.c:283
 msgid "Re-configure interface and DHCP server"
-msgstr ""
+msgstr "Pârkonfigurçjiet saskarni un DHCP serveri"
 
 #: ../../standalone/drakgw_.c:290
+#, fuzzy
 msgid "The Local Network did not finish with `.0', bailing out."
-msgstr ""
+msgstr "Lokâlais tîkls nebeidzâs ar `.0', programma tiek pabeigta."
 
 #: ../../standalone/drakgw_.c:301
 #, c-format
@@ -11890,9 +11957,8 @@ msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Interneta pieslçguma koplietoðana paðlaik ir ieslçgta"
 
 #: ../../standalone/drakgw_.c:507
-#, fuzzy
 msgid "Internet connection sharing configuration"
-msgstr "Interneta pieslçgums un konfigurâcija"
+msgstr "Interneta pieslçgums koplietoðanas konfigurâcija"
 
 #: ../../standalone/drakgw_.c:514
 #, fuzzy, c-format
@@ -12011,15 +12077,15 @@ msgstr ""
 
 #: ../../standalone/drakperm_.c:311
 msgid "Use owner id for execution"
-msgstr ""
+msgstr "Lietot îpaðnieka id izpildei"
 
 #: ../../standalone/drakperm_.c:312
 msgid "Use group id for execution"
-msgstr ""
+msgstr "Lietot grupas id izpildei"
 
 #: ../../standalone/drakperm_.c:313
 msgid "when checked, owner and group won't be changed"
-msgstr ""
+msgstr "kad atzîmçts, îpaðnieks un grupa netiks izmainîti"
 
 #: ../../standalone/drakperm_.c:318
 msgid "Path selection"
@@ -12059,10 +12125,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/draksplash_.c:34
+#, fuzzy
 msgid ""
 "package 'ImageMagick' is required for correct working.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
+"Priekð korektas darbîbas nepiecieðama pakotne\n"
+"'ImageMagick'. Klikðíiniet uz \"Labi\", lai instalçtu\n"
+"'ImageMagick', jeb uz \"Atlikt\" lai izbeigtu"
 
 #: ../../standalone/draksplash_.c:78
 #, fuzzy
@@ -12070,9 +12140,8 @@ msgid "first step creation"
 msgstr "sâknçðanas diska veidoðana"
 
 #: ../../standalone/draksplash_.c:79
-#, fuzzy
 msgid "final resolution"
-msgstr "Izðíirtspçja"
+msgstr "galçjâ izðíirtspçja"
 
 #: ../../standalone/draksplash_.c:80 ../../standalone/draksplash_.c:172
 msgid "choose image file"
@@ -12105,7 +12174,7 @@ msgstr ""
 
 #: ../../standalone/draksplash_.c:102
 msgid "text width"
-msgstr ""
+msgstr "teksta platums"
 
 #: ../../standalone/draksplash_.c:103
 msgid "text box height"
@@ -12148,12 +12217,13 @@ msgid "Choose color"
 msgstr "Izvçlieties krâsu"
 
 #: ../../standalone/draksplash_.c:127
+#, fuzzy
 msgid "Display logo on Console"
-msgstr ""
+msgstr "Attçlot logo konsolç."
 
 #: ../../standalone/draksplash_.c:128
 msgid "Make kernel message quiet by default"
-msgstr ""
+msgstr "Izveidot kodola paziòojumus klusus pçc noklusçðanas"
 
 #: ../../standalone/draksplash_.c:165 ../../standalone/draksplash_.c:329
 #, c-format
@@ -12202,28 +12272,33 @@ msgid "Canada (cable)"
 msgstr "Kanâda (kabelis)"
 
 #: ../../standalone/drakxtv_.c:66
+#, fuzzy
 msgid "USA (broadcast)"
-msgstr ""
+msgstr "ASV (broadcast)"
 
 #: ../../standalone/drakxtv_.c:66
 msgid "USA (cable)"
-msgstr ""
+msgstr "ASV (kabelis)"
 
 #: ../../standalone/drakxtv_.c:66
+#, fuzzy
 msgid "USA (cable-hrc)"
-msgstr ""
+msgstr "ASV (cable-hrc)"
 
 #: ../../standalone/drakxtv_.c:67
+#, fuzzy
 msgid "China (broadcast)"
-msgstr ""
+msgstr "Íîna (broadcast)"
 
 #: ../../standalone/drakxtv_.c:67
+#, fuzzy
 msgid "Japan (broadcast)"
-msgstr ""
+msgstr "Japâna (broadcast)"
 
 #: ../../standalone/drakxtv_.c:67
+#, fuzzy
 msgid "Japan (cable)"
-msgstr ""
+msgstr "Japâna (cable)"
 
 #: ../../standalone/drakxtv_.c:68
 msgid "East Europe"
@@ -12247,25 +12322,27 @@ msgstr "Austrâlija"
 
 #: ../../standalone/drakxtv_.c:69
 msgid "Newzealand"
-msgstr ""
+msgstr "Jaunzçlande"
 
 #: ../../standalone/drakxtv_.c:70
 msgid "South Africa"
-msgstr ""
+msgstr "Dienvidâfrika"
 
 #: ../../standalone/drakxtv_.c:71
 msgid "Argentina"
-msgstr ""
+msgstr "Argentîna"
 
 #: ../../standalone/drakxtv_.c:72
 msgid "Australian Optus cable TV"
-msgstr ""
+msgstr "Austrâlieðu Optus kabeïu TV"
 
 #: ../../standalone/drakxtv_.c:107
 msgid ""
 "Please,\n"
 "type in your tv norm and country"
 msgstr ""
+"Lûdzu,\n"
+"ieraksties Jûsu TV standrtu un valsti"
 
 #: ../../standalone/drakxtv_.c:109
 msgid "TV norm:"
@@ -12277,11 +12354,11 @@ msgstr "Apgabals:"
 
 #: ../../standalone/drakxtv_.c:114
 msgid "Scanning for TV channels in progress ..."
-msgstr ""
+msgstr "Notiek TV kanâlu skançðana ..."
 
 #: ../../standalone/drakxtv_.c:122
 msgid "Scanning for TV channels"
-msgstr ""
+msgstr "Notiek TV kanâlu skançðana ..."
 
 #: ../../standalone/drakxtv_.c:125
 #, fuzzy
@@ -12298,7 +12375,7 @@ msgstr "Lai jums jauka diena!"
 
 #: ../../standalone/drakxtv_.c:130
 msgid "Now, you can run xawtv (under X Window!) !\n"
-msgstr ""
+msgstr "Tagad Jûs varat izpildît xawtv (zem X Window!) !\n"
 
 #: ../../standalone/drakxtv_.c:153
 msgid "No TV Card detected!"
@@ -12315,6 +12392,14 @@ msgid ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
+"Jûsu datora TV karte netika noteikta. Lûdzu pârliecinieties, ka Linux "
+"atbalstîta Video/TV karte ir pareizi iesprausta.\n"
+"\n"
+"\n"
+"Jûs varat aplûkot mûsu aparatûras datubâzi ðeit:\n"
+"\n"
+"\n"
+"http://www.linux-mandrake.com/en/hardware.php3"
 
 #: ../../standalone/harddrake2_.c:8
 msgid ""
@@ -12430,7 +12515,7 @@ msgstr "Syslog"
 
 #: ../../standalone/logdrake_.c:177
 msgid "Mandrake Tools Explanations"
-msgstr ""
+msgstr "Mandrake rîku apraksti"
 
 #: ../../standalone/logdrake_.c:180
 msgid "search"
@@ -12574,7 +12659,7 @@ msgstr "Pârbaudît portus"
 #: ../../standalone/scannerdrake_.c:81
 #, c-format
 msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr ""
+msgstr "Ðî Mandrake Linux versija neatbalsta %s."
 
 #: ../../standalone/scannerdrake_.c:56
 #, c-format
@@ -12625,11 +12710,11 @@ msgstr ""
 #: ../../standalone/service_harddrake_.c:44
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr ""
+msgstr "Daþas iekârtas no \"%s\" aparatûras klases tika izòemtas:\n"
 
 #: ../../standalone/service_harddrake_.c:48
 msgid "Some devices were added:\n"
-msgstr ""
+msgstr "Tika pievienotas daþas iekârtas:\n"
 
 #: ../../steps.pm_.c:14
 msgid "Choose your language"
@@ -13070,6 +13155,55 @@ msgstr "Zinâtniska darbastacija"
 #~ "Atcerieties.\n"
 #~ "ka daþi servisi var bût bîstami, ja darbojas serverî.\n"
 #~ "Parasti izvçlieties tikai tos servisus, kas jums tieðâm nepiecieðami."
+
+#~ msgid ""
+#~ "X (for X Window System) is the heart of the GNU/Linux graphical "
+#~ "interface\n"
+#~ "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
+#~ "WindowMaker, etc.) bundled with Mandrake Linux rely. In this section, "
+#~ "DrakX\n"
+#~ "will try to configure X automatically.\n"
+#~ "\n"
+#~ "It is extremely rare for it to fail, unless the hardware is very old (or\n"
+#~ "very new). If it succeeds, it will start X automatically with the best\n"
+#~ "resolution possible, depending on the size of the monitor. A window will\n"
+#~ "then appear and ask you if you can see it.\n"
+#~ "\n"
+#~ "If you are doing an \"Expert\" installation, you will enter the X\n"
+#~ "configuration wizard. See the corresponding section of the manual for "
+#~ "more\n"
+#~ "information about this wizard.\n"
+#~ "\n"
+#~ "If you can see the message during the test, and answer \"Yes\", then "
+#~ "DrakX\n"
+#~ "will proceed to the next step. If you cannot see the message, it simply\n"
+#~ "means that the configuration was wrong and the test will automatically "
+#~ "end\n"
+#~ "after 10 seconds, restoring the screen. Refer then to the Video\n"
+#~ "configuration section of the user guide for more information on how to\n"
+#~ "configure your display."
+#~ msgstr ""
+#~ "X (X Logu Sistçma) ir GNU/Linux grafiskâs saaskarnes sirds,\n"
+#~ "uz kuru balstâs grafiskâs vides, kuras piegâdâtas ar Mandrake Linux\n"
+#~ "(KDE, GNOME, AfterStep, WindowMaker, utt.). Ðinî posmâ DrakX\n"
+#~ "mçìinâs automâtiski nokonfigurçt X.\n"
+#~ "\n"
+#~ "Ïoti reti tas neizdodas, ja vien aparatûra nav ïoti veca (vai ïoti\n"
+#~ "jauna). Ja tas izdosies, X sâksies automâtiski ar labâko iespçjamo\n"
+#~ "izðíirtspçju, atkarîbâ no ekrâna izmçriem. Parâdîsies logs ar\n"
+#~ "jautâjumu, vai Jûs to redzat.\n"
+#~ "\n"
+#~ "Ja Jûs veicat \"Eksperta\" instalâciju, tiks izpildîts X konfigurçðanas\n"
+#~ "vednis. Aplûkojiet atbilstoðo nodaïu rokasgrâmatâ, lai iegûtu vairâk\n"
+#~ "informâcijas par vedni.\n"
+#~ "\n"
+#~ "Ja Jûs redzçsiet paziòojumu pârbaudes laikâ, un atbildçsies \"Jâ\",\n"
+#~ "tad DrakX pâries uz nâkamo soli. Ja Jûs neredzat paziòojumu, tas\n"
+#~ "vienkârði nozîmç ka konfigurâcija nebija pareiza, un tests automâtiski\n"
+#~ "beigsies pçc 10 sekundçm, atjaunojot ekrâna izskatu. Tad apskatiet Video\n"
+#~ "konfigurçðanas nodaïu lietotâja rokasgrâmatâ, lai iegûtu vairâk "
+#~ "informâcijas,\n"
+#~ "kâ konfigurçt Jûsu ekrânu."
 
 #, fuzzy
 #~ msgid ""

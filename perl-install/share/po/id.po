@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2002-09-13 22:00+0200\n"
-"PO-Revision-Date: 2002-09-08 11:57+0900\n"
+"PO-Revision-Date: 2002-09-15 23:28+0900\n"
 "Last-Translator: Budi Rachmanto <rac@linux-mandrake.com>\n"
 "Language-Team: Bahasa Indonesia <id@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1505,6 +1505,10 @@ msgid ""
 "configured as a WebDAV server). If you would like to add WebDAV mount\n"
 "points, select \"New\"."
 msgstr ""
+"WebDAV adalah protokol yg memungkinkan Anda me-mount direktori server web\n"
+"secara lokal, dan memperlakukannya sbg sistem file lokal (asal server web\n"
+"dikonfigurasikan sbg server WebDAV). Jika Anda ingin menambah titik mount\n"
+"WebDav, pilih \"Baru\"."
 
 #: ../../diskdrake/dav.pm_.c:27
 msgid "New"
@@ -2447,12 +2451,13 @@ msgid "No alternative driver"
 msgstr "Tiada driver alternatif"
 
 #: ../../harddrake/sound.pm_.c:169
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
 msgstr ""
-"Tak diketahui adanya driver alternatif OSS/ALSA utk kartu suara Anda (%s)"
+"Tak diketahui adanya driver alternatif OSS/ALSA utk kartu suara Anda (%s) yg "
+"kini memakai \"%s\""
 
 #: ../../harddrake/sound.pm_.c:171
 msgid "Sound configuration"
@@ -2475,6 +2480,10 @@ msgid ""
 "Your card currently use the %s\"%s\" driver (default driver for your card is "
 "\"%s\")"
 msgstr ""
+"\n"
+"\n"
+"Kartu Anda kini memakai driver %s\"%s\" (driver standar kartu Anda adalah \"%"
+"s\")"
 
 #: ../../harddrake/sound.pm_.c:176
 msgid "Driver:"
@@ -2492,7 +2501,7 @@ msgstr "Pertolongan"
 
 #: ../../harddrake/sound.pm_.c:183
 msgid "Switching between ALSA and OSS help"
-msgstr ""
+msgstr "Ganti pertolongan antara ALSA dan OSS"
 
 #: ../../harddrake/sound.pm_.c:184
 msgid ""
@@ -2512,6 +2521,18 @@ msgid ""
 "- the new ALSA api that provides many enhanced features but requires using "
 "the ALSA library.\n"
 msgstr ""
+"OSS (Open Sound System) adalah API suara pertama, tak tergantung OS "
+"(tersedia di hampir semua sistem unix) tapi amat primitif dan terbatas.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) adalah arsitektur modular yg\n"
+"men-support banyak kartu ISA, USB dan PCI.\n"
+"\n"
+"Ia juga menyediakan API lebih baik daripada OSS.\n"
+"\n"
+"Utk menggunakan alsa, pakailah:\n"
+"- api OSS kompatibel lama, atau\n"
+"- api ALSA baru yg menyediakan banyak fitur canggih tapi memerlukan library "
+"ALSA.\n"
 
 #: ../../harddrake/sound.pm_.c:200
 #, c-format
@@ -2522,6 +2543,11 @@ msgid ""
 "\n"
 "The new \"%s\" driver'll only be used on next bootstrap."
 msgstr ""
+"Driver \"%s\" lama di-blacklist.\n"
+"\n"
+"Ia merusak kernel saat pembongkaran (unload).\n"
+"\n"
+"Driver baru \"%s\" akan digunakan pada boot berikut."
 
 #: ../../harddrake/sound.pm_.c:203 ../../standalone/drakconnect_.c:301
 msgid "Please Wait... Applying the configuration"
@@ -6988,7 +7014,7 @@ msgstr "Protokol apa yang ingin Anda gunakan?"
 #: ../../network/isdn.pm_.c:200
 #, c-format
 msgid "Found \"%s\" interface do you want to use it ?"
-msgstr ""
+msgstr "Ditemukan antarmuka \"%s\" Anda ingin menggunakannya?"
 
 #: ../../network/isdn.pm_.c:207
 msgid "What kind of card do you have?"
@@ -7408,14 +7434,12 @@ msgid "Gateway device"
 msgstr "Device gateway"
 
 #: ../../network/network.pm_.c:376
-#, fuzzy
 msgid "DNS server address should be in format 1.2.3.4"
-msgstr "Alamat IP harus dalam format 1.2.3.4"
+msgstr "Alamat server DNS harus dalam format 1.2.3.4"
 
 #: ../../network/network.pm_.c:380
-#, fuzzy
 msgid "Gateway address should be in format 1.2.3.4"
-msgstr "Alamat IP harus dalam format 1.2.3.4"
+msgstr "Alamat gateway harus dalam format 1.2.3.4"
 
 #: ../../network/network.pm_.c:394
 msgid "Proxies configuration"
@@ -9618,24 +9642,39 @@ msgid ""
 "be sent to this user (username or\n"
 "\t       email)"
 msgstr ""
+"Standar: Keamanan standar dianjurkan utk komputer yg terhubung ke "
+"Internet               sbg klien.\n"
+"\n"
+"Tinggi: Ada beberapa pembatasan, dan pemeriksaan otomatis tiap malam.\n"
+"\n"
+"Lebih Tinggi: Cukup aman utk dipakai sbg server yg menerima koneksi dari\n"
+"              banyak klien. Jika mesin Anda hanya klien Internet pilihlah\n"
+"\t      tingkat lebih rendah.\n"
+"\n"
+"Paranoid:  Sama dengan tingkat terdahulu, tapi sistem tertutup "
+"seluruhnya                 dengan fitur keamanan maksimum\n"
+"\n"
+"Administrator Keamanan:\n"
+"               Jika opsi 'Pemberitahuan Keamanan' diset, berita keamanan "
+"akan dikirim ke pengguna ini\n"
+"\t       (nama pengguna atau email)"
 
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
-msgstr "Tingkat keamanan:"
+msgstr "Tingkat Keamanan:"
 
 #: ../../security/main.pm_.c:74
-#, fuzzy
 msgid "Security Alerts:"
-msgstr "Tingkat keamanan"
+msgstr "Pemberitahuan Keamanan:"
 
 #: ../../security/main.pm_.c:83
 msgid "Security Administrator:"
 msgstr "Admin Keamanan:"
 
 #: ../../security/main.pm_.c:114 ../../security/main.pm_.c:150
-#, fuzzy, c-format
+#, c-format
 msgid " (default: %s)"
-msgstr " ? (default %s) "
+msgstr " (standar: %s)"
 
 #: ../../security/main.pm_.c:118 ../../security/main.pm_.c:154
 #: ../../security/main.pm_.c:179
@@ -9643,31 +9682,28 @@ msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need explanations, click on Help.\n"
 msgstr ""
+"Opsi berikut dapat diset utk mengatur keamanan sistem Anda.\n"
+"Klik Pertolongan jika Anda butuh penjelasan.\n"
 
 #: ../../security/main.pm_.c:226
-#, fuzzy
 msgid "Network Options"
-msgstr "Opsi Tambahan"
+msgstr "Opsi Jaringan"
 
 #: ../../security/main.pm_.c:235
-#, fuzzy
 msgid "System Options"
-msgstr "Opsi Tambahan"
+msgstr "Opsi Sistem"
 
 #: ../../security/main.pm_.c:242
-#, fuzzy
 msgid "Periodic Checks"
-msgstr "Cek Keamanan"
+msgstr "Cek Periodik"
 
 #: ../../security/main.pm_.c:256
-#, fuzzy
 msgid "Please wait, setting security level..."
-msgstr "Pilih tingkat keamanan"
+msgstr "Tunggu, tingkat keamanan sedang diset..."
 
 #: ../../security/main.pm_.c:262
-#, fuzzy
 msgid "Please wait, setting security options..."
-msgstr "Tunggu, instalasi sedang disiapkan..."
+msgstr "Tunggu, opsi keamanan sedang diset..."
 
 #: ../../services.pm_.c:14
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -10373,9 +10409,8 @@ msgid "<-- Del User"
 msgstr "<-- Hapus User"
 
 #: ../../standalone/drakTermServ_.c:694
-#, fuzzy
 msgid "No net boot images created!"
-msgstr "Image Boot Net"
+msgstr "Image boot jaringan tak dibuat!"
 
 #: ../../standalone/drakTermServ_.c:710
 msgid "Add Client -->"
@@ -10390,15 +10425,16 @@ msgid "dhcpd Config..."
 msgstr "Konfig dhcpd..."
 
 #: ../../standalone/drakTermServ_.c:873
-#, fuzzy
 msgid "dhcpd Server Configuration"
-msgstr "Konfigurasi Lanjutan"
+msgstr "Konfigurasi Server dhcpd"
 
 #: ../../standalone/drakTermServ_.c:874
 msgid ""
 "Most of these values were extracted\n"
 "from your running system. You can modify as needed."
 msgstr ""
+"Sebagian besar nilai ini disusun dari sistem Anda\n"
+"yg sedang berjalan. Anda dapat mengganti seperlunya."
 
 #: ../../standalone/drakTermServ_.c:875
 msgid "Write Config"
@@ -10849,11 +10885,12 @@ msgstr ""
 "Sekarang"
 
 #: ../../standalone/drakbackup_.c:1786
-#, fuzzy
 msgid ""
 "Other (not drakbackup)\n"
 "keys in place already"
-msgstr "Kunci sudah ada di tempat"
+msgstr ""
+"Kunci lain (bukan drakbackup)\n"
+"sudah ada di tempat"
 
 #: ../../standalone/drakbackup_.c:1790
 msgid "Please enter the host name or IP."
@@ -13145,13 +13182,19 @@ msgid ""
 "Note: if you've an ISA PnP sound card, you'll have to use the sndconfig "
 "program.  Just type \"sndconfig\" in a console."
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Catatan: jika Anda punya kartu suara PnP ISA, Anda harus menggunakan "
+"sndconfig.  Ketikkan \"sndconfig\" di konsol."
 
 #: ../../standalone/draksplash_.c:34
-#, fuzzy
 msgid ""
 "package 'ImageMagick' is required for correct working.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
-msgstr "paket ImageMagick diperlukan utk kerja secara benar"
+msgstr ""
+"paket 'ImageMagick' diperlukan agar kerja bisa dilakukan dg benar.\n"
+"Klik \"Ok\" utk menginstal 'ImageMagick' atau \"Batal\" utk keluar"
 
 #: ../../standalone/draksplash_.c:78
 msgid "first step creation"
@@ -13272,9 +13315,9 @@ msgstr "Preview sedang dibuat ..."
 
 #. -PO  First %s is theme name, second %s (in parenthesis) is resolution
 #: ../../standalone/draksplash_.c:511
-#, fuzzy, c-format
+#, c-format
 msgid "%s BootSplash (%s) preview"
-msgstr "Gagal membuat preview Bootsplash"
+msgstr "Preview Bootsplash %s (%s)"
 
 #: ../../standalone/drakxtv_.c:49
 msgid ""
@@ -13745,14 +13788,11 @@ msgstr ""
 #: ../../standalone/service_harddrake_.c:44
 #, c-format
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
-msgstr "Some devices in the \"%s\" hardware class were removed:\n"
+msgstr "Beberapa alat di kelas perangkat keras \"%s\" dihapus:\n"
 
 #: ../../standalone/service_harddrake_.c:48
-#, fuzzy
 msgid "Some devices were added:\n"
-msgstr ""
-"\n"
-"Bbrp device di kelas %s ditambahkan:\n"
+msgstr "Beberapa device ditambahkan:\n"
 
 #: ../../steps.pm_.c:14
 msgid "Choose your language"

@@ -8,9 +8,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-sv-sv\n"
+"Project-Id-Version: DrakX-sv\n"
 "POT-Creation-Date: 2002-09-13 22:00+0200\n"
-"PO-Revision-Date: 2002-09-05 09:50+0000\n"
+"PO-Revision-Date: 2002-09-14 20:57+0000\n"
 "Last-Translator: Mattias Newzella <newzella@linux.nu>\n"
 "Language-Team: svenska <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1304,7 +1304,7 @@ msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
 msgstr ""
-"Kan inte starta om LiLo.\n"
+"Kan inte starta om Lilo.\n"
 "Kör \"lilo\" som root på kommandoraden för att slutföra temainstallationen."
 
 #: ../../bootlook.pm_.c:256
@@ -1459,7 +1459,7 @@ msgstr "Belgiskt"
 
 #: ../../crypto.pm_.c:17 ../../crypto.pm_.c:30
 msgid "Czech Republic"
-msgstr "Tjekiskt"
+msgstr "Tjeckiskt"
 
 # Noteraatt de tidigare namnen, med a på slutet (t.ex. svenska) angav
 # plural. Men vad jag vet anges alltid tangentbordslaouter i singular
@@ -1506,6 +1506,12 @@ msgid ""
 "configured as a WebDAV server). If you would like to add WebDAV mount\n"
 "points, select \"New\"."
 msgstr ""
+"WebDAV är ett protokoll som låter dig montera en webbservers katalog\n"
+"lokalt och behandla den som ett lokalt filsystem (under förutsättning att "
+"webbservern\n"
+"är konfigurerad som en WebDAV-server). Om du vill lägga till WebDAV-"
+"monteringspunkter,\n"
+"välj \"Ny\"."
 
 #: ../../diskdrake/dav.pm_.c:27
 msgid "New"
@@ -2462,11 +2468,13 @@ msgid "No alternative driver"
 msgstr "Ingen alternativ drivrutin"
 
 #: ../../harddrake/sound.pm_.c:169
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no known OSS/ALSA alternative driver for your sound card (%s) which "
 "currently uses \"%s\""
-msgstr "Det finns ingen känd alternativ OSS/ALSA-drivrutin för ljudkortet (%s)"
+msgstr ""
+"Det finns ingen känd alternativ OSS/ALSA-drivrutin för ljudkortet (%s) som "
+"för närvarande använder \"%s\""
 
 #: ../../harddrake/sound.pm_.c:171
 msgid "Sound configuration"
@@ -2489,6 +2497,10 @@ msgid ""
 "Your card currently use the %s\"%s\" driver (default driver for your card is "
 "\"%s\")"
 msgstr ""
+"\n"
+"\n"
+"Kortet använder för närvarande drivrutinen %s\"%s\" (standarddrivrutin för "
+"kortet är \"%s\")"
 
 #: ../../harddrake/sound.pm_.c:176
 msgid "Driver:"
@@ -2506,7 +2518,7 @@ msgstr "Hjälp"
 
 #: ../../harddrake/sound.pm_.c:183
 msgid "Switching between ALSA and OSS help"
-msgstr ""
+msgstr "Byter mellan ALSA- och OSS-hjälp"
 
 #: ../../harddrake/sound.pm_.c:184
 msgid ""
@@ -2526,6 +2538,21 @@ msgid ""
 "- the new ALSA api that provides many enhanced features but requires using "
 "the ALSA library.\n"
 msgstr ""
+"OSS (Open Sound System) var det första ljudgränssnittet. Det är ett OS-"
+"oberoende ljudgränssnitt (det finns tillgängligt på de flesta Unix-system) "
+"men är ett väldigt grundläggande och begränsat gränssnitt.\n"
+"OSS-drivrutiner uppfinner alla hjulet på nytt.\n"
+"\n"
+"ALSA (Advanced Linux Sound Architecture) är en modulariserad arkitektur "
+"vilken\n"
+"stödjer ett stort antal ISA-, USB- och PCI-kort.\n"
+"\n"
+"Det tillhandahåller också ett mycket högre gränssnitt än OSS.\n"
+"\n"
+"För att använda ALSA kan man antingen använda:\n"
+"- det gamla kompatibla OSS-gränssnittet\n"
+"- det nya ALSA-gränssnittet som tillhandahåller många utökade funktioner men "
+"kräver att ALSA-biblioteket används.\n"
 
 #: ../../harddrake/sound.pm_.c:200
 #, c-format
@@ -2536,6 +2563,12 @@ msgid ""
 "\n"
 "The new \"%s\" driver'll only be used on next bootstrap."
 msgstr ""
+"Den gamla drivrutinen \"%s\" är svartlistad.\n"
+"\n"
+"Det har rapporterats att oopses the kernel on unloading.\n"
+"\n"
+"Den nya drivrutinen \"%s\" kommer endast att användas vid nästa \"bootstrap"
+"\"."
 
 #: ../../harddrake/sound.pm_.c:203 ../../standalone/drakconnect_.c:301
 msgid "Please Wait... Applying the configuration"
@@ -2649,8 +2682,8 @@ msgid ""
 msgstr ""
 "- pci-enheter: det här visar PCI-kortplats, enhet och funktion för det här "
 "kortet\n"
-"- eide-enheter: enheten är antingen en slav- eller master-enhet\n"
-"- scsi-enheter: scsi-bussen och scsi-enhets-id:n"
+"- EIDE-enheter: enheten är antingen en slav- eller master-enhet\n"
+"- SCSI-enheter: SCSI-bussen och SCSI-enhets-id:n"
 
 #: ../../harddrake/ui.pm_.c:32
 msgid "Old device file"
@@ -3189,8 +3222,9 @@ msgstr ""
 "\n"
 "Du kan läsa kapitlet om Internetanslutning i manualen för en djupare "
 "genomgång\n"
-"om konfigurationen, eller helt enkelt vänta tills systemet är installerat ch "
-"sedan\\nanvända programmet som det står om i manualen för att anpassa din "
+"om konfigurationen, eller helt enkelt vänta tills systemet är installerat "
+"och\n"
+"sedan använda programmet som det står om i manualen för att anpassa din "
 "anslutning.\n"
 "\n"
 "Om du vill konfigurera nätverket senare eller är klar med din anslutning\n"
@@ -3367,7 +3401,6 @@ msgstr ""
 "formatera den eftersom DrakX kommer att skriva om hela disketten."
 
 #: ../../help.pm_.c:277
-#, fuzzy
 msgid ""
 "You now need to choose where you want to install the Mandrake Linux\n"
 "operating system on your hard drive. If your hard drive is empty or if an\n"
@@ -3439,10 +3472,10 @@ msgid ""
 "Guide''''"
 msgstr ""
 "Nu måste du välja var på hårddisken du vill installera Mandrake\n"
-"Linux operativsystem. Om den är tom eller om ett befintligt\n"
-"operativsystem använder allt tillgängligt utrymme behöver du partitionera\n"
-"den. Att partitionera en hårddisk går ut på att man logiskt delar upp den\n"
-"för att skapa utrymme åt Mandrake Linux-systemet.\n"
+"Linux. Om den är tom eller om ett befintligt operativsystem använder\n"
+"allt tillgängligt utrymme behöver du partitionera den. Att partitionera en\n"
+"hårddisk går ut på att man logiskt delar upp den för att skapa utrymme\n"
+"åt det nya Mandrake Linux-systemet.\n"
 "\n"
 "Eftersom resultatet av en partitionering vanligtvis inte går att ångra\n"
 "kan partitionering kännas skrämmande om du är en ovan användare.\n"
@@ -3460,47 +3493,55 @@ msgstr ""
 "för att installera Linux-systemet.\n"
 "\n"
 "Om partitioner inte redan har definierats, behöver du skapa dem genom\n"
-"att använda guiden. Beroende på din hårddiskkonfiguration, kommer flera\n"
+"att använda guiden. Beroende på hårddiskkonfiguration, kommer flera\n"
 "alternativ att finnas tillgängliga:\n"
 "\n"
 " * \"Använd ledigt utrymme\": det här leder till en automatisk\n"
-"partitionering av din tomma disk. Du kommer inte att få några fler frågor.\n"
+"partitionering av den tomma disken. Du kommer inte att få några fler "
+"frågor.\n"
 "\n"
 " * \"Använd existerande partition\": guiden har hittat en eller flera\n"
 "Linux-partitioner på hårddisken. Om du vill använda dem, välj detta\n"
-"alternativ.\n"
+"alternativ. Du uppmanas att välja monteringspunkterna som\n"
+"är associerade med varje partition. De gamla monteringspunkterna väljs\n"
+"som förval och vanligen bör du behålla dem.\n"
 "\n"
 " * \"Använd ledigt utrymme på Windows-partitionen\": Om Microsoft Windows\n"
 "är installerat på hårddisken och tar upp allt tillgängligt utrymme, måste\n"
-"du skapa ledigt utrymme för Linux-data. För att göra det kan du radera din\n"
-"Microsoft Windows-partition och data (se lösningarna \"Radera hela\n"
-"hårddisken\" eller \"Expert-läge\") eller ändra storlek på din Microsoft\n"
-"Windows-partition. Ändra storlek kan utföras utan att förlora data.\n"
+"du skapa ledigt utrymme för Linux-data. För att göra det kan du ta bort\n"
+"Microsoft Windows-partitionen och datat (se lösningarna \"Radera hela\n"
+"hårddisken\" eller \"Expert-läge\") eller ändra storlek på Microsoft\n"
+"Windows-partitionen. Ändring av storlek kan utföras utan att förlora data,\n"
+"under förutsättning att du nyligen defragmenterat Windows-partitionen.\n"
+"Du rekommenderas också att säkerhetskopiera datat på Windows-partitionen.\n"
 "Denna lösning rekommenderas om du vill använda både Mandrake Linux\n"
 "och Microsoft Windows på samma dator.\n"
 "\n"
-"   Innan du väljer denna lösning måste du förstå att storleken på din\n"
-"Microsoft Windows-partition kommer att bli mindre än den är för närvarande.\n"
+"   Innan du väljer denna lösning måste du förstå att storleken på\n"
+"Microsoft Windows-partitionen kommer att bli mindre än den är för "
+"närvarande.\n"
 "Det betyder att du kommer att ha mindre utrymme under Microsoft Windows för\n"
 "att lagra data eller installera ny mjukvara.\n"
 "\n"
-" * \"Rensa hela hårddisken\": Om du vill ta bort all data och alla\n"
+" * \"Rensa hela hårddisken\": Om du vill ta bort alla data och alla\n"
 "partitioner som finns på hårddisken och ersätta dem med ditt nya\n"
 "Mandrake Linux-system, väljer du detta alternativ. Var försiktig med\n"
 "detta alternativ eftersom du kan inte ångra dig efteråt.\n"
 "\n"
-"   Om du väljer detta alternativ kommer all data på disken att försvinna.\n"
+"   Om du väljer detta alternativ kommer alla data på disken att försvinna.\n"
 "\n"
 " * \"Ta bort Windows\": tar helt enkelt bort allt på disken och startar en\n"
-"fräsch partitionering från grunden. All data på disken kommer att tas\n"
+"fräsch partitionering från grunden. Alla data på disken kommer att tas\n"
 "bort.\n"
 "\n"
 "   Om du väljer detta alternativ kommer all data på disken att försvinna.\n"
 "\n"
 " * \"Expert-läge\": välj detta alternativ om du vill partitionera\n"
 "hårddisken manuellt. Var försiktig - det är ett kraftfullt men farligt\n"
-"alternativ. Du kan väldigt enkelt förlora allt ditt data. Därför, välj\n"
-"inte detta om du inte är helt säker på vad du gör."
+"alternativ. Du kan väldigt enkelt förlora allt data. Därför, välj\n"
+"inte detta om du inte är helt säker på vad du gör. För att veta hur du ska\n"
+"använda Diskdrake-verktyget som används här, se kapitlet \"Managing Your\n"
+"Partitions\" i \"Starter Guide\"."
 
 #: ../../help.pm_.c:347
 msgid ""
@@ -3830,7 +3871,7 @@ msgstr ""
 " * Ctrl+m för att ange monteringspunkten.\n"
 "\n"
 "För att få information om de olika typerna av filsystem, läs kapitlet\n"
-"ext2fs i \"Reference Manual\".\n"
+"Ext2fs i \"Reference Manual\".\n"
 "\n"
 "Om du installerar på en PPC-maskin bör du skapa en en liten HFS-\n"
 "partition (\"bootstrap\") på åtminstone 1 MB. Den kommer att användas av\n"
@@ -3973,7 +4014,6 @@ msgstr ""
 "du känner dig osäker."
 
 #: ../../help.pm_.c:582
-#, fuzzy
 msgid ""
 "Normally, DrakX selects the right keyboard for you (depending on the\n"
 "language you have chosen). However, you might not have a keyboard that\n"
@@ -3999,7 +4039,12 @@ msgstr ""
 "du gå tillbaka till detta installationssteg och välja önskat tangentbord\n"
 "ur listan.\n"
 "\n"
-"Klicka på Mer för en komplett lista över tillgängliga tangentbord."
+"Klicka på \"Mer\" för en komplett lista över tillgängliga tangentbord.\n"
+"\n"
+"Om du väljer en tangentbordslayout som inte är baserad på ett icke-latinskt\n"
+"alfabet kommer du i nästa dialogruta uppmanas att välja snabbtangenterna "
+"som\n"
+"ska användas för att byta mellan den latinska layouten och den icke-latinska."
 
 #: ../../help.pm_.c:598
 msgid ""
@@ -4037,7 +4082,6 @@ msgstr ""
 "ytterligare språk, klicka på OK för att fortsätta."
 
 #: ../../help.pm_.c:617
-#, fuzzy
 msgid ""
 "DrakX generally detects the number of buttons your mouse possesses. If not,\n"
 "it assumes you have a two-button mouse and will set it up for third-button\n"
@@ -4059,8 +4103,9 @@ msgid ""
 "your mouse to activate it correctly. Then test that all buttons and\n"
 "movements are correct."
 msgstr ""
-"Som standard antar DrakX att du har mus med två knappar och kommer att\n"
-"ställa in den för knapp 3-emulering. DrakX kommer automatiskt att veta\n"
+"DrakX identifierar vanligen hur många knappar din mus har. Om inte\n"
+"antar den att du har en mus med två knappar och kommer att ställa in\n"
+"den för knapp 3-emulering. DrakX kommer automatiskt att veta\n"
 "om musen är av typ PS/2, seriell eller USB.\n"
 "\n"
 "Om du vill specificera en annan mustyp välj då den i listan\n"
@@ -4069,7 +4114,14 @@ msgstr ""
 "Om du väljer en annan mus än den förvalda kommer en testskärm att\n"
 "visas. Använd musknapparna och hjulet för att verifiera att inställningarna\n"
 "är korrekt. Om musen inte fungerar ordentligt tryck på mellanslag eller\n"
-"Enter för att avbryta och välja igen."
+"Enter för att avbryta och välja igen.\n"
+"\n"
+"Ibland identifieras inte hjulmöss automatiskt. Du måste manuellt välja\n"
+"korrekt mus i listan. Se till så att du väljer den som motsvarar porten den\n"
+"är ansluten till. När du har klickat OK kommer en musbild att visas. Du "
+"måste då\n"
+"röra på hjulet för att aktivera det. Testa sedan att alla knappar\n"
+"och musrörelsen fungerar korrekt."
 
 #: ../../help.pm_.c:638
 msgid ""
@@ -4192,15 +4244,15 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer many advanced\n"
 "options, which are reserved for the expert user."
 msgstr ""
-"LILO och Grub är starthanterare för GNU/Linux. Det här steget är\n"
+"Lilo och Grub är starthanterare för GNU/Linux. Det här steget är\n"
 "vanligtvis helt automatiskt. DrakX analyserar startsektorn på\n"
 "disken och uppträder lite olika beroende på vad den hittar där:\n"
 "\n"
 " * om en startsektor tillhörande Windows hittas kommer den att ersättas\n"
-"med grub/LILO. På så sätt kan du välja mellan GNU/Linux och andra OS\n"
+"med Grub/Lilo. På så sätt kan du välja mellan GNU/Linux och andra OS\n"
 "när du startar datorn.\n"
 "\n"
-" * om en grub- eller LILO-startsektor hittas, kommer den att ersättas med "
+" * om en Grub- eller Lilo-startsektor hittas, kommer den att ersättas med "
 "en\n"
 "ny.\n"
 "\n"
@@ -4211,10 +4263,10 @@ msgstr ""
 "\n"
 "    * \"Grub\": om du föredrar Grub (textbaserad meny).\n"
 "\n"
-"    * \"LILO med grafisk meny\": om du föredrar Lilo med grafiskt\n"
+"    * \"Lilo med grafisk meny\": om du föredrar Lilo med grafiskt\n"
 "gränssnitt.\n"
 "\n"
-"    * \"LILO med textbaserad meny\": om du föredrar LILO med textbaserad "
+"    * \"Lilo med textbaserad meny\": om du föredrar Lilo med textbaserad "
 "meny.\n"
 "\n"
 " * \"Startenhet\": i de flesta fall behöver du inte ändra det förvalda\n"
@@ -4246,7 +4298,6 @@ msgstr ""
 "\"Klar\" tar dig till nästa installationssteg."
 
 #: ../../help.pm_.c:718
-#, fuzzy
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options which will be available at boot time will be displayed.\n"
@@ -4261,16 +4312,19 @@ msgid ""
 "anyone. In which case, you can delete the corresponding entries. But then,\n"
 "you will need a boot disk in order to boot those other operating systems!"
 msgstr ""
-"LILO (Linux Loader) och grub är starthanterare: de kan starta\n"
-"antingen GNU/Linux eller något annat operativsystem som finns\n"
-"på datorn. Vanligtvis hittas och installeras dessa andra\n"
-"operativsystem automatiskt. Om så inte är fallet kan du lägga till\n"
-"en post manuellt i den här rutan. Var försiktig så att du inte\n"
-"väljer felaktiga parametrar.\n"
+"När du har konfigurerat de allmänna parametrarna för starthanteraren kommer\n"
+"listan över startalternativ som finns tillgängliga vid start att visas.\n"
+"\n"
+"Om det finns ett annat operativsystem installerat kommer det att "
+"automatiskt\n"
+"läggas till i startmenyn. Här kan du finjustera de befintliga alternativen.\n"
+"Välj en post och klicka på \"Ändra\" för att ändra eller ta bort den. \"Lägg "
+"till\"\n"
+"skapar en ny post. \"Klar\" går vidare till nästa installationssteg.\n"
 "\n"
 "Du kanske inte vill att någon annan ska få åtkomst till dessa andra\n"
 "operativsystem. Om så är fallet kan du ta bort de motsvarande posterna.\n"
-"Men om du gör det, måste du använda en startdiskett för att kunna starta\n"
+"Om du gör det, måste du använda en startdiskett för att kunna starta\n"
 "dessa operativsystem."
 
 #: ../../help.pm_.c:732
@@ -4322,12 +4376,12 @@ msgstr ""
 " * \"CUPS\"\"Common Unix Printing System\" är mycket bra på att skriva\n"
 "ut till lokala skrivare och till skrivare på andra sidan jorden. Det är "
 "enkelt och kan\n"
-"agera som en server eller klient för det gamla skrivarsystemet \"lpd\", det\n"
-"är alltså kompatibelt med gamla skrivarsystem. CUPS kan utföra mångra "
+"agera som en server eller klient för det gamla skrivarsystemet \"LPD\", det\n"
+"är alltså kompatibelt med gamla skrivarsystem. CUPS kan utföra många "
 "tricks,\n"
 "men den grundläggande installationen är nästan lika enkel som med \"pdq\". "
 "Om\n"
-"du ska använda CUPS för att emulera en \"lpd\"-server måste du aktivera\n"
+"du ska använda CUPS för att emulera en \"LPD\"-server måste du aktivera\n"
 "demonen \"cups-lpd\". CUPS har grafiska gränssnitt för utskrift och för att\n"
 "välja olika utskriftsalternativ.\n"
 "\n"
@@ -4341,7 +4395,6 @@ msgstr ""
 "nätverk."
 
 #: ../../help.pm_.c:759
-#, fuzzy
 msgid ""
 "DrakX now detects any IDE device present in your computer. It will also\n"
 "scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -4368,24 +4421,22 @@ msgstr ""
 "leta efter PCI SCSI-kort på systemet. Om DrakX hittar ett SCSI-kort\n"
 "och känner till rätt drivrutin, kommer kortet att installeras automatiskt.\n"
 "\n"
-"Om du har något SCSI-kort som DrakX inte hittar, kommer du i alla fall att\n"
-"få frågan om det finns något PCI SCSI-kort i systemet. Om det inte finns\n"
-"något kort kan du klicka på Nej. Om du klickar Ja kommer en lista\n"
-"med kort att presenteras, från vilken du kan välja ditt specifika kort.\n"
-"Om du är osäker kan du markera \"Visa hårdvaruinformation\" och klicka\n"
-"OK så visas en lista över vilken hårdvara som hittats i datorn.\n"
-"Undersök listan med hårdvara och klicka sedan på OK för att\n"
+"Eftersom hårdvaruidentifieringen inte alltid hittar all hårdvara, kommer du "
+"att\n"
+"få frågan om det finns något PCI SCSI-kort i systemet. Klicka på \"Ja\" om "
+"du\n"
+"vet att ett SCSI-kort finns i datorn. Du kommer att få se en lista\n"
+"med SCSI-kort där du kan välja ett specifikt kort. Klicka \"Nej\" om du\n"
+"inte har någon SCSI-hårdvara. Om du är osäker kan du markera \"Visa\n"
+"hårdvaruinformation\" och klicka OK så visas en lista över vilken hårdvara\n"
+"som hittats i datorn. Undersök listan och klicka sedan på OK för att\n"
 "återgå till SCSI-gränssnittsfrågan.\n"
 "\n"
 "Om du blir tvungen att manuellt specificera ditt kort kommer DrakX att\n"
 "fråga om du vill ange alternativ för det. Du bör tillåta DrakX att själv\n"
 "undersöka hårdvaran efter alternativ. Detta fungerar oftast bra.\n"
 "\n"
-"Om inte, kommer du att behöva ange alternativ för drivrutinen. Se \"User\n"
-"Guide\" (kapitel 3, avsnittet \"Collective informations on your hardware\")\n"
-"för tips om hur du får tag på information från hårdvarudokumentation,\n"
-"tillverkarens hemsida (om du har tillgång till Internet) eller från\n"
-"Microsoft Windows (om du har det på systemet)."
+"Om inte, kommer du att behöva ange alternativ för drivrutinen."
 
 #: ../../help.pm_.c:781
 msgid ""
@@ -4515,7 +4566,7 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
-"Yaboot är en starthanterare för NewWorld MacIntosh-hårdvara. Den kan ladda\n"
+"Yaboot är en starthanterare för NewWorld Macintosh-hårdvara. Den kan ladda\n"
 "antingen GNU/Linux, MacOS eller MacOSX. I de flesta fall blir dessa\n"
 "operativsystem korrekt identifierade och installerade. Om så inte är\n"
 "fallet kan du lägga till dem manuellt här. Var försiktig så du väljer rätt\n"
@@ -4547,7 +4598,6 @@ msgstr ""
 "\"Open Firmware\"-fördröjningen är över."
 
 #: ../../help.pm_.c:860
-#, fuzzy
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
 "your installed hardware, you may (or may not), see the following entries:\n"
@@ -4595,14 +4645,18 @@ msgstr ""
 "klockan efter din tidszon.\n"
 "\n"
 " * \"Skrivare\": om du klickar på \"Ingen skrivare\" startar skrivarguiden.\n"
+"Se motsvarande kapitel i \"Starter Guide\" för mer information om hur du\n"
+"ska göra för att installera en ny skrivare. Gränssnittet som visas där "
+"liknar\n"
+"det som används vid installationen.\n"
 "\n"
-" * \"Ljudkort\": om ett ljudkort upptäcks i datorn visas det här.\n"
+" * \"Ljudkort\": om ett ljudkort identifierats i datorn visas det här.\n"
 "Ingen ändring är möjlig under installationen.\n"
 "\n"
-" * \"TV-kort\": om ett TV-kort upptäcks i datorn visas det här.\n"
+" * \"TV-kort\": om ett TV-kort identifierats i datorn visas det här.\n"
 "Ingen ändring är möjlig under installationen.\n"
 "\n"
-" * \"ISDN-kort\": om ett ISDN-kort upptäcks i datorn visas det här.\n"
+" * \"ISDN-kort\": om ett ISDN-kort identifierats i datorn visas det här.\n"
 "Du kan klicka på knappen för att ändra dess parametrar."
 
 #: ../../help.pm_.c:891
@@ -5396,7 +5450,7 @@ msgstr ""
 "försäljning, drifts-/affärs-avbrott, finansiella förluster,\n"
 "rättsavgifter och böter i en rättsprocess mot er, eller några andra\n"
 "därav följande förluster) som orsakats av ägandet, användandet eller\n"
-"nedladdandet, från någon av Mandrake Linuxs siter, av\n"
+"nedladdandet, från någon av Mandrake Linux siter, av\n"
 "mjukvarukomponenter som är förbjudna eller begränsade av landets\n"
 "lagar. Detta begränsade ansvar gäller bland annat, men är inte\n"
 "begränsat till, det kryptografiska mjukvarukomponenter som ingår i\n"
@@ -5445,7 +5499,7 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:191
 msgid "Are you sure you refuse the licence?"
-msgstr "Är du säker på att du inte vill accepetera licensen?"
+msgstr "Är du säker på att du inte vill acceptera licensen?"
 
 #: ../../install_steps_interactive.pm_.c:211
 #: ../../install_steps_interactive.pm_.c:1021
@@ -6714,15 +6768,15 @@ msgstr "Högra alt-tangenten"
 
 #: ../../keyboard.pm_.c:269
 msgid "Both Shift keys simultaneously"
-msgstr "Båda shift-tangenterna nedtryckta samtidigt"
+msgstr "Båda skift-tangenterna nedtryckta samtidigt"
 
 #: ../../keyboard.pm_.c:270
 msgid "Control and Shift keys simultaneously"
-msgstr "Ctrl och shift nedtryckta samtidigt"
+msgstr "Ctrl och skift nedtryckta samtidigt"
 
 #: ../../keyboard.pm_.c:271
 msgid "CapsLock key"
-msgstr "CapsLock-tangenten"
+msgstr "Caps Lock-tangenten"
 
 #: ../../keyboard.pm_.c:272
 msgid "Ctrl and Alt keys simultaneously"
@@ -6730,7 +6784,7 @@ msgstr "Ctrl och alt nedtryckta samtidigt"
 
 #: ../../keyboard.pm_.c:273
 msgid "Alt and Shift keys simultaneously"
-msgstr "Alt och shift nedtryckta samtidigt"
+msgstr "Alt och skift nedtryckta samtidigt"
 
 #: ../../keyboard.pm_.c:274
 msgid "\"Menu\" key"
@@ -7167,7 +7221,7 @@ msgstr "Vilket protokoll vill du använda?"
 #: ../../network/isdn.pm_.c:200
 #, c-format
 msgid "Found \"%s\" interface do you want to use it ?"
-msgstr ""
+msgstr "Hittade \"%s\"-gränssnitt. Vill du använda det?"
 
 #: ../../network/isdn.pm_.c:207
 msgid "What kind of card do you have?"
@@ -7429,7 +7483,7 @@ msgstr "LAN-anslutning"
 
 #: ../../network/netconnect.pm_.c:189 ../../network/netconnect.pm_.c:198
 msgid "ethernet card(s) detected"
-msgstr "ethernetkort har hittats"
+msgstr "ethernet-kort har hittats"
 
 #: ../../network/netconnect.pm_.c:201
 msgid "Choose the connection you want to configure"
@@ -7583,14 +7637,12 @@ msgid "Gateway device"
 msgstr "Gateway-enhet"
 
 #: ../../network/network.pm_.c:376
-#, fuzzy
 msgid "DNS server address should be in format 1.2.3.4"
-msgstr "IP-adressen ska vara i formatet 1.2.3.4"
+msgstr "DNS-serveradressen ska vara i formatet 1.2.3.4"
 
 #: ../../network/network.pm_.c:380
-#, fuzzy
 msgid "Gateway address should be in format 1.2.3.4"
-msgstr "IP-adressen ska vara i formatet 1.2.3.4"
+msgstr "Gateway-adressen ska vara i formatet 1.2.3.4"
 
 #: ../../network/network.pm_.c:394
 msgid "Proxies configuration"
@@ -7618,15 +7670,15 @@ msgstr "Webbadressen ska börja med \"ftp:\" eller \"http:\""
 
 #: ../../network/shorewall.pm_.c:24
 msgid "Firewalling configuration detected!"
-msgstr "Brandväggskonfiguration upptäckt."
+msgstr "Brandväggskonfiguration identifierad."
 
 #: ../../network/shorewall.pm_.c:25
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fix after installation."
 msgstr ""
-"Varning! En existerande brandväggskonfiguration har upptäckts. Du behöver "
-"eventuellt en manuell fix efter installationen."
+"Varning! En existerande brandväggskonfiguration har identifierats. Du "
+"behöver eventuellt en manuell fix efter installationen."
 
 #: ../../network/tools.pm_.c:41
 msgid "Internet configuration"
@@ -8238,7 +8290,7 @@ msgstr ""
 "Observera att det tar längre tid att identifiera nätverksskrivare än att "
 "identifiera lokalt anslutna skrivare. Om du vill att det ska gå fortare att "
 "identifiera skrivare kan du slå av identifieringen av nätverksskrivare och/"
-"eller skrivare anslutna tiil Windows-datorer.\n"
+"eller skrivare anslutna till Windows-datorer.\n"
 "\n"
 "Klicka på \"Nästa\" när du är klar och på \"Avbryt\" om du inte vill "
 "installera skrivare just nu."
@@ -8788,7 +8840,7 @@ msgid ""
 msgstr ""
 "Printerdrake har jämfört modellbeteckningen den identifierade automatiskt "
 "med modeller som finns i dess modellista och försökt hitta den som passar "
-"bäst. Valet kKli fel, speciellt om skrivaren inte finns med i listan "
+"bäst. Valet kan vara fel, speciellt om skrivaren inte finns med i listan "
 "överhuvudtaget. Så kontrollera om valet är korrekt och om så är fallet "
 "klicka på \"Korrekt modell\" annars på \"Välj modell manuellt\" så du kan "
 "välja skrivarmodell manuellt på nästa skärm.\n"
@@ -9238,7 +9290,7 @@ msgstr ""
 "\"mtools\" (skriv \"man mtools\" på kommandoraden för mer info). Du hittar "
 "kortets filsystem under enhetsbokstaven \"p:\", eller efterföljande "
 "enhetsbokstäver om du har mer än en HP-skrivare med fotokortsenhet. I "
-"\"MtoolsFM\" kan du byta mella enhetsbokstäverna i fältet längst upp till "
+"\"MtoolsFM\" kan du byta mellan enhetsbokstäverna i fältet längst upp till "
 "höger i fillistorna."
 
 #: ../../printerdrake.pm_.c:2461 ../../printerdrake.pm_.c:2923
@@ -9792,7 +9844,7 @@ msgstr "mkraid misslyckades"
 
 #: ../../raid.pm_.c:137
 msgid "mkraid failed (maybe raidtools are missing?)"
-msgstr "mkraid misslyckades (kanske finns det inga raid-verktyg)"
+msgstr "mkraid misslyckades (kanske finns det inga RAID-verktyg)"
 
 #: ../../raid.pm_.c:153
 #, c-format
@@ -9823,24 +9875,42 @@ msgid ""
 "be sent to this user (username or\n"
 "\t       email)"
 msgstr ""
+"Standard: Detta är den standardsäkerhet som rekommenderas för en dator som "
+"kommer att\n"
+"               vara ansluten till Internet som klient.\n"
+"\n"
+"Hög:       Det finns några begränsningar och fler automatiska kontroller "
+"körs varje natt.\n"
+"\n"
+"Högre:    Säkerheten är hög nog för en server som tillåter att många "
+"klienter ansluter mot den.\n"
+"Om datorn enbart är en klient på Internet bör du\n"
+"\t    välja en lägre nivå.\n"
+"Paranoid:  Baserat på föregående nivå, men systemet är helt stängt.\n"
+"Alla säkerhetsfunktioner är aktiverade.\n"
+"\n"
+"Säkerhetsadministratör:\n"
+"               Om alternativet \"Säkerhetsunderrättelser\"' är markerat "
+"kommer säkerhetsunderrättelser att skickas till den här användaren "
+"(användarnamn eller\n"
+"\t       e-post)"
 
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
 msgstr "Säkerhetsnivå:"
 
 #: ../../security/main.pm_.c:74
-#, fuzzy
 msgid "Security Alerts:"
-msgstr "Säkerhetsnivå"
+msgstr "Säkerhetsunderrättelser:"
 
 #: ../../security/main.pm_.c:83
 msgid "Security Administrator:"
 msgstr "Säkerhetsadministratör:"
 
 #: ../../security/main.pm_.c:114 ../../security/main.pm_.c:150
-#, fuzzy, c-format
+#, c-format
 msgid " (default: %s)"
-msgstr " (Standard)"
+msgstr " (standard: %s)"
 
 #: ../../security/main.pm_.c:118 ../../security/main.pm_.c:154
 #: ../../security/main.pm_.c:179
@@ -9848,30 +9918,28 @@ msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need explanations, click on Help.\n"
 msgstr ""
+"Följande alternativ kan ställas in för att anpassa systemets\n"
+"säkerhet. Om du behöver förklaringar, klicka på Hjälp.\n"
 
 #: ../../security/main.pm_.c:226
-#, fuzzy
 msgid "Network Options"
-msgstr "Fler alternativ"
+msgstr "Nätverksalternativ"
 
 #: ../../security/main.pm_.c:235
-#, fuzzy
 msgid "System Options"
-msgstr "Fler alternativ"
+msgstr "Systemalternativ"
 
 #: ../../security/main.pm_.c:242
 msgid "Periodic Checks"
-msgstr ""
+msgstr "Periodiska kontroller"
 
 #: ../../security/main.pm_.c:256
-#, fuzzy
 msgid "Please wait, setting security level..."
-msgstr "Välj önskad säkerhetsnivå"
+msgstr "Vänta, ställer in säkerhetsnivå..."
 
 #: ../../security/main.pm_.c:262
-#, fuzzy
 msgid "Please wait, setting security options..."
-msgstr "Vänta, förbereder installation..."
+msgstr "Vänta, ställer in säkerhetsalternativ..."
 
 #: ../../services.pm_.c:14
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
@@ -9993,7 +10061,7 @@ msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
 msgstr ""
-"LPD är en skrivardemon som behövs för att lpr ska fungera korrekt.\n"
+"LPD är en skrivardemon som behövs för att LPR ska fungera korrekt.\n"
 "Det är i princip en server som tilldelar utskrifter till skrivare."
 
 #: ../../services.pm_.c:45
@@ -10063,7 +10131,7 @@ msgid ""
 "have\n"
 "it installed on machines that don't need it."
 msgstr ""
-"PCMCIA används för att ansluta t ex ethernet-nätverkskort och modem till\n"
+"PCMCIA används för att ansluta t ex Ethernet-nätverkskort och modem till\n"
 "bärbara datorer. PCMCIA-tjänsten startas inte om den inte behövs, så det är\n"
 "helt säkert att ha den installerad, även på datorer som inte använder den."
 
@@ -10276,11 +10344,11 @@ msgstr ""
 
 #: ../../share/advertising/04-multimedia.pl_.c:9
 msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr ""
+msgstr "Upptäck de mest uppdaterade multimedia-verktygen!"
 
 #: ../../share/advertising/04-multimedia.pl_.c:10
 msgid "Push multimedia to its limits!"
-msgstr ""
+msgstr "Pressa multimedia till dess gränser!"
 
 #: ../../share/advertising/04-multimedia.pl_.c:11
 msgid ""
@@ -10407,17 +10475,19 @@ msgstr ""
 
 #: ../../share/advertising/13-mdkcampus.pl_.c:9
 msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr ""
+msgstr "Upptäck MandrakeSofts kurskatalog Linux-Campus"
 
 #: ../../share/advertising/13-mdkcampus.pl_.c:10
 msgid ""
 "The training program has been created to respond to the needs of both end "
 "users and experts (Network and System administrators)"
 msgstr ""
+"Kursen har skapats för att fylla behoven för både slutanvändare och experter "
+"(nätverk- och systemadministratörer)"
 
 #: ../../share/advertising/13-mdkcampus.pl_.c:11
 msgid "Certify yourself on Linux"
-msgstr "Certifiera dig på Linux."
+msgstr "Certifiera dig på Linux"
 
 #: ../../share/advertising/13-mdkcampus.pl_.c:12
 msgid ""
@@ -10425,6 +10495,10 @@ msgid ""
 "partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
 "certification program (worldwide professional technical certification)"
 msgstr ""
+"Vare sig du väljer att lära dig själv online eller via vårt nätverk av "
+"utbildningspartners, förbereder kurskatalogen Linux-Campus dig för det "
+"erkända LPI-certificeringsprogrammet (världsomspännande professionell "
+"teknisk certifiering)"
 
 #: ../../share/advertising/14-mdkexpert.pl_.c:9
 msgid "Become a MandrakeExpert"
@@ -10443,15 +10517,17 @@ msgid ""
 "your knowledge and help others by becoming a recognized Expert on the online "
 "technical support website:"
 msgstr ""
+"Anslut till MandrakeSofts supportgrupper och Linux-gemenskapen på Internet "
+"för att dela med dig av dina kunskaper och hjälpa andra genom att bli en "
+"erkänd expert på den tekniska supportwebbplatsen:"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:9
-#, fuzzy
 msgid "MandrakeExpert Corporate"
-msgstr "MandrakeExpert"
+msgstr "MandrakeExpert för företag"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:10
 msgid "An online platform to respond to company's specific support needs"
-msgstr ""
+msgstr "En online-plattform för att bistå företag med specifika supportbehov"
 
 #: ../../share/advertising/15-mdkexpert-corporate.pl_.c:11
 msgid ""
@@ -10473,6 +10549,12 @@ msgid ""
 "competititve edge, if you want to support Mandrake Linux development, join "
 "MandrakeClub!"
 msgstr ""
+"MandrakeClub och Mandrake Corporate Club skapades för företag och privata "
+"användare av Mandrake Linux som direkt vill stödja sin favorit-Linux-"
+"distribution och också få speciella privilegier. Om du tycker om våra "
+"produkter, om ditt företag drar fördel av våra produkter så att företaget "
+"går bättre och om du vill stödja utvecklingen av Mandrake Linux, gå med i "
+"MandrakeClub!"
 
 #: ../../standalone.pm_.c:42
 msgid "Installing packages..."
@@ -10480,7 +10562,7 @@ msgstr "Installerar paket..."
 
 #: ../../standalone/XFdrake_.c:147
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
-msgstr "Logga ut och använd sedan Ctrl-Alt-Backsteg"
+msgstr "Logga ut och använd sedan Ctrl+Alt+Backsteg"
 
 #: ../../standalone/XFdrake_.c:151
 #, c-format
@@ -10572,9 +10654,8 @@ msgid "<-- Del User"
 msgstr "<-- Ta bort användare"
 
 #: ../../standalone/drakTermServ_.c:694
-#, fuzzy
 msgid "No net boot images created!"
-msgstr "Net Boot-avbilder"
+msgstr "Inga nätstartavbilder skapade."
 
 #: ../../standalone/drakTermServ_.c:710
 msgid "Add Client -->"
@@ -10589,15 +10670,16 @@ msgid "dhcpd Config..."
 msgstr "dhcpd-konfiguration..."
 
 #: ../../standalone/drakTermServ_.c:873
-#, fuzzy
 msgid "dhcpd Server Configuration"
-msgstr "Avancerad konfiguration"
+msgstr "Konfiguration av dhcpd-server"
 
 #: ../../standalone/drakTermServ_.c:874
 msgid ""
 "Most of these values were extracted\n"
 "from your running system. You can modify as needed."
 msgstr ""
+"De flesta av dessa värden har hämtats från\n"
+"det startade systemet. Du kan ändra efter behov."
 
 #: ../../standalone/drakTermServ_.c:875
 msgid "Write Config"
@@ -11056,11 +11138,12 @@ msgstr ""
 "nu"
 
 #: ../../standalone/drakbackup_.c:1786
-#, fuzzy
 msgid ""
 "Other (not drakbackup)\n"
 "keys in place already"
-msgstr "Nycklarna finns redan"
+msgstr ""
+"Andra (inte drakbackup-)\n"
+"nycklar finns redan"
 
 #: ../../standalone/drakbackup_.c:1790
 msgid "Please enter the host name or IP."
@@ -12545,8 +12628,8 @@ msgid ""
 "Warning, another Internet connection has been detected, maybe using your "
 "network"
 msgstr ""
-"Varning, en annan Internetanslutning har upptäckts som kanske använder ditt "
-"nätverk."
+"Varning, en annan Internetanslutning har identifierats som kanske använder "
+"ditt nätverk."
 
 #: ../../standalone/drakconnect_.c:430
 msgid ""
@@ -12696,7 +12779,7 @@ msgstr "utelämna SCSI-moduler"
 
 #: ../../standalone/drakfloppy_.c:164
 msgid "omit raid modules"
-msgstr "utelämna raid-moduler"
+msgstr "utelämna RAID-moduler"
 
 #: ../../standalone/drakfloppy_.c:200
 msgid "Remove a module"
@@ -12830,7 +12913,7 @@ msgstr "Stäng av teckensnittsfiler"
 
 #: ../../standalone/drakfont_.c:534
 msgid "xfs restart"
-msgstr "starta om xfs"
+msgstr "starta om XFS"
 
 #: ../../standalone/drakfont_.c:542 ../../standalone/drakfont_.c:951
 msgid ""
@@ -13258,6 +13341,10 @@ msgid ""
 "and groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
+"Drakperm används för att se filer som används för att korrigera "
+"behörigheter, ägare och grupper via msec.\n"
+"Du kan också redigera dina egna regler vilka kommer att överskrida "
+"standardreglerna."
 
 #: ../../standalone/drakperm_.c:62
 msgid "Add a new rule at the end"
@@ -13316,6 +13403,8 @@ msgid ""
 "Used for directory:\n"
 " only owner of directory or file in this directory can delete it"
 msgstr ""
+"Används för katalog:\n"
+" endast ägaren av kataloger eller filer i den här katalogen kan ta bort dem"
 
 #: ../../standalone/drakperm_.c:311
 msgid "Use owner id for execution"
@@ -13327,7 +13416,7 @@ msgstr "Använd grupp-id vid exekvering"
 
 #: ../../standalone/drakperm_.c:313
 msgid "when checked, owner and group won't be changed"
-msgstr ""
+msgstr "om markerad kommer ägare och grupp inte att ändras"
 
 #: ../../standalone/drakperm_.c:318
 msgid "Path selection"
@@ -13373,13 +13462,19 @@ msgid ""
 "Note: if you've an ISA PnP sound card, you'll have to use the sndconfig "
 "program.  Just type \"sndconfig\" in a console."
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Observera: om du har ett ISA PnP-ljudkort måste du använda sndconfig-"
+"programmet. Skriv \"sndconfig\" i en konsoll."
 
 #: ../../standalone/draksplash_.c:34
-#, fuzzy
 msgid ""
 "package 'ImageMagick' is required for correct working.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
-msgstr "paktet ImageMagick krävs för att det ska fungera korrekt"
+msgstr ""
+"paketet ImageMagick krävs för att det ska fungera korrekt.\n"
+"Klicka OK för att installera ImageMagick eller Avbryt för att avsluta."
 
 #: ../../standalone/draksplash_.c:78
 msgid "first step creation"
@@ -13403,7 +13498,7 @@ msgstr "Bläddra"
 
 #: ../../standalone/draksplash_.c:99 ../../standalone/draksplash_.c:162
 msgid "Configure bootsplash picture"
-msgstr "Konfigurera startskärmsbild"
+msgstr "Konfigurera startkärmbild"
 
 #: ../../standalone/draksplash_.c:100
 msgid ""
@@ -13498,7 +13593,7 @@ msgstr "Genererar förhandsgranskning..."
 #: ../../standalone/draksplash_.c:511
 #, c-format
 msgid "%s BootSplash (%s) preview"
-msgstr ""
+msgstr "%s-startskärm (%s)-förhandsgranskning"
 
 #: ../../standalone/drakxtv_.c:49
 msgid ""
@@ -13974,11 +14069,8 @@ msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Vissa enheter i \"%s\"-hårdvaruklassen togs bort:\n"
 
 #: ../../standalone/service_harddrake_.c:48
-#, fuzzy
 msgid "Some devices were added:\n"
-msgstr ""
-"\n"
-"Vissa enheter i \"%s\"-klassen lades till:\n"
+msgstr "Vissa enheter lades till:\n"
 
 #: ../../steps.pm_.c:14
 msgid "Choose your language"
