@@ -836,6 +836,14 @@ sub write_XF86Config {
     print G qq(    Option "XkbDisable"\n) unless $O->{xkb_keymap};
     print F $keyboardsection_part3;
     print G $keyboardsection_part3_v4;
+
+    $O->{xkb_model} ||= 
+      arch() =~ /ppc/ ? 'macintosh' :
+      arch() =~ /sparc/ ? 'sun' :
+      $O->{xkb_keymap} eq 'br' ? 'abnt2' : 'pc105';
+    print F qq(    XkbModel        "$O->{xkb_model}"\n);
+    print G qq(    Option "XkbModel" "$O->{xkb_model}"\n);
+
     print F qq(    XkbLayout       "$O->{xkb_keymap}"\n);
     print G qq(    Option "XkbLayout" "$O->{xkb_keymap}"\n);
     print F join '', map { "    $_\n" } @{$xkb_options{$O->{xkb_keymap}} || []};

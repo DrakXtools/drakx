@@ -50,6 +50,7 @@ sub getinfoFromXF86Config {
 
 	    $c{driver} = $1 if /^\s*Driver\s+"(.*?)"/;
 	    $c{id} = $1 if /^\s*Identifier\s+"[^\d"]*(\d*)"/;
+	    $c{xkb_model} ||= $1 if /^\s*Option\s+"XkbModel"\s+"(.*?)"/;
 	    $c{xkb_keymap} ||= $1 if /^\s*Option\s+"XkbLayout"\s+"(.*?)"/;
 	    $c{XMOUSETYPE} ||= $1 if /^\s*Option\s+"Protocol"\s+"(.*?)"/;
 	    $c{device} ||= $1 if /^\s*Option\s+"Device"\s+"\/dev\/(.*?)"/;
@@ -93,6 +94,7 @@ sub getinfoFromXF86Config {
     local *F; open F, "$prefix/etc/X11/XF86Config";
     while (<F>) {
 	if (/^Section "Keyboard"/ .. /^EndSection/) {
+	    $keyboard{xkb_model} ||= $1 if /^\s*XkbModel\s+"(.*?)"/;
 	    $keyboard{xkb_keymap} ||= $1 if /^\s*XkbLayout\s+"(.*?)"/;
 	} elsif (/^Section "Pointer"/ .. /^EndSection/) {
 	    $mouse{XMOUSETYPE} ||= $1 if /^\s*Protocol\s+"(.*?)"/;

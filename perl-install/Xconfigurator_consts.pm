@@ -487,7 +487,6 @@ if (arch() =~ /^sparc/) {
 #    XkbSymbols  "sun/us(sun5)"
 
     XkbRules    "sun"
-    XkbModel    "sun"
     XkbLayout   "us"
     XkbCompat   "compat/complete"
     XkbTypes    "types/complete"
@@ -497,7 +496,6 @@ if (arch() =~ /^sparc/) {
 ';
 $keyboardsection_part3_v4 = '
     Option "XkbRules"    "sun"
-    Option "XkbModel"    "sun"
     Option "XkbLayout"   "us"
     Option "XkbCompat"   "compat/complete"
     Option "XkbTypes"    "types/complete"
@@ -538,12 +536,10 @@ $keyboardsection_part3 = '
     XkbSymbols      "macintosh/us"
     XkbGeometry     "macintosh"
     XkbRules        "xfree86"
-    XkbModel        "macintosh"
 ';
 
 $keyboardsection_part3_v4 = '
     Option "XkbRules" "xfree86"
-    Option "XkbModel" "macintosh"
 ';	
 } else {
 $keyboardsection_part3 = '
@@ -578,12 +574,10 @@ $keyboardsection_part3 = '
     XkbSymbols      "us(pc105)"
     XkbGeometry     "pc"
     XkbRules        "xfree86"
-    XkbModel        "pc105"
 ';
 
 $keyboardsection_part3_v4 = '
     Option "XkbRules" "xfree86"
-    Option "XkbModel" "pc105"
 ';
 }
 
