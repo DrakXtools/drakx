@@ -193,7 +193,6 @@ want to use the default host name."),
 
 # automatic net aliases configuration
 sub configure_eth_aliases() {
-    modules::load_category('network/main|gigabit|usb');
     foreach (detect_devices::getNet()) {
         my $driver = c::getNetDriver($_) or next;
         modules::add_alias($_, $driver);
