@@ -553,7 +553,7 @@ sub read_rpmsrate {
 		    }
 		    if ($p->rate) {
 			my @m4 = $p->rflags;
-			if (@m3 > 1 || @m4 > 1) {
+			if ((@m3 > 1 || @m4 > 1) && "@m3[1..$#m3]" ne "@m4[1..$#m4]") {
 			    log::l("can't handle complicate flags for packages appearing twice ($_)");
 			    $fatal_error++;
 			}
