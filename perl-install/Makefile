@@ -8,9 +8,9 @@ include Makefile.config
 
 POFILES   = $(shell ls share/po/*.po)
 MOFILES   = $(POFILES:%.po=%.mo)
-DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config ddcprobe drakxtools.spec serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons standalone/man/C/* pixmaps pixmaps/langs standalone/interactive_http rpcinfo-flushed.c standalone/convert standalone/finish-install.xsetup standalone/service_harddrake.sh
+DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config drakxtools.spec serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons standalone/man/C/* pixmaps pixmaps/langs standalone/interactive_http rpcinfo-flushed.c standalone/convert standalone/finish-install.xsetup standalone/service_harddrake.sh
 OTHERS     = $(OTHERDIRS) $(OTHERFILES)
-OTHERDIRS  = tools/ddcprobe tools/serial_probe
+OTHERDIRS  = tools/serial_probe
 OTHERFILES = tools/rpcinfo-flushed.c
 
 STAGE1 = ../mdk-stage1
