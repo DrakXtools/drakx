@@ -216,7 +216,7 @@ sub SIGHUP_daemon {
     if ($service eq "cupsd") {$service = "cups"};
     # PDQ has no daemon, exit.
     if ($service eq "pdq") {return 1};
-    # CUPS needs auto-configuration
+    # CUPS needs auto-correction for its configuration
     run_program::rooted($prefix, "/usr/sbin/correctcupsconfig") if ($service eq "cups");
     # Name of the daemon
     my %daemons = (
@@ -226,7 +226,7 @@ sub SIGHUP_daemon {
 			    "cups" => "cupsd",
 			    "devfs" => "devfsd",
 			    );
-    my $daemon = $deamons{$service};
+    my $daemon = $daemons{$service};
     $daemon = $service if (! defined $daemon);
 #    if ($service eq "cups") {
 #	# The current CUPS (1.1.13) dies on SIGHUP, do the normal restart.
