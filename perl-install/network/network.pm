@@ -73,6 +73,13 @@ sub write_conf {
     setVarsInSh($file, $netc, if_(!$netc->{DHCP}, 'HOSTNAME'), qw(NETWORKING FORWARD_IPV4 DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
 
+sub write_zeroconf {
+    my ($file, $netc);
+    my %zeroconf_file = getVarsFromSh($file) or die "cannot open file $file: $!";
+    $zeroconf_file{hostname} = $netc->{ZEROCONF_HOSTNAME};
+    setVarsInSh($file, %zeroconf_file);
+}
+
 sub write_resolv_conf {
     my ($file, $netc) = @_;
 
@@ -501,6 +508,8 @@ sub configureNetwork2 {
 	$in->do_pkgs->install('pump');
     }
     #-res_init();		#- reinit the resolver so DNS changes take affect
+    
+    write_zeroconf('/etc/tmdns.conf', $netc) if $netc->{ZEROCONF_HOSTNAME};
 
     proxy_configure($::o->{miscellaneous});
 }
