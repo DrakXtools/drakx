@@ -22,6 +22,10 @@
 #ifndef _MOUNT_H_
 #define _MOUNT_H_
 
+#ifndef DISABLE_NETWORK
+#include "nfsmount.h"
+#endif
+
 int my_mount(char *dev, char *location, char *fs);
 
 #endif

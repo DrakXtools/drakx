@@ -3,6 +3,9 @@
  *
  * Copyright 2000 MandrakeSoft
  *
+ * View the homepage: http://us.mandrakesoft.com/~gc/html/stage1.html
+ *
+ *
  * This software may be freely redistributed under the terms of the GNU
  * public license.
  *

@@ -28,6 +28,7 @@
 #include <net/route.h>
 #include <resolv.h>
 #include <sys/ioctl.h>
+#include <sys/mount.h>
 #include <stdio.h>
 
 #include "stage1.h"
@@ -36,6 +37,7 @@
 #include "probing.h"
 #include "log.h"
 #include "dns.h"
+#include "mount.h"
 
 #include "network.h"
 
@@ -342,8 +344,6 @@ static enum return_type configure_network(struct interface_info * intf)
 	char ips[50];
 	char * name;
 
-	write_resolvconf();
-
 	wait_message("Trying to guess hostname and domain...");
 	strcpy(ips, inet_ntoa(intf->ip));
 	name = mygethostbyaddr(ips);
@@ -371,7 +371,7 @@ static enum return_type configure_network(struct interface_info * intf)
 	}
 	else {
 		hostname = strdup(name);
-		domain = strchr(strdup(name), '.');
+		domain = strchr(strdup(name), '.') + 1;
 	}
 
 	return RETURN_OK;
@@ -399,6 +399,7 @@ static enum return_type bringup_networking(struct interface_info * intf)
 			break;
 			
 		case BRINGUP_CONF:
+			write_resolvconf();
 			results = configure_network(intf);
 			if (results != RETURN_OK)
 				step = BRINGUP_NET;
@@ -499,14 +500,61 @@ static enum return_type intf_select_and_up(void)
 	}
 	while (results == RETURN_BACK);
 
-	return RETURN_ERROR;
+	return RETURN_OK;
 }
+
+
 
 enum return_type nfs_prepare(void)
 {
+	char * questions[] = { "NFS server name", "Linux-Mandrake directory", NULL };
+	char ** answers;
+	char * nfsmount_location;
 	enum return_type results = intf_select_and_up();
 
-	return results;
+	if (results != RETURN_OK)
+		return results;
+
+	do {
+		results = ask_from_entries("Please enter the name or IP address of your NFS server, "
+					   "and the directory containing the Linux-Mandrake installation.",
+					   questions, &answers, 40);
+		if (results != RETURN_OK)
+			return nfs_prepare();
+		
+		nfsmount_location = malloc(strlen(answers[0]) + strlen(answers[1]) + 2);
+		strcpy(nfsmount_location, answers[0]);
+		strcat(nfsmount_location, ":");
+		strcat(nfsmount_location, answers[1]);
+		
+		if (my_mount(nfsmount_location, "/tmp/image", "nfs") == -1) {
+			error_message("I can't mount the directory from the NFS server.");
+			results = RETURN_BACK;
+			continue;
+		}
+
+		if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
+			error_message("That NFS volume does not seem to contain the Linux-Mandrake Installation.");
+			umount("/tmp/image");
+			results = RETURN_BACK;
+		}
+	}
+	while (results == RETURN_BACK);
+
+	log_message("found the Linux-Mandrake Installation, good news!");
+
+	if (IS_SPECIAL_STAGE2) {
+		if (load_ramdisk() != RETURN_OK) {
+			error_message("Could not load program into memory");
+			return nfs_prepare();
+		}
+	}
+
+	if (IS_RESCUE)
+		umount("/tmp/image"); /* TOCHECK */
+
+	method_name = strdup("nfs");
+	return RETURN_OK;
 }
 
 
@@ -514,12 +562,12 @@ enum return_type ftp_prepare(void)
 {
 	enum return_type results = intf_select_and_up();
 
-	return results;
+	return RETURN_ERROR | results;
 }
 
 enum return_type http_prepare(void)
 {
 	enum return_type results = intf_select_and_up();
 
-	return results;
+	return RETURN_ERROR | results;
 }

@@ -31,6 +31,7 @@
 #include "mount.h"
 
 
+
 #ifndef DISABLE_MEDIAS
 /* WARNING: this won't work if the argument is not /dev/ based */
 static int ensure_dev_exists(char *dev)
@@ -106,11 +107,12 @@ int my_mount(char *dev, char *location, char *fs)
 	int rc;
 
 #ifndef DISABLE_MEDIAS
-	rc = ensure_dev_exists(dev);
-
-	if (rc != 0) {
-		log_message("could not create required device file");
-		return -1;
+	if (strcmp(fs, "nfs")) {
+	    rc = ensure_dev_exists(dev);
+	    if (rc != 0) {
+		    log_message("could not create required device file");
+		    return -1;
+	    }
 	}
 #endif
 
@@ -144,6 +146,23 @@ int my_mount(char *dev, char *location, char *fs)
 	if (!strcmp(fs, "iso9660")) {
 		my_insmod("isofs");
 		flags |= MS_RDONLY;
+	}
+#endif
+
+#ifndef DISABLE_NETWORK
+	if (!strcmp(fs, "nfs")) {
+		int flags = 0;
+
+		my_insmod("nfs");
+		flags |= MS_RDONLY;
+
+		log_message("preparing nfsmount for %s", dev);
+
+		rc = nfsmount_prepare(dev, &flags, &opts);
+		if (rc != 0) {
+			log_perror(dev);
+			return rc;
+		}
 	}
 #endif
 

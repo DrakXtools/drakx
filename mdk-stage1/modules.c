@@ -146,19 +146,17 @@ int load_modules_dependencies(void)
 		while (start && *start) {
 			ptr = strchr(start, ' ');
 			if (ptr) *ptr = '\0';
-			tmp_deps[i] = strdup(start);
+			tmp_deps[i++] = strdup(start);
 			if (ptr)
 				start = ptr + 1;
 			else
 				start = NULL;
-			i++;
 			while (start && *start && *start == ' ')
 				start++;
 		}
-		tmp_deps[i] = NULL;
+		tmp_deps[i++] = NULL;
 
-		modules_deps[line].deps = (char **) malloc(sizeof(char *) * (i+1));
-		memcpy(modules_deps[line].deps, tmp_deps, sizeof(char *) * (i+1));
+		modules_deps[line].deps = memdup(tmp_deps, sizeof(char *) * i);
 
 		line++;
 		start = end + 1;

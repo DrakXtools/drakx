@@ -70,8 +70,7 @@ void process_cmdline(void)
 			i++;
 			continue;
 		}
-		name = (char *) malloc(i-j + 1);
-		memcpy(name, &buf[j], i-j);
+		name = memdup(&buf[j], i-j + 1);
 		name[i-j] = 0;
 
 		if (buf[i] == '=') {
@@ -79,8 +78,7 @@ void process_cmdline(void)
 			i++;
 			while (buf[i] != ' ' && buf[i] != 0)
 				i++;
-			value = (char *) malloc(i-k + 1);
-			memcpy(value, &buf[k], i-k);
+			value = memdup(&buf[k], i-k + 1);
 			value[i-k] = 0;
 		}
 
@@ -104,8 +102,7 @@ void process_cmdline(void)
 
 	tmp_params[p++].name = NULL;
 
-	params = (struct cmdline_elem *) malloc(sizeof(struct cmdline_elem) * p);
-	memcpy(params, tmp_params, sizeof(struct cmdline_elem) * p);
+	params = memdup(tmp_params, sizeof(struct cmdline_elem) * p);
 
 	log_message("\tgot %d args", p);
 }
@@ -231,7 +228,7 @@ enum return_type load_ramdisk(void)
 	}
 	
 	stat(img_name, &statr);
-	init_progression("Loading Installation program into memory...", statr.st_size);
+	init_progression("Loading program into memory...", statr.st_size);
 
 	while (!gzeof(st2)) {
 		int actually = gzread(st2, buffer, sizeof(buffer));
@@ -264,3 +261,11 @@ enum return_type load_ramdisk(void)
 	return RETURN_OK;
 }
 
+
+/* pixel's */
+void * memdup(void *src, size_t size)
+{
+	void * r = malloc(size);
+	memcpy(r, src, size);
+	return r;
+}

@@ -61,9 +61,15 @@ static int get_int_response(void)
 
 static char * get_string_response(void)
 {
+	/* I won't use a scanf/%s since I also want the null string to be accepted */
 	char s[50];
+	int i = 0;
 	fflush(stdout);
-	scanf(" %50s", s);
+	read(0, &(s[i++]), 1);
+	fcntl(0, F_SETFL, O_NONBLOCK);
+	while (read(0, &(s[i++]), 1) > 0 && i < sizeof(s));
+	fcntl(0, F_SETFL, 0);
+	s[i-2] = '\0';
 	return strdup(s);
 }
 
@@ -216,10 +222,10 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 {
 	int j, i = 0;
 
-	printf("> %s (`-' for void answer)\n", msg);
+	printf("> %s\n", msg);
 
 	while (questions && *questions) {
-		printf("(%d) %s\n", i, *questions);
+		printf("(%c) %s\n", i + 'a', *questions);
 		i++;
 		questions++;
 	}
@@ -229,10 +235,8 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 	while (1) {
 		int r;
 		for (j = 0 ; j < i ; j++) {
-			printf("(%d) ? ", j);
+			printf("(%c) ? ", j + 'a');
 			(*answers)[j] = get_string_response();
-			if (!strcmp((*answers)[j], "-"))
-				(*answers)[j] = strdup("");
 		}
 		printf("(0) Cancel (1) Accept (2) Re-enter answers\n? ");
 		r = get_int_response();

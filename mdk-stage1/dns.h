@@ -19,17 +19,12 @@
  *
  */
 
-#ifndef _TOOLS_H_
-#define _TOOLS_H_
+#ifndef H_DNS
+#define H_DNS 
 
+#include <netinet/in.h>
 
-void process_cmdline(void);
-int get_param(int i);
-void set_param(int i);
-int total_memory(void);
-int ramdisk_possible(void);
-enum return_type load_ramdisk(void);
-void * memdup(void *src, size_t size);
-
+int mygethostbyname(char * name, struct in_addr * addr);
+char * mygethostbyaddr(char * ipnum);
 
 #endif

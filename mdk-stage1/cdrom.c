@@ -63,7 +63,8 @@ static enum return_type try_with_device(char *dev_name)
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible())
 		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
 
-	if (IS_RESCUE) umount("/tmp/image"); /* TOCHECK */
+	if (IS_RESCUE)
+		umount("/tmp/image"); /* TOCHECK */
 
 	method_name = strdup("cdrom");
 	return RETURN_OK;

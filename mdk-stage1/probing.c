@@ -22,7 +22,7 @@
 
 /*
  * This contains stuff related to probing:
- * (1) PCI devices
+ * (1) any (actually SCSI and NET only) devices (autoprobe for PCI)
  * (2) IDE media
  * (3) SCSI media
  * (4) ETH devices
@@ -54,7 +54,7 @@ void probe_that_type(enum driver_type type)
 	if (IS_EXPERT)
 		ask_insmod(type);
 	else { 
-		/* probe for PCI devices */
+		/* ---- PCI probe */
 		char * mytype;
 		FILE * f;
 		int len = 0;
@@ -144,8 +144,8 @@ static void find_media(void)
 	log_message("looking for ide media");
 
     	count = 0;
-    	strcpy(b, "/proc/ide/hda");
-    	for (; b[12] <= 'm'; b[12]++) {
+    	strcpy(b, "/proc/ide/hd");
+    	for (b[12] = 'a'; b[12] <= 'h'; b[12]++) {
 		int i;
 		
 		/* first, test if file exists (will tell if attached medium exists) */
@@ -332,8 +332,7 @@ static void find_media(void)
 	tmp[count].name = NULL;
 	count++;
 
-	medias = (struct media_info *) malloc(sizeof(struct media_info) * count);
-	memcpy(medias, tmp, sizeof(struct media_info) * count);
+	medias = memdup(tmp, sizeof(struct media_info) * count);
 }
 
 
@@ -360,11 +359,8 @@ void get_medias(enum media_type media, char *** names, char *** models)
 	tmp_names[count] = NULL;
 	tmp_models[count++] = NULL;
 
-	*names = (char **) malloc(sizeof(char *) * count);
-	memcpy(*names, tmp_names, sizeof(char *) * count);
-
-	*models = (char **) malloc(sizeof(char *) * count);
-	memcpy(*models, tmp_models, sizeof(char *) * count);
+	*names = memdup(tmp_names, sizeof(char *) * count);
+	*models = memdup(tmp_models, sizeof(char *) * count);
 }
 #endif /* DISABLE_MEDIAS */
 
@@ -401,7 +397,6 @@ char ** get_net_devices(void)
 	};
 	char ** ptr = devices;
 	char * tmp[50];
-	char ** results;
 	int i = 0;
 	static int already_probed = 0;
 
@@ -418,9 +413,6 @@ char ** get_net_devices(void)
 	}
 	tmp[i++] = NULL;
 
-	results = (char **) malloc(sizeof(char *) * i);
-	memcpy(results, tmp, sizeof(char *) * i);
-	
-	return results;
+	return memdup(tmp, sizeof(char *) * i);
 }
 #endif /* DISABLE_NETWORK */
