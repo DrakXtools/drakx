@@ -92,13 +92,13 @@ one or more of the corresponding groups.
  * \"Development\": if the machine is to be used for programming, choose the
 desired group(s).
 
- * \"Server\": finally, if the machine is intended to be a server, you will
-be able to select which of the most common services you wish to see
-installed on the machine.
+ * \"Server\": if the machine is intended to be a server, you will be able
+to select which of the most common services you wish to see installed on
+the machine.
 
- * \"Graphical Environment\": this is where you will choose your preferred
-graphical environment. At least one must be selected if you want to have a
-graphical workstation!
+ * \"Graphical Environment\": finally, this is where you will choose your
+preferred graphical environment. At least one must be selected if you want
+to have a graphical workstation!
 
 Moving the mouse cursor over a group name will display a short explanatory
 text about that group.
@@ -185,7 +185,7 @@ need. Please remember that several services can be dangerous if they are
 enabled on a server. In general, select only the services you really need."),
 
 configureTimezoneGMT => 
-__("GNU/Linux manages time in GMT (Greenwich Manage Time) and translates it in
+__("GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in
 local time according to the time zone you selected."),
 
 configureX => 
@@ -338,7 +338,7 @@ rewritten, all data is lost.
    This feature is very handy when installing a great number of similar
 machines. See the Auto install section at our web site.
 
- * \"Save packages selection\"(*): saves the packages selection as made
+ * \"Save packages selection\"(*) : saves the packages selection as made
 previously. Then, when doing another installation, insert the floppy inside
 the driver and run the installation going to the help screen by pressing on
 the [F1] key, and by issuing >>linux defcfg=\"floppy\"<<.
@@ -458,8 +458,8 @@ emergency boot situations."),
 
 resizeFATChoose => 
 __("More than one Microsoft Windows partition has been detected on your hard
-drive. Please choose the one you want resize in order to install your new
-Mandrake Linux operating system.
+drive. Please choose the one you want to resize in order to install your
+new Mandrake Linux operating system.
 
 Each partition is listed as follows: \"Linux name\", \"Windows name\"
 \"Capacity\".
@@ -692,9 +692,9 @@ networks."),
 setupSCSI => 
 __("DrakX is now detecting any IDE devices present in your computer. It will
 also scan for one or more PCI SCSI card(s) on your system. If a SCSI card
-is found DrakX will automatically install the appropriate driver.
+is found, DrakX will automatically install the appropriate driver.
 
-Because hardware detection will sometimes not detect a piece of hardware
+Because hardware detection will sometimes not detect a piece of hardware,
 DrakX will ask you to confirm if a PCI SCSI card is present. Click \"Yes\"
 if you know that there is a SCSI card installed in your machine. You will
 be presented a list of SCSI cards to choose from. Click \"No\" if you have
@@ -710,8 +710,8 @@ usually works well.
 
 If DrakX is not able to probe for the options that need to be passed, you
 will need to manually provide options to the driver. Please review the
-``User Guide'' (chapter 3, section \"Collecting information on your
-hardware\") for hints on retrieving the parameters required from hardware
+``User Guide'' (chapter 3, section \"Collecting Information on Your
+Hardware\") for hints on retrieving the parameters required from hardware
 documentation, from the manufacturer's web site (if you have Internet
 access) or from Microsoft Windows (if you used this hardware with Windows
 on your system)."),
@@ -798,17 +798,17 @@ summary =>
 __("Here are presented various parameters concerning your machine. Depending on
 your installed hardware, you may - or not, see the following entries:
 
- * \"Mouse\": mouse check the current mouse configuration and click on the
-button to change it if necessary.
+ * \"Mouse\": check the current mouse configuration and click on the button
+to change it if necessary.
 
- * \"Keyboard\": keyboard check the current keyboard map configuration and
-click on the button to change that if necessary.
+ * \"Keyboard\": check the current keyboard map configuration and click on
+the button to change that if necessary.
 
- * \"Timezone\": time zoneDrakX, by default, guesses your time zone from the
-language you have chosen. But here again, as for the choice of a keyboard,
-you may not be in the country for which the chosen language should
-correspond. Hence, you may need to click on the \"Timezone\" button in
-order to configure the clock according to the time zone you are in.
+ * \"Timezone\": DrakX, by default, guesses your time zone from the language
+you have chosen. But here again, as for the choice of a keyboard, you may
+not be in the country for which the chosen language should correspond.
+Hence, you may need to click on the \"Timezone\" button in order to
+configure the clock according to the time zone you are in.
 
  * \"Printer\": clicking on the \"No Printer\" button will open the printer
 configuration wizard.
