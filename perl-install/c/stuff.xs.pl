@@ -356,10 +356,9 @@ int
 detectSMP()
 
 void
-pci_probe(probe_type)
-  int probe_type
+pci_probe()
   PPCODE:
-    struct pciusb_entries entries = pci_probe(probe_type);
+    struct pciusb_entries entries = pci_probe();
     char buf[2048];
     int i;
 

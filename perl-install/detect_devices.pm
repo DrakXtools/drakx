@@ -465,16 +465,14 @@ sub add_addons {
     @l;
 }
 
-sub pci_probe {
-    my ($probe_type) = @_;
-    log::l("full pci_probe") if $probe_type;
+sub pci_probe() {
     add_addons($pcitable_addons, map {
 	my %l;
 	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
 	\%l
-    } c::pci_probe($probe_type || 0));
+    } c::pci_probe());
 }
 
 sub usb_probe() {
@@ -516,7 +514,7 @@ sub matching_desc {
     my ($regexp) = @_;
     grep { $_->{description} =~ /$regexp/i } probeall();
 }
-sub stringlist { 
+sub stringlist() { 
     map {
 	sprintf("%-16s: %s%s%s", 
 		$_->{driver} || 'unknown', 
@@ -524,7 +522,7 @@ sub stringlist {
 		$_->{media_type} ? sprintf(" [%s]", $_->{media_type}) : '',
 		$_->{subid} && $_->{subid} != 0xffff ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '',
 	       )
-    } probeall(@_); 
+    } probeall; 
 }
 
 sub tryOpen($) {
