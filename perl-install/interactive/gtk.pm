@@ -172,30 +172,21 @@ sub create_treeview_tree {
 	}
 	$wtree{$s};
     };
-    foreach (@l) {
-	my ($root, $leaf) = /(.*)$sep(.+)/ ? ($1, $2) : ('', $_);
-	my $iter = $tree_model->append_set($parent->($root), [ 0 => $leaf ]);
-	$wleaves{$_} = $tree_model->get_path_str($iter);
-	$iter->free;
-    }
-    $_->free foreach values %wtree;
-    undef %wtree;
 
     #- do some precomputing to not slowdown selection change and key press
     my (%precomp, @ordered_keys);
-    $tree_model->foreach(sub {
-        my (undef, $path_, $iter) = @_;
-	my ($path, $pathstr, @ll, $val, $listval);
-	$path = $path_->copy;
-	$pathstr = $path->to_string;
-	while ($path->get_depth) { unshift @ll, $tree_model->get($path, 0); $path->up }
-	$val = join($e->{separator}, @ll);
-	mapn { $listval = $_[1] if $val eq $_[0] } \@l, $e->{list};
-	$precomp{$pathstr} = { value => $tree_model->get($iter, 0), fullvalue => $val, listvalue => $listval };
+    mapn {
+	my ($root, $leaf) = $_[0] =~ /(.*)$sep(.+)/ ? ($1, $2) : ('', $_[0]);
+	my $iter = $tree_model->append_set($parent->($root), [ 0 => $leaf ]);
+	my $pathstr = $tree_model->get_path_str($iter);
+	$iter->free;
+	$precomp{$pathstr} = { value => $leaf, fullvalue => $_[0], listvalue => $_[1] };
 	push @ordered_keys, $pathstr;
-	0
-    }, undef);
-    
+	$wleaves{$_[0]} = $pathstr;
+    } \@l, $e->{list};
+    $_->free foreach values %wtree;
+    undef %wtree;
+
     my $select = sub {
 	my ($path_str) = @_;
 	my $path = Gtk2::TreePath->new_from_string($path_str);
