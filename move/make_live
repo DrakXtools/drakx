@@ -40,7 +40,7 @@ sub installPackages {
 				 qw(zcip dhcp-client dhcpcd ppp kdenetwork-kppp rp-pppoe pptp-adsl speedtouch speedtouch_mgmt nfs-utils-clients samba-client tmdns wireless-tools adiusbadsl), #- network conf
                                  qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
 				 qw(ATI_GLX NVIDIA_GLX),
-				 qw(hcfpcimodem hsflinmodem ltmodem),
+				 qw(hcfpcimodem hsflinmodem ltmodem NVIDIA_nforce-2.4.22.21mdk),
 				 qw(xinput), #- for some mice
                                  qw(perl-Term-Readline-Gnu),  #- allow debugging move
                                                                  ],
@@ -63,6 +63,21 @@ sub installPackages {
     rename "/etc/rpm/macros.", "/etc/rpm/macros";
 }
 
+sub config_X_proprietary_drivers {
+    unlink "$::prefix/usr/lib/libGL.so";
+
+    my %name_to_Driver = (NVIDIA_GLX => 'nvidia', ATI_GLX => 'fglrx');
+
+    my $lib = 'libGL.so.1';
+    symlinkf("/etc/X11/$lib", "$::prefix/usr/lib/$lib");
+    foreach (keys %name_to_Driver) {
+	my ($full_name) = run_program::rooted_get_stdout($::prefix, 'rpm', '-ql', $_) =~ m!/usr/lib/(\Q$lib\E\..*)! or die '';
+	symlinkf($full_name, "$::prefix/usr/lib/$lib.$name_to_Driver{$_}");
+    }
+    #- remove the dirty hack done by NVIDIA_kernel-xxx proprietary package
+    #- we do it by hand when needed
+    substInFile { $_ = '' if /^nvidia$/ } "$::prefix/etc/modules";
+}
 my $cwd = chomp_(`pwd`);
 $::prefix = $ARGV[0] || '/tmp/live_tree';
 print "Making live in $::prefix directory.\n";
@@ -80,9 +95,7 @@ print "Making live in $::prefix directory.\n";
     run_program::rooted($::prefix, 'kbuildsycoca', '--global');
     eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
 
-    #- remove the dirty hack done by NVIDIA_kernel-xxx proprietary package
-    #- we do it by hand when needed
-    substInFile { $_ = '' if /^nvidia$/ } "$::prefix/etc/modules";
+    config_X_proprietary_drivers();
 
     unlink "$::prefix/usr/share/autostart/$_.desktop" foreach 'klipper', 'korgac', 'kalarmd.autostart';
 }
