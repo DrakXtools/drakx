@@ -599,10 +599,20 @@ sub install_urpmi {
 		       readlink "/tmp/image/Mandrake" =~ m,^(\/.*)\/Mandrake\/*$, && "removable:/$1") . "/$_->{rpmsdir}";
 
 	    #- build list file using internal data, synthesis file should exists.
-	    #- WARNING this method of build only works because synthesis (or hdlist)
-	    #-         has been read.
-	    foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
-		print LIST "$dir/".$_->filename."\n";
+	    if ($_->{end} > $_->{start}) {
+		#- WARNING this method of build only works because synthesis (or hdlist)
+		#-         has been read.
+		foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
+		    print LIST "$dir/".$_->filename."\n";
+		}
+	    } else {
+		#- need to use another method here to build synthesis.
+		local (*F, $_);
+		open F, "parsehdlist '$prefix/var/lib/urpmi/hdlist.$name.cz' |";
+		while ($_ = <F>) {
+		    print LIST "$dir/$_";
+		}
+		close F;
 	    }
 	    close LIST;
 
