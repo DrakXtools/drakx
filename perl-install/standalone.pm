@@ -170,7 +170,7 @@ sub install {
 	$wait = $o->{in}->wait_message('', N("Installing packages..."));
     }
     log::explanations("installed packages @l");
-    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', @l) == 0;
+    my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', '--no-verify-rpm', @l) == 0;
 
     if ($o->{in}->isa('interactive::newt')) {
 	$o->{in}->resume;
