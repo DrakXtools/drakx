@@ -503,7 +503,7 @@ sub write {
 }
 
 sub read {
-    my %keyboard = getVarsFromSh("$::prefix/etc/sysconfig/keyboard") or return {};
+    my %keyboard = getVarsFromSh("$::prefix/etc/sysconfig/keyboard") or return;
     if (!$keyboard{KEYBOARD}) {
 	add2hash(\%keyboard, grep { keyboard2kmap($_) eq $keyboard{KEYTABLE} } keyboards());
     }
