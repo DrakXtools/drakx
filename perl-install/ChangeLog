@@ -52,6 +52,60 @@
 	(main): don't remove pcmcia modules anymore (not there anymore), remove
 	/sbin/stage1
 
+2001/02/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile: tag VERSION as 8.0 since stage2 graphics now show
+	8.0
+
+	* mdk-stage1/network.c: don't reverse hostname lookup if dhcp already gave
+	hostname+domain
+
+2001/02/07  Pixel  <pixel@mandrakesoft.com>
+
+	* share/logo-mandrake.xpm: xpm files should be xpm, not pngs :-(
+
+	* detect_devices.pm (hasPCMCIA): created (check for /proc/pcmcia)
+
+	* install_steps_interactive.pm (miscellaneous): remove asking about
+	numlock and hd optimizations,
+	deprecates it (aka don't do anything)
+
+	* Xconfigurator.pm (main): don't need isLaptop anymore, use
+	detect_devices::hasPCMCIA
+
+	* bootloader.pm (suggest): read CLEAN_TMP from sysconfig/system, default
+	value of memsize
+	if given
+	(install): save CLEAN_TMP in sysconfig/system
+	(get_append, add_append): get or set an append value
+	(has_profiles, set_profiles): get or add an entry office for profiles,
+	also add prof=Home in
+	the default entry
+
+	* any.pm (setupBootloader): take care of profiles and memsize
+	(facesnames): only display icons capitalized. This goes along the new
+	mandrake_desk where capitalized named faces are the new one. [a-z].*
+	icons
+	being only kept for compatibility. (in case no capitalized icons
+	available
+	display everything (compatibility with old mandrake_desk)
+
+	* standalone/draknet, standalone/XFdrake: don't pass isLaptop
+
+	* install_steps.pm (setupBootloaderBefore, miscellaneousBefore): remove
+	taking care of
+	profiles and memsize. Now in any & bootloader
+	(miscellaneousBefore): CLEAN_TMP is now in $o->{bootloader}, not in
+	$o->{miscellaneous} anymore
+
+	* install_gtk.pm (create_help_window, create_logo_window): use gtkxpm
+
+	* netconnect.pm: remove the $isLaptop unused from a hell lot of functions
+
+	* install2.pm (@installSteps): remove miscellaneous
+	(main): don't remove pcmcia modules anymore (not there anymore), remove
+	/sbin/stage1
+
 2001/02/07  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
 
 	* share/rpmsrate: Add usbd to SYSTEM.
