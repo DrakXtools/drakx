@@ -365,7 +365,7 @@ sub ask_if_suppl_media {
     my ($o) = @_;
     my $suppl = $o->ask_from_list_(
 	'', formatAlaTeX(
-#-PO: keep the double empty lines between sections, this is formated a la LaTeX
+#-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 		N("The following media have been found and will be used during install: %s.
 
 
@@ -624,7 +624,7 @@ sub warnAboutNaughtyServers {
     my @naughtyServers = pkgs::naughtyServers($o->{packages}) or return 1;
     my $r = $o->ask_from_list_('', 
 formatAlaTeX(
-             #-PO: keep the double empty lines between sections, this is formated a la LaTeX
+             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
              N("You have selected the following server(s): %s
 
 
@@ -647,7 +647,7 @@ sub warnAboutRemovedPackages {
     my @removedPackages = keys %{$packages->{state}{ask_remove} || {}} or return;
     if (!$o->ask_yesorno('', 
 formatAlaTeX(
-             #-PO: keep the double empty lines between sections, this is formated a la LaTeX
+             #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
              N("The following packages will be removed to allow upgrading your system: %s
 
 

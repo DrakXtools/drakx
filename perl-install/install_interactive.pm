@@ -151,7 +151,7 @@ sub partitionWizardSolutions {
 		    $pkg->new($part->{device}, devices::make($part->{device}));
 		};
 		$@ and die N("The FAT resizer is unable to handle your partition, 
-the following error occured: %s", formatError($@));
+the following error occurred: %s", formatError($@));
 		my $min_win = do {
 		    my $_w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
 		    $resize_fat->min_size;
@@ -162,7 +162,7 @@ the following error occured: %s", formatError($@));
 
 		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrakelinux installation.");
 		$o->ask_okcancel('', formatAlaTeX(
-                                            #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+                                            #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                             N("WARNING!
 
 DrakX will now resize your Windows partition. Be careful: this

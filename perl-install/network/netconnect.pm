@@ -1173,7 +1173,7 @@ It is not necessary on most networks."),
                         if ($a && !$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
                             $success = 0;
                             $in->ask_okcancel(N("Network Configuration"), 
-                                              N("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
+                                              N("A problem occurred while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
                         }
                         return $offer_to_connect->();
                     },
@@ -1225,7 +1225,7 @@ Try to reconfigure your connection.");
 
 "), if_($::isStandalone && $in->isa('interactive::gtk'),
         N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))) : 
-          N("Problems occured during configuration.
+          N("Problems occurred during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
                     },
                            end => 1,

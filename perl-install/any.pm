@@ -120,7 +120,7 @@ sub installBootloader {
 	$err =~ s/^\w+ failed// or die;
 	$err = formatError($err);
 	while ($err =~ s/^Warning:.*//m) {}
-	$in->ask_warn('', [ N("Installation of bootloader failed. The following error occured:"), $err ]);
+	$in->ask_warn('', [ N("Installation of bootloader failed. The following error occurred:"), $err ]);
 	return;
     } elsif (arch() =~ /ppc/) {
 	my $of_boot = cat_("$::prefix/tmp/of_boot_dev") || die "Can't open $::prefix/tmp/of_boot_dev";

@@ -245,7 +245,7 @@ To use alsa, one can either use:
             log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oops the kernel on unloading.\n
-The new \"%s\" driver'll only be used on next bootstrap.", $device->{current_driver}, $new_driver)) if $blacklisted;
+The new \"%s\" driver will only be used on next bootstrap.", $device->{current_driver}, $new_driver)) if $blacklisted;
             do_switch($in, $modules_conf, $device->{current_driver}, $new_driver, $device->{sound_slot_index});
             $device->{current_driver} = $new_driver;
         }
@@ -277,7 +277,7 @@ sub trouble {
     my ($in) = @_;
     $in->ask_warn(N("Sound trouble shooting"),
                   formatAlaTeX(
-                               #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+                               #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                N("The classic bug sound tester is to run the following commands:
 
 
@@ -309,7 +309,7 @@ sub get_any_driver_entry {
             my $old_driver = $driver;
             if ($in->ask_from(N("Choosing an arbitrary driver"),
                               formatAlaTeX(
-                                           #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+                                           #-PO: keep the double empty lines between sections, this is formatted a la LaTeX
                                            N("If you really think that you know which driver is the right one for your card
 you can pick one in the above list.
 

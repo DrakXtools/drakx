@@ -83,7 +83,7 @@ performance metrics for any machine on that network."),
 rusersd => N_("The rusers protocol allows users on a network to identify who is
 logged in on other responding machines."),
 rwhod => N_("The rwho protocol lets remote users get a list of all of the users
-logged into a machine running the rwho daemon (similiar to finger)."),
+logged into a machine running the rwho daemon (similar to finger)."),
 sound => N_("Launch the sound system on your machine"),
 syslog => N_("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
@@ -212,7 +212,7 @@ sub ask_standalone_gtk {
     };
     my $b = Gtk2::EventBox->new;
     $b->set_events('pointer_motion_mask');
-    gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(N("Services and deamons")),
+    gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(N("Services and daemons")),
 	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;

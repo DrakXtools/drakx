@@ -6,7 +6,7 @@ use strict;
 use common;
 
 sub main_license() {
-#-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+#-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("Introduction
 
 The operating system and the different components available in the Mandrakelinux distribution 
@@ -37,7 +37,7 @@ Mandrakesoft S.A. will, in no circumstances and to the extent permitted by law, 
 incidental, direct or indirect damages whatsoever (including without limitation damages for loss of 
 business, interruption of business, financial loss, legal fees and penalties resulting from a court 
 judgment, or any other consequential loss) arising out of  the use or inability to use the Software 
-Products, even if Mandrakesoft S.A. has been advised of the possibility or occurence of such 
+Products, even if Mandrakesoft S.A. has been advised of the possibility or occurrence of such 
 damages.
 
 LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES
@@ -94,7 +94,7 @@ http://www.mp3licensing.com for more details). If you are unsure if a patent
 may be applicable to you, check your local laws.");
 }
 sub com_license() { 
-#-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+#-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("
 Warning
 
@@ -127,7 +127,7 @@ copyright laws applicable to software programs.
 }
 
 sub install_completed() {
-#-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+#-PO: keep the double empty lines between sections, this is formatted a la LaTeX
 N("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 

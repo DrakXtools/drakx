@@ -72,7 +72,7 @@ Font Importation and monitoring application
 OPTIONS:
 --windows_import : import from all available windows partitions.
 --xls_fonts      : show all fonts that already exist from xls
---install        : accept any font file and any directry.
+--install        : accept any font file and any directory.
 --uninstall      : uninstall any font or any directory of font.
 --replace        : replace all font if already exist
 --application    : 0 none application.

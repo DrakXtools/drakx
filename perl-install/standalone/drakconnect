@@ -673,9 +673,9 @@ sub del_intf() {
                  end => {
                          name => sub {
                              ($faillure ?
-                              N("An error occured while deleting the \"%s\" network interface:\n\n%s",
+                              N("An error occurred while deleting the \"%s\" network interface:\n\n%s",
                                 $intf2delete, $faillure) :
-                              N("Congratulations, the \"%s\" network interface has been succesfully deleted", $intf2delete)
+                              N("Congratulations, the \"%s\" network interface has been successfully deleted", $intf2delete)
                              )
                          },
                          end => 1,
