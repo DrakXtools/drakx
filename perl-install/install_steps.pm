@@ -829,7 +829,9 @@ sub setupBootloaderBefore {
     if (cat_("/proc/cmdline") =~ /\b(pci)=(\S+)/) {
 	bootloader::add_append($o->{bootloader}, $1, $2);
     }
-    bootloader::add_append($o->{bootloader}, acpi => (cat_("/proc/cmdline") =~ /\bacpi=(\S+)/ ? $1 : 'off'));
+    if (my ($acpi) = cat_("/proc/cmdline") =~ /\bacpi=(\S+)/) {
+	bootloader::add_append($o->{bootloader}, acpi => $acpi);
+    }
 
     if (arch() =~ /alpha/) {
 	if (my $dev = fsedit::get_root($o->{fstab})) {
