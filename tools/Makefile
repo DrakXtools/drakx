@@ -7,7 +7,7 @@ CFLAGS      = -Wall
 
 .PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist.ordered $(BASE)/compss $(DIRS) xhost+ rpcinfo-flushed install
+all: $(DIRS) xhost+ rpcinfo-flushed install
 
 $(DIRS):
 	make -C $@
@@ -26,12 +26,6 @@ xhost+: %: %.c
 
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
-
-$(BASE)/compss $(BASE)/depslist.ordered: $(BASE)/hdlists $(BASE)/hdlist.cz
-	gendistrib --nohdlists --distrib $(ROOTDEST)
-
-$(BASE)/hdlist.cz: $(BASE)/hdlists $(RPMS)
-	gendistrib --noclean --nobasefiles --distrib $(ROOTDEST)
 
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
