@@ -582,9 +582,20 @@ sub ask_fromW {
 				$w->child->set_label($advanced ? $common->{advanced_label_close} : $common->{advanced_label});
 			    } ];
 
+    my $label_sizegrp = Gtk2::SizeGroup->new('horizontal');
+    my $realw_sizegrp = Gtk2::SizeGroup->new('horizontal');
     my $create_widgets = sub {
 	my (@widgets) = @_;
-	create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})] } @widgets);
+	gtkpack__(Gtk2::VBox->new,
+               map { 
+                   $_->{real_w} =~ /Gtk2::CheckButton/ && !$_->{icon_w} && !$_->{e}{label} ?
+                     $_->{real_w} : gtkpack_(Gtk2::HBox->new,
+                                             0, $_->{icon_w},
+                                             0, gtkadd_widget($label_sizegrp, $_->{e}{label}),
+                                             1, gtkadd_widget($realw_sizegrp, $_->{real_w}),
+                                            );
+               } @widgets
+              );
     };
 
     my $always_pack = $create_widgets->(@widgets_always);
