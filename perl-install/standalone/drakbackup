@@ -117,6 +117,9 @@ read_conf_file();
 sub read_passwd {
     push  @user_and_path_list, (split(':', $_))[0] . "," . (split(':', $_))[5]  foreach (grep /[5-9][0-9][0-9]/, cat_('/etc/passwd'));
     $DEBUG and print "$_\n" foreach @user_and_path_list;
+    # fixme!
+    $cfg_file_exist or push @home_files, (split(',', $_))[0] foreach (@user_and_path_list);
+    $DEBUG and print "$_\n" foreach @home_files;
 }
 
 
@@ -153,6 +156,7 @@ sub read_conf_file {
 	$cfg_file_exist = 1;
     } else {
 	$cfg_file_exist = 0;
+	read_passwd();
     }    
     $DEBUG and debug; 
     $DEBUG and read_passwd();
@@ -247,6 +251,7 @@ sub interactive_mode {
     Gtk->exit(0);
 }
 
+
 sub about {
     my $text = new Gtk::Text(undef, undef);
     my $about_box;
@@ -275,7 +280,10 @@ sub about {
 					      ),
 				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
-							      sub { ${$central_widget}->destroy(); interactive_mode()  }),
+							      sub { ${$central_widget}->destroy(); 
+								    $mdk_cc and interactive_mode();
+								    $mdk_cc or interactive_mode_my();
+								    }),
 					    ),
 				  )
 	    );
@@ -545,7 +553,10 @@ sub advanced {
 					     ),
 				  0, gtkadd(new Gtk::HButtonBox,
 					    gtksignal_connect(new Gtk::Button(_("Close")), clicked => 
-							      sub { ${$central_widget}->destroy(); interactive_mode() }),
+							      sub { ${$central_widget}->destroy(); 
+								    $mdk_cc and interactive_mode();
+								    $mdk_cc or interactive_mode_my();
+								}),
 					    gtksignal_connect(new Gtk::Button(_("Help")), clicked => 
 							      sub { save_conf_file(); ${$central_widget}->destroy(); adv_help() }),
 					    gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { 
@@ -568,9 +579,11 @@ sub advanced {
 }
 
 
-
 sub interactive_mode_my {
     $interactive = 1;
+    my $box_cfg_state;
+    my $box_cgf_state_replace;
+    my $box_cgf_state_comp;
     my $mask;
     my $style;
     my $box;
@@ -584,76 +597,152 @@ sub interactive_mode_my {
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
     my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left.png");
     my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot.png");
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
 
-    my $box2 = new Gtk::VBox( 0, 10 );
+    read_conf_file();    
+    if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
+    } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
 
-    my $label3 = gtkpack(new Gtk::HBox(0,10),
-			 new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
-			 _("Backup Wizard")
-			 );
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
+    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
+	
+    if ($cfg_file_exist) { 
+	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @home_files\n-Other Files to backup: @other_files\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
+	$box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
+				  gtkset_justify( $label_cfg_file , 'left'),
+				  ),
+    } else { $box_cfg_state =  gtkpack(new Gtk::VBox(0,1),
+				       _("No configuration please click Wizard or Advanced.") ), }
 
-    my $radio1 = new Gtk::RadioButton( "  Backup Wizard");
-    $box2->add( $radio1);
-    $radio1->set_active(1);
-    my $radio2 = new Gtk::RadioButton( "  Backup Advanced", $radio1);
-    $box2->add( $radio2);
-    my $radio3 = new Gtk::RadioButton( "  Build Backup now", $radio2);
-    $box2->add( $radio3);
-    my $radio4 = new Gtk::RadioButton( "  Restore Backup", $radio3);
-    $box2->add( $radio4);
-    gtksignal_connect( $radio1, clicked => sub { $backup_choice = 0 });
-    gtksignal_connect( $radio2, clicked => sub { $backup_choice = 1 });
-    gtksignal_connect( $radio3, clicked => sub { $backup_choice = 2 });
-    
     gtkadd($window1,
 	   gtkpack(new Gtk::VBox(0,0),
-		    gtkpack(new Gtk::VBox(0,0),
-			    new Gtk::Pixmap($pix_u_map, $pix_u_mask),
-			    gtkpack_(new Gtk::HBox(0,0),
-				     0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
-				     1, gtkpack($up_box = new Gtk::VBox(0,5),
-						$box = gtkpack_(new Gtk::VBox(0,0),
-								0, _("\n Please choose the method to configure your system backup."),
-								1, gtkpack(new Gtk::HBox(0,20),
-									   gtkpack(new Gtk::VBox(0,10),
-										   new Gtk::HBox(0,15),
-										   $box2,
-										   new Gtk::HBox(0,5),
-										   ),
-									   ),
-								1, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-									  gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub {
-									      ${$central_widget}->destroy(); help() }),
-									  gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub { 
-									      ${$central_widget}->destroy(); 
-									      $backup_choice == 0  and print "Wizard\n";
-									      $backup_choice == 1  and advanced();
-									      $backup_choice == 2  and print "now\n";
-									  }),
-									  ),
-							       ),
-						),
-				     ),
-			    new Gtk::Pixmap($pix_r_map, $pix_r_mask),
-			    gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-				   gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { save_conf_file(); Gtk->main_quit() }),
-				   gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { $central_widget_save = $central_widget; 
-				       ${$central_widget}->destroy(); about() }),
-				   gtksignal_connect(new Gtk::Button(_("            Help           ")), clicked => sub { 
-				       ${$central_widget}->destroy(); help() }),
-				   ),
-			    ),
+		   gtkpack(gtkset_usize($up_box = new Gtk::VBox(0, 5), 500, 420),
+			   $box = gtkpack_(new Gtk::VBox(0, 3),
+					   0, new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+					   1, gtkpack_(new Gtk::HBox(0, 3),
+						       0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
+						       1, gtkadd(new Gtk::Frame(_("State of configuration file.")),
+								 gtkpack(new Gtk::VBox(0,10),
+									 $box_cfg_state,
+								      ),
+								 ),
+						       ),
+					   0, gtkpack_(new Gtk::HBox(0, 0),
+						       0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
+						       1, gtkpack_(new Gtk::VBox(0, 1),								   
+								   1, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), 
+											clicked => sub { save_conf_file(); Gtk->main_quit() }),
+								   1, gtksignal_connect(new Gtk::Button(_("     Restore      ")), 
+								clicked => sub { save_conf_file(); Gtk->main_quit() }),
+								   ),
+						       ),
+					   0, new Gtk::HSeparator,
+					   0, new Gtk::HSeparator,
+					   0, gtkpack_(gtkset_layout(new Gtk::HButtonBox, -end),
+						       1, gtksignal_connect(new Gtk::Button(_("Advanced Conf.")), clicked => 
+									    sub { ${$central_widget}->destroy(); advanced() }),
+						       1, gtksignal_connect(new Gtk::Button(_("Wizard Conf.")), clicked => 
+									    sub { ${$central_widget}->destroy(); wizard() }),
+						       1, gtksignal_connect(new Gtk::Button(_("close")), clicked => 
+									    sub { save_conf_file(); Gtk->main_quit() }),
+						       ),
+					   ),
+			   ),
 		   ),
 	   );
     $central_widget = \$box;
     $window1->show_all;
     $window1->realize;
-    $window1->show_all();
-    
+    $window1->show_all();    
     Gtk->main;
     Gtk->exit(0);
 }
+
+
+# sub interactive_mode_my {
+#     $interactive = 1;
+#     my $mask;
+#     my $style;
+#     my $box;
+#     init Gtk;
+#     my $text2 = new Gtk::Text(undef, undef);
+#     my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+#     $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
+#     $window1->set_position(1);
+#     $window1->set_title(_("Drakbackup"));
+
+#     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
+#     my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left.png");
+#     my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot.png");
+#     my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
+
+#     my $box2 = new Gtk::VBox( 0, 10 );
+
+#     my $label3 = gtkpack(new Gtk::HBox(0,10),
+# 			 new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
+# 			 _("Backup Wizard")
+# 			 );
+
+#     my $radio1 = new Gtk::RadioButton( "  Backup Wizard");
+#     $box2->add( $radio1);
+#     $radio1->set_active(1);
+#     my $radio2 = new Gtk::RadioButton( "  Backup Advanced", $radio1);
+#     $box2->add( $radio2);
+#     my $radio3 = new Gtk::RadioButton( "  Build Backup now", $radio2);
+#     $box2->add( $radio3);
+#     my $radio4 = new Gtk::RadioButton( "  Restore Backup", $radio3);
+#     $box2->add( $radio4);
+#     gtksignal_connect( $radio1, clicked => sub { $backup_choice = 0 });
+#     gtksignal_connect( $radio2, clicked => sub { $backup_choice = 1 });
+#     gtksignal_connect( $radio3, clicked => sub { $backup_choice = 2 });
+    
+#     gtkadd($window1,
+# 	   gtkpack(new Gtk::VBox(0,0),
+# 		    gtkpack(new Gtk::VBox(0,0),
+# 			    new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+# 			    gtkpack_(new Gtk::HBox(0,0),
+# 				     0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
+# 				     1, gtkpack($up_box = new Gtk::VBox(0,5),
+# 						$box = gtkpack_(new Gtk::VBox(0,0),
+# 								0, _("\n Please choose the method to configure your system backup."),
+# 								1, gtkpack(new Gtk::HBox(0,20),
+# 									   gtkpack(new Gtk::VBox(0,10),
+# 										   new Gtk::HBox(0,15),
+# 										   $box2,
+# 										   new Gtk::HBox(0,5),
+# 										   ),
+# 									   ),
+# 								1, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
+# 									  gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub {
+# 									      ${$central_widget}->destroy(); help() }),
+# 									  gtksignal_connect(new Gtk::Button(_("Next")), clicked => sub { 
+# 									      ${$central_widget}->destroy(); 
+# 									      $backup_choice == 0  and print "Wizard\n";
+# 									      $backup_choice == 1  and advanced();
+# 									      $backup_choice == 2  and print "now\n";
+# 									  }),
+# 									  ),
+# 							       ),
+# 						),
+# 				     ),
+# 			    new Gtk::Pixmap($pix_r_map, $pix_r_mask),
+# 			    gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
+# 				   gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { save_conf_file(); Gtk->main_quit() }),
+# 				   gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { $central_widget_save = $central_widget; 
+# 				       ${$central_widget}->destroy(); about() }),
+# 				   gtksignal_connect(new Gtk::Button(_("            Help           ")), clicked => sub { 
+# 				       ${$central_widget}->destroy(); help() }),
+# 				   ),
+# 			    ),
+# 		   ),
+# 	   );
+#     $central_widget = \$box;
+#     $window1->show_all;
+#     $window1->realize;
+#     $window1->show_all();
+    
+#     Gtk->main;
+#     Gtk->exit(0);
+# }
 
 
 
