@@ -109,7 +109,7 @@ function install_kernel() {
     
     find $ALL_KERNELS/$ver -type f -name "*.o.gz" -o -name "*.ko.gz" | xargs gunzip
     
-    # will get back when make_boot_img is called
+    # remove those files during update_kernel, they will get back when make_boot_img is called
     for dir in /tftpboot /var/lib/tftpboot; do
         rm -f $dir/{vmlinuz,network.rdz,all.rdz}
     done
