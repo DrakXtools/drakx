@@ -803,6 +803,13 @@ sub setupBootloaderBefore {
     my ($o) = @_;
 
     require bootloader;
+
+    #- remove previous ide-scsi lines
+    bootloader::modify_append($o->{bootloader}, sub {
+	my ($_simple, $dict) = @_;
+	@$dict = grep { $_->[1] ne 'ide-scsi' } @$dict;
+    });
+
     if ($o->{miscellaneous}{HDPARM}) {
 	bootloader::set_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide/ } all("/proc/ide");
     }
