@@ -232,8 +232,8 @@ sub reallyChooseGroups {
 	    $w_size->set(&$size_to_display);
 	});
 	gtkset_tip($tips, $check, $help);
-	gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check);
-	#$check;
+	#gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check);
+	$check;
     };
     my $entries_in_path = sub {
 	my ($path) = @_;
@@ -260,6 +260,7 @@ sub reallyChooseGroups {
 					   '',
 					   $entry->('Development|Development'),
 					   $entry->('Development|Documentation'),
+					   $entry->('Development|LSB'),
 					  ),
 				   0, gtkpack(new Gtk::VBox(0,0), 
 					   $entries_in_path->('Server'),
