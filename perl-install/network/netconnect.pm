@@ -162,6 +162,15 @@ sub get_subwizard {
                         pppoa  => N("PPP over ATM (PPPoA)"),
                        );
 
+      my $encapsulation;
+      my %encapsulations = (
+                            N("Bridged Ethernet LLC") => 1, 
+                            N("Bridged Ethernet VC") => 2, 
+                            N("Routed IP LLC") => 3, 
+                            N("Routed IP VC") => 4,
+                            N("PPPOA LLC") => 5, 
+                            N("PPPOA VC") => 6,
+                           );
     
       # main wizard:
       my $wiz;
@@ -594,7 +603,7 @@ killall pppd
                     post => sub {
                         $adsl_data = $adsl_data{$adsl_provider};
                         if ($adsl_provider ne $adsl_old_provider) {
-                            $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 vpi vci);
+                            $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 Encapsulation vpi vci);
                               $adsl_protocol = $adsl_types{$adsl_data->{method}};
                         }
                         $adsl_protocol = $adsl_types{pppoa} if $adsl_device eq 'speedtouch';
@@ -695,6 +704,7 @@ If you don't know, choose 'use pppoe'"),
                     pre => sub {
                         $netc->{dnsServer2} ||= $adsl_data->{dns1};
                         $netc->{dnsServer3} ||= $adsl_data->{dns2};
+                        $encapsulation ||= find { $encapsulations{$_} eq $netc->{Encapsulation} } keys %encapsulations;
                     },
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
@@ -705,6 +715,7 @@ If you don't know, choose 'use pppoe'"),
                          { label => N("Second DNS Server (optional)"), val => \$netc->{dnsServer3} },
                          { label => N("Account Login (user name)"), val => \$netcnx->{login} },
                          { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
+                         { label => N("Encapsulation :"), val => \$encapsulation, list => [ sort keys %encapsulations ], },
                         ],
                     },
                     post => sub {
@@ -716,6 +727,7 @@ If you don't know, choose 'use pppoe'"),
                                      N("United Kingdom") => [ 0, 38 ],
                                      N("United States")  => [ 8, 35 ],
                                     );
+                            $netc->{Encapsulation} = $encapsulations{$encapsulation};
                             ($netc->{vpi}, $netc->{vci}) = @{$h{$netcnx->{country}}};
                         }
                         network::adsl::adsl_conf_backend($netcnx, $netc, $adsl_device, $adsl_type); #FIXMEl
