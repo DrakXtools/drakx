@@ -32,7 +32,7 @@ use handle_configs;
 
 my $sanedir = "$::prefix/etc/sane.d";
 my $scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
-my $scannerDB = readScannerDB("$scannerDBdir/ScannerDB");
+our $scannerDB = readScannerDB("$scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port, $vendor, $product) = @_;
