@@ -1740,6 +1740,8 @@ sub configure_queue($) {
 
     #- Create the queue with "foomatic-configure", in case of queue
     #- renaming copy the old queue
+    my $quotedconnect = $printer->{currentqueue}{connect};
+    $quotedconnect =~ s/\$/\\\$/g; # Quote '$' in URI
     run_program::rooted($::prefix, "foomatic-configure", "-q",
 			"-s", $printer->{currentqueue}{spooler},
 			"-n", $printer->{currentqueue}{queue},
@@ -1747,7 +1749,7 @@ sub configure_queue($) {
 			 $printer->{OLD_QUEUE} &&
 			 $printer->{configured}{$printer->{OLD_QUEUE}} ?
 			 ("-C", $printer->{OLD_QUEUE}) : ()),
-			"-c", $printer->{currentqueue}{connect},
+			"-c", $quotedconnect,
 			($printer->{currentqueue}{foomatic} ?
 			 ("-p", $printer->{currentqueue}{printer},
 			  "-d", $printer->{currentqueue}{driver}) :
