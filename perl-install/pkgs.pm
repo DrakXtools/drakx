@@ -1137,7 +1137,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    close OUTPUT;
 	    open STDIN, "<&INPUT_CHILD";
 	    open STDOUT, ">&OUTPUT_CHILD";
-	    exec "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->{mediums}}
+	    exec if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->{mediums}}
 	      or c::_exit(1);
 	}
 
