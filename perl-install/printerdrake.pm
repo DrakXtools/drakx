@@ -237,7 +237,7 @@ sub first_time_dialog {
 		    ($localprinterspresent ?
 		     _("Do you want to enable printing on the printers mentioned above?\n") :
 		     _("Are you sure that you want to set up printing on this machine?\n")));
-    my $warning = _("NOTE: Depending on the printer model and the printing system up to 80 MB of additional software will be installed.");
+    my $warning = _("NOTE: Depending on the printer model and the printing system up to %d MB of additional software will be installed.", 80);
     my $dialogtext = "$localprinters\n$question\n$warning";
 
     # Close wait message
