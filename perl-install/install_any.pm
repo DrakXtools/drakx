@@ -550,7 +550,7 @@ sub g_auto_install {
 	   Data::Dumper->Dump([$o], ['$o']), if_($replay, q(
 package install_steps_auto_install;
 $graphical = 1;
-push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat';
+push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat', 'formatMountPartitions';
 )), "\0");
 }
 
