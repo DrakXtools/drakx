@@ -1,3 +1,19 @@
+2000-02-11  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (setup_thiskind): handles the undef
+	value returned by load_thiskind
+
+	* install_steps_interactive.pm (load_thiskind): returns undef if
+	error loading a module
+
+	* fs.pm (format_part): changed the prototype from $;$@ to $;@
+	otherwise, @options always have a value (mostly undef) and mkdosfs
+	fails (with "mkdosfs", "/dev/hdXX", undef, "-F", 32)
+
+	* install_steps_interactive.pm (setup_thiskind):
+	add a $auto_probe_pci that overrules $o->{auto_probe_pci}
+	(that way no pci probe the second time)
+
 2000-02-10  François Pons  <fpons@mandrakesoft.com>
 	* heavy modification of build_archive and extract_archive to manage
 	a TOC directly in archive file, handle bzip2 or gzip compression,

@@ -1193,19 +1193,19 @@ You may have to restart installation and give ``%s'' at the prompt", $ide));
 	}
     }
 
-    eval { modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia) };
-    $@ and $o->errorInStep($@);
+    my @l = eval { modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia) };
+    $@ and $o->errorInStep($@), return undef;
+    @l;
 }
 
 #------------------------------------------------------------------------------
 sub setup_thiskind {
-    my ($o, $type, $auto, $at_least_one) = @_;    
+    my ($o, $type, $auto, $at_least_one) = @_;
 
-    if (!exists $o->{auto_probe_pci}) {
-	$o->{auto_probe_pci} = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
-    }
-    my @l = $o->load_thiskind($type) if $o->{auto_probe_pci};
-    return if $auto && (@l || !$at_least_one);
+    # load_thiskind returns undef in case of error
+    my @l = $o->load_thiskind($type) if !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
+    return if defined @l && $auto && (@l || !$at_least_one);
+
     while (1) {
 	my $msg = @l ?
 	  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),

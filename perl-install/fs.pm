@@ -73,7 +73,7 @@ sub format_dos($@) {
     run_program::run("mkdosfs", devices::make($dev), @options) or die _("%s formatting of %s failed", "dos", $dev);
 }
 
-sub format_part($;$@) {
+sub format_part($;@) {
     my ($part, @options) = @_;
 
     $part->{isFormatted} and return;
