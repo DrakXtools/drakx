@@ -1542,24 +1542,19 @@ sub config_sane {
 sub config_photocard {
 
     # Add definitions for the drives p:. q:, r:, and s: to /etc/mtools.conf
-    my $mtoolsconf = join("", cat_("$::prefix/etc/mtools.conf"));
-    return if $mtoolsconf =~ m/^\s*drive\s+p:/m;
-    my $mtoolsconf_append = "
+    cat_("$::prefix/etc/mtools.conf") !~ m/^\s*drive\s+p:/m or return;
+
+    append_to_file("$::prefix/etc/mtools.conf", <<'EOF');
 # Drive definitions added for the photo card readers in HP multi-function
 # devices driven by HPOJ
-drive p: file=\":0\" remote
-drive q: file=\":1\" remote
-drive r: file=\":2\" remote
-drive s: file=\":3\" remote
+drive p: file=":0" remote
+drive q: file=":1" remote
+drive r: file=":2" remote
+drive s: file=":3" remote
 # This turns off some file system integrity checks of mtools, it is needed
 # for some photo cards.
 mtools_skip_check=1
-";
-    local *F;
-    open F, ">> $::prefix/etc/mtools.conf" or 
-	die "can't write mtools config in /etc/mtools.conf: $!";
-    print F $mtoolsconf_append;
-    close F;
+EOF
 
     # Generate a config file for the graphical mtools frontend MToolsFM or
     # modify the existing one
@@ -1574,22 +1569,23 @@ mtools_skip_check=1
 	$mtoolsfmconf =~ s/^\s*DRIVES\s*=\s*\"[A-Za-z ]*\"/DRIVES=\"$alloweddrives\"/m;
 	$mtoolsfmconf =~ s/^\s*LEFTDRIVE\s*=\s*\"[^\"]*\"/LEFTDRIVE=\"p\"/m;
     } else {
-	$mtoolsfmconf = "\# MToolsFM config file. comments start with a hash sign.
-\#
-\# This variable sets the allowed driveletters (all lowercase). Example:
-\# DRIVES=\"ab\"
-DRIVES=\"apqrs\"
-\#
-\# This variable sets the driveletter upon startup in the left window.
-\# An empty string or space is for the hardisk. Example:
-\# LEFTDRIVE=\"a\"
-LEFTDRIVE=\"p\"
-\#
-\# This variable sets the driveletter upon startup in the right window.
-\# An empty string or space is for the hardisk. Example:
-\# RIGHTDRIVE=\"a\"
-RIGHTDRIVE=\" \"
-";
+	$mtoolsfmconf = <<'EOF';
+# MToolsFM config file. comments start with a hash sign.
+#
+# This variable sets the allowed driveletters (all lowercase). Example:
+# DRIVES="ab"
+DRIVES="apqrs"
+#
+# This variable sets the driveletter upon startup in the left window.
+# An empty string or space is for the hardisk. Example:
+# LEFTDRIVE="a"
+LEFTDRIVE="p"
+#
+# This variable sets the driveletter upon startup in the right window.
+# An empty string or space is for the hardisk. Example:
+# RIGHTDRIVE="a"
+RIGHTDRIVE=" "
+EOF
     }
     output("$::prefix/etc/mtoolsfm.conf", $mtoolsfmconf);
 }

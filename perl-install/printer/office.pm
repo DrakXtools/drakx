@@ -45,7 +45,7 @@ sub configureoffice {
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
+    my $configfilecontent = cat_("$::prefix$configfilename");
     # Update remote CUPS queues
     if (0 && $printer->{SPOOLER} eq "cups" && 
 	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
@@ -100,7 +100,7 @@ sub configureoffice {
     $configfilecontent = removeentry(@parameters, $configfilecontent);
     $configfilecontent = addentry($parameters[0], $parameters[1] . $suites{$suite}{perl} . $spoolers{$printer->{SPOOLER}{print_command}}, $configfilecontent);
     # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
+    return eval { output("$::prefix$configfilename", $configfilecontent) };
 }
 
 sub add_cups_remote_to_office {
@@ -111,7 +111,7 @@ sub add_cups_remote_to_office {
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
+    my $configfilecontent = cat_("$::prefix$configfilename");
     # Update remote CUPS queues
     if ($printer->{SPOOLER} eq "cups" && 
 	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
@@ -149,7 +149,7 @@ sub add_cups_remote_to_office {
 	}
     }
     # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
+    return eval { output("$::prefix$configfilename", $configfilecontent) };
 }
 
 sub remove_printer_from_office {
@@ -160,13 +160,13 @@ sub remove_printer_from_office {
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
+    my $configfilecontent = cat_("$::prefix$configfilename");
     # Remove the printer entry
     $configfilecontent = 
 	removestarofficeprinterentry($printer, $queue, $configprefix,
 				     $configfilecontent);
     # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
+    return eval { output("$::prefix$configfilename", $configfilecontent) };
 }
 
 sub remove_local_printers_from_office {
@@ -177,14 +177,14 @@ sub remove_local_printers_from_office {
     $configfilename =~ m!$suites{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
-    my $configfilecontent = readsofficeconfigfile($configfilename);
+    my $configfilecontent = cat_("$::prefix$configfilename");
     # Remove the printer entries
     foreach my $queue (keys(%{$printer->{configured}})) {
 	$configfilecontent = 
 	    removestarofficeprinterentry($printer, $queue, $configprefix, $configfilecontent);
     }
     # Write back Star Office configuration file
-    return writesofficeconfigfile($configfilename, $configfilecontent);
+    return eval { output("$::prefix$configfilename", $configfilecontent) };
 }
 
 
@@ -361,21 +361,8 @@ sub find_config_file {
     return "";
 }
 
-sub readsofficeconfigfile {
-    my ($file) = @_;
-    local *F; 
-    open F, "< $::prefix$file" or return "";
-    my $filecontent = join("", <F>);
-    close F;
-    return $filecontent;
-}
-
 sub writesofficeconfigfile {
     my ($file, $filecontent) = @_;
-    local *F; 
-    open F, "> $::prefix$file" or return 0;
-    print F $filecontent;
-    close F;
-    return 1;
+    eval { output("$::prefix$file", $filecontent) };
 }
 
