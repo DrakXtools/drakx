@@ -32,7 +32,7 @@ sub ensure_is_installed {
 sub ensure_is_installed_if_available {
     my ($do, $pkg, $file) = @_;
     if (! -e "$::prefix$file" && !$::testing) {
-        $do->{in}->do_pkgs->what_provides($pkg) and $do->{in}->do_pkgs->install($pkg);
+        $do->what_provides($pkg) and $do->install($pkg);
     }
 }
     
