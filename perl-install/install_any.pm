@@ -350,10 +350,10 @@ sub setPackages {
 	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{meta_class});
 
-	if ($::auto_install && !$o->{compssUsersChoice}) {
+	if ($::auto_install && !$o->{interactive} && !$o->{compssUsersChoice}) {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
 	}
-	if (!$::auto_install && !$o->{isUpgrade}) {
+	if ($o->{interactive} && !$o->{isUpgrade}) {
 	    #- by default, choose:
 	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG';
 	    $o->{compssUsersChoice}{$_} = 1 
@@ -362,7 +362,7 @@ sub setPackages {
 	$o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
 	$o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
 	$o->{compssUsersChoice}{SYSTEM} = 1;
-	$o->{compssUsersChoice}{X} = 1 if !$::auto_install;
+	$o->{compssUsersChoice}{X} = 1 if !$o->{interactive};
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
 	$o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
 	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
