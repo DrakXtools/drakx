@@ -29,6 +29,7 @@ our %l = (
         qw(sb1000 sdladrv sis900 skfp smc-ultra smc9194 starfire),
         qw(tc35815 tlan tulip typhoon via-rhine),
         qw(wd winbond-840 forcedeth),
+        qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       ),
       qw(3c59x 8139too 8139cp sundance), #rtl8139
     ],
@@ -92,8 +93,8 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         # 3w-xxxx drivers ATA-RAID, 3w-9xxx drives SATA-RAID
-        qw(3w-9xxx 3w-xxxx DAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc ipr it8212 iteraid mptscsih qla2100 qla2200 qla2300 qla2322 qla6312 qla6322 pdc-ultra),
+        qw(3w-9xxx 3w-xxxx aacraid cciss cpqfc cpqarray DAC960 dpt_i2o gdth i2o_block ipr it821x it8212),
+        qw(iteraid megaraid megaraid_mbox mptscsih qla2100 qla2200 qla2300 qla2322 qla6312 qla6322 pdc-ultra),
         qw(ips ppa imm),
        if_(c::kernel_version =~ /^\Q2.4/,
 	qw(ataraid hptraid silraid pdcraid)
@@ -169,7 +170,7 @@ our %l = (
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
-    joystick => [ qw(ns558 emu10k1-gp iforce) ],
+    joystick => [ qw(cs461x ns558 emu10k1-gp fm801-gp iforce lightning ns558 vortex) ],
   },
 
   various => 
@@ -179,7 +180,7 @@ our %l = (
       qw(linear raid0 raid1 raid5 lvm-mod multipath dm-mod),
     ],
     mouse => [
-      qw(busmouse msbusmouse logibusmouse serial qpmouse atixlmouse),
+      qw(busmouse msbusmouse logibusmouse  qpmouse serial synclinkmp atixlmouse),
       if_(arch() =~ /ppc/, 'macserial'),
       qw(hid mousedev usbhid usbmouse),
     ],
