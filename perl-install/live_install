@@ -27,9 +27,6 @@ done
 /bin/cp -a "$dir/../../Mandrake/mdkinst" "/tmp/drakx"
 
 if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
-    # gtk ressource for live.
-    export GTK_DATA_PREFIX=/tmp/drakx/mdkinst/usr
-
     # get correct fonts for DrakX.
     if [ -n "$DISPLAY" ]; then
 	xset +fp /tmp/drakx/mdkinst/usr/X11R6/lib/X11/fonts/
