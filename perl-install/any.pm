@@ -82,6 +82,13 @@ sub enableMD5Shadow { #- NO MORE USED
     } grep { -r $_ } map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd);
 }
 
+sub grub_installed {
+    my ($in) = @_;
+    my $f = "/usr/sbin/grub";
+    $in->do_pkgs->install('grub') if !-e $f;
+    -e $f;
+}
+
 sub setupBootloader {
     my ($in, $b, $all_hds, $fstab, $security, $prefix, $more) = @_;
     my $hds = $all_hds->{hds};
@@ -196,6 +203,9 @@ sub setupBootloader {
 	
 	$b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
 	$bootloaders{$bootloader} and $bootloaders{$bootloader}->();
+
+	grub_installed($in) or return 1 if $b->{methods}{grub};
+
 	#- at least one method
 	grep_each { $::b } %{$b->{methods}} or return 0;
 
