@@ -57,7 +57,7 @@ sub selectLanguage($) {
 					_("Please, choose a language to use."),
 					# the translation may be used for the help
 					[ lang::list() ],
-					lang::lang2text($o->{lang})));
+					lang::lang2text($o->{lang}))) unless $::oo->{lang};
     install_steps::selectLanguage($o);
 
 #-    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
@@ -105,6 +105,12 @@ sub selectInstallClass1 {
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
+
+    if ($::oo->{installClass}) {
+	delete $::o->{mouse}{unsafe} if $::oo->{oem};
+	return install_steps::selectInstallClass($o);
+    }
+
     my %c = my @c = (
       $::corporate ? () : (
 	_("Automated") => "beginner",
@@ -483,7 +489,7 @@ notation (for example, 1.2.3.4)."),
 				 }
 			     },
 			     focus_out => sub {
-				 $intf->{NETMASK} = network::netmask($intf->{IPADDR}) unless $_[0]
+				 $intf->{NETMASK} ||= network::netmask($intf->{IPADDR}) unless $_[0]
 			     }
 			    );
 }
@@ -608,7 +614,7 @@ sub timeConfig {
     my ($o, $f, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
+    $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone}) if !$::oo->{oem} || $clicked;
     $o->{timezone}{UTC} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{UTC}) if $::expert || $clicked;
     install_steps::timeConfig($o, $f);
 }
@@ -1052,6 +1058,7 @@ Do you want to try XFree 4.0?")) if $::expert && arch() != /sparc/;
     { local $::testing = 0; #- unset testing
       local $::auto = $::beginner;
       local $::noauto = $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
+      local $::skiptest = $::oo->{oem}; #- if lang is forced, assume no test (HACK)
       $::noauto = $::noauto; #- no warning
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
@@ -1154,7 +1161,7 @@ For information on fixes which are available for this release of Linux-Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
 
 Information on configuring your system is available in the post
-install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install;
+install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install && !$::oo->{oem};
 
     $::global_wait = $o->wait_message('', _("Shutting down"));
 }

@@ -30,6 +30,7 @@ sub load {
     system("extract_archive /modules/modules.cz* /tmp $name.o >/dev/null");
     -r "/tmp/$name.o" or die "can't find module $name\n";
     system("/sbin/insmod -f /tmp/$name.o"); $? and die("insmod $name failed");
+    system("rm /tmp/$name.o");
 }
 
 !@ARGV || $ARGV[0] =~ /-h/ and die "usage: modprobe <module> [<options...>]\n";

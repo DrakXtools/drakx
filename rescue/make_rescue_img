@@ -59,6 +59,7 @@ foreach (cat_("aliases")) {
 }
 _ "cp ../modules/modules.{cz*,dep} $tmp/modules";
 
+_ "install -s kernel_read_part $tmp/sbin" if $arch =~ /i.86/;
 __ "$sudo strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 exit 0 if $ARGV[0];

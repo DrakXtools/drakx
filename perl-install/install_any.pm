@@ -504,7 +504,7 @@ sub killCardServices {
 }
 
 sub hdInstallPath() {
-    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage| or return;
+    cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage| or return;
     my ($part) = grep { $_->{device} eq $1 } @{$::o->{fstab}};    
     $part->{mntpoint} or grep { $_->{mntpoint} eq "/mnt/hd" } @{$::o->{fstab}} and return;
     $part->{mntpoint} ||= "/mnt/hd";

@@ -224,6 +224,8 @@ $o = $::o = {
 
 };
 
+$::oo = {};
+
 #-######################################################################################
 #- Steps Functions
 #- each step function are called with two arguments : clicked(because if you are a
@@ -232,7 +234,7 @@ $o = $::o = {
 
 #------------------------------------------------------------------------------
 sub selectLanguage {
-    $o->selectLanguage($_[1] == 1);
+    $o->selectLanguage;
 
     addToBeDone {
 	lang::write($o->{prefix});
@@ -299,7 +301,7 @@ sub partitionDisks {
     return install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
 
     my $stage1_hd;
-    if (cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage\s+(\S+)|) {
+    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)|) {
 	$stage1_hd = { dev => $1, fs => $2 };
 	install_any::getFile("XXX"); #- close still opened filehandle
 	fs::umount("/tmp/hdimage");
@@ -557,6 +559,9 @@ sub main {
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
+	    oem       => sub { $::oo->{oem} = $v },
+	    lang      => sub { $o->{lang} = $v },
+	    flang     => sub { $o->{lang} = $::oo->{lang} = $v },
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    vga16     => sub { $o->{vga16} = $v },
@@ -564,6 +569,7 @@ sub main {
 	    expert    => sub { $::expert = 1; $::beginner = 0 },
 	    beginner  => sub { $::beginner = $v },
 	    class     => sub { $o->{installClass} = $v },
+	    fclass    => sub { $o->{installClass} = $::oo->{installClass} = $v },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
