@@ -197,7 +197,7 @@ static enum return_type try_with_device(char *dev_name)
 		return RETURN_ERROR;
 	}
 
-	results = ask_from_list_comments_auto("Please choose the partition where is copied the " DISTRIB_NAME " Distribution.",
+	results = ask_from_list_comments_auto("Please choose the partition where " DISTRIB_NAME " is copied.",
 					      parts, parts_comments, &choice, "partition", parts);
 	if (results != RETURN_OK)
 		return results;

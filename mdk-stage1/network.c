@@ -384,7 +384,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		static char ** answers = NULL;
 		struct in_addr addr;
 
-		results = ask_from_entries_auto("Please enter the network information. (leave netmask void for Internet standard)",
+		results = ask_from_entries_auto("Please enter the network information. (leave netmask blank for Internet standard)",
 						questions, &answers, 16, questions_auto, static_ip_callback);
 		if (results != RETURN_OK)
 			return setup_network_interface(intf);

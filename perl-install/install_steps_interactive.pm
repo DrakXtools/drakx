@@ -89,7 +89,7 @@ sub selectLanguage {
 
     if ($o->isa('interactive_gtk')) {
 	$o->ask_warn('', formatAlaTeX(
-"If you see this message it is because you choose a language for
+"If you see this message it is because you chose a language for
 which DrakX does not include a translation yet; however the fact
 that it is listed means there is some support for it anyway.
 
@@ -116,7 +116,7 @@ system and the different components of the Mandrake Linux distribution.
 
 1. License Agreement
 
-Please read carefully this document. This document is a license agreement between you and  
+Please read this document carefully. This document is a license agreement between you and  
 MandrakeSoft S.A. which applies to the Software Products.
 By installing, duplicating or using the Software Products in any manner, you explicitly 
 accept and fully agree to conform to the terms and conditions of this License. 
@@ -355,8 +355,8 @@ sub doPartitionDisks {
 	$warned = 1;
 	if ($o->ask_yesorno(_("Error"), 
 _("I can't read your partition table, it's too corrupted for me :(
-I can try to go on blanking bad partitions (ALL DATA will be lost!).
-The other solution is to disallow DrakX to modify the partition table.
+I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
+The other solution is to not allow DrakX to modify the partition table.
 (the error is %s)
 
 Do you agree to loose all the partitions?
@@ -464,7 +464,7 @@ sub formatMountPartitions {
 		_("Creating and formatting file %s", $part->{loopback_file}) :
 		_("Formatting partition %s", $part->{device}));
     });
-    die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
+    die _("Not enough swap space to fulfill installation, please add some") if availableMemory < 40 * 1024;
 }
 
 #------------------------------------------------------------------------------
@@ -493,7 +493,7 @@ sub choosePackages {
     require pkgs;
 
     my $min_size = pkgs::selectedSize($packages);
-    $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
+    $min_size < $availableC or die _("Your system does not have enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
     my $min_mark = $::expert ? 3 : 4;
     my $def_mark = 4; #-TODO: was 59, 59 is for packages that need gl hw acceleration.
@@ -841,7 +841,7 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 sub installCrypto {
     my $license =
-_("You have now the possibility to download software aimed for encryption.
+_("You now have the opportunity to download encryption software.
 
 WARNING:
 
@@ -879,11 +879,13 @@ sub installUpdates {
     $o->hasNetwork or return;
 
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
-formatAlaTeX(_("You have now the possibility to download updated packages that have
-been released after the distribution has been made available.
+formatAlaTeX(
+_("You now have the opportunity to download updated packages. These packages
+have been released after the distribution was released. They may
+contain security or bug fixes.
 
-You will get security fixes or bug fixes, but you need to have an
-Internet connection configured to proceed.
+To download these packages, you will need to have a working Internet 
+connection.
 
 Do you want to install the updates ?"))) || return;
 

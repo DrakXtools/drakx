@@ -728,7 +728,7 @@ not cause any damage.", $l),
 	} else {
 	    @options = split ' ',
 	      $in->ask_from_entry('',
-_("You may now provide its options to module %s.
+_("You may now provide options to module %s.
 Options are in format ``name=value name2=value2 ...''.
 For instance, ``io=0x300 irq=7''", $l),
 				 _("Module options:"),

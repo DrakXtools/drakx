@@ -408,8 +408,8 @@ int main(int argc, char **argv, char **env)
 
 	if (IS_RESCUE && total_memory() < MEM_LIMIT_RESCUE) {
 		stg1_error_message("You are starting the rescue with a low memory configuration. "
-				   "From that point, experience showed us that the program may stop "
-				   "or crash at any point without immediate proper reason. Continue at "
+				   "Our experience shows that your system may crash at any point "
+				   "or lock up for no apparent reason. Continue at "
 				   "your own risk. Alternatively, you may reboot your system now.");
 	}
 
