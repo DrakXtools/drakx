@@ -112,7 +112,30 @@ void initIMPS2() {
   tcdrain(fd);
 }
 
-void log_message(const char * s, ...) {}
+void log_message(const char * s, ...) {
+   va_list args;
+   va_list args_copy;
+   FILE * logtty = fopen("/dev/tty3", "w");
+   if (!logtty)
+      return;
+   fprintf(logtty, "* ");
+   va_start(args, s);
+   vfprintf(logtty, s, args);
+   fprintf(logtty, "\n");
+   fclose(logtty);
+   va_end(args);
+
+   logtty = fopen("/tmp/ddebug.log", "a");
+   if (!logtty)
+      return;
+   fprintf(logtty, "* ");
+   va_copy(args_copy, args);
+   va_start(args_copy, s);
+   vfprintf(logtty, s, args_copy);
+   fprintf(logtty, "\n");
+   fclose(logtty);
+   va_end(args_copy);
+}
 
 ';
 
