@@ -283,13 +283,15 @@ sub configure {
 
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
-    $in->ask_from('', N("Select the memory size of your graphics card"),
-		  [ { val => \ ($card->{VideoRam} = $options->{VideoRam_probed} || 4096),
-		      type => 'list',
-		      list => [ ikeys %VideoRams ],
-		      format => sub { translate($VideoRams{$_[0]}) },
-		      not_edit => !$::expert } ]) or return
-			if $card->{needVideoRam} && !$card->{VideoRam};
+    if ($card->{needVideoRam} && !$card->{VideoRam}) {
+	$card->{VideoRam} = first(grep { $_ <= $options->{VideoRam_probed} } reverse ikeys %VideoRams) || 4096;
+	$in->ask_from('', N("Select the memory size of your graphics card"),
+		      [ { val => \$card->{VideoRam},
+			  type => 'list',
+			  list => [ ikeys %VideoRams ],
+			  format => sub { translate($VideoRams{$_[0]}) },
+			  not_edit => !$::expert } ]) or return;
+    }
 
     to_raw_X($card, $raw_X);
     $card;
