@@ -22,7 +22,7 @@ sub check {
 
 
 sub find_servers() {
-    local (*F, $_);
+    local *F;
     my $pid = open F, "rpcinfo-flushed -b mountd 2 |";
     $SIG{ALRM} = sub { kill(15, $pid) };
     alarm 1;
@@ -42,7 +42,12 @@ sub find_servers() {
 sub find_exports {
     my ($server) = @_;
 
-    my (undef, @l) = `showmount -e $server->{ip}`;
+    local *F;
+    my $pid = open F, "showmount -e $server->{ip} |";
+    $SIG{ALRM} = sub { kill(15, $pid) };
+    alarm 5;
+
+    my (undef, @l) = <F>;
     map { /(\S+)\s*(\S+)/; { name => $1, comment => $2 } } @l;
 }
 
