@@ -25,8 +25,8 @@ sub open_stdout() {
 
 # cont_stdout must be called after open_stdout and before the first print
 sub cont_stdout {
-    my ($title) = @_;
-    print CGI::start_html('-title' => $title) if $no_header;
+    my ($o_title) = @_;
+    print CGI::start_html('-title' => $o_title) if $no_header;
     $no_header = 0;
 }
 
