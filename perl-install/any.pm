@@ -94,6 +94,7 @@ sub setupBootloader {
 
     if (!$::expert && $more < 1) {
 	#- automatic
+	$b->{methods}{lilo} and $b->{methods}{lilo} = "boot-graphic.b";
     } elsif (!$::expert) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
@@ -113,25 +114,29 @@ sub setupBootloader {
     } else {
 	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" : "setupBootloaderGeneral") unless $::isStandalone; #- TO MERGE ?
 
-	if ($::expert) {
-	    my $default = arch() =~ /sparc/ ? 'silo' : 'grub';
-	    my $m = $in->ask_from_list_('', _("Which bootloader(s) do you want to use?"), [ keys(%{$b->{methods}}), __("None") ], $default) or return;
-	    $b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
-	    $b->{methods}{$m} = 1 if $m ne "None";
-	}
-	#- at least one method
-	grep_each { $::b } %{$b->{methods}} or return;
-
-	#- put lilo if grub is chosen, so that /etc/lilo.conf is generated
-	exists $b->{methods}{lilo} and $b->{methods}{lilo} = 1 if $b->{methods}{grub};
-
 	my @silo_install_lang = (_("First sector of drive (MBR)"), _("First sector of boot partition"));
 	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
+
+	my %bootloaders = (if_(exists $b->{methods}{silo},
+			       __("SILO")                     => sub { $b->{methods}{silo} = 1 }),
+			   if_(exists $b->{methods}{lilo},
+			       __("LILO with text menu")      => sub { $b->{methods}{lilo} = "boot-menu.b" },
+			       __("LILO with graphical menu") => sub { $b->{methods}{lilo} = "boot-graphic.b" }),
+			   if_(exists $b->{methods}{grub},
+			       #- put lilo if grub is chosen, so that /etc/lilo.conf is generated
+			       __("Grub")                     => sub { $b->{methods}{grub} = 1;
+								       exists $b->{methods}{lilo}
+									 and $b->{methods}{lilo} = "boot-graphic.b" }),
+			   if_(exists $b->{methods}{loadlin},
+			       __("Boot from DOS/Windows (loadlin)") => sub { $b->{methods}{loadlin} = 1 }),
+			  );
+	my $bootloader = arch() =~ /sparc/ ? __("SILO") : __("LILO with graphical menu");
 	my $profiles = bootloader::has_profiles($b);
 	my $memsize = bootloader::get_append('mem');
 
 	$b->{vga} ||= 'Normal';
 	$in->ask_from_entries_refH('', _("Bootloader main options"), [
+{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], },
     arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : (
@@ -160,6 +165,11 @@ sub setupBootloader {
 				     0;
 				 }
 				) or return 0;
+	$b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
+	$bootloaders{$bootloader} and $bootloaders{$bootloader}->();
+	#- at least one method
+	grep_each { $::b } %{$b->{methods}} or return;
+
 	$b->{use_partition} = $silo_install_lang eq _("First sector of drive (MBR)") ? 0 : 1;
 	$b->{vga} = $bootloader::vga_modes{$b->{vga}} || $b->{vga};
 
@@ -538,7 +548,7 @@ sub setup_thiskind {
     my ($in, $type, $auto, $at_least_one) = @_;
 
     return if arch() eq "ppc";
-    my @l = setup_thiskind_backend ($type, $auto, $at_least_one, sub { my $w = wait_load_module($in, $type, @_) } );
+    my @l = setup_thiskind_backend ($type, $auto, $at_least_one, sub { my $w = wait_load_module($in, $type, @_); } );
 
     if (!$::noauto) {
 	if (my @err = grep { $_ } map { $_->{error} } @l) {

@@ -477,7 +477,13 @@ sub install_lilo($$) {
 	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
 	#- print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
-	print F "message=/boot/message" if $lilo->{message};
+	if ($lilo->{message}) {
+	    if (-e "$prefix/boot/$lilo->{methods}{lilo}" && $lilo->{methods}{lilo} eq "boot-graphic.b") {
+		print F "message=/boot/message-graphic";
+	    } else {
+		print F "message=/boot/message";
+	    }
+	}
 	print F "menu-scheme=wb:bw:wb:bw";
 
 	foreach (@{$lilo->{entries}}) {
@@ -506,6 +512,9 @@ sub install_lilo($$) {
 	    }
 	}
     }
+    #- try to use a specific stage2 if defined and present.
+    -e "$prefix/boot/$lilo->{methods}{lilo}" and symlinkf $lilo->{methods}{lilo}, "$prefix/boot/boot.b";
+    log::l("stage2 of lilo used is " . readlink "$prefix/boot/boot.b");
     log::l("Installing boot loader...");
     $::testing and return;
     run_program::rooted($prefix, "lilo", "2>", "/tmp/.error") or die "lilo failed";
