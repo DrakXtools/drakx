@@ -387,11 +387,11 @@ notation (for example, 1.2.3.4).");
 		     return 0 if !$intf->{WIRELESS_FREQ};
 		     if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
 			 $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
-			 return (1,6);
+			 return 1,6;
 		     }
 		     if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
 			 $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
-			 return (1,8);
+			 return 1,8;
 		     }
 		 },
 	         focus_out => sub {
@@ -447,7 +447,7 @@ want to use the default host name."),
 }
 
 sub miscellaneous_choose {
-    my ($in, $u, $b_clicked) = @_;
+    my ($in, $u) = @_;
 
     $in->ask_from('',
        N("Proxies configuration"),
@@ -459,7 +459,7 @@ sub miscellaneous_choose {
 	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("URL should begin with 'ftp:' or 'http:'")), return 1,1;
 	   0;
        }
-    ) or return if $::expert || $b_clicked;
+    ) or return;
     1;
 }
 
