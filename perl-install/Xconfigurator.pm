@@ -1092,19 +1092,17 @@ _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 	    rewriteInittab($run ? 5 : 3) unless $::testing;
 	}
-	autologin($prefix, $o, $in, $allowFB, $isLaptop, $install);
+	autologin($prefix, $o, $in, $install);
     }
 }
 
 sub autologin {
-    my ($o, $allowFB);
-    ($prefix, $o, $in, $allowFB, $isLaptop, $install) = @_;
-    $o ||= {};
+    my ($prefix, $o, $in, $install) = @_;
     my @etc_pass_fields = qw(name pw uid gid realname home shell);
     my @users = mapgrep {
 	my %l; @l{@etc_pass_fields} = split ':';
 	$l{uid} > 500, $l{name};
-    } cat_("$o->{prefix}/etc/passwd");
+    } cat_("$prefix/etc/passwd");
     unless (($::auto && $o->{skiptest}) || !@users || $o->{authentication}{NIS}) {
 	my $cmd = $prefix ? "chroot $prefix" : "";
 	my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
