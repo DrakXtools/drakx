@@ -118,6 +118,7 @@ pci_id_t pci_id[] = {
     { 0x1179, 0x060f, "yenta_socket", "Toshiba ToPIC97" }, 
     { 0x1179, 0x0617, "yenta_socket", "Toshiba ToPIC100" }, 
     { 0x119b, 0x1221, "i82365", "Omega Micro 82C092G" }, 
+    { 0x1524, 0x1411, "yenta_socket", "ENE Technology CB1411" },
     { 0x8086, 0x1221, "i82092", "Intel 82092AA_0" }, 
     { 0x8086, 0x1222, "i82092", "Intel 82092AA_1" }, 
 };
