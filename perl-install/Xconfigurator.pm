@@ -1131,31 +1131,6 @@ _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 	    rewriteInittab($run ? 5 : 3) unless $::testing;
 	}
-	autologin($prefix, $o, $in, $install);
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
-}
-
-sub autologin {
-    my ($prefix, $o, $in, $install) = @_;
-    my $cmd = $prefix ? "chroot $prefix" : "";
-    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
-    my @users = mapgrep {
-	$_->{uid} > 500, $_->{name};
-    } map { any::unpack_passwd($_) } cat_("$prefix/etc/passwd");
-    my @runlevel = mapgrep {
-	/^id:([35]):initdefault:\s*$/ > 0, $1;
-    } cat_("$prefix/etc/inittab");
-    if (!($::isStandalone && $0 =~ /Xdrakres/) && !($::auto && $o->{skiptest}) && first(@runlevel, 0) == 5 &&
-	@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
-	my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
-	$o->{autologin} ||= $l{USER};
-	$in->ask_from_entries_refH(_("Autologin"),
-				   _("I can set up your computer to automatically log on one user.
-If you don't want to use this feature, click on the cancel button."),
-				   [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
- 				     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
-    }
-    $o->{autologin} and $install->("autologin");
-    any::setAutologin($prefix, $o->{autologin}, $o->{desktop});
 }
