@@ -553,6 +553,7 @@ sub main {
     }
     mkdir $o->{prefix}, 0755;
     mkdir $o->{root}, 0755;
+    devices::make("/dev/zero"); #- needed by ddcxinfos
 
     #-  make sure we don't pick up any gunk from the outside world
     my $remote_path = "$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
