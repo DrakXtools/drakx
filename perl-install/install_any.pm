@@ -442,7 +442,7 @@ sub install_urpmi {
 		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
 
-	local *FILES; open FILES, "parsehdlist /tmp/$_->{hdlist} |";
+	local *FILES; open FILES, "$ENV{LD_LOADER} parsehdlist /tmp/$_->{hdlist} |";
 	chop, print LIST "$dir/$_\n" foreach <FILES>;
 	close FILES or log::l("parsehdlist failed"), return;
 	close LIST;
