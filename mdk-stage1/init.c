@@ -335,6 +335,7 @@ void unmount_filesystems(void)
         if (!disallow_eject) {
                 fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
                 if (fd > 0) {
+                        ioctl(fd, CDROM_LOCKDOOR, 0);
                         ioctl(fd, CDROMEJECT, 0);
                         close(fd);
                 }
