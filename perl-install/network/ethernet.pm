@@ -188,9 +188,12 @@ sub configureNetwork {
 N("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
-such as ``mybox.mylab.myco.com''."),
+such as ``mybox.mylab.myco.com''.") . N("
+
+Enter a Zeroconf host name without any dot if you don't
+want to use the default host name."),
 		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
-			if_($netc->{ZEROCONF}, { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} }),
+			{ label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
 		      ],
 		      complete => sub {
 			  if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
