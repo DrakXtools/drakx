@@ -533,7 +533,7 @@ sub _create_window($$) {
     my ($o, $title) = @_;
     my $w = new Gtk::Window;
     my $gc = Gtk::Gdk::GC->new(gtkroot());
-    $my_gtk::shape_width = 7;
+    !$::isStandalone && !$::live and $my_gtk::shape_width = 7;
 #-  $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
     $gc->set_foreground(gtkcolor(5120, 10752, 22784)); #- in hex : 20, 42, 89
     my $inner = gtkadd(my $f_ = gtkset_shadow_type(new Gtk::Frame(undef), 'out'),
@@ -605,17 +605,18 @@ sub _create_window($$) {
 	my ($X, $Y, $Wi, $He) = @{$my_gtk::force_center || $o->{force_center}};
         $w->set_uposition(max(0, $X + ($Wi - $wi) / 2), max(0, $Y + ($He - $he) / 2));
 
-	my $sqw = $my_gtk::shape_width; #square width
-	my $wia = int(($wi+7)/8);
-	my $s = "\xFF" x ($wia*$he);
-	my $wib = $wia*8;
-	my $dif = $wib-$wi;
-	foreach my $y (0..$sqw-1) { vec($s, $wib-1-$dif-$_+$wib*$y, 1) = 0x0 foreach (0..$sqw-1) }
-	foreach my $y (0..$sqw-1) { vec($s, (($he-1)*$wib)-$wib*$y+$_, 1) = 0x0 foreach (0..$sqw-1) }
-	$w->realize;
-	my $b = Gtk::Gdk::Bitmap->create_from_data($w->window, $s, $wib, $he);
-	$w->window->shape_combine_mask($b, 0, 0);
-
+	if(!$::isStandalone && !$::live) {
+	    my $sqw = $my_gtk::shape_width; #square width
+	    my $wia = int(($wi+7)/8);
+	    my $s = "\xFF" x ($wia*$he);
+	    my $wib = $wia*8;
+	    my $dif = $wib-$wi;
+	    foreach my $y (0..$sqw-1) { vec($s, $wib-1-$dif-$_+$wib*$y, 1) = 0x0 foreach (0..$sqw-1) }
+	    foreach my $y (0..$sqw-1) { vec($s, (($he-1)*$wib)-$wib*$y+$_, 1) = 0x0 foreach (0..$sqw-1) }
+	    $w->realize;
+	    my $b = Gtk::Gdk::Bitmap->create_from_data($w->window, $s, $wib, $he);
+	    $w->window->shape_combine_mask($b, 0, 0);
+	}
     }) if ($my_gtk::force_center || $o->{force_center}) && !($my_gtk::force_position || $o->{force_position}) ;
 
     $o->{window} = $f;
