@@ -765,12 +765,15 @@ Do you want to install the updates ?")),
 		crypto::mirrors() };
 	    #- if no mirror have been found, use current time zone and propose among available.
 	    $u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone});
-	    $u->{mirror} = $o->ask_from_treelistf('', 
-						  N("Choose a mirror from which to get the packages"), 
-						  '|',
-						  \&crypto::mirror2text,
-						  \@mirrors,
-						  $u->{mirror});
+	    $o->ask_from_({ messages => N("Choose a mirror from which to get the packages"),
+			    cancel => N("Cancel"),
+			  }, [ { separator => '|',
+				 format => \&crypto::mirror2text,
+				 list => \@mirrors,
+				 val => \$u->{mirror},
+			       },
+			     ],
+			 ) or $u->{mirror} = '';
 	};
 	return if $@ || !$u->{mirror};
 
