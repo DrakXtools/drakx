@@ -111,7 +111,7 @@ sub new($$) {
 	foreach (@servers) {
 	    log::l("Trying with server $_");
 	    my $dir = "/usr/X11R6/bin";
-	    my ($prog, $Driver) = /Driver:(.*)/ ? ('XFree86', $1) : /Xsun|Xpmac|Xnest|^X_move$/ ? $_ : "XF86_$_";
+	    my ($prog, $Driver) = /Driver:(.*)/ ? ('Xorg', $1) : /Xsun|Xpmac|Xnest|^X_move$/ ? $_ : "XF86_$_";
 	    unless (-x "$dir/$prog") {
 		unlink $_ foreach glob_("$dir/X*");
 		install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
