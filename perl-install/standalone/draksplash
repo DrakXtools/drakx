@@ -143,10 +143,10 @@ my %boot_conf_frame = ('frame' => Gtk2::Frame->new(N("Configure bootsplash pictu
                                   ],
                        );
 #- var action is used to hide/show the correct frame
-my $VB2 = Gtk2::VBox->new(0, 5);
+$first{frame}->add(mk_frame(\%first));
 my $first_vbox = Gtk2::VBox->new(0, 5);
 
-&mk_frame($VB2, \%first);
+
 #****************************- Signal event actions
 #- change resolution 
 $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
@@ -364,49 +364,66 @@ sub tool_tip {
 	}
 }
 
-my %hboxes;
 
 #- Desc  => just prepare widgets for a fram hash 
 #- Args  => $box(a Vbox widget to contain all widgets), \%frame (hash with complete definition of the frame)
 #- Return=> all hash{widgets} are created and packed in $box
 sub mk_frame {
-	my ($box, $ref) = @_;
-	foreach my $pos (@{$ref->{pos}}) {
-       my $key = $1.'hb' if $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
-	  #- open a new hbox
-	  $hboxes{$key} = Gtk2::HBox->new($3 ? 1 : 0, 5);
-	  #- look for label
-	  $ref->{widget}{label}{$1}
-	    and $ref->{widgets}{label}{$1} = Gtk2::Label->new($ref->{widget}{label}{$1}) 
-	    and $hboxes{$key}->add($ref->{widgets}{label}{$1});
-	  #- look for scale
-	  $ref->{widget}{scale}{$1}
-	    and $ref->{widgets}{scale}{$1} = Gtk2::HScale->new($adj{$1} =  Gtk2::Adjustment->new(0, 0, $scale_size{$1}, 1, 10, 0))
-	    and $hboxes{$key}->add($ref->{widgets}{scale}{$1})
-	    and $ref->{widgets}{scale}{$1}->set_digits(0);
-	  $adj{$1} and $adj{$1}->set_value($theme{boot_conf}{$1});
-	  #- look for combo
-       my @popdown;
-	  if ($ref->{widget}{combo}{$1}) {
-                  @popdown = @{$ref->{widget}{combo}{$1}};
-                  $ref->{widgets}{combo}{$1} = $ref->{widget}{extras}{$1}{noneditable} ? Gtk2::OptionMenu->new : Gtk2::Combo->new;
-                  $hboxes{$key}->add($ref->{widgets}{combo}{$1});
-                  $ref->{widgets}{combo}{$1}->set_popdown_strings(@popdown);
-     }
-	  #- look for checkbox
-	  $ref->{widget}{check}{$1}
-	    and $ref->{widgets}{check}{$1} = Gtk2::CheckButton->new($ref->{widget}{check}{$1})
-	    and $hboxes{$key}->add($ref->{widgets}{check}{$1})
-	    and $ref->{widgets}{check}{$1}->set_active(1);
-	  #- look for button
-	  $ref->{widget}{button}{$1}
-	    and $ref->{widgets}{button}{$1} = Gtk2::Button->new($ref->{widget}{button}{$1})
-	    and  $hboxes{$key}->add($ref->{widgets}{button}{$1});
-	  #- look for tooltips
-	  $ref->{widget}{tooltip}{$1} and tool_tip($1, \%$ref);
-	  $box->add($hboxes{$key});
-	}
-	$ref->{frame}->add($box);
+    my ($ref) = @_;
+    my @buttons;
+    my $u = create_packtable({ col_spacings => 10, row_spacings => 5 },
+                             map {
+                                 my $pos = $_;
+                                 my $key = $1 if $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
+                                 my @widgets;
+
+                                 #- look for label
+                                 if ($ref->{widget}{label}{$1}) {
+                                     my $w = $ref->{widgets}{label}{$1} = Gtk2::Label->new($ref->{widget}{label}{$1});
+                                     push @widgets, $w;
+                                 }
+
+                                 #- look for scale
+                                 if ($ref->{widget}{scale}{$1}) {
+                                     my $w = $ref->{widgets}{scale}{$1} = Gtk2::HScale->new($adj{$1} =  Gtk2::Adjustment->new(0, 0, $scale_size{$1}, 1, 10, 0));
+                                     $ref->{widgets}{scale}{$1}->set_digits(0);
+                                     push @widgets, $w;
+                                 }
+                                 $adj{$1} and $adj{$1}->set_value($theme{boot_conf}{$1});
+
+                                 #- look for combo
+                                 my @popdown;
+                                 if ($ref->{widget}{combo}{$1}) {
+                                     @popdown = @{$ref->{widget}{combo}{$1}};
+                                     my $w = $ref->{widgets}{combo}{$1} = $ref->{widget}{extras}{$1}{noneditable} ? Gtk2::OptionMenu->new : Gtk2::Combo->new;
+                                     $ref->{widgets}{combo}{$1}->set_popdown_strings(@popdown);
+                                     push @widgets, $w;
+                                 }
+
+                                 #- look for checkbox
+                                 if ($ref->{widget}{check}{$1}) {
+                                     my $w =  $ref->{widgets}{check}{$1} = Gtk2::CheckButton->new($ref->{widget}{check}{$1});
+                                     $ref->{widgets}{check}{$1}->set_active(1);
+                                     push @widgets, $w;
+                                 }
+
+                                 #- look for button
+                                 if ($ref->{widget}{button}{$1}) {
+                                     my $w =  $ref->{widgets}{button}{$1} = Gtk2::Button->new($ref->{widget}{button}{$1});
+                                     @widgets ?
+                                       push @widgets, $w
+                                         : push @buttons, $w;
+                                 }
+
+                                 #- look for tooltips
+                                 $ref->{widget}{tooltip}{$1} and tool_tip($1, \%$ref);
+                                 if_(@widgets, \@widgets);
+                             } @{$ref->{pos}}
+                            );
+    
+    gtkpack__(Gtk2::VBox->new,
+              gtkset_border_width($u, 3),
+              @buttons);
 }
 
 #- Desc  => take a decimal value between 0 to 255 and return the corresponding hexadecimal value
@@ -425,8 +442,8 @@ sub dec2hex {
 
 #- Desc  => prepare and set all signal_connect for boot_frame widget 
 sub make_boot_frame() {
-	my $VB = Gtk2::VBox->new(0, 5);
-	&mk_frame($VB, \%boot_conf_frame);
+    $boot_conf_frame{frame}->add(mk_frame(\%boot_conf_frame));
+
 	#- open a color choose box
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
 		my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
