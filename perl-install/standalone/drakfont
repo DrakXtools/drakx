@@ -42,6 +42,10 @@
 #           - Printer Application Fonts Support...
 #                 check-button. (by default all check)
 
+# directory to install fonts /usr/X11R6/lib/X11/fonts/
+# -->> /usr/X11R6/lib/X11/fonts/drakfont
+
+
 use Gtk;
 use lib qw(/usr/lib/libDrakX);
 #use interactive;
@@ -62,7 +66,8 @@ if ("@ARGV" =~ /--help|-h/) {
 --replace        : replace all font if already exist
 --application    : 0 none application.
                  : 1 all application available supported.
-                 : name_of_application" like  staroffice for only this one.
+                 : name_of_application" like  so for staroffice 
+                 : and gs for ghostscript for only this one.
 );
     exit(0);
 }
@@ -74,7 +79,8 @@ my $replace;
 my $application;
 my $install;
 my $uninstall;
-
+my $so = 1;
+my $gs = 1;
 my $mode = -1;
 my @application;
 my @install;
@@ -93,12 +99,28 @@ foreach (@ARGV) {
     $mode == 2 and push @uninstall, $_;
 }
 
+
+
+foreach my $i (@application) {
+    if ( $i =~ /so/i) {
+	if ( $gs != 2 ) { $gs = 0;}
+	$so = 2;
+    }
+    if ($i  =~ /gs/i){ 
+	if ( $so != 2 ) { $so = 0; }
+	$gs = 2;
+    }
+}
+
+
 print "app : @application\n";
 print "install : @install\n";
 print "uninstall : @uninstall\n";
+print "applications supproted: so: $so  gs: $gs \n";
+
 
 my $xfs_conffile = '/etc/X11/fs/config';
-my $drakfont_dir = '/home/seb/new_drackfont';
+my $drakfont_dir = '/home/seb/new_drackfont'; #/usr/X11R6/lib/X11/fonts/drakfont
 my $chkfontpath = '/usr/sbin/chkfontpath';
 
 my $part;
@@ -157,7 +179,7 @@ sub search_windows_font {
 
 sub is_a_font {
     local $_ = $_[0];
-    /.ttf$/i || /.pfa$/i || /.pfb$/i || /.pcf$/i || /.pcf.gz$/i;
+    /.ttf$/i || /.pfa$/i || /.pfb$/i || /.pcf$/i || /.pcf.gz$/i || /.pfm$/i ;
 }
 
 sub search_dir_font {
@@ -211,23 +233,34 @@ sub print_list { print "Font(s) to Install :\n\n"; print "$_\n" foreach (@font_l
 sub put_font_dir {
     mkdir_p($drakfont_dir);
     cp_af(@font_list, $drakfont_dir);
+    if (@application && $so && !$gs)  {
+	foreach my $fontname ( glob ("$/drakfont_dir/*.pfm") ) { system ("cd $/drakfont_dir && pfm2afm $fontname"); }
+	foreach my $fontname ( glob ("$/drakfont_dir/*.ttf") ) { system ("cd $/drakfont_dir && tt2afm $fontname && rm $fontname"); }
+    }
+    if (@application && $so && $gs)  {
+	foreach my $fontname ( glob ("$/drakfont_dir/*.ttf") ) { system ("cd $/drakfont_dir && ttf2type1 $fontname && rm $fontname"); }
+    }
+    system ("cd $/drakfont_dir && type1inst ");
+    if (@application && $gs)  {	system ("cat Fontmap.bak >>$(rpm -ql ghostscript | grep Fontmap")  }
     system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
-    # xlsfonts | less pour verifier l'installation des polices.
 }
 
+
+# have to be carreful when you remove some type1 fonts whith ghostscript
+# you have have to remove this font from the files "rpm -ql ghostscript | grep Fontmap"
+ 
 sub remove_fonts {
     my @list_dir;
     my @toto;
     foreach my $i (@font_list) {
-#	rm_rf($i);
-	print "nom complet : ".$i."\n";
+	rm_rf($i);
+#	print "nom complet : ".$i."\n";
 	$i =~ s/\/\w*\.\w*//gi;
 	grep ( $i, (@list_dir)) or push @list_dir, $i;
-	print "nom rep     : " . $_."\n" foreach @list_dir;
+#	print "nom rep     : " . $_."\n" foreach @list_dir;
     }
     foreach my $i (@list_dir) {
-#	print listlength all("$i");
-	if (listlength all("$i") > 2)  {
+	if (listlength all("$i") < 3)  {
 	    # remove this directory of the de fontpath
 	    system("chkfontpath -r $i") or print "PERL::system command failed during chkfontpath\n";
 	} else {
@@ -261,7 +294,7 @@ sub backend_mod {
 	search_dir_font $_ foreach (@install);
 	print ".................................................\n\n";
 	print "Font to install : ".$_."\n" foreach (@font_list);
-	#put_font_dir();
+	put_font_dir();
 	print "\n...............The End...................\n";
     }
 
@@ -282,3 +315,4 @@ sub interactive_mode {
 
 #   faire la gestion des applications + printer
 
+# xlsfonts | less pour verifier l'installation des polices.
