@@ -114,8 +114,7 @@ sub selectInstallClass($@) {
 }
 #------------------------------------------------------------------------------
 sub setupSCSI { 
-    modules::load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
-    modules::load_multi(qw(ide-probe ide-disk ide-cd));
+    modules::load_ide();
     modules::load_thiskind('scsi');
 }
 #------------------------------------------------------------------------------
@@ -429,7 +428,7 @@ sub pppConfig {
     print F "nameserver $o->{modem}{dns2}\n" if $o->{modem}{dns2};
     close F;
 
-    install_any::template2userfile($o->{prefix}, "/usr/share/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
+    install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
 
     miscellaneousNetwork($o);
 }
@@ -762,10 +761,11 @@ sub miscellaneous {
 	$_ .= " mem=$ramsize";
     }
     if (my @l = detect_devices::getIDEBurners() and !/ide-scsi/) {
-	$_ .= " " . join(" ", map { "$_=ide-scsi" } @l);
+	$_ .= " " . join(" ", (map { "$_=ide-scsi" } @l), 
+			 map { "$_->{device}=ide-floppy" } detect_devices::ide_zips());
     }
-    if (my $m = modules::get_options("ide-mod")) {
-	$m =~ /options="(.*)"/ and $_ .= " $1" if !/ide.=/;
+    if (my $m = detect_devices::hasUltra66()) {
+	$_ .= " $m" if !/ide.=/;
     }
 
     #- keep some given parameters

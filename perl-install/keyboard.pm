@@ -180,6 +180,7 @@ sub lang2keyboard($) {
 
 sub load($) {
     my ($keymap) = @_;
+    return if $::testing;
 
     my ($magic, @keymaps) = unpack "I i" . c::MAX_NR_KEYMAPS() . "a*", $keymap;
     $keymap = pop @keymaps;
@@ -209,9 +210,9 @@ sub load($) {
 
 sub xmodmap_file {
     my ($keyboard) = @_;
-    my $f = "/usr/share/xmodmap/xmodmap.$keyboard";
+    my $f = "$ENV{SHARE_PATH}/xmodmap/xmodmap.$keyboard";
     if (! -e $f) {
-	run_program::run("extract_archive", "/usr/share/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
+	run_program::run("extract_archive", "$ENV{SHARE_PATH}/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
 	$f = "/tmp/xmodmap.$keyboard";
     }
     -e $f && $f;
@@ -222,11 +223,11 @@ sub setup($) {
     my $o = $keyboards{$keyboard} or return;
 
     log::l("loading keymap $o->[1]");
-    if (-e (my $f = "/usr/share/keymaps/$o->[1].kmap")) {
+    if (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$o->[1].kmap")) {
 	load(cat_($f));
     } else {
 	local *F;
-	open F, "extract_archive /usr/share/keymaps.cz2 '' $o->[1].kmap |";
+	open F, "extract_archive $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].kmap |";
 	local $/ = undef;
 	eval { load(<F>) };
     }

@@ -84,16 +84,6 @@ sub selectKeyboard($) {
     }
 }
 #------------------------------------------------------------------------------
-sub selectPath($) {
-    my ($o) = @_;
-    $o->{isUpgrade} =
-      $o->ask_from_list_(_("Install/Upgrade"),
-			 _("Is this an install or an upgrade?"),
-			 [ __("Install"), __("Upgrade") ],
-			 $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
-    install_steps::selectPath($o);
-}
-#------------------------------------------------------------------------------
 sub selectRootPartition($@) {
     my ($o, @parts) = @_;
     $o->{upgradeRootPartition} =
@@ -103,31 +93,45 @@ sub selectRootPartition($@) {
 #- TODO check choice, then mount partition in $o->{prefix} and autodetect.
 #-    install_steps::selectRootPartition($o);
 }
+
+sub selectInstallClass1 {
+    my ($o, $verif, $l, $def, $l2, $def2) = @_;
+    $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def));
+
+    $o->ask_from_list_(_("Install/Upgrade"), _("Is this an install or an upgrade?"), $l2, $def2);
+}
+
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
-    my @c = qw(beginner specific expert);
-    my %c = (
-	     beginner  => _("Recommended"),
-	     specific  => _("Customized"),
-	     expert    => _("Expert"),
-	    );
-    my $installClass = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
-							 _("Which installation class do you want?"),
-							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{beginner})};
-    $::expert   = $installClass eq "expert";
-    $::beginner = $installClass eq "beginner";
+    my %c = my @c = (
+	_("Recommended") => "beginner",
+	_("Customized")  => "specific",
+	_("Expert")	 => "expert",
+    );
 
-    if ($::beginner) {
-	$o->{installClass} = "normal";
-    } else {
+    my $verifInstallClass = sub {
+	$o->{installClass} = $c{$_[0]};
+	$::beginner = $o->{installClass} eq "beginner";
+	$::expert   = $o->{installClass} eq "expert" &&
+	  $o->ask_from_list_('',
+_("Are you sure you are an expert? 
+Hey no kidding, you will be allowed powerfull but dangerous things here."), 
+			 [ _("Hurt me plenty"), _("Normal") ]) ne "Normal";
+    };      
+
+    $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
+					      first(list2kv(@c)), ${{reverse %c}}{$o->{installClass}},
+					      [ __("Install"), __("Upgrade") ], $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
+
+    unless ($::beginner || $o->{isUpgrade}) {
 	my %c = (
 		 normal    => _("Normal"),
 		 developer => _("Development"),
 		 server    => _("Server"),
 		);
 	$o->{installClass} = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
-							       _("What usage do you want?"),
+							       _("Which usage do you want?"),
 							       [ values %c ], $c{$o->{installClass}})};
     }
     install_steps::selectInstallClass($o);
@@ -156,7 +160,12 @@ sub selectMouse {
     $o->SUPER::selectMouse;
 }
 #------------------------------------------------------------------------------
-sub setupSCSI { setup_thiskind($_[0], 'scsi', $_[1], $_[2]) }
+sub setupSCSI { 
+    my ($o) = @_;
+    { my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
+      modules::load_ide() }
+    setup_thiskind($_[0], 'scsi', $_[1], $_[2]);
+}
 
 sub ask_mntpoint_s {
     my ($o, $fstab) = @_;
@@ -283,7 +292,7 @@ You can go on anyway, but be warned that you won't get all packages", $max_size 
 	 ($o->{packages_}{ind}) = 
 	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
     }
-    $o->choosePackagesTree($packages, $compss) if $::expert;
+    $o->choosePackagesTree($packages, $compss) if $o->{compssUsersChoice}{Individual} || $::expert && $o->{isUpgrade};
 }
 
 sub chooseSizeToInstall {
@@ -297,8 +306,8 @@ sub chooseGroups {
 
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
-			       [ @$compssUsersSorted, "Miscellaneous" ],
-			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous" ]
+			       [ @$compssUsersSorted, _("Miscellaneous"), _("Individual package selection") ],
+			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous", "Individual" ]
 			       ) or goto &chooseGroups unless $::beginner;
 
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
@@ -594,7 +603,11 @@ sub setRootPassword($) {
 		 $::beginner ? () : "setRootPasswordNIS");
 
     $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 ? () : _("No password")],
-			 _("Set root password"), [
+			 [ _("Set root password"), 
+			   $::beginner ? "\n" .
+_("(a user ``mandrake'' with password ``mandrake'' has been automatically added.
+Do not use the user ``root'', except in special occasions.") : ()
+			 ], [
 _("Password") => { val => \$sup->{password},  hidden => 1 },
 _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
   $o->{installClass} eq "server" || $::expert ? (
@@ -628,14 +641,14 @@ _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("
 #------------------------------------------------------------------------------
 sub addUser($) {
     my ($o, $clicked) = @_;
-    my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", realname => "default" } : {};
+    my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", passwd => "mandrake", realname => "default" } : {};
     $u->{password2} ||= $u->{password} ||= "";
     $u->{shell} ||= "/bin/bash";
     $u->{icon} ||= translate('default');
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
-    if ($o->{security} < 2 && !$clicked || $o->ask_from_entries_refH(
+    if (($o->{security} >= 2 || $clicked) && $o->ask_from_entries_refH(
         [ _("Add user"), _("Accept user"), $o->{security} >= 4 && !@{$o->{users}} ? () : _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ 
@@ -667,7 +680,7 @@ sub addUser($) {
     )) {
 	push @{$o->{users}}, $o->{user};
 	$o->{user} = {};
-	goto &addUser unless $o->{security} < 2 && !$clicked; #- INFO_TO_DEL: bad security level may cause deadlocks...
+	goto &addUser;
     }
     install_steps::addUser($o);
 }
@@ -950,6 +963,8 @@ sub setupXfree {
 sub generateAutoInstFloppy($) {
     my ($o) = @_;
 
+    return unless $::expert && $::corporate;
+
     my ($floppy) = detect_devices::floppies();
 
     $o->ask_yesorno('', 
@@ -1088,12 +1103,6 @@ sub setup_thiskind {
 
     my @l;
     my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
-
-    {
-	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
-	modules::load("ide-mod", 'prereq', $allow_probe && 'options="' . detect_devices::hasUltra66() . '"');
-	modules::load_multi(qw(ide-probe ide-disk ide-cd));
-    }
 
     if ($allow_probe && $type =~ /scsi/i) {
 	#- hey, we're allowed to pci probe :)   let's do a lot of probing!

@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border @grabbed);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -180,6 +180,9 @@ sub gtkset_default_fontset($) {
     Gtk::Widget->set_default_style($style);
 }
 
+sub gtkcreate_xpm { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), @_) }
+sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
+sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 
 #-###############################################################################
 #- createXXX functions
@@ -450,7 +453,7 @@ sub _ask_from_entry($$@) {
 		 gtksignal_connect($entry, 'activate' => $f),
 		 ($o->{hide_buttons} ? () : create_okcancel($o))),
 	  );
-    $entry->grab_focus();
+    $entry->grab_focus;
 }
 
 sub _ask_from_list {
@@ -536,7 +539,7 @@ sub _ask_warn($@) {
 		 gtksignal_connect(my $w = new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
 		 ),
 	  );
-    $w->grab_focus();
+    $w->grab_focus;
 }
 
 sub _ask_okcancel($@) {
@@ -548,7 +551,7 @@ sub _ask_okcancel($@) {
 		   create_okcancel($o, $ok, $cancel),
 		 )
 	 );
-    $o->{ok}->grab_focus();
+    $o->{ok}->grab_focus;
 }
 
 

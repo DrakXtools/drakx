@@ -47,7 +47,7 @@ sub addUsers {
     foreach my $u (@users) {
 	substInFile { s/^$u\n//; $_ .= "$u\n" if eof } "$msec/user.conf" if -d $msec;
     }
-    run_program::rooted($prefix, "/etc/security/msec/init-sh/grpuser.sh --refresh");
+    run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh");
 }
 
 sub setupBootloader {

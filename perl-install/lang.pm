@@ -208,12 +208,12 @@ sub set {
 	#- using a compressed cpio archive is nighmare to extract all files.
 	#- reset locale environment variable to avoid any warnings by perl,
 	#- so installation of new locale is done with empty locale ...
-	unless (-e "/usr/share/locale/".$languages{$lang}[2]) {
+	unless (-e "$ENV{SHARE_PATH}/locale/".$languages{$lang}[2]) {
 	    @ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
 
-	    eval { commands::rm("-r", "/usr/share/locale") };
+	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
 	    require 'run_program.pm';
-	    run_program::run("extract_archive", "/usr/share/locale.cz2", '/usr/share/locale', $languages{$lang}[2]);
+	    run_program::run("extract_archive", "$ENV{SHARE_PATH}/locale.cz2", '$ENV{SHARE_PATH}/locale', $languages{$lang}[2]);
 	}
 
 	$ENV{LC_ALL}    = $lang;
@@ -330,7 +330,7 @@ sub load_po($) {
 #-    }
 #-
 #-    # text mode font
-#-    log::l("loading font /usr/share/consolefonts/$fontFile");
+#-    log::l("loading font $ENV{SHARE_PATH}/consolefonts/$fontFile");
 #-    #c::loadFont("/tmp/$fontFile") or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
 #-    #print STDERR "\033(K";
 #-

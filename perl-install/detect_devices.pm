@@ -34,8 +34,9 @@ sub get {
     [ \&hasCompaqSmartArray, \&getCompaqSmartArray ];
 }
 sub hds() { grep { $_->{type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
-sub zips() { grep { $_->{type} eq 'hd' && isZipDrive($_) } get(); }
-#-sub jazzs() { grep { $_->{type} eq 'hd' && isJazDrive($_) } get(); }
+sub zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } get(); }
+sub ide_zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } getIDE(); }
+#-sub jazzs() { grep { $_->{type} =~ /.d/ && isJazDrive($_) } get(); }
 sub ls120s() { grep { $_->{type} =~ /.d/ && isLS120Drive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
@@ -51,7 +52,7 @@ sub cdroms() {
     @l;
 }
 sub floppies() {
-    my @ide = map { $_->{device} } grep { $_->{type} eq 'fd' } get() and modules::load("ide-floppy");
+    my @ide = map { $_->{device} } ls120s() and modules::load("ide-floppy");
     (@ide, grep { tryOpen($_) } qw(fd0 fd1));
 }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
@@ -197,12 +198,11 @@ sub syslog {
 
 sub hasSMP { c::detectSMP() }
 
-#- warning: hasUltra66 does a pci probe
 sub hasUltra66 {
     cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
 
     require pci_probing::main;
-    my @l = map { $_->[0] } grep { $_->[1] =~ /(HPT|Ultra66)/ } pci_probing::main::probe('STORAGE_OTHER', 'more') or return;
+    my @l = map { $_->[0] } pci_probing::main::matching_desc('(HPT|Ultra66)') or return;
     
     my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x",
       @l == 2 ?

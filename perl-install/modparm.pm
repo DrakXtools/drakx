@@ -15,7 +15,7 @@ use log;
 #- Functions
 #-######################################################################################
 sub read_modparm_file {
-  my $file = -e "modparm.lst" ? "modparm.lst" : "/usr/share/modparm.lst";
+  my $file = -e "modparm.lst" ? "modparm.lst" : "$ENV{SHARE_PATH}/modparm.lst";
   my @line;
 
   my %modparm_hash;

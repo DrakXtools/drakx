@@ -265,6 +265,30 @@ sub selectLanguage {
 }
 
 #------------------------------------------------------------------------------
+sub selectInstallClass1 {
+    my ($o, $verif, $l, $def, $l2, $def2) = @_;
+
+    my $w = my_gtk->new('');
+    my ($radio, $focused);
+    gtkadd($w->{window},
+	   gtkpack($o->create_box_with_title(_("Which installation class do you want?")),
+		   (my @radios = map { $radio = new Gtk::RadioButton($_, $radio ? $radio : ()); 
+			 $radio->set_active($_ eq $def); $radio } @$l),
+		   gtkadd(create_hbox(),
+			  map { my $v = $_; 
+				my $b = new Gtk::Button($_);
+				$focused = $b if $_ eq $def2;
+				gtksignal_connect($b, "clicked" => sub { $w->{retval} = $v; Gtk->main_quit });
+			    } @$l2)
+		  ));
+    $focused->grab_focus if $focused;
+    $w->main;
+
+    mapn { $verif->($_[1]) if $_[0]->active } \@radios, $l;
+    $w->{retval};
+}
+
+#------------------------------------------------------------------------------
 sub selectMouse {
     my ($o, $force) = @_;
     my $old_dev = $o->{mouse}{device};
@@ -368,7 +392,7 @@ installation of each selected groups.") .
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;
 
-    my ($curr, $info_widget, $w_size, $go, $idle);
+    my ($curr, $info_widget, $w_size, $go, $idle, $flat, $auto_deps);
     my (%wtree, %ptree);
 
     my $w = my_gtk->new('');
@@ -385,20 +409,22 @@ sub choosePackagesTree {
 			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), 150, 0),
 				      createScrolledWindow($info_widget = new Gtk::Text),
 				     )),
-		    0, gtkpack__(new Gtk::HBox(0,0), $w_size = new Gtk::Label('')),
+		    0, my $l = new Gtk::HBox(0,0),
 		    0, gtkpack(new Gtk::HBox(0,10),
 			       $go = gtksignal_connect(new Gtk::Button(_("Install")), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
 			      )
     ));
+    gtkpack__($l, $w_size = new Gtk::Label(''));
+    $l->pack_end(my $toolbar = new Gtk::Toolbar('horizontal', 'icons'), 0, 1, 0);
+    $l->pack_end(gtksignal_connect(new Gtk::CheckButton(_("Automatic dependencies")), clicked => sub { invbool \$auto_deps }), 0, 1, 0);
+
     $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
     $go->grab_focus;
-    $w->show;
+    $w->{rwindow}->show_all;
 
-    $tree->freeze;
-    my $dir = $::testing && $ENV{SHARE_PATH} || "/usr/share";
-    my $pix_base     = [ Gtk::Gdk::Pixmap->create_from_xpm($w->{window}->window, $w->{window}->style->bg('normal'), "$dir/rpm-base.xpm") ];
-    my $pix_selected = [ Gtk::Gdk::Pixmap->create_from_xpm($w->{window}->window, $w->{window}->style->bg('normal'), "$dir/rpm-selected.xpm") ];
-    my $pix_unselect = [ Gtk::Gdk::Pixmap->create_from_xpm($w->{window}->window, $w->{window}->style->bg('normal'), "$dir/rpm-unselected.xpm") ];
+    my $pix_base     = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-base.xpm") ];
+    my $pix_selected = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-selected.xpm") ];
+    my $pix_unselect = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-unselected.xpm") ];
 
     my $parent; $parent = sub {
 	if (my $w = $wtree{$_[0]}) { return $w }
@@ -417,16 +443,38 @@ sub choosePackagesTree {
 	$tree->node_set_pixmap($node, 1, $pix->[0], $pix->[1]);
 	push @{$ptree{$leaf}}, $node;
     };
-    
-    my ($root, $leaf);
-    foreach (sort keys %{$packages->[0]}) {
-	$add_node->($_, 'all');
+    my $add_nodes = sub {
+	%ptree = %wtree = ();
+
+	$tree->freeze;
+	while (1) { $tree->remove_node($tree->node_nth(0) || last) }
+
+	my ($root, $leaf);
+	if ($flat = $_[0]) {
+	    $add_node->($_, undef) foreach sort keys %{$packages->[0]};
+	} else {
+	    foreach (sort @$compss) {
+		($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);
+		$add_node->($leaf, $root);
+	    }
+	}
+	$tree->thaw;
+    };
+    $add_nodes->($flat);
+
+    my %toolbar = my @toolbar = 
+      (
+       ftout =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
+       ftin  =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
+       reload=>  [ _("Toggle between flat and group sorted"), sub { $add_nodes->(!$flat) } ],
+      );
+    $toolbar->set_button_relief("none");
+    foreach (grep_index { $::i % 2 == 0 } @toolbar) {
+	gtksignal_connect($toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkxpm($tree, "$ENV{SHARE_PATH}/$_.xpm")),
+			  clicked => $toolbar{$_}[1]);
     }
-    foreach (sort @$compss) {
-	($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);
-	$add_node->($leaf, $root);
-    }
-    $tree->thaw;
+    $toolbar->set_style("icons");
+
 
     my $display_info = sub {
 	my $p = $packages->[0]{$curr} or return gtktext_insert($info_widget, '');
@@ -462,7 +510,7 @@ sub choosePackagesTree {
 	    my $p = $packages->[0]{$curr} or return;
 	    pkgs::togglePackageSelection($packages, $p, my $l = {});
 	    if (my @l = grep { $l->{$_} } keys %$l) {
-		@l > 1 and $o->ask_okcancel('', [ _("The following packages are going to be install/removed"), join(", ", sort @l) ], 1) || return;
+		@l > 1 && !$auto_deps and $o->ask_okcancel('', [ _("The following packages are going to be install/removed"), join(", ", sort @l) ], 1) || return;
 		pkgs::togglePackageSelection($packages, $p);
 		foreach (@l) {
 		    my $p = $packages->[0]{$_};
@@ -598,7 +646,7 @@ _("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and ret
 
 #------------------------------------------------------------------------------
 sub load_rc($) {
-    if (my ($f) = grep { -r $_ } map { "$_/$_[0].rc" } ("share", "/usr/share", dirname(__FILE__))) {
+    if (my ($f) = grep { -r $_ } map { "$_/$_[0].rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
 	Gtk::Rc->parse($f);
 	foreach (cat_($f)) {
 	    if (/style\s+"background"/ .. /^\s*$/) {
@@ -782,7 +830,7 @@ sub create_logo_window() {
     $w->{rwindow}->set_name("logo");
     $w->show;
     my $file = "logo-mandrake.xpm";
-    -r $file or $file = "/usr/share/$file";
+    -r $file or $file = "$ENV{SHARE_PATH}/$file";
     if (-r $file) {
 	my $ww = $w->{window};
 	my @logo = Gtk::Gdk::Pixmap->create_from_xpm($ww->window, $ww->style->bg('normal'), $file);

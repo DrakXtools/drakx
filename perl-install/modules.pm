@@ -134,6 +134,7 @@ arch() =~ /^sparc/ ? (
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
   "scsi_mod" => "scsi_mod",
+  "sd_mod" => "sd_mod",
   "ide-mod" => "ide-mod",
   "ide-probe" => "ide-probe",
 }],
@@ -485,7 +486,7 @@ sub write_conf {
 
     my @l = sort grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf;
     add_alias('block-major-11', 'scsi_hostadapter') if @l;
-    push @l, "ide-floppy" if detect_devices::zips();
+    push @l, "ide-floppy" if detect_devices::ide_zips();
     $conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @l if @l;
 
     local *F;
@@ -565,4 +566,9 @@ sub get_pcmcia_devices($$) {
 	}
     }
     @devs;
+}
+
+sub load_ide {
+    load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
+    load_multi(qw(ide-probe ide-disk ide-cd));
 }

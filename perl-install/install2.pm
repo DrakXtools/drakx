@@ -43,21 +43,20 @@ my (%installSteps, @orderedInstallSteps);
   selectLanguage     => [ __("Choose your language"), 1, 1, '' ],
   selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
   setupSCSI          => [ __("Setup SCSI"), 1, 0, '' ],
-  selectPath         => [ __("Choose install or upgrade"), 0, 0, '', "selectInstallClass" ],
-  selectMouse        => [ __("Configure mouse"), 1, 1, 'beginner', "selectPath" ],
-  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectPath" ],
+  selectMouse        => [ __("Configure mouse"), 1, 1, 'beginner', "selectInstallClass" ],
+  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1, 'beginner' ],
-  partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectPath" ],
+  partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, 1, 'beginner', "selectPath" ],
-  doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectPath"] ],
+  choosePackages     => [ __("Choose packages to install"), 1, 1, 'beginner', "selectInstallClass" ],
+  doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
   configureNetwork   => [ __("Configure networking"), 1, 1, 'beginner', "formatPartitions" ],
   installCrypto      => [ __("Cryptographic"), 1, 1, '!expert', "configureNetwork" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, '', "doInstallStep" ],
   configureServices  => [ __("Configure services"), 1, 1, '!expert', "doInstallStep" ],
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
-  addUser            => [ __("Add a user"), 1, 1, '', "doInstallStep" ],
+  addUser            => [ __("Add a user"), 1, 1, '' ],
 arch() !~ /alpha/ ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "doInstallStep" ],
 ) : (),
@@ -68,7 +67,6 @@ arch() !~ /alpha/ ? (
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
 	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
-	$h{previous}= $installSteps[$i - 2] if $i >= 2;
 	$h{next}    = $installSteps[$i + 2];
 	$h{entered} = 0;
 	$h{onError} = $installSteps[$i + 2 * $h{onError}];
@@ -260,12 +258,6 @@ sub selectKeyboard {
 }
 
 #------------------------------------------------------------------------------
-sub selectPath {
-    $o->selectPath;
-    install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
-}
-
-#------------------------------------------------------------------------------
 sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
    
@@ -275,16 +267,24 @@ sub selectInstallClass {
         $o->setPackages(\@install_classes);
         $o->selectPackagesToUpgrade() if $o->{isUpgrade};
     }
+    if ($o->{isUpgrade}) {
+	@{$o->{orderedSteps}} = map { /selectInstallClass/ ? ($_, "partitionDisks") : $_ } 
+	                        grep { !/partitionDisks/ } @{$o->{orderedSteps}};
+	my $s; foreach (@{$o->{orderedSteps}}) {
+	    $s->{next} = $_;
+	    $s = $o->{steps}{$_};
+	}
+    }
 }
 
 #------------------------------------------------------------------------------
 sub partitionDisks {
+    return install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
     return
       $o->{fstab} = [
 	{ device => "loop7", type => 0x83, size => 2048 * cat_('/dos/lnx4win/size.txt'), mntpoint => "/", isFormatted => 1, isMounted => 1 },
 	{ device => "/initrd/dos/lnx4win/swapfile", type => 0x82, mntpoint => "swap", isFormatted => 1, isMounted => 1 },
       ] if $o->{lnx4win};
-    return if $o->{isUpgrade};
 
     ($o->{hd_dev}) = cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage|;
 
@@ -491,6 +491,7 @@ sub main {
 		       require install_steps_auto_install;
 		       install_steps_auto_install::errorInStep();
 		   };
+    $ENV{SHARE_PATH} ||= "/usr/share";
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
@@ -585,6 +586,8 @@ sub main {
 	if ($@) {
 	    log::l("error using auto_install, continuing");
 	    undef $::auto_install;
+	} else {
+	    log::l("auto install config file loaded successfully");
 	}
     }
     unless ($::auto_install) {

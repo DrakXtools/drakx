@@ -359,7 +359,7 @@ sub searchAndMount4Upgrade {
 	
     log::l("found root partition : $root->{device}");
 
-    #- test if the partition has to be fschecked and remounted rw.
+    #- test if the partition has to be fsck'ed and remounted rw.
     if ($root->{realMntpoint}) {
 	($o->{prefix}, $root->{mntpoint}) = ($root->{realMntpoint}, '/');
     } else {
@@ -723,44 +723,44 @@ sub kdeicons_postinstall($) {
     foreach (<F>) {
 	if (m|^/dev/(\S+)\s+/mnt/cdrom(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/cdrom.fsdev.kdelnk.in", "Desktop/Cd-Rom". ($2 && " $2") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/cdrom.fsdev.kdelnk.in", "Desktop/Cd-Rom". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+/mnt/zip(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/zip.fsdev.kdelnk.in", "Desktop/Zip". ($2 && " $2") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/zip.fsdev.kdelnk.in", "Desktop/Zip". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+/mnt/floppy-ls(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/LS-120". ($2 && " $2") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/floppy.fsdev.kdelnk.in", "Desktop/LS-120". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+/mnt/floppy(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/Floppy". ($2 && " $2") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/floppy.fsdev.kdelnk.in", "Desktop/Floppy". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/cdrom(\d*)\s+/mnt/cdrom\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/Cd-Rom". ($1 && " $1") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/cdrom.kdelnk.in", "Desktop/Cd-Rom". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/zip(\d*)\s+/mnt/zip\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/Zip". ($1 && " $1") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/zip.kdelnk.in", "Desktop/Zip". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/floppy-ls(\d*)\s+/mnt/floppy-ls\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/LS-120". ($1 && " $1") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/floppy.kdelnk.in", "Desktop/LS-120". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/floppy(\d*)\s+/mnt/floppy\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/Floppy". ($1 && " $1") .".kdelnk",
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/floppy.kdelnk.in", "Desktop/Floppy". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+(/mnt/DOS_\S*)\s+|) {
 	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
-	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
 	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/hd_unmount.xpm";
 	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/large/hd_unmount.xpm";
 	} elsif (m|^/dev/(\S+)\s+(\S*)\s+vfat\s+|) {
 	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
-	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
+	    template2userfile($prefix, "$ENV{SHARE_PATH}/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
 	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/hd_unmount.xpm";
 	    symlink "hd_umount.xpm", "$prefix/usr/share/icons/large/hd_unmount.xpm";
 	}

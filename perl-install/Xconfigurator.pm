@@ -178,12 +178,12 @@ sub cardConfiguration(;$$$) {
     add2hash($card, cardName2card($card->{type})) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 ? 'XFree86' : "XF86_$card->{server}");
+    $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 && $card->{driver} ? 'XFree86' : "XF86_$card->{server}");
 
     -x "$prefix$card->{prog}" or $install && do {
 	$in->suspend;
 	&$install($card->{server});
-	&$install('server') if $::xf4;
+	&$install('server') if $::xf4 && $card->{driver};
 	$in->resume;
     };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
@@ -267,7 +267,7 @@ sub testConfig($) {
     unlink "/tmp/.X9-lock";
     #- restart_xfs;
 
-    my $f = $tmpconfig . ($::xf4 && "-4");
+    my $f = $tmpconfig . ($::xf4 && $o->{card}{driver} && "-4");
     local *F;
     open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $f 2>&1 |";
     foreach (<F>) {
@@ -332,7 +332,7 @@ sub testFinalConfig($;$$) {
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
-	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && "-4")) : ()),
+	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && $o->{card}{driver} && "-4")), 
 	  ":9" or c::_exit(0);
     }
 
