@@ -242,8 +242,10 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '
 
     #- 3D acceleration configuration for XFree 4.0 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
-    ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 32768) if $card->{identifier} =~ /MGA G[24]00/;
-    ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 10000) if $card->{type} =~ /Intel 810/;
+    if (card->{DRI_glx}) {
+	($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 32768) if $card->{identifier} =~ /MGA G[24]00/;
+	($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 10000) if $card->{type} =~ /Intel 810/;
+    }
 
     if (!$::isStandalone && $card->{driver} eq "i810") {
 	require modules;
@@ -728,13 +730,11 @@ sub write_XF86Config {
 
     #- write module section for version 3.
     if ($o->{wacom} || $o->{card}{Utah_glx}) {
-	print F qq(
-Section "Module"
+	print F qq(Section "Module"
 );
 	print F qq(    Load "xf86Wacom.so"\n) if $o->{wacom};
 	print F qq(    Load "glx-3.so"\n) if $o->{card}{Utah_glx}; #- glx.so may clash with server version 4.
-	print F qq(
-EndSection
+	print F qq(EndSection
 
 );
     }
