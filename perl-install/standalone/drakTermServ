@@ -176,7 +176,7 @@ sub write_thin_inittab {
 	if ($client_ip eq "CLIENT") {
 		$suffix = '$$CLIENT$$';
 	} else {
-		$suffix = "\$\$IP=$client_ip$$";
+		$suffix = "\$\$IP=$client_ip\$\$";
 	}
 	
 	my $inittab = "
