@@ -89,7 +89,7 @@ ifeq (sparc,$(ARCH))
 	ln -s /usr/X11R6/lib/X11/xkb/xkbcomp $(DEST)/usr/bin/xkbcomp
 endif
 ifeq (i386,$(ARCH))
-	install -s ../all.kernels/cardmgr/* $(DEST)/usr/bin
+	install -s ../all.kernels/*/cardmgr/cardmgr* $(DEST)/usr/bin
 	install -s ../tools/i386/mkreiserfs $(DEST)/usr/bin
 endif
 
