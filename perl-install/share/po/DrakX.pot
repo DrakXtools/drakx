@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-09-30 15:17+0200\n"
+"POT-Creation-Date: 2000-10-02 13:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,35 +301,35 @@ msgstr ""
 msgid "Please relog into %s to activate the changes"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1114
+#: ../../Xconfigurator.pm_.c:1115
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1117
+#: ../../Xconfigurator.pm_.c:1118
 msgid "X at startup"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1118
+#: ../../Xconfigurator.pm_.c:1119
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1138
+#: ../../Xconfigurator.pm_.c:1139
 msgid "Autologin"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1139
+#: ../../Xconfigurator.pm_.c:1140
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
 "If you don't want to use this feature, click on the cancel button."
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1141
+#: ../../Xconfigurator.pm_.c:1142
 msgid "Choose the default user:"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1142
+#: ../../Xconfigurator.pm_.c:1143
 msgid "Choose the window manager to run:"
 msgstr ""
 
@@ -486,7 +486,7 @@ msgid "Delay before booting default image"
 msgstr ""
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:773
-#: ../../install_steps_interactive.pm_.c:824 ../../netconnect.pm_.c:530
+#: ../../install_steps_interactive.pm_.c:824 ../../netconnect.pm_.c:529
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -539,7 +539,7 @@ msgid "Add"
 msgstr ""
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:45
-#: ../../install_steps_interactive.pm_.c:818 ../../netconnect.pm_.c:804
+#: ../../install_steps_interactive.pm_.c:818 ../../netconnect.pm_.c:800
 #: ../../printerdrake.pm_.c:353 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr ""
@@ -756,16 +756,16 @@ msgstr ""
 msgid "Start Menu"
 msgstr ""
 
-#: ../../common.pm_.c:610
+#: ../../common.pm_.c:606
 #, c-format
 msgid "%d minutes"
 msgstr ""
 
-#: ../../common.pm_.c:612
+#: ../../common.pm_.c:608
 msgid "1 minute"
 msgstr ""
 
-#: ../../common.pm_.c:614
+#: ../../common.pm_.c:610
 #, c-format
 msgid "%d seconds"
 msgstr ""
@@ -1876,7 +1876,7 @@ msgstr ""
 
 #: ../../help.pm_.c:363
 msgid ""
-"Your new Linux-Mandrake operating system is currently\n"
+"Your new Linux-Mandrake operating system is currently being\n"
 "installed. This operation should take a few minutes (it depends on size you\n"
 "choose to install and the speed of your computer).\n"
 "\n"
@@ -4056,12 +4056,20 @@ msgstr ""
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr ""
 
+#: ../../mouse.pm_.c:64
+msgid "busmouse"
+msgstr ""
+
 #: ../../mouse.pm_.c:66
 msgid "2 buttons"
 msgstr ""
 
 #: ../../mouse.pm_.c:67
 msgid "3 buttons"
+msgstr ""
+
+#: ../../mouse.pm_.c:70
+msgid "none"
 msgstr ""
 
 #: ../../mouse.pm_.c:72
@@ -4245,8 +4253,8 @@ msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:339 ../../netconnect.pm_.c:605
-#: ../../netconnect.pm_.c:731 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:339 ../../netconnect.pm_.c:604
+#: ../../netconnect.pm_.c:730 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr ""
 
@@ -4262,219 +4270,219 @@ msgstr ""
 msgid "Do you want to start your connection at boot?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:511
+#: ../../netconnect.pm_.c:510
 msgid "Try to find a modem?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:521
+#: ../../netconnect.pm_.c:520
 msgid "Please choose which serial port your modem is connected to."
 msgstr ""
 
-#: ../../netconnect.pm_.c:526
+#: ../../netconnect.pm_.c:525
 msgid "Dialup options"
 msgstr ""
 
-#: ../../netconnect.pm_.c:527
+#: ../../netconnect.pm_.c:526
 msgid "Connection name"
 msgstr ""
 
-#: ../../netconnect.pm_.c:528
+#: ../../netconnect.pm_.c:527
 msgid "Phone number"
 msgstr ""
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:528
 msgid "Login ID"
 msgstr ""
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "Authentication"
 msgstr ""
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "PAP"
 msgstr ""
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "Script-based"
 msgstr ""
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "Terminal-based"
 msgstr ""
 
-#: ../../netconnect.pm_.c:532
+#: ../../netconnect.pm_.c:531
 msgid "Domain name"
 msgstr ""
 
-#: ../../netconnect.pm_.c:534
+#: ../../netconnect.pm_.c:533
 msgid "First DNS Server"
 msgstr ""
 
-#: ../../netconnect.pm_.c:535
+#: ../../netconnect.pm_.c:534
 msgid "Second DNS Server"
 msgstr ""
 
-#: ../../netconnect.pm_.c:564
+#: ../../netconnect.pm_.c:563
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:564 ../../netconnect.pm_.c:568
+#: ../../netconnect.pm_.c:563 ../../netconnect.pm_.c:567
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:564
+#: ../../netconnect.pm_.c:563
 msgid "You are not currently connected to Internet."
 msgstr ""
 
-#: ../../netconnect.pm_.c:568
+#: ../../netconnect.pm_.c:567
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:568
+#: ../../netconnect.pm_.c:567
 msgid "You are currently connected to internet."
 msgstr ""
 
-#: ../../netconnect.pm_.c:572
+#: ../../netconnect.pm_.c:571
 msgid "Connect to Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:574
+#: ../../netconnect.pm_.c:573
 msgid "Disconnect from Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:576
+#: ../../netconnect.pm_.c:575
 msgid "Configure Internet connection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:579
+#: ../../netconnect.pm_.c:578
 msgid "Internet connection & configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:606 ../../netconnect.pm_.c:732
+#: ../../netconnect.pm_.c:605 ../../netconnect.pm_.c:731
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:621
+#: ../../netconnect.pm_.c:620
 msgid "Connect to Internet with a normal modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:639
+#: ../../netconnect.pm_.c:638
 msgid "Connect to Internet using ISDN"
 msgstr ""
 
-#: ../../netconnect.pm_.c:644
+#: ../../netconnect.pm_.c:643
 msgid "Internal ISDN card"
 msgstr ""
 
-#: ../../netconnect.pm_.c:646
+#: ../../netconnect.pm_.c:645
 msgid "External ISDN modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:649 ../../netconnect.pm_.c:682
-#: ../../netconnect.pm_.c:694 ../../netconnect.pm_.c:718
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:648 ../../netconnect.pm_.c:681
+#: ../../netconnect.pm_.c:693 ../../netconnect.pm_.c:717
+#: ../../netconnect.pm_.c:762
 msgid "Connect to the Internet"
 msgstr ""
 
-#: ../../netconnect.pm_.c:650
+#: ../../netconnect.pm_.c:649
 msgid "What kind is your ISDN connection?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:667
 msgid "Connect to Internet using DSL (or ADSL)"
 msgstr ""
 
-#: ../../netconnect.pm_.c:677
+#: ../../netconnect.pm_.c:676
 msgid "France"
 msgstr ""
 
-#: ../../netconnect.pm_.c:679
+#: ../../netconnect.pm_.c:678
 msgid "Other countries"
 msgstr ""
 
-#: ../../netconnect.pm_.c:683
+#: ../../netconnect.pm_.c:682
 msgid "In which country are you located ?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:689
+#: ../../netconnect.pm_.c:688
 msgid "Alcatel modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:690
 msgid "ECI modem"
 msgstr ""
 
-#: ../../netconnect.pm_.c:695
+#: ../../netconnect.pm_.c:694
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr ""
 
-#: ../../netconnect.pm_.c:713
+#: ../../netconnect.pm_.c:712
 msgid "use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:715
+#: ../../netconnect.pm_.c:714
 msgid "don't use pppoe"
 msgstr ""
 
-#: ../../netconnect.pm_.c:719
+#: ../../netconnect.pm_.c:718
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections use only use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:741
 msgid "Connect to Internet using Cable"
 msgstr ""
 
-#: ../../netconnect.pm_.c:766
+#: ../../netconnect.pm_.c:763
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr ""
 
-#: ../../netconnect.pm_.c:780
+#: ../../netconnect.pm_.c:776
 msgid "Disable Internet Connection"
 msgstr ""
 
-#: ../../netconnect.pm_.c:791
+#: ../../netconnect.pm_.c:787
 msgid "Configure local network"
 msgstr ""
 
-#: ../../netconnect.pm_.c:791
+#: ../../netconnect.pm_.c:787
 msgid "Reconfigure local network"
 msgstr ""
 
-#: ../../netconnect.pm_.c:798
+#: ../../netconnect.pm_.c:794
 msgid "Disable networking"
 msgstr ""
 
-#: ../../netconnect.pm_.c:808
+#: ../../netconnect.pm_.c:804
 msgid "Connect to the Internet / Configure local Network"
 msgstr ""
 
-#: ../../netconnect.pm_.c:809
+#: ../../netconnect.pm_.c:805
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
 msgstr ""
 
-#: ../../netconnect.pm_.c:810
+#: ../../netconnect.pm_.c:806
 msgid "How do you want to connect to the Internet?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:831
+#: ../../netconnect.pm_.c:827
 msgid "Network Configuration"
 msgstr ""
 
-#: ../../netconnect.pm_.c:832
+#: ../../netconnect.pm_.c:828
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"

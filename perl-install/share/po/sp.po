@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-09-30 15:17+0200\n"
+"POT-Creation-Date: 2000-10-02 13:40+0200\n"
 "PO-Revision-Date: 1999-08-09 16:39+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -323,15 +323,15 @@ msgstr ""
 msgid "Please relog into %s to activate the changes"
 msgstr "Молим, поново унесите %s ради активирања промена"
 
-#: ../../Xconfigurator.pm_.c:1114
+#: ../../Xconfigurator.pm_.c:1115
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr "Молим ваш излогујте се и рестартујте (Ctrl-Alt-BackSpace) рачунар"
 
-#: ../../Xconfigurator.pm_.c:1117
+#: ../../Xconfigurator.pm_.c:1118
 msgid "X at startup"
 msgstr "X окружење на старту"
 
-#: ../../Xconfigurator.pm_.c:1118
+#: ../../Xconfigurator.pm_.c:1119
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -339,11 +339,11 @@ msgstr ""
 "Ja могу подести ваш рачунар да аутоматски подиже X окружење при стартању.\n"
 "Да ли желите X окружење при рестарту ?"
 
-#: ../../Xconfigurator.pm_.c:1138
+#: ../../Xconfigurator.pm_.c:1139
 msgid "Autologin"
 msgstr "Ауто логовaњe"
 
-#: ../../Xconfigurator.pm_.c:1139
+#: ../../Xconfigurator.pm_.c:1140
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
 "If you don't want to use this feature, click on the cancel button."
@@ -352,11 +352,11 @@ msgstr ""
 "Уколико не желите да користите ову опциjу, кликните на  тастер "
 "поништи(cancel) ?"
 
-#: ../../Xconfigurator.pm_.c:1141
+#: ../../Xconfigurator.pm_.c:1142
 msgid "Choose the default user:"
 msgstr "Изаберите default (основног) корисникa:"
 
-#: ../../Xconfigurator.pm_.c:1142
+#: ../../Xconfigurator.pm_.c:1143
 msgid "Choose the window manager to run:"
 msgstr "Изаберите window менадзер коjи желите да користите:"
 
@@ -478,7 +478,7 @@ msgstr "LILO/grub инсталација"
 
 #: ../../any.pm_.c:111 ../../install_steps_interactive.pm_.c:745
 msgid "None"
-msgstr "Ниjедан"
+msgstr "Ниједан"
 
 #: ../../any.pm_.c:111
 msgid "Which bootloader(s) do you want to use?"
@@ -513,7 +513,7 @@ msgid "Delay before booting default image"
 msgstr "Пауза пре стартања default image-а"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:773
-#: ../../install_steps_interactive.pm_.c:824 ../../netconnect.pm_.c:530
+#: ../../install_steps_interactive.pm_.c:824 ../../netconnect.pm_.c:529
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -569,7 +569,7 @@ msgid "Add"
 msgstr "Додај"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:45
-#: ../../install_steps_interactive.pm_.c:818 ../../netconnect.pm_.c:804
+#: ../../install_steps_interactive.pm_.c:818 ../../netconnect.pm_.c:800
 #: ../../printerdrake.pm_.c:353 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Урађено"
@@ -841,16 +841,16 @@ msgstr "Десктоп"
 msgid "Start Menu"
 msgstr "Старт мени "
 
-#: ../../common.pm_.c:610
+#: ../../common.pm_.c:606
 #, c-format
 msgid "%d minutes"
 msgstr "%d минутa"
 
-#: ../../common.pm_.c:612
+#: ../../common.pm_.c:608
 msgid "1 minute"
 msgstr "1 минут"
 
-#: ../../common.pm_.c:614
+#: ../../common.pm_.c:610
 #, c-format
 msgid "%d seconds"
 msgstr "%d секунди"
@@ -2072,7 +2072,7 @@ msgstr ""
 
 #: ../../help.pm_.c:363
 msgid ""
-"Your new Linux-Mandrake operating system is currently\n"
+"Your new Linux-Mandrake operating system is currently being\n"
 "installed. This operation should take a few minutes (it depends on size you\n"
 "choose to install and the speed of your computer).\n"
 "\n"
@@ -4576,6 +4576,11 @@ msgstr "MM HitTablet"
 msgid "Logitech Mouse (serial, old C7 type)"
 msgstr "Logitech mouse (серијски, стари C7 тип)"
 
+#: ../../mouse.pm_.c:64
+#, fuzzy
+msgid "busmouse"
+msgstr "Нема  мишa"
+
 #: ../../mouse.pm_.c:66
 msgid "2 buttons"
 msgstr "2 тастерa"
@@ -4583,6 +4588,10 @@ msgstr "2 тастерa"
 #: ../../mouse.pm_.c:67
 msgid "3 buttons"
 msgstr "3 тастерa"
+
+#: ../../mouse.pm_.c:70
+msgid "none"
+msgstr "ниједан"
 
 #: ../../mouse.pm_.c:72
 msgid "No mouse"
@@ -4778,8 +4787,8 @@ msgid ""
 msgstr ""
 "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
 
-#: ../../netconnect.pm_.c:339 ../../netconnect.pm_.c:605
-#: ../../netconnect.pm_.c:731 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:339 ../../netconnect.pm_.c:604
+#: ../../netconnect.pm_.c:730 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Мрeжни интерфejс"
 
@@ -4796,179 +4805,179 @@ msgstr "ADSL конфигурацијa"
 msgid "Do you want to start your connection at boot?"
 msgstr "Да ли желите да стартуjетe конектовaње при стартaњу системa ?"
 
-#: ../../netconnect.pm_.c:511
+#: ../../netconnect.pm_.c:510
 msgid "Try to find a modem?"
 msgstr "Да потражим модем ?"
 
-#: ../../netconnect.pm_.c:521
+#: ../../netconnect.pm_.c:520
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Изаберите серијски порт  на који је модем повезан."
 
-#: ../../netconnect.pm_.c:526
+#: ../../netconnect.pm_.c:525
 msgid "Dialup options"
 msgstr "Dialup опције"
 
-#: ../../netconnect.pm_.c:527
+#: ../../netconnect.pm_.c:526
 msgid "Connection name"
 msgstr "Име конекције"
 
-#: ../../netconnect.pm_.c:528
+#: ../../netconnect.pm_.c:527
 msgid "Phone number"
 msgstr "Број телефона"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:528
 msgid "Login ID"
 msgstr "ID за логовање"
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "Authentication"
 msgstr "Аутентификација"
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "Script-based"
 msgstr "Базирано на скрипти"
 
-#: ../../netconnect.pm_.c:531
+#: ../../netconnect.pm_.c:530
 msgid "Terminal-based"
 msgstr "Базирано на терминалу"
 
-#: ../../netconnect.pm_.c:532
+#: ../../netconnect.pm_.c:531
 msgid "Domain name"
 msgstr "Име домена"
 
-#: ../../netconnect.pm_.c:534
+#: ../../netconnect.pm_.c:533
 msgid "First DNS Server"
 msgstr "Први DNS Сервер"
 
-#: ../../netconnect.pm_.c:535
+#: ../../netconnect.pm_.c:534
 msgid "Second DNS Server"
 msgstr "Други DNS Сервер"
 
-#: ../../netconnect.pm_.c:564
+#: ../../netconnect.pm_.c:563
 #, fuzzy
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
 msgstr "Конектуj на интернет / подеси локални мрежу"
 
-#: ../../netconnect.pm_.c:564 ../../netconnect.pm_.c:568
+#: ../../netconnect.pm_.c:563 ../../netconnect.pm_.c:567
 #, fuzzy
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr "Подеси интернет конфигурациjу"
 
-#: ../../netconnect.pm_.c:564
+#: ../../netconnect.pm_.c:563
 #, fuzzy
 msgid "You are not currently connected to Internet."
 msgstr "Немој конектовати на интернет"
 
-#: ../../netconnect.pm_.c:568
+#: ../../netconnect.pm_.c:567
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:568
+#: ../../netconnect.pm_.c:567
 #, fuzzy
 msgid "You are currently connected to internet."
 msgstr "Немој конектовати на интернет"
 
-#: ../../netconnect.pm_.c:572
+#: ../../netconnect.pm_.c:571
 #, fuzzy
 msgid "Connect to Internet"
 msgstr "Конектуj на интернет"
 
-#: ../../netconnect.pm_.c:574
+#: ../../netconnect.pm_.c:573
 #, fuzzy
 msgid "Disconnect from Internet"
 msgstr "Дисконектуj са интернетa"
 
-#: ../../netconnect.pm_.c:576
+#: ../../netconnect.pm_.c:575
 msgid "Configure Internet connection"
 msgstr "Подеси интернет конфигурациjу"
 
-#: ../../netconnect.pm_.c:579
+#: ../../netconnect.pm_.c:578
 msgid "Internet connection & configuration"
 msgstr "Интернет конекциjа и  конфигурациja"
 
-#: ../../netconnect.pm_.c:606 ../../netconnect.pm_.c:732
+#: ../../netconnect.pm_.c:605 ../../netconnect.pm_.c:731
 #, fuzzy
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr "Садам треба да се рестартуjе мрeжни интерфеjс.Да ли се слaжете ?"
 
-#: ../../netconnect.pm_.c:621
+#: ../../netconnect.pm_.c:620
 #, fuzzy
 msgid "Connect to Internet with a normal modem"
 msgstr "Конекциjа на интернет са обичним модемом"
 
-#: ../../netconnect.pm_.c:639
+#: ../../netconnect.pm_.c:638
 #, fuzzy
 msgid "Connect to Internet using ISDN"
 msgstr "Конекциja на интернет са ISDN картицом"
 
-#: ../../netconnect.pm_.c:644
+#: ../../netconnect.pm_.c:643
 msgid "Internal ISDN card"
 msgstr "Интерна  ISDN картицa"
 
-#: ../../netconnect.pm_.c:646
+#: ../../netconnect.pm_.c:645
 #, fuzzy
 msgid "External ISDN modem"
 msgstr "Екстерни модем"
 
-#: ../../netconnect.pm_.c:649 ../../netconnect.pm_.c:682
-#: ../../netconnect.pm_.c:694 ../../netconnect.pm_.c:718
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:648 ../../netconnect.pm_.c:681
+#: ../../netconnect.pm_.c:693 ../../netconnect.pm_.c:717
+#: ../../netconnect.pm_.c:762
 msgid "Connect to the Internet"
 msgstr "Конектуj на интернет"
 
-#: ../../netconnect.pm_.c:650
+#: ../../netconnect.pm_.c:649
 msgid "What kind is your ISDN connection?"
 msgstr "Каква jе врста вaше ISDN кенекциjе ?"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:667
 #, fuzzy
 msgid "Connect to Internet using DSL (or ADSL)"
 msgstr "Конектуj на интернет користeћи DSL (или  ADSL)"
 
-#: ../../netconnect.pm_.c:677
+#: ../../netconnect.pm_.c:676
 msgid "France"
 msgstr "Францускa"
 
-#: ../../netconnect.pm_.c:679
+#: ../../netconnect.pm_.c:678
 msgid "Other countries"
 msgstr "Друге земљe"
 
-#: ../../netconnect.pm_.c:683
+#: ../../netconnect.pm_.c:682
 msgid "In which country are you located ?"
 msgstr "У коjоj се замљи налазитe ?"
 
-#: ../../netconnect.pm_.c:689
+#: ../../netconnect.pm_.c:688
 msgid "Alcatel modem"
 msgstr "Alcatel модем"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:690
 msgid "ECI modem"
 msgstr "ECI модем"
 
-#: ../../netconnect.pm_.c:695
+#: ../../netconnect.pm_.c:694
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr "Ако jе вaш adsl модем Alcatel -ов,изаберите Alcatel.Уколико ниjе,ECI."
 
-#: ../../netconnect.pm_.c:713
+#: ../../netconnect.pm_.c:712
 msgid "use pppoe"
 msgstr "користи pppoe"
 
-#: ../../netconnect.pm_.c:715
+#: ../../netconnect.pm_.c:714
 msgid "don't use pppoe"
 msgstr "не користи pppoe"
 
-#: ../../netconnect.pm_.c:719
+#: ../../netconnect.pm_.c:718
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections use only use dhcp.\n"
@@ -4978,39 +4987,39 @@ msgstr ""
 "Мeђутим, постоjе конекциjе коjе користе само  dhcp.\n"
 "Уколико не знатe коjа je, изаберитe 'use pppoe'"
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:741
 #, fuzzy
 msgid "Connect to Internet using Cable"
 msgstr "Конектуj на интернет користeћи Кабловску"
 
-#: ../../netconnect.pm_.c:766
+#: ../../netconnect.pm_.c:763
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
 msgstr "Ког dhcp клиjента желите да користитe ?Постављени jе dhcpd"
 
-#: ../../netconnect.pm_.c:780
+#: ../../netconnect.pm_.c:776
 #, fuzzy
 msgid "Disable Internet Connection"
 msgstr "Подеси интернет конфигурациjу"
 
-#: ../../netconnect.pm_.c:791
+#: ../../netconnect.pm_.c:787
 msgid "Configure local network"
 msgstr "Подеси локални мрежу"
 
-#: ../../netconnect.pm_.c:791
+#: ../../netconnect.pm_.c:787
 msgid "Reconfigure local network"
 msgstr "Реконфигуриши локалну мрежу"
 
-#: ../../netconnect.pm_.c:798
+#: ../../netconnect.pm_.c:794
 msgid "Disable networking"
 msgstr "искључи  мрежу"
 
-#: ../../netconnect.pm_.c:808
+#: ../../netconnect.pm_.c:804
 msgid "Connect to the Internet / Configure local Network"
 msgstr "Конектуj на интернет / подеси локални мрежу"
 
-#: ../../netconnect.pm_.c:809
+#: ../../netconnect.pm_.c:805
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5018,15 +5027,15 @@ msgstr ""
 "Локални мрежа је већ подешена.\n"
 "Да ли желите да:"
 
-#: ../../netconnect.pm_.c:810
+#: ../../netconnect.pm_.c:806
 msgid "How do you want to connect to the Internet?"
 msgstr "Како желите да се конектуjете на интернет ?"
 
-#: ../../netconnect.pm_.c:831
+#: ../../netconnect.pm_.c:827
 msgid "Network Configuration"
 msgstr "Подешавање мрежe"
 
-#: ../../netconnect.pm_.c:832
+#: ../../netconnect.pm_.c:828
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
