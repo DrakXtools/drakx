@@ -407,6 +407,8 @@ sub raidAutoStart {
     if (my @needed_perso = map { if_(/^kmod: failed.*md-personality-(.)/, $personalities{$1}) } syslog()) {
 	log::l("RAID: autostart needs personality from $_"), eval { modules::load($_) } foreach @needed_perso;
 	return raidAutoStartIoctl();
+    } else {
+	1;
     }
 }
 
