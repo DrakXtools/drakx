@@ -75,9 +75,6 @@ my ($width, $height) = (300, 150);
 
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
-my $combo1 = Gtk2::OptionMenu->new;
-$combo1->set_popdown_strings(network::netconnect::get_profiles());
-$combo1->entry->set_text($netcnx->{PROFILE} || "default");
 MDK::Common::Globals::init(
 			   in => $in,
 			   prefix => '',
@@ -91,14 +88,11 @@ gtkadd($window1->{window},
                             1, my $notebook = Gtk2::Notebook->new,
                             0, gtkpack_(Gtk2::VBox->new(0,5),
                                         0, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Settings")), 'etched_out'),
-                                                  gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,5),5),
-                                                            gtkpack__(Gtk2::HBox->new(0,0),
-                                                                      N("Connection type: "), 
-                                                                      my $label_cnx_type = Gtk2::Label->new("")),
-                                                            gtkpack__(Gtk2::HBox->new(0,0),
-                                                                      N("Profile "), $combo1)
-                                                            )
-                                                  ),
+                                                  gtkpack__(Gtk2::HBox->new(0,0),
+                                                            N("Connection type: "), 
+                                                            my $label_cnx_type = Gtk2::Label->new("")),
+                                                  
+                                                 ),
                                         1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Global statistics")), 'etched_out'),
                                                   gtkpack__(Gtk2::VBox->new(0,0),
                                                             create_packtable({ col_spacings => 1, row_spacings => 1 },
@@ -112,17 +106,9 @@ gtkadd($window1->{window},
                                                                      ),
                                                            )
                                                  ),
-                                        0, gtkpack_(Gtk2::HBox->new(0,5),
-                                                    1, gtksignal_connect(my $button_connect = gtkset_sensitive(Gtk2::Button->new, 0), clicked => \&connection),
-                                                    0, Gtk2::VSeparator->new,
-                                                    0, gtkpack(Gtk2::VBox->new(0,5),
-                                                               gtksignal_connect(Gtk2::Button->new(N("Logs")), clicked => sub {
-                                                                                     -e "/usr/sbin/logdrake"
-                                                                                       ? system('/usr/sbin/logdrake --file=/var/log/messages &')
-                                                                                         : system('/usr/X11R6/bin/xvt -e "tail -f /var/log/messages " &')
-                                                                                     }),
-                                                               gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
-                                                              )
+                                        0, gtkpack(Gtk2::HBox->new(0,5),
+                                                   gtksignal_connect(my $button_connect = gtkset_sensitive(Gtk2::Button->new(N("Wait please")), 0), clicked => \&connection),
+                                                   gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => sub { ugtk2->exit(0) }),
                                                    )
                                        )
                            ),
@@ -131,24 +117,12 @@ gtkadd($window1->{window},
       );
 $window1->{rwindow}->show_all;
 $window1->{rwindow}->realize;
-$combo1->entry->signal_connect(changed => sub {
-                        $netcnx->{PROFILE} = $combo1->entry->get_text;
-				    network::netconnect::set_profile($netcnx);
-				    network::netconnect::load_conf($netcnx, $netc, $intf);
-				    network::netconnect::read_net_conf('', $netcnx, $netc);
-				});
 my $gct = Gtk2::Gdk::GC->new($window1->{rwindow}->window);
 $gct->set_foreground($colort);
 my $gcr = Gtk2::Gdk::GC->new($window1->{rwindow}->window);
 $gcr->set_foreground($colorr);
 my $gca = Gtk2::Gdk::GC->new($window1->{rwindow}->window);
 $gca->set_foreground($colora);
-my $pix_c_map = gtkcreate_pixbuf("net_c.png");
-my $pix_d_map = gtkcreate_pixbuf("net_d.png");
-$button_connect->add(gtkpack__(Gtk2::VBox->new(0,3),
-				   my $pix_c = gtkcreate_img("net_u.png"),
-				   my $label_c = Gtk2::Label->new(N("Wait please"))
-				  ));
 $statusbar->push(1, N("Wait please, testing your connection..."));
 $window1->{rwindow}->show_all;
 
@@ -352,9 +326,6 @@ sub update() {
     };
 
     my @intfs = get_val(); # get values from /proc file system
-    if ($combo1->entry->get_text ne ($netcnx->{PROFILE} || "default")) {
-	$combo1->entry->set_text($netcnx->{PROFILE} || "default");
-    }
     foreach (@intfs) {
 	my $intf = $_;
 	if (!member($intf,@interfaces)) {
@@ -449,13 +420,12 @@ sub update() {
 		$statusbar->pop(1);
 		$statusbar->push(1, $isconnected == 1 ? N("Connected") : N("Not connected"));
 	    }
-	    $label_c->set_label($isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
-	    $pix_c->set_from_pixbuf($isconnected == 1 ? $pix_c_map : $pix_d_map);
+         $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
 	    $button_connect->set_sensitive(1);
 	}
     if (!(-e $connect_file && -e $disconnect_file)) {
 	$button_connect->set_sensitive(0);
-	$label_c->set_label("No internet connection configured");
+	$button_connect->set("label", N("No internet connection configured"));
     }
     1;
 }
