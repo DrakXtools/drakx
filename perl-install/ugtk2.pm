@@ -742,7 +742,7 @@ sub new {
 			require install_gtk;
 			install_gtk::create_big_help($::o);
 		    } elsif ($d eq 'screenshot') {
-			common::take_screenshot($o);
+			common::take_screenshot();
 		    } elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
 			log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 			$::expert = !$::expert;

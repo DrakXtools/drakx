@@ -165,18 +165,17 @@ sub screenshot_dir__and_move {
 }
 
 sub take_screenshot {
-    my ($in) = @_;
     my $dir = screenshot_dir__and_move() . '/DrakX-screenshots';
     my $warn;
     if (!-e $dir) {
-	mkdir $dir or $in->ask_warn('', N("Can't make screenshots before partitioning")), return;
+	mkdir $dir or $::o->ask_warn('', N("Can't make screenshots before partitioning")), return;
 	$warn = 1;
     }
     my $nb = 1;
     $nb++ while -e "$dir/$nb.png";
     system("fb2png /dev/fb0 $dir/$nb.png 0");
 
-    $in->ask_warn('', N("Screenshots will be available after install in %s", "/root/DrakX-screenshots")) if $warn;
+    $::o->ask_warn('', N("Screenshots will be available after install in %s", "/root/DrakX-screenshots")) if $warn;
 }
 
 sub join_lines {
