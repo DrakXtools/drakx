@@ -362,7 +362,7 @@ sub create_dialog {
     $dialog->set_border_width(10);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
     $dialog->set_size_request(-1, 400);
-    $dialog->vbox->pack_start(create_scrolled_window(my $text = Gtk2::Label->new($label), [ 'never', 'automatic']), 1, 1, 0);
+    $dialog->vbox->pack_start(create_scrolled_window(my $text = Gtk2::Label->new($label), [ 'never', 'automatic' ]), 1, 1, 0);
     $text->set_line_wrap(1);
 
     my $button = Gtk2::Button->new(N("OK"));
