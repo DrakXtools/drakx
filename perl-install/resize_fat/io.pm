@@ -53,9 +53,8 @@ sub read_file($$) {
 sub check_mounted($) {
     my ($f) = @_;
 
-    local *F;
-    open F, "/proc/mounts" or die "error opening /proc/mounts\n";
-    foreach (<F>) {
+    open(my $F, "/proc/mounts") or die "error opening /proc/mounts\n";
+    foreach (<$F>) {
 	/^$f\s/ and die "device is mounted";
     }
 }

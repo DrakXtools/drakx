@@ -163,7 +163,7 @@ sub reload {
     my $num_level = 0;
     require security::level;
     $num_level ||= security::level::get();
-    $msec->{functions}{defaults_file} = "$::prefix/usr/share/msec/level.".$num_level;
+    $msec->{functions}{defaults_file} = "$::prefix/usr/share/msec/level.$num_level";
     $msec->{functions}{default} = { $msec->load_defaults('functions') };
 }
 
