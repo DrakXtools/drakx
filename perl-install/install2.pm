@@ -378,7 +378,7 @@ sub formatPartitions {
 sub choosePackages {
     install_any::setPackages($o) if $_[1] == 1;
     $o->choosePackages($o->{packages}, $o->{compss}); 
-    $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
+    $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }
 
 sub doInstallStep {

@@ -107,7 +107,8 @@ sub setPackages {
     $o->{compssList} = pkgs::readCompssList($o->{packages});
     push @{$o->{base}}, "kernel-smp" if smp::detect();
 
-    $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
+    $o->{packages}{$_}{base} = 
+      $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
 
