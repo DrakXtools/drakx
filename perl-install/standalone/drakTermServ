@@ -234,7 +234,7 @@ sub display_error {
 	    $error_box = gtkpack_(new Gtk::VBox(0,0),
 		  1, new Gtk::Label($message),
 				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+					    gtksignal_connect(new Gtk::Button(N("OK")), clicked => 
 							      sub { ${$central_widget}->destroy(); create_fontsel() }),
 					    ),
 				  )
@@ -249,7 +249,7 @@ sub interactive_mode {
     $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
     $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
-    $window1->set_title(_("Mandrake Terminal Server Configuration"));
+    $window1->set_title(N("Mandrake Terminal Server Configuration"));
     $window1->set_border_width(5);
     my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic82-network-40");    
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakTS.620x57");
@@ -264,14 +264,14 @@ sub interactive_mode {
 					),
 					1, gtkpack_(new Gtk::HBox(0,2),
 						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(_("Enable Server")), clicked 	=>
+							gtksignal_connect(new Gtk::Button(N("Enable Server")), clicked 	=>
 								sub { ${$central_widget}->destroy(); 
 									$windows = 1;
 									cursor_wait(); 
 									enable_ts();
 									cursor_norm();
 								}),
-							gtksignal_connect(new Gtk::Button(_("Disable Server")), clicked => 
+							gtksignal_connect(new Gtk::Button(N("Disable Server")), clicked => 
 								sub { ${$central_widget}->destroy(); 
 									cursor_wait();
 									disable_ts();
@@ -279,14 +279,14 @@ sub interactive_mode {
 								}),
 						),
 						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(_("Start Server")), clicked =>
+							gtksignal_connect(new Gtk::Button(N("Start Server")), clicked =>
 								sub {  ${$central_widget}->destroy(); 
 									$windows = 0; 
 									cursor_wait();	
 									start_ts();
 									cursor_norm();
 								}),
-							gtksignal_connect(new Gtk::Button(_("Stop Server")), clicked 	=>
+							gtksignal_connect(new Gtk::Button(N("Stop Server")), clicked 	=>
 								sub { ${$central_widget}->destroy(); 
 									cursor_wait();
 									stop_ts();
@@ -294,22 +294,22 @@ sub interactive_mode {
 								}),
 							),
 						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(_("Etherboot Floppy/ISO")), clicked 	=>
+							gtksignal_connect(new Gtk::Button(N("Etherboot Floppy/ISO")), clicked 	=>
 								sub { ${$central_widget}->destroy(); $windows = 1; make_boot() }),
-							gtksignal_connect(new Gtk::Button(_("Net Boot Images")), clicked => 
+							gtksignal_connect(new Gtk::Button(N("Net Boot Images")), clicked => 
 								sub { ${$central_widget}->destroy(); make_nbi() }),
 						),
 						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(_("Add/Del Users")), clicked =>
+							gtksignal_connect(new Gtk::Button(N("Add/Del Users")), clicked =>
 								sub {  ${$central_widget}->destroy(); $windows = 0; maintain_users() }),
-							gtksignal_connect(new Gtk::Button(_("Add/Del Clients")), clicked 	=>
+							gtksignal_connect(new Gtk::Button(N("Add/Del Clients")), clicked 	=>
 								sub { ${$central_widget}->destroy(); maintain_clients()}),
 						),     
 						1, new Gtk::HBox(0,2),
 						0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-							gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
+							gtksignal_connect(new Gtk::Button(N("Help")),clicked =>
 								sub { ${$central_widget}->destroy(); help() }),
-							gtksignal_connect(new Gtk::Button(_("Close")), clicked => 
+							gtksignal_connect(new Gtk::Button(N("Close")), clicked => 
 								sub { write_conf_file();
 									$::isEmbedded and kill 'USR1', $::CCPID;
 									Gtk->main_quit() 
@@ -364,7 +364,7 @@ sub about {
 			   0, new Gtk::VScrollbar($text->vadj),
 			   ),
 				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+					    gtksignal_connect(new Gtk::Button(N("OK")), clicked => 
 							      sub { ${$central_widget}->destroy(); create_fontsel() }),
 					    ),
 				  )
@@ -481,7 +481,7 @@ sub help {
 			   0, new Gtk::VScrollbar($text->vadj),
 			   ),
 				 0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
-					   gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+					   gtksignal_connect(new Gtk::Button(N("OK")), clicked => 
 							     sub { ${$central_widget}->destroy() }),
 					   ),
 				 )
@@ -512,9 +512,9 @@ sub make_boot {
 				createScrolledWindow($list_nics),
 				gtkadd(new Gtk::VBox(1,10),
 					new Gtk::HBox(0,20),
-					gtksignal_connect(new Gtk::Button(_("Boot Floppy")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Boot Floppy")), clicked => 
 						sub { write_eb_image($nic, $rom_path, "floppy") }),
-					gtksignal_connect(new Gtk::Button(_("Boot ISO")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Boot ISO")), clicked => 
 						sub { write_eb_image($nic, $rom_path, "iso") }),
 					new Gtk::HBox(0,20),
 				),
@@ -583,9 +583,9 @@ sub make_nbi {
 			0, gtkadd(new Gtk::HBox(0,10),
 				createScrolledWindow($tree_kernels),
 				gtkadd(new Gtk::VBox(1,10),
-					gtksignal_connect(new Gtk::Button(_("Build Whole Kernel -->")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Build Whole Kernel -->")), clicked => 
 						sub { if ($kernel) { 
-								$in->ask_warn('',_("This will take a few minutes."));
+								$in->ask_warn('',N("This will take a few minutes."));
 								cursor_wait();
 								system("/usr/bin/mknbi-set -k /boot/$kernel");
 								$list_nbis->clear_items();
@@ -597,10 +597,10 @@ sub make_nbi {
 								}
 								cursor_norm(); 
 							} else {
-								$in->ask_warn('',_("No kernel selected!")) if !($kernel); 
+								$in->ask_warn('',N("No kernel selected!")) if !($kernel); 
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(_("Build Single NIC -->")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Build Single NIC -->")), clicked => 
 						sub { if ($nic) {
 								system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
 								$list_nbis->clear_items();
@@ -611,11 +611,11 @@ sub make_nbi {
 									select => sub { $nbi = $t })));
 								} 
 							} else {
-								$in->ask_warn('',_("No nic selected!"));
+								$in->ask_warn('',N("No nic selected!"));
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(_("Build All Kernels -->")), clicked => 
-						sub { $in->ask_warn('',_("This will take a few minutes."));
+					gtksignal_connect(new Gtk::Button(N("Build All Kernels -->")), clicked => 
+						sub { $in->ask_warn('',N("This will take a few minutes."));
 							cursor_wait();
 							system("/usr/bin/mknbi-set");
 							$list_nbis->clear_items();
@@ -628,14 +628,14 @@ sub make_nbi {
 							cursor_norm(); 
 						}),
 					new Gtk::HBox(1,1),
-					gtksignal_connect(new Gtk::Button(_("<-- Delete")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("<-- Delete")), clicked => 
 						sub { my $nbi = "/var/lib/tftpboot/" . $nbi;
 							my $result = unlink($nbi) || warn("Can't delete $nbi...");
 							if ($result eq 1) {
 								$list_nbis->remove_items($list_nbis->selection);
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(_("Delete All NBIs")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Delete All NBIs")), clicked => 
 						sub { cursor_wait(); 
 							foreach (grep(/\.nbi/, all("/var/lib/tftpboot"))) {
 								my $nbi = "/var/lib/tftpboot/" . $_;
@@ -692,12 +692,12 @@ sub maintain_users {
 	
 	gtkpack($status_box,
 		$user_box = gtkpack_(new Gtk::VBox(0,10),
-			0, gtkadd(new Gtk::Label(_("!!! Indicates the password in the system database is different than\n the one in the Terminal Server database.\nDelete/re-add the user to the Terminal Server to enable login."))),
+			0, gtkadd(new Gtk::Label(N("!!! Indicates the password in the system database is different than\n the one in the Terminal Server database.\nDelete/re-add the user to the Terminal Server to enable login."))),
 			0, gtkadd(new Gtk::HBox(0,20),
 				createScrolledWindow($list_sys_users),
 				gtkadd(new Gtk::VBox(1,10),
 					new Gtk::HBox(0,10),
-					gtksignal_connect(new Gtk::Button(_("Add User -->")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Add User -->")), clicked => 
 						sub { my $result = adduser(0, $sys_user);
 							if ($result eq 0) { 
 								$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk::ListItem($sys_user), 
@@ -705,7 +705,7 @@ sub maintain_users {
 								$list_ts_users->show() })));
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(_("<-- Del User")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("<-- Del User")), clicked => 
 						sub { deluser(0, $ts_user);
 							$list_ts_users->remove_items($list_ts_users->selection);
 						}),
@@ -744,7 +744,7 @@ sub maintain_clients {
 		$c_detail->append($c_det_ip);
 		$c_det_ip->show();
 		
-		my $c_det_type = new_with_label Gtk::TreeItem(_("type: %s", $clients{$key}{type}));
+		my $c_det_type = new_with_label Gtk::TreeItem(N("type: %s", $clients{$key}{type}));
 		$c_detail->append($c_det_type);
 		$c_det_type->show();
 		
@@ -777,7 +777,7 @@ sub maintain_clients {
 		$entry_nbi->set_popdown_strings(@images);
 		$entry_nbi->set_value_in_list(1, 0);
 	} else {
-		$in->ask_warn('',_("No net boot images created!"));		
+		$in->ask_warn('',N("No net boot images created!"));		
 		make_nbi();
 		return 1;
 	}
@@ -797,12 +797,12 @@ sub maintain_clients {
 				),
 				gtkadd(new Gtk::VBox(1,10),
 					gtkadd(new Gtk::HBox(0,1),
-						gtksignal_connect($check_thin = new Gtk::CheckButton(_("Thin Client")), clicked =>
+						gtksignal_connect($check_thin = new Gtk::CheckButton(N("Thin Client")), clicked =>
 							sub { invbool \$is_thin }),
-						$check_allow_thin = new Gtk::CheckButton(_("Allow Thin Clients")),
+						$check_allow_thin = new Gtk::CheckButton(N("Allow Thin Clients")),
 					), 
 #					new Gtk::HBox(1,1),
-					gtksignal_connect(new Gtk::Button(_("Add Client -->")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Add Client -->")), clicked => 
 						sub { my $hostname = $entry_host->get_text();
 							my $mac = $entry_mac->get_text();
 							my $ip = $entry_ip->get_text();
@@ -845,7 +845,7 @@ sub maintain_clients {
 								}		
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(_("<-- Edit Client")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("<-- Edit Client")), clicked => 
 						sub { $entry_host->set_text($client);
 								$entry_mac->set_text($clients{$client}{hardware});
 								$entry_ip->set_text($clients{$client}{address});
@@ -861,13 +861,13 @@ sub maintain_clients {
 									$tree_clients->remove_items($tree_clients->selection);
 								}
 						}),
-					gtksignal_connect(new Gtk::Button(_("Delete Client")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("Delete Client")), clicked => 
 						sub { my $result = delclient(0, $client);
 							if ($result eq 0) {
 								$tree_clients->remove_items($tree_clients->selection);
 							}
 						}),
-					gtksignal_connect(new Gtk::Button(_("dhcpd Config...")), clicked => 
+					gtksignal_connect(new Gtk::Button(N("dhcpd Config...")), clicked => 
 						sub { ${$central_widget}->destroy(); dhcpd_config() }),
 #					new Gtk::HBox(1,1),
 				),
@@ -900,7 +900,7 @@ sub maintain_clients {
 				standalone::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 				update_hosts_allow("disable");
 			}
-			$in->ask_warn('',_("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
+			$in->ask_warn('',N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
 		}
 	);
 	$central_widget = \$client_box;
@@ -918,42 +918,42 @@ sub dhcpd_config {
 						
 	#- entry boxes for data entry
 	my $box_subnet = new Gtk::HBox(0,0);
-	my $label_subnet = new Gtk::Label(_("Subnet:"));
+	my $label_subnet = new Gtk::Label(N("Subnet:"));
 	$label_subnet->set_justify('right');
 	my $entry_subnet = new Gtk::Entry(20);	
 	$box_subnet->pack_end($entry_subnet, 0, 0, 10);
 	$box_subnet->pack_end($label_subnet, 0, 0, 10);
 	
 	my $box_netmask = new Gtk::HBox(0,0);
-	my $label_netmask = new Gtk::Label(_("Netmask:"));
+	my $label_netmask = new Gtk::Label(N("Netmask:"));
 	$label_netmask->set_justify('left');
 	my $entry_netmask = new Gtk::Entry(20);
 	$box_netmask->pack_end($entry_netmask, 0, 0, 10);
 	$box_netmask->pack_end($label_netmask, 0, 0, 10);
 	
 	my $box_routers = new Gtk::HBox(0,0);
-	my $label_routers = new Gtk::Label(_("Routers:"));
+	my $label_routers = new Gtk::Label(N("Routers:"));
 	$label_routers->set_justify('left');
 	my $entry_routers = new Gtk::Entry(20);
 	$box_routers->pack_end($entry_routers, 0, 0, 10);
 	$box_routers->pack_end($label_routers, 0, 0, 10);
 	
 	my $box_subnet_mask = new Gtk::HBox(0,0);
-	my $label_subnet_mask = new Gtk::Label(_("Subnet Mask:"));
+	my $label_subnet_mask = new Gtk::Label(N("Subnet Mask:"));
 	$label_subnet_mask->set_justify('left');
 	my $entry_subnet_mask = new Gtk::Entry();
 	$box_subnet_mask->pack_end($entry_subnet_mask, 0, 0, 10);
 	$box_subnet_mask->pack_end($label_subnet_mask, 0, 0, 10);
 	
 	my $box_broadcast = new Gtk::HBox(0,0);
-	my $label_broadcast = new Gtk::Label(_("Broadcast Address:"));
+	my $label_broadcast = new Gtk::Label(N("Broadcast Address:"));
 	$label_broadcast->set_justify('left');
 	my $entry_broadcast = new Gtk::Entry(20);
 	$box_broadcast->pack_end($entry_broadcast, 0, 0, 10);
 	$box_broadcast->pack_end($label_broadcast, 0, 0, 10);
 	
 	my $box_domain = new Gtk::HBox(0,0);
-	my $label_domain = new Gtk::Label(_("Domain Name:"));
+	my $label_domain = new Gtk::Label(N("Domain Name:"));
 	$label_domain->set_justify('left');
 	my $entry_domain = new Gtk::Entry(20);
 	$box_domain->pack_end($entry_domain, 0, 0, 10);
@@ -961,7 +961,7 @@ sub dhcpd_config {
 	
 	my $box_name_servers = new Gtk::HBox(0,0);
 	my $box_name_servers_entry = new Gtk::VBox(0,0);
-	my $label_name_servers = new Gtk::Label(_("Name Servers:"));
+	my $label_name_servers = new Gtk::Label(N("Name Servers:"));
 	$label_name_servers->set_justify('left');
 	my $entry_name_server1 = new Gtk::Entry();
 	my $entry_name_server2 = new Gtk::Entry();
@@ -972,8 +972,8 @@ sub dhcpd_config {
 	$box_name_servers->pack_end($box_name_servers_entry, 0, 0, 10);
 	$box_name_servers->pack_end($label_name_servers, 0, 0, 10);
 
-	my $label_ip_range_start = new Gtk::Label(_("IP Range Start:"));
-	my $label_ip_range_end = new Gtk::Label(_("IP Range End:"));
+	my $label_ip_range_start = new Gtk::Label(N("IP Range Start:"));
+	my $label_ip_range_end = new Gtk::Label(N("IP Range End:"));
 	my $entry_ip_range_start = new Gtk::Entry(15);
 	my $entry_ip_range_end = new Gtk::Entry(15);
 	
@@ -1025,11 +1025,11 @@ sub dhcpd_config {
 				gtkadd($box_name_servers),
 			),
 			0, gtkadd(new Gtk::VBox(0,0),
-				new Gtk::Label(_("dhcpd Server Configuration")."\n\n".
-					_("Most of these values were extracted\nfrom your running system.\nYou can modify as needed.")),
+				new Gtk::Label(N("dhcpd Server Configuration")."\n\n".
+					N("Most of these values were extracted\nfrom your running system.\nYou can modify as needed.")),
 				new Gtk::HSeparator,
 				gtkadd((new Gtk::HBox),
-					new Gtk::Label(_("Dynamic IP Address Pool:")),
+					new Gtk::Label(N("Dynamic IP Address Pool:")),
 				),
 				gtkadd((new Gtk::HBox(0,0)),
 					gtkadd((new Gtk::VBox),
@@ -1042,7 +1042,7 @@ sub dhcpd_config {
 					),
 				),
 				gtkadd(new Gtk::HBox),
-				gtksignal_connect(new Gtk::Button(_("Write Config")), clicked => 
+				gtksignal_connect(new Gtk::Button(N("Write Config")), clicked => 
 						sub { write_dhcpd_config(
 							$entry_subnet->get_text(),
 							$entry_netmask->get_text(),
@@ -1144,16 +1144,16 @@ sub write_eb_image {
 	if ($type eq 'floppy') {
 		my $in = interactive->vnew;
 		if (-e "/dev/fd0") {
-			my $result = $in->ask_okcancel(_("Please insert floppy disk:"));
+			my $result = $in->ask_okcancel(N("Please insert floppy disk:"));
 			return if !($result);
 			$result = system("cat $rom_path/boot1a.bin $rom_path/lzrom/$nic > /dev/fd0") if $result;
 			if ($result) {
-				$in->ask_warn('',_("Couldn't access the floppy!"))
+				$in->ask_warn('',N("Couldn't access the floppy!"))
 			} else { 
-				$in->ask_warn('',_("Floppy can be removed now"))
+				$in->ask_warn('',N("Floppy can be removed now"))
 			}
 		} else {
-			$in->ask_warn('',_("No floppy drive available!"));
+			$in->ask_warn('',N("No floppy drive available!"));
 		}
 	} else {
 		mkdir_p("/tmp/eb");
@@ -1162,9 +1162,9 @@ sub write_eb_image {
 		system("mkisofs -b eb.img -o /tmp/$nic.iso /tmp/eb");
 		rm_rf("/tmp/eb");
 		if (-e "/tmp/$nic.iso") {
-			$in->ask_warn('',_("Etherboot ISO image is %s", "/tmp/$nic.iso"))
+			$in->ask_warn('',N("Etherboot ISO image is %s", "/tmp/$nic.iso"))
 		} else { 
-			$in->ask_warn('',_("Something went wrong! - Is mkisofs installed?"))
+			$in->ask_warn('',N("Something went wrong! - Is mkisofs installed?"))
 		}		
 	}
 }
@@ -1183,7 +1183,7 @@ sub enable_ts {
 			print("No /etc/dhcpd.conf built yet - use GUI to create!!\n");
 			return;
 		} else {
-			$in->ask_warn('',_("Need to create /etc/dhcpd.conf first!"));
+			$in->ask_warn('',N("Need to create /etc/dhcpd.conf first!"));
 			#$central_widget->destroy;
 			dhcpd_config();
 			return;		
@@ -1489,7 +1489,7 @@ sub update_hosts_allow {
 	if ($mode eq "enable") {
 		my $has_all = `grep ALL /etc/hosts.allow`;
 		if ($has_all) {
-			$in->ask_warn('',_("/etc/hosts.allow and /etc/hosts.deny already configured - not changed"));
+			$in->ask_warn('',N("/etc/hosts.allow and /etc/hosts.deny already configured - not changed"));
 			return;
 		}
 		if (!$has_all) {

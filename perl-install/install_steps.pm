@@ -72,8 +72,8 @@ sub leavingStep {
 
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
 	eval { &$f() };
-	$o->ask_warn(_("Error"), [
-_("An error occurred, but I don't know how to handle it nicely.
+	$o->ask_warn(N("Error"), [
+N("An error occurred, but I don't know how to handle it nicely.
 Continue at your own risk."), $@ ]) if $@;
     }
 }
@@ -166,7 +166,7 @@ sub doPartitionDisksAfter {
     }
     
     if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{all_hds})) {
-	die _("You must have a FAT partition mounted in /boot/efi");
+	die N("You must have a FAT partition mounted in /boot/efi");
     }
 
     if ($o->{partitioning}{use_existing_root}) {
@@ -208,7 +208,7 @@ sub ask_mntpoint_s {
 
 	next unless $m && $m ne 'swap'; #- there may be a lot of swap.
 
-	$m{$m} and die _("Duplicate mount point %s", $m);
+	$m{$m} and die N("Duplicate mount point %s", $m);
 	$m{$m} = 1;
 
 	#- in case the type does not correspond, force it to ext3
@@ -377,7 +377,7 @@ sub afterInstallPackages($) {
 
     return if $::g_auto_install;
 
-    die _("Some important packages didn't get installed properly.
+    die N("Some important packages didn't get installed properly.
 Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl Mandrake/RPMS/*.rpm\"
 ") if grep { m|read failed: Input/output error| } cat_("$o->{prefix}/root/drakx/install.log");
@@ -449,7 +449,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 	my $kdmrc = "$o->{prefix}/usr/share/config/kdm/kdmrc";
 
 	my $kde_charset = lang::charset2kde_charset(lang::lang2charset($o->{lang}));
-	my $welcome = c::to_utf8(_("Welcome to %s", '%n'));
+	my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
 	substInFile { 
 	    s/^(GreetString)=.*/$1=$welcome/;
 	    s/^(Language)=.*/$1=$LANG/;
@@ -545,7 +545,7 @@ GridHeight=70
 	my @l = detect_devices::floppies_dev();
 
 	foreach (qw(blank updatemodules)) {
-	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die _("No floppy drive available");
+	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die N("No floppy drive available");
 	}
 
 	$o->{blank} and $o->copyKernelFromFloppy();
@@ -784,7 +784,7 @@ sub createBootdisk($) {
 
     my @l = detect_devices::floppies_dev();
 
-    $dev = shift @l || die _("No floppy drive available")
+    $dev = shift @l || die N("No floppy drive available")
       if $dev eq "1"; #- special case meaning autochoose
 
     return if $::testing;

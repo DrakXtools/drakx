@@ -9,11 +9,11 @@ use common;
 
 
 our %depth2text = (
-      8 => __("256 colors (8 bits)"),
-     15 => __("32 thousand colors (15 bits)"),
-     16 => __("65 thousand colors (16 bits)"),
-     24 => __("16 million colors (24 bits)"),
-     32 => __("4 billion colors (32 bits)"),
+      8 => N_("256 colors (8 bits)"),
+     15 => N_("32 thousand colors (15 bits)"),
+     16 => N_("65 thousand colors (16 bits)"),
+     24 => N_("16 million colors (24 bits)"),
+     32 => N_("4 billion colors (32 bits)"),
 );
 our @depths_available = ikeys(%depth2text);
 
@@ -104,7 +104,7 @@ sub allowed {
 	push @resolution_and_depth,
 	  map {
 	      my $Depth = $_;
-	      map { /(\d+)x(\d+)/; { X => $1, Y => $2, Depth => $Depth } } @resolutions;
+	      map { m/(\d+)x(\d+)/; { X => $1, Y => $2, Depth => $Depth } } @resolutions;
 	  } @depths;
     }
     $prefered_depth, @resolution_and_depth;
@@ -127,7 +127,7 @@ sub choose {
     my ($in, $default_resolution, @resolutions) = @_;
 
     my $resolution = $default_resolution || {};
-    $in->ask_from(_("Resolutions"), "",
+    $in->ask_from(N("Resolutions"), "",
 		  [ {
 		     val => \$resolution, type => 'list', sort => 0,
 		     list => [ sort { $a->{X} <=> $b->{X} } @resolutions ],
@@ -207,7 +207,7 @@ sub choose_gtk {
 
     require my_gtk;
     my_gtk->import(qw(:helpers :wrappers));
-    my $W = my_gtk->new(_("Resolution"));
+    my $W = my_gtk->new(N("Resolution"));
 
     my %monitor_images_x_res = do {
 	my @l = qw(640 800 1024 1152 1280 1400 1600 1920 2048);
@@ -252,8 +252,8 @@ sub choose_gtk {
     $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
 
     gtkadd($W->{window},
-	   gtkpack_($W->create_box_with_title(_("Choose the resolution and the color depth"),
-					      if_($card->{BoardName}, "(" . _("Graphics card: %s", $card->{BoardName}) . ")"),
+	   gtkpack_($W->create_box_with_title(N("Choose the resolution and the color depth"),
+					      if_($card->{BoardName}, "(" . N("Graphics card: %s", $card->{BoardName}) . ")"),
 					     ),
 		    1, gtkpack2(new Gtk::VBox(0,0),
 				gtkpack2__(new Gtk::VBox(0, 15),
@@ -266,7 +266,7 @@ sub choose_gtk {
 						   ),
 					  ),
 			       ),
-		    0, gtkadd($W->create_okcancel(_("Ok"), _("Cancel"))),
+		    0, gtkadd($W->create_okcancel(N("Ok"), N("Cancel"))),
 		    ));
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);

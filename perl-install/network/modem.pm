@@ -36,20 +36,20 @@ sub pppConfig {
     $mouse ||={};
     $mouse->{device} ||= readlink "$prefix/dev/mouse";
     $::isInstall and $in->set_help('selectSerialPort');
-    $modem->{device} ||= $in->ask_from_listf('', _("Please choose which serial port your modem is connected to."),
+    $modem->{device} ||= $in->ask_from_listf('', N("Please choose which serial port your modem is connected to."),
 					     \&mouse::serial_port2text,
 					     [ grep { $_ ne $mouse->{device} } (mouse::serial_ports(), if_(-e '/dev/modem', '/dev/modem')) ]) || return;
 
     $::isStandalone || $in->set_help('configureNetworkISP');
-    $in->ask_from('', _("Dialup options"), [
-{ label => _("Connection name"), val => \$modem->{connection} },
-{ label => _("Phone number"), val => \$modem->{phone} },
-{ label => _("Login ID"), val => \$modem->{login} },
-{ label => _("Password"), val => \$modem->{passwd}, hidden => 1 },
-{ label => _("Authentication"), val => \$modem->{auth}, list => [ __("PAP"), __("Terminal-based"), __("Script-based"), __("CHAP") ] },
-{ label => _("Domain name"), val => \$modem->{domain} },
-{ label => _("First DNS Server (optional)"), val => \$modem->{dns1} },
-{ label => _("Second DNS Server (optional)"), val => \$modem->{dns2} },
+    $in->ask_from('', N("Dialup options"), [
+{ label => N("Connection name"), val => \$modem->{connection} },
+{ label => N("Phone number"), val => \$modem->{phone} },
+{ label => N("Login ID"), val => \$modem->{login} },
+{ label => N("Password"), val => \$modem->{passwd}, hidden => 1 },
+{ label => N("Authentication"), val => \$modem->{auth}, list => [ N_("PAP"), N_("Terminal-based"), N_("Script-based"), N_("CHAP") ] },
+{ label => N("Domain name"), val => \$modem->{domain} },
+{ label => N("First DNS Server (optional)"), val => \$modem->{dns1} },
+{ label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
     ]) or return;
     $netc->{DOMAINNAME2} = $modem->{domain};
     any::pppConfig($in, $modem, $prefix);
@@ -66,12 +66,12 @@ sub winmodemConfigure {
     	my $temp;
     	/Hcf/ and $temp = "hcf";
     	/Hsf/ and $temp = "hsf";
-    	$temp and $in->do_pkgs->what_provides("${temp}linmodem") and $type="${temp}linmodem";
+    	$temp and $in->do_pkgs->what_provides("${temp}linmodem") and $type = "${temp}linmodem";
     }
     
-    $type || $in->ask_warn(_("Warning"), _("Your modem isn't supported by the system.
+    $type || $in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
 Take a look at http://www.linmodems.org")) && return 1;
-    my $e = $in->ask_from_list(_("Title"), _("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [_("Install rpm"), _("Do nothing")]) or return 0;
+    my $e = $in->ask_from_list(N("Title"), N("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [N("Install rpm"), N("Do nothing")]) or return 0;
     $e =~ /rpm/ ? $in->do_pkgs->install($type) : return 1;
     1;
 }

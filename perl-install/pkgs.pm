@@ -23,11 +23,11 @@ my @preferred = qw(perl-GTK postfix gcc gcc-cpp gcc-c++ proftpd ghostscript-X vi
 
 #- lower bound on the left ( aka 90 means [90-100[ )
 %compssListDesc = (
-   5 => __("must have"),
-   4 => __("important"),
-   3 => __("very nice"),
-   2 => __("nice"),
-   1 => __("maybe"),
+   5 => N_("must have"),
+   4 => N_("important"),
+   3 => N_("very nice"),
+   2 => N_("nice"),
+   1 => N_("maybe"),
 );
 
 #- constant for small transaction.

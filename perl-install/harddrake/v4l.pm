@@ -11,7 +11,7 @@ use modules;
 
 # please update me on bttv update :
 
-my $default = _("Auto-detect");
+my $default = N("Auto-detect");
 # TODO: split %tuners_lst in per driver perl source files that get transformed in Storable files
 my %tuners_lst = 
     (
@@ -61,8 +61,8 @@ my %tuners_lst =
 # Tweaked from Cardlist
 my $cards_lst = {
     'bttv' => {
-        _("Auto-detect") => -1,
-        _("Unknown|Generic") => 0,
+        N("Auto-detect") => -1,
+        N("Unknown|Generic") => 0,
         "M|Miro|PCTV" => 1,
         "Hauppauge|bt848" => 2,
         "S|STB|Hauppauge 878" => 3,
@@ -94,8 +94,8 @@ my $cards_lst = {
         "A|Askey|CPH06X (bt878)" => 24,
         "G|Guillemot|Maxi TV Video 3" => 24,
         "A|Askey|CPH05X (bt878)" => 24,
-        _("Unknown|CPH05X (bt878) [many vendors]") => 24,
-        _("Unknown|CPH06X (bt878) [many vendors]") => 24,
+        N("Unknown|CPH05X (bt878) [many vendors]") => 24,
+        N("Unknown|CPH06X (bt878) [many vendors]") => 24,
         "T|Terratec|Terra TV+ Version 1.0 (Bt848)" => 25,
         "Vobis|TV-Boostar" => 25,
         "T|Terratec|TV-Boostar" => 25,
@@ -182,7 +182,7 @@ my $cards_lst = {
         "Hauppauge|WinTV PVR" => 80
         },
             'saa7134' => {
-                _("Unknown|Generic") => 0,
+                N("Unknown|Generic") => 0,
                 "Proteus|Pro [philips reference design]" => 1,
                 "LifeView|FlyVIDEO3000" => 2,
                 "LifeView|FlyVIDEO2000" => 3,
@@ -197,7 +197,7 @@ my $cards_lst = {
 
 my %pll_lst = 
     (
-     -1 => _("Default"),
+     -1 => N("Default"),
      0 => "don't use pll",
      1 => "28 Mhz Crystal (X)",
      2 =>"35 Mhz Crystal"
@@ -206,15 +206,15 @@ my %pll_lst =
 sub config {
     my ($in, $driver) = @_;
     my %conf = (gbuffers => 4, card => $default, tuner => -1, radio => 0, pll => -1);
-    if ($in->ask_from("BTTV configuration", _("For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.
+    if ($in->ask_from("BTTV configuration", N("For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.
 If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed"),
                       [
-                       { label => _("Card model:"), val => \$conf{card}, list => [keys %{$cards_lst->{$driver}}], type => 'combo', default => -1, sort =>1, separator => '|'},
-                       { label => _("Tuner type:"), val => \$conf{tuner}, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1, separator => '|'},
-                       { label => _("Number of capture buffers:"), val => \$conf{gbuffers}, min=>2, max=>32, sort => 1, default => 0, type=>'range', advanced =>1, help => _("number of capture buffers for mmap'ed capture")},                    
+                       { label => N("Card model:"), val => \$conf{card}, list => [keys %{$cards_lst->{$driver}}], type => 'combo', default => -1, sort =>1, separator => '|'},
+                       { label => N("Tuner type:"), val => \$conf{tuner}, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1, separator => '|'},
+                       { label => N("Number of capture buffers:"), val => \$conf{gbuffers}, min=>2, max=>32, sort => 1, default => 0, type=>'range', advanced =>1, help => N("number of capture buffers for mmap'ed capture")},                    
                        if_($driver eq 'bttv',
-                           { label => _("PLL setting:"), val => \$conf{pll}, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1},
-                           { label => _("Radio support:"), val => \$conf{radio}, type => "bool", text => _("enable radio support")}),
+                           { label => N("PLL setting:"), val => \$conf{pll}, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1},
+                           { label => N("Radio support:"), val => \$conf{radio}, type => "bool", text => N("enable radio support")}),
                        ]
                       ))
     {

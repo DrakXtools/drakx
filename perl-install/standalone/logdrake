@@ -83,7 +83,7 @@ my $h = chomp_(`hostname -s`);
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
-$window->set_title(_("logdrake"));
+$window->set_title(N("logdrake"));
 $window->set_policy(1, 1, 1);
 $window->border_width (5) unless ($::isEmbedded);
 #$window->set_default_size(540,460);
@@ -93,31 +93,31 @@ my (undef,undef,undef,$mday) = localtime(time);
 $cal->select_day($mday);
 my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
 my $cal_mode = 0;
-my $cal_butt = gtksignal_connect(new Gtk::CheckButton(_("Show only for the selected day")), clicked =>sub{ $cal_mode =!$cal_mode; gtkset_sensitive($cal,$cal_mode) });
+my $cal_butt = gtksignal_connect(new Gtk::CheckButton(N("Show only for the selected day")), clicked =>sub{ $cal_mode =!$cal_mode; gtkset_sensitive($cal,$cal_mode) });
 
 ### menus definition
 # the menus are not shown
 # but they provides shiny shortcut like C-q
 my @menu_items = (
-		  { path => _("/_File"), type => '<Branch>' },
-		  { path => _("/File/_New"), accelerator => _("<control>N"), callback => \&print_hello },
-		  { path => _("/File/_Open"), accelerator => _("<control>O"),callback => \&print_hello },
-		  { path => _("/File/_Save"), accelerator => _("<control>S"),callback => \&save },
-		  { path => _("/File/Save _As") },
-		  { path => _("/File/-"),type => '<Separator>' },
-		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => \&quit },
-		  { path => _("/_Options"), type => '<Branch>' },
-		  { path => _("/Options/Test") },
-		  { path => _("/_Help"),type => '<LastBranch>' },
-		  { path => _("/Help/_About...") } 
+		  { path => N("/_File"), type => '<Branch>' },
+		  { path => N("/File/_New"), accelerator => N("<control>N"), callback => \&print_hello },
+		  { path => N("/File/_Open"), accelerator => N("<control>O"),callback => \&print_hello },
+		  { path => N("/File/_Save"), accelerator => N("<control>S"),callback => \&save },
+		  { path => N("/File/Save _As") },
+		  { path => N("/File/-"),type => '<Separator>' },
+		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => \&quit },
+		  { path => N("/_Options"), type => '<Branch>' },
+		  { path => N("/Options/Test") },
+		  { path => N("/_Help"),type => '<LastBranch>' },
+		  { path => N("/Help/_About...") } 
 		 );
 my $menubar = ugtk::create_factory_menu($window, @menu_items);
 ######### menus end
 
 
 ########## font and colors
-my $n = Gtk::Gdk::Font->fontset_load(_("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"));
-my $b = Gtk::Gdk::Font->fontset_load(_("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"));
+my $n = Gtk::Gdk::Font->fontset_load(N("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"));
+my $b = Gtk::Gdk::Font->fontset_load(N("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"));
 
 #$black    = "\033[30m";
 #$red      = "\033[31m";
@@ -170,36 +170,36 @@ my $col = $cyan;
 ######### font and colors end
 
 my %files = (
-	     "auth" => { file => "/var/log/auth.log", desc => _("Authentication") },
-	     "user" => { file => "/var/log/user.log", desc => _("User") },
-	     "messages" => { file => "/var/log/messages", desc => _("Messages") },
-	     "syslog" => { file => "/var/log/syslog", desc => _("Syslog") },
-	     "explanations" => { file => "/var/log/explanations", desc => _("Mandrake Tools Explanations") }
+	     "auth" => { file => "/var/log/auth.log", desc => N("Authentication") },
+	     "user" => { file => "/var/log/user.log", desc => N("User") },
+	     "messages" => { file => "/var/log/messages", desc => N("Messages") },
+	     "syslog" => { file => "/var/log/syslog", desc => N("Syslog") },
+	     "explanations" => { file => "/var/log/explanations", desc => N("Mandrake Tools Explanations") }
 );
 
-my $yy = gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("search")) , clicked => \&search),0);
+my $yy = gtkset_sensitive(gtksignal_connect(new Gtk::Button(N("search")) , clicked => \&search),0);
 my $log_text = new Gtk::Text(undef, undef);
 my $refcount_search;
 #### far from window
 gtkadd($window,
        gtkpack_(new Gtk::VBox(0,0),
-		if_(!$::isExplain && !$::isEmbedded, 0, _("A tool to monitor your logs")),
-		if_(!$::isFile, 0, gtkadd(new Gtk::Frame(_("Settings")),
+		if_(!$::isExplain && !$::isEmbedded, 0, N("A tool to monitor your logs")),
+		if_(!$::isFile, 0, gtkadd(new Gtk::Frame(N("Settings")),
 					   gtkpack__(new Gtk::VBox(0,2),
 						     gtkpack__(new Gtk::VBox(0,2),
-							       # _("Show lines"),
+							       # N("Show lines"),
 							       gtkpack__(new Gtk::HBox(0,0),
-									 " " . _("matching") . " ", $e_yes = new Gtk::Entry(),
-									 " " . _("but not matching") . " ", $e_no = new Gtk::Entry()
+									 " " . N("matching") . " ", $e_yes = new Gtk::Entry(),
+									 " " . N("but not matching") . " ", $e_no = new Gtk::Entry()
 									)
 							      ),
 						     gtkpack_(new Gtk::HBox(0,0),
-							      1, gtkadd(gtkset_border_width(new Gtk::Frame(_("Choose file")),2),
+							      1, gtkadd(gtkset_border_width(new Gtk::Frame(N("Choose file")),2),
 									gtkpack (gtkset_border_width(new Gtk::VBox(0,0),0),
 										 map { ${ "b_". $_ } = gtksignal_connect(new Gtk::CheckButton($files{ $_ }{desc}), clicked => sub{ $refcount_search++; gtkset_sensitive($yy,$refcount_search) }) } keys %files,
 										)
 								       ),
-							      0, gtkadd(gtkset_border_width(new Gtk::Frame(_("Calendar")),2),
+							      0, gtkadd(gtkset_border_width(new Gtk::Frame(N("Calendar")),2),
 									gtkpack__(gtkset_border_width(new Gtk::VBox(0,0),5),
 										  $cal_butt, $cal
 										 )
@@ -209,11 +209,11 @@ gtkadd($window,
 						    )
 					  )
 		   ),
-		!$::isExplain ? (1, gtkadd(new Gtk::Frame(_("Content of the file")),
+		!$::isExplain ? (1, gtkadd(new Gtk::Frame(N("Content of the file")),
 					 createScrolledWindow($log_text)
 					)) : (1, createScrolledWindow($log_text)),
 		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(new Gtk::HButtonBox,-end), 5),
-					      if_(!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail alert")), 
+					      if_(!$::isFile, gtksignal_connect(new Gtk::Button (N("Mail alert")), 
 										clicked => sub { eval { alert_config() };  
 												 if ($@ =~ /wizcancel/) {
 												     $::Wizard_no_previous = 1;
@@ -221,8 +221,8 @@ gtkadd($window,
 												     $::WizardWindow->destroy if defined $::WizardWindow;
 												     undef $::WizardWindow;
 												 } })),
-					      gtksignal_connect(new Gtk::Button (_("Save")), clicked => \&save),
-					      gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => \&quit)
+					      gtksignal_connect(new Gtk::Button (N("Save")), clicked => \&save),
+					      gtksignal_connect(new Gtk::Button ($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
 					     )
 		   )
        	       )
@@ -265,7 +265,7 @@ sub parse_file {
   my $i = 0;
   gtkadd(my $win_pb = (gtkset_modal new Gtk::Window(), 1),
 	 gtkpack(new Gtk::VBox(5,0), 
-		 " " . _("please wait, parsing file: %s", $files{ $_ }{desc}) . " ",
+		 " " . N("please wait, parsing file: %s", $files{ $_ }{desc}) . " ",
 		 my $pbar = new Gtk::ProgressBar()
 		)
 	);
@@ -389,7 +389,7 @@ sub alert_config {
     
     $::isWizard = 1;
     $::Wizard_pix_up = "wiz_logdrake.png";    # FIXME
-    $::Wizard_title = _("Mail alert");
+    $::Wizard_title = N("Mail alert");
     
     my $cron = q(#!/usr/bin/perl
 # generated by logdrake
@@ -406,30 +406,30 @@ my $initdir = "/etc/init.d";
   begin:
     $::Wizard_finished = 0;
     $::Wizard_no_previous = 1;
-    $in->ask_okcancel(_("Mail alert configuration"),
-                      _("Welcome to the mail configuration utility.\n\nHere, you'll be able to set up the alert system.\n"),
+    $in->ask_okcancel(N("Mail alert configuration"),
+                      N("Welcome to the mail configuration utility.\n\nHere, you'll be able to set up the alert system.\n"),
 		      1) or quit();
 
   step_service:
     undef $::Wizard_no_previous;
     undef $::Wizard_finished;
     my $service = {
-		  httpd => _("Apache World Wide Web Server"), 
-		  bind => _("Domain Name Resolver"),
-		  ftp => _("Ftp Server"),
-		  postfix => _("Postfix Mail Server"),
-		  samba => _("Samba Server"),
-		  sshd => _("SSH Server"),
-		  webmin => _("Webmin Service"),
-		  xinetd => _("Xinetd Service")
+		  httpd => N("Apache World Wide Web Server"), 
+		  bind => N("Domain Name Resolver"),
+		  ftp => N("Ftp Server"),
+		  postfix => N("Postfix Mail Server"),
+		  samba => N("Samba Server"),
+		  sshd => N("SSH Server"),
+		  webmin => N("Webmin Service"),
+		  xinetd => N("Xinetd Service")
 		 };
     my @installed_d = ();
     foreach $serv (keys %$service) {
 	-e "$initdir/$serv" && push (@installed_d,$serv);
     }
   
-    $in->ask_from(_("service setting"),
-		  _("You will receive an alert if one of the selected services is no more running"),
+    $in->ask_from(N("service setting"),
+		  N("You will receive an alert if one of the selected services is no more running"),
 		  [ map { { label => "$_", val => \${ $_ }, type => "bool", text => "$service->{ $_ }" } } @installed_d
 		  ]) or goto begin;
 
@@ -441,8 +441,8 @@ my $initdir = "/etc/init.d";
 
   step_load:
     undef $::Wizard_finished;
-    $in->ask_from(_("load setting"),
-		  _("You will receive an alert if the load is higher than this value"),
+    $in->ask_from(N("load setting"),
+		  N("You will receive an alert if the load is higher than this value"),
 		  [
 		   { label => "load ", val => \$load, type => 'range', min => 1, max => 50 },
 		  ]) or goto step_service;
@@ -455,8 +455,8 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
   step_output:
 #    $::Wizard_no_previous = 1;
     $::Wizard_finished = 1;
-    $in->ask_from(_("alert configuration"),
-		  _("Please enter your email address below "),
+    $in->ask_from(N("alert configuration"),
+		  N("Please enter your email address below "),
 		  [
 		   { label => "" },
 		   { label => "Email", val => \$email},
@@ -495,6 +495,6 @@ print F $r;
 
 sub save {
     $::isWizard=0;
-    $yy = $in->ask_file(_("Save as.."),"/root") or return;
+    $yy = $in->ask_file(N("Save as.."),"/root") or return;
     output($yy,$log_text->get_chars(0,$log_text->get_length()));
 }

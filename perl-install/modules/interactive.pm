@@ -13,7 +13,7 @@ sub config_window {
 	   my ($name, $format, $description) = @$_;
 	   push @l, { label => $name, help => "$description\n[$format]", val => \$conf{$name} };
     }
-    if ($in->ask_from("Module configuration", _("You can configure each parameter of the module here."), \@l)) {
+    if ($in->ask_from("Module configuration", N("You can configure each parameter of the module here."), \@l)) {
 	   my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
 	   if ($options) {
 		  modules::set_options($_->{driver}, $options);

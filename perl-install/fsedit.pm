@@ -18,16 +18,16 @@ use log;
 use fs;
 
 %suggestions = (
-  __("simple") => [
+  N_("simple") => [
     { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize =>5500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/home", size => 300 << 11, type =>0x483, ratio => 3 },
-  ], __("with /usr") => [
+  ], N_("with /usr") => [
     { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize =>1000 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize =>4000 << 11 },
     { mntpoint => "/home", size => 100 << 11, type =>0x483, ratio => 3 },
-  ], __("server") => [
+  ], N_("server") => [
     { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize => 400 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize =>4000 << 11 },
@@ -236,8 +236,8 @@ sub get_hds {
     if ($in) {
 	catch_cdie { hds($flags, sub {
 	    my ($dev, $err) = @_;
-            $in->ask_yesorno(_("Error"), 
-_("I can't read the partition table of device %s, it's too corrupted for me :(
+            $in->ask_yesorno(N("Error"), 
+N("I can't read the partition table of device %s, it's too corrupted for me :(
 I can try to go on, erasing over bad partitions (ALL DATA will be lost!).
 The other solution is to not allow DrakX to modify the partition table.
 (the error is %s)
@@ -498,8 +498,8 @@ sub get_root { &get_root_ || {} }
 #- do this before modifying $part->{type}
 sub check_type {
     my ($type, $hd, $part) = @_;
-    isThisFs("jfs", { type => $type }) && $part->{size} < 16 << 11 and die _("You can't use JFS for partitions smaller than 16MB");
-    isThisFs("reiserfs", { type => $type }) && $part->{size} < 32 << 11 and die _("You can't use ReiserFS for partitions smaller than 32MB");
+    isThisFs("jfs", { type => $type }) && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
+    isThisFs("reiserfs", { type => $type }) && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
 }
 
 sub package_needed_for_partition_type {
@@ -518,18 +518,18 @@ sub check_mntpoint {
     my ($mntpoint, $hd, $part, $all_hds) = @_;
 
     $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
-    $mntpoint =~ m|^/| or die _("Mount points must begin with a leading /");
-    $mntpoint ne $part->{mntpoint} && has_mntpoint($mntpoint, $all_hds) and die _("There is already a partition with mount point %s\n", $mntpoint);
+    $mntpoint =~ m|^/| or die N("Mount points must begin with a leading /");
+    $mntpoint ne $part->{mntpoint} && has_mntpoint($mntpoint, $all_hds) and die N("There is already a partition with mount point %s\n", $mntpoint);
 
     die "raid / with no /boot" 
       if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
-    die _("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
+    die N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
       if ($mntpoint eq '/' || $mntpoint eq '/boot') && isLVM($hd);
-    die _("This directory should remain within the root filesystem")
+    die N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin /root /mnt));
-    die _("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
+    die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
-    die _("You can't use an encrypted file system for mount point %s", $mntpoint)
+    die N("You can't use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;
@@ -596,9 +596,9 @@ sub auto_allocate {
     if ($before == listlength(fsedit::get_all_fstab($all_hds))) {
 	# find out why auto_allocate failed
 	if (my @l = grep { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
-	    die _("Not enough free space for auto-allocating");
+	    die N("Not enough free space for auto-allocating");
 	} else {
-	    die _("Nothing to do");
+	    die N("Nothing to do");
 	}
     }
 }
@@ -691,7 +691,7 @@ sub move {
 
     local (*F, *G);
     sysopen F, $hd->{file}, 0 or die '';
-    sysopen G, $hd2->{file}, 2 or die _("Error opening %s for writing: %s", $hd2->{file}, "$!");
+    sysopen G, $hd2->{file}, 2 or die N("Error opening %s for writing: %s", $hd2->{file}, "$!");
 
     my $base = $part1->{start};
     my $base2 = $part2->{start};

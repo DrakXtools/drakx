@@ -9,12 +9,12 @@ use common;
 my @all_servers = 
 (
   { 
-   name => _("Web Server"),
+   name => N("Web Server"),
    pkg => 'apache apache-mod_perl boa',
    ports => '80/tcp 443/tcp',
   },
   {
-   name => _("Domain Name Server"),
+   name => N("Domain Name Server"),
    pkg => 'bind',
    ports => '53/tcp 53/udp',
   },
@@ -29,12 +29,12 @@ my @all_servers =
    ports => '20/tcp 21/tcp',
   },
   {
-   name => _("Mail Server"),
+   name => N("Mail Server"),
    pkg => 'sendmail postfix qmail',
    ports => '25/tcp',
   },
   {
-   name => _("POP and IMAP Server"),
+   name => N("POP and IMAP Server"),
    pkg => 'imap courier-imap-pop',
    ports => '109/tcp 110/tcp 143/tcp',
   },
@@ -108,7 +108,7 @@ sub get_ports {
 sub set_ports {
     my ($disabled, $ports) = @_;
 
-    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die _("No network card");
+    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die N("No network card");
     $shorewall->{disabled} = $disabled;
     $shorewall->{ports} = $$ports;
 
@@ -126,13 +126,13 @@ sub get_conf {
     } elsif (my $shorewall = network::shorewall::read()) {
 	$shorewall->{disabled}, from_ports(\$shorewall->{ports});
     } else {
-	$in->ask_okcancel('', _("drakfirewall configurator
+	$in->ask_okcancel('', N("drakfirewall configurator
 
 This configures a personal firewall for this Mandrake Linux machine.
 For a powerful dedicated firewall solution, please look to the
 specialized MandrakeSecurity Firewall distribution."), 1) or return;
 
-	$in->ask_okcancel('', _("drakfirewall configurator
+	$in->ask_okcancel('', N("drakfirewall configurator
 
 Make sure you have configured your Network/Internet access with
 drakconnect before going any further."), 1) or return;
@@ -149,14 +149,14 @@ sub choose {
     my @l = grep { $_->{on} || !$_->{hide} } @all_servers;
 
     $in->ask_from_({
-		    messages => _("Which services would you like to allow the Internet to connect to?"),
-		    advanced_messages => _("You can enter miscellaneous ports. 
+		    messages => N("Which services would you like to allow the Internet to connect to?"),
+		    advanced_messages => N("You can enter miscellaneous ports. 
 Valid examples are: 139/tcp 139/udp.
 Have a look at /etc/services for information."),
 		    callbacks => {
 			complete => sub {
 			    if (my $invalid_port = check_ports_syntax($unlisted)) {
-				$in->ask_warn('', _("Invalid port given: %s.
+				$in->ask_warn('', N("Invalid port given: %s.
 The proper format is \"port/tcp\" or \"port/udp\", 
 where port is between 1 and 65535.", $invalid_port));
 				return 1;
@@ -164,9 +164,9 @@ where port is between 1 and 65535.", $invalid_port));
 			},
 		   }},
 		  [ 
-		   { text => _("Everything (no firewall)"), val => \$disabled, type => 'bool' },
+		   { text => N("Everything (no firewall)"), val => \$disabled, type => 'bool' },
 		   (map { { text => $_->{name}, val => \$_->{on}, type => 'bool', disabled => sub { $disabled } } } @l),
-		   { label => _("Other ports"), val => \$unlisted, advanced => 1, disabled => sub { $disabled } }
+		   { label => N("Other ports"), val => \$unlisted, advanced => 1, disabled => sub { $disabled } }
 		  ]) or return;
 
     $disabled, to_ports([ grep { $_->{on} } @l ], $unlisted);

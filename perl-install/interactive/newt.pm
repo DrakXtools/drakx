@@ -191,9 +191,9 @@ sub ask_fromW_real {
     my ($b1, $b2) = map { simplify_string($_) }
       (exists $common->{ok} ? 
        ($common->{ok}, $common->{cancel}) :
-       ($::isWizard ? _("Next") : _("Ok"), $common->{cancel} || ($::isWizard ? _("<- Previous") : _("Cancel"))));
+       ($::isWizard ? N("Next") : N("Ok"), $common->{cancel} || ($::isWizard ? N("<- Previous") : N("Cancel"))));
     #- b1 is always displayed, so giving it some label :-(
-    $b1 ||= $::isWizard ? _("Next") : _("Ok");
+    $b1 ||= $::isWizard ? N("Next") : N("Ok");
     my @b2 = if_($b2, $b2);
     my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($::isWizard ? (@b2, $b1) : ($b1, @b2));
     ($ok, $cancel) = ($cancel, $ok) if $::isWizard;

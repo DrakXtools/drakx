@@ -32,7 +32,7 @@ sub new {
 
 sub add {
     my ($raids, $part, $nb) = @_; $nb = nb($nb);
-    $raids->[$nb]{isMounted} and die _("Can't add a partition to _formatted_ RAID md%d", $nb);
+    $raids->[$nb]{isMounted} and die N("Can't add a partition to _formatted_ RAID md%d", $nb);
     inactivate_and_dirty($raids->[$nb]);
     $part->{notFormatted} = 1; $part->{isFormatted} = 0;
     $part->{raid} = $nb;
@@ -105,7 +105,7 @@ sub write {
     my ($raids, $file) = @_;
     local *F;
     local $\ = "\n";
-    open F, ">$file" or die _("Can't write file %s", $file);
+    open F, ">$file" or die N("Can't write file %s", $file);
 
     foreach (grep { $_ } @$raids) {
 	print F <<"EOF";
@@ -134,7 +134,7 @@ sub make {
     eval { modules::load(module($part)) };
     &write($raids, "/etc/raidtab");
     run_program::run("mkraid", "--really-force", $dev) or die
-	$::isStandalone ? _("mkraid failed (maybe raidtools are missing?)") : _("mkraid failed");
+	$::isStandalone ? N("mkraid failed (maybe raidtools are missing?)") : N("mkraid failed");
 }
 
 sub format_part {
@@ -150,7 +150,7 @@ sub verify {
     my ($raids) = @_;
     $raids or return;
     foreach (grep { $_ } @$raids) {
-	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die _("Not enough partitions for RAID level %d\n", $_->{level});
+	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die N("Not enough partitions for RAID level %d\n", $_->{level});
     }
 }
 

@@ -13,7 +13,7 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die _("usage: keyboarddrake [--expert] [keyboard]\n");
+/-h/ and die N("usage: keyboarddrake [--expert] [keyboard]\n");
 
 $::expert = /-expert/;
 
@@ -28,8 +28,8 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
   begin:
     $::isEmbedded and kill 'USR2', $::CCPID;
   choose:
-    $keyboard->{KEYBOARD} = $in->ask_from_listf(_("Keyboard"),
-						_("Please, choose your keyboard layout."),
+    $keyboard->{KEYBOARD} = $in->ask_from_listf(N("Keyboard"),
+						N("Please, choose your keyboard layout."),
 						\&keyboard::KEYBOARD2text,
 						[ keyboard::KEYBOARDs() ],
 						$keyboard->{KEYBOARD}) or goto end;
@@ -38,7 +38,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
 }
 
 if ($::expert) {
-    my $isNotDelete = !$in->ask_yesorno("BackSpace", _("Do you want the BackSpace to return Delete in console?"), 1);
+    my $isNotDelete = !$in->ask_yesorno("BackSpace", N("Do you want the BackSpace to return Delete in console?"), 1);
     $keyboard->{BACKSPACE} = $isNotDelete ? "BackSpace" : "Delete";
 }
 

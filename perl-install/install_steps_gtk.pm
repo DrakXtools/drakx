@@ -147,7 +147,7 @@ sub selectLanguage {
     $o->SUPER::selectLanguage;
   
     $o->ask_warn('',
-_("Your system is low on resources. You may have some problem installing
+N("Your system is low on resources. You may have some problem installing
 Mandrake Linux. If that occurs, you can try a text install instead. For this,
 press `F1' when booting on CDROM, then enter `text'.")) if $first_time && availableRamMB() < 60; # 60MB
 
@@ -158,10 +158,10 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $::live || @$l == 1 || !@$l2 and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
 
-    my $w = my_gtk->new(_("Install Class"));
+    my $w = my_gtk->new(N("Install Class"));
     my $focused;
     gtkadd($w->{window},
-	   gtkpack($w->create_box_with_title(_("Please choose one of the following classes of installation:")),
+	   gtkpack($w->create_box_with_title(N("Please choose one of the following classes of installation:")),
 		   (my @radios = gtkradio($def, @$l)),
 		   gtkadd(create_vbox(),
 			  map { my $v = $_; 
@@ -234,7 +234,7 @@ sub reallyChooseGroups {
 	translate($path), map { $entry->($_) } grep { $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
     };
     gtkadd($w->{window},
-	   gtkpack($w->create_box_with_title(_("Package Group Selection")),
+	   gtkpack($w->create_box_with_title(N("Package Group Selection")),
 		   gtkpack_(new Gtk::VBox(0,0),
 			   1, gtkpack_(new Gtk::HBox(0,0),
 			        $o->{meta_class} eq 'server' ? (
@@ -267,12 +267,12 @@ sub reallyChooseGroups {
 		   gtkadd(new Gtk::HBox(0,0),
 			  $w_size,
 			  if_($individual, do {
-			      my $check = Gtk::CheckButton->new(_("Individual package selection"));
+			      my $check = Gtk::CheckButton->new(N("Individual package selection"));
 			      $check->set_active($$individual);
 			      $check->signal_connect(clicked => sub { $$individual = $check->get_active });
 			      $check;
 			  }),
-			  gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { Gtk->main_quit }),
+			  gtksignal_connect(new Gtk::Button(N("Ok")), clicked => sub { Gtk->main_quit }),
 			 ),
 		  ),
 	  );
@@ -290,7 +290,7 @@ sub choosePackagesTree {
 
     my $common; $common = { get_status => sub {
 				my $size = pkgs::selectedSize($packages);
-				_("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available / sqr(1024));
+				N("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available / sqr(1024));
 			    },
 			    node_state => sub {
 				my $p = pkgs::packageByName($packages,$_[0]) or return;
@@ -322,7 +322,7 @@ sub choosePackagesTree {
 					}
 					my $root2 = join('|', map { translate($_) } split('\|', $root));
 					$add_node->($_, $root2)                    foreach sort @firstchoice;
-					$add_node->($_, $root2 . '|' . _("Other")) foreach sort @others;
+					$add_node->($_, $root2 . '|' . N("Other")) foreach sort @others;
 				    }
 				}
 			    },
@@ -332,11 +332,11 @@ sub choosePackagesTree {
 
 				my $imp = translate($pkgs::compssListDesc{$p->flag_base ? 5 : $p->rate});
 
-				my $info = $@ ? _("Bad package") :
-				  (_("Name: %s\n", $p->name) .
-				   _("Version: %s\n", $p->version . '-' . $p->release) .
-				   _("Size: %d KB\n", $p->size / 1024) .
-				   ($imp && _("Importance: %s\n", $imp)) . "\n" .
+				my $info = $@ ? N("Bad package") :
+				  (N("Name: %s\n", $p->name) .
+				   N("Version: %s\n", $p->version . '-' . $p->release) .
+				   N("Size: %d KB\n", $p->size / 1024) .
+				   ($imp && N("Importance: %s\n", $imp)) . "\n" .
 				   formatLines(c::from_utf8($p->description)));
 				return $info;
 			    },
@@ -358,13 +358,13 @@ sub choosePackagesTree {
 					$p->flag_selected or $size += $p->size;
 				    }
 				    if (pkgs::correctSize($size / sqr(1024)) > $available / sqr(1024)) {
-					return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
+					return $o->ask_warn('', N("You can't select this package as there is not enough space left to install it"));
 				    }
 
 				    @l > @n && $common->{state}{auto_deps} and
 				      $o->ask_okcancel('', [ $isSelection ? 
-							     _("The following packages are going to be installed") :
-							     _("The following packages are going to be removed"),
+							     N("The following packages are going to be installed") :
+							     N("The following packages are going to be removed"),
 							     common::formatList(20, sort @l) ], 1) || return;
 				    if ($isSelection) {
 					pkgs::selectPackage($packages, $_) foreach @n;
@@ -376,11 +376,11 @@ sub choosePackagesTree {
 					$set_state->($_, $p->flag_selected ? 'selected' : 'unselected');
 				    }
 				} else {
-				    $o->ask_warn('', _("You can't select/unselect this package"));
+				    $o->ask_warn('', N("You can't select/unselect this package"));
 				}
 			    },
 			    grep_allowed_to_toggle => sub {
-				grep { $_ ne _("Other") && !pkgs::packageByName($packages, $_)->flag_base } @_;
+				grep { $_ ne N("Other") && !pkgs::packageByName($packages, $_)->flag_base } @_;
 			    },
 			    grep_unselected => sub {
 				grep { !pkgs::packageByName($packages, $_)->flag_selected } @_;
@@ -388,30 +388,30 @@ sub choosePackagesTree {
 			    check_interactive_to_toggle => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return;
 				if ($p->flag_base) {
-				    $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
+				    $o->ask_warn('', N("This is a mandatory package, it can't be unselected"));
 				} elsif ($p->flag_installed && !$p->flag_upgrade) {
-				    $o->ask_warn('', _("You can't unselect this package. It is already installed"));
+				    $o->ask_warn('', N("You can't unselect this package. It is already installed"));
 				} elsif ($p->flag_selected && $p->flag_installed) {
 				    if ($::expert) {
-					$o->ask_yesorno('', _("This package must be upgraded.\nAre you sure you want to deselect it?")) or return;
+					$o->ask_yesorno('', N("This package must be upgraded.\nAre you sure you want to deselect it?")) or return;
 					return 1;
 				    } else {
-					$o->ask_warn('', _("You can't unselect this package. It must be upgraded"));
+					$o->ask_warn('', N("You can't unselect this package. It must be upgraded"));
 				    }
 				} else { return 1 }
 				return;
 			    },
-			    auto_deps => _("Show automatically selected packages"),
-			    ok => _("Install"),
-			    cancel => $limit_to_medium && _("Cancel"),
+			    auto_deps => N("Show automatically selected packages"),
+			    ok => N("Install"),
+			    cancel => $limit_to_medium && N("Cancel"),
 			    icons => [ { icon         => 'floppy',
-					 help         => _("Load/Save on floppy"),
-					 wait_message => _("Updating package selection"),
+					 help         => N("Load/Save on floppy"),
+					 wait_message => N("Updating package selection"),
 					 code         => sub { $o->loadSavePackagesOnFloppy($packages); 1 },
 				       }, 
 				       if_(0, 
 				       { icon         => 'feather',
-					 help         => _("Minimal install"),
+					 help         => N("Minimal install"),
 					 code         => sub {
 					     
 					     install_any::unselectMostPackages($o);
@@ -426,7 +426,7 @@ sub choosePackagesTree {
 			  };
 
     $o->set_help('choosePackagesTree');
-    $o->ask_browse_tree_info('', _("Choose the packages you want to install"), $common);
+    $o->ask_browse_tree_info('', N("Choose the packages you want to install"), $common);
 }
 
 #------------------------------------------------------------------------------
@@ -442,32 +442,32 @@ sub installPackages {
 
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
-    my $w = my_gtk->new(_("Installing"));
+    my $w = my_gtk->new(N("Installing"));
     $w->sync;
     my $text = new Gtk::Label;
     my ($advertising, $change_time, $i);
     my $show_advertising if 0;
     $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
-    my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
+    my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (N("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
     $w->{rwindow}->set_policy(1, 1, 1);
     gtkadd($w->{window}, my $box = new Gtk::VBox(0,10));
     $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.6, 0),
 			   $msg, $progress,
 			   create_packtable({},
-					    [_("Time remaining "), $msg_time_remaining],
-#					    [_("Total time "), $msg_time_total],
+					    [N("Time remaining "), $msg_time_remaining],
+#					    [N("Total time "), $msg_time_total],
 					   ),
 			   $text,
 			   $progress_total,
 			   gtkadd(create_hbox(),
-				  my $cancel = new Gtk::Button(_("Cancel")),
-				  my $details = new Gtk::Button(_("Details")),
+				  my $cancel = new Gtk::Button(N("Cancel")),
+				  my $details = new Gtk::Button(N("Details")),
 				  ),
 			  )), 0, 1, 0);
     $details->hide if !@install_any::advertising_images;
     $w->sync;
-    $msg->set(_("Please wait, preparing installation..."));
+    $msg->set(N("Please wait, preparing installation..."));
     gtkset_mousecursor_normal($cancel->window);
     gtkset_mousecursor_normal($details->window);
     my $advertize = sub {
@@ -551,12 +551,12 @@ sub installPackages {
 	    $nb = $amount;
 	    $total_size = $total; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set(_("%d packages", $nb));
+	    $msg->set(N("%d packages", $nb));
 	    $w->flush;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    $progress->update(0);
 	    my $p = $data->{depslist}[$id];
-	    $msg->set(_("Installing package %s", $p->name));
+	    $msg->set(N("Installing package %s", $p->name));
 	    $current_total_size += $last_size;
 	    $last_size = $p->size;
 	    $text->set((split /\n/, c::from_utf8($p->summary))[0] || '');
@@ -593,8 +593,8 @@ sub installPackages {
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
 	    my $time = time();
-	    my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($install_steps_interactive::com_license), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept");
-            $r &&= $o->ask_okcancel('', _("Change your Cd-Rom!
+	    my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($install_steps_interactive::com_license), [ N_("Accept"), N_("Refuse") ], "Accept") eq "Accept");
+            $r &&= $o->ask_okcancel('', N("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
@@ -608,11 +608,11 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
       sub {
 	  if ($@ =~ /^error ordering package list: (.*)/) {
 	      $o->ask_yesorno('', [
-_("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and return 1;
+N("There was an error ordering packages:"), $1, N("Go on anyway?") ], 1) and return 1;
 	      ${$_[0]} = "already displayed";
 	  } elsif ($@ =~ /^error installing package list: (.*)/) {
 	      $o->ask_yesorno('', [
-_("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and return 1;
+N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and return 1;
 	      ${$_[0]} = "already displayed";
 	  }
 	  0;

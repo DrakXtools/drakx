@@ -23,7 +23,7 @@ if ($::isEmbedded) {
 my $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
-/-h/ and die _("no help implemented yet.\n");
+/-h/ and die N("no help implemented yet.\n");
 /-version/ and die 'version: $Id$'."\n";
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
@@ -31,7 +31,7 @@ $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPI
 
 #- verification of package image magik
 if(!$in->do_pkgs->is_installed('ImageMagick')){
-	 $in->ask_okcancel(_("Error"),_("package 'ImageMagick' is required for correct working.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
+	 $in->ask_okcancel(N("Error"),N("package 'ImageMagick' is required for correct working.\nClick \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit")) 
 		 and $in->do_pkgs->install('ImageMagick')
 		 or $::isEmbedded ? kill(USR1, $::CCPID) : &CloseAppWindow ;
 }
@@ -75,14 +75,14 @@ my %scale_size = ('tx'=> ($theme{'res'}{'w'} / $font_size{'w'}),
 		  'ph'=> $theme{'res'}{'h'},
 	      );
 
-my %first = ('frame'=>new Gtk::Frame(_("first step creation")),
-	     'widget'=>{ 'label'=> {	'res'=>_("final resolution"),
-	   				'file'=>_("choose image file"),
-					'name'=>_("Theme name")
+my %first = ('frame'=>new Gtk::Frame(N("first step creation")),
+	     'widget'=>{ 'label'=> {	'res'=>N("final resolution"),
+	   				'file'=>N("choose image file"),
+					'name'=>N("Theme name")
 				   },
-			 'button'=>{ #'boot_conf'=>_("Make bootsplash step 2"),
-				     #'lilo_conf'=>_("Go to lilosplash configuration"),
-				     'file'=>_("Browse"),
+			 'button'=>{ #'boot_conf'=>N("Make bootsplash step 2"),
+				     #'lilo_conf'=>N("Go to lilosplash configuration"),
+				     'file'=>N("Browse"),
 				 },
 			 'combo'=> {'res'=>['800x600', '1024x768', '1280x1024'],
 		       		    'name'=>[ $theme{'name'} , &giv_exist_thm]
@@ -96,16 +96,16 @@ my %first = ('frame'=>new Gtk::Frame(_("first step creation")),
 					#'kill'
 					],
 	     );
-my %boot_conf_frame = ('frame' => new Gtk::Frame( _("Configure bootsplash picture") ),
-		       'widget'=> { 'label' => { 'tx'=> _("x coordinate of text box\nin number of character"),
-						 'ty'=> _("y coordinate of text box\nin number of character"),
-						 'tw'=> _("text width"),
-						 'th'=> _("text box height"),
-						 'px'=> _("the progress bar x coordinate\nof its upper left corner"),
-						 'py'=> _("the progress bar y coordinate\nof its upper left corner"),
-						 'pw'=> _("the width of the progress bar"),
-						 'ph'=> _("the heigth of the progress bar"),
-						 'pc'=> _("the color of the progress bar")
+my %boot_conf_frame = ('frame' => new Gtk::Frame( N("Configure bootsplash picture") ),
+		       'widget'=> { 'label' => { 'tx'=> N("x coordinate of text box\nin number of character"),
+						 'ty'=> N("y coordinate of text box\nin number of character"),
+						 'tw'=> N("text width"),
+						 'th'=> N("text box height"),
+						 'px'=> N("the progress bar x coordinate\nof its upper left corner"),
+						 'py'=> N("the progress bar y coordinate\nof its upper left corner"),
+						 'pw'=> N("the width of the progress bar"),
+						 'ph'=> N("the heigth of the progress bar"),
+						 'pc'=> N("the color of the progress bar")
 					       },
 				#- must set scale values to true to get them created by mk_frame
 				     'scale' => {'tx'=> 1,
@@ -117,15 +117,15 @@ my %boot_conf_frame = ('frame' => new Gtk::Frame( _("Configure bootsplash pictur
 						 'pw'=> 1,
 						 'ph'=> 1,
 				    		},
-				     'button' => { #'annul'=> _("Go back"),
-				     		   'prev'=>_("Preview"),
-				     			'kill'=>_("Quit"),
-				     			'save'=>_("Save theme"),
-						   		'pc'=> _("Choose color"),
+				     'button' => { #'annul'=> N("Go back"),
+				     		   'prev'=>N("Preview"),
+				     			'kill'=>N("Quit"),
+				     			'save'=>N("Save theme"),
+						   		'pc'=> N("Choose color"),
 						   
 						 },
-				     'check'  => { 'logo' => _("Display logo on Console" ),
-				     		   'quiet'=> _("Make kernel message quiet by default"),
+				     'check'  => { 'logo' => N("Display logo on Console" ),
+				     		   'quiet'=> N("Make kernel message quiet by default"),
 						 },
 				   },
 		       'pos'=> [ 'tx 1' , 
@@ -159,17 +159,17 @@ $first{'widgets'}{'combo'}{'res'}->entry->signal_connect( changed => sub {
 	($theme{'res'}{'w'},$theme{'res'}{'h'}) = $theme{'res'}{'res'} =~ /([^x]+)x([^x]+)/;
 	&set_scale_size;
 	$boot_conf_frame{'frame'}->destroy ;
-	$boot_conf_frame{'frame'} = new Gtk::Frame(_("Configure bootsplash picture") );
+	$boot_conf_frame{'frame'} = new Gtk::Frame(N("Configure bootsplash picture") );
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{'frame'});
-	member( $theme{'name'}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf or $in->ask_warn(_("Notice"),_("This theme haven't yet any bootsplash in %s !",$theme{'res'}{'res'}));
+	member( $theme{'name'}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf or $in->ask_warn(N("Notice"),N("This theme haven't yet any bootsplash in %s !",$theme{'res'}{'res'}));
       });
 #- go to bootsplash configuration step 2
 #$first{'widgets'}{'button'}{'boot_conf'}->signal_connect( clicked => sub{show_act(\%boot_conf_frame) } );
 #- image file selection for new theme
 $first{'widgets'}{'button'}{'file'}->signal_connect( clicked =>sub{
 	my $file_dialog = new Gtk::FileSelection('choose image');
-	$file_dialog->set_filename( ( $first{'widgets'}{'label'}{'file'}->get ne _("choose image file") )?$first{'widgets'}{'label'}{'file'}->get:'~/' );
+	$file_dialog->set_filename( ( $first{'widgets'}{'label'}{'file'}->get ne N("choose image file") )?$first{'widgets'}{'label'}{'file'}->get:'~/' );
 	$file_dialog->cancel_button->signal_connect( clicked => sub{ $file_dialog->destroy} );
 	$file_dialog->ok_button->signal_connect( clicked => sub{ $first{'widgets'}{'label'}{'file'}->set_text($file_dialog->get_filename) ; $file_dialog->destroy ;});
 	$file_dialog->show;
@@ -209,7 +209,7 @@ sub CloseAppWindow{
 
 #- Desc  => write config file for boot theme and copy image in the right location
 sub write_boot_thm{
-	my $w = $in->wait_message('',_("saving Bootsplash theme..."));
+	my $w = $in->wait_message('',N("saving Bootsplash theme..."));
   	&set_thm_values;
   	my $logo = ($boot_conf_frame{'widgets'}{'check'}{'logo'}->get_active)?'yes':'no';
 	my $quiet = ($boot_conf_frame{'widgets'}{'check'}{'quiet'}->get_active)?'yes':'no';
@@ -326,7 +326,7 @@ sub which_res_exist{
 		   and last;
 		
 	}
-	$is_ok == 1  or $in->ask_warn(_("Notice"),_("This theme haven't yet any bootsplash in %s !",$theme{'res'}{'res'})) and return 0;
+	$is_ok == 1  or $in->ask_warn(N("Notice"),N("This theme haven't yet any bootsplash in %s !",$theme{'res'}{'res'})) and return 0;
 	return 1;
 }	
 
@@ -432,7 +432,7 @@ sub make_boot_frame{
 	&mk_frame(\$VB,\%boot_conf_frame);
 	#- open a color choose box
 	$boot_conf_frame{'widgets'}{'button'}{'pc'}->signal_connect( clicked => sub {
-		$color = new Gtk::ColorSelectionDialog(_("ProgressBar color selection"));
+		$color = new Gtk::ColorSelectionDialog(N("ProgressBar color selection"));
 		$theme{'boot_conf'}{'pc'} =~ m/0x(.{2})(.{2})(.{2})/;
 		my @rgb = map { hex($_)/255 }  ($1 ,$2, $3);
 		$color->colorsel->set_color(@rgb);#$theme{'boot_conf'}{'pc'});
@@ -453,7 +453,7 @@ sub make_boot_frame{
 	#- made a preview
 	$boot_conf_frame{'widgets'}{'button'}{'prev'}->signal_connect( clicked => sub{
 	  if(! -f $first{'widgets'}{'label'}{'file'}->get) {
-	    $in->ask_warn(_("Notice"),_("You must choose an image file first!"));
+	    $in->ask_warn(N("Notice"),N("You must choose an image file first!"));
 	    return 0;
 	  }
 	  #- calculation of the 2 angle of text box and progress bar
@@ -462,7 +462,7 @@ sub make_boot_frame{
 	  my $text_br = ($theme{'boot_conf'}{'tw'}*$font_size{'w'}+$theme{'boot_conf'}{'tx'}*$font_size{'w'}).','.($theme{'boot_conf'}{'th'}*$font_size{'h'}+$theme{'boot_conf'}{'ty'}*$font_size{'h'});
 	  my $progress_tl = $theme{'boot_conf'}{'px'}.','.$theme{'boot_conf'}{'py'};
 	  my $progress_br = ($theme{'boot_conf'}{'px'}+$theme{'boot_conf'}{'pw'}).','.($theme{'boot_conf'}{'py'}+$theme{'boot_conf'}{'ph'});
-	  my $w = $in->wait_message('', _("Generating preview ..."));
+	  my $w = $in->wait_message('', N("Generating preview ..."));
 	  $x++;
 		local $txt_tl_x 	= $theme{'boot_conf'}{'tx'}*$font_size{'w'}; 
 		local $txt_tl_y 	= $theme{'boot_conf'}{'ty'}*$font_size{'h'};
@@ -508,7 +508,7 @@ sub show_prev{
  $prev_window
    or ($prev_window = new Gtk::Window('toplevel') and $prev_window->set_policy( 0, 1, 1 ) ); 
 #-PO  First %s is theme name, second %s (in parenthesis) is resolution
- $prev_window->set_title(_("%s BootSplash (%s) preview",$theme{'name'},$theme{'res'}{'res'}));
+ $prev_window->set_title(N("%s BootSplash (%s) preview",$theme{'name'},$theme{'res'}{'res'}));
  $prev_pic = gtkcreate_png_pixbuf($file);
  $prev_pic->scale_simple($theme{'res'}{'w'},$theme{'res'}{'h'},0);
  $prev_pix = $prev_pic->render_pixmap_and_mask($prev_pic);

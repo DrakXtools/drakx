@@ -101,8 +101,8 @@ sub ask_fromW {
 
     print "</table>\n";
     print $q->p();
-    print $q->submit(-name => 'ok_submit', -value => $common->{ok} || _("Ok"));
-    print $q->submit(-name => 'cancel_submit', -value => $common->{cancel} || _("Cancel")) if $common->{cancel} || !exists $common->{ok};
+    print $q->submit(-name => 'ok_submit', -value => $common->{ok} || N("Ok"));
+    print $q->submit(-name => 'cancel_submit', -value => $common->{cancel} || N("Cancel")) if $common->{cancel} || !exists $common->{ok};
     print $q->hidden('state'), $q->hidden('uid');
     print $q->end_form, $q->end_html;
 
@@ -116,8 +116,8 @@ sub ask_fromW {
 	last if $q->param('uid') == $uid;
 
 	open_stdout(); # re-open for writing
-	cont_stdout(_("Error"));
-	print $q->h1(_("Error")), $q->p("Sorry, you can't go back");
+	cont_stdout(N("Error"));
+	print $q->h1(N("Error")), $q->p("Sorry, you can't go back");
 	goto redisplay;
     }
     each_index {
@@ -150,7 +150,7 @@ sub wait_message_nextW {
 }
 sub wait_message_endW {
     my ($o, $w) = @_;
-    p(_("Done"));
+    p(N("Done"));
     print "\n" . CGI::p();
 }
 

@@ -54,7 +54,7 @@ sub lilo_choice
     my $loader = arch() =~ /ppc/ ? "Yaboot" : "LILO";
     if ($@) {
 	$in->ask_warn('', 
-		      [ _("Installation of %s failed. The following error occured:", $loader),
+		      [ N("Installation of %s failed. The following error occured:", $loader),
 			grep { !/^Warning:/ } cat_("/tmp/.error") ]);
 	unlink "/tmp/.error";
 	goto ask;

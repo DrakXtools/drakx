@@ -105,12 +105,12 @@ sub setupBootloader {
     if ($automatic) {
 	#- automatic
     } elsif ($semi_auto) {
-	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
+	my @l = (N_("First sector of drive (MBR)"), N_("First sector of boot partition"));
 
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
 	if (arch() =~ /sparc/) {
-	    $b->{use_partition} = $in->ask_from_list_(_("SILO Installation"),
-						      _("Where do you want to install the bootloader?"),
+	    $b->{use_partition} = $in->ask_from_list_(N("SILO Installation"),
+						      N("Where do you want to install the bootloader?"),
 						      \@l, $l[$b->{use_partition}]) or return 0;
 	} elsif (arch() =~ /ppc/) {
 		if (defined $partition_table::mac::bootstrap_part) {
@@ -122,33 +122,33 @@ sub setupBootloader {
 	} else {
 	    my $boot = $hds->[0]{device};
 	    my $onmbr = "/dev/$boot" eq $b->{boot};
-	    $b->{boot} = "/dev/" . ($in->ask_from_list_(_("LILO/grub Installation"),
-							_("Where do you want to install the bootloader?"),
+	    $b->{boot} = "/dev/" . ($in->ask_from_list_(N("LILO/grub Installation"),
+							N("Where do you want to install the bootloader?"),
 							\@l, $l[!$onmbr]) eq $l[0] 
 				    ? $boot : fsedit::get_root($fstab, 'boot')->{device});
 	}
     } else {
 	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' :"setupBootloader") unless $::isStandalone; #- TO MERGE ?
 
-	my @silo_install_lang = (_("First sector of drive (MBR)"), _("First sector of boot partition"));
+	my @silo_install_lang = (N("First sector of drive (MBR)"), N("First sector of boot partition"));
 	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
 
 	my %bootloaders = (if_(exists $b->{methods}{silo},
-			       __("SILO")                     => sub { $b->{methods}{silo} = 1 }),
+			       N_("SILO")                     => sub { $b->{methods}{silo} = 1 }),
 			   if_(exists $b->{methods}{lilo},
-			       __("LILO with text menu")      => sub { $b->{methods}{lilo} = "lilo-menu" },
-			       __("LILO with graphical menu") => sub { $b->{methods}{lilo} = "lilo-graphic" }),
+			       N_("LILO with text menu")      => sub { $b->{methods}{lilo} = "lilo-menu" },
+			       N_("LILO with graphical menu") => sub { $b->{methods}{lilo} = "lilo-graphic" }),
 			   if_(exists $b->{methods}{grub},
 			       #- put lilo if grub is chosen, so that /etc/lilo.conf is generated
-			       __("Grub")                     => sub { $b->{methods}{grub} = 1;
+			       N_("Grub")                     => sub { $b->{methods}{grub} = 1;
 								       exists $b->{methods}{lilo}
 									 and $b->{methods}{lilo} = "lilo-menu" }),
 			   if_(exists $b->{methods}{loadlin},
-			       __("Boot from DOS/Windows (loadlin)") => sub { $b->{methods}{loadlin} = 1 }),
+			       N_("Boot from DOS/Windows (loadlin)") => sub { $b->{methods}{loadlin} = 1 }),
 			   if_(exists $b->{methods}{yaboot},
-			       __("Yaboot") => sub { $b->{methods}{yaboot} = 1 }),
+			       N_("Yaboot") => sub { $b->{methods}{yaboot} = 1 }),
 			  );
-	my $bootloader = arch() =~ /sparc/ ? __("SILO") : arch() =~ /ppc/ ? __("Yaboot") : __("LILO with graphical menu");
+	my $bootloader = arch() =~ /sparc/ ? N_("SILO") : arch() =~ /ppc/ ? N_("Yaboot") : N_("LILO with graphical menu");
 	my $profiles = bootloader::has_profiles($b);
 	my $memsize = bootloader::get_append($b, 'mem');
 	my $prev_clean_tmp = my $clean_tmp = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
@@ -156,46 +156,46 @@ sub setupBootloader {
 	$b->{password2} ||= $b->{password} ||= '';
 	$b->{vga} ||= 'normal';
 	if (arch() !~ /ppc/) {
-	$in->ask_from('', _("Bootloader main options"), [
-{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
+	$in->ask_from('', N("Bootloader main options"), [
+{ label => N("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
     arch() =~ /sparc/ ? (
-{ label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
+{ label => N("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : if_(arch() !~ /ia64/,
-{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
-{ label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact"), advanced => 1 },
-{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
+{ label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
+{ label => N("Compact"), val => \$b->{compact}, type => "bool", text => N("compact"), advanced => 1 },
+{ label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
 ),
-{ label => _("Delay before booting default image"), val => \$b->{timeout} },
+{ label => N("Delay before booting default image"), val => \$b->{timeout} },
     if_($security >= 4 || $b->{password} || $b->{restricted},
-{ label => _("Password"), val => \$b->{password}, hidden => 1 },
-{ label => _("Password (again)"), val => \$b->{password2}, hidden => 1 },
-{ label => _("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => _("restrict") },
+{ label => N("Password"), val => \$b->{password}, hidden => 1 },
+{ label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
+{ label => N("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => N("restrict") },
     ),
-{ label => _("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
-{ label => _("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
+{ label => N("Clean /tmp at each boot"), val => \$clean_tmp, type => 'bool', advanced => 1 },
+{ label => N("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$memsize, advanced => 1 },
     if_(detect_devices::isLaptop(),
-{ label => _("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
+{ label => N("Enable multi profiles"), val => \$profiles, type => 'bool', advanced => 1 },
     ),
 ],
 				 complete => sub {
-				     !$memsize || $memsize =~ /K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', _("Give the ram size in MB")), return 1;
-#-				     $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
-				     $b->{restricted} && !$b->{password} and $in->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
-				     $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return 1;
+				     !$memsize || $memsize =~ /K$/ || $memsize =~ s/^(\d+)M?$/$1M/i or $in->ask_warn('', N("Give the ram size in MB")), return 1;
+#-				     $security > 4 && length($b->{password}) < 6 and $in->ask_warn('', N("At this level of security, a password (and a good one) in lilo is requested")), return 1;
+				     $b->{restricted} && !$b->{password} and $in->ask_warn('', N("Option ``Restrict command line options'' is of no use without a password")), return 1;
+				     $b->{password} eq $b->{password2} or !$b->{restricted} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1;
 				     0;
 				 }
 				) or return 0;
 	} else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
-	$in->ask_from('', _("Bootloader main options"), [
-	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
-	{ label => _("Init Message"), val => \$b->{'init-message'} },
-	{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
-	{ label => _("Open Firmware Delay"), val => \$b->{delay} },
-	{ label => _("Kernel Boot Timeout"), val => \$b->{timeout} },
-	{ label => _("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
-	{ label => _("Enable OF Boot?"), val => \$b->{enableofboot}, type => "bool" },
-	{ label => _("Default OS?"), val=> \$b->{defaultos}, list => [ 'linux', 'macos', 'macosx', 'darwin' ] },
+	$in->ask_from('', N("Bootloader main options"), [
+	{ label => N("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
+	{ label => N("Init Message"), val => \$b->{'init-message'} },
+	{ label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
+	{ label => N("Open Firmware Delay"), val => \$b->{delay} },
+	{ label => N("Kernel Boot Timeout"), val => \$b->{timeout} },
+	{ label => N("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
+	{ label => N("Enable OF Boot?"), val => \$b->{enableofboot}, type => "bool" },
+	{ label => N("Default OS?"), val=> \$b->{defaultos}, list => [ 'linux', 'macos', 'macosx', 'darwin' ] },
 	]) or return 0;				
 	}
 	
@@ -207,7 +207,7 @@ sub setupBootloader {
 	#- at least one method
 	grep_each { $::b } %{$b->{methods}} or return 0;
 
-	$b->{use_partition} = $silo_install_lang eq _("First sector of drive (MBR)") ? 0 : 1;
+	$b->{use_partition} = $silo_install_lang eq N("First sector of drive (MBR)") ? 0 : 1;
 
 	bootloader::set_profiles($b, $profiles);
 	bootloader::add_append($b, "mem", $memsize);
@@ -229,7 +229,7 @@ sub setupBootloader {
 	is_empty_hash_ref($b->{bios}) && #- some bios mapping already there
 	arch() !~ /ppc/) {
 	log::l("mixed_kind_of_disks");
-	my $hd = $in->ask_from_listf('', _("You decided to install the bootloader on a partition.
+	my $hd = $in->ask_from_listf('', N("You decided to install the bootloader on a partition.
 This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
 
 On which drive are you booting?"), \&partition_table::description, $hds) or goto &setupBootloader;
@@ -245,7 +245,7 @@ On which drive are you booting?"), \&partition_table::description, $hds) or goto
 	$in->ask_from_(
 		{
 		 messages => 
-_("Here are the entries on your boot menu so far.
+N("Here are the entries on your boot menu so far.
 You can add some more or change the existing ones."),
 		 ok => '',
 },
@@ -255,7 +255,7 @@ You can add some more or change the existing ones."),
 		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
 		      translate($e);
 		}, list => [ @{$b->{entries}} ], allow_empty_list => 1 },
-		  (map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $c = $s; 1 } } } (if_(@{$b->{entries}} > 0, __("Modify")), __("Add"), __("Done"))),
+		  (map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $c = $s; 1 } } } (if_(@{$b->{entries}} > 0, N_("Modify")), N_("Add"), N_("Done"))),
 		]
 	);
 	!$c || $c eq "Done" and last;
@@ -263,9 +263,9 @@ You can add some more or change the existing ones."),
 	if ($c eq "Add") {
 	    my @labels = map { $_->{label} } @{$b->{entries}};
 	    my $prefix;
-	    if ($in->ask_from_list_('', _("Which type of entry do you want to add?"),
-				    [ __("Linux"), arch() =~ /sparc/ ? __("Other OS (SunOS...)") : arch() =~ /ppc/ ? 
-				   __("Other OS (MacOS...)") : __("Other OS (windows...)") ]
+	    if ($in->ask_from_list_('', N("Which type of entry do you want to add?"),
+				    [ N_("Linux"), arch() =~ /sparc/ ? N_("Other OS (SunOS...)") : arch() =~ /ppc/ ? 
+				   N_("Other OS (MacOS...)") : N_("Other OS (windows...)") ]
 				   ) eq "Linux") {
 		$e = { type => 'image',
 		       root => '/dev/' . fsedit::get_root($fstab)->{device}, #- assume a good default.
@@ -284,53 +284,53 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-{ label => _("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
-{ label => _("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
-{ label => _("Append"), val => \$e->{append} },
+{ label => N("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
+{ label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
+{ label => N("Append"), val => \$e->{append} },
   if_(arch !~ /ppc|ia64/,
-{ label => _("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert },
+{ label => N("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert },
 ),
-{ label => _("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ], not_edit => 0 },
-{ label => _("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
+{ label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ], not_edit => 0 },
+{ label => N("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
 	    );
 	    @l = @l[0..2] unless $::expert;
 	} else {
 	    @l = ( 
-{ label => _("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
+{ label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 if_(arch() !~ /sparc|ppc|ia64/,
-{ label => _("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
-{ label => _("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
+{ label => N("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
+{ label => N("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
 ),
 	    );
 	    @l = $l[0] unless $::expert;
 	}
 if (arch() !~ /ppc/) {
 	@l = (
-{ label => _("Label"), val => \$e->{label} },
+{ label => N("Label"), val => \$e->{label} },
 @l,
-{ label => _("Default"), val => \$default, type => 'bool' },
+{ label => N("Default"), val => \$default, type => 'bool' },
 	);
 } else {
-        unshift @l, { label => _("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
+        unshift @l, { label => N("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
 	if ($e->{type} eq "image") {
-		@l = ({ label => _("Label"), val => \$e->{label} },
-		$::expert ? @l[1..4] : (@l[1..2], { label => _("Append"), val => \$e->{append} }) ,
-		if_($::expert, { label => _("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
+		@l = ({ label => N("Label"), val => \$e->{label} },
+		$::expert ? @l[1..4] : (@l[1..2], { label => N("Append"), val => \$e->{append} }) ,
+		if_($::expert, { label => N("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
 		if_($::expert, $l[5]),
-		{ label => _("NoVideo"), val => \$e->{novideo}, type => 'bool' },
-		{ label => _("Default"), val => \$default, type => 'bool' }
+		{ label => N("NoVideo"), val => \$e->{novideo}, type => 'bool' },
+		{ label => N("Default"), val => \$default, type => 'bool' }
 		);
 	}
 }
 
 	if ($in->ask_from_(
 	    { 
-	     if_($c ne "Add", cancel => _("Remove entry")),
+	     if_($c ne "Add", cancel => N("Remove entry")),
 	     callbacks => {
 	       complete => sub {
-		   $e->{label} or $in->ask_warn('', _("Empty label not allowed")), return 1;
-		   $e->{kernel_or_dev} or $in->ask_warn('', $e->{type} eq 'image' ? _("You must specify a kernel image") : _("You must specify a root partition")), return 1;
-		   member(lc $e->{label}, map { lc $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', _("This label is already used")), return 1;
+		   $e->{label} or $in->ask_warn('', N("Empty label not allowed")), return 1;
+		   $e->{kernel_or_dev} or $in->ask_warn('', $e->{type} eq 'image' ? N("You must specify a kernel image") : N("You must specify a root partition")), return 1;
+		   member(lc $e->{label}, map { lc $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', N("This label is already used")), return 1;
 		   0;
 	       } } }, \@l)) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
@@ -654,12 +654,12 @@ sub load_category__prompt_for_more {
 
     while (1) {
 	my $msg = @l ?
-	  [ _("Found %s %s interfaces", join(", ", @l), $msg_type),
-	    _("Do you have another one?") ] :
-	  _("Do you have any %s interfaces?", $msg_type);
+	  [ N("Found %s %s interfaces", join(", ", @l), $msg_type),
+	    N("Do you have another one?") ] :
+	  N("Do you have any %s interfaces?", $msg_type);
 
-	my $opt = [ __("Yes"), __("No") ];
-	push @$opt, __("See hardware info") if $::expert;
+	my $opt = [ N_("Yes"), N_("No") ];
+	push @$opt, N_("See hardware info") if $::expert;
 	#my $r = $in->ask_from_list_('', $msg, $opt, "No") or die 'already displayed';
 	my $r = $in->ask_from_list_('', $msg, $opt, "No") or return;
 	if ($r eq "No") { return @l }
@@ -676,8 +676,8 @@ sub wait_load_module {
 #-PO: the first %s is the card type (scsi, network, sound,...)
 #-PO: the second is the vendor+model name
     $in->wait_message('',
-		     [ _("Installing driver for %s card %s", $category, $text),
-		       if_($::expert, _("(module %s)", $module))
+		     [ N("Installing driver for %s card %s", $category, $text),
+		       if_($::expert, N("(module %s)", $module))
 		     ]);
 }
 
@@ -688,15 +688,15 @@ sub load_module__ask_options {
 
     if (@parameters) {
 	$in->ask_from('', 
-		      _("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
+		      N("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
 		      [ map { { label => $_->[0] . ($_->[1] ? " ($_->[1])" : ''), help => $_->[2], val => \$_->[3] } } @parameters ],
 		     ) or return;
 	[ map { if_($_->[3], "$_->[0]=$_->[3]") } @parameters ];
     } else {
 	my $s = $in->ask_from_entry('',
-_("You may now provide options to module %s.
+N("You may now provide options to module %s.
 Options are in format ``name=value name2=value2 ...''.
-For instance, ``io=0x300 irq=7''", $module_descr), _("Module options:")) or return;
+For instance, ``io=0x300 irq=7''", $module_descr), N("Module options:")) or return;
 	[ split ' ', $s ];
     }
 }
@@ -708,7 +708,7 @@ sub load_category__prompt {
     my %available_modules = map_each { $::a => $::b ? "$::a ($::b)" : $::a } modules::category2modules_and_description($category);
     my $module = $in->ask_from_listf('',
 #-PO: the %s is the driver type (scsi, network, sound,...)
-			       _("Which %s driver should I try?", $msg_type),
+			       N("Which %s driver should I try?", $msg_type),
 			       sub { $available_modules{$_[0]} },
 			       [ keys %available_modules ]) or return;
     my $module_descr = $available_modules{$module};
@@ -717,11 +717,11 @@ sub load_category__prompt {
     require modparm;
     my @parameters = modparm::parameters($module);
     if (@parameters && $in->ask_from_list_('',
-_("In some cases, the %s driver needs to have extra information to work
+N("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
 information it needs? Occasionally, probing will hang a computer, but it should
-not cause any damage.", $module_descr), [ __("Autoprobe"), __("Specify options") ], 'Autoprobe') ne 'Autoprobe') {
+not cause any damage.", $module_descr), [ N_("Autoprobe"), N_("Specify options") ], 'Autoprobe') ne 'Autoprobe') {
 	$options = load_module__ask_options($in, $module_descr, \@parameters) or return;
     }
     while (1) {
@@ -733,7 +733,7 @@ not cause any damage.", $module_descr), [ __("Autoprobe"), __("Specify options")
 	return $module_descr if !$@;
 
 	$in->ask_yesorno('',
-_("Loading module %s failed.
+N("Loading module %s failed.
 Do you want to try again with other parameters?", $module_descr), 1) or return;
 
 	$options = load_module__ask_options($in, $module_descr, \@parameters) or return;
@@ -749,33 +749,33 @@ sub ask_users {
     my @icons = facesnames($prefix);
 
     my %high_security_groups = (
-        xgrp => _("access to X programs"),
-	rpm => _("access to rpm tools"),
-	wheel => _("allow \"su\""),
-	adm => _("access to administrative files"),
-	ntools => _("access to network tools"),
-	ctools => _("access to compilation tools"),
+        xgrp => N("access to X programs"),
+	rpm => N("access to rpm tools"),
+	wheel => N("allow \"su\""),
+	adm => N("access to administrative files"),
+	ntools => N("access to network tools"),
+	ctools => N("access to compilation tools"),
     );
     while (1) {
 	$u->{password2} ||= $u->{password} ||= '';
 	$u->{shell} ||= '/bin/bash';
-	my $names = @$users ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
+	my $names = @$users ? N("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
 
 	my %groups;
 	my $verif = sub {
-	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
-	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', _("This password is too simple")), return (1,2);
-	    $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
-	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-	    length($u->{name}) <= 32 or $in->ask_warn('', _("The user name is too long")), return (1,0);
-	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
+	    $u->{password} eq $u->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return (1,2);
+	    $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', N("This password is too simple")), return (1,2);
+	    $u->{name} or $in->ask_warn('', N("Please give a user name")), return (1,0);
+	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', N("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+	    length($u->{name}) <= 32 or $in->ask_warn('', N("The user name is too long")), return (1,0);
+	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', N("This user name is already added")), return (1,0);
 	    return 0;
 	};
 	my $ret = $in->ask_from_(
-	    { title => _("Add user"),
-	      messages => _("Enter a user\n%s", $names),
-	      ok => _("Accept user"),
-	      cancel => $security < 4 || @$users ? _("Done") : '',
+	    { title => N("Add user"),
+	      messages => N("Enter a user\n%s", $names),
+	      ok => N("Accept user"),
+	      cancel => $security < 4 || @$users ? N("Done") : '',
 	      callbacks => {
 	          focus_out => sub {
 		      if ($_[0] eq 0) {
@@ -785,13 +785,13 @@ sub ask_users {
 	          complete => $verif,
                   canceled => sub { $u->{name} ? &$verif : 0 },
 	    } }, [ 
-	    { label => _("Real name"), val => \$u->{realname} },
-	    { label => _("User name"), val => \$u->{name} },
-            { label => _("Password"),val => \$u->{password}, hidden => 1 },
-            { label => _("Password (again)"), val => \$u->{password2}, hidden => 1 },
-            { label => _("Shell"), val => \$u->{shell}, list => [ shells($prefix) ], not_edit => !$::expert, advanced => 1 },
+	    { label => N("Real name"), val => \$u->{realname} },
+	    { label => N("User name"), val => \$u->{name} },
+            { label => N("Password"),val => \$u->{password}, hidden => 1 },
+            { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
+            { label => N("Shell"), val => \$u->{shell}, list => [ shells($prefix) ], not_edit => !$::expert, advanced => 1 },
 	      if_($security <= 3 && @icons,
-	    { label => _("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
+	    { label => N("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
 	      ),
 	      if_($security > 3,
 		  map {
@@ -818,13 +818,13 @@ sub autologin {
 	add2hash_($o, { autologin => $users[0] });
 
 	$in->ask_from_(
-		       { title => _("Autologin"),
-			 messages => _("I can set up your computer to automatically log on one user.
+		       { title => N("Autologin"),
+			 messages => N("I can set up your computer to automatically log on one user.
 Do you want to use this feature?"),
-			 ok => _("Yes"),
-			 cancel => _("No") },
-		       [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => \@users },
-			 { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
+			 ok => N("Yes"),
+			 cancel => N("No") },
+		       [ { label => N("Choose the default user:"), val => \$o->{autologin}, list => \@users },
+			 { label => N("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
 		      )
 	  or delete $o->{autologin};
     } else {
@@ -839,9 +839,9 @@ sub selectLanguage {
 			   exclude_non_installed_langs => !$::isInstall,
 			  );
     $in->ask_from_(
-	{ messages => _("Please choose a language to use."),
+	{ messages => N("Please choose a language to use."),
 	  title => 'language choice',
-	  advanced_messages => formatAlaTeX(_("Mandrake Linux can support multiple languages. Select
+	  advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
 	  callbacks => {
@@ -855,7 +855,7 @@ when your installation is complete and you restart your system.")),
 		 text => $_->[1], advanced => 1,
 	       } 
 	   } sort { $a->[1] cmp $b->[1] } map { [ $_, lang::lang2text($_) ] } lang::list()),
-	  { val => \$langs->{all}, type => 'bool', text => _("All"), advanced => 1 }),
+	  { val => \$langs->{all}, type => 'bool', text => N("All"), advanced => 1 }),
 	]) or return;
     $langs->{$lang} = 1;
     $lang;
@@ -976,7 +976,7 @@ sub fileshare_config {
     my $file = '/etc/security/fileshare.conf';
     my %conf = getVarsFromSh($file);
 
-    my @l = (__("No sharing"), __("Allow all users"), __("Custom"));
+    my @l = (N_("No sharing"), N_("Allow all users"), N_("Custom"));
     my $restrict = exists $conf{RESTRICT} ? text2bool($conf{RESTRICT}) : 1;
 
     if ($restrict) {
@@ -986,10 +986,10 @@ sub fileshare_config {
 	my @have = grep { -e $type2file{$_}[0] } @wanted;
 	if (!@have) {
 	    if (@wanted == 1) {
-		$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $type2file{$wanted[0]}[1]), 1) or return;
+		$in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $type2file{$wanted[0]}[1]), 1) or return;
 	    } else {
 		my %choices;
-		my $wanted = $in->ask_many_from_list('', _("You can export using NFS or Samba. Please select which you'd like to use."),
+		my $wanted = $in->ask_many_from_list('', N("You can export using NFS or Samba. Please select which you'd like to use."),
 						  { list => \@wanted }) or return;
 		@wanted = @$wanted or return;
 	    }
@@ -997,13 +997,13 @@ sub fileshare_config {
 	    @have = grep { -e $type2file{$_}[0] } @wanted;
 	}
 	if (!@have) {
-	    $in->ask_warn('', _("Mandatory package %s is missing", $wanted[0]));
+	    $in->ask_warn('', N("Mandatory package %s is missing", $wanted[0]));
 	    return;
 	}
     }
 
     my $r = $in->ask_from_list_('fileshare',
-_("Would you like to allow users to share some of their directories?
+N("Would you like to allow users to share some of their directories?
 Allowing this will permit users to simply click on \"Share\" in konqueror and nautilus.
 
 \"Custom\" permit a per-user granularity.
@@ -1017,9 +1017,9 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 	# custom
 	if ($in->ask_from_no_check(
 	{
-	 -e '/usr/bin/userdrake' ? (ok => _("Launch userdrake"), cancel => _("Cancel")) : (cancel => ''),
+	 -e '/usr/bin/userdrake' ? (ok => N("Launch userdrake"), cancel => N("Cancel")) : (cancel => ''),
 	 messages =>
-_("The per-user sharing uses the group \"fileshare\". 
+N("The per-user sharing uses the group \"fileshare\". 
 You can use userdrake to add a user in this group.")
 	}, [])) {
 	    if (!fork) { exec "userdrake" or c::_exit(0) }
@@ -1070,38 +1070,38 @@ sub choose_security_level {
     my $expert_file = "/etc/security/msec/expert_mode";
 
     my %l = (
-      0 => _("Welcome To Crackers"),
-      1 => _("Poor"),
-      2 => _("Standard"),
-      3 => _("High"),
-      4 => _("Higher"),
-      5 => _("Paranoid"),
+      0 => N("Welcome To Crackers"),
+      1 => N("Poor"),
+      2 => N("Standard"),
+      3 => N("High"),
+      4 => N("Higher"),
+      5 => N("Paranoid"),
     );
     my %help = (
-      0 => _("This level is to be used with care. It makes your system more easy to use,
+      0 => N("This level is to be used with care. It makes your system more easy to use,
 but very sensitive: it must not be used for a machine connected to others
 or to the Internet. There is no password access."),
-      1 => _("Password are now enabled, but use as a networked computer is still not recommended."),
-      2 => _("This is the standard security recommended for a computer that will be used to connect to the Internet as a client."),
-      3 => _("There are already some restrictions, and more automatic checks are run every night."),
-      4 => _("With this security level, the use of this system as a server becomes possible.
+      1 => N("Password are now enabled, but use as a networked computer is still not recommended."),
+      2 => N("This is the standard security recommended for a computer that will be used to connect to the Internet as a client."),
+      3 => N("There are already some restrictions, and more automatic checks are run every night."),
+      4 => N("With this security level, the use of this system as a server becomes possible.
 The security is now high enough to use the system as a server which can accept
 connections from many clients. Note: if your machine is only a client on the Internet, you should choose a lower level."),
-      5 => _("This is similar to the previous level, but the system is entirely closed and security features are at their maximum."),
+      5 => N("This is similar to the previous level, but the system is entirely closed and security features are at their maximum."),
     );
     delete @l{0,1};
     delete $l{5} if !$::expert;
 
     $in->ask_from(
-            _("DrakSec Basic Options"),
-            _("Please choose the desired security level") . "\n\n" .
+            N("DrakSec Basic Options"),
+            N("Please choose the desired security level") . "\n\n" .
             join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } ikeys %l),
             [
-              { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
+              { label => N("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
                 if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
-                { label => _("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
-                  _("A library which defends against buffer overflow and format string attacks.") } ),
-                { label => _("Security Administrator (login or email)"), val => $email, },
+                { label => N("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
+                  N("A library which defends against buffer overflow and format string attacks.") } ),
+                { label => N("Security Administrator (login or email)"), val => $email, },
             ],
     );
 													 }
@@ -1190,7 +1190,7 @@ sub keyboard_group_toggle_choose {
 
     if (my $grp_toggles = keyboard::grp_toggles($keyboard)) {
 	my $GRP_TOGGLE = $keyboard->{GRP_TOGGLE} || 'caps_toggle';
-	$GRP_TOGGLE = $in->ask_from_listf('', _("Here you can choose the key or key combination that will 
+	$GRP_TOGGLE = $in->ask_from_listf('', N("Here you can choose the key or key combination that will 
 allow switching between the different keyboard layouts
 (eg: latin and non latin)"), sub { $grp_toggles->{$_[0]} }, [ sort keys %$grp_toggles ], $GRP_TOGGLE) or return;
 

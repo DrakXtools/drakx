@@ -24,7 +24,7 @@ sub B::OP::debug {
 
 		$s =~ s/"/\\"/g;
 		if ($l->first->sv->NAME eq '_') {
-		    print OUT qq($::pkg _("$s")\n);
+		    print OUT qq($::pkg N("$s")\n);
 		}
 	    }
 	}

@@ -172,7 +172,7 @@ sub main {
     my ($current_part, $current_hd);
     
     while (1) {
-	my $choose_txt = $current_part ? __("Choose another partition") : __("Choose a partition");
+	my $choose_txt = $current_part ? N_("Choose another partition") : N_("Choose a partition");
 	my $parts_and_holes = [ fsedit::get_all_fstab_and_holes($all_hds) ];
 	my $choose_part = sub {
 	    $current_part = $in->ask_from_listf('diskdrake', translate($choose_txt), sub { format_part_info_short(fsedit::part2hd($_[0], $all_hds), $_[0]) }, $parts_and_holes, $current_part) || return;
@@ -197,7 +197,7 @@ sub main {
 	my $a;
 	if ($current_part) {
 	    $in->ask_from_({
-			    cancel => _("Exit"), 
+			    cancel => N("Exit"), 
 			    title => 'diskdrake',
 			    messages => format_part_info($current_hd, $current_part),
 			   },
@@ -211,7 +211,7 @@ sub main {
     }
     return if eval { Done($in, $all_hds) };
     if (my $err = $@) {
-    	$in->ask_warn(_("Error"), formatError($err));
+    	$in->ask_warn(N("Error"), formatError($err));
     }
     goto &main;
 }
@@ -223,7 +223,7 @@ sub main {
 # general actions
 ################################################################################
 sub general_possible_actions {
-    __("Undo"), ($::expert ? __("Toggle to normal mode") : __("Toggle to expert mode"));
+    N_("Undo"), ($::expert ? N_("Toggle to normal mode") : N_("Toggle to expert mode"));
 }
 
 
@@ -242,17 +242,17 @@ sub Done {
     eval { raid::verify($all_hds->{raids}) };
     if (my $err = $@) {
 	$::expert or die;
-	$in->ask_okcancel('', [ formatError($err), _("Continue anyway?")]) or return;
+	$in->ask_okcancel('', [ formatError($err), N("Continue anyway?")]) or return;
     }
     foreach (@{$all_hds->{hds}}) {
 	if (!write_partitions($in, $_)) {
 	    return if !$::isStandalone;
-	    $in->ask_yesorno(_("Quit without saving"), _("Quit without writing the partition table?"), 1) or return;
+	    $in->ask_yesorno(N("Quit without saving"), N("Quit without writing the partition table?"), 1) or return;
 	}
     }
     if (!$::isInstall) {
 	my $new = fs::fstab_to_string($all_hds);
-	if ($new ne $all_hds->{current_fstab} && $in->ask_yesorno('', _("Do you want to save /etc/fstab modifications"), 1)) {
+	if ($new ne $all_hds->{current_fstab} && $in->ask_yesorno('', N("Do you want to save /etc/fstab modifications"), 1)) {
 	    $all_hds->{current_fstab} = $new;
 	    fs::write_fstab($all_hds);
 	}
@@ -266,14 +266,14 @@ sub Done {
 sub hd_possible_actions {
     my ($in, $hd, $all_hds) = @_;
     ( 
-     if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, __("Clear all")), 
-     if_(!$hd->{readonly} && $::isInstall, __("Auto allocate")),
-     __("More"),
+     if_(!$hd->{readonly} || $hd->{getting_rid_of_readonly_allowed}, N_("Clear all")), 
+     if_(!$hd->{readonly} && $::isInstall, N_("Auto allocate")),
+     N_("More"),
     );
 }
 sub hd_possible_actions_interactive {
     my ($in, $hd, $all_hds) = @_;
-    &hd_possible_actions, __("Hard drive information");
+    &hd_possible_actions, N_("Hard drive information");
 }
 
 sub Clear_all {
@@ -305,9 +305,9 @@ sub Auto_allocate {
 	$@ =~ /partition table already full/ or die;
 
 	$in->ask_warn("", [ 
-			   _("All primary partitions are used"),
-			   _("I can't add any more partition"), 
-			   _("To have more partitions, please delete one to be able to create an extended partition"),
+			   N("All primary partitions are used"),
+			   N("I can't add any more partition"), 
+			   N("To have more partitions, please delete one to be able to create an extended partition"),
 			  ]);
     }
 }
@@ -317,16 +317,16 @@ sub More {
 
     $in->ask_from('', '',
 	    [
-	     { val => _("Save partition table"),    clicked_may_quit => sub { SaveInFile($in, $hd);   1 } },
-	     { val => _("Restore partition table"), clicked_may_quit => sub { ReadFromFile($in, $hd); 1 } },
-	     { val => _("Rescue partition table"),  clicked_may_quit => sub { Rescuept($in, $hd);     1 } },
+	     { val => N("Save partition table"),    clicked_may_quit => sub { SaveInFile($in, $hd);   1 } },
+	     { val => N("Restore partition table"), clicked_may_quit => sub { ReadFromFile($in, $hd); 1 } },
+	     { val => N("Rescue partition table"),  clicked_may_quit => sub { Rescuept($in, $hd);     1 } },
 	         if_($::isInstall, 
-	     { val => _("Reload partition table"), clicked => sub { 
+	     { val => N("Reload partition table"), clicked => sub { 
 		   $::o->{all_hds} = fsedit::empty_all_hds();
 		   die "setstep doPartitionDisks\n" if $::setstep;
 	       } }),
 	         if_($::isInstall, 
-	     { text => _("Removable media automounting"), val => \$::o->{useSupermount}, type => 'bool' },
+	     { text => N("Removable media automounting"), val => \$::o->{useSupermount}, type => 'bool' },
 		 ),
 	    ],
     );
@@ -335,19 +335,19 @@ sub More {
 sub ReadFromFile {
     my ($in, $hd) = @_;
 
-    my $file = $::isStandalone ? $in->ask_file(_("Select file")) : devices::make("fd0") or return;
+    my $file = $::isStandalone ? $in->ask_file(N("Select file")) : devices::make("fd0") or return;
 
     eval {
     catch_cdie { partition_table::load($hd, $file) }
       sub {
 	  $@ =~ /bad totalsectors/ or return;
 	  $in->ask_yesorno('',
-_("The backup partition table has not the same size
+N("The backup partition table has not the same size
 Still continue?"), 0);
       };
     };
     if (my $err = $@) {
-    	$in->ask_warn(_("Error"), formatError($err));
+    	$in->ask_warn(N("Error"), formatError($err));
     }
 }
 
@@ -355,26 +355,26 @@ sub SaveInFile {
     my ($in, $hd) = @_;
 
     my $file = $::isStandalone ?
-		 $in->ask_file(_("Select file")) :
-                 $in->ask_okcancel(_("Warning"),
-_("Insert a floppy in drive
+		 $in->ask_file(N("Select file")) :
+                 $in->ask_okcancel(N("Warning"),
+N("Insert a floppy in drive
 All data on this floppy will be lost"), 1) && devices::make(detect_devices::floppy()) or return;
 
     eval { partition_table::save($hd, $file) };
     if (my $err = $@) {
-    	$in->ask_warn(_("Error"), formatError($err));
+    	$in->ask_warn(N("Error"), formatError($err));
     }
 }
 
 sub Rescuept {
     my ($in, $hd) = @_;
-    my $w = $in->wait_message('', _("Trying to rescue partition table"));
+    my $w = $in->wait_message('', N("Trying to rescue partition table"));
     fsedit::rescuept($hd);
 }
 
 sub Hd_info {
     my ($in, $hd) = @_;
-    $in->ask_warn('', [ _("Detailed information"), format_hd_info($hd) ]);
+    $in->ask_warn('', [ N("Detailed information"), format_hd_info($hd) ]);
 }
 
 ################################################################################
@@ -386,21 +386,21 @@ sub part_possible_actions {
     $part or return;
 
     my %actions = my @l = (
-        __("Mount point")      => '($part->{real_mntpoint} && common::usingRamdisk()) || (!isBusy && !isSwap && !isNonMountable)',
-        __("Type")             => '!isBusy && $::expert && (!readonly || ($part->{type} & 0xff) == 0x83)',
-        __("Options")          => '$::expert',
-        __("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && isThisFs("xfs", $part)',
-        __("Move")             => '!isBusy && !readonly && !isSpecial && $::expert && 0', # disable for the moment
-        __("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
-        __("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
-        __("Add to RAID")      => '!isBusy && isRawRAID && !isSpecial',
-        __("Add to LVM")       => '!isBusy && isRawLVM',
-        __("Unmount")          => '!$part->{real_mntpoint} && isMounted',
-        __("Delete")	       => '!isBusy && !readonly',
-        __("Remove from RAID") => 'isPartOfRAID',
-        __("Remove from LVM")  => 'isPartOfLVM',
-        __("Modify RAID")      => 'isPartOfRAID && !isMounted($all_hds->{raids}[$part->{raid}])',
-        __("Use for loopback") => '!$part->{real_mntpoint} && isMountableRW && !isSpecial && hasMntpoint && $::expert',
+        N_("Mount point")      => '($part->{real_mntpoint} && common::usingRamdisk()) || (!isBusy && !isSwap && !isNonMountable)',
+        N_("Type")             => '!isBusy && $::expert && (!readonly || ($part->{type} & 0xff) == 0x83)',
+        N_("Options")          => '$::expert',
+        N_("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && isThisFs("xfs", $part)',
+        N_("Move")             => '!isBusy && !readonly && !isSpecial && $::expert && 0', # disable for the moment
+        N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
+        N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
+        N_("Add to RAID")      => '!isBusy && isRawRAID && !isSpecial',
+        N_("Add to LVM")       => '!isBusy && isRawLVM',
+        N_("Unmount")          => '!$part->{real_mntpoint} && isMounted',
+        N_("Delete")	       => '!isBusy && !readonly',
+        N_("Remove from RAID") => 'isPartOfRAID',
+        N_("Remove from LVM")  => 'isPartOfLVM',
+        N_("Modify RAID")      => 'isPartOfRAID && !isMounted($all_hds->{raids}[$part->{raid}])',
+        N_("Use for loopback") => '!$part->{real_mntpoint} && isMountableRW && !isSpecial && hasMntpoint && $::expert',
     );
     my ($actions_names) = list2kv(@l);
     my %macros = (
@@ -409,7 +409,7 @@ sub part_possible_actions {
         isPrimary => 'isPrimary($part, $hd)',
     );
     if ($part->{type} == 0) {
-	if_(!$hd->{readonly}, __("Create"));
+	if_(!$hd->{readonly}, N_("Create"));
     } else {
         grep { 
     	    my $cond = $actions{$_};
@@ -440,18 +440,18 @@ sub Create {
     my $mb_size = $part->{size} >> 11;
     my $has_startsector = ($::expert || arch() !~ /i.86/) && !isLVM($hd);
 
-    my $w = $in->ask_from(_("Create a new partition"), '',
+    my $w = $in->ask_from(N("Create a new partition"), '',
         [
            if_($has_startsector,
-         { label => _("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)), type => 'range' },
+         { label => N("Start sector: "), val => \$part->{start}, min => $def_start, max => ($max - min_partition_size($hd)), type => 'range' },
            ),
-         { label => _("Size in MB: "), val => \$mb_size, min => min_partition_size($hd) >> 11, max => $def_size >> 11, type => 'range' },
-         { label => _("Filesystem type: "), val => \$type, list => [ partition_table::important_types() ], sort => 0 },
-         { label => _("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
+         { label => N("Size in MB: "), val => \$mb_size, min => min_partition_size($hd) >> 11, max => $def_size >> 11, type => 'range' },
+         { label => N("Filesystem type: "), val => \$type, list => [ partition_table::important_types() ], sort => 0 },
+         { label => N("Mount point: "), val => \$part->{mntpoint}, list => [ fsedit::suggestions_mntpoint($all_hds), '' ],
            disabled => sub { my $p = { type => name2type($type) }; isSwap($p) || isNonMountable($p) }, type => 'combo', not_edit => 0,
          },
            if_($::expert && $hd->hasExtended,
-         { label => _("Preference: "), val => \$primaryOrExtended, list => [ '', "Extended", "Primary", if_($::expert, "Extended_0x85") ] },
+         { label => N("Preference: "), val => \$primaryOrExtended, list => [ '', "Extended", "Primary", if_($::expert, "Extended_0x85") ] },
            ),
         ], changed => sub {
 	    if ($part->{start} + ($mb_size << 11) > $max) {
@@ -476,12 +476,12 @@ sub Create {
 	    eval { fsedit::add($hd, $part, $all_hds, { force => 1, primaryOrExtended => $primaryOrExtended }) };
 	    if (my $err = $@) {
 		if ($err =~ /raw_add/ && $hd->hasExtended && !$hd->{primary}{extended}) {
-		    $in->ask_warn(_("Error"), _("You can't create a new partition
+		    $in->ask_warn(N("Error"), N("You can't create a new partition
 (since you reached the maximal number of primary partitions).
 First remove a primary partition and create an extended partition."));
 		    return 0;
 		} else {
-		    $in->ask_warn(_("Error"), $@);
+		    $in->ask_warn(N("Error"), $@);
 		    return 1;
 		}
 	    }
@@ -506,7 +506,7 @@ sub Delete {
 	lvm::lv_delete($hd, $part);
     } elsif (isLoopback($part)) {
 	my $f = "$part->{loopback_device}{mntpoint}$part->{loopback_file}";
-	if (-e $f && $in->ask_yesorno('', _("Remove the loopback file?"))) {
+	if (-e $f && $in->ask_yesorno('', N("Remove the loopback file?"))) {
 	    unlink $f;
 	}
 	my $l = $part->{loopback_device}{loopback};
@@ -525,7 +525,7 @@ sub Delete {
 sub Type {
     my ($in, $hd, $part) = @_;
 
-    my $warn = sub { ask_alldatawillbelost($in, $part, __("After changing type of partition %s, all data on this partition will be lost")) };
+    my $warn = sub { ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost")) };
 
     #- for ext2, warn after choosing as ext2->ext3 can be achieved without loosing any data :)
     isExt2($part) or $warn->() or return;
@@ -536,14 +536,14 @@ sub Type {
     @types = grep { (name2type($_) & 0xff) == 0x83 } @types if $hd->{readonly};
 
     my $type_name = type2name($part->{type});
-    $in->ask_from(_("Change partition type"),
-		  _("Which filesystem do you want?"),
-		  [ { label => _("Type"), val => \$type_name, list => \@types, sort => 0, not_edit => !$::expert } ]) or return;
+    $in->ask_from(N("Change partition type"),
+		  N("Which filesystem do you want?"),
+		  [ { label => N("Type"), val => \$type_name, list => \@types, sort => 0, not_edit => !$::expert } ]) or return;
 
     my $type = $type_name && name2type($type_name);
 
     if (isExt2($part) && isThisFs('ext3', { type => $type })) {
-	my $w = $in->wait_message('', _("Switching from ext2 to ext3"));
+	my $w = $in->wait_message('', N("Switching from ext2 to ext3"));
 	if (run_program::run("tune2fs", "-j", devices::make($part->{device}))) {
 	    $part->{type} = $type;
 	    $part->{isFormatted} = 1; #- assume that if tune2fs works, partition is formatted
@@ -573,14 +573,14 @@ sub Mount_point {
     };
     $in->ask_from(
         '',
-        isLoopback($part) ? _("Where do you want to mount loopback file %s?", $part->{loopback_file}) :
-			    _("Where do you want to mount device %s?", $part->{device}),
-	[ { label => _("Mount point"), val => \$mntpoint, 
+        isLoopback($part) ? N("Where do you want to mount loopback file %s?", $part->{loopback_file}) :
+			    N("Where do you want to mount device %s?", $part->{device}),
+	[ { label => N("Mount point"), val => \$mntpoint, 
 	    list => [ if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '' ], 
 	    not_edit => 0 } ],
 	complete => sub {
 	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn('', 
-_("Can't unset mount point as this partition is used for loop back.
+N("Can't unset mount point as this partition is used for loop back.
 Remove the loopback first")), return 1;
 	    $part->{mntpoint} eq $mntpoint || check_mntpoint($in, $mntpoint, $hd, $part, $all_hds) or return 1;
     	    $migrate_files = need_migration($in, $mntpoint) or return 1;
@@ -601,8 +601,8 @@ sub Mount_point_raw_hd {
     my $mntpoint = $part->{mntpoint} || shift @propositions;
     $in->ask_from(
         '',
-        _("Where do you want to mount %s?", $part->{device}),
-	[ { label => _("Mount point"), val => \$mntpoint, 
+        N("Where do you want to mount %s?", $part->{device}),
+	[ { label => N("Mount point"), val => \$mntpoint, 
 	    list => [ if_($mntpoint, $mntpoint), '', @propositions ], 
 	    not_edit => 0 } ],
 	complete => sub {
@@ -625,7 +625,7 @@ sub Resize {
 	if (isFat($part)) {
 	    write_partitions($in, $hd) or return;
 	    #- try to resize without losing data
-	    my $w = $in->wait_message(_("Resizing"), _("Computing FAT filesystem bounds"));
+	    my $w = $in->wait_message(N("Resizing"), N("Computing FAT filesystem bounds"));
 
 	    $nice_resize{fat} = resize_fat::main->new($part->{device}, devices::make($part->{device}));
 	    $min = max($min, $nice_resize{fat}->min_size);
@@ -657,20 +657,20 @@ sub Resize {
 	#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
 	#- this save at least a cylinder (less than 8Mb).
 	$min += partition_table::raw::cylinder_size($hd);
-	$min >= $max and return $in->ask_warn('', _("This partition is not resizeable"));
+	$min >= $max and return $in->ask_warn('', N("This partition is not resizeable"));
 
 	#- for these, we have tools to resize partition table
 	#- without losing data (or at least we hope so :-)
 	if (%nice_resize) {
-	    ask_alldatamaybelost($in, $part, __("All data on this partition should be backed-up")) or return;
+	    ask_alldatamaybelost($in, $part, N_("All data on this partition should be backed-up")) or return;
 	} else {
-	    ask_alldatawillbelost($in, $part, __("After resizing partition %s, all data on this partition will be lost")) or return;
+	    ask_alldatawillbelost($in, $part, N_("After resizing partition %s, all data on this partition will be lost")) or return;
 	}
     }
 
     my $mb_size = $part->{size} >> 11;
-    $in->ask_from(_("Resize"), _("Choose the new size"), [ 
-		   { label => _("New size in MB: "), val => \$mb_size, min => $min >> 11, max => $max >> 11, type => 'range' },
+    $in->ask_from(N("Resize"), N("Choose the new size"), [ 
+		   { label => N("New size in MB: "), val => \$mb_size, min => $min >> 11, max => $max >> 11, type => 'range' },
 		]) or return;
 
 
@@ -684,7 +684,7 @@ sub Resize {
 
     undef $@;
     my $b = before_leaving { $@ and $part->{size} = $oldsize };
-    my $w = $in->wait_message(_("Resizing"), '');
+    my $w = $in->wait_message(N("Resizing"), '');
 
     if (isLVM($hd)) {
 	lvm::lv_resize($part, $oldsize) if $size > $oldsize;	
@@ -722,13 +722,13 @@ sub Resize {
 }
 sub Move {
     my ($in, $hd, $part, $all_hds) = @_;
-    my $hd2 = $in->ask_from_listf(_("Move"),
-				  _("Which disk do you want to move it to?"), \&partition_table::description, @{$all_hds->{hds}}) or return;
-    my $start2 = $in->ask_from_entry(_("Sector"),
-				     _("Which sector do you want to move it to?"));
+    my $hd2 = $in->ask_from_listf(N("Move"),
+				  N("Which disk do you want to move it to?"), \&partition_table::description, @{$all_hds->{hds}}) or return;
+    my $start2 = $in->ask_from_entry(N("Sector"),
+				     N("Which sector do you want to move it to?"));
     defined $start2 or return;
 
-    my $w = $in->wait_message(_("Moving"), _("Moving partition..."));
+    my $w = $in->wait_message(N("Moving"), N("Moving partition..."));
     fsedit::move($hd, $part, $hd2, $start2);
 }
 sub Format {
@@ -745,8 +745,8 @@ sub Add2RAID {
     my $raids = $all_hds->{raids};
 
     local $_ = @$raids == () ? "new" :
-      $in->ask_from_list_('', _("Choose an existing RAID to add to"),
-			  [ (grep { $_ } map_index { $_ && "md$::i" } @$raids), __("new") ]) or return;
+      $in->ask_from_list_('', N("Choose an existing RAID to add to"),
+			  [ (grep { $_ } map_index { $_ && "md$::i" } @$raids), N_("new") ]) or return;
 
     if (/new/) {
 	my $nb1 = raid::new($raids, $part);
@@ -761,12 +761,12 @@ sub Add2LVM {
     my $lvms = $all_hds->{lvms};
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
 
-    my $lvm = $in->ask_from_listf_('', _("Choose an existing LVM to add to"),
+    my $lvm = $in->ask_from_listf_('', N("Choose an existing LVM to add to"),
 				  sub { ref $_[0] ? $_[0]{VG_name} : $_[0] },
-				  [ @$lvms, __("new") ]) or return;
+				  [ @$lvms, N_("new") ]) or return;
     if (!ref $lvm) {
 	# create new lvm
-	my $name = $in->ask_from_entry('', _("LVM name?")) or return;
+	my $name = $in->ask_from_entry('', N("LVM name?")) or return;
 	$name =~ s/\W/_/g;
 	$name = substr($name, 0, 63); # max length must be < NAME_LEN / 2  where NAME_LEN is 128
 	$lvm = bless { disks => [], VG_name => $name }, 'lvm';
@@ -807,7 +807,7 @@ sub Loopback {
 
     write_partitions($in, $hd) or return;
 
-    my $handle = any::inspect($real_part) or $in->ask_warn('', _("This partition can't be used for loopback")), return;
+    my $handle = any::inspect($real_part) or $in->ask_warn('', N("This partition can't be used for loopback")), return;
 
     my ($min, $max) = (1, loopback::getFree($handle->{dir}, $real_part));
     $max = max($max, 1 << (31 - 9)) if isFat($real_part); #- FAT doesn't handle file size bigger than 2GB
@@ -820,17 +820,17 @@ sub Loopback {
 
     my $type = type2name($part->{type});
     my $mb_size = $part->{size} >> 11;
-    $in->ask_from(_("Loopback"), '', [
-		  { label => _("Loopback file name: "), val => \$part->{loopback_file} },
-		  { label => _("Size in MB: "), val => \$mb_size, min => $min >> 11, max => $max >> 11, type => 'range' },
-		  { label => _("Filesystem type: "), val => \$type, list => [ partition_table::important_types() ], not_edit => !$::expert, sort => 0 },
+    $in->ask_from(N("Loopback"), '', [
+		  { label => N("Loopback file name: "), val => \$part->{loopback_file} },
+		  { label => N("Size in MB: "), val => \$mb_size, min => $min >> 11, max => $max >> 11, type => 'range' },
+		  { label => N("Filesystem type: "), val => \$type, list => [ partition_table::important_types() ], not_edit => !$::expert, sort => 0 },
              ],
 	     complete => sub {
-		 $part->{loopback_file} or $in->ask_warn('', _("Give a file name")), return 1, 0;
+		 $part->{loopback_file} or $in->ask_warn('', N("Give a file name")), return 1, 0;
 		 $part->{loopback_file} =~ s|^([^/])|/$1|;
 		 if (my $size = loopback::verifFile($handle->{dir}, $part->{loopback_file}, $real_part)) {
-		     $size == -1 and $in->ask_warn('', _("File already used by another loopback, choose another one")), return 1, 0;
-		     $in->ask_yesorno('', _("File already exists. Use it?")) or return 1, 0;
+		     $size == -1 and $in->ask_warn('', N("File already used by another loopback, choose another one")), return 1, 0;
+		     $in->ask_yesorno('', N("File already exists. Use it?")) or return 1, 0;
 		     delete $part->{notFormatted};
 		     $part->{size} = divide($size, 512);
 		 } else {
@@ -853,14 +853,14 @@ sub Options {
     my %help = fs::mount_options_help(keys %$options);
 
     my $prev_user = $options->{user};
-    $in->ask_from(_("Mount options"),
+    $in->ask_from(N("Mount options"),
 		  '',
 		  [ 
 		   (map { 
 			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_})), val => \$options->{$_}, 
 			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool'), }
 		     } keys %$options),
-		    { label => _("Various"), val => \$unknown, advanced => 1 },
+		    { label => N("Various"), val => \$unknown, advanced => 1 },
 		  ],
 		  changed => sub {
 		      if ($prev_user != $options->{user}) {
@@ -924,9 +924,9 @@ sub modifyRAID {
     my $md = "md$nb";
     $in->ask_from('', '',
 		  [
-{ label => _("device"), val => \$md, list => [ map { "md$_" } grep { $nb == $_ || !$raids->[$_] } 0..8 ] },
-{ label => _("level"), val => \$raids->[$nb]{level}, list => [ qw(0 1 4 5 linear) ] },
-{ label => _("chunk size"), val => \$raids->[$nb]{'chunk-size'} },
+{ label => N("device"), val => \$md, list => [ map { "md$_" } grep { $nb == $_ || !$raids->[$_] } 0..8 ] },
+{ label => N("level"), val => \$raids->[$nb]{level}, list => [ qw(0 1 4 5 linear) ] },
+{ label => N("chunk size"), val => \$raids->[$nb]{'chunk-size'} },
 		  ],
 		 ) or return;
     raid::updateSize($raids->[$nb]); # changing the raid level changes the size available
@@ -941,7 +941,8 @@ sub ask_alldatamaybelost {
 
     #- here we may have a non-formatted or a formatted partition
     #- -> doing as if it was formatted
-    $in->ask_okcancel(_("Read carefully!"), [ _("Be careful: this operation is dangerous."), _($msg, $part->{device}) ], 1);
+    $in->ask_okcancel(N("Read carefully!"), 
+		      [ N("Be careful: this operation is dangerous."), sprintf(translate($msg), $part->{device}) ], 1);
 }
 sub ask_alldatawillbelost {
     my ($in, $part, $msg) = @_;
@@ -950,13 +951,13 @@ sub ask_alldatawillbelost {
 
     #- here we may have a non-formatted or a formatted partition
     #- -> doing as if it was formatted
-    $in->ask_okcancel(_("Read carefully!"), _($msg, $part->{device}), 1);
+    $in->ask_okcancel(N("Read carefully!"), sprintf(translate($msg), $part->{device}), 1);
 }
 
 sub partitions_suggestions {
     my ($in) = @_;
     my $t = $::expert ? 
-      $in->ask_from_list_('', _("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
+      $in->ask_from_list_('', N("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
       'simple';
     $fsedit::suggestions{$t};
 }
@@ -972,7 +973,7 @@ sub check_type {
 	if (my $pkg = fsedit::package_needed_for_partition_type({ type => $type })) {
 	    my $fs = type2fs({ type => $type });
 	    if (!-x "/sbin/mkfs.$fs") {
-		$in->ask_yesorno('', _("The package %s is needed. Install it?", $pkg), 1) or return;
+		$in->ask_yesorno('', N("The package %s is needed. Install it?", $pkg), 1) or return;
 		$in->do_pkgs->install($pkg);
 	    }
 	    -x "/sbin/mkfs.$fs" or $in->ask_warn('', "Mandatory package $pkg is missing"), return;
@@ -986,17 +987,17 @@ sub check_mntpoint {
     local $_ = $@;
     if (m|/boot ending on cylinder > 1024|) {
 	$in->ask_warn('',
-_("Sorry I won't accept to create /boot so far onto the drive (on a cylinder > 1024).
+N("Sorry I won't accept to create /boot so far onto the drive (on a cylinder > 1024).
 Either you use LILO and it won't work, or you don't use LILO and you don't need /boot"));
     } elsif (m|/ ending on cylinder > 1024|) {
 	$in->ask_warn('',
-_("The partition you've selected to add as root (/) is physically located beyond
+N("The partition you've selected to add as root (/) is physically located beyond
 the 1024th cylinder of the hard drive, and you have no /boot partition.
 If you plan to use the LILO boot manager, be careful to add a /boot partition"));
 	undef $_;
     } elsif (m|raid / with no /boot|) {
 	$in->ask_warn('',
-_("You've selected a software RAID partition as root (/).
+N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
 So be careful to add a /boot partition"));
 	undef $_;
@@ -1016,11 +1017,11 @@ sub write_partitions {
     $hd->{isDirty} or return 1;
     isLVM($hd) and return 1;
 
-    $in->ask_okcancel(_("Read carefully!"), _("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
+    $in->ask_okcancel(N("Read carefully!"), N("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
     if (!$::testing) {
 	partition_table::write($hd);
     }
-    $hd->{rebootNeeded} and die _("You'll need to reboot before the modification can take place");
+    $hd->{rebootNeeded} and die N("You'll need to reboot before the modification can take place");
     1;
 }
 
@@ -1031,11 +1032,11 @@ sub unmount {
 sub format_ {
     my ($in, $hd, $part, $all_hds) = @_;
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
-    ask_alldatawillbelost($in, $part, __("After formatting partition %s, all data on this partition will be lost")) or return;
+    ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
     $part->{isFormatted} = 0; #- force format;
-    my $w = $in->wait_message(_("Formatting"), 
-			      isLoopback($part) ? _("Formatting loopback file %s", $part->{loopback_file}) :
-			                          _("Formatting partition %s", $part->{device}));
+    my $w = $in->wait_message(N("Formatting"), 
+			      isLoopback($part) ? N("Formatting loopback file %s", $part->{loopback_file}) :
+			                          N("Formatting partition %s", $part->{device}));
     fs::format_part($all_hds->{raids}, $part);
     1;
 }
@@ -1046,8 +1047,8 @@ sub need_migration {
     my @l = grep { $_ ne "lost+found" } all($mntpoint);
     if (@l && $::isStandalone) {
 	my $choice;
-	my @choices = (__("Move files to the new partition"), __("Hide files"));
-	$in->ask_from('', _("Directory %s already contains data\n(%s)", $mntpoint, formatList(5, @l)), 
+	my @choices = (N_("Move files to the new partition"), N_("Hide files"));
+	$in->ask_from('', N("Directory %s already contains data\n(%s)", $mntpoint, formatList(5, @l)), 
 		      [ { val => \$choice, list => \@choices, type => 'list' } ]) or return;
 	$choice eq $choices[0] ? 'migrate' : 'hide';
     } else {
@@ -1058,15 +1059,15 @@ sub need_migration {
 sub migrate_files {
     my ($in, $hd, $part, $all_hds) = @_;
 
-    my $wait = $in->wait_message('', _("Moving files to the new partition"));
+    my $wait = $in->wait_message('', N("Moving files to the new partition"));
     my $handle = any::inspect($part, '', 'rw');
     my @l = glob_("$part->{mntpoint}/*");
     foreach (@l) {
-	$wait->set(_("Copying %s", $_)); 
+	$wait->set(N("Copying %s", $_)); 
 	system("cp", "-a", $_, $handle->{dir});
     }
     foreach (@l) {
-	$wait->set(_("Removing %s", $_)); 
+	$wait->set(N("Removing %s", $_)); 
 	system("rm", "-rf", $_);
     }
 }
@@ -1076,7 +1077,7 @@ sub warn_if_renumbered {
     my $l = delete $hd->{partitionsRenumbered};
     return if is_empty_array_ref($l);
 
-    my @l = map { _("partition %s is now known as %s", @$_) } @$l;
+    my @l = map { N("partition %s is now known as %s", @$_) } @$l;
     $in->ask_warn('', join("\n", 'Partitions have been renumbered: ', @l));
 }
 
@@ -1096,49 +1097,49 @@ sub format_part_info {
 
     my $info = '';
 
-    $info .= _("Mount point: ") . "$part->{mntpoint}\n" if $part->{mntpoint};
-    $info .= _("Device: ") . "$part->{device}\n" if $part->{device} && !isLoopback($part);
-    $info .= _("DOS drive letter: %s (just a guess)\n", $part->{device_windobe}) if $part->{device_windobe};
+    $info .= N("Mount point: ") . "$part->{mntpoint}\n" if $part->{mntpoint};
+    $info .= N("Device: ") . "$part->{device}\n" if $part->{device} && !isLoopback($part);
+    $info .= N("DOS drive letter: %s (just a guess)\n", $part->{device_windobe}) if $part->{device_windobe};
     if (arch() eq "ppc") {
       my $new_value = $part->{pType};
       $new_value =~ s/[^A-Za-z0-9_]//g;
-      $info .= _("Type: ") . $new_value . ($::expert ? sprintf " (0x%x)", $part->{type} : '') . "\n";
+      $info .= N("Type: ") . $new_value . ($::expert ? sprintf " (0x%x)", $part->{type} : '') . "\n";
       if (defined $part->{pName}) {
       	$new_value = $part->{pName};
       	$new_value =~ s/[^A-Za-z0-9_]//g;
-      	$info .= _("Name: ") . $new_value . "\n";
+      	$info .= N("Name: ") . $new_value . "\n";
       }
     } elsif ($part->{type}) {
 	my $type = substr(type2name($part->{type}), 0, 40); # limit the length
-	$info .= _("Type: ") . $type . ($::expert ? sprintf " (0x%x)", $part->{type} : '') . "\n";
+	$info .= N("Type: ") . $type . ($::expert ? sprintf " (0x%x)", $part->{type} : '') . "\n";
     } else {
-	$info .= _("Empty") . "\n";
+	$info .= N("Empty") . "\n";
     }
-    $info .= _("Start: sector %s\n", $part->{start}) if $::expert && !isSpecial($part);
-    $info .= _("Size: %s", formatXiB($part->{size}, 512));
+    $info .= N("Start: sector %s\n", $part->{start}) if $::expert && !isSpecial($part);
+    $info .= N("Size: %s", formatXiB($part->{size}, 512));
     $info .= sprintf " (%s%%)", int 100 * $part->{size} / $hd->{totalsectors} if $hd->{totalsectors};
-    $info .= _(", %s sectors", $part->{size}) if $::expert;
+    $info .= N(", %s sectors", $part->{size}) if $::expert;
     $info .= "\n";
-    $info .= _("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size(), ($part->{start} + $part->{size} - 1) / $hd->cylinder_size()) if ($::expert || !$part->{type}) && !isSpecial($part);
-    $info .= _("Formatted\n") if $part->{isFormatted};
-    $info .= _("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
-    $info .= _("Mounted\n") if $part->{isMounted};
-    $info .= _("RAID md%s\n", $part->{raid}) if isPartOfRAID($part);
+    $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size(), ($part->{start} + $part->{size} - 1) / $hd->cylinder_size()) if ($::expert || !$part->{type}) && !isSpecial($part);
+    $info .= N("Formatted\n") if $part->{isFormatted};
+    $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
+    $info .= N("Mounted\n") if $part->{isMounted};
+    $info .= N("RAID md%s\n", $part->{raid}) if isPartOfRAID($part);
     $info .= sprintf "LVM %s\n", $part->{lvm} if isPartOfLVM($part);
-    $info .= _("Loopback file(s):\n   %s\n", join(", ", map { $_->{loopback_file} } @{$part->{loopback}})) if isPartOfLoopback($part);
-    $info .= _("Partition booted by default\n    (for MS-DOS boot, not for lilo)\n") if $part->{active} && $::expert;
+    $info .= N("Loopback file(s):\n   %s\n", join(", ", map { $_->{loopback_file} } @{$part->{loopback}})) if isPartOfLoopback($part);
+    $info .= N("Partition booted by default\n    (for MS-DOS boot, not for lilo)\n") if $part->{active} && $::expert;
     if (isRAID($part)) {
-	$info .= _("Level %s\n", $part->{level});
-	$info .= _("Chunk size %s\n", $part->{'chunk-size'});
-	$info .= _("RAID-disks %s\n", join ", ", map { $_->{device} } @{$part->{disks}});
+	$info .= N("Level %s\n", $part->{level});
+	$info .= N("Chunk size %s\n", $part->{'chunk-size'});
+	$info .= N("RAID-disks %s\n", join ", ", map { $_->{device} } @{$part->{disks}});
     } elsif (isLoopback($part)) {
-	$info .= _("Loopback file name: %s", $part->{loopback_file});
+	$info .= N("Loopback file name: %s", $part->{loopback_file});
     }
     if (isApple($part)) {
-	$info .= _("\nChances are, this partition is\na Driver partition, you should\nprobably leave it alone.\n");
+	$info .= N("\nChances are, this partition is\na Driver partition, you should\nprobably leave it alone.\n");
     }
     if (isAppleBootstrap($part)) {
-	$info .= _("\nThis special Bootstrap\npartition is for\ndual-booting your system.\n");
+	$info .= N("\nThis special Bootstrap\npartition is for\ndual-booting your system.\n");
     }
     # restrict the length of the lines
     $info =~ s/(.{60}).*/$1.../mg;
@@ -1156,14 +1157,14 @@ sub format_hd_info {
     my ($hd) = @_;
 
     my $info = '';
-    $info .= _("Device: ") . "$hd->{device}\n";
-    $info .= _("Read-only") . "\n" if $hd->{readonly};
-    $info .= _("Size: %s\n", formatXiB($hd->{totalsectors}, 512)) if $hd->{totalsectors};
-    $info .= _("Geometry: %s cylinders, %s heads, %s sectors\n", @{$hd->{geom}}{qw(cylinders heads sectors)}) if $::expert && $hd->{geom};
-    $info .= _("Info: ") . ($hd->{info} || $hd->{media_type}) . "\n" if $::expert && ($hd->{info} || $hd->{media_type});
-    $info .= _("LVM-disks %s\n", join ", ", map { $_->{device} } @{$hd->{disks}}) if isLVM($hd) && $hd->{disks};
-    $info .= _("Partition table type: %s\n", $1) if $::expert && ref($hd) =~ /_([^_]+)$/;
-    $info .= _("on channel %d id %d\n", $hd->{channel}, $hd->{id}) if $::expert && exists $hd->{channel};
+    $info .= N("Device: ") . "$hd->{device}\n";
+    $info .= N("Read-only") . "\n" if $hd->{readonly};
+    $info .= N("Size: %s\n", formatXiB($hd->{totalsectors}, 512)) if $hd->{totalsectors};
+    $info .= N("Geometry: %s cylinders, %s heads, %s sectors\n", @{$hd->{geom}}{qw(cylinders heads sectors)}) if $::expert && $hd->{geom};
+    $info .= N("Info: ") . ($hd->{info} || $hd->{media_type}) . "\n" if $::expert && ($hd->{info} || $hd->{media_type});
+    $info .= N("LVM-disks %s\n", join ", ", map { $_->{device} } @{$hd->{disks}}) if isLVM($hd) && $hd->{disks};
+    $info .= N("Partition table type: %s\n", $1) if $::expert && ref($hd) =~ /_([^_]+)$/;
+    $info .= N("on channel %d id %d\n", $hd->{channel}, $hd->{id}) if $::expert && exists $hd->{channel};
     $info;
 }
 
@@ -1171,13 +1172,13 @@ sub format_raw_hd_info {
     my ($raw_hd) = @_;
 
     my $info = '';
-    $info .= _("Mount point: ") . "$raw_hd->{mntpoint}\n" if $raw_hd->{mntpoint};
+    $info .= N("Mount point: ") . "$raw_hd->{mntpoint}\n" if $raw_hd->{mntpoint};
     $info .= format_hd_info($raw_hd);
     if ($raw_hd->{type}) {
 	my $type = substr(type2name($raw_hd->{type}), 0, 40); # limit the length
-	$info .= _("Type: ") . $type . "\n";
+	$info .= N("Type: ") . $type . "\n";
     }
-    $info .= _("Options: %s", $raw_hd->{options}) if $raw_hd->{options};
+    $info .= N("Options: %s", $raw_hd->{options}) if $raw_hd->{options};
     $info;
 }
 
@@ -1193,15 +1194,15 @@ sub choose_encrypt_key {
     my ($encrypt_key, $encrypt_key2);
     $in->ask_from_(
 		       {
-         title => _("Filesystem encryption key"), 
-	 messages => _("Choose your filesystem encryption key"),
+         title => N("Filesystem encryption key"), 
+	 messages => N("Choose your filesystem encryption key"),
 	 callbacks => { 
 	     complete => sub {
-		 length $encrypt_key < 20 and $in->ask_warn('', _("This encryption key is too simple (must be at least %d characters long)", 20)), return (1,0);
-		 $encrypt_key eq $encrypt_key2 or $in->ask_warn('', [ _("The encryption keys do not match"), _("Please try again") ]), return (1,1);
+		 length $encrypt_key < 20 and $in->ask_warn('', N("This encryption key is too simple (must be at least %d characters long)", 20)), return (1,0);
+		 $encrypt_key eq $encrypt_key2 or $in->ask_warn('', [ N("The encryption keys do not match"), N("Please try again") ]), return (1,1);
 		 return 0
         } } }, [
-{ label => _("Encryption key"), val => \$encrypt_key,  hidden => 1 },
-{ label => _("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },
+{ label => N("Encryption key"), val => \$encrypt_key,  hidden => 1 },
+{ label => N("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },
     ]) && $encrypt_key;
 }

@@ -15,7 +15,7 @@ sub parameters {
 
   my $modinfo = '/sbin/modinfo';
   -x $modinfo or $modinfo = '/usr/bin/modinfo';
-  -x $modinfo or die _('modinfo is not available');
+  -x $modinfo or die N("modinfo is not available");
 
   if (!$::isStandalone && !$::testing) {
       modules::extract_modules('/tmp', $module);
@@ -47,11 +47,11 @@ sub parameters {
       #- print "STILL HAVE ($_)\n" if $_;
 
 	 my $format = $min == 1 && $max == 1 ?
-		($is_a_number ? _("a number") : '') :
+		($is_a_number ? N("a number") : '') :
 		$min == $max ? 
-		($is_a_number ? _("%d comma separated numbers", $min) : _("%d comma separated strings", $min)) :
+		($is_a_number ? N("%d comma separated numbers", $min) : N("%d comma separated strings", $min)) :
 		$min == 1 ?
-		($is_a_number ? _("comma separated numbers") : _("comma separated strings")) :
+		($is_a_number ? N("comma separated numbers") : N("comma separated strings")) :
 		''; #- too weird and buggy, do not display it
     push @parameters, [ $name, $format, $description ];
   }

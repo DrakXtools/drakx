@@ -84,9 +84,9 @@ sub vnew {
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if ($su && $>) {
 	    if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
-		exec("kdesu", "-c", "$0 @ARGV") or die _("kdesu missing");
+		exec("kdesu", "-c", "$0 @ARGV") or die N("kdesu missing");
 	    } else {
-		exec { 'consolehelper' } $0, @ARGV or die _("consolehelper missing");
+		exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
 	    }
 	}
 	eval { require interactive::gtk };
@@ -97,7 +97,7 @@ sub vnew {
 	}
     } else {
 	if ($su && $>) {
-	    exec { 'consolehelper' } $0, @ARGV or die _("consolehelper missing");
+	    exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
 	}
     }
 
@@ -124,12 +124,12 @@ sub exit { exit($_[0]) }
 sub ask_warn {
     my ($o, $title, $message) = @_;
     local $::isWizard=0;
-    ask_from_listf_no_check($o, $title, $message, undef, [ _("Ok") ]);
+    ask_from_listf_no_check($o, $title, $message, undef, [ N("Ok") ]);
 }
 
 sub ask_yesorno {
     my ($o, $title, $message, $def, $help) = @_;
-    ask_from_list_($o, $title, $message, [ __("Yes"), __("No") ], $def ? "Yes" : "No", $help) eq "Yes";
+    ask_from_list_($o, $title, $message, [ N_("Yes"), N_("No") ], $def ? "Yes" : "No", $help) eq "Yes";
 }
 
 sub ask_okcancel {
@@ -139,7 +139,7 @@ sub ask_okcancel {
 	$::no_separator = 1;
     	$o->ask_from_no_check({ title => $title, messages => $message, focus_cancel => !$def });
     } else {
-	ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
+	ask_from_list_($o, $title, $message, [ N_("Ok"), N_("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
     }
 }
 
@@ -149,7 +149,7 @@ sub ask_file {
 }
 sub ask_fileW {
     my ($o, $title, $dir) = @_;
-    $o->ask_from_entry($title, _("Choose a file"));
+    $o->ask_from_entry($title, N("Choose a file"));
 }
 
 sub ask_from_list {
@@ -315,8 +315,8 @@ sub ask_from_normalize {
     if (!$common->{title} && $::isStandalone) {
 	($common->{title} = $0) =~ s|.*/||;
     }
-    $common->{advanced_label} ||= _("Advanced");
-    $common->{advanced_label_close} ||= _("Basic");
+    $common->{advanced_label} ||= N("Advanced");
+    $common->{advanced_label_close} ||= N("Basic");
     $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
     add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 }, advanced => sub {} });
 }
@@ -342,7 +342,7 @@ sub ask_from_real {
 
 sub ask_browse_tree_info {
     my ($o, $title, $message, $common) = @_;
-    add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") });
+    add2hash_($common, { ok => N("Ok"), cancel => N("Cancel") });
     add2hash_($common, { title => $title, message => $message });
     add2hash_($common, { grep_allowed_to_toggle      => sub { @_ },
 			 grep_unselected             => sub { grep { $common->{node_state}($_) eq 'unselected' } @_ },
@@ -379,7 +379,7 @@ sub ask_browse_tree_info_refW { #- default definition, do not use with too many 
 sub wait_message {
     my ($o, $title, $message, $temp) = @_;
 
-    my $w = $o->wait_messageW($title, [ _("Please wait"), deref($message) ]);
+    my $w = $o->wait_messageW($title, [ N("Please wait"), deref($message) ]);
     push @tempory::objects, $w if $temp;
     my $b = before_leaving { $o->wait_message_endW($w) };
 

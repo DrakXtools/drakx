@@ -65,7 +65,7 @@ my $in = 'interactive'->vnew('su', 'default');
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
-$window1->set_title(_("Network Monitoring"));
+$window1->set_title(N("Network Monitoring"));
 $window1->set_policy(1, 1, 1);
 $window1->set_border_width(5);
 #$::isEmbedded or $window1->set_usize(580, 320);
@@ -99,38 +99,38 @@ MDK::Common::Globals::init(
 
 gtkadd($window1,
        gtkpack_(new Gtk::VBox(0,5),
-		0, _("Network Monitoring"),
+		0, N("Network Monitoring"),
 		1, gtkpack_(new Gtk::HBox(0,5),
 			    1, my $notebook = new Gtk::Notebook,
 			    0, gtkpack_(new Gtk::VBox(0,5),
-					0, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Settings")), 'etched_out'),
+					0, gtkadd(gtkset_shadow_type(new Gtk::Frame(N("Settings")), 'etched_out'),
 						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
 							    gtkpack__(new Gtk::HBox(0,0),
-								      _("Connection type: "), my $label_cnx_type = new Gtk::Label("")),
+								      N("Connection type: "), my $label_cnx_type = new Gtk::Label("")),
 							    gtkpack__(new Gtk::HBox(0,0),
-								      _("Profile "), $combo1)
+								      N("Profile "), $combo1)
 							   )
 						 ),
-					1, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Statistics")), 'etched_out'),
+					1, gtkadd(gtkset_shadow_type(new Gtk::Frame(N("Statistics")), 'etched_out'),
 						  gtkpack__(new Gtk::VBox(0,0),
 						  create_packtable({ col_spacings => 1, row_spacings => 1},
 						   [ "", "instantaneous" , "average"],
-						   [ _("Sending Speed:"), my $label_st = new Gtk::Label(""), my $label_sta=new Gtk::Label("na")],
-						   [ _("Receiving Speed:"),my $label_sr= new Gtk::Label(""), my $label_sra=new Gtk::Label("na")],
+						   [ N("Sending Speed:"), my $label_st = new Gtk::Label(""), my $label_sta=new Gtk::Label("na")],
+						   [ N("Receiving Speed:"),my $label_sr= new Gtk::Label(""), my $label_sra=new Gtk::Label("na")],
 								  ),
-						   gtkpack__(new Gtk::HBox(0,0), "  "._("Connection Time: "), my $label_ct = new Gtk::Label("")),
+						   gtkpack__(new Gtk::HBox(0,0), "  " . N("Connection Time: "), my $label_ct = new Gtk::Label("")),
 							   )
 						 ),
 					0, gtkpack_(new Gtk::HBox(0,5),
 						   1, gtksignal_connect(my $button_connect = gtkset_sensitive(new Gtk::Button(), 0), clicked => \&connection),
 						   0, new Gtk::VSeparator,
 						   0, gtkpack(new Gtk::VBox(0,5),
-							      gtksignal_connect(new Gtk::Button(_("Logs")), clicked => sub {
+							      gtksignal_connect(new Gtk::Button(N("Logs")), clicked => sub {
 							        -e "/usr/sbin/logdrake"
 								  ? system('/usr/sbin/logdrake --file=/var/log/messages &')
 								    : system('/usr/X11R6/bin/xvt -e "tail -f /var/log/messages " &')
 						 }),
-							      gtksignal_connect(my $button_close = new Gtk::Button(_("Close")), clicked => sub { Gtk->exit(0) }),
+							      gtksignal_connect(my $button_close = new Gtk::Button(N("Close")), clicked => sub { Gtk->exit(0) }),
 							     )
 						  )
 				       )
@@ -157,9 +157,9 @@ my ($pix_d_map, $pix_d_mask) = gtkcreate_png("net_d.png");
 my ($pix_u_map, $pix_u_mask) = gtkcreate_png("net_u.png");
 $button_connect->add(gtkpack__(new Gtk::VBox(0,3),
 				   my $pix_c = new Gtk::Pixmap($pix_u_map, $pix_u_mask),
-				   my $label_c = new Gtk::Label(_("Wait please"))
+				   my $label_c = new Gtk::Label(N("Wait please"))
 				  ));
-$statusbar->push(1, _("Wait please, testing your connection..."));
+$statusbar->push(1, N("Wait please, testing your connection..."));
 $window1->show_all();
 #$window1->set_policy (1, 1, 1);
 
@@ -190,7 +190,7 @@ sub connection {
     $button_connect->set_sensitive(0);
     $button_close->set_sensitive(0);
     $statusbar->pop(1);
-    $statusbar->push(1, $wasconnected ? _("Disconnecting from Internet ") : _("Connecting to Internet "));
+    $statusbar->push(1, $wasconnected ? N("Disconnecting from Internet ") : N("Connecting to Internet "));
     if($wasconnected == 1) {
 	$c_time = time();
 	$ct_tag = Gtk->timeout_add(1000, sub {
@@ -203,7 +203,7 @@ sub connection {
 
     my $tag = Gtk->timeout_add(1000, sub {
 				   $statusbar->pop(1);
-				   $statusbar->push(1, ($wasconnected  == 1 ? _("Disconnecting from Internet ") : _("Connecting to Internet "))
+				   $statusbar->push(1, ($wasconnected  == 1 ? N("Disconnecting from Internet ") : N("Connecting to Internet "))
 						    . join('', map { "." } (1..$nb_point)));
 				   $nb_point++;
 				   if ($nb_point  < 4) { return 1; }
@@ -234,11 +234,11 @@ sub connection {
 					    $ret = 0;
 					    $statusbar->pop(1);
 					    $statusbar->push(1, $wasconnected ? ( $isconnected ?
-									  _("Disconnection from Internet failed.") :
-									  _("Disconnection from Internet complete.")) :
+									  N("Disconnection from Internet failed.") :
+									  N("Disconnection from Internet complete.")) :
 						     ( $isconnected ?
-						       _("Connection complete.") :
-						       _("Connection failed.\nVerify your configuration in the Mandrake Control Center."))
+						       N("Connection complete.") :
+						       N("Connection failed.\nVerify your configuration in the Mandrake Control Center."))
 						    );
 				            my $delay = 1000;
 					    # keep the message displayed longer if there is a problem.
@@ -342,14 +342,14 @@ sub change_color {
     my $doit;
     $window->signal_connect ( delete_event => sub { Gtk->main_quit() });
     $window->set_position(1);
-    $window->set_title(_("Color configuration"));
+    $window->set_title(N("Color configuration"));
     $window->set_border_width(5);
     gtkadd(gtkset_modal($window,1),
 	   gtkpack_(new Gtk::VBox(0,5),
 		    1, my $colorsel = new Gtk::ColorSelection,
 		    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-			      gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { $doit=1; Gtk->main_quit() }),
-			      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { $doit=1; Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { Gtk->main_quit() }),
 			     )
 		   )
 	  );
@@ -395,31 +395,31 @@ sub update {
 													 $gct->set_foreground($colort);
 													 $_[0]->draw(undef);
 												     }),
-										   _("sent: "), $monitor->{$intf}{labelt} = new Gtk::Label("0")),
+										   N("sent: "), $monitor->{$intf}{labelt} = new Gtk::Label("0")),
 								      gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
 										   gtksignal_connect(my $button_r = gtkset_relief(new Gtk::Button(), 'none'), clicked => sub {
 													 $colorr = change_color($colorr);
 													 $gcr->set_foreground($colorr);
 													 $_[0]->draw(undef);
 												     }),
-										   _("received: "), $monitor->{$intf}{labelr} = new Gtk::Label("0")),
+										   N("received: "), $monitor->{$intf}{labelr} = new Gtk::Label("0")),
 								      gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
 										   gtksignal_connect(my $button_a = gtkset_relief(new Gtk::Button(), 'none'), clicked => sub {
 													 $colora = change_color($colora);
 													 $gca->set_foreground($colora);
 													 $_[0]->draw(undef);
 												     }),
-										   _("average"))
+										   N("average"))
 								     ),
 							    0, gtkpack__(gtkset_border_width(new Gtk::VBox(0,0), 5),
-							      gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Local measure")), 'etched_out'),
+							      gtkadd(gtkset_shadow_type(new Gtk::Frame(N("Local measure")), 'etched_out'),
 								     gtkpack__(gtkset_border_width(new Gtk::VBox(0,0), 5),
 									       gtkpack__(new Gtk::HBox(0,0),
-											 _('sent: '),
+											 N("sent: "),
 											 my $measure_t = new Gtk::Label("0")
 											),
 									       gtkpack__(new Gtk::HBox(0,0),
-											 _('received: '),
+											 N("received: "),
 											 my $measure_r = new Gtk::Label("0")
 											)
 									      )
@@ -444,8 +444,8 @@ sub update {
 						    my $received = $x >= 0 ? $monitor->{$intf}{stack_r}[$x] : 0;
 						    my $transmitted = $x >= 0 ? $monitor->{$intf}{stack_t}[$x] : 0;
 						    my $type;
-						    $y * $scale / 150 < $transmitted and $type = _('transmitted');
-						    (150 - $y) * $scale / 150 < $received and $type = _('received');
+						    $y * $scale / 150 < $transmitted and $type = N("transmitted");
+						    (150 - $y) * $scale / 150 < $received and $type = N("received");
 						    $measure_r->set(formatXiB($received));
 						    $measure_t->set(formatXiB($transmitted));
 						});
@@ -467,13 +467,13 @@ sub update {
 	    if(($isconnected == 1) && !in_ifconfig($netcnx->{NET_INTERFACE})) {
 		$isconnected=0;
 		$statusbar->pop(1);
-		$statusbar->push(1, _("Warning, another internet connexion has been detected, maybe using your network"));
+		$statusbar->push(1, N("Warning, another internet connexion has been detected, maybe using your network"));
 	    } else {
 		#- translators : $netcnx->{type} is the type of network connection (modem, adsl...)
 		$statusbar->pop(1);
-		$statusbar->push(1, $isconnected == 1 ? _("Connected") : _("Not connected"));
+		$statusbar->push(1, $isconnected == 1 ? N("Connected") : N("Not connected"));
 	    }
-	    $label_c->set($isconnected == 1 ? _("Disconnect %s", $netcnx->{type}) : _("Connect %s", $netcnx->{type}));
+	    $label_c->set($isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
 	    $isconnected == 1 ? $pix_c->set($pix_c_map, $pix_c_mask) : $pix_c->set($pix_d_map, $pix_d_mask);
 	    $button_connect->set_sensitive(1);
 	}

@@ -90,13 +90,13 @@ sub choose {
 	}
     };
 
-    $in->ask_from(_("Monitor"), _("Choose a monitor"), 
+    $in->ask_from(N("Monitor"), N("Choose a monitor"), 
 		  [ { val => \$merged_name, separator => '|', 
 		      list => ['Custom', "Plug'n Play", sort keys %h_monitors],
-		      format => sub { $_[0] eq 'Custom' ? _("Custom") : 
-				      $_[0] eq "Plug'n Play" ? _("Plug'n Play") . " ($monitor->{ModelName})" :
-				      $_[0] =~ /^Generic\|(.*)/ ? _("Generic") . "|$1" :  
-				      _("Vendor") . "|$_[0]" },
+		      format => sub { $_[0] eq 'Custom' ? N("Custom") : 
+				      $_[0] eq "Plug'n Play" ? N("Plug'n Play") . " ($monitor->{ModelName})" :
+				      $_[0] =~ /^Generic\|(.*)/ ? N("Generic") . "|$1" :  
+				      N("Vendor") . "|$_[0]" },
 		      sort => 0 } ]) or return;
 
     if ($merged_name eq "Plug'n Play") {
@@ -106,20 +106,20 @@ sub choose {
 	    $monitor->{VendorName} = "Plug'n Play";
 	} else {
 	    delete $monitor->{VendorName};
-	    $in->ask_warn('', _("Plug'n Play probing failed. Please choose a precise monitor"));
+	    $in->ask_warn('', N("Plug'n Play probing failed. Please choose a precise monitor"));
 	    goto ask_monitor;
 	}
     } elsif ($merged_name eq 'Custom') {
 	$in->ask_from('',
-_("The two critical parameters are the vertical refresh rate, which is the rate
+N("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
 
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
 that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
-		      [ { val => \$monitor->{HorizSync}, list => \@HorizSync_ranges, label => _("Horizontal refresh rate"), not_edit => 0 },
-			{ val => \$monitor->{VertRefresh}, list => \@VertRefresh_ranges, label => _("Vertical refresh rate"), not_edit => 0 } ]) or goto &choose;
+		      [ { val => \$monitor->{HorizSync}, list => \@HorizSync_ranges, label => N("Horizontal refresh rate"), not_edit => 0 },
+			{ val => \$monitor->{VertRefresh}, list => \@VertRefresh_ranges, label => N("Vertical refresh rate"), not_edit => 0 } ]) or goto &choose;
 	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
     } else {
 	put_in_hash($monitor, $h_monitors{$merged_name});

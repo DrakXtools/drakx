@@ -41,12 +41,12 @@ sub scan4channels {
 #    as we're just a, xawtv wraper
 #    -x "/usr/bin/scantv" or $in->do_pkgs->install('xawtv');
 #    -x "/usr/bin/scantv" or { 
-#{	   exec {'consolehelper'} $0, ("urpmi", "xawtv") or die _("consolehelper missing");
+#{	   exec {'consolehelper'} $0, ("urpmi", "xawtv") or die N("consolehelper missing");
 #    };
     if (! -x "/usr/bin/scantv") {
 #	standalone::explanations("package xawtv isn't installed");
 	   $in->ask_warn("XawTV isn't installed!", 
-				  formatAlaTeX(_("XawTV isn't installed!
+				  formatAlaTeX(N("XawTV isn't installed!
 
 
 If you do have a TV card but DrakX has neither detected it (no bttv nor saa7134
@@ -63,14 +63,14 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 #   my %freqtables = map {$i=$_;$i =~ s/ (.*)/-\1/;_($_) => $i} (...)
 #   this table must be checked on each xawtv release:
 	   my %freqtables = 
-		  ("us-bcast" => _("USA (broadcast)"), "us-cable" => _("USA (cable)"), "us-cable-hrc" => _("USA (cable-hrc)"), "canada-cable" => _("Canada (cable)"),
-		   "japan-bcast" => _("Japan (broadcast)"), "japan-cable" => _("Japan (cable)"), "china-bcast" => _("China (broadcast)"),
-		   "europe-west" => _("West Europe"), "europe-east" => _("East Europe"), "italy" => _("Italy"), "ireland" => _("Ireland"), "france" => _("France [SECAM]"),
-		   "newzealand" => _("Newzealand"), "australia" => _("Australia"),
-		   "southafrica" => _("South Africa"),
-		   "argentina" => _("Argentina"),
-		   "australia-optus" => _("Australian Optus cable TV"),
-		   -1 =>_("All")
+		  ("us-bcast" => N("USA (broadcast)"), "us-cable" => N("USA (cable)"), "us-cable-hrc" => N("USA (cable-hrc)"), "canada-cable" => N("Canada (cable)"),
+		   "japan-bcast" => N("Japan (broadcast)"), "japan-cable" => N("Japan (cable)"), "china-bcast" => N("China (broadcast)"),
+		   "europe-west" => N("West Europe"), "europe-east" => N("East Europe"), "italy" => N("Italy"), "ireland" => N("Ireland"), "france" => N("France [SECAM]"),
+		   "newzealand" => N("Newzealand"), "australia" => N("Australia"),
+		   "southafrica" => N("South Africa"),
+		   "argentina" => N("Argentina"),
+		   "australia-optus" => N("Australian Optus cable TV"),
+		   -1 =>N("All")
 		   );
 #   Info: HRC means "Harmonically Related Carrier"
 
@@ -104,30 +104,30 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 		  log::l("[drakxtv] guess lang=>$_, norm=>$norm, area=>$ftable_id");
 	   }
 
-	   if ($in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
+	   if ($in->ask_from("TVdrake", N("Please,\ntype in your tv norm and country"),
 					 [
-					  { label => _("TV norm:"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo' },
-					  { label => _("Area:"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
+					  { label => N("TV norm:"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo' },
+					  { label => N("Area:"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
 					  ]
 					 ))
-	   {   my $wait = $in->wait_message(_('Please wait'),
-								 _("Scanning for TV channels in progress ..."));
+	   {   my $wait = $in->wait_message(N("Please wait"),
+								 N("Scanning for TV channels in progress ..."));
 #       we provide scantv a bogus table (france) which will
 #       will be ignored since "All" is selected (because of -a)
 		  $ftable_id = "france -a " if ($ftable_id eq -1);
 		  # Note that this'll be broken if/when we implement interactive::qt
 		  my $use_X = $in->isa('interactive::gtk') && -x "/usr/X11R6/bin/xvt";
 		  my $home = $ENV{HOME};
-		  my $i = system ( (($use_X) ?
-					   "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
-					  . "scantv -n $norm -f $ftable_id -o $home/.xawtv".(($use_X)?"":" &>$home/tmp/scantv.log;"));
+		  my $i = system(($use_X ? "xvt -T '" . N("Scanning for TV channels") . " ...' -e " : "") . 
+				 "scantv -n $norm -f $ftable_id -o $home/.xawtv". 
+				 ($use_X ? "" : " &>$home/tmp/scantv.log;"));
 		  if ($i) {
-			 $in->ask_warn(_("There was an error while scanning for TV channels"),
-						_("XawTV isn't installed!")) }
+			 $in->ask_warn(N("There was an error while scanning for TV channels"),
+				       N("XawTV isn't installed!")) }
 		  else {
 			 standalone::explanations("created file $home/.xawtv");
-			   $in->ask_warn(_("Have a nice day!"),
-						  _("Now, you can run xawtv (under X Window!) !\n")) if (! $use_X);
+			   $in->ask_warn(N("Have a nice day!"),
+					 N("Now, you can run xawtv (under X Window!) !\n")) if (! $use_X);
 		    };
 		  
 	   };
@@ -150,8 +150,8 @@ if (@devices) {
 	   $in->exit(0);
     }
 } else {
-    $in->ask_warn(_("No TV Card detected!"), formatAlaTeX(
-											   _("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
+    $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
+											   N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
 
 
 You can visit our hardware database at:

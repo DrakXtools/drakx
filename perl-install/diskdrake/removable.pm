@@ -21,10 +21,10 @@ sub main {
 
 sub actions {
     (
-     __("Mount point") => \&mount_point,
-     __("Options") => \&options,
-     __("Type") => \&type,
-     __("Done") => \&done,
+     N_("Mount point") => \&mount_point,
+     N_("Options") => \&options,
+     N_("Type") => \&type,
+     N_("Done") => \&done,
     );
 }
 
@@ -44,9 +44,9 @@ sub type {
     my ($in, $raw_hd) = @_;
     my @fs = ('auto', fs::auto_fs());
     my $type = $raw_hd->{type};
-    $in->ask_from(_("Change type"),
-			      _("Which filesystem do you want?"),
-			      [ { label => _("Type"), val => \$type, list => [@fs], not_edit => !$::expert } ]) or return;
+    $in->ask_from(N("Change type"),
+			      N("Which filesystem do you want?"),
+			      [ { label => N("Type"), val => \$type, list => [@fs], not_edit => !$::expert } ]) or return;
     $raw_hd->{type} = $type;
 }
 

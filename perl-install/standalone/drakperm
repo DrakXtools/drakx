@@ -12,7 +12,7 @@ use interactive;
 my $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
-/-h/ and die _("no help implemented yet.\n");
+/-h/ and die N("no help implemented yet.\n");
 /-version/ and die 'version: $Id$'."\n";
 
 
@@ -39,31 +39,31 @@ my $W = $w->{window};
 #my $W = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $W->signal_connect(delete_event => sub { my_gtk->exit });
 my $scroll 		= new Gtk::ScrolledWindow;
-my $Perm_list = new_with_titles Gtk::CList((_("path"),_("user"),_("group"),_("permissions")));
+my $Perm_list = new_with_titles Gtk::CList((N("path"),N("user"),N("group"),N("permissions")));
 my $vb				= new Gtk::VBox(0,5);
 my $select_box= new Gtk::HBox(0,5);
 my $action_box= new Gtk::HBox(0,5);
 my $up_down_box=new Gtk::HBox(0,5);
 my $B_quit		= new Gtk::Button('quit');
 my $B_sav			= new Gtk::Button('save');
-my $B_up			= new Gtk::Button(_("Up"));
-my $B_del			= new Gtk::Button(_("delete"));
-my $B_edit		= new Gtk::Button(_("edit"));
-my $B_down		= new Gtk::Button(_("Down"));
-my $B_add			= new Gtk::Button(_("add a rule"));
-my $label_perm= new Gtk::Label(_("select perm file to see/edit"));
+my $B_up			= new Gtk::Button(N("Up"));
+my $B_del			= new Gtk::Button(N("delete"));
+my $B_edit		= new Gtk::Button(N("edit"));
+my $B_down		= new Gtk::Button(N("Down"));
+my $B_add			= new Gtk::Button(N("add a rule"));
+my $label_perm= new Gtk::Label(N("select perm file to see/edit"));
 my $combo_perm= new Gtk::Combo;
 my $tips			= new Gtk::Tooltips;
-my $pres			= new Gtk::Label(_("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."));
+my $pres			= new Gtk::Label(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."));
 my $F					= new Gtk::Frame;
 #- widgets settings
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
-$tips->set_tip($B_add,_("Add a new rule at the end"));
-$tips->set_tip($B_edit,_("Edit curent rule"));
-$tips->set_tip($B_up,_("Up selected rule one level"));
-$tips->set_tip($B_down,_("Down selected rule one level"));
-$tips->set_tip($B_del,_("Delete selected rule"));
+$tips->set_tip($B_add,N("Add a new rule at the end"));
+$tips->set_tip($B_edit,N("Edit curent rule"));
+$tips->set_tip($B_up,N("Up selected rule one level"));
+$tips->set_tip($B_down,N("Down selected rule one level"));
+$tips->set_tip($B_del,N("Delete selected rule"));
 
 #- signal management
 $W->signal_connect(delete_event => sub { my_gtk->exit });
@@ -234,25 +234,25 @@ sub row_setting_dialog{
 	my $dlg 		= new Gtk::Dialog();
 	my $ok 			= new Gtk::Button('ok');
 	my $cancel 	= new Gtk::Button('cancel');
-	my $browse	= new Gtk::Button(_("browse"));
+	my $browse	= new Gtk::Button(N("browse"));
 	my $users 	= new Gtk::Combo;
 	my $groups	= new Gtk::Combo;
 	my $file		= new Gtk::Entry;
 	my $file_hbox=new Gtk::HBox(0,5);
 	my $usr_hbox= new Gtk::HBox(0,5);
 	my $usr_vbox= new Gtk::VBox(0,5);
-	my $usr_check=new Gtk::CheckButton(_("Current user"));
+	my $usr_check=new Gtk::CheckButton(N("Current user"));
 	local @rights	= ('user','group','other');
 	local @check		= ( '' , 'read','write','execute');
 	my $hb_rights = new Gtk::HBox(0,15);
 	my $vb_rights = new Gtk::VBox(0,15);
-	my $F_rights	= new Gtk::Frame(_("Permissions"));
-	my $F_path		= new Gtk::Frame(_("Path"));
-	my $F_usr			= new Gtk::Frame(_("Property"));
+	my $F_rights	= new Gtk::Frame(N("Permissions"));
+	my $F_path		= new Gtk::Frame(N("Path"));
+	my $F_usr			= new Gtk::Frame(N("Property"));
 	my $vb_specials = new Gtk::VBox(0,5);
-	my $sticky	= new Gtk::CheckButton(_("sticky-bit"));
-	my $suid	= new Gtk::CheckButton(_("Set-UID"));
-	my $gid	= new Gtk::CheckButton(_("Set-GID"));
+	my $sticky	= new Gtk::CheckButton(N("sticky-bit"));
+	my $suid	= new Gtk::CheckButton(N("Set-UID"));
+	my $gid	= new Gtk::CheckButton(N("Set-GID"));
 	local $rght = ${$CURENT{'data'}}[3];
 	local $s = (length($rght) == 4)?substr($rght,0,1):0 ;
 	local $user = ($s)?substr($rght,1,1):substr($rght,0,1);
@@ -307,15 +307,15 @@ sub row_setting_dialog{
 		$users->set_sensitive(0);
 	}
 	
-	$tips->set_tip($sticky,_("Used for directory:\n only owner of directory or file in this directory can delete it"));
-	$tips->set_tip($suid,_("Use owner id for execution"));
-	$tips->set_tip($gid,_("Use group id for execution"));
-	$tips->set_tip($usr_check,_("when checked, owner and group won't be changed"));
+	$tips->set_tip($sticky,N("Used for directory:\n only owner of directory or file in this directory can delete it"));
+	$tips->set_tip($suid,N("Use owner id for execution"));
+	$tips->set_tip($gid,N("Use group id for execution"));
+	$tips->set_tip($usr_check,N("when checked, owner and group won't be changed"));
 	
 	#- event management
 	$cancel->signal_connect( clicked =>sub{ $dlg->destroy } );
 	$browse->signal_connect( clicked => sub {
-			my $file_dlg = new Gtk::FileSelection(_("Path selection"));
+			my $file_dlg = new Gtk::FileSelection(N("Path selection"));
 			$file_dlg->set_modal(1);
 			$file_dlg->show;
 			$file_dlg->set_filename( $file->get_text );
@@ -361,9 +361,9 @@ sub row_setting_dialog{
 	$usr_vbox->add($usr_check);
 	$usr_vbox->add($usr_hbox);
 	
-	$usr_hbox->add(new Gtk::Label(_("user :")));
+	$usr_hbox->add(new Gtk::Label(N("user :")));
 	$usr_hbox->add($users);
-	$usr_hbox->add(new Gtk::Label(_("group :")));
+	$usr_hbox->add(new Gtk::Label(N("group :")));
 	$usr_hbox->add($groups);
 	
 	$F_path->add($file_hbox);

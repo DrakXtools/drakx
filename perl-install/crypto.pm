@@ -11,31 +11,31 @@ use log;
 use ftp;
 
 %url2land = (
-	     fr => _("France"),
-	     cr => _("Costa Rica"),
-	     be => _("Belgium"),
-	     cz => _("Czech Republic"),
-	     de => _("Germany"),
-	     gr => _("Greece"),
-	     no => _("Norway"),
-	     se => _("Sweden"),
-	     nl => _("Netherlands"),
-	     it => _("Italy"),
-	     at => _("Austria"),
+	     fr => N("France"),
+	     cr => N("Costa Rica"),
+	     be => N("Belgium"),
+	     cz => N("Czech Republic"),
+	     de => N("Germany"),
+	     gr => N("Greece"),
+	     no => N("Norway"),
+	     se => N("Sweden"),
+	     nl => N("Netherlands"),
+	     it => N("Italy"),
+	     at => N("Austria"),
 	    );
 
 %land2tzs = (
-	     _("France") => [ 'Europe/Paris', 'Europe/Brussels', 'Europe/Berlin' ],
-	     _("Belgium") => [ 'Europe/Brussels', 'Europe/Paris', 'Europe/Berlin' ],
-	     _("Czech Republic") => [ 'Europe/Prague', 'Europe/Berlin' ],
-	     _("Germany") => [ 'Europe/Berlin', 'Europe/Prague' ],
-	     _("Greece") => [ 'Europe/Athens', 'Europe/Prague' ],
-	     _("Norway") => [ 'Europe/Oslo', 'Europe/Stockholm' ],
-	     _("Sweden") => [ 'Europe/Stockholm', 'Europe/Oslo' ],
-	     _("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
-	     _("Netherlands") => [ 'Europe/Amsterdam', 'Europe/Brussels', 'Europe/Berlin' ],
-	     _("Italy") => [ 'Europe/Rome', 'Europe/Brussels', 'Europe/Paris' ],
-	     _("Austria") => [ 'Europe/Vienna', 'Europe/Brussels', 'Europe/Berlin' ],
+	     N("France") => [ 'Europe/Paris', 'Europe/Brussels', 'Europe/Berlin' ],
+	     N("Belgium") => [ 'Europe/Brussels', 'Europe/Paris', 'Europe/Berlin' ],
+	     N("Czech Republic") => [ 'Europe/Prague', 'Europe/Berlin' ],
+	     N("Germany") => [ 'Europe/Berlin', 'Europe/Prague' ],
+	     N("Greece") => [ 'Europe/Athens', 'Europe/Prague' ],
+	     N("Norway") => [ 'Europe/Oslo', 'Europe/Stockholm' ],
+	     N("Sweden") => [ 'Europe/Stockholm', 'Europe/Oslo' ],
+	     N("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
+	     N("Netherlands") => [ 'Europe/Amsterdam', 'Europe/Brussels', 'Europe/Berlin' ],
+	     N("Italy") => [ 'Europe/Rome', 'Europe/Brussels', 'Europe/Paris' ],
+	     N("Austria") => [ 'Europe/Vienna', 'Europe/Brussels', 'Europe/Berlin' ],
 	    );
 
 %static_mirrors = (
@@ -58,7 +58,7 @@ sub mirrors {
 	    my ($arch, $url, $dir) = m|updates([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
 		log::l("ignoring updates from $url because of incompatible arch: $arch"), next;
-	    my $land = _("United States");
+	    my $land = N("United States");
 	    foreach (keys %url2land) {
 		my $qu = quotemeta $_;
 		$url =~ /\.$qu(?:\..*)?$/ and $land = $url2land{$_};

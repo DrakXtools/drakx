@@ -4,7 +4,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
-use MDK::Common;
+use common;
 use interactive;
 use harddrake::data;
 use Storable qw(store retrieve);
@@ -41,11 +41,11 @@ foreach (@harddrake::data::tree) {
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
     if (@was_removed) {
-	$msg .= _("Some devices in the \"%s\" hardware class were removed:\n", $item) .
+	$msg .= N("Some devices in the \"%s\" hardware class were removed:\n", $item) .
 	    "- ". harddrake::data::custom_id($oldconfig->{$_}, $item) ." was removed\n" foreach @was_removed . "\n";
     }
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
-    $msg .= _("Some devices were added:\n", $item) if @added;
+    $msg .= N("Some devices were added:\n", $item) if @added;
     $msg .= "- ". harddrake::data::custom_id($ID{$_}, $item) ." was added\n" foreach (@added);
     @added || @was_removed or next;
     next unless (-x $configurator);
@@ -61,7 +61,7 @@ foreach (@harddrake::data::tree) {
     if ($no) {
 	require interactive;
 	undef $wait;
-	$wait = $in->wait_message(_('Please wait'), _('Hardware probing in progress'));
+	$wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
     } elsif ($res) {
 	if (my $pid = fork) {
 	    wait;

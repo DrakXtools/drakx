@@ -27,8 +27,8 @@ sub test {
 
     if ($bad_card || !$auto) {
 	my $msg = 
-	$in->ask_yesorno(_("Test of the configuration"), 
-			 _("Do you want to test the configuration?") . ($bad_card ? "\n" . _("Warning: testing this graphic card may freeze your computer") : ''),
+	$in->ask_yesorno(N("Test of the configuration"), 
+			 N("Do you want to test the configuration?") . ($bad_card ? "\n" . N("Warning: testing this graphic card may freeze your computer") : ''),
 			 !$bad_card) or return 1;
     }
 
@@ -76,7 +76,7 @@ sub test {
 		    while (<F>) {
 			/reporting a problem/ and last;
 			push @msg, $_;
-			$in->ask_warn('', [ _("An error occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
+			$in->ask_warn('', [ N("An error occurred:"), " ", @msg, N("\ntry to change some parameters") ]);
 			return 0;
 		    }
 		}
@@ -88,7 +88,7 @@ sub test {
 			/^$/ and last;
 			push @msg, $_;
 		    }
-		    $in->ask_warn('', [ _("An error occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
+		    $in->ask_warn('', [ N("An error occurred:"), " ", @msg, N("\ntry to change some parameters") ]);
 		    return 0;
 		}
 	    }
@@ -121,7 +121,7 @@ sub test {
         my $text = Gtk::Label->new;
         my $time = 12;
         Gtk->timeout_add(1000, sub {
-	    $text->set(_("Leaving in %d seconds", $time));
+	    $text->set(N("Leaving in %d seconds", $time));
 	    $time-- or Gtk->main_quit;
             1;
 	});
@@ -132,12 +132,12 @@ sub test {
             if -r "$::prefix/$background" && -x "$::prefix/$qiv";
 
         my $in = interactive::gtk->new;
-	$in->exit($in->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
+	$in->exit($in->ask_yesorno('', [ N("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
     my $err = $?;
 
-    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occurred, try to change some parameters"));
+    $rc || $err == 222 << 8 or $in->ask_warn('', N("An error occurred, try to change some parameters"));
 
     unlink "$::prefix/$f", "$::prefix/$f-4";
     unlink "/tmp/.X11-unix/X9" if $::prefix;

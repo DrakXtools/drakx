@@ -190,7 +190,7 @@ sub set_resolution {
 		    '"default"';
 		} else {
 		    my @Modes = grep { 
-			/(\d+)x(\d+)/;
+			m/(\d+)x(\d+)/;
 			$1 <= $resolution->{X} && (!$resolution->{Y} || $2 <= $resolution->{Y});
 		    } reverse our @resolutions;
 		    join(" ", map { qq("$_") } @Modes);

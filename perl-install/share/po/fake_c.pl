@@ -1,8 +1,8 @@
 #!/usr/bin/perl -lp
 
-s|^(__?\()| $1|;		# add a blank at the beginning (?!)
+s|^(N_?\()| $1|;		# add a blank at the beginning (?!)
 
-s|_\(\[(.*),\s*(.*),\s*(.*)\]|ngettext($2,$3,$1)|; # special plural form handling
+s|N\(\[(.*),\s*(.*),\s*(.*)\]|ngettext($2,$3,$1)|; # special plural form handling
 
 s,\Qs/#.*//,,;			# ugly special case
 

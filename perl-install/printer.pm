@@ -25,24 +25,24 @@ my $ptalinitread = 0;
 our %spoolers = ('ppq' => {
                           'help' => "/usr/bin/lphelp %s |",
 					 'print_command' => 'lpr-pdq',
-					 'long_name' =>_("PDQ - Print, Don't Queue"),
-					 'short_name' => _("PDQ")
+					 'long_name' =>N("PDQ - Print, Don't Queue"),
+					 'short_name' => N("PDQ")
                  },
                 'lpd' => {
                         'help' => "/usr/bin/pdq -h -P %s 2>&1 |",
                         'print_command' => 'lpr-cups',
-				    'long_name' => _("LPD - Line Printer Daemon"),
-					   'short_name' => _("LPD")
+				    'long_name' => N("LPD - Line Printer Daemon"),
+					   'short_name' => N("LPD")
                  },
 			 'lprng' => {
 				'print_command' => 'lpr-lpd',
-				'long_name' => _("LPRng - LPR New Generation"),
-				'short_name' => _("LPRng")
+				'long_name' => N("LPRng - LPR New Generation"),
+				'short_name' => N("LPRng")
 			 },
 			 'cups' => {
 				'print_command' => 'lpr-cups',
-				'long_name' => _("CUPS - Common Unix Printing System"),
-				'short_name' => _("CUPS")
+				'long_name' => N("CUPS - Common Unix Printing System"),
+				'short_name' => N("CUPS")
 			 }
             );
 our %spooler_inv = map { $spooler{$_}{long_name} => $_ } keys %spoolers;
@@ -50,15 +50,15 @@ our %spooler_inv = map { $spooler{$_}{long_name} => $_ } keys %spoolers;
 our %shortspooler_inv = map { $spooler{$_}{short_name} => $_ } keys %spoolers;
 
 %printer_type = (
-    _("Local printer")                              => "LOCAL",
-    _("Remote printer")                             => "REMOTE",
-    _("Printer on remote CUPS server")              => "CUPS",
-    _("Printer on remote lpd server")               => "LPD",
-    _("Network printer (TCP/Socket)")               => "SOCKET",
-    _("Printer on SMB/Windows 95/98/NT server")     => "SMB",
-    _("Printer on NetWare server")                  => "NCP",
-    _("Enter a printer device URI")                 => "URI",
-    _("Pipe job into a command")                    => "POSTPIPE"
+    N("Local printer")                              => "LOCAL",
+    N("Remote printer")                             => "REMOTE",
+    N("Printer on remote CUPS server")              => "CUPS",
+    N("Printer on remote lpd server")               => "LPD",
+    N("Network printer (TCP/Socket)")               => "SOCKET",
+    N("Printer on SMB/Windows 95/98/NT server")     => "SMB",
+    N("Printer on NetWare server")                  => "NCP",
+    N("Enter a printer device URI")                 => "URI",
+    N("Pipe job into a command")                    => "POSTPIPE"
 );
 our %printer_type_inv = reverse %printer_type;
 
@@ -351,7 +351,7 @@ sub getSNMPModel {
     open F, ($::testing ? $prefix : "chroot $prefix/ ") .
 	"/bin/sh -c \"scli -1 -c 'show printer info' $host\" |" or
 	return { CLASS => 'PRINTER',
-		 MODEL => _("Unknown Model"),
+		 MODEL => N("Unknown Model"),
 		 MANUFACTURER => "",
 		 DESCRIPTION => "",
 		 SERIALNUMBER => ""
@@ -393,7 +393,7 @@ sub getSNMPModel {
     
     # We couldn't determine a model
     if ($model eq "") {
-	$model = _("Unknown Model");
+	$model = N("Unknown Model");
     }
     
     # Remove trailing spaces
@@ -572,7 +572,7 @@ sub whatNetPrinter {
 		for my $share (@shares) {
 		    push @res, { port => "smb://$host/$share->{name}",
 				 val => { CLASS => 'PRINTER',
-					  MODEL => _("Unknown Model"),
+					  MODEL => N("Unknown Model"),
 					  MANUFACTURER => "",
 					  DESCRIPTION =>
 					      "$share->{description}",
@@ -793,7 +793,7 @@ sub read_configured_queues($) {
 		$printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{args} = read_cups_options($QUEUES[$i]{queuedata}{queue});
 	    }
 	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} ||= "";
-	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= _("Unknown model");
+	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} ||= N("Unknown model");
 	} else {
 	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{make} = $QUEUES[$i]{make};
 	    $printer->{configured}{$QUEUES[$i]{queuedata}{queue}}{queuedata}{model} = $QUEUES[$i]{model};
@@ -821,48 +821,48 @@ sub make_menuentry {
     my $connect = $printer->{configured}{$queue}{queuedata}{connect};
     my $localremote;
     if (($connect =~ m!^file:!) || ($connect =~ m!^ptal:/mlc:!)) {
-	$localremote = _("Local Printers");
+	$localremote = N("Local Printers");
     } else {
-	$localremote = _("Remote Printers");
+	$localremote = N("Remote Printers");
     }
     my $make = $printer->{configured}{$queue}{queuedata}{make};
     my $model = $printer->{configured}{$queue}{queuedata}{model};
     my $connection;
     if ($connect =~ m!^file:/dev/lp(\d+)$!) {
 	my $number = $1;
-	$connection = _(" on parallel port \#%s", $number);
+	$connection = N(" on parallel port \#%s", $number);
     } elsif ($connect =~ m!^file:/dev/usb/lp(\d+)$!) {
 	my $number = $1;
-	$connection = _(", USB printer \#%s", $number);
+	$connection = N(", USB printer \#%s", $number);
     } elsif ($connect =~ m!^ptal:/(.+)$!) {
 	my $ptaldevice = $1;
 	if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
 	    my $number = $1;
-	    $connection = _(", multi-function device on parallel port \#%s",
+	    $connection = N(", multi-function device on parallel port \#%s",
 			    $number);
 	} elsif ($ptaldevice =~ /^mlc:usb:/) {
-	    $connection = _(", multi-function device on USB");
+	    $connection = N(", multi-function device on USB");
 	} elsif ($ptaldevice =~ /^hpjd:/) {
-	    $connection = _(", multi-function device on HP JetDirect");
+	    $connection = N(", multi-function device on HP JetDirect");
 	} else {
-	    $connection = _(", multi-function device");
+	    $connection = N(", multi-function device");
 	}
     } elsif ($connect =~ m!^file:(.+)$!) {
-	$connection = _(", printing to %s", $1);
+	$connection = N(", printing to %s", $1);
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
-	$connection = _(" on LPD server \"%s\", printer \"%s\"", $2, $1);
+	$connection = N(" on LPD server \"%s\", printer \"%s\"", $2, $1);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
-	$connection = _(", TCP/IP host \"%s\", port %s", $1, $2);
+	$connection = N(", TCP/IP host \"%s\", port %s", $1, $2);
     } elsif (($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
-	$connection = _(" on SMB/Windows server \"%s\", share \"%s\"", $1, $2);
+	$connection = N(" on SMB/Windows server \"%s\", share \"%s\"", $1, $2);
     } elsif (($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
-	$connection = _(" on Novell server \"%s\", printer \"%s\"", $1, $2);
+	$connection = N(" on Novell server \"%s\", printer \"%s\"", $1, $2);
     } elsif ($connect =~ m!^postpipe:(.+)$!) {
-	$connection = _(", using command %s", $1);
+	$connection = N(", using command %s", $1);
     } else {
 	$connection = ($::expert ? ", URI: $connect" : "");
     }
@@ -981,10 +981,10 @@ sub read_printer_db(;$) {
 
     # Add raw queue
     if ($spooler ne "pdq") {
-	$entry->{ENTRY} = _("Raw printer (No driver)");
+	$entry->{ENTRY} = N("Raw printer (No driver)");
 	$entry->{driver} = "raw";
 	$entry->{make} = "";
-	$entry->{model} = _("Unknown model");
+	$entry->{model} = N("Unknown model");
 	map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
     }
 
@@ -994,8 +994,8 @@ sub read_printer_db(;$) {
 	#&$install('cups-drivers') unless $::testing;
 	#my $w;
 	#if ($in) {
-	#    $w = $in->wait_message(_("CUPS starting"),
-	#			   _("Reading CUPS drivers database..."));
+	#    $w = $in->wait_message(N("CUPS starting"),
+	#			   N("Reading CUPS drivers database..."));
 	#}
         poll_ppd_base();
     }
@@ -1153,9 +1153,9 @@ sub read_cups_printer_list {
 	    my $comment = "";
 	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
 		(!$printer->{configured}{$queuename})) {
-		$comment = _("(on %s)", $1);
+		$comment = N("(on %s)", $1);
 	    } else {
-		$comment = _("(on this machine)");
+		$comment = N("(on this machine)");
 	    }
 	    push (@printerlist, "$queuename $comment");
 	}
@@ -1180,13 +1180,13 @@ sub get_cups_remote_queues {
 	    my $comment = "";
 	    if (($2 =~ m!^ipp://([^/:]+)[:/]!) &&
 		(!$printer->{configured}{$queuename})) {
-		$comment = _("On CUPS server \"%s\"", $1);
+		$comment = N("On CUPS server \"%s\"", $1);
 		my $sep = "!";
 		push (@printerlist,
-		      ($::expert ? _("CUPS") . $sep : "") .
-		      _("Remote Printers") . "$sep$queuename: $comment"
+		      ($::expert ? N("CUPS") . $sep : "") .
+		      N("Remote Printers") . "$sep$queuename: $comment"
 		      . ($queuename eq $printer->{DEFAULT} ?
-			 _(" (Default)") : ("")));
+			 N(" (Default)") : ("")));
 	    }
 	}
     }
@@ -1376,7 +1376,7 @@ sub get_descr_from_ppd {
     my %ppd;
 
     #- if there is no ppd, this means this is a raw queue.
-    local *F; open F, "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd" or return "|" . _("Unknown model");
+    local *F; open F, "$prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd" or return "|" . N("Unknown model");
     # "OTHERS|Generic PostScript printer|PostScript (en)";
     local $_;
     while (<F>) {
@@ -1907,7 +1907,7 @@ sub configure_hpoj {
 	# $model is for the PTAL device name, so make sure that it is unique
 	# so in the case of the model name auto-detection having failed leave
 	# the port number or the host name as model name.
-	my $searchunknown = _("Unknown model");
+	my $searchunknown = N("Unknown model");
 	if (($_->{val}{MODEL}) &&
 	    ($_->{val}{MODEL} !~ /$searchunknown/i) &&
 	    ($_->{val}{MODEL} !~ /^\s*$/)) {

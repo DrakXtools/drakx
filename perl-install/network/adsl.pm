@@ -16,18 +16,18 @@ sub configure {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkADSL');
   conf_adsl_step1:
-    # my $type = $in->ask_from_list_(_("Connect to the Internet"),
-    # 				   _("The most common way to connect with adsl is pppoe.
+    # my $type = $in->ask_from_list_(N("Connect to the Internet"),
+    # 				   N("The most common way to connect with adsl is pppoe.
     # Some connections use pptp, a few ones use dhcp.
-    # If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb"), __("ECI Hi-Focus")]) or return;
+    # If you don't know, choose 'use pppoe'"), [N_("use pppoe"), N_("use pptp"), N_("use dhcp"), N_("Alcatel speedtouch usb"), N_("ECI Hi-Focus")]) or return;
     my @l = ( 
-	     [__("use pppoe"),
-	      __("use pptp"), 
-	      __("use dhcp"), 
-	      __("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected")]
+	     [N_("use pppoe"),
+	      N_("use pptp"), 
+	      N_("use dhcp"), 
+	      N_("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected")]
 	    );
-    my $type = $in->ask_from_list_(_("Connect to the Internet"),
-				   _("The most common way to connect with adsl is pppoe.
+    my $type = $in->ask_from_list_(N("Connect to the Internet"),
+				   N("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
 If you don't know, choose 'use pppoe'"), @l) or return;
     $type =~ s/use //;
@@ -38,8 +38,8 @@ If you don't know, choose 'use pppoe'"), @l) or return;
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
 	#-network::configureNetwork($prefix, $netc, $in, $intf, $first_time);
 #  	if ($::isStandalone and $netc->{NET_DEVICE}) {
-#  	    $in->ask_yesorno(_("Network interface"),
-#  			     _("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1)
+#  	    $in->ask_yesorno(N("Network interface"),
+#  			     N("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1)
 #  	      and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
 #  	}
     }
@@ -151,10 +151,10 @@ user "$adsl->{login}"
 						      ['ppp-compress-26', 'ppp_deflate']);
 	$::isStandalone and modules::write_conf($prefix);
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
-	-e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', _('You need the alcatel microcode.
+	-e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', N("You need the alcatel microcode.
 Download it at
 http://www.speedtouchdsl.com/dvrreg_lx.htm
-and copy the mgmt.o in /usr/share/speedtouch'));
+and copy the mgmt.o in /usr/share/speedtouch"));
     }
 
 if ($adsl_type eq 'eci') {

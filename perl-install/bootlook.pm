@@ -43,7 +43,7 @@ if ($::isEmbedded) {
 my $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
-/-h/ and die _("no help implemented yet.\n");
+/-h/ and die N("no help implemented yet.\n");
 /-version/ and die 'version: $Id$'."\n";
 
 my @winm;
@@ -59,7 +59,7 @@ my $lilogrub = chomp_(`detectloader -q`);
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
-$window->set_title(_("Boot Style Configuration"));
+$window->set_title(N("Boot Style Configuration"));
 $window->border_width(2);
 #$window->realize;
 
@@ -76,8 +76,8 @@ $window->border_width(2);
 ### menus definition
 # the menus are not shown
 # but they provides shiny shortcut like C-q
-my @menu_items = ( { path => _("/_File"), type => '<Branch>' },
-		   { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback    => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
+my @menu_items = ( { path => N("/_File"), type => '<Branch>' },
+		   { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
 		 );
 my $menubar = ugtk::create_factory_menu($window, @menu_items);
 ######### menus end
@@ -88,14 +88,14 @@ $user_combo->entry->set_text($auto_mode{autologin}) if ($auto_mode{autologin});
 my $desktop_combo =new Gtk::Combo;
 $desktop_combo->set_popdown_strings(get_wm());
 $desktop_combo->entry->set_text($auto_mode{desktop}) if ($auto_mode{desktop});
-my $a_c_button = new Gtk::RadioButton (_("NewStyle Categorizing Monitor"));
-my $a_h_button = new Gtk::RadioButton _("NewStyle Monitor"), $a_c_button;
-my $a_v_button = new Gtk::RadioButton _("Traditional Monitor"), $a_c_button;
-my $a_g_button = new Gtk::RadioButton _("Traditional Gtk+ Monitor"),$a_c_button ;
-my $a_button = new Gtk::CheckButton(_("Launch Aurora at boot time"));
+my $a_c_button = new Gtk::RadioButton (N("NewStyle Categorizing Monitor"));
+my $a_h_button = new Gtk::RadioButton N("NewStyle Monitor"), $a_c_button;
+my $a_v_button = new Gtk::RadioButton N("Traditional Monitor"), $a_c_button;
+my $a_g_button = new Gtk::RadioButton N("Traditional Gtk+ Monitor"),$a_c_button ;
+my $a_button = new Gtk::CheckButton(N("Launch Aurora at boot time"));
 my $a_box = new Gtk::VBox(0, 0);
 my $x_box = new Gtk::VBox(0, 0);
-my $disp_mode = arch() =~ /ppc/ ? _("Yaboot mode") : _("Lilo/grub mode");
+my $disp_mode = arch() =~ /ppc/ ? N("Yaboot mode") : N("Lilo/grub mode");
 
 my %themes = 	('path'=>'/usr/share/bootsplash/themes/',
 		 'default'=>'Mandrake',
@@ -143,9 +143,9 @@ my $lilo_pic = gtkpng($themes{'def_thmb'});
 my $boot_pixbuf ;
 my $boot_pic = gtkpng($themes{'def_thmb'});
 
-my $thm_button = new Gtk::Button(_("Install themes"));
-my $logo_thm = new Gtk::CheckButton(_("Display theme\nunder console"));
-my $B_create = new Gtk::Button(_("Create new theme"));
+my $thm_button = new Gtk::Button(N("Install themes"));
+my $logo_thm = new Gtk::CheckButton(N("Display theme\nunder console"));
+my $B_create = new Gtk::Button(N("Create new theme"));
 my $keep_logo = 1;
 $logo_thm->set_active(1);
 $logo_thm->signal_connect(clicked => sub { invbool(\$keep_logo) });
@@ -189,15 +189,15 @@ sub {
       #lilo installation
       if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
 			use MDK::Common::File;
-	    standalone::explanations(_("Backup %s to %s.old",$lilomsg,$lilomsg)); 
+	    standalone::explanations(N("Backup %s to %s.old",$lilomsg,$lilomsg)); 
 	    cp_af($lilomsg,"/boot/message-graphic.old") ;
-	    #can't use this anymore or $in->ask_warn(_("Error"), _("unable to backup lilo message"));
-	    standalone::explanations(_("Copy %s to %s",$themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)); 
+	    #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
+	    standalone::explanations(N("Copy %s to %s",$themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)); 
 	    cp_af($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg) ;
-			#can't use this anymore  or $in->ask_warn(_("Error"), _("can't change lilo message"));
+			#can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
 	} else {
             $error = 1;
-            $in->ask_warn(_("Error"), _("Lilo message not found"));
+            $in->ask_warn(N("Error"), N("Lilo message not found"));
         }
         #bootsplash install
         if ( -f $themes{'path'} . $combo{'boot'}->entry->get_text() . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg") {
@@ -227,9 +227,9 @@ THEME=" . $combo{'boot'}->entry->get_text() . "
 LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
                 if (-f $boot_conf_file) {
                         eval { output($boot_conf_file, $bootsplash_cont) };
-			$@ and $in->ask_warn(_("Error"), _("Can't write /etc/sysconfig/bootsplash.")) or standalone::explanations(_("Write %s",$boot_conf_file));
+			$@ and $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash.")) or standalone::explanations(N("Write %s",$boot_conf_file));
                 } else {
-                    $in->ask_warn(_("Error"), _("Can't write /etc/sysconfig/bootsplash\nFile not found."));
+                    $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash\nFile not found."));
                     $error = 1;
                 }
         } else {
@@ -239,24 +239,24 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
         if (!$error) {
             foreach (map { if_(m|^initrd-(.*)\.img|, $1) } all('/boot')){
                 if ( system("mkinitrd -f /boot/initrd-$_.img $_" ) ) {
-                    $in->ask_warn(_("Error"),
-				  _("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
+                    $in->ask_warn(N("Error"),
+				  N("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
                     $error = 1;
                 } else { 
-		  standalone::explanations(_("Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'.", $_,$_));
+		  standalone::explanations(N("Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'.", $_,$_));
 		}
             }
         }
         if (system('lilo')) {
-            $in->ask_warn(_("Error"),
-_("Can't relaunch LiLo!
+            $in->ask_warn(N("Error"),
+N("Can't relaunch LiLo!
 Launch \"lilo\" as root in command line to complete LiLo theme installation."));
             $error = 1;
         } else {
-		standalone::explanations(_("Relaunch 'lilo'"));
+		standalone::explanations(N("Relaunch 'lilo'"));
 	}
-	$in->ask_warn(_(($error)?"Error":"Notice"),
-		      _($error?"Theme installation failed!":"LiLo and Bootsplash themes installation successfull"));
+	$in->ask_warn($error ? N("Error") : N("Notice"),
+		      $error ? N("Theme installation failed!") : N("LiLo and Bootsplash themes installation successfull"));
 });
 
 gtkadd($window,
@@ -264,36 +264,36 @@ gtkadd($window,
 		  gtkadd (new Gtk::Frame ("$disp_mode"),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
-					      1,_("You are currently using %s as your boot manager.
+					      1,N("You are currently using %s as your boot manager.
 Click on Configure to launch the setup wizard.", $lilogrub),
-					      0,gtksignal_connect(new Gtk::Button (_("Configure")), clicked => $::lilo_choice),
+					      0,gtksignal_connect(new Gtk::Button (N("Configure")), clicked => $::lilo_choice),
 					     )),
 #				    "" #we need some place under the button -- replaced by gtkset_border_width( for the moment
 #				   )
 				     
 			 ),
                 #Splash Selector
-                gtkadd(my $thm_frame = new Gtk::Frame( _("Splash selection") ),
+                gtkadd(my $thm_frame = new Gtk::Frame( N("Splash selection") ),
                        gtkpack__(gtkset_border_width(new Gtk::HBox(0,5),5),
                                  gtkpack__(new Gtk::VBox(0,5),
-                                           _("Themes"),
+                                           N("Themes"),
                                            $combo{'thms'},
-                                           _("\nSelect theme for\nlilo and bootsplash,\nyou can choose\nthem separatly"),
+                                           N("\nSelect theme for\nlilo and bootsplash,\nyou can choose\nthem separatly"),
                                            $logo_thm),
                                  gtkpack__(new Gtk::VBox(0,5),
-                                           _("Lilo screen"),
+                                           N("Lilo screen"),
                                            $combo{'lilo'},
                                            $lilo_pic,
 					   $B_create),
                                  gtkpack__(new Gtk::VBox(0,5),
-                                           _("Bootsplash"),
+                                           N("Bootsplash"),
                                            $combo{'boot'},
                                            $boot_pic,
                                            $thm_button))
                       ),
 
 		  # aurora
-# 		  gtkadd (new Gtk::Frame (_("Boot mode")),
+# 		  gtkadd (new Gtk::Frame (N("Boot mode")),
 # 			  gtkpack__ (new Gtk::HBox(0,0),
 # 				     gtkpack__ (new Gtk::VBox(0, 5),
 # 						gtksignal_connect ($a_button, clicked => sub {
@@ -321,16 +321,16 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 # 				    )
 # 			 ),
 		  # X
-		  gtkadd (new Gtk::Frame (_("System mode")),
+		  gtkadd (new Gtk::Frame (N("System mode")),
 			  gtkpack__ (new Gtk::VBox(0, 5),
-				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (_("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
+				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
 							   $x_box->set_sensitive(!$x_mode);
 							   $x_mode = !$x_mode;
 						       }),
 				     gtkpack__ (gtkset_sensitive ($x_box, $x_mode),
-						gtkset_active($x_no_button  = new Gtk::RadioButton (_("No, I don't want autologin")), !$l_mode),
+						gtkset_active($x_no_button  = new Gtk::RadioButton (N("No, I don't want autologin")), !$l_mode),
 						gtkpack__ (new Gtk::HBox(0, 10),
-							   gtkset_active($x_yes_button = new Gtk::RadioButton((_("Yes, I want autologin with this (user, desktop)")), $x_no_button), $l_mode),
+							   gtkset_active($x_yes_button = new Gtk::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $l_mode),
 							   gtkpack__ (new Gtk::VBox(0, 10),
 								      $user_combo,
 								      $desktop_combo
@@ -340,8 +340,8 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				    )
 			 ),
 		 gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
-			 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub{ updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
-			 gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
+			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub{ updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
+			 gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
 			)
 	       )
       );
@@ -400,7 +400,7 @@ sub print_hello {
 
 sub isXlaunched {
     my $line;
-    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: %s", $!);
+    open INITTAB, "/etc/inittab" or die N("can not open /etc/inittab for reading: %s", $!);
     while (<INITTAB>) {
 	if (/id:([1-6]):initdefault:/) { $line = $_; last }
     }

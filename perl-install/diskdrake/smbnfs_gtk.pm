@@ -42,7 +42,7 @@ sub try_ {
     my ($kind, $name, $f, @args) = @_;
     eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {
-	$in->ask_warn(_("Error"), formatError($err));
+	$in->ask_warn(N("Error"), formatError($err));
     }
     update($kind);
     Gtk->main_quit if member($name, 'Cancel', 'Done');
@@ -66,7 +66,7 @@ sub per_entry_info_box {
     if ($entry) {
 	$info = diskdrake::interactive::format_raw_hd_info($entry);
     }
-    gtkpack($box, gtkadd(new Gtk::Frame(_("Details")), gtkset_justify(new Gtk::Label($info), 'left')));
+    gtkpack($box, gtkadd(new Gtk::Frame(N("Details")), gtkset_justify(new Gtk::Label($info), 'left')));
 }
 
 sub per_entry_action_box {
@@ -78,14 +78,14 @@ sub per_entry_action_box {
     push @buttons, map {
 	  my $s = $_;
 	  gtksignal_connect(new Gtk::Button(translate($s)), clicked => sub { try($kind, $s, {}, $entry) });
-      } (if_($entry->{isMounted}, __("Unmount")),
-	 if_($entry->{mntpoint} && !$entry->{isMounted}, __("Mount"))) if $entry;
+      } (if_($entry->{isMounted}, N_("Unmount")),
+	 if_($entry->{mntpoint} && !$entry->{isMounted}, N_("Mount"))) if $entry;
 
     my @l = (
-	     if_($entry, __("Mount point") => \&raw_hd_mount_point),
-	     if_($entry && $entry->{mntpoint}, __("Options") => \&raw_hd_options),
-	     __("Cancel") => sub {},
-	     __("Done") => \&done,
+	     if_($entry, N_("Mount point") => \&raw_hd_mount_point),
+	     if_($entry && $entry->{mntpoint}, N_("Options") => \&raw_hd_options),
+	     N_("Cancel") => sub {},
+	     N_("Done") => \&done,
 	    );
     push @buttons, map {
 	my ($txt, $f) = @$_;
@@ -159,12 +159,12 @@ sub import_ctree {
 	return @l if !$@;
 
 	if ($server->{username}) {
-	    $in->ask_warn('', _("Can't login using username %s (bad password?)", $server->{username}));
+	    $in->ask_warn('', N("Can't login using username %s (bad password?)", $server->{username}));
 	    network::smb::remove_bad_credentials($server);
 	} else {
 	    if (my @l = network::smb::authentifications_available($server)) {
-		my $user = $in->ask_from_list_(_("Domain Authentication Required"),
-					       _("Which username"), [ @l, __("Another one") ]) or return;
+		my $user = $in->ask_from_list_(N("Domain Authentication Required"),
+					       N("Which username"), [ @l, N_("Another one") ]) or return;
 		if ($user ne 'Another one') {
 		    network::smb::read_credentials($server, $user);
 		    goto $find_exports;
@@ -172,12 +172,12 @@ sub import_ctree {
 	    }
 	}
 
-	if ($in->ask_from(_("Domain Authentication Required"),
-		      _("Please enter your username, password and domain name to access this host."),
+	if ($in->ask_from(N("Domain Authentication Required"),
+		      N("Please enter your username, password and domain name to access this host."),
 		      [ 
-		       { label => _("Username"), val => \$server->{username} },
-		       { label => _("Password"), val => \$server->{password}, hidden => 1 },
-		       { label => _("Domain"), val => \$server->{domain} },
+		       { label => N("Username"), val => \$server->{username} },
+		       { label => N("Password"), val => \$server->{password}, hidden => 1 },
+		       { label => N("Domain"), val => \$server->{domain} },
 		      ])) {
 	    goto $find_exports;
 	} else {
@@ -197,7 +197,7 @@ sub import_ctree {
     };
 
     { 
-	my $search = new Gtk::Button(_("Search servers"));
+	my $search = new Gtk::Button(N("Search servers"));
 	gtkpack__($info_box, 
 		  gtksignal_connect($search,
 				    clicked => sub {

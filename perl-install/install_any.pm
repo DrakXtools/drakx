@@ -420,7 +420,7 @@ sub warnAboutNaughtyServers {
     my ($o) = @_;
     my @naughtyServers = pkgs::naughtyServers($o->{packages}) or return 1;
     if (!$o->ask_yesorno('', 
-formatAlaTeX(_("You have selected the following server(s): %s
+formatAlaTeX(N("You have selected the following server(s): %s
 
 
 These servers are activated by default. They don't have any known security
@@ -438,7 +438,7 @@ sub warnAboutRemovedPackages {
     my ($o, $packages) = @_;
     my @removedPackages = keys %{$packages->{state}{ask_remove} || {}} or return;
     if (!$o->ask_yesorno('', 
-formatAlaTeX(_("The following packages will be removed to allow upgrading your system: %s
+formatAlaTeX(N("The following packages will be removed to allow upgrading your system: %s
 
 
 Do you really want to remove these packages?
@@ -468,7 +468,7 @@ sub setAuthentication {
 	#run_program::rooted($o->{prefix}, "/usr/sbin/chkauth", "yp", $domain, "-s", $nis);
 	$o->pkg_install("ypbind");
 	my $domain = $o->{netc}{NISDOMAIN};
-	$domain || $nis ne "broadcast" or die _("Can't use broadcast with no NIS domain");
+	$domain || $nis ne "broadcast" or die N("Can't use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($nis ne "broadcast" && " server")
 	                : "ypserver";
 	substInFile {
@@ -878,11 +878,11 @@ sub g_default_packages {
     my $floppy = detect_devices::floppy();
 
     while (1) {
-	$o->ask_okcancel('', _("Insert a FAT formatted floppy in drive %s", $floppy), 1) or return;
+	$o->ask_okcancel('', N("Insert a FAT formatted floppy in drive %s", $floppy), 1) or return;
 
 	eval { fs::mount(devices::make($floppy), "/floppy", "vfat", 0) };
 	last if !$@;
-	$o->ask_warn('', _("This floppy is not FAT formatted"));
+	$o->ask_warn('', N("This floppy is not FAT formatted"));
     }
 
     require Data::Dumper;
@@ -894,7 +894,7 @@ sub g_default_packages {
 	   $str, "\0");
     fs::umount("/floppy");
 
-    $quiet or $o->ask_warn('', _("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
+    $quiet or $o->ask_warn('', N("To use this saved packages selection, boot installation with ``linux defcfg=floppy''"));
 }
 
 sub loadO {
@@ -917,7 +917,7 @@ sub loadO {
 	-e "$f.pl" and $f .= ".pl" unless -e $f;
 
 	my $fh;
-	if (-e $f) { open $fh, $f } else { $fh = getFile($f) or die _("Error reading file %s", $f) }
+	if (-e $f) { open $fh, $f } else { $fh = getFile($f) or die N("Error reading file %s", $f) }
 	{
 	    local $/ = "\0";
 	    no strict;
@@ -1039,7 +1039,7 @@ sub getHds {
     }
 
     if (is_empty_array_ref($hds)) { #- no way
-	die _("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
+	die N("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 
     #- try to figure out if the same number of hds is available, use them if ok.
@@ -1207,12 +1207,12 @@ sub ensure_is_installed {
     my ($do, $pkg, $file, $auto) = @_;
 
     if (! -e "$::prefix$file") {
-	$do->{o}->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	$do->{o}->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$auto;
 	$do->{o}->do_pkgs->install($pkg);
     }
     if (! -e "$::prefix$file") {
-	$do->{o}->ask_warn('', _("Mandatory package %s is missing", $pkg));
+	$do->{o}->ask_warn('', N("Mandatory package %s is missing", $pkg));
 	return;
     }
     1;

@@ -13,15 +13,15 @@ my $force_xf4 = arch() =~ /ppc|ia64/;
 
 
 my %VideoRams = (
-     256 => __("256 kB"),
-     512 => __("512 kB"),
-    1024 => __("1 MB"),
-    2048 => __("2 MB"),
-    4096 => __("4 MB"),
-    8192 => __("8 MB"),
-   16384 => __("16 MB"),
-   32768 => __("32 MB"),
-   65536 => __("64 MB or more"),
+     256 => N_("256 kB"),
+     512 => N_("512 kB"),
+    1024 => N_("1 MB"),
+    2048 => N_("2 MB"),
+    4096 => N_("4 MB"),
+    8192 => N_("8 MB"),
+   16384 => N_("16 MB"),
+   32768 => N_("32 MB"),
+   65536 => N_("64 MB or more"),
 );
 
 our %serversdriver = arch() =~ /^sparc/ ? (
@@ -200,7 +200,7 @@ sub card_config__not_listed {
     );
 
     my $r = $in->ask_from_treelistf(
-	_("X server"), _("Choose a X server"), '|', 
+	N("X server"), N("Choose a X server"), '|', 
 	sub { $_[0] =~ /^Vendor\|($vendors_regexp)\s*-?(.*)/ ? "Vendor|$1|$2" : 
 	      $_[0] =~ /^Vendor\|(.*)/ ? "Vendor|Other|$1" : $_[0] },
 	\@list, 
@@ -227,8 +227,8 @@ sub multi_head_choose {
 
     my @choices = multi_head_choices('', @cards);
 
-    my $tc = $in->ask_from_listf(_("Multi-head configuration"),
-				 _("Your system support multiple head configuration.
+    my $tc = $in->ask_from_listf(N("Multi-head configuration"),
+				 N("Your system support multiple head configuration.
 What do you want to do?"), sub { $_[0]{text} }, \@choices) or return;
 
     $tc->{code} or die internal_error();
@@ -283,7 +283,7 @@ sub configure {
 
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
-    $in->ask_from('', _("Select the memory size of your graphics card"),
+    $in->ask_from('', N("Select the memory size of your graphics card"),
 		  [ { val => \ ($card->{VideoRam} = $options->{VideoRam_probed} || 4096),
 		      type => 'list',
 		      list => [ ikeys %VideoRams ],
@@ -344,9 +344,9 @@ sub xfree_and_glx_choose {
 
     my $tc = 
       $auto ? $choices[0] :
-	$in->ask_from_listf(_("XFree configuration"), 
+	$in->ask_from_listf(N("XFree configuration"), 
 			    formatAlaTeX(join("\n\n\n", (grep { $_ } map { $_->{more_messages} } @choices),
-					      _("Which configuration of XFree do you want to have?"))), 
+					      N("Which configuration of XFree do you want to have?"))), 
 			    sub { $_[0]{text} }, \@choices) or return;
     log::l("Using $tc->{text}");
     $tc->{code}();
@@ -378,13 +378,13 @@ sub multi_head_choices {
 	    $card->{Xinerama} = $_[0];
 	    $card;
 	};
-	my $independent = { text => _("Configure all heads independently"), code => sub { $configure_multi_head->('') } };
-	my $xinerama    = { text => _("Use Xinerama extension"),            code => sub { $configure_multi_head->(1) } };
+	my $independent = { text => N("Configure all heads independently"), code => sub { $configure_multi_head->('') } };
+	my $xinerama    = { text => N("Use Xinerama extension"),            code => sub { $configure_multi_head->(1) } };
 	push @choices, $want_Xinerama ? ($xinerama, $independent) : ($independent, $xinerama);
     }
 
     foreach my $c (@cards) {
-	push @choices, { text => _("Configure only card \"%s\"%s", $c->{description}, $c->{BusID} && " ($c->{BusID})"),
+	push @choices, { text => N("Configure only card \"%s\"%s", $c->{description}, $c->{BusID} && " ($c->{BusID})"),
 			 code => sub { $c } };
     }
     @choices;
@@ -396,8 +396,8 @@ sub xfree_and_glx_choices {
     #- XFree version available, better to parse available package and get version from it.
     my ($xf4_ver, $xf3_ver) = ('4.2.1', '3.3.6');
 
-    my $xf3 = if_($card->{server}, { text => _("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } });
-    my $xf4 = if_($card->{Driver}, { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } });
+    my $xf3 = if_($card->{server}, { text => N("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } });
+    my $xf4 = if_($card->{Driver}, { text => N("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } });
 
     #- no XFree3 with multi-head
     my @choices = grep { $_ } ($card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3));
@@ -408,12 +408,12 @@ sub xfree_and_glx_choices {
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
     if ($card->{UTAH_GLX}) {
-	my $e = { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
+	my $e = { text => N("XFree %s with 3D hardware acceleration", $xf3_ver),
 			    code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
 			    more_messages => ($card->{Driver} && !$card->{DRI_GLX} ?
-_("Your card can have 3D hardware acceleration support but only with XFree %s.
+N("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
-_("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)),
+N("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)),
 			  };
 	$card->{prefer_xf3} ? unshift(@choices, $e) : push(@choices, $e);
     }
@@ -421,36 +421,36 @@ _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
     #- this is with Utah GLX and so, it can provide a way of testing.
     if ($card->{UTAH_GLX_EXPERIMENTAL} && $::expert) {
-	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
+	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
 			 code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
 			 more_messages => (using_xf4($card) && !$card->{DRI_GLX} ?
-_("Your card can have 3D hardware acceleration support but only with XFree %s,
+N("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
-_("Your card can have 3D hardware acceleration support with XFree %s,
+N("Your card can have 3D hardware acceleration support with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)),
 		       };
     }
 
     #- ask the expert or any user on second pass user to enable or not hardware acceleration support.
     if ($card->{DRI_GLX}) {
-	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
+	unshift @choices, { text => N("XFree %s with 3D hardware acceleration", $xf4_ver),
 			    code => sub { $card->{prefer_xf3} = 0; $card->{use_DRI_GLX} = 1 },
-			    more_messages => _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver),
+			    more_messages => N("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver),
 			  };
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
     if ($card->{DRI_GLX_EXPERIMENTAL} && $::expert) {
-	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf4_ver),
+	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf4_ver),
 			 code => sub { $card->{prefer_xf3} = 0; $card->{use_DRI_GLX} = 1 },
-			 more_messages => _("Your card can have 3D hardware acceleration support with XFree %s,
+			 more_messages => N("Your card can have 3D hardware acceleration support with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver),
 		       };
     }
 
     if (arch() =~ /ppc/ && $ENV{DISPLAY}) {
-	push @choices, { text => _("Xpmac (installation display driver)"), code => sub { 
+	push @choices, { text => N("Xpmac (installation display driver)"), code => sub { 
 			     #- HACK: re-allowing XFree 3
 			     $::force_xf4 = 0;
 			     $card->{server} = "Xpmac";

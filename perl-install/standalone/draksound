@@ -44,15 +44,15 @@ if (@devices) {
 	   harddrake::sound::config($in, $_);
 	 } modules::probe_category('multimedia/sound');
 } else {
-    $in->ask_warn(_("No Sound Card detected!"), 
-			   formatAlaTeX(_("No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.
+    $in->ask_warn(N("No Sound Card detected!"), 
+			   formatAlaTeX(N("No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.
 
 
 You can visit our hardware database at:
 
 
 http://www.linux-mandrake.com/en/hardware.php3").
-_("\n\n\nNote: if you've an ISA PnP sound card, you'll have to use the sndconfig program.  Just type \"sndconfig\" in a console.")));
+N("\n\n\nNote: if you've an ISA PnP sound card, you'll have to use the sndconfig program.  Just type \"sndconfig\" in a console.")));
 }
 
 modules::write_conf;

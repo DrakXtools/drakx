@@ -18,12 +18,12 @@ sub configure_cable {
     $::isInstall and $in->set_help('configureNetworkCable');
     $netcnx->{type}='cable';
     #  		     $netcnx->{cable}={};
-    #  		     $in->ask_from_entries_ref(_("Cable connection"),
-    #  _("Please enter your host name if you know it.
+    #  		     $in->ask_from_entries_ref(N("Cable connection"),
+    #  N("Please enter your host name if you know it.
     #  Some DHCP servers require the hostname to work.
     #  Your host name should be a fully-qualified host name,
     #  such as ``mybox.mylab.myco.com''."),
-    #  					       [_("Host name:")], [ \$netcnx->{cable}{hostname} ]);
+    #  					       [N("Host name:")], [ \$netcnx->{cable}{hostname} ]);
     if ($::expert) {
 	my @m = (
 	       { description => "dhcpcd",
@@ -33,8 +33,8 @@ sub configure_cable {
 	       { description => "dhcp-client",
 		 c => 4},
 	      );
-	if (my $f = $in->ask_from_listf(_("Connect to the Internet"),
-					_("Which dhcp client do you want to use?
+	if (my $f = $in->ask_from_listf(N("Connect to the Internet"),
+					N("Which dhcp client do you want to use?
 Default is dhcpcd"),
 					sub { $_[0]{description} },
 					\@m)) {
@@ -85,12 +85,12 @@ sub conf_network_card {
     any::load_category($in, 'network/main|usb', !$::expert, 1);
     my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr);
     my $interface;
-    @all_cards == () and $in->ask_warn('', _("No ethernet network adapter has been detected on your system.
+    @all_cards == () and $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
 I cannot set up this connection type.")) and return;
     @all_cards == 1 and $interface = $all_cards[0][0] and goto l1;
     again :
-	$interface = $in->ask_from_list(_("Choose the network interface"),
-					_("Please choose which network adapter you want to use to connect to Internet"),
+	$interface = $in->ask_from_list(N("Choose the network interface"),
+					N("Please choose which network adapter you want to use to connect to Internet"),
 					[ map { $_->[0] . ($_->[1] ? " (using module $_->[1])" : "") } @all_cards ]
 				       ) or return;
     defined $interface or goto again;
@@ -99,8 +99,8 @@ I cannot set up this connection type.")) and return;
 
     my $device = conf_network_card_backend($netc, $intf, $type, $interface, $ipadr, $netadr, $interface);
 #      if ( $::isStandalone and !($type eq "dhcp")) {
-#  	$in->ask_yesorno(_("Network interface"),
-#  			  _("I'm about to restart the network device:\n") . $device . _("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
+#  	$in->ask_yesorno(N("Network interface"),
+#  			  N("I'm about to restart the network device:\n") . $device . N("\nDo you agree?"), 1) and configureNetwork2($in, $prefix, $netc, $intf) and system("$prefix/sbin/ifdown $device;$prefix/sbin/ifup $device");
 #      }
     1;
 }
@@ -165,8 +165,8 @@ sub go_ethernet {
     $netc->{NET_INTERFACE}=$netc->{NET_DEVICE};
     configureNetwork($netc, $intf, $first_time) or return;
 #      if ( $::isStandalone and $netc->{NET_DEVICE}) {
-#  	$in->ask_yesorno(_("Network interface"),
-#  			 _("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
+#  	$in->ask_yesorno(N("Network interface"),
+#  			 N("I'm about to restart the network device %s. Do you agree?", $netc->{NET_DEVICE}), 1) and system("$prefix/sbin/ifdown $netc->{NET_DEVICE}; $prefix/sbin/ifup $netc->{NET_DEVICE}");
 #      }
     1;
 }
@@ -175,7 +175,7 @@ sub configureNetwork {
     my ($netc, $intf, $first_time) = @_;
     local $_;
     any::load_category($in, 'network/main|usb|pcmcia', !$::expert, 1) or return;
-    my @l = detect_devices::getNet() or die _("no network card found");
+    my @l = detect_devices::getNet() or die N("no network card found");
     my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
 
   configureNetwork_step_1:
@@ -191,7 +191,7 @@ sub configureNetwork {
 	$n_card++;
     }
     #-	  {
-    #-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+    #-	      my $wait = $o->wait_message(N("Hostname"), N("Determining host name and domain..."));
     #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
     #-	  }
     $last or return;
@@ -199,12 +199,12 @@ sub configureNetwork {
 	$netc->{minus_one} = 1;
 	my $dhcp_hostname = $netc->{HOSTNAME};
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
-	$in->ask_from(_("Configuring network"),
-_("Please enter your host name if you know it.
+	$in->ask_from(N("Configuring network"),
+N("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
-		      [ { label => _("Host name"), val => \$netc->{HOSTNAME} }]) or goto configureNetwork_step_1;
+		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} }]) or goto configureNetwork_step_1;
 	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;

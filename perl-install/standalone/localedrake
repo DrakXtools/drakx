@@ -30,7 +30,7 @@ if (defined $klang) {
 	lang::write('', $lang, $>);
 	if ($>) {
 	    if (my $wm = any::running_window_manager()) {
-		$in->ask_okcancel('', _("The change is done, but to be effective you must logout"), 1)
+		$in->ask_okcancel('', N("The change is done, but to be effective you must logout"), 1)
 		  && any::ask_window_manager_to_logout($wm);
 	    }
 	}

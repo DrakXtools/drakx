@@ -282,18 +282,18 @@ sub create_dialog {
     my $ret = 0;
     my $dialog = new Gtk::Dialog;
     $dialog->signal_connect (delete_event => sub { Gtk->main_quit() });
-    $dialog->set_title(_("logdrake"));
+    $dialog->set_title(N("logdrake"));
     $dialog->border_width(10);
     $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
 
-    my $button = new Gtk::Button _("OK");
+    my $button = new Gtk::Button N("OK");
     $button->can_default(1);
     $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy(); Gtk->main_quit() });
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
     if ($c) {
-	my $button2 = new Gtk::Button _("Cancel");
+	my $button2 = new Gtk::Button N("Cancel");
 	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy(); Gtk->main_quit() });
 	$button2->can_default(1);
 	$dialog->action_area->pack_start($button2, 1, 1, 0);
@@ -636,7 +636,7 @@ sub write_on_pixmap {
     my $draw = sub {
 	my $style = new Gtk::Style;
 	#- i18n : you can change the font.
-	$style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*")));
+	$style->font(Gtk::Gdk::Font->fontset_load(N("-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*")));
 	my $y_pos2 = $y_pos;
   	foreach (@text) {
   	    $darea->window->draw_string($style->font, $gc, $x_pos, $y_pos2, $_);

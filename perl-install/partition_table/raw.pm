@@ -186,7 +186,7 @@ sub test_for_bad_drives {
     my $tmp2;
     &$seek; sysread F, $tmp2, $SECTORSIZE or die "test_for_bad_drives: can't even read again ($!)";
     $tmp eq $tmp2 or die
-_("Something bad is happening on your drive. 
+N("Something bad is happening on your drive. 
 A test to check the integrity of data has failed. 
 It means writing anything on the disk will end up with random trash");
 }

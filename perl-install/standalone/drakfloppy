@@ -61,17 +61,17 @@ if ($::isEmbedded) {
 $in = 'interactive'->vnew('su', 'default');
 local $_ = join '', @ARGV;
 
-/-h/ and die _("usage: drakfloppy\n");
+/-h/ and die N("usage: drakfloppy\n");
 
 $expert_mode = 0;
 # we have put here the list in order to do $list->clear() when we have to do
-$fixed_font = Gtk::Gdk::Font->fontset_load(_("-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"));
-my @titles = ( _("Module name"), _("Size") );
+$fixed_font = Gtk::Gdk::Font->fontset_load(N("-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"));
+my @titles = ( N("Module name"), N("Size") );
 my $list = new_with_titles Gtk::CList( @titles );
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window->signal_connect( 'delete_event', sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) });
-$window->set_title( _("drakfloppy") );
+$window->set_title( N("drakfloppy") );
 $window->set_policy(1, 1, 1);
 $window->border_width (5);
 
@@ -79,8 +79,8 @@ $window->border_width (5);
 # the menus are not shown
 # but they provides shiny shortcut like C-q
 my @menu_items = ( 
-		  { path => _("/_File"), type => '<Branch>' },
-		  { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
+		  { path => N("/_File"), type => '<Branch>' },
+		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
 		 );
 my $menubar = ugtk::create_factory_menu($window, @menu_items);
 
@@ -88,7 +88,7 @@ my $menubar = ugtk::create_factory_menu($window, @menu_items);
 
 my $global_vbox = new Gtk::VBox();
 
-$::isEmbedded or $global_vbox->pack_start (new Gtk::Label(_("boot disk creation")), 0, 0, 0);
+$::isEmbedded or $global_vbox->pack_start (new Gtk::Label(N("boot disk creation")), 0, 0, 0);
 
 ######## up part
 my $up_vbox  = new Gtk::VBox (0, 0);
@@ -96,12 +96,12 @@ my $up_vbox  = new Gtk::VBox (0, 0);
 # device part
 my $dev_hbox = new Gtk::HBox (1, 0);
 my $device_combo = new Gtk::Combo();
-my $device_button = new Gtk::Button( _("default") );
+my $device_button = new Gtk::Button( N("default") );
 
 $device_combo->set_popdown_strings( "/dev/fd0", "/dev/fd1", );
 $device_button->signal_connect( 'clicked', sub { $device_combo->entry->set_text("/dev/fd0");});
 
-$dev_hbox->pack_start (new Gtk::Label( _("device") ), 0, 0, 0);
+$dev_hbox->pack_start (new Gtk::Label( N("device") ), 0, 0, 0);
 $dev_hbox->pack_start ($device_combo, 0, 0, 0);
 $dev_hbox->pack_start ($device_button, 0, 0, 0);
 $up_vbox->pack_start  ($dev_hbox, 0, 0, 0);
@@ -109,10 +109,10 @@ $up_vbox->pack_start  ($dev_hbox, 0, 0, 0);
 # kernel part
 my $ker_hbox = new Gtk::HBox (1, 0);
 my $kernel_combo = new Gtk::Combo();
-my $kernel_button = new Gtk::Button( _("default") );
+my $kernel_button = new Gtk::Button( N("default") );
 $kernel_combo->disable_activate();
 $kernel_combo->set_popdown_strings( do {
-    opendir YREP, "/lib/modules" or die _("DrakFloppy Error: %s", $!);
+    opendir YREP, "/lib/modules" or die N("DrakFloppy Error: %s", $!);
     my @files_modules = grep !/^\.\.?$/, readdir YREP;
     closedir YREP;
     @files_modules;
@@ -123,27 +123,27 @@ $aaaa= `uname -r`;
 chomp ($aaaa);
 $kernel_button->signal_connect( 'clicked', sub { $kernel_combo->entry->set_text($aaaa); $list->clear(); });
 
-$ker_hbox->pack_start (new Gtk::Label( _("kernel version") ), 0, 0, 0);
+$ker_hbox->pack_start (new Gtk::Label( N("kernel version") ), 0, 0, 0);
 $ker_hbox->pack_start ($kernel_combo, 0, 0, 0);
 $ker_hbox->pack_start ($kernel_button, 0, 0, 0);
 $up_vbox->pack_start  ($ker_hbox, 0, 0, 5);
 
 # vbox part
-my $up_frame = new Gtk::Frame( _("General") );
+my $up_frame = new Gtk::Frame( N("General") );
 $up_frame->add($up_vbox);
 $global_vbox->pack_start ($up_frame, 1, 1, 0);
 
 ### expert mode
-my $expert_main_frame = new Gtk::Frame( _("Expert Area") );
+my $expert_main_frame = new Gtk::Frame( N("Expert Area") );
 my $expert_dedans = new Gtk::VBox( 0, 5 );
 $expert_dedans->border_width (5);
-my $expert_button_frame = new Gtk::Frame( _("mkinitrd optional arguments") );
-my $expert_mod_frame = new Gtk::Frame( _("Add a module") );
+my $expert_button_frame = new Gtk::Frame( N("mkinitrd optional arguments") );
+my $expert_mod_frame = new Gtk::Frame( N("Add a module") );
 my $expert_pane = new Gtk::HPaned();
 $expert_pane->set_handle_size( 10 );
 $expert_pane->set_gutter_size( 8 );
 
-my $expert_button = new Gtk::Button( _("Expert Mode") );
+my $expert_button = new Gtk::Button( N("Expert Mode") );
 $expert_button->signal_connect( "clicked", sub {
 				  if ($expert_mode) {
 				    $expert_mod_frame->hide();
@@ -158,10 +158,10 @@ $expert_button->signal_connect( "clicked", sub {
 my $expert_button_vbox = new Gtk::VBox(0, 5);
 my $expert_button_hbox = new Gtk::HBox(0, 5);
 my $expert_button_hbox2 = new Gtk::HBox(0, 5);
-my $force_button = new Gtk::ToggleButton( _("force") );
-my $needed_button = new Gtk::ToggleButton( _("if needed") );
-my $scsi_button = new Gtk::ToggleButton( _("omit scsi modules") );
-my $raid_button = new Gtk::ToggleButton( _("omit raid modules") );
+my $force_button = new Gtk::ToggleButton( N("force") );
+my $needed_button = new Gtk::ToggleButton( N("if needed") );
+my $scsi_button = new Gtk::ToggleButton( N("omit scsi modules") );
+my $raid_button = new Gtk::ToggleButton( N("omit raid modules") );
 $expert_button_hbox->pack_start( $force_button, 0, 0, 0 );
 $expert_button_hbox->pack_start( $raid_button, 0, 0, 0 );
 
@@ -197,7 +197,7 @@ fill_tree ($kernel_combo->entry->get_text());
 
 # Create a ScrolledWindow for the list
 my $list_scrolled_win = new Gtk::ScrolledWindow( undef, undef );
-my $rmmod_button = new Gtk::Button( _("Remove a module") );
+my $rmmod_button = new Gtk::Button( N("Remove a module") );
 my $expert_inside_pane2 = new Gtk::VBox (0, 0);
 my $list_selected_row;
 
@@ -219,7 +219,7 @@ $list->set_shadow_type( 'none' );
 $list->show();
 
 ### output
-my $output_frame = new Gtk::Frame( _("Output") );
+my $output_frame = new Gtk::Frame( N("Output") );
 my $output = new Gtk::Text( undef, undef );
 my $vscrollbar = new Gtk::VScrollbar( $output->vadj );
 my $output_hbox = new Gtk::HBox (0, 0);
@@ -231,8 +231,8 @@ $output_frame->add ($output_hbox);
 $global_vbox->pack_start ($output_frame, 0, 0, 0);
 
 ### final buttons
-my $build_button = new Gtk::Button( _("Build the disk") );
-my $cancel_button = new Gtk::Button( _("Cancel") );
+my $build_button = new Gtk::Button( N("Build the disk") );
+my $cancel_button = new Gtk::Button( N("Cancel") );
 my $fin_hbox = new Gtk::HBox( 0, 0 );
 $cancel_button->signal_connect( clicked=> sub {$::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0)});
 $build_button->signal_connect('clicked', \&build_it);
@@ -374,18 +374,18 @@ sub build_it {
   }
   $co .= " " . $kernel_combo->entry->get_text();
   $co .= " 2>&1 |";
-  create_dialog(_("Be sure a media is present for the device %s",  $device_combo->entry->get_text()), 1) or return;
+  create_dialog(N("Be sure a media is present for the device %s",  $device_combo->entry->get_text()), 1) or return;
 # we test if the media is present
  test:
   my $a = "dd count=1 if=/dev/null of=". $device_combo->entry->get_text() ." 2>&1";
   my $b= `$a`;
-  if ($b =~ "dd") {create_dialog(_("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text()), 1) ? goto test : return 0; }
+  if ($b =~ "dd") {create_dialog(N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text()), 1) ? goto test : return 0; }
   
-  open STATUS, $co or do { create_dialog(_("Unable to fork: %s", $!), 0); return; };
+  open STATUS, $co or do { create_dialog(N("Unable to fork: %s", $!), 0); return; };
   while (<STATUS>) {
       $output->insert( $fixed_font, undef, undef, $_ );
   }
-  close STATUS or create_dialog(_("Unable to close properly mkbootdisk: \n %s \n %s", $!, $?), 0);
+  close STATUS or create_dialog(N("Unable to close properly mkbootdisk: \n %s \n %s", $!, $?), 0);
   
   return (0);
 }

@@ -8,7 +8,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE __ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt);
+@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -24,11 +24,11 @@ $SECTORSIZE      = 512;
 #-#####################################################################################
 
 
-sub _ {
+sub N {
     my $s = shift @_; my $t = translate($s);
     sprintf $t, @_;
 }
-sub __ { $_[0] }
+sub N_ { $_[0] }
 
 sub salt {
     my ($nb) = @_;
@@ -96,7 +96,7 @@ sub formatXiB {
 	($nb, $base) = ($newnb, $newbase);
 	$base >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
     };
-    foreach ('', _("KB"), _("MB"), _("GB")) {
+    foreach ('', N("KB"), N("MB"), N("GB")) {
 	$decr->(); 
 	if ($newnb < 1 && $newnb * $newbase < 1) {
 	    my $v = $nb * $base;
@@ -104,7 +104,7 @@ sub formatXiB {
 	    return int($v) . ($s ? ".$s" : '') . $_;
 	}
     }
-    int($newnb * $newbase) . _("TB");
+    int($newnb * $newbase) . N("TB");
 }
 
 sub formatTime {
@@ -112,11 +112,11 @@ sub formatTime {
     if ($h) {
 	sprintf "%02d:%02d", $h, $m;
     } elsif ($m > 1) {
-	_("%d minutes", $m);
+	N("%d minutes", $m);
     } elsif ($m == 1) {
-	_("1 minute");
+	N("1 minute");
     } else {
-	_("%d seconds", $s);
+	N("%d seconds", $s);
     }
 }
 
@@ -161,14 +161,14 @@ sub take_screenshot {
     my $dir = screenshot_dir__and_move() . '/DrakX-screenshots';
     my $warn;
     if (!-e $dir) {
-	mkdir $dir or $in->ask_warn('', _("Can't make screenshots before partitioning")), return;
+	mkdir $dir or $in->ask_warn('', N("Can't make screenshots before partitioning")), return;
 	$warn = 1;
     }
     my $nb = 1;
     $nb++ while -e "$dir/$nb.png";
     system("fb2png /dev/fb0 $dir/$nb.png 0");
 
-    $in->ask_warn('', _("Screenshots will be available after install in %s", "/root/DrakX-screenshots")) if $warn;
+    $in->ask_warn('', N("Screenshots will be available after install in %s", "/root/DrakX-screenshots")) if $warn;
 }
 
 sub join_lines {

@@ -11,77 +11,77 @@ use run_program;
 
 sub description {
     my %services = (
-alsa => __("Launch the ALSA (Advanced Linux Sound Architecture) sound system"),
-anacron => __("Anacron a periodic command scheduler."),
-apmd => __("apmd is used for monitoring batery status and logging it via syslog.
+alsa => N_("Launch the ALSA (Advanced Linux Sound Architecture) sound system"),
+anacron => N_("Anacron a periodic command scheduler."),
+apmd => N_("apmd is used for monitoring batery status and logging it via syslog.
 It can also be used for shutting down the machine when the battery is low."),
-atd => __("Runs commands scheduled by the at command at the time specified when
+atd => N_("Runs commands scheduled by the at command at the time specified when
 at was run, and runs batch commands when the load average is low enough."),
-crond => __("cron is a standard UNIX program that runs user-specified programs
+crond => N_("cron is a standard UNIX program that runs user-specified programs
 at periodic scheduled times. vixie cron adds a number of features to the basic
 UNIX cron, including better security and more powerful configuration options."),
-gpm => __("GPM adds mouse support to text-based Linux applications such the
+gpm => N_("GPM adds mouse support to text-based Linux applications such the
 Midnight Commander. It also allows mouse-based console cut-and-paste operations,
 and includes support for pop-up menus on the console."),
-harddrake => __("HardDrake runs a hardware probe, and optionally configures
+harddrake => N_("HardDrake runs a hardware probe, and optionally configures
 new/changed hardware."),
-httpd => __("Apache is a World Wide Web server. It is used to serve HTML files and CGI."),
-inet => __("The internet superserver daemon (commonly called inetd) starts a
+httpd => N_("Apache is a World Wide Web server. It is used to serve HTML files and CGI."),
+inet => N_("The internet superserver daemon (commonly called inetd) starts a
 variety of other internet services as needed. It is responsible for starting
 many services, including telnet, ftp, rsh, and rlogin. Disabling inetd disables
 all of the services it is responsible for."),
-ipchains => __("Launch packet filtering for Linux kernel 2.2 series, to set
+ipchains => N_("Launch packet filtering for Linux kernel 2.2 series, to set
 up a firewall to protect your machine from network attacks."),
-keytable => __("This package loads the selected keyboard map as set in
+keytable => N_("This package loads the selected keyboard map as set in
 /etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.
 You should leave this enabled for most machines."),
-kheader => __("Automatic regeneration of kernel header in /boot for
+kheader => N_("Automatic regeneration of kernel header in /boot for
 /usr/include/linux/{autoconf,version}.h"),
-kudzu => __("Automatic detection and configuration of hardware at boot."),
-linuxconf => __("Linuxconf will sometimes arrange to perform various tasks
+kudzu => N_("Automatic detection and configuration of hardware at boot."),
+linuxconf => N_("Linuxconf will sometimes arrange to perform various tasks
 at boot-time to maintain the system configuration."),
-lpd => __("lpd is the print daemon required for lpr to work properly. It is
+lpd => N_("lpd is the print daemon required for lpr to work properly. It is
 basically a server that arbitrates print jobs to printer(s)."),
-lvs => __("Linux Virtual Server, used to build a high-performance and highly
+lvs => N_("Linux Virtual Server, used to build a high-performance and highly
 available server."),
-named => __("named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."),
-netfs => __("Mounts and unmounts all Network File System (NFS), SMB (Lan
+named => N_("named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."),
+netfs => N_("Mounts and unmounts all Network File System (NFS), SMB (Lan
 Manager/Windows), and NCP (NetWare) mount points."),
-network => __("Activates/Deactivates all network interfaces configured to start
+network => N_("Activates/Deactivates all network interfaces configured to start
 at boot time."),
-nfs => __("NFS is a popular protocol for file sharing across TCP/IP networks.
+nfs => N_("NFS is a popular protocol for file sharing across TCP/IP networks.
 This service provides NFS server functionality, which is configured via the
 /etc/exports file."),
-nfslock => __("NFS is a popular protocol for file sharing across TCP/IP
+nfslock => N_("NFS is a popular protocol for file sharing across TCP/IP
 networks. This service provides NFS file locking functionality."),
-numlock => __("Automatically switch on numlock key locker under console
+numlock => N_("Automatically switch on numlock key locker under console
 and XFree at boot."),
-oki4daemon => __("Support the OKI 4w and compatible winprinters."),
-pcmcia => __("PCMCIA support is usually to support things like ethernet and
+oki4daemon => N_("Support the OKI 4w and compatible winprinters."),
+pcmcia => N_("PCMCIA support is usually to support things like ethernet and
 modems in laptops.  It won't get started unless configured so it is safe to have
 it installed on machines that don't need it."),
-portmap => __("The portmapper manages RPC connections, which are used by
+portmap => N_("The portmapper manages RPC connections, which are used by
 protocols such as NFS and NIS. The portmap server must be running on machines
 which act as servers for protocols which make use of the RPC mechanism."),
-postfix => __("Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."),
-random => __("Saves and restores system entropy pool for higher quality random
+postfix => N_("Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."),
+random => N_("Saves and restores system entropy pool for higher quality random
 number generation."),
-rawdevices => __("Assign raw devices to block devices (such as hard drive
+rawdevices => N_("Assign raw devices to block devices (such as hard drive
 partitions), for the use of applications such as Oracle"),
-routed => __("The routed daemon allows for automatic IP router table updated via
+routed => N_("The routed daemon allows for automatic IP router table updated via
 the RIP protocol. While RIP is widely used on small networks, more complex
 routing protocols are needed for complex networks."),
-rstatd => __("The rstat protocol allows users on a network to retrieve
+rstatd => N_("The rstat protocol allows users on a network to retrieve
 performance metrics for any machine on that network."),
-rusersd => __("The rusers protocol allows users on a network to identify who is
+rusersd => N_("The rusers protocol allows users on a network to identify who is
 logged in on other responding machines."),
-rwhod => __("The rwho protocol lets remote users get a list of all of the users
+rwhod => N_("The rwho protocol lets remote users get a list of all of the users
 logged into a machine running the rwho daemon (similiar to finger)."),
-sound => __("Launch the sound system on your machine"),
-syslog => __("Syslog is the facility by which many daemons use to log messages
+sound => N_("Launch the sound system on your machine"),
+syslog => N_("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
-usb => __("Load the drivers for your usb devices."),
-xfs => __("Starts the X Font Server (this is mandatory for XFree to run)."),
+usb => N_("Load the drivers for your usb devices."),
+xfs => N_("Starts the X Font Server (this is mandatory for XFree to run)."),
     );
     my ($name, $prefix) = @_;
     my $s = $services{$name};
@@ -107,7 +107,7 @@ sub ask_install_simple {
     my ($in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
     $in->ask_many_from_list("drakxservices",
-			    _("Choose which services should be automatically started at boot time"),
+			    N("Choose which services should be automatically started at boot time"),
 			    {
 			     list => $l,
 			     help => sub { description($_[0], $prefix) },
@@ -119,26 +119,26 @@ sub ask_install_simple {
 sub ask_install {
     my ($in, $prefix) = @_;
     my %root_services = (
-			 _("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd) ],
-			 _("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
+			 N("Printing") => [ qw(cups cupslpd lpr lpd oki4daemon hpoj cups-lpd) ],
+			 N("Internet") => [ qw(httpd boa tux roxen ftp pftp tftp proftpd wu-ftpd pure-ftpdipsec proftpd-xinetd
                                                ipchains iptables ipvsadm isdn4linux ibod jabber jabber-icq adsl squid
                                                portsentry prelude nessusd junkbuster radvd cddbp ippl iptoip jail.init) ],
-			 _("File sharing") => [ qw(nfs nfslock smb nettalk netfs mcserv autofs amd
+			 N("File sharing") => [ qw(nfs nfslock smb nettalk netfs mcserv autofs amd
                                                    venus.init auth2.init codasrv.init update.init swat) ],
-			 _("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs
+			 N("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs
                                              alsa functions halt kheader killall mandrake_everytime mandrake_firstime
                                              random rawdevices single keytable syslog crond medusa-init portmap acon
                                              anacron atd gpm psacct wine acpid numlock jserver sensors mosix bpowerd bpowerfail
                                              fcron powertweak.init ups syslog-ng cvs apcupsd) ],
-			 _("Remote Administration") => [ qw(sshd telnetd telnet rsh rlogin rexec webmin cfd heartbeat ldirectord
+			 N("Remote Administration") => [ qw(sshd telnetd telnet rsh rlogin rexec webmin cfd heartbeat ldirectord
                                                             iplog mon vncserver netsaint olympusd drakxtools_http) ],
-#			 _("Network Client") => [ qw(ypbind nscd arpwatch fetchmail dnrd_rc diald rsync) ],
-#			 _("Network Server") => [ qw(named bootparamd ntpd xntpd chronyd postfix sendmail
+#			 N("Network Client") => [ qw(ypbind nscd arpwatch fetchmail dnrd_rc diald rsync) ],
+#			 N("Network Server") => [ qw(named bootparamd ntpd xntpd chronyd postfix sendmail
 #                                                     imap imaps ipop2 ipop3 pop3s routed yppasswdd ypserv ldap dhcpd dhcrelay
 #                                                     hylafax innd identd rstatd rusersd rwalld rwhod gated
 #                                                     kadmin kprop krb524 krb5kdc krb5server hldsld bayonne sockd dhsd gnu-pop3d
 #                                                     gdips pptpd.conf vrrpd crossfire bnetd pvmd ircd sympa finger ntalk talk) ],
-			 _("Database Server") => [ qw(mysql postgresql) ],
+			 N("Database Server") => [ qw(mysql postgresql) ],
 			);
     my %services_root;
     foreach my $root (keys %root_services) {
@@ -149,12 +149,12 @@ sub ask_install {
     $services{$_} = 0 foreach @{$l || []};
     $services{$_} = 1 foreach @{$on_services || []};
 
-    $in->ask_browse_tree_info('drakxservices', _("Choose which services should be automatically started at boot time"),
+    $in->ask_browse_tree_info('drakxservices', N("Choose which services should be automatically started at boot time"),
 			      {
 			       node_state => sub { $services{$_[0]} ? 'selected' : 'unselected' },
 			       build_tree => sub {
 				   my ($add_node, $flat) = @_;
-				   $add_node->($_, !$flat && ($services_root{$_} || _("Other")))
+				   $add_node->($_, !$flat && ($services_root{$_} || N("Other")))
 				     foreach sort keys %services;
 			       },
 			       grep_unselected => sub { grep { !$services{$_} } @_ },
@@ -167,7 +167,7 @@ sub ask_install {
 				   }
 			       },
 			       get_status => sub {
-				   _("Services: %d activated for %d registered", 
+				   N("Services: %d activated for %d registered", 
 				     scalar(grep { $_ } values %services),
 				     scalar(values %services));
 			       },
@@ -183,7 +183,7 @@ sub ask_standalone_gtk {
     require my_gtk;
     my_gtk->import(qw(:helpers :wrappers));
 
-    my $W = my_gtk->new(_("Services"));
+    my $W = my_gtk->new(N("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
     my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup = new Gtk::Window (-popup),
@@ -195,7 +195,7 @@ sub ask_standalone_gtk {
     my $update_service = sub {
 		my $started = -e "/var/lock/subsys/$_[0]";
                 my $action = $started ? "stop" : "start";
-                $_[1]->set($started ? _("running") : _("stopped"));
+                $_[1]->set($started ? N("running") : N("stopped"));
                 $started, $action;
     };
     my $strip = sub {
@@ -209,31 +209,31 @@ sub ask_standalone_gtk {
     };
     my $b = new Gtk::EventBox();
     $b->set_events(["pointer_motion_mask"]);
-    gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(_("Services and deamons")),
+    gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(N("Services and deamons")),
 	1, gtkset_usize(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;
         	my $infos = $strip->(description($_, $prefix));
-                $infos ||= _("No additional information\nabout this service, sorry.");
+                $infos ||= N("No additional information\nabout this service, sorry.");
 		my $l = new Gtk::Label();
                 my ($started, $action) = $update_service->($service, gtkset_justify($l, 0));
 		[ gtkpack__(new Gtk::HBox(0,0), $_),
 		  gtkpack__(new Gtk::HBox(0,0), $l),
-		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_("Info")), clicked => sub { $display->($infos) })),
+		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(N("Info")), clicked => sub { $display->($infos) })),
                   gtkpack__(new Gtk::HBox(0,0), gtkset_active(gtksignal_connect(
-                          new Gtk::CheckButton(_("On boot")),
+                          new Gtk::CheckButton(N("On boot")),
                           clicked => sub { if ($_[0]->active) {
                                                push @$on_services, $service if !member($service, @$on_services);
                                            } else {
                                                @$on_services = grep { $_ ne $service } @$on_services;
                                         }}), member($service, @$on_services))),
 		  map { my $a = $_;
-                      gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_($a)),
+                      gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(translate($a)),
                           clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_ = `$c`; s/\033\[[^mG]*[mG]//g;
                                            ($started, $action) = $update_service->($service, $l);
                                            $display->($_);
                                          }
-                      )) } (__("Start"), __("Stop"))
+                      )) } (N_("Start"), N_("Stop"))
 		]
 	    }
             @$l)), 500, 400),

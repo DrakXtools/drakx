@@ -18,8 +18,8 @@ sub configure {
   isdn_step_1:
     defined $netc->{autodetect}{isdn}{id} and goto intern_pci;
     $::isInstall and $in->set_help('configureNetworkISDN');
-    my $e = $in->ask_from_list_(_("Network Configuration Wizard"),
-				_("What kind is your ISDN connection?"), [ __("Internal ISDN card"), __("External ISDN modem")]
+    my $e = $in->ask_from_list_(N("Network Configuration Wizard"),
+				N("What kind is your ISDN connection?"), [ N_("Internal ISDN card"), N_("External ISDN modem")]
 			       ) or return;
     if ($e =~ /card/) {
       intern_pci:
@@ -41,8 +41,8 @@ sub configure {
 sub isdn_write_config {
     my ($isdn, $netc) = @_;
   isdn_write_config_step_1:
-    my $e = $in->ask_from_list_(_("Network Configuration Wizard"),
-				    _("Which ISDN configuration do you prefer?
+    my $e = $in->ask_from_list_(N("Network Configuration Wizard"),
+				    N("Which ISDN configuration do you prefer?
 
 * The Old configuration uses isdn4net. It contains powerful
   tools, but is tricky to configure, and not standard.
@@ -51,7 +51,7 @@ sub isdn_write_config {
   standard, but with less tools.
 
 We recommand the light configuration.
-"), [ __("New configuration (isdn-light)"), __("Old configuration (isdn4net)")]
+"), [ N_("New configuration (isdn-light)"), N_("Old configuration (isdn4net)")]
 			       ) or return;
     my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn-light', 'isdn4net');
     if (!$::isStandalone) {
@@ -167,7 +167,7 @@ sub isdn_ask_info {
     my ($isdn, $netc) = @_;
     my $f = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
     $f = "$prefix$f" if !-e $f;
-    my $str = $in->ask_from_treelist(_("ISDN Configuration"), _("Select your provider.\nIf it isn't listed, choose Unlisted."),
+    my $str = $in->ask_from_treelist(N("ISDN Configuration"), N("Select your provider.\nIf it isn't listed, choose Unlisted."),
 				     '|', ['Unlisted - edit manually',
 					   read_providers_backend($f)], 'Unlisted - edit manually')
       or return;
@@ -180,13 +180,13 @@ sub isdn_ask_info {
 
 sub isdn_ask_protocol {
     my @toto = (
-	      { description => $::expert ? _("Europe protocol (EDSS1)") : _("Europe protocol"),
+	      { description => $::expert ? N("Europe protocol (EDSS1)") : N("Europe protocol"),
 		protokol => 2},
-	      { description => $::expert ? _("Protocol for the rest of the world\nNo D-Channel (leased lines)") : _("Protocol for the rest of the world"),
+	      { description => $::expert ? N("Protocol for the rest of the world\nNo D-Channel (leased lines)") : N("Protocol for the rest of the world"),
 		protokol => 3}
 	     );
-    my $e = $in->ask_from_listf(_("ISDN Configuration"),
-				_("Which protocol do you want to use?"),
+    my $e = $in->ask_from_listf(N("ISDN Configuration"),
+				N("Which protocol do you want to use?"),
 				sub { $_[0]{description} },
 				\@toto) or return 0;
     $e->{protokol};
@@ -197,31 +197,31 @@ sub isdn_ask {
     
     #- ISDN card already detected
     if (!$::expert && defined $netc->{autodetect}{isdn}{card_type}) {
-	$in->ask_yesorno(_("ISDN Configuration"), _("Found \"%s\" interface do you want to use it ?",$netc->{autodetect}{isdn}{description}), 1) or return;
+	$in->ask_yesorno(N("ISDN Configuration"), N("Found \"%s\" interface do you want to use it ?",$netc->{autodetect}{isdn}{description}), 1) or return;
 	$isdn->{$_} = $netc->{autodetect}{isdn}{$_} foreach qw(description vendor id card_type driver type mem io io0 io1 irq firmware);
 	goto isdn_ask_step_3;
     }
 
  isdn_ask_step_1:
-    my $e = $in->ask_from_list_(_("ISDN Configuration"),
-				$label . "\n" . _("What kind of card do you have?"),
-				[ __("ISA / PCMCIA"), __("PCI"), __("I don't know") ]
+    my $e = $in->ask_from_list_(N("ISDN Configuration"),
+				$label . "\n" . N("What kind of card do you have?"),
+				[ N_("ISA / PCMCIA"), N_("PCI"), N_("I don't know") ]
 			       ) or return;
     if ($e =~ /PCI/) {
 	$isdn->{card_type} = 'pci';
     } else {
-	$in->ask_from_list_(_("ISDN Configuration"),
-			    _("
+	$in->ask_from_list_(N("ISDN Configuration"),
+			    N("
 If you have an ISA card, the values on the next screen should be right.\n
 If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
 "),
-			    [ __("Continue"), __("Abort") ]) eq 'Continue' or goto isdn_ask_step_1;
+			    [ N_("Continue"), N_("Abort") ]) eq 'Continue' or goto isdn_ask_step_1;
 	$isdn->{card_type} = 'isa';
     }
 
   isdn_ask_step_2:
-    $e = $in->ask_from_listf(_("ISDN Configuration"),
-			     _("Which is your ISDN card?"),
+    $e = $in->ask_from_listf(N("ISDN Configuration"),
+			     N("Which is your ISDN card?"),
 			     sub { $_[0]{description} },
 			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto isdn_ask_step_1;
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
@@ -240,7 +240,7 @@ sub isdn_detect {
   	log::l("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
 	$isdn->{description} =~ s/\|/ -- /;
 	if ($isdn->{type} eq '') {
-	    isdn_ask($isdn, $netc, _("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or return;
+	    isdn_ask($isdn, $netc, N("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or return;
 	} else {
 	  isdn_detect_step_1:
 	    $isdn->{protocol}=isdn_ask_protocol() or return;
@@ -249,7 +249,7 @@ sub isdn_detect {
 	    isdn_write_config($isdn, $netc) or goto isdn_detect_step_2;
 	}
     } else {
-	isdn_ask($isdn, $netc, _("No ISDN PCI card found. Please select one on the next screen.")) or return;
+	isdn_ask($isdn, $netc, N("No ISDN PCI card found. Please select one on the next screen.")) or return;
     }
     $netc->{$_}='ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;

@@ -192,7 +192,7 @@ sub addDefaultRoute {
 
 sub sethostname {
     my ($netc) = @_;
-    syscall_('sethostname', $netc->{HOSTNAME}, length $netc->{HOSTNAME}) or log::l("sethostname failed: $!");
+    syscall_("sethostname", $netc->{HOSTNAME}, length $netc->{HOSTNAME}) or log::l("sethostname failed: $!");
 }
 
 sub resolv($) {
@@ -290,12 +290,12 @@ sub configureNetworkIntf {
     }
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
-	$text = _("WARNING: this device has been previously configured to connect to the Internet.
+	$text = N("WARNING: this device has been previously configured to connect to the Internet.
 Simply accept to keep this device configured.
 Modifying the fields below will override this configuration.");
     }
     else {
-	$text = _("Please enter the IP configuration for this machine.
+	$text = N("Please enter the IP configuration for this machine.
 Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4).");
     }
@@ -305,13 +305,13 @@ notation (for example, 1.2.3.4).");
     my $onboot = 1;
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
-    $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
-  	          (_("Configuring network device %s", $intf->{DEVICE}) . ($module ? _(" (driver %s)", $module) : '') ."\n\n") .
+    $in->ask_from(N("Configuring network device %s", $intf->{DEVICE}),
+  	          (N("Configuring network device %s", $intf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') ."\n\n") .
 	          $text,
-	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
-	           { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
-	           { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
-	           if_($::expert, { label => _("Start at boot"), val => \$onboot, type => "bool" }),
+	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
+	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
+	           { label => N("Automatic IP"), val => \$pump, type => "bool", text => N("(bootp/dhcp)") },
+	           if_($::expert, { label => N("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
 	           { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
@@ -332,17 +332,17 @@ notation (for example, 1.2.3.4).");
 	         	 return 0 if $pump;
 	         	 for (my $i = 0; $i < @fields; $i++) {
 	         	     unless (is_ip($intf->{$fields[$i]})) {
-	         		 $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
+	         		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
 	         		 return (1,$i);
 	         	     }
 	         	     return 0;
 	         	 }
 	         	 if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-	         	     $in->ask_warn('', _('Freq should have the suffix k, M or G (for example, "2.46G" for 2.46 GHz frequency), or add enough \'0\'.'));
+	         	     $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough \'0\'."));
 	         	     return (1,6);
 	         	 }
 	         	 if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-	         	     $in->ask_warn('', _('Rate should have the suffix k, M or G (for example, "11M" for 11M), or add enough \'0\'.'));
+	         	     $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough \'0\'."));
 	         	     return (1,8);
 	         	 }
 	         },
@@ -361,25 +361,25 @@ sub configureNetworkNet {
 #-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
 
     $::isInstall and $in->set_help('configureNetworkHost');
-    $in->ask_from(_("Configuring network"),
-_("Please enter your host name.
+    $in->ask_from(N("Configuring network"),
+N("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one"),
-			       [ { label => _("Host name"), val => \$netc->{HOSTNAME} },
-				 { label => _("DNS server"), val => \$netc->{dnsServer} },
-				 { label => _("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
+			       [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
+				 { label => N("DNS server"), val => \$netc->{dnsServer} },
+				 { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
 				    if_(@devices > 1,
-				 { label => _("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
+				 { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
 				    ),
 			       ],
 		               complete => sub {
 				   if ($netc->{dnsServer} and !is_ip($netc->{dnsServer})) {
-				       $in->ask_warn('', _("DNS server address should be in format 1.2.3.4"));
+				       $in->ask_warn('', N("DNS server address should be in format 1.2.3.4"));
 				       return 1;
 				   }
 				   if ($netc->{GATEWAY} and !is_ip($netc->{GATEWAY})) {
-				       $in->ask_warn('', _("Gateway address should be in format 1.2.3.4"));
+				       $in->ask_warn('', N("Gateway address should be in format 1.2.3.4"));
 				       return 1;
 				   }
 				   0;
@@ -393,14 +393,14 @@ sub miscellaneousNetwork {
     $::isInstall and $in->set_help('configureNetworkProxy');
     $u->{track_network_id} = detect_devices::isLaptop();
     $::expert || $clicked and ($in->ask_from('',
-       _("Proxies configuration"),
-       [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
-         { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },
-	 if_(!$no_track_net, { label => _("Track network card id (useful for laptops)"), val => \$u->{track_network_id}, type => "bool" }),
+       N("Proxies configuration"),
+       [ { label => N("HTTP proxy"), val => \$u->{http_proxy} },
+         { label => N("FTP proxy"),  val => \$u->{ftp_proxy} },
+	 if_(!$no_track_net, { label => N("Track network card id (useful for laptops)"), val => \$u->{track_network_id}, type => "bool" }),
        ],
        complete => sub {
-	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', _("Proxy should be http://...")), return 1,0;
-	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', _("Url should begin with 'ftp:' or 'http:'")), return 1,1;
+	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', N("Proxy should be http://...")), return 1,0;
+	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("Url should begin with 'ftp:' or 'http:'")), return 1,1;
 	   0;
        }
     ) or return);

@@ -46,7 +46,7 @@ sub install {
     if ($o->{in}->isa('interactive::newt')) {
 	$o->{in}->suspend;
     } else {
-	$wait = $o->{in}->wait_message('', _("Installing packages..."));
+	$wait = $o->{in}->wait_message('', N("Installing packages..."));
     }
     standalone::explanations("installed packages @l");
     my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', @l) == 0;
@@ -63,12 +63,12 @@ sub ensure_is_installed {
     my ($o, $pkg, $file, $auto) = @_;
 
     if (! -e $file) {
-	$o->{in}->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	$o->{in}->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
 	  or return if !$auto;
 	$o->{in}->do_pkgs->install($pkg);
     }
     if (! -e $file) {
-	$o->{in}->ask_warn('', _("Mandatory package %s is missing", $pkg));
+	$o->{in}->ask_warn('', N("Mandatory package %s is missing", $pkg));
 	return;
     }
     1;

@@ -426,7 +426,7 @@ sub suggest {
 	if (!$lilo->{message}) {
 	    my $msg_en =
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
-__("Welcome to %s the operating system chooser!
+N_("Welcome to %s the operating system chooser!
 
 Choose an operating system in the list above or
 wait %d seconds for default boot.
@@ -986,23 +986,23 @@ EOF
      output "$::prefix/boot/grub/messages", map { substr(translate($_) . "\n", 0, 78) } ( #- ensure the translated messages are not too big the hard way
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
-__("Welcome to GRUB the operating system chooser!"),
+N_("Welcome to GRUB the operating system chooser!"),
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
-__("Use the %c and %c keys for selecting which entry is highlighted."),
+N_("Use the %c and %c keys for selecting which entry is highlighted."),
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
-__("Press enter to boot the selected OS, \'e\' to edit the"),
+N_("Press enter to boot the selected OS, \'e\' to edit the"),
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
-__("commands before booting, or \'c\' for a command-line."),
+N_("commands before booting, or \'c\' for a command-line."),
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #-PO: and keep them smaller than 79 chars long
-__("The highlighted entry will be booted automatically in %d seconds."),
+N_("The highlighted entry will be booted automatically in %d seconds."),
 );
    
     my $e = "$::prefix/boot/.enough_space";
-    output $e, 1; -s $e or die _("not enough room in /boot");
+    output $e, 1; -s $e or die N("not enough room in /boot");
     unlink $e;
     $f;
 }
@@ -1102,9 +1102,9 @@ sub install_loadlin_desktop {
 
 #-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #-PO: so you may need to put them in English or in a different language if MS-windows doesn't exist in your language
-    foreach (__("Desktop"),
+    foreach (N_("Desktop"),
 #-PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows 
-	     __("Start Menu")) {
+	     N_("Start Menu")) {
         my $d = "$windrive/$windir/" . translate($_);
         -d $d or $d = "$windrive/$windir/$_";
         -d $d or log::l("can't find windows $d directory"), next;
@@ -1123,7 +1123,7 @@ sub install {
     my ($lilo, $fstab, $hds) = @_;
 
     if (my ($p) = grep { $lilo->{boot} eq "/dev/$_->{device}" } @$fstab) {
-	die _("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
+	die N("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
 	  if isThisFs('xfs', $p);
     }
     $lilo->{keytable} = keytable($lilo->{keytable});

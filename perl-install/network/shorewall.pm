@@ -23,8 +23,8 @@ sub check_iptables {
 	-x '/sbin/iptables' && listlength(`/sbin/iptables -t nat -nL`) > 8;
     };
 
-    !$existing_config || $in->ask_okcancel(_("Firewalling configuration detected!"),
-					   _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation."));
+    !$existing_config || $in->ask_okcancel(N("Firewalling configuration detected!"),
+					   N("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation."));
 }
 
 sub set_config_file {

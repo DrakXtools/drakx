@@ -290,7 +290,7 @@ sub configure_pcmcia {
     $running = 1;
 
     if (c::kernel_version() =~ /^2\.2/) {
-	my $msg = _("PCMCIA support no longer exists for 2.2 kernels. Please use a 2.4 kernel.");
+	my $msg = N("PCMCIA support no longer exists for 2.2 kernels. Please use a 2.4 kernel.");
 	log::l($msg);
 	return $msg;
     }

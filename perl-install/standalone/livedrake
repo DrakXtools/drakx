@@ -21,8 +21,8 @@ my $cd_mntpoint = "/mnt/cdrom";
 
 while (! -x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
     ejectCdrom();
-    $in->ask_okcancel(_("Change Cd-Rom"),
-_("Please insert the Installation Cd-Rom in your drive and press Ok when done.
+    $in->ask_okcancel(N("Change Cd-Rom"),
+N("Please insert the Installation Cd-Rom in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid live upgrade."), 1) or $in->exit(0);
     run_program::run("mount", "/mnt/cdrom");
 }
@@ -32,7 +32,7 @@ if (-x "$cd_mntpoint/Mandrake/mdkinst/usr/bin/perl-install/live_install") {
     $::testing or exec "./live_install";
 }
 
-$in->ask_warn('', _("Unable to start live upgrade !!!\n"));
+$in->ask_warn('', N("Unable to start live upgrade !!!\n"));
 $in->exit(1);
 
 sub ejectCdrom {

@@ -40,7 +40,7 @@ $(POFILES): DrakX.pot
 
 DrakX.pot: $(PMSFILES)
 	$(MAKE) $(PMSCFILES);
-	xgettext -F -n --add-comments='-PO' --keyword=_ --keyword=__ -o $@ $(PMSCFILES)
+	xgettext -F -n --add-comments='-PO' --keyword=N --keyword=N_ -o $@ $(PMSCFILES)
 	rm $(PMSCFILES)
 	perl i18n_compssUsers 2>/dev/null >> $@
 

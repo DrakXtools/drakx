@@ -54,7 +54,7 @@ exit 0 if !printerdrake::first_time_dialog($printer, $in, 1);
 # Check whether Foomatic is installed and install it if necessary
 printerdrake::install_foomatic($in);
 
-my $w = $in->wait_message(_("Printerdrake"), _("Reading printer data ..."));
+my $w = $in->wait_message(N("Printerdrake"), N("Reading printer data ..."));
 # Get what was installed before
 eval { $printer = printer::getinfo('') };
 # Choose the spooler by command line options

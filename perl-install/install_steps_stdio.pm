@@ -19,7 +19,7 @@ sub new($$) {
 
 sub enteringStep {
     my ($o, $step) = @_;
-    print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
+    print N("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
     $o->SUPER::enteringStep($step);
 }
 sub leavingStep {

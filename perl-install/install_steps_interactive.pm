@@ -7,7 +7,7 @@ use vars qw(@ISA $new_bootstrap $com_license);
 
 @ISA = qw(install_steps);
 
-$com_license = _("
+$com_license = N("
 Warning
 
 Please read carefully the terms below. If you disagree with any
@@ -64,7 +64,7 @@ use log;
 #-######################################################################################
 sub errorInStep($$) {
     my ($o, $err) = @_;
-    $o->ask_warn(_("Error"), [ _("An error occurred"), formatError($err) ]);
+    $o->ask_warn(N("Error"), [ N("An error occurred"), formatError($err) ]);
 }
 
 sub kill_action {
@@ -82,7 +82,7 @@ sub selectLanguage {
     my ($o) = @_;
 
     $o->{lang} = any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {})
-      || return $o->ask_yesorno('', _("Do you really want to leave the installation?")) ? $o->exit : &selectLanguage;
+      || return $o->ask_yesorno('', N("Do you really want to leave the installation?")) ? $o->exit : &selectLanguage;
     install_steps::selectLanguage($o);
 
     $o->charsetChanged;
@@ -98,7 +98,7 @@ least read and write in that language; and possibly more (various
 fonts, spell checkers, various programs translated etc. that
 varies from language to language).")) if $o->{lang} !~ /^en/ && !lang::load_mo();
     } else {
-	#- don't use _( ) for this, as it is never translated
+	#- no need to have this in po since it is never translated
 	$o->ask_warn('', "The characters of your language can't be displayed in console,
 so the messages will be displayed in english during installation") if $ENV{LANGUAGE} eq 'C';
     }
@@ -109,8 +109,8 @@ sub acceptLicence {
     return if $o->{useless_thing_accepted};
 
     $o->set_help('license');
-    $o->{useless_thing_accepted} = $o->ask_from_list_(_("License agreement"), formatAlaTeX(
-_("Introduction
+    $o->{useless_thing_accepted} = $o->ask_from_list_(N("License agreement"), formatAlaTeX(
+N("Introduction
 
 The operating system and the different components available in the Mandrake Linux distribution 
 shall be called the \"Software Products\" hereafter. The Software Products include, but are not 
@@ -192,9 +192,9 @@ Software included may be covered by patents in your country. For example, the
 MP3 decoders included may require a licence for further usage (see
 http://www.mp3licensing.com for more details). If you are unsure if a patent
 may be applicable to you, check your local laws.
-"), [ __("Accept"), __("Refuse") ], "Refuse") eq "Accept" and return;
+"), [ N_("Accept"), N_("Refuse") ], "Refuse") eq "Accept" and return;
 
-    $o->ask_yesorno('', _("Are you sure you refuse the licence?"), 1) and $o->exit;
+    $o->ask_yesorno('', N("Are you sure you refuse the licence?"), 1) and $o->exit;
 
     &acceptLicence;
 }
@@ -214,10 +214,10 @@ sub selectKeyboard {
 	my $other;
 	my $ext_keyboard = my $KEYBOARD = $o->{keyboard}{KEYBOARD};
 	$o->ask_from_(
-		      { title => _("Keyboard"), 
-			messages => _("Please choose your keyboard layout."),
-			advanced_messages => _("Here is the full list of keyboards available"),
-			advanced_label => _("More"),
+		      { title => N("Keyboard"), 
+			messages => N("Please choose your keyboard layout."),
+			advanced_messages => N("Here is the full list of keyboards available"),
+			advanced_label => N("More"),
 			callbacks => { changed => sub { $other = $_[0]==1 } },
 		      },
 		      [ if_(@best > 1, { val => \$KEYBOARD, type => 'list', format => $format, sort => 1,
@@ -234,11 +234,11 @@ sub selectKeyboard {
 #------------------------------------------------------------------------------
 sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
-    $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def) || die 'already displayed');
+    $verif->($o->ask_from_list(N("Install Class"), N("Which installation class do you want?"), $l, $def) || die 'already displayed');
 
     return if !@$l2;
 
-    $::live ? 'Update' : $o->ask_from_list_(_("Install/Update"), _("Is this an install or an update?"), $l2, $def2);
+    $::live ? 'Update' : $o->ask_from_list_(N("Install/Update"), N("Is this an install or an update?"), $l2, $def2);
 }
 
 #------------------------------------------------------------------------------
@@ -247,22 +247,22 @@ sub selectInstallClass {
 
     my %c = my @c = (
       if_(!$::corporate,
-	_("Recommended") => "beginner",
+	N("Recommended") => "beginner",
       ),
       if_($o->{meta_class} ne 'desktop',
-	_("Expert")	 => "expert",
+	N("Expert")	 => "expert",
       ),
     );
-    %c = @c = (_("Expert") => "expert") if $::expert && !$clicked;
+    %c = @c = (N("Expert") => "expert") if $::expert && !$clicked;
 
     $o->set_help('selectInstallClassCorpo') if $::corporate;
 
     my $verifInstallClass = sub { $::expert = $c{$_[0]} eq "expert" };
-    my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? __("Upgrade packages only") : __("Upgrade") : __("Install");
+    my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? N_("Upgrade packages only") : N_("Upgrade") : N_("Install");
 
     if ($installMode = $o->selectInstallClass1($verifInstallClass,
 					       first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
-					       exists $o->{isUpgrade} ? [] : [ __("Install"), __("Upgrade"), __("Upgrade packages only") ], $installMode)) {
+					       exists $o->{isUpgrade} ? [] : [ N_("Install"), N_("Upgrade"), N_("Upgrade packages only") ], $installMode)) {
 	log::l("install class: $installMode");
 	$o->{isUpgrade} = $installMode =~ /Upgrade/;
 	$o->{keepConfiguration} = $installMode =~ /packages only/;
@@ -279,14 +279,14 @@ sub selectMouse {
 
     my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
     $o->{mouse} = mouse::fullname2mouse(
-	$o->ask_from_treelist_('', _("Please choose the type of your mouse."), 
+	$o->ask_from_treelist_('', N("Please choose the type of your mouse."), 
 			       '|', [ mouse::fullnames() ], $prev) || return) if $force;
 
     if ($force && $o->{mouse}{type} eq 'serial') {
 	$o->set_help('selectSerialPort');
 	$o->{mouse}{device} = 
-	  $o->ask_from_listf(_("Mouse Port"),
-			    _("Please choose on which serial port your mouse is connected to."),
+	  $o->ask_from_listf(N("Mouse Port"),
+			    N("Please choose on which serial port your mouse is connected to."),
 			    \&mouse::serial_port2text,
 			    [ mouse::serial_ports() ]) or return;
     }
@@ -294,10 +294,10 @@ sub selectMouse {
 	#- set a sane default F11/F12
 	$o->{mouse}{button2_key} = 87;
 	$o->{mouse}{button3_key} = 88;
-	$o->ask_from('', _("Buttons emulation"),
+	$o->ask_from('', N("Buttons emulation"),
 		[
-		{ label => _("Button 2 Emulation"), val => \$o->{mouse}{button2_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
-		{ label => _("Button 3 Emulation"), val => \$o->{mouse}{button3_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
+		{ label => N("Button 2 Emulation"), val => \$o->{mouse}{button2_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
+		{ label => N("Button 3 Emulation"), val => \$o->{mouse}{button3_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
 		]) or return;
     }
     
@@ -318,14 +318,14 @@ sub setupSCSI {
 
     if (!$::noauto && arch() =~ /i.86/) {
 	if ($o->{pcmcia} ||= !$::testing && c::pcmcia_probe()) {
-	    my $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards..."));
+	    my $w = $o->wait_message(N("PCMCIA"), N("Configuring PCMCIA cards..."));
 	    my $results = modules::configure_pcmcia($o->{pcmcia});
 	    $w = undef;
 	    $results and $o->ask_warn('', $results);
 	}
     }
     { 
-	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
+	my $w = $o->wait_message(N("IDE"), N("Configuring IDE"));
 	modules::load(modules::category2modules('disk/cdrom'));
     }
     any::load_category($o, 'bus/firewire', 1);
@@ -342,10 +342,10 @@ sub ask_mntpoint_s {
     my @fstab = grep { isTrueFS($_) } @$fstab;
     @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
     @fstab = @$fstab if @fstab == 0;
-    die _("No partition available") if @fstab == 0;
+    die N("No partition available") if @fstab == 0;
 
     {
-	my $w = $o->wait_message('', _("Scanning partitions to find mount points"));
+	my $w = $o->wait_message('', N("Scanning partitions to find mount points"));
 	install_any::suggest_mount_points($fstab, $o->{prefix}, 'uniq');
 	log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
     }
@@ -353,7 +353,7 @@ sub ask_mntpoint_s {
 	$fstab[0]{mntpoint} = '/';
     } else {
 	$o->ask_from('', 
-				  _("Choose the mount points"),
+				  N("Choose the mount points"),
 				  [ map { { label => partition_table::description($_), 
 					    val => \$_->{mntpoint},
 					    not_edit => 0,
@@ -383,7 +383,7 @@ sub doPartitionDisks {
 		fsedit::add($freepart->{hd}, { start => $freepart->{start}, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
-		$o->ask_warn('',_("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
+		$o->ask_warn('',N("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
 	    }
 	}
     }
@@ -392,9 +392,9 @@ sub doPartitionDisks {
 	# either one root is defined (and all is ok), or we take the first one we find
 	my $p = fsedit::get_root_($o->{fstab});
         if (!$p) {
-            my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix}) or die _("No root partition found to perform an upgrade");
-	    $p = $o->ask_from_listf(_("Root Partition"),
-			            _("What is the root partition (/) of your system?"),
+            my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix}) or die N("No root partition found to perform an upgrade");
+	    $p = $o->ask_from_listf(N("Root Partition"),
+			            N("What is the root partition (/) of your system?"),
 			            \&partition_table::description, \@l) or die "setstep exitInstall\n";
         }
 	install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
@@ -408,7 +408,7 @@ sub doPartitionDisks {
 #------------------------------------------------------------------------------
 sub rebootNeeded {
     my ($o) = @_;
-    $o->ask_warn('', _("You need to reboot for the partition table modifications to take place"));
+    $o->ask_warn('', N("You need to reboot for the partition table modifications to take place"));
 
     install_steps::rebootNeeded($o);
 }
@@ -432,8 +432,8 @@ sub choosePartitionsToFormat {
     $_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
 
     $o->ask_from_(
-        { messages => _("Choose the partitions you want to format"),
-          advanced_messages => _("Check bad blocks?"),
+        { messages => N("Choose the partitions you want to format"),
+          advanced_messages => N("Check bad blocks?"),
         },
         [ map { 
 	    my $e = $_;
@@ -460,31 +460,31 @@ sub formatMountPartitions {
     catch_cdie {
         fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
         	my ($part) = @_;
-        	$w ||= $o->wait_message('', _("Formatting partitions"));
+        	$w ||= $o->wait_message('', N("Formatting partitions"));
         	$w->set(isLoopback($part) ?
-        		_("Creating and formatting file %s", $part->{loopback_file}) :
-        		_("Formatting partition %s", $part->{device}));
+        		N("Creating and formatting file %s", $part->{loopback_file}) :
+        		N("Formatting partition %s", $part->{device}));
         });
     } sub { 
 	$@ =~ /fsck failed on (\S+)/ or return;
-	$o->ask_yesorno('', _("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can loose data)", $1), 1);
+	$o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can loose data)", $1), 1);
     };
-    die _("Not enough swap space to fulfill installation, please add some") if availableMemory < 40 * 1024;
+    die N("Not enough swap space to fulfill installation, please add some") if availableMemory < 40 * 1024;
 }
 
 #------------------------------------------------------------------------------
 sub setPackages {
     my ($o, $rebuild_needed) = @_;
 
-    my $w = $o->wait_message('', $rebuild_needed ? _("Looking for available packages and rebuilding rpm database...") :
-			     _("Looking for available packages..."));
+    my $w = $o->wait_message('', $rebuild_needed ? N("Looking for available packages and rebuilding rpm database...") :
+			     N("Looking for available packages..."));
     install_any::setPackages($o, $rebuild_needed);
 
-    $w->set(_("Looking at packages already installed..."));
+    $w->set(N("Looking at packages already installed..."));
     pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
 
     if ($rebuild_needed) {
-	$w->set(_("Finding packages to upgrade..."));
+	$w->set(N("Finding packages to upgrade..."));
 	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
     }
 }
@@ -502,7 +502,7 @@ sub choosePackages {
     require pkgs;
 
     my $min_size = pkgs::selectedSize($packages);
-    $min_size < $availableC or die _("Your system does not have enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
+    $min_size < $availableC or die N("Your system does not have enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
     my $min_mark = $::expert ? 3 : 4;
 
@@ -526,7 +526,7 @@ sub choosePackages {
 sub choosePackagesTree {
     my ($o, $packages, $limit_to_medium) = @_;
 
-    $o->ask_many_from_list('', _("Choose the packages you want to install"),
+    $o->ask_many_from_list('', N("Choose the packages you want to install"),
 			   {
 			    list => [ grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium }
 				      @{$packages->{depslist}} ],
@@ -538,18 +538,18 @@ sub choosePackagesTree {
 sub loadSavePackagesOnFloppy {
     my ($o, $packages) = @_;
     $o->ask_from('', 
-_("Please choose load or save package selection on floppy.
+N("Please choose load or save package selection on floppy.
 The format is the same as auto_install generated floppies."),
-		 [ { val => \ (my $choice), list => [ __("Load from floppy"), __("Save on floppy") ], format => \&translate, type => 'list' } ]) or return;
+		 [ { val => \ (my $choice), list => [ N_("Load from floppy"), N_("Save on floppy") ], format => \&translate, type => 'list' } ]) or return;
 
     if ($choice eq 'Load from floppy') {
 	while (1) {
-	    my $w = $o->wait_message(_("Package selection"), _("Loading from floppy"));
+	    my $w = $o->wait_message(N("Package selection"), N("Loading from floppy"));
 	    log::l("load package selection from floppy");
 	    my $O = eval { install_any::loadO(undef, 'floppy') };
 	    if ($@) {
 		$w = undef;	#- close wait message.
-		$o->ask_okcancel('', _("Insert a floppy containing package selection"))
+		$o->ask_okcancel('', N("Insert a floppy containing package selection"))
 		  or return;
 	    } else {
 		install_any::unselectMostPackages($o);
@@ -618,7 +618,7 @@ sub chooseGroups {
 	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
 	$unselect_all ||= $size > $lsize;
 	$size = $lsize;
-	_("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available_size);
+	N("Total size: %d / %d MB", pkgs::correctSize($size / sqr(1024)), $available_size);
     };
 
     while (1) {
@@ -631,7 +631,7 @@ sub chooseGroups {
 	$o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
 	last if pkgs::correctSize($size / sqr(1024)) < $available_size;
        
-	$o->ask_warn('', _("Selected size is larger than available space"));	
+	$o->ask_warn('', N("Selected size is larger than available space"));	
     }
 
     $o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
@@ -646,14 +646,14 @@ sub chooseGroups {
 	my $docs = !$o->{excludedocs};	
 	my $minimal = !grep { $_ } values %{$o->{compssUsersChoice}};
 
-	$o->ask_from(_("Type of install"), 
-		     _("You haven't selected any group of packages.
+	$o->ask_from(N("Type of install"), 
+		     N("You haven't selected any group of packages.
 Please choose the minimal installation you want:"),
 		     [
-		      { val => \$o->{compssUsersChoice}{X}, type => 'bool', text => _("With X"), disabled => sub { $minimal } },
+		      { val => \$o->{compssUsersChoice}{X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
 		        if_($::expert || $minimal,
-		      { val => \$docs, type => 'bool', text => _("With basic documentation (recommended!)"), disabled => sub { $minimal } },
-		      { val => \$minimal, type => 'bool', text => _("Truly minimal install (especially no urpmi)") },
+		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
+		      { val => \$minimal, type => 'bool', text => N("Truly minimal install (especially no urpmi)") },
 			),
 		     ],
 		     changed => sub { $o->{compssUsersChoice}{X} = $docs = 0 if $minimal },
@@ -680,7 +680,7 @@ sub reallyChooseGroups {
     my $size_text = &$size_to_display;
 
     my ($path, $all);
-    $o->ask_from('', _("Package Group Selection"), [
+    $o->ask_from('', N("Package Group Selection"), [
         { val => \$size_text, type => 'label' }, {},
 	 (map { 
 	       my $old = $path;
@@ -694,8 +694,8 @@ sub reallyChooseGroups {
 		  help => translate($o->{compssUsers}{$_}{descr}),
 		 }
 	   } @{$o->{compssUsersSorted}}),
-	 if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
-	 if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
+	 if_($o->{meta_class} eq 'desktop', { text => N("All"), val => \$all, type => 'bool' }),
+	 if_($individual, { text => N("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
     ], changed => sub { $size_text = &$size_to_display }) or return;
 
     if ($all) {
@@ -738,12 +738,12 @@ sub chooseCD {
 
     $o->set_help('chooseCD');
     $o->ask_many_from_list('',
-_("If you have all the CDs in the list below, click Ok.
+N("If you have all the CDs in the list below, click Ok.
 If you have none of those CDs, click Cancel.
 If only some CDs are missing, unselect them, then click Ok."),
 			   {
 			    list => \@mediumsDescr,
-			    label => sub { _("Cd-Rom labeled \"%s\"", $_[0]) },
+			    label => sub { N("Cd-Rom labeled \"%s\"", $_[0]) },
 			    val => sub { \$mediumsDescr{$_[0]} },
 			   }) or do {
 			       $mediumsDescr{$_} = 0 foreach @mediumsDescr; #- force unselection of other CDs.
@@ -764,7 +764,7 @@ sub installPackages {
     my ($o, $packages) = @_;
     my ($current, $total) = (0, 0);
 
-    my $w = $o->wait_message(_("Installing"), _("Preparing installation"));
+    my $w = $o->wait_message(N("Installing"), N("Preparing installation"));
 
     my $old = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
@@ -773,7 +773,7 @@ sub installPackages {
 	    $total = $_total;
 	} elsif ($type eq 'inst' && $subtype eq 'start') {
 	    my $p = $data->{depslist}[$id];
-	    $w->set(_("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
+	    $w->set(N("Installing package %s\n%d%%", $p->name, $total && 100 * $current / $total));
 	    $current += $p->size;
 	} else { goto $old }
     };
@@ -788,8 +788,8 @@ sub installPackages {
 	$method eq 'cdrom' && !$::oem and do {
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
-	    my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($com_license), [ __("Accept"), __("Refuse") ], "Accept") eq "Accept");
-            $r &&= $o->ask_okcancel('', _("Change your Cd-Rom!
+	    my $r = $name !~ /commercial/i || ($o->{useless_thing_accepted2} ||= $o->ask_from_list_('', formatAlaTeX($com_license), [ N_("Accept"), N_("Refuse") ], "Accept") eq "Accept");
+            $r &&= $o->ask_okcancel('', N("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
 If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
@@ -801,11 +801,11 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
       sub {
 	  if ($@ =~ /^error ordering package list: (.*)/) {
 	      $o->ask_yesorno('', [
-_("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and return 1;
+N("There was an error ordering packages:"), $1, N("Go on anyway?") ], 1) and return 1;
 	      ${$_[0]} = "already displayed";
 	  } elsif ($@ =~ /^error installing package list: (.*)/) {
 	      $o->ask_yesorno('', [
-_("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and return 1;
+N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and return 1;
 	      ${$_[0]} = "already displayed";
 	  }
 	  0;
@@ -819,19 +819,19 @@ _("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and r
 
 sub afterInstallPackages($) {
     my ($o) = @_;
-    my $w = $o->wait_message('', _("Post-install configuration"));
+    my $w = $o->wait_message('', N("Post-install configuration"));
     $o->SUPER::afterInstallPackages($o);
 }
 
 sub copyKernelFromFloppy {
     my ($o) = @_;
-    $o->ask_okcancel('', _("Please insert the Boot floppy used in drive %s", $o->{blank}), 1) or return;
+    $o->ask_okcancel('', N("Please insert the Boot floppy used in drive %s", $o->{blank}), 1) or return;
     $o->SUPER::copyKernelFromFloppy();
 }
 
 sub updateModulesFromFloppy {
     my ($o) = @_;
-    $o->ask_okcancel('', _("Please insert the Update Modules floppy in drive %s", $o->{updatemodules}), 1) or return;
+    $o->ask_okcancel('', N("Please insert the Update Modules floppy in drive %s", $o->{updatemodules}), 1) or return;
     $o->SUPER::updateModulesFromFloppy();
 }
 
@@ -851,7 +851,7 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 sub installCrypto {
     my $license =
-_("You now have the opportunity to download encryption software.
+N("You now have the opportunity to download encryption software.
 
 WARNING:
 
@@ -890,7 +890,7 @@ sub installUpdates {
 
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
 formatAlaTeX(
-_("You now have the opportunity to download updated packages. These packages
+N("You now have the opportunity to download updated packages. These packages
 have been released after the distribution was released. They may
 contain security or bug fixes.
 
@@ -905,12 +905,12 @@ Do you want to install the updates ?"))) || return;
     require crypto;
     eval {
 	my @mirrors = do { my $w = $o->wait_message('',
-						    _("Contacting Mandrake Linux web site to get the list of available mirrors..."));
+						    N("Contacting Mandrake Linux web site to get the list of available mirrors..."));
 			   crypto::mirrors() };
 	#- if no mirror have been found, use current time zone and propose among available.
 	$u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone});
 	$u->{mirror} = $o->ask_from_treelistf('', 
-					      _("Choose a mirror from which to get the packages"), 
+					      N("Choose a mirror from which to get the packages"), 
 					      '|',
 					      \&crypto::mirror2text,
 					      \@mirrors,
@@ -919,7 +919,7 @@ Do you want to install the updates ?"))) || return;
     return if $@ || !$u->{mirror};
 
     my $update_medium = do {
-	my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages..."));
+	my $w = $o->wait_message('', N("Contacting the mirror to get the list of available packages..."));
 	crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
     };
 
@@ -947,20 +947,20 @@ sub configureTimezone {
     my ($o, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone}) || return;
+    $o->{timezone}{timezone} = $o->ask_from_treelist('', N("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone}) || return;
     $o->set_help('configureTimezoneGMT');
 
     my $ntp = to_bool($o->{timezone}{ntp});
     $o->ask_from('', '', [
-	  { text => _("Hardware clock set to GMT"), val => \$o->{timezone}{UTC}, type => 'bool' },
-	  { text => _("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },
+	  { text => N("Hardware clock set to GMT"), val => \$o->{timezone}{UTC}, type => 'bool' },
+	  { text => N("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },
     ]) or goto &configureTimezone
 	    if $::expert || $clicked;
     if ($ntp) {
 	my @servers = split("\n", timezone::ntp_servers());
 
 	$o->ask_from('', '',
-	    [ { label => _("NTP Server"), val => \$o->{timezone}{ntp}, list => \@servers, not_edit => 0 } ]
+	    [ { label => N("NTP Server"), val => \$o->{timezone}{ntp}, list => \@servers, not_edit => 0 } ]
         ) or goto &configureTimezone;
 	$o->{timezone}{ntp} =~ s/.*\((.+)\)/$1/;
     } else {
@@ -994,15 +994,15 @@ sub summary {
     my $format_printers = sub {
 	my $printer = $o->{printer};
 	if (is_empty_hash_ref($printer->{configured})) {
-	    pkgs::packageByName($o->{packages}, 'cups')->flag_installed and return _("Remote CUPS server");
-	    return _("No printer");
+	    pkgs::packageByName($o->{packages}, 'cups')->flag_installed and return N("Remote CUPS server");
+	    return N("No printer");
 	}
 	my $entry;
 	foreach ($printer->{currentqueue},
 		 map { $_->{queuedata} } ($printer->{configured}{$printer->{DEFAULT}}, values %{$printer->{configured}})) {
 	    $_ && ($_->{make} || $_->{model}) and return "$_->{make} $_->{model}";
 	}
-	return _("Remote CUPS server"); #- fall back in case of something wrong.
+	return N("Remote CUPS server"); #- fall back in case of something wrong.
     };
 
     my @sound_cards = (arch() =~ /ppc/ ? \&modules::load_category : \&modules::probe_category)->('multimedia/sound');
@@ -1012,37 +1012,37 @@ sub summary {
     my $isa_sound_card = 
       !@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO}) &&
 	sub {
-	    if ($o->ask_yesorno('', _("Do you have an ISA sound card?"))) {
+	    if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
 		$o->do_pkgs->install('sndconfig');
-		$o->ask_warn('', _("Run \"sndconfig\" after installation to configure your sound card"));
+		$o->ask_warn('', N("Run \"sndconfig\" after installation to configure your sound card"));
 	    } else {
-		$o->ask_warn('', _("No sound card detected. Try \"harddrake\" after installation"));
+		$o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
 	    }
 	};
 
     $o->ask_from_({
-		   messages => _("Summary"),
+		   messages => N("Summary"),
 		   cancel   => '',
 		  }, [
-{ label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}); &$format_mouse } },
-{ label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
-{ label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
-{ label => _("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
+{ label => N("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}); &$format_mouse } },
+{ label => N("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
+{ label => N("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
+{ label => N("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
     (map {
-{ label => _("ISDN card"), val => $_->{description}, clicked => sub { $o->configureNetwork } }
+{ label => N("ISDN card"), val => $_->{description}, clicked => sub { $o->configureNetwork } }
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
     (map { 
         my $device = $_;
-	   { label => _("Sound card"), val => $_->{description}, clicked => sub {
+	   { label => N("Sound card"), val => $_->{description}, clicked => sub {
 		  require harddrake::sound; 
 		  harddrake::sound::config($o, $device)
 		  }
 	   }
     } @sound_cards),
-    if_($isa_sound_card, { label => _("Sound card"), clicked => $isa_sound_card }), 
+    if_($isa_sound_card, { label => N("Sound card"), clicked => $isa_sound_card }), 
     (map {
 	my $driver = $_->{driver};
-	{ label => _("TV card"), val => $_->{description}, clicked => sub { 
+	{ label => N("TV card"), val => $_->{description}, clicked => sub { 
 	      require harddrake::v4l; 
 	      harddrake::v4l::config($o, $driver);
 	  }
@@ -1084,10 +1084,10 @@ sub configurePrinter {
 sub setRootPassword {
     my ($o, $clicked) = @_;
     my $sup = $o->{superuser} ||= {};
-    my $auth = ($o->{authentication}{LDAP} && __("LDAP") ||
-		$o->{authentication}{NIS} && __("NIS") ||
-		$o->{authentication}{winbind} && __("Windows Domain") ||
-		__("Local files"));
+    my $auth = ($o->{authentication}{LDAP} && N_("LDAP") ||
+		$o->{authentication}{NIS} && N_("NIS") ||
+		$o->{authentication}{winbind} && N_("Windows Domain") ||
+		N_("Local files"));
     $sup->{password2} ||= $sup->{password} ||= "";
 
     return if $o->{security} < 1 && !$clicked;
@@ -1096,49 +1096,49 @@ sub setRootPassword {
 
     $o->ask_from_(
         {
-	 title => _("Set root password"), 
-	 messages => _("Set root password"),
-	 cancel => ($o->{security} <= 2 && !$::corporate ? _("No password") : ''),
+	 title => N("Set root password"), 
+	 messages => N("Set root password"),
+	 cancel => ($o->{security} <= 2 && !$::corporate ? N("No password") : ''),
 	 callbacks => { 
 	     complete => sub {
-		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,0);
+		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return (1,0);
 		 length $sup->{password} < 2 * $o->{security}
-		   and $o->ask_warn('', _("This password is too short (it must be at least %d characters long)", 2 * $o->{security})), return (1,0);
+		   and $o->ask_warn('', N("This password is too short (it must be at least %d characters long)", 2 * $o->{security})), return (1,0);
 		 return 0
         } } }, [
-{ label => _("Password"), val => \$sup->{password},  hidden => 1 },
-{ label => _("Password (again)"), val => \$sup->{password2}, hidden => 1 },
+{ label => N("Password"), val => \$sup->{password},  hidden => 1 },
+{ label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },
   if_($::expert,
-{ label => _("Authentication"), val => \$auth, list => [ __("Local files"), __("LDAP"), __("NIS"), __("Windows Domain") ], format => \&translate },
+{ label => N("Authentication"), val => \$auth, list => [ N_("Local files"), N_("LDAP"), N_("NIS"), N_("Windows Domain") ], format => \&translate },
   ),
 			 ]) or return;
 
-    if ($auth eq __("LDAP")) {
+    if ($auth eq N_("LDAP")) {
 	$o->{authentication}{LDAP} ||= 'ldap.' . $o->{netc}{DOMAINNAME};
 	$o->{netc}{LDAPDOMAIN} ||= join (',', map { "dc=$_" } split /\./, $o->{netc}{DOMAINNAME});
 	$o->ask_from('',
-		     _("Authentication LDAP"),
-		     [ { label => _("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },
-		       { label => _("LDAP Server"), val => \$o->{authentication}{LDAP} },
+		     N("Authentication LDAP"),
+		     [ { label => N("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },
+		       { label => N("LDAP Server"), val => \$o->{authentication}{LDAP} },
 		     ]) or goto &setRootPassword;
     } else { $o->{authentication}{LDAP} = '' }
-    if ($auth eq __("NIS")) { 
+    if ($auth eq N_("NIS")) { 
 	$o->{authentication}{NIS} ||= 'broadcast';
 	$o->ask_from('',
-		     _("Authentication NIS"),
-		     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-		       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
+		     N("Authentication NIS"),
+		     [ { label => N("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
+		       { label => N("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
 		     ]) or goto &setRootPassword;
     } else { $o->{authentication}{NIS} = '' }
-    if ($auth eq __("Windows Domain")) {
+    if ($auth eq N_("Windows Domain")) {
 	#- maybe we should browse the network like diskdrake --smb and get the 'doze server names in a list 
 	#- but networking isn't setup yet necessarily
-	$o->ask_warn('', _("For this to work for a W2K PDC, you will probably need to have the admin run: C:\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."));
+	$o->ask_warn('', N("For this to work for a W2K PDC, you will probably need to have the admin run: C:\>net localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add and reboot the server.\nYou will also need the username/password of a Domain Admin to join the machine to the Windows(TM) domain.\nIf networking is not yet enabled, Drakx will attempt to join the domain after the network setup step.\nShould this setup fail for some reason and domain authentication is not working, run 'smbpasswd -j DOMAIN -U USER%PASSWORD' using your Windows(tm) Domain, and Admin Username/Password, after system boot.\nThe command 'wbinfo -t' will test whether your authentication secrets are good."));
 	$o->ask_from('',
-			_("Authentication Windows Domain"),
-			[ { label => _("Windows Domain"), val => \ ($o->{netc}{WINDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-			  { label => _("Domain Admin User Name"), val => \$o->{authentication}{winbind} },
-			  { label => _("Domain Admin Password"), val => \$o->{authentication}{winpass}, hidden => 1  },
+			N("Authentication Windows Domain"),
+			[ { label => N("Windows Domain"), val => \ ($o->{netc}{WINDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
+			  { label => N("Domain Admin User Name"), val => \$o->{authentication}{winbind} },
+			  { label => N("Domain Admin Password"), val => \$o->{authentication}{winpass}, hidden => 1  },
 			]) or goto &setRootPassword;
     } else { $o->{authentication}{winbind} = '' }
     install_steps::setRootPassword($o);
@@ -1173,7 +1173,7 @@ sub createBootdisk {
     if (arch() =~ /sparc/) {
 	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
 	$o->ask_okcancel('',
-			 _("A custom bootdisk provides a way of booting into your Linux system without
+			 N("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 SILO on your system, or another operating system removes SILO, or SILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
@@ -1189,20 +1189,20 @@ drive and press \"Ok\"."),
     } else {
 	my @l = detect_devices::floppies_dev();
 	my %l = (
-		 'fd0'  => _("First floppy drive"),
-		 'fd1'  => _("Second floppy drive"),
-		 'Skip' => _("Skip"),
+		 'fd0'  => N("First floppy drive"),
+		 'fd1'  => N("Second floppy drive"),
+		 'Skip' => N("Skip"),
 		 );
 
 	if ($first_time || @l == 1) {
 	    $o->ask_yesorno('', formatAlaTeX(
-			    _("A custom bootdisk provides a way of booting into your Linux system without
+			    N("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 LILO (or grub) on your system, or another operating system removes LILO, or LILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
 failures. Would you like to create a bootdisk for your system?
-%s", isThisFs('xfs', fsedit::get_root($o->{fstab})) ? _("
+%s", isThisFs('xfs', fsedit::get_root($o->{fstab})) ? N("
 
 (WARNING! You're using XFS for your root partition,
 creating a bootdisk on a 1.44 Mb floppy will probably fail,
@@ -1210,25 +1210,25 @@ because XFS needs a very large driver).") : '')),
 			    $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
 	    $o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
 	} else {
-	    @l or die _("Sorry, no floppy drive available");
+	    @l or die N("Sorry, no floppy drive available");
 
 	    $o->ask_from_(
               {
-	       messages => _("Choose the floppy drive you want to use to make the bootdisk"),
+	       messages => N("Choose the floppy drive you want to use to make the bootdisk"),
 	      }, [ { val => \$o->{mkbootdisk}, list => \@l, format => sub { $l{$_[0]} || $_[0] } } ]
             ) or return;
         }
-        $o->ask_warn('', _("Insert a floppy in %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
+        $o->ask_warn('', N("Insert a floppy in %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
     }
 
-    my $w = $o->wait_message('', _("Creating bootdisk..."));
+    my $w = $o->wait_message('', N("Creating bootdisk..."));
     install_steps::createBootdisk($o);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloaderBefore {
     my ($o) = @_;
-    my $w = $o->wait_message('', _("Preparing bootloader..."));
+    my $w = $o->wait_message('', N("Preparing bootloader..."));
     $o->set_help('empty');
     $o->SUPER::setupBootloaderBefore($o);
 }
@@ -1239,29 +1239,29 @@ sub setupBootloader {
     if (arch() =~ /ppc/) {
 	my $machtype = detect_devices::get_mac_generation();
 	if ($machtype !~ /NewWorld/) {
-	    $o->ask_warn('', _("You appear to have an OldWorld or Unknown\n machine, the yaboot bootloader will not work for you.\nThe install will continue, but you'll\n need to use BootX to boot your machine"));
+	    $o->ask_warn('', N("You appear to have an OldWorld or Unknown\n machine, the yaboot bootloader will not work for you.\nThe install will continue, but you'll\n need to use BootX to boot your machine"));
 	    log::l("OldWorld or Unknown Machine - no yaboot setup");
 	    return;
 	}
     }
     if (arch() =~ /^alpha/) {
-	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
+	$o->ask_yesorno('', N("Do you want to use aboot?"), 1) or return;
 	catch_cdie { $o->SUPER::setupBootloader } sub {
 	    $o->ask_yesorno('', 
-_("Error installing aboot, 
+N("Error installing aboot, 
 try to force installation even if that destroys the first partition?"));
 	};
     } else {
 	any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
 
 	{
-	    my $w = $o->wait_message('', _("Installing bootloader"));
+	    my $w = $o->wait_message('', N("Installing bootloader"));
 	    eval { $o->SUPER::setupBootloader };
 	}
 	if (my $err = $@) {
 	    $err =~ /failed$/ or die;
 	    $o->ask_warn('', 
-			 [ _("Installation of bootloader failed. The following error occured:"),
+			 [ N("Installation of bootloader failed. The following error occured:"),
 			   grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
 	    unlink "$o->{prefix}/tmp/.error";
 	    die "already displayed";
@@ -1269,7 +1269,7 @@ try to force installation even if that destroys the first partition?"));
 	    my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
 	    chop($of_boot);
 	    unlink "$o->{prefix}/tmp/.error";
-	    $o->ask_warn('', _("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
+	    $o->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
 	}
     }
 }
@@ -1303,11 +1303,11 @@ sub generateAutoInstFloppy {
 
     my $floppy = detect_devices::floppy();
 
-    $o->ask_okcancel('', _("Insert a blank floppy in drive %s", $floppy), 1) or return;
+    $o->ask_okcancel('', N("Insert a blank floppy in drive %s", $floppy), 1) or return;
 
     my $dev = devices::make($floppy);
     {
-	my $w = $o->wait_message('', _("Creating auto install floppy..."));
+	my $w = $o->wait_message('', N("Creating auto install floppy..."));
 	install_any::getAndSaveAutoInstallFloppy($o, $replay, $dev) or return;
     }
     common::sync();         #- if you shall remove the floppy right after the LED switches off
@@ -1318,7 +1318,7 @@ sub exitInstall {
     my ($o, $alldone) = @_;
 
     return $o->{step} = '' unless $alldone || $o->ask_yesorno('', 
-_("Some steps are not completed.
+N("Some steps are not completed.
 
 Do you really want to quit now?"), 0);
 
@@ -1329,7 +1329,7 @@ Do you really want to quit now?"), 0);
     $o->ask_from_no_check(
 	{
 	 messages => formatAlaTeX(
-_("Congratulations, installation is complete.
+N("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 
 
@@ -1342,22 +1342,22 @@ consult the Errata available from:
 
 Information on configuring your system is available in the post
 install chapter of the Official Mandrake Linux User's Guide.",
-_("http://www.mandrakelinux.com/en/90errata.php3"))),
+N("http://www.mandrakelinux.com/en/90errata.php3"))),
 	 cancel => '',
 	},      
 	[
 	 if_($::expert,
-	     { val => \ (my $t1 = _("Generate auto install floppy")), clicked => sub {
+	     { val => \ (my $t1 = N("Generate auto install floppy")), clicked => sub {
 		   my $t = $o->ask_from_list_('', 
-_("The auto install can be fully automated if wanted,
+N("The auto install can be fully automated if wanted,
 in that case it will take over the hard drive!!
 (this is meant for installing on another box).
 
 You may prefer to replay the installation.
-"), [ __("Replay"), __("Automated") ]);
+"), [ N_("Replay"), N_("Automated") ]);
 		   $t and $o->generateAutoInstFloppy($t eq 'Replay');
 	       }, advanced => 1 },
-	     { val => \ (my $t2 = _("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
+	     { val => \ (my $t2 = N("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
 	 ),
 	]
 	) if $alldone && !$::g_auto_install;

@@ -22,59 +22,59 @@ my %mice =
 (
  'sunmouse' =>
  [ [ 'sunmouse' ],
-   [ [ 3, 'sun', 'sun', __("Sun - Mouse") ]
+   [ [ 3, 'sun', 'sun', N_("Sun - Mouse") ]
    ]]
 ) :
 (
  'PS/2' => 
  [ [ 'psaux' ],
-   [ [ 2, 'ps/2', 'PS/2', __("Standard") ],
-     [ 5, 'ps/2', 'MouseManPlusPS/2', __("Logitech MouseMan+") ],
-     [ 5, 'imps2', 'IMPS/2', __("Generic PS2 Wheel Mouse") ],
-     [ 5, 'ps/2', 'GlidePointPS/2', __("GlidePoint") ],
+   [ [ 2, 'ps/2', 'PS/2', N_("Standard") ],
+     [ 5, 'ps/2', 'MouseManPlusPS/2', N_("Logitech MouseMan+") ],
+     [ 5, 'imps2', 'IMPS/2', N_("Generic PS2 Wheel Mouse") ],
+     [ 5, 'ps/2', 'GlidePointPS/2', N_("GlidePoint") ],
      '',
-     [ 5, 'ps/2', 'ThinkingMousePS/2', __("Kensington Thinking Mouse") ],
-     [ 5, 'netmouse', 'NetMousePS/2', __("Genius NetMouse") ],
-     [ 5, 'netmouse', 'NetScrollPS/2', __("Genius NetScroll") ],
-     [ 7, 'ps/2', 'ExplorerPS/2', __("Microsoft Explorer") ],
+     [ 5, 'ps/2', 'ThinkingMousePS/2', N_("Kensington Thinking Mouse") ],
+     [ 5, 'netmouse', 'NetMousePS/2', N_("Genius NetMouse") ],
+     [ 5, 'netmouse', 'NetScrollPS/2', N_("Genius NetScroll") ],
+     [ 7, 'ps/2', 'ExplorerPS/2', N_("Microsoft Explorer") ],
    ]],
      
  'USB' =>
  [ [ 'usbmouse' ],
-   [ if_(arch() eq 'ppc', [ 1, 'ps/2', 'PS/2', __("1 button") ]),
-     [ 2, 'ps/2', 'PS/2', __("Generic 2 Button Mouse") ],
-     [ 3, 'ps/2', 'PS/2', __("Generic") ],
-     [ 5, 'ps/2', 'IMPS/2', __("Wheel") ],
-     [ 7, 'ps/2', 'ExplorerPS/2', __("Microsoft Explorer") ],
+   [ if_(arch() eq 'ppc', [ 1, 'ps/2', 'PS/2', N_("1 button") ]),
+     [ 2, 'ps/2', 'PS/2', N_("Generic 2 Button Mouse") ],
+     [ 3, 'ps/2', 'PS/2', N_("Generic") ],
+     [ 5, 'ps/2', 'IMPS/2', N_("Wheel") ],
+     [ 7, 'ps/2', 'ExplorerPS/2', N_("Microsoft Explorer") ],
    ]],
 
- __("serial") =>
+ N_("serial") =>
  [ [ map { "ttyS$_" } 0..3 ],
-   [ [ 2, 'Microsoft', 'Microsoft', __("Generic 2 Button Mouse") ],
-     [ 3, 'Microsoft', 'Microsoft', __("Generic 3 Button Mouse") ],
-     [ 5, 'ms3', 'IntelliMouse', __("Microsoft IntelliMouse") ],
-     [ 3, 'MouseMan', 'MouseMan', __("Logitech MouseMan") ],
-     [ 2, 'MouseSystems', 'MouseSystems', __("Mouse Systems") ],     
+   [ [ 2, 'Microsoft', 'Microsoft', N_("Generic 2 Button Mouse") ],
+     [ 3, 'Microsoft', 'Microsoft', N_("Generic 3 Button Mouse") ],
+     [ 5, 'ms3', 'IntelliMouse', N_("Microsoft IntelliMouse") ],
+     [ 3, 'MouseMan', 'MouseMan', N_("Logitech MouseMan") ],
+     [ 2, 'MouseSystems', 'MouseSystems', N_("Mouse Systems") ],     
      '',
-     [ 3, 'logim', 'MouseMan', __("Logitech CC Series") ],
-     [ 5, 'pnp', 'IntelliMouse', __("Logitech MouseMan+/FirstMouse+") ],
-     [ 5, 'ms3', 'IntelliMouse', __("Genius NetMouse") ],
-     [ 2, 'MMSeries', 'MMSeries', __("MM Series") ],
-     [ 2, 'MMHitTab', 'MMHittab', __("MM HitTablet") ],
-     [ 3, 'Logitech', 'Logitech', __("Logitech Mouse (serial, old C7 type)") ],
-     [ 3, 'Microsoft', 'ThinkingMouse', __("Kensington Thinking Mouse") ],
+     [ 3, 'logim', 'MouseMan', N_("Logitech CC Series") ],
+     [ 5, 'pnp', 'IntelliMouse', N_("Logitech MouseMan+/FirstMouse+") ],
+     [ 5, 'ms3', 'IntelliMouse', N_("Genius NetMouse") ],
+     [ 2, 'MMSeries', 'MMSeries', N_("MM Series") ],
+     [ 2, 'MMHitTab', 'MMHittab', N_("MM HitTablet") ],
+     [ 3, 'Logitech', 'Logitech', N_("Logitech Mouse (serial, old C7 type)") ],
+     [ 3, 'Microsoft', 'ThinkingMouse', N_("Kensington Thinking Mouse") ],
    ]],
 
- __("busmouse") =>
+ N_("busmouse") =>
  [ [ arch() eq 'ppc' ? 'adbmouse' : ('atibm', 'inportbm', 'logibm') ],
-   [ if_(arch() eq 'ppc', [ 1, 'Busmouse', 'BusMouse', __("1 button") ]),
-     [ 2, 'Busmouse', 'BusMouse', __("2 buttons") ],
-     [ 3, 'Busmouse', 'BusMouse', __("3 buttons") ],
+   [ if_(arch() eq 'ppc', [ 1, 'Busmouse', 'BusMouse', N_("1 button") ]),
+     [ 2, 'Busmouse', 'BusMouse', N_("2 buttons") ],
+     [ 3, 'Busmouse', 'BusMouse', N_("3 buttons") ],
    ]],
 
- __("none") =>
+ N_("none") =>
  [ [ 'none' ],
-   [ [ 0, 'none', 'Microsoft', __("No mouse") ],
+   [ [ 0, 'none', 'Microsoft', N_("No mouse") ],
    ]],
 );
 
@@ -162,7 +162,7 @@ sub fullnames {
 		my $l = raw2mouse($type, $_);
 		"$type|$l->{name}";
 	    } else { 
-		$type .= "|[" . _("Other") . "]";
+		$type .= "|[" . N("Other") . "]";
 		'';
 	    }
 	} @{$::b->[1]}
@@ -483,9 +483,9 @@ sub test_mouse {
 						  210, 350);
 		      if ($::isInstall) {
 			  my $bad_mouse = member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2');
-			  $draw_text->(_("Please test the mouse"), $height - 120);
-			  $draw_text->(_("To activate the mouse,"), $height - 105) if $bad_mouse;
-			  $draw_text->(_("MOVE YOUR WHEEL!"), $height - 90) if $bad_mouse;
+			  $draw_text->(N("Please test the mouse"), $height - 120);
+			  $draw_text->(N("To activate the mouse,"), $height - 105) if $bad_mouse;
+			  $draw_text->(N("MOVE YOUR WHEEL!"), $height - 90) if $bad_mouse;
 			  $darea->window->draw_rectangle($darea->style->bg_gc('normal'), 1, 0, $height-65, $width, $height);
 		      }
 		  };

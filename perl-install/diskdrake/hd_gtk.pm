@@ -91,10 +91,10 @@ sub main {
     $w->sync;
     $done_button->grab_focus;
     $my_gtk::pop_it = 1;
-    $in->ask_okcancel(_("Read carefully!"), _("Please make a backup of your data first"), 1) or return
+    $in->ask_okcancel(N("Read carefully!"), N("Please make a backup of your data first"), 1) or return
       if $::isStandalone;
     $in->ask_warn('', 
-_("If you plan to use aboot, be carefull to leave a free space (2048 sectors is enough)
+N("If you plan to use aboot, be carefull to leave a free space (2048 sectors is enough)
 at the beginning of the disk")) if (arch() eq 'alpha') and !$::isEmbedded;
 
     $w->main;
@@ -113,7 +113,7 @@ sub try_ {
     my $v = eval { $f->($in, @args, $all_hds) };
     if (my $err = $@) {
 	$err =~ /setstep/ and die '';
-    	$in->ask_warn(_("Error"), formatError($err));
+    	$in->ask_warn(N("Error"), formatError($err));
     }
 
     $current_entry = '' if !diskdrake::interactive::is_part_existing($current_entry, $all_hds);
@@ -148,9 +148,9 @@ sub add_kind2notebook {
 sub general_action_box {
     my ($box, $nowizard) = @_;
     $_->widget->destroy foreach $box->children;
-    my @actions = (if_($::isInstall && !$nowizard, __("Wizard")), 
+    my @actions = (if_($::isInstall && !$nowizard, N_("Wizard")), 
 		   diskdrake::interactive::general_possible_actions($in, $all_hds), 
-		   __("Done"));
+		   N_("Done"));
     foreach my $s (@actions) {
 	my $button = new Gtk::Button(translate($s));
 	$done_button = $button if $s eq 'Done';
@@ -181,14 +181,14 @@ sub per_entry_action_box {
 	    $w;
 	} diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds);
 
-	gtkadd($box, gtkadd(new Gtk::Frame(_("Choose action")),
+	gtkadd($box, gtkadd(new Gtk::Frame(N("Choose action")),
 			    createScrolledWindow(gtkpack__(new Gtk::VBox(0,0), @buttons)))) if @buttons;
     } else {
 	my $txt = !$::isStandalone && fsedit::is_one_big_fat($all_hds->{hds}) ?
-_("You have one big FAT partition
+N("You have one big FAT partition
 (generally used by MicroSoft Dos/Windows).
 I suggest you first resize that partition
-(click on it, then click on \"Resize\")") : _("Please click on a partition");
+(click on it, then click on \"Resize\")") : N("Please click on a partition");
 	gtkpack($box, gtktext_insert(new Gtk::Text, $txt));
     }
 }
@@ -202,7 +202,7 @@ sub per_entry_info_box {
     } elsif ($kind->{type} =~ /hd|lvm/) {
 	$info = diskdrake::interactive::format_hd_info($kind->{val});
     }
-    gtkpack($box, gtkadd(new Gtk::Frame(_("Details")), gtkset_justify(new Gtk::Label($info), 'left')));
+    gtkpack($box, gtkadd(new Gtk::Frame(N("Details")), gtkset_justify(new Gtk::Label($info), 'left')));
 }
 
 sub current_kind_changed {
@@ -249,7 +249,7 @@ sub create_automatic_notebooks {
 	my $b = $_->{marked} or $notebook_widget->remove_page($::i);
 	$b;
     } @notebook;
-    @notebook or die _("No hard drives found");
+    @notebook or die N("No hard drives found");
 }
 
 ################################################################################
@@ -320,12 +320,12 @@ sub hd2kind {
 }
 
 sub filesystems_button_box() {
-    my @types = (__("Ext2"), __("Journalised FS"), __("Swap"), arch() =~ /sparc/ ? __("SunOS") : arch() eq "ppc" ? __("HFS") : __("FAT"),
-		 __("Other"), __("Empty"));
+    my @types = (N_("Ext2"), N_("Journalised FS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("FAT"),
+		 N_("Other"), N_("Empty"));
     my %name2type = (Ext2 => 0x83, 'Journalised FS' => 0x483, Swap => 0x82, Other => 1, FAT => 0xb, HFS => 0x402);
 
     gtkpack(new Gtk::HBox(0,0), 
-	    _("Filesystem types:"),
+	    N("Filesystem types:"),
 	    map { my $w = new Gtk::Button(translate($_));
 		  my $t = $name2type{$_};
 		  $w->signal_connect(clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
@@ -342,14 +342,14 @@ sub createOrChangeType {
               { type => 0, start => 1, size => $hd->{totalsectors} - 1 };
     $part or return;
     if ($type == 1) {
-	$in->ask_warn('', _("Use ``%s'' instead", $part->{type} ? _("Type") : _("Create")));
+	$in->ask_warn('', N("Use ``%s'' instead", $part->{type} ? N("Type") : N("Create")));
     } elsif (!$type) {
-	$in->ask_warn('', _("Use ``%s'' instead", _("Delete"))) if $part->{type};
+	$in->ask_warn('', N("Use ``%s'' instead", N("Delete"))) if $part->{type};
     } elsif ($part->{type}) {
 	return unless $::expert;
 	return if $type == $part->{type};
-	isBusy($part) and $in->ask_warn('', _("Use ``Unmount'' first")), return;
-	diskdrake::interactive::ask_alldatawillbelost($in, $part, __("After changing type of partition %s, all data on this partition will be lost")) or return;
+	isBusy($part) and $in->ask_warn('', N("Use ``Unmount'' first")), return;
+	diskdrake::interactive::ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost")) or return;
 	diskdrake::interactive::check_type($in, $type, $hd, $part) and fsedit::change_type($type, $hd, $part);
     } else {
 	$part->{type} = $type;

@@ -40,11 +40,11 @@ begin:
 $::isEmbedded and kill 'USR2', $::CCPID;
 
 my $imagefile = "/root/drakx/replay_install.img";
--f $imagefile or $in->ask_okcancel(_("Error!"), 
-				   _("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
+-f $imagefile or $in->ask_okcancel(N("Error!"), 
+				   N("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
 
-$::direct or $in->ask_okcancel(_("Auto Install Configurator"),
-_("You are about to configure an Auto Install floppy. This feature is somewhat dangerous and must be used circumspectly.
+$::direct or $in->ask_okcancel(N("Auto Install Configurator"),
+N("You are about to configure an Auto Install floppy. This feature is somewhat dangerous and must be used circumspectly.
 
 With that feature, you will be able to replay the installation you've performed on this computer, being interactively prompted for some steps, in order to change their values.
 
@@ -62,24 +62,24 @@ my $st = \%steps::installSteps;
 for (my $f = $st->{first}; $f; $f = $st->{$f}{next}) {
     next if member($f, @manual_steps);
     my $def_choice = 'replay';
-    push @choices, { label => _($st->{$f}{text}), val => \$def_choice, list => [ _('replay'), _('manual') ] };
+    push @choices, { label => translate($st->{$f}{text}), val => \$def_choice, list => [ N("replay"), N("manual") ] };
     push @all_steps, [ $f, \$def_choice ];
 }
 
-$in->ask_from(_("Automatic Steps Configuration"),
-	      _("Please choose for each step whether it will replay like your install, or it will be manual"),
+$in->ask_from(N("Automatic Steps Configuration"),
+	      N("Please choose for each step whether it will replay like your install, or it will be manual"),
 	      \@choices
 	     ) or quit_global($in, 0);
 
-${$_->[1]} eq _('manual') and push @manual_steps, $_->[0] foreach @all_steps;
+${$_->[1]} eq N("manual") and push @manual_steps, $_->[0] foreach @all_steps;
 
 my $mountdir = "/root/tmp/drakautoinst-mountdir"; -d $mountdir or mkdir $mountdir, 0755;
 my $floppy = detect_devices::floppy();
 my $dev = devices::make($floppy);
-$in->ask_okcancel('', _("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
+$in->ask_okcancel('', N("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
 {
-    standalone::explanations(_("Creating auto install floppy"));
-    my $w = $in->wait_message('', _("Creating auto install floppy"));
+    standalone::explanations(N("Creating auto install floppy"));
+    my $w = $in->wait_message('', N("Creating auto install floppy"));
     commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
     common::sync();
 }
@@ -127,7 +127,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 
     member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [$_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_\}") ] foreach (keys %$o);
 
-    my $W = my_gtk->new(_('$o edition'));
+    my $W = my_gtk->new('$o edition');
     my @box_to_hide;
     my $nb_pages=0;
     my $notebook = new Gtk::Notebook;
@@ -141,7 +141,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 							  new Gtk::Pixmap(gtkcreate_png('mdk_logo'))),
 						1, new Gtk::VBox(0,0),
 					       ),
-				    0, _("\nWelcome.\n\nThe parameters of the auto-install are available in the sections on the left"),
+				    0, N("\nWelcome.\n\nThe parameters of the auto-install are available in the sections on the left"),
 				    1, new Gtk::VBox(0,0),
 				   ), undef);
     $notebook->show_all;
@@ -181,7 +181,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 							      gtksignal_connect(gtkadd($button,
 										       gtkpack__(new Gtk::VBox(0,3),
 												 $b,
-												 _($_->[0]),
+												 translate($_->[0]),
 												)
 										      ), released => sub {
 											  $button->get_active() or $button->set_active(1),return;
@@ -199,15 +199,15 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 		   ),
 	    0, new Gtk::HSeparator,
 	    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'end'), 5),
-		      gtksignal_connect(new Gtk::Button(_("Accept")), clicked => sub { Gtk->main_quit;  }),
-		      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { $o = $o_old; Gtk->main_quit; quit_global($in, 0) }),
+		      gtksignal_connect(new Gtk::Button(N("Accept")), clicked => sub { Gtk->main_quit;  }),
+		      gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $o = $o_old; Gtk->main_quit; quit_global($in, 0) }),
 		     )
 	   )
 	  );
     $_->hide foreach @box_to_hide;
 #    $W->{window}->show_all;
 #      gtkadd($W->{window},
-#  	   gtkpack_($W->create_box_with_title(_("Edit variables")),
+#  	   gtkpack_($W->create_box_with_title(N("Edit variables")),
 #  		    1, my $notebook = create_notebook( map { $_, h2widget($o->{$_}, "\$o->\{$_\}") } keys %$o ),
 #  		    0, gtkpack(gtkset_border_width(new Gtk::HBox(0,0),5), $W->create_okcancel),
 #  		   ),
@@ -236,8 +236,8 @@ output($cfgfile, $str);
 
 fs::umount($mountdir);
 
-$in->ask_okcancel(_("Congratulations!"), 
-_("The floppy has been successfully generated.
+$in->ask_okcancel(N("Congratulations!"), 
+N("The floppy has been successfully generated.
 You may now replay your installation."));
 
 quit_global($in, 0);
@@ -275,7 +275,7 @@ sub h2widget {
 			  control_buttons(${$k}{$list_keys[0]},
 					  sub { my ($vb, $widget_list2, $ref_local_k, $i) = @_;
 						my @widget_list = @{$widget_list2};
-			my $field = $in->ask_from_entry(_("Auto Install"), ("Enter the name of the new field you want to add")) or return undef;
+			my $field = $in->ask_from_entry(N("Auto Install"), ("Enter the name of the new field you want to add")) or return undef;
 						$field eq '' and return undef;
 						gtkpack__($vb,
 							  $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
@@ -345,14 +345,14 @@ sub control_buttons {
     my (%local_k) = %{$ref_local_k};
     my ($button_add, $button_remove);
     0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'spread'), 5),
-	      gtksignal_connect($button_add = new Gtk::Button(_("Add an item")), clicked => sub {
+	      gtksignal_connect($button_add = new Gtk::Button(N("Add an item")), clicked => sub {
 				    $local_k{$_} = undef foreach keys %local_k;
 				    $i++;
 				    $local_gui->($vb, \@widget_list, \%local_k, $i) or $i--, return;
 				    $i>=0 and $button_remove->set_sensitive(1);
 				}
 			       ),
-	      gtksignal_connect($button_remove = new Gtk::Button(_("Remove the last item")), clicked => sub {
+	      gtksignal_connect($button_remove = new Gtk::Button(N("Remove the last item")), clicked => sub {
 				    $i>=0 or return;
 				    $widget_list[$i]->destroy();
 				    $i--;

@@ -42,7 +42,7 @@ if (!$mouse || !$::auto) {
 			     0;
 			 });
     }
-    my $name = $in->ask_from_treelistf('mousedrake', _("Please, choose the type of your mouse."), '|',
+    my $name = $in->ask_from_treelistf('mousedrake', N("Please, choose the type of your mouse."), '|',
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
 				       $mouse->{type} . '|' . $mouse->{name});
@@ -55,10 +55,10 @@ if (!$mouse || !$::auto) {
 	modules::load(qw(hid mousedev usbmouse));
     }
 
-    $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
+    $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', N("Emulate third button?"), 1));
 
-    $mouse->{device} = $in->ask_from_listf(_("Mouse Port"),
-					   _("Please choose on which serial port your mouse is connected to."),
+    $mouse->{device} = $in->ask_from_listf(N("Mouse Port"),
+					   N("Please choose on which serial port your mouse is connected to."),
 					   \&mouse::serial_port2text,
 					   [ mouse::serial_ports ],
 					   $mouse->{device},

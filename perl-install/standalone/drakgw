@@ -40,7 +40,7 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: drakgw [--version]\n";
 /-version/ and die 'version: $Id$ '."\n";
 $::Wizard_pix_up = "wiz_drakgw.png";
-$::Wizard_title = _("Internet Connection Sharing");
+$::Wizard_title = N("Internet Connection Sharing");
 $::direct = /-direct/;
 
 
@@ -113,7 +113,7 @@ sub fatal_quit ($)
 my ($kernel_version) = c::kernel_version() =~ /(...)/;
 log::l("[drakgw] kernel_version $kernel_version");
 
-$kernel_version eq '2.4' or fatal_quit(_("Sorry, we support only 2.4 kernels."));
+$kernel_version eq '2.4' or fatal_quit(N("Sorry, we support only 2.4 kernels."));
 
 begin:
 
@@ -124,15 +124,15 @@ if ($shorewall && $shorewall->{masquerade}) {
     $::Wizard_no_previous = 1;
 
     if (!$shorewall->{disabled}) {
-	my $r = $in->ask_from_list_(_("Internet Connection Sharing currently enabled"),
-_("The setup of Internet connection sharing has already been done.
+	my $r = $in->ask_from_list_(N("Internet Connection Sharing currently enabled"),
+N("The setup of Internet connection sharing has already been done.
 It's currently enabled.
 
 What would you like to do?"),
-				   [ __("disable"), __("reconfigure"), __("dismiss") ]) or quit_global($in, 0);
+				   [ N_("disable"), N_("reconfigure"), N_("dismiss") ]) or quit_global($in, 0);
 	if ($r eq "disable") {
 	    {
-		my $wait_disabl = $in->wait_message('', _("Disabling servers..."));
+		my $wait_disabl = $in->wait_message('', N("Disabling servers..."));
 		stop_daemons();
 	    }
 	    foreach ($dhcpd_conf, $masq_file) {
@@ -141,7 +141,7 @@ What would you like to do?"),
 	    sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakgw] Disabled");
 	    $::Wizard_finished = 1;
-	    $in->ask_okcancel('', _("Internet connection sharing is now disabled."));
+	    $in->ask_okcancel('', N("Internet connection sharing is now disabled."));
 	    quit_global($in, 0);
 	}
 	if ($r eq "dismiss") {
@@ -150,24 +150,24 @@ What would you like to do?"),
     }
     else
     {
-	my $r = $in->ask_from_list_(_("Internet Connection Sharing currently disabled"),
-_("The setup of Internet connection sharing has already been done.
+	my $r = $in->ask_from_list_(N("Internet Connection Sharing currently disabled"),
+N("The setup of Internet connection sharing has already been done.
 It's currently disabled.
 
 What would you like to do?"),
-				   [ __("enable"), __("reconfigure"), __("dismiss") ]);
+				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
 	if ($r eq "enable") {
 	    foreach ($dhcpd_conf, $masq_file) {
 		rename($_, "$_.old") if -f $_;
 		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
 	    }
 	    {
-		my $wait_enabl = $in->wait_message('', _("Enabling servers..."));
+		my $wait_enabl = $in->wait_message('', N("Enabling servers..."));
 		start_daemons();
 	    }
             log::l("[drakgw] Enabled");
 	    $::Wizard_finished = 1;
-	    $in->ask_okcancel('', _("Internet connection sharing is now enabled."));
+	    $in->ask_okcancel('', N("Internet connection sharing is now enabled."));
 	    quit_global($in, 0);
 	}
 	if ($r eq "dismiss") {
@@ -183,8 +183,8 @@ step_ask_confirm:
 
 $::Wizard_no_previous = 1;
     
-$::direct or $in->ask_okcancel(_("Internet Connection Sharing"),
-_("You are about to configure your computer to share its Internet connection.
+$::direct or $in->ask_okcancel(N("Internet Connection Sharing"),
+N("You are about to configure your computer to share its Internet connection.
 With that feature, other computers on your local network will be able to use this computer's Internet connection.
 
 Make sure you have configured your Network/Internet access using drakconnect before going any further.
@@ -212,8 +212,8 @@ log::l("[drakgw] Available network cards: ", join(", ", @cards));
 
 my $format = sub {
     $aliased_devices{$_[0]} ?
-      _("Interface %s (using module %s)", $_[0], $aliased_devices{$_[0]}) :
-      _("Interface %s", $_[0]);
+      N("Interface %s (using module %s)", $_[0], $aliased_devices{$_[0]}) :
+      N("Interface %s", $_[0]);
 };
 
 #- setup the network interface we shall use
@@ -221,15 +221,15 @@ my $format = sub {
 my $device;
 if (!@cards)
 {
-    $in->ask_warn(_("No network adapter on your system!"), 
-		  _("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
+    $in->ask_warn(N("No network adapter on your system!"), 
+		  N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
     quit_global($in, 0);
 }
 elsif (@cards == 1)
 {
     $device = $cards[0];
-    $in->ask_okcancel(_("Network interface"),
-_("There is only one configured network adapter on your system:
+    $in->ask_okcancel(N("Network interface"),
+N("There is only one configured network adapter on your system:
 
 %s
 
@@ -237,8 +237,8 @@ I am about to setup your Local Area Network with that adapter.", $format->($devi
 }
 else
 {
-    $device = $in->ask_from_listf(_("Choose the network interface"),
-				    _("Please choose what network adapter will be connected to your Local Area Network."),
+    $device = $in->ask_from_listf(N("Choose the network interface"),
+				    N("Please choose what network adapter will be connected to your Local Area Network."),
 				     $format,
 				    \@cards,
 				    ) or goto step_ask_confirm;
@@ -261,63 +261,63 @@ my $reconf_dhcp_server_intf = 1;
 
 if (grep(/$device/, @configured_devices)) {
   step_warning_already_conf:
-    my $auto = _('Yes');
-		my $dhcp_details = _('Yes');
+    my $auto = N("Yes");
+		my $dhcp_details = N("Yes");
     my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
-    $in->ask_from(_("Network interface already configured"),
-		  _("Warning, the network adapter (%s) is already configured.
+    $in->ask_from(N("Network interface already configured"),
+		  N("Warning, the network adapter (%s) is already configured.
 
 Do you want an automatic re-configuration?
 
 You can do it manually but you need to know what you're doing.", $device),
-		  [ { label => _("Automatic reconfiguration"), val => \$auto, list => [ _('Yes'), _('No (experts only)') ] },
-		    { val => _("Show current interface configuration"), clicked =>
-		      sub { $in->ask_warn(_('Current interface configuration'),
-					  _("Current configuration of `%s':
+		  [ { label => N("Automatic reconfiguration"), val => \$auto, list => [ N("Yes"), N("No (experts only)") ] },
+		    { val => N("Show current interface configuration"), clicked =>
+		      sub { $in->ask_warn(N("Current interface configuration"),
+					  N("Current configuration of `%s':
 
 Network: %s
 IP address: %s
 IP attribution: %s
 Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_detectsetup;
     
-    if ($auto ne _('Yes')) {
+    if ($auto ne N("Yes")) {
 	$reconf_dhcp_server_intf = 0;
 	$server_ip = $conf->{IPADDR};
 	$nameserver_ip = $conf->{IPADDR};
 	$lan_address = $conf->{NETWORK};
 	$in->ask_from('',
-		      _("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
+		      N("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
 
 The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
 		      
 Else, I can reconfigure your interface and (re)configure a DHCP server for you.
 
 ", $device),
-      [ { label => _("Local Network adress"), val => \$lan_address, type => 'entry' },
-			{ label => _("Netmask"), val => \$netmask, type => 'entry' } ])
+      [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
+			{ label => N("Netmask"), val => \$netmask, type => 'entry' } ])
 		  or goto step_warning_already_conf;
 	$in->ask_from('',
-		      _("DHCP Server Configuration.
+		      N("DHCP Server Configuration.
 
 Here you can select different options for the DHCP server configuration.
 If you don't know the meaning of an option, simply leave it as it is.
 
 ", $device),
-			[ { label => _("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
-			{ label => _("The DNS Server IP"), val => \$nameserver_ip, type => 'entry' },
-			{ label => _("The internal domain name"), val => \$internal_domain_name, type => 'entry' },
-			{ label => _("The DHCP start range"), val => \$start_range, type => 'entry' },
-			{ label => _("The DHCP end range"), val => \$end_range, type => 'entry' },
-			{ label => _("The default lease (in seconds)"), val => \$default_lease, type => 'entry' },
-			{ label => _("The maximum lease (in seconds)"), val => \$max_lease, type => 'entry' },
-			{ label => _("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
+			[ { label => N("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
+			{ label => N("The DNS Server IP"), val => \$nameserver_ip, type => 'entry' },
+			{ label => N("The internal domain name"), val => \$internal_domain_name, type => 'entry' },
+			{ label => N("The DHCP start range"), val => \$start_range, type => 'entry' },
+			{ label => N("The DHCP end range"), val => \$end_range, type => 'entry' },
+			{ label => N("The default lease (in seconds)"), val => \$default_lease, type => 'entry' },
+			{ label => N("The maximum lease (in seconds)"), val => \$max_lease, type => 'entry' },
+			{ label => N("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
 	  or goto step_warning_already_conf;
     }
 }
     
 if (!($lan_address =~ s/\.0$//)) {
     $in->ask_warn('', 
-		  _("The Local Network did not finish with `.0', bailing out."));
+		  N("The Local Network did not finish with `.0', bailing out."));
     quit_global($in, 0);
 }
 standalone::explanations("Using LAN address <$lan_address>");
@@ -328,7 +328,7 @@ standalone::explanations("Using LAN address <$lan_address>");
 foreach (grep { $_ ne $device } @configured_devices)
 {
     grep(/$lan_address/, cat_("/etc/sysconfig/network-scripts/ifcfg-$_")) and
-      ($in->ask_warn('', _("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
+      ($in->ask_warn('', N("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
 }
 
 
@@ -338,8 +338,8 @@ network::shorewall::check_iptables($in) or goto step_detectsetup;
 #- **********************************
 #- * 2nd step: configure
 
-$wait_configuring = $in->wait_message(_("Configuring..."), 
-				      _("Configuring scripts, installing software, starting servers..."));
+$wait_configuring = $in->wait_message(N("Configuring..."), 
+				      N("Configuring scripts, installing software, starting servers..."));
 
 
 #- setup the /etc/sysconfig/network-script/ script
@@ -375,7 +375,7 @@ my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
 if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
     foreach (keys %rpm2file) {
 	-e $rpm2file{$_} or $in->do_pkgs->install($_);
-	-e $rpm2file{$_} or fatal_quit(_("Problems installing package %s", $_));
+	-e $rpm2file{$_} or fatal_quit(N("Problems installing package %s", $_));
     }
 }
 
@@ -507,8 +507,8 @@ undef $wait_configuring;
 $::Wizard_no_previous = 1;
 $::Wizard_finished = 1;
 
-$in->ask_okcancel(_("Congratulations!"), 
-_("Everything has been configured.
+$in->ask_okcancel(N("Congratulations!"), 
+N("Everything has been configured.
 You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."));
 
 
@@ -527,21 +527,21 @@ sub pur_gtk_mode
     init Gtk;
     my $setup_state = $shorewall && $shorewall->{masquerade} ? 
                          ($shorewall->{disabled} ? 
-			  _("The setup has already been done, but it's currently disabled.") :
-			  _("The setup has already been done, and it's currently enabled.")) :
-			 _("No Internet Connection Sharing has ever been configured.");
+			  N("The setup has already been done, but it's currently disabled.") :
+			  N("The setup has already been done, and it's currently enabled.")) :
+			 N("No Internet Connection Sharing has ever been configured.");
     
     my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
     $window1->signal_connect(delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
-    $window1->set_title(_("Internet connection sharing configuration"));
+    $window1->set_title(N("Internet connection sharing configuration"));
     $window1->border_width(10);
     my $vbox1 = new Gtk::VBox(0,0);
     $window1->add($vbox1);
     my $hbox1 = new Gtk::HBox(0,0);
     $vbox1->pack_start($hbox1,1,1,0);
     my $label1 = new Gtk::Label(
-_("Welcome to the Internet Connection Sharing utility!
+N("Welcome to the Internet Connection Sharing utility!
 
 %s
 
@@ -553,13 +553,13 @@ Click on Configure to launch the setup wizard.", $setup_state));
     my $bbox1 = new Gtk::HButtonBox;
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout(-end);
-    my $button_conf = new Gtk::Button _("Configure");
+    my $button_conf = new Gtk::Button N("Configure");
     $button_conf->signal_connect(clicked => sub {
 				       system("/usr/sbin/drakgw --wizard");
 				       kill('USR1', $::CCPID);
 				   });
     $bbox1->add($button_conf);
-    my $button_cancel = new Gtk::Button _("Cancel");
+    my $button_cancel = new Gtk::Button N("Cancel");
     $button_cancel->signal_connect(clicked => sub {
 					 kill('USR1', $::CCPID);
 				     });

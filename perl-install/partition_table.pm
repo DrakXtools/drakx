@@ -596,11 +596,11 @@ sub write {
 
 	my @magic_parts = grep { $_->{isMounted} && $_->{real_mntpoint} } get_normal_parts($hd);
 	foreach (@magic_parts) {
-	    syscall_('umount', $_->{real_mntpoint}) or log::l(_("error unmounting %s: %s", $_->{real_mntpoint}, "$!"));
+	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, "$!"));
 	}
 	$hd->kernel_read;
 	foreach (@magic_parts) {
-	    syscall_('mount', , $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(_("mount failed: ") . "$!");
+	    syscall_('mount', , $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . "$!");
 	}
     }
     $hd->{needKernelReread} = 0;
@@ -664,7 +664,7 @@ sub add_primary {
 }
 
 sub add_extended {
-    arch() =~ /^sparc|ppc/ and die _("Extended partition not supported on this platform");
+    arch() =~ /^sparc|ppc/ and die N("Extended partition not supported on this platform");
 
     my ($hd, $part, $extended_type) = @_;
     $extended_type =~ s/Extended_?//;
@@ -682,7 +682,7 @@ sub add_extended {
 	    local $e->{size} = $end - $start;
 	    eval { verifyPrimary($hd->{primary}) };
 	    $@ and die
-_("You have a hole in your partition table but I can't use it.
+N("You have a hole in your partition table but I can't use it.
 The only solution is to move your primary partitions to have the hole next to the extended partitions.");
 	}
     }
@@ -765,16 +765,16 @@ sub load {
     my ($hd, $file, $force) = @_;
 
     local *F;
-    open F, $file or die _("Error reading file %s", $file);
+    open F, $file or die N("Error reading file %s", $file);
 
     my $h;
     {
 	local $/ = "\0";
 	eval <F>;
     }
-    $@ and die _("Restoring from file %s failed: %s", $file, $@);
+    $@ and die N("Restoring from file %s failed: %s", $file, $@);
 
-    ref $h eq 'ARRAY' or die _("Bad backup file");
+    ref $h eq 'ARRAY' or die N("Bad backup file");
 
     my %h; @h{@fields2save} = @$h;
 
@@ -796,5 +796,5 @@ sub save {
     require Data::Dumper;
     open F, ">$file"
       and print F Data::Dumper->Dump([\@h], ['$h']), "\0"
-      or die _("Error writing to file %s", $file);
+      or die N("Error writing to file %s", $file);
 }

@@ -62,7 +62,7 @@ sub new {
 	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
 	    my ($y2, $x2) = $im_left->get_size;
 	    my $style = $draw1->style->copy();
-	    $style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*")));
+	    $style->font(Gtk::Gdk::Font->fontset_load(N("-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*")));
 	    my $w = $style->font->string_width($::Wizard_title);
 	    $draw1->signal_connect(expose_event => sub {
 				       for (my $i = 0; $i < (540/$y1); $i++) {
@@ -156,11 +156,11 @@ END { &exit() }
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
     $spread ||= $::isWizard ? "end" : "spread";
-    $cancel = $::isWizard ? _("<- Previous") : _("Cancel") if !defined $cancel && !defined $ok;
-    $ok = $::isWizard ? ($::Wizard_finished ? _("Finish") : _("Next ->")) : _("Ok") if !defined $ok;
+    $cancel = $::isWizard ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
+    $ok = $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok") if !defined $ok;
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
-    $::isWizard and gtksignal_connect($w->{wizcancel} = new Gtk::Button(_("Cancel")), clicked => sub { die 'wizcancel' });
+    $::isWizard and gtksignal_connect($w->{wizcancel} = new Gtk::Button(N("Cancel")), clicked => sub { die 'wizcancel' });
     my @l = grep { $_ } $::isWizard ? ($w->{wizcancel}, $::Wizard_no_previous ? () : $b2, $b1): ($b1, $b2);
     push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
 
@@ -284,8 +284,8 @@ sub _create_window($$) {
 #-###############################################################################
 
 sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w) }
-sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w) }
-sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is this correct?"), _("Ok"), _("Cancel")); main($w) }
+sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, N("Yes"), N("No")); main($w) }
+sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, N("Is this correct?"), N("Ok"), N("Cancel")); main($w) }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w) }
 sub ask_dir        { my $w = my_gtk->new(shift @_); $w->_ask_dir(@_); main($w) }
 
@@ -308,7 +308,7 @@ sub _ask_warn($@) {
     my ($o, @msgs) = @_;
     gtkadd($o->{window},
 	  gtkpack($o->create_box_with_title(@msgs),
-		 gtksignal_connect(my $w = new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
+		 gtksignal_connect(my $w = new Gtk::Button(N("Ok")), "clicked" => sub { Gtk->main_quit }),
 		 ),
 	  );
     $w->grab_focus;
@@ -357,7 +357,7 @@ sub ask_browse_tree_info {
 		    0, $common->{message},
 		    1, gtkpack(new Gtk::HBox(0,0),
 			       createScrolledWindow($tree),
-			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), $::windowwidth - 490, 0),
+			       gtkadd(gtkset_usize(new Gtk::Frame(N("Info")), $::windowwidth - 490, 0),
 				      createScrolledWindow(my $info = new Gtk::Text),
 				     )),
 		    0, my $l = new Gtk::HBox(0,15),
@@ -378,9 +378,9 @@ sub ask_browse_tree_info {
     $go->grab_focus;
     $w->{rwindow}->show_all;
 
-    my @toolbar = (ftout  =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
-		   ftin   =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
-		   reload =>  [ _("Toggle between flat and group sorted"), sub { invbool(\$common->{state}{flat}); $common->{rebuild_tree}->() } ]);
+    my @toolbar = (ftout  =>  [ N("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
+		   ftin   =>  [ N("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
+		   reload =>  [ N("Toggle between flat and group sorted"), sub { invbool(\$common->{state}{flat}); $common->{rebuild_tree}->() } ]);
     foreach my $ic (@{$common->{icons} || []}) {
 	push @toolbar, ($ic->{icon} => [ $ic->{help}, sub {
 					     if ($ic->{code}) {

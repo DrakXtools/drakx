@@ -26,24 +26,24 @@ sub intro {
     read_net_conf($prefix, $netcnx, $netc);
     if (!$::isWizard) {
 	if (connected()) {
-	    $text = _("You are currently connected to internet.") . (-e $disconnect_file ? _("\nYou can disconnect or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
+	    $text = N("You are currently connected to internet.") . (-e $disconnect_file ? N("\nYou can disconnect or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
 	    $connected = 1;
 	} else {
-	    $text = _("You are not currently connected to Internet.") . (-e $connect_file ? _("\nYou can connect to Internet or reconfigure your connection.") : _("\nYou can reconfigure your connection."));
+	    $text = N("You are not currently connected to Internet.") . (-e $connect_file ? N("\nYou can connect to Internet or reconfigure your connection.") : N("\nYou can reconfigure your connection."));
 	    $connected = 0;
 	}
 	my @l = (
-	       !$connected && -e $connect_file ? { description => _("Connect"),
+	       !$connected && -e $connect_file ? { description => N("Connect"),
 						   c => 1} : (),
-	       $connected && -e $disconnect_file ? { description => _("Disconnect"),
+	       $connected && -e $disconnect_file ? { description => N("Disconnect"),
 						     c => 2} : (),
-	       { description => _("Configure the connection"),
+	       { description => N("Configure the connection"),
 		 c => 3},
-	       { description => _("Cancel"),
+	       { description => N("Cancel"),
 		 c => 4},
 	      );
-	my $e = $in->ask_from_listf(_("Internet connection & configuration"),
-				    _($text),
+	my $e = $in->ask_from_listf(N("Internet connection & configuration"),
+				    translate($text),
 				    sub { $_[0]{description} },
 				    \@l);
 	run_program::rooted($prefix, $connect_prog) if ($e->{c}==1);
@@ -91,21 +91,21 @@ sub pre_func {
 	$::Wizard_splash = 1;
 	require my_gtk;
 	my_gtk->import(qw(:wrappers));
-	my $W = my_gtk->new(_("Network Configuration Wizard"));
+	my $W = my_gtk->new(N("Network Configuration Wizard"));
 	gtkadd($W->{window},
 	       gtkpack_(new Gtk::VBox(0, 0),
 			1, write_on_pixmap(gtkpng ("drakconnect_step"),
 					   20,200,
-					   _("We are now going to configure the %s connection.",_($text)),
+					   N("We are now going to configure the %s connection.", translate($text)),
 					  ),
-			0, $W->create_okcancel(_("OK"))
+			0, $W->create_okcancel(N("OK"))
 		       )
 	      );
 	$W->main;
 	$::Wizard_splash = 0;
     } else {
 	#- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-	$in->ask_okcancel(_("Network Configuration Wizard"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.",_($_[0])), 1);
+	$in->ask_okcancel(N("Network Configuration Wizard"), N("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.", translate($_[0])), 1);
     }
     undef $::Wizard_no_previous;
 }
@@ -134,8 +134,8 @@ sub main {
 
     my $direct_net_install;
     if ($first_time && $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs")) {
-	(!($::expert || $noauto) or $in->ask_okcancel(_("Network Configuration"),
-						      _("Because you are doing a network installation, your network is already configured.
+	(!($::expert || $noauto) or $in->ask_okcancel(N("Network Configuration"),
+						      N("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
 "), 1)) and do {
     $netcnx->{type}='lan';
@@ -160,22 +160,22 @@ ifdown eth0
   step_1:
     $::Wizard_no_previous=1;
     my @profiles = get_profiles();
-    $in->ask_from(_("Network Configuration Wizard"),
-		  _("Welcome to The Network Configuration Wizard.
+    $in->ask_from(N("Network Configuration Wizard"),
+		  N("Welcome to The Network Configuration Wizard.
 
 We are about to configure your internet/network connection.
 If you don't want to use the auto detection, deselect the checkbox.
 "),
 		  [
-		   if_(@profiles > 1, { label => _("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
-		   { label => _("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
-		   if_($::isStandalone, { label => _("Expert Mode"), val => \$::expert, type => 'bool' }),
+		   if_(@profiles > 1, { label => N("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
+		   { label => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
+		   if_($::isStandalone, { label => N("Expert Mode"), val => \$::expert, type => 'bool' }),
 		  ]
 		 ) or goto step_5;
     undef $::Wizard_no_previous;
     set_profile($netcnx);
     if ($netc->{autodetection}) {
-	my $w = $in->wait_message(_("Network Configuration Wizard"), _("Detecting devices..."));
+	my $w = $in->wait_message(N("Network Configuration Wizard"), N("Detecting devices..."));
 	detect($netc->{autodetect}, $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs"));
     }
 
@@ -186,24 +186,24 @@ If you don't want to use the auto detection, deselect the checkbox.
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1: 0;
 #     my @l = (
-# 	     [_("Normal modem connection"), $netc->{autodetect}{modem}, __("detected on port %s"), \$conf{modem}],
-# 	     [_("ISDN connection"), $netc->{autodetect}{isdn}{description}, __("detected %s"), \$conf{isdn}],
-# 	     [_("ADSL connection"), $netc->{autodetect}{adsl}, __("detected"), \$conf{adsl}],
-# 	     [_("Cable connection"), $netc->{autodetect}{cable}, __("cable connection detected"), \$conf{cable}],
-# 	     [_("LAN connection"), $netc->{autodetect}{lan}, __("ethernet card(s) detected"), \$conf{lan}]
+# 	     [N("Normal modem connection"), $netc->{autodetect}{modem}, N_("detected on port %s"), \$conf{modem}],
+# 	     [N("ISDN connection"), $netc->{autodetect}{isdn}{description}, N_("detected %s"), \$conf{isdn}],
+# 	     [N("ADSL connection"), $netc->{autodetect}{adsl}, N_("detected"), \$conf{adsl}],
+# 	     [N("Cable connection"), $netc->{autodetect}{cable}, N_("cable connection detected"), \$conf{cable}],
+# 	     [N("LAN connection"), $netc->{autodetect}{lan}, N_("ethernet card(s) detected"), \$conf{lan}]
 # 	);
     my $i = 0;
     map { defined $set_default or do { $_->[1] and $set_default = $i }; $i++ } @l;
     @l = (
-[_("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . _("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
-[_("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . _("detected")), \$conf{winmodem}],
-[_("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . _("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
-[_("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . _("detected")), \$conf{adsl}],
-[_("Cable connection") . if_($netc->{autodetect}{cable}, " - " . _("cable connection detected")), \$conf{cable}],
-[_("LAN connection") . if_($netc->{autodetect}{lan}, " - " . _("ethernet card(s) detected")), \$conf{lan}]
+[N("Normal modem connection") . if_($netc->{autodetect}{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem})), \$conf{modem}],
+[N("Winmodem connection") . if_($netc->{autodetect}{winmodem}, " - " . N("detected")), \$conf{winmodem}],
+[N("ISDN connection") . if_($netc->{autodetect}{isdn}{description}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description})), \$conf{isdn}],
+[N("ADSL connection") . if_($netc->{autodetect}{adsl}, " - " . N("detected")), \$conf{adsl}],
+[N("Cable connection") . if_($netc->{autodetect}{cable}, " - " . N("cable connection detected")), \$conf{cable}],
+[N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), \$conf{lan}]
 );
     $::isInstall and $in->set_help('configureNetwork');
-    my $e = $in->ask_from(_("Network Configuration Wizard"), _("Choose the connection you want to configure"),
+    my $e = $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
 			  [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
 			  changed => sub {
 			      return if !$netc->{autodetection};
@@ -227,15 +227,15 @@ If you don't want to use the auto detection, deselect the checkbox.
     my $nb = keys %{$netc->{internet_cnx}};
     if ($nb < 1) {
     } elsif ($nb > 1) {
-	$in->ask_from(_("Network Configuration Wizard"),
-		      _("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
-		      [ { label => _("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ]} ]
+	$in->ask_from(N("Network Configuration Wizard"),
+		      N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
+		      [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ]} ]
 		     ) or goto step_2;
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
     member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and
-      $netc->{at_boot} = $in->ask_yesorno(_("Network Configuration Wizard"), _("Do you want to start the connection at boot?"));
+      $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
     if ($netc->{internet_cnx_choice} ) {
 	write_cnx_script($netc);
 	$netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
@@ -249,12 +249,12 @@ If you don't want to use the auto detection, deselect the checkbox.
     network::configureNetwork2($in, $prefix, $netc, $intf);
     my $network_configured = 1;
 
-    if ($netconnect::need_restart_network && $::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
-							  _("The network needs to be restarted"), 1))) {
+    if ($netconnect::need_restart_network && $::isStandalone and ($::expert or $in->ask_yesorno(N("Network configuration"),
+							  N("The network needs to be restarted"), 1))) {
 #-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
 	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
 	    $success = 0;
-	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
+	    $in->ask_okcancel(N("Network Configuration"), N("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
 	}
     }
 
@@ -264,17 +264,17 @@ If you don't want to use the auto detection, deselect the checkbox.
 
   step_3:
 
-    my $m = $success ? _("Congratulations, the network and Internet configuration is finished.
+    my $m = $success ? N("Congratulations, the network and Internet configuration is finished.
 The configuration will now be applied to your system.
 
 ") . if_($::isStandalone && $in->isa('interactive_gtk'),
-_("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))
-      : _("Problems occured during configuration.
+N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))
+      : N("Problems occured during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
     if ($::isWizard) {
 	$::Wizard_no_previous=1;
 	$::Wizard_finished=1;
-	$in->ask_okcancel(_("Network Configuration"), $m, 1);
+	$in->ask_okcancel(N("Network Configuration"), $m, 1);
 	undef $::Wizard_no_previous;
 	undef $::Wizard_finished;
     } else { $::isStandalone and $in->ask_warn('', $m) }
@@ -343,8 +343,8 @@ fi
 #-	      any::load_category($in, 'network/main|usb', !$::expert, 1);
 #-	      $netc->{nb_cards} = listlength(detect_devices::getNet());
 #-	  };
-#-	  ($netc->{nb_cards} - $netc->{minus_one} - (get_net_device($prefix) =~ /eth.+/ ? 1 : 0) > 0) and $in->ask_okcancel(_("Network Configuration"),
-#-_("Now that your Internet connection is configured,
+#-	  ($netc->{nb_cards} - $netc->{minus_one} - (get_net_device($prefix) =~ /eth.+/ ? 1 : 0) > 0) and $in->ask_okcancel(N("Network Configuration"),
+#-N("Now that your Internet connection is configured,
 #-your computer can be configured to share its Internet connection.
 #-Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).
 #-

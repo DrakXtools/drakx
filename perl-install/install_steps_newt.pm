@@ -16,23 +16,21 @@ use devices;
 use lang;
 use common;
 
-my $banner = __();
-
 sub banner {
-    my $banner = translate(__("Mandrake Linux Installation %s"));
+    my $banner = translate(N_("Mandrake Linux Installation %s"));
     my $l = first(Newt::GetScreenSize()) - length($banner) - length($_[0]) + 1;
     Newt::DrawRootText(0, 0, sprintf($banner, ' ' x $l . $_[0]));
     Newt::Refresh();
 }
 
-sub new($$) {
+sub new {
     my ($type, $o) = @_;
 
     interactive::newt->new;
 
     banner('');
 #-PO This string must fit in a 80-char wide text screen
-    Newt::PushHelpLine(_("  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "));
+    Newt::PushHelpLine(N("  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "));
 
     (bless {}, ref $type || $type)->SUPER::new($o);
 }

@@ -73,8 +73,8 @@ sub configure_chooser_raw {
     my %texts;
 
     my $update_texts = sub {
-	$texts{card} = $X->{card} && $X->{card}{BoardName} || _("Custom");
-	$texts{monitor} = $X->{monitor} && $X->{monitor}{ModelName} || _("Custom");
+	$texts{card} = $X->{card} && $X->{card}{BoardName} || N("Custom");
+	$texts{monitor} = $X->{monitor} && $X->{monitor}{ModelName} || N("Custom");
 	$texts{resolution} = Xconfig::resolution_and_depth::to_string($X->{resolution});
 
 	$texts{$_} =~ s/(.{20}).*/$1.../ foreach keys %texts; #- ensure not too long
@@ -99,27 +99,27 @@ sub configure_chooser_raw {
     my $ok;
     $in->ask_from_({ ok => '' }, 
 		   [
-		    { label => _("Graphic Card"), val => \$texts{card}, icon => "eth_card_mini", clicked => sub { 
+		    { label => N("Graphic Card"), val => \$texts{card}, icon => "eth_card_mini", clicked => sub { 
 			  $may_set->('card', Xconfig::card::configure($in, $raw_X, $do_pkgs, 0, $options));
 		      } },
-		    { label => _("Monitor"), val => \$texts{monitor}, icon => "ic82-systemeplus-40", clicked => sub { 
+		    { label => N("Monitor"), val => \$texts{monitor}, icon => "ic82-systemeplus-40", clicked => sub { 
 			  $may_set->('monitor', Xconfig::monitor::configure($in, $raw_X));
 		      } },
-		    { label => _("Resolution"), val => \$texts{resolution}, icon => "X", disabled => sub { !$X->{card} || !$X->{monitor} },
+		    { label => N("Resolution"), val => \$texts{resolution}, icon => "X", disabled => sub { !$X->{card} || !$X->{monitor} },
 		      clicked => sub {
 			  $may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}));
 		      } },
 		        if_(Xconfig::card::check_bad_card($X->{card}) || $::isStandalone,
-		     { val => _("Test"), icon => "warning", disabled => sub { !$X->{card} || !$X->{monitor} },
+		     { val => N("Test"), icon => "warning", disabled => sub { !$X->{card} || !$X->{monitor} },
 		       clicked => sub { 
 			  $ok = Xconfig::test::test($in, $raw_X, $X->{card}, 'auto', 0);
 		      } },
 			),
-		    { val => _("Options"), icon => "ic82-tape-40", clicked => sub {
+		    { val => N("Options"), icon => "ic82-tape-40", clicked => sub {
 			  Xconfig::various::various($in, $X->{card}, $options);
 			  $X->{various} = 'done';
 		      } },
-		    { val => $::isInstall ? _("Ok") : _("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
+		    { val => $::isInstall ? N("Ok") : N("Quit"), icon => "exit", clicked_may_quit => sub { 1 } },
 		   ]);
     $ok, $modified;
 }
@@ -142,7 +142,7 @@ sub configure_chooser {
 sub may_write {
     my ($in, $raw_X, $X, $ok) = @_;
 
-    $ok ||= $in->ask_yesorno('', _("Keep the changes?
+    $ok ||= $in->ask_yesorno('', N("Keep the changes?
 The current configuration is:
 
 %s", Xconfig::various::info($raw_X, $X->{card})), 1);

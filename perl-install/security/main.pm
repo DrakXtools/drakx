@@ -33,7 +33,7 @@ sub basic_seclevel_explanations {
 	my $text = new Gtk::Text(undef, undef);
 	$text->set_editable(0);
 	$text->insert(undef, $text->style->black, undef,
-			    _("Standard: This is the standard security recommended for a computer that will be used to connect
+			    N("Standard: This is the standard security recommended for a computer that will be used to connect
                to the Internet as a client.
 
 High:       There are already some restrictions, and more automatic checks are run every night.
@@ -63,7 +63,7 @@ sub basic_seclevel_option {
 	$$seclevel_entry->set_popdown_strings(@sec_levels);
 	$$seclevel_entry->entry->set_text($current_level);
 
-	new Gtk::Label(_("Security Level:")), $$seclevel_entry;
+	new Gtk::Label(N("Security Level:")), $$seclevel_entry;
 }
 
 sub draksec_main {
@@ -97,11 +97,11 @@ sub draksec_main {
 							   basic_seclevel_explanations($msec),
 							   create_packtable ({ col_spacings => 10, row_spacings => 5 },
 											 [ basic_seclevel_option(\$seclevel_entry, $msec) ],
-											 [ new Gtk::Label(_("Security Alerts:")), 
+											 [ new Gtk::Label(N("Security Alerts:")), 
 											   my $secadmin_check = new Gtk::CheckButton ],
-											 [ new Gtk::Label(_("Security Administrator:")),
+											 [ new Gtk::Label(N("Security Administrator:")),
 											   my $secadmin_entry = new Gtk::Entry ] )),
-					   new Gtk::Label(_("Basic")));
+					   new Gtk::Label(N("Basic")));
 
 	$secadmin_entry->set_text($msec->get_check_value("MAIL_USER"));
 	$secadmin_check->set_active(1) if $msec->get_check_value("MAIL_WARN") eq "yes";
@@ -112,12 +112,12 @@ sub draksec_main {
 	my @all_choices = (@yesno_choices, @alllocal_choices);
 	my %options_values;
 
-	foreach ( [ 'network', _("Network Options") ], [ 'system', _("System Options") ] ) {
+	foreach ( [ 'network', N("Network Options") ], [ 'system', N("System Options") ] ) {
 	    my ($domain, $label) = @$_;
 	    my %values;
 	    
 	    $notebook->append_page(gtkshow(createScrolledWindow(gtkpack(new Gtk::VBox(0, 0),
-		   new Gtk::Label(_("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
+		   new Gtk::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
 		   create_packtable({ col_spacings => 10, row_spacings => 5 },
 						   map {
 		   my $i = $_;
@@ -135,8 +135,8 @@ sub draksec_main {
 			  $values{$i} = new Gtk::Entry();
 			  $values{$i}->set_text($msec->get_function_value($i));
 		   }
-		   [ new Gtk::Label($i._(" (default: %s)", $default)), $values{$i} ];
-		   # , gtksignal_connect(new Gtk::Button(_("Help")), 'clicked' => sub { show_msec_help($_) } ) ]
+		   [ new Gtk::Label($i . N(" (default: %s)", $default)), $values{$i} ];
+		   # , gtksignal_connect(new Gtk::Button(N("Help")), 'clicked' => sub { show_msec_help($_) } ) ]
 	 } $msec->get_functions($domain))))),
 						  new Gtk::Label($label));
 	 $options_values{$domain} = \%values;
@@ -146,7 +146,7 @@ sub draksec_main {
 	my %security_checks_value;
 
 	$notebook->append_page(gtkshow(createScrolledWindow(gtkpack(new Gtk::VBox(0, 0),
-		   new Gtk::Label(_("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
+		   new Gtk::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
 		   create_packtable({ col_spacings => 10, row_spacings => 5 },
 						map {
 						    my $i = $_;
@@ -155,15 +155,15 @@ sub draksec_main {
 							   $security_checks_value{$i}->entry->set_editable(0);
 							   $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
 							   $security_checks_value{$i}->entry->set_text($msec->get_check_value($i));
-							   [ gtkshow(new Gtk::Label(_($i))), $security_checks_value{$i} ];
-							   # , gtksignal_connect(new Gtk::Button(_("Help")), 'clicked' => sub { show_msec_help($i) } ) ]
+							   [ gtkshow(new Gtk::Label(translate($i))), $security_checks_value{$i} ];
+							   # , gtksignal_connect(new Gtk::Button(N("Help")), 'clicked' => sub { show_msec_help($i) } ) ]
 							   }
 						} ($msec->get_default_checks))))),
-					   new Gtk::Label(_("Periodic Checks")));
+					   new Gtk::Label(N("Periodic Checks")));
 
 
 	####################### OK CANCEL BUTTONS ##################################
-	my $bok = gtksignal_connect(new Gtk::Button(_("Ok")),
+	my $bok = gtksignal_connect(new Gtk::Button(N("Ok")),
 						   'clicked' => sub {
                   my $seclevel_value = $seclevel_entry->entry->get_text();
 		  my $secadmin_check_value = $secadmin_check->get_active();
@@ -173,13 +173,13 @@ sub draksec_main {
 		  standalone::explanations("Configuring msec");
 
 		  if ($seclevel_value ne $msec->get_secure_level()) {
-		      $w = wait_msg(_("Please wait, setting security level..."));
+		      $w = wait_msg(N("Please wait, setting security level..."));
 		      standalone::explanations("Setting security level");
 		      $msec->set_secure_level($seclevel_value);
 		      remove_wait_msg($w);
 		  }
 
-		  $w = wait_msg(_("Please wait, setting security options..."));
+		  $w = wait_msg(N("Please wait, setting security options..."));
 		  standalone::explanations("Setting security administrator option");
 		  $msec->config_check('MAIL_WARN', $secadmin_check_value == 1 ? 'yes' : 'no');
 
@@ -212,7 +212,7 @@ sub draksec_main {
 		  my_gtk->exit(0);
 		  } );
 
-	my $bcancel = gtksignal_connect(new Gtk::Button(_("Cancel")),
+	my $bcancel = gtksignal_connect(new Gtk::Button(N("Cancel")),
 							  'clicked' => sub { my_gtk->exit(0) } );
 	gtkpack_($vbox,
 		    1, gtkshow($notebook),

@@ -165,23 +165,23 @@ sub switch {
     if ($alternative) {
         my $new_driver = $alternative->[0];
         if ($new_driver eq 'unknown') {
-            $in->ask_warn(_("No alternative driver"),
-                          _("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
+            $in->ask_warn(N("No alternative driver"),
+                          N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
                             $device->{description}, $driver));
-        } elsif ($in->ask_from(_("Sound configuration"),
-                               _("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
+        } elsif ($in->ask_from(N("Sound configuration"),
+                               N("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
                                  $device->{description}) .
-                               _("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
+                               N("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
                                [
-                                { label => _("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1, format => sub {
+                                { label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1, format => sub {
                                     my %des = category2modules_and_description('multimedia/sound');
                                     "$_[0] (". $des{$_[0]} . ')'
                                     }, allow_empty_list => 1 },
                                 {
-                                    val => _("Help"), disabled => sub { },
+                                    val => N("Help"), disabled => sub { },
                                     clicked => sub {  
-                                        $in->ask_warn(_("Switching between ALSA and OSS help"),
-                                                      _("OSS (Open Sound System) was the first sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.
+                                        $in->ask_warn(N("Switching between ALSA and OSS help"),
+                                                      N("OSS (Open Sound System) was the first sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.
 What's more, OSS drivers all reinvent the wheel.
 
 ALSA (Advanced Linux Sound Architecture) is a modularized architecture which
@@ -197,20 +197,20 @@ To use alsa, one can either use:
         {
             return if ($new_driver eq $driver);
             standalone::explanations("switching audio driver from '$driver' to '$new_driver'\n");
-            $in->ask_warn(_("Warning"), _("The old \"%s\" driver is blacklisted.\n
+            $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oopses the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
-            my $wait = $in->wait_message(_("Please wait"),_("Please Wait... Applying the configuration"));
+            my $wait = $in->wait_message(N("Please wait"),N("Please Wait... Applying the configuration"));
             do_switch($driver, $new_driver);
             undef $wait;
         }
     } elsif ($driver eq "unknown") {
-        $in->ask_warn(_("No known driver"), 
-                      _("There's no known driver for your sound card (%s)",
+        $in->ask_warn(N("No known driver"), 
+                      N("There's no known driver for your sound card (%s)",
                         $device->{description}));
     } else {
-        $in->ask_warn(_("Unkown driver"), 
-                      _("The \"%s\" driver for your sound card is unlisted\n
+        $in->ask_warn(N("Unkown driver"), 
+                      N("The \"%s\" driver for your sound card is unlisted\n
 Please send the output of the \"lspcidrake -v\" command to
 <install at mandrakesoft dot com>
 with subject: unlisted sound driver \"%s\"")
