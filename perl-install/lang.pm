@@ -19,7 +19,7 @@ use log;
 my %languages = (
   'en'  => [ 'English',			undef,	      'en', 'en_US:en' ],
   'bg'  => [ 'Bulgarian',		'cp1250',     'bg', 'bg' ],
-  'br'  => [ 'Brezhonneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
+  'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
   'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:fr_FR:es:fr' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
   'cy'  => [ 'Cymraeg (Welsh)',		'iso-8859-14','cy', 'cy:en_GB:en' ],
