@@ -395,8 +395,7 @@ sub choosePackagesTree {
 				    $o->ask_warn('', $error) if $error;
 				    #- disable selection (or unselection).
 				    $isSelection ? $packages->disable_selected($packages->{rpmdb}, $state, @l) :
-				                   $packages->resolve_requested($packages->{rpmdb}, $state, \%l,
-										callback_choices => \&pkgs::packageCallbackChoices);
+				                   $packages->resolve_requested($packages->{rpmdb}, $state, { map { $_->id => 1 } @l });
 				} else {
 				    #- keep the changes, update visible state.
 				    foreach (@l) {
