@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.17mdk
+Release: 0.18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -357,6 +357,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb  3 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.18mdk
+- drakconnect: fix CAPI kernel drivers installation (blino)
+- drakfirewall: port 445 is used for Samba (w/o NetBios) (blino)
+
 * Fri Jan 28 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.17mdk
 - diskdrake: fix autocheck flag in /etc/fstab for / (pixel, #13283)
 - drakbackup: Wizard, System Backup configuration problems (stew, #13235)
