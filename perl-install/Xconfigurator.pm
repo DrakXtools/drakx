@@ -229,7 +229,7 @@ _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver
 	$msg = ($card->{use_xf4} && !$card->{DRI_glx} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
-Your card is supported by XFree %s which may have abetter support in 2D.", $xf3_ver, $xf4_ver) :
+Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "\n\n" . $msg;
 	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
