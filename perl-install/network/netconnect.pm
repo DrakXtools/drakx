@@ -169,8 +169,8 @@ sub real_main {
                             2 => N("Bridged Ethernet VC"), 
                             3 => N("Routed IP LLC"), 
                             4 => N("Routed IP VC"),
-                            5 => N("PPPOA LLC"), 
-                            6 => N("PPPOA VC"),
+                            5 => N("PPPoA LLC"), 
+                            6 => N("PPPoA VC"),
                            );
 
       my %ppp_auth_methods = (
