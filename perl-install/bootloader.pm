@@ -721,6 +721,7 @@ sub write_lilo_conf {
 	my %dev2bios = reverse %bios2dev;
 	my %done;
 	if ($dev2bios{$dev}) {
+	    log::l("Since we're booting on $bios2dev{0}, make it bios=0x80, whereas $dev is now " . (0x80 + $dev2bios{$dev}));
 	    print  F "disk=/dev/$bios2dev{0} bios=0x80";
 	    printf F "disk=/dev/$dev bios=0x%x\n", 0x80 + $dev2bios{$dev};
 	    $done{0} = $done{$dev2bios{$dev}} = 1;
@@ -733,7 +734,8 @@ sub write_lilo_conf {
 		&& $bios2dev{$_ - 1} eq "hd" . chr(ord($letter) - 1);
 		  #- no need to help lilo with hdb (resp. hdd, hdf...)
 	    $done{$_} = 1;
-	    printf F "disk=/dev/$bios2dev{1} bios=0x%x\n", 0x80 + $_;
+	    log::l("Helping lilo: $bios2dev{$_} must be " . (0x80 + $_));
+	    printf F "disk=/dev/$bios2dev{$_} bios=0x%x\n", 0x80 + $_;
 	}
 
 	print F "message=/boot/message" if (arch() !~ /ia64/);
