@@ -264,13 +264,18 @@ sub updatefirmware {
 
     return 0 if !$firmware;
 
-    # Install the firmware file in /usr/share/sane/firmware
-    $firmware = scanner::installfirmware($firmware, $_->{val}{BACKEND});
-
-    # Enter the path to the firmware in the appropriate config file
     foreach (@configured) {
 	next if $_->{val}{DESCRIPTION} ne $scannerchoice; 
+	# Install the firmware file in /usr/share/sane/firmware
 	my $backend = $_->{val}{BACKEND};
+	$firmware = scanner::installfirmware($firmware, $backend);
+	if (!$firmware) {
+	    $in->ask_warn('Error',
+			  N("Could not install the firmware file for the %s!",
+			    $scannerchoice));
+	    return 0;
+	}
+	# Enter the path to the firmware in the appropriate config file
 	my $firmwareline =$_->{val}{FIRMWARELINE};
 	$firmwareline =~ s/\$FIRMWARE/$firmware/sg;
 	scanner::setfirmware($backend, $firmwareline);
