@@ -31,12 +31,7 @@ TV
   4 KDE kwintv
 
 OFFICE
-  5 LOCALES"en" staroffice-en
-    LOCALES"de" staroffice-de
-    LOCALES"es" staroffice-es
-    LOCALES"fr" staroffice-fr
-    LOCALES"it" staroffice-it
-    acroread
+  5 staroffice-en staroffice-de staroffice-es staroffice-fr staroffice-it acroread
   4 !KDE abisuite 
   4 cbb gaddr ical xpdf moneydance
   3 wv 
@@ -222,7 +217,7 @@ NETWORKING_FILE_SERVER
 NETWORKING_WWW
   5 lynx
   4 bluefish netscape-communicator wget links mozilla
-  4 GNOME screem galeon
+  4 GNOME screem galeon nautilus nautilus-mozilla
   3 plugger
   4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
 NETWORKING_WWW_SERVER
@@ -245,7 +240,7 @@ GRAPHICS
     3 ee
 
 ARCHIVING
-  5 dump ncompress sharutils unzip arkeia-server-shareware
+  5 dump ncompress sharutils unzip
   4 gtkzip
   3 unarj unstuff
   2 zip mt-st taper
@@ -259,6 +254,8 @@ BURNER
   4 xcdroast
   3 mkisofs cdrecord
   2 eroaster 
+  DEVELOPMENT
+    3 cdrecord-devel
 
 DATABASES
   5 postgresql
@@ -283,8 +280,12 @@ GAMES
   GNOME
     4 gnome-chess gnome-games
     1 gtkgo gtulpas
+    DEVELOPMENT
+      3 gnomes-games-devel
   KDE
     2 kdegames
+    DEVELOPMENT
+      2 kdegames-devel
   3D
     4 spacecup chromium tuxracer csmash gltron
       
@@ -338,7 +339,6 @@ DEVELOPMENT
   4 gettext-devel
 
     BOOKS
-    3 mandrake_doc-de mandrake_doc-en mandrake_doc-es mandrake_doc-fr mandrake_doc-it
     2 pam-doc python-docs slang-doc kernel-doc nasm-doc qt2-doc ruby-doc lkmpg
 
   KDE
@@ -351,7 +351,7 @@ DEVELOPMENT
     3 memprof glade gnome-guile pygnome gnome-core-devel gnome-guile-devel
       gnome-objc-devel gnome-pim-devel gob 
     2 pygnome-applet pygnome-capplet pygnome-libglade rep-gtk-gnome
-      gnomemm-devel gnome-games-devel gnome-pilot-devel glademm
+      gnomemm-devel gnome-pilot-devel glademm
     1 gnucash-devel rep-gtk-libglade
 
   DEVELOPMENT_OTHER
@@ -395,6 +395,9 @@ CONFIG
   2 control-panel adjtimex isicom xinput timeconfig Bastille-Tk-module
   1 ipxutils
 
+BOOKS
+  4 mandrake_doc-de mandrake_doc-en mandrake_doc-es mandrake_doc-fr mandrake_doc-it
+ 
 SYSTEM
   5 !GNOME !KDE icewm-light
 
