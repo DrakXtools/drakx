@@ -83,6 +83,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         # automatic sound slots configuration
         system("rm -f /etc/asound.state");
         harddrake::sound::configure_sound_slots();
+        next;
     } elsif ($Ident eq "ETHERNET") {
         modules::remove_alias_regexp('^(wlan|eth)[0-9]*$');
         modules::load_category('network/main|gigabit|usb');
