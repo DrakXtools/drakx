@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 15mdk
+Release: 16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar 30 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-16mdk
+- harddrake:
+  o do not list hardware controllers in unknown section
+  o ensure we detect all known SATA controllers
+  o fix optical mice detection (#15082)
+- net_applet: really load network configuration at start (blino)
+- printerdrake: do not mis-detect some USB keyboards as printers (till)
+
 * Tue Mar 29 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-15mdk
 - drakconnect (blino):
   o fix eaglectrl path (#15033)
@@ -379,6 +387,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - localedrake:
   o fix russian size (pixel, #14988)
   o "unicode" checkbox is visible only in expert mode
+- fix tools' crash when drakconf is not installing (#13392)
 
 * Fri Mar 25 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-14mdk
 - drakroam:
