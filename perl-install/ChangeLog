@@ -1,5 +1,65 @@
 2004/09/07  David Baudens  <baudens at mandrakesoft.com>
 
+	* share/rpmsrate: Add kphone
+	Down kdm
+
+2004/09/07  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - shift twice to get the correct function name
+
+2004/09/07  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/adsl.c (perform_adsl) ppp module doesn't exist, don't try to
+	load it
+
+	* mouse.pm: more synaptics fixes
+
+	* fs/mount_options.pm (set_default) use "users" options for removable
+	devices (so that users
+	can unmount them if the devices were mounted by root)
+
+2004/09/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Bokmål po file
+
+2004/09/07  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/bootloader-config: take care of symlink based bootloader
+	entries
+
+	* bootloader.pm: create get_kernels_and_labels_before_kernel_remove() used
+	by bootloader-config
+
+	* modules/modprobe_conf.pm, modules/modules_conf.pm: when installing on
+	kernel 2.4, do generate a valid modprobe.conf anyway
+
+2004/09/07  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: install_urpmi() wasn't writing proper urls when having
+	read an hdlists
+	file for a networked supplementary media
+	Allow supplementary media for upgrades
+
+	* pkgs.pm: install_urpmi() wasn't writing proper urls when having read an
+	hdlists
+	file for a networked supplementary media
+
+2004/09/07  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: one more change for 10.1-0.23mdk
+	last minute change for 10.1-0.23mdk
+	10.1-0.23mdk
+
+	* share/po/fr.po: typo fix
+	fix unclosed tag
+
+	* install_steps.pm (selectLanguage) set default IM (else IM was only set
+	if one click on
+	"Country / Region" in summary)
+
+2004/09/07  David Baudens  <baudens at mandrakesoft.com>
+
 	* share/rpmsrate: Down zapping rank
 
 2004/09/07  Daouda Lo  <daouda at mandrakesoft.com>
@@ -37949,7 +38009,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.959 2004/09/03 08:39:32 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.960 2004/09/07 08:05:01 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
