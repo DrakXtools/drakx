@@ -944,7 +944,7 @@ sub _create_window($$) {
 	$signal = $w->signal_connect(motion_notify_event => sub {
 	    delete $::o->{mouse}{unsafe};
 	    log::l("unsetting unsafe mouse");
-	    $w->signal_disconnect($signal);
+	    $w->signal_handler_disconnect($signal);
 	});
     }
 
