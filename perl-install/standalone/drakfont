@@ -344,35 +344,24 @@ sub put_font_dir() {
         interactive_progress($pbar2, 0.10, N("True Type install done"));
         my $update_chkfontpath = "$chkfontpath -a $drakfont_dir/ttf";
 
-        if ($so && $gs) {
-            my @glob_drak = glob("$drakfont_dir/tmp/tmp/*.ttf");
-            convert_ttf_fonts(\@glob_drak, 1);
-            system("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm *.afm ../Type1");
-            system("cd $drakfont_dir/tmp/Type1 && $type1inst");
-            interactive_progress($pbar2, 0.10, N("type1inst building"));
-            -e "$drakfont_dir/tmp/Type1/Fontmap" 
-              and system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
-            system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
-            my $type1dir = $drakfont_dir . "/Type1";
-            system("cd $type1dir && $fccache && $type1inst");
-            interactive_progress($pbar2, 0.05, N("Ghostscript referencing"));
-            $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
-        }
-
-        if (!$so && $gs) {
+        if ($gs) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ], 1);
-            system("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm ../Type1");
+            system(join("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm", if_($so, "*.afm"), "../Type1"));
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
             interactive_progress($pbar2, 0.1, N("type1inst building"));
-            system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
-            system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
+            if ($so) {
+                -e "$drakfont_dir/tmp/Type1/Fontmap" 
+                  and system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
+                system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
+            } else {
+                system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
+                system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
+            }
             my $type1dir = $drakfont_dir . "/Type1";
             system("cd $type1dir && $fccache && $type1inst");
             interactive_progress($pbar2, 0.05, N("Ghostscript referencing"));
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
-        }
-
-        if ($so && !$gs) {
+        } elsif ($so) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ]);
             convert_fonts([ glob("$drakfont_dir/tmp/tmp/*.pfm") ], $pfm2afm, "PFM");
             system("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
