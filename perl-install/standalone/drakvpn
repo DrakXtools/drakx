@@ -64,7 +64,7 @@ if ($kernel_version > 2.5) {
 	$ipsec_conf = "/etc/ipsec.conf";
 } else {
 	$ipsec_conf = "/etc/freeswan/ipsec.conf";
-};
+}
 my $ipsec = network::ipsec::read_ipsec_conf($ipsec_conf,$kernel_version);
 my $racoon = network::ipsec::read_racoon_conf($racoon_conf);
 
@@ -106,7 +106,7 @@ What would you like to do?"),
 		network::ipsec::stop_daemons();
 	    }
 	    foreach ($ipsec_conf, $tunnels_file) {
-		if (-f $_) { rename($_, "$_.drakvpndisable") or die "Could not rename $_ to $_.drakvpndisable" };
+		if (-f $_) { rename($_, "$_.drakvpndisable") or die "Could not rename $_ to $_.drakvpndisable" }
 	    }
 	    network::ipsec::sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakvpn] Disabled");
@@ -130,7 +130,7 @@ What would you like to do?"),
 	    foreach ($ipsec_conf, $tunnels_file) {
 		rename($_, "$_.old") if -f $_;
 		rename("$_.drakvpndisable", $_) or die "Could not find configuration. Please reconfigure.";
-	    };
+	    }
 	    {
 		my $_wait_enabl = $in->wait_message('', N("Enabling VPN..."));
 		network::ipsec::start_daemons();
@@ -249,7 +249,7 @@ if (!$::testing && $ipsec_package =~ /super/i && $kernel_version < 2.5) {
 	$in->do_pkgs->remove("freeswan") if -e "/etc/freeswan/ipsec.d/policies/clear";
 	$in->do_pkgs->remove("super-freeswan-doc") if -e "/usr/sbin/ipsec";
 	$in->do_pkgs->remove("super-freeswan") if -e "/usr/lib/ipsec/auto.advroute";
-};
+}
  
 				      
 #- install and setup the RPM packages, if needed
@@ -262,7 +262,7 @@ if (!$::testing && $ipsec_package =~ /ipsec-tools/i) {
 } else {
 	%rpm2file = ($ipsec_package => '/usr/sbin/ipsec',
 		shorewall => '/sbin/shorewall');
-};
+}
 		
 #- first: try to install all in one step, if needed
 if (! ($ipsec_package =~ /super/i && -e "/usr/lib/ipsec/auto.advroute" || 
@@ -309,7 +309,7 @@ N("Next, we will configure the %s file.\n
 Simply click on Next.\n", $ipsec_conf)) or goto step_detectsetup;
 
 	$c = "configure";
-};
+}
 
 #-------------------------------------------------------------------
 #---------------------- configure ipsec_conf -----------------------
@@ -321,7 +321,7 @@ step_configure_ipsec_conf:
 
 @section_names = network::ipsec::get_section_names_ipsec_conf($ipsec,$kernel_version) if $ipsec;
 
-my $choice = $section_names[0] if $section_names[0];
+my $choice = $section_names[0];
 my $d = $in->ask_from_list(N("%s entries", $ipsec_conf),
 N("The %s file contents
 is divided into sections.\n
@@ -342,7 +342,7 @@ if ($d eq "display $ipsec_conf" || $d eq "_:display here is a verb\nDisplay") {
 	my $ipsec_exists = 0;
 	foreach my $key (keys %$ipsec) {
 		$ipsec_exists = 1 if  $ipsec->{$key};
-	};
+	}
 	if ($ipsec_exists) {
 		$in->ask_okcancel(N("_:display here is a verb\nDisplay configuration"),
 		network::ipsec::display_ipsec_conf($ipsec,$kernel_version));
@@ -385,7 +385,7 @@ The section names have to be unique.\n
 You'll have to go back and add another section
 or change its name.\n"));
 	goto step_add_section;
-};
+}
 
 	my $config_setup = {
 		1 => [ "config", "setup" ],
@@ -426,7 +426,7 @@ The section names have to be unique.\n
 You'll have to go back and add another section
 or change its name.\n"));
 	goto step_add_section;
-};
+}
 
 	my $conn_default = {
 		1 => [ "conn", "%default" ],
@@ -513,7 +513,7 @@ The section names have to be unique.\n
 You'll have to go back and add another section
 or change the name of the section.\n"));
 	goto step_add_normal_conn;
-};
+}
 
 	network::ipsec::add_section_ipsec_conf($normal_conn, $ipsec);
 
@@ -559,14 +559,14 @@ Choose continue when you are done to write the data.\n"), $section)  or goto ste
 		put_in_hash($ipsec, { max(keys %$ipsec) + 1 => "#!/sbin/setkey -f" });
 		put_in_hash($ipsec, { max(keys %$ipsec) + 1 => "flush;" });
 		put_in_hash($ipsec, { max(keys %$ipsec) + 1 => "spdflush;" });
-	};
+	}
 
 	network::ipsec::add_section_ipsec_conf($section, $ipsec);
 
 	@section_names = network::ipsec::get_section_names_ipsec_conf($ipsec,$kernel_version);
 
 	goto step_configure_ipsec_conf;
-};
+}
 
 #- edit ---------------------
 
@@ -635,7 +635,7 @@ Choose continue when you are done to write the data.\n", $ipsec_conf),
 
 	goto step_configure_ipsec_conf;
 
-};
+}
 
 #- edit ---- kernel 2.6 part -------------------------------
 
@@ -648,7 +648,7 @@ Choose continue when you are done to write the data.\n"), $ipsec->{$number})  or
 	
 goto step_configure_ipsec_conf;
 
-};
+}
 
 #- remove ---------------------
 
@@ -681,7 +681,7 @@ step_configure_racoon_conf:
 
 @section_names = network::ipsec::get_section_names_racoon_conf($racoon) if $racoon;
 
-my $choice = $section_names[0] if $section_names[0];
+my $choice = $section_names[0];
 my $d = $in->ask_from_list_(N("%s entries", $racoon_conf),
 N("The racoon.conf file configuration.\n
 The contents of this file is divided into sections.
@@ -703,7 +703,7 @@ if ($d eq "_:display here is a verb\nDisplay") {
 	my $racoon_exists = 0;
 	foreach my $key (keys %$racoon) {
 		$racoon_exists = 1 if  $racoon->{$key};
-	};
+	}
 
 	if ($racoon_exists) {
 		$in->ask_okcancel(N("_:display here is a verb\nDisplay configuration"),
@@ -913,7 +913,7 @@ quit_global($in, 0);
 sub quit_global {
     my ($in, $exitcode) = @_;
     $in->exit($exitcode);
-    goto begin
+    goto begin;
 }
 
 
