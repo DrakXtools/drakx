@@ -236,14 +236,31 @@ sub findIntf {
     $intf->{$device}{DEVICE} = $device;
     $intf->{$device};
 }
-#PAD \s* a la fin
+
 my $ip_regexp = qr/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+
 sub is_ip {
     my ($ip) = @_;
     my @fields = $ip =~ $ip_regexp or return;
     every { 0 <= $_ && $_ <= 255 } @fields or return;
     @fields;
 }
+
+sub ip_compare {
+    my ($ip1, $ip2) = @_;
+    my (@ip1_fields) = $ip1 =~ $ip_regexp;
+    my (@ip2_fields) = $ip2 =~ $ip_regexp;
+    
+    every { $ip1_fields[$_] eq $ip2_fields[$_] } (0 .. 3);
+}
+
+sub is_ip_forbidden {
+    my ($ip) = @_;
+    my @forbidden = ('127.0.0.1', '255.255.255.255');
+    
+    any { ip_compare($ip, $_) } @forbidden;
+}
+
 sub is_domain_name {
     my ($name) = @_;
     my @fields = split /\./, $name;
@@ -282,6 +299,7 @@ sub dns {
     join(".", @masked);
 
 }
+
 sub gateway {
     my ($ip) = @_;
     my @masked = masked_ip($ip) =~ $ip_regexp;
@@ -303,16 +321,6 @@ sub configureNetworkIntf {
 	$netc->{wireless_eth} = 1;
 	$intf->{WIRELESS_MODE} = "Managed";
 	$intf->{WIRELESS_ESSID} = "any";
-#-	$intf->{WIRELESS_NWID} = "";
-#-	$intf->{WIRELESS_FREQ} = "";
-#-	$intf->{WIRELESS_SENS} = "";
-#-	$intf->{WIRELESS_RATE} = "";
-#-	$intf->{WIRELESS_ENC_KEY} = "";
-#-	$intf->{WIRELESS_RTS} = "";
-#-	$intf->{WIRELESS_FRAG} = "";
-#-	$intf->{WIRELESS_IWCONFIG} = "";
-#-	$intf->{WIRELESS_IWSPY} = "";
-#-	$intf->{WIRELESS_IWPRIV} = "";
     }
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
@@ -333,7 +341,7 @@ notation (for example, 1.2.3.4).");
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
-#    $::isStandalone or $in->set_help('configureNetworkIP');
+
     $in->ask_from(N("Configuring network device %s", $intf->{DEVICE}),
   	          (N("Configuring network device %s", $intf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') . "\n\n") .
 	          $text,
@@ -371,7 +379,11 @@ notation (for example, 1.2.3.4).");
 			 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
 			 return 1, $bad[0];
 		     }
-		     		     		     
+
+		     if (is_ip_forbidden($intf->{IPADDR})) {
+			 $in->ask_warn('', N("Warning : IP address %s is usually reserved !", $intf->{IPADDR}));
+		     }
+		     
 		     return 0 if !$intf->{WIRELESS_FREQ};
 		     if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
 			 $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
@@ -400,7 +412,6 @@ sub configureNetworkNet {
     my $gateway_ex = gateway($intf->{IPADDR});
 #-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
 
-#    $::isInstall and $in->set_help('configureNetworkHost');
     $in->ask_from(N("Configuring network"),
 N("Please enter your host name.
 Your host name should be a fully-qualified host name,
@@ -437,7 +448,6 @@ want to use the default host name."),
 
 sub miscellaneous_choose {
     my ($in, $u, $b_clicked) = @_;
-#    $in->set_help('configureNetworkProxy') if $::isInstall;
 
     $in->ask_from('',
        N("Proxies configuration"),
