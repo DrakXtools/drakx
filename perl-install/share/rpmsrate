@@ -144,10 +144,9 @@ NETWORKING_FILE_TRANSFER
   3 fmirror ncftp tftp
   3 GNOME dpsftp
   2 uucp
-
+  
 NETWORKING_FILE_TRANSFER_SERVER
   4 proftpd bwbserver_linux
-  4 WIZARDS wizards_lib-ftp
   2 wu-ftpd anonftp
 
 NETWORKING_LDAP_SERVER
@@ -169,7 +168,6 @@ NETWORKING_IRC
 
 NETWORKING_FIREWALLING_SERVER
   5 iproute2 routed iptables
-  5 WIZARDS wizards_lib-firewall
   3 prelude
   1 portsentry 
 
@@ -185,7 +183,6 @@ NETWORKING_MAIL
   1 exmh sylpheed fetchmail-daemon fetchmailconf
 NETWORKING_MAIL_SERVER
   5 postfix 
-  5 WIZARDS wizards_lib-postfix
   4 mailman 
 
 NETWORKING_NEWS
@@ -194,14 +191,12 @@ NETWORKING_NEWS
   1 slrn-pull xrn
 NETWORKING_NEWS_SERVER
   4 inn 
-  4 WIZARDS wizards_lib-news
   3 inews 
 
 NETWORKING_OTHER
   2 finger fwhois ucd-snmp-utils htdig macutils
 NETWORKING_OTHER_SERVER
   3 dhcp-server gated timed ntp
-  3 WIZARDS wizards_lib-dhcp wizards_lib-time 
 
   3 intimed mcserv nscd imap pidentd
     rdate bootparamd 
@@ -232,7 +227,6 @@ NETWORKING_DNS
   4 bind-utils 
 NETWORKING_DNS_SERVER
   5 bind 
-  5 WIZARDS wizards_lib-dns
   4 caching-nameserver
   1 nslint
 
@@ -244,7 +238,6 @@ NETWORKING_FILE
   1 am-utils
 NETWORKING_FILE_SERVER 
   5 nfs-utils
-  4 WIZARDS wizards_lib-samba
   4 samba-server bwbserver_linux
   3 BOOKS samba-doc 
   2 arkeia-server samba-winbind
@@ -262,7 +255,6 @@ NETWORKING_WWW_SERVER
   5 apache apache-mod_perl mod_ssl mod_php 
   4 apache-suexec 
     bwbserver_linux
-  4 WIZARDS wizards_lib-web
   4 BOOKS apache-manual
   3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
     php-pgsql php-readline php mod_sxnet auth_ldap HTML-Embperl
@@ -445,6 +437,9 @@ FILE_TOOLS
 WEBMIN
   3 webmin
 
+WIZARDS
+  5 drakwizard
+  
 CONFIG
   4 linuxconf linuxconf-lang-fr linuxconf-lang-de
   4 X gnome-linuxconf
