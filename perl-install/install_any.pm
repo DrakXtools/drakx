@@ -1159,10 +1159,10 @@ sub g_auto_install {
     $o->{interactiveSteps} = [ 'doPartitionDisks', 'formatPartitions' ] if $b_replay;
 
     #- deep copy because we're modifying it below
-    $o->{users} = [ @{$o->{users} || []} ];
+    $o->{users} = $b_respect_privacy ? [] : [ @{$o->{users} || []} ];
 
     my @user_info_to_remove = (
-	if_($b_respect_privacy, qw(name realname home pw)), 
+	if_($b_respect_privacy, qw(realname pw)), 
 	qw(oldu oldg password password2),
     );
     $_ = { %{$_ || {}} }, delete @$_{@user_info_to_remove} foreach $o->{superuser}, @{$o->{users} || []};
@@ -1173,11 +1173,13 @@ sub g_auto_install {
 	    $_ = { %{$_ || {}} }, delete @$_{@netcnx_type_to_remove} foreach $o->{netcnx}{$type};
 	}
     }
+    my $warn_privacy = $b_respect_privacy ? "!! This file has been simplified to respect privacy when reporting problems.
+# You should use /root/drakx/auto_inst.cfg.pl instead !!\n#" : '';
     
     require Data::Dumper;
     my $str = join('', 
 "#!/usr/bin/perl -cw
-#
+# $warn_privacy
 # You should check the syntax of this file before using it in an auto-install.
 # You can do this with 'perl -cw auto_inst.cfg.pl' or by executing this file
 # (note the '#!/usr/bin/perl -cw' on the first line).
