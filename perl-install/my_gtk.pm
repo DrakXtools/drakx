@@ -40,7 +40,7 @@ sub new {
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
     foreach (@interactive::objects) {
-	$::isWizard or $_->{rwindow}->set_modal(0);
+	$::isWizard or $::isEmbedded or $_->{rwindow}->set_modal(0);
     }
     push @interactive::objects, $o if !$opts{no_interactive_objects};
     $o->{rwindow}->set_position('center_always') if $::isStandalone;
