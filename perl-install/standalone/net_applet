@@ -32,7 +32,7 @@ my %appletstate = (
              connected => {
   		          colour => [ 'connected' ],
 			  changes => [ 'disconnected', 'error', 'busy' ],
-			  menu => [ 'confNetwork', 'refresh', 'help' ],
+			  menu => [ 'confNetwork', 'monitorNetwork', 'refresh', 'help' ],
 			  tt => [ N("Network is up on interface ") ]
 			  },
              disconnected => {
@@ -45,6 +45,7 @@ my %appletstate = (
 
 my %actions = (
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
+               'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor &") } },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },
                'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } }
               );
