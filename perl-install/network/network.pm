@@ -77,7 +77,7 @@ sub write_conf {
 
 sub write_zeroconf {
     my ($file, $zhostname) = @_;
-    substInFile { s/^(hostname) =.*/$1 = $zhostname/ } $file;
+    eval { substInFile { s/^(hostname) =.*/$1 = $zhostname/ } $file };
 }
 
 sub write_resolv_conf {
