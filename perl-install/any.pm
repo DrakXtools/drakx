@@ -88,11 +88,18 @@ sub setupBootloader {
     my $hds = $all_hds->{hds};
 
     $more++ if $b->{bootUnsafe};
-    $more = 2 if arch() =~ /ppc/; #- no auto for PPC yet
+    my $automatic = !$::expert && $more < 1;
+    my $semi_auto = !$::expert && arch() !~ /ia64/;
+    my $ask_per_entries = $::expert || $more > 1;
+    $automatic = 0 if arch() =~ /ppc/; #- no auto for PPC yet
+    $automatic = $semi_auto = 0 
+      #- full expert questions when there is 2 kind of disks
+      #- it would need a semi_auto asking on which drive the bios boots...
+      if (grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds);
 	
-    if (!$::expert && $more < 1) {
+    if ($automatic) {
 	#- automatic
-    } elsif (!$::expert && arch() !~ /ia64/) {
+    } elsif ($semi_auto) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
@@ -198,7 +205,9 @@ sub setupBootloader {
 	bootloader::add_append($b, "mem", $memsize);
     }
 
-    while ($::expert || $more > 1) {
+    $ask_per_entries or last;
+
+    while (1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 	my ($c, $e);
 	$in->ask_from_( 
