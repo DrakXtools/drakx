@@ -21,8 +21,8 @@ sub detect {
                  $auto_detect->{isdn} = network::isdn::detect_backend($modules_conf);
              },
              lan => sub { # ethernet
-                 modules::load_category($modules_conf, 'network/main|gigabit|usb');
                  require network::ethernet;
+                 modules::load_category($modules_conf, network::ethernet::get_eth_categories());
                  $auto_detect->{lan} = { map { $_->[0] => $_->[1] } network::ethernet::get_eth_cards($modules_conf) };
              },
              adsl => sub {
@@ -125,7 +125,8 @@ sub real_main {
 
       my $lan_detect = sub {
           detect($modules_conf, $netc->{autodetect}, 'lan');
-          modules::interactive::load_category($in, $modules_conf, 'network/main|gigabit|pcmcia|usb|wireless', !$::expert, 0);
+          require network::ethernet;
+          modules::interactive::load_category($in, $modules_conf, network::ethernet::get_eth_categories(), !$::expert, 0);
           @all_cards = network::ethernet::get_eth_cards($modules_conf);
           %eth_intf = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
           require list_modules;
@@ -829,7 +830,8 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     post => sub {
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         if ($ntf_name eq "Manually load a driver") {
-                            modules::interactive::load_category__prompt($in, $modules_conf, 'network/main|gigabit|pcmcia|usb|wireless');
+                            require network::ethernet;
+                            modules::interactive::load_category__prompt($in, $modules_conf, network::ethernet::get_eth_categories());
                             return 'lan';
                         }
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
@@ -1339,7 +1341,7 @@ sub start_internet {
     my ($o) = @_;
     init_globals($o);
     #- give a chance for module to be loaded using kernel-BOOT modules...
-    $::isStandalone or modules::load_category($o->{modules_conf}, 'network/main|gigabit|usb');
+    $::isStandalone or modules::load_category($o->{modules_conf}, 'network/*');
     connect_backend($o->{netc});
 }
 

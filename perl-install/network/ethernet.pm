@@ -11,6 +11,7 @@ use network::tools;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
+@EXPORT = qw(get_eth_categories);
 
 sub write_ether_conf {
     my ($in, $modules_conf, $netcnx, $netc, $intf) = @_;
