@@ -23,7 +23,7 @@ use c;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--expert]\n";
-/-v/ and die "version: $Id$";
+/-v/ and die 'version: $Id$ ';
 
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
 $::isStandalone = 1;
