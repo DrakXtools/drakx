@@ -164,7 +164,7 @@ sub process {
                                  if_($page->{interactive_help_id}, interactive_help_id => $page->{interactive_help_id}),
                                }, $data2);
         } else {
-            $a = $in->ask_okcancel($o->{name}, $name, $yes);
+            $a = $in->ask_okcancel($o->{name}, $name, $yes || 'ok');
         }
         # interactive->ask_yesorno does not support stepping forward or backward:
         $a = $yes if $a && $page->{type} eq "yesorno";
