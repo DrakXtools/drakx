@@ -239,7 +239,7 @@ sub set {
 	#- defer running smbpassword until the network is up
 
 	$when_network_is_up->(sub {
-	    run_program::rooted($::prefix, 'smbpasswd', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	    run_program::rooted($::prefix, 'net','join', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     } elsif ($kind eq 'SMBKRB') {
 
@@ -247,7 +247,7 @@ sub set {
 	my $realm = $authentication->{AD_domain};
 
 	configure_krb5_for_AD($authentication);
-	$in->do_pkgs->install('samba-winbind', 'pam_krb5');
+	$in->do_pkgs->install('samba-winbind', 'pam_krb5','samba-server');
 	set_nsswitch_priority('winbind');
 	set_pam_authentication('winbind');
 
@@ -256,6 +256,8 @@ sub set {
 	network::smb::write_smb_ads_conf($domain,$realm);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir_p("$::prefix/home/$domain");
+	run_program::rooted($::prefix, 'service', 'smb', 'restart');
+	run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'net', 'ads', 'join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
