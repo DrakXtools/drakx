@@ -185,7 +185,7 @@ endif
 	gzip -9f $(DEST)/usr/share/ldetect-lst/*
 
 	cd share ; cp -a consolefonts devices $(DEST)/usr/share
-	cat share/symlinks `../tools/specific_arch share/symlinks` | uniq > $(DEST)/usr/share/symlinks
+	cat share/symlinks `../tools/specific_arch share/symlinks` > $(DEST)/usr/share/symlinks
 	-cd share ; cp -f *.png $(DEST)/usr/share
 	-cd pixmaps ; cp -af *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cp `perl -I. -Mlang -e 'lang::png_lang_files()'` $(DEST)/usr/share/langs
