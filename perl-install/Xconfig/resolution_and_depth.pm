@@ -249,7 +249,7 @@ sub choose_gtk {
     };
 
     my $pixmap_mo = Gtk2::Image->new;
-    my $set_chosen_x_res = sub {
+    my $set_chosen_resolution = sub {
 	$chosen_x_res = $_[0];
 	if ($_[1]) {
 	    $chosen_y_res = $_[1];
@@ -262,7 +262,7 @@ sub choose_gtk {
 	$pixmap_mo->set_from_file($image);
 	$x_res_combo->entry->set_text($chosen_x_res . "x" . $chosen_y_res);
     };
-    $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
+    $set_chosen_resolution->($chosen_x_res, $chosen_y_res);
 
     my $help_sub = $in->interactive_help_sub_display_id('configureX_resolution');
     gtkadd($W->{window},
@@ -291,18 +291,18 @@ sub choose_gtk {
 	$set_chosen_Depth_image->();
 
 	if (!member($chosen_x_res, @{$depth2x_res{$chosen_Depth}})) {
-	    $set_chosen_x_res->(max(@{$depth2x_res{$chosen_Depth}}));
+	    $set_chosen_resolution->(max(@{$depth2x_res{$chosen_Depth}}));
 	}
     });
     $x_res_combo->set_popdown_strings(uniq map { "$_->{X}x$_->{Y}" } sort { $a->{X} <=> $b->{X} } @resolutions);
     $x_res_combo->entry->signal_connect(changed => sub {
-	$set_chosen_x_res->($1, $2) if $x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
+	$set_chosen_resolution->($1, $2) if $x_res_combo->entry->get_text =~ /(\d+)x(\d+)/;
 	
 	if (!member($chosen_Depth, @{$x_res2depth{$chosen_x_res}})) {
 	    $set_chosen_Depth->(max(@{$x_res2depth{$chosen_x_res}}));
 	}
     });
-    $set_chosen_x_res->($chosen_x_res, $chosen_y_res);
+    $set_chosen_resolution->($chosen_x_res, $chosen_y_res);
     $set_chosen_Depth->($chosen_Depth);
     $W->{ok}->grab_focus;
 
