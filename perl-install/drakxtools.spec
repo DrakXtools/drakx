@@ -291,10 +291,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-- moved code of XFdrake NVIDIA support to generic in standalone. (francois)
-
 * Thu Mar  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-16mdk
 - draksound: fix #1929
+- moved code of XFdrake NVIDIA support to generic in standalone. (francois)
 
 * Thu Mar  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-15mdk
 - fix infamous #2672
