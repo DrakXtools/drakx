@@ -347,7 +347,9 @@ sub read_all_conf {
 	    $intf->{WIRELESS_ENC_KEY} = network::tools::get_wep_key_from_iwconfig($intf->{WIRELESS_ENC_KEY});
 	}
     }
-    $netcnx->{type} or probe_netcnx_type($::prefix, $netc, $intf, $netcnx);
+    if (my $default_intf = network::tools::get_default_gateway_interface($netc, $intf)) {
+        $netcnx->{type} ||= network::tools::get_interface_type($intf->{$default_intf});
+    }
 }
 
 #- FIXME: this is buggy, use network::tools::get_default_gateway_interface
