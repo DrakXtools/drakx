@@ -218,7 +218,7 @@ sub choose_gtk {
     require ugtk2;
     mygtk2->import;
     ugtk2->import(qw(:create :helpers :wrappers));
-    my $W = ugtk2->new(N("Resolution"));
+    my $W = ugtk2->new(N("Resolution"), modal => 1);
 
     my %monitor_images_x_res = do {
 	my @l = qw(640 800 1024 1152 1280 1400 1600 1920 2048);
