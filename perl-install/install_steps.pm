@@ -1001,7 +1001,7 @@ sub upNetwork {
     if (length($o->{prefix}) > 1) {
 	symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach (qw(resolv.conf protocols services));
     }
-    $o->{method} eq "ftp" || $o->{method} eq "http" || $o->{method} eq "nfs" and return 1;
+    member($o->{method}, qw(ftp http nfs)) and return 1;
     modules::write_conf($o->{prefix});
     if (hasNetwork($o)) {
 	if ($o->{netcnx}{type} =~ /adsl|lan|cable/) {
