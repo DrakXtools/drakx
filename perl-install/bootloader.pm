@@ -113,6 +113,15 @@ sub suggest_onmbr($) {
     !$type || member($type, qw(dos dummy lilo grub empty)), !$type;
 }
 
+sub compare_entries($$) {
+    my ($a, $b) = @_;
+    my %entries;
+
+    @entries{keys %$a, keys %$b} = ();
+    $a->{$_} eq $b->{$_} and delete $entries{$_} foreach keys %entries;
+    scalar keys %entries;
+}
+
 sub add_entry($$) {
     my ($entries, $v) = @_;
     my (%usedold, $freeold);
@@ -120,13 +129,21 @@ sub add_entry($$) {
     do { $usedold{$1 || 0} = 1 if $_->{label} =~ /^old ([^_]*)_/x } foreach @$entries;
     foreach (0..scalar keys %usedold) { exists $usedold{$_} or $freeold = $_ || '', last }
 
-    do { $_->{label} = "old${freeold}_$_->{label}" if $_->{label} eq $v->{label} } foreach @$entries;
-    push @$entries, $v;
+    foreach (@$entries) {
+	if ($_->{label} eq $v->{label}) {
+	    if (compare_entries($_, $v)) {
+		$_->{label} = "old${freeold}_$_->{label}";
+	    } else {
+		$v = undef; #- avoid inserting it twice as another entry already exists !
+	    }
+	}
+    }
+    $v and push @$entries, $v;
 }
 
 sub add_kernel($$$$$) {
     my ($prefix, $lilo, $kernelVersion, $specific, $v) = @_;
-    my $ext = $specific && "-$specific";
+    my $ext = $specific && "-$specific"; $specific eq 'hack' and $specific = '';
     my ($vmlinuz, $image, $initrdImage) = ("vmlinuz-$kernelVersion$specific", "/boot/vmlinuz$ext", "/boot/initrd$ext.img");
     -e "$prefix/boot/$vmlinuz" or log::l("unable to find kernel image $prefix/boot/$vmlinuz"), return;
     {
@@ -180,6 +197,7 @@ sub suggest($$$$$) {
     my $root_part = fsedit::get_root($fstab);
     my $root = isLoopback($root_part) ? "loop7" : $root_part->{device};
     my $boot = fsedit::get_root($fstab, 'boot')->{device};
+    my $partition = first($boot =~ /\D*(\d*)/);
 
     require c; c::initSilo() if arch() =~ /sparc/;
 
@@ -248,6 +266,17 @@ wait %d seconds for default boot.
 		label => 'failsafe',
 		root  => "/dev/$root",
 	       })->{append} .= " failsafe" unless $lilo->{password};
+
+    #- manage hackkernel if installed.
+    my $hasHack = -e "$prefix/boot/vmlinuz-hack";
+    if ($hasHack) {
+	my $hackVersion = first(readlink "$prefix/boot/vmlinuz-hack" =~ /vmlinux-(.*)/);
+	add_kernel($prefix, $lilo, $hackVersion, 'hack',
+		  {
+		   label => 'hack',
+		   root  => "/dev/$root",
+		  });
+    }
 
     if (arch() =~ /sparc/) {
 	#- search for SunOS, it could be a really better approach to take into account

@@ -137,7 +137,9 @@ You can add some more or change the existing ones."),
 	    if ($in->ask_from_list_('', _("Which type of entry do you want to add?"),
 				    [ __("Linux"), arch() =~ /sparc/ ? __("Other OS (SunOS...)") : __("Other OS (windows...)") ]
 				   ) eq "Linux") {
-		$e = { type => 'image' };
+		$e = { type => 'image',
+		       root => '/dev/' . fsedit::get_root($fstab)->{device}, #- assume a good default.
+		     };
 		$prefix = "linux";
 	    } else {
 		$e = { type => 'other' };

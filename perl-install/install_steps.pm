@@ -763,28 +763,14 @@ sub readBootloaderConfigBeforeInstall {
     add2hash($o->{bootloader} ||= {}, bootloader::read($o->{prefix}, arch() =~ /sparc/ ? "/etc/silo.conf" : "/etc/lilo.conf"));
 
     #- since kernel or kernel-smp may not be upgraded, it should be checked
-    #- if there is a need to update existing lilo.conf entries by using that
-    #- hash.
-    my %ofpkgs = (
-		  'vmlinuz'     => pkgs::packageByName($o->{packages}, 'kernel'),
-		  'vmlinuz-smp' => pkgs::packageByName($o->{packages}, 'kernel-smp'),
-		 );
-
-    #- change the /boot/vmlinuz or /boot/vmlinuz-smp entries to follow symlink.
-    foreach $image (keys %ofpkgs) {
-	pkgs::packageFlagSelected($ofpkgs{$image}) or next;
-	if (my $v = readlink "$o->{prefix}/boot/$image") {
+    #- if there is a need to update existing lilo.conf entries by following
+    #- symlinks before kernel or other packages get installed.
+    foreach my $e (@{$o->{bootloader}{entries}}) {
+	while (my $v = readlink "$o->{prefix}/$e->{kernel_or_dev}") {
 	    $v = "/boot/$v" if $v !~ m|^/|;
-	    if (-e "$o->{prefix}$v") {
-		my $e;
-
-		require bootloader;
-		$e = bootloader::get("/boot/$image", $o->{bootloader});
-
-		$e or next;
-		$e->{kernel_or_dev} = $v;
-		log::l("renaming /boot/$image entry by $v");
-	    }
+	    -e "$o->{prefix}$v" or next;
+	    log::l("renaming /boot/$e->{kernel_or_dev} entry by $v");
+	    $e->{kernel_or_dev} = $v;
 	}
     }
 }

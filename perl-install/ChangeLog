@@ -1,3 +1,13 @@
+2000-07-19  François Pons  <fpons@mandrakesoft.com>
+
+	* any.pm: added default root to existing root device when adding
+	an entry in bootloader.
+	* bootloader.pm: avoid duplicating entry (floppy and old-floppy)
+	when they are identical.
+	manage hackkernel by suggest an entry by default if installed.
+	* install_steps.pm: reworked symlink closure for bootloader
+	to keep previous configuration.
+
 2000-07-11  François Pons  <fpons@mandrakesoft.com>
 
 	* bootloader.pm: merged lilo.pm and silo.pm inside bootloader.pm,
