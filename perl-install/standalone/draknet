@@ -207,7 +207,7 @@ $vbox1->pack_start($frame2,1,1,0);
 my $vbox2 = new Gtk::VBox(0,0);
 $vbox2->set_border_width(5);
 $frame2->add($vbox2);
-my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocole"), _("Driver"));
+my $clist1 = new_with_titles Gtk::CList(_("Adapter"), _("Interface"), _("IP address"), _("Protocol"), _("Driver"));
 $clist1->set_column_auto_resize($_,1) foreach (0..4);
 $clist1->column_titles_passive();
 $clist1->set_shadow_type('etched_out');
