@@ -20,7 +20,7 @@ list_modules.pm:
 	ln -sf ../kernel/list_modules.pm
 
 TAGS: $(ALLPMS)
-	etags -o - $^ /usr/lib/perl5/*/*/MDK/Common/*.pm | ./perl2etags > $@
+	@etags -o - $^ /usr/lib/perl5/*/*/MDK/Common/*.pm | ./perl2etags > $@
 
 clean:
 	for i in $(DIRS) share/po; do $(MAKE) -C $$i clean; done
