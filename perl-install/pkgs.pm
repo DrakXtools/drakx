@@ -928,15 +928,17 @@ sub done_db {
 }
 
 sub versionCompare($$) {
-    my ($a, $b) = @_;
-    local $_;
-
-    while ($a || $b) {
-	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D*)// } ($b, $a);
-	$_ = ($sa =~ /^\d/ || $sb =~ /^\d/) && length($sa) <=> length($sb) || $sa cmp $sb and return $_ || 0;
-	$sa eq '' && $sb eq '' and return $a cmp $b || 0;
-    }
+    goto &c::rpmvercmp;
 }
+#- old code using perl version, still broken on some case.
+#-    my ($a, $b) = @_;
+#-    local $_;
+#-
+#-    while ($a || $b) {
+#-	my ($sb, $sa) =  map { $1 if $a =~ /^\W*\d/ ? s/^\W*0*(\d+)// : s/^\W*(\D*)// } ($b, $a);
+#-	$_ = ($sa =~ /^\d/ || $sb =~ /^\d/) && length($sa) <=> length($sb) || $sa cmp $sb and return $_ || 0;
+#-	$sa eq '' && $sb eq '' and return $a cmp $b || 0;
+#-    }
 
 sub selectPackagesAlreadyInstalled {
     my ($packages, $prefix) = @_;
