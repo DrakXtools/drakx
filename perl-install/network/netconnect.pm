@@ -87,7 +87,7 @@ sub get_subwizard {
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
-      my (%connections, %rconnections, @connection_list);
+      my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
@@ -195,7 +195,6 @@ sub get_subwizard {
                             my $string = join('', $str, if_($conf{$type}, " - ", $extra_str));
                             $connections{$string} = $type;
                         }
-                        %rconnections = reverse %connections;
                         @connection_list = ({ val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], });
                     },
                     if_(!$::isInstall, no_back => 1),
@@ -912,9 +911,6 @@ You may also enter the IP address of the gateway if you have one."),
                     next => "zeroconf",
                    },
                    
-                   dhcp_hostname => 
-                   {
-                   },
                    
                    zeroconf => 
                    {
