@@ -32,12 +32,12 @@ sub get {
     getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
 sub hds() { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
-sub zips() { grep { $_->{media_type} =~ /.d/ && isZipDrive($_) } get(); }
-sub ide_zips() { grep { $_->{media_type} =~ /.d/ && isZipDrive($_) } getIDE(); }
-#-sub jazzs() { grep { $_->{media_type} =~ /.d/ && isJazDrive($_) } get(); }
-sub ls120s() { grep { $_->{media_type} =~ /.d/ && isLS120Drive($_) } get(); }
+sub zips() { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get(); }
+sub ide_zips() { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } getIDE(); }
+#-sub jazzs() { grep { member($_->{media_type}, 'fd', 'hd') && isJazDrive($_) } get(); }
+sub ls120s() { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get(); }
 sub cdroms() { 
-    my @l = grep { $_->{media_type} eq 'cdrom' } get(); 
+    my @l = grep { $_->{media_type} =~ /cdrom/ } get(); 
     if (my @l2 = IDEburners()) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
@@ -50,9 +50,9 @@ sub cdroms() {
     }
     @l;
 }
-sub burners    { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } get() }
-sub IDEburners { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } getIDE() }
-sub dvdroms    { grep { $_->{media_type} eq 'cdrom' && isDvdDrive($_) } get() }
+sub burners    { grep { $_->{media_type} eq 'cdrom-burner' || $_->{media_type} =~ /cdrom/ && isBurner($_) } get() }
+sub IDEburners { grep { $_->{media_type} eq 'cdrom-burner' || $_->{media_type} =~ /cdrom/ && isBurner($_) } getIDE() }
+sub dvdroms    { grep { $_->{media_type} =~ /cdrom/ && isDvdDrive($_) } get() }
 
 sub get_mac_model() {
     my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
@@ -94,7 +94,8 @@ sub floppy { first(floppies_dev()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub isBurner { 
-    my $dev = $_[0]{device};
+    my ($e) = @_;
+    my $dev = $e->{device};
     if (my($nb) = $dev =~ /scd(.*)/) {
 	grep { /^(scd|sr)$nb:.*writer/ } syslog();
     } else {
@@ -142,6 +143,9 @@ sub getSCSI() {
 	} elsif ($type =~ /CD-ROM/) {
 	    $device = "scd" . $cdromNum++;
 	    $type = 'cdrom';
+	} elsif ($type =~ /WORM/) {
+	    $device = "scd" . $cdromNum++;
+	    $type = 'cdrom-burner';
 	}
 	$device and push @drives, { device => $device, media_type => $type, info => "$vendor $model", id => $id, bus => 0 };
     }

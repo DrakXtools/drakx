@@ -99,7 +99,7 @@ struct hd {
   int totalsectors      # size in sectors
   string device         # 'hda', 'sdc' ...
   string device_alias   # 'cdrom', 'floppy' ...
-  string media_type     # one of { 'hd', 'cdrom', 'fd', 'tape' }
+  string media_type     # one of { 'hd', 'cdrom', 'cdrom-burner', 'fd', 'tape' }
   string info           # name of the hd, eg: 'QUANTUM ATLAS IV 9 WLS'
 
   bool isDirty          # does it need to be written to the disk 

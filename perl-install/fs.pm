@@ -331,11 +331,11 @@ sub set_default_options {
 
     if ($options->{supermount} && $is_auto) {
 	# this can't work, guessing :-(
-	$part->{type} = fs2type($part->{media_type} eq 'cdrom' ? 'iso9660' : 'vfat');
+	$part->{type} = fs2type($part->{media_type} =~ /cdrom/ ? 'iso9660' : 'vfat');
 	$is_auto = 0;
     }
 
-    if ($part->{media_type} eq 'cdrom') {
+    if ($part->{media_type} =~ /cdrom/) {
 	$options->{ro} = 1;
     }
 
