@@ -89,3 +89,13 @@ This gives for example for:
 	automatic=met:nfs,net:static,ip:192.168.1.24,ser:192.168.1.7,dir:/stable/i586
 
 
+
+You may specify a stage2 auto-install file, different from the
+default `auto_inst.cfg.pl' in Mandrake/base, by filling the
+`bootfile' parameter of your DHCP server response.
+
+Note that if the name ends with `-IP' or `-IP.pl', IP will be
+replaced by the IP address given to the host, normalized to
+hexadecimal (that is, `192.168.100.57' would give 'C0A86439').
+
+
