@@ -483,8 +483,12 @@ N("Examples for correct IPs:\n") .
 		}
 		# Write cupsd.conf
 		printer::main::write_cups_config($printer);
+		my $w = 
+		    $in->wait_message(N("Printerdrake"),
+				      N("Restarting CUPS..."));
 		printer::main::write_cupsd_conf
 		    (@{$printer->{cupsconfig}{cupsd_conf}});
+		undef $w;
 	    }
 	} else {
 	    # Cancel clicked
@@ -742,6 +746,12 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 		printer::default::set_printer($printer);
 	    }
 	}
+	# Delete some variables
+	foreach (qw(OLD_QUEUE QUEUE TYPE str_type DBENTRY ARGS OLD_CHOICE)){
+	    $printer->{$_} = "";
+	}
+	$printer->{currentqueue} = {};
+	$printer->{complete} = 0;
     }
     # Configure the current printer queues in applications
     $_w =
@@ -3497,14 +3507,20 @@ sub main {
 	    printer::default::set_spooler($printer);
 	}
 
-        # Get the default printer (Done after non-interactive queue setup,
-        # so that these queues are taken into account)
+        # Get the default printer (Done before non-interactive queue setup,
+        # so that former default is not lost)
         assure_default_printer_is_set($printer, $in);
+	my $nodefault = (!$printer->{DEFAULT});
 
         # Non-interactive setup of newly detected printers (This is done
 	# only when not in expert mode, so we always have a spooler defined
         # here)
         configure_new_printers($printer, $in, $upNetwork);
+
+	# Make sure that default printer is registered
+	if ($nodefault) {
+	    printer::default::set_printer($printer);
+	}
 
 	# Mark this part as done, it should not be done a second time.
 	if ($::isInstall) {
@@ -3565,7 +3581,7 @@ sub main {
 		if ($cursorpos eq "::" && 
 		    $printer->{DEFAULT} &&
 		    $printer->{DEFAULT} ne "") {
-		    if ($printer->{configured}{$printer->{DEFAULT}}) {
+		    if (defined($printer->{configured}{$printer->{DEFAULT}})) {
 			$cursorpos = 
 			    $printer->{configured}{$printer->{DEFAULT}}{queuedata}{menuentry} . N(" (Default)");
 		    } elsif ($printer->{SPOOLER} eq "cups") {

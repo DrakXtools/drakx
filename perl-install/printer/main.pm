@@ -115,7 +115,11 @@ sub assure_device_is_available_for_cups {
     my ($result, $i);
     # USB printers get special model-dependent URLs in "lpinfo -v" here
     # checking is complicated, so we simply restart CUPS then and ready.
-    my $maxattempts = ($device =~ /usb/ ? 1 : 3);
+    if ($device =~ /usb/) {
+	$result = printer::services::restart("cups");
+	return 1;
+    }
+    my $maxattempts = 3;
     for ($i = 0; $i < $maxattempts; $i++) {
 	local *F; 
 	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
@@ -1155,10 +1159,12 @@ sub read_cups_config {
 	handle_configs::read_unique_directive($printer->{cupsconfig}{cupsd_conf},
 					      'BrowseOrder', 'deny,allow');
 
-    # Keyword "BrowsePoll" 
-    @{$printer->{cupsconfig}{BrowsePoll}} =
-	handle_configs::read_directives($printer->{cupsconfig}{cupsd_conf},
-					'BrowsePoll');
+    # Keyword "BrowsePoll" (needs "Browsing On")
+    if ($printer->{cupsconfig}{keys}{Browsing} !~ /off/i) {
+	@{$printer->{cupsconfig}{BrowsePoll}} =
+	    handle_configs::read_directives($printer->{cupsconfig}{cupsd_conf},
+					    'BrowsePoll');
+    }
 
     # Root location
     @{$printer->{cupsconfig}{rootlocation}} =
@@ -1229,7 +1235,8 @@ sub write_cups_config {
 					  'BrowseOrder Deny,Allow');
 	}
     } else {
-	if ($printer->{cupsconfig}{localprintersshared}) {
+	if (($printer->{cupsconfig}{localprintersshared}) ||
+	    ($#{$printer->{cupsconfig}{BrowsePoll}} >= 0)) {
 	    # Deny all broadcasts, but leave all "BrowseAllow" lines
 	    # untouched
 	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
@@ -1237,8 +1244,9 @@ sub write_cups_config {
 	      handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
 					    'BrowseOrder Allow,Deny');
 	} else {
-	    # We also do not share printers, so we turn browsing off to
-	    # do not need to deal with any addresses
+	    # We also do not share printers, if we also do not
+	    # "BrowsePoll", we turn browsing off to do not need to deal 
+	    # with any addresses
 	    handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
 					  'Browsing Off');
 	}
@@ -1293,6 +1301,9 @@ sub write_cups_config {
 				      'BrowsePoll ' .
 				      join ("\nBrowsePoll ", 
 					    @{$printer->{cupsconfig}{BrowsePoll}}));
+	# "Browsing" must be on for "BrowsePoll" to work
+	handle_configs::set_directive($printer->{cupsconfig}{cupsd_conf},
+				      'Browsing On');
     } else {
 	handle_configs::comment_directive($printer->{cupsconfig}{cupsd_conf},
 					  'BrowsePoll');
@@ -1988,6 +1999,7 @@ sub autodetectionentry_for_uri {
 	    my $smake = handle_configs::searchstr($make);
 	    my $smodel = handle_configs::searchstr($model);
 	    foreach my $p (@autodetected) {
+		next if $p->{port} !~ /usb/i;
 		next if ((!$p->{val}{MANUFACTURER} or
 			  ($p->{val}{MANUFACTURER} ne $make)) and
 			 (!$p->{val}{DESCRIPTION} or
