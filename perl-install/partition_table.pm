@@ -58,7 +58,7 @@ arch() =~ /^ppc/ ? (
   0xf => 'Win95: Extended partition, LBA-mapped',
   0x10 => 'OPUS (?)',
   0x11 => 'Hidden DOS 12-bit FAT',
-  0x12 => 'Compaq config partition',
+  0x12 => 'Compaq/HP config partition',
   0x14 => 'Hidden DOS 16-bit FAT <32M',
   0x16 => 'Hidden DOS 16-bit FAT >=32M',
   0x17 => 'Hidden IFS (e.g., HPFS)',
