@@ -353,9 +353,6 @@ sub setPackages {
 	foreach (lang::langsLANGUAGE($o->{langs})) {
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
-	#- for the first time, select package to upgrade.
-	#- TOCHECK this may not be the best place for that as package are selected at some other point.
-	$o->selectPackagesToUpgrade if $o->{isUpgrade};
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
