@@ -61,6 +61,27 @@ sub checkval { $_[0] && $_[0] ne ' '  ? '*' : ' ' }
 
 sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
+
+    if (grep { $_->{type} ne 'button' } @$l or @$l < 5) {
+	&ask_fromW_real;
+    } else {
+	my $r;
+	do {
+	    my @choices = map {
+		my $s = simplify_string(may_apply($_->{format}, ${$_->{val}}));
+		$s = "$_->{label}: $s" if $_->{label};
+		{ label => $s, clicked_may_quit => $_->{clicked_may_quit} }
+	    } @$l;
+	    #- replace many buttons with a list
+	    my $new_l = [ { val => \$r, type => 'list', list => \@choices, format => sub { $_[0]{label} }, sort => 0 } ];
+	    ask_fromW_real($o, $common, $new_l, $l2) or return;
+	} until $r->{clicked_may_quit}->();
+	1;
+    }
+}
+
+sub ask_fromW_real {
+    my ($o, $common, $l, $l2) = @_;
     my $ignore; #-to handle recursivity
     my $old_focus = -2;
 
