@@ -284,9 +284,12 @@ sub setupBootloader__entries {
     require Xconfig::resolution_and_depth;
 
     my $Modify = sub {
+	require network::netconnect; #- to list network profiles
 	my ($e) = @_;
 	my $default = my $old_default = $e->{label} eq $b->{default};
 	my $vga = Xconfig::resolution_and_depth::from_bios($e->{vga});
+	my $netprofile = bootloader::get_append($b, 'PROFILE');
+	bootloader::remove_append_dict($b, 'PROFILE'); #- hide PROFILE option in 'append' text entry
 
 	my @l;
 	if ($e->{type} eq "image") { 
@@ -298,6 +301,7 @@ sub setupBootloader__entries {
 { label => N("Video mode"), val => \$vga, list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ], format => \&Xconfig::resolution_and_depth::to_string, advanced => 1 },
 ),
 { label => N("Initrd"), val => \$e->{initrd}, list => [ map { if_(/^initrd/, "/boot/$_") } all("$::prefix/boot") ], not_edit => 0, advanced => 1 },
+{ label => N("Network profile"), val => \$netprofile, list => [ sort (uniq('', $netprofile, network::netconnect::get_profiles())) ], advanced => 1 },
 	    );
 	} else {
 	    @l = ( 
@@ -336,6 +340,7 @@ sub setupBootloader__entries {
 
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	$e->{vga} = ref($vga) ? $vga->{bios} : $vga;
+	bootloader::set_append($b, 'PROFILE', $netprofile) if $netprofile;
 	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
 	1;
     };
