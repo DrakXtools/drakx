@@ -11,6 +11,8 @@ use network::tools;
 use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix);
 use MDK::Common::File;
+
+
 @ISA = qw(Exporter);
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
 
@@ -18,36 +20,20 @@ sub configure {
     my ($netcnx, $netc, $_isdn) = @_;
   isdn_step_1:
     defined $netc->{autodetect}{isdn}{id} and goto intern_pci;
-#    $::isInstall and $in->set_help('configureNetworkISDN');
+
     my $e = $in->ask_from_list_(N("Network Configuration Wizard"),
-				N("Which ISDN configuration do you prefer?
-
-* The Old configuration uses isdn4net. It contains powerful
-  tools, but is tricky to configure, and not standard.
-
-* The New configuration is easier to understand, more
-  standard, but with less tools.
-
-We recommand the light configuration.
-"), [ N_("New configuration (isdn-light)"), N_("Old configuration (isdn4net)") ]
+				N("What kind is your ISDN connection?"), [ N_("Internal ISDN card"), N_("External ISDN modem") ]
 			       ) or return;
-    $netc->{autodetect}{isdn}{is_light} = $e =~ /light/ ? 1 : undef;
-    $e = $in->ask_from_list_(N("Network Configuration Wizard"),
-			     N("What kind is your ISDN connection?"), [ N_("Internal ISDN card"), N_("External ISDN modem") ]
-			    ) or return;
     
     if ($e =~ /card/) {
       intern_pci:
 	$netc->{isdntype} = 'isdn_internal';
-	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type', 'is_light';
-	$netcnx->{isdn_internal}{is_light} =
-	  defined $netc->{autodetect}{isdn}{id} ? 1 : $netc->{autodetect}{isdn}{is_light};
+	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type';
 	$netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
 	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
     } else {
 	$netc->{isdntype} = 'isdn_external';
 	$netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
-	$netcnx->{isdn_external}{is_light} = $netc->{autodetect}{isdn}{is_light};
 	$netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
 	$netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
 	require network::modem;
@@ -58,15 +44,7 @@ We recommand the light configuration.
 
 sub isdn_write_config {
     my ($isdn, $netc) = @_;
-  isdn_write_config_step_1:
-    my ($rmpackage, $instpackage) = $isdn->{is_light} ? ('isdn4net', 'isdn-light') : ('isdn-light', 'isdn4net');
-    if (!$::isStandalone) {
-	require pkgs;
-	my $p = pkgs::packageByName($in->{packages}, $rmpackage);
-	$p && $p->flag_selected and pkgs::unselectPackage($in->{packages}, $p);
-    }
-    run_program::rooted($prefix, "rpm", "-e", $rmpackage);
-    $in->do_pkgs->install($instpackage, if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
+    $in->do_pkgs->install('isdn4net', if_($isdn->{speed} =~ /128/, 'ibod'), 'isdn4k-utils');
     isdn_write_config_backend($isdn, $netc);
     1;
 }
@@ -74,37 +52,8 @@ sub isdn_write_config {
 sub isdn_write_config_backend {
     my ($isdn, $netc, $o_netcnx) = @_;
     defined $o_netcnx and $netc->{isdntype} = $o_netcnx->{type};
-    if ($isdn->{is_light}) {
-	modules::mergein_conf("$prefix/etc/modules.conf");
-	if ($isdn->{id}) {
-	    isdn_detect_backend($isdn);
-	} else {
-	    my $a = "";
-	    defined $isdn->{$_} and $a .= "$_=" . $isdn->{$_} . " " foreach qw(type protocol mem io io0 io1 irq);
-	    $isdn->{driver} eq "hisax" and $a .= "id=HiSax";
-	    modules::set_options($isdn->{driver}, $a);
-	}
-	modules::add_alias("ippp0", $isdn->{driver});
-	$::isStandalone and modules::write_conf($prefix);
-	foreach my $f ('ioptions1B', 'ioptions2B') {
-	    substInFile { s/^name .*\n//; $_ .= "name $isdn->{login}\n" if eof  } "$prefix/etc/ppp/$f";
-	    chmod 0600, $f;
-	}
-	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
-	    substInFile {
-		s/EAZ =.*/EAZ = $isdn->{phone_in}/;
-		s/PHONE_OUT =.*/PHONE_OUT = $isdn->{phone_out}/;
-		if (/NAME = ippp0/ .. /PPPBIND = 0/) {
-		    s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/;
-		}
-	    } "$prefix/etc/isdn/$f";
-	    chmod 0600, $f;
-	}
-	my $bundle = $isdn->{speed} =~ /64/ ? "1B" : "2B";
-	symlinkf("isdn" . $bundle . ".conf", "$prefix/etc/isdn/isdnctrl.conf");
-	symlinkf("ioptions" . $bundle, "$prefix/etc/ppp/ioptions");
-    } else {
-	output_with_perm("$prefix/etc/isdn/profile/link/myisp", 0600,
+
+    output_with_perm("$prefix/etc/isdn/profile/link/myisp", 0600,
 	  qq(
 I4L_USERNAME="$isdn->{login}"
 I4L_SYSNAME=""
@@ -132,7 +81,6 @@ usepeerdns
 defaultroute
 ";
 	system "$prefix/etc/rc.d/init.d/isdn4linux restart";
-    }
 
     substInFile { s/^FIRMWARE.*\n//; $_ .= qq(FIRMWARE="$isdn->{firmware}"\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
 
@@ -154,51 +102,25 @@ defaultroute
 sub isdn_read_config {
     my ($isdn) = @_;
     
-    if ($isdn->{is_light}) {
-	my $c = modules::read_conf("/etc/modules.conf");
-	$isdn->{driver} = $c->{ippp0}{alias};
-	#- 'type' 'protocol' 'mem' 'io' 'io0' 'io1' 'irq'  'id'
-	foreach (split(' ', $c->{$isdn->{driver}}{options})) {
-	    $isdn->{$1} = $2 if /(.*)=(.*)/;
-	}
-	foreach my $f ('ioptions1B', 'ioptions2B') {
-	    foreach (cat_("$prefix/etc/ppp/$f")) {
-		if (/^\s*name\s*(.*)/) {
-		    $isdn->{login} = $1;
-		    goto NEXT;
-		}
-	    }
-	}
-	NEXT:
-	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
-	    foreach (cat_("$prefix/etc/isdn/$f")) {
-		/^\s*EAZ\s*=\s*(.*)/ and $isdn->{phone_in} = $1;
-		/^\s*PHONE_OUT\s*=\s*(.*)/ and $isdn->{phone_out} = $1;
-		if (/^\s*NAME\s*=\s*ippp0/ .. /PPPBIND\s*=\s*0/) {
-		    /^\s*HUPTIMEOUT\s*=\s*(.*)/ and $isdn->{huptimeout} = $1;
-		}
-	    }
-	}
-    } else {
-	my %match = (I4L_USERNAME => 'login',
-		     I4L_LOCALMSN => 'phone_in',
-		     I4L_REMOTE_OUT => 'phone_out',
-		     I4L_DIALMODE => 'dialing_mode',
-		     I4L_MODULE => 'driver',
-		     I4L_TYPE => 'type',
-		     I4L_IRQ => 'irq',
-		     I4L_MEMBASE => 'mem',
-		     I4L_PORT => 'io',
-		     I4L_IO0 => 'io0',
-		     I4L_IO1 => 'io1',
-		     I4L_FIRMWARE => 'firmware');
-	foreach ('link/myisp', 'card/mycard') {
-	    my %conf = getVarsFromSh("$prefix/etc/isdn/profile/$_");
-	    foreach (keys %conf) {	 
-		$isdn->{$match{$_}} = $conf{$_} if $match{$_};
-	    }
+    my %match = (I4L_USERNAME => 'login',
+		 I4L_LOCALMSN => 'phone_in',
+		 I4L_REMOTE_OUT => 'phone_out',
+		 I4L_DIALMODE => 'dialing_mode',
+		 I4L_MODULE => 'driver',
+		 I4L_TYPE => 'type',
+		 I4L_IRQ => 'irq',
+		 I4L_MEMBASE => 'mem',
+		 I4L_PORT => 'io',
+		 I4L_IO0 => 'io0',
+		 I4L_IO1 => 'io1',
+		 I4L_FIRMWARE => 'firmware');
+    foreach ('link/myisp', 'card/mycard') {
+	my %conf = getVarsFromSh("$prefix/etc/isdn/profile/$_");
+	foreach (keys %conf) {	 
+	    $isdn->{$match{$_}} = $conf{$_} if $match{$_};
 	}
     }
+
     $isdn->{passwd} = network::tools::passwd_by_login($isdn->{login});
     #$isdn->{description} = '';
     #$isdn->{vendor} = '';
