@@ -320,10 +320,10 @@ sub setPackages {
 	if ($::auto_install && !$o->{compssUsersChoice}) {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
 	}
+	$o->{compssUsersChoice}{TV} = 1 if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
 	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
-
 	$o->{compssUsersChoice}{'3D'} = 1 if 
 	    detect_devices::matching_desc('Matrox.* G[24]00') ||
 	    detect_devices::matching_desc('Riva.*128') ||
