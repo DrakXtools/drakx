@@ -243,9 +243,6 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char 
 {
 	char alias[500];
 	int i;
-#ifndef DISABLE_MEDIAS
-	static int number_scsi = 0;
-#endif
 #ifndef DISABLE_NETWORK
 	char ** net_devices = NULL; /* fucking compiler */
 #endif
