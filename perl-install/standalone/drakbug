@@ -32,18 +32,35 @@ Gtk::Gdk::ImlibImage->init;
 my $in = 'interactive'->vnew;
 
 $::bugzilla_url = "https://qa.mandrakesoft.com";
+my $version = "0.9.0";
+my $prog = undef;
+
+sub usage {
+    print STDERR _("drakbug version %s
+Copyright (C) 2002 MandrakeSoft.
+This is free software and may be redistributed under the terms of the GNU GPL.
+
+usage: drakbug [OPTIONS] [PROGRAM_NAME]
+
+OPTIONS:
+", $version) . _("  --help            - print this help message.
+") . "\n" . _("  --report          - program should be one of mandrake tools
+");
+    exit(0);
+}
+
+while (defined($_ = shift @ARGV)) {
+    /^--help$/ and do { usage; next };
+    /^--report$/ and do { $prog = shift @ARGV;};
+}
 
 my $window_g = new Gtk::Window -toplevel;
-$window_g->set_polcy($false,$false,$true);
+$window_g->set_policy($false,$false,$true);
 $window_g->set_position( 1 );
 $window_g->border_width( 5 );
 $window_g->set_title(_("Mandrake Bug Report Tool"));
 #$window_g->set_usize(540, 350);
 $window_g->signal_connect( "delete_event", \&quit_global);
-
-chomp(my $kernel_release = `uname -r`);
-$kernel_release.="";
-chomp(my $mdk_release = cat_("/etc/mandrake-release"));
 
 my $mdk_app = { 
 	       _("Mandrake Control Center") => 'drakconf',
@@ -65,24 +82,31 @@ my @generic_tool = keys %{$mdk_app};
 my @all_drakxtools = @ { $mdk_app->{_("Standalone Tools")} };
 push(@generic_tool,@all_drakxtools);
 
+my $kernel_release = chomp_(`uname -r`);
+$kernel_release.="";
+my $mdk_release = chomp_(cat_("/etc/mandrake-release"));
+
+my $table = new Gtk::Table(4,2,'TRUE');
+#$table->set_border_width(5);
+$table->set_row_spacings(10);
+$table->set_col_spacings(5);
+$table->attach(new Gtk::Label(_("Application:")), 0, 1, 0, 1,'fill', 'fill',20,0);
+$table->attach(new Gtk::Label(_("Package: ")), 0, 1, 1, 2, 'fill', 'fill',0,0);
+$table->attach(new Gtk::Label(_("Kernel:")), 0, 1, 2, 3, 'fill', 'fill',0,0);
+$table->attach(new Gtk::Label(_("Release: ")), 0, 1, 3, 4, 'fill', 'fill',0,0);
+$table->attach(my $comb_app = new Gtk::Combo(), 1, 2, 0, 1, 'fill', 'fill',0,0);
+$comb_app->set_usize(270,undef);
+$comb_app->set_popdown_strings("",@generic_tool);
+$table->attach(my $package = new Gtk::Entry(), 1, 2, 1, 2, 'fill', 'fill',0,0);
+$package->set_text("...");
+$table->attach(my $kernel_rel = new Gtk::Entry(), 1, 2, 2, 3, 'fill', 'fill',0,0);
+$kernel_rel->set_text("$kernel_release");
+$table->attach(my $mdk_rel = new Gtk::Entry(), 1, 2, 3, 4, 'fill', 'fill',0,0);
+$mdk_rel->set_text("$mdk_release");
+
 gtkpack2__(
 	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
-		      gtkpack(new Gtk::HBox(0,0),
-			      gtkpack(new Gtk::Label(_("Application:"))),
-			      gtkpack(gtkcombo_setpopdown_strings(my $comb_app = new Gtk::Combo(),("",@generic_tool))),
-			     ),
-		      gtkpack(new Gtk::HBox(0,5),
-			      gtkpack(new Gtk::Label(_("Package: "))),
-			      gtkpack(gtkset_text(my $version = new Gtk::Entry(50),"...")),
-			     ),
-		      gtkpack(new Gtk::HBox(0,5),
-			      gtkpack(new Gtk::Label(_("Kernel:"))),
-			      gtkpack(gtkset_text(my $kernel_rel = new Gtk::Entry(50),"$kernel_release")),
-			     ),
-		      gtkpack(new Gtk::HBox(0,0),
-			      gtkpack(new Gtk::Label(_("Release: "))),
-			      gtkpack(gtkset_text(my $compiler = new Gtk::Entry(50),"$mdk_release")),
-			     ),
+		      gtkadd($table ),
 		      gtkpack(new Gtk::HBox(0,0),
 			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://www.bugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
 			     ),
@@ -90,25 +114,19 @@ gtkpack2__(
 		      
 		     ),
 	  );
-$comb_app->entry->signal_connect('changed', sub {
-				     if (($text = $comb_app->entry->get_text()) ne '') {
-					 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-					 if (member($text,@all_drakxtools)) {chomp($app_choice = `rpm -q drakxtools`) } else {
-					 
-					 exists $mdk_app->{$text}[1] ? chomp($which_app =`which '$mdk_app->{$text}[1]'`) : chomp($which_app = `which '$mdk_app->{$text}'`);
-					 chomp($app_choice = `rpm -qf '$which_app'`); 
-				     }
-					 $app_choice !~ m/ / ? $version->set_text("$app_choice") : $version->set_text(_("Not installed"));
-				     }
-				 }
-				);
+if (defined $prog && member($prog, @all_drakxtools)) {
+    $comb_app->entry->set_text($prog);
+    update_app($prog); 
+};
+
+$comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text())} );
 my $kernel = $kernel_rel->get_chars(0,-1);
 my $hbx = new Gtk::HBox(0,0);
 my $Close_Button = new Gtk::Button(_("Close"));
 $Close_Button->signal_connect(clicked => sub { Gtk->exit(0)});
 $hbx->pack_start($Close_Button,0,0,0);
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { connect_bugzilla("https://qa.mandrakesoft.com/wizard/");});
+$Report_Button->signal_connect(clicked => sub { connect_bugzilla("$::bugzilla_url/wizard/");});
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
@@ -118,13 +136,28 @@ Gtk->main();
 Gtk->exit(0);
 in->exit(0);
 
+sub update_app {
+    my ($text) = @_;
+    if ($text ne '') {					 
+	$ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+	if (member($text,@all_drakxtools)) {
+	    chomp($app_choice = `rpm -q drakxtools`) 
+	} else {	
+	    exists $mdk_app->{$text}[1] ? $which_app =chomp_(`which '$mdk_app->{$text}[1]'`) : $which_app = chomp_(`which '$mdk_app->{$text}'`);
+	    $app_choice = chomp_(`rpm -qf '$which_app'`); 
+	}
+	$app_choice !~ m/ / ? $package->set_text("$app_choice") : $package->set_text(_("Not installed"));
+    }
+}
+
 sub connect_bugzilla {
     my($url) = @_;
     my $w = $in->wait_message('',_("connecting to Bugzilla wizard ...")); 
-    exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
-    my @browser = qw (mozilla  konqueror galeon );
+    sleep(2);
+    exec $ENV{BROWSER},$url if exists $ENV{BROWSER} ;
+    my @browser = qw (mozilla konqueror galeon );
     foreach (@browser) {
-	if (-e "/usr/bin/$_") { print "execing $_\n "; exec $_,$url} 
+	if (-e "/usr/bin/$_") { print "execing $_ : $url\n "; exec $_,$url} 
     }
     $in->ask_warn('', _("No browser available! Please install one"));
 }
