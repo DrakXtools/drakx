@@ -107,7 +107,7 @@ my $default = {
 	      [ 0, __('Games') => qw(xbill xboard xboing xfishtank xgammon xjewel xpat2 xpilot xpuzzles xtrojka xkobo freeciv) ],
 	     ],
     packages => [ qw() ],
-    partitionning => { clearall => 0, eraseBadPartitions => 1, autoformat => 1 },
+    partitionning => { clearall => $::testing, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
@@ -282,7 +282,8 @@ sub main {
 
     for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
 	$o->enteringStep($step);
-	&{$install2::{$step}}() and $o->{steps}->{$step}->{completed} = 1;
+	eval { &{$install2::{$step}}() };
+	$@ and $o->warn($@);
 	$o->leavingStep($step);
     }
     killCardServices();

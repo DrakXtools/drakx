@@ -156,9 +156,7 @@ sub read_one($$) {
 
     @extended > 1 and die "more than one extended partition";
 
-    foreach (@normal, @extended) {
-	$_->{rootDevice} = $hd->{device};
-    }
+    $_->{rootDevice} = $hd->{device} foreach @normal, @extended;
     { raw => $pt, extended => $extended[0], normal => \@normal };
 }
 
@@ -236,7 +234,7 @@ sub write($) {
 sub active($$) {
     my ($hd, $part) = @_;
 
-    foreach (@{$hd->{primary}->{normal}}) { $_->{active} = 0; }
+    $_->{active} = 0 foreach @{$hd->{primary}->{normal}};
     $part->{active} = 0x80;   
 }
 

@@ -64,14 +64,12 @@ sub choosePackages($$$) {
 			       [ map { $_->{selected} } @$comps ]);
     
     for (my $i = 0; $i < @$comps; $i++) {
-	$comps[$i]->{selected} = $r[$i];
+	$comps->[$i]->{selected} = $r[$i];
     }
 }
 
 sub installPackages {
     my $o = shift;
-
-    $::testing and exit 0;
 
     my $old = \&log::ld;
     local *log::ld = sub { 
@@ -187,7 +185,7 @@ sub ask_many_from_list {
     foreach (@t) { check_it($_, $n) or goto TRY_AGAIN }
 
     my @rr = (0) x @$list;
-    foreach (@t) { $rr[$_ - 1] = 1; }
+    $rr[$_ - 1] = 1 foreach @t;
     @rr;
 }
 

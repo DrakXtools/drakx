@@ -33,7 +33,9 @@ sub new {
 sub main($;$) {
     my ($o, $f) = @_;
     $o->show;
+    $o->{window}->grab_add;
     do { Gtk->main } while ($o->{retval} && $f && !&$f());
+    $o->{window}->grab_remove;
     $o->destroy;
     $o->{retval}
 }
@@ -253,31 +255,33 @@ sub _ask_from_list($$$@) {
     for (my $i = 0; $i < @sorted; $i++) {
 	my $focused = $i;
 	my $w = new Gtk::ListItem($sorted[$i]);
-	$w->signal_connect(key_press_event => sub {
+	my $id = $w->signal_connect(key_press_event => sub {
              my ($w, $e)= @_;
 	     my $c = chr $e->{keyval};
-
+	
 	     Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-
+	
 	     if ($e->{keyval} >= 0x100) {
-		 if ($c eq "\r" || $c eq "\x8d") {
-		     $list->select_item($focused);
-		 }
-		 $starting_word = '';
+		   if ($c eq "\r" || $c eq "\x8d") {
+		       $list->select_item($focused);
+		   }
+		   $starting_word = '';
 	     } else {
-		 my $curr = $focused + bool($starting_word eq '' || $starting_word eq $c);
-		 $starting_word .= $c unless $starting_word eq $c;
-
-		 my $j; for ($j = 0; $j < @sorted; $j++) {
-		     $sorted[($j + $curr) % @sorted] =~ /^$starting_word/i and last;
-		 }
-		 $j == @sorted ?
-		   $starting_word = '' :
-		   $widgets[($j + $curr) % @sorted]->grab_focus;
-
-		 $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+		   my $curr = $focused + bool($starting_word eq '' || $starting_word eq $c);
+		   $starting_word .= $c unless $starting_word eq $c;
+	
+		   my $j; for ($j = 0; $j < @sorted; $j++) {
+		       $sorted[($j + $curr) % @sorted] =~ /^$starting_word/i and last;
+		   }
+		   $j == @sorted ?
+		     $starting_word = '' :
+		     $widgets[($j + $curr) % @sorted]->grab_focus;
+	
+		   $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
 	     }
+	     1;
 	});
+	push @::ask_from_list_widgets, $w; # hack!! to not get SIGSEGV
 	push @widgets, $w;
     }
     gtkadd($list, @widgets);

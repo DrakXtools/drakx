@@ -77,7 +77,7 @@ sub mkdir_ {
 	}
 	mkdir $_[0], 0755 or die "mkdir: error creating directory $_: $!\n";
     };
-    foreach (@_) { &$mkdir($_); }
+    &$mkdir($_) foreach @_;
 }
 
 

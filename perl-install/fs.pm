@@ -239,7 +239,5 @@ sub write_fstab($;$$) {
 	exists $new{$a} || exists $new{$b} and next;
 	print F $_;
     }
-    foreach (@to_add) {
-	print F join(" ", @$_), "\n";
-    }
+    print F join(" ", @$_), "\n" foreach @to_add;
 }

@@ -20,7 +20,7 @@ $SECTORSIZE = 512;
 
 1;
 
-sub _ { my $s = shift; sprintf translate($s), @_ }
+sub _ { my $s = shift @_; sprintf translate($s), @_ }
 sub __ { $_[0] }
 sub min { my $min = shift; grep { $_ < $min and $min = $_; } @_; $min }
 sub max { my $max = shift; grep { $_ > $max and $max = $_; } @_; $max }

@@ -134,7 +134,7 @@ full_stage2:
 stage2:
 	$(MAKE) install_pms
 	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
-	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/instimage/usr/[bl]*
+	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/depslist Mandrake/instimage/usr/[bl]*
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd

@@ -206,7 +206,7 @@ sub load($;$$) {
 
     $type or ($type, $minor) = @{$drivers{$name}}[3,4];
 
-    foreach (@{$deps{$name}}) { load($_, 'prereq', $minor) }
+    load($_, 'prereq', $minor) foreach @{$deps{$name}};
     load_raw($name, $type, $minor);
 }
 

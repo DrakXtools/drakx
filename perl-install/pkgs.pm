@@ -181,10 +181,10 @@ sub install {
     my ($total, $nb);
 
     foreach my $p (@$toInstall) {
-	$p->{file} ||= 
-	  install_any::imageGetFile(sprintf "%s-%s-%s.%s.rpm",
-				    map { c::headerGetEntry($p->{header}, $_) } 
-				    qw(name version release arch));
+	local *F;
+	open F, $p->{file} or die "error opening package $p->{name} (file $p->{file})";
+	$p->{header} = c::rpmReadPackageHeader(fileno F);
+
 	c::rpmtransAddPackage($trans, $p->{header}, $p->{file}, $isUpgrade);
 	$nb++;
 	$total += $p->{size};
