@@ -72,7 +72,7 @@
 # 
 # REQUIRE:      cron if daemon
 #               cdrecord & mkisofs
-#		ftp
+#		ftp || perl Net::FTP
 #		ssh-askpass
 #
 # PBS persistants:
@@ -85,6 +85,9 @@
 #
 #
 # TODO:
+#		during restore step catch the most recent date
+#		and put in list all backup between the fisrt date 
+#		and the select date.
 #		1bis - refaire en clist.
 #		3 - add port for ftp backup.
 #		4 - change NET::FTP to ftp cmds.  
