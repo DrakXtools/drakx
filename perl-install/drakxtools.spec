@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.13mdk
+Release: 0.14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Aug 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.14mdk
+- drakconnect: restart network for non ethernet adsl devices (blino)
+- harddrake service:
+  o add --force parameter (#9613)
+  o do run configurator
+  o restore bootsplash (blino)
+- printerdrake: prepare support for daemonless CUPS client (till)
+- XFdrake: fix synaptics configuration (blino)
+
 * Wed Aug 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.13mdk
 - fix modules conf parsing (blino)
 - ddcxinfos: extensive rewrite and cleanups to use the new int10
