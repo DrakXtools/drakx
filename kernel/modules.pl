@@ -39,6 +39,7 @@ my @skip_modules_on_stage1 = (
   qla2200 qla2300
   iph5526
   ),
+  'in2000', 'pas16', 'a100u2w', 'cpqfc',
   'AM53C974', # deprecated by tmscsim
   qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
   "u14-34f", #- duplicate from ultrastor.o
