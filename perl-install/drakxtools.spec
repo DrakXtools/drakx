@@ -330,7 +330,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - draksplash:
   o do not crash when the image format is unknown
   o fix preview refresh
-- localedrake: enable to choose input method in advanced mode
+- localedrake:
+  o enable to choose input method in advanced mode
+  o support im-ja input method too
 - service_harddrake: do not offer to configure mouse if we've already
   automatically reconfigure it b/c of 2.4.x vs 2.6.x switch
 
