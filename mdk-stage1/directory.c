@@ -140,6 +140,8 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 	} else {
 		int offset = strncmp(location_full, IMAGE_LOCATION_DIR, sizeof(IMAGE_LOCATION_DIR) - 1) == 0 ? sizeof(IMAGE_LOCATION_DIR) - 1 : 0;
 		log_message("assuming %s is a mirror tree", location_full + offset);
+
+		rmdir(IMAGE_LOCATION); /* useful if we loopback mounted it */
 		symlink(location_full + offset, IMAGE_LOCATION);
 		add_to_env("METHOD", method_live);
 	}
