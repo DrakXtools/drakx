@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 20mdk
+Release: 21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -303,6 +303,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar 12 2003 Pixel <pixel@mandrakesoft.com> 9.1-21mdk
+- diskdrake: have a default mount point for newly added removables
+- drakupdate_fstab: allow --del to remove fd0 & fd1
+
 * Wed Mar 12 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-20mdk
 - drakedm: install dm if needed
 - harddrake service: handle multiple remvable devices in the same hw
