@@ -259,7 +259,7 @@ sub set_permissions {
 }
 
 sub mandrake_release() {
-    chomp_(cat_("/etc/mandrake-release"))
+    chomp_(cat_("/etc/mandrakelinux-release"))
 }
 
 sub require_root_capability() {

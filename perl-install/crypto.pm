@@ -105,7 +105,7 @@ sub bestMirror {
 #- hack to retrieve Mandrakelinux version...
 sub version() {
     require pkgs;
-    my $pkg = pkgs::packageByName($::o->{packages}, 'mandrake-release');
+    my $pkg = pkgs::packageByName($::o->{packages}, 'mandrakelinux-release');
     $pkg && $pkg->version || '9.1'; #- safe but dangerous ;-)
 }
 
