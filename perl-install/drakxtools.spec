@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 1.1.12
-Release: 1mdk
+Version: 9.1
+Release: 0.1mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -207,6 +207,8 @@ my \$res = \$in->ask_okcancel(\$ARGV[0], \$ARGV[1], 1);
 EOF
 
 chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/harddrake2}
+# temporary fix until we reenable this feature
+rm -f $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2
 
 %find_lang libDrakX
 cat libDrakX.lang >> %name.list
@@ -286,6 +288,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Nov 15 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.1mdk
+- bump version
+- add missing printer/ directory
+
 * Thu Nov 14 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.12-1mdk
 - printerdrake cleanups
 - various perl lifting

@@ -24,6 +24,8 @@ use modules;
 use standalone;
 use list_modules;
 
+my $has_nvaudio = -x '/lib/modules/' . c::kernel_version() . '/';
+
 my %alsa2oss = 
     (
      "snd-ad1816a" => [ "ad1816" ], # isa
