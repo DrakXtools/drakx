@@ -745,7 +745,11 @@ such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one."),
                     data =>
                     [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
-                      { label => N("DNS server"), val => \$netc->{dnsServer} },
+                      { label => N("DNS server 1"),  val => \$netc->{dnsServer} },
+                      { label => N("DNS server 2"),  val => \$netc->{dnsServer2} },
+                      { label => N("DNS server 3"),  val => \$netc->{dnsServer3} },
+                      { label => N("Search domain"), val => \$netc->{DOMAINNAME}, 
+                        help => N("By default search domain will be set from the fully-qualified host name") },
                       { label => N("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
                       if_(@devices > 1,
                           { label => N("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
