@@ -240,6 +240,31 @@ sub init_sizes() {
     $::move and $::windowwidth -= 100;
 }
 
+sub handle_unsafe_mouse {
+    my ($o, $window) = @_;
+
+    $o->{mouse}{unsafe} or return;
+
+    $window->add_events('pointer-motion-mask');
+    my $signal; $signal = $window->signal_connect(motion_notify_event => sub {
+	delete $o->{mouse}{unsafe};
+	log::l("unsetting unsafe mouse");
+	$window->signal_handler_disconnect($signal);
+    });
+}
+
+sub special_shortcuts {
+    my (undef, $event) = @_;
+    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot', $Gtk2::Gdk::Keysyms{Delete} => 'restart' }}{$event->keyval};
+    if ($d eq 'screenshot') {
+	take_screenshot($::o);
+    } elsif ($d eq 'restart' && member('control-mask', @{$event->state}) && member('mod1-mask', @{$event->state})) {
+	log::l("restarting install");
+	ugtk2->exit(0x35);
+    }
+    0;
+}
+
 #------------------------------------------------------------------------------
 sub createXconf {
     my ($file, $mouse_type, $mouse_dev, $_wacom_dev, $Driver) = @_;

@@ -872,17 +872,8 @@ sub new {
 	    gtkadd($::WizardWindow, gtknew('Frame', shadow_type => 'out', child => $::WizardTable));
 
 	    if ($::isInstall) {
-		$::WizardWindow->signal_connect(key_press_event => sub {
-		    my (undef, $event) = @_;
-		    my $d = ${{ $Gtk2::Gdk::Keysyms{F2} => 'screenshot', $Gtk2::Gdk::Keysyms{Delete} => 'restart' }}{$event->keyval};
-		    if ($d eq 'screenshot') {
-			common::take_screenshot();
-		    } elsif ($d eq 'restart' && member('control-mask', @{$event->state}) && member('mod1-mask', @{$event->state})) {
-			log::l("restarting install");
-                        $o->exit(0x35);
- 		    }
-		    0;
-		});
+		require install_gtk; #- for perl_checker
+		$::WizardWindow->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
 	    } elsif (!$o->{isEmbedded}) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
@@ -971,14 +962,9 @@ sub _create_window {
 	} 
     });
 
-    if ($::isInstall && $::o->{mouse}{unsafe}) {
-	$w->add_events('pointer-motion-mask');
-	my $signal;  #- do not make this line part of next one, signal_disconnect will not be able to access $signal value
-	$signal = $w->signal_connect(motion_notify_event => sub {
-	    delete $::o->{mouse}{unsafe};
-	    log::l("unsetting unsafe mouse");
-	    $w->signal_handler_disconnect($signal);
-	});
+    if ($::isInstall) {
+	require install_gtk; #- for perl_checker
+	install_gtk::handle_unsafe_mouse($::o, $w);
     }
 
     if ($force_center_at_pos) {

@@ -175,33 +175,6 @@ sub group_n_lm {
     @l;
 }
 
-sub screenshot_dir__and_move() {
-    my ($dir1, $dir2) = ("$::prefix/root", '/tmp/stage2');
-    if (-e $dir1) {
-	if (-e "$dir2/DrakX-screenshots") {
-	    cp_af("$dir2/DrakX-screenshots", $dir1);
-	    rm_rf("$dir2/DrakX-screenshots");
-	}
-	$dir1;
-    } else {
-	$dir2;
-    }
-}
-
-sub take_screenshot() {
-    my $dir = screenshot_dir__and_move() . '/DrakX-screenshots';
-    my $warn;
-    if (!-e $dir) {
-	mkdir $dir or $::o->ask_warn('', N("Can not make screenshots before partitioning")), return;
-	$warn = 1;
-    }
-    my $nb = 1;
-    $nb++ while -e "$dir/$nb.png";
-    system("fb2png /dev/fb0 $dir/$nb.png 0");
-
-    $::o->ask_warn('', N("Screenshots will be available after install in %s", "/root/DrakX-screenshots")) if $warn;
-}
-
 sub join_lines {
     my @l;
     my $s;

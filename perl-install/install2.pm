@@ -189,7 +189,7 @@ sub formatPartitions {
     eval { fs::mount('none', "$o->{prefix}/proc/bus/usb", 'usbdevfs') };
     eval { fs::mount('none', "$o->{prefix}/sys", 'sysfs') };
 
-    common::screenshot_dir__and_move();
+    install_any::screenshot_dir__and_move();
     install_any::move_clp_to_disk();
 
     any::rotate_logs($o->{prefix});
