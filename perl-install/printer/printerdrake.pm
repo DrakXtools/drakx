@@ -12,6 +12,7 @@ use printer::main;
 use printer::services;
 use printer::detect;
 use printer::default;
+use printer::data;
 
 1;
 
@@ -2646,6 +2647,8 @@ sub start_spooler_on_boot {
     # Checks whether the spooler will be started at boot time and if not,
     # ask the user whether he wants to start the spooler at boot time.
     my ($printer, $in, $service) = @_;
+    # PDQ has no daemon, so nothing needs to be started :
+    return unless $service;
 
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
@@ -2666,154 +2669,66 @@ Do you want to have the automatic starting of the printing system turned on agai
     1;
 }
 
-# FIXME: heavy duplication
 sub install_spooler {
     # installs the default spooler and start its daemon
     my ($printer, $in, $upNetwork) = @_;
-    if (!$::testing) {
-	# If the user refuses to install the spooler in high or paranoid
-	# security level, exit.
-	return 0 unless security_check($printer, $in, $printer->{SPOOLER});
-	if ($printer->{SPOOLER} eq "cups") {
-	    {
-		my $w = $in->wait_message(N("Printerdrake"),
-					  N("Checking installed software..."));
-		if (!$::testing &&
-		    !files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
-						/sbin/ifconfig
-						/usr/bin/xpp),
-					     ($::expert ? 
-					      "/usr/share/cups/model/postscript.ppd.gz" : ())
-					    ))) {
-		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp',
-					   ($::expert ? 'cups-drivers' : ())));
-		}
-		if (!$::testing && !files_exist(qw(/usr/bin/wget /usr/bin/curl))) {
-		    $in->do_pkgs->install($::isInstall ? 'curl' : 'webfetch');
-		}
-		# Try to start the network when CUPS is the spooler, so that
-		# remote CUPS printers get displayed (especially during
-		# installation)
-		$upNetwork and do {
-		    &$upNetwork(); 
-		    undef $upNetwork; 
-		    sleep(1);
-		};
-		# Start daemon
-		# Avoid unnecessary restarting of CUPS, this blocks the
-		# startup of printerdrake for several seconds.
-		printer::services::start_not_running_service("cups");
-		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
-          foreach (@{$spoolers{cups}{alternatives}}){
-              set_alternative($_->[0], $_->[1]);
-          }
-		# Remove PDQ panic buttons from the user's KDE Desktops
-	        printer::main::pdq_panic_button("remove");
-	    }
-	    # Should it be started at boot time?
-	    start_spooler_on_boot($printer, $in, "cups");
-	} elsif ($printer->{SPOOLER} eq "lpd") {
-	    {
-		my $w = $in->wait_message(N("Printerdrake"), 
-					  N("Checking installed software..."));
-		# "lpr" conflicts with "LPRng", remove "LPRng"
-		if (!$::testing &&
-		    files_exist((qw(/usr/lib/filters/lpf)))) {
-		    my $w = $in->wait_message(N("Printerdrake"),
-					      N("Removing LPRng..."));
-		    $in->do_pkgs->remove_nodeps('LPRng');
-		}
-		if (!$::testing &&
-		    !files_exist((qw(/usr/sbin/lpf
-					       /usr/sbin/lpd
-					       /sbin/ifconfig
-					       /usr/bin/gpr
-					       /usr/bin/a2ps
-					       /usr/bin/convert)))) {
-		    $in->do_pkgs->install(('lpr', 'net-tools', 'gpr', 'a2ps', 'ImageMagick'));
-		}
-		# Start the network (especially during installation), so the
-		# user can set up queues to remote printers.
-		$upNetwork and do {
-		    &$upNetwork(); 
-		    undef $upNetwork; 
-		    sleep(1);
-		};
-		# Start daemon
-	        printer::services::restart("lpd");
-		# Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
-          foreach (@{$spoolers{lpd}{alternatives}}){
-              set_alternative($_->[0], $_->[1]);
-          }
-		# Remove PDQ panic buttons from the user's KDE Desktops
-	        printer::main::pdq_panic_button("remove");
-	    }
-	    # Should it be started at boot time?
-	    start_spooler_on_boot($printer, $in, "lpd");
-	} elsif ($printer->{SPOOLER} eq "lprng") {
-	    {
-		my $w = $in->wait_message(N("Printerdrake"),
-					  N("Checking installed software..."));
-		# "LPRng" conflicts with "lpr", remove "lpr"
-		if (!$::testing &&
-		    files_exist((qw(/usr/sbin/lpf)))) {
-		    my $w = $in->wait_message(N("Printerdrake"),
-					      N("Removing LPD..."));
-		    $in->do_pkgs->remove_nodeps('lpr');
-		}
-		if (!$::testing &&
-		    !files_exist((qw(/usr/lib/filters/lpf
-					       /usr/sbin/lpd
-					       /sbin/ifconfig
-					       /usr/bin/gpr
-					       /usr/bin/a2ps
-					       /usr/bin/convert)))) {
-		    $in->do_pkgs->install('LPRng', 'net-tools', 'gpr', 'a2ps', 'ImageMagick');
-		}
-		# Start the network (especially during installation), so the
-		# user can set up queues to remote printers.
-		$upNetwork and do {
-		    &$upNetwork(); 
-		    undef $upNetwork; 
-		    sleep(1);
-		};
-		# Start daemon
-	        printer::services::restart("lpd");
-		# Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
-          foreach (@{$spoolers{lprng}{alternatives}}){
-              set_alternative($_->[0], $_->[1]);
-          }
-		# Remove PDQ panic buttons from the user's KDE Desktops
-	        printer::main::pdq_panic_button("remove");
-	    }
-	    # Should it be started at boot time?
-	    start_spooler_on_boot($printer, $in, "lpd");
-	} elsif ($printer->{SPOOLER} eq "pdq") {
-	    {
-		my $w = $in->wait_message(N("Printerdrake"),
-					  N("Checking installed software..."));
-          $in->do_pkgs->install('pdq') if !$::testing && !files_exist(qw(/usr/bin/pdq /usr/X11R6/bin/xpdq));
-		# Start the network (especially during installation), so the
-		# user can set up queues to remote printers.
-		$upNetwork and do {
-		    &$upNetwork(); 
-		    undef $upNetwork; 
-		    sleep(1);
-		};
-		# PDQ has no daemon, so nothing needs to be started
-		
-		# Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
-          foreach (@{$spoolers{pdq}{alternatives}}){
-              set_alternative($_->[0], $_->[1]);
-          }
-		# Add PDQ panic buttons to the user's KDE Desktops
-	        printer::main::pdq_panic_button("add");
-	    }
-	}
-	# Give a SIGHUP to the devfsd daemon to correct the permissions
-	# for the /dev/... files according to the spooler
-	printer::main::SIGHUP_daemon("devfs");
+    return 1 if $::testing;
+    my $spooler = $printer->{SPOOLER};
+    # If the user refuses to install the spooler in high or paranoid security level, exit.
+    return 0 unless security_check($printer, $in, $spooler);
+    return 1 if $spooler !~ /^(cups|lpd|lprng|pqd)$/; # should not happen
+    my $w = $in->wait_message(N("Printerdrake"), N("Checking installed software..."));
+
+    # "lpr" conflicts with "LPRng", remove either "LPRng" or remove "lpr"
+    my $packages = $spoolers{$spooler}{packages2rm};
+    if ($packages) {
+        $w = $in->wait_message(N("Printerdrake"), N("Removing %s ..."), $spoolers{$packages->[0]}{short_name});
+        $in->do_pkgs->remove_nodeps($packages->[0]) if !files_exist($packages->[1]);
     }
+
+    $packages = $spoolers{$spooler}{packages2add};
+    if ($packages) {
+        $w = $in->wait_message(N("Printerdrake"), N("Installing %s ..."), $spoolers{$spooler}{short_name});
+        $in->do_pkgs->install(@{$packages->[0]}) if !files_exist(@{$packages->[1]});
+    }
+
+    undef $w;
+    
+    # Start the network (especially during installation), so the
+    # user can set up queues to remote printers.
+    # (especially during installation)
+
+    $upNetwork and do {
+        &$upNetwork(); 
+        undef $upNetwork; 
+        sleep(1);
+    };
+
+    # Start daemon
+    if ($spooler eq "cups") {
+        # Start daemon
+        # Avoid unnecessary restarting of CUPS, this blocks the
+        # startup of printerdrake for several seconds.
+        printer::services::start_not_running_service("cups");
+     } elsif ($spoolers{$spooler}{service}) {
+          printer::services::restart($spoolers{$spooler}{service}) ;
+        }
+    
+    # Set the choosen spooler tools as defaults for "lpr", "lpq", "lprm", ...
+    foreach (@{$spoolers{$spooler}{alternatives}}){
+        set_alternative($_->[0], $_->[1]);
+    }
+    undef $w;
+
+    # Remove/add PDQ panic buttons from the user's KDE Desktops
+    printer::main::pdq_panic_button($spooler eq 'pdq' ? "add" : "remove");
+
+    # Should it be started at boot time?
+    start_spooler_on_boot($printer, $in, $spoolers{$spooler}{boot_spooler});
+
+    # Give a SIGHUP to the devfsd daemon to correct the permissions
+    # for the /dev/... files according to the spooler
+    printer::main::SIGHUP_daemon("devfs");
     1;
 }
 
