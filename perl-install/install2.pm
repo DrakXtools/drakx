@@ -414,6 +414,7 @@ sub main {
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
 	    move  => sub { $::move = 1 },
+	    globetrotter  => sub { $::move = 1; $::globetrotter = 1 },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
 

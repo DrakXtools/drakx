@@ -45,10 +45,10 @@ sub new($$) {
 	    my @options = $wanted_DISPLAY;
 	    if ($server eq 'Xnest') {
 		push @options, '-ac', '-geometry', $o->{vga} || ($o->{vga16} ? '640x480' : '800x600');
-	    } elsif (!$::move) {
+	    } elsif ($::globetrotter || !$::move) {
 		install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
 
-		push @options, '-kb', '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/ && arch() ne 'ppc';
+		push @options, if_(!$::globetrotter, '-kb'), '-allowMouseOpenFail', '-xf86config', $f if arch() !~ /^sparc/ && arch() ne 'ppc';
 		push @options, 'tty7', '-dpms', '-s', '240';
 
 		#- old weird servers: Xpmac and Xsun
@@ -100,12 +100,12 @@ sub new($$) {
 	    @servers = qw(Xpmac);
         }
 
-        if ($::move && !$::testing) {
+        if (($::move || $::globetrotter) && !$::testing) {
             require move;
             require run_program;
             move::automatic_xconf($o);
             run_program::run('/sbin/service', 'xfs', 'start');
-            @servers = qw(X_move);
+            @servers = $::globetrotter ? qw(Driver:fbdev) : qw(X_move);
 	}
 
 	foreach (@servers) {
@@ -117,7 +117,7 @@ sub new($$) {
 		install_any::getAndSaveFile("Mandrake/mdkinst$dir/$prog", "$dir/$prog") or die "failed to get server $prog: $!";
 		chmod 0755, "$dir/$prog";
 	    }
-	    if (/FB/) {
+	    if (/FB/i) {
 		!$o->{vga16} && $o->{allowFB} or next;
 
 		$o->{allowFB} = &$launchX($prog, $Driver) #- keep in mind FB is used.
