@@ -359,7 +359,7 @@ sub setPackages {
 	$o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
 	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
 	$o->{compssUsersChoice}{'3D'} = 1 if 
-	    detect_devices::matching_desc('Matrox.* G[24]00') ||
+	    detect_devices::matching_desc('Matrox.* G[24][05]0') ||
 	    detect_devices::matching_desc('Riva.*128') ||
 	    detect_devices::matching_desc('Rage X[CL]') ||
 	    detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
