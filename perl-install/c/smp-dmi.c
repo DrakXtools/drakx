@@ -219,7 +219,32 @@ static int processor(u8 *data) {
 	return 0;
 }
 
-static int memory_in_MB(u8 *data)
+static int memory_in_MB_type6(u8 *data)
+{
+	struct dmi_header *dm;
+	
+	int dmi_memory_module_size(u8 code) {
+		/* 3.3.7.2 */
+		switch(code&0x7F) {
+		case 0x7D: /* Not Determinable */
+		case 0x7E: /* Disabled */
+		case 0x7F: /* Not Installed */
+			break;
+		default:
+			return 1<<(code&0x7F);
+		}
+		return 0;
+	}
+
+	dm = (struct dmi_header *)data;
+		
+	if ((dm->type == 6) && (dm->length >= 0xC))
+		return dmi_memory_module_size(data[0x0A]); /* Enabled Size */
+	
+	return 0;
+}
+
+static int memory_in_MB_type17(u8 *data)
 {
 	struct dmi_header *dm;
 	
@@ -271,5 +296,5 @@ int intelDetectSMP(void) {
 }
 
 int dmiDetectMemory(void) {
-	return dmi_detect(memory_in_MB);
+	return max(dmi_detect(memory_in_MB_type6), dmi_detect(memory_in_MB_type17));
 }
