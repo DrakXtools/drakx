@@ -10,6 +10,7 @@ use vars qw(@ISA);
 use common qw(:common);
 use partition_table qw(:types);
 use install_steps;
+use detect_devices;
 use network;
 use modules;
 use lang;
@@ -134,21 +135,31 @@ sub configureNetwork($) {
 	
 
 
-sub createBootdisk($) {
-    my ($o) = @_;
-    
-    if ($o->{mkbootdisk} = $o->ask_yesorno('',
+sub createBootdisk {
+    my ($o, $first_time) = @_;
+    my @l = detect_devices::floppies();
+ 
+    if ($first_time || @l == 1) {
+	$o->ask_yesorno('',
  _("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 lilo on your system, or another operating system removes lilo, or lilo doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?"), !$o->default("mkbootdisk"))) {
+failures. Would you like to create a bootdisk for your system?"), !$o->default("mkbootdisk")) or return;
 
-	$o->ask_warn('', _("Insert a floppy in drive fd0 (aka A:)"));
-	my $w = $o->wait_message('', _("Creating bootdisk"));
-	$o->SUPER::createBootdisk;
+	$o->{mkbootdisk} = $o->default("mkbootdisk") || 1;
+    } else {
+	@l or die _("Sorry, no floppy drive available");
+
+	$o->{mkbootdisk} = $o->ask_from_list('', 
+_("Choose the floppy drive you want to use to make the bootdisk"), 
+					     \@l, $o->default("mkbootdisk"));
     }
+
+    $o->ask_warn('', _("Insert a floppy in floppy drive %s", $o->{mkbootdisk}));
+    my $w = $o->wait_message('', _("Creating bootdisk"));
+    $o->SUPER::createBootdisk;
 }
 
 sub setupBootloader($) {

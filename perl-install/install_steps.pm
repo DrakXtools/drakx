@@ -6,6 +6,7 @@ use strict;
 use common qw(:file :system :common);
 use install_any qw(:all);
 use partition_table qw(:types);
+use detect_devices;
 use modules;
 use run_program;
 use lilo;
@@ -225,19 +226,13 @@ sub createBootdisk($) {
 
     my @l = detect_devices::floppies();
 
-    $dev = shift @l if $dev eq "1"; # special case to specify autochoose
+    $dev = shift @l || die _("no floppy available") 
+      if $dev eq "1"; # special case meaning autochoose
 
     return if $::testing;
 
-	
-	unshift @l, $
-
-	$o->{mkbootdisk} = shift @l || die _("no floppy available") if $o->{mkbootdisk} eq "1";
-       
-	    eval { 
-		lilo::mkbootdisk($o->{prefix}, versionString(), "/dev/" . $o->{mkbootdisk}) 
-	      };
-	    $o->{mkbootdisk} = 1;
+    lilo::mkbootdisk($o->{prefix}, versionString(), "/dev/$dev");
+    $o->{mkbootdisk} = $dev;
 }
 
 sub setupBootloader($) {

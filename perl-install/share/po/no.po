@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-08-28 18:45+0200\n"
+"POT-Creation-Date: 1999-08-28 22:05+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -512,8 +512,8 @@ msgstr "Les nøye!"
 msgid "all data on this partition will be lost"
 msgstr "alle data på denne partisjonen vil gå tapt"
 
-#: ../diskdrake.pm_.c:136 ../install_steps.pm_.c:73
-#: ../install_steps_interactive.pm_.c:23
+#: ../diskdrake.pm_.c:136 ../install_steps.pm_.c:74
+#: ../install_steps_interactive.pm_.c:24
 msgid "Error"
 msgstr "Feil"
 
@@ -912,7 +912,14 @@ msgstr ""
 "Pakkene som er valgt blir nå installert på systemet ditt. Dette tar bare "
 "noen få minutter."
 
-#: ../install2.pm_.c:82
+#: ../install2.pm_.c:82 ../install2.pm_.c:84 ../install2.pm_.c:86
+#: ../install2.pm_.c:88 ../install2.pm_.c:90 ../install2.pm_.c:115
+#: ../install2.pm_.c:117 ../install2.pm_.c:119 ../install2.pm_.c:125
+#: ../install2.pm_.c:154
+msgid "Help"
+msgstr "Hjelp"
+
+#: ../install2.pm_.c:92
 msgid ""
 "The system now requires an administrator password for your Linux system.\n"
 "This passwd is required of you by twice in order to being certain of its "
@@ -947,7 +954,7 @@ msgstr ""
 "inn\" \n"
 "\"root\" og \"passord\", som du nå vil opprette."
 
-#: ../install2.pm_.c:93
+#: ../install2.pm_.c:103
 msgid ""
 "You can now authorize one or more people to be connected on your Linux "
 "system. Each one of\n"
@@ -976,7 +983,7 @@ msgstr ""
 "Det her høyt anbefalt at du logger deg på som vanlig bruker og kun bruker "
 "kontoen \"root\" når det er nødvendig."
 
-#: ../install2.pm_.c:102
+#: ../install2.pm_.c:112
 msgid ""
 "The system being now copied on your disk, he is now time to indicate to it "
 "from where it will have to start.\n"
@@ -987,7 +994,7 @@ msgstr ""
 "Med mindre du vet akkurat hva du gjør, velg alltid \"Første sektor av "
 "disken\"."
 
-#: ../install2.pm_.c:106
+#: ../install2.pm_.c:121
 msgid ""
 "It is now time to configure the graphic server. First of all, choose your "
 "monitor. You have then\n"
@@ -1000,92 +1007,88 @@ msgstr ""
 "til å teste konfigurasjonen din og endre dine valg hvis disse valgene ikke "
 "passet for deg."
 
-#: ../install2.pm_.c:114
+#: ../install2.pm_.c:131
 msgid "Choose your language"
 msgstr "Velg språk"
 
-#: ../install2.pm_.c:115
+#: ../install2.pm_.c:132
 msgid "Choose install or upgrade"
 msgstr "Velg installering eller oppgradering"
 
-#: ../install2.pm_.c:116
+#: ../install2.pm_.c:133
 msgid "Select installation class"
 msgstr "Velg installasjonsklasse"
 
-#: ../install2.pm_.c:117
+#: ../install2.pm_.c:134
 msgid "Setup SCSI"
 msgstr "Oppsett SCSI"
 
-#: ../install2.pm_.c:118
+#: ../install2.pm_.c:135
 msgid "Setup filesystems"
 msgstr "Oppsett filsystemer"
 
-#: ../install2.pm_.c:119
+#: ../install2.pm_.c:136
 msgid "Format partitions"
 msgstr "Formater partisjoner"
 
-#: ../install2.pm_.c:120
+#: ../install2.pm_.c:137
 msgid "Choose packages to install"
 msgstr "Velg pakker for installering"
 
-#: ../install2.pm_.c:121
+#: ../install2.pm_.c:138
 msgid "Install system"
 msgstr "Installer systemet"
 
-#: ../install2.pm_.c:122
+#: ../install2.pm_.c:139
 #, fuzzy
 msgid "Configure mouse"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:123
+#: ../install2.pm_.c:140
 msgid "Configure networking"
 msgstr "Konfigurer nettverk"
 
-#: ../install2.pm_.c:127 ../install_steps_graphical.pm_.c:407
+#: ../install2.pm_.c:144 ../install_steps_graphical.pm_.c:407
 msgid "Set root password"
 msgstr "Sett root passord"
 
-#: ../install2.pm_.c:128
+#: ../install2.pm_.c:145
 msgid "Add a user"
 msgstr "Legg til en bruker"
 
-#: ../install2.pm_.c:129
+#: ../install2.pm_.c:146
 msgid "Create bootdisk"
 msgstr "Opprett oppstartdiskett"
 
-#: ../install2.pm_.c:130
+#: ../install2.pm_.c:147
 msgid "Install bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../install2.pm_.c:131
+#: ../install2.pm_.c:148
 msgid "Configure X"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:132
+#: ../install2.pm_.c:149
 msgid "Exit install"
 msgstr "Gå ut av installering"
 
-#: ../install2.pm_.c:137
-msgid "Help"
-msgstr "Hjelp"
-
-#: ../install2.pm_.c:146
+#: ../install2.pm_.c:163
 msgid "beginner"
 msgstr "nybegynner"
 
-#: ../install2.pm_.c:146
+#: ../install2.pm_.c:163
 msgid "developer"
 msgstr "utvikler"
 
-#: ../install2.pm_.c:146
+#: ../install2.pm_.c:163
 msgid "expert"
 msgstr "ekspert"
 
-#: ../install2.pm_.c:146
+#: ../install2.pm_.c:163
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:227
+#: ../install2.pm_.c:244
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -1093,9 +1096,13 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:242
+#: ../install2.pm_.c:259
 msgid "partitionning failed: no root filesystem"
 msgstr "partisjonering feilet: intet root filsystem"
+
+#: ../install_steps.pm_.c:229
+msgid "no floppy available"
+msgstr ""
 
 #: ../install_steps_graphical.pm_.c:205
 msgid "Hide"
@@ -1207,100 +1214,100 @@ msgstr "Vennligst oppgi et brukernavn"
 msgid "The user name must contain only letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde bokstaver, tall, `-' og `_'"
 
-#: ../install_steps_interactive.pm_.c:23
+#: ../install_steps_interactive.pm_.c:24
 msgid "An error occured"
 msgstr "En feil oppsto"
 
-#: ../install_steps_interactive.pm_.c:30
+#: ../install_steps_interactive.pm_.c:31
 msgid "Which language do you want?"
 msgstr "Hvilket språk ønsker du?"
 
-#: ../install_steps_interactive.pm_.c:36
+#: ../install_steps_interactive.pm_.c:37
 msgid "Install/Upgrade"
 msgstr "Installer/Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:37
+#: ../install_steps_interactive.pm_.c:38
 msgid "Is it an install or an updgrade?"
 msgstr "Er det en installasjon eller en oppgradering?"
 
-#: ../install_steps_interactive.pm_.c:38
+#: ../install_steps_interactive.pm_.c:39
 msgid "Install"
 msgstr "Installer"
 
-#: ../install_steps_interactive.pm_.c:38
+#: ../install_steps_interactive.pm_.c:39
 msgid "Upgrade"
 msgstr "Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:44
+#: ../install_steps_interactive.pm_.c:45
 msgid "Install Class"
 msgstr "Installeringsklasse"
 
-#: ../install_steps_interactive.pm_.c:45
+#: ../install_steps_interactive.pm_.c:46
 msgid "What type of user will you have?"
 msgstr "Hva slags brukertype vil du ha?"
 
-#: ../install_steps_interactive.pm_.c:54
+#: ../install_steps_interactive.pm_.c:55
 #, c-format
 msgid "Installing driver for scsi card %s"
 msgstr "Installerer driver for scsi-kort %s"
 
-#: ../install_steps_interactive.pm_.c:55
+#: ../install_steps_interactive.pm_.c:56
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
-#: ../install_steps_interactive.pm_.c:64
+#: ../install_steps_interactive.pm_.c:65
 msgid " scsi interfaces"
 msgstr " scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:64
+#: ../install_steps_interactive.pm_.c:65
 msgid "Found "
 msgstr "Funnet "
 
-#: ../install_steps_interactive.pm_.c:65
+#: ../install_steps_interactive.pm_.c:66
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../install_steps_interactive.pm_.c:66
+#: ../install_steps_interactive.pm_.c:67
 msgid "Do you have an scsi interface?"
 msgstr "Har du et scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:68
+#: ../install_steps_interactive.pm_.c:69
 msgid "What scsi card have you?"
 msgstr "Hva slags scsi-kort har du?"
 
-#: ../install_steps_interactive.pm_.c:77
+#: ../install_steps_interactive.pm_.c:78
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen "
 "skal tre i kraft"
 
-#: ../install_steps_interactive.pm_.c:87
+#: ../install_steps_interactive.pm_.c:88
 msgid "Choose the partitions you want to format"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../install_steps_interactive.pm_.c:98
+#: ../install_steps_interactive.pm_.c:99
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
 
-#: ../install_steps_interactive.pm_.c:111
+#: ../install_steps_interactive.pm_.c:112
 msgid "Keep the current IP configuration"
 msgstr "Behold nåværende IP-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:112
+#: ../install_steps_interactive.pm_.c:113
 msgid "Reconfigure network now"
 msgstr "Rekonfigurer nettverket nå"
 
-#: ../install_steps_interactive.pm_.c:113
+#: ../install_steps_interactive.pm_.c:114
 msgid "Don't set up networking"
 msgstr "Ikke sett opp nettverk"
 
-#: ../install_steps_interactive.pm_.c:115
+#: ../install_steps_interactive.pm_.c:116
 msgid "Network Configuration"
 msgstr "Nettverks-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:116
+#: ../install_steps_interactive.pm_.c:117
 msgid "LAN networking has already been configured. Do you want to:"
 msgstr "LAN nettverket har allerede blitt konfigurert. Vil du:"
 

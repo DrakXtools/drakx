@@ -20,107 +20,139 @@ use smp;
 use lang;
 use run_program;
 
-my %stepsHelp = (
-selectLanguage => 
- __("Choose the language which you approved. This one govern the language's system."),
-selectPath => 
- __("Choose \"Installation\" if you never have installed Linux system on this computer or if you wish
-to install several of them on this machine.
 
-Choose \"Update\" if you wish to update a Linux system Mandrake 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or
- 6.0 (Venus)."),
+my %stepsHelp = (
+
+selectLanguage => 
+ __("Choose preferred language for install and system usage."),
+
+selectPath => 
+ __("Choose \"Installation\" if there are no previous versions of Linux
+installed, or if you wish use to multiple distributions or versions.
+
+Choose \"Update\" if you wish to update a previous version of Mandrake
+Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
+
 selectInstallClass => 
  __("Select:
-  - Beginer: if you have never installed Linux system and wish to install the system elected 
-\"Product of the year\" for 1999, click here.
-  - Developer: if wish to use your Linux system to build software, you will find your happiness here.
-  - Server: if you wish to install the operating system elected \"Distribution/Server\" for 1999,
-choose this installation class.
-  - Expert: if you alway know very fine GNU/Linux and that you wish to preserve the whole
-control of the installation, this class is for you."),
+  - Beginner: If you have not installed Linux before, or wish to install
+the distribution elected \"Product of the year\" for 1999, click here.
+  - Developer: If you are familiar with Linux and will be using the
+computer primarily for software development, you will find happiness
+here.
+  - Server: If you wish to install a general purpose server, or the
+Linux distribution elected \"Distribution/Server\" for 1999, select
+this.
+  - Expert: If you know GNU/Linux and want to perform a highly
+customized installation, this Install Class is for you."),
+
 setupSCSI => 
- __("The system did not detect a SCSI card. If you have one (or several) click on \"Yes\" and choose the module
-to be tested. In the contrary case, cliquez on \"Not\".
+ __("The system did not detect a SCSI card. If you have one (or several)
+click on \"Yes\" and choose the module(s)
+to be tested. Otherwise, select \"Not\".
 
-If you don't know if you have interfaces SCSI, consult the documentation delivered with your computer
-or, if you use Microsoft Windows 95/98, consult the file \"Peripheral manager\" of the item \"System\"
- of the \"Control panel\"."),
+If you don't know if your computer has SCSI interfaces, consult the
+original documentation delivered with the computer, or if you use
+Microsoft Windows 95/98, inspect the information available via \"Control
+panel\", \"System\", \"Peripheral manager\"."),
+
 partitionDisks => 
- __("In this stage, you will must partion your hard disk. It consists in cutting your disk in several zones
-(which are not equal). This operation, for spectacular and intimidating that it is,
- is not hardly if you be carrefull so that you do. 
-Also, take your time, are sure you before click on \"Finishing\" and READ the handbook of DiskDrake
-before use them."),
-
-#"In this stage, you must partition your hard disk. Partitioning is the
-#division of space on the hard disk into zones (which need not be equal) and
-#certain types of software are installed in certain partitions. This
-#operation, while both spectacular and intimidating, is not difficult to do
-#if you understand what your system needs and what you need to do in the
-#process. If you are uncertain, read the DiskDrake handbook and the
-#Partitioning HOWTO before you proceed. Be cautious during this step. If you
-#make an error, consult the DiskDrake handbook as to how to go about
-#correcting it."
+ __("At this point, hard drive partitions must be defined. (Unless you
+are overwriting a previous install of Linux and have already defined
+your hard drives partions as desired.) This operation consists of
+logically dividing the computer's hard drive capacity into separate
+areas for use. Two common partition are: \"root\" which is the point at
+which the filesystem's directory structure starts, and \"boot\", which
+contains those files necessary to start the operating system when the
+computer is first turned on. Because the effects of this process are
+usually irreversible, partitioning can be intimidating and stressful to
+the inexperienced. DiskDrake simplifies the process so that it need not
+be. Consult the documentation and take your time before proceeding."),
 
 formatPartitions => 
- __("The partitions lately created must be formatted so that the system can use them.
-You can also format partitions previously created and used if you wish to remove all the data they
-contain. Note that it is not necessary to format the partitions already created and in use
-if they contain data you want to keep (typical cases: /home and /usr/local)."),
+ __("Any partitions that have been newly defined must be formatted for
+use. At this time, you may wish to re-format some pre-existing
+partitions to erase the data they contain. Note: it is not necessary to
+re-format pre-existing partitions, particularly if they contain files or
+data you wish to keep. Typical examples: /home and /usr/local."),
+
 choosePackages => 
- __("You now have the possibility of choosing the software that you wish to install.
+ __("You may now select the packages you wish to install.
 
-Please note that packages manage the dependences: that means that if you wish to install
-a software requiring the presence of another software, the latter will be automatically selected
-and that it will be impossible for you to install the former without installing the latter.
+Please note that some packages require the installation of others. These
+are referred to as package dependencies. The packages you select, and
+the packages they require will automatically be added to the
+installation configuration. It is impossible to install a package
+without installing all of its dependencies.
 
-Information on each category of packages and each one of them is available in the zone \"Infos\"
-located above buttons of confirmation/selection/deselection."),
+Information on each category and specific package is available in the
+area titled \"Info\". This is located above buttons: [confirmation]
+[selection] [deselection]."),
+
 doInstallStep => 
- __("Selected packages are now getting installed on your system. This operation take only a few minutes."),
+ __("The packages selected are now being installed. This operation
+should only take a few minutes."),
+
 configureMouse => 
  __("Help"),
+
 configureNetwork =>
  __("Help"),
+
 configureTimezone =>
  __("Help"),
+
 configureServices =>
  __("Help"),
+
 configurePrinter =>
  __("Help"),
+
 setRootPassword => 
- __("The system now requires an administrator password for your Linux system.
-This passwd is required of you by twice in order to being certain of its spelling.
+ __("An administrator password for your Linux system must now be
+assigned. The password must be entered twice to verify that both
+password entries are identical.
 
-Choose it carefully because it mainly conditions the good functioning of your system.
-Indeed, only the administrator (also named \"root\") is able to configure the computer.
-The password should not be too simple so that whoever cannot be connected under this account.
-It should not be either too sophisticated under penalty of being difficult to retain and, finally, forgotten.
+Choose this password carefully. Only persons with access to an
+administrator account can maintain and administer the system.
+Alternatively, unauthorized use of an administrator account can be
+extremely dangerous to the integrity of the system, the data upon it,
+and other systems with which it is interfaced. The password should be a
+mixture of alphanumeric characters and a least 8 characters long. It
+should never be written down. Do not make the password too long or
+complicated that it will be difficult to remember.
 
-When you wish to connect yourselves on your Linux system as an administrator, the \"login\" 
-is \"root\" and the \"password\", this one which you now will indicate."),
+When you login as Administrator, at \"login\" type \"root\" and at
+\"password\", type the password that was created here."),
+
 addUser => 
- __("You can now authorize one or more people to be connected on your Linux system. Each one of
-them will profit from his own environment will be able to configure.
+ __("You can now authorize one or more people to be use your Linux
+system. Each user account will have their own customizable environment.
 
-It is very important that you create at least one user even if you are the only person who will connect
-herself on this machine. Indeed, if runnig the system as \"root\" is attractive, that 
-is a very bad idea. This last having all the rights it is certain that at one time you will broke all.
-This is highly preferable you connect as simple user and that you use the account \"root\" only when
-that is essential."),
-doInstallStep => 
- __("The system being now copied on your disk, he is now time to indicate to it from where it will have to start.
-Unless you know exactly what you do, always choose \"First sector of drive\"."),
+It is very important that you create at least one user, even if there
+will only be one principle user of the system. The administrative
+\"root\" account should not be used for day to day operation of the
+computer.  It is a security risk.  The use of a regular user account
+protects you and the system from yourself. The root account should only
+be used for administrative and maintenance tasks that can not be
+accomplished from a regular user account."),
+
 createBootdisk =>
  __("Help"),
+
 setupBootloader =>
- __("Help"),
-configureX =>
- __("Help"),
+ __("You need to indicate where you wish
+to place the information required to boot to Linux.
+
+Unless you know exactly what you are doing, choose \"First sector of
+drive\"."),
+
 configureX => 
- __("It is now time to configure the graphic server. First of all, choose your monitor. You have then
-the possibility of testing your configuration and of reconsidering your choices if the latter are not
-appropriate to you."),
+ __("It is now time to configure the video card and monitor
+configuration for the X windows Graphic User Interface (GUI). First
+select you monitor. Next, you may test the configuration and change your
+selections if necessary."),
+
 exitInstall =>
  __("Help"),
 );
@@ -299,7 +331,7 @@ sub addUser {
 sub createBootdisk {
     fs::write($o->{prefix}, $o->{fstab}) unless $o->{isUpgrade};
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
-    $o->createBootdisk;
+    $o->createBootdisk($o->{steps}{$o->{step}}{entered} == 1);
 }
 
 sub setupBootloader {
