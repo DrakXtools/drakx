@@ -50,8 +50,8 @@ our %l = (
       qw(catc CDCEther kaweth pegasus rtl8150 usbnet),
     ],
     wireless => [
-      qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503 at76c503-rfmd atmel_cs),
-      qw(hermes ipw2100 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx),
+      qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503-rfmd atmel_cs),
+      qw(ipw2100 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx),
       qw(prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
@@ -89,20 +89,20 @@ our %l = (
       ),
     ],
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs) ], #ide_cs
-    raw => [ qw(scsi_mod sd_mod) ],
+    raw => [ qw(sd_mod) ],
     usb => [ qw(usb-storage) ],
     firewire => [ qw(eth1394 sbp2) ],
-    cdrom => [ qw(ide-cd cdrom sr_mod) ],
+    cdrom => [ qw(ide-cd sr_mod) ],
   },
 
   ################################################################################
 
   bus => 
   {
-    usb => [ qw(usbcore usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd usbkbd keybdev input) ],
-    firewire => [ qw(ohci1394 ieee1394) ],
+    usb => [ qw(usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd usbkbd keybdev) ],
+    firewire => [ qw(ohci1394) ],
     pcmcia => [
-      if_(arch() !~ /^sparc/, qw(pcmcia_core tcic ds i82365 i82092 yenta_socket)), # cb_enabler
+      if_(arch() !~ /^sparc/, qw(tcic i82365 i82092 yenta_socket)), # cb_enabler
     ],
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
@@ -111,15 +111,15 @@ our %l = (
 
   fs => 
   {
-    network => [ qw(af_packet nfs lockd sunrpc) ],
+    network => [ qw(af_packet nfs) ],
     cdrom => [ qw(isofs) ],
     loopback => [ qw(isofs loop), if_($ENV{MOVE}, qw(cryptoloop gzloop supermount)) ],
     local => [
-      if_(arch() =~ /^i.86|x86_64/, qw(vfat fat ntfs)),
+      if_(arch() =~ /^i.86|x86_64/, qw(vfat ntfs)),
       if_(arch() =~ /^ppc/, qw(hfs)),
       qw(reiserfs),
     ],
-    various => [ qw(smbfs romfs jbd xfs) ],
+    various => [ qw(smbfs romfs ext3 xfs) ],
 
   },
 
@@ -154,7 +154,7 @@ our %l = (
   # just here for classification, unused categories (nor auto-detect, nor load_thiskind)
   {
     raid => [
-      qw(linear raid0 raid1 raid5 lvm-mod md multipath xor),
+      qw(linear raid0 raid1 raid5 lvm-mod multipath),
     ],
     mouse => [
       qw(busmouse msbusmouse logibusmouse serial qpmouse atixlmouse),
@@ -166,7 +166,7 @@ our %l = (
     ],
     other => [
       qw(defxx i810_rng i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
-      qw(parport parport_pc parport_serial),
+      qw(parport_pc parport_serial),
       qw(btaudio),
 
       #- these need checking
@@ -177,7 +177,7 @@ our %l = (
       if_(arch() =~ /ia64/, qw(hp-agp i460-agp)),
       if_(arch() =~ /ppc/, qw(uninorth-agp)),
 
-      qw(agpgart ali-agp amd64-agp amd-k7-agp ati-agp intel-agp),
+      qw(ali-agp amd64-agp amd-k7-agp ati-agp intel-agp),
 	 qw(nvidia-agp sworks-agp sis-agp via-agp),
     ],
   },
