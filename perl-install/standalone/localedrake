@@ -64,7 +64,7 @@ if ($@) {
 lang::write($locale, $>);
 if ($>) {
     if (my $wm = any::running_window_manager()) {
-	$in->ask_okcancel('', N("The change is done, but to be effective you must logout"), 1)
+	$in->ask_yesorno('', N("The change is done, but to be effective you must logout"), 1)
 	  and any::ask_window_manager_to_logout($wm);
     }
 }
