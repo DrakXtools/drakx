@@ -192,8 +192,9 @@ sub clean_postinstall_rpms() {
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub getNextStep() {
-    find { !$::o->{steps}{$_}{done} && $::o->{steps}{$_}{reachable} } @{$::o->{orderedSteps}}
+sub getNextStep {
+    my ($o) = @_;
+    find { !$o->{steps}{$_}{done} && $o->{steps}{$_}{reachable} } @{$o->{orderedSteps}}
 }
 
 sub spawnShell() {

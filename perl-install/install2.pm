@@ -293,7 +293,7 @@ sub configureX {
 #------------------------------------------------------------------------------
 sub exitInstall {
     my ($_clicked, $_xent_number, $auto) = @_;
-    installStepsCall($o, $auto, 'exitInstall', getNextStep() eq 'exitInstall');
+    installStepsCall($o, $auto, 'exitInstall', getNextStep($::o) eq 'exitInstall');
 }
 
 
@@ -602,7 +602,7 @@ sub main {
 
     #-the main cycle
     my $clicked = 0;
-    MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
+    MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep($o)) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
 	eval {
