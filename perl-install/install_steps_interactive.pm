@@ -1087,6 +1087,7 @@ sub setRootPassword {
 	 title => N("Set root password"), 
 	 messages => N("Set root password"),
 	 interactive_help_id => "setRootPassword",
+#-PO: keep this short or else the buttons will not fit in the window
 	 cancel => ($o->{security} <= 2 && !$::corporate ? N("No password") : ''),
 	 focus_first => 1,
 	 callbacks => { 
