@@ -177,7 +177,11 @@ sub main {
 	my $choose_txt = $current_part ? N_("Choose another partition") : N_("Choose a partition");
 	my $parts_and_holes = [ fsedit::get_all_fstab_and_holes($all_hds) ];
 	my $choose_part = sub {
-	    $current_part = $in->ask_from_listf('diskdrake', translate($choose_txt), sub { format_part_info_short(fsedit::part2hd($_[0], $all_hds), $_[0]) }, $parts_and_holes, $current_part) || return;
+	    $current_part = $in->ask_from_listf('diskdrake', translate($choose_txt), 
+						sub {
+						    my $hd = fsedit::part2hd($_[0] || return, $all_hds);
+						    format_part_info_short($hd, $_[0]);
+						}, $parts_and_holes, $current_part) || return;
 	    $current_hd = fsedit::part2hd($current_part, $all_hds);
 	};
 
