@@ -438,7 +438,6 @@ int net_device_available(char * device) {
     
 	s = socket(AF_INET, SOCK_DGRAM, 0);
 	if (s < 0) {
-		close(s);
 		log_perror(device);
 		return 0;
 	}
