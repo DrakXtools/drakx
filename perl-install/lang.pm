@@ -834,7 +834,7 @@ my %charset2pango_font = (
   'utf_ta' =>      "TSCu_Paranar 14",
   'utf_vi' =>      "Sans 14",
   'iso-8859-7' =>  "Kerkis 14",
-  'jisx0208' =>    "Sans 18",
+  'jisx0208' =>    "Sans 14",
   #- Nimbus Sans L is missing some chars used by some cyrillic languages,
   #- but tose haven't yet DrakX translations; it also misses vietnamese
   #- latin chars; all other latin and cyrillic are covered.
