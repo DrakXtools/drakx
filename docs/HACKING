@@ -21,7 +21,8 @@ do
 done
 
 Then, log yourself into the cvs:
-% export CVSROOT=:pserver:anoncvs@mandrakesoft.com:/home/cvs/cooker
+% export CVS_RSH=ssh
+% export CVSROOT=:ext:anoncvs@cvs.mandrakesoft.com:/cooker
 % cvs login
 % Passwd: cvs
 % cvs checkout gi
