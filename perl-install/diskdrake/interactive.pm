@@ -948,8 +948,8 @@ sub Options {
 			  if (!check($in, $hd, $part, $all_hds)) {
 			      $options->{encrypted} = 0;
 			  } elsif (!$part->{encrypt_key} && !isSwap($part)) {
-			      if (my $encrypt_key = choose_encrypt_key($in)) {
-				  $options->{'encryption='} = 'AES128';
+			      if (my ($encrypt_key, $encrypt_algo) = choose_encrypt_key($in)) {
+				  $options->{'encryption='} = $encrypt_algo;
 				  $part->{encrypt_key} = $encrypt_key;
 			      } else {
 				  $options->{encrypted} = 0;
@@ -1260,6 +1260,9 @@ sub choose_encrypt_key {
     my ($in) = @_;
 
     my ($encrypt_key, $encrypt_key2);
+    my @algorithms = map { "AES$_" } 128, 196, 256, 512, 1024, 2048;
+    my $encrypt_algo = "AES128";
+
     $in->ask_from_(
 		       {
          title => N("Filesystem encryption key"), 
@@ -1272,7 +1275,8 @@ sub choose_encrypt_key {
         } } }, [
 { label => N("Encryption key"), val => \$encrypt_key,  hidden => 1 },
 { label => N("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },
-    ]) && $encrypt_key;
+{ label => N("Encryption algorithm"), type => 'list', val => \$encrypt_algo, list => \@algorithms }
+    ]) && ($encrypt_key, $encrypt_algo);
 }
 
 
