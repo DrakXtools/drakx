@@ -253,7 +253,7 @@ sub manage {
     each_index {
 	my ($name, $interface, $protocol) = ($_, $p->{$_}{name}, $p->{$_}{protocol});
 	$p->{$name}{gui}{index} = $::i;
-	$p->{$name}{intf} ||= {};
+	$p->{$name}{intf} ||= { DEVICE => $interface };
 	build_tree($netc, $p->{$name}{intf}, $name, $interface, $protocol);
 	build_notebook($netc, $p->{$name}{intf}, $p->{$name}{gui}, $apply_button, $name, $interface);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $p->{$name}{gui}{notebook}));
