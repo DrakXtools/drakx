@@ -117,3 +117,6 @@ substInFile {
 substInFile {
     s|Mandrake Linux release (\S+) \(.*\)|Mandrake Move release $1 (Moyoto)|;
 } "$::prefix/etc/mandrake-release";
+
+#- remove uncessary wizards, especially from appearing in MCC
+unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
