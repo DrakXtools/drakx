@@ -160,7 +160,7 @@ qq{debug
 kdebug 1
 noipdefault
 defaultroute
-pty "/usr/local/bin/pppoeci -v 1 -vpi 8 -vci 35"
+pty "/usr/bin/pppoeci -v 1 -vpi $1 -vci $2"
 sync
 noaccomp
 nopcomp
