@@ -12,7 +12,7 @@ use network::smb;
 use network::nfs;
 use my_gtk qw(:helpers :wrappers :ask);
 
-my ($all_hds, $in, $tree, $current_entry, $current_leaf, $icon_pix, $icon_mask);
+my ($all_hds, $in, $tree, $current_entry, $current_leaf, %icons);
 
 sub main {
     ($in, $all_hds, my $type) = @_;
@@ -98,11 +98,18 @@ sub done {
     diskdrake::interactive::Done($in, $all_hds);
 }
 
+sub set_export_icon {
+    my ($entry, $w) = @_;
+    $entry ||= {};
+    my $icon = $icons{$entry->{isMounted} ? 'mounted' : $entry->{mntpoint} ? 'has_mntpoint' : 'default'};
+    my_gtk::ctree_set_icon($tree, $w, @$icon);
+}
+
 sub update {
     my ($kind) = @_;
     per_entry_action_box($kind->{action_box}, $kind, $current_entry);
     per_entry_info_box($kind->{info_box}, $kind, $current_entry);
-    my_gtk::ctree_set_icon($tree, $current_leaf, $current_entry->{mntpoint} ? ($icon_pix, $icon_mask) : (undef, undef)) if $current_entry;
+    set_export_icon($current_entry, $current_leaf) if $current_entry;
 }
 
 sub find_fstab_entry {
@@ -129,13 +136,16 @@ sub import_ctree {
     $tree->set_selection_mode('browse');
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
-#    ($icon_pix, $icon_mask) = gtkcreate_png("user");
+    foreach ('default', 'server', 'has_mntpoint', 'mounted') {
+	$icons{$_} = [ gtkcreate_png("smbnfs_$_") ];
+    }
 
     my $add_server = sub {
 	my ($server) = @_;
 	my $name = $server->{name} || $server->{ip};
 	$servers_displayed{$name} ||= do {
 	    my $w = $tree->insert_node(undef, undef, [$name], 5, (undef) x 4, 0, 0);
+	    my_gtk::ctree_set_icon($tree, $w, @{$icons{server}});
 	    $wservers{$w} = $server;
 	    $w;
 	};
@@ -146,7 +156,7 @@ sub import_ctree {
 	$tree->expand($node);
 	foreach ($kind->find_exports($wservers{$node} || die '')) {
 	    my $w = $tree->insert_node($node, undef, [$kind->to_string($_)], 5, (undef) x 4, 1, 0);
-	    my_gtk::ctree_set_icon($tree, $w, $icon_pix, $icon_mask) if (find_fstab_entry($kind, $_) || {})->{mntpoint}; 
+	    set_export_icon(find_fstab_entry($kind, $_), $w);
 	    $wexports{$w->{_gtk}} = $_;
 	}
     };
