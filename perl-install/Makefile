@@ -18,7 +18,7 @@ tar-drakxtools: clean
 	cd ../drakxtools ; perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
 	cd ../drakxtools ; rm -rf install* pkgs.pm ftp.pm t.pm */CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
 	cd .. ; tar cfj drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config Newt c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) icons pixmaps *.pm)
-#	cd .. ; rm -rf drakxtools
+	cd .. ; rm -rf drakxtools
 
 $(DIRS):
 	install -d auto
