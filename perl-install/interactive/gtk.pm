@@ -630,7 +630,7 @@ sub ask_fromW {
 	@widgets && ($common->{focus_first} || @widgets == 1 && member(ref $widgets[0]{focus_w}, "Gtk2::TreeView", "Gtk2::RadioButton")) ? 
 	  $widgets[0]{focus_w} : 
 	    $mainw->{ok};
-    $widget_to_focus->grab_focus();
+    $widget_to_focus->grab_focus() if $widget_to_focus;
 
     my $check = sub {
 	my ($f) = @_;
