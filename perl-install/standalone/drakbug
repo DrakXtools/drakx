@@ -27,13 +27,10 @@ use common;
 use ugtk2 qw(:all);
 use Config;
 
-my $bugzilla = 'http://qa.mandrakesoft.com/enter_bug.cgi';
-
+my ($bugzilla, $upload_info, $wizard_name);
 my $prog;
 my ($incident, $stable_release) = (0, 0);
-my $wizard_name = "Bugzilla wizard";
 my ($bugdesc, $bugwrite, $table, $comb_app, $button_pkg, $package, $extra_data, $summary, $textview, $kversion, $cpuinfo, $lspci);
-my $upload_info = N("To submit a bug report, click on the button report.\nThis will open  a web browser window on %s\n where you'll find a form to fill in.  The information displayed above will be \ntransferred to that server.", $bugzilla);
 
 foreach (@ARGV) {
     next unless defined $_;
@@ -75,8 +72,11 @@ if ($mandrake_release =~ /(official|community)/i) {
     $bugzilla = $anthill . '/drakbug.php?request=1';
     $stable_release = 1;
     $wizard_name = "Anthill";
-    $upload_info = N("To submit a bug report, click the report button, which will open your default browser\nto Anthill where you will be able to upload the above information as a bug report.");
+} else {
+    $bugzilla = 'http://qa.mandrakesoft.com/enter_bug.cgi';
+    $wizard_name = "Bugzilla wizard";
 }
+$upload_info = N("To submit a bug report, click on the button report.\nThis will open  a web browser window on %s\n where you'll find a form to fill in.  The information displayed above will be \ntransferred to that server.", $wizard_name);
 
 if ($stable_release == 0) {
     $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
