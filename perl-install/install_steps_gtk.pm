@@ -163,15 +163,21 @@ sub selectMouse {
     local $ugtk2::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
 
     while (1) {
-	log::l("telling X server to use another mouse");
-	eval { modules::load('serial') } if $mouse->{device} =~ /ttyS/;
+	my $xId = mouse::xmouse2xId($mouse->{XMOUSETYPE});
+	my $x_protocol_changed = $old{device} ne $mouse->{device} || $xId != mouse::xmouse2xId($old{XMOUSETYPE});
+	if ($x_protocol_changed) {
+	    log::l("telling X server to use another mouse");
+	    eval { modules::load('serial') } if $mouse->{device} =~ /ttyS/;
 
-	if (!$::testing) {
-	    devices::make($mouse->{device});
-	    symlinkf($mouse->{device}, "/dev/mouse");
-	    c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($mouse->{XMOUSETYPE}), $mouse->{nbuttons} < 3);
+	    if (!$::testing) {
+		devices::make($mouse->{device});
+		symlinkf($mouse->{device}, "/dev/mouse");
+		c::setMouseLive($ENV{DISPLAY}, $xId, $mouse->{nbuttons} < 3);
+	    }
 	}
-	mouse::test_mouse_install($mouse) and return;
+	mouse::test_mouse_install($mouse, $x_protocol_changed) and return;
+
+	%old = %$mouse;
 	$o->SUPER::selectMouse(1);
 	$mouse = $o->{mouse};
     } 

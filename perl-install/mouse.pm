@@ -405,7 +405,7 @@ sub write_conf {
 }
 
 sub test_mouse_install {
-    my ($mouse) = @_;
+    my ($mouse, $x_protocol_changed) = @_;
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
     my $w = ugtk2->new('', disallow_big_help => 1);
@@ -418,7 +418,7 @@ sub test_mouse_install {
 		   gtkset_sensitive(create_okcancel($w, undef, undef, 'edge'), 1)
 		  ),
 	  );
-    test_mouse($mouse, $w, $darea, $width, $height);
+    test_mouse($mouse, $w, $darea, $width, $height, $x_protocol_changed);
     $w->sync; # HACK
     Gtk2::Gdk->pointer_grab($vbox_grab->window, 1, 'pointer_motion_mask', $vbox_grab->window, undef, 0);
     $w->main;
@@ -438,7 +438,7 @@ sub test_mouse_standalone {
 }
 
 sub test_mouse {
-    my ($mouse, $_w, $darea, $width, $height) = @_;
+    my ($mouse, $_w, $darea, $width, $height, $x_protocol_changed) = @_;
 
 #    $darea->realize;  IS IT REALLY NEEDED? generates a Gtk-CRITICAL when run..
     require ugtk2;
@@ -469,10 +469,11 @@ sub test_mouse {
     $drawarea = sub {
 	$draw_pixbuf->($image, 0, 0, 210, 350);
 	if ($::isInstall) {
-	    my $bad_mouse = member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2');
 	    $draw_text->(N("Please test the mouse"), $height - 120);
-	    $draw_text->(N("To activate the mouse,"), $height - 105) if $bad_mouse;
-	    $draw_text->(N("MOVE YOUR WHEEL!"), $height - 90) if $bad_mouse;
+	    if ($x_protocol_changed && $mouse->{nbuttons} > 3 && member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2')) {
+		$draw_text->(N("To activate the mouse,"), $height - 105);
+		$draw_text->(N("MOVE YOUR WHEEL!"), $height - 90);
+	    }
 	}
     };
 
