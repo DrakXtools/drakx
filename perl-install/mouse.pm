@@ -32,7 +32,7 @@ my %mice =
      [ 5, 'ps/2', 'MouseManPlusPS/2', N_("Logitech MouseMan+") ],
      [ 5, 'imps2', 'IMPS/2', N_("Generic PS2 Wheel Mouse") ],
      [ 5, 'ps/2', 'GlidePointPS/2', N_("GlidePoint") ],
-     [ 5, 'imps2', 'auto', N_("Automatic") ],
+     [ 5, 'imps2', c::kernel_version() =~ /^\Q2.4/ ? 'auto' : 'ExplorerPS/2', N_("Automatic") ],
      '',
      [ 5, 'ps/2', 'ThinkingMousePS/2', N_("Kensington Thinking Mouse") ],
      [ 5, 'netmouse', 'NetMousePS/2', N_("Genius NetMouse") ],
