@@ -260,12 +260,12 @@ INTERFACE=`$modems{$adsl_device}{get_intf}`
 
     # sagem specific stuff
     if ($adsl_device eq 'sagem') {
-        my %l = map { $_ => sprintf("%08s", $netc->{$_}) } qw(vci vpi);
+        my %l = map { $_ => sprintf("%08s", $netc->{$_}) } qw(vci vpi Encapsulation);
         # set vpi and vci parameters for sagem
         substInFile {
             s/VCI=.*\n/VCI=$l{vci}\n/;
             s/VPI=.*\n/VPI=$l{vpi}\n/;
-            s/Encapsulation=.*\n/Encapsulation=$l{vpi}\n/;
+            s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
         } "$::prefix/etc/analog/adiusbadsl.conf";
     } elsif ($adsl_device eq 'speedtouch') {
         # speedtouch really is used only with pppoa, let its own script handle firmware upload and the like:
