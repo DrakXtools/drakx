@@ -101,7 +101,7 @@ sub read_grub() {
         } elsif ($global) {
             $b{$keyword} = $v eq '' ? 1 : ungrubify($v);
         } else {
-            $e->{root} = $1 if $v =~ s/root=([^\s]*)\s*//;
+            $e->{root} = $1 if $v =~ s/root=(\S*)\s*//;
             if ($keyword eq 'kernel') {
                 ($e->{kernel_or_dev}, $e->{append}) = split /\s+/, ungrubify($v), 2;
                 $e->{type} = 'image';
