@@ -513,9 +513,6 @@ sub main {
     require harddrake::sound;
     harddrake::sound::configure_sound_slots();
 
-    #- needed very early for install_steps_gtk
-    eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse} && !$::testing;
-
     #- need to be after oo-izing $o
     if ($o->{brltty}) {
 	symlink "/tmp/stage2/$_", $_ foreach "/etc/brltty";
@@ -527,8 +524,9 @@ sub main {
 		install_any::getAndSaveFile($_ , "/tmp/stage2/$_") if $_;
 	    }
 	    install_any::getAndSaveFile("/lib/brltty/libbrlttyb$o->{brltty}{driver}.so") or do {
-		warn("Braille driver $o->{brltty}{driver} for BRLTTY was not found.\n",
-		     "Press ENTER to continue.\n");
+		local $| = 1;
+		print("Braille driver $o->{brltty}{driver} for BRLTTY was not found.\n",
+		      "Press ENTER to continue.\n\a");
 		<STDIN>;
 	    };
 	    install_any::getAndSaveFile("/usr/bin/brltty");
@@ -537,6 +535,9 @@ sub main {
 	devices::make("vcsa");
 	run_program::run("brltty");
     }
+
+    #- needed very early for install_steps_gtk
+    eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse} && !$::testing;
 
     $o->{lang} = lang::set($o->{lang}) if $o->{lang} ne 'en_US'; #- mainly for defcfg
 
