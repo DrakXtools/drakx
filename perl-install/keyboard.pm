@@ -336,16 +336,16 @@ sub unpack_keyboards {
 }
 sub lang2keyboards {
     my @li = sort { $b->[1] <=> $a->[1] } map { @$_ } map {
-	#- first try with the 5 first chars of LANG; if it fails try with
-	#- with the 2 first chars of LANG, it still not good, with "us". 
-	unpack_keyboards($lang2keyboard{substr($_, 0, 5)}) || [ [ ($keyboards{substr($_, 0, 2)} ? $_ : "us") => 100 ] ];
+	#- first try with the 5 first chars of LANG; if it fails then try with
+	#- with the 2 first chars of LANG before resorting to default. 
+	unpack_keyboards($lang2keyboard{substr($_, 0, 5)}) || unpack_keyboards($lang2keyboard{substr($_, 0, 2)}) || [ [ ($keyboards{$_} ? $_ : "us") => 100 ] ];
     } @_;
     \@li;
 }
 sub lang2keyboard {
     my ($l) = @_;
     my $kb = lang2keyboards($l)->[0][0];
-    $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboad mapping to us.
+    $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboard mapping to us.
 }
 sub usb2drakxkbd {
     my ($cc) = @_;
