@@ -1,3 +1,117 @@
+2001/04/11  dam's  <damien@mandrakesoft.com>
+
+	* share/themes-mdk.rc: tooltips
+
+	* bootlook.pm: updated
+	corrected
+
+	* tinyfirewall.pm: installation of package : not at the same place
+
+	* netconnect.pm: updated
+	added driver for pcmcia, corrected eth conf for pppoe
+
+2001/04/11  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: added missing LD_LOADER for calling rpm.
+
+	* printerdrake.pm: fixed probe on kernel 2.4.
+	make printer devices more accurate.
+	removed limitation to only one port probed
+
+	* pkgs.pm: added missing use of LD_LOADER for starting parsehdlist on
+	upgrade.
+
+	* detect_devices.pm: avoid need of shell for live upgrade on serial_probe
+	(removed 2>/dev/null which
+	is not necessary).
+	fixed printer probe (usb and parallel).
+
+	* mouse.pm: fix wacom usb tablet
+
+	* standalone/printerdrake: added missing take into account of
+	/etc/modules.conf
+
+	* lang.pm: added missing LD_LOADER reference and remove old code
+	commented.
+
+2001/04/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: unfuzzyize
+	sync with new msg in services.pm and compssUsers
+	sync with pablo update
+	fixes of translations
+	write the shitload of untranslated and fuzzy msg
+
+	* standalone/tinyfirewall: i18n title
+
+	* services.pm: have many more services tooltipped from here so we can get
+	translations afterwards
+
+	* share/compssUsers: fix typos of rpmsrate groups
+
+	* standalone/drakgw: kosmetik
+	do i18n for title also
+
+2001/04/11  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/rpmsrate: Added reference to netscape-chinese_big5 file
+
+	* share/po/DrakX.pot, share/po/wa.po: Updated Walloon file
+	Updated po files
+	Updated Slovak, Walloon and Polish files
+
+	* share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/de.po,
+	share/po/ko.po, share/po/ja.po, share/po/is.po, share/po/zh_TW.Big5.po,
+	share/po/it.po, share/po/id.po, share/po/pl.po, share/po/fi.po,
+	share/po/zh_CN.GB2312.po, share/po/sk.po, share/po/vi.po,
+	share/po/ca.po, share/po/cs.po: Updated po files
+	Updated Slovak, Walloon and Polish files
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/ga.po,
+	share/po/sr.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/cy.po, share/po/nl.po, share/po/sv.po, share/po/hu.po,
+	share/po/no.po, share/po/th.po, share/po/el.po, share/po/lt.po,
+	share/po/sl.po, share/po/br.po, share/po/gl.po, share/po/lv.po,
+	share/po/uk.po, share/po/eo.po, share/po/ro.po, share/po/da.po,
+	share/po/af.po: Updated po files
+
+2001/04/11  Pixel  <pixel@mandrakesoft.com>
+
+	* run_program.pm (rooted): don't call install_any::check_prog if rooted
+
+	* standalone/drakboot: make it work (why was bootloader::install
+	commented?)
+
+	* share/compssUsers: adapt for new profile choosing layout
+
+	* Makefile: take cardmgr-*
+
+	* install_steps_interactive.pm (chooseGroups): warn if chosen size is too
+	big
+	translate the ``path'' in profile selection
+
+	* share/po/i18n_compssUsers: relooking
+
+	* any.pm (setupBootloader): translate the bootloaders to use
+	(setupBootloader): nicer look&feel
+
+	* install_any.pm (fsck_option): add a closing ``"'' so that strings to
+	i18n extraction works
+	(fsck_option): add a closing ``"'' so that strings to i18n extraction
+	works
+	(check_prog): make it work
+
+	* install_steps_gtk.pm (reallyChooseGroups): relook
+	(installPackages): pressing "Details" gives you more detailed info
+	(reallyChooseGroups): start relooking
+	(installPackages): don't display advertising if less 20MB of packages
+	translate the ``path'' in profile selection
+
+2001/04/11  warly
+
+	* share/compssUsers: Add descr for servers
+
 2001/04/11  François Pons  <fpons@mandrakesoft.com>
 
 	* printerdrake.pm: make printer devices more accurate.
