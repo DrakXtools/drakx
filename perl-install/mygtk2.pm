@@ -91,26 +91,26 @@ my $global_tooltips;
 sub _gtk {
     my ($w, $class, $action, %opts) = @_;
 
-    my @known_opts = ('width', 'height', 'position', 'can_focus', 'widget_name', 'grab_focus', 'tip', 'size_group');
-
     if (my $f = $mygtk2::{"_gtk__$class"}) {
 	$w = $f->($w, \%opts, $class, $action);
     } else {
 	internal_error("$action $class: unknown class");
     }
 
-    $w->set_size_request($opts{width} || -1, $opts{height} || -1) if $opts{width} || $opts{height};
-    $w->set_uposition($opts{position}[0], $opts{position}[1]) if $opts{position};
-    $w->set_name($opts{widget_name}) if $opts{widget_name};
-    $w->can_focus($opts{can_focus}) if defined $opts{can_focus};
-    $w->grab_focus if $opts{grab_focus};
-    $opts{size_group}->add_widget($w) if $opts{size_group};
-    if ($opts{tip}) {
+    $w->set_size_request(delete $opts{width} || -1, delete $opts{height} || -1) if exists $opts{width} || exists $opts{height};
+    if (my $position = delete $opts{position}) {
+	$w->set_uposition($position->[0], $position->[1]);
+    }
+    $w->set_name(delete $opts{widget_name}) if exists $opts{widget_name};
+    $w->can_focus(delete $opts{can_focus}) if exists $opts{can_focus};
+    $w->can_default(delete $opts{can_default}) if exists $opts{can_default};
+    $w->grab_focus if delete $opts{grab_focus};
+    (delete $opts{size_group})->add_widget($w) if $opts{size_group};
+    if (my $tip = delete $opts{tip}) {
 	$global_tooltips ||= Gtk2::Tooltips->new;
-	$global_tooltips->set_tip($w, $opts{tip});
+	$global_tooltips->set_tip($w, $tip);
     }
 
-    delete $opts{$_} foreach @known_opts;
     if (%opts && !$opts{allow_unknown_options}) {
 	internal_error("$action $class: unknown option(s) " . join(', ', keys %opts));
     }
