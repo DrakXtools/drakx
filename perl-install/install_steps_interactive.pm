@@ -894,7 +894,7 @@ sub summary {
     my $timezone_manually_set;  
     push @l, {
 	group => N("System"),
-	label => N("Country"),
+	label => N("Country") . N(" / Region"),
 	val => sub { lang::c2name($o->{locale}{country}) },
 	clicked => sub {
 	    any::selectCountry($o, $o->{locale}) or return;
