@@ -217,15 +217,7 @@ cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2 <<EOF
 exec /usr/share/harddrake/service_harddrake X11
 EOF
 
-cat > $RPM_BUILD_ROOT%_datadir/harddrake/confirm <<EOF
-#!/usr/bin/perl
-use lib qw(/usr/lib/libDrakX);
-use interactive;
-
-my \$in = interactive->vnew;
-my \$res = \$in->ask_okcancel(\$ARGV[0], \$ARGV[1], 1);
-\$in->exit(\$res);
-EOF
+mv $RPM_BUILD_ROOT%_sbindir/service_harddrake_confirm $RPM_BUILD_ROOT%_datadir/harddrake/confirm
 
 chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/harddrake2}
 # temporary fix until we reenable this feature
