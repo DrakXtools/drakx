@@ -603,25 +603,23 @@ sub killCardServices() {
     $pid and kill(15, $pid); #- send SIGTERM
 }
 
-sub unlockCdrom(;$) {
-    my ($cdrom) = @_;
-    $cdrom or cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
-    eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
+sub unlockCdrom() {
+    my $cdrom = cat_("/proc/mounts") =~ m!(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image)! && $1 or return;
+    eval { ioctl(detect_devices::tryOpen($cdrom), c::CDROM_LOCKDOOR(), 0) };
 }
-sub ejectCdrom(;$) {
-    my ($cdrom) = @_;
+sub ejectCdrom {
+    my ($o_cdrom) = @_;
     getFile("XXX"); #- close still opened filehandle
-    $cdrom ||= $1 if cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image),;
-    if ($cdrom) {
-	#- umount BEFORE opening the cdrom device otherwise the umount will
-	#- D state if the cdrom is already removed
-	eval { fs::umount("/tmp/image") };
-	$@ and warnAboutFilesStillOpen();
-	eval { 
-	    my $dev = detect_devices::tryOpen($cdrom);	    
-	    ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
-	};
-    }
+    my $cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image)! && $1 or return;
+
+    #- umount BEFORE opening the cdrom device otherwise the umount will
+    #- D state if the cdrom is already removed
+    eval { fs::umount("/tmp/image") };
+    $@ and warnAboutFilesStillOpen();
+    eval { 
+	my $dev = detect_devices::tryOpen($o_cdrom);	    
+	ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
+    };
 }
 
 sub warnAboutFilesStillOpen() {
