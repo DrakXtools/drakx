@@ -12,7 +12,7 @@ CAT_GNOME
   4 gnome-applets gtk-themes file-roller
     gnome-utils gucharmap xlockmore gtk-engines2 
     gconf-editor
-  5 !CAT_KDE gdm
+  5 !CAT_KDE || CAT_GNOME  gdm
   3 gnome-pilot
   2 bug-buddy
 
@@ -40,7 +40,7 @@ CAT_VIDEO
   2 xmovie
 TV
   5 CAT_KDE kdetv
-  5 !CAT_KDE tvtime
+  5 !CAT_KDE || CAT_GNOME tvtime
   3 xawtv
   3 zapping
   3 HW"ATI" ati.2
@@ -50,7 +50,7 @@ CAT_OFFICE
   5 OpenOffice.org-help-cs OpenOffice.org-help-de
   5 OpenOffice.org-l10n-ar OpenOffice.org-l10n-ca
   5 CAT_KDE koffice-kivio
-  5 !CAT_KDE dia
+  5 !CAT_KDE || CAT_GNOME dia
   5 gnucash gnucash-hbci gnucash-ofx
   5 planner
   5 CAT_KDE kdenetwork-kdict
@@ -91,6 +91,7 @@ CAT_AUDIO
   5 audacity
   5 CAT_KDE kdemultimedia-kaudiocreator kdemultimedia-common
   5 gnome-media
+  4 CAT_GNOME rhythmbox sound-juicer
   4 CAT_GNOME gnome-audio
   4 CAT_KDE rosegarden4
   3 cdp
@@ -227,7 +228,7 @@ CAT_NETWORKING_LDAP_SERVER
 
 CAT_NETWORKING_INSTANT_MESSAGING
   5 CAT_KDE kdenetwork-kopete
-  5 !CAT_KDE gaim
+  5 !CAT_KDE || CAT_GNOME gaim
   3 licq
   3 ayttm
   3 licq-console licq-rms
@@ -363,10 +364,10 @@ CAT_GRAPHICS
   5 qiv
   5 gimp2_0 gimp-help-2
   5 CAT_KDE kuickshow
-  5 !CAT_KDE gqview
+  5 !CAT_KDE gthumb
   5 CAT_KDE kdegraphics-ksnapshot
   5 CAT_KDE digikam
-  4 !CAT_KDE flphoto gtkam
+  4 !CAT_KDE || CAT_GNOME flphoto gtkam
   4 CAT_KDE kdegraphics-common
   4 ImageMagick giftrans gphoto2
   3 gimp-data-extras
@@ -662,7 +663,7 @@ CAT_SYSTEM
   5 DRIVER"^ISDN:" ibod isdn4net isdn4k-utils
   5 DRIVER"adiusbadsl" eagle-usb
   5 CAT_KDE  DRIVER"bcm203x|bfusb|hci_usb" kdebluetooth 
-  5 !CAT_KDE DRIVER"bcm203x|bfusb|hci_usb" gnome-bluetooth
+  5 !CAT_KDE || CAT_GNOME DRIVER"bcm203x|bfusb|hci_usb" gnome-bluetooth
   5 DRIVER"ipw2100" ipw2100-firmware
   5 DRIVER"ipw2200" ipw2200-firmware
   5 DRIVER"ath_pci" madwifi-kernel madwifi
