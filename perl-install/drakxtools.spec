@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10.1
-Release: 27mdk
+Version: 10.2
+Release: 0.1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Nov 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.1mdk
+- drakauth: add SmartCard authentication (pixel)
+- drakbackup: advise user about anacron (stew, anthill #1134)
+- drakconnect:
+  o add support for Philips Semiconductors DSL card (blino)
+  o security fix: let ifcfg files be readable only by root when a WEP
+    key is set (blino, #12177)
+  o update/add ADSL ISP entries (baud)
+- drakTermServ (stew):
+  o create cfg dir if needed
+  o use xorg.conf
+  o touch /etc/dhcpd.conf.etherboot.kernel if missing
+  o ignore vmnet for broadcast address
+  o start reworking PXE support.
+- harddrake2: display more information about memory
+- localedrake: fix configuring fcitx IM (Funda Wang)
+- XFdrake: do not detect smartcards (pixel)
 
 * Thu Oct 28 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-27mdk
 - bootloader: run grub chrooted (gwenole)
