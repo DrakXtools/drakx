@@ -451,7 +451,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     }
 
 #    #- update language and icons for KDE.
-#    update_userkderc($_, 'Locale', Language => "") foreach list_skels($o->{prefix}, '.kderc');
+#    update_gnomekderc($_, 'Locale', Language => "") foreach list_skels($o->{prefix}, '.kderc');
 #    log::l("updating kde icons according to available devices");
 #    install_any::kdeicons_postinstall($o->{prefix});
 

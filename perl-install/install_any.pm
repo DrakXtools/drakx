@@ -541,7 +541,7 @@ sub install_urpmi {
 sub kderc_largedisplay {
     my ($prefix) = @_;
 
-    update_userkderc($_, 'KDE', 
+    update_gnomekderc($_, 'KDE', 
 		     Contrast => 7,
 		     kfmIconStyle => "Large",
 		     kpanelIconStyle => "Normal", #- to change to Large when icons looks better
