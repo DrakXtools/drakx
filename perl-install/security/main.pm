@@ -200,7 +200,11 @@ sub draksec_main {
 				  my $opt = $options_values{$domain}{$key};
 				  $msec->config_function($key, $opt =~ /Combo/ ? $opt->entry->get_text() : $opt->get_text());
 			   }
-		    }
+		  }
+		  standalone::explanations("Applying msec changes");
+		  system "/usr/sbin/msec";
+
+			   
 
 		  remove_wait_msg($w);
 
