@@ -1,4 +1,5 @@
 CFLAGS=-Wall -O # -g -DDEBUG
+LDFLAGS = -lm
 TARGETS=ddcxinfos
 
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
