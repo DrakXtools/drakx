@@ -1597,7 +1597,7 @@ sub set {
 package Gtk2::WrappedLabel;
 sub new {
     my ($_type, $o_text) = @_;
-    ugtk2::gtkset_line_wrap(Gtk2::Label->new($o_text), 1);
+    ugtk2::gtkset_line_wrap(Gtk2::Label->new($o_text || ''), 1);
 }
 
 
