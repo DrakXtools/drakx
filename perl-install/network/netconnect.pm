@@ -1275,7 +1275,7 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
 "), 1) 
                 and do {
                     $netcnx->{type} = 'lan';
-                    $netc->{NET_INTERFACE} = 'eth0';
+                    $netc->{$_} = 'eth0' foreach qw(NET_DEVICE NET_INTERFACE);
                     $use_wizard = 0;
                 };
         }
