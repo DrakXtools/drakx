@@ -546,6 +546,7 @@ sub main {
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
+	log::l("umask is ", umask());
 	eval {
 	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};
