@@ -81,11 +81,11 @@ sub get_subwizard {
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
-      my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
+      my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices, %eth_intf);
       my (%connections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, $adsl_protocol, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
-      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
+      my ($ntf_name, $ntf_device, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -132,12 +132,13 @@ sub get_subwizard {
       my $lan_detect = sub {
           detect($netc->{autodetect}, 'lan') if !$::isInstall;
           modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1);
-          @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
+          @all_cards = network::ethernet::get_eth_cards();
           @cards = map { $_->[0] } @all_cards;
           foreach my $card (@all_cards) {
               modules::remove_alias($card->[1]);
               modules::add_alias($card->[0], $card->[1]);
           }
+          %eth_intf = map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards;
       };
 
       my $find_lan_module = sub { $module ||= (find { $_->[0] eq $ethntf->{DEVICE} } @all_cards)->[1] };
@@ -521,13 +522,13 @@ killall pppd
                         $lan_detect->();
                         detect($netc->{autodetect}, 'adsl');
                         # FIXME: we still need to detect bewan modems
-                        @adsl_devices = @cards;
+                        @adsl_devices = values %eth_intf;
                         foreach my $modem (keys %adsl_devices) {
                             push @adsl_devices, $adsl_devices{$modem} if $netc->{autodetect}{adsl}{$modem};
                         }
                     },
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
-                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
+                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_device, allow_empty_list => 1,
                                list => \@adsl_devices, } ],
                     post => sub {
                         my %packages = (
@@ -535,6 +536,7 @@ killall pppd
                                         'sagem'      => [ 'adiusbadsl', '/usr/sbin/adictrl' ],
                                         'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
                                        );
+                        $ntf_name = { reverse %eth_intf }->{$ntf_device} || $ntf_device;
                         $adsl_device = { reverse %adsl_devices }->{$ntf_name} || $ntf_name; # ethernet device case
                         return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
@@ -665,8 +667,12 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                    {
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
-                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ detect_devices::getNet() ], allow_empty_list => 1 } ],
+                    data =>  sub {
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_device, list => [ values %eth_intf ], 
+                            allow_empty_list => 1 } ];
+                    },
                     post => sub {
+                        $ntf_name = { reverse %eth_intf }->{$ntf_device} || $ntf_device;
                         delete $ethntf->{$_} foreach keys %$ethntf;
                         add2hash($ethntf, $intf->{$ntf_name});
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
