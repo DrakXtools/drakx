@@ -49,7 +49,11 @@ my ($netcnx, $netc, $intf)  = ({}, {}, {});
 my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
 
 my $in = 'interactive'->vnew('su');
-!$::isEmbedded and $in->isa('interactive::gtk');
+if ($in->isa('interactive::gtk')) {
+    require ugtk2;
+    ugtk2->import(qw(:create :dialogs :helpers :wrappers));
+    reread_net_conf();
+}
 $::Wizard_pix_up = "wiz_drakconnect.png";
 
 MDK::Common::Globals::init(
@@ -64,24 +68,14 @@ MDK::Common::Globals::init(
 /--skip-wizard/ and goto manage;
 /--add/ and add_intf();
 /--del/ and del_intf();
-/--internet/ and do {
-    init();
-    configure_net($netcnx, $netc, $intf);
-};
+/--internet/ and configure_net($netcnx, $netc, $intf);
 
 # default is to run wizard
 add_intf();
 
 my @all_cards;
 
-sub init() {
-    require ugtk2;
-    ugtk2->import(qw(:create :dialogs :helpers :wrappers));
-    reread_net_conf();
-}
-
 manage:
-init();
 my $window1 = ugtk2->new('drakconnect');
 $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
 unless ($::isEmbedded) {
