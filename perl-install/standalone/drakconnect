@@ -640,11 +640,21 @@ sub del_intf() {
                  welcome => {
                              no_back => 1,
                              name => N("Select the network interface to remove:"),
-                             data =>  [ { label => N("Net Device"), val => \$intf2delete, list => [ keys %$intf ], allow_empty_list => 1 } ],
+                             data =>  [ { label => N("Net Device"), val => \$intf2delete, allow_empty_list => 1,
+                                          list => [ keys %$intf, grep { -f "/etc/ppp/peers/$_" } qw(adsl isdn) ], } ],
                              post => sub {
                                  !$::testing and eval {
-                                     system("ifdown $intf2delete");
-                                     rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf2delete");
+                                     if (member($intf2delete, qw(adsl isdn))) {
+                                         system("service internet stop");
+                                         # system("ifdown " . $intf2delete eq "isdn" : "ippp0" : "ppp0");
+                                         rm_rf("/etc/ppp/peers/$intf2delete");
+                                         if (any { /$intf2delete/ } cat_("/etc/sysconfig/network-scripts/net_cnx_up")) {
+                                             unlink "/etc/sysconfig/network-scripts/net_cnx_$_" foreach qw(up down);
+                                         }
+                                     } else {
+                                         system("ifdown $intf2delete");
+                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf2delete");
+                                     }
                                  };
                                  $faillure = $@;
                              },
