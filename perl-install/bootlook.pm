@@ -56,7 +56,7 @@ unless ($::isEmbedded) {
     my @menu_items = ({ path => N("/_File"), type => '<Branch>' },
                       { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { ugtk2->exit(0) } },
                       );
-    my $menubar = create_factory_menu($w->{rwindow}, @menu_items);
+    create_factory_menu($w->{rwindow}, @menu_items);
     ######### menus end
 }
 
