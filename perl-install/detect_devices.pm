@@ -125,7 +125,7 @@ sub getIDE() {
 }
 
 sub getCompaqSmartArray() {
-    my @idi;
+    my (@idi, $f);
 
     foreach ('array/ida', 'cciss/cciss') {
 	my $prefix = "/proc/driver/$_"; #- kernel 2.4 places it here
