@@ -89,8 +89,9 @@ sub isdn_write_config_backend {
 	    substInFile {
 		s/EAZ =.*/EAZ = $isdn->{phone_in}/;
 		s/PHONE_OUT =.*/PHONE_OUT = $isdn->{phone_out}/;
-#		s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/;
-#		$a or s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/, $a=1;
+		if (/NAME = ippp0/ .. /PPPBIND = 0/) {
+		    s/HUPTIMEOUT =.*/HUPTIMEOUT = $isdn->{huptimeout}/;
+		}
 	    } "$prefix/etc/isdn/$f";
 	    chmod 0600, $f;
 	}

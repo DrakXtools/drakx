@@ -601,7 +601,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
 		     [_("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5','eth6', 'eth7', 'eth8', 'eth9' ]],
 		     [_("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcpcd", "dhcpxd", "dhcp-client"] ],
 		     [_("Connection speed"), \$cnx->{speed}, ["64 Kb/s", "128 Kb/s"]],
-		     [_("Connection timeout (in sec) [ beta, not yet implemented ]"), \$cnx->{huptimeout} ]
+		     [_("Connection timeout (in sec)"), \$cnx->{huptimeout} ]
 );
     foreach (@conf_data) {
 	$infos[2*$i]=new Gtk::HBox(0,0);
