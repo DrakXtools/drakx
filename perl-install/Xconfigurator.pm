@@ -7,7 +7,7 @@ use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsy
 use pci_probing::main;
 use common qw(:common :file :functional :system);
 use log;
-
+use run_program;
 use Xconfigurator_consts;
 use my_gtk qw(:wrappers);
 

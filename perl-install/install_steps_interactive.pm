@@ -105,7 +105,7 @@ sub selectInstallClass($@) {
 	    );
     my $installClass = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
 							 _("What installation class do you want?"),
-							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{specific})};
+							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{beginner})};
     $::expert   = $installClass eq "expert";
     $::beginner = $installClass eq "beginner";
 
@@ -113,6 +113,7 @@ sub selectInstallClass($@) {
 	$o->{installClass} = $installClass;
     } else {
 	my %c = (
+		 normal    => _("Normal"),
 		 developer => _("Developement"),
 		 server    => _("Server"),
 		);

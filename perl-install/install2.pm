@@ -34,29 +34,29 @@ use run_program;
 #-######################################################################################
 #- Steps table
 #-######################################################################################
-my @installStepsFields = qw(text redoable onError needs entered reachable toBeDone help next done);
+my @installStepsFields = qw(text redoable onError beginnerHidden needs entered reachable toBeDone help next done);
 my @installSteps = (
-  selectLanguage     => [ __("Choose your language"), 1, 1 ],
-  selectInstallClass => [ __("Select installation class"), 1, 1 ],
-  setupSCSI          => [ __("Setup SCSI"), 1, 0 ],
-  selectPath         => [ __("Choose install or upgrade"), 0, 0, "selectInstallClass" ],
-  selectMouse        => [ __("Configure mouse"), 1, 1, "selectPath" ],
-  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, "selectPath" ],
-  partitionDisks     => [ __("Setup filesystems"), 1, 0, "selectPath" ],
-  formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, 1, "selectPath" ],
-  doInstallStep      => [ __("Install system"), 1, -1 ],
-  miscellaneous      => [ __("Miscellaneous"), 1, 1 ],
-  configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],
-  configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],
-#-  configureServices => [ __("Configure services"), 0, 0 ],
-  configurePrinter   => [ __("Configure printer"), 1, 0, "doInstallStep" ],
-  setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],
-  addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],
-  createBootdisk     => [ __("Create a bootdisk"), 1, 0, "doInstallStep" ],
-  setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
-  configureX         => [ __("Configure X"), 1, 0, ["formatPartitions", "setupBootloader"] ],
-  exitInstall        => [ __("Exit install"), 0, 0 ],
+  selectLanguage     => [ __("Choose your language"), 1, 1, 0 ],
+  selectInstallClass => [ __("Select installation class"), 1, 1, 0 ],
+  setupSCSI          => [ __("Setup SCSI"), 1, 0, 0 ],
+  selectPath         => [ __("Choose install or upgrade"), 0, 0, 0, "selectInstallClass" ],
+  selectMouse        => [ __("Configure mouse"), 1, 1, 0, "selectPath" ],
+  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, 1, "selectPath" ],
+  partitionDisks     => [ __("Setup filesystems"), 1, 0, 0, "selectPath" ],
+  formatPartitions   => [ __("Format partitions"), 1, -1, 0, "partitionDisks" ],
+  choosePackages     => [ __("Choose packages to install"), 1, 1, 0, "selectPath" ],
+  doInstallStep      => [ __("Install system"), 1, -1, 0 ],
+  miscellaneous      => [ __("Miscellaneous"), 1, 1, 1 ],
+  configureNetwork   => [ __("Configure networking"), 1, 1, 1, "formatPartitions" ],
+  configureTimezone  => [ __("Configure timezone"), 1, 1, 0, "doInstallStep" ],
+#-  configureServices => [ __("Configure services"), 0, 0, 0 ],
+  configurePrinter   => [ __("Configure printer"), 1, 0, 0, "doInstallStep" ],
+  setRootPassword    => [ __("Set root password"), 1, 1, 0, "formatPartitions" ],
+  addUser            => [ __("Add a user"), 1, 1, 0, "doInstallStep" ],
+  createBootdisk     => [ __("Create a bootdisk"), 1, 0, 0, "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1, 0, "doInstallStep" ],
+  configureX         => [ __("Configure X"), 1, 0, 0, ["formatPartitions", "setupBootloader"] ],
+  exitInstall        => [ __("Exit install"), 0, 0, 1 ],
 );
 
 my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
@@ -141,7 +141,7 @@ $o = $::o = {
     authentification => { md5 => 1, shadow => 1 },
     lang         => 'en',
     isUpgrade    => 0,
-    installClass => "beginner",
+#-    installClass => "beginner",
 
     timezone => {
 #-                   timezone => "Europe/Paris",
