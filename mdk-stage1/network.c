@@ -659,14 +659,15 @@ static enum return_type intf_select_and_up(char **http_proxy_host, char **http_p
 	
 	results = bringup_networking(sel_intf);
 
-	if (http_proxy_host && http_proxy_port) {
-		intf_get_http_proxy(intf);
-		*http_proxy_host = intf->http_proxy_host;
-		*http_proxy_port = intf->http_proxy_port;
-	}
+	if (results == RETURN_OK) {
+		if (http_proxy_host && http_proxy_port) {
+			intf_get_http_proxy(intf);
+			*http_proxy_host = intf->http_proxy_host;
+			*http_proxy_port = intf->http_proxy_port;
+		}
 
-	if (results == RETURN_OK)
 		save_netinfo(sel_intf);
+	}
 
 	return results;
 }
