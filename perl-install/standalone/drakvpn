@@ -537,7 +537,7 @@ step_add_section_ipsec_conf_k26:
 
 	ask_info3('',
 N("Add a Security Policy.\n
-You can now add a Secutiy Policy.\n
+You can now add a Security Policy.\n
 Choose continue when you are done to write the data.\n"), $section)  or goto step_configure_ipsec_conf;
 
 #	$existing_section = network::ipsec::already_existing_section_ipsec_conf($section->{src_dest}, $ipsec, $kernel_version);
@@ -588,7 +588,7 @@ N("You cannot edit this section.\n
 This section is mandatory for Freswan 2.X.
 One has to specify version 2.0 on the top
 of the %s file, and eventually, disable or
-enable the oportunistic ecryption.\n",$ipsec_conf));
+enable the oportunistic encryption.\n",$ipsec_conf));
 	goto step_edit_ipsec_conf;
 
 } elsif ($choice =~ /^config setup/) {
