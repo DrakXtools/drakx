@@ -61,9 +61,11 @@ sub getinfoFromXF86Config {
 	    $c{flags}{needVideoRam} ||= 1 if /^\s*VideoRam\s+/;
 	    $c{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
 	    $c{board} ||= $1 if /^\s*BoardName\s+"(.*?)"/;
+	    $c{options}{$1} ||= 1 if /^\s*Option\s+"(.*?)"/;
+	    $c{options}{$1} ||= 0 if /^\s*#\s*Option\s+"(.*?)"/;
 
 	    #- clockchip, ramdac, dacspeed read with following line.
-	    push @{$c{lines}}, $_ unless /(Section|Identifier|VideoRam|VendorName|BoardName)/;
+	    push @{$c{lines}}, $_ unless /(Section|Identifier|VideoRam|VendorName|BoardName|Option)/;
 
 	    add2hash($o->{card} ||= {}, \%c) if ($i =~ /E0/ && $c{type} && $c{type} ne "Generic VGA");
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {

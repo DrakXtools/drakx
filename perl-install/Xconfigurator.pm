@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines %xkb_options);
+use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -179,6 +179,25 @@ sub cardConfiguration(;$$$) {
 					 [ sort { $videomemory{$a} <=> $videomemory{$b} }
 					   keys %videomemory])};
     $card;
+}
+
+sub optionsConfiguration($) {
+    my ($o) = @_;
+    my @l;
+    my %l;
+
+    foreach (@options) {
+	if ($o->{card}{server} eq $_->[1] && $o->{card}{identifier} =~ /$_->[2]/) {
+	    $o->{card}{options}{$_->[0]} ||= 0;
+	    unless ($l{$_->[0]}) {
+		push @l, $_->[0], { val => \$o->{card}{options}{$_->[0]}, type => 'bool' };
+		$l{$_->[0]} = 1;
+	    }
+	}
+    }
+    @l = @l[0..19] if @l > 19; #- reduce list size to 10 for display (it's a hash).
+
+    $in->ask_from_entries_refH('', _("Choose options for server"), \@l);
 }
 
 sub monitorConfiguration(;$$) {
@@ -627,6 +646,9 @@ sub write_XF86Config {
 	print F "    # Clock lines\n";
 	print F "    Clocks $_\n" foreach (@{$O->{clocklines}});
     }
+
+    print F "\n";
+    print F map { (!$O->{options}{$_} && '#') . qq(    Option      "$_"\n) } keys %{$O->{options} || {}};
     print F "EndSection\n\n\n";
 
     #- Write Screen sections.
@@ -734,6 +756,7 @@ sub main {
 	my %c = my @c = (
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) },
+           ($::expert ? (__("Change Server options") => sub { optionsConfiguration($o) }) : ()),
 	   __("Change Resolution") => sub { resolutionsConfiguration($o, noauto => 1) },
 	   __("Automatical resolutions search") => sub {
 	       delete $o->{card}{depth};

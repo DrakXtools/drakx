@@ -197,6 +197,8 @@ sub searchAndMount4Upgrade {
     my ($o) = @_;
     my ($root, $found);
 
+    my $w = $::beginner && $o->wait_message('', _("Searching root partition."));
+
     $o->{partitioning}{readonly} = 1;
 
     #- try to find the partition where the system is installed if beginner

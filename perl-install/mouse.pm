@@ -90,7 +90,7 @@ sub mouseconfig {
     my ($t, $mouse);
 
     foreach (0..1) { #- probe only ttyS0 and ttyS1.
-	$t = detect_devices::probe_device(devices::make("/dev/ttyS$_"));
+	$t = detect_devices::probe_device("/dev/ttyS$_");
 	if ($t->{CLASS} =~ /MOUSE/i) {
 	    $t->{MFG} ||= $t->{MANUFACTURER};
 

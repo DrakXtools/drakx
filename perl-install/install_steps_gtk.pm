@@ -270,7 +270,7 @@ sub choosePackages {
 
     return if $::beginner;
     chooseSizeToInstall(@_);
-    install_steps_interactive::choosePackages(@_);
+    install_steps_interactive::choosePackages(@_) unless $::expert;
     choosePackagesTree(@_) if $::expert;
 }
 sub chooseSizeToInstall {
