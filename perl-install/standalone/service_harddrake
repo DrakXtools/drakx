@@ -67,6 +67,7 @@ foreach (@harddrake::data::tree) {
     $config{$Ident} = \%ID;
 
     my $oldconfig = $previous_config->{$Ident};
+    next if is_empty_hash_ref %$previous_config;
 
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
@@ -76,8 +77,8 @@ foreach (@harddrake::data::tree) {
     my @added = difference2([ keys %ID ], [ keys %$oldconfig ]);
     $msg .= _("\nSome devices in the %s class were added:\n", $item) if @added;
     $msg .= "- $_ was added\n" foreach @added;
-
     @added || @was_removed or next;
+   
     next unless (-x $configurator);
 
     if ($in->ask_okcancel("Hardware changes in $Ident class",
