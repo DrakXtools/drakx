@@ -454,18 +454,19 @@ sub ask_browse_tree_info_given_widgets {
 	$wtree{$s};
     };
     my $add_node = sub {
-	my ($leaf, $root) = @_;
+	my ($leaf, $root, $options) = @_;
 	my $state = $common->{node_state}($leaf) or return;
 	if ($leaf) {
 	    my $node = $w->{tree}->insert_node($add_parent->($root, $state), undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
 	    $set_node_state->($node, $state);
 	    push @{$ptree{$leaf}}, $node;
 	} else {
+	    my $parent = $add_parent->($root, $state);
 	    #- hackery for partial displaying of trees, used in rpmdrake:
-	    #- if leaf is void, we do create the parent and one child (to have the [+] in front of the parent in the ctree)
+	    #- if leaf is void, we may create the parent and one child (to have the [+] in front of the parent in the ctree)
 	    #- though we use '' as the label of the child; then rpmdrake will connect on tree_expand, and whenever
 	    #- the first child has '' as the label, it will remove the child and add all the "right" children
-	    $w->{tree}->insert_node($add_parent->($root, $state), undef, ['', '', ''], 5, (undef) x 4, 1, 0);
+	    $options->{nochild} or $w->{tree}->insert_node($parent, undef, ['', '', ''], 5, (undef) x 4, 1, 0);
 	}
     };
     $common->{delete_all} = sub {
