@@ -42,7 +42,7 @@ copyright laws applicable to software programs.
 #-######################################################################################
 use common;
 use partition_table qw(:types);
-use partition_table_raw;
+use partition_table::raw;
 use install_steps;
 use install_interactive;
 use install_any;
@@ -379,16 +379,16 @@ _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!"));
 
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) { #- need to make bootstrap part if NewWorld machine - thx Pixel ;^)
-	if (defined $partition_table_mac::bootstrap_part) {
+	if (defined $partition_table::mac::bootstrap_part) {
 	    #- don't do anything if we've got the bootstrap setup
 	    #- otherwise, go ahead and create one somewhere in the drive free space
 	} else {
-	    if (defined $partition_table_mac::freepart_start && $partition_table_mac::freepart_size >= 1) {	        
-		my ($hd) = $partition_table_mac::freepart_device;
-		log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table_mac::freepart_start");
-		$partition_table_mac::bootstrap_part = $partition_table_mac::freepart_part;	
-		log::l("bootstrap now at $partition_table_mac::bootstrap_part");
-		fsedit::add($hd, { start => $partition_table_mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
+	    if (defined $partition_table::mac::freepart_start && $partition_table::mac::freepart_size >= 1) {	        
+		my ($hd) = $partition_table::mac::freepart_device;
+		log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table::mac::freepart_start");
+		$partition_table::mac::bootstrap_part = $partition_table::mac::freepart_part;	
+		log::l("bootstrap now at $partition_table::mac::bootstrap_part");
+		fsedit::add($hd, { start => $partition_table::mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
 		$o->ask_warn('',_("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));

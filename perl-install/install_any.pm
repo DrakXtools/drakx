@@ -18,7 +18,7 @@ use MDK::Common::System;
 use common;
 use run_program;
 use partition_table qw(:types);
-use partition_table_raw;
+use partition_table::raw;
 use devices;
 use fsedit;
 use modules;
@@ -989,7 +989,7 @@ sub getHds {
     my $flags = $o->{partitioning};
 
     my @drives = detect_devices::hds();
-#    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
+#    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table::raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
     my $all_hds = catch_cdie { fsedit::hds(\@drives, $flags) }
@@ -1007,7 +1007,7 @@ sub getHds {
 	goto getHds;
     }
     if (!$::testing) {
-	@$hds = grep { eval { partition_table_raw::test_for_bad_drives($_) }; !$@ } @$hds;
+	@$hds = grep { eval { partition_table::raw::test_for_bad_drives($_) }; !$@ } @$hds;
     }
 
     $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)

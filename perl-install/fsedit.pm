@@ -9,7 +9,7 @@ use vars qw(%suggestions);
 #-######################################################################################
 use common;
 use partition_table qw(:types);
-use partition_table_raw;
+use partition_table::raw;
 use detect_devices;
 use fsedit;
 use devices;
@@ -143,7 +143,7 @@ sub hds {
     foreach (@$drives) {
 	my $file = devices::make($_->{device});
 
-	my $hd = partition_table_raw::get_geometry($file) or log::l("An error occurred while getting the geometry of block device $file: $!"), next;
+	my $hd = partition_table::raw::get_geometry($file) or log::l("An error occurred while getting the geometry of block device $file: $!"), next;
 	add2hash_($hd, $_);
 	$hd->{file} = $file;
 	$hd->{prefix} = $hd->{device};
@@ -153,7 +153,7 @@ sub hds {
 	eval { partition_table::read($hd, $flags->{clearall} || member($_->{device}, @{$flags->{clear} || []})) };
 	if ($@) {
 	    cdie "ask_before_blanking:$@";
-	    partition_table_raw::zero_MBR($hd);
+	    partition_table::raw::zero_MBR($hd);
 	}
 	member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)
 	  foreach partition_table::get_normal_parts($hd);
@@ -164,7 +164,7 @@ sub hds {
 	#- special case for type overloading (eg: reiserfs is 0x183)
 	foreach (grep { isExt2($_) } partition_table::get_normal_parts($hd)) {
 	    my $type = typeOfPart($_->{device});
-	    $_->{type} = $type if $type > 0x100 || $type && $hd->isa('partition_table_gpt');
+	    $_->{type} = $type if $type > 0x100 || $type && $hd->isa('partition_table::gpt');
 	}
 	push @hds, $hd;
     }
@@ -691,7 +691,7 @@ sub rescuept($) {
     }
     close F or die "rescuept failed";
 
-    partition_table_raw::zero_MBR($hd);
+    partition_table::raw::zero_MBR($hd);
     foreach (@hd) {
 	my $b = partition_table::verifyInside($_, $ext);
 	if ($b) {
@@ -726,7 +726,7 @@ sub verifyHds {
     if ($readonly && !$ok) {
 	log::l("using /proc/partitions as diskdrake failed :(");
 	foreach my $hd (@$hds) {
-	    partition_table_raw::zero_MBR($hd);
+	    partition_table::raw::zero_MBR($hd);
 	    $hd->{primary} = { normal => [ grep { $hd->{device} eq $_->{rootDevice} } @parts ] };
 	}
 	$ok = 1;

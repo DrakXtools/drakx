@@ -7,7 +7,7 @@ use vars;
 
 use common;
 use partition_table qw(:types);
-use partition_table_raw;
+use partition_table::raw;
 use detect_devices;
 use install_steps;
 use devices;
@@ -180,7 +180,7 @@ When sure, press Ok.")) or return;
 					    \&partition_table::description, $hds) or return;
 		$o->set_help('takeOverHdConfirm');
 		$o->ask_okcancel('', _("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd))) or return;
-		partition_table_raw::zero_MBR($hd);
+		partition_table::raw::zero_MBR($hd);
 		fsedit::auto_allocate($all_hds);
 		1;
 	    } ];

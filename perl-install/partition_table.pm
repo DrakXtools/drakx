@@ -12,7 +12,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 
 use common;
-use partition_table_raw;
+use partition_table::raw;
 use detect_devices;
 use log;
 
@@ -462,8 +462,8 @@ sub read_one($$) {
 	foreach ('empty', @parttype, 'lvm_PV', 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
 	    eval {
-		require("partition_table_$_.pm");
-		bless $hd, "partition_table_$_";
+		require("partition_table/$_.pm");
+		bless $hd, "partition_table::$_";
 		($pt, $info) = $hd->read($sector);
 		log::l("found a $_ partition table on $hd->{file} at sector $sector");
 	    };
@@ -486,7 +486,7 @@ sub read_one($$) {
 sub read($;$) {
     my ($hd, $clearall) = @_;
     if ($clearall) {
-	partition_table_raw::zero_MBR_and_dirty($hd);
+	partition_table::raw::zero_MBR_and_dirty($hd);
 	return 1;
     }
     my $pt = read_one($hd, 0) or return 0;
@@ -584,7 +584,7 @@ sub write {
     if ($hd->{needKernelReread} && ref($hd->{needKernelReread}) eq 'ARRAY' && $::isStandalone) {
 	#- we've only been adding partitions. Try special add_partition (using BLKPG_ADD_PARTITION)
 	local *F;
-	partition_table_raw::openit($hd, *F) or goto force_reread;
+	partition_table::raw::openit($hd, *F) or goto force_reread;
 
 	foreach (@{$hd->{needKernelReread}}) {
 	    c::add_partition(fileno F, $_->{start}, $_->{size}, $_->{device} =~ /(\d+)$/)

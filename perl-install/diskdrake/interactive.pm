@@ -5,7 +5,7 @@ use strict;
 
 use common;
 use partition_table qw(:types);
-use partition_table_raw;
+use partition_table::raw;
 use detect_devices;
 use run_program;
 use loopback;
@@ -274,7 +274,7 @@ sub Clear_all {
     if (isLVM($hd)) {
 	lvm::lv_delete($hd, $_) foreach @parts
     } else {
-	partition_table_raw::zero_MBR_and_dirty($hd);
+	partition_table::raw::zero_MBR_and_dirty($hd);
     }
 }
 
@@ -488,7 +488,7 @@ sub Delete {
 	fsedit::recompute_loopbacks($all_hds);
     } else {
 	if (arch() =~ /ppc/) {
-	    undef $partition_table_mac::bootstrap_part if (isAppleBootstrap($part) && ($part->{device} = $partition_table_mac::bootstrap_part));
+	    undef $partition_table::mac::bootstrap_part if (isAppleBootstrap($part) && ($part->{device} = $partition_table::mac::bootstrap_part));
 	}
 	partition_table::remove($hd, $part);
 	warn_if_renumbered($in, $hd);
@@ -624,7 +624,7 @@ sub Resize {
 	}
 	#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
 	#- this save at least a cylinder (less than 8Mb).
-	$min += partition_table_raw::cylinder_size($hd);
+	$min += partition_table::raw::cylinder_size($hd);
 	$min >= $max and return $in->ask_warn('', _("This partition is not resizeable"));
 
 	#- for these, we have tools to resize partition table

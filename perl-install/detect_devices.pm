@@ -160,8 +160,8 @@ sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]->{media_type} eq 'f
 
 sub isFloppyOrHD {
     my ($dev) = @_;
-    require partition_table_raw;
-    my $geom = partition_table_raw::get_geometry(devices::make($dev));
+    require partition_table::raw;
+    my $geom = partition_table::raw::get_geometry(devices::make($dev));
     $geom->{totalsectors} < 10 << 11 ? 'fd' : 'hd';
 }
 

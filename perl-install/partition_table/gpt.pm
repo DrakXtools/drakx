@@ -1,14 +1,14 @@
-package partition_table_gpt; # $Id$
+package partition_table::gpt; # $Id$
 
 use diagnostics;
 use strict;
 use vars qw(@ISA);
 
-@ISA = qw(partition_table_raw);
+@ISA = qw(partition_table::raw);
 
 use common;
-use partition_table_raw;
-use partition_table_dos;
+use partition_table::raw;
+use partition_table::dos;
 use partition_table;
 use c;
 
@@ -142,13 +142,13 @@ sub read {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    my $l = partition_table_dos::read($hd, $sector);
+    my $l = partition_table::dos::read($hd, $sector);
     my @l = grep { $_->{size} && $_->{type} && !partition_table::isExtended($_) } @$l;
     @l == 1 or die "bad PMBR";
     $l[0]{type} == 0xee or die "bad PMBR";
     my $myLBA = $l[0]{start};
 
-    local *F; partition_table_raw::openit($hd, *F) or die "failed to open device";
+    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
     my $info1 = eval { read_header($myLBA, *F) };
     my $info2 = eval { read_header($info1->{alternateLBA} || $l[0]{start} + $l[0]{size} - 1, *F) }; #- what about using $hd->{totalsectors} ???
     my $info = $info1 || { %$info2, myLBA => $info2->{alternateLBA}, alternateLBA => $info2->{myLBA}, partitionEntriesLBA => $info2->{alternateLBA} + 1 } or die;
@@ -185,13 +185,13 @@ sub write {
 
     {
 	# write the PMBR
-	my $pmbr = partition_table_dos::clear_raw();
+	my $pmbr = partition_table::dos::clear_raw();
 	$pmbr->{raw}[0] = { type => 0xee, local_start => $info->{myLBA}, size => $info->{alternateLBA} - $info->{myLBA} + 1 };
-	partition_table_dos::write($hd, $sector, $pmbr->{raw});
+	partition_table::dos::write($hd, $sector, $pmbr->{raw});
     }
 
     local *F;
-    partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+    partition_table::raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
     
     c::lseek_sector(fileno(F), $info->{myLBA}, 0) or return 0;
     #- pad with 0's

@@ -15,7 +15,7 @@ use fsedit;
 use devices;
 use loopback;
 use detect_devices;
-use partition_table_raw;
+use partition_table::raw;
 use run_program;
 use modules;
 
@@ -126,7 +126,7 @@ sub read($$) {
 sub suggest_onmbr {
     my ($hds) = @_;
     
-    my $type = partition_table_raw::typeOfMBR($hds->[0]{device});
+    my $type = partition_table::raw::typeOfMBR($hds->[0]{device});
     !$type || member($type, qw(dos dummy lilo grub empty)), !$type;
 }
 
@@ -406,11 +406,11 @@ wait %d seconds for default boot.
 	}
     } elsif (arch() =~ /ppc/) {
 	#- if we identified a MacOS partition earlier - add it
-	if (defined $partition_table_mac::macos_part) {
+	if (defined $partition_table::mac::macos_part) {
 	    add_entry($lilo->{entries},
 		      {
 		       label => "macos",
-		       kernel_or_dev => $partition_table_mac::macos_part
+		       kernel_or_dev => $partition_table::mac::macos_part
 		      });
 	}
     } elsif (arch() !~ /ia64/) {

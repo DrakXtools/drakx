@@ -7,7 +7,7 @@ use common;
 use resize_fat::main;
 use my_gtk qw(:helpers :wrappers :ask);
 use partition_table qw(:types);
-use partition_table_raw;
+use partition_table::raw;
 use detect_devices;
 use diskdrake::interactive;
 use run_program;

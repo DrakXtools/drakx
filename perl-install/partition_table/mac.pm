@@ -1,13 +1,13 @@
-package partition_table_mac; # $Id$
+package partition_table::mac; # $Id$
 
 use diagnostics;
 #use strict;   - fixed other PPC code to comply, but program bails on empty partition table - sbenedict
 use vars qw(@ISA $freepart_device $bootstrap_part $freepart_start $freepart_size $freepart_part $macos_part);
 
-@ISA = qw(partition_table_raw);
+@ISA = qw(partition_table::raw);
 
 use common;
-use partition_table_raw;
+use partition_table::raw;
 use partition_table;
 use c;
 
@@ -100,7 +100,7 @@ sub read($$) {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    local *F; partition_table_raw::openit($hd, *F) or die "failed to open device";
+    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
     c::lseek_sector(fileno(F), $sector, 0) or die "reading of partition in sector $sector failed";
 
     sysread F, $tmp, psizeof($bz_format) or die "error while reading bz \(Block Zero\) in sector $sector";
@@ -203,7 +203,7 @@ sub write($$$;$) {
 	my $file = "/tmp/partition_table_$hd->{device}";
 	open F, ">$file" or die "error opening test file $file";
     } else {
-	partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+	partition_table::raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
         c::lseek_sector(fileno(F), $sector, 0) or return 0;
     }
 
@@ -301,7 +301,7 @@ sub write($$$;$) {
                 $_->{pFlags} = 0x33;
 		$_->{isBoot} = 1;
 		log::l("writing a bootstrap at /dev/$_->{device}");
-		$install_steps_interactive::new_bootstrap = 1 if !(defined $partition_table_mac::bootstrap_part);
+		$install_steps_interactive::new_bootstrap = 1 if !(defined $partition_table::mac::bootstrap_part);
 		$bootstrap_part = "/dev/" . $_->{device};
             } elsif ($_->{type} == 0x82) {
                 $_->{pType} = "Apple_UNIX_SVR2";

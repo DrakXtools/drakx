@@ -1,13 +1,13 @@
-package partition_table_dos; # $Id$
+package partition_table::dos; # $Id$
 
 use diagnostics;
 use strict;
 use vars qw(@ISA);
 
-@ISA = qw(partition_table_raw);
+@ISA = qw(partition_table::raw);
 
 use common;
-use partition_table_raw;
+use partition_table::raw;
 use partition_table;
 use c;
 
@@ -52,7 +52,7 @@ sub read {
     my ($hd, $sector) = @_;
     my $tmp;
 
-    local *F; partition_table_raw::openit($hd, *F) or die "failed to open device";
+    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
     c::lseek_sector(fileno(F), $sector, $offset) or die "reading of partition in sector $sector failed";
 
     my @pt = map {
@@ -79,7 +79,7 @@ sub write($$$;$) {
 	my $file = "/tmp/partition_table_$hd->{device}";
 	open F, ">$file" or die "error opening test file $file";
     } else {
-	partition_table_raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
+	partition_table::raw::openit($hd, *F, 2) or die "error opening device $hd->{device} for writing";
         c::lseek_sector(fileno(F), $sector, $offset) or return 0;
     }
 

@@ -157,7 +157,7 @@ sub doPartitionDisksAfter {
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) {
-	die "Need bootstrap partition to boot system!" if !(defined $partition_table_mac::bootstrap_part);
+	die "Need bootstrap partition to boot system!" if !(defined $partition_table::mac::bootstrap_part);
     }
     
     if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{all_hds})) {

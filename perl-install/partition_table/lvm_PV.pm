@@ -1,11 +1,11 @@
-package partition_table_lvm; # $Id$
+package partition_table::lvm; # $Id$
 
 use diagnostics;
 use strict;
 
-our @ISA = qw(partition_table_raw);
+our @ISA = qw(partition_table::raw);
 
-use partition_table_raw;
+use partition_table::raw;
 use c;
 
 my $magic = "HM\1\0";
@@ -23,7 +23,7 @@ my $offset = 0;
 sub read {
     my ($hd, $sector) = @_;
 
-    local *F; partition_table_raw::openit($hd, *F) or die "failed to open device";
+    local *F; partition_table::raw::openit($hd, *F) or die "failed to open device";
     c::lseek_sector(fileno(F), $sector, $offset) or die "reading of partition in sector $sector failed";
 
     sysread F, my $tmp, length $magic or die "error reading magic number on disk $hd->{file}";
