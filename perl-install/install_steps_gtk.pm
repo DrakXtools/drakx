@@ -255,7 +255,12 @@ sub doPartitionDisks($$) {
 	my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
 	my $min_win = $resize_fat->min_size;
 	if (!$@ && $part->{size} > $min_linux + $min_freewin + $min_win && $o->ask_okcancel('',
-_("TODO"))) {
+_("WARNING!
+
+DrakX now needs to resize your Windows partition. Be careful: this operation is
+dangerous. If you have not already done so, you should first run scandisk (and
+optionally run defrag) on this partition and backup your data.
+When sure, press Ok."))) {
 	    my $hd = $hds->[0];
 	    my $oldsize = $part->{size};
 	    $hd->{isDirty} = $hd->{needKernelReread} = 1;
