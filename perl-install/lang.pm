@@ -607,6 +607,7 @@ sub read {
     my $file = $prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n');
     my %h = getVarsFromSh("$prefix$file");
     my $lang = $h{LC_MESSAGES} || 'en_US';
+    $lang = bestMatchSentence($lang, list()) if !exists $languages{$lang};
     my $langs = $user_only ? () :
       cat_("$prefix/etc/rpm/macros") =~ /%_install_langs (.*)/ ? unpack_langs($1) : { $lang => 1 };
     $lang, $langs;
