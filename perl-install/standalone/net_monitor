@@ -130,7 +130,7 @@ $gca->set_foreground($colora);
 $statusbar->push(1, N("Wait please, testing your connection..."));
 $window1->{rwindow}->show_all;
 
-my $time_tag = Glib::Timeout->add(1000, \&rescan);
+Glib::Timeout->add(1000, \&rescan);
 my $time_tag2 = Glib::Timeout->add(1000, \&update);
 
 update();
@@ -404,7 +404,6 @@ sub update() {
 	    $darea->{$intf}->signal_connect(motion_notify_event => sub { 
                                     my (undef, $e) = @_;
                                     my $x = $e->x - 50;
-                                    my $y = $e->y;
                                     my $received    = $x >= 0 ? $monitor->{$intf}{stack_r}[$x] : 0;
                                     my $transmitted = $x >= 0 ? $monitor->{$intf}{stack_t}[$x] : 0;
                                     $measure_r->set_label(formatXiB($received));
@@ -492,7 +491,7 @@ sub draw_monitor {
 	$step++;
     }
     $step = $left_border - 1;
-    ($av1, $av2) = undef;
+    $av1 = $av2 = undef;
     foreach (@{$o->{stack_ra}}) {
 	if ($_ != -1) {
 	    if (!defined $av1) { $av1 = $_ } else { defined $av2 or $av2 = $_ }
