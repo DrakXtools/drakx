@@ -283,7 +283,7 @@ GridHeight=70
 
     #- move some file after an upgrade that may be seriously annoying.
     if ($o->{isUpgrade}) {
-	log::l("moving previous desktop files that have been updated to \$HOME/tmp of each user");
+	log::l("moving previous desktop files that have been updated to Trash of each user");
 	install_any::move_desktop_file($o->{prefix});
     }
 }

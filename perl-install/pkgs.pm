@@ -412,11 +412,11 @@ sub selectPackagesToUpgrade($$$;$$) {
 			 if ($p) {
 			     eval { getHeader($p) }; $@ && log::l("cannot get the header for package $p->{name}");
 			     my $version_cmp = versionCompare(c::headerGetEntry($header, 'version'), $p->{version});
-			     my $version_rel_cmp = $p->{header} ? c::rpmVersionCompare($header, $p->{header}) :
+			     my $version_rel_test = $p->{header} ? c::rpmVersionCompare($header, $p->{header}) >= 0 :
 			       ($version_cmp > 0 ||
 				$version_cmp == 0 &&
-				versionCompare(c::headerGetEntry($header, 'release'), $p->{release}));
-			     if ($version_rel_cmp >= 0) {
+				versionCompare(c::headerGetEntry($header, 'release'), $p->{release}) >= 0);
+			     if ($version_rel_test) {
 				 if ($otherPackage && $version_cmp <= 0) {
 				     $toRemove{$otherPackage} = 1; #- force removing for theses other packages, select our.
 				 } else {
@@ -600,7 +600,7 @@ sub install($$$) {
 	  };
     c::rpmtransSetScriptFd($trans, fileno LOG);
 
-    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
+    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     my $callbackOpen = sub {
 	my $f = (my $p = $packages{$_[0]})->{file};
@@ -651,7 +651,7 @@ sub remove($$) {
 	c::rpmtransRemovePackages($db, $trans, $p) if $p !~ /kernel/;
     }
 
-    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
+    eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     my $callbackOpen = sub { log::l("trying to open file from $_[0] which should not happen"); };
     my $callbackClose = sub { log::l("trying to close file from $_[0] which should not happen"); };

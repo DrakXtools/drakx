@@ -663,22 +663,24 @@ sub kdeicons_postinstall($) {
 
 sub move_desktop_file($) {
     my ($prefix) = @_;
-    my @toMove = qw(doc.kdelnk news.kdelnk updates.kdelnk home.kdelnk printer.kdelnk floppy.kdelnk cdrom.kdelnk);
+    my @toMove = qw(doc.kdelnk news.kdelnk updates.kdelnk home.kdelnk printer.kdelnk floppy.kdelnk cdrom.kdelnk FLOPPY.kdelnk CDROM.kdelnk);
 
     foreach (list_skels()) {
 	my $dir = "$prefix$_";
 	if (-d "$dir/Desktop") {
-	    my @toSubst = glob_("$dir/Desktop/.*\.rpmorig");
+	    my @toSubst = glob_("$dir/Desktop/*rpmorig");
 
 	    push @toSubst, "$dir/Desktop/$_" foreach @toMove;
 
 	    #- remove any existing save in Trash of each user and
 	    #- move appropriate file there after an upgrade.
 	    foreach (@toSubst) {
-		my $basename = basename($_);
+		if (-e $_) {
+		    my $basename = basename($_);
 
-		unlink "$dir/Desktop/Trash/$basename";
-		rename $_, "$dir/Desktop/Trash/$basename";
+		    unlink "$dir/Desktop/Trash/$basename";
+		    rename $_, "$dir/Desktop/Trash/$basename";
+		}
 	    }
 	}
     }
