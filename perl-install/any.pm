@@ -291,21 +291,14 @@ sub setupBootloader__entries {
 { label => N("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 { label => N("Append"), val => \$e->{append} },
   if_(arch() !~ /ppc|ia64/,
-{ label => N("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert },
+{ label => N("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert, advanced => 1 },
 ),
-{ label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/initrd*") ], not_edit => 0 },
-{ label => N("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
+{ label => N("Initrd"), val => \$e->{initrd}, list => [ map { s/$::prefix//; $_ } glob_("$::prefix/boot/initrd*") ], not_edit => 0, advanced => 1 },
 	    );
-	    @l = @l[0..2] unless $::expert;
 	} else {
 	    @l = ( 
 { label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab, detect_devices::floppies_dev() ], not_edit => !$::expert },
-if_(arch() !~ /sparc|ppc|ia64/,
-{ label => N("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @{$all_hds->{hds}} ], not_edit => !$::expert },
-{ label => N("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
-),
 	    );
-	    @l = $l[0] unless $::expert;
 	}
 	if (arch() !~ /ppc/) {
 	    @l = (
