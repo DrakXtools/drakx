@@ -398,7 +398,7 @@ sub getSerialModem {
     eval { modules::load($serdev) };
 
     probeSerialDevices();
-    foreach ('modem', map { "ttyS$_" } (0..7)) {
+    foreach (map { "ttyS$_" } (0..7)) {
 	next if $mouse->{device} =~ /$_/;
 	next unless -e "/dev/$_";
 	hasModem("/dev/$_") and $modem->{device} = $_, last;
