@@ -788,9 +788,10 @@ sub advanced_what_entire_sys{
 sub advanced_what{
     my $box_what;
     
-    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("user");
-    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("net_u");
-    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("bootloader");
+    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic82-users-40");
+    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("ic82-others-40");
+    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("ic82-system-40");
+    my ($pix_sysp_map, $pix_sysp_mask) = gtkcreate_png("ic82-systemeplus-40");
 
     gtkpack($advanced_box,
 	    $box_what = gtkpack_(new Gtk::HBox(0, 15),
@@ -826,7 +827,7 @@ sub advanced_what{
 				    new Gtk::HBox(0, 5)
 				    ));
     $button_what_all->add(gtkpack(new Gtk::HBox(0,10),
-				    new Gtk::Pixmap($pix_other_map, $pix_other_mask),
+				    new Gtk::Pixmap($pix_sysp_map, $pix_sysp_mask),
 				    new Gtk::Label(_(" A Entire System  ")),
 				    new Gtk::HBox(0, 5)
 				    ));
@@ -1085,7 +1086,7 @@ sub advanced_where_hd {
     my $box_where_hd;
     my $button;
     my $adj = new Gtk::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
-    my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("filedialog");
+    my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("ic82-dossier-32");
     
     gtkpack($advanced_box,
 	    $box_where_hd = gtkpack_(new Gtk::VBox(0, 6),
@@ -1134,9 +1135,10 @@ sub advanced_where_hd {
 
 sub advanced_where{
     my $box_where;
-    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("net");
-    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom");
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("hd");
+    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("ic82-network-40");
+    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("ic82-CD-40");
+    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("ic82-discdurwhat-40");
+    my ($pix_tape_map, $pix_tape_mask) = gtkcreate_png("ic82-tape-40");
 
     gtkpack($advanced_box,
 	    $box_where = gtkpack_(new Gtk::HBox(0, 15),
@@ -1172,7 +1174,7 @@ sub advanced_where{
 				  new Gtk::HBox(0, 5)
 				  ));
     $button_where_tape->add(gtkpack(new Gtk::HBox(0,10),
-				  new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
+				  new Gtk::Pixmap($pix_tape_map, $pix_tape_mask),
 				  new Gtk::Label(_(" Tape ")),
 				  new Gtk::HBox(0, 5)
 				  ));
@@ -1188,7 +1190,7 @@ sub advanced_when{
     my $check_where_cd_daemon;
     my $check_where_hd_daemon;
     my $check_where_net_daemon;
-    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("backup_time");
+    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("ic82-when-40");
     my $combo_when_space = new Gtk::Combo();
     $combo_when_space->set_popdown_strings (_("hourly"),_("daily"),_("weekly"),_("monthly"));    
 
@@ -1241,7 +1243,7 @@ sub advanced_when{
 
 sub advanced_options{
     my $box_options;
-    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("backup_options");
+    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("ic82-moreoption-40");
     
     gtkpack($advanced_box,
 	    $box_options = gtkpack_(new Gtk::VBox(0, 15),
@@ -1271,10 +1273,10 @@ sub advanced_options{
 
 sub advanced_box{
     my $box_adv;
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("backup_hd");
-    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("backup_time");
-    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("backup_net");
-    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("backup_options");
+    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("ic82-discdurwhat-40");
+    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("ic82-when-40");
+    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("ic82-where-40");
+    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("ic82-moreoption-40");
 
     gtkpack($advanced_box,
 	    $box_adv = gtkpack_(new Gtk::HBox(0, 15),
