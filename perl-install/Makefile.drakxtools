@@ -21,7 +21,7 @@ $(DIRS):
 	$(MAKE) -C $@
 
 install:
-	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
+	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
 	install -d $(LIBDEST)/sbus_probing
 	install $(STANDALONEPMS) $(SBINDEST)
 	mv -f $(SBINDEST)/lspcidrake $(BINDEST)

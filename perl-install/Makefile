@@ -16,7 +16,7 @@ tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/serial_probe drakxtools	
 	cd ../drakxtools ; rm -rf install* pkgs.pm ftp.pm t.pm */CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfI drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config share/MonitorsDB share/Cards+ share/CardsNames Newt c ddcprobe serial_probe share/po pci_probing sbus_probing resize_fat share/diskdrake.rc share/isdndb.net $(STANDALONEPMS) icons *.pm)
+	cd .. ; tar cfI drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config share/MonitorsDB share/Cards+ share/CardsNames Newt c ddcprobe serial_probe share/po pci_probing sbus_probing resize_fat share/diskdrake.rc share/isdn_db.txt $(STANDALONEPMS) icons *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
