@@ -3,11 +3,15 @@ FNAME=$(NAME)/drakxtools_http
 PREFIX=
 DATADIR=$(PREFIX)/usr/share
 
-all:
+all: index.html
+
+index.html: index.html.pl
+	perl $^ > $@
 
 install:	
 	install -D miniserv.init $(PREFIX)/etc/init.d/drakxtools_http
-	install -D -m 644 miniserv.conf $(PREFIX)/etc/drakxtools_http.conf
+	install -D -m 644 authorised_progs $(PREFIX)/etc/drakxtools_http/authorised_progs
+	install -D -m 644 miniserv.conf $(PREFIX)/etc/drakxtools_http/conf
 	install -D -m 644 miniserv.pam $(PREFIX)/etc/pam.d/miniserv
 	install -D -m 644 miniserv.logrotate $(PREFIX)/etc/logrotate.d/drakxtools_http
 

@@ -62,6 +62,9 @@ sub force_exit_dead_prog {
 sub spawn_server {
     my ($prog) = @_;
 
+    my @authorised_progs = map { chomp($_) } cat_('/etc/drakxtools_http/authorised_progs');
+    member($prog, @authorised_progs) or error("You tried to call a non-authorised program");
+
     fork and return;
 
     $ENV{INTERACTIVE_HTTP} = $script_name;

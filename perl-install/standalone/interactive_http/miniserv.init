@@ -8,7 +8,7 @@ server=/usr/share/libDrakX/$name/miniserv.pl
 case "$1" in
 'start')
 	echo -n "Starting $name: "
-	perl $server /etc/$name.conf
+	perl $server /etc/$name/conf
 	touch /var/lock/subsys/drakxtools_http
 	echo $name
 	;;
