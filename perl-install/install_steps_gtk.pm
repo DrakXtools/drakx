@@ -328,7 +328,7 @@ sub choosePackagesTree {
 		$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
 		foreach my $p (values %{$packages->{names}}) {
 		    my ($rate, @flags) = pkgs::packageRateRFlags($p);
-		    next if !($rate && !grep { !grep { /^!(.*)/ ? !$fl{$1} : $fl{$_} } split('\|\|') } @flags);
+		    next if !($rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags);
 		    $rate >= 3 ?
 		      push(@firstchoice, pkgs::packageName($p)) :
 		      push(@others,      pkgs::packageName($p));
