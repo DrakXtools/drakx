@@ -357,7 +357,7 @@ sub make_menuentry {
     } elsif ($connect =~ m!^file:(.+)$!) {
 	$connection = N(", printing to %s", $1);
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
-	$connection = N(" on LPD server \"%s\", printer \"%s\"", $2, $1);
+	$connection = N(" on LPD server \"%s\", printer \"%s\"", $1, $2);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
 	$connection = N(", TCP/IP host \"%s\", port %s", $1, $2);
     } elsif ($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$! ||
