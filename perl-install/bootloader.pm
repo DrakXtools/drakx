@@ -561,7 +561,7 @@ wait %d seconds for default boot.
 					label => 'restore',
 					kernel_or_dev => "/boot/restore/vmlinuz",
 					initrd => "/boot/restore/all.rdz",
-					append => $cmdline,
+					append => "$cmdline recovery", #- the restore entry is a recovery entry
 					if_($vga, vga => $vga),
 				       });
 	    }
