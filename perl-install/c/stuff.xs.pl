@@ -572,7 +572,7 @@ standard_charset()
 ';
 
 $ENV{C_RPM} and print '
-char *
+const char *
 rpmErrorString()
 
 void
