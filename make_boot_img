@@ -195,7 +195,7 @@ sub initrd {
 	_ "$sudo cp -f $modz/${type}_modules.mar $mnt/modules/modules$I.mar";
     }
     _ "$sudo cp -f $modz/modules.dep $mnt/modules/";
-    _ "$sudo cp -f /sbin/sash $mnt/tmp/sh" if $ENV{DEBUGSTAGE1};
+    _ "$sudo cp -f /sbin/sash $mnt/tmp/sh" if $type eq 'all' && $ENV{DEBUGSTAGE1};
     _ "$sudo umount $mnt";
 
 # Workaround for vfat-loop bug (quite touchy)
