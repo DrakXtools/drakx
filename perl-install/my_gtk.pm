@@ -56,9 +56,29 @@ sub new {
 	    $::WizardTable = new Gtk::Table(2, 2, 0);
 	    $::WizardWindow->add($::WizardTable);
 	    my $draw1 = new Gtk::DrawingArea;
-	    $draw1->set_usize(400,100);
+	    $draw1->set_usize(540,100);
 	    my $draw2 = new Gtk::DrawingArea;
-	    $draw2->set_usize(100,200);
+	    $draw2->set_usize(100,300);
+	    my ($im_up, $mask_up) = gtkcreate_png($::Wizard_pix_up || "wiz_default_up.png");
+	    my ($y1, $x1) = $im_up->get_size;
+	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
+	    my ($y2, $x2) = $im_left->get_size;
+	    $draw1->signal_connect(expose_event => sub {
+				       my $i;
+				       for ($i=0;$i<(540/$y2);$i++) {
+					   $draw1->window->draw_pixmap ($draw1->style->bg_gc('normal'),
+									$im_up, 0, 0, 0, $y1*$i,
+									$x1 , $y1 );
+				       }
+				   });
+	    $draw2->signal_connect(expose_event => sub {
+				       my $i;
+				       for ($i=0;$i<(300/$y2);$i++) {
+					   $draw2->window->draw_pixmap ($draw2->style->bg_gc('normal'),
+									$im_left, 0, 0, 0, $y2*$i,
+									$x2 , $y2 );
+				       }
+				   });
 	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
 	    $::WizardWindow->show_all;
