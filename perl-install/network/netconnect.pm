@@ -473,7 +473,7 @@ killall pppd
                     name => N("Dialup: IP parameters"),
                     data => sub {
                         [
-                         { label => N("IP address"), type => "list", val => \$modem->{auto_ip}, list => [ N("Automatic"), N("Manual") ] },
+                         { label => N("IP parameters"), type => "list", val => \$modem->{auto_ip}, list => [ N("Automatic"), N("Manual") ] },
                          { label => N("IP address"), val => \$modem->{IPAddr}, disabled => $modem_dyn_ip },
                          { label => N("Subnet mask"), val => \$modem->{SubnetMask}, disabled => $modem_dyn_ip },
                         ];
