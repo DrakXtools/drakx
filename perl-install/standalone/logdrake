@@ -41,14 +41,18 @@ use Data::Dumper;
 #         (This version is now UTF8 compliant - Sg 2001-08-18)
 #-------------------------------------------------------------
 
-sub _ {
-    my $s = shift @_; my $t = translate($s);
-    sprintf $t, @_;
-}
+{
+    no warnings;
+    sub _ {
+	my $s = shift @_; my $t = translate($s);
+	sprintf $t, @_;
+    }
 
-sub translate {
-    my ($s) = @_;
-    $s ? c::dgettext('drakconf', $s) : '';
+    no warnings;
+    sub translate {
+	my ($s) = @_;
+	$s ? c::dgettext('drakconf', $s) : '';
+    }
 }
 
 $::isInstall and die "Not supported during install.\n";
@@ -173,12 +177,13 @@ my %files = (
 );
 
 my $yy=gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("search")) , clicked => \&search),0);
+my $log_text = new Gtk::Text(undef, undef);
 my $refcount_search;
 #### far from window
 gtkadd($window,
        gtkpack_(new Gtk::VBox(0,5),
-		0, _("A tool to monitor your logs"),
-		if_ (!$::isFile, 0, gtkadd(new Gtk::Frame(_("Settings")),
+		if_(!$::isExplain, 0, _("A tool to monitor your logs")),
+		if_(!$::isFile, 0, gtkadd(new Gtk::Frame(_("Settings")),
 					   gtkpack__(new Gtk::VBox(0,2),
 						     gtkpack__(new Gtk::VBox(0,2),
 							       # _("Show lines"),
@@ -202,17 +207,17 @@ gtkadd($window,
 						     $yy,
 						    )
 					  )
-		    ),
-		1, gtkadd(new Gtk::Frame(_("Content of the file")),
-			  createScrolledWindow(my $log_text = new Gtk::Text(undef, undef))
-			 ),
-		0, gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
+		   ),
+		!$::isExplain ? (1, gtkadd(new Gtk::Frame(_("Content of the file")),
+					 createScrolledWindow($log_text)
+					)) : (1, $log_text),
+		if_(!$::isExplain, 0, gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
 			   if_ (!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => \&alert_config)),
 			   gtksignal_connect(new Gtk::Button (_("Save")), clicked => \&save),
 			   gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => \&quit)
 			  )
-       
-	       )
+		   )
+       	       )
        
       );
 
@@ -220,8 +225,8 @@ $::isFile and gtkset_usize($log_text,400,500);
 $window->realize;
 $window->show_all();
 search() if ($::isFile);
-Gtk->main_iteration while Gtk->events_pending;
-$::isEmbedded and kill 'USR2', $::CCPID;
+#Gtk->main_iteration while Gtk->events_pending;
+#$::isEmbedded and kill 'USR2', $::CCPID;
 Gtk->main;
 
 sub quit {
@@ -276,7 +281,7 @@ sub parse_file {
       while (@all) {
 	  $t = pop @all;
 	  next if ($t =~ /logdrake/);
-	  last if !($t =~ /$Explain/);
+	  last if !($t =~ /$::Explain/);
 	  push @t, $t;
       }
       @all=reverse @t;
@@ -511,6 +516,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.10  2002/02/05 11:16:28  damien
+# correction for mcc.
+#
 # Revision 1.9  2002/02/04 14:02:14  damien
 # corrected typo. Yvounet, check your code!!
 #
