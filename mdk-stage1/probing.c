@@ -160,7 +160,7 @@ static void probe_that_type(enum driver_type type)
  
 			for (i = 0; i < len; i++) {
 				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
-					log_message("PCI: device %x %x is \"%s\" (%s)", vendor, device, pcidb[i].name, pcidb[i].module);
+					log_message("PCI: device %04x %04x is \"%s\" (%s)", vendor, device, pcidb[i].name, pcidb[i].module);
 #ifndef DISABLE_MEDIAS
 					if (type == SCSI_ADAPTERS) {
 						stg1_info_message("About to load driver for SCSI adapter:\n \n%s", pcidb[i].name);
