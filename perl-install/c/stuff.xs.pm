@@ -478,8 +478,6 @@ int
 prom_getbool(key)
   char *key
 
-
-
 void
 initSilo()
 
@@ -497,9 +495,7 @@ void
 setPromVars(linuxAlias, bootDevice)
   char *linuxAlias
   char *bootDevice
-';
 
-$ENV{C_RPM} and print '
 char *
 iconv(s, from_charset, to_charset)
   char *s
@@ -531,6 +527,9 @@ standard_charset()
   OUTPUT:
   RETVAL
 
+';
+
+$ENV{C_RPM} and print '
 int
 rpmReadConfigFiles()
   CODE:
