@@ -1,0 +1,71 @@
+#!/bin/bash
+
+ok=1
+
+boot_loop=loop0
+main_loop=loop3
+
+while [ -n "$1" ]; do
+    case "$1" in
+	--boot-loop)
+	    boot_loop="$1"
+            shift
+	    shift
+	;;
+	--main-loop)
+	    main_loop="$2"
+            shift
+	    shift
+	;;
+	--totem-pid)
+            totem_pid="$2"
+            shift
+	    shift
+	;;
+	*)
+            ok=''
+	    shift
+    esac
+done
+
+if [ -z "$totem_pid" -o -z "$ok" ]; then
+    printf "Usage: mdk_behind_totem [--boot-loop <loop>] [--main-loop <loop>] --totem-pid <pid>\n"
+    exit 1
+fi
+
+exec 2> /tmp/mdk_behind_totem.log
+
+trap 'umount_cd' USR1
+
+umount_cd() {
+    echo umount_cd
+    busy-files | grep /image/
+    busy-files | grep /image_boot/
+
+    umount /image_boot
+    losetup -d /dev/$boot_loop
+
+    ln -sf /image_always/lib /
+    umount /image
+    /image_always/sbin/losetup -d /dev/$main_loop
+}
+
+mount_cd() {
+    echo mount_cd
+    /image_always/sbin/losetup -r -e gz /image_raw/live_tree.clp /dev/$main_loop
+    /image_always/bin/mount /dev/$main_loop /image
+
+    losetup -r -e gz /image_raw/live_tree_boot.clp /dev/$boot_loop
+    mount /dev/$boot_loop /image_boot
+
+    ln -sf /image/lib /
+
+    mdk_move_loop to_cdrom always totem
+}
+
+while [ -e "/proc/$totem_pid" ]; do
+    echo "waiting..."
+    sleep 1
+done
+
+mount_cd

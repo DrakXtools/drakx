@@ -53,7 +53,7 @@ install: build
 
 	sudo install -m 440 tree/sudoers $(DEST_LIVETREE)/etc
 	sudo install -m 644 tree/mdk_move_boot_loop.desktop $(DEST_LIVETREE)/usr/share/autostart
-	sudo install tree/mdk_move_loop $(DEST_LIVETREE)/usr/bin
+	sudo install tree/{mdk_move_loop,mdk_totem,mdk_behind_totem} $(DEST_LIVETREE)/usr/bin
 	sudo install -m 644 tree/kdedrc $(DEST_LIVETREE)/usr/share/config
 
 	grep ChangeLog $(INSTALL)/CVS/Entries > /tmp/version
