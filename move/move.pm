@@ -150,6 +150,7 @@ sub init {
     }
 
     #- free up stage1 memory
+    eval { fs::umount('/stage1/proc/bus/usb') };
     fs::umount($_) foreach qw(/stage1/proc /stage1);
 
     #- devfsd needed for devices accessed by old names
