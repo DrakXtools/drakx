@@ -85,7 +85,7 @@ sub detect {
 sub pre_func {
     my ($text) = @_;
     $::Wizard_no_previous=1;
-    if ($in->isa('interactive_gtk')) {
+    if ($in->isa('interactive_gtk') && $::isStandalone) {
 	$::Wizard_splash=1;
 	require my_gtk;
 	my_gtk->import(qw(:wrappers));
@@ -93,7 +93,7 @@ sub pre_func {
 	gtkadd($W->{window},
 	       gtkpack_(new Gtk::VBox(0, 0),
 			1, write_on_pixmap(gtkpng ("draknet_step"),
-					   20,190,
+					   20,200,
 					   _("We are now going to configure the %s connection.",_($text)),
 					   _("Press next to continue."),
 					  ),
@@ -104,7 +104,7 @@ sub pre_func {
 	$::Wizard_splash=0;
     } else {
 	#- for i18n : %s is the type of connection of the list: (modem, isdn, adsl, cable, local network);
-	$in->ask_okcancel(_("Network Configuration Wizard"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress next to begin.",_($_[0])), 1);
+	$in->ask_okcancel(_("Network Configuration Wizard"), _("\n\n\nWe are now going to configure the %s connection.\n\n\nPress OK to continue.",_($_[0])), 1);
     }
     undef $::Wizard_no_previous;
 }
