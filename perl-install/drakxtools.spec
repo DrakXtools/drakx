@@ -328,6 +328,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Thu Aug 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.14mdk
+- fix ddcprobe for other archictectures
 - drakconnect: restart network for non ethernet adsl devices (blino)
 - harddrake service:
   o add --force parameter (#9613)
