@@ -114,7 +114,7 @@ sub conf_network_card_backend {
     $interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
     
     # FIXME: this is wrong regarding some wireless interfaces or/and if user play if ifname(1):
-    $netc->{NET_DEVICE} = $interface; #- one consider that there is only ONE Internet connection device..
+    $netc->{$_} = $interface foreach qw(NET_DEVICE NET_INTERFACE); #- one consider that there is only ONE Internet connection device..
     
     @{$intf->{$interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $o_netadr, 'yes');
     
