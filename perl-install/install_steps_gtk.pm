@@ -107,7 +107,7 @@ sub new($$) {
             require move;
             require run_program;
             move::automatic_xconf($o);
-            run_program::rooted('', '/sbin/service', 'xfs', 'start');
+            run_program::run('/sbin/service', 'xfs', 'start');
             @servers = qw(X);
 	}
 
