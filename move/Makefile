@@ -35,6 +35,9 @@ iso: build install live_tree_boot big_clps only_iso
 build: stage1 xwait runlevel_set
 	$(MAKE) -C ../perl-install mo_files
 
+data/isolinux-graphic.bmp.parameters: data/isolinux-graphic.bmp
+	perl -I $(INSTALL) $(INSTALL)/standalone/draksplash2 --kernel isolinux/vmlinuz --initrd isolinux/all.rdz $<
+
 data/i18n_en.list:
 	cd data ; ./make_i18n_list $(DEST_LIVETREE)
 
