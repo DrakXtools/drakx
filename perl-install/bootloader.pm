@@ -148,19 +148,22 @@ sub same_entries {
 sub add_entry {
     my ($bootloader, $v) = @_;
 
+    my $to_add = $v;
     foreach my $label ($v->{label}, map { 'old' . $_ . '_' . $v->{label} } ('', 2..10)) {
 	my $conflicting = get_label($label, $bootloader);
-	if ($conflicting && same_entries($conflicting, $v)) {
-	    #- removing $conflicting. 
-	    #- It's better than better $conflicting and not adding $v because same_entries can match not so same entries, esp. regarding symlinks
-	    @{$bootloader->{entries}} = grep { $_ != $conflicting } @{$bootloader->{entries}};
-	    undef $conflicting;
+
+	if ($conflicting) {
+	    #- replacing $conflicting with $to_add
+	    $to_add->{label} = $label;
+	    @{$bootloader->{entries}} = map { $_ == $conflicting ? $to_add : $_ } @{$bootloader->{entries}};
 	}
-	if (!$conflicting) {
-	    $v->{label} = $label;
-	    push @{$bootloader->{entries}}, $v;
+	if (!$conflicting || same_entries($conflicting, $to_add)) {
+	    #- we have found an unused label
+	    $to_add->{label} = $label;
+	    push @{$bootloader->{entries}}, $to_add;
 	    return $v;
 	}
+	$to_add = $conflicting;
     }
     die 'add_entry';
 }
