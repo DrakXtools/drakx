@@ -388,10 +388,7 @@ sub load {
 
     if ($type) {
 	add_alias('usb-interface', $name) if $type =~ /SERIAL_USB/i;
-	if ($type eq "scsi" || $type eq $type_aliases{scsi}) {
-	    add_alias('scsi_hostadapter', $name);
-	    load("sd_mod");
-	}
+	add_alias('scsi_hostadapter', $name) if $type eq "scsi" || $type eq $type_aliases{scsi};
     }
     $conf{$name}{options} = join " ", @options if @options;
 }
@@ -573,7 +570,9 @@ sub load_thiskind($;&$) {
 	    add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
 	}
     }
-    map { $loaded_text{$_} || $_ } @{$loaded{$type} || []};
+    my @loaded = map { $loaded_text{$_} || $_ } @{$loaded{$type} || []};
+    $type eq 'scsi' and @loaded and eval { load("sd_mod") };
+    @loaded;
 }
 
 sub pcmcia_need_config($) {
