@@ -159,8 +159,17 @@ Xtest(display)
   if ((pid = fork()) == 0) {
     Display *d = XOpenDisplay(display);
     if (d) {
-      XSetCloseDownMode(d, RetainPermanent);
-      XCloseDisplay(d);
+      int child;
+      /* keep a client until some window is created, otherwise X server blinks to hell */
+      if ((child = fork()) == 0) {
+        XEvent event;
+        XSelectInput(d, DefaultRootWindow(d), SubstructureNotifyMask);
+        do {
+          XNextEvent(d, &event);
+        } while (event.type != CreateNotify);
+        XCloseDisplay(d);
+        exit(0);
+      }
     }
     _exit(d != NULL);
   }
