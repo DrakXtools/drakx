@@ -37,7 +37,7 @@ foreach $type (keys %t) {
 struct pci_module_map ${type}_pci_ids[] = {
 ";
     my %l;
-    foreach (glob("../../kernel/lib/modules/*/$t{$type}/*.o"), glob("../../kernel/lib/modules/*/kernel/drivers/$t{$type}/*.o")) {
+    foreach (glob("../../kernel/lib/modules/*/$t{$type}/*.o"), glob("../../kernel/lib/modules/*/kernel/drivers/$t{$type}/{*/,}*.o")) {
 	m|([^/]*)\.o$|;
 	$l{$1} = 1;
     }
