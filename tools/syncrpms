@@ -21,7 +21,7 @@
 use strict qw(subs vars refs);
 
 #- compare a version string.
-use rpmtools;
+use URPM;
 
 #- get basename for a file.
 sub basename { $_[0] =~ /([^\/]*)$/ ? $1 : $_[0]; }
@@ -61,8 +61,7 @@ sub get_rpms {
 	if (/([^\/]*?)-([^-]*)-([^-]*)\.([^-\.]*)\.rpm$/) {
 	    my $key = "$1 $4"; #- get name including architecture.
 	    if ($rpms->{$key}) {
-		if (rpmtools::version_compare($2, $rpms->{$key}{version}) > 0 ||
-		    rpmtools::version_compare($2, $rpms->{$key}{version}) == 0 && rpmtools::version_compare($3, $rpms->{$key}{release}) > 0) {
+		if (URPM::ranges_overlap("== $2-$3", "> $rpms->{$key}{version}-$rpms->{$key}{release}")) {
 		    if ($modifiable) {
 			if ($flag->{sorted}) {
 			    print "you said rpms directory is sorted, so I keep obsoleted $rpms->{$key}{file} by $_ in $rpms->{$key}{dir}\n" if $flag->{verbose};
@@ -166,11 +165,11 @@ sub sync_rpms {
     #- search in both part.
     foreach (keys %$source) {
 	if ($target->{$_}) {
-	    if (rpmtools::version_compare($source->{$_}{version}, $target->{$_}{version}) > 0 ||
-		rpmtools::version_compare($source->{$_}{version}, $target->{$_}{version}) == 0 && 
-		(rpmtools::version_compare($source->{$_}{release}, $target->{$_}{release}) > 0 ||
-		 rpmtools::version_compare($source->{$_}{release}, $target->{$_}{release}) == 0 &&
-		 -s "$source->{$_}{dir}/$source->{$_}{file}" != -s "$target->{$_}{dir}/$target->{$_}{file}")) {
+	    if (URPM::ranges_overlap("== $source->{$_}{version}-$source->{$_}{release}",
+				     ">= $target->{$_}{version}-$target->{$_}{release}")) {
+		if ("$source->{$_}{version}-$source->{$_}{release}" eq "$target->{$_}{version}-$target->{$_}{release}") {
+		    -s "$source->{$_}{dir}/$source->{$_}{file}" == -s "$target->{$_}{dir}/$target->{$_}{file}" and next;
+		}
 		if ($flag->{verbose}) {
 		    print "updating $target->{$_}{dir}/$target->{$_}{file} with newer version $source->{$_}{file}\n";
 		}
@@ -182,8 +181,7 @@ sub sync_rpms {
 		    }
 		    rm("$target->{$_}{dir}/$target->{$_}{file}") unless $source->{$_}{file} eq $target->{$_}{file}; #- copy on eq
 		}
-	    } elsif (rpmtools::version_compare($source->{$_}{version}, $target->{$_}{version}) != 0 ||
-		     rpmtools::version_compare($source->{$_}{release}, $target->{$_}{release}) != 0) {
+	    } elsif ($source->{$_}{version} ne $target->{$_}{version} || $source->{$_}{release} ne $target->{$_}{release}) {
 		if ($flag->{verbose}) {
 		    print STDERR "keeping more up-to-date version $target->{$_}{dir}/$target->{$_}{file} against $source->{$_}{dir}/$source->{$_}{file}, check your repository !\n";
 		}
