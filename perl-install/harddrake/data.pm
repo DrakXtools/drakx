@@ -203,7 +203,8 @@ our @tree =
           #- protocol reported are not accurate) so we match network adapters against
           #- known drivers :-(
           require list_modules;
-          my @net_modules = list_modules::category2modules('network/gigabit|main|pcmcia|usb|wireless');
+          require network::ethernet;
+          my @net_modules = list_modules::category2modules(network::ethernet::get_eth_categories());
           f(grep { member($_->{driver}, @net_modules) } @devices);
       },
       checked_on_boot => 1,
