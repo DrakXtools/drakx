@@ -739,13 +739,6 @@ sub write_conf {
 
 sub read_stage1_conf {
     mergein_conf($_[0]);
-
-    if (arch() =~ /sparc/) {
-    } elsif (arch() =~ /ppc/) {
-	$conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";    	
-    } else {
-	$conf{pcmcia_core}{"pre-install"} ||= "CARDMGR_OPTS=-f /etc/rc.d/init.d/pcmcia start";
-    }
 }
 
 sub load_thiskind {
