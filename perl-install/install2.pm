@@ -478,6 +478,7 @@ sub main {
     $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
     $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
     $o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
+    $o->{meta_class} = 'server' if $VERSION =~ /server/i;
     if ($::oem) {
 	$o->{partitioning}{use_existing_root} = 1;
 	$o->{partitioning}{auto_allocate} = 1;
