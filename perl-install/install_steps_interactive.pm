@@ -417,6 +417,7 @@ sub askSupplMirror {
 	    val => \$u->{mirror},
 	}, ],
     ) or $u->{mirror} = '';
+    delete $o->{updates};
     if ($u->{mirror} eq '-') {
 	return $o->ask_from_entry('', $message) || '';
     }
