@@ -197,6 +197,9 @@ endif
 
 full_stage2:
 	$(MAKE) stage2
+	$(MAKE) mdkinst_stage2
+
+mdkinst_stage2:
 	$(MISC_DEST)/make_mdkinst_stage2 $(DEST) $(STAGE2_DEST)/mdkinst_stage2
 
 stage2:
