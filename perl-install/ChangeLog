@@ -1,3 +1,278 @@
+2001/07/06  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/ntp_servers.pl: some workarounds
+
+2001/07/05  François Pons  <fpons@mandrakesoft.com>
+
+	* keyboard.pm: added DISABLE_WINDOWS_KEY in /etc/sysconfig/keyboard if a
+	laptop is detected.
+
+2001/07/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/modules_descr.h: add usb net descriptions
+
+2001/07/05  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm (file2part): created
+
+	* any.pm: ia64 bootloader configuration adaptations
+
+	* bootloader.pm: typo fix
+	ia64 bootloader configuration adaptations
+
+2001/07/04  dam's  <damien@mandrakesoft.com>
+
+	* globals.pm: added error handling
+
+	* network/netconnect.pm, network/ethernet.pm: modularized. It compiles,
+	runs, and works for some stuff.
+	modularization continuated
+	updated CVS:
+	----------------------------------------------------------------------
+	uses the fantastic global module.
+	corrected
+
+	* standalone/draknet: corrected
+
+	* network/tools.pm, network/adsl.pm: modularized. It compiles, runs, and
+	works for some stuff.
+	updated CVS:
+	----------------------------------------------------------------------
+	uses the fantastic global module.
+	corrected
+
+	* network/network.pm: modularized. It compiles, runs, and works for some
+	stuff.
+	modularization continuated
+
+	* network/isdn.pm, network/modem.pm: modularized. It compiles, runs, and
+	works for some stuff.
+	updated CVS:
+	----------------------------------------------------------------------
+	uses the fantastic global module.
+
+	* docs/net_object_class.fig: updated doc
+
+2001/07/04  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: added missing last Card read from Cards+ file.
+	allow S3 card to have VideoRam uncommented, fix 86c368 video driver that
+	seems
+	needing VideoRam too.
+	fixed need of video ram if 86c368 and S3 ViRGE.
+
+	* install_any.pm: another too wide string truncated to 80 chars.
+	make auto_inst.cfg file no longer than 80 chars wide.
+
+	* install_steps_interactive.pm: added back timezone settings (thanks
+	FredC).
+
+2001/07/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/adsl.c: nonsense to exit if interface is not "eth.*"
+
+	* mdk-stage1/newt-frontend.c: very nice things happen when you hardcode
+	arrays to a too small value
+
+	* docs/HACKING: update -d in order to get all the directories...
+
+2001/07/04  mbadaire
+
+	* tools/ia64/elilo.efi, tools/specific_arch, share/list.ia64,
+	tools/ia64/e2fsck.shared: Ia64 Adaptation
+
+	* install_gtk.pm, share/list.i386, common.pm, share/list.ppc, share/list,
+	share/list.alpha, install_steps_gtk.pm, share/list.sparc: Ia64
+	adaptation
+
+2001/07/04  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm (selected_leaves): fix dead-loop
+	(selected_leaves): make it work with loops (eg: mandrake_desk loops with
+	control-center resulting on none of them being a leaf)
+
+	* perl2fcalls: check exclude_uses before reporting bad use of "use"
+	exclude module globals from use's to look at
+
+	* globals.pm (import): yet another fix
+	fix a pb when init is called before another import
+	typo correction
+	enhanced: shared values are grouped together based on a name
+	module to share constant values between modules
+
+	* fsedit.pm: add /boot/efi in suggestions for ia64
+
+	* install_interactive.pm, install_steps.pm: fix typo
+	verify a /boot/efi partition exists
+
+	* Makefile, install_any.pm, share/list.ppc, share/list.alpha, share/list,
+	share/list.sparc: remove busybox as default shell. Only use it as the
+	interactive shell on tty2
+
+2001/07/03  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, network/netconnect_consts.pm, network/tools.pm,
+	network/modem.pm, network/netconnect.pm, network/isdn.pm: network
+	subsystem now compiles. Enjoy
+
+	* docs/net_object_class.fig: documentation about net modules structure
+
+2001/07/03  François Pons  <fpons@mandrakesoft.com>
+
+	* network/netconnect.pm: fix another dam's sucks
+	fix dam's sucks
+
+	* network/netconnect_consts.pm, Makefile.config: fix dam's sucks
+
+	* standalone/XFdrake: expert is allowed to choose frame buffer.
+
+	* install_steps_interactive.pm: added loadSavePackagesOnFloppy to manage
+	package selection file used by
+	auto_install too from packages tree directly on floppies.
+
+	* share/floppy.png: updated size to 16x22 to be more aligned.
+	for loading/saving packages selection.
+
+	* install_any.pm: modified g_default_packages to be used from package tree
+	save on floppy.
+
+	* install_steps_gtk.pm: added Load/Save on floppy.
+	added improve choice of package, well not very usefull but asked by
+	higher
+	people :-)
+
+2001/07/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/rp-pppoe/gui/html/props-basic.png,
+	mdk-stage1/rp-pppoe/gui/html/props-options.png,
+	mdk-stage1/rp-pppoe/gui/html/props-advanced.png,
+	mdk-stage1/rp-pppoe/gui/html/mainwin-busy.png,
+	mdk-stage1/rp-pppoe/gui/html/mainwin-nonroot.png,
+	mdk-stage1/rp-pppoe/gui/html/mainwin.png,
+	mdk-stage1/rp-pppoe/gui/html/props-nic.png: plop
+
+	* modules.pm, mdk-stage1/probing.h, mdk-stage1/.cvsignore,
+	mdk-stage1/usb-resource/Makefile,
+	mdk-stage1/usb-resource/update-usb-ids.pl, mdk-stage1/Makefile,
+	mdk-stage1/usb-resource/.cvsignore, mdk-stage1/probing.c: add support
+	for install from USB Network Adapters
+
+2001/07/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sp.po, share/po/fi.po, share/po/DrakX.pot,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/es.po,
+	share/po/fr.po, share/po/sr.po, share/po/de.po, share/po/el.po,
+	share/po/et.po, share/po/sk.po, share/po/tr.po, share/po/eu.po,
+	share/po/ru.po, share/po/sl.po, share/po/vi.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/wa.po, share/po/da.po,
+	share/po/sv.po, share/po/zh_TW.Big5.po: updated Danish file
+
+2001/07/03  Pixel  <pixel@mandrakesoft.com>
+
+	* timezone.pm (configureTimezone): propose a list of NTP servers
+	(ntp_server): fix
+	add ntp handling
+
+	* fs.pm (mount): fix fsck.ext2'ing
+	(mount): add fsck.ext2 before ext2-mounting
+
+	* share/themes/DarkMarble-gloom2.png: re-adding with -kb
+	re-adding with -kb
+
+	* pixmaps/user.png: re-adding with -kb
+	removing for re-adding with -kb
+	re-adding with -kb
+	removing for re-adding with -kb
+
+	* share/themes/blueHeart-button4.png, share/reload.png,
+	share/themes/focus.png, share/themes/DarkMarble-button3_in.png,
+	share/logo-mandrake.png, share/themes/marble3d-check1.png,
+	share/themes/blueHeart-button_def.png, share/rpm-semiselected.png,
+	share/logo-mandrake-Desktop.png, share/themes/marble3d-check2.png,
+	share/rpm-installed.png, share/themes/marble3d-button1.png,
+	share/logo-mandrake_sav.png, share/themes/mdk-button1.png,
+	share/themes/DarkMarble-check_off.png, pixmaps/harddrive.png,
+	share/themes/marble3d-button_def.png, share/themes/marble3d-button2.png,
+	share/help_sav.png, share/themes/DarkMarble-button3_out_prelight.png,
+	pixmaps/services.png, pixmaps/bootdisk.png, share/rpm-selected.png,
+	share/themes/marble3d-button4.png, pixmaps/bootloader.png,
+	share/themes/DarkMarble-button3_out.png, share/logo-mandrake_trans.png,
+	share/themes/mdk-button4.png, pixmaps/printer.png, share/rpm-base.png,
+	share/logo-mandrake2.png, share/themes/blueHeart-brown_bg1.png,
+	share/themes/marble3d-bg1.png, pixmaps/security.png, share/ftin.png,
+	pixmaps/rootpasswd.png, share/help.png,
+	share/themes/DarkMarble-check_on.png,
+	share/themes/blueHeart-button1.png, pixmaps/keyboard.png,
+	pixmaps/default.png, share/themes/blueHeart-button2.png, pixmaps/X.png,
+	share/themes/DarkMarble-button3_in_prelight.png, share/ftout.png,
+	pixmaps/mouse.png, share/rpm-unselected.png: re-adding with -kb
+	removing for re-adding with -kb
+
+	* install_any.pm, install_steps.pm: add ntp handling
+
+	* tools/addchangelog.pl: reverted the last erroneous modif
+	re-adding with -kb
+
+	* tools/ntp_servers.pl: get a formatted list of NTP servers from an
+	authorised source
+
+	* install_steps_interactive.pm (doPartitionDisks): better error message
+	when no root partition is found
+	(configureTimezone): propose a list of NTP servers
+	add ntp handling
+
+	* docs/comparisons: re-adding with -kb
+
+2001/07/02  dam's  <damien@mandrakesoft.com>
+
+	* install_steps_interactive.pm: new network sources reorganizationCVS:
+	----------------------------------------------------------------------
+
+	* share/list: added modinfo
+
+	* modparm.pm: syntax correction
+
+	* network/netconnect_consts.pm, network.pm, standalone/draknet,
+	network/tools.pm, netconnect.pm, network/netconnect.pm,
+	network/ethernet.pm, network/isdn.pm, network/adsl.pm,
+	network/network.pm, network/modem.pm, netconnect_consts.pm: new network
+	sources reorganization
+
+2001/07/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/da.po, share/po/cs.po, share/po/af.po: update po files
+
+2001/07/02  Pixel  <pixel@mandrakesoft.com>
+
+	* crypto.pm: remove buggy prototype
+
+	* share/po/Makefile: yet even better i18n strings extraction
+	  - fix to add some missing messages
+	  - add more verif
+
+	* c/stuff.xs.pm: use size_t instead of int where it should
+
+	* Xconfigurator.pm (write_XF86Config): fix fpons sucks (multi wacoms in
+	XF3)
+
+	* share/po/b_dump_strings.pm: high level i18n messages getting. only
+	partial stuff. Used only for verification
+
+	* perl2fcalls: add handling of using pkg::func when func is provided by
+	pkg2 use'd by pkg
+
 2001/06/25  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/id.po: updated Indonesian file
