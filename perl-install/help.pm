@@ -568,7 +568,7 @@ sub selectCountry() {
     N("\"%s\": check the current country selection. If you are not in this
 country, click on the \"%s\" button and choose another one. If your country
 is not in the first list shown, click the \"%s\" button to get the complete
-country list.", N("Country"), N("Configure"), N("More"));
+country list.", N("Country") . N(" / Region"), N("Configure"), N("More"));
 }
 sub selectInstallClass() {
     N("This step is activated only if an old GNU/Linux partition has been found on
@@ -948,7 +948,7 @@ button. This should be reserved to advanced users.
 
  * \"%s\": here you'll be able to fine control which services will be run
 on your machine. If you plan to use this machine as a server it's a good
-idea to review this setup.", N("Configure"), N("Keyboard"), N("Country"), N("Configure"), N("More"), N("Timezone"), N("Configure"), N("Mouse"), N("Printer"), N("Configure"), N("Sound card"), N("Graphical Interface"), N("Configure"), N("TV card"), N("Configure"), N("ISDN card"), N("Configure"), N("Network"), N("Security Level"), N("Firewall"), N("Bootloader"), N("Services"));
+idea to review this setup.", N("Configure"), N("Keyboard"), N("Country") . N(" / Region"), N("Configure"), N("More"), N("Timezone"), N("Configure"), N("Mouse"), N("Printer"), N("Configure"), N("Sound card"), N("Graphical Interface"), N("Configure"), N("TV card"), N("Configure"), N("ISDN card"), N("Configure"), N("Network"), N("Security Level"), N("Firewall"), N("Bootloader"), N("Services"));
 }
 sub takeOverHdChoose() {
     N("Choose the hard drive you want to erase in order to install your new
