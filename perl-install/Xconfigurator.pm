@@ -1020,35 +1020,22 @@ _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 	    rewriteInittab($run ? 5 : 3) unless $::testing;
 
-	    if ($o->{miscellaneous}{autologin} || $::auto || $in->ask_yesorno(_("Autologin at startup"),
-									      _("I can set up your computer to automatically log on one user.
-Would you like to use this feature?"), 1))
-	      {
-		$o->{miscellaneous}{autologin}=1;
-		my @users;
-		my @etc_pass_fields = qw(name pw uid gid realname home shell);
-		my @lines = cat_(my $f = "$o->{prefix}/etc/passwd") or log::l("missing passwd file"), return;
-		foreach (@lines) {
-		  my %l; @l{@etc_pass_fields} = split ':';
-		  if ($l{"uid"} > 500) {
-		    push @users, $l{"name"};
-		  }
-		}
-		if ( $in->ask_from_entries_refH(
-						[ _("Autologin"), _("Ok"), _("Cancel") ],
-						_("Autologin - Choose default user\n"),
-						[ _("Choose the default user :") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ],
-						complete => sub {
-						  $o->{miscellaneous}{autologuser} or $in->ask_warn('', _("Please choose a user in the list")), return (1,0);
-						  return 0;
-						}
-					       ))
-		  {
-		    $o->{miscellaneous}{autologin}=1;
-		  }
-		else { $o->{miscellaneous}{autologin}=0; }
-	      }
-	  }
+	    my @etc_pass_fields = qw(name pw uid gid realname home shell);
+	    my @users = mapgrep {
+		my %l; @l{@etc_pass_fields} = split ':';
+		$l{uid} > 500, $l{name};
+	    } cat_("$o->{prefix}/etc/passwd");
+
+	    if (exists $o->{miscellaneous}{autologin} || $::auto || @users
+		|| $in->ask_yesorno(_("Autologin at startup"),
+_("I can set up your computer to automatically log on one user.
+Would you like to use this feature?"), 1)) {
+		$o->{miscellaneous}{autologin} = $in->ask_from_entries_refH(_("Autologin"),
+					_("Autologin - Choose default user\n"),
+					[ _("Choose the default user :") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ],
+		);
+	    }
+	}
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
-      }
-  }
+    }
+}

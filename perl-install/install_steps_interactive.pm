@@ -169,6 +169,11 @@ sub selectMouse {
     }
 
     $o->setup_thiskind('SERIAL_USB', !$::expert, 0) if $o->{mouse}{device} eq "usbmouse";
+    eval { 
+	devices::make("usbmouse");
+	modules::load("usbmouse");
+	modules::load("mousedev");
+    } if $o->{mouse}{device} eq "usbmouse";
 
     $o->SUPER::selectMouse;
 }

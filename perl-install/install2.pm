@@ -721,9 +721,6 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
-    #- mainly for auto_install's
-    run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
-
     install_any::clean_postinstall_rpms();
     install_any::ejectCdrom();
 
@@ -741,6 +738,9 @@ sub main {
     install_steps::cleanIfFailedUpgrade($o);
 
     -e "$o->{prefix}/usr/bin/urpmi" or eval { commands::rm("-rf", "$o->{prefix}/var/lib/urpmi") };
+
+    #- mainly for auto_install's
+    run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
 
     #- have the really bleeding edge ddebug.log
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };

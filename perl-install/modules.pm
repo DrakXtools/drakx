@@ -139,7 +139,7 @@ arch() =~ /^sparc/ ? (
   "sd_mod" => "sd_mod",
   "ide-mod" => "ide-mod",
   "ide-probe" => "ide-probe",
-  "ide-probe-mod" => "ide-probe-mod",
+#-  "ide-probe-mod" => "ide-probe-mod",
 }],
 [ 'disk', {
 arch() =~ /^sparc/ ? (
