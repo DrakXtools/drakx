@@ -136,7 +136,7 @@ sub extractHeaders($$$) {
     foreach (@$pkgs) {
 	my $f = "$prefix/tmp/headers/". packageHeaderFile($_);
 	local *H;
-	open H, $f or die "unable to open header file $f: $!";
+	open H, $f or log::l("unable to open header file $f: $!"), next;
 	$_->{header} = c::headerRead(fileno H, 1) or log::l("unable to read header of package ". packageHeaderFile($_));
     }
     @$pkgs = grep { $_->{header} } @$pkgs;
@@ -180,6 +180,10 @@ sub selectPackage($$;$$$) {
     #- check if the same or better version is installed,
     #- do not select in such case.
     packageFlagInstalled($pkg) and return;
+
+    #- check for medium selection, if the medium has not been
+    #- selected, the package cannot be selected.
+    $pkg->{medium}{selected} or return;
 
     #- avoid infinite recursion (mainly against badly generated depslist.ordered).
     $check_recursion ||= {}; exists $check_recursion->{$pkg->{file}} and return; $check_recursion->{$pkg->{file}} = undef;
@@ -292,12 +296,13 @@ sub psUsingHdlists {
 	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
 
 	my $fakemedium = $method . ($medium || 1);
-	$packages[2]{$medium} = { hdlist => $hdlist,
-				  medium => $medium, #- default medium is ''.
-				  descr  => $descr, #- default value is '' too.
+	$packages[2]{$medium} = { hdlist     => $hdlist,
+				  medium     => $medium, #- default medium is ''.
+				  descr      => $descr, #- default value is '' too.
 				  fakemedium => $fakemedium,
-				  min    => scalar keys %{$packages[0]},
-				  max    => -1, #- will be updated after reading current hdlist.
+				  min        => scalar keys %{$packages[0]},
+				  max        => -1, #- will be updated after reading current hdlist.
+				  selected   => !$medium, #- default value is only CD1, it is really the minimal.
 				};
 
 	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
@@ -474,7 +479,7 @@ sub readCompssUsers {
 sub setSelectedFromCompssList {
     my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
     my $ind = $compssListLevels->{$install_class}; defined $ind or log::l("unknown install class $install_class in compssList"), return;
-
+    my $nb = selectedSize($packages);
     my @packages = allPackages($packages);
     my @places = do {
 	#- special case for /^k/ aka kde stuff
@@ -486,17 +491,23 @@ sub setSelectedFromCompssList {
 	next if packageFlagSkip($p);
 	last if $p->{values}[$ind] < $min_level;
 
-	selectPackage($packages, $p);
+	#- determine the packages that will be selected when
+	#- selecting $p. the packages are not selected.
+	my %newSelection;
+	selectPackage($packages, $p, \%newSelection);
 
-	my $nb = 0; foreach (@packages) {
-	    $nb += packageSize($_) if packageFlagSelected($_);
+	#- this enable an incremental total size.
+	foreach (values %newSelection) {
+	    $nb += packageSize($_);
 	}
 	if ($max_size && $nb > $max_size) {
-	    unselectPackage($packages, $p);
 	    $min_level = $p->{values}[$ind];
 	    log::l("setSelectedFromCompssList: up to indice $min_level (reached size $max_size)");
 	    last;
 	}
+
+	#- at this point the package can safely be selected.
+	selectPackage($packages, $p);
     }
     $ind, $min_level;
 }
@@ -664,7 +675,7 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
     foreach (values %{$packages->[0]}) {
 	my $p = $_;
 
-	unless ($p->{selected}) {
+	unless (packageFlagSelected($p)) {
 	    my $toSelect = 0;
 	    if (my $list = $filelist{packageName($p)}) {
 		my @commonparts = map { /^=(.*)/ ? ($1) : () } @$list;

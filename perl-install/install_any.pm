@@ -31,7 +31,7 @@ use log;
 #- package that have to be copied for proper installation (just to avoid changing cdrom)
 #- here XFree86 is copied entirey if not already installed, maybe better to copy only server.
 @needToCopy = qw(
-XFree86 dhcpcd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb
+XFree86 dhcpxd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb
 );
 
 #-######################################################################################
@@ -40,7 +40,6 @@ XFree86 dhcpcd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb
 my $postinstall_rpms = '';
 my $current_medium = '';
 my $asked_medium = '';
-my %refused_media = ();
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
@@ -66,7 +65,7 @@ sub errorOpeningFile($) {
     my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
     $current_medium eq $asked_medium and return; #- nothing to do in such case.
-    $refused_media{$asked_medium} and return; #- refused forever...
+    $::o->{packages}[2]{$asked_medium}{selected} or return; #- not selected means no need for worying about.
 
     my $max = 32; #- always refuse after $max tries.
     if ($::o->{method} eq "cdrom") {
@@ -91,7 +90,8 @@ sub errorOpeningFile($) {
     }
 
     #- keep in mind the asked medium has been refused on this way.
-    $refused_media{$asked_medium} = 'refused';
+    #- this means it is no more selected.
+    $::o->{packages}[2]{$asked_medium}{selected} = undef;
 
     return;
 }

@@ -1,3 +1,12 @@
+2000-04-04  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: modified selection packages from compssList by
+	incremental selection, much more quickly.
+	added selected medium for selecting a package.
+	* install_any.pm: refused media hash transfered to selected value
+	of media table.
+	@needToCopy list should only have package of default medium.
+
 2000-04-03  Pixel  <pixel@mandrakesoft.com>
 
 	* fs.pm (format_ext2): add options "-b 1024 -O none" for alpha

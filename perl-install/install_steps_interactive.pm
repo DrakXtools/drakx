@@ -123,7 +123,7 @@ Hey no kidding, you will be allowed powerfull but dangerous things here."),
 					      first(list2kv(@c)), ${{reverse %c}}{$o->{installClass}},
 					      [ __("Install"), __("Upgrade") ], $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
 
-    if ($::beginner || $o->{isUpgrade}) {
+    if ($::corporate || $::beginner || $o->{isUpgrade}) {
 	$o->{installClass} = "normal";
     } else {
 	my %c = (
@@ -263,6 +263,10 @@ sub selectPackagesToUpgrade {
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
 
+    #- this is done at the very beginning to take into account
+    #- selection of CD by user.
+    $o->chooseCD($packages);
+
     require pkgs;
     unless ($o->{isUpgrade}) {
 	my $available = pkgs::invCorrectSize(install_any::getAvailableSpace($o) / sqr(1024)) * sqr(1024);
@@ -277,7 +281,6 @@ sub choosePackages {
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::selectedSize($packages);
 
-	$o->chooseCD($packages);
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
 	my $max_size = int (sum map { pkgs::packageSize($_) } values %{$packages->[0]});
@@ -582,8 +585,10 @@ sub servicesConfig {
 }
 
 #------------------------------------------------------------------------------
-sub printerConfig($) {
-    my ($o) = @_;
+sub printerConfig {
+    my ($o, $clicked) = @_;
+
+    return if $::corporate && $::beginner && !$clicked;
 
     require printer;
     eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
@@ -592,7 +597,7 @@ sub printerConfig($) {
 }
 
 #------------------------------------------------------------------------------
-sub setRootPassword($) {
+sub setRootPassword {
     my ($o, $clicked) = @_;
     my $sup = $o->{superuser} ||= {};
     $sup->{password2} ||= $sup->{password} ||= "";
@@ -639,7 +644,7 @@ _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("
 #------------------------------------------------------------------------------
 #-addUser
 #------------------------------------------------------------------------------
-sub addUser($) {
+sub addUser {
     my ($o, $clicked) = @_;
     my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", password => "mandrake", realname => "default" } : {};
     $u->{password2} ||= $u->{password} ||= "";
