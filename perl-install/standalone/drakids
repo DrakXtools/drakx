@@ -19,6 +19,11 @@ my $activefw = activefw->new(sub {
       $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Blacklist";
+
+    clear_blacklist() if
+      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
+      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
+      $msg->get_member eq "Clear";
 });
 
 my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
@@ -56,6 +61,10 @@ sub init_blacklist {
     while (my @blacklist = splice(@packets, 0, 8)) {
         handle_blacklist(@blacklist);
     }
+}
+
+sub clear_blacklist {
+    @{$blacklist->{data}} = ();
 }
 
 sub handle_blacklist {
