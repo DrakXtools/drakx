@@ -47,8 +47,8 @@ Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libde
 
 %description
 Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
-drakboot, drakbug, drakbug_report, drakfloppy, drakfont, drakgw,
-draknet, drakproxy, draksec, drakTermServ, drakxconf, drakxservices,
+drakboot, drakbug, drakbug_report, drakconnect, drakfloppy, drakfont,
+drakgw, drakproxy, draksec, drakTermServ, drakxconf, drakxservices,
 drakxtv, lsnetdrake, lspcidrake, keyboarddrake, livedrake,
 localedrake, mousedrake, printerdrake, scannerdrake, tinyfirewall and
 XFdrake :
@@ -74,14 +74,14 @@ drakbug: interactive bug report tool
 
 drakbug_report: help find bugs in DrakX
 
+drakconnet: LAN/Internet connection configuration. It handles
+ethernet, ISDN, DSL, cable, modem.
+
 drakfloppy: boot disk creator
 
 drakfont: import some fonts in the system.
 
 drakgw: internet connection sharing
-
-draknet: LAN/Internet connection configuration. It handles ethernet,
-ISDN, DSL, cable, modem.
 
 drakproxy: proxies configuration
 
@@ -245,7 +245,8 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Thu Jul 11 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
+* Fri Jul 12 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
+- draknet is dead; vival el drakconnect
 - no need to write /etc/sysconfig/harddrake2/previous_hw in %%post
   since harddrake2 service doesn't configure anything if previous
   config was empty
