@@ -2889,7 +2889,7 @@ sub main {
 			} elsif ($printer->{SPOOLER} eq "cups") {
 			    ($cursorpos) = 
 				grep { /!$printer->{DEFAULT}:[^!]*$/ }
-			    printer::main::get_cups_remote_queues($printer);
+			    printer::cups::get_formatted_remote_queues($printer);
 			}
 		    }
 		    # Generate the list of available printers
@@ -2900,7 +2900,7 @@ sub main {
 				 keys(%{$printer->{configured}
 					|| {}})),
 				($printer->{SPOOLER} eq "cups" ?
-				 printer::main::get_cups_remote_queues($printer) :
+				 printer::cups::get_formatted_remote_queues($printer) :
 				 ()));
 		    my $noprinters = $#printerlist < 0;
 		    # Position the cursor where it were before (in case
