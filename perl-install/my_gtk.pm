@@ -201,7 +201,7 @@ sub create_box_with_title($@) {
 
     @_ = map { ref $_ ? $_ : warp_text($_) } @_;
     $o->{box} = gtkpack_(new Gtk::VBox(0,0),
-			 map({
+			 (map{
 			      my $w = ref $_ ? $_ : new Gtk::Label($_);
 			      $w->set_name("Title");
 			      0, $w;

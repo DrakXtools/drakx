@@ -255,7 +255,7 @@ sub read($;$) {
     1;
 }
 
-sub read_extended($$) {
+sub read_extended {
     my ($hd, $extended) = @_;
 
     my $pt = read_one($hd, $extended->{start}) or return 0;

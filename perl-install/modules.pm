@@ -156,7 +156,7 @@ sub text2driver($) {
 }
 
 
-sub load($;$@) {
+sub load {
     my ($name, $type, @options) = @_;
 
     if ($::testing) {

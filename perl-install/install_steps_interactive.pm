@@ -742,7 +742,7 @@ sub load_module {
 
     my @names = modparm::get_options_name($m);
 
-    if ((!defined @names || @names > 0) && $o->ask_from_list('',
+    if ((@names != 0) && $o->ask_from_list('',
 _("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
@@ -750,7 +750,7 @@ information it needs? Occasionally, probing will hang a computer, but it should
 not cause any damage.", $l),
 			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
       ASK:
-	if (defined @names) {
+	if (@names >= 0) {
 	    my @l = $o->ask_from_entries('',
 _("You may now provide its options to module %s.", $l),
 					 \@names) or return;
