@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - MDK Release 9.2\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
-"PO-Revision-Date: 2003-05-15 00:40+0300\n"
+"POT-Creation-Date: 2003-05-20 12:43+0200\n"
+"PO-Revision-Date: 2003-05-18 21:31+0300\n"
 "Last-Translator: Thomas Backlund <tmb@iki.fi>\n"
 "Language-Team: Finnish <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -369,7 +369,7 @@ msgid "Webcam"
 msgstr "Webbikamera"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "Prosessorin (kakkostason) välimuistin koko"
 
@@ -1581,7 +1581,7 @@ msgid "Interface"
 msgstr "Liitäntä"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -1625,7 +1625,7 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 msgstr ""
-"optioiden kuvaus:\n"
+"Optioiden kuvaus:\n"
 "\n"
 " - Varmista järjestelmätiedostoja:\n"
 "\n"
@@ -1659,6 +1659,12 @@ msgstr ""
 "\tJos et valitse tätä optiota kaikki vanhat varmistukset\n"
 "\tpoistetaan ennen uuden tekoa.    \n"
 "\n"
+" - Erotusvarmistuskset:\n"
+"\n"
+"Erotusvarmistus toimii vertaamalla muutoksia aluperäiseen \n"
+"varmistukseen edellisen asteittaisen sijasta. Tällä tavalla \n"
+"palautus toivotusta päivämäärästä saadaan tehty palauttamalla\n"
+"ensin alkuperäinen palautus ja sitten haluttu päivämäärä.\n"
 "\n"
 
 #: ../../security/help.pm:1
@@ -1946,11 +1952,6 @@ msgstr ""
 "Haluatko luoda käynnistyslevykkeen järjestelmääsi?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB tulostin \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1972,9 +1973,9 @@ msgid "Start at boot"
 msgstr "Käynnistä koneen käynnistyksen yhteydessä"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental Backups"
-msgstr "Käytä kasvavia varmuuskopioita (älä korvaa vanhoja varmuuskopioita)"
+msgstr "Käytä asteittaiset varmuuskopiot"
 
 #: ../../any.pm:1
 #, c-format
@@ -1990,6 +1991,11 @@ msgstr "Peliohjain"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -2084,11 +2090,6 @@ msgstr ""
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 "Tee uusi varmuuskopio ennen palauttamista (vain kasvavilla varmuuskopioilla)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Tulostin rinnakkaisportissa \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2252,11 +2253,6 @@ msgstr ""
 "Valitse kiintolevy, jonka haluat tyhjentää uudelle Mandrake Linux\n"
 "-asennusosiolle. Ole varovainen, koska kaikki asemalla oleva tieto\n"
 "tuhoutuu eikä ole enää palautettavissa!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " rinnakkaisliitännässä \\#%s"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -2684,7 +2680,7 @@ msgstr ""
 "\n"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "information level that can be obtained through the cpuid instruction"
 msgstr "Tietotaso joka voidaan saada cpuid-käskyn kautta"
 
@@ -5045,6 +5041,8 @@ msgid ""
 "the WP flag in the CR0 register enforce write proctection at the memory page "
 "level, thus enabling the processor to prevent kernel accesses)"
 msgstr ""
+"WP lipuke rekisterissä CD0 pakottaa kirjoitussuojan muistisivun tasolla, "
+"jolloin sallitaan prosessoria estää ytimen käyttöä"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -5095,12 +5093,12 @@ msgid "Cape Verde"
 msgstr "Kap Verde"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "Löytyykö tästä prosessorista Cyrix 6x86 Coma -virhe "
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
 "Ensimmäiset pentiumprosessorit olivat virheellisiä ja jumiutuivat "
@@ -5591,6 +5589,11 @@ msgstr "Libya"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Asetan komentotiedostot, asennan ohjelmistot, käynnistän palvelimet..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Tulostin rinnakkaisportissa \\#%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5625,6 +5628,11 @@ msgstr ""
 "Parametrit: (arg)\n"
 "\n"
 "Ota käyttöön / poista käytöstä libsafe jos se löytyy järjestelmästä."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "USB-tulostin \\#%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5952,6 +5960,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Poista väliaikaistiedostot"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Onnittelut, verkko- ja Internetyhteyksien asetus on valmis.\n"
+"\n"
+"Asetukset otetaan nyt käyttöön järjestelmässä.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6313,9 +6331,9 @@ msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS-asema: %s (vain arvaus)\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select the files or directories and click on 'OK'"
-msgstr "Valitse tiedostot tai hakemistot ja klikkaa 'Lisää'"
+msgstr "Valitse tiedostot tai hakemistot ja painaa 'OK'"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6328,7 +6346,7 @@ msgid "omit scsi modules"
 msgstr "jätä pois scsi-moduulit"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "Prosessoriperhe (esim. i686 luokka on 6)"
 
@@ -8450,11 +8468,6 @@ msgstr ""
 "  Raporttiviestiäsi ei lähetetty.\n"
 "  Ole hyvä ja aseta sendmail"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", monikäyttölaite rinnakkaisportissa \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8641,7 +8654,7 @@ msgstr "Tietoja: "
 msgid "Button `%s': %s"
 msgstr "Painike '%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
 #: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -9182,7 +9195,7 @@ msgid "NoVideo"
 msgstr "Ei näyttöä"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "this field describes the device"
 msgstr "Tämä kenttä kuvaa laitteen"
 
@@ -9262,7 +9275,7 @@ msgid "Choose the window manager to run:"
 msgstr "Valitse käytettävä ikkunointijärjestelmä:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "sub generation of the cpu"
 msgstr "Prosessorin alasukupolvi"
 
@@ -9548,9 +9561,9 @@ msgid "Netherlands"
 msgstr "Alankomaat"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sending files by FTP"
-msgstr "Lähetän tiedostoja..."
+msgstr "Lähetän tiedostoja FTP:n kautta"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9952,7 +9965,7 @@ msgstr ""
 "käynnistyksessä."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
@@ -10077,15 +10090,22 @@ msgstr "Valitse portti, johon tulostimesi on kytketty."
 msgid "Change Cd-Rom"
 msgstr "Vaihda CD-levyä"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Mitä versiota XFree-palvelimesta haluat käyttää?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguay"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr "Käytä kasvavia varmuuskopioita (älä korvaa vanhoja varmuuskopioita)"
+msgstr ""
+"Käytä asteittaiset/erotus varmuuskopioita (älä korvaa vanhoja "
+"varmuuskopioita)"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -11567,6 +11587,11 @@ msgstr "SILO"
 msgid "Change type"
 msgstr "Muuta tyyppiä"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ", USB printer #%s"
+msgstr ", USB tulostin \\#%s"
+
 #: ../../any.pm:1
 #, c-format
 msgid "SILO Installation"
@@ -11713,7 +11738,7 @@ msgstr ""
 "yritänkö pakkoasennusta vaikka se tuhoaa ensimmäisen osion?"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -11744,7 +11769,7 @@ msgid ""
 "      \n"
 "\n"
 msgstr ""
-"optioiden kuvaus:\n"
+"Optioiden kuvaus:\n"
 "\n"
 "Tässä vaiheessa Drakbackup sallii sinua muuttaa:\n"
 "\n"
@@ -11830,15 +11855,15 @@ msgstr "Käynnistyksen yhteydessä"
 msgid "Bus identification"
 msgstr "Väylän tunniste"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Tee ensin varmuuskopio tiedoistasi"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikaani"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Tee ensin varmuuskopio tiedoistasi"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12318,7 +12343,7 @@ msgstr ""
 "tapauksessa tulostin ei toimi. Ajuri ei välitä asettamastasi yhteystavasta."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "generation of the cpu (eg: 8 for PentiumIII, ...)"
 msgstr "Prosessorin sukupolvi (esim.: Pentium III on 8, ...)"
 
@@ -13583,7 +13608,7 @@ msgid "Reselect correct fonts"
 msgstr "Valitse uudelleen oikeat kirjasimet"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -13593,7 +13618,7 @@ msgid ""
 "drive before sending it to the server.\n"
 "\n"
 msgstr ""
-"optioiden kuvaus:\n"
+"Optioiden kuvaus:\n"
 "\n"
 "Ole varovainen kun käytät FTP-varmistusta, koska ainoastaan\n"
 "valmiiksi 'rakennetut' varmistukset lähetetään palvelimelle.\n"
@@ -13640,14 +13665,14 @@ msgstr ""
 "       XFdrake tarkkuus"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write protection"
-msgstr "Tulostimen automaattinen tunnistus"
+msgstr "Kirjoitussuoja"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "You've not selected any font"
-msgstr "kirjasimia ei löytynyt.\n"
+msgstr "Et valinnut yhtäkään kirjasinta"
 
 # Asennuksen sivuvalikko
 #: ../../steps.pm:1
@@ -13773,12 +13798,12 @@ msgstr ""
 "Ota käyttöön / poista käytöstä msec turvallisuustarkistukset joka tunti."
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s fonts conversion"
-msgstr "pfm kirjasinten muunnos"
+msgstr "%s kirjasinten muunnos"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Väylätyyppi johon hiiri on liitetty"
 
@@ -13981,7 +14006,7 @@ msgid "Software Manager"
 msgstr "Ohjelmiston hallinta"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Restore Description:\n"
 " \n"
@@ -14020,6 +14045,7 @@ msgstr ""
 "valinnat.\n"
 "\n"
 "Muuten voit valita ainoastaan yhden näistä: \n"
+"\n"
 " - Asteittaiset  varmistukset:\n"
 "\n"
 "\tAsteittainen varmistus on tehokkain tapa varmistaa.\n"
@@ -14030,7 +14056,12 @@ msgstr ""
 "\tJos et valitse tätä optiota kaikki vanhat varmistukset\n"
 "\tpoistetaan ennen uuden tekoa.    \n"
 "\n"
+" - Erotusvarmistuskset:\n"
 "\n"
+"Erotusvarmistus toimii vertaamalla muutoksia aluperäiseen \n"
+"varmistukseen edellisen asteittaisen sijasta. Tällä tavalla \n"
+"palautus toivotusta päivämäärästä saadaan tehty palauttamalla\n"
+"ensin alkuperäinen palautus ja sitten haluttu päivämäärä.\n"
 "\n"
 
 #: ../../interactive/stdio.pm:1
@@ -14254,6 +14285,11 @@ msgstr ""
 "Taajuuden pitäisi loppua päätteeseen k, M tai G (esim. \"2.46G\" jos "
 "taajuus\n"
 "on 2.46 GHz) tai sinun pitää lisätä riittävästi '0' (nollia) loppuun."
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", monikäyttölaite rinnakkaisportissa \\#%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14907,9 +14943,9 @@ msgid "Raw printer"
 msgstr "Raakatulostin"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "official vendor name of the cpu"
-msgstr "Prosessorin valmistajan virallinen nimi"
+msgstr "prosessorin valmistajan virallinen nimi"
 
 #: ../../Xconfig/monitor.pm:1 ../../standalone/harddrake2:1
 #, c-format
@@ -14974,17 +15010,6 @@ msgid ""
 msgstr ""
 "Jakaaksesi omaa tietämystäsi ja auttaaksesi Linux-työkalujen kehityksessä, "
 "liity keskustelufoorumeihin, joita löydät meidän \"Yhteisö\" webbisivuilta."
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Onnittelut, verkko- ja Internetyhteyksien asetus on valmis.\n"
-"\n"
-"Asetukset otetaan nyt käyttöön järjestelmässä.\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15773,7 +15798,7 @@ msgid "mount failed: "
 msgstr "liittäminen epäonnistui: "
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
@@ -16687,6 +16712,11 @@ msgstr "Tarkista vialliset lohkot?"
 msgid "Other MultiMedia devices"
 msgstr "Muu multimedialaite"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Tulostin"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -17475,6 +17505,11 @@ msgstr ""
 msgid "(already added %s)"
 msgstr "(lisätty jo: %s)"
 
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Käyttöjärjestelmän lataajan asennus"
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", using command %s"
@@ -17683,7 +17718,7 @@ msgid "Apache World Wide Web Server"
 msgstr "Apache WWW-palvelin"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
 msgstr "prosessorin askel (alamalli (sukupolvi) numero)"
 
@@ -17908,6 +17943,11 @@ msgstr ""
 #, c-format
 msgid "Restore all backups"
 msgstr "Palauta kaikki varmuuskopiot"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid " on parallel port #%s"
+msgstr " rinnakkaisliitännässä \\#%s"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -18229,7 +18269,7 @@ msgid "Please enter the directory to save:"
 msgstr "Syötä hakemisto, johon tallennetaan:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "format of floppies supported by the drive"
 msgstr "Levykkeiden eri muodot joita asema tukee"
 
@@ -18253,11 +18293,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Yhteys muodostettu"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB-tulostin \\#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18650,7 +18685,7 @@ msgstr "Etsin jo asennettuja paketteja..."
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Differential Backups"
-msgstr ""
+msgstr "Käytä Erotusvarmistus"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19560,7 +19595,7 @@ msgid "Delay before booting the default image"
 msgstr "Viive ennen oletusjärjestelmän käynnistystä"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
-"PO-Revision-Date: 2003-04-22 11:57+0200\n"
+"POT-Creation-Date: 2003-05-20 12:43+0200\n"
+"PO-Revision-Date: 2003-05-17 15:57+0200\n"
 "Last-Translator: Riho Kurg <rx@linux.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "CUPS serveril \"%s\""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Post-install configuration"
-msgstr "Paigaldusjärgsed sätted"
+msgstr "Paigaldusjärgne seadistamine"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -218,7 +218,7 @@ msgstr "Paigaldamiseks on valitud järgmised paketid"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "CUPS configuration"
-msgstr "CUPSi sätted"
+msgstr "CUPSi seadistused"
 
 #: ../../lang.pm:1
 #, c-format
@@ -261,7 +261,7 @@ msgid ""
 msgstr ""
 "Internetiühenduse nõustaja\n"
 "\n"
-"Nüüd hakkame internetiühendust seadistama.\n"
+"Nüüd hakkame Internetiühendust seadistama.\n"
 "Kui Te ei soovi automaatset tuvastamist, siis jätke see märkimata.\n"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
@@ -312,7 +312,7 @@ msgstr "256 kB"
 #: ../../any.pm:1
 #, c-format
 msgid "Bootloader main options"
-msgstr "Alglaaduri peasätted"
+msgstr "Alglaaduri põhiseadistused"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -361,7 +361,7 @@ msgid "Webcam"
 msgstr "Veebikaamera"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "(Teise taseme) CPU puhvri suurus"
 
@@ -443,7 +443,7 @@ msgstr ""
 "Enamiku moodsate TV-kaartide puhul avastab GNU/Linuxi kerneli bttv-moodul "
 "automaatselt õiged parameetrid.\n"
 "Kui kaart siiski valesti tuvastati, võite siin määrata õige tuuneri ja "
-"kaardi tüübi. Valige vajadusel korral sobivad tv-kaardi parameetrid"
+"kaardi tüübi. Valige vajadusel korral sobivad TV-kaardi parameetrid"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -562,7 +562,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Advanced Configuration"
-msgstr "Muud sätted"
+msgstr "Muud seadistused"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -577,7 +577,7 @@ msgstr "Juur"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Choose an existing RAID to add to"
-msgstr "Vali olemasolev RAID, millele lisada"
+msgstr "Valige olemasolev RAID, millele lisada"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -942,7 +942,7 @@ msgstr ""
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Current interface configuration"
-msgstr "Liidese praegused sätted"
+msgstr "Liidese praegune seadistus"
 
 #: ../../printer/data.pm:1
 #, c-format
@@ -961,13 +961,12 @@ msgstr ""
 "\n"
 "Kui Teil on ISA kaart, siis peaks järgmised väärtused olema õiged.\n"
 "\n"
-"Kui Teil on PCMCIA kaart, peaksite Te ise teadma selle IRQ ning IO "
-"väärtusi.\n"
+"Kui Teil on PCMCIA kaart, peate ise teadma selle IRQ ning IO väärtusi.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do not print any test page"
-msgstr "Ära trüki ühtegi testlehekülge"
+msgstr "Ära trüki testlehekülge"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1354,7 +1353,7 @@ msgstr "See server on juba nimekirjas ja seda ei ole võimalik uuesti lisada.\n"
 #: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Network Configuration"
-msgstr "Võrgu sätted"
+msgstr "Võrgu seadistused"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -1442,7 +1441,7 @@ msgid "Interface"
 msgstr "Liides"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -1486,7 +1485,7 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 msgstr ""
-"valikute kirjeldus:\n"
+"Valikute kirjeldus:\n"
 "\n"
 " - Süsteemsete failide varundamine:\n"
 "       \n"
@@ -1508,12 +1507,14 @@ msgstr ""
 " - Muude failide varundamine: \n"
 "\n"
 "\tSee võimalus lubab salvestada veelgi enam\n"
-"\tandmeid, kuid praegu ei ole selle puhul veel\n"
-"\tvõimalik kasutada muutvarundamist.\t\t\n"
+"\tandmeid. Kui soovite lisada konkreetseid faile,\n"
+"\tvalige need paremal asuvast failide nimekirjast.\n"
+"\tKatalooge saab lisada vasakul asuvast kataloogide\n"
+"\tnimekirjast ning faile valimata 'Olgu' klõpsates.\n"
 " \n"
 " - Muutvarundamine:\n"
 "\n"
-"\ttMuutvarundamine on kõige võimsam kasutatav\n"
+"\tMuutvarundamine on kõige võimsam kasutatav\n"
 "\tvalik, mis lubab esmalt varundada kõik andmed\n"
 "\tja seejärel ainult vahepeal muutunud andmed.\n"
 "\tSel moel on võimalik ka taastamise ajal taastada\n"
@@ -1521,6 +1522,12 @@ msgstr ""
 "\tKui Te ei ole seda võimalust valinud, kustutatakse\n"
 "\tenne iga varundamist vanad varukoopiad.    \n"
 "\n"
+" - Diferentsvarundamine:\n"
+"\n"
+"\tDiferentsvarundamisel ei võrrelda andmete muutusi mitte\n"
+"\tvarasema muutvarunduse failiga, vaid alati esialgselt\n"
+"\tvarundatud faili(de)ga. See meetod võimaldab taastada\n"
+"\tesialgse seisu ning seejärel konkreetse kuupäeva erinevused.\n"
 "\n"
 
 #: ../../security/help.pm:1
@@ -1534,8 +1541,8 @@ msgid ""
 msgstr ""
 "Argumendid: (arg, expr='*.*', dev='tty12')\n"
 "\n"
-"Syslog-i raportite lubamine/keelamine konsoolile 12. \\fIexpr\\fP on \n"
-"avaldis, mis kirjeldab, mida logida (vt lähemalt syslog.conf(5)) ja \n"
+"Syslogi raportite lubamine/keelamine konsoolile 12. \\fIexpr\\fP on \n"
+"avaldis, mis kirjeldab, mida logida (vt lähemalt syslog.conf(5)), ja \n"
 "dev seade, kuhu logiraport saata."
 
 #: ../../modules/parameters.pm:1
@@ -1596,7 +1603,7 @@ msgstr "Brunei"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote lpd Printer Options"
-msgstr "Võrguprinteri (lpd) sätted"
+msgstr "Võrguprinteri (lpd) seadistused"
 
 #: ../../help.pm:1
 #, c-format
@@ -1813,11 +1820,6 @@ msgstr ""
 "Hoidke end ja Teid hoiab ka Jumal!\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB printer \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1839,9 +1841,9 @@ msgid "Start at boot"
 msgstr "Käivitub alglaadimisel"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental Backups"
-msgstr "Muutvarunduse kasutamine (vanu varukoopiaid ei asendata)"
+msgstr "Muutvarunduse kasutamine"
 
 #: ../../any.pm:1
 #, c-format
@@ -1857,6 +1859,11 @@ msgstr "Juhtkang"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1948,11 +1955,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Uus varundamine enne taastamist (ainult muutvarunduse puhul)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Printer paralleelpordis \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2104,7 +2106,7 @@ msgstr "Set-UID"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please check if you are using CDRW media"
-msgstr "Märkige palun, kui kasutate CDRW andmekandjat"
+msgstr "Palun märkige, kui kasutate CDRW andmekandjat"
 
 #: ../../help.pm:1
 #, c-format
@@ -2115,12 +2117,7 @@ msgid ""
 msgstr ""
 "Valige kõvaketas, mida soovite puhastada oma uue Mandrake Linuxi\n"
 "paigaldamiseks. Ettevaatust, kõik sellel leiduvad andmed hävitatakse\n"
-"ega ole enam taastatavad."
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " paralleelpordis \\#%s"
+"ja neid ei saa enam taastada."
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2494,7 +2491,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Wizard Configuration"
-msgstr "Nõustaja sätted"
+msgstr "Nõustaja seadistamine"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -2535,7 +2532,7 @@ msgstr ""
 "\n"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "information level that can be obtained through the cpuid instruction"
 msgstr "Infotase, mida võib saada cpuid instruktsiooni vahendusel"
 
@@ -2612,7 +2609,7 @@ msgid ""
 "- Options:\n"
 msgstr ""
 "\n"
-"- valikud:\n"
+"- Valikud:\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2637,7 +2634,7 @@ msgstr "WebDAVi ülekanne ebaõnnestus!"
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "XFree configuration"
-msgstr "XFree sätted"
+msgstr "XFree seadistused"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -2717,7 +2714,7 @@ msgstr "Helisüsteemi ALSA (Advanced Linux Sound Architecture) käivitamine"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Installing driver for %s card %s"
-msgstr "Paigaldame juhtprogrammi %s kaardile %s"
+msgstr "Juhtprogrammi %s paigaldamine kaardile %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2937,7 +2934,7 @@ msgstr "Palun valige, millist võrguliidest soovite kasutada kohtvõrgu jaoks."
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "OK to restore the other files."
-msgstr "Muude failide taastamiseks vajuta 'Olgu'."
+msgstr "Muude failide taastamiseks vajutage 'Olgu'."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3121,7 +3118,7 @@ msgstr "Seiskamisviga"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Mail alert configuration"
-msgstr "Meilihoiatuse sätted"
+msgstr "Meilihoiatuse seadistused"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3434,7 +3431,7 @@ msgstr "Kontrollige, et andmekandja on seadmes %s"
 #: ../../any.pm:1
 #, c-format
 msgid "Enable multiple profiles"
-msgstr "Võimalda mitu profiili"
+msgstr "Mitme profiili lubamine"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3478,10 +3475,10 @@ msgid ""
 "for you.\n"
 "\n"
 msgstr ""
-"Teie praegused sätted on võimalik säilitada ja eeldada, et DHCP server on "
+"Teie praegune seadistus on võimalik säilitada ja eeldada, et DHCP server on "
 "juba seadistatud. Sellisel juhul kontrollige, et võrk, mida kasutate "
 "kohtvõrgu tarbeks, on õigesti tuvastatud. Seda ei hakata ümber seadistama "
-"ega Teie DHCP serveri sätteid muutma.\n"
+"ega Teie DHCP serveri seadistust muutma.\n"
 "\n"
 "Vaikimisi DNS kirje on tulemüüri poolt seadistatud puhverdav nimeserver. See "
 "on võimalik asendada näiteks Teie ISP DNSi IP-ga.\n"
@@ -3514,7 +3511,7 @@ msgid ""
 "After this is done, we recommend that you restart your X environment to "
 "avoid any hostname-related problems."
 msgstr ""
-"Soovitame taaskäivitada ka X keskkonna, et vältida võimalikke\n"
+"Soovitame uuesti käivitada ka X keskkonna, et vältida võimalikke\n"
 "masinanime muutmisest tingitud probleeme."
 
 #: ../../services.pm:1
@@ -3632,7 +3629,7 @@ msgstr "teisene"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "View Backup Configuration."
-msgstr "Varundamise sätete vaatamine."
+msgstr "Varundamise seadistuste vaatamine."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -4461,7 +4458,7 @@ msgid ""
 msgstr ""
 "\n"
 "Käsud \"%s\" ja \"%s\" võimaldavad samuti muuta konkreetse trükkimistöö "
-"valikuid. Selleks tuleb vaid lisada soovitud sätted käsureale, näiteks \"%s "
+"valikuid. Selleks tuleb vaid lisada soovitud valikud käsureale, näiteks \"%s "
 "<fail>\".\n"
 
 #: ../../standalone/drakbackup:1
@@ -4479,7 +4476,7 @@ msgid ""
 msgstr ""
 "WebDAV on protokoll, mis võimaldab haakida veebiserveri kataloogi\n"
 "kohalikult ning käsitleda seda kui kohalikku failisüsteemi (eeldusel, et\n"
-"veebiserver on seadistatud WebDAVi serverina). Kui soovite lisada\n"
+"veebiserver on seadistatud WebDAV-serverina). Kui soovite lisada\n"
 "WebDAVi haakepunkte, vajutage nupule \"Uus\"."
 
 #: ../../standalone/drakbug:1
@@ -4565,7 +4562,7 @@ msgstr "Misvärk"
 #: ../../network/network.pm:1
 #, c-format
 msgid "Proxies configuration"
-msgstr "Vahendajate sätted"
+msgstr "Vahendajate seadistused"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -4677,7 +4674,7 @@ msgid ""
 "- Save via %s on host: %s\n"
 msgstr ""
 "\n"
-"- salvesta %s vahendusel masinale: %s\n"
+"- Salvesta %s vahendusel masinale: %s\n"
 
 #: ../../lang.pm:1 ../../standalone/drakxtv:1
 #, c-format
@@ -4859,8 +4856,8 @@ msgid ""
 "Modifying the fields below will override this configuration."
 msgstr ""
 "HOIATUS: See seade on juba seadistatud Interneti jaoks.\n"
-"Valige lihtsalt Olgu, et sätteid mitte muuta.\n"
-"Allpool olevate väljade muutmine tühistab varasemad sätted."
+"Valige lihtsalt 'Olgu', et seadistust mitte muuta.\n"
+"Allolevate väljade muutmine tühistab varasema seadistuse."
 
 #: ../../any.pm:1
 #, c-format
@@ -4878,6 +4875,8 @@ msgid ""
 "the WP flag in the CR0 register enforce write proctection at the memory page "
 "level, thus enabling the processor to prevent kernel accesses)"
 msgstr ""
+"WP lipp CR0 registris kehtestab kirjutuskaitse mälulehekülje tasemel, "
+"võimaldades nii protsessoril takistada ligipääsu kernelile)"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -4915,7 +4914,7 @@ msgid ""
 "Please check all options that you need.\n"
 msgstr ""
 "\n"
-"Kontrollige palun kõiki vajalikke valikuid.\n"
+"Märkige pakun ära kõik vajalikud valikud.\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -4928,15 +4927,15 @@ msgid "Cape Verde"
 msgstr "Cabo Verde"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "Kas sel CPU-l on Cyrix 6x86 \"koomaviga\" ?"
+msgstr "kas sel CPU-l on Cyrix 6x86 \"koomaviga\""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"Varased pentiumid olid vigased ning hangusid F00F baidikoodi dekodeerimisel"
+"varased pentiumid olid vigased ning hangusid F00F baidikoodi dekodeerimisel"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5021,7 +5020,7 @@ msgstr "%s kontrollimine"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "TCP/Socket Printer Options"
-msgstr "TCP/Socket printeri sätted"
+msgstr "TCP/Socket printeri seadistused"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -5177,7 +5176,7 @@ msgstr "Ghostscript"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "LAN Configuration"
-msgstr "LAN sätted"
+msgstr "LAN seadistused"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5378,7 +5377,7 @@ msgstr "Pakettide paigaldamisel tekkis viga:"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Lexmark inkjet configuration"
-msgstr "Lexmark inkjeti sätted"
+msgstr "Lexmark inkjeti seadistused"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5424,6 +5423,11 @@ msgstr "Liibüa"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Häälestan skriptid, paigaldan tarkvara, käivitan serverid..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Printer paralleelpordis \\#%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5431,7 +5435,7 @@ msgid ""
 "- Burn to CD"
 msgstr ""
 "\n"
-"- kirjuta CD-le"
+"- Kirjuta CD-le"
 
 #: ../../any.pm:1
 #, c-format
@@ -5458,6 +5462,11 @@ msgstr ""
 "Argumendid: (arg)\n"
 "\n"
 "Libsafe lubamine/keelamine, kui see süsteemist leitakse."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "USB printer \\#%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5557,7 +5566,7 @@ msgid ""
 "- Save to Tape on device: %s"
 msgstr ""
 "\n"
-"- salvesta lindile seadmel: %s"
+"- Salvesta lindile seadmel: %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5786,6 +5795,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Ajutiste failide kustutamine"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Õnnitleme, võrk ja internetiühendus on seadistatud.\n"
+"Sätted salvestatakse nüüd.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6036,7 +6055,7 @@ msgstr "Meilihoiatus"
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Internet configuration"
-msgstr "Interneti sätted"
+msgstr "Internetiseadistused"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6142,9 +6161,9 @@ msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS kettatähis: %s (arvatavasti)\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select the files or directories and click on 'OK'"
-msgstr "Valige failid või kataloogid ja klõpsake 'Lisa'"
+msgstr "Valige failid või kataloogid ja klõpsake 'Olgu'"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6157,7 +6176,7 @@ msgid "omit scsi modules"
 msgstr "scsi moodulite vahelejätt"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "CPU perekond (nt 6, kui on i686)"
 
@@ -6170,7 +6189,7 @@ msgid ""
 "Internet & Network connection.\n"
 msgstr ""
 "Võrguühendus on juba seadistatud, sest paigaldatakse ju võrgust.\n"
-"Kui soovite neid seadistusi säilitada, valige Olgu, muidu katkestage ja "
+"Kui soovite neid seadistusi säilitada, valige 'Olgu', muidu katkestage ja "
 "saate seadistada uuesti.\n"
 
 #: ../../Xconfig/various.pm:1
@@ -6342,7 +6361,7 @@ msgid ""
 "Internet, you should choose a lower level."
 msgstr ""
 "Sellel turvatasemel võib süsteemi kasutada Internetis ka serverina.\n"
-" Turvalisus on nüüd piisavalt kõrge, et töötades serverina võib masin\n"
+"Turvalisus on nüüd piisavalt kõrge, et töötades serverina võib masin\n"
 "vastu võtta ka palju kliente. Märkus: kui Teie masin kasutab Internetti\n"
 "ainult kliendina, võiks valida madalama taseme."
 
@@ -6380,8 +6399,8 @@ msgid ""
 "overtaken, but jobs will not be transferred.\n"
 "Not all queues can be transferred due to the following reasons:\n"
 msgstr ""
-"Teil on võimalus kopeerida printeri sätted, mida määrasite spuulerile %s, "
-"Teie praegusele spuulerile %s. Üle kantakse kõik sätete andmed (printeri "
+"Teil on võimalus kopeerida printeri seadistused, mida määrasite spuulerile %"
+"s, Teie praegusele spuulerile %s. Üle kantakse kõik seadistused (printeri "
 "nimi, kirjeldus, asukoht, ühendusviis, vaikevalikud), aga mitte tööd.\n"
 "Kõiki järjekordi ei saa üle kanda järgmistel põhjustel:\n"
 
@@ -6805,7 +6824,7 @@ msgid ""
 "either the CUPS or the Foomatic specifications. Note that not all URI types "
 "are supported by all the spoolers."
 msgstr ""
-"Siin saab määrata konkreetselt URI printerile ligipääsuks. URI peab järgima "
+"Siin saab määrata konkreetse URI printerile ligipääsuks. URI peab järgima "
 "CUPSi või Foomaticu spetsifikatsiooni. Pange tähele, et mitte kõik spuulerid "
 "ei toeta kõiki URI tüüpe."
 
@@ -6847,7 +6866,7 @@ msgstr ""
 "--show-conf           : varundatavate failide või kataloogide loend.\n"
 "--config-info         : selgitab seadetefaili võtmeid (X-i "
 "mittekasutajaile).\n"
-"--daemon              : kasutab deemoni sätteid.\n"
+"--daemon              : kasutab deemoni seadistusi.\n"
 "--help                : näitab käesolevat abiteadet.\n"
 "--version             : näitab versiooni nime.\n"
 
@@ -6870,7 +6889,7 @@ msgstr ""
 "\n"
 " Täname:\n"
 "\t- LTSP projekti http://www.ltsp.org\n"
-"\t- Michael rowni <mbrown\\@fensystems.co.uk>\n"
+"\t- Michael Browni <mbrown\\@fensystems.co.uk>\n"
 "\n"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
@@ -7514,7 +7533,7 @@ msgstr "Sellel platvormil ei saa laiendatud partitsiooni luua"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "ISDN Configuration"
-msgstr "ISDN sätted"
+msgstr "ISDN seadistused"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7537,8 +7556,8 @@ msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fixes after installation."
 msgstr ""
-"Hoiatus! Leiti olemasolevad tulemüüri sätted. Tõenäoliselt peaksite need "
-"hiljem üle vaatama."
+"Hoiatus! Leiti olemasolevad tulemüüri seadistused. Tõenäoliselt peaksite "
+"need hiljem üle vaatama."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7557,7 +7576,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer default settings"
-msgstr "Printeri vaikesätted"
+msgstr "Printeri vaikeseadistused"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -7841,7 +7860,7 @@ msgid ""
 "IP attribution: %s\n"
 "Driver: %s"
 msgstr ""
-"'%s' praegused sätted:\n"
+"'%s' praegused seadistused:\n"
 "\n"
 "Võrk: %s\n"
 "IP aadress: %s\n"
@@ -8266,11 +8285,6 @@ msgstr ""
 "  Raportimeili ei õnnestunud saata.\n"
 "  Seadistage palun sendmail"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", mitme funktsiooniga seade paralleelpordis \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8404,7 +8418,7 @@ msgstr ""
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
-"Palun valige, millist võrguliidest soovite internetiühenduse jaoks kasutada"
+"Palun valige, millist võrguliidest soovite Internetiühenduse jaoks kasutada"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8455,7 +8469,7 @@ msgstr "Info: "
 msgid "Button `%s': %s"
 msgstr "Nupp '%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
 #: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -8550,7 +8564,7 @@ msgstr ""
 "\n"
 "%s\n"
 "\n"
-"Kohtvõrgu sätted seotakse selle liidesega."
+"Kohtvõrgu seadistused seotakse selle liidesega."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -8690,7 +8704,7 @@ msgstr "Iisraeli"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "load setting"
-msgstr "koormuse sätted"
+msgstr "koormuse seadistused"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8819,7 +8833,7 @@ msgid ""
 "This field isn't necessary, only a tool to fill in the form.)"
 msgstr ""
 "Valige palun CD/DVD-seade.\n"
-"(Vajutage Enter sätete levitamiseks teistele väljadele.\n"
+"(Vajutage Enter seadistuste levitamiseks teistele väljadele.\n"
 "See väli ei ole kohustuslik, ainult vahend vormi täitmiseks.)"
 
 #: ../../lang.pm:1
@@ -8856,7 +8870,7 @@ msgid ""
 "If you don't know the meaning of an option, simply leave it as it is.\n"
 "\n"
 msgstr ""
-"DHCP serveri sätted.\n"
+"DHCP serveri seadistused.\n"
 "\n"
 "Siin saab valida erinevaid võimalusi DHCP serveri seadistustele.\n"
 "Kui te ei tea mõne valiku tähendust, jätke see puutumata.\n"
@@ -8908,7 +8922,7 @@ msgid ""
 "- Daemon (%s) include:\n"
 msgstr ""
 "\n"
-"- deemon (%s) sisaldab:\n"
+"- Deemon (%s) sisaldab:\n"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -8955,7 +8969,7 @@ msgid ""
 "Verify your configuration in the Mandrake Control Center."
 msgstr ""
 "Ühenduse loomine ebaõnnestus.\n"
-"Kontrollige palun sätteid Mandrake juhtimiskeskuse abil."
+"Kontrollige palun seadistusi Mandrake juhtimiskeskuse abil."
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -8988,9 +9002,9 @@ msgid "NoVideo"
 msgstr "NoVideo"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "this field describes the device"
-msgstr "See väli kirjeldab seadet"
+msgstr "see väli kirjeldab seadet"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9068,7 +9082,7 @@ msgid "Choose the window manager to run:"
 msgstr "Valige palun käivitatav aknahaldur:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "sub generation of the cpu"
 msgstr "CPU alampõlvkond"
 
@@ -9121,7 +9135,7 @@ msgstr ""
 "seda seadistust sooritada graafiliste kasutajaliideste abil. Katkestage kohe "
 "pärast litsentsilepinguga nõustumist. Seejärel trükkige \"lexmarkmaintain\" "
 "abil printeripea joondamise leheküljed ning kohandage selle rakenduse abil "
-"pea joondamise sätteid."
+"pea joondamise seadistust."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -9348,9 +9362,9 @@ msgid "Netherlands"
 msgstr "Holland"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sending files by FTP"
-msgstr "Failide saatmine..."
+msgstr "Failide saatmine FTP vahendusel"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9593,7 +9607,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "CUPS printer configuration"
-msgstr "CUPS printeri sätted"
+msgstr "CUPS printeri seadistused"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -9752,7 +9766,7 @@ msgid ""
 msgstr "Aktiveerib süsteemi alglaadimisel kõik vajalikud võrguliidesed."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
@@ -9880,15 +9894,20 @@ msgstr "Valige palun port, kuhu Teie printer on ühendatud."
 msgid "Change Cd-Rom"
 msgstr "Vahetage CD-ROM"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Millist XFree seadistust soovite kasutada?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguay"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr "Muutvarunduse kasutamine (vanu varukoopiaid ei asendata)"
+msgstr "Muut/diferentsvarunduse kasutamine (vanu varukoopiaid ei asendata)"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9975,7 +9994,7 @@ msgstr "valige pilt"
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid "Firewalling configuration detected!"
-msgstr "Leitud tulemüüri sätted!"
+msgstr "Leitud tulemüüri seadistused!"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10445,7 +10464,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Copyright (C) 2002: MandrakeSoft \n"
+" Autoriõigus (C) 2002: MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
 
@@ -10880,7 +10899,7 @@ msgstr "Angola"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "service setting"
-msgstr "teenuse sätted"
+msgstr "teenuse seadistused"
 
 #: ../../any.pm:1 ../../Xconfig/main.pm:1 ../../Xconfig/monitor.pm:1
 #, c-format
@@ -10997,13 +11016,13 @@ msgid ""
 "duplex unit, extra trays) are set correctly. Note that with a very high "
 "printout quality/resolution printing can get substantially slower."
 msgstr ""
-"Printeri vaikesätted\n"
+"Printeri vaikeseadistused\n"
 "\n"
 "Kontrollige palun, et lehekülje suurus ja tinditüüp/trükiresiim (kui "
-"võimalik), samuti laserprinterite riistvaralised sätted (mälu, dupleksseade, "
-"lisasalved) oleksid määratud korrektselt. Pange tähele, et väga suure "
-"trükikvaliteedi või lahutusvõime puhul muutub trükkimine märgatavalt "
-"aeglasemaks."
+"võimalik), samuti laserprinterite riistvaralised seadistused (mälu, "
+"dupleksseade, lisasalved) oleksid määratud korrektselt. Pange tähele, et "
+"väga suure trükikvaliteedi või lahutusvõime puhul muutub trükkimine "
+"märgatavalt aeglasemaks."
 
 #: ../../install_any.pm:1
 #, c-format
@@ -11366,6 +11385,11 @@ msgstr "SILO"
 msgid "Change type"
 msgstr "Muuda tüüpi"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ", USB printer #%s"
+msgstr ", USB printer \\#%s"
+
 #: ../../any.pm:1
 #, c-format
 msgid "SILO Installation"
@@ -11493,7 +11517,7 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 9.1 võimaldab teil kasutada uusimat tarkvara helifailide "
+"Mandrake Linux võimaldab teil kasutada uusimat tarkvara helifailide "
 "mängimiseks, piltide või fotode töötlemiseks ning videode vaatamiseks"
 
 #: ../../printer/printerdrake.pm:1
@@ -11511,7 +11535,7 @@ msgstr ""
 "kas sundida peale, riskides esimese partitsiooni hävinguga?"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -11542,7 +11566,7 @@ msgid ""
 "      \n"
 "\n"
 msgstr ""
-"valikute kirjeldused:\n"
+"Valikute kirjeldused:\n"
 "\n"
 " Sellel sammul võimaldab Drakbackup muuta:\n"
 "\n"
@@ -11561,10 +11585,10 @@ msgstr ""
 "      \n"
 " - .backupignore meetodit:\n"
 "\n"
-"      Nagu cvs-i puhul, eirab ka Drakbackup igas kataloogis\n"
+"      Nagu cvs, eirab ka Drakbackup igas kataloogis\n"
 "      kõike seda, mis on kirjas .backupignore failides.\n"
 "      nt: \n"
-"         /*> cat .backupignore*\n"
+"         #> cat .backupignore*\n"
 "         *.o\n"
 "         *~\n"
 "         ...\n"
@@ -11628,15 +11652,15 @@ msgstr "Alglaadimisel"
 msgid "Bus identification"
 msgstr "Siinitunnus"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Palun tehke oma andmetest kõigepealt varukoopia"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikan"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Palun tehke oma andmetest kõigepealt varukoopia"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11943,7 +11967,7 @@ msgstr ""
 "\t      valida madalam tase.\n"
 "\n"
 "Paranoiline: See sarnaneb eelmisele tasemele, ainult et süsteem on täiesti "
-"suletud ja turvasätted\n"
+"suletud ja turvaseadistused\n"
 "               maksimumi peale keeratud.\n"
 "\n"
 "Turvaadministraator:\n"
@@ -12098,9 +12122,9 @@ msgstr ""
 "eirab Teie määratud ühendusviisi."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "generation of the cpu (eg: 8 for PentiumIII, ...)"
-msgstr "CPU põlvkond (nt 8, kui on PentiumIII, ...)"
+msgstr "CPU põlvkond (nt 8, kui on PentiumIII ...)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12220,7 +12244,7 @@ msgid ""
 "do you really want to overwrite its configuration?"
 msgstr ""
 "Printer \"%s\" on juba olemas,\n"
-"kas tõesti kirjutada selle sätted üle?"
+"kas tõesti kirjutada selle seadistused üle?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12439,7 +12463,7 @@ msgid ""
 "- System Files:\n"
 msgstr ""
 "\n"
-"- süsteemsed failid:\n"
+"- Süsteemsed failid:\n"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -12632,7 +12656,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "OKI winprinter configuration"
-msgstr "OKI winprinteri sätted"
+msgstr "OKI winprinteri seadistused"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12729,7 +12753,7 @@ msgstr "CapsLock-klahv"
 #: ../../steps.pm:1
 #, c-format
 msgid "Install bootloader"
-msgstr "Alglaaduri sätted"
+msgstr "Alglaaduri seadistused"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12961,7 +12985,7 @@ msgstr "Edenemine kokku"
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Color configuration"
-msgstr "Värvisätted"
+msgstr "Värviseadistused"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13353,7 +13377,7 @@ msgid "Reselect correct fonts"
 msgstr "Korrektsete fontide uuestivalimine"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -13363,9 +13387,9 @@ msgid ""
 "drive before sending it to the server.\n"
 "\n"
 msgstr ""
-"valikute kirjeldus:\n"
+"Valikute kirjeldus:\n"
 "\n"
-"Olge palun ettevaatlik, kui kasutate ftp-varundamist, sest serverile\n"
+"Olge palun ettevaatlik, kui kasutate FTP-varundamist, sest serverile\n"
 "saadetakse ainult juba loodud varukoopiad. Seetõttu tuleb esmalt\n"
 "luua varukoopiad kõvakettal ja alles siis need serverile saata.\n"
 "\n"
@@ -13411,14 +13435,14 @@ msgstr ""
 "       XFDrake kuvatihedus"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write protection"
-msgstr "Printeri automaattuvastus"
+msgstr "Kirjutuskaitse"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "You've not selected any font"
-msgstr "ei suutnud fonte leida.\n"
+msgstr "Ühtegi fonti ei ole valitud!"
 
 #: ../../steps.pm:1
 #, c-format
@@ -13540,14 +13564,14 @@ msgstr ""
 "Msec igatunnise turvakontrolli lubamine/keelamine."
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s fonts conversion"
-msgstr "pfm fontide teisendamine"
+msgstr "%s fontide teisendamine"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr "Siinitüüp, millega hiir on ühendatud"
+msgstr "siinitüüp, millega hiir on ühendatud"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13750,7 +13774,7 @@ msgid "Software Manager"
 msgstr "Tarkvarahaldur"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Restore Description:\n"
 " \n"
@@ -13779,7 +13803,7 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 msgstr ""
-"taastamise kirjeldus:\n"
+"Taastamise kirjeldus:\n"
 "\n"
 "Kasutatakse ainult kõige värskemaid andmeid, sest muutvarunduse\n"
 "korral on oluline taastada üksteise järel kõik vanemad varukoopiad.\n"
@@ -13799,7 +13823,12 @@ msgstr ""
 "\tKui Te ei ole seda võimalust valinud, kustutatakse\n"
 "\tenne iga varundamist vanad varukoopiad.    \n"
 "\n"
-"\n"
+" - Diferentsvarundamine:\n"
+" \n"
+"\tDiferentsvarundamisel ei võrrelda andmete muutusi mitte\n"
+"\tvarasema muutvarunduse failiga, vaid alati esialgselt\n"
+"\tvarundatud faili(de)ga. See meetod võimaldab taastada\n"
+"\tesialgse seisu ning seejärel konkreetse kuupäeva erinevused.\n"
 "\n"
 
 #: ../../interactive/stdio.pm:1
@@ -14023,6 +14052,11 @@ msgstr ""
 "Sagedus peab sisaldama sufiksit k, M või G (näiteks \"2.46G\" - 2,46 GHz "
 "sagedusel), või lisage piisavalt nulle."
 
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", mitme funktsiooniga seade paralleelpordis \\#%s"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "serial"
@@ -14110,7 +14144,7 @@ msgstr "LPRng - LPR, uus põlvkond"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Drakbackup Configuration"
-msgstr "Drakbackupi sätted"
+msgstr "Drakbackupi seadistused"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -14139,7 +14173,7 @@ msgstr "Vaikimisi sisenemine"
 #: ../../install_gtk.pm:1
 #, c-format
 msgid "System configuration"
-msgstr "Süsteemi sätted"
+msgstr "Süsteemi seadistused"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14450,7 +14484,7 @@ msgid ""
 "%s"
 msgstr ""
 "Kas säilitada muudatused?\n"
-"Olemasolevad sätted:\n"
+"Olemasolevad seadistused:\n"
 "\n"
 "%s"
 
@@ -14671,7 +14705,7 @@ msgid "Raw printer"
 msgstr "Toorprinter"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "official vendor name of the cpu"
 msgstr "CPU ametlik tootja"
 
@@ -14737,17 +14771,6 @@ msgid ""
 msgstr ""
 "Oma teadmiste jagamiseks ning Linuxi vahendite loomiseks võite ühineda "
 "diskussioonirühmadega, mida leiab meie \"kogukonna\" veebilehekülgedel"
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Õnnitleme, võrk ja internetiühendus on seadistatud.\n"
-"Sätted salvestatakse nüüd.\n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14933,12 +14956,12 @@ msgstr "Printer puudub"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "alert configuration"
-msgstr "hoiatuse sätted"
+msgstr "hoiatuse seadistused"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "NetWare Printer Options"
-msgstr "NetWare printeri sätted"
+msgstr "NetWare printeri seadistused"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -14963,7 +14986,7 @@ msgstr "Tavakasutaja"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Network configuration (%d adapters)"
-msgstr "Võrgusätted (%d liidest)"
+msgstr "Võrguseadistused (%d liidest)"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -15353,7 +15376,7 @@ msgstr "Eemalda valitud masin"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network configuration"
-msgstr "Võrgusätted"
+msgstr "Võrguseadistused"
 
 #: ../../any.pm:1
 #, c-format
@@ -15513,7 +15536,7 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
-msgstr "Teenuste sätted"
+msgstr "Teenuste seadistused"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15526,7 +15549,7 @@ msgid "mount failed: "
 msgstr "haakimine ebaõnnestus: "
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
@@ -15804,7 +15827,7 @@ msgstr "Internetiühendus on katkestatud."
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Custom configuration"
-msgstr "Kohandatud sätted"
+msgstr "Kohandatud seadistused"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16126,7 +16149,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "SMB (Windows 9x/NT) Printer Options"
-msgstr "SMB (Windows 9x/NT) printeri sätted"
+msgstr "SMB (Windows 9x/NT) printeri seadistused"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -16364,7 +16387,7 @@ msgstr "kui on 'jah', käivitab chkrootkit kontrolli."
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Connection Configuration"
-msgstr "Internetiühenduse sätted"
+msgstr "Internetiühenduse seadistused"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -16431,6 +16454,11 @@ msgstr "Blokkide kontroll?"
 msgid "Other MultiMedia devices"
 msgstr "Muud multimeediaseadmed"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Printer"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -16473,7 +16501,7 @@ msgstr "NIS autentimine"
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
-msgstr "Säte ``Piira käsurea suvandeid'' ei ole kasutatav ilma salasõnata"
+msgstr "Võti ``Piira käsurea suvandeid'' ei ole kasutatav ilma salasõnata"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16828,7 +16856,7 @@ msgid ""
 "- User Files:\n"
 msgstr ""
 "\n"
-"- kasutaja failid.\n"
+"- Kasutaja failid.\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17143,7 +17171,7 @@ msgstr "Printeri nimi tohib sisaldada vaid tähti, numbreid ja alakriipsu"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Show current interface configuration"
-msgstr "Liidese praeguste sätete näitamine"
+msgstr "Liidese praeguste seadistuste näitamine"
 
 #: ../../help.pm:1
 #, c-format
@@ -17214,6 +17242,11 @@ msgstr ""
 msgid "(already added %s)"
 msgstr "(juba lisatud %s)"
 
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Alglaaduri paigaldus"
+
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", using command %s"
@@ -17247,7 +17280,7 @@ msgstr "iga nädal"
 #: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Settings"
-msgstr "Sätted"
+msgstr "Seadistused"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17428,9 +17461,9 @@ msgid "Apache World Wide Web Server"
 msgstr "Apache veebiserver"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr "Protsessori alamtüüp (nn stepping'u number) "
+msgstr "protsessori alamtüüp (nn stepping'u number) "
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17632,7 +17665,7 @@ msgstr "Bogomipsid"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Mandrake Terminal Server Configuration"
-msgstr "Mandrake terminaliserveri sätted"
+msgstr "Mandrake terminaliserveri seadistused"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17651,6 +17684,11 @@ msgstr ""
 #, c-format
 msgid "Restore all backups"
 msgstr "Taasta kõik varukoopiad"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid " on parallel port #%s"
+msgstr " paralleelpordis \\#%s"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -17680,7 +17718,7 @@ msgid ""
 "- Other Files:\n"
 msgstr ""
 "\n"
-"- muud failid:\n"
+"- Muud failid:\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17930,7 +17968,7 @@ msgid ""
 "- Save on Hard drive on path: %s\n"
 msgstr ""
 "\n"
-"- salvesta kõvakettale asukohta: %s\n"
+"- Salvesta kõvakettale asukohta: %s\n"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -17968,9 +18006,9 @@ msgid "Please enter the directory to save:"
 msgstr "Sisestage palun kataloog, kuhu salvestada:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "format of floppies supported by the drive"
-msgstr "Flopi vorming, mida seade tunnustab"
+msgstr "flopi vorming, mida seade tunnustab"
 
 #: ../../raid.pm:1
 #, c-format
@@ -17991,11 +18029,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Ühendatud"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB printer \\#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18089,7 +18122,7 @@ msgid ""
 "- Delete hard drive tar files after backup.\n"
 msgstr ""
 "\n"
-"- kustuta pärast varundamist kõvakettalt tar-failid.\n"
+"- Kustuta pärast varundamist kõvakettalt tar-failid.\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -18173,7 +18206,7 @@ msgstr "Kasutaja valik käsitsi"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Transfer printer configuration"
-msgstr "Printeri sätete ülekandmine"
+msgstr "Printeri seadistuste ülekandmine"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18385,7 +18418,7 @@ msgstr "Tuvastan juba paigaldatud pakette..."
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Differential Backups"
-msgstr ""
+msgstr "Diferentsvarunduse kasutamine"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18527,7 +18560,7 @@ msgstr "Automaatpaigalduse seadistaja"
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure networking"
-msgstr "Võrgusätted"
+msgstr "Võrgu seadistamine"
 
 #: ../../any.pm:1
 #, c-format
@@ -18719,7 +18752,7 @@ msgstr "Kohtvõrku ühendatud printerite automaattuvastus"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "LAN configuration"
-msgstr "LAN sätted"
+msgstr "LAN seadistused"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19293,7 +19326,7 @@ msgid "Delay before booting the default image"
 msgstr "Ooteaeg alglaadimisel"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -19326,9 +19359,9 @@ msgid ""
 "             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
 "\n"
-" Copyright (C) 2001-2002: MandrakeSoft \n"
-"\tDUPONT Sebastien (esialgne versioon)\n"
-"        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
+" Autoriõigus (C) 2001-2002: MandrakeSoft \n"
+"     DUPONT Sebastien (esialgne versioon)\n"
+"     CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
 "\n"
 " Käesolev rakendus on vaba tarkvara. Te võite seda edasi levitada\n"
 " ja/või muuta vastavalt GNU Üldise Avaliku Litsentsi tingimustele, nagu\n"
@@ -19351,12 +19384,10 @@ msgstr ""
 "\t    teisendab Windowsi .pfm-faili .afm-failiks (Adobe fondimeetrika)\n"
 "    -  type1inst:\n"
 "\t autor: James Macnicol: \n"
-"\t    type1inst tekitab failid fonts.dir fonts.scale ja Fontmap.\n"
+"\t    type1inst tekitab failid fonts.dir, fonts.scale ja Fontmap.\n"
 "    -  ttf2pt1:   \n"
 "\t  autorid: Andrew Weeks, Frank Siegert, Thomas Henlich, Sergei Babkin  \n"
 "             teisendab ttf-fondifailid afm- ja pfb-fontideks\n"
-"\n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19683,68 +19714,23 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Valik rakendusi e-posti lugemiseks ja saatmiseks ning veebi lehitsemiseks"
 
-#~ msgid "Internet connection & configuration"
-#~ msgstr "Internetiühenduse seadistamine"
+#~ msgid ", USB printer \\#%s"
+#~ msgstr ", USB printer \\#%s"
 
-#~ msgid "Configure the connection"
-#~ msgstr "Ühenduse seadistamine"
+#~ msgid "Printer on parallel port \\#%s"
+#~ msgstr "Printer paralleelpordis \\#%s"
 
-#~ msgid "Disconnect"
-#~ msgstr "Katkesta ühendus"
+#~ msgid " on parallel port \\#%s"
+#~ msgstr " paralleelpordis \\#%s"
 
-#~ msgid "Connect"
-#~ msgstr "Ühenda"
-
-#~ msgid ""
-#~ "\n"
-#~ "You can reconfigure your connection."
-#~ msgstr ""
-#~ "\n"
-#~ "Saate seadistada ühenduse uuesti."
+#~ msgid ", multi-function device on parallel port \\#%s"
+#~ msgstr ", mitme funktsiooniga seade paralleelpordis \\#%s"
 
 #~ msgid ""
+#~ "Congratulations, the network and Internet configuration is finished.\n"
+#~ "The configuration will now be applied to your system.\n"
 #~ "\n"
-#~ "You can connect to the Internet or reconfigure your connection."
 #~ msgstr ""
+#~ "Õnnitleme, võrk ja internetiühendus on seadistatud.\n"
+#~ "Seadistused salvestatakse nüüd.\n"
 #~ "\n"
-#~ "Saate ühenduda Internetti või seadistada ühendus uuesti."
-
-#~ msgid "You are not currently connected to the Internet."
-#~ msgstr "Hetkel ei ole Te Internetti ühendatud."
-
-#~ msgid ""
-#~ "\n"
-#~ "You can disconnect or reconfigure your connection."
-#~ msgstr ""
-#~ "\n"
-#~ "Saate ühenduse katkestada või uuesti seadistada."
-
-#~ msgid "You are currently connected to the Internet."
-#~ msgstr "Hetkel olete Internetti ühendatud."
-
-#~ msgid "files sending by FTP"
-#~ msgstr "failide saatmine FTP kaudu"
-
-#~ msgid "Use incremental backup  (do not replace old backups)"
-#~ msgstr "Muutvarunduse kasutamine  (vanu varukoopiaid ei asendata)"
-
-#~ msgid "Relaunch 'lilo'"
-#~ msgstr "Taaskäivita 'lilo'"
-
-#~ msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-#~ msgstr "Loo initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#~ msgid "Write %s"
-#~ msgstr "Kirjuta %s"
-
-#~ msgid "Copy %s to %s"
-#~ msgstr "Tee %s -st koopia %s"
-
-#~ msgid "Backup %s to %s.old"
-#~ msgstr "Tee %s -st varukoopia %s.old"
-
-#~ msgid "ttf fonts conversion"
-#~ msgstr "ttf fontide teisendamine"
-
-#~ msgid "Fonts conversion"
-#~ msgstr "Fontide teisendamine"
