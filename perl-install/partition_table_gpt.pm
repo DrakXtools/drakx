@@ -68,14 +68,13 @@ sub crc32 {
         }
         $crc = ($crc >> 8) ^ $subcrc;
     }
-    $crc;
+    $crc ^ 0xFFFFFFFF;
 }
 
-sub compute_crc {
+sub compute_headerCRC32 {
     my ($info) = @_;
     local $info->{headerCRC32} = 0;
-    my $tmp = pack($main_format, @$info{@$main_fields});
-    crc32($tmp) ^ 0xFFFFFFFF;
+    crc32(pack($main_format, @$info{@$main_fields}));
 }
 
 sub read {
@@ -100,12 +99,17 @@ sub read {
     $info{partitionEntrySize} == psizeof($partitionEntry_format) or die "bad partitionEntrySize";
     $info{revision} <= $current_revision or log::l("oops, this is a new GPT revision ($info{revision} > $current_revision)");
 
-    my $chksum = compute_crc(\%info);
-    $chksum == $info{headerCRC32} or die "bad checksum";
+    $info{headerCRC32} == compute_headerCRC32(\%info) or die "bad partition table checksum";
+
+    c::lseek_sector(fileno(F), $info{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
+    sysread F, $tmp, psizeof($partitionEntry_format) * $info{nbPartitions} or die "error while reading partition table in sector $sector";
+    $info{partitionEntriesCRC32} == crc32($tmp) or die "bad partition entries checksum";
 
     c::lseek_sector(fileno(F), $info{partitionEntriesLBA}, 0) or die "can't seek to sector partitionEntriesLBA";
     my %gpt_types_rev = reverse %gpt_types;
-    my @pt = map {
+    my @pt = 
+      grep { $_->{size} && $_->{type} } #- compress empty partitions as kernel skip them
+      map {
 	sysread F, $tmp, psizeof($partitionEntry_format) or die "error while reading partition table in sector $sector";
 	my %h; @h{@$partitionEntry_fields} = unpack $partitionEntry_format, $tmp;
 	$h{size} = $h{ending} - $h{start};
@@ -127,7 +131,7 @@ sub write {
     
     foreach (@$pt) {
 	$_->{ending} = $_->{start} + $_->{size};
-	$_->{gpt_type} = $gpt_types{$_->{type}} || $gpt_types{0x83};
+	$_->{gpt_type} = $gpt_types{$_->{type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
 
     $info->{csum} = compute_crc($info);

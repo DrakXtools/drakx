@@ -153,6 +153,9 @@ sub hds {
 	member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)
 	  foreach partition_table::get_normal_parts($hd);
 
+	# special case for Various type
+	$_->{type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{type} == 0x100 } partition_table::get_normal_parts($hd);
+
 	#- special case for type overloading (eg: reiserfs is 0x183)
 	foreach (grep { isExt2($_) } partition_table::get_normal_parts($hd)) {
 	    my $type = typeOfPart($_->{device});
