@@ -414,11 +414,11 @@ msgstr "Skriv /etc/fstab"
 
 #: ../diskdrake.pm_.c:34
 msgid "Toggle to expert mode"
-msgstr "Endre til ekspertmodus"
+msgstr "Skift til ekspertmodus"
 
 #: ../diskdrake.pm_.c:35
 msgid "Toggle to normal mode"
-msgstr "Endre til normalmodus"
+msgstr "Skift til normalmodus"
 
 #: ../diskdrake.pm_.c:36
 msgid "Restore from file"
@@ -1515,7 +1515,7 @@ msgid ""
 "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
 "(the master drive on the primary channel)."
 msgstr ""
-"Hvis du ikke spesifikt kjenner en annen måte, så er det vanlige valget\n"
+"Hvis du ikke spesifikt ønsker annen måte, så er det vanlige valget\n"
 "\"/dev/hda\" (masterdisken på den primære kanalen)."
 
 #: ../help.pm_.c:299
@@ -2064,7 +2064,7 @@ msgstr "Installer/Oppgrader"
 
 #: ../install_steps_interactive.pm_.c:80
 msgid "Is this an install or an upgrade?"
-msgstr "Er dette en installasjon eller en oppgradering?"
+msgstr "Er dette en installering eller en oppgradering?"
 
 #: ../install_steps_interactive.pm_.c:81
 msgid "Upgrade"
@@ -2169,7 +2169,7 @@ msgstr "Valg pakkegruppe"
 #: ../install_steps_interactive.pm_.c:254
 #, c-format
 msgid "Too many packages chosen: %dMB doesn't fit in %dMB"
-msgstr ""
+msgstr "For mange pakker er valgt: %dMB passer ikke i %dMB"
 
 #: ../install_steps_interactive.pm_.c:277
 msgid ""
@@ -2458,7 +2458,7 @@ msgstr "Laster ned kryptografiske pakker"
 
 #: ../install_steps_interactive.pm_.c:500
 msgid "Which is your timezone?"
-msgstr "Hvilken er tidsonen din?"
+msgstr "Hvilken er din tidsone?"
 
 #: ../install_steps_interactive.pm_.c:501
 msgid "Is your hardware clock set to GMT?"
@@ -2596,14 +2596,12 @@ msgid "This user name is already added"
 msgstr "Denne brukeren er allerede lagt til"
 
 #: ../install_steps_interactive.pm_.c:615
-#, fuzzy
 msgid "First drive"
-msgstr "Første DNS-tjener"
+msgstr "Første disk"
 
 #: ../install_steps_interactive.pm_.c:616
-#, fuzzy
 msgid "Second drive"
-msgstr "Andre DNS-tjener"
+msgstr "Andre disk"
 
 #: ../install_steps_interactive.pm_.c:617
 msgid "Skip"
@@ -3010,15 +3008,16 @@ msgid ""
 "As a work-around i can make a custom floppy giving access the hard drive on "
 "ide2 and ide3"
 msgstr ""
+"Linux støtter ennå ikke ultra dma 66 HPT fullt ut.\n"
+"Jeg kan lage en diskett som gir tilgang til harddisken på ide2 og ide3"
 
 #: ../install_steps_interactive.pm_.c:995
-#, fuzzy
 msgid ""
 "Enter a floppy to create an HTP enabled boot\n"
 "(all data on floppy will be lost)"
 msgstr ""
-"Sett inn en diskett i stasjonen\n"
-"Alle data på denne disketten vil gå tapt"
+"Sett inn en diskett for å opprette en oppstart med HTP slått på\n"
+"(Alle data på disketten vil gå tapt)"
 
 #: ../install_steps_interactive.pm_.c:1012
 msgid "It is necessary to restart installation booting on the floppy"
@@ -3035,6 +3034,8 @@ msgid ""
 "Failed to create an HTP boot floppy.\n"
 "You may have to restart installation and give ``%s'' at the prompt"
 msgstr ""
+"Oppretting av HTP oppstartsdiskett mislykket.\n"
+"Du må muligens starte installasjonen igjen og gi ``%s'' ved klartegnet"
 
 #: ../install_steps_interactive.pm_.c:1037
 #, c-format
@@ -3796,9 +3797,8 @@ msgid "Emulate third button?"
 msgstr "Emulere tredje knapp?"
 
 #: ../standalone/rpmdrake_.c:25
-#, fuzzy
 msgid "reading configuration"
-msgstr "Test konfigurasjon"
+msgstr "leser konfigurasjon"
 
 #: ../standalone/rpmdrake_.c:45 ../standalone/rpmdrake_.c:50
 #: ../standalone/rpmdrake_.c:253
@@ -3815,222 +3815,200 @@ msgid "Package"
 msgstr "Pakke"
 
 #: ../standalone/rpmdrake_.c:51
-#, fuzzy
 msgid "Text"
-msgstr "ekspert"
+msgstr "Tekst"
 
 #: ../standalone/rpmdrake_.c:53
-#, fuzzy
 msgid "Tree"
-msgstr "Gresk"
+msgstr "Tre"
 
 #: ../standalone/rpmdrake_.c:54
 msgid "Sort by"
-msgstr ""
+msgstr "Sortert etter"
 
 #: ../standalone/rpmdrake_.c:55
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 #: ../standalone/rpmdrake_.c:58
-#, fuzzy
 msgid "See"
-msgstr "Tjener"
+msgstr "Se"
 
 #: ../standalone/rpmdrake_.c:59 ../standalone/rpmdrake_.c:163
-#, fuzzy
 msgid "Installed packages"
-msgstr "installer pakker"
+msgstr "Installerte pakker"
 
 #: ../standalone/rpmdrake_.c:60
-#, fuzzy
 msgid "Available packages"
-msgstr "/Alle pakker"
+msgstr "Tilgjengelige pakker"
 
 #: ../standalone/rpmdrake_.c:62
-#, fuzzy
 msgid "Show only leaves"
-msgstr "Vis mindre"
+msgstr "Vis bare tillatelser"
 
 #: ../standalone/rpmdrake_.c:67
 msgid "Expand all"
-msgstr ""
+msgstr "Utvid alle"
 
 #: ../standalone/rpmdrake_.c:68
-#, fuzzy
 msgid "Collapse all"
-msgstr "Fjern alle"
+msgstr "Trekk sammen alle"
 
 #: ../standalone/rpmdrake_.c:70
-#, fuzzy
 msgid "Configuration"
-msgstr "Test konfigurasjon"
+msgstr "Konfigurasjon"
 
 #: ../standalone/rpmdrake_.c:71
-#, fuzzy
 msgid "Add location of packages"
-msgstr "Tillat erstatting av pakker"
+msgstr "Legg til lokasjon av pakker"
 
 #: ../standalone/rpmdrake_.c:75
-#, fuzzy
 msgid "Update location"
-msgstr "Alternativer for oppgradering"
+msgstr "Oppdater lokasjon"
 
 #: ../standalone/rpmdrake_.c:79 ../standalone/rpmdrake_.c:328
-#, fuzzy
 msgid "Remove"
-msgstr "Fjern inngang"
+msgstr "Fjern"
 
 #: ../standalone/rpmdrake_.c:100
 msgid "Configuration: Add Location"
-msgstr ""
+msgstr "Konfigurasjon: Legg til lokasjon"
 
 #: ../standalone/rpmdrake_.c:101
-#, fuzzy
 msgid "Expand Tree"
-msgstr ""
-"Utvid\n"
-"Tre"
+msgstr "Utvid tre"
 
 #: ../standalone/rpmdrake_.c:102
-#, fuzzy
 msgid "Collapse Tree"
-msgstr ""
-"Trekk sammen\n"
-"Tre"
+msgstr "Trekk sammen tre"
 
 #: ../standalone/rpmdrake_.c:103
-#, fuzzy
 msgid "Find Package"
-msgstr "Finn pakker"
+msgstr "Finn pakke"
 
 #: ../standalone/rpmdrake_.c:104
-#, fuzzy
 msgid "Find Package containing file"
-msgstr "Finn pakker som"
+msgstr "Finn pakke som inneholder fil"
 
 #: ../standalone/rpmdrake_.c:105
 msgid "Toggle between Installed and Available"
-msgstr ""
+msgstr "Skift mellom Installert og Tilgjengelig"
 
 #: ../standalone/rpmdrake_.c:139
-#, fuzzy
 msgid "Files:\n"
-msgstr "Fil"
+msgstr "Filer:\n"
 
 #: ../standalone/rpmdrake_.c:161 ../standalone/rpmdrake_.c:209
 msgid "Uninstall"
 msgstr "Avinstaller"
 
 #: ../standalone/rpmdrake_.c:163
-#, fuzzy
 msgid "Choose package to install"
-msgstr "Velg pakker for installering"
+msgstr "Velg pakke å installere"
 
 #: ../standalone/rpmdrake_.c:190
-#, fuzzy
 msgid "Checking dependencies"
-msgstr "Sjekker signaturer"
+msgstr "Sjekker avhengigheter"
 
 #: ../standalone/rpmdrake_.c:190 ../standalone/rpmdrake_.c:409
 msgid "Wait"
-msgstr ""
+msgstr "Vent"
 
 #: ../standalone/rpmdrake_.c:209
-#, fuzzy
 msgid "The following packages are going to be uninstalled"
-msgstr "%d pakker kunne ikke avinstalleres"
+msgstr "Følgende pakker vil bli avinstallert"
 
 #: ../standalone/rpmdrake_.c:210
-#, fuzzy
 msgid "Uninstalling the RPMs"
-msgstr "Installerer pakke %s"
+msgstr "Avinstallerer RPM'ene"
 
 #: ../standalone/rpmdrake_.c:229 ../standalone/rpmdrake_.c:269
 msgid "Regexp"
-msgstr ""
+msgstr "Regexp"
 
 #: ../standalone/rpmdrake_.c:229
 msgid "Which package are looking for"
-msgstr ""
+msgstr "Hvilken pakke ser etter"
 
 #: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
 #: ../standalone/rpmdrake_.c:278
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found"
-msgstr "%d problemer funnet."
+msgstr "%d ikke funnet"
 
 #: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
 #: ../standalone/rpmdrake_.c:278
 msgid "No match"
-msgstr ""
+msgstr "Ingen som stemmer"
 
 #: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
 #: ../standalone/rpmdrake_.c:278
 msgid "No more match"
-msgstr ""
+msgstr "Ingen flere som stemmer"
 
 #: ../standalone/rpmdrake_.c:246
 msgid ""
 "rpmdrake is currently in ``low memory'' mode.\n"
 "I'm going to relaunch rpmdrake to allow searching files"
 msgstr ""
+"rpmdrake er for øyeblikket i ``lavt minne'' modus.\n"
+"Jeg vil starte rpmdrake på nytt for å muliggjøre søk etter filer"
 
 #: ../standalone/rpmdrake_.c:253
 msgid "Which file are you looking for"
-msgstr ""
+msgstr "Hvilken fil ser du etter"
 
 #: ../standalone/rpmdrake_.c:269
 msgid "What are looking for"
-msgstr ""
+msgstr "Hva ser etter"
 
 #: ../standalone/rpmdrake_.c:289
 msgid "Give a name (eg: `extra', `commercial')"
-msgstr ""
+msgstr "Oppgi ett navn (f.eks. `ekstra', `kommersiell')"
 
 #: ../standalone/rpmdrake_.c:291
-#, fuzzy
 msgid "Directory"
-msgstr "Sektor"
+msgstr "Katalog"
 
 #: ../standalone/rpmdrake_.c:294
 msgid "No cdrom available (nothing in /mnt/cdrom)"
-msgstr ""
+msgstr "Ingen cdrom tilgjengelig (ingenting i /mnt/cdrom)"
 
 #: ../standalone/rpmdrake_.c:298
 msgid "URL of the directory containing the RPMs"
-msgstr ""
+msgstr "Katalogens URL inneholder RPM'ene"
 
 #: ../standalone/rpmdrake_.c:299
 msgid ""
 "For FTP and HTTP, you need to give the location for hdlist\n"
 "It must be relative to the URL above"
 msgstr ""
+"For FTP og HTTP må du oppgi lokasjonen for hdlist\n"
+"Den må være relatert til URL'en ovenfor"
 
 #: ../standalone/rpmdrake_.c:302
 msgid "Please submit the following information"
-msgstr ""
+msgstr "Vennligst gi følgende informasjon"
 
 #: ../standalone/rpmdrake_.c:304
-#, fuzzy, c-format
+#, c-format
 msgid "%s is already in use"
-msgstr "Denne etiketten er allerede i bruk"
+msgstr "%s er allerede i bruk"
 
 #: ../standalone/rpmdrake_.c:315 ../standalone/rpmdrake_.c:321
 #: ../standalone/rpmdrake_.c:329
 msgid "Updating the RPMs base"
-msgstr ""
+msgstr "Oppdaterer RPM basen"
 
 #: ../standalone/rpmdrake_.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Going to remove entry %s"
-msgstr "Fjern inngang"
+msgstr "Inngang %s vil bli fjernet"
 
 #: ../standalone/rpmdrake_.c:360
 msgid "Finding leaves"
-msgstr ""
+msgstr "Finner tillatelser"
 
 #: ../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
-msgstr ""
-
+msgstr "Finne tillatelser vil ta litt tid"
