@@ -207,8 +207,6 @@ sub installPackages() {
     $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
 
     pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
-    use Data::Dumper;
-    output("/tmp/pkgs1", Dumper($o->{packages}));
 
     # unselect some packages whose services fsck up the box and whose services are not enabled by appropriate tools:
     # (shorewall must be deselected before iptables is)
@@ -218,7 +216,6 @@ sub installPackages() {
     }
 
     my @toInstall = pkgs::packagesToInstall($o->{packages});
-    output("/tmp/pkgs2", Dumper([ map { $_->name } @toInstall ]));
     local $ENV{DURING_INSTALL} = 1;
     $ENV{LD_LIBRARY_PATH} = "/lib:/usr/lib:/usr/X11R6/lib:/usr/lib/qt3/lib";
     pkgs::install($::prefix, 0, \@toInstall, $o->{packages});
