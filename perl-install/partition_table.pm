@@ -196,7 +196,7 @@ sub adjust_main_extended($) {
 	my ($l, @l) = @{$hd->{extended}};
 
 	# the first is a special case, must recompute its real size
-	my $start = round_down($l->{normal}{start} - 1, cylinder_size($hd));
+	my $start = round_down($l->{normal}{start} - 1, $hd->{geom}{sectors});
 	my $end = $l->{normal}{start} + $l->{normal}{size};
 	foreach (map $_->{normal}, @l) {
 	    $start = min($start, $_->{start});
