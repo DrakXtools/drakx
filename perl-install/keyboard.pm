@@ -82,6 +82,7 @@ our %lang2keyboard =
 'ku_IQ' => 'ku:90',
   'kw'  => 'uk:80 ie:70',
   'ky'  => 'ky:90 ru_yawerty:40',
+  'lb'  => 'ch_fr:89 be:85 us-intl:70 fr:60 dvorak_fr:20',
   'li'  => 'us_intl:80 be:70 nl:10 us:5',
   'lo'  => 'lao:90',
   'lt'  => 'lt:80 lt_new:70 lt_b:60 lt_p:50',
@@ -148,7 +149,7 @@ our %lang2keyboard =
 
 # USB kbd table
 # The numeric values are the bCountryCode field (5th byte)  of HID descriptor
-# NOTE: we do not trust when the layout is declared as us layout (0x21)
+# NOTE: we do not trust when the layout is declared as US layout (0x21)
 # as most manufacturers just use that value when selling physical devices
 # with different layouts printed on the keys.
 my @usb2keyboard =
