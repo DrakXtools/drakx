@@ -529,7 +529,7 @@ sub check_mntpoint {
     $mntpoint =~ m|^/| or die \N("Mount points must begin with a leading /");
     $mntpoint ne $part->{mntpoint} && has_mntpoint($mntpoint, $all_hds) and die \N("There is already a partition with mount point %s\n", $mntpoint);
 
-    die \N("You've selected a software RAID partition as root (/).
+    cdie \N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
     die \N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
