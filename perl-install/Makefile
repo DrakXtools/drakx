@@ -62,7 +62,7 @@ install_pms: $(DIRS)
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
 		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
-		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
 	if [ "x$(PERL_INSTALL_DEBUG)" == "x" ]; then \
 		perl -pi -e 's|#!/usr/bin/perl -d.*\n|#!/usr/bin/perl\n|' $(DESTREP4PMS)/install2; \
