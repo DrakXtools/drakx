@@ -72,12 +72,14 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 sub adsl_ask_info {
     my ($adsl, $netc, $_intf, $adsl_type) = @_;
     my $pppoe_file = "/etc/ppp/pppoe.conf";
+    my $pptp_file = '/etc/sysconfig/network-scripts/net_cnx_up';
     my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if $adsl_type =~ /pppoe/ && -f $pppoe_file;
     my $login = $pppoe_conf{USER};
     foreach (qw(/etc/ppp/peers/adsl /etc/ppp/options /etc/ppp/options.adsl)) {
 	next if $login && ! -r $_;
 	($login) = map { if_(/^user\s+\"([^\"]+)\"/, $1) } cat_($_);
     }
+    ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if $adsl_type =~ /pptp/ && -r $pptp_file;
     my $passwd = passwd_by_login($login);
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
