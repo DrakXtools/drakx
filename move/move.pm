@@ -657,6 +657,7 @@ sub install2::startMove {
 	$ENV{SHELL} = $shell;
         $ENV{XDM_MANAGED} = '/var/run/rebootctl,maysd,mayfn,sched';  #- for reboot/halt availability of "logout" by kde
         $ENV{GDMSESSION} = 1;  #- disable ~/.xsession-errors in Xsession (waste of usb key writes)
+	$ENV{LD_LIBRARY_PATH} = "$home/lib";
         chdir;
 	exec 'startkde_move';
     } else {
