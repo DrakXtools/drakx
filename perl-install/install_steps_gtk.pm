@@ -532,7 +532,7 @@ sub installPackages {
 Warning
 
 Please read carefully the terms below. If you disagree with any
-portion, you are not allowed to install the next CD media. Press 'Cancel' 
+portion, you are not allowed to install the next CD media. Press 'Refuse' 
 to continue the installation without using these media.
 
 

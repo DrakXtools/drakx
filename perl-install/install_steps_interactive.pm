@@ -93,12 +93,8 @@ Software Products.
 2. Limited Warranty
 
 The Software Products and attached documentation are provided \"as is\", with no warranty, to the 
-extent permitted by law. Should the Software Products be defective, MandrakeSoft S.A. will at its 
-own will either replace the Software Products, or reimburse the paid fee.
-This limited warranty is void if you fail to comply to the recommendations, instructions and 
-conditions 
-of use listed in the documentation or license agreements of the Software Products.
-To the extent permitted by law, MandrakeSoft S.A. will in no circumstances be liable for any special, 
+extent permitted by law.
+MandrakeSoft S.A. will, in no circumstances and to the extent permitted by law, be liable for any special,
 incidental, direct or indirect damages whatsoever (including without limitation damages for loss of 
 business, interruption of business, financial loss, legal fees and penalties resulting from a court 
 judgment, or any other consequential loss) arising out of  the use or inability to use the Software 
