@@ -167,7 +167,11 @@ my $popimap = sub {
 		  [undef , "No I don't need NTP", "Yes I need NTP", $ntp ],
 		  [undef , "Don't Save", "Save & Quit", $quit ]
 		 );
-    if (!Kernel22()) { pop @struct; pop @struct; pop @struct; @struct = ( @struct, [undef , "Don't Save", "Save & Quit", $quit ] ) }
+    if (!Kernel22()) { 
+	pop @struct; pop @struct; pop @struct;
+	@struct = ( @struct, [undef , "Don't Save", "Save & Quit", $quit ] );
+	@messages[9]=@messages[11];
+    }
     for (my $i=0;$i<@struct;$i++) {
 	$::Wizard_no_previous = $i == 0;
 	$::Wizard_finished = $i == $#struct;
