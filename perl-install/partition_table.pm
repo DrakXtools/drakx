@@ -38,6 +38,7 @@ if_(arch() =~ /^ppc/,
   0x383 => 'Journalised FS: JFS',
   0x483 => 'Journalised FS: ext3',
 ), if_(arch() =~ /^ia64/,
+  0x100 => 'Various',
   0x183 => 'Journalised FS: ReiserFS',
   0x283 => 'Journalised FS: XFS',
   0x483 => 'Journalised FS: ext3',
@@ -441,7 +442,10 @@ sub read_one($$) {
     #- it can be safely considered that the first sector is used to probe the partition table
     #- but other sectors (typically for extended partition ones) have to match this type!
     if (!$sector) {
-	my @parttype = arch() =~ /^sparc/ ? ('sun', 'bsd', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown');
+	my @parttype = (
+	  if_(arch() =~ /^ia64/, 'gpt'),
+	  arch() =~ /^sparc/ ? ('sun', 'bsd', 'unknown') : ('dos', 'bsd', 'sun', 'mac', 'unknown'),
+	);
 	foreach ('empty', @parttype) {
 	    /unknown/ and die "unknown partition table format";
 	    eval {
