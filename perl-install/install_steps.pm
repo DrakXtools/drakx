@@ -798,11 +798,6 @@ sub miscellaneous {
 }
 
 #------------------------------------------------------------------------------
-sub generateAutoInstFloppy($) {
-    my ($o) = @_;
-}
-
-#------------------------------------------------------------------------------
 sub exitInstall { 
     my ($o) = @_;
     eval { output "$o->{prefix}/root/report.bug", commands::report_bug() };
