@@ -48,7 +48,6 @@ sub unselect($$;$) {
 	$i->{selected} = 1; #- that way, its counter will be zero the first time
 	set_add($set, @{$i->{provides} || []});
     }
-
     while (@$l) {
 	my $n = shift @$l;
 	my $i = Package($packages, $n);
@@ -58,7 +57,7 @@ sub unselect($$;$) {
 	    push @$l, @{$i->{deps} || []} if !$size || ($size -= $i->{size}) > 0;
 	}
     }
-    return if $size <= 0;
+    return if defined $size && $size <= 0;
 
     #- garbage collect for circular dependencies
     my $changed = 1;
@@ -275,7 +274,7 @@ sub install {
     my ($total, $nb);
 
     foreach my $p (@$toInstall) {
-	getHeader($p) or next;
+	eval { getHeader($p) }; $@ and next;
 	$p->{installed} = 1;
 	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
 	                       $p->{name}, $p->{version}, $p->{release}, 

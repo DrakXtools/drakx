@@ -31,9 +31,18 @@ sub relGetFile($) {
     s/i386/i586/;
     $_;
 }
-sub getFile($) { 
-    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;
-    \*getFile;
+sub getFile($) {
+    local $^W = 0;
+    if ($::o->{method} && $::o->{method} eq "ftp") {
+	require 'ftp.pm';
+	*install_any::getFile = \&ftp::getFile;
+    } else {
+	*install_any::getFile = sub($) {
+	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;
+	    \*getFile;
+	};
+    }
+    goto &getFile;
 }
 
 sub versionString {

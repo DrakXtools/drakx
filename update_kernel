@@ -1,7 +1,7 @@
 #!/bin/bash
 
 KERNEL_VERSION="*BOOT"
-KERNEL_VERSION="2.2.12chmouBOOT"
+KERNEL_VERSION="2.2.13-BOOTchmou2"
 
 SCSI_DRIVERS="
      53c7,8xx.o AM53C974.o BusLogic.o NCR53c406a.o advansys.o aha152x.o
@@ -38,6 +38,7 @@ HD_MODULES="     $MISCMODULES $FSMODULES $SCSI_DRIVERS $BLOCK_DRIVERS"
 
 
 cp -f /boot/vmlinuz-$KERNEL_VERSION vmlinuz
+/usr/sbin/rdev -v vmlinuz 785
 rm -rf modules ; install -d modules
 
 (cd modules ; 

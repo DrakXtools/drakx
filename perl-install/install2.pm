@@ -247,7 +247,7 @@ my %suggestedPartitions = (
 #-if you want to do a kickstart file, you just have to add all the required fields (see for example
 #-the variable $default)
 #-#######################################################################################
-$o = { 
+$o = $::o = { 
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
@@ -586,12 +586,6 @@ sub main {
     $o->{modules} = modules::get_stage1_conf($o->{modules}, "/tmp/conf.modules");
     modules::read_already_loaded();
     modparm::read_modparm_file(($::testing ? "/tmp" : "/usr/share") . "/modparm.lst");
-
-    if ($o->{method} && $o->{method} eq "ftp") {
-	require 'ftp.pm';
-	local $^W = 0;
-	*install_any::getFile = \&ftp::getFile;
-    }
 
     #-the main cycle
     my $clicked = 0;
