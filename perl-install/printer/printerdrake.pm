@@ -1785,12 +1785,13 @@ sub setup_common {
 	    # Install HPOJ package
 	    if (!$::testing &&
 		!files_exist(qw(/usr/sbin/ptal-mlcd
-					   /usr/sbin/ptal-init
-					   /usr/bin/xojpanel))) {
+				/usr/sbin/ptal-init
+				/usr/bin/xojpanel
+				/usr/sbin/lsusb))) {
 		$w = $in->wait_message(N("Printerdrake"),
 					   N("Installing HPOJ package..."))
 		    if !$printer->{noninteractive};
-		$in->do_pkgs->install('hpoj', 'xojpanel');
+		$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils');
 	    }
 	    # Configure and start HPOJ
 	    undef $w;

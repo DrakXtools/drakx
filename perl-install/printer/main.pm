@@ -2182,58 +2182,91 @@ sub configure_hpoj {
 	    $model = $_->{val}{MODEL};
 	}
 	$serialnumber = $_->{val}{SERIALNUMBER};
+	services::stop("hpoj") if ($bus ne "hpjd");
 	# Check if the device is really an HP multi-function device
-	if ($bus ne "hpjd") {
-	    # Start ptal-mlcd daemon for locally connected devices
-	    services::stop("hpoj");
-	    run_program::rooted($::prefix, 
-				"ptal-mlcd", "$bus:probe", "-device", 
-				$device, split(' ',$address_arg));
-	}
-	$device_ok = 0;
-	my $ptalprobedevice = $bus eq "hpjd" ? "hpjd:$hostname" : "mlc:$bus:probe";
-	local *F;
-	if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice |") {
-	    my $devid = join("", <F>);
-	    close F;
-	    if ($devid) {
-		$device_ok = 1;
-          local *F;
-		if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -mdl 2>/dev/null |") {
-		    $model_long = join("", <F>);
-		    close F;
-		    chomp $model_long;
-		    # If SNMP or local port auto-detection failed but HPOJ
-		    # auto-detection succeeded, fill in model name here.
-		    if (!$_->{val}{MODEL} ||
-			$_->{val}{MODEL} =~ /$searchunknown/i ||
-			$_->{val}{MODEL} =~ /^\s*$/) {
-			if ($model_long =~ /:([^:;]+);/) {
-			    $_->{val}{MODEL} = $1;
+	my $libusb = 0;
+	foreach $libusb (0, 1) {
+	    # Do access via libusb/user mode only if we have a USB device
+	    next if ($libusb && ($bus ne "usb"));
+	    my $printermoduleunloaded = 0;
+	    if ($bus ne "hpjd") {
+		if (!$libusb) {
+		    # Start ptal-mlcd daemon for locally connected devices
+		    # (kernel mode with "printer" module for USB).
+		    run_program::rooted($::prefix, 
+					"ptal-mlcd", "$bus:probe",
+					"-device", 
+					$device, split(' ',$address_arg));
+		} else {
+		    # Start ptal-mlcd daemon for user-mode USB devices
+		    # (all LIDIL MF devices as HP PSC 1xxx and OfficeJet 
+		    #  4xxx)
+		    my $usbdev = usbdevice($_->{val});
+		    if (defined($usbdev)) {
+			# Unload kernel module "printer"
+			if (modules::get_probeall("usb-interface")) {
+			    eval(modules::unload("printer"));
+			    $printermoduleunloaded = 1;
 			}
+			# Start ptal-mlcd
+			run_program::rooted($::prefix, 
+					    "ptal-mlcd", "$bus:probe",
+					    "-device", $usbdev);
+		    } else {
+			# We could not determine the USB device number,
+			# so we cannot check this device in user mode
+			next;
 		    }
 		}
-		if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |") { #-#
-		    $serialnumber_long = join("", <F>);
-		    close F;
-		    chomp $serialnumber_long;
-		}
-		$cardreader = 1 if printer::hpoj::cardReaderDetected($ptalprobedevice);
 	    }
-	}
-	if ($bus ne "hpjd") {
-	    # Stop ptal-mlcd daemon for locally connected devices
-            local *F;
-	    if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
-		my $line = <F>;
-		if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
-		    my $pid = $1;
-		    kill 15, $pid;
-		}
+	    $device_ok = 0;
+	    my $ptalprobedevice = $bus eq "hpjd" ? "hpjd:$hostname" : "mlc:$bus:probe";
+	    local *F;
+	    if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice |") {
+		my $devid = join("", <F>);
 		close F;
+		if ($devid) {
+		    $device_ok = 1;
+		    local *F;
+		    if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -mdl 2>/dev/null |") {
+			$model_long = join("", <F>);
+			close F;
+			chomp $model_long;
+			# If SNMP or local port auto-detection failed but 
+			# HPOJ auto-detection succeeded, fill in model name 
+			# here.
+			if (!$_->{val}{MODEL} ||
+			    $_->{val}{MODEL} =~ /$searchunknown/i ||
+			    $_->{val}{MODEL} =~ /^\s*$/) {
+			    if ($model_long =~ /:([^:;]+);/) {
+				$_->{val}{MODEL} = $1;
+			    }
+			}
+		    }
+		    if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |") { #-#
+			$serialnumber_long = join("", <F>);
+			close F;
+			chomp $serialnumber_long;
+		    }
+		    $cardreader = 1 if printer::hpoj::cardReaderDetected($ptalprobedevice);
+		}
 	    }
-	    printer::services::start("hpoj");
+	    if ($bus ne "hpjd") {
+		# Stop ptal-mlcd daemon for locally connected devices
+		local *F;
+		if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
+		    my $line = <F>;
+		    if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
+			my $pid = $1;
+			kill 15, $pid;
+		    }
+		    close F;
+		}
+		$printermoduleunloaded && eval(modules::load("printer"));
+	    }
+	    last if $device_ok;
 	}
+	printer::services::start("hpoj") if ($bus ne "hpjd");
 	last;
     }
     # No, it is not an HP multi-function device.
@@ -2397,6 +2430,56 @@ sub configure_hpoj {
     return $ptaldevice;
 }
 
+sub devicefound {
+    my ($usbid, $model, $serial) = @_;
+    # Compare the output of "lsusb -vv" with the elements of the device 
+    # ID string
+    if ($serial && ($usbid->{'SERIALNUMBER'} eq $serial)) {
+	# Match of serial number has absolute priority
+	return 1;
+    } elsif ($model && ($usbid->{'MODEL'} eq $model)) {
+	# Try to match the model name otherwise
+	return 1;
+    }
+    return 0;
+}
+
+sub usbdevice() {
+    my ($usbid) = @_;
+    # Run "lsusb -vv¨ and search the given device to get its USB bus and
+    # device numbers
+    local *F;
+    open F, ($::testing ? "" : "chroot $::prefix/ ") .
+	"/bin/sh -c \"export LC_ALL=C; lsusb -vv 2> /dev/null\" |"
+	or return undef;
+    my ($bus, $device, $model, $serial) = ("", "", "", "");
+    my $found = 0;
+    while (my $line = <F>) {
+	chomp $line;
+	if ($line =~ m/^\s*Bus\s+(\d+)\s+Device\s+(\d+)\s*:/i) {
+	    # head line of a new device
+	    my ($newbus, $newdevice) = ($1, $2);
+	    last if (($model || $serial) && 
+		     ($found = devicefound($usbid, $model, $serial)));
+	    ($bus, $device) = ($newbus, $newdevice);
+	} elsif ($line =~ m/^\s*iProduct\s+\d+\s+(.+)$/i) {
+	    # model line
+	    next if $device eq "";
+	    $model = $1;
+	} elsif ($line =~ m/^\s*iSerial\s+\d+\s+(.+)$/i) {
+	    # model line
+	    next if $device eq "";
+	    $serial = $1;
+	}
+    }
+    close F;
+    # Check last entry
+    $found = devicefound($usbid, $model, $serial);
+
+    return 0 if !$found;
+    return sprintf("%%%03d%%%03d", $bus, $device);
+}
+
 sub config_sane() {
     # Add HPOJ backend to /etc/sane.d/dll.conf if needed (no individual
     # config file /etc/sane.d/hpoj.conf necessary, the HPOJ driver finds the
@@ -2434,6 +2517,7 @@ EOF
 	}
 	$mtoolsfmconf =~ s/^\s*DRIVES\s*=\s*"[A-Za-z ]*"/DRIVES="$alloweddrives"/m;
 	$mtoolsfmconf =~ s/^\s*LEFTDRIVE\s*=\s*"[^"]*"/LEFTDRIVE="p"/m;
+        #"# Fix emacs syntax highlighting
     } else {
 	$mtoolsfmconf = <<'EOF';
 # MToolsFM config file. comments start with a hash sign.
