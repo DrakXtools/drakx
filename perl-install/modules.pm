@@ -433,7 +433,11 @@ sub when_load {
 	    add_probeall('scsi_hostadapter', $name);
 	    eval { load('sd_mod') };
 	}
-	add_alias('sound-slot-0', $name) if $category =~ /sound/;
+        if ($category =~ /sound/) {
+            my $sound_alias = find { /^sound-slot-[0-9]+$/ and $conf{$_}{alias} eq $module } keys %conf;
+            $sound_alias ||= 'sound-slot-0';
+            add_alias($sound_alias, $name);
+        }
     }
 }
 
