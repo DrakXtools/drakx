@@ -41,8 +41,6 @@ my $pixdir = '/usr/share/libDrakX/pixmaps/';
 
 local $_ = join '', @ARGV;
 
-printer::main::get_usermode();
-
 my $printer;
 
 my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
@@ -78,14 +76,19 @@ if (0 && !$::isInstall && !$::isEmbedded) {
 #gtkflush();
 
 # Check whether Foomatic is installed and install it if necessary
-printer::printerdrake::install_foomatic($in);
+#printer::printerdrake::install_foomatic($in);
 
 my $_w = $in->wait_message(N("Printerdrake"),
 			   N("Reading data of installed printers..."));
 
 # Get what was installed before
 eval { $printer = printer::main::getinfo('') };
+
+# Were we in expert mode last time?
+$printer->{expert} = printer::main::get_usermode();
+
 # Choose the spooler by command line options
+$commandline =~ /-expert/ and $printer->{expert} = 1;
 $commandline =~ /-cups/ and
     $printer->{SPOOLER} = 'cups' and printer::main::read_configured_queues($printer);
 $commandline =~ /-lpr/ and 
@@ -152,12 +155,15 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
                                             [ N("/_Actions") . N("/_Configure CUPS"), undef, \&ConfigCUPS, undef, '<StockItem>', 'gtk-config' ],
                                             [ N("/_Options"), undef, undef, undef, '<Branch>' ],
                                             [ join('', @{$options{expert}}), undef, sub {
-                                                  $::expert = $buttorcheck{expert}->get_active;
+                                                  $printer->{expert} = $buttorcheck{expert}->get_active;
 						  # Remember state of expert
 						  # mode for next
 						  # printerdrake session
-						  printer::main::set_usermode($::expert);
-
+						  printer::main::set_usermode($printer->{expert});
+						  # Read printer database
+						  # for the new user mode
+						  %printer::main::thedb = 
+						      ();
                                               }, undef, '<CheckItem>' ],
                                             [ N("/_Help"), undef, undef, undef, '<Branch>' ],
                                             [ N("/_Help").N("/_Help"), undef, \&HelpSystem, undef, '<StockItem>', 'gtk-help' ],
@@ -170,7 +176,7 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
 }('default', 'edit', 'delete', 'expert');
 
 if (defined $buttorcheck{expert}) {
-    $buttorcheck{expert}->set_active($::expert);
+    $buttorcheck{expert}->set_active($printer->{expert});
 } else {
     print STDERR "BUG with LANGUAGE $ENV{LANGUAGE}\n";
 }

@@ -63,10 +63,10 @@ sub spooler() {
 sub printer_type($) {
     my ($printer) = @_;
     for ($printer->{SPOOLER}) {
-	/cups/  and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB), if_($::expert, qw(URI))};
-	/lpd/   and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
-	/lprng/ and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($::expert, qw(POSTPIPE URI))};
-	/pdq/   and return @printer_type_inv{qw(LOCAL LPD SOCKET), if_($::expert, qw(URI))};
+	/cups/  and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB), if_($printer->{expert}, qw(URI))};
+	/lpd/   and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($printer->{expert}, qw(POSTPIPE URI))};
+	/lprng/ and return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP), if_($printer->{expert}, qw(POSTPIPE URI))};
+	/pdq/   and return @printer_type_inv{qw(LOCAL LPD SOCKET), if_($printer->{expert}, qw(URI))};
     }
 }
 
@@ -371,11 +371,11 @@ sub make_menuentry {
     } elsif ($connect =~ m!^postpipe:(.+)$!) {
 	$connection = N(", using command %s", $1);
     } else {
-	$connection = ($::expert ? ", URI: $connect" : "");
+	$connection = ($printer->{expert} ? ", URI: $connect" : "");
     }
     my $sep = "!";
     $printer->{configured}{$queue}{queuedata}{menuentry} = 
-	($::expert ? "$spooler$sep" : "") .
+	($printer->{expert} ? "$spooler$sep" : "") .
 	"$localremote$sep$queue: $make $model$connection";
 }
 
@@ -427,9 +427,9 @@ sub connectionstr {
     return $connection;
 }
 
-sub read_printer_db(;$) {
+sub read_printer_db {
 
-    my $spooler = $_[0];
+    my ($printer, $spooler) = @_;
 
     local *DBPATH; #- don't have to do close ... and don't modify globals at least
     # Generate the Foomatic printer/driver overview, read it from the
@@ -503,7 +503,7 @@ sub read_printer_db(;$) {
 		    # Expert mode:
 		    # Make one database entry per driver with the entry name
 		    # manufacturer|model|driver
-		    if ($::expert) {
+		    if ($printer->{expert}) {
 			foreach my $driver (@{$entry->{drivers}}) {
 			    my $driverstr;
 			    if ($driver eq "Postscript") {
@@ -575,7 +575,7 @@ sub read_printer_db(;$) {
 
     #- Load CUPS driver database if CUPS is used as spooler
     if ($spooler && $spooler eq "cups") {
-        poll_ppd_base();
+        poll_ppd_base($printer);
     }
 
     #my @entries_db_short     = sort keys %printer::thedb;
@@ -669,7 +669,7 @@ sub set_usermode {
     return $usermode;
 }
 
-sub get_usermode() { $::expert = $sysconfig{USER_MODE} eq 'expert' ? 1 : 0 }
+sub get_usermode() { $sysconfig{USER_MODE} eq 'expert' ? 1 : 0 }
 
 sub set_jap_textmode {
     my $textmode = ($_[0] ? 'cjk' : '');
@@ -1528,7 +1528,7 @@ sub get_descr_from_ppd {
     my $make = $ppd{Manufacturer};
     my $lang = $ppd{LanguageVersion};
     my $entry = ppd_entry_str($make, $descr, $lang);
-    if (!$::expert) {
+    if (!$printer->{expert}) {
 	# Remove driver from printer list entry when in recommended mode
 	$entry =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
     }
@@ -1553,6 +1553,7 @@ sub ppd_devid_data {
 }
 
 sub poll_ppd_base() {
+    my ($printer) = @_;
     #- Before trying to poll the ppd database available to cups, we have 
     #- to make sure the file /etc/cups/ppds.dat is no more modified.
     #- If cups continue to modify it (because it reads the ppd files 
@@ -1605,7 +1606,7 @@ sub poll_ppd_base() {
 		    # Foomatic
 		    $key = $keynolang;
 		}
-		if (!$::expert) {
+		if (!$printer->{expert}) {
 		    # Remove driver from printer list entry when in
 		    # recommended mode
 		    $key =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;

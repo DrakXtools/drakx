@@ -96,7 +96,7 @@ sub config_cups {
 		help => N("Turning on this allows to print plain text files in japanese language. Only use this function if you really want to print text in japanese, if it is activated you cannot print accentuated characters in latin fonts any more and you will not be able to adjust the margins, the character size, etc. This setting only affects printers defined on this machine. If you want to print japanese text on a printer set up on a remote machine, you have to activate this function on that remote machine."),
 		type => 'bool',
 		val => \$jap_textmode },
-	      if_($::expert,
+	      if_($printer->{expert},
 		  { text => N("Automatic correction of CUPS configuration"),
 		    type => 'bool',
 		    help => N("When this option is turned on, on every startup of CUPS it is automatically made sure that
@@ -606,7 +606,7 @@ sub configure_new_printers {
     # Experts can have weird things as self-made CUPS backends, so do not
     # automatically pollute the system with unwished queues in expert
     # mode
-    return 1 if $::expert;
+    return 1 if $printer->{expert};
     
     # Wait message
     my $w = $in->wait_message(N("Printerdrake"),
@@ -792,7 +792,7 @@ sub wizard_welcome {
     # If networking is configured, start it, but don't ask the user to
     # configure networking.
     my $havelocalnetworks;
-    if ($::expert) {
+    if ($printer->{expert}) {
 	$havelocalnetworks = 0;
 	undef $printer->{AUTODETECTNETWORK};
 	undef $printer->{AUTODETECTSMB};
@@ -809,7 +809,7 @@ sub wizard_welcome {
     }
     if ($in) {
 	eval {
-	    if ($::expert) {
+	    if ($printer->{expert}) {
 		if ($::isWizard) {
 		    $ret = $in->ask_okcancel(
 			 N("Add a new printer"),
@@ -895,7 +895,7 @@ If you want to add, remove, or rename a printer, or if you want to change the de
 sub setup_local_autoscan {
     my ($printer, $in, $upNetwork) = @_;
     my $queue = $printer->{OLD_QUEUE};
-    my $expert_or_modify = $::expert || !$printer->{NEW};
+    my $expert_or_modify = $printer->{expert} || !$printer->{NEW};
     my $do_auto_detect = 
 	($expert_or_modify &&
 	  $printer->{AUTODETECT} ||
@@ -944,7 +944,7 @@ sub setup_local_autoscan {
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
 		    $menustr .= N(", printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
 		}
-		$menustr .= " ($p->{port})" if $::expert;
+		$menustr .= " ($p->{port})" if $printer->{expert};
 		$menuentries->{$menustr} = $p->{port};
 		push @str, N("Detected %s", $menustr);
 	    } else {
@@ -958,12 +958,12 @@ sub setup_local_autoscan {
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
 		    $menustr .= N("Printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
 		}
-		$menustr .= " ($p->{port})" if $::expert;
+		$menustr .= " ($p->{port})" if $printer->{expert};
 		$menuentries->{$menustr} = $p->{port};
 	    }
 	}
 	my @port;
-	if ($::expert) {
+	if ($printer->{expert}) {
 	    @port = printer::detect::whatPrinterPort();
 	  LOOP: foreach my $q (@port) {
 		if (@str) {
@@ -977,7 +977,7 @@ sub setup_local_autoscan {
 		} elsif ($q =~ m!^/dev/usb/lp(\d+)$!) {
 		    $menustr = N("USB printer #%s", $1);
 		}
-		$menustr .= " ($q)" if $::expert;
+		$menustr .= " ($q)" if $printer->{expert};
 		$menuentries->{$menustr} = $q;
 	    }
 	}
@@ -991,10 +991,10 @@ sub setup_local_autoscan {
 	my $m;
 	for ($m = 0; $m <= 2; $m++) {
 	    my $menustr = N("Printer on parallel port #%s", $m);
-	    $menustr .= " (/dev/lp$m)" if $::expert;
+	    $menustr .= " (/dev/lp$m)" if $printer->{expert};
 	    $menuentries->{$menustr} = "/dev/lp$m";
 	    $menustr = N("USB printer #%s", $m);
-	    $menustr .= " (/dev/usb/lp$m)" if $::expert;
+	    $menustr .= " (/dev/usb/lp$m)" if $printer->{expert};
 	    $menuentries->{$menustr} = "/dev/usb/lp$m";
 	}
     }
@@ -1028,12 +1028,12 @@ sub setup_local_autoscan {
 	$device = $menuentries->{$menuchoice} if $device eq "";
     }
     if ($in) {
-#	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
+#	$printer->{expert} or $in->set_help('configurePrinterDev') if $::isInstall;
 	if ($#menuentrieslist < 0) { # No menu entry
 	    # auto-detection has failed, we must do all manually
 	    $do_auto_detect = 0;
 	    $printer->{MANUAL} = 1;
-	    if ($::expert) {
+	    if ($printer->{expert}) {
 		$device = $in->ask_from_entry(
 		     N("Local Printer"),
 		     N("No local printer found! To manually install a printer enter a device name/file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."),
@@ -1060,7 +1060,7 @@ sub setup_local_autoscan {
 			     N("Local Printers") :
 			     N("Available printers")),
 		   messages => (($do_auto_detect ?
-				 ($::expert ?
+				 ($printer->{expert} ?
 				  ($#menuentrieslist == 0 ?
 				   (N("The following printer was auto-detected. ") .
 				    ($printer->{NEW} ?
@@ -1079,10 +1079,10 @@ sub setup_local_autoscan {
 				    ($printer->{NEW} ?
 				     N("Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
 				     N("Please choose the printer to which the print jobs should go."))))) :
-				 ($::expert ?
+				 ($printer->{expert} ?
 				  N("Please choose the port that your printer is connected to or enter a device name/file name in the input line") :
 				  N("Please choose the port that your printer is connected to."))) .
-				if_($::expert,
+				if_($printer->{expert},
 				    N(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."))), 
 				  callbacks => {
 				      complete => sub {
@@ -1101,11 +1101,11 @@ sub setup_local_autoscan {
 				      }
 				  } },
 		 [
-		  if_($::expert, { val => \$device }),
+		  if_($printer->{expert}, { val => \$device }),
 		  { val => \$menuchoice, list => \@menuentrieslist, 
-		    not_edit => !$::expert, format => \&translate,
+		    not_edit => !$printer->{expert}, format => \&translate,
 		    allow_empty_list => 1, type => 'list' },
-		  if_(!$::expert && $do_auto_detect && $printer->{NEW}, 
+		  if_(!$printer->{expert} && $do_auto_detect && $printer->{NEW}, 
 		   { text => N("Manual configuration"), type => 'bool',
 		     val => \$manualconf }),
 		  ]
@@ -1361,7 +1361,7 @@ Use a password-less account on your Windows server, as the \"GUEST\" account or 
 Set up your Windows server to make the printer available under the LPD protocol. Then set up printing from this machine with the \"%s\" connection type in Printerdrake.
 
 ", N("Printer on remote lpd server")) .
-		      ($::expert ? 
+		      ($printer->{expert} ? 
 		       N("Set up your Windows server to make the printer available under the IPP protocol and set up printing from this machine with the \"%s\" connection type in Printerdrake.
 
 ", N("Enter a printer device URI")) : "") .
@@ -1928,7 +1928,7 @@ sub setup_common {
 	my $_w = $in->wait_message
 	    (N("Printerdrake"), N("Reading printer database..."))
 	    if !$printer->{noninteractive};
-        printer::main::read_printer_db($printer->{SPOOLER});
+        printer::main::read_printer_db($printer, $printer->{SPOOLER});
     }
 
     #- Search the database entry which matches the detected printer best
@@ -2041,7 +2041,7 @@ sub setup_common {
 	    # Try to match the (human-readable) make and model of the
 	    # Foomatic database or of thr PPD file
 	    my $dbmakemodel;
-	    if ($::expert) {
+	    if ($printer->{expert}) {
 		$dbmakemodel = $1 if $entry =~ m/^(.*)\|[^\|]*$/;
 	    } else {
 		$dbmakemodel = $entry;
@@ -2167,7 +2167,7 @@ sub get_db_entry {
 	my $_w = $in->wait_message(N("Printerdrake"),
 				   N("Reading printer database..."))
 	    if $printer->{noninteractive};
-	printer::main::read_printer_db($printer->{SPOOLER});
+	printer::main::read_printer_db($printer, $printer->{SPOOLER});
     }
     my $_w = $in->wait_message(N("Printerdrake"),
 			       N("Preparing printer database..."))
@@ -2185,7 +2185,7 @@ sub get_db_entry {
 	    }
 	    my $make = uc($printer->{configured}{$queue}{queuedata}{make});
 	    my $model =	$printer->{configured}{$queue}{queuedata}{model};
-	    if ($::expert) {
+	    if ($printer->{expert}) {
 		$printer->{DBENTRY} = "$make|$model|$driverstr";
 		# database key contains the "(recommended)" for the
 		# recommended driver, so add it if necessary
@@ -2225,9 +2225,9 @@ sub get_db_entry {
           }
 	    }
 	    foreach my $key (keys %printer::main::thedb) {
-		if ($::expert &&
+		if ($printer->{expert} &&
 		    $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
-		    !$::expert && $key =~ /^$make\|$model$/) {
+		    !$printer->{expert} && $key =~ /^$make\|$model$/) {
 		    $printer->{DBENTRY} = $key;
 		}
 	    }
@@ -2239,8 +2239,8 @@ sub get_db_entry {
 	    $model =~ s/PostScript//i;
 	    $model =~ s/Series//i;
 	    foreach my $key (keys %printer::main::thedb) {
-		if ($::expert && $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
-		    !$::expert && $key =~ /^$make\|$model$/) {
+		if ($printer->{expert} && $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
+		    !$printer->{expert} && $key =~ /^$make\|$model$/) {
 		    $printer->{DBENTRY} = $key;
 		}
 	    }
@@ -2263,7 +2263,7 @@ sub get_db_entry {
 	    $printer->{OLD_CHOICE} = "XXX";
 	}
     } else {
-	if ($::expert && $printer->{DBENTRY} !~ /(recommended)/) {
+	if ($printer->{expert} && $printer->{DBENTRY} !~ /(recommended)/) {
 	    my ($make, $model) = $printer->{DBENTRY} =~ /^([^\|]+)\|([^\|]+)\|/;
 	    foreach my $key (keys %printer::main::thedb) {
 		if ($key =~ /^$make\|$model\|.*\(recommended\)$/) {
@@ -2310,7 +2310,7 @@ sub choose_model {
     if (keys %printer::main::thedb == 0) {
 	my $_w = $in->wait_message(N("Printerdrake"),
 				  N("Reading printer database..."));
-        printer::main::read_printer_db($printer->{SPOOLER});
+        printer::main::read_printer_db($printer, $printer->{SPOOLER});
     }
     if (!member($printer->{DBENTRY}, keys(%printer::main::thedb))) {
 	$printer->{DBENTRY} = N("Raw printer (No driver)");
@@ -2686,7 +2686,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 	# Show the options dialog. The call-back function does a
 	# range check of the numerical options.
 	my $windowtitle = "$printer->{currentqueue}{make} $printer->{currentqueue}{model}";
-	if ($::expert) {
+	if ($printer->{expert}) {
 	    my $driver;
 	    if ($driver = $printer->{currentqueue}{driver}) {
 		if ($printer->{currentqueue}{foomatic}) {
@@ -2714,7 +2714,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 	}
 	# Do not show the options setup dialog when installing a new printer
 	# in recommended mode without "Manual configuration" turned on.
-	if ((!$printer->{NEW} || $::expert || $printer->{MANUAL}) &&
+	if ((!$printer->{NEW} || $printer->{expert} || $printer->{MANUAL}) &&
 	    !$printer->{noninteractive}) {
 	    return 0 if !$in->ask_from(
 		 $windowtitle,
@@ -2829,10 +2829,10 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	 [
 	  { text => N("Standard test page"), type => 'bool',
 	    val => \$options{standard} },
-	  if_($::expert,
+	  if_($printer->{expert},
 	   { text => N("Alternative test page (Letter)"), type => 'bool', 
 	     val => \$options{altletter} }),
-	  if_($::expert,
+	  if_($printer->{expert},
 	   { text => N("Alternative test page (A4)"), type => 'bool', 
 	     val => \$options{alta4} }), 
 	  { text => N("Photo test page"), type => 'bool', val => \$options{photo} },
@@ -3564,7 +3564,7 @@ sub init {
 
     # Save the user mode, so that the same one is used on the next start
     # of Printerdrake
-    printer::main::set_usermode($::expert);
+    printer::main::set_usermode($printer->{expert});
     
     # printerdrake does not work without foomatic, and for more
     # convenience we install some more stuff
@@ -3592,7 +3592,7 @@ sub init {
 	}
 	
 	# only experts should be asked for the spooler
-	$printer->{SPOOLER} ||= 'cups' if !$::expert;
+	$printer->{SPOOLER} ||= 'cups' if !$printer->{expert};
 	
     }
     
@@ -3653,7 +3653,7 @@ sub mainwindow_interactive {
 	# have a local network, to suppress some buttons in the
 	# recommended mode
 	my $havelocalnetworks_or_expert =
-	    $::expert ||
+	    $printer->{expert} ||
 	    check_network($printer, $in, $upNetwork, 1) && 
 	    printer::detect::getIPsInLocalNetworks() != ();
 #	$in->set_help('mainMenu') if $::isInstall;
@@ -3722,7 +3722,7 @@ sub mainwindow_interactive {
 			  1;
 		      },
 		  val => N("CUPS configuration") }) : ()),
-	      ($::expert && 
+	      ($printer->{expert} && 
 	       (files_exist(qw(/usr/bin/pdq)) ||
 		files_exist(qw(/usr/lib/filters/lpf 
 			       /usr/sbin/lpd))) ?
@@ -3742,7 +3742,7 @@ sub mainwindow_interactive {
 			$menuchoice = "\@usermode";
 			1 
 			},
-			    val => ($::expert ? N("Normal Mode") :
+			    val => ($printer->{expert} ? N("Normal Mode") :
 				    N("Expert Mode")) },
 	      { clicked_may_quit =>
 		    sub { $menuchoice = "\@quit"; 1 },
@@ -3751,14 +3751,14 @@ sub mainwindow_interactive {
 	      ]);
 	# Toggle expert mode and standard mode
 	if ($menuchoice eq "\@usermode") {
-	    $::expert = printer::main::set_usermode(!$::expert);
+	    $printer->{expert} = printer::main::set_usermode(!$printer->{expert});
 	    # Read printer database for the new user mode
 	    %printer::main::thedb = ();
 	    # Modify menu entries to switch the tree
 	    # structure between expert/normal mode.
 	    my $spooler =
 		$spoolers{$printer->{SPOOLER}}{short_name};
-	    if ($::expert) {
+	    if ($printer->{expert}) {
 		foreach (keys(%{$printer->{configured}})) { 
 		    $printer->{configured}{$_}{queuedata}{menuentry} =~ 
 			s/^/$spooler!/;
@@ -3897,25 +3897,25 @@ sub add_printer {
 	    # eval to catch wizard cancel. The wizard stuff 
 	    # should be in a separate function with steps. see 
 	    # drakgw.
-	    $::expert or $printer->{TYPE} = "LOCAL";
+	    $printer->{expert} or $printer->{TYPE} = "LOCAL";
 	  step_1:
-	    !$::expert or choose_printer_type($printer, $in) or
+	    !$printer->{expert} or choose_printer_type($printer, $in) or
 		goto step_0;
 	  step_2:
 	    setup_printer_connection($printer, $in, $upNetwork) or 
 		do {
-		    goto step_1 if $::expert;
+		    goto step_1 if $printer->{expert};
 		    goto step_0;
 		};
 	  step_3:
-	    if ($::expert || $printer->{MANUAL} ||
+	    if ($printer->{expert} || $printer->{MANUAL} ||
 		$printer->{MORETHANONE}) {
 		choose_printer_name($printer, $in) or
 		    goto step_2;
 	    }
 	    get_db_entry($printer, $in);
 	  step_3_9:
-	    if (!$::expert && !$printer->{MANUAL}) {
+	    if (!$printer->{expert} && !$printer->{MANUAL}) {
 		is_model_correct($printer, $in) or do {
 		    goto step_3 if $printer->{MORETHANONE};
 		    goto step_2;
@@ -3924,7 +3924,7 @@ sub add_printer {
 	  step_4:
 	    # Remember DB entry for "Previous" button in wizard
 	    my $dbentry = $printer->{DBENTRY};
-	    if ($::expert || $printer->{MANUAL} ||
+	    if ($printer->{expert} || $printer->{MANUAL} ||
 		$printer->{MANUALMODEL}) { 
 		choose_model($printer, $in) or do {
 		    # Restore DB entry
@@ -3962,19 +3962,19 @@ sub add_printer {
 	};
 	wizard_close($in, 0) if $@ =~ /wizcancel/;
     } else {
-	$::expert or $printer->{TYPE} = "LOCAL";
+	$printer->{expert} or $printer->{TYPE} = "LOCAL";
 	wizard_welcome($printer, $in, $upNetwork) or return 0;
-	!$::expert or choose_printer_type($printer, $in) or return 0;
+	!$printer->{expert} or choose_printer_type($printer, $in) or return 0;
 	setup_printer_connection($printer, $in, $upNetwork) or return 0;
-	if ($::expert || $printer->{MANUAL} ||
+	if ($printer->{expert} || $printer->{MANUAL} ||
 	    $printer->{MORETHANONE}) {
 	    choose_printer_name($printer, $in) or return 0;
 	}
 	get_db_entry($printer, $in);
-	if (!$::expert && !$printer->{MANUAL}) {
+	if (!$printer->{expert} && !$printer->{MANUAL}) {
 	    is_model_correct($printer, $in) or return 0;
 	}
-	if ($::expert || $printer->{MANUAL} ||
+	if ($printer->{expert} || $printer->{MANUAL} ||
 	    $printer->{MANUALMODEL}) { 
 	    choose_model($printer, $in) or return 0;
 	}
@@ -4038,7 +4038,7 @@ sub edit_printer {
 		     ", Descr.: $printer->{configured}{$queue}{queuedata}{desc}" : '') .
 		     ($printer->{configured}{$queue}{queuedata}{loc} ?
 		      ", Loc.: $printer->{configured}{$queue}{queuedata}{loc}" : '') .
-		      ($::expert ?
+		      ($printer->{expert} ?
 		       ", Driver: $printer->{configured}{$queue}{queuedata}{driver}" : '');
 	    }
 	} else {
@@ -4063,7 +4063,7 @@ What do you want to modify on this printer?",
 		list => [ ($printer->{configured}{$queue} ?
 			   (N("Printer connection type"),
 			    N("Printer name, description, location"),
-			    ($::expert ?
+			    ($printer->{expert} ?
 			     N("Printer manufacturer, model, driver") :
 			     N("Printer manufacturer, model")),
 			    if_($printer->{configured}{$queue}{queuedata}{make} ne "" &&
@@ -4268,7 +4268,7 @@ sub final_cleanup {
 	}
 	delete($printer->{configured}{$queue}{queuedata}{menuentry});
     }
-    foreach (qw(Old_queue OLD_QUEUE QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB noninteractive))
+    foreach (qw(Old_queue OLD_QUEUE QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB noninteractive expert))
     { delete $printer->{$_} };
 }
 
