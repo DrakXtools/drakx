@@ -278,9 +278,9 @@ sub get_internet_connection {
 
 sub get_interface_type {
     my ($interface) = @_;
+    member($interface->{TYPE}, "xDSL", "ADSL") && "adsl" ||
     $interface->{DEVICE} =~ /^(eth|ath|wlan)/ && "ethernet" ||
     $interface->{DEVICE} =~ /^ippp/ && "isdn" ||
-    member($interface->{TYPE}, "xDSL", "ADSL") && "adsl" ||
     $interface->{DEVICE} =~ /^ppp/ && "modem" ||
     "unknown";
 }
