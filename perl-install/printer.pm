@@ -369,7 +369,7 @@ sub poll_ppd_base {
     run_program::rooted($prefix, "ifup lo"); #- else cups will not be happy!
     run_program::rooted($prefix, "/etc/rc.d/init.d/cups start");
 
-    foreach (1..10) {
+    foreach (1..30) {
 	local *PPDS; open PPDS, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/poll_ppd_base -a |";
 	foreach (<PPDS>) {
 	    chomp;

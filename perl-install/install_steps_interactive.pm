@@ -278,6 +278,7 @@ sub choosePartitionsToFormat($$) {
 
     return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
 
+    #- keep it temporary until the guy has accepted
     my %toFormat = map { $_ => $_->{toFormat} || $_->{toFormatUnsure} } @l;
 
     my %label;
@@ -290,11 +291,13 @@ sub choosePartitionsToFormat($$) {
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],
 			       [ map { \$toFormat{$_} } @l ]) or die "cancel";
+    #- ok now we can really set toFormat
+    $_->{toFormat} = $toFormat{$_} foreach @l;
+
     @l = grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l;
     $o->ask_many_from_list_ref('', _("Check bad blocks?"),
 			       [ map { $label{$_} } @l ],
 			       [ map { \$_->{toFormatCheck} } @l ]) or goto &choosePartitionsToFormat if $::expert;
-    $_->{toFormat} = $toFormat{$_} foreach @l;
 }
 
 
@@ -583,9 +586,9 @@ sub configurePrinter {
     $::expert or $o->{printer}{mode} ||= 'CUPS';
     if ($::expert || !$o->{printer}{mode}) {
 	$o->{printer}{mode} = $o->ask_from_list_([''], _("Which printing system do you want to use?"),
-						 [ 'CUPS', 'lpr', __("Cancel") ],
+						 [ 'CUPS', 'lpr', __("None") ],
 						);
-	$o->{printer}{want} = $o->{printer}{mode} ne 'Cancel';
+	$o->{printer}{want} = $o->{printer}{mode} ne 'None';
 	$o->{printer}{want} or $o->{printer}{mode} = undef, return;
     }
 

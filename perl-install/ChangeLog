@@ -1,3 +1,25 @@
+2000-09-16  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): move
+	the setting of toFormat before asking for bad blocks, seems to fix
+	things?? weird :-/
+
+	* network.pm (miscellaneousNetwork): fix the setting of focus on
+	error (tx2Thomas Poindessous :)	
+
+	* install_steps_interactive.pm (configurePrinter): changed
+	"Cancel" to "None" (for Thomas Poindessous :)
+
+	* printer.pm (poll_ppd_base): max polling time raised from 10s to
+	30s (for Till)	
+
+	* install_steps.pm (ask_mntpoint_s): don't force partition type to
+	be ext2 (at least if it's a known fs) (for Warly)
+
+2000-09-15  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
+
 2000-09-15  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_gtk.pm (set_help): save the help message displayed

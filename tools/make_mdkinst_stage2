@@ -6,9 +6,10 @@
     exit
 }
 
-STAGE2TMP=/tmp/stage2_tmp
+TMPDIR=${TMPDIR=/tmp}
+STAGE2TMP=$TMPDIR/stage2_tmp
 MKE2FS="/sbin/mke2fs -q -m 0 -F -s 1"
-MNTPOINT=/tmp/stage2_img
+MNTPOINT=$TMPDIR/stage2_img
 REP4PMS=/usr/bin/perl-install
 DEST=$1
 STAGE2=$2

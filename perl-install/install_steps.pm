@@ -181,9 +181,6 @@ sub ask_mntpoint_s {
 
     #- TODO: set the mntpoints
 
-    #- assure type is at least ext2
-    (fsedit::get_root($fstab) || {})->{type} = 0x83;
-
     my %m; foreach (@$fstab) {
 	my $m = $_->{mntpoint};
 
@@ -193,7 +190,7 @@ sub ask_mntpoint_s {
 	$m{$m} = 1;
 
 	#- in case the type does not correspond, force it to ext2
-	$_->{type} = 0x83 if $m =~ m|^/| && !isFat($_);
+	$_->{type} = 0x83 if $m =~ m|^/| && !isFat($_) && !isTrueFS($_);
     }
     1;
 }

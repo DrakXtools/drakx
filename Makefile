@@ -87,7 +87,10 @@ upload: clean install
 	upload Mandrake/base *_stage2.gz ;\
 	upload boot '' ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
-	echo 
+	echo
+
+	perl -pe 'exit if /  DrakX </' perl-install/ChangeLog | mail -s 'new DrakX snapshot' changelog@linux-mandrake.com install@linux-mandrake.com
+	tools/addchangelog perl-install/ChangeLog 'snapshot uploaded'
 
 upload_sparc:
 	touch /tmp/mdkinst_done
