@@ -76,9 +76,7 @@ foreach (@harddrake::data::tree) {
 	alarm (0);
     };
 
-    next unless ($@);     # timed out
-    print "CANCELED\n" if $res;
-    next unless ($res);   # canceled
+    next unless ($@ && $res);     # timed out || canceled
     if (my $pid = fork) {
 		require POSIX;
 		  POSIX::wait();
