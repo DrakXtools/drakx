@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-no\n"
-"POT-Creation-Date: 2003-05-26 17:15+0200\n"
+"POT-Creation-Date: 2003-05-30 18:54+0200\n"
 "PO-Revision-Date: 2003-03-13 06:52+0100\n"
 "Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@linux-mandrake.com>\n"
@@ -3327,31 +3327,6 @@ msgstr "Normal modemtilkobling"
 msgid "File Selection"
 msgstr "Filvalg"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Hvilken ISDN konfigurering foretrekker du?\n"
-"\n"
-"* Den gamle konfigurasjoen bruker isdn4net. Det har kraftfulle\n"
-"  verktøy, den det er vanskelig å konfigurere for en nybegynner,\n"
-"  og er ikke standardbasert.\n"
-"\n"
-"' Det nye konfigurasjonsverktøyet er enklere å forstå,\n"
-"  mer standardisert, men med færre verktøy.\n"
-"\n"
-"Vi anbefaler den nye konfigurasjonen.\n"
-"\n"
-
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
 msgid "CUPS"
@@ -5039,11 +5014,6 @@ msgstr "Monterer partisjon %s"
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Ny konfigurasjon (isdn-light)"
-
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Userdrake"
@@ -5838,11 +5808,6 @@ msgstr "Tjekkia"
 #, c-format
 msgid "Egypt"
 msgstr "Egypt"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Gamle konfigurasjonen (isdn4net)"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -9970,6 +9935,11 @@ msgstr "leverandørnavnet til prosessoren"
 msgid "Hardware clock set to GMT"
 msgstr "Maskinvareklokken din satt til GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Vil du teste konfigurasjonen?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -10405,7 +10375,8 @@ msgstr "Velg vekk skrifttyper som er installert"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Avbryt"
@@ -11397,6 +11368,11 @@ msgstr "Du kan ikke fjerne denne pakken. Den må oppgraderes"
 #, c-format
 msgid "Loading from floppy"
 msgstr "Henter fra disketten"
+
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -15172,6 +15148,7 @@ msgstr "Philippines"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -17350,6 +17327,11 @@ msgstr "Opprett en oppstartdiskett"
 #, c-format
 msgid "Solomon Islands"
 msgstr "Solomon Islands"
+
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Vennligst test musen."
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -19958,6 +19940,35 @@ msgstr "NFS-tjener, SMB-tjener, Proxy-tjener, SSH-tjener"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Sett med verktøy for å lese og sende e-post og nyheter for åsurfe på nett"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Hvilken ISDN konfigurering foretrekker du?\n"
+#~ "\n"
+#~ "* Den gamle konfigurasjoen bruker isdn4net. Det har kraftfulle\n"
+#~ "  verktøy, den det er vanskelig å konfigurere for en nybegynner,\n"
+#~ "  og er ikke standardbasert.\n"
+#~ "\n"
+#~ "' Det nye konfigurasjonsverktøyet er enklere å forstå,\n"
+#~ "  mer standardisert, men med færre verktøy.\n"
+#~ "\n"
+#~ "Vi anbefaler den nye konfigurasjonen.\n"
+#~ "\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Ny konfigurasjon (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Gamle konfigurasjonen (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Internett tilkobling & konfigurasjon"
