@@ -362,7 +362,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     $ENV{DURING_INSTALL} = 1;
     pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages->[1], $packages->[2]);
     delete $ENV{DURING_INSTALL};
-    run_program::rooted($o->{prefix}, 'ldconfig') or die "ldconfig failed!";
+    run_program::rooted($o->{prefix}, 'ldconfig') or die "ldconfig failed!" unless $::g_auto_install;
     log::l("Install took: ", formatTimeRaw(time - $time));
     install_any::log_sizes($o);
 }
