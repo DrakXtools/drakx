@@ -138,7 +138,7 @@ sub write_fstab {
 	    (1, $_->{mntpoint} eq '/' ? 1 : loopback::carryRootLoopback($_) ? 0 : 2) : 
 	    (0, 0);
 
-	if (($device eq 'none' || !$new{$device}) && !$new{$mntpoint}) {
+	if (($device eq 'none' || !$new{$device}) && ($mntpoint eq 'swap' || !$new{$mntpoint})) {
 	    #- keep in mind the new line for fstab.
 	    $new{$device} = 1;
 	    $new{$mntpoint} = 1;
