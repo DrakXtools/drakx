@@ -1187,11 +1187,11 @@ It is not necessary on most networks."),
                                               { name => N("Manually (the interface would still be activated at boot)"),
                                                ONBOOT => 1, DIAL_ON_BOOT => 0 });
                         my $method =  find {
-                            $_->{ONBOOT} eq text2bool($intf->{ippp0}{ONBOOT}) and
-                            $_->{DIAL_ON_BOOT} eq text2bool($intf->{ippp0}{DIAL_ON_BOOT})
+                            $_->{ONBOOT} eq text2bool($intf->{ippp0}{ONBOOT}) &&
+                              $_->{DIAL_ON_BOOT} eq text2bool($intf->{ippp0}{DIAL_ON_BOOT})
                         } @isdn_dial_methods;
                         #- use net_applet by default
-                        $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]->{name};
+                        $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]{name};
                     },
                     name => N("How do you to dial this connection ?"),
                     data => sub {
