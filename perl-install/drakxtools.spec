@@ -115,7 +115,8 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 make PREFIX=$RPM_BUILD_ROOT install
-mkdir -p $RPM_BUILD_ROOT%_initrddir/
+mkdir -p $RPM_BUILD_ROOT/{%_initrddir,etc/sysconfig/harddrake2}
+touch $RPM_BUILD_ROOT/etc/sysconfig/harddrake2/previous_hw
 
 mv ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor \
    ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor.real
@@ -192,6 +193,8 @@ done
 %files -n harddrake
 %defattr(-,root,root)
 %config(noreplace) %_initrddir/harddrake
+%dir /etc/sysconfig/harddrake2/
+%config(noreplace) /etc/sysconfig/harddrake2/previous_hw
 
 %files -n harddrake-ui
 %defattr(-,root,root)
@@ -209,27 +212,35 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Mon Jul  8 2002 tve <tv@vador.mandrakesoft.com> 1.1.8-2mdk
+* Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-2mdk
+- spec :
+  o enhance descriptions
+  o various spec clean
+  o harddrake :
+ 	* obsoletes/provides libdetect-lst, libdetect-lst-devel, detect,
+	  detect-lst, kudzu-devel
+	* split package between harddrake and harddrake-ui to minimize
+    	  the harddrake service dependancies
+	* add missing /etc/sysconfig/harddrake2
 - harddrake2 :
-  o split package between harddrake and harddrake-ui to minimize the
-    harddrake service dependancies
-  o obsoletes/provides libdetect-lst, libdetect-lst-devel, detect,
-    detect-lst, kudzu-devel
   o cache detect_devices::probeall(1) so that hw probe is run once
-  o enhanced help
-  o mice:
-	* s/nbuttons/Number of buttons/ 
-	* delete qw(MOUSETYPE XMOUSETYPE unsafe)
-  o eide devices: split up info field into vendor and model fields
-  o complete help
-  o skip configuration on firt run
-  o don't restart harddrake on install
-  o center the main window
-  o remove drakx decorations
-  o don't display "run config tool" button if no configurator
-    availlable
-  o skip hw classes without configurator (which'll have a configurator
-    after porting updfstab)
+  o hw configuration :
+  	* eide devices: split up info field into vendor and model fields
+  o ui:
+	* enhanced help
+	* mice:
+		- s/nbuttons/Number of buttons/ 
+		- delete qw(MOUSETYPE XMOUSETYPE unsafe)
+	* complete help
+	* center the main window
+	* remove drakx decorations
+	* don't display "run config tool" button if no configurator
+	  availlable
+  o logic:
+	* skip configuration on firt run
+	* don't restart harddrake on install
+	* skip hw classes without configurator (which'll have a
+	  configurator after porting updfstab)
 
 
 * Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
