@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.21mdk
+Release: 0.22mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -357,6 +357,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Feb  9 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.22mdk
+- localedrake: switch arabic font for KDE from "Roya" to "Terafik"
+  that supports ascii glyphs (pablo)
+- ugtk2: API changes for rpmdrake (rafael)
+
 * Wed Feb  9 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.21mdk
 - drakboot: fix ACPI checkbox (pixel, #13335)
 - drakkeyboard: synchronized keyboards with X11 (pablo)
