@@ -473,7 +473,7 @@ sub install2::verifyKey {
     my $_wait = $using_existing_host_config
                 || $o->wait_message(N("Setting up USB key"), N("Please wait, setting up system configuration files on USB key..."));
 
-    if (eval { fs::umount_part($key_part) }) {
+    if (eval { fs::umount_part($key_part); 1 }) {
 	log::l("remounting without sync option");
 	$key_part->{options} = $key_mountopts;
 	fs::mount_part($key_part);
