@@ -718,11 +718,15 @@ sub create_help_window {
 #-    gtkadd($b, new Gtk::Pixmap(@pixmap));
 
 #    Gtk::XmHTML->init;
+    my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm"));
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
 #-		    0, $b,
 #-		    1, createScrolledWindow($w_help = new Gtk::XmHTML)));
-		    1, createScrolledWindow($w_help = new Gtk::Text)));
+		    0, $pixmap,
+		    1, createScrolledWindow($w_help = new Gtk::Text)
+		   ));
+
 #-    $w_help->source($o->{step} ? translate($o->{steps}{$o->{step}}{help}) : '');
     gtktext_insert($w_help, $o->{step} ? formatAlaTeX(translate($help::steps{$o->{step}})) : '');
 
@@ -760,19 +764,24 @@ sub create_steps_window {
 			my $step_name = $_;
 			my $step = $o->{steps}{$_};
 			my $w = new Gtk::Label(translate($step->{text}));
-
 			my $pixmap = new Gtk::Pixmap(@{$steps_icons[$step->{done} ? 0 : $step->{entered} ? 1 : 2]});
+			$pixmap->set_sensitive(0) if !$step->{reachable};
 			gtkpack_(my $b = new Gtk::HBox(0,5), 0, $pixmap, 0, $w);
 
+#(dam's) BUGGY : pixmaps cannot be signaled directly (well I think)
 			$pixmap->set_events('enter_notify_mask');
-			$pixmap->signal_connect(enter_notify_event => sub {  print "HERE\n" });
-
+			$pixmap->signal_connect(enter_notify_event => sub {   print "HERE\n" });
+#			
 			if ($step->{reachable}) {
-			    my $button = new Gtk::Button;
-			    $button->set_relief('none');
-			    gtksignal_connect(gtkadd($button, $b), clicked => sub { die "setstep $step_name\n" });
-			    $button;
+			  my $button = new Gtk::Button;
+			  $button->set_relief('none');
+			  gtksignal_connect(gtkadd($button, $b), clicked => sub { die "setstep $step_name\n" });
+			  $button->set_events('enter_notify_mask');
+			  $button->signal_connect(enter_notify_event => sub { print "HERE\n"; });
+			  $b=$button;
 			}
+			$b;
+
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}}),
