@@ -1,3 +1,78 @@
+2004/09/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/uz.po, share/po/uz@Latn.po: updated Uzbek files
+
+	* share/po/it.po: updated Italian file
+
+2004/09/14  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install_steps.pm (configureNetwork) commit forgotten patch (I sux)
+
+	* detect_devices.pm (getModem) use network/slmodem category
+
+	* install_steps_interactive.pm (configureNetwork) load all network modules
+	before network
+	auto-configuration, so that all interfaces will be available and
+	written in iftab
+
+	* network/isdn.pm: adapt to kernel packages naming
+
+	* network/netconnect.pm: allow to configure slmodem
+
+2004/09/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech file
+
+	* lang.pm: comment for default:LTR
+	comment on default:LTR
+
+	* share/po/it.po, share/po/ms.po, share/po/es.po, share/po/am.po,
+	share/po/fur.po, share/po/fi.po, share/po/pt.po: corrected default:LTR
+	entries
+
+	* share/po/ar.po: corrected "<control>X" strings
+
+	* share/po/bn.po: corrected "<control>X" strings
+	corrected default:LTR entries
+
+2004/09/14  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm, fsedit.pm, fs/mount_options.pm,
+	partition_table.pm: 
+	  - ensure {is_removable} field is there for created partitions, not
+	only existing partitions
+	  - it breaks Create(), fixing
+
+2004/09/14  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* authentication.pm: Fix net join syntax for winbind setup.
+
+2004/09/14  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix typo in 10.1-7mdk's changelog
+	10.1-8mdk
+	10.1-7mdk
+	package man pages
+
+	* standalone/service_harddrake: adapt to new nvidia driver location
+
+	* any.pm (selectCountry) offer to select IM if language has one
+	preselected
+	(else option is only availlable in advanced mode)
+
+	* Makefile.drakxtools, Makefile: package man pages
+
+	* standalone/man/C/man8/drakconnect.8: remove reference to ipchains
+	add drakconnect man page
+
+	* network/ethernet.pm (get_eth_cards) document it somewhat
+	(get_eth_cards_names) let detect_devices->firewire_probe() set the
+	device description
+	(get_eth_cards) workaround buggy eth1394 that returs a bogus driver
+	name for the GDRVINFO command of the ETHTOOL ioctl returns
+	(get_eth_cards_names) set a sensible name for firewire network
+	adapters in order to make GUIes look more user friendly
+
 2004/09/14  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/isdn.pm: adapt to kernel packages naming
@@ -39204,7 +39279,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.969 2004/09/13 11:46:32 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.970 2004/09/14 10:02:11 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
