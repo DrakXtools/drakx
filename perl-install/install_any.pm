@@ -40,9 +40,9 @@ my $cdrom;
 my %iso_images;
 
 sub mountCdrom {
-    my ($mountpoint, $cdrom_) = @_;
-    $cdrom_ = $cdrom if !defined $cdrom_;
-    eval { fs::mount($cdrom_, $mountpoint, "iso9660", 'readonly') };
+    my ($mountpoint, $o_cdrom) = @_;
+    $o_cdrom = $cdrom if !defined $o_cdrom;
+    eval { fs::mount($o_cdrom, $mountpoint, "iso9660", 'readonly') };
 }
 
 sub useMedium($) {
@@ -175,7 +175,7 @@ sub errorOpeningFile($) {
     return;
 }
 sub getFile {
-    my ($f, $o_method, $altroot) = @_;
+    my ($f, $o_method, $o_altroot) = @_;
     log::l("getFile $f:$o_method");
     my $rel = relGetFile($f);
     do {
@@ -196,8 +196,8 @@ sub getFile {
 	    #- this allows handling changing a media when some of the files on the
 	    #- first CD have been copied to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
-	    $altroot ||= '/tmp/image';
-	    $f2 = "$altroot/$rel" if !$postinstall_rpms || !-e $f2;
+	    $o_altroot ||= '/tmp/image';
+	    $f2 = "$o_altroot/$rel" if !$postinstall_rpms || !-e $f2;
 	    $f2 = $rel if $rel =~ m!^/! && !-e $f2; #- not a relative path
 	    my $F; open($F, $f2) && $F;
 	}
