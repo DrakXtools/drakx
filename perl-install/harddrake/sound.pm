@@ -214,12 +214,12 @@ To use alsa, one can either use:
                                 &get_any_driver_entry($in, $driver, $device),
                                 ]))
         {
-            return if $new_driver eq $driver;
-            log::explanations("switching audio driver from '$driver' to '$new_driver'\n");
+            return if $new_driver eq $device->{current_driver};
+            log::explanations("switching audio driver from '" . $device->{current_driver} . "' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oops the kernel on unloading.\n
-The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
-            do_switch($in, $driver, $new_driver, $device->{sound_slot_index});
+The new \"%s\" driver'll only be used on next bootstrap.", $device->{current_driver}, $new_driver)) if $blacklisted;
+            do_switch($in, $device->{current_driver}, $new_driver, $device->{sound_slot_index});
             $device->{current_driver} = $new_driver;
         }
     } elsif ($driver =~ /^Bad:/) {
