@@ -815,7 +815,7 @@ sub clear_nbi {
 sub update_list {
     my ($list_model) = @_;
     $list_model->clear;
-    $list_model->append_set(0, $_) foreach grep { /\.nbi/ } all($tftpboot);
+    $list_model->append_set(0, $_) foreach grep { /\.nbi/ } sort(all($tftpboot));
 }
 
 sub build_n_update {
