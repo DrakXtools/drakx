@@ -4278,22 +4278,32 @@ sub message_norestore_box {
     $up_box->show_all();    
 }
 
-sub message_noselect_box {
+
+sub message_common_box {
     $box2->destroy();
+    my ($label) = @_;
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
     
     gtkadd($advanced_box,
-		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack(new Gtk::HBox(0, 15),	
-				new Gtk::VBox(0, 5),	
-				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				N("Please select media for backup..."),
-				new Gtk::VBox(0, 5),	
-			),
-			1, new Gtk::VBox(0, 5),	
-		),
-	);
+           $box2 = gtkpack_(new Gtk::HBox(0, 15),	
+                            1, new Gtk::VBox(0, 5),	
+                            1, gtkpack(new Gtk::HBox(0, 15),	
+                                       new Gtk::VBox(0, 5),	
+                                       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
+                                       $label,
+                                       new Gtk::VBox(0, 5),	
+                                       ),
+                            1, new Gtk::VBox(0, 5),	
+                            ),
+           );
+    $previous_widget = \&wizard;
+    $next_widget = \&wizard;
+    $central_widget = \$box2;
+    $up_box->show_all();    
+}
+
+sub message_noselect_box {
+    message_common_box(N("Please select media for backup..."));
     $previous_widget = \&wizard_step2;
     $next_widget = \&wizard_step2;
     $central_widget = \$box2;
@@ -4301,21 +4311,7 @@ sub message_noselect_box {
 }
 
 sub message_noselect_what_box {
-    $box2->destroy();
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
-    
-    gtkadd($advanced_box,
-		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack(new Gtk::HBox(0, 15),	
-				new Gtk::VBox(0, 5),	
-				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				N("Please select data to backup..."),
-				new Gtk::VBox(0, 5),	
-			),
-		1, new Gtk::VBox(0, 5),	
-		),
-	);
+    message_common_box(N("Please select data to backup..."));
     $previous_widget = \&wizard;
     $next_widget = \&wizard;
     $central_widget = \$box2;
