@@ -115,7 +115,7 @@ sub ftp($) { ftp::new($_[0], dir($_[0])) }
 sub getFile {
     my ($file, $o_host) = @_;
     my $host = $o_host || $crypto::host;
-    my $dir = dir($host) . ($file =~ /\.rpm$/ && "/RPMS");
+    my $dir = dir($host);
     log::l("getting crypto file $file on directory $dir with login $mirrors{$host}[2]");
     my ($ftp, $retr) = ftp::new($host, $dir,
 				if_($mirrors{$host}[2], $mirrors{$host}[2]),
