@@ -1,3 +1,44 @@
+2001/02/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/include/stdlib.h, mdk-stage1/minilibc.c,
+	mdk-stage1/init-libc-headers.h,
+	mdk-stage1/dietlibc/include/sys/select.h, mdk-stage1/Makefile,
+	mdk-stage1/init.c, mdk-stage1/minilibc.h,
+	mdk-stage1/dietlibc/include/unistd.h,
+	mdk-stage1/dietlibc/include/sys/socket.h,
+	mdk-stage1/dietlibc/include/signal.h: have "init" compiled against
+	dietlibc (rather than glibc) on non-Intel arch's
+
+2001/02/22  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_auto_install.pm: $graphical is now a module variable. Can
+	be changed from everywhere
+
+	* fs.pm (write_fstab): clean-up, $fstab takes precedence over @to_add, but
+	not
+	over existing /etc/fstab. Fix some stupid stuff
+
+	* modules.pm, commands.pm: call /usr/bin/insmod_ with full path
+
+	* install2.pm (main): don't set a special $remote_path PATH for
+	postInstallNonRooted
+	(otherwise install's modprobe is not used, and you can't "modprobe
+	vfat",
+	even if "/usr/bin/modprobe vfat" doesn't work because insmod_ is not
+	found.
+
+	* my_gtk.pm (create_box_with_title): disallow focusing on text if it is
+	non-scrolled
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): fix setting
+	type to 'list' in
+	case of format. should be only set if type is unset
+	(ask_from_entries_refH_powered_normalize): if list+format then type is
+	'list', combo not accepted (hacky?)
+
+	* interactive_gtk.pm (ask_from_entries_refW): if no button wanted, don't
+	call create_okcancel
+
 2001/02/22  Pixel  <pixel@mandrakesoft.com>
 
 	* interactive.pm (ask_from_entries_refH_powered_normalize): if list+format
