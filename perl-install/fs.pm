@@ -532,7 +532,7 @@ sub set_removable_mntpoints {
 sub get_raw_hds {
     my ($prefix, $all_hds) = @_;
 
-    $all_hds->{raw_hds} = [ detect_devices::removables() ];
+    push @{$all_hds->{raw_hds}}, detect_devices::removables();
     get_major_minor(@{$all_hds->{raw_hds}});
 
     my @fstab = read_fstab($prefix, "/etc/fstab", 'keep_freq_passno');
