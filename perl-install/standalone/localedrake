@@ -46,6 +46,7 @@ eval {
   language:
     local $::Wizard_no_previous = 1;
     my $old_lang = $locale->{lang};
+    $in->{locale} = $locale;
     $locale->{lang} = any::selectLanguage($in, $locale->{lang});
     $locale->{IM} = lang::get_default_im($locale->{lang}) if $old_lang ne $locale->{lang};
     undef $::Wizard_no_previous;
