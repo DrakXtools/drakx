@@ -149,13 +149,13 @@ sub subpart_from_wild_device_name {
 		($part{major}, $part{minor}) = unmakedev($rdev);
 	    }
 
-	    if (my $symlink = readlink("$::prefix$dev")) {
-		if ($symlink =~ m|^[^/]+$|) {
-		    $part{device_alias} = $dev;
-		    $dev = $symlink;
-		}
-	    }
+	    my $symlink = readlink("$::prefix$dev");
 	    $dev =~ s!/(tmp|u?dev)/!!;
+
+	    if ($symlink && $symlink =~ m|^[^/]+$|) {
+		$part{device_alias} = $dev;
+		$dev = $symlink;
+	    }
 
 	    if (my (undef, $part_number) = $dev =~ m!/(disc|part(\d+))$!) {
 		$part{part_number} = $part_number if $part_number;
