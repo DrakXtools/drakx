@@ -97,7 +97,7 @@ drakx_stuff:
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
     $o->{steps}{handleMoveKey} = { reachable => 1, text => "Handle Move Key" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ qw(selectLanguage handleMoveKey acceptLicense selectMouse selectKeyboard startMove) ];
+    $o->{orderedSteps} = [ qw(selectLanguage acceptLicense handleMoveKey selectMouse selectKeyboard startMove) ];
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
