@@ -1,3 +1,89 @@
+2003/08/26  François Pons  <fpons at mandrakesoft.com>
+
+	* pkgs.pm: get selected list from compssUsers for readCompssUsers.
+
+	* install_steps_interactive.pm: drop security level selection for desktop
+	user.
+	do not ask user for group selection if desktop meta class is used.
+
+	* share/compssUsers.server: added [selected=server] for groups to be
+	selected by default.
+
+	* share/compssUsers: added [selected=default] for all section which needed
+	to be selected
+	(approximative map of existing packages).
+
+	* install_any.pm: added default compssUsers group selection from
+	compssUser file directly (use
+	[selected=...] where ... is a list of comma separated meta_class (or
+	default for
+	no meta_class or all for all meta_class).
+	fixed all radeon card are using 3D for 3D package group.
+
+	* share/compssUsers.desktop: added [selected=desktop] when needed (same as
+	default selection (PowerPack) but
+	Gnome is removed).
+
+2003/08/26  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/diskdrake: do embed WebDAV configuration (fix bug #4703)
+
+	* any.pm: install "autofs" pkg when using ldap (thanks to Buchan Milne)
+
+	* diskdrake/dav.pm: focus_first on the webdav server field
+
+	* keyboard.pm: 
+	  - don't set XkbCompat to group_led, it's better to use grp_led:scroll
+	in
+	XkbOptions
+	  - also set compose:rwin if GRP_TOGGLE is not rwin_toggle. rationale:
+		  Also, for multilayout keyboards, it would be nice to also
+		  in XkbOptions "compose:rwin" to define the right windows
+		  key as the compose key (unless "rwin_toggle" has been
+		  choosen to toggle the layouts) "compose:rwin" is the
+		  default when loading a single latin layout, but is lost
+		  when loading several layouts...
+
+	* fs.pm: use fs=ext2:vfat or fs=udf:iso9600 for supermount (it needs
+	supermount-ng)
+
+2003/08/26  Till Kamppeter  <till at mandrakesoft.com>
+
+	* pixmaps/printer-mdk.png: Updated icon for printerdrake's dialog windows.
+
+2003/08/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: more last bits for 9.2-2mdk for lord pixel
+	9.2-2mdk
+
+	* modules.pm (add_alias) override current setting when adding an alias
+
+	* standalone/drakconnect: add --gui in order to start in "mcc" state (aka
+	not in wizard mode)
+	more dialog misusage and some indent fixes
+	enfore gc style for gtk+2 widgets creation
+	more layout fixes: cance/ok order coherency, no VBoxes/HButtonBoxes
+	abuses, ...
+	(configure_net) Gtk2::Dialog main area is already a vbox, so it's
+	useless to pack a vbox there idem for action area and Gtk2::HButtonBox
+	(get_intf_status) kill duplicate
+	net & lan configuration dialogs: prevent one to do concurrent config
+	changes from the gui
+	(sensitive_buttons) fix it
+	  - only allow to run one wizard at once (insensitive button if one is
+	already started)
+	  - reload the configuration once the wizard exited
+	  - prevent one to do concurrent config changes from the gui while the
+	  wizard is run (proper fix involve both fix modality/transcientness
+	  when embedded and running the wizard within the same process instead
+	  of forking it]
+
+	* harddrake/data.pm: explain data struct
+
+	* harddrake/sound.pm, standalone/service_harddrake: while bootstrapping,
+	only write /etc/modules.conf only if we really altered it
+	(thus preventing depmod to be runned everytime)
+
 2003/08/26  Pixel  <pixel at mandrakesoft.com>
 
 	* diskdrake/dav.pm: focus_first on the webdav server field
@@ -19795,7 +19881,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.823 2003/08/25 14:30:01 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.824 2003/08/26 12:43:18 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
