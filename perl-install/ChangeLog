@@ -1,3 +1,55 @@
+2003/09/09  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/ta.po, share/po/ko.po, share/po/fi.po, share/po/sq.po: Fix
+	s/9.1/9.2
+
+2003/09/09  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/printerdrake: 
+	  - help call
+	  - reportbug via bugzilla
+
+2003/09/09  François Pons  <fpons at mandrakesoft.com>
+
+	* install_messages.pm: fixed reference to 9.1 errata, (now
+	http://www.mandrakelinux.com/en/92errata.php3).
+
+	* standalone/drakautoinst: try again if no floppy (or error during
+	creation of floppy)
+
+2003/09/09  keld
+
+	* share/po/da.po: updates
+	soft/GtkMdkWidgets/po/da.po soft/wizard_perl/po/da.po
+	gi/perl-install/share/po/da.po
+
+2003/09/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po, share/po/uk.po, share/po/eu.po: updated Basque,
+	Portuguese and Ukrainian files
+
+2003/09/09  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: don't ask security level when upgrading
+
+	* mouse.pm: write "MOVE YOUR WHEEL!" only for ps2 mice
+
+	* modules.pm: increase sleep time after modprobing usb-uhci/usb-ohci
+	(otherwise USB mouse may be undetected)
+
+	* share/po/help-it.pot, share/po/help-de.pot, share/po/help-fr.pot,
+	help.pm, share/po/help-ru.pot, share/po/help-es.pot: update from xml
+	help
+
+2003/09/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakfloppy: fix #5430: do not confuse users with debug
+	messages
+
+	* install_steps.pm: fix network install
+
+	* standalone/drakboot: fix default size without draksplash
+
 2003/09/09  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
 
 	* share/po/pl.po: Updated
@@ -21122,7 +21174,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.831 2003/09/08 16:05:52 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.832 2003/09/09 09:14:46 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
