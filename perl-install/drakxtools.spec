@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 2mdk
+Release: 3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Nov  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-3mdk
+- drakconnect:
+  o fix wireless cards detection (#3690, #5814, ...)
+  o always list sagem_dhcp in list, showing it only in expert mode is
+    confusing
+- drakconnect/localedrake: fix a few unstranslated strings
+
 * Wed Nov  5 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-2mdk
 - drakbackup: enable bz2 compression option (stew)
 - drakconnect: detect again unconfigured network interfaces
