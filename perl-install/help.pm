@@ -760,9 +760,6 @@ system! Be sure you know what you do before changing any of the options. !!
 Clicking the \"Advanced\" button in this dialog will offer advanced options
 that are reserved for the expert user."),
 
-setupBootloader-title => 
-N_("Installing a Bootloader"),
-
 setupBootloaderAddEntry => 
 N_("After you have configured the general bootloader parameters, the list of
 boot options that will be available at boot time will be displayed.
