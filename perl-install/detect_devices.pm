@@ -546,22 +546,6 @@ sub isLaptop {
 		    matching_desc('ATI.*(Mobility|LT)'));
 }
 
-sub hasUltra66 {
-    die "hasUltra66 deprecated";
-    #- keep it BUT DO NOT USE IT as now included in kernel.
-    cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
-
-    my @l = map { $_->{verbatim} } matching_desc('HPT|Ultra66') or return;
-    
-    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x",
-      @l == 2 ?
-	(map_index { hex($_) + (odd($::i) ? 1 : -1) } map { (split ' ')[3..4] } @l) :
-	(map_index { hex($_) + (odd($::i) ? 1 : -1) } map { (split ' ')[3..6] } @l);
-
-    log::l("HPT|Ultra66: found $ide");
-    $ide;
-}
-
 sub whatParport() {
     my @res;
     foreach (0..3) {
