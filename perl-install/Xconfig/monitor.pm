@@ -41,7 +41,7 @@ sub configure {
     }
     my $head_nb = 1;
     foreach my $monitor (@$monitors) {
-	choose($in, $monitor, @$monitors > 1 ? $head_nb++ : 0, $b_auto) or return;
+	choose($in, $monitor, @$monitors > 1 ? $head_nb++ : 0, $raw_X->get_Driver, $b_auto) or return;
     }
     $raw_X->set_monitors(@$monitors);
     $monitors;
@@ -67,7 +67,7 @@ sub configure_auto_install {
     } $monitors, $old_X->{monitors} if $old_X->{monitors};
 
     if (!is_valid($monitors->[0])) {
-	put_in_hash($monitors->[0], probe());
+	put_in_hash($monitors->[0], probe($old_X->{card}{Driver}));
     }
 
     foreach my $monitor (@$monitors) {
@@ -82,7 +82,7 @@ sub configure_auto_install {
 }
 
 sub choose {
-    my ($in, $monitor, $head_nb, $b_auto) = @_;
+    my ($in, $monitor, $head_nb, $card_Driver, $b_auto) = @_;
 
     my $ok = is_valid($monitor);
     if ($b_auto) {
@@ -123,7 +123,7 @@ sub choose {
 	local $::noauto = 0; #- hey, you asked for plug'n play, so i do probe!
 	delete @$monitor{'VendorName', 'ModelName', 'EISA_ID'};
 	if ($head_nb <= 1) {
-	    if (my $probed_info = probe()) {
+	    if (my $probed_info = probe($card_Driver)) {
 		put_in_hash($monitor, $probed_info);
 	    } else {
 		$in->ask_warn('', N("Plug'n Play probing failed. Please select the correct monitor"));
@@ -176,12 +176,9 @@ sub is_valid {
     $monitor->{HorizSync} && $monitor->{VertRefresh};
 }
 
-sub probe() {
-    my $monitor = probe_DDC();
-    if (!configure_automatic($monitor || {})) {
-	$monitor = probe_DMI();
-    }
-    is_valid($monitor) && $monitor;
+sub probe {
+    my ($o_card_Driver) = @_;
+    probe_DDC() || probe_using_X($o_card_Driver) || probe_DMI();
 }
 
 sub probe_DDC() {
@@ -213,7 +210,23 @@ sub probe_DDC() {
 	$monitor->{VendorName} = "Plug'n Play";
 	$monitor->{ModelName} = $monitor->{monitor_name};
     }
+    configure_automatic($monitor) or return;
     $monitor;
+}
+
+sub probe_using_X {
+    my ($card_Driver) = @_;
+
+    detect_devices::isLaptop() or return;
+
+    $card_Driver ||= do {
+	require Xconfig::card;
+	my @cards = Xconfig::card::probe();
+	$cards[0]{Driver};
+    } or return;
+
+    my $resolution = run_program::rooted_get_stdout($::prefix, 'monitor-probe-using-X', $card_Driver) or return;
+    generic_flat_panel($resolution);
 }
 
 sub probe_DMI() {
@@ -221,11 +234,15 @@ sub probe_DMI() {
     if (@res > 1) {
 	log::l("oops, more than one resolution from DMI and pci probe: ", join(' ', @res));
     }
-    my ($X, $Y) = $res =~ /(\d+)x(\d+)/ or log::l("bad resolution $res"), return;
+    generic_flat_panel($res);
+}
 
+sub generic_flat_panel {
+    my ($resolution) = @_;
+    my ($X, $Y) = $resolution =~ /(\d+)x(\d+)/ or log::l("bad resolution $resolution"), return;
     {
 	VendorName => 'Generic',
-	ModelName => "Flat Panel $res",
+	ModelName => "Flat Panel $resolution",
 	HorizSync => '31.5-100', VertRefresh => '60',
 	preferred_resolution => { X => $X, Y => $Y },
     };

@@ -181,7 +181,11 @@ sub _new_device_sections {
     $raw_X->remove_Section('Device');
     map { $raw_X->add_Section('Device', { Identifier => { val => "device$_" }, DPMS => { Option => 1 } }) } (1 .. $nb_new);
 }
-
+sub get_Driver {
+    my ($raw_X) = @_;
+    my $card = eval { $raw_X->get_device };
+    $card && $card->{Driver};
+}
 
 ################################################################################
 # wacoms #######################################################################
