@@ -503,7 +503,7 @@ sub write_conf {
     add_alias('block-major-11', 'scsi_hostadapter') if @l;
     push @l, "ide-floppy" if detect_devices::ide_zips();
     $conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @l if @l;
-    $conf{"usb-storage"}{"post-install"} = "modprobe usbkbd; modprobe keybdev" if @l;
+    $conf{"usb-storage"}{"post-install"} = "modprobe usbkbd; modprobe keybdev" if @l && arch() !~ /sparc|alpha/;
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
