@@ -26,20 +26,24 @@ add_icon_path("/usr/share/libDrakX/pixmaps/");
 is_running('net_applet') and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
 my $current_md5 = md5file($prog_name);
+
+my ($netcnx, $intf);
+my $watched_interface;
+
 my %appletstate = (
              connected => {
   		          colour => [ 'connected' ],
 			  changes => [ 'disconnected', 'error', 'busy' ],
-			  menu => [ 'downNetwork', 'confNetwork', 'monitorNetwork', 'refresh', 'help' ],
+                          menu => [ 'downNetwork', 'chooseInterface', 'chooseProfile', 'confNetwork', 'monitorNetwork', 'refresh', 'help' ],
 			  tt => [ N_("Network is up on interface %s") ]
 			  },
              disconnected => {
 			      colour => [ 'disconnected' ],
 			      changes => [ 'connected', 'error', 'busy' ],
-			      menu => [ 'upNetwork', 'confNetwork', 'refresh', 'help' ],
-			      tt => [ 
+			      menu => [ 'upNetwork', 'chooseInterface', 'chooseProfile', 'confNetwork', 'refresh', 'help' ],
+			      tt => [
                             #-PO: keep the "Configure Network" substring synced with the "Configure Network" message below
-                            N_("Network is down on interface %s. Click on \"Configure Network\"") 
+                            N_("Network is down on interface %s. Click on \"Configure Network\"")
                            ]
                              },
              notconfigured => {
@@ -58,6 +62,25 @@ my %actions = (
                'downNetwork' => { name => sub { N("Disconnect %s", $_[0]) }, launch => \&network::tools::stop_interface },
                'monitorNetwork' => { name => N("Monitor Network"), launch => sub { system("/usr/sbin/net_monitor --defaultintf $_[0] &") } },
                'confNetwork' => { name => N("Configure Network"), launch => sub { system("/usr/sbin/drakconnect --skip-wizard &") } },
+               'chooseInterface' => {
+                   name => N("Watched interface"),
+                   choices => sub { N("Auto-detect"), sort keys %$intf },
+                   choice_selected => sub { $watched_interface ? $_[0] eq $watched_interface : $_[0] eq N("Auto-detect") },
+                   launch => sub {
+                       $watched_interface = $_[0] eq N("Auto-detect") ? undef : $_[0];
+                       checkNetworkForce();
+                   }
+               },
+               'chooseProfile' => {
+                   name => N("Profiles"),
+                   choices => sub { network::netconnect::get_profiles() },
+                   choice_selected => sub { $_[0] eq $netcnx->{PROFILE} },
+                   launch => sub {
+                       $netcnx->{PROFILE} = $_[0];
+                       network::netconnect::set_profile($netcnx);
+                       checkNetworkForce();
+                   }
+               },
 	       'refresh' => { name => N("Refresh"), launch => sub { checkNetwork() } },
                'help' => { name => N("Get Online Help"), launch => sub { system("drakhelp --id internet-connection &") } }
               );
@@ -129,15 +152,22 @@ sub netMonitor() {
     checkNetwork();
 }
 sub checkNetwork() {
-    my $netcnx = {};
+    $netcnx = {};
     my $netc = {};
-    my $intf = {};
+    $intf = {};
     network::netconnect::read_net_conf($netcnx, $netc, $intf);
     my ($gw_intf, $is_up, $gw_address, $dns_server) = network::tools::get_internet_connection($netc, $intf);
+    my ($gw_intf, $is_up, $gw_address) = $watched_interface ?
+      ($watched_interface, network::tools::get_interface_status($watched_interface)) :
+      network::tools::get_internet_connection($netc, $intf);
     go2State($gw_address ? 'connected' : $gw_intf ? 'disconnected' : 'notconfigured', $gw_intf);
 
     my $new_md5 = md5file($prog_name);
     if ($new_md5 ne $current_md5) { exec($prog_name) }
+}
+sub checkNetworkForce() {
+    $current_state = "refresh";
+    checkNetwork();
 }
 sub getIP {
     my ($interface) = shift;
@@ -170,7 +200,18 @@ sub setState {
     foreach (@$arr) {
         my $name = ref($actions{$_}{name}) eq 'CODE' ? $actions{$_}{name}->($interface) : $actions{$_}{name};
         my $launch = $actions{$_}{launch};
-        $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
+        if ($actions{$_}{choices}) {
+           my $selected = $actions{$_}{choice_selected};
+           $menu->append(gtkshow(create_menu($name, map {
+               my $choice = $_;
+               my $w = gtkshow(gtkset_active(Gtk2::CheckMenuItem->new_with_label($choice), $selected->($choice)));
+               gtksignal_connect($w, activate => sub { $launch->($choice) });
+               $w->set_draw_as_radio(1);
+               $w;
+           } $actions{$_}{choices}->())));
+       } else {
+           $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($name)), activate => sub { $launch->($interface) }));
+       }
     }
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     if ($enable_activefw) {
