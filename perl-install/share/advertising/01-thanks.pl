@@ -5,7 +5,7 @@ $height = 303;
 
 $y_start = 80;
 
-$title = N("Thank you for choosing Mandrake Linux 9.1");
+$title = N("Thank you for choosing Mandrake Linux 9.2");
 
 @text = (N("Welcome to the Open Source world."),
          '',
