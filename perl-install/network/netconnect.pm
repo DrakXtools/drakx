@@ -609,7 +609,7 @@ or skip and do it later."),
                         if ($adsl_answer eq N("Use a floppy")) {
                             $mounted = 1;
                             $file = 'mgmt.o';
-                            ($source, $adsl_failed) = network::tools::use_floppy($file);
+                            ($source, $adsl_failed) = network::tools::use_floppy($in, $file);
                         } elsif ($adsl_answer eq N("Use my Windows partition")) {
                             $file = 'alcaudsl.sys';
                             ($source, $adsl_failed) = network::tools::use_windows();

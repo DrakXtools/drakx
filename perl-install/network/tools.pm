@@ -5,12 +5,10 @@ use common;
 use run_program;
 use c;
 use vars qw(@ISA @EXPORT @EXPORT_OK);
-use MDK::Common::Globals "network", qw($in);
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip is_wireless_intf passwd_by_login read_providers_backend read_secret_backend set_cnx_script test_connected write_cnx_script write_initscript write_secret_backend);
-@EXPORT_OK = qw($in);
 
 our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
 my $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
@@ -204,7 +202,7 @@ sub use_windows() {
 }
 
 sub use_floppy {
-    my ($file) = @_;
+    my ($in, $file) = @_;
     my $floppy = detect_devices::floppy();
     $in->ask_okcancel(N("Insert floppy"),
 		      N("Insert a FAT formatted floppy in drive %s with %s in root directory and press %s", $floppy, $file, N("Next"))) or return;
