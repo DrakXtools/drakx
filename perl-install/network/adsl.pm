@@ -208,7 +208,7 @@ user "$adsl->{login}"
 						      ['ppp-compress-26', 'ppp_deflate'];
 	$::isStandalone and modules::write_conf($prefix);
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
-	-e "/usr/share/speedtouch/mgmt.o" and return 1;
+	-e "$prefix/usr/share/speedtouch/mgmt.o" and return 1;
 	
       firmware:
 	
@@ -222,7 +222,7 @@ user "$adsl->{login}"
 You can provide it now via a floppy or your windows partition,
 or skip and do it later."), $l) or return;
 	
-	my $destination = '/usr/share/speedtouch/';
+	my $destination = "$prefix/usr/share/speedtouch/";
 	$answer eq 'Use a floppy' and network::tools::copy_firmware('floppy', $destination, 'mgmt.o') || goto firmware;
 	$answer eq 'Use my Windows partition' and network::tools::copy_firmware('windows', $destination, 'alcaudsl.sys') || goto firmware;
 	$answer eq 'Do it later' and $in->ask_warn('', N("You need the Alcatel microcode.
