@@ -928,8 +928,12 @@ sub setup_local_autoscan {
 	$printer->{MORETHANONE} = $#autodetected > 0;
 	my @str;
 	foreach my $p (@autodetected) {
-	    if ($p->{val}{DESCRIPTION}) {
-		my $menustr = $p->{val}{DESCRIPTION};
+	    if (($p->{val}{DESCRIPTION}) || ($p->{val}{MODEL})) {
+		my $menustr = ($p->{val}{DESCRIPTION} ?
+			       $p->{val}{DESCRIPTION} :
+			       (($p->{val}{MANUFACTURER} ? 
+				 ($p->{val}{MANUFACTURER} . " ") : ()) .
+				$p->{val}{MODEL}));
 		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
                     my $port = $1;
 		    $menustr .= N(" on parallel port #%s", $port);
