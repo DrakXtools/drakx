@@ -181,12 +181,16 @@ sub display_perm {
 
 sub save_perm {
     $modified or return 0;
+    my $val;
     local *F;
-    open F, '>'.$local_path.'perm.local' or die("F CHIER BORDEL");
-    foreach my $i (0..$rows_cnt) {
-	my $line = $permList->get_text($i, 0) . "\t" . $permList->get_text($i,1) . ($permList->get_text($i,2) ? "." . $permList->get_text($i,2) : "") . "\t" . $permList->get_text($i,3) . "\n";
-	print F $line;
-    }
+    open F, '>'.$local_path.'perm.local' or die("Impssible to process \"", $local_path, "perm.local\"");
+    $treeModel->foreach(sub {
+                             my ($model, $_path, $iter) = @_;
+                             my $module = $model->get($iter, 0);
+                             my $line = $model->get($iter, 0) . "\t" . $model->get($iter,1) . ($model->get($iter,2) ? "." . $model->get($iter,2) : "") . "\t" . $model->get($iter,3) . "\n";
+                             print F $line;
+                             return 0;
+                         }, $val);
     close F;
     $modified = 0;
 }
