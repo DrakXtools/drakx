@@ -504,9 +504,12 @@ sub install_yaboot($$$) {
     }
     log::l("Installing boot loader...");
     my $f = "$prefix/tmp/of_boot_dev";
-	my $of_dev = get_of_dev($prefix, $lilo->{boot});
-	output($f, "$of_dev\n");  
+    my $of_dev = get_of_dev($prefix, $lilo->{boot});
+    output($f, "$of_dev\n");  
     $::testing and return;
+    if (defined $install_steps_interactive::new_bootstrap) {
+	run_program::run("hformat", "$lilo->{boot}") or die "hformat failed";
+    }	
     run_program::rooted($prefix, "/sbin/ybin", "2>", "/tmp/.error") or die "ybin failed";
     unlink "$prefix/tmp/.error";	
 }

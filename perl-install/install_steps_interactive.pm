@@ -3,7 +3,7 @@ package install_steps_interactive; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@ISA);
+use vars qw(@ISA $new_bootstrap);
 
 @ISA = qw(install_steps);
 
@@ -336,23 +336,23 @@ Do you agree to loose all the partitions?
 _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!"));
 
-	if (arch() =~ /ppc/ && !$::expert) {	#- need to make bootstrap part if recommended install - thx Pixel ;^)
-		if (defined $partition_table_mac::bootstrap_part) {
-			#- don't do anything if we've got the bootstrap setup
-			#- otherwise, go ahead and create one somewhere in the drive free space
-		} else {
-			if (defined $partition_table_mac::freepart_start && $partition_table_mac::freepart_size >= 1) {
-				my ($hd) = $partition_table_mac::freepart_device;
-				log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table_mac::freepart_start");
-    			$partition_table_mac::bootstrap_part = $partition_table_mac::freepart_part;	
-				log::l("bootstrap now at $partition_table_mac::bootstrap_part");
-    			fsedit::add($hd, { start => $partition_table_mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{hds}, { force => 1, primaryOrExtended => 'Primary' });    
-				run_program::run("hformat", $partition_table_mac::bootstrap_part) or die "hformat of $partition_table_mac::bootstrap_part failed";
-			} else {
-				die "no free space for 1MB bootstrap";
-			}
-		}
+    if (arch() =~ /ppc/) {	#- need to make bootstrap part if recommended install - thx Pixel ;^)
+	if (defined $partition_table_mac::bootstrap_part) {
+	    #- don't do anything if we've got the bootstrap setup
+	    #- otherwise, go ahead and create one somewhere in the drive free space
+	} else {
+	    if (defined $partition_table_mac::freepart_start && $partition_table_mac::freepart_size >= 1) {
+		my ($hd) = $partition_table_mac::freepart_device;
+		log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table_mac::freepart_start");
+		$partition_table_mac::bootstrap_part = $partition_table_mac::freepart_part;	
+		log::l("bootstrap now at $partition_table_mac::bootstrap_part");
+		fsedit::add($hd, { start => $partition_table_mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{hds}, { force => 1, primaryOrExtended => 'Primary' });
+		$new_bootstrap = 1;    
+	    } else {
+		die "no free space for 1MB bootstrap";
+	    }
 	}
+    }
 
     if ($o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
@@ -1027,7 +1027,7 @@ try to force installation even if that destroys the first partition?"));
 		my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
 		chop($of_boot);
 		unlink "$o->{prefix}/tmp/.error";
-		$o->ask_warn('', _("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device $of_boot,\\\\tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt."));
+		$o->ask_warn('', _("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device $of_boot,\\\\yaboot\n Then type: shut-down\nAt your next boot you should see the bootloader prompt."));
 	    }
     }
 }
