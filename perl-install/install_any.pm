@@ -509,6 +509,7 @@ sub install_urpmi {
 		URPM::compare_pubkeys($k, $kv) == 0 and $id = $kv->{id}, last;
 	    }
 	    unless ($id) {
+		log::l("importing pubkey block");
 		URPM::import_pubkey(block => $k->{block}, db => $db);
 		$packages->parse_pubkeys(db => $db);
 		foreach my $kv (values %{$packages->{keys} || {}}) {
@@ -516,7 +517,10 @@ sub install_urpmi {
 		}
 	    }
 	    #- the key has been found, take care of it for the given medium.
-	    $id and $medium->{key_ids}{$id} = undef;
+	    if ($id) {
+		log::l("found key id=$id for medium $medium->{descr}");
+		$medium->{key_ids}{$id} = undef;
+	    }
 	}
     }
 
