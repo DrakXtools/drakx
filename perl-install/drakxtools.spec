@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 31mdk
+Release: 32mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -308,6 +308,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Apr 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-32mdk
+- translation snapshot
+
 * Mon Apr  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-31mdk
 - harddrake gui: fix menu entry description
 - drakbtoot: fix #2826 (aka crash when one enter space in lilo label)
