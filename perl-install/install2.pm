@@ -182,6 +182,9 @@ sub formatPartitions {
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp root/drakx);
 
+    devices::make("$o->{prefix}/dev/null");
+    chmod 0666, "$o->{prefix}/dev/null";
+
     common::screenshot_dir__and_move();
 
     any::rotate_logs($o->{prefix});
