@@ -211,7 +211,8 @@ sub timeConfig {
     my ($o, $f) = @_;
 
     $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT});
-    $o->{timezone}{timezone} = $o->ask_from_list('', _("In which timezone are you"), [ install_any::getTimeZones() ], $o->{timezone}{timezone});
+    $o->{timezone}{timezone} ||= 
+    $o->{timezone}{timezone} = $o->ask_from_list('', _("In which timezone are you"), [ timezone::getTimeZones($o->{prefix}) ], $o->{timezone}{timezone});
     install_steps::timeConfig($o,$f);
 }
 

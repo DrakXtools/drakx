@@ -126,14 +126,6 @@ sub addToBeDone(&$) {
     push @{$::o->{steps}{$step}{toBeDone}}, $f;
 }
 
-sub getTimeZones {
-    local *F;
-    open F, "cd $::o->{prefix}/usr/share/zoneinfo && find [A-Z]* -type f |";
-    my @l = sort map { chop; $_ } <F>;
-    close F or die "cannot list the available zoneinfos";
-    @l;
-}
-
 sub upgrFindInstall {
 #    int rc;
 #

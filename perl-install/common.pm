@@ -55,6 +55,7 @@ sub round_up { my ($i, $r) = @_; $i += $r - ($i + $r - 1) % $r - 1; }
 sub round_down { my ($i, $r) = @_; $i -= $i % $r; }
 sub is_empty_array_ref { my $a = shift; !defined $a || @$a == 0 }
 sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }
+sub intersection { my (%l, @m); @l{@{shift @_}} = (); foreach (@_) { @m = grep { exists $l{$_} } @$_; %l = (); @l{@m} = (); } keys %l }
 
 sub set_new(@) { my %l; @l{@_} = undef; { list => [ @_ ], hash => \%l } }
 sub set_add($@) { my $o = shift; foreach (@_) { exists $o->{hash}{$_} and next; push @{$o->{list}}, $_; $o->{hash}{$_} = undef } }
@@ -242,9 +243,9 @@ sub getVarsFromSh($) {
 	  /^\s*			# leading space
 	   (\w+) =		# variable
 	   (
-   	       "([^"]*)"	# double-quoted text "
-   	     | '([^']*)'	# single-quoted text '
-   	     | [^'"\s]+		# normal text '
+   	       "([^"]*)"	# double-quoted text
+   	     | '([^']*)'	# single-quoted text
+   	     | [^'"\s]+		# normal text
            )
            \s*$			# end of line
           /x or next;
@@ -262,4 +263,16 @@ sub setVarsInSh {
     $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
 }
 
-
+sub bestMatchSentence {
+    my $best = -1;
+    my $bestSentence;
+    my @s = split /\W+/, shift;
+    foreach (@_) {
+	my $count = 0;
+	foreach my $e (@s) { 
+	    $count++ if /$e/i;
+	}
+	$best = $count, $bestSentence = $_ if $count > $best;
+    }
+    $bestSentence;
+}
