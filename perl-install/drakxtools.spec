@@ -40,7 +40,7 @@ Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
 Requires: %{name} = %{version}-%{release}
 Obsoletes: kudzu, libdetect0, libdetect0-devel
-Providese: kudzu, libdetect0, libdetect0-devel
+Provides: kudzu, libdetect0, libdetect0-devel
 
 %description
 Contains XFdrake, diskdrake, keyboarddrake, lspcidrake, mousedrake,
