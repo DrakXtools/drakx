@@ -152,18 +152,18 @@ ifdown eth0
   step_1:
     $::Wizard_no_previous = 1;
     my @profiles = get_profiles();
-    $in->ask_from(N("Network Configuration Wizard"),
-		  N("Welcome to The Network Configuration Wizard.
+    eval { $in->ask_from(N("Network Configuration Wizard"),
+			 N("Welcome to The Network Configuration Wizard.
 
 We are about to configure your internet/network connection.
 If you don't want to use the auto detection, deselect the checkbox.
 "),
-		  [
-		   if_(@profiles > 1, { label => N("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
-		   { label => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
-		   if_($::isStandalone, { label => N("Expert Mode"), val => \$::expert, type => 'bool' }),
-		  ]
-		 ) or goto step_5;
+			 [
+			  if_(@profiles > 1, { label => N("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
+			  { label => N("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
+			  if_($::isStandalone, { label => N("Expert Mode"), val => \$::expert, type => 'bool' }),
+			 ]
+			) or goto step_5; }; $in->exit(0) if $@ =~ /wizcancel/;
     undef $::Wizard_no_previous;
     set_profile($netcnx);
     if ($netc->{autodetection}) {
@@ -173,7 +173,6 @@ If you don't want to use the auto detection, deselect the checkbox.
 
   step_2:
 
-#    my $set_default;
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
     $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
 
@@ -187,33 +186,33 @@ If you don't want to use the auto detection, deselect the checkbox.
 	  [N("LAN connection") . if_($netc->{autodetect}{lan}, " - " . N("ethernet card(s) detected")), \$conf{lan}]
 	 );
     $::isInstall and $in->set_help('configureNetwork');
-    $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
-			  [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
-			  changed => sub {
-			      return if !$netc->{autodetection};
-			      my $c = 0;
-			      #-      $conf{adsl} and $c++;
-			      $conf{cable} and $c++;
-			      my $a = keys(%{$netc->{autodetect}{lan}});
-			      0 < $a && $a <= $c and $conf{lan} = undef;
-			  }
-			 ) or goto step_1;
-    load_conf($netcnx, $netc, $intf);
-    $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($in, $netcnx, $mouse, $netc, $intf) or goto step_2 };
-    $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($in, $netc) or goto step_2 }; 
-    $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc, $isdn) or goto step_2 };
-    $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
-    $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
-    $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
-
+    eval { $in->ask_from(N("Network Configuration Wizard"), N("Choose the connection you want to configure"),
+			 [ map { { label => $_->[0], val => $_->[1], type => 'bool' } } @l ],
+			 changed => sub {
+			     return if !$netc->{autodetection};
+			     my $c = 0;
+			     #-      $conf{adsl} and $c++;
+			     $conf{cable} and $c++;
+			     my $a = keys(%{$netc->{autodetect}{lan}});
+			     0 < $a && $a <= $c and $conf{lan} = undef;
+			 }
+			) or goto step_1;
+	   load_conf($netcnx, $netc, $intf);
+	   $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($in, $netcnx, $mouse, $netc, $intf) or goto step_2 };
+	   $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($in, $netc) or goto step_2 }; 
+	   $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc, $isdn) or goto step_2 };
+	   $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
+	   $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
+	   $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
+       }; $in->exit(0) if $@ =~ /wizcancel/;
   step_2_1:
     my $nb = keys %{$netc->{internet_cnx}};
     if ($nb < 1) {
     } elsif ($nb > 1) {
-	$in->ask_from(N("Network Configuration Wizard"),
-		      N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
-		      [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ] } ]
-		     ) or goto step_2;
+	eval { $in->ask_from(N("Network Configuration Wizard"),
+			     N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n") . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center"),
+			     [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ] } ]
+			    ) or goto step_2; }; $in->exit(0) if $@ =~ /wizcancel/;
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
@@ -231,15 +230,16 @@ If you don't want to use the auto detection, deselect the checkbox.
     my $success = 1;
     network::configureNetwork2($in, $prefix, $netc, $intf);
     my $network_configured = 1;
-
-    if ($netconnect::need_restart_network && $::isStandalone and ($::expert or $in->ask_yesorno(N("Network configuration"),
-							  N("The network needs to be restarted"), 1))) {
-#-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
+    
+    eval { if ($netconnect::need_restart_network && $::isStandalone and ($::expert or $in->ask_yesorno(N("Network configuration"),
+												       N("The network needs to be restarted"), 1) or goto step_2)) {
 	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
 	    $success = 0;
-	    $in->ask_okcancel(N("Network Configuration"), N("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
+	    $in->ask_okcancel(N("Network Configuration"), 
+			      N("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
 	}
     }
+       }; $in->exit(0) if $@ =~ /wizcancel/;
 
     write_initscript();
     $::isStandalone && member($netc->{internet_cnx_choice}, ('modem', 'adsl', 'isdn')) and
@@ -257,7 +257,7 @@ Test your connection via net_monitor or mcc. If your connection doesn't work, yo
     if ($::isWizard) {
 	$::Wizard_no_previous = 1;
 	$::Wizard_finished = 1;
-	$in->ask_okcancel(N("Network Configuration"), $m, 1);
+	eval { $in->ask_okcancel(N("Network Configuration"), $m, 1); }; $in->exit(0) if $@ =~ /wizcancel/;
 	undef $::Wizard_no_previous;
 	undef $::Wizard_finished;
     } else { $::isStandalone and $in->ask_warn('', $m) }
@@ -474,7 +474,6 @@ sub get_profiles {
     map { if_(/drakconnect_conf\.(.*)/, $1) } all("$::prefix/etc/sysconfig/network-scripts");
 }
 
-
 sub load_conf {
     my ($netcnx, $netc, $intf) = @_;
     my $adsl_pptp = {};
@@ -485,59 +484,20 @@ sub load_conf {
 
     if (-e "$prefix/etc/sysconfig/network-scripts/drakconnect_conf") {
 	foreach (cat_("$prefix/etc/sysconfig/network-scripts/drakconnect_conf")) {
-#	    /^DNSPrimaryIP=(.*)$/ and $netc->{dnsServer} = $1;
-#	    /^DNSSecondaryIP=(.*)$/ and $netc->{dnsServer2} = $1;
-#	    /^DNSThirdIP=(.*)$/ and $netc->{dnsServer3} = $1;
-#	    /^InternetAccessType=(.*)$/ and $netcnx->{type} = $1;
-#	    /^InternetInterface=(.*)$/ and $netcnx->{NET_INTERFACE} = $1;
-#	    /^InternetGateway=(.*)$/ and $netc->{GATEWAY} = $1;
-#	    /^SystemName=(.*)$/ and $system_name = $1;
-#	    /^DomainName=(.*)$/ and $domain_name = $1;
-# 	    /^Eth([0-9])Known=true$/ and $intf->{"eth$1"}{DEVICE} = "eth$1";
-# 	    /^Eth([0-9])IP=(.*)$/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{IPADDR} = $2;
-# 	    /^Eth([0-9])Mask=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{NETMASK} = $2;
-# 	    /^Eth([0-9])BootProto=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{BOOTPROTO} = $2;
-# 	    /^Eth([0-9])OnBoot=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{ONBOOT} = $2;
-# 	    /^Eth([0-9])Hostname=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $netc->{HOSTNAME} = $2;
-# 	    /^Eth([0-9])Driver=(.*)\n/ && $intf->{"eth$1"}{DEVICE} and $intf->{"eth$1"}{driver} = $2;
-# 	    /^ISDNDriver=(.*)$/ and $isdn->{driver} = $1;
-# 	    /^ISDNDeviceType=(.*)$/ and $isdn->{type} = $1;
-# 	    /^ISDNIrq=(.*)/ and $isdn->{irq} = $1;
-# 	    /^ISDNMem=(.*)$/ and $isdn->{mem} = $1;
-# 	    /^ISDNIo=(.*)$/ and $isdn->{io} = $1;
-# 	    /^ISDNIo0=(.*)$/ and $isdn->{io0} = $1;
-# 	    /^ISDNIo1=(.*)$/ and $isdn->{io1} = $1;
-# 	    /^ISDNProtocol=(.*)$/ and $isdn->{protocol} = $1;
-# 	    /^ISDNCardDescription=(.*)$/ and $isdn->{description} = $1;
-# 	    /^ISDNCardVendor=(.*)$/ and $isdn->{vendor} = $1;
-# 	    /^ISDNId=(.*)$/ and $isdn->{id} = $1;
-# 	    /^ISDNProviderPhone=(.*)$/ and $isdn->{phone_out} = $1;
-# 	    /^ISDNDialing=(.*)$/ and $isdn->{dialing_mode} = $1;
-# 	    /^ISDNISDNSpeed=(.*)$/ and $isdn->{speed} = $1;
-# 	    /^ISDNTimeout=(.*)$/ and $isdn->{huptimeout} = $1;
-# 	    /^ISDNHomePhone=(.*)$/ and $isdn->{phone_in} = $1;
-# 	    /^ISDNLogin=(.*)$/ and $isdn->{login} = $1;
-# 	    /^ISDNPassword=(.*)$/ and $isdn->{passwd} = $1;
-# 	    /^ISDNConfirmPassword=(.*)$/ and $isdn->{passwd2} = $1;
 
-	    #/^PPPDevice=(.*)$/ and $modem->{device} = $1;
 	    /^PPPConnectionName=(.*)$/ and $modem->{connection} = $1; # Keep this for futur multiple cnx support
-	    #/^PPPProviderPhone=(.*)$/ and $modem->{phone} = $1;
 	    /^PPPProviderDomain=(.*)$/ and $modem->{domain} = $1; # used only for kppp
-	    #/^PPPProviderDNS1=(.*)$/ and $modem->{dns1} = $1; # be aware that this value is now extracted from kppprc file ONLY
-	    #/^PPPProviderDNS2=(.*)$/ and $modem->{dns2} = $1;
 	    /^PPPLogin=(.*)$/ and $modem->{login} = $1;
-	    #/^PPPPassword=(.*)$/ and $modem->{passwd} = $1;
 	    /^PPPAuthentication=(.*)$/ and $modem->{auth} = $1; # We keep this because system is configured the same for both PAP and CHAP.
+	    
 	    if (/^PPPSpecialCommand=(.*)$/) {
 		$netcnx->{type} eq 'isdn_external' and $netcnx->{$netcnx->{type}}{special_command} = $1;
 	    }
-#	    /^ADSLLogin=(.*)$/ and $adsl_pppoe->{login} = $1;
-#	    /^ADSLPassword=(.*)$/ and $adsl_pppoe->{passwd} = $1;
+
 	    /^DOMAINNAME2=(.*)$/ and $netc->{DOMAINNAME2} = $1;
 	}
     }
-#    $system_name && $domain_name and $netc->{HOSTNAME} = join ('.', $system_name, $domain_name);
+
     $adsl_pptp->{$_} = $adsl_pppoe->{$_} foreach 'login', 'passwd', 'passwd2';
     $isdn_external->{$_} = $modem->{$_} foreach 'device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth';
     $netcnx->{adsl_pptp} = $adsl_pptp;
@@ -545,15 +505,7 @@ sub load_conf {
     $netcnx->{modem} = $modem;
     $netcnx->{modem} = $isdn_external;
     $netcnx->{isdn_internal} = $isdn;
-#     -e "$prefix/etc/sysconfig/network" and put_in_hash($netc, network::read_conf("$prefix/etc/sysconfig/network"));
-#     foreach (glob_("$prefix/etc/sysconfig/ifcfg-*")) {
-# 	my $l = network::read_interface_conf($_);
-# 	$intf->{$l->{DEVICE}} = $l;
-#     }
-#     my $file = "$prefix/etc/resolv.conf";
-#     if (-e $file) {
-# 	put_in_hash($netc, network::read_resolv_conf($file));
-#     }
+
     network::read_all_conf($prefix, $netc, $intf);
 }
 
