@@ -312,8 +312,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Fri May 30 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.2-0.6mdk
-- mousedrake: add mouse test in non-embedded mode (#2049)
+* Tue Jun 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.6mdk
+- autoinstall: (pixel)
+  o fix regarding LVMs
+  o support encrypted partitions
+- draconnect: misc fixes (poulpy)
+- drakboot: reread grub config file if grub is the current boot loader
+  (#3965)
+- diskdrake: fix for nfs mount points (pixel)
+- drakgw: reread current network conf (florin)
+- i18n fixes
+- mousedrake: add mouse test in non-embedded mode (#2049) (gc)
 
 * Tue May 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.5mdk
 - keyboardrake: resync with XFree86-4.3 (pablo)
