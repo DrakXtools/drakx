@@ -3,8 +3,8 @@ use Config;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 
-my $libs = '-lldetect';
-$libs .= ' -L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc -lext2fs' if $ENV{C_DRAKX};
+my $libs = '-lldetect -lext2fs';
+$libs .= ' -L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc' if $ENV{C_DRAKX};
 $libs .= ' -lrpm -lrpmdb -lrpmio -lz' if $ENV{C_RPM};
 
 my $pcmcia_dir = $ENV{C_DRAKX} && $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia' : '';
