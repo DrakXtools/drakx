@@ -408,6 +408,7 @@ sub change_type($$$) {
     $type != $part->{type} or return;
     $hd->{isDirty} = 1;
     $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
+    $part->{mntpoint} = '' if isLVM({ type => $type }) || isRAID({ type => $type });
     $part->{type} = $type;
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;    
