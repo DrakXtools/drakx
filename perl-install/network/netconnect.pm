@@ -774,7 +774,8 @@ You may also enter the IP address of the gateway if you have one."),
                             return 1;
                         }
                     },
-                    post => $handle_multiple_cnx,
+                    #post => $handle_multiple_cnx,
+                    next => "zeroconf",
                    },
                    
                    dhcp_hostname => 
