@@ -15,6 +15,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '212.35.2.1',
                    dnsServer3 => '212.35.2.2',
                    DOMAINNAME2 => 'tiscali.be',
@@ -24,12 +25,14 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                   },
 
                   N("France") . "|Free non dégroupé 512/128" =>
                   { 
                    vpi => 8, 
                    vci => 23,
+                   Encapsulation => 4,
                    dnsServer2 => '213.228.0.68',
                    dnsServer3 => '212.27.32.176',
                    method => 'pppoa',
@@ -40,6 +43,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 24,
+                   Encapsulation => 6,
                    dnsServer2 => '213.228.0.68',
                    dnsServer3 => '212.27.32.176',
                    DOMAINNAME2 => 'free.fr',
@@ -49,6 +53,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '62.62.156.12',
                    dnsServer3 => '62.62.156.13',
                    method => 'pppoa',
@@ -58,6 +63,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '194.117.200.10',
                    dnsServer3 => '194.117.200.15',
                    method => 'pppoa',
@@ -68,6 +74,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '193.252.19.3',
                    dnsServer3 => '193.252.19.4',
                    method => 'pppoa',
@@ -78,6 +85,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '212.151.136.242',
                    dnsServer3 => '130.244.127.162',
                    method => 'pppoa',
@@ -87,6 +95,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23, 
+                   Encapsulation => 5,
                    dnsServer2 => '213.36.80.1',
                    dnsServer3 => '213.36.80.2',
                    method => 'pppoa',
@@ -105,12 +114,14 @@ our %adsl_data = (
                   {
                    vpi => 0,
                    vci => 64,
+                   Encapsulation => 1,
                   },
 
                   N("Germany") . "|Deutsche Telekom (DT)" =>
                   {
                    vpi => 1,
                    vci => 20,
+                   Encapsulation => 1,
                    method => 'pppoe',
                   },
 
@@ -118,6 +129,7 @@ our %adsl_data = (
                   {
                    vpi => 1,
                    vci => 20,
+                   Encapsulation => 1,
                    dnsServer2 => '195.20.224.234',
                    dnsServer3 => '194.25.2.129',
                    method => 'pppoe',
@@ -133,6 +145,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '195.20.224.234',
                    dnsServer3 => '194.25.2.129',
                    method => 'pppoa',
@@ -142,6 +155,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '195.20.224.234',
                    dnsServer3 => '194.25.2.129',
                    method => 'pppoa',
@@ -151,12 +165,14 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 30,
+                   Encapsulation => 6,
                   },
 
                   N("Poland") . "|Telekomunikacja Polska (TPSA/neostrada)" =>
                   {
                    vpi => 0,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '194.204.152.34',
                    dnsServer3 => '217.98.63.164',
                    method => 'pppoa',
@@ -168,10 +184,18 @@ our %adsl_data = (
                    vci => 23,
                   },
                   
+                  N("Spain") . "|Retevision " =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 6,
+                  },
+
                   N("Spain") . "|Telefónica IP dinámica" =>
                   {
                    vpi => 8,
                    vci => 20,
+                   Encapsulation => 1,
                    dnsServer2 => '80.58.32.33',
                    dnsServer3 => '80.58.0.97',
                    method => 'pppoe',
@@ -180,6 +204,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 20,
+                   Encapsulation => 3,
                    protocol => 'static',
                    dnsServer2 => '80.58.32.33',
                    dnsServer3 => '80.58.0.97',
@@ -190,6 +215,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '80.58.0.33',
                    dnsServer3 => '80.58.32.97',
                    method => 'pppoa',
@@ -199,18 +225,21 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 1,
                   },
 
                   N("United Kingdom") . "|Tiscali UK " =>
                   {
                    vpi => 0,
                    vci => 26,
+                   Encapsulation => 6,
                   },
 
                   N("United Kingdom") . "|British Telecom " =>
                   {
                    vpi => 0,
                    vci => 26
+                   Encapsulation => 6,
                   },
                  );
 
