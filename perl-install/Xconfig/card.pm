@@ -418,8 +418,10 @@ sub xfree3_version() { '3.3.6' }
 sub xfree_and_glx_choices {
     my ($card) = @_;
 
-    my $xf3 = if_($card->{server}, { text => N("XFree %s", xfree3_version()), code => sub { $card->{prefer_xf3} = 1 } });
-    my $xf4 = if_($card->{Driver}, { text => N("XFree %s", xfree4_version()), code => sub { $card->{prefer_xf3} = 0 } });
+    my $xf3 = if_($card->{server} && !$force_xf4, 
+		  { text => N("XFree %s", xfree3_version()), code => sub { $card->{prefer_xf3} = 1 } });
+    my $xf4 = if_($card->{Driver}, 
+		  { text => N("XFree %s", xfree4_version()), code => sub { $card->{prefer_xf3} = 0 } });
 
     #- no XFree3 with multi-head
     my @choices = grep { $_ } ($card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3));
@@ -429,7 +431,7 @@ sub xfree_and_glx_choices {
 
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
-    if ($card->{UTAH_GLX}) {
+    if ($card->{UTAH_GLX} && !$force_xf4) {
 	my $e = { text => N("XFree %s with 3D hardware acceleration", xfree3_version()),
 			    code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
 			    more_messages => ($card->{Driver} && !$card->{DRI_GLX} ?
@@ -442,7 +444,7 @@ N("Your card can have 3D hardware acceleration support with XFree %s.", xfree3_v
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
     #- this is with Utah GLX and so, it can provide a way of testing.
-    if ($card->{UTAH_GLX_EXPERIMENTAL} && $::expert) {
+    if ($card->{UTAH_GLX_EXPERIMENTAL} && $::expert && !$force_xf4) {
 	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", xfree3_version()),
 			 code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
 			 more_messages => (using_xf4($card) && !$card->{DRI_GLX} ?
