@@ -89,13 +89,11 @@ sub ask_connect_now {
 	  if_($::isInstall, N("For security reasons, it will be disconnected now.")) :
 	    N("The system doesn't seem to be connected to the Internet.
 Try to reconfigure your connection.");
-	if ($::isWizard) {
-	    $::Wizard_no_previous = 1;
-	    $::Wizard_finished = 1;
-	    $in->ask_okcancel(N("Network Configuration"), $m, 1);
-	    undef $::Wizard_no_previous;
-	    undef $::Wizard_finished;
-	} else {  $in->ask_warn('', $m) }
+	$::Wizard_no_previous = 1;
+	$::Wizard_finished = 1;
+	$in->ask_okcancel(N("Network Configuration"), $m, 1);
+	undef $::Wizard_no_previous;
+	undef $::Wizard_finished;
 	$::isInstall and disconnect_backend();
     }
     undef $::Wizard_no_previous;
@@ -180,7 +178,7 @@ sub connected_bg {
 	fcntl($kid_pipe, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
 	my $a;
   	if (defined($a = <$kid_pipe>)) {
-	    close($kid_pipe) || warn "kid exited $?";
+	    close($kid_pipe) or warn "kid exited $?";
 	    undef $kid_pipe;
 	    $$ref = $a;
   	}
@@ -203,15 +201,15 @@ my $current_connection_status;
 sub test_connected {
     local $| = 1;
     my ($cmd) = @_;
-
+    
     if (!defined $current_connection_status) { $current_connection_status = -1 }
-
+    
     if ($cmd == 0) {
         if (defined $kid_pipe_connect) {
 	    fcntl($kid_pipe_connect, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
 	    my $a;
 	    if (defined($a = <$kid_pipe_connect>)) {
-		close($kid_pipe_connect) || warn "kid exited $?";
+		close($kid_pipe_connect) or warn "kid exited $?";
 		undef $kid_pipe_connect;
 		undef $kid_pid;
 		$current_connection_status = $a;
@@ -219,7 +217,7 @@ sub test_connected {
         }
 	return $current_connection_status;
     }
-
+    
     if ($cmd == 1) {
         if ($current_connection_status != -2) {
              $current_connection_status = -2;
