@@ -588,7 +588,6 @@ sub ask_fromW {
 	my (@widgets) = @_;
 	gtkpack_(Gtk2::VBox->new,
               map {
-                  print "widget is «$_->{real_w}»\n";
                   ($_->{real_w}->isa("Gtk2::ScrolledWindow") ? 1 : 0), 
                    $_->{real_w}->isa("Gtk2::CheckButton") && !$_->{icon_w} && !$_->{e}{label} ?
                      $_->{real_w} : gtkpack_(Gtk2::HBox->new,
