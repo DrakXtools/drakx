@@ -42,24 +42,24 @@ sub icon_paths {
 # gtk widgets wrappers
 #-#######################
 
-sub gtkdestroy($)             { $_[0] and $_[0]->destroy }
+sub gtkdestroy                { $_[0] and $_[0]->destroy }
 sub gtkflush                  { Gtk->main_iteration while Gtk->events_pending }
-sub gtkhide($)                { $_[0]->hide; $_[0] }
+sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
-sub gtkpack($@)               { gtkpowerpack(1, 1, @_) }
-sub gtkpack_($@)              { gtkpowerpack('arg', 1, @_) }
-sub gtkpack__($@)             { gtkpowerpack(0, 1, @_) }
-sub gtkpack2($@)              { gtkpowerpack(1, 0, @_) }
-sub gtkpack2_($@)             { gtkpowerpack('arg', 0, @_) }
-sub gtkpack2__($@)            { gtkpowerpack(0, 0, @_) }
+sub gtkpack                   { gtkpowerpack(1, 1, @_) }
+sub gtkpack_                  { gtkpowerpack('arg', 1, @_) }
+sub gtkpack__                 { gtkpowerpack(0, 1, @_) }
+sub gtkpack2                  { gtkpowerpack(1, 0, @_) }
+sub gtkpack2_                 { gtkpowerpack('arg', 0, @_) }
+sub gtkpack2__                { gtkpowerpack(0, 0, @_) }
 sub gtkpack3                  { gtkpowerpack($a?1:0, 0, @_) }
 sub gtkput                    { $_[0]->put(gtkshow($_[1]), $_[2], $_[3]); $_[0] }
 sub gtkpixmap                 { new Gtk::Pixmap(gdkpixmap(@_)) }
 sub gtkresize                 { $_[0]->window->resize($_[1], $_[2]); $_[0] }
-sub gtkset_active($$)         { $_[0]->set_active($_[1]); $_[0] }
+sub gtkset_active             { $_[0]->set_active($_[1]); $_[0] }
 sub gtkset_border_width       { $_[0]->set_border_width($_[1]); $_[0] }
 sub gtkset_editable           { $_[0]->set_editable($_[1]); $_[0] }
-sub gtkset_justify($$)        { $_[0]->set_justify($_[1]); $_[0] }
+sub gtkset_justify            { $_[0]->set_justify($_[1]); $_[0] }
 sub gtkset_layout             { $_[0]->set_layout($_[1]); $_[0] }
 sub gtkset_modal              { $_[0]->set_modal($_[1]); $_[0] }
 sub gtkset_mousecursor_normal { gtkset_mousecursor(68, @_) }
@@ -69,9 +69,9 @@ sub gtkset_sensitive          { $_[0]->set_sensitive($_[1]); $_[0] }
 sub gtkset_tip                { $_[0]->set_tip($_[1], $_[2]) if $_[2]; $_[1] }
 sub gtkset_shadow_type        { $_[0]->set_shadow_type($_[1]); $_[0] }
 sub gtkset_style              { $_[0]->set_style($_[1]); $_[0] }
-sub gtkset_usize($$$)         { $_[0]->set_usize($_[1],$_[2]); $_[0] }
-sub gtkshow($)                { $_[0]->show; $_[0] }
-sub gtksize($$$)              { $_[0]->size($_[1],$_[2]); $_[0] }
+sub gtkset_usize              { $_[0]->set_usize($_[1],$_[2]); $_[0] }
+sub gtkshow                   { $_[0]->show; $_[0] }
+sub gtksize                   { $_[0]->size($_[1],$_[2]); $_[0] }
 
 sub gdkpixmap {
     my ($f, $w) = @_;
@@ -79,7 +79,7 @@ sub gdkpixmap {
     $f =~ m|.xpm$| and return gtkcreate_xpm($w, $f);
 }
 
-sub gtkadd($@) {
+sub gtkadd {
     my $w = shift;
     foreach (@_) {
 	ref $_ or $_ = new Gtk::Label($_);
@@ -89,7 +89,7 @@ sub gtkadd($@) {
     $w
 }
 
-sub gtkappend($@) {
+sub gtkappend {
     my $w = shift;
     foreach (@_) {
 	my $l = $_;
@@ -168,7 +168,7 @@ sub gtkset_text {
     $w;
 }
 
-sub gtkcombo_setpopdown_strings ($@) {
+sub gtkcombo_setpopdown_strings {
     my $w = shift;
     $w->set_popdown_strings(@_);
     $w;
@@ -191,7 +191,7 @@ sub gtkset_mousecursor {
     ($w || gtkroot())->set_cursor(Gtk::Gdk::Cursor->new($type));
 }
 
-sub gtksignal_connect($@) {
+sub gtksignal_connect {
     my $w = shift;
     $w->signal_connect(@_);
     $w;
@@ -201,12 +201,12 @@ sub gtksignal_connect($@) {
 # create widgets wrappers
 #-#######################
 
-sub create_adjustment($$$) {
+sub create_adjustment {
     my ($val, $min, $max) = @_;
     new Gtk::Adjustment($val, $min, $max + 1, 1, ($max - $min + 1) / 10, 1);
 }
 
-sub create_box_with_title($@) {
+sub create_box_with_title {
     my $o = shift;
 
     my $nbline = sum(map { round(length($_) / 60 + 1/2) } map { split "\n" } @_);
@@ -265,20 +265,20 @@ sub create_box_with_title($@) {
 
 sub create_hbox { gtkset_layout(gtkset_border_width(new Gtk::HButtonBox, 3), $_[0] || 'spread') }
 
-sub create_menu($@) {
+sub create_menu {
     my $title = shift;
     my $w = new Gtk::MenuItem($title);
     $w->set_submenu(gtkshow(gtkappend(new Gtk::Menu, @_)));
     $w
 }
 
-sub create_notebook(@) {
+sub create_notebook {
     my $n = new Gtk::Notebook;
     add2notebook($n, splice(@_, 0, 2)) while @_;
     $n
 }
 
-sub create_packtable($@) {
+sub create_packtable {
     my ($options, @l) = @_;
     my $w = new Gtk::Table(0, 0, $options->{homogeneous} || 0);
     map_index {
@@ -312,7 +312,7 @@ sub createScrolledWindow {
     $w
 }
 
-sub create_treeitem($) {
+sub create_treeitem {
     my ($name) = @_;
     
     my ($next_child, $left, $right, $up, $down);
