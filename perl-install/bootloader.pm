@@ -755,7 +755,7 @@ sub write_lilo_conf {
 		print F "\tread-only" if !$_->{'read-write'};
 	    } else {
 		print F "\ttable=$_->{table}" if $_->{table};
-		print F "\tunsafe" if $_->{unsafe} && !$_->{table};
+		print F $_->{table} ? "\tignore-table" : "\tunsafe" if $_->{unsafe};
 		
 		if (my ($dev) = $_->{table} =~ m|/dev/(.*)|) {
 		    if ($dev2bios{$dev}) {
