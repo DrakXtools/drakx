@@ -59,7 +59,7 @@ $window1->set_position(1);
 $window1->set_title(_("Network configuration (%d adapters)", @all_cards));
 $window1->border_width(10);
 $::isEmbedded or $window1->set_usize(500, 400);
-my $vbox1 = new Gtk::VBox(0,0);
+my $vbox1 = new Gtk::VBox(0,10);
 $window1->add($vbox1);
 my $hbox1 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox1,1,1,0);
@@ -142,7 +142,7 @@ chop (my $hostname = `hostname`);
 my $label_host = new Gtk::Label($hostname);
 $hbox2->pack_start($label_host,0,0,0);
 
-$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
+#$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
 my $frame1 = new Gtk::Frame (_("Internet access"));
 $vbox1->pack_start($frame1,1,1,0);
@@ -218,7 +218,7 @@ $button1->signal_connect( clicked => [ \&configure_net, '', $netcnx, $netc, $int
 $hbox_frame1_button->pack_start($button1, 0, 0, 0);
 $vbox_frame1->pack_start($hbox_frame1_button,0,0,0);
 
-$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
+#$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
 my $frame2 = new Gtk::Frame (_("LAN configuration"));
 $vbox1->pack_start($frame2,1,1,0);
@@ -249,14 +249,14 @@ $button3->signal_connect( clicked => [ \&configure_lan, '', $netcnx, $netc, $int
 $hbox3->pack_start($button3, 0, 0, 0);
 $vbox2->pack_start($hbox3, 0, 0, 0);
 
-$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
+#$vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
 my $bbox0 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox0,0,0,0);
 $bbox0->set_layout(-end);
 
 
-my $button_wizard = new Gtk::Button _("Configure...");
+my $button_wizard = new Gtk::Button _("Configure");
 $button_wizard->signal_connect ( clicked => sub {
 				     $::isWizard = 1;
 				     system("draknet --wizard");
