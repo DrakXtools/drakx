@@ -485,18 +485,18 @@ sub monitorConfiguration(;$$) {
     my $monitor = shift || {};
     my $useFB = shift || 0;
 
-    if ($monitor->{hsyncrange} && $monitor->{vsyncrange}) {
-	add2hash($monitor, { type => "monitor1", vendor => "Unknown", model => "Unknown" });
-	return $monitor;
-    }
-
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
     if ($monitor->{EISA_ID}) {
+	log::l("EISA_ID: $monitor->{EISA_ID}");
 	if (my ($mon) = grep { lc($_->{eisa}) eq $monitor->{EISA_ID} } values %monitors) {
 	    add2hash($monitor, $mon);
-	    return $monitor;
+	    log::l("EISA_ID corresponds to: $monitor->{type}");
 	}
+    }
+    if ($monitor->{hsyncrange} && $monitor->{vsyncrange}) {
+	add2hash($monitor, { type => "monitor1", vendor => "Unknown", model => "Unknown" });
+	return $monitor;
     }
 
     my $good_default = (arch() =~ /ppc/ ? 'Apple|' : 'Generic|') . translate($good_default_monitor);
