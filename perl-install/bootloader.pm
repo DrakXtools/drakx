@@ -484,6 +484,8 @@ sub duplicate_kernel_entry {
     add_entry($bootloader, $entry);
 }
 
+my $uniq_dict_appends = join('|', qw(devfs acpi pci resume PROFILE XFree));
+
 sub unpack_append {
     my ($s) = @_;
     my @l = split(' ', $s);
@@ -494,7 +496,10 @@ sub pack_append {
 
     #- normalize
     $simple = [ reverse(uniq(reverse @$simple)) ];
-    $dict = [ reverse(uniq_ { my ($k, $v) = @$_; $k eq 'mem' ? "$k=$v" : $k } reverse @$dict) ];
+    $dict = [ reverse(uniq_ { 
+	my ($k, $v) = @$_; 
+	$k =~ /^($uniq_dict_appends)$/ ? $k : "$k=$v";
+    } reverse @$dict) ];
 
     join(' ', @$simple, map { "$_->[0]=$_->[1]" } @$dict);
 }
