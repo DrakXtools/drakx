@@ -357,7 +357,7 @@ sub set {
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
 
-	load_mo($ENV{LANG});
+	load_mo();
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
