@@ -79,7 +79,7 @@ PUBLISHING
   5 enscript ghostscript-module-X
   4 ghostscript-utils gv psutils texinfo nlpr
   2 latex2html jadetex tetex-afm tetex-dvips tetex-latex tetex-xdvi tetex-latex-arab tetex-latex-heb docbook-dtd31-sgml
-  2 BOOKS tetex-doc
+  2 BOOKS tetex-doc tetex-latex-arab-doc
   1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB cttex
   1 BOOKS docbook-style-dsssl-doc
 
@@ -254,7 +254,7 @@ NETWORKING_WWW
   4 wget links mozilla Flashplayer crossover-plugin-demo j2re
   4 GNOME 
       screem 
-      !LOCALES"eu" galeon 
+      galeon 
   3 plugger opera bluefish
 NETWORKING_WWW_SERVER
   5 apache apache-mod_perl mod_ssl mod_php 
@@ -482,16 +482,17 @@ X
 
   2 app-defaults-be app-defaults-cs app-defaults-ga app-defaults-ru app-defaults-th app-defaults-uk
 
-  5 CHARSET"iso-8859-13" fonts-type1-baltic
-    LOCALES"ar" fonts-ttf-arabic
-    LOCALES"be" || LOCALES"bg" || LOCALES"ru" || LOCALES"uk" urw-fonts
-    LOCALES"ru" || LOCALES"uk" XFree86-cyrillic-fonts
+  5 LOCALES"mi" || LOCALES"lt" || LOCALES"lv" fonts-type1-baltic
+    LOCALES"ar" || LOCALES"fa" || LOCALES"ur" fonts-ttf-arabic
+    LOCALES"be" || LOCALES"bg" || LOCALES"mk" || LOCALES"sp" urw-fonts
+    LOCALES"mn" || LOCALES"tg" || LOCALES"tt" urw-fonts
+    LOCALES"ru" || LOCALES"uk" urw-fonts XFree86-cyrillic-fonts
     LOCALES"el" fonts-type1-greek
-    LOCALES"he" fonts-hebrew-elmar
+    LOCALES"he" || LOCALES"yi" fonts-hebrew-elmar
     LOCALES"hy" fonts-ttf-armenian
     LOCALES"ja" fonts-ttf-japanese
     LOCALES"ko" fonts-ttf-korean
-    LOCALES"ta" fonts-ttf-tscii fonts-bitmap-tscii
+    LOCALES"ta" fonts-ttf-tamil fonts-ttf-tscii fonts-bitmap-tscii 
     LOCALES"th" fonts-ttf-thai
     LOCALES"zh_CN" || LOCALES"zh" fonts-ttf-gb2312
     LOCALES"zh_TW" || LOCALES"zh" taipeifonts fonts-ttf-big5
