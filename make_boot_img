@@ -83,14 +83,12 @@ if ($arch =~ /x86_64/ && $img =~ /all/) {
 if ($arch =~ /i.86/ && $img =~ /all/) {
     isolinux($main, @kernels);
 
-    if (0) {
     my ($img, $img_sav) = ("images/cdrom.img-$main", 'images/cdrom.img-sav');
     rename($img, $img_sav);
     $type = 'cdrom';
     $::{"boot_img_$arch"}->($mnt, $img, "kernel/all.kernels/$main/boot/vmlinu*", sub { $_[0] =~ s/\bautomatic=\S+\b//; "$_[0] changedisk" });
     rename($img, 'images/cdrom-changedisk.img');
     rename($img_sav, $img);
-    }
 }
 
 if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
@@ -178,17 +176,16 @@ sub entries_append {
 sub boot_img_i386 {
     my ($mnt, $img, $kernel, $args_callback) = @_;
 
-    $img =~ /\*/ and return;
     __ "$sudo umount $mnt 2>/dev/null";
 
     if ($type eq "hd") {
-	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
+	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
     } elsif ($type eq "all") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
     } elsif ($type eq "blank") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-blank.img.bz2 > $img";
     } else {
-	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
+	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
     }
 
 
