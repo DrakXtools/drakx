@@ -43,6 +43,8 @@ sub kill_action {
     $o->kill;
 }
 
+sub charsetChanged {}
+
 #-######################################################################################
 #- Steps Functions
 #-######################################################################################
@@ -68,6 +70,8 @@ sub selectLanguage {
 	]);
 
     install_steps::selectLanguage($o);
+
+    $o->charsetChanged;
 
     $o->ask_warn('', 
 "If you see this message it is because you choose a language for which
