@@ -128,6 +128,28 @@ sub syslinux_msg {
       . "\n" . syslinux_color('red') . "[F1-Help] [F2-Advanced Help] [F3-Main]" . syslinux_color('default') . "\n";
 }
 
+sub syslinux_cfg {
+    my ($timeout, $entries) = @_;
+
+    my $header = <<EOF;
+default linux
+prompt 1
+timeout $timeout
+display boot.msg
+F1 help.msg
+F2 advanced.msg
+F3 boot.msg
+EOF
+
+    my @l = map {
+	"label $_->{label}\n" .
+	"  kernel $_->{kernel}\n" .
+	($_->{initrd} ? "  append initrd=$_->{initrd} $_->{append}\n" : '');
+    } @$entries;
+
+    $header . join('', @l);
+}
+
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
@@ -206,7 +228,7 @@ sub entries_append {
         if_($type eq "all", all => "pcmcia $default_vga $default_acpi"),
     );
 
-    map { [ $_->[0], "$default_append $_->[1]" ] }
+    map { { label => $_->[0], append => "$default_append $_->[1]" } }
       group_by2(@entries);
 }
 
@@ -231,20 +253,11 @@ sub boot_img_i386 {
     initrd($tmp_mnt_initrd, $initrd_type, $I, $rdz);
     my $short_type = substr($type, 0, 8);
 
-    my $timeout = 72;
-    output "$mnt/syslinux.cfg",
-"default linux
-prompt 1
-timeout $timeout
-display boot.msg
-F1 help.msg
-F2 advanced.msg
-F3 boot.msg
-" . join('', map {
-"label $_->[0]
-  kernel vmlinuz
-  append initrd=$short_type.rdz $_->[1]
-" } entries_append($type));
+    output("$mnt/syslinux.cfg", 
+	   syslinux_cfg(72, #- timeout
+			[ map {
+			    { kernel => 'vmlinuz', initrd => "$short_type.rdz", %$_ };
+			} entries_append($type) ]));
 
     eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
     if ($@) {
@@ -692,27 +705,18 @@ sub isolinux {
 
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
     _ "install -m 644 -D /boot/memtest* isolinux/test/memtest.bin";
-    output "isolinux/isolinux.cfg", "
-default linux
-prompt 1
-timeout 150
-display boot.msg
-F1 help.msg
-F2 advanced.msg
-F3 boot.msg
-" . join('', map {
-"label $_->[0]
-  kernel alt0/vmlinuz
-  append initrd=alt0/all.rdz $_->[1] automatic=method:cdrom
-" } entries_append('all'))
-  . join('', map_index {
-"label alt$::i
-  kernel alt$::i/vmlinuz
-  append initrd=alt$::i/all.rdz $default_append $default_acpi $default_vga
-" } @kernels) .
-"label memtest
-  kernel test/memtest.bin
-";
+    output("isolinux/isolinux.cfg", 
+	   syslinux_cfg(150, [
+	       (map {
+		   { label => $_->{label}, kernel => 'alt0/vmlinuz', initrd => 'alt0/all.rdz', 
+		     append => "$_->{append} automatic=method:cdrom" };
+	       } entries_append('all')),
+	       (map_index {
+		   { label => "alt$::i", kernel => "alt$::i/vmlinuz", initrd => "alt$::i/all.rdz", 
+		     append => "$default_append $default_acpi $default_vga" };
+	       } @kernels),
+	       { label => 'memtest', kernel => 'test/memtest.bin' },
+	   ]));
 
     output("isolinux/help.msg", syslinux_msg('help.msg.xml'));
     output("isolinux/advanced.msg", syslinux_msg('advanced.msg.xml', 
