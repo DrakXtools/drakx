@@ -45,7 +45,7 @@
 
 #else
 
-#define DISTRIB_NAME "Mandrake Linux"
+#define DISTRIB_NAME "Mandrakelinux"
 #define IMAGE_LOCATION SLASH_LOCATION "/tmp/image"
 #define IMAGE_LOCATION_REAL "/tmp/image"
 #define STAGE2_LOCATION_REL "/tmp/stage2"
