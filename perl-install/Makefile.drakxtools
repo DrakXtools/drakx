@@ -19,7 +19,7 @@ all: $(DIRS)
 $(DIRS):
 	install -d auto
 	rm standalone ; ln -s . standalone
-	rm -f po/DrakX.pot # force rebuild of po's
+	rm -f share/po/DrakX.pot # force rebuild of po's
 	$(MAKE) -C $@
 
 install:
@@ -41,4 +41,4 @@ install:
 
 	$(MAKE) -C share/po install DATADIR=$(DATADIR) NAME=$(NAME)
 
-	cp -rf auto icons $(LIBDEST)
+	cp -rfL auto icons $(LIBDEST)
