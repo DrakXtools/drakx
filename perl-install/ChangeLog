@@ -1,3 +1,49 @@
+2001/08/29  François Pons  <fpons@mandrakesoft.com>
+
+	* mouse.pm: improved write_conf to enable multi-mice if only once mice is
+	already defined.
+
+	* standalone/mousedrake: try to merge already existing mouse configuration
+	with what has been probed,
+	change if mouse is really changed as probe is incomplete.
+
+	* Xconfig.pm: improve getinfoFromXF86Config for mouse parameters.
+
+	* pkgs.pm: fixed if undef encountered in depslist when installing package
+	(traversing
+	depslist as $depOrder).
+
+2001/08/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw, standalone/drakautoinst: quit_global
+
+	* share/po/fr.po: minor fix
+
+2001/08/29  Pixel  <pixel@mandrakesoft.com>
+
+	* c.pm: better error message when function c::foo() is missing
+
+	* keyboard.pm (loadkeys_files): fixed
+
+	* install_steps_interactive.pm, standalone/localedrake, lang.pm, any.pm,
+	Makefile.config: add localedrake (not tested)
+
+	* rescue/make_rescue_img: make it work (do not have the dev in /)
+	cleanup, speedup, use mknod for devices
+
+	* install_steps_gtk.pm (installPackages): have Ok button by default for
+	asking for changing CD
+
+	* rescue/devices.pl, rescue/list: cleanup, speedup, use mknod for devices
+
+	* bootloader.pm (mkbootdisk): cleanup
+
+	* rescue/dirs: make it work (do not have the dev in /)
+
+	* devices.pm: remove fd0H1440 and fd1H1440
+
+	* modules.pm: remove "msdos"
+
 2001/08/29  dam's  <damien@mandrakesoft.com>
 
 	* network/adsl.pm, network/tools.pm, share/rpmsrate: speedtouch
