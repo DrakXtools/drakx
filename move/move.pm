@@ -159,6 +159,8 @@ sub init {
     #- non-trivial files/directories that need be readable, files that will be overwritten
     handle_etcfiles('READ', 'OVERWRITE');
 
+    run_program::run('chown', 'clamav.clamav', '/var/log/clamav/freshclam.log');
+
     #- create remaining /etc and /var subdirectories if not already copied or symlinked,
     #- because programs most often won't try to create the missing subdir before trying
     #- to write a file, leading to obscure unexpected failures
