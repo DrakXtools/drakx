@@ -1044,8 +1044,9 @@ sub write_lilo {
 	    push @entry_conf, $entry->{'read-write'} ? "read-write" : "read-only";
 	    push @entry_conf, grep { $entry->{$_} } qw(optional);
 	} else {
-	    push @entry_conf, "table=$entry->{table}" if $entry->{table};
-	    push @entry_conf, "unsafe" if $entry->{unsafe} && !$entry->{table};
+	    delete $entry->{unsafe} if !$entry->{table}; #- we can't have both
+	    push @entry_conf, map { "$_=$entry->{$_}" } grep { $entry->{$_} } qw(table boot-as);
+	    push @entry_conf, grep { $entry->{$_} } qw(unsafe master-boot);
 		
 	    if ($entry->{table}) {
 		#- hum, things like table=c: are needed for some os2 cases,
