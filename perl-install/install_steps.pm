@@ -952,7 +952,7 @@ sub upNetwork {
 
     #- do not destroy this file if prefix is '' or even '/' (could it happens ?).
     if (length($o->{prefix}) > 1) {
-	symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach qw(resolv.conf protocols services);
+	-f "$o->{prefix}/etc/$_" && symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach qw(resolv.conf protocols services);
     }
     member($o->{method}, qw(ftp http nfs)) and return 1;
     $o->{modules_conf}->write;
