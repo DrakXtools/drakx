@@ -13,8 +13,8 @@
 #
 
 
-sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
-sub chomp_ { my @l = map { my $l = $_; chomp $l; $l } @_; wantarray ? @l : $l[0] }
+sub cat_ { local *F; open F, $_[0] or return; my @l = <F>; wantarray() ? @l : join '', @l }
+sub chomp_ { my @l = map { my $l = $_; chomp $l; $l } @_; wantarray() ? @l : $l[0] }
 
 
 my @mounts = cat_('/proc/mounts');
@@ -38,7 +38,7 @@ M: foreach (@parts) {
     my $dev = (split)[3] or next;
     $dev = "/dev/$dev";
 
-    for my $fs ('ext3', 'ext2', 'reiserfs', 'xfs', 'jfs') {
+    foreach my $fs ('ext3', 'ext2', 'reiserfs', 'xfs', 'jfs') {
 	my $where = $target;
 	if (!system("mount -t $fs $dev $where 2>/dev/null")) {
 	    if (-r "$where/etc/fstab" && -r "$where/etc/mandrake-release") {
@@ -71,6 +71,7 @@ if ($root) {
 	-d $where || mkdir($where) or die "couldn't create $where\n";
 	print "\t$dev on $where type $type\n";
 	system("mount -t $type $dev $where -o $opts");
+	system("cp -f /etc/mtab $target/etc/mtab"); #- to allow a nice chrooted "mount" or "df"
     }
     print "\nYour system is ready on $target.\n\n";
 } else {
@@ -81,6 +82,10 @@ if ($root) {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.6  2003/08/03 21:50:06  prigaux
+#- - copy /etc/mtab to /mnt/etc/mtab to have a nice chrooted "mount" or "df"
+#- - some perl_checker compliance
+#-
 #- Revision 1.5  2001/11/05 17:03:54  gc
 #- honours hash in /etc/fstab to disable lines
 #-
