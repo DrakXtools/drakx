@@ -545,7 +545,7 @@ sub ask_fromW {
 		}
 
 		$w->set_popdown_strings(@formatted_list);
-		$w->set_text($formatted_list[0]) if $w->isa('Gtk2::ComboBox');
+		$w->set_text(ref($e->{val}) ? may_apply($e->{format}, ${$e->{val}}) : $formatted_list[0]) if $w->isa('Gtk2::ComboBox');
 		($real_w, $w) = ($w, $w->entry);
 
 		#- FIXME workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
