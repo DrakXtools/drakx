@@ -624,7 +624,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
 		     [N("First DNS Server (optional)"), \$cnx->{dns1} ],
 		     [N("Second DNS Server (optional)"), \$cnx->{dns2} ],
 		     [N("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5','eth6', 'eth7', 'eth8', 'eth9' ]],
-		     [N("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcpcd", "dhcpxd", "dhcp-client"] ],
+		     [N("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcp-client", "dhcpcd", "dhcpxd"] ],
 		     [N("Connection speed"), \$cnx->{speed}, ["64 Kb/s", "128 Kb/s"]],
 		     [N("Connection timeout (in sec)"), \$cnx->{huptimeout} ]
 );

@@ -26,24 +26,24 @@ sub configure_cable {
     #  					       [N("Host name:")], [ \$netcnx->{cable}{hostname} ]);
     if ($::expert) {
 	my @m = (
-	       { description => "dhcpcd",
-		 c => 1 },
-	       { description => "dhcpxd",
-		 c => 3 },
 	       { description => "dhcp-client",
+		 c => 1 },
+	       { description => "dhcpcd",
+		 c => 3 },
+	       { description => "dhcpxd",
 		 c => 4 },
 	      );
 	if (my $f = $in->ask_from_listf(N("Connect to the Internet"),
 					N("Which dhcp client do you want to use?
-Default is dhcpcd"),
+Default is dhcp-client"),
 					sub { $_[0]{description} },
 					\@m)) {
-	    $f->{c} == 1 and $netcnx->{dhcp_client} = "dhcpcd" and $in->do_pkgs->install(qw(dhcpcd));
-	    $f->{c} == 3 and $netcnx->{dhcp_client} = "dhcpxd" and $in->do_pkgs->install(qw(dhcpxd));
-	    $f->{c} == 4 and $netcnx->{dhcp_client} = "dhcp-client" and $in->do_pkgs->install(qw(dhcp-client));
+	    $f->{c} == 3 and $netcnx->{dhcp_client} = "dhcpcd" and $in->do_pkgs->install(qw(dhcpcd));
+	    $f->{c} == 4 and $netcnx->{dhcp_client} = "dhcpxd" and $in->do_pkgs->install(qw(dhcpxd));
+	    $f->{c} == 1 and $netcnx->{dhcp_client} = "dhcp-client" and $in->do_pkgs->install(qw(dhcp-client));
 	}
     } else {
-	$in->do_pkgs->install(qw(dhcpcd));
+	$in->do_pkgs->install(qw(dhcp-client));
     }
     go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
     write_cnx_script($netc, "cable",
