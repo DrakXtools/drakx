@@ -530,8 +530,8 @@ sync rate, which is the rate at which scanlines are displayed.
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
 that is beyond the capabilities of your monitor: you may damage your monitor.
  If in doubt, choose a conservative setting."),
-				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges, label => _("Horizontal refresh rate") },
-				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges, label => _("Vertical refresh rate") }]);
+				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges, label => _("Horizontal refresh rate"), not_edit => 0 },
+				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges, label => _("Vertical refresh rate"), not_edit => 0 } ]);
     } else {
 	add2hash($monitor, $monitors{$monitor->{type}} || $standard_monitors_{$monitor->{type}});
     }
