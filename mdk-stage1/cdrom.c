@@ -69,6 +69,7 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
 
 	if (IS_RESCUE)
+		/* in rescue mode, we don't need the media anymore */
 		umount(IMAGE_LOCATION);
 #endif
 

@@ -184,6 +184,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 #endif
 
 	if (IS_RESCUE) {
+		/* in rescue mode, we don't need the media anymore */
 		umount(IMAGE_LOCATION);
 		del_loop(loopdev);
 	}
