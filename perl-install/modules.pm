@@ -666,6 +666,9 @@ sub write_conf {
     my $file = "$prefix/etc/modules.conf";
     rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
+    my @scsi_hostadapters = $scsi ? map { "scsi_hostadapter$_" } ('', 1..$scsi-1) : ();
+    $conf{'scsi-hosts'}{probeall} = join(' ', @scsi_hostadapters) if @scsi_hostadapters;
+
     #- remove the post-install supermount stuff. We now do it in /etc/modules
     #- Substitute new aliases in modules.conf (if config has changed)
     substInFile { $_ = '' if /^post-install supermount/ } $file;
@@ -687,7 +690,7 @@ sub write_conf {
 	    print F "$type $mod $v2\n" if $v2 && $type ne "loaded" && !$written->{$mod}{$type};
 	}
     }
-    my @l = map { "scsi_hostadapter$_" } '', 1..$scsi-1 if $scsi;
+    my @l = ();
     push @l, 'ide-floppy' if detect_devices::ide_zips();
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
     my $l = join '|', @l;
