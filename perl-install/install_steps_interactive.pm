@@ -528,7 +528,7 @@ sub chooseGroups {
 
 	$o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
 
-	if ($val{LSB}) {
+	if ($val{'Development|LSB'}) {
 	    $o->ask_okcancel('', 
 N("Due to incompatibilities of the 2.6 series kernel with the LSB runtime
 tests, the 2.4 series kernel will be installed as the default to insure
