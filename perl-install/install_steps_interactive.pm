@@ -931,9 +931,6 @@ sub addUser {
 	any::ask_users($o->{prefix}, $o, $o->{users}, $o->{security});
     }
     any::get_autologin($o->{prefix}, $o);
-    if (!$::expert && !$clicked && $o->{users}) {
-	$o->{autologin} = $o->{users}[0]{name};
-    }
     any::autologin($o->{prefix}, $o, $o);
 
     install_steps::addUser($o);
