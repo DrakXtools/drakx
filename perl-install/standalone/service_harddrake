@@ -78,6 +78,7 @@ foreach (@harddrake::data::tree) {
     $msg .= "- $_ was added\n" foreach @added;
 
     @added || @was_removed or next;
+    next unless (-x $configurator);
 
     if ($in->ask_okcancel("Hardware changes in $Ident class",
 					 $msg . "\nDo you want to run the appropriate config tool ?", 1)) {
