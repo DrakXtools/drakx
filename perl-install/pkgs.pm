@@ -637,9 +637,12 @@ sub read_rpmsrate {
 	    # has packages on same line
 	    my ($rate) = grep { /^\d$/ } @m or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
 	    foreach (split ' ', $data) {
-		#-log::l("rpmsrate: $_ = ", join(" && ", @m));
-		my $p = packageByName($packages, $_) or log::l("unknown package $_"), next;
-		$p->[$VALUES] = join("\t", $rate, grep { !/^\d$/ } @m);
+		if ($packages) {
+		    my $p = packageByName($packages, $_) or next;
+		    $p->[$VALUES] = join("\t", $rate, grep { !/^\d$/ } @m);
+		} else {
+		    print "$_ = ", join(" && ", @m), "\n";
+		}
 	    }
 	    push @l, @l2;
 	} else {
