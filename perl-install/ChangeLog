@@ -1,3 +1,219 @@
+2002/09/05  David Baudens  <baudens@mandrakesoft.com>
+
+	* pixmaps/services.png, pixmaps/X.png, pixmaps/quit.png,
+	pixmaps/bootloader.png, pixmaps/language.png, pixmaps/summary.png,
+	pixmaps/security.png, pixmaps/partition.png, pixmaps/default.png,
+	pixmaps/keyboard.png, pixmaps/mouse.png,
+	share/advertising/02-community.png, pixmaps/rootpasswd.png,
+	pixmaps/bootdisk.png, pixmaps/colors16.png, pixmaps/harddrive.png,
+	pixmaps/warning.png, pixmaps/user.png, pixmaps/printer-mdk.png,
+	pixmaps/network.png, standalone/icons/drakfont.620x57.png,
+	pixmaps/eth_card_mini.png: Update
+
+	* share/po/fr.po: Update
+	Update
+	Update
+	Update
+	Update
+
+2002/09/05  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/modem.pm: 
+	  - fix drakconnect broken modem detection
+
+2002/09/05  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed problem of --auto-select not always run.
+	fixed copy of hdlist to avoid copying ignored media.
+
+	* install_any.pm: allow noauto:... media in hdlists file to be installed
+	for urpmi.
+
+2002/09/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: add baudens
+
+	* drakxtools.spec: meuuuuuuuuuh
+
+	* my_gtk.pm: ask_browse_tree_info_given_widgets: add ability of partial
+	selection clickery leading to unselection for rpmdrake (if
+	someone understands this log message..)
+
+	* mdk-stage1/modules.c, mdk-stage1/usb-resource/update-usb-ids.pl,
+	mdk-stage1/probing.c, mdk-stage1/modules.h: fake support the firewire in
+	stage1 (as if it were usb ;p)
+
+2002/09/05  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* bootlook.pm: add use ugtk.pm
+
+	* standalone/draksplash: preview window bug correction
+
+2002/09/05  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po: updated Portuguese file
+
+	* share/po/zh_CN.po: updated Chinese and Danish files
+
+	* share/po/it.po: updated Chinese file, some more Italian typo corrections
+	updated Czech and Swedish files; corrected various erros in Italian file
+
+	* share/po/es.po, share/po/ta.po, share/po/hu.po: updated po file
+
+	* share/po/zh_TW.po: updated Chinese file, some more Italian typo
+	corrections
+
+	* share/po/da.po: updated Chinese and Danish files
+	updated Danish file
+
+	* share/po/cs.po, share/po/sv.po: updated Czech and Swedish files;
+	corrected various erros in Italian file
+
+	* share/po/sk.po: updated Slovak file
+
+	* share/po/vi.po: Updated Vietnamese file
+
+	* share/po/nl.po: updated Dutch file
+
+2002/09/05  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/localedrake: workaround kde control center calling
+	localedrake with an empty kde lang
+
+	* diskdrake/dav.pm: add nice description to the initial dialog box (thanks
+	Stew!)
+
+	* install_any.pm: add flag CDCOM when using commercial cds
+
+	* network/network.pm, proxy.pm: allow http://xxx for ftp_proxy
+
+	* lvm.pm: fix using given size for created LVs whereas lvcreate allocates
+	a little less
+	(thanks to Alan Hughes)
+
+	* any.pm (ask_window_manager_to_logout): do not su into user before doing
+	dcop if
+	we are not root (otherwise localedrake in user ask for user's password
+	before login out) (thanks to H. Narfi Stefansson for reporting it)
+
+	* bootloader.pm: do not add an nt label if there is no magic
+	use name mangling for labels (taken from installkernel)
+
+	* standalone/XFdrake: correctly set allowFB flag
+
+2002/09/05  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* drakxtools.spec: rework perl-Expect usage/requirements
+
+	* standalone/drakbackup: cleanup check for Expect - thx gc
+	rework perl-Expect usage/requirements
+
+2002/09/05  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: don't rely on ctree row number
+
+2002/09/04  David Baudens  <baudens@mandrakesoft.com>
+
+	* standalone/logdrake, standalone/icons/wiz_logdrake.png: Add image for
+	logdrake
+
+	* standalone/icons/drakbackup.540x57.png, drakxtools.spec,
+	standalone/icons/wiz_printerdrake.png, standalone/icons/wiz_drakgw.png,
+	standalone/icons/wiz_scannerdrake.png,
+	standalone/icons/wiz_drakconnect.png, standalone/icons/wiz_firewall.png,
+	standalone/icons/wiz_default_up.png: Update
+
+2002/09/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/it.po: fix typo
+
+2002/09/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/af.po: updated pot file
+
+	* share/po/sk.po, share/po/pt.po, share/po/vi.po, share/po/el.po: updated
+	po file
+	updated Greek, Hungarian, Portuguese, Slovak and Vietnamese files
+
+	* share/po/cy.po: updated Welsh file
+	updated po file
+	updated Danish and Welsh files
+
+	* share/po/da.po: updated po file
+	updated Danish and Welsh files
+
+	* share/po/id.po, share/po/ru.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/br.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/sp.po, share/po/ca.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/ta.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po: updated po file
+
+	* share/po/hu.po: updated hungarian file
+	updated po file
+	updated Greek, Hungarian, Portuguese, Slovak and Vietnamese files
+
+	* share/po/fr.po: updated po file
+	corrected error syntax
+
+2002/09/04  Pixel  <pixel@mandrakesoft.com>
+
+	* drakxtools.spec: remove symlink Xconfigurator (which was broken anyway,
+	thanks to Ian Ventura-Whiting for reporting it)
+
+	* standalone/drakupdate_fstab: do not use standalone (so that no
+	"explaination" are generated)
+
+	* bootloader.pm (same_entries): compare kernel options sorted (this is an
+	approximation of
+	reality since order can matter, but...). An example is "quiet
+	devfs=mount
+	hdc=ide-scsi" vs "devfs=mount hdc=ide-scsi quiet" (thanks to Gabriel
+	Phoenix)
+
+	* ugtk.pm: make perl_checker happy
+
+	* fs.pm: revert add2hash_ username=% to add2hash (it breaks diskdrake
+	--smb not
+	defaulting to username=%, and i can't find out what was wrong in
+	auto_install's manualFstab)
+
+	* install_steps.pm (addUser): fix calling with a user already existing
+	(mainly for installs keeping the / non-formatted, special for pixel)
+
+	* install_steps_interactive.pm: fix dialog box asking "Load from floppy"
+	or "Save on floppy" in individual package selection
+
+2002/09/04  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* drakxtools.spec: add perl-Expect requires for drakbackup (now enabled
+	and in main)
+
+2002/09/04  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* Makefile.config: add drakperm!
+
+	* share/po/fr.po: s/Si vous disque/Si votre disque/
+	s/Si non,, Les partitions devront être créés/Sinon, les partitions
+	devront ,bj(Btre cr,bii(Bes/
+	s/des fonctionnalité additionnelle/des fonctionnalit,bi(Bs
+	additionnelles/
+	s/sur un disque amovibles/sur un disque amovible/
+	s/sauves la table/sauve la table/
+	s/pour récurer les partitions/pour r,bi(Bcup,bi(Brer les partitions/
+
+	* standalone/drakperm: 
+	  - really embbed
+	  - kill stupid things (aka embedded window withouth any widget vs
+	toplevel window)
+
+	* ugtk.pm: gtkcreate_png_pixbuf() : support jpeg too for bootlook.pm
+
 2002/09/04  baudens
 
 	* standalone/icons/wiz_logdrake.png, standalone/logdrake: Add image for
@@ -2051,7 +2267,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.736 2002/09/03 23:31:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.737 2002/09/04 16:28:43 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
