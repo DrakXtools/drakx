@@ -601,13 +601,18 @@ sub main {
 	   "DRAKX_PASSWORD=$o->{lilo}{password}\n",
 	   'DRAKX_USERS="', join(" ", map { $_->{name} } @{$o->{users} || []}), qq("\n));
     run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-#    unlink "$o->{prefix}/tmp/secure.DrakX";
+    unlink "$o->{prefix}/tmp/secure.DrakX";
+
+    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
 
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
+
+    #- have the really bleeding edge ddebug.log for this f*cking msec :-/
+    eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
 
     #- ala pixel? :-) [fpons]
     sync(); sync();

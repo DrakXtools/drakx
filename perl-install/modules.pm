@@ -28,7 +28,7 @@ my @drivers_by_category = (
   "ac3200" => "Ansel Communication AC3200",
   "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
-#  "apricot" => "Apricot 82596",  # now builtin the kernel
+  "82596" => "Apricot 82596",
 #  "atp" => "ATP", # builtin the kernel
   "cs89x0" => "CS89x0",
   "de4x5" => "Digital 425,434,435,450,500",
@@ -70,7 +70,6 @@ my @drivers_by_category = (
   "wd" => "WD8003, WD8013 and compatible",
   "yellowfin" => "Symbios Yellowfin G-NIC",
 
-  "82596" => "82596",
   "8390" => "8390",
   "dmfe" => "dmfe",
   "dummy" => "dummy",
@@ -87,28 +86,18 @@ my @drivers_by_category = (
   "sunrpc" => "sunrpc",
 }],
 [ 'scsi', {
-  "DAC960" => "Mylex DAC960",
   "aha152x" => "Adaptec 152x",
   "aha1542" => "Adaptec 1542",
   "aha1740" => "Adaptec 1740",
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "advansys" => "AdvanSys Adapters",
-#  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "in2000" => "Always IN2000",
   "AM53C974" => "AMD SCSI",
-  "megaraid" => "AMI MegaRAID",
   "BusLogic" => "BusLogic Adapters",
-  "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "dtc" => "DTC 3180/3280",
-  "eata" => "EATA SCSI PM2x24/PM3224",
-  "eata_dma" => "EATA DMA Adapters",
-  "eata_pio" => "EATA PIO Adapters",
   "seagate" => "Future Domain TMC-885, TMC-950",
   "fdomain" => "Future Domain TMC-16x0",
-  "gdth" => "ICP Disk Array Controller",
   "initio" => "Initio",
-  "ips" => "IBM ServeRAID controller",
-  "ppa" => "Iomega PPA3 (parallel port Zip)",
   "g_NCR5380" => "NCR 5380",
   "NCR53c406a" => "NCR 53c406a",
   "53c7,8xx" => "NCR 53c7xx",
@@ -124,21 +113,32 @@ my @drivers_by_category = (
   "wd7000" => "Western Digital wd7000",
 
   "a100u2w" => "a100u2w",
-  "atp870u" => "atp870u",
+  "atp870u" => "atp870u (Acard/Artop)",
   "dc395x_trm" => "dc395x_trm",
   "ide-scsi" => "ide-scsi",
-  "imm" => "Iomega Zip (new driver)",
   "psi240i" => "psi240i",
   "qlogicfc" => "qlogicfc",
   "sim710" => "sim710",
-  "st" => "st",
   "sym53c416" => "sym53c416",
   "tmscsim" => "tmscsim",
+}],
+[ 'disk', {
+  "DAC960" => "Mylex DAC960",
+#  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
+  "megaraid" => "AMI MegaRAID",
+  "cpqarray" => "Compaq Smart-2/P RAID Controller",
+  "gdth" => "ICP Disk Array Controller",
+  "ips" => "IBM ServeRAID controller",
+  "eata" => "EATA SCSI PM2x24/PM3224",
+  "eata_pio" => "EATA PIO Adapters",
+  "eata_dma" => "EATA DMA Adapters",
+  "st" => "st",
+  "ppa" => "Iomega PPA3 (parallel port Zip)",
+  "imm" => "Iomega Zip (new driver)",
 }],
 [ 'cdrom', {
   "sbpcd" => "SoundBlaster/Panasonic",
   "aztcd" => "Aztech CD",
-#  "bpcd" => "Backpack CDROM", # not there anymore?
   "gscd" => "Goldstar R420",
   "isp16" => "ISP16/MAD16/Mozart",
   "mcd" => "Mitsumi",
@@ -200,6 +200,26 @@ my @drivers_by_category = (
   "ds" => "PCMCIA card support",
   "i82365" => "PCMCIA i82365 controller",
 }],
+[ 'paride', {
+  "aten" => "ATEN EH-100",
+  "bpck" => "Microsolutions backpack",
+  "comm" => "DataStor (older type) commuter adapter",
+  "dstr" => "DataStor EP-2000",
+  "epat" => "Shuttle EPAT",
+  "epia" => "Shuttle EPIA",
+  "fit2" => "Fidelity Intl. (older type)",
+  "fit3" => "Fidelity Intl. TD-3000",
+  "frpw" => "Freecom Power",
+  "friq" => "Freecom IQ (ASIC-2)",
+  "kbic" => "KingByte KBIC-951A and KBIC-971A",
+  "ktti" => "KT Tech. PHd",
+  "on20" => "OnSpec 90c20",
+  "on26" => "OnSpec 90c26",
+  "pd"   => "Parallel port IDE disks",
+  "pcd"  => "Parallel port CD-ROM",
+  "pf"   => "Parallel port ATAPI disk",
+  "paride" => "Main parallel port module",
+}],
 [ 'raid', {
   "linear" => "linear",
   "raid0" => "raid0",
@@ -257,11 +277,7 @@ while (my ($k, $v) = each %drivers) {
 
 sub module_of_type($) {
     my ($type) = @_;
-    if ($type eq 'scsi&cdrom') {
-	grep { $drivers{$_}{type} =~ /^(scsi|cdrom)$/ && !exists $scsi_raid{$_} } keys %drivers;
-    } else {
-	grep { $drivers{$_}{type} eq $type } keys %drivers;
-    }
+    grep { $drivers{$_}{type} =~ /^($type)$/ } keys %drivers;
 }
 
 sub text_of_type($) {

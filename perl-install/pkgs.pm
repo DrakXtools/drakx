@@ -145,12 +145,12 @@ sub psUsingHdlist() {
     my $f = install_any::getFile('hdlist') or die "no hdlist found";
     my %packages;
 
-#    my ($noSeek, $end) = 0;
-#    $end = sysseek F, 0, 2 or die "seek failed";
-#    sysseek F, 0, 0 or die "seek failed";
+#-    my ($noSeek, $end) = 0;
+#-    $end = sysseek F, 0, 2 or die "seek failed";
+#-    sysseek F, 0, 0 or die "seek failed";
 
     while (my $header = c::headerRead(fileno $f, 1)) {
-#	 or die "error reading header at offset ", sysseek(F, 0, 1);
+#-	 or die "error reading header at offset ", sysseek(F, 0, 1);
 	my $name = c::headerGetEntry($header, 'name');
 
 	$packages{$name} = {
@@ -512,8 +512,8 @@ sub install($$) {
     };
     my $callbackClose = sub { $packages{$_[0]}{installed} = 1; };
     my $callbackMessage = \&pkgs::installCallback;
-#    my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
-#    my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
+#-    my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
+#-    my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other

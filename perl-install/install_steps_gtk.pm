@@ -16,11 +16,8 @@ use Gtk;
 use Gtk::XmHTML;
 use devices;
 use fsedit;
-use keyboard;
-use network;
 use modules;
 use install_steps;
-use run_program;
 use install_steps_interactive;
 use interactive_gtk;
 use install_any;
@@ -264,9 +261,9 @@ sub doPartitionDisks($$) {
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $first_time) = @_;
 
-    if ($::beginner) {	
+    if ($::beginner) {
 	require pkgs;
-	pkgs::setSelectedFromCompssList_($o->{compssListLevels}, $o->{packages}, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
+	pkgs::setSelectedFromCompssList_($o->{compssListLevels}, $o->{packages}, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{isUpgrade});
     } else {
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 90, $o->{installClass}) unless $::expert || $o->{isUpgrade};
 	install_steps_interactive::choosePackages(@_);
@@ -300,7 +297,7 @@ sub chooseSizeToInstall {
     ($o->{packages_}{ind}, $o->{packages_}{select_level}) = 
       pkgs::setSelectedFromCompssList_($o->{compssListLevels}, $o->{packages}, 
 				       pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
-				       $o->{installClass}, $o->{lang}, $o->{isUpgrade});
+				       $o->{installClass}, $o->{isUpgrade});
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss, $compssUsers) = @_;

@@ -27,8 +27,8 @@ sub fromEnv() {
 
 sub new {
     my ($host, $prefix, $login, $password) = @_;
-    my @l = do { if ($hosts{$host}) {
-	@{$hosts{$host}};
+    my @l = do { if ($hosts{"$host$prefix"}) {
+	@{$hosts{"$host$prefix"}};
     } else {
 	my %options = (Passive => 1);
 	$options{Firewall} = $ENV{PROXY} if $ENV{PROXY};
@@ -44,7 +44,7 @@ sub new {
 	$ftp->cwd($prefix);
 
 	my @l = ($ftp, \ (my $retr = undef));
-	$hosts{$host} = \@l;
+	$hosts{"$host$prefix"} = \@l;
 	@l;
     }};
     wantarray ? @l : $l[0];

@@ -193,7 +193,7 @@ sub installPackages($$) {
     my ($o, $packages) = @_;
 
     #- hack to ensure proper ordering for installation of packages.
-    my @firstToInstall = qw(basesystem sed);
+    my @firstToInstall = qw(setup basesystem sed);
     my %firstInstalled;
     my @toInstall;
     foreach (@firstToInstall) {
@@ -214,8 +214,6 @@ sub afterInstallPackages($) {
 
     #-  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
-
-    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
     $o->pcmciaConfig();
 
@@ -268,7 +266,7 @@ sub pppConfig {
 
     my %toreplace;
     $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain);
-    $toreplace{kpppauth} = ${{ 'Script-based' => 0, PAP => 1, 'Terminal-based' => 2, CHAP => 3, }}{$o->{modem}{auth}};
+    $toreplace{kpppauth} = ${{ 'Script-based' => 0, PAP => 1, 'Terminal-based' => 2, CHAP => 3, }}{$o->{modem}{auth}}; #'
     $toreplace{phone} =~ s/[^\d]//g;
     $toreplace{dnsserver} = join '', map { "$o->{modem}{$_}," } "dns1", "dns2";
 
@@ -566,7 +564,7 @@ sub miscellaneous {
     $ENV{SECURE_LEVEL} = $o->{security};
 
     cat_("/proc/cmdline") =~ /mem=(\S+)/;
-    add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1 + 3) : () });
+    add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });
 }
 
 #------------------------------------------------------------------------------

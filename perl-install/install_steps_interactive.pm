@@ -692,6 +692,7 @@ _("Default") => { val => \$default, type => 'bool' },
 	$o->ask_warn('', 
 		     [ _("Installation of LILO failed. The following error occured:"),
 		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
+	unlink "$o->{prefix}/tmp/.error";
 	die "already displayed";
     }
 }

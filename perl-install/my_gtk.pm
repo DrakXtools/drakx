@@ -65,15 +65,7 @@ sub destroy($) {
 sub DESTROY { goto &destroy }
 sub sync($) {
     my ($o) = @_;
-
-    flush();
-
     show($o);
-
-    my $h = Gtk->idle_add(sub { Gtk->main_quit; 1 });
-    map { Gtk->main } (1..4);
-    Gtk->idle_remove($h);
-
     flush();
 }
 sub flush(;$) {
@@ -218,19 +210,13 @@ sub create_box_with_title($@) {
 
 sub createScrolledWindow($) {
     my ($W) = @_;
-    if (member(ref $W, qw(Gtk::Text))) {
-	gtkpack_(new Gtk::HBox(0,0), 
-		 1, $W, 
-		 0, new Gtk::VScrollbar($W->vadj));
-    } else {
-	my $w = new Gtk::ScrolledWindow(undef, undef);
-	$w->set_policy('automatic', 'automatic');
-	member(ref $W, qw(Gtk::CList Gtk::CTree)) ?
-	  $w->add($W) :
-	    $w->add_with_viewport($W);
-	$W->show;
-	$w
-    }
+    my $w = new Gtk::ScrolledWindow(undef, undef);
+    $w->set_policy('automatic', 'automatic');
+    member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text)) ?
+      $w->add($W) :
+      $w->add_with_viewport($W);
+    $W->show;
+    $w
 }
 
 sub create_menu($@) {
@@ -299,7 +285,7 @@ sub _create_window($$) {
     my $f = new Gtk::Frame(undef);
     $w->set_name("Title");
 
-    if ($::isStandalone || $o->{no_border} || 1) {
+    if ($::isStandalone || $o->{no_border} || 1) { # hack
 	gtkadd($w, $f);
     } else {
 	my $t = new Gtk::Table(0, 0, 0);
@@ -326,9 +312,8 @@ sub _create_window($$) {
 
     $w->set_title($title);
 
-    $w->signal_connect("map_event" => sub { c::XSetInputFocus($w->window->XWINDOW); }) if $my_gtk::force_focus || $o->{force_focus};
-    $w->signal_connect("expose_event" => sub { c::XSetInputFocus($w->window->XWINDOW); }) if $my_gtk::force_focus || $o->{force_focus};
-    $w->signal_connect("delete_event" => sub { undef $o->{retval}; Gtk->main_quit });
+    $w->signal_connect(expose_event => sub { c::XSetInputFocus($w->window->XWINDOW); }) if $my_gtk::force_focus || $o->{force_focus};
+    $w->signal_connect(delete_event => sub { undef $o->{retval}; Gtk->main_quit });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
     $w->signal_connect("key_press_event" => sub {
@@ -521,8 +506,7 @@ sub _ask_from_list {
 			    1, @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list,
 			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
 		  ));
-
-    $o->sync; #- otherwise the moveto is not done
+    $o->show; #- otherwise the moveto is not done
     my $toselect; map_index {
 	$list->append($_);
 	$toselect = $::i if $def && $_ eq $def;

@@ -6,10 +6,10 @@ function f() {
     v=`perl -Iperl-install -e "use modules; print qq(\\$_.o\n) foreach modules::module_of_type(\"$1\")"` 
 }
 
-f "scsi" ; SCSI_DRIVERS=$v
+f "scsi|disk" ; SCSI_DRIVERS=$v
 f "net" ; NETWORK_DRIVERS=$v
-f "scsi&cdrom" ; CD_DRIVERS=$v
-f "pcmcia" ; PCMCIA_DRIVERS=$v
+f "scsi|cdrom" ; CD_DRIVERS=$v
+f "pcmcia|paride" ; PCMCIA_DRIVERS=$v
 
 MISCMODULES="lp.o parport_pc.o parport.o loop.o"
 FSMODULES="vfat.o fat.o"
@@ -19,6 +19,7 @@ CDROM_MODULES="  $FSMODULES $CD_DRIVERS"
 HD_MODULES="     $MISCMODULES $FSMODULES $SCSI_DRIVERS"
 PCMCIA_MODULES=" $MISCMODULES $FSMODULES $PCMCIA_DRIVERS 8390.o lockd.o nfs.o sunrpc.o"
 LNX4WIN_MODULES="$FSMODULES loop.o isofs.o"
+NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 echo $NETWORK_DRIVERS
 
@@ -45,7 +46,7 @@ install -d lnx4win/initrd/modules
     ls $PCMCIA_MODULES  | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
     cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
     cp -f $LNX4WIN_MODULES modules.dep ../lnx4win/initrd/modules
-    rm -f $NETWORK_MODULES $CDROM_MODULES $HD_MODULES $PCMCIA_MODULES $PCMCIA_INSTALLMODULES nls_*.o # leave in the directory non-install1 used modules
+    rm -f $NETWORK_MODULES $CDROM_MODULES $HD_MODULES $PCMCIA_MODULES $PCMCIA_INSTALLMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
 )
 
 cp -f vmlinuz /export/lnx4win
