@@ -121,7 +121,7 @@ unless (-e "/cdrom/VERSION") {
 $options{free_size} = 500;
 $options{free_primary} = 1;
 $options{free_fs} = 'fat32';
-$options{boot_entries} = 'linux,linux-nonfb,failsafe,floppy';
+$options{boot_entries} = 'linux,linux-nonfb,restore,failsafe,floppy';
 $options{kernel} = "acpi=off";
 
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
@@ -203,7 +203,8 @@ Type \`\`yes'' and [enter] to go on\n"
 my $min_size = $options{min_size} || 4000;
 my $def_size = $options{def_size} || 3500;
 my $trigger_size = $options{trigger_size} || 4000;
-my $inst_size = $options{inst_size} || 1500;
+#my $inst_size = $options{inst_size} || 1500;
+my $inst_size = $options{inst_size} || 2500;
 my $swap_size = $options{swap_size} || 128;
 $hd_size > $min_size or die "hard disk is too small to contain oem install (${hd_size}MB found, need $min_size at least)";
 
