@@ -152,7 +152,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 				      "%s", extract_list_directory(IMAGE_LOCATION));
 			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
-			return RETURN_ERROR;
+			return RETURN_BACK;
 		}
 		if (load_ramdisk() != RETURN_OK) {
 			stg1_error_message("Could not load program into memory.");
