@@ -656,7 +656,7 @@ sub deselectFoundMedia {
 	$totalsize >= 0 and $totalsize += $mediumsize->{$_->[0]};
 	++$i;
     }
-    $totalsize or $totalsize = -1; #- don't check size, total medium size unknown
+    $totalsize ||= -1; #- don't check size, total medium size unknown
     my @selection = (1) x @hdlist2;
     my $copy_rpms_on_disk = 0;
     my $ask_copy_rpms_on_disk = $o->{method} !~ /iso/i;

@@ -645,7 +645,6 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     if (!$pid && defined $pid) { #- child
 	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	$wait_message->(N("Copying in progress"));
-	my $du = 0;
 	#- from commands.pm. TODO: factorize, possibly in MDK::Common.
 	my $f; $f = sub {
 	    my ($e) = @_;
