@@ -94,7 +94,7 @@ my %available_roaming_daemons = (
 					      my $ifc = $row->[4] ? "$IFConfig \@DEV\@ up; $DHClient \@DEV\@" : "$IFUp \@DEV\@";
 					      push @contents, "$essid\t\t$iwc; $ifc\n";
 					  }
-					  output($config, @contents);
+					  output_p($config, @contents);
 				      },
 				      add_net => sub {},
 				      remove_net => sub {},
@@ -117,7 +117,7 @@ my %available_roaming_daemons = (
 				      write_config => sub {},
 				      add_net => sub {
 					  my ($config, $essid) = @_;
-					  output("$config/$essid", qq(# essid specific config file));
+					  output_p("$config/$essid", qq(# essid specific config file));
 				      },
 				      remove_net => sub {
 					  my ($config, $essid) = @_;
