@@ -186,38 +186,25 @@ $my_win->main;
 ugtk2->exit(0);
 
 sub ntp_widget_state {
-    my $state = shift;
+    my ($state) = @_;
     $check_ntp->set_active($state);  
     $hb_ntp->set_sensitive($state);
     $mode = $state;
 }
 sub install_ntp() {
-    my $w = ugtk2->new("Want to install ntp ?", grab => 1, center => 1, if_(!$::isEmbedded, transient => $my_win->{rwindow}));
-    gtkadd($w->{window},
-           gtkpack__(Gtk2::VBox->new(0,5),
-                     Gtk2::Label->new(N("We need to install ntp package\n to enable Network Time Protocol")),
-                     Gtk2::HSeparator->new,
-                     gtkpack(create_hbox(),
-                             gtksignal_connect(Gtk2::Button->new(N("Yes")), clicked => sub {
-						   Gtk2->main_quit;
-						   $in->do_pkgs->install('ntp');
-                                               }),
-                             gtksignal_connect(Gtk2::Button->new(N("No")), clicked => sub { 
-						   Gtk2->main_quit; 
-						   ntp_widget_state(0);
-					       }))));
     $my_win->{window}->set_sensitive(0);
-    $w->main;
+    if (warn_dialog(N("Warning"), N("We need to install ntp package\n to enable Network Time Protocol
+
+Do you want to install ntp ?"))) {
+	$in->do_pkgs->install('ntp');
+    } else {
+	ntp_widget_state(0);
+    }
     $my_win->{window}->set_sensitive(1);
 }
 sub get_server() {
-    my ($servs, @sv);
-    $servs = timezone::ntp_servers();
-    foreach my $l (keys %$servs) {
-	my $c = $l . "  (" . $servs->{$l} . ")";
-	push(@sv, $c);
-    }
-    \@sv
+    my $servs = timezone::ntp_servers();
+    [ map { "$_  ($servs->{$_})" } keys %$servs ]
 }
 sub update_time() {
     Repaint($drawing_area, 1);
