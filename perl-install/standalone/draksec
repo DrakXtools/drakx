@@ -41,8 +41,16 @@ use security::l10n;
 my ($w, %fields);
 
 ############################    I18N     ###################################
-my %inv_translations = map { translate($_) => $_ } N_("ALL"), N_("LOCAL"), N_("NONE"), N_("default"), N_("default"), N_("ignore"), N_("no"), N_("yes");
-my %translations = reverse %inv_translations;
+my %translations = (
+	'ALL'     => N("ALL"),
+	'LOCAL'   => N("LOCAL"),
+	'NONE'    => N("NONE"),
+	'default' => N("Default"),
+	'ignore'  => N("Ignore"),
+ 	'no'      => N("No"),
+	'yes'     => N("Yes"),
+);
+my %inv_translations = reverse %translations;
 
 sub to_i18n { map { $translations{$_} || $_ } @_ }
 sub from_i18n { $inv_translations{$_[0]} || $_[0] }
