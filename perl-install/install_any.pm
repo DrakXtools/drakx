@@ -725,6 +725,10 @@ sub default_packages {
         modules::append_to_modules_loaded_at_startup($_, 'toshiba') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
         push @l, "toshutils";
     }
+    if ($dmi{BIOS}{Vendor} eq 'COMPAL' && $dmi{BIOS}{Characteristics} =~ /Function key-initiated network boot is supported/) {
+        modules::append_to_modules_loaded_at_startup($_, 'acerhk') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+    }
+
     push @l, "grub" if isLoopback(fs::get::root($o->{fstab}));
     push @l, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
