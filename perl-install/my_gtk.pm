@@ -51,6 +51,7 @@ sub new {
 	if (!defined($::WizardWindow)) {
 	    $::WizardWindow = new Gtk::Window;
 	    $::WizardWindow->set_position('center_always');
+	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel'});
 	    $::WizardTable = new Gtk::Table(2, 2, 0);
 	    $::WizardWindow->add($::WizardTable);
 	    my $draw1 = new Gtk::DrawingArea;
