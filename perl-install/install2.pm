@@ -607,7 +607,7 @@ sub main {
 	   "DRAKX_PASSWORD=$o->{lilo}{password}\n",
 	   'DRAKX_USERS="', join(" ", map { $_->{name} } @{$o->{users} || []}), qq("\n));
     run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-#-    unlink "$o->{prefix}/tmp/secure.DrakX";
+    unlink "$o->{prefix}/tmp/secure.DrakX";
 
     run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
