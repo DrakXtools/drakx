@@ -61,8 +61,8 @@ sub device_name_to_entry {
     $name =~ /fd[01]/ && !$::auto and return { device => $name };
     my @l = detect_devices::get();
 
-    my ($e, $nb);
-    if ((my $devfs_prefix, $nb) = $name =~ m,(.*)/(?:cd|disc|part(\d+))$,) {
+    my $e;
+    if (my ($devfs_prefix, $nb) = $name =~ m,(.*)/(?:cd|disc|part(\d+))$,) {
 	$e = find { $_->{devfs_prefix} eq $devfs_prefix } @l;
         $e->{devfs_prefix} ||= $devfs_prefix;
 	$e->{devfs_device} = $e->{devfs_prefix} . '/part' . $nb;
@@ -70,10 +70,8 @@ sub device_name_to_entry {
 	    $e->{prefer_devfs_name} = 1;
 	}
     } else {
-	if ($e = find { $name eq $_->{device} } @l) {
-	    $nb = '';
-	} else {
-	    (my $prefix, $nb) = $name =~ m/^(.*?)(\d*)$/;
+	unless ($e = find { $name eq $_->{device} } @l) {
+	    my ($prefix, $nb) = $name =~ m/^(.*?)(\d*)$/;
 	    $e = find { $prefix eq ($_->{prefix} || $_->{device}) } @l;
 	    $e->{device} = ($e->{prefix} || $e->{device}) . $nb;
 	}
