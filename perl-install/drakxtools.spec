@@ -36,6 +36,7 @@ Group: System/Configuration/Other
 Requires: ldetect-lst >= 0.1.25-1mdk
 Requires: dmidecode
 Conflicts: drakxtools-newt < 10-51mdk
+%define _requires_exceptions perl(URPM)
 
 %package http
 Summary: The drakxtools via http
