@@ -118,3 +118,20 @@ diff -u -p -r1.340 any.pm
  		    messages => N("Please choose your country."),
  		    interactive_help_id => 'selectCountry',
  		    advanced_messages => N("Here is the full list of available countries"),
+Index: lang.pm
+===================================================================
+RCS file: /cooker/gi/perl-install/lang.pm,v
+retrieving revision 1.312
+diff -u -r1.312 lang.pm
+--- lang.pm     19 Mar 2003 17:06:18 -0000      1.312
++++ lang.pm     28 Mar 2003 15:24:41 -0000
+@@ -23,7 +23,8 @@
+ my %langs = (
+ 'af' =>    [ 'Afrikaans',           'Afrikaans',         'af_ZA', '  3  ', 'iso-8859-1' ],
+ 'am' =>    [ 'Amharic',             'ZZ emarNa',         'am_ET', '  3  ', 'utf_am' ],
+-'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],
++#- doesn't work well after install
++#'ar' =>    [ 'Arabic',              'AA Arabic',         'ar_EG', ' 23  ', 'utf_ar' ],
+ 'az' =>    [ 'Azeri (Latin)',       'Azerbaycanca',      'az_AZ', ' 2   ', 'utf_az' ],
+ 'be' =>    [ 'Belarussian',         'Belaruskaya',       'be_BY', '1    ', 'cp1251' ],
+ 'bg' =>    [ 'Bulgarian',           'Blgarski',          'bg_BG', '1    ', 'cp1251' ],
