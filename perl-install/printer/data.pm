@@ -11,6 +11,7 @@ use vars qw(@ISA @EXPORT);
 our %spoolers = ('pdq' => {
                           'help' => "/usr/bin/pdq -h -P %s 2>&1 |",
 			  'print_command' => 'lpr-pdq',
+			  'print_gui' => 'xpdq',
 			  'long_name' => N("PDQ - Print, Don't Queue"),
 			  'short_name' => N("PDQ"),
                           'packages2add' => [ [ 'pdq' ], [qw(/usr/bin/pdq /usr/X11R6/bin/xpdq)] ],
@@ -21,7 +22,8 @@ our %spoolers = ('pdq' => {
                           ],
                  },
                 'lpd' => {
-                        'print_command' => 'lpr',
+                        'print_command' => 'lpr-lpd',
+			'print_gui' => 'gpr',
 			'long_name' => N("LPD - Line Printer Daemon"),
                         'short_name' => N("LPD"),
                         'boot_spooler' => 'lpd',
@@ -43,6 +45,7 @@ our %spoolers = ('pdq' => {
                  },
 		 'lprng' => {
 		     'print_command' => 'lpr-lpd',
+		     'print_gui' => 'gpr',
 		     'long_name' => N("LPRng - LPR New Generation"),
 		     'short_name' => N("LPRng"),
 		     'boot_spooler' => 'lpd',
@@ -68,6 +71,7 @@ our %spoolers = ('pdq' => {
 		 'cups' => {
 		     'help' => "/usr/bin/lphelp %s |",
 		     'print_command' => 'lpr-cups',
+		     'print_gui' => 'xpp',
 		     'long_name' => N("CUPS - Common Unix Printing System"),
 		     'short_name' => N("CUPS"),
 		     'boot_spooler' => 'cups',

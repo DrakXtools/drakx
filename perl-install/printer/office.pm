@@ -106,7 +106,7 @@ sub configureoffice {
     $configfilecontent =
 	addentry($parameters[0],
 		 $parameters[1] . $suites->{$suite}{perl} . 
-		 $spoolers{$printer->{SPOOLER}}{print_command},
+		 $spoolers{$printer->{SPOOLER}}{print_gui},
 		 $configfilecontent);
     # Write back Star Office configuration file
     return eval { output("$::prefix$configfilename", $configfilecontent) };
