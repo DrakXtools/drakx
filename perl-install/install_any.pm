@@ -441,6 +441,9 @@ sub selectSupplMedia {
 		#- probe for an hdlists file and then look for all hdlists listed herein
 		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}, '1s') };
 		log::l("psUsingHdlists failed: $@");
+		#- copy latest compssUsers.pl and rpmsrate somewhere locally
+		getAndSaveFile("/mnt/cdrom/media/media_info/compssUsers.pl", "/tmp/compssUsers.pl");
+		getAndSaveFile("/mnt/cdrom/media/media_info/rpmsrate", "/tmp/rpmsrate");
 	    }
 	} else {
 	    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
@@ -519,15 +522,11 @@ sub setPackages {
 	#- if there is a supplementary CD, the rpmsrate/compssUsers are overridable
 	pkgs::read_rpmsrate(
 	    $o->{packages},
-	    getFile(
-		$suppl_method eq 'cdrom' && -e "/mnt/cdrom/media/media_info/rpmsrate"
-		? "/mnt/cdrom/media/media_info/rpmsrate"
-		: "media/media_info/rpmsrate")
+	    getFile($suppl_method eq 'cdrom' && -e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
 	);
 	($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
 	    $o->{meta_class},
-	    ($suppl_method eq 'cdrom' && -e '/mnt/cdrom/media/media_info/compssUsers.pl' ? '/mnt/cdrom/' : '')
-		. 'media/media_info/compssUsers.pl'
+	    $suppl_method eq 'cdrom' && -e '/tmp/compssUsers.pl' ? '/tmp/compssUsers.pl' : 'media/media_info/compssUsers.pl'
 	);
 
 	#- preselect default_packages and compssUsers selected.
