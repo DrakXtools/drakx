@@ -865,6 +865,8 @@ enum return_type nfs_prepare(void)
 		results = try_with_directory(nfs_own_mount, "nfs", "nfs-iso");
 		if (results == RETURN_BACK)
 			umount(nfs_own_mount);
+		else if (results == RETURN_ERROR)
+                        return RETURN_ERROR;
 	}
 	while (results == RETURN_BACK);
 
