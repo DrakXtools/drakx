@@ -1247,13 +1247,13 @@ sub install($$$;$$) {
     init_db($prefix);
 
     my $callbackOpen = sub {
-	my $p = $packages{$_[0]};
+	my $p = $packages{$_[0]} or log::l("unable to retrieve package of $_[0]"), return -1;
 	my $f = packageFile($p);
 	print LOG "$f $p->[$MEDIUM]{descr}\n";
 	my $fd = install_any::getFile($f, $p->[$MEDIUM]{descr});
 	$fd ? fileno $fd : -1;
     };
-    my $callbackClose = sub { packageSetFlagInstalled(delete $packages{$_[0]}, 1) };
+    my $callbackClose = sub { packageSetFlagInstalled($packages{$_[0]}, 1) };
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
