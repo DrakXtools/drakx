@@ -385,7 +385,7 @@ if (open F, ">/hd/Mandrake/oem_patch.pl") {
 		    #- present.
 		  pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method});
 		}
-	    }
+	    };
 
 	    use install_steps;
 	    package install_steps;
