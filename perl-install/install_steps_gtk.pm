@@ -323,10 +323,9 @@ sub choosePackagesTree {
 	    $add_node->($_, undef) foreach sort grep { my $pkg = pkgs::packageByName($packages, $_);
 						       pkgs::packageMedium($pkg)->{selected} } keys %{$packages->{names}};
 	} else {
-	    foreach (@{$o->{compssUsersSorted}}) {
-		my $root = $o->{compssUsers}{$_}{path} . '|' . $_;
+	    foreach my $root (@{$o->{compssUsersSorted}}) {
 		my (%fl, @firstchoice, @others);
-		$fl{$_} = 1 foreach @{$o->{compssUsers}{$_}{flags}};
+		$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
 		foreach my $p (values %{$packages->{names}}) {
 		    my ($rate, @flags) = pkgs::packageRateRFlags($p);
 		    next if !($rate && !grep { !grep { /^!(.*)/ ? !$fl{$1} : $fl{$_} } split('\|\|') } @flags);
