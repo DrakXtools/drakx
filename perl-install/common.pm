@@ -6,10 +6,11 @@ use diagnostics;
 use strict;
 use run_program;
 use vars qw(@ISA @EXPORT $SECTORSIZE);
+use POSIX qw(setlocale LC_ALL LC_COLLATE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB is_xbox makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_permissions translate unmakedev untranslate);
+@EXPORT = qw($SECTORSIZE N N_ check_for_xserver files_exist formatTime formatXiB is_xbox makedev mandrake_release removeXiBSuffix require_root_capability salt setVirtual set_alternative set_l10n_sort set_permissions translate unmakedev untranslate);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -80,6 +81,17 @@ sub untranslate {
     foreach (@_) { translate($_) eq $s and return $_ }
     die "untranslate failed";
 }
+
+sub set_l10n_sort() {
+    my $collation_locale = $ENV{LC_ALL};
+    if ($collation_locale) {
+        $collation_locale =~ /UTF-8/ or setlocale(LC_ALL, "$collation_locale.UTF-8");
+    } else {
+        $collation_locale = setlocale(LC_COLLATE);
+        $collation_locale =~ /UTF-8/ or setlocale(LC_COLLATE, "$collation_locale.UTF-8");
+    }
+}
+
 
 BEGIN { undef *availableRamMB }
 sub availableRamMB()  { 
