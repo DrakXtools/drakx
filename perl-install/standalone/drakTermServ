@@ -1136,6 +1136,7 @@ sub client_set {
 		if ($default eq "all") {
 			my $inittab = '/etc/initab$$CLIENT$$';
 			$in->ask_warn(N("Warning"), N("All clients will use %s", $inittab));
+			`mv '/etc/inittab\$\$CLIENT\$\$' '/etc/inittab\$\$CLIENT\$\$.fat'` if -f '/etc/inittab$$CLIENT$$';;
 			write_thin_inittab("CLIENT");
 		}
 	} else {
@@ -1149,7 +1150,7 @@ sub client_set {
 		change_gdm_xdmcp("false");
 		log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 		update_hosts_allow("disable");
-		rm_rf('/etc/inittab$$CLIENT$$') if $default eq "all";
+		`mv '/etc/inittab\$\$CLIENT\$\$.fat' '/etc/inittab\$\$CLIENT\$\$'` if $default eq "all" && -f '/etc/inittab$$CLIENT$$.fat';
 	}
 	$clients_set = 1;
 }
