@@ -160,8 +160,12 @@ sub get_hds {
 	    my $handled;
 	    eval {
 		catch_cdie {
-		    partition_table::read($hd); 
-		    compare_with_proc_partitions($hd) if $::isInstall;
+		    partition_table::read($hd);
+		    if (listlength(partition_table::get_normal_parts($hd)) == 0) {
+			$handled = 1 if $handle_die_and_cdie->();
+		    } else {
+			compare_with_proc_partitions($hd) if $::isInstall;
+		    }
 		} sub {
 		    my $err = $@;
 		    if ($handle_die_and_cdie->()) {
