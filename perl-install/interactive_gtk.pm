@@ -405,6 +405,8 @@ sub ask_from_entries_refW {
 	($advanced) = @_;
 	$advanced ? $advanced_pack->show : $advanced_pack->hide;
 	@widgets = (@widgets_always, $advanced ? @widgets_advanced : ());
+	$mainw->sync; #- for $set_all below (mainly for the set of clist)
+	$set_all->(); #- must be done when showing advanced lists (to center selected value)
     };
     my $advanced_button = [ $common->{advanced_label}, sub { $set_advanced->(!$advanced) } ];
 
@@ -430,8 +432,6 @@ sub ask_from_entries_refW {
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
     $mainw->{window}->set_usize(0, min($total_size > 10 ? 350 : 200, $::windowheight - 60)) if $has_scroll;
-    $mainw->sync; #- for $set_all below (mainly for the set of clist)
-    $set_all->();
     $set_advanced->(0);
     (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
