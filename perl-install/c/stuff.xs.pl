@@ -249,8 +249,8 @@ add_partition(hd, part_number, start_sector, size_sector)
   unsigned long size_sector
   CODE:
   {
-    long long start = start_sector * 512;
-    long long size = size_sector * 512;
+    long long start = (long long) start_sector * 512;
+    long long size = (long long) size_sector * 512;
     struct blkpg_partition p = { start, size, part_number, "", "" };
     struct blkpg_ioctl_arg s = { BLKPG_ADD_PARTITION, 0, sizeof(struct blkpg_partition), (void *) &p };
     RETVAL = ioctl(hd, BLKPG, &s) == 0;
