@@ -619,7 +619,7 @@ sub ask_fromW {
 	    $advanced ? $w->show : $w->hide;
 	}	    
 	@widgets = (@widgets_always, if_($advanced, @widgets_advanced));
-	$mainw->sync; #- for $set_all below (mainly for the set of clist)
+	#$mainw->sync; #- for $set_all below (mainly for the set of clist)
 	$first_time = 0;
 	$set_all->(); #- must be done when showing advanced lists (to center selected value)
     };
