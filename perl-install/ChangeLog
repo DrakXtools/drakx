@@ -1,5 +1,45 @@
 2002/02/07  dam's  <damien@mandrakesoft.com>
 
+	* my_gtk.pm: fixed shadow when testing X
+
+2002/02/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/help_xml2pm.pl: fixed email address
+
+2002/02/07  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/smbnfs_gtk.pm: 
+	  - don't pop the "do you want to install samba?"
+	  - rwindow is not a window when embedded, so set_default_size only if
+	possible
+
+	* my_gtk.pm: make perl_checker happy
+	ensure no more than one child is in the Plug
+
+	* interactive.pm: fix (causing XFdrake to use a combo instead of a list)
+
+	* interactive_gtk.pm: fix error causing a bad window sizing when there is
+	a horiz scroll
+	(exit): ensure USR1 is sent to mcc
+
+	* Xconfigurator.pm: allow to edit the hsyncrange and vsyncrange when
+	choosing monitor "Custom"
+
+	* install2.pm, install_steps.pm: create and use miscellaneousAfter (so
+	that SECURE_LEVEL is set *after* asking)
+
+	* diskdrake/interactive.pm (Options): wrap the help text
+
+	* standalone/diskdrake: handle --embedded xxx xxx
+
+2002/02/07  tvignaud
+
+	* standalone/drakxtv, Makefile.config: add drakxtv (scantv gui)
+
+	* standalone/localedrake: fix pixel stuff: don't restart wm on cancel
+
+2002/02/07  dam's  <damien@mandrakesoft.com>
+
 	* share/logo-mandrake.png: beta 2
 
 	* printerdrake.pm: corrected wizard pb
