@@ -37,6 +37,7 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
+$::expert = "@ARGV" =~ /--expert/;
 $::isEmbedded or $::isWizard=1;
 $::Wizard_pix_up = "wiz_draknet.png";
 $::Wizard_title = "Network & Internet Configuration";
