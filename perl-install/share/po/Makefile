@@ -25,7 +25,7 @@ $(PMSCFILES): %_.c: %
 
 $(POFILES): DrakX.pot
 	perl -ne 'print unless /^#.*\Qdrakx-help.xml/ .. /^$$/' $@ > $@t
-	if [ -e help-$@t ]; then msgmerge -C help-$@t $@t $< > $@; else msgmerge $@t $< > $@; fi
+	if [ -e help-$@t ]; then perl -pe 's|^#~ ||' -i $@t ; msgmerge -C $@t help-$@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
 DrakX.pot: $(PMSFILES)
