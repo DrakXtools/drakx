@@ -94,8 +94,8 @@ arch() =~ /^sparc/ ? (
   "af_packet" => "packet socket",
   "nfs" => "Network File System (nfs)",
   "lockd" => "lockd",
-  "parport" => "parport",
-  "parport_pc" => "parport_pc",
+# was needed by plip  "parport" => "parport",
+# was needed by plip  "parport_pc" => "parport_pc",
   "sunrpc" => "sunrpc",
 }],
 [ 'isdn', {
@@ -163,8 +163,8 @@ arch() =~ /^sparc/ ? (
   "eata" => "EATA SCSI PM2x24/PM3224",
   "eata_pio" => "EATA PIO Adapters",
   "eata_dma" => "EATA DMA Adapters",
-  "ppa" => "Iomega PPA3 (parallel port Zip)",
-  "imm" => "Iomega Zip (new driver)",
+# really needed??  "ppa" => "Iomega PPA3 (parallel port Zip)",
+# really needed??  "imm" => "Iomega Zip (new driver)",
 ),
 }],
 [ 'disk_raw', {

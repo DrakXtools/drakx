@@ -6,6 +6,24 @@ function f() {
     v=`perl -Iperl-install -Mmodules -e "print qq(\\$_.o\n) foreach modules::module_of_type__4update_kernel(\"$1\")"` 
 }
 
+function create_marfile() {
+    marfile=$1
+    shift
+    for i in $*
+    do
+	j=`basename $i .o`
+        needed=`cat modules.dep | perl -ne "print "'$1'" if /^$j: (.*)/"`
+        for k in $needed
+	do
+	    [ -z "`echo $* | grep $k`" ] \
+              && [ -z "`echo $PCMCIA_INSTALLMODULES | grep $k`" ] \
+              && echo "WARNING! in $marfile, $k is missing (required by $i)"
+        done
+    done
+    ../mdk-stage1/mar/mar -c $marfile $*
+}
+
+
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
 f "scsi" ; SCSI_DRIVERS=$v
@@ -17,13 +35,13 @@ f "big net_raw cdrom_raw scsi_raw disk_raw" ; BIG_DRIVERS=$v
 f "pcmcia net cdrom scsi disk keepbig" ; ALL_DRIVERS=$v
 [ $ARCH == "i386" ] && FSMODULES="vfat.o fat.o"
 
-NETWORK_MODULES="  $FSMODULES $NETWORK_DRIVERS"
-CDROM_MODULES="    $FSMODULES $CD_DRIVERS"
-HD_MODULES="       $FSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o"
-HDREISER_MODULES=" $FSMODULES $SCSI_DRIVERS loop.o isofs.o" # reiserfs.o   <-- currently unsupported in kernel-boot-2.4
+NETWORK_MODULES="  $FSMODULES $NETWORK_DRIVERS isa-pnp.o"
+CDROM_MODULES="    $FSMODULES $CD_DRIVERS isa-pnp.o"
+HD_MODULES="       $FSMODULES $SCSI_DRIVERS $DISK_DRIVERS loop.o isofs.o isa-pnp.o"
+HDREISER_MODULES=" $FSMODULES $SCSI_DRIVERS loop.o isofs.o isa-pnp.o" # reiserfs.o   <-- currently unsupported in kernel-boot-2.4
 PCMCIA_MODULES="   $FSMODULES $PCMCIA_DRIVERS"
-BIG_MODULES="      $FSMODULES $BIG_DRIVERS"
-ALL_MODULES="      $FSMODULES $ALL_DRIVERS " # reiserfs.o   <-- currently unsupported in kernel-boot-2.4
+BIG_MODULES="      $FSMODULES $BIG_DRIVERS isa-pnp.o"
+ALL_MODULES="      $FSMODULES $ALL_DRIVERS isa-pnp.o" # reiserfs.o   <-- currently unsupported in kernel-boot-2.4
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
@@ -46,13 +64,13 @@ rm -rf modules ; install -d modules
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
     ls *.o               | packdrake -b9s modules.cz 400000
     ls *.o               | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
-    ../mdk-stage1/mar/mar -c network_modules.mar  $NETWORK_MODULES
-    ../mdk-stage1/mar/mar -c cdrom_modules.mar    $CDROM_MODULES
-    ../mdk-stage1/mar/mar -c hd_modules.mar       $HD_MODULES
-    ../mdk-stage1/mar/mar -c hdreiser_modules.mar $HDREISER_MODULES
-    ../mdk-stage1/mar/mar -c pcmcia_modules.mar   $PCMCIA_MODULES
-    ../mdk-stage1/mar/mar -c other_modules.mar    $BIG_MODULES
-    ../mdk-stage1/mar/mar -c all_modules.mar      $ALL_MODULES
+    create_marfile network_modules.mar  $NETWORK_MODULES
+    create_marfile cdrom_modules.mar    $CDROM_MODULES
+    create_marfile hd_modules.mar       $HD_MODULES
+    create_marfile hdreiser_modules.mar $HDREISER_MODULES
+    create_marfile pcmcia_modules.mar   $PCMCIA_MODULES
+    create_marfile other_modules.mar    $BIG_MODULES
+    create_marfile all_modules.mar      $ALL_MODULES
 [ "$ARCH" == "i386" ] && {
     cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
 }
