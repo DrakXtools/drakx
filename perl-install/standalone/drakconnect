@@ -42,10 +42,8 @@ use network::adsl;
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file);
 use POSIX ":sys_wait_h";
 
-my $xpm_path = "/usr/share/libDrakX/pixmaps";
-
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
-my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
+#my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
 
 my $in = 'interactive'->vnew('su');
 if ($in->isa('interactive::gtk')) {
@@ -90,7 +88,7 @@ $window1->{rwindow}->set_border_width(10);
 
 my $warning_label1;
 
-my ($lan_button, $wiz_button, $int_button, $host_button, $button_apply);
+my ($lan_button, $host_button, $button_apply);
 
 
 my $hostname = chomp_(`hostname`);
@@ -129,7 +127,7 @@ $list->signal_connect(button_press_event => sub {
 
 update_list();
 
-my ($label_host, $int_state, $button_expert);
+my ($label_host, $int_state);
 
 
 $window1->{window}->add(
