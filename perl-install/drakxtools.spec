@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 12mdk
+Release: 14mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Sep 17 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-13mdk
+- diskdrake: (pixel)
+  o fix writting wrong types in fstab
+  o fix handling of mount points with underscoresb (#5728)
+  o do not check current partition for already used mount point
+- drakauth : fix NIS managment (#5668) (pixel)
+- drakhelp: load online drakbug help (daouda)
+- draksound: (#5403)
+  o make sure to use OptionMenu instead of Combo boxes
+  o move help into a tooltip
+- package installation: ensure rpmdb is closed (fpons)
+
 * Tue Sep 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-12mdk
 - diskdrake: (pixel)
   o fix growing ext2/ext3 partitions
