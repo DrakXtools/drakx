@@ -972,31 +972,31 @@ sub write_lilo {
 
     push @conf, map_each { "disk=$::a bios=$::b" } %{$bootloader->{bios}};
 
-    foreach (@{$bootloader->{entries}}) {
-	push @conf, "$_->{type}=" . $file2fullname->($_->{kernel_or_dev});
+    foreach my $entry (@{$bootloader->{entries}}) {
+	push @conf, "$entry->{type}=" . $file2fullname->($entry->{kernel_or_dev});
 	my @entry_conf;
-	push @entry_conf, "label=" . make_label_lilo_compatible($_->{label});
+	push @entry_conf, "label=" . make_label_lilo_compatible($entry->{label});
 
-	if ($_->{type} eq "image") {		
-	    push @entry_conf, "root=$_->{root}" if $_->{root};
-	    push @entry_conf, "initrd=" . $file2fullname->($_->{initrd}) if $_->{initrd};
-	    push @entry_conf, qq(append="$_->{append}") if $_->{append};
-	    push @entry_conf, "vga=$_->{vga}" if $_->{vga};
-	    push @entry_conf, $_->{'read-write'} ? "read-write" : "read-only";
+	if ($entry->{type} eq "image") {		
+	    push @entry_conf, "root=$entry->{root}" if $entry->{root};
+	    push @entry_conf, "initrd=" . $file2fullname->($entry->{initrd}) if $entry->{initrd};
+	    push @entry_conf, qq(append="$entry->{append}") if $entry->{append};
+	    push @entry_conf, "vga=$entry->{vga}" if $entry->{vga};
+	    push @entry_conf, $entry->{'read-write'} ? "read-write" : "read-only";
 	} else {
-	    push @entry_conf, "table=$_->{table}" if $_->{table};
-	    push @entry_conf, "unsafe" if $_->{unsafe} && !$_->{table};
+	    push @entry_conf, "table=$entry->{table}" if $entry->{table};
+	    push @entry_conf, "unsafe" if $entry->{unsafe} && !$entry->{table};
 		
-	    if ($_->{table}) {
-		my $hd = fs::device2part($_->{table}, $hds);
+	    if ($entry->{table}) {
+		my $hd = fs::device2part($entry->{table}, $hds);
 		if ($hd != $sorted_hds[0]) {		       
 		    #- boot off the nth drive, so reverse the BIOS maps
 		    my $nb = sprintf("0x%x", 0x80 + (find_index { $hd == $_ } @sorted_hds));
-		    $_->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
+		    $entry->{mapdrive} ||= { '0x80' => $nb, $nb => '0x80' }; 
 		}
 	    }
-	    if ($_->{mapdrive}) {
-		push @entry_conf, map_each { "map-drive=$::a", "   to=$::b" } %{$_->{mapdrive}};
+	    if ($entry->{mapdrive}) {
+		push @entry_conf, map_each { "map-drive=$::a", "   to=$::b" } %{$entry->{mapdrive}};
 	    }
 	}
 	push @conf, map { "\t$_" } @entry_conf;
