@@ -288,9 +288,8 @@ sub prepare_write_fstab {
 	    # handle bloody supermount special case
 	    if ($options =~ /supermount/) {
 		my @l = grep { $_ ne 'supermount' } split(',', $options);
-		my @l1 = grep { member($_, 'ro', 'exec') } @l;
-		my @l2 = difference2(\@l, \@l1);
-		$options = join(",", "dev=$dev", "fs=$fs_type", @l1, if_(@l2, '--', @l2));
+		my ($l1, $l2) = partition { member($_, 'ro', 'exec') } @l;
+		$options = join(",", "dev=$dev", "fs=$fs_type", @$l1, if_(@$l2, '--', @$l2));
 		($dev, $fs_type) = ('none', 'supermount');
 	    } else {
 		#- if we were using supermount, the type could be something like ext2:vfat
