@@ -393,6 +393,25 @@ int mandrake_move_post(void)
         char buf[5000];
         int fd;
         char rootdev[] = "0x0100"; 
+        int real_is_symlink_to_raw = 0;
+
+        if (!access(IMAGE_LOCATION "/move/symlinks", R_OK)) {
+                log_message("move: seems we don't use a cloop since " IMAGE_LOCATION "/move/symlinks is here");
+                if (scall(symlink(IMAGE_LOCATION, IMAGE_LOCATION_REAL), "symlink"))
+                        return RETURN_ERROR;
+                real_is_symlink_to_raw = 1;
+        } else {
+                if (access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
+                        log_message("move: panic, " IMAGE_LOCATION "/move/symlinks isn't here but " IMAGE_LOCATION "/live_tree.clp neither");
+                        return RETURN_ERROR;
+                } else {
+                        my_insmod("cloop", ANY_DRIVER_TYPE, "file=" IMAGE_LOCATION "/live_tree.clp");
+                        if (scall(mknod("/dev/cloop0", S_IFBLK | 0600, makedev(240, 0)), "mknod"))
+                                return RETURN_ERROR;
+                        if (my_mount("/dev/cloop0", IMAGE_LOCATION_REAL, "iso9660", 0))
+                                stg1_error_message("Could not mount compressed loopback :(.");
+                }
+        }
 
         if (scall(!(f = fopen(IMAGE_LOCATION_REAL "/move/symlinks", "rb")), "fopen"))
                 return RETURN_ERROR;
@@ -424,6 +443,13 @@ int mandrake_move_post(void)
         }
         fclose(f);
 
+        if (real_is_symlink_to_raw) {
+                if (scall(unlink(IMAGE_LOCATION_REAL), "unlink"))
+                        return RETURN_ERROR;
+                if (scall(symlink(RAW_LOCATION_REL, IMAGE_LOCATION_REAL), "symlink"))
+                        return RETURN_ERROR;
+        }
+                
         log_message("move: pivot_rooting");
         // trick so that kernel won't try to mount the root device when initrd exits
         if (scall((fd = open("/proc/sys/kernel/real-root-dev", O_WRONLY)) < 0, "open"))
