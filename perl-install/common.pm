@@ -2,7 +2,7 @@ package common; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int $cancel $SECTORSIZE %compat_arch);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int $SECTORSIZE %compat_arch);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -57,8 +57,8 @@ sub _ {
 }
 #-delete $main::{'_'};
 sub __ { $_[0] }
-sub even($) { $_[0] % 2 == 0 }
-sub odd($)  { $_[0] % 2 == 1 }
+sub even { $_[0] % 2 == 0 }
+sub odd  { $_[0] % 2 == 1 }
 sub min { fold_left { $a < $b ? $a : $b } @_ }
 sub max { fold_left { $a > $b ? $a : $b } @_ }
 sub sum { fold_left { $a + $b } @_ }
@@ -74,13 +74,13 @@ sub uniq { my %l; @l{@_} = (); keys %l }
 sub to_int { $_[0] =~ /(\d*)/; $1 }
 sub to_float { $_[0] =~ /(\d*(\.\d*)?)/; $1 }
 sub ikeys { my %l = @_; sort { $a <=> $b } keys %l }
-sub add2hash($$)  { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } $a }
-sub add2hash_($$) { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { exists $a->{$k} or $a->{$k} = $v } $a }
-sub put_in_hash($$) { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} = $v } $a }
+sub add2hash  { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } $a }
+sub add2hash_ { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { exists $a->{$k} or $a->{$k} = $v } $a }
+sub put_in_hash { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} = $v } $a }
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
-sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }
-sub basename { @_ == 1 or die "usage: basename <name>\n"; local $_ = shift; s|/*\s*$||; s|.*/||; $_ }
-sub bool($) { $_[0] ? 1 : 0 }
+sub dirname { @_ == 1 or die "usage: dirname <name>\n" . backtrace(); local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }
+sub basename { @_ == 1 or die "usage: basename <name>\n" . backtrace(); local $_ = shift; s|/*\s*$||; s|.*/||; $_ }
+sub bool { @_ == 1 or die "usage: bool(<scalar>)\n" . backtrace(); $_[0] ? 1 : 0 }
 sub invbool { my $a = shift; $$a = !$$a; $$a }
 sub listlength { scalar @_ }
 sub bool2text { $_[0] ? "true" : "false" }
@@ -143,13 +143,13 @@ sub expand_symlinks {
 
 sub may_apply { $_[0] ? $_[0]->($_[1]) : (@_ > 2 ? $_[2] : $_[1]) }
 
-sub if_($@) {
+sub if_ {
     my $b = shift;
     $b or return ();
     wantarray || @_ <= 1 or die("if_ called in scalar context with more than one argument " . join(":", caller()));
     wantarray ? @_ : $_[0];
 }
-sub if__($@) {
+sub if__ {
     my $b = shift;
     defined $b or return ();
     wantarray || @_ <= 1 or die("if_ called in scalar context with more than one argument " . join(":", caller()));
@@ -263,7 +263,7 @@ sub catch_cdie(&&) {
     &$f();
 }
 
-sub cdie($;&) {
+sub cdie {
     my ($err, $f) = @_;
     foreach (@common::cdie_catches) {
 	$@ = $err;
@@ -301,7 +301,7 @@ sub syscall_ {
     syscall(&{$common::{"SYS_$f"}}, @_) == 0;
 }
 
-sub salt($) {
+sub salt {
     my ($nb) = @_;
     require devices;
     open F, devices::make("random") or die "missing random";
@@ -333,13 +333,13 @@ sub translate {
     c::dgettext('libDrakX', $s);
 }
 
-sub untranslate($@) {
+sub untranslate {
     my $s = shift || return;
     foreach (@_) { translate($_) eq $s and return $_ }
     die "untranslate failed";
 }
 
-sub warp_text($;$) {
+sub warp_text {
     my ($text, $width) = @_;
     $width ||= 80;
 
@@ -359,7 +359,7 @@ sub warp_text($;$) {
     @l;
 }
 
-sub formatAlaTeX($) {
+sub formatAlaTeX {
     my ($t, $tmp);
     foreach (split "\n", $_[0]) {
 	if (/^$/) {
@@ -372,7 +372,7 @@ sub formatAlaTeX($) {
     $t . ($t && $tmp && "\n") . $tmp;
 }
 
-sub formatLines($) {
+sub formatLines {
     my ($t, $tmp);
     foreach (split "\n", $_[0]) {
 	if (/^\s/) {
@@ -385,7 +385,7 @@ sub formatLines($) {
     "$t$tmp\n";
 }
 
-sub getVarsFromSh($) {
+sub getVarsFromSh {
     my %l;
     local *F; open F, $_[0] or return;
     local $_;
@@ -502,7 +502,7 @@ sub bestMatchSentence {
     wantarray ? ($bestSentence, $best) : $bestSentence;
 }
 
-sub typeFromMagic($@) {
+sub typeFromMagic {
     my $f = shift;
     local *F; sysopen F, $f, 0 or return;
 
@@ -529,7 +529,7 @@ sub availableRamMB()  {
     $s;
 }
 
-sub setVirtual($) {
+sub setVirtual {
     my $vt = '';
     local *C;
     sysopen C, "/dev/console", 2 or die "failed to open /dev/console: $!";
@@ -540,7 +540,7 @@ sub setVirtual($) {
 }
 
 
-sub removeXiBSuffix($) {
+sub removeXiBSuffix {
     local $_ = shift;
 
     /(\d+)\s*kB?$/i and return $1 * 1024;
