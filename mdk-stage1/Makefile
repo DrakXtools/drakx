@@ -116,14 +116,8 @@ STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
 endif
 endif
 
-ifdef MOVE
-MOVE_ADDSRC = lomount.c
-else
-MOVE_ADDSRC =
-endif
-
  #- stage1 itself
-STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c $(MOVE_ADDSRC)
+STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c directory.c lomount.c
 NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c lomount.c
@@ -167,11 +161,13 @@ endif
 
 BINS = init init-stage2 stage1-full
 
+ifndef MOVE
 ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-network
 endif
 ifeq (x86_64, $(ARCH))
 BINS += stage1-cdrom stage1-network
+endif
 endif
 
 ifeq (i386, $(ARCH))
