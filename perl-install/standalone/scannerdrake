@@ -76,6 +76,7 @@ sub removeverticalbar {
 sub auto {
     my $changed = 0;
     foreach (@f) {
+	my $c = 0;
 	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; # some HP entries have a trailing space, i will correct usbtable asap
@@ -84,23 +85,24 @@ sub auto {
 		next;
 	    }
 	    if ($in->ask_yesorno('Scannerdrake',N("%s found on %s, configure it automatically?",removeverticalbar($name),$_->{port}),1)) {
-		$changed ||= (tryConfScanner($name, $_->{port}, 
-					     $_->{val}{vendor},
-					     $_->{val}{id}) or 
-			      manual($_->{port}, $_->{val}{vendor},
-				     $_->{val}{id}, $name));
+		$c = (tryConfScanner($name, $_->{port}, 
+				     $_->{val}{vendor},
+				     $_->{val}{id}) or 
+		      manual($_->{port}, $_->{val}{vendor},
+			     $_->{val}{id}, $name));
 	    } else {
-		$changed ||= manual($_->{port}, $_->{val}{vendor},
-				    $_->{val}{id}, $name);
+		$c = manual($_->{port}, $_->{val}{vendor},
+			    $_->{val}{id}, $name);
 	    }
 	} else {
 	    $in->ask_yesorno('Scannerdrake',
 			     N("%s is not in the scanner database, configure it manually?", 
 			       removeverticalbar($_->{val}{DESCRIPTION})),1)
-		and ($changed ||=
+		and ($c =
 		     manual($_->{port}, $_->{val}{vendor}, $_->{val}{id},
 			    $_->{val}{DESCRIPTION}));
 	}
+	$changed ||= $c;
     }
     return $changed;
 }
