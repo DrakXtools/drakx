@@ -587,7 +587,7 @@ sub font_choice() {
     my $file_dialog;
     $select_font_msg = N("Select the font file or directory and click on 'Add'");
     $file_dialog = Gtk2::FileSelection->new(N("File Selection"));
-    $file_dialog->signal_connect(delete_event => sub { print "DESTROY\n"; $file_dialog->response('close') });
+    $file_dialog->signal_connect(delete_event => sub { $file_dialog->response('close') });
     $file_dialog->ok_button->signal_connect(clicked => \&file_ok_sel, $file_dialog);
     $file_dialog->ok_button->set_label(N("Add"));
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->response('cancel') });
