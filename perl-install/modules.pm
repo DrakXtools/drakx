@@ -538,9 +538,9 @@ sub load_thiskind($;&$) {
     if ($type eq 'scsi') {
 	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
 
-	#- probe for USB SCSI.
+	#- probe for USB SCSI, make sure keyboard is allowed.
 	if (my ($c) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
-	    eval { load($c, "SERIAL_USB"); load("usb-storage", $type); sleep(1); };
+	    eval { load($c, "SERIAL_USB"); load("usb-storage", $type); load("usbkbd"); load("keybdev"); sleep(1); };
 	    -d "/proc/scsi/usb" or unload("usb-storage");
 	}
 	#- probe for parport SCSI.
