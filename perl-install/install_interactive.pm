@@ -154,7 +154,7 @@ sub partitionWizardSolutions {
 		$@ and die N("The FAT resizer is unable to handle your partition, 
 the following error occured: %s", $@);
 		my $min_win = do {
-		    my $w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
+		    my $_w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
 		    $resize_fat->min_size;
 		};
 		#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,

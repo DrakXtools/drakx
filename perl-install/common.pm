@@ -258,7 +258,7 @@ sub require_root_capability {
 
 sub check_for_xserver {
     if (!defined $::xtest) {
-        $::xtest = $ENV{DISPLAY} && (system('/usr/X11R6/bin/xtest') == 0);
+        $::xtest = $ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0;
     }
     return $::xtest;
 }
