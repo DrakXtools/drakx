@@ -36,7 +36,7 @@ my %sanity_check =
   );
 
 foreach $type (keys %t) {
-    print STDERR $type;
+    print STDERR "$type (checks: ", join('/', @{$sanity_check{$type}}), ") ";
     my @modulez;
     foreach $floppy (@{$t{$type}}) {
 	foreach $marfile (glob("../../all.modules/*/${floppy}_modules.mar")) {
