@@ -629,8 +629,13 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
                 stg1_error_message("Fatal error when launching Mandrake Move.");
 #endif
 
-	if (shell_pid != 0)
+	if (shell_pid != 0) {
+                int fd;
 		kill(shell_pid, 9);
+		fd = open("/dev/tty2", O_RDWR);
+                write(fd, "Killed\n", 7);
+                close(fd);
+        }
 
 	finish_frontend();
 	close_log();

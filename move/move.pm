@@ -589,6 +589,7 @@ sub install2::startMove {
 
     #- password in screensaver doesn't make sense if we keep the shell
     kill 9, cat_('/var/run/drakx_shell.pid');
+    output('/dev/tty2', "Killed\n");
 
     if (fork()) {
 	sleep 1;
