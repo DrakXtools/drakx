@@ -197,8 +197,8 @@ gtkadd($my_win->{window},
                                                       } else { print "CRITICAL: \"$@\"\n" }
 
                                                   })),
-					      gtksignal_connect(new Gtk2::Button(N("Save")), clicked => \&save),
-					      gtksignal_connect(new Gtk2::Button($::isEmbedded ? N("Cancel") : N("Quit")), clicked => \&quit)
+					      gtksignal_connect(Gtk2::Button->new_from_stock('gtk-save'), clicked => \&save),
+					      gtksignal_connect(Gtk2::Button->new_from_stock($::isEmbedded ? 'gtk-cancel' : 'gtk-quit'), clicked => \&quit)
 					      )
 		    )
 		)
