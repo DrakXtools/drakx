@@ -700,7 +700,7 @@ sub getAndSaveInstallFloppy {
     if ($postinstall_rpms && -d $postinstall_rpms && -r "$postinstall_rpms/auto_install.img") {
 	log::l("getAndSaveInstallFloppy: using file saved as $postinstall_rpms/auto_install.img");
 	require commands;
-	commands::cp("-f", "$postinstall_rpms/auto_install.img", $where) or return;
+	commands::cp("-f", "$postinstall_rpms/auto_install.img", $where);
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
 	  ${{ disk => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
