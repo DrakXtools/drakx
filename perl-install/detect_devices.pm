@@ -285,6 +285,7 @@ sub whatUsbport() {
     my ($i, $elem, @res) = (0, {});
     foreach (grep { $_->{type} =~ /Printer/ } usb_probe()) {
 	my ($manufacturer, $model) = split '\|', $_->{description};
+	$_->{description} =~ s/Hewlett[-\s_]Packard/HP/;
 	push @res, { port => "/dev/usb/lp$i", val => { CLASS => 'PRINTER',
 						       MODEL => $model,
 						       MANUFACTURER => $manufacturer,
