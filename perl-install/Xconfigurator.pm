@@ -11,7 +11,6 @@ use run_program;
 use Xconfigurator_consts;
 use any;
 use modules;
-use my_gtk qw(:helpers :wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
 
@@ -763,7 +762,7 @@ sub chooseResolutionsGtk($$;$) {
     my ($card, $chosen_depth, $chosen_w) = @_;
 
     require my_gtk;
-    my_gtk->import(qw(:wrappers));
+    my_gtk->import(qw(:helpers :wrappers));
 
     my $W = my_gtk->new(_("Resolution"));
     my %txt2depth = reverse %depths;
