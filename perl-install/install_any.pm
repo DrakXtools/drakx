@@ -311,7 +311,8 @@ sub setPackages {
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
-	    push @{$o->{default_packages}}, pkgs::packageByName($o->{packages}, "locales-$_") || next;
+	    pkgs::packageByName($o->{packages}, "locales-$_") or next;
+	    push @{$o->{default_packages}}, "locales-$_";
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
  
