@@ -77,26 +77,25 @@ sub getinfoFromXF86Config {
 	} elsif (my $s = /^Section "Screen"/ .. /^EndSection/) {
 	    undef $driver if $s == 1;
 	    $driver = $1 if /^\s*Driver\s+"(.*?)"/;
-	    #- print "($driver eq $Xconfigurator::serversdriver{$o->{card}{server}})";
-	    if ($driver eq $Xconfigurator::serversdriver{$o->{card}{server}}) { #- take into account the right screen section for the server.
+	    if ($driver eq $Xconfigurator::serversdriver{$o->{card}{server}}) {
 		$o->{card}{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
 		if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
 		    undef $depth if $i == 1;
 		    $depth = $1 if /^\s*Depth\s+(\d*)/;
 		    if (/^\s*Modes\s+(.*)/) {
 			my $a = 0;
-			push @{$o->{card}{depth}{$depth || 8}},
+			unshift @{$o->{card}{depth}{$depth || 8} ||= []}, #- insert at the beginning for resolution_wanted!
 		            grep { $_->[0] >= 640 } map { [ /"(\d+)x(\d+)"/ ] } split ' ', $1;
 		    }
 		}
 	    }
 	}
     }
-    #- get the default resolution.
+    #- get the default resolution according the the current file.
     my @depth = keys %{$o->{card}{depth}};
     $o->{resolution_wanted} ||=
-      $o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][0] . "x" .
-	$o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][1];
+      ($o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][0]) . "x" .
+	($o->{card}{depth}{$o->{card}{default_depth} || $depth[0]}[0][1]);
     $o;
 }
 

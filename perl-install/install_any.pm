@@ -394,9 +394,14 @@ sub setupFB {
     #- with the right mode, nothing more to do.
     foreach (qw(secure smp)) {
 	if ($o->{bootloader}{entries}{"/boot/vmlinuz-$_"}) {
-	    $o->{bootloader}{entries}{"/boot/vmlinuz-$_"}{vga} = $vga;
-	    lilo::install($o->{prefix}, $o->{bootloader});
-	    return 1;
+	    if ($_ eq 'secure') {
+		log::l("warning: kernel-secure is not fb, using a kernel-fb instead");
+		#- nothing done, fall through linux-fb.
+	    } else {
+		$o->{bootloader}{entries}{"/boot/vmlinuz-$_"}{vga} = $vga;
+		lilo::install($o->{prefix}, $o->{bootloader});
+		return 1;
+	    }
 	}
     }
     my $root = $o->{bootloader}{entries}{'/boot/vmlinuz'}{root};
