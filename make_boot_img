@@ -489,7 +489,7 @@ sub isolinux {
     }
     if (-e "isolinux-graphic.bmp") {
 	#- change here for newer picture isolinux-graphic.bmp and newer parameters.
-	_ "lilo-bmp2mdk mode:0x103 progress:425,173,16,14,64+2 clear:600,800,64+2 pos:0,0 <isolinux-graphic.bmp >isolinux/boot.msg";
+	_ "lilo-bmp2mdk mode:0x103 progress:425,173,16,11,64+2 clear:600,800,64+2 pos:0,0 <isolinux-graphic.bmp >isolinux/boot.msg";
     }
     _ "cp /usr/lib/syslinux/isolinux$debug.bin isolinux/isolinux.bin";
     output "isolinux/isolinux.cfg", "
