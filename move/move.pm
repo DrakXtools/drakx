@@ -206,8 +206,14 @@ sub init {
     install_steps::setupSCSI($o);
     run_program::run('sysctl', '-w', 'kernel.hotplug=/sbin/hotplug');
 
-    key_mount($o);
-    cat_('/proc/cmdline') =~ /\bcleankey\b/ and eval { rm_rf $key_sysconf, glob_('/home/.mdkmove*') };
+    if (cat_('/proc/cmdline') =~ /\bformatkey\b/) {
+	#- waiting until X is launched
+    } else {
+	key_mount($o);
+    }
+    if (cat_('/proc/cmdline') =~ /\bcleankey\b/) {
+	eval { rm_rf $key_sysconf, glob_('/home/.mdkmove*') };
+    }
     key_installfiles('simple');
     setup_userconf($o);
     if (-f '/etc/X11/X') {
@@ -278,6 +284,22 @@ sub handleI18NClp {
     log::l("move: handleI18NClp (lang=$lang, clp_name=$clp_name)");
     lomount_clp($clp_name, '/usr');
     lomount_clp("always_$clp_name", '/usr');
+}
+
+sub clean_partition_table_and_format_key {
+    my ($in) = @_;
+    my @keys = grep { detect_devices::isKeyUsb($_) } detect_devices::getSCSI();
+    my $key = $in->ask_from_listf('', "Which key?",
+				 sub { "$_->{usb_description} ($_->{device})" },
+				 \@keys);
+    $key->{prefix} ||= $key->{device};
+    add2hash_($key, partition_table::raw::get_geometry($key->{file} = devices::make($key->{device})));
+    partition_table::raw::zero_MBR($key);
+    my ($part) = partition_table::get_normal_parts_and_holes($key);
+    $part->{type} = 0xb;
+    partition_table::add($key, $part);
+    partition_table::write($key);
+    fs::real_format_part($part);	
 }
 
 sub key_parts {
@@ -478,6 +500,11 @@ sub install2::verifyKey {
     my $o = $::o;
 
     log::l("automatic transparent key support is disabled"), return if $key_disabled;
+
+    if (cat_('/proc/cmdline') =~ /\bformatkey\b/) {
+	clean_partition_table_and_format_key($o);
+	key_mount($o, 'reread');
+    }
 
     check_key($o) or return;
 
