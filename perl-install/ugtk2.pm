@@ -498,7 +498,7 @@ sub create_packtable {
 sub create_okcancel {
     my ($w, $o_ok, $o_cancel, $o_spread, @other) = @_;
     # @other is a list of extra buttons (usually help (eg: XFdrake/drakx caller) or advanced (eg: interactive caller) button)
-    # extra buttons have the following structure [ label, handler, is_first ]
+    # extra buttons have the following structure [ label, handler, is_first, pack_right ]
     local $::isWizard = $::isWizard && !$w->{pop_it};
     my $cancel;
     if (defined $o_cancel || defined $o_ok) {
@@ -514,22 +514,23 @@ sub create_okcancel {
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     }
     $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
-    my @l2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
-    my @r2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
+    my $f = sub { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[3]) };
+    my @left  = ((map { $f->($_) } grep {  $_->[2] && !$_->[3] } @other),
+                  map { $f->($_) } grep { !$_->[2] && !$_->[3] } @other);
+    my @right = ((map { $f->($_) } grep {  $_->[2] &&  $_->[3] } @other),
+                  map { $f->($_) } grep { !$_->[2] &&  $_->[3] } @other);
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
     # but in the installer where all windows run in wizard mode because of design even when not in a wizard step
-    my @extras = (@l2, @r2);
-    $bprev = Gtk2::Label->new if !$cancel && $::Wizard_no_previous && !@extras;
-    my (@first, @last); # buttons lists
+    $bprev = Gtk2::Label->new if !$cancel && $::Wizard_no_previous && !@left && !@right;
     if ($::isWizard) {
-        # wizard mode: order is cancel/extras/white/prev/next
-        @first = (if_(!$::isInstall, $w->{wizcancel}), @extras);
-        @last = ($bprev, $bok);
+        # wizard mode: order is cancel/left_extras/white/right_extras/prev/next
+        unshift @left, $w->{wizcancel} if !$::isInstall;
+        push @right, $bprev, $bok;
     } else { 
-        # normal mode: cancel/ok button follow current desktop's HIG
-        my @extras = (@l2, @r2, if_($ok && $cancel, Gtk2::Label->new)); # space buttons but if there's only one
-        @first = ($bprev, @extras);
-        @last = ($bok);
+        # normal mode: cancel/ok button follow GNOME's HIG
+        unshift @left, $bprev;
+        push @left, Gtk2::Label->new if $ok && $cancel; # space buttons but if there's only one button
+        push @right, $bok;
     }
 
     gtkpack(Gtk2::VBox->new,
@@ -543,8 +544,8 @@ sub create_okcancel {
                                     $_;
                                 } grep { $_ } @{$_->[0]})
                                )
-                    } ([ \@first, 'start' ],
-                       [ \@last,  'end' ],
+                    } ([ \@left, 'start' ],
+                       [ \@right,  'end' ],
                       )
                     )
                    ),
