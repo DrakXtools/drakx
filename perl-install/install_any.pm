@@ -131,7 +131,7 @@ sub getFile {
 	    #- handling changing a media when some of the file on the first CD has been copied
 	    #- to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
-	    $f2 = "/tmp/rhimage/$rel" unless -e $f2;
+	    $f2 = "/tmp/rhimage/$rel" unless $postinstall_rpms && -e $f2;
 	    log::l("local getFile $f2");
 	    open GETFILE, $f2 and *GETFILE;
 	}

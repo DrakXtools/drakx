@@ -579,6 +579,7 @@ sub bug {
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
       header("pcmcia: stab"), cat_("/var/run/stab"),
+      header("usb"), cat_("/proc/bus/usb/devices"),
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog"),

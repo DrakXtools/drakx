@@ -18,11 +18,11 @@ use modules;
 
 
 sub tellAboutProprietaryModules {
-    my ($o);
+    my ($o) = @_;
     my @l = grep {$_} map { $_->{driver} =~ /^Bad:(.*)/ && $1 } detect_devices::probeall();
     $o->ask_warn('', 
 _("Some hardware on your computer needs ``proprietary'' drivers to work.
-You can find some information about them at: %s"), join(", ", @l)) if @l;
+You can find some information about them at: %s", join(", ", @l))) if @l;
 }
 
 sub partition_with_diskdrake {

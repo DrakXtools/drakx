@@ -50,9 +50,7 @@ sub initrd {
     my ($mnt, $img) = @_;
     my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
     my $tmp = "$ENV{HOME}/tmp/initrd";
-    my $tar = "$instdir/install1_$type.$arch.tar.bz2";
-    -e $tar or $tar = "$instdir/install1.$arch.tar.bz2";
-    -e $tar or $tar = "$instdir/install1.tar.bz2";
+    my $tar = "$instdir/install1.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
@@ -63,6 +61,12 @@ sub initrd {
     install_s("$instdir/installinit/init", "$mnt/sbin");
     install_s("$instdir/$install", "$mnt/sbin/install");
 
+    if ($type eq "pcmcia") {
+	unlink "$mnt/sbin/sh";
+	_ "$sudo cp -a tools/$arch/sh $mnt/sbin";
+	_ "$sudo cp -a /etc/pcmcia $mnt/etc";
+	_ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
+    }
     _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
     _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz" if $type !~ /blank/;
     _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
