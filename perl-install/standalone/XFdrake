@@ -52,5 +52,5 @@ system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
 Xconfig::getinfo($i);
 
-Xconfigurator::main('', $i, $in, 0, -e "/etc/pcmcia", \&standalone::pkgs_install);
+Xconfigurator::main('', $i, $in, 0, \&standalone::pkgs_install);
 $in->exit(0);

@@ -141,7 +141,7 @@ Gtk->main;
 
 dd:
 
-netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", sub {});#\&standalone::pkgs_install);
+netconnect::intro('', $netcnx, $in, sub {});#\&standalone::pkgs_install);
 $in->exit(0);
 
 sub configure_net {
