@@ -247,9 +247,12 @@ sub ask_from_entries_refH_powered_normalize {
 
     #- don't display empty lists and one element lists
     @$l = grep { 
-	my $b = $_->{list} && $_->{not_edit};
-	#@{$_->{list}} == () and die 'ask_from_list: empty list';
-	!($b && @{$_->{list}} <= 1);
+	if ($_->{list} && $_->{not_edit}) {
+	    @{$_->{list}} == () and die 'ask_from_list: empty list';
+	    @{$_->{list}} > 1;
+	} else {
+	    1;
+	}
     } @$l;
 
     $common->{advanced_label} ||= _("Advanced");
@@ -261,6 +264,7 @@ sub ask_from_entries_refH_powered_normalize {
 sub ask_from_entries_refH_powered {
     my ($o, $common, $l) = @_;
     ask_from_entries_refH_powered_normalize($o, $common, $l);
+
     @$l or return 1;
     $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
 }
