@@ -7,8 +7,7 @@ use log;
 
 #- key: lang name (locale name for some (~5) special cases needing
 #-      extra distinctions)
-#- [0]: language name (localized, used for sorting, the display is done
-#-      with a lang-%s.png image, with %s being the key)
+#- [0]: lang name in english
 #- [1]: transliterated locale name in the locale name (used for sorting)
 #- [2]: default locale name to use for that language if there isn't
 #-      an existing locale for the combination language+country choosen
