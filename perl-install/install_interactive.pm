@@ -31,10 +31,10 @@ sub partition_with_diskdrake {
     $o->set_help('partition_with_diskdrake');
     do {
 	$ok = 1;
-	require diskdrake_interactive;
+	require diskdrake::interactive;
 	{
 	    local $::expert = $::expert;
-	    diskdrake_interactive::main($o, $all_hds, $nowizard);
+	    diskdrake::interactive::main($o, $all_hds, $nowizard);
 	}
 	if (delete $o->{wizard}) {
 	    partitionWizard($o, 'nodiskdrake') or redo;

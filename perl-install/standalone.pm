@@ -63,7 +63,7 @@ sub explanations { c::syslog(c::LOG_INFO()|c::LOG_LOCAL1(), "@_") }
 
 @common_functs = qw(renamef linkf symlinkf output substInFile mkdir_p rm_rf cp_af touch setVarsInSh setVarsInCsh update_gnomekderc);
 @builtin_functs = qw(chmod chown unlink link symlink rename system);
-@drakx_modules = qw(Xconfig Xconfigurator Xconfigurator_consts any bootloader bootlook c class_discard commands crypto detect_devices devices diskdrake diskdrake_interactive fs fsedit http keyboard lang log loopback lvm modparm modules mouse my_gtk network partition_table partition_table_bsd partition_table_dos partition_table_empty partition_table_gpt partition_table_mac partition_table_raw partition_table_sun printer printerdrake proxy raid run_program scanner services steps swap timezone tinyfirewall);
+@drakx_modules = qw(Xconfig Xconfigurator Xconfigurator_consts any bootloader bootlook c class_discard commands crypto detect_devices devices diskdrake fs fsedit http keyboard lang log loopback lvm modparm modules mouse my_gtk network partition_table partition_table_bsd partition_table_dos partition_table_empty partition_table_gpt partition_table_mac partition_table_raw partition_table_sun printer printerdrake proxy raid run_program scanner services steps swap timezone tinyfirewall);
 
 
 sub import {

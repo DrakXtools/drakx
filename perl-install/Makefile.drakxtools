@@ -1,7 +1,8 @@
+# -*- Makefile -*-
 include Makefile.config
 
 INLIBDEST_DIRS = Newt c resize_fat sbus_probing 
-HAVEINST_DIRS = share/po interactive_http
+HAVEINST_DIRS = share/po standalone/interactive_http
 DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) ddcprobe serial_probe
 NAME = libDrakX
 PREFIX = 
@@ -21,7 +22,6 @@ all: rpcinfo-flushed $(DIRS)
 
 $(DIRS):
 	install -d auto
-	rm standalone ; ln -s . standalone
 	rm -f share/po/DrakX.pot # force rebuild of po's
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
@@ -48,6 +48,9 @@ install:
 	install -m 644 $(patsubst %,sbus_probing/%.pm,main) $(LIBDEST)/sbus_probing
 	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
 
+	install -d $(LIBDEST)/diskdrake
+	install -m 644 diskdrake/*.pm $(LIBDEST)/diskdrake
+
 	find $(LIBDEST) -name "*.pm" | xargs perl -pi -e '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/'
 
 	for i in $(HAVEINST_DIRS); do \
@@ -55,4 +58,4 @@ install:
 	done
 
 	find auto -follow -name .exists -o -name "*.bs" | xargs rm -f
-	cp -rfL auto icons $(LIBDEST)
+	cp -rfL auto standalone/icons $(LIBDEST)
