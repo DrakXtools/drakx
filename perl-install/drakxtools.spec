@@ -247,6 +247,7 @@ rm -rf $RPM_BUILD_ROOT
 for i in %_sbindir/kbdconfig %_sbindir/mouseconfig %_bindir/printtool;do
     [[ -L $i ]] && %__rm -f $i
 done
+:
 
 %post http
 %_post_service drakxtools_http
