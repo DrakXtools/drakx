@@ -20,7 +20,7 @@ sub F() { *LOG }
 sub l {
     $logOpen or openLog();
     if ($::isStandalone) {
-	c::syslog(join "", @_);
+	c::syslog(c::LOG_WARNING(), join("", @_));
     } elsif ($::isInstall) {
 	print LOG "* ", @_, "\n";
 	print LOG2 "* ", @_, "\n";
@@ -32,9 +32,7 @@ sub ld { $logDebugMessages and &l }
 sub w { &l }
 
 sub openLog(;$) {
-    if ($::isStandalone) {
-	c::openlog("DrakX");
-    } elsif ($::isInstall) {
+    if ($::isInstall) {
 	if ($_[0]) { #- useLocal
 	    open LOG, "> $_[0]";# or die "no log possible :(";
 	} else {

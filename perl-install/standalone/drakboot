@@ -2,10 +2,10 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use common;
 use interactive;
-use standalone;
 use any;
 use bootloader;
 use detect_devices;

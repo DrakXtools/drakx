@@ -15,8 +15,9 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
 use interactive;
-use standalone;
 use proxy;
 
 use my_gtk qw(:helpers :wrappers);
@@ -67,6 +68,12 @@ Gtk->exit(0);
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.9  2002/01/18 20:22:20  gc
+#- - write the 'common' part of the 'explanations' stuff,
+#-   with nice help from Pixel for the tough Perl part
+#- - move 'use standalone' up in all standalone apps,
+#-   to comply to 'explanations'
+#-
 #- Revision 1.8  2001/10/30 20:11:31  damien
 #- corrected ref($in) =~ /gtk/
 #-

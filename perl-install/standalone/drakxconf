@@ -2,9 +2,9 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
-use standalone;
 use keyboard;
 use Xconfigurator_consts;
 use common;

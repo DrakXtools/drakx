@@ -15,9 +15,10 @@
 
 use lib qw(/usr/lib/libDrakX);
 
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
 use common;
 use interactive;
-use standalone;
 use devices;
 use detect_devices;
 use steps;
@@ -359,6 +360,12 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.16  2002/01/18 20:22:20  gc
+#- - write the 'common' part of the 'explanations' stuff,
+#-   with nice help from Pixel for the tough Perl part
+#- - move 'use standalone' up in all standalone apps,
+#-   to comply to 'explanations'
+#-
 #- Revision 1.15  2002/01/08 10:21:15  fpons
 #- removed stupid invocation of _("$_"), is it correct code to change it to $_ only ?
 #-

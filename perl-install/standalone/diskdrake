@@ -23,9 +23,11 @@
 
 
 use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
 use common;
 use diskdrake_interactive;
-use standalone;
 use interactive;
 use detect_devices;
 use fsedit;
