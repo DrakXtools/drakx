@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.20mdk
+Release: 0.21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Sep  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.21mdk
+- misc GUI enhancements
+- drakconnect: fix crashes (#11100)
+- harddrake service: really add module for storage controllers, AGP
+  controllers, TV cards
+- mousedrake, XFdrake: fix synaptics configuration (blino)
+
 * Fri Sep  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.20mdk
 - detect more devices
 - misc GUI cleanups
