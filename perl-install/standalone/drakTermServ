@@ -870,10 +870,8 @@ sub dhcpd_config {
 				gtkadd($box_name_servers),
 			),
 			0, gtkadd(new Gtk::VBox(0,0),
-				new Gtk::Label(_("dhcpd Server Configuration\n\n
-					Most of these values were extracted
-					from your running system.  You can
-					modify as needed.")),
+				new Gtk::Label(_("dhcpd Server Configuration")."\n\n".
+					_("Most of these values were extracted\nfrom your running system. You can modify as needed.")),
 				gtksignal_connect(new Gtk::Button(_("Write Config")), clicked => 
 						sub { write_dhcpd_config(
 							$entry_subnet->get_text(),
