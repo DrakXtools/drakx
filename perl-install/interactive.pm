@@ -314,6 +314,9 @@ sub ask_from_normalize {
 	}
     } @$l;
 
+    if (!$common->{title} && $::isStandalone) {
+	($common->{title} = $0) =~ s|.*/||;
+    }
     $common->{advanced_label} ||= _("Advanced");
     $common->{advanced_label_close} ||= _("Basic");
     $common->{$_} = [ deref($common->{$_}) ] foreach qw(messages advanced_messages);
