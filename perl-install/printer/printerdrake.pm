@@ -2855,7 +2855,7 @@ sub get_db_entry {
 	    }
 	    foreach my $key (keys %printer::main::thedb) {
 		if ($printer->{expert} &&
-		    $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
+		    $key =~ /^$make\|$model\|.*\(recommended\).*$/ ||
 		    !$printer->{expert} && $key =~ /^$make\|$model$/) {
 		    $printer->{DBENTRY} = $key;
 		}
@@ -2868,7 +2868,7 @@ sub get_db_entry {
 	    $model =~ s/PostScript//i;
 	    $model =~ s/Series//i;
 	    foreach my $key (keys %printer::main::thedb) {
-		if ($printer->{expert} && $key =~ /^$make\|$model\|.*\(recommended\)$/ ||
+		if ($printer->{expert} && $key =~ /^$make\|$model\|.*\(recommended\).*$/ ||
 		    !$printer->{expert} && $key =~ /^$make\|$model$/) {
 		    $printer->{DBENTRY} = $key;
 		}
@@ -2895,7 +2895,7 @@ sub get_db_entry {
 	if ($printer->{expert} && $printer->{DBENTRY} !~ /(recommended)/) {
 	    my ($make, $model) = $printer->{DBENTRY} =~ /^([^\|]+)\|([^\|]+)\|/;
 	    foreach my $key (keys %printer::main::thedb) {
-		if ($key =~ /^$make\|$model\|.*\(recommended\)$/) {
+		if ($key =~ /^$make\|$model\|.*\(recommended\).*$/) {
 		    $printer->{DBENTRY} = $key;
 		}
 	    }
