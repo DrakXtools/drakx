@@ -101,7 +101,7 @@ sub setupBootloader {
 	if (arch() =~ /sparc/) {
 	    $b->{use_partition} = $in->ask_from_list_(_("SILO Installation"),
 						      _("Where do you want to install the bootloader?"),
-						      \@l, $l[$b->{use_partition}]);
+						      \@l, $l[$b->{use_partition}]) or return;
 	} else {
 	    my $boot = $hds->[0]{device};
 	    my $onmbr = "/dev/$boot" eq $b->{boot};
@@ -169,17 +169,21 @@ sub setupBootloader {
 
     while ($::expert || $more > 1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
-	my $c = $in->ask_from_listf([''], 
+	my $c;
+	$in->ask_from_entries_refH_powered( 
+		{
+		 messages => 
 _("Here are the different entries.
 You can add some more or change the existing ones."),
-		sub {
+		 ok => '',
+},
+		[ { val => \$c, format => sub {
 		    my ($e) = @_;
 		    ref $e ? 
 		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
 		      translate($e);
-		},
-		[ @{$b->{entries}}, __("Add"), __("Done") ]);
-
+		}, list => [ @{$b->{entries}}, __("Add"), __("Done") ] } ]
+	);
 	$c eq "Done" and last;
 
 	my ($e);
@@ -553,7 +557,7 @@ sub setup_thiskind {
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;
 	my $r = "Yes";
-	$r = $in->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
+	$r = $in->ask_from_list_('', $msg, $opt, "No") || die 'already displayed' unless $at_least_one && @l == 0;
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
 	    push @l, load_module($in, $type) || next;

@@ -28,7 +28,7 @@ $keyboard ||= $in->ask_from_listf_(_("Keyboard"),
 				   _("Please, choose your keyboard layout."),
 				   \&keyboard::keyboard2text,
 				   [ keyboard::keyboards() ],
-				   keyboard::read());
+				   keyboard::read()) or $in->exit(0);
 
 keyboard::keyboard2text($keyboard) or die "bad keyboard $keyboard\n";
 
@@ -61,6 +61,10 @@ substInFile {
 
 keyboard::write('', $keyboard, $isNotDelete);
 
-$::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
-$keyboard='';
-goto begin;
+if ($::isEmbedded) {
+    kill(USR1, $::CCPID);
+    $keyboard = '';
+    goto begin;
+} else {
+    $in->exit(0);
+}

@@ -181,7 +181,7 @@ sub cardConfiguration(;$$$) {
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
     $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
-    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq 'Other|Unlisted';
+    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) or return if $card->{type} eq 'Other|Unlisted';
 
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
@@ -283,7 +283,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 
     #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
     #- proposed one by DrakX.
-    my $tc = $in->ask_from_listf(_("XFree configuration"), formatAlaTeX($msg), sub { translate($_[0]{text}) }, \@choices);
+    my $tc = $in->ask_from_listf(_("XFree configuration"), formatAlaTeX($msg), sub { translate($_[0]{text}) }, \@choices) or return;
     #- in case of class discarding, this can help ...
     $tc or $tc = $choices[0];
     $tc->{code} and $tc->{code}();
@@ -318,7 +318,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	$videomemory{$in->ask_from_list_('',
 					 _("Select the memory size of your graphic card"),
 					 [ sort { $videomemory{$a} <=> $videomemory{$b} }
-					   keys %videomemory])};
+					   keys %videomemory]) || return};
 
 
     #- hack for ATI Mach64 cards where two options should be used if using Utah-GLX.
@@ -1085,23 +1085,31 @@ sub main {
 
     my $quit;
     until ($ok || $quit) {
+	ref($in) =~ /discard/ and die "automatic X configuration failed, ensure you give hsyncrange and vsyncrange with non-DDC aware videocards/monitors";
 
-	my %c = my @c = (
-	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
-           __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) },
-                    if_($::expert, 
-           __("Change Server options") => sub { optionsConfiguration($o) }),
-	   __("Change Resolution") => sub { resolutionsConfiguration($o) },
-	   __("Show information") => sub { show_info($o) },
-	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
-	   __("Quit") => sub { $quit = 1 },
-        );
 	$in->set_help('configureXmain') unless $::isStandalone;
-	my $f = $in->ask_from_list_(['XFdrake'],
-				 _("What do you want to do?"),
-				 [ grep { !ref } @c ]) or die "automatic X configuration failed, ensure you give hsyncrange and vsyncrange with non-DDC aware videocards/monitors";
-	eval { &{$c{$f}} };
-	!$@ || $@ =~ /ask_from_list cancel/ or die;
+
+	my $f;
+	$in->ask_from_entries_refH_powered(
+		{ 
+		 title => 'XFdrake',
+		 messages => _("What do you want to do?"),
+		 ok => '',
+		}, [
+		    { format => sub { $_[0][0] }, val => \$f,
+		      list => [
+	   [ __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() } ],
+           [ __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) } ],
+                    if_($::expert, 
+           [ __("Change Server options") => sub { optionsConfiguration($o) } ]),
+	   [ __("Change Resolution") => sub { resolutionsConfiguration($o) } ],
+	   [ __("Show information") => sub { show_info($o) } ],
+	   [ __("Test again") => sub { $ok = testFinalConfig($o, 1) } ],
+	   [ __("Quit") => sub { $quit = 1 } ],
+			       ],
+		    }
+		   ]);
+	$f->[1]->();
 	$in->kill;
     }
     if (!$ok) {

@@ -43,7 +43,7 @@ sub new {
     $o->{rwindow}->set_position('center_always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
 
-    if ($::isWizard) {
+    if ($::isWizard && !$my_gtk::pop_it) {
 	my $rc = "/etc/gtk/wizard.rc";
 	-r $rc or $rc = dirname(__FILE__) . "/wizard.rc";
 	Gtk::Rc->parse($rc);
@@ -288,12 +288,12 @@ sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
     my $one = ($ok xor $cancel);
     $spread ||= $::isWizard ? "end" : "spread";
-    $ok ||= _("Ok");
-    $::isWizard and $ok = _("Next ->");
+    $ok ||= $::isWizard ? _("Next ->") : _("Ok"); 
+    $cancel ||= $::isWizard ? _("Previous") : _("Cancel");
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
-    my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel || _("Cancel")), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
-    $::isWizard and my $b3 = gtksignal_connect($w->{previous} = new Gtk::Button(_("<- Previous")), clicked => $w->{previous_clicked} || sub { log::l("default previous_clicked"); $w->{retval} = -1; Gtk->main_quit });
-    my @l = grep { $_ } $::isWizard ? ($b2, $b3, $b1): ($b1, $b2);
+    my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
+    $::isWizard and gtksignal_connect($w->{wizcancel} = new Gtk::Button(_("Cancel")), clicked => sub { die 'wizcancel' });
+    my @l = grep { $_ } $::isWizard ? ($b2, $w->{wizcancel}, $b1): ($b1, $b2);
     push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
 
     $_->can_default($::isWizard) foreach @l;
@@ -375,7 +375,7 @@ sub create_packtable($@) {
 		ref $_ or $_ = new Gtk::Label($_);
 		$j != $#$l ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1, 'fill', 'fill', 5, 0) :
-		  $w->attach($_, $j, $j + 1, $i, $i + 1, 1|4, ref($_) eq 'Gtk::ScrolledWindow' ? 1|4 : 0, 0, 0);
+		  $w->attach($_, $j, $j + 1, $i, $i + 1, { 'fill', 'expand' }, ref($_) eq 'Gtk::ScrolledWindow' ? { 'fill', 'expand' } : 0, 0, 0);
 		$_->show;
 	    }
 	} @$l;

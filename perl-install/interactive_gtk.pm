@@ -28,6 +28,10 @@ sub exit {
     c::_exit($_[0]) #- workaround 
 }
 
+sub ask_warn {
+    local $my_gtk::pop_it = 1;
+    &interactive::ask_warn;
+}
 sub create_clist {
     my ($e, $may_go_to_next, $changed) = @_;
     my (@widgets, $curr);

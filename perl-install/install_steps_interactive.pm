@@ -198,7 +198,7 @@ sub selectKeyboard {
 #------------------------------------------------------------------------------
 sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
-    $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def));
+    $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def) || die 'already displayed');
 
     $::live ? 'Update' : $o->ask_from_list_(_("Install/Update"), _("Is this an install or an update?"), $l2, $def2);
 }
@@ -244,7 +244,7 @@ sub selectMouse {
 	  $o->ask_from_listf(_("Mouse Port"),
 			    _("Please choose on which serial port your mouse is connected to."),
 			    \&mouse::serial_port2text,
-			    [ mouse::serial_ports ]);
+			    [ mouse::serial_ports ]) or return;
     }
 
     any::setup_thiskind($o, 'usb', !$::expert, 0, $o->{pcmcia}) if $o->{mouse}{device} eq "usbmouse";
@@ -755,11 +755,12 @@ sub configurePrinter {
     $::expert or $printer->{mode} ||= 'CUPS';
     if ($::expert || !$printer->{mode}) {
 	$o->set_help('configurePrinterSystem');
-	$printer->{mode} = $o->ask_from_list_([''], _("Which printing system do you want to use?"),
-						 [ 'CUPS', 'lpr', __("None") ],
-						);
-	$printer->{want} = $printer->{mode} ne 'None';
-	$printer->{want} or $printer->{mode} = undef, return;
+	$o->ask_from_entries_refH_powered(
+              {
+	       messages => _("Which printing system do you want to use?"),
+	       }, [ { val => \$printer->{mode}, list => [ 'CUPS', 'lpr' ] } ]
+        ) or $printer->{mode} = undef, $printer->{want} = undef, return;
+	$printer->{want} = 1;
 	$o->set_help('configurePrinter');
     }
 
@@ -874,12 +875,11 @@ failures. Would you like to create a bootdisk for your system?")),
 	} else {
 	    @l or die _("Sorry, no floppy drive available");
 
-	    $o->{mkbootdisk} = $o->ask_from_listf('',
-						  _("Choose the floppy drive you want to use to make the bootdisk"),
-						  sub { $l{$_[0]} || $_[0] },
-						  [ @l, "Skip" ], 
-						  $o->{mkbootdisk});
-	    return $o->{mkbootdisk} = '' if $o->{mkbootdisk} eq 'Skip';
+	    $o->ask_from_entries_refH_powered(
+              {
+	       messages => _("Choose the floppy drive you want to use to make the bootdisk"),
+	      }, [ { val => \$o->{mkbootdisk}, list => \@l, format => sub { $l{$_[0]} || $_[0] } } ]
+            ) or return;
         }
         $o->ask_warn('', _("Insert a floppy in drive %s", $l{$o->{mkbootdisk}} || $o->{mkbootdisk}));
     }

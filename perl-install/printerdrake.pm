@@ -235,15 +235,13 @@ sub setup_gsdriver_lpr($$$;$) {
 
     do {
 	$printer->{DBENTRY} ||= $printer::thedb_gsdriver{$printer->{GSDRIVER}}{ENTRY};
-	eval { $printer->{DBENTRY} = $printer::descr_to_db{
+	$printer->{DBENTRY} = $printer::descr_to_db{
 	    $in->ask_from_list_(_("Configure Printer"),
 				_("What type of printer do you have?"),
 				[ @printer::entry_db_description ],
 				$printer::db_to_descr{$printer->{DBENTRY}},
-                                { %printer::descr_to_help })
-	    };
-	}; $@ =~ /^ask_from_list cancel/ and return;
-
+                                { %printer::descr_to_help }) || return
+	   };
 	my %db_entry = %{$printer::thedb{$printer->{DBENTRY}}};
 
 	#- specific printer drivers to install.
@@ -300,7 +298,7 @@ sub setup_gsdriver_lpr($$$;$) {
 	printer::configure_queue($printer);
 	$printer->{complete} = 0;
 	
-	$action = $in->ask_from_listf('', _("Do you want to test printing?"), sub { $action{$_[0]} }, \@action, 'done');
+	$action = $in->ask_from_listf('', _("Do you want to test printing?"), sub { $action{$_[0]} }, \@action, 'done') or return;
 
 	my @testpages;
 	push @testpages, "/usr/lib/rhs/rhs-printfilters/testpage.asc"
@@ -342,10 +340,14 @@ sub main($$$;$) {
 	    $queue = $printer->{want} || $in->ask_yesorno(_("Printer"),
 							  _("Would you like to configure a printer?"), 0) ? 'lp' : 'Done';
 	} else {
-	    $queue = $in->ask_from_list_([''],
+	    $in->ask_from_entries_refH_powered(,
+		{
+		 messages =>
 _("Here are the following print queues.
 You can add some more or change the existing ones."),
-					 [ (sort keys %{$printer->{configured} || {}}), __("Add"), __("Done") ],
+		 ok => '',
+		}, [ { val => \$queue, format => \&translate, list => [ (sort keys %{$printer->{configured} || {}}), __("Add"), __("Done") ] } ]
+            );
 					);
 	    if ($queue eq 'Add') {
 		my %queues; @queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
@@ -376,7 +378,7 @@ You can add some more or change the existing ones."),
 							   _("How is the printer connected?"),
 							   [ printer::printer_type($printer) ],
 							   $printer->{str_type},
-							  );
+							  ) or return;
 		$printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 		if ($printer->{TYPE} eq 'REMOTE') {
 		    $printer->{str_type} = $printer::printer_type_inv{CUPS};
@@ -386,7 +388,7 @@ any printer here; printers will be automatically detected.
 In case of doubt, select \"Remote CUPS server\"."),
 							       [ @printer::printer_type_inv{qw(CUPS LPD SOCKET)} ],
 							       $printer->{str_type},
-							      );
+							      ) or return;
 		    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 		}
 		if ($printer->{TYPE} eq 'CUPS') {
@@ -455,7 +457,7 @@ how is the printer connected?") }, [
 							       _("How is the printer connected?"),
 							       [ printer::printer_type($printer) ],
 							       $printer->{str_type},
-							      );
+							      ) or return;
 		} else {
 		    $in->set_help('configurePrinterLPR') if $::isInstall;
 		    $in->ask_from_entries_refH_powered(

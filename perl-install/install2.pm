@@ -584,7 +584,7 @@ sub main {
 		redo MAIN;
 	    }
 	    /^theme_changed$/ and redo MAIN;
-	    unless (/^already displayed/ || /^ask_from_list cancel/) {
+	    unless (/^already displayed/) {
 		eval { $o->errorInStep($_) };
 		$@ and next;
 	    }
