@@ -267,6 +267,7 @@ my $media_problem = 0;
 my $vol_name = 'Drakbackup';
 my $good_restore_path = 1;
 my $max_space = 1000.0;
+my @no_devices = translate("No devices found");
 
 foreach (@ARGV) {
 
@@ -1919,7 +1920,7 @@ sub advanced_where_net_types {
 	 			0, my $check_where_use_net = new Gtk2::CheckButton(N("Use network connection to backup")),
 				1, new Gtk2::HBox(0,10),
 	 			0, new Gtk2::Label(N("Net Method:")),
-	 			0, gtkset_sensitive(my $entry_net_type = new Gtk2::Combo(), $where_net),
+	 			0, gtkset_sensitive(my $entry_net_type = new Gtk2::OptionMenu(), $where_net),
 	 		),	 
 	 		0, gtkpack_(new Gtk2::HBox(0,5),
 	   			0, gtkset_sensitive(my $check_use_expect = new Gtk2::CheckButton(N("Use Expect for SSH")), ($where_net && $net_proto eq 'ssh')),
@@ -1929,22 +1930,22 @@ sub advanced_where_net_types {
 			),
 	 		0, new Gtk2::HSeparator,
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter the host name or IP.")), $where_net),
+		    	0, gtkset_sensitive(new Gtk2::Label(N("Host name or IP.")), $where_net),
 		    	1, new Gtk2::HBox(0,10),
 		    	0, gtkset_sensitive(my $host_name_entry = new Gtk2::Entry(), $where_net),
 		    ),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	 			0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory (or module) to\n put the backup on this host.")), $where_net),
+	 			0, gtkset_sensitive(new Gtk2::Label(N("Directory (or module) to\n put the backup on this host.")), $where_net),
 		     	1, new Gtk2::HBox(0,10),
 		     	0, gtkset_sensitive(my $host_path_entry = new Gtk2::Entry(), $where_net), 
 		    ),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter your login")), $where_net),
+		    	0, gtkset_sensitive(new Gtk2::Label(N("Login name")), $where_net),
 				1, new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(my $login_user_entry = new Gtk2::Entry(), $where_net),
 			),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter your password")),  $where_net),
+				0, gtkset_sensitive(new Gtk2::Label(N("Password")),  $where_net),
 				1, new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(my $passwd_user_entry = new Gtk2::Entry(), $where_net),
 			),
@@ -1956,7 +1957,6 @@ sub advanced_where_net_types {
 	);
 	$entry_net_type->set_popdown_strings(@net_methods);
 	$entry_net_type->entry->set_text($net_proto);
-	$entry_net_type->entry->set_property('editable', 0);
 	$button_xfer_keys->signal_connect('clicked', sub { 
 		if ($passwd_user && $login_user && $host_name) {
 			do_expect("sendkey");
@@ -2038,10 +2038,14 @@ sub advanced_where_cd {
 	
 	get_cd_info();
 	
-	my $combo_where_cd_device = new Gtk2::Combo();
-    $combo_where_cd_device->set_popdown_strings(sort keys %cd_devices) if keys %cd_devices;  
+	my $combo_where_cd_device = new Gtk2::OptionMenu();
+	if (keys %cd_devices) {
+    	$combo_where_cd_device->set_popdown_strings(sort keys %cd_devices);
+	} else {
+		$combo_where_cd_device->set_popdown_strings(@no_devices);
+	}  
 	
-    my $combo_where_cd_time = new Gtk2::Combo();
+    my $combo_where_cd_time = new Gtk2::OptionMenu();
     $combo_where_cd_time->set_popdown_strings("650 Mb", "700 Mb", "750 Mb", "800 Mb");    
  
 	my $combo_where_cdrecord_device = new Gtk2::Combo();
@@ -2058,14 +2062,14 @@ sub advanced_where_cd {
 			0, my $check_where_cd = new Gtk2::CheckButton(N("Use CD/DVDROM to backup")),
 			0, new Gtk2::HSeparator,
 			0, gtkpack_(new Gtk2::HBox(0,10),
-			0, gtkset_sensitive(new Gtk2::Label(N("Please choose your CD/DVD device\n(Press Enter to propogate settings to other fields.\nThis field isn't necessary, only a tool to fill in the form.)")), $where_cd),
+			0, gtkset_sensitive(new Gtk2::Label(N("Choose your CD/DVD device")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
-				0, gtkset_sensitive(gtkset_size_request($combo_where_cd_device, 200, 20), $where_cd),
+				0, gtkset_sensitive($combo_where_cd_device, $where_cd),
 			),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-			0, gtkset_sensitive(new Gtk2::Label(N("Please choose your CD/DVD media size (Mb)")), $where_cd),
+			0, gtkset_sensitive(new Gtk2::Label(N("Choose your CD/DVD media size (Mb)")), $where_cd),
 				1, new Gtk2::VBox(0, 5),
-				0, gtkset_sensitive(gtkset_size_request($combo_where_cd_time, 200, 20), $where_cd),
+				0, gtkset_sensitive($combo_where_cd_time, $where_cd),
 			),
 			0, new Gtk2::VBox(0, 5),
 			0, gtkpack_(new Gtk2::HBox(0,10),
@@ -2077,7 +2081,7 @@ sub advanced_where_cd {
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	 			0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to erase your RW media (1st Session)")), $cdrw && $where_cd),
+	 			0, gtkset_sensitive(new Gtk2::Label(N("Erase your RW media (1st Session)")), $cdrw && $where_cd),
 				0, gtkset_sensitive(my $button_erase_now = Gtk2::Button->new_from_stock(N(" Erase Now ")), $cdrw),			
 	    		1, new Gtk2::VBox(0, 5),
 	    		0, gtkset_sensitive(my $check_cdrw_erase = new Gtk2::CheckButton(), $cdrw && $where_cd),
@@ -2099,7 +2103,7 @@ sub advanced_where_cd {
 #			),
 			0, new Gtk2::VBox(0, 5),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter your CD Writer device name\n ex: 0,1,0")),  $where_cd),
+				0, gtkset_sensitive(new Gtk2::Label(N("Enter your CD Writer device name\n ex: 0,1,0")),  $where_cd),
 				1, new Gtk2::VBox(0, 5),
 #				0, gtkset_size_request(gtkset_sensitive($cd_device_entry = new Gtk2::Entry(), $where_cd), 200, 20),
 				0, gtkset_sensitive(gtkset_size_request($combo_where_cdrecord_device, 200, 20), $where_cd),
@@ -2169,9 +2173,13 @@ sub advanced_where_tape {
 	#- look for tape devices;
 	get_tape_info();
 
-	my $combo_where_tape_device = new Gtk2::Combo();
-    $combo_where_tape_device->set_popdown_strings(@tape_devices) if @tape_devices;  
-
+	my $combo_where_tape_device = new Gtk2::OptionMenu();
+    if (@tape_devices) {  
+		$combo_where_tape_device->set_popdown_strings(@tape_devices) 
+	} else {
+		$combo_where_tape_device->set_popdown_strings(@no_devices);
+	}
+	
     my $box_where_tape;
     local $_;
 	
@@ -2181,25 +2189,27 @@ sub advanced_where_tape {
 		 	0, my $check_where_tape = new Gtk2::CheckButton(N("Use tape to backup")),
 		 	0, new Gtk2::HSeparator,
 		 	0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the device name to use for backup")), $where_tape),
+				0, gtkset_sensitive(new Gtk2::Label(N("Device name to use for backup")), $where_tape),
 				1, new Gtk2::VBox(0, 6),
-				0, gtkset_sensitive(gtkset_size_request($combo_where_tape_device, 200, 20), $where_tape),
+				#0, gtkset_sensitive(gtkset_size_request($combo_where_tape_device, 200, 20), $where_tape),
+				0, gtkset_sensitive($combo_where_tape_device, $where_tape),
+
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to use the non-rewinding device.")), $where_tape),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Don't rewind tape after backup")), $where_tape),
 	    		1, new Gtk2::VBox(0, 5),
 	    		0, gtkset_sensitive(my $check_tape_rewind = new Gtk2::CheckButton(), $where_tape),
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to erase your tape before the backup.")), $where_tape),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Erase tape before backup")), $where_tape),
 	    		1, new Gtk2::VBox(0, 5),
 	    		0, gtkset_sensitive(my $check_tape_erase = new Gtk2::CheckButton(), $where_tape),
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk2::Label(N("Please check if you want to eject your tape after the backup.")), $where_tape),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Eject tape after the backup")), $where_tape),
 	    		1, new Gtk2::VBox(0, 5),
 	    		0, gtkset_sensitive(my $check_tape_eject = new Gtk2::CheckButton(), $where_tape),
 			),
@@ -2274,7 +2284,7 @@ sub advanced_where_hd {
 #	 0, my $check_where_hd = new Gtk2::CheckButton( N("Use Hard Disk to backup")),
 #	 0, new Gtk2::HSeparator,
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save to:")), $where_hd),
+				0, gtkset_sensitive(new Gtk2::Label(N("Enter the directory to save to:")), $where_hd),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
 				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
@@ -2283,7 +2293,7 @@ sub advanced_where_hd {
 			),
 			0, new Gtk2::VBox(0, 6),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
+				0, gtkset_sensitive(new Gtk2::Label(N("Maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
@@ -2383,7 +2393,7 @@ sub advanced_where() {
 sub advanced_when() {
     my $box_when;
 #   $daemon_media = '';
-    my $combo_when_space = new Gtk2::Combo();
+    my $combo_when_space = new Gtk2::OptionMenu();
     my %trans = (N("hourly") => 'hourly',
 		 N("daily") => 'daily',
 		 N("weekly") => 'weekly',
@@ -2395,9 +2405,8 @@ sub advanced_when() {
     $combo_when_space->set_popdown_strings(N("hourly"), N("daily"), N("weekly"), N("monthly"));    
 
 	#- drop down list of possible medias - default to config value
-    my $entry_media_type = new Gtk2::Combo();
+    my $entry_media_type = new Gtk2::OptionMenu();
     $entry_media_type->set_popdown_strings(@media_types, @net_methods);
-#    $entry_media_type->set_value_in_list(1, 0);   
 	$entry_media_type->entry->set_text($daemon_media);
 	
     gtkpack($advanced_box,
@@ -3196,7 +3205,7 @@ sub restore_step_user() {
 sub restore_step_sys() {
     my $restore_step_sys;
 	my $check_backup_before;
-    my $combo_restore_step_sys = new Gtk2::Combo();
+    my $combo_restore_step_sys = new Gtk2::OptionMenu();
     $combo_restore_step_sys->set_popdown_strings(@sys_backuped);
     gtkpack($advanced_box,
 		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
@@ -3243,7 +3252,7 @@ sub restore_other_media_hd {
 			0, my $check_where_hd = new Gtk2::CheckButton(N("Use Hard Disk to backup")),
 			0, new Gtk2::HSeparator,
 			0, gtkpack_(new Gtk2::HBox(0,10),
-		    	0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory to save:")), $where_hd),
+		    	0, gtkset_sensitive(new Gtk2::Label(N("Enter the directory to save:")), $where_hd),
 		    	1, new Gtk2::VBox(0, 6),
 		    	0, gtkset_size_request(gtkset_sensitive($save_path_entry = new Gtk2::Entry(), $where_hd), 152, 20),
 		    	0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
@@ -3251,7 +3260,7 @@ sub restore_other_media_hd {
 			),
 	 		0, new Gtk2::VBox(0, 6),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
-	    		0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
+	    		0, gtkset_sensitive(new Gtk2::Label(N("Enter the maximum size\n allowed for Drakbackup (Mb)")),  $where_hd),
 	    		1, new Gtk2::VBox(0, 6),
 	    		0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
@@ -3285,7 +3294,7 @@ sub restore_other_media() {
 			0, new Gtk2::HSeparator,
 			0, my $check_other_media_hd = new Gtk2::CheckButton(N("Restore from Hard Disk.")),
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the directory where backups are stored")), $other_media_hd),
+				0, gtkset_sensitive(new Gtk2::Label(N("Enter the directory where backups are stored")), $other_media_hd),
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($restore_find_path_entry = new Gtk2::Entry(), $other_media_hd), 152, 20),
 				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
@@ -4068,11 +4077,11 @@ sub button_box_adv() {
     $button_box_tmp->destroy;
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
+				adv_help();
+			}),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				interactive_mode_box();
-			}),
-			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
-				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
@@ -4095,12 +4104,12 @@ sub button_box_restore_main() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+				adv_help();
+			}),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();
-			}),
-			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
-				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
@@ -4120,12 +4129,12 @@ sub button_box_file_restore() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+				adv_help();
+			}),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				restore_box();
-			}),
-			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
-				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			),
@@ -4153,12 +4162,12 @@ sub button_box_backup_end() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
+				adv_help() 
+			}),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
-			}),
-			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
-				adv_help(\&$current_widget, $custom_help) 
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
@@ -4179,12 +4188,12 @@ sub button_box_wizard_end() {
 
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
+				adv_help();
+			}),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget();
 				interactive_mode_box();
-			}),
-			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
-				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
@@ -4205,12 +4214,12 @@ sub button_box_restore_end() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
+				adv_help();
+			}),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget();
 				interactive_mode_box();
-			}),
-			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
-				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
@@ -4248,7 +4257,7 @@ sub button_box_restore_pbs_end() {
 			1, new Gtk2::HBox(0, 5),	
 			1, new Gtk2::HBox(0, 5),	
 			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
-				adv_help(\&$current_widget, $custom_help);
+				adv_help();
 			}),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), clicked => sub { 
 				destroy_widget();
@@ -4263,12 +4272,12 @@ sub button_box_build_backup() {
 
 	gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+				adv_help(); 
+			}),
 			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();
-			}),
-			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
-				adv_help(\&$current_widget, $custom_help); 
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
@@ -4289,12 +4298,12 @@ sub button_box_restore() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+				adv_help();
+			}),
 			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box();  
-			}),
-			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
-				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub { 
@@ -4318,13 +4327,13 @@ sub button_box_find_media {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+				$central_widget = \$box2; 
+				adv_help();
+			}),
 			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				$central_widget = \$box2;
 				interactive_mode_box();  
-			}),
-			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
-				$central_widget = \$box2; 
-				adv_help(\&restore_find_media_box, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-go-back'), clicked => sub {
@@ -4343,12 +4352,12 @@ sub button_box_wizard() {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
+			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
+				adv_help() 
+			}),
 			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
-			}),
-			1, gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub {
-				adv_help(\&$current_widget, $custom_help) 
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(Gtk2::Button->new_from_stock($next_widget ? 'gtk-go-back' : 'gtk-ok'), clicked => sub { 
@@ -4369,7 +4378,7 @@ sub button_box_main() {
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack(Gtk2::HButtonBox->new,
 			gtksignal_connect(Gtk2::Button->new_from_stock('gtk-help'), clicked => sub { 
-				adv_help(\&interactive_mode_box, $custom_help) 
+				adv_help() 
 			}),
 			gtksignal_connect(Gtk2::Button->new_from_stock('gtk-close'), clicked => sub { ugtk2->exit(0) }),
 		),
@@ -4753,33 +4762,33 @@ sub interactive_mode_box {
 			1, new Gtk2::VBox(0, 5),	
 			1, gtkpack_(new Gtk2::VBox(0, 5),	
 				1, new Gtk2::VBox(0, 5),	
-				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Wizard Configuration")), clicked => sub { 
+				0, gtksignal_connect(Gtk2::Button->new_from_stock(N("Wizard Configuration")), clicked => sub { 
 					destroy_widget();
 					read_conf_file();
 					wizard(); 
 				}),
-				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Advanced Configuration")), clicked => sub { 
+				0, gtksignal_connect(Gtk2::Button->new_from_stock(N("Advanced Configuration")), clicked => sub { 
 					button_box_adv();
 					destroy_widget();
 					advanced_box(); 
 				}),
-				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("View Configuration")), clicked => sub { 
+				0, gtksignal_connect(Gtk2::Button->new_from_stock(N("View Configuration")), clicked => sub { 
 					destroy_widget();
 					build_backup_box_see_conf("interactive");
 				}),
-				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("View Last Log")), clicked => sub { 
+				0, gtksignal_connect(Gtk2::Button->new_from_stock(N("View Last Log")), clicked => sub { 
 					$results = cat_($log_file);
 					button_box_log_main();
 					show_status();
 				}),				
-				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Backup Now")), clicked => sub { 
+				0, gtksignal_connect(Gtk2::Button->new_from_stock(N("Backup Now")), clicked => sub { 
 					if ($cfg_file_exist) { 
 						build_backup_box();
 					} else { 
 						message_noconf_box();
 					}
 				}),
-				1, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore")), clicked => sub {
+				0, gtksignal_connect(Gtk2::Button->new_from_stock(N("Restore")), clicked => sub {
 					destroy_widget(); 
 					restore_box();
 				}),
@@ -4808,6 +4817,7 @@ sub interactive_mode() {
     unless ($::isEmbedded) {
 	   $my_win->{rwindow}->set_position('center');
 	   $my_win->{rwindow}->set_title(N("Drakbackup"));
+	   $window1->set_size_request(600, 500);
     }
     $my_win->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     read_conf_file();     
@@ -4846,217 +4856,8 @@ sub interactive_mode() {
 
 ################################################  HELP & ABOUT  ################################################  
 
-
-sub adv_help {
-    my ($function, $custom_help) = @_;
-
-################################################  help definition ##############################################
-
-    my %custom_helps = (
-			"options" => 
-			N("Options Description:
-
- In this step Drakbackup allow you to change:
-
- - the .backupignore mode:
-
-      Like with cvs, drakbackup will ignore all references
-      included in .backupignore files in each directory.
-      
-	  Example: 
-         #> cat .backupignore
-         *.o
-         *~
-         ...
- 
- - The user(s) to whom drakbackup reports should be mailed to.
-      
-      This can be a comma sperated lists of local users, or
-      internet email addresses if your system is setup to
-      do internet mail.
-  
- - The compression mode (not enabled):
-    
-      If you check bzip2 compression, you will compress
-      your data better than gzip (about 2-10 %%).
-      This option is not checked by default because
-      this compression mode needs more time (about 1000%% more).
- 
- - The update mode (not enabled):
-
-      This option will update your backup, but this
-      option is not really useful because you need to
-      decompress your backup before you can update it.
-      
-"), 
-			"mail_pb" =>
-			N("
- Some errors during sendmail are caused by 
- a bad configuration of postfix. To solve it you have to
- set myhostname or mydomain in /etc/postfix/main.cf
-
-"),
-
-			"what" =>
-			N("Options Description:
-
- - Backup System Files:
-       
-	This option allows you to backup your /etc directory,
-	which contains all configuration files. Please be
-	careful during the restore step to not overwrite:
-		/etc/passwd 
-		/etc/group 
-		/etc/fstab
-
- - Backup User Files: 
-
-	This option allows you select all users that you want to 
-	backup. To preserve disk space, it is recommended that
-	you do not include the web browser's cache.
-
- - Backup Other Files: 
-
-	This option allows you to include additional data to save.
-	If you want to add individual files, select them from the
-	righthand 'Files' list pane.  To add directories, enter the 
-	directory by clicking on it in the lefthand 'Folders' pane, 
-	and at that point click 'OK' without selecting any files.
- 
- - Incremental Backups:
-
-	The incremental backup is the most powerful option for 
-	backup. This option allows you to backup all your data 
-	the first time, and only the changed data afterward.
-	Then you will be able, during the restore step, to restore 
-	your data from a specified date. If you have not selected 
-	this option all old backups are deleted before each backup.    
-
- - Differential Backups:
- 
-	The differential backup, rather than comparing changes in the
-	data to the previous incremental backup, always compares the
-	data to the initial base backup. This method allows one to
-	restore the base and then the differential from a certain date.
-
-"), 
-			"restore" =>
-			N("Restore Description:
-
-Drakbackup now allows you to search the backup lists for a particular
-file or files to restore.  If the search is successful, you will be 
-presented with a list of matches, along with backup media and dates.
-You can then select individual files to restore from your backup media.
- 
-For 'normal' restores, only the most recent date will be used, 
-because with incremental  backups it is necessary to restore 
-one by one each older backup.
-
-So if you don't want to restore a user please unselect all their
-check boxes.
-
-Otherwise, you are able to select only one of these.
-
- - Incremental Backups:
-
-	The incremental backup is the most powerful option for 
-	backup. This option allows you to backup all your data 
-	the first time, and only the changed data afterward.
-	Then you will be able, during the restore step, to restore 
-	your data from a specified date. If you have not selected 
-	this option all old backups are deleted before each backup.    
-
- - Differential Backups:
- 
-	The differential backup, rather than comparing changes in the
-	data to the previous incremental backup, always compares the
-	data to the initial base backup. This method allows one to
-	restore the base and then the differential from a certain date.
-
-"),  
-			"main" =>
-			N(" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>") .
-"\n" .
-N(" updates 2002 MandrakeSoft by Stew Benedict <sbenedict\@mandrakesoft.com>") .
-"\n\n" . translate($::license) .
-"\n\n                                            _____________________\n" .
-N("Description:
-
-  Drakbackup is used to backup your system.
-  During the configuration you can select: 
-	- System files, 
-	- Users files, 
-	- Other files.
-	or All your system ...  and Other (like Windows Partitions)
-
-  Drakbackup allows you to backup your system on:
-	- Harddrive.
-	- NFS.
-	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
-	- FTP.
-	- Rsync.
-	- Webdav.
-	- Tape.
-
-  Drakbackup allows you to restore your system to
-  a user selected directory.
-
-  Per default all backups will be stored on your
-  /var/lib/drakbackup directory
-
-  Configuration file:
-	/etc/drakconf/drakbackup/drakbackup.conf
-
-Restore Step:
-  
-  During the restore step, DrakBackup will remove 
-  your original directory and verify that all 
-  backup files are not corrupted. It is recommended 
-  you do a last backup before restoring.
-
-
-"),
-			"ftp" =>
-			N("Options Description:
-
-Please be careful when you are using ftp backup, because only 
-backups that are already built are sent to the server.
-So at the moment, you need to build the backup on your hard 
-drive before sending it to the server.
-
-"),
-			"restore_pbs" =>
-			N("
-Restore Backup Problems:
-
-During the restore step, Drakbackup will verify all your
-backup files before restoring them.
-Before the restore, Drakbackup will remove 
-your original directory, and you will loose all your 
-data. It is important to be careful and not modify the 
-backup data files by hand.
-")
-);
-
-################################################  help function ##############################################
-	destroy_widget();
-    my $text = new Gtk2::TextView;
-    gtktext_insert($text, $custom_helps{$custom_help} || $custom_helps{main});
-    gtkpack($advanced_box,
-	    $box2 = gtkpack_(new Gtk2::VBox(0,10),
-
-			1, create_scrolled_window($text), 
-			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-				gtksignal_connect(Gtk2::Button->new_from_stock(N("OK")), clicked => sub { 
-					destroy_widget(); 
-					$function->();
-				}),
-			),
-		)
-	);
-
-    $central_widget = \$box2;
-    $up_box->show_all;
+sub adv_help() {
+	exec("drakhelp Drakxtools-Guide.html/drakbackup.html") unless fork();
 }
 
 sub to_ok() {
