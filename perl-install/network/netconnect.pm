@@ -88,7 +88,7 @@ sub get_subwizard {
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
-      my ($modem, $modem_name, $modem_conf_read);
+      my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $adsl_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -450,7 +450,7 @@ killall pppd
                         #my @cnx_list = map { $_->{server} } @$secret;
                         $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
                     },
-                    name => N("Dialup options"), 
+                    name => N("Dialup: account options"), 
                     data => sub {
                             [
                              { label => N("Connection name"), val => \$modem->{connection} },
@@ -458,10 +458,58 @@ killall pppd
                              { label => N("Login ID"), val => \$modem->{login} },
                              { label => N("Password"), val => \$modem->{passwd}, hidden => 1 },
                              { label => N("Authentication"), val => \$modem->{auth}, list => [ N_("PAP"), N_("Terminal-based"), N_("Script-based"), N_("CHAP") ] },
-                             { label => N("Domain name"), val => \$modem->{domain} },
-                                                                { label => N("First DNS Server (optional)"), val => \$modem->{dns1} },
-                             { label => N("Second DNS Server (optional)"), val => \$modem->{dns2} },
                             ],
+                        },
+                    next => "ppp_ip",
+                   },
+         
+
+                   ppp_ip =>
+                   {
+                    pre => sub {
+                        $modem_dyn_ip = sub { $modem->{auto_ip} eq N("Automatic") };
+                    },
+                    name => N("Dialup: IP parameters"),
+                    data => sub {
+                        [
+                         { label => N("IP address"), type => "list", val => \$modem->{auto_ip}, list => [ N("Automatic"), N("Manual") ] },
+                         { label => N("Domain name"), val => \$modem->{domain}, disabled => $modem_dyn_ip },
+                         { label => N("IP adress"), val => \$modem->{IPAddr}, disabled => $modem_dyn_ip },
+                         { label => N("Subnet mask"), val => \$modem->{SubnetMask}, disabled => $modem_dyn_ip },
+                        ];
+                    },
+                    next => "ppp_dns",
+                   },
+         
+
+                   ppp_dns =>
+                   {
+                    pre => sub {
+                        $modem_dyn_dns = sub { $modem->{auto_dns} eq N("Automatic") };
+                    },
+                    name => N("Dialup: DNS parameters"),
+                    data => sub {
+                        [
+                         { label => N("DNS"), type => "list", val => \$modem->{auto_dns}, list => [ N("Automatic"), N("Manual") ] },
+                         { label => N("Domain name"), val => \$modem->{domain}, disabled => $modem_dyn_dns },
+                         { label => N("First DNS Server (optional)"), val => \$modem->{dns1}, disabled => $modem_dyn_dns },
+                         { label => N("Second DNS Server (optional)"), val => \$modem->{dns2}, disabled => $modem_dyn_dns },
+                         { label => N("Set hostname from IP"), val => \$modem->{AutoName}, disabled => $modem_dyn_dns },
+                        ];
+                    },
+                    next => "ppp_gateway",
+                   },
+         
+
+                   ppp_gateway =>
+                   {
+                    name => N("Dialup: IP parameters"), 
+                    data => sub {
+                        [
+                         { label => N("Gateway"), type => "list", val => \$modem->{auto_gateway}, list => [ N("Automatic"), N("Manual") ] },
+                         { label => N("Gateway IP address"), val => \$modem->{dns1}, 
+                           disabled => sub { $modem->{auto_gateway} eq N("Automatic") } },
+                        ];
                         },
                     post => sub {
                         network::modem::ppp_configure($in, $modem);
