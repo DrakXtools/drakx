@@ -1,3 +1,84 @@
+2003/03/13  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: updated Spanish translations
+
+2003/03/13  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps_gtk.pm: desktop group simplification.
+
+2003/03/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/no.po: updated Norwegian file
+
+	* share/po/ru.po, share/po/fi.po: updated Russian and Finnish files
+
+	* share/po/id.po, share/po/eo.po, share/po/cs.po, share/po/hu.po: updated
+	Czech, Esperanto, Indonesian and Hungarian files
+
+2003/03/13  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: cleanup (still need to handle permissions more cleanly, people
+	using umask 0
+	should be shot)
+
+2003/03/13  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Fix IP pool range bug from gtk2 conversion.
+
+2003/03/13  Till Kamppeter  <till at mandrakesoft.com>
+
+	* scanner.pm: Bug fixes:
+	  - SHOWSTOPPER: SCSI scanners were never recognized as already
+	configured, the user was always asked whether he wants to configure
+	  them. Problem was that device files are symlinks.
+	  - Made most ISDN and ADSL devices not being considered as a scanner by
+	  Scannerdrake, SANE does not support internet scanners.
+
+2003/03/13  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/03/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: more logs
+	first 9.1-22mdk bits
+
+	* install_any.pm: alsa drivers are now named snd-<name> not anymore
+	snd-card-<name>
+
+	* any.pm: fix #3161 (ensure right permissions on /etc/sysconfig/autologin
+	for
+	bad root umask case)
+
+	* modules.pm: via via686 upgdrade after simplification too (next time
+	pixel told me
+	it's better to reuse some regexp, i kill him)
+	fix upgrade after simplification
+	simplify
+	convert alsa driver from old naming system to new one (snd-card-XXX =>
+	snd-XXX) and ensure correct upgrade for snd-via683 and snd-via8233
+	drivers
+
+	* docs/mdk-9.2: more stuff
+	more thoughts
+
+2003/03/13  Warly  <warly at mandrakesoft.com>
+
+	* install_gtk.pm: logo is the same for desktop and powerpack
+	installations.
+
+	* share/compssUsers.desktop: Make only one sectio. Include KDE/GNOME and
+	documentation into it.
+
+2003/03/12  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: updated
+
+2003/03/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/et.po, share/po/he.po: updated Welsh, Estonian
+	and Hebrew files
+
 2003/03/12  François Pons  <fpons at mandrakesoft.com>
 
 	* install_any.pm: added log for kernel module packages found.
@@ -14764,7 +14845,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.806 2003/03/12 00:01:58 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.807 2003/03/12 21:48:08 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
