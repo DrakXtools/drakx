@@ -632,6 +632,13 @@ sub install_silo($$$) {
     c::setPromVars($silo->{bootalias}, $silo->{bootdev});
 }
 
+sub make_label_lilo_compatible {
+    my ($label) = @_; 
+    $label = substr($label, 0, 15); #- lilo doesn't handle more than 15 char long labels
+    $label =~ s/\s/_/g; #- lilo doesn't like spaces
+    $label;
+}
+
 sub write_lilo_conf {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
@@ -678,6 +685,7 @@ sub write_lilo_conf {
 	open F, ">$f" or die "cannot create lilo config file: $f";
 	log::l("writing lilo config to $f");
 
+	local $lilo->{default} = make_label_lilo_compatible($lilo->{default});
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default append keytable);
 	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
  	print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- also done by msec
@@ -699,9 +707,7 @@ sub write_lilo_conf {
 
 	foreach (@{$lilo->{entries}}) {
 	    print F "$_->{type}=", $file2fullname->($_->{kernel_or_dev});
-	    my $label = substr($_->{label}, 0, 15); #- lilo doesn't handle more than 15 char long labels
-	    $label =~ s/\s/_/g; #- lilo doesn't like spaces
-	    print F "\tlabel=$label"; 
+	    print F "\tlabel=", make_label_lilo_compatible($_->{label});
 
 	    if ($_->{type} eq "image") {		
 		print F "\troot=$_->{root}";

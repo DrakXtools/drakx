@@ -307,7 +307,8 @@ if (arch() !~ /ppc/) {
 	     callbacks => {
 	       complete => sub {
 		   $e->{label} or $in->ask_warn('', _("Empty label not allowed")), return 1;
-		   member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', _("This label is already used")), return 1;
+		   $e->{kernel_or_dev} or $in->ask_warn('', $e->{type} eq 'image' ? _("You must specify a kernel image") : _("You must specify a root partition")), return 1;
+		   member(lc $e->{label}, map { lc $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', _("This label is already used")), return 1;
 		   0;
 	       } } }, \@l)) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
