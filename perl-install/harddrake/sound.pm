@@ -139,11 +139,15 @@ sub get_alternative {
     $alsa2oss{$driver} || $oss2alsa{$driver};
 }
 
+sub explain {
+    standalone::explanations @_ unless $::isInstall;
+}
+
 
 sub do_switch {
     my ($old_driver, $new_driver) = @_;
     require standalone;
-    standalone::explanations("removing old $old_driver\n");
+    explain("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
     rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
     unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
@@ -155,7 +159,7 @@ sub do_switch {
         rooted("/sbin/chkconfig --add alsa");
         load($new_driver); # service alsa is buggy
     } else { run_program::run("/sbin/chkconfig --del alsa") }
-    standalone::explanations("loading new $new_driver\n");
+    explain("loading new $new_driver\n");
     rooted("/sbin/chkconfig --add sound"); # just in case ...
     rooted("service sound start") unless $blacklisted;
 }
@@ -209,7 +213,7 @@ To use alsa, one can either use:
                                 ]))
         {
             return if $new_driver eq $driver;
-            standalone::explanations("switching audio driver from '$driver' to '$new_driver'\n");
+            explain("switching audio driver from '$driver' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oopses the kernel on unloading.\n
 The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)) if $blacklisted;
