@@ -940,7 +940,7 @@ sub _ask_okcancel($@) {
 
 sub create_file_selector {
     my (%opts) = @_;
-    my $w = ugtk2->new(delete $opts{title});
+    my $w = ugtk2->new(delete $opts{title}, modal => 1);
     my ($message, $save, $want_a_dir) = (delete $opts{message}, delete $opts{save}, delete $opts{want_a_dir});
     my $action = $want_a_dir ? ($save ? 'create_folder' : 'select_folder') : ($save ? 'save' : 'open');
     add2hash(\%opts, { width => 480, height => 250 });
