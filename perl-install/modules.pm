@@ -261,7 +261,9 @@ sub write_conf {
 	} elsif ($conf{$alias}{$type} && $conf{$alias}{$type} ne $module) {
 	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
 	    $_ = "$type $alias $v\n";
-	}
+	} elsif ($type eq 'alias' && !defined $conf{$alias}{alias}) { 
+         undef $_;
+     }
     } $file;
 
     my $written = read_conf($file);
