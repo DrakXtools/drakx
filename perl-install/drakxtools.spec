@@ -327,6 +327,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Tue Aug  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.3mdk
+- bootloader-config (pixel):
+  o try to keep the order of kernel options
+  o don't allow unknown kernel names to mess everything
+  o handle win4lin kernels
 - draksec: sanitize GUI:
   o upcase fields values
   o fix spacing issues
