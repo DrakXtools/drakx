@@ -406,6 +406,7 @@ sub pppConfig {
     my %toreplace;
     $toreplace{$_} = $modem->{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
     $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, }}{$modem->{auth}};
+    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3 }}{$modem->{auth}};
     $toreplace{phone} =~ s/\D//g;
     $toreplace{dnsserver} = join ',', map { $modem->{$_} } "dns1", "dns2";
     $toreplace{dnsserver} .= $toreplace{dnsserver} && ',';
@@ -416,7 +417,7 @@ sub pppConfig {
     $toreplace{connection} ||= 'DialupConnection';
     $toreplace{domain} ||= 'localdomain';
     $toreplace{intf} ||= 'ppp0';
-    $toreplace{papname} = $modem->{auth} eq 'PAP' && $toreplace{login};
+    $toreplace{papname} = ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') && $toreplace{login};
 
     #- build ifcfg-ppp0.
     my $ifcfg = "$prefix/etc/sysconfig/network-scripts/ifcfg-ppp0";
@@ -489,7 +490,7 @@ END
     close CHAT;
     chmod 0600, $chat;
 
-    if ($modem->{auth} eq 'PAP') {
+    if ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') {
 	#- need to create a secrets file for the connection.
 	my $secrets = "$prefix/etc/ppp/" . lc($modem->{auth}) . "-secrets";
 	my @l = cat_($secrets);
@@ -521,6 +522,7 @@ ExDNSDisabled=0
 AutoName=0
 ScriptArguments=
 AccountingEnabled=0
+DialString=ATDT
 Phonenumber=$toreplace{phone}
 IPAddr=0.0.0.0
 Domain=$toreplace{domain}

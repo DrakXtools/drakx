@@ -44,7 +44,7 @@ sub pppConfig {
 { label => _("Phone number"), val => \$modem->{phone} },
 { label => _("Login ID"), val => \$modem->{login} },
 { label => _("Password"), val => \$modem->{passwd}, hidden => 1 },
-{ label => _("Authentication"), val => \$modem->{auth}, list => [ __("PAP"), __("Terminal-based"), __("Script-based") ] },
+{ label => _("Authentication"), val => \$modem->{auth}, list => [ __("PAP"), __("Terminal-based"), __("Script-based"), __("CHAP") ] },
 { label => _("Domain name"), val => \$modem->{domain} },
 { label => _("First DNS Server (optional)"), val => \$modem->{dns1} },
 { label => _("Second DNS Server (optional)"), val => \$modem->{dns2} },
