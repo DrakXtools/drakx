@@ -152,6 +152,11 @@ typedef unsigned int vm_offset_t;
 #include <machine/types.h>
 #endif
 
+typedef unsigned char	u8;
+typedef unsigned short	u16;
+typedef unsigned int	u32;
+typedef vm_offset_t		addr_t;
+
 /* EBDA is @ 40:0e in real-mode terms */
 #define EBDA_POINTER            0x040e          /* location of EBDA pointer */
 
@@ -172,43 +177,43 @@ typedef unsigned int vm_offset_t;
 /* MP Floating Pointer Structure */
 typedef struct MPFPS {
     char        signature[ 4 ];
-    void*       pap;
-    u_char      length;
-    u_char      spec_rev;
-    u_char      checksum;
-    u_char      mpfb1;
-    u_char      mpfb2;
-    u_char      mpfb3;
-    u_char      mpfb4;
-    u_char      mpfb5;
+    addr_t      pap;
+    u8          length;
+    u8          spec_rev;
+    u8          checksum;
+    u8          mpfb1;
+    u8          mpfb2;
+    u8          mpfb3;
+    u8          mpfb4;
+    u8          mpfb5;
 } mpfps_t;
 
 /* MP Configuration Table Header */
 typedef struct MPCTH {
     char        signature[ 4 ];
-    u_short     base_table_length;
-    u_char      spec_rev;
-    u_char      checksum;
-    u_char      oem_id[ 8 ];
-    u_char      product_id[ 12 ];
-    void*       oem_table_pointer;
-    u_short     oem_table_size;
-    u_short     entry_count;
-    void*       apic_address;
-    u_short     extended_table_length;
-    u_char      extended_table_checksum;
-    u_char      reserved;
+    u16         base_table_length;
+    u8          spec_rev;
+    u8          checksum;
+    u8          oem_id[ 8 ];
+    u8          product_id[ 12 ];
+    addr_t      oem_table_pointer;
+    u16         oem_table_size;
+    u16         entry_count;
+    addr_t      apic_address;
+    u16         extended_table_length;
+    u8          extended_table_checksum;
+    u8          reserved;
 } mpcth_t;
 
 typedef struct PROCENTRY {
-    u_char      type;
-    u_char      apicID;
-    u_char      apicVersion;
-    u_char      cpuFlags;
-    u_long      cpuSignature;
-    u_long      featureFlags;
-    u_long      reserved1;
-    u_long      reserved2;
+    u8          type;
+    u8          apicID;
+    u8          apicVersion;
+    u8          cpuFlags;
+    u32         cpuSignature;
+    u32         featureFlags;
+    u32         reserved1;
+    u32         reserved2;
 } ProcEntry;
 
 #define PROCENTRY_FLAG_EN       0x01
@@ -274,7 +279,7 @@ static int intelDetectSMP_mptable(void)
 	mpcth_t     cth;
 	int count, i;
 	    
-	paddr = (vm_offset_t) mpfps.pap;
+	paddr = mpfps.pap;
 	seekEntry( paddr );
 	readEntry( &cth, sizeof( cth ) );
 	/* if we don't have any entries, the kernel sure
