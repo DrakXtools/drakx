@@ -1,3 +1,173 @@
+2004/03/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt_BR.po: updated Brazilian file
+
+2004/03/01  Pixel  <pixel at mandrakesoft.com>
+
+	* Makefile: we don't need .pod files during install
+	(but why aren't glib & gtk files not listed in share/list ??)
+
+	* install_any.pm: simplify
+
+	* any.pm: use "default.png" instead of (missing) "man.png" which resulted
+	to defaulting to parrot (ic-bird.png)
+
+	* rescue/list, tools/Makefile: adapt to perl packages rebuilt
+
+	* crypto.pm, install_steps_interactive.pm: do not use $o in crypto.pm,
+	pass {distro_type} to mirrors() and bestMirror() instead
+
+2004/03/01  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Removed spurious quotes ('"') from HPOJ config file.
+
+	* printer/printerdrake.pm: Support for new HP multi-function devices and
+	for special needs of Lexmark X125 printer.
+
+2004/03/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (create_packtable) wrap labels by default
+	(Gtk2::WrappedLabel::new) left align labels by default
+
+	* standalone/service_harddrake: do not crash when detector failled (eg:
+	when mouse detection failled because
+	of unhandled exception on module exception b/c of unresolved symbolds
+	b/c of
+	gcc-3.4)
+
+	* standalone/drakconnect: fix bootproto filling (#8498)
+
+	* standalone/draksec: sanitize main explanation text (resizable, weight,
+	margin, ...)
+	prevent pull-down menus to fill availlable space in packtables
+	wrap and left align main options labels
+	do not left align main explanation text
+
+	* drakxtools.spec: 10-15mdk
+
+	* share/po/fr.po: typo fix
+	fix item description (#8507)
+
+	* standalone/icons/harddrake2/isdn.png,
+	standalone/icons/harddrake2/webcam.png, share/po/br.po,
+	standalone/icons/harddrake2/tape.png,
+	standalone/icons/harddrake2/modem.png,
+	standalone/icons/harddrake2/keyboard.png: update
+
+2004/02/29  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2004/02/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ar.po: updated po file
+
+	* share/po/nb.po: updated Norwegian file
+
+2004/02/29  reinouts
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	(small change to test)
+
+2004/02/29  yrahal
+
+	* share/po/ar.po: Committing Arabeyes.org's Arabic translation for the
+	past week :-)
+
+2004/02/28  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* install_any.pm: log reason why getAndSaveFile can't opening dest file
+	for writing
+
+	* share/list: rpmtools and perl-URPM have been rebuilt for perl 5.8.3
+
+	* tools/make_mdkinst_stage2: add a few more inodes to the second stage
+	ramdisk, got bitten by
+	a sucking no space left on device :/ will also print available
+	inodes when creating ramdisk so that we can see if our computing
+	was quite good
+
+	* lang.pm: load_mo: first perform a lookup on mo's for all possible langs,
+	will prevent from downloading each time another time the mo file
+	(fr_FR comes first, is not here, everything including fr gets
+	removed, fr_FR is non-existent, and then fr is downloaded again)
+
+2004/02/28  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/tl.po: Updated Italian and Filipino files
+
+	* share/po/hi.po: updated Hindi po file
+
+	* share/po/bs.po: updated Bosnian file
+
+2004/02/27  Florin Grad  <florin at mandrakesoft.com>
+
+	* network/shorewall.pm, network/drakfirewall.pm: remove the masq zone and
+	add policies, rules only if there is an interface in loc
+
+2004/02/27  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/02/27  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: when in automatic=disk mode but no partition is
+	given, fall back
+	on non automatic mode evidently
+
+2004/02/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+2004/02/27  tbacklund
+
+	* share/po/fi.po: fully translated again...
+
+2004/02/27  tsdgeos
+
+	* share/po/ca.po: unfuzzying
+
+2004/02/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-14mdk
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: sync
+
+	* standalone/net_monitor (in_ifconfig) better check ifconfig is executable
+	before running it
+	(-e is not enough)
+
+	* network/netconnect.pm: note that isdn configuration has not yet be
+	ported upon new wizard layer
+	fix crash when modem was not found
+
+2004/02/27  Warly  <warly at mandrakesoft.com>
+
+	* crypto.pm: add $o in global vars.
+	add distro_type variable to select correct updates mirror type
+
+	* install2.pm: add distro_type variable to select correct updates mirror
+	type
+
+	* share/rpmsrate: Try to have some find of better handling for PRINTER
+	flag
+
 2004/02/27  Guillaume Cottenceau  <gc at mandrakesoft.com>
 
 	* mdk-stage1/disk.c: when in automatic=disk mode but no partition is
@@ -27767,7 +27937,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.893 2004/02/27 15:12:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.894 2004/02/27 15:14:00 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
