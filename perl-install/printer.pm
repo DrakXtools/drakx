@@ -106,7 +106,7 @@ sub set_default_spooler ($) {
     # Make Foomatic config directory if it does not exist yet
     mkdir "$prefix$FOOMATICCONFDIR" if (!(-d "$prefix$FOOMATICCONFDIR"));
     # Mark the default driver in a file
-    open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER" || 
+    open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER" or 
 	die "Cannot create $prefix$FOOMATIC_DEFAULT_SPOOLER!";
     print DEFSPOOL $printer->{SPOOLER};
     close DEFSPOOL;
@@ -120,16 +120,16 @@ sub set_permissions {
     if (!$::isInstall) { return 1 }
     if ($owner && $group) {
         run_program::rooted($prefix, "/bin/chown", "$owner.$group", $file)
-	    || die "Could not start chown!";
+	    or die "Could not start chown!";
     } elsif ($owner) {
         run_program::rooted($prefix, "/bin/chown", $owner, $file)
-	    || die "Could not start chown!";
+	    or die "Could not start chown!";
     } elsif ($group) {
         run_program::rooted($prefix, "/bin/chgrp", $group, $file)
-	    || die "Could not start chgrp!";
+	    or die "Could not start chgrp!";
     }
     run_program::rooted($prefix, "/bin/chmod", $perms, $file)
-	|| die "Could not start chmod!";
+	or die "Could not start chmod!";
 }
 
 sub restart_service ($) {
@@ -192,7 +192,7 @@ sub service_starts_on_boot ($) {
     my ($service) = @_;
     local *F; 
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" ||
+	"/bin/sh -c \"export LC_ALL=C; /sbin/chkconfig --list $service 2>&1\" |" or
 	    return 0;
     while (my $line = <F>) {
 	chomp $line;
@@ -208,7 +208,7 @@ sub service_starts_on_boot ($) {
 sub start_service_on_boot ($) {
     my ($service) = @_;
     run_program::rooted($prefix, "/sbin/chkconfig", "--add", $service)
-	|| return 0;
+	or return 0;
     return 1;
 }
 
@@ -276,7 +276,7 @@ sub assure_device_is_available_for_cups {
     my ($device) = @_;
     local *F; 
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" ||
+	"/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" or
 	    die "Could not run \"lpinfo\"!";
     while (my $line = <F>) {
 	if ($line =~ /$device/) { # Found a line containing the device name,
@@ -293,7 +293,7 @@ sub network_running {
     # If the network is not running return 0, otherwise 1.
     local *F; 
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /sbin/ifconfig\" |" ||
+	"/bin/sh -c \"export LC_ALL=C; /sbin/ifconfig\" |" or
 	    die "Could not run \"ifconfig\"!";
     while (my $line = <F>) {
 	if (($line !~ /^lo\s+/) && # The loopback device can have been 
@@ -319,7 +319,7 @@ sub getSNMPModel {
     # SNMP request to auto-detect model
     local *F;
     open F, ($::testing ? $prefix : "chroot $prefix/ ") .
-	"/bin/sh -c \"scli -1 -c 'show printer info' $host\" |" ||
+	"/bin/sh -c \"scli -1 -c 'show printer info' $host\" |" or
 	return { CLASS => 'PRINTER',
 		 MODEL => _("Unknown Model"),
 		 MANUFACTURER => "",
@@ -389,7 +389,7 @@ sub getSMBPrinterShares {
     # SMB request to auto-detect shares
     local *F;
     open F, ($::testing ? "" : "chroot $prefix/ ") .
-	"/bin/sh -c \"export LC_ALL=C; smbclient -N -L $host\" |" || return ();
+	"/bin/sh -c \"export LC_ALL=C; smbclient -N -L $host\" |" or return ();
     my $insharelist = 0;
     my @shares;
     while (my $l = <F>) {
@@ -495,7 +495,7 @@ sub whatNetPrinter {
     local *F;
     open F, ($::testing ? "" : "chroot $prefix/ ") .
 	"/bin/sh -c \"export LC_ALL=C; nmap -r -P0 -p $portlist $hostlist\" |"
-	|| return @res;
+	or return @res;
     my $host = "";
     my $ip = "";
     my $port = "";
@@ -563,7 +563,7 @@ sub spooler_in_security_level {
     $file = "$prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
-	open F, "< $file" || return 0;
+	open F, "< $file" or return 0;
 	while (my $line = <F>) {
 	    if ($line =~ /^\s*$sp\s*$/) {
 		close F;
@@ -582,7 +582,7 @@ sub add_spooler_to_security_level {
     $file = "$prefix/etc/security/msec/server.$level";
     if (-f $file) {
 	local *F; 
-	open F, ">> $file" || return 0;
+	open F, ">> $file" or return 0;
 	print F "$sp\n";
 	close F;
     }
@@ -603,7 +603,7 @@ sub set_alternative {
     # Read the list of executables for the given command to find the number
     # of the desired executable
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /bin/echo | update-alternatives --config $command \" |" ||
+	"/bin/sh -c \"export LC_ALL=C; /bin/echo | update-alternatives --config $command \" |" or
 	    die "Could not run \"update-alternatives\"!";
     my $choice = 0;
     while (my $line = <F>) {
@@ -628,7 +628,7 @@ sub pdq_panic_button {
     my $setting = $_[0];
     if (-f "$prefix/usr/sbin/pdqpanicbutton") {
         run_program::rooted($prefix, "/usr/sbin/pdqpanicbutton", "--$setting")
-	    || die "Could not $setting PDQ panic buttons!";
+	    or die "Could not $setting PDQ panic buttons!";
     }
 }
 
@@ -678,7 +678,7 @@ sub read_configured_queues($) {
 	    #- poll queue info 
 	    local *F; 
 	    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-		"foomatic-configure -P -q -s $spooler |" ||
+		"foomatic-configure -P -q -s $spooler |" or
 		    die "Could not run foomatic-configure";
 	    eval (join('',(<F>))); 
 	    close F;
@@ -692,7 +692,7 @@ sub read_configured_queues($) {
 	#- Poll the queues of the current default spooler
 	local *F; 
 	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	    "foomatic-configure -P -q -s $printer->{SPOOLER} |" ||
+	    "foomatic-configure -P -q -s $printer->{SPOOLER} |" or
 		die "Could not run foomatic-configure";
 	eval (join('',(<F>))); 
 	close F;
@@ -824,7 +824,7 @@ sub read_printer_db(;$) {
     # appropriate file when it is already generated
     if (!(-f $dbpath)) {
 	open DBPATH, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	    "foomatic-configure -O -q |" ||
+	    "foomatic-configure -O -q |" or
 		die "Could not run foomatic-configure";
     } else {
 	open DBPATH, $dbpath or die "An error occurred on $dbpath : $!";
@@ -959,7 +959,7 @@ sub read_foomatic_options ($) {
 		  " -s $printer->{SPOOLER} -n $printer->{OLD_QUEUE}" : "") .
 		($printer->{SPECIAL_OPTIONS} ?
 		  " $printer->{SPECIAL_OPTIONS}" : "") 
-		    . " |" ||
+		    . " |" or
 	    die "Could not run foomatic-configure";
     eval (join('',(<F>))); 
     close F;
@@ -975,10 +975,10 @@ sub read_cups_options ($) {
     local *F;
     if ($queue_or_file =~ /.ppd.gz$/) { # compressed PPD file
 	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	    "gunzip -cd $queue_or_file | lphelp - |" || return 0;
+	    "gunzip -cd $queue_or_file | lphelp - |" or return 0;
     } else { # PPD file not compressed or queue
 	open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	    "lphelp $queue_or_file |" || return 0;
+	    "lphelp $queue_or_file |" or return 0;
     }
     my $i;
     my $j;
@@ -1083,7 +1083,7 @@ sub read_cups_printer_list {
     # daemon currently knows, including remote ones.
     local *F;
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"lpstat -v |" || return ();
+	"lpstat -v |" or return ();
     my @printerlist;
     my $line;
     while ($line = <F>) {
@@ -1110,7 +1110,7 @@ sub get_cups_remote_queues {
     # "BrowsePoll" entries in the local /etc/cups/cupsd.conf/
     local *F;
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"lpstat -v |" || return ();
+	"lpstat -v |" or return ();
     my @printerlist;
     my $line;
     while ($line = <F>) {
@@ -1231,7 +1231,7 @@ sub set_default_printer {
     my ($printer) = $_[0];
     run_program::rooted($prefix, "foomatic-configure",
 			"-D", "-q", "-s", $printer->{SPOOLER},
-			"-n", $printer->{DEFAULT}) || return 0;
+			"-n", $printer->{DEFAULT}) or return 0;
     return 1;
 }
 
@@ -1239,7 +1239,7 @@ sub get_default_printer {
     my $printer = $_[0];
     local *F;
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"foomatic-configure -Q -q -s $printer->{SPOOLER} |" || return undef;
+	"foomatic-configure -Q -q -s $printer->{SPOOLER} |" or return undef;
     my $line;
     while ($line = <F>) {
 	if ($line =~ m!^\s*<defaultqueue>(.*)</defaultqueue>\s*$!) {
@@ -1689,7 +1689,7 @@ sub get_copiable_queues {
     my @queuelist;      #- here we will list all Foomatic-generated queues
     # Get queue list with foomatic-configure
     open QUEUEOUTPUT, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	    "foomatic-configure -Q -q -s $oldspooler |" ||
+	    "foomatic-configure -Q -q -s $oldspooler |" or
 		die "Could not run foomatic-configure";
 
     my $entry = {};
@@ -1777,7 +1777,7 @@ sub configure_hpoj {
     # the subroutine definitions stay valid after leaving this subroutine.
     if (!$ptalinitread) {
 	local *PTALINIT;
-	open PTALINIT, "$prefix/usr/sbin/ptal-init" || do {
+	open PTALINIT, "$prefix/usr/sbin/ptal-init" or do {
 	    die "unable to open $prefix/usr/sbin/ptal-init";
 	};
 	my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
@@ -1961,7 +1961,7 @@ sub configure_hpoj {
 
     # Open configuration file
     local *CONFIG;
-    open(CONFIG,"> $prefix/etc/ptal/$ptaldevice") ||
+    open(CONFIG,"> $prefix/etc/ptal/$ptaldevice") or
 	die "Could not open /etc/ptal/$ptaldevice for writing!\n";
 
     # Write file header.
@@ -2723,7 +2723,7 @@ sub findopenofficeconfigfile {
 sub readsofficeconfigfile {
     my ($file) = @_;
     local *F; 
-    open F, "< $prefix$file" || return "";
+    open F, "< $prefix$file" or return "";
     my $filecontent = join("", <F>);
     close F;
     return $filecontent;
@@ -2732,7 +2732,7 @@ sub readsofficeconfigfile {
 sub writesofficeconfigfile {
     my ($file, $filecontent) = @_;
     local *F; 
-    open F, "> $prefix$file" || return 0;
+    open F, "> $prefix$file" or return 0;
     print F $filecontent;
     close F;
     return 1;
@@ -2744,7 +2744,7 @@ sub getcupsremotequeues {
     # "BrowsePoll" entries in the local /etc/cups/cupsd.conf
     local *F;
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
-	"lpstat -v |" || return ();
+	"lpstat -v |" or return ();
     my @printerlist;
     my $line;
     while ($line = <F>) {
@@ -3072,7 +3072,7 @@ sub findgimpconfigfiles {
     }
     my @filestotreat;
     local *PASSWD;
-    open PASSWD, "< $prefix/etc/passwd" || die "Cannot read /etc/passwd!\n";
+    open PASSWD, "< $prefix/etc/passwd" or die "Cannot read /etc/passwd!\n";
     while (<PASSWD>) {
 	chomp;
 	if ($_ =~ /^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
@@ -3111,7 +3111,7 @@ sub findgimpconfigfiles {
 sub readgimpconfigfile {
     my ($file) = @_;
     local *F; 
-    open F, "< $prefix$file" || return "";
+    open F, "< $prefix$file" or return "";
     my $filecontent = join("", <F>);
     close F;
     return $filecontent;
@@ -3120,7 +3120,7 @@ sub readgimpconfigfile {
 sub writegimpconfigfile {
     my ($file, $filecontent) = @_;
     local *F; 
-    open F, "> $prefix$file" || return 0;
+    open F, "> $prefix$file" or return 0;
     print F $filecontent;
     close F;
     return 1;
