@@ -46,7 +46,7 @@ sub installPackages {
     pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
 
     my @toInstall = pkgs::packagesToInstall($o->{packages});
-    $ENV{DURING_INSTALL} = 1;
+    local $ENV{DURING_INSTALL} = 1;
     $ENV{LD_LIBRARY_PATH} = "/lib:/usr/lib:/usr/X11R6/lib:/usr/lib/qt3/lib";
     pkgs::install($::prefix, 0, \@toInstall, $o->{packages});
 
@@ -65,11 +65,11 @@ print "Making live in $::prefix directory.\n";
 #    eval { rm_rf($::prefix) };
     output_p("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
     installPackages();
-    system("chroot $::prefix ldconfig");
+    run_program::rooted($::prefix, 'ldconfig');
     touch("$::prefix/etc/menu/enable_simplified");
-    system("chroot $::prefix update-menus");
-    system("chroot $::prefix fc-cache");  #- generate cache in all directories mentioned in config file
-    system("chroot $::prefix kbuildsycoca --global");
+    run_program::rooted($::prefix, 'update-menus');
+    run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directories mentioned in config file
+    run_program::rooted($::prefix, 'kbuildsycoca', '--global');
     eval { rm_rf("$::prefix/dev") }; # we don't need it, we use devfs
     eval { rm_rf("$::prefix/lib/i686") }; # de-complexify, use the default on any arch
 
