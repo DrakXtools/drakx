@@ -17,7 +17,7 @@ my %mirrors = (
  "ftp.leo.org" => [ "Germany", "/pub/comp/os/unix/linux/Mandrake/Mandrake-crypto" ],
  "sunsite.uio.no" => [ "Norway", "/pub/unix/Linux/Mandrake-crypto" ],
  "ftp.sunet.se" => [ "Sweden", "/pub/Linux/distributions/mandrake-crypto" ],
- "ackbar" => [ "Ackbar", "/crypto", "a", "a" ],
+#- "ackbar" => [ "Ackbar", "/crypto", "a", "a" ],
 );
 
 my %deps = (
