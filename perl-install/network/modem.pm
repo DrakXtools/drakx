@@ -19,10 +19,7 @@ sub ppp_configure {
 }
 
 sub ppp_configure_raw {
-    my ($in, $netc, $modem) = @_;
-    $netc->{DOMAINNAME2} = $modem->{domain};
-    $in->do_pkgs->install('ppp') if !$::testing;
-    $in->do_pkgs->install('kdenetwork-kppp') if $in->do_pkgs->is_installed('kdebase');
+    my ($modem) = @_;
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
     my %toreplace;
