@@ -1,3 +1,79 @@
+2002/02/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ru.po, share/po/sp.po, share/po/ca.po, share/po/th.po,
+	share/po/uk.po, share/po/es.po, share/po/eo.po, share/po/ro.po,
+	share/po/sv.po, share/po/sr.po, share/po/da.po, share/po/el.po,
+	share/po/et.po, share/po/cs.po, share/po/tr.po, share/po/az.po,
+	share/po/eu.po: updated some po files
+
+2002/02/24  Pixel  <pixel@mandrakesoft.com>
+
+	* share/keyboards.tar.bz2: fix permission
+
+2002/02/23  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cy.po, share/po/Makefile: updated Welsh file
+
+	* share/po/zh_CN.po, share/po/DrakX.pot, share/po/eu.po, share/po/vi.po,
+	share/po/wa.po, share/po/zh_TW.po: udated Vietnamese file
+
+	* install_steps_interactive.pm: removed useless _( ) around a string
+	displayed in English only
+
+	* share/po/be.po, share/po/bg.po, share/po/sk.po, share/po/ar.po,
+	share/po/sl.po, share/po/br.po, share/po/bs.po, share/po/sv.po,
+	share/po/af.po: updated some po files
+
+2002/02/23  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_newt.pm: 
+	  - use simplify_string to ensure multi-line and too long strings are
+	not used
+	(hacky, but no other solution)
+	  - set $::setstep like interactive_gtk is doing (??)
+
+	* partition_table_empty.pm: handle MBR containing the same character (0 or
+	"l")
+
+	* diskdrake/interactive.pm: not_edit'able filesystem type (allow esp. a
+	nicer newt version)
+
+	* devices.pm (devices::make): following a good advice from Andrej
+	Borsenkow, return the
+	file even if the device file doesn't exist the caller will fail or not.
+	The
+	advantage is better compatibility than raising an exception
+	devices::make doesn't mknod with devfs
+
+	* detect_devices.pm: no need to catch the exception from devices::make
+	anymore
+	devices::make doesn't mknod with devfs
+
+	* fs.pm: nicer error message when mount fails
+
+	* share/rpmsrate: adding gphoto2
+
+	* install_steps_interactive.pm: when passwords do not match, focus on
+	first password entry, not the second (thanks to garrick)
+
+	* Xconfigurator_consts.pm: remove Option "sw_cursor" for "SiS 6326" since
+	it's already handled in Xconfigurator.pm
+
+	* my_gtk.pm: fix @icon_paths to include /usr/share/libDrakX/pixmaps
+	(thanks to garrick)
+
+	* modules.pm: remove "-f" option for insmod
+
+2002/02/23  siegel
+
+	* share/po/de.po: fixed silly error
+	updates
+
+2002/02/23  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Added automatic configuration of printers
+	in Star Office and Open Office.
+
 2002/02/22  dam's  <damien@mandrakesoft.com>
 
 	* share/advertising/02-internet.pl, share/advertising/07-server.pl,
