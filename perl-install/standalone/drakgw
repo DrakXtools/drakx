@@ -441,6 +441,8 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 #
 /sbin/ipchains -P forward DENY
 /sbin/ipchains -A forward -s $lan_address.0/24 -j MASQ
+
+# Let incoming packets arrive to our interface, in case there are some firewall rules to come
 /sbin/ipchains -A input -i $device -j ACCEPT
 ));
 chmod 0700, $rc_firewall_22;
@@ -456,6 +458,19 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 # In the NAT table (-t nat), Append a rule (-A) after routing (POSTROUTING)
 # which says to MASQUERADE the connection (-j MASQUERADE).
 iptables -t nat -A POSTROUTING -s $lan_address.0/24 -j MASQUERADE
+
+# Allows forwarding specifically to our LAN
+iptables -A FORWARD -s $lan_address.0/24 -j ACCEPT
+
+# Allow dhcp requests
+iptables -A INPUT -i $device -p udp --sport bootpc --dport bootps -j ACCEPT
+iptables -A INPUT -i $device -p tcp --sport bootpc --dport bootps -j ACCEPT
+iptables -A INPUT -i $device -p udp --sport bootps --dport bootpc -j ACCEPT
+iptables -A INPUT -i $device -p tcp --sport bootps --dport bootpc -j ACCEPT
+
+# Allow dns requests
+iptables -A INPUT -i $device -p udp --dport domain -j ACCEPT
+iptables -A INPUT -i $device -p tcp --dport domain -j ACCEPT
 ));
 chmod 0700, $rc_firewall_24;
 
@@ -641,6 +656,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.42  2001/04/12 13:50:24  gc
+#- add some rule so later on tinyfirewall will not prevent everything from working
+#-
 #- Revision 1.41  2001/04/11 15:28:36  gc
 #- kosmetik
 #-
