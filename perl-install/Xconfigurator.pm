@@ -302,6 +302,13 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	readlink("$prefix/etc/X11/X") =~ /XF86_/ and $card->{prefer_xf3} = !$card->{force_xf4};
     }
 
+    #- hack for SiS 640 for laptop.
+    if ($card->{identifier} =~ /SiS.*640/ and detect_devices::isLaptop()) {
+	$card->{use_xf4} = $card->{force_xf4} = '';
+	$card->{prefer_xf3} = 1;
+	$card->{server} = 'FBDev';
+    }
+
     #- basic installation, use of XFree 4.1 or XFree 3.3.
     my ($xf4_ver, $xf3_ver) = ("4.1.0", "3.3.6");
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
