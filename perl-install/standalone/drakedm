@@ -29,10 +29,10 @@ my $in = 'interactive'->vnew('su');
 
 my $cfg_file = '/etc/sysconfig/desktop';
 
-my %dm = ('GNOME' => [ 'GDM (GNOME Display Manager)', '/usr/bin/gdm', 'gdm' ],
-          'KDM'   => [ 'KDM (KDE Display Manager)', '/usr/bin/kdm', 'kdebase-kdm' ],
-          'KDE'   => [ 'MdkKDM (Mandrake Display Manager)', '/usr/bin/mdkkdm', 'mdkkdm' ],
-          'XDM'   => [ 'XDM (X Display Manager)', '/usr/bin/X11/xdm', 'xorg-x11' ],
+my %dm = ('GNOME' => [ N("GDM (GNOME Display Manager)"), '/usr/bin/gdm', 'gdm' ],
+          'KDM'   => [ N("KDM (KDE Display Manager)"), '/usr/bin/kdm', 'kdebase-kdm' ],
+          'KDE'   => [ N("MdkKDM (Mandrakelinux Display Manager)"), '/usr/bin/mdkkdm', 'mdkkdm' ],
+          'XDM'   => [ N("XDM (X Display Manager)"), '/usr/bin/X11/xdm', 'xorg-x11' ],
           );
 
 my $dm;
