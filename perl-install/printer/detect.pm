@@ -47,6 +47,8 @@ sub whatParport() {
 		    $elem->{$1} =~ s/HEWLETT[-\s_]PACKARD/HP/;
 		}
 	    }
+	    # Some parallel printers miss the "CLASS" field
+	    $elem->{CLASS} = 'PRINTER' if !defined($elem->{CLASS});
 	}
 	push @res, { port => "/dev/lp$_", val => $elem };
     }
