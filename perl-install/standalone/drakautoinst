@@ -70,7 +70,7 @@ for (my $f = $st->{first}; $f; $f = $st->{$f}{next}) {
 $in->ask_from(_("Automatic Steps Configuration"),
 	      _("Please choose for each step whether it will replay like your install, or it will be manual"),
 	      \@choices
-	     );# or quit_global($in, 0);
+	     ); or quit_global($in, 0);
 
 ${$_->[1]} eq _('manual') and push @manual_steps, $_->[0] foreach @all_steps;
 
@@ -359,6 +359,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.12  2001/10/30 17:00:05  damien
+#- updated
+#-
 #- Revision 1.11  2001/10/26 13:45:11  damien
 #- progress bar hack
 #-
