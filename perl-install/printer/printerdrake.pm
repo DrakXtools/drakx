@@ -67,6 +67,7 @@ sub config_cups {
     # Read state for auto-correction of cupsd.conf
     $printer->{cupsconfig}{autocorrection} =
 	printer::main::get_cups_autoconf();
+    my $oldautocorr = $printer->{cupsconfig}{autocorrection};
     # Human-readable strings for hosts onto which the local printers
     # are shared
     my $maindone;
@@ -298,8 +299,11 @@ N("192.168.100.0/255.255.255.0\n")
 		$retvalue = 1;
 		$maindone = 1;
 		# Write state for auto-correction of cupsd.conf
-		printer::main::set_cups_autoconf
-		    ($printer->{cupsconfig}{autocorrection});
+		if ($oldautocorr != 
+		    $printer->{cupsconfig}{autocorrection}) {
+		    printer::main::set_cups_autoconf
+			($printer->{cupsconfig}{autocorrection});
+		}
 		# Write cupsd.conf
 		printer::main::write_cups_config($printer);
 		printer::main::write_cupsd_conf

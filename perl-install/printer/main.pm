@@ -647,7 +647,9 @@ sub set_cups_autoconf {
     output($file, @file_content);
 
     # Restart CUPS
-    printer::services::restart("cups");
+    if ($autoconf) {
+	printer::services::restart("cups");
+    }
 
     return 1;
 }
