@@ -271,7 +271,7 @@ contains a fair number of system tools for restoring a system, which has
 crashed due to a power failure, an unfortunate typing error, a typo in a
 password, or any other reason.
 
-When you click on this step, you will be asked to enter a disk inside the
+When you click on this step, you will be asked to insert a disk inside the
 drive. The floppy disk you will insert must be empty or contain data which
 you do not need. You will not have to format it since DrakX will rewrite
 the whole disk."),
