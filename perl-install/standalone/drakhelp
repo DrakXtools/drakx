@@ -19,7 +19,7 @@ my $lang = lang::lang2LANG(lang::read('',$>)) || 'en';
 if (!member($lang, qw(de en es fr it ru))) { $lang = 'en' };
 my $path_to_help = "/usr/share/doc/mandrake/" . $lang . "/";
 
--d $path_to_help or $in->do_pkgs->install('mandrake_doc-' . $lang);
+-d $path_to_help or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $lang);
 
 if ((my $wm = any::running_window_manager()) eq 'kwin') {
     system("mdklaunchhelp " . $path_to_help . $ARGV[0] . "&");
