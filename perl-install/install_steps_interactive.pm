@@ -422,7 +422,7 @@ sub askSupplMirror {
 	return $o->ask_from_entry('', $message) || '';
     }
     my $url = "ftp://$u->{mirror}$crypto::mirrors{$u->{mirror}}[1]";
-    $url =~ s/\bmedia\/?$//;
+    $url =~ s!\bmedia/?$!!;
     log::l("mirror chosen [$url]");
     return $url;
 }
