@@ -469,7 +469,7 @@ sub installPackages {
 				   my $decy = 0;
 				   my $first = 1;
 				   foreach (@data) {
-				       my ($text, $x, $y, $area_width, $area_height, $_bold) = @$_;
+				       my ($text, $x, $y, $area_width, $area_height, $bold) = @$_;
 				       my ($width, $_height, $lines, $widths, $heights, $_ascents, $_descents) =
 					 get_text_coord($text, $darea, $area_width, $area_height, 1, 0, 1, 1);
 				       if ($first && $icon) {
@@ -484,14 +484,15 @@ sub installPackages {
 				       $yicon > $y + ${$heights}[0] and $decy = $yicon - ($y + ${$heights}[$i]);
 				       foreach (@{$lines}) {
 					   my $layout = $darea->create_pango_layout($_);
-					   $darea->window->draw_layout($darea->style->white_gc,
-								       ($dx-$width)/2 + $x + ${$widths}[$i],
-								       ($first ? 0 : $decy) + $y + ${$heights}[$i],
-								       $layout);
-					   $darea->window->draw_layout($darea->style->white_gc,
-								       ($dx-$width)/2 + $x + ${$widths}[$i] + 1,
-								       ($first ? 0 : $decy) + $y + ${$heights}[$i],
-								       $layout);
+					   my $draw_lay = sub {
+					       my ($gc, $decx, $decy) = @_;
+					       $darea->window->draw_layout($gc,
+									   ($dx-$width)/2 + $x + ${$widths}[$i] + $decx,
+									   ($first ? 0 : $decy) + $y + ${$heights}[$i] + $decy,
+									   $layout);
+					   };
+					   $bold and $draw_lay->($darea->style->black_gc, 1, 1);
+					   $draw_lay->($darea->style->white_gc, 0, 0);
 					   $layout->unref;
 					   $i++;
 				       }
