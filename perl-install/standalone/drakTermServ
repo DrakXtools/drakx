@@ -76,7 +76,7 @@ if ($ts == 256) {
 		system("urpmi terminal-server > /dev/null");
 	}
 	$ts = system("rpm -qa | grep terminal-server > /dev/null");
-	if ($ts eq 256) {
+	if ($ts == 256) {
 		warn("Useless without Terminal Server");
 		exit(1);
 	}
@@ -137,24 +137,23 @@ if ("@ARGV" =~ /--delclient/) {
 read_conf_file();	
 interactive_mode() if $#ARGV < 1;
 
-sub read_conf_file {
-    local *CONF_FILE;
+sub read_conf_file() {
 	if (-e $cfg_file) {
+         local *CONF_FILE;
 		open(CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
           local $_;
 		while (<CONF_FILE>) {
-			next unless /\S/;
-			next if /^#/;
-			chomp;
-			if (/^ALLOW_THIN/)       { $thin_clients = 1 }
+			if (/^ALLOW_THIN/) {
+                   $thin_clients = 1;
+                   last;
+               }
 		}
 	}
-	close CONF_FILE;
 }
 
-sub write_conf_file {
+sub write_conf_file() {
 	my @cfg_list;
-	if ($thin_clients eq 1) {
+	if ($thin_clients == 1) {
 		@cfg_list = "ALLOW_THIN\n";
 	}
 	output_p($cfg_file, @cfg_list);
@@ -195,18 +194,18 @@ x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
 	my $inittab_file = "/etc/inittab\$\$IP=$client_ip\$\$";
      local *INITTAB;
-	open(INITTAB, "> $inittab_file") || warn("Can't open $inittab_file!");
+	open(INITTAB, "> $inittab_file") or warn("Can't open $inittab_file!");
 	print INITTAB $inittab;
 	close INITTAB	
 }
 
-sub cursor_wait {
+sub cursor_wait() {
 	# turn the cursor to a watch
 	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_WATCH"));	
 	gtkflush();
 }
 
-sub cursor_norm {
+sub cursor_norm() {
 	# restore normal cursor
 	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_LEFT_PTR"));
 	gtkflush();
@@ -215,13 +214,13 @@ sub cursor_norm {
 sub display_error {
     my ($message) = @_;
     my $error_box;
-    ${$central_widget}->destroy();
+    $$central_widget->destroy();
     gtkpack($status_box,
 	    $error_box = gtkpack_(new Gtk2::VBox(0,0),
 		  1, new Gtk2::Label($message),
 				  0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					    gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub {
-						${$central_widget}->destroy(); 
+						$$central_widget->destroy(); 
 					    }),
 					    ),
 				  )
@@ -229,7 +228,7 @@ sub display_error {
     $central_widget = \$error_box;
 }
 
-sub interactive_mode {
+sub interactive_mode() {
     $window1 = ugtk2->new('drakTermServ');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
@@ -249,14 +248,14 @@ sub interactive_mode {
 					    1, gtkpack_(new Gtk2::HBox(0,2),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
-								      ${$central_widget}->destroy(); 
+								      $$central_widget->destroy(); 
 								      $windows = 1;
 								      cursor_wait(); 
 								      enable_ts();
 								      cursor_norm();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
-								      ${$central_widget}->destroy(); 
+								      $$central_widget->destroy(); 
 								      cursor_wait();
 								      disable_ts();
 								      cursor_norm(); 
@@ -264,14 +263,14 @@ sub interactive_mode {
 								  ),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
-								      ${$central_widget}->destroy(); 
+								      $$central_widget->destroy(); 
 								      $windows = 0; 
 								      cursor_wait();	
 								      start_ts();
 								      cursor_norm();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
-								      ${$central_widget}->destroy(); 
+								      $$central_widget->destroy(); 
 								      cursor_wait();
 								      stop_ts();
 								      cursor_norm();
@@ -279,27 +278,27 @@ sub interactive_mode {
 								  ),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
-								      ${$central_widget}->destroy();
+								      $$central_widget->destroy();
 								      $windows = 1; 
 								      make_boot();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
-								      ${$central_widget}->destroy();
+								      $$central_widget->destroy();
 								      make_nbi();
 								  }),
 								  ),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
-								      ${$central_widget}->destroy();
+								      $$central_widget->destroy();
 								      $windows = 0;
 								      maintain_users();
 								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { ${$central_widget}->destroy(); maintain_clients() }),
+								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { $$central_widget->destroy(); maintain_clients() }),
 								  ),
 							1, new Gtk2::HBox(0,2),
 							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
-								      ${$central_widget}->destroy();
+								      $$central_widget->destroy();
 								      help();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
@@ -321,7 +320,7 @@ sub interactive_mode {
     ugtk2->exit(0);
 }
 
-sub about {
+sub about() {
     text_view(N("
  Copyright (C) 2002 by MandrakeSoft 
 	Stew Benedict sbenedict\@mandrakesoft.com
@@ -350,7 +349,7 @@ sub text_view {
 			   ),
 				 0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					   gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
-							     sub { ${$central_widget}->destroy() }),
+							     sub { $$central_widget->destroy() }),
 					   ),
 				 )
 	    );
@@ -358,7 +357,7 @@ sub text_view {
     $status_box->show_all();
 }
 
-sub help {
+sub help() {
     text_view(N("drakTermServ Overview
 			   
         - Create Etherboot Enabled Boot Images:
@@ -460,7 +459,7 @@ sub help {
 "));
 }
 
-sub make_boot {
+sub make_boot() {
 	#- make a boot image on floppy or iso from etherboot images
 	my $boot_box;
 	my $rom_path = "/usr/lib/etherboot";
@@ -497,7 +496,7 @@ sub make_boot {
 	$boot_box->show_all();
 }
 
-sub make_nbi {
+sub make_nbi() {
 	my $nbi_box;
 	my @kernels = grep { /vmlinuz/ } all("/boot");
 	my $kernel;
@@ -620,7 +619,7 @@ sub make_nbi {
 					gtksignal_connect(new Gtk2::Button(N("<-- Delete")), clicked => 
 						sub { my $nbi = "/var/lib/tftpboot/" . $nbi;
 							my $result = unlink($nbi) || warn("Can't delete $nbi...");
-							if ($result eq 1) {
+							if ($result == 1) {
 								$list_model->remove($nbi_iter);
 							}
 						}),
@@ -643,7 +642,7 @@ sub make_nbi {
 	$nbi_box->show_all();
 }
 
-sub maintain_users {
+sub maintain_users() {
 	#- copy users from /etc/shadow to /etc/shadow$$CLIENT$$ to allow ts login
 	my $user_box;
 	my @sys_users = cat_("/etc/shadow");
@@ -662,7 +661,7 @@ sub maintain_users {
 	
 	foreach (@sys_users) {
 		my ($s_label) = split(/:/, $_, 2);
-		if (grep(/$s_label/, @homes)) {
+		if (grep { /$s_label/ } @homes) {
     		$list_model->append($iter);
     		$list_model->set($iter, [ 0 => $s_label ]);
 		}
@@ -685,7 +684,7 @@ sub maintain_users {
 	
 	foreach (@ts_users) {
 		my ($t_label) = split(/:/, $_, 2);
-		my @system_entry = grep(/$t_label/, @sys_users); 
+		my @system_entry = grep { /$t_label/ } @sys_users; 
 		$t_label = $t_label . " !!!" if $_ ne $system_entry[0];
 		$list_model->append($iter);
     	$list_model->set($iter, [ 0 => $t_label ]);
@@ -706,7 +705,7 @@ sub maintain_users {
 					new Gtk2::HBox(0,10),
 					gtksignal_connect(new Gtk2::Button(N("Add User -->")), clicked => 
 						sub { my $result = adduser(0, $sys_user);
-							if ($result eq 0) {
+							if ($result == 0) {
 							 	$list_model->append($iter);
     							$list_model->set($iter, [ 0 => $sys_user ]);
 							}
@@ -725,7 +724,7 @@ sub maintain_users {
 	$user_box->show_all();
 }
 
-sub maintain_clients {
+sub maintain_clients() {
 	#- add client machines to Terminal Server config
 	my $client_box;
 	my %clients = read_dhcpd_conf();
@@ -828,7 +827,7 @@ sub maintain_clients {
 	
 								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
 								
-								if ($result eq 0) {
+								if ($result == 0) {
 									my $t_client = Gtk2::TreeIter->new;
 
 		    						$model->append($t_client, undef);
@@ -843,7 +842,7 @@ sub maintain_clients {
     								$model->set($c_det_ip, [ 0 => $ip ]);
 																		
 									my $client_type = "type: fat";
-									$client_type = "type: thin" if $is_thin eq 1;
+									$client_type = "type: thin" if $is_thin == 1;
 									my $c_det_type = Gtk2::TreeIter->new;
 									$model->append($c_det_type, $t_client);
     								$model->set($c_det_type, [ 0 => $client_type ]);
@@ -870,18 +869,18 @@ sub maintain_clients {
 								}	
 								$entry_nbi->entry->set_text($clients{$client}{filename});
 								my $result = delclient(0, $client);
-								if ($result eq 0) {
+								if ($result == 0) {
 									$model->remove($citer);
 								}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("Delete Client")), clicked => 
 						sub { my $result = delclient(0, $client);
-							if ($result eq 0) {
+							if ($result == 0) {
 								$model->remove($citer);
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("dhcpd Config...")), clicked => 
-						sub { ${$central_widget}->destroy(); dhcpd_config() }),
+						sub { $$central_widget->destroy(); dhcpd_config() }),
 #					new Gtk2::HBox(1,1),
 				),
 				create_scrolled_window($tree_clients),
@@ -896,19 +895,19 @@ sub maintain_clients {
 			# we need to change some system files to allow the thin clients
 			# to access the server - enabling xdmcp and modify hosts.deny/hosts.allow for some security
 			# we also need to set runlevel to 5 and restart the display manager
-			if ($thin_clients eq 1) {
-				`perl -pi -e 's/id:3:initdefault:/id:5:initdefault:/' /etc/inittab`;
-				`perl -pi -e 's/\! DisplayManager.requestPort:/DisplayManager.requestPort:/' /etc/X11/xdm/xdm-config`;
-				`perl -pi -e 's/Enable=false/Enable=true/' /usr/share/config/kdm/kdmrc`;
+			if ($thin_clients == 1) {
+				substInFile { s/id:3:initdefault:/id:5:initdefault:/ } "/etc/inittab";
+				substInFile { s/! DisplayManager.requestPort:/DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
+				substInFile { s/Enable=false/Enable=true/ } "/usr/share/config/kdm/kdmrc";
 				# This file had 2 "Enable=" entries, one for xdmcp and one for debug
 				change_gdm_xdmcp("true");
 				log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 				# just xdmcp in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
 				update_hosts_allow("enable");
 			} else {
-				`perl -pi -e 's/id:5:initdefault:/id:3:initdefault:/' /etc/inittab`;
-				`perl -pi -e 's/DisplayManager.requestPort:/\! DisplayManager.requestPort:/' /etc/X11/xdm/xdm-config`;
-				`perl -pi -e 's/Enable=true/Enable=false/' /usr/share/config/kdm/kdmrc`;
+				substInFile { s/id:5:initdefault:/id:3:initdefault:/ } '/etc/inittab';
+				substInFile { s/DisplayManager.requestPort:/! DisplayManager.requestPort:/ } "/etc/X11/xdm/xdm-config";
+				substInFile { s/Enable=true/Enable=false/ } "/usr/share/config/kdm/kdmrc";
 				change_gdm_xdmcp("false");
 				log::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 				update_hosts_allow("disable");
@@ -920,7 +919,7 @@ sub maintain_clients {
 	$client_box->show_all();
 }
 
-sub dhcpd_config {
+sub dhcpd_config() {
 	#- do main dhcp server config
 	my $dhcpd_box;
 	my @ifvalues;
@@ -1077,7 +1076,7 @@ sub dhcpd_config {
 	$dhcpd_box->show_all();	
 }
 
-sub get_mask_from_sys {
+sub get_mask_from_sys() {
 	my %netconfig;
 	if (-e "/etc/sysconfig/network-scripts/ifcfg-eth0") {
 		%netconfig = getVarsFromSh("/etc/sysconfig/network-scripts/ifcfg-eth0");
@@ -1102,14 +1101,14 @@ sub get_subnet_from_sys {
 	join(".", @subnet);
 }
 
-sub get_broadcast_from_sys {
+sub get_broadcast_from_sys() {
 	my @ifconfig = grep { /inet/ } `/sbin/ifconfig eth0`;
 	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
 		
 	$ifvalues[5];
 }
 
-sub get_ip_from_sys {
+sub get_ip_from_sys() {
 	my @ifconfig = grep { /inet/ } `/sbin/ifconfig eth0`;
 	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
 		
@@ -1192,7 +1191,7 @@ sub enable_ts {
 	$buff[1] = "\tChecking default /etc/dhcpd.conf...\n";
 	my @my_conf = cat_("/etc/dhcpd.conf");
 	if ($my_conf[0] !~ /drakTermServ/) {
-		if ($cmd_line eq 1) {
+		if ($cmd_line == 1) {
 			print("No /etc/dhcpd.conf built yet - use GUI to create!!\n");
 			return;
 		} else {
@@ -1316,7 +1315,7 @@ sub stop_ts {
 
 }
 
-sub show_status {
+sub show_status() {
     text_view("@buff");
 }
 
@@ -1386,9 +1385,7 @@ sub deluser {
           }
           local *FHANDLE;
 		open(FHANDLE, "> /etc/shadow\$\$CLIENT\$\$");
-		foreach my $user (@ts_users) {
-			print FHANDLE $user;
-		} 
+		print FHANDLE $_ foreach @ts_users;
 		close FHANDLE;
 	}
 	
@@ -1430,7 +1427,7 @@ sub addclient {
 	if (!$host_in_use && !$mac_in_use && !$ip_in_use) {
 		$ts_clients{$hostname}{hardware} = $mac;
 		$ts_clients{$hostname}{address} = $ip;
-		if ($is_thin eq 1) {
+		if ($is_thin == 1) {
 			$ts_clients{$hostname}{type} = "thin";
 		} else {
 			$ts_clients{$hostname}{type} = "fat";
@@ -1439,7 +1436,7 @@ sub addclient {
 			
 		my $clients = "/etc/dhcpd.conf.etherboot.clients";
           local *CLIENT;
-		open(CLIENT, ">> $clients") || warn("Can't open $clients!");
+		open(CLIENT, ">> $clients") or warn("Can't open $clients!");
 		my $client_entry = format_client_entry($hostname, %ts_clients);
 		print CLIENT $client_entry;
 		close CLIENT;	
@@ -1473,8 +1470,8 @@ sub change_gdm_xdmcp {
 	my ($enable) = @_;
 	my @conf_data = cat_("/etc/X11/gdm/gdm.conf");
 	for (my $i = 0; $i < @conf_data; $i++) {
-		$conf_data[$i] =~ s/^Enable\=false/Enable\=true/ if $enable eq "true";
-		$conf_data[$i] =~ s/^Enable\=true/Enable\=false/ if $enable eq "false";
+		$conf_data[$i] =~ s/^Enable=false/Enable=true/ if $enable eq "true";
+		$conf_data[$i] =~ s/^Enable=true/Enable=false/ if $enable eq "false";
 		# bail here so we don't alter the debug setting
 		if ($conf_data[$i] eq "[debug]\n") {
 			output("/etc/X11/gdm/gdm.conf", @conf_data);
@@ -1546,7 +1543,7 @@ sub write_dhcpd_conf {
 	my $clients = "/etc/dhcpd.conf.etherboot.clients";
 		
      local *CLIENT;
-	open(CLIENT, "> $clients") || warn("Can't open $clients!");
+	open(CLIENT, "> $clients") or warn("Can't open $clients!");
 	foreach my $key (keys(%ts_clients)) {
 		my $client_entry = format_client_entry($key, %ts_clients);
 		print CLIENT $client_entry;
@@ -1554,14 +1551,14 @@ sub write_dhcpd_conf {
 	close CLIENT	
 }
 
-sub read_dhcpd_conf {
+sub read_dhcpd_conf() {
 	my $clients = "/etc/dhcpd.conf.etherboot.clients";
 	my %ts_clients;
 	my $hostname;
 	
 	#- read and parse current client entries
      local *CLIENTS;
-	open(CLIENTS, $clients) || warn("Can't open $clients\n"); 
+	open(CLIENTS, $clients) or warn("Can't open $clients\n"); 
 	while (<CLIENTS>) {
 		my ($name, $val, $val2) = split ' ';
 		$val = $val2 if $name =~ /hardware/;
