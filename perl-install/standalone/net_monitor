@@ -72,7 +72,7 @@ my $intf = {};
 my $c_time = 0;
 my $ct_tag;
 
-my ($pixmap, $darea);
+my ($pixmap, $darea, $gc_lines);
 my ($width, $height) = (300, 150);
 
 my $left_border = 50;
@@ -436,6 +436,10 @@ sub update() {
 	    $darea->{$intf}->signal_connect(expose_event => sub {
                          $darea->{$intf}->window->draw_drawable($darea->{$intf}->style->bg_gc('normal'), $pixmap->{$intf}, 0, 0, 0, 0, $width, $height);
                      });
+            $gc_lines->{$intf} = Gtk2::Gdk::GC->new($darea->{$intf}->window);
+            $gc_lines->{$intf}->set_foreground($darea->{$intf}->style->white);
+            $gc_lines->{$intf}->set_line_attributes(1, 'on-off-dash', 'not-last', 'round');
+
 	}
     }
     foreach (@interfaces) {
@@ -479,6 +483,7 @@ sub in_ifconfig {
 sub draw_monitor {
     my ($o, $intf) = @_;
     defined $darea->{$intf} or return;
+    my $gcl = $gc_lines->{$intf};
     my $pixmap = $pixmap->{$intf};
     $pixmap->draw_rectangle($darea->{$intf}->style->black_gc, 1, 0, 0, $width, $height);
     my $maxr = 0;
@@ -533,10 +538,6 @@ sub draw_monitor {
 	}
 	$step++;
     }
-
-    my $gcl = Gtk2::Gdk::GC->new($darea->{$intf}->window);
-    $gcl->set_foreground($darea->{$intf}->style->white);
-    $gcl->set_line_attributes(1, 'on-off-dash', 'not-last', 'round');
 
     my ($pix_maxr, $pix_maxt);
     if ($last_a) {
