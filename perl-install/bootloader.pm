@@ -253,27 +253,19 @@ wait %d seconds for default boot.
 	       {
 		label => 'linux',
 		root  => "/dev/$root",
+		$vga_fb ? ( vga => $vga_fb) : (), #- using framebuffer
 	       }) if $isSecure || $isSMP;
     add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
 		label => $isSecure || $isSMP ? 'linux-up' : 'linux',
 		root  => "/dev/$root",
+		$vga_fb ? ( vga => $vga_fb) : (), #- using framebuffer
 	       });
     add_kernel($prefix, $lilo, $kernelVersion, '',
 	       {
 		label => 'failsafe',
 		root  => "/dev/$root",
 	       })->{append} .= " failsafe" unless $lilo->{password};
-
-    if (-e "$prefix/boot/vmlinuz-${kernelVersion}fb") {
-	add_kernel($prefix, $lilo, $kernelVersion, 'fb',
-		  {
-		   label => 'linux-fb',
-		   root  => "/dev/$root",
-		   $vga_fb ? ( vga => $vga_fb) : (), #- specific mode for kernel-fb.
-		  });
-	$vga_fb and $lilo->{default} = 'linux-fb'; #- make it by default.
-    }
 
     #- manage hackkernel if installed.
     my $hasHack = -e "$prefix/boot/vmlinuz-hack";
@@ -283,6 +275,7 @@ wait %d seconds for default boot.
 		  {
 		   label => 'hack',
 		   root  => "/dev/$root",
+		   $vga_fb ? ( vga => $vga_fb) : (), #- using framebuffer
 		  }) if $hackVersion;
     }
 

@@ -34,7 +34,7 @@ XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs XFree86-FBDev XFree86-server
 XFree86 XFree86-glide-module Device3DFX Glide_V3-DRI Glide_V5 Mesa
 dhcpcd pump dhcpxd dhcp-client isdn4net isdn4k-utils dev pptp-adsl-fr rp-pppoe ppp ypbind
-rhs-printfilters lpr cups cups-drivers pnm2ppa Lexmark-1100-printer-driver__lm1100 samba ncpfs kernel-fb
+rhs-printfilters lpr cups cups-drivers pnm2ppa Lexmark-1100-printer-driver__lm1100 samba ncpfs
 );
 
 #-######################################################################################
@@ -379,38 +379,15 @@ sub ejectCdrom(;$) {
 sub setupFB {
     my ($o, $vga) = @_;
 
-    #- install needed packages for frame buffer.
-    $o->pkg_install('kernel-fb');
-
     $vga ||= 785; #- assume at least 640x480x16.
 
     require bootloader;
-    #- update bootloader entries with a new fb label. a bit hack unless
-    #- a frame buffer kernel is used, in such case we use it instead
-    #- with the right mode, nothing more to do.
-    foreach (qw(secure smp)) {
-	if (my $e = bootloader::get("/boot/vmlinuz-$_", $o->{bootloader})) {
-	    if ($_ eq 'secure') {
-		log::l("warning: kernel-secure is not fb, using a kernel-fb instead");
-		#- nothing done, fall through linux-fb.
-	    } else {
-		$e->{vga} = $vga;
-		goto ok;
-	    }
+    #- update bootloader entries with vga, all kernel are now framebuffer.
+    foreach (qw(vmlinuz vmlinuz-secure vmlinuz-smp vmlinuz-hack)) {
+	if (my $e = bootloader::get("/boot/$_", $o->{bootloader})) {
+	    $e->{vga} = $vga;
 	}
     }
-    if (bootloader::add_kernel($o->{prefix}, $o->{bootloader}, kernelVersion($o), 'fb',
-			       {
-				label => 'linux-fb',
-				root => bootloader::get("/boot/vmlinuz", $o->{bootloader})->{root},
-				vga => $vga,
-			       })) {
-	$o->{bootloader}{default} = 'linux-fb';
-    } else {
-	log::l("unable to install kernel with frame buffer support, disabling");
-	return 0;
-    }
-  ok:
     bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
     1;
 }
@@ -658,7 +635,7 @@ sub use_root_part {
 	my $handle = any::inspect($part, $prefix) or die;
 	fs::get_mntpoints_from_fstab($fstab, $handle->{dir}, 'uniq');
     }
-    map { $_->{mntpoint} = 'swap_upgrade' } grep { isSwap($_) } @$fstab; #- use all available swap.
+    map { $_->{mntpoint} = 'swap' } grep { isSwap($_) } @$fstab; #- use all available swap.
     fs::mount_all($fstab, $prefix);
 }
 
