@@ -23,6 +23,7 @@
 #define _URL_H_
 
 int ftp_open_connection(char * host, char * name, char * password, char * proxy);
+int ftp_get_filesize(int sock, char * remotename);
 int ftp_start_download(int sock, char * remotename, int * size);
 int ftp_end_data_command(int sock);
 

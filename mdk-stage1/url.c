@@ -309,7 +309,7 @@ int ftp_data_command(int sock, char * command, char * param)
 }
 
 
-static int ftp_get_filesize(int sock, char * remotename)
+int ftp_get_filesize(int sock, char * remotename)
 {
 	int size = 0;
 	char buf[2000];
@@ -330,7 +330,7 @@ static int ftp_get_filesize(int sock, char * remotename)
 		return -1;
 	}
 
-	fd = ftp_data_command(sock, "LIST", NULL);
+	fd = ftp_data_command(sock, "LIST", file);
 	if (fd <= 0) {
 		close(sock);
 		return -1;
