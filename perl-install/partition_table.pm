@@ -18,7 +18,7 @@ use log;
 
 @important_types = ('Linux native', 'Linux swap', 'Journalised FS: ext3', 'Journalised FS: ReiserFS',
 		    if_(arch() =~ /ppc/, 'Journalised FS: JFS', 'Journalised FS: XFS', 'Apple HFS Partition', 'Apple Bootstrap'),
-		    if_(arch() =~ /i.86/, 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'FAT32'),
+		    if_(arch() =~ /i.86/, 'Journalised FS: JFS', 'Journalised FS: XFS', 'FAT32'),
 		    if_(arch() =~ /ia64/, 'Journalised FS: XFS', 'FAT32'),
 		    if_(arch() =~ /x86_64/, 'FAT32'),
 		   );
