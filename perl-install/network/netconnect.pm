@@ -564,6 +564,7 @@ Modifying the fields below will override this configuration."),
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
                         @fields = qw(IPADDR NETMASK);
+                        $netcnx->{dhcp_client} ||= "dhcp-client";
                     },
                     name => sub { join('', 
                                        N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module),
@@ -585,6 +586,8 @@ notation (for example, 1.2.3.4).")),
                           { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
                           { text => N("Network Hotplugging"), val => \$hotplug, type => "bool" },
                           { text => N("Start at boot"), val => \$onboot, type => "bool" },
+                          { label => N("DHCP client"), val => \$netcnx->{dhcp_client}, 
+                            list => ["dhcp-client", "dhcpcd", "dhcpxd"], advanced => 1 },
                         ],
                     },
                     complete => sub {
