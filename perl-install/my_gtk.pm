@@ -248,9 +248,9 @@ sub create_okcancel {
 
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $::isWizard or $w->{retval} = 1; Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel || _("Cancel")), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
-    my @l = grep { $_ } $::isStandalone ? ($b2, $b1) : ($b1, $b2);
+    my @l = grep { $_ } $::isWizard ? ($b2, $b1) : ($b1, $b2);
 
-    $_->can_default($::isStandalone) foreach @l;
+    $_->can_default($::isWizard) foreach @l;
     gtkadd(create_hbox($spread), @l);
 }
 
