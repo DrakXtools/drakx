@@ -1,3 +1,118 @@
+2002/07/18  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fix speed improvement for computeGroupSize by computing closure
+	directly (in
+	order to have an approximative size, not the real one).
+	add back change CD support.
+
+2002/07/18  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm, Xconfigurator_consts.pm, Xconfig.pm: 
+	  - %standard_monitors are now in Cards+, dropping them
+	  - multi head support generalized, now based on Cards+ MULTI_HEAD
+	  - fix some ModeLines being written twice in XF86Config
+	  - remove setting DefaultFbBpp to 32
+	(since it is the default in all my tests)
+
+2002/07/17  alus
+
+	* share/po/pl.po: some more fixes
+	some little changes
+
+2002/07/17  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: added missing use pkgs.
+
+2002/07/17  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* pkgs.pm: spell right harddrake (two 'd') in @preferred
+
+	* tools/cvslog2changelog.pl: add daouda chaumette cbelisle
+
+2002/07/17  Pixel  <pixel@mandrakesoft.com>
+
+	* install_gtk.pm: normalize Modeline to ModeLine
+
+	* common.pm: add function "internal_error" (a specialized "die")
+
+	* drakxtools.spec: the new XFdrake needs latest ldetect-lst
+
+	* Makefile (test_pms): exclude urpm from uses
+
+	* printer.pm, printerdrake.pm: use {XXX} instead of {'XXX'} (as detected
+	by new perl_checker)
+	remove "$_ =~ " (as detected by new perl_checker)
+
+	* any.pm: move the "if !$::testing" for not modifying inittab in function
+	runlevel()
+	(was in install_steps.pm)
+
+	* commands.pm: remove "$_ =~ " (as detected by new perl_checker)
+
+	* Xconfigurator.pm, Xconfigurator_consts.pm, install_steps.pm,
+	standalone/XFdrake, Xconfig.pm: Big Xconfigurator.pm cleanup/rework
+	  - use $X instead of $o (to avoid name conflict with DrakX's $o)
+	  - {flag}{noclockprobe} unused, dropping it
+	  - rename {memory} into "VideoRam"
+	  - rename {ramdac} into {Ramdac}
+	  - rename {chipset} into {Chipset}
+	  - rename {clockchip} into {Clockchip}
+	  - rename {keyboard}{xkb_model} into {keyboard}{XkbModel}
+	  - rename {keyboard}{xkb_keymap} into {keyboard}{XkbLayout}
+	  - drop {mouse}{chordmiddle} (obsolete)
+	  - drop {mouse}{cleardtrrts} (obsolete, was not written to XF4 config)
+	  - &testConfig is unused, removing it
+	  - as a concequence, {clocklines} is never set, dropping it
+	  - when UNSUPPORTED remove {driver}, instead of setting
+	{flag}{unsupported}
+	  - Cards+ now only provide {Chipset} for cards needing it
+	  => {flag}{needChipset} not needed anymore
+	  - moved setting needVideoRam in Cards+ (via NEEDVIDEORAM)
+	  (hoping it will work: since the regexp was broken, it was never done.
+	   (it was applied on the module field of pcitable, instead of the
+	description))
+	  - dropped modelines_text_Trident_TG_96xx case (it has never been used)
+	  - rename %xkb_options into %XkbOptions
+	  - rename {DRI_glx} into {DRI_GLX}, the value now comes from Cards+
+	  instead of regexp'ing {identifier}
+	  - rename {Utah_glx} into {UTAH_GLX}, the value now comes from Cards+
+	  instead of regexp'ing {identifier}
+	  - rename {Utah_glx_EXPERIMENTAL} into {UTAH_GLX_EXPERIMENTAL}, the
+	value now comes from Cards+
+	  instead of regexp'ing {identifier}
+	  - very_bad_card and bad_card are now the same, the value now comes
+	from
+	  Cards+ (BAD_FB_RESTORE & BAD_FB_RESTORE_XF3)
+	  - drop unused @accelservers
+	  - remove $modelines_text_apple, use $modelines_text_ext instead
+	  - don't use a <Section "Modes"> together with <UseModes "Mac Modes">,
+	put
+	  directly modelines in Section "Monitor"
+	  (why should ppc behave differently than others!?)
+	  - replace (conflicting) ModeLines "1280x1024 @ 74 Hz" and
+	  "1280x1024 @ 76 Hz" with "1280x1024 @ 75 Hz" (from ddcxinfos)
+	  - drop ModeLine "640x480 @ 72 Hz"
+	  (it conflicts, and anyway, it has no real use nowadays :)
+	  - drop comments about HorizSync, VertRefresh and ModeLine's from
+	  XF86Config
+	  - drop many unneeded stuff from XF86Config:
+	  AutoRepeat, Xqueue, Xleds, NoTrapSignals, XkbTypes, XkbKeycodes,
+	  XkbCompat, XkbRules, LeftAlt/RightAlt/ScrollLock/RightCtl
+	  - drop section comments from XF86Config
+	  - drop XF86_Mono configuration
+	  (it doesn't work anyway, seems like it needs a special ModeLine?)
+	  - drop 320x200 with XF86_SVGA (who can use this!?)
+	  - do not write Screen section "accel" if the server configured is not
+	an
+	  accel one
+	  - drop the "Generic VGA" Device section for XF4
+	  (this device is unused)
+	  - drop {monitor}{vendor}, {monitor}{model}, {card}{vendor},
+	{card}{model},
+	  {card}{board} (only description strings, not useful for running the
+	server)
+	  - use x_res instead of wres for things like 1024 in 1024x768
+
 2002/07/17  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps_gtk.pm: added missing use pkgs.
