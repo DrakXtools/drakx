@@ -392,7 +392,7 @@ wait %d seconds for default boot.
 	     yaboot => to_bool(arch() =~ /ppc/),
 	     silo => to_bool(arch() =~ /sparc/),
 	     lilo => to_bool(arch() !~ /sparc|ppc/) && !isLoopback(fsedit::get_root($fstab)),
-	     grub => to_bool(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab)) && availableRamMB() < 800), #- don't use grub if more than 800MB
+	     grub => to_bool(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab))),
 	     loadlin => to_bool(arch() !~ /sparc|ppc/) && -e "/initrd/loopfs/lnx4win",
 	    );
     unless ($lilo->{methods}) {
