@@ -51,12 +51,12 @@ sub confScanner {
 	$line =~ /^(\S+)LINE\s+(.*?)$/;
 	my $linetype = $1;
 	$line = $2;
-	if ((!$linetype) or
-	    (($linetype eq "USB") and (($port =~ /usb/i) or ($vendor))) or
-	    (($linetype eq "PARPORT") and (!$vendor) and 
-	     ($port =~ /(parport|pt_drv|parallel)/i)) or
-	    (($linetype eq "SCSI") and (!$vendor) and
-	     ($port =~ m!(/sg|scsi|/scanner)!i))) {
+	if (!$linetype or
+	    ($linetype eq "USB" and ($port =~ /usb/i or $vendor)) or
+	    ($linetype eq "PARPORT" and !$vendor and 
+	     $port =~ /(parport|pt_drv|parallel)/i) or
+	    ($linetype eq "SCSI" and !$vendor and
+	     $port =~ m!(/sg|scsi|/scanner)!i)) {
 	    handle_configs::set_directive(\@driverconf, $line, 1);
 	}
     }
@@ -72,7 +72,7 @@ sub add2dll {
 }
 
 sub configured {
-    my @res = ();
+    my @res;
     # Run "scanimage -L", to find the scanners which are already working
     open LIST, "LC_ALL=C scanimage -L |";
     while (my $line = <LIST>) {
@@ -98,17 +98,12 @@ sub configured {
 
 sub detect {
     my @configured = @_;
-    my @res = ();
+    my @res;
     # Run "sane-find-scanner", this also detects USB scanners which only
     # work with libusb.
     open DETECT, "LC_ALL=C sane-find-scanner -q |";
     while (my $line = <DETECT>) {
-	my $vendorid = undef;
-	my $productid = undef;
-	my $make = undef;
-	my $model = undef;
-	my $description = undef;
-	my $port = undef;
+	my ($vendorid, $productid, $make, $model, $description, $port);
 	if ($line =~ /^\s*found\s+USB\s+scanner/i) {
 	    # Found an USB scanner
 	    if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\].*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f\[]+[^\[]*\[([^\[\]]+)\]/) {
@@ -157,10 +152,10 @@ sub detect {
 	if ($port =~ /^libusb/) {
 	    my $duplicate = 0;
 	    foreach (@res) {
-		if (($_->{val}{vendor} eq $vendorid) &&
-		    ($_->{val}{id} eq $productid) &&
-		    ($_->{port} =~ /dev.*usb.*scanner/) &&
-		    (!defined($_->{port2}))) {
+		if ($_->{val}{vendor} eq $vendorid &&
+		    $_->{val}{id} eq $productid &&
+		    $_->{port} =~ /dev.*usb.*scanner/ &&
+		    !defined($_->{port2})) {
 		    # Duplicate entry found, merge the entries
 		    $_->{port2} = $port;
 		    $_->{val}{MANUFACTURER} ||= $make;
@@ -192,8 +187,8 @@ sub detect {
 	    my $searchport1 = handle_configs::searchstr($d->{port});
 	    my $searchport2 = handle_configs::searchstr($d->{port2});
 	    foreach my $c (@configured) {
-		if (($c->{port} =~ /$searchport1$/) ||
-		    ($c->{port} =~ /$searchport2$/)) {
+		if ($c->{port} =~ /$searchport1$/ ||
+		    $c->{port} =~ /$searchport2$/) {
 		    $d->{configured} = 1;
 		    last;
 		}
@@ -206,20 +201,17 @@ sub detect {
 
 sub get_usb_ids_for_port {
     my ($port) = @_;
-    my $vendorid;
-    my $productid;
+    local *DETECT;
     if ($port =~ /^\s*libusb:(\d+):(\d+)\s*$/) {
 	# Use "lsusb" to find the USB IDs
 	open DETECT, "LC_ALL=C lsusb -s $1:$2 |";
 	while (my $line = <DETECT>) {
 	    if ($line =~ /ID\s+([0-9a-f]+):(0x[0-9a-f]+)($|\s+)/) {
 		# Scanner connected via scanner.o kernel module
-		$vendorid = "0x$1";
-		$productid = "0x$2";
+		return ("0x$1", "0x$2");
 		last;
 	    }
 	}
-	close DETECT;
     } else {
 	# Run "sane-find-scanner" on the port
 	open DETECT, "LC_ALL=C sane-find-scanner -q $port |";
@@ -227,15 +219,11 @@ sub get_usb_ids_for_port {
 	    if ($line =~ /^\s*found\s+USB\s+scanner/i) {
 		if ($line =~ /vendor=(0x[0-9a-f]+)[^0-9a-f]+.*prod(|uct)=(0x[0-9a-f]+)[^0-9a-f]+/) {
 		    # Scanner connected via scanner.o kernel module
-		    $vendorid = $1;
-		    $productid = $3;
-		    last;
+		    return ($1, $3);
 		}
 	    }
 	}
-	close DETECT;
     }
-    return ($vendorid, $productid);
 }
 
 sub readScannerDB {
@@ -336,17 +324,11 @@ sub updateScannerDBfromSane {
 	if ($line =~ /^\s*SERVER\s+(\S+)\s*$/) {
 	    $backend = $1;
 	} elsif ($backend) {
-	    push (@{$configlines{$backend}}, $line);
+	    push @{$configlines{$backend}}, $line;
 	}
     }
 
-    my @descfiles;
-    push (@descfiles,
-	  glob_("$_sanesrcdir/doc/descriptions/*.desc"));
-    push (@descfiles,
-	  glob_("$_sanesrcdir/doc/descriptions-external/*.desc"));
-    
-    foreach my $f (@descfiles) {
+    foreach my $f (glob_("$_sanesrcdir/doc/descriptions/*.desc"), glob_("$_sanesrcdir/doc/descriptions-external/*.desc")) {
 	my $F = common::openFileMaybeCompressed($f);
 	$to_add .= "\n# from $f";
 	my ($lineno, $cmd, $val) = 0;
