@@ -3,25 +3,32 @@
 #
 # Guillaume Cottenceau (gc@mandrakesoft.com)
 #
-# Copyright 2000 MandrakeSoft
+# Copyright 2000, 2001, 2002 MandrakeSoft
 #
-# This software may be freely redistributed under the terms of the GNU
-# public license.
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 2, as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 
 use lib qw(/usr/lib/libDrakX);
 
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use common;
+use detect_devices;
 use interactive;
-use standalone;
 use log;
 use c;
 use network::netconnect;
-use detect_devices;
-use common;
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -61,12 +68,15 @@ pur_gtk_mode() if $::isEmbedded && $in->isa('interactive_gtk');
 
 sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
 
-sub outpend { my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_; }
+sub outpend { 
+    standalone::explanations("modified file $_[0]");
+    my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_;
+}
 
 sub start_daemons ()
 {
     my $cups_used = 0;
-    log::l("[drakgw] Starting daemons");
+    standalone::explanations("Starting daemons");
     if (-f "/etc/rc.d/init.d/cups") {
         if (grep(/is running/, `/etc/rc.d/init.d/cups status`)) {
            $cups_used = 1;
@@ -86,7 +96,7 @@ sub start_daemons ()
 
 sub stop_daemons ()
 {
-    log::l("[drakgw] Stopping daemons");
+    standalone::explanations("Stopping daemons");
     grep /is running/, `/etc/rc.d/init.d/dhcpd status` and sys("/etc/rc.d/init.d/dhcpd stop");
     grep /Connection refused/, `/etc/rc.d/init.d/named status 2>&1` or sys("/etc/rc.d/init.d/named stop");
     if ($kernel_version eq "2.2") {
@@ -189,7 +199,7 @@ undef $::Wizard_no_previous;
 
 step_detectsetup:
 
-my @configured_devices = map { /ifcfg-(\S+)/ } `ls /etc/sysconfig/network-scripts/ifcfg*`;
+my @configured_devices = map { /ifcfg-(\S+)/ } glob('/etc/sysconfig/network-scripts/ifcfg*');
 
 my %aliased_devices; 
 /^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
@@ -237,7 +247,7 @@ else
 				    ) or goto step_ask_confirm;
     defined $device or quit_global($in, 0);
 }
-log::l("[drakgw] Choosing network card: $device");
+standalone::explanations("Choosing network device: $device");
 
 
 my $lan_address = "192.168.0.0";
@@ -287,8 +297,7 @@ if (!($lan_address =~ s/\.0$//)) {
 		  _("The Local Network did not finish with `.0', bailing out."));
     quit_global($in, 0);
 }
-
-log::l("[drakgw] Lan address <$lan_address> ; will reconf (bool) <$reconf_dhcp_server_intf>");
+standalone::explanations("Using LAN address <$lan_address>");
 
 
 #- test for potential conflict with other networks
@@ -326,6 +335,7 @@ $wait_configuring = $in->wait_message(_("Configuring..."),
 #- setup the /etc/sysconfig/network-script/ script
 
 if ($reconf_dhcp_server_intf) {
+    standalone::explanations("Reconfiguring network parameters of $device");
     my $network_scripts = "/etc/sysconfig/network-scripts";
     my $ifcfg = "$network_scripts/ifcfg-$device";
     renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
@@ -362,7 +372,7 @@ if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
 
 
 #- setup the masquerading configuration
-
+standalone::explanations("Modifying firewalling configuration");
 if (!-f $rc_firewall_generic) {
     output($rc_firewall_generic, "#!/bin/sh
 #
@@ -537,6 +547,7 @@ substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysco
 #- setup the DHCP server
 
 if ($reconf_dhcp_server_intf) {
+    standalone::explanations("Configuring a DHCP server on $lan_address.0");
     renamef($dhcpd_conf, "$dhcpd_conf.old");
     output($dhcpd_conf, qq(subnet $lan_address.0 netmask 255.255.255.0 {
 	# default gateway
@@ -584,18 +595,19 @@ substInFile { s/^INTERFACES\n//; $_ .= "INTERFACES=\"$device\"\n" if eof } $sysc
 #-     
 #- These steps are only done when the CUPS package is installed.
 
-substInFile {
-    s/^ServerName[^:].*\n//; $_ .= "ServerName $server_ip\n" if eof;
-    s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
-    s/^BrowseOrder.*\n//; $_ .= "BrowseOrder Deny,Allow\n" if eof;
-    s/^BrowseDeny.*\n//; $_ .= "BrowseDeny All\n" if eof;
-    s/^BrowseAllow.*\n//; $_ .= "BrowseAllow $lan_address.*\n" if eof;
-} $cups_conf;
-
-
 #- Modify the root location block in /etc/cups/cupsd.conf
 
 if (-f $cups_conf) {
+    standalone::explanations("Updating CUPS configuration accordingly");
+
+    substInFile {
+        s/^ServerName[^:].*\n//; $_ .= "ServerName $server_ip\n" if eof;
+        s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
+        s/^BrowseOrder.*\n//; $_ .= "BrowseOrder Deny,Allow\n" if eof;
+        s/^BrowseDeny.*\n//; $_ .= "BrowseDeny All\n" if eof;
+        s/^BrowseAllow.*\n//; $_ .= "BrowseAllow $lan_address.*\n" if eof;
+    } $cups_conf;
+
     my @cups_conf_content = cat_($cups_conf);
     my @root_location; my $root_location_start; my $root_location_end;
 
@@ -710,12 +722,13 @@ Click on Configure to launch the setup wizard.", $setup_state));
 }
 
 
-
-
-
-
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.58  2002/01/18 20:19:44  gc
+#- - move 'use standalone' up to comply to 'explanations'
+#- - write higher-level 'explanations'
+#- - small fix, s/`ls ..`/glob(..)/
+#-
 #- Revision 1.57  2001/12/17 17:58:20  gc
 #- drakgw for gold
 #-
