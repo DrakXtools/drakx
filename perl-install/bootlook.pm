@@ -98,11 +98,15 @@ my $x_box = new Gtk::VBox(0, 0);
 gtkadd($window,
        gtkpack__ (my $global_vbox = new Gtk::VBox(0,0),
 		  gtkadd (new Gtk::Frame (_("Lilo/grub mode")),
-			  gtkpack__(new Gtk::HBox(0, 0),
-				    _("You are currently using %s as Boot Manager.
+#			  gtkpack__(new Gtk::VBox(0,0),
+				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
+					      1,_("You are currently using %s as Boot Manager.
 Click on Configure to launch the setup wizard.", $lilogrub),
-				    gtksignal_connect(new Gtk::Button (_("Configure")), clicked => $::lilo_choice)
-				   )
+					      0,gtksignal_connect(new Gtk::Button (_("Configure")), clicked => $::lilo_choice),
+					     )),
+#				    "" #we need some place under the button -- replaced by gtkset_border_width( for the moment
+#				   )
+				     
 			 ),
 		  # aurora
 		  gtkadd (new Gtk::Frame (_("Boot mode")),
@@ -153,7 +157,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 			 ),
 		 gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
 			 gtksignal_connect(new Gtk::Button (_("OK")), clicked=>sub{updateInit();updateAutologin();updateAurora();$::isEmbedded ? kill(USR1,$::CCPID) : Gtk->exit(0)}),
-			 gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)})
+			 gtksignal_connect(new Gtk::Button (_("Cancel")), clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)})
 			)
 	       )
       );
