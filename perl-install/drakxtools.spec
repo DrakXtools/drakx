@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 45mdk
+Release: 46mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,6 +312,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Jun 21 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-46mdk
+- harddrake service:
+  o do not uselessy fork shells
+  o faster auto mouse reconfiguration on major kernel switch
+  o fix logs of newly added hardware
+  o fix mouse autoconfiguration done on every boot instead of on 2.4.x/2.6.x
+    switches
+  o handle newly added wireless network card (broken since early 2004/02)
+  o log error when we cannot run the config tool or when it isn't executable
+  o only log about nv <-> nvidia swtich only if we do have to perform it
+- harddrake GUI:
+  o display media type for mass storage devices
+  o enhanced data for mice and hard disks
+  o fix undisplayed fields
+  o show disk ID if we cannot guess its vendor string from it
+  o show splited vendor and description fields for USB hard disks too
+  o really ensure that "identification" section is displayed first
+ 
 * Fri Jun 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-45mdk
 - authentication: more LDAP work (pixel)
 - drakbackup: fix .backupignore issue (stew)
