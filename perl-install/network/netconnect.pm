@@ -659,8 +659,7 @@ Take a look at http://www.linmodems.org"),
                         if ($ntf_name eq 'bewan' && !$::testing) {
                             $in->do_pkgs->ensure_is_installed_if_available('unicorn', "$::prefix/usr/bin/bewan_adsl_status");
                         }
-                        return 'adsl_provider' if $adsl_devices{$ntf_name};
-                        return 'adsl_protocol';
+                        return 'adsl_provider';
                     },
                    },
 
