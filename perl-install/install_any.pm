@@ -987,8 +987,12 @@ sub loadO {
 
     #- handle backward compatibility for things that changed
     foreach (@{$o->{partitions} || []}, @{$o->{manualFstab} || []}) {
-	if (my $pt_type = delete $_->{type}) {
-	    fs::type::set_pt_type($_, $pt_type);
+	if (my $type = delete $_->{type}) {
+	    if ($type =~ /^(0x)?(\d*)$/) {
+		fs::type::set_pt_type($_, $type);
+	    } else {
+		fs::type::set_fs_type($_, $type);
+	    }
 	}
     }
 
