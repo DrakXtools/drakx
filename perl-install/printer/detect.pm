@@ -40,15 +40,18 @@ sub whatParport() {
 	open $F, "/proc/parport/$_/autoprobe" or open $F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
 	{
 	    local $_;
+	    my $itemfound = 0;
 	    while (<$F>) { 
 		if (/(.*):(.*);/) { #-#
 		    $elem->{$1} = $2;
 		    $elem->{$1} =~ s/Hewlett[-\s_]Packard/HP/;
 		    $elem->{$1} =~ s/HEWLETT[-\s_]PACKARD/HP/;
+		    $itemfound = 1;
 		}
 	    }
 	    # Some parallel printers miss the "CLASS" field
-	    $elem->{CLASS} = 'PRINTER' if !defined($elem->{CLASS});
+	    $elem->{CLASS} = 'PRINTER' 
+		if $itemfound && !defined($elem->{CLASS});
 	}
 	push @res, { port => "/dev/lp$_", val => $elem };
     }
