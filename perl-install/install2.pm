@@ -379,6 +379,7 @@ sub main {
 	    test      => sub { $::testing = 1 },
 	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
+	    recovery  => sub { $::recovery = 1 },
 	    newt      => sub { $o->{interactive} = "newt" },
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
@@ -503,6 +504,8 @@ sub main {
 
     #- oem patch should be read before to still allow patch or defcfg.
     eval { $o = $::o = install_any::loadO($o, "Mandrake/base/patch-oem.pl"); log::l("successfully read oem patch") };
+    #- recovery mode should be read early to allow default parameter to be taken.
+    eval { $o = $::o = install_any::loadO($o, "Mandrake/base/recovery.cfg"); log::l("successfully read recovery") } if $::recovery;
     #- patch should be read after defcfg in order to take precedance.
     eval { $o = $::o = install_any::loadO($o, $cfg); log::l("successfully read default configuration: $cfg") } if $cfg;
     eval { $o = $::o = install_any::loadO($o, "patch"); log::l("successfully read patch") } if $patch;
