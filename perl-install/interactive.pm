@@ -25,6 +25,7 @@ use common;
 #-  cancel               => force the name of the "Cancel"/"Previous" button
 #-  advanced_label       => force the name of the "Advanced" button
 #-  advanced_label_close => force the name of the "Basic" button
+#-  advanced_state       => if set to 1, force the "Advanced" part of the dialog to be opened initially
 #-  focus_cancel         => force focus on the "Cancel" button
 #-  focus_first          => force focus on the first entry
 #-  callbacks            => functions called when something happen: complete canceled advanced changed focus_out ok_disabled

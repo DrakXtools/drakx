@@ -640,7 +640,7 @@ sub ask_fromW {
     $pack->pack_start($buttons_pack, 0, 0, 0) if $buttons_pack; $buttons_pack->show if $buttons_pack;
     gtkadd($mainw->{window}, $pack);
     $set_default_size->() if $has_scroll_always;
-    $set_advanced->(0);
+    $set_advanced->($common->{advanced_state});
     
     my $widget_to_focus =
       $common->{focus_cancel} ? $mainw->{cancel} :
