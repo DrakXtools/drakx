@@ -633,7 +633,7 @@ sub set_default_im {
 
 set_default_im('x-unikey',  qw(vi_VN vi_VN.TCVN vi_VN.UTF-8 vi_VN.VISCII));
 # CJK default input methods:
-set_default_im('scim',  qw(ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
+set_default_im('scim',  qw(am ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
 
 # keep the following list in sync with share/rpmsrate:
 my %IM2packages = (
