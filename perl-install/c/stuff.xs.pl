@@ -398,8 +398,9 @@ usb_probe()
     EXTEND(SP, entries.nb);
     for (i = 0; i < entries.nb; i++) {
       struct pciusb_entry *e = &entries.entries[i];
-      snprintf(buf, sizeof(buf), "%04x\t%04x\t%s\t%s\t%s\t%d\t%d", 
-               e->vendor, e->device, usb_class2text(e->class_), e->module ? e->module : "unknown", e->text, e->pci_bus, e->pci_device);
+      struct usb_class_text class_text = usb_class2text(e->class_);
+      snprintf(buf, sizeof(buf), "%04x\t%04x\t%s|%s|%s\t%s\t%s\t%d\t%d", 
+               e->vendor, e->device, class_text.usb_class_text, class_text.usb_sub_text, class_text.usb_prot_text, e->module ? e->module : "unknown", e->text, e->pci_bus, e->pci_device);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
     }
     pciusb_free(&entries);

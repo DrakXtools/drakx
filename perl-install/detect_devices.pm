@@ -509,6 +509,7 @@ sub usb_probe() {
     add_addons($usbtable_addons, map {
 	my %l;
 	@l{qw(vendor id media_type driver description pci_bus pci_device)} = split "\t";
+	$l{media_type} = join('|', grep { $_ ne '(null)' } split('\|', $l{media_type}));
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
 	\%l
