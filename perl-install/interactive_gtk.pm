@@ -41,7 +41,7 @@ sub create_clist {
     my $select = sub {
 	$list->set_focus_row($_[0]);
 	$list->select_row($_[0], 0);
-	$list->moveto($_[0], 0, 0.5, 0);
+	$list->moveto($_[0], 0, 0.5, 0) if $list->row_is_visible($_[0]) ne 'full';
     };
 
 #    ref $title && !@okcancel ?
@@ -93,7 +93,7 @@ sub create_clist {
 
     $list, sub {
 	my ($v) = @_;
-	eval { 
+	eval {
 	    $select->(find_index { $_ eq $v } @{$e->{list}});
 	};
     };
@@ -280,13 +280,15 @@ sub ask_from_entries_refW {
 	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
 	} elsif ($e->{type} eq 'button') {
-	    $w = Gtk::Button->new($e->{text});
+	    $w = Gtk::Button->new('');
 	    $w->signal_connect(clicked => sub {
-		$o->{retval} = 1;
-		Gtk->main_quit;
-		$mainw->destroy;
+		$get_all->();
+		$mainw->{rwindow}->hide;
 		$e->{clicked}();
+		$mainw->{rwindow}->show;
+		$set_all->();
 	    });
+	    $set = sub { $w->child->set(may_apply($e->{format}, $_[0])) };
 	} elsif ($e->{type} eq 'range') {
 	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
 	    $adj->signal_connect(value_changed => $changed);

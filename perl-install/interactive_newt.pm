@@ -102,7 +102,7 @@ sub ask_from_entries_refW {
 	    $set = sub { $w->CheckboxSetValue(checkval($_[0])) };
 	    $get = sub { $w->CheckboxGetValue == ord '*' };
 	} elsif ($e->{type} eq 'button') {
-	    $w = Newt::Component::Button(-1, -1, $e->{text} || '');
+	    $w = Newt::Component::Button(-1, -1, may_apply($e->{format}, ${$e->{val}}));
 	} elsif ($e->{type} =~ /list/) {
 	    my ($h, $wi) = (5, 20);
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
@@ -182,19 +182,23 @@ sub ask_from_entries_refW {
 	!$error;
     };
 
-    my ($canceled, $r);
+    my $canceled;
     do {
-	$r = $form->RunForm;
+	my $r = $form->RunForm;
+	foreach (@widgets) {
+	    if ($$r == ${$_->{w}}) {
+		$form->FormDestroy;
+		Newt::PopWindow;
+		$_->{e}{clicked}();
+		return ask_from_entries_refW($o, $common, $l, $l2);
+	    }
+	}
 	$canceled = $cancel && $$r == $$cancel;
+
     } until ($check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'}));
 
     $form->FormDestroy;
     Newt::PopWindow;
-
-    foreach (@widgets) {
-	$_->{e}{clicked}() if $$r == ${$_->{w}};
-    }
-
     !$canceled;
 }
 
