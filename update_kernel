@@ -29,7 +29,7 @@ PCMCIA_DRIVERS="
      ibmtr_cs.o ide_cs.o iflash2+_mtd.o iflash2_mtd.o
      netwave_cs.o nmclan_cs.o
      parport_cs.o pcnet_cs.o qlogic_cs.o
-     smc91c92_cs.o sram_mtd.o tulip_cb.o wavelan_cs.o xirc2ps_cs.o
+     smc91c92_cs.o sram_mtd.o tulip_cb.o xirc2ps_cs.o
      ftl_cs.o memory_cb.o memory_cs.o serial_cb.o serial_cs.o
 
      8390.o 
@@ -52,6 +52,7 @@ LOCAL_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $CD_DRIVERS $BLOCK_DRIVERS 
 CDROM_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $CD_DRIVERS isofs.o"
 HD_MODULES="$MISCMODULES $FSMODULES $SCSI_DRIVERS $BLOCK_DRIVERS"
 PCMCIA_MODULES="$PCMCIA_DRIVERS $MISCMODULES $FSMODULES"
+LNX4WIN_MODULES="$FSMODULES loop.o isofs.o $SCSI_DRIVERS"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
 
@@ -69,7 +70,7 @@ rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
     cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
     mkdir pristine ; cp $PRISTINE_MODULES pristine
     /sbin/depmod -m ../System.map -i -e *.o | grep ': ' | sed 's/\.o//g' > modules.dep
-    ls *.o              | ../perl-install/build_archive modules 400000
+    ls *.o              | ../build_archive modules 400000
     ls *.o              | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
     ls $NETWORK_MODULES | cpio --quiet -H crc -o | gzip -9 > network_modules.cgz
     ls $LOCAL_MODULES   | cpio --quiet -H crc -o | gzip -9 > local_modules.cgz	
@@ -77,5 +78,8 @@ rm -rf install_pcmcia_modules ; install -d install_pcmcia_modules
     ls $HD_MODULES      | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
     ls $PCMCIA_MODULES  | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
     cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
+    cp -f $LNX4WIN_MODULES modules.dep ../lnx4win/initrd/modules
     rm -f $NETWORK_MODULES $CDROM_MODULES $HD_MODULES $PCMCIA_MODULES $PCMCIA_INSTALLMODULES nls_*.o # leave in the directory non-install1 used modules
 )
+
+cp -f vmlinuz /export/lnx4win

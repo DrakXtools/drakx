@@ -6,7 +6,7 @@ DIRS = install install/installinit mouseconfig perl-install ddcprobe lnx4win
 .PHONY: dirs $(FLOPPY_IMG)
 
 install: build
-	mkdir /export/images 2>/dev/null ; true
+	mkdir -p /export/images 2>/dev/null ||:
 	cp -f $(BOOT_IMG) /export/images
 	make -C perl-install full_stage2
 

@@ -81,7 +81,7 @@ install_pms: $(DIRS)
 
 	cp *.rc $(DESTREP4PMS)
 	install -d $(DESTREP4PMS)/po
-	cp -f po/*.po* $(DESTREP4PMS)/po || true
+	cp -f po/*.po* $(DESTREP4PMS)/po ||:
 	ln -sf perl-install/install2 $(DEST)/usr/bin
 	ln -sf perl-install/commands $(DEST)/usr/bin
 	chmod a+x $(DESTREP4PMS)/install2
@@ -152,7 +152,7 @@ get_needed_files: $(DIRS)
 	else \
 		cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/; \
 		install -d $(DEST)/lib/modules; \
-		cp -f ../modules/pristine/* $(DEST)/lib/modules || true; \
+		cp -f ../modules/pristine/* $(DEST)/lib/modules ||: ; \
 	fi
 
 	ln -s install2 $(DEST)/usr/bin/runinstall2
@@ -181,8 +181,8 @@ stage2:
 	install -d $(STAGE2TMP)
 	$(SUDO) cp -a $(DEST)/* $(STAGE2TMP)
 
-	$(SUDO) umount /mnt/stage2 ; true
-	dd if=/dev/zero of=$(STAGE2) bs=1M count=16
+	$(SUDO) umount /mnt/stage2 ||:
+	dd if=/dev/zero of=$(STAGE2) bs=1M count=15
 	$(MKE2FS) -N 1000 $(STAGE2)
 	$(SUDO) mount -t ext2 $(STAGE2) /mnt/stage2 -o loop
 
