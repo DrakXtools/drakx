@@ -4,9 +4,9 @@ package harddrake::sound;
 # No ALSA for OSS's 
 #    o tv cards: btaudio,
 #    o isa cards: msnd_pinnacle, pas2, 
+#    o pci cards: ad1889,
 # No OSS for ALSA's
-#    o pci cards: snd-ali5451, snd-als4000, snd-es968, 
-#      snd-hdsp
+#    o pci cards: snd-ali5451, snd-als4000, snd-es968, snd-hdsp
 #    o isa cards: snd-als100, snd-azt2320, snd-cmi8330, snd-cs4231,
 #      snd-cs4236, snd-dt0197h, snd-es18xx,snd-es1688,
 #      snd-korg1212, snd-rme32, snd-rme96
@@ -108,7 +108,6 @@ my %oss2alsa =
      "maestro3" => [ "snd-maestro3" ],
      "mpu401"  => [ "snd-mpu401" ],
      "msnd_pinnacle" => [ "unknown" ],
-     "msnd_pinnacle" =>  [ "unknown" ],
      "nm256_audio" => [ "snd-nm256" ],
      "nvaudio" => [ "snd-intel8x0" ],
      "opl3"    => [ "snd-opl3sa2" ],
