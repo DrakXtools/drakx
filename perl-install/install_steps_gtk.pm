@@ -260,8 +260,6 @@ sub reallyChooseGroups {
     my $w_size = new Gtk::Label(&$size_to_display);
     gtkadd($w->{window},
 	   gtkpack_($w->create_box_with_title(_("Package Group Selection")),
-		   0, $w_size,
-		   0, '',
 		   1, createScrolledWindow(gtkpack(new Gtk::VBox(0,0),
 		     map {
 			 my $e = $_;
@@ -278,7 +276,6 @@ sub reallyChooseGroups {
 			 $check->set_active($val->{$e});
 			 $check->signal_connect(clicked => sub { 
 			     $val->{$e} = $check->get_active;
-			     print "Size is now ", &$size_to_display, "\n";
 			     $w_size->set(&$size_to_display);
 			 });
 			 gtkset_tip($tips, $check, $help);
@@ -290,14 +287,15 @@ sub reallyChooseGroups {
 			  gtkpack_(new Gtk::HBox(0,0), 0, gtkpng($file), 1, $check),
 			 )
 		     } @{$o->{compssUsersSorted}})),
-		    0, gtkadd(create_hbox(1), 
-			   gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { Gtk->main_quit }),
-			   if_($individual, do {
-			       my $check = Gtk::CheckButton->new(_("Individual package selection"));
-			       $check->set_active($$individual);
-			       $check->signal_connect(clicked => sub { $$individual = $check->get_active });
-			       $check;
-			   }),
+		    0, gtkadd(new Gtk::HBox(0,0),
+			      $w_size,
+			      if_($individual, do {
+				  my $check = Gtk::CheckButton->new(_("Individual package selection"));
+				  $check->set_active($$individual);
+				  $check->signal_connect(clicked => sub { $$individual = $check->get_active });
+				  $check;
+			      }),
+			      gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { Gtk->main_quit }),
 		    ),
 		   ),
 	  );
@@ -594,7 +592,7 @@ sub installPackages {
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
 
-	    if (@install_any::advertising_images && time() - $change_time > 20) {
+	    if (@install_any::advertising_images && $total_size > 20 * sqr(1024) && time() - $change_time > 20) {
 		$change_time = time();
                 my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 		log::l("advertising $f");
@@ -610,7 +608,7 @@ sub installPackages {
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
 	    $progress_total->update($ratio);
-	    if ($dtime != $last_dtime && $current_total_size > 10 * 1024 * 1024) {
+	    if ($dtime != $last_dtime && $current_total_size > 10 * sqr(1024)) {
 		$msg_time_total->set(formatTime(10 * round($total_time / 10) + 10));
 		$msg_time_remaining->set(formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
 		$last_dtime = $dtime;
