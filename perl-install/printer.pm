@@ -100,11 +100,6 @@ sub stop_service ($) {
 	|| die "Could not stop $service!";
 }
 
-sub remove_package ($) {
-    my ($package) = @_;
-    run_program::rooted($prefix, "rpm -e --nodeps $package") || do {};
-}
-
 sub installed ($) {
     my ($package) = @_;
     open RPMCHECK, "rpm -qa --root $prefix/ | grep $package |" ||

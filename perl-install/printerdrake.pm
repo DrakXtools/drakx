@@ -32,7 +32,7 @@ sub auto_detect {
 
 
 sub setup_local($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
 
     my $queue = $printer->{OLD_QUEUE};
     my @port = ();
@@ -90,7 +90,7 @@ complete => sub {
 }
 
 sub setup_lpd($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
 
     my $uri;
     my $remotehost;
@@ -131,13 +131,13 @@ complete => sub {
 
     #- LPD does not support filtered queues to a remote LPD server by itself
     #- It needs an additional program as "rlpr"
-    if ($printer->{SPOOLER} eq 'lpd') {&$install('rlpr');}
+    if ($printer->{SPOOLER} eq 'lpd') {$in->do_pkgs->install('rlpr');}
 
     1;
 }
 
 sub setup_smb($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
 
     my $uri;
     my $smbuser = "";
@@ -220,13 +220,13 @@ complete => sub {
     ($smbpassword && ":$smbpassword") . "@")), ($workgroup && ("$workgroup/")),
     ($smbserver || $smbserverip), "/$smbshare");
 
-    &$install('samba-client');
+    $in->do_pkgs->install('samba-client');
     $printer->{SPOOLER} eq 'cups' and printer::restart_queue($printer);
     1;
 }
 
 sub setup_ncp($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
 
     my $uri;
     my $ncpuser = "";
@@ -290,12 +290,12 @@ complete => sub {
     ($ncppassword && ":$ncppassword") . "@")),
     "$ncpserver/$ncpqueue");
 
-    &$install('ncpfs');
+    $in->do_pkgs->install('ncpfs');
     1;
 }
 
 sub setup_socket($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
     my ($hostname, $port);
 
     my $uri;
@@ -337,13 +337,13 @@ complete => sub {
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
     if (($printer->{SPOOLER} eq 'lpd') ||
-        ($printer->{SPOOLER} eq 'lprng')) {&$install('nc');}
+        ($printer->{SPOOLER} eq 'lprng')) {$in->do_pkgs->install('nc');}
 
     1;
 }
 
 sub setup_uri($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
 
     return if !$in->ask_from_entries_refH(_("Printer Device URI"),
 __("You can specify directly the URI to access the printer. The URI must fulfill either the CUPS or the Foomatic specifications. Not that not all URI types are supported by all the spoolers."), [
@@ -368,18 +368,18 @@ complete => sub {
 }
     );
     if ($printer->{currentqueue}{'connect'} =~ /^smb:/) {
-        &$install('samba-client');
+        $in->do_pkgs->install('samba-client');
         printer::restart_queue($printer);
     }
     if ($printer->{currentqueue}{'connect'} =~ /^ncp:/) {
-        &$install('ncpfs');
+        $in->do_pkgs->install('ncpfs');
         printer::restart_queue($printer);
     }
     1;
 }
 
 sub setup_postpipe($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
 
     my $uri;
     my $commandline;
@@ -413,7 +413,7 @@ complete => sub {
 }
 
 sub setup_gsdriver($$$;$) {
-    my ($printer, $in, $install, $upNetwork) = @_;
+    my ($printer, $in, $upNetwork) = @_;
     #- Read the printer driver database if necessary
     if ((keys %printer::thedb) == 0) {
         printer::read_printer_db($printer->{SPOOLER});
@@ -683,7 +683,7 @@ Does it work properly?"), 1) and last;
 }
 
 sub setup_default_spooler ($$$) {
-    my ($printer, $in, $install) = @_;
+    my ($printer, $in) = @_;
     $printer->{SPOOLER} ||= 'cups';
     my $str_spooler = 
 	$in->ask_from_list_(__("Select Printer Spooler"),
@@ -693,7 +693,7 @@ sub setup_default_spooler ($$$) {
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
     # Install the spooler if not done yet
-    install_spooler($printer, $install);
+    install_spooler($printer);
     # Get the queues of this spooler
     printer::read_configured_queues($printer);
     return $printer->{SPOOLER};
@@ -705,44 +705,44 @@ sub install_spooler ($$) {
     #       Turn off /etc/printcap writing in CUPS when LPD or
     #       LPRng is used (perhaps better to be done in CUPS/LPD/LPRng
     #       start-up scripts?)
-    my ($printer, $install) = @_;
+    my ($printer) = @_;
     if (!$::testing) {
 	if ($printer->{SPOOLER} eq "cups") {
-	    &$install(('cups', 'xpp', 'qtcups', 'kups',
+	    $in->do_pkgs->install(('cups', 'xpp', 'qtcups', 'kups',
 		       ($::expert ? 'cups-drivers' : ())));
-	    if ($::expert) {&$install('cups-drivers');}
+	    if ($::expert) {$in->do_pkgs->install('cups-drivers');}
 	    # Start daemon
 	    printer::start_service("cups");
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lpd") {
 	    # "lpr" conflicts with "LPRng", remove "LPRng"
-	    printer::remove_package("LPRng");
-	    &$install('lpr');
+	    $in->do_pkgs->remove('LPRng');
+	    $in->do_pkgs->install('lpr');
 	    # Start daemon
 	    printer::start_service("lpd");
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "lprng") {
 	    # "LPRng" conflicts with "lpr", remove "lpr"
-	    printer::remove_package("lpr");
-	    &$install('LPRng');
+	    $in->do_pkgs->remove('lpr');
+	    $in->do_pkgs->install('LPRng');
 	    # Start daemon
 	    printer::start_service("lpd");
 	    sleep 1;
 	} elsif ($printer->{SPOOLER} eq "pdq") {
-	    &$install('pdq');
+	    $in->do_pkgs->install('pdq');
 	    # PDQ has no daemon
 	}
     }
 }
 
 #- Program entry point for configuration with lpr or cups (stored in $mode).
-sub main($$$$;$) {
-    my ($printer, $in, $ask_multiple_printer, $install, $upNetwork) = @_;
+sub main {
+    my ($printer, $in, $ask_multiple_printer, $upNetwork) = @_;
 
     # printerdrake does not work without foomatic, and for more convenience
     # we install some more stuff
     if (!$::testing) {
-	&$install(('foomatic', 'printer-utils', 'printer-testpages',
+	$in->do_pkgs->install(('foomatic', 'printer-utils', 'printer-testpages',
 		   (printer::installed("gimp") ? 'gimpprint' : ())));
     }
 
@@ -751,7 +751,7 @@ sub main($$$$;$) {
 
     # If we have chosen a spooler, install it.
     if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
-	install_spooler($printer, $install);
+	install_spooler($printer);
     }
 
     my ($queue, $continue) = ('', 1);
@@ -763,13 +763,13 @@ sub main($$$$;$) {
 				 0) ? 'lp' : __("Done");
 	    if ($queue ne __("Done")) {
 		$printer->{SPOOLER} ||= 
-		    setup_default_spooler ($printer, $in, $install) ||
+		    setup_default_spooler ($printer, $in) ||
 			return;
 	    }
 	} else {
 	    # Ask for a spooler when none is defined
 	    $printer->{SPOOLER} ||= 
-		setup_default_spooler ($printer, $in, $install) ||
+		setup_default_spooler ($printer, $in) ||
 		    return;
 	    # Show a queue list window when there is at least one queue
 	    # or when we are in expert mode
@@ -803,7 +803,7 @@ sub main($$$$;$) {
 	    }
 	    if ($queue =~ /^Spooler: /) {
 		$printer->{SPOOLER} =
-		    setup_default_spooler ($printer, $in, $install) || 
+		    setup_default_spooler ($printer, $in) || 
 			$printer->{SPOOLER};
 		next;
 	    }
@@ -948,18 +948,18 @@ to be filled in. They are comments for the users.") },
 	    $printer->{QUEUE} = $printer->{currentqueue}{'queue'};
 	    $continue = 0;
 	    for ($printer->{TYPE}) {
-		/LOCAL/     and setup_local    ($printer, $in, $install) and last;
-		/LPD/       and setup_lpd      ($printer, $in, $install) and last;
-		/SOCKET/    and setup_socket   ($printer, $in, $install) and last;
-		/SMB/       and setup_smb      ($printer, $in, $install) and last;
-		/NCP/       and setup_ncp      ($printer, $in, $install) and last;
-		/URI/       and setup_uri      ($printer, $in, $install) and last;
-		/POSTPIPE/  and setup_postpipe ($printer, $in, $install) and last;
+		/LOCAL/     and setup_local    ($printer, $in) and last;
+		/LPD/       and setup_lpd      ($printer, $in) and last;
+		/SOCKET/    and setup_socket   ($printer, $in) and last;
+		/SMB/       and setup_smb      ($printer, $in) and last;
+		/NCP/       and setup_ncp      ($printer, $in) and last;
+		/URI/       and setup_uri      ($printer, $in) and last;
+		/POSTPIPE/  and setup_postpipe ($printer, $in) and last;
 		$continue = 1; last;
 	    }
 	}
 	#- configure the printer driver
-	if (!$continue && setup_gsdriver($printer, $in, $install, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
+	if (!$continue && setup_gsdriver($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
 	    if (lc($printer->{QUEUE}) ne lc($printer->{OLD_QUEUE})) {
 		printer::remove_queue($printer, $printer->{OLD_QUEUE});
 	    }
