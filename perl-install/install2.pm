@@ -392,7 +392,7 @@ sub main {
 	    askdisplay => sub { print "Please enter the X11 display to perform the install on ? "; $o->{display} = chomp_(scalar(<STDIN>)) },
 	    security  => sub { $o->{security} = $v },
 	    noauto    => sub { $::noauto = 1 },
-	    test      => sub { $::testing = 1 },
+	    testing   => sub { $::testing = 1 },
 	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
 	    recovery  => sub { $::recovery = 1 },
