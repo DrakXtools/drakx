@@ -271,7 +271,7 @@ sub getAvailableSpace_raw {
     die "missing root partition";
 }
 
-sub setPackages($) {
+sub setPackages {
     my ($o) = @_;
 
     require pkgs;
@@ -283,60 +283,51 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "kernel-secure" if $o->{security} > 3;
 	push @{$o->{default_packages}}, "kernel-smp" if $o->{security} <= 3 && detect_devices::hasSMP(); #- no need for kernel-smp if we have kernel-secure which is smp
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
-	push @{$o->{default_packages}}, "apmd" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "cdrecord" if detect_devices::burners();
 	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("snd-slot-0") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
-	#- some program that may be crazy on some conditions (hack waiting for Aurora to work if no fb).
-	$o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
-			  !detect_devices::matching_desc('SiS') &&
-			  !detect_devices::matching_desc('Rage Mobility'))
-	  or push @pkgs::skip_list, 'Aurora';
+#	 #- some program that may be crazy on some conditions (hack waiting for Aurora to work if no fb).
+#	 $o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
+#			   !detect_devices::matching_desc('SiS') &&
+#			   !detect_devices::matching_desc('Rage Mobility'))
+#	   or push @pkgs::skip_list (*deprecated*), 'Aurora';
 
 	#- must be done after selecting base packages (to save memory)
 	pkgs::getProvides($o->{packages});
 
 	$o->{compss} = pkgs::readCompss($o->{prefix}, $o->{packages});
 	#- must be done after getProvides
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, lang::unpack_langs($o->{langs}));
+	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
 	($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}, $o->{compssUsersDescr}) = 
-	  pkgs::readCompssUsers($o->{packages}, $o->{compss}, $o->{meta_class});
+	  pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
 
-	my @l = ();
-	push @l, 'xawtv', 'kwintv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
-	push @l, "drakprofile", "draksync", "irda-utils" if $o->{pcmcia};
-	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
-	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo (3|Banshee)');
-	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
-	pkgs::packageSetValues([ map { $_ + 50 } @{pkgs::packageValues($_)} ])
-	    foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
+	$o->{compssUsersChoice}{SYSTEM} = 1;
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
 
-	#- add OpenGL games that are only usefull if a 3D accelerated card is installed.
-	my @gl = ();
-	if (detect_devices::matching_desc('Matrox.* G[24]00') ||
-	    detect_devices::matching_desc('Riva.*128') ||
-	    detect_devices::matching_desc('Rage X[CL]') ||
-	    detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
-	    detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
-	    detect_devices::matching_desc('Voodoo [35]') ||
-	    detect_devices::matching_desc('Voodoo Banshee') ||
-	    detect_devices::matching_desc('8281[05].* CGC') ||
-	    detect_devices::matching_desc('Radeon ') ||
-	    detect_devices::matching_desc('Rage 128')) {
-	    push @gl, "xscreensaver-gl", "Mesa-demos", "xmms-mesa";
-	    push @gl, "bzflag" if (!detect_devices::matching_desc('Riva.*128') &&
-				   !detect_devices::matching_desc('Rage X[CL]') &&
-				   !detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') &&
-				   !detect_devices::matching_desc('3D Rage (?:LT|Pro)'));
-	    push @gl, "csmash", "gltron", "spacecup", "chromium", "tuxracer", "openuniverse";
+	foreach (@{lang::unpack_langs(lang::pack_langs($o->{langs}))}) {
+	    push @{$o->{default_packages}}, pkgs::packageByName($o->{packages}, "locales-$_") || next;
+	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
-	pkgs::packageSetValues([ map { $_ + 60 } @{pkgs::packageValues($_)} ])
-	    foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @gl;
+ 
+#	 if (detect_devices::matching_desc('Matrox.* G[24]00') ||
+#	     detect_devices::matching_desc('Riva.*128') ||
+#	     detect_devices::matching_desc('Rage X[CL]') ||
+#	     detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
+#	     detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
+#	     detect_devices::matching_desc('Voodoo [35]') ||
+#	     detect_devices::matching_desc('Voodoo Banshee') ||
+#	     detect_devices::matching_desc('8281[05].* CGC') ||
+#	     detect_devices::matching_desc('Radeon ') ||
+#	     detect_devices::matching_desc('Rage 128')) {
+#	}
+
+	#- for the first time, select package to upgrade.
+	#- TOCHECK this may not be the best place for that as package are selected at some other point.
+	$o->selectPackagesToUpgrade if $o->{isUpgrade};
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.

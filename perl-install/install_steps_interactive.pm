@@ -434,17 +434,17 @@ sub choosePackages {
     my $min_size = pkgs::selectedSize($packages);
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
-    my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
-    my $def_mark = 59; #- 59 is for packages that need gl hw acceleration.
+    my $min_mark = $::beginner ? 2 : 1;
+    my $def_mark = 4; #-TODO: was 59, 59 is for packages that need gl hw acceleration.
 
     my $b = pkgs::saveSelected($packages);
-    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $def_mark, 0, $o->{installClass});
+    pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $def_mark, 0);
     my $def_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
-    my ($ind, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+    my $level = pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
 
-    $o->chooseGroups($packages, $compssUsers, $min_mark, $ind, \$individual, $max_size) unless $::beginner || $::corporate;
+    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) unless $::beginner || $::corporate;
 
     my $size2install = min($availableC, do {
 	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
@@ -475,11 +475,11 @@ sub choosePackages {
 	}
     });
     if (!$size2install) { #- special case for desktop
-	$o->chooseGroups($packages, $compssUsers, $min_mark, $ind) or goto &choosePackages;
+	$o->chooseGroups($packages, $compssUsers, $min_mark) or goto &choosePackages;
 	$size2install = $availableC;
     }
     ($o->{packages_}{ind}) =
-      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
+      pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $size2install);
 
     $o->choosePackagesTree($packages, $compss) if $individual;
 }
@@ -491,61 +491,44 @@ sub chooseSizeToInstall {
 sub choosePackagesTree {}
 
 sub chooseGroups {
-    my ($o, $packages, $compssUsers, $min_level, $ind, $individual, $max_size) = @_;
+    my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
 
     my %size;
-    my $base = pkgs::selectedSize($packages);
-    foreach (@{$o->{compssUsersSorted}}) {
-	my $b = pkgs::saveSelected($packages);
-	pkgs::packageValues($_)->[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
-	$size{$_} = pkgs::selectedSize($packages) - $base;
-	pkgs::restoreSelected($b);
-    }
+#    my $base = pkgs::selectedSize($packages);
+#    foreach (@{$o->{compssUsersSorted}}) {
+#	 my $b = pkgs::saveSelected($packages);
+#	 pkgs::packageRate($_) < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
+#	 $size{$_} = pkgs::selectedSize($packages) - $base;
+#	 pkgs::restoreSelected($b);
+#    }
 
     my @groups = @{$o->{compssUsersSorted}};
-    if ($o->{meta_class} ne 'desktop') {
-	push @groups, __("Miscellaneous");
-
-	my $b = pkgs::saveSelected($packages);
-	foreach (@{$o->{compssUsersSorted}}) {
-	    pkgs::packageValues($_)->[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
-	}
-	$size{Miscellaneous} = $max_size - pkgs::selectedSize($packages);
-	pkgs::restoreSelected($b);
+    my %val;
+    foreach (@groups) {
+	$val{$_} = ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}};
     }
-    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
+#    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
     my $all;
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
 			     help => sub { translate($o->{compssUsersDescr}{$_}) },
-			     ref => sub { \$o->{compssUsersChoice}{$_} },
+			     ref => sub { \$val{$_} },
 			     icon2f => sub { 
 				 my $f = "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default');
 				 -e "$f.xpm" or $f .= "_section";
 				 -e "$f.xpm" or $f = '/usr/share/icons/default_section';
 				 "$f.xpm";
 			     },
-			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') }, 
+			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') },
 			   },
 			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),
 			   $individual ? { list => [ _("Individual package selection") ], ref => sub { $individual } } : (),
 			  ) or return;
     if ($all) {
-	$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, "Miscellaneous";
-    }
-    unless ($o->{compssUsersChoice}{Miscellaneous}) {
-	my %l;
-	$l{@{$compssUsers->{$_}}} = () foreach @{$o->{compssUsersSorted}};
-	exists $l{$_} or pkgs::packageSetFlagSkip($_, 1) foreach values %{$packages->{names}};
-    }
-    foreach (@{$o->{compssUsersSorted}}) {
-	$o->{compssUsersChoice}{$_} or pkgs::skipSetWithProvides($packages, @{$compssUsers->{$_}});
-    }
-    foreach (@{$o->{compssUsersSorted}}) {
-	$o->{compssUsersChoice}{$_} or next;
-	foreach (@{$compssUsers->{$_}}) {
-	    pkgs::packageSetFlagSkip($_, 0);
-	}
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}};
+    } else {
+	$o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}} } grep { !$val{$_} } keys %val;
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}} } grep {  $val{$_} } keys %val;
     }
     1;
 }

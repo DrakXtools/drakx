@@ -122,7 +122,7 @@ endif
 	cd share ; cp *.xpm $(DEST)/usr/share
 	cd share ; cp isdndb.net $(DEST)/usr/share/isdn_db.txt
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
-	cd share ; cp compssUsers compssUsers.desktop compssList $(ROOTDEST)/Mandrake/base
+	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
 
 	if [ -f ../modules/modules.cz* ]; then \
 		cp -f ../modules/modules.cz* $(DEST)/lib/; \

@@ -263,17 +263,13 @@ sub choosePackages {
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
     log::l(sprintf "available size %dMB (corrected %dMB)", $available / sqr(1024), $availableCorrected / sqr(1024));
 
-    foreach (values %{$packages->{names}}) {
-	pkgs::packageSetFlagSkip($_, 0);
-    }
-
     #- avoid destroying user selection of packages. TOCHECK
     if ($first_time) {
 	pkgs::unselectAllPackages($packages);
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
-	add2hash_($o, { compssListLevel => $::expert ? 90 : 80 }) unless $::auto_install;
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $o->{compssListLevel}, $availableCorrected, $o->{installClass}) if exists $o->{compssListLevel};
+	add2hash_($o, { compssListLevel => $::expert ? 5 : 4 }) unless $::auto_install;
+	pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected) if exists $o->{compssListLevel};
     }
 
     $availableCorrected;
@@ -428,7 +424,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     if ($o->{compssUsersChoice}{KDE} && -x "$o->{prefix}/usr/bin/kdm") {
 	log::l("setting desktop to KDE");
 	output($f, "KDE\n");
-    } elsif ($o->{compssUsersChoice}{Gnome} && -x "$o->{prefix}/usr/bin/gdm") {
+    } elsif ($o->{compssUsersChoice}{GNOME} && -x "$o->{prefix}/usr/bin/gdm") {
 	log::l("setting desktop to GNOME");
 	output($f, "GNOME\n");
     }

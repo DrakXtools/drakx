@@ -2,7 +2,7 @@ package pkgs; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans);
+use vars qw(*LOG @preferred $limitMinTrans %compssListDesc);
 
 use common qw(:common :file :functional :system);
 use install_any;
@@ -15,79 +15,18 @@ use loopback;
 use lang;
 use c;
 
-#- lower bound on the left ( aka 90 means [90-100[ )
-%compssListDesc = (
- 100 => __("mandatory"), #- do not use it, it's for base packages
-  90 => __("must have"), #- every install have these packages (unless hand de-selected in expert, or not enough room)
-  80 => __("important"), #- every beginner/custom install have these packages (unless not enough space)
-		         #- has minimum X install (XFree86 + icewm)(normal)
-  70 => __("very nice"), #- KDE(normal)
-  60 => __("nice"),      #- gnome(normal)
-  50 => __("interesting"),
-  40 => __("interesting"),
-  30 => __("maybe"),
-  20 => __("maybe"),
-  10 => __("maybe"),#__("useless"),
-   0 => __("maybe"),#__("garbage"),
-#- if the package requires locales-LANG and LANG is chosen, rating += 90
-#- if the package is in %by_lang and the corresponding LANG is chosen, rating += 90   (see %by_lang below)
- -10 => __("i18n (important)"), #- every install in the corresponding lang have these packages
- -20 => __("i18n (very nice)"), #- every beginner/custom install in the corresponding lang have theses packages
- -30 => __("i18n (nice)"),
-);
-#- HACK: rating += 50 for some packages (like kapm, cf install_any::setPackages)
 
-%by_lang = (
-  'ar'	=> [ 'acon' ],
-#'be_BE.CP1251' => [ 'fonts-ttf-cyrillic' ],
-#'bg_BG' => [ 'fonts-ttf-cyrillic' ],
-  'cs'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-# 'cy'  => iso8859-14 fonts
-# 'el'	=> greek fonts
-# 'eo'	=> iso8859-3 fonts
-  'fa'  => [ 'acon' ],
-  'he'  => [ 'acon' ],
-  'hr'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  'hu'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  'hy'	=> [ 'fonts-ttf-armenian' ],
-  'ja'	=> [ 'rxvt-CLE', 'fonts-ttf-japanese', 'kterm' ],
-# 'ka'	=> georgian fonts
-  'ko'	=> [ 'rxvt-CLE', 'fonts-ttf-korean' ],
-  'lt'	=> [ 'fonts-type1-baltic' ],
-  'lv'	=> [ 'fonts-type1-baltic' ],
-  'mi'	=> [ 'fonts-type1-baltic' ],
-# 'mk'	=> [ 'fonts-ttf-cyrillic' ],
-  'pl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  'ro'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-# 'ru'  => [ 'XFree86-cyrillic-fonts', 'fonts-ttf-cyrillic' ],
-  'ru'  => [ 'XFree86-cyrillic-fonts' ],
-  'ru_RU.KOI8-R' => [ 'XFree86-cyrillic-fonts' ],
-  'sk'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-  'sl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-# 'sp'	=> [ 'fonts-ttf-cyrillic' ],
-  'sr'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-# 'th'	=> thai fonts
-  'tr'	=> [ 'XFree86-ISO8859-9', 'XFree86-ISO8859-9-75dpi-fonts' ],
-#'uk_UA' => [ 'fonts-ttf-cyrillic' ],
-# 'vi'	=> vietnamese fonts
-  'yi'  => [ 'acon' ],
-  'zh'  => [ 'rxvt-CLE', 'taipeifonts', 'fonts-ttf-big5', 'fonts-ttf-gb2312' ],
-  'zh_CN.GB2312' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
-  'zh_TW.Big5' => [ 'rxvt-CLE', 'taipeifonts', 'fonts-ttf-big5' ],
-);
-
-@skip_list = qw(
-XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
-XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
-XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs
-MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
-kernel-linus kernel-secure kernel-BOOT
-hackkernel hackkernel-BOOT hackkernel-headers
-hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb 
-autoirpm autoirpm-icons numlock 
-);
 
 @preferred = qw(perl-GTK postfix wu-ftpd ghostscript-X vim-minimal kernel ispell-en);
+
+#- lower bound on the left ( aka 90 means [90-100[ )
+%compssListDesc = (
+   5 => __("must have"),
+   4 => __("important"),
+   3 => __("very nice"),
+   2 => __("nice"),
+   1 => __("maybe"),
+);
 
 #- constant for small transaction.
 $limitMinTrans = 8;
@@ -107,7 +46,6 @@ my $PKGS_SELECTED  = 0x00ffffff;
 my $PKGS_FORCE     = 0x01000000;
 my $PKGS_INSTALLED = 0x02000000;
 my $PKGS_BASE      = 0x04000000;
-my $PKGS_SKIP      = 0x08000000;
 my $PKGS_UPGRADE   = 0x20000000;
 
 #- package to ignore, typically in Application CD.
@@ -140,7 +78,6 @@ sub packageFlagSelected  { $_[0]->[$FLAGS] & $PKGS_SELECTED }
 sub packageFlagForce     { $_[0]->[$FLAGS] & $PKGS_FORCE }
 sub packageFlagInstalled { $_[0]->[$FLAGS] & $PKGS_INSTALLED }
 sub packageFlagBase      { $_[0]->[$FLAGS] & $PKGS_BASE }
-sub packageFlagSkip      { $_[0]->[$FLAGS] & $PKGS_SKIP }
 sub packageFlagUpgrade   { $_[0]->[$FLAGS] & $PKGS_UPGRADE }
 
 sub packageSetFlagSelected  { $_[0]->[$FLAGS] &= ~$PKGS_SELECTED; $_[0]->[$FLAGS] |= $_[1] & $PKGS_SELECTED; }
@@ -148,15 +85,13 @@ sub packageSetFlagSelected  { $_[0]->[$FLAGS] &= ~$PKGS_SELECTED; $_[0]->[$FLAGS
 sub packageSetFlagForce     { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_FORCE)     : ($_[0]->[$FLAGS] &= ~$PKGS_FORCE); }
 sub packageSetFlagInstalled { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_INSTALLED) : ($_[0]->[$FLAGS] &= ~$PKGS_INSTALLED); }
 sub packageSetFlagBase      { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_BASE)      : ($_[0]->[$FLAGS] &= ~$PKGS_BASE); }
-sub packageSetFlagSkip      { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_SKIP)      : ($_[0]->[$FLAGS] &= ~$PKGS_SKIP); }
 sub packageSetFlagUpgrade   { $_[1] ? ($_[0]->[$FLAGS] |= $PKGS_UPGRADE)   : ($_[0]->[$FLAGS] &= ~$PKGS_UPGRADE); }
 
 sub packageMedium { $_[0]->[$MEDIUM] }
 
 sub packageProvides { map { $_[0]->{depslist}[$_] || die "unkown package id $_" } unpack "s*", $_[1]->[$PROVIDES] }
 
-sub packageValues    { [ unpack "s*", $_[0]->[$VALUES] ] }
-sub packageSetValues { $_[0]->[$VALUES] = pack "s*", @{$_[1]} }
+sub packageRate { substr($_[0]->[$VALUES], 0, 1) }
 
 sub packageHeader     { $_[0]->[$HEADER] }
 sub packageFreeHeader { c::headerFree(delete $_[0]->[$HEADER]) }
@@ -244,11 +179,6 @@ sub packageByName {
 sub packageById {
     my ($packages, $id) = @_;
     $packages->{depslist}[$id] or log::l("unknown package id $id") && undef;
-}
-sub allPackages {
-    my ($packages) = @_;
-    my %skip_list; @skip_list{@skip_list} = ();
-    grep { !exists $skip_list{packageName($_)} } values %{$packages->{names}};
 }
 sub packagesOfMedium {
     my ($packages, $mediumName) = @_;
@@ -394,11 +324,6 @@ sub unselectAllPackagesIncludingUpgradable($) {
 	    packageSetFlagUpgrade($_, 0);
 	}
     }
-}
-
-sub skipSetWithProvides {
-    my ($packages, @l) = @_;
-    packageSetFlagSkip($_, 1) foreach grep { $_ } map { $_, packageProvides($packages, $_) } @l;
 }
 
 sub psUpdateHdlistsDeps {
@@ -670,43 +595,66 @@ sub readCompss {
     \@compss;
 }
 
-sub readCompssList {
-    my ($packages, $langs) = @_;
-    my $f = install_any::getFile('Mandrake/base/compssList') or die "can't find compssList";
-    my @levels = split ' ', <$f>;
-
-    local $_;
+sub read_rpmsrate {
+    my ($packages, $f) = @_;
+    my $line_nb = 0;
+    my (@l);
     while (<$f>) {
-	/^\s*$/ || /^#/ and next;
-	my ($name, @values) = split;
-	my $p = packageByName($packages, $name) or log::l("unknown entry $name (in compssList)"), next;
-	$p->[$VALUES] = pack "s*", @values;
-    }
+	$line_nb++;
+	/\t/ and die "tabulations not allowed at line $line_nb\n";
+	s/#.*//; # comments
 
-    my %done;
-    foreach (@$langs) {
-	my $p = packageByName($packages, "locales-$_") or next;
-	foreach ($p, packageProvides($packages, $p), map { packageByName($packages, $_) } @{$by_lang{$_} || []}) {
-	    next if !$_ || $done{$_}; $done{$_} = 1;
-	    $_->[$VALUES] = pack "s*", map { $_ + 90 } ($_->[$VALUES] ? (unpack "s*", $_->[$VALUES]) : ((0) x @levels));
+	my ($indent, $data) = /(\s*)(.*)/;
+	next if !$data; # skip empty lines
+
+	@l = grep { $_->[0] < length $indent } @l;
+
+	my @m = @l ? @{$l[$#l][1]} : ();
+	my ($t, $flag, @l2);
+	while ($data =~ 
+	       /^((
+                   [1-5]
+                   |
+                   (?:            (?: !\s*)? [0-9A-Z_]+(?:".*?")?)
+                   (?: \s*\|\|\s* (?: !\s*)? [0-9A-Z_]+(?:".*?")?)*
+                  )
+                  (?:\s+|$)
+                 )(.*)/x) {
+	    ($t, $flag, $data) = ($1,$2,$3);
+	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {}
+	    my $ok = 0;
+	    $flag = join('||', grep { 
+		if (my ($inv, $p) = /^(!)?PCI"(.*)"/) {
+		    ($inv xor detect_devices::matching_desc($p)) and $ok = 1;
+		    0;
+		} else {
+		    1;
+		}
+	    } split '\|\|', $flag);
+	    push @m, $ok ? 'TRUE' : $flag || 'FALSE';
+	    push @l2, [ length $indent, [ @m ] ];
+	    $indent .= $t;
+	}
+	if ($data) {
+	    # has packages on same line
+	    my ($rate) = grep { /^\d$/ } @m or die sprintf qq(missing rate for "%s" at line %d (flags are %s)\n), $data, $line_nb, join('&&', @m);
+	    foreach (split ' ', $data) {
+		#-log::l("rpmsrate: $_ = ", join(" && ", @m));
+		my $p = packageByName($packages, $_) or log::l("unknown package $_"), next;
+		$p->[$VALUES] = join("\t", $rate, grep { !/^\d$/ } @m);
+	    }
+	    push @l, @l2;
+	} else {
+	    push @l, [ $l2[0][0], $l2[$#l2][1] ];
 	}
     }
-    my $l = { map_index { $_ => $::i } @levels };
 }
 
 sub readCompssUsers {
-    my ($packages, $compss, $meta_class) = @_;
+    my ($packages, $meta_class) = @_;
     my (%compssUsers, %compssUsersIcons, , %compssUsersDescr, @sorted, $l);
     my (%compss); 
-    foreach (@$compss) {
-	local ($_, $a) = m|(.*)/(.*)|;
-	do { push @{$compss{$_}}, $a } while s|/[^/]+||;
-    }
 
-    my $map = sub {
-	$l or return;
-	$_ = $packages->{names}{$_} or log::l("unknown package $_ (in compssUsers)") foreach @$l;
-    };
     my $file = 'Mandrake/base/compssUsers';
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
     local $_;
@@ -715,7 +663,6 @@ sub readCompssUsers {
 	s/#.*//;
 
 	if (/^(\S.*)/) {
-	    &$map;
 	    my ($icon, $descr);
 	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
 	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
@@ -723,30 +670,20 @@ sub readCompssUsers {
 	    $compssUsersDescr{$_} = $descr; 
 	    push @sorted, $_;
 	    $compssUsers{$_} = $l = [];
-	} elsif (/\s+\+(\S+)/) {
-	    push @$l, $1;
 	} elsif (/^\s+(.*?)\s*$/) {
-	    push @$l, @{$compss{$1} || log::l("unknown category $1 (in compssUsers)") && []};
+	    push @$l, $1;
 	}
     }
-    &$map;
     \%compssUsers, \@sorted, \%compssUsersIcons, \%compssUsersDescr;
 }
 
 sub setSelectedFromCompssList {
-    my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
-    my $ind = $compssListLevels->{$install_class}; defined $ind or log::l("unknown install class $install_class in compssList"), return;
+    my ($packages, $compssUsersChoice, $min_level, $max_size, $install_class) = @_;
+    $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
-    my @packages = allPackages($packages);
-    my @places = do {
-	#- special case for /^k/ aka kde stuff
-	my @values = map { my @v = unpack "s*", $_->[$VALUES]; $v[$ind] } @packages;
-	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
-    };
-    foreach (@places) {
-	my $p = $packages[$_];
-	next if packageFlagSkip($p);
-	last if (unpack "s*", $p->[$VALUES])[$ind] < $min_level;
+    foreach my $p (sort { substr($a,0,1) <=> substr($b,0,1) } values %{$packages->{names}}) {
+	my ($rate, @flags) = split "\t", $p->[$VALUES];
+	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.
@@ -760,7 +697,7 @@ sub setSelectedFromCompssList {
 	}
 	if ($max_size && $nb > $max_size) {
 	    $nb = $old_nb;
-	    $min_level = (unpack "s*", $p->[$VALUES])[$ind];
+	    $min_level = packageRate($p);
 	    last;
 	}
 
@@ -768,7 +705,7 @@ sub setSelectedFromCompssList {
 	selectPackage($packages, $p);
     }
     log::l("setSelectedFromCompssList: reached size $nb, up to indice $min_level (less than $max_size)");
-    $ind, $min_level;
+    $min_level;
 }
 
 #- usefull to know the size it would take for a given min_level/max_size
@@ -1119,8 +1056,8 @@ sub selectPackagesToUpgrade($$$;$$) {
 	    close OUTPUT;
 	    open STDIN, "<&INPUT_CHILD";
 	    open STDOUT, ">&OUTPUT_CHILD";
-	    exec "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->{mediums}};
-	    c::_exit(1);
+	    exec "parsehdlist", "--interactive", map { "/tmp/$_->{hdlist}" } values %{$packages->{mediums}}
+	      or c::_exit(1);
 	}
 
 	#- let the parent known about what we found here!

@@ -319,15 +319,6 @@ sub choosePackages {
     #- always setPackages as it may have to copy hdlist files and depslist file.
     $o->setPackages;
 
-    #- for the first time, select package to upgrade.
-    #- TOCHECK this may not be the best place for that as package are selected at some other point.
-    if ($_[1] == 1) {
-	$o->selectPackagesToUpgrade if $o->{isUpgrade};
-
-	$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
-	# $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
-    }
-
     $o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
 
     #- check pre-condition where base backage has to be selected.
