@@ -511,7 +511,8 @@ sub selectSupplMedia {
 	    };
 	    if (!defined $f) {
 		log::l($@) if $@;
-		$o->ask_warn('', N("Can not find hdlist file on this mirror"));
+		#- no hdlist found
+		$o->ask_warn('', N("Can't find a package list file on this mirror. Make sure the location is correct."));
 		useMedium($prev_asked_medium);
 		return 'error';
 	    }
