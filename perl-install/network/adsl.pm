@@ -90,6 +90,7 @@ sub adsl_conf {
 sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type) = @_;
 
+    commands::mkdir_("-p", "$prefix/etc/ppp");
     output("$prefix/etc/ppp/options",
 'lock
 noipdefault

@@ -65,7 +65,8 @@ MDK::Common::Globals::init(
 $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 require Gtk;
 init Gtk;
-use my_gtk qw(:helpers :wrappers);
+require my_gtk;
+import my_gtk qw(:helpers :wrappers);
 my $expert_mode=0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
 any::setup_thiskind_backend('net', undef);
