@@ -173,7 +173,7 @@ sub init {
     system('sysctl -w kernel.hotplug="/sbin/hotplug"');
 
     key_mount($o);
-    cat_('/proc/cmdline') =~ /\bcleankey\b/ and eval { rm_rf $key_sysconf };
+    cat_('/proc/cmdline') =~ /\bcleankey\b/ and eval { rm_rf $key_sysconf, glob_('/home/.mdkmove*') };
     key_installfiles('simple');
     setup_userconf($o);
     if (-f '/etc/X11/X') {
