@@ -70,6 +70,7 @@ sub new($$) {
 	    }
 	    my $nb;
 	    foreach (1..60) {
+		log::l("waiting for the server to start ($_ $nb)");
 		log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
 		$nb++ if xf86misc::main::Xtest($wanted_DISPLAY);
 		if ($nb > 2) { #- one succeeded test is not enough :-(
