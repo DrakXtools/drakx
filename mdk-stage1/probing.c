@@ -399,9 +399,10 @@ static void find_media(enum media_bus bus)
 	if (medias)
 		free(medias); /* that does not free the strings, by the way */
 
-	if (bus == BUS_SCSI || bus == BUS_USB || bus == BUS_ANY)
-		probe_that_type(SCSI_ADAPTERS, bus);
-
+	if (bus == BUS_SCSI || bus == BUS_USB || bus == BUS_ANY) {
+                log_message("looking for SCSI adapters");
+                probe_that_type(SCSI_ADAPTERS, bus);
+        }
 	/* ----------------------------------------------- */
 	if (bus != BUS_IDE && bus != BUS_ANY)
 		goto find_media_after_ide;
