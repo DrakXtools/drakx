@@ -48,17 +48,7 @@ begin:
 
 	if ($configure_this eq 'everything') {
 	    check_XFree($in);
-	    my $raw_X = Xconfig::xfree->read;
-	    my $default = Xconfig::default::configure();
-	    my $has_conf = @{$raw_X->{xfree3}} || @{$raw_X->{xfree4}};
-	    $raw_X->{xfree3} = $default->{xfree3} if !@{$raw_X->{xfree3}};
-	    $raw_X->{xfree4} = $default->{xfree4} if !@{$raw_X->{xfree4}};
-
-	    if ($has_conf) {
-		Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options);
-	    } else {
-		Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $::auto, $options);
-	    }
+	    Xconfig::main::configure_everything_or_configure_chooser($in, $options, $::auto);
 	} elsif ($configure_this eq 'auto_install') {
 	    Xconfig::main::configure_everything_auto_install(Xconfig::default::configure(), $in->do_pkgs, {}, $options);
 	} elsif ($configure_this eq 'monitor') {

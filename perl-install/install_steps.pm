@@ -898,15 +898,15 @@ sub setupBootloader {
 sub configureXBefore {
     my ($o) = @_;
 
-    require Xconfig::default;
-    $o->{raw_X} = Xconfig::default::configure($o->{keyboard}, $o->{mouse});
-
     #- keep this here if the package has to be updated.
     $o->pkg_install("XFree86");
 }
 sub configureX {
     my ($o) = @_;
     configureXBefore($o);
+
+    require Xconfig::default;
+    $o->{raw_X} = Xconfig::default::configure($o->{keyboard}, $o->{mouse});
 
     require Xconfig::main;
     Xconfig::main::configure_everything_auto_install($o->{raw_X}, $o->do_pkgs, $o->{X},

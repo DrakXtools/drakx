@@ -140,6 +140,25 @@ sub configure_chooser {
     'config_changed';
 }
 
+sub configure_everything_or_configure_chooser {
+    my ($in, $options, $auto, $keyboard, $mouse) = @_;
+    my $raw_X = Xconfig::xfree->read;
+    my $default = Xconfig::default::configure($keyboard, $mouse);
+    my $has_conf = @{$raw_X->{xfree3}} || @{$raw_X->{xfree4}};
+    $raw_X->{xfree3} = $default->{xfree3} if !@{$raw_X->{xfree3}};
+    $raw_X->{xfree4} = $default->{xfree4} if !@{$raw_X->{xfree4}};
+
+    return $raw_X if $has_conf && $auto;
+
+    if ($has_conf) {
+	Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options) or return;
+    } else {
+	Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $auto, $options) or return;
+    }
+    $raw_X;
+}
+
+
 sub may_write {
     my ($in, $raw_X, $X, $ok) = @_;
 

@@ -1111,22 +1111,17 @@ sub miscellaneous {
 sub configureX {
     my ($o, $expert) = @_;
 
+    install_steps::configureXBefore($o);
+    symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
+
     my $options = { 
 	allowFB => $o->{allowFB},
 	allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
     };
 
-    if ($o->{raw_X}) {
-	Xconfig::main::configure_chooser($o, $o->{raw_X}, $o->do_pkgs, $options);
-    } else {
-	install_steps::configureXBefore($o);
-	symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
-	require Xconfig::main;
-	if (Xconfig::main::configure_everything($o, $o->{raw_X}, $o->do_pkgs, !$expert, $options)) {
-	    install_steps::configureXAfter($o);
-	} else {
-	    $o->{raw_X} = undef;
-	}
+    require Xconfig::main;
+    if ($o->{raw_X} = Xconfig::main::configure_everything_or_configure_chooser($o, $options, !$expert, $o->{keyboard}, $o->{mouse})) {
+	install_steps::configureXAfter($o);
     }
 }
 
