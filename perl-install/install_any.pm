@@ -300,9 +300,9 @@ sub setPackages($) {
 
 	my @l = ();
 	push @l, "kapm", "kcmlaptop", "DrakProfile", "DrakSync" if $o->{pcmcia};
-	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
 	push @l, "Glide_V5"  if detect_devices::matching_desc('Voodoo 5');
 	push @l, "Glide_V3-DRI"  if detect_devices::matching_desc('Voodoo 3');
+	push @l, "Device3Dfx", "XFree86-glide-module" if detect_devices::matching_desc('Voodoo');
 	require timezone;
 	require lang;
 	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;
