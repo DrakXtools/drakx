@@ -748,8 +748,8 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 	char *selected_medium;
 	int fd, size, line_pos = 0;
 	char line[500];
-	int use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
-
+	int use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
+ 
 	fd = http_download_file(MIRRORLIST_HOST, MIRRORLIST_PATH, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
 	if (fd < 0) {
 		log_message("HTTP: unable to get mirrors list");
@@ -944,7 +944,7 @@ enum return_type ftp_prepare(void)
 			return ftp_prepare();
 		}
 
-		use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
+		use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
 		strcpy(location_full, answers[1][0] == '/' ? "" : "/");
 		strcat(location_full, answers[1]);
@@ -1091,7 +1091,7 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: trying to retrieve %s from %s", location_full, answers[0]);
 		
-		use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
+		use_http_proxy = http_proxy_host && http_proxy_port && !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
 		fd = http_download_file(answers[0], location_full, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
 		if (fd < 0) {
