@@ -13,7 +13,7 @@ use c;
 
 my $in = 'interactive'->vnew('su');
 
-modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+modules::mergein_conf();
 
 begin:
 my $mouse = mouse::read();

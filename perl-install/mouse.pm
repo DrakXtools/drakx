@@ -567,7 +567,7 @@ mouse - Perl functions to handle mice
 
    require modules;
    require mouse;
-   modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+   modules::mergein_conf();
    &mouse::detect();
 
 =head1 DESCRIPTION

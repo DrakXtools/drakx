@@ -121,7 +121,7 @@ if (@devices) {
 	   if (($< == 0 || $::testing) && (grep { detect_devices::isTVcard($_) } @devices)) {
 		  require harddrake::v4l;
 		  require modules;
-		  modules::mergein_conf('/etc/modules.conf') if !$configured;
+		  modules::mergein_conf() if !$configured;
 		  $configured++;
 		  $not_canceled &&= harddrake::v4l::config($in, $_->{driver});
 		  modules::write_conf();

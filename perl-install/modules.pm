@@ -272,7 +272,7 @@ sub read_conf {
     \%c;
 }
 
-sub mergein_conf {
+sub mergein_conf_raw {
     my ($file) = @_;
     my $modconfref = read_conf($file);
     while (my ($key, $value) = each %$modconfref) {
@@ -280,6 +280,10 @@ sub mergein_conf {
 	$conf{$key}{options} = $value->{options} if $value->{options};
 	push @{$conf{$key}{probeall} ||= []}, deref($value->{probeall});
     }
+}
+sub mergein_conf {
+    my $file = "$::prefix/etc/modules.conf";
+    mergein_conf_raw($file) if -r $file;
 }
 
 sub write_conf() {
@@ -346,10 +350,6 @@ sub append_to_modules_loaded_at_startup {
 	$_ = '' if $l && /$l/;
 	$_ .= join '', map { "$_\n" } @l if eof;
     } $file;
-}
-
-sub read_stage1_conf {
-    mergein_conf($_[0]);
 }
 
 

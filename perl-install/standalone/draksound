@@ -29,7 +29,7 @@ use detect_devices;
 
 my $in = 'interactive'->vnew('su');
 
-modules::mergein_conf('/etc/modules.conf');
+modules::mergein_conf();
 
 my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_AUDIO' } detect_devices::probeall();
 if (@devices) {

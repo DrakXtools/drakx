@@ -260,7 +260,7 @@ our @tree =
       detector => sub { 
           require mouse;
           require modules;
-          modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+          modules::mergein_conf();
           &mouse::detect();
       },
       checked_on_boot => 1,

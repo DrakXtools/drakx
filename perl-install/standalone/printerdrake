@@ -103,7 +103,7 @@ $commandline =~ /-lprng/ and
     $printer->{SPOOLER} = 'lprng' and printer::main::read_configured_queues($printer);
 $commandline =~ /-pdq/ and 
     $printer->{SPOOLER} = 'pdq'  and printer::main::read_configured_queues($printer);
--r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
+modules::mergein_conf();
 
 undef $w;
 

@@ -6,7 +6,7 @@ use common;
 sub config_window {
     my ($in, $data) = @_;
     require modules;
-    modules::mergein_conf('/etc/modules.conf');
+    modules::mergein_conf();
     my %conf = modules::get_parameters($data->{driver});
     require modules::parameters;
     my @l;

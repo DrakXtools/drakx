@@ -50,7 +50,7 @@ sub get_eth_cards() {
     my @all_cards = detect_devices::getNet();
 
     my @devs = detect_devices::pcmcia_probe();
-    modules::mergein_conf("$::prefix/etc/modules.conf");
+    modules::mergein_conf();
     my $saved_driver;
     return map {
         my $interface = $_;

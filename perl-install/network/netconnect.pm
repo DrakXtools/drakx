@@ -121,7 +121,7 @@ sub real_main {
       $netc->{NET_INTERFACE} = $netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
       network::network::read_all_conf($::prefix, $netc, $intf);
 
-      modules::mergein_conf("$::prefix/etc/modules.conf");
+      modules::mergein_conf();
 
       $netc->{autodetect} = {};
 

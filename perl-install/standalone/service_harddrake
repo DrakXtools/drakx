@@ -20,7 +20,7 @@ my $last_boot_config = $hw_sysconfdir."/previous_hw";
 
 $last_boot_config .= '_X11' if $invert_do_it;
 
-modules::mergein_conf('/etc/modules.conf');
+modules::mergein_conf();
 
 # autoreconfigure the mouse on major kernel change:
 my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
