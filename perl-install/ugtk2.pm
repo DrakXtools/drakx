@@ -6,21 +6,25 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack2_
-      gtkpack2__ gtkpowerpack gtkcombo_setpopdown_strings gtkset_editable gtkset_selectable gtkentry 
-      gtkset_text gtkset_tip gtkappenditems gtkappend  gtkset_shadow_type gtkset_layout gtkset_relief
-      gtkadd gtkexpand gtkput gtktext_append gtktext_insert gtkset_size_request gtksize gtkset_justify gtkset_active
-      gtkset_sensitive gtkset_visibility gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow
-      gtkhide gtkdestroy gtkflush gtkset_mousecursor gtkset_mousecursor_normal gtkset_markup gtkmodify_font gtkset_property
-      gtkset_mousecursor_wait gtkappend_text gtkprepend_text gtkinsert_text gtkroot gtksetstyle gtkappend_page) ],
-    helpers => [ qw(add2notebook add_icon_path n_line_size fill_tiled fill_tiled_coords string_size
-      get_text_coord gtkcolor gtkset_background gtkfontinfo gtkcreate_img gtkcreate_pixbuf set_back_pixbuf
-      prepare_gtk2) ],
-    create => [ qw(create_box_with_title create_adjustment create_scrolled_window create_hbox create_vbox
-      create_dialog destroy_window create_factory_menu create_menu create_notebook create_packtable
-      create_vpaned create_hpaned create_okcancel) ],
-    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_browse_tree_info 
-      ask_browse_tree_info_given_widgets ask_dir) ],
+    wrappers => [ qw(gtkadd gtkappend gtkappend_page gtkappend_text gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
+                     gtkentry gtkexpand gtkflush gtkhide gtkinsert_text gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
+                     gtkpack2__ gtkpack_ gtkpack__ gtkpowerpack gtkprepend_text gtkput gtkradio gtkresize gtkroot
+                     gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_layout gtkset_markup
+                     gtkset_modal gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_name
+                     gtkset_property gtkset_relief gtkset_selectable gtkset_sensitive gtkset_shadow_type gtkset_size_request
+                     gtkset_text gtkset_tip gtkset_visibility gtksetstyle gtkshow gtksignal_connect gtksize gtktext_append
+                     gtktext_insert ) ],
+
+    helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords get_text_coord gtkcolor gtkcreate_img
+                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size prepare_gtk2 set_back_pixbuf string_size) ],
+
+    create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_hbox create_hpaned
+                   create_menu create_notebook create_okcancel create_packtable create_scrolled_window create_vbox
+                   create_vpaned destroy_window ) ],
+
+    ask => [ qw(ask_browse_tree_info ask_browse_tree_info_given_widgets ask_dir ask_from_entry ask_okcancel ask_warn
+                ask_yesorno ) ],
+
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -186,6 +190,13 @@ sub gtksignal_connect {
     $w;
 }
 
+sub gtkset_name {
+    my ($widget, $name) = @_;
+    $widget->set_name($name);
+    $widget;
+}
+
+
 sub gtkpowerpack {
     #- Get Default Attributes (if any). 2 syntaxes allowed :
     #- gtkpowerpack( {expand => 1, fill => 0}, $box...) : the attributes are picked from a specified hash ref
@@ -327,8 +338,7 @@ sub create_box_with_title {
 					   (map {
 					       my $w = ref $_ ? $_ : Gtk2::Label->new($_);
 					       $::isWizard and $w->set_justify("left");
-					       $w->set_name("Title");
-					       (0, $w);
+					       (0, gtkset_name($w, "Title"));
 					   } map { ref $_ ? $_ : warp_text($_) } @_),
 					   1, Gtk2::HBox->new(0,0),
 					  )
@@ -340,8 +350,7 @@ sub create_box_with_title {
 		      (map {
 			  my $w = ref $_ ? $_ : Gtk2::Label->new($_);
 			  $::isWizard and $w->set_justify("left");
-			  $w->set_name("Title");
-			  $w;
+			  gtkset_name($w, "Title");
 		      } map { ref $_ ? $_ : warp_text($_) } @_),
 		      if_($a, Gtk2::HSeparator->new)
 		     )
