@@ -49,9 +49,9 @@ sub leavingStep($$) {
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") } if -d "$o->{prefix}/root" && !$::testing;
 
     for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
-
+	#- the reachability property must be recomputed each time to take
+	#- into account failed step.
 	next if $o->{steps}{$s}{done} && !$o->{steps}{$s}{redoable};
-	next if $o->{steps}{$s}{reachable};
 
 	my $reachable = 1;
 	if (my $needs = $o->{steps}{$s}{needs}) {
@@ -340,9 +340,11 @@ sub readBootloaderConfigBeforeInstall {
 	    $v = readlink "$o->{prefix}/boot/$image";
 	    if ($v) {
 		$v = "/boot/$v" if $v !~ m@/@;
-		$o->{bootloader}{entries}{$v} = $o->{bootloader}{entries}{"/boot/$image"};
-		delete $o->{bootloader}{entries}{"/boot/$image"};
-		log::l("renaming /boot/$image entry by $v");
+		if (-e "$o->{prefix}$v") {
+		    $o->{bootloader}{entries}{$v} = $o->{bootloader}{entries}{"/boot/$image"};
+		    delete $o->{bootloader}{entries}{"/boot/$image"};
+		    log::l("renaming /boot/$image entry by $v");
+		}
 	    }
 	}
     }

@@ -510,6 +510,7 @@ sub main {
 	    eval { $o->errorInStep($_) } unless /^already displayed/;
 	    $@ and next;
 	    $o->{step} = $o->{steps}{$o->{step}}{onError};
+	    next MAIN unless $o->{steps}{$o->{step}}{reachable}; #- sanity check: avoid a step not reachable on error.
 	    redo MAIN;
 	}
 	$o->{steps}{$o->{step}}{done} = 1;
