@@ -50,7 +50,11 @@ our @tree =
 	    grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} eq 'network' } @devices}],
 #	["","Tokenring cards", "Ethernetcard.png", "", \&detect_devices::getNet],
 #	["","FDDI cards", "Ethernetcard.png", "", \&detect_devices::getNet],
-#	["","Modem", "Modem.png", "", \&detect_devices::getNet],
+	["MODEM","Modem", "modem.png", "", sub { require network::modem; 
+									 my $modem;
+									 modem_detect_backend($modem);
+									 $modem->{device} ?$modem : {};
+								  } ],
 #	["","Isdn", "", "", \&detect_devices::getNet]
 
 	["BRIDGE","Bridge(s)", "memory.png", "", sub { grep { $_->{media_type} =~ 'BRIDGE' } @devices}],
