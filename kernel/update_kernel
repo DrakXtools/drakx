@@ -56,7 +56,14 @@ function create_modules_mar() {
 if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
 	rpm=$(rpm -qp --qf '%{name}' $RPMS/kernel-[0-9]*.rpm | perl -pe 's/kernel-((\.?[0-9]+){3})\.(.*)/$1-${3}/')
 else 
-	rpm=$(rpm -qp --qf '%{name}' $RPMS/kernel-BOOT-*.rpm | perl -pe 's/kernel-BOOT-((\.?[0-9]+){3})\.(.*)/$1-${3}BOOT/')
+        #- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm 2.4.22-10mdk)
+        if [ -n "$1" ]; then
+            file=$1
+            rpm=$2
+        else
+            file=$RPMS/kernel-BOOT-*.rpm
+            rpm=$(rpm -qp --qf '%{name}' $file | perl -pe 's/kernel-BOOT-((\.?[0-9]+){3})\.(.*)/$1-${3}BOOT/')
+        fi
 fi
 if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
     [ -n "$main" ] && rm -rf $ALL_KERNELS/$main
@@ -66,7 +73,7 @@ if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
     if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
       rpm2cpio $RPMS/kernel-[0-9]*.rpm | cpio -id
     else
-      rpm2cpio $RPMS/kernel-BOOT-*.rpm | cpio -id
+      rpm2cpio $file | cpio -id
     fi
     find -type f -name "*.o.gz" | xargs gunzip
     cd ../..
