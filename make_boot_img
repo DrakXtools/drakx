@@ -244,6 +244,10 @@ sub syslinux_cfg_all {
 	{ label => 'memtest', kernel => 'test/memtest.bin' },
     );
 }
+sub remove_ending_zero {
+    my ($img) = @_;
+    _(q(perl -0777 -pi -e 's/\0+$//' ) . $img);
+}
 
 sub boot_img_i386 {
     my ($type, $I, $img, $kernel) = @_;
@@ -297,6 +301,8 @@ sub boot_img_i386 {
     _ "sync";
     _ "df $tmp_mnt";
     _ "$sudo umount $tmp_mnt";
+
+    remove_ending_zero($img);
 }
 
 # alias to x86 variant, slightly bigger with images though
@@ -840,4 +846,6 @@ sub drivers {
     _ "df $tmp_mnt";
 
     _ "$sudo umount $tmp_mnt";
+
+    remove_ending_zero($img);
 }
