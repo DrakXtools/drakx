@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.17mdk
+Release: 0.18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Feb 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.18mdk
+- new default icon for wizards banner
+- drakconnect
+  o wizard:
+    * handle atmel_cs wireless driver
+    * sort lan protocols
+  o manage interface: update (poulpy)
+- drakvpn: one can now start from scratch with ipsec.conf (florin)
+- harddrake: really fix doble blanked ISDN detection
+- mousedrake (pixel):
+  o detection defaults on automatic choices
+  o fix mouse detection on kernel 2.4
+- printerdrake: fix problem that not used parallel ports were detected
+  as printers
+
 * Tue Feb 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.17mdk
 - drakboot: remove bad entries after reading existing conf file (pixel)
 - drakclock: let's look better when embedded
