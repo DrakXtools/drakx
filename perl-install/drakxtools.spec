@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 1mdk
+Release: 2mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -48,7 +48,7 @@ Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libde
 %description
 Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
 drakboot, drakbug, drakbug_report, drakconnect, drakfloppy, drakfont,
-drakgw, drakproxy, draksec, drakTermServ, drakxconf, drakxservices,
+drakgw, drakproxy, draksec, drakTermServ, drakxservices,
 drakxtv, lsnetdrake, lspcidrake, keyboarddrake, livedrake,
 localedrake, mousedrake, printerdrake, scannerdrake, tinyfirewall and
 XFdrake :
@@ -88,8 +88,6 @@ drakproxy: proxies configuration
 draksec: security configurator (security levels, ...)
 
 drakTermServ: mandrake terminal server configurator
-
-drakxconf: simple control center
 
 drakxservices: SysV service and dameaons configurator
 
@@ -201,7 +199,6 @@ rm -rf $RPM_BUILD_ROOT
 %post
 [[ ! -e /usr/X11R6/bin/Xconfigurator ]] && %__ln_s -f ../sbin/XFdrake /usr/X11R6/bin/Xconfigurator
 [[ ! -e %_sbindir/kbdconfig ]] && %__ln_s -f keyboarddrake %_sbindir/kbdconfig
-[[ ! -e %_sbindir/setuptool ]] && %__ln_s -f drakxconf %_sbindir/setuptool
 [[ ! -e %_sbindir/mouseconfig ]] && %__ln_s -f mousedrake %_sbindir/mouseconfig
 [[ ! -e %_bindir/printtool ]] && %__ln_s -f ../sbin/printerdrake %_bindir/printtool
 :
@@ -263,6 +260,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Aug  1 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-2mdk
+- remove obsoleted drakconf
+- various fixes
+- [ugtk::gtkcreate_png] suppress all gtk warnings
+- updated vietnamese translation (pablo)
+- [interactive::gtk] fix many warnings when {icon} is not given (pixel)
+
 * Thu Aug  1 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-1mdk
 - integrate patches in my_gtk and ugtk for new rpmdrake:
   - [ugtk] add "gtkentry" so that we can create an entry and set
