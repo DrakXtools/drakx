@@ -72,9 +72,15 @@ sub passwd_by_login {
     }
 }
 
-sub connect_backend() { run_program::rooted($::prefix, "$connect_file &") }
+sub connect_backend {
+    my ($netc) = @_;
+    run_program::rooted($::prefix, "ifup $netc->{NET_INTERFACE} &");
+}
 
-sub disconnect_backend() { run_program::rooted($::prefix, "$disconnect_file &") }
+sub disconnect_backend {
+    my ($netc) = @_;
+    run_program::rooted($::prefix, "ifdown $netc->{NET_INTERFACE} &");
+}
 
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 

@@ -566,10 +566,6 @@ Take a look at http://www.linmodems.org"),
                     pre => sub {
                         $mouse ||= {};
                         $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-                        set_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"),
-                                         q(ifdown ppp0
-killall pppd
-), $netcnx->{type});
                     },
                     name => N("Dialup: account options"), 
                     data => sub {
@@ -786,7 +782,7 @@ If you don't know, choose 'use pppoe'"),
                             return 'lan_intf';
                         }
                         network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
-                        $netc->{NET_DEVICE} = $ntf_name if $adsl_type eq 'pppoe';
+                        $netc->{$_} = $adsl_type eq 'pppoe' ? $ntf_name : 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
                         return 'adsl_account';
                     },
                    },
@@ -815,10 +811,6 @@ If you don't know, choose 'use pppoe'"),
                     post => sub {
                         $netc->{internet_cnx_choice} = 'adsl';
                         network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $ntf_name, $adsl_type, $netcnx); #FIXME
-                        set_cnx_script($netc, "adsl", "ifup ppp0",
-                                       q(ifdown ppp0
-killall pppd
-), $netcnx->{type});
                         $config->{adsl} = { kind => $ntf_name, protocol => $adsl_type };
                         $handle_multiple_cnx->();
                     },
@@ -958,13 +950,6 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netc->{dhcp_client}) if $auto_ip;
-                        set_cnx_script($netc, "cable", qq(
-/sbin/ifup $netc->{NET_DEVICE}
-),
-                                                  qq(
-/sbin/ifdown $netc->{NET_DEVICE}
-), $netcnx->{type}) if $netcnx->{type} eq 'cable';
-
                         return $is_wireless ? "wireless" : "static_hostname";
                     },
                    },
@@ -1236,8 +1221,7 @@ It is not necessary on most networks."),
                         if ($a) {
                             # local $::isWizard = 0;
                             my $_w = $in->wait_message('', N("Testing your connection..."), 1);
-                            # FIXME: drop cnx_scripts (still used for modem connexions), use ifup/ifdown instead
-                            connect_backend();
+                            connect_backend($netc);
                             my $s = 30;
                             $type =~ /modem/ and $s = 50;
                             $type =~ /adsl/ and $s = 35;
@@ -1260,7 +1244,7 @@ Try to reconfigure your connection.");
                     no_back => 1,
                     end => 1,
                     post => sub {
-                        $::isInstall and disconnect_backend();
+                        $::isInstall and disconnect_backend($netc);
                         return "end";
                     },
                    },

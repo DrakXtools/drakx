@@ -103,10 +103,10 @@ $int_connect->signal_connect(clicked => sub {
         if (cat_($network::tools::connect_prog) =~ m|/usr/bin/kppp| && -e '/usr/bin/kppp') {
             run_program::run("/usr/bin/kppp &");
           } else {
-              connect_backend();
+              connect_backend($netc);
           }
     } else {
-        disconnect_backend();
+        disconnect_backend($netc);
     }
 });
 
