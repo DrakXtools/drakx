@@ -77,7 +77,14 @@ clean:
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
-upload: clean install
+upload: 
+	$(MAKE) clean
+
+#	# done before make install to increment ChangeLog version
+	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl
+
+	$(MAKE) install
+
 	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
 	upload Mandrake/base compss* ;\
@@ -92,8 +99,6 @@ upload: clean install
 	upload '' live_update ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo
-
-	tools/addchangelog.pl perl-install tools/cvslog2changelog.pl | tools/mailchangelog.pl
 
 upload_sparc:
 	touch /tmp/mdkinst_done
