@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.28mdk
+Release: 0.29mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -358,6 +358,26 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 24 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.29mdk
+- drakconnect:
+  o add norwegian ADSL providers (Eskild Hustvedt)
+  o remove all non-digit characters in phone number (blino, #10813)
+  o minimal WPA support (blino)
+- drakxtv: scan TV channels for TV cards that do not require any
+  driver configuration (#13865)
+- drakups:
+  o fix crash due to latest perl-Libconf 
+  o fix reading UPS db
+- net_applet: fix name of mcc tool (blino & me, #13896)
+- printerdrake:
+  o enable to alter options of a not set up non-Foomatic queu
+  o fix accentuated characters in PPDs not correctly reproduced in the
+   printer options dialog
+- GUI layers:
+  o fix displaying "Advanced" instead of "Basic" in advanced_state by
+    default (pixel, #13944)
+  o force to open file selector as a modal window (rafael, #13942)
+
 * Tue Feb 22 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.28mdk
 - drakfont: allow to select multiple files (blino)
 - localedrake:
