@@ -774,6 +774,7 @@ sub get_that_type {
 		$_->{driver} = $1;
 		$_->{options} = $2;
 		$_->{firmware} = $3;
+		$_->{firmware} =~ s/firmware=//;
 		$_->{driver} eq "hisax" and $_->{options} .= " id=HiSax";
 	    }
 	    $b;
