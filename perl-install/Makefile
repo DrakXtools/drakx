@@ -7,7 +7,7 @@ include Makefile.config
 
 POFILES   = $(shell ls share/po/*.po)
 MOFILES   = $(POFILES:%.po=%.mo)
-DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config apps.net_monitor ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons pixmaps standalone/interactive_http rpcinfo-flushed.c
+DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config apps.net_monitor ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons pixmaps standalone/interactive_http rpcinfo-flushed.c standalone/service_harddrake.sh
 OTHERS     = $(OTHERDIRS) $(OTHERFILES)
 OTHERDIRS  = tools/ddcprobe tools/serial_probe
 OTHERFILES = tools/rpcinfo-flushed.c
