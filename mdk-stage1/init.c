@@ -432,8 +432,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		kill(klog_pid, 9);
 		printf("proceeding...\n");
 		return 0;
-        } else
-		printf("install succeeded\n");
+        }
 
 	if (testing)
 		return 0;
