@@ -237,23 +237,38 @@ my @serverPartitioning = (
 		     { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
 );
 
-#all the fields can be also present in $o, (in that case it overides)
-my $default = {
+#-#######################################################################################
+#-$O
+#-the big struct which contain, well everything (globals + the interactive methods ...)
+#-if you want to do a kickstart file, you just have to add all the required fields (see for example
+#-the variable $default)
+#-#######################################################################################
+$o = $::o = { 
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI   => 0,
     mkbootdisk => "fd0", # no mkbootdisk if 0 or undef,   find a floppy with 1
     packages   => [ qw() ],
     partitioning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
-    partitions => [
-		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
-		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
-		   { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
+#    partitions => [
+#		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+#		      { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
+#		      { mntpoint => "/usr",  size => 512 << 11, type => 0x83, growable => 1 }, 
+#		      { mntpoint => "/var",  size => 256 << 11, type => 0x83 }, 
+#		      { mntpoint => "/home", size => 512 << 11, type => 0x83, growable => 1 }, 
+#		      { mntpoint => "swap",  size =>  64 << 11, type => 0x82 }
+#		    { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
+#		    { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
+#		    { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
 #		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
-	     ],
+#	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     lang         => 'us',
     isUpgrade    => 0,
     installClass => 'beginner',
+    timezone => {
+                   timezone => "Europe/Paris",
+                   GMT      => 1,
+                },
     printer => { 
                  complete => 0,
                  str_type => $printer::printer_type[0],
@@ -280,20 +295,11 @@ my $default = {
                  SMBPASSWD => "passowrd",
                  SMBWORKGROUP => "AS3",
                },
+    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
+    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
     
 #    keyboard => 'de',
 #    display => "192.168.1.9:0",
-};
-
-#-#######################################################################################
-#-$O
-#-the big struct which contain, well everything (globals + the interactive methods ...)
-#-if you want to do a kickstart file, you just have to add all the required fields (see for example
-#-the variable $default)
-#-#######################################################################################
-$o = $::o = { 
-
-    default      => $default,              
     steps        => \%installSteps,        
     orderedSteps => \@orderedInstallSteps, 
 
@@ -301,8 +307,6 @@ $o = $::o = {
 
     base => [ qw(basesystem initscripts console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
 # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
-#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
-#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
 #    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
 
 #step : the current one
@@ -329,7 +333,7 @@ sub selectLanguage {
 
     addToBeDone {
 	unless ($o->{isUpgrade}) {
-	        lang::write($o->{prefix});
+	    lang::write($o->{prefix});
             keyboard::write($o->{prefix}, $o->{keyboard});
 	}
     } 'doInstallStep';
@@ -349,7 +353,7 @@ sub selectKeyboard {
 
 #------------------------------------------------------------------------------
 sub selectPath {
-    $o->{isUpgrade}    = $o->selectInstallOrUpgrade;
+    $o->selectPath;
 
     $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
     $o->{orderedSteps} = $o->{isUpgrade} ? \@orderedUpgradeSteps : \@orderedInstallSteps;
@@ -357,7 +361,7 @@ sub selectPath {
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
-    $o->{installClass} = $o->selectInstallClass(@install_classes);
+    $o->selectInstallClass(@install_classes);
 
     $::expert = $o->{installClass} eq "expert";
 }
@@ -374,7 +378,7 @@ sub setupSCSI {
 #PADTODO
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
-    $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{default}{partitioning}) }
+    $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
       sub {
 	  $o->ask_warn(_("Error"), 
 _("I can't read your partition table, it's too corrupted for me :(
@@ -390,7 +394,7 @@ I'll try to go on blanking bad partitions"));
     }
 
     unless ($o->{isUpgrade}) {
-	eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{default}{partitioning}{auto_allocate};
+	eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{partitioning}{auto_allocate};
 	$o->doPartitionDisks($o->{hds});
 
 	unless ($::testing) {
@@ -447,6 +451,7 @@ sub configureTimezone {
     my ($clicked) = $_[0];
     my $f = "$o->{prefix}/etc/sysconfig/clock";
     return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$clicked;
+
     $o->timeConfig($f);
 }
 #------------------------------------------------------------------------------
@@ -540,6 +545,8 @@ sub main {
 	    $o->{steps}{first} = shift;
 	} elsif (/--expert/) {
 	    $::expert = 1;
+	} else {
+	    $::expert = 0;
 	}
        
     }

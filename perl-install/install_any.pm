@@ -77,7 +77,7 @@ sub mouse_detect() {
 
 sub shells($) {
     my ($o) = @_;
-    my @l = grep { -x "$o->{prefix}$_" } @{$o->{default}{shells}};
+    my @l = grep { -x "$o->{prefix}$_" } @{$o->{shells}};
     @l ? @l : "/bin/bash";
 }
 

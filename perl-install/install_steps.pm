@@ -3,6 +3,9 @@ package install_steps;
 use diagnostics;
 use strict;
 
+#-######################################################################################
+#- misc imports
+#-######################################################################################
 use common qw(:file :system :common);
 use install_any qw(:all);
 use partition_table qw(:types);
@@ -29,17 +32,18 @@ my $o;
 1;
 
 
+#-######################################################################################
+#- misc functions
+#-######################################################################################
 sub new($$) {
     my ($type, $o_) = @_;
 
     $o = bless $o_, ref $type || $type;
 }
 
-sub default {
-    my ($o, $field) = @_;
-    $o->{$field} || $o->{default}{$field};
-}
-
+#-######################################################################################
+#- In/Out Steps Functions
+#-######################################################################################
 sub enteringStep($$) {
     my ($o, $step) = @_;
     log::l("starting step `$step'");
@@ -77,46 +81,48 @@ so continue at your own risk :("), $@ ]) if $@;
 
 sub errorInStep($$) {}
 
-sub chooseLanguage($) {
-    $o->default("lang");
-}
-sub chooseKeyboard($) {
-    $o->default("keyboard");
-}
-sub choosePrinter($) {
-    $o->default("printer");
-}
 
+#-######################################################################################
+#- Steps Functions
+#-######################################################################################
 
-sub selectInstallOrUpgrade($) {
-    $o->default("isUpgrade") || 0;
+#------------------------------------------------------------------------------
+sub selectLanguage {
+    $o->{keyboard} ||= keyboard::lang2keyboard($o->{lang});
+    selectKeyboard($o);
 }
-sub selectInstallClass($@) {
-    $o->default("installClass") || $_[1];
-}
-sub setupSCSI {
-    modules::load_thiskind('scsi');
-}
-
+#------------------------------------------------------------------------------
+sub selectKeyboard { keyboard::setup($o->{keyboard}) }
+#------------------------------------------------------------------------------
+sub selectPath {}
+#------------------------------------------------------------------------------
+sub selectInstallClass($@) {}
+#------------------------------------------------------------------------------
+sub setupSCSI { modules::load_thiskind('scsi') }
+#------------------------------------------------------------------------------
 sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
-    fsedit::auto_allocate($hds, $o->default("partitions"));
+    fsedit::auto_allocate($hds, $o->{partitions});
 }
+
+#------------------------------------------------------------------------------
 sub rebootNeeded($) {
     my ($o) = @_;
     log::l("Rebooting...");
     exit "true";
 }
 
+#------------------------------------------------------------------------------
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
     foreach (@$fstab) { 
 	$_->{toFormat} = ($_->{mntpoint} && isExt2($_) || isSwap($_)) &&
-	  ($_->{notFormatted} || $o->{default}{partitioning}{autoformat});
+	  ($_->{notFormatted} || $o->{partitioning}{autoformat});
     }
 }
 
+#------------------------------------------------------------------------------
 sub formatPartitions {
     my $o = shift;
     foreach (@_) {
@@ -124,10 +130,12 @@ sub formatPartitions {
     }
 }
 
+#------------------------------------------------------------------------------
 sub choosePackages($$$) {
     my ($o, $packages, $compss) = @_;
 }
 
+#------------------------------------------------------------------------------
 sub beforeInstallPackages {
     my ($o) = @_;
 
@@ -150,12 +158,14 @@ sub afterInstallPackages($) {
 #    configPCMCIA($o->{rootPath}, $o->{pcmcia});
 }
 
+#------------------------------------------------------------------------------
 sub mouseConfig($) { 
     my ($o) = @_;
     setVarsInSh("$o->{prefix}/etc/sysconfig/mouse", $o->{mouse});
     symlink $o->{mouse}{DEVICE}, "$o->{prefix}/dev/mouse" or log::l("creating /dev/mouse symlink failed");
 }
 
+#------------------------------------------------------------------------------
 sub configureNetwork($) {
     my ($o) = @_;
     my $etc = "$o->{prefix}/etc";
@@ -171,9 +181,10 @@ sub configureNetwork($) {
     #res_init();		# reinit the resolver so DNS changes take affect     
 }
 
+#------------------------------------------------------------------------------
 sub timeConfig {
     my ($o, $f) = @_;
-    my $t = $o->default("timezone");
+    my $t = $o->{timezone};
 
     setVarsInSh($f, { 
 	ZONE => $t->{timezone},
@@ -182,17 +193,20 @@ sub timeConfig {
     });
 }
 
+#------------------------------------------------------------------------------
 sub servicesConfig {}
+#------------------------------------------------------------------------------
 sub printerConfig {
     my($o) = @_;
-    my $printer = $o->default("printer");
     if ($o->{printer}{complete}) {
+
 	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
 	$o->installPackages($o->{packages});
-	printer::configure_queue($printer) if $o->{printer}{complete};
+
+	printer::configure_queue($o->{printer});
     }
 }
-
+#------------------------------------------------------------------------------
 sub setRootPassword($) {
     my ($o) = @_;
     my %u = %{$o->{superuser}};
@@ -216,6 +230,7 @@ sub setRootPassword($) {
     }
 }
 
+#------------------------------------------------------------------------------
 sub addUser($) {
     my ($o) = @_;
     my %u = %{$o->{user}};
@@ -249,6 +264,7 @@ sub addUser($) {
     commands::chown_("-r", "$u{uid}.$u{gid}", "$p$u{home}");
 }
 
+#------------------------------------------------------------------------------
 sub createBootdisk($) {
     my $dev = $o->default("mkbootdisk") or return;
 
@@ -263,14 +279,17 @@ sub createBootdisk($) {
     $o->{mkbootdisk} = $dev;
 }
 
+#------------------------------------------------------------------------------
 sub setupBootloader($) {
     my ($o) = @_;
     my $versionString = versionString();
-    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->default("bootloader"));
+    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{bootloader});
 }
 
+#------------------------------------------------------------------------------
 sub setupXfree {
     my ($o) = @_;
 }
 
+#------------------------------------------------------------------------------
 sub exitInstall {}
