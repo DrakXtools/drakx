@@ -568,10 +568,10 @@ my %IM_config =
             XMODIFIERS => '@im=SCIM',
            },
    uim => {
-           GTK_IM_MODULE => 'uim-anthy',
-           XIM => 'uim-anthy',
+           GTK_IM_MODULE => 'uim',
+           XIM => 'uim',
            XIM_PROGRAM => 'uim-xim',
-           XMODIFIERS => '@im=uim-anthy',
+           XMODIFIERS => '@im=uim',
           },
    xcin => {
             XIM => 'xcin',
