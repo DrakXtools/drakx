@@ -17,11 +17,12 @@ sub getTimeZones {
     @l;
 }
 
-sub read ($) {
-    my ($f) = @_;
-    my %t = getVarsFromSh($f) or die "cannot open file $f: $!";
+sub read {
+    my ($prefix) = @_;
+    my $f = "$prefix/etc/sysconfig/clock";
+    my %t = getVarsFromSh($f) or return;
 
-    ("timezone", $t{ZONE}, "UTC", text2bool($t{UTC}));
+    (timezone => $t{ZONE}, UTC => text2bool($t{UTC}));
 }
 
 sub write {

@@ -276,6 +276,17 @@ sub getAvailableSpace_raw {
     die "missing root partition";
 }
 
+sub preConfigureTimezone {
+    my ($o) = @_;
+    require timezone;
+   
+    #- can't be done in install cuz' timeconfig %post creates funny things
+    add2hash($o->{timezone}, { timezone::read() }) if $o->{isUpgrade};
+
+    $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
+    add2hash_($o->{timezone}, { UTC => $::expert && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} });
+}
+
 sub setPackages {
     my ($o) = @_;
 

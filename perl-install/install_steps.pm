@@ -497,9 +497,17 @@ sub installCrypto {
     $o->pkg_install(@{$u->{packages}});
 }
 
+sub summary {
+    my ($o) = @_;
+    configureTimezone($o);
+    configurePrinter($o);
+}
+
 #------------------------------------------------------------------------------
 sub configureTimezone {
     my ($o) = @_;
+    install_any::preConfigureTimezone($o);
+
     require timezone;
     timezone::write($o->{prefix}, $o->{timezone});
 }
@@ -507,8 +515,10 @@ sub configureTimezone {
 #------------------------------------------------------------------------------
 sub configureServices {
     my ($o) = @_;
-    require services;
-    services::doit($o, $o->{services}, $o->{prefix}) if $o->{services};
+    if ($o->{services}) {
+	require services;
+	services::doit($o, $o->{services}, $o->{prefix});
+    }
 }
 #------------------------------------------------------------------------------
 sub configurePrinter {

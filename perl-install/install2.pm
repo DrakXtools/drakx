@@ -50,9 +50,8 @@ my (%installSteps, @orderedInstallSteps);
   installPackages    => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '', "formatPartitions" ],
 #-  installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
-  configureTimezone  => [ __("Configure timezone"), 1, 1, '', "installPackages" ],
+  summary            => [ __("Summary"), 1, 0, '', "installPackages" ],
   configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages" ],
-  configurePrinter   => [ __("Configure printer"), 1, 0, '', "installPackages" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages" ],
   addUser            => [ __("Add a user"), 1, 1, '', "installPackages" ],
 arch() !~ /alpha/ ? (
@@ -362,6 +361,8 @@ VISOR=no
 }
 
 #------------------------------------------------------------------------------
+sub summary { $o->summary($_[1] == 1) }
+#------------------------------------------------------------------------------
 sub configureNetwork {
     #- get current configuration of network device.
     require network;
@@ -371,24 +372,7 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 sub installCrypto { $o->installCrypto }
 #------------------------------------------------------------------------------
-sub configureTimezone {
-    my ($clicked) = @_;
-    my $f = "$o->{prefix}/etc/sysconfig/clock";
-
-    require timezone;
-    if ($o->{isUpgrade} && -r $f && -s $f > 0) {
-	return if $_[1] == 1 && !$clicked;
-	#- can't be done in install cuz' timeconfig %post creates funny things
-	add2hash($o->{timezone}, { timezone::read($f) });
-    }
-    $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
-    $o->{timezone}{UTC} = $::expert && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
-    $o->configureTimezone($clicked);
-}
-#------------------------------------------------------------------------------
 sub configureServices { $::expert and $o->configureServices }
-#------------------------------------------------------------------------------
-sub configurePrinter  { $o->configurePrinter($_[0]) }
 #------------------------------------------------------------------------------
 sub setRootPassword {
     return if $o->{isUpgrade};
