@@ -593,6 +593,10 @@ wait %d seconds for default boot.
     $bootloader->{method} = first(method_choices($fstab, $bootloader));
 }
 
+sub detect_bootloader() {
+    chomp_(run_program::rooted_get_stdout($::prefix, 'detectloader'));
+}
+
 sub method_choices {
     my ($fstab, $bootloader) = @_;
     my %choices = (
