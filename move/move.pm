@@ -30,7 +30,7 @@ sub init {
 
     #- rw things
     mkdir "/$_" foreach qw(home mnt root root/tmp etc var);
-    mkdir "/etc/$_" foreach qw(X11 cups);
+    mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
 
@@ -38,12 +38,12 @@ sub init {
     #- sudoers must a file, not a symlink
     system("cp /image/etc/{passwd,group,sudoers} /etc");
 
-    system("cp -R /image/etc/cups/* /etc/cups");
+    mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_") foreach qw(cups profile.d sysconfig/network-scripts);
  
     #- ro things
     symlinkf_short("/image/etc/$_", "/etc/$_")
       foreach qw(alternatives shadow man.config services shells pam.d security inputrc ld.so.conf 
-                 DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
+                 DIR_COLORS bashrc profile rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
                  dynamic gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache openoffice xinetd.d);
     symlinkf_short("/image/etc/X11/$_", "/etc/X11/$_")
@@ -102,6 +102,7 @@ sub install2::startMove {
 
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
+    install_steps_interactive::configureNetwork($o);
     install_steps_interactive::summaryBefore($o);
 
     require install_any;

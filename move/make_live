@@ -6,7 +6,7 @@ use pkgs;
 
 my @langs = map { /^../; $& } split /\s/, (cat_('move.pm') =~ /ALLOWED_LANGS = qw\((.*)\)/)[0];
 
-@ARGV == 0 or die "usage: make_live\n";
+@ARGV <= 1 or die "usage: make_live [live_location=/tmp/live_tree]\n";
 
 sub installPackages {
     rename "/etc/rpm/macros", "/etc/rpm/macros.";
@@ -33,6 +33,7 @@ sub installPackages {
                                  qw(XFree86-server XFree86-xfs XFree86-FBDev),
                                  qw(acpi acpid), #- so that removing acpi=ht will work
 				 qw(mountloop),	#- crypted folders
+				 qw(zcip dhcpcd ppp kdenetwork-kppp rp-pppoe pptp-adsl speedtouch speedtouch_mgmt nfs-utils-clients samba-client tmdns wireless-tools adiusbadsl), #- network conf
                                                                  ],
 					    });
 
@@ -54,7 +55,8 @@ sub installPackages {
 }
 
 my $cwd = chomp_(`pwd`);
-$::prefix = "/tmp/live_tree";
+$::prefix = $ARGV[0] || '/tmp/live_tree';
+print "Making live in $::prefix directory.\n";
 
 {
     eval { fs::umount("$::prefix/proc") };
