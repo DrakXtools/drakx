@@ -33,7 +33,6 @@ use network::netconnect;
 $::isInstall and die "Not supported during install.\n";
 
 $::Wizard_pix_up = "wiz_drakgw.png"; #- to change ? keep existing one, nobody will see (too late) ;-)
-$::Wizard_title = N("PXE Server Configuration");
 $::direct = grep { /-direct/ } @ARGV;
 
 
@@ -54,6 +53,7 @@ my $intf = {};
 network::read_all_conf('', $netc, $intf);
 
 my $in = 'interactive'->vnew('su', 'default');
+$::Wizard_title = N("PXE Server Configuration");
 
 !$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
 
