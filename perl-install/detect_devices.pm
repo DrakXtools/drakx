@@ -2,6 +2,7 @@ package detect_devices; # $Id$
 
 use diagnostics;
 use strict;
+use vars qw($pcitable_addons $usbtable_addons);
 
 #-######################################################################################
 #- misc imports
@@ -224,28 +225,54 @@ sub getNet() {
 #    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
 #}
 
+$pcitable_addons = <<'EOF';
+# add here lines conforming the pcitable format (0xXXXX\t0xXXXX\t"\w+"\t".*")
+0x10b7	0x9055	"3c90x"	"3Com Corporation|3c905B 100BaseTX [Cyclone]"
+EOF
+
+$usbtable_addons = <<'EOF';
+# add here lines conforming the usbtable format (0xXXXX\t0xXXXX\t"\w+"\t".*")
+EOF
+
+sub add_addons {
+    my ($addons, @l) = @_;
+
+    foreach (split "\n", $addons) {
+	/^\s/ and die "bad detect_devices::probeall_addons line \"$_\"";
+	s/^#.*//;
+	s/"(.*?)"/$1/g;
+	next if /^$/;
+	my ($vendor, $id, $driver, $description) = split("\t", $_, 4) or die "bad detect_devices::probeall_addons line \"$_\"";
+	foreach (@l) {
+	    $_->{vendor} == hex $vendor && $_->{id} == hex $id or next;
+	    put_in_hash($_, { driver => $driver, description => $description });
+	}
+    }
+    @l;
+}
+
 sub pci_probe {
     my ($probe_type) = @_;
     log::l("full pci_probe") if $probe_type;
-    map {
+    add_addons($pcitable_addons, map {
 	my %l;
 	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
 	\%l
-    } c::pci_probe($probe_type || 0);
+    } c::pci_probe($probe_type || 0));
 }
 
 sub usb_probe {
     -e "/proc/bus/usb/devices" or return ();
 
-    map {
+    add_addons($usbtable_addons, map {
 	my %l;
 	@l{qw(vendor id media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
 	\%l
-    } c::usb_probe();
+    } c::usb_probe());
 }
 
 sub pcmcia_probe {
