@@ -20,7 +20,6 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 
-use strict;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -45,9 +44,6 @@ my $direct = /-direct/;
 
 my $sysconf_network = "/etc/sysconfig/network";
 my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
-#my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
-#my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
-#my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
 my $masq_file = "/etc/shorewall/masq";
 my $dhcpd_conf = "/etc/dhcpd.conf";
 my $squid_conf = "/etc/squid/squid.conf";
@@ -143,6 +139,7 @@ What would you like to do?"),
 			print "remove rules entries\n";
 			substInFile {
 				s/REDIRECT\tmasq\t$squid_port\ttcp\twww\t\-\n//;
+				s/REDIRECT\tloc\t$squid_port\ttcp\twww\t\-\n//;
 				s/ACCEPT\tfw\tnet\ttcp\twww\n//;
 			} "/etc/shorewall/rules";
 	    sys("/etc/init.d/shorewall restart >/dev/null");
@@ -207,6 +204,9 @@ my %aliased_devices;
 
 my $card_netconnect = network::netconnect::get_net_device() || "eth0";
 defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
+
+my @all_cards = network::ethernet::get_eth_cards();
+my %net_devices = network::ethernet::get_eth_cards_names(@all_cards);
 
 	$in->ask_from('',
 		      N("Please enter the name of the interface connected to the internet.
@@ -273,6 +273,7 @@ my $max_lease = network::network::read_dhcpd_conf()->{default_lease_time}[0] ||=
 my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0] ||= network::network::read_resolv_conf_raw()->{search}[0] ||= "homeland.net";
 my $squid_cache_size = network::network::read_squid_conf()->{cache_size}[1] ||= "100";
 my $squid_admin_mail = network::network::read_squid_conf()->{admin_mail}[0] ||= 'admin@mydomain.com';
+my $squid_visible_hostname = network::network::read_squid_conf()->{visible_hostname}[0] ||= 'myfirewall@mydomain.com';
 
 my $reconf_dhcp_server_intf = 1;
 
@@ -396,14 +397,14 @@ if (!$::testing && any { !-e $rpm2file{$_} } keys %rpm2file) {
 put_in_hash($shorewall ||= {}, {
     disabled => 0,
     net_interface => $card_netconnect,
-    loc_interface => [ grep { $_ ne $device } @cards ],
-    masquerade => { interface => $device, subnet => "$lan_address.0/$netmask" },
+    loc_interface => [ grep { $_ ne $card_netconnect } @cards ],
+    masquerade => { subnet => "$lan_address.0/$netmask" },
 });
 
 network::shorewall::write($shorewall);
 print "add rules entries\n";
 substInFile {
-	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tmasq\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
+	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
 } "/etc/shorewall/rules";
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
@@ -485,6 +486,7 @@ http_access allow mynetwork
 http_access allow localhost
 http_reply_access allow all
 icp_access allow all
+visible_hostname $squid_visible_hostname
 httpd_accel_host virtual
 httpd_accel_with_proxy on
 httpd_accel_uses_host_header on
@@ -494,7 +496,7 @@ deny_info ERR_CUSTOM_ACCESS_DENIED all
 memory_pools off
 coredump_dir /var/spool/squid
 ie_refresh on
-)) if $::testing;
+)) if !$::testing;
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
 #- working correctly: 
