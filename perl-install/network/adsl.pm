@@ -316,8 +316,6 @@ TYPE=$kind
         $::isStandalone and $modules_conf->write;
     }
 
-    write_cnx_script($netc);
-
     unless ($::isStandalone) {
         my @modules = (@{$modems{$adsl_device}{modules}}, map { $_->[1] } @{$modems{$adsl_device}{aliases}});
         @modules && eval { modules::load(@modules) }
