@@ -16,7 +16,7 @@ my $last_boot_config = $hw_sysconfdir."/previous_hw";
 $last_boot_config .= '_X11' if $invert_do_it;
 
 # first run ? if not read old hw config
-my $previous_config = (-f $last_boot_config && -s $last_boot_config) ? retrieve($last_boot_config) : {};
+my $previous_config = -f $last_boot_config && -s $last_boot_config ? Storable::retrieve($last_boot_config) : {};
 $previous_config = $$previous_config if ref($previous_config) !~ /HASH/;
 my (%config, $wait);
 my $in = interactive->vnew;
@@ -51,11 +51,11 @@ foreach (@harddrake::data::tree) {
     next unless -x $configurator;
     my ($pid, $no);
     $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
-    unless ($pid = fork) {
+    unless ($pid = fork()) {
 	exec("/usr/share/harddrake/confirm 'Hardware changes in $Ident class ($timeout seconds to answer)' '" . $msg . "Do you want to run the appropriate config tool ?'");
     }
     alarm($timeout);
-    wait;
+    wait();
     my $res = $?;
     alarm(0);
     if ($no) {
@@ -63,13 +63,13 @@ foreach (@harddrake::data::tree) {
 	undef $wait;
 	$wait = $in->wait_message(N("Please wait"), N("Hardware probing in progress"));
     } elsif ($res) {
-	if (my $pid = fork) {
-	    wait;
+	if (fork()) {
+	    wait();
 	} else { exec("$configurator 2>/dev/null") or die "$configurator missing\n" }
     }
 }
 
 # output new hw config
-log::explanations "created file $last_boot_config";
-store \%config, $last_boot_config;
+log::explanations("created file $last_boot_config");
+Storable::store \%config, $last_boot_config;
 $in->exit(0);
