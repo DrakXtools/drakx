@@ -754,6 +754,6 @@ _("I can set up your computer to automatically start X upon booting.
 Would you like X to start when you reboot?"), 1);
 
 	rewriteInittab($run ? 5 : 3) unless $::testing;
-	run_program::rooted($prefix, "chkconfig", "--level", "5", "gpm", "off") if $o->{mouse}{device} =~ /ttyS/;
+	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/;
     }
 }
