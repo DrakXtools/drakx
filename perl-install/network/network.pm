@@ -313,6 +313,23 @@ sub gateway {
     join(".", @masked);
 }
 
+sub miscellaneous_choose {
+    my ($in, $u) = @_;
+
+    $in->ask_from('',
+       N("Proxies configuration"),
+       [ { label => N("HTTP proxy"), val => \$u->{http_proxy} },
+         { label => N("FTP proxy"),  val => \$u->{ftp_proxy} },
+       ],
+       complete => sub {
+	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', N("Proxy should be http://...")), return 1,0;
+	   $u->{ftp_proxy} =~ m,^($|ftp://|http://), or $in->ask_warn('', N("URL should begin with 'ftp:' or 'http:'")), return 1,1;
+	   0;
+       }
+    ) or return;
+    1;
+}
+
 sub proxy_configure {
     my ($u) = @_;
     setExportedVarsInSh("$::prefix/etc/profile.d/proxy.sh",  $u, qw(http_proxy ftp_proxy));
