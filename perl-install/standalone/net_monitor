@@ -192,7 +192,7 @@ sub connection() {
 				       my ($sec, $min, $hour) = gmtime(time() - $c_time);
 				       my $e = sprintf("%02d:%02d:%02d", $hour, $min, $sec);
 				       $label_ct->set_label($e); 1 })
-    } else { Glib::Source->remove($ct_tag) }
+    }
     my $nb_point = 1;
     $first = 1;
 
@@ -235,6 +235,8 @@ sub connection() {
 						       N("Connection complete.") :
 						       N("Connection failed.\nVerify your configuration in the Mandrakelinux Control Center."))
 						    );
+ 				            # remove the connection time timer if connection is down or failed
+ 				            $isconnected or Glib::Source->remove($ct_tag);
 				            my $delay = 1000;
 					    # keep the message displayed longer if there is a problem.
 				    	    if ($isconnected == $wasconnected) { $delay = 5000 }
