@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.9mdk
+Release: 0.10mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -366,6 +366,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jan 12 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.10mdk
+- drakbackup, drakTermServ: silent install of terminal-server (urpmi
+  --X is deprecated) (rafael)
+- localedrake (Funda Wang):
+  o install scim-chewing for zh locale
+  o fix font setting for zh_CN
+- printerdrake: show banner when embedded
+
 * Thu Jan  6 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.9mdk
 - diskdrake: display a progress bar while formating (pixel)
 - localedrake: fix UIM config b/c of new UIM-0.4.5
