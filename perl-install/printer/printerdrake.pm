@@ -807,7 +807,7 @@ sub setup_local_autoscan {
 				   (N("The following printer was auto-detected. ") .
 				    ($printer->{NEW} ?
 				     N("The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") : 
-				     N("There is currently no alternative possibiliy"))) :
+				     N("Currently, no alternative possibility is available"))) :
 				   (N("Here is a list of all auto-detected printers. ") .
 				    ($printer->{NEW} ?
 				     N("Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
