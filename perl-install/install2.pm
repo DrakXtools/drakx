@@ -267,7 +267,7 @@ sub configureNetwork {
 #------------------------------------------------------------------------------
 sub installUpdates {
     my ($_clicked, $_ent_number, $auto) = @_;
-    installStepsCall($o, $auto, 'installUpdates');
+    installStepsCall($o, $auto, 'installUpdates') if $o->{meta_class} ne 'firewall';
 }
 #------------------------------------------------------------------------------
 sub configureServices {
