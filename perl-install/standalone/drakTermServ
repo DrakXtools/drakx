@@ -60,7 +60,7 @@ my $tftpboot = "/var/lib/tftpboot";
 my @kernels = grep { /vmlinuz-/ } all("/boot");
 my $i = 0;
 foreach (@kernels) {
-	splice(@kernels, $i, 1) if -l $_;
+	splice(@kernels, $i, 1) if -l "/boot/$_";
 	$i++;
 }
 
@@ -483,7 +483,7 @@ sub sync_users {
 sub restart_dm() {
 	if ($clients_set) {
     	my $result = $in->ask_okcancel('', N("In order to enable changes made for thin clients, the display manager must be restarted. Restart now?"));
-		system('/sbin/service dm restart') if $result;
+		system('nohup /sbin/service dm restart') if $result;
 	}
 }
 
