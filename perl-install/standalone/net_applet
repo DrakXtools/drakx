@@ -227,7 +227,7 @@ sub handle_attack {
                       gtknew('HBox', children => [
                           0, gtknew('Label', text => "     "),
                           1, gtknew('VBox', children_loose => [
-                              N("Attack time: %s", activefw::format_date($timestamp),
+                              N("Attack time: %s", activefw::format_date($timestamp)),
                               N("Network interface: %s", $indev),
                               N("Attack type: %s", $prefix),
                               if_($protocol, N("Protocol: %s", $protocol)),
