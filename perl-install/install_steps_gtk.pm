@@ -123,7 +123,7 @@ sub enteringStep {
     printf "Entering step `%s'\n", $o->{steps}{$step}{text};
     $o->SUPER::enteringStep($step);
     install_gtk::create_steps_window($o);
-    install_gtk::create_help_window($o);
+    $o->set_help($step);
 }
 sub leavingStep {
     my ($o, $step) = @_;

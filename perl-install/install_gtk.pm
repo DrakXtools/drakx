@@ -102,14 +102,8 @@ sub create_help_window {
 	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
 	$w->{rwindow}->set_title('skip');
 	$w->sync;
-    }
-    my $pixmap = gtkpng("$ENV{SHARE_PATH}/help.png");
-    gtkadd($w->{window},
-	   gtkpack_(new Gtk::HBox(0,-2),
-		    0, gtkadd(gtksignal_connect(new Gtk::Button, clicked => sub { create_big_help($o) }), $pixmap),
-		    1, createScrolledWindow($o->{help_window_text} = new Gtk::Text),
-		   ));
-    $o->set_help($o->{step}) if $o->{step};
+    };
+    gtkadd($w->{window}, createScrolledWindow($o->{help_window_text} = new Gtk::Text));
     $w->show;
     $o->{help_window} = $w;
 }
