@@ -731,7 +731,7 @@ sub show_warning {
 	$mode = "WARNING" if ($mode eq "w");
 	$mode = "FATAL" if ($mode eq "f");
 	if ($interactive) {
-		$in->ask_warn('',_("$mode: $warning"));
+		$in->ask_warn('', "$mode: $warning");
 	} else {
 		warn "$mode: $warning\n";
 	}
@@ -819,7 +819,7 @@ return(1);
 		$exp_command = "ssh-copy-id -i $_ $login_user\@$host_name" if ($mode eq "sendkey");
 	
 		if ((-e $backup_key) && ($mode eq "sendkey")) {
-			if ($in->ask_yesorno('',_("$backup_key exists, delete?\n\nWarning: If you've already done this process you'll probably\n need to purge the entry from authorized_keys on the server."))) {
+			if ($in->ask_yesorno('', _("%s exists, delete?\n\nWarning: If you've already done this process you'll probably\n need to purge the entry from authorized_keys on the server.", $backup_key))) {
 				unlink($backup_key);
 				unlink($backup_key . '.pub');
 			} else {
@@ -835,7 +835,7 @@ return(1);
 			cursor_norm();
 		}
 		
-		my $exp = Expect->spawn($exp_command) or $in->ask_warn('',_("ERROR: Cannot spawn $exp_command."));
+		my $exp = Expect->spawn($exp_command) or $in->ask_warn('',_("ERROR: Cannot spawn %s.", $exp_command));
 
 		$interactive and progress($pbar3, 1/@send_files, _("Total progess"));
 		$interactive and $stext->set_text($_);
@@ -862,7 +862,7 @@ return(1);
 		); 
 
 		my $exit_stat = $exp->exitstatus;
-		$in->ask_warn('',_("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i $backup_key $login_user\@$host_name\n\nwithout being prompted for a password.")) if (($exit_stat eq 0) && ($mode eq "sendkey"));
+		$in->ask_warn('',_("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if (($exit_stat eq 0) && ($mode eq "sendkey"));
 		$log_buff .= "$_\n" if (($exit_stat eq 0) && ($mode eq "backup"));
 		$exp->hard_close();
 	}
@@ -1279,7 +1279,7 @@ sub build_backup_files {
 		build_cd() if ($daemon_media eq 'cd');
 		build_tape() if ($daemon_media eq 'tape');
 
-		$results .= _("\nDrakbackup activities via $daemon_media:\n\n") ;
+		$results .= _("\nDrakbackup activities via %s:\n\n", $daemon_media) ;
 		$results .= $log_buff;
 	}
 	
@@ -1302,7 +1302,7 @@ sub build_backup_files {
 			ssh_client() if (($net_proto eq 'ssh') && !($use_expect));
 			do_expect("backup", "") if (($net_proto eq 'ssh') && ($use_expect));
 			webdav_client() if ($net_proto eq 'webdav');
-			$results .= _("\nDrakbackup activities via $net_proto:\n\n");
+			$results .= _("\nDrakbackup activities via %s:\n\n", $net_proto);
 		}
 		
 		if ($where_cd) {
