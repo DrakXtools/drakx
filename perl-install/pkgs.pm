@@ -10,7 +10,6 @@ use commands;
 use run_program;
 use detect_devices;
 use log;
-use pkgs;
 use fs;
 use loopback;
 use c;
@@ -715,12 +714,12 @@ sub setSelectedFromCompssList {
 sub saveSelected {
     my ($packages) = @_;
     my @l = values %{$packages->{names}};
-    my @flags = map { pkgs::packageFlagSelected($_) } @l;
+    my @flags = map { packageFlagSelected($_) } @l;
     [ $packages, \@l, \@flags ];
 }
 sub restoreSelected {
     my ($packages, $l, $flags) = @{$_[0]};
-    mapn { pkgs::packageSetFlagSelected(@_) } $l, $flags;
+    mapn { packageSetFlagSelected(@_) } $l, $flags;
 }
 
 sub computeGroupSize {
