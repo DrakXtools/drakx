@@ -1,3 +1,161 @@
+2004/09/03  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: don't exclude Gtk2::Entry filling
+
+2004/09/03  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/09/03  Pixel  <pixel at mandrakesoft.com>
+
+	* share/list, install2.pm: stage1 terminfo is not available anymore, use
+	our own terminfo
+
+2004/09/03  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Don't bypass errorOpeningFile, because it won't ask for
+	further CDs
+	anymore... (/me sux)
+
+	* share/po/fr.po: Fix grammar.
+
+2004/09/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+
+	* ugtk2.pm (create_hbox) do not set extra border since we've a generic fix
+	in _create_window
+	(_create_window) prevent inner widgets to stick the window
+
+2004/09/03  vljubovic
+
+	* share/po/bs.po: Improving Bosnian translation
+
+2004/09/03  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: now kernel-i686-up-4GB and kernel-p3-smp-64GB are
+	deprecated
+
+2004/09/02  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated partially
+
+2004/09/02  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated zh_CN translation
+
+2004/09/02  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 626
+	DrakX will first
+
+2004/09/02  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: fix cancel in disk install
+
+	* standalone/drakupdate_fstab: do not use supermount by default for
+	removable devices
+
+	* share/rpmsrate: add synaptics in INSTALL section
+
+	* network/test.pm: initial import of connection test package
+
+	* fs/mount_options.pm: set_default: use sync for removable devices
+
+	* crypto.pm, install_any.pm: adapt to new mirror structure
+
+2004/09/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po: updated po file
+	updated pot file
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* standalone/drakhelp: Mandrake -> Mandrakelinux
+
+2004/09/02  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: replace /etc/udev/conf.d/xxx.conf shell scripts with
+	/etc/udev/rules.d/xxx.conf conf file
+
+2004/09/02  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: If a supplementary media is incorrect, continue asking
+	Don't log too much
+	Don't start network for supplementary media if it is cdrom or disk
+
+	* install_steps.pm: Don't unselect all media in autoinstalls.
+
+	* pkgs.pm: If a supplementary media is incorrect, continue asking
+	Allow to deselect media only if the hdlists file contains a line
+	"askmedia"
+
+2004/09/02  sharuzzaman
+
+	* share/po/ms.po: Updated Malay translation
+
+2004/09/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.19mdk
+
+	* standalone/printerdrake, standalone/scannerdrake: reuse icon for windows
+
+	* standalone/localedrake: use proper window & banner icon
+	set banner title...
+
+	* standalone/drakhelp: reuse icon for windows
+	fix untraslated title
+
+	* standalone/drakfirewall, standalone/logdrake, standalone/draksec,
+	standalone/drakfloppy, standalone/drakedm, standalone/drakxservices,
+	standalone/drakproxy, standalone/drakperm, standalone/keyboarddrake,
+	standalone/net_monitor, standalone/diskdrake, standalone/mousedrake,
+	standalone/drakclock, standalone/drakxtv: reuse mcc icons (if
+	availlable) for windows
+
+	* printer/main.pm (write_client_conf) fix drakxtools build
+
+	* any.pm (selectLanguage) tag title as translatable
+
+	* ugtk2.pm (new) fallback on window'icon for wizards
+
+2004/09/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po, share/po/es.po, share/po/fr.po, share/po/wa.po: updated
+	Norwegian file; small fixes on Spanish, French and Walloon files
+
+2004/09/01  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: comply with the rpmsrate parser
+
+2004/09/01  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Do not check for presence of "scanner-gui" during install.
+
+	* services.pm: 
+	  - Lete the function "start_not_running_service()" really start the
+	specified service if it is not running instead of being a copy of the
+	function "is_service_running()".
+	  - Restored wrong upload.
+
 2004/09/01  Frederic Lepied  <flepied at mandrakesoft.com>
 
 	* share/rpmsrate: fixed/added some laptop entries
@@ -37242,7 +37400,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.955 2004/09/01 10:25:14 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.956 2004/09/01 14:25:32 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
