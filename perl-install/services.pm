@@ -203,22 +203,13 @@ sub ask_standalone_gtk {
                 $_[1]->set($started ? N("running") : N("stopped"));
                 $started, $action;
     };
-    my $strip = sub {
-                my $infos_old = $_[0];
-                my $infos;
-		while ($infos_old =~ s/(.{40})//) {
-                    $1 =~ /(.*) ([^ ]*)/;
-		    $infos .= "$1\n$2";
-                }
-                $infos .= $infos_old;
-    };
     my $b = Gtk2::EventBox->new;
     $b->set_events('pointer_motion_mask');
     gtkadd($W->{window}, gtkadd($b, gtkpack_($W->create_box_with_title(N("Services and deamons")),
 	1, gtkset_size_request(create_scrolled_window(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
                 my $service = $_;
-        	my $infos = $strip->(description($_, $prefix));
+        	my $infos = warp_text(description($_, $prefix), 40);
                 $infos ||= N("No additional information\nabout this service, sorry.");
 		my $l = Gtk2::Label->new;
                 my ($started, $action) = $update_service->($service, gtkset_justify($l, 'left'));
