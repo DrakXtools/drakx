@@ -507,8 +507,10 @@ sub main {
 	    $o->kill_action;
 	    /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
 	    /^theme_changed$/ and redo MAIN;
-	    eval { $o->errorInStep($_) } unless /^already displayed/;
-	    $@ and next;
+	    unless (/^already displayed/) {
+		eval { $o->errorInStep($_) };
+		$@ and next;
+	    }
 	    $o->{step} = $o->{steps}{$o->{step}}{onError};
 	    next MAIN unless $o->{steps}{$o->{step}}{reachable}; #- sanity check: avoid a step not reachable on error.
 	    redo MAIN;

@@ -116,7 +116,9 @@ sub ask_mntpoint_s {
     (fsedit::get_root($fstab) || {})->{type} = 0x83;
 
     my %m; foreach (@$fstab) {
-	my $m = $_->{mntpoint} or next;
+	my $m = $_->{mntpoint};
+
+	next unless $m && $m ne 'swap'; #- there may be a lot of swap.
 
 	$m{$m} and die _("Duplicate mount point %s", $m);
 	$m{$m} = 1;
