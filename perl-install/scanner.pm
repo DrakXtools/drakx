@@ -168,7 +168,7 @@ sub configured() {
 sub nonroot_access_for_parport {
 
     # This function configures a non-root access for parallel port
-    # scanners by running saned as root, esporting the scanner to
+    # scanners by running saned as root, exporting the scanner to
     # localhost and letting the user's frontend use the "net" backend
     # to access the scanner through the loopback network device.
 
@@ -488,7 +488,10 @@ sub readScannerDB {
 	ASK => sub { $card->{ask} = $val },
 	SERVER => sub { $card->{server} = $val },
 	DRIVER => sub { $card->{driver} = $val },
+	KERNEL => sub { push(@{$card->{kernel}}, $val) },
 	UNSUPPORTED => sub { $card->{flags}{unsupported} = 1 },
+	MANUAL => sub { $card->{flags}{manual} = 1 },
+	MANUALREQUIRED => sub { $card->{flags}{manual} = 2 },
 	COMMENT => sub {},
     };
 
