@@ -2,7 +2,7 @@ package harddrake::sound;
 # lists filled with Danny Tholen help, enhanced by Thierry Vignaud
 #
 # No ALSA for OSS's 
-#    o btaudio (tv card),
+#    o tv cards: btaudio,
 #    o isa cards: msnd_pinnacle, pas2, 
 # No OSS for ALSA's
 #    o pci cards: snd-ali5451, snd-als4000, snd-es968, snd-fm801,
@@ -123,7 +123,7 @@ sub get_alternative {
 	   $alsa2oss{$driver};
     } elsif ($oss2alsa{$driver}) {
 	   $oss2alsa{$driver}
-    } else { {} }
+    } else { undef }
 }
 
 sub do_switch {
@@ -133,7 +133,7 @@ sub do_switch {
     run_program::run("service alsa stop") if $old_driver =~ /^snd-/;
     modules::unload($old_driver); #    run_program("/sbin/modprobe -r $driver"); # just in case ...
     modules::remove_module($old_driver); # completed by the next add_alias()
-    modules::add_alias('sound-slot-$::i', $new_driver);
+    modules::add_alias("sound-slot-$::i", $new_driver);
     modules::write_conf;
     if ($new_driver =~ /^snd-/) {
 	   run_program::run("service alsa start");
@@ -162,7 +162,7 @@ sub switch {
 						 [
 						  { label => _("Driver :"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1, format => sub {
 							 my %des = modules::category2modules_and_description('multimedia/sound');
-							 "$_[0] (". $des{$_[0]};
+							 "$_[0] (". $des{$_[0]} . ')'
 						  }, allow_empty_list => 1 }
 						  ]))
 	   {
@@ -187,5 +187,4 @@ with subject: unlisted sound driver")
 sub config {
     my ($in, $device) = @_;
     switch($in, $device);
-
 }

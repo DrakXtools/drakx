@@ -36,8 +36,10 @@ my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_AUDIO' } detect_devices::pr
 if (@devices) {
     # TODO: That need some work for multiples sound cards
     map_index {
-	   # allocate sound-slot in the same order as install2.pm $device->{driver} with the right sound-slot-XX
-	   $_->{driver} = modules::get_alias("sound-slot-$::i");
+	   # allocate sound-slot in the same order as install2.pm
+	   # fill $device->{driver} with the right sound-slot-XX or default driver if missing sound-slot [real fix'll be in harddrake service]
+	   my $driver = modules::get_alias("sound-slot-$::i");
+	   $_->{driver} = $driver if $driver;
 	   harddrake::sound::config($in, $_);
 	 } modules::probe_category('multimedia/sound');
 } else {
