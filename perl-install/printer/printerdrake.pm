@@ -14,10 +14,15 @@ use printer::detect;
 use printer::default;
 use printer::data;
 
-1;
+my $companyname = "MandrakeSoft";
+my $distroname = "Mandrake Linux";
+my $shortdistroname = "Mandrake";
+my $domainname = "mandrakesoft.com";
 
 my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by uncompresing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
 ");
+
+1;
 
 sub config_cups {
     my ($printer, $in, $upNetwork) = @_;
@@ -888,7 +893,7 @@ Congratulations, your printer is now installed and configured!
 
 You can print using the \"Print\" command of your application (usually in the \"File\" menu).
 
-If you want to add, remove, or rename a printer, or if you want to change the default option settings (paper input tray, printout quality, ...), select \"Printer\" in the \"Hardware\" section of the Mandrake Control Center."))
+If you want to add, remove, or rename a printer, or if you want to change the default option settings (paper input tray, printout quality, ...), select \"Printer\" in the \"Hardware\" section of the %s Control Center.", $shortdistroname))
     }
 }
 
@@ -3349,7 +3354,7 @@ sub check_network {
     if (!start_network($in, $upNetwork) && !$dontconfigure) {
 	$in->ask_warn(N("Configuration of a remote printer"), 
 ($::isInstall ?
-N("The network configuration done during the installation cannot be started now. Please check whether the network is accessable after booting your system and correct the configuration using the Mandrake Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the Mandrake Control Center, section \"Hardware\"/\"Printer\"") :
+N("The network configuration done during the installation cannot be started now. Please check whether the network is accessable after booting your system and correct the configuration using the %s Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the %s Control Center, section \"Hardware\"/\"Printer\"", $shortdistroname, $shortdistroname) :
 N("The network access was not running and could not be started. Please check your configuration and your hardware. Then try to configure your remote printer again.")));
 	return 0;
     }

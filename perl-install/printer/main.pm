@@ -49,10 +49,11 @@ sub spooler() {
 
     #return @spooler_inv{qw(cups lpd lprng pdq)};
 
-    # LPRng is not officially supported any more since Mandrake 9.0, so
-    # show it only in the spooler menu when it was manually installed.
+    # LPRng is not officially supported any more since version 9.0 of
+    # this distribution, so show it only in the spooler menu when it
+    # was manually installed.
 
-    # PDQ is not officially supported any more since Mandrake 9.1, so
+    # PDQ is not officially supported any more since version 9.1, so
     # show it only in the spooler menu when it was manually installed.
 
     return map { $spoolers{$_}{long_name} } qw(cups), 
@@ -2229,7 +2230,7 @@ sub configure_hpoj {
 	    # Preliminary workaround to make the user-mode USB devices
 	    # (LIDIL devices) installable as verification of the HPOJ
 	    # settings of these devices does not work yet. The workaround
-	    # will probably removed after Mandrake 9.2.
+	    # will probably removed after version 9.2 of this distribution.
 	    # Note: This workaround leaves out the checking for a photo
 	    # memory card reader, but to my knowledge there are no LIDIL
 	    # devices with card reader yet.

@@ -38,6 +38,10 @@ use Gtk2::Gdk::Keysyms;
 use modules;
 use c;
 
+my $companyname = "MandrakeSoft";
+my $distroname = "Mandrake Linux";
+my $domainname = "mandrakesoft.com";
+
 my $pixdir = '/usr/share/libDrakX/pixmaps/';
 
 local $_ = join '', @ARGV;
@@ -123,7 +127,7 @@ my $stringsearch = '';
 
 sub HelpSystem() { exec("drakhelp --id printerdrake") unless fork() };
 
-$us->{wnd} = ugtk2->new(N("Mandrake Linux Printer Management Tool") . " " . $us->{VERSION});
+$us->{wnd} = ugtk2->new(N("%s Printer Management Tool", $distroname) . " " . $us->{VERSION});
 gtkset_size_request($us->{wnd}{rwindow}, 660, 460);
 
 if (!$::isEmbedded) {
@@ -167,7 +171,7 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
                                               }, undef, '<CheckItem>' ],
                                             [ N("/_Help"), undef, undef, undef, '<Branch>' ],
                                             [ N("/_Help").N("/_Help"), undef, sub { HelpSystem() }, undef, '<StockItem>', 'gtk-help' ],
-                                            [ N("/_Help").N("/_Report Bug"), undef, sub { system("$ENV{BROWSER} https://qa.mandrakesoft.com &") }, undef, '<StockItem>', 'gtk-stop' ],
+                                            [ N("/_Help").N("/_Report Bug"), undef, sub { system("$ENV{BROWSER} https://qa.$domainname &") }, undef, '<StockItem>', 'gtk-stop' ],
                                             [ N("/_Help").N("/_About..."), undef, \&About, undef, '<StockItem>', 'gtk-preferences' ]
 					   )
 					  );
@@ -515,7 +519,7 @@ sub About() {
     $list->can_focus(0);
     each_index { $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => $::i)) } 0..2;
     $list->set_headers_visible(0);
-    foreach my $row ([ N("Authors: "), '', '' ], [ '', 'Till Kamppeter', '<till@mandrakesoft.com>' ], ['', '', '']) {
+    foreach my $row ([ N("Authors: "), '', '' ], [ '', 'Till Kamppeter', "<till\@$domainname>" ], ['', '', '']) {
         $tree_model->append_set(undef, [ map_index { $::i => $_ } @$row ]);
     }
     $list->get_selection->set_mode('none');
