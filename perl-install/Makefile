@@ -1,8 +1,10 @@
 VERSION = 2.2.10-BOOT
+SUDO = sudo
 SO_FILES = c/blib/arch/auto/c/c.so
 PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake
 ROOTDEST = /export
 DEST = $(ROOTDEST)/Mandrake/mdkinst
+STAGE2 = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
@@ -158,6 +160,13 @@ full_stage2:
 
 stage2:
 	$(MAKE) install_pms
+
+	dd if=/dev/zero of=$(STAGE2) bs=1M count=16
+	echo y | /sbin/mke2fs $(STAGE2)
+	$(SUDO) mount $(STAGE2) /mnt/stage2 -o loop
+	$(SUDO) cp -a $(DEST)/* /mnt/stage2
+	$(SUDO) umount $(STAGE2)
+	gzip -f -9 $(STAGE2)
 #	cd $(ROOTDEST) ; tar cfz /tmp/instimage-full.tgz Mandrake
 #	cd $(ROOTDEST) ; tar cfz /tmp/instimage-light.tgz Mandrake/base/compss Mandrake/mdkinst/usr/[bl]*
 

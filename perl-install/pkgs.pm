@@ -8,6 +8,7 @@ use common qw(:common :file);
 use install_any;
 use log;
 use smp;
+use pkgs;
 use fs;
 use lang;
 
@@ -85,11 +86,10 @@ sub set($$$) {
     $val ? &select($packages, $p) : unselect($packages, $p);
 }
 
-sub psUsingDirectory(;$) {
-    my ($dirname) = @_;
+sub psUsingDirectory() {
+    my $dirname = install_any::imageGetFile('');
     my %packages;
 
-    $dirname ||= install_any::imageGetFile('');
     log::l("scanning $dirname for packages");
     foreach (all("$dirname")) {
 	my ($name, $version, $release) = /(.*)-([^-]+)-([^-.]+)\.[^.]+\.rpm/ or log::l("skipping $_"), next;
@@ -99,6 +99,31 @@ sub psUsingDirectory(;$) {
 	    file => "$dirname/$_", selected => 0, deps => [],
         };
     }
+    \%packages;
+}
+
+sub psUsingHdlist() {
+    my $file = install_any::imageGetFile('hdlist');
+    my ($noSeek, $end, %packages) = 0;
+
+    local *F;
+    sysopen F, $file, 0 or die "error opening header file $file: $!";
+
+    $end = sysseek F, 0, 2 or die "seek failed";
+    sysseek F, 0, 0 or die "seek failed";
+
+    while (sysseek(F, 0, 1) < $end) {
+	my $header = c::headerRead(fileno F, 1) or die "error reading header at offset ", sysseek(F, 0, 1);
+
+	my $name = c::headerGetEntry($header, 'name');
+
+	$packages{$name} = {
+             name => $name, version => c::headerGetEntry($header, 'version'), release => c::headerGetEntry($header, 'release'),
+	     header => $header, selected => 0, deps => [],
+        };
+    }
+    log::l("psUsingHdlist read " . scalar keys(%packages) . " headers");
+    
     \%packages;
 }
 
@@ -172,34 +197,6 @@ sub setCompssSelected($$$) {
     }
 }
 
-sub addHdlistInfos {
-    my ($fd, $noSeek) = @_;
-    my %packages;
-    my $end;
-    my $file;
-    local *F;
-    sysopen F, $file, 0 or die "error opening header file $file: $!";
-
-    $end = sysseek $fd, 0, 2 or die "seek failed";
-    sysseek $fd, 0, 0 or die "seek failed";
-
-    while (sysseek($fd, 0, 1) <= $end) {
-	my $header = c::headerRead(fileno($fd), 1);
-	unless ($header) {
-	    $noSeek and last;
-	    die "error reading header at offset ", sysseek($fd, 0, 1);
-	}
-
-	c::headerGetEntry($header, 'name');
-
-	$noSeek or $end <= sysseek($fd, 0, 1) and last; 
-    }
-
-    log::l("psFromHeaderListDesc read " . scalar keys(%packages) . " headers");
-    
-    \%packages;
-}
-
 sub init_db {
     my ($prefix, $isUpgrade) = @_;
 
@@ -241,6 +238,11 @@ sub install {
 
     foreach my $p (@$toInstall) {
 	$p->{installed} = 1;
+	$p->{file} ||= install_any::imageGetFile(sprintf "%s-%s-%s.%s.rpm",
+						 $p->{name},
+						 $p->{version},
+						 $p->{release},
+						 c::headerGetEntry(getHeader($p), 'arch'));
 	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $isUpgrade);
 	$nb++;
 	$total += $p->{size};

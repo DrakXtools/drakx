@@ -11,11 +11,13 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 use common qw(:common :system);
+use pkgs;
+use smp;
 use log;
 
 1;
 
-sub fileInBase { member($_[0], qw(compss depslist)); }
+sub fileInBase { member($_[0], qw(compss depslist hdlist)); }
 
 sub imageGetFile { 
     fileInBase($_[0]) and return "/tmp/rhimage/Mandrake/base/$_[0]";
@@ -71,15 +73,29 @@ sub spawnShell {
 
 sub mouse_detect() {
     my %l;
-    @l{qw(type xtype device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
+    @l{qw(MOUSETYPE XMOUSETYPE DEVICE)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
     \%l;
 }
 
 sub shells($) {
     my ($o) = @_;
     my @l = grep { -x "$o->{prefix}$_" } @{$o->{default}{shells}};
-    @l or die "no shell available";
-    @l;
+    @l ? @l : "/bin/bash";
+}
+
+sub setPackages {
+    my ($o) = @_;
+
+    eval { $o->{packages} = pkgs::psUsingHdlist() };
+    $@ and $o->{packages} = pkgs::psUsingDirectory();
+    pkgs::getDeps($o->{packages});
+
+    $o->{compss} = pkgs::readCompss($o->{packages});
+    push @{$o->{base}}, "kernel-smp" if smp::detect();
+
+    $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
+
+    pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
 }
 
 sub addToBeDone(&$) {

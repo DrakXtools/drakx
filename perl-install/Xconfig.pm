@@ -22,9 +22,9 @@ sub getinfo {
     getinfoFromSysconfig($o);
     $o->{mouse}{emulate3buttons} = 1;
 
-    unless ($o->{mouse}{xtype}) {
+    unless ($o->{mouse}{XMOUSETYPE}) {
 	my ($type, $dev) = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
-	$o->{mouse}{xtype} ||= $type;
+	$o->{mouse}{XMOUSETYPE} ||= $type;
 	$o->{mouse}{device} ||= "/dev/$dev";
     }
     $o->{mouse}{device} ||= "/dev/mouse" if -e "/dev/mouse";
@@ -43,7 +43,7 @@ sub getinfoFromXF86Config {
 	if (/^Section "Keyboard"/ .. /^EndSection/) {
 	    $o->{keyboard}{xkb_keymap} ||= $1 if /^\s*XkbLayout\s+"(.*?)"/;
 	} elsif (/^Section "Pointer"/ .. /^EndSection/) {
-	    $o->{mouse}{xtype} ||= $1 if /^\s*Protocol\s+"(.*?)"/;
+	    $o->{mouse}{XMOUSETYPE} ||= $1 if /^\s*Protocol\s+"(.*?)"/;
 	    $o->{mouse}{device} ||= $1 if /^\s*Device\s+"(.*?)"/;
 	} elsif (my $i = /^Section "Device"/ .. /^EndSection/) {
 	    if ($i = 1 && $c{type} && $c{type} ne "Generic VGA") {
@@ -81,7 +81,7 @@ sub getinfoFromXF86Config {
 sub getinfoFromSysconfig {
     my $o = shift || {};
     if (my %mouse = getVarsFromSh "/etc/sysconfig/mouse") {
-	$o->{mouse}{xtype} ||= $mouse{XMOUSETYPE};
+	$o->{mouse}{XMOUSETYPE} ||= $mouse{XMOUSETYPE};
     }
     if (my %keyboard = getVarsFromSh "/etc/sysconfig/keyboard") {
 	$keyboard{KEYTABLE} or last;

@@ -137,3 +137,9 @@ sub getNet() {
     @l;
 }
 
+sub findIntf {
+    my ($intf, $device) = @_;
+    my ($l) = grep { $_->{DEVICE} eq $device } @$intf;
+    push @$intf, $l = { DEVICE => $device } unless $l;
+    $l;
+}

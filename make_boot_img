@@ -60,7 +60,7 @@ default linux
 prompt 0
 label linux
   kernel vmlinuz
-  append $ks initrd=initrd.gz mdkinst $type
+  append $ks ramdisk=32000 initrd=initrd.gz mdkinst $type
 ");
     _ "cp -f install/installinit/ks.cfg $mnt 2>/dev/null" if $ks;
     _ "sync";

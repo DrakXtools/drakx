@@ -135,7 +135,7 @@ sub keepOnlyLegalModes {
 
 sub cardConfigurationAuto() {
     my $card;
-    if (my ($c) = pci_probing::main::probe('video')) {
+    if (my ($c) = pci_probing::main::probe("DISPLAY")) {
 	local $_;
 	($card->{identifier}, $_) = @$c;
 	$card->{type} = $1 if /Card:(.*)/;
@@ -482,11 +482,11 @@ sub write_XF86Config {
     # Write pointer section.     
     $O = $o->{mouse};
     print F $pointersection_text1;
-    print F qq(    Protocol    "$O->{xtype}"\n);
+    print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
     print F qq(    Device      "$O->{device}"\n);
     # this will enable the "wheel" or "knob" functionality if the mouse supports it 
     print F "    ZAxisMapping 4 5\n" if
-      member($O->{xtype}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
+      member($O->{XMOUSETYPE}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
 
     print F $pointersection_text2;
     print F "#" unless $O->{emulate3buttons};
@@ -609,7 +609,7 @@ sub show_info {
     my $info;
 
     $info .= _("Keyboard layout: %s\n", $o->{keyboard}{xkb_keymap});
-    $info .= _("Mouse type: %s\n", $o->{mouse}{xtype});
+    $info .= _("Mouse type: %s\n", $o->{mouse}{XMOUSETYPE});
     $info .= _("Mouse device: %s\n", $o->{mouse}{device}) if $::expert;
     $info .= _("Monitor: %s\n", $o->{monitor}{type});
     $info .= _("Monitor HorizSync: %s\n", $o->{monitor}{hsyncrange}) if $::expert;

@@ -126,12 +126,7 @@ sub configureNetwork($) {
 	my @l = first(network::getNet());
 	@l = ($l[0]) unless $::expert; # keep only one
 
-	foreach my $dev (@l) {
-	    my ($l) = grep { $_->{DEVICE} eq $dev } @{$o->{intf}};
-
-	    push @{$o->{intf}}, $l = { DEVICE => $dev } unless $l;
-	    $o->configureNetworkIntf($l);
-	}
+	$o->configureNetworkIntf(network::findIntf($o->{intf}, $_)) foreach @l;
 	$o->configureNetworkNet($o->{netc} ||= {});
     }
     $o->SUPER::configureNetwork;

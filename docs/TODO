@@ -1,20 +1,11 @@
-add the different xmodmaps for every languages (maybe gnome-core xmodmaps can help)
+dd the different xmodmaps for every languages (maybe gnome-core xmodmaps can help)
 xmodmap needed even for english as the backspace is not what it should
 
 mkdosfs missing => crash :(  ??
 
 look at SuperProbe
 
-after install, startx does not launch an available window manager
-(kdebase was present, and twm too)
-
 add the ability to give arguments to insmod.
-
-pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
-
-/etc/sysconfig/mouse is not created
-
-replace in place catchable die's by cdie's  (as in partition_table::load)
 
 Xconfigurator:
   simplify Monitors
@@ -37,14 +28,21 @@ loadFont sucks
 
 trash on the screen when X first start
 
-network configuration
+finish network configuration
 
 get the error when reading .rpm files fail
 
 ask for notepad (aka portable) or not
 ask for hdparm or not
+ask for more than the memory size detected
+ask for the VGA mode for lilo or vidmode
 
-mouseConfig in setup.c
+lilo (ask the timeout, prompt or not)
+
 add a log != tty3 (like /tmp/...)
 
 remove the gray line surrounding the logo
+
+pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
+
+replace in place catchable die's by cdie's  (as in partition_table::load)

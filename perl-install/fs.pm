@@ -143,11 +143,13 @@ sub mount_part($;$) {
     my ($part, $prefix) = @_;
     
     $part->{isMounted} and return;
-    $part->{mntpoint} or die "missing mount point";
     
-    isSwap($part) ?
-	swap::swapon($part->{device}) :
+    if (isSwap($part)) {
+	swap::swapon($part->{device});
+    } else {
+	$part->{mntpoint} or die "missing mount point";
 	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), 0);
+    }
     $part->{isMounted} = $part->{isFormatted} = 1; # assume that if mount works, partition is formatted
 }
 
@@ -169,7 +171,7 @@ sub mount_all($;$) {
 
     # order mount by alphabetical ordre, that way / < /home < /home/httpd...
     foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} } @$fstab) {
-	$_->{mntpoint} and mount_part($_, $prefix);
+	mount_part($_, $prefix) if ($_->{mntpoint} || isSwap($_));
     }
 }
 

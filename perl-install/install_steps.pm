@@ -144,7 +144,9 @@ sub afterInstallPackages($) {
 }
 
 sub mouseConfig($) { 
-    #TODO
+    my ($o) = @_;
+    setVarsInSh("$o->{prefix}/etc/sysconfig/mouse", $o->{mouse});
+    symlink $o->{mouse}{DEVICE}, "$o->{prefix}/dev/mouse" or log::l("creating /dev/mouse symlink failed");
 }
 
 sub configureNetwork($) {

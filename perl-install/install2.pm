@@ -51,6 +51,17 @@ partitionDisks =>
  is not hardly if you be carrefull so that you do. 
 Also, take your time, are sure you before click on \"Finishing\" and READ the handbook of DiskDrake
 before use them."),
+
+#"In this stage, you must partition your hard disk. Partitioning is the
+#division of space on the hard disk into zones (which need not be equal) and
+#certain types of software are installed in certain partitions. This
+#operation, while both spectacular and intimidating, is not difficult to do
+#if you understand what your system needs and what you need to do in the
+#process. If you are uncertain, read the DiskDrake handbook and the
+#Partitioning HOWTO before you proceed. Be cautious during this step. If you
+#make an error, consult the DiskDrake handbook as to how to go about
+#correcting it."
+
 formatPartitions => 
  __("The partitions lately created must be formatted so that the system can use them.
 You can also format partitions before created and used if you wish to remove all the data which
@@ -108,13 +119,13 @@ my @installSteps = (
   formatPartitions => [ __("Format partitions"), 1, -1, "partitionDisks" ],
   choosePackages => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
   doInstallStep => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ],
-#  configureMouse => [ __("Configure mouse"), 0, 0 ],
+  configureMouse => [ __("Configure mouse"), 1, 1, "formatPartitions" ],
   configureNetwork => [ __("Configure networking"), 1, 1, "formatPartitions" ],
 #  configureTimezone => [ __("Configure timezone"), 0, 0 ],
 #  configureServices => [ __("Configure services"), 0, 0 ],
 #  configurePrinter => [ __("Configure printer"), 0, 0 ],
-  setRootPassword => [ __("Set root password"), 1, 0, "formatPartitions" ],
-  addUser => [ __("Add a user"), 1, 0, "formatPartitions" ],
+  setRootPassword => [ __("Set root password"), 1, 1, "formatPartitions" ],
+  addUser => [ __("Add a user"), 1, 1, "formatPartitions" ],
   createBootdisk => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
   setupBootloader => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
   configureX => [ __("Configure X"), 1, 0, "doInstallStep" ],
@@ -168,7 +179,7 @@ $o = $::o = {
 #    isUpgrade => 0,
 #    installClass => 'beginner',
 
-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
+#    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
     default => $default, 
     steps => \%installSteps, 
     orderedSteps => \@orderedInstallSteps,
@@ -249,26 +260,17 @@ sub formatPartitions {
 	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
     }
     mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc etc/sysconfig etc/sysconfig/network-scripts 
-                                             home mnt tmp var var/tmp var/lib var/lib/rpm);
+                                             home mnt tmp var var/tmp var/lib var/lib/rpm); #)
 }
 
 sub choosePackages {
-    if ($o->{steps}{$o->{step}}{entered} == 1) {
-	$o->{packages} = pkgs::psUsingDirectory();
-	pkgs::getDeps($o->{packages});
-
-	$o->{compss} = pkgs::readCompss($o->{packages});
-	push @{$o->{base}}, "kernel-smp" if smp::detect();
-
-	foreach (@{$o->{base}}) { $o->{packages}{$_}{base} = 1 }
-
-	pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
-    }
+    install_any::setPackages($o) if $o->{steps}{$o->{step}}{entered} == 1;
     $o->choosePackages($o->{packages}, $o->{compss}); 
-    foreach (@{$o->{base}}) { $o->{packages}{$_}{selected} = 1 }
+    $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
 }
 
 sub doInstallStep {
+    install_any::setPackages($o) unless $o->{steps}{choosePackages}{entered};
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
@@ -325,14 +327,15 @@ sub main {
     eval { spawnShell() };
 
     # needed very early for install_steps_graphical
-    $o->{mouse} = install_any::mouse_detect() unless $::testing;
+    $o->{mouse} = install_any::mouse_detect() unless $::testing || $o->{mouse};
 
     $o = install_steps_graphical->new($o);
 
     $o->{netc} = network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	log::l("found network config file $file");
-	push @{$o->{intf}}, network::read_interface_conf($file);
+	my $l = network::read_interface_conf($file);
+	add2hash(network::findIntf($o->{intf} ||= [], $l->{DEVICE}), $l);
     }
 
     modules::load_deps("/modules/modules.dep");

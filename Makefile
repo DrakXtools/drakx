@@ -6,7 +6,7 @@ BINS = install/install install/local-install install/installinit/init
 .PHONY: $(BOOT_IMG) $(FLOPPY_IMG) $(BINS) update_kernel
 
 all: $(BOOT_IMG)
-	mkdir /export/images
+	mkdir /export/images 2>/dev/null ; true
 	cp -f $(BOOT_IMG) /export/images
 
 clean:
