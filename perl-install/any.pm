@@ -768,7 +768,7 @@ sub ask_users {
 	    $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    length($u->{name}) <= 32 or $in->ask_warn('', _("The user name is too long")), return (1,0);
-	    member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
+	    member($u->{name}, 'root', map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
 	    return 0;
 	};
 	my $ret = $in->ask_from_(
