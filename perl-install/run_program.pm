@@ -25,6 +25,7 @@ sub rooted {
     return 1 if $root && $<;
 
     $root ? $root .= '/' : ($root = '');
+    install_any::check_prog (ref $name ? $name->[0] : $name, $root) if $::isInstall;
 
     if (my $pid = fork) {
 	waitpid $pid, 0;
