@@ -4,6 +4,39 @@
 	setSelectedFromCompssList not called in
 	expert even the first_time (especially nasty for auto_installs)
 
+	* fs.pm, partition_table.pm, fsedit.pm: add ext3 support
+
+	* diskdrake.pm: add ext3 support
+	(Type): handle lossless switch from ext2 to ext3
+
+	* install_steps_gtk.pm: add the feather feature, but do not enable it
+
+	* interactive_gtk.pm (ask_browse_tree_info_refW): s/wait_msg/wait_message/
+	(wait_msg doesn't
+	exist anywhere, it must be a fpons typo)
+
+	* pkgs.pm: make perl_checker happy
+
+	* c/stuff.xs.pm, c/Makefile.PL: add is_ext3
+
+	* bootloader.pm: as when lilo is selected, we don't try to install grub,
+	just create the
+	config file in case it may be useful
+
+	* common.pm: moved arch() and alike to MDK::Common::System
+
+	* partition_table_raw.pm: add yaboot detection
+
+	* install_any.pm, share/rpmsrate: create a new flags "X" selected by
+	default, contain what X related packages
+	which were in "SYSTEM"
+
+2001/08/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (choosePackages): simplify, fix
+	setSelectedFromCompssList not called in
+	expert even the first_time (especially nasty for auto_installs)
+
 	* install_steps_gtk.pm: add the feather feature, but do not enable it
 
 	* bootloader.pm: as when lilo is selected, we don't try to install grub,
