@@ -36,7 +36,7 @@ load loop
 load sd_mod
 load sr_mod
 
-grep -q oem /proc/cmdline && exec /etc/oem -f
+grep -q oem /proc/cmdline && exec /etc/oem-all -f
 
 /sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0
 /sbin/route add 127.0.0.1 lo
