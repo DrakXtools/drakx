@@ -15,13 +15,17 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 	my $dest = $orig;
 	$dest =~ s|^$prefix|$light_prefix|;
 
-	my $link = $orig;
-	$link =~ s|^$prefix|/image_$live_name|;
+	if (-l $orig) {
+	    system('cp', '-a', $orig, $dest);
+	} else {
+	    my $link = $orig;
+	    $link =~ s|^$prefix|/image_$live_name|;
 
-	mkdir_p(dirname($dest));
-	rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
+	    mkdir_p(dirname($dest));
+	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
 
-	symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
+	    symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
+	}
     }
 }
 
@@ -35,13 +39,15 @@ sub remove_light_tree {
 	my $orig = $dest;
 	$orig =~ s|^$prefix|$light_prefix|;
 
-	next if !-e $orig;
-
-	if (-e $dest && -s $dest != -s $orig) {
-	    warn "ERROR: $dest already exist, skipping\n";
-	} elsif (!-d $dest || -l $dest) {
-	    unlink $dest or die "removing $dest failed: $!\n";
-	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
+	if (-l $orig) {
+	    unlink $orig;
+	} elsif (-e $orig) {
+	    if (-e $dest && -s $dest != -s $orig) {
+		warn "ERROR: $dest already exist, skipping\n";
+	    } elsif (!-d $dest || -l $dest) {
+		unlink $dest or die "removing $dest failed: $!\n";
+		rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
+	    }
 	}
     }
     system("rm -rf $light_prefix/usr/bin/stage2/*.pm");
@@ -49,6 +55,24 @@ sub remove_light_tree {
     system("rm -rf $light_prefix/usr/share/langs/*.png");
 
     rmdir($_) foreach reverse(chomp_(`find $light_prefix -type d`));
+
+    if (-e $light_prefix) {
+	unlink($_) foreach chomp_(`find $light_prefix -type l`);
+
+	foreach my $orig (chomp_(`find $light_prefix -type f`)) {
+	    my $dest = $orig;
+	    $dest =~ s|^$light_prefix|$prefix|;
+	    if (my $orig2 = readlink($dest)) {
+		$orig2 =~ s!/image_$live_name/!$light_prefix/! or next;
+		$orig2 eq $orig or next;
+	    } else {
+		next if -e $dest && -s $dest != -s $orig;
+	    }
+	    unlink $dest or die "removing $dest failed: $!\n";
+	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
+	}
+	rmdir($_) foreach reverse(chomp_(`find $light_prefix -type d`));
+    }
 
     if (-e $light_prefix) {
 	print "still there:\n";
