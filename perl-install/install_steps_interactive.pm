@@ -393,7 +393,7 @@ wish to access and any applicable user name and password."),
 #------------------------------------------------------------------------------
 sub setRootPassword($) {
     my ($o) = @_;
-    $o->{superuser} ||= {};
+    $o->{superuser}{password2} ||= $o->{user}{password} ||= "";
     my %sup = %{$o->{superuser}};
 
     $o->ask_from_entries_ref(_("Set root password"),
@@ -414,29 +414,27 @@ sub setRootPassword($) {
 #------------------------------------------------------------------------------
 sub addUser($) {
     my ($o) = @_;
-    $o->{user} ||= {};
     $o->{user}{password2} ||= $o->{user}{password} ||= "";
-    my $u = $o->{user};
+    my %u = %{$o->{user}};
     my @fields = qw(realname name password password2);
-
     my @shells = install_any::shells($o);
 
     $o->ask_from_entries_ref(
         _("Add user"),
         _("Enter a user"),
         [ _("Real name"), _("User name"), _("Password"), _("Password (again)"), _("Shell") ],
-        [ (map { \$u->{$_}} @fields), 
-	  {val => \$u->{shell}, list => \@shells, not_edit => !$::expert},
+        [ (map { \$u{$_}} @fields), 
+	  {val => \$u{shell}, list => \@shells, not_edit => !$::expert},
         ],
         focus_out => sub {
-	    print "int $_[0], $u->{name},  $u->{realname},\n";
-	    ($u->{name}) = $u->{realname} =~ /\U(\S+)/ if $_[0] eq 0;
+	    print "int $_[0], $u{name},  $u{realname}, $u{shell}\n";
+	    ($u{name}) = $u{realname} =~ /\U(\S+)/ if $_[0] eq 0;
 	},
         complete => sub {
-	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,2);
-	    (length $u->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,1);
-	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
-	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+	    $u{password} eq $u{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,2);
+	    (length $u{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,1);
+	    $u{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
+	    $u{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    return 0;
 	},
     );
