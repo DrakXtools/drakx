@@ -353,8 +353,10 @@ int main(int argc, char **argv, char **env)
 		fatal_error("could not select an installation method");
 
 	if (!IS_RAMDISK) {
-		if (symlink(IMAGE_LOCATION LIVE_LOCATION, STAGE2_LOCATION) != 0)
-			fatal_error("symlink to " STAGE2_LOCATION " failed");
+		if (symlink(IMAGE_LOCATION LIVE_LOCATION, STAGE2_LOCATION) != 0) {
+			printf("symlink from " IMAGE_LOCATION LIVE_LOCATION " to " STAGE2_LOCATION " failed");
+			fatal_error(strerror(errno));
+		}
 	}
 
 	if (interactive_pid != 0)
