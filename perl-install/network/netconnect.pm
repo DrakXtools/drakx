@@ -792,7 +792,7 @@ Modifying the fields below will override this configuration."),
                         [ { val => \$auto_ip, type => "list", list => [ values %l10n_lan_protocols ] } ];
                     },
                     post => sub {
-                        $auto_ip = $auto_ip eq N("Automatic IP (BOOTP/DHCP/Zeroconf)") || 0;
+                        $auto_ip = $auto_ip ne $l10n_lan_protocols{static} || 0;
                         return 'lan_intf';
                     },
                    },
