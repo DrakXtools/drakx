@@ -156,10 +156,7 @@ sub add_spooler_to_security_level {
     $sp = $spooler eq "lpr" || $spooler eq "lprng" ? "lpd" : $spooler;
     my $file = "$::prefix/etc/security/msec/server.$level";
     if (-f $file) {
-	local *F; 
-	open F, ">> $file" or return 0;
-	print F "$sp\n";
-	close F;
+	   eval { append_to_file($file, "$sp\n") } or return 0;
     }
     return 1;
 }
@@ -1544,9 +1541,7 @@ sub configure_queue($) {
 	# Add a comment line containing the path of the used PPD file to the
 	# end of the PPD file
 	if ($printer->{currentqueue}{ppd} ne '1') {
-	    local *F;
-	    open F, ">> $::prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd";
-	    print F "*%MDKMODELCHOICE:$printer->{currentqueue}{ppd}\n";
+	    append_to_file("$::prefix/etc/cups/ppd/$printer->{currentqueue}{queue}.ppd", "*%MDKMODELCHOICE:$printer->{currentqueue}{ppd}\n");
 	}
 	# Copy the old queue's PPD file to the new queue when it is renamed,
 	# to conserve the option settings
@@ -2137,11 +2132,8 @@ sub config_sane {
     # config file /etc/sane.d/hpoj.conf necessary, the HPOJ driver finds the
     # scanner automatically)
     return if member("hpoj", chomp_(cat_("$::prefix/etc/sane.d/dll.conf")));
-    local *F;
-    open F, ">> $::prefix/etc/sane.d/dll.conf" or 
-	die "can't write SANE config in /etc/sane.d/dll.conf: $!";
-    print F "hpoj\n";
-    close F;
+    eval { append_to_file("$::prefix/etc/sane.d/dll.conf", "hpoj\n") } or
+	   die "can't write SANE config in /etc/sane.d/dll.conf: $!";
 }
 
 sub config_photocard {
