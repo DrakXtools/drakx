@@ -65,6 +65,11 @@ sub test {
 
     my $_b = before_leaving { unlink $f_err };
 
+    my $warn_error = sub {
+	my ($error_msg) = @_;
+	$in->ask_warn('', [ N("An error occurred:\n%s\nTry to change some parameters", $error_msg) ]);
+    };
+
     if (!xtest(":9")) {
 	open(my $F, $f_err);
 
@@ -76,8 +81,7 @@ sub test {
 		    local $_;
 		    while (<$F>) {
 			/reporting a problem/ and last;
-			push @msg, $_;
-			$in->ask_warn('', [ N("An error occurred:"), " ", @msg, N("\ntry to change some parameters") ]);
+			$warn_error->(join(@msg, $_));
 			return 0;
 		    }
 		}
@@ -90,7 +94,7 @@ sub test {
 			/^$/ and last;
 			push @msg, $_;
 		    }
-		    $in->ask_warn('', [ N("An error occurred:"), " ", @msg, N("\ntry to change some parameters") ]);
+		    $warn_error->(join(@msg));
 		    return 0;
 		}
 	    }
@@ -139,7 +143,7 @@ sub test {
     my $rc = close $F;
     my $err = $?;
 
-    $rc || $err == 222 << 8 or $in->ask_warn('', N("An error occurred, try to change some parameters"));
+    $rc || $err == 222 << 8 or $warn_error->('');
 
     unlink "$::prefix/$f", "$::prefix/$f-4";
     unlink "/tmp/.X11-unix/X9" if $::prefix;
