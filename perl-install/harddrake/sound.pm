@@ -288,7 +288,7 @@ sub get_any_driver_entry {
     my ($in, $driver, $device, $index) = @_;
     {
         val => N("Let me pick any driver"), disabled => sub {},
-        clicked => sub { &choose_any_driver($in, $driver, $device->{description}, $index); }
+        clicked => sub { &choose_any_driver($in, $driver, $device->{description}, $index) }
     }
 }
 
