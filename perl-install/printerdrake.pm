@@ -142,7 +142,6 @@ sub setup_printer_connection {
 sub auto_detect {
     my ($in) = @_;
     {
-	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
 	modules::get_probeall("usb-interface") and eval { modules::load("printer") };
 	eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
 	eval { modules::load(qw(parport_pc lp parport_probe)); }; #- take care as not available on 2.4 kernel (silent error).
@@ -229,6 +228,7 @@ Do you really want to get your printers auto-detected?"),
     my $menuentries = {};
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
+	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
 	# When HPOJ is running, it blocks the printer ports on which it is
 	# configured, so we stop it here. If it is not installed or not 
 	# configured, this command has no effect.
