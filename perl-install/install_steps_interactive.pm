@@ -67,7 +67,7 @@ translated etc. that varies from language to language).") if $o->{lang} !~ /^en/
     
     unless ($o->{useless_thing_accepted}) {
 	$o->set_help('license');
-	$o->{useless_thing_accepted} = $o->ask_from_list_('', formatAlaTeX(
+	$o->{useless_thing_accepted} = $o->ask_from_list_(_("License agreement"), formatAlaTeX(
 _(" Introduction
 
 The operating system and the different components available in the Linux-Mandrake distribution 
@@ -462,7 +462,7 @@ sub choosePackages {
 
     #- avoid reselection of package if individual selection is requested and this is not the first time.
     if (1 || $first_time || !$individual) {
-	my $min_mark = $::beginner ? 10 : $::expert ? 0 : 1;
+	my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
 
 	my $b = pkgs::saveSelected($packages);
 	my (undef, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});

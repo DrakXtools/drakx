@@ -286,9 +286,6 @@ sub beforeInstallPackages {
 	}
     }
 
-    #- copy RPM-GPG *before* installing packages (otherwise may be the CD2)
-    install_any::getAndSaveFile('RPM-GPG-KEYS', "$o->{prefix}/root/tmp/RPM-GPG-KEYS");
-
     log::l("before install packages, after copy");
     #- some packages need such files for proper installation.
     any::writeandclean_ldsoconf($o->{prefix});
@@ -439,10 +436,6 @@ Consoles 1,3,4,7 may also contain interesting information";
 	install_any::install_urpmi($o->{prefix}, $o->{method}, $o->{packages}[2]);
 	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
-
-    #- RPM-GPG-KEYS is copied earlier to ensure we have it
-    run_program::rooted($o->{prefix}, qw(gpg --import --homedir /etc/rpm /root/tmp/RPM-GPG-KEYS));
-    unlink "$o->{prefix}/root/tmp/RPM-GPG-KEYS";
 
 #    #- update language and icons for KDE.
 #    update_userkderc($o->{prefix}, 'Locale', Language => "");

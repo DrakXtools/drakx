@@ -55,8 +55,8 @@ sub partitionWizardSolutions {
     my @wizlog;
     my (@solutions, %solutions);
 
-    my $min_linux = 500 << 11;
-    my $max_linux = 2500 << 11;
+    my $min_linux = 400 << 11;
+    my $max_linux = 3000 << 11;
     my $min_swap = 50 << 11;
     my $max_swap = 300 << 11;
     my $min_freewin = 100 << 11;
@@ -188,7 +188,7 @@ sub partitionWizard {
     $o->set_help('doPartitionDisks');
 
     my %solutions = partitionWizardSolutions($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
-    %solutions = (loopback => $solutions{loopback}) if $o->{lnx4win};
+    %solutions = (loopback => $solutions{loopback}) if $o->{lnx4win} && $solutions{loopback};
     delete $solutions{diskdrake} if $nodiskdrake;
 
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
@@ -199,6 +199,7 @@ sub partitionWizard {
     log::l("solutions found: " . join('', map {$_->[1]} @sol) . " (all solutions found: " . join('', map {$_->[1]} @solutions) . ")");
 
     @solutions = @sol if @sol > 1;
+    log::l("solutions: ", int @solutions);
     @solutions or $o->ask_warn('', _("I can't find any room for installing")), die 'already displayed';
 
     my $ok; while (!$ok) {

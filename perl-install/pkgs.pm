@@ -683,8 +683,11 @@ sub readCompssUsers {
 
 	if (/^(\S.*)/) {
 	    &$map;
-	    /^(.*?)\s*\[icon=(.*?)\]/  and $_ = $1, $compssUsersIcons{$_} = $2;
-	    /^(.*?)\s*\[descr=(.*?)\]/ and $_ = $1, $compssUsersDescr{$_} = $2;
+	    my ($icon, $descr);
+	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
+	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
+	    $compssUsersIcons{$_} = $icon; 
+	    $compssUsersDescr{$_} = $descr; 
 	    push @sorted, $_;
 	    $compssUsers{$_} = $l = [];
 	} elsif (/\s+\+(\S+)/) {
