@@ -18,7 +18,7 @@ sub show_info {
 sub info {
     my ($raw_X, $card) = @_;
     my $info;
-    my $xf_ver = Xconfig::card::using_xf4($card) ? "4.2.0" : "3.3.6";
+    my $xf_ver = Xconfig::card::using_xf4($card) ? "4.2.1" : "3.3.6";
     my $title = $card->{use_DRI_GLX} || $card->{use_UTAH_GLX} ?
 		 _("XFree %s with 3D hardware acceleration", $xf_ver) : _("XFree %s", $xf_ver);
     my $keyboard = eval { $raw_X->get_keyboard } || {};

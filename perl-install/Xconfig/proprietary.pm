@@ -20,7 +20,7 @@ sub install_matrox_hal {
     system("wget -O $tmpdir/$tar ftp://ftp.matrox.com/pub/mga/archive/linux/2002/$tar") if !-e "$tmpdir/$tar";
     system("tar xzC $tmpdir -f $tmpdir/$tar");
 
-    my $src_dir = "$tmpdir/$dir_in_tar/xfree86/4.2.0/drivers";
+    my $src_dir = "$tmpdir/$dir_in_tar/xfree86/4.2.1/drivers";
     foreach (all($src_dir)) {
 	my $src = "$src_dir/$_";
 	my $dest = "$dest_dir/$_";
