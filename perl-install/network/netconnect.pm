@@ -505,7 +505,8 @@ Take a look at http://www.linmodems.org"),
                                         );
                         
                         my %devices = (ltmodem => '/dev/ttyS14',
-                                       hsflinmodem => '/dev/ttySHSF0'
+                                       hsflinmodem => '/dev/ttySHSF0',
+                                       slmodem => '/dev/ttySL0'
                                       );
                         
                         
