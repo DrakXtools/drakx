@@ -559,7 +559,7 @@ sub updateModulesFromFloppy {
 	log::l("examining updated modules for kernel $kernelVersion");
 	if (-d "/floppy/$kernelVersion") {
 	    my @src_files = glob_("/floppy/$kernelVersion/*");
-	    my @dest_files = split "\n", `chroot $o->{prefix} find /lib/modules`;
+	    my @dest_files = map { chomp_($_) } run_program::rooted_get_stdout($o->{prefix}, 'find', '/lib/modules');
 	    foreach my $s (@src_files) {
 		log::l("found updatable module $s");
 		my ($sfile, $sext) = $s =~ /([^\/\.]*\.o)(?:\.gz|\.bz2)?$/;

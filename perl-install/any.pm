@@ -820,8 +820,7 @@ sub ask_users {
 sub autologin {
     my ($prefix, $o, $in) = @_;
 
-    my $cmd = $prefix ? "chroot $prefix" : "";
-    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l 2>/dev/null`));
+    my @wm = split(' ', run_program::rooted_get_stdout($prefix, '/usr/sbin/chksession', '-l'));
     my @users = map { $_->{name} } @{$o->{users} || []};
 
     if (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {

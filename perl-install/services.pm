@@ -280,8 +280,9 @@ sub doit {
 #--- the listref of "on" services
 sub services {
     my ($prefix) = @_;
-    my $cmd = $prefix && !$::testing ? "chroot $prefix" : "";
-    my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort `LANGUAGE=C $cmd /sbin/chkconfig --list`;
+    local $ENV{LANGUAGE} = 'C';
+    my @raw_l = run_program::rooted_get_stdout($prefix, '/sbin/chkconfig', '--list');
+    my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort @raw_l;
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
 }
 
