@@ -210,12 +210,12 @@ $my_win->{window}->show_all();
 search() if $::isFile;
 $my_win->main;
 
-sub quit { ugtk2->exit(0) }
+sub quit() { ugtk2->exit(0) }
 
 #-------------------------------------------------------------
 # search functions
 #-------------------------------------------------------------
-sub search {
+sub search() {
     $log_text->window->freeze_updates();
     $log_buf->set_text('', -1);
     if ($::isFile) {
@@ -254,7 +254,7 @@ sub parse_file {
   }
   my $ey = $e_yes->get_chars(0, -1);
   my $en = $e_no->get_chars(0, -1);
-  $ey =~ s/ OR /\|/;
+  $ey =~ s/ OR /|/;
   $ey =~ s/^\*$//;
   $en =~ s/^\*$/.*/;
   $ey = $ey . $::Word if $::isWord;
@@ -286,9 +286,9 @@ sub parse_file {
        $win_pb->window->process_updates(1); # no gtkflush() because we do not want to refresh the TextView
       }
       
-      if ($en eq "" and /$ey/i)     { logcolorize($_); next }
-      if (!  /$en/i and /$ey/i)     { logcolorize($_); next }
-      if (!  /$en/i and $ey eq "")  { logcolorize($_); next }
+      if ($en eq "" && /$ey/i)     { logcolorize($_); next }
+      if (!  /$en/i && /$ey/i)     { logcolorize($_); next }
+      if (!  /$en/i && $ey eq "")  { logcolorize($_); next }
   }
   $win_pb->destroy() if !$::isEmbedded || !$::isExplain;
 
@@ -327,9 +327,9 @@ sub logcolorize {
 	return;
     }
     # Extract PID if present
-    if ($rec[1] =~ /\[(\d+)\]\:/) {
+    if ($rec[1] =~ /\[(\d+)\]:/) {
 	my ($pid) = $1;
-	$rec[1] =~ s/\[$1\]\://;
+	$rec[1] =~ s/\[$1\]://;
 	log_output($rec[1] . "[",  { %n, 'foreground' => 'green' });
 	log_output($pid,  { %b, 'foreground' => 'black' });
 	log_output("]: ",  { %n, 'foreground' => 'green' });
@@ -370,7 +370,7 @@ sub log_output {
 # mail/sms alert
 #-------------------------------------------------------------
 
-sub alert_config {
+sub alert_config() {
     
     $::isWizard = 1;
     $::Wizard_pix_up = "wiz_logdrake.png";    # FIXME
@@ -477,7 +477,7 @@ print F $r;
 #-------------------------------------------------------------
 
 
-sub save {
+sub save() {
     $::isWizard = 0;
     $yy = $in->ask_file(N("Save as.."), "/root") or return;
     my $buf = $log_text->get_buffer;
