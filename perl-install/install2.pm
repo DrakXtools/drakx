@@ -491,6 +491,9 @@ sub main {
  	log::l("switching to newt install cuz not enough memory");
  	$o->{interactive} = "newt";
     }
+    # perl_checker: require install_steps_gtk
+    # perl_checker: require install_steps_newt
+    # perl_checker: require install_steps_stdio
     require "install_steps_$o->{interactive}.pm" if $o->{interactive};
 
     #- needed before accessing floppy (in case of usb floppy)

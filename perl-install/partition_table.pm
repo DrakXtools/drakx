@@ -464,6 +464,13 @@ sub read_one($$) {
 	foreach ('empty', @parttype, 'lvm_PV', 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
 	    eval {
+		# perl_checker: require partition_table::bsd
+		# perl_checker: require partition_table::dos
+		# perl_checker: require partition_table::empty
+		# perl_checker: require partition_table::gpt
+		# perl_checker: require partition_table::lvm_PV
+		# perl_checker: require partition_table::mac
+		# perl_checker: require partition_table::sun
 		require "partition_table/$_.pm";
 		bless $hd, "partition_table::$_";
 		($pt, $info) = $hd->read($sector);
