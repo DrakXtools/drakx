@@ -21,6 +21,7 @@ use c;
 my $KMAP_MAGIC = 0x8B39C07F;
 
 #- a best guess of the keyboard layout, based on the choosen locale
+#- beware only the first 5 characters are used
 my %lang2keyboard =
 (
   'af' => 'us_intl',
@@ -281,13 +282,13 @@ sub unpack_keyboards {
     [ map { [ split ':' ] } split ' ', $k ];
 }
 sub lang2keyboards {
-    my ($l) = substr($_[0], 0, 5);
-    my $li = unpack_keyboards($lang2keyboard{$l}) || [ $keyboards{$l} && $l || "us" ];
+    my ($l) = @_;
+    my $li = unpack_keyboards($lang2keyboard{substr($l, 0, 5)}) || [ $keyboards{$l} && $l || "us" ];
     $li->[0][1] ||= 100;
     $li;
 }
 sub lang2keyboard {
-    my ($l) = substr($_[0], 0, 5);
+    my ($l) = @_;
     my $kb = lang2keyboards($l)->[0][0];
     $keyboards{$kb} ? $kb : "us"; #- handle incorrect keyboad mapping to us.
 }
@@ -377,7 +378,7 @@ sub write {
     my ($prefix, $keyboard, $charset, $isNotDelete) = @_;
 
     my $config = read_raw($prefix);
-    put_in_hash($config, { 
+    put_in_hash($config, {
 			  KEYTABLE => keyboard2kmap($keyboard), 
 			  KBCHARSET => $charset,
 			 });

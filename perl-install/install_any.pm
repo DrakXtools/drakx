@@ -396,6 +396,7 @@ sub setPackages {
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
 	    pkgs::packageByName($o->{packages}, "locales-$_") or next;
 	    push @{$o->{default_packages}}, "locales-$_";
+	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1; #- mainly for zh in case of zh_TW.Big5
 	}
 	foreach (lang::langsLANGUAGE($o->{langs})) {
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
