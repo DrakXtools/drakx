@@ -249,8 +249,7 @@ sub ask_standalone_gtk {
 						    my ($ox, $oy) = $w->window->get_deskrelative_origin;
 						    $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy });
     $b->signal_connect(button_press_event => sub { $nopop->() });
-    $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
-    $::isEmbedded and kill 12, $::CCPID;
+    $::isEmbedded and gtkflush();
     $W->main or return;
     $on_services;
 }
