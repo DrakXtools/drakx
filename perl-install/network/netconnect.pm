@@ -632,20 +632,59 @@ If you don't know, choose 'use pppoe'"),
                               },
                              ],
                     post => sub {
+                        $netcnx->{type} = 'adsl';
                         $adsl_type = find { $adsl_types{$_} eq $adsl_protocol } keys %adsl_types;
-                        if ($adsl_type eq 'dhcp') {
-                            $auto_ip = 1;
+                        $adsl_type = { reverse %adsl_types }->{$adsl_protocol};
+                        # process static/dhcp ethernet devices:
+                        if (!exists $adsl_devices{$adsl_device} && member($adsl_type, qw(manual dhcp))) {
+                            $auto_ip = $adsl_type eq 'dchp';
+                            $ethntf->{DEVICE} = $ntf_name;
+                            $find_lan_module->();
+                            delete $ethntf->{$_} foreach keys %$ethntf;
+                            add2hash($ethntf, $intf->{$ntf_name});
                             return 'lan_intf';
-                        } elsif ($adsl_type eq 'manual') {
-                            $auto_ip = 0;
-                            return 'lan_intf';
-                        } elsif ($adsl_type eq 'pppoe') {
-                            $netc->{NET_DEVICE} = $ntf_name;
                         }
-                        return 'hw_account';
+                        network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $adsl_device);
+                        $netc->{NET_DEVICE} = $ntf_name if $adsl_type eq 'pppoe';
+                        return 'adsl_account';
                     },
                    },
                     
+
+                   adsl_account => 
+                   {
+                    pre => sub {
+                        $netc->{dnsServer2} ||= $adsl_data->{dns1};
+                        $netc->{dnsServer3} ||= $adsl_data->{dns2};
+                    },
+                    name => N("Connection Configuration") . "\n\n" .
+                    N("Please fill or check the field below"),
+                    data => sub {
+                        [ 
+                         { label => N("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} },
+                         { label => N("First DNS Server (optional)"), val => \$netc->{dnsServer2} },
+                         { label => N("Second DNS Server (optional)"), val => \$netc->{dnsServer3} },
+                         { label => N("Account Login (user name)"), val => \$netcnx->{login} },
+                         { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
+                        ],
+                    },
+                    post => sub {
+                        if ($netc->{country}) {
+                            my %h = (N("Belgium") => [ 8, 35 ],
+                                     N("France")  => [ 8, 35 ],
+                                     N("Italy")   => [ 8, 35 ],
+                                     N("Netherlands")    => [ 8, 48 ],
+                                     N("United Kingdom") => [ 0, 38 ],
+                                     N("United States")  => [ 8, 35 ],
+                                    );
+                            ($netc->{vpi}, $netc->{vci}) = @{$h{$netcnx->{country}}};
+                        }
+                        network::adsl::adsl_conf_backend($netcnx, $netc, $adsl_device, $adsl_type); #FIXMEl
+                        $handle_multiple_cnx->();
+                    },
+                   },
+
+
                     adsl_unsupported_eci => 
                     {
                      name => N("The ECI Hi-Focus modem cannot be supported due to binary driver distribution problem.
