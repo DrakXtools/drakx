@@ -332,10 +332,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o fix the ";" mark in the "Security Policies" section (florin)
 - interactive layer: don't have a scroll inside a scroll which causes
   display pbs (#7433) (pixel)
-- printerdrake:
+- printerdrake (till):
   o recognize parallel printers also when they miss the
     "CLASS:PRINTER;" in their device ID string (ex: Brother HL-720,
-    bug #7753) (till)
+    bug #7753)
   o warn when there's no network access
   o remove printer list button when there's no network also in expert
     mode.
