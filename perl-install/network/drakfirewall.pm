@@ -90,8 +90,7 @@ sub check_ports_syntax {
 
 sub to_ports {
     my ($servers, $unlisted) = @_;
-    my $ports = join(' ', (map { $_->{ports} } @$servers), if_($unlisted, $unlisted));
-    \$ports;
+    join(' ', (map { $_->{ports} } @$servers), if_($unlisted, $unlisted));
 }
 
 sub from_ports {
@@ -99,7 +98,7 @@ sub from_ports {
 
     my @l;
     my @unlisted;
-    foreach (split ' ', $$ports) {
+    foreach (split ' ', $ports) {
 	if (my $s = port2server($_)) {
 	    push @l, $s;
 	} else {
@@ -120,6 +119,11 @@ sub default_from_pkgs {
     } @all_servers ];
 }
 
+sub default_ports {
+    my ($do_pkgs) = @_;
+    to_ports(default_from_pkgs($do_pkgs), '');
+}
+
 sub get_ports() {
     my $shorewall = network::shorewall::read() or return;
     \$shorewall->{ports};
@@ -134,7 +138,7 @@ sub set_ports {
 	$do_pkgs->ensure_binary_is_installed('shorewall', 'shorewall', $::isInstall) or return;
     
 	$shorewall->{disabled} = $disabled;
-	$shorewall->{ports} = $$ports;
+	$shorewall->{ports} = $ports;
 	network::shorewall::write($shorewall);
     }
 }
@@ -206,12 +210,4 @@ sub main {
     ($disabled, my $ports) = choose($in, $disabled, $servers, $unlisted) or return;
 
     set_ports($in->do_pkgs, $disabled, $ports, $in);
-}
-
-sub main_auto_install {
-    my ($do_pkgs, $disabled) = @_;
-
-    my $possible_servers = default_from_pkgs($do_pkgs);
-
-    set_ports($do_pkgs, $disabled, to_ports($possible_servers, ''));
 }
