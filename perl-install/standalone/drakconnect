@@ -128,13 +128,9 @@ $button_del->signal_connect(clicked => sub {
                                                               my $profile2delete = $combo_dialog->entry->get_text;
                                                               $dialog->destroy;
                                                               Gtk2->main_quit;
-                                                              network::netconnect::del_profile($netcnx, $profile2delete);
-                                                              if ($profile2delete eq $netcnx->{PROFILE}) {
-                                                                  set_profiles("default");
-                                                              } else {
-                                                                  update_profiles();
-                                                              }
-                                                          }),
+                                                              network::netconnect::del_profile($profile2delete);
+                                                              $profile2delete eq $netcnx->{PROFILE} ? set_profiles("default") : update_profiles();
+							  }),
                                        );
                                 $dialog->show_all;
                                 $dialog->run;
