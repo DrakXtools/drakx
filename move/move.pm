@@ -104,11 +104,12 @@ Continue at your own risk."), formatError($@) ]) if $@;
 	sleep 1;
         log::l("DrakX waves bye-bye");
 
-	(undef, undef, my $uid, my $gid, undef, undef, undef, my $home) = getpwnam('mdk');
+	(undef, undef, my $uid, my $gid, undef, undef, undef, my $home, my $shell) = getpwnam('mdk');
 	$( = $) = "$gid $gid";
 	$< = $> = $uid;
 	$ENV{LOGNAME} = $ENV{USER} = 'mdk';
 	$ENV{HOME} = $home;
+	$ENV{SHELL} = $shell;
 	exec 'startkde';
     } else {
 	exec 'xwait' or c::_exit(0);
