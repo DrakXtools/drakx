@@ -181,6 +181,11 @@ sub configure {
 
     if ($b_auto) {
 	#- use $default_resolution
+	if (Xconfig::card::using_xf4($card) && $card->{Driver} eq 'fglrx') {
+	    $default_resolution = first(find { $default_resolution->{Y} eq $_->{Y} && $_->{Depth} == 24 }
+					$default_resolution, @resolutions);
+	    $default_resolution ||= first(find { $_->{Depth} == 24 } $default_resolution, @resolutions);
+	}
     } elsif ($in->isa('interactive::gtk')) {
 	$default_resolution = choose_gtk($in, $card, $default_resolution, @resolutions) or return;
     } else {
