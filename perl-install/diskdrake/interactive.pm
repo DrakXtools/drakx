@@ -994,7 +994,7 @@ sub migrate_files {
 sub warn_if_renumbered {
     my ($in, $hd) = @_;
     my $l = delete $hd->{partitionsRenumbered};
-    return if is_empty_array_ref($l);
+    return if is_empty_array_ref($l) || $::isInstall;
 
     my @l = map { _("partition %s is now known as %s", @$_) } @$l;
     $in->ask_warn('', join("\n", 'Partitions have been renumbered: ', @l));
