@@ -157,7 +157,7 @@ if (!$::isEmbedded && $in->isa('interactive_gtk')) {
 					 push @box_to_hide, $box;
 					 $box->{vis} = 0;
 					 my @button_to_hide;
-					 0, gtksignal_connect(new Gtk::Button(_("$_")), clicked => sub {
+					 0, gtksignal_connect(new Gtk::Button($_), clicked => sub {
 								if($box->{vis}) { $box->hide(); $box->{vis} = 0; $notebook->set_page(0); }
 								else {
 								    $_->hide, $_->{vis}=0 foreach @box_to_hide;
@@ -359,6 +359,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.15  2002/01/08 10:21:15  fpons
+#- removed stupid invocation of _("$_"), is it correct code to change it to $_ only ?
+#-
 #- Revision 1.14  2001/11/05 16:07:21  damien
 #- typo
 #-
