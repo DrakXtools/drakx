@@ -173,22 +173,22 @@ sub configureNetwork {
     
     if ($last->{BOOTPROTO} !~ /static/) {
 	$netc->{minus_one} = 1;
-#	$::isInstall and $in->set_help('configureNetworkHostDHCP');
+
 	$in->ask_from(N("Configuring network"), N("
 
 Enter a Zeroconf host name without any dot if you don't
 want to use the default host name."),
 		      [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
-			if_($::expert, { label => N("Host name"), val => \$netc->{HOSTNAME} }),
+			{ label => N("Host name"), val => \$netc->{HOSTNAME}, advanced => 1 }
 		      ],
 		      complete => sub {
-			  if ($netc->{ZEROCONF_HOSTNAME} && $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
+			  if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
 			      $in->ask_warn('', N("Zeroconf host name must not contain a ."));
 			      return 1;
 			  }
 			  0;
 		      }
-		      ) or goto configureNetwork_step_1;
+		     ) or goto configureNetwork_step_1;
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
     }
