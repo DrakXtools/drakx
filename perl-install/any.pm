@@ -1011,23 +1011,23 @@ sub choose_security_level {
       5 => _("Paranoid"),
     );
     my %help = (
-      0 => formatAlaTeX(_("This level is to be used with care. It makes your system more easy to use,
+      0 => _("This level is to be used with care. It makes your system more easy to use,
 but very sensitive: it must not be used for a machine connected to others
-or to the Internet. There is no password access.")),
-      1 => formatAlaTeX(_("Password are now enabled, but use as a networked computer is still not recommended.")),
-      2 => formatAlaTeX(_("This is the standard security recommended for a computer that will be used to connect to the Internet as a client.")),
-      3 => formatAlaTeX(_("There are already some restrictions, and more automatic checks are run every night.")),
-      4 => formatAlaTeX(_("With this security level, the use of this system as a server becomes possible.
+or to the Internet. There is no password access."),
+      1 => _("Password are now enabled, but use as a networked computer is still not recommended."),
+      2 => _("This is the standard security recommended for a computer that will be used to connect to the Internet as a client."),
+      3 => _("There are already some restrictions, and more automatic checks are run every night."),
+      4 => _("With this security level, the use of this system as a server becomes possible.
 The security is now high enough to use the system as a server which accept
-connections from many clients. Note: if your machine is only a client on the Internet, you should better choose a lower level.")),
-      5 => formatAlaTeX(_("Based on the previous level, but the system is entirely closed.
-Security features are at their maximum.")),
+connections from many clients. Note: if your machine is only a client on the Internet, you should better choose a lower level."),
+      5 => _("Based on the previous level, but the system is entirely closed.
+Security features are at their maximum."),
     );
     delete @l{0,1};
     delete $l{5} if !$::expert;
 
     $in->ask_from('', _("Choose security level") . "\n\n" .
-		  join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
+		  join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } keys %l),
 		  [
 		   { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
 		   if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
