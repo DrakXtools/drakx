@@ -307,7 +307,7 @@ sub load_conf {
     my ($netcnx, $netc, $intf) = @_;
     my $current = { getVarsFromSh("$prefix/etc/netprofile/current") };
     
-    $netcnx->{PROFILE} = $current->{PROFILE};
+    $netcnx->{PROFILE} = $current->{PROFILE} || 'default';
     network::read_all_conf($prefix, $netc, $intf);
 }
 
