@@ -615,10 +615,10 @@ sub list {
 }
 
 sub l2console_font {
-    my ($locale) = @_;
+    my ($locale, $during_install) = @_;
     my $c = $charsets{l2charset($locale->{lang}) || return} or return;
     my ($name, $sfm, $acm) = @$c;
-    undef $acm if $locale->{utf8};
+    undef $acm if $locale->{utf8} && !$during_install;
     ($name, $sfm, $acm);
 }
 
@@ -895,7 +895,7 @@ sub write {
     };
     log::l("lang::write: lang:$locale->{lang} country:$locale->{country} locale|lang:$locale_lang locale|country:$locale_country language:$h->{LANGUAGE}");
 
-    my ($name, $sfm, $acm) = l2console_font($locale);
+    my ($name, $sfm, $acm) = l2console_font($locale, 0);
     if ($name && !$b_user_only) {
 	my $p = "$prefix/usr/lib/kbd";
 	if ($name) {
@@ -1032,7 +1032,7 @@ sub console_font_files() {
 
 sub load_console_font {
     my ($locale) = @_;
-    my ($name, $sfm, $acm) = l2console_font($locale);
+    my ($name, $sfm, $acm) = l2console_font($locale, 1);
 
     require run_program;
     run_program::run(if_($ENV{LD_LOADER}, $ENV{LD_LOADER}), 
