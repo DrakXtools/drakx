@@ -83,7 +83,7 @@ sub from_raw_X {
 
     my $card = {
 	use_UTAH_GLX => int(grep { /glx/ } $raw_X->{xfree3}->get_modules),
-	use_DRI_GLX  => int(grep { /glx/ } $raw_X->{xfree4}->get_modules),
+	use_DRI_GLX  => int(grep { /dri/ } $raw_X->{xfree4}->get_modules),
 	server => $raw_X->{xfree3_server},
 	prefer_xf3 => readlink("$::prefix/etc/X11/X") !~ /XFree86/ && !$force_xf4,
 	%$device,
@@ -103,13 +103,13 @@ sub to_raw_X {
 
     $raw_X->{xfree3}->set_load_module('glx-3.so', $card->{use_UTAH_GLX}); #- glx.so may clash with server version 4.
 
-    $raw_X->{xfree4}->set_load_module($_, $card->{use_DRI_GLX} && !$card->{DRI_GLX_SPECIAL})
-      foreach 'dri', 'glx';
+    $raw_X->{xfree4}->set_load_module('glx', !$card->{DRI_GLX_SPECIAL}); #- glx for everyone, except proprietary nvidia
+    $raw_X->{xfree4}->set_load_module('dri', $card->{use_DRI_GLX} && !$card->{DRI_GLX_SPECIAL});
 
     # This loads the NVIDIA GLX extension module.
     # IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
     # IT WILL LOAD XFree86 glx module and the server will crash.
-    $raw_X->{xfree4}->set_load_module('/usr/X11R6/lib/modules/extensions/libglx.so', $card->{DRI_GLX_SPECIAL});
+    $raw_X->{xfree4}->set_load_module('/usr/X11R6/lib/modules/extensions/libglx.so', $card->{DRI_GLX_SPECIAL}); 
 
     $raw_X->{xfree4}->remove_Section('DRI');
     $raw_X->{xfree4}->add_Section('DRI', { Mode => { val => '0666' } }) if $card->{use_DRI_GLX};
