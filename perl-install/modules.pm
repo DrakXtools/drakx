@@ -534,6 +534,10 @@ sub load_thiskind($;&$) {
 	    eval { load($_, $type); push @devs, "imm" };
 	    last if !$@;
 	}
+	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
+	if (my ($c) = pci_probing::main::probe('AUDIO')) {
+	    modules::add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
+	}
     }
     @devs, map { [ $_, $_ ] } @{$loaded{$type} || []};
 }

@@ -1129,13 +1129,6 @@ sub setup_thiskind {
     my @l;
     my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
 
-    if ($allow_probe && $type =~ /scsi/i) {
-	#- hey, we're allowed to pci probe :)   let's do a lot of probing!
-	require pci_probing::main;
-	if (my ($c) = pci_probing::main::probe('AUDIO')) {
-	    modules::add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
-	}
-    }
     if ($allow_probe) {
 	eval { @l = $o->load_thiskind($type) };
 	if ($@) {

@@ -184,6 +184,7 @@ sub loadkeys_files {
 	push @l, $l if $l;
 	print STDERR "unknown $_\n" if $_[0] && !$l;
     }
+    @l;
 }
 
 sub lang2keyboard($) {
