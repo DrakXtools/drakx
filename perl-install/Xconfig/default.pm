@@ -13,7 +13,11 @@ sub configure {
     my ($keyboard, $mouse) = @_;
 
     $keyboard ||= keyboard::read($::prefix);
-    $mouse ||= $::noauto ? mouse::read($::prefix) : mouse::detect();
+    $mouse ||= do {
+	my $mouse = mouse::read($::prefix); 
+	add2hash($mouse, mouse::detect()) if !$::noauto;
+	$mouse;
+    };
 
 
     my $raw_X = Xconfig::xfree->empty_config;
