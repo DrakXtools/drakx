@@ -1,3 +1,178 @@
+2001/09/03  dam's  <damien@mandrakesoft.com>
+
+	* network/network.pm: added timeout in resolv.conf
+
+2001/09/03  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: updated to use new urpmi.cfg format for install_urpmi,
+	make sure the directory
+	is not given for ftp and http install ($dir).
+
+	* Xconfigurator_consts.pm: added 1920x1440 and 2048x1536.
+
+	* Xconfig.pm: make sure a staling Mouse2 is not present unless it really
+	physically exists.
+
+2001/09/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: add axnet_cs to pcmcia category
+
+	* mdk-stage1/probing.c: change `scd' with `sr'
+
+2001/09/03  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/es.po: updated Spanish file
+
+	* share/po/ko.po: updated Korean file
+
+2001/09/03  Pixel  <pixel@mandrakesoft.com>
+
+	* timezone.pm (ntp_server): also set /etc/ntp/step-tickers
+
+	* fsedit.pm, devices.pm: fix mtab reading and pseudo-device use
+
+	* interactive_gtk.pm: better sizing for combo boxes
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): do not propose
+	to propose already formatted
+	fat partitions
+
+	* share/list: those files disappeared ??
+
+	* fs.pm: fix for lvm (non-)creation of devices
+	(set_default_options): created
+	fix mtab reading and pseudo-device use
+
+	* diskdrake.pm (smb_create, nfs_create): make the "New" button work
+	(raw_hd_mount_point): fix checking the same mount point
+	(try_): fix error displaying
+
+	* partition_table.pm: fix switching to 0x85 extended when
+	remove_empty_extended is called
+
+2001/09/03  yduret
+
+	* standalone/net_monitor: sync with new logdrake command line options
+
+2001/09/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/bs.po: updated bosnian file
+	Added Bosnian file
+
+2001/09/01  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: avoid deleting package from %packages in install() when closing
+	fd associated,
+	if the open is called again (?), it will cause an invalid file (seems to
+	happens
+	on some invalid file).
+
+2001/08/31  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draksec: corrected yesno interpretation
+	libsafe modification
+
+	* network/netconnect.pm: corrected profil recording for modem
+
+	* standalone/net_monitor: correted typo
+
+	* network/ethernet.pm: corrected zero return when cable configuring
+
+	* any.pm: corrected autologin : no uc anymore
+
+	* network/modem.pm: added domainname2 setting
+
+	* share/logo-mandrake.png: new logo
+
+2001/08/31  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: added missing AlwaysCore line for second mouse for
+	XF3.
+
+	* mouse.pm: added missing AlwaysCore line for second mouse in XF3.
+
+	* standalone.pm: add option --allow-medium-change to force asking question
+	even if --auto is
+	given on command line of urpmi, for installing package so that a dialog
+	appears.
+
+2001/08/31  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: mures is a fine game, have it at weight "4" under GAMES
+	section
+	have "numlock" in INSTALL because it's the only package which goes to
+	CD#2
+	when you unselect all groups, so having it here will allow not changing
+	CD
+	with this kind of small install
+
+2001/08/31  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/uk.po, share/po/es.po: updated Ukrainian
+	and Spanish files
+
+	* share/po/sv.po: updated Swedish file
+	updated Ukrainian and Spanish files
+
+2001/08/31  siegel
+
+	* share/help_sav.png: not used any more
+
+	* share/po/de.po: updates
+
+	* share/logo-mandrake2.png, share/logo-mandrake_trans.png,
+	share/logo-mandrake_sav.png, share/logo-mandrake-Desktop.png: old
+	versions => not in use any more
+
+2001/08/31  yduret
+
+	* bootlook.pm: updated code
+
+2001/08/30  dam's  <damien@mandrakesoft.com>
+
+	* network/tools.pm: nicer display
+
+	* standalone/draknet: added use common.pm (can be usefull, eh?)
+
+	* network/network.pm: silently /sbin/ip
+	track_network_id only if laptop
+
+2001/08/30  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: Updated Danishfile
+	updated pot file (I had lost the group descriptions, sorry, they are
+	back now)
+	moved chinese files to charset independent names
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: updated pot file (I
+	had lost the group descriptions, sorry, they are back now)
+	moved chinese files to charset independent names
+
+2001/08/30  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm (read): it works now
+
+	* help.pm: fixed (was utf8)
+
+	* install_steps_gtk.pm (new): call interactive_gtk::new
+
+	* install_steps.pm, Xconfigurator.pm: disable gpm (in case of serial
+	mouse) before service choice
+
+	* pkgs.pm (naughtyServers): update for 8.1
+
 2001/08/30  dam's  <damien@mandrakesoft.com>
 
 	* interactive.pm: corrected icon display
