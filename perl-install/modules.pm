@@ -321,6 +321,13 @@ sub write_conf() {
 	      if $v2 && !$written->{$mod}{$type};
 	}
     }
+    #- use module-init-tools script for the moment
+    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$::prefix/etc/modprobe.conf";
+
+    write_preload_conf();
+}
+
+sub write_preload_conf() {
     my @l;
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, grep { detect_devices::matching_driver("^$_\$") } qw(bttv cx8800 saa7134);
@@ -330,8 +337,6 @@ sub write_conf() {
     }
     append_to_modules_loaded_at_startup("$::prefix/etc/modules", @l);
     append_to_modules_loaded_at_startup("$::prefix/etc/modprobe.preload", @l_26);
-    #- use module-init-tools script for the moment
-    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$::prefix/etc/modprobe.conf";
 }
 
 sub append_to_modules_loaded_at_startup {
