@@ -25,26 +25,30 @@ my %perm_l10n = ($default_perm_level => N("System settings"),
                 );
 my %rev_perm_l10n = reverse %perm_l10n;
 my ($editable, $modified) = (0, 0);
-my $prec_txt = $default_perm_level;
+
+my @rules;
 
 #- Widget declaration
 my $w = ugtk2->new('drakperm');
-$w->{rwindow}->set_size_request(550, 400) unless $::isEmbedded;
+$w->{rwindow}->set_size_request(620, 400) unless $::isEmbedded;
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
-my $model = Gtk2::ListStore->new("Gtk2::Gdk::Pixbuf", ("Glib::String") x 4);
+my $model = Gtk2::ListStore->new("Gtk2::Gdk::Pixbuf", ("Glib::String") x 5);
 my $permList = Gtk2::TreeView->new_with_model($model);
 
 my $pixbuf = gtkcreate_pixbuf('non-editable');
 
 my @column_sizes = (150, 100, 100, 15, -1);
 
+# TreeView layout is (Editable, Path, User, Group, Permissions, [hidden]index_id)
 $permList->append_column(Gtk2::TreeViewColumn->new_with_attributes(N("Editable"), Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 each_index {
     my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1);
     $col->set_min_width($column_sizes[$::i+1]);
     $permList->append_column($col);
 } (N("Path"), N("User"), N("Group"), N("Permissions"));
+
+load_perms();
 
 #- widgets settings
 my $combo_perm = new Gtk2::OptionMenu;
@@ -65,6 +69,8 @@ my @buttons;
 
 sub del_callback() {
     my ($tree, $iter) = $permList->get_selection->get_selected;
+    my $removed_idx = $tree->get($iter, 5);
+    @rules = grep { $_->{index} ne $removed_idx } @rules;
     $tree->remove($iter);
     sensitive_buttons(0);
     $modified++;
@@ -85,8 +91,6 @@ sub move_callback {
     $permList->get_selection->select_iter($iter);
     $permList->queue_draw;
 }
-
-my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($rev_perm_l10n{$combo_perm->entry->get_text} , @_) });
 
 $permList->signal_connect(button_press_event => sub { 
                      return unless $editable;
@@ -133,8 +137,9 @@ Select permissions to see/edit", $default_perm_level)),
 $W->show_all;
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
-display_perm($default_perm_level);
-$combo_perm->entry->set_text($perm_l10n{$default_perm_level});
+$combo_perm->entry->set_text($perm_l10n{all});
+display_perm('all');
+my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($rev_perm_l10n{$combo_perm->entry->get_text} , @_) });
 
 $permList->get_selection->signal_connect('changed' => sub {
                                                my ($select) = @_;
@@ -165,47 +170,25 @@ sub hide_down_button_iflast_item {
     $buttons[1]->set_sensitive($next_item && !$model->get($next_item, 0));
 }
 
-sub check_save() {
-    $modified or return 0;
-    my $sav_ = $in->ask_okcancel('Warning', 'your changed will be lost do you wish to continue?');
-    $sav_ and $modified = 0;
-    return $sav_;   
-}
 
 sub display_perm {
-    my $perm_level = shift @_;
+    my ($perm_level) = @_;
+    print "switching to «$perm_level»\n";
     return unless $perm_level;
-    my @files = $perm_level eq 'all' ? (sort values %perm_files) : $perm_files{$perm_level};
-    my $sav_ = &check_save;
-    if ($modified && ! $sav_) {
-     $combo_perm->entry->signal_handler_block($combo_sig);
-     $combo_perm->entry->set_text($prec_txt);
-     $combo_perm->entry->signal_handler_unblock($combo_sig);
-     return 0;
-    }
-
-    $editable = $perm_level =~ /^level \d/ ? 0 : 1;
-     
+    my $show_sys_rules  = $perm_level eq $default_perm_level;
+    my $show_user_rules = $perm_level eq 'editable';
+    my $show_all_rules  = $perm_level eq 'all';
+    # cleaner way: only remove filtered out rules, add those not any more filtered rather than refilling the whole tree
     $model->clear;
-    foreach my $file (@files) {
-        local *F;
-        open F, $file;
-        
-        local $_;
-        my $is_uneditable = $file ne $perm_files{editable};
-        while (<F>) {
-            if (m/^([^#]\S+)\s+([^.\s]+)\.(\S+)?\s+(\d+)/) {
-                $model->append_set(if_($is_uneditable, 0 => $pixbuf), 1 => $1, 2 => $2, 3 => $3, 4 => $4);
-            } elsif (m/^([^#]\S+)\s+current?\s+(\d+)/) {
-                $model->append_set(if_($is_uneditable, 0 => $pixbuf), 1 => $1, 2 => 'current', 3 => '', 4 => $2);
-            }
-        }
-        close F;
-    }
+    foreach my $rule (@rules) {
+        next if !$show_all_rules && ($show_user_rules && $rule->{editable} || $show_sys_rules && !$rule->{editable});
+        $model->append_set(map_index { if_(defined $rule->{$_}, $::i => $rule->{$_}) } qw(editable path user group perms index));
+    };
+
+    # alter button box behavior
+    $editable = $perm_level =~ /^level \d/ ? 0 : 1;
     $up_down_box->set_sensitive($editable);
     sensitive_buttons(0) if $editable;
-     
-    $prec_txt = $perm_level;
 }
 
 sub save_perm() {
@@ -224,6 +207,30 @@ sub save_perm() {
     }
     $modified = 0;
     ugtk2->exit;
+}
+
+sub load_perms() {
+    my $index = 0;
+    foreach my $file (@perm_files{($default_perm_level, 'editable')}) {
+        local *F;
+        open F, $file;
+        
+        local $_;
+        my $is_uneditable = $file ne $perm_files{editable};
+        while (<F>) {
+            next if /^#/;
+            # Editable, Path, User, Group, Permissions
+            if (m/^(\S+)\s+([^.\s]+)\.(\S+)?\s+(\d+)/) {
+                push @rules, { if_($is_uneditable, editable => $pixbuf), path => $1, user => $2, group => $3, perms => $4, index => $index };
+            } elsif (m/^(\S+)\s+current?\s+(\d+)/) {
+                push @rules, { if_($is_uneditable, editable => $pixbuf), path => $1, user => 'current', group => '', perms => $2, index => $index };
+            } else {
+                warn "unparsed \"$_\"line";
+            }
+            $index++;
+        }
+        close F;
+    }
 }
 
 sub row_setting_dialog {
@@ -312,14 +319,8 @@ sub row_setting_dialog {
                     });
     my %perms;
     $ok->signal_connect(clicked => sub {
-                            if (!$iter) {  # create new item when adding a new one
-                                $iter = $model->append;
-                                my $first_iter = $model->get_iter_first;
-                                if ($first_iter) {
-                                    $model->move_after($iter, $first_iter);
-                                    $model->swap($iter, $first_iter);
-                                }
-                            }
+                            # create new item if needed (that is when adding a new one) at end of list
+                            $iter ||= $model->append;
                             $model->set($iter, 1 => $file->get_text);
                             if ($usr_check->get_active) {
                                 $model->set($iter, 2 => 'current');
