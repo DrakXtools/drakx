@@ -56,7 +56,7 @@ random => __("Saves and restores system entropy pool for higher quality random
 number generation."),
 routed => __("The routed daemon allows for automatic IP router table updated via
 the RIP protocol. While RIP is widely used on small networks, more complex
-routing protocls are needed for complex networks."),
+routing protocols are needed for complex networks."),
 rstatd => __("The rstat protocol allows users on a network to retrieve
 performance metrics for any machine on that network."),
 rusersd => __("The rusers protocol allows users on a network to identify who is

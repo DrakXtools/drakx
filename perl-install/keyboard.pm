@@ -99,7 +99,7 @@ arch() =~ /^sparc/ ? (
  "us" => [ __("US keyboard"),    "sunkeymap",   "us" ],
 ) : (),
 arch() =~ /^ppc/ ? (
- "us" => [ __("US Keyboard"),    "mac-us-ext",  "us" ],
+ "us" => [ __("US keyboard"),    "mac-us-ext",  "us" ],
 ) : (
  "am" => [ __("Armenian"),       "am-armscii8", "am" ],
  "be" => [ __("Belgian"),        "be-latin1",   "be" ],
