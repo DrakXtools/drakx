@@ -206,7 +206,7 @@ gtkadd($my_win->{window},
 		)
        );
 
-$::isFile and gtkset_size_request($log_text, 400, 500);
+$::isFile && !$::isEmbedded and gtkset_size_request($log_text, 400, 500);
 
 $my_win->{window}->realize;
 $my_win->{window}->show_all();
