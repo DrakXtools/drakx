@@ -316,7 +316,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Fri Jun 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-45mdk
 - authentication: more LDAP work (pixel)
 - drakbackup: fix .backupignore issue (stew)
-- drakupdate_fstab: add suppor for floppies
+- drakupdate_fstab: add support for floppies
 - harddrake service:
   o mouse: autoreconfigure it when switching between 2.4.x and 2.6.x kernels
   o network: automatic config with DHCP of new cards
