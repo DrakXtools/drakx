@@ -1064,7 +1064,7 @@ notation (for example, 1.2.3.4).")),
                    ndiswrapper =>
                    {
                     data => sub {
-                        [ { label => N("Choose a ndiswrapper driver"), type => "list", val => \$ndiswrapper_driver,
+                        [ { label => N("Choose an ndiswrapper driver"), type => "list", val => \$ndiswrapper_driver,
                             list => [ N("Install a new driver"), N("Use already installed driver (%s)", join(", ", network::tools::ndiswrapper_installed_drivers())) ] } ];
                     },
                     complete => sub {
@@ -1100,7 +1100,7 @@ notation (for example, 1.2.3.4).")),
                         modules::load("ndiswrapper");
 
                         #- FIXME: move this somewhere in get_eth_cards, so that configure_eth_aliases correctly writes ndiswrapper
-                        #- find the first interface matching a ndiswrapper driver, try ethtool then sysfs
+                        #- find the first interface matching an ndiswrapper driver, try ethtool then sysfs
                         my @available_drivers = network::tools::ndiswrapper_available_drivers();
                         $ntf_name = find {
                             my $drv = c::getNetDriver($_) || readlink("/sys/class/net/$_/driver");
