@@ -221,7 +221,7 @@ sub doPartitionDisks {
 
 #------------------------------------------------------------------------------
 
-sub ask_mntpoint_s {
+sub ask_mntpoint_s {#-}}}
     my ($_o, $fstab) = @_;
 
     #- TODO: set the mntpoints
@@ -256,6 +256,7 @@ sub choosePartitionsToFormat($$) {
 	
 	add2hash_($_, { toFormat => $_->{notFormatted} });
         $_->{toFormatUnsure} = member($_->{mntpoint}, '/', '/usr');
+	$_->{toFormat} ||= $::recovery && delete $_->{toFormatUnsure};
 
 	if (!$_->{toFormat}) {
 	    my $t = fsedit::typeOfPart($_->{device});
