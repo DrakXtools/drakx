@@ -69,7 +69,7 @@ sub load_font {
     Gtk2::Rc->parse_string(q(
 style "default-font" 
 {
-   font_name = ") . lang::l2pango_font($o->{locale}{lang}) . q( 12"
+   font_name = ") . lang::l2pango_font($o->{locale}{lang}) . q("
 }
 widget "*" style "default-font"
 
@@ -118,6 +118,7 @@ sub create_steps_window {
 
     return if $::stepswidth == 0;
 
+    $o->{steps_window} and $o->{steps_window}->destroy;
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
     $w->{rwindow}->set_uposition(8, 160);
@@ -132,7 +133,7 @@ sub create_steps_window {
 	$_ eq 'setRootPassword'
 	  and gtkpack__($vb, '', '', $steps{conf} = Gtk2::Label->new(N("System configuration")), '');
 	$steps{steps}{$_} = { img => gtkcreate_img('steps_off.png'),
-			      txt => Gtk2::Label->new($o->{steps}{$_}{text}) };
+			      txt => Gtk2::Label->new(translate($o->{steps}{$_}{text})) };
 	gtkpack__($vb, gtkpack__(Gtk2::HBox->new(0, 7), $steps{steps}{$_}{img}, $steps{steps}{$_}{txt}));
 					      
     }
@@ -155,14 +156,6 @@ sub update_steps_position {
 	}
 	$last_step = $_;
     }
-}
-
-sub update_steps_labels {
-    my ($o) = @_;
-    return if !$steps{steps};
-    $steps{inst}->set_label(N("System installation"));
-    $steps{conf}->set_label(N("System configuration"));
-    $steps{steps}{$_}{txt}->set_label(translate($o->{steps}{$_}{text})) foreach keys %{$steps{steps}};
 }
 
 #------------------------------------------------------------------------------

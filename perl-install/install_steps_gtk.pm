@@ -151,7 +151,7 @@ sub charsetChanged {
     my ($o) = @_;
     Gtk2->set_locale;
     install_gtk::load_font($o);
-    install_gtk::update_steps_labels($o);
+    install_gtk::create_steps_window($o);
 }
 
 #-######################################################################################

@@ -643,19 +643,20 @@ sub charset2kde_font {
 # on the "charset" defined by language array. This allows to selecting
 # an appropriate font for each language.
 my %charset2pango_font = (
-  'tis620' =>      "Norasi",
-  'utf_ar' =>      "KacstBook",
-  'utf_cyr2' =>    "URW Bookman L",
-  'utf_he' =>      "ClearlyU",
-  'utf_hy' =>      "Artsounk",
-  'utf_ka' =>      "ClearlyU",
-  'utf_ta' =>      "TSCu_Paranar",
-  'utf_vi' =>      "ClearlyU",
-  'iso-8859-7' =>  "Kerkis",
+  'tis620' =>      "Norasi 14",
+  'utf_ar' =>      "KacstBook 14",
+  'utf_cyr2' =>    "URW Bookman L 14",
+  'utf_he' =>      "ClearlyU 12",
+  'utf_hy' =>      "Artsounk 14",
+  'utf_ka' =>      "ClearlyU 14",
+  'utf_ta' =>      "TSCu_Paranar 14",
+  'utf_vi' =>      "ClearlyU 14",
+  'iso-8859-7' =>  "Kerkis 14",
+  'jisx0208' =>    "Sans 18",
   #- Nimbus Sans L is missing some chars used by some cyrillic languages,
   #- but tose haven't yet DrakX translations; it also misses vietnamese
   #- latin chars; all other latin and cyrillic are covered.
-  'default' =>     "Nimbus Sans L"
+  'default' =>     "Nimbus Sans L 12"
 );
 
 sub charset2pango_font {
