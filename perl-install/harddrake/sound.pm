@@ -5,10 +5,10 @@ package harddrake::sound;
 #    o tv cards: btaudio,
 #    o isa cards: msnd_pinnacle, pas2, 
 # No OSS for ALSA's
-#    o pci cards: snd-ali5451, snd-als4000, snd-es968, snd-fm801,
-#      snd-hdsp, snd-via8233
+#    o pci cards: snd-ali5451, snd-als4000, snd-es968, 
+#      snd-hdsp
 #    o isa cards: snd-als100, snd-azt2320, snd-cmi8330, snd-cs4231,
-#      snd-cs4236, snd-dt0197h, snd-es18xx,snd-es1688, snd-ice1712,
+#      snd-cs4236, snd-dt0197h, snd-es18xx,snd-es1688,
 #      snd-korg1212, snd-rme32, snd-rme96
 #    o usb cards: snd-usb-audio
 
@@ -51,13 +51,13 @@ my %alsa2oss =
      "snd-es1938"  => [ "esssolo1" ],
      "snd-es1968"  => [ "maestro" ], # isa
      "snd-es968"   => [ "unknown" ],
-     "snd-fm801"   => [ "unknown" ],
+     "snd-fm801"   => [ "forte" ],
      "snd-gusclassic" => [ "gus" ], # isa
      "snd-gusextreme" => [ "gus" ], # isa
      "snd-gusmax"  => [ "gus" ],    # isa
      "snd-hdsp" => [ "unknown" ],
-     "snd-ice1712" => [ "unknown" ], # isa
-     "snd-intel8x0" => [ "i810_audio", "nvaudio" ],
+     "snd-ice1712" => [ "ice1712" ], # isa
+     "snd-intel8x0" => [ "ali5455", "i810_audio", "nvaudio" ],
      "snd-interwave" => [ "gus" ],  # isa
      "snd-korg1212" => [ "unknown" ], # isa
      "snd-maestro3" => [ "maestro3" ],
@@ -76,8 +76,7 @@ my %alsa2oss =
      "snd-sscape" => [ "unknown" ], # isa
      "snd-trident" => [ "trident" ],
      "snd-usb-audio" => [ "unknown" ], # usb
-     "snd-via686"  => [ "via82cxxx_audio" ],
-     "snd-via8233" => [ "unknown" ],
+     "snd-via82xx"  => [ "via82cxxx_audio" ],
      "snd-wavefront" => [ "wavefront" ], # isa
      "snd-ymfpci"  => [ "ymfpci" ]
      );
@@ -87,6 +86,8 @@ my %oss2alsa =
     (
      "ad1816"  => [ "snd-ad1816a" ],
      "ad1848"  => [ "snd-ad1848" ],
+     "ad1889"  => [ "unknown" ],
+     "ali5455" => [ "snd-intel8x0" ],
      "audigy"  => [ "snd-emu10k1" ],
      "awe_wave" => [ "snd-sbawe" ],
      "btaudio" => [ "unknown" ],
@@ -98,8 +99,10 @@ my %oss2alsa =
      "es1370"  => [ "snd-ens1370" ],
      "es1371"  => [ "snd-ens1371" ],
      "esssolo1" => [ "snd-es1938" ],
+     "forte"   => [ "snd-fm801" ],
      "gus"     => ["snd-interwave", "snd-gusclassic", "snd-gusmax", "snd-gusextreme"],
      "i810_audio" => [ "snd-intel8x0" ],
+     "ice1712" => [ "snd-ice1712" ],
      "mad16"   => [ "snd-opti93x" ],
      "maestro" => [ "snd-es1968" ],
      "maestro3" => [ "snd-maestro3" ],
@@ -118,7 +121,7 @@ my %oss2alsa =
      "sonicvibes" => [ "snd-sonicvibes" ],
      "sscape"  => [ "snd-sb16" ],
      "trident" => [ "snd-trident" ],
-     "via82cxxx_audio" => [ "snd-via686" ],
+     "via82cxxx_audio" => [ "snd-via82xx" ],
      "wavefront" => [ "snd-wavefront" ],
      "ymfpci"  => [ "snd-ymfpci" ]
      );
@@ -212,10 +215,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
                         $device->{description}));
     } else {
         $in->ask_warn(N("Unkown driver"), 
-                      N("The \"%s\" driver for your sound card is unlisted\n
-Please send the output of the \"lspcidrake -v\" command to
-<install at mandrakesoft dot com>
-with subject: unlisted sound driver \"%s\""),
+                      N("The \"%s\" driver for your sound card is unlisted"),
                       $driver, $driver);
     }
 }
