@@ -282,31 +282,31 @@ sub build_notebook {
     if ($intf->{WIRELESS_MODE}) {
 	gtkpack($gui->{sheet}{Wireless} = Gtk2::HBox->new(0,0),
 		gtkpack_(Gtk2::VBox->new(0,0),
-			 map {(0, gtkpack_(Gtk2::VBox->new(0,0),
-					   1, Gtk2::Label->new($_->[0]),
-					   0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
-					  ));
-			  } ([ N("Operating Mode"), "WIRELESS_MODE" ],
-			     [ N("Netwok name (ESSID)"), "WIRELESS_ESSID" ],
-			     [ N("Network ID"), "WIRELESS_NWID" ],
-			     [ N("Operating frequency"), "WIRELESS_FREQ" ],
-			     [ N("Sensitivity threshold"), "WIRELESS_SENS" ],
-			     [ N("Bitrate (in b/s)"), "WIRELESS_RATE" ]
-			    ),
+			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
+					    1, Gtk2::Label->new($_->[0]),
+					    0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+					   ));
+			   } ([ N("Operating Mode"), "WIRELESS_MODE" ],
+			      [ N("Netwok name (ESSID)"), "WIRELESS_ESSID" ],
+			      [ N("Network ID"), "WIRELESS_NWID" ],
+			      [ N("Operating frequency"), "WIRELESS_FREQ" ],
+			      [ N("Sensitivity threshold"), "WIRELESS_SENS" ],
+			      [ N("Bitrate (in b/s)"), "WIRELESS_RATE" ]
+			     ),
 			),
 		Gtk2::VSeparator->new,
 		gtkpack_(Gtk2::VBox->new(0,0),
-			 map {(0, gtkpack_(Gtk2::VBox->new(0,0),
-					   1, Gtk2::Label->new($_->[0]),
-					   0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
-					  ));
-			  } ([ N("Encryption key"), 'WIRELESS_ENC_KEY' ],
-			     [ N("RTS/CTS"), 'WIRELESS_RTS' ],
-			     [ N("Fragmentation"), 'WIRELESS_FRAG' ],
-			     [ N("Iwconfig command extra arguments"),  'WIRELESS_IWCONFIG' ],
-			     [ N("Iwspy command extra arguments"), 'WIRELESS_IWSPY' ],
-			     [ N("Iwpriv command extra arguments"), 'WIRELESS_IWPRIV' ],
-			    ),
+			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
+					    1, Gtk2::Label->new($_->[0]),
+					    0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+					   ));
+			   } ([ N("Encryption key"), 'WIRELESS_ENC_KEY' ],
+			      [ N("RTS/CTS"), 'WIRELESS_RTS' ],
+			      [ N("Fragmentation"), 'WIRELESS_FRAG' ],
+			      [ N("Iwconfig command extra arguments"),  'WIRELESS_IWCONFIG' ],
+			      [ N("Iwspy command extra arguments"), 'WIRELESS_IWSPY' ],
+			      [ N("Iwpriv command extra arguments"), 'WIRELESS_IWPRIV' ],
+			     ),
 			),
 	       );
 	$gui->{intf}{$_}->set_text($intf->{$_}) foreach keys %{$gui->{intf}};
@@ -315,18 +315,25 @@ sub build_notebook {
     #- options box
     gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),
 	    gtkpack__(Gtk2::VBox->new(0,0),
-                   $gui->{intf_bool}{ONBOOT} = Gtk2::CheckButton->new(N("Start at boot")),
-                   $gui->{intf_bool}{HWADDR} = Gtk2::CheckButton->new(N("Track network card id (useful for laptops)")),
-                   $gui->{intf_bool}{MII_NOT_SUPPORTED} = Gtk2::CheckButton->new(N("Network Hotplugging")),	    
-                  ));
+		      $gui->{intf_bool}{ONBOOT} = Gtk2::CheckButton->new(N("Start at boot")),
+		      $gui->{intf_bool}{HWADDR} = Gtk2::CheckButton->new(N("Track network card id (useful for laptops)")),
+		      $gui->{intf_bool}{MII_NOT_SUPPORTED} = Gtk2::CheckButton->new(N("Network Hotplugging")),	    
+		     ));
     $gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
-        
+    
     #- informations box
+    my $module = c::getNetDriver($interface) || modules::get_alias($interface);
+    my $info = find { $_->{driver} eq $module } detect_devices::probeall();
     gtkpack($gui->{sheet}{Informations} = Gtk2::VBox->new(0,0),
 	    gtktext_insert(Gtk2::TextView->new, 
 			   join('',
-				map { "$_\n" } (N("Module name : %s", c::getNetDriver($interface) || modules::get_alias($interface)), 
+				map { "$_\n" } (N("Vendor : %s", split('\|', $info->{description})),
+						N("Descripton : %s", reverse split('\|', $info->{description})),
+						N("Media class : %s", $info->{media_type}),
+						N("Module name : %s", $module), 
 						N("Mac Address : %s", c::get_hw_address($interface)),
+						N("Bus : %s", $info->{bus}),
+						N("Location on the bus : %s", $info->{pci_bus}),
 					       ))
 			  ),
 	   );
