@@ -8,14 +8,10 @@ License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.3-12mdk
 Conflicts: drakconf < 0.96-10mdk 
-BuildRequires:        gcc
-BuildRequires:        gettext
-BuildRequires:        gtk+-devel
-BuildRequires:        ldetect-devel
-BuildRequires:        ncurses-devel
-BuildRequires:        newt-devel
-BuildRequires:        perl-devel
+BuildRequires: gettext, gtk+-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel
 BuildRoot: %_tmppath/%name-buildroot
+Provides: draksec
+Obsoletes: draksec
 
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
@@ -85,6 +81,8 @@ drakgw: internet connection sharing
 
 drakproxy: proxies configuration
 
+draksec: security options managment / msec frontend
+
 draksound: sound card configuration
 
 draksplash: bootsplash themes creation
@@ -129,6 +127,7 @@ See package %name
 This add the capability to be runned behind a web server to the drakx tools.
 See package %name
 
+
 %description -n harddrake
 The harddrake service is a hardware probing tool run at system boot
 time to determine what hardware has been added or removed from the
@@ -169,7 +168,7 @@ dirs1="usr/lib/libDrakX usr/share/libDrakX"
 (cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n")|egrep -v 'bin/.*harddrake' > %{name}.list
 (cd $RPM_BUILD_ROOT ; find $dirs1 -type d -printf "%%%%dir /%%p\n") >> %{name}.list
 
-perl -ni -e '/gtk|icons|pixmaps|XFdrake|bootlook|drakbackup|drakfont|logdrake|net_monitor/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
+perl -ni -e '/XFdrake|bootlook|drakbackup|drakfont|gtk|icons|logdrake|net_monitor|pixmaps/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 
 #mdk menu entry
@@ -289,7 +288,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Sun Sep  8 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-43mdk
+* Mon Sep  9 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-43mdk
+- move back draksec to drakxtools
 - harddrake:
   o don't pollute sbin namespace with one shot scripts
   o add run wrapper script for harddrake service
