@@ -63,7 +63,7 @@ static enum return_type try_with_device(char *dev_name)
         /* uglyness to allow auto starting with devfs */
         if (!IS_AUTOMATIC || streq((choice = get_auto_value("partition")), "")) {
                 if (parts[0] == NULL) {
-                        stg1_error_message("No partitions found.");
+                        stg1_error_message("No partition found.");
                         return RETURN_ERROR;
                 }
 
