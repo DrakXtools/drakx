@@ -1623,7 +1623,7 @@ webmin
 wu-ftpd
 ypbind
 ); # nfs-utils-clients portmap
-  # /usr/bin/kdm, X server, xdm
+   # X server
 
   my @new = qw(
 apache-mod_perl
