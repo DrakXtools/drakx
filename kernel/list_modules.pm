@@ -31,7 +31,7 @@ our %l = (
 
 	qw(iph5526), #- fibre channel
       ),
-      qw(3c59x 8139too sundance), #rtl8139
+      qw(3c59x 8139too 8139cp sundance), #rtl8139
     ],
     gigabit => [
       qw(dl2k myri_sbus yellowfin ns83820 r8169 tg3 e1000 sk98lin),
