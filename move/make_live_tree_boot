@@ -1,6 +1,8 @@
 #!/usr/bin/perl
 
-use MDK::Common;
+use lib qw(../perl-install);
+use common;
+use lang;
 
 my $prefix = '/tmp/live_tree';
 my @ALLOWED_LANGS = split(' ', first(cat_('move.pm') =~ /ALLOWED_LANGS = qw\((.*)\)/));
@@ -127,9 +129,15 @@ if (!@ARGV) {
     create_light_tree('boot', \@boot_list);    
     create_light_tree('totem', \@totem_list);    
     foreach my $lang (@ALLOWED_LANGS) {
+	my $full_lang = lang::l2locale($lang);
+	my ($short_lang) = $full_lang =~ /(..)/;
 	my @list = map { 
 	    my $s = $_;
-	    $s =~ s/__LANG__/$lang/;
+	    $s =~ s/__LANG__/$full_lang/;
+	    if (! -e $s) {
+		$s = $_;
+		$s =~ s/__LANG__/$short_lang/;
+	    }
 	    if (readlink($s) =~ m!^[^/]!) {
 		system('cp', $s, "$s-");
 		rename "$s-", $s;
