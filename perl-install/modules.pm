@@ -172,8 +172,13 @@ sub add_probeall {
 
 sub remove_alias($) {
     my ($name) = @_;
+    remove_alias_regexp("^$name\$");
+}
+
+sub remove_alias_regexp($) {
+    my ($name) = @_;
     foreach (keys %conf) {
-	$conf{$_}{alias} && $conf{$_}{alias} eq $name or next;
+	$conf{$_}{alias} && $_ =~ qr/$name/ or next;
 	delete $conf{$_}{alias};
 	return 1;
     }
