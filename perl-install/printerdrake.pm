@@ -228,7 +228,7 @@ Do you really want to get your printers auto-detected?"),
     my $menuentries = {};
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
-	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
+	my $w = $in->wait_message(_("Printer auto-detection"), _("Detecting devices..."));
 	# When HPOJ is running, it blocks the printer ports on which it is
 	# configured, so we stop it here. If it is not installed or not 
 	# configured, this command has no effect.
@@ -244,6 +244,8 @@ Do you really want to get your printers auto-detected?"),
 		    $menustr .= _(" on parallel port \#%s", $1);
 		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
 		    $menustr .= _(", USB printer \#%s", $1);
+		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
+		    $menustr .= _(", network printer \"%s\", port %s", $1, $2);
 		}
 		if ($::expert) {
 		    $menustr .= " ($p->{port})";
@@ -256,6 +258,8 @@ Do you really want to get your printers auto-detected?"),
 		    $menustr = _("Printer on parallel port \#%s", $1);
 		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
 		    $menustr = _("USB printer \#%s", $1);
+		} elsif ($p->{port} =~ m!^socket://([^:]+):(\d+)$!) {
+		    $menustr .= _("Network printer \"%s\", port %s", $1, $2);
 		}
 		if ($::expert) {
 		    $menustr .= " ($p->{port})";
