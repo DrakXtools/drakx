@@ -487,7 +487,13 @@ sub create_okcancel {
     my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $::isWizard ? N("<- Previous") : N("Cancel");
     my $ok = defined $o_ok ? $o_ok : $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
     my $bok = $ok && gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
-    my $bprev = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
+    my $bprev;
+    if ($cancel) {
+        $bprev = gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || 
+                                   sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
+    } elsif($::Wizard_no_previous) { # prevent one button to be centered (eg: "finish" in wizards)
+        $bprev = Gtk2::Label->new;
+    }
     $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
     if (!defined $wm_is_kde) {
         require any;
@@ -496,14 +502,15 @@ sub create_okcancel {
     my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
     my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
     # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
-    my @extras = (@l2, @r2, if_($::isWizard || $ok && $cancel, Gtk2::Label->new));
+    # but in the installer where all windows run in wizard mode because of design even when not in a wizard step
+    my @extras = (@l2, @r2, if_(!$::isInstall && ($::isWizard || $ok && $cancel), Gtk2::Label->new));
     my @l; # buttons list
     if ($::isWizard) {
         # wizard mode: order is cancel/extras/white/prev/next
-        push @l, if_(!$::isInstall, $w->{wizcancel}), @extras, if_(!$::Wizard_no_previous, $bprev), $bok;
+        push @l, if_(!$::isInstall, $w->{wizcancel}), @extras, $bprev, if_($::isInstall, Gtk2::Label->new), $bok;
     } else { 
         # normal mode: cancel/ok button follow current desktop's HIG
-    my @extras = (@l2, @r2, if_($ok && $cancel, Gtk2::Label->new)); # space buttons but if there's only one
+        my @extras = (@l2, @r2, if_($ok && $cancel, Gtk2::Label->new)); # space buttons but if there's only one
         push @l, $wm_is_kde ? ($bok, @extras, $bprev) : ($bprev, @extras, $bok);
     }
 
