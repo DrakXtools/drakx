@@ -14,5 +14,7 @@ clean:
 
 stuff.xs: %: %.pm
 	rm -f $@
-	C_RPM=$(C_RPM) C_DRAKX=$(C_DRAKX) perl $< > $@
+	export C_RPM=$(C_RPM)
+	export C_DRAKX=$(C_DRAKX)
+	perl $< > $@
 	chmod a-w $@
