@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 10mdk
+Release: 11mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -291,7 +291,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-
+* Fri Feb 28 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-11mdk
 - drakconnect is no more supporting profiles. (francois)
 - drakconnect support for sagem Fast 800 used by free.fr (francois)
 - drakconnect support for ltmodem. (francois)
