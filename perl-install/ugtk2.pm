@@ -970,7 +970,7 @@ sub main {
     my ($o, $o_completed, $o_canceled) = @_;
     gtkset_mousecursor_normal();
     my $timeout = Glib::Timeout->add(1000, sub { gtkset_mousecursor_normal(); 1 });
-    my $_b = MDK::Common::Func::before_leaving { Glib::Source->remove($timeout) };
+    my $_b = MDK::Common::Func::before_leaving { $o->destroy; Glib::Source->remove($timeout) };
     $o->show;
 
     do {
