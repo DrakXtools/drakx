@@ -24,6 +24,7 @@
 #include <sys/mount.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <libgen.h>
 #include "stage1.h"
 #include "frontend.h"
 #include "log.h"
