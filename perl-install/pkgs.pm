@@ -1454,7 +1454,10 @@ sub install($$$;$$) {
 								   [ hashtree2list($$, \%ppids) ]) ]);
 	
 		if (@killpid) {
-		    log::l("ERROR: DrakX should not have to clean the packages shit. Killing ". join(", ", @killpid));
+		    foreach (@killpid) {
+			my $s = "$_: " . join(' ', split("\0", cat_("/proc/$_/cmdline")));
+			log::l("ERROR: DrakX should not have to clean the packages shit. Killing $s");
+		    }
 		    kill 15, @killpid;
 		    sleep 2;
 		    kill 9, @killpid;
