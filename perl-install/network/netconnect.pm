@@ -109,7 +109,7 @@ sub pre_func {
 }
 
 sub main {
-    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $direct_fr) = @_;
+    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $direct_fr, $noauto) = @_;
     MDK::Common::Globals::init(
 		  in => $in,
 		  prefix => $prefix,
@@ -127,8 +127,8 @@ sub main {
 
     my $direct_net_install;
     if ($first_time && $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs")) {
-	(!$::expert or $in->ask_okcancel(_("Network Configuration"),
-					 _("Because you are doing a network installation, your network is already configured.
+	(!($::expert || $noauto) or $in->ask_okcancel(_("Network Configuration"),
+						      _("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
 "), 1)) and do {
     output "$prefix$connect_file",

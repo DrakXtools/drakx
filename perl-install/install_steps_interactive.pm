@@ -741,10 +741,10 @@ sub updateModulesFromFloppy {
 
 #------------------------------------------------------------------------------
 sub configureNetwork {
-    my ($o, $first_time) = @_;
+    my ($o, $first_time, $noauto) = @_;
     require network::netconnect;
     network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf},
-		     sub { $o->pkg_install(@_) }, $first_time, $o->{lang} eq "fr_FR" && $o->{keyboard} eq "fr");
+			      $first_time, $o->{lang} eq "fr_FR" && $o->{keyboard} eq "fr", $noauto);
 }
 
 #-configureNetworkIntf moved to network

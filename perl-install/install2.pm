@@ -256,7 +256,7 @@ sub configureNetwork {
     #- get current configuration of network device.
     require network;
     eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
-    installStepsCall($o, $auto, 'configureNetwork', $ent_number == 1);
+    installStepsCall($o, $auto, 'configureNetwork', $ent_number == 1, $clicked);
 }
 #------------------------------------------------------------------------------
 sub installCrypto {
@@ -564,6 +564,7 @@ sub main {
 	    /^theme_changed$/ and redo MAIN;
 	    unless (/^already displayed/) {
 		eval { $o->errorInStep($_) };
+		$o->{steps}{$o->{step}}{auto} = 0;
 		$err = $@;
 		$err and next;
 	    }

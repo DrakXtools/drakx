@@ -567,7 +567,7 @@ sub selectMouse($) {
 sub configureNetwork {
     my ($o) = @_;
     require network;
-    network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf}, sub { $o->pkg_install(@_) });
+    network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
 }
 
 #------------------------------------------------------------------------------
