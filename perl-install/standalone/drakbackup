@@ -619,7 +619,7 @@ sub do_expect {
 			$in->ask_warn(N("Information"), N("This may take a moment to generate the keys."));
 			gtkset_mousecursor_wait();
 			#- not using a passphrase for the moment
-			system("ssh-keygen", "-P", "''", "-t", "dsa", "-f", $backup_key);
+			system("ssh-keygen", "-P", "", "-t", "dsa", "-f", $backup_key);
 			gtkset_mousecursor_normal();
 		}
 		
