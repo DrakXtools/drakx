@@ -53,9 +53,7 @@ sub fold_left(&@) {
 
 sub _ {
     my $s = shift @_; my $t = translate($s);
-    $t && ref $t or return sprintf $t, @_;
-    my ($T, @p) = @$t;
-    sprintf $T, @_[@p];
+    sprintf $t, @_;
 }
 #-delete $main::{'_'};
 sub __ { $_[0] }
@@ -368,20 +366,7 @@ sub list_skels {
 
 sub translate {
     my ($s) = @_;
-    if (ref($s) eq 'ARRAY') {
-	$s = $s->[0] == 1 ? "singular\0$s->[1]" : "plural\0$s->[2]";
-    }
-    my ($lang) = $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || $ENV{LANG} || 'en';
-
-    require lang;
-    foreach (split ':', $lang) {
-	lang::load_po($_) unless defined $po::I18N::{$_};
-	if (%{$po::I18N::{$_}}) {
-	    return if $s eq '_I18N_';
-	    return ${$po::I18N::{$_}}{$s} || $s 
-	}
-    }
-    $s;
+    c::dgettext('libDrakX', $s);
 }
 
 sub untranslate($@) {

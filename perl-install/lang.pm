@@ -318,7 +318,6 @@ sub set {
 	$ENV{LC_TIME}			= "C";
 	$ENV{LC_COLLATE}		= "C";
 	$ENV{LC_MONETARY}		= "C";
-	$ENV{LC_MESSAGES}		= "C";
 	$ENV{LC_PAPER}			= "C";
 	$ENV{LC_NAME}			= "C";
 	$ENV{LC_ADDRESS}		= "C";
@@ -327,9 +326,11 @@ sub set {
 	$ENV{LC_IDENTIFICATION}	= "C";
 
 	$ENV{LC_CTYPE}  = $lang;
+	$ENV{LC_MESSAGES} = $languages{$lang}[2];
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
 
+	load_mo($ENV{LANG});
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
@@ -411,60 +412,31 @@ sub write {
     setVarsInSh("$prefix/etc/sysconfig/i18n", $h);
 }
 
-sub load_po {
+sub load_mo {
     my ($lang) = @_;
-    my ($s, $from, $to, $state, $fuzzy);
+    my ($localedir, $suffix) = ('/usr/share/locale', 'LC_MESSAGES/libDrakX.mo');
+    $localedir .= "_special" if $::isInstall;
 
-    $s .= "package po::I18N;\n";
-    $s .= "no strict;\n";
-    $s .= "\%{'$lang'} = (";
+    $lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
 
-    my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
+    c::bindtextdomain('libDrakX', $localedir);
 
-    my $F;
-    unless ($f && -e $f) {
-	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
-	if (-e $f) {
-	    open $F, "$ENV{LD_LOADER} bzip2 -dc $f 2>/dev/null |";
-	} elsif ($::isInstall) {
-	    require install_any;
-	    $F = install_any::getFile("Mandrake/mdkinst/usr/bin/perl-install/po/$lang.po");
+    foreach (split ':', $lang) {
+	my $f = "$localedir/$_/$suffix";
+	-s $f and return $_;
+
+	if ($::isInstall) {
+	    # cleanup
+	    eval { commands::rm("-r", $localedir) };
+	    eval { commands::mkdir_("-p", dirname("$localedir/$_/$suffix")) };
+	    install_any::getAndSaveFile ("$localedir/$_/$suffix");
+
+	    -s $f and return $_;
 	}
-    } else {
-	open $F, $f; #- not returning here help avoiding reading the same multiple times.
     }
-    local $_;
-    while (<$F>) {
-	/^msgstr/ and $state = 'msgstr';
-	/^msgid/  && !$fuzzy and $state = 'msgid';
-	s/@/\\@/g;
-
-	if (/^(#|$)/ && $state ne 'between') {
-	    $state = 'between';
-	    $to = c::iconv($to, $lang::charset, c::standard_charset());
-	    if (my @l = $to =~ /%(\d+)\$/g) {
-		$to =~ s/%(\d+)\$/%/g;
-		$to = qq([ "$to", ) . join(",", map { $_ - 1 } @l) . " ],";
-	    } else {
-		$to = qq("$to");
-	    }
-	    if ($from) {
-		$s .= qq("$from" => $to,\n);
-	    } elsif ($to =~ /charset=([\w-]+)/) {
-		$lang::charset = $1;
-	    }
-	    $from = $to = '';
-	}
-	$to .= (/"(.*)"/)[0] if $state eq 'msgstr';
-	$from .= (/"(.*)"/)[0] if $state eq 'msgid';
-
-	$fuzzy = /^#, fuzzy/;
-    }
-    $s .= ");";
-    no strict "vars";
-    eval $s;
-    !$@;
+    '';
 }
+
 
 
 sub console_font_files {

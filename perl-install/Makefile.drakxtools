@@ -1,15 +1,17 @@
 include Makefile.config
 
 DIRS = ddcprobe serial_probe share/po Newt c resize_fat
+NAME = libDrakX
 PREFIX = 
-SBINDEST = $(PREFIX)/usr/sbin
-ETCDEST = $(PREFIX)/etc/gtk
+LIBDIR = $(PREFIX)/usr/lib
 DATADIR = $(PREFIX)/usr/share
 BINDEST = $(PREFIX)/usr/bin
-LIBDEST = $(PREFIX)/usr/lib/libDrakX
+SBINDEST = $(PREFIX)/usr/sbin
+ETCDEST = $(PREFIX)/etc/gtk
 BINX11DEST = $(PREFIX)/usr/X11R6/bin
 LIBX11DEST = $(PREFIX)/usr/X11R6/lib/X11
-PIXDIR = $(PREFIX)/usr/share/libDrakX/pixmaps
+LIBDEST = $(LIBDIR)/$(NAME)
+PIXDIR = $(DATADIR)/$(NAME)/pixmaps
 .PHONY: $(DIRS)
 
 all: $(DIRS)
@@ -21,7 +23,7 @@ $(DIRS):
 	$(MAKE) -C $@
 
 install:
-	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
+	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(DIRS:%=$(LIBDEST)/%)
 	install -d $(LIBDEST)/sbus_probing
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
@@ -31,13 +33,12 @@ install:
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(ETCDEST)
 	install -m 644 share/wizard.rc $(ETCDEST)
-	install -m 644 share/po/*.po $(LIBDEST)/po
 	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
 	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
 	install -m 644 $(patsubst %,sbus_probing/%.pm,main) $(LIBDEST)/sbus_probing
 	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
 	find $(LIBDEST) -name "*.pm" | xargs perl -pi -e '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/'
 
+	$(MAKE) -C share/po install DATADIR=$(DATADIR) NAME=$(NAME)
+
 	cp -rf auto icons $(LIBDEST)
-	bzip2 -9 $(LIBDEST)/po/*.po
-	find $(LIBDEST) -name "*.so" | xargs strip

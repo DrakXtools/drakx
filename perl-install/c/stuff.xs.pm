@@ -35,6 +35,7 @@ print '
 #include <X11/Xlib.h>
 #include <X11/extensions/xf86misc.h>
 
+#include <libintl.h>
 #include <term.h>
 #undef max_colors
 
@@ -149,6 +150,22 @@ setMouseLive(display, type, emulate3buttons)
 ';
 
 print '
+
+void
+setlocale()
+   CODE:
+   setlocale(LC_ALL, "");
+
+char *
+bindtextdomain(domainname, dirname)
+   char * domainname
+   char * dirname
+
+char *
+dgettext(domainname, msgid)
+   char * domainname
+   char * msgid
+
 int
 KTYP(x)
   int x
