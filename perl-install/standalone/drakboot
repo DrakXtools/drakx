@@ -12,6 +12,7 @@ use fsedit;
 use fs;
 use c;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /-embedded (\S*) (\S*)/;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakboot [--expert]\n";
@@ -20,25 +21,27 @@ $::expert = /-expert/;
 
 my $in = interactive->vnew('su');
 
-my %l = (
-	 arch() !~ /sparc|alpha/ ? (
-	 _("Configure LILO/GRUB") => '',
-	 _("Create a boot floppy") => ['/usr/X11R6/bin/drakfloppy'],
-				   ) : (),
-	 _("Format floppy") => [ '/usr/bin/kfloppy', '/usr/bin/gfloppy' ],
-);
+if (!$::isEmbedded) {
+    my %l = (
+	     arch() !~ /sparc|alpha/ ? (
+					_("Configure LILO/GRUB") => '',
+					_("Create a boot floppy") => ['/usr/X11R6/bin/drakfloppy'],
+				       ) : (),
+	     _("Format floppy") => [ '/usr/bin/kfloppy', '/usr/bin/gfloppy' ],
+	    );
 
-while (my ($k, $v) = each %l) {
-    $v or next;
-    foreach (@$v) {
-	-x $_ and $l{$k} = $_, last;
+    while (my ($k, $v) = each %l) {
+	$v or next;
+	foreach (@$v) {
+	    -x $_ and $l{$k} = $_, last;
+	}
+	-x $l{$k} or delete $l{$k};
     }
-    -x $l{$k} or delete $l{$k};
-}
 
-if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {
-    my $cmd = $l{$in->ask_from_list(_("Choice"), _("What do you want to do?"), [ keys %l ])};
-    exec $cmd if $cmd;
+    if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {
+	my $cmd = $l{$in->ask_from_list(_("Choice"), _("What do you want to do?"), [ keys %l ])};
+	exec $cmd if $cmd;
+    }
 }
 
 my $bootloader = bootloader::read('', '/etc/lilo.conf');
