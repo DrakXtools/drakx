@@ -351,7 +351,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o misc cleanups (blino)
   o setup slmodem (blino)
   o workaround buggy eth1394 that returns a bogus driver name for the
-    GDRVINFO command of the ETHTOOL ioctl returns (so that we gset a
+    GDRVINFO command of the ETHTOOL ioctl returns (so that we set a
     sensible name for firewire network adapters in GUIes)
 
 * Tue Sep 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-6mdk
