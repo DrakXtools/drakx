@@ -172,13 +172,13 @@ sub switch {
     my $driver = $device->{current_driver} || $device->{driver};
 
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
-    my $alternative = get_alternative($driver);
-    unless ($driver eq $device->{driver} or member($device->{driver}, @$alternative)) {
-	push @$alternative, @{get_alternative($device->{driver})}, $device->{driver}
+    my @alternative = @{get_alternative($driver)};
+    unless ($driver eq $device->{driver} or member($device->{driver}, @alternative)) {
+	push @alternative, @{get_alternative($device->{driver})}, $device->{driver}
     }
-    if ($alternative) {
+    if (@alternative) {
         my $new_driver = $driver;
-        push @$alternative, $driver;
+        push @alternative, $driver;
         my %des = modules::category2modules_and_description('multimedia/sound');
 
         if ($new_driver eq 'unknown') {
@@ -209,8 +209,8 @@ To use alsa, one can either use:
 				},
                                [
                                 { 
-                                    label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1,
-                                    help => join("\n\n", map { qq("$_": ) . $des{$_} } @$alternative),
+                                    label => N("Driver:"), val => \$new_driver, list => \@alternative, default => $new_driver, sort =>1,
+                                    help => join("\n\n", map { qq("$_": ) . $des{$_} } @alternative),
                                     allow_empty_list => 1,
                                 },
                                 {
