@@ -213,7 +213,7 @@ sub manage {
     while (my ($device, $interface) = each %$intf) {
         exists $name{$device} and next;
         my $type = network::tools::get_interface_type($interface);
-        $p->{$type || $device} = {
+        $p->{"$type ($device)"} = {
                                   name => $device,
                                   intf => $interface
                                  };
