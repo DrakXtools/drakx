@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uk\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-02-06 02:57+0200\n"
+"PO-Revision-Date: 2004-05-01 18:35+0300\n"
 "Last-Translator: Taras Boychuk <btr1@ukrpost.net>\n"
 "Language-Team: ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -5890,19 +5890,19 @@ msgid "NFS"
 msgstr "NFS"
 
 #: install_any.pm:1532
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose a media"
-msgstr "Будь ласка, виберіть"
+msgstr "Будь ласка, виберіть носій"
 
 #: install_any.pm:1564
-#, fuzzy, c-format
+#, c-format
 msgid "Bad media %s"
-msgstr "додано носія %s"
+msgstr "Поганий носій %s"
 
 #: install_any.pm:1576
-#, fuzzy, c-format
+#, c-format
 msgid "File already exists. Overwrite it?"
-msgstr "Файл вже існує.  Переписати?"
+msgstr "Файл вже існує. Переписати?"
 
 #: install_any.pm:1627
 #, c-format
@@ -6630,9 +6630,9 @@ msgid "Show automatically selected packages"
 msgstr "Показувати автоматично вибрані пакунки"
 
 #: install_steps_gtk.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Load/Save selection"
-msgstr "Переміщення виділеного"
+msgstr "Завантажити/зберегти виділене"
 
 #: install_steps_gtk.pm:391
 #, c-format
@@ -6940,13 +6940,13 @@ msgstr ""
 "чи поновлення (%d > %d )"
 
 #: install_steps_interactive.pm:495
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
-"Будь ласка, виберіть, завантажити чи записати вибір пакунків на дискету.\n"
-"Формат дискети такий самий, як дискети auto_install."
+"Будь ласка, виберіть, завантажити чи записати вибір пакунків.\n"
+"Формат такий самий, як файлів auto_install."
 
 #: install_steps_interactive.pm:497
 #, c-format
@@ -6960,9 +6960,9 @@ msgid "Save"
 msgstr "Зберегти"
 
 #: install_steps_interactive.pm:505
-#, fuzzy, c-format
+#, c-format
 msgid "Bad file"
-msgstr "Завантажити файл"
+msgstr "Поганий файл"
 
 #: install_steps_interactive.pm:581
 #, c-format
@@ -11521,7 +11521,7 @@ msgstr "Перенаправити роботу по каналу в коман�
 #: printer/main.pm:45
 #, c-format
 msgid "recommended"
-msgstr "рекомендовано"
+msgstr ""
 
 #: printer/main.pm:324 printer/main.pm:629 printer/main.pm:1664
 #: printer/main.pm:2699 printer/main.pm:2708 printer/printerdrake.pm:903
@@ -11551,24 +11551,24 @@ msgid ", USB printer"
 msgstr ", друкарка USB"
 
 #: printer/main.pm:364
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on a parallel port"
-msgstr "Друкарка на паралельному порті #%s"
+msgstr ", друкарка HP або паралельний порт"
 
 #: printer/main.pm:366
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on USB"
-msgstr ", друкарка USB"
+msgstr ", друкарка HP на USB"
 
 #: printer/main.pm:368
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on HP JetDirect"
-msgstr ", багатофункціональний пристрій на HP JetDirect"
+msgstr ", друкарка HPна HP JetDirect"
 
 #: printer/main.pm:370
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer"
-msgstr ", друкарка USB"
+msgstr ", друкарка HP"
 
 #: printer/main.pm:376
 #, c-format
@@ -11642,24 +11642,24 @@ msgid "USB printer"
 msgstr "Друкарка USB"
 
 #: printer/main.pm:432
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on a parallel port"
-msgstr "Друкарка на паралельному порті #%s"
+msgstr "Друкарка HP на паралельному порті"
 
 #: printer/main.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on USB"
-msgstr "Друкарок не знайдено!"
+msgstr "друкарка HP на USB"
 
 #: printer/main.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on HP JetDirect"
-msgstr ", багатофункціональний пристрій на HP JetDirect"
+msgstr "друкарка HP на HP JetDirect"
 
 #: printer/main.pm:438
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer"
-msgstr "Друкарка"
+msgstr "друкарка HP"
 
 #: printer/main.pm:444
 #, c-format
@@ -12159,12 +12159,12 @@ msgstr ""
 #: printer/printerdrake.pm:623
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
+msgstr "Встановити тривалість автовизначення мережевих друкарок"
 
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr ""
+msgstr "Введіть тривалість автовизнанчення мережевих друкарок тут (в мс)."
 
 #: printer/printerdrake.pm:631
 #, c-format
@@ -12173,11 +12173,14 @@ msgid ""
 "network printers will be, but the scan can take longer then, especially if "
 "there are many machines with local firewalls in the network. "
 msgstr ""
+"Чим більшу тривалість Ви встановите, тим надійнішим буде виявлення мережевих "
+"друкарок, але сканування буде довше тривати, особливо при великій кількості "
+"машин в мережі."
 
 #: printer/printerdrake.pm:635
-#, fuzzy, c-format
+#, c-format
 msgid "The timeout must be a positive integer number!"
-msgstr "Зміщення мусить бути беззнаковим цілим!"
+msgstr "Тривалість має бути додатнім цілим числом!"
 
 #: printer/printerdrake.pm:673
 #, c-format
@@ -13122,6 +13125,10 @@ msgid ""
 "inkjets, scanning on multi-function devices, and memory card access on "
 "printers with card readers. "
 msgstr ""
+"Для багатьох друкарок HP доступні спеціальні функції, такі як контроль "
+"чорнил, очищення сопел, вирівнювання головок, сканування на "
+"багатофункціональних пристроях, доступ до карт пам'яті з допомогою "
+"спеціальних пристроїв."
 
 #: printer/printerdrake.pm:2106
 #, c-format
@@ -13129,6 +13136,8 @@ msgid ""
 "To access these extra functions on your HP printer, it must be set up with "
 "the appropriate software: "
 msgstr ""
+"Щоб мати доступ до цих додаткових функцій на друкарці HP, його потрібно "
+"встановити з допомогою відповідних програм: "
 
 #: printer/printerdrake.pm:2107
 #, c-format
@@ -13137,6 +13146,8 @@ msgid ""
 "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
 "newer PhotoSmart models "
 msgstr ""
+"Або з допомогою новішого HPLIP, який дає можливість обслуговувати друкарку з "
+"допомогою графічної оболонки \"Інструментарій\", "
 
 #: printer/printerdrake.pm:2108
 #, c-format
@@ -13144,25 +13155,27 @@ msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
 msgstr ""
+"або з допомогою старішого HPOJ, який дає підтримку тільки сканера і карт "
+"пам'яті, але не зможе допомогти у випадку збою HPLIP. "
 
 #: printer/printerdrake.pm:2110
 #, c-format
 msgid "What is your choice (choose \"None\" for non-HP printers)? "
-msgstr ""
+msgstr "Який Ваш вибір (виберіть \"Нічого\" для друкарок не HP)?"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2112
 #: printer/printerdrake.pm:2138 printer/printerdrake.pm:2144
 #: printer/printerdrake.pm:2170
-#, fuzzy, c-format
+#, c-format
 msgid "HPLIP"
-msgstr "_PLIP"
+msgstr "HPLIP"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2114
 #: printer/printerdrake.pm:2270 printer/printerdrake.pm:2276
 #: printer/printerdrake.pm:2287
 #, c-format
 msgid "HPOJ"
-msgstr ""
+msgstr "HPOJ"
 
 #: printer/printerdrake.pm:2119
 #, c-format
@@ -13186,15 +13199,14 @@ msgid "Only printing will be possible on the %s."
 msgstr "На %s буде можливий лише друк."
 
 #: printer/printerdrake.pm:2160
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove your old HPOJ configuration file %s for your %s! "
-msgstr ""
-"Не вдається створити окремий конфігураційний каталог користувача \"%s\": %s\n"
+msgstr "Не вдається вилучити старий файл конфігурації HPOJ (%s) для %s! "
 
 #: printer/printerdrake.pm:2162
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "Вилучіть файл вручну і перезапустіть HPOJ."
 
 #: printer/printerdrake.pm:2170 printer/printerdrake.pm:2287
 #, c-format
@@ -13202,9 +13214,9 @@ msgid "Checking device and configuring %s..."
 msgstr "Перевіряється пристрій і налаштовується %s..."
 
 #: printer/printerdrake.pm:2189
-#, fuzzy, c-format
+#, c-format
 msgid "Which printer do you want to set up with HPLIP?"
-msgstr "На який сектор Ви хочете його перемістити?"
+msgstr "Яку друкарку Ви хочете встановити з HPLIP?"
 
 #: printer/printerdrake.pm:2218 printer/printerdrake.pm:2331
 #, c-format
@@ -13217,9 +13229,9 @@ msgid "Scanning on the %s will not be possible."
 msgstr "Сканування на %s буде неможливе."
 
 #: printer/printerdrake.pm:2246
-#, fuzzy, c-format
+#, c-format
 msgid "Using and Maintaining your %s"
-msgstr "Публікація та відсилання статті \"%s\""
+msgstr "Використання і робота з %s"
 
 #: printer/printerdrake.pm:2371
 #, c-format
@@ -13243,9 +13255,9 @@ msgstr ""
 "Доступ до карт пам'яті фото на Вашому багатофункціональному пристрої HP"
 
 #: printer/printerdrake.pm:2421
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring device..."
-msgstr "Встановлюється конфігурація..."
+msgstr "Налаштовується пристрій..."
 
 #: printer/printerdrake.pm:2455
 #, c-format
@@ -13872,9 +13884,9 @@ msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Друк/Доступ до фотокарток на \"%s\""
 
 #: printer/printerdrake.pm:3798
-#, fuzzy, c-format
+#, c-format
 msgid "Using/Maintaining the printer \"%s\""
-msgstr "Друк на друкарці \"%s\""
+msgstr "Використання/Обслуговування друкарки \"%s\""
 
 #: printer/printerdrake.pm:3799
 #, c-format
@@ -13893,6 +13905,9 @@ msgid ""
 "features of your printer are supported.\n"
 "\n"
 msgstr ""
+"Ваш %s встановлено з драйверами HPLIP. В такій спосіб підтримуються багато "
+"можливостей друкарки.\n"
+"\n"
 
 #: printer/printerdrake.pm:3830
 #, c-format
@@ -13900,6 +13915,8 @@ msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
 msgstr ""
+"Сканер друкарки може використовується із програмою SANE, напр. Kooka або "
+"XSane (в меню Мультимедія/Графіка). "
 
 #: printer/printerdrake.pm:3831
 #, c-format
@@ -13908,6 +13925,9 @@ msgid ""
 "your scanner on the network.\n"
 "\n"
 msgstr ""
+"Запустіть Scannerdrake (Обладнання/Сканер в Центрі Керування "
+"Мандрейклінакс), щоб зробити сканер доступним в мережі.\n"
+"\n"
 
 #: printer/printerdrake.pm:3835
 #, c-format
@@ -13915,6 +13935,8 @@ msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
 msgstr ""
+"Доступ до пристрою зчитування карт пам'яті може бути здійснений як до "
+"звичайного пристрою USB."
 
 #: printer/printerdrake.pm:3836
 #, c-format
@@ -13923,6 +13945,9 @@ msgid ""
 "your desktop.\n"
 "\n"
 msgstr ""
+"Після вставлення карти на стільниці повинна з'явитися піктограмка твердого "
+"диску.\n"
+"\n"
 
 #: printer/printerdrake.pm:3838
 #, c-format
@@ -13931,6 +13956,9 @@ msgid ""
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
 msgstr ""
+"Доступ до пристрою читання карт пам'яті може бути виконано з інструментарію "
+"HP (меню: Система/Моніторинг/Інструментарій HP) шляхом вибору \"Доступ до "
+"карт фото на закладці \"Функції\". "
 
 #: printer/printerdrake.pm:3839
 #, c-format
@@ -13939,6 +13967,9 @@ msgid ""
 "card reader is usually faster.\n"
 "\n"
 msgstr ""
+"Зауважте, що це дуже повільно, зчитування зображень з камери чи пристрою для "
+"читання USB-карт швидше.\n"
+"\n"
 
 #: printer/printerdrake.pm:3842
 #, c-format
@@ -13947,26 +13978,28 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
+"Інструментарій друкарок HP (меню: Система/Моніторинг/Інструментарій HP) "
+"містить засоби для моніторингу і підтримки для %s:\n"
 
 #: printer/printerdrake.pm:3843
 #, c-format
 msgid " - Ink level/status info\n"
-msgstr ""
+msgstr " - інформація про рівень/стан чорнила\n"
 
 #: printer/printerdrake.pm:3844
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr ""
+msgstr " - очищення сопел від чорнил\n"
 
 #: printer/printerdrake.pm:3845
-#, fuzzy, c-format
+#, c-format
 msgid " - Print head alignment\n"
-msgstr "Горизонтальне вирівнювання"
+msgstr " - Вирівнювання головок\n"
 
 #: printer/printerdrake.pm:3846
-#, fuzzy, c-format
+#, c-format
 msgid " - Color calibration\n"
-msgstr "Налаштування кольору"
+msgstr " - Калібрування по кольору\n"
 
 #: printer/printerdrake.pm:3861
 #, c-format
@@ -25407,9 +25440,9 @@ msgid "Get Online Help"
 msgstr "Отримати довідку Online"
 
 #: standalone/net_applet:177
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive intrusion detection"
-msgstr "Система виявлення вторгнень NetRanger"
+msgstr "Виявлення інтерактивних вторгнень"
 
 #: standalone/net_applet:181
 #, c-format
@@ -25419,82 +25452,82 @@ msgstr "Завжди запускати при завантаженні"
 #: standalone/net_applet:230
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr ""
+msgstr "Атаку на сканування портів було здійснено %s."
 
 #: standalone/net_applet:231
-#, fuzzy, c-format
+#, c-format
 msgid "The %s service has been attacked by %s."
-msgstr "Цю подію було змінено."
+msgstr "Службу %s було атаковано %s."
 
 #: standalone/net_applet:232
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr ""
+msgstr "Спробу атаки на злам пароля було здіснено %s."
 
 #: standalone/net_applet:240
-#, fuzzy, c-format
+#, c-format
 msgid "Active Firewall: intrusion detected"
-msgstr "Знайдено конфігурацію firewall!"
+msgstr "Активний захисний шлюз: виявлено вторгнення"
 
 #: standalone/net_applet:251
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to blacklist the attacker?"
-msgstr "Чи хочете ви завершити гру?"
+msgstr "Чи хочете занести атакувальника в чорний список?"
 
 #: standalone/net_applet:265
 #, c-format
 msgid "Always blacklist (do not ask again)"
-msgstr ""
+msgstr "Завжди заносити в чорний список (не запитувати більше)"
 
 #: standalone/net_applet:268
-#, fuzzy, c-format
+#, c-format
 msgid "Attack details"
-msgstr "Загально"
+msgstr "Деталі атаки"
 
 #: standalone/net_applet:272
-#, fuzzy, c-format
+#, c-format
 msgid "Attack time: %s"
-msgstr "Дія: %s"
+msgstr "Час атаки: %s"
 
 #: standalone/net_applet:273
-#, fuzzy, c-format
+#, c-format
 msgid "Network interface: %s"
-msgstr "Інтерфейси мережі"
+msgstr "Інтерфейс мережі: %s"
 
 #: standalone/net_applet:274
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type: %s"
-msgstr "Тип доступу: %s\n"
+msgstr "Тип атаки: %s"
 
 #: standalone/net_applet:275
-#, fuzzy, c-format
+#, c-format
 msgid "Protocol: %s"
-msgstr "Протоколи"
+msgstr "Протокол: %s"
 
 #: standalone/net_applet:276
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker IP address: %s"
-msgstr "IP-адреса комп'ютера:"
+msgstr "IP-адреса атакованого комп'ютера: %s"
 
 #: standalone/net_applet:277
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker hostname: %s"
-msgstr "Збій при отриманні назви комп'ютера: %s\n"
+msgstr "Назва атакованої машини: %s"
 
 #: standalone/net_applet:278
-#, fuzzy, c-format
+#, c-format
 msgid "Service attacked: %s"
-msgstr "\tНазва сервера: %s\n"
+msgstr "Атакований сервер: %s"
 
 #: standalone/net_applet:279
-#, fuzzy, c-format
+#, c-format
 msgid "Port attacked: %s"
-msgstr "Порт: %s"
+msgstr "Атакований порт: %s"
 
 #: standalone/net_applet:280
 #, c-format
 msgid "Type of ICMP attack: %s"
-msgstr ""
+msgstr "Тип атаки ICMP: %s"
 
 #: standalone/net_monitor:61 standalone/net_monitor:66
 #, c-format
@@ -25860,12 +25893,12 @@ msgstr "Порт: %s"
 #: standalone/scannerdrake:138 standalone/scannerdrake:141
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (НЕ ПІДТРИМУЄТЬСЯ)"
 
 #: standalone/scannerdrake:144
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not supported under Linux."
-msgstr "%s не підтримується цією версією %s."
+msgstr "%s не підтримується Лінаксом."
 
 #: standalone/scannerdrake:171 standalone/scannerdrake:185
 #, c-format
@@ -26008,14 +26041,14 @@ msgid "Searching for scanners..."
 msgstr "Йде пошук сканерів ..."
 
 #: standalone/scannerdrake:383
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up kernel modules..."
-msgstr "Встановлення користувацької інформації..."
+msgstr "Встановлення модулів ядра..."
 
 #: standalone/scannerdrake:390 standalone/scannerdrake:397
-#, fuzzy, c-format
+#, c-format
 msgid "Attention!"
-msgstr "Притягнення"
+msgstr "Увага!"
 
 #: standalone/scannerdrake:391
 #, c-format
@@ -26025,6 +26058,10 @@ msgid ""
 "Manual adjustments are required. Please edit the configuration file /etc/"
 "sane.d/%s.conf. "
 msgstr ""
+"%s наможливо налаштувати повністю автоматично.\n"
+"\n"
+"Потрібно підправити дещо вручну. Будь ласка, внесіть необхідні зміни у файл /"
+"etc/sane.d/%s.conf. "
 
 #: standalone/scannerdrake:392 standalone/scannerdrake:401
 #, c-format
@@ -26032,16 +26069,17 @@ msgid ""
 "More info in the driver's manual page. Run the command \"man sane-%s\" to "
 "read it."
 msgstr ""
+"Детальніше читайте в документації до драйвера. Виконайте команду \"man sane-%"
+"s\", щоб прочитати її."
 
 #: standalone/scannerdrake:394 standalone/scannerdrake:403
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"Ваш %s було налаштовано.\n"
-"Тепер Ви можете сканувати документи з допомогою \"XSane\" або \"Kooka\" з "
-"меню програм Мультимедіа/Графіка."
+"Після цього Ви зможете сканувати документи з допомогою \"XSane\" або \"Kooka"
+"\" з меню програм Мультимедіа/Графіка."
 
 #: standalone/scannerdrake:398
 #, c-format
@@ -26049,6 +26087,8 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
+"%s було налаштовано, але, можливо, потрібно дещо підправити вручну, щоб все "
+"працювало. "
 
 #: standalone/scannerdrake:399
 #, c-format
@@ -26056,11 +26096,13 @@ msgid ""
 "If it does not appear in the list of configured scanners in the main window "
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
+"Якщо він не з'являється в списку налаштованих сканерів в головному вікні "
+"Scannerdrake, або не працює правильно, "
 
 #: standalone/scannerdrake:400
 #, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr ""
+msgstr "внесіть виправлення в конфігураційний файл /etc/sane.d/%s.conf. "
 
 #: standalone/scannerdrake:406
 #, c-format
@@ -26382,29 +26424,29 @@ msgid "Is this correct?"
 msgstr "Все вірно?"
 
 #: ugtk2.pm:960
-#, fuzzy, c-format
+#, c-format
 msgid "No file chosen"
-msgstr "вибір файлів"
+msgstr "Файл не вибрано"
 
 #: ugtk2.pm:962
-#, fuzzy, c-format
+#, c-format
 msgid "You have chosen a file, not a directory"
-msgstr "Необхідно вказати файл, а не каталог.\n"
+msgstr "Ви вибрали файл, не теку"
 
 #: ugtk2.pm:964
-#, fuzzy, c-format
+#, c-format
 msgid "You have chosen a directory, not a file"
-msgstr "Назва \"/\" може бути лише каталогом, а не ключем"
+msgstr "Ви вибрали теку, а не файл"
 
 #: ugtk2.pm:966
-#, fuzzy, c-format
+#, c-format
 msgid "No such directory"
-msgstr "Не є каталогом"
+msgstr "Немає такої теки"
 
 #: ugtk2.pm:966
-#, fuzzy, c-format
+#, c-format
 msgid "No such file"
-msgstr "Немає файлу \"%s\"\n"
+msgstr "Немає такого файла"
 
 #: ugtk2.pm:1045
 #, c-format
@@ -26434,48 +26476,3 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Встановлення завершилося невдало"
-
-#~ msgid ""
-#~ "Insert a floppy in drive\n"
-#~ "All data on this floppy will be lost"
-#~ msgstr ""
-#~ "Вставте дискету в дисковод\n"
-#~ "Всі дані на цій дискеті будуть втрачені"
-
-#~ msgid "Insert a FAT formatted floppy in drive %s"
-#~ msgstr "Вставте дискету відформатовану у FAT в привід %s"
-
-#~ msgid "This floppy is not FAT formatted"
-#~ msgstr "Ця дискета не відформатована як FAT"
-
-#~ msgid ""
-#~ "To use this saved packages selection, boot installation with ``linux "
-#~ "defcfg=floppy''"
-#~ msgstr ""
-#~ "Для того, щоб використати записаний вибір пакунків, завантажте\n"
-#~ "систему з ``linux defcfg=floppy''"
-
-#~ msgid "Load/Save on floppy"
-#~ msgstr "Прочитати з дискети/записати на дискету"
-
-#~ msgid ""
-#~ "Please choose load or save package selection on floppy.\n"
-#~ "The format is the same as auto_install generated floppies."
-#~ msgstr ""
-#~ "Будь ласка, виберіть, завантажити чи записати вибір пакунків на дискету.\n"
-#~ "Формат дискети такий самий, як дискети auto_install."
-
-#~ msgid "Load from floppy"
-#~ msgstr "Завантажити з дискети"
-
-#~ msgid "Save on floppy"
-#~ msgstr "Записати на дискету"
-
-#~ msgid "Package selection"
-#~ msgstr "Вибір пакунків"
-
-#~ msgid "Loading from floppy"
-#~ msgstr "Завантажується з дискети"
-
-#~ msgid "Insert a floppy containing package selection"
-#~ msgstr "Вставте дискету, що містить вибір пакунків"
