@@ -1,3 +1,142 @@
+2001/12/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (selectMouse): when selecting a usb mouse,
+	call setup_thiskind with
+	at_least_one=1 (so that pci_class probe is used and so unknown
+	serial_usb
+	recognised (cf ldetect))
+
+	* modules.pm (load_thiskind): allow $probe_type to be given, allowing
+	forced pci probe (unsafe)
+
+	* any.pm (setup_thiskind_backend): when at_least_one==1, try load_thiskind
+	forcing
+	pci_class probe when no modules is found.
+
+2001/12/28  sdupont
+
+	* standalone/drakbackup: update select data on backup cd
+
+2001/12/27  sdupont
+
+	* standalone/drakbackup: fix of user selection during restore step.
+			remove return_file_date.
+			change algo for incremental backup.
+
+2001/12/26  sdupont
+
+	* standalone/drakbackup: some gi corrections & update.
+	 incremental restore.
+
+2001/12/22  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: s/use pkgs/require pkgs/ since pkgs::versionCompare is
+	only used during install
+
+	* my_gtk.pm: export gtkcolor (used in install_steps_gtk)
+	make perl_checker happy
+
+2001/12/22  sdupont
+
+	* pixmaps/backup_bot.png, pixmaps/cdrom.png, pixmaps/backup_time.png,
+	pixmaps/backup_bot2.png, pixmaps/backup_left.png, pixmaps/net.png,
+	pixmaps/backup_hd.png, pixmaps/backup_title.png,
+	pixmaps/backup_left2.png, pixmaps/filedialog.png, pixmaps/hd.png,
+	pixmaps/backup_options.png, pixmaps/backup_net.png: remove old
+	drakbackup pixmaps files.
+
+	* pixmaps/ic82-back-up-16.png, pixmaps/ic82-discdurwhat-40.png,
+	pixmaps/ic82-tape-40.png, pixmaps/ic82-moreoption-40.png,
+	pixmaps/ic82-where-40.png, pixmaps/ic82-system-40.png,
+	pixmaps/ic82-others-40.png, pixmaps/ic82-systemeplus-40.png,
+	pixmaps/ic82-network-40.png, pixmaps/ic82-CD-40.png,
+	pixmaps/ic82-when-40.png, pixmaps/ic82-back-up-32.png,
+	pixmaps/ic82-users-40.png, pixmaps/ic82-dossier-32.png,
+	pixmaps/ic82-back-up-48.png: drakbackup designer icons.
+
+	* standalone/drakbackup: add pixmaps on backup step.
+	new designer pixmaps on drakbackup.
+
+2001/12/21  sdupont
+
+	* standalone/drakbackup: some update in file name parsing...
+	etc ...
+
+	* pixmaps/BDO-drakebackup1.png: drakbackup
+
+2001/12/20  dam's  <damien@mandrakesoft.com>
+
+	* install_steps_gtk.pm: API changed, so call changed
+
+	* share/logo-mandrake.png: new ayo logo
+
+2001/12/20  sdupont
+
+	* standalone/drakbackup: update the todo header
+	the REQUIRE header
+	& code cleaning
+	  - tar -cvf tarfilename --after-date="sept 1, 2000" /home
+	   l.380 incremental: date -> if already exist do find -m ... | tar ...
+	   non incremental: date + delete old before the backup
+	  - correct detection of backups during restore.
+	  - gi for other media during restore. hd-> ok
+	  - backend for build backup update and support
+	  incremental backups.
+	  - real incremental backup
+	update resore & help.
+
+2001/12/19  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: update graphical backend
+
+2001/12/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: add dl2k.o (nic module) per request of nplanel
+
+2001/12/19  sdupont
+
+	* standalone/drakbackup: 
+	  - gi for other media during restore. hd-> ok
+	  - backend for build backup update and support
+	incremental backups.
+	  - real incremental backup
+	add other media source during restore.
+	  - update help & license.
+	  - code cleaning.
+	  - ask during whqt sys step if user want to backup critical
+	  files, like /etc/passwd /etc/group /etc/fstab
+	  - use preserve permissions during tar
+	  - begin of total backup step.( all partitions wanted, windows
+	partitions for example!)
+	  - remove replace mode (backup_*_version is enought)
+
+2001/12/18  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: fixed dam's sucking (syntax error only, code is
+	untested).
+
+2001/12/18  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: fix typos
+
+2001/12/18  sdupont
+
+	* standalone/drakfont: include new pixmap on main menu.
+
+	* standalone/drakbackup: sort lists in all lists selection.
+			correct use of incremental backup
+			parse of restore & system state.
+	fix restore user selection problems
+	fix build backup data selection problems
+	ect ...
+	drakbackup -> drakxtools.rpm
+
+	* pixmaps/ic-drakfont-48.png: drakfont pixmap...
+
+2001/12/18  yduret
+
+	* standalone/logdrake: fix console mode : exit now
+
 2001/12/18  Pixel  <pixel@mandrakesoft.com>
 
 	* any.pm: fix typos
