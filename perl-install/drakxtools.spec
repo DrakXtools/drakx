@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 28mdk
+Release: 29mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -303,6 +303,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar 28 2003 Pixel <pixel@mandrakesoft.com> 9.1-29mdk
+- use ServerFlags DontVTSwitch for i865
+
 * Mon Mar 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-28mdk
 - drakconnect: add support for ltpmodem
 
