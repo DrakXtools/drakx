@@ -184,9 +184,10 @@ sub selectInstallClass1 {
 #------------------------------------------------------------------------------
 sub selectMouse {
     my ($o, $force) = @_;
+    my $old = $o->{mouse}{XMOUSETYPE};
     $o->SUPER::selectMouse($force);
 
-    if (!$::testing) {
+    if ($old ne $o->{mouse}{XMOUSETYPE} && !$::testing) {
 	log::l("telling X server to use another mouse");
 	eval { commands::modprobe("serial") } if $o->{mouse}{device} =~ /ttyS/;
 	symlinkf($o->{mouse}{device}, "/dev/mouse");
@@ -763,10 +764,7 @@ sub create_steps_window {
     $w->show;
 
     my @steps_icons = map { [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/step-$_.xpm") ] } qw(green orange red);
-
     my $style = Gtk::Widget->get_default_style->copy;
-    print $style->fg('normal');
-    print $style->white;
 
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),

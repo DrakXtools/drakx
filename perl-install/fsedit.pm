@@ -443,11 +443,8 @@ sub verifyHds {
 	    $hd->{primary} = { normal => [ grep { $hd->{device} eq $_->{rootDevice} } @parts ] };
 	}
     }
-    my $fstab = [ get_fstab(@$hds) ];
-    if (is_empty_array_ref($fstab) && $readonly) {
-	die _("You don't have any partitions!");
-    }
-    ($hds, $fstab, $ok);
+    $readonly && get_fstab(@$hds) == 0 and die _("You don't have any partitions!");
+    $ok;
 }
 
 #-######################################################################################

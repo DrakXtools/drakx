@@ -243,8 +243,9 @@ sub getAvailableSpace {
 sub getAvailableSpace_mounted {
     my ($prefix) = @_;
     my $dir = -d "$prefix/usr" ? "$prefix/usr" : "$prefix";
-    my ($free, undef) = common::df($dir) or return;
-    $free || 1;
+    my (undef, $free) = common::df($dir) or return;
+    log::l("getAvailableSpace_mounted $free");
+    $free * 1024 || 1;
 }
 sub getAvailableSpace_raw {
     my ($fstab) = @_;
@@ -323,20 +324,21 @@ sub addToBeDone(&$) {
 
 sub getHds {
     my ($o) = @_;
-    my ($ok, $ok2) = 1;
+    my ($ok, $ok2) = (1, 1);
+    my $flags = $o->{partitioning};
 
     my @drives = detect_devices::hds();
 #    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
-    $o->{hds} = catch_cdie { fsedit::hds(\@drives, $o->{partitioning}) }
+    $o->{hds} = catch_cdie { fsedit::hds(\@drives, $flags) }
       sub {
         log::l("error reading partition table: $@");
 	my ($err) = $@ =~ /(.*) at /;
 	$@ =~ /overlapping/ and $o->ask_warn('', $@), return 1;
 	$o->ask_okcancel(_("Error"),
 [_("I can't read your partition table, it's too corrupted for me :(
-I'll try to go on blanking bad partitions"), $err]) unless $o->{partitioning}{readonly};
+I'll try to go on blanking bad partitions"), $err]) unless $flags->{readonly};
 	$ok = 0; 1 
     };
 
@@ -345,20 +347,19 @@ I'll try to go on blanking bad partitions"), $err]) unless $o->{partitioning}{re
 	goto getHds;
     }
 
-    ($o->{hds}, $o->{fstab}, $ok2) = fsedit::verifyHds($o->{hds}, $o->{partitioning}{readonly}, $ok);
+    $ok2 = fsedit::verifyHds($o->{hds}, $flags->{readonly}, $ok)
+        unless $flags->{clearall} || $flags->{clear};
 
+    $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
     fs::check_mounted($o->{fstab});
     fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
 
-    $o->{partitioning}{clearall} and return 1;
     $o->ask_warn('', 
 _("DiskDrake failed to read correctly the partition table.
-Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
+Continue at your own risk!")) if !$ok2 && $ok && !$flags->{readonly};
 
     my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
-#    my @nt  = grep { isNT($_)  && isNT( { type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
-#    log::l("nt parts: ",  join ",", map { $_->{device} } @nt) if @nt;
     if (@win == 1) {
 	$win[0]{mntpoint} = "/mnt/windows";
     } else {

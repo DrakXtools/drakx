@@ -9,6 +9,7 @@ use log;
 use detect_devices;
 use run_program;
 use Xconfigurator_consts;
+use any;
 use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
@@ -1020,7 +1021,7 @@ sub main {
     }
     my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
 
-    $ok &&= testFinalConfig($o, $::auto, $::skiptest);
+    $ok &&= testFinalConfig($o, $::auto, $o->{skiptest});
 
     my $quit;
     until ($ok || $quit) {
@@ -1095,14 +1096,15 @@ Would you like X to start when you reboot?"), 1);
 		$l{uid} > 500, $l{name};
 	    } cat_("$o->{prefix}/etc/passwd");
 
-	    !(exists $o->{miscellaneous}{autologuser} || $::auto || !@users || exists $o->{authentication}{NIS} ) &&
+	    unless (exists $o->{miscellaneous}{autologuser} || $::auto || !@users || $o->{authentication}{NIS}) {
 	        $in->ask_from_entries_refH(_("Autologin"),
 _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
-[ _("Choose the default user :") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ], )
-                or delete $o->{miscellaneaous}{autologuser};
-		set_autologin($prefix, $o->{miscellaneous}{autologuser}, "kde" ) if (@users && !exists $o->{authentication}{NIS} && exists $o->{miscellaneous}{autologuser});
-	   }
+                                           [ _("Choose the default user :") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ])
+		  or delete $o->{miscellaneaous}{autologuser};
+	    }
+	    any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, "kde");
+	}
        run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
 }

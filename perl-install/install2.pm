@@ -224,8 +224,6 @@ $o = $::o = {
 
 };
 
-$::oo = {};
-
 #-######################################################################################
 #- Steps Functions
 #- each step function are called with two arguments : clicked(because if you are a
@@ -538,7 +536,7 @@ sub main {
 
 #-    c::unlimit_core() unless $::testing;
 
-    my ($cfg, $patch);
+    my ($cfg, $patch, @auto);
     my %cmdline; map { 
 	my ($n, $v) = split '=';
 	$cmdline{$n} = $v || 1;
@@ -559,9 +557,9 @@ sub main {
     map_each {
 	my ($n, $v) = @_;
 	my $f = ${{
-	    oem       => sub { $::oo->{oem} = $v },
+	    oem       => sub { $o->{oem} = $v },
 	    lang      => sub { $o->{lang} = $v },
-	    flang     => sub { $o->{lang} = $::oo->{lang} = $v },
+	    flang     => sub { $o->{lang} = $v ; push @auto, 'selectLanguage' },
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    vga16     => sub { $o->{vga16} = $v },
@@ -569,7 +567,7 @@ sub main {
 	    expert    => sub { $::expert = 1; $::beginner = 0 },
 	    beginner  => sub { $::beginner = $v },
 	    class     => sub { $o->{installClass} = $v },
-	    fclass    => sub { $o->{installClass} = $::oo->{installClass} = $v },
+	    fclass    => sub { $o->{installClass} = $v; push @auto, "selectInstallClass" },
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
@@ -596,6 +594,9 @@ sub main {
 	symlinkf $root, "/tmp/rhimage" or die "unable to create link /tmp/rhimage";
 	$o->{method} ||= "cdrom";
 	$o->{mkbootdisk} = 0;
+    }
+    if ($o->{oem}) {
+	push @auto, 'exitInstall', 'selectMouse', 'timeConfig';
     }
 
     unless ($::testing) {
@@ -674,6 +675,12 @@ sub main {
 	$o->{interactive} = "newt";
 	require install_steps_newt;
     }
+    foreach (@auto) {
+	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;
+	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
+	$s->{hidden} = 1;
+    }
+
     $::o = $o = $o_;
 
     #- get stage1 network configuration if any.

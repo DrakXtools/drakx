@@ -28,14 +28,16 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: XFdrake [--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
+my $i = {};
+
+$::isStandalone = 1;
 $::force_xf3 = /-xf3/;
 $::beginner = /-beginner/;
 $::expert = /-expert/;
 $::auto = /-auto/;
 $::noauto = /-noauto/;
-$::skiptest = /-skiptest/;
 $::testing = /-testing/;
-$::isStandalone = 1;
+$i->{skiptest} = /-skiptest/;
 
 my $f = "/usr/X11R6/lib/X11/Cards";
 -e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
@@ -47,7 +49,7 @@ my $in = vnew interactive('su');
 
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 
-my $i = $0 =~ Xdrakres ? Xconfig::getinfoFromXF86Config() : {};
+Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
 Xconfig::getinfo($i);
 
 Xconfigurator::main('', $i, $in, 0, -e "/etc/pcmcia", sub { system("urpmi --auto XFree86-$_[0]") });

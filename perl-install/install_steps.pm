@@ -859,7 +859,7 @@ sub setupXfree {
     require class_discard;
     { local $::testing = 0; #- unset testing
       local $::auto = 1;
-      local $::skiptest = 1;
+      $o->{X}{skiptest} = 1;
       Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, bool($o->{pcmcia}), sub {
          $o->pkg_install("XFree86-$_[0]");
       });
@@ -925,6 +925,9 @@ sub miscellaneous {
 sub generateAutoInstFloppy($) {
     my ($o) = @_;
 }
+
+#------------------------------------------------------------------------------
+sub exitInstall { install_any::unlockCdrom }
 
 #------------------------------------------------------------------------------
 sub hasNetwork {
