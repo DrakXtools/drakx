@@ -115,12 +115,11 @@ sub probe_category {
 
     grep {
 	if ($category eq 'network/isdn') {
-	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*),?(.*)/;
+	    my $b = $_->{driver} =~ /ISDN:([^,]*),?([^,]*)(?:,firmware=(.*))?/;
 	    if ($b) {
 		$_->{driver} = $1;
 		$_->{options} = $2;
 		$_->{firmware} = $3;
-		$_->{firmware} =~ s/firmware=//;
 		$_->{driver} eq "hisax" and $_->{options} .= " id=HiSax";
 	    }
 	    $b;
