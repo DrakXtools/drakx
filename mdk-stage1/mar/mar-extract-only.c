@@ -33,7 +33,8 @@ zerr(BZFILE * f) /* decrease code size */
 {
 	fprintf(stderr, BZ2_bzerror(f, &z_errnum));
 }
-void
+
+inline void
 log_perror(char *msg)
 {
 	perror(msg);
