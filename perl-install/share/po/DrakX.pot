@@ -6,13 +6,209 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-10-08 00:07+0800\n"
+"POT-Creation-Date: 2004-10-07 21:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8-bit\n"
+
+#: ../move/move.pm:292
+#, c-format
+msgid "Which USB key do you want to format?"
+msgstr ""
+
+#: ../move/move.pm:296
+#, c-format
+msgid ""
+"You are about to format a USB device \"%s\". This will delete all data on it.\n"
+"Make sure that the selected device is the USB key you want to format. \n"
+"We advise you to unplug all other USB storage devices while doing this operation."
+msgstr ""
+
+#: ../move/move.pm:448 ../move/move.pm:460
+#, c-format
+msgid "Key isn't writable"
+msgstr ""
+
+#: ../move/move.pm:450
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled. Please\n"
+"unplug it, remove write protection, and then plug it again."
+msgstr ""
+
+#: ../move/move.pm:452
+#, c-format
+msgid "Retry"
+msgstr ""
+
+#: ../move/move.pm:453 ../move/move.pm:497
+#, c-format
+msgid "Continue without USB key"
+msgstr ""
+
+#: ../move/move.pm:462
+#, c-format
+msgid ""
+"The USB key seems to have write protection enabled, but we can't safely\n"
+"unplug it now.\n"
+"\n"
+"\n"
+"Click the button to reboot the machine, unplug it, remove write protection,\n"
+"plug the key again, and launch Mandrake Move again."
+msgstr ""
+
+#: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1353
+#, c-format
+msgid "Reboot"
+msgstr ""
+
+#: ../move/move.pm:473
+#, c-format
+msgid ""
+"Your USB key doesn't have any valid Windows (FAT) partitions.\n"
+"We need one to continue (beside, it's more standard so that you\n"
+"will be able to move and access your files from machines\n"
+"running Windows). Please plug in an USB key containing a\n"
+"Windows partition instead.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
+
+#: ../move/move.pm:483
+#, c-format
+msgid ""
+"We didn't detect any USB key on your system. If you\n"
+"plug in an USB key now, Mandrake Move will have the ability\n"
+"to transparently save the data in your home directory and\n"
+"system wide configuration, for next boot on this computer\n"
+"or another one. Note: if you plug in a key now, wait several\n"
+"seconds before detecting again.\n"
+"\n"
+"\n"
+"You may also proceed without an USB key - you'll still be\n"
+"able to use Mandrake Move as a normal live Mandrake\n"
+"Operating System."
+msgstr ""
+
+#: ../move/move.pm:494
+#, c-format
+msgid "Need a key to save your data"
+msgstr ""
+
+#: ../move/move.pm:496
+#, c-format
+msgid "Detect USB key again"
+msgstr ""
+
+#: ../move/move.pm:517
+#, c-format
+msgid "Setting up USB key"
+msgstr ""
+
+#: ../move/move.pm:517
+#, c-format
+msgid "Please wait, setting up system configuration files on USB key..."
+msgstr ""
+
+#: ../move/move.pm:546
+#, c-format
+msgid "Enter your user information, password will be used for screensaver"
+msgstr ""
+
+#: ../move/move.pm:556
+#, c-format
+msgid "Auto configuration"
+msgstr ""
+
+#: ../move/move.pm:556
+#, c-format
+msgid "Please wait, detecting and configuring devices..."
+msgstr ""
+
+#: ../move/move.pm:604 ../move/move.pm:660 ../move/move.pm:664 diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:116 diskdrake/interactive.pm:223 diskdrake/interactive.pm:236 diskdrake/interactive.pm:377 diskdrake/interactive.pm:392 diskdrake/interactive.pm:515 diskdrake/interactive.pm:520 diskdrake/smbnfs_gtk.pm:42 fsedit.pm:167 install_steps.pm:82 install_steps_interactive.pm:38 interactive/http.pm:117 interactive/http.pm:118 network/netconnect.pm:995 network/netconnect.pm:999 network/netconnect.pm:1004 network/netconnect.pm:1045 network/netconnect.pm:1049 network/netconnect.pm:1187 network/netconnect.pm:1192 network/netconnect.pm:1210 network/netconnect.pm:1393 printer/printerdrake.pm:238 printer/printerdrake.pm:245 printer/printerdrake.pm:270 printer/printerdrake.pm:416 printer/printerdrake.pm:421 printer/printerdrake.pm:434 printer/printerdrake.pm:444 printer/printerdrake.pm:508 printer/printerdrake.pm:1182 printer/printerdrake.pm:1229 printer/printerdrake.pm:1266 printer/printerdrake.pm:1310 printer/printerdrake.pm:1314 printer/printerdrake.pm:1328 printer/printerdrake.pm:1418 printer/printerdrake.pm:1498 printer/printerdrake.pm:1502 printer/printerdrake.pm:1506 printer/printerdrake.pm:1555 printer/printerdrake.pm:1612 printer/printerdrake.pm:1616 printer/printerdrake.pm:1630 printer/printerdrake.pm:1740 printer/printerdrake.pm:1744 printer/printerdrake.pm:1781 printer/printerdrake.pm:1846 printer/printerdrake.pm:1864 printer/printerdrake.pm:1873 printer/printerdrake.pm:1882 printer/printerdrake.pm:1893 printer/printerdrake.pm:1955 printer/printerdrake.pm:2408 printer/printerdrake.pm:2672 printer/printerdrake.pm:2678 printer/printerdrake.pm:3188 printer/printerdrake.pm:3192 printer/printerdrake.pm:3196 printer/printerdrake.pm:3606 printer/printerdrake.pm:3846 printer/printerdrake.pm:3866 printer/printerdrake.pm:3942 printer/printerdrake.pm:4007 printer/printerdrake.pm:4123 standalone/drakTermServ:379 standalone/drakTermServ:731 standalone/drakTermServ:738 standalone/drakTermServ:933 standalone/drakTermServ:1403 standalone/drakTermServ:1408 standalone/drakTermServ:1415 standalone/drakTermServ:1426 standalone/drakTermServ:1447 standalone/drakauth:37 standalone/drakbackup:512 standalone/drakbackup:626 standalone/drakbackup:1128 standalone/drakbackup:1161 standalone/drakbackup:1665 standalone/drakbackup:1821 standalone/drakbackup:2416 standalone/drakbackup:4105 standalone/drakbackup:4325 standalone/drakbug:235 standalone/drakbug:254 standalone/drakbug:260 standalone/drakclock:125 standalone/drakconnect:648 standalone/drakconnect:651 standalone/drakconnect:670 standalone/drakfloppy:297 standalone/drakfloppy:301 standalone/drakfloppy:307 standalone/drakfont:210 standalone/drakfont:223 standalone/drakfont:259 standalone/drakfont:604 standalone/draksplash:21 standalone/draksplash:501 standalone/drakxtv:107 standalone/logdrake:169 standalone/logdrake:437 standalone/logdrake:442 standalone/scannerdrake:59 standalone/scannerdrake:196 standalone/scannerdrake:255 standalone/scannerdrake:684 standalone/scannerdrake:695 standalone/scannerdrake:834 standalone/scannerdrake:845 standalone/scannerdrake:915 wizards.pm:95 wizards.pm:99 wizards.pm:121
+#, c-format
+msgid "Error"
+msgstr ""
+
+#: ../move/move.pm:605 install_steps.pm:83
+#, c-format
+msgid ""
+"An error occurred, but I don't know how to handle it nicely.\n"
+"Continue at your own risk."
+msgstr ""
+
+#: ../move/move.pm:660 install_steps_interactive.pm:38
+#, c-format
+msgid "An error occurred"
+msgstr ""
+
+#: ../move/move.pm:666
+#, c-format
+msgid ""
+"An error occurred:\n"
+"\n"
+"\n"
+"%s\n"
+"\n"
+"This may come from corrupted system configuration files\n"
+"on the USB key, in this case removing them and then\n"
+"rebooting Mandrake Move would fix the problem. To do\n"
+"so, click on the corresponding button.\n"
+"\n"
+"\n"
+"You may also want to reboot and remove the USB key, or\n"
+"examine its contents under another OS, or even have\n"
+"a look at log files in console #3 and #4 to try to\n"
+"guess what's happening."
+msgstr ""
+
+#: ../move/move.pm:681
+#, c-format
+msgid "Remove system config files"
+msgstr ""
+
+#: ../move/move.pm:682
+#, c-format
+msgid "Simply reboot"
+msgstr ""
+
+#: ../move/tree/mdk_totem:50 ../move/tree/mdk_totem:96
+#, c-format
+msgid "You can only run with no CDROM support"
+msgstr ""
+
+#: ../move/tree/mdk_totem:71
+#, c-format
+msgid "Kill those programs"
+msgstr ""
+
+#: ../move/tree/mdk_totem:72
+#, c-format
+msgid "No CDROM support"
+msgstr ""
+
+#: ../move/tree/mdk_totem:76 diskdrake/hd_gtk.pm:95 diskdrake/interactive.pm:1005 diskdrake/interactive.pm:1015 diskdrake/interactive.pm:1068
+#, c-format
+msgid "Read carefully!"
+msgstr ""
+
+#: ../move/tree/mdk_totem:77
+#, c-format
+msgid ""
+"You can't use another CDROM when the following programs are running: \n"
+"%s"
+msgstr ""
+
+#: ../move/tree/mdk_totem:101
+#, c-format
+msgid "Copying to memory to allow removing the CDROM"
+msgstr ""
 
 #: Xconfig/card.pm:13
 #, c-format
@@ -1385,11 +1581,6 @@ msgstr ""
 msgid "Mount point"
 msgstr ""
 
-#: diskdrake/dav.pm:75 diskdrake/hd_gtk.pm:116 diskdrake/interactive.pm:223 diskdrake/interactive.pm:236 diskdrake/interactive.pm:377 diskdrake/interactive.pm:392 diskdrake/interactive.pm:515 diskdrake/interactive.pm:520 diskdrake/smbnfs_gtk.pm:42 fsedit.pm:167 install_steps.pm:82 install_steps_interactive.pm:38 interactive/http.pm:117 interactive/http.pm:118 network/netconnect.pm:995 network/netconnect.pm:999 network/netconnect.pm:1004 network/netconnect.pm:1045 network/netconnect.pm:1049 network/netconnect.pm:1187 network/netconnect.pm:1192 network/netconnect.pm:1210 network/netconnect.pm:1393 printer/printerdrake.pm:238 printer/printerdrake.pm:245 printer/printerdrake.pm:270 printer/printerdrake.pm:416 printer/printerdrake.pm:421 printer/printerdrake.pm:434 printer/printerdrake.pm:444 printer/printerdrake.pm:508 printer/printerdrake.pm:1182 printer/printerdrake.pm:1229 printer/printerdrake.pm:1266 printer/printerdrake.pm:1310 printer/printerdrake.pm:1314 printer/printerdrake.pm:1328 printer/printerdrake.pm:1418 printer/printerdrake.pm:1498 printer/printerdrake.pm:1502 printer/printerdrake.pm:1506 printer/printerdrake.pm:1555 printer/printerdrake.pm:1612 printer/printerdrake.pm:1616 printer/printerdrake.pm:1630 printer/printerdrake.pm:1740 printer/printerdrake.pm:1744 printer/printerdrake.pm:1781 printer/printerdrake.pm:1846 printer/printerdrake.pm:1864 printer/printerdrake.pm:1873 printer/printerdrake.pm:1882 printer/printerdrake.pm:1893 printer/printerdrake.pm:1955 printer/printerdrake.pm:2408 printer/printerdrake.pm:2672 printer/printerdrake.pm:2678 printer/printerdrake.pm:3188 printer/printerdrake.pm:3192 printer/printerdrake.pm:3196 printer/printerdrake.pm:3606 printer/printerdrake.pm:3846 printer/printerdrake.pm:3866 printer/printerdrake.pm:3942 printer/printerdrake.pm:4007 printer/printerdrake.pm:4123 standalone/drakTermServ:379 standalone/drakTermServ:731 standalone/drakTermServ:738 standalone/drakTermServ:933 standalone/drakTermServ:1403 standalone/drakTermServ:1408 standalone/drakTermServ:1415 standalone/drakTermServ:1426 standalone/drakTermServ:1447 standalone/drakauth:37 standalone/drakbackup:512 standalone/drakbackup:626 standalone/drakbackup:1128 standalone/drakbackup:1161 standalone/drakbackup:1665 standalone/drakbackup:1821 standalone/drakbackup:2416 standalone/drakbackup:4105 standalone/drakbackup:4325 standalone/drakbug:235 standalone/drakbug:254 standalone/drakbug:260 standalone/drakclock:125 standalone/drakconnect:648 standalone/drakconnect:651 standalone/drakconnect:670 standalone/drakfloppy:297 standalone/drakfloppy:301 standalone/drakfloppy:307 standalone/drakfont:210 standalone/drakfont:223 standalone/drakfont:259 standalone/drakfont:604 standalone/draksplash:21 standalone/draksplash:501 standalone/drakxtv:107 standalone/logdrake:169 standalone/logdrake:437 standalone/logdrake:442 standalone/scannerdrake:59 standalone/scannerdrake:196 standalone/scannerdrake:255 standalone/scannerdrake:684 standalone/scannerdrake:695 standalone/scannerdrake:834 standalone/scannerdrake:845 standalone/scannerdrake:915 wizards.pm:95 wizards.pm:99 wizards.pm:121
-#, c-format
-msgid "Error"
-msgstr ""
-
 #: diskdrake/dav.pm:83
 #, c-format
 msgid "Please enter the WebDAV server URL"
@@ -1413,11 +1604,6 @@ msgstr ""
 #: diskdrake/dav.pm:111 diskdrake/interactive.pm:1239
 #, c-format
 msgid "Options: %s"
-msgstr ""
-
-#: diskdrake/hd_gtk.pm:95 diskdrake/interactive.pm:1005 diskdrake/interactive.pm:1015 diskdrake/interactive.pm:1068
-#, c-format
-msgid "Read carefully!"
 msgstr ""
 
 #: diskdrake/hd_gtk.pm:95
@@ -3487,11 +3673,6 @@ msgid ""
 "/dev/fd0\"."
 msgstr ""
 
-#: help.pm:409 install_steps_interactive.pm:1353
-#, c-format
-msgid "Reboot"
-msgstr ""
-
 #: help.pm:409
 #, c-format
 msgid "Generate auto-install floppy"
@@ -4279,11 +4460,6 @@ msgstr ""
 msgid "Error reading file %s"
 msgstr ""
 
-#: install_any.pm:1359
-#, c-format
-msgid "The "
-msgstr ""
-
 #: install_any.pm:1361
 #, c-format
 msgid "%s (was %s)"
@@ -4644,13 +4820,6 @@ msgstr ""
 msgid "http://www.mandrakelinux.com/en/101errata.php3"
 msgstr ""
 
-#: install_steps.pm:83
-#, c-format
-msgid ""
-"An error occurred, but I don't know how to handle it nicely.\n"
-"Continue at your own risk."
-msgstr ""
-
 #: install_steps.pm:246
 #, c-format
 msgid "Duplicate mount point %s"
@@ -4875,11 +5044,6 @@ msgstr ""
 #: install_steps_gtk.pm:632 install_steps_interactive.pm:934 install_steps_interactive.pm:1086
 #, c-format
 msgid "not configured"
-msgstr ""
-
-#: install_steps_interactive.pm:38
-#, c-format
-msgid "An error occurred"
 msgstr ""
 
 #: install_steps_interactive.pm:86
@@ -6889,7 +7053,7 @@ msgstr ""
 msgid "Libya"
 msgstr ""
 
-#: lang.pm:313
+#: lang.pm:313 network/adsl_consts.pm:487
 #, c-format
 msgid "Morocco"
 msgstr ""
@@ -7815,11 +7979,6 @@ msgstr ""
 #: network/adsl.pm:41 network/netconnect.pm:804
 #, c-format
 msgid "ADSL connection type:"
-msgstr ""
-
-#: network/adsl_consts.pm:487
-#, c-format
-msgid "Morrocco"
 msgstr ""
 
 #: network/drakfirewall.pm:12 share/compssUsers.pl:84
