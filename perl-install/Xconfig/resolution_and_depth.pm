@@ -146,7 +146,7 @@ sub choices {
     @resolutions = filter_using_VideoRam($card->{VideoRam}, @resolutions) if $card->{VideoRam};
 
     my $x_res = do {
-	my $res = $resolution_wanted->{X} || ($monitor->{Model} =~ /^Flat Panel (\d+x\d+)$/ ? $1 : size2default_resolution($monitor->{size} || 14));
+	my $res = $resolution_wanted->{X} || ($monitor->{ModelName} =~ /^Flat Panel (\d+x\d+)$/ ? $1 : size2default_resolution($monitor->{size} || 14));
 	my $x_res = first(split 'x', $res);
 	#- take the first available resolution <= the wanted resolution
 	max map { if_($_->{X} <= $x_res, $_->{X}) } @resolutions;
