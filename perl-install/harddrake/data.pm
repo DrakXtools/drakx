@@ -3,7 +3,6 @@ package harddrake::data;
 use strict;
 use detect_devices;
 use common;
-use class_discard;
 
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
 our ($version, $sbindir, $bindir) = ("1.1.8", "/usr/sbin", "/usr/bin");
@@ -53,6 +52,7 @@ our @tree =
 
 	["PRINTER","Printer", "hw_printer.png", "$sbindir/printerdrake", 
 	 sub { 
+		require class_discard;
 		require printerdrake; printerdrake::auto_detect(class_discard->new)  } , 0 ],
 	["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake",
 	 sub { 
