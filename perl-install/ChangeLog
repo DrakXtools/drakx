@@ -1,3 +1,17 @@
+2001/01/08  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm: fixes
+	(ask_from_treelistf, ask_from_treelist): now use ask_from_entries_refH
+	(ask_from_entries_refH_powered): remove "1;" (was there for debugging)
+
+	* interactive_gtk.pm: fixes
+	(ask_from_treelistW): removed
+	(create_ctree): created, used for ``type => treelist'' entries
+
+	* my_gtk.pm: fixes
+
+	* ChangeLog: New snapshot uploaded
+
 2001/01/07  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/sr.po, share/po/sp.po, share/po/no.po, share/po/cs.po: updated
