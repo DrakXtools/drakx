@@ -23,22 +23,20 @@ use standalone;
 use interactive;
 use common;
 require Gtk;
-require Gtk::Gdk::ImlibImage;
 use my_gtk qw(:helpers :wrappers :ask);
 use Config;
 
-Gtk::Gdk::ImlibImage->init;
 
 my $in = 'interactive'->vnew;
 
 my $bugzilla_url = "http://drakbug.mandrakesoft.com";
 my $version = "0.9.0";
 my $prog;
-my $incident=0;
+my $incident = 0;
 
 while (defined($_ = shift @ARGV)) {
     /^--report$/ and do { $prog = shift @ARGV };
-    /^--incident$/ and do {$incident = 1 ; $prog = shift @ARGV };
+    /^--incident$/ and do { $incident = 1; $prog = shift @ARGV };
 }
 
 my $window_g = new Gtk::Window -toplevel;
@@ -53,7 +51,7 @@ my $mdk_app = {
 	       N("Mandrake Control Center") => 'drakconf',
 	       N("First Time Wizard") => 'drakfw',
 	       N("Synchronization tool") => 'draksync',  
-	       N("Standalone Tools") => ['adduserdrake','diskdrake','drakautoinst','drakbackup','drakboot','drakbug','drakfloppy','drakfont','drakgw','drakconnect','drakxservices','drakxtv','keyboardrake','logdrake','mousedrake','net_monitor','printerdrake','scannerdrake','drakfirewall','XFdrake'],
+	       N("Standalone Tools") => ['adduserdrake', 'diskdrake', 'drakautoinst', 'drakbackup', 'drakboot', 'drakbug', 'drakfloppy', 'drakfont', 'drakgw', 'drakconnect', 'drakxservices', 'drakxtv', 'keyboardrake', 'logdrake', 'mousedrake', 'net_monitor', 'printerdrake', 'scannerdrake', 'drakfirewall', 'XFdrake'],
 	       N("HardDrake") => 'harddrake2',
 	       N("Mandrake Online") => 'mdkonline',
 	       N("Menudrake") => 'menudrake',
@@ -67,36 +65,36 @@ my $mdk_app = {
 	      };
 
 my @generic_tool = keys %{$mdk_app}; 
-my @all_drakxtools = @ { $mdk_app->{N("Standalone Tools")} };
+my @all_drakxtools = @{ $mdk_app->{N("Standalone Tools")} };
 push(@generic_tool,@all_drakxtools);
 
 my $kernel_release = chomp_(`uname -r`);
-$kernel_release.="";
+$kernel_release .= "";
 my $mdk_release = chomp_(cat_("/etc/mandrake-release"));
 
-my $table = new Gtk::Table(4,2,'TRUE');
+my $table = new Gtk::Table(4,2, 'TRUE');
 #$table->set_border_width(5);
 $table->set_row_spacings(10);
 $table->set_col_spacings(5);
-$table->attach(new Gtk::Label(N("Application:")), 0, 1, 0, 1,'fill', 'fill',20,0);
+$table->attach(new Gtk::Label(N("Application:")), 0, 1, 0, 1, 'fill', 'fill',20,0);
 $table->attach(new Gtk::Label(N("Package: ")), 0, 1, 1, 2, 'fill', 'fill',0,0);
 $table->attach(new Gtk::Label(N("Kernel:")), 0, 1, 2, 3, 'fill', 'fill',0,0);
 $table->attach(new Gtk::Label(N("Release: ")), 0, 1, 3, 4, 'fill', 'fill',0,0);
 $table->attach(my $comb_app = new Gtk::Combo(), 1, 2, 0, 1, 'fill', 'fill',0,0);
 $comb_app->set_usize(270,undef);
-$comb_app->set_popdown_strings("",sort(@generic_tool));
+$comb_app->set_popdown_strings("", sort(@generic_tool));
 $table->attach(my $package = new Gtk::Entry(), 1, 2, 1, 2, 'fill', 'fill',0,0);
 $package->set_text("...");
 $table->attach(my $kernel_rel = new Gtk::Entry(), 1, 2, 2, 3, 'fill', 'fill',0,0);
-$kernel_rel->set_text("$kernel_release");
+$kernel_rel->set_text($kernel_release);
 $table->attach(my $mdk_rel = new Gtk::Entry(), 1, 2, 3, 4, 'fill', 'fill',0,0);
-$mdk_rel->set_text("$mdk_release");
+$mdk_rel->set_text($mdk_release);
 
 gtkpack2__(
 	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
 		      gtkadd($table),
 		      gtkpack(new Gtk::HBox(0,0),
-			      gtkpack(gtkset_justify(new Gtk::Label(N("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://drakbug.mandrakesoft.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
+			      gtkpack(gtkset_justify(new Gtk::Label(N("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://drakbug.mandrakesoft.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")), "left")),
 			     ),
 		      gtkpack(new Gtk::HSeparator),
 		      
@@ -105,11 +103,11 @@ gtkpack2__(
 
 if (defined $prog) {
     update_app($prog); 
-    $comb_app->entry->set_text("$prog");
+    $comb_app->entry->set_text($prog);
 };
 
 $comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text()) });
-my $kernel = $kernel_rel->get_chars(0,-1);
+my $kernel = $kernel_rel->get_chars(0, -1);
 my $hbx = new Gtk::HBox(0,0);
 my $Close_Button = new Gtk::Button(N("Close"));
 $Close_Button->signal_connect(clicked => sub { Gtk->exit(0) });
@@ -117,13 +115,13 @@ $hbx->pack_start($Close_Button,0,0,0);
 
 my $Report_Button = new Gtk::Button(N("Report"));
 $Report_Button->signal_connect(clicked => sub { my $options = "mdkbugreport=1";
-						$options.="&incident=1" if $incident;
-						$p = $package->get_text(); $k=$kernel_rel->get_text(); ($r =parse_release()) =~ s/\s//;
-						$options.="&package=$p" if $p =~ /mdk/;
-						$options.="&kernel=$k";
-						$options.="&version=$r";
-						print "$bugzilla_url"."?"."$options" ."\n";
-						connect_bugzilla("$bugzilla_url"."?"."$options") });
+						$options .= "&incident=1" if $incident;
+						$p = $package->get_text(); $k = $kernel_rel->get_text(); ($r = parse_release()) =~ s/\s//;
+						$options .= "&package=$p" if $p =~ /mdk/;
+						$options .= "&kernel=$k";
+						$options .= "&version=$r";
+						print $bugzilla_url . "?" . $options . "\n";
+						connect_bugzilla($bugzilla_url."?".$options) });
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
@@ -131,15 +129,15 @@ $window_g->add($vbx);
 $window_g->show_all();
 Gtk->main();
 Gtk->exit(0);
-in->exit(0);
+$in->exit(0);
 
 sub update_app {
     my ($text) = @_;
     my $app_choice;
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
     if (member($text,@all_drakxtools) || $text eq N("Standalone Tools")) {
-	$app_choice = chomp_(`rpm -q drakxtools`) ;
-    } elsif (member($text,keys %{$mdk_app}) && $text ne N("Standalone Tools")) {	
+	$app_choice = chomp_(`rpm -q drakxtools`);
+    } elsif (member($text, keys %{$mdk_app}) && $text ne N("Standalone Tools")) {	
 	$app_choice = get_package($mdk_app->{$text});
     } else {
 	LOOP: while (($key,$value) = each %{$mdk_app}) {
@@ -152,7 +150,7 @@ sub update_app {
 	}
 	
     }
-    $app_choice ? $package->set_text("$app_choice") : $package->set_text(N("Not installed"));
+    $app_choice ? $package->set_text($app_choice) : $package->set_text(N("Not installed"));
 }
 
 my %packages;
@@ -177,10 +175,10 @@ sub parse_release {
 
 sub connect_bugzilla {
     my($url) = @_;
-    my $w = $in->wait_message('',N("connecting to Bugzilla wizard ...")); 
+    my $w = $in->wait_message('', N("connecting to Bugzilla wizard ...")); 
     sleep(3);
-    exec $ENV{BROWSER},$url if exists $ENV{BROWSER} ;
-    my @browser = qw (mozilla konqueror galeon);
+    exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
+    my @browser = qw(mozilla konqueror galeon);
     foreach (@browser) {
 	if (-e "/usr/bin/$_") { standalone::explanations("Contacting $url with $_\n "); exec $_,$url } 
     }
