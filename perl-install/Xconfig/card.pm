@@ -276,15 +276,19 @@ sub configure {
     my @cards = probe();
     @cards or @cards = {};
 
-    if ($auto) {
-	return 0 if !$cards[0]{server} && !$cards[0]{Driver};
-    } else {
+    if (!$cards[0]{server} && !$cards[0]{Driver}) {
+	if ($options->{allowFB}) {
+	    $cards[0]{Driver} = 'fbdev';
+	} elsif ($auto) {
+	    log::l("Xconfig::card: auto failed (unknown card and no allowFB)");
+	    return 0;
+	}
+    }
+    if (!$auto) {
 	card_config__not_listed($in, $cards[0], $options) or return;
     }
 
     my $card = multi_head_choose($in, $auto, @cards) or return;
-
-    $card->{Driver} = 'fbdev' if $options->{allowFB} && !$card->{server} && !$card->{Driver};
 
     xfree_and_glx_choose($in, $card, $auto) or return;
 
