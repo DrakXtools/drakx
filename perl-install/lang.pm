@@ -76,7 +76,6 @@ my %charsets = (
   "Big5"       => [ "?????",                    "????",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
   "gb2312"     => [ "?????",                    "????",
-        "*-helvetica-medium-r-normal--14-*-*-*-*-*-iso8859-1," .
         "-isas-song ti-medium-r-normal--16-*-*-*-*-*-gb2312.1980-0" ],
   "iso-8859-1" => [ "lat0-sun16",		"iso15", std("iso8859-1") ],
   "iso-8859-2" => [ "lat2-sun16",		"iso02", std("iso8859-2") ],

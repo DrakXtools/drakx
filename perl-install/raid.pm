@@ -9,6 +9,7 @@ use strict;
 use common qw(:common :functional);
 use run_program;
 use devices;
+use commands;
 use fs;
 
 sub nb($) { 
@@ -63,6 +64,15 @@ sub updateSize($) {
     };
 }
 
+sub module($) {
+    my ($part) = @_;
+    my $mod = $part->{level};
+
+    $mod = 5 if $mod eq "4";
+    $mod = "raid$mod" if $mod =~ /^\d+$/;
+    $mod;
+}
+
 sub updateIsFormatted($) {
     my ($part) = @_;
     $part->{isFormatted}  = and_ map { $_->{isFormatted}  } @{$part->{disks}};
@@ -97,6 +107,7 @@ EOF
 sub make($$) {
     my ($raid, $part) = @_;
     my $dev = devices::make($part->{device});
+    eval { commands::modprobe(module($part)) };
     run_program::run("raidstop", $dev);
     &write($raid, "/etc/raidtab");
     run_program::run("mkraid", "--really-force", $dev);
@@ -107,6 +118,14 @@ sub format_part($$) {
     my ($raid, $part) = @_;
     make($raid->{raid}, $part) if is($part);
     fs::format_part($part);
+}
+
+sub verify($) {
+    my ($raid) = @_;
+    $raid && $raid->{raid} or return;
+    foreach (@{$raid->{raid}}) {
+	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die _("Not enough partitions for RAID level %d\n", $_->{level});
+    }
 }
 
 1;
