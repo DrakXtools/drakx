@@ -474,7 +474,7 @@ sub test_mouse {
 	$draw_by_name->('mouse');
 	if ($::isInstall || 1) {
 	    $draw_text->(N("Please test the mouse"), 200);
-	    if ($b_x_protocol_changed && $mouse->{nbuttons} > 3 && member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2')) {
+	    if ($b_x_protocol_changed && $mouse->{nbuttons} > 3 && $mouse->{device} eq 'psaux' && member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2')) {
 		$draw_text->(N("To activate the mouse,"), 240);
 		$draw_text->(N("MOVE YOUR WHEEL!"), 260);
 	    }
