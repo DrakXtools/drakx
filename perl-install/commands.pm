@@ -331,55 +331,15 @@ sub more {
     require devices;
     my $tty = devices::make('tty');
     my $n = 0; 
-    local *IN; open IN, $tty or die "can't open $tty\n";
+    open my $IN, $tty or die "can't open $tty\n";
     local $_;
     while (<>) {
 	if (++$n == 25) {
-	    my $v = <IN>;
+	    my $v = <$IN>;
 	    $v =~ /^q/ and exit 0;
 	    $n = 0;
 	}
 	print
-    }
-}
-
-sub pack_ {
-    my $t;
-    foreach (@_) {
-	if (-d $_) {
-	    pack_(glob_($_));
-	} else {
-	    print -s $_, "\n";
-	    print $_, "\n";
-
-	    local *F;
-	    open F, $_ or die "can't read file $_: $!\n";
-	    while (read F, $t, $BUFFER_SIZE) { print $t }
-	}
-    }
-}
-
-sub unpack_ {
-    my $t;
-    @_ == 1 or die "give me one and only one file to unpack\n";
-    local *F;
-    open F, $_[0] or die "can't open file $_: $!\n";
-    while (1) {
-	my $size = chomp_(scalar <F>);
-	defined $size or last;
-	$size =~ /^\d+$/ or die "bad format (can't find file size)\n";
-	my $filename = chomp_(scalar <F>) or die "expecting filename\n";
-
-	print "$filename\n";
-	my $dir = dirname($filename);
-	-d $dir or mkdir_p($dir);
-
-	local *G;
-	open G, "> $filename" or die "can't write file $filename: $!\n";
-	while ($size) {
-	    $size -= read(F, $t, min($size, $BUFFER_SIZE)) || die "data for file $filename is missing\n";
-	    print G $t or die "error writing to file $filename: $!\n";
-	}
     }
 }
 
