@@ -1195,30 +1195,32 @@ sub restore_step_sys {
 
 sub restore_step2 {
     my $retore_step2;
-    gtkpack($retore_box2,
+
+ 
+    gtkpack($advanced_box,
 	    $retore_step2 = gtkpack_(new Gtk::VBox(0,10),
 				     1, new Gtk::VBox(0,10),
 				     0, my $check_restore_sys = new Gtk::CheckButton(_("Restore system")),
 				     0, my $check_restore_user = new Gtk::CheckButton(_("Restore Users")),
 				     0, my $check_restore_other = new Gtk::CheckButton(_("Restore Other")),
 				     1, new Gtk::VBox(0,10),
-				     0, gtkpack_(new Gtk::HBox(0,10),
-						 1,  new Gtk::VBox(0,10),
-						 0, gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
-						     ${$central_widget}->destroy();
-						     if ($restore_sys && $backup_sys_cvs) { restore_step_sys(); }
-						     elsif ($restore_user) { restore_step_user();}
-						     elsif ($restore_other){ restore_step_other();}
-						     else{ do_restore();}
-								 }),
-						 ),
+#				     0, gtkpack_(new Gtk::HBox(0,10),
+#						 1,  new Gtk::VBox(0,10),
+#						 0, gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
+#						     ${$central_widget}->destroy();
+#						     if ($restore_sys && $backup_sys_cvs) { restore_step_sys(); }
+#						     elsif ($restore_user) { restore_step_user();}
+#						     elsif ($restore_other){ restore_step_other();}
+#						     else{ do_restore();}
+#								 }),
+#						 ),
 				     ),
 	    );
     foreach  ([$check_restore_sys, \$restore_sys], [$check_restore_user, \$restore_user], [$check_restore_other, \$restore_other]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
-
+    restore_button_box();
     $central_widget = \$retore_step2;
     $up_box->show_all();
 }
@@ -1245,7 +1247,9 @@ sub restore_box {
 											$restore_user = 1;
 											do_restore(); }),
 						  1, gtksignal_connect(new Gtk::Button(_("Custom Restore")), 
-								       clicked => sub { $retore_box->destroy(); restore_step2(); }),
+								       clicked => sub { $retore_box->destroy(); 
+											restore_step2();
+										    }),
 						  ),
 				      1, new Gtk::HBox(0,10),
 				      ),
