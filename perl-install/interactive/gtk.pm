@@ -461,22 +461,35 @@ sub ask_fromW {
 		$w = new Gtk::Combo;
 		$w->set_use_arrows_always(1);
 		$w->entry->set_editable(!$e->{not_edit});
-		$w->set_popdown_strings(@{$e->{list}});
 		$w->disable_activate;
+
+		my @formatted_list = map { may_apply($e->{format}, $_) } @{$e->{list}};
+
+		$w->set_popdown_strings(@formatted_list);
 		($real_w, $w) = ($w, $w->entry);
-		my @l = sort { $b <=> $a } map { length } @{$e->{list}};
+		$set = sub {
+		    my $s = may_apply($e->{format}, $_[0]);
+		    $w->set_text($s) if $s ne $w->get_text && $_[0] ne $w->get_text;
+		};
+		$get = sub { 
+		    my $s = $w->get_text;
+		    my $i = eval { find_index { $s eq $_ } @formatted_list };
+		    defined $i ? $e->{list}[$i] : $s;
+		};
+
+		my @l = sort { $b <=> $a } map { length } @formatted_list;
 		$has_horiz_scroll = 1;
 		$width = $l[@l / 16]; # take the third octile (think quartile)
 	    } else {
                 $w = new Gtk::Entry;
 		$w->signal_connect(focus_in_event => sub { $w->select_region });
 		$w->signal_connect(focus_out_event => sub { $w->select_region(0,0) });
+		$set = sub { $w->set_text($_[0]) if $_[0] ne $w->get_text };
+		$get = sub { $w->get_text };
 	    }
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $w->signal_connect(changed => $changed);
 	    $w->set_visibility(0) if $e->{hidden};
-	    $set = sub { $w->set_text($_[0]) if $_[0] ne $w->get_text };
-	    $get = sub { $w->get_text };
 	}
 	$w->signal_connect(focus_out_event => sub { 
             $update->(sub { $common->{callbacks}{focus_out}($ind) });

@@ -274,14 +274,12 @@ sub ask_from_normalize {
 	    $e->{type} = 'treelist' if $e->{separator};
 	    add2hash_($e, { not_edit => 1 });
 	    $e->{type} ||= 'combo';
-	    ${$e->{val}} = $li->[0] if ($e->{type} ne 'combo' || $e->{not_edit}) && !member(${$e->{val}}, @$li);
-	    if ($e->{type} eq 'combo' && $e->{format}) {
-		my @l = map { $e->{format}->($_) } @{$e->{list}};
-		delete $e->{format};
-		each_index {
-		    ${$e->{val}} = $l[$::i] if $_ eq ${$e->{val}};
-		} @{$e->{list}};
-		($e->{list}, $e->{saved_list}) = (\@l, $e->{list});
+
+	    if (!$e->{not_edit}) {
+		die q(when using "not_edit" you must use strings, not a data structure) if ref ${$e->{val}} || grep { ref } @$li;
+	    }
+	    if ($e->{type} ne 'combo' || $e->{not_edit}) {
+		${$e->{val}} = $li->[0] if !member(may_apply($e->{format}, ${$e->{val}}), map { may_apply($e->{format}, $_) } @$li);
 	    }
 	} elsif ($e->{type} eq 'range') {
 	    $e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
@@ -338,13 +336,6 @@ sub ask_from_real {
     my ($o, $common, $l) = @_;
     my $v = $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
     %$common = ();
-    foreach my $e (@$l) {
-	my $l = delete $e->{saved_list} or next;
-	each_index {
-	    ${$e->{val}} = $l->[$::i] if $_ eq ${$e->{val}};
-	} @{$e->{list}};
-	$e->{list} = $l;
-    }
     $v;
 }
 
