@@ -138,7 +138,7 @@ sub setVarsInCsh {
 }
 
 sub update_gnomekderc {
-    explanations "updated file $_[0]";
+    explanations "modified file $_[0]";
     goto &MDK::Common::System::update_gnomekderc;
 }
 
