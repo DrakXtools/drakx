@@ -14,8 +14,8 @@ If you experience problems, you can try to add on the command line :
  o  0fpatch07 to use a patch from the floppy (file named 09patch.pl07).
  o  0fcleankey07 to remove previously saved system config files from the USB key.
  o  0fvirtual_key=09/dev/hda10f,09/key07 to use file 09/key07 on device 09/dev/hda107 as a
-    virtual key instead of a physical one (must be an existing file containing a
-    valid filesystem - e.g. a loopback).
+    virtual key instead of a physical one (must be an existing file containing
+    a valid filesystem - e.g. a loopback).
 
 You can also pass some 0f<specific kernel options>07 to the Linux kernel. 
 For example, try 0flinux mem=128M07 if your system has 128Mb of RAM but we
