@@ -17,7 +17,7 @@ sub config_window {
     # BUG: once we've released mdk9.2 and unfreeze cooker, morph this
     #      into a proper error dialog with a nice error message (but
     #      for now we cannot due to string freeze :-()
-    @l = { label => N("Parameters"), help => "", val => N("NONE"), allow_empty_list => 1 } if -1 == $#l;
+    @l = { label => N("Parameters"), help => "", val => N("NONE"), allow_empty_list => 1 } if !@l;
     if ($in->ask_from(N("Module configuration"), N("You can configure each parameter of the module here."), \@l)) {
 	   my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
 	   if ($options) {
