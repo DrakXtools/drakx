@@ -377,16 +377,16 @@ sub getSerialModem {
     my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
     eval { modules::load($serdev) };
 
-    detect_devices::probeSerialDevices();
+    probeSerialDevices();
     foreach ('modem', map { "ttyS$_" } (0..7)) {
 	next if $mouse->{device} =~ /$_/;
 	next unless -e "/dev/$_";
-	detect_devices::hasModem("/dev/$_") and $modem->{device} = $_, last;
+	hasModem("/dev/$_") and $modem->{device} = $_, last;
     }
 
     #- add an alias for macserial on PPC
     modules::add_alias('serial', $serdev) if (arch() =~ /ppc/ && $modem->{device});
-    my @devs = detect_devices::pcmcia_probe();
+    my @devs = pcmcia_probe();
     foreach (@devs) {
 	$_->{type} =~ /serial/ and $modem->{device} = $_->{device};
     }
