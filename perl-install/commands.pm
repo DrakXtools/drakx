@@ -339,7 +339,7 @@ sub strings {
     $h and die "usage: strings [-o] [-n min-length] [<files>]\n";
     $n = $n ? shift : 4;
     $/ = "\0"; @ARGV = @_; my $l = 0; while (<>) {
-	while (/[$printable_chars]\{$n,}/og) {
+	while (/[$printable_chars]{$n,}/og) {
 	    printf "%07d ", ($l + length $') if $o;
 	    print "$&\n" ;
 	}

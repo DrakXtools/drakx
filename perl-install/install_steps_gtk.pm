@@ -34,13 +34,6 @@ my $w_help;
 my $itemsNB = 1;
 my (@background1, @background2);
 
-#- initialised in function init_sizes
-my ($width,       $height);
-my ($stepswidth,  $stepsheight);
-my ($logowidth,   $logoheight);
-my ($helpwidth,   $helpheight);
-my ($windowwidth, $windowheight);
-
 my @themes_vga16 = qw(blue blackwhite savane);
 my @themes = qw(DarkMarble marble3d blueHeart);
 
@@ -231,7 +224,7 @@ sub new($$) {
     install_theme($o);
     create_logo_window($o);
 
-    $my_gtk::force_center = [ $width - $windowwidth, $logoheight, $windowwidth, $windowheight ];
+    $my_gtk::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
     (bless {}, ref $type || $type)->SUPER::new($o);
 }
@@ -524,7 +517,7 @@ sub choosePackagesTree {
 					    #- keep show more or less [ _("Show more") => sub { &$show_add(-10) } ],
 					   )
     ));
-    $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $windowwidth, $windowheight);
+    $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
     $w->show;
     &$show_add(0);
     &$update();
@@ -539,7 +532,7 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
     my $w = my_gtk->new(_("Installing"), grab => 1);
-    $w->{window}->set_usize($windowwidth * 0.8, $windowheight * 0.5);
+    $w->{window}->set_usize($::windowwidth * 0.8, $::windowheight * 0.5);
     my $text = new Gtk::Label;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
@@ -603,7 +596,7 @@ _("There was an error ordering packages:"), $1, _("Go on anyway?") ], 1) and ret
 
 #------------------------------------------------------------------------------
 sub load_rc($) {
-    if (my ($f) = grep { -r $_ } map { "$_/$_[0].rc" } (".", "/usr/share", dirname(__FILE__))) {
+    if (my ($f) = grep { -r $_ } map { "$_/$_[0].rc" } ("share", "/usr/share", dirname(__FILE__))) {
 	Gtk::Rc->parse($f);
 	foreach (cat_($f)) {
 	    if (/style\s+"background"/ .. /^\s*$/) {
@@ -646,8 +639,8 @@ widget "*Steps*" style "steps"
 
 #------------------------------------------------------------------------------
 sub create_big_help {
-    my $w = my_gtk->new('', grab => 1, force_position => [ $stepswidth, $logoheight ]);
-    $w->{rwindow}->set_usize($logowidth, $height - $logoheight);
+    my $w = my_gtk->new('', grab => 1, force_position => [ $::stepswidth, $::logoheight ]);
+    $w->{rwindow}->set_usize($::logowidth, $::rootheight - $::logoheight);
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
 		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, 
@@ -669,8 +662,8 @@ sub create_help_window {
     } else {
 	$w = bless {}, 'my_gtk';
 	$w->{rwindow} = $w->{window} = new Gtk::Window;
-	$w->{rwindow}->set_uposition($width - $helpwidth, $height - $helpheight);
-	$w->{rwindow}->set_usize($helpwidth, $helpheight);
+	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
+	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
 	$w->sync;
     }
 
@@ -725,7 +718,7 @@ sub create_steps_window {
     my $w = bless {}, 'my_gtk';
     $w->{rwindow} = $w->{window} = new Gtk::Window;
     $w->{rwindow}->set_uposition(0, 0);
-    $w->{rwindow}->set_usize($stepswidth, $stepsheight);
+    $w->{rwindow}->set_usize($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name("Steps");
     $w->{rwindow}->set_events('button_press_mask');
     $w->{rwindow}->signal_connect(button_press_event => sub {
@@ -780,8 +773,8 @@ sub create_logo_window() {
     gtkdestroy($o->{logo_window});
     my $w = bless {}, 'my_gtk';
     $w->{rwindow} = $w->{window} = new Gtk::Window;
-    $w->{rwindow}->set_uposition($stepswidth, 0);
-    $w->{rwindow}->set_usize($logowidth, $logoheight);
+    $w->{rwindow}->set_uposition($::stepswidth, 0);
+    $w->{rwindow}->set_usize($::logowidth, $::logoheight);
     $w->{rwindow}->set_name("background");
     $w->show;
     my $file = "logo-mandrake.xpm";
@@ -795,12 +788,12 @@ sub create_logo_window() {
 }
 
 sub init_sizes() {
-#    ($height,      $width)        = (480, 640);
-    ($height,      $width)        = my_gtk::gtkroot()->get_size;
-    ($stepswidth,  $stepsheight)  = (140,   $height);                                           
-    ($logowidth,   $logoheight)   = ($width - $stepswidth, 40);                                 
-    ($helpwidth,   $helpheight)   = ($width - $stepswidth, 100);                                
-    ($windowwidth, $windowheight) = ($width - $stepswidth, $height - $helpheight - $logoheight);
+    ($::rootheight,  $::rootwidth)    = (480, 640);
+    ($::rootheight,  $::rootwidth)    = my_gtk::gtkroot()->get_size;
+    ($::stepswidth,  $::stepsheight)  = (140, $::rootheight);                                           
+    ($::logowidth,   $::logoheight)   = ($::rootwidth - $::stepswidth, 40);                                 
+    ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 100);                                
+    ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
 }
 
 #------------------------------------------------------------------------------

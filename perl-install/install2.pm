@@ -430,7 +430,7 @@ sub configureTimezone {
     $o->timeConfig($f, $clicked);
 }
 #------------------------------------------------------------------------------
-sub configureServices { $o->servicesConfig }
+sub configureServices { $::expert and $o->servicesConfig }
 #------------------------------------------------------------------------------
 sub configurePrinter  { $o->printerConfig }
 #------------------------------------------------------------------------------

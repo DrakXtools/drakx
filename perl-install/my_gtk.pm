@@ -513,7 +513,7 @@ sub _ask_from_list {
     gtkadd($o->{window},
 	   gtkpack($o->create_box_with_title(@$messages),
 		   gtkpack_(new Gtk::VBox(0,7),
-			    1, @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list,
+			    1, @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, min(400, $::windowheight - 60)) : $list,
 			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
 		  ));
     $o->show; #- otherwise the moveto is not done

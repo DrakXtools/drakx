@@ -13,7 +13,7 @@ use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
 
-my ($prefix, %cards, %monitors);
+my ($prefix, %monitors);
 
 1;
 
@@ -31,13 +31,10 @@ sub setVirtual($) {
 
 sub readCardsDB {
     my ($file) = @_;
-    my ($card);
-
-#    %cards and return;
+    my ($card, %cards);
 
     local *F;
     open F, $file or die "file $file not found";
-    print "readCardsDB\n";
 
     my ($lineno, $cmd, $val) = 0;
     my $fs = {
