@@ -263,10 +263,10 @@ arch =~ /ppc/ ? () : (
 	} else {
 	    @l = ( 
 { label => _("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
-arch() !~ /sparc|ppc/ ? (
+if_(arch() !~ /sparc|ppc/,
 { label => _("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
 { label => _("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
-) : (),
+),
 	    );
 	    @l = $l[0] unless $::expert;
 	}
@@ -282,8 +282,8 @@ if (arch() !~ /ppc/) {
 	if ($e->{type} eq "image") {
 		@l = ({ label => _("Label"), val => \$e->{label} },
 		$::expert ? @l[1..4] : { label => _("Append"), val => \$e->{append} } ,
-		$::expert ? { label => _("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] } : (),
-		$::expert ? @l[5] : (),
+		if_($::expert, { label => _("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
+		if_($::expert, $l[5]),
 		{ label => _("NoVideo"), val => \$e->{novideo}, type => 'bool' },
 		{ label => _("Default"), val => \$default, type => 'bool' }
 		);
