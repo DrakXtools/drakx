@@ -120,6 +120,7 @@ endif
 	cd share ; cp template.in/*.in $(DEST)/usr/share
 	cd share ; cp MonitorsDB Cards+ CardsNames $(DEST)/usr/X11R6/lib/X11
 	cd share ; cp *.xpm $(DEST)/usr/share
+	cd share ; cp isdndb.net $(DEST)/usr/share/isdn_db.txt
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssList $(ROOTDEST)/Mandrake/base
 
