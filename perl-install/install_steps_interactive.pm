@@ -843,7 +843,7 @@ sub summaryBefore {
 	$o->{intf}{eth0} and $o->{netcnx}{type} ||= 'lan';
 	$o->{intf}{ppp0} and $o->{netcnx}{type} ||= 'modem';
     };
-    log::l("summaryBefore: network configuration: $@");
+    log::l("summaryBefore: network configuration: ", formatError($@));
 }
 
 sub summary_prompt {
