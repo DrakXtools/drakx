@@ -129,6 +129,10 @@ sub init {
     mkdir_p("/etc/$_"), cp_f(glob_("/image/etc/$_/*"), "/etc/$_")
       foreach qw(cups profile.d sysconfig devfs/conf.d);
 
+    #- TODO: cp_af is broken for symlinks to directories
+    #- replace below with cp_af is fixed in perl-MDK-Common
+    run_program::run('cp', '-a', glob("/image/etc/rc[0-6].d"), '/etc');
+
     #- directories we badly need as non-links because files will be written in
     handle_etcfiles('DIR');
  
