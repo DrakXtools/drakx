@@ -74,8 +74,21 @@ char * get_auto_value(char * auto_param)
 {
 	struct param_elem * ptr = automatic_params;
 
+	struct param_elem short_aliases[] =
+		{ { "method", "met" }, { "network", "netw" }, { "interface", "int" }, { "gateway", "gat" },
+		  { "netmask", "netm" }, { "adsluser", "adslu" }, { "adslpass", "adslp" }, { "hostname", "hos" },
+		  { "domain", "dom" }, { "server", "ser" }, { "directory", "dir" }, { "user", "use" },
+		  { "pass", "pas" }, { "disk", "dis" }, { "partition", "par" }, { NULL } };
+	struct param_elem * ptr_alias = short_aliases;
+	while (ptr_alias->name) {
+		if (streq(auto_param, ptr_alias->name))
+			break;
+		ptr_alias++;
+	}
+
 	while (ptr->name) {
-		if (!strcmp(ptr->name, auto_param))
+		if (streq(ptr->name, auto_param)
+		    || (ptr_alias->name && streq(ptr_alias->value, ptr->name)))
 			return ptr->value;
 		ptr++;
 	}

@@ -78,3 +78,14 @@ fi
 
 
 
+You may use shorter versions of keywords (it helps reducing size of
+commandline), please find each keyword short-alias counterpart in file
+../automatic.c under the identifier named "short_aliases".
+
+This gives for example for:
+
+	automatic=method:nfs,network:static,ip:192.168.1.24,server:192.168.1.7,directory:/stable/i586
+==>
+	automatic=met:nfs,net:static,ip:192.168.1.24,ser:192.168.1.7,dir:/stable/i586
+
+
