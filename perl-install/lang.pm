@@ -679,8 +679,8 @@ sub unpack_langs {
 
 sub read {
     my ($prefix, $user_only) = @_;
-    my $file = $prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n');
-    my %h = getVarsFromSh("$prefix$file");
+    my ($f1, $f2) = ("$prefix$ENV{HOME}/.i18n", "$prefix/etc/sysconfig/i18n");
+    my %h = getVarsFromSh($user_only && -e $f1 ? $f1 : $f2);
     my $lang = $h{LC_MESSAGES} || 'en_US';
     $lang = bestMatchSentence($lang, list()) if !exists $languages{$lang};
     my $langs = $user_only ? () :
@@ -741,6 +741,9 @@ sub write {
 	my $charset = lang2charset($lang);
 	my $confdir = $prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
 	my ($prev_kde_charset) = cat_("$confdir/kdeglobals") =~ /^Charset=(.*)/mi;
+
+	mkdir_p($confdir);
+
 	update_gnomekderc("$confdir/kdeglobals", Locale => (
 			      Charset => charset2kde_charset($charset),
 			      Country => lang2country($lang, $prefix),
