@@ -161,7 +161,8 @@ sub create_ctree {
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
     $tree, sub {
-	my $node = $wleaves{$_[0]} or return;
+	my $v = may_apply($e->{format}, $_[0]);
+	my $node = $wleaves{$v} or return;
 
 	for (my $c = $node; $c; $c = $c->row->parent) { 
 	    $tree->expand($c);
