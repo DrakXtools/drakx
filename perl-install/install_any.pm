@@ -550,6 +550,13 @@ sub install_urpmi {
 	close FILES or log::l("parsehdlist failed"), return;
 	close LIST;
 
+	#- build synthesis file if there are still not existing (ie not copied from mirror).
+	if (-s "$prefix/var/lib/urpmi/synthesis.$name.cz" > 32) {
+	    run_program::rooted($prefix, "parsehdlist", ">", "/var/lib/urpmi/synthesis.hdlist.$name",
+				"--synthesis", "/var/lib/urpmi/hdlist.$name.cz");
+	    run_program::rooted($prefix, "gzip", "-S", ".cz", "/var/lib/urpmi/synthesis.hdlist.$name");
+	}
+
 	my ($qname, $qdir) = ($name, $dir);
 	$qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
@@ -565,9 +572,6 @@ sub install_urpmi {
 ";
     } sort { $a->{medium} <=> $b->{medium} } values %$mediums;
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
-
-    #- automatically build all synthesis files.
-    run_program::rooted($prefix, "perl", "-e", 'use urpm; $urpm = new urpm; $urpm->read_config; $urpm->update_media');
 }
 
 
