@@ -472,8 +472,7 @@ sub getSpeedtouch() {
 }
 
 sub getBewan() {
-    grep { $_->{description} =~ /Bewan Systems\|PCI ADSL Modem|BEWAN ADSL USB/ } probeall();
-    
+    matching_desc__regexp('Bewan Systems\|PCI ADSL Modem|BEWAN ADSL USB');
 }
 sub getSagem() {
     matching_driver(qw(adiusbadsl eagle-usb));
