@@ -60,6 +60,7 @@ local $_ = join '', @ARGV;
 /--skip-wizard/ and manage($netc, $intf);
 /--add/ and add_intf();
 /--del/ and del_intf();
+/--old/ and goto old;
 if (/--install/) {
     $::isInstall = 1;
     add_intf()
@@ -69,6 +70,7 @@ if (/--install/) {
 # default is to run wizard
 add_intf();
 
+old:
 my @all_cards;
 
 my $window1 = ugtk2->new('drakconnect');
