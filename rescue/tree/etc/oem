@@ -872,6 +872,7 @@ sub selectPackage {
 		    my $dep = $packages->{depslist}[$_] or next;
 		    $preferred ||= $dep;
 		    $dep->{selected} and $preferred = $dep, last;
+		    packageName($dep) =~ /kernel-\d/ and $preferred = $dep; #- hard coded preference to simple kernel
 		    exists $preferred{::chop_version($dep->{name})} and $preferred = $dep;
 		}
 		selectPackage($packages, $preferred, $base, $otherOnly, $check_recursion) if $preferred;
