@@ -788,6 +788,7 @@ sub dmidecode() {
 	foreach (run_program::get_stdout('dmidecode')) {
 	    if (/^\t\t(.*)/) {
 		$l[-1]->{string} .= "$1\n";
+		$l[-1]->{$1} = $2 if /^\t\t(.*): (.*)$/;
 	    } elsif (my ($s) = /^\t(.*)/) {
 		next if $s =~ /^DMI type /;
 		$s =~ s/ Information$//;
