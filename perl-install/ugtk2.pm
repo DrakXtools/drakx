@@ -751,7 +751,7 @@ sub new {
 
     $o->{pop_it} ||= $pop_it || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
-	pop @l if !$::isInstall; #- don't take into account the DrawingArea
+	pop @l if !$::isInstall && $::isWizard; #- don't take into account the DrawingArea
 	any { $_->visible } @l;
     };
 
@@ -822,14 +822,19 @@ sub new {
 
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
 
-    if ($::isEmbedded && !$o->{pop_it} && !eval { $::Plug && $::Plug->child }) {
+    if ($::isEmbedded && !$o->{pop_it}) {
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk2::HBox(0,0);
 	$o->{rwindow} = $o->{window};
-	$::Plug ||= new Gtk2::Plug($::XID);
-	$::Plug->show;
-	flush();
-	$::Plug->add($o->{window});
+	if (!$::Plug) {
+	    $::Plug = new Gtk2::Plug($::XID);
+	    $::Plug->show;
+	    flush();
+	    $::WizardTable = Gtk2::Table->new(2, 2, 0);
+	    $::Plug->add($::WizardTable);
+	}
+	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
+	$::WizardTable->show;
     }
     $o;
 }
