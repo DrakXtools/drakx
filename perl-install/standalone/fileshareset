@@ -334,9 +334,9 @@ sub name_mangle {
     $_ .= "_" while length($_) < 3;
 
     # 4. if size is too big, shorten it
-    while (length > 15) {
+    while (length > 12) {
 	my ($s) = m|.*?/(.*)|;
-	if (length($s) > 10 && !grep { /\Q$s/ } @others) {
+	if (length($s) > 8 && !grep { /\Q$s/ } @others) {
 	    # dropping leading directories when the resulting is still long and meaningful
 	    $_ = $s;
 	    next;
@@ -358,7 +358,7 @@ sub name_mangle {
     my $conflicts = qr|^($l)$|;
     if (/$conflicts/) {
       A: while (1) {
-	    for (my $nb = 1; length("$_$nb") <= 15; $nb++) {
+	    for (my $nb = 1; length("$_$nb") <= 12; $nb++) {
 		if ("$_$nb" !~ /$conflicts/) {
 		    $_ = "$_$nb";
 		    last A;
