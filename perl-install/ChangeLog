@@ -1,3 +1,135 @@
+2003/01/10  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/netconnect.pm: 
+	  - catch wizcancel die
+	  - fix fucked previous button after configuration completes
+	  - little cleanup
+
+2003/01/10  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: do not use supermount by default
+	(readBootloaderConfigBeforeInstall): set bootUnsafe to 0 when upgrading
+	so
+	that it doesn't ask where to install the bootloader (mbr vs boot
+	partition)
+	simplify and factorize
+	(now works on 1.upgrade 2.install 3.install + change existing config)
+
+	* Xconfig/card.pm: fix priority
+
+	* Xconfig/main.pm, standalone/XFdrake, install_steps_interactive.pm:
+	simplify and factorize
+	(now works on 1.upgrade 2.install 3.install + change existing config)
+
+	* fsedit.pm: lvm on / works (dixit Brian J. Murrell)
+
+	* install2.pm: fix unused vars
+
+2003/01/09  François Pons  <fpons@mandrakesoft.com>
+
+	* install2.pm: changed interface of detect_devices::install_addons.
+
+	* detect_devices.pm: add update-ldetect-lst after install_addons.
+
+2003/01/09  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/fi.po, share/po/sq.po: updated Finnish and Albanian files
+
+2003/01/09  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (configureNetwork): call
+	install_steps::configureNetwork()
+	  - configureNetwork step now only does easy_dhcp()
+	  - added full network configuration to summary
+
+	* network/network.pm (easy_dhcp): don't call network::configureNetwork2
+	  - fix priority
+	  - add a log
+
+	* install2.pm: 
+	  - configureNetwork step now only does easy_dhcp()
+	  - added full network configuration to summary
+
+	* install_steps_gtk.pm (installPackages): do pop error messages
+
+2003/01/09  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm: Added cupsd.conf handling functions for a new printer
+	sharing configuration dialog.
+
+2003/01/09  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* share/po/fr.po: fix invalid translation for draksound
+
+	* harddrake/sound.pm: there's an oss usb driver too
+	  - snd-rme9652 is a snd-rme96 sub module
+	  - fix rme96xx <=> snd-rme96 equivalence
+	quite a number of ensoniq cards are managed by sb.o
+	  - pss is the oss equivalent of alsa ad1848
+	  - oss ad1848 is not a driver but a sub module
+	cmi8330 is handled by sb too
+	als100 card is handled by sb oss sound driver
+	oss trident driver handle ali5451 too
+	  - remove doble
+	  - add a comment noting there's no alsa alternative for oss' ad1889
+	driver
+	fix "unlisted driver" bug for rme driver
+	  - add new oss drivers : ad1889, ali5455 and forte
+	  - mark forte as oss counterpart for alsa snd-fm801 driver
+	  - mark ice1712 as oss counterpart for alsa snd-ice1712 driver
+	  - mark ali5455 as one of the oss counterpart for alsa snd-intel8x0
+	  driver
+	  - update top commentary
+	  - snd-via686 and snd-via8233 were merged in via82cxxx_audio
+	  - don't pollute install ml anymore
+
+	* keyboard.pm: make return value name more explicit
+	simplify
+
+2003/01/08  François Pons  <fpons@mandrakesoft.com>
+
+	* detect_devices.pm: added install_addons to install pcitable or usbtable
+	addons.
+
+	* install2.pm: removed perl_checker warning.
+	added install_addons before leaving.
+
+	* any.pm: really install the bootloader.
+
+2003/01/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: fix a misc bug in rpmdrake (selecting a pkg doesn't work in
+	certain circumstances - seems to be when the treeview doesn't have the
+	focus, for exa
+	mple after a search) by changing a bit the way we handle
+	button_press_event in ask_browse_tree_info
+
+2003/01/08  Pixel  <pixel@mandrakesoft.com>
+
+	* network/network.pm: pass $::prefix instead of ''
+	fix typo
+	(easy_dhcp): cleanup
+
+	* install2.pm: UGLY TEMPORARY FIX: create an /etc/passwd for fontconfig
+
+	* ugtk2.pm: ensure drakx don't need wiz_default_up.png and
+	wiz_default_left.png
+
+2003/01/08  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/office.pm: Fixed Titi's bugs in the auto-configuration of
+	printers in OpenOffice.org.
+
+2003/01/08  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* printer/printerdrake.pm: once we identify the protocal, skip remaining
+	tests
+
+	* printer/office.pm: 
+	  - typo fix
+	  - s/if !/unless/
+	  - remove useless next
+
 2003/01/08  Pixel  <pixel@mandrakesoft.com>
 
 	* ugtk2.pm: ensure drakx don't need wiz_default_up.png and
@@ -7756,7 +7888,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.763 2003/01/07 23:08:22 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.764 2003/01/08 12:28:22 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
