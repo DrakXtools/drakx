@@ -237,29 +237,12 @@ _("Default") => { val => \$default, type => 'bool' },
 
 sub setAutologin {
   my ($prefix, $user, $desktop) = @_;
-  $user and do {
+  if ($user) {
       local *F;
-      open F, ">$prefix/home/$user/.wmrc" or die "Can't open $!";
-      print F $desktop;
+      open F, ">$prefix/etc/sysconfig/desktop" or die "Can't open $!";
+      print F uc($desktop);
       close F;
-  };
-  my @wm = (qw(gnome ice maker kde after fvwm fvwm2 fvwm95 mwm twm enligh xfce blackbox sawfish));
-  my @wm2 = (qw(gnome-session icewm wmaker kdestart afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish));
-  my $i=0;
-  foreach (@wm) {
-      lc($desktop) =~ /$_/ and $desktop = $wm2[$i] and last;
-      $i++;
   }
-  my $f = "$prefix/home/$user/.xinitrc";
-  -e $f or do {
-      open F, ">$f" or die "Can't open $!";
-      print F "# Mandrake-Autologin : if you remove this comment, I won't ever edit this file.";
-      close F; };
-  cat_($f) =~ /^# Mandrake-Autologin.*\n/ and do {
-      substInFile {
-	  s/^exec .*\n//;
-	  $_ = "exec $desktop\n" . $_ if eof;
-      } "$prefix/home/$user/.xinitrc"; };
   setVarsInSh("$prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
 }
