@@ -203,7 +203,7 @@ static int module_already_present(const char * name)
 	while (1) {
 		char buf[500];
 		if (!fgets(buf, sizeof(buf), f)) break;
-		if (!strncmp(name, buf, strlen(name)))
+		if (!strncmp(name, buf, strlen(name)) && buf[strlen(name)] == ' ')
 			answ = 1;
 	}
 	fclose(f);
