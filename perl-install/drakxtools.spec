@@ -342,6 +342,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o misc fixes (especially regarding sagem ADSL modems)
 - harddrake service: really autoconf TV cards
 - more synaptics fixes (blino)
+- use "users" options for removable devices (so that users can unmount
+  them if the devices were mounted by root) (blino)
 
 * Mon Sep  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.22mdk
 - diskdrake (pixel):
