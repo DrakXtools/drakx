@@ -1,6 +1,90 @@
 #!/usr/bin/perl
 
-system('mdk_move_loop', 'to_memory', 'always', 'totem');
+use lib qw(../../perl-install /usr/lib/libDrakX);
+use common;
+use interactive;
+
+sub busy_pids_and_files() {
+    my @pids = grep { $_ ne $$ && /^(\d+)$/ } all('/proc');
+
+    map {
+
+	my @l1 = grep {
+	    $_ && !m!^(/proc/|/dev/|pipe:|socket:)!;
+	} map { readlink($_) } "/proc/$_/exe", glob_("/proc/$_/fd/*");
+
+	my @l2 = grep { $_ } map { (split)[5] } cat_("/proc/$_/maps");
+
+	if (my @l = grep { m!^/image(_boot)?/! } @l1, @l2) {
+	    my ($cmdline) = cat_("/proc/$_/cmdline") =~ /([^\0]*)/;
+	    my $exe = readlink("/proc/$_/exe");
+	    { pid => $_, cmdline => $cmdline, exe => $exe, files => [ sort(uniq(@l)) ] };
+	} else {
+	    ();
+	}
+    } @pids;
+}
+
+sub remove_simple_daemons {
+    my (@busy) = @_;
+    my @auto_killed = grep { $_->{cmdline} =~ m!\bkdesud$|^kdeinit: kded$! } @busy or return @busy;
+
+    kill 15, map { $_->{pid} } @auto_killed;
+    sleep 1;
+
+    #- return updated list
+    busy_pids_and_files();
+}
+
+my $in = interactive->vnew;
+
+if (my @busy = remove_simple_daemons(busy_pids_and_files())) {
+    { #- log it
+	open(my $LOG, '| sudo sh -c "cat > /dev/tty3"');
+	print $LOG '*' x 80, "\n";
+	print $LOG join("\n", "$_->{exe} ($_->{cmdline}) =>", map { "  $_" } @{$_->{files}}) . "\n" foreach @busy;
+	print $LOG '*' x 80, "\n";
+    }
+
+    my @progs = map { 
+	my $s = $_->{cmdline};
+	$s =~ s!/.*/!!;
+	$s =~ s!^kdeinit:\s+(\S+).*!$1!;
+	$s =~ s!\s+--.*!!;
+	$s;
+    } @busy;
+
+    my $choice = 'quit';
+    my @l = my %l = (
+		     kill => N("Kill those programs"), 
+		     keep => N("Run with no CDROM support"), 
+		     quit => N("Quit"),
+		    );
+
+    $in->ask_from_({ ok => undef,
+		     title => N("Busy files"),
+		     messages => N("You can't use another CDROM when the following programs are running: 
+%s", join(", ", uniq(sort @progs))) }, 
+		  [ { type => 'list', val => \$choice, list => first(list2kv(@l)), format => sub { $l{$_[0]} } } ]);
+
+    if ($choice eq 'quit') {
+	$in->exit;
+    } elsif ($choice eq 'keep') {
+	exec 'totem' or $in->exit;
+    } else {
+	kill 15, map { $_->{pid} } @busy;
+	sleep 2;
+	kill 9, map { $_->{pid} } @busy;
+    }
+}
+
+{
+    $in->wait_message('', N("Copying to memory to allow removing the CDROM"));
+    system('mdk_move_loop', 'to_memory', 'always', 'totem');
+}
+
+ugtk2::gtkset_mousecursor_normal(); #- for restoring a normal in any case
+ugtk2::flush();
 
 my $totem_pid = $$;
 
