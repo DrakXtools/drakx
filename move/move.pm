@@ -267,10 +267,10 @@ sub key_installfiles {
             print "inconsistency: more than one /etc/passwd on key! can't proceed, please clean the key\n";
             exit 1;
         }
+        return if !@etcpasswords;
         my ($path) = $etcpasswords[0] =~ m|(.*)/etc/passwd|;
         run_program::run('cp', '-f', "$path$_", $_) foreach @files;
         run_program::run('rm', '-f', $etcpasswords[0]);
-        return $etcpasswords[0];
     };
 
     if (!-d $sysconf) {
