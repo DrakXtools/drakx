@@ -1,10 +1,11 @@
 package harddrake::ui;
 
 use strict;
+use diagnostics;
 
 require harddrake::data;
 use common;
-use my_gtk qw(:helpers :wrappers :various);
+use ugtk2 qw(:create :helpers :wrappers);
 use interactive;
 
 
@@ -71,7 +72,7 @@ my ($in, %IDs, $pid, $w);
 my (%options, %check_boxes);
 my $conffile = "/etc/sysconfig/harddrake2/ui.conf";
 
-my ($modem_check_box, $printer_check_box, $current_device);
+my ($modem_check_box, $printer_check_box, $current_device, $current_configurator);
 
 my @menu_items = 
     (
@@ -128,9 +129,10 @@ sub detect {
                 $_->{bus_id} = join ':', map { if_($i->{$_} ne "65535",  sprintf("%lx", $i->{$_})) } qw(vendor id subvendor subid);
                 $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(pci_bus pci_device pci_function);
             }
+	    # we really should test for $title there:
             # split description into manufacturer/description
             ($_->{Vendor}, $_->{description}) = split(/\|/, $_->{description}) if exists $_->{description};
-            
+
             if (exists $_->{val}) { # Scanner ?
                 my $val = $_->{val};
                 ($_->{Vendor}, $_->{description}) = split(/\|/, $val->{DESCRIPTION});
@@ -149,118 +151,129 @@ sub detect {
                 my $alter = harddrake::sound::get_alternative($_->{driver});
                 $_->{alternative_drivers} = join(':', @$alter) if $alter->[0] ne 'unknown';
             }
-            foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} }
+            foreach my $i (qw(vendor id subvendor subid pci_bus pci_device pci_function MOUSETYPE XMOUSETYPE unsafe val devfs_prefix wacom auxmouse)) { delete $_->{$i} };
             $_->{device} = '/dev/'.$_->{device} if exists $_->{device};
             push @$devices_list, $_;
         }
-        push @class_tree, [ $devices_list, [ [$title], 5 ], $icon, [ 0, ($title =~ /Unknown/ ? 0 : 1) ], $title, $configurator ];
+        push @class_tree, [ $devices_list, $title, $icon, $configurator ];
     }
     @class_tree;
 }
 
 sub new {
     my ($sig_id, $wait);
-    unless ($::isEmbedded) {
-        # so we don't stop the mcc's animation while detecting hw & building ui
-        $in = 'interactive'->vnew('su', 'default');
-        $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
-        my_gtk::flush();
-    }
+    $in = 'interactive'->vnew('su', 'default');
+    $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+    gtkflush();
     %options = getVarsFromSh($conffile);
     my @class_tree = &detect;
 
     # Build the gui
     add_icon_path('/usr/share/pixmaps/harddrake2/');
-    $w = my_gtk->new(N("Harddrake2 version ") . $harddrake::data::version);
-    $w->{window}->set_usize(760, 550) unless $::isEmbedded;
-
-    $w->{window}->add(my $main_vbox = gtkadd(gtkadd($::isEmbedded ? new Gtk::VBox(0, 0) :
-                                                    gtkadd(new Gtk::VBox(0, 0),
-                                                           my $menubar = ugtk::create_factory_menu($w->{rwindow}, @menu_items)),
-                                                    my $hpaned = new Gtk::HPaned),
-                                             my $statusbar = new Gtk::Statusbar));
-    $main_vbox->set_child_packing($statusbar, 0, 0, 0, 'start');
-    if ($::isEmbedded) {
-        $main_vbox->add(gtksignal_connect(my $but = new Gtk::Button(N("Quit")),
-                                          'clicked' => \&quit_global));
-        $main_vbox->set_child_packing($but, 0, 0, 0, 'start');
-    } else { $main_vbox->set_child_packing($menubar, 0, 0, 0, 'start') }
-
-    $hpaned->pack1(gtkadd(new Gtk::Frame(N("Detected hardware")), createScrolledWindow(my $tree = new Gtk::CTree(1, 0))), 1, 1);
-    $hpaned->pack2(my $vbox = gtkadd(gtkadd(gtkadd(new Gtk::VBox,
-                                                   gtkadd(new Gtk::Frame(N("Information")),
-                                                          gtkadd(new Gtk::HBox, 
-                                                                 createScrolledWindow(my $text = new Gtk::Text)))), 
-                                            my $module_cfg_button = new Gtk::Button(N("Configure module"))),
-                                     my $config_button = new Gtk::Button(N("Run config tool"))), 1, 1);
-    $vbox->set_child_packing($config_button, 0, 0, 0, 'start');
-    $vbox->set_child_packing($module_cfg_button, 0, 0, 0, 'start');
+    $w = ugtk2->new(N("Harddrake2 version ") . $harddrake::data::version);
+    $w->{window}->set_size_request(760, 550) unless $::isEmbedded;
+    my ($menubar, $factory) = create_factory_menu($w->{rwindow}, @menu_items);
+    my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, Gtk2::GType->STRING);
+    my $statusbar;
+    $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
+                               if_(!$::isEmbedded, 0, $menubar),
+                               1, create_hpaned(gtkadd(new Gtk2::Frame(N("Detected hardware")), 
+                                                       create_scrolled_window(my $tree = Gtk2::TreeView->new_with_model($tree_model))),
+                                                gtkpack_(0, Gtk2::VBox->new(0, 0),
+                                                         1, gtkadd(gtkset_size_request(new Gtk2::Frame(N("Information")), 300, 450),
+                                                                   create_scrolled_window(my $text = Gtk2::TextView->new)), 
+                                                         0, my $module_cfg_button = gtksignal_connect(new Gtk2::Button(N("Configure module")),
+                                                                                                      clicked => sub {
+                                                                                                        require modules::interactive;
+                                                                                                        modules::interactive::config_window($in, $current_device);
+                                                                                                        gtkset_mousecursor_normal();
+                                                                                                      }),
+                                                         0, my $config_button = gtksignal_connect(new Gtk2::Button(N("Run config tool")),
+                                                                                                  # we've a configurator, let's add a button for it and show it
+                                                                                                  clicked => sub {
+                                                                                                    return 1 if defined $pid;
+                                                                                                    if ($pid = fork()) {
+                                                                                                      $sig_id = $statusbar->push($statusbar->get_context_id("id"),
+                                                                                                                                 N("Running \"%s\" ...", $current_configurator));
+                                                                                                    } else {
+                                                                                                      exec($current_configurator) or die "$current_configurator missing\n";
+                                                                                                    }
+                                                                                                  })
+                                                        ),
+                                                'resize2' => 1
+                                               ),
+                               0, $statusbar = new Gtk2::Statusbar,
+                               if_($::isEmbedded, 0, gtksignal_connect(my $but = new Gtk2::Button(N("Quit")),
+                                                                       'clicked' => \&quit_global))
+                              )
+                      );
 
     my $color = gtkcolor(0x3100, 0x6400, 0xbc00);
     my $wcolor = gtkcolor(0xFFFF, 0x6400, 0x6400);
-    $tree->set_column_auto_resize(0, 1);
+#    $tree->set_column_auto_resize(0, 1);
+    my (%data, %configurators);
+    gtktext_append($text, [ [ N_("Click on a device in the left tree in order to get its information displayed here.") ] ]);
+    $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
+    $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 1));
+#    $textcolumn->set_min_width(350);
+    $tree->set_headers_visible(0);
+    my $select_count;
+    my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
+					my ($select) = @_;
+					# gtk+ send us a dummy signal on realization
+					unless ($select_count) {
+					  $select_count = 1;
+					  return 1;
+					}
+					my ($model, $iter) = $select->get_selected();
+					if ($model) {
+					  my $id = $model->get($iter, 1);
+					  $current_device = $data{$id};
 
-    $tree->signal_connect('select_row', sub {
-        my ($ctree, $row, $column, $event) = @_;
-        my $node = $ctree->node_nth($row);
-        my ($name, undef) = $tree->node_get_pixtext($node,0);
-        $current_device = $tree->{data}{$name};
+					  if ($current_device) {
+					    gtktext_insert($text, [ map  {
+					      if ($fields{$_}[0]) {
+						[  $fields{$_}[0] . ": ", { 'foreground' => 'royalblue3' } ],
+						  [ "$current_device->{$_}\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} eq 'unknown' ? 'indian red' : 'black') } ]
+						} else {
+						  print "Warning: skip \"$_\" field => \"$current_device->{$_}\"\n\n";
+						}
+					    } sort keys %$current_device ]);
 
-        if ($current_device) {
-            $text->hide;
-            $text->backward_delete($text->get_point);
-            foreach my $i (sort keys %$current_device) {
-                if ($fields{$i}[0]) {
-                    $text->insert("", $text->style->black, "", $fields{$i}[0] . ": ");
-                    $text->insert("", $i eq 'driver' && $current_device->{$i} eq 'unknown' ? $wcolor : $color,
-                                  "", "$current_device->{$i}\n\n");
-                } else { print "Skip \"$i\" field => \"$current_device->{$i}\"\n\n" }
-            }
-            disconnect($module_cfg_button, 'module');
+					    # we've valid driver, let's offer to configure it
+					    if (exists $current_device->{driver} &&  $current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/) {
+					      $module_cfg_button->show;
+					    }
 
-            # we've valid driver, let's offer to configure it
-            if (exists $current_device->{driver} &&  $current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/) {
-                $module_cfg_button->show;
-                $IDs{module} = $module_cfg_button->signal_connect(clicked => sub {
-                    require modules::interactive;
-                    modules::interactive::config_window($in, $current_device);
-                    gtkset_mousecursor_normal();
-                });
-            }
-            disconnect($config_button, 'tool');
-            $text->show;
-            my $configurator = $tree->{configurator}{$name};
-
-            return unless -x $configurator;
-            
-            # we've a configurator, let's add a button for it and show it
-            $IDs{tool} = $config_button->signal_connect(clicked => sub {
-                return if defined $pid;
-                if ($pid = fork()) {
-                    $sig_id = $statusbar->push($statusbar->get_context_id("id"), N("Running \"%s\" ...", $configurator));
-                } else { exec($configurator) or die "$configurator missing\n" }
-            });
-            $config_button->show;
-        } else {
-            $text->backward_delete($text->get_point); # erase all previous text
-            $config_button->hide;
-            $module_cfg_button->hide;
-        }
-    });
+					    $current_configurator = $configurators{$id};
+					    $config_button->show if -x $current_configurator;
+					    return 1;
+					  }
+					}
+					# hide buttons if needed
+					$text->get_buffer->set_text('', -1); # erase all previous text
+					$config_button->hide;
+					$module_cfg_button->hide;
+				      });
 
     # Fill the graphic tree with a "tree branch" widget per device category
     foreach (@class_tree) {
-        my ($devices_list, $arg, $icon, $arg2, $title, $configurator) = @$_;
-        my $hw_class_tree = $tree->insert_node(undef, undef, @$arg, (gtkcreate_png($icon)) x 2, @$arg2);
+        my ($devices_list, $title, $icon, $configurator) = @$_;
+        my $parent_iter = Gtk2::TreeIter->new;
+	$tree_model->append($parent_iter, undef);
+	$tree_model->set($parent_iter, [ 0 => gtkcreate_pixbuf($icon), 1 => $title ]);
+
         # Fill the graphic tree with a "tree leaf" widget per device
         foreach (@$devices_list) {
             my $custom_id = $_->{custom_id};
             delete $_->{custom_id};
-            $custom_id .= ' ' while exists($tree->{data}{$custom_id});
-            my $hw_item = $tree->insert_node($hw_class_tree, undef, [$custom_id], 5, (undef) x 4, 1, 0);
-            $tree->{data}{$custom_id} = $_;
-            $tree->{configurator}{$custom_id} = $configurator;
+            $custom_id .= ' ' while exists($data{$custom_id}); # get a unique id for eg bt8xx audio/video funtions
+	    $tree_model->append_set($parent_iter, [ 1 => $custom_id ]);
+            $data{$custom_id} = $_;
+            $configurators{$custom_id} = $configurator;
         }
+	#$tree->expand_to_path($tree_model->get_path($iter)) unless ($title eq "Unknown/Others");
+	$tree->expand_row($tree_model->get_path($parent_iter), 1) unless ($title eq "Unknown/Others");
     }
 
     $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
@@ -268,7 +281,7 @@ sub new {
     $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
     foreach (['PRINTERS_DETECTION', N("/Autodetect printers")], ['MODEMS_DETECTION', N("/Autodetect modems")]) {
-        $check_boxes{$_->[0]} = $menubar->{factory}->get_widget("<main>".N("/Options").$_->[1]);
+        $check_boxes{$_->[0]} = $factory->get_widget("<main>".N("/Options").$_->[1]);
         $options{$_->[0]} = 0 unless defined($options{$_->[0]}); # force detection by default
         $check_boxes{$_->[0]}->set_active($options{$_->[0]});    # restore saved values
     }
@@ -276,8 +289,7 @@ sub new {
     $w->{rwindow}->show_all();
     undef $wait;
     gtkset_mousecursor_normal();
-    foreach ($module_cfg_button, $config_button) { $_->hide };
-    $in = 'interactive'->vnew('su', 'default') if $::isEmbedded;
+    $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
     $w->main;
 }
 
@@ -285,17 +297,8 @@ sub new {
 sub quit_global {
     kill(15, $pid) if $pid;
     setVarsInSh($conffile, \%options);
-    my_gtk->exit(0);
+    ugtk2->exit(0);
 }
 
-# remove a signal handler from a button & hide it if needed
-sub disconnect {
-    my ($button, $id) = @_;
-    if ($IDs{$id}) {
-        $button->signal_disconnect($IDs{$id});
-        $button->hide;
-        undef $IDs{$id};
-    }
-}
 
 1;
