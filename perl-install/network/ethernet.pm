@@ -36,7 +36,7 @@ qq(
 /sbin/ifup lo
 ), $netcnx->{type});
     }
-    $::isStandalone and modules::write_conf($prefix);
+    $::isStandalone and modules::write_conf();
     1;
 }
 

@@ -200,7 +200,7 @@ user "$adsl->{login}"
 						      ['ppp-compress-21', 'bsd_comp'],
 						      ['ppp-compress-24', 'ppp_deflate'],
 						      ['ppp-compress-26', 'ppp_deflate'];
-	$::isStandalone and modules::write_conf($prefix);
+	$::isStandalone and modules::write_conf();
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->ensure_is_installed('speedtouch_mgmt', '/usr/share/speedtouch/mgmt.o', 'auto');
 	-e "$prefix/usr/share/speedtouch/mgmt.o" and goto end_firmware;
 	
@@ -252,7 +252,7 @@ lcp-echo-interval 0
 	modules::add_alias($_->[0], $_->[1]) foreach  ['char-major-108', 'ppp_generic'],
 						      ['tty-ldisc-14', 'ppp_synctty'],
 						      ['tty-ldisc-13', 'n_hdlc'];
-	$::isStandalone and modules::write_conf($prefix);
+	$::isStandalone and modules::write_conf();
     }
 
     if ($adsl_type eq 'pptp') {

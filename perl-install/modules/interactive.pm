@@ -22,7 +22,7 @@ sub config_window {
 	   my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
 	   if ($options) {
 		  modules::set_options($data->{driver}, $options);
-		    modules::write_conf;
+		    modules::write_conf();
 		}
     }
 }

@@ -404,7 +404,7 @@ sub write_conf {
     my ($in, $mouse, $b_keep_auxmouse_unchanged) = @_;
 
     &write($in, $mouse);
-    modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
+    modules::write_conf() if $mouse->{device} eq "usbmouse" && !$::testing;
 
     require Xconfig::xfree;
     my $xfree_conf = Xconfig::xfree->read;

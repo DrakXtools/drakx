@@ -680,7 +680,7 @@ I cannot set up this connection type.")), return;
                     format => sub { my ($e) = @_; $e->[0] . ($e->[1] ? " (using module $e->[1])" : "") },
                     
                     post => sub {
-                        modules::write_conf($::prefix) if $::isStandalone;
+                        modules::write_conf() if $::isStandalone;
                         my $_device = conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $netadr);
                         return "lan";
                     },

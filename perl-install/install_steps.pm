@@ -981,7 +981,7 @@ sub upNetwork {
 	symlinkf("$o->{prefix}/etc/$_", "/etc/$_") foreach qw(resolv.conf protocols services);
     }
     member($o->{method}, qw(ftp http nfs)) and return 1;
-    modules::write_conf($o->{prefix});
+    modules::write_conf();
     if (hasNetwork($o)) {
 	if ($o->{netcnx}{type} =~ /adsl|lan|cable/) {
 	    require network::netconnect;
@@ -1003,7 +1003,7 @@ sub downNetwork {
     my ($o, $costlyOnly) = @_;
 
     $o->{method} eq "ftp" || $o->{method} eq "http" || $o->{method} eq "nfs" and return 1;
-    modules::write_conf($o->{prefix});
+    modules::write_conf();
     if (hasNetwork($o)) {
 	if (!$costlyOnly) {
 	    require network::netconnect;

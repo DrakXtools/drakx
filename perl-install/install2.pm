@@ -276,7 +276,7 @@ sub setupBootloader {
     my ($_clicked, $ent_number, $auto) = @_;
     return if $::g_auto_install || $::uml_install;
 
-    modules::write_conf($o->{prefix});
+    modules::write_conf();
 
     installStepsCall($o, $auto, 'setupBootloaderBefore') if $ent_number == 1;
     installStepsCall($o, $auto, 'setupBootloader', $ent_number);
@@ -289,7 +289,7 @@ sub configureX {
 
     #- done here and also at the end of install2.pm, just in case...
     install_any::write_fstab($o);
-    modules::write_conf($o->{prefix});
+    modules::write_conf();
 
     require pkgs;
     installStepsCall($o, $auto, 'configureX') if pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed && !$o->{X}{disabled} || $::testing;
@@ -640,7 +640,7 @@ sub main {
     install_any::log_sizes($o);
     install_any::remove_advertising($o);
     install_any::write_fstab($o);
-    modules::write_conf($o->{prefix});
+    modules::write_conf();
     detect_devices::install_addons($o->{prefix});
 
     #- save recovery file if needed (ie disk style install).
