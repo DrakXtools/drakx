@@ -1,0 +1,27 @@
+# This file contains all the bugs/glitches/inconsistencies shipped in
+# 9.0 (Dolphin) Mandrake Linux Release.
+
+# Feel free to add your entry and if possible the fixes and status of
+  the errata.
+
+ o Drakxtools:
+   ==========  
+   
+   harddrake:
+
+   logdrake:
+    IS: Send the alert mail when service is stopped but the mail
+	      is empty.
+    SHOULD BE: incorporate a text on which service is stopped.
+    Status: not fixed. 
+
+ o Drakconf:
+   =========
+   IS: locale nl_NL, sl and zh_CN prevent drakconf from starting with
+   a "cannot call set_active on undefined values" error.
+
+   SHOULD BE: work well in all locales.
+
+ o Install: 
+   ========
+ 
