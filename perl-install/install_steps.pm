@@ -920,24 +920,19 @@ sub miscellaneousBefore {
 sub miscellaneous {
     my ($o) = @_;
 
-    local $_ = $o->{bootloader}{perImageAppend};
-
-    if (my @l = detect_devices::IDEburners() and !/ide-scsi/) {
-	$_ .= " " . join(" ", (map { "$_->{device}=ide-scsi" } @l), 
-			 #- in that case, also add ide-floppy otherwise ide-scsi will be used!
-			 map { "$_->{device}=ide-floppy" } detect_devices::ide_zips());
+    if (my @l = detect_devices::IDEburners()) {
+	add_append($o->{bootloader}, $_->{device}, 'ide-scsi') foreach @l;
+	#- in that case, also add ide-floppy otherwise ide-scsi will be used!
+	add_append($o->{bootloader}, $_->{device}, 'ide-floppy') foreach detect_devices::ide_zips();
     }
     if ($o->{miscellaneous}{HDPARM}) {
-	$_ .= join('', map { " $_=autotune" } grep { /ide.*/ } all("/proc/ide")) if !/ide.=autotune/;
+	add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
     }
     if (grep { /Athlon|Duron/ } cat_("/proc/cpuinfo")) {
-        $_ .= " mem=nopentium";
+	add_append($o->{bootloader}, 'mem', 'nopentium');
     }
     #- keep some given parameters
     #-TODO
-
-    log::l("perImageAppend: $_");
-    $o->{bootloader}{perImageAppend} = $_;
 }
 
 #------------------------------------------------------------------------------

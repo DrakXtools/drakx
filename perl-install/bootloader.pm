@@ -181,27 +181,39 @@ sub add_kernel {
     $v;
 }
 
+sub unpack_append {
+    my ($s) = @_;
+    my @l = split(' ', $s);
+    [ grep { !/=/ } @l ], [ map { if_(/(.*?)=(.*)/, [$1, $2]) } @l ];
+}
+sub pack_append {
+    my ($simple, $dict) = @_;
+    join(' ', @$simple, map { "$_->[0]=$_->[1]" } @$dict);
+}
+
+sub append__mem_is_memsize { $_[0] =~ /^\d+[kM]?$/i }
+
 sub get_append {
     my ($b, $key) = @_;
-    if ($key eq 'mem') {
-	($b->{perImageAppend} =~ /\bmem=(\d+[KkMm]?)(?:\s.*)?$/)[0];
-    } else {
-	($b->{perImageAppend} =~ /\b$key=(\S*)/)[0];
-    }
+    my (undef, $dict) = unpack_append($b->{perImageAppend});
+    my @l = map { $_->[1] } grep { $_->[0] eq $key } @$dict;
+
+    #- suppose we want the memsize
+    @l = grep { append__mem_is_memsize($_) } @l if $key eq 'mem';
+
+    log::l("more than one $key in $b->{perImageAppend}") if @l > 1;
+    $l[0];
 }
 sub add_append {
     my ($b, $key, $val) = @_;
 
     foreach (\$b->{perImageAppend}, map { \$_->{append} } @{$b->{entries}}) {
-	if ($key eq 'mem') {
-	    $$_ =~ s/\bmem=(\d+[KkMm]?)(\s.*)?$/$2/;
-	} else {
-	    $$_ =~ s/\b$key=\S*\s*//;
-	}
-	$$_ =~ s/\s*$/ $key=$val/ if $val;
+	my ($simple, $dict) = unpack_append($$_);
+	@$dict = grep { $_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val) } @$dict;
+	push @$dict, [ $key, $val ] if $val;
+	$$_ = pack_append($simple, $dict);
 	log::l("add_append: $$_");
     }
-    log::l("add_append: $b->{perImageAppend}");
 }
 sub may_append {
     my ($b, $key, $val) = @_;
