@@ -89,7 +89,7 @@ my %languages = (
   'sp'  => [ 'Serbian (Cyrillic)',	'iso-8859-5', 'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian (Latin)',		'iso-8859-2', 'sr', 'sr' ],
   'sv'  => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
-#-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
+  'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
 'uk_UA' => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk_UA:uk' ],
@@ -199,7 +199,7 @@ my %charsets = (
 #- (and gtk support isn't done yet)
   "isiri-3342" => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
-  "tscii-0" => [ undef,			undef,		"trivial.trans",
+  "tscii-0" => [ "tamil",		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
 );
 
