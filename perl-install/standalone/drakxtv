@@ -21,6 +21,7 @@
 # If we ever want to autoconf the tv card at install time, we should
 # make a package out of this.
 # Maybe we'll have to for harddrake2
+#
 #package tvdrake;
 
 use lib qw(/usr/lib/libDrakX);
@@ -43,7 +44,7 @@ sub scan4channels {
 	    "argentina" => _("Argentina"),
 	    -1 =>_("All")
 	    );
-# HRC is Harmonically Related Carrier
+# HRC means Harmonically Related Carrier
 
     $in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
 			   [
@@ -54,8 +55,8 @@ sub scan4channels {
 				  my $wait = $in->wait_message(_('Please wait'),
 										 _("Scanning for TV channels in progress ..."));
 
-#                     france is a bogus table provided to scantv which will
-#                     ignore it as "All" is selected because of -a
+#                     we provide scantv a bogus table (france) which will
+#                     will be ignored as "All" is selected because of -a
 				  $ftable_id = "france -a " if ($ftable_id eq -1);
 				  # Note that this'll be broken if/when we implement interactive_qt
 				  my $use_X =$in->isa('interactive_gtk') && -x "/usr/X11R6/bin/xvt";
