@@ -1,3 +1,21 @@
+2001/07/06  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed selected_leaves. change algorithm as previous one can
+	still causes dead
+	lock and may not reproduce correct list. take care of choice that need
+	to be
+	examined before else another package may be chosen if choice is not
+	satisfied
+	when selecting packages.
+
+	* install_any.pm: change all 8 space into a tabulation, this is simple and
+	may change visual
+	aspect but it gives correct output and filesize by 40%.
+
+2001/07/06  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/ntp_servers.pl: some workarounds
+
 2001/07/06  Pixel  <pixel@mandrakesoft.com>
 
 	* tools/ntp_servers.pl: some workarounds
