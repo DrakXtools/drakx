@@ -44,6 +44,7 @@ my %mice =
      [ 2, 'ps/2', 'PS/2', __("Generic 2 Button Mouse") ],
      [ 3, 'ps/2', 'PS/2', __("Generic") ],
      [ 5, 'ps/2', 'IMPS/2', __("Wheel") ],
+     [ 7, 'ps/2', 'ExplorerPS/2', __("Microsoft Explorer") ],
    ]],
 
  __("serial") =>
@@ -191,18 +192,20 @@ sub serial_port2text {
 sub read {
     my %mouse = getVarsFromSh "$::prefix/etc/sysconfig/mouse";
     eval { add2hash_(\%mouse, fullname2mouse($mouse{FULLNAME})) };
-    $mouse{nbuttons} = $mouse{XEMU3} eq "yes" ? 2 : $mouse{WHEEL} eq "yes" ? 5 : 3;
+    $mouse{nbuttons} ||= $mouse{XEMU3} eq "yes" ? 2 : $mouse{WHEEL} eq "yes" ? 5 : 3;
     \%mouse;
 }
 
 sub write {
-    my ($prefix, $mouse) = @_;
+    my ($in, $mouse) = @_;
     local $mouse->{FULLNAME} = qq("$mouse->{type}|$mouse->{name}"); #-"
     local $mouse->{XEMU3} = bool2yesno($mouse->{nbuttons} < 3);
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
-    setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
+    setVarsInSh("$::prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
     any::devfssymlinkf($mouse, 'mouse');
     any::devfssymlinkf($mouse->{auxmouse}, 'mouse1') if $mouse->{auxmouse};
+
+    various_xfree_conf($in, $mouse);
 
     if (arch() =~ /ppc/) {
 	my $s = join('',
@@ -213,9 +216,9 @@ sub write {
 	substInFile { 
 	    $_ = '' if /^\Qdev.mac_hid.mouse_button/;
 	    $_ .= $s if eof;
-	} "$prefix/etc/sysctl.conf";
+	} "$::prefix/etc/sysctl.conf";
 	#- hack - dev RPM symlinks to mouse0 - lands on mouse1 with new input layer on PPC input/mice will get both ADB and USB
-	symlinkf "/dev/input/mice", "$prefix/dev/usbmouse" if ($mouse->{device} eq "usbmouse");    
+	symlinkf "/dev/input/mice", "$::prefix/dev/usbmouse" if ($mouse->{device} eq "usbmouse");    
     }
 }
 
@@ -340,7 +343,7 @@ sub set_xfree_conf {
 	{
 	    Protocol => $_->{XMOUSETYPE},
 	    Device => "/dev/$_->{device}",
-	    if_($_->{nbuttons} > 3, ZAxisMapping => [ '4 5', if_($_->{nbuttons} > 5, '6 7') ]),
+	    if_($_->{nbuttons} > 3, ZAxisMapping => [ $_->{nbuttons} > 5 ? '6 7' : '4 5' ]),
 	    if_($_->{nbuttons} < 3, Emulate3Buttons => undef, Emulate3Timeout => 50),
 	};
     } ($mouse, if_($mouse->{auxmouse}, $mouse->{auxmouse}));
@@ -351,6 +354,35 @@ sub set_xfree_conf {
     }
 
     $xfree_conf->set_mice(@mice);
+
+    if (my @wacoms = @{$mouse->{wacom} || []}) {
+	$xfree_conf->set_wacoms(map { { Device => "/dev/$_", USB => m|input/event| } } @wacoms);
+	$xfree_conf->{xfree3}->add_load_module('xf86Wacom.so') if $xfree_conf->{xfree3};
+    }
+}
+
+sub various_xfree_conf {
+    my ($in, $mouse) = @_;
+
+    {
+	my $f = "$::prefix/etc/X11/xinit.d/mouse_buttons";
+	if ($mouse->{nbuttons} <= 5) {
+	    unlink($f);
+	} else {
+	    output_p($f, "xmodmap -e 'pointer = 1 2 3 6 7 4 5'\n");
+	    chmod 0755, $f;
+	}
+    }
+    {
+	my $f = "$::prefix/etc/X11/xinit.d/auxmouse_buttons";
+	if (!$mouse->{auxmouse} || $mouse->{auxmouse}{nbuttons} <= 5) {
+	    unlink($f);
+	} else {
+	    $in->do_pkgs->install('xinput');
+	    output_p($f, "xinput set-button-map Mouse2 1 2 3 6 7 4 5\n");
+	    chmod 0755, $f;
+	}
+    }
 }
 
 #- write_conf : write the mouse infos into the Xconfig files.
@@ -365,15 +397,15 @@ sub set_xfree_conf {
 #-  $mouse->{MOUSETYPE} : type of the mouse : string : ex "ps/2"
 #-  $mouse->{XEMU3} : emulate 3rd button : string : 'yes' or 'no'
 sub write_conf {
-    my ($mouse, $keep_auxmouse_unchanged) = @_;
+    my ($in, $mouse, $keep_auxmouse_unchanged) = @_;
 
-    &write('', $mouse);
+    &write($in, $mouse);
     modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 
     require Xconfig::xfree;
     my $xfree_conf = Xconfig::xfree->read;
     set_xfree_conf($mouse, $xfree_conf, $keep_auxmouse_unchanged);
-    $xfree_conf->write;    
+    $xfree_conf->write;
 }
 
 sub test_mouse_install {
