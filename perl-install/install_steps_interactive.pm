@@ -859,7 +859,7 @@ sub addUser {
 sub createBootdisk {
     my ($o, $first_time) = @_;
 
-    return if $first_time && $::beginner || $o->{lnx4win};
+    return if $first_time && $::beginner;
 
     if (arch() =~ /sparc/) {
 	#- as probing floppies is a bit more different on sparc, assume always /dev/fd0.
@@ -931,7 +931,7 @@ _("Error installing aboot,
 try to force installation even if that destroys the first partition?"));
 	};
     } else {
-	$o->{lnx4win} or any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
+	any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
 
 	eval { $o->SUPER::setupBootloader };
 	if ($@) {

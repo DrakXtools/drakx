@@ -188,7 +188,14 @@ sub partitionWizard {
     $o->set_help('doPartitionDisks');
 
     my %solutions = partitionWizardSolutions($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
-    %solutions = (loopback => $solutions{loopback}) if $o->{lnx4win} && $solutions{loopback};
+    if ($o->{lnx4win}) {
+	if ($solutions{loopback}) {
+	    %solutions = (loopback => $solutions{loopback});
+	} else {
+	    $o->ask_warn('', _("You don't have enough free space on your Windows partition")) if grep { isFat($_) } @{$o->{fstab}}
+	}
+    }
+
     delete $solutions{diskdrake} if $nodiskdrake;
 
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
