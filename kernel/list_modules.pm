@@ -15,26 +15,31 @@ our %l = (
   {
     main => [
       if_(arch() =~ /ppc/, qw(mace bmac gmac)),
-      if_(arch() =~ /^sparc/, qw(myri_sbus sunbmac sunhme sunqe)),
+      if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
-        qw(3c501 3c503 3c505 3c507 3c509 3c515), # 3c90x
+        qw(3c501 3c503 3c505 3c507 3c509 3c515),
 	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
-        qw(cs89x0 de600 de620 r8169),
+        qw(cs89x0 de600 de620),
         qw(defxx orinoco_plx), # most unused
-        qw(depca dgrs dmfe e100 e1000 e2100 eepro eepro100 eexpress epic100 eth16i),
+        qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
-        qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci), #old_tulip 
-        qw(sb1000 sis900 sk98lin smc-ultra smc9194 starfire tg3 tlan tmspci tulip via-rhine), #sktr 
-        qw(wd winbond-840 yellowfin ns83820),
-	qw(fealnx),
+        qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci),
+        qw(sb1000 sis900 smc-ultra smc9194 starfire tlan tmspci tulip via-rhine),
+        qw(wd winbond-840),
+	qw(fealnx 3c990fx),
+        qw(skfp tc35815 lanstreamer farsync sdladrv orinoco_pci prism2_plx),
 
 	qw(iph5526), #- fibre channel
       ),
-      qw(3c59x 8139too sundance dl2k), #rtl8139
+      qw(3c59x 8139too sundance), #rtl8139
     ],
+    gigabit => [
+      qw(dl2k myri_sbus yellowfin ns83820 r8169 tg3 e1000 sk98lin),
+      qw(bcm5820 bcm5700), #- encrypted
+    ],
+
     raw => [
-      qw(8390 mii),
-      qw(ppp_generic ppp_async slhc aironet4500_core),
+      qw(ppp_generic ppp_async),
     ],
     pcmcia => [ 
       qw(3c574_cs 3c589_cs airo airo_cs aironet4500_cs axnet_cs fmvj18x_cs),
@@ -60,7 +65,7 @@ our %l = (
         qw(atp870u dc395x_trm dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
         qw(qla1280 qla2x00 qlogicfas qlogicfc),
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
-        qw(eata eata_pio eata_dma),
+        qw(eata eata_pio eata_dma mptscsih nsp32),
       ),
       '53c7,8xx',
       qw(aic7xxx pci2000 qlogicisp sym53c8xx), # ncr53c8xx
@@ -69,7 +74,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid ataraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc qla2200 qla2300),
+	qw(cpqfc qla2200 qla2300 hptraid),
         qw(ips ppa imm),
       ),
     ],
