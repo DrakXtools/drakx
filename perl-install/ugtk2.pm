@@ -2,8 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus $force_position
-            $grab $pop_it $shape_width $border);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus $force_position $grab $pop_it $shape_width $border); #- leave it on one line, for automatic removal of the line at package creation
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -1222,9 +1221,8 @@ sub ask_browse_tree_info_given_widgets {
     };
 
     $w->{tree}->signal_connect(key_press_event => sub {
-        my ($w, undef, $e) = @_;
-	my $c = chr($e->keyval & 0xff);
-	$toggle->(0) if $e->keyval >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
+	my $c = chr($_[1]->keyval & 0xff);
+	$toggle->(0) if $_[1]->keyval >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
 	1;
     });
     $w->{tree}->get_selection->signal_connect(changed => sub {
