@@ -337,7 +337,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - localedrake: use xim by default for CJK languages for which we don't
   ship good enough native gtk2 input methods (pablo)
 
-
 * Wed Feb 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-11mdk
 - harddrake service: 
   o look at sound cards changes on bootstrapping
