@@ -175,7 +175,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 				      "%s", extract_list_directory(IMAGE_LOCATION));
 			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
-			return RETURN_ERROR;
+			return RETURN_BACK;
 		}
 #ifndef MANDRAKE_MOVE
 		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
