@@ -7,14 +7,32 @@ use any;
 sub kinds() { 
     ('local', 'LDAP', 'NIS', 'winbind', 'AD', 'ADWIN');
 }
-sub kind2description {
+
+sub kind2name {
     my ($kind) = @_;
-    ${{ local => N("Local file\nUse local for all authentication and information user tell in local file\n"), 
-    LDAP => N("LDAP\nTells your computer to use LDAP for some or all authentication.\nLDAP consolidates certain types of information within your organization.\n"), 
-    NIS => N("NIS\nAllows you to run a group of computers in the same Network\nInformation Service domain with a common password and group file.\n"), 
-    winbind => N("Windows Domain\nWinbind allows a system to retrieve information about\nusers and to authenticate users by using in an Windows domain.\n "), 
-    AD => N("Active Directory with SFU\nKerberos is a secure system for providing network authentication services.\n"),
-    ADWIN => N("Active Directory with Winbind\nKerberos is a secure system for providing network authentication services.\n") }}{$kind};
+    # Keep the following strings in sync with kind2description ones!!!
+    ${{ local => N("Local file"), 
+    LDAP => N("LDAP"), 
+    NIS => N("NIS"), 
+    winbind => N("Windows Domain"), 
+    AD => N("Active Directory with SFU"),
+    ADWIN => N("Active Directory with Winbind") }}{$kind};
+}
+
+sub kind2description() {
+    join('', 
+         map {
+             qq($_->[0]\n$_->[1]\n\n)
+         }
+         (
+          [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
+          [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
+          [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
+          [ N("Windows Domain:"), N("Winbind allows a system to retrieve information about users and to authenticate users by using in an Windows domain."), ],
+          [ N("Active Directory with SFU:"), N("Kerberos is a secure system for providing network authentication services."), ],
+          [ N("Active Directory with Winbind:"), N("Kerberos is a secure system for providing network authentication services.")  ],
+         )
+        );
 }
 sub to_kind {
     my ($authentication) = @_;
