@@ -1,3 +1,77 @@
+2001/08/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (choosePackages): simplify, fix
+	setSelectedFromCompssList not called in
+	expert even the first_time (especially nasty for auto_installs)
+
+	* install_steps_gtk.pm: add the feather feature, but do not enable it
+
+	* bootloader.pm: as when lilo is selected, we don't try to install grub,
+	just create the
+	config file in case it may be useful
+
+	* interactive_gtk.pm (ask_browse_tree_info_refW): s/wait_msg/wait_message/
+	(wait_msg doesn't
+	exist anywhere, it must be a fpons typo)
+
+	* share/rpmsrate, install_any.pm: create a new flags "X" selected by
+	default, contain what X related packages
+	which were in "SYSTEM"
+
+2001/08/03  dam's  <damien@mandrakesoft.com>
+
+	* standalone/net_monitor, network/tools.pm, network/netconnect.pm,
+	network/isdn.pm: debugging, 128Kb/s ISDN
+
+	* Makefile.drakxtools, Makefile: added network pms
+
+2001/08/03  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm: typo fix
+	replace isJfs/isXfs/... with isThisFs("jfs"
+
+	* install_any.pm: replace isJfs/isXfs/... with isThisFs("jfs"
+	update_userkderc is now called update_gnomekderc
+
+	* Makefile: better po skipping
+
+	* commands.pm (sync): (re-?)add
+
+	* fs.pm, install_steps_interactive.pm, diskdrake.pm, bootloader.pm:
+	replace isJfs/isXfs/... with isThisFs("jfs"
+
+	* fsedit.pm (check_mntpoint): /root should remain within the root
+	filesystem
+
+	* install_steps.pm (choosePartitionsToFormat): toFormatUnsure=1 for /usr
+	update_userkderc is now called update_gnomekderc
+
+2001/08/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/adsl.c: 
+	  - fix problem of clashing user/pass between adsl and ftp/http in case
+	of automatic installs
+	  - update doc on automatic install parameters (doc/TECH-INFOS)
+
+	* mdk-stage1/doc/TECH-INFOS: 
+	  - small update
+	  - fix problem of clashing user/pass between adsl and ftp/http in case
+	of automatic installs
+	  - update doc on automatic install parameters (doc/TECH-INFOS)
+
+2001/08/02  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/no.po: updated Norwegian file
+
+2001/08/02  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm, services.pm, install_interactive.pm,
+	network/netconnect.pm, install_any.pm, Xconfigurator.pm: instead of
+	testing if ref($in) or ref($o) contains /gtk/, test if interactive_gtk
+	is in ISA of the object
+
+	* partition_table.pm, fsedit.pm, diskdrake.pm: JFS support
+
 2001/08/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/adsl.c: 
