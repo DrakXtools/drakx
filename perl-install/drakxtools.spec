@@ -52,8 +52,8 @@ Requires: %name = %version-%release
 Requires: sane-backends
 
 %description
-Contains many Mandrake applications simplifying users and
-administrators life on a Mandrake Linux machine. Nearly all of
+Contains many Mandrakelinux applications simplifying users and
+administrators life on a Mandrakelinux machine. Nearly all of
 them work both under XFree (graphical environment) and in console
 (text environment), allowing easy distant work.
 
@@ -98,7 +98,7 @@ draksound: sound card configuration
 
 draksplash: bootsplash themes creation
 
-drakTermServ: mandrake terminal server configurator
+drakTermServ: terminal server configurator
 
 drakxservices: SysV service and dameaons configurator
 
