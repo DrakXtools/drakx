@@ -206,7 +206,7 @@ sub getNet() {
 #      }
 #      /ippp/ and run_program::rooted("", "/sbin/isdnctrl delif $_") foreach @netdevices;
 #      @a;
-    grep { !($::isStandalone && /plip/) && c::hasNetDevice($_) } @netdevices;
+    grep { !(($::isStandalone || $::live) && /plip/) && c::hasNetDevice($_) } @netdevices;
 }
 
 #sub getISDN() {
