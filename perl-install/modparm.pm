@@ -50,4 +50,8 @@ sub get_options_name($) {
   @names;
 }
 
+if ($::testing) {
+    read_modparm_file("/tmp/modparm.txt");
+}
+
 1;

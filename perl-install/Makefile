@@ -170,7 +170,7 @@ stage2:
 	$(SUDO) cp -a $(DEST)/* $(STAGE2TMP)
 
 	$(SUDO) umount /mnt/stage2 ; true
-	dd if=/dev/zero of=$(STAGE2) bs=1M count=13
+	dd if=/dev/zero of=$(STAGE2) bs=1M count=14
 	echo y | /sbin/mke2fs $(STAGE2)
 	$(SUDO) mount $(STAGE2) /mnt/stage2 -o loop
 
