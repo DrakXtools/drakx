@@ -420,12 +420,15 @@ EOF
 sub install_addons {
     my ($prefix) = @_;
 
-    if (-d $prefix) {
+    #- this test means install_addons can only be called after ldetect-lst has been installed.
+    if (-d "$prefix/usr/share/ldetect-lst") {
+	my $update = 0;
 	foreach ([ 'pcitable.d', $pcitable_addons ], [ 'usbtable.d', $usbtable_addons ]) {
 	    my ($dir, $str) = @$_;
-	    -d "$prefix/$dir" && $str =~ /^[^#]/m and
-	      output "$prefix/$dir/95drakx.lst", $str;
+	    -d "$prefix/usr/share/ldetect-lst/$dir" && $str =~ /^[^#]/m and $update = 1 and
+	      output "$prefix/usr/share/ldetect-lst/$dir/95drakx.lst", $str;
 	}
+	$update and run_program::rooted($prefix, "/usr/sbin/update-ldetect-lst");
     }
 }
 
