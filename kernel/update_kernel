@@ -38,13 +38,13 @@ function create_modules() {
 
 [ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
 
-rpm=$(rpm -qp --qf '%{name}' /RPMS/kernel-BOOT-*.rpm | perl -pe 's/kernel-BOOT-(.*)\.(.*)/$1-${2}BOOT/')
+rpm=$(rpm -qpl /export/Mandrake/RPMS/kernel-BOOT-*.rpm | perl -ne 'm|/boot/vmlinuz-(.*)| and print "$1\n"')
 if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
     [ -n "$main" ] && rm -rf $ALL_KERNELS/$main
     cd $ALL_KERNELS
     rm -rf $rpm ; mkdir $rpm
     cd $rpm
-    rpm2cpio /RPMS/kernel-BOOT-*.rpm | cpio -id
+    rpm2cpio /export/Mandrake/RPMS/kernel-BOOT-*.rpm | cpio -id
     find -type f -name "*.o.gz" | xargs gunzip
     cd ../..
 
