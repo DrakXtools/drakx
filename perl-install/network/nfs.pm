@@ -35,8 +35,8 @@ sub check {
 }
 
 sub find_servers {
-    my $pid2 = open(my $F2, "rpcinfo-flushed -b mountd 2 |");
-    my $pid3 = open(my $F3, "rpcinfo-flushed -b mountd 3 |");
+    open(my $F2, "rpcinfo-flushed -b mountd 2 |");
+    open(my $F3, "rpcinfo-flushed -b mountd 3 |");
 
     common::nonblock($F2);
     common::nonblock($F3);

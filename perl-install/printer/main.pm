@@ -126,8 +126,8 @@ sub assure_device_is_available_for_cups {
     for ($i = 0; $i < $maxattempts; $i++) {
 	local *F; 
 	open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	    "/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" or
-	    die "Could not run \"lpinfo\"!";
+	    '/bin/sh -c "export LC_ALL=C; /usr/sbin/lpinfo -v" |' or
+	    die 'Could not run "lpinfo"!';
 	while (my $line = <F>) {
 	    if ($line =~ /$sdevice/) { # Found a line containing the device
 		                       # name, so CUPS knows it.
@@ -2265,7 +2265,7 @@ sub configure_hpoj {
 	    if ($bus ne "hpjd") {
 		# Stop ptal-mlcd daemon for locally connected devices
 		local *F;
-		if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . "ps auxwww | grep \"ptal-mlcd $bus:probe\" | grep -v grep | ") {
+		if (open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . qq(ps auxwww | grep "ptal-mlcd $bus:probe" | grep -v grep | )) {
 		    my $line = <F>;
 		    if ($line =~ /^\s*\S+\s+(\d+)\s+/) {
 			my $pid = $1;
@@ -2326,34 +2326,35 @@ sub configure_hpoj {
     # Write file header.
     my $date = chomp_(`date`);
     print CONFIG
-	"# Added $date by \"printerdrake\".\n" .
-	"\n" .
-	"# The basic format for this file is \"key[+]=value\".\n" .
-	"# If you say \"+=\" instead of \"=\", then the value is appended to any\n" .
-	"# value already defined for this key, rather than replacing it.\n" .
-	"\n" .
-	"# Comments must start at the beginning of the line.  Otherwise, they may\n" .
-	"# be interpreted as being part of the value.\n" .
-	"\n" .
-	"# If you have multiple devices and want to define options that apply to\n" .
-	"# all of them, then put them in the file /etc/ptal/defaults, which is read\n" .
-	"# in before this file.\n" .
-	"\n" .
-	"# The format version of this file:\n" .
-	"#   ptal-init ignores devices with incorrect/missing versions.\n" .
-	"init.version=2\n";
+qq(
+# Added $date by "printerdrake"
+
+# The basic format for this file is "key[+]=value".
+# If you say "+=" instead of "=", then the value is appended to any
+# value already defined for this key, rather than replacing it.
+
+# Comments must start at the beginning of the line.  Otherwise, they may
+# be interpreted as being part of the value.
+
+# If you have multiple devices and want to define options that apply to
+# all of them, then put them in the file /etc/ptal/defaults, which is read
+# in before this file.
+
+# The format version of this file:
+#   ptal-init ignores devices with incorrect/missing versions.
+init.version=2\n");
 
     # Write model string.
     if ($model_long !~ /\S/) {
 	print CONFIG
 	    "\n" .
-	    "# \"printerdrake\" couldn't read the model but added this device anyway:\n" .
+	    qq(# "printerdrake" couldn't read the model but added this device anyway:\n) .
 	    "# ";
     } else {
 	print CONFIG
 	    "\n" .
 	    "# The device model that was originally detected on this port:\n" .
-	    "#   If this ever changes, then you should re-run \"printerdrake\"\n" .
+	    qq(#   If this ever changes, then you should re-run "printerdrake"\n) .
 	    "#   to delete and re-configure this device.\n";
 	if ($bus eq "par") {
 	    print CONFIG
@@ -2362,7 +2363,7 @@ sub configure_hpoj {
 	}
     }
     print CONFIG
-	"init.mlcd.append+=-devidmatch \"$model_long\"\n";
+	qq(init.mlcd.append+=-devidmatch "$model_long"\n);
 
     # Write serial-number string.
     if ($serialnumber_long !~ /\S/) {
@@ -2380,7 +2381,7 @@ sub configure_hpoj {
 	}
     }
     print CONFIG
-	"init.mlcd.append+=-devidmatch \"$serialnumber_long\"\n";
+	qq(init.mlcd.append+=-devidmatch "$serialnumber_long"\n);
 
     if ($bus =~ /^[pu]/) {
 	print CONFIG
@@ -2398,7 +2399,7 @@ sub configure_hpoj {
 	    "\n" .
 	    "# ptal-mlcd's remote console can be useful for debugging, but may be a\n" .
 	    "# security/DoS risk otherwise.  In any case, it's accessible with the\n" .
-	    "# command \"ptal-connect mlc:<XXX>:<YYY> -service PTAL-MLCD-CONSOLE\".\n" .
+	    qq(# command "ptal-connect mlc:<XXX>:<YYY> -service PTAL-MLCD-CONSOLE".\n) .
 	    "# Uncomment the following line if you want to enable this feature for\n" .
 	    "# this device:\n" .
 	    "# init.mlcd.append+=-remconsole\n" .
@@ -2433,7 +2434,7 @@ sub configure_hpoj {
 	    "\n" .
 	    "# If you have more than one photo-card-capable peripheral and you want to\n" .
 	    "# assign particular TCP port numbers and mtools drive letters to each one,\n" .
-	    "# then change the line below to use the \"-portoffset <n>\" option.\n" .
+	    qq(# then change the line below to use the "-portoffset <n>" option.\n) .
 	    "init.photod.append+=-maxaltports 26\n";
     }
     close(CONFIG);
@@ -2466,7 +2467,7 @@ sub usbdevice() {
     # device numbers
     local *F;
     open F, ($::testing ? "" : "chroot $::prefix/ ") .
-	"/bin/sh -c \"export LC_ALL=C; lsusb -vv 2> /dev/null\" |"
+	'/bin/sh -c "export LC_ALL=C; lsusb -vv 2> /dev/null" |'
 	or return undef;
     my ($bus, $device, $model, $serial) = ("", "", "", "");
     my $found = 0;

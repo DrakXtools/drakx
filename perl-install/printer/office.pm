@@ -20,7 +20,7 @@ our $suites = {
 	'remove' => \&removeopenofficeprinterentry,
 	'file_name' => '^(.*)/share/psprint/psprint.conf$',
 	'param' => ["Generic Printer", "Command="],
-	'perl' => "/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/",
+	'perl' => '/usr/bin/perl -p -e "s=/euro /unused=/Euro /unused=" | /usr/bin/',
 	'files' => ["/usr/lib/office6*/share/psprint/psprint.conf",
 		    "/usr/local/lib/office6*/share/psprint/psprint.conf",
 		    "/usr/local/office6*/share/psprint/psprint.conf",
@@ -31,7 +31,7 @@ our $suites = {
 	'remove' => \&removestarofficeprinterentry,
 	'file_name' => '^(.*)/share/xp3/Xpdefaults$',
 	'param' => ["ports", "default_queue="],
-	'perl' => "/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/",
+	'perl' => '/usr/bin/perl -p -e "s=16#80 /euro=16#80 /Euro=" | /usr/bin/',
 	'files' => ["/usr/lib/*/share/xp3/Xpdefaults",
 		    "/usr/local/lib/*/share/xp3/Xpdefaults",
 		    "/usr/local/*/share/xp3/Xpdefaults",
@@ -216,7 +216,7 @@ sub makestarofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry("ports", "$queue=", $configfile);
     $configfile = addentry("ports", 
-			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}}{print_command} . " -P $queue",
+			   qq($queue=/usr/bin/perl -p -e "s=16#80 /euro=16#80 /Euro=" | /usr/bin/) . $spoolers{$printer->{SPOOLER}}{print_command} . " -P $queue",
 			   $configfile);
     # Make printer's section
     $configfile = addsection("$queue,PostScript,$queue", $configfile);
@@ -270,7 +270,7 @@ sub makeopenofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry($queue, "Command=", $configfile);
     $configfile = addentry($queue, 
-			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/" . $spoolers{$printer->{SPOOLER}}{print_command} . " -P $queue",
+			   qq(Command=/usr/bin/perl -p -e "s=/euro /unused=/Euro /unused=" | /usr/bin/) . $spoolers{$printer->{SPOOLER}}{print_command} . " -P $queue",
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);

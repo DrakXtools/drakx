@@ -338,7 +338,7 @@ sub pkg_install {
     log::l("selecting packages ".join(" ", @l));
     require pkgs;
     if ($::testing) {
-	log::l("selecting package \"$_\"") foreach @l;
+	log::l(qq(selecting package "$_")) foreach @l;
     } else {
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;

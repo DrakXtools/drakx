@@ -141,7 +141,7 @@ END
 	if ($replaced) {
 	    output($secrets, @l);
         } else {
-	    append_to_file($secrets, "$toreplace{login}  ppp0  \"$toreplace{passwd}\"\n");
+	    append_to_file($secrets, qq($toreplace{login}  ppp0  "$toreplace{passwd}"\n));
 	}
 	#- restore access right to secrets file, just in case.
 	chmod 0600, $secrets;

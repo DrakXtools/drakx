@@ -140,9 +140,9 @@ foreach (@ARGV) {
 
 
 sub version {
-    print STDERR "Drakxtools version 9.1.0
-Copyright (C) 1999-2002 MandrakeSoft by <install\@mandrakesoft.com>
-",  $::license, "\n";
+    print STDERR 'Drakxtools version 9.1.0
+Copyright (C) 1999-2002 MandrakeSoft by <install@mandrakesoft.com>
+',  $::license, "\n";
 }
 
 ################################################################################
@@ -207,7 +207,7 @@ sub check_kernel_module_packages {
     eval {
 	local *_;
 	require urpm;
-	my $urpm = new urpm;
+	my $urpm = urpm->new;
 	$urpm->read_config(nocheck_access => 1);
 	foreach (grep { !$_->{ignore} } @{$urpm->{media} || []}) {
 	    $urpm->parse_synthesis("$urpm->{statedir}/synthesis.$_->{hdlist}");

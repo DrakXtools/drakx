@@ -224,7 +224,7 @@ N("Examples for correct IPs:\n") .
 					   return (1,1);
 				       }
 				       if ($hostchoice eq $menu[0]) {
-					   $address = "\@LOCAL";
+					   $address = '@LOCAL';
 				       } elsif ($hostchoice eq $menu[-1]) {
 					   $address = $ip;
 				       } else {
@@ -1245,7 +1245,7 @@ sub setup_smb {
 	    $smbserver = $1;
 	    $smbshare = $2;
 	} else {
-	    die "The \"smb://\" URI must at least contain the server name and the share name!\n";
+	    die qq(The "smb://" URI must at least contain the server name and the share name!\n);
 	}
 	if (network::is_ip($smbserver)) {
 	    $smbserverip = $smbserver;
@@ -1433,7 +1433,7 @@ sub setup_ncp {
 	    $ncpserver = $1;
 	    $ncpqueue = $2;
 	} else {
-	    die "The \"ncp://\" URI must at least contain the server name and the share name!\n";
+	    die qq(The "ncp://" URI must at least contain the server name and the share name!\n);
 	}
     }
 
@@ -1652,7 +1652,7 @@ list => [ $printer->{currentqueue}{connect},
 	  "ncp://",
 	  "socket://",
 	  "file:/",
-	  "postpipe:\"\"",
+	  'postpipe:""',
 	  ], not_edit => 0 }, ],
 complete => sub {
     unless ($printer->{currentqueue}{connect} =~ /[^:]+:.+/) {
@@ -1732,7 +1732,7 @@ sub setup_postpipe {
     if ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m/^postpipe:/) {
 	$uri = $printer->{currentqueue}{connect};
-	$commandline = $1 if $uri =~ m!^\s*postpipe:\"(.*)\"$!;
+	$commandline = $1 if $uri =~ m!^\s*postpipe:"(.*)"$!;
     } else {
 	$commandline = "";
     }
@@ -3701,7 +3701,7 @@ sub mainwindow_interactive {
 		    sub { 
 			# Save the cursor position
 			$cursorpos = $menuchoice;
-			$menuchoice = "\@addprinter";
+			$menuchoice = '@addprinter';
 			1; 
 		    },
 		val => N("Add a new printer") },
@@ -3711,7 +3711,7 @@ sub mainwindow_interactive {
 		      sub { 
 			  # Save the cursor position
 			  $cursorpos = $menuchoice;
-			  $menuchoice = "\@refresh";
+			  $menuchoice = '@refresh';
 			  1;
 		      },
 		  val => ($#printerlist < 0 ?
@@ -3721,7 +3721,7 @@ sub mainwindow_interactive {
 		      sub { 
 			  # Save the cursor position
 			  $cursorpos = $menuchoice;
-			  $menuchoice = "\@cupsconfig";
+			  $menuchoice = '@cupsconfig';
 			  1;
 		      },
 		  val => N("CUPS configuration") }) : ()),
@@ -3733,7 +3733,7 @@ sub mainwindow_interactive {
 		     sub {
 			 # Save the cursor position
 			 $cursorpos = $menuchoice;
-			 $menuchoice = "\@spooler";
+			 $menuchoice = '@spooler';
 			 1;
 		     },
 		 val => N("Change the printing system") } :
@@ -3742,18 +3742,18 @@ sub mainwindow_interactive {
 		    sub {
 			# Save the cursor position
 			$cursorpos = $menuchoice;
-			$menuchoice = "\@usermode";
+			$menuchoice = '@usermode';
 			1 
 			},
 			    val => ($printer->{expert} ? N("Normal Mode") :
 				    N("Expert Mode")) },
 	      { clicked_may_quit =>
-		    sub { $menuchoice = "\@quit"; 1 },
+		    sub { $menuchoice = '@quit'; 1 },
 		    val => ($::isEmbedded || $::isInstall ?
 			    N("Done") : N("Quit")) },
 	      ]);
 	# Toggle expert mode and standard mode
-	if ($menuchoice eq "\@usermode") {
+	if ($menuchoice eq '@usermode') {
 	    $printer->{expert} = printer::main::set_usermode(!$printer->{expert});
 	    # Read printer database for the new user mode
 	    %printer::main::thedb = ();
@@ -3777,19 +3777,19 @@ sub mainwindow_interactive {
 	    next;
 	}
 	# Refresh printer list
-	next if $menuchoice eq "\@refresh";
+	next if $menuchoice eq '@refresh';
 	# Configure CUPS
-	if ($menuchoice eq "\@cupsconfig") {
+	if ($menuchoice eq '@cupsconfig') {
 	    config_cups($printer, $in, $upNetwork);
 	    next;
 	}
 	# Call function to switch to another spooler
-	if ($menuchoice eq "\@spooler") {
+	if ($menuchoice eq '@spooler') {
 	    $printer->{SPOOLER} = setup_default_spooler($printer, $in, $upNetwork) || $printer->{SPOOLER};
 	    next;
 	}
 	# Add a new print queue
-	if ($menuchoice eq "\@addprinter") {
+	if ($menuchoice eq '@addprinter') {
 	    $newcursorpos = add_printer($printer, $in, $upNetwork);
 	}
 	# Edit an existing print queue
@@ -3803,7 +3803,7 @@ sub mainwindow_interactive {
 	    $newcursorpos = 1;
 	}
 	#- Close printerdrake
-	$menuchoice eq "\@quit" and last;
+	$menuchoice eq '@quit' and last;
 
 	if ($newcursorpos) {
 	    # Set the cursor onto the current menu entry
