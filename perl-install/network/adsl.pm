@@ -104,10 +104,13 @@ sub sagem_set_parameters {
             s/STATIC_IP=.*\n//;
             s!</eaglectrl>!STATIC_IP=$netc->{static_ip}\n</eaglectrl>! if $netc->{static_ip};
         } "$::prefix$cfg_file";
+    }
+    #- create CMV symlinks for both POTS and ISDN lines
+    foreach my $type (qw(p i)) {
         my $cmv;
-        $cmv = "$::prefix/etc/eagle-usb/CMVep$netc->{provider_id}.txt" if $netc->{provider_id};
-        -f $cmv or $cmv = "$::prefix/etc/eagle-usb/CMVepWO.txt";
-        symlink("$::prefix/etc/eagle-usb/CMVep.txt", $cmv);
+        $cmv = "$::prefix/etc/eagle-usb/CMVe${type}$netc->{provider_id}.txt" if $netc->{provider_id};
+        -f $cmv or $cmv = "$::prefix/etc/eagle-usb/CMVe${type}WO.txt";
+        symlink("$::prefix/etc/eagle-usb/CMVe${type}.txt", $cmv);
     }
 }
 
