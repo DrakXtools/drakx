@@ -275,7 +275,7 @@ sub createBootdisk {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    my ($clicked, $ent_number, $auto) = @_;
+    my ($_clicked, $ent_number, $auto) = @_;
     return if $::g_auto_install || $::uml_install;
 
     modules::write_conf($o->{prefix});
@@ -292,7 +292,7 @@ sub setupBootloader {
 }
 #------------------------------------------------------------------------------
 sub configureX {
-    my ($clicked, $_ent_number, $auto) = @_;
+    my ($_clicked, $_ent_number, $auto) = @_;
 
     #- done here and also at the end of install2.pm, just in case...
     install_any::write_fstab($o);
