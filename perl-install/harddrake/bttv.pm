@@ -70,6 +70,7 @@ my %cards_lst =
 	"A|AVerMedia|TVPhone" => 6,
 	"M|MATRIX-Vision|MV-Delta" => 7,
 	"L|Lifeview|FlyVideo II (Bt848) LR26" => 8,
+	"G|Genius/Kye|Video Wonder Pro II (848 or 878)" => 8,
 	"I|IMS/IXmicro|TurboTV" => 9,
 	"Hauppauge|bt878" => 10,
 	"M|Miro|PCTV pro" => 11,
@@ -89,6 +90,7 @@ my %cards_lst =
 	"P|Phoebe Micro|Tv Master + FM" => 22,
 	"M|Modular|Technology MM205 PCTV (bt878)" => 23,
 	"A|Askey|CPH06X (bt878)" => 24,
+	"G|Guillemot|Maxi TV Video 3" => 24,
 	"A|Askey|CPH05X (bt878)" => 24,
 	_("Unknown|CPH05X (bt878) [many vendors]") => 24,
 	_("Unknown|CPH06X (bt878) [many vendors]") => 24,
@@ -111,6 +113,7 @@ my %cards_lst =
 	"L|Lifeview|FlyVideo 98FM LR50" => 36,
 	"T|Typhoon|TView TV/FM Tuner" => 36,
 	"P|Prolink|PixelView PlayTV pro" => 37,
+	"P|Prolink|PixelView PlayTV Theater" => 37,
 	"A|Askey|CPH06X TView99" => 38,
 	"P|Pinnacle|PCTV Studio/Rave" => 39,
 	"S|STB|STB2 TV PCI FM, P/N 6000704" => 40,
@@ -131,6 +134,7 @@ my %cards_lst =
 	"Eagle|Wireless Capricorn2 (bt878A)" => 51,
 	"P|Pinnacle|PCTV Studio Pro" => 52,
 	"T|Typhoon|KNC1 TV Station RDS" => 53,
+	"T|Typhoon|TV Tuner RDS (black package)" => 53,
 	"T|Typhoon|TView RDS + FM Stereo" => 53,
 	"L|Lifeview|FlyVideo 2000" => 54,
 	"L|Lifeview|FlyVideo A2" => 54,
@@ -159,7 +163,9 @@ my %cards_lst =
 	"A|Active|Imaging AIMMS" => 69,
 	"P|Prolink|Pixelview PV-BT878P+ (Rev.4C)" => 70,
 	"L|Lifeview|FlyVideo 98EZ (capture only) LR51" => 71,
-	"P|Prolink|Pixelview PV-BT878P+9B (PlayTV Pro rev.9B FM+NICAM)" => 72,
+#	"G|Genius/Kye|Video Wonder/Genius Internet Video Kit" => 71,
+	"P|Prolink|Pixelview PV-BT878P+ (Rev.9B) (PlayTV Pro rev.9B FM+NICAM)" => 72,
+	"T|Typhoon|TV Tuner Pal BG (blue package)" => 72,
 	"S|Sensoray|311" => 73,
 	"RemoteVision|MX (RV605)" => 74,
 	"P|Powercolor|MTV878" => 75,
@@ -182,21 +188,23 @@ my %pll_lst =
 
 sub config {
     my ($in) = @_;
-    my %conf = (card => $default, tuner => -1, radio => 0, pll => -1);
+    my %conf = (gbuffers => 4, card => $default, tuner => -1, radio => 0, pll => -1);
 #    return unless (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1));
     if ($in->ask_from("BTTV configuration", _("For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.
 If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed"),
 				  [
 				   { label => _("Card model :"), val => \$conf{card}, list => [keys %cards_lst], type => 'combo', default => -1, sort =>1, separator => '|'},
-				   { label => _("PLL type :"), val => \$conf{pll}, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1},
+				   { label => _("PLL setting :"), val => \$conf{pll}, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1},
+				   { label => _("Number of capture buffers :"), val => \$conf{gbuffers}, min=>2, max=>32, sort => 1, default => 0, type=>'range', advanced =>1, help => _("number of capture buffers for mmap'ed capture")},				   
 				   { label => _("Tuner type :"), val => \$conf{tuner}, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1, separator => '|'},
 				   { label => _("Radio support :"), val => \$conf{radio}, type => "bool", text => _("enable radio support")},
 				   ]
 				  ))
     {
+	   $conf{card}=$cards_lst{$conf{card}};
 	   my $options = 
 	     'radio=' . ($conf{radio} ? 1 : 0) . ' '.
-	     join(' ', map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner));
+	     join(' ', map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner gbuffers));
 	   log::l("[harddrake::tv] $options");
 	   standalone::explanations("modified file /etc/modules.conf ($options)");
 	   modules::set_options("bttv", $options) if $options;
