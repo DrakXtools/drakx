@@ -14,6 +14,7 @@ use Digest::MD5 qw(md5_hex);
 
 my @ALLOWED_LANGS = qw(en_US fr es it de);
 our ($using_existing_user_config, $using_existing_host_config);
+my $key_sysconf = '/home/.sysconf';
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
@@ -113,6 +114,7 @@ sub init {
     system('sysctl -w kernel.hotplug="/sbin/hotplug"');
 
     key_mount($o);
+    cat_('/proc/cmdline') =~ /\bcleankey\b/ and eval { rm_rf $key_sysconf };
     key_installfiles('simple');
     if (`getent passwd 501` =~ /([^:]+):/) {
         $o->{users} = [ { name => $1 } ];
@@ -207,12 +209,11 @@ sub machine_ident {
 sub key_installfiles {
     my ($mode) = @_;
 
-    mkdir '/home/.sysconf';
-    my $sysconf = '/home/.sysconf/' . machine_ident();
+    mkdir $key_sysconf;
+    my $sysconf = "$key_sysconf/" . machine_ident();
 
-    if (!-d $sysconf || cat_('/proc/cmdline') =~ /\bcleankey\b/) {
+    if (!-d $sysconf) {
         if ($mode eq 'full') {
-            eval { rm_rf $sysconf };
             mkdir $sysconf;
             foreach (chomp_(cat_('/image/move/keyfiles'))) {
                 my $target_dir = "$sysconf/" . dirname($_);
@@ -225,11 +226,11 @@ sub key_installfiles {
                     symlinkf("$sysconf$_", $_);
                 }
             }
-            system("cp /image/move/README.adding.more.files /home/.sysconf");
+            system("cp /image/move/README.adding.more.files $key_sysconf");
         } else {
             #- not in full mode and no host directory, grab user config from first existing host directory if possible
             foreach (qw(/etc/passwd /etc/group /etc/sysconfig/i18n)) {
-                my $first_available = first(glob("/home/.sysconf/*$_")) or next;
+                my $first_available = first(glob("$key_sysconf/*$_")) or next;
                 system("cp $first_available $_");
             }
         }
