@@ -84,7 +84,7 @@ get_needed_files: $(DIRS) $(MOFILES)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
-	perl -pe "s/ARCH/$(ARCH)/g" | perl -pe "s/PERL_VERSION/$$version/g" > /tmp/list
+	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g" > /tmp/list
 
 	@missing=`perl -lne 'print if !-e $$_' /tmp/list`; [ -z "$$missing" ] || { echo "missing files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
 
