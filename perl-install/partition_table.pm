@@ -17,8 +17,8 @@ use detect_devices;
 use log;
 
 @important_types = ('Linux native', 'Linux swap', 
-		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'Win98 FAT32'),
-			if_(arch() =~ /ia64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: XFS'),
+		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'FAT32'),
+			if_(arch() =~ /ia64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: XFS', 'FAT32'),
 		    if_(arch() =~ /ppc/, 'Apple HFS Partition', 'Apple Bootstrap'));
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
@@ -63,7 +63,7 @@ if_(arch() =~ /^ppc/,
 ),
   0x9 => 'AIX data partition / Coherent filesystem / QNX 1.x and 2.x ("qnz")',
   0xa => 'OS/2 Boot Manager / Coherent swap partition / OPUS',
-  0xb => 'Win98 FAT32',
+  0xb => 'FAT32',
   0xc => 'Win98 FAT32, LBA-mapped',
   0xe => 'Win95: DOS 16-bit FAT, LBA-mapped',
   0xf => 'Win95: Extended partition, LBA-mapped',
@@ -157,7 +157,7 @@ if_(arch() =~ /^ppc/,
   0xe4 => 'SpeedStor 16-bit FAT extended partition < 1024 cyl.',
   0xeb => 'BeOS',
   0xee => 'EFI GPT',
-  0xef => 'Partition that contains an EFI file system',
+  0xef => 'EFI (FAT-12/16/32)',
   0xf1 => 'SpeedStor 0xf1',
   0xf2 => 'DOS 3.3+ secondary partition',
   0xf4 => 'SpeedStor large partition / Prologue single-volume partition',
