@@ -140,7 +140,12 @@ sub init {
     #- create remaining /etc and /var subdirectories if not already copied or symlinked,
     #- because programs most often won't try to create the missing subdir before trying
     #- to write a file, leading to obscure unexpected failures
-    -d $_ or mkdir_p $_ foreach chomp_(cat_('/image/move/directories-to-create'));
+    foreach (cat_('/image/move/directories-to-create')) {
+	my ($mode, $uid, $gid, $name) = split;
+	next if -d $name;
+	mkdir($name, oct($mode));
+	chown($uid, $gid, $name);
+    }
 
     chmod 01777, '/tmp', '/var/tmp';  #- /var/tmp -> badly needed for printing from OOo
 
