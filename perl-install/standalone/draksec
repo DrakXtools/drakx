@@ -59,49 +59,38 @@ sub basic_seclevel_explanations {
     my $text = new Gtk2::TextView;
     $text->set_editable(0);
     gtktext_insert($text,
-		   formatAlaTeX(N("Standard: This is the standard security recommended for a computer that will be used to connect
+             formatAlaTeX(N("Standard: This is the standard security recommended for a computer that will be used to connect
                to the Internet as a client.
 
 High:       There are already some restrictions, and more automatic checks are run every night.
 
 Higher:    The security is now high enough to use the system as a server which can accept
               connections from many clients. If your machine is only a client on the Internet, you
-	      should choose a lower level.
+           should choose a lower level.
 
 Paranoid:  This is similar to the previous level, but the system is entirely closed and security
                 features are at their maximum
 
 Security Administrator:
                If the 'Security Alerts' option is set, security alerts will be sent to this user (username or
-	       email)")));
+            email)")));
     
     gtkpack_(gtkshow(new Gtk2::HBox(0, 0)), 1, $text);
 }
 
-sub basic_seclevel_option {
-	my ($seclevel_entry, $_msec) = @_;
-	my @sec_levels = security::level::get_common_list();
-	my $current_level = security::level::get_string();
-
-	push(@sec_levels, $current_level) unless member($current_level, @sec_levels);
-
-	$$seclevel_entry->entry->set_editable(0);
-	$$seclevel_entry->set_popdown_strings(@sec_levels);
-	$$seclevel_entry->entry->set_text($current_level);
-
-	new Gtk2::Label(N("Security Level:")), $$seclevel_entry;
-}
-
 sub new_editable_combo {
-	my $w = new Gtk2::Combo();
-	$w->entry->set_editable(0);
-	$w;
+    my ($string_list, $default_value) = @_;
+    my $w = new Gtk2::Combo();
+    $w->entry->set_editable(0);
+    $w->set_popdown_strings(@$string_list) unless is_empty_array_ref $string_list;
+    $w->entry->set_text($default_value) if $default_value;
+    $w;
 }
 
 sub set_help_tip {
-	my ($entry, $default, $opt) = @_;
+     my ($entry, $default, $opt) = @_;
      my $help = $security::help::help{$opt};
-	gtkset_tip(new Gtk2::Tooltips, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", $default));
+     gtkset_tip(new Gtk2::Tooltips, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", $default));
 }
 
 my $msec = new security::msec;
@@ -111,7 +100,6 @@ my $window = $w->{window};
 ############################ MAIN WINDOW ###################################
 # Set different options to Gtk2::Window
 unless ($::isEmbedded) {
-#	  $w->{rwindow}->set_policy(1, 1, 1);
     $w->{rwindow}->set_position('center');
     $w->{rwindow}->set_title("DrakSec");
     $window->set_size_request(598, 590);
@@ -129,19 +117,28 @@ my $notebook = create_notebook();
 my $common_opts = { col_spacings => 10, row_spacings => 5 };
 
 ######################## BASIC OPTIONS PAGE ################################
-my $seclevel_entry = new Gtk2::Combo();
+my $seclevel_entry;
 
 $notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
                                        basic_seclevel_explanations($msec),
                                        create_packtable($common_opts,
-                                                        [ basic_seclevel_option(\$seclevel_entry, $msec) ],
+                                                        [ 
+                                                          do {
+                                                              my @sec_levels = security::level::get_common_list();
+                                                              my $current_level = security::level::get_string();
+                                                              
+                                                              push(@sec_levels, $current_level) unless member($current_level, @sec_levels);
+                                                              $seclevel_entry = new_editable_combo(\@sec_levels, $current_level);
+                                                              
+                                                              new Gtk2::Label(N("Security Level:")), $seclevel_entry;
+                                                          }
+                                                          ],
                                                         [ new Gtk2::Label(N("Security Alerts:")), 
                                                           my $secadmin_check = new Gtk2::CheckButton ],
                                                         [ new Gtk2::Label(N("Security Administrator:")),
-                                                          my $secadmin_entry = new Gtk2::Entry ]))),
+                                                          my $secadmin_entry = new Gtk2::Entry($msec->get_check_value("MAIL_USER")) ]))),
                                new Gtk2::Label(N("Basic")));
                        
-$secadmin_entry->set_text($msec->get_check_value("MAIL_USER"));
 $secadmin_check->set_active(1) if $msec->get_check_value("MAIL_WARN") eq "yes";
                        
 ######################### NETWORK & SYSTEM OPTIONS #########################
@@ -163,13 +160,8 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            my $entry;
                                                                                            my $default = $msec->get_function_default($i);
                                                                                            if (member($default, @all_choices)) {
-                                                                                               $values{$i} = new_editable_combo();
+                                                                                               $values{$i} = new_editable_combo(member($default, @yesno_choices) ? \@yesno_choices : member($default, @alllocal_choices) ? \@alllocal_choices : ());
                                                                                                $entry = $values{$i}->entry;
-                                                                                               if (member($default, @yesno_choices)) {
-                                                                                                   $values{$i}->set_popdown_strings(@yesno_choices);
-                                                                                               } elsif (member($default, @alllocal_choices)) {
-                                                                                                   $values{$i}->set_popdown_strings(@alllocal_choices);
-                                                                                               }
                                                                                            } else {
                                                                                                $values{$i} = new Gtk2::Entry();
                                                                                                $entry = $values{$i};
@@ -190,11 +182,9 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                1, create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
-                                                                                       $security_checks_value{$i} = new_editable_combo();
+                                                                                       $security_checks_value{$i} = new_editable_combo([ 'yes', 'no', 'default'], $msec->get_check_value($i));
                                                                                        my $entry = $security_checks_value{$i}->entry;
                                                                                        set_help_tip($entry, $msec->get_check_default($i), $i);
-                                                                                       $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
-                                                                                       $entry->set_text($msec->get_check_value($i));
                                                                                        [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
                                                                                    } sort $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
