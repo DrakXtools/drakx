@@ -3,6 +3,7 @@ package http;
 use IO::Socket;
 
 use install_any;
+use network;
 
 
 my $sock;
@@ -11,6 +12,7 @@ sub getFile($) {
     local($^W) = 0;
 
     my ($host, $port, $path) = $ENV{URLPREFIX} =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;
+    $host = network::resolv($host);
     $path .= "/" . install_any::relGetFile($_[0]);
 
     $sock->close if $sock;
@@ -24,6 +26,17 @@ sub getFile($) {
 		     "Host: $host" . ($port && ":$port"),
 		     "User-Agent: DrakX/vivelinuxabaszindozs",
 		     "", "");
+
+    #- skip until empty line
+    local $_;
+    my ($now, $last) = 0;
+    do {
+	$last = $now;
+	sysread($sock, $_, 1) || die;
+	sysread($sock, $_, 1) || die if /\015/;
+	$now = /\012/;
+    } until ($now && $last);
+
     $sock;
 }
 

@@ -146,6 +146,11 @@ sub sethostname {
     syscall_('sethostname', $netc->{HOSTNAME}, length $netc->{HOSTNAME}) or log::l("sethostname failed: $!");
 }
 
+sub resolv($) {
+    my ($name) = @_;
+    is_ip($name) ? $name : join(".", unpack "C4", (gethostbyname $name)[4]);
+}
+
 sub dnsServers {
     my ($netc) = @_;
     grep { $_ } map { $netc->{$_} } qw(dnsServer dnsServer2 dnsServer3);

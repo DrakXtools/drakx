@@ -471,6 +471,7 @@ sub install_urpmi {
 
 	my $dir = ${{ nfs => "file://mnt/nfs", 
 		      ftp => $ENV{URLPREFIX}, 
+		      http => $ENV{URLPREFIX}, 
 		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};
 	local *FILES; open FILES, "hdlist2files $f|";
 	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;

@@ -22,7 +22,7 @@
 # DiskDrake is also based upon the libfdisk and the install from Red Hat Software
 
 
-use lib qw(/usr/lib/libDrakX .);
+use lib qw(/usr/lib/libDrakX);
 use common qw(:common :functional);
 use diskdrake;
 use interactive_gtk;
@@ -31,8 +31,13 @@ use fsedit;
 use fs;
 use log;
 
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: XFdrake [--expert] [--testing]\n";
+
+$::expert = /--expert/;
+$::testing = /--testing/;
 $::isStandalone = 1;
-#$::expert = 1;
 
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";

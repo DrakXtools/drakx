@@ -229,6 +229,7 @@ sub verifyParts($) {
 }
 sub verifyPrimary($) {
     my ($pt) = @_;
+    $_->{start} > 0 || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
     verifyParts_(@{$pt->{normal}}, $pt->{extended});
 }
 
