@@ -121,6 +121,7 @@ NETWORKING_CHAT
     3 talk ytalk
     2 GNOME gabber gaim
   SERVER
+    4 jabber 
     3 talk-server
     
 NETWORKING_FILE_TRANSFER
@@ -131,7 +132,7 @@ NETWORKING_FILE_TRANSFER
     3 GNOME dpsftp
   SERVER
     4 proftpd
-    3 anonftp
+    2 wu-ftpd anonftp
 
 NETWORKING_INSTANT_MESSAGING
   CLIENT
@@ -149,6 +150,11 @@ NETWORKING_IRC
     2 irssi
     1 eggdrop
 
+NETWORKING_FIREWALLING
+  SERVER
+    5 iproute2 routed 
+    4 portsentry 
+
 NETWORKING_MAIL
   CLIENT
     5 mailx metamail
@@ -157,6 +163,9 @@ NETWORKING_MAIL
     3 !GNOME !KDE xmailbox
     2 FaxMail comsat elm faces-xface
     1 exmh mutt fetchmail-daemon fetchmailconf
+  SERVER
+    5 postfix 
+    4 sympa 
 
 NETWORKING_NEWS
   CLIENT
@@ -164,14 +173,31 @@ NETWORKING_NEWS
     3 slrn tin trn 
     1 slrn-pull xrn
   SERVER
-    3 inn 
+    4 inn
+    3 inews 
 
 NETWORKING_OTHER
-  4 bind-utils nfs-utils-clients
-  3 finger fwhois samba-client ucd-snmp-utils
-  2 htdig iproute2 macutils queso
-  2 GNOME gnomba
-  1 nslint
+  SERVER
+    4 webmin
+    3 dhcp gated timed xntp3 
+  CLIENT
+    3 finger fwhois ucd-snmp-utils
+    2 htdig macutils queso
+
+SERVER_OTHER
+  SERVER
+    3 intimed mcserv nscd imap pidentd
+      rdate bootparamd 
+      cleanfeed ucd-snmp leafnode vnc-server
+      cvsweb finger-server mars-nwe 
+      XFree86-Xvfb XFree86-Xnest
+    2 heartbeat
+
+NIS
+  SERVER
+    5 ypserv
+  CLIENT
+    5 ypbind
 
 NETWORKING_REMOTE_ACCESS
   CLIENT
@@ -182,14 +208,40 @@ NETWORKING_REMOTE_ACCESS
     1 sftp
   SERVER
     5 openssh-server
-    1 telnet-server
+    1 telnet-server rsh-server 
+
+NETWORKING_DNS
+  SERVER
+    5 bind 
+    4 caching-nameserver
+    1 nslint
+  CLIENT
+    4 bind-utils 
+
+NETWORKING_FILE
+  SERVER 
+    5 nfs-utils
+    4 samba
+    3 squid
+  CLIENT  
+    4 nfs-utils-clients samba-client 
+    3 am-utils 
+    2 GNOME gnomba
 
 NETWORKING_WWW
-  5 lynx
-  4 bluefish netscape-communicator wget links
-  4 GNOME screem
-  3 plugger
-  4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
+  CLIENT
+    5 lynx
+    4 bluefish netscape-communicator wget links
+    4 GNOME screem
+    3 plugger
+    4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
+  SERVER
+    5 apache apache-mod_perl mod_ssl
+    4 apache-suexec 
+    4 BOOKS apache-manual
+    3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
+      php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl
+    1 Zope Zope-core Zope-pcgi Zope-zserver
 
 GRAPHICS
   4 ImageMagick giftrans gimp gphoto qiv xli
@@ -224,9 +276,12 @@ DATABASES
   SERVER
     4 postgresql-server
     3 MySQL
-    2 postgresql-odbc postgresql-perl postgresql-tcl postgresql-test
-  DEVELOPMENT
-    1 MySQL-bench MySQL-devel postgresql-jdbc postgresql-python postgresql-tk
+    3 postgresql-perl postgresql-python
+    2 postgresql-jdbc postgresql-tk postgresql-tcl postgresql-odbc postgresql-tcl postgresql-test
+  DEVELOPMENT 
+    4 perl-Mysql
+    3 postgresql-devel
+    1 MySQL-bench MySQL-devel
 
 GAMES
   4 clanbomber
@@ -277,7 +332,7 @@ DEVELOPMENT
   3 perl-DBI perl-Digest-MD5 perl-IO-stringy perl-PDL perl-Parse-RecDescent 
     perl-GTK-GLArea perl-Tk perlftlib eperl perl-URI perl-DB_File
     perl-Data-ShowTable perl-HTML-Parser perl-HTML-SimpleParse perl-MIME-Base64
-    perl-MIME-tools perl-MP3-Info perl-MailTools perl-Msgcat perl-Mysql
+    perl-MIME-tools perl-MP3-Info perl-MailTools perl-Msgcat
 
   3 rpmlint rpm-devel rpm-build 
   3 kernel-source 
@@ -290,25 +345,11 @@ DEVELOPMENT
     ruby-extensions ruby-gtk ruby 
 
   4 gettext-devel
-  2 ImageMagick-devel Mesa-common-devel Xaw3d-devel detect-devel
-    gd-devel p2c-devel gmp-devel guile-devel libgr-devel libjpeg-devel libpng-devel
-    libtermcap-devel libtiff-devel libungif-devel libxml-devel libxml2-devel
-    linuxconf-devel slang-devel sox-devel zlib-devel XFree86-devel dev86-devel
-    gdk-pixbuf-devel gimp-devel gpm-devel kudzu-devel libghttp-devel libgtop-devel
-    libmikmod-devel librep-devel libunicode-devel popt-devel pwdb-devel t1lib-devel
-    ucd-snmp-devel mpeg_lib-devel WindowMaker-devel aalib-devel adns-devel
-    alsa-lib-devel audiofile-devel cups-devel e2fsprogs-devel egcs-objc-devel
-    g-wrap-devel gkrellm-devel ibtk libPropList-devel licq-devel openldap-devel
-    parted-devel pciutils-devel pilot-link-devel postgresql-devel svgalib-devel
-    recode-devel aspell-devel cdrecord-devel cracklib-devel faces-devel fnlib-devel
-    freetype-devel gtk+mdk-devel gtkglarea-devel XFree86-static-libs imap-devel
-    php-devel pth-devel sane-devel swig-devel xdelta-devel isapnptools-devel
-    pango-devel
 
-  BOOKS
-    4 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
+    BOOKS
     3 mandrake_doc-de mandrake_doc-en mandrake_doc-es mandrake_doc-fr mandrake_doc-it
     2 pam-doc python-docs slang-doc kernel-doc nasm-doc qt2-doc ruby-doc lkmpg
+
   KDE
     3 kdebase-devel kdegraphics-devel kdelibs-devel kdelibs-sound-devel
       kdemultimedia-devel kdenetwork-devel
@@ -321,6 +362,22 @@ DEVELOPMENT
     2 pygnome-applet pygnome-capplet pygnome-libglade rep-gtk-gnome
       gnomemm-devel gnome-games-devel gnome-pilot-devel glademm
     1 gnucash-devel rep-gtk-libglade
+
+  DEVELOPMENT_OTHER
+    2 ImageMagick-devel Mesa-common-devel Xaw3d-devel detect-devel
+      gd-devel p2c-devel gmp-devel guile-devel libgr-devel libjpeg-devel libpng-devel
+      libtermcap-devel libtiff-devel libungif-devel libxml-devel libxml2-devel
+      linuxconf-devel slang-devel sox-devel zlib-devel XFree86-devel dev86-devel
+      gdk-pixbuf-devel gimp-devel gpm-devel kudzu-devel libghttp-devel libgtop-devel
+      libmikmod-devel librep-devel libunicode-devel popt-devel pwdb-devel t1lib-devel
+      ucd-snmp-devel mpeg_lib-devel WindowMaker-devel aalib-devel adns-devel
+      alsa-lib-devel audiofile-devel cups-devel e2fsprogs-devel egcs-objc-devel
+      g-wrap-devel gkrellm-devel ibtk libPropList-devel licq-devel openldap-devel
+      parted-devel pciutils-devel pilot-link-devel svgalib-devel
+      recode-devel aspell-devel cdrecord-devel cracklib-devel faces-devel fnlib-devel
+      freetype-devel gtk+mdk-devel gtkglarea-devel XFree86-static-libs imap-devel
+      php-devel pth-devel sane-devel swig-devel xdelta-devel isapnptools-devel
+      pango-devel
 
 MONITORING
   5 procinfo psacct
@@ -338,25 +395,6 @@ FILE_TOOLS
   3 FileRunner dosfstools draksync mc tree
   2 git gentoo sfm
   1 xdelta
-
-WEB_SERVER
-  5 apache apache-mod_perl mod_ssl
-  4 apache-suexec 
-  4 BOOKS apache-manual
-  3 php-dba_gdbm_db2 php-gd php-imap php-ldap php-manual php-mysql php-oracle
-    php-pgsql php-readline php mod_php mod_ssl-sxnet auth_ldap HTML-Embperl
-  1 Zope Zope-core Zope-pcgi Zope-zserver
-
-SERVER
-  4 nfs-utils
-  3 intimed mcserv nscd dhcp gated imap pidentd
-    postfix rdate routed samba bind bootparamd caching-nameserver
-    cleanfeed timed ucd-snmp xntp3 leafnode squid sympa vnc-server
-    am-utils cvsweb finger-server jabber mars-nwe 
-    inews portsentry XFree86-Xvfb XFree86-Xnest webmin
-  2 heartbeat tftp-server
-  1 rsh-server 
-  5 NIS ypbind
 
 CONFIG
   5 drakxtools ldetect
@@ -415,6 +453,9 @@ EMULATORS
   3 wine
   2 BasiliskII BasiliskII-sheepnet xdosemu 
   1 xmame xmess
+
+BOOKS
+  4 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
 
 INSTALL
   5 pptp-adsl-fr dhcpcd dhcpxd dhcp-client isdn4net isdn4k-utils rp-pppoe pump wireless-tools

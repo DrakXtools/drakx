@@ -18,6 +18,7 @@ Internet station [icon=networking] [path=workstation] [descr=Set of tools to rea
 	CLIENT
 	NETWORKING_WWW
 	NETWORKING_MAIL
+	NETWORKING_FILE
 	NETWORKING_NEWS
 	COMMUNICATIONS
 	NETWORKING_CHAT
@@ -51,7 +52,7 @@ Development, Integrated Environment [icon=] [path=Developement] [descr=]
 
 Development, Web [icon=] [path=Developement] [descr=]
 	DEVELOPMENT
-	NETWORKING_WEB
+	NETWORKING_WWW
 
 Development, Database [icon=] [path=Developement] [descr=]
 	DEVELOPMENT
@@ -60,6 +61,7 @@ Development, Database [icon=] [path=Developement] [descr=]
 Server, Web/FTP  [icon=] [path=Server] [descr=]
 	SERVER
 	NETWORKING_WWW
+	NETWORKING_FILE_TRANSFER
 
 Server, Mail/Groupware/News [icon=] [path=Server] [descr=]
 	SERVER
@@ -72,17 +74,20 @@ Server, Database [icon=] [path=Server] [descr=]
 
 Server, Firewall/Router [icon=] [path=Server] [descr=]
 	SERVER
+	NETWORKING_FIREWALL
 
 Server, File/Print/Samba [icon=] [path=Server] [descr=]
 	SERVER
-	SAMBA
+	NETWORKING_FILE
 
 Server, DNS/DHCP [icon=] [path=Server] [descr=] 
 	SERVER
-	DNS
+	NIS
+	NETWORKING_DNS
 
 Server, Network Computer server [icon=] [path=Server] [descr=]
 	SERVER
+	NETWORKING_FILE
 
 Documentation [icon=documentation] [path=Workstation] [descr=Books and Howto's on Linux and Free Software]
 	BOOKS
