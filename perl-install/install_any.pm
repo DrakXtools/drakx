@@ -624,7 +624,8 @@ sub install_urpmi {
 }
 
 ";
-    } sort { $a->{medium} <=> $b->{medium} } grep { $_->{selected} } values %$mediums;
+	#- select only ignored (ie noauto flag) media and selected one.
+    } sort { $a->{medium} <=> $b->{medium} } grep { $_->{ignored} || $_->{selected} } values %$mediums;
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
 }
 
