@@ -1,3 +1,76 @@
+2002/02/05  dam's  <damien@mandrakesoft.com>
+
+	* standalone/logdrake: wizard updated
+	correction for mcc.
+
+2002/02/05  François Pons  <fpons@mandrakesoft.com>
+
+	* share/rpmsrate.server: synced with normal rpmsrate for Basque
+	management.
+
+	* install2.pm: auto_allocate for oem mode is not needed as oem script
+	create all necessary partition.
+
+	* install_any.pm: add support for Basque (no KDE).
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: newer syslinux 1.67.
+
+	* share/rpmsrate: add support for Basque (no netscape in such case)
+
+	* rescue/tree/etc/oem: select preferred kernel as kernel-\d.
+
+	* install_steps.pm: fixed logic, when someone want /root/drakx,
+	it has to check /root/drakx and not /root only.
+
+2002/02/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/tree/sbin/modprobe: don't do insmod -f, it's not really necessary
+	and it taints the kernel (pabo)
+
+	* rescue/tree/etc/profile: use LD_LIBRARY_PATH in rescue so that PATH'ing
+	in /mnt
+	can really be used
+
+2002/02/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/es.po, share/po/bg.po, share/po/ga.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/cy.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/is.po, share/po/hu.po,
+	share/po/it.po, share/po/id.po, share/po/pl.po, share/po/no.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2002/02/05  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: fix "help lilo when there is hdd with no hdc drive"
+
+	* Xconfigurator.pm: testFinalConfig now always returns true if test is
+	skipped because of a bad_card (back to the old behaviour, this was no
+	good (the aim is to enable changing the monitor when test is skipped))
+
+	* share/po/fr.po: fix "Details" translated in "Détails de la partition"
+	but is used at different
+	place where the meaning has nothing to do with "partitions"
+
+2002/02/05  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Added automatic configuration of HPOJ for
+	HP's multi-function devices.
+
+2002/02/05  warly
+
+	* share/compssUsers.server: remove non server group from rpmsrate.server
+	add utilities group in compssUser.server
+	(webmin,ssh-server,wizards,monitoring)
+
+	* share/rpmsrate.server: begin rpmsrate.server cleaning
+
 2002/02/05  Pixel  <pixel@mandrakesoft.com>
 
 	* bootloader.pm: fix "help lilo when there is hdd with no hdc drive"
