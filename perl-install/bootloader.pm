@@ -1320,7 +1320,7 @@ sub update_for_renumbered_partitions {
 	map_each {
 	    $sorted_hds[$1] = fs::get::device2part($::b, $all_hds->{hds}) if $::a =~ /hd(\d+)/;
 	} %$grub2dev;
-    };
+    }
 
     foreach (@$renumbering) {
 	my ($old, $new) = @$_;
