@@ -99,7 +99,7 @@ foreach (@ARGV) {
 	$::expert = 1;
     } elsif (/--noauto$/) {
 	$::noauto = /-noauto/;
-    } elsif (/^--auto$) {
+    } elsif (/^--auto$/) {
 	$::auto = 1;
     } elsif (/^--testing$/) {
 	$::testing = 1;
