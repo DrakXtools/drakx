@@ -175,6 +175,7 @@ sub gtkcombo_setpopdown_strings {
 sub gtkset_mousecursor {
     my ($type, $w) = @_;
     ($w || gtkroot())->set_cursor(Gtk2::Gdk::Cursor->new($type));
+    $w;
 }
 
 sub gtksignal_connect {
