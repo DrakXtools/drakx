@@ -1061,7 +1061,7 @@ sub device_string2grub {
     my ($dev, $legacy_floppies, $sorted_hds) = @_;
     if (my $device = fs::device2part($dev, [ @$sorted_hds, fsedit::get_fstab(@$sorted_hds) ])) {
 	device2grub($device, $sorted_hds);
-    } elsif (my $floppy = fs::device2part($dev, @$legacy_floppies)) {
+    } elsif (my $floppy = fs::device2part($dev, $legacy_floppies)) {
 	my $bios = find_index { $floppy eq $_ } @$legacy_floppies;
 	"(fd$bios)";
     } else {
