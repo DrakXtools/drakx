@@ -694,6 +694,14 @@ sub summary {
     configurePrinter($o) if $o->{printer};
 }
 
+sub summaryAfter {
+    my ($o) = @_;
+
+    require bootloader;
+    bootloader::get_append($o->{bootloader}, 'acpi') ne 'off' && (-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid") and
+	$in->do_pkgs->install(qw(acpi acpid));
+}
+
 #------------------------------------------------------------------------------
 sub configureTimezone {
     my ($o) = @_;
