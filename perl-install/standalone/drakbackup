@@ -595,55 +595,38 @@ sub read_cron_files() {
 }
 
 sub save_cron_files() {
-	my $entry_changed = 0;
 	my $tmpcron = "$ENV{HOME}/tmp/crontab.tmp";
 
 	if ($nonroot_user && $when_space ne "custom" && $when_space ne '' && $backup_daemon)  {
 		show_warning("w", N("Interval cron not available as non-root"));
 		$backup_daemon = 0;
 		return 1;
-	}
-    my @cron_file = ("#!/bin/sh\n", "export USER=root\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
-
-    if ($backup_daemon) {
-	if ($when_space ne "custom") {
-			output_p("/etc/cron.$when_space/drakbackup",  @cron_file);
-			system("chmod +x /etc/cron.$when_space/drakbackup");
 	} else {
-			my $newdetail = join(" ", $time_string, $exec_string, "\n");
-			system("crontab -l | tail +4 > $tmpcron");
-			my @cronlines = cat_($tmpcron);
-			my $index = 0;
-			foreach (@cronlines) {
-				if (/$exec_string/) {
-					$cronlines[$index] = $newdetail;
-					$entry_changed = 1;
-				}
-				$index++;
-			}
-			push(@cronlines, $newdetail) if $entry_changed == 0;
-			output($tmpcron, @cronlines);
-			system("crontab $tmpcron");
-			unlink($tmpcron);
-		}
-	} elsif (!$nonroot_user) {
 		foreach (qw(hourly daily weekly monthly)) {
 	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
 		}
+	}
+    my @cron_file = ("#!/bin/sh\n", "export USER=root\n", "/usr/sbin/drakbackup --daemon > /dev/null 2>&1\n");
+
+	if ($when_space ne "custom" && $when_space ne '' && $backup_daemon) {
+		output_p("/etc/cron.$when_space/drakbackup",  @cron_file);
+		system("chmod +x /etc/cron.$when_space/drakbackup");
+	}
+	if ($when_space eq "custom" || !$backup_daemon) {
+		my $newdetail = join(" ", $time_string, $exec_string, "\n") if $backup_daemon;
 		system("crontab -l | tail +4 > $tmpcron");
 		my @cronlines = cat_($tmpcron);
-		if (any { /$exec_string/ } @cronlines) {
-			my $index = 0;
-			foreach (@cronlines) {
-				if (/$exec_string/) {
-					splice(@cronlines, $index, 1);
-				}
-				$index++;
+		my $index = 0;
+		foreach (@cronlines) {
+			if (/$exec_string/) {
+				splice(@cronlines, $index, 1);
 			}
-			output($tmpcron, @cronlines);
-			system("crontab $tmpcron");
-			unlink($tmpcron);
+			$index++
 		}
+		push(@cronlines, $newdetail) if $backup_daemon;
+		output($tmpcron, @cronlines);
+		system("crontab $tmpcron");
+		unlink($tmpcron);
 	}
 }
 
