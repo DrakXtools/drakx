@@ -1,3 +1,520 @@
+2004/02/10  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/02/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po, share/po/uz@Latn.po: updated pot file
+
+2004/02/10  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: better code for detecting if the window is hidden or not
+	(fixes embedded drakconnect wizard should be popped window) (bugzilla
+	#7246)
+	remove many warnings about unitialised value (causing a bug in
+	diagnostics.pm?)
+
+	* pkgs.pm: remove postfix from naughtyServers (fix titi)
+
+	* Xconfig/resolution_and_depth.pm: prefer BoardName to card_name
+
+	* interactive/gtk.pm: have modal windows
+
+2004/02/10  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Undo some of the breakage, format is still
+	wrong :(
+
+	* standalone/drakbackup: Remove confusing "On hard drive" checkbox from
+	wizard (Arnaud de Lorbeau)
+	Fix failure to disable user cron job. Code reduction.
+
+2004/02/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* pkgs.pm: warn when installing postfix server (#7102)
+	fix not warning about apache2 servers (#7559)
+
+	* network/ethernet.pm (mapIntfToDevice) match pci function too (not that
+	important since we
+	do not know of any ethernet pci card that export two functions on the
+	pci bug but anyway it's saner)
+	note that we do not match for pci domain since ldetect does not report
+	it
+
+2004/02/09  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/02/09  fwang
+
+	* share/po/zh_CN.po: update
+
+2004/02/09  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* install_gtk.pm: resurrect 9.2 code for setting background. i was said to
+	remove it for move because default colour is already mandrake colour but
+	obviously it isn't.
+
+	* Xconfig/resolution_and_depth.pm: RIVA128 fails miserably when using
+	16bpp
+
+2004/02/09  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm, standalone/XFdrake:
+	handle allowNVIDIA_rpms & allowATI_rpms directly in
+	Xconfig::card::install_server
+
+	* .cvsignore: my test file is now t.pl
+
+	* install_steps_gtk.pm: use modal windows during install
+
+	* common.pm: fix typo
+
+	* Xconfig/card.pm: fix typo
+	handle allowNVIDIA_rpms & allowATI_rpms directly in
+	Xconfig::card::install_server
+	force XF4 on all archs
+
+	* ugtk2.pm: remove show_all that breaks when there are some hidden windows
+	allow set_modal for popped windows at install
+
+2004/02/09  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Thierry compliance. Doesn't work anymore and
+	fails perl_checker now :P
+
+2004/02/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/ethernet.pm (ether_conf) rename it as write_ether_conf()
+	(mapIntfToDevice) fix pci/usb ethernet devices matching
+
+	* standalone/drakfont (appli_choice) fix crash on option toggling (#7248)
+
+	* network/netconnect.pm: fix unability to select gateway (#7585)
+	fix empty list in "multiple internet_connexions" step
+	fix unwritten ethernet interface config
+	sort ethX interfaces in list
+	blacklist bogus forcedeth driver for network hotplugging, enable
+	ifplugd support for all other drivers even at install time (#7389)
+
+	* drakxtools.spec: 10-0.9mdk
+	10-0.8mdk
+
+	* detect_devices.pm (getNet) detect athX interfaces too (maybe should we
+	inverse this func
+	logic and blacklist ppp and the like interfaces ...)
+	some eide Lite-on drivers are reported with different casse
+
+2004/02/08  Pixel  <pixel at mandrakesoft.com>
+
+	* Newt/.cvsignore: simplify
+
+	* install_steps_interactive.pm: adapt to change allowing checking
+	nvidia/ati proprietary driver availability only when needed
+
+	* xf86misc/main.pm, c/stuff.xs.pl, install_steps_gtk.pm, mouse.pm,
+	Makefile.config, xf86misc/main.xs, xf86misc/.cvsignore, drakxtools.spec,
+	xf86misc/Makefile.PL, common.pm, xf86misc/Makefile, Xconfig/test.pm,
+	Makefile.drakxtools: move Xtest() and setMouseLive() out of c/stuff to
+	xf86misc::main
+	so that we can use them (esp. setMouseLive) in standalone without making
+	drakxtools-newt
+	require xfree libs
+
+2004/02/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+	update
+
+	* drakxtools.spec: XFdrake can run w/o gtk+ toolkit
+	10-0.7mdk
+
+	* Xconfig/card.pm, standalone/XFdrake: make XFdrake startup be
+	instantenous for non nv|ati cards (allowNVIDIA_rpms and
+	allowATI_rpms tests used to cost us 99% of the long startup time of
+	XFdrake:-()
+
+2004/02/08  yrahal
+
+	* share/po/ar.po: Committing Arabeyes.org Arabic translation
+
+2004/02/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po, share/po/uz@Latn.po: updated pot file
+	updated pot file
+
+	* standalone/logdrake: English typo and disambiguation of some strings
+
+2004/02/07  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: PXE image support, researched by Venantius
+	Kumar.
+
+2004/02/06  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/dwd-05.pl, share/advertising/dwd-08.pl,
+	share/advertising/dwd-02.pl, share/advertising/dwd-04.pl,
+	share/advertising/dwd-06.pl, share/advertising/dwd-07.pl,
+	share/advertising/dwd-09.pl: Update
+
+	* share/rpmsrate: Update for Discovery
+
+2004/02/06  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - do only one regexp on $interface
+	  - more readable repack
+	  - add sub check_field
+	  - check IPs
+	  - delete BOOTPROTO when not needed
+
+2004/02/06  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/02/06  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/url.c: log server http response
+
+	* ugtk2.pm: shrink_topwindow: add (force gtk to recompute size of
+	topwindow, when some child widgets got destroyed or shrinked)
+
+2004/02/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/help-zh_CN.pot, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/help_xml2pm.pl, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/nb.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/mn.po, share/po/uk.po,
+	share/po/lt.po, share/po/cy.po, share/po/help-it.pot, share/po/tg.po,
+	share/po/bs.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* help.pm: Changed Newt/Previous strings to remove arrows
+
+2004/02/06  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: draksec needs gtk, no must not be in drakxtools-newt
+	(bugzilla #7413)
+
+	* Xconfig/monitor.pm: 
+	  - ensure ModelName comes from the ddc probe when choosing "Plug'n
+	Play"
+	  - only "Plug'n Play" instead of "Plug'n Play (<ModelName>)" when
+	current monitor is not plug'n play
+
+	* mouse.pm: 
+	  - add change_mouse_live()
+	  - use /dev/mouse in XF86Config to allow changing protocol in
+	standalone
+
+	* interactive/gtk.pm: workaround gtk limitation #133489
+
+	* install_steps_gtk.pm: use mouse::change_mouse_live()
+
+	* bootloader.pm: special way to remove mem=<memsize>
+	please perl_checker
+	following quintela's lilo change, allowing lilo labels up to 31
+	characters
+
+	* share/po/help_xml2pm.pl: 
+	  - handle zh_CN.po
+	  - handle tags <phrase> and <hardware>
+
+	* Xconfig/card.pm: don't test X config if using driver vmware (bugzilla
+	#5346)
+
+	* share/po/help-zh_CN.pot, share/po/help-ru.pot, help.pm,
+	share/po/help-de.pot, share/po/help-fr.pot, share/po/help-es.pot,
+	share/po/help-it.pot: update from xml
+
+	* standalone/mousedrake: use ->create_okcancel instead of doing it by hand
+	(hopefully it will ensure better choice of Ok/Cancel vs Cancel/Ok
+	without breaking anything...)
+	  - no special testing mouse in embedded
+	  - use mouse::change_mouse_live()
+
+	* network/shorewall.pm: handle range (bugzilla #7172)
+
+	* any.pm (fileshare_config): quite different way of handling it, asking
+	first if user
+	wants sharing or not, then asking which protocol (when users wants
+	sharing).
+	Removing or installing the server package handling the protocols (smb or
+	nfs).
+	handle better bootloader per entries video mode
+	special way to remove mem=<memsize>
+	remove defaulting global vga mode to normal
+	fix old typo: complete callback was not called
+	drop bootloader main options "Compact" and "Video mode"
+
+2004/02/06  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Provide more detailed info on files backed
+	up/ignored. <Anthill #306>
+	Cleanup some of the redundant code in the actual backup routines.
+
+2004/02/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake (alert_config) do not complain when removing non
+	existing cron entry
+	(aka when one run twice the disable path)
+
+	* security/msec.pm: fix draksec not saving options when config file do not
+	exists :-(
+
+	* share/po/fr.po: update
+	update
+	fix layout in drakconnect
+
+	* standalone/draksec: workaround gtk limitation #133489
+
+	* drakxtools.spec: 10-0.6mdk
+	move drakbug, drakclock, drakperm, drakTermServ, net_monitor in
+	drakxtools too since they require ugtk2.
+	move their aliases (soft links) their too.
+	10-0.5mdk
+	10-0.4mdk
+
+	* network/netconnect.pm: help perl_checker regarding comments for
+	translators
+	wireless step: add an hint for translators
+	split wireless step into two steps since there way too much options
+	fix wireless settings (references being made too early)
+	(main) try first to match a pcmcia device before trying to match
+	pci/usb when looking for module (#7431)
+
+	* ugtk2.pm (new) remove unused flush()
+	(new) fix pixel breaking non wizard embedded case while cleaning :-(
+
+	* standalone/draksound: advertize alsaconf too since sndconfig failled for
+	cards only managed
+	by ALSA (#7456)
+
+2004/02/06  Warly  <warly at mandrakesoft.com>
+
+	* standalone/drakboot: Warn if the user is not in framebuffer mode, but
+	allow to see the installed theme.
+	Do not perform autologin config in splash mode
+	Better parsing of current resolution from detect-resolution
+
+2004/02/05  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* any.pm: this part of code is already executed only in $::isInstall
+
+	* standalone/drakconnect: Informations doesn't exist in english, use
+	Information instead (no need to update the POs, they already contain
+	Information elsewhere)
+
+2004/02/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/mn.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/nb.po, share/po/bs.po,
+	share/po/uz.po, share/po/ro.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/hi.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/el.po, share/po/bg.po,
+	share/po/hu.po, share/po/uz@Latn.po: updated pot file
+
+	* share/po/zh_CN.po: updated pot file
+	updated Chinese file
+
+	* share/po/sl.po: updated Slovenian file
+	updated pot file
+
+	* share/po/et.po: updated pot file
+	updated Estonian file
+
+	* keyboard.pm: ichanged console uz keyboard to uz.uni
+
+	* share/po/cs.po: updated Czech file
+	updated pot file
+
+2004/02/05  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: allow 24bpp for DRI (since all drivers
+	now support it: we had mga tdfx r128
+	radeon, and i810 also works (tested on a i865))
+
+	* interactive/gtk.pm: since we use WrappedLabel, it's better not to
+	warp_text()
+
+	* standalone/drakboot: write fstab for /tmp using tmpfs when "clean /tmp"
+	is chosen
+
+	* Xconfig/xfreeX.pm, Xconfig/parse.pm, Xconfig/main.pm, Xconfig/xfree.pm: 
+	  - add ->prepare_write to allow comparing raw_X's
+	  - ensure "config_changed" is returned only if the config file really
+	changed
+
+	* ugtk2.pm: simplify _create_window() prototype
+
+	* diskdrake/dav.pm: remove "Quit" icon
+
+	* any.pm: fix ugly typo (occuring when removing "clean /tmp", ie not
+	often, especially
+	since drakboot didn't write fstab)
+
+	* install_steps.pm: install_steps is a do_pkgs, so add "use do_pkgs"
+
+2004/02/05  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2004/02/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/logdrake: typo fix (spoted by Per Øyvind Karlsen)
+	upcase protocol name
+
+	* network/netconnect.pm: enable one to not enter optional parameters (aka
+	relax checks on valid
+	values for bitrate and frequency) (#7432)
+
+	* share/po/fr.po: update
+	another typo fix regarding firewall
+	typo fixes (cosmic flo)
+
+	* ugtk2.pm (new) add a border too when embedded
+
+	* network/ethernet.pm (get_eth_cards) try first to match a pcmcia device
+	before trying to
+	match pci/usb ones when looking for real device's name (#7401)
+
+2004/02/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/nb.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* lang.pm: more locale fixes; and changed images for Uzbek to default to
+	cyrillic
+	a bit of locales corrections
+
+	* pixmaps/langs/lang-uz@Latn.png, pixmaps/langs/lang-uz.png: more locale
+	fixes; and changed images for Uzbek to default to cyrillic
+
+2004/02/04  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/icons/wiz_default_left.png: remove $draw2 (in ugtk2.pm) and
+	wiz_default_left.png which are unused
+
+	* install_steps_gtk.pm: rename $ugtk2::force_center used at install with
+	$ugtk2::force_center_at_pos
+	the boolean $ugtk2::force_center value used standalone is kept as before
+
+	* mouse.pm: use protocol "ExplorerPS/2" instead of "auto" for kernel 2.6
+	(not statisfying since people booting with kernel 2.4 will not get a
+	working
+	mouse, but at least we can test if this really works nicely for 2.6)
+
+	* standalone/harddrake2, standalone.pm: $::noBorder is deprecated (it was
+	the same as !$::isInstall)
+
+	* ugtk2.pm: 
+	  - rename $ugtk2::force_center used at install with
+	$ugtk2::force_center_at_pos
+	the boolean $ugtk2::force_center value used standalone is kept as before
+	  - deprecate $::noBorder (it was the same as !$::isInstall)
+	  - deprecate $ugtk2::force_position (unused AFAIK)
+	
+	  - _create_window() now returns the created window, it doesn't assign
+	{rwindow}
+	  nor {window} anymore. It doesn't handle a Frame for the window
+	  (it is now directly done by ugtk2->new which is the only function
+	using _create_window())
+	
+	  - deprecate option no_interactive_objects (unused AFAIK)
+	
+	  - {rwindow} is a VBox for both isWizard and isEmbedded
+	  (when isEmbedded, a HBox was created, replacing the create VBox)
+	
+	  - call ->set_title on $::WizardWindow so that the title is honored in
+	non embedded wizard
+	
+	  - remove $draw2 and wiz_default_left.png which are unused
+	
+	  - remove ->set_uposition on $::WizardWindow for install. This is not
+	needed
+	  anymore since force_center_at_pos now works on $::WizardWindow
+	
+	  - hoist $::WizardTable creation
+	
+	  - explicitly set the size of the window during install. The chosen
+	value is
+	  the same as before +9 pixels for the height
+	  (the size needs to be fixed since the advertising images must fit)
+	
+	  - remove the callbacks on expose_event and delete_event for non
+	embedded wizard.
+	  they are the same as the one in _create_window()
+	  (except for the delete_event which explicitly destroy the window, is
+	that ok??)
+	
+	more questions:
+	  - ->set_title on a plug may break, it needs testing
+	  - flush() just after Gtk2::Plug->new, is it needed? (since there is
+	another flush())
+
 2004/02/04  Daouda Lo  <daouda at mandrakesoft.com>
 
 	* drakxtools.spec: 
@@ -25113,7 +25630,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.865 2004/02/02 16:20:57 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.866 2004/02/04 23:34:48 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
