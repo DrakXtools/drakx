@@ -194,18 +194,18 @@ sub ensure_is_installed {
 }
 
 sub what_provides {
-    my ($o, $name) = @_;
+    my ($_o, $name) = @_;
     my ($what) = split '\n', `urpmq '$name' 2>/dev/null`;
     split '\|', $what;
 }
 
 sub is_installed {
-    my ($o, @l) = @_;
+    my ($_o, @l) = @_;
     run_program::run('rpm', '>', '/dev/null', '-q', @l);
 }
 
 sub are_installed {
-    my ($o, @l) = @_;
+    my ($_o, @l) = @_;
     my @l2;
     run_program::run('rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l);
     intersection(\@l, [ map { chomp_($_) } @l2 ]);
