@@ -727,6 +727,18 @@ sub afterInstallPackages($) {
     $o->SUPER::afterInstallPackages($o);
 }
 
+sub copyKernelFromDiskette {
+    my ($o) = @_;
+    $o->ask_warn('', _("Please insert the Boot floppy used in drive %s", $o->{blank}));
+    $o->SUPER::copyKernelFromDiskette();
+}
+
+sub updateModulesFromDiskette {
+    my ($o) = @_;
+    $o->ask_warn('', _("Please insert the Update Modules floppy in drive %s", $o->{updatemodules}));
+    $o->SUPER::updateModulesFromDiskette();
+}
+
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o, $first_time) = @_;
