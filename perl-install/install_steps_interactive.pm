@@ -1096,7 +1096,7 @@ sub setRootPassword {
 		     _("Authentication LDAP"),
 		     [ { label => _("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },
 		       { label => _("LDAP Server"), val => \$o->{authentication}{LDAP} },
-		     ]);
+		     ]) or goto &setRootPassword;
     } else { $o->{authentication}{LDAP} = '' }
     if ($auth eq __("NIS")) { 
 	$o->{authentication}{NIS} ||= 'broadcast';
@@ -1104,7 +1104,7 @@ sub setRootPassword {
 		     _("Authentication NIS"),
 		     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
 		       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
-		     ]); 
+		     ]) or goto &setRootPassword;
     } else { $o->{authentication}{NIS} = '' }
     install_steps::setRootPassword($o);
 }
