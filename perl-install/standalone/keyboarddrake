@@ -11,18 +11,22 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die _("usage: keyboarddrake [--expert]\n");
+/-h/ and die _("usage: keyboarddrake [--expert] [keyboard]\n");
 
 $::expert = /-expert/;
 $::isStandalone = 1;
 
+my ($keyboard) = grep { !/^-/ } @ARGV;
+
 my $in = interactive->vnew('su');
 
-my $keyboard = $in->ask_from_listf_(_("Keyboard"),
+$keyboard ||= $in->ask_from_listf_(_("Keyboard"),
 				   _("Please, choose your keyboard layout."),
 				   \&keyboard::keyboard2text,
 				   [ keyboard::xmodmaps() ],
 				   keyboard::read());
+
+keyboard::keyboard2text($keyboard) or die "bad keyboard $keyboard\n";
 
 my $isNotDelete = $::expert && !$in->ask_yesorno("BackSpace", _("Do you want the BackSpace to return Delete in console?"), 1);
 
