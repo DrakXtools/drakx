@@ -13,7 +13,7 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-use lib qw(..);
+use lib qw(/usr/lib/libDrakX);
 
 use common;
 use interactive;
@@ -125,6 +125,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.2  2001/08/13 19:08:27  gc
+#- ouch! use lib from /usr/lib/libDrakX, rather than from ..
+#-
 #- Revision 1.1  2001/08/13 19:06:50  gc
 #- initial revision for drakautoinst
 #- - put %installSteps in a separate package (steps.pm) (for drakxtools)
