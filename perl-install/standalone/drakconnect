@@ -252,7 +252,11 @@ sub build_tree {
     if ($interface eq 'adsl') {
 	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1, N("Information") => 1 };
 	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_kind);
-	$intf->{save} = sub { network::adsl::adsl_conf_backend($in, $intf, $netc, $interface_kind, $protocol) };
+	$intf->{save} = sub { 
+            $netc->{internet_cnx_choice} = 'adsl';
+            $netc->{at_boot} = $intf->{ONBOOT} eq 'yes' ? 1 : 0;
+            network::adsl::adsl_conf_backend($in, $intf, $netc, $interface_kind, $protocol) 
+          };
     }
     elsif ($interface eq 'modem') {
 	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1 };
@@ -545,11 +549,6 @@ sub save {
 	save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
 	$p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
     }
-
-    if (exists $p->{adsl}) {
-        $p->{adsl}{intf}{ONBOOT} ? system("/sbin/chkconfig --add internet 2> /dev/null") : 
-          system("/sbin/chkconfig --del internet 2> /dev/null");
-    };
 
     system("/etc/rc.d/init.d/network restart");
     $apply_button->set_sensitive(0);
