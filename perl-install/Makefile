@@ -15,6 +15,14 @@ OTHERFILES = tools/rpcinfo-flushed.c
 
 STAGE1 = ../mdk-stage1
 
+USE_PCMCIA := n
+ifeq ($(ARCH),i386)
+USE_PCMCIA := y
+endif
+ifeq ($(ARCH),x86_64)
+USE_PCMCIA := y
+endif
+
 .PHONY: all $(DIRS) install clean stage2 full_stage2
 
 all: list_modules.pm TAGS $(DIRS)
@@ -94,7 +102,7 @@ get_needed_files: $(DIRS) mo_files
 	find auto -follow -name "*.so" >> $(TMPDIR)/list
 
 	for i in $(LOCALFILES) `cat $(TMPDIR)/list` ; do \
-		ldd $$i 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/lib/.*?/,/lib/,' | sort | uniq >> $(TMPDIR)/list; \
+		ldd $$i 2>/dev/null | grep "=>" | perl -pe 's/.*=> //; s/ .*//; s,^/(lib(64)?)/.*?/,/\1/,' | sort | uniq >> $(TMPDIR)/list; \
 	done
 
 	perl -Mlang -I. -e 'print "$$_\n" foreach lang::console_font_files()' >> $(TMPDIR)/list
@@ -124,7 +132,7 @@ ifeq (sparc,$(ARCH))
 endif
 	cp -a /usr/X11R6/lib/X11/locale/{C,en_US.UTF-8,iso8859-1} $(DEST)/usr/X11R6/lib/X11/locale
 
-ifeq (i386,$(ARCH))
+ifeq (y,$(USE_PCMCIA))
 	install -s /sbin/cardmgr $(DEST)/usr/bin
 endif
 
@@ -176,7 +184,8 @@ endif
 
 	gzip -9f $(DEST)/usr/share/ldetect-lst/*
 
-	cd share ; cp -a consolefonts devices symlinks $(DEST)/usr/share
+	cd share ; cp -a consolefonts devices $(DEST)/usr/share
+	cat share/symlinks `../tools/specific_arch share/symlinks` | uniq > $(DEST)/usr/share/symlinks
 	-cd share ; cp -f *.png $(DEST)/usr/share
 	-cd pixmaps ; cp -af *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cp `perl -I. -Mlang -e 'lang::png_lang_files()'` $(DEST)/usr/share/langs
@@ -193,7 +202,7 @@ endif
 #	ga and sl are disabled because too few messages are translated
 	rm -rf $(DEST)/usr/share/locale_special/{ga,sl}
 
-ifeq (i386,$(ARCH))
+ifeq (y,$(USE_PCMCIA))
 	cp -a /etc/pcmcia $(DEST)/etc
 	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.modules/`cat ../kernel/all.kernels/.main`/modules.dep
 endif
