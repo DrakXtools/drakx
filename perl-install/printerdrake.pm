@@ -92,12 +92,13 @@ these fields blank."),
               ok => _("Apply/Re-read printers"),
 	      callbacks => { complete => sub {
 		 unless (!$server || network::is_ip($server)) {
-		     $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
+		     $in->ask_warn('', 
+			_("The IP address should look like 192.168.1.20"));
 		     return (1,0);
 		 }
 		 if ($port !~ /^\d*$/) {
 		     $in->ask_warn('',
-			 _("Port number should be an integer number"));
+			_("The port number should be an integer!"));
 		     return (1,1);
 		 }
 		 return 0;
@@ -487,7 +488,7 @@ complete => sub {
 	return (1,0);
     }
     unless ($remoteport =~ /^[0-9]+$/) {
-	$in->ask_warn('', _("The port must be an integer number!"));
+	$in->ask_warn('', _("The port number should be an integer!"));
 	return (1,1);
     }
     return 0;
@@ -897,14 +898,14 @@ can get substantially slower."),
 			     (($printer->{ARGS}[$i]{'type'} eq 'float') ||
 			      ($userinputs[$i] =~ /^[0-9]+$/)) {
 				 $in->ask_warn
-				     ('', _("Option $printer->{ARGS}[$i]{'comment'} must be an integer number!"));
+				     ('', _("Option %s must be an integer number!", $printer->{ARGS}[$i]{'comment'}));
 				 return (1, $i);
 			     }
 			 unless
 			     (($printer->{ARGS}[$i]{'type'} eq 'int') ||
 			      ($userinputs[$i] =~ /^[0-9\.]+$/)) {
 				 $in->ask_warn
-				     ('', _("Option $printer->{ARGS}[$i]{'comment'} must be a number!"));
+				     ('', _("Option %s must be a number!", $printer->{ARGS}[$i]{'comment'}));
 				 return (1, $i);
 			     }
 			 unless (($userinputs[$i] >= 
@@ -912,7 +913,7 @@ can get substantially slower."),
 				 ($userinputs[$i] <= 
 				  $printer->{ARGS}[$i]{'max'})) {
 			     $in->ask_warn
-				 ('', _("Option $printer->{ARGS}[$i]{'comment'} out of range!"));
+				 ('', _("Option %s out of range!", $printer->{ARGS}[$i]{'comment'}));
 			     return (1, $i);
 			 }
 		     }
@@ -1120,7 +1121,7 @@ You can also type a new name or skip this printer.",
 		    },
 		      [{label => _("New printer name"),val => \$newqueue}]))) {
 		    my $w = $in->wait_message('', 
-			        _("Transferring $oldqueue ..."));
+			        _("Transferring %s ...", $oldqueue));
 		    printer::copy_foomatic_queue($printer, $oldqueue,
 						 $oldspooler, $newqueue) and
 						     $queuecopied = 1;
