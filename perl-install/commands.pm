@@ -450,7 +450,7 @@ sub du {
     my $f; $f = sub {
 	my ($e) = @_;
 	my $s = (lstat($e))[12];
-	$s += sum(map { &$f($_) } glob_("$e/*")) if !-l $e && -d $e;
+	$s += sum(map { &$f($_) } glob_("$e/*")) if !-l _ && -d _;
 	$s;
     };
     print &$f($_) >> 1, "\t$_\n" foreach @_ ? @_ : glob_("*");
