@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 5mdk
+Release: 6mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar 16 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-6mdk
+- drakboot: fix dropping line macos in yaboot.conf (pixel, #14642)
+- drakconnect (blino):
+  o allow to display multiple instances of the similar adsl devices
+  o fix unicorn packages installation
+- interactive layer: fix some nasty bug
+- localekdrake:
+  o preserve utf-8 setting (#12308)
+  o enable to enable/disable utf-8
+  o install scim-input-pad when switching IM for japanese
+  o ensure there's never a "previous" button on first step (even when
+    stepping back)
+- printerdrake: fix setting of default printer on daemon-less CUPS
+  client (till, #13940)
+- XFdrake: probe DDC, then fallbacks on DMI
+
 * Tue Mar 15 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-5mdk
 - diskdrake: add support for XBox (stew, pixel)
 - drakboot: don't die when we have no entries in grub menu.lst (pixel)
