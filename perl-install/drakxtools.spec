@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 12mdk
+Release: 13mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Dec 22 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-13mdk
+- do not show useless "ignore" button when requesting root password
+  through kdesu
+- drakperm: keep changes when switching view moed
+- drakclock:
+  o prevent one to open zillions of sub dialogs
+  o reuse std dialogs
+  o remove stock icons
+- fix buttons layouts and text wrapping in in drakboot, drakfloppy and
+  drakperm
+- logdrake's mail alert wizard: 
+  o properly handle faillure
+  o accept local user names as well as emails
+- printerdrake, harddrake2: push help menu at right
+- scannerdrake: (till)
+  o add upload firmware feature 
+  o configure non-root access to parallel port scanners automatically.
+
 * Tue Dec  9 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-12mdk
 - net_monitor:
   o properly handle multiple interfaces (each one having its own pixmap)
@@ -322,11 +340,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o kill icons on button
   o kill profile managment (duplicated features already availlable
     within mcc)
-- drakonnect:
+- drakconnect:
   o split in multiples pieces
   o move profile support into mcc
   o fix writing spurious "WIRELESS_NWID=HASH(0x8e93758)" in ifcfg-<intf>
   o add "delete an interface" wizard
+- draksound: handle new snd-bt87x driver 
 
 * Fri Nov 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-11mdk
 - improve buttons layout in interactive written tools
