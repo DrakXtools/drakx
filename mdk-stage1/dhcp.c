@@ -211,7 +211,7 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 	unsigned char * chptr;
 	unsigned char option, length;
 
-	if (breq->bootfile && strlen(breq->bootfile) > 0)
+	if (breq->bootfile && strlen(breq->bootfile) > 0 && IS_NETAUTO)
 		stage2_kickstart = strdup(breq->bootfile);
 	
 	memcpy(&intf->ip, &breq->yiaddr, 4);
