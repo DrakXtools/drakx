@@ -141,15 +141,15 @@ static void probe_that_type(enum driver_type type)
 		switch (type) {
 #ifndef DISABLE_MEDIAS
 		case SCSI_ADAPTERS:
-			pcidb = scsi_pci_ids;
-			len   = scsi_num_ids;
+			pcidb = medias_pci_ids;
+			len   = medias_num_ids;
 			break;
 #endif
 #ifndef DISABLE_NETWORK
 #ifndef DISABLE_PCINET
 		case NETWORK_DEVICES:
-			pcidb = eth_pci_ids;
-			len   = eth_num_ids;
+			pcidb = network_pci_ids;
+			len   = network_num_ids;
 			break;
 #endif
 #endif
