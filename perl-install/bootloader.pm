@@ -667,10 +667,10 @@ sub method_choices {
     my %choices = (
 	if_(arch() =~ /sparc/,
 	    'silo' => N("SILO"),
-        ), if_(arch() !~ /sparc|ppc/ && !isLoopback(fsedit::get_root($fstab)),
+        ), if_(arch() !~ /sparc|ppc/ && !isLoopback(fsedit::get_root($fstab)) && whereis_binary('lilo'),
 	    if_(!detect_devices::matching_desc('ProSavageDDR'), 'lilo-graphic' => N("LILO with graphical menu")),
 	    'lilo-menu'    => N("LILO with text menu"),
-	), if_(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab)),
+	), if_(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab)) && whereis_binary('grub'),
 	    'grub' => N("Grub"),
         ), if_(arch() =~ /ppc/,
 	    'yaboot' => N("Yaboot"),
@@ -1193,15 +1193,9 @@ sub install {
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
 
-    my @methods = $bootloader->{method} eq 'grub' ? ('lilo-graphic', 'grub') : $bootloader->{method};
-    my @rcs = map {
-	my ($main_method) = /(\w+)/;
-	my $f = $bootloader::{"install_$main_method"} or die "unknown bootloader method $_";
-	eval { $f->($bootloader, $fstab, $hds, $_) };
-	$@;
-    } @methods;
-    
-    die $rcs[0] if every { $_ } @rcs;
+    my ($main_method) = $bootloader->{method} =~ /(\w+)/;
+    my $f = $bootloader::{"install_$main_method"} or die "unknown bootloader method $bootloader->{method}";
+    $f->($bootloader, $fstab, $hds, $bootloader->{method});
 }
 
 1;
