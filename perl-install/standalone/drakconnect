@@ -42,17 +42,19 @@ use network::tools;
 use MDK::Common::Globals "network", qw($in);
 use POSIX ":sys_wait_h";
 
-my ($netcnx, $netc, $intf)  = ({}, {}, {});
-#my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
-
 $ugtk2::wm_icon = "drakconnect";
 my $in = 'interactive'->vnew('su');
 if ($in->isa('interactive::gtk')) {
     require ugtk2;
     ugtk2->import(qw(:create :dialogs :helpers :wrappers));
 }
+
+my ($netcnx, $netc, $intf)  = ({}, {}, {});
+network::netconnect::read_net_conf($netcnx, $netc, $intf);
+
 my $modules_conf = modules::any_conf->read;
-network::tools::reread_net_conf($modules_conf, $netcnx, $netc, $intf);
+modules::load_category($modules_conf, 'net');
+
 $::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "drakconnect.png";
 
