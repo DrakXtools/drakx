@@ -72,7 +72,7 @@ unless (-e "/cdrom/VERSION") {
 my ($lang, $flang);
 open F, "/cdrom/VERSION" or die "no installation cdrom found on $cd";
 while (<F>) {
-    /[\s-]fr/ and ($lang, $flang) = ("fr", "fr_FR");
+    /[\s-]fr/ and ($lang, $flang) = ('fr', 'fr_FR@euro');
     /\[server\]/ and $options{server} = '';
     /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
 }
@@ -309,9 +309,8 @@ if (open F, ">/hd/Mandrake/oem_patch.pl") {
 		#- for expert, as they may have done individual selection before.
 	        install_any::unselectMostPackages($o);
 
-		#- use specific OEM packages selection, go to level 4.
-		#- and select at least GAMES group, everything else has
-		#- already be selected during master preparation.
+		#- use specific OEM packages selection, go to level 5
+		#- and disable some extension.
 		$o->{compssUsersChoice}{$_} = 0 foreach 'GNOME';
 		$o->{compssUsersChoice}{$_} = 0 
 		    foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
@@ -560,6 +559,12 @@ sub select_packages {
       pkgs::readCompssUsers($o->{packages}, $o->{meta_class});
     eval { install_any::getFile("XXX") }; #- close out any still opened filehandle..
 
+    if (!$o->{compssUsersChoice}) {
+	#- by default, choose:
+	$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG';
+	$o->{compssUsersChoice}{$_} = 1 
+	    foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+    }
     if (exists $options{server}) {
 	foreach (qw(KDE ACCESSIBILITY PUBLISHING CUPS EDITORS TEXT_TOOLS COMMUNICATIONS TERMINALS
 		    NETWORKING_FILE_TRANSFER NETWORKING_OTHER
@@ -567,7 +572,7 @@ sub select_packages {
 		    NETWORKING_MAIL_SERVER NETWORKING_OTHER_SERVER
 		    NETWORKING_REMOTE_ACCESS NETWORKING_REMOTE_ACCESS_SERVER NETWORKING_DNS
 		    NETWORKING_FILE NETWORKING_FILE_SERVER NETWORKING_WWW NETWORKING_WWW_SERVER
-		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM)) {
+		    ARCHIVING DEVELOPMENT MONITORING FILE_TOOLS CONFIG BOOKS SYSTEM X)) {
 	    $o->{compssUsersChoice}{$_} = 1;
 	}
 	#- additional packages to be selected for server, databases with MySQL (avoid rpmsrate modifications).
@@ -577,7 +582,7 @@ sub select_packages {
 	}
     } else {
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
-	$o->{compssUsersChoice}{SYSTEM} = 1;
+	$o->{compssUsersChoice}{$_} = 1 foreach qw(SYSTEM X);
 	@{$o->{compssUsersChoice}}{grep { /SERVER|DATABASES/ } keys %{$o->{compssUsersChoice}}} = ();
     }
 
@@ -592,8 +597,8 @@ sub select_packages {
 
     #- package that have to selected here as a bonus for oem install.
     foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfsprogs xfsprogs jfsprogs icewm-light
-		Mesa Mesa-demos alsa alsa-utils
-		xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
+		Mesa Mesa-demos alsa alsa-utils xawtv kwintv xscreensaver-gl Mesa-demos xmms-mesa 
+		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
                 glibc vim-minimal kernel kernel22
 		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
                )) {
@@ -603,8 +608,9 @@ sub select_packages {
 
     #- special packages that are to be move to closure always ...
     foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure
-		xawtv kwintv xscreensaver-gl xmms-mesa bzflag csmash gltron spacecup chromium tuxracer
-		kernel22-smp kernel22-secure alsa imwheel nfs-utils-clients lvm usbd reiserfsprogs
+		xawtv kwintv xscreensaver-gl xmms-mesa 
+		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
+		kernel22-smp kernel22-secure alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs
 		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
 		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
@@ -645,7 +651,7 @@ sub read_depslist {
 
 #- compability method for the below ones, wrap DrakX code extracted.
 package log;
-sub l { open LOG, ">>/tmp/ddebug.txt"; print LOG @_; close LOG; }
+sub l {}
 
 package detect_devices;
 sub matching_desc { 0 }
