@@ -187,14 +187,15 @@ sub get_existing {
 
 	my $md_part = new($raids, device => $md, level => $raw_part->{level}, disks => \@mdparts);
 
-	if (my $type = fs::type::type_subpart_from_magic($md_part)) {
+	my $type = fs::type::type_subpart_from_magic($md_part);
+	if ($type) {
 	    put_in_hash($md_part, $type);
 	} else {
 	    fs::type::set_fs_type($md_part, 'ext3');
 	}
-	fs::type::set_isFormatted($md_part, to_bool($fs_type));
+	fs::type::set_isFormatted($md_part, to_bool($type->{fs_type}));
 
-	log::l("RAID: found $md (raid $md_part->{level}) type $fs_type with parts $raw_part->{devices}");
+	log::l("RAID: found $md (raid $md_part->{level}) type $type->{fs_type} with parts $raw_part->{devices}");
     }
     $raids;
 }
