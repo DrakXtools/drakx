@@ -256,6 +256,10 @@ sub prepare_write_fstab {
 		my @l2 = difference2(\@l, \@l1);
 		$options = join(",", "dev=$dev", "fs=$type", @l1, if_(@l2, '--', @l2));
 		($dev, $type) = ('none', 'supermount');
+	    } else {
+		#- if we were using supermount, the type could be something like ext2:vfat
+		#- but this can't be done without supermount, so switching to "auto"
+		$type = 'auto' if $type =~ /:/;
 	    }
 
 	    [ $mntpoint, $_->{comment} . join(' ', $dev, $mntpoint, $type, $options || 'defaults', $freq, $passno) . "\n" ];
@@ -332,7 +336,7 @@ sub mount_options_unpack {
 
     $non_defaults->{encrypted} = 1 if !$part->{isFormatted} || isSwap($part);
 
-    $non_defaults->{supermount} = 1 if member(type2fs($part), 'auto', @auto_fs);
+    $non_defaults->{supermount} = 1 if $part->{type} =~ /:/ || member(type2fs($part), 'auto', @auto_fs);
 
     my $defaults = { reverse %$non_defaults };
     my %options = map { $_ => '' } keys %$non_defaults;
@@ -431,10 +435,9 @@ sub set_default_options {
 
     if ($opts{is_removable}) {
 	$options->{supermount} = $opts{useSupermount};
-	$part->{type} = 'auto';
+	$part->{type} = !$options->{supermount} ? 'auto' :
+	  $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
     }
-
-    my $is_auto = isThisFs('auto', $part);
 
     if ($part->{media_type} eq 'cdrom') {
 	$options->{ro} = 1;
@@ -460,7 +463,7 @@ sub set_default_options {
     if (isThisFs('smbfs', $part)) {
 	add2hash($options, { 'username=' => '%' }) if !$options->{'credentials='};
     }
-    if (isFat($part) || $is_auto) {
+    if (isFat($part) || member('vfat', split(':', $part->{type})) || isThisFs('auto', $part)) {
 
 	put_in_hash($options, {
 			       user => 1, noexec => 0,
@@ -473,7 +476,7 @@ sub set_default_options {
     if (isThisFs('ntfs', $part)) {
 	put_in_hash($options, { ro => 1, 'umask=0' => $opts{security} < 3, 'iocharset=' => $opts{iocharset} });
     }
-    if (isThisFs('iso9660', $part) || $is_auto) {
+    if (member('iso9660', split(':', $part->{type})) || isThisFs('auto', $part)) {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
     }
     if (isThisFs('reiserfs', $part)) {
