@@ -54,7 +54,7 @@ my %fields =
       "pci_device" => [ N("PCI device #"), N("") ],
       "pci_function" => [ N("PCI function #"), N("") ],
       "vendor" => [ N("Vendor ID"), N("") ],
-      "id" => [ N(""), N("Device ID") ],
+      "id" => [ N("Device ID"), N("") ],
       "subvendor" => [ N("Sub vendor ID"), N("") ],
       "subid" => [ N("Sub device ID"), N("") ],
       "usb_pci_device" =>, [ N("Device USB ID"), N("") ],
@@ -397,7 +397,7 @@ foreach (@classes) {
         rename_field($_, 'usb_vendor', 'vendor');
         rename_field($_, 'vendor_name', 'Vendor');
 
-        foreach my $i (qw(EMULATEWHEEL MOUSETYPE XMOUSETYPE auxmouse devfs_prefix unsafe val vendor wacom)) { delete $_->{$i} };
+        foreach my $i (qw(EMULATEWHEEL MOUSETYPE XMOUSETYPE auxmouse devfs_prefix unsafe val wacom)) { delete $_->{$i} };
 
         my $custom_id = harddrake::data::custom_id($_, $title);
         foreach my $field (qw(devfs_device device)) {
