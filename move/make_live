@@ -89,3 +89,6 @@ substInFile {
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
     s|\s*shadow||;
 } "$::prefix/etc/pam.d/system-auth";
+
+update_gnomekderc("$::prefix/usr/share/config/kdesktoprc",
+                  ScreenSaver => ('DPMS-dependent' => 'false', 'Lock' => 'true'));
