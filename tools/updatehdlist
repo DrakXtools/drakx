@@ -1,0 +1,10 @@
+#!/bin/sh
+
+topdir=$1
+[ -d "$topdir" ] || topdir=/export
+[ -d "$topdir" ] || exit 1
+add=$topdir/Mandrake/RPMS2
+[ -d "$add" ] || add=$topdir/Mandrake/RPMS
+
+./syncrpms --verbose --clean --update --remove --add $add --from /RPMS --to $topdir/Mandrake/RPMS*
+gendistrib --noclean --distrib $topdir
