@@ -31,6 +31,8 @@ $boot_medium = 1;
 $current_medium = $boot_medium;
 $asked_medium = $boot_medium;
 
+our $global_ftp_prefix;
+
 #-######################################################################################
 #- Media change variables&functions
 #-######################################################################################
@@ -199,7 +201,7 @@ sub getFile {
 	    crypto::getFile($f);
 	} elsif ($current_method eq "ftp") {
 	    require ftp;
-	    ftp::getFile($rel, @{ $::o->{packages}{mediums}{$asked_medium}{ftp_prefix} || our $global_ftp_prefix || [] });
+	    ftp::getFile($rel, @{ $::o->{packages}{mediums}{$asked_medium}{ftp_prefix} || $global_ftp_prefix || [] });
 	} elsif ($current_method eq "http") {
 	    require http;
 	    http::getFile(($ENV{URLPREFIX} || $o_altroot) . "/$rel");
@@ -369,7 +371,7 @@ sub deselectFoundMedia {
     my @hdlist2;
     my @corresp;
     my $i = 0;
-    for (@$hdlists) {
+    foreach (@$hdlists) {
 	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/;
 	if (!$cd || !@{$cdlist{$cd} || []}) {
 	    push @hdlist2, $_;
@@ -394,9 +396,9 @@ If you want to skip some of them, you can unselect them now."),
 	},
     );
     my @l2; $i = 0;
-    for my $c (@$l) {
+    foreach my $c (@$l) {
 	++$i while $hdlists->[$i][3] ne $c->[3];
-	push @l2, $hdlists->[$_] for @{$corresp[$i]};
+	push @l2, $hdlists->[$_] foreach @{$corresp[$i]};
     }
     log::l("keeping media " . join ',', map { $_->[1] } @l2);
     @l2;
@@ -500,7 +502,7 @@ sub selectSupplMedia {
 	    }
 	} else {
 	    my $url;
-	    local our $global_ftp_prefix;
+	    local $global_ftp_prefix;
 	    if ($suppl_method eq 'ftp') { #- mirrors are ftp only (currently)
 		$url = $o->askSupplMirror(N("URL of the mirror?")) or return '';
 		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
