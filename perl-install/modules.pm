@@ -418,6 +418,9 @@ sub when_load {
     if ($type =~ /\bscsi\b/ || $type eq $type_aliases{scsi}) {
 	add_alias('scsi_hostadapter', $name), eval { load('sd_mod') };
     }
+    if ($name =~ /^snd-card-/) {
+	load('snd-pcm-oss', 'prereq');
+    }
     $conf{$name}{options} = join " ", @options if @options;
 }
 
