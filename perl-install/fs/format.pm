@@ -26,6 +26,11 @@ sub package_needed_for_partition_type {
     $l->[0];
 }
 
+sub known_type {
+    my ($part) = @_;
+    to_bool($cmds{$part->{fs_type}});
+}
+
 sub check_package_is_installed {
     my ($do_pkgs, $fs_type) = @_;
 
