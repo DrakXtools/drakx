@@ -748,7 +748,8 @@ sub default_packages {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('toshiba');
         push @l, "toshutils";
     }
-    if ($dmi_BIOS->{Vendor} eq 'COMPAL' && $dmi_BIOS->{Characteristics} =~ /Function key-initiated network boot is supported/) {
+    if ($dmi_BIOS->{Vendor} eq 'COMPAL' && $dmi_BIOS->{Characteristics} =~ /Function key-initiated network boot is supported/
+          || $dmi_BIOS->{'Base Board'}{Manufacturer} =~ /^ACER/ && $dmi_BIOS->{'Base Board'}{'Product Name'} =~ /TravelMate 610/) {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');
     }
 
