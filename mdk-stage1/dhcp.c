@@ -257,13 +257,6 @@ static void parse_reply(struct bootp_request * breq, struct interface_info * int
 			log_message("got gateway %s", inet_ntoa(gateway));
 			break;
 
-		case BOOTP_OPTION_HOSTNAME:
-			memcpy(tmp_str, chptr, length);
-			tmp_str[length] = '\0';
-			hostname = strdup(tmp_str);
-			log_message("got hostname %s", hostname);
-			break;
-
 		}
 
 		chptr += length;
