@@ -550,7 +550,7 @@ sub getECI() {
 }
 
 sub getNet() { 
-    # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|tr|usb|wifi|wlan).
+    # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|ra|tr|usb|wifi|wlan).
     # there's also bnep%d for bluetooth, bcp%d...
     # we do this by blacklisting the following interfaces:
     # - sit0 which is *always* created by net/ipv6/sit.c, thus is always created since net.agent loads ipv6 module
