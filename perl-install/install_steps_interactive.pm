@@ -497,7 +497,7 @@ sub pppConfig {
     $m->{device} ||= $o->set_help('selectSerialPort') && 
                      mouse::serial_ports_names2dev(
 	$o->ask_from_list('', _("Please choose which serial port your modem is connected to."),
-			  [ grep { my $avoidDevice = mouse::serial_ports_name2dev($_);
+			  [ grep { my $avoidDevice = mouse::serial_ports_names2dev($_);
 				   $o->{mouse}{device} !~ /$avoidDevice/ } mouse::serial_ports_names ]));
 
     $o->set_help('configureNetworkISP');

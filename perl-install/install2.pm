@@ -561,9 +561,8 @@ sub main {
     }
 
     unless ($::testing) {
-	unlink $_ foreach (
-			   "/sbin/insmod", "/sbin/rmmod", "/sbin/install",
-			   "/modules/modules.cgz",
+	unlink $_ foreach ( $o->{pcmcia} ? () : ("/sbin/install", "/modules/modules.cgz"),
+			   "/sbin/insmod", "/sbin/rmmod",
 			   "/modules/pcmcia_core.o", #- always use module from archive.
 			   "/modules/i82365.o",
 			   "/modules/tcic.o",
