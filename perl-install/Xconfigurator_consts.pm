@@ -112,9 +112,9 @@ use common qw(:common);
     __("16 MB or more") => 16384,
 );
 
-$default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
+$good_default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
+$low_default_monitor = "Super VGA, 800x600 at 56 Hz";
 %standard_monitors = (
-  __("Standard VGA, 640x480 at 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
   __("Standard VGA, 640x480 at 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
   __("Super VGA, 800x600 at 56 Hz") 				   => [ '800x600@56',      "31.5-35.1"       , "55-60" ],
   __("8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)") => [ '8514 compatible', "31.5,35.5"       , "60,70,87" ],
