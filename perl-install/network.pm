@@ -253,7 +253,7 @@ sub configureNetwork {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($in, $intf2) or last;
+	configureNetworkIntf($in, $intf2, $netc->{net_device}, 0) or last;
 
 	$netc ||= {};
 	$last = $intf2;
@@ -279,17 +279,27 @@ such as ``mybox.mylab.myco.com''."),
 
 
 sub configureNetworkIntf {
-    my ($in, $intf) = @_;
+    my ($in, $intf, $net_device, $skip) = @_;
+    my $text;
+    if ($net_device eq $intf->{DEVICE}) {
+	$skip and return 1;
+	$text = _("WARNING : This device has been previously configured to connect to the Internet.
+Simply press Cancel to keep this device configured.
+Modifying the fields below and clicking on OK will override this configuration.");
+    }
+    else {
+	$text = _("Please enter the IP configuration for this machine.
+Each item should be entered as an IP address in dotted-decimal
+notation (for example, 1.2.3.4).");
+    }
     my $pump = $intf->{BOOTPROTO} =~ /^(dhcp|bootp)$/;
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from_entries_ref(_("Configuring network device %s", $intf->{DEVICE}),
-($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . "\n\n") .
-_("Please enter the IP configuration for this machine.
-Each item should be entered as an IP address in dotted-decimal
-notation (for example, 1.2.3.4)."),
+			      ($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . "\n\n") .
+			      $text,
 			     [ _("IP address"), _("Netmask"), _("Automatic IP") ],
 			     [ \$intf->{IPADDR}, \$intf->{NETMASK}, { val => \$pump, type => "bool", text => _("(bootp/dhcp)") } ],
 			     complete => sub {
