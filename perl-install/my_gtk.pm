@@ -353,9 +353,6 @@ sub gtkcreate_png {
 }
 sub gtkbuttonset {
     my ($button, $str) = @_;
-    require Data::Dumper;
-    print " -- " . Data::Dumper->Dump([$button],['$button']) . "\n";
-    print " -- " . Data::Dumper->Dump([$str],['$str']) . "\n";
     $button->child->destroy;
     $button->add(gtkshow(new Gtk::Label $str));
     $button;
