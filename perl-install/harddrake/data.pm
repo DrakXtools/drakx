@@ -14,7 +14,7 @@ my @devices = detect_devices::probeall();
 sub unknown() {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/
 	       && !member($_->{driver}, qw(cpia_usb cyber2000fb forcedeth ibmcam megaraid mod_quickcam nvnet ohci1394 ov511 ov518_decomp scanner ultracam usbvideo usbvision))
-	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|www.linmodems.org/
+	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|sata|www.linmodems.org/
 	       && $_->{type} ne 'network'
 	       && $_->{description} !~ /Alcatel|ADSL Modem/
 	   } @devices;
@@ -288,6 +288,15 @@ our @tree =
       icon => "ide_hd.png",
       configurator => "",
       detector => sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ || $_->{driver} eq '3w-xxxx' } @devices) },
+      checked_on_boot => 0,
+     },
+
+     {
+      class => "SATA_STORAGE",
+      string => N("SATA controllers"),
+      icon => "ide_hd.png",
+      configurator => "",
+      detector => sub { f(grep { $_->{driver} =~ /^sata/ } @devices) },
       checked_on_boot => 0,
      },
 
