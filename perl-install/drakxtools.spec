@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 24mdk
+Release: 25mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -321,7 +321,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Fri Mar 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-24mdk
+
+* Fri Mar 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-25mdk
 - add missing icons for localedrake menu entry (dadou)
 - diskdrake: fix compaq smart array support (#9029) (pixel)
 - drakboot: reread current bootsplash config (olivier blin)
