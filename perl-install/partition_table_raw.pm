@@ -115,10 +115,10 @@ sub typeOfMBR($) {
     my $dev = devices::make($_[0]);
     local *F; sysopen F, $dev, 0 or return;
 
-    my $tmp
+    my $tmp;
     foreach (@MBR_signatures) {
 	my ($name, $offset, $signature) = @$_;
-	sysseek F, $offset, 0 or next;
+	sysseek(F, $offset, 0) or next;
 	sysread(F, $tmp, length $signature) && $tmp eq $signature and return $name;
     }
     undef;

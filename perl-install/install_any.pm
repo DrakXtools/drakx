@@ -14,6 +14,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 #- misc imports
 #-######################################################################################
 use common qw(:common :system);
+use commands;
 use run_program;
 use detect_devices;
 use pkgs;
