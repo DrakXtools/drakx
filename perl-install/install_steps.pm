@@ -886,6 +886,8 @@ sub setupBootloaderBefore {
 sub setupBootloader {
     my ($o) = @_;
 
+    any::install_acpi_pkgs($o->do_pkgs, $o->{bootloader});
+
     require bootloader;
     bootloader::install($o->{bootloader}, $o->{all_hds});
 }

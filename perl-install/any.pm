@@ -78,6 +78,15 @@ sub hdInstallPath() {
     defined $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
 }
 
+sub install_acpi_pkgs {
+    my ($do_pkgs, $b) = @_;
+
+    my $acpi = bootloader::get_append($b, 'acpi') or return;
+    if (!member($acpi, 'off', 'ht')) {
+	$do_pkgs->install('acpi', 'acpid') if !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
+    }
+}
+
 sub setupBootloader {
     my ($in, $b, $all_hds, $fstab, $security) = @_;
 
@@ -98,13 +107,9 @@ sub setupBootloader {
 
     eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
-    bootloader::install($b, $all_hds);
+    install_acpi_pkgs($in->do_pkgs, $b);
 
-    if (my $acpi = bootloader::get_append($b, 'acpi')) {
-	if (!member($acpi, 'off', 'ht')) {
-	    $in->do_pkgs->install('acpi', 'acpid') if !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
-	}
-    }    
+    bootloader::install($b, $all_hds);
 }
 
 
