@@ -9,7 +9,6 @@ package harddrake::sound;
 #    o pci cards: snd-als4000, snd-es968, snd-hdsp
 #    o isa cards: snd-azt2320, snd-cs4231, snd-cs4236, 
 #      snd-dt0197h, snd-korg1212, snd-rme32
-#    o usb cards: snd-usb-audio
 
 # TODO: 
 #    o ensure sound isn't user (either dsp/midi/sequencer/mixer)
@@ -73,7 +72,7 @@ my %alsa2oss =
      "snd-sonicvibes" => [ "sonicvibes" ],
      "snd-sscape" => [ "unknown" ], # isa
      "snd-trident" => [ "trident" ],
-     "snd-usb-audio" => [ "unknown" ], # usb
+     "snd-usb-audio" => [ "audio" ], # usb
      "snd-via82xx"  => [ "via82cxxx_audio" ],
      "snd-wavefront" => [ "wavefront" ], # isa
      "snd-ymfpci"  => [ "ymfpci" ]
@@ -86,6 +85,7 @@ my %oss2alsa =
      "ad1889"  => [ "unknown" ],
      "ali5455" => [ "snd-intel8x0" ],
      "audigy"  => [ "snd-emu10k1" ],
+     "audio" => [ "snd-usb-audio" ], # usb
      "awe_wave" => [ "snd-sbawe" ],
      "btaudio" => [ "unknown" ],
      "cmpci"   => [ "snd-cmipci" ],
