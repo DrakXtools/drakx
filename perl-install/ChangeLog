@@ -1,3 +1,326 @@
+2004/08/13  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/dis-06.pl, share/advertising/dis-05.png,
+	share/advertising/25.pl, share/advertising/dwd-08.pl,
+	share/advertising/pwp-02.pl, share/advertising/dwd-04.pl,
+	share/advertising/03.png, share/advertising/25.png,
+	share/advertising/13-b.png, share/advertising/pwp-05.png,
+	share/advertising/dis-11.pl, share/advertising/dwd-04.png,
+	share/advertising/30.png, share/advertising/dis-10.pl,
+	share/advertising/ppp-11.pl, share/advertising/27.pl,
+	share/advertising/14.pl, share/advertising/dwd-03.png,
+	share/advertising/08.pl, share/advertising/dis-05.pl,
+	share/advertising/22.pl, share/advertising/dis-03.png,
+	share/advertising/10.pl, share/advertising/dwd-01.pl,
+	share/advertising/18.pl, share/advertising/dwd-08.png,
+	share/advertising/dis-01.pl, share/advertising/pwp-02.png,
+	share/advertising/28.png, share/advertising/09.png,
+	share/advertising/ppp-06.pl, share/advertising/29.png,
+	share/advertising/ppp-07.png, share/advertising/list-dwd,
+	share/advertising/06.png, share/advertising/pwp-09.png,
+	share/advertising/dis-03.pl, share/advertising/dwd-09.png,
+	share/advertising/01.png, share/advertising/list-dis,
+	share/advertising/pwp-01.png, share/advertising/02.png,
+	share/advertising/15.png, share/advertising/23.png,
+	share/advertising/29.pl, share/advertising/ppp-03.pl,
+	share/advertising/07.pl, share/advertising/04.png,
+	share/advertising/13-a.png, share/advertising/09.pl,
+	share/advertising/17.pl, share/advertising/13-b.pl,
+	share/advertising/ppp-01.png, share/advertising/04.pl,
+	share/advertising/ppp-08.pl, share/advertising/dwd-06.pl,
+	share/advertising/ppp-05.png, share/advertising/ppp-02.pl,
+	share/advertising/12.png, share/advertising/24.pl,
+	share/advertising/12.pl, share/advertising/26.pl,
+	share/advertising/dis-09.png, share/advertising/16.png,
+	share/advertising/ppp-11.png, share/advertising/14.png,
+	share/advertising/list-pwp, share/advertising/ppp-09.png,
+	share/advertising/dis-06.png, share/advertising/dis-11.png,
+	share/advertising/10.png, share/advertising/dis-04.png,
+	share/advertising/19.pl, share/advertising/pwp-10.png,
+	share/advertising/05.pl, share/advertising/ppp-05.pl,
+	share/advertising/ppp-01.pl, share/advertising/dis-09.pl,
+	share/advertising/pwp-03.pl, share/advertising/dwd-05.png,
+	share/advertising/pwp-04.pl, share/advertising/20.png,
+	share/advertising/dis-10.png, share/advertising/dis-02.pl,
+	share/advertising/dwd-07.png, share/advertising/dis-04.pl,
+	share/advertising/ppp-06.png, share/advertising/20.pl,
+	share/advertising/02.pl, share/advertising/list-ppp,
+	share/advertising/21.png, share/advertising/pwp-07.pl,
+	share/advertising/pwp-08.png, share/advertising/07.png,
+	share/advertising/26.png, share/advertising/dwd-02.pl,
+	share/advertising/30.pl, share/advertising/ppp-09.pl,
+	share/advertising/16.pl, share/advertising/pwp-06.png,
+	share/advertising/dis-07.pl, share/advertising/01.pl,
+	share/advertising/drweb.pl, share/advertising/dwd-05.pl,
+	share/advertising/drweb.png, share/advertising/ppp-10.pl,
+	share/advertising/pwp-07.png, share/advertising/pwp-09.pl,
+	share/advertising/pwp-04.png, share/advertising/pwp-05.pl,
+	share/advertising/dis-01.png, share/advertising/23.pl,
+	share/advertising/dwd-06.png, share/advertising/dis-08.png,
+	share/advertising/ppp-08.png, share/advertising/19.png,
+	share/advertising/dis-08.pl, share/advertising/dwd-02.png,
+	share/advertising/pwp-06.pl, share/advertising/27.png,
+	share/advertising/dis-07.png, share/advertising/22.png,
+	share/advertising/ppp-03.png, share/advertising/dwd-03.pl,
+	share/advertising/28.pl, share/advertising/dis-02.png,
+	share/advertising/pwp-03.png, share/advertising/dwd-07.pl,
+	share/advertising/24.png, share/advertising/03.pl,
+	share/advertising/06.pl, share/advertising/ppp-07.pl,
+	share/advertising/13-a.pl, share/advertising/11.png,
+	share/advertising/ppp-04.png, share/advertising/pwp-10.pl,
+	share/advertising/ppp-10.png, share/advertising/18.png,
+	share/advertising/11.pl, share/advertising/15.pl,
+	share/advertising/21.pl, share/advertising/17.png,
+	share/advertising/05.png, share/advertising/dwd-01.png,
+	share/advertising/ppp-04.pl, share/advertising/pwp-01.pl,
+	share/advertising/ppp-02.png, share/advertising/pwp-08.pl,
+	share/advertising/08.png, share/advertising/dwd-09.pl: New ad's for 10.1
+
+2004/08/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/rpmsrate: add list of providers for modem connexions in INSTALL
+	section
+
+	* network/network.pm (write_interface_conf) do not write undefined MAC
+	address in iftab
+
+	* any.pm: add and use bootloader::set_append_netprofile() and
+	bootloader::get_append_netprofile()
+	remove old linuxconf profile code
+	(setupBootloader__entries) allow to choose net profile in advanced mode
+
+	* standalone/drakvpn: perl_checker fix (add missing spaces)
+	do not assume drakvpn is already configured if the tunnels file is
+	made of comments only
+
+	* ugtk2.pm: ctrl-alt-delete allows to restart install
+
+	* bootloader.pm: add and use bootloader::set_append_netprofile() and
+	bootloader::get_append_netprofile()
+	remove old linuxconf profile code
+	add remove_append_dict
+
+	* standalone/drakupdate_fstab: drakupdate_fstab: add debug mode that dumps
+	argv, device list and fstab
+	to make bug reports easier
+	(device_name_to_entry) remove unused $variable
+	(device_name_to_entry) if device looks like a devfs device, set
+	$e->{devfs_device} to $name even if the device wasn't found in devices
+	list (it helps in case the device has been removed in del mode)
+	(device_name_to_entry) remove useless assignment
+	(device_name_to_entry) in non devfs case, $e->{device} always equals
+	to $name, move this test in devfs case
+	(device_name_to_entry) don't do brain twisted things
+	($e->{prefix} || $e->{device}) equals $prefix
+	$prefix . $nb equals $name
+	(device_name_to_entry) fix indentation
+	(device_name_to_entry) define $nb locally
+	(device_name_to_entry) recompute $e->{device} only when needed
+	(device_name_to_entry) do devfs things where they should be done
+	(device_name_to_entry) define $e->{devfs_prefix} if entry looks looks
+	like a devfs one but isn't found in device list (else our computed
+	$e->{devfs_device} will be crappy)
+
+2004/08/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: changed arabic font to roya.ttf (from
+	fonts-ttf-arabic-farsi) which
+	also cover Farsi (fa).
+	updated Nimbus Sans L to cooker version, and edited it to add
+	the two missing letters needed to full latin and cyrillic coverage
+	(the two letters were latin schwa (for Azeri) and cyrillic che
+	with descender (for Tajik))
+
+2004/08/13  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: 
+	  - bootloader::remove_append_dict() is not useful,
+	bootloader::set_append() can do the same
+	  - don't modify anything before "Ok" is clicked
+	  - set_append with $netprofile eq '' will remove parameter PROFILE=xxx,
+	which is what we want
+
+	* install_steps.pm: 
+	  - don't use compssUsers anymore, use compssUsers.pl
+	  - code to display compssUsers choices is now in compssUsers.pl
+	  - {compssUsers} is now a list instead of a hash, and so drop
+	{compssUsersSorted}
+	  - rename {compssUsersChoice} to {rpmsrate_flags_chosen} (better name)
+	  - i18n_compssUsers is no more needed, add share/compssUsers.pl* to
+	ALLPMS
+	  - move installing acpi and acpid directly in any::setupBootloader()
+	instead of doing
+	it in summaryAfter(), that way acpi and acpid are installed in drakboot
+	(bugzilla #10760)
+	  - if no acpi parameter, don't try installing acpi & acpid (fix for
+	ppc)
+
+	* install_steps_gtk.pm: perl_checker compliance
+	  - don't use compssUsers anymore, use compssUsers.pl
+	  - code to display compssUsers choices is now in compssUsers.pl
+	  - {compssUsers} is now a list instead of a hash, and so drop
+	{compssUsersSorted}
+	  - rename {compssUsersChoice} to {rpmsrate_flags_chosen} (better name)
+	  - i18n_compssUsers is no more needed, add share/compssUsers.pl* to
+	ALLPMS
+
+	* share/compssUsers.pl, Makefile.config, share/compssUsers, pkgs.pm,
+	install2.pm, share/po/Makefile, share/po/i18n_compssUsers,
+	install_any.pm, Makefile, install_steps_interactive.pm: 
+	  - don't use compssUsers anymore, use compssUsers.pl
+	  - code to display compssUsers choices is now in compssUsers.pl
+	  - {compssUsers} is now a list instead of a hash, and so drop
+	{compssUsersSorted}
+	  - rename {compssUsersChoice} to {rpmsrate_flags_chosen} (better name)
+	  - i18n_compssUsers is no more needed, add share/compssUsers.pl* to
+	ALLPMS
+
+	* any.pm: perl_checker compliance
+	  - bootloader::remove_append_dict() is not useful,
+	bootloader::set_append() can do the same
+	  - don't modify anything before "Ok" is clicked
+	  - set_append with $netprofile eq '' will remove parameter PROFILE=xxx,
+	which is what we want
+	  - move installing acpi and acpid directly in any::setupBootloader()
+	instead of doing
+	it in summaryAfter(), that way acpi and acpid are installed in drakboot
+	(bugzilla #10760)
+	  - if no acpi parameter, don't try installing acpi & acpid (fix for
+	ppc)
+
+2004/08/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm: perl_checker fix
+	Concision, good (says perl_checker)
+	Try to copy associated synthesis when a custom hdlist path is given
+
+	* standalone.pm: Remove a perl compilation warning
+
+	* install_steps.pm, install_steps_interactive.pm: Don't ask for the
+	selection of supplementary media in non-interactive
+	installs.
+
+	* install_any.pm: One further step towards the ftp supplementary media
+	Don't ask for the selection of supplementary media in non-interactive
+	installs.
+
+2004/08/12  Funda Wang <fundawang at linux.net.cn>
+
+	* lang.pm: Hong Kong -> Hong Kong SAR
+
+2004/08/12  Olivier Blin <oblin at mandrakesoft.com>
+
+	* share/gen_locales.pl: revived, still needed since installer can't make
+	symlinks on read-only stage2, and we can't easily workaround it by
+	modifying LC_* variables
+
+	* network/netconnect.pm: kill unused variables
+	kill deprecated parts
+	set both NET_DEVICE and NET_INTERFACE in automatic lan configuration
+	(network install)
+	set NET_DEVICE and NET_INTERFACE for lan and adsl dhcp/manual
+	connections
+
+	* share/gen_locales.sh: still needed since installer can't make symlinks
+	on read-only stage2,
+	and we can't easily workaround it by modifying LC_* variables
+
+	* network/network.pm: write interface MAC address in iftab
+	errm, don't commit crappy gnome proxy handling for now
+	(write_interface_conf) simplify HWADDR assignment and define
+	$mac_address (will be used later for /etc/iftab)
+
+	* mdk-stage1/init.c: restart forked process if it exits with
+	exit_value_restart as return
+	code (thanks to Rafael for the choice of its value, 0x35 is the
+	translation of RS, abbreviation of ReStart, in his local l33t dialect,
+	and happens to be 53 in its decimal form, which is quite nice)
+	reorder else if blocks, it's useless to do two times the same test
+	(WEXITSTATUS(wait_status) == exit_value_proceed)
+	use a do while loop to wait for forked process
+
+2004/08/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: fixed tamil font (removed wrong unicode values for
+	some glyphs);
+	improved fonts.conf
+
+	* share/po/help-zh_CN.pot, share/po/bn.po, share/po/ms.po, share/po/sk.po,
+	share/po/gl.po, share/po/pt_BR.po, share/po/th.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/be.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/help-ru.pot, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/help-de.pot, share/po/mn.po,
+	share/po/am.po, share/po/lt.po, share/po/cy.po, share/po/help-it.pot,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/hi.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/nl.po, share/po/help-fr.pot, share/po/tl.po,
+	share/po/de.po, share/po/help-es.pot, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* standalone/drakbug: fixed English string
+
+2004/08/12  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: enhance based on perl_checker suggestion, but not using it :)
+
+	* .perl_checker: standalone doesn't need to be blacklisted
+
+	* resize_fat/io.pm: remove check_mounted(), it is done by diskdrake
+
+	* share/po/help-zh_CN.pot, share/po/help-fr.pot, share/po/help-de.pot,
+	share/po/help-ru.pot, share/po/help-es.pot, share/po/help-it.pot: update
+	from doc (/cooker/doc/manualB)
+
+	* help.pm: fix bad %%
+	update from doc (/cooker/doc/manualB)
+
+	* share/po/help_xml2pm.pl: 
+	  - nicer error message for help.pm N parameters error
+	  - handle <sect3> (and also <option>)
+
+2004/08/12  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: First stab at supporting several hdlists on a
+	supplementary CD
+
+2004/08/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/nn.po: update (Karl Ove Hufthammer <karl@huftis.org>)
+
+	* standalone/drakbug: better let pango/Gtk+ do the proper wrapping that
+	let translator
+	manually insert end of lines which will badly look depending on
+	current theme and font settings
+
+	* standalone/net_monitor: let's be more l10n-friendly
+	fix default connection time (Fabrice FACORAT)
+
+	* tools/cvslog2changelog.pl: sync with soft/common/username
+
+	* standalone/draksec (basic_seclevel_explanations) explain
+	(basic_seclevel_explanations)
+	  - handle "bold" value for "weight"
+	  - display labels as bold
+
+	* share/po/br.po, share/po/fr.po: update
+
+	* share/rpmsrate: install driver and firmware for madwifi cards
+
+	* share/po/sv.po: typo fix (#10713, Robin Rosenberg
+	<robin.rosenberg@dewire.com>)
+	fix missing translations (#10711, Robin Rosenberg
+	<robin.rosenberg@dewire.com>)
+	big swedish update thanks to Robin Rosenberg
+	<robin.rosenberg@dewire.com>
+
 2004/08/12  Pixel  <pixel at mandrakesoft.com>
 
 	* .perl_checker: standalone doesn't need to be blacklisted
@@ -34879,7 +35202,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.944 2004/08/10 07:33:39 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.945 2004/08/12 05:41:23 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
