@@ -37,7 +37,7 @@ sub rpm2version {
 
 sub update_kernel_from_repository {
     my ($RPMS, $main_ver, $is_BOOT) = @_;
-    my $rpm_wildcard = 'kernel-' . ($is_BOOT ? 'BOOT-' : 'i586-up-1GB-') . $main_ver . '*.rpm';
+    my $rpm_wildcard = 'kernel-' . ($is_BOOT ? 'BOOT-' : (arch() =~ /i.86/ ? 'i586-up-1GB-' : '')) . $main_ver . '*.rpm';
     my ($kernel_rpm) = my @kernels = glob("$RPMS/$rpm_wildcard");
     @kernels <= 1 or die "more than one kernel match $rpm_wildcard";
     @kernels >= 1 or return; # die "no kernel match $rpm_wildcard";
