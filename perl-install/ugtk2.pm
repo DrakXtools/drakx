@@ -1238,8 +1238,7 @@ sub ask_browse_tree_info_given_widgets {
     $w->{tree}->signal_connect(key_press_event => sub {
 	my $c = chr($_[1]->keyval & 0xff);
 	if ($_[1]->keyval >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ') {
-	    Gtk2->update_ui;                               #- ultra dirty hackish so that gtk
-	    Gtk2->timeout_add(1, sub { $toggle->(0), 0 })  #- will not loop forever
+	    $toggle->(0);
 	}
 	0;
     });
@@ -1259,8 +1258,8 @@ sub ask_browse_tree_info_given_widgets {
 	#- two changed events, the first being on a different row :/ (is it a bug in gtk2?) - that
 	#- happens in rpmdrake when doing a "search" and directly trying to select a found package
 	if ($mouse_toggle_pending eq $model->get($iter, 0)) {
-	    Gtk2->update_ui;
-	    Gtk2->timeout_add(1, sub { $toggle->(1), $mouse_toggle_pending = 0 });
+	    $toggle->(1);
+            $mouse_toggle_pending = 0;
 	}
 	0;
     });
