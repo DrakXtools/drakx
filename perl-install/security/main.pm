@@ -108,7 +108,7 @@ sub draksec_main {
 
 	$notebook->append_page(gtkpack(my $basic_page = new Gtk2::VBox(0, 0),
 							   basic_seclevel_explanations($msec),
-							   create_packtable ($common_opts,
+							   create_packtable($common_opts,
 											 [ basic_seclevel_option(\$seclevel_entry, $msec) ],
 											 [ new Gtk2::Label(N("Security Alerts:")), 
 											   my $secadmin_check = new Gtk2::CheckButton ],
