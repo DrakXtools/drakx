@@ -162,14 +162,13 @@ sub get_subwizard {
                         pppoa  => N("PPP over ATM (PPPoA)"),
                        );
 
-      my $encapsulation;
       my %encapsulations = (
-                            N("Bridged Ethernet LLC") => 1, 
-                            N("Bridged Ethernet VC") => 2, 
-                            N("Routed IP LLC") => 3, 
-                            N("Routed IP VC") => 4,
-                            N("PPPOA LLC") => 5, 
-                            N("PPPOA VC") => 6,
+                            1 => N("Bridged Ethernet LLC"), 
+                            2 => N("Bridged Ethernet VC"), 
+                            3 => N("Routed IP LLC"), 
+                            4 => N("Routed IP VC"),
+                            5 => N("PPPOA LLC"), 
+                            6 => N("PPPOA VC"),
                            );
     
       # main wizard:
@@ -185,6 +184,7 @@ sub get_subwizard {
                         if (!$::isInstall) {
                             $conf{$_} = 0 foreach qw(adsl cable isdn lan modem winmodem);
                         }
+                        $cnx_type = N("ADSL connection"); # DEBUGING
                         my @connections = 
                           (
                            [ #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
@@ -467,7 +467,7 @@ killall pppd
                             /.*ATDT(\d*)/ and $modem->{phone} ||= $1;
                         }
                         foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
-                            /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
+                            /NAME=([\'\"]?)(.*)\1/ and $modem->{login} ||= $2;
                         }
                         $modem->{login} ||= $l{Username};
                         my $secret = network::tools::read_secret_backend();
@@ -594,6 +594,7 @@ killall pppd
                         require network::adsl_consts;
                         %adsl_data = %network::adsl_consts::adsl_data;
                         $adsl_old_provider = $adsl_provider;
+                        # FIXME we should use detect_timezone() to preselect ADSL provider
                     },
                     name => N("Please choose your ADSL provider"),
                     data => sub { 
@@ -607,6 +608,7 @@ killall pppd
                               $adsl_protocol = $adsl_types{$adsl_data->{method}};
                         }
                         $adsl_protocol = $adsl_types{pppoa} if $adsl_device eq 'speedtouch';
+                        use Data::Dumper; print Data::Dumper->Dump([ $adsl_data, $netc ], [ qw(adsl_data netcnx) ]);
                         return 'adsl_protocol';
                     },
                    },
@@ -684,6 +686,7 @@ If you don't know, choose 'use pppoe'"),
                         $adsl_type = find { $adsl_types{$_} eq $adsl_protocol } keys %adsl_types;
                         $adsl_type = { reverse %adsl_types }->{$adsl_protocol};
                         # process static/dhcp ethernet devices:
+                        print "«$adsl_device» => «$adsl_devices{$adsl_device}» => «$adsl_type»\n";
                         if (!exists $adsl_devices{$adsl_device} && member($adsl_type, qw(manual dhcp))) {
                             $auto_ip = $adsl_type eq 'dchp';
                             $ethntf->{DEVICE} = $ntf_name;
@@ -704,7 +707,6 @@ If you don't know, choose 'use pppoe'"),
                     pre => sub {
                         $netc->{dnsServer2} ||= $adsl_data->{dns1};
                         $netc->{dnsServer3} ||= $adsl_data->{dns2};
-                        $encapsulation ||= find { $encapsulations{$_} eq $netc->{Encapsulation} } keys %encapsulations;
                     },
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
@@ -715,7 +717,9 @@ If you don't know, choose 'use pppoe'"),
                          { label => N("Second DNS Server (optional)"), val => \$netc->{dnsServer3} },
                          { label => N("Account Login (user name)"), val => \$netcnx->{login} },
                          { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
-                         { label => N("Encapsulation :"), val => \$encapsulation, list => [ sort keys %encapsulations ], },
+                         { label => N("Encapsulation :"), val => \$netc->{Encapsulation}, list => [ sort keys %encapsulations ],
+                           translate => sub { $encapsulations{$_[0]} },
+                         },
                         ],
                     },
                     post => sub {
@@ -727,7 +731,7 @@ If you don't know, choose 'use pppoe'"),
                                      N("United Kingdom") => [ 0, 38 ],
                                      N("United States")  => [ 8, 35 ],
                                     );
-                            $netc->{Encapsulation} = $encapsulations{$encapsulation};
+                            print "Encaps: $netc->{Encapsulation} («$encapsulations{$netc->{Encapsulation}}»)\n";
                             ($netc->{vpi}, $netc->{vci}) = @{$h{$netcnx->{country}}};
                         }
                         network::adsl::adsl_conf_backend($netcnx, $netc, $adsl_device, $adsl_type); #FIXMEl
@@ -853,6 +857,12 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
+                        write_cnx_script($netc, "cable", qq(
+/sbin/ifup $netc->{NET_DEVICE}
+),
+                                                  qq(
+/sbin/ifdown $netc->{NET_DEVICE}
+), $netcnx->{type}) if $netcnx->{type} eq 'cable';
 
                         return is_wireless_intf($module) ? "wireless" : "static_hostname";
                     },
@@ -989,17 +999,6 @@ You may also enter the IP address of the gateway if you have one."),
                             $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4"));
                             return 1;
                         }
-                    },
-                    #post => $handle_multiple_cnx,
-                    next => "zeroconf",
-                   },
-                   
-                   
-                   zeroconf => 
-                   {
-                    name => N("Enter a Zeroconf host name which will be the one that your machine will get back to other machines on the network:"),
-                    data => [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} } ],
-                    complete => sub {
                         if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
                             $in->ask_warn(N("Error"), N("Zeroconf host name must not contain a ."));
                             return 1;
