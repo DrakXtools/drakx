@@ -48,6 +48,9 @@ typedef __uint8_t u8;
 #include <ext2fs/ext2_fs.h>
 #include <ext2fs/ext2fs.h>
 
+// for UPS on USB:
+#include <linux/hiddev.h>
+
 #include <libldetect.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/xf86misc.h>
@@ -403,6 +406,20 @@ usb_probe()
 
 unsigned int
 getpagesize()
+
+
+char*
+get_usb_ups_name(int fd)
+  CODE:
+        /* from nut/drivers/hidups.c::upsdrv_initups() : */
+        char name[256];
+        ioctl(fd, HIDIOCGNAME(sizeof(name)), name);
+        RETVAL=name;
+        ioctl(fd, HIDIOCINITREPORT, 0);
+  OUTPUT:
+  RETVAL
+
+
 
 int
 hasNetDevice(device)
