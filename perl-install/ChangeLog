@@ -1,3 +1,84 @@
+2005/04/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: remove useless and unwanted non-ASCII character
+
+	* network/adsl.pm: please perl_checker
+	replace non-ASCII characters
+
+2005/04/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+2005/04/05  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/draksplash, share/advertising/22.pl, share/advertising/10.pl,
+	standalone/drakpxe, share/advertising/05.pl, share/advertising/21.pl,
+	share/advertising/28.pl, share/advertising/14.pl,
+	share/advertising/24.pl: 
+	  - remove non useful non-ascii characters
+	  - add "use utf8" for useful utf8 characters
+
+	* ugtk2.pm: replace the latin-charset unbreakable space with a "use utf8"
+	and the utf8 unbreakable space
+
+	* install_any.pm: media_browser is returning a file, not a file handle,
+	/me is bad :-/
+
+	* bootloader.pm: apply patch from bugzilla #15216, adding support for
+	"password=..." and "restricted" at per-entry level (thanks to jarfil)
+
+	* Makefile: the keyboard check is always failing, can't make pablo have it
+	right, so not checking it by default
+	(that way we can have the "make check" in gi call "make check" in
+	gi/perl-install)
+	check the presence of non ascii characters in perl files (allow utf8
+	chars if there is 'use utf8')
+
+	* lang.pm: check(): only display "Errors:" if there is some errors
+
+	* rescue/list: revert adding Compress::Zlib
+
+	* install_steps.pm: remove accentuated char
+
+	* printer/main.pm: replace non ascii char
+
+2005/04/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/thirdparty.h, mdk-stage1/thirdparty.c:
+	add thirdparty_load_media_modules(), try to find third party modules on
+	the install media
+
+	* mdk-stage1/probing.h, mdk-stage1/probing.c: allow to keep track of
+	orphan devices (no module available)
+
+	* drakxtools.spec: 10.2-19mdk
+
+2005/04/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm, share/keyboards.tar.bz2: included/fixed some xmodmap files
+
+	* share/po/gl.po: updated Galician
+
+2005/04/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Try to guess the device associated with the CD-ROM when
+	installing urpmi
+	(bug 14395)
+
+2005/04/04  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Fixed bug #4319: Printer options cannot be set after renaming the
+	printer or changing the connection type
+	  - Fixed bug of PostScript printers with manufacturer-supplied PPD
+	cannot
+	be renamed at all
+	  - Fixed bug of print queue being deleted when renaming fails
+	  - Fixed bug of printerdrake trying to open a message window when
+	  non-interactive queue generation fails
+	  - Fixed pre-definition of $printer->{ARGS}, this bug made printerdrake
+	  crashing sometimes
+
 2005/04/04  Olivier Blin <oblin at mandrakesoft.com>
 
 	* mdk-stage1/thirdparty.h, mdk-stage1/thirdparty.c, mdk-stage1/stage1.c:
@@ -48166,7 +48247,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1028 2005/04/04 15:36:35 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1029 2005/04/04 19:10:19 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
