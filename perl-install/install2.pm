@@ -84,7 +84,6 @@ my @install_classes = qw(normal developer server);
 #-#######################################################################################
 $o = $::o = {
 #    bootloader => { linear => 0, lba32 => 1, message => 1, timeout => 5, restricted => 0 },
-    autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
@@ -116,7 +115,6 @@ $o = $::o = {
 #-mouse
 #-keyboard
 #-netc
-#-autoSCSI drives hds  fstab
 #-methods
 #-packages compss
 #-printer haveone entry(cf printer.pm)
@@ -156,9 +154,7 @@ sub selectMouse {
 #------------------------------------------------------------------------------
 sub setupSCSI {
     my ($clicked) = @_;
-    $o->{autoSCSI} ||= !$::expert;
-
-    $o->setupSCSI($o->{autoSCSI} && !$clicked, $clicked);
+    $o->setupSCSI(!$::expert && !$clicked, $clicked);
 }
 
 #------------------------------------------------------------------------------
