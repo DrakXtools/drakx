@@ -336,7 +336,7 @@ sub choosePackagesTree {
 			      )
     ));
     gtkpack__($l, my $toolbar = new Gtk::Toolbar('horizontal', 'icons'));
-    gtkpack__($l, gtksignal_connect(new Gtk::CheckButton(_("Show automatically selected packages")), clicked => sub { invbool \$auto_deps }));
+    gtkpack__($l, gtksignal_connect(gtkset_active(new Gtk::CheckButton(_("Show automatically selected packages")), $auto_deps), clicked => sub { invbool \$auto_deps }));
     $l->pack_end($w_size = new Gtk::Label(''), 0, 1, 20);
 
     $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
