@@ -961,7 +961,11 @@ sub miscellaneousAfter {
 #------------------------------------------------------------------------------
 sub exitInstall { 
     my ($o) = @_;
-    eval { output "$o->{prefix}/root/drakx/report.bug", install_any::report_bug($o->{prefix}) };
+    eval { 
+	my $report = '/root/drakx/report.bug';
+	output "$o->{prefix}$report", install_any::report_bug($o->{prefix});
+	run_program::rooted($o->{prefix}, 'gzip', $report);
+    };
     install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/drakx/replay_install.img" );
     eval { output "$o->{prefix}/root/drakx/README", "This directory contains several installation-related files,
 mostly log files (very useful if you ever report a bug!).
