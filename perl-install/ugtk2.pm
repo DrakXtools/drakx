@@ -30,7 +30,7 @@ use common;
 
 use Gtk2;
 
-if (!$::no_ugtk_init) {
+unless ($::no_ugtk_init) {
     !$ENV{DISPLAY} || system('/usr/X11R6/bin/xtest') and die "Cannot be run in console mode.\n";
     Gtk2->init(\@ARGV);
 }
@@ -497,10 +497,10 @@ sub gtkcreate_pixbuf {
 #		                [ 'third', { 'font' => 'Serif 15', ... } ],
 #                               ... ]);
 sub gtktext_insert {
-    my ($textview, $t, $opts) = @_;
+    my ($textview, $t, $opts, $append) = @_;
     if (ref($t) eq 'ARRAY') {
 	my $buffer = $textview->get_buffer;
-	$buffer->set_text('', -1);
+	$buffer->set_text('', -1) unless $append;
 	foreach my $token (@$t) {
 	    my $c = $buffer->get_char_count;
 	    $buffer->insert($buffer->get_end_iter, $token->[0], -1);
