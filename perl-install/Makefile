@@ -99,6 +99,7 @@ get_needed_files: $(SO_FILES)
 		ldd $$i 2>/dev/null | grep -v "not a dynamic" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
 	done
 
+	install -d $(DEST)/etc
 	install -d $(DEST)/lib
 	install -d $(DEST)/bin
 	install -d $(DEST)/usr/bin

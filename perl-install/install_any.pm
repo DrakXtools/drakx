@@ -17,14 +17,15 @@ use log;
 
 1;
 
-sub fileInBase { member($_[0], qw(compss depslist hdlist)); }
-
-sub imageGetFile { 
-    fileInBase($_[0]) and return "/tmp/rhimage/Mandrake/base/$_[0]";
-    my $f = "/tmp/rhimage/Mandrake/RPMS/$_[0]";
-    -r $f and return $f;
-    $f =~ s/i386/i586/;
-    $f;
+sub relGetFile($) {
+    local $_ = member($_[0], qw(compss depslist hdlist)) ? "base" : "RPMS";
+    $_ = "Mandrake/$_/$_[0]";
+    s/i386/i586/;
+    $_;
+}
+sub getFile($) { 
+    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;
+    \*getFile;
 }
 
 sub versionString {
@@ -95,7 +96,7 @@ sub setPackages {
 
     $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
 
-    pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass});
+    pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass}, $o->{lang});
 }
 
 sub addToBeDone(&$) {

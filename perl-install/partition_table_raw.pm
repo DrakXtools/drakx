@@ -57,7 +57,7 @@ sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
 sub kernel_read($) {
     my ($hd) = @_;
     local *F; openit($hd, \*F) or return 0;
-    ioctl(F, c::BLKRRPART(), 0) or die "kernel_read failed: need to reboot";
+    $hd->{rebootNeeded} = !ioctl(F, c::BLKRRPART(), 0);
 }
 
 sub read($$) {
@@ -102,6 +102,8 @@ sub write($$$) {
 sub clear_raw { { raw => [ ({}) x $nb_primary ] } }
 
 sub zero_MBR($) { 
-    $_[0]{primary} = clear_raw();
-    delete $_[0]{extended};
+    my ($hd) = @_;
+    $hd->{isDirty} = $hd->{needKernelReread} = 1;
+    $hd->{primary} = clear_raw();
+    delete $hd->{extended};
 }

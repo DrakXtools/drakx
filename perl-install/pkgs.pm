@@ -30,7 +30,7 @@ sub select($$;$) {
     while (@l) {
 	my $n = shift @l;
 	$n =~ /|/ and $n = first(split '\|', $n); #TODO better handling of choice
-	my $i = Package($packages, $n);
+	my $i = Package($packages, $n) or next;
 	$i->{base} ||= $base;
 	$i->{deps} or log::l("missing deps for $n");
 	push @l, @{$i->{deps} || []} unless $i->{selected};
@@ -87,7 +87,7 @@ sub set($$$) {
 }
 
 sub psUsingDirectory() {
-    my $dirname = install_any::imageGetFile('');
+    my $dirname = "/tmp/rhimage/Mandrake/RPMS";
     my %packages;
 
     log::l("scanning $dirname for packages");
@@ -96,25 +96,22 @@ sub psUsingDirectory() {
 
 	$packages{$name} = {
             name => $name, version => $version, release => $release,
-	    file => "$dirname/$_", selected => 0, deps => [],
+	    file => $_, selected => 0, deps => [],
         };
     }
     \%packages;
 }
 
 sub psUsingHdlist() {
-    my $file = install_any::imageGetFile('hdlist');
-    my ($noSeek, $end, %packages) = 0;
+    my $f = install_any::getFile('hdlist') or die "no hdlist found";
+    my %packages;
 
-    local *F;
-    sysopen F, $file, 0 or die "error opening header file $file: $!";
+#    my ($noSeek, $end) = 0;
+#    $end = sysseek F, 0, 2 or die "seek failed";
+#    sysseek F, 0, 0 or die "seek failed";
 
-    $end = sysseek F, 0, 2 or die "seek failed";
-    sysseek F, 0, 0 or die "seek failed";
-
-    while (sysseek(F, 0, 1) < $end) {
-	my $header = c::headerRead(fileno F, 1) or die "error reading header at offset ", sysseek(F, 0, 1);
-
+    while (my $header = c::headerRead(fileno $f, 1)) {
+#	 or die "error reading header at offset ", sysseek(F, 0, 1);
 	my $name = c::headerGetEntry($header, 'name');
 
 	$packages{$name} = {
@@ -134,9 +131,8 @@ sub chop_version($) {
 sub getDeps($) {
     my ($packages) = @_;
 
-    local *F;
-    open F, install_any::imageGetFile("depslist") or die "can't find dependencies list";
-    foreach (<F>) {
+    my $f = install_any::getFile("depslist") or die "can't find dependencies list";
+    foreach (<$f>) {
 	my ($name, $size, @deps) = split;
 	($name, @deps) = map { chop_version($_) } ($name, @deps);
 	$packages->{$name} or next;
@@ -150,9 +146,8 @@ sub readCompss($) {
     my ($packages) = @_;
     my (@compss, $ps, $category);
 
-    local *F;
-    open F, install_any::imageGetFile("compss") or die "can't find compss";
-    foreach (<F>) {
+    my $f = install_any::getFile("compss") or die "can't find compss";
+    foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
 	my ($options, $name) = /^(\S*)\s+(.*?)\s*$/ or die "bad line in compss: $_";
@@ -170,8 +165,8 @@ sub readCompss($) {
     [ @compss, $category ];
 }
 
-sub setCompssSelected($$$) {
-    my ($compss, $packages, $install_class, $select) = @_;
+sub setCompssSelected($$$$) {
+    my ($compss, $packages, $install_class, $lang) = @_;
 
     my $l = substr($install_class, 0, 1);
     my $L = uc $l;
@@ -179,7 +174,7 @@ sub setCompssSelected($$$) {
     my $verif_lang = sub {
 	local $SIG{__DIE__} = 'none';
 	$_[0] =~ /-([^-]*)$/;
-	$1 eq $ENV{LANG} || eval { lang::text2lang($1) eq $ENV{LANG} } && !$@;
+	$1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@;
     };
 
     foreach my $c (@$compss) {
@@ -217,9 +212,8 @@ sub getHeader($) {
     my ($p) = @_;
 
     unless ($p->{header}) {
-	local *F;
-	open F, $p->{file} or die "error opening package $p->{name} (file $p->{file})";
-	$p->{header} = c::rpmReadPackageHeader(fileno F);
+	my $f = install_any::getFile($p->{file}) or die "error opening package $p->{name} (file $p->{file})";
+	$p->{header} = c::rpmReadPackageHeader(fileno $f);
     }
     $p->{header};
 }
@@ -238,11 +232,9 @@ sub install {
 
     foreach my $p (@$toInstall) {
 	$p->{installed} = 1;
-	$p->{file} ||= install_any::imageGetFile(sprintf "%s-%s-%s.%s.rpm",
-						 $p->{name},
-						 $p->{version},
-						 $p->{release},
-						 c::headerGetEntry(getHeader($p), 'arch'));
+	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
+	                       $p->{name}, $p->{version}, $p->{release}, 
+			       c::headerGetEntry(getHeader($p), 'arch');
 	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $isUpgrade);
 	$nb++;
 	$total += $p->{size};
@@ -256,10 +248,13 @@ sub install {
     log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
 
     # !! do not translate these messages, they are used when catched (cf install_steps_graphical)
+    my $callbackOpen = sub { fileno install_any::getFile($_[0]) || log::l("bad file $_[0]") };
+    my $callbackClose = sub { };
     my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
     my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
 
-    if (my @probs = c::rpmRunTransactions($trans, $callbackStart, $callbackProgress, $force)) {
+    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, 
+					  $callbackStart, $callbackProgress, $force)) {
 	die "installation of rpms failed:\n  ", join("\n  ", @probs);
     }
     c::rpmtransFree($trans); 

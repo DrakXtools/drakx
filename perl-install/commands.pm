@@ -274,8 +274,9 @@ $pid, $cpu, $cmd
 
 
 sub dd {
-    my $u = "usage: dd [-h] [if=<file>] [of=<file>] [bs=<number>] [count=<number>]\n";
-    (getopts(\@_, qw(h)))[0] and die $u;
+    my $u = "usage: dd [-h] [-p] [if=<file>] [of=<file>] [bs=<number>] [count=<number>]\n";
+    my ($help, $percent) = getopts(\@_, qw(hp));
+    die $u if $help;
     my %h = (if => \*STDIN, of => \*STDOUT, bs => 512, count => undef);
     foreach (@_) {
 	/(.*?)=(.*)/ && exists $h{$1} or die $u;
@@ -290,12 +291,13 @@ sub dd {
     $h{bs} =~ /(\d+)G$/ and $h{bs} = $1 * 1024 * 1024 * 1024;
 
     for ($nb = 0; !$h{count} || $nb < $h{count}; $nb++) {
+	printf "\r%02.1d%%", 100 * $nb / $h{count} if $h{count} && $percent;
 	$read = sysread(IF, $tmp, $h{bs}) or $h{count} ? die "error: can't read block $nb\n" : last;
 	syswrite(OF, $tmp) or die "error: can't write block $nb\n";
 	$read < $h{bs} and $read = 1, last;
     }
-    print STDERR "$nb+$read records in\n";
-    print STDERR "$nb+$read records out\n";
+    print STDERR "\r$nb+$read records in\n";
+    print STDERR   "$nb+$read records out\n";
 }
 
 sub head_tail {

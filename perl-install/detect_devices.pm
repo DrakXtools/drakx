@@ -29,6 +29,11 @@ sub get {
 }
 sub hds() { grep { $_->{type} eq 'hd' } get(); }
 sub cdroms() { grep { $_->{type} eq 'cdrom' } get(); }
+sub floppies() {
+    my @l = grep { $_->{type} eq 'fd' } get();
+    unshift @l, "fd0" if tryOpen("fd0");
+    @l;
+}
 
 sub hasSCSI() {
     defined $scsiDeviceAvailable and return $scsiDeviceAvailable;
@@ -143,3 +148,8 @@ sub hasPlip() { goto &getPlip }
 sub hasEthernet() { hasNetDevice("eth0"); }
 sub hasTokenRing() { hasNetDevice("tr0"); }
 sub hasNetDevice($) { c::hasNetDevice($_[0]) }
+
+sub tryOpen($) {
+    local *F;
+    sysopen F, "/dev/$_[0]", c::O_NONBLOCK();
+}

@@ -64,17 +64,17 @@ before use them."),
 
 formatPartitions => 
  __("The partitions lately created must be formatted so that the system can use them.
-You can also format partitions previously created and used if you wish to remove all the data they
-contain. Note that it is not necessary to format the partitions already created and in use
-if they contain data you want to keep (typical cases: /home and /usr/local)."),
+You can also format partitions before created and used if you wish to remove all the data which
+contain. Note that it is not necessary to format the partitions created before used if they contain data to
+which you want to keep (typical cases: / home and / usr/local)."),
 choosePackages => 
- __("You now have the possibility of choosing the software that you wish to install.
+ __("You now have the possibility of choosing the software which you wish to install.
 
 Please note that packages manage the dependences: that means that if you wish to install
-a software requiring the presence of another software, the latter will be automatically selected
-and that it will be impossible for you to install the former without installing the latter.
+a software requiring the presence of another software, this last will be automatically selected
+and that it will be impossible for you to install the first without installing the second.
 
-Information on each category of packages and each one of them is available in the zone \"Infos\"
+Information on each category of packages and each one of enter of them are available in zone \"Infos\"
 located above buttons of confirmation/selection/deselection."),
 doInstallStep => 
  __("Selected packages are now getting installed on your system. This operation take only a few minutes."),
@@ -88,7 +88,7 @@ The password should not be too simple so that whoever cannot be connected under 
 It should not be either too sophisticated under penalty of being difficult to retain and, finally, forgotten.
 
 When you wish to connect yourselves on your Linux system as an administrator, the \"login\" 
-is \"root\" and the \"password\", this one which you now will indicate."),
+is \"root\" and the \"passswrd\", this one which you now will indicate."),
 addUser => 
  __("You can now authorize one or more people to be connected on your Linux system. Each one of
 them will profit from his own environment will be able to configure.
@@ -99,8 +99,8 @@ is a very bad idea. This last having all the rights it is certain that at one ti
 This is highly preferable you connect as simple user and that you use the account \"root\" only when
 that is essential."),
 doInstallStep => 
- __("The system being now copied on your disk, he is now time to indicate to it from where he will have to start.
-Unless than you know exactly what you do, always choose \"First sector of drive\"."),
+ __("The system being now copied on your disk, he is now time to indicate to him from where he will have to start.
+With less than you know exactly what you do, always choose \"First sector of drive\"."),
 
 configureX => 
  __("It is now time to configure the graphic server. First of all, choose your monitor. You have then
@@ -156,28 +156,25 @@ my @serverPartitioning = (
 );
 
 my $default = {
-    lang => 'us',
-    isUpgrade => 0,
-    installClass => 'beginner',
 #    display => "192.168.1.9:0",
 
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI => 0,
     mkbootdisk => 0,
     packages => [ qw() ],
-    partitionning => { clearall => $::testing, eraseBadPartitions => 1, auto_allocate => 0, autoformat => 0 },
+    partitionning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
 		   { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
 #		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
 	     ],
-    shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash) ],
+    shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
 };
 $o = $::o = { 
-#    lang => 'fr',
-#    isUpgrade => 0,
-#    installClass => 'beginner',
+    lang => 'us',
+    isUpgrade => 0,
+    installClass => 'beginner',
 
 #    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
     default => $default, 
@@ -235,13 +232,7 @@ sub partitionDisks {
 	$o->doPartitionDisks($o->{hds});
 
 	unless ($::testing) {
-	    # Write partitions to disk 
-	    my $need_reboot = 0;
-	    foreach (@{$o->{hds}}) { 
-		eval { partition_table::write($_); };
-		$need_reboot ||= $@;
-	    }
-	    $need_reboot and $o->rebootNeeded;
+	    $o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
 	}
     }
 
@@ -340,6 +331,18 @@ sub main {
 
     modules::load_deps("/modules/modules.dep");
     modules::read_conf("/tmp/conf.modules");
+
+    while (@_) {
+	local $_ = shift;
+	if (/--method/) {
+	    $_ = shift;
+	    if (/ftp/) {
+		require 'ftp.pm';
+		local $^W = 0;
+		*install_any::getFile = \&ftp::getFile;
+	    }
+	}
+    }
 
     my $clicked = 0;
     for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {

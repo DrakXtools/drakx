@@ -51,7 +51,7 @@ sub enteringStep($$) {
 	my $reachable = 1;
 	if (my $needs = $o->{steps}{$s}{needs}) {
 	    my @l = ref $needs ? @$needs : $needs;
-	    $reachable = min(map { $o->{steps}{$_}{done} } @l);
+	    $reachable = min(map { $o->{steps}{$_}{done} || 0 } @l);
 	}
 	if ($reachable && !$o->{steps}{$s}{reachable}) {
 	    $o->{steps}{$s}{reachable} = 1;

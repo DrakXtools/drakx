@@ -204,7 +204,7 @@ sub warp_text($;$) {
 
     my @l; 
     foreach (split "\n", $text) {
-	my $t; 
+	my $t = '';
 	foreach (split /\s+/, $_) {
 	    if (length "$t $_" > $width) {
 		push @l, $t;
