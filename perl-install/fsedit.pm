@@ -144,7 +144,7 @@ sub hds {
 	$hd->{file} = $file;
 	$hd->{prefix} = $hd->{device};
 	# for RAID arrays of format c0d0p1
-	$hd->{prefix} .= "p" if $hd->{prefix} =~ m,(rd|ida|cciss)/,;
+	$hd->{prefix} .= "p" if $hd->{prefix} =~ m,(rd|ida|cciss|ataraid)/,;
 
 	eval { partition_table::read($hd, $flags->{clearall} || member($_->{device}, @{$flags->{clear} || []})) };
 	if ($@) {
