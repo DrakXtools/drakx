@@ -796,4 +796,6 @@ sub runlevel {
     }
 }
 
+sub to_utf8 { c::to_utf8($lang::charset || 'ISO_8859-1', $_[0]) }
+
 1;

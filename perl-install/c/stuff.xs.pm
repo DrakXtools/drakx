@@ -455,7 +455,30 @@ from_utf8(s)
       char *buf = alloca(s_len + 10); /* 10 for safety, it should not be needed, utf8 is *always* bigger than a special encoding */
       {
 	  char *ptr = buf;
-	  int ptr_len = s_len;
+	  int ptr_len = s_len + 10;
+	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
+	      *ptr = 0;
+	      RETVAL = buf;
+	  }
+      }
+      iconv_close(cd);
+  }
+  OUTPUT:
+  RETVAL
+
+char *
+to_utf8(charset, s)
+  char *charset
+  char *s
+  CODE:
+  iconv_t cd = iconv_open("utf-8", charset);
+  RETVAL = s;
+  if (cd != (iconv_t) (-1)) {
+      int s_len = strlen(RETVAL);
+      char *buf = alloca(2 * s_len + 10); /* 10 for safety, it should not be needed */
+      {
+	  char *ptr = buf;
+	  int ptr_len = 2 * s_len + 10;
 	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
 	      *ptr = 0;
 	      RETVAL = buf;

@@ -447,7 +447,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 #    log::l("updating kde icons according to available devices");
 #    install_any::kdeicons_postinstall($o->{prefix});
 
-    my $welcome = _("Welcome to %s", "HOSTNAME");
+    my $welcome = any::to_utf8(_("Welcome to %s", "HOSTNAME"));
     substInFile { s/^(GreetString)=.*/$1=$welcome/ } "$o->{prefix}/usr/share/config/kdmrc";
     install_any::disable_user_view($o->{prefix}) if $o->{security} >= 3 || $o->{authentication}{NIS};
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
