@@ -1414,6 +1414,13 @@ sub ask_browse_tree_info_given_widgets {
     $w->{w}->main;
 }
 
+sub gtk_set_treelist {
+    my ($treelist, $l) = @_;
+
+    my $list = $treelist->get_model;
+    $list->clear;
+    $list->append_set([ 0 => $_ ]) foreach @$l;
+}
 
 # misc helpers:
 
