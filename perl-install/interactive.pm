@@ -248,7 +248,7 @@ sub ask_from_entries_refH_powered_normalize {
     #- don't display empty lists and one element lists
     @$l = grep { 
 	my $b = $_->{list} && $_->{not_edit};
-	@{$_->{list}} == () and die 'ask_from_list: empty list';
+	#@{$_->{list}} == () and die 'ask_from_list: empty list';
 	!($b && @{$_->{list}} <= 1);
     } @$l;
 
