@@ -20,6 +20,9 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
 } else {
     $in = 'interactive'->vnew('su');
 
+    my ($xkb_models, $model2text) = keyboard::xkb_models();
+    $keyboard->{XkbModel} ||= 'pc105';
+
   choose:
     $in->ask_from(N("Keyboard"),
 		  N("Please, choose your keyboard layout."),
@@ -27,7 +30,11 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
 		      format => sub { translate(keyboard::KEYBOARD2text($_[0])) },
 		      list => [ keyboard::KEYBOARDs() ],
 		      type => 'list',
-		  } ]) or goto end;
+		    },
+		    { val => \$keyboard->{XkbModel},
+		      format => sub { $model2text->{$_[0]} },
+		      list => $xkb_models },
+		]) or goto end;
 
     keyboard::group_toggle_choose($in, $keyboard) or goto choose;
 }

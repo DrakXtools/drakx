@@ -365,6 +365,11 @@ sub keyboard2text { keyboard2one($_[0], 0) }
 sub keyboard2kmap { keyboard2one($_[0], 1) }
 sub keyboard2xkb  { keyboard2one($_[0], 2) }
 
+sub xkb_models() {
+    my $models = parse_xkb_rules()->{model};
+    [ map { $_->[0] } @$models ], { map { @$_ } @$models };
+}
+
 sub grp_toggles {
     my ($keyboard) = @_;
     keyboard2one($keyboard, 3) or return;
@@ -482,15 +487,33 @@ sub load {
     } @$tables_given;
 }
 
+sub parse_xkb_rules() {
+    my $cat;
+    my %l;
+    my $lst_file = "$::prefix/usr/X11R6/lib/X11/xkb/rules/xorg.lst";
+    foreach (cat_($lst_file)) {
+	next if m!^\s*//! || m!^\s*$!;
+	chomp;
+	if (/^\!\s*(\S+)$/) {
+	    $cat = $1;
+	} elsif (/^\s*(\w\S*)\s+(.*)/) {
+	    push @{$l{$cat}}, [ $1, $2 ];
+	} else {
+	    log::l("parse_xkb_rules:$lst_file: bad line $_");
+	}
+    }
+    \%l;
+}
+
 sub keyboard2full_xkb {
     my ($keyboard) = @_;
 
     my $XkbLayout = keyboard2xkb($keyboard) or return { XkbDisable => '' };
 
-    my $XkbModel = 
-      arch() =~ /sparc/ ? 'sun' :
+    my $XkbModel = $keyboard->{XkbModel} ||
+      (arch() =~ /sparc/ ? 'sun' :
 	$XkbLayout eq 'jp' ? 'jp106' : 
-	$XkbLayout eq 'br' ? 'abnt2' : 'pc105';
+	$XkbLayout eq 'br' ? 'abnt2' : 'pc105');
 
     {
 	XkbLayout => 
