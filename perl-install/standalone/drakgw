@@ -57,7 +57,7 @@ my $in = 'interactive'->vnew('su', 'default');
 
 !$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
 
-pur_gtk_mode() if $::isEmbedded && ref($in) =~ /gtk/;
+pur_gtk_mode() if $::isEmbedded && $in->isa('interactive_gtk');
 
 sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
 
@@ -666,6 +666,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.56  2001/10/30 19:10:41  gc
+#- use isa rather than ref to test if we're gtk
+#-
 #- Revision 1.55  2001/10/02 10:28:14  gc
 #- don't call pkgs_install when no package needs to be installed
 #-
