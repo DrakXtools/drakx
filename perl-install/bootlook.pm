@@ -41,10 +41,6 @@ if ($::isEmbedded) {
 }
 
 my $in = 'interactive'->vnew('su', 'default');
-local $_ = join '', @ARGV;
-
-/-h/ and die N("no help implemented yet.\n");
-/-version/ and die 'version: $Id$'."\n";
 
 my @winm;
 my @usernames;
