@@ -13,7 +13,7 @@ my @devices = detect_devices::probeall();
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown() {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/
-	       && $_->{driver} !~ /^(ISDN|mod_quickcam|ohci1394|scanner|usbvision)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/
+	       && $_->{driver} !~ /^(ISDN|mod_quickcam|ohci1394|scanner|usbvision)$|Mouse:USB|class\|Mouse|Removable:zip|megaraid|nvnet|www.linmodems.org/
 	       && $_->{type} ne 'network'
 	       && $_->{description} !~ /Alcatel|ADSL Modem/
 	   } @devices;
@@ -84,7 +84,7 @@ our @tree =
 
      [ "ATA_STORAGE", , N("(E)IDE/ATA controllers"), "ide_hd.png", "", sub { grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices }, 0 ],
      [ "FIREWIRE_CONTROLLER", , N("Firewire controllers"), "usb.png", "", sub { grep { $_->{driver} =~ /ohci1394/ } @devices }, 1 ],
-     [ "SCSI_CONTROLLER", , N("SCSI controllers"), "scsi.png", "", sub { grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices }, 0 ],
+     [ "SCSI_CONTROLLER", , N("SCSI controllers"), "scsi.png", "", sub { grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices }, 0 ],
      [ "USB_CONTROLLER", , N("USB controllers"), "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices }, 0 ],
      [ "SMB_CONTROLLER", , N("SMBus controllers"), "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices }, 0 ],
      );
