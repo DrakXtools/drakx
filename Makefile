@@ -62,6 +62,7 @@ install_only:
     ifeq (i386,$(ARCH))
 	rm -rf $(ROOTDEST)/isolinux
 	cp -af isolinux $(ROOTDEST)
+	cp -f images/cdrom-changedisk.img $(ROOTDEST)/images
     endif
 
 	install live_update $(ROOTDEST)/live_update

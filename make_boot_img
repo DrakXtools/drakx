@@ -74,6 +74,13 @@ foreach (@kernels) {
 }
 if ($arch =~ /i.86/ && $img =~ /all/) {
     isolinux($main, @kernels);
+
+    my ($img, $img_sav) = ("images/cdrom.img-$main", 'images/cdrom.img-sav');
+    rename($img, $img_sav);
+    $type = 'cdrom';
+    boot_img_i386($mnt, $img, "kernel/all.kernels/$main/boot/vmlinu*", sub { $_[0] =~ s/\bautomatic=\S+\b//; "$_[0] changedisk" });
+    rename($img, 'images/cdrom-changedisk.img');
+    rename($img_sav, $img);
 }
 
 if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
@@ -155,7 +162,7 @@ sub entries_append {
 }
 
 sub boot_img_i386 {
-    my ($mnt, $img, $kernel) = @_;
+    my ($mnt, $img, $kernel, $args_callback) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
 
@@ -193,9 +200,10 @@ F1 help.msg
 F2 advanced.msg
 F3 boot.msg
 " . join('', map {
+    my $args = $args_callback ? $args_callback->($_->[1]) : $_->[1];
 "label $_->[0]
   kernel vmlinuz
-  append initrd=$type.rdz $_->[1]
+  append initrd=$type.rdz $args
 " } entries_append($type));
 
     _ "sync";
