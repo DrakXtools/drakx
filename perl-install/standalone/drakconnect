@@ -442,7 +442,7 @@ sub build_notebook {
 	$dialing_mode_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'static'; $apply->() });
 	$speed_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{speed} = '64'; $apply->() });
 	$speed_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{speed} = '128'; $apply->() });
-	$gui->{intf_bool}{ONBOOT}->set_active($interface eq 'adsl' ? adsl_atboot() : ($intf->{ONBOOT} eq 'yes' ? 1 : 0));
+	$gui->{intf_bool}{ONBOOT}->set_active($intf->{ONBOOT} eq 'yes' ? 1 : 0);
 	$gui->{intf_bool}{MII_NOT_SUPPORTED}->set_active($intf->{MII_NOT_SUPPORTED} eq 'no' ? 1 : 0);
 	$gui->{intf_bool}{HWADDR}->set_active($intf->{HWADDR});
     }
@@ -772,7 +772,6 @@ sub apply {
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
 sub chk_internet() { `LC_ALL=C LANGUAGE=C /sbin/chkconfig --list | grep internet` =~ /:on/ ? 1 : 0 };
-sub adsl_atboot() { (any { /x--boot_time/ } cat_($network::tools::connect_file)) ? 0 : 1 };
 
 sub update_intbutt() {
     $int_state->set($isconnected ? N("Connected") : N("Not connected"));
