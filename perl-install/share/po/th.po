@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-01-09 21:03+0100\n"
+"POT-Creation-Date: 2000-05-11 22:37+0200\n"
 "PO-Revision-Date: 1999-11-22 17:01+0100\n"
 "Last-Translator: Kan Yuenyong <kan@kaiwal.com>\n"
 "Language-Team: Thai\n"
@@ -13,40 +13,43 @@ msgstr ""
 "Content-Type: text/plain; charset=tis-620\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../Xconfigurator.pm_.c:159
+#: ../../Xconfigurator.pm_.c:116 ../../Xconfigurator.pm_.c:228
+msgid "Generic"
+msgstr ""
+
+#: ../../Xconfigurator.pm_.c:165
 msgid "Graphic card"
 msgstr "กราฟฟิคการ์ด"
 
-#: ../Xconfigurator.pm_.c:159
+#: ../../Xconfigurator.pm_.c:165
 msgid "Select a graphic card"
 msgstr "เลือกกราฟฟิคการ์ด"
 
-#: ../Xconfigurator.pm_.c:160
+#: ../../Xconfigurator.pm_.c:166
 msgid "Choose a X server"
 msgstr "เลือก X เซิร์ฟเวอร์"
 
-#: ../Xconfigurator.pm_.c:160
-#, fuzzy
+#: ../../Xconfigurator.pm_.c:166
 msgid "X server"
-msgstr "server (เซิร์ฟเวอร์)"
+msgstr "X เซิร์ฟเวอร์"
 
-#: ../Xconfigurator.pm_.c:181
+#: ../../Xconfigurator.pm_.c:190
 msgid "Select the memory size of your graphic card"
 msgstr "เลือกขนาดหน่วยความจำของกราฟฟิคการ์ด"
 
-#: ../Xconfigurator.pm_.c:203
+#: ../../Xconfigurator.pm_.c:217
 msgid "Choose options for server"
 msgstr "เลือกออปชั่นเพิ่มเติมสำหรับเซิร์ฟเวอร์"
 
-#: ../Xconfigurator.pm_.c:221
+#: ../../Xconfigurator.pm_.c:228
 msgid "Choose a monitor"
 msgstr "เลือกจอภาพ"
 
-#: ../Xconfigurator.pm_.c:221
+#: ../../Xconfigurator.pm_.c:228
 msgid "Monitor"
 msgstr "จอภาพ"
 
-#: ../Xconfigurator.pm_.c:224
+#: ../../Xconfigurator.pm_.c:231
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -66,68 +69,69 @@ msgstr ""
 "ไม่เกินความสามารถของจอภาพ ไม่เช่นนั้นอาจเกิดความเสียหายกับจอภาพได้\n"
 "หากไม่แน่ใจโปรดเลือกเซ็ตอัพแบบมาตรฐาน"
 
-#: ../Xconfigurator.pm_.c:231
+#: ../../Xconfigurator.pm_.c:238
 msgid "Horizontal refresh rate"
 msgstr "อัตราการรีเฟรชตามแนวนอน"
 
-#: ../Xconfigurator.pm_.c:231
+#: ../../Xconfigurator.pm_.c:238
 msgid "Vertical refresh rate"
 msgstr "อัตราการรีเฟรชตามแนวตั้ง"
 
-#: ../Xconfigurator.pm_.c:272
+#: ../../Xconfigurator.pm_.c:277
 msgid "Monitor not configured"
 msgstr "ไม่มีการคอนฟิกจอภาพ"
 
-#: ../Xconfigurator.pm_.c:275
+#: ../../Xconfigurator.pm_.c:280
 msgid "Graphic card not configured yet"
 msgstr "ยังไม่ได้คอนฟิกกราฟฟิกการ์ด"
 
-#: ../Xconfigurator.pm_.c:278
+#: ../../Xconfigurator.pm_.c:283
 msgid "Resolutions not chosen yet"
 msgstr "ยังไม่ได้เลือกความขนาดจอภาพ"
 
-#: ../Xconfigurator.pm_.c:289
+#: ../../Xconfigurator.pm_.c:296
 msgid "Do you want to test the configuration?"
 msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
 
-#: ../Xconfigurator.pm_.c:293
+#: ../../Xconfigurator.pm_.c:300
 msgid "Warning: testing is dangerous on this graphic card"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:296
-msgid "Test configuration"
+#: ../../Xconfigurator.pm_.c:303
+msgid "Test of the configuration"
 msgstr "ทดสอบการคอนฟิก"
 
-#: ../Xconfigurator.pm_.c:334
-msgid "An error occurred:"
-msgstr "มีข้อผิดพลาดเกิดขึ้น:"
-
-#: ../Xconfigurator.pm_.c:336
+#: ../../Xconfigurator.pm_.c:342
 msgid ""
 "\n"
-"try changing some parameters"
+"try to change some parameters"
 msgstr ""
 "\n"
 "ลองเปลี่ยนพารามิเตอร์บางตัว"
 
-#: ../Xconfigurator.pm_.c:358
-#, c-format
-msgid "(leaving in %d seconds)"
-msgstr "(ออกภายใน %d วินาที)"
+#: ../../Xconfigurator.pm_.c:342
+msgid "An error has occurred:"
+msgstr "มีข้อผิดพลาดเกิดขึ้น:"
 
-#: ../Xconfigurator.pm_.c:362 ../my_gtk.pm_.c:425
-msgid "Is this correct?"
+#: ../../Xconfigurator.pm_.c:365
+#, c-format
+msgid "Leaving in %d seconds"
+msgstr "ออกภายใน %d วินาที"
+
+#: ../../Xconfigurator.pm_.c:369
+#, fuzzy
+msgid "Is this the correct setting?"
 msgstr "ถูกต้องหรือไม่?"
 
-#: ../Xconfigurator.pm_.c:370
-msgid "An error occurred, try changing some parameters"
+#: ../../Xconfigurator.pm_.c:377
+msgid "An error has occurred, try to change some parameters"
 msgstr "เกิดความผิดพลาดขึ้น โปรดแก้ไขพารามิเตอร์บางอย่าง"
 
-#: ../Xconfigurator.pm_.c:378 ../Xconfigurator.pm_.c:547
+#: ../../Xconfigurator.pm_.c:385 ../../Xconfigurator.pm_.c:558
 msgid "Automatic resolutions"
 msgstr "กำหนดขนาดจอภาพโดยอัตโนมัติ"
 
-#: ../Xconfigurator.pm_.c:379
+#: ../../Xconfigurator.pm_.c:386
 msgid ""
 "To find the available resolutions I will try different ones.\n"
 "Your screen will blink...\n"
@@ -137,24 +141,34 @@ msgstr ""
 "จอภาพของคุณจะมีการกระพริบ...\n"
 "คุณสามารถปิดจอภาพได้ถ้าต้องการ และคุณจะได้ยินเสียงเตือนเมื่อการตรวจสอบสิ้นสุด"
 
-#: ../Xconfigurator.pm_.c:434 ../printerdrake.pm_.c:208
+#: ../../Xconfigurator.pm_.c:441 ../../printerdrake.pm_.c:167
 msgid "Resolution"
 msgstr "ขนาดจอภาพ"
 
-#: ../Xconfigurator.pm_.c:469
-msgid "Choose resolution and color depth"
+#: ../../Xconfigurator.pm_.c:476
+msgid "Choose the resolution and the color depth"
 msgstr "เลือกขนาดจอภาพและความละเอียดสี"
 
-#: ../Xconfigurator.pm_.c:477
+#: ../../Xconfigurator.pm_.c:478
+#, c-format
+msgid "Graphic card: %s"
+msgstr "กราฟฟิคการ์ด: %s"
+
+#: ../../Xconfigurator.pm_.c:479
+#, c-format
+msgid "XFree86 server: %s"
+msgstr "เซิร์ฟเวอร์ XFree86: %s"
+
+#: ../../Xconfigurator.pm_.c:488
 msgid "Show all"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: ../Xconfigurator.pm_.c:501
+#: ../../Xconfigurator.pm_.c:512
 #, fuzzy
 msgid "Resolutions"
 msgstr "ขนาดจอภาพ"
 
-#: ../Xconfigurator.pm_.c:548
+#: ../../Xconfigurator.pm_.c:559
 msgid ""
 "I can try to find the available resolutions (eg: 800x600).\n"
 "Sometimes, though, it may hang the machine.\n"
@@ -164,7 +178,7 @@ msgstr ""
 "ซึ่งบางครั้งอาจทำให้ระบบหยุดการทำงานได้\n"
 "คุณต้องการให้โปรแกรมลองทำดูหรือไม่?"
 
-#: ../Xconfigurator.pm_.c:553
+#: ../../Xconfigurator.pm_.c:564
 msgid ""
 "No valid modes found\n"
 "Try with another video card or monitor"
@@ -172,109 +186,109 @@ msgstr ""
 "ไม่พบโหมดที่เหมาะสม\n"
 "ให้ลองเลือกวิดิโอการ์ดและจอภาพชนิดอื่นแทน"
 
-#: ../Xconfigurator.pm_.c:772
+#: ../../Xconfigurator.pm_.c:904
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "เลือกชนิดของคีย์บอร์ด: %s\n"
 
-#: ../Xconfigurator.pm_.c:773
+#: ../../Xconfigurator.pm_.c:905
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "เลือกชนิดของเม้าส์: %s\n"
 
-#: ../Xconfigurator.pm_.c:774
+#: ../../Xconfigurator.pm_.c:906
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "ดีไวซ์ของเม้าส์: %s\n"
 
-#: ../Xconfigurator.pm_.c:775
+#: ../../Xconfigurator.pm_.c:907
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "จอภาพ: %s\n"
 
-#: ../Xconfigurator.pm_.c:776
+#: ../../Xconfigurator.pm_.c:908
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "อัตราความถี่กวาดตามแนวนอน: %s\n"
 
-#: ../Xconfigurator.pm_.c:777
+#: ../../Xconfigurator.pm_.c:909
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "อัตราความถี่กวาดตามแนวตั้ง: %s\n"
 
-#: ../Xconfigurator.pm_.c:778
+#: ../../Xconfigurator.pm_.c:910
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "กราฟฟิคการ์ด: %s\n"
 
-#: ../Xconfigurator.pm_.c:779
+#: ../../Xconfigurator.pm_.c:911
 #, c-format
 msgid "Graphic memory: %s kB\n"
 msgstr "ขนาดหน่วยความจำของกราฟฟิคการ์ด: %s kB\n"
 
-#: ../Xconfigurator.pm_.c:780
+#: ../../Xconfigurator.pm_.c:912
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "เซิร์ฟเวอร์ XFree86: %s\n"
 
-#: ../Xconfigurator.pm_.c:794
+#: ../../Xconfigurator.pm_.c:927
 msgid "Preparing X-Window configuration"
 msgstr "เตรียมการคอนฟิกของ X-Window"
 
-#: ../Xconfigurator.pm_.c:808
+#: ../../Xconfigurator.pm_.c:941
 msgid "Change Monitor"
 msgstr "เปลี่ยนจอภาพ"
 
-#: ../Xconfigurator.pm_.c:809
+#: ../../Xconfigurator.pm_.c:942
 msgid "Change Graphic card"
 msgstr "เปลี่ยนกราฟฟิคการ์ด"
 
-#: ../Xconfigurator.pm_.c:810
+#: ../../Xconfigurator.pm_.c:943
 msgid "Change Server options"
 msgstr "เปลี่ยนออปชั่นของเซิร์ฟเวอร์"
 
-#: ../Xconfigurator.pm_.c:811
+#: ../../Xconfigurator.pm_.c:944
 msgid "Change Resolution"
 msgstr "เปลี่ยนขนาดจอภาพ"
 
-#: ../Xconfigurator.pm_.c:812
+#: ../../Xconfigurator.pm_.c:945
 msgid "Automatical resolutions search"
 msgstr "ค้นหาขนาดของจอภาพแบบอัตโนมัติ"
 
-#: ../Xconfigurator.pm_.c:816
+#: ../../Xconfigurator.pm_.c:949
 msgid "Show information"
 msgstr "แสดงข้อมูล"
 
-#: ../Xconfigurator.pm_.c:817
+#: ../../Xconfigurator.pm_.c:950
 msgid "Test again"
 msgstr "ทดสอบอีกครั้ง"
 
-#: ../Xconfigurator.pm_.c:818 ../standalone/rpmdrake_.c:46
+#: ../../Xconfigurator.pm_.c:951 ../../standalone/rpmdrake_.c:46
 msgid "Quit"
 msgstr "ออก"
 
-#: ../Xconfigurator.pm_.c:822
+#: ../../Xconfigurator.pm_.c:955 ../../standalone/drakboot_.c:36
 msgid "What do you want to do?"
 msgstr "คุณต้องการจะทำอะไร?"
 
-#: ../Xconfigurator.pm_.c:829
+#: ../../Xconfigurator.pm_.c:962
 msgid "Forget the changes?"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:845
+#: ../../Xconfigurator.pm_.c:980
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:861
+#: ../../Xconfigurator.pm_.c:996
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr ""
 
-#: ../Xconfigurator.pm_.c:864
+#: ../../Xconfigurator.pm_.c:999
 msgid "X at startup"
 msgstr "ให้เป็นกราฟฟิคเมื่อเริ่มต้น"
 
-#: ../Xconfigurator.pm_.c:865
+#: ../../Xconfigurator.pm_.c:1000
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -282,185 +296,402 @@ msgstr ""
 "โปรแกรมจะกำหนดให้คอมพิวเตอร์ของคุณใช้งานแบบกราฟฟิคเมื่อเริ่มบูต\n"
 "คุณต้องการจะให้ทำงานแบบกราฟฟิคเมื่อรีบูตหรือไม่?"
 
-#: ../Xconfigurator_consts.pm_.c:4
+#: ../../Xconfigurator_consts.pm_.c:4
 msgid "256 colors (8 bits)"
 msgstr "256 สี (8 บิต)"
 
-#: ../Xconfigurator_consts.pm_.c:5
+#: ../../Xconfigurator_consts.pm_.c:5
 msgid "32 thousand colors (15 bits)"
 msgstr "สามหมื่นสองพันสี (15 บิต)"
 
-#: ../Xconfigurator_consts.pm_.c:6
+#: ../../Xconfigurator_consts.pm_.c:6
 msgid "65 thousand colors (16 bits)"
 msgstr "หกหมื่นห้าพันสี (16 บิต)"
 
-#: ../Xconfigurator_consts.pm_.c:7
+#: ../../Xconfigurator_consts.pm_.c:7
 msgid "16 million colors (24 bits)"
 msgstr "สิบหกล้านสี (24 บิต)"
 
-#: ../Xconfigurator_consts.pm_.c:8
+#: ../../Xconfigurator_consts.pm_.c:8
 msgid "4 billion colors (32 bits)"
 msgstr "สี่พันล้านสี (32 บิต)"
 
-#: ../Xconfigurator_consts.pm_.c:96
+#: ../../Xconfigurator_consts.pm_.c:103
 msgid "256 kB"
 msgstr "256 kB"
 
-#: ../Xconfigurator_consts.pm_.c:97
+#: ../../Xconfigurator_consts.pm_.c:104
 msgid "512 kB"
 msgstr "512 kB"
 
-#: ../Xconfigurator_consts.pm_.c:98
+#: ../../Xconfigurator_consts.pm_.c:105
 msgid "1 MB"
 msgstr "1 MB"
 
-#: ../Xconfigurator_consts.pm_.c:99
+#: ../../Xconfigurator_consts.pm_.c:106
 msgid "2 MB"
 msgstr "2 MB"
 
-#: ../Xconfigurator_consts.pm_.c:100
+#: ../../Xconfigurator_consts.pm_.c:107
 msgid "4 MB"
 msgstr "4 MB"
 
-#: ../Xconfigurator_consts.pm_.c:101
+#: ../../Xconfigurator_consts.pm_.c:108
 msgid "8 MB"
 msgstr "8 MB"
 
-#: ../Xconfigurator_consts.pm_.c:102
+#: ../../Xconfigurator_consts.pm_.c:109
 msgid "16 MB or more"
 msgstr "16 MB หรือมากกว่า"
 
-#: ../Xconfigurator_consts.pm_.c:107 ../Xconfigurator_consts.pm_.c:108
+#: ../../Xconfigurator_consts.pm_.c:114 ../../Xconfigurator_consts.pm_.c:115
 msgid "Standard VGA, 640x480 at 60 Hz"
 msgstr "จอภาพวีจีเอแบบมาตรฐาน 640x480 ที่ 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:109
+#: ../../Xconfigurator_consts.pm_.c:116
 msgid "Super VGA, 800x600 at 56 Hz"
 msgstr "Super VGA ขนาด 800x600 ที่ 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:110
+#: ../../Xconfigurator_consts.pm_.c:117
 msgid "8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)"
 msgstr ""
 "คอมแพตติเบิลกับ 8514 ขนาด 1024x768 ที่ 87 Hz interlaced (ไม่มี 800x600)"
 
-#: ../Xconfigurator_consts.pm_.c:111
+#: ../../Xconfigurator_consts.pm_.c:118
 msgid "Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz"
 msgstr "Super VGA ขนาด 1024x768 ที่ 87 Hz interlaced ขนาด 800x600 ที่ 56 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:112
+#: ../../Xconfigurator_consts.pm_.c:119
 msgid "Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz"
 msgstr "Extended Super VGA, 800x600 ที่ 60 Hz, 640x480 ที่ 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:113
+#: ../../Xconfigurator_consts.pm_.c:120
 msgid "Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz"
 msgstr "Non-Interlaced SVGA, 1024x768 ที่ 60 Hz, 800x600 ที่ 72 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:114
+#: ../../Xconfigurator_consts.pm_.c:121
 msgid "High Frequency SVGA, 1024x768 at 70 Hz"
 msgstr "High Frequency SVGA ขนาด 1024x768 ที่ 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:115
+#: ../../Xconfigurator_consts.pm_.c:122
 msgid "Multi-frequency that can do 1280x1024 at 60 Hz"
 msgstr "Multi-frequency ซึ่งสามารถกำหนดขนาด 1280x1024 ที่ 60 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:116
+#: ../../Xconfigurator_consts.pm_.c:123
 msgid "Multi-frequency that can do 1280x1024 at 74 Hz"
 msgstr "Multi-frequency ซึ่งสามารถกำหนดขนาด 1280x1024 ที่ 74 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:117
+#: ../../Xconfigurator_consts.pm_.c:124
 msgid "Multi-frequency that can do 1280x1024 at 76 Hz"
 msgstr "Multi-frequency ซึ่งสามารถกำหนดขนาด 1280x1024 ที่ 76 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:118
+#: ../../Xconfigurator_consts.pm_.c:125
 msgid "Monitor that can do 1600x1200 at 70 Hz"
 msgstr "จอภาพที่สามารถกำหนด 1600x1200 ที่ 70 Hz"
 
-#: ../Xconfigurator_consts.pm_.c:119
+#: ../../Xconfigurator_consts.pm_.c:126
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr "จอภาพที่สามารถกำหนด 1600x1200 ที่ 76 Hz"
 
-#: ../diskdrake.pm_.c:16 ../diskdrake.pm_.c:370
-msgid "Create"
-msgstr "สร้าง"
+#: ../../any.pm_.c:17
+msgid "curly"
+msgstr ""
 
-#: ../diskdrake.pm_.c:17
-msgid "Unmount"
-msgstr "เลิกเม้าท์์ระบบไฟล์"
+#: ../../any.pm_.c:17
+#, fuzzy
+msgid "default"
+msgstr "Default"
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:372
-msgid "Delete"
-msgstr "ลบ"
+#. -PO: names (tie, curly...) have corresponding icons for kdm
+#: ../../any.pm_.c:17
+#, fuzzy
+msgid "tie"
+msgstr "แอ็คทีฟ"
 
-#: ../diskdrake.pm_.c:18
-msgid "Format"
-msgstr "ฟอร์แมต"
+#: ../../any.pm_.c:18
+msgid "brunette"
+msgstr ""
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:527
-msgid "Resize"
-msgstr "เปลี่ยนขนาด"
+#: ../../any.pm_.c:18
+msgid "girl"
+msgstr ""
 
-#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:370 ../diskdrake.pm_.c:414
-msgid "Type"
-msgstr "ประเภท"
+#: ../../any.pm_.c:18
+msgid "woman-blond"
+msgstr ""
 
-#: ../diskdrake.pm_.c:19 ../diskdrake.pm_.c:430
-msgid "Mount point"
-msgstr "กำหนดจุดเม้าท์"
+#: ../../any.pm_.c:19
+#, fuzzy
+msgid "automagic"
+msgstr "กำหนดค่า IP แบบอัตโนมัติ"
 
-#: ../diskdrake.pm_.c:33
-msgid "Write /etc/fstab"
-msgstr "เขียนลงใน /etc/fstab"
+#: ../../any.pm_.c:60
+msgid "First sector of boot partition"
+msgstr "เซ็กเตอร์แรกของบูตพาร์ติชั่น"
 
-#: ../diskdrake.pm_.c:34
-msgid "Toggle to expert mode"
-msgstr "ปกติ > สำหรับผู้ชำนาญ"
+#: ../../any.pm_.c:60
+msgid "First sector of drive (MBR)"
+msgstr "เซ็กเตอร์แรกของไดรว์ (MBR)"
 
-#: ../diskdrake.pm_.c:35
-msgid "Toggle to normal mode"
-msgstr "สำหรับผู้ชำนาญ > ปกติ"
+#: ../../any.pm_.c:65
+msgid "LILO/grub Installation"
+msgstr "การติดตั้ง LILO/grub"
 
-#: ../diskdrake.pm_.c:36
-msgid "Restore from file"
-msgstr "เรียกคืนจากไฟล์"
+#: ../../any.pm_.c:66
+msgid "Where do you want to install the bootloader?"
+msgstr "คุณจะติดตั้งบูตโหลดเดอร์ไว้ที่ไหน?"
 
-#: ../diskdrake.pm_.c:37
-msgid "Save in file"
-msgstr "บันทึกลงไฟล์"
+#: ../../any.pm_.c:73
+#, fuzzy
+msgid "None"
+msgstr "ทำเรียบร้อยแล้ว"
 
-#: ../diskdrake.pm_.c:38
-msgid "Restore from floppy"
-msgstr "เรียกคืนจากแผ่นฟล้อปปี้"
+#: ../../any.pm_.c:73
+#, fuzzy
+msgid "Which bootloader(s) do you want to use?"
+msgstr "ข้อมูลประเภทใดที่คุณต้องการเพิ่ม"
 
-#: ../diskdrake.pm_.c:39
-msgid "Save on floppy"
-msgstr "บันทึกลงแผ่นฟล้อปปี้"
+#: ../../any.pm_.c:84
+msgid "Boot device"
+msgstr "อุปกรณ์บูต"
 
-#: ../diskdrake.pm_.c:40 ../install_steps_interactive.pm_.c:618
-#: ../install_steps_interactive.pm_.c:748 ../standalone/adduserdrake_.c:34
+#: ../../any.pm_.c:85
+msgid "LBA (doesn't work on old BIOSes)"
+msgstr ""
+
+#: ../../any.pm_.c:86
+msgid "Compact"
+msgstr "แบบอัด (Compact)"
+
+#: ../../any.pm_.c:86
+msgid "compact"
+msgstr "แบบอัด (compact)"
+
+#: ../../any.pm_.c:87 ../../install_steps_interactive.pm_.c:809
+msgid "Delay before booting default image"
+msgstr "หน่วงเวลาก่อนทำการบูตอิมเมจที่ใช้"
+
+#: ../../any.pm_.c:88
+msgid "Video mode"
+msgstr "โหมดของการแสดงผล"
+
+#: ../../any.pm_.c:90 ../../install_steps_interactive.pm_.c:531
+#: ../../install_steps_interactive.pm_.c:654
+#: ../../install_steps_interactive.pm_.c:705
+#: ../../install_steps_interactive.pm_.c:811 ../../printerdrake.pm_.c:85
+#: ../../printerdrake.pm_.c:110 ../../standalone/adduserdrake_.c:42
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+#: ../../any.pm_.c:91 ../../install_steps_interactive.pm_.c:655
+#: ../../install_steps_interactive.pm_.c:706
+#: ../../install_steps_interactive.pm_.c:812
+#: ../../standalone/adduserdrake_.c:43
+msgid "Password (again)"
+msgstr "รหัสผ่าน (ใส่อีกครั้ง)"
+
+#: ../../any.pm_.c:92 ../../install_steps_interactive.pm_.c:813
+msgid "Restrict command line options"
+msgstr "อ็อปชั่นจำเพาะที่ใช้กับคอมมานด์ไลน์"
+
+#: ../../any.pm_.c:92 ../../install_steps_interactive.pm_.c:813
+msgid "restrict"
+msgstr "จำเพาะ"
+
+#: ../../any.pm_.c:98
+#, fuzzy
+msgid "Bootloader main options"
+msgstr "อ๊อปชั่นหลักของ LILO"
+
+#: ../../any.pm_.c:101 ../../install_steps_interactive.pm_.c:820
+msgid ""
+"Option ``Restrict command line options'' is of no use without a password"
+msgstr "อ็อปชั่น ``อ๊อปชั่นจำเพาะที่ใช้กับคอมมานด์ไลน์'' จะต้องใส่รหัสผ่านด้วย"
+
+#: ../../any.pm_.c:102 ../../install_steps_interactive.pm_.c:664
+#: ../../install_steps_interactive.pm_.c:719
+#: ../../install_steps_interactive.pm_.c:821
+#: ../../standalone/adduserdrake_.c:56
+msgid "Please try again"
+msgstr "โปรดลองอีกครั้ง"
+
+#: ../../any.pm_.c:102 ../../install_steps_interactive.pm_.c:664
+#: ../../install_steps_interactive.pm_.c:719
+#: ../../install_steps_interactive.pm_.c:821
+#: ../../standalone/adduserdrake_.c:56
+msgid "The passwords do not match"
+msgstr "รหัสผ่านไม่เหมือนกัน"
+
+#: ../../any.pm_.c:112
+#, fuzzy
+msgid ""
+"Here are the different entries.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"ต่อไปนี้เป็นข้อมูลใน LILO\n"
+"คุณต้องการเพิ่มข้อมูลหรือแก้ไขข้อมูลที่มีได้"
+
+#: ../../any.pm_.c:114 ../../install_steps_interactive.pm_.c:832
+#: ../../printerdrake.pm_.c:245 ../../standalone/rpmdrake_.c:302
+msgid "Add"
+msgstr "เพิ่ม"
+
+#: ../../any.pm_.c:114 ../../diskdrake.pm_.c:42
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../install_steps_interactive.pm_.c:832 ../../printerdrake.pm_.c:245
+#: ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "ทำเรียบร้อยแล้ว"
 
-#: ../diskdrake.pm_.c:43
+#: ../../any.pm_.c:123
+msgid "Linux"
+msgstr "ลีนุกซ์"
+
+#: ../../any.pm_.c:123
+msgid "Other OS (windows...)"
+msgstr "ระบบปฏิบัติการอื่นๆ (วินโดวส์...)"
+
+#: ../../any.pm_.c:123
+msgid "Which type of entry do you want to add?"
+msgstr "ข้อมูลประเภทใดที่คุณต้องการเพิ่ม"
+
+#: ../../any.pm_.c:142 ../../install_steps_interactive.pm_.c:857
+msgid "Image"
+msgstr "Image"
+
+#: ../../any.pm_.c:143 ../../any.pm_.c:151
+#: ../../install_steps_interactive.pm_.c:859
+msgid "Root"
+msgstr "Root"
+
+#: ../../any.pm_.c:144 ../../install_steps_interactive.pm_.c:860
+msgid "Append"
+msgstr "Append"
+
+#: ../../any.pm_.c:145 ../../install_steps_interactive.pm_.c:861
+msgid "Initrd"
+msgstr "Initrd"
+
+#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:862
+msgid "Read-write"
+msgstr "Read-write"
+
+#: ../../any.pm_.c:152
+msgid "Table"
+msgstr "Table"
+
+#: ../../any.pm_.c:153
+msgid "Unsafe"
+msgstr "Unsafe"
+
+#: ../../any.pm_.c:158 ../../install_steps_interactive.pm_.c:869
+msgid "Label"
+msgstr "Label"
+
+#: ../../any.pm_.c:160 ../../install_steps_interactive.pm_.c:871
+msgid "Default"
+msgstr "Default"
+
+#: ../../any.pm_.c:163 ../../install_steps_gtk.pm_.c:674
+#: ../../install_steps_interactive.pm_.c:652
+#: ../../install_steps_interactive.pm_.c:874 ../../interactive.pm_.c:74
+#: ../../interactive.pm_.c:84 ../../interactive.pm_.c:224
+#: ../../interactive_newt.pm_.c:49 ../../interactive_newt.pm_.c:98
+#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:200
+#: ../../my_gtk.pm_.c:459 ../../my_gtk.pm_.c:634 ../../printerdrake.pm_.c:272
+msgid "Ok"
+msgstr "ตกลง"
+
+#: ../../any.pm_.c:163 ../../install_steps_interactive.pm_.c:874
+msgid "Remove entry"
+msgstr "ลบข้อมูล"
+
+#: ../../any.pm_.c:166 ../../install_steps_interactive.pm_.c:877
+msgid "Empty label not allowed"
+msgstr "ไม่อนุญาตให้มีหัวข้อว่าง"
+
+#: ../../any.pm_.c:167
+msgid "This label is already used"
+msgstr "หัวข้อนี้ถูกใช้ไปเรียบร้อยแล้ว"
+
+#: ../../diskdrake.pm_.c:18 ../../diskdrake.pm_.c:413
+msgid "Create"
+msgstr "สร้าง"
+
+#: ../../diskdrake.pm_.c:19
+msgid "Unmount"
+msgstr "เลิกเม้าท์์ระบบไฟล์"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:415
+msgid "Delete"
+msgstr "ลบ"
+
+#: ../../diskdrake.pm_.c:20
+msgid "Format"
+msgstr "ฟอร์แมต"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:590
+msgid "Resize"
+msgstr "เปลี่ยนขนาด"
+
+#: ../../diskdrake.pm_.c:20 ../../diskdrake.pm_.c:413
+#: ../../diskdrake.pm_.c:466
+msgid "Type"
+msgstr "ประเภท"
+
+#: ../../diskdrake.pm_.c:21 ../../diskdrake.pm_.c:485
+msgid "Mount point"
+msgstr "กำหนดจุดเม้าท์"
+
+#: ../../diskdrake.pm_.c:35
+msgid "Write /etc/fstab"
+msgstr "เขียนลงใน /etc/fstab"
+
+#: ../../diskdrake.pm_.c:36
+msgid "Toggle to expert mode"
+msgstr "ปกติ > สำหรับผู้ชำนาญ"
+
+#: ../../diskdrake.pm_.c:37
+msgid "Toggle to normal mode"
+msgstr "สำหรับผู้ชำนาญ > ปกติ"
+
+#: ../../diskdrake.pm_.c:38
+msgid "Restore from file"
+msgstr "เรียกคืนจากไฟล์"
+
+#: ../../diskdrake.pm_.c:39
+msgid "Save in file"
+msgstr "บันทึกลงไฟล์"
+
+#: ../../diskdrake.pm_.c:40
+msgid "Restore from floppy"
+msgstr "เรียกคืนจากแผ่นฟล้อปปี้"
+
+#: ../../diskdrake.pm_.c:41
+msgid "Save on floppy"
+msgstr "บันทึกลงแผ่นฟล้อปปี้"
+
+#: ../../diskdrake.pm_.c:45
 msgid "Clear all"
 msgstr "ล้างทั้งหมด"
 
-#: ../diskdrake.pm_.c:44
+#: ../../diskdrake.pm_.c:46
 msgid "Format all"
 msgstr "ฟอร์แมตทั้งหมด"
 
-#: ../diskdrake.pm_.c:45
+#: ../../diskdrake.pm_.c:47
 msgid "Auto allocate"
 msgstr "กำหนดแบบอัตโนมัติ"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid "All primary partitions are used"
 msgstr "พาร์ติชั่นแบบ primary ถูกใช้ทั้งหมดแล้ว"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid "I can't add any more partition"
 msgstr "โปรแกรมไม่สามารถเพิ่มพาร์ติชั่นได้อีก"
 
-#: ../diskdrake.pm_.c:48
+#: ../../diskdrake.pm_.c:50
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
@@ -468,138 +699,151 @@ msgstr ""
 "หากต้องการเพิ่มพาร์ติชั่น โปรดลบพาร์ติชั่นทิ้งหนึ่งพาร์ติชั่นเพื่อสร้าง\n"
 "พาร์ติชั่นแบบ extended ได้"
 
-#: ../diskdrake.pm_.c:51
+#: ../../diskdrake.pm_.c:53
 #, fuzzy
 msgid "Rescue partition table"
 msgstr "บันทึกตารางพาร์ติชั่น"
 
-#: ../diskdrake.pm_.c:52
+#: ../../diskdrake.pm_.c:54
 msgid "Undo"
 msgstr "ยกเลิก"
 
-#: ../diskdrake.pm_.c:53
+#: ../../diskdrake.pm_.c:55
 msgid "Write partition table"
 msgstr "บันทึกตารางพาร์ติชั่น"
 
-#: ../diskdrake.pm_.c:54
+#: ../../diskdrake.pm_.c:56
 msgid "Reload"
 msgstr "เรียกคืนอีกครั้ง"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:96
+msgid "loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:109
 msgid "Empty"
 msgstr "ว่าง"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Ext2"
 msgstr "Ext2"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "FAT"
 msgstr "FAT"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Other"
 msgstr "อื่นๆ"
 
-#: ../diskdrake.pm_.c:98
+#: ../../diskdrake.pm_.c:109
 msgid "Swap"
 msgstr "สวอป"
 
-#: ../diskdrake.pm_.c:104
+#: ../../diskdrake.pm_.c:115
 msgid "Filesystem types:"
 msgstr "ประเภทของระบบไฟล์:"
 
-#: ../diskdrake.pm_.c:113
+#: ../../diskdrake.pm_.c:124
 msgid "Details"
 msgstr "รายละเอียด"
 
-#: ../diskdrake.pm_.c:127
+#: ../../diskdrake.pm_.c:138
 msgid ""
-"You have one big fat partition\n"
-"(generally use by MicroSoft Dos/Windows).\n"
+"You have one big FAT partition\n"
+"(generally used by MicroSoft Dos/Windows).\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
 
-#: ../diskdrake.pm_.c:132
+#: ../../diskdrake.pm_.c:143
 msgid "Please make a backup of your data first"
 msgstr ""
 
-#: ../diskdrake.pm_.c:132 ../diskdrake.pm_.c:146 ../diskdrake.pm_.c:458
-#: ../diskdrake.pm_.c:487
+#: ../../diskdrake.pm_.c:143 ../../diskdrake.pm_.c:160
+#: ../../diskdrake.pm_.c:169 ../../diskdrake.pm_.c:517
+#: ../../diskdrake.pm_.c:546
 msgid "Read carefully!"
 msgstr "โปรดอ่านอย่างถี่ถ้วน!"
 
-#: ../diskdrake.pm_.c:146
-#, c-format
-msgid "After %s partition %s,"
-msgstr "หลังจาก %s พาร์ติชั่น %s,"
+#: ../../diskdrake.pm_.c:146
+msgid ""
+"If you plan to use aboot, be carefull to leave a free space (2048 sectors is "
+"enough)\n"
+"at the beginning of the disk"
+msgstr ""
 
-#: ../diskdrake.pm_.c:146
-msgid "all data on this partition will be lost"
-msgstr "ข้อมูลทั้งหมดในพาร์ติชั่นนี้จะถูกลบทิ้ง"
+#: ../../diskdrake.pm_.c:160
+msgid "Be careful: this operation is dangerous."
+msgstr ""
 
-#: ../diskdrake.pm_.c:165 ../install_any.pm_.c:193 ../install_steps.pm_.c:71
-#: ../install_steps_interactive.pm_.c:37 ../standalone/diskdrake_.c:60
-#: ../standalone/rpmdrake_.c:294 ../standalone/rpmdrake_.c:304
+#: ../../diskdrake.pm_.c:197 ../../install_any.pm_.c:330
+#: ../../install_steps.pm_.c:74 ../../install_steps_interactive.pm_.c:40
+#: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
+#: ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr "ผิดพลาด"
 
-#: ../diskdrake.pm_.c:189 ../diskdrake.pm_.c:610
+#: ../../diskdrake.pm_.c:221 ../../diskdrake.pm_.c:680
 msgid "Mount point: "
 msgstr "จุดเม้าท์: "
 
-#: ../diskdrake.pm_.c:190 ../diskdrake.pm_.c:228
+#: ../../diskdrake.pm_.c:222 ../../diskdrake.pm_.c:263
 msgid "Device: "
 msgstr "อุปกรณ์: "
 
-#: ../diskdrake.pm_.c:191
+#: ../../diskdrake.pm_.c:223
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "อักษรไดรว์แบบดอส: %s (เป็นการคาดเดา)\n"
 
-#: ../diskdrake.pm_.c:192 ../diskdrake.pm_.c:231
+#: ../../diskdrake.pm_.c:224 ../../diskdrake.pm_.c:266
 msgid "Type: "
 msgstr "ประเภท: "
 
-#: ../diskdrake.pm_.c:193
+#: ../../diskdrake.pm_.c:225
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "เริ่มต้น: เซ็กเตอร์ %s\n"
 
-#: ../diskdrake.pm_.c:194
+#: ../../diskdrake.pm_.c:226
 #, c-format
-msgid "Size: %s MB"
-msgstr "ขนาด: %s MB"
+msgid "Size: %d MB"
+msgstr "ขนาด: %d MB"
 
-#: ../diskdrake.pm_.c:196
+#: ../../diskdrake.pm_.c:228
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s เซ็กเตอร์"
 
-#: ../diskdrake.pm_.c:198
+#: ../../diskdrake.pm_.c:230
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr "ไซลินเดอร์ %d เป็น ไซลินเดอร์ %d\n"
 
-#: ../diskdrake.pm_.c:199
+#: ../../diskdrake.pm_.c:231
 msgid "Formatted\n"
 msgstr "ฟอร์แมต\n"
 
-#: ../diskdrake.pm_.c:200
+#: ../../diskdrake.pm_.c:232
 msgid "Not formatted\n"
 msgstr "ยังไม่ได้ฟอร์แมต\n"
 
-#: ../diskdrake.pm_.c:201
+#: ../../diskdrake.pm_.c:233
 msgid "Mounted\n"
 msgstr "เม้าท์\n"
 
-#: ../diskdrake.pm_.c:202
+#: ../../diskdrake.pm_.c:234
 #, c-format
 msgid "RAID md%s\n"
 msgstr "RAID md%s\n"
 
-#: ../diskdrake.pm_.c:203
+#: ../../diskdrake.pm_.c:235
+#, c-format
+msgid "Loopback file(s): %s\n"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:236
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -607,66 +851,80 @@ msgstr ""
 "พาร์ติชั่นที่กำหนดให้บูตซึ่งกำหนดไว้แล้ว\n"
 "    (สำหรับบูตของ MS-DOS ไม่ใช่ lilo)\n"
 
-#: ../diskdrake.pm_.c:205
+#: ../../diskdrake.pm_.c:238
 #, c-format
 msgid "Level %s\n"
 msgstr "ระดับ %s\n"
 
-#: ../diskdrake.pm_.c:206
+#: ../../diskdrake.pm_.c:239
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "ขนาดของ Chunk %s\n"
 
-#: ../diskdrake.pm_.c:207
+#: ../../diskdrake.pm_.c:240
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "ดิสก์แบบ RAID %s\n"
 
-#: ../diskdrake.pm_.c:224
+#: ../../diskdrake.pm_.c:242
+#, c-format
+msgid "Loopback file name: %s"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:259
 #, fuzzy
 msgid "Please click on a partition"
 msgstr "สร้างพาร์ติชั่นใหม่"
 
-#: ../diskdrake.pm_.c:229
+#: ../../diskdrake.pm_.c:264
 #, c-format
 msgid "Size: %d MB\n"
 msgstr "ขนาด: %d MB\n"
 
-#: ../diskdrake.pm_.c:230
+#: ../../diskdrake.pm_.c:265
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "ข้อมูลทางกายภาพ: %s ไซลินเดอร์, %s หัวอ่าน, %s เซ้กเตอร์\n"
 
-#: ../diskdrake.pm_.c:232
+#: ../../diskdrake.pm_.c:267
+#, fuzzy, c-format
+msgid "Partition table type: %s\n"
+msgstr "พาร์ติชั่นรูท"
+
+#: ../../diskdrake.pm_.c:268
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr "บนบัส %d id %d\n"
 
-#: ../diskdrake.pm_.c:245
+#: ../../diskdrake.pm_.c:281
 msgid "Mount"
 msgstr "เม้าท์"
 
-#: ../diskdrake.pm_.c:246
+#: ../../diskdrake.pm_.c:282
 msgid "Active"
 msgstr "แอ็คทีฟ"
 
-#: ../diskdrake.pm_.c:247
+#: ../../diskdrake.pm_.c:283
 msgid "Add to RAID"
 msgstr "เพิ่มให้ RAID"
 
-#: ../diskdrake.pm_.c:248
+#: ../../diskdrake.pm_.c:284
 msgid "Remove from RAID"
 msgstr "ลบออกจาก RAID"
 
-#: ../diskdrake.pm_.c:249
+#: ../../diskdrake.pm_.c:285
 msgid "Modify RAID"
 msgstr "แก้ไข RAID"
 
-#: ../diskdrake.pm_.c:256
+#: ../../diskdrake.pm_.c:286
+msgid "Use for loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:293
 msgid "Choose action"
 msgstr "เลือกกิจกรรม"
 
-#: ../diskdrake.pm_.c:349
+#: ../../diskdrake.pm_.c:386
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -678,7 +936,7 @@ msgstr ""
 "หรือคุณใช้ LILO และโปรแกรมไม่ทำงาน หรือคุณไม่ได้ใช้ LILO และคุณไม่ต้องการ "
 "/boot"
 
-#: ../diskdrake.pm_.c:353
+#: ../../diskdrake.pm_.c:390
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -690,146 +948,198 @@ msgstr ""
 "ถ้าคุณต้องการใช้ LILO เป็นบูตแมเนเจอร์ โปรดระมัดระวังในการเพิ่มพาร์ติชั่น "
 "/boot"
 
-#: ../diskdrake.pm_.c:370 ../diskdrake.pm_.c:372
+#: ../../diskdrake.pm_.c:396
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"So be careful to add a /boot partition if you want to use lilo or grub"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:413 ../../diskdrake.pm_.c:415
 #, c-format
 msgid "Use ``%s'' instead"
 msgstr ""
 
-#: ../diskdrake.pm_.c:375
+#: ../../diskdrake.pm_.c:418
 msgid "Use ``Unmount'' first"
 msgstr ""
 
-#: ../diskdrake.pm_.c:376 ../diskdrake.pm_.c:409
-msgid "changing type of"
-msgstr "เปลี่ยนประเภทของ"
+#: ../../diskdrake.pm_.c:419 ../../diskdrake.pm_.c:461
+#, fuzzy, c-format
+msgid ""
+"After changing type of partition %s, all data on this partition will be lost"
+msgstr "ข้อมูลทั้งหมดในพาร์ติชั่นนี้จะถูกลบทิ้ง"
 
-#: ../diskdrake.pm_.c:388
+#: ../../diskdrake.pm_.c:431
 msgid "Continue anyway?"
 msgstr "ทำงานต่อหรือไม่?"
 
-#: ../diskdrake.pm_.c:393
+#: ../../diskdrake.pm_.c:436
 msgid "Quit without saving"
 msgstr "ออกโดยไม่ต้องบันทึก"
 
-#: ../diskdrake.pm_.c:393
+#: ../../diskdrake.pm_.c:436
 msgid "Quit without writing the partition table?"
 msgstr "ออกโดยไม่ต้องเขียนตารางพาร์ติชั่น"
 
-#: ../diskdrake.pm_.c:412
+#: ../../diskdrake.pm_.c:464
 msgid "Change partition type"
 msgstr "เปลี่ยนประเภทพาร์ติชั่น"
 
-#: ../diskdrake.pm_.c:413
+#: ../../diskdrake.pm_.c:465
 msgid "Which partition type do you want?"
 msgstr "ประเภทของพาร์ติชั่นไหนที่คุณต้องการ"
 
-#: ../diskdrake.pm_.c:429
+#: ../../diskdrake.pm_.c:483
+#, fuzzy, c-format
+msgid "Where do you want to mount loopback file %s?"
+msgstr "คุณต้องการเม้าท์อุปกรณ์ %s ไว้ที่ใด?"
+
+#: ../../diskdrake.pm_.c:484
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "คุณต้องการเม้าท์อุปกรณ์ %s ไว้ที่ใด?"
 
-#: ../diskdrake.pm_.c:451
-msgid "formatting"
-msgstr "ฟอร์แมต"
+#: ../../diskdrake.pm_.c:489
+msgid ""
+"Can't unset mount point as this partition is used for loop back.\n"
+"Remove the loopback first"
+msgstr ""
 
-#: ../diskdrake.pm_.c:453
+#: ../../diskdrake.pm_.c:508
+#, fuzzy, c-format
+msgid "After formatting partition %s, all data on this partition will be lost"
+msgstr "ข้อมูลทั้งหมดในพาร์ติชั่นนี้จะถูกลบทิ้ง"
+
+#: ../../diskdrake.pm_.c:510
 msgid "Formatting"
 msgstr "ฟอร์แมต"
 
-#: ../diskdrake.pm_.c:453 ../install_steps_interactive.pm_.c:221
+#: ../../diskdrake.pm_.c:511
+#, fuzzy, c-format
+msgid "Formatting loopback file %s"
+msgstr "ฟอร์แมตพาร์ติชั่น %s"
+
+#: ../../diskdrake.pm_.c:512 ../../install_steps_interactive.pm_.c:253
 #, c-format
 msgid "Formatting partition %s"
 msgstr "ฟอร์แมตพาร์ติชั่น %s"
 
-#: ../diskdrake.pm_.c:458
+#: ../../diskdrake.pm_.c:517
 msgid "After formatting all partitions,"
 msgstr "หลังจากฟอร์แมตทุกพาร์ติชั่น"
 
-#: ../diskdrake.pm_.c:458
+#: ../../diskdrake.pm_.c:517
 msgid "all data on these partitions will be lost"
 msgstr "ข้อมูลทั้งหมดในพาร์ติชั่นจะถูกลบทิ้ง"
 
-#: ../diskdrake.pm_.c:468
+#: ../../diskdrake.pm_.c:527
 msgid "Move"
 msgstr "ย้าย"
 
-#: ../diskdrake.pm_.c:469
-msgid "Which disk do you want to move to?"
+#: ../../diskdrake.pm_.c:528
+msgid "Which disk do you want to move it to?"
 msgstr "คุณต้องการจะย้ายไปดิสก์ไหน"
 
-#: ../diskdrake.pm_.c:473
+#: ../../diskdrake.pm_.c:532
 msgid "Sector"
 msgstr "เซ็กเตอร์"
 
-#: ../diskdrake.pm_.c:474
-msgid "Which sector do you want to move to?"
+#: ../../diskdrake.pm_.c:533
+msgid "Which sector do you want to move it to?"
 msgstr "คุณต้องการย้ายไปเซ็กเตอร์ไหน"
 
-#: ../diskdrake.pm_.c:477
+#: ../../diskdrake.pm_.c:536
 msgid "Moving"
 msgstr "ย้าย"
 
-#: ../diskdrake.pm_.c:477
+#: ../../diskdrake.pm_.c:536
 msgid "Moving partition..."
 msgstr "ย้ายพาร์ติชั่น..."
 
-#: ../diskdrake.pm_.c:487
+#: ../../diskdrake.pm_.c:546
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "ตารางพาร์ติชั่นของไดรฟ์ %s จะถูกบันทึกลงไปในดิสก์"
 
-#: ../diskdrake.pm_.c:489
+#: ../../diskdrake.pm_.c:548
 msgid "You'll need to reboot before the modification can take place"
 msgstr "คุณจะต้องทำการรีบูตระบบก่อนที่จะทำการแก้ไข"
 
-#: ../diskdrake.pm_.c:510 ../install_steps_gtk.pm_.c:255
-msgid "Computing fat filesystem bounds"
+#: ../../diskdrake.pm_.c:569 ../../install_steps_gtk.pm_.c:208
+msgid "Computing FAT filesystem bounds"
 msgstr "คำนวณขอบเขตของระบบไฟล์"
 
-#: ../diskdrake.pm_.c:510 ../diskdrake.pm_.c:555
-#: ../install_steps_gtk.pm_.c:255
+#: ../../diskdrake.pm_.c:569 ../../diskdrake.pm_.c:618
+#: ../../install_steps_gtk.pm_.c:208
 msgid "Resizing"
 msgstr "ปรับขนาด"
 
-#: ../diskdrake.pm_.c:524
-msgid "resizing"
-msgstr "ปรับขนาด"
+#: ../../diskdrake.pm_.c:585
+#, fuzzy
+msgid "All data on this partition should be backed-up"
+msgstr "ข้อมูลทั้งหมดในพาร์ติชั่นนี้จะถูกลบทิ้ง"
 
-#: ../diskdrake.pm_.c:534
+#: ../../diskdrake.pm_.c:587
+#, fuzzy, c-format
+msgid "After resizing partition %s, all data on this partition will be lost"
+msgstr "ข้อมูลทั้งหมดในพาร์ติชั่นนี้จะถูกลบทิ้ง"
+
+#: ../../diskdrake.pm_.c:597
 msgid "Choose the new size"
 msgstr "เลือกขนาดใหม่"
 
-#: ../diskdrake.pm_.c:534 ../install_steps_graphical.pm_.c:287
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:317
-#: ../install_steps_gtk.pm_.c:361
+#: ../../diskdrake.pm_.c:597 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
 msgid "MB"
 msgstr "MB"
 
-#: ../diskdrake.pm_.c:587
+#: ../../diskdrake.pm_.c:652
 msgid "Create a new partition"
 msgstr "สร้างพาร์ติชั่นใหม่"
 
-#: ../diskdrake.pm_.c:603
+#: ../../diskdrake.pm_.c:672
 msgid "Start sector: "
 msgstr "เริ่มเซ็กเตอร์: "
 
-#: ../diskdrake.pm_.c:606
+#: ../../diskdrake.pm_.c:676 ../../diskdrake.pm_.c:750
 msgid "Size in MB: "
 msgstr "ขนาดเป็น MB: "
 
-#: ../diskdrake.pm_.c:609
+#: ../../diskdrake.pm_.c:679 ../../diskdrake.pm_.c:753
 msgid "Filesystem type: "
 msgstr "ประเภทของระบบไฟล์: "
 
-#: ../diskdrake.pm_.c:611
+#: ../../diskdrake.pm_.c:682
 msgid "Preference: "
 msgstr "ข้อกำหนด: "
 
-#: ../diskdrake.pm_.c:655 ../diskdrake.pm_.c:671
+#: ../../diskdrake.pm_.c:729 ../../install_steps.pm_.c:132
+msgid "This partition can't be used for loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:739
+msgid "Loopback"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:749
+msgid "Loopback file name: "
+msgstr ""
+
+#: ../../diskdrake.pm_.c:775
+msgid "File already used by another loopback, choose another one"
+msgstr ""
+
+#: ../../diskdrake.pm_.c:776
+#, fuzzy
+msgid "File already exists. Use it?"
+msgstr "มีข้อมูล %s อยู่แล้ว"
+
+#: ../../diskdrake.pm_.c:798 ../../diskdrake.pm_.c:814
 msgid "Select file"
 msgstr "เลือกไฟล์"
 
-#: ../diskdrake.pm_.c:664
+#: ../../diskdrake.pm_.c:807
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -837,11 +1147,11 @@ msgstr ""
 "พาร์ติชั่นแบ็คอัพไม่มีขนาดเท่ากัน\n"
 "ต้องการทำต่อหรือไม่?"
 
-#: ../diskdrake.pm_.c:672
+#: ../../diskdrake.pm_.c:815
 msgid "Warning"
 msgstr "คำเตือน"
 
-#: ../diskdrake.pm_.c:673
+#: ../../diskdrake.pm_.c:816
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -849,68 +1159,77 @@ msgstr ""
 "กรุณาใส่แผ่นฟล้อปปี้ในไดรว์\n"
 "ข้อมูลทั้งหมดบนแผ่นฟล้อปปี้จะถูกลบ"
 
-#: ../diskdrake.pm_.c:687
+#: ../../diskdrake.pm_.c:830
 msgid "Trying to rescue partition table"
 msgstr "กำลังพยายามกู้ตารางพาร์ติชั่นคืน"
 
-#: ../diskdrake.pm_.c:698
+#: ../../diskdrake.pm_.c:841
 msgid "device"
 msgstr "อุปกรณ์"
 
-#: ../diskdrake.pm_.c:699
+#: ../../diskdrake.pm_.c:842
 msgid "level"
 msgstr "ระดับ"
 
-#: ../diskdrake.pm_.c:700
+#: ../../diskdrake.pm_.c:843
 msgid "chunk size"
 msgstr "ขนาดของ chunk"
 
-#: ../diskdrake.pm_.c:712
+#: ../../diskdrake.pm_.c:855
 msgid "Choose an existing RAID to add to"
 msgstr "เลือก RAID เพื่อเพิ่มเข้าไป"
 
-#: ../diskdrake.pm_.c:713
+#: ../../diskdrake.pm_.c:856
 msgid "new"
 msgstr "ใหม่"
 
-#: ../fs.pm_.c:67 ../fs.pm_.c:73
+#: ../../fs.pm_.c:85 ../../fs.pm_.c:91 ../../fs.pm_.c:97 ../../fs.pm_.c:103
 #, c-format
 msgid "%s formatting of %s failed"
 msgstr "กำลังฟอร์แมต %s ของ %s ที่มีปัญหา"
 
-#: ../fs.pm_.c:93
-#, c-format
-msgid "don't know how to format %s in type %s"
+#: ../../fs.pm_.c:129
+#, fuzzy, c-format
+msgid "I don't know how to format %s in type %s"
 msgstr "ไม่ทราบว่าจะฟอร์แมต %s ให้เป็นประเภท %s ได้อย่างไร"
 
-#: ../fs.pm_.c:106
+#: ../../fs.pm_.c:186
 msgid "nfs mount failed"
 msgstr "การเม้าท์ระบบไฟล์ nfs ล้มเหลว"
 
-#: ../fs.pm_.c:123
+#: ../../fs.pm_.c:209
 msgid "mount failed: "
 msgstr "การเม้าท์ล้มเหลว: "
 
-#: ../fs.pm_.c:134
+#: ../../fs.pm_.c:220
 #, c-format
 msgid "error unmounting %s: %s"
 msgstr "ผิดพลาดยกเลิกการเม้าท์ %s: %s"
 
-#: ../fsedit.pm_.c:219
+#: ../../fsedit.pm_.c:250
 msgid "Mount points must begin with a leading /"
 msgstr "จุดเม้าท์จะต้องเริ่มด้วย /"
 
-#: ../fsedit.pm_.c:222
-#, c-format
-msgid "There is already a partition with mount point %s"
+#: ../../fsedit.pm_.c:253
+#, fuzzy, c-format
+msgid "There is already a partition with mount point %s\n"
 msgstr "มีพาร์ติชั่นที่เป็นจุดเม้าท์ที่ %s เรียบร้อยแล้ว"
 
-#: ../fsedit.pm_.c:306
+#: ../../fsedit.pm_.c:261
+#, c-format
+msgid "Circular mounts %s\n"
+msgstr ""
+
+#: ../../fsedit.pm_.c:273
+msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
+msgstr ""
+
+#: ../../fsedit.pm_.c:355
 #, c-format
 msgid "Error opening %s for writing: %s"
 msgstr "เกิดข้อผิดพลาดในการเปิด %s สำหรับการเขียน: %s"
 
-#: ../fsedit.pm_.c:388
+#: ../../fsedit.pm_.c:437
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -918,74 +1237,135 @@ msgstr ""
 "เกิดข้อผิดพลาดขึ้น - ไม่พบอุปกรณ์ที่ถูกต้องเพื่อจะสร้างระบบไฟล์ใหม่ "
 "โปรดตรวจสอบฮาร์ดแวร์ของท่านเพื่อแก้ไขปัญหานี้"
 
-#: ../fsedit.pm_.c:403
+#: ../../fsedit.pm_.c:452
 msgid "You don't have any partitions!"
 msgstr "คุณยังไม่ได้แบ่งพาร์ติชั่น!"
 
-#: ../help.pm_.c:7
+#: ../../help.pm_.c:7
 msgid "Choose preferred language for install and system usage."
 msgstr "เลือกภาษาที่ต้องการในการติดตั้งและใช้งานของระบบ"
 
-#: ../help.pm_.c:10
+#: ../../help.pm_.c:10
 msgid "Choose the layout corresponding to your keyboard from the list above"
 msgstr "เลือกรูปแบบของคีย์บอร์ดตามรายการข้างต้น"
 
-#: ../help.pm_.c:13
+#: ../../help.pm_.c:13
 msgid ""
 "Choose \"Install\" if there are no previous versions of Linux\n"
 "installed, or if you wish to use multiple distributions or versions.\n"
 "\n"
+"Choose \"Upgrade\" if you wish to update a previous version of Mandrake "
+"Linux:\n"
+"5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold "
+"2000\n"
+"or 7.0 (Air).\n"
 "\n"
-"Choose \"Upgrade\" if you wish to update a previous version of Mandrake\n"
-"Linux: 5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1\n"
-"(Helios) or Gold 2000."
+"\n"
+"Select:\n"
+"\n"
+"  - Automated (recommended): If you have never installed Linux before, "
+"choose this. NOTE:\n"
+"    networking will not be configured during installation, use "
+"\"LinuxConf\"\n"
+"    to configure it after the install completes.\n"
+"\n"
+"  - Customized: If you are familiar enough with GNU/Linux, you may then "
+"choose\n"
+"    the primary usage for your machine. See below for details.\n"
+"\n"
+"  - Expert: This supposes that you are fluent with GNU/Linux and want to\n"
+"    perform a highly customized installation. As for a \"Customized\"\n"
+"    installation class, you will be able to select the usage for your "
+"system.\n"
+"    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE "
+"DOING!\n"
 msgstr ""
 "เลือก \"ติดตั้ง\" ถ้าหากคุณไม่ได้ติดตั้งลีนุกซ์เวอร์ชั่นเดิม\n"
 "หรือต้องการติดตั้งหลายดิสตริบิวชั่น (หรือหลายเวอร์ชั่น)\n"
 "\n"
-"\n"
 "เลือก \"อัพเกรด\" ถ้าคุณต้องการอัพเดตเวอร์ชั่นของแมนเดรกลีนุกซ์:\n"
 "5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen), 6.0 (Venus),\n"
-"6.1 (Helios) หรือ Gold 2000."
+"6.1 (Helios), Gold 2000 หรือ 7.0 (Air).\n"
+"\n"
+"เลือก:\n"
+"\n"
+" - Automated (แบบแนะนำ): (ข้อเลือกแนะนำ) ถ้าคุณไม่เคยติดตั้งลีนุกซ์มาก่อน\n"
+"\n"
+" - แบบปรับแก้ได้: ข้อเลือกที่แก้ไขได้X ถ้าคุณคุ้นเคยกับลีนุกซ์ดีอยู่แล้ว\n"
+"   คุณอาจต้องการเลือกการติดตั้งระบบระหว่างระบบทั่วไป, "
+"ระบบสำหรับพัฒนาซอฟท์แวร์\n"
+"   หรือแบบเซิร์ฟเวอร์ ให้เลือก \"ปกติ\" สำหรับติดตั้งตามปกติลงในคอมพิวเตอร์\n"
+"   คุณอาจเลือก \"พัฒนาซอฟท์แวร์\" "
+"ถ้าคุณต้องการให้คอมพิวเตอร์ของคุณสำหรับการทำงาน\n"
+"   แบบการพัฒนาซอฟท์แวร์ หรือเลือก \"เซิรฟ์เวอร์\" ถ้าคุณต้องการ\n"
+"   ติดตั้งซอฟท์แวร์สำหรับเซิร์ฟเวอร์ทั่วๆไป (เช่นเมลล์ การพิมพ์...)\n"
+"\n"
+" - แบบผู้เชี่ยวชา: (สำหรับผู้ชำนาญแล้ว) ถ้าคุณใช้งาน GNU/Linux "
+"ได้อย่างคล่องแคล่ว\n"
+"   และต้องการติดตั้งแบบเลือกด้วยตนเอง การติดตั้งแบบนี้จะเหมาะสมที่สุด\n"
+"   คุณยังสามารถจะเลือกใช้งานระบบที่คุณติดตั้งแบบ \"แบบปรับแก้ได้\"ได้ด้วย\n"
 
-#: ../help.pm_.c:22
+#: ../../help.pm_.c:37
 msgid ""
 "Select:\n"
 "\n"
-"  - Recommended: If you have never installed Linux before.\n"
+"  - Customized: If you are familiar enough with GNU/Linux, you may then "
+"choose\n"
+"    the primary usage for your machine. See below for details.\n"
 "\n"
-"\n"
-"  - Customized: If you are familiar with Linux, you will be able to \n"
-"select the usage for the installed system between normal, development or\n"
-"server. Choose \"Normal\" for a general purpose installation of your\n"
-"computer. You may choose \"Development\" if you will be using the computer\n"
-"primarily for software development, or choose \"Server\" if you wish to\n"
-"install a general purpose server (for mail, printing...).\n"
-"\n"
-"\n"
-"  - Expert: If you are fluent with GNU/Linux and want to perform\n"
-"a highly customized installation, this Install Class is for you. You will\n"
-"be able to select the usage of your installed system as for \"Customized\"."
+"  - Expert: This supposes that you are fluent with GNU/Linux and want to\n"
+"    perform a highly customized installation. As for a \"Customized\"\n"
+"    installation class, you will be able to select the usage for your "
+"system.\n"
+"    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE "
+"DOING!\n"
 msgstr ""
 "เลือก:\n"
 "\n"
-" - Recommended: (ข้อเลือกแนะนำ) ถ้าคุณไม่เคยติดตั้งลีนุกซ์มาก่อน\n"
 "\n"
-"\n"
-" - Customized: (ข้อเลือกที่แก้ไขได้X ถ้าคุณคุ้นเคยกับลีนุกซ์ดีอยู่แล้ว\n"
-"คุณอาจต้องการเลือกการติดตั้งระบบระหว่างระบบทั่วไป, ระบบสำหรับพัฒนาซอฟท์แวร์\n"
-"หรือแบบเซิร์ฟเวอร์ ให้เลือก \"ปกติ\" สำหรับติดตั้งตามปกติลงในคอมพิวเตอร์\n"
-"คุณอาจเลือก \"พัฒนาซอฟท์แวร์\" "
+" - แบบปรับแก้ได้: ข้อเลือกที่แก้ไขได้X ถ้าคุณคุ้นเคยกับลีนุกซ์ดีอยู่แล้ว\n"
+"   คุณอาจต้องการเลือกการติดตั้งระบบระหว่างระบบทั่วไป, "
+"ระบบสำหรับพัฒนาซอฟท์แวร์\n"
+"   หรือแบบเซิร์ฟเวอร์ ให้เลือก \"ปกติ\" สำหรับติดตั้งตามปกติลงในคอมพิวเตอร์\n"
+"   คุณอาจเลือก \"พัฒนาซอฟท์แวร์\" "
 "ถ้าคุณต้องการให้คอมพิวเตอร์ของคุณสำหรับการทำงาน\n"
-"แบบการพัฒนาซอฟท์แวร์ หรือเลือก \"เซิรฟ์เวอร์\" ถ้าคุณต้องการ\n"
-"ติดตั้งซอฟท์แวร์สำหรับเซิร์ฟเวอร์ทั่วๆไป (เช่นเมลล์ การพิมพ์...)\n"
+"   แบบการพัฒนาซอฟท์แวร์ หรือเลือก \"เซิรฟ์เวอร์\" ถ้าคุณต้องการ\n"
+"   ติดตั้งซอฟท์แวร์สำหรับเซิร์ฟเวอร์ทั่วๆไป (เช่นเมลล์ การพิมพ์...)\n"
 "\n"
 "\n"
-" - Expert: (สำหรับผู้ชำนาญแล้ว) ถ้าคุณใช้งาน GNU/Linux ได้อย่างคล่องแคล่ว\n"
-"และต้องการติดตั้งแบบเลือกด้วยตนเอง การติดตั้งแบบนี้จะเหมาะสมที่สุด\n"
-"คุณยังสามารถจะเลือกใช้งานระบบที่คุณติดตั้งแบบ \"แบบปรับแก้ได้\"ได้ด้วย"
+" - แบบผู้เชี่ยวชา: (สำหรับผู้ชำนาญแล้ว) ถ้าคุณใช้งาน GNU/Linux "
+"ได้อย่างคล่องแคล่ว\n"
+"   และต้องการติดตั้งแบบเลือกด้วยตนเอง การติดตั้งแบบนี้จะเหมาะสมที่สุด\n"
+"   คุณยังสามารถจะเลือกใช้งานระบบที่คุณติดตั้งแบบ \"แบบปรับแก้ได้\"ได้ด้วย\n"
 
-#: ../help.pm_.c:40
+#: ../../help.pm_.c:49
+msgid ""
+"The different choices for your machine's usage (provided, hence, that you "
+"have\n"
+"chosen either \"Custom\" or \"Expert\" as an installation class) are the\n"
+"following:\n"
+"\n"
+"  - Normal: choose this if you intend to use your machine primarily for\n"
+"    everyday use (office work, graphics manipulation and so on). Do not\n"
+"    expect any compiler, development utility et al. installed.\n"
+"\n"
+"  - Development: as its name says. Choose this if you intend to use your\n"
+"    machine primarily for software development. You will then have a "
+"complete\n"
+"    collection of software installed in order to compile, debug and format\n"
+"    source code, or create software packages.\n"
+"\n"
+"  - Server: choose this if the machine which you're installing "
+"Linux-Mandrake\n"
+"    on is intended to be used as a server. Either a file server (NFS or "
+"SMB),\n"
+"    a print server (Unix' lp (Line Printer) protocol or Windows style SMB\n"
+"    printing), an authentication server (NIS), a database server and so on. "
+"As\n"
+"    such, do not expect any gimmicks (KDE, GNOME...) to be installed.\n"
+msgstr ""
+
+#: ../../help.pm_.c:70
 msgid ""
 "DrakX will attempt at first to look for one or more PCI\n"
 "SCSI adapter(s). If it finds it (or them)  and knows which driver(s)\n"
@@ -1029,7 +1409,8 @@ msgstr ""
 "ในคู่มือติดตั้งและแนะนำการใช้งานเบื้องต้น ต่อไปนี้เป็น option ที่คุณ\n"
 "จะต้องใส่ให้กับไดรเวอร์"
 
-#: ../help.pm_.c:64
+#: ../../help.pm_.c:94
+#, fuzzy
 msgid ""
 "At this point, you may choose what partition(s) to use to install\n"
 "your Linux-Mandrake system if they have been already defined (from a\n"
@@ -1054,8 +1435,19 @@ msgid ""
 "\n"
 "Because the effects of this process are usually irreversible, partitioning\n"
 "can be intimidating and stressful to the unexperienced user. DiskDrake\n"
-"simplifies the process so that it need not be. Consult the documentation\n"
-"and take your time before proceeding."
+"simplifies the process so that it must not be. Consult the documentation\n"
+"and take your time before proceeding.\n"
+"\n"
+"\n"
+"You can reach any option using the keyboard: navigate through the "
+"partitions\n"
+"using Tab and Up/Down arrows. When a partition is selected, you can use:\n"
+"\n"
+"- Ctrl-c  to create a new partition (when an empty partition is selected)\n"
+"\n"
+"- Ctrl-d  to delete a partition\n"
+"\n"
+"- Ctrl-m  to set the mount point\n"
 msgstr ""
 "ตอนนี้คุณสามารถเลือกพาร์ติชั่นที่จะทำการติดตั้ง Linux-Mandrake ซึ่งต้อง\n"
 "เป็นพาร์ติชั่นที่คุณได้กำหนดไว้แล้ว (จากการติดตั้งลีนุกซ์มาก่อน หรือ\n"
@@ -1082,7 +1474,7 @@ msgstr ""
 "การทำความเข้าใจ คุณสามารถใช้ DiskDrake ในการช่วยทำการแบ่งพาร์ติชั่น\n"
 "โปรดศึกษาคู่มือและทำความเข้าใจก่อนใช้งาน"
 
-#: ../help.pm_.c:90
+#: ../../help.pm_.c:131
 msgid ""
 "Any partitions that have been newly defined must be formatted for\n"
 "use (formatting meaning creating a filesystem). At this time, you may\n"
@@ -1100,39 +1492,30 @@ msgstr ""
 "เพราะบางพาร์ติชั่นอาจบรรจุข้อมูลที่คุณต้องการใช้งานภายหลัง อย่างเช่น\n"
 "พาร์ติชั่นที่เก็บข้อมูลของไดเร็กทอรี /home และ /usr/local เป็นต้น"
 
-#: ../help.pm_.c:98
+#: ../../help.pm_.c:139
 msgid ""
-"You may now select the packages you wish to install.\n"
+"You may now select the group of packages you wish to\n"
+"install or upgrade.\n"
 "\n"
-"\n"
-"First you can select group of package to install or upgrade. After that\n"
-"you can select more packages according to the total size you wish to\n"
-"select.\n"
-"\n"
-"\n"
-"If you are in expert mode, you can select packages individually.\n"
-"Please note that some packages require the installation of others.\n"
-"These are referred to as package dependencies. The packages you select,\n"
-"and the packages they require will be automatically selected for\n"
-"install. It is impossible to install a package without installing all\n"
-"of its dependencies."
+"DrakX will then check whether you have enough room to install them all. If "
+"not,\n"
+"it will warn you about it. If you want to go on anyway, it will proceed "
+"onto\n"
+"the installation of all selected groups but will drop some packages of "
+"lesser\n"
+"interest. At the bottom of the list you can select the option\n"
+"\"Individual package selection\"; in this case you will have to browse\n"
+"through more than 1000 packages..."
 msgstr ""
-"ตอนนี้คุณสามารถเลือกแพ็คเก็จที่คุณต้องการติดตั้งได้\n"
-"\n"
-"\n"
-"ก่อนอื่นคุณสามารถเลือกขนาดของระบบที่ต้องการติดตั้ง และโปรแกรมจะทำการเลือก\n"
-"แพ็คเก็จแบบอัตโนมัติโดยดูจากขนาดที่คุณเลือก หลังจากนั้นคุณสามารถเลือก\n"
-"แพ็คเก็จเพิ่มเติมตามกลุ่ม หรือคลิ้ก Ok เพื่อใช้ตัวเลือกที่กำหนดไว้แล้ว\n"
-"\n"
-"\n"
-"ถ้าคุณอยู่ในโหมดผู้เชี่ยวชาญ (expert mode) คุณสามารถเลือกแพ็คเก็จ\n"
-"โดยระบุตัวแพ็คเก็จ โปรดทราบด้วยว่าแพ็คเก็จบางตัวอาจต้องการให้มีการติดตั้ง\n"
-"แพ็คเก็จตัวอื่นๆลงไปก่อน (หรือเรียกว่า dependencies) "
-"ทั้งแพ็คเก็จที่คุณเลือก\n"
-"และแพ็คเก็จที่ต้องติดตั้งลงไปด้วยจะถูกโปรแกรมติดตั้งโดยอัตโนมัติ เราไม่\n"
-"สามารถติดตั้งแพ็คเก็จลงไปโดยไม่ติดตั้งแพ็คเก็จที่ต้องการได้"
 
-#: ../help.pm_.c:114
+#: ../../help.pm_.c:150
+msgid ""
+"If you have all the CDs in the list above, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
+msgstr ""
+
+#: ../../help.pm_.c:155
 msgid ""
 "The packages selected are now being installed. This operation\n"
 "should take a few minutes unless you have chosen to upgrade an\n"
@@ -1143,7 +1526,7 @@ msgstr ""
 "เวลาไม่นาน ถ้าหากคุณไม่ได้เลือกอัพเกรดระบบซึ่งวิธีการนี้จะต้องใช้\n"
 "เวลาพอสมควร ก่อนการติดตั้งจะเริ่มต้นขึ้น"
 
-#: ../help.pm_.c:120
+#: ../../help.pm_.c:161
 msgid ""
 "If DrakX failed to find your mouse, or if you want to\n"
 "check what it has done, you will be presented the list of mice\n"
@@ -1171,13 +1554,13 @@ msgstr ""
 "ในกรณีที่เป็นเม้าส์แบบซีเรียล (พอร์ตอนุกรม) คุณจะต้องบอกโปรแกรม\n"
 "ว่าเม้าส์ของคุณต่อเข้ากับพอร์ตใด"
 
-#: ../help.pm_.c:135
+#: ../../help.pm_.c:176
 msgid ""
-"Please select the correct port. For example, the COM1 port in MS Windows\n"
-"is named ttyS0 in Linux."
+"Please select the correct port. For example, the COM1 port under MS Windows\n"
+"is named ttyS0 under Linux."
 msgstr ""
 
-#: ../help.pm_.c:139
+#: ../../help.pm_.c:180
 #, fuzzy
 msgid ""
 "This section is dedicated to configuring a local area\n"
@@ -1235,7 +1618,7 @@ msgstr ""
 "อินเทอร์เน็ตด้วยโมเด็มให้คุณ DrakX จะลองค้นหาโมเด็ม หากโปรแกรมหาไม่พบ\n"
 "คุณจะต้องช่วยโปรแกรมโดยเลือกพอร์ตอนุกรมที่ต่อกับโมเด็มอยู่"
 
-#: ../help.pm_.c:169
+#: ../../help.pm_.c:210
 msgid ""
 "Enter:\n"
 "\n"
@@ -1252,19 +1635,19 @@ msgid ""
 "not sure, ask your network administrator or ISP.\n"
 msgstr ""
 
-#: ../help.pm_.c:184
+#: ../../help.pm_.c:225
 msgid ""
 "You may now enter dialup options. If you're not sure what to enter, the\n"
 "correct information can be obtained from your ISP."
 msgstr ""
 
-#: ../help.pm_.c:188
+#: ../../help.pm_.c:229
 msgid ""
 "If you will use proxies, please configure them now. If you don't know if\n"
-"you will use proxies, ask your network administrator or your ISP."
+"you should use proxies, ask your network administrator or your ISP."
 msgstr ""
 
-#: ../help.pm_.c:192
+#: ../../help.pm_.c:233
 msgid ""
 "You can install cryptographic package if your internet connection has been\n"
 "set up correctly. First choose a mirror where you wish to download packages "
@@ -1275,32 +1658,45 @@ msgid ""
 "to your legislation."
 msgstr ""
 
-#: ../help.pm_.c:200
+#: ../../help.pm_.c:241
 msgid ""
 "You can now select your timezone according to where you live.\n"
 "\n"
 "\n"
-"Linux manages time in GMT or \"Greenwich Meridian Time\" and translates it\n"
+"Linux manages time in GMT or \"Greenwich Mean Time\" and translates it\n"
 "in local time according to the time zone you have selected."
 msgstr ""
 "ตอนนี้คุณสามารถกำหนดย่านเวลาตามถิ่นที่อยู่อาศัยของคุณ\n"
 "\n"
 "\n"
-"ลีีนุกซ์จะจัดการระบบเวลาเป็น GMT หรือ \"Greenwich Meridian Time\" "
-"และแปลงค่า\n"
+"ลีีนุกซ์จะจัดการระบบเวลาเป็น GMT หรือ \"Greenwich Mean Time\" และแปลงค่า\n"
 "เวลาให้เป็นเวลาท้องถิ่น ซึ่งจะขึ้นอยู่กับย่านเวลาที่คุณได้เลือกเอาไว้"
 
-#: ../help.pm_.c:207
-msgid "Help"
-msgstr "ข้อความช่วยเหลือ"
+#: ../../help.pm_.c:248
+msgid ""
+"You may now choose which services you want to see started at boot time.\n"
+"When your mouse comes over an item, a small balloon help will popup which\n"
+"describes the role of the service.\n"
+"\n"
+"Be especially careful in this step if you intend to use your machine as a\n"
+"server: you will probably want not to start any services which you don't\n"
+"want."
+msgstr ""
 
-#: ../help.pm_.c:210
+#: ../../help.pm_.c:257
+#, fuzzy
 msgid ""
 "Linux can deal with many types of printer. Each of these\n"
-"types require a different setup.\n"
+"types require a different setup. Note however that the print\n"
+"spooler uses 'lp' as the default printer name; so you\n"
+"must have one printer with such a name; but you can give\n"
+"several names, separated by '|' characters, to a printer.\n"
+"So, if you prefer to have a more meaningful name you just have\n"
+"to put it first, eg: \"My Printer|lp\".\n"
+"The printer having \"lp\" in its name(s) will be the default printer.\n"
 "\n"
 "\n"
-"If your printer is directly connected to your computer, select\n"
+"If your printer is physically connected to your computer, select\n"
 "\"Local printer\". You will then have to tell which port your\n"
 "printer is connected to, and select the appropriate filter.\n"
 "\n"
@@ -1340,7 +1736,7 @@ msgstr ""
 "สำหรับเครื่องพิมพ์ในระบบเน็ตแวร์จะต้องทำตามวิธีการเดียว\n"
 "กันนี้ด้วย ยกเว้นว่าคุณไม่ต้องการข้อมูลของเวิร์กกรุ๊ป"
 
-#: ../help.pm_.c:233
+#: ../../help.pm_.c:286
 msgid ""
 "You can now enter the root password for your Linux-Mandrake\n"
 "system. The password must be entered twice to verify that both\n"
@@ -1353,7 +1749,7 @@ msgid ""
 "be extremely dangerous to the integrity of the system and its data,\n"
 "and other systems connected to it. The password should be a\n"
 "mixture of alphanumeric characters and a least 8 characters long. It\n"
-"should *never* be written down. Do not make the password too long or\n"
+"should NEVER be written down. Do not make the password too long or\n"
 "complicated, though: you must be able to remember without too much\n"
 "effort."
 msgstr ""
@@ -1370,19 +1766,19 @@ msgstr ""
 "คุณ *ไม่ควร* จดรหัสผ่านของคุณไว้ อย่ากำหนดให้รหัสผ่านยาวหรือซับซ้อนเกินไป\n"
 "และอย่ากำหนดให้รหัสผ่านยากและซับซ้อนเกินกว่าคุณจะจำได้ด้วย"
 
-#: ../help.pm_.c:249
+#: ../../help.pm_.c:302
 msgid ""
 "To enable a more secure system, you should select \"Use shadow file\" and\n"
 "\"Use MD5 passwords\"."
 msgstr ""
 
-#: ../help.pm_.c:253
+#: ../../help.pm_.c:306
 msgid ""
 "If your network uses NIS, select \"Use NIS\". If you don't know, ask your\n"
 "network administrator."
 msgstr ""
 
-#: ../help.pm_.c:257
+#: ../../help.pm_.c:310
 #, fuzzy
 msgid ""
 "You may now create one or more \"regular\" user account(s), as\n"
@@ -1428,7 +1824,7 @@ msgstr ""
 "ซึ่งคุณได้สร้างไว้ในขั้นตอนนี้ และเข้าล็อกอินใช้งานในฐานะรูทเฉพาะเมื่อมีจุด\n"
 "ประสงค์ในการบริหารระบบ และทำการซ่อมบำรุงเท่านั้น"
 
-#: ../help.pm_.c:276
+#: ../../help.pm_.c:329
 #, fuzzy
 msgid ""
 "It is strongly recommended that you answer \"Yes\" here. If you install\n"
@@ -1441,7 +1837,7 @@ msgstr ""
 "ไม่ได้ทำการสร้างแผ่นบูตไว้ตามที่มีการแนะนำ คุณจะไม่สามารถบูตเข้าระบบลีนุกซ์\n"
 "ได้อีกเลย!"
 
-#: ../help.pm_.c:282
+#: ../../help.pm_.c:335
 msgid ""
 "You need to indicate where you wish\n"
 "to place the information required to boot to Linux.\n"
@@ -1456,46 +1852,32 @@ msgstr ""
 "\n"
 "ถ้าคุณไม่ทราบว่าคุณจะต้องทำอย่างไร โปรดเลือก \"เซ็กเตอร์แรกของไดรว์ (MBR)\"."
 
-#: ../help.pm_.c:290
+#: ../../help.pm_.c:343
 msgid ""
 "Unless you know specifically otherwise, the usual choice is \"/dev/hda\"\n"
-"(the master drive on the primary channel)."
+" (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."
 msgstr ""
 
-#: ../help.pm_.c:294
+#: ../../help.pm_.c:347
 msgid ""
-"LILO (the LInux LOader) can boot Linux and other operating systems.\n"
-"Normally they are correctly detected during installation. If you don't\n"
-"see yours detected, you can add one or more now.\n"
+"LILO (the LInux LOader) and Grub are bootloaders: they are able to boot\n"
+"either Linux or any other operating system present on your computer.\n"
+"Normally, these other operating systems are correctly detected and\n"
+"installed. If this is not the case, you can add an entry by hand in this\n"
+"screen. Be careful as to choose the correct parameters.\n"
 "\n"
 "\n"
-"If you don't want that everybody could access at one of them, you can "
-"remove\n"
-"it now (a boot disk will be needed to boot it)."
+"You may also want not to give access to these other operating systems to\n"
+"anyone, in which case you can delete the corresponding entries. But\n"
+"in this case, you will need a boot disk in order to boot them!"
 msgstr ""
 
-#: ../help.pm_.c:303
+#: ../../help.pm_.c:359
 msgid ""
-"LILO main options are:\n"
+"LILO and grub main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
 "partition) that contains the boot sector. Unless you know specifically\n"
 "otherwise, choose \"/dev/hda\".\n"
-"\n"
-"\n"
-"  - Linear: Generate linear sector addresses instead of\n"
-"sector/head/cylinder addresses. Linear addresses are translated at run\n"
-"time and do not depend on disk geometry. Note that boot disks may not be\n"
-"portable if \"linear\" is used, because the BIOS service to determine the\n"
-"disk geometry does not work reliably for floppy  disks. When using\n"
-"\"linear\" with large disks, /sbin/lilo may generate references to\n"
-"inaccessible disk areas, because 3D sector addresses are not known\n"
-"before boot time.\n"
-"\n"
-"\n"
-"  - Compact: Tries to merge read requests for adjacent sectors into a\n"
-"single read request. This drastically reduces load time and keeps the\n"
-"map smaller. Using \"compact\" is especially recommended when booting from\n"
-"a floppy disk.\n"
 "\n"
 "\n"
 "  - Delay before booting default image: Specifies the number in tenths\n"
@@ -1511,7 +1893,7 @@ msgid ""
 "    * <number>:  use the corresponding text mode."
 msgstr ""
 
-#: ../help.pm_.c:338
+#: ../../help.pm_.c:378
 msgid ""
 "Now it's time to configure the X Window System, which is the\n"
 "core of the Linux GUI (Graphical User Interface). For this purpose,\n"
@@ -1535,49 +1917,57 @@ msgstr ""
 "เพื่อให้คุณสามารถตรวจและทราบได้ว่าการเซ็ตนั้นสามารถใช้งานได้ หากไม่สามารถ\n"
 "ทำงานได้ คุณสามารถกลับไปแก้ไขการเซ็ตอัพได้ตลอดเวลา"
 
-#: ../help.pm_.c:351
+#: ../../help.pm_.c:391
 msgid ""
 "If something is wrong in X configuration, use these options to correctly\n"
 "configure the X Window System."
 msgstr ""
 
-#: ../help.pm_.c:355
+#: ../../help.pm_.c:395
 msgid ""
 "If you prefer to use a graphical login, select \"Yes\". Otherwise, select\n"
 "\"No\"."
 msgstr ""
 
-#: ../help.pm_.c:359
+#: ../../help.pm_.c:399
 msgid ""
-"You can now select some miscellaneous options for you system.\n"
+"You can now select some miscellaneous options for your system.\n"
 "\n"
-"  - Use hard drive optimizations: This option can improve hard disk\n"
-"accesses but is only for advanced users, it can ruin your hard drive if\n"
-"used incorrectly. Use it only if you know how.\n"
+"  - Use hard drive optimizations: this option can improve hard disk "
+"performance\n"
+"    but is only for advanced users: some buggy chipsets can ruin your data, "
+"so\n"
+"    beware. Note that the kernel has a builtin blacklist of drives and\n"
+"    chipsets, but if you want to avoid bad surprises, leave this option "
+"unset.\n"
 "\n"
+"  - Choose security level: you can choose a security level for your\n"
+"    system. Please refer to the manual for complete information. Basically: "
+"if\n"
+"    you don't know, select \"Medium\" ; if you really want to have a secure\n"
+"    machine, choose \"Paranoid\" but beware: IN THIS LEVEL, ROOT LOGIN AT\n"
+"    CONSOLE IS NOT ALLOWED! If you want to be root, you have to login as a "
+"user\n"
+"    and then use \"su\". More generally, do not expect to use your machine\n"
+"    for anything but as a server. You have been warned.\n"
 "\n"
-"  - Choose security level: You can choose a security level for your\n"
-"system.\n"
-"    Please refer to the manual for more information.\n"
+"  - Precise RAM size if needed: unfortunately, in today's PC world, there is "
+"no\n"
+"    standard method to ask the BIOS about the amount of RAM present in your\n"
+"    computer. As a consequence, Linux may fail to detect your amount of RAM\n"
+"    correctly. If this is the case, you can specify the correct amount of "
+"RAM\n"
+"    here. Note that a difference of 2 or 4 MB is normal.\n"
 "\n"
+"  - Removable media automounting: if you would prefer not to manually\n"
+"    mount removable media (CD-ROM, Floppy, Zip) by typing \"mount\" and\n"
+"    \"umount\", select this option. \n"
 "\n"
-"  - Precise RAM size if needed: In some cases, Linux is unable to\n"
-"correctly detect all the installed RAM on  some systems. If this is the\n"
-"case, specify the correct quantity. Note: a difference of 2 or 4 Mb is\n"
-"normal.\n"
-"\n"
-"\n"
-"  - Removable media automounting: If you would prefer not to manually\n"
-"mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount\" and\n"
-"\"umount\", select this option. \n"
-"\n"
-"\n"
-"  - Enable Num Lock at startup: If you want Number Lock enabled after\n"
-"booting, select this option (Note: Num Lock will still not work under\n"
-"X)."
+"  - Enable NumLock at startup: if you want NumLock enabled after booting,\n"
+"    select this option (Note: NumLock may or may not work under X)."
 msgstr ""
 
-#: ../help.pm_.c:387
+#: ../../help.pm_.c:428
 msgid ""
 "Your system is going to reboot.\n"
 "\n"
@@ -1586,119 +1976,105 @@ msgid ""
 "the additional instructions."
 msgstr ""
 
-#: ../install2.pm_.c:43
+#: ../../install2.pm_.c:43
 msgid "Choose your language"
 msgstr "เลือกภาษาที่คุณใช้"
 
-#: ../install2.pm_.c:44
+#: ../../install2.pm_.c:44
 msgid "Select installation class"
 msgstr "เลือกชุดการติดตั้ง"
 
-#: ../install2.pm_.c:45
-msgid "Setup SCSI"
-msgstr "เซ็ตอัพ SCSI"
+#: ../../install2.pm_.c:45
+#, fuzzy
+msgid "Hard drive detection"
+msgstr "ใช้วิธีการบีบอัดฮาร์ดไดรว์ (optimisations) หรือไม่?"
 
-#: ../install2.pm_.c:46
-msgid "Choose install or upgrade"
-msgstr "เลือกติดตั้ง/อัพเกรด"
-
-#: ../install2.pm_.c:47
+#: ../../install2.pm_.c:46
 msgid "Configure mouse"
 msgstr "คอนฟิกเม้าส์"
 
-#: ../install2.pm_.c:48
+#: ../../install2.pm_.c:47
 msgid "Choose your keyboard"
 msgstr "เลือกคีย์บอร์ด"
 
-#: ../install2.pm_.c:49
+#: ../../install2.pm_.c:48 ../../install_steps_interactive.pm_.c:318
 msgid "Miscellaneous"
 msgstr "ทั่วๆไป"
 
-#: ../install2.pm_.c:50
+#: ../../install2.pm_.c:49
 msgid "Setup filesystems"
 msgstr "เซ็ตอัพระบบไฟล์"
 
-#: ../install2.pm_.c:51
+#: ../../install2.pm_.c:50
 msgid "Format partitions"
 msgstr "ฟอร์แมตพาร์ติชั่น"
 
-#: ../install2.pm_.c:52
+#: ../../install2.pm_.c:51
 msgid "Choose packages to install"
 msgstr "เลือกแพ็คเก็จ"
 
-#: ../install2.pm_.c:53
+#: ../../install2.pm_.c:52
 msgid "Install system"
 msgstr "ติดตั้งระบบ"
 
-#: ../install2.pm_.c:54
+#: ../../install2.pm_.c:53
 msgid "Configure networking"
 msgstr "คอนฟิกระบบเน็ตเวิร์ก"
 
-#: ../install2.pm_.c:55
+#: ../../install2.pm_.c:54
 msgid "Cryptographic"
 msgstr "ระบบเข้ารหัส"
 
-#: ../install2.pm_.c:56
+#: ../../install2.pm_.c:55
 msgid "Configure timezone"
 msgstr "คอนฟิกย่านเวลา"
 
-#: ../install2.pm_.c:58
+#: ../../install2.pm_.c:56
+#, fuzzy
+msgid "Configure services"
+msgstr "คอนฟิกเครื่องพิมพ์"
+
+#: ../../install2.pm_.c:57
 msgid "Configure printer"
 msgstr "คอนฟิกเครื่องพิมพ์"
 
-#: ../install2.pm_.c:59 ../install_steps_interactive.pm_.c:576
-#: ../install_steps_interactive.pm_.c:577
+#: ../../install2.pm_.c:58 ../../install_steps_interactive.pm_.c:652
+#: ../../install_steps_interactive.pm_.c:653
 msgid "Set root password"
 msgstr "เซ็ตรหัสผ่านรูท"
 
-#: ../install2.pm_.c:60
+#: ../../install2.pm_.c:59
 msgid "Add a user"
 msgstr "เพิ่มผู้ใช้"
 
-#: ../install2.pm_.c:61
+#: ../../install2.pm_.c:61
 msgid "Create a bootdisk"
 msgstr "สร้างแผ่นบูต"
 
-#: ../install2.pm_.c:62
+#: ../../install2.pm_.c:63
 msgid "Install bootloader"
 msgstr "ติดตั้งบูตโหลดเดอร์"
 
-#: ../install2.pm_.c:63
+#: ../../install2.pm_.c:64
 msgid "Configure X"
 msgstr "คอนฟิกระบบ X"
 
-#: ../install2.pm_.c:64
+#: ../../install2.pm_.c:65
+msgid "Auto install floppy"
+msgstr ""
+
+#: ../../install2.pm_.c:66
 msgid "Exit install"
 msgstr "ออกจากการติดตั้ง"
 
-#: ../install2.pm_.c:83
-msgid "beginner"
-msgstr "beginner (เริ่มต้น)"
-
-#: ../install2.pm_.c:83
-msgid "developer"
-msgstr "developer (นักพัฒนา)"
-
-#: ../install2.pm_.c:83
-msgid "expert"
-msgstr "export (ผู้เชี่ยวชาญ)"
-
-#: ../install2.pm_.c:83
-msgid "server"
-msgstr "server (เซิร์ฟเวอร์)"
-
-#: ../install2.pm_.c:311
+#: ../../install2.pm_.c:308
 msgid ""
 "You must have a root partition.\n"
 "For this, create a partition (or click on an existing one).\n"
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
 
-#: ../install2.pm_.c:327
-msgid "Not enough swap to fulfill installation, please add some"
-msgstr "ไม่มีพื้นที่สวอปเพียงพอกับการติดตั้ง โปรดเพิ่มเนื้อที่"
-
-#: ../install_any.pm_.c:194 ../standalone/diskdrake_.c:61
+#: ../../install_any.pm_.c:331 ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
@@ -1706,7 +2082,7 @@ msgstr ""
 "โปรแกรมไม่สามารถอ่านตารางพาร์ติชั่นได้ ข้อมูลในตารางไม่ถูกต้อง :(\n"
 "โปรแกรมจะพยายามเคลียร์พาร์ติชั่นที่มีปัญหาให้"
 
-#: ../install_any.pm_.c:210
+#: ../../install_any.pm_.c:348
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
@@ -1714,37 +2090,32 @@ msgstr ""
 "ดิสก์เดรก ล้มเหลวที่จะอ่านตารางพาร์ติชั่นให้ถูกต้อง\n"
 "ถ้าทำงานต่ออาจมีข้อผิดพลาดได้!"
 
-#: ../install_any.pm_.c:220
+#: ../../install_any.pm_.c:370
 msgid "Searching root partition."
 msgstr "กำลังค้นหาพาร์ติชั่นรูท"
 
-#: ../install_any.pm_.c:249
+#: ../../install_any.pm_.c:399
 msgid "Information"
 msgstr "ข้อมูล"
 
-#: ../install_any.pm_.c:250
+#: ../../install_any.pm_.c:400
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
 msgstr "%s: นี่ไม่ใช่รูทพาร์ติชั่น โปรดเลือกพาร์ติชั่นใหม่"
 
-#: ../install_any.pm_.c:252
+#: ../../install_any.pm_.c:402
 msgid "No root partition found"
 msgstr "ไม่พบรูทพาร์ติชั่น"
 
-#: ../install_any.pm_.c:289
+#: ../../install_any.pm_.c:440
 msgid "Can't use broadcast with no NIS domain"
 msgstr "ไม่สามารถใช้บรอดคาสท์ถ้าไม่มีโดเมน NIS"
 
-#: ../install_any.pm_.c:473
+#: ../../install_any.pm_.c:602
 msgid "Error reading file $f"
 msgstr "ไม่สามารถอ่านไฟล์ $f"
 
-#: ../install_any.pm_.c:479
-#, c-format
-msgid "Bad kickstart file %s (failed %s)"
-msgstr "ไฟล์คิกสตาร์ทไม่ถูกต้อง %s (ข้อผิดพลาด %s)"
-
-#: ../install_steps.pm_.c:72
+#: ../../install_steps.pm_.c:75
 msgid ""
 "An error occurred, but I don't know how to handle it nicely.\n"
 "Continue at your own risk."
@@ -1752,30 +2123,39 @@ msgstr ""
 "มีความผิดพลาดเกิดขึ้น แต่โปรแกรมไม่สามารถแก้ไขได้\n"
 "หากทำงานต่ออาจเกิดความเสียหายได้"
 
-#: ../install_steps.pm_.c:136
+#: ../../install_steps.pm_.c:174
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "ทำซ้ำจุดเม้าท์ %s"
 
-#: ../install_steps.pm_.c:295
+#: ../../install_steps.pm_.c:318
+msgid ""
+"Some important packages didn't get installed properly.\n"
+"Either your cdrom drive or your cdrom is defective.\n"
+"Check the cdrom on an installed computer using \"rpm -qpl "
+"Mandrake/RPMS/*.rpm\"\n"
+msgstr ""
+
+#: ../../install_steps.pm_.c:385
 #, c-format
 msgid "Welcome to %s"
 msgstr ""
 
-#: ../install_steps.pm_.c:562
+#: ../../install_steps.pm_.c:737
 msgid "No floppy drive available"
 msgstr "ไม่มีไดรว์ฟล้อปปี็เหลืออยู่"
 
-#: ../install_steps_auto_install.pm_.c:18 ../install_steps_stdio.pm_.c:26
+#: ../../install_steps_auto_install.pm_.c:18 ../../install_steps_gtk.pm_.c:125
+#: ../../install_steps_stdio.pm_.c:26
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "เข้าสู่ขั้นตอน `%s'\n"
 
-#: ../install_steps_graphical.pm_.c:259 ../install_steps_gtk.pm_.c:294
+#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:249
 msgid "You must have a swap partition"
 msgstr "คุณจะต้องมีพาร์ติชั่นสวอป"
 
-#: ../install_steps_graphical.pm_.c:261 ../install_steps_gtk.pm_.c:296
+#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:251
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -1785,79 +2165,95 @@ msgstr ""
 "\n"
 "ต้องการจะทำต่อหรือไม่?"
 
-#: ../install_steps_graphical.pm_.c:287 ../install_steps_gtk.pm_.c:317
+#: ../../install_steps_graphical.pm_.c:287
 msgid "Choose the size you want to install"
 msgstr "เลือกขนาดที่คุณต้องการติดตั้ง"
 
-#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:361
+#: ../../install_steps_graphical.pm_.c:334
 msgid "Total size: "
 msgstr "ขนาดรวม: "
 
-#: ../install_steps_graphical.pm_.c:346 ../install_steps_gtk.pm_.c:373
-#: ../standalone/rpmdrake_.c:136
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:447
+#: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr "เวอร์ชั่น: %s\n"
 
-#: ../install_steps_graphical.pm_.c:347 ../install_steps_gtk.pm_.c:374
-#: ../standalone/rpmdrake_.c:137
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:448
+#: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "ขนาด: %d KB\n"
 
-#: ../install_steps_graphical.pm_.c:462 ../install_steps_gtk.pm_.c:489
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:360
 msgid "Choose the packages you want to install"
 msgstr "เลือกแพ็คเก็จที่คุณต้องการติดตั้ง"
 
-#: ../install_steps_graphical.pm_.c:465 ../install_steps_gtk.pm_.c:492
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:363
 msgid "Info"
 msgstr "ข้อมูล"
 
-#: ../install_steps_graphical.pm_.c:473 ../install_steps_gtk.pm_.c:500
-#: ../install_steps_interactive.pm_.c:81 ../standalone/rpmdrake_.c:161
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:368
+#: ../../install_steps_interactive.pm_.c:129 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "ติดตั้ง"
 
-#: ../install_steps_graphical.pm_.c:492 ../install_steps_gtk.pm_.c:519
-#: ../install_steps_interactive.pm_.c:317
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:533
+#: ../../install_steps_interactive.pm_.c:382
 msgid "Installing"
 msgstr "กำลังติดตั้ง"
 
-#: ../install_steps_graphical.pm_.c:499 ../install_steps_gtk.pm_.c:526
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:539
 msgid "Please wait, "
 msgstr "โปรดรอสักครู่"
 
-#: ../install_steps_graphical.pm_.c:501 ../install_steps_gtk.pm_.c:528
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:541
 msgid "Time remaining "
 msgstr "เวลาที่เหลือ "
 
-#: ../install_steps_graphical.pm_.c:502 ../install_steps_gtk.pm_.c:529
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:542
 msgid "Total time "
 msgstr "เวลาทั้งหมด "
 
-#: ../install_steps_graphical.pm_.c:507 ../install_steps_gtk.pm_.c:534
-#: ../install_steps_interactive.pm_.c:317
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:551
+#: ../../install_steps_interactive.pm_.c:382
 msgid "Preparing installation"
 msgstr "กำลังเตรียมการติดตั้ง"
 
-#: ../install_steps_graphical.pm_.c:528 ../install_steps_gtk.pm_.c:549
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:566
 #, c-format
 msgid "Installing package %s"
 msgstr "กำลังติดตั้งแพ็คเก็จ %s"
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:607
+#: ../../install_steps_gtk.pm_.c:611
 msgid "Go on anyway?"
 msgstr "ทำงานต่อหรือไม่?"
 
-#: ../install_steps_graphical.pm_.c:553 ../install_steps_gtk.pm_.c:574
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:607
 msgid "There was an error ordering packages:"
 msgstr "มีปัญหาการลำดับของแพ็คเก็จ:"
 
-#: ../install_steps_graphical.pm_.c:577 ../install_steps_interactive.pm_.c:893
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:997
 msgid "Use existing configuration for X11?"
 msgstr "ใช้คอนฟิกที่มีอยู่แล้วของระบบ X11 หรือไม่?"
 
-#: ../install_steps_gtk.pm_.c:259
+#: ../../install_steps_gtk.pm_.c:154
+msgid "Please, choose one of the following classes of installation:"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:195
+#, fuzzy
+msgid "You don't have any windows partitions!"
+msgstr "คุณยังไม่ได้แบ่งพาร์ติชั่น!"
+
+#: ../../install_steps_gtk.pm_.c:197
+#, fuzzy
+msgid "You don't have any enough room for Lnx4win"
+msgstr "คุณยังไม่ได้แบ่งพาร์ติชั่น!"
+
+#: ../../install_steps_gtk.pm_.c:213
 msgid ""
 "WARNING!\n"
 "\n"
@@ -1869,174 +2265,358 @@ msgid ""
 "When sure, press Ok."
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:278
+#: ../../install_steps_gtk.pm_.c:232
 #, fuzzy
 msgid "Automatic resizing failed"
 msgstr "กำหนดขนาดจอภาพโดยอัตโนมัติ"
 
-#: ../install_steps_gtk.pm_.c:312
+#: ../../install_steps_gtk.pm_.c:261
+#, fuzzy
+msgid "Which partition do you want to use to put Linux4Win?"
+msgstr "คุณต้องการย้ายไปเซ็กเตอร์ไหน"
+
+#: ../../install_steps_gtk.pm_.c:280
+#, fuzzy
+msgid "Choose the sizes"
+msgstr "เลือกขนาดใหม่"
+
+#: ../../install_steps_gtk.pm_.c:282
+#, fuzzy
+msgid "Root partition size in MB: "
+msgstr "พาร์ติชั่นรูท"
+
+#: ../../install_steps_gtk.pm_.c:284
+#, fuzzy
+msgid "Swap partition size in MB: "
+msgstr "ขนาดเป็น MB: "
+
+#: ../../install_steps_gtk.pm_.c:316
+#, c-format
 msgid ""
-"Now that you've selected desired groups, please choose \n"
-"how many packages you want, ranging from minimal to full \n"
-"installation of each selected groups."
+"The total size for the groups you have selected is approximately %d MB.\n"
 msgstr ""
 
-#: ../install_steps_gtk.pm_.c:315
-msgid "You will be able to choose more precisely in next step"
+#: ../../install_steps_gtk.pm_.c:318
+msgid ""
+"If you wish to install less than this size,\n"
+"select the percentage of packages that you want to install.\n"
+"\n"
+"A low percentage will install only the most important packages;\n"
+"a percentage of 100%% will install all selected packages."
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:323
+msgid ""
+"You have space on your disk for only %d%% of these packages.\n"
+"\n"
+"If you wish to install less than this,\n"
+"select the percentage of packages that you want to install.\n"
+"A low percentage will install only the most important packages;\n"
+"a percentage of %d%% will install as many packages as possible."
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:329
+#, fuzzy
+msgid "You will be able to choose them more specifically in the next step."
 msgstr "คุณจะต้องเลือกให้ถูกต้องมากขึ้นในขั้นตอนถัดไป"
 
-#: ../install_steps_gtk.pm_.c:372
+#: ../../install_steps_gtk.pm_.c:331
+#, fuzzy
+msgid "Percentage of packages to install"
+msgstr "เลือกแพ็คเก็จ"
+
+#: ../../install_steps_gtk.pm_.c:372
+#, fuzzy
+msgid "Automatic dependencies"
+msgstr "กำหนดขนาดจอภาพโดยอัตโนมัติ"
+
+#: ../../install_steps_gtk.pm_.c:425 ../../standalone/rpmdrake_.c:101
+msgid "Expand Tree"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:426 ../../standalone/rpmdrake_.c:102
+msgid "Collapse Tree"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:427
+msgid "Toggle between flat and group sorted"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:445
 #, fuzzy
 msgid "Bad package"
 msgstr "แพ็คเก็จ %d ชุด"
 
-#: ../install_steps_gtk.pm_.c:522
+#: ../../install_steps_gtk.pm_.c:446
+#, c-format
+msgid "Name: %s\n"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:449
+#, c-format
+msgid "Importance: %s\n"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:457
+#, fuzzy, c-format
+msgid "Total size: %d / %d MB"
+msgstr "ขนาดรวม: "
+
+#: ../../install_steps_gtk.pm_.c:467
+msgid "This is a mandatory package, it can't be unselected"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:469
+msgid "You can't unselect this package. It is already installed"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:473
+msgid ""
+"This package must be upgraded\n"
+"Are you sure you want to deselect it?"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:476
+msgid "You can't unselect this package. It must be upgraded"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:489
+msgid ""
+"You can't select this package as there is not enough space left to install it"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:492
+#, fuzzy
+msgid "The following packages are going to be installed/removed"
+msgstr "เลือกแพ็คเก็จ"
+
+#: ../../install_steps_gtk.pm_.c:501
+msgid "You can't select/unselect this package"
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:536
 msgid "Estimating"
 msgstr "การประเมิน"
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../../install_steps_gtk.pm_.c:548 ../../interactive.pm_.c:84
+#: ../../interactive.pm_.c:223 ../../interactive_newt.pm_.c:49
+#: ../../interactive_newt.pm_.c:98 ../../interactive_stdio.pm_.c:27
+#: ../../my_gtk.pm_.c:201 ../../my_gtk.pm_.c:459
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: ../../install_steps_gtk.pm_.c:561
 #, c-format
 msgid "%d packages"
 msgstr "แพ็คเก็จ %d ชุด"
 
-#: ../install_steps_gtk.pm_.c:544
+#: ../../install_steps_gtk.pm_.c:561
 msgid ", %U MB"
 msgstr ", %U MB"
 
-#: ../install_steps_interactive.pm_.c:37
+#: ../../install_steps_gtk.pm_.c:592
+#, c-format
+msgid ""
+"Change your Cd-Rom!\n"
+"\n"
+"Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
+"done.\n"
+"If you don't have it, press Cancel to avoid installation from this Cd-Rom."
+msgstr ""
+
+#: ../../install_steps_gtk.pm_.c:611
+#, fuzzy
+msgid "There was an error installing packages:"
+msgstr "มีปัญหาการลำดับของแพ็คเก็จ:"
+
+#: ../../install_steps_interactive.pm_.c:40
 msgid "An error occurred"
 msgstr "มีปัญหาเกิดขึ้น"
 
-#: ../install_steps_interactive.pm_.c:54
-msgid "Which language do you want?"
-msgstr "คุณต้องการเลือกภาษาใด"
+#: ../../install_steps_interactive.pm_.c:57
+#, fuzzy
+msgid "Please, choose a language to use."
+msgstr "คุณมีเม้าส์ชนิดใด"
 
-#: ../install_steps_interactive.pm_.c:68 ../standalone/keyboarddrake_.c:22
+#: ../../install_steps_interactive.pm_.c:72
+#: ../../standalone/keyboarddrake_.c:22
 msgid "Keyboard"
 msgstr "คีย์บอร์ด"
 
-#: ../install_steps_interactive.pm_.c:69 ../standalone/keyboarddrake_.c:23
-msgid "What is your keyboard layout?"
+#: ../../install_steps_interactive.pm_.c:73
+#, fuzzy
+msgid "Please, choose your keyboard layout."
 msgstr "คุณต้องการเลือกคีย์บอร์ดเลย์เอ้าท์แบบใด"
 
-#: ../install_steps_interactive.pm_.c:79
-msgid "Install/Upgrade"
-msgstr "ติดตั้ง/อัพเกรด"
+#: ../../install_steps_interactive.pm_.c:81
+msgid "You can choose other languages that will be available after install"
+msgstr ""
 
-#: ../install_steps_interactive.pm_.c:80
-msgid "Is this an install or an upgrade?"
-msgstr "นี่เป็นการติดตั้งหรือการอัพเกรด"
-
-#: ../install_steps_interactive.pm_.c:81
-msgid "Upgrade"
-msgstr "อัพเกรด"
-
-#: ../install_steps_interactive.pm_.c:89
+#: ../../install_steps_interactive.pm_.c:91
 msgid "Root Partition"
 msgstr "พาร์ติชั่นรูท"
 
-#: ../install_steps_interactive.pm_.c:90
+#: ../../install_steps_interactive.pm_.c:92
 msgid "What is the root partition (/) of your system?"
 msgstr "พาร์ติชั่นใดเป็นรูทพาร์ติชั่น (/) ในระบบของคุณ"
 
-#: ../install_steps_interactive.pm_.c:100
-msgid "Recommended"
-msgstr "แบบแนะนำ (Recommended)"
-
-#: ../install_steps_interactive.pm_.c:101
-msgid "Customized"
-msgstr "แบบปรับแก้ได้ (Customized)"
-
-#: ../install_steps_interactive.pm_.c:102
-msgid "Expert"
-msgstr "แบบผู้เชี่ยวชาญ (Expert"
-
-#: ../install_steps_interactive.pm_.c:104
-#: ../install_steps_interactive.pm_.c:118
+#: ../../install_steps_interactive.pm_.c:100
+#: ../../install_steps_interactive.pm_.c:140
 msgid "Install Class"
 msgstr "ประเภทของการติดตั้ง"
 
-#: ../install_steps_interactive.pm_.c:105
-msgid "What installation class do you want?"
+#: ../../install_steps_interactive.pm_.c:100
+#, fuzzy
+msgid "Which installation class do you want?"
 msgstr "คุณต้องการติดตั้งประเภทใด"
 
-#: ../install_steps_interactive.pm_.c:114
+#: ../../install_steps_interactive.pm_.c:102
+msgid "Install/Upgrade"
+msgstr "ติดตั้ง/อัพเกรด"
+
+#: ../../install_steps_interactive.pm_.c:102
+msgid "Is this an install or an upgrade?"
+msgstr "นี่เป็นการติดตั้งหรือการอัพเกรด"
+
+#: ../../install_steps_interactive.pm_.c:110
+#, fuzzy
+msgid "Automated"
+msgstr "กำหนดค่า IP แบบอัตโนมัติ"
+
+#: ../../install_steps_interactive.pm_.c:112
+#: ../../install_steps_interactive.pm_.c:124
+msgid "Customized"
+msgstr "แบบปรับแก้ได้ (Customized)"
+
+#: ../../install_steps_interactive.pm_.c:113
+#: ../../install_steps_interactive.pm_.c:124
+msgid "Expert"
+msgstr "แบบผู้เชี่ยวชาญ (Expert)"
+
+#: ../../install_steps_interactive.pm_.c:122
+msgid ""
+"Are you sure you are an expert? \n"
+"You will be allowed to make powerfull but dangerous things here."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:129
+msgid "Upgrade"
+msgstr "อัพเกรด"
+
+#: ../../install_steps_interactive.pm_.c:135
 msgid "Normal"
 msgstr "ปกติ (Normal)"
 
-#: ../install_steps_interactive.pm_.c:115
+#: ../../install_steps_interactive.pm_.c:136
 msgid "Development"
 msgstr "พัฒนาซอฟท์แวร์ (Development)"
 
-#: ../install_steps_interactive.pm_.c:116
+#: ../../install_steps_interactive.pm_.c:137
 msgid "Server"
 msgstr "เซิรฟ์เวอร์ (Server)"
 
-#: ../install_steps_interactive.pm_.c:119
-msgid "What usage do you want?"
-msgstr "คุณต้องการใช้งานอะไร>"
+#: ../../install_steps_interactive.pm_.c:141
+#, fuzzy
+msgid "Which usage is your system used for ?"
+msgstr "คุณใช้ย่านเวลาใด?"
 
-#: ../install_steps_interactive.pm_.c:132 ../standalone/mousedrake_.c:25
-msgid "What is the type of your mouse?"
+#: ../../install_steps_interactive.pm_.c:152
+msgid "Please, choose the type of your mouse."
 msgstr "คุณมีเม้าส์ชนิดใด"
 
-#: ../install_steps_interactive.pm_.c:140 ../standalone/mousedrake_.c:38
+#: ../../install_steps_interactive.pm_.c:160 ../../standalone/mousedrake_.c:38
 msgid "Mouse Port"
 msgstr "พอร์ตของเม้าส์"
 
-#: ../install_steps_interactive.pm_.c:141 ../standalone/mousedrake_.c:39
-msgid "Which serial port is your mouse connected to?"
+#: ../../install_steps_interactive.pm_.c:161
+msgid "Please choose on which serial port your mouse is connected to."
 msgstr "เม้าส์ของคุณต่อเข้ากับพอร์ตอนุกรมใด"
 
-#: ../install_steps_interactive.pm_.c:157
+#: ../../install_steps_interactive.pm_.c:172
+#, fuzzy
+msgid "Configuring IDE"
+msgstr "ทดสอบการคอนฟิก"
+
+#: ../../install_steps_interactive.pm_.c:172
+msgid "IDE"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:182
 msgid "no available partitions"
 msgstr "ไม่มีพาร์ติชั่นเหลือ"
 
-#: ../install_steps_interactive.pm_.c:159
+#: ../../install_steps_interactive.pm_.c:184
 #, c-format
-msgid "(%dMb)"
-msgstr "(%dMb)"
+msgid "(%dMB)"
+msgstr "(%dMB)"
 
-#: ../install_steps_interactive.pm_.c:166
-msgid "Which partition do you want to use as your root partition"
+#: ../../install_steps_interactive.pm_.c:191
+msgid "Please choose a partition to use as your root partition."
 msgstr "พาร์ติชั่นใดที่คุณต้องการใช้เป็นรูทพาร์ติชั่น"
 
-#: ../install_steps_interactive.pm_.c:173
+#: ../../install_steps_interactive.pm_.c:198
 msgid "Choose the mount points"
 msgstr "เลือกจุดเม้าท์"
 
-#: ../install_steps_interactive.pm_.c:185
+#: ../../install_steps_interactive.pm_.c:210
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "คุณต้องทำการรีบูตระบบให้เครื่องรับทราบการเปลี่ยนแปลงตารางพาร์ติชั่น"
 
-#: ../install_steps_interactive.pm_.c:207
+#: ../../install_steps_interactive.pm_.c:236
 msgid "Choose the partitions you want to format"
 msgstr "เลือกพาร์ติชั่นที่คุณต้องการฟอร์แมต"
 
-#: ../install_steps_interactive.pm_.c:211
+#: ../../install_steps_interactive.pm_.c:240
 msgid "Check bad blocks?"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:230
+#: ../../install_steps_interactive.pm_.c:248
+#, fuzzy
+msgid "Formatting partitions"
+msgstr "ฟอร์แมตพาร์ติชั่น %s"
+
+#: ../../install_steps_interactive.pm_.c:252
+#, c-format
+msgid "Creating and formatting file %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:255
+msgid "Not enough swap to fulfill installation, please add some"
+msgstr "ไม่มีพื้นที่สวอปเพียงพอกับการติดตั้ง โปรดเพิ่มเนื้อที่"
+
+#: ../../install_steps_interactive.pm_.c:261
 msgid "Looking for available packages"
 msgstr "กำลังหาแพ็คเก็จที่มีอยู่"
 
-#: ../install_steps_interactive.pm_.c:236
+#: ../../install_steps_interactive.pm_.c:267
 msgid "Finding packages to upgrade"
 msgstr "กำลังหาแพ็คเก็จที่จะทำการอัพเกรด"
 
-#: ../install_steps_interactive.pm_.c:266
-#, c-format
-msgid ""
-"You need %dMB for a full install of the groups you selected.\n"
-"You can go on anyway, but be warned that you won't get all packages"
+#: ../../install_steps_interactive.pm_.c:284
+msgid "Your system has not enough space left for installation or upgrade"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:290
+#: ../../install_steps_interactive.pm_.c:317
 msgid "Package Group Selection"
 msgstr "เลือกกลุ่มแพ็คเก็จ"
 
-#: ../install_steps_interactive.pm_.c:326
+#: ../../install_steps_interactive.pm_.c:320
+msgid "Individual package selection"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:360
+msgid ""
+"If you have all the CDs in the list below, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:363
+#, c-format
+msgid "Cd-Rom labeled \"%s\""
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:391
 msgid ""
 "Installing package %s\n"
 "%d%%"
@@ -2044,56 +2624,59 @@ msgstr ""
 "กำลังติดตั้งแพ็คเก็จ %s\n"
 "%d%%"
 
-#: ../install_steps_interactive.pm_.c:335
+#: ../../install_steps_interactive.pm_.c:400
 #, fuzzy
-msgid "Post install configuration"
+msgid "Post-install configuration"
 msgstr "การคอนฟิก Proxies"
 
-#: ../install_steps_interactive.pm_.c:346
+#: ../../install_steps_interactive.pm_.c:410
 msgid "Keep the current IP configuration"
 msgstr "ใช้คอนฟิก IP ของปัจจุบัน"
 
-#: ../install_steps_interactive.pm_.c:347
+#: ../../install_steps_interactive.pm_.c:411
 msgid "Reconfigure network now"
 msgstr "ทำการคอนฟิกเน็ตเวิร์กอีกครั้ง"
 
-#: ../install_steps_interactive.pm_.c:348
-#: ../install_steps_interactive.pm_.c:360
+#: ../../install_steps_interactive.pm_.c:412
 msgid "Do not set up networking"
 msgstr "อย่าเซ็ตอัพเน็ตเวิร์ก"
 
-#: ../install_steps_interactive.pm_.c:350
-#: ../install_steps_interactive.pm_.c:358
+#: ../../install_steps_interactive.pm_.c:415
+#: ../../install_steps_interactive.pm_.c:420
 msgid "Network Configuration"
 msgstr "การคอนฟิกระบบเน็ตเวิร์ก"
 
-#: ../install_steps_interactive.pm_.c:351
+#: ../../install_steps_interactive.pm_.c:416
 msgid "Local networking has already been configured. Do you want to:"
 msgstr "ระบบเน็ตเวิร์กท้องถิ่นได้ทำการคอนฟิกเรียบร้อยแล้ว คุณต้องการจะ:"
 
-#: ../install_steps_interactive.pm_.c:359
-msgid "Do you want to configure networking for your system?"
+#: ../../install_steps_interactive.pm_.c:421
+#, fuzzy
+msgid "Do you want to configure a local network for your system?"
 msgstr "คุณต้องการคอนฟิกระบบเน็ตเวิร์กสำหรับระบบของคุณหรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:360
-msgid "Dialup with modem"
-msgstr "การหมุนโทรศัพท์ด้วยโมเด็ม"
-
-#: ../install_steps_interactive.pm_.c:360
-msgid "Local LAN"
-msgstr "ระบบแลนแบบท้องถิ่น"
-
-#: ../install_steps_interactive.pm_.c:369
+#: ../../install_steps_interactive.pm_.c:427
 msgid "no network card found"
 msgstr "ไม่พบการ์ดเน็ตเวิร์ก"
 
-#: ../install_steps_interactive.pm_.c:399
-#: ../install_steps_interactive.pm_.c:400
+#: ../../install_steps_interactive.pm_.c:449
+#, fuzzy
+msgid "Modem Configuration"
+msgstr "ทดสอบการคอนฟิก"
+
+#: ../../install_steps_interactive.pm_.c:450
+#, fuzzy
+msgid ""
+"Do you want to configure a dialup connection with modem for your system?"
+msgstr "คุณต้องการคอนฟิกระบบเน็ตเวิร์กสำหรับระบบของคุณหรือไม่?"
+
+#: ../../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:463
 #, c-format
 msgid "Configuring network device %s"
 msgstr "กำลังคอนฟิกอุปกรณ์เน็ตเวิร์ก %s"
 
-#: ../install_steps_interactive.pm_.c:401
+#: ../../install_steps_interactive.pm_.c:464
 msgid ""
 "Please enter the IP configuration for this machine.\n"
 "Each item should be entered as an IP address in dotted-decimal\n"
@@ -2103,31 +2686,31 @@ msgstr ""
 "ข้อมูลแต่ละอย่างสามารถใส่เข้าไปได้โดยใช้ค่า IP ในรูปแบบตัวเลขคั่นด้วยจุด\n"
 "(dotted-decimal notation) ตัวอย่างเช่น 1.2.3.4"
 
-#: ../install_steps_interactive.pm_.c:404
+#: ../../install_steps_interactive.pm_.c:467
 msgid "Automatic IP"
 msgstr "กำหนดค่า IP แบบอัตโนมัติ"
 
-#: ../install_steps_interactive.pm_.c:404
+#: ../../install_steps_interactive.pm_.c:467
 msgid "IP address:"
 msgstr "ค่า IP:"
 
-#: ../install_steps_interactive.pm_.c:404
+#: ../../install_steps_interactive.pm_.c:467
 msgid "Netmask:"
 msgstr "เน็ตมาสก์:"
 
-#: ../install_steps_interactive.pm_.c:405
+#: ../../install_steps_interactive.pm_.c:468
 msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
-#: ../install_steps_interactive.pm_.c:411 ../printerdrake.pm_.c:149
+#: ../../install_steps_interactive.pm_.c:474 ../../printerdrake.pm_.c:89
 msgid "IP address should be in format 1.2.3.4"
 msgstr "ค่าของ IP ควรอยู่ในรูปแบบ 1.2.3.4"
 
-#: ../install_steps_interactive.pm_.c:429
+#: ../../install_steps_interactive.pm_.c:492
 msgid "Configuring network"
 msgstr "กำลังคอนฟิกระบบเน็ตเวิร์ก"
 
-#: ../install_steps_interactive.pm_.c:430
+#: ../../install_steps_interactive.pm_.c:493
 msgid ""
 "Please enter your host name.\n"
 "Your host name should be a fully-qualified host name,\n"
@@ -2139,91 +2722,79 @@ msgstr ""
 "ตัวอย่างเช่น ``mybox.mylab.yco.com''\n"
 "คุณอาจจะใส่ค่า IP ของเกตเวย์ด้วยถ้าคุณมีเครื่องที่ทำหน้าที่เป็นเกตเวย์อยู่"
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../../install_steps_interactive.pm_.c:497
 msgid "DNS server:"
 msgstr "เซิร์ฟเวอร์ DNS:"
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Gateway device:"
 msgstr "อุปกรณ์เกตเวย์"
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Gateway:"
 msgstr "เกตเวย์:"
 
-#: ../install_steps_interactive.pm_.c:434
+#: ../../install_steps_interactive.pm_.c:497
 msgid "Host name:"
 msgstr "ชื่อโฮสต์:"
 
-#: ../install_steps_interactive.pm_.c:447
+#: ../../install_steps_interactive.pm_.c:510
 msgid "Try to find a modem?"
 msgstr "จะลองหาโมเด็มหรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:457
-msgid "Which serial port is your modem connected to?"
+#: ../../install_steps_interactive.pm_.c:521
+msgid "Please choose which serial port your modem is connected to."
 msgstr "คุณต้องการให้โมเด็มของคุณต่อกับพอร์ตอนุกรมใด?"
 
-#: ../install_steps_interactive.pm_.c:462
+#: ../../install_steps_interactive.pm_.c:527
 msgid "Dialup options"
 msgstr "อ็อปชั่นของการหมุนโทรศัพท์"
 
-#: ../install_steps_interactive.pm_.c:463
+#: ../../install_steps_interactive.pm_.c:528
 msgid "Connection name"
 msgstr "ชื่อการเชื่อมต่อ"
 
-#: ../install_steps_interactive.pm_.c:464
+#: ../../install_steps_interactive.pm_.c:529
 msgid "Phone number"
 msgstr "หมายเลขโทรศัพท์"
 
-#: ../install_steps_interactive.pm_.c:465
+#: ../../install_steps_interactive.pm_.c:530
 msgid "Login ID"
 msgstr "หมายเลขประจำตัวการล็อกอิน"
 
-#: ../install_steps_interactive.pm_.c:466
-#: ../install_steps_interactive.pm_.c:578
-#: ../install_steps_interactive.pm_.c:624
-#: ../install_steps_interactive.pm_.c:724 ../standalone/adduserdrake_.c:40
-msgid "Password"
-msgstr "รหัสผ่าน"
-
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Authentication"
 msgstr "การตรวจสอบสิทธิ์การใช้งาน"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "CHAP"
 msgstr "CHAP"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "PAP"
 msgstr "PAP"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Script-based"
 msgstr "รูปแบบสคริปต์"
 
-#: ../install_steps_interactive.pm_.c:467
+#: ../../install_steps_interactive.pm_.c:532
 msgid "Terminal-based"
 msgstr "รูปแบบเทอร์มินอล"
 
-#: ../install_steps_interactive.pm_.c:468
+#: ../../install_steps_interactive.pm_.c:533
 msgid "Domain name"
 msgstr "ชื่อโดเมน"
 
-#: ../install_steps_interactive.pm_.c:469
+#: ../../install_steps_interactive.pm_.c:535
 msgid "First DNS Server"
 msgstr "เซิรฟ์เวอร์ DNS เครื่องแรก"
 
-#: ../install_steps_interactive.pm_.c:470
+#: ../../install_steps_interactive.pm_.c:536
 msgid "Second DNS Server"
 msgstr "เซิรฟ์เวอร์ DNS เครื่องที่สอง"
 
-#: ../install_steps_interactive.pm_.c:483
-#, fuzzy
-msgid "Bringing up the network"
-msgstr "กำลังคอนฟิกระบบเน็ตเวิร์ก"
-
-#: ../install_steps_interactive.pm_.c:492
+#: ../../install_steps_interactive.pm_.c:549
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -2240,7 +2811,7 @@ msgid ""
 "In addition customer and/or end user shall particularly be aware to not "
 "infringe\n"
 "the laws of his/their jurisdiction. Should customer and/or end user do not\n"
-"respect the provision of these applicable laws, he/they will incur serious\n"
+"respect the provision of these applicable laws, he/they will incure serious\n"
 "sanctions.\n"
 "\n"
 "In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
@@ -2262,124 +2833,90 @@ msgid ""
 "USA"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:523
+#: ../../install_steps_interactive.pm_.c:580
 msgid "Choose a mirror from which to get the packages"
 msgstr "เลือกมิลเรอร์ไซต์ที่จะใช้ในการดาวน์โหลดแพ็คเก็จ"
 
-#: ../install_steps_interactive.pm_.c:528
+#: ../../install_steps_interactive.pm_.c:588
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "กำลังติดต่อกับมิลเรอร์ไซต์เพื่อหารายการของแพ็คเก็จที่มีให้"
 
-#: ../install_steps_interactive.pm_.c:532
-msgid "Which packages do you want to install"
+#: ../../install_steps_interactive.pm_.c:592
+#, fuzzy
+msgid "Please choose the packages you want to install."
 msgstr "เลือกแพ็คเก็จที่คุณต้องการติดตั้ง"
 
-#: ../install_steps_interactive.pm_.c:534
-msgid "Downloading cryptographic packages"
-msgstr "กำลังดาวน์โหลดแพ็คเก็จระบบเข้ารหัส"
-
-#: ../install_steps_interactive.pm_.c:544
+#: ../../install_steps_interactive.pm_.c:606
 msgid "Which is your timezone?"
 msgstr "คุณใช้ย่านเวลาใด?"
 
-#: ../install_steps_interactive.pm_.c:545
+#: ../../install_steps_interactive.pm_.c:607
 msgid "Is your hardware clock set to GMT?"
 msgstr "คุณต้องการให้เซ็ตนาฬิกาฮาร์ดแวร์เป็น GMT?"
 
-#: ../install_steps_interactive.pm_.c:555
-msgid "Printer"
-msgstr "เครื่องพิมพ์"
-
-#: ../install_steps_interactive.pm_.c:556
-msgid "Would you like to configure a printer?"
-msgstr "คุณต้องการคอนฟิกเครื่องพิมพ์ด้วยหรือไม่"
-
-#: ../install_steps_interactive.pm_.c:576
+#: ../../install_steps_interactive.pm_.c:652
 msgid "No password"
 msgstr "ไม่มีรหัสผ่าน"
 
-#: ../install_steps_interactive.pm_.c:576
-#: ../install_steps_interactive.pm_.c:798 ../interactive.pm_.c:74
-#: ../interactive.pm_.c:84 ../interactive.pm_.c:164
-#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:97
-#: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:192 ../my_gtk.pm_.c:425
-#: ../my_gtk.pm_.c:525
-msgid "Ok"
-msgstr "ตกลง"
-
-#: ../install_steps_interactive.pm_.c:579
-#: ../install_steps_interactive.pm_.c:625
-#: ../install_steps_interactive.pm_.c:725 ../standalone/adduserdrake_.c:41
-msgid "Password (again)"
-msgstr "รหัสผ่าน (ใส่อีกครั้ง)"
-
-#: ../install_steps_interactive.pm_.c:581
+#: ../../install_steps_interactive.pm_.c:657
 msgid "Use shadow file"
 msgstr "ใช้ไฟล์แบบชาโดว์ (shadow)"
 
-#: ../install_steps_interactive.pm_.c:581
+#: ../../install_steps_interactive.pm_.c:657
 msgid "shadow"
 msgstr "ชาโดว์"
 
-#: ../install_steps_interactive.pm_.c:582
+#: ../../install_steps_interactive.pm_.c:658
 msgid "MD5"
 msgstr "MD5"
 
-#: ../install_steps_interactive.pm_.c:582
+#: ../../install_steps_interactive.pm_.c:658
 msgid "Use MD5 passwords"
 msgstr "ใช้รหัสผ่าน MD5"
 
-#: ../install_steps_interactive.pm_.c:584
+#: ../../install_steps_interactive.pm_.c:660
 msgid "Use NIS"
 msgstr "ใช้ NIS"
 
-#: ../install_steps_interactive.pm_.c:584
+#: ../../install_steps_interactive.pm_.c:660
 msgid "yellow pages"
 msgstr "ใช้ระบบสมุดหน้าเหลือง (yellow pages)"
 
-#: ../install_steps_interactive.pm_.c:588
-#: ../install_steps_interactive.pm_.c:636
-#: ../install_steps_interactive.pm_.c:736 ../standalone/adduserdrake_.c:52
-msgid "Please try again"
-msgstr "โปรดลองอีกครั้ง"
-
-#: ../install_steps_interactive.pm_.c:588
-#: ../install_steps_interactive.pm_.c:636
-#: ../install_steps_interactive.pm_.c:736 ../standalone/adduserdrake_.c:52
-msgid "The passwords do not match"
-msgstr "รหัสผ่านไม่เหมือนกัน"
-
-#: ../install_steps_interactive.pm_.c:590
+#: ../../install_steps_interactive.pm_.c:666
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:597
+#: ../../install_steps_interactive.pm_.c:673
 msgid "Authentification NIS"
 msgstr "การตรวจสอบสิทธิ์การใช้งานของ NIS"
 
-#: ../install_steps_interactive.pm_.c:598
+#: ../../install_steps_interactive.pm_.c:674
 msgid "NIS Domain"
 msgstr "โดเมน NIS"
 
-#: ../install_steps_interactive.pm_.c:598
+#: ../../install_steps_interactive.pm_.c:674
 msgid "NIS Server"
 msgstr "เซิร์ฟเวอร์ NIS"
 
-#: ../install_steps_interactive.pm_.c:618 ../standalone/adduserdrake_.c:34
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../standalone/adduserdrake_.c:36
 msgid "Accept user"
 msgstr "ยอมรับผู้ใช้"
 
-#: ../install_steps_interactive.pm_.c:618 ../standalone/adduserdrake_.c:34
+#: ../../install_steps_interactive.pm_.c:699
+#: ../../standalone/adduserdrake_.c:36
 msgid "Add user"
 msgstr "เพิ่มผู้ใช้"
 
-#: ../install_steps_interactive.pm_.c:619 ../standalone/adduserdrake_.c:35
+#: ../../install_steps_interactive.pm_.c:700
+#: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid "(already added %s)"
 msgstr "(เพิ่ม %s เรียบร้อยแล้ว)"
 
-#: ../install_steps_interactive.pm_.c:619 ../standalone/adduserdrake_.c:35
+#: ../../install_steps_interactive.pm_.c:700
+#: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid ""
 "Enter a user\n"
@@ -2388,56 +2925,69 @@ msgstr ""
 "ให้ใส่ผู้ใช้\n"
 "%s"
 
-#: ../install_steps_interactive.pm_.c:621 ../standalone/adduserdrake_.c:37
+#: ../../install_steps_interactive.pm_.c:702
+#: ../../standalone/adduserdrake_.c:39
 msgid "Real name"
 msgstr "ชื่อเต็ม"
 
-#: ../install_steps_interactive.pm_.c:622 ../standalone/adduserdrake_.c:38
+#: ../../install_steps_interactive.pm_.c:703 ../../printerdrake.pm_.c:84
+#: ../../printerdrake.pm_.c:109 ../../standalone/adduserdrake_.c:40
 msgid "User name"
 msgstr "ชื่อผู้ใช้"
 
-#: ../install_steps_interactive.pm_.c:627 ../standalone/adduserdrake_.c:43
+#: ../../install_steps_interactive.pm_.c:708
+#: ../../standalone/adduserdrake_.c:45
 msgid "Shell"
 msgstr "เชลล์ที่ใช้"
 
-#: ../install_steps_interactive.pm_.c:637 ../standalone/adduserdrake_.c:53
+#: ../../install_steps_interactive.pm_.c:710
+#: ../../standalone/adduserdrake_.c:47
+msgid "Icon"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:720
+#: ../../standalone/adduserdrake_.c:57
 msgid "This password is too simple"
 msgstr "รหัสผ่านนี้ง่ายต่อการเดา"
 
-#: ../install_steps_interactive.pm_.c:638 ../standalone/adduserdrake_.c:54
+#: ../../install_steps_interactive.pm_.c:721
+#: ../../standalone/adduserdrake_.c:58
 msgid "Please give a user name"
 msgstr "โปรดป้อนชื่อผู้ใช้"
 
-#: ../install_steps_interactive.pm_.c:639 ../standalone/adduserdrake_.c:55
+#: ../../install_steps_interactive.pm_.c:722
+#: ../../standalone/adduserdrake_.c:59
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "ชื่อผู้ใช้จะสามารถมีได้เฉพาะตัวอักษรตัวเล็ก ตัวเลข '-' และ '_'"
 
-#: ../install_steps_interactive.pm_.c:640 ../standalone/adduserdrake_.c:56
+#: ../../install_steps_interactive.pm_.c:723
+#: ../../standalone/adduserdrake_.c:60
 msgid "This user name is already added"
 msgstr "ชื่อผู้ใช้นี้ได้ถูกเพิ่มลงไปในระบบเรียบร้อยแล้ว"
 
-#: ../install_steps_interactive.pm_.c:659
+#: ../../install_steps_interactive.pm_.c:747
 #, fuzzy
-msgid "First drive"
+msgid "First floppy drive"
 msgstr "เซิรฟ์เวอร์ DNS เครื่องแรก"
 
-#: ../install_steps_interactive.pm_.c:660
+#: ../../install_steps_interactive.pm_.c:748
 #, fuzzy
-msgid "Second drive"
+msgid "Second floppy drive"
 msgstr "เซิรฟ์เวอร์ DNS เครื่องที่สอง"
 
-#: ../install_steps_interactive.pm_.c:661
+#: ../../install_steps_interactive.pm_.c:749
 msgid "Skip"
 msgstr "ข้ามไป"
 
-#: ../install_steps_interactive.pm_.c:666
+#: ../../install_steps_interactive.pm_.c:755
+#, fuzzy
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
 "install\n"
-"LILO on your system, or another operating system removes LILO, or LILO "
-"doesn't\n"
+"LILO (or grub) on your system, or another operating system removes LILO, or "
+"LILO doesn't\n"
 "work with your hardware configuration. A custom bootdisk can also be used "
 "with\n"
 "the Mandrake rescue image, making it much easier to recover from severe "
@@ -2451,259 +3001,188 @@ msgstr ""
 "จะสามารถใช้กับอิมเมจกู้คืนระบบของแมนเดร็ก ซึ่งจะช่วยให้คุณสามารถทำการกู้\n"
 "คืนระบบจากความผิดพลาดได้ด้วย คุณต้องการจะสร้างแผ่นบูตหรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:675
+#: ../../install_steps_interactive.pm_.c:764
 msgid "Sorry, no floppy drive available"
 msgstr "ขออภัย ไม่มีฟล้อปปี้ไดรว์เลย"
 
-#: ../install_steps_interactive.pm_.c:678
+#: ../../install_steps_interactive.pm_.c:767
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr "ให้เลือกฟล้อปปี้ไดรว์ที่คุณต้องการทำเป็นแผ่นบูต"
 
-#: ../install_steps_interactive.pm_.c:683
+#: ../../install_steps_interactive.pm_.c:772
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "ให้ใส่แผ่นฟล้อปปี้ลงในไดรว์ %s"
 
-#: ../install_steps_interactive.pm_.c:684
-#: ../install_steps_interactive.pm_.c:1042
+#: ../../install_steps_interactive.pm_.c:773
 msgid "Creating bootdisk"
 msgstr "กำลังสร้างแผ่นบูต"
 
-#: ../install_steps_interactive.pm_.c:691
-msgid "Preparing bootloader"
-msgstr "กำลังเตรียมบูตโหลดเดอร์"
-
-#: ../install_steps_interactive.pm_.c:703
-msgid "First sector of boot partition"
-msgstr "เซ็กเตอร์แรกของบูตพาร์ติชั่น"
-
-#: ../install_steps_interactive.pm_.c:703
-msgid "First sector of drive (MBR)"
-msgstr "เซ็กเตอร์แรกของไดรว์ (MBR)"
-
-#: ../install_steps_interactive.pm_.c:708
-msgid "LILO Installation"
-msgstr "การติดตั้ง LILO"
-
-#: ../install_steps_interactive.pm_.c:709
-msgid "Where do you want to install the bootloader?"
-msgstr "คุณจะติดตั้งบูตโหลดเดอร์ไว้ที่ไหน?"
-
-#: ../install_steps_interactive.pm_.c:715
-msgid "Do you want to use LILO?"
-msgstr "คุณต้องการใช้ LILO หรือไม่"
-
-#: ../install_steps_interactive.pm_.c:718
-msgid "Boot device"
-msgstr "อุปกรณ์บูต"
-
-#: ../install_steps_interactive.pm_.c:719
-msgid "Linear (needed for some SCSI drives)"
-msgstr "Linear (ใช้สำหรับไดรว์แบบ SCSI บางตัว)"
-
-#: ../install_steps_interactive.pm_.c:719
-msgid "linear"
-msgstr "linear"
-
-#: ../install_steps_interactive.pm_.c:720
-msgid "Compact"
-msgstr "แบบอัด (Compact)"
-
-#: ../install_steps_interactive.pm_.c:720
-msgid "compact"
-msgstr "แบบอัด (compact)"
-
-#: ../install_steps_interactive.pm_.c:721
-msgid "Delay before booting default image"
-msgstr "หน่วงเวลาก่อนทำการบูตอิมเมจที่ใช้"
-
-#: ../install_steps_interactive.pm_.c:722
-msgid "Video mode"
-msgstr "โหมดของการแสดงผล"
-
-#: ../install_steps_interactive.pm_.c:726
-msgid "Restrict command line options"
-msgstr "อ็อปชั่นจำเพาะที่ใช้กับคอมมานด์ไลน์"
-
-#: ../install_steps_interactive.pm_.c:726
-msgid "restrict"
-msgstr "จำเพาะ"
-
-#: ../install_steps_interactive.pm_.c:732
-msgid "LILO main options"
-msgstr "อ๊อปชั่นหลักของ LILO"
-
-#: ../install_steps_interactive.pm_.c:735
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
-msgstr "อ็อปชั่น ``อ๊อปชั่นจำเพาะที่ใช้กับคอมมานด์ไลน์'' จะต้องใส่รหัสผ่านด้วย"
-
-#: ../install_steps_interactive.pm_.c:746
-#, fuzzy
-msgid ""
-"Here are the following entries in LILO.\n"
-"You can add some more or change the existing ones."
-msgstr ""
-"ต่อไปนี้เป็นข้อมูลใน LILO\n"
-"คุณต้องการเพิ่มข้อมูลหรือแก้ไขข้อมูลที่มีได้"
-
-#: ../install_steps_interactive.pm_.c:748 ../standalone/rpmdrake_.c:302
-msgid "Add"
-msgstr "เพิ่ม"
-
-#: ../install_steps_interactive.pm_.c:757
-msgid "Linux"
-msgstr "ลีนุกซ์"
-
-#: ../install_steps_interactive.pm_.c:757
-msgid "Other OS (windows...)"
-msgstr "ระบบปฏิบัติการอื่นๆ (วินโดวส์...)"
-
-#: ../install_steps_interactive.pm_.c:757
-msgid "Which type of entry do you want to add"
-msgstr "ข้อมูลประเภทใดที่คุณต้องการเพิ่ม"
-
-#: ../install_steps_interactive.pm_.c:777
-msgid "Image"
-msgstr "Image"
-
-#: ../install_steps_interactive.pm_.c:778
-#: ../install_steps_interactive.pm_.c:786
-msgid "Root"
-msgstr "Root"
-
-#: ../install_steps_interactive.pm_.c:779
-msgid "Append"
-msgstr "Append"
-
-#: ../install_steps_interactive.pm_.c:780
-msgid "Initrd"
-msgstr "Initrd"
-
-#: ../install_steps_interactive.pm_.c:781
-msgid "Read-write"
-msgstr "Read-write"
-
-#: ../install_steps_interactive.pm_.c:787
-msgid "Table"
-msgstr "Table"
-
-#: ../install_steps_interactive.pm_.c:788
-msgid "Unsafe"
-msgstr "Unsafe"
-
-#: ../install_steps_interactive.pm_.c:793
-msgid "Label"
-msgstr "Label"
-
-#: ../install_steps_interactive.pm_.c:795
-msgid "Default"
-msgstr "Default"
-
-#: ../install_steps_interactive.pm_.c:798
-msgid "Remove entry"
-msgstr "ลบข้อมูล"
-
-#: ../install_steps_interactive.pm_.c:801
-msgid "Empty label not allowed"
-msgstr "ไม่อนุญาตให้มีหัวข้อว่าง"
-
-#: ../install_steps_interactive.pm_.c:802
-msgid "This label is already in use"
-msgstr "หัวข้อนี้ถูกใช้ไปเรียบร้อยแล้ว"
-
-#: ../install_steps_interactive.pm_.c:803
-#, c-format
-msgid "A entry %s already exists"
-msgstr "มีข้อมูล %s อยู่แล้ว"
-
-#: ../install_steps_interactive.pm_.c:817
+#: ../../install_steps_interactive.pm_.c:785 ../../standalone/drakboot_.c:55
 msgid "Installation of LILO failed. The following error occured:"
 msgstr "การติดตั้ง LILO ล้มเหลว ต่อไปนี้เป็นข้อผิดพลาดที่เกิดขึ้น"
 
-#: ../install_steps_interactive.pm_.c:831
+#: ../../install_steps_interactive.pm_.c:806
+msgid "Do you want to use SILO?"
+msgstr "คุณต้องการใช้ SILO หรือไม่"
+
+#: ../../install_steps_interactive.pm_.c:817
+msgid "SILO main options"
+msgstr "อ๊อปชั่นหลักของ SILO"
+
+#: ../../install_steps_interactive.pm_.c:830
+msgid ""
+"Here are the following entries in SILO.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"ต่อไปนี้เป็นข้อมูลใน SILO\n"
+"คุณต้องการเพิ่มข้อมูลหรือแก้ไขข้อมูลที่มีได้"
+
+#: ../../install_steps_interactive.pm_.c:858
+#, fuzzy
+msgid "Partition"
+msgstr "พาร์ติชั่นรูท"
+
+#: ../../install_steps_interactive.pm_.c:878
+msgid "This label is already in use"
+msgstr "หัวข้อนี้ถูกใช้ไปเรียบร้อยแล้ว"
+
+#: ../../install_steps_interactive.pm_.c:891
+msgid "Installation of SILO failed. The following error occured:"
+msgstr "การติดตั้ง SILO ล้มเหลว ต่อไปนี้เป็นข้อผิดพลาดที่เกิดขึ้น"
+
+#: ../../install_steps_interactive.pm_.c:901
+msgid "Preparing bootloader"
+msgstr "กำลังเตรียมบูตโหลดเดอร์"
+
+#: ../../install_steps_interactive.pm_.c:909
+msgid "Do you want to use aboot?"
+msgstr "คุณต้องการใช้ aboot หรือไม่"
+
+#: ../../install_steps_interactive.pm_.c:912
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:929
 msgid "Proxies configuration"
 msgstr "การคอนฟิก Proxies"
 
-#: ../install_steps_interactive.pm_.c:832
+#: ../../install_steps_interactive.pm_.c:930
 msgid "HTTP proxy"
 msgstr "HTTP proxy"
 
-#: ../install_steps_interactive.pm_.c:833
+#: ../../install_steps_interactive.pm_.c:931
 msgid "FTP proxy"
 msgstr "FTP proxy"
 
-#: ../install_steps_interactive.pm_.c:839
+#: ../../install_steps_interactive.pm_.c:937
 msgid "Proxy should be http://..."
 msgstr "ค่าของ Proxy ควรจะเป็น http://..."
 
-#: ../install_steps_interactive.pm_.c:840
+#: ../../install_steps_interactive.pm_.c:938
 msgid "Proxy should be ftp://..."
 msgstr "ค่าของ Proxy ควรจะเป็น ftp://..."
 
-#: ../install_steps_interactive.pm_.c:850 ../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:948 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:851 ../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:949 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr "ต่ำกว่ามาตรฐาน"
 
-#: ../install_steps_interactive.pm_.c:852 ../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:950 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr "ต่ำ"
 
-#: ../install_steps_interactive.pm_.c:853 ../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:951 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr "ปานกลาง"
 
-#: ../install_steps_interactive.pm_.c:854 ../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:952 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr "สูง"
 
-#: ../install_steps_interactive.pm_.c:855 ../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:953 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr "Paranoid"
 
-#: ../install_steps_interactive.pm_.c:868
+#: ../../install_steps_interactive.pm_.c:966
 msgid "Miscellaneous questions"
 msgstr "คำถามอื่นๆ"
 
-#: ../install_steps_interactive.pm_.c:869
+#: ../../install_steps_interactive.pm_.c:967
 msgid "(may cause data corruption)"
 msgstr "(อาจเกิดข้อมูลเสียหาย)"
 
-#: ../install_steps_interactive.pm_.c:869
+#: ../../install_steps_interactive.pm_.c:967
 msgid "Use hard drive optimisations?"
 msgstr "ใช้วิธีการบีบอัดฮาร์ดไดรว์ (optimisations) หรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:870 ../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:968 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr "เลือกระดับระบบรักษาความปลอดภัย"
 
-#: ../install_steps_interactive.pm_.c:871
+#: ../../install_steps_interactive.pm_.c:969
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "กำหนดค่าหน่วยความจำ (RAM) ให้ถูกต้องถ้าต้องการ (ระบบพบ %d MB)"
 
-#: ../install_steps_interactive.pm_.c:872
+#: ../../install_steps_interactive.pm_.c:970
 msgid "Removable media automounting"
 msgstr ""
 
-#: ../install_steps_interactive.pm_.c:874
+#: ../../install_steps_interactive.pm_.c:972
+msgid "Clean /tmp at each boot"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:975
+msgid "Enable multi profiles"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:977
 msgid "Enable num lock at startup"
 msgstr "ให้เปิด num lock เมื่อเริ่มระบบ"
 
-#: ../install_steps_interactive.pm_.c:877
-msgid "Give the ram size in Mb"
+#: ../../install_steps_interactive.pm_.c:980
+msgid "Give the ram size in MB"
 msgstr "ให้ป้อนข้อมูลของขนาดหน่วยความจำเป็น Mb"
 
-#: ../install_steps_interactive.pm_.c:905
-#: ../install_steps_interactive.pm_.c:1075
+#: ../../install_steps_interactive.pm_.c:982
+#, fuzzy
+msgid "Can't use supermount in high security level"
+msgstr "เลือกระดับระบบรักษาความปลอดภัย"
+
+#: ../../install_steps_interactive.pm_.c:1002
+msgid ""
+"DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
+"By default, the 3.3 server is used because it works on more graphic cards.\n"
+"\n"
+"Do you want to try XFree 4.0?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:1015
+#: ../../install_steps_interactive.pm_.c:1167
 msgid "Try to find PCI devices?"
 msgstr "ให้ลองค้นหาอุปกรณ์ PCI หรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:920
+#: ../../install_steps_interactive.pm_.c:1034
+msgid "Do you want to generate an auto install floppy for linux replication?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:1036
+#, fuzzy, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr "ให้ใส่แผ่นฟล้อปปี้ลงในไดรว์ %s"
+
+#: ../../install_steps_interactive.pm_.c:1044
+#, fuzzy
+msgid "Creating auto install floppy"
+msgstr "กำลังเตรียมการติดตั้ง"
+
+#: ../../install_steps_interactive.pm_.c:1068
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -2713,7 +3192,7 @@ msgstr ""
 "\n"
 "คุณต้องการออกจากการติดตั้งจริงๆหรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:927
+#: ../../install_steps_interactive.pm_.c:1075
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -2735,26 +3214,26 @@ msgstr ""
 "ข้อมูลสำหรับการคอนฟิกระบบของคุณ สามารถหาได้จากช่วง\n"
 "บทหลังจากการติดตั้งของคู่มือแนะนำผู้ใช้งานลีนุกซ์-แมนเดรกฉบับเป็นทางการ"
 
-#: ../install_steps_interactive.pm_.c:936
+#: ../../install_steps_interactive.pm_.c:1084
 msgid "Shutting down"
 msgstr "ยุติการทำงานระบบ"
 
-#: ../install_steps_interactive.pm_.c:950
+#: ../../install_steps_interactive.pm_.c:1096
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "ติดตั้งไดรเวอร์สำหรับ %s การ์ด %s"
 
-#: ../install_steps_interactive.pm_.c:951
+#: ../../install_steps_interactive.pm_.c:1097
 #, c-format
 msgid "(module %s)"
 msgstr "(โมดูล %s)"
 
-#: ../install_steps_interactive.pm_.c:961
+#: ../../install_steps_interactive.pm_.c:1107
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "ต้องการให้โปรแกรมทดลองใช้ไดรเวอร์ %s ชนิดใด?"
 
-#: ../install_steps_interactive.pm_.c:969
+#: ../../install_steps_interactive.pm_.c:1115
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -2771,20 +3250,20 @@ msgstr ""
 "ตรวจหาข้อมูลที่จำเป็นต้องใช้? ในบางกรณีการตรวจหาอาจทำให้คอมพิวเตอร์แฮงค์\n"
 "แต่จะไม่เป็นอันตรายกับคอมพิวเตอร์"
 
-#: ../install_steps_interactive.pm_.c:974
+#: ../../install_steps_interactive.pm_.c:1120
 msgid "Autoprobe"
 msgstr "ตรวจหาอัตโนมัติ"
 
-#: ../install_steps_interactive.pm_.c:974
+#: ../../install_steps_interactive.pm_.c:1120
 msgid "Specify options"
 msgstr "ระบุอ๊อปชั่น"
 
-#: ../install_steps_interactive.pm_.c:978
+#: ../../install_steps_interactive.pm_.c:1124
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "คุณสามารถป้อนข้อมูลอ๊อปชั่นให้กับโมดูล %s ได้แล้ว"
 
-#: ../install_steps_interactive.pm_.c:984
+#: ../../install_steps_interactive.pm_.c:1130
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -2795,11 +3274,11 @@ msgstr ""
 "อ๊อปชั่นจะอยู่ในรูปแบบ ``name=value name2=value2 ...''\n"
 "ตัวอย่างเช่น, ``io=0x300 irq=7''"
 
-#: ../install_steps_interactive.pm_.c:987
+#: ../../install_steps_interactive.pm_.c:1133
 msgid "Module options:"
 msgstr "อ๊อปชั่นของโมดูล:"
 
-#: ../install_steps_interactive.pm_.c:997
+#: ../../install_steps_interactive.pm_.c:1143
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -2808,301 +3287,309 @@ msgstr ""
 "การโหลดโมดูล %s ล้มเหลว\n"
 "คุณต้องการให้ทดลองอีกครั้งด้วยพารามิเตอร์อื่นๆอีกหรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:1010
+#: ../../install_steps_interactive.pm_.c:1156
 msgid "Try to find PCMCIA cards?"
 msgstr "ให้ลองค้นหาการ์ด PCMCIA หรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:1011
+#: ../../install_steps_interactive.pm_.c:1157
 msgid "Configuring PCMCIA cards..."
 msgstr "กำลังคอนฟิกการ์ด PCMCIA..."
 
-#: ../install_steps_interactive.pm_.c:1011
+#: ../../install_steps_interactive.pm_.c:1157
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../install_steps_interactive.pm_.c:1018
-msgid ""
-"Linux does not yet fully support ultra dma 66 HPT.\n"
-"As a work-around i can make a custom floppy giving access the hard drive on "
-"ide2 and ide3"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1039
-#, fuzzy
-msgid ""
-"Enter a floppy to create an HTP enabled boot\n"
-"(all data on floppy will be lost)"
-msgstr ""
-"กรุณาใส่แผ่นฟล้อปปี้ในไดรว์\n"
-"ข้อมูลทั้งหมดบนแผ่นฟล้อปปี้จะถูกลบ"
-
-#: ../install_steps_interactive.pm_.c:1056
-msgid "It is necessary to restart installation booting on the floppy"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1057
-msgid "It is necessary to restart installation with the new parameters"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1061
-#, c-format
-msgid ""
-"Failed to create an HTP boot floppy.\n"
-"You may have to restart installation and give ``%s'' at the prompt"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:1081
+#: ../../install_steps_interactive.pm_.c:1176
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "ตรวจพบ %s อินเทอร์เฟส %s"
 
-#: ../install_steps_interactive.pm_.c:1082
+#: ../../install_steps_interactive.pm_.c:1177
 msgid "Do you have another one?"
 msgstr "คุณมีอันอื่นๆอีกหรือไม่?"
 
-#: ../install_steps_interactive.pm_.c:1083
+#: ../../install_steps_interactive.pm_.c:1178
 #, c-format
-msgid "Do you have any %s interface?"
+msgid "Do you have any %s interfaces?"
 msgstr "คุณมีอินเทอร์เฟส %s จำนวนเท่าไหร่?"
 
-#: ../install_steps_interactive.pm_.c:1085 ../interactive.pm_.c:79
-#: ../my_gtk.pm_.c:424 ../printerdrake.pm_.c:176
+#: ../../install_steps_interactive.pm_.c:1180 ../../interactive.pm_.c:79
+#: ../../my_gtk.pm_.c:458 ../../printerdrake.pm_.c:124
 msgid "No"
 msgstr "ไม่ต้อง"
 
-#: ../install_steps_interactive.pm_.c:1085 ../interactive.pm_.c:79
-#: ../my_gtk.pm_.c:424
+#: ../../install_steps_interactive.pm_.c:1180 ../../interactive.pm_.c:79
+#: ../../my_gtk.pm_.c:458
 msgid "Yes"
 msgstr "ใช่"
 
-#: ../install_steps_interactive.pm_.c:1086
+#: ../../install_steps_interactive.pm_.c:1181
 msgid "See hardware info"
 msgstr "อ่านต่อข้อมูลของฮาร์ดแวร์"
 
-#: ../install_steps_newt.pm_.c:19
+#: ../../install_steps_interactive.pm_.c:1197
+#, fuzzy
+msgid "Bringing up the network"
+msgstr "กำลังคอนฟิกระบบเน็ตเวิร์ก"
+
+#: ../../install_steps_interactive.pm_.c:1202
+#, fuzzy
+msgid "Bringing down the network"
+msgstr "กำลังคอนฟิกระบบเน็ตเวิร์ก"
+
+#: ../../install_steps_newt.pm_.c:21
 #, c-format
 msgid "Linux-Mandrake Installation %s"
 msgstr "การติดตั้งลีนุกซ์-แมนเดรก %s"
 
-#: ../install_steps_newt.pm_.c:30
+#: ../../install_steps_newt.pm_.c:32
 msgid ""
 "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr "  <Tab>/<Alt-Tab> ระหว่างตัวเลือก | <Space> เลือก | <F12> หน้าถัดไป "
 
-#: ../interactive.pm_.c:84 ../interactive.pm_.c:163
-#: ../interactive_newt.pm_.c:50 ../interactive_newt.pm_.c:97
-#: ../interactive_stdio.pm_.c:27 ../my_gtk.pm_.c:193 ../my_gtk.pm_.c:425
-msgid "Cancel"
-msgstr "ยกเลิก"
+#: ../../install_steps_newt.pm_.c:43
+#, c-format
+msgid ""
+"You can now partition your %s hard drive\n"
+"When you are done, don't forget to save using `w'"
+msgstr ""
 
-#: ../interactive.pm_.c:181
+#: ../../interactive.pm_.c:244
 msgid "Please wait"
 msgstr "โปรดรอสักครู่"
 
-#: ../interactive_stdio.pm_.c:35
+#: ../../interactive_stdio.pm_.c:35
 #, c-format
 msgid "Ambiguity (%s), be more precise\n"
 msgstr "เกิดข้อขัดแย้ง (%s), โปรดเลือกให้ถูกต้อง\n"
 
-#: ../interactive_stdio.pm_.c:36 ../interactive_stdio.pm_.c:51
-#: ../interactive_stdio.pm_.c:70
+#: ../../interactive_stdio.pm_.c:36 ../../interactive_stdio.pm_.c:51
+#: ../../interactive_stdio.pm_.c:70
 msgid "Bad choice, try again\n"
 msgstr "ตัวเลือกผิดพลาด โปรดทดลองอีกครั้ง\n"
 
-#: ../interactive_stdio.pm_.c:39
+#: ../../interactive_stdio.pm_.c:39
 #, c-format
 msgid " ? (default %s) "
 msgstr " ? (ค่าตั้งต้น %s) "
 
-#: ../interactive_stdio.pm_.c:52
+#: ../../interactive_stdio.pm_.c:52
 #, c-format
 msgid "Your choice? (default %s) "
 msgstr "ตัวเลือกของคุณ? (ค่าตั้งต้น %s)"
 
-#: ../interactive_stdio.pm_.c:71
+#: ../../interactive_stdio.pm_.c:71
 #, c-format
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "ตัวเลือกของคุณ? (ค่าตั้งต้น %s ให้ใส่ `none' เพื่อตัวเลือกว่าง) "
 
-#: ../keyboard.pm_.c:88
-msgid "Armenian"
-msgstr "อาร์เมเนียน"
-
-#: ../keyboard.pm_.c:89
-msgid "Belgian"
-msgstr "เบลเยี่ยม"
-
-#: ../keyboard.pm_.c:90
-msgid "Bulgarian"
-msgstr "บัลกาเรีย"
-
-#: ../keyboard.pm_.c:91
-msgid "Brazilian"
-msgstr "บราซิล"
-
-#: ../keyboard.pm_.c:92
-msgid "Swiss (French layout)"
-msgstr "สวิส (เลย์เอ้าท์ตามฝรั่งเศษ)"
-
-#: ../keyboard.pm_.c:93
-msgid "Swiss (German layout)"
-msgstr "สวิส (เลย์เอ้าท์ตามเยอรมัน)"
-
-#: ../keyboard.pm_.c:94
+#: ../../keyboard.pm_.c:89 ../../keyboard.pm_.c:116
 msgid "Czech"
 msgstr "เชคโกสโลวาเกีย"
 
-#: ../keyboard.pm_.c:95
+#: ../../keyboard.pm_.c:90 ../../keyboard.pm_.c:103 ../../keyboard.pm_.c:117
 msgid "German"
 msgstr "เยอรมัน"
 
-#: ../keyboard.pm_.c:96
-msgid "Danish"
-msgstr "เดนมาร์ก"
-
-#: ../keyboard.pm_.c:97
+#: ../../keyboard.pm_.c:91 ../../keyboard.pm_.c:120
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../keyboard.pm_.c:98
-msgid "Estonian"
-msgstr "Estonian"
-
-#: ../keyboard.pm_.c:99
+#: ../../keyboard.pm_.c:92 ../../keyboard.pm_.c:122
 msgid "Spanish"
 msgstr "สเปน"
 
-#: ../keyboard.pm_.c:100
+#: ../../keyboard.pm_.c:93 ../../keyboard.pm_.c:123
 msgid "Finnish"
 msgstr "ฟินแลนด์"
 
-#: ../keyboard.pm_.c:101
+#: ../../keyboard.pm_.c:94 ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:124
 msgid "French"
 msgstr "ฝรั่งเศษ"
 
-#: ../keyboard.pm_.c:102
-msgid "Georgian (\"Russian\" layout)"
-msgstr "จอร์เจีย (เลย์เอ้าท์แบบรัสเซีย)"
-
-#: ../keyboard.pm_.c:103
-msgid "Georgian (\"Latin\" layout)"
-msgstr "จอร์เจีย (เลย์เอ้าท์แบบละติน)"
-
-#: ../keyboard.pm_.c:104
-msgid "Greek"
-msgstr "กรีก"
-
-#: ../keyboard.pm_.c:105
-msgid "Hungarian"
-msgstr "อังการี"
-
-#: ../keyboard.pm_.c:106
-msgid "Israeli"
-msgstr "อิสราเอล"
-
-#: ../keyboard.pm_.c:107
-msgid "Israeli (Phonetic)"
-msgstr "อิลราเอล (โฟเนติค)"
-
-#: ../keyboard.pm_.c:108
-msgid "Icelandic"
-msgstr "ไอซ์แลนด์"
-
-#: ../keyboard.pm_.c:109
-msgid "Italian"
-msgstr "อิตาลี"
-
-#: ../keyboard.pm_.c:110
-msgid "Latin American"
-msgstr "ละตินอเมริกา"
-
-#: ../keyboard.pm_.c:111
-msgid "Dutch"
-msgstr "ฮอลแลนด์"
-
-#: ../keyboard.pm_.c:112
-msgid "Lithuanian AZERTY"
-msgstr "ลิธัวเนีย AZERTY"
-
-#: ../keyboard.pm_.c:113
-msgid "Lithuanian \"number row\" QWERTY"
-msgstr "ลิธัวเนีย \"แถวตัวเลข\" QWERTY"
-
-#: ../keyboard.pm_.c:114
-msgid "Lithuanian \"phonetic\" QWERTY"
-msgstr "ลิธัวเนีย \"โฟเนติค\" QWERTY"
-
-#: ../keyboard.pm_.c:115
+#: ../../keyboard.pm_.c:95 ../../keyboard.pm_.c:143
 msgid "Norwegian"
 msgstr "นอร์เวย์"
 
-#: ../keyboard.pm_.c:116
+#: ../../keyboard.pm_.c:96
+msgid "Polish"
+msgstr "โปแลนด์"
+
+#: ../../keyboard.pm_.c:97 ../../keyboard.pm_.c:148
+msgid "Russian"
+msgstr "รัสเซีย"
+
+#: ../../keyboard.pm_.c:98 ../../keyboard.pm_.c:157
+msgid "UK keyboard"
+msgstr "อังกฤษ"
+
+#: ../../keyboard.pm_.c:99 ../../keyboard.pm_.c:102 ../../keyboard.pm_.c:158
+msgid "US keyboard"
+msgstr "อเมริกา"
+
+#: ../../keyboard.pm_.c:106
+#, fuzzy
+msgid "Armenian (old)"
+msgstr "อาร์เมเนียน"
+
+#: ../../keyboard.pm_.c:107
+#, fuzzy
+msgid "Armenian (typewriter)"
+msgstr "อาร์เมเนียน (โฟเนติค)"
+
+#: ../../keyboard.pm_.c:108
+msgid "Armenian (phonetic)"
+msgstr "อาร์เมเนียน (โฟเนติค)"
+
+#: ../../keyboard.pm_.c:111
+msgid "Belgian"
+msgstr "เบลเยี่ยม"
+
+#: ../../keyboard.pm_.c:112
+msgid "Bulgarian"
+msgstr "บัลกาเรีย"
+
+#: ../../keyboard.pm_.c:113
+msgid "Brazilian (ABNT-2)"
+msgstr "บราซิล"
+
+#: ../../keyboard.pm_.c:114
+msgid "Swiss (German layout)"
+msgstr "สวิส (เลย์เอ้าท์ตามเยอรมัน)"
+
+#: ../../keyboard.pm_.c:115
+msgid "Swiss (French layout)"
+msgstr "สวิส (เลย์เอ้าท์ตามฝรั่งเศษ)"
+
+#: ../../keyboard.pm_.c:118
+msgid "German (no dead keys)"
+msgstr ""
+
+#: ../../keyboard.pm_.c:119
+msgid "Danish"
+msgstr "เดนมาร์ก"
+
+#: ../../keyboard.pm_.c:121
+msgid "Estonian"
+msgstr "Estonian"
+
+#: ../../keyboard.pm_.c:125
+msgid "Georgian (\"Russian\" layout)"
+msgstr "จอร์เจีย (เลย์เอ้าท์แบบรัสเซีย)"
+
+#: ../../keyboard.pm_.c:126
+msgid "Georgian (\"Latin\" layout)"
+msgstr "จอร์เจีย (เลย์เอ้าท์แบบละติน)"
+
+#: ../../keyboard.pm_.c:127
+msgid "Greek"
+msgstr "กรีก"
+
+#: ../../keyboard.pm_.c:128
+msgid "Hungarian"
+msgstr "อังการี"
+
+#: ../../keyboard.pm_.c:129
+msgid "Croatian"
+msgstr ""
+
+#: ../../keyboard.pm_.c:130
+msgid "Israeli"
+msgstr "อิสราเอล"
+
+#: ../../keyboard.pm_.c:131
+msgid "Israeli (Phonetic)"
+msgstr "อิลราเอล (โฟเนติค)"
+
+#: ../../keyboard.pm_.c:134
+msgid "Icelandic"
+msgstr "ไอซ์แลนด์"
+
+#: ../../keyboard.pm_.c:135
+msgid "Italian"
+msgstr "อิตาลี"
+
+#: ../../keyboard.pm_.c:136
+msgid "Latin American"
+msgstr "ละตินอเมริกา"
+
+#: ../../keyboard.pm_.c:137
+msgid "Dutch"
+msgstr "ฮอลแลนด์"
+
+#: ../../keyboard.pm_.c:138
+#, fuzzy
+msgid "Lithuanian AZERTY (old)"
+msgstr "ลิธัวเนีย AZERTY"
+
+#: ../../keyboard.pm_.c:140
+#, fuzzy
+msgid "Lithuanian AZERTY (new)"
+msgstr "ลิธัวเนีย AZERTY"
+
+#: ../../keyboard.pm_.c:141
+msgid "Lithuanian \"number row\" QWERTY"
+msgstr "ลิธัวเนีย \"แถวตัวเลข\" QWERTY"
+
+#: ../../keyboard.pm_.c:142
+msgid "Lithuanian \"phonetic\" QWERTY"
+msgstr "ลิธัวเนีย \"โฟเนติค\" QWERTY"
+
+#: ../../keyboard.pm_.c:144
 #, fuzzy
 msgid "Polish (qwerty layout)"
 msgstr "สวิส (เลย์เอ้าท์ตามเยอรมัน)"
 
-#: ../keyboard.pm_.c:117
+#: ../../keyboard.pm_.c:145
 #, fuzzy
 msgid "Polish (qwertz layout)"
 msgstr "สวิส (เลย์เอ้าท์ตามเยอรมัน)"
 
-#: ../keyboard.pm_.c:118
+#: ../../keyboard.pm_.c:146
 msgid "Portuguese"
 msgstr "โปรตุเกส"
 
-#: ../keyboard.pm_.c:119
+#: ../../keyboard.pm_.c:147
 msgid "Canadian (Quebec)"
 msgstr "คานาดา (ควิเบค)"
 
-#: ../keyboard.pm_.c:120
-msgid "Russian"
-msgstr "รัสเซีย"
-
-#: ../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:149
 msgid "Russian (Yawerty)"
 msgstr "รัสเซีย (Yawerty)"
 
-#: ../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:150
 msgid "Swedish"
 msgstr "สวีเดน"
 
-#: ../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:151
 msgid "Slovenian"
 msgstr "สโลวาเนีย"
 
-#: ../keyboard.pm_.c:124
+#: ../../keyboard.pm_.c:152
 msgid "Slovakian"
 msgstr "สโลวาเกีย"
 
-#: ../keyboard.pm_.c:125
+#: ../../keyboard.pm_.c:153
 msgid "Thai keyboard"
 msgstr "ไทย"
 
-#: ../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:154
 msgid "Turkish (traditional \"F\" model)"
 msgstr "ตุรกี (โมเดลแบบแผน \"F\")"
 
-#: ../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:155
 msgid "Turkish (modern \"Q\" model)"
 msgstr "ตุรกี (โมเดลสมัยใหม่ \"Q\")"
 
-#: ../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:156
 msgid "Ukrainian"
 msgstr "ยูเครน"
 
-#: ../keyboard.pm_.c:129
-msgid "UK keyboard"
-msgstr "อังกฤษ"
-
-#: ../keyboard.pm_.c:130
-msgid "US keyboard"
-msgstr "อเมริกา"
-
-#: ../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:159
 msgid "US keyboard (international)"
 msgstr "คีย์บอร์ดอเมริกัน (นานาชาติ)"
 
-#: ../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:160
 msgid "Yugoslavian (latin layout)"
 msgstr "ยูโกสลาเวีย (เลย์เอ้าท์แบบละติน)"
 
@@ -3112,7 +3599,7 @@ msgstr "ยูโกสลาเวีย (เลย์เอ้าท์แบบละติน)"
 # transliteration be used; or maybe the english text be used; as it is best
 # When possible cp437 accentuated letters can be used too.
 #
-#: ../lilo.pm_.c:145
+#: ../../lilo.pm_.c:176
 #, c-format
 msgid ""
 "Welcome to LILO the operating system chooser!\n"
@@ -3131,131 +3618,213 @@ msgstr ""
 "แล้วกด <ENTER> หรือให้รอสัก %d วินาทีเพื่อใช้การบูตจากตัวเลือกตั้งต้น\n"
 "\n"
 
-#: ../mouse.pm_.c:20
-msgid "No Mouse"
-msgstr "ไม่มีเม้าส์"
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is the nsuggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
+#: ../../lilo.pm_.c:431
+msgid "Welcome to GRUB the operating system chooser!"
+msgstr ""
 
-#: ../mouse.pm_.c:21
-msgid "Microsoft Rev 2.1A or higher (serial)"
-msgstr "Microsoft Rev 2.1A หรือสูงกว่า (พอร์ตอนุกรม)"
+#: ../../lilo.pm_.c:432
+#, c-format
+msgid "Use the %c and %c keys for selecting which entry is highlighted."
+msgstr ""
 
-#: ../mouse.pm_.c:22
-msgid "Logitech CC Series (serial)"
-msgstr "Logitech CC Series (พอร์ตอนุกรม)"
+#: ../../lilo.pm_.c:433
+msgid "Press enter to boot the selected OS, 'e' to edit the"
+msgstr ""
 
-#: ../mouse.pm_.c:23
-msgid "Logitech MouseMan+/FirstMouse+ (serial)"
-msgstr "Logitech MouseMan+/FirstMouse+ (พอร์ตอนุกรม)"
+#: ../../lilo.pm_.c:434
+msgid "commands before booting, or 'c' for a command-line."
+msgstr ""
 
-#: ../mouse.pm_.c:24
-msgid "ASCII MieMouse (serial)"
-msgstr "ASCII MieMouse (พอร์ตอนุกรม)"
+#: ../../lilo.pm_.c:435
+#, c-format
+msgid "The highlighted entry will be booted automatically in %d seconds."
+msgstr ""
 
-#: ../mouse.pm_.c:25
-msgid "Genius NetMouse (serial)"
-msgstr "Genius NetMouse (พอร์ตอนุกรม)"
+#: ../../lilo.pm_.c:439
+msgid "not enough room in /boot"
+msgstr ""
 
-#: ../mouse.pm_.c:26
-msgid "Microsoft IntelliMouse (serial)"
-msgstr "Microsoft IntelliMouse (พอร์ตอนุกรม)"
+#. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
+#: ../../lilo.pm_.c:518
+msgid "Desktop"
+msgstr ""
 
-#: ../mouse.pm_.c:27
-msgid "MM Series (serial)"
-msgstr "MM Series (พอร์ตอนุกรม)"
+#: ../../lilo.pm_.c:518
+msgid "Start Menu"
+msgstr ""
 
-#: ../mouse.pm_.c:28
-msgid "MM HitTablet (serial)"
-msgstr "MM HitTablet (พอร์ตอนุกรม)"
+#: ../../mouse.pm_.c:21
+#, fuzzy
+msgid "Sun - Mouse"
+msgstr "เม้าส์แบบ USB"
 
-#: ../mouse.pm_.c:29
-msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "Logitech Mouse (พอร์ตอนุกรม, แบบเก่า C7)"
+#: ../../mouse.pm_.c:23
+#, fuzzy
+msgid "Apple ADB Mouse"
+msgstr "เม้าส์แบบ ATI บัส"
 
-#: ../mouse.pm_.c:30
-msgid "Logitech MouseMan/FirstMouse (serial)"
-msgstr "Logitech MouseMan/FirstMouse (พอร์ตอนุกรม)"
+#: ../../mouse.pm_.c:24
+#, fuzzy
+msgid "Apple ADB Mouse (2 Buttons)"
+msgstr "เม้าส์แบบ USB (3 ปุ่มหรือมากกว่า)"
 
-#: ../mouse.pm_.c:31
-msgid "Generic Mouse (serial)"
-msgstr "เม้าส์แบบปกติ (พอร์ตอนุกรม)"
+#: ../../mouse.pm_.c:25
+#, fuzzy
+msgid "Apple ADB Mouse (3+ Buttons)"
+msgstr "เม้าส์แบบ USB (3 ปุ่มหรือมากกว่า)"
 
-#: ../mouse.pm_.c:32
-msgid "Microsoft compatible (serial)"
-msgstr "เม้าส์ที่เข้ากันได้กับไมโครซอฟท์ (พอร์ตปกติ)"
+#: ../../mouse.pm_.c:26
+#, fuzzy
+msgid "Apple USB Mouse"
+msgstr "เม้าส์แบบ USB"
 
-#: ../mouse.pm_.c:33
-msgid "Generic 3 Button Mouse (serial)"
-msgstr "เม้าส์แบบปกติที่ใช้งานสามปุ่ม (พอร์ตปกติ)"
+#: ../../mouse.pm_.c:27
+#, fuzzy
+msgid "Apple USB Mouse (2 Buttons)"
+msgstr "เม้าส์แบบ USB (3 ปุ่มหรือมากกว่า)"
 
-#: ../mouse.pm_.c:34
-msgid "Mouse Systems (serial)"
-msgstr "Mouse Systems (พอร์ตอนุกรม)"
+#: ../../mouse.pm_.c:28
+#, fuzzy
+msgid "Apple USB Mouse (3+ Buttons)"
+msgstr "เม้าส์แบบ USB (3 ปุ่มหรือมากกว่า)"
 
-#: ../mouse.pm_.c:35
+#: ../../mouse.pm_.c:30
 msgid "Generic Mouse (PS/2)"
 msgstr "เม้าส์แบบปกติ (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:36
+#: ../../mouse.pm_.c:31
 msgid "Logitech MouseMan/FirstMouse (ps/2)"
 msgstr "Logitech MouseMan/FirstMouse (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:37
+#: ../../mouse.pm_.c:32
 msgid "Generic 3 Button Mouse (PS/2)"
 msgstr "เม้าส์แบบปกติที่ใช้งานสามปุ่ม (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:38
+#: ../../mouse.pm_.c:33
 msgid "ALPS GlidePoint (PS/2)"
 msgstr "ALPS GlidePoint (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:39
+#: ../../mouse.pm_.c:34
 msgid "Logitech MouseMan+/FirstMouse+ (PS/2)"
 msgstr "Logitech MouseMan+/FirstMouse+ (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:40
+#: ../../mouse.pm_.c:35
 msgid "Kensington Thinking Mouse (PS/2)"
 msgstr "Kensington Thinking Mouse (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:41
+#: ../../mouse.pm_.c:36
 msgid "ASCII MieMouse (PS/2)"
 msgstr "ASCII MieMouse (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:42
+#: ../../mouse.pm_.c:37
 msgid "Genius NetMouse (PS/2)"
 msgstr "Genius NetMouse (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:43
+#: ../../mouse.pm_.c:38
 msgid "Genius NetMouse Pro (PS/2)"
 msgstr "Genius NetMouse Pro (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:44
+#: ../../mouse.pm_.c:39
 msgid "Genius NetScroll (PS/2)"
 msgstr "Genius NetScroll (พอร์ต PS/2)"
 
-#: ../mouse.pm_.c:45
+#: ../../mouse.pm_.c:40
 msgid "Microsoft IntelliMouse (PS/2)"
 msgstr "Microsoft IntelliMouse (PS/2)"
 
-#: ../mouse.pm_.c:46
+#: ../../mouse.pm_.c:41
 msgid "ATI Bus Mouse"
 msgstr "เม้าส์แบบ ATI บัส"
 
-#: ../mouse.pm_.c:47
+#: ../../mouse.pm_.c:42
 msgid "Microsoft Bus Mouse"
 msgstr "เม้าส์แบบไมโครซอฟท์บัส"
 
-#: ../mouse.pm_.c:48
+#: ../../mouse.pm_.c:43
 msgid "Logitech Bus Mouse"
 msgstr "เม้าส์แบบลอจิเทคบัส"
 
-#: ../mouse.pm_.c:49
+#: ../../mouse.pm_.c:44
 msgid "USB Mouse"
 msgstr "เม้าส์แบบ USB"
 
-#: ../mouse.pm_.c:50
+#: ../../mouse.pm_.c:45
 msgid "USB Mouse (3 buttons or more)"
 msgstr "เม้าส์แบบ USB (3 ปุ่มหรือมากกว่า)"
 
-#: ../partition_table.pm_.c:486
+#: ../../mouse.pm_.c:47
+msgid "No Mouse"
+msgstr "ไม่มีเม้าส์"
+
+#: ../../mouse.pm_.c:48
+msgid "Microsoft Rev 2.1A or higher (serial)"
+msgstr "Microsoft Rev 2.1A หรือสูงกว่า (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:49
+msgid "Logitech CC Series (serial)"
+msgstr "Logitech CC Series (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:50
+msgid "Logitech MouseMan+/FirstMouse+ (serial)"
+msgstr "Logitech MouseMan+/FirstMouse+ (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:51
+msgid "ASCII MieMouse (serial)"
+msgstr "ASCII MieMouse (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:52
+msgid "Genius NetMouse (serial)"
+msgstr "Genius NetMouse (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:53
+msgid "Microsoft IntelliMouse (serial)"
+msgstr "Microsoft IntelliMouse (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:54
+msgid "MM Series (serial)"
+msgstr "MM Series (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:55
+msgid "MM HitTablet (serial)"
+msgstr "MM HitTablet (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:56
+msgid "Logitech Mouse (serial, old C7 type)"
+msgstr "Logitech Mouse (พอร์ตอนุกรม, แบบเก่า C7)"
+
+#: ../../mouse.pm_.c:57
+msgid "Logitech MouseMan/FirstMouse (serial)"
+msgstr "Logitech MouseMan/FirstMouse (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:58
+msgid "Generic Mouse (serial)"
+msgstr "เม้าส์แบบปกติ (พอร์ตอนุกรม)"
+
+#: ../../mouse.pm_.c:59
+msgid "Microsoft compatible (serial)"
+msgstr "เม้าส์ที่เข้ากันได้กับไมโครซอฟท์ (พอร์ตปกติ)"
+
+#: ../../mouse.pm_.c:60
+msgid "Generic 3 Button Mouse (serial)"
+msgstr "เม้าส์แบบปกติที่ใช้งานสามปุ่ม (พอร์ตปกติ)"
+
+#: ../../mouse.pm_.c:61
+msgid "Mouse Systems (serial)"
+msgstr "Mouse Systems (พอร์ตอนุกรม)"
+
+#: ../../my_gtk.pm_.c:459
+msgid "Is this correct?"
+msgstr "ถูกต้องหรือไม่?"
+
+#: ../../partition_table.pm_.c:533
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
@@ -3265,114 +3834,129 @@ msgstr ""
 "การแก้ไขปัญหาสามารถทำได้โดยย้ายไพรมารีพาร์ติชั่น "
 "เพื่อให้ช่องว่าไปต่อท้ายพาร์ติชั่นแบบ extended"
 
-#: ../partition_table.pm_.c:572
+#: ../../partition_table.pm_.c:621
 #, c-format
 msgid "Error reading file %s"
 msgstr "มีปัญหากับการอ่านข้อมูลในไฟล์ %s"
 
-#: ../partition_table.pm_.c:579
+#: ../../partition_table.pm_.c:628
 #, c-format
 msgid "Restoring from file %s failed: %s"
 msgstr "การกู้คืนจากไฟล์ %s ล้มเหลว: %s"
 
-#: ../partition_table.pm_.c:581
+#: ../../partition_table.pm_.c:630
 msgid "Bad backup file"
 msgstr "ไฟล์แบ็คอัพมีปัญหา"
 
-#: ../partition_table.pm_.c:602
+#: ../../partition_table.pm_.c:651
 #, c-format
 msgid "Error writing to file %s"
 msgstr "ข้อผิดพลาดถูกบันทึกในไฟล์ %s"
 
-#: ../placeholder.pm_.c:5
+#: ../../pkgs.pm_.c:20
+msgid "mandatory"
+msgstr ""
+
+#: ../../pkgs.pm_.c:21
+msgid "must have"
+msgstr ""
+
+#: ../../pkgs.pm_.c:22
+msgid "important"
+msgstr ""
+
+#: ../../pkgs.pm_.c:24
+msgid "very nice"
+msgstr ""
+
+#: ../../pkgs.pm_.c:25
+#, fuzzy
+msgid "nice"
+msgstr "อุปกรณ์"
+
+#: ../../pkgs.pm_.c:26 ../../pkgs.pm_.c:27
+#, fuzzy
+msgid "interesting"
+msgstr "ปรับขนาด"
+
+#: ../../pkgs.pm_.c:28 ../../pkgs.pm_.c:29 ../../pkgs.pm_.c:30
+#: ../../pkgs.pm_.c:31
+#, fuzzy
+msgid "maybe"
+msgstr "Image"
+
+#: ../../pkgs.pm_.c:33
+msgid "i18n (important)"
+msgstr ""
+
+#: ../../pkgs.pm_.c:34
+msgid "i18n (very nice)"
+msgstr ""
+
+#: ../../pkgs.pm_.c:35
+msgid "i18n (nice)"
+msgstr ""
+
+#: ../../placeholder.pm_.c:5
 #, fuzzy
 msgid "Show less"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: ../placeholder.pm_.c:6
+#: ../../placeholder.pm_.c:6
 msgid "Show more"
 msgstr ""
 
-#: ../printer.pm_.c:244
+#: ../../printer.pm_.c:244
 msgid "Local printer"
 msgstr "เครื่องพิมพ์โลคอล (ต่อติดกับตัวเครื่อง)"
 
-#: ../printer.pm_.c:245
+#: ../../printer.pm_.c:245
 msgid "Remote lpd"
 msgstr "รีโมต lpd"
 
-#: ../printer.pm_.c:246
+#: ../../printer.pm_.c:246
 msgid "SMB/Windows 95/98/NT"
 msgstr "SMB/วินโดวส์ 95/98/NT"
 
-#: ../printer.pm_.c:247
+#: ../../printer.pm_.c:247
 msgid "NetWare"
 msgstr "เน็ตแวร์"
 
-#: ../printerdrake.pm_.c:75
-msgid "Local Printer Options"
-msgstr "อ็อปชั่นของเครื่องพิมพ์โลคอล"
-
-#: ../printerdrake.pm_.c:76
-msgid ""
-"Every print queue (which print jobs are directed to) needs a\n"
-"name (often lp) and a spool directory associated with it. What\n"
-"name and directory should be used for this queue?"
-msgstr ""
-"พรินต์คิว (พรินต์คิวเป็นที่ๆงานพิมพ์จะไปเก็บไว้ที่นี่ก่อนส่งเครื่องพิมพ์)\n"
-"ต้องการให้มีการตั้งชื่อ (ปกติจะเป็น lp) และไดเร็กทอรีที่เก็บข้อมูล\n"
-"คุณต้องการตั้งชื่อ และกำหนดไดเร็กทอรีให้เป็นค่าใดบ้าง?"
-
-#: ../printerdrake.pm_.c:79
-msgid "Name of queue:"
-msgstr "ชื่อของคิว:"
-
-#: ../printerdrake.pm_.c:79
-msgid "Spool directory:"
-msgstr "สปูลไดเร็กทอรี:"
-
-#: ../printerdrake.pm_.c:90
-msgid "Select Printer Connection"
-msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
-
-#: ../printerdrake.pm_.c:91
-msgid "How is the printer connected?"
-msgstr "เครื่องพิมพ์เชื่อมต่ออย่างไร?"
-
-#: ../printerdrake.pm_.c:99
+#: ../../printerdrake.pm_.c:19
 msgid "Detecting devices..."
 msgstr "กำลังตรวจสอบอุปกรณ์..."
 
-#: ../printerdrake.pm_.c:99
+#: ../../printerdrake.pm_.c:19
 msgid "Test ports"
 msgstr "กำลังตรวจสอบพอร์ต"
 
-#: ../printerdrake.pm_.c:112
+#: ../../printerdrake.pm_.c:35
 #, c-format
 msgid "A printer, model \"%s\", has been detected on "
 msgstr "ตรวจพบเครื่องพิมพ์โมเดล \"%s\""
 
-#: ../printerdrake.pm_.c:119
+#: ../../printerdrake.pm_.c:44
 msgid "Local Printer Device"
 msgstr "อุปกรณ์เครื่องพิมพ์โลคอล"
 
-#: ../printerdrake.pm_.c:120
+#: ../../printerdrake.pm_.c:45
 msgid ""
-"What device is your printer connected to  \n"
+"What device is your printer connected to \n"
 "(note that /dev/lp0 is equivalent to LPT1:)?\n"
 msgstr ""
 "อุปกรณ์ที่เครื่องพิมพ์ของคุณเชื่อมต่ออยู่คือ \n"
 "( /dev/lp0 จะเทีบเท่ากับ LPT1:)?\n"
 
-#: ../printerdrake.pm_.c:121
-msgid "Printer Device:"
+#: ../../printerdrake.pm_.c:47
+#, fuzzy
+msgid "Printer Device"
 msgstr "อุปกรณ์เครื่องพิมพ์:"
 
-#: ../printerdrake.pm_.c:125
+#: ../../printerdrake.pm_.c:62
 msgid "Remote lpd Printer Options"
 msgstr "อ๊อปชั่นของเครื่องพิมพ์แบบรีโมท"
 
-#: ../printerdrake.pm_.c:126
+#: ../../printerdrake.pm_.c:63
 msgid ""
 "To use a remote lpd print queue, you need to supply\n"
 "the hostname of the printer server and the queue name\n"
@@ -3382,19 +3966,20 @@ msgstr ""
 "ของชื่อโฮสต์ที่ให้บริการเครื่องพิมพ์นั้น และชื่อคิวของเซิร์ฟเวอร์นั้น\n"
 "ซึ่งเป็นที่ๆงานพิมพ์จะถูกเก็บไว้"
 
-#: ../printerdrake.pm_.c:129
-msgid "Remote hostname:"
+#: ../../printerdrake.pm_.c:66
+#, fuzzy
+msgid "Remote hostname"
 msgstr "ชื่อโฮสต์รีโมท:"
 
-#: ../printerdrake.pm_.c:129
+#: ../../printerdrake.pm_.c:67
 msgid "Remote queue"
 msgstr "ชื่อคิวรีโมท"
 
-#: ../printerdrake.pm_.c:134
+#: ../../printerdrake.pm_.c:75
 msgid "SMB (Windows 9x/NT) Printer Options"
 msgstr "อ๊อปชั่นของเครื่องพิมพ์แบบ SMB (เครื่องพิมพ์ในระบบวินโดวส์ 9x/NT)"
 
-#: ../printerdrake.pm_.c:135
+#: ../../printerdrake.pm_.c:76
 msgid ""
 "To print to a SMB printer, you need to provide the\n"
 "SMB host name (Note! It may be different from its\n"
@@ -3408,35 +3993,27 @@ msgstr ""
 "ชื่อของเครื่องพิมพ์ที่ต้องการใช้ (share name) และชื่อของผู้ใช้ (username)\n"
 "รหัสผ่าน (password) และข้อมูลของเวิร์คกรุ๊ป (workgroup) ด้วย"
 
-#: ../printerdrake.pm_.c:140
-msgid "SMB server IP:"
-msgstr "ค่า IP ของ SMB เซิร์ฟเวอร์:"
+#: ../../printerdrake.pm_.c:81
+msgid "SMB server host"
+msgstr "ชื่อโฮสต์ของ SMB server"
 
-#: ../printerdrake.pm_.c:140
-msgid "SMB server host:"
-msgstr "ชื่อโฮสต์ของ SMB server:"
+#: ../../printerdrake.pm_.c:82
+msgid "SMB server IP"
+msgstr "ค่า IP ของ SMB เซิร์ฟเวอร์"
 
-#: ../printerdrake.pm_.c:141 ../printerdrake.pm_.c:163
-msgid "Password:"
-msgstr "รหัสผ่าน:"
+#: ../../printerdrake.pm_.c:83
+msgid "Share name"
+msgstr "ชื่อที่ใช้ในกรุ๊ป (sharename)"
 
-#: ../printerdrake.pm_.c:141
-msgid "Share name:"
-msgstr "ชื่อที่ใช้ในกรุ๊ป (sharename):"
+#: ../../printerdrake.pm_.c:86
+msgid "Workgroup"
+msgstr "เวิร์กกรุ๊ป (workgroup)"
 
-#: ../printerdrake.pm_.c:141 ../printerdrake.pm_.c:163
-msgid "User name:"
-msgstr "ชื่อผู้ใช้:"
-
-#: ../printerdrake.pm_.c:142
-msgid "Workgroup:"
-msgstr "เวิร์กกรุ๊ป (workgroup):"
-
-#: ../printerdrake.pm_.c:157
+#: ../../printerdrake.pm_.c:102
 msgid "NetWare Printer Options"
 msgstr "อ๊อปชั่นของเครื่องพิมพ์ในระบบเน็ตแวร์"
 
-#: ../printerdrake.pm_.c:158
+#: ../../printerdrake.pm_.c:103
 msgid ""
 "To print to a NetWare printer, you need to provide the\n"
 "NetWare print server name (Note! it may be different from its\n"
@@ -3448,68 +4025,97 @@ msgstr ""
 "โฮสต์แบบ TCP/IP) และข้อมูลชื่อคิวของเครื่องพิมพ์ที่ต้องการใช้\n"
 "รวมทั้งชื่อผู้ใช้และรหัสผ่านด้วย"
 
-#: ../printerdrake.pm_.c:162
-msgid "Print Queue Name:"
-msgstr "ชื่อพรินต์คิว:"
-
-#: ../printerdrake.pm_.c:162
-msgid "Printer Server:"
+#: ../../printerdrake.pm_.c:107
+msgid "Printer Server"
 msgstr "ชื่อเซิร์ฟเวอร์ของพรินเตอร์"
 
-#: ../printerdrake.pm_.c:173
+#: ../../printerdrake.pm_.c:108
+msgid "Print Queue Name"
+msgstr "ชื่อพรินต์คิว"
+
+#: ../../printerdrake.pm_.c:121
 msgid "Yes, print ASCII test page"
 msgstr "ใช่ ให้พิมพ์กระดาษทดสอบแบบ ASCII"
 
-#: ../printerdrake.pm_.c:174
+#: ../../printerdrake.pm_.c:122
 msgid "Yes, print PostScript test page"
 msgstr "ใช่ ให้พิมพ์กระดาษทดสอบแบบโพสต์สคริปต์"
 
-#: ../printerdrake.pm_.c:175
+#: ../../printerdrake.pm_.c:123
 msgid "Yes, print both test pages"
 msgstr "ใช้ ให้พิมพ์กระดาษทดสอบทั้งสองแบบ"
 
-#: ../printerdrake.pm_.c:183
+#: ../../printerdrake.pm_.c:130
 msgid "Configure Printer"
 msgstr "การคอนฟิกเครื่องพิมพ์"
 
-#: ../printerdrake.pm_.c:184
+#: ../../printerdrake.pm_.c:131
 msgid "What type of printer do you have?"
 msgstr "คุณมีเครื่องพิมพ์ชนิดใด?"
 
-#: ../printerdrake.pm_.c:204
+#: ../../printerdrake.pm_.c:163
 msgid "Printer options"
 msgstr "อ๊อปชั่นของเครื่องพิมพ์"
 
-#: ../printerdrake.pm_.c:205
+#: ../../printerdrake.pm_.c:164
 msgid "Paper Size"
 msgstr "ขนาดกระดาษ"
 
-#: ../printerdrake.pm_.c:206
+#: ../../printerdrake.pm_.c:165
 msgid "Eject page after job?"
 msgstr "ให้คืนกระดาษออกมาหลังจากเสร็จงานด้วยหรือไม่?"
 
-#: ../printerdrake.pm_.c:209
-msgid "Fix stair-stepping text?"
-msgstr "ให้ทำข้อความ stair-stepping แบบคงที่หรือไม่"
-
-#: ../printerdrake.pm_.c:212
+#: ../../printerdrake.pm_.c:170
 msgid "Uniprint driver options"
 msgstr "อ๊อปชั่นของไดรเวอร์แบบ Uniprint"
 
-#: ../printerdrake.pm_.c:213
+#: ../../printerdrake.pm_.c:171
 msgid "Color depth options"
 msgstr "อ๊อปชั่นของความละเอียดสี"
 
-#: ../printerdrake.pm_.c:223
+#: ../../printerdrake.pm_.c:173
+msgid "Print text as PostScript?"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:174
+msgid "Reverse page order"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:176
+msgid "Fix stair-stepping text?"
+msgstr "ให้ทำข้อความ stair-stepping แบบคงที่หรือไม่"
+
+#: ../../printerdrake.pm_.c:179
+msgid "Number of pages per output pages"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:180
+msgid "Right/Left margins in points (1/72 of inch)"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:181
+msgid "Top/Bottom margins in points (1/72 of inch)"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:184
+msgid "Extra GhostScript options"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:187
+#, fuzzy
+msgid "Extra Text options"
+msgstr "อ๊อปชั่นของความละเอียดสี"
+
+#: ../../printerdrake.pm_.c:198
 msgid "Do you want to test printing?"
 msgstr "คุณต้องการพิมพ์ทดสอบหรือไม่?"
 
-#: ../printerdrake.pm_.c:234
+#: ../../printerdrake.pm_.c:210
 #, fuzzy
 msgid "Printing test page(s)..."
 msgstr "ใช้ ให้พิมพ์กระดาษทดสอบทั้งสองแบบ"
 
-#: ../printerdrake.pm_.c:252
+#: ../../printerdrake.pm_.c:218
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
@@ -3520,53 +4126,325 @@ msgid ""
 "Does it work properly?"
 msgstr ""
 
-#: ../printerdrake.pm_.c:256
+#: ../../printerdrake.pm_.c:222
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
 "This may take a little time before printer start.\n"
 "Does it work properly?"
 msgstr ""
 
-#: ../raid.pm_.c:36
+#: ../../printerdrake.pm_.c:238
+msgid "Printer"
+msgstr "เครื่องพิมพ์"
+
+#: ../../printerdrake.pm_.c:239
+msgid "Would you like to configure a printer?"
+msgstr "คุณต้องการคอนฟิกเครื่องพิมพ์ด้วยหรือไม่"
+
+#: ../../printerdrake.pm_.c:243
+#, fuzzy
+msgid ""
+"Here are the following print queues.\n"
+"You can add some more or change the existing ones."
+msgstr ""
+"ต่อไปนี้เป็นข้อมูลใน LILO\n"
+"คุณต้องการเพิ่มข้อมูลหรือแก้ไขข้อมูลที่มีได้"
+
+#: ../../printerdrake.pm_.c:266 ../../printerdrake.pm_.c:272
+msgid "Select Printer Connection"
+msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
+
+#: ../../printerdrake.pm_.c:267
+msgid "How is the printer connected?"
+msgstr "เครื่องพิมพ์เชื่อมต่ออย่างไร?"
+
+#: ../../printerdrake.pm_.c:272
+#, fuzzy
+msgid "Remove queue"
+msgstr "ชื่อคิวรีโมท"
+
+#: ../../printerdrake.pm_.c:273
+msgid ""
+"Every print queue (which print jobs are directed to) needs a\n"
+"name (often lp) and a spool directory associated with it. What\n"
+"name and directory should be used for this queue and how is the printer "
+"connected?"
+msgstr ""
+"พรินต์คิว (พรินต์คิวเป็นที่ๆงานพิมพ์จะไปเก็บไว้ที่นี่ก่อนส่งเครื่องพิมพ์)\n"
+"ต้องการให้มีการตั้งชื่อ (ปกติจะเป็น lp) และไดเร็กทอรีที่เก็บข้อมูล\n"
+"คุณต้องการตั้งชื่อ และกำหนดไดเร็กทอรีให้เป็นค่าใดบ้าง?"
+
+#: ../../printerdrake.pm_.c:276
+#, fuzzy
+msgid "Name of queue"
+msgstr "ชื่อของคิว:"
+
+#: ../../printerdrake.pm_.c:277
+#, fuzzy
+msgid "Spool directory"
+msgstr "สปูลไดเร็กทอรี:"
+
+#: ../../printerdrake.pm_.c:278
+#, fuzzy
+msgid "Printer Connection"
+msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
+
+#: ../../raid.pm_.c:36
 #, c-format
 msgid "Can't add a partition to _formatted_ RAID md%d"
 msgstr "ไม่สามารถเพิ่มพาร์ติชั่นเป็น _formatted_ RAID md%d"
 
-#: ../raid.pm_.c:106
+#: ../../raid.pm_.c:106
 msgid "Can't write file $file"
 msgstr "ไม่สามารถบันทึกไฟล์ $file"
 
-#: ../raid.pm_.c:146
+#: ../../raid.pm_.c:131
+msgid "mkraid failed"
+msgstr ""
+
+#: ../../raid.pm_.c:131
+msgid "mkraid failed (maybe raidtools are missing?)"
+msgstr ""
+
+#: ../../raid.pm_.c:147
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "ไม่มีพาร์ติชั่นพอสำหรับ RAID ระดับ %d\n"
 
-#: ../standalone/draksec_.c:28
+#: ../../services.pm_.c:14
+msgid "Anacron a periodic command scheduler."
+msgstr ""
+
+#: ../../services.pm_.c:15
+msgid ""
+"apmd is used for monitoring batery status and logging it via syslog.\n"
+"It can also be used for shutting down the machine when the battery is low."
+msgstr ""
+
+#: ../../services.pm_.c:17
+msgid ""
+"Runs commands scheduled by the at command at the time specified when\n"
+"at was run, and runs batch commands when the load average is low enough."
+msgstr ""
+
+#: ../../services.pm_.c:19
+msgid ""
+"cron is a standard UNIX program that runs user-specified programs\n"
+"at periodic scheduled times. vixie cron adds a number of features to the "
+"basic\n"
+"UNIX cron, including better security and more powerful configuration options."
+msgstr ""
+
+#: ../../services.pm_.c:22
+msgid ""
+"GPM adds mouse support to text-based Linux applications such the\n"
+"Midnight Commander. It also allows mouse-based console cut-and-paste "
+"operations,\n"
+"and includes support for pop-up menus on the console."
+msgstr ""
+
+#: ../../services.pm_.c:25
+msgid ""
+"Apache is a World Wide Web server.  It is used to serve HTML files\n"
+"and CGI."
+msgstr ""
+
+#: ../../services.pm_.c:27
+msgid ""
+"The internet superserver daemon (commonly called inetd) starts a\n"
+"variety of other internet services as needed. It is responsible for "
+"starting\n"
+"many services, including telnet, ftp, rsh, and rlogin. Disabling inetd "
+"disables\n"
+"all of the services it is responsible for."
+msgstr ""
+
+#: ../../services.pm_.c:31
+msgid ""
+"This package loads the selected keyboard map as set in\n"
+"/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.\n"
+"You should leave this enabled for most machines."
+msgstr ""
+
+#: ../../services.pm_.c:34
+msgid ""
+"lpd is the print daemon required for lpr to work properly. It is\n"
+"basically a server that arbitrates print jobs to printer(s)."
+msgstr ""
+
+#: ../../services.pm_.c:36
+msgid ""
+"named (BIND) is a Domain Name Server (DNS) that is used to resolve\n"
+"host names to IP addresses."
+msgstr ""
+
+#: ../../services.pm_.c:38
+msgid ""
+"Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
+"Manager/Windows), and NCP (NetWare) mount points."
+msgstr ""
+
+#: ../../services.pm_.c:40
+msgid ""
+"Activates/Deactivates all network interfaces configured to start\n"
+"at boot time."
+msgstr ""
+
+#: ../../services.pm_.c:42
+msgid ""
+"NFS is a popular protocol for file sharing across TCP/IP networks.\n"
+"This service provides NFS server functionality, which is configured via the\n"
+"/etc/exports file."
+msgstr ""
+
+#: ../../services.pm_.c:45
+msgid ""
+"NFS is a popular protocol for file sharing across TCP/IP\n"
+"networks. This service provides NFS file locking functionality."
+msgstr ""
+
+#: ../../services.pm_.c:47
+msgid ""
+"PCMCIA support is usually to support things like ethernet and\n"
+"modems in laptops.  It won't get started unless configured so it is safe to "
+"have\n"
+"it installed on machines that don't need it."
+msgstr ""
+
+#: ../../services.pm_.c:50
+msgid ""
+"The portmapper manages RPC connections, which are used by\n"
+"protocols such as NFS and NIS. The portmap server must be running on "
+"machines\n"
+"which act as servers for protocols which make use of the RPC mechanism."
+msgstr ""
+
+#: ../../services.pm_.c:53
+msgid ""
+"Postfix is a Mail Transport Agent, which is the program that\n"
+"moves mail from one machine to another."
+msgstr ""
+
+#: ../../services.pm_.c:55
+msgid ""
+"Saves and restores system entropy pool for higher quality random\n"
+"number generation."
+msgstr ""
+
+#: ../../services.pm_.c:57
+msgid ""
+"The routed daemon allows for automatic IP router table updated via\n"
+"the RIP protocol. While RIP is widely used on small networks, more complex\n"
+"routing protocols are needed for complex networks."
+msgstr ""
+
+#: ../../services.pm_.c:60
+msgid ""
+"The rstat protocol allows users on a network to retrieve\n"
+"performance metrics for any machine on that network."
+msgstr ""
+
+#: ../../services.pm_.c:62
+msgid ""
+"The rusers protocol allows users on a network to identify who is\n"
+"logged in on other responding machines."
+msgstr ""
+
+#: ../../services.pm_.c:64
+msgid ""
+"The rwho protocol lets remote users get a list of all of the users\n"
+"logged into a machine running the rwho daemon (similiar to finger)."
+msgstr ""
+
+#: ../../services.pm_.c:66
+msgid ""
+"Syslog is the facility by which many daemons use to log messages\n"
+"to various system log files.  It is a good idea to always run syslog."
+msgstr ""
+
+#: ../../services.pm_.c:68
+msgid "This startup script try to load your modules for your usb mouse."
+msgstr ""
+
+#: ../../services.pm_.c:69
+msgid "Starts and stops the X Font Server at boot time and shutdown."
+msgstr ""
+
+#: ../../services.pm_.c:92
+msgid "Choose which services should be automatically started at boot time"
+msgstr ""
+
+# NOTE: this message will be displayed by lilo at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+# When possible cp437 accentuated letters can be used too.
+#
+#: ../../silo.pm_.c:116
+#, c-format
+msgid ""
+"Welcome to SILO the operating system chooser!\n"
+"\n"
+"To list the possible choices, press <TAB>.\n"
+"\n"
+"To load one of them, write its name and press <ENTER> or\n"
+"wait %d seconds for default boot.\n"
+"\n"
+msgstr ""
+"ยินดีต้อนรับสู่ SILO โปรแกรมเลือกใช้ระบบปฏิบัติการ!\n"
+"\n"
+"เพื่อให้แสดงรายการที่เป็นไปได้ ให้กดปุ่ม <TAB>\n"
+"\n"
+"เพื่อให้โหลดรายการจากตัวเลือกที่มี ให้เขียนชื่อของรายการที่เลือกลงไป\n"
+"แล้วกด <ENTER> หรือให้รอสัก %d วินาทีเพื่อใช้การบูตจากตัวเลือกตั้งต้น\n"
+"\n"
+
+#: ../../standalone/drakboot_.c:23
+#, fuzzy
+msgid "Configure LILO/GRUB"
+msgstr "คอนฟิกระบบ X"
+
+#: ../../standalone/drakboot_.c:24
+#, fuzzy
+msgid "Create a boot floppy"
+msgstr "สร้างแผ่นบูต"
+
+#: ../../standalone/drakboot_.c:25
+#, fuzzy
+msgid "Format floppy"
+msgstr "ฟอร์แมตทั้งหมด"
+
+#: ../../standalone/drakboot_.c:36
+#, fuzzy
+msgid "Choice"
+msgstr "อุปกรณ์"
+
+#: ../../standalone/draksec_.c:28
 msgid ""
 "This level is to be used with care. It makes your system more easy to use,\n"
 "but very sensitive: it must not be used for a machine connected to others\n"
 "or to the Internet. There is no password access."
 msgstr ""
 
-#: ../standalone/draksec_.c:31
+#: ../../standalone/draksec_.c:31
 msgid ""
 "Password are now enabled, but use as a networked computer is still not "
 "recommended."
 msgstr ""
 
-#: ../standalone/draksec_.c:32
+#: ../../standalone/draksec_.c:32
 msgid ""
 "Few improvements for this security level, the main one is that there are\n"
 "more security warnings and checks."
 msgstr ""
 
-#: ../standalone/draksec_.c:34
+#: ../../standalone/draksec_.c:34
 msgid ""
 "This is the standard security recommended for a computer that will be used\n"
 "to connect to the Internet as a client. There are now security checks. "
 msgstr ""
 
-#: ../standalone/draksec_.c:36
+#: ../../standalone/draksec_.c:36
 msgid ""
 "With this security level, the use of this system as a server becomes "
 "possible.\n"
@@ -3574,275 +4452,399 @@ msgid ""
 "connections from many clients. "
 msgstr ""
 
-#: ../standalone/draksec_.c:39
+#: ../../standalone/draksec_.c:39
 msgid ""
 "We take level 4 features, but now the system is entirely closed.\n"
 "Security features are at their maximum."
 msgstr ""
 
-#: ../standalone/draksec_.c:49
+#: ../../standalone/draksec_.c:49
 #, fuzzy
 msgid "Setting security level"
 msgstr "เลือกระดับระบบรักษาความปลอดภัย"
 
-#: ../standalone/drakxconf_.c:21
+#: ../../standalone/drakxconf_.c:21
 #, fuzzy
 msgid "Choose the tool you want to use"
 msgstr "เลือกขนาดที่คุณต้องการติดตั้ง"
 
-#: ../standalone/drakxservices_.c:21
-msgid "Choose which services should be automatically started at boot time"
-msgstr ""
+#: ../../standalone/keyboarddrake_.c:23
+msgid "What is your keyboard layout?"
+msgstr "คุณต้องการเลือกคีย์บอร์ดเลย์เอ้าท์แบบใด"
 
-#: ../standalone/mousedrake_.c:30
+#: ../../standalone/mousedrake_.c:25
+#, fuzzy
+msgid "What is the type of your mouse?"
+msgstr "คุณมีเม้าส์ชนิดใด"
+
+#: ../../standalone/mousedrake_.c:30
 msgid "no serial_usb found\n"
 msgstr ""
 
-#: ../standalone/mousedrake_.c:35
+#: ../../standalone/mousedrake_.c:35
 msgid "Emulate third button?"
 msgstr "ต้องการจำลองเม้าส์ปุ่มที่สามด้วยหรือไม่?"
 
-#: ../standalone/rpmdrake_.c:25
+#: ../../standalone/mousedrake_.c:39
+#, fuzzy
+msgid "Which serial port is your mouse connected to?"
+msgstr "เม้าส์ของคุณต่อเข้ากับพอร์ตอนุกรมใด"
+
+#: ../../standalone/rpmdrake_.c:25
 #, fuzzy
 msgid "reading configuration"
 msgstr "ทดสอบการคอนฟิก"
 
-#: ../standalone/rpmdrake_.c:45 ../standalone/rpmdrake_.c:50
-#: ../standalone/rpmdrake_.c:253
+#: ../../standalone/rpmdrake_.c:45 ../../standalone/rpmdrake_.c:50
+#: ../../standalone/rpmdrake_.c:253
 msgid "File"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:48 ../standalone/rpmdrake_.c:229
-#: ../standalone/rpmdrake_.c:253 ../standalone/rpmdrake_.c:269
+#: ../../standalone/rpmdrake_.c:48 ../../standalone/rpmdrake_.c:229
+#: ../../standalone/rpmdrake_.c:253 ../../standalone/rpmdrake_.c:269
 msgid "Search"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:49 ../standalone/rpmdrake_.c:56
+#: ../../standalone/rpmdrake_.c:49 ../../standalone/rpmdrake_.c:56
 #, fuzzy
 msgid "Package"
 msgstr "แพ็คเก็จ %d ชุด"
 
-#: ../standalone/rpmdrake_.c:51
+#: ../../standalone/rpmdrake_.c:51
 #, fuzzy
 msgid "Text"
 msgstr "export (ผู้เชี่ยวชาญ)"
 
-#: ../standalone/rpmdrake_.c:53
+#: ../../standalone/rpmdrake_.c:53
 #, fuzzy
 msgid "Tree"
 msgstr "กรีก"
 
-#: ../standalone/rpmdrake_.c:54
+#: ../../standalone/rpmdrake_.c:54
 msgid "Sort by"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:55
+#: ../../standalone/rpmdrake_.c:55
 msgid "Category"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:58
+#: ../../standalone/rpmdrake_.c:58
 #, fuzzy
 msgid "See"
 msgstr "เซิรฟ์เวอร์ (Server)"
 
-#: ../standalone/rpmdrake_.c:59 ../standalone/rpmdrake_.c:163
+#: ../../standalone/rpmdrake_.c:59 ../../standalone/rpmdrake_.c:163
 #, fuzzy
 msgid "Installed packages"
 msgstr "กำลังติดตั้งแพ็คเก็จ %s"
 
-#: ../standalone/rpmdrake_.c:60
+#: ../../standalone/rpmdrake_.c:60
 #, fuzzy
 msgid "Available packages"
 msgstr "กำลังหาแพ็คเก็จที่มีอยู่"
 
-#: ../standalone/rpmdrake_.c:62
+#: ../../standalone/rpmdrake_.c:62
 #, fuzzy
 msgid "Show only leaves"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: ../standalone/rpmdrake_.c:67
+#: ../../standalone/rpmdrake_.c:67
 msgid "Expand all"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:68
+#: ../../standalone/rpmdrake_.c:68
 #, fuzzy
 msgid "Collapse all"
 msgstr "ล้างทั้งหมด"
 
-#: ../standalone/rpmdrake_.c:70
+#: ../../standalone/rpmdrake_.c:70
 #, fuzzy
 msgid "Configuration"
 msgstr "ทดสอบการคอนฟิก"
 
-#: ../standalone/rpmdrake_.c:71
+#: ../../standalone/rpmdrake_.c:71
 msgid "Add location of packages"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:75
+#: ../../standalone/rpmdrake_.c:75
 msgid "Update location"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:79 ../standalone/rpmdrake_.c:328
+#: ../../standalone/rpmdrake_.c:79 ../../standalone/rpmdrake_.c:328
 #, fuzzy
 msgid "Remove"
 msgstr "ลบข้อมูล"
 
-#: ../standalone/rpmdrake_.c:100
+#: ../../standalone/rpmdrake_.c:100
 msgid "Configuration: Add Location"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:101
-msgid "Expand Tree"
-msgstr ""
-
-#: ../standalone/rpmdrake_.c:102
-msgid "Collapse Tree"
-msgstr ""
-
-#: ../standalone/rpmdrake_.c:103
+#: ../../standalone/rpmdrake_.c:103
 #, fuzzy
 msgid "Find Package"
 msgstr "แพ็คเก็จ %d ชุด"
 
-#: ../standalone/rpmdrake_.c:104
+#: ../../standalone/rpmdrake_.c:104
 msgid "Find Package containing file"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:105
+#: ../../standalone/rpmdrake_.c:105
 msgid "Toggle between Installed and Available"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:139
+#: ../../standalone/rpmdrake_.c:139
 msgid "Files:\n"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:161 ../standalone/rpmdrake_.c:209
+#: ../../standalone/rpmdrake_.c:161 ../../standalone/rpmdrake_.c:209
 #, fuzzy
 msgid "Uninstall"
 msgstr "ติดตั้ง"
 
-#: ../standalone/rpmdrake_.c:163
+#: ../../standalone/rpmdrake_.c:163
 #, fuzzy
 msgid "Choose package to install"
 msgstr "เลือกแพ็คเก็จ"
 
-#: ../standalone/rpmdrake_.c:190
+#: ../../standalone/rpmdrake_.c:190
 msgid "Checking dependencies"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:190 ../standalone/rpmdrake_.c:409
+#: ../../standalone/rpmdrake_.c:190 ../../standalone/rpmdrake_.c:409
 msgid "Wait"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:209
+#: ../../standalone/rpmdrake_.c:209
 #, fuzzy
 msgid "The following packages are going to be uninstalled"
 msgstr "เลือกแพ็คเก็จ"
 
-#: ../standalone/rpmdrake_.c:210
+#: ../../standalone/rpmdrake_.c:210
 #, fuzzy
 msgid "Uninstalling the RPMs"
 msgstr "กำลังติดตั้งแพ็คเก็จ %s"
 
-#: ../standalone/rpmdrake_.c:229 ../standalone/rpmdrake_.c:269
+#: ../../standalone/rpmdrake_.c:229 ../../standalone/rpmdrake_.c:269
 msgid "Regexp"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:229
+#: ../../standalone/rpmdrake_.c:229
 msgid "Which package are looking for"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 #, c-format
 msgid "%s not found"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 msgid "No match"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:238 ../standalone/rpmdrake_.c:262
-#: ../standalone/rpmdrake_.c:278
+#: ../../standalone/rpmdrake_.c:238 ../../standalone/rpmdrake_.c:262
+#: ../../standalone/rpmdrake_.c:278
 msgid "No more match"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:246
+#: ../../standalone/rpmdrake_.c:246
 msgid ""
 "rpmdrake is currently in ``low memory'' mode.\n"
 "I'm going to relaunch rpmdrake to allow searching files"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:253
-msgid "Which file are you looking for"
+#: ../../standalone/rpmdrake_.c:253
+msgid "Which file are you looking for?"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:269
-msgid "What are looking for"
+#: ../../standalone/rpmdrake_.c:269
+msgid "What are looking for?"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:289
+#: ../../standalone/rpmdrake_.c:289
 msgid "Give a name (eg: `extra', `commercial')"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:291
+#: ../../standalone/rpmdrake_.c:291
 #, fuzzy
 msgid "Directory"
 msgstr "เซ็กเตอร์"
 
-#: ../standalone/rpmdrake_.c:294
+#: ../../standalone/rpmdrake_.c:294
 msgid "No cdrom available (nothing in /mnt/cdrom)"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:298
+#: ../../standalone/rpmdrake_.c:298
 msgid "URL of the directory containing the RPMs"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:299
+#: ../../standalone/rpmdrake_.c:299
 msgid ""
 "For FTP and HTTP, you need to give the location for hdlist\n"
 "It must be relative to the URL above"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:302
+#: ../../standalone/rpmdrake_.c:302
 msgid "Please submit the following information"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:304
+#: ../../standalone/rpmdrake_.c:304
 #, fuzzy, c-format
 msgid "%s is already in use"
 msgstr "หัวข้อนี้ถูกใช้ไปเรียบร้อยแล้ว"
 
-#: ../standalone/rpmdrake_.c:315 ../standalone/rpmdrake_.c:321
-#: ../standalone/rpmdrake_.c:329
+#: ../../standalone/rpmdrake_.c:315 ../../standalone/rpmdrake_.c:321
+#: ../../standalone/rpmdrake_.c:329
 msgid "Updating the RPMs base"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:328
+#: ../../standalone/rpmdrake_.c:328
 #, fuzzy, c-format
 msgid "Going to remove entry %s"
 msgstr "ลบข้อมูล"
 
-#: ../standalone/rpmdrake_.c:360
+#: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves"
 msgstr ""
 
-#: ../standalone/rpmdrake_.c:360
+#: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr ""
 
-#~ msgid "Polish"
-#~ msgstr "โปแลนด์"
+#~ msgid "Recommended"
+#~ msgstr "แบบแนะนำ (Recommended)"
 
-#~ msgid "Going to install %d MB. You can choose to install more programs"
-#~ msgstr "กำลังจะติดตั้ง %d MB คุณสามารถเลือกโปรแกรมมากกว่านี้ได้"
+#~ msgid ""
+#~ "Choose \"Install\" if there are no previous versions of Linux\n"
+#~ "installed, or if you wish to use multiple distributions or versions.\n"
+#~ "\n"
+#~ "\n"
+#~ "Choose \"Upgrade\" if you wish to update a previous version of Mandrake "
+#~ "Linux:\n"
+#~ "5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold "
+#~ "2000\n"
+#~ "or 7.0 (Air)."
+#~ msgstr ""
+#~ "เลือก \"ติดตั้ง\" ถ้าหากคุณไม่ได้ติดตั้งลีนุกซ์เวอร์ชั่นเดิม\n"
+#~ "หรือต้องการติดตั้งหลายดิสตริบิวชั่น (หรือหลายเวอร์ชั่น)\n"
+#~ "\n"
+#~ "\n"
+#~ "เลือก \"อัพเกรด\" ถ้าคุณต้องการอัพเดตเวอร์ชั่นของแมนเดรกลีนุกซ์:\n"
+#~ "5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen), 6.0 (Venus),\n"
+#~ "6.1 (Helios), Gold 2000 หรือ 7.0 (Air)."
+
+#~ msgid "Do you want to use LILO?"
+#~ msgstr "คุณต้องการใช้ LILO หรือไม่"
+
+#~ msgid ""
+#~ "You may now select the packages you wish to install.\n"
+#~ "\n"
+#~ "\n"
+#~ "First you can select group of package to install or upgrade. After that\n"
+#~ "you can select more packages according to the total size you wish to\n"
+#~ "select.\n"
+#~ "\n"
+#~ "\n"
+#~ "If you are in expert mode, you can select packages individually.\n"
+#~ "Please note that some packages require the installation of others.\n"
+#~ "These are referred to as package dependencies. The packages you select,\n"
+#~ "and the packages they require will be automatically selected for\n"
+#~ "install. It is impossible to install a package without installing all\n"
+#~ "of its dependencies."
+#~ msgstr ""
+#~ "ตอนนี้คุณสามารถเลือกแพ็คเก็จที่คุณต้องการติดตั้งได้\n"
+#~ "\n"
+#~ "\n"
+#~ "ก่อนอื่นคุณสามารถเลือกขนาดของระบบที่ต้องการติดตั้ง และโปรแกรมจะทำการเลือก\n"
+#~ "แพ็คเก็จแบบอัตโนมัติโดยดูจากขนาดที่คุณเลือก หลังจากนั้นคุณสามารถเลือก\n"
+#~ "แพ็คเก็จเพิ่มเติมตามกลุ่ม หรือคลิ้ก Ok เพื่อใช้ตัวเลือกที่กำหนดไว้แล้ว\n"
+#~ "\n"
+#~ "\n"
+#~ "ถ้าคุณอยู่ในโหมดผู้เชี่ยวชาญ (expert mode) คุณสามารถเลือกแพ็คเก็จ\n"
+#~ "โดยระบุตัวแพ็คเก็จ โปรดทราบด้วยว่าแพ็คเก็จบางตัวอาจต้องการให้มีการติดตั้ง\n"
+#~ "แพ็คเก็จตัวอื่นๆลงไปก่อน (หรือเรียกว่า dependencies) "
+#~ "ทั้งแพ็คเก็จที่คุณเลือก\n"
+#~ "และแพ็คเก็จที่ต้องติดตั้งลงไปด้วยจะถูกโปรแกรมติดตั้งโดยอัตโนมัติ เราไม่\n"
+#~ "สามารถติดตั้งแพ็คเก็จลงไปโดยไม่ติดตั้งแพ็คเก็จที่ต้องการได้"
+
+#~ msgid "Help"
+#~ msgstr "ข้อความช่วยเหลือ"
+
+#~ msgid "Downloading cryptographic packages"
+#~ msgstr "กำลังดาวน์โหลดแพ็คเก็จระบบเข้ารหัส"
+
+#~ msgid "Setup SCSI"
+#~ msgstr "เซ็ตอัพ SCSI"
+
+#~ msgid "Which language do you want?"
+#~ msgstr "คุณต้องการเลือกภาษาใด"
+
+#~ msgid "Which packages do you want to install"
+#~ msgstr "เลือกแพ็คเก็จที่คุณต้องการติดตั้ง"
+
+#~ msgid "Local LAN"
+#~ msgstr "ระบบแลนแบบท้องถิ่น"
+
+#~ msgid "Dialup with modem"
+#~ msgstr "การหมุนโทรศัพท์ด้วยโมเด็ม"
+
+#~ msgid "Local Printer Options"
+#~ msgstr "อ็อปชั่นของเครื่องพิมพ์โลคอล"
+
+#~ msgid "server"
+#~ msgstr "server (เซิร์ฟเวอร์)"
+
+#~ msgid "expert"
+#~ msgstr "export (ผู้เชี่ยวชาญ)"
+
+#~ msgid "developer"
+#~ msgstr "developer (นักพัฒนา)"
+
+#~ msgid "beginner"
+#~ msgstr "beginner (เริ่มต้น)"
+
+#~ msgid "Linear (needed for some SCSI drives)"
+#~ msgstr "Linear (ใช้สำหรับไดรว์แบบ SCSI บางตัว)"
+
+#~ msgid "linear"
+#~ msgstr "linear"
+
+#~ msgid "After %s partition %s,"
+#~ msgstr "หลังจาก %s พาร์ติชั่น %s,"
+
+#~ msgid "changing type of"
+#~ msgstr "เปลี่ยนประเภทของ"
+
+#~ msgid "formatting"
+#~ msgstr "ฟอร์แมต"
+
+#~ msgid "resizing"
+#~ msgstr "ปรับขนาด"
+
+#~ msgid "Size: %s MB"
+#~ msgstr "ขนาด: %s MB"
+
+#~ msgid "Bad kickstart file %s (failed %s)"
+#~ msgstr "ไฟล์คิกสตาร์ทไม่ถูกต้อง %s (ข้อผิดพลาด %s)"
 
 #~ msgid "Partitioning failed: no root filesystem"
 #~ msgstr "การทำพาร์ติชั่นล้มเหลว: ไม่มีรูทไฟล์ซิสเต็ม"
 
-#, fuzzy
-#~ msgid "Enter a floppy (all data will be lost)"
-#~ msgstr ""
-#~ "กรุณาใส่แผ่นฟล้อปปี้ในไดรว์\n"
-#~ "ข้อมูลทั้งหมดบนแผ่นฟล้อปปี้จะถูกลบ"
+#~ msgid "Going to install %d MB. You can choose to install more programs"
+#~ msgstr "กำลังจะติดตั้ง %d MB คุณสามารถเลือกโปรแกรมมากกว่านี้ได้"
+
+#~ msgid "Password:"
+#~ msgstr "รหัสผ่าน:"
+
+#~ msgid "User name:"
+#~ msgstr "ชื่อผู้ใช้:"
+
+#~ msgid "A entry %s already exists"
+#~ msgstr "มีข้อมูล %s อยู่แล้ว"
+
+#~ msgid "Choose install or upgrade"
+#~ msgstr "เลือกติดตั้ง/อัพเกรด"
+
+#~ msgid "What usage do you want?"
+#~ msgstr "คุณต้องการใช้งานอะไร>"
