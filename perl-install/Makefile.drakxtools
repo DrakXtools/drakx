@@ -4,8 +4,8 @@ DIRS = ddcprobe serial_probe share/po Newt c pci_probing resize_fat
 PREFIX = 
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
+DATADIR = $(PREFIX)/usr/share
 BINDEST = $(PREFIX)/usr/bin
-SYSCONFNETDEST= $(PREFIX)/etc/sysconfig/network-scripts/
 LIBDEST = $(PREFIX)/usr/lib/libDrakX
 BINX11DEST = $(PREFIX)/usr/X11R6/bin
 LIBX11DEST = $(PREFIX)/usr/X11R6/lib/X11
@@ -21,7 +21,7 @@ $(DIRS):
 	$(MAKE) -C $@
 
 install:
-	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(BINX11DEST) $(SYSCONFNETDEST) $(LIBX11DEST) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
+	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
 	install -d $(LIBDEST)/sbus_probing
 	install $(STANDALONEPMS) $(SBINDEST)
 	mv -f $(SBINDEST)/lspcidrake $(BINDEST)
@@ -29,7 +29,7 @@ install:
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
-	install -m 644 share/isdndb.net $(LIBDEST)/isdn_db.txt
+	install -m 644 share/isdndb.net $(DATADIR)/isdn_db.txt
 	install -m 644 share/{MonitorsDB,CardsNames,Cards+} $(LIBX11DEST)
 	install -m 644 share/diskdrake.rc $(ETCDEST)
 	install -m 644 share/po/*.po $(LIBDEST)/po
