@@ -507,8 +507,6 @@ int main(int argc, char **argv)
 	if (!abnormal_termination) {
 		printf("rebooting system\n");
 		sleep(2);
-		
-		                     printf("**temp** should be rebooting\n"); while(1);
 		reboot(0xfee1dead, 672274793, 0x1234567);
 	} else {
 		printf("you may safely reboot your system\n");
