@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 17:27+0100\n"
 "PO-Revision-Date: 2003-02-24 11:57+0200\n"
 "Last-Translator: Riho Kurg <rx@linux.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -10915,11 +10915,6 @@ msgstr "Trükkimissüsteemi muutmine"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Printeri jagamine"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "CUPSi sätted"
 
@@ -11345,12 +11340,12 @@ msgstr "Trükkimine/skaneerimine/fotokaardid seadmel \"%s\""
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Seda, millised valikud on saadaval praeguse printeri puhul, saab teada kas "
 "allpool seisvast loendist või pärast vajutust nupule \"Trükkimisvalikute "
-"loend\".%s%s\n"
+"loend\".%s%s%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11595,49 +11590,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-"Teie printer kuulub GDI laserprinterite (winprinterid) rühma. Neid müüvad "
-"erinevad tootjad, kes kasutavad andmete saatmiseks printerile Zenographicsi "
-"ZJ-stream rasteri vormingut. Nende printerite draiver on veel väga "
-"algusjärgus ega pruugi seetõttu sugugi alati töötada. Väga usutav on see, et "
-"printer töötab ainult siis, kui valite paberi suuruseks A4.\n"
-"\n"
-"Mõned sellised printerid, näiteks HP LaserJet 1000, mille jaoks see draiver "
-"algselt loodigi, vajavad pärast sisselülitamist tootjapoolse tarkvara "
-"paigaldamist. HP LaserJet 1000 puhul tuleb teil otsida printeri Windowsi "
-"draiveri CD-lt või kõvaketta Windowsi partitsioonilt faili \"sihp1000.img\" "
-"ning laadida see printerile ühega järgnevatest käskudest:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Esimese käsu võib anda suvaline kasutaja, teise andmiseks on vaja olla "
-"administraator. Pärast seda võite normaalselt trükkida.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "GDI laserprinter Zenographics ZJ-Stream vorminguga"
+msgid "Firmware-Upload for HP LaserJet 1000"
+msgstr "HP LaserJet 1000 püsivara laadimine"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11822,6 +11776,11 @@ msgstr "Printer tehakse CUPS-ile kättesaadavaks"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Kontrollin ja häälestan HPOJ.."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Digifoto mälukaardi lugeja Teie HP mitmefunktsionaalsel seadmel"
 
@@ -11839,11 +11798,6 @@ msgstr "Paketi \"mtools\" paigaldamine..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "SANE pakettide paigaldamine..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Kontrollin ja häälestan HPOJ.."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12721,6 +12675,11 @@ msgstr "Serveri IP puudub!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr "Kui porti ei ole määratud, kasutatakse vaikimisi porti 631."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
 "Sisestage serveri IP aadress ja prot, mille printereid soovite kasutada."
@@ -12852,6 +12811,30 @@ msgstr "CUPS-i automaatne seadistamine"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+"Selle lubamine võimaldab trükkida jaapanikeelseid tekstifaile. Kasutage seda "
+"ainult siis, kui soovite tõesti jaapanikeelseid tekste trükkida, sest kui "
+"see on sisse lülitatud, ei ole enam võimalik trükkida ladina tähestiku "
+"diakriitiliste märkidega tähti ega kohandada veeriseid, märgisuurust jne. "
+"See puudutab ainult käesoleva masinaga ühendatud printereid. Kui soovite "
+"trükkida jaapanikeelset teksti võrgus asuva masinaga ühendatud printeril, "
+"tuleb see funktsioon tollel masinal sisse lülitada."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Japanese text printing mode"
+msgstr "Jaapani teksti trükkimisresiim"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12925,8 +12908,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "CUPS printer sharing configuration"
-msgstr "CUPS printeri jagamise sätted"
+msgid "CUPS printer configuration"
+msgstr "CUPS printeri sätted"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12953,6 +12936,24 @@ msgstr "Kuidas on see printer ühendatud?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Valige printeri ühendusviis"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
+"HP LaserJet 1000 vajab pärast sisselülitamist püsivara laadimist. Laadige HP "
+"veebileheküljelt alla Windowsi draiveripakett (püsivara printeri CD-l ei "
+"toimi) ning pakkige püsivarafail lahti, kasutades 'unzip' utiliiti ning "
+"otsides faili 'sihp1000.img'. Kopeerige fail kataloogi '/etc/printer'. Seal "
+"suudab automaatne laadimisskriot selle üles leida ja laadida iga kord, kui "
+"printer on ühendatud ja sisse lülitatud.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14694,11 +14695,6 @@ msgid ""
 msgstr ""
 "Seadistustefaili ei leitud, \n"
 "klõpsake palun nupul 'Nõustaja' või 'Muud'."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19675,69 +19671,30 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS, SMB, SSH server, vahendaja (proxy)"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Kontor"
+msgid "Audio station"
+msgstr "Audiotööjaam"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "Meili, uudiste, veebi, jututamise ja failiülekande vahendid"
+msgid "Sound playing/editing programs"
+msgstr "Heli esitamise ja redigeerimise rakendused"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Mängud"
+msgid "Video station"
+msgstr "Videotööjaam"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimeedia - Graafika"
+msgid "Video playing programs"
+msgstr "Video esitamise rakendused"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
-msgstr "Graafikarakendused, näiteks Gimp"
+msgid "Graphic station"
+msgstr "Graafikatööjaam"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimeedia - Heli"
+msgid "Graphics programs"
+msgstr "Graafikarakendused"
 
 #: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Helivahendid: mp3- ja midi-mängijad, mikserid jms"
-
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimeedia - Video"
-
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Videode mängimine ja redigeerimine"
-
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimeedia - CD kirjutamine"
-
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Vahendid CD-de kirjutamiseks"
-
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Veel graafilisi töölaudu (Gnome, IceWM)"
-
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, WindowMaker, Enlightenment, Fvwm jne"
-
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Isikliku info haldamine"
-
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Suhtlus Palm Piloti või Visoriga"
-
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Isiklikud rahaasjad"
-
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Isiklike rahaasjade rakendused, näiteks gnucash"
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr ""
+"Valik rakendusi e-posti lugemiseks ja saatmiseks ning veebi lehitsemiseks"
