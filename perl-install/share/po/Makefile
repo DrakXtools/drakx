@@ -38,6 +38,9 @@ install:
 clean:
 	rm -f empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
 
+check:
+	@grep -F '$$' DrakX.pot && { echo "bad translation strings (contains \$$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"; exit 1; } ||:
+
 verif:
 	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES)
 	perl -ne '$$i += my @l = /\.c:/g; END { print "$$i\n" }' DrakX.pot

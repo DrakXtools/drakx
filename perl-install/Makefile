@@ -15,6 +15,9 @@ clean:
 	rm -rf auto ../drakxtools.tar.bz2
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
+check:
+	$(MAKE) -C share/po check
+
 tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af rpcinfo-flushed.c tools/ddcprobe tools/serial_probe drakxtools
