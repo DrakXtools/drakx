@@ -17,7 +17,9 @@ our %help = (
 'allow_autologin' => N("Allow/Forbid autologin."),
 
 'allow_issues' => N("If set to \"ALL\", /etc/issue and /etc/issue.net are allowed to exist.
+
 If set to NONE, no issues are allowed.
+
 Else only /etc/issue is allowed."),
 
 'allow_reboot' => N("Allow/Forbid reboot by the console user."),
@@ -28,12 +30,16 @@ Else only /etc/issue is allowed."),
 
 'allow_user_list' => N("Allow/Forbid the list of users on the system on display managers (kdm and gdm)."),
 
-'allow_x_connections' => N("Allow/Forbid X connections. First arg specifies what is done
-on the client side: ALL (all connections are allowed), LOCAL (only
-local connection) and NONE (no connection)."),
+'allow_x_connections' => N("Allow/Forbid X connections:
+
+- ALL (all connections are allowed),
+
+- LOCAL (only connection from local machine),
+
+- NONE (no connection)."),
 
 'allow_xserver_to_listen' => N("The argument specifies if clients are authorized to connect
-to the X server on the tcp port 6000 or not."),
+to the X server from the network on the tcp port 6000 or not."),
 
 'authorize_services' => N("Authorize:
 
@@ -45,18 +51,21 @@ to the X server on the tcp port 6000 or not."),
 
 To authorize the services you need, use /etc/hosts.allow (see hosts.allow(5))."),
 
-'create_server_link' => N("If SERVER_LEVEL (or SECURE_LEVEL if absent) is greater than 3
-in /etc/security/msec/security.conf, creates the symlink /etc/security/msec/server
-to point to /etc/security/msec/server.<SERVER_LEVEL>. The /etc/security/msec/server
-is used by chkconfig --add to decide to add a service if it is present in the file
-during the installation of packages."),
+'create_server_link' => N("If SERVER_LEVEL (or SECURE_LEVEL if absent)
+is greater than 3 in /etc/security/msec/security.conf, creates the
+symlink /etc/security/msec/server to point to
+/etc/security/msec/server.<SERVER_LEVEL>.
 
-'enable_at_crontab' => N("Enable/Disable crontab and at for users. Put allowed users in /etc/cron.allow and /etc/at.allow
-(see man at(1) and crontab(1))."),
+The /etc/security/msec/server is used by chkconfig --add to decide to
+add a service if it is present in the file during the installation of
+packages."),
 
-'enable_console_log' => N("Enable/Disable syslog reports to console 12. \"expr\" is the
-expression describing what to log (see syslog.conf(5) for more details) and
-dev the device to report the log."),
+'enable_at_crontab' => N("Enable/Disable crontab and at for users.
+
+Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)
+and crontab(1))."),
+
+'enable_console_log' => N("Enable/Disable syslog reports to console 12"),
 
 'enable_dns_spoofing_protection' => N("Enable/Disable name resolution spoofing protection.  If
 \"alert\" is true, also reports to syslog."),
@@ -88,23 +97,29 @@ dev the device to report the log."),
 'password_length' => N("Set the password minimum length and minimum number of digit and minimum number of capitalized letters."),
 
 'set_root_umask' => N("Set the root umask."),
-CHECK_UNOWNED => N("if set to yes, report unowned files."),
+CHECK_OPEN_PORT => N("if set to yes, check open ports."),
+CHECK_PASSWD => N("if set to yes, check for :
+
+- empty passwords,
+
+- no password in /etc/shadow
+
+- for users with the 0 id other than root."),
+CHECK_PERMS => N("if set to yes, check permissions of files in the users' home."),
+CHECK_PROMISC => N("if set to yes, check if the network devices are in promiscuous mode."),
+CHECK_SECURITY => N("if set to yes, run the daily security checks."),
+CHECK_SGID => N("if set to yes, check additions/removals of sgid files."),
 CHECK_SHADOW => N("if set to yes, check empty password in /etc/shadow."),
 CHECK_SUID_MD5 => N("if set to yes, verify checksum of the suid/sgid files."),
-CHECK_SECURITY => N("if set to yes, run the daily security checks."),
-CHECK_PASSWD => N("if set to yes, check for empty passwords, for no password in /etc/shadow and for users with the 0 id other than root."),
-SYSLOG_WARN => N("if set to yes, report check result to syslog."),
 CHECK_SUID_ROOT => N("if set to yes, check additions/removals of suid root files."),
-CHECK_PERMS => N("if set to yes, check permissions of files in the users' home."),
-CHKROOTKIT_CHECK => N("if set to yes, run chkrootkit checks."),
-CHECK_PROMISC => N("if set to yes, check if the network devices are in promiscuous mode."),
-RPM_CHECK => N("if set to yes, run some checks against the rpm database."),
-TTY_WARN => N("if set to yes, reports check result to tty."),
+CHECK_UNOWNED => N("if set to yes, report unowned files."),
 CHECK_WRITABLE => N("if set to yes, check files/directories writable by everybody."),
-MAIL_WARN => N("if set to yes, report check result by mail."),
+CHKROOTKIT_CHECK => N("if set to yes, run chkrootkit checks."),
 MAIL_USER => N("if set, send the mail report to this email address else send it to root."),
-CHECK_OPEN_PORT => N("if set to yes, check open ports."),
-CHECK_SGID => N("if set to yes, check additions/removals of sgid files."),
+MAIL_WARN => N("if set to yes, report check result by mail."),
+RPM_CHECK => N("if set to yes, run some checks against the rpm database."),
+SYSLOG_WARN => N("if set to yes, report check result to syslog."),
+TTY_WARN => N("if set to yes, reports check result to tty."),
 
 'set_shell_history_size' => N("Set shell commands history size. A value of -1 means unlimited."),
 
