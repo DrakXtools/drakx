@@ -82,7 +82,7 @@ my $user_combo = Gtk2::ComboBox->new_text;
 $user_combo->set_popdown_strings(sort(list_users()));
 $user_combo->entry->set_text($auto_mode->{autologin}) if $auto_mode->{autologin};
 my $desktop_combo = Gtk2::ComboBox->new_text;
-$desktop_combo->set_popdown_strings(split(' ', `/usr/sbin/chksession -l`));
+$desktop_combo->set_popdown_strings(sort(split(' ', `/usr/sbin/chksession -l`)));
 $desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
 
 my %themes = 	('path' => '/usr/share/bootsplash/themes/',
