@@ -15,6 +15,7 @@ sub getFile {
 
     # can be used for ftp urls (with http proxy)
     my ($host, $port, $path) = $url =~ m,^(?:http|ftp)://([^/:]+)(?::(\d+))?(/\S*)?$,;
+    defined $host or return undef;
 
     my $use_http_proxy = $ENV{PROXY} && $ENV{PROXYPORT};
 
