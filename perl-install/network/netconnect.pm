@@ -75,7 +75,6 @@ sub detect {
     network::adsl->import;
     $auto_detect->{adsl} = adsl_detect($adsl);
     
-    my $modem = {};
     require network::modem;
     network::modem->import;
     my ($modem, @pci_modems) = detect_devices::getModem();
