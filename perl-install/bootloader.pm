@@ -770,7 +770,7 @@ sub write_grub_config {
     }
     my $bootIsReiser = isThisFs("reiserfs", fsedit::get_root($fstab, 'boot'));
     my $file2grub = sub {
-	my ($part, $file) = fsedit::file2part($prefix, $fstab, $_[0]);
+	my ($part, $file) = fsedit::file2part($prefix, $fstab, $_[0], 'keep_simple_symlinks');
 	dev2grub($part->{device}, \%dev2bios) . $file;
     };
     {

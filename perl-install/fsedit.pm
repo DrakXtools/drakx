@@ -312,10 +312,10 @@ sub is_one_big_fat {
 }
 
 sub file2part {
-    my ($prefix, $fstab, $file) = @_;    
+    my ($prefix, $fstab, $file, $keep_simple_symlinks) = @_;    
     my $part;
 
-    $file = expand_symlinks "$prefix$file";
+    $file = $keep_simple_symlinks ? common::expand_symlinks_but_simple("$prefix$file") : expand_symlinks("$prefix$file");
     unless ($file =~ s/^$prefix//) {
 	my ($part) = grep { loopback::carryRootLoopback($_) } @$fstab or die;
 	log::l("found $part->{mntpoint}");
@@ -324,7 +324,7 @@ sub file2part {
     foreach (@$fstab) {
 	my $m = $_->{mntpoint};
 	$part = $_ if 
-	  $file =~ /^$m/ && 
+	  $file =~ /^\Q$m/ && 
 	    (!$part || length $part->{mntpoint} < length $m);
     }
     $part or die "file2part: not found $file";
@@ -664,7 +664,16 @@ sub verifyHds {
     }
 
     my @parts = readProcPartitions($hds);
-    $ok &&= @parts == listlength(get_fstab(@$hds)) unless arch() eq "ppc";
+    foreach my $hd (@$hds) {
+	my @l1 = partition_table::get_normal_parts($hd);
+	my @l2 = grep { $_->{rootDevice} eq $hd->{device} } @parts;
+	if (int(@l1) != int(@l2) && arch() ne 'ppc') {
+	    log::l(sprintf
+		   "/proc/partitions doesn't agree with drakx %d != %d:\n%s\n", int(@l1), int(@l2),
+		   "/proc/partitions: " . join(", ", map { "$_->{device} ($_->{rootDevice})" } @parts));
+	    $ok = 0;
+	}
+    }
 
     if ($readonly && !$ok) {
 	log::l("using /proc/partitions as diskdrake failed :(");

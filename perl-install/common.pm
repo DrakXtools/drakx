@@ -116,6 +116,17 @@ sub formatTime {
 
 sub usingRamdisk { scalar(grep { /ram3/ } cat_("/proc/mounts")) }
 
+sub expand_symlinks_but_simple {
+    my ($f) = @_;
+    my $link = readlink($f);
+    my $f2 = expand_symlinks($f);
+    if ($link && $link !~ m|/|) {
+	# put back the last simple symlink
+	$f2 =~ s|\Q$link\E$|basename($f)|e;
+    }
+    $f2
+}
+
 sub sync { &MDK::Common::System::sync }
 
 #-######################################################################################
