@@ -408,7 +408,7 @@ sub lilo_choice
  
     $::expert=1;
   ask:
-    $::isEmbedded = 0;
+    local $::isEmbedded = 0;
     any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
     eval { bootloader::install('', $bootloader, $fstab, $hds) };  
     if ($@) {
@@ -418,5 +418,4 @@ sub lilo_choice
 	unlink "/tmp/.error";
 	goto ask;
     }
-    $::isEmbedded = 0;
 }
