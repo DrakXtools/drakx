@@ -370,15 +370,6 @@ sub getCPUs {
     @cpus;
 }
 
-#-AT&F&O2B40
-#- DialString=ATDT0231389595((
-
-#- modem_detect_backend : detects modem on serial ports and fills the infos in $modem : detects only one card
-#- input
-#-  $modem
-#-  $mouse : facultative, hash containing device to exclude not to test mouse port : ( device => /ttyS[0-9]/ )
-#- output:
-#-  $modem->{device} : device where the modem were detected
 sub getSerialModem {
     my ($modem, $mouse) = @_;
     $mouse ||= {};
@@ -405,7 +396,7 @@ sub getModem() {
     my @pci_modems = grep { $_->{driver} eq 'Bad:www.linmodems.org' } probeall(0);
     my $serial_modem = {};
     getSerialModem($serial_modem);
-    @pci_modems, $serial_modem;
+    $serial_modem, @pci_modems;
 }
 
 sub getSpeedtouch {
