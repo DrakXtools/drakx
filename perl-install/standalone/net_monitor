@@ -164,7 +164,7 @@ $statusbar->push(1, _("Wait please, testing your connection..."));
 $window1->show_all();
 #$window1->set_policy (1, 1, 1);
 my $time_tag = Gtk->timeout_add(1000, \&rescan);
-my $time_tag2 = Gtk->timeout_add(5000, \&update);
+my $time_tag2 = Gtk->timeout_add(20000, \&update);
 
 update();
 rescan();
