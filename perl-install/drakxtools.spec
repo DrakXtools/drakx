@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.30mdk
+Release: 0.31mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -290,6 +290,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Sun Feb 16 2003 Till Kamppeter <till@mandrakesoft.com> 9.1-0.31mdk
+- Various fixes/improvements on printerdrake:
+  o Restructured function "main()"
+  o Auto-generation of print queues during installation
+  o Support for unknown printers in auto-detection and auto-generation of
+    print queues
+  o Fixed display of printer help pages
+  o Fixed determination of default printer
+
 * Fri Feb 14 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-0.30mdk
 - drakperm fixes
 - drakfont fixes
