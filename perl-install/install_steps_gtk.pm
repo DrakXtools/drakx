@@ -479,7 +479,7 @@ sub choosePackagesTree {
 				     ],
 			    state => {
 				      auto_deps => 1,
-				      flat      => 0,
+				      flat      => $limit_to_medium,
 				     },
 			  };
 
