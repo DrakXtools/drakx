@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 5mdk
+Release: 6mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -118,10 +118,10 @@ It autodetects both monitor and video card if possible.
 
 
 %description newt
-This add the capability to be runned behind a web server to the drakx tools.
 See package %name
 
 %description http
+This add the capability to be runned behind a web server to the drakx tools.
 See package %name
 
 %description -n harddrake
@@ -203,9 +203,6 @@ done
 %preun http
 %_preun_service drakxtools_http
 
-%post -n harddrake
-%_initrddir/harddrake start
-
 %post -n harddrake-ui
 %update_menus
 
@@ -248,6 +245,11 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Jul 11 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
+- no need to write /etc/sysconfig/harddrake2/previous_hw in %%post
+  since harddrake2 service doesn't configure anything if previous
+  config was empty
+
 * Thu Jul 11 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
 - drakx :
 	o code enhancement: increase coherency around the whole drakx
