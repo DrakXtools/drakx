@@ -104,7 +104,7 @@ sub selectLanguage {
     $o->{locale}{langs} ||= { $o->{locale}{lang} => 1 };
 
     if (!exists $o->{locale}{country}) {
-	my $h = lang::analyse_locale_name($o->{locale}{lang});
+	my $h = lang::analyse_locale_name(lang::l2locale($o->{locale}{lang}));
 	$o->{locale}{country} = $h->{country} if $h->{country};
     }
 
