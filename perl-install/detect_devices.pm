@@ -370,7 +370,13 @@ sub whatParport() {
 	open F, "/proc/parport/$_/autoprobe" or open F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
 	{
 	    local $_;
-	    while (<F>) { $elem->{$1} = $2 if /(.*):(.*);/ }
+	    while (<F>) { 
+		if (/(.*):(.*);/) {
+		    $elem->{$1} = $2;
+		    $elem->{$1} =~ s/Hewlett[-\s_]Packard/HP/;
+		    $elem->{$1} =~ s/HEWLETT[-\s_]PACKARD/HP/;
+		}
+	    }
 	}
 	push @res, { port => "/dev/lp$_", val => $elem};
     }
