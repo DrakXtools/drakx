@@ -40,7 +40,7 @@ sub scan4channels {
 #    -x "/usr/bin/scantv" or { 
 #{	   exec {'consolehelper'} $0, ("urpmi", "xawtv") or die N("consolehelper missing");
 #    };
-    if (! -x "/usr/bin/scantv") {
+    if (!$::testing && ! -x "/usr/bin/scantv") {
 #	log::explanations("package xawtv isn't installed");
 	   $in->ask_warn("XawTV isn't installed!", 
 				  formatAlaTeX(N("XawTV isn't installed!
@@ -130,6 +130,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 }
 
 my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' || $_->{driver} eq 'usbvision' } detect_devices::probeall(1);
+push @devices, { driver => 'bttv', description => 'dummy' } if $::testing && !@devices;
 if (@devices) {
     # TODO: That need some work for multiples TV cards
     foreach (@devices) {
