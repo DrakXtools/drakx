@@ -15,7 +15,7 @@ sub busy_pids_and_files() {
 
 	my @l2 = grep { $_ } map { (split)[5] } cat_("/proc/$_/maps");
 
-	if (my @l = grep { m!^/image(_boot)?/! } @l1, @l2) {
+	if (my @l = grep { m!^/(image(_boot)?|cdrom/live_tree)/! } @l1, @l2) {
 	    my ($cmdline) = cat_("/proc/$_/cmdline") =~ /([^\0]*)/;
 	    my $exe = readlink("/proc/$_/exe");
 	    { pid => $_, cmdline => $cmdline, exe => $exe, files => [ sort(uniq(@l)) ] };
@@ -27,7 +27,7 @@ sub busy_pids_and_files() {
 
 sub remove_simple_daemons {
     my (@busy) = @_;
-    my @auto_killed = grep { $_->{cmdline} =~ m!\bkdesud$|^kdeinit: kded$! } @busy or return @busy;
+    my @auto_killed = grep { $_->{cmdline} =~ m!\b(kdesud|kded|kio_uiserver)$! } @busy or return @busy;
 
     kill 15, map { $_->{pid} } @auto_killed;
     sleep 1;
