@@ -284,7 +284,9 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	if (!seems_ok) {
 		log_message("reading compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
 		remove_wait_message();
-		stg1_error_message("Could not uncompress second stage ramdisk.");
+		stg1_error_message("Could not uncompress second stage ramdisk. "
+				   "This is probably an hardware error while reading the data. "
+				   "(this may be caused by a hardware failure or a Linux kernel bug)");
 		return RETURN_ERROR;
 	}
 
