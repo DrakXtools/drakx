@@ -364,7 +364,7 @@ sub ask_fromW {
 	my ($e, $ind) = @_;
 
 	my $may_go_to_next = sub {
-	    my ($w, $event, $kind) = @_;
+	    my ($w, $event) = @_;
 	    if (!$event || ($event->keyval & 0x7f) == 0xd) {
 		$w->signal_stop_emission_by_name('key_press_event') if $event;
 		if ($ind == $#widgets) {
