@@ -88,7 +88,13 @@ sub read($$) {
 	    push @{$b{entries}}, $e = { type => $_, kernel_or_dev => $v };
 	    $global = 0;
 	} elsif ($global) {
-	    $b{$_} = $v || 1;
+	    if ($_ eq 'disk' && $v =~ /(\S+)\s+bios\s*=\s*(\S+)/) {
+		$b{bios}{$1} = $2;
+	    } elsif ($_ eq 'bios') {
+		$b{bios}{$b{disk}} = $v;
+	    } else {
+		$b{$_} = $v || 1;
+	    }
 	} else {
 	    if ((/map-drive/ .. /to/) && /to/) {
 		$e->{mapdrive}{$e->{'map-drive'}} = $v;
@@ -693,9 +699,32 @@ sub write_lilo_conf {
 	    last;
 	}
     }
-	if (arch() !~ /ia64/) {
-		-e "$prefix/boot/boot.b" && -e "$prefix/boot/message" or die "unable to get right lilo configuration in $prefix/boot";
+    if (arch() !~ /ia64/) {
+	-e "$prefix/boot/boot.b" && -e "$prefix/boot/message" or die "unable to get right lilo configuration in $prefix/boot";
+    }
+
+
+    my %bios2dev = map_index { $::i => $_ } dev2bios($hds, $lilo->{boot});
+    my %dev2bios = reverse %bios2dev;
+
+    if (is_empty_hash_ref($lilo->{bios} ||= {})) {
+	my $dev = $hds->[0]{device};
+	if ($dev2bios{$dev}) {
+	    log::l("Since we're booting on $bios2dev{0}, make it bios=0x80, whereas $dev is now " . (0x80 + $dev2bios{$dev}));
+	    $lilo->{bios}{"/dev/$bios2dev{0}"} = '0x80';
+	    $lilo->{bios}{"/dev/$dev"} = sprintf("0x%x", 0x80 + $dev2bios{$dev});
 	}
+	foreach (0 .. 3) {
+	    my ($letter) = $bios2dev{$_} =~ /hd([^ac])/; #- at least hda and hdc are handled correctly :-/
+	    next if $lilo->{bios}{"/dev/$bios2dev{$_}"} || !$letter;
+	    next if 
+	      $_ > 0	     #- always print if first disk is hdb, hdd, hde...
+		&& $bios2dev{$_ - 1} eq "hd" . chr(ord($letter) - 1);
+	    #- no need to help lilo with hdb (resp. hdd, hdf...)
+	    log::l("Helping lilo: $bios2dev{$_} must be " . (0x80 + $_));
+	    $lilo->{bios}{"/dev/$bios2dev{$_}"} = sprintf("0x%x", 0x80 + $_);
+	}
+    }
 
     {
 	local *F;
@@ -718,32 +747,14 @@ sub write_lilo_conf {
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
 	print F "serial=", $1 if get_append($lilo, 'console') =~ /ttyS(.*)/;
 
-	my $dev = $hds->[0]{device};
-	my %bios2dev = map_index { $::i => $_ } dev2bios($hds, $lilo->{boot});
-	my %dev2bios = reverse %bios2dev;
-	my %done;
-	if ($dev2bios{$dev}) {
-	    log::l("Since we're booting on $bios2dev{0}, make it bios=0x80, whereas $dev is now " . (0x80 + $dev2bios{$dev}));
-	    print  F "disk=/dev/$bios2dev{0} bios=0x80";
-	    printf F "disk=/dev/$dev bios=0x%x\n", 0x80 + $dev2bios{$dev};
-	    $done{0} = $done{$dev2bios{$dev}} = 1;
-	}
-	foreach (0 .. 3) {
-	    my ($letter) = $bios2dev{$_} =~ /hd([^ac])/; #- at least hda and hdc are handled correctly :-/
-	    next if $done{$_} || !$letter;
-	    next if 
-	      $_ > 0 #- always print if first disk is hdb, hdd, hde...
-		&& $bios2dev{$_ - 1} eq "hd" . chr(ord($letter) - 1);
-		  #- no need to help lilo with hdb (resp. hdd, hdf...)
-	    $done{$_} = 1;
-	    log::l("Helping lilo: $bios2dev{$_} must be " . (0x80 + $_));
-	    printf F "disk=/dev/$bios2dev{$_} bios=0x%x\n", 0x80 + $_;
-	}
-
 	print F "message=/boot/message" if (arch() !~ /ia64/);
 	print F "menu-scheme=wb:bw:wb:bw" if (arch() !~ /ia64/);
 
 	print F "ignore-table" if grep { $_->{unsafe} && $_->{table} } @{$lilo->{entries}};
+
+	while (my ($dev, $bios) = each %{$lilo->{bios}}) {
+	    print F "\tdisk=$dev bios=$bios";
+	}
 
 	foreach (@{$lilo->{entries}}) {
 	    print F "$_->{type}=", $file2fullname->($_->{kernel_or_dev});
