@@ -166,7 +166,7 @@ sub ask_many_from_list_ref {
 }
 sub ask_many_from_list_with_help_ref {
     my ($o, $title, $message, @l) = @_;
-    my @L = grep { $_->[0] } combine(3, @l) or return 1;
+    my @L = grep { @{$_->[0]} } combine(3, @l) or return 1;
     $o->ask_many_from_list_with_help_refW($title, [ deref($message) ], @L);
 }
 

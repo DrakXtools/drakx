@@ -296,8 +296,8 @@ _("Choose the sizes"),
 #------------------------------------------------------------------------------
 sub chooseSizeToInstall {
     my ($o, $packages, $min_size, $max_size_, $available, $individual) = @_;
-    my $enough = $available > $max_size_;
     my $max_size = min($max_size_, $available * 0.9);
+    my $enough = $max_size == $max_size_;
     my $percentage = int 100 * $max_size / $max_size_;
 
     #- don't ask anything if the difference between min and max is too small
@@ -306,7 +306,7 @@ sub chooseSizeToInstall {
     log::l("choosing size to install between $min_size and $max_size");
     my $w = my_gtk->new('');
     my $adj = create_adjustment($percentage, $min_size * 100 / $max_size_, $percentage);
-    my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
+    my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 20, 0);
     my $val;
 
     gtkadd($w->{window},
@@ -326,15 +326,19 @@ A low percentage will install only the most important packages;
 a percentage of %d%% will install as many packages as possible.", $percentage, $percentage))
 . ($individual ? "\n\n" . _("You will be able to choose them more specifically in the next step.") : ''),
 		 create_packtable({},
-				  [ _("Percentage of packages to install") . '  ', $spin, "%", ],
+				  [ _("Percentage of packages to install") . '  ', $spin, "%", my $mb = new Gtk::Label('xxxx MB') ],
 				  [ undef, new Gtk::HScrollbar($adj) ],
 			       ),
 		 create_okcancel($w)
 		)
 	 );
+    $spin->signal_connect(changed => my $changed = sub { 
+	my $val = $spin->get_value_as_int / 100 * $max_size;
+	$mb->set(sprintf("(%dMB)", pkgs::correctSize($val / sqr(1024)))); 
+    }); &$changed();
     $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });
     $spin->grab_focus();
-    $w->main and $spin->get_value_as_int / 100 * $max_size;
+    $w->main and $val;
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;
