@@ -619,31 +619,33 @@ sub autologin {
 
 sub selectLanguage {
     my ($in, $lang, $langs_) = @_;
-    my $langs = $langs_ || {};
-    #- can't use images after install since the install theme is inverse video :/
-    my $using_images = $in->isa('interactive::gtk') && $::isInstall;
 
-    #- to create the default value, use the first location for that value :/
-    $lang = first(lang::l2location($lang))."|$lang";
+    my $common = { messages => N("Please choose a language to use."),
+		   title => 'language choice',
+		   interactive_help_id => 'selectLanguage' };
 
-    my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
-    my $listval2val = sub { $_[0] =~ /\|(.*)/; $1 };
+    if ($::isInstall) {
+	my $langs = $langs_ || {};
+	my $using_images = $in->isa('interactive::gtk');
 
-    my @langs = map { my $l = $_; map { [ "$_|$l", $_, $l ] } lang::l2location($l) } lang::list_langs(exclude_non_installed => !$::isInstall);
-    #- since gtk version will use images (function image2f) we need to sort differently
-    my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
-    @langs = map { $_->[0] } sort { $a->[1] cmp $b->[1] || $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
+	#- to create the default value, use the first location for that value :/
+	$lang = first(lang::l2location($lang))."|$lang";
+	
+	my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
+	my $listval2val = sub { $_[0] =~ /\|(.*)/; $1 };
 
-    $in->ask_from_(
-	{ messages => N("Please choose a language to use."),
-	  title => 'language choice',
-	  interactive_help_id => 'selectLanguage',
-	  if_($::isInstall, cancel => ''),
-	  advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
+	my @langs = map { my $l = $_; map { [ "$_|$l", $_, $l ] } lang::l2location($l) } lang::list_langs();
+	#- since gtk version will use images (function image2f) we need to sort differently
+	my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
+	@langs = map { $_->[0] } sort { $a->[1] cmp $b->[1] || $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
+
+	add2hash($common, { cancel => '',
+			    advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
-	  callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 } }
-	},
+			    callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 } } });
+			    
+	$in->ask_from_($common,
 	[ { val => \$lang, separator => '|', 
 	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
 	    format => sub { $_[0] =~ /(.*\|)(.*)/; $1.lang::l2name($2) },
@@ -658,11 +660,19 @@ when your installation is complete and you restart your system.")),
 		  } 
 	      } sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs())
 	]) or return;
-    $langs->{$listval2val->($lang)} = 1;
-    $langs->{$_} or delete $langs->{$_} foreach keys %$langs;  #- clean hash
+	$langs->{$listval2val->($lang)} = 1;
+	$langs->{$_} or delete $langs->{$_} foreach keys %$langs;  #- clean hash
+	
+	#- convert to the default locale for asked language
+	$listval2val->($lang);
 
-    #- convert to the default locale for asked language
-    $listval2val->($lang);
+    } else {
+	my @langs = sort { lang::l2name($a) cmp lang::l2name($b) } lang::list_langs(exclude_non_installed => 1);
+	$in->ask_from_($common,
+		       [ { val => \$lang, type => 'list',
+			   format => sub { lang::l2name($_[0]) }, list => \@langs } ]) or return;
+	$lang;
+    }
 }
 
 sub selectCountry {
