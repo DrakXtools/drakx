@@ -667,6 +667,13 @@ $modelines_text_ext = '
 # TV fullscreen mode or DVD fullscreen output.
 # These are available along with standard mode timings.
 
+# 1024x768 @ 97.6 Hz, 80.21 kHz hsync
+Modeline "1024x768"   115.5  1024 1080 1272 1440  768  771  781  822 -hsync -vsync
+
+# Sony Vaio C1(X,XS,VE,VN)?
+# 1024x480 @ 85.6 Hz, 48 kHz hsync
+ModeLine "1024x480"    65.00 1024 1032 1176 1344   480  488  494  563 -hsync -vsync
+
 # 768x576 @ 79 Hz, 50 kHz hsync
 ModeLine "768x576"     50.00  768  832  846 1000   576  590  595  630
 # 768x576 @ 100 Hz, 61.6 kHz hsync
