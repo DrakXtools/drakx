@@ -971,7 +971,7 @@ _("Some steps are not completed.
 
 Do you really want to quit now?"), 0);
 
-    install_steps::exitInstall;
+    install_steps::exitInstall($o);
 
     $o->exit unless $alldone;
 
