@@ -47,7 +47,7 @@ if (!$dm) {
 }
 
 my @raw_list = sort keys %dm;
-my @list = $::expert ? @raw_list : (grep { -e $dm{$_}->[1] } @raw_list) or @raw_list;
+my @list = $::expert ? @raw_list : (grep { -e $dm{$_}->[1] } @raw_list) || @raw_list;
 
 start:
 if ($in->ask_from(N("Choosing a display manager"),
@@ -72,7 +72,7 @@ several different X sessions on your local machine at the same time.")),
         s/^\n//g;
         $_ .= "\nDISPLAYMANAGER=$dm\n" if eof;
     } $cfg_file;
-    log::explanations("Switching to \"$dm\" display manager");
+    log::explanations(qq(Switching to "$dm" display manager));
     if (any::running_window_manager()) {
         $in->ask_yesorno('', N("The change is done, do you want to restart the dm service ?"), 1) and services::restart("dm");
     }
