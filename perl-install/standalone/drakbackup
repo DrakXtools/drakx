@@ -191,7 +191,7 @@ my $remove_user_before_restore = 0;
 my @file_list_to_send_by_ftp;
 my $results;
 my @net_methods = ("ftp", "rsync", "ssh", "webdav");
-my @media_types = ("cd", translate(N_("hd")), translate(N_("tape")));
+my @media_types = (translate(N_("hd")), "cd", translate(N_("tape")));
 my %cd_devices;
 my $std_device;
 my @tape_devices;
