@@ -265,10 +265,7 @@ sub new {
 
     $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
     $w->{rwindow}->signal_connect(delete_event => \&quit_global);
-    undef $wait;
-    gtkset_mousecursor_normal();
     $w->{rwindow}->set_position('center') unless $::isEmbedded;
-    $w->{rwindow}->show_all();
 
     foreach (['PRINTERS_DETECTION', N("/Autodetect printers")], ['MODEMS_DETECTION', N("/Autodetect modems")]) {
         $check_boxes{$_->[0]} = $menubar->{factory}->get_widget("<main>".N("/Options").$_->[1]);
@@ -276,6 +273,9 @@ sub new {
         $check_boxes{$_->[0]}->set_active($options{$_->[0]});    # restore saved values
     }
 
+    $w->{rwindow}->show_all();
+    undef $wait;
+    gtkset_mousecursor_normal();
     foreach ($module_cfg_button, $config_button) { $_->hide };
     $in = 'interactive'->vnew('su', 'default') if $::isEmbedded;
     $w->main;
