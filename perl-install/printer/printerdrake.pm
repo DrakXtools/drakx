@@ -2903,9 +2903,9 @@ sub print_testpages {
 	   messages => N("Please select the test pages you want to print.
 Note: the photo test page can take a rather long time to get printed and on laser printers with too low memory it can even not come out. In most cases it is enough to print the standard test page."),
 	   cancel => (!$printer->{NEW} ?
-		       N("Cancel") : ($::isWizard ? N("<- Previous") : 
+		       N("Cancel") : ($::isWizard ? N("Previous") : 
 				      N("No test pages"))),
-	   ok => ($::isWizard ? N("Next ->") : N("Print")),
+	   ok => ($::isWizard ? N("Next") : N("Print")),
 	   callbacks => {
 	       changed => sub {
 		   if ($oldres2 ne $res2) {

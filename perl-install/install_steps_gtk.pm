@@ -283,7 +283,7 @@ sub reallyChooseGroups {
 			      $check->signal_connect(clicked => sub { $$individual = $check->get_active });
 			      $check;
 			  }),
-			  gtksignal_connect(Gtk2::Button->new(N("Next ->")), clicked => sub { Gtk2->main_quit }),
+			  gtksignal_connect(Gtk2::Button->new(N("Next")), clicked => sub { Gtk2->main_quit }),
 			 ),
 		  ),
 	  );
@@ -440,7 +440,7 @@ sub choosePackagesTree {
 			    auto_deps => N("Show automatically selected packages"),
 			    interactive_help_id => 'choosePackagesTree',
 			    ok => N("Install"),
-			    cancel => N("<- Previous"),
+			    cancel => N("Previous"),
 			    icons => [ { icon         => 'floppy',
 					 help         => N("Load/Save on floppy"),
 					 wait_message => N("Updating package selection"),

@@ -4222,7 +4222,7 @@ sub button_box_adv() {
 				interactive_mode_box();
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
 				destroy_widget();
 				$previous_widget->();
 			}),
@@ -4250,7 +4250,7 @@ sub button_box_restore_main() {
 				interactive_mode_box();
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
 				destroy_widget(); 
 				interactive_mode_box() 
 			}),
@@ -4308,7 +4308,7 @@ sub button_box_backup_end() {
 				interactive_mode_box() 
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
 				destroy_widget(); 
 				$previous_widget->() 
 			}),
@@ -4334,7 +4334,7 @@ sub button_box_wizard_end() {
 				interactive_mode_box();
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
 				destroy_widget(); 
 				$previous_widget->();
 			}),
@@ -4360,7 +4360,7 @@ sub button_box_restore_end() {
 				interactive_mode_box();
 			}),
 			1, new Gtk2::HBox(0, 1),	
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
 				destroy_widget();
 				$previous_widget->();
 			}),
@@ -4417,11 +4417,11 @@ sub button_box_build_backup() {
 				interactive_mode_box();
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
 				destroy_widget();
 				$previous_widget->();
 			}),
-			1, gtksignal_connect(Gtk2::Button->new(N("Next ->")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new(N("Next")), clicked => sub {
 				destroy_widget();
 				$next_widget->();
 			}),
@@ -4443,11 +4443,11 @@ sub button_box_restore() {
 				interactive_mode_box();  
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub { 
 				destroy_widget(); 
 				$previous_widget->(); 
 			}),
-			1, gtksignal_connect(Gtk2::Button->new(N("Next ->")), clicked => sub {
+			1, gtksignal_connect(Gtk2::Button->new(N("Next")), clicked => sub {
 				destroy_widget(); 
 				$next_widget->();
 			}),
@@ -4473,11 +4473,11 @@ sub button_box_find_media {
 				interactive_mode_box();  
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(Gtk2::Button->new(N("<- Previous")), clicked => sub {
+			0, gtksignal_connect(Gtk2::Button->new(N("Previous")), clicked => sub {
 				$central_widget = \$box2;
 				interactive_mode_box();  
 			}),
-			1, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Next ->")), clicked => sub {
+			1, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Next")), clicked => sub {
 				interactive_mode_box("restore"); 
 			}), $mount_media),
 		),
@@ -4497,11 +4497,11 @@ sub button_box_wizard() {
 				interactive_mode_box() 
 			}),
 			1, new Gtk2::HBox(0, 0),
-			0, gtksignal_connect(Gtk2::Button->new($next_widget ? N("<- Previous") : N("Ok")), clicked => sub { 
+			0, gtksignal_connect(Gtk2::Button->new($next_widget ? N("Previous") : N("Ok")), clicked => sub { 
 				destroy_widget();
 				$previous_widget ? $previous_widget->() : $next_widget->();
 			}),
-			if_($next_widget, 1, gtksignal_connect(Gtk2::Button->new(N("Next ->")), clicked => sub {
+			if_($next_widget, 1, gtksignal_connect(Gtk2::Button->new(N("Next")), clicked => sub {
 				destroy_widget();
 				$next_widget ? $next_widget->() : $previous_widget->();
 			})),

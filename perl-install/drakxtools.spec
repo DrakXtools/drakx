@@ -317,7 +317,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Thu Jan 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-21mdk
-- prevent spurious top window to appears when embedded in mcc
+- prevent spurious top windows to appears when embedded in mcc
 
 * Thu Jan 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-20mdk
 - diskdrake:
