@@ -497,6 +497,23 @@ wait %d seconds for default boot.
 	any::set_login_serial_console($port, $speed);
     }
 
+    #- add a restore entry if installation is done from disk, in order to allow redoing it.
+    if (my $hd_install_path = any::hdInstallPath()) {
+	if (-e "$hd_install_path/boot/vmlinuz" && -e "$hd_install_path/boot/all.rdz" and
+	    my ($cmdline) = cat_("$hd_install_path/boot/menu.lst") =~ /kernel \S+\/boot\/vmlinuz (.*)$/) {
+	    log::l("adding a restore bootloader entry on $hd_install_path");
+	    add_entry($bootloader, {
+				    type => 'image',
+				    label => 'restore',
+				    kernel_or_dev => "$hd_install_path/boot/vmlinuz",
+				    initrd => "$hd_install_path/boot/all.rdz",
+				    append => $cmdline,
+				   });
+	} else {
+	    log::l("no restore bootloader need to be used");
+	}
+    }
+
     my %labels = get_kernels_and_labels();
     $labels{''} or die "no kernel installed";
 
