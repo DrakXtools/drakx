@@ -151,7 +151,6 @@ if ($::isEmbedded) {
 }
 
 my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", "Glib::String", "Glib::Int");
-my ($statusbar, $sig_id);
 $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            if_(!$::isEmbedded, 0, $menubar),
                            1, create_hpaned(gtkadd(Gtk2::Frame->new(N("Detected hardware")), 
@@ -171,15 +170,12 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                                               clicked => sub {
                                                                                                   return 1 if defined $pid;
                                                                                                   if ($pid = fork()) {
-                                                                                                      $sig_id = $statusbar->push($statusbar->get_context_id("id"),
-                                                                                                                                 N("Running \"%s\" ...", $current_configurator));
                                                                                                   } else {
                                                                                                       exec($current_configurator) or die "$current_configurator missing\n";
                                                                                                   }
                                                                                               })
                                                      ),
                                             ),
-                           0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
                                                          gtksignal_connect(Gtk2::Button->new(N("Options")), event => popup_menu($opt_menu), $menubar),
                                                          gtksignal_connect(Gtk2::Button->new(N("Help")), event => popup_menu($help_menu), $menubar),
@@ -307,7 +303,6 @@ foreach (@harddrake::data::tree) {
 
 $SIG{CHLD} = sub {
     undef $pid;
-    $statusbar->pop($sig_id);
     # reap zombies
     my $child_pid;
     do { $child_pid = waitpid(-1, POSIX::WNOHANG) } until $child_pid > 0;
