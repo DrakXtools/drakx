@@ -333,7 +333,7 @@ sub lilo_choice
     
     my ($all_hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
-    fs::get_all_mntpoints_from_fstab($all_hds);
+    fs::merge_info_from_fstab($fstab);
  
     $::expert=1;
   ask:

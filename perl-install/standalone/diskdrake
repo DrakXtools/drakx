@@ -67,8 +67,8 @@ my $fstab = [ fsedit::get_all_fstab($all_hds) ];
 
 fs::get_raw_hds('', $all_hds);
 
-fs::get_all_mntpoints_from_fstab($all_hds);
-fs::check_mounted($fstab);
+fs::merge_info_from_fstab([ fsedit::get_really_all_fstab($all_hds) ]);
+fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
 diskdrake_interactive::main($in, $all_hds);
 
 $in->exit(0);

@@ -269,6 +269,12 @@ sub get_all_fstab {
     my @raids = grep {$_} @{$all_hds->{raids}};
     @parts, @raids, @{$all_hds->{loopbacks}};
 }
+sub get_really_all_fstab {
+    my ($all_hds) = @_;
+    my @parts = map { partition_table::get_normal_parts($_) } all_hds($all_hds);
+    my @raids = grep {$_} @{$all_hds->{raids}};
+    @parts, @raids, @{$all_hds->{loopbacks}}, @{$all_hds->{raw_hds}}, @{$all_hds->{nfss}}, @{$all_hds->{smb}};
+}
 sub get_all_fstab_and_holes {
     my ($all_hds) = @_;
     my @raids = grep {$_} @{$all_hds->{raids}};
@@ -413,7 +419,7 @@ sub mntpoint2part {
 }
 sub has_mntpoint {
     my ($mntpoint, $all_hds) = @_;
-    mntpoint2part($mntpoint, [ get_all_fstab($all_hds) ]);
+    mntpoint2part($mntpoint, [ get_really_all_fstab($all_hds) ]);
 }
 sub get_root_ {
     my ($fstab, $boot) = @_;

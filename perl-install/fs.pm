@@ -16,62 +16,141 @@ use modules;
 use fsedit;
 use loopback;
 
-1;
-
-sub add_options(\$@) {
-    my ($option, @options) = @_;
-    my %l; @l{split(',', $$option), @options} = (); delete $l{defaults};
-    $$option = join(',', keys %l) || "defaults";
-}
-
-
-sub get_raw_hds {
-    my ($prefix, $all_hds) = @_;
-
-    $all_hds->{raw_hds} = 
-      [ 
-       detect_devices::floppies(), detect_devices::cdroms(), 
-       (map { $_->{device} .= '4'; $_ } detect_devices::zips())
-      ];
-    my @fstab = read_fstab("$prefix/etc/fstab");
-    $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
-    $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
-}
 
 sub read_fstab {
     my ($file) = @_;
 
-    local *F;
-    open F, $file or return;
-
     map {
-	my ($dev, @l) = split;
-	$dev =~ s,/(tmp|dev)/,,;
-	{ device => $dev, mntpoint => $l[0], type => $l[1], options => $l[2] }
-    } <F>;
+	my ($dev, $mntpoint, $type, $options) = split;
+
+	$options = 'defaults' if $options eq 'rw'; # clean-up for mtab read
+
+	$type = fs2type($type);
+	if ($type eq 'supermount') {
+	    # normalize this bloody supermount
+	    $options = join(",", grep {
+		if (/fs=(.*)/) {
+		    $type = $1;
+		    0;
+		} elsif (/dev=(.*)/) {
+		    $dev = $1;
+		    0;
+		} else {
+		    1;
+		}
+	    } split(',', $options));
+	}
+
+	if ($dev =~ m,/(tmp|dev)/,) {
+	    $dev = expand_symlinks($dev);
+	    $dev =~ s,/(tmp|dev)/,,;
+	}
+
+	{ device => $dev, mntpoint => $mntpoint, type => $type, options => $options };
+    } cat_($file);
 }
 
-sub up_mount_point {
-    my ($mntpoint, $fstab) = @_;
-    while (1) {
-	$mntpoint = dirname($mntpoint);
-	$mntpoint ne "." or return;
-	$_->{mntpoint} eq $mntpoint and return $_ foreach @$fstab;
+sub merge_fstabs {
+    my ($fstab, @l) = @_;
+
+    foreach my $p (@$fstab) {
+	my ($p2) = grep { $_->{device} eq $p->{device} } @l or next;
+	@l       = grep { $_->{device} ne $p->{device} } @l;
+
+	$p->{type} ne $p2->{type} && $p->{type} ne 'auto' && $p2->{type} ne 'auto' and
+	  log::l("err, fstab and partition table do not agree for $p->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs ", (type2fs($p2) || type2name($p2->{type}))), next;
+	
+	$p->{mntpoint} = $p2->{mntpoint} if delete $p->{unsafeMntpoint};
+
+	$p->{type} = $p2->{type} if $p->{type} eq 'defaults';
+	$p->{options} = $p2->{options};
+	add2hash($p, $p2);
+    }
+    @l;
+}
+
+sub add2all_hds {
+    my ($all_hds, @l) = @_;
+
+    @l = merge_fstabs([ fsedit::get_really_all_fstab($all_hds) ], @l);
+
+    foreach (@l) {
+	my $s = 
+	    isNfs($_) ? 'nfs' :
+	    isThisFs('smbfs', $_) ? 'smb' :
+	    'special';
+	push @{$all_hds->{$s}}, $_;
     }
 }
 
-sub check_mounted($) {
+sub merge_info_from_mtab {
     my ($fstab) = @_;
 
-    local (*F, *G, *H);
-    open F, "/etc/mtab";
-    open G, "/proc/mounts";
-    open H, "/proc/swaps";
-    foreach (<F>, <G>, <H>) {
-	foreach my $p (@$fstab) {
-	    /$p->{device}\s+([^\s]*)\s+/ and $p->{mntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1;
+    my @l1 = map {; { device => $_->{device}, type => fs2type('swap') } } read_fstab('/proc/swaps');
+    my @l2 = map { read_fstab($_) } '/etc/mtab', '/proc/mounts';
+
+    foreach (@l1, @l2) {
+	$_->{isMounted} = $_->{isFormatted} = 1;
+	delete $_->{options};
+    } 
+    merge_fstabs($fstab, @l1, @l2);
+}
+
+sub merge_info_from_fstab {
+    my ($fstab, $prefix, $uniq) = @_;
+    my @l = grep { !($uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab)) } read_fstab("$prefix/etc/fstab");
+    merge_fstabs($fstab, @l);
+}
+
+sub write_fstab {
+    my ($all_hds, $prefix) = @_;
+    $prefix ||= '';
+
+    my @l1 = (fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}});
+    my @l2 = read_fstab("$prefix/etc/fstab");
+
+    my %new;
+    my @l = map { 
+	my $device = 
+	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smb)) ? 
+	      $_->{device} : 
+	  isLoopback($_) ? 
+	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : $_->{device}) :
+	  do {
+	      my $dir = $_->{device} =~ m|^/| ? '' : '/dev/';
+	      devices::make("$prefix$dir$_->{device}"); "$dir$_->{device}";
+	  };
+
+	mkdir("$prefix/$_->{mntpoint}", 0755);
+	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $_->{mntpoint};
+	
+	my ($freq, $passno) =
+	  isTrueFS($_) ? 
+	    (1, $_->{mntpoint} eq '/' ? 1 : loopback::carryRootLoopback($_) ? 0 : 2) : 
+	    (0, 0);
+
+	if (($device eq 'none' || !$new{$device}) && !$new{$mntpoint}) {
+	    #- keep in mind the new line for fstab.
+	    $new{$device} = 1;
+	    $new{$mntpoint} = 1;
+
+	    my $options = $_->{options};
+	    my $type = type2fs($_);
+
+	    # handle bloody supermount special case
+	    if ($options =~ /supermount/) {
+		$options = join(",", "dev=$device", "fs=$type", grep { $_ ne 'supermount' } split(':', $options));
+		($device, $type) = ($mntpoint, 'supermount');
+	    }
+
+	    [ $device, $mntpoint, $type, $options || 'defaults', $freq, $passno ];
+	} else {
+	    ()
 	}
-    }
+    } grep { $_->{device} && $_->{mntpoint} && $_->{type} } (@l1, @l2);
+
+    log::l("writing $prefix/etc/fstab");
+    output("$prefix/etc/fstab", map { join(' ', @$_) . "\n" } sort { $a->[1] cmp $b->[1] } @l);
 }
 
 sub auto_fs() {
@@ -87,9 +166,17 @@ sub mount_options {
     \%non_defaults, \@user_implies;
 }
 
+# simple function
+# use mount_options_unpack + mount_options_pack for advanced stuff
+sub add_options(\$@) {
+    my ($option, @options) = @_;
+    my %l; @l{split(',', $$option), @options} = (); delete $l{defaults};
+    $$option = join(',', keys %l) || "defaults";
+}
+
 sub mount_options_unpack {
     my ($part) = @_;
-    my ($type, $packed_options) = ($part->{type}, $part->{options});
+    my $packed_options = $part->{options};
 
     my ($non_defaults, $user_implies) = mount_options();
 
@@ -105,7 +192,6 @@ sub mount_options_unpack {
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 
-    $non_defaults->{autofs} = 1;  # autofs proposed for any types??
     $non_defaults->{supermount} = 1 if member(type2fs($part), 'auto', @auto_fs);
 
     my $defaults = { reverse %$non_defaults };
@@ -114,8 +200,6 @@ sub mount_options_unpack {
     foreach (split(",", $packed_options)) {
 	if ($_ eq 'user') {
 	    $options{$_} = 1 foreach ('user', @$user_implies);
-	} elsif (/fstype=(.*)/) {
-	    $type = $1;
 	} elsif (exists $non_defaults->{$_}) {
 	    $options{$_} = 1;
 	} elsif ($defaults->{$_}) {
@@ -130,25 +214,16 @@ sub mount_options_unpack {
     $options{'rsize=8192,wsize=8192'} = delete $options{'rsize=8192'} && delete $options{'wsize=8192'}
       if exists $options{'rsize=8192'};
 
-    $options{autofs} = 1 if $part->{type} eq 'autofs';
-    $options{supermount} = 1 if $part->{type} eq 'supermount';
-
     my $unknown = join(",", @unknown);
-    \%options, $unknown, $type;
+    \%options, $unknown;
 }
 
 sub mount_options_pack {
-    my ($part, $options, $unknown, $type) = @_;
+    my ($part, $options, $unknown) = @_;
 
     my ($non_defaults, $user_implies) = mount_options();
     my @l;
 
-    if ($options->{autofs} || $options->{supermount}) {
-	$options->{"fstype=$type"} = 1;
-	delete $options->{$_} and $part->{type} = $_ foreach 'autofs', 'supermount';
-    } else {
-	$part->{type} = $type;
-    }
     if (delete $options->{user}) {
 	push @l, 'user';
 	foreach (@$user_implies) {
@@ -195,33 +270,118 @@ sub mount_options_help {
     %help;
 }
 
-sub get_mntpoints_from_fstab {
-    my ($l, $prefix, $uniq) = @_;
-    log::l("reading fstab");
-    foreach (read_fstab("$prefix/etc/fstab")) {
-	next if $uniq && fsedit::mntpoint2part($_->{mntpoint}, $l);
-	($_->{device} = expand_symlinks(($_->{device} =~ m|^/| ? '' : '/dev/') . $_->{device})) =~ s|^/dev/||;
+sub set_default_options {
+    my ($all_hds, $useSupermount, $iocharset, $codepage) = @_;
 
-	foreach my $p (@$l) {
-	    $p->{device} eq $_->{device} or next;
-	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p) and
-		log::l("err, fstab and partition table do not agree for $_->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs $_->{type}"), next;
-	    delete $p->{unsafeMntpoint} || !$p->{mntpoint} or next;
-	    $p->{type} ||= $_->{type};
-	    $p->{mntpoint} = $_->{mntpoint};
-	    $p->{options} = $_->{options};
+    my @removables = @{$all_hds->{raw_hds}};
+
+    foreach my $part (fsedit::get_really_all_fstab($all_hds)) {
+	my ($options, $unknown) = mount_options_unpack($part);
+
+	if (member($part, @removables)) {
+	    $options->{supermount} = $useSupermount;
+	    $part->{type} = 'auto'; # if supermount, code below will handle choosing the right type
 	}
+
+	my $is_auto = isThisFs('auto', $part);
+
+	if ($options->{supermount} && $is_auto) {
+	    # this can't work, guessing :-(
+	    $part->{type} = fs2type($part->{media_type} eq 'cdrom' ? 'iso9660' : 'vfat');
+	    $is_auto = 0;
+	}
+
+	if ($part->{media_type} eq 'fd') {
+	    # slow device so don't loose time, write now!
+	    $options->{sync} = 1;
+	}
+
+	if (isNfs($part)) {
+	    put_in_hash($options, { 
+	        ro => 1, nosuid => 1, 'rsize=8192,wsize=8192' => 1, 
+		'iocharset=' => $iocharset,
+            });
+	}
+	if (isFat($part) || $is_auto) {
+	    put_in_hash($options, {
+	        user => 1, 'umask=0' => 1, exec => 1,
+	        'iocharset=' => $iocharset, 'codepage=' => $codepage,
+            });
+	}
+	if (isThisFs('ntfs', $part) || $is_auto) {
+	    put_in_hash($options, { 'iocharset=' => $iocharset });
+	}
+	if (isThisFs('iso9660', $part) || $is_auto) {
+	    put_in_hash($options, { user => 1, exec => 1, });
+	}
+	if (isThisFs('reiserfs', $part)) {
+	    $options->{notail} = 1;
+	}
+	if (isLoopback($_) && !isSwap($_)) { #- no need for loop option for swap files
+	    $options->{loop} = 1;
+	}
+
+	# rationalize: no need for user
+	if ($options->{autofs} || $options->{supermount}) {
+	    $options->{user} = 0;
+	}
+
+	# have noauto when we have user
+	$options->{noauto} = $options->{user}; 
+
+	if ($options->{user}) {
+	    # ensure security  (user_implies - noexec as noexec is not a security matter)
+	    $options->{$_} = 1 foreach 'nodev', 'nosuid';
+	}
+
+	mount_options_pack($part, $options, $unknown);
     }
 }
-sub get_all_mntpoints_from_fstab {
-    my ($all_hds, $prefix, $uniq) = @_;
-    my @l = (fsedit::get_all_fstab($all_hds), @{$all_hds->{raw_hds}});
-    get_mntpoints_from_fstab(\@l, $prefix, $uniq);
+
+sub set_removable_mntpoints {
+    my ($all_hds) = @_;
+
+    my %names;
+    foreach (@{$all_hds->{raw_hds}}) {
+	my $name = $_->{media_type};
+	if (member($name, 'hd', 'fd')) {
+	    if (detect_devices::isZipDrive($_)) {
+		$name = 'zip';
+	    } elsif ($name eq 'fd') {
+		$name = 'floppy';
+	    } else {
+		log::l("set_removable_mntpoints: don't know what to with hd $_->{device}");
+		next;
+	    }
+	}
+	my $s = ++$names{$name};
+	$_->{mntpoint} ||= "/mnt/$name" . ($s == 1 ? '' : $s);
+    }
 }
 
-#- mke2fs -b (1024|2048|4096) -c -i(1024 > 262144) -N (1 > 100000000) -m (0-100%) -L volume-label
-#- tune2fs
+sub get_raw_hds {
+    my ($prefix, $all_hds) = @_;
+
+    $all_hds->{raw_hds} = 
+      [ 
+       detect_devices::floppies(), detect_devices::cdroms(), 
+       (map { $_->{device} .= '4'; $_ } detect_devices::zips())
+      ];
+    my @fstab = read_fstab("$prefix/etc/fstab");
+    $all_hds->{nfss} = [ grep { isNfs($_) } @fstab ];
+    $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
+    $all_hds->{special} = [
+       { device => 'none', mntpoint => '/proc', type => 'proc' },
+       { device => 'none', mntpoint => '/dev/pts', type => 'devpts', options => 'mode=0620' },
+    ];
+}
+
+################################################################################
+# formatting functions
+################################################################################
 sub format_ext2($@) {
+    #- mke2fs -b (1024|2048|4096) -c -i(1024 > 262144) -N (1 > 100000000) -m (0-100%) -L volume-label
+    #- tune2fs
     my ($dev, @options) = @_;
     $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
@@ -299,6 +459,9 @@ sub format_part {
     }
 }
 
+################################################################################
+# mounting functions
+################################################################################
 sub formatMount_part {
     my ($part, $raids, $fstab, $prefix, $callback) = @_;
 
@@ -457,6 +620,9 @@ sub umount_all($;$) {
     }
 }
 
+################################################################################
+# various functions
+################################################################################
 sub df {
     my ($part, $prefix) = @_;
     my $dir = "/tmp/tmp_fs_df";
@@ -488,102 +654,13 @@ sub df {
     $part->{free};
 }
 
-#- do some stuff before calling write_fstab
-sub write {
-    my ($prefix, $fstab, $manualFstab, $useSupermount, $options) = @_;
-    $fstab = [ @{$fstab||[]}, @{$manualFstab||[]} ];
-
-    unless ($::live) {
-	log::l("resetting /etc/mtab");
-	local *F;
-	open F, "> $prefix/etc/mtab" or die "error resetting $prefix/etc/mtab";
+sub up_mount_point {
+    my ($mntpoint, $fstab) = @_;
+    while (1) {
+	$mntpoint = dirname($mntpoint);
+	$mntpoint ne "." or return;
+	$_->{mntpoint} eq $mntpoint and return $_ foreach @$fstab;
     }
-
-    my $floppy = detect_devices::floppy();
-
-    my @to_add = (
-       $useSupermount ?
-       [ split ' ', "/mnt/floppy /mnt/floppy supermount fs=vfat,dev=/dev/$floppy 0 0" ] :
-       [ split ' ', "/dev/$floppy /mnt/floppy auto sync,user,noauto,nosuid,nodev 0 0" ],
-       [ split ' ', 'none /proc proc defaults 0 0' ],
-       [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ],
-       (map_index {
-	   my $i = $::i ? $::i + 1 : '';
-	   mkdir "$prefix/mnt/cdrom$i", 0755;#- or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
-	   symlinkf $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
-	   chown 0, 22, "$prefix/dev/$_->{device}";
-	   $useSupermount ?
-	     [ "/mnt/cdrom$i", "/mnt/cdrom$i", "supermount", "fs=iso9660,dev=/dev/cdrom$i", 0, 0 ] :
-	     [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
-       } detect_devices::cdroms()),
-       (map_index { #- for zip drives, the right partition is the 4th by default.
-	   my $i = $::i ? $::i + 1 : '';
-	   mkdir "$prefix/mnt/zip$i", 0755 or log::l("failed to mkdir $prefix/mnt/zip$i: $!");
-	   symlinkf "$_->{device}4", "$prefix/dev/zip$i" or log::l("failed to symlink $prefix/dev/zip$i: $!");
-	   $useSupermount ?
-	     [ "/mnt/zip$i", "/mnt/zip$i", "supermount", "fs=vfat,dev=/dev/zip$i", 0, 0 ] :
-	     [ "/dev/zip$i", "/mnt/zip$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
-       } detect_devices::zips()));
-    write_fstab($fstab, $prefix, $options, @to_add);
 }
 
-sub write_fstab($;$$@) {
-    my ($fstab, $prefix, $options, @to_add) = @_;
-    $prefix ||= '';
-
-    my $format_options = sub { 
-	my ($default, @l) = @_;
-	join(',', $default, map { "$_=$options->{$_}" } grep { $options->{$_} } @l);
-    };
-
-    unshift @to_add, map {
-	my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
-	$options = $_->{options} || $options;
-	
-	isTrueFS($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
-	isNfs($_) and $dir = '', $options = $_->{options} || $format_options->('ro,nosuid,rsize=8192,wsize=8192', 'iocharset');
-	isFat($_) and $options = $_->{options} || $format_options->("user,exec,umask=0", 'codepage', 'iocharset');
-	isThisFs("reiserfs", $_) and add_options($options, "notail");
-	
-	my $dev = isLoopback($_) ?
-	  ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : $_->{device}) :
-	  ($_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}");
-	
-	local $_->{mntpoint} = do { 
-	    $passno = 0;
-	    "/initrd/loopfs";
-	} if loopback::carryRootLoopback($_);
-	
-	add_options($options, "loop") if isLoopback($_) && !isSwap($_); #- no need for loop option for swap files
-	
-	eval { devices::make("$prefix/$dev") } if $dir && !isLoopback($_);
-	mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint} && !isSwap($_);
-	
-	[ $dev, $_->{mntpoint}, type2fs($_), $options, $freq, $passno ];
-	
-    } grep { $_->{mntpoint} && type2fs($_) } @$fstab;
-
-    push @to_add, map { [ split ] } cat_("$prefix/etc/fstab");
-
-    my %new;
-    @to_add = grep { 
-	if (($_->[0] eq 'none' || !$new{$_->[0]}) && !$new{$_->[1]}) {
-	    #- keep in mind the new line for fstab.
-	    @new{$_->[0], $_->[1]} = (1, 1);
-	    1;
-	} else {
-	    0;
-	}
-    } @to_add;
-
-    log::l("writing $prefix/etc/fstab");
-    local *F;
-    open F, "> $prefix/etc/fstab" or die "error writing $prefix/etc/fstab";
-    print F join(" ", @$_), "\n" foreach sort { $a->[1] cmp $b->[1] } @to_add;
-}
-
-sub merge_fstabs {
-    my ($fstab, $manualFstab) = @_;
-    my %l; $l{$_->{device}} = $_ foreach @$manualFstab;
-    put_in_hash($_, $l{$_->{device}}) foreach @$fstab;
-}
+1;

@@ -863,7 +863,7 @@ sub suggest_mount_points {
 	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
-	fs::get_mntpoints_from_fstab($fstab, $handle->{dir}, $uniq) if $mnt eq '/';
+	fs::merge_info_from_fstab($fstab, $handle->{dir}, $uniq) if $mnt eq '/';
     }
     $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @$fstab;
 }
@@ -882,7 +882,7 @@ sub use_root_part {
     my ($fstab, $part, $prefix) = @_;
     {
 	my $handle = any::inspect($part, $prefix) or die;
-	fs::get_mntpoints_from_fstab($fstab, $handle->{dir}, 'uniq');
+	fs::merge_info_from_fstab($fstab, $handle->{dir}, 'uniq');
     }
     map { $_->{mntpoint} = 'swap' } grep { isSwap($_) } @$fstab; #- use all available swap.
 }
@@ -919,10 +919,12 @@ sub getHds {
     #- try to figure out if the same number of hds is available, use them if ok.
     $ok && $hds && @$hds > 0 && @{$o->{all_hds}{hds} || []} == @$hds and return $ok;
 
+    fs::get_raw_hds('', $all_hds);
+    fs::add2all_hds($all_hds, @{$o->{manualFstab}});
+
     $o->{all_hds} = $all_hds;
     $o->{fstab} = [ fsedit::get_all_fstab($all_hds) ];
-    fs::check_mounted($o->{fstab});
-    fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
+    fs::merge_info_from_mtab($o->{fstab});
 
     my @win = grep { isFat($_) && isFat({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
@@ -990,8 +992,7 @@ sub disable_user_view {
 
 sub write_fstab {
     my ($o) = @_;
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount}, lang::fs_options($o->{lang}))
-	if !$::live;
+    fs::write_fstab($o->{all_hds}, $o->{prefix}) if !$::live;
 }
 
 my @bigseldom_used_groups = (
