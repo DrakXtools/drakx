@@ -9,9 +9,13 @@ use common;
 use lang;
 use any;
 
+my $in = interactive->vnew;
+
 my $lang = lang::lang2LANG(lang::read('',$>)) || 'en';
 if (!member($lang, qw(de en es fr it ru))) { $lang = 'en' };
 my $path_to_help = "/usr/share/doc/mandrake/" . $lang . "/";
+
+-d $path_to_help or $in->ask_warn('drakhelp', N("Documentation not available. \n Please install package mandrake_doc-%s \n",$lang));
 
 if ((my $wm = any::running_window_manager()) eq 'kwin') {
     system("mdklaunchhelp " . $path_to_help . $ARGV[0] . "&");
@@ -21,7 +25,7 @@ if ((my $wm = any::running_window_manager()) eq 'kwin') {
 
 sub on_request_help {
     my ($link) = @_;
-    my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or return;
+    my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
     standalone::explanations("Connection to help system at $link");
     system("$browser $link &");
 }
