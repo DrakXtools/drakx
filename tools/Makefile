@@ -17,8 +17,8 @@ install:
 	install make_mdkinst_stage2 $(ROOTDEST)/misc
 	cd /usr/bin ; install packdrake $(ROOTDEST)/misc || { echo "packdrake is missing"; exit 1; }
 	cd /usr/bin ; install gendistrib rpm2header $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	eval `perl -V:version`; cd /usr/lib/perl5/site_perl/$$version/*-linux ; install packdrake.pm rpmtools.pm $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
-	eval `perl -V:version`; cd /usr/lib/perl5/site_perl/$$version/*-linux/auto ; cp -rf rpmtools $(ROOTDEST)/misc/auto || { echo "install rpmtools first!" ; exit 1; }
+	eval `perl -V:version`; cd /usr/lib/perl5/vendor_perl/$$version/*-linux ; install packdrake.pm rpmtools.pm $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
+	eval `perl -V:version`; cd /usr/lib/perl5/vendor_perl/$$version/*-linux/auto ; cp -rf rpmtools $(ROOTDEST)/misc/auto || { echo "install rpmtools first!" ; exit 1; }
 	mkdir -p $(DEST)/usr/bin
 
 xhost+: %: %.c
