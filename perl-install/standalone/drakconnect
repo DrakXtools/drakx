@@ -260,7 +260,7 @@ $window1->{window}->add(
                                                                                    !$wizard_pid and do { exec("drakconnect") or POSIX::_exit(1) };
                                                                                    sensitive_buttons(0);
                                                                                } else {
-                                                                                   err_dialog(N("Unable to fork: %s", "$!"));
+                                                                                   err_dialog(N("Error"), N("Unable to fork: %s", "$!"));
                                                                                }
                                                                            }),
                                           ),
@@ -669,7 +669,7 @@ Create one first by clicking on 'Configure'")));
     $dialog->run;
 }
 
-sub reread_net_conf {
+sub reread_net_conf() {
     network::netconnect::read_net_conf('', $netcnx, $netc);
     modules::load_category('net');
     @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
