@@ -38,7 +38,7 @@ $(POFILES): DrakX.pot
 	if [ -e help-$@t ]; then perl -pe 's|^#~ ||' -i $@t ; msgmerge -C $@t help-$@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
-DrakX.pot2: $(PMSFILES_HERE)
+DrakX.pot: $(PMSFILES_HERE)
 	cd ../.. ; perl_checker -q --generate-pot share/po/$@ $(PMSFILES)
 
 install:
