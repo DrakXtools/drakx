@@ -1,3 +1,123 @@
+2003/09/16  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* share/rpmsrate: wireless packages fix
+
+	* network/adsl.pm: fix firmware testing at installation
+
+2003/09/16  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps_interactive.pm: added question to ask for recovering the
+	system in recover mode.
+
+	* install_any.pm: removing update media tag (except for update medium)
+
+	* install2.pm: made mouse, keyboard, packages selection, timezone and
+	security selection automatic...
+	/ and /usr should be formatted, keep default for installation.
+	fixed stupid typo preventing mouse modules to be loaded.
+	added automatic steps in recovery mode.
+	disable recovery mode if recovery.cfg file has not been read
+	successfully.
+
+2003/09/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/help-ru.pot, share/po/help-de.pot, share/po/DrakX.pot,
+	share/po/help-it.pot, share/po/help-es.pot: updated pot files
+
+2003/09/16  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/gtk.pm: Gtk2::CheckButton->new is
+	Gtk2::CheckButton->new_with_mnemonic, it's better to use
+	Gtk2::CheckButton->new_with_label (bug #5728)
+
+2003/09/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* interactive/gtk.pm: fix expert mode resulting in advanced setting being
+	displayed by
+	default but label still being "advanced" instead of "basic"
+
+	* drakxtools.spec: one more fix
+	9.2-12mdk
+
+2003/09/16  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: add minichinput in X 5
+
+2003/09/15  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: initialize $adsl, fix #5674 and pppoe.conf problems
+	fix #5056 (mostly workaround as kernel is frozen)
+
+	* network/netconnect.pm: net install autodetection fix
+
+2003/09/15  François Pons  <fpons at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: avoid using other depth than 24 for
+	fglrx in automatic mode.
+
+	* standalone.pm: improved speed by invoking once `rpm -qa` instead of 4.
+
+2003/09/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/is.po, share/po/fr.po, share/po/fi.po: updated Finnish, French
+	and Icelandic files
+
+	* share/po/help-ru.pot, share/po/help-fr.pot, share/po/help-it.pot,
+	share/po/help-de.pot, share/po/help-es.pot: put back previous versions
+	of help-*.pot files to be in synch with help.pm
+
+2003/09/15  Pixel  <pixel at mandrakesoft.com>
+
+	* run_program.pm: better logging of killed runaway processes
+
+	* Xconfig/main.pm: configure_resolution() must return 'config_changed'
+	when a new resolution is chosen
+
+	* lang.pm: use locale_special when $::prefix is set (so that X test is
+	i18n)
+
+	* any.pm: set ICEAUTHORITY for "gnome-session-save --kill"
+	(it would be better to set it in usermode, but it works :)
+
+	* standalone/XFdrake: 
+	  - call any::ask_window_manager_to_logout() after forking so that exit
+	doesn't happen before it is done
+	(otherwise it can loose Xauth access)
+	  - fix checking config_changed (it can be string 'config_changed' or
+	the new $raw_X)
+
+	* partition_table.pm: associate partition table 0xeb (BeOS) with
+	filesystem befs (part of bug #5523)
+
+2003/09/15  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbug: New, improved, compact code, courtesy of Thierry.
+	Updates for stable release bug submission to anthill (vdanen)
+
+2003/09/15  Till Kamppeter  <till at mandrakesoft.com>
+
+	* share/rpmsrate: Added usbutils to the packages needed for installation.
+	This package
+	is needed for setting up the HP PSC 1xxx and OfficeJet 4xxx with HPOJ.
+
+	* printer/main.pm: Small fix on LIDIL workaround.
+	Put device identity info into the HPOJ config file also when HPOJ
+	configuration was not verified (LIDIL devices).
+	Added workaround to make HP PSC 1xxx and OfficeJet 4xxx really working.
+
+2003/09/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: fix #5488: do not overwrite current driver if it's a
+	viable driver for
+	the current sound card
+	show the current driver too (being preselected) so that users do not
+	get confused
+
+	* drakxtools.spec: typo fixes
+
+	* interactive/gtk.pm: fix hidden or cutted buttons (#1919, #2364, #2705,
+	#3667, ...)
+
 2003/09/15  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* network/adsl.pm: fix #5056 (mostly workaround as kernel is frozen)
@@ -21724,7 +21844,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.836 2003/09/14 18:46:14 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.837 2003/09/15 15:47:06 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
