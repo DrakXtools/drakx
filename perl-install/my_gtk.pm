@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -297,7 +297,7 @@ sub gtkroot {
     Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
 }
 
-sub gtkcolor($$$) {
+sub gtkcolor {
     my ($r, $g, $b) = @_;
 
     my $color = bless { red => $r, green => $g, blue => $b }, 'Gtk::Gdk::Color';
@@ -369,6 +369,71 @@ sub gtkbuttonset {
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
+sub create_pix_text {
+    #reference widget, text, color_text, font(opt), width(opt), height(opt), background(opt) (gtkcolor or gdkpixmap), flag1, flag2
+    my ($w, $text, $color_text, $font, $max_width, $max_height, $background, $can_be_greater, $can_be_smaller) = @_;
+    print " back : " . ref($background) . "\n";
+    my $color_background;
+    ref($background) eq 'Gtk::Gdk::Color' and $color_background = $background;
+    $background =~ /#(\d+)#(\d+)#(\d+)/ and $color_background = gtkcolor(map{$_*65535/255}($1, $2, $3));
+    my $max_width2 = $max_width;
+    $font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
+    my $style= new Gtk::Style;
+    $style->font(Gtk::Gdk::Font->fontset_load($font));
+    my @lines;
+    my @heights;
+    $heights[0] = 0;
+    my @ascents;
+    my @descents;
+    my $flag = 1;
+    my $idx = 0;
+    my $height = 0;
+    my $width = 0;
+    my $real_width = 0;
+    my $real_height = 0;
+    my @t = split(' ', $text);
+    foreach (@t) {
+	my $l = $style->font->string_width($_ . if_(!$flag, " "));
+	if ($width + $l > $max_width2 && !$flag) {
+	    $flag = 1;
+	    $width = 0;
+	    $height += $style->font->string_height($lines[$idx]);
+	    $heights[$idx+1] = $height;
+	    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
+	    $idx++;
+	}
+	$lines[$idx] = $flag ? "$_" : $lines[$idx] . " $_";
+	$width += $l;
+	$flag = 0;
+	$l <= $max_width2 or $max_width2 = $l;
+	$width <= $real_width or $real_width = $width;
+    }
+    $height += $style->font->string_height($lines[$idx]);
+    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
+
+    $height < $real_height or $real_height = $height;
+    $width = $max_width;
+    $height = $max_height;
+    $real_width < $max_width && $can_be_smaller and $width = $real_width;
+    $real_width > $max_width && $can_be_greater and $width = $real_width;
+    $real_height < $max_height && $can_be_smaller and $height = $real_height;
+    $real_height > $max_height && $can_be_greater and $height = $real_height;
+    $color_text ||= gtkcolor(0, 0, 65535);
+    my $gc_text = new Gtk::Gdk::GC($w->window);
+    $gc_text->set_foreground($color_text);
+    $color_background ||= gtkcolor(65535, 65535, 65535);
+    my $gc_background = new Gtk::Gdk::GC($w->window);
+    $gc_background->set_foreground($color_background);
+    my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
+    $pix->draw_rectangle($gc_background, 1, 0, 0, $width, $height);
+    my $i = 0;
+    foreach (@lines) {
+	$pix->draw_string($style->font, $gc_text, 0, $ascents[$i] + $heights[$i], $_);
+	$i++;
+    }
+    ($pix, $width, $height);
+}
+
 sub write_on_pixmap {
     my ($pixmap, $x_pos, $y_pos, @text)=@_;
     my ($gdkpixmap, $gdkmask) = $pixmap->get();
