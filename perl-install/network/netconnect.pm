@@ -670,7 +670,7 @@ If you don't know, choose 'use pppoe'"),
                         if (!exists $adsl_devices{$ntf_name} && member($adsl_type, qw(manual dhcp))) {
                             $auto_ip = $adsl_type eq 'dchp';
                             $find_lan_module->();
-                            $ethntf = $intf->{$ntf_name};
+                            $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                             return 'lan_intf';
                         }
                         network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
@@ -727,7 +727,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                             allow_empty_list => 1, format => sub { $eth_intf{$_[0]} } } ];
                     },
                     post => sub {
-                        $ethntf = $intf->{$ntf_name};
+                        $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                         $::isInstall && $netc->{NET_DEVICE} eq $ethntf->{DEVICE} ? 'lan_alrd_cfg' : 'lan_protocol';
                     },
                    },
