@@ -98,10 +98,10 @@ sub new_editable_combo {
 	$w;
 }
 
-sub set_default_tip {
+sub set_help_tip {
 	my ($entry, $default, $opt) = @_;
      my $help = $security::help::help{$opt};
-	gtkset_tip(new Gtk2::Tooltips, $entry, join("\n", if_($help, formatAlaTeX($help)), if_($default, N("(default value: %s)", $default))));
+	gtkset_tip(new Gtk2::Tooltips, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", $default));
 }
 
 my $msec = new security::msec;
@@ -176,7 +176,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                                $entry = $values{$i};
                                                                                            }
                                                                                            $entry->set_text($msec->get_function_value($i));
-                                                                                           set_default_tip($entry, $default, $i);
+                                                                                           set_help_tip($entry, $default, $i);
                                                                                            [ new Gtk2::Label($i), $values{$i} ];
                                                                                        } sort $msec->get_functions($domain))))),
                            new Gtk2::Label($label));
@@ -194,7 +194,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                                            my $i = $_;
                                                                                            $security_checks_value{$i} = new_editable_combo();
                                                                                            my $entry = $security_checks_value{$i}->entry;
-                                                                                           set_default_tip($entry, $msec->get_check_default, $i);
+                                                                                           set_help_tip($entry, $msec->get_check_default($i), $i);
                                                                                            $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
                                                                                            $entry->set_text($msec->get_check_value($i));
                                                                                            [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
