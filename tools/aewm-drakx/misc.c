@@ -25,6 +25,5 @@ int handle_xerror(Display *dpy, XErrorEvent *e)
     XGetErrorText(dpy, e->error_code, msg, sizeof msg);
     err("X error (%#lx): %s", e->resourceid, msg);
 
-    if (c) remove_client(c);
     return 0;
 }
