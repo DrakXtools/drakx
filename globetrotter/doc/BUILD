@@ -19,6 +19,7 @@ lftp -u a,a ftp://kameha:/~/../nplanel/rpm/prop/RPMS/i586/
   doble [A-Z] | xargs rm -f
   doble [a-g] | xargs rm -f
   doble [h-z] | xargs rm -f
+- run "gendistrib --noclean /export"
 - plug the LaCie disk
 - run make_live --partition --format --install --post in order to
   prepare the disk
