@@ -15,8 +15,10 @@ GNOME
 
 KDE
   5 kdebase
+  5 kde-i18n-ca kde-i18n-cs kde-i18n-da kde-i18n-de kde-i18n-el kde-i18n-es kde-i18n-et kde-i18n-fi kde-i18n-fr kde-i18n-he kde-i18n-hu kde-i18n-is kde-i18n-it kde-i18n-ja kde-i18n-ko kde-i18n-nl kde-i18n-no kde-i18n-no_NY kde-i18n-pl kde-i18n-pt kde-i18n-pt_BR kde-i18n-ro kde-i18n-ru kde-i18n-sk kde-i18n-sr kde-i18n-sv kde-i18n-tr kde-i18n-uk kde-i18n-zh_CN.GB2312 kde-i18n-zh_TW.Big5 
   4 kdeaddutils kdeadmin kdegraphics kdemultimedia kdenetwork
     kdepim kdetoys kdeutils
+
   2 kdesdk quanta kdoc
 
 VIDEO
@@ -54,10 +56,11 @@ ACCESSIBILITY
   2 gtkeyboard
 
 PUBLISHING
-  5 enscript ghostscript-module-X
+  5 enscript ghostscript-module-X bg5ps
   4 docbook-dtd31-sgml ghostscript-utils gv jadetex latex2html psutils tetex-afm
     tetex-doc tetex-dvilj tetex-dvips tetex-latex tetex-xdvi texinfo
-  1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB
+  4 tetex-latex-arab tetex-latex-heb
+  1 docbook-style-dsssl openjade sgml-tools ghostscript-module-SVGALIB cttex
   1 BOOKS docbook-style-dsssl-doc
 
   5 CUPS 
@@ -90,7 +93,8 @@ EDITORS
 TEXT_TOOLS
   5 words
   4 groff patch recode rgrep
-  3 aspell ed ispell
+  4 ispell-af ispell-br ispell-ca ispell-cs ispell-da ispell-de ispell-el ispell-en ispell-eo ispell-es ispell-fi ispell-fr ispell-ga ispell-gd ispell-gv ispell-id ispell-it ispell-nl ispell-no ispell-pl ispell-pt ispell-pt_BR ispell-ro ispell-ru ispell-sk ispell-sl ispell-sv
+  3 ed
   2 groff-gxditview lout
   BOOKS
     3 gawk-doc
@@ -104,12 +108,12 @@ COMMUNICATIONS
 
 TERMINALS
   5 open rxvt vlock
-  4 screen
+  4 screen kon2
   3 Eterm
   1 aterm x3270
 
   4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh_CN" || LOCALES"zh_CN.GB2312" || LOCALES"zh_TW" || LOCALES"zh" || LOCALES"zh_TW.Big5" rxvt-CLE
-    LOCALES"ja" kterm
+    LOCALES"ja" kterm 
 
 NETWORKING_CHAT
   CLIENT
@@ -181,6 +185,7 @@ NETWORKING_WWW
   4 bluefish netscape-communicator wget
   4 GNOME screem
   3 plugger
+  4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
   2 links
 
 GRAPHICS
@@ -269,7 +274,9 @@ DEVELOPMENT
 
   BOOKS
     4 slang-doc kernel-doc nasm-doc
+    4 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
     3 pam-doc python-docs
+    3 mandrake_doc-de mandrake_doc-en mandrake_doc-es mandrake_doc-fr mandrake_doc-it
     2 qt2-doc ruby-doc
   
   KDE
@@ -332,17 +339,26 @@ SYSTEM
   5 Aurora DrakConf MAKEDEV XFree86 XFree86-75dpi-fonts 
     at anacron drakfloppy drakfont eject gurpmi harddrake kudzu
     linux_logo locales man-pages usbd iputils xterm 
-    raidtools rpmdrake urpmi
+    raidtools rpmdrake urpmi 
   4 fonts-ttf-decoratives fonts-ttf-west_european
     imlib-cfgeditor imwheel menudrake reiserfs-utils sndconfig tksysv ftp
     hexedit strace
   3 XFree86-100dpi-fonts 
     autofs drakprofile sane acpid
   2 DrakeLogo adns audiofile awesfx compat-glibc fbset gfcc sudo
-  2 BOOKS grub-doc lilo-doc
+
   1 Mesa xtoolwait fdutils genromfs mailcap usbview kernel-utils
   GNOME
     3 gnome-print gnorpm
+
+  BOOKS 
+    4 grub-doc lilo-doc
+      howto-html-de howto-html-el howto-html-en howto-html-es howto-html-fr howto-html-hr howto-html-hu howto-html-id howto-html-it howto-html-ja howto-html-ko howto-html-pl howto-html-ro howto-html-sl howto-html-sv howto-html-zh
+
+  5 xcin xa+cv xvnkb FreeWnn ami
+  5 GNOME ami-gnome
+  2 app-defaults-be app-defaults-cs app-defaults-ga app-defaults-ru app-defaults-th app-defaults-uk
+
 
   4 NIS yp-tools
 
@@ -359,6 +375,7 @@ SYSTEM
     LOCALES"hy" fonts-ttf-armenian
     LOCALES"ja" fonts-ttf-japanese
     LOCALES"ko" fonts-ttf-korean
+    LOCALES"he" fonts-hebrew-elmar
     LOCALES"zh_CN" || LOCALES"zh_CN.GB2312" fonts-ttf-gb2312
     LOCALES"zh_TW" || LOCALES"zh_TW.Big5" taipeifonts fonts-ttf-big5
     LOCALES"cs" || LOCALES"hr" || LOCALES"hu" || LOCALES"pl" || LOCALES"ro" || LOCALES"sk" || LOCALES"sl" || LOCALES"sp" || LOCALES"sq" || LOCALES"sr"
