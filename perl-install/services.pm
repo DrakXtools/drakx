@@ -269,7 +269,17 @@ sub services {
     my ($prefix) = @_;
     my $cmd = $prefix && !$::testing ? "chroot $prefix" : "";
     my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort `LANGUAGE=C $cmd /sbin/chkconfig --list`;
-    [ map { $_->[0] } @l ], [ mapgrep { $_->[1], $_->[0] } @l ];
+    [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
+}
+
+sub mapgrep(&@) {
+    my $f = shift;
+    my @l;
+    foreach (@_) {
+	my ($b, $v) = $f->($_);
+	push @l, $v if $b;
+    }
+    @l;
 }
 
 1;

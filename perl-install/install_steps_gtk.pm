@@ -400,7 +400,7 @@ sub choosePackagesTree {
 				      $o->ask_okcancel('', [ $isSelection ? 
 							     _("The following packages are going to be installed") :
 							     _("The following packages are going to be removed"),
-							     join(", ", common::truncate_list(20, sort @l)) ], 1) || return;
+							     common::formatList(20, sort @l) ], 1) || return;
 				    if ($isSelection) {
 					pkgs::selectPackage($packages, $_) foreach @n;
 				    } else {

@@ -250,7 +250,7 @@ sub cp {
 	    }
 
 	    if (-d $src) {
-		-d $dest or mkdir $dest, mode($src) or die "mkdir: can't create directory $dest: $!\n";
+		-d $dest or mkdir $dest, (stat($src))[2] or die "mkdir: can't create directory $dest: $!\n";
 		&$cp(glob_($src), $dest);
 	    } elsif (-l $src) {
 		unless (symlink((readlink($src) || die "readlink failed: $!"), $dest)) {
@@ -263,7 +263,7 @@ sub cp {
 		open G, "> $dest" or $force or die "can't create $dest : $!\n";
 		local $_;
 		while (<F>) { print G $_ }
-		chmod mode($src), $dest;
+		chmod (stat($src))[2], $dest;
 	    }
 	}
     };

@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     common     => [ qw(__ may_apply even odd arch better_arch compat_arch min max sqr sum and_ or_ if_ if__ chomp_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ put_in_hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref next_val_in_array) ],
-    functional => [ qw(fold_left compose mapgrep map_index grep_index find_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
+    functional => [ qw(fold_left compose map_index grep_index find_index map_each grep_each list2kv mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ cat__ catMaybeCompressed output symlinkf renamef mode typeFromMagic expand_symlinks) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInShMode setVarsInCsh substInFile availableMemory availableRamMB removeXiBSuffix formatXiB template2file template2userfile update_userkderc list_skels formatTime formatTimeRaw unix2dos setVirtual isCdNotEjectable) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE %compat_arch) ],
@@ -104,9 +104,6 @@ sub is_empty_hash_ref { my $a = shift; !defined $a || keys(%$a) == 0 }
 sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }
 sub intersection { my (%l, @m); @l{@{shift @_}} = (); foreach (@_) { @m = grep { exists $l{$_} } @$_; %l = (); @l{@m} = (); } keys %l }
 
-sub set_new(@) { my %l; @l{@_} = undef; { list => [ @_ ], hash => \%l } }
-sub set_add($@) { my $o = shift; foreach (@_) { exists $o->{hash}{$_} and next; push @{$o->{list}}, $_; $o->{hash}{$_} = undef } }
-
 sub sync { syscall_('sync') }
 sub gettimeofday { my $t = pack "LL"; syscall_('gettimeofday', $t, 0) or die "gettimeofday failed: $!\n"; unpack("LL", $t) }
 sub unix2dos { local $_ = $_[0]; s/\015$//mg; s/$/\015/mg; $_ }
@@ -120,8 +117,6 @@ sub openFileMaybeCompressed {
 }
 sub catMaybeCompressed { cat__(openFileMaybeCompressed($_[0])) }
 
-sub remove_spaces { local $_ = shift; s/^ +//; s/ +$//; $_ }
-sub mode { my @l = stat $_[0] or die "unable to get mode of file $_[0]: $!\n"; $l[2] }
 sub psizeof { length pack $_[0] }
 
 sub concat_symlink {
@@ -181,16 +176,6 @@ sub touch {
     utime $now, $now, $f;
 }
 
-sub mapgrep(&@) {
-    my $f = shift;
-    my @l;
-    foreach (@_) {
-	my ($b, $v) = $f->($_);
-	push @l, $v if $b;
-    }
-    @l;
-}
-
 sub map_index(&@) {
     my $f = shift;
     my @v; local $::i = 0;
@@ -227,26 +212,6 @@ sub grep_each(&%) {
 }
 sub list2kv(@) { [ grep_index { even($::i) } @_ ], [ grep_index { odd($::i) } @_ ] }
 
-sub combine {
-    my $nb = shift;
-    my @l; while (my @m = splice(@_, 0, $nb)) { push @l, \@m }
-    @l;
-}
-
-#- pseudo-array-hash :)
-sub map_tab_hash(&$@) {
-    my ($f, $fields, @tab_hash) = @_;
-    my %hash;
-    my $key = { map_index {($_, $::i + 1)} @{$fields} };
-
-    for (my $i = 0; $i < @tab_hash; $i += 2) {
-	my $h = [$key, @{$tab_hash[$i + 1]}];
-	&$f($i, $h) if $f;
-	$hash{ $tab_hash[$i] } = $h;
-      }
-    %hash;
-}
-
 sub smapn {
     my $f = shift;
     my $n = shift;
@@ -262,7 +227,6 @@ sub mapn_(&@) {
     my $f = shift;
     smapn($f, max(map { scalar @$_ } @_), @_);
 }
-
 
 sub add_f4before_leaving {
     my ($f, $b, $name) = @_;
@@ -519,38 +483,8 @@ sub substInFile(&@) {
     }
 }
 
-sub best_match {
-    my ($str, @lis) = @_;
-    my @words = split /\W+/, $str;
-    my ($max, $res) = 0;
-
-    foreach (@lis) {
-	my $count = 0;
-	foreach my $i (@words) {
-	    $count++ if /$i/i;
-	}
-	$max = $count, $res = $_ if $count >= $max;
-    }
-    $res;
-}
-
-sub bestMatchSentence {
-
-    my $best = -1;
-    my $bestSentence;
-    my @s = split /\W+/, shift;
-    foreach (@_) {
-	my $count = 0;
-	foreach my $e (@s) {
-	    $count++ if /$e/i;
-	}
-	$best = $count, $bestSentence = $_ if $count > $best;
-    }
-    wantarray ? ($bestSentence, $best) : $bestSentence;
-}
-
 # count the number of character that match
-sub bestMatchSentence2 {
+sub bestMatchSentence {
 
     my $best = -1;
     my $bestSentence;
@@ -632,9 +566,9 @@ sub formatXiB {
     int($newnb * $newbase) . _("TB");
 }
 
-sub truncate_list {
+sub formatList {
     my $nb = shift;
-    @_ <= $nb ? @_ : (@_[0..$nb-1], '...');
+    join(", ", @_ <= $nb ? @_ : (@_[0..$nb-1], '...'));
 }
 
 sub formatTime {

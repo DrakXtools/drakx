@@ -61,9 +61,9 @@ _("What device is your printer connected to
 
     foreach (@parport) {
 	$printer->{DEVICE} eq $_->{port} or next;
-	$printer->{DBENTRY} = $printer::descr_to_db{common::bestMatchSentence2($_->{val}{DESCRIPTION},
-									       @printer::entry_db_description)};
-        $printer->{cupsDescr} = common::bestMatchSentence2($_->{val}{DESCRIPTION}, keys %printer::descr_to_ppd);
+	$printer->{DBENTRY} = $printer::descr_to_db{common::bestMatchSentence($_->{val}{DESCRIPTION},
+									      @printer::entry_db_description)};
+        $printer->{cupsDescr} = common::bestMatchSentence($_->{val}{DESCRIPTION}, keys %printer::descr_to_ppd);
     }
     1;
 }
