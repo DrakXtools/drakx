@@ -697,6 +697,15 @@ rescue-net:             boots the rescue image from a network server
 
 }
 
+sub VERSION {
+    my ($kernels) = @_;
+
+    map { "$_\n" }
+      $ENV{DISTRIB_DESCR},
+      scalar gmtime(),
+      '', @$kernels;
+}
+
 sub syslinux_all_files {
     my ($dir, $kernels) = @_;
 
@@ -741,10 +750,7 @@ sub boot_iso {
 
     syslinux_all_files('.boot_iso/isolinux', $kernels);
 
-    output('.boot_iso/VERSION', map { "$_\n" }
-	   $ENV{DISTRIB_DESCR},
-	   scalar gmtime(),
-	   '', @$kernels);	   
+    output('.boot_iso/VERSION', VERSION($kernels));	   
    
     _ "cp /usr/lib/syslinux/isolinux.bin .boot_iso/isolinux/isolinux.bin";
     output('.boot_iso/isolinux/isolinux.cfg', syslinux_cfg_all('cdrom-changedisk'));
