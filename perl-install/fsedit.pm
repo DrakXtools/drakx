@@ -686,7 +686,7 @@ sub move {
     my $part1 = { %$part };
     my $part2 = { %$part };
     $part2->{start} = $sector2;
-    $part2->{size} += $hd2->cylinder_size() - 1;
+    $part2->{size} += $hd2->cylinder_size - 1;
     partition_table::remove($hd, $part);
     {
 	local ($part2->{notFormatted}, $part2->{isFormatted}); #- do not allow partition::add to change this

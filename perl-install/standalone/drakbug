@@ -65,7 +65,7 @@ push(@generic_tool,@all_drakxtools);
 my $kernel_release = chomp_(`uname -r`);
 
 my $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-                             [ new Gtk2::Label(N("Application:")), my $comb_app = gtkset_size_request(Gtk2::Combo->new(), 270, -1) ],
+                             [ new Gtk2::Label(N("Application:")), my $comb_app = gtkset_size_request(Gtk2::Combo->new, 270, -1) ],
                              [ new Gtk2::Label(N("Package: ")), my $package = new Gtk2::Entry("...") ],
                              [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new($kernel_release), 0) ],
                              [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new(mandrake_release()), 0) ]
@@ -86,7 +86,7 @@ gtkadd(
                            0, gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => sub { 
                                                     my $options = "mdkbugreport=1";
                                                     $options .= "&incident=1" if $incident;
-                                                    my $p = $package->get_text();
+                                                    my $p = $package->get_text;
                                                     (my $r = parse_release()) =~ s/\s//;
                                                     $options .= "&package=$p" if $p =~ /mdk/;
                                                     $options .= "&kernel=$kernel_release";
@@ -105,8 +105,8 @@ if (defined $prog) {
     $comb_app->entry->set_text($prog);
 };
 
-$comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text()) });
-$window->{window}->show_all();
+$comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text) });
+$window->{window}->show_all;
 $window->main;
 ugtk2->exit(0);
 

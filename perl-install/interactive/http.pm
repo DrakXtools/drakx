@@ -100,7 +100,7 @@ sub ask_fromW {
     } @$l;
 
     print "</table>\n";
-    print $q->p();
+    print $q->p;
     print $q->submit('-name' => 'ok_submit', '-value' => $common->{ok} || N("Ok"));
     print $q->submit('-name' => 'cancel_submit', '-value' => $common->{cancel} || N("Cancel")) if $common->{cancel} || !exists $common->{ok};
     print $q->hidden('state'), $q->hidden('uid');

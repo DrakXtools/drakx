@@ -89,7 +89,7 @@ my %themes = 	('path' => '/usr/share/bootsplash/themes/',
                );
 my $cur_res = top(cat_('/etc/lilo.conf') =~ /[^#]*vga=(.*)/);
 #- verify that current resolution is ok
-if (member( $cur_res, qw( 785 788 791 794))) {
+if (member($cur_res, qw( 785 788 791 794))) {
     ($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
 } else {
     $no_bootsplash = 1; #- we can't select any theme we're not in Framebuffer mode :-/
@@ -137,14 +137,14 @@ $B_create->signal_connect(clicked => sub {
 #- ******** action to take on changing combos values
 
 $combo{thms}->entry->signal_connect(changed => sub {
-                                        my $thm_txt = $combo{thms}->entry->get_text();
+                                        my $thm_txt = $combo{thms}->entry->get_text;
                                         $combo{lilo}->entry->set_text(member($thm_txt, @lilo_thms) ? $thm_txt : $themes{default} || 'default');
                                         $combo{boot}->entry->set_text(member($thm_txt, @boot_thms) ? $thm_txt : $themes{default} || 'default');
     
                                     });
 
 $combo{lilo}->entry->signal_connect(changed => sub {
-                                        my $new_file = $themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{thumb};
+                                        my $new_file = $themes{path} . $combo{lilo}->entry->get_text . $themes{lilo}{thumb};
                                         undef($lilo_pixbuf);
                                         $lilo_pixbuf = gtkcreate_pixbuf(-r $new_file ? $new_file : $themes{def_thmb});
                                         $lilo_pixbuf = $lilo_pixbuf->scale_simple(155, 116, 'nearest');
@@ -152,9 +152,9 @@ $combo{lilo}->entry->signal_connect(changed => sub {
                                     });
 
 $no_bootsplash == 0 
-  and $combo{boot}->entry->signal_connect( changed => sub {
-                                               my $img_file = $themes{path}.$combo{boot}->entry->get_text().$themes{boot}{path}."bootsplash-$cur_res.jpg";
-                                               $boot_pic = gtkcreate_img( $img_file);
+  and $combo{boot}->entry->signal_connect(changed => sub {
+                                               my $img_file = $themes{path}.$combo{boot}->entry->get_text.$themes{boot}{path}."bootsplash-$cur_res.jpg";
+                                               $boot_pic = gtkcreate_img($img_file);
                                            });
 
 $combo{thms}->entry->set_text($themes{default});
@@ -165,18 +165,18 @@ $thm_button->signal_connect('clicked',
                                 my $boot_conf_file = '/etc/sysconfig/bootsplash';
                                 my $lilomsg = '/boot/message-graphic';
                                 #lilo installation
-                                if (-f $themes{path}.$combo{lilo}->entry->get_text() . $themes{lilo}{file}) {
+                                if (-f $themes{path}.$combo{lilo}->entry->get_text . $themes{lilo}{file}) {
                                     use MDK::Common::File;
                                     cp_af($lilomsg, "/boot/message-graphic.old");
                                     #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
-                                    cp_af($themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file}, $lilomsg);
+                                    cp_af($themes{path} . $combo{lilo}->entry->get_text . $themes{lilo}{file}, $lilomsg);
                                     #can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
                                 } else {
                                     $error = 1;
                                     $in->ask_warn(N("Error"), N("Lilo message not found"));
                                 }
                                 #bootsplash install
-                                if ($::testing || -f $themes{path} . $combo{boot}->entry->get_text() . $themes{boot}{path} . "bootsplash-$cur_res.jpg") {
+                                if ($::testing || -f $themes{path} . $combo{boot}->entry->get_text . $themes{boot}{path} . "bootsplash-$cur_res.jpg") {
                                     my $bootsplash_cont = "# -*- Mode: shell-script -*-
 # Specify here if you want add the splash logo to initrd when
 # generating an initrd. You can specify :
@@ -190,7 +190,7 @@ $thm_button->signal_connect('clicked',
 SPLASH=$cur_res
 # Choose the themes. The should be based in
 # /usr/share/bootsplash/themes/
-THEME=" . $combo{boot}->entry->get_text() . "
+THEME=" . $combo{boot}->entry->get_text . "
 # Say yes here if you want to leave the logo on the console.
 # Three options :
 #
@@ -247,7 +247,7 @@ gtkadd($window,
 				     
                        ),
                  #Splash Selector
-                 gtkadd(my $thm_frame = new Gtk2::Frame( N("Splash selection")),
+                 gtkadd(my $thm_frame = new Gtk2::Frame(N("Splash selection")),
                         gtkpack(gtkset_border_width(new Gtk2::HBox(0, 5), 5),
                                   gtkpack__(new Gtk2::VBox(0, 5),
                                             N("Themes"),
@@ -296,15 +296,15 @@ gtkadd($window,
                 )
       );
 
-$auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active()) });
-$auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[1]->get_active()) });
+$auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active) });
+$auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[1]->get_active) });
 $auto_buttons[0]->set_active(1) if $auto_mode->{autologin};
 $auto_buttons[1]->set_active(1) if !$auto_mode->{autologin};
 
 $x_box->set_sensitive($x_mode);
 $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
-$window->show_all();
-$no_bootsplash and $thm_frame->hide();
+$window->show_all;
+$no_bootsplash and $thm_frame->hide;
 update_bootloader_label($lilogrub);
 gtkflush();
 $w->main;
@@ -346,8 +346,8 @@ sub lilo_choice() {
 #-------------------------------------------------------------
 
 sub updateAutologin() {
-    my ($usern, $deskt) = ($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
-    if ($auto_buttons[0]->get_active()) {
+    my ($usern, $deskt) = ($user_combo->entry->get_text, $desktop_combo->entry->get_text);
+    if ($auto_buttons[0]->get_active) {
         $in->do_pkgs->install('autologin') if $x_mode;
         any::set_autologin($usern, $deskt);
     } else {

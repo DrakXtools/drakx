@@ -232,7 +232,7 @@ sub search_windows_font() {
                     }
                 }
                 !$replace && any { /$i/ } @installed_fonts and next;
-                grep { /$i$/ } @font_list or push @font_list, "$win_dir/$_->[1]/fonts/$i";
+                any { /$i$/ } @font_list or push @font_list, "$win_dir/$_->[1]/fonts/$i";
             }
         }
         $interactive && $nb_dir and progress($pbar, 1, N("done"));
@@ -266,14 +266,14 @@ sub search_dir_font() {
                         push @font_list_tmp, $i;
                         foreach my $i (@font_list_tmp) {
                             !$replace && any { /$i/ } @installed_fonts and next;
-                            grep { /$i/ } @font_list or push @font_list, "$fn/$i";
+                            any { /$i/ } @font_list or push @font_list, "$fn/$i";
                         }
                     }
                 }
             }
             elsif (is_a_font($fn)) {
 		!$replace && any { /$fn/ } @installed_fonts and next;
-		!grep { /$fn/ } @installed_fonts and push @font_list, $fn;
+		!any { /$fn/ } @installed_fonts and push @font_list, $fn;
 	    }
         }
         interactive_progress($pbar, 0.50 / @install, N("Reselect correct fonts"));
@@ -395,7 +395,7 @@ sub remove_gs_fonts() {
         my @FontmapGS_list = cat_($FontmapGS);
         foreach my $font_gs (@FontmapGS_list) {
             my @tmp_list = split(' ', $font_gs);
-            grep { /$tmp_list[0]/ } @Fontmap_out or push @Fontmap_new, $font_gs;
+            any { /$tmp_list[0]/ } @Fontmap_out or push @Fontmap_new, $font_gs;
         }
         print $_ foreach @Fontmap_new;
         output($FontmapGS, @Fontmap_new);
@@ -420,7 +420,7 @@ sub remove_fonts() {
 	    } else { rm_rf($i) }
         }
         $i =~ s!/\w*\.\w*!!gi;
-        grep { $i } @list_dir or push @list_dir, $i;
+        any { $i } @list_dir or push @list_dir, $i;
         interactive_progress($pbar1, 1 / @font_list, N("Suppress Fonts Files"));
     }
     interactive_progress($pbar1, 0.01, N("done"));
@@ -488,13 +488,13 @@ sub create_fontsel() {
 sub display_error {
     my ($message) = @_;
     my $error_box;
-    $$central_widget->destroy();
+    $$central_widget->destroy;
     gtkpack($font_box,
 	    $error_box = gtkpack_(new Gtk2::VBox(0, 0), 1,
 				  new Gtk2::Label($message), 0,
 				  gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					 gtksignal_connect(new Gtk2::Button(N("OK")),
-							   clicked => sub { $$central_widget->destroy(); create_fontsel() }
+							   clicked => sub { $$central_widget->destroy; create_fontsel() }
 							  ),
 					),
 				 )
@@ -521,13 +521,13 @@ sub interactive_mode() {
 					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
 						      gtksignal_connect(new Gtk2::Button(N("Get Windows Fonts")),
 									clicked => sub {
-									    $$central_widget->destroy();
+									    $$central_widget->destroy;
 									    $windows = 1;
 									    appli_choice();
 									}),
 						      gtksignal_connect(new Gtk2::Button(N("Uninstall Fonts")),
 									clicked => sub {
-									    $$central_widget->destroy();
+									    $$central_widget->destroy;
 									    uninstall();
 									}),
 						     ), 0,
@@ -536,7 +536,7 @@ sub interactive_mode() {
 									clicked => sub {
                                                  $font_button->set_sensitive(1);
                                                  $adv_opt_button->set_sensitive(0);
-									    $$central_widget->destroy();
+									    $$central_widget->destroy;
 									    $windows = 0;
 									    advanced_install();
 									}),
@@ -544,14 +544,14 @@ sub interactive_mode() {
 									clicked => sub {
                                                  $font_button->set_sensitive(0);
                                                  $adv_opt_button->set_sensitive(1);
-									    $$central_widget->destroy();
+									    $$central_widget->destroy;
 									    create_fontsel();
 									}),
 						     ), 1,
 					       new Gtk2::HBox(0, 2), 0,
 					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
 						      gtksignal_connect(new Gtk2::Button(N("About")), clicked => \&help),
-						      gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub { Gtk2->main_quit() }),
+						      gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub { Gtk2->main_quit }),
 						     ),
 					      ),
 				     ),
@@ -578,12 +578,12 @@ sub text_view {
 				    ), 0, 
 			    gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 				   gtksignal_connect(new Gtk2::Button(N("OK")), 
-						     clicked => sub { $$central_widget->destroy() }),
+						     clicked => sub { $$central_widget->destroy }),
 				  ),
 			   )
 	   );
     $central_widget = \$box;
-    $font_box->show_all();
+    $font_box->show_all;
 }
 
 sub help() {
@@ -664,13 +664,13 @@ sub appli_choice() {
 					    gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 						   gtksignal_connect(new Gtk2::Button(N("OK")),
 								     clicked => sub {
-									 $$central_widget->destroy();
+									 $$central_widget->destroy;
 									 import_status();
 								     }),
 						   gtksignal_connect(new Gtk2::Button(N("Cancel")),
 								     clicked => sub {
 									 @install = ();
-									 $$central_widget->destroy();
+									 $$central_widget->destroy;
 									 create_fontsel();
 								     }),
 						  ),
@@ -684,7 +684,7 @@ sub appli_choice() {
         gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 });
     }
     $central_widget = \$choice_box;
-    $font_box->show_all();
+    $font_box->show_all;
 }
 
 my $select_font_msg;
@@ -692,18 +692,18 @@ my $select_font_msg;
 sub font_choice() {
     my $file_dialog;
     $select_font_msg = N("Select the font file or directory and click on 'Add'");
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() });
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy });
     $file_dialog->ok_button->signal_connect(clicked => \&file_ok_sel, $file_dialog);
     $file_dialog->ok_button->set_label(N("Add"));
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
     $file_dialog->cancel_button->set_label(N("Close"));
     $file_dialog->set_filename($select_font_msg);
-    $file_dialog->show();
+    $file_dialog->show;
 }
 
 sub file_ok_sel {
     my ($_widget, $file_selection) = @_;
-    my $file_name = $file_selection->get_filename();
+    my $file_name = $file_selection->get_filename;
     if ($file_name =~ /\Q$select_font_msg/) {
         create_dialog(N("Error"), N("You've not selected any font"));
     } else {
@@ -741,7 +741,7 @@ sub advanced_install() {
 				       gtksignal_connect(new Gtk2::Button(N("Install List")), 
 							 clicked => sub {
 							     if (@install) {
- 								 $$central_widget->destroy();
+ 								 $$central_widget->destroy;
  								 appli_choice();
 							     }
 							 })
@@ -749,16 +749,16 @@ sub advanced_install() {
 			       )
 	   );
     $central_widget = \$adv_box;
-    $adv_box->show_all();
+    $adv_box->show_all;
 }
 
 sub list_to_remove() {
     #my @files_path = grep(!/fonts/, all($current_path)); garbage ?
     gtkflush();
-    my ($tree, @tux) = $left_list->get_selection->get_selected_rows(); #- get tree & paths
+    my ($tree, @tux) = $left_list->get_selection->get_selected_rows; #- get tree & paths
     push @uninstall, map { $tree->get($tree->get_iter($_), 0) } @tux;
     #push @uninstall, $current_path . "/" . $files_path[$_] foreach @number_to_remove; garbage ?
-    $$central_widget->destroy();
+    $$central_widget->destroy;
     show_list_to_remove();
 }
 
@@ -779,18 +779,18 @@ sub show_list_to_remove() {
 				 gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					gtksignal_connect(new Gtk2::Button(N("click here if you are sure.")),
 							  clicked => sub {
-							      $$central_widget->destroy();
+							      $$central_widget->destroy;
 							      import_status_uninstall();
 							  }),
 					gtksignal_connect(new Gtk2::Button(N("here if no.")),
 							  clicked =>
-							  sub { $$central_widget->destroy(); create_fontsel() }
+							  sub { $$central_widget->destroy; create_fontsel() }
 							 ),
 				       ),
 				)
 	   );
     $central_widget = \$show_box;
-    $show_box->show_all();
+    $show_box->show_all;
 }
 
 sub uninstall() { #- TODO : add item to right list with gtksignal_connect
@@ -826,17 +826,17 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
 					   ), 0,
 				   gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					  gtksignal_connect(new Gtk2::Button(N("Unselected All")),
-							    clicked => sub { $left_list->get_selection->unselect_all() }
+							    clicked => sub { $left_list->get_selection->unselect_all }
 							   ),
 					  gtksignal_connect(new Gtk2::Button(N("Selected All")),
-							    clicked => sub { $left_list->get_selection->select_all() }
+							    clicked => sub { $left_list->get_selection->select_all }
 							   ),
 					  gtksignal_connect(new Gtk2::Button(N("Remove List")), clicked => sub { list_to_remove() }),
 					 ),
 				  )
 	   );
     $central_widget = \$uninst_box;
-    $uninst_box->show_all();
+    $uninst_box->show_all;
 }
 
 sub import_status() {
@@ -856,7 +856,7 @@ sub import_status() {
 				 ),
 	   );
     $central_widget = \$table;
-    $font_box->show_all();
+    $font_box->show_all;
     gtkflush();
     backend_mod();
 }
@@ -877,8 +877,7 @@ sub import_status_uninstall() {
 				 ),
 	   );
     $central_widget = \$table;
-    $font_box->show_all();
-    gtkflush();
+    $font_box->show_all;
     backend_mod();
 }
 

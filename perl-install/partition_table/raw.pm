@@ -152,7 +152,7 @@ sub zero_MBR {
     $type = "dos" if arch() =~ /ppc/ && detect_devices::get_mac_model() =~ /^IBM/;
     require "partition_table/$type.pm";
     bless $hd, "partition_table::$type";
-    $hd->{primary} = $hd->clear_raw();
+    $hd->{primary} = $hd->clear_raw;
     delete $hd->{extended};
 }
 

@@ -84,10 +84,10 @@ if ($modify) {
 
     if ($cmd eq '--add') {
 	my @errs = map { eval { $_->add($dir) }; $@ } @exports;
-	grep { !$_ } @errs or error("already exported");
+	any { !$_ } @errs or error("already exported");
     } else {
 	my @errs = map { eval { $_->remove($dir) }; $@ } @exports;
-	grep { !$_ } @errs or error("not exported");
+	any { !$_ } @errs or error("not exported");
     }    
     foreach my $export (@exports) {
 	$export->write;
@@ -189,7 +189,7 @@ package nfs_exports;
 use vars qw(@ISA $conf_file $default_options);
 BEGIN { @ISA = 'exports' }
 
-sub read {
+sub read() {
     my $file = $conf_file;
     local *F;
     open F, $file or return [];
@@ -253,7 +253,7 @@ sub write {
     print F $_->{raw} foreach @$nfs_exports;
 }
 
-sub update_server {
+sub update_server() {
     if (fork()) {
 	system('/usr/sbin/exportfs', '-r');
 	if (system('/sbin/pidof rpc.mountd >/dev/null') != 0 ||
@@ -272,7 +272,7 @@ package smb_exports;
 use vars qw(@ISA $conf_file);
 BEGIN { @ISA = 'exports' }
 
-sub read {
+sub read() {
     my ($s, @l);
     local *F;
     open F, $conf_file;
@@ -338,7 +338,7 @@ sub name_mangle {
     # 4. if size is too big, shorten it
     while (length > 12) {
 	my ($s) = m|.*?/(.*)|;
-	if (length($s) > 8 && !grep { /\Q$s/ } @others) {
+	if (length($s) > 8 && !any { /\Q$s/ } @others) {
 	    # dropping leading directories when the resulting is still long and meaningful
 	    $_ = $s;
 	    next;
@@ -376,7 +376,7 @@ sub name_mangle {
     $_;
 }
 
-sub update_server {
+sub update_server() {
     if (fork()) {
 	system('/usr/bin/killall -HUP smbd 2>/dev/null');
 	if (system('/sbin/pidof smbd >/dev/null') != 0 ||

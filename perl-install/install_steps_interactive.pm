@@ -741,7 +741,7 @@ sub configureNetwork {
     my ($o) = @_;
     require network::network;
     network::network::easy_dhcp($o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
-    $o->SUPER::configureNetwork();
+    $o->SUPER::configureNetwork;
 }
 
 #------------------------------------------------------------------------------
@@ -1073,7 +1073,7 @@ sub summary {
 
     $o->summary_prompt(\@l, $check_complete);
 
-    $o->cleanupPrinter();
+    $o->cleanupPrinter;
     install_steps::configureTimezone($o) if !$timezone_manually_set;  #- do not forget it.
 }
 

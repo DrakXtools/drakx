@@ -73,7 +73,7 @@ my $dev = devices::make($floppy);
 $in->ask_okcancel('', N("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
 {
     log::explanations(N("Creating auto install floppy"));
-    my $w = $in->wait_message('', N("Creating auto install floppy"));
+    my $_w = $in->wait_message('', N("Creating auto install floppy"));
     commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
     common::sync();
 }
@@ -95,7 +95,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
     $struct_gui{$_} = 'Users' foreach qw(superuser users authentication);
     $struct_gui{$_} = 'Hardware' foreach qw(keyboard mouse X printer wacom nomouseprobe);
 
-    %pixmap = ( lang => 'language',
+    %pixmap = (lang => 'language',
 		isUpgrade => '',
 		security => 'security',
 		autoExitInstall => '',
@@ -151,7 +151,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 					 $box->{vis} = 0;
 					 my @button_to_hide;
 					 0, gtksignal_connect(new Gtk2::Button($_), clicked => sub {
-								if ($box->{vis}) { $box->hide(); $box->{vis} = 0; $notebook->set_page(0) }
+								if ($box->{vis}) { $box->hide; $box->{vis} = 0; $notebook->set_page(0) }
 								else {
 								    $_->hide, $_->{vis}=0 foreach @box_to_hide;
 								    $box->show; $box->{vis} = 1;
@@ -177,7 +177,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 												 translate($_->[0]),
 												)
 										      ), released => sub {
-											  $button->get_active() or $button->set_active(1),return;
+											  $button->get_active or $button->set_active(1), return;
 											  $_->set_active(0) foreach @button_to_hide;
 											  $button->set_active(1);
 											  $box->{active_function} = $function;
@@ -249,8 +249,8 @@ sub h2widget {
 	my $vb;
 	my @widget_list;
 	my $i = -1;
-	my @list_keys = keys(%{$k});
-	if (ref(${$k}{$list_keys[0]}) =~ /HASH/) {
+	my @list_keys = keys(%$k);
+	if (ref($k->{$list_keys[0]}) =~ /HASH/) {
 	    $i++;
 	    my ($button_add, $button_remove);
 	    $w = gtkpack_(new Gtk2::VBox(0,0),
@@ -258,27 +258,27 @@ sub h2widget {
 							    $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
 					map {
 					    my $e;
-					    $e = h2widget(${$k}{$_}, "$label\{$_\}");
+					    $e = h2widget($k->{$_}, "$label\{$_\}");
 					    [ "$_ : ", $e ] } @list_keys
 									    ),
 						       )
 					     ),
-			  control_buttons(${$k}{$list_keys[0]},
+			  control_buttons($k->{$list_keys[0]},
 					  sub { my ($vb, $widget_list2, $ref_local_k, $i) = @_;
-						my @widget_list = @{$widget_list2};
+						my @widget_list = @$widget_list2;
 			my $field = $in->ask_from_entry(N("Auto Install"), ("Enter the name of the new field you want to add")) or return undef;
 						$field eq '' and return undef;
 						gtkpack__($vb,
 							  $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
 										      [ "$field : ", h2widget($ref_local_k, "$label\{$field\}") ])
 							 );
-						@{$widget_list2} = @widget_list;
+						@$widget_list2 = @widget_list;
 					    },
 					  $vb, \$i, \@widget_list)
 			 );
 	} else {
 	    $w = create_packtable({ col_spacings => 10, row_spacings => 3 },
-				  map { create_entry_element(${$k}{$_}, "$label\{$_\}", $_) } @list_keys
+				  map { create_entry_element($k->{$_}, "$label\{$_\}", $_) } @list_keys
 				 )
 	}
     } elsif (ref($k) =~ /ARRAY/) {
@@ -288,21 +288,20 @@ sub h2widget {
 	$w = gtkpack_(new Gtk2::VBox(0,0),
 		      1, create_scrolled_window(
 					      gtkpack__($vb = new Gtk2::VBox(0,5),
-							map { $i++; $widget_list[$i] = h2widget($_, "$label\[$i\]") } @{$k},
+							map { $i++; $widget_list[$i] = h2widget($_, "$label\[$i\]") } @$k,
 						       )
 					     ),
-		      control_buttons(@{$k}[0],
+		      control_buttons($k->[0],
 				      sub { my ($vb, $widget_list2, $ref_local_k, $i) = @_;
-					    my @widget_list = @{$widget_list2};
+					    my @widget_list = @$widget_list2;
 					    gtkpack__($vb, $widget_list[$i] = h2widget($ref_local_k, "$label\[$i\]"));
-					    @{$widget_list2} = @widget_list;
+					    @$widget_list2 = @widget_list;
 					},
 				      $vb, \$i, \@widget_list)
 		     );
     } else {
-	$label =~ /\$o->\{(.+)\}/;
 	$w = create_packtable({ col_spacings => 10, row_spacings => 3 },
-			      create_entry_element($k, $label, $1))
+			      create_entry_element($k, $label, $1)) if $label =~ /\$o->\{(.+)\}/;
     }
     return $w;
 }
@@ -320,7 +319,7 @@ sub create_entry_element {
 	$e->{value} = $value;
 	my $tag = Gtk2->timeout_add(1000, sub { $e->set_text($text); 0 });
 	gtksignal_connect($e, changed => sub {
-			      my $exe = $e->{value} . "='" . $e->get_text() . "'";
+			      my $exe = $e->{value} . "='" . $e->get_text . "'";
 			      print "EXEC : $exe\n ";
 			      eval $exe;
 			  });
@@ -330,10 +329,10 @@ sub create_entry_element {
 
 sub control_buttons {
     my ($ref_local_k, $local_gui, $vb, $j, $widget_list2) = @_;
-    my @widget_list = @{$widget_list2};
-    my $i = ${$j};
+    my @widget_list = @$widget_list2;
+    my $i = $$j;
     ref($ref_local_k) =~ /HASH/ or return();
-    my (%local_k) = %{$ref_local_k};
+    my (%local_k) = %$ref_local_k;
     my ($button_add, $button_remove);
     0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk2::HButtonBox, 'spread'), 5),
 	      gtksignal_connect($button_add = new Gtk2::Button(N("Add an item")), clicked => sub {
@@ -345,7 +344,7 @@ sub control_buttons {
 			       ),
 	      gtksignal_connect($button_remove = new Gtk2::Button(N("Remove the last item")), clicked => sub {
 				    $i >= 0 or return;
-				    $widget_list[$i]->destroy();
+				    $widget_list[$i]->destroy;
 				    $i--;
 				    $i >= 0 or $button_remove->set_sensitive(0);
 				}

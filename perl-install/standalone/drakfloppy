@@ -76,12 +76,12 @@ $device_combo->set_popdown_strings(map { "/dev/" . $_->{device} } detect_devices
 
 # kernel part
 my $kernel_combo = new Gtk2::Combo();
-$kernel_combo->disable_activate();
+$kernel_combo->disable_activate;
 $kernel_combo->set_popdown_strings(sort grep { !/^\.\.?$/ } all("/lib/modules"));
 $kernel_combo->entry->set_text(chomp_(`uname -r`));
 $kernel_combo->entry->signal_connect(changed => sub { 
-                                         change_tree($kernel_combo->entry->get_text());
-                                         $list_model->clear();
+                                         change_tree($kernel_combo->entry->get_text);
+                                         $list_model->clear;
                                      });
 
 
@@ -93,10 +93,10 @@ $tree->set_headers_visible(0);
 $tree->append_column(my $textcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 #$tree->append_column(my $dummy_textcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
 $tree->signal_connect('row-expanded',  \&expand_tree);
-$tree->get_selection()->signal_connect('changed' => \&selected_tree);
+$tree->get_selection->signal_connect('changed' => \&selected_tree);
 
 
-fill_tree($kernel_combo->entry->get_text());
+fill_tree($kernel_combo->entry->get_text);
 
 
 ### 
@@ -125,7 +125,7 @@ $window->{window}->add(
                                                               gtksignal_connect(Gtk2::Button->new("default"),
                                                                                 clicked => sub { 
                                                                                     $kernel_combo->entry->set_text(chomp_(`uname -r`));
-                                                                                    $list_model->clear();
+                                                                                    $list_model->clear;
                                                                                 }),
                                                              ),
                                                    ),
@@ -185,7 +185,7 @@ $window->{window}->add(
                                ),
                       );
 
-$window->{rwindow}->show_all();
+$window->{rwindow}->show_all;
 toggle_expert_button();
 
 $window->main;
@@ -194,10 +194,10 @@ ugtk2->exit(0);
 
 sub toggle_expert_button() {
     if ($expert_mode) {
-        $expert_mod_frame->show();
+        $expert_mod_frame->show;
         $expert_button->child->set(N("Normal Mode"));
     } else {
-        $expert_mod_frame->hide();
+        $expert_mod_frame->hide;
         $expert_button->child->set(N("Expert Mode"));
     }
 }
@@ -225,7 +225,7 @@ sub change_tree {
 # Called whenever an item is clicked on the tree widget.
 sub selected_tree {
     my ($select) = @_;
-    my ($model, $iter) = $select->get_selected();
+    my ($model, $iter) = $select->get_selected;
     return unless $model;       # no real selection
     my $file = $model->get($iter, 1);
     $iter->free;
@@ -277,7 +277,7 @@ sub expand_tree {
 #-------------------------------------------------------------
 sub build_it() {
     my $y;
-    my $co = "/sbin/mkbootdisk --noprompt --verbose --device " . $device_combo->entry->get_text();
+    my $co = "/sbin/mkbootdisk --noprompt --verbose --device " . $device_combo->entry->get_text;
     if ($expert_mode) {
         $co .= " --mkinitrdargs -f" if $force_button->get_active;
         $co .= " --mkinitrdargs --ifneeded" if $needed_button->get_active;
@@ -292,15 +292,15 @@ sub build_it() {
                                  return 0;
                              }, $val);
     }
-    $co .= " " . $kernel_combo->entry->get_text();
+    $co .= " " . $kernel_combo->entry->get_text;
     $co .= " 2>&1 |";
-    create_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text()), 1) or return;
+    create_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text), 1) or return;
     # we test if the media is present
   test:
-    my $a = "dd count=1 if=/dev/null of=" . $device_combo->entry->get_text() . " 2>&1";
+    my $a = "dd count=1 if=/dev/null of=" . $device_combo->entry->get_text . " 2>&1";
     my $b = `$a`;
     if ($b =~ /dd/) {
-        create_dialog(N("Error"), N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text()), 1) ? goto test : return 0;
+        create_dialog(N("Error"), N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text), 1) ? goto test : return 0;
     }
   
     local *STATUS;

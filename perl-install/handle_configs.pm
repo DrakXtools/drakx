@@ -15,22 +15,16 @@ sub searchstr {
     # "quotemeta()" does not serve for this, as it also quotes some regular
     # characters, as the space
     my ($s) = @_;
-    $s =~ s/([\\\/\(\)\[\]\{\}\|\.\$\@\%\*\?\#\+\-])/\\$1/g;
+    $s =~ s!([\\/\(\)\[\]\{\}\|\.\$\@\%\*\?#\+\-])!\\$1!g;
     return $s;
 }
 
 sub read_directives {
-
     # Read one or more occurences of a directive
-
     my ($lines_ptr, $directive) = @_;
 
-    my @result = ();
     my $searchdirective = searchstr($directive);
-    ($_ =~ /^\s*$searchdirective\s+(\S.*)$/ and push(@result, $1)) 
-	foreach @{$lines_ptr};
-    (chomp) foreach @result;
-    return @result;
+    map { if_(/^\s*$searchdirective\s+(\S.*)$/, chomp_($1)) } @$lines_ptr;
 }
 
 sub read_unique_directive {
@@ -42,7 +36,7 @@ sub read_unique_directive {
     my ($lines_ptr, $directive, $default) = @_;
 
     if ((my @d = read_directives($lines_ptr, $directive)) > 0) {
-	my $value = $d[$#d];
+	my $value = $d[-1];
 	set_directive($lines_ptr, "$directive $value");
 	return $value;
     } else {
@@ -57,8 +51,8 @@ sub insert_directive {
     my ($lines_ptr, $directive) = @_;
 
     my $searchdirective = searchstr($directive);
-    ($_ =~ /^\s*$searchdirective$/ and return 0) foreach @{$lines_ptr};
-    push(@{$lines_ptr}, "$directive\n");
+    (/^\s*$searchdirective$/ and return 0) foreach @$lines_ptr;
+    push @$lines_ptr, "$directive\n";
     return 1;
 }
 
@@ -70,8 +64,8 @@ sub remove_directive {
 
     my $success = 0;
     my $searchdirective = searchstr($directive);
-    ($_ =~ /^\s*$searchdirective/ and $_ = "" and $success = 1)
-	foreach @{$lines_ptr};
+    (/^\s*$searchdirective/ and $_ = "" and $success = 1)
+	foreach @$lines_ptr;
     return $success;
 }
 
@@ -81,12 +75,11 @@ sub comment_directive {
 
     my ($lines_ptr, $directive, $exactmatch) = @_;
 
-    my $success = 0;
     my $searchdirective = searchstr($directive);
-    $searchdirective .= ".*" if (!$exactmatch);
-    ($_ =~ s/^\s*($searchdirective)$/\#$1/ and $success = 1)
-	foreach @{$lines_ptr};
-    return $success;
+    $searchdirective .= ".*" if !$exactmatch;
+    (s/^\s*($searchdirective)$/#$1/ and return 1)
+	foreach @$lines_ptr;
+    return 0;
 }
 
 sub replace_directive {
@@ -99,8 +92,8 @@ sub replace_directive {
     my $success = 0;
     $newdirective = "$newdirective\n";
     my $searcholddirective = searchstr($olddirective);
-    ($_ =~ /^\s*$searcholddirective/ and $_ = $newdirective and 
-     $success = 1 and $newdirective = "") foreach @{$lines_ptr};
+    (/^\s*$searcholddirective/ and $_ = $newdirective and 
+     $success = 1 and $newdirective = "") foreach @$lines_ptr;
     return $success;
 }
 
@@ -114,13 +107,13 @@ sub move_directive_to_version_commented_out {
 
     my $success = 0;
     my $searchcommentedout = searchstr($commentedout);
-    $searchcommentedout .= ".*" if (!$exactmatch);
-    ($_ =~ /^\s*\#$searchcommentedout$/ and 
-     $success = 1 and last) foreach @{$lines_ptr};
+    $searchcommentedout .= ".*" if !$exactmatch;
+    (/^\s*#$searchcommentedout$/ and 
+     $success = 1 and last) foreach @$lines_ptr;
     if ($success) {
 	remove_directive($lines_ptr, $directive);
-	($_ =~ s/^\s*\#($searchcommentedout)$/$directive/ and 
-	 $success = 1 and last) foreach @{$lines_ptr};
+	(s/^\s*#($searchcommentedout)$/$directive/ and 
+	 $success = 1 and last) foreach @$lines_ptr;
     }
     return $success;
 }
@@ -138,7 +131,7 @@ sub set_directive {
     }
 
     my $success = (replace_directive($lines_ptr, $olddirective,
-				     $directive) or
+				     $directive) ||
 		   insert_directive($lines_ptr, $directive));
     if ($success) {
 	move_directive_to_version_commented_out($lines_ptr, $directive, 

@@ -96,17 +96,17 @@ $button_del->signal_connect(clicked => sub {
 				$bbox_dialog->set_layout('end');
 				my $button_ok = new Gtk2::Button(N("OK"));
 				$button_ok->signal_connect(clicked => sub {
-							       network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text());
-							       $netcnx->{PROFILE} eq $combo_dialog->entry->get_text() and $netcnx->{PROFILE} = "default";
-							       Gtk2->main_quit();
+							       network::netconnect::del_profile($netcnx, $combo_dialog->entry->get_text);
+							       $netcnx->{PROFILE} eq $combo_dialog->entry->get_text and $netcnx->{PROFILE} = "default";
+							       Gtk2->main_quit;
 							   });
 				$bbox_dialog->add($button_ok);
 				my $button_cancel = new Gtk2::Button(N("Cancel"));
-				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit() });
+				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit });
 				$bbox_dialog->add($button_cancel);
 				$dialog->show_all;
 				$dialog->set_modal(1);
-				Gtk2->main();
+				Gtk2->main;
 				$dialog->destroy;
 				$combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text ? $combo1->entry->get_text : "default");
 				$combo1->set_popdown_strings(network::netconnect::get_profiles());
@@ -124,17 +124,17 @@ $button_new->signal_connect(clicked => sub {
 				$bbox_dialog->set_layout('end');
 				my $button_ok = new Gtk2::Button(N("OK"));
 				$button_ok->signal_connect(clicked => sub {
-							       network::netconnect::add_profile($netcnx, $entry_dialog->get_text());
-							       $netcnx->{PROFILE} = $entry_dialog->get_text();
-							       Gtk2->main_quit();
+							       network::netconnect::add_profile($netcnx, $entry_dialog->get_text);
+							       $netcnx->{PROFILE} = $entry_dialog->get_text;
+							       Gtk2->main_quit;
 							   });
 				$bbox_dialog->add($button_ok);
 				my $button_cancel = new Gtk2::Button(N("Cancel"));
-				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit() });
+				$button_cancel->signal_connect(clicked => sub { Gtk2->main_quit });
 				$bbox_dialog->add($button_cancel);
 				$dialog->show_all;
 				$dialog->set_modal(1);
-				Gtk2->main();
+				Gtk2->main;
 				$dialog->destroy;
 				$combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 				$combo1->set_popdown_strings(network::netconnect::get_profiles());
@@ -236,7 +236,7 @@ $window1->{window}->add(
 
 my $button_expert = new Gtk2::Button(N("Expert Mode"));
 $button_expert->signal_connect(clicked => sub {
-				     foreach ($button_internet, $button_lan) { $expert_mode ? $_->hide() : $_->show() }
+				     foreach ($button_internet, $button_lan) { $expert_mode ? $_->hide : $_->show }
 				     $button_expert->child->set($expert_mode ? N("Expert Mode") : N("Normal Mode"));
 				     $expert_mode = !$expert_mode;
 				 });
@@ -268,14 +268,14 @@ $button_ok->signal_connect(clicked => sub {
 $bbox0->add($button_ok);
 $combo1->entry->signal_connect('changed', sub {
 #				    connected() and disconnect_backend();
-				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text());
+				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text);
 				    network::netconnect::load_conf($netcnx, $netc, $intf);
 				    $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
 				    update();
 				    $button_apply->set_sensitive(1);
 				});
 
-$window1->{rwindow}->show_all();
+$window1->{rwindow}->show_all;
 $_->hide foreach $button_internet, $button_lan;
 gtkflush();
 my $tag = Gtk2->timeout_add(4000, \&update2);
@@ -382,12 +382,12 @@ sub configure_lan {
 Configure them first by clicking on 'Configure'")),1,1,0);
 	$dialog->action_area->add(gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'end'),
                                          gtksignal_connect(new Gtk2::Button(N("OK")),
-                                                           clicked => sub { Gtk2->main_quit() })
+                                                           clicked => sub { Gtk2->main_quit })
                                          )
                                   );
 	$dialog->show_all;
 	$dialog->set_modal(1);
-	Gtk2->main();
+	Gtk2->main;
 	$dialog->destroy;
 	return;
     }
@@ -469,7 +469,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	foreach (0..$#all_cards) {
 	    my @infos = @{$card_tab[2*$_]};
 	    each_index {
-		${$_->[1]} = $infos[2*$::i+1]->get_text();
+		${$_->[1]} = $infos[2*$::i+1]->get_text;
 	    } @{$card_tab[2*$_+1]};
 	    if ($intf->{"eth$_"}{BOOTPROTO} eq "dhcp") {
 		delete @{$intf->{"eth$_"}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
@@ -477,16 +477,16 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	}
 	update();
 	$button_apply->set_sensitive(1);
-	$window->destroy(); Gtk2->main_quit;
+	$window->destroy; Gtk2->main_quit;
     });
     $bbox8->add($button_ok);
 
     my $button_cancel = new Gtk2::Button(N("Cancel"));
-    $button_cancel->signal_connect(clicked => sub { $window->destroy(); Gtk2->main_quit });
+    $button_cancel->signal_connect(clicked => sub { $window->destroy; Gtk2->main_quit });
     $bbox8->add($button_cancel);
 
     $window->set_modal(1);
-    $window->show_all();
+    $window->show_all;
     foreach (0..$#all_cards) {
 	my @infos = @{$card_tab[2*$_]};
 	$intf->{"eth$_"}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
@@ -507,12 +507,12 @@ Create one first by clicking on 'Configure'")),1,1,0);
 	$bbox_dialog->set_layout('end');
 	my $button_ok = new Gtk2::Button(N("OK"));
 	$button_ok->signal_connect(clicked => sub {
-					 Gtk2->main_quit();
+					 Gtk2->main_quit;
 				     });
 	$bbox_dialog->add($button_ok);
 	$dialog->show_all;
 	$dialog->set_modal(1);
-	Gtk2->main();
+	Gtk2->main;
 	$dialog->destroy;
 	return;
     }
@@ -604,14 +604,14 @@ Create one first by clicking on 'Configure'")),1,1,0);
     my $button_ok = new Gtk2::Button(N("OK"));
     $button_ok->signal_connect(clicked => sub {
 				     each_index {
-					    ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text() if $_;
+					    ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text if $_;
 				     } @mask;
 				     update();
 				     $button_apply->set_sensitive(1);
-				     $window->destroy(); Gtk2->main_quit;
+				     $window->destroy; Gtk2->main_quit;
 				 });
     my $button_cancel = new Gtk2::Button(N("Cancel"));
-    $button_cancel->signal_connect(clicked => sub { $window->destroy(); Gtk2->main_quit });
+    $button_cancel->signal_connect(clicked => sub { $window->destroy; Gtk2->main_quit });
 
     $window->set_modal(1);
 
@@ -630,14 +630,13 @@ Create one first by clicking on 'Configure'")),1,1,0);
                     ),
           );
 
-    $window->show_all();
-    Gtk2->main;
+    $window->show_all->main;
 }
 
 sub new_dialog() {
     my $dialog = new Gtk2::Dialog();
     $dialog->set_position('center-on-parent');
     $dialog->vbox->set_border_width(10);
-    $dialog->signal_connect(delete_event => sub { Gtk2->main_quit() });
+    $dialog->signal_connect(delete_event => sub { Gtk2->main_quit });
     $dialog;
 }

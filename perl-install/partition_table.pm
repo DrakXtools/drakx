@@ -709,7 +709,7 @@ The only solution is to move your primary partitions to have the hole next to th
 	my $l = first(@{$hd->{extended}});
 
 	#- the first is a special case, must recompute its real size
-	$l->{start} = round_down($l->{normal}{start} - 1, $hd->cylinder_size());
+	$l->{start} = round_down($l->{normal}{start} - 1, $hd->cylinder_size);
 	$l->{size} = $l->{normal}{start} + $l->{normal}{size} - $l->{start};
 	my $ext = { %$l };
 	unshift @{$hd->{extended}}, { type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };

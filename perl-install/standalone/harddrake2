@@ -175,7 +175,7 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                                                   }
                                                                                               })
                                                      ),
-                                            ( 'resize1' => 0, shrink1 => 1, resize2 => 0, shrink2 => 1)
+                                            ('resize1' => 0, shrink1 => 1, resize2 => 0, shrink2 => 1)
                                             ),
                            0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
@@ -194,9 +194,9 @@ my (@data, @configurators);
 $tree->append_column(my $pixcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 $tree->append_column(my $textcolumn = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 1));
 $tree->set_headers_visible(0);
-$tree->get_selection()->signal_connect('changed' => sub {
+$tree->get_selection->signal_connect('changed' => sub {
     my ($select) = @_;
-    my ($model, $iter) = $select->get_selected();
+    my ($model, $iter) = $select->get_selected;
     if ($model) {
         my $idx = $model->get($iter, 2);
         $iter->free;

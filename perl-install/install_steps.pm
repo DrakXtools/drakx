@@ -580,8 +580,8 @@ GridHeight=70
 	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die \N("No floppy drive available");
 	}
 
-	$o->{blank} and $o->copyKernelFromFloppy();
-	$o->{updatemodules} and $o->updateModulesFromFloppy();
+	$o->{blank} and $o->copyKernelFromFloppy;
+	$o->{updatemodules} and $o->updateModulesFromFloppy;
     }
 }
 

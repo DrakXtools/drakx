@@ -62,7 +62,7 @@ sub edit_callback() {
 my @buttons;
 
 sub del_callback() {
-    my ($tree, $iter) = $permList->get_selection->get_selected();
+    my ($tree, $iter) = $permList->get_selection->get_selected;
     $tree->remove($iter);
     $iter->free;
     sensitive_buttons(0);
@@ -102,7 +102,7 @@ sub up_callback() {
   CLEAN1: $iter->free;
 }
 
-my $combo_sig = $combo_perm->entry->signal_connect( changed => sub { display_perm($combo_perm->entry->get_text , @_) });
+my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($combo_perm->entry->get_text , @_) });
 $permList->signal_connect(button_press_event => sub { 
                      return unless $editable;
                      my (undef, $event) = @_;
@@ -148,9 +148,9 @@ $w->{rwindow}->set_position('center') unless $::isEmbedded;
 display_perm($default_perm_level);
 $combo_perm->entry->set_text($default_perm_level);
 
-$permList->get_selection()->signal_connect('changed' => sub {
+$permList->get_selection->signal_connect('changed' => sub {
                                                my ($select) = @_;
-                                               my (undef, $iter) = $select->get_selected();
+                                               my (undef, $iter) = $select->get_selected;
                                                my $editable = $editable;
                                                $editable = 0 unless $iter;
                                                sensitive_buttons($editable);
@@ -183,7 +183,7 @@ sub display_perm {
 
     $editable = $perm_level =~ /^level \d/ ? 0 : 1;
      
-    $treeModel->clear();
+    $treeModel->clear;
     local *F;
     open F, $file;
     local $_;
@@ -307,8 +307,8 @@ sub row_setting_dialog {
                      $file_dlg->set_transient_for($dlg);
                      $file_dlg->show;
                      $file_dlg->set_filename($file->get_text);
-                     $file_dlg->cancel_button->signal_connect( clicked => sub { $file_dlg->destroy });
-                     $file_dlg->ok_button->signal_connect( clicked => sub {
+                     $file_dlg->cancel_button->signal_connect(clicked => sub { $file_dlg->destroy });
+                     $file_dlg->ok_button->signal_connect(clicked => sub {
                                                 $file->set_text($file_dlg->get_filename);
                                                 $file_dlg->destroy;
                                                });

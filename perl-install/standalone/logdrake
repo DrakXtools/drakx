@@ -144,7 +144,7 @@ my %files = (
 my $yy = gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("search")) , clicked => \&search),0);
 my $log_text = gtktext_insert(Gtk2::TextView->new, [ [ '' ] ]);
 
-my $log_buf = $log_text->get_buffer();
+my $log_buf = $log_text->get_buffer;
 my $refcount_search;
 #### far from window
 
@@ -206,7 +206,7 @@ gtkadd($my_win->{window},
 
 $::isFile && !$::isEmbedded and gtkset_size_request($log_text, 400, 500);
 
-$my_win->{window}->show_all();
+$my_win->{window}->show_all;
 search() if $::isFile;
 $my_win->main;
 
@@ -216,7 +216,7 @@ sub quit() { ugtk2->exit(0) }
 # search functions
 #-------------------------------------------------------------
 sub search() {
-    $log_text->window->freeze_updates();
+    $log_text->window->freeze_updates;
     $log_buf->set_text('', -1);
     if ($::isFile) {
 	parse_file($::File);
@@ -225,8 +225,8 @@ sub search() {
 	    parse_file($files{$_}{file}, $files{$_}{desc}) if $toggle{$_}->active;
 	}
     }
-    $log_text->window->thaw_updates();
-    $log_text->show();
+    $log_text->window->thaw_updates;
+    $log_text->show;
     gtkflush();
 }
 
@@ -248,8 +248,8 @@ sub parse_file {
              );
       $win_pb->set_transient_for($my_win->{rwindow}) unless $::isEmbedded;
       $win_pb->set_position('center');
-      $win_pb->realize();
-      $win_pb->show_all();
+      $win_pb->realize;
+      $win_pb->show_all;
       gtkflush();
   }
   my $ey = $e_yes->get_chars(0, -1);
@@ -260,7 +260,7 @@ sub parse_file {
   $ey = $ey . $::Word if $::isWord;
 
   if ($cal_mode) {
-      my (undef, $month, $day) = $cal->get_date();
+      my (undef, $month, $day) = $cal->get_date;
       $ey = $months[$month]."\\s{1,2}$day\\s.*$ey.*\n";
   }
 
@@ -290,7 +290,7 @@ sub parse_file {
       if (!  /$en/i && /$ey/i)     { logcolorize($_); next }
       if (!  /$en/i && $ey eq "")  { logcolorize($_); next }
   }
-  $win_pb->destroy() if !$::isEmbedded || !$::isExplain;
+  $win_pb->destroy if !$::isEmbedded || !$::isExplain;
 
   if ($::isTail) {
       close F;

@@ -410,18 +410,18 @@ sub all_user_list() {
 
 sub the_time() {
     $the_time = "_";
-    $the_time .= localtime->year() + 1900;
-    if (localtime->mon() < 9) { $the_time .= "0" }
-    $the_time .= localtime->mon() + 1;
-    if (localtime->mday() < 10) { $the_time .= "0" }
-    $the_time .= localtime->mday();
+    $the_time .= localtime->year + 1900;
+    if (localtime->mon < 9) { $the_time .= "0" }
+    $the_time .= localtime->mon + 1;
+    if (localtime->mday < 10) { $the_time .= "0" }
+    $the_time .= localtime->mday;
     $the_time .= "_";
-    if (localtime->hour() < 10) { $the_time .= "0" }
-    $the_time .= localtime->hour();
-    if (localtime->min() < 10) { $the_time .= "0" }
-    $the_time .= localtime->min();
-    if (localtime->sec() < 10) { $the_time .= "0" }
-    $the_time .= localtime->sec();    
+    if (localtime->hour < 10) { $the_time .= "0" }
+    $the_time .= localtime->hour;
+    if (localtime->min < 10) { $the_time .= "0" }
+    $the_time .= localtime->min;
+    if (localtime->sec < 10) { $the_time .= "0" }
+    $the_time .= localtime->sec;    
 }
 
 sub get_tape_info() {
@@ -859,7 +859,7 @@ sub do_expect {
 		my $exit_stat = $exp->exitstatus;
 		$in->ask_warn('', N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if $exit_stat == 0 && $mode eq "sendkey";
 		$log_buff .= "$_\n" if $exit_stat == 0 && $mode eq "backup";
-		$exp->hard_close();
+		$exp->hard_close;
 	}
 	$interactive and progress($pbar, $plabel, 0.5, "Done...");
 	$interactive = 1 if $mode eq "sendkey";
@@ -1193,7 +1193,7 @@ sub build_backup_files() {
 	$nonroot_user and $tar_cmd_user .= " --exclude .drakbackup";
 
     -d $save_path and @dir_content = all($save_path);
-    grep { /^backup_base_sys/ } @dir_content and $base_sys_exist = 1;
+    any { /^backup_base_sys/ } @dir_content and $base_sys_exist = 1;
 
     if ($where_hd && !$daemon || $daemon) {
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
@@ -1203,7 +1203,7 @@ sub build_backup_files() {
 			$incr =~ s/incr/diff/ if $sys_diff_mode;
 			#- 8/19/2002 - changed these greps to look at the list, rather than the tar file
 			#- we retain the list for other media backups, but the tar file goes away, potentially
- 			if ((grep { /^list_incr_sys/ } @dir_content) && !$sys_diff_mode) { 
+ 			if ((any { /^list_incr_sys/ } @dir_content) && !$sys_diff_mode) { 
 		    	my @more_recent = grep { /^list_incr_sys/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
@@ -1217,7 +1217,7 @@ sub build_backup_files() {
 					$results .= "\nfile: $save_path/backup_incr_sys$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_sys$the_time.txt");
 		    	}
-			} elsif (grep { /^list_base_sys/ }  @dir_content) { 
+			} elsif (any { /^list_base_sys/ }  @dir_content) { 
 		    	my @more_recent = grep { /^list_base_sys/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
@@ -1258,7 +1258,7 @@ sub build_backup_files() {
 			$incr =~ s/incr/diff/ if $user_diff_mode;
 			#- 8/19/2002 - changed these greps to look at the list, rather than the tar file
 			#- we retain the list for other media backups, but the tar file goes away, potentially
-		    if ((grep { /^list_incr_user_$user/ } @dir_content) && !$user_diff_mode) { 
+		    if ((any { /^list_incr_user_$user/ } @dir_content) && !$user_diff_mode) { 
 				my @more_recent = grep { /^list_incr_user_$user/ } sort @dir_content; 
 				$more_recent = pop @more_recent;
 				$DEBUG and print "more recent file: $more_recent\n";
@@ -1272,7 +1272,7 @@ sub build_backup_files() {
 					$results .= " \nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
 				}
-		    } elsif (grep { /^list_base_user_$user/ } @dir_content) { 
+		    } elsif (any { /^list_base_user_$user/ } @dir_content) { 
 				my @more_recent = grep { /^list_base_user_$user/ } sort @dir_content; 
 				$more_recent = pop @more_recent;			
 				$DEBUG and print "more recent file: $more_recent\n";
@@ -1309,7 +1309,7 @@ sub build_backup_files() {
 		if ($backup_other_versions) {
 			$incr = "incr_other";
 			$incr =~ s/incr/diff/ if $other_diff_mode;
- 			if ((grep { /^list_incr_other/ } @dir_content) && !$user_diff_mode) { 
+ 			if ((any { /^list_incr_other/ } @dir_content) && !$user_diff_mode) { 
 		    	my @more_recent = grep { /^list_incr_other/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
@@ -1323,7 +1323,7 @@ sub build_backup_files() {
 					$results .= "\nfile: $save_path/backup_incr_other$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_other$the_time.txt");
 		    	}
-			} elsif (grep { /^list_base_other/ }  @dir_content) { 
+			} elsif (any { /^list_base_other/ }  @dir_content) { 
 		    	my @more_recent = grep { /^list_base_other/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
@@ -1532,12 +1532,12 @@ sub show_status() {
 		$table = gtkpack_(new Gtk2::VBox(0,10), 1, $scrolled_window)
 	);
     $central_widget = \$table;
-    $table->show_all();    
+    $table->show_all;    
 }
 
 sub file_ok_sel { 
     my ($file_selection) = @_;     
-    my $file_name = $file_selection->get_filename();
+    my $file_name = $file_selection->get_filename;
     if (!member($file_name, @list_other)) {
 		push(@list_other, $file_name);
 		$list_model->append($iter);
@@ -1548,24 +1548,24 @@ sub file_ok_sel {
 sub filedialog_where_hd() {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() });
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
 	$save_path_entry->set_text($file_dialog->get_filename()); 
-	$file_dialog->destroy() });
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
-    $file_dialog->show();
+	$file_dialog->destroy });
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
+    $file_dialog->show;
 }
 
 sub filedialog_restore_find_path() {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() });
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
-		$restore_find_path_entry->set_text($file_dialog->get_filename()); 
-		$file_dialog->destroy() 
+		$restore_find_path_entry->set_text($file_dialog->get_filename);
+		$file_dialog->destroy;
 	});
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
-    $file_dialog->show();
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
+    $file_dialog->show;
 }
 
 sub filedialog_generic {
@@ -1574,23 +1574,23 @@ sub filedialog_generic {
 	my ($prompt, $widget, $set_var) = @_; 
 	my $file_dialog;
 	
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(translate($prompt)), destroy => sub { $file_dialog->destroy() });
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(translate($prompt)), destroy => sub { $file_dialog->destroy });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
-		$$set_var = $file_dialog->get_filename();
+		$$set_var = $file_dialog->get_filename;
 		$$widget->set_text($$set_var); 
-		$file_dialog->destroy() 
+		$file_dialog->destroy;
 	});
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
-    $file_dialog->show();
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
+    $file_dialog->show;
 }
 
 sub filedialog() {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("Select the files or directories and click on 'OK'")), destroy => sub { $file_dialog->destroy() });
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("Select the files or directories and click on 'OK'")), destroy => sub { $file_dialog->destroy });
     $file_dialog->ok_button->signal_connect(clicked => sub { file_ok_sel($file_dialog) });
-    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
-    $file_dialog->show();
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
+    $file_dialog->show;
 }
 
 ################################################  ADVANCED  ################################################  
@@ -1636,11 +1636,11 @@ sub advanced_what_sys() {
 			
 	});
 	$mode_buttons[1]->set_active($sys_diff_mode);
-	$mode_buttons[0]->signal_connect('toggled' => sub { $sys_diff_mode = $mode_buttons[1]->get_active() });
+	$mode_buttons[0]->signal_connect('toggled' => sub { $sys_diff_mode = $mode_buttons[1]->get_active });
 	$mode_buttons[0]->set_sensitive($backup_sys_versions);
 	$mode_buttons[1]->set_sensitive($backup_sys_versions);
     fonction_env(\$box_what_sys, \&advanced_what_sys, \&advanced_what, "what");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_what_user {
@@ -1658,7 +1658,7 @@ sub advanced_what_user {
 					map { my $name = $_;
 						my @user_list_tmp;
 						my $b = new Gtk2::CheckButton($name); 
-						if (grep { /^$name$/ } @user_list) {
+						if (any { /^$name$/ } @user_list) {
 							$check_what_user{$_}[1] = 1;
 							gtkset_active($b, 1);
 						} else {
@@ -1693,12 +1693,12 @@ sub advanced_what_user {
 		$mode_buttons[1]->set_sensitive($backup_user_versions);	
 	});
 	$mode_buttons[1]->set_active($user_diff_mode);
-	$mode_buttons[0]->signal_connect('toggled' => sub { $user_diff_mode = $mode_buttons[1]->get_active() });
+	$mode_buttons[0]->signal_connect('toggled' => sub { $user_diff_mode = $mode_buttons[1]->get_active });
 	$mode_buttons[0]->set_sensitive($backup_user_versions);
 	$mode_buttons[1]->set_sensitive($backup_user_versions);
     if ($previous_function) { fonction_env(\$box_what_user, \&advanced_what_user, \&$previous_function, "what", \&$previous_function) }
     else { fonction_env(\$box_what_user, \&advanced_what_user, \&advanced_what, "what") }
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_what_other() {
@@ -1757,11 +1757,11 @@ sub advanced_what_other() {
 		$mode_buttons[1]->set_sensitive($backup_other_versions);	
 	});
 	$mode_buttons[1]->set_active($other_diff_mode);
-	$mode_buttons[0]->signal_connect('toggled' => sub { $other_diff_mode = $mode_buttons[1]->get_active() });
+	$mode_buttons[0]->signal_connect('toggled' => sub { $other_diff_mode = $mode_buttons[1]->get_active });
 	$mode_buttons[0]->set_sensitive($backup_other_versions);
 	$mode_buttons[1]->set_sensitive($backup_other_versions);
     fonction_env(\$box_what_other, \&advanced_what_other, \&advanced_what, "what");
-    $up_box->show_all();			
+    $up_box->show_all;			
 }
 
 sub advanced_what_entire_sys() {
@@ -1792,7 +1792,7 @@ sub advanced_what_entire_sys() {
 				  new Gtk2::HBox(0, 5)
 				  ));
     fonction_env(\$box_what, \&advanced_what_entire_sys, \&advanced_what, "");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_what() {
@@ -1804,7 +1804,7 @@ sub advanced_what() {
 		     1, gtkpack_(new Gtk2::VBox(0, 15),	
 				 1, new Gtk2::VBox(0, 5),
 				 1, gtksignal_connect(my $button_what_sys = new Gtk2::Button(), 
-						      clicked => sub { $box_what->destroy(); advanced_what_sys() }),
+						      clicked => sub { $box_what->destroy(); advanced_what_sys }),
 				 1, gtksignal_connect(my $button_what_user = new Gtk2::Button(), 
 						      clicked => sub { destroy_widget(); advanced_what_user() }),
 				 1, gtksignal_connect(my $button_what_other = new Gtk2::Button(), 
@@ -1838,7 +1838,7 @@ sub advanced_what() {
 # 				    ));
 
     fonction_env(\$box_what, \&advanced_what, \&advanced_box, "");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_where_net_types {
@@ -1899,15 +1899,15 @@ sub advanced_where_net_types {
 	}); 	
     $passwd_user_entry->set_visibility(0);
     $passwd_user_entry->set_text($passwd_user);
-    $passwd_user_entry->signal_connect('changed', sub { $passwd_user = $passwd_user_entry->get_text() });
+    $passwd_user_entry->signal_connect('changed', sub { $passwd_user = $passwd_user_entry->get_text });
     $host_path_entry->set_text($host_path);
     $host_name_entry->set_text($host_name);
     $login_user_entry->set_text($login_user);
-    $host_name_entry->signal_connect('changed', sub { $host_name = $host_name_entry->get_text() });
-    $host_path_entry->signal_connect('changed', sub { $host_path = $host_path_entry->get_text() });
-    $login_user_entry->signal_connect('changed', sub { $login_user = $login_user_entry->get_text() });
+    $host_name_entry->signal_connect('changed', sub { $host_name = $host_name_entry->get_text });
+    $host_path_entry->signal_connect('changed', sub { $host_path = $host_path_entry->get_text });
+    $login_user_entry->signal_connect('changed', sub { $login_user = $login_user_entry->get_text });
     $entry_net_type->entry->signal_connect('changed', sub { 
-		$net_proto = $entry_net_type->entry->get_text();
+		$net_proto = $entry_net_type->entry->get_text;
 		my $sensitive = 0;
 		$sensitive = 1 if $net_proto eq 'ssh';
 		$check_use_expect->set_sensitive($sensitive);
@@ -1962,7 +1962,7 @@ sub advanced_where_net_types {
     } else { 
 		fonction_env(\$box_where_net, \&advanced_where_net_types, \&advanced_where, "net");
 	}
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_where_cd {
@@ -2077,10 +2077,10 @@ sub advanced_where_cd {
 		}
 	}); 	
     $combo_where_cdrecord_device->entry->set_text($cd_device);
-    $combo_where_cdrecord_device->entry->signal_connect('changed', sub { $cd_device = $combo_where_cdrecord_device->entry->get_text() });
+    $combo_where_cdrecord_device->entry->signal_connect('changed', sub { $cd_device = $combo_where_cdrecord_device->entry->get_text });
     
 	$combo_where_cd_time->entry->set_text($cd_time);
-    $combo_where_cd_time->entry->signal_connect('changed', sub { $cd_time = $combo_where_cd_time->entry->get_text() });
+    $combo_where_cd_time->entry->signal_connect('changed', sub { $cd_time = $combo_where_cd_time->entry->get_text });
 
 	#- this one drives changes in the other entries
 	#- still not getting quite the desired behavior, but combo box signals seem to be limited
@@ -2088,7 +2088,7 @@ sub advanced_where_cd {
 	
 #-	$combo_where_cd_device->entry->set_text($std_device);
 	$combo_where_cd_device->entry->signal_connect('activate', sub {
-		$std_device = $combo_where_cd_device->entry->get_text(); 
+		$std_device = $combo_where_cd_device->entry->get_text;
 		$combo_where_cdrecord_device->entry->set_text($cd_devices{$std_device}{rec_dev});
 		$check_dvdr->set_active($cd_devices{$std_device}{dvdr});
 		$check_dvdram->set_active($cd_devices{$std_device}{dvdram});
@@ -2101,7 +2101,7 @@ sub advanced_where_cd {
 	} else { 
 		fonction_env(\$box_where_cd, \&advanced_where_cd, \&advanced_where, ""); 
 	}
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_where_tape {
@@ -2191,14 +2191,14 @@ sub advanced_where_tape {
     });
     $combo_where_tape_device->entry->set_text($tape_device);
 	$combo_where_tape_device->entry->signal_connect('changed', sub {
-		$tape_device = $combo_where_tape_device->entry->get_text();
+		$tape_device = $combo_where_tape_device->entry->get_text;
 	}); 
     if ($previous_function) { 
 		fonction_env(\$box_where_tape, \&advanced_where_tape, \&$previous_function, ""); 
 	} else { 
 		fonction_env(\$box_where_tape, \&advanced_where_tape, \&advanced_where, ""); 
 	}
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_where_hd {
@@ -2246,13 +2246,13 @@ sub advanced_where_hd {
 #    });
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($save_path);
-    $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text() });
+    $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text });
     if ($previous_function) { 
 		fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function, ""); 
 	} else { 
 		fonction_env(\$box_where_hd, \&advanced_where_hd, \&advanced_where, ""); 
 	}
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_where() {
@@ -2310,7 +2310,7 @@ sub advanced_where() {
  		new Gtk2::HBox(0, 5)
  	));
     fonction_env(\$box_where, \&advanced_where, \&advanced_box, ""); 
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 #- 7/7/2002 - S.Benedict reworked when - drop all the checkboxes and use a list
@@ -2369,12 +2369,12 @@ sub advanced_when() {
 		advanced_when();
     });
     $combo_when_space->entry->set_text($trans2{$when_space});
-    $combo_when_space->entry->signal_connect('changed', sub { $when_space = $trans{$combo_when_space->entry->get_text()} });
+    $combo_when_space->entry->signal_connect('changed', sub { $when_space = $trans{$combo_when_space->entry->get_text} });
 	$entry_media_type->entry->signal_connect('changed', sub { 
-		$daemon_media = $entry_media_type->entry->get_text();
+		$daemon_media = $entry_media_type->entry->get_text;
 	});
     fonction_env(\$box_when, \&advanced_when, \&advanced_box, "");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_options() {
@@ -2407,9 +2407,9 @@ sub advanced_options() {
     check_list([$check_mail, \$send_mail], [$check_del_hd_files, \$del_hd_files]);
 #    check_list([$check_mail, \$send_mail], [$check_tar_bz2, \$comp_mode], [$check_backupignore, \$backupignore]);
     $mail_entry->set_text($user_mail);
-    $mail_entry->signal_connect('changed', sub { $user_mail = $mail_entry->get_text() });
+    $mail_entry->signal_connect('changed', sub { $user_mail = $mail_entry->get_text });
     fonction_env(\$box_options, \&advanced_options, \&advanced_box, "options");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub advanced_box() {
@@ -2454,7 +2454,7 @@ sub advanced_box() {
 	    new Gtk2::HBox(0, 5)
 	));
     fonction_env(\$box_adv, \&advanced_box, \&interactive_mode_box, "");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 ################################################  WIZARD  ################################################  
@@ -2478,7 +2478,7 @@ sub wizard_step3() {
 	);
     fonction_env(\$box2, \&wizard_step3, \&wizard_step2, "");
     button_box_wizard_end();
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub wizard_step2() {
@@ -2551,7 +2551,7 @@ sub wizard_step2() {
     if (!$where_hd && !$where_cd && !$where_net) { fonction_env(\$box2, \&wizard_step2, \&wizard, "", \&message_noselect_box) }
     else { fonction_env(\$box2, \&wizard_step2, \&wizard, "", \&wizard_step3) }
     button_box_wizard();
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub wizard()   {
@@ -2590,7 +2590,7 @@ sub wizard()   {
     if ($backup_sys || $backup_user && @user_list) { fonction_env(\$box2, \&wizard, \&interactive_mode_box, "", \&wizard_step2) } 
     else { fonction_env(\$box2, \&wizard, \&interactive_mode_box, "", \&message_noselect_what_box) } 
     button_box_wizard();
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 ################################################  RESTORE  ################################################  
@@ -2610,8 +2610,8 @@ sub find_backup_to_restore() {
 		s/_incr//gi;
 		push @list_backup , $_;
     }
-    if (grep { /^backup_other/ } @list_backup) { $other_backuped = 1 }
-    if (grep { /^backup_sys/ } @list_backup) { $sys_backuped = 1 }
+    if (any { /^backup_other/ } @list_backup) { $other_backuped = 1 }
+    if (any { /^backup_sys/ } @list_backup) { $sys_backuped = 1 }
     foreach (grep { /^backup_sys_/ } @list_backup) {
 		chomp;
 		s/^backup_sys_//gi;
@@ -2641,7 +2641,7 @@ sub find_backup_to_restore() {
 #	my $to_put = "  $nom,  (date: $date, hour: $heure)";
 		$to_put = "$_       user: $nom,   date: $day/$month/$year,   hour: $hour:$min";
 		push @user_backuped , $to_put;
-		grep { /^$nom$/ } @user_list_backuped or push @user_list_backuped, $nom;
+		any { /^$nom$/ } @user_list_backuped or push @user_list_backuped, $nom;
     }
 }
 
@@ -2849,7 +2849,7 @@ sub show_backup_details {
 		)
 	);
     $central_widget = \$advanced_box_archive;
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub valid_backup_test {
@@ -2890,7 +2890,7 @@ sub restore_aff_backup_problems() {
 	);
     button_box_restore_pbs_end();
     fonction_env(\$do_restore, \&restore_aff_backup_problems, "", "restore_pbs");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_aff_result() {
@@ -2909,7 +2909,7 @@ sub restore_aff_result() {
 	);
     button_box_build_backup_end();
     $central_widget = \$do_restore;
-    $up_box->show_all();
+    $up_box->show_all;
 
 }
 
@@ -2938,7 +2938,7 @@ sub restore_backend() {
 	my $theure2;
 	local $_;
 	
-    if (grep { /tar.gz$/ } all($path_to_find_restore)) { 
+    if (any { /tar.gz$/ } all($path_to_find_restore)) { 
     	$untar_cmd = 0; 
     } else { 
     	$untar_cmd = 1; 
@@ -3008,7 +3008,7 @@ sub restore_do() {
 		build_backup_status();
 		read_conf_file();
 		build_backup_files();
-		$table->destroy();
+		$table->destroy;
     }
     restore_do2();
 }
@@ -3028,7 +3028,7 @@ sub restore_do2() {
 	);
     button_box_restore_end();
     fonction_env(\$do_restore, \&restore_do2, \&restore_box, "restore");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_step_other() {
@@ -3046,7 +3046,7 @@ sub restore_step_other() {
 	);
     check_list([$check_restore_other_sure, \$restore_other]);
     fonction_env(\$retore_step_other, \&restore_step_other, \&restore_step2, "restore", \&restore_do);
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 my %check_user_to_restore;
@@ -3096,7 +3096,7 @@ sub restore_step_user() {
 					$b->signal_connect(toggled => sub { 
 						if (!$check_user_to_restore{$name_complet}[1]) {
 							$check_user_to_restore{$name_complet}[1] = 1;
-							if (!grep { /$name/ } @user_list_to_restore2) {
+							if (!any { /$name/ } @user_list_to_restore2) {
 								push @user_list_to_restore2, $name_complet 
 							}
 						} else {
@@ -3124,7 +3124,7 @@ sub restore_step_user() {
     if ($restore_other) { fonction_env(\$retore_step_user, \&restore_step_user, "", "restore", \&restore_step_other) }
 	elsif ($restore_sys) { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step_sys, "restore", \&restore_step_other) }
     else { fonction_env(\$retore_step_user, \&restore_step_user, \&restore_step2, "restore", \&restore_do) }
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_step_sys() {
@@ -3148,12 +3148,12 @@ sub restore_step_sys() {
 		),
 	);
     $combo_restore_step_sys->entry->signal_connect('changed', sub {
-		$restore_step_sys_date = $combo_restore_step_sys->entry->get_text();
+		$restore_step_sys_date = $combo_restore_step_sys->entry->get_text;
 	});
 	$details->signal_connect('clicked', sub { 
 		#- we're only passing a portion of the filename to
 		#- the subroutine so we need to let it know this
-		my $backup_date = $combo_restore_step_sys->entry->get_text();
+		my $backup_date = $combo_restore_step_sys->entry->get_;
 		destroy_widget();
 		show_backup_details(\&restore_step_sys, "sys", $backup_date);
 	}); 	
@@ -3162,7 +3162,7 @@ sub restore_step_sys() {
     if ($restore_user) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_step_user) }
     elsif ($restore_other) { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_step_other) }
     else { fonction_env(\$restore_step_sys, \&restore_step_sys,  \&restore_step2, "restore", \&restore_do) }
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_other_media_hd {
@@ -3205,10 +3205,10 @@ sub restore_other_media_hd {
     });
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($save_path);
-    $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text() });
+    $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text });
     if ($previous_function) { fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function, "") }
     else { fonction_env(\$box_where_hd, \&advanced_where_hd, \&advanced_where, "") }
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_other_media() {
@@ -3255,10 +3255,10 @@ sub restore_other_media() {
 #    });
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $restore_find_path_entry->set_text($path_to_find_restore);
-    $restore_find_path_entry->signal_connect('changed', sub { $path_to_find_restore = $restore_find_path_entry->get_text() });
+    $restore_find_path_entry->signal_connect('changed', sub { $path_to_find_restore = $restore_find_path_entry->get_text });
 #- not sure if this was the original intent - address the crash at "Next"
     fonction_env(\$box_find_restore, \&restore_other_media, \&restore_step2, "other_media", \&restore_do);
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_step2() {
@@ -3275,9 +3275,9 @@ sub restore_step2() {
 	
     if (-f "$restore_info_path/$info_prefix" . "_other*") { $other_exist = 1 } 
     else { $other_exist = 0; $restore_other = 0 }
-    if (grep  { /_sys_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { $sys_exist = 1 } 
+    if (any  { /_sys_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { $sys_exist = 1 } 
     else { $sys_exist = 0; $restore_sys = 0 }
-    if (grep { /_user_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { $user_exist = 1 } 
+    if (any { /_user_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { $user_exist = 1 } 
     else { $user_exist = 0; $restore_user = 0 }
 
 # disabling this (sb) - very nicely wipes out your backup media if the user isn't very careful
@@ -3344,8 +3344,8 @@ sub restore_step2() {
     elsif ($restore_other) { $next_widget = \&restore_step_other }
     else { $next_widget = \&restore_do }
     $restore_path_entry->set_text($restore_path); 
-    $restore_path_entry->signal_connect('changed', sub { $restore_path = $restore_path_entry->get_text() });
-    $up_box->show_all();
+    $restore_path_entry->signal_connect('changed', sub { $restore_path = $restore_path_entry->get_text });
+    $up_box->show_all;
 }
 
 sub catalog_restore() {
@@ -3462,12 +3462,12 @@ sub catalog_restore() {
 	);		
 	
 	$restore_path_entry->set_text($restore_path);
-	gtksignal_connect($restore_path_entry, changed => sub { $restore_path = $restore_path_entry->get_text() });
+	gtksignal_connect($restore_path_entry, changed => sub { $restore_path = $restore_path_entry->get_text });
 	
 	button_box_restore();		
 	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, "restore", \&catalog_restore);
 	$central_widget = \$catalog_box;	
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_catalog_entry {
@@ -3838,7 +3838,7 @@ sub restore_box() {
 					1, new Gtk2::VBox(0,10),
 					1, new Gtk2::VBox(0,10),
 					1, gtksignal_connect(new Gtk2::Button(N("Restore all backups")), clicked => sub { 
-						$retore_box->destroy();
+						$retore_box->destroy;
 						button_box_restore();
 						@user_list_to_restore2 = sort @user_backuped; 
 						$restore_sys = 1;
@@ -3847,7 +3847,7 @@ sub restore_box() {
 						restore_do() 
 					}),
 					1, gtksignal_connect(new Gtk2::Button(N("Custom Restore")), clicked => sub { 
-						$retore_box->destroy();
+						$retore_box->destroy;
 						button_box_restore(); 
 						restore_step2();
 					}),
@@ -3863,7 +3863,7 @@ sub restore_box() {
 	}
     fonction_env(\$retore_box, \&restore_box, \&interactive_mode_box, "restore");
     $central_widget = \$retore_box;
-	$up_box->show_all();
+	$up_box->show_all;
 }
 
 sub restore_find_media_box() {
@@ -3891,7 +3891,7 @@ sub restore_find_media_box() {
 				gtkpack(new Gtk2::VBox(0, 10),
 					gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("CD in place - continue.")), clicked => sub {  
 						$good_restore_path = 1;
-						$box2->destroy();
+						$box2->destroy;
 						interactive_mode_box("restore");
 					}), $mount_media),
 					$new_path_entry = gtkset_sensitive(new Gtk2::Entry(), $mount_media),
@@ -3899,7 +3899,7 @@ sub restore_find_media_box() {
 						filedialog_generic("Directory To Restore From", \$new_path_entry, \$path_to_find_restore);
 					}), $mount_media),
 					gtksignal_connect(new Gtk2::Button(N("Restore From Catalog")), clicked => sub {  
-						$box2->destroy();
+						$box2->destroy;
 						catalog_restore();
 					}),
 				),
@@ -3911,7 +3911,7 @@ sub restore_find_media_box() {
 	$new_path_entry->set_text($path_to_find_restore);
 
 	button_box_find_media($mount_media);  
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub restore_status() {
@@ -3940,14 +3940,14 @@ sub restore_status() {
 	);
     $custom_help = "options";
     $central_widget = \$table;
-    $up_box->show_all();
+    $up_box->show_all;
     gtkflush();
 }
 
 ################################################  BUTTON_BOX  ################################################  
 
 sub button_box_adv() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
@@ -3973,7 +3973,7 @@ sub button_box_adv() {
 }
 
 sub button_box_restore_main() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
@@ -3998,7 +3998,7 @@ sub button_box_restore_main() {
 }
 
 sub button_box_backup_end() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
@@ -4024,7 +4024,7 @@ sub button_box_backup_end() {
 }
 
 sub button_box_wizard_end() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
@@ -4050,7 +4050,7 @@ sub button_box_wizard_end() {
 }
 
 sub button_box_restore_end() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
@@ -4075,7 +4075,7 @@ sub button_box_restore_end() {
 }
 
 sub button_box_build_backup_end() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox, 
@@ -4090,7 +4090,7 @@ sub button_box_build_backup_end() {
 }
 
 sub button_box_restore_pbs_end() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox, 
@@ -4108,7 +4108,7 @@ sub button_box_restore_pbs_end() {
 }
 
 sub button_box_build_backup() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
 	gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
@@ -4134,7 +4134,7 @@ sub button_box_build_backup() {
 
 sub button_box_restore() {
 
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
@@ -4163,12 +4163,12 @@ sub button_box_find_media {
 	my ($mount_media) = @_;
 	
 	#- $central_widget is not known yet?
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				$box2->destroy();
+				$box2->destroy;
 				interactive_mode_box();  
 			}),
 			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
@@ -4177,11 +4177,11 @@ sub button_box_find_media {
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				$box2->destroy();
+				$box2->destroy;
 				interactive_mode_box();  
 			}),
 			1, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
-				$box2->destroy();
+				$box2->destroy;
 				interactive_mode_box("restore"); 
 			}), $mount_media),
 		),
@@ -4189,7 +4189,7 @@ sub button_box_find_media {
 }
 
 sub button_box_wizard() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
@@ -4214,7 +4214,7 @@ sub button_box_wizard() {
 }
 
 sub button_box_main() {
-    $button_box_tmp->destroy();
+    $button_box_tmp->destroy;
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack(gtkset_layout(new Gtk2::HButtonBox, 'start'),
@@ -4229,7 +4229,7 @@ sub button_box_main() {
 ################################################  MESSAGES  ################################################  
 
 sub dialog_one {
-    $table->destroy();
+    $table->destroy;
     my ($label) = @_;
     
     gtkadd($advanced_box,
@@ -4246,7 +4246,7 @@ sub dialog_one {
     button_box_restore_main();
     $custom_help = "mail_pb";
     $central_widget = \$box2;
-    $up_box->show_all();    
+    $up_box->show_all;    
 }
 
 sub send_mail_pb() {
@@ -4280,12 +4280,12 @@ sub install_rpm {
 		),
 	);
     fonction_env(\$box_what_user, \&install_rpm, \&$previous_function, "what");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 
 sub message_norestore_box() {
-    $box2->destroy();
+    $box2->destroy;
     
     gtkadd($advanced_box,
 		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
@@ -4301,12 +4301,12 @@ sub message_norestore_box() {
 	);
     button_box_restore_main();
     $central_widget = \$box2;
-    $up_box->show_all();    
+    $up_box->show_all;    
 }
 
 
 sub message_common_box {
-    $box2->destroy();
+    $box2->destroy;
     my ($label) = @_;
     
     gtkadd($advanced_box,
@@ -4324,7 +4324,7 @@ sub message_common_box {
     $previous_widget = \&wizard;
     $next_widget = \&wizard;
     $central_widget = \$box2;
-    $up_box->show_all();    
+    $up_box->show_all;    
 }
 
 sub message_noselect_box() {
@@ -4332,7 +4332,7 @@ sub message_noselect_box() {
     $previous_widget = \&wizard_step2;
     $next_widget = \&wizard_step2;
     $central_widget = \$box2;
-    $up_box->show_all();    
+    $up_box->show_all;    
 }
 
 sub message_noselect_what_box() {
@@ -4340,13 +4340,13 @@ sub message_noselect_what_box() {
     $previous_widget = \&wizard;
     $next_widget = \&wizard;
     $central_widget = \$box2;
-    $up_box->show_all();    
+    $up_box->show_all;    
 }
 
 sub message_common_box_2 {
     my ($label, $restore_main) = @_;
 
-    $box2->destroy();
+    $box2->destroy;
 
     gtkadd($advanced_box,
 		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
@@ -4362,7 +4362,7 @@ sub message_common_box_2 {
 	);
     button_box_restore_main() if $restore_main;
     $central_widget = \$box2;
-    $up_box->show_all();    
+    $up_box->show_all;    
 }
 sub message_noconf_box() {
     message_common_box_2(N("No configuration file found \nplease click Wizard or Advanced."), 1);
@@ -4465,7 +4465,7 @@ sub build_backup_status() {
 
     $custom_help = "options";
     $central_widget = \$tbox;
-    $up_box->show_all();
+    $up_box->show_all;
     gtkflush();
 }
 
@@ -4498,7 +4498,7 @@ sub build_backup_ftp_status() {
 	);
     $custom_help = "options";
     $central_widget = \$table;
-    $up_box->show_all();
+    $up_box->show_all;
     gtkflush();
 }
 
@@ -4522,7 +4522,7 @@ sub build_backup_box_see_conf() {
     $central_widget = \$box2;
     $current_widget = \&build_backup_box_see_conf;
     $previous_widget = \&build_backup_box;
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub build_backup_box_progress() {
@@ -4578,7 +4578,7 @@ sub build_backup_box() {
 
     button_box_restore_main();
     fonction_env(\$box2, \&build_backup_box, \&interactive_mode_box, "options");
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 ################################################  INTERACTIVE  ################################################  
@@ -4622,7 +4622,7 @@ sub interactive_mode_box {
     button_box_main();
     $custom_help = "main";
     $central_widget = \$box2;
-    $up_box->show_all();
+    $up_box->show_all;
 	if ($mode eq "restore") {
 		destroy_widget(); 
 		restore_box();
@@ -4671,7 +4671,7 @@ sub interactive_mode() {
     $central_widget = \$box2;
     $window1->show_all;
     $window1->realize;
-    $window1->show_all();    
+    $window1->show_all;    
     $my_win->main;
     $my_win->exit(0);
 }
@@ -4874,7 +4874,7 @@ backup data files by hand.
 		)
 	);
     $central_widget = \$advanced_box_help;
-    $up_box->show_all();
+    $up_box->show_all;
 }
 
 sub to_ok() {

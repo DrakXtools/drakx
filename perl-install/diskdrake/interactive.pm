@@ -1148,7 +1148,7 @@ sub format_part_info {
     $info .= sprintf " (%s%%)", int 100 * $part->{size} / $hd->{totalsectors} if $hd->{totalsectors};
     $info .= N(", %s sectors", $part->{size}) if $::expert;
     $info .= "\n";
-    $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size(), ($part->{start} + $part->{size} - 1) / $hd->cylinder_size()) if ($::expert || !$part->{type}) && !isSpecial($part);
+    $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size, ($part->{start} + $part->{size} - 1) / $hd->cylinder_size) if ($::expert || !$part->{type}) && !isSpecial($part);
     $info .= N("Formatted\n") if $part->{isFormatted};
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
@@ -1216,7 +1216,7 @@ sub format_raw_hd_info {
 #- get the minimal size of partition in sectors to help diskdrake on
 #- limit cases, include a cylinder + start of a eventually following
 #- logical partition.
-sub min_partition_size { $_[0]->cylinder_size() + 2*$_[0]{geom}{sectors} }
+sub min_partition_size { $_[0]->cylinder_size + 2*$_[0]{geom}{sectors} }
 
 
 sub choose_encrypt_key {

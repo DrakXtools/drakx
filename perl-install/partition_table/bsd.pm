@@ -124,7 +124,7 @@ sub info {
       dtype => $hd->{device} =~ /^sd/ ? $dtype_scsi : $dtype_ST506,
       secsize => $common::SECTORSIZE,
       ncylinders => $hd->{geom}{cylinders},
-      secpercyl => $hd->cylinder_size(),
+      secpercyl => $hd->cylinder_size,
       secprtunit => $hd->{geom}{totalsectors},
       rpm => 3600,
       interleave => 1,

@@ -47,15 +47,15 @@ sub adjustStart($$) {
     #- note that if start sector is on the first cylinder, it is adjusted
     #- to 0 and it is valid, cylinder 0 bug is from bad define for sparc
     #- compilation of mke2fs combined with a blind kernel...
-    $part->{start} = round_down($part->{start}, $hd->cylinder_size());
+    $part->{start} = round_down($part->{start}, $hd->cylinder_size);
     $part->{size} = $end - $part->{start};
-    $part->{size} = $hd->cylinder_size() if $part->{size} <= 0;
+    $part->{size} = $hd->cylinder_size if $part->{size} <= 0;
 }
 sub adjustEnd($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
-    my $end2 = round_up($end, $hd->cylinder_size());
-    $end2 = $hd->{geom}{cylinders} * $hd->cylinder_size() if $end2 > $hd->{geom}{cylinders} * $hd->cylinder_size();
+    my $end2 = round_up($end, $hd->cylinder_size);
+    $end2 = $hd->{geom}{cylinders} * $hd->cylinder_size if $end2 > $hd->{geom}{cylinders} * $hd->cylinder_size;
     $part->{size} = $end2 - $part->{start};
 }
 
@@ -95,7 +95,7 @@ sub read($$) {
     foreach (0..$nb_primary-1) {
 	my $h = { type => $infos_up[2 * $_], flag => $infos_up[1 + 2 * $_],
 		  start_cylinder => $partitions_up[2 * $_], size => $partitions_up[1 + 2 * $_] };
-	$h->{start} = $sector + $h->{start_cylinder} * $hd->cylinder_size();
+	$h->{start} = $sector + $h->{start_cylinder} * $hd->cylinder_size;
 	$h->{type} && $h->{size} or $h->{$_} = 0 foreach keys %$h;
 	push @pt, $h;
     }
@@ -130,12 +130,12 @@ sub write($$$;$) {
     }
 
     ($info->{infos}, $info->{partitions}) = map { join '', @$_ } list2kv map {
-	$_->{start} % $hd->cylinder_size() == 0 or die "partition not at beginning of cylinder";
+	$_->{start} % $hd->cylinder_size == 0 or die "partition not at beginning of cylinder";
 #	$csize += $_->{size} if $_->{type} != 5;
 #	$wdsize += $_->{size} if $_->{type} == 5;
 	$_->{flags} |= 0x10 if $_->{mntpoint} eq '/';
 	$_->{flags} |= 0x01 if partition_table::isSwap($_);
-	local $_->{start_cylinder} = $_->{start} / $hd->cylinder_size() - $sector;
+	local $_->{start_cylinder} = $_->{start} / $hd->cylinder_size - $sector;
 	pack($format1, @$_{@$fields1}), pack($format2, @$_{@$fields2});
     } @$pt;
 #    $csize == $wdsize or die "partitions are not using whole disk space";
@@ -192,7 +192,7 @@ sub clear_raw {
 	type => 5, #- the whole disk type.
 	flags => 0,
 	start_cylinder => 0,
-	size => $hd->{geom}{cylinders} * $hd->cylinder_size(),
+	size => $hd->{geom}{cylinders} * $hd->cylinder_size,
     };
 
     $pt;

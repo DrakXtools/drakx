@@ -101,8 +101,8 @@ unless ($::isEmbedded) {
 }
 
 # Connect the signals
-$window->signal_connect('delete_event', sub { $window->destroy() });
-$window->signal_connect('destroy', sub { ugtk2->exit() });
+$window->signal_connect('delete_event', sub { $window->destroy });
+$window->signal_connect('destroy', sub { ugtk2->exit });
 
 $window->add(my $vbox = gtkshow(new Gtk2::VBox(0, 0)));
 
@@ -188,9 +188,9 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
 ####################### OK CANCEL BUTTONS ##################################
 my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
                             'clicked' => sub {
-                                my $seclevel_value = $seclevel_entry->entry->get_text();
-                                my $secadmin_check_value = $secadmin_check->get_active();
-                                my $secadmin_value = $secadmin_entry->get_text();
+                                my $seclevel_value = $seclevel_entry->entry->get_text;
+                                my $secadmin_check_value = $secadmin_check->get_active;
+                                my $secadmin_value = $secadmin_entry->get_text;
                                 my $w;
 
                                 log::explanations("Configuring msec");
@@ -213,7 +213,7 @@ my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
 
                                 log::explanations("Setting security periodic checks");
                                 foreach my $key (keys %security_checks_value) {
-                                    $msec->set_check($key, $security_checks_value{$key}->entry->get_text());
+                                    $msec->set_check($key, $security_checks_value{$key}->entry->get_text);
                                 }
                                 $msec->apply_checks;
 
@@ -221,7 +221,7 @@ my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
                                     log::explanations("Setting msec functions related to $domain");
                                     foreach my $key (keys %{$options_values{$domain}}) {
                                         my $opt = $options_values{$domain}{$key};
-                                        $msec->set_function($key, $opt =~ /Combo/ ? $opt->entry->get_text() : $opt->get_text());
+                                        $msec->set_function($key, $opt =~ /Combo/ ? $opt->entry->get_text : $opt->get_text);
                                     }
                                 }
                                 $msec->apply_functions;
@@ -241,7 +241,7 @@ gtkpack_($vbox,
                           $bok),
                    $bcancel));
 $bcancel->can_default(1);
-$bcancel->grab_default();
+$bcancel->grab_default;
 
 $w->main;
 ugtk2->exit(0);

@@ -662,7 +662,7 @@ sub read_location {
     my ($cupsd_conf_ptr, $path) = @_;
 
     my @result;
-    if (grep { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
+    if (any { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
 	my $location_start = -1;
 	my $location_end = -1;
 	# Go through all the lines, bail out when start and end line found
@@ -707,7 +707,7 @@ sub rip_location {
     my @location;
     my $location_start = -1;
     my $location_end = -1;
-    if (grep { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
+    if (any { m!^\s*<Location\s+$path\s*>! } @$cupsd_conf_ptr) {
 	# Go through all the lines, bail out when start and end line found
 	for (my $i = 0; 
 	     $i <= $#{$cupsd_conf_ptr} == -1;
@@ -1617,7 +1617,7 @@ sub poll_ppd_base() {
 		    # recommended and there was a PostScript PPD? Make
 		    # the PostScript PPD the recommended one
 		    my $firstfound = $foundkeys[0];
-		    if (!(grep { /\(recommended\)/ } @foundkeys)) {
+		    if (!(any { /\(recommended\)/ } @foundkeys)) {
 			# Do it only if none of the native PostScript
 			# PPDs for this printer is already "recommended"
 			foreach (keys %{$thedb{$firstfound}}) {

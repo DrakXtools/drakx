@@ -78,7 +78,7 @@ sub get_check_value {
 
 sub list_checks {
     my ($msec) = @_;
-    map { if_(!member($_, qw(MAIL_WARN MAIL_USER)), $_) } keys %{$msec->{checks}{default}};
+    grep { !member($_, qw(MAIL_WARN MAIL_USER)) } keys %{$msec->{checks}{default}};
 }
 
 sub list_functions {
@@ -101,7 +101,7 @@ sub list_functions {
 
     # get all function names; filter out those which are in the ignore
     # list, return what lefts.
-    map { if_(!member($_, @ignore_list) && member($_, @{$options{$category}}), $_) } keys %{$msec->{functions}{default}};
+    grep { !member($_, @ignore_list) && member($_, @{$options{$category}}) } keys %{$msec->{functions}{default}};
 }
 
 
@@ -173,7 +173,7 @@ sub new {
     $msec->{functions}{val_separator} = '\(';
     $msec->{checks}{def_separator}    = '=';
     $msec->{functions}{def_separator} = ' ';
-    $msec->reload();
+    $msec->reload;
 
     $msec->{checks}{default}    = { $msec->load_defaults('checks') };
     $msec->{functions}{value}   = { $msec->load_values('functions') };

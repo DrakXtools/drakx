@@ -53,7 +53,7 @@ require_root_capability();
 my $window1 = my_gtk->new('net_monitor');
 $window1->{rwindow}->signal_connect(delete_event => sub { my_gtk->exit(0) });
 unless ($::isEmbedded) {
-    $window1->{rwindow}->set_position(1) ;
+    $window1->{rwindow}->set_position(1);
     $window1->{rwindow}->set_title(N("Network Monitoring"));
     $window1->{rwindow}->set_policy(1, 1, 1);
     $window1->{rwindow}->set_border_width(5);
@@ -104,9 +104,9 @@ gtkadd($window1->{window},
 					1, gtkadd(gtkset_shadow_type(new Gtk::Frame(N("Statistics")), 'etched_out'),
 						  gtkpack__(new Gtk::VBox(0,0),
 						  create_packtable({ col_spacings => 1, row_spacings => 1 },
-						   [ "", "instantaneous" , "average"],
-						   [ N("Sending Speed:"), my $label_st = new Gtk::Label(""), my $label_sta = new Gtk::Label("na")],
-						   [ N("Receiving Speed:"),my $label_sr = new Gtk::Label(""), my $label_sra = new Gtk::Label("na")],
+						   [ "", "instantaneous" , "average" ],
+						   [ N("Sending Speed:"),   my $label_st = new Gtk::Label(""), my $label_sta = new Gtk::Label("na") ],
+						   [ N("Receiving Speed:"), my $label_sr = new Gtk::Label(""), my $label_sra = new Gtk::Label("na") ],
 								  ),
 						   gtkpack__(new Gtk::HBox(0,0), "  " . N("Connection Time: "), my $label_ct = new Gtk::Label("")),
 							   )
@@ -131,7 +131,7 @@ gtkadd($window1->{window},
 $window1->{rwindow}->show_all;
 $window1->{rwindow}->realize;
 $combo1->entry->signal_connect(changed => sub {
-				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text());
+				    network::netconnect::set_profile($netcnx, $combo1->entry->get_text);
 				    network::netconnect::load_conf($netcnx, $netc, $intf);
 				    network::netconnect::set_net_conf($netcnx, $netc, $intf);
 				    network::netconnect::read_net_conf('', $netcnx, $netc);
@@ -150,7 +150,7 @@ $button_connect->add(gtkpack__(new Gtk::VBox(0,3),
 				   my $label_c = new Gtk::Label(N("Wait please"))
 				  ));
 $statusbar->push(1, N("Wait please, testing your connection..."));
-$window1->{rwindow}->show_all();
+$window1->{rwindow}->show_all;
 #$window1->{rwindow}->set_policy (1, 1, 1);
 
 my $time_tag = Gtk->timeout_add(1000, \&rescan);
@@ -184,8 +184,8 @@ sub connection {
     if ($wasconnected == 1) {
 	$c_time = time();
 	$ct_tag = Gtk->timeout_add(1000, sub {
-				       my ($sec,$min,$hour) = gmtime(time() - $c_time);
-				       my $e = sprintf ("%02d:%02d:%02d", $hour, $min, $sec);
+				       my ($sec, $min, $hour) = gmtime(time() - $c_time);
+				       my $e = sprintf("%02d:%02d:%02d", $hour, $min, $sec);
 				       $label_ct->set($e); 1 })
     } else { Gtk->timeout_remove($ct_tag) }
     my $nb_point = 1;
@@ -219,7 +219,7 @@ sub connection {
 				       }
 				   }
                                    # either we got a result, or we timed out.
-				   if ($isconnect != -2 or $nb_point > 20) {
+				   if ($isconnect != -2 || $nb_point > 20) {
 				            $isconnected = $isconnect;
 					    $ret = 0;
 					    $statusbar->pop(1);
@@ -319,7 +319,7 @@ sub get_val {
     foreach (@line) {
 	s/\s*(\w*)://;
 	my $intf = $1;
-	push (@ret,$intf);
+	push @ret,$intf;
 	$monitor->{$intf}{val} = [split()];
 	$monitor->{$intf}{intf} = $intf;
     }
@@ -328,9 +328,9 @@ sub get_val {
 
 sub change_color {
     my ($color) = @_;
-    my $window = new Gtk::Window -toplevel;
+    my $window = Gtk::Window->new('toplevel');
     my $doit;
-    $window->signal_connect(delete_event => sub { Gtk->main_quit() });
+    $window->signal_connect(delete_event => sub { Gtk->main_quit });
     $window->set_position(1);
     $window->set_title(N("Color configuration"));
     $window->set_border_width(5);
@@ -338,17 +338,17 @@ sub change_color {
 	   gtkpack_(new Gtk::VBox(0,5),
 		    1, my $colorsel = new Gtk::ColorSelection,
 		    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
-			      gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { $doit = 1; Gtk->main_quit() }),
-			      gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { Gtk->main_quit() }),
+			      gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { $doit = 1; Gtk->main_quit }),
+			      gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { Gtk->main_quit }),
 			     )
 		   )
 	  );
-    $colorsel->set_color($color->red()/65535, $color->green()/65535, $color->blue()/65535, $color->pixel());
-    $window->show_all();
+    $colorsel->set_color($color->red/65535, $color->green/65535, $color->blue/65535, $color->pixel);
+    $window->show_all;
     Gtk->main;
-    $window->destroy();
+    $window->destroy;
     $doit or return $color;
-    my (@color) = $colorsel->get_color();
+    my (@color) = $colorsel->get_color;
     my_gtk::gtkcolor($color[0]*65535, $color[1]*65535, $color[2]*65535);
 }
 
@@ -422,7 +422,7 @@ sub update {
 		$i->[0]->add(gtksignal_connect(gtkshow(gtksize(gtkset_usize(new Gtk::DrawingArea(), 10, 10), 10, 10)), expose_event => sub { $_[0]->window->draw_rectangle($i->[1], 1, 0, 0, 10, 10) }));
 	    }
 	    $notebook->set_page($notebook->page_num($page));
-	    $monitor->{$intf}{page} = ($notebook->page_num($page));
+	    $monitor->{$intf}{page} = $notebook->page_num($page);
 	    $monitor->{$intf}{pixmap_db} = new Gtk::Gdk::Pixmap($monitor->{$intf}{darea}->window, 300, 150);
 	    $monitor->{$intf}{referencer} = $monitor->{$intf}{val}[0];
 	    $monitor->{$intf}{referencet} = $monitor->{$intf}{val}[8];
@@ -530,7 +530,7 @@ sub draw_monitor {
 
     my $switch = 1;
     my $gcl = new Gtk::Gdk::GC($o->{darea}->window);
-    $gcl->set_foreground($o->{darea}->window->get_colormap->color_white());
+    $gcl->set_foreground($o->{darea}->window->get_colormap->color_white);
     $gcl->set_line_attributes(1, 'on-off-dash', 'not-last', 'round');
     for (my $i = 30; $i <= 120; $i += 30) {
 	$o->{pixmap_db}->draw_line($gcl, 50, $i, 300, $i);

@@ -264,7 +264,7 @@ my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0]
 
 my $reconf_dhcp_server_intf = 1;
 
-if (grep { /$device/ } @configured_devices) {
+if (any { /$device/ } @configured_devices) {
   step_warning_already_conf:
     my $auto = N("Yes");
 		my $_dhcp_details = N("Yes");
@@ -332,7 +332,7 @@ log::explanations("Using LAN address <$lan_address>");
 #- test for potential conflict with other networks
 
 foreach (grep { $_ ne $device } @configured_devices) {
-    grep { /$lan_address/ } cat_("/etc/sysconfig/network-scripts/ifcfg-$_") and
+    any { /$lan_address/ } cat_("/etc/sysconfig/network-scripts/ifcfg-$_") and
       ($in->ask_warn('', N("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
 }
 
@@ -377,7 +377,7 @@ my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
 @needed_to_install and $in->do_pkgs->install(@needed_to_install);
 #- second: try one by one if failure detected
-if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
+if (any { !-e $rpm2file{$_} } keys %rpm2file) {
     foreach (keys %rpm2file) {
 	-e $rpm2file{$_} or $in->do_pkgs->install($_);
 	-e $rpm2file{$_} or fatal_quit(N("Problems installing package %s", $_));
@@ -467,7 +467,7 @@ if (-f $cups_conf) {
 
     # Cut out the root location block so that it can be treated seperately
     # without affecting the rest of the file
-    if (grep { m|^\s*<Location\s+/\s*>| } @cups_conf_content) {
+    if (any { m|^\s*<Location\s+/\s*>| } @cups_conf_content) {
 	$root_location_start = -1;
 	$root_location_end = -1;
 	# Go through all the lines, bail out when start and end line found
@@ -568,7 +568,7 @@ Click on Configure to launch the setup wizard.", $setup_state));
     my $button_cancel = Gtk2::Button->new(N("Cancel"));
     $button_cancel->signal_connect(clicked => sub { ugtk2->exit(0) });
     $bbox1->add($button_cancel);
-    $window1->{rwindow}->show_all();
+    $window1->{rwindow}->show_all;
     $window1->main;
     ugtk2->exit(0);
     

@@ -3172,7 +3172,7 @@ sub network_configured() {
     my @netscripts =
 	cat_("ls -1 $::prefix/etc/sysconfig/network-scripts/ |");
     my $netconfigured = 0;
-    ( /ifcfg-/ and !/(ifcfg-lo|:|rpmsave|rpmorig|rpmnew)/ and
+    (/ifcfg-/ and !/(ifcfg-lo|:|rpmsave|rpmorig|rpmnew)/ and
       !/(~|\.bak)$/ and $netconfigured = 1) foreach @netscripts;
     return $netconfigured;
 }
@@ -3673,7 +3673,7 @@ sub main {
 		    title => N("Printerdrake"),
 		    messages => N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."),
 		    cancel => (""),
-		    ok => ("")},
+		    ok => ("") },
 		    # List the queues
 		    [ if_(!$noprinters,
 			  { val => \$menuchoice, format => \&translate,

@@ -214,13 +214,13 @@ sub cursor_norm() {
 sub display_error {
     my ($message) = @_;
     my $error_box;
-    $$central_widget->destroy();
+    $$central_widget->destroy;
     gtkpack($status_box,
 	    $error_box = gtkpack_(new Gtk2::VBox(0,0),
 		  1, new Gtk2::Label($message),
 				  0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					    gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub {
-						$$central_widget->destroy(); 
+						$$central_widget->destroy;
 					    }),
 					    ),
 				  )
@@ -246,64 +246,64 @@ sub interactive_mode() {
 						       $main_box = new Gtk2::VBox(0,10),
 						       ),
 					    1, gtkpack_(new Gtk2::HBox(0,2),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Enable Server")), clicked => sub {
-								      $$central_widget->destroy(); 
+								      $$central_widget->destroy;
 								      $windows = 1;
 								      cursor_wait(); 
 								      enable_ts();
 								      cursor_norm();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Disable Server")), clicked => sub {
-								      $$central_widget->destroy(); 
+								      $$central_widget->destroy;
 								      cursor_wait();
 								      disable_ts();
 								      cursor_norm(); 
 								  }),
 								  ),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Start Server")), clicked => sub { 
-								      $$central_widget->destroy(); 
+								      $$central_widget->destroy;
 								      $windows = 0; 
 								      cursor_wait();	
 								      start_ts();
 								      cursor_norm();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Stop Server")), clicked => sub {
-								      $$central_widget->destroy(); 
+								      $$central_widget->destroy;
 								      cursor_wait();
 								      stop_ts();
 								      cursor_norm();
 								  }),
 								  ),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Etherboot Floppy/ISO")), clicked => sub { 
-								      $$central_widget->destroy();
+								      $$central_widget->destroy;
 								      $windows = 1; 
 								      make_boot();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Net Boot Images")), clicked => sub {
-								      $$central_widget->destroy();
+								      $$central_widget->destroy;
 								      make_nbi();
 								  }),
 								  ),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Add/Del Users")), clicked => sub {
-								      $$central_widget->destroy();
+								      $$central_widget->destroy;
 								      $windows = 0;
 								      maintain_users();
 								  }),
-								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { $$central_widget->destroy(); maintain_clients() }),
+								  gtksignal_connect(new Gtk2::Button(N("Add/Del Clients")), clicked => sub { $$central_widget->destroy; maintain_clients() }),
 								  ),
 							1, new Gtk2::HBox(0,2),
-							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new(), 'end'),
+							0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
 								  gtksignal_connect(new Gtk2::Button(N("Help")),clicked => sub {
-								      $$central_widget->destroy();
+								      $$central_widget->destroy;
 								      help();
 								  }),
 								  gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub {
 								      write_conf_file();
-								      Gtk2->main_quit();
+								      Gtk2->main_quit;
 								  }),
 								  ),
 							),
@@ -314,7 +314,7 @@ sub interactive_mode() {
     $central_widget = \$main_box;
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
-    $window1->{rwindow}->show_all();    
+    $window1->{rwindow}->show_all;    
 
     $window1->main;
     ugtk2->exit(0);
@@ -349,12 +349,12 @@ sub text_view {
 			   ),
 				 0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 					   gtksignal_connect(new Gtk2::Button(N("OK")), clicked => 
-							     sub { $$central_widget->destroy() }),
+							     sub { $$central_widget->destroy }),
 					   ),
 				 )
 	    );
     $central_widget = \$box;
-    $status_box->show_all();
+    $status_box->show_all;
 }
 
 sub help() {
@@ -493,7 +493,7 @@ sub make_boot() {
 	);
 	
 	$central_widget = \$boot_box;
-	$boot_box->show_all();
+	$boot_box->show_all;
 }
 
 sub make_nbi() {
@@ -639,7 +639,7 @@ sub make_nbi() {
 	);
 	
 	$central_widget = \$nbi_box;
-	$nbi_box->show_all();
+	$nbi_box->show_all;
 }
 
 sub maintain_users() {
@@ -661,7 +661,7 @@ sub maintain_users() {
 	
 	foreach (@sys_users) {
 		my ($s_label) = split(/:/, $_, 2);
-		if (grep { /$s_label/ } @homes) {
+		if (any { /$s_label/ } @homes) {
     		$list_model->append($iter);
     		$list_model->set($iter, [ 0 => $s_label ]);
 		}
@@ -721,7 +721,7 @@ sub maintain_users() {
 	);
 	
 	$central_widget = \$user_box;
-	$user_box->show_all();
+	$user_box->show_all;
 }
 
 sub maintain_clients() {
@@ -819,10 +819,10 @@ sub maintain_clients() {
 					), 
 #					new Gtk2::HBox(1,1),
 					gtksignal_connect(new Gtk2::Button(N("Add Client -->")), clicked => 
-						sub { my $hostname = $entry_host->get_text();
-							my $mac = $entry_mac->get_text();
-							my $ip = $entry_ip->get_text();
-							my $nbi = $entry_nbi->entry->get_text(); 
+						sub { my $hostname = $entry_host->get_text;
+							my $mac = $entry_mac->get_text;
+							my $ip = $entry_ip->get_text;
+							my $nbi = $entry_nbi->entry->get_text;
 							if ($hostname && $mac && $ip) {
 	
 								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
@@ -880,7 +880,7 @@ sub maintain_clients() {
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("dhcpd Config...")), clicked => 
-						sub { $$central_widget->destroy(); dhcpd_config() }),
+						sub { $$central_widget->destroy; dhcpd_config }),
 #					new Gtk2::HBox(1,1),
 				),
 				create_scrolled_window($tree_clients),
@@ -916,7 +916,7 @@ sub maintain_clients() {
 		}
 	);
 	$central_widget = \$client_box;
-	$client_box->show_all();
+	$client_box->show_all;
 }
 
 sub dhcpd_config() {
@@ -1055,17 +1055,17 @@ sub dhcpd_config() {
 				gtkadd(new Gtk2::HBox),
 				gtksignal_connect(new Gtk2::Button(N("Write Config")), clicked => 
 						sub { write_dhcpd_config(
-							$entry_subnet->get_text(),
-							$entry_netmask->get_text(),
-							$entry_routers->get_text(),
-							$entry_subnet_mask->get_text(),
-							$entry_broadcast->get_text(),
-							$entry_domain->get_text(),
-							$entry_name_server1->get_text(),
-							$entry_name_server2->get_text(),
-							$entry_name_server3->get_text(),
-							$entry_ip_range_start->get_text(),
-							$entry_ip_range_end->get_text(),						
+							$entry_subnet->get_text,
+							$entry_netmask->get_text,
+							$entry_routers->get_text,
+							$entry_subnet_mask->get_text,
+							$entry_broadcast->get_text,
+							$entry_domain->get_text,
+							$entry_name_server1->get_text,
+							$entry_name_server2->get_text,
+							$entry_name_server3->get_text,
+							$entry_ip_range_start->get_text,
+							$entry_ip_range_end->get_text,						
 						) }),
 				new Gtk2::HBox(0,10),
 			),
@@ -1073,7 +1073,7 @@ sub dhcpd_config() {
 	);	
 
 	$central_widget = \$dhcpd_box;
-	$dhcpd_box->show_all();	
+	$dhcpd_box->show_all;	
 }
 
 sub get_mask_from_sys() {

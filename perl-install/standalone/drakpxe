@@ -226,7 +226,7 @@ my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
 @needed_to_install and $in->do_pkgs->install(@needed_to_install);
 #- second: try one by one if failure detected
-if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
+if (any { !-e $rpm2file{$_} } keys %rpm2file) {
     foreach (keys %rpm2file) {
 	-e $rpm2file{$_} or $in->do_pkgs->install($_);
 	-e $rpm2file{$_} or fatal_quit(N("Problems installing package %s", $_));
@@ -235,7 +235,7 @@ if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
 
 #- check if a pool already exist allowing PXE, else create one wich will be correct.
 if ($pool) {
-    @{$pool}{qw(start_ip end_ip)} = ($start_ip, $end_ip);
+    @$pool{qw(start_ip end_ip)} = ($start_ip, $end_ip);
 } else {
     $pool = { start_ip => $start_ip, end_ip => $end_ip };
     foreach (keys %{$dhcpd_conf->{class}}) {
@@ -482,7 +482,7 @@ sub parse_pxelinux_cfg {
 	close F;
     }
     #- try to fix bad file (first version of drakpxe for example).
-    my %default_pxelinux_cfg = ( PROMPT => 1,
+    my %default_pxelinux_cfg = (PROMPT => 1,
 				 DEFAULT => "local",
 				 DISPLAY => "messages",
 				 TIMEOUT => 50,

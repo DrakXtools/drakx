@@ -465,7 +465,7 @@ sub miscellaneous_choose {
 
 sub proxy_configure {
     my ($u) = @_;
-    setExportedVarsInSh( "$::prefix/etc/profile.d/proxy.sh",  $u, qw(http_proxy ftp_proxy));
+    setExportedVarsInSh("$::prefix/etc/profile.d/proxy.sh",  $u, qw(http_proxy ftp_proxy));
     setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $u, qw(http_proxy ftp_proxy));
 }
 

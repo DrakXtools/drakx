@@ -221,11 +221,8 @@ sub ppp_choose {
 						 \&mouse::serial_port2text,
 						 [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ]) || return;
 
-    my @cnx_list;
-    my $secret = network::tools::read_secret_backend();
-    foreach (@$secret) {
-	push @cnx_list, $_->{server};
-    }
+    #my $secret = network::tools::read_secret_backend();
+    #my @cnx_list = map { $_->{server} } @$secret;
     $in->ask_from('', N("Dialup options"), [
 					    { label => N("Connection name"), val => \$modem->{connection} },
 					    { label => N("Phone number"), val => \$modem->{phone} },
