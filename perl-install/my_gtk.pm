@@ -40,7 +40,6 @@ sub new {
     push @interactive::objects, $o unless $opts{no_interactive_objects};
 
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
-    print "modal############################################################\n" if $my_gtk::grab || $o->{grab};
     $o;
 }
 sub main($;$) {

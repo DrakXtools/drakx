@@ -489,8 +489,10 @@ sub selectMouse($) {
 }
 
 #------------------------------------------------------------------------------
-#- configureNetwork moved to network and is renamed.
-#------------------------------------------------------------------------------
+sub configureNetwork {
+    my ($o) = @_;
+    network::configureNetwork2($o, $o->{prefix}, $o->{netc}, $o->{intf});
+}
 
 #------------------------------------------------------------------------------
 sub installCrypto {

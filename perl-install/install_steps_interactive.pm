@@ -129,7 +129,7 @@ are you ready to answer that kind of questions?"),
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
 					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
-					      [ __("Install"), __("Upgrade") ], $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
+					      [ __("Install"), __("Rescue") ], $o->{isUpgrade} ? "Rescue" : "Install") eq "Rescue";
 
     if ($::corporate || $::beginner) {
 	delete $o->{installClass};
@@ -194,10 +194,14 @@ sub ask_mntpoint_s {
     @fstab = @$fstab if @fstab == 0;
     die _("no available partitions") if @fstab == 0;
 
+
     if (@fstab == 1) {
 	$fstab[0]{mntpoint} = '/';
     } else {
 	install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
+
+	log::l("default mntpoint $_->{mntpoint}") foreach @fstab;
+
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
 				  [ map { partition_table_raw::description($_) => 

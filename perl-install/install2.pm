@@ -363,7 +363,7 @@ sub miscellaneous {
 	$usb{ZIP} = bool2yesno(-d "/proc/scsi/usb");
 	setVarsInSh($f, \%usb);
 
-	install_any::fsck_option();
+	install_any::fsck_option($o);
     } 'installPackages';
 }
 

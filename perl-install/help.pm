@@ -13,7 +13,7 @@ selectInstallClass => [
  __("Choose \"Install\" if there are no previous versions of GNU/Linux
 installed, or if you wish to use multiple distributions or versions.
 
-Choose \"Upgrade\" if you wish to update a previous version of Mandrake Linux:
+Choose \"Rescue\" if you wish to rescue a previous version of Mandrake Linux:
 %s or %s.
 
 

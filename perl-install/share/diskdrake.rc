@@ -8,6 +8,11 @@ style "red" = "font"
   bg[NORMAL] = { 1.0, 0, 0 }
   bg[PRELIGHT] = { 0.9, 0, 0 }
 }
+style "darkred" = "font"
+{
+  bg[NORMAL] = { 0.7, 0, 0 }
+  bg[PRELIGHT] = { 0.6, 0, 0 }
+}
 style "green" = "font"
 {
   bg[NORMAL] = { 0, 1.0, 0 }
@@ -28,6 +33,7 @@ style "white" = "font"
 
 widget "*Linux*"      style "red" 
 widget "*Ext2*"       style "red" 
+widget "*ReiserFS*"   style "darkred" 
 widget "*Linux swap*" style "green"
 widget "*Swap*"       style "green"
 widget "*FAT*"        style "blue"

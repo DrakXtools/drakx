@@ -24,7 +24,7 @@ $(DIRS):
 	$(MAKE) -C $@
 
 test_pms: verify_c
-	./perl2fcalls -excludec -excluderesize_fat::c_rewritten install2 standalone/keyboarddrake standalone/XFdrake standalone/drakboot
+	for i in install2 standalone/keyboarddrake standalone/XFdrake standalone/drakboot; do ./perl2fcalls -excludec -excluderesize_fat::c_rewritten $$i; done
 	for i in install2 install_steps_*.pm; do perl -cw -I. $$i; done
 
 verify_c:

@@ -241,7 +241,7 @@ sub hasUltra66 {
     my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x",
       @l == 2 ?
 	(map_index { hex($_) + (odd($::i) ? 1 : -1) } map { (split ' ')[3..4] } @l) :
-	(map_index { hex($_) - 1                    } map { (split ' ')[3..6] } @l);
+	(map_index { hex($_) + (odd($::i) ? 1 : -1) } map { (split ' ')[3..6] } @l);
 
     log::l("HPT|Ultra66: found $ide");
     $ide;

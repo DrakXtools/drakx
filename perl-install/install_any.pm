@@ -225,7 +225,7 @@ sub spawnShell {
     exec {"/bin/sh"} "-/bin/sh" or log::l("exec of /bin/sh failed: $!");
 }
 
-sub fsck_option() {
+sub fsck_option {
     my ($o) = @_;
     my $y = $o->{security} < 3 && $::beginner ? "-y " : "";
     substInFile { s/^(\s*fsckoptions="?)(-y )?/$1$y/ } "$o->{prefix}/etc/rc.d/rc.sysinit";
@@ -628,7 +628,7 @@ sub suggest_mount_points {
 	my $d = $handle->{dir};
 	my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
 	$mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$user if -e "$d/.bashrc";
-	$mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_("$d")) && '/home'; 
+	$mnt ||= (grep { -d $_ && (stat($_))[4] >= 500 && -e "$_/.bashrc" } glob_("$d")) ? '/home' : ''; 
 
 	next if $uniq && fsedit::mntpoint2part($mnt, \@parts);
 	$part->{mntpoint} = $mnt;
