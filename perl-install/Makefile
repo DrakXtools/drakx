@@ -128,6 +128,7 @@ endif
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
 	cd share ; cp -f *.png *.xpm $(DEST)/usr/share
+	cd pixmaps ; cp -f *.png *.xpm $(DEST)/usr/share
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
 
