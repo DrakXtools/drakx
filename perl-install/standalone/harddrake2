@@ -251,7 +251,7 @@ foreach (@harddrake::data::tree) {
         $data{$custom_id} = $_;
         $configurators{$custom_id} = $configurator;
     }
-    $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq "Unknown/Others";
+    $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq N_("Unknown/Others");
     $parent_iter->free;
 }
 
