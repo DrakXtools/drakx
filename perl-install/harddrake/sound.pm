@@ -67,7 +67,7 @@ my %alsa2oss =
      "snd-opti93x" => [ "mad16" ],
      "snd-rme32"   => [ "unknown" ], # isa
      "snd-rme96"   => [ "unknown" ], # isa
-     "snd-rme9652g" => [ "rme96xx" ],
+     "snd-rme9652" => [ "rme96xx" ],
      "snd-sb16"    => ["sscape", "sb"],
      "snd-sb8"     => [ "sb" ],
      "snd-sbawe"   => [ "awe_wave" ],
@@ -115,7 +115,7 @@ my %oss2alsa =
      "opl3sa"  => [ "snd-opl3sa2" ],
      "opl3sa2" => [ "snd-opl3sa2" ],
      "pas2"    => [ "unknown" ],
-     "rme96xx" => [ "snd-rme9652.o.g" ],
+     "rme96xx" => [ "snd-rme9652" ],
      "sb"      => ["snd-sb8", "snd-sb16"],
      "sgalaxy" => [ "snd-sgalaxy" ],
      "sonicvibes" => [ "snd-sonicvibes" ],
@@ -216,7 +216,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
     } else {
         $in->ask_warn(N("Unkown driver"), 
                       N("The \"%s\" driver for your sound card is unlisted"),
-                      $driver, $driver);
+                      $driver);
     }
 }
 
