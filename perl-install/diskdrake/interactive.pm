@@ -704,7 +704,7 @@ sub Resize {
 	local *log::l = sub { $w->set(join(' ', @_)) };
 	$nice_resize{fat}->resize($part->{size});
     } elsif ($nice_resize{ext2}) {
-	my $s = int(($part->{size} << 9) / $block_size);
+	my $s = int($part->{size} / ($block_size / 512));
 	log::l("resize2fs $nice_resize{ext2} to size $s in block of $block_size bytes");
 	run_program::run("resize2fs", "-pf", $nice_resize{ext2}, $s);
     } elsif ($nice_resize{reiserfs}) {
