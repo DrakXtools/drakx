@@ -622,10 +622,56 @@ sub setPackages {
     }
 }
 
+sub count_files {
+    my ($dir) = @_;
+    -d $dir or return 0;
+    opendir my $dh, $dir or return 0;
+    my @list = grep { !/^\.\.?$/ } readdir $dh;
+    closedir $dh;
+    my $c = 0;
+    foreach my $n (@list) {
+	my $p = "$dir/$n";
+	if (-d $p) { $c += count_files($p) } else { ++$c }
+    }
+    $c;
+}
+
+sub cp_with_progress {
+    my $wait_message = shift;
+    my $current = shift;
+    my $total = shift;
+    my $dest = pop @_;
+    @_ or return;
+    @_ == 1 || -d $dest or die "cp: copying multiple files, but last argument ($dest) is not a directory\n";
+
+    foreach my $src (@_) {
+	my $dest = $dest;
+	-d $dest and $dest .= '/' . basename($src);
+
+	unlink $dest;
+
+	if (-l $src) {
+	    unless (symlink(readlink($src) || die("readlink failed: $!"), $dest)) {
+		warn "symlink: can't create symlink $dest: $!\n";
+	    }
+	} elsif (-d $src) {
+	    -d $dest or mkdir $dest, (stat($src))[2] or die "mkdir: can't create directory $dest: $!\n";
+	    cp_with_progress($wait_message, $current, $total, glob_($src), $dest);
+	} else {
+	    open(my $F, $src) or die "can't open $src for reading: $!\n";
+	    open(my $G, ">", $dest) or die "can't cp to file $dest: $!\n";
+	    local $/ = \4096;
+	    local $_; while (<$F>) { print $G $_ }
+	    chmod((stat($src))[2], $dest);
+	    $wait_message->('', ++$current, $total);
+	}
+    }
+    1;
+}
+
 sub copy_rpms_on_disk {
     my ($o) = @_;
     mkdir "$o->{prefix}/$_", 0755 foreach qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrakelinux var/ftp/pub/Mandrakelinux/media);
-    my $wait_w;
     local *changeMedium = sub {
 	my ($method, $medium) = @_;
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
@@ -637,66 +683,38 @@ sub copy_rpms_on_disk {
 		cat_("/proc/mounts") =~ m,(/dev/\S+)\s+(/mnt/cdrom|/tmp/image),
 		    and ($cdrom, my $mountpoint) = ($1, $2);
 		ejectCdrom($cdrom, $mountpoint);
-		undef $wait_w;
 		$r = $o->ask_okcancel('', N("Change your Cd-Rom!
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.", $name), 1);
-		$wait_w = $o->wait_message(N("Please wait"), N("Copying in progress"));
 	    }
 	    return $r;
 	} else {
 	    return 1;
 	}
     };
-    my $total = $o->{mediumsize};
-    log::l("totalsize=$total");
-    my $pid;
-    #- will we show a progress bar?
-    my $copy_has_progress_bar = !method_allows_medium_change($o->{method}) || $o->{method} =~ /-iso$/;
-    if ($copy_has_progress_bar) {
-	#- display the progress bar only for non-cdrom installation methods
-	$pid = fork();
-	if (!$pid && defined $pid) { #- child
-	    ($wait_w, my $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
-	    $wait_message->(N("Copying in progress"));
-	    #- from commands.pm. TODO: factorize, possibly in MDK::Common.
-	    my $f; $f = sub {
-		my ($e) = @_;
-		my $s = (lstat($e))[12];
-		$s += sum(map { &$f($_) } glob_("$e/*")) if !-l _ && -d _;
-		$s;
-	    };
-	    while (1) {
-		my $s = $f->("$o->{prefix}/var/ftp/pub/Mandrakelinux/media") / 1024;
-		$wait_message->('', $s, $total);
-		sleep 1;
-		last if $s > $total - 100;
-	    }
-	    undef $wait_w;
-	    c::_exit(0);
-	}
-    }
     foreach my $k (pkgs::allMediums($o->{packages})) {
+	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	my $m = $o->{packages}{mediums}{$k};
+	$wait_message->(N("Copying in progress") . "\n($m->{descr})"); #- XXX to be translated
 	if ($k != $current_medium) {
 	    do {
 		askChangeMedium($o->{method}, $k)
 		    or next;
-		mountCdrom("/tmp/image", $cdrom);
+		mountCdrom("/tmp/image", $cdrom) if $o->{method} eq 'cdrom';
 	    } while !-d "/tmp/image/$m->{rpmsdir}";
 	    $current_medium = $k;
 	}
 	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
-	unless ($copy_has_progress_bar) { $wait_w = $o->wait_message(N("Please wait"), N("Copying in progress")) }
+	my $total = count_files("/tmp/image/$m->{rpmsdir}");
+	log::l("($total files)");
 	eval {
-	    cp_af("/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media");
+	    cp_with_progress($wait_message, 0, $total, "/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media");
 	};
-	undef $wait_w;
 	log::l($@) if $@;
 	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrakelinux";
 	$m->{method} = 'disk';
 	$m->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
+	undef $wait_w;
     }
-    kill 15, $pid if defined $pid;
     ejectCdrom() if $o->{method} eq "cdrom";
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
