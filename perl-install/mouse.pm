@@ -445,11 +445,11 @@ sub test_mouse {
     ugtk2->import(qw(:wrappers));
     my $wait = 0;
     my %xpms;
-    $xpms{$_} = ugtk2::gtkcreate_pixbuf("mouse_$_.xpm") foreach qw(3b 3bp left right middle);
+    $xpms{$_} = ugtk2::gtkcreate_pixbuf("mouse_$_.xpm") foreach qw(3b 3b+ left right middle);
     $xpms{au} = ugtk2::gtkcreate_pixbuf('arrow_up.xpm');
     $xpms{ad} = ugtk2::gtkcreate_pixbuf('arrow_down.xpm');
     my $image = $xpms{'3b'};
-    $mouse->{nbuttons} > 3 and $image = $xpms{'3bp'};
+    $mouse->{nbuttons} > 3 and $image = $xpms{'3b+'};
     my $draw_text = sub {
   	my ($t, $y) = @_;
 	my $layout = $darea->create_pango_layout($t);
