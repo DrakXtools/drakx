@@ -20,7 +20,7 @@ our %l = (
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x),
 	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
         qw(cs89x0 de600 de620),
-        qw(defxx orinoco_plx), # most unused
+        qw(defxx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci),
@@ -51,7 +51,7 @@ our %l = (
     ],
     wireless => [
       qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503 at76c503-rfmd atmel_cs),
-      qw(hermes netwave_cs orinoco orinoco_cs orinoco_pci prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
+      qw(hermes netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
