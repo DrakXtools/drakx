@@ -1,3 +1,580 @@
+2003/08/01  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Add gnome calculator and charmap
+
+2003/08/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_CN.po: updated Chinese file
+
+	* lang.pm: Added some more languages to the list;
+	defined kde fonts for some languages
+
+	* pixmaps/langs/lang-zu.png, pixmaps/langs/lang-te.png,
+	pixmaps/langs/lang-mr.png, pixmaps/langs/lang-uz@Cyrl.png,
+	pixmaps/langs/lang-ss.png, pixmaps/langs/lang-xh.png,
+	pixmaps/langs/lang-sr@Latn.png, pixmaps/langs/lang-se.png,
+	pixmaps/langs/lang-ku.png, pixmaps/langs/lang-ml.png,
+	pixmaps/langs/lang-ne.png, pixmaps/langs/lang-as.png,
+	pixmaps/langs/lang-li.png, pixmaps/langs/lang-st.png,
+	pixmaps/langs/lang-ve.png, pixmaps/langs/lang-gu.png,
+	pixmaps/langs/lang-uz.png: New/updated images with language names
+
+	* share/po/et.po: updated po file
+
+	* share/rpmsrate: Added locale->fonts-* dependencies
+
+2003/08/01  Pixel  <pixel at mandrakesoft.com>
+
+	* .perl_checker: printer::printerdrake is not perl_checker compliant,
+	don't pretend it is!
+
+	* standalone/draksec: perl_checker compliance
+
+	* Makefile: s/head -1/head -n 1/
+	(am i the only one who thinks changing head's usage is really stupid?
+	well...)
+
+	* diskdrake/smbnfs_gtk.pm: instead of removing the "Search servers" button
+	when the search is over, keep
+	it to allow searching for new servers (the label is changed from "Search
+	servers" to "Search new servers") (bug #4297)
+
+	* install_any.pm, any.pm: 
+	  - move write_smb_conf() from install_any to network::smb
+	  - rename setAuthentication() to set_authentication()
+	  - move the work of set_authentication() from install_any to any
+	  - move the per-authentification kind questions from
+	install_steps_interactive::setRootPassword() to
+	any::ask_authentification_parameters()
+	  - various cleanup in code prompting authentification questions
+	  - call install_any::set_authentication() in
+	install_steps::setRootPassword()
+	instead of waiting for the installPackages step to be done
+	  (since setRootPassword occurs *after* packages installation)
+	  - don't call set_authentification() in install_steps::addUser()
+	  (why was this done there??)
+	=> these changes will allow drakauth
+	use $::prefix
+
+	* interactive/gtk.pm: don't warn when label is used with no text for boot
+	entries
+	(i want titi's explaination on this first)
+
+	* Xconfig/card.pm: Intel drivers don't need DontVTSwitch anymore (dixit
+	Arnaud de Lorbeau)
+
+	* drakxtools.spec, standalone/drakauth, Makefile.config: add drakauth
+
+	* install_steps_interactive.pm, install2.pm, install_steps.pm,
+	network/smb.pm: 
+	  - move write_smb_conf() from install_any to network::smb
+	  - rename setAuthentication() to set_authentication()
+	  - move the work of set_authentication() from install_any to any
+	  - move the per-authentification kind questions from
+	install_steps_interactive::setRootPassword() to
+	any::ask_authentification_parameters()
+	  - various cleanup in code prompting authentification questions
+	  - call install_any::set_authentication() in
+	install_steps::setRootPassword()
+	instead of waiting for the installPackages step to be done
+	  (since setRootPassword occurs *after* packages installation)
+	  - don't call set_authentification() in install_steps::addUser()
+	  (why was this done there??)
+	=> these changes will allow drakauth
+
+	* ugtk2.pm: replace signal_disconnect with signal_handler_disconnect
+	(needed for perl-gtk2-xs)
+
+	* Xconfig/xfree4.pm, Xconfig/xfree3.pm, Xconfig/xfreeX.pm,
+	Xconfig/parse.pm: => do as Chris Picton suggested
+	Chris Picton said (nearly one year ago :-/) :
+	I have found the need for many low res screen resolutions for such
+	thingas as movie playing, xmame, etc.
+	
+	The method XFdrake uses to enable modes is to enumerate each mode in the
+	XF86Config file. For example (a newly created file):
+	
+	Subsection "Display"
+	    Depth 24
+	    Modes "1280x960" "1152x864" "1024x768" "800x600" "640x480"
+	EndSubsection
+	
+	It would be better (at least under XFree 4, which automatically provides
+	resoltions from the monitor, if it is capable), to not limit the modes
+	provided to the user
+	
+	If I use instead, the following:
+	
+	Subsection "Display"
+	    Depth 24
+	    Virtual 1280 960
+	EndSubsection
+	
+	My maximum mode is exactly the same as before, but I have many more low
+	resolution modes.
+
+2003/07/31  François Pons  <fpons at mandrakesoft.com>
+
+	* rescue/tree/etc/oem: make oem-all by default (obsoleted previous oem)
+
+	* install_steps.pm: added redo of initrd files for oem changes to take
+	effects for bootsplash...
+	fixed /usr/share/bootsplash directory not created for images.
+	apply oem image modification to bootsplash too.
+
+2003/07/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sv.po: updated pot file
+	updated Swedish file
+
+	* share/po/ru.po, share/po/et.po, share/po/cy.po, share/po/ca.po,
+	share/po/ja.po, share/po/tg.po, share/po/pt_BR.po, share/po/ar.po,
+	share/po/lt.po, share/po/id.po, share/po/eo.po, share/po/be.po,
+	share/po/af.po, share/po/sq.po, share/po/he.po, share/po/az.po,
+	share/po/ta.po, share/po/uk.po, share/po/sk.po, share/po/it.po,
+	share/po/ro.po, share/po/pt.po, share/po/es.po, share/po/ko.po,
+	share/po/bs.po, share/po/sr@Latn.po, share/po/lv.po, share/po/bg.po,
+	share/po/DrakX.pot, share/po/sr.po, share/po/el.po, share/po/nb.po,
+	share/po/zh_TW.po, share/po/sl.po, share/po/th.po, share/po/hu.po,
+	share/po/cs.po, share/po/ga.po, share/po/is.po, share/po/uz@Cyrl.po,
+	share/po/gl.po, share/po/pl.po, share/po/fr.po, share/po/eu.po,
+	share/po/de.po, share/po/da.po, share/po/tr.po, share/po/nl.po,
+	share/po/vi.po, share/po/wa.po, share/po/hr.po, share/po/zh_CN.po,
+	share/po/fi.po, share/po/mt.po, share/po/uz.po: updated pot file
+
+2003/07/31  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: 
+	  - drakxtools-newt must not require perl(interactive::gtk) or
+	perl(ugtk2)
+	  - only drakbackup require perl(Net::FTP) & perl(Time::localtime), i
+	don't want
+	this require for all drakxtools. What about moving drakbackup to a
+	separate
+	package?
+
+	* bootloader.pm: use "splash=silent" instead of "quiet".
+	kernel messages will still be written, but will be hidden (can be seen
+	if
+	pressing F2 or escape at boot time)
+
+2003/07/31  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: UI issues from cooker list.  Push help off to
+	drakhelp.
+
+2003/07/30  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/07/30  François Pons  <fpons at mandrakesoft.com>
+
+	* interactive/gtk.pm: removed ugly code for scrollbars as pixel has fixed
+	it now.
+
+	* ugtk2.pm: intermediate commit to completely broken ugtk2 for handling
+	tree, in order for
+	gc or pixel to fix this...
+
+	* pkgs.pm: allow testing locally, should not avoid pkgs to work in real
+	place.
+
+	* install_steps_interactive.pm: removed remaining code of eval (eq nop).
+	remove eval around choosePackagesTree as it display something even if it
+	doesn't run...
+
+2003/07/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cs.po, share/po/he.po, share/po/sq.po: updated Albanian, Czech
+	and Hebrew files
+
+2003/07/30  Pixel  <pixel at mandrakesoft.com>
+
+	* network/network.pm: revert to 1.129:
+	it's no good removing " (using module ...)" from {DEVICE} field, it's
+	much
+	  better not having it in the first place. See network/ethernet.pm v1.81
+	for
+	  the real fix
+
+	* install_steps.pm: Aurora doesn't exist anymore (and it's been that way
+	for quite a few time)
+
+	* network/ethernet.pm: fix typo (thanks to perl_checker)
+	cleanup (especially ensure $interface is not something like "eth0 (using
+	module ...)" but only "eth0" (cf network/network.pm 1.130 nasty change)
+
+	* timezone.pm: 
+	  - cleanup
+	  - add pool.ntp.org (and make it the default) (cf bug #4197)
+
+	* install_steps_gtk.pm: ensure "No details" is displayed instead of
+	"Details" when beginning a new
+	package installation round and "No details" was pressed in previous
+	round
+
+	* any.pm: perl_checker compliance
+	  - cleanup debug code
+	  - use read_gnomekderc & update_gnomekderc instead of getVarsFromSh &
+	substInFile
+	allow other=/dev/fd0 (bug #4405)
+
+	* Xconfig/test.pm: 
+	  - move from perl-GTK2 to perl-Gtk2
+	  - fix an old weird typo
+
+	* install_steps_interactive.pm: fix typo
+	  - cleanup
+	  - add pool.ntp.org (and make it the default) (cf bug #4197)
+
+2003/07/29  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Add vera font by default
+
+2003/07/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/DrakX.pot, share/po/wa.po, share/po/da.po, share/po/zh_CN.po,
+	share/po/uz@Cyrl.po, share/po/sk.po, share/po/uz.po: updated pot file
+
+2003/07/29  Pixel  <pixel at mandrakesoft.com>
+
+	* docs/README: remove some really obsolete doc
+
+	* fsedit.pm: re-export %fsedit::suggestions as needed (why did titi my-ed
+	it?) (fixes bug #4298)
+
+	* install2.pm: use formatError for the error message occuring when
+	auto_install.cfg is bad
+
+	* drakxtools.spec: there is no good url for drakxtools, but at least don't
+	give a broken one!
+	(thanks to Raul Dias)
+
+	* ugtk2.pm: labels are not able to correctly handle long texts, so
+	rollback to using
+	TextView instead.
+	For information on this pb:
+	  - IHM team doesn't like TextView because the text can be selected, and
+	a
+	contextual menu is available
+	  - IHM team doesn't like the difference between small text (using a
+	Label) and
+	longer text (using a TextView)
+	  - Label can wrap automatically but not nicely (it doesn't use the full
+	width)
+	  - Label can't wrap CJK text which have no spaces
+	Apart from this Label vs TextView pb, Titi only left some code which
+	takes
+	care of small text, causing the text to be wrapped using warp_text
+	(which is
+	not proportional font aware) and not using a scrolled window (causing
+	the
+	license to take more than the screen, the buttons disappearing at the
+	bottom
+	of the screen)
+
+2003/07/28  François Pons  <fpons at mandrakesoft.com>
+
+	* share/list.i386: moved mkfs.xfs
+
+	* rescue/list.i386: moved xfs files.
+
+	* rescue/list.ia64: moved xfs files (problably the same for ia64 ?).
+
+	* interactive/gtk.pm: make sure the split of message is done only in
+	install mode, as standalone has
+	no problem.
+
+2003/07/28  Pixel  <pixel at mandrakesoft.com>
+
+	* tools/ddcprobe/Makefile: we now need -lm to link
+
+2003/07/28  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/07/26  keld
+
+	* share/po/da.po: small update
+	gi/perl-install/share/po/da.po
+	update!
+	soft/menudrake/po/da.po gi/perl-install/share/po/da.po
+	update
+	gi/perl-install/share/po/da.po
+
+2003/07/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po, share/po/uk.po: updated Japanese and Ukrainian files
+
+2003/07/25  aginies
+
+	* pixmaps/drakcluster.png: new icon, without alpha-layer (unsupported
+	under 9.0)
+
+2003/07/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: Updated Estonian file
+	updated pot file
+
+	* share/po/ru.po, share/po/cy.po, share/po/ca.po, share/po/ja.po,
+	share/po/tg.po, share/po/pt_BR.po, share/po/ar.po, share/po/lt.po,
+	share/po/id.po, share/po/eo.po, share/po/be.po, share/po/af.po,
+	share/po/sq.po, share/po/he.po, share/po/az.po, share/po/ta.po,
+	share/po/uk.po, share/po/sk.po, share/po/it.po, share/po/ro.po,
+	share/po/pt.po, share/po/es.po, share/po/ko.po, share/po/bs.po,
+	share/po/sr@Latn.po, share/po/lv.po, share/po/bg.po, share/po/DrakX.pot,
+	share/po/sr.po, share/po/el.po, share/po/nb.po, share/po/zh_TW.po,
+	share/po/sv.po, share/po/sl.po, share/po/th.po, share/po/hu.po,
+	share/po/cs.po, share/po/ga.po, share/po/is.po, share/po/uz@Cyrl.po,
+	share/po/gl.po, share/po/pl.po, share/po/fr.po, share/po/eu.po,
+	share/po/de.po, share/po/da.po, share/po/tr.po, share/po/nl.po,
+	share/po/vi.po, share/po/wa.po, share/po/hr.po, share/po/zh_CN.po,
+	share/po/fi.po, share/po/mt.po, share/po/uz.po: updated pot file
+
+2003/07/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.2-0.24mdk
+	9.2-0.24mdk: work in progress
+
+	* ugtk2.pm: work in progress (follow interface team recommendation) : use
+	checkboxes instead of ugly icon
+	inconsistent (aka semi-selected) state still need working
+	install caller must be fixed like rpmdrake is
+
+	* standalone/drakbug: use std button layout
+	use option menus instead of combos in on interface team request
+
+	* standalone/drakperm: fix crash on adding new permission
+
+2003/07/24  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Update
+
+2003/07/24  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: removed ncompress (contrib)
+
+2003/07/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakboot: hide splash screen section for now on ihm team
+	request
+
+	* standalone/net_monitor: 
+	  - use option menus instead of combos
+	  - fix crash on profile change due to netconnect api change
+
+	* harddrake/sound.pm: fix #4258
+
+	* standalone/logdrake: upcase label
+
+	* security/l10n.pm: describe
+
+	* security/help.pm: better help
+	  - filter dumb characters
+	  - strip help from internal msec doc so that it better fit end user
+
+	* share/po/fr.po: update
+	one more typo (still fabrice)
+	typo fix (spoted by Fabrice Facorat)
+	follow english case
+
+	* interactive/gtk.pm: if the callee explicitely want to force the user to
+	pick sg from a
+	fixed set of options, the right widget to use is an OptionMenu rather
+	than a Combo (see ugtk2 r1.141 log and ugtk2::Gtk2::OptionMenu
+	sub-module)
+
+	* standalone/drakperm: since we've replace save "button" by "ok", exit the
+	tool after saving the preferences
+	fix tree filling
+	  - ugtk2-ize dialog construction
+	  - fix tip setting
+	localize level option menu
+	settings dialog:
+	  - localize all fields
+	  - add tips for all check boxes
+	use stock icons on rule toolbar
+	make label be undserstandable
+	upcase various widget texts (still have to localize settings dialog
+	fields though)
+	simplify (un|)sensitive property setting of the list
+	use option menus instead of combos in settings dialog too
+	use stock icons and std button layout in settings dialog
+	use option menus instead of combos
+
+	* drakxtools.spec: bump perl-Gtk2 requires in order to fix drakfont bug
+	with utf8 file
+	names
+	9.2-0.23mdk
+	draksec: requires a non broken msec
+	9.2-0.22mdk
+
+	* standalone/mousedrake: use std button layout
+
+	* standalone/draksec: restore help for msec checks
+
+	* standalone/drakconnect: remove nonsense expert button
+	  - (configure_lan) directly use global variables
+	  - double click on ethernet lines run lan config dialog
+
+2003/07/23  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/drakhelp: 
+	  - ru, de and it have no specific drakxtools help packages. Default to
+	english
+	  - retest $$path to see if the page exists.
+	  - don't launch browser unless help page exists.
+
+2003/07/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/he.po: fixed "arrows"
+
+	* share/po/uz@Cyrl.po, share/po/uz.po: Added Uzbek cyrillic file
+
+2003/07/23  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix catalog restore for perl-Gtk2
+	Fix rsync behavior - broken in perl_checker fixes
+	Fix wildcard_to_tarfile
+
+2003/07/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm: new autologin scheme (spec87): directly configure display
+	manager
+
+	* drakxtools.spec: log drakfont fixes
+	9.2-0.21mdk
+
+	* standalone/drakboot: we do not need anymore autologin (spec87)
+
+	* standalone/drakfont: fix #1679 & #3673
+
+2003/07/22  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/07/22  François Pons  <fpons at mandrakesoft.com>
+
+	* install_gtk.pm: fixed titi sucks (as usually as he never tests nor
+	checks what he is writing).
+
+	* standalone.pm: avoid being clashed by signature checking when installing
+	packages,
+	need a better fix later.
+
+	* interactive/gtk.pm: tempory fix for title not having scroll bars (which
+	sounds reasonable ?), as the
+	size of the window is fixed the low part of the window is not visible.
+	titi who makes the portage to newer Gtk2 has not tested this (again, for
+	info).
+
+2003/07/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+2003/07/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: last but not least ...
+	more unfuzzy
+	unfuzzy...
+	more french translation
+	better phrasing
+
+	* drakxtools.spec: first bits of 9.2-0.21mdk
+	9.2-0.20mdk
+	9.2-0.20mdk
+
+	* standalone/draksec: N_ON_E is of no use, NONE is
+	simplify and order vertically OptionMenus
+
+	* network/network.pm: fix fpons sucks (as usuall as he neither tests nor
+	care about bug
+	reports)
+
+	* standalone/drakconnect: 
+	  - fix "lan config" dialog where fields were not filled
+	  - factorize some code in order to achieve it
+
+	* standalone/drakgw: disable service start/stop too in testing mode
+	do not install package in testing mode
+	no valid reason not to be able to go back at first step
+	fix going backward in the wizard at deepest stages
+	testing mode: enable to go some steps further when testing this tool
+	fix back step
+
+2003/07/21  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps_gtk.pm: avoid src package to be seen in tree.
+
+	* pkgs.pm: fixed setSelectedFromCompssList (updated with newer perl-URPM
+	interface),
+	more need to be done. maybe increased speed of unselectAllPackages.
+
+2003/07/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ru.po, share/po/et.po, share/po/cy.po, share/po/ca.po,
+	share/po/ja.po, share/po/tg.po, share/po/pt_BR.po, share/po/ar.po,
+	share/po/lt.po, share/po/id.po, share/po/eo.po, share/po/be.po,
+	share/po/af.po, share/po/sq.po, share/po/he.po, share/po/az.po,
+	share/po/ta.po, share/po/uk.po, share/po/sk.po, share/po/it.po,
+	share/po/ro.po, share/po/pt.po, share/po/es.po, share/po/ko.po,
+	share/po/bs.po, share/po/sr@Latn.po, share/po/lv.po, share/po/bg.po,
+	share/po/DrakX.pot, share/po/sr.po, share/po/el.po, share/po/nb.po,
+	share/po/zh_TW.po, share/po/sv.po, share/po/sl.po, share/po/th.po,
+	share/po/hu.po, share/po/cs.po, share/po/ga.po, share/po/is.po,
+	share/po/gl.po, share/po/pl.po, share/po/fr.po, share/po/eu.po,
+	share/po/de.po, share/po/da.po, share/po/tr.po, share/po/nl.po,
+	share/po/vi.po, share/po/wa.po, share/po/hr.po, share/po/zh_CN.po,
+	share/po/fi.po, share/po/mt.po, share/po/uz.po: updated pot file
+
+2003/07/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: mcc view: add an help button (and ugtk2-ize main
+	window buttons btw)
+
+	* network/netconnect.pm: add a hint if we never restore profiles feature
+	do not gratuitously waste space
+	if we really want the type connection to be translated by translate()
+	call in
+	step_2, we should mark it as translatable for gettext somewhere ...
+	fix final success message:
+	  - fix join usage
+	  - fix gtk frontend detection
+	do not loop if one refuse to save changes, just skip the save step
+	keep user changes on back step
+	fix no previous button when using ask_okcancel() in wizard mode due to
+	*very*
+	ugly "$common->{cancel} = '' if !defined wantarray();" in interactive.pm
+	anyway, the whole pre_func() idea was totally dumb
+	it now looks a little cleaner
+	
+	
+	
+	making all main configuration callbacks having the same prototype and
+	name
+	would enable further cleanups (direct call to
+	network::$net_module{$type}::configure(...);)
+
+	* standalone/harddrake2: add hints for translators
+	workaround buggy gtk+-2.x that do not wrap textviews when realized
+
+	* standalone/diskdrake: provide some help access in standalone mode
+
+	* network/network.pm: dhcp host name cannot be set if one want to get it
+	from dhcp server
+
+	* drakxtools.spec: 9.2-0.19mdk
+
+	* standalone/draksec: add hints for translators
+	make 1st tab title somewhat clearer
+	fix infamous "when embedded draksec can be enlarged but never shrink
+	back"
+	one should not be able to set syadmin when no reports
+	  - describe all security levels
+	  - make it clean than security admin is not a security level
+	  - colorize security levels names
+	  - use a label instead of textview
+
 2003/07/21  François Pons  <fpons at mandrakesoft.com>
 
 	* install_steps_gtk.pm: avoid src package to be seen in tree.
@@ -17547,7 +18124,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.811 2003/07/21 14:56:27 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.812 2003/07/21 15:11:53 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
