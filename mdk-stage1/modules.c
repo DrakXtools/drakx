@@ -59,7 +59,7 @@ static int insmod_archived_file(const char * mod_name, char * options)
 
 	rc = insmod_call(final_name, options);
 	if (rc)
-		log_message("\tfailed.");
+		log_message("\tfailed");
 	unlink(final_name); /* sucking no space left on device */
 	return rc;
 }
@@ -239,7 +239,7 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 
 	i = insmod_with_deps(mod_name, options);
 	if (i == 0) {
-		log_message("\tsucceeded %s.", mod_name);
+		log_message("\tsucceeded %s", mod_name);
 #ifndef DISABLE_MEDIAS
 		if (type == SCSI_ADAPTERS) {
 			if (number_scsi > 0)

@@ -80,7 +80,7 @@ static void spawn_shell(void)
 	pid_t pid;
 	char * shell_name = "/sbin/sash";
 
-	log_message("spawning a shell..");
+	log_message("spawning a shell");
 
 	if (!IS_TESTING) {
 		fd = open("/dev/tty2", O_RDWR);
@@ -160,7 +160,7 @@ static void expert_third_party_modules(void)
 	umount(floppy_mount_location);
 
 	if (rc) {
-		log_message("\tfailed.");
+		log_message("\tfailed");
 		error_message("Insmod failed.");
 	}
 

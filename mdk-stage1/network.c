@@ -47,7 +47,7 @@
 
 static void error_message_net(void)  /* reduce code size */
 {
-	error_message("Could not configure network");
+	error_message("Could not configure network.");
 }
 
 
@@ -347,7 +347,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			return setup_network_interface(intf);
 
 		if (!inet_aton(answers[0], &addr)) {
-			error_message("Invalid IP address");
+			error_message("Invalid IP address.");
 			return setup_network_interface(intf);
 		}
 		memcpy(&intf->ip, &addr, sizeof(addr));
@@ -591,7 +591,7 @@ enum return_type nfs_prepare(void)
 
 	if (IS_SPECIAL_STAGE2) {
 		if (load_ramdisk() != RETURN_OK) {
-			error_message("Could not load program into memory");
+			error_message("Could not load program into memory.");
 			return nfs_prepare();
 		}
 	}
