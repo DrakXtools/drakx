@@ -170,14 +170,17 @@ sub rewrite2_ {
 	"\n$text\n";
 
     } elsif (member($tree->{tag},  
-		    'acronym', 'application', 'emphasis', 'indexterm', 
-		    'keycombo', 'note', 'primary', 
+		    'acronym', 'application', 'emphasis',  
+		    'keycombo', 'note', 
 		    'superscript', 'systemitem', 
 		    'tip', 'ulink', 'xref' 
 		   )) {
 	# ignored tags
 	$text;
-    } elsif (member($tree->{tag}, 'title', 'article')) {
+    } elsif (member($tree->{tag},
+		    'title', 'article', 'primary', 'secondary', 
+		    'indexterm', 
+		   )) {
 	# dropped tags
 	'';
     } elsif ($tree->{tag} eq 'sect1') {
