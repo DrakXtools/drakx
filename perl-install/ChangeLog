@@ -1,3 +1,89 @@
+2001/11/26  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* tools/i386/netboot/stage2.rtl8139: add rtl8139 netboot file that works
+
+	* tools/i386/netboot/stage1.rtl8139: add rtl8139 netboot file that works
+	stage1/stage2 of rtl8139 didn't work
+
+2001/11/26  dam's  <damien@mandrakesoft.com>
+
+	* common.pm, my_gtk.pm: new features for new mcc
+
+2001/11/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: getAndSaveAutoInstallFloppy: don't die when output'ing
+	of
+	auto_inst.cfg is not possible
+
+2001/11/26  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm: add $o->{excludedocs} feature
+
+	* Makefile.drakxtools: remove unneeded files (*.bs and .exists)
+
+	* interactive_gtk.pm: cleanup
+
+2001/11/26  sdupont
+
+	* standalone/drakbackup: new gi, advanced step.
+	update.
+	gawk cmds.
+	better use for read and save conf. file now on
+	/etc/draxtools/drakbackup/drakbackup.cfg
+
+	* pixmaps/backup_hd.png, pixmaps/backup_options.png,
+	pixmaps/backup_net.png, pixmaps/backup_time.png: png files for
+	DrakBackup.
+
+2001/11/25  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/fileshareset: first version. for the moment, only nfs.
+
+2001/11/25  sdupont
+
+	* standalone/drakbackup: update of read_conf_file and default mode.
+
+2001/11/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po, share/po/es.po: updated Spanish and Danish files
+
+2001/11/24  sdupont
+
+	* standalone/drakfont: about...
+
+	* standalone/drakbackup: update
+	update gi ,build of system, user, other, options interfaces.
+	advanced step.
+
+2001/11/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: package for pcmcia is now called "pcmcia-cs"
+
+	* any.pm, detect_devices.pm: pcmcia: /var/run/stab is nor
+	/var/lib/pcmcia/stab
+	yes it probably doesn't bring anything valuable but it's
+	how life is :-)
+
+2001/11/23  sdupont
+
+	* standalone/drakbackup: radio buttons & information message.
+	change gi interface, include help, about and pixmaps (backup_*.png on
+	standalone/pixmaps directory)
+
+2001/11/22  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: removed loading of agpgart module for i810 card.
+
+2001/11/22  sdupont
+
+	* standalone/drakfont: about button & GPL license.
+
+	* standalone/drakbackup: update gi.
+	TODO: separate all the boxes.
+	include wizard and advanced in pixmaps.
+	update
+	notebook gi.
+
 2001/11/21  François Pons  <fpons@mandrakesoft.com>
 
 	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2,
