@@ -121,3 +121,8 @@ substInFile {
 
 #- remove uncessary wizards, especially from appearing in MCC
 unlink "$::prefix/usr/sbin/$_" foreach qw(drakautoinst drakboot drakfloppy drakgw drakedm drakfont rpmdrake MandrakeUpdate rpmdrake-remove edit-urpm-sources.pl);
+
+#- remove services we start ourselves from chkconfig system
+substInFile {
+    s|chkconfig:|chkconfig-disabled:|;
+} "/etc/rc.d/init.d/$_" foreach qw(xfs dm devfsd syslog);
