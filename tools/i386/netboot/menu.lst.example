@@ -1,0 +1,7 @@
+timeout 0
+
+title linux
+dhcp
+tftpserver 192.168.1.9
+kernel (nd)/var/lib/tftpboot/vmlinuz ramdisk=32000 vga=788 kickstart=Mandrake/base/auto_inst.cfg.pl useless_thing_accepted
+initrd (nd)/var/lib/tftpboot/network.rdz
