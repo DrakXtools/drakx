@@ -501,7 +501,7 @@ such as ``mybox.mylab.myco.com''."),
     #- (dam's)
     if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
 			_("Do you want to configure a ISDN connection for your system?"), 0)) {
-        Netconnect::isdn($o->{prefix}, $o->{netc}, $o, bool($o->{pcmcia}));
+        Netconnect::isdn($o->{prefix}, $o->{isdn}, $o, bool($o->{pcmcia}));
     }
 }
 

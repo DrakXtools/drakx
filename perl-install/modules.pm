@@ -96,6 +96,9 @@ arch() =~ /^sparc/ ? (
   "parport_pc" => "parport_pc",
   "sunrpc" => "sunrpc",
 }],
+[ 'isdn', {
+  "hisax" => "hisax",
+}],
 [ 'scsi', {
 arch() =~ /^sparc/ ? (
   "qlogicpti" => "Performance Technologies ISP",
@@ -524,7 +527,7 @@ sub load_thiskind($;&$) {
     my ($type, $f, $pcic) = @_;
     my %loaded_text;
 
-    my @devs = detect_devices::matching_type($type, $pcic);
+    my @devs = grep { my $l = $drivers{$_->{driver}}; $l && $l->{type} eq $type } detect_devices::probeall('', $pcip);
     log::l("probe found " . scalar @devs . " $type devices");
 
     my %devs; foreach (@devs) {
