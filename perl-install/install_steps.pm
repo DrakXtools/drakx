@@ -172,11 +172,12 @@ sub doPartitionDisks {
 
     install_any::getHds($o);
 
-    if ($o->{isUpgrade}) {
+    if ($o->{partitioning}{use_existing_root} || $o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
 	my $p = fsedit::get_root_($o->{fstab}) || first(install_any::find_root_parts($o->{hds}, $o->{prefix})) or die;
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
-    } elsif ($o->{partitioning}{auto_allocate}) {
+    } 
+    if ($o->{partitioning}{auto_allocate}) {
 	fsedit::auto_allocate($o->{hds}, $o->{partitions});
     }
 }
