@@ -998,7 +998,8 @@ sub install($$$;$$) {
 			  foreach @transToInstall;
 		    }
 
-		    #$trans->order or die "error ordering package list: " . c::rpmErrorString();
+		    my @checks = $trans->check; @checks and log::l("check failed : ".join("\n               ", @checks));
+		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
 		    $trans->set_script_fd(fileno $LOG);
 
 		    log::l("rpm transactions start");
