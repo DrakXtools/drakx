@@ -719,7 +719,7 @@ sub ask_users {
 	    member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
 	    return 0;
 	};
-	$in->ask_from_entries_refH_powered(
+	my $ret = $in->ask_from_entries_refH_powered(
 	    { title => _("Add user"),
 	      messages => _("Enter a user\n%s", $names),
 	      ok => _("Accept user"),
@@ -746,6 +746,7 @@ sub ask_users {
 
 	push @$users, $u if $u->{name};
 	$u = {};
+	$ret or return;
     }
 }
 
