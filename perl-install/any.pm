@@ -658,6 +658,13 @@ sub autologin {
     }
 }
 
+#- part of perl-MDK-Common-1.1.7-2mdk but since cooker is frozen...
+sub uniq_(&@) {
+    my $f = shift;
+    $l{$f->($_)} = 1 foreach @_;
+    grep { delete $l{$f->($_)} } @_;
+}
+
 sub selectLanguage {
     my ($in, $lang, $o_langs_) = @_;
 
@@ -673,9 +680,9 @@ sub selectLanguage {
 	$lang = first(lang::l2location($lang))."|$lang";
 	
 	my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
-	my $listval2val = sub { $1 if $_[0] =~ /\|(.*)/ };
+	my $listval2val = sub { $_[0] =~ /\|(.*)/ ? $1 : $_[0] };
 
-	my @langs = map { my $l = $_; map { [ "$_|$l", $_, $l ] } lang::l2location($l) } lang::list_langs();
+	my @langs = map { my $l = $_; uniq_ { $_->[0] } map { [ ($::move ? $l : "$_|$l"), $_, $l ] } lang::l2location($l) } lang::list_langs();
 	#- since gtk version will use images (function image2f) we need to sort differently
 	my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
 	@langs = map { $_->[0] } sort { $a->[1] cmp $b->[1] || $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
@@ -689,9 +696,9 @@ when your installation is complete and you restart your system.")),
 	$in->ask_from_($common,
 	[ { val => \$lang, separator => '|', 
 	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
-	    format => sub { $1.lang::l2name($2) if $_[0] =~ /(.*\|)(.*)/ },
+	    format => sub { $_[0] =~ /(.*\|)(.*)/ ? $1.lang::l2name($2) : lang::l2name($_[0]) },
 	    list => \@langs, sort => 0 },
-	    if_($o_langs_, if_($::isInstall,
+	    if_($o_langs_ && !$::move, if_($::isInstall,
 			     { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }),
 		{ val => \$langs->{all}, type => 'bool', text => N("All languages"), advanced => 1 },
 	        map {
