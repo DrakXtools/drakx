@@ -279,7 +279,11 @@ sub loadkeys_files {
 
 sub unpack_keyboards {
     my ($k) = @_ or return;
-    [ map { [ split ':' ] } split ' ', $k ];
+    [ grep { 
+	my $b = $keyboards{$_->[0]};
+	$b or log::l("bad keyboard $_->[0] in %keyboard::lang2keyboard");
+	$b;
+    } map { [ split ':' ] } split ' ', $k ];
 }
 sub lang2keyboards {
     my ($l) = @_;
