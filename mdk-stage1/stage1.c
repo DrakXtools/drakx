@@ -467,8 +467,13 @@ int mandrake_move_post(void)
         fclose(f);
         
         // hardcoded :(
-        if (scall(symlink("/image_totem/usr", SLASH_LOCATION "/usr"), "symlink"))
-                return RETURN_ERROR;
+        if (!access(TOTEM_LOCATION, R_OK)) {
+                if (scall(symlink("/image_totem/usr", SLASH_LOCATION "/usr"), "symlink"))
+                        return RETURN_ERROR;
+        } else
+                // need a fallback in case we don't use image_totem.clp nor live_tree_totem, but we're in -u mode
+                if (scall(symlink(LIVE_LOCATION_REL "/usr", SLASH_LOCATION "/usr"), "symlink"))
+                        return RETURN_ERROR;
 
         // need to create the few devices needed to start up stage2 in a decent manner, we can't symlink or they will keep CD busy
         // we need only the ones before mounting /dev as devfs
