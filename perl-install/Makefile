@@ -87,6 +87,9 @@ ifeq (sparc,$(ARCH))
 	ln -s /tmp $(DEST)/usr/X11R6/lib/X11/xkb/compiled
 	ln -s /usr/X11R6/lib/X11/xkb/xkbcomp $(DEST)/usr/bin/xkbcomp
 endif
+ifeq (i386,$(ARCH))
+	install -s ../kernel/cardmgr/cardmgr $(DEST)/usr/bin
+endif
 
 	for i in `cat /tmp/list`; do \
 	    if (echo $$i | grep -q "lib/[^/]*\.so"); then \
