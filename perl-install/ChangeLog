@@ -1,3 +1,184 @@
+2004/07/09  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: fix mounting /sys (why did i switch to using syscall_
+	'mount' directly? and with missing parameters!)
+
+	* any.pm: add "ls -l /sys/bus/scsi/devices" in report.bug
+	(it helps for debugging getSCSI on 2.6)
+
+2004/07/08  keld
+
+	* share/po/da.po: updates
+	soft/drakcronat/po/da.po soft/drakfax/po/da.po
+	soft/GtkMdkWidgets/po/da.po soft/mdkonline/po/da.po
+	soft/rpmdrake/po/da.po soft/urpmi/po/da.po
+	gi/perl-install/share/po/da.po
+	soft/galaxy/thememdk/mandrake_client/po/da.po
+
+2004/07/08  Pixel  <pixel at mandrakesoft.com>
+
+	* modules.pm: handle s/snd-card/snd/g and
+	s/snd-via686|snd-via8233/snd-via82xx/g more generically
+	in mergein_conf(), get the "above" value, and don't dirty "probeall"
+	rename load_raw() to load_raw_install() and change the prototype
+	cleanup
+	  - create when_load_category()
+	  - replace regexp [uo]hci on module name with testing category
+	"bus/usb"
+	  - move the special case imm ppa from when_load() to load()
+	fix previous commit
+	  - generalize the snd-pcm-oss case
+	  - cleanup
+	  - rename add_alias() into set_alias()
+	  - create set_sound_slot() and use it
+	don't remove "above ... snd-pcm-oss" for the old alias, it's better done
+	explictly, and already done by remove_module()
+
+	* install_steps_interactive.pm: 
+	  - create X_options_from_o() and use it
+	  - add freeDriver boot option
+	when adding users during install, suggest the user names found in /home
+
+	* Xconfig/card.pm, install2.pm, install_steps.pm, install_any.pm: 
+	  - create X_options_from_o() and use it
+	  - add freeDriver boot option
+
+	* lang.pm: merge with MDK-10-update Move changes
+
+	* any.pm: fix typo
+	merge "language choice dialog" from MDK-10-update
+	selectCountry doesn't really need a $o, a $in is enough
+	when adding users during install, suggest the user names found in /home
+
+	* network/adsl.pm, harddrake/sound.pm, detect_devices.pm,
+	network/ethernet.pm: 
+	  - rename add_alias() into set_alias()
+	  - create set_sound_slot() and use it
+
+	* standalone/adduserdrake: when adding users during install, suggest the
+	user names found in /home
+
+2004/07/08  rvojta
+
+	* standalone/drakedm: 
+	  - typo fix (lost -> lose)
+
+2004/07/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: add vincent
+
+	* drakxtools.spec: 10-53mdk final
+
+	* standalone/drakedm: warn the user before dm exit will kill the session
+	(Robert Vojta, #10179)
+
+2004/07/07  Pixel  <pixel at mandrakesoft.com>
+
+	* mouse.pm: fix comment
+	modules::mergein_conf() doesn't need to be given /etc/modules.conf
+	=> prepare for reading either modprobe.conf or modules.conf based on the
+	running kernel version
+
+	* install_steps.pm, install_steps_interactive.pm, install_any.pm: 
+	  - move configure_pcmcia() and write_pcmcia() out of modules.pm to
+	install_any.pm
+	  - load pcmcia_core, $pcic and ds in one call to modules::load
+	  - don't pass prefix to write_pcmcia()
+
+	* modules.pm: fix indentation
+	modules::mergein_conf() doesn't need to be given /etc/modules.conf
+	=> prepare for reading either modprobe.conf or modules.conf based on the
+	running kernel version
+	modules::mergein_conf() doesn't need to be given /etc/modules.conf
+	=> prepare for reading either modprobe.conf or modules.conf based on the
+	running kernel version
+	remove non-useful prototypes ($)
+	use the module category to decide if it needs alias usb-interface or
+	alias ieee1394-controller
+	fix typo
+	  - restrict view of %mappings_24_26 and %mappings_26_24 to modules.pm
+	  - simplify mapping_24_26(), it now takes only one module name, not a
+	list
+	  - simplify mapping_26_24(), the special case is handled properly in
+	%mappings_26_24
+	  - move configure_pcmcia() and write_pcmcia() out of modules.pm to
+	install_any.pm
+	  - load pcmcia_core, $pcic and ds in one call to modules::load
+	  - don't pass prefix to write_pcmcia()
+	create write_preload_conf()
+
+	* standalone/XFdrake: modules::mergein_conf() doesn't need to be given
+	/etc/modules.conf
+	=> prepare for reading either modprobe.conf or modules.conf based on the
+	running kernel version
+	modules::mergein_conf() doesn't need to be given /etc/modules.conf
+	=> prepare for reading either modprobe.conf or modules.conf based on the
+	running kernel version
+
+	* standalone/printerdrake, standalone/service_harddrake,
+	network/ethernet.pm, harddrake/data.pm, network/netconnect.pm,
+	install2.pm, modules/interactive.pm, standalone/mousedrake,
+	standalone/draksound, standalone/drakxtv: modules::mergein_conf()
+	doesn't need to be given /etc/modules.conf
+	=> prepare for reading either modprobe.conf or modules.conf based on the
+	running kernel version
+
+2004/07/07  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Merge fixes from Anthill 927, 929.
+	(filenames with spaces, .backupignore, gui behavior)
+	Merge fixes from Anthill 927, 929
+	(filenames with spaces, .backupignore, gui issues)
+
+2004/07/06  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot: update bootsplash even if framebuffer was disabled
+
+	* mdk-stage1/config-stage1.h: add missing slash in Mandrake Move image
+	location
+
+2004/07/06  Pixel  <pixel at mandrakesoft.com>
+
+	* mdk-stage1/config-stage1.h: fix blino fix
+	doing basename is dumb (is blino too?), really make the symlink relative
+
+	* mdk-stage1/disk.c: 
+	  - when the directory is bad, go back to choose another directory
+	instead of choosing another device
+	(you can still use "Cancel" to choose another device)
+	  - list files in directory given, not the root directory of the device
+
+	* standalone/bootloader-config: fix typo
+	  - nicer "usage: ..."
+	  - add actions "add-entry" and "remove-entry"
+	  - add option --label
+	  - add option --chainload
+	  - rename --vmlinuz to --image
+
+	* bootloader.pm: remove unneeded spaces in append=" foo"
+	write_lilo handles "optional"
+	rename var
+	cleanup
+	cleanup
+
+	* mdk-stage1/directory.c: doing basename is dumb (is blino too?), really
+	make the symlink relative
+
+	* Xconfig/xfree.pm: add 1024x480 (part of bugzilla #5192)
+
+	* Xconfig/resolution_and_depth.pm: rename function $set_chosen_x_res to
+	$set_chosen_resolution (since it sets both)
+	(choose_gtk): ensure default height is the chosen one
+
+2004/07/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* c/stuff.xs.pl: workaround blind gwenole
+	workaround build with new kernels
+
+	* standalone/service_harddrake: high level explanation
+
+	* drakxtools.spec: 10-53mdk
+
 2004/07/06  Pixel  <pixel at mandrakesoft.com>
 
 	* mdk-stage1/disk.c: 
@@ -32478,7 +32659,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.929 2004/06/25 08:44:56 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.930 2004/07/06 01:53:28 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
