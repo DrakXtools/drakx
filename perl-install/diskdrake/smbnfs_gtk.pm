@@ -209,7 +209,7 @@ sub import_tree {
 		  gtksignal_connect($search,
 				    clicked => sub {
 					$add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $kind->find_servers;
-					$search->destroy;
+					$search->set_label(N("Search new servers"));
 				    }));
     }
 
