@@ -377,7 +377,7 @@ sub psUsingHdlists {
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $o_fhdlist, $o_fpubkey) = @_;
+    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey) = @_;
     my $fakemedium = "$descr ($method$medium)";
     my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
     log::l("trying to read $hdlist for medium $medium");
@@ -415,9 +415,12 @@ sub psUsingHdlist {
 
     #- get all keys corresponding in the right pubkey file,
     #- they will be added in rpmdb later if not found.
-    if (!$o_fhdlist || $o_fpubkey) {
-	my $pubkey = $o_fpubkey || install_any::getFile("Mandrake/base/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
-	$m->{pubkey} = [ $packages->parse_armored_file($pubkey) ];
+    if (!$o_fhdlist || $o_pubkey) {
+	$m->{pubkey} = $o_pubkey;
+	unless ($m->{pubkey}) {
+	    my $pubkey = $o_fpubkey || install_any::getFile("Mandrake/base/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
+	    $m->{pubkey} = [ $packages->parse_armored_file($pubkey) ];
+	}
     }
 
     #- integrate medium in media list, only here to avoid download error (update) to be propagated.
