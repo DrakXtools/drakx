@@ -183,12 +183,6 @@ sub choosePackages($$$$) {
 
 sub beforeInstallPackages {
     my ($o) = @_;
-
-    $o->{bootloader}{perImageAppend} .= " " . join(" ", grep { /^ide/ } split ' ', cat_("/proc/cmdline"));
-    if (my @l = detect_devices::getIDEBurners()) {
-	$o->{bootloader}{perImageAppend} .= " " . join(" ", map { "$_=ide-scsi" } @l);
-    }
-
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
     require pkgs;
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});

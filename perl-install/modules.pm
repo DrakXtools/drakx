@@ -301,9 +301,10 @@ sub text2driver($) {
 }
 
 sub add_alias($$) { 
-    my ($alias, $name);
-    $conf{$_}{alias} && $conf{$_}{alias} eq $name and return foreach keys %conf;
+    my ($alias, $name) = @_;
+    /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $name and return foreach keys %conf;
     $alias .= $scsi++ || '' if $alias eq 'scsi_hostadapter';
+    log::l("adding alias $alias to $name");
     $conf{$alias}{alias} ||= $name;
     1;
 }
