@@ -356,7 +356,7 @@ $low_default_monitor = "Super VGA, 800x600 at 56 Hz";
 );
 
 %xkb_options = (
-    'ru(winkeys)' => [ 'XkbVariant "winkeys"', 'XkbOptions "grp:caps_toggle"' ],
+    'ru(winkeys)' => [ 'XkbOptions "grp:caps_toggle"' ],
     'jp' => [ 'XkbModel "jp106"' ], 
 );
 
