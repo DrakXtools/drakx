@@ -109,7 +109,7 @@ sub checkNetwork {
 sub getIP {
     my ($interface) = shift;
     my $ifconfig = '/sbin/ifconfig';
-    my @lines = qx|$ifconfig $interface|;
+    my @lines = `$ifconfig $interface`;
     my @ip = map { if_(/inet adr:([\d.]+)/, $1) } @lines;
     return wantarray() ? @ip : $ip[0];
 }
