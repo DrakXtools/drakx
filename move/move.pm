@@ -169,6 +169,7 @@ sub init {
     modules::load_category('bus/usb'); 
     eval { modules::load('usb-storage', 'sd_mod') };
     handle_virtual_key();
+    $o->{pcmcia} ||= !$::noauto && c::pcmcia_probe();
     install_steps::setupSCSI($o);
     run_program::run('sysctl', '-w', 'kernel.hotplug="/sbin/hotplug"');
 
