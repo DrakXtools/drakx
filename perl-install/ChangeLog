@@ -1,3 +1,32 @@
+2004/03/24  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: Update translations
+
+	* share/rpmsrate: Install kdeutils-kwalletmanager by default when KDE is
+	installed
+
+2004/03/24  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_gtk.pm: meta_class server (PowerPack+) needs category
+	Workstation
+
+	* share/rpmsrate: when BIGMEM & SMP, use kernel-p3-smp-64GB
+
+2004/03/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_conf_backend) only disable kernel driver for 2.4.x
+	kernels since
+	latest speedtouch package is totally broken in userland mode now :-(
+
+	* drakxtools.spec: fix changelog
+	one more change
+	one more change in 10-26mdk
+
+	* standalone/service_harddrake: switch between nv and nvidia driver if
+	commercial driver isn't installed
+
+	* network/adsl_consts.pm: #5056 really refered to austria, not australia
+
 2004/03/24  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/hi.po: updated Hindi file
@@ -29791,7 +29820,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.916 2004/03/23 18:04:25 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.917 2004/03/24 09:29:33 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
