@@ -115,8 +115,9 @@ sub selectMouse {
 sub setupSCSI {
     my ($clicked, $_ent_number, $auto) = @_;
 
-    if (!$::live && !$::g_auto_install && !$o->{blank} && !$::testing && !$::uml_install && !$::move) {
-	-s modules::cz_file() or die \N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
+    if (!$::live && !$::g_auto_install && !$o->{blank} && !$::testing && !$::uml_install) {
+	-d '/lib/modules/' . c::kernel_version() ||
+	  -s modules::cz_file() or die \N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
 
     installStepsCall($o, $auto, 'setupSCSI', $clicked);
