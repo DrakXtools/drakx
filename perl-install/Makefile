@@ -17,7 +17,7 @@ tar-drakxtools: clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/serial_probe drakxtools
 	cd ../drakxtools ; perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
 	cd ../drakxtools ; rm -rf install* pkgs.pm ftp.pm t.pm */CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfj drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config Newt c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) icons pixmaps *.pm) --exclude pixmaps/wiz_*.png
+	cd .. ; tar cfj drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config Newt c ddcprobe serial_probe share/po sbus_probing resize_fat share/diskdrake.rc share/wizard.rc $(STANDALONEPMS) icons pixmaps *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
@@ -89,7 +89,7 @@ ifeq (sparc,$(ARCH))
 	ln -s /usr/X11R6/lib/X11/xkb/xkbcomp $(DEST)/usr/bin/xkbcomp
 endif
 ifeq (i386,$(ARCH))
-	install -s ../all.kernels/*/cardmgr/cardmgr* $(DEST)/usr/bin
+	install -s ../all.kernels/*/cardmgr/cardmgr{,-*} $(DEST)/usr/bin
 endif
 
 	for i in `cat /tmp/list`; do \
@@ -129,7 +129,7 @@ endif
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
 	-cd share ; cp -f *.png *.xpm $(DEST)/usr/share
-	-cd pixmaps ; cp -f *.png *.xpm $(DEST)/usr/share
+	-cd pixmaps ; cp -f *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.desktop rpmsrate $(ROOTDEST)/Mandrake/base
 
