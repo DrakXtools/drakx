@@ -352,13 +352,13 @@ sub create_box_with_title {
     }
 }
 
-# drakfloppy / logdrake
+# drakfloppy / drakfont
 sub create_dialog {
-    my ($label, $o_c) = @_;
+    my ($title, $label, $o_c) = @_;
     my $ret = 0;
     my $dialog = Gtk2::Dialog->new;
     $dialog->signal_connect(delete_event => sub { Gtk2->main_quit });
-#    $dialog->set_title(N("logdrake"));
+    $dialog->set_title($title);
     $dialog->set_border_width(10);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
     $dialog->vbox->pack_start(Gtk2::Label->new($label), 1, 1, 0);

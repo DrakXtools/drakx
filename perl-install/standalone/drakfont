@@ -605,7 +605,7 @@ sub text_view {
 }
 
 sub help() {
-    ugtk2::create_dialog(N("
+    ugtk2::create_dialog(N("Help"), N("
  Copyright (C) 2001-2002 by MandrakeSoft 
      DUPONT Sebastien (original version)
      CHAUMETTE Damien <dchaumette\@mandrakesoft.com>
@@ -723,7 +723,7 @@ sub file_ok_sel {
     my ($_widget, $file_selection) = @_;
     my $file_name = $file_selection->get_filename();
     if ($file_name =~ /$select_font_msg/) {
-        create_dialog(N("You've not selected any font"));
+        create_dialog(N("Error"), N("You've not selected any font"));
     } else {
         print "-- @install\n";
         if (!member($file_name, @install)) {
