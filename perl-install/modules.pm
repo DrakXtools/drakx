@@ -422,7 +422,7 @@ sub load {
     if ($::testing) {
 	log::l("i try to install $name module (@options)");
     } elsif ($::isStandalone || $::live) {
-	return run_program::run("modprobe", $name, @options);
+	run_program::run("modprobe", $name, @options);
     } else {
 	$conf{$name}{loaded} and return;
 	
