@@ -196,6 +196,7 @@ sub bestKernelPackage {
     }
     
     log::l("bestKernelPackage: " . join(' ', map { $_->{pkg}->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
+    $preferred{'kernel-source-' . $kernels[0]{version}} = undef;
     $kernels[0]{pkg};
 }
 
