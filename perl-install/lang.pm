@@ -184,90 +184,93 @@ sub std_ { std2($_[0], 10), std2($_[0], 10) }
 sub std  { std2($_[0], $_[1] || 10), std2($_[0],  8) }
 
 #- [0]: console font name; [1]: unicode map for console font
-#- [2]: acm file for console font; [3]: X11 fontset
+#- [2]: acm file for console font;
+#- [3]: iocharset param for mount; [4]: codepage parameter for mount
+#- [5]: X11 fontset
 my %charsets = (
-  "armscii-8"  => [ "arm8",		"armscii8.uni",	"trivial.trans", 
-	std_("armscii-8") ],
+  "armscii-8"  => [ "arm8",		"armscii8.uni",	"trivial.trans",
+    undef,	undef, std_("armscii-8") ],
 #- chinese needs special console driver for text mode
   "Big5"       => [ undef,		undef,		undef,
-	"-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
+	"big5", "cp950", "-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
   "gb2312"     => [ undef,		undef,		undef,
-        "-*-*-*-*-*-*-*-*-*-*-*-*-gb2312.1980-0" ],
-  "georgian-academy" => [ "t_geors",	"geors.uni",	"trivial.trans",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
+	"gb2312", "cp936", "-*-*-*-*-*-*-*-*-*-*-*-*-gb2312.1980-0" ],
+  "georgian-academy" => [ "t_geors", "geors.uni",	"trivial.trans",
+	undef,  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
   "georgian-ps" => [ "t_geors",		"geors.uni",	"geors_to_geops.trans",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
+	undef,  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
   "iso-8859-1" => [ "lat0-sun16",	undef,		"iso15",
-	sub { std("iso8859-1", @_) } ],
+	"iso8859-1", "cp850", sub { std("iso8859-1", @_) } ],
   "iso-8859-2" => [ "lat2-sun16",	undef,		"iso02",
-	sub { std("iso8859-2", @_) } ],
+	"iso8859-2", "cp852", sub { std("iso8859-2", @_) } ],
   "iso-8859-3" => [ "iso03.f16",	undef,		"iso03",
-	std_("iso8859-3") ],
+	"iso8859-3", undef, std_("iso8859-3") ],
   "iso-8859-4" => [ "lat4u-16",		undef,		"iso04",
-	std_("iso8859-4") ],
+	"iso8859-4", "cp775", std_("iso8859-4") ],
   "iso-8859-5" => [ "iso05.f16",	"iso05",	"trivial.trans",
+  	"iso8859-5", "cp855", 
 	std2("iso8859-5", 10), std2("iso8859-5",  8) ],
 #-#- arabic needs special console driver for text mode [acon]
 #-#- (and gtk support isn't done yet)
   "iso-8859-6" => [ "iso06.f16",	"iso06",	"trivial.trans",
-	std_("iso8859-6") ],
+    "iso8859-6", "cp864", std_("iso8859-6") ],
   "iso-8859-7" => [ "iso07.f16",	"iso07",	"trivial.trans",
-	std_("iso8859-7") ],
+	"iso8859-7", "cp869", std_("iso8859-7") ],
 #-#- hebrew needs special console driver for text mode [acon]
 #-#- (and gtk support isn't done yet)
    "iso-8859-8" => [ "iso08.f16",	"iso08",	"trivial.trans",
 #	std_("iso8859-8") ],
-	std_("microsoft-cp1255") ],
+	"iso8859-8", "cp862", std_("microsoft-cp1255") ],
   "iso-8859-9" => [ "iso09.f16",	"iso09",	"trivial.trans",
-	sub { std("iso8859-9", @_) } ],
+	"iso8859-9", "cp857", sub { std("iso8859-9", @_) } ],
   "iso-8859-13" => [ "tlat7",		"iso01",	"trivial.trans",
-	std_("iso8859-13") ],
+	"iso8859-13", "cp775", std_("iso8859-13") ],
   "iso-8859-14" => [ "tlat8",		"iso01",	"trivial.trans",
-	std_("iso8859-14") ],
+	"iso8859-14", "cp850", std_("iso8859-14") ],
   "iso-8859-15" => [ "lat0-sun16",	undef,		"iso15",
-	std("iso8859-15") ],
+	"iso8859-15", "cp850", std("iso8859-15") ],
   "iso-8859-9e" => [ "tiso09e",		"iso09",	"trivial.trans",
-	std2("iso8859-9e",10) ],
+	"iso8859-9", "cp857", std2("iso8859-9e",10) ],
 #- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ undef,		undef,		"trivial.trans",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
+	"euc-jp", "cp932", "-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
   "koi8-r"     => [ "UniCyr_8x16",	undef,		"koi8-r",
-	std("koi8-r") ],
+	"koi8-r", "cp866", std("koi8-r") ],
   "koi8-u"     => [ "UniCyr_8x16",	undef,		"koi8-u",
-	std("koi8-u") ],
+	"koi8-u", "cp866", std("koi8-u") ],
   "koi8-k"     => [ "koi8-k",		"iso01",	"trivial.trans",
-	std("koi8-c") ],
+	undef, undef, std("koi8-c") ],
   "tatar-cyr"  => [ "tatar-cyr",	undef,		"cp1251",
-	std("tatar-cyr") ],
+	undef, undef, std("tatar-cyr") ],
   "cp1251"     => [ "UniCyr_8x16",	undef,		"cp1251",
-	sub { std("microsoft-cp1251", @_) } ],
+	"cp1251", "cp866", sub { std("microsoft-cp1251", @_) } ],
 #- Yiddish needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
-	std_("microsoft-cp1255") ],
+	"cp1255", "cp862", std_("microsoft-cp1255") ],
 #- Urdu needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "cp1256"     => [ undef,              undef,          "trivial.trans",
-	std_("microsoft-cp1255") ],
+	undef, "cp864", std_("microsoft-cp1255") ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ undef,		undef,		undef,
-	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
+	"euc-kr", "cp949", "-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
 #- I have no console font for Thai...
   "tis620"     => [ undef,		undef,		"trivial.trans",
-	std2("tis620.2533-1",12) ],
+	"tis-620", "cp874", std2("tis620.2533-1",12) ],
   "tcvn"       => [ "tcvn8x16",		"tcvn",		"trivial.trans",
-	std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
+	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
   "viscii"     => [ "viscii10-8x16",	"viscii.uni",	"viscii1.0_to_viscii1.1.trans",
 #-	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
-	std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
+	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
 #- Farsi (iranian) needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "isiri-3342" => [ undef,		undef,		"trivial.trans",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
+	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
   "tscii-0" => [ "tamil",		undef,		"trivial.trans",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
+	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
   "unicode" => [ undef,			undef,		"trivial.trans",
-	"-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
+	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );
 
 #-######################################################################################
@@ -497,7 +500,7 @@ sub get_x_fontset {
 
     my $l = $languages{$lang}  or return;
     my $c = $charsets{$l->[1]} or return;
-    my ($big, $small) = @$c[3..4];
+    my ($big, $small) = @$c[5..6];
     ($big, $small) = $big->($size) if ref $big;
     ($big, $small);
 }
