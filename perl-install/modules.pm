@@ -314,6 +314,7 @@ sub get_pcmcia_devices($$) {
 
 	#- run cardmgr in foreground while it is configuring the card.
 	run_program::run("cardmgr", "-f", "-m" ,"/modules");
+	sleep(3);
     }
 
     foreach (cat_("/var/run/stab")) {
