@@ -344,11 +344,12 @@ int module_already_present(const char * name)
 {
 	FILE * f;
 	int answ = 0;
+        const char * real_name = get_name_kernel_26_transition(name);
 	if ((f = fopen("/proc/modules", "rb"))) {
                 while (1) {
                         char buf[500];
                         if (!fgets(buf, sizeof(buf), f)) break;
-                        if (!strncmp(name, buf, strlen(name)) && buf[strlen(name)] == ' ')
+                        if (!strncmp(real_name, buf, strlen(real_name)) && buf[strlen(real_name)] == ' ')
                                 answ = 1;
                 }
                 fclose(f);
