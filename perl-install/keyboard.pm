@@ -84,6 +84,7 @@ my %lang2keyboard =
   'ru_RU.KOI8-R' => 'ru',
   'sk' => 'sk_qwerty',
   'sl' => 'si',
+  'sp' => 'sr',
   'sr' => 'yu',
   'sv' => 'se',
   'sv@ny' => 'se',
@@ -183,7 +184,7 @@ arch() eq "ppc" ? (
  "us" => [ __("US keyboard"),    "us",           "us" ],
  "us_intl" => [ __("US keyboard (international)"), "us-latin1", "us_intl" ],
  "vn" => [ __("Vietnamese \"numeric row\" QWERTY"),"vn-tcvn", "vn" ], 
- "yu" => [ __("Yugoslavian (latin layout)"), "sr", "yu" ],
+ "yu" => [ __("Yugoslavian (latin/cyrillic)"), "sr", "sr" ],
 )),
 );
 
