@@ -304,6 +304,21 @@ sub create_box_with_title {
 	return $box;
     }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
+    if (@_ <= 2 && ($nbline > 4 || ($nbline > 1 && ref($::o) && member($::o->{locale}{lang}, qw(ja))))) {
+	$o->{icon} && !$::isWizard and 
+	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
+	my $wanted = $o->{box_size};
+	$o->{box_size} = min(200, $o->{box_size});
+	my $has_scroll = $o->{box_size} < $wanted;
+
+	my $wtext = Gtk2::TextView->new;
+	$wtext->set_left_margin(3);
+	$wtext->can_focus($has_scroll);
+	chomp(my $text = join("\n", @_));
+	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
+	$scroll->set_size_request(400, $o->{box_size});
+	gtkpack($box, $scroll);
+    } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
 	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
@@ -337,6 +352,7 @@ sub create_box_with_title {
 		      if_($a, Gtk2::HSeparator->new)
 		     )
 	}
+    }
 }
 
 sub _create_dialog {
