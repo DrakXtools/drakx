@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 9.2
-Release: 16mdk
+Version: 9.3
+Release: 1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,80 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Nov  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-1mdk
+- overall misc cleanups
+- diskdrake: check both nfs servers version 2 and version 3, and
+  remove duplicates (bug #6055) (pixel)
+- drakconnect:
+  o fix going back in some places (isdn, ...)
+  o fix #6159: fix detection when a local name server is faking the
+    connection because of its cache by checking at least a packet is
+    ack-ed
+  o translate a few strings (part of #5670)
+  o handle more than 4 ethernet cards
+- drakconnect, drakfirewall, drakgw: show up a combo box with detected
+  network interfaces (but still let the user manually type it sg like
+  ppp0 if needed) instead of letting the user guessing the network
+  interface
+- drakfont: support getting fonts from samba (Salane KIng)
+- harddrake:
+  o show isdn & adsl adapters too (adsl adapters were previously
+    classed as modems)
+  o use drakconnect to configure modems
+- drakfirewall: translate services names
+- "mail alert" wizard from logdrake:
+  o save options into /etc/sysconfig/mail_alert instead of hardcoding
+    them in the cron task and restore them when configuring it again
+  o ensure services are always listed in the same order
+  o send the mail only if there's really sg to warn about (aka do not
+    sent empty mails)
+  o generate perl_checker compliant cron tasks
+- translations: updates, breakages
+
+* Tue Nov  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-19mdk
+- drakboot: disable lun detections for ide burners
+- drakconnect:
+  o fix empty fields in expert mode
+  o fix anthill bug #50: ensure /etc/ppp/pap-secrets is not world
+    readable since it contains password/user mapping for dialup
+- net_monitor: handle multiple network interfaces
+
+* Mon Oct 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-18mdk
+- drakconnect:
+  o do not blacklist anymore bcm4400 for network hotplugging
+  o support ISDN usb adapters
+- drakperm:
+  o force user|group|other rights order in edit dialog
+  o one was able to alter system rules in memory wheareas this is not
+    supported since they're enforced by msec.
+    disable "ok" button for system rules to prevent confusion.
+- harddrake service: workaround anthill bug #18 (do not overwrite sound
+  aliases when no hardware change occured)
+- misc amd64 fixes (gwenole)
+- net_monitor:
+  o fix connection status detection
+  o fix profile managment switch
+
+* Thu Oct 16 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-17mdk
+- drakbackup: all users overrides individual selection in wizard
+  (#5916) (stew)
+- drakconnect:
+   o fix #425, #1881: wireless adapters settings were lost when
+     altering network configuration when not from wizard mode
+   o when steping back in wizard, do not overwrite first card
+	parameters with last one's (#3276)
+   o fix expert mode (lost checkboxes states when "expert mode" option
+     is checked)
+   o blacklist bcm4400 for network hotplugging
+- drakfont:
+  o fix ttf conversion (#5088)
+  o log more explanations
+- draksec: fix unsaved security administrator setting (#6103)
+- misc chinese fixes (arnaud, pablo)
+- printerdrake: fix lpd call (pablo)
+- translations updates (pablo)
+- misc amd64 fixes (gwenole)
+
 * Fri Sep 19 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-16mdk
 - drakconnect: fix #5825 (hostname set as ARRAY(0x...))
 
