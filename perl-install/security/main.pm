@@ -157,8 +157,7 @@ sub draksec_main {
 							   [ gtkshow(new Gtk::Label(_($i))), $security_checks_value{$i} ];
 							   # , gtksignal_connect(new Gtk::Button(_("Help")), 'clicked' => sub { show_msec_help($i) } ) ]
 							   }
-						} ($msec->get_default_checks)),
-											  new Gtk::Label(_("Periodic Checks 2"))))),
+						} ($msec->get_default_checks))))),
 					   new Gtk::Label(_("Periodic Checks")));
 
 
