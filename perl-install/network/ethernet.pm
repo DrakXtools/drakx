@@ -48,11 +48,9 @@ Default is dhcpcd"),
     go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
     write_cnx_script($netc, "cable",
 qq(
-#!/bin/bash
 /sbin/ifup $netc->{NET_DEVICE}
 ),
 qq(
-#!/bin/bash
 /sbin/ifdown $netc->{NET_DEVICE}
 ));
 }
@@ -76,11 +74,9 @@ sub configure_lan {
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
         write_cnx_script($netc, "local network",
 qq(
-#!/bin/bash
 /etc/rc.d/init.d/network restart
 ),
 qq(
-#!/bin/bash
 /etc/rc.d/init.d/network stop
 /sbin/ifup lo
 ));

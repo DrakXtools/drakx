@@ -10,8 +10,11 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
-    my($netc, $type, $up, $down) = @_;
-    $type or output ("$prefix$_", $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_}) foreach ($connect_file, $disconnect_file);
+    my ($netc, $type, $up, $down) = @_;
+    $type or output ("$prefix$_",
+'#!/bin/bash
+' . if_(!$netc->{at_boot}, 'if [ "x$1" == "x--boot_time" ]; then exit; fi
+') . $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{$_}) foreach ($connect_file, $disconnect_file);
     foreach ([$connect_file, $up], [$disconnect_file, $down]) {
 	$netc->{internet_cnx}{$type}{$_->[0]}=$_->[1];
 	chmod 0755, "$prefix" . $_->[0];
@@ -78,6 +81,7 @@ sub ask_info2 {
 		   if__($cnx->{phone_out}, { label => _("Provider phone number"), val => \$cnx->{phone_out} }),
 		   if__($netc->{dnsServer2}, { label => _("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
 		   if__($netc->{dnsServer3}, { label => _("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
+		   if__($netc->{vcivpi}, { label => _("Choose your country"), val => \$netc->{vcivpi}, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK'] }),
 		   if__($cnx->{dialing_mode}, { label => _("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
 		   if__($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
 		   if__($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
@@ -85,6 +89,11 @@ sub ask_info2 {
 		   if__($cnx->{passwd}, { label => _("Account Password"),  val => \$cnx->{passwd} }),
 		  ]
 		 ) or return;
+    if ($netc->{vcivpi}) {
+	foreach (['Netherlands', 8.48], ['France', 8.35], ['Belgium', 8.35], ['Italy', 8.35], ['UK', 0.38]) {
+	    $netc->{vcivpi} eq $_->[0] and $netc->{vcivpi} = $_->[1] ;
+	}
+    }
     1;
 }
 
@@ -102,3 +111,52 @@ sub type2interface {
 sub connected { gethostbyname("www.mandrakesoft.com") ? 1 : 0 }
 
 sub disconnected { }
+
+
+sub write_initscript {
+    output ("$prefix/etc/rc.d/init.d/internet",
+	    qq{
+#!/bin/bash
+#
+# internet       Bring up/down internet connection
+#
+# chkconfig: 2345 11 89
+# description: Activates/Deactivates the internet interfaces
+#
+# dam's damien@mandrakesoft.com
+
+	case "$1" in
+		start)
+		echo -n "Checking internet connections to start at boot: "
+		$connect_file --boot_time
+		touch /var/lock/subsys/internet
+		echo -n internet
+		echo
+		;;
+	stop)
+		echo -n "Stopping internet connection if needed: "
+		$disconnect_file
+		echo -n internet
+		echo
+		rm -f /var/lock/subsys/internet
+		;;
+	restart)
+		$0 stop
+		echo -n "Waiting 10 sec before restarting the internet connection."
+		sleep 10
+		$0 start
+		;;
+	status)
+		;;
+	*)
+	echo "Usage: internet {start|stop|status|restart}"
+	exit 1
+esac
+exit 0
+ });
+    chmod 0755, "$prefix/etc/rc.d/init.d/internet";
+    $::isStandalone ? system("/sbin/chkconfig --add internet") : do {
+	symlinkf ("../init.d/internet", "$prefix/etc/rc.d/rc$_") foreach
+	  '0.d/K11internet', '1.d/K11internet', '2.d/K11internet', '3.d/S89internet', '5.d/S89internet', '6.d/K11internet';
+    };
+}

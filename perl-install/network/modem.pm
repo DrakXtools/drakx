@@ -20,11 +20,9 @@ sub configure{
   modem_step_1:
     pppConfig($netcnx->{$netcnx->{type}}, $mouse, $netc) or return;
     write_cnx_script($netc, "modem",
-q(#!/bin/bash
-ifup ppp0
+q(ifup ppp0
 ),
-q(#!/bin/bash
-ifdown ppp0
+q(ifdown ppp0
 killall pppd
 ));
     1;

@@ -133,12 +133,10 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
 "), 1)) and do {
     output "$prefix$connect_file",
       qq(
-#!/bin/bash
 ifup eth0
 );
     output "$prefix$disconnect_file",
       qq(
-#!/bin/bash
 ifdown eth0
 );
     chmod 0755, "$prefix$disconnect_file";
@@ -211,6 +209,7 @@ ifdown eth0
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
+    $netc->{at_boot} = $in->ask_yesorno(_("Network Configuration Wizard"), _("Do you want to start the connection at boot?"));
     if ($netc->{internet_cnx_choice} ) {
 	write_cnx_script($netc);
     } else {
