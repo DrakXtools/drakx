@@ -759,14 +759,17 @@ Section "XInput"
     SubSection "WacomStylus"
         Port "/dev/$o->{wacom}"
         AlwaysCore
+        Mode Absolute
     EndSubSection
     SubSection "WacomCursor"
         Port "/dev/$o->{wacom}"
         AlwaysCore
+        Mode Relative
     EndSubSection
     SubSection "WacomEraser"
         Port "/dev/$o->{wacom}"
         AlwaysCore
+        Mode Absolute
     EndSubSection
 EndSection
 
@@ -778,18 +781,21 @@ Section "InputDevice"
     Driver	"wacom"
     Option	"Type" "stylus"
     Option	"Device" "/dev/$o->{wacom}"
+    Option	"Mode" "Absolute"
 EndSection
 Section "InputDevice"
     Identifier	"eraser"
     Driver	"wacom"
     Option	"Type" "eraser"
     Option	"Device" "/dev/$o->{wacom}"
+    Option	"Mode" "Absolute"
 EndSection
 Section "InputDevice"
     Identifier	"cursor"
     Driver	"wacom"
     Option	"Type" "cursor"
     Option	"Device" "/dev/$o->{wacom}"
+    Option	"Mode" "Relative"
 EndSection
 ) if $o->{wacom};
 
