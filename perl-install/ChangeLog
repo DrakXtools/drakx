@@ -14,6 +14,48 @@
 
 2001/04/13  François Pons  <fpons@mandrakesoft.com>
 
+	* rescue/tree/etc/oem: avoid locking cdrom for oem (compssUsers file still
+	opened).
+
+	* install_steps_gtk.pm: avoid illegal modulus zero if no advertizing is
+	available.
+	fixed very old typo not encountered before;
+
+2001/04/13  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (main): reverse message
+
+	* install_steps_gtk.pm (installPackages): hide Details button sooner
+	(installPackages): do not show button "Details" when no advertising
+
+	* Xconfigurator_consts.pm: do not set XkbVariant "winkeys" for
+	ru(winkeys), it is redondant
+
+	* interactive_gtk.pm (ask_from_entries_refW): set_default_size width 250
+
+	* any.pm (ask_users): do not have an empty icon. better not ask for icon
+	if no icon
+
+2001/04/13  warly
+
+	* share/compssUsers: add ssh server in Network Computer Server
+
+2001/04/13  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: net_cnx_up/down xritten in neuneu
+
+	* Xconfigurator.pm: corrected
+	updated
+	updated message
+
+	* standalone/draknet: message corrected
+
+2001/04/13  fabman
+
+	* share/po/es.po: synchro with EN
+
+2001/04/13  François Pons  <fpons@mandrakesoft.com>
+
 	* install_steps_gtk.pm: avoid illegal modulus zero if no advertizing is
 	available.
 	fixed very old typo not encountered before;
