@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 
+-x "../mar/mar" or die "\t*FAILED* Sorry, need ../mar/mar binary\n";
+
 require '/usr/bin/merge2pcitable.pl';
-
 my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
-
 
 print '
 #define PCI_REVISION_ID         0x08    /* Revision ID */
@@ -17,49 +17,46 @@ struct pci_module_map {
 
 ';
 
-my %t = (scsi => 'scsi', eth => 'net');
-
-my @modulz = sort grep { -d $_ } glob("../../all.modules/*");
-my $selected_mod = pop @modulz;
-my ($kern) = $selected_mod =~ /.*\/([^\/]+)/;
-
-if (-x "../mar/mar" && -f "../../all.modules/$kern/network_modules.mar" && -f "../../all.modules/$kern/hd_modules.mar") {
-    $modulez{'eth'} = [ `../mar/mar -l ../../all.modules/$kern/network_modules.mar` ];
-    $modulez{'scsi'} = [ `../mar/mar -l ../../all.modules/$kern/hd_modules.mar` ];
-    $check_marfiles = 1;
-}
-
+my %t = ( network => [ 'network' ],
+	  medias => [ 'hd', 'cdrom' ]
+	);
+my %sanity_check = ( network => [ '3c59x', 'eepro100', 'e100', 'tulip', 'via-rhine', 'ne2k-pci', '8139too', 'tlan' ],
+		     medias => [ 'aic7xxx', 'advansys', 'ncr53c8xx', 'sym53c8xx', 'initio' ],
+		   );
 
 foreach $type (keys %t) {
-    print "#ifndef DISABLE_NETWORK\n" if ($type eq 'eth');
-    print "#ifndef DISABLE_MEDIAS\n" if ($type eq 'scsi');
-
-    print "
-struct pci_module_map ${type}_pci_ids[] = {
-";
-    my %l;
-    foreach (glob("../../all.kernels/$kern/lib/modules/*/$t{$type}/*.o"), glob("../../all.kernels/$kern/lib/modules/*/kernel/drivers/$t{$type}/{*/,}*.o")) {
-	m|([^/]*)\.o$|;
-	$l{$1} = 1;
-    }
-    my %absent;
-    while (my ($k, $v) = each %$drivers) {
-	$l{$v->[0]} or next;
-	$k =~ /^(....)(....)/;
-	printf qq|\t{0x%s  , 0x%s  , ( "%s" ), ( "%s" )} ,\n|,
-	   $1, $2, $v->[1], $v->[0];
-	if (defined($check_marfiles)) {
-	    ($absent{$v->[0]} = 1) if (!grep(/^\t$v->[0]\.o\s/, @{$modulez{$type}}));
+    print STDERR $type;
+    my @modulez;
+    foreach $floppy (@{$t{$type}}) {
+	foreach $marfile (glob("../../all.modules/*/${floppy}_modules.mar")) {
+	    -f $marfile or die "\t*FAILED* Sorry, need $marfile mar file\n";
+	    my @modz = `../mar/mar -l $marfile`;
+	    if ($marfile !~ /2\.2\.14/) {
+		foreach $mandatory (@{$sanity_check{$type}}) {
+		    grep(/\t$mandatory\.o/, @modz) or die "\t*FAILED* Sanity check should prove that $mandatory.o be part of $marfile\n"
+		}
+	    }
+	    push @modulez, @modz;
+	    print STDERR ".";
 	}
     }
 
-    if (%absent) { print STDERR "\tmissing for $type: "; foreach (keys %absent) { print STDERR "$_ " } print STDERR "\n"; };
-
-print "
-};
-int ${type}_num_ids=sizeof(${type}_pci_ids)/sizeof(struct pci_module_map);
+    print "#ifndef DISABLE_".uc($type)."
+struct pci_module_map ${type}_pci_ids[] = {
 ";
 
-    print "#endif\n";
+    while (my ($k, $v) = each %$drivers) {
+	grep(/^\t$v->[0]\.o/, @modulez) or next;
+	$k =~ /^(....)(....)/;
+	printf qq|\t{ 0x%s, 0x%s, "%s", "%s" },\n|,
+	  $1, $2, $v->[1], $v->[0];
+    }
 
+    print "};
+int ${type}_num_ids = sizeof(${type}_pci_ids) / sizeof(struct pci_module_map);
+#endif
+
+";
+
+    print STDERR "\n";
 }
