@@ -177,7 +177,7 @@ sub add_append {
 
     foreach ({ append => $b->{perImageAppend} }, @{$b->{entries}}) {
 	$_->{append} =~ s/\b$key=\S*\s*//;
-	$_->{append} =~ s/\s*$/ $key=$val)/ if $val;
+	$_->{append} =~ s/\s*$/ $key=$val/ if $val;
     }
 }
 
