@@ -1,3 +1,316 @@
+2004/08/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: updated fonts (added devanagari and tamil)
+
+2004/08/10  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: more logs
+
+	* network/adsl.pm: mounting device "none" is cleaner
+
+	* share/rpmsrate: don't install devfsd by default, use udev instead
+
+	* modules/modprobe_conf.pm, modules/modules_conf.pm: perl_checker
+	compliance
+	internally keep module names according to what we configure (and our
+	kernel, 2.4 or 2.6)
+
+	* modules.pm, modules/any_conf.pm: internally keep module names according
+	to what we configure (and our kernel, 2.4 or 2.6)
+
+	* Xconfig/various.pm, Xconfig/card.pm: s/XFree/Xorg/
+
+2004/08/10  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: install_urpmi(): set up the right with_hdlist for
+	urpmi.cfg
+	Back to first medium after having added a supplementary one.
+	Set prefix for http supplementary media, since $URLPREFIX is not
+	defined.
+
+	* crypto.pm: Adapt to the new mirror structure: RPMs are no longer in a
+	RPMS subdirectory
+
+2004/08/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: install udev by default
+
+2004/08/09  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/08/09  fwang
+
+	* share/advertising/dis-11.pl, share/advertising/pwp-10.pl,
+	share/advertising/dwd-08.pl, share/advertising/ppp-11.pl:
+	s/MandrakeExpert/Mandrakeexpert
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/08/09  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 556
+	The Mandrakelinux
+
+2004/08/09  jjorge
+
+	* share/po/pt.po: saraiva corrected
+	saraiva
+
+2004/08/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: in netconnect::(start|stop)_internet, use
+	(connect|disconnect)_backend
+
+	* install_any.pm: use new ISO images volume name (#10543)
+	fix regexp (do not strip paths ending in .*iso)
+
+	* mdk-stage1/directory.c: typo fix (from Olivier Borowski)
+
+2004/08/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+	updated pot file
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ltg.po, share/po/nb.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* share/fonts.tar.bz2: replaced arabic and bengali fonts
+
+	* share/po/ar.po: updated Arabic file
+	updated pot file
+
+	* share/po/bn.po: updated Bengali file
+	updated pot file
+
+2004/08/09  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/http.pm: use $F instead of *F
+	prototype perl_checker compliance
+
+	* network/network.pm: perl_checker prototype compliance
+	perl_checker compliance + cleanup
+
+	* ugtk2.pm, standalone/drakxtv, standalone/localedrake: we never pass a
+	prefix to lang::read() which is always use in standalone,
+	so use $::prefix and don't pass a prefix anymore
+
+	* any.pm: 
+	  - move the "Input method:" at the end (titi did put it in the middle
+	for OptionMenu which is crap)
+	  - need updating the "changed" callback since there is a new entry
+
+	* share/rpmsrate: remove awesfx from "SYSTEM 2" otherwise it gives a fatal
+	error
+
+	* diskdrake/interactive.pm: help perl_checker know the $all_hds *is* used
+
+	* install_steps_auto_install.pm, install2.pm: correctly call errorInStep()
+
+	* fsedit.pm: flags is optional
+
+	* lang.pm: prototype compliance with perl_checker
+	we never pass a prefix to lang::read() which is always use in
+	standalone,
+	so use $::prefix and don't pass a prefix anymore
+
+	* Xconfig/various.pm: 
+	  - adapt prototype of runlevel() to its use
+	  - bootloader::read() needs fstab
+
+	* install_steps.pm: correctly call errorInStep()
+	fix call to bootloader::read()
+
+	* install_any.pm: fix typo
+	  - fix unlockCdrom()
+	  - ejectCdrom() prototype compliance with perl_checker
+
+	* fs.pm: allow 192.168.1.1:/export
+
+2004/08/09  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Select supplementary medium
+	Begin the support for installations over multiple media.
+
+	* share/po/pt.po: Remove conflict marker and duplicate entries
+
+2004/08/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakperm: prefer obj->new rather than new obj for gtk+
+	widgets
+	  - perl_checker cleanups
+	  - reuse cat_() where opencoded
+
+	* share/po/fr.po: update
+	update
+
+	* standalone/logdrake, standalone/drakfloppy,
+	Xconfig/resolution_and_depth.pm, standalone/drakconnect,
+	standalone/drakbug, standalone/drakTermServ, standalone/net_monitor:
+	prefer obj->new rather than new obj for gtk+ widgets
+
+	* ugtk2.pm (gtkappend_page) title is optonnal and perl_checker is loudly
+	complaining outdoor...
+
+	* standalone/drakautoinst: prefer obj->new rather than new obj for gtk+
+	widgets
+	perl_checker cleanup
+
+	* standalone/net_applet: developers should always run their stuff with the
+	strict pragma
+	prefer obj->new rather than new obj for gtk+ widgets
+	(checkNetwork) do not die when gateway canot be guessed (Joe Bolin
+	<sopwithcamel@charter.net>)
+	else the applet dies never to be heard from again until the next login
+	b/c with DHCP connections, the gateway information is lost when the
+	network is manually brought down.
+	Indeed gateway is not needed for direct connection through crossover
+	cable.
+	(setState) fix status toolip
+	allow multiple instances, but only one per user (Joe Bolin
+	<sopwithcamel@charter.net>)
+
+	* standalone/draksec (basic_seclevel_explanation) handle any tags ala
+	label
+	add hint about ala LaTeX strings for translators
+	prefer obj->new rather than new obj for gtk+ widgets
+
+	* standalone/drakbackup: prefer obj->new rather than new obj for gtk+
+	widgets
+	(find_files_to_restore) cleanups
+
+	* harddrake/sound.pm, install_messages.pm, standalone/drakfont,
+	standalone/draksound, install_interactive.pm, install_any.pm,
+	standalone/drakxtv: add hint about ala LaTeX strings for translators
+
+	* share/po/br.po: update
+
+	* drakxtools.spec: 10.1-0.7mdk
+
+2004/08/09  yrahal
+
+	* share/po/ar.po: Arabic (from Arabeyes.org) translation
+	Arabic translation
+
+2004/08/08  fwang
+
+	* network/netconnect.pm: s/iwpconfig/iwconfig
+
+	* share/advertising/dwd-04.pl, share/advertising/ppp-09.pl,
+	share/advertising/dis-08.pl, share/advertising/dis-10.pl,
+	share/advertising/ppp-05.pl, share/advertising/ppp-08.pl,
+	share/advertising/ppp-10.pl, share/advertising/dwd-06.pl,
+	share/advertising/dis-09.pl, share/advertising/ppp-04.pl,
+	share/advertising/pwp-04.pl, share/advertising/pwp-08.pl,
+	share/advertising/dwd-07.pl, share/advertising/pwp-07.pl,
+	share/advertising/pwp-09.pl: Some string fixes
+
+	* standalone/logdrake: typo fix
+	s/Mandrake/Mandrakelinux
+
+	* authentication.pm, share/po/zh_CN.po: typo fix
+
+	* lang.pm: Revised comments to make non-utf-8 editor happier
+	changed default font for gb2312
+
+	* standalone/drakconnect, standalone/drakbug, standalone/harddrake2,
+	standalone.pm, standalone/net_monitor: s/Mandrake/Mandrakelinux
+
+2004/08/08  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 401
+	Volume label:
+
+2004/08/08  Pixel  <pixel at mandrakesoft.com>
+
+	* share/aliases: remove raidstop
+
+	* diskdrake/hd_gtk.pm, share/list.i386, diskdrake/interactive.pm,
+	fs/get.pm, install2.pm, fsedit.pm, detect_devices.pm, raid.pm,
+	bootloader.pm, install_any.pm: 
+	  - switch to mdadm (instead of raidtools)
+	  - create mdadm.conf instead of raidtab
+	  - internal {raids} is no more indexed by X for mdX, and so don't have
+	holes anymore
+	  - internal {chunk-size} is now a number in KiB
+	  - internal {raid} is the raid device name, not the number
+	  - various cleanup for raid detection
+
+	* install_steps.pm: don't set toFormat if we don't have a {fs_type} (eg:
+	pt_type 0xfd, ie raw raid)
+
+	* share/rpmsrate: many authentication packages where missing (bugzilla
+	#10644)
+	many authentication packages where missing (bugzilla #10644)
+
+2004/08/08  tsdgeos
+
+	* share/po/ca.po: small updates to catalan translation
+
+2004/08/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakperm (row_setting_dialog) add hints for translators
+	(row_setting_dialog) enable translators to print a fully translated
+	strings
+	(though we should probably just pregenerate and fill pos with all the
+	strings
+	b/c of inflections and mutations that occur in some languages)
+	(row_setting_dialog) do not set hash as string on labels else perl will
+	stringify this very hash thus making draksec crashes with strict pragma
+	simplify code through Gtk2::ComboBox->new_with_strings()
+
+	* standalone/drakTermServ, standalone/drakbackup, standalone/draksec,
+	standalone/drakfloppy: simplify code through
+	Gtk2::ComboBox->new_with_strings()
+
+	* drakxtools.spec: fix 10.1-0.6mdk's changelog
+
+	* standalone/drakboot: sort theme list
+	simplify code through Gtk2::ComboBox->new_with_strings()
+	sort WMs list
+	use proper widget (aka GtkTable)
+	sort user list
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: merge in typo fixes
+
+	* ugtk2.pm (Gtk2::ComboBox->new_with_strings) make it working
+
+2004/08/08  yrahal
+
+	* share/po/ar.po: Arabic translation
+
 2004/08/08  hilbert
 
 	* share/po/zh_TW.po: DrakX-zh_TW: 205
@@ -34356,7 +34669,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.942 2004/08/05 06:25:07 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.943 2004/08/08 07:11:16 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
