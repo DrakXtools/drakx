@@ -195,13 +195,14 @@ $window1->{window}->add(
                                                                                             [ new Gtk2::Label(N("Type:")), $type_label ],
                                                                                             [ $int_label, $interface_name ],
                                                                                             [ Gtk2::Label->new(N("Status:")), 
-                                                                                              $int_state = Gtk2::Label->new(N("Testing your connection...")),
-                                                                                              $int_connect, ] # $button_internet ]
+                                                                                              $int_state = Gtk2::Label->new(N("Testing your connection...")) ]
                                                                                             ),
                                                                            5),
                                                     0, $warning_label1,
-                                                    0, gtkpack_(new Gtk2::HBox(0, 0),
-                                                                0, $button_internet),
+                                                    0, gtkpack(Gtk2::HButtonBox->new,
+                                                               $button_internet,
+                                                               $int_connect,
+                                                              ),
                                                     )
                                            ),
                                  1, gtkadd(Gtk2::Frame->new(N("LAN configuration")),
