@@ -32,14 +32,15 @@ enum return_type ftp_prepare(void);
 enum return_type http_prepare(void);
 
 
-enum boot_proto_type { BOOTPROTO_STATIC, BOOTPROTO_DHCP };
+enum boot_proto_type { BOOTPROTO_STATIC, BOOTPROTO_DHCP, BOOTPROTO_ADSL_PPPOE };
 
 /* all of these in_addr things are in network byte order! */
 struct interface_info {
-    char device[10];
-    int is_ptp, is_up;
-    struct in_addr ip, netmask, broadcast, network;
-    enum boot_proto_type boot_proto;
+	char device[10];
+	int is_ptp, is_up;
+	struct in_addr ip, netmask, broadcast, network;
+	enum boot_proto_type boot_proto;
+	char *user, *pass; /* for ADSL connection */
 };
 
 

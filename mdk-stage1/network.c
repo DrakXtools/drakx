@@ -169,7 +169,7 @@ int configure_net_device(struct interface_info * intf)
 
 	intf->is_up = 1;
 
-	if (intf->boot_proto == BOOTPROTO_STATIC && !streq(intf->device, "lo")) {
+	if (intf->boot_proto != BOOTPROTO_DHCP && !streq(intf->device, "lo")) {
 		/* I need to sleep a bit in order for kernel to finish
 		   init of the network device; if not, first sendto() for
 		   gethostbyaddr will get an EINVAL. */
@@ -303,12 +303,16 @@ static int save_netinfo(struct interface_info * intf) {
 
 	if (intf->boot_proto == BOOTPROTO_DHCP)
 		fprintf(f, "BOOTPROTO=dhcp\n");
-	else {
+	else if (intf->boot_proto == BOOTPROTO_STATIC) {
 		fprintf(f, "BOOTPROTO=static\n");
 		fprintf(f, "IPADDR=%s\n", inet_ntoa(intf->ip));
 		fprintf(f, "NETMASK=%s\n", inet_ntoa(intf->netmask));
 		fprintf(f, "NETWORK=%s\n", inet_ntoa(intf->network));
 		fprintf(f, "BROADCAST=%s\n", inet_ntoa(intf->broadcast));
+	} else if (intf->boot_proto == BOOTPROTO_ADSL_PPPOE) {
+		fprintf(f, "BOOTPROTO=adsl_pppoe\n");
+		fprintf(f, "USER=%s\n", intf->user);
+		fprintf(f, "PASS=%s\n", intf->pass);
 	}
 
 	fclose(f);
@@ -437,8 +441,6 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 			return RETURN_ERROR;
 
 	} else if (streq(choice, "ADSL")) {
-		intf->boot_proto = BOOTPROTO_STATIC;
-
 		results = perform_adsl(intf);
 
 		if (results == RETURN_BACK)

@@ -147,6 +147,8 @@ enum return_type perform_adsl(struct interface_info * intf)
 	if (results != RETURN_OK)
 		return results;
 
+	intf->boot_proto = BOOTPROTO_ADSL_PPPOE;
+
 	wait_message("Waiting for ADSL connection to show up...");
 	my_insmod("ppp_generic", ANY_DRIVER_TYPE, NULL);
 	my_insmod("ppp_async", ANY_DRIVER_TYPE, NULL);
@@ -158,6 +160,9 @@ enum return_type perform_adsl(struct interface_info * intf)
 		wait_message("Retrying the ADSL connection...");
 		results = adsl_connect(intf->device, answers[0], answers[1]);
 		remove_wait_message();
+	} else {
+		intf->user = strdup(answers[0]);
+		intf->pass = strdup(answers[1]);
 	}
 
 	if (results != RETURN_OK) {
