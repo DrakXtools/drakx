@@ -754,6 +754,7 @@ sub getAndSaveAutoInstallFloppy {
 	c::del_loop($dev);
 	require commands;
 	commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
+	unlink $imagefile;
     }
     1;
 }
