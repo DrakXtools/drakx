@@ -752,7 +752,8 @@ sub installUpdates {
     
     $o->hasNetwork or return;
 
-    is_empty_hash_ref($u) and $o->ask_yesorno_({ messages => formatAlaTeX(
+    if (is_empty_hash_ref($u)) {
+	$o->ask_yesorno_({ messages => formatAlaTeX(
 N("You now have the opportunity to download updated packages. These packages
 have been updated after the distribution was released. They may
 contain security or bug fixes.
@@ -761,8 +762,9 @@ To download these packages, you will need to have a working Internet
 connection.
 
 Do you want to install the updates ?")),
-						interactive_help_id => 'installUpdates',
-					       }) || return;
+			   interactive_help_id => 'installUpdates',
+					       }) or return;
+    }
 
     #- bring all interface up for installing crypto packages.
     install_interactive::upNetwork($o);

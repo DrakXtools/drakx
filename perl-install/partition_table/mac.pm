@@ -11,7 +11,7 @@ use partition_table::raw;
 use partition_table;
 use c;
 
-my %typeToDos = (
+my %_typeToDos = (
   "Apple_partition_map" => 0x401,
   "Apple_Bootstrap"	=> 0x401,
   "Apple_Driver43"	=> 0x401,
