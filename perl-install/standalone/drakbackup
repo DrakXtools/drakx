@@ -10,60 +10,47 @@
 #  from starup or on drakconf utility.
 #
 #backup name format: all the time from the /
-#                    backup_sys.tar.gz                    -> default system backup
-#		     backup_user_james.tar.gz             -> default user backup
-#		     backup_user_seb.tar.gz   
-#                    backup_other.tar.gz                  -> other directories
+#                    backup_sys_date.tar.gz                    -> default system backup
+#		     backup_user_james_date.tar.gz             -> default user backup
+#		     backup_user_seb_date.tar.gz   
+#                    backup_other_date.tar.gz                  -> other directories
 #
 #
-# seems to be good idea to have a txt file where user explain the differences
-# between all the backup
-#
-# save only the differences...
-#
-# build iso fs with rescue.
 # configuration file on /etc/drakconf/drakbackup/drakbakup.conf
-#
-# todo: use .backupignore like on CVS
-#       backend : --resore_all, --restore_sys, --restore_users
-#		  --build_cd_autoinst 	
-#		  --backup_now --backup_default_now
-#	restore user: pbs with list selection	  
-#       calcul disk space.
-#
-#  CD: only create iso image
-#
-#  WARNING: ne pas ecraser les fichiers /etc/passwd fstab 
-#           after a other install
-#
-#  REQUIRE: cron if daemon
-#           cvs if version control of /etc directory
-#           cdrecord & mkisofs
-#           
-#  cdrw: /sys/dev/cdrom/info   
-#        /scsi/host0/bus0/target4/lun0   #   
-#  tar --use-compress-prog=bzip2 xf foo.tar.bz2   
-#
-#  don't forget to build floppy boot
-#
 #
 #________________________________________________________________
 # 
+# REQUIRE:      cron if daemon
+#               cdrecord & mkisofs
+#
 # PBS persistants:
-# 
 #		selection des sources a inclure dans le backup cd. 
 #
+#
+# WARNING:      ne pas ecraser les fichiers /etc/passwd fstab 
+#               after a other install
+#
+#
 # TODO:
-#		custom deamon
+#		replace alors incremental selectionne.
+#		l.380 incremental: date -> si deja existe faire find -m ... | tar ...
+#		non incremental: date + supprime old avant le backup
+#		placer README dans $save_path -> prevenir des danger de supprimer la premier version
+#		ftp choose port to use ftp connexions
 #               ssh & rsync
+#	        calcul disk space.
+#	        backend : --resore_all, --restore_sys, --restore_users
+#			  --build_cd_autoinst 	
+#			  --backup_now --backup_default_now
 #		boot floppy disk
 #		webdav
 #		rsync
-#		cd writer detection
+#		cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
 #		write on cd
+#		custom deamon
 #		build autoboot with backup and install cd 
-#		
-#               
+#		use .backupignore like on CVS
+#		               
 # DONE TODAY:
 #________________________________________________________________
 
@@ -206,6 +193,8 @@ foreach (@ARGV) {
 $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
 
 sub read_passwd {
+    my @tmp1;
+    my @tmp2;
     @user_and_path_list = map { (split(':', $_))[0] . ":" . (split(':', $_))[5] } grep {( split(':', $_))[2] > 500} split ('\n', cat_('/etc/passwd'));  
     $DEBUG and print "user_and_path_list: ".$_."\n" foreach (@user_and_path_list);
     @user_list = ();
@@ -213,7 +202,10 @@ sub read_passwd {
     push @user_and_path_list, 'root:/root';
     push @user_list, (split(':', $_))[0] foreach (@user_and_path_list);
     push @all_user_list, (split(':', $_))[0] foreach (@user_and_path_list);
-    $DEBUG and print "home_files: ".$_."\n" foreach (@user_list);
+    @tmp1 = sort @user_list;
+    @user_list = @tmp1;
+    @tmp2 = sort @all_user_list;
+    @all_user_list = @tmp2;
 }
 
 
@@ -369,8 +361,8 @@ sub ftp_client {
     my $ftp = Net::FTP->new("$host_name"); 
     $ftp->login("$login_user","$passwd_user"); 
     $ftp->cwd("$host_path"); 
-#$ftp->get("/ce/repertoire/ce.fichier"); 
-    $ftp->send(""); 
+#   $ftp->get("/ce/repertoire/ce.fichier"); 
+    $ftp->send("$save_path/*"); 
     $ftp->quit; 
 }
 
@@ -381,28 +373,29 @@ sub build_backup_files {
     my $vartemp;
     my @list_other_;
 
+#   $where_net_ftp
+
     the_time();    
     -d  $save_path or mkdir_p($save_path);
     if ($comp_mode) { $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
     else { $tar_cmd = "tar cvz "; $tar_ext = "tar.gz"}
-    if ( $option_replace ) { 
-	$comp_mode and system("cd $save_path && rm -f *.tar.gz");  
-	$comp_mode or  system("cd $save_path && rm -f *.tar.bz2");  
-    }
     if ($where_hd) {
 	print "backup_sys @sys_files\n";
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
+	print "$save_path/backup_sys_\n";
+	$backup_sys_versions or system("rm -f $save_path/backup_sys*");
 	$backup_sys and system("$tar_cmd -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup files..."));
 	print "backup_other @list_other\n";
 	if (@list_other) {
+	    $backup_other_versions or system("rm -f $save_path/backup_other*");
 	    system("$tar_cmd -f $save_path/backup_other$the_time.$tar_ext @list_other");
 	    foreach (@list_other) {
 		push @list_other_, $_ . "\n";
 	    }
 	    output_p( $save_path . '/list_other', @list_other_);    
-	}
+ 	}
 	$interactive and progress($pbar1, 1, _("Backup User files..."));
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup Progress..."));
 	if ($backup_user) {
@@ -411,6 +404,7 @@ sub build_backup_files {
 		$path_name = return_path($_);
 		print "path of user: $path_name\n";
 		print "the time:".$the_time."\n";
+		$backup_user_versions or system("rm -f $save_path/backup_user_$vartemp*");
 		$what_no_browser or system("$tar_cmd  -f $save_path/backup_user_$vartemp$the_time.$tar_ext $path_name");
 		$what_no_browser and system("$tar_cmd --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$vartemp$the_time.$tar_ext $path_name");
 	    }
@@ -1404,7 +1398,8 @@ sub restore_step_other {
 my %check_user_to_restore;
 sub restore_step_user {
     my $retore_step_user;
-    @user_list_to_restore2 = @user_backuped;
+    @user_list_to_restore2 = sort @user_backuped;
+    @user_backuped = @user_list_to_restore2;
 
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
@@ -1517,6 +1512,7 @@ sub restore_step2 {
     elsif ($restore_other){ $next_widget = \&restore_step_other;}
     else{ $next_widget = \&restore_do;}
     $restore_path_entry->set_text($restore_path); 
+    $restore_path_entry->signal_connect( 'changed', sub { $restore_path = $restore_path_entry->get_text(); });
     $custom_help = "restore";
     $previous_widget =\&restore_box;
     $current_widget = \&restore_step2;
@@ -1607,7 +1603,6 @@ sub button_box_restore_main {
 				       ),
 	    );
 }
-
 
 sub button_box_backup_end {
     $button_box_tmp->destroy();
@@ -1751,7 +1746,6 @@ sub button_box_main {
 
 ################################################  MESSAGES  ################################################  
 
-
 sub message_norestorefile_box {
     $box2->destroy();
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
@@ -1871,7 +1865,6 @@ sub progress {
     Gtk->main_iteration while Gtk->events_pending;
 }
 
-
 sub find_backup_to_put_on_cd {
     my @list_backup_tmp;
     my @data_backuped_tmp;
@@ -1913,7 +1906,6 @@ sub find_backup_to_put_on_cd {
 	push @data_backuped , $to_put;
     }
 }
-
 
 sub build_backup_status {
     my $table;
@@ -1975,7 +1967,6 @@ sub build_backup_box_progress {
 #    build_backup_files(); 
 }
 
-
 sub aff_total_tail {
     my @toto = ();
     my $total = 0;
@@ -1993,7 +1984,8 @@ my %check_data_to_backup_cd;
 sub build_backup_cd_select_data {
     my $retore_step_user;
     find_backup_to_put_on_cd();
-    @user_list_to_build_on_cd = @data_backuped;
+    @user_list_to_build_on_cd = sort @data_backuped;
+    @data_backuped = @user_list_to_build_on_cd;
 
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
@@ -2391,16 +2383,6 @@ Drakbacup allow to restore the system (etc, var files)
     $central_widget = \$about_box;
     $up_box->show_all();
 }
-
-
-
-
-
-
-
-
-
-
 
 
 # _____________________________________________________________ OLD CODE
