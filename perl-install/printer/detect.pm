@@ -7,7 +7,7 @@ use detect_devices;
 use printer::data;
 
 sub local_detect() {
-    modules::any_conf->read->get_probeall("usb-interface") and eval { modules::load($usbprintermodule) };
+    modules::any_conf->vnew->read->get_probeall("usb-interface") and eval { modules::load($usbprintermodule) };
     eval { modules::unload(qw(lp parport_pc parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
     eval { modules::load(qw(parport_pc lp)) }; #- take care as not available on 2.4 kernel (silent error).
     whatPrinter();
