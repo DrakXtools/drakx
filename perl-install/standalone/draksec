@@ -286,7 +286,7 @@ gtkpack_($vbox,
                                 }
                                 $msec->apply_functions;
                                 log::explanations("Applying msec changes");
-                                run_program::rooted($::prefix, "/usr/sbin/msec");
+                                run_program::run("/usr/sbin/msec");
 
                                 remove_wait_msg($w);
 

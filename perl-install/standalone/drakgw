@@ -139,7 +139,7 @@ What would you like to do?"),
 		substInFile {
 		s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
 		} "/etc/shorewall/rules";
-		run_program::rooted($::prefix, 'chkconfig', '--add', 'shorewall');
+		run_program::run('chkconfig', '--add', 'shorewall');
 		run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
 	    }
             log::l("[drakgw] Enabled");
@@ -586,7 +586,7 @@ print "add rules entries\n";
 substInFile {
 	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tloc\t$squid_port\ttcp\twww\t-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
 } "/etc/shorewall/rules";
-run_program::rooted($::prefix, 'chkconfig', '--add', 'shorewall');
+run_program::run('chkconfig', '--add', 'shorewall');
 run_program::run('service', '>', '/dev/null', 'shorewall', 'restart') if $::isStandalone;
 
 #- bye-bye message
