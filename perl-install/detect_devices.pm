@@ -783,29 +783,34 @@ sub hasSMP() {
 sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
 
 sub dmidecode() {
-    my (%l, $cat);
+	my @l;
 
-    my $dmidecode_infos if 0;
-    
-    if (!$dmidecode_infos) {
 	foreach (run_program::get_stdout('dmidecode')) {
 	    if (/^\t\t(.*)/) {
-		$l{$cat} .= "$1\n";
+		$l[-1]->{string} .= "$1\n";
 	    } elsif (my ($s) = /^\t(.*)/) {
 		next if $s =~ /^DMI type /;
 		$s =~ s/ Information$//;
-		$cat = $s;
+		push @l, { name => $s };
 	    }
 	}
-	my $Chassis = $l{Chassis} =~ /^Type:\s*(\S+)/m && $1;
-	my $BIOS_Year = $l{BIOS} =~ m!^Release Date:.*?(\d{4})!m && $1 ||
-	                $l{BIOS} =~ m!^Release Date:.*?\d\d/\d\d/(\d\d)!m && "20$1";
+    @l;
+}
+
+sub computer_info() {
+	my $dmidecode_infos;
+     my @l = dmidecode();
+	my $chassis = (find { $_->{name} eq 'Chassis' } @l) || { string => '' };
+	my $Chassis = $chassis->{string} =~ /^Type:\s*(\S+)/m && $1;
+	my $BIOS = (find { $_->{name} eq 'BIOS' } @l) || { string => '' };
+	my $BIOS_Year = $BIOS->{string} =~ m!^Release Date:.*?(\d{4})!m && $1 ||
+	                $BIOS->{string} =~ m!^Release Date:.*?\d\d/\d\d/(\d\d)!m && "20$1";
 	
 	$dmidecode_infos = { 
 	    isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Sub Notebook', 'Docking Station'),
 	    if_($BIOS_Year, BIOS_Year => $BIOS_Year),
 	};
-    }
+
     $dmidecode_infos;
 }
 
