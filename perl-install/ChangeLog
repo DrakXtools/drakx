@@ -1,3 +1,72 @@
+2001/03/14  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: changed label + profile before types..
+
+2001/03/14  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed unselect management of choice, propagate unselection
+	correctly to all
+	packages requiring unselected package.
+
+	* install_any.pm: use LD_LOADER when invoking parshedlist.
+
+2001/03/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/no.po, share/po/nl.po: updated Norwegian file
+
+	* share/locales.tar.bz2, share/gconv.tar.bz2, share/list,
+	share/fonts.tar.bz2: new fonts and locale files
+
+	* share/po/ko.po: Fixed email of Korean translator
+	updated Korean file
+
+	* install_steps_interactive.pm, install_gtk.pm, lang.pm, keyboard.pm:
+	completed language list
+	completed language->keyboard guessing list
+	aesthetic changes to an English message (removed \n and let gtk+
+	do the formatting, it is nicer)
+
+	* share/po/az.po: Updated Azeri file
+
+2001/03/14  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm: fix the compssUsers interpretation
+	(readCompssUsers): change the key of compssUsers, added "label"
+	(computeGroupSize): fix bug
+	(computeGroupSize): fix logging
+
+	* share/gconv.tar.bz2: moved to share/list
+
+	* bootlook.pm: fix for perl2fcalls
+
+	* share/rpmsrate: CLIENT & SERVER is prohibited
+
+	* timezone.pm: 
+	  - add many timezones
+	  - defaults to GMT
+	  - verifier added
+
+	* install_steps_gtk.pm: fix the compssUsers interpretation
+	(choosePackagesTree): fix
+
+	* common.pm (bestMatchSentence, bestMatchSentence2): in wantarray, return
+	the number
+	of matched words/characters
+
+	* share/compssUsers: keep only one Development entry
+	CLIENT & SERVER is prohibited
+
+	* install_steps_interactive.pm (chooseGroups): disable the size display as
+	it is wrong (for the beta2)
+	(chooseGroups): add path for seperating groups, use "label" for the
+	group text
+
+	* Makefile: remove gconv
+
+2001/03/13  siegel
+
+	* share/po/de.po: Fixed typos.
+
 2001/03/13  siegel
 
 	* share/po/de.po: Fixed typos.
