@@ -474,7 +474,7 @@ sub check_mntpoint {
 
     $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
     $mntpoint =~ m|^/| or die _("Mount points must begin with a leading /");
-    has_mntpoint($mntpoint, $all_hds) and die _("There is already a partition with mount point %s\n", $mntpoint);
+    $mntpoint ne $part->{mntpoint} && has_mntpoint($mntpoint, $all_hds) and die _("There is already a partition with mount point %s\n", $mntpoint);
 
     die "raid / with no /boot" 
       if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
@@ -484,6 +484,8 @@ sub check_mntpoint {
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
     die _("You need a true filesystem (ext2, reiserfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
+    die _("You can't use an encrypted file system for mount point %s", $mntpoint)
+      if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr));
 
     local $part->{mntpoint} = $mntpoint;
     loopback::check_circular_mounts($hd, $part, $all_hds);
