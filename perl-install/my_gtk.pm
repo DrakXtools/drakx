@@ -512,18 +512,11 @@ sub gtkicons_labels_widget {
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
         my ($icon, undef) = gtkcreate_png($_->[1]);
-# 	$darea->signal_connect( size_allocate => sub {
-#				    print "SIZE_ALLOCATE\n";
-#				    undef $dbl_area;
-#  				    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
-#  				    ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
-# 				});
 	$darea->{state} = 0;
 	$darea->signal_connect(expose_event => sub {
                   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
                   if (!defined($dbl_area) || $darea->{state} != $dbl_area->{state}) {
 		      my $state = $darea->{state};
-		      print "STATE : $state\n";
                       my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, $y_round,
                                                                1, 0, $background, $x_back2, $y_back2, 1, 0, $state);
                       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
@@ -550,7 +543,6 @@ sub gtkicons_labels_widget {
 	$darea->signal_connect( leave_notify_event => sub {
 				    if ($darea->{state} == 1) {
 					$darea->{state} = 0;
-					print "plop . " .  $darea->{state} . " | " . $dbl_area->{state} . "\n";
 					$darea->draw(undef);
 				    }
 				});
