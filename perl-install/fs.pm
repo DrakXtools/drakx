@@ -375,49 +375,46 @@ sub write_fstab($;$$) {
     my ($fstab, $prefix, @to_add) = @_;
     $prefix ||= '';
 
-    #- get the list of devices and mntpoint to remove existing entries
-    #- and @to_add take precedence over $fstab to handle removable device
-    #- if they are mounted OR NOT during install.
-    my @new = grep { $_ ne 'none' } map { @$_[0,1] } @to_add;
-    my %new; @new{@new} = undef;
+    unshift @to_add, map {
+	my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
+	$options = $_->{options} || $options;
+	
+	isTrueFS($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
+	isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
+	isFat($_) and $options = $_->{options} || "user,exec,umask=0";
+	
+	isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
+	
+	my $dev = isLoopback($_) ?
+	  ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : loopback::file($_)) :
+	  ($_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}");
+	
+	local $_->{mntpoint} = do { 
+	    $passno = 0;
+	    "/initrd/loopfs";
+	} if loopback::carryRootLoopback($_);
+	
+	add_options($options, "loop") if isLoopback($_) && !isSwap($_); #- no need for loop option for swap files
+	
+	eval { devices::make("$prefix/$dev") } if $dir && !isLoopback($_);
+	mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint} && !isSwap($_);
+	
+	[ $dev, $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
+	
+    } grep { $_->{mntpoint} && type2fs($_->{type}) } @$fstab;
 
-    unshift @to_add,
-      grep { 
-	  my $b = !exists $new{$_->[0]} && !exists $new{$_->[1]};
-	  #- keep in mind the new line for fstab.
-	  @new{@$_[0,1]} = undef;
-	  $b
-      } map {
-	  my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
-	  $options = $_->{options} || $options;
+    push @to_add, map { [ split ] } cat_("$prefix/etc/fstab");
 
-	  isTrueFS($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
-	  isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
-	  isFat($_) and $options = $_->{options} || "user,exec,umask=0";
-
-	  isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
-
-	  my $dev = isLoopback($_) ?
-	    ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : loopback::file($_)) :
-	    ($_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}");
-	      
-	  local $_->{mntpoint} = do { 
-	      $passno = 0;
-	      "/initrd/loopfs";
-	  } if loopback::carryRootLoopback($_);
-
-	  add_options($options, "loop") if isLoopback($_) && !isSwap($_); #- no need for loop option for swap files
-
-	  eval { devices::make("$prefix/$dev") } if $dir && !isLoopback($_);
-	  mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint} && !isSwap($_);
-
-	  [ $dev, $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
-
-      } grep { $_->{mntpoint} && type2fs($_->{type}) } @$fstab;
-
-    push @to_add,
-      grep { !exists $new{$_->[0]} && !exists $new{$_->[1]} }
-      map { [ split ] } cat_("$prefix/etc/fstab");
+    my %new;
+    @to_add = grep { 
+	if (!$new{$_->[0]} && !$new{$_->[1]}) {
+	    #- keep in mind the new line for fstab.
+	    @new{$_->[0], $_->[1]} = (1, 1);
+	    1;
+	} else {
+	    0;
+	}
+    } @to_add;
 
     log::l("writing $prefix/etc/fstab");
     local *F;
