@@ -1,3 +1,52 @@
+2003/02/19  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: make sure network::network:: is used (just
+	in case)
+	add default configuration for network for summary.
+
+2003/02/19  gbeauchesne
+
+	* share/rpmsrate, share/compssUsers: 
+	  - Add localized help files for OpenOffice.org
+	  - Add new SPELLCHECK category for myspell spellchecking and
+	hyphenators
+
+2003/02/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/de.po: fix typo (#1821)
+
+	* share/compssUsers: provide a minimum desrciption for Scientific
+	Workstation (#1814)
+
+	* share/themes-galaxy.rc: try to choose sensible values for insensitive
+	widgets
+
+2003/02/19  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm: don't log "warning: find_index failed in ..."
+
+	* diskdrake/interactive.pm: 
+	  - allow raid on raid (raid 10)
+	  - focus mount point in Mount_point
+	  - focus type in Type
+
+	* raid.pm: mkraid wants all the md devices written in raidtab to exist,
+	even if asking to
+	create a specific md
+	cleanup
+
+	* detect_devices.pm, fsedit.pm: 
+	  - cleanup & simplify
+	  - handle raid on raid detection
+
+2003/02/19  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakxtv: 
+	  - perl_checker fixes
+	  - indent-region, untabify
+	  - comment workaround
+	workaround a drakx bug which don't always add bttv to /etc/modules
+
 2003/02/18  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* drakxtools.spec: new version
@@ -12003,7 +12052,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.786 2003/02/17 23:55:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.787 2003/02/19 13:41:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
