@@ -46,7 +46,7 @@ endif
 
 dirs:
 	@for n in . $(DIRS); do \
-		[ "$$n" = "." ] || make -C $$n ;\
+		[ "$$n" = "." ] || make -C $$n all ;\
 	done
 
 rescue: modules
