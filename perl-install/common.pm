@@ -14,12 +14,18 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
+
+#-#####################################################################################
+#- Globals
+#-#####################################################################################
 $printable_chars = "\x20-\x7E";     
 $sizeof_int      = psizeof("i");    
 $bitof_int       = $sizeof_int * 8; 
 $SECTORSIZE      = 512;             
 
-1;
+#-#####################################################################################
+#- Functions
+#-#####################################################################################
 
 sub fold_left(&@) {
     my $f = shift;
@@ -264,7 +270,24 @@ sub setVarsInSh {
     $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
 }
 
+
+sub best_match {
+    my ($str, @lis) = @_;
+    my @words = split /\W+/, $str;
+    my ($max, $res) = 0;
+    
+    foreach (@lis) {
+	my $count = 0;
+	foreach my $i (@words) {
+	    $count++ if /$i/i;
+	}
+	$max = $count, $res = $_ if $count >= $max;
+    }
+    $res;
+}
+
 sub bestMatchSentence {
+
     my $best = -1;
     my $bestSentence;
     my @s = split /\W+/, shift;
@@ -277,3 +300,25 @@ sub bestMatchSentence {
     }
     $bestSentence;
 }
+
+# count the number of character that match
+sub bestMatchSentence2 {
+
+    my $best = -1;
+    my $bestSentence;
+    my @s = split /\W+/, shift;
+    foreach (@_) {
+	my $count = 0;
+	foreach my $e (@s) { 
+	    $count+= length ($e) if /$e/i;
+	}
+	$best = $count, $bestSentence = $_ if $count > $best;
+    }
+    $bestSentence;
+}
+
+
+#-######################################################################################
+#- Wonderful perl :(
+#-######################################################################################
+1; # 

@@ -3,17 +3,24 @@ package detect_devices;
 use diagnostics;
 use strict;
 
+#-######################################################################################
+#- misc imports
+#-######################################################################################
 use log;
 use common qw(:common :file);
 use devices;
 use c;
 
+#-#####################################################################################
+#- Globals
+#-#####################################################################################
 my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr plip fddi);
 my $scsiDeviceAvailable;
 my $CSADeviceAvailable;
 
-1;
-
+#-######################################################################################
+#- Functions
+#-######################################################################################
 sub get {
     #- Detect the default BIOS boot harddrive is kind of tricky. We may have IDE,
     #- SCSI and RAID devices on the same machine. From what I see so far, the default
@@ -162,6 +169,12 @@ sub tryOpen($) {
     local *F;
     sysopen F, devices::make($_[0]), c::O_NONBLOCK() and \*F;
 }
+
+sub tryWrite($) {
+    local *F;
+    sysopen F, devices::make($_[0]), 1 | c::O_NONBLOCK() and \*F;
+}
+
 sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
     `dmesg`
@@ -171,3 +184,35 @@ sub hasSMP {
     my $nb = grep { /^processor/ } cat_("/proc/cpuinfo");
     $nb > 1;
 }
+
+sub whatParport() {
+    my @res =();
+    foreach (0..3) {
+	local *F;
+	my $elem = {}; 
+	open F, "/proc/parport/$_/autoprobe" or next;
+	foreach (<F>) { $elem->{$1} = $2 if /(.*):(.*);/ }
+	push @res, { port => "/dev/lp$_", val => $elem};
+    }
+    @res;
+}
+
+#-CLASS:PRINTER;
+#-MODEL:HP LaserJet 1100;
+#-MANUFACTURER:Hewlett-Packard;
+#-DESCRIPTION:HP LaserJet 1100 Printer;
+#-COMMAND SET:MLC,PCL,PJL;
+sub whatPrinter() {
+    my @res = whatParport();
+    grep { $_->{val}{CLASS} eq "PRINTER"} @res;
+}
+
+sub whatPrinterPort() {
+    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2);
+}    
+
+#-######################################################################################
+#- Wonderful perl :(
+#-######################################################################################
+1; # 
+

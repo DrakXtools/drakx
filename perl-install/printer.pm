@@ -28,8 +28,7 @@ use strict;
 =cut
 
 #-#####################################################################################
-use vars qw(%thedb %printer_type %printer_type_inv @papersize_type %fields $spooldir);
-
+use vars qw(%thedb %printer_type %printer_type_inv @papersize_type %fields $spooldir @entries_db_short @entry_db_description %descr_to_db %db_to_descr);
 #-#####################################################################################
 
 =head2 Imports
@@ -230,6 +229,8 @@ my $PRINTER_DB_FILE    = "/usr/lib/rhs/rhs-printfilters/printerdb";
 my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 
 
+
+
 #-#####################################################################################
 
 =head2 Exported constant
@@ -317,6 +318,12 @@ sub read_printer_db(;$) {
 	    $thedb{$entryname} = $entry;
 	}
     }
+    
+    @entries_db_short     = sort keys %printer::thedb;
+    @entry_db_description = map { $printer::thedb{$_}{DESCR} } @entries_db_short;
+    %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
+    %db_to_descr          = reverse %descr_to_db;
+
 }
 
 

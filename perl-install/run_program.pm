@@ -11,8 +11,8 @@ sub run($@) { rooted('', @_) }
 
 sub rooted {
     my ($root, $name, @args) = @_;
-
-    log::l("running: $name @args" . ($root ? " with root $root" : ""));
+    my $str = ref $name ? $name->[0] : $name;
+    log::l("running: $str @args" . ($root ? " with root $root" : ""));
     $root ? $root .= '/' : ($root = '');
 
     fork and wait, return $? == 0;
@@ -25,9 +25,18 @@ sub rooted {
 	$root and chroot $root;
 	chdir "/";
 
-	unless (exec $name, @args) {
-	    log::l("exec of $name failed: $!");
-	    exec('false') or exit(1);
+	if (ref $name) {
+	    unless (exec { $name->[0] } $name->[1], @args) {
+		log::l("exec of $name->[0] failed: $!");
+		exec('false') or exit(1);
+	    }
+	} else {
+	    unless (exec $name, @args) {
+		log::l("exec of $name failed: $!");
+		exec('false') or exit(1);
+	    }
+
 	}
     }
+	
 }

@@ -203,19 +203,6 @@ for (my $i = 0; $i < @installSteps; $i += 2) {
     push @orderedInstallSteps, $installSteps[$i];
 }
 
-#-TOSEE bug with
-#-%installSteps = 
-#-      map_tab_hash {
-#-	   my ($i, $h)   = @_; 
-#-	   $h->{help}    = $stepsHelp{$installSteps[$i]} || __("Help");
-#-	   $h->{next}    = $installSteps[$i + 2];
-#-	   $h->{onError} = $installSteps[$i + 2 * $h->{onError}];
-#-#-          $h->{toBeDone} = []; SEMBLE FIXE les PBS
-#-#-          $h->{entered} = 0;
-#-	   push @orderedInstallSteps, $installSteps[$i];
-#-      } \@installStepsFields, @installSteps;
-#-print Dumper(\%installSteps);
-
 $installSteps{first} = $installSteps[0];
 
 #-#####################################################################################
@@ -297,7 +284,7 @@ $o = {
                  PAPERSIZE => "legal",
                  CRLF      => 0,
 
-                 DEVICE    => "/dev/dev1",
+                 DEVICE    => "/dev/lp",
 
                  REMOTEHOST => "",
                  REMOTEQUEUE => "",
@@ -546,7 +533,9 @@ sub main {
     eval { spawnShell() };
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
+    $o->{root}   = $::testing ? "/tmp/root-perl-install" : "/";
     mkdir $o->{prefix}, 0755;
+    mkdir $o->{root}, 0755;
 
     #-  make sure we don't pick up any gunk from the outside world 
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";

@@ -88,6 +88,7 @@ sub ask_from_entries_refW {
 	    $depth_combo->entry->set_editable(!$_->{not_edit});
 	    $depth_combo->set_popdown_strings(@{$_->{list}});
 	    $depth_combo->disable_activate;
+	    $_->{val} ||= $_->{list}[0];
 	    $depth_combo;
 	} else {
 	    new Gtk::Entry;

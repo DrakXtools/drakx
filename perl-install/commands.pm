@@ -4,12 +4,20 @@ use diagnostics;
 use strict;
 use vars qw($printable_chars);
 
+#-######################################################################################
+#- misc imports
+#-######################################################################################
 use common qw(:common :file :system :constant);
 
+#-#####################################################################################
+#- Globals
+#-#####################################################################################
 my $BUFFER_SIZE = 1024;
 
-1;
 
+#-######################################################################################
+#- Functions
+#-######################################################################################
 sub getopts {
     my $o = shift;
     my @r = map { '' } (@_ = split //, $_[0]);
@@ -384,7 +392,7 @@ sub insmod {
     require 'run_program.pm';
     run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $name.o");
     -r $f or die "can't find module $name";
-    run_program::run("insmod_", $f, @_) or die("insmod $name failed");
+    run_program::run(["insmod_", "insmod"], $f, @_) or die("insmod $name failed");
     unlink $f;
 }
 
@@ -444,3 +452,9 @@ $dev, $size, $used, $free, $use, $mntpoint
 	write DF if $size;
     }
 }
+
+#-######################################################################################
+#- Wonderful perl :(
+#-######################################################################################
+1; # 
+

@@ -107,7 +107,7 @@ sub ask_from_entry {
     my ($o, $title, $message, $label, $def, %callback) = @_;
 
     $message = ref $message ? $message : [ $message ];
-    $o->ask_from_entries($title, $message, [ $label ], [ $def ], %callback);
+    first ($o->ask_from_entries($title, $message, [ $label ], [ $def ], %callback));
 }
 
 sub ask_from_entries($$$$;$%) {
@@ -126,11 +126,12 @@ sub ask_from_entries_ref($$$$;$%) {
     my ($o, $title, $message, $l, $val, %callback) = @_;
     
     $message = ref $message ? $message : [ $message ];
+
     my $val_hash = [ map {
 	if ((ref $_) eq "SCALAR") {
 	    { val => $_ }
 	} else {
-	    ($_->{list} && @{$_->{list}}) ?
+	    ($_->{list} && (@{$_->{list}} > 1)) ?
 	      { %$_, type => "list"} : $_;
 	}
     } @$val ];

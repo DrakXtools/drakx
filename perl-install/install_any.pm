@@ -10,14 +10,19 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
+#-######################################################################################
+#- misc imports
+#-######################################################################################
 use common qw(:common :system);
 use run_program;
 use detect_devices;
 use pkgs;
 use log;
 
-1;
 
+#-######################################################################################
+#- Functions
+#-######################################################################################
 sub relGetFile($) {
     local $_ = member($_[0], qw(compss compssList depslist hdlist)) ? "base" : "RPMS";
     $_ = "Mandrake/$_/$_[0]";

@@ -26,7 +26,7 @@ use fs;
 use modparm;
 use log;
 use printer;
-
+use lilo;
 #-######################################################################################
 #- In/Out Steps Functions
 #-######################################################################################
@@ -233,6 +233,14 @@ sub printerConfig($) {
 		      $o->{printer}{want});
     return if !$o->{printer}{want};
     
+    unless (($::testing)) {
+	printer::set_prefix($o->{prefix});
+	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
+	$o->installPackages($o->{packages});
+
+    }
+    printer::read_printer_db();
+    
     $o->{printer}{complete} = 0;
     if ($::expert) {
 	#std info
@@ -262,21 +270,27 @@ name and directory should be used for this queue?"),
     if ($o->{printer}{TYPE} eq "LOCAL") {
 	{
 	    my $w = $o->wait_message(_("Test ports"), _("Detecting devices..."));
-	    eval { modules::load("lp"); };
+	    eval { modules::load("lp");modules::load("parport_probe"); };
 	}
-	my @port = ();
-	foreach ("lp0", "lp1", "lp2") {
-	    local *LP;
-	    push @port, "/dev/$_" if open LP, ">/dev/$_"
-	}
-	eval { modules::unload("lp") };
 	
-#-	@port =("lp0", "lp1", "lp2");
+	my @port = ();
+	my @parport = detect_devices::whatPrinter();
+	eval { modules::unload("parport_probe") };
+	my $str;
+	if ($parport[0]) {
+	    my $port = $parport[0]{port};
+	    $o->{printer}{DEVICE}    = $port;
+	    my $descr = common::bestMatchSentence2($parport[0]{val}{DESCRIPTION}, @printer::entry_db_description);
+	    $o->{printer}{DBENTRY} = $printer::descr_to_db{$descr};
+	    $str = _("I have detected a %s on ", $parport[0]{val}{DESCRIPTION}) . $port;
+	    @port = map { $_->{port}} @parport;
+	} else {
+	    @port = detect_devices::whatPrinterPort();
+	}
 	$o->{printer}{DEVICE}    = $port[0] if $port[0];
 
-
 	return if !$o->ask_from_entries_ref(_("Local Printer Device"),
-					    _("What device is your printer connected to  \n(note that /dev/lp0 is equivalent to LPT1:)?\n"),
+					    _("What device is your printer connected to  \n(note that /dev/lp0 is equivalent to LPT1:)?\n") . $str ,
 					    [_("Printer Device:")],
 					    [{val => \$o->{printer}{DEVICE}, list => \@port }],
 					   );
@@ -328,25 +342,14 @@ wish to access and any applicable user name and password."),
 					   );
     }
     
-    unless (($::testing)) {
-	printer::set_prefix($o->{prefix});
-	pkgs::select($o->{packages}, $o->{packages}{'rhs-printfilters'});
-	$o->installPackages($o->{packages});
 
-    }
-
-    printer::read_printer_db();
-    my @entries_db_short     = sort keys %printer::thedb;
-    my @entry_db_description = map { $printer::thedb{$_}{DESCR} } @entries_db_short;
-    my %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
-    my %db_to_descr          = reverse %descr_to_db;
     
     $o->{printer}{DBENTRY} = 
-      $descr_to_db{
+      $printer::descr_to_db{
 		   $o->ask_from_list_(_("Configure Printer"),
 				      _("What type of printer do you have?"),
-				      [@entry_db_description],
-				      $db_to_descr{$o->{printer}{DBENTRY}},
+				      [@printer::entry_db_description],
+				      $printer::db_to_descr{$o->{printer}{DBENTRY}},
 				     )
 		  };
 
@@ -515,6 +518,20 @@ sub setupBootloader($) {
 			 \@l, 
 			 $l[!$o->{bootloader}{onmbr}]
 			) eq $l[0];
+
+    lilo::proposition($o->{hds}, $o->{fstab});
+
+    my @entries = grep { $_->{liloLabel} } @{$o->{fstab}};
+
+    $o->ask_from_entries_ref('',
+    		       _("The boot manager Mandrake uses can boot other 
+                         operating systems as well. You need to tell me  
+                         what partitions you would like to be able to boot 
+                         and what label you want to use for each of them."),
+			 [map {"$_->{device}" . type2name($_->{type})} @entries],
+			 [map {\$_->{liloLabel}} @entries],
+			 );
+
     install_steps::setupBootloader($o);
 }
 
