@@ -196,7 +196,7 @@ configureNetworkISP =>
 correct information can be obtained from your ISP."),
 
 configureNetworkProxy =>
- __("If you will  proxies, please configure them now. If you don't know if
+ __("If you will use proxies, please configure them now. If you don't know if
 you should use proxies, ask your network administrator or your ISP."),
 
 installCrypto =>
@@ -386,7 +386,7 @@ system.
 
 
   - Precise RAM size if needed: In some cases, Linux is unable to
-correctly detect all the installed RAM on  some systems. If it is the
+correctly detect all the installed RAM on some systems. If this is the
 case, specify the correct quantity. Note: a difference of 2 or 4 Mb is
 normal.
 

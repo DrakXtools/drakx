@@ -309,7 +309,7 @@ sub chooseSizeToInstall {
 _("Now that you've selected desired groups, please choose 
 how many packages you want, ranging from minimal to full 
 installation of each selected groups.") .
-		  ($o->{compssUsersChoice}{Individual} ? "\n" . _("You will be able to choose them  more specificaly in the next step") : ''),
+		  ($o->{compssUsersChoice}{Individual} ? "\n" . _("You will be able to choose them more specificaly in the next step") : ''),
 		 create_packtable({ col_spacings => 10 },
 				  [ _("Choose the size you want to install"), $spin, _("MB"), ],
 				  [ undef, new Gtk::HScrollbar($adj) ],
