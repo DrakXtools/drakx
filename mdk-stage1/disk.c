@@ -44,6 +44,9 @@ enum return_type disk_prepare(void)
 	int i, count = 0;
 	enum return_type results;
 
+	error_message("Currently unsupported");
+	return RETURN_ERROR;
+
 	my_insmod("sd_mod");
 	my_insmod("vfat");
 	my_insmod("reiserfs");

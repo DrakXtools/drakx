@@ -39,6 +39,7 @@
 #include "dns.h"
 #include "mount.h"
 #include "automatic.h"
+#include "dhcp.h"
 
 #include "network.h"
 
@@ -332,9 +333,16 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 		}
 		intf->boot_proto = BOOTPROTO_STATIC;
 	} else {
-		error_message("DHCP not implemented yet");
-		intf->boot_proto = BOOTPROTO_DHCP;
+		error_message("Currently unsupported");
 		return RETURN_ERROR;
+
+		results = RETURN_ERROR; //setup_network_intf_as_dhcp(intf);
+		if (results == RETURN_BACK)
+			return setup_network_interface(intf);
+		if (results == RETURN_ERROR)
+			return results;
+		intf->boot_proto = BOOTPROTO_DHCP;
+		return RETURN_OK;
 	}
 	
 	if (configure_net_device(intf))
@@ -559,14 +567,12 @@ enum return_type nfs_prepare(void)
 
 enum return_type ftp_prepare(void)
 {
-	enum return_type results = intf_select_and_up();
-
-	return RETURN_ERROR | results;
+	error_message("Currently unsupported");
+	return RETURN_ERROR;
 }
 
 enum return_type http_prepare(void)
 {
-	enum return_type results = intf_select_and_up();
-
-	return RETURN_ERROR | results;
+	error_message("Currently unsupported");
+	return RETURN_ERROR;
 }
