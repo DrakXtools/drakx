@@ -9,7 +9,7 @@ use interactive;
 use any;
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
-my @shells = grep { -x $_ } map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
+my @shells = any::shells();
 my $isMD5 = cat_("/etc/pam.d/system-auth") =~ /md5/;
 my $isShadow = cat_("/etc/pam.d/system-auth") =~ /shadow/;
 
@@ -21,13 +21,13 @@ if (my @l = grep { ! /^-/ } @ARGV) {
     $users = [ map { { name => $_, realname => $_ } } @l ];
 } else {
     $in = 'interactive'->vnew('su');
-    any::ask_users('', $in, $users, $ENV{SECURE_LEVEL});
+    any::ask_users($in, $users, $ENV{SECURE_LEVEL});
 }
 
 system("adduser", $_->{name}) foreach @$users;
 any::write_passwd_user('', $_, $isMD5) foreach @$users;
 system("pwconv") if $isShadow;
 
-any::addUsers('', $users);
+any::addUsers($users);
 
 $in->exit(0) if $in;

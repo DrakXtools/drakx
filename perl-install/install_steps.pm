@@ -501,7 +501,7 @@ EOF
 	} "$o->{prefix}/usr/share/config/kdm/kdmrc";
 
     }
-    install_any::disable_user_view($o->{prefix}) if $o->{security} >= 3 || $o->{authentication}{NIS};
+    install_any::disable_user_view() if $o->{security} >= 3 || $o->{authentication}{NIS};
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
     foreach (list_skels($o->{prefix}, '.kde/share/config/kfmrc')) {
@@ -782,7 +782,7 @@ sub setRootPassword {
     my ($o) = @_;
     $o->{superuser} ||= {};
     $o->{superuser}{name} = 'root';
-    any::write_passwd_user($o->{prefix}, $o->{superuser}, $o->{authentication}{md5});
+    any::write_passwd_user($o->{superuser}, $o->{authentication}{md5});
     delete $o->{superuser}{name};
     install_any::set_authentication($o);
 }
@@ -791,17 +791,16 @@ sub setRootPassword {
 
 sub addUser {
     my ($o) = @_;
-    my $p = $o->{prefix};
     my $users = $o->{users} ||= [];
 
     my (%uids, %gids); 
-    foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1 }
+    foreach (glob_("$::prefix/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1 }
 
     foreach (@$users) {
 	$_->{home} ||= "/home/$_->{name}";
 
-	my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]) || int getpwnam($_->{name});
-	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]) || int getgrnam($_->{name});
+	my $u = $_->{uid} || ($_->{oldu} = (stat("$::prefix$_->{home}"))[4]) || int getpwnam($_->{name});
+	my $g = $_->{gid} || ($_->{oldg} = (stat("$::prefix$_->{home}"))[5]) || int getgrnam($_->{name});
 	#- search for available uid above 501 else initscripts may fail to change language for KDE.
 	if (!$u || getpwuid($u)) { for ($u = 501; getpwuid($u) || $uids{$u}; $u++) {} }
 	if (!$g)                 { for ($g = 501; getgrgid($g) || $gids{$g}; $g++) {} }
@@ -810,34 +809,34 @@ sub addUser {
 	$_->{gid} = $g; $gids{$g} = 1;
     }
 
-    any::write_passwd_user($p, $_, $o->{authentication}{md5}) foreach @$users;
+    any::write_passwd_user($_, $o->{authentication}{md5}) foreach @$users;
 
-    append_to_file("$p/etc/group",
+    append_to_file("$::prefix/etc/group",
 		   map { "$_->{name}:x:$_->{gid}:\n" } grep { ! getgrgid($_->{gid}) } @$users);
 
     foreach my $u (@$users) {
-	if (! -d "$p$u->{home}") {
+	if (! -d "$::prefix$u->{home}") {
 	    my $mode = $o->{security} < 2 ? 0755 : 0750;
-	    eval { cp_af("$p/etc/skel", "$p$u->{home}") };
+	    eval { cp_af("$::prefix/etc/skel", "$::prefix$u->{home}") };
 	    if ($@) {
-		log::l("copying of skel failed: $@"); mkdir("$p$u->{home}", $mode); 
+		log::l("copying of skel failed: $@"); mkdir("$::prefix$u->{home}", $mode); 
 	    } else {
-		chmod $mode, "$p$u->{home}";
+		chmod $mode, "$::prefix$u->{home}";
 	    }
 	}
 	require commands;
-	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
+	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$::prefix$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
     }
     #- since we wrote the password in /etc/passwd, we must convert to shadow
     run_program::rooted($::prefix, 'pwconv') if $o->{authentication}{shadow};
 
-    any::addUsers($p, $users);
+    any::addUsers($users);
 
     $o->pkg_install("autologin") if $o->{autologin};
     any::set_autologin($o->{autologin}, $o->{desktop});
 
-    install_any::disable_user_view($p) if @$users == ();
+    install_any::disable_user_view() if @$users == ();
 }
 
 #------------------------------------------------------------------------------

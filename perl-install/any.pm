@@ -23,30 +23,28 @@ sub drakx_version() {
     sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("$ENV{SHARE_PATH}/VERSION")))[2,3];
 }
 
-sub facesdir {
-    my ($prefix) = @_;
-    "$prefix/usr/share/mdk/faces/";
+sub facesdir() {
+    "$::prefix/usr/share/mdk/faces/";
 }
 sub face2png {
-    my ($face, $prefix) = @_;
-    facesdir($prefix) . $face . ".png";
+    my ($face) = @_;
+    facesdir() . $face . ".png";
 }
-sub facesnames {
-    my ($prefix) = @_;
-    my $dir = facesdir($prefix);
+sub facesnames() {
+    my $dir = facesdir();
     my @l = grep { /^[A-Z]/ } all($dir);
     map { if_(/(.*)\.png/, $1) } (@l ? @l : all($dir));
 }
 
 sub addKdmIcon {
-    my ($prefix, $user, $icon) = @_;
-    my $dest = "$prefix/usr/share/faces/$user.png";
-    eval { cp_af(facesdir($prefix) . $icon . ".png", $dest) } if $icon;
+    my ($user, $icon) = @_;
+    my $dest = "$::prefix/usr/share/faces/$user.png";
+    eval { cp_af(facesdir() . $icon . ".png", $dest) } if $icon;
 }
 
 sub allocUsers {
-    my ($prefix, $users) = @_;
-    my @m = my @l = facesnames($prefix);
+    my ($users) = @_;
+    my @m = my @l = facesnames();
     foreach (grep { !$_->{icon} || $_->{icon} eq "automagic" } @$users) {
 	$_->{auto_icon} = splice(@m, rand(@m), 1); #- known biased (see cookbook for better)
 	log::l("auto_icon is $_->{auto_icon}");
@@ -55,12 +53,12 @@ sub allocUsers {
 }
 
 sub addUsers {
-    my ($prefix, $users) = @_;
+    my ($users) = @_;
 
-    allocUsers($prefix, $users);
+    allocUsers($users);
     foreach my $u (@$users) {
-	run_program::rooted($prefix, "usermod", "-G", join(",", @{$u->{groups}}), $u->{name}) if !is_empty_array_ref($u->{groups});
-	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon});
+	run_program::rooted($::prefix, "usermod", "-G", join(",", @{$u->{groups}}), $u->{name}) if !is_empty_array_ref($u->{groups});
+	addKdmIcon($u->{name}, delete $u->{auto_icon} || $u->{icon});
     }
 }
 
@@ -516,9 +514,8 @@ sub writeandclean_ldsoconf {
 	uniq cat_($file), "/usr/X11R6/lib\n";
 }
 
-sub shells {
-    my ($prefix) = @_;
-    grep { -x "$prefix$_" } chomp_(cat_("$prefix/etc/shells"));
+sub shells() {
+    grep { -x "$::prefix$_" } chomp_(cat_("$::prefix/etc/shells"));
 }
 
 sub inspect {
@@ -548,11 +545,11 @@ sub inspect {
 }
 
 sub ask_users {
-    my ($prefix, $in, $users, $security) = @_;
+    my ($in, $users, $security) = @_;
 
     my $u if 0; $u ||= {};
 
-    my @icons = facesnames($prefix);
+    my @icons = facesnames();
 
     my %high_security_groups = (
         xgrp => N("access to X programs"),
@@ -598,9 +595,9 @@ sub ask_users {
 	    { label => N("User name"), val => \$u->{name} },
             { label => N("Password"),val => \$u->{password}, hidden => 1 },
             { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
-            { label => N("Shell"), val => \$u->{shell}, list => [ shells($prefix) ], not_edit => !$::expert, advanced => 1 },
+            { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], not_edit => !$::expert, advanced => 1 },
 	      if_($security <= 3 && @icons,
-	    { label => N("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
+	    { label => N("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => \&face2png, format => \&translate },
 	      ),
 	      if_($security > 3,
 		  map {
@@ -728,7 +725,7 @@ sub selectCountry {
 }
 
 sub write_passwd_user {
-    my ($prefix, $u, $isMD5) = @_;
+    my ($u, $isMD5) = @_;
 
     $u->{pw} = $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
     $u->{shell} ||= '/bin/bash';
@@ -743,7 +740,7 @@ sub write_passwd_user {
 	if (eof && $u->{name}) {
 	    $_ .= pack_passwd($u);
 	}
-    } "$prefix/etc/passwd";
+    } "$::prefix/etc/passwd";
 }
 
 sub set_login_serial_console {

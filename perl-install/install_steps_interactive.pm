@@ -1163,7 +1163,7 @@ sub addUser {
 	  if !member('mandrake', map { $_->{name} } @{$o->{users}});
     }
     if ($o->{security} >= 1 || $clicked) {
-	any::ask_users($o->{prefix}, $o, $o->{users}, $o->{security});
+	any::ask_users($o, $o->{users}, $o->{security});
     }
     add2hash($o, any::get_autologin());
     any::autologin($o, $o);
