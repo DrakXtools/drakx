@@ -25,6 +25,7 @@ sub unknown {
 our @tree =
     (
      [ "FLOPPY", "Floppy", "floppy.png", "", \&detect_devices::floppies, 0 ],
+     [ "ZIP", "Zip", "floppy.png", "", \&detect_devices::zips, 0 ],
      [ "HARDDISK", "Disk", "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds, 1 ],
      [ "CDROM", "CDROM", "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms }, 0 ],
      [ "BURNER", "CD/DVD burners", "cd.png", "", \&detect_devices::burners(), 0 ],
