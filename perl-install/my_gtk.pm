@@ -1,6 +1,3 @@
- #-########################################################################
-#- Pixel's implementation of Perl-GTK  :-)  [DDX]
-#-########################################################################
 package my_gtk; # $Id$
 
 use diagnostics;
@@ -516,7 +513,7 @@ sub gtkicons_labels_widget {
                   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
                   if (!defined($dbl_area) || $darea->{state} != $dbl_area->{state}) {
 		      my $state = $darea->{state};
-                      my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, $y_round,
+                      my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, 1,
                                                                1, 0, $background, $x_back2, $y_back2, 1, 0, $state);
                       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
                       $darea->set_usize($dx, $dy);
@@ -527,9 +524,13 @@ sub gtkicons_labels_widget {
                                              $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
                       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
                                              $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
+#                      $dbl_area->draw_rectangle($darea->style->black_gc, 0,
+#						0, 0, max($width, $x_round) - 1 , $y_round + $height - 1);
                   }
                   $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
                                               $dbl_area, 0, 0, 0, 0, $dx, $dy);
+#		  $darea->window->draw_rectangle($darea->style->black_gc, 0,
+#						0, 0, $dx, $dy);
                   ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
               });
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
@@ -551,22 +552,21 @@ sub gtkicons_labels_widget {
 	$i++;
     }
     my $fixed = new Gtk::Fixed;
-    my $timeout;
     foreach (@tab) { $fixed->put($_, 75, 65) }
-    $fixed->signal_connect(expose_event => sub {
-			       $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 30, 5, @tab);
-			   });
+    my $redraw_function = sub { $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 5, @tab) };
+    $fixed->signal_connect(expose_event => $redraw_function );
     $fixed->signal_connect(realize => sub {
-		       $fixed->window->set_back_pixmap($background, 0);
-		       $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 30, 5, @tab);
-		   });
+			       $fixed->window->set_back_pixmap($background, 0);
+			       $redraw_function->();
+			   });
+    $fixed->{redraw_function} = $redraw_function;
     $fixed->show_all();
     my $w_ret = createScrolledWindow($fixed, ['automatic', 'automatic']);
 
     #- Ugly hacks, don't touch! ########
     my $timeout2 = Gtk->timeout_add(100, sub { $fixed->set_usize($w_ret->allocation->[2] - 22, 0); 0; });
     $w_ret->vscrollbar->set_usize(19, undef);
-    gtkset_border_width($w_ret, -2);
+    gtkset_border_width($w_ret, -2); #- ok, this is very very ugly...
 }
 
 sub compute_icons {
@@ -605,7 +605,7 @@ sub compute_icons {
 	if ($n > $nb) {
 	    $n = 0;
 	    $x = $decx/2 + $line_up;
-	    $y += int($dy[$_+1]/5)*5;
+	    $y += int($dy[$_-$nb]/5)*5 + 15;
 	}
     }
     @ret;
