@@ -871,10 +871,8 @@ sub configurePrinter {
 		       sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
     if (!is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups'))) {
-	$o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') ;
-
-	#- call update-menus at the end of these package installation, as some menu entries may have been added.
-	run_program::rooted($o->{prefix}, "update-menus");
+	$o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups')
+	  and run_program::rooted($o->{prefix}, "update-menus");
     }
 }
 

@@ -374,6 +374,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     run_program::rooted_or_die($o->{prefix}, 'ldconfig') unless $::g_auto_install;
     log::l("Install took: ", formatTimeRaw(time - $time));
     install_any::log_sizes($o);
+    scalar(@toInstall); #- return number of packages installed.
 }
 
 sub afterInstallPackages($) {

@@ -685,7 +685,8 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
             $r;
 	};
     };
-    catch_cdie { $o->install_steps::installPackages($packages); }
+    my $install_result;
+    catch_cdie { $install_result = $o->install_steps::installPackages($packages); }
       sub {
 	  if ($@ =~ /^error ordering package list: (.*)/) {
 	      $o->ask_yesorno('', [
@@ -703,6 +704,7 @@ _("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and r
 	die "setstep choosePackages\n";
     }
     $w->destroy;
+    $install_result;
 }
 
 sub set_help {
