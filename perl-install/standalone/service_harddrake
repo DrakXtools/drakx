@@ -80,7 +80,6 @@ foreach my $hw_class (@harddrake::data::tree) {
 
     modules::load('ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
     @added || @was_removed or next;
-    $splash and !system('echo verbose > /proc/splash') and $splash = 0;
     my @configurator_pool;
     if (harddrake::data::is_removable($Ident)) {
         foreach my $device (@ID{@added}) {
@@ -118,6 +117,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     if (!$hw_class->{automatic}) {
         $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
         unless ($pid = fork()) {
+            $splash and !system('echo verbose > /proc/splash') and $splash = 0;
             exec("/usr/share/harddrake/confirm", $Ident, $timeout, $msg);
         }
         alarm($timeout);
