@@ -6,9 +6,7 @@ use keyboard;
 
 $lib = (arch() =~ /x86_64/ ? "lib64" : "lib");
 $tmp = "/tmp/rescue_tmp";
-$mnt = "/tmp/rescue_stage2_img";
-$mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
-$rescue = "rescue_stage2";
+$rescue = "rescue.clp";
 
 if ($>) {
     $sudo = "sudo";
@@ -114,26 +112,4 @@ __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 exit 0 if $ARGV[0];
 
-if (arch() =~ /ppc/) {
-    #- xfs module on PPC is 4MB! - need room to unpack it
-    $size = `du -s $tmp | cut -f1` + 4096; #- add 4MB of free space
-} else {
-    $size = `du -s $tmp | cut -f1` + 2048; #- add 2MB of free space
-}
-
-mkdir_p($mnt);
-__ "$sudo umount $mnt 2>/dev/null";
-
-_ "dd if=/dev/zero of=$rescue bs=1k count=$size";
-_ "$mke2fs $rescue";
-_ "$sudo mount -t ext2 $rescue $mnt -o loop";
-_ "rmdir $mnt/lost+found";
-
-_ "$sudo chown -R root.root $tmp";
-_ "$sudo cp -a $tmp/* $mnt";
-_ "$sudo rm -rf $tmp";
-
-_ "$sudo umount $mnt";
-_ "rmdir $mnt";
-
-_ "bzip2 -f -9 $rescue";
+_ "mkisofs -quiet -D -R $tmp | create_compressed_fs - 65536 $rescue 200 2>/dev/null"

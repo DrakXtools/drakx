@@ -111,10 +111,10 @@ STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
 endif
 
  #- stage1 itself
-STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c
+STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c lomount.c
 CDROMSRC = cdrom.c
-DISKSRC = disk.c directory.c lomount.c
-NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c lomount.c
+DISKSRC = disk.c directory.c
+NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c directory.c
 
 # use sort to remove duplicates
 STAGE1_ALLSRC = $(sort $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))

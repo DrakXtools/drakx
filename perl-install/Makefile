@@ -71,6 +71,8 @@ test_pms_all:
 	msgfmt -o $@ $<
 
 install_pms: $(DIRS)
+	[ -d $(DEST) ] || $(MISC_DEST)/mdkinst_stage2_tool $(STAGE2_DEST)
+
 	for i in `perl -ne 's/sub (\w+?)_?(\(\))? {.*/$$1/ and print' commands.pm` sync; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
 	install -d $(DESTREP4PMS)
@@ -214,10 +216,10 @@ endif
 
 full_stage2:
 	$(MAKE) stage2
-	$(MAKE) mdkinst_stage2
+	$(MAKE) clp
 
-mdkinst_stage2:
-	$(MISC_DEST)/make_mdkinst_stage2 $(DEST) $(STAGE2_DEST)/mdkinst_stage2
+clp:
+	$(MISC_DEST)/mdkinst_stage2_tool $(STAGE2_DEST)
 
 stage2:
 	if [ `id -u` = 0 ]; then rm -rf $(DEST); else $(SUDO) rm -rf $(DEST); fi

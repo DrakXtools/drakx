@@ -117,6 +117,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 	char location_full[500];
         char * loopdev = NULL;
 	struct stat statbuf;
+	enum return_type ret = RETURN_OK;
 
 	unlink(IMAGE_LOCATION);
 	strcpy(location_full, directory);
@@ -142,63 +143,36 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		symlink(location_full + offset, IMAGE_LOCATION);
 		add_to_env("METHOD", method_live);
 	}
-#ifndef MANDRAKE_MOVE
-	if (IS_RESCUE || ((loopdev || streq(method_live, "disk")) && ramdisk_possible())) {
-		/* RAMDISK install */
-		if (access(IMAGE_LOCATION "/" RAMDISK_LOCATION_REL, R_OK)) {
-			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the subdirectory " RAMDISK_LOCATION_REL ")\n"
-				      "Here's a short extract of the files in the directory:\n"
-				      "%s", extract_list_directory(IMAGE_LOCATION));
-			umount(IMAGE_LOCATION);
-			del_loop(loopdev);
-			return RETURN_BACK;
-		}
-		if (load_ramdisk() != RETURN_OK) {
-			stg1_error_message("Could not load program into memory.");
-			umount(IMAGE_LOCATION);
-			del_loop(loopdev);
-			return RETURN_ERROR;
-		}
-	} else {
-#endif
-		/* LIVE install */
-#ifdef MANDRAKE_MOVE
-		if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
-			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the subdirectory " IMAGE_LOCATION ")\n"
-				      "Here's a short extract of the files in the directory:\n"
-				      "%s", extract_list_directory(IMAGE_LOCATION));
-#else
-		char p;
-		if (access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK)) {
-			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
-				      "(I need the subdirectory " LIVE_LOCATION_REL ")\n"
-				      "Here's a short extract of the files in the directory:\n"
-				      "%s", extract_list_directory(IMAGE_LOCATION));
-#endif
-			umount(IMAGE_LOCATION);
-			del_loop(loopdev);
-			return RETURN_BACK;
-		}
-#ifndef MANDRAKE_MOVE
-		if (readlink(IMAGE_LOCATION "/" LIVE_LOCATION_REL "/usr/bin/runinstall2", &p, 1) != 1) {
-			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
-				      "You need more memory to perform an installation from a Windows partition. "
-				      "Another solution is to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
-			umount(IMAGE_LOCATION);
-			del_loop(loopdev);
-			return RETURN_ERROR;
-		}
-		log_message("found the " DISTRIB_NAME " Installation, good news!");
-	}
-#endif
 
-	if (IS_RESCUE) {
+#ifdef MANDRAKE_MOVE
+	if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
+		stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
+				   "(I need the file " IMAGE_LOCATION "/live_tree/etc/fstab" ")\n"
+				   "Here's a short extract of the files in the directory:\n"
+				   "%s", extract_list_directory(IMAGE_LOCATION));
+		ret = RETURN_BACK;
+	}
+#else
+	if (access(IMAGE_LOCATION "/" CLP_LOCATION_REL, R_OK)) {
+		stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
+				   "(I need the subdirectory " CLP_LOCATION_REL ")\n"
+				   "Here's a short extract of the files in the directory:\n"
+				   "%s", extract_list_directory(IMAGE_LOCATION));
+		ret = RETURN_BACK;
+	} else if (may_load_clp() != RETURN_OK) {
+		stg1_error_message("Could not load program into memory.");
+		ret = RETURN_ERROR;
+	}
+
+	if (ret == RETURN_OK)
+		log_message("found the " DISTRIB_NAME " Installation, good news!");
+
+#endif
+	if (IS_RESCUE || ret != RETURN_OK) {
 		/* in rescue mode, we don't need the media anymore */
 		umount(IMAGE_LOCATION);
 		del_loop(loopdev);
-	}
+	}	
 
-	return RETURN_OK;
+	return ret;
 }

@@ -967,7 +967,7 @@ enum return_type ftp_prepare(void)
                                 results = RETURN_BACK;
                                 continue;
                         }
-			kernels_list_file = asprintf_("%s/" RAMDISK_LOCATION_REL "mdkinst.kernels", location_full);
+			kernels_list_file = asprintf_("%s/" CLP_LOCATION_REL "mdkinst.kernels", location_full);
 
 			log_message("FTP: trying to retrieve %s", kernels_list_file);
 		        fd = ftp_start_download(ftp_serv_response, kernels_list_file, &size);
@@ -992,7 +992,7 @@ enum return_type ftp_prepare(void)
 			}
                 }
 
-		strcat(location_full, get_ramdisk_realname());
+		strcat(location_full, CLP_FILE_REL("/"));
 
 		log_message("FTP: trying to retrieve %s", location_full);
 
@@ -1021,7 +1021,7 @@ enum return_type ftp_prepare(void)
 
 		log_message("FTP: size of download %d bytes", size);
 		
-		results = load_ramdisk_fd(fd, size);
+		results = load_clp_fd(fd, size);
 		if (results == RETURN_OK) {
 		        if (!use_http_proxy)
 			        ftp_end_data_command(ftp_serv_response);
@@ -1087,7 +1087,7 @@ enum return_type http_prepare(void)
 
 		strcpy(location_full, answers[1][0] == '/' ? "" : "/");
 		strcat(location_full, answers[1]);
-		strcat(location_full, get_ramdisk_realname());
+		strcat(location_full, CLP_FILE_REL("/"));
 
 		log_message("HTTP: trying to retrieve %s from %s", location_full, answers[0]);
 		
@@ -1106,7 +1106,7 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: size of download %d bytes", size);
 		
-		if (load_ramdisk_fd(fd, size) != RETURN_OK) {
+		if (load_clp_fd(fd, size) != RETURN_OK) {
 			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return RETURN_ERROR;
                 }

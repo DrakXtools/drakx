@@ -30,7 +30,6 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/types.h>
-#include <bzlib.h>
 #include <sys/mount.h>
 #include <sys/poll.h>
 #include <errno.h>
@@ -228,7 +227,8 @@ int image_has_stage2()
 #ifdef MANDRAKE_MOVE
         return access(IMAGE_LOCATION "/live_tree.clp", R_OK) == 0;
 #else
-	return access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0;
+	return access(CLP_FILE_REL(IMAGE_LOCATION "/"), R_OK) == 0 ||
+	       access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0;
 #endif
 }
 
@@ -242,6 +242,15 @@ int ramdisk_possible(void)
 	}
 }
 
+int clp_preload(void)
+{
+	if (total_memory() > (IS_RESCUE ? MEM_LIMIT_RESCUE_PRELOAD : MEM_LIMIT_DRAKX_PRELOAD))
+		return 1;
+	else {
+		log_message("warning, not preloading clp due to low mem");
+		return 0;
+	}
+}
 
 enum return_type save_fd(int from_fd, char * to, void (*callback_func)(int overall))
 {
@@ -298,7 +307,6 @@ enum return_type copy_file(char * from, char * to, void (*callback_func)(int ove
         }
 }
 
-#ifdef MANDRAKE_MOVE
 enum return_type mount_clp(char *clp,  char *location_mount)
 {
 	if (lomount(clp, location_mount, NULL, 1)) {
@@ -348,106 +356,22 @@ enum return_type mount_clp_may_preload(char *clp_name, char *location_mount, int
                 return mount_clp(clp, location_mount);
 	}
 }
-#endif
 
 #ifndef MANDRAKE_MOVE
-enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
+enum return_type may_load_clp(void)
 {
-	BZFILE * st2;
-	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd, and that root=/dev/ram3 is actually passed to the kernel at boot time */
-	int ram_fd;
-	char buffer[32768];
-	int z_errnum;
-	char * wait_msg = "Loading program into memory...";
-	int bytes_read = 0;
-	int actually;
-	int seems_ok = 0;
-
-	st2 = BZ2_bzdopen(ramdisk_fd, "r");
-
-	if (!st2) {
-		log_message("Opening compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
-		stg1_error_message("Could not open compressed ramdisk file.");
-		return RETURN_ERROR;
+	if (!IS_RESCUE && access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK) == 0) {
+		/* LIVE install */
+		return RETURN_OK;
+	} else {
+		/* CLP install */
+		return mount_clp_may_preload(CLP_NAME(""), STAGE2_LOCATION, clp_preload());
 	}
-
-	ram_fd = open(ramdisk, O_WRONLY);
-	if (ram_fd == -1) {
-		log_perror(ramdisk);
-		stg1_error_message("Could not open ramdisk device file.");
-		return RETURN_ERROR;
-	}
-	
-	init_progression(wait_msg, size);
-
-	while ((actually = BZ2_bzread(st2, buffer, sizeof(buffer))) > 0) {
-		seems_ok = 1;
-		if (write(ram_fd, buffer, actually) != actually) {
-			log_perror("writing ramdisk");
-			remove_wait_message();
-			return RETURN_ERROR;
-		}
-		update_progression((int)((bytes_read += actually) / RAMDISK_COMPRESSION_RATIO));
-	}
-
-	if (!seems_ok) {
-		log_message("reading compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
-		BZ2_bzclose(st2); /* opened by gzdopen, but also closes the associated fd */
-		close(ram_fd);
-		remove_wait_message();
-		stg1_error_message("Could not uncompress second stage ramdisk. "
-				   "This is probably an hardware error while reading the data. "
-				   "(this may be caused by a hardware failure or a Linux kernel bug)");
-		return RETURN_ERROR;
-	}
-
-	end_progression();
-
-	BZ2_bzclose(st2); /* opened by gzdopen, but also closes the associated fd */
-	close(ram_fd);
-
-	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2", 1))
-		return RETURN_ERROR;
-
-	return RETURN_OK;
 }
 
-
-char * get_ramdisk_realname(void)
+enum return_type load_clp_fd(int fd, int size)
 {
-	char img_name[500];
-	
-	strcpy(img_name, "/" RAMDISK_LOCATION_REL);
-	strcat(img_name, IS_RESCUE ? "rescue" : "mdkinst");
-	strcat(img_name, "_stage2.bz2");
-
-	return strdup(img_name);
-}
-
-
-enum return_type load_ramdisk(void)
-{
-	int st2_fd;
-        off_t size;
-	char img_name[500];
-
-	strcpy(img_name, IMAGE_LOCATION);
-	strcat(img_name, get_ramdisk_realname());
-
-	log_message("trying to load %s as a ramdisk", img_name);
-
-	st2_fd = open(img_name, O_RDONLY); /* to be able to see the progression */
-
-	if (st2_fd == -1) {
-		log_message("open ramdisk file (%s) failed", img_name);
-		stg1_error_message("Could not open compressed ramdisk file (%s).", img_name);
-		return RETURN_ERROR;
-	}
-
-	if ((size = file_size(img_name)) == -1)
-		return RETURN_ERROR;
-	else
-		return load_ramdisk_fd(st2_fd, size);
+	return preload_mount_clp(fd, size, CLP_NAME(""), STAGE2_LOCATION);
 }
 #endif
 

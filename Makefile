@@ -74,7 +74,7 @@ upload_only:
 	upload $(STAGE2_DEST) '*_stage2.bz2' ;\
 	upload $(EXTRA_INSTALL_DEST)/advertising '' ;\
 	upload $(MISC_DEST) gendistrib ;\
-	upload $(MISC_DEST) make_mdkinst_stage2 ;\
+	upload $(MISC_DEST) mdkinst_stage2_tool ;\
 	upload $(MISC_DEST) packdrake ;\
 	upload $(MISC_DEST) packdrake.pm ;\
 	upload $(MISC_DEST) auto ;\

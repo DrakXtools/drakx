@@ -370,8 +370,7 @@ process_recovery(void)
                                 log_message("going on with a recovery on disk %s partition %s", medias[i], *part);
 
                                 symlink(disk_own_mount, IMAGE_LOCATION);
-                                if (ramdisk_possible())
-                                        load_ramdisk(); /* if load of ramdisk failed, try to continue in live */
+				may_load_clp(); /* no error check */
                                 
                                 add_to_env("METHOD", "disk");
                                 return 1;

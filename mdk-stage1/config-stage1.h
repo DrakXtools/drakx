@@ -20,14 +20,15 @@
 
 /* If we have more than that amount of memory (in Mbytes), we assume we can load the second stage as a ramdisk */
 #define MEM_LIMIT_DRAKX 68
+/* If we have more than that amount of memory (in Mbytes), we preload the second stage as a ramdisk */
+#define MEM_LIMIT_DRAKX_PRELOAD 100
 
 /* If we have more than that amount of memory (in Mbytes), we assume we can load the rescue as a ramdisk */
 #define MEM_LIMIT_RESCUE 40
+/* If we have more than that amount of memory (in Mbytes), we preload the rescue as a ramdisk */
+#define MEM_LIMIT_RESCUE_PRELOAD 100
 
 
-#define RAMDISK_COMPRESSION_RATIO 1.95
-
-#define RAMDISK_LOCATION_REL "install/stage2/"
 #define SLASH_LOCATION   "/sysroot"
 
 #ifdef MANDRAKE_MOVE
@@ -53,6 +54,11 @@
 #define DISTRIB_NAME "Mandrakelinux"
 
 #define LIVE_LOCATION_REL "install/stage2/live/"
+#define CLP_LOCATION_REL  "install/stage2/"
+#define CLP_STAGE2_NAME "mdkinst.clp"
+#define CLP_RESCUE_NAME "rescue.clp"
+#define CLP_NAME(prefix) (IS_RESCUE ? prefix CLP_RESCUE_NAME : prefix CLP_STAGE2_NAME)
+#define CLP_FILE_REL(prefix) CLP_NAME(prefix CLP_LOCATION_REL)
 
 /* the remote media is mounted in 
    - IMAGE_LOCATION_DIR "nfsimage", and IMAGE_LOCATION is a symlink image -> nfsimage/mdk/mirror/dir
@@ -63,6 +69,11 @@
 #define IMAGE_LOCATION_REL "image"
 #define IMAGE_LOCATION IMAGE_LOCATION_DIR IMAGE_LOCATION_REL
 
+#define CLP_LOCATION IMAGE_LOCATION "/" CLP_LOCATION_REL
+
+/* - if we use a clp   : STAGE2_LOCATION is a the mount point
+   - if we use the live: STAGE2_LOCATION is a relative symlink to IMAGE_LOCATION_REL/install/stage2/live 
+*/
 #define STAGE2_LOCATION_ROOTED "/tmp/stage2"
 #define STAGE2_LOCATION  SLASH_LOCATION STAGE2_LOCATION_ROOTED
 

@@ -51,7 +51,8 @@ For one CD or a network/hd volume, please use media/main.
 Optionnally, you can modify ``media/media_info/rpmsrate''; this file manages
 the relative importance of the files, and thus their installation or not.
 
-Also, mdkinst_stage2.gz must be remade if you modify files in install/stage2/live.
+To modify the code of stage2, use "misc/mdkinst_stage2_tool install/stage2" to generate "install/stage2/live".
+When you are done use "misc/mdkinst_stage2_tool install/stage2" again, the "rm -rf install/stage/live".
 See below for information about these files.
 
 ********************************************************************************
@@ -102,15 +103,13 @@ install/stage2/live
 	live system used on certain installs. See ``Ramdisk or not'' below for
 	more.
 
-install/stage2/mdkinst_stage2.bz2
-	for the ramdisk. live sytem in ext2 filesystem bzipped2.
-	generated from install/stage2/live tree using misc/make_mdkinst_stage2
-	See ``Ramdisk or not'' below for more.
+install/stage2/mdkinst.clp
+	for the compressed loopback of install.
+	generated from install/stage2/live tree using misc/mdkinst_stage2_tool
 
-install/stage2/rescue_stage2.bz2
-	rescue ramdisk. live sytem in ext2 filesystem bzipped2.
+install/stage2/rescue.clp
+	rescue ramdisk. create_compressed_fs iso file
 	this is the ramdisk loaded when typing rescue on boot prompt.
-	there is no live system available, only the ramdisk is used.
 
 install/images/*.img
 	floppy boot images to use with DrakX. Use:
@@ -160,49 +159,11 @@ set to developer (!)...
 DrakX uses .po files for its translation. A script takes the different
 strings out of the .pm files. It generates the DrakX.pot file which contains
 all the english strings to translate.
-To add a new language, you just have to add it to lang.pm (if it's not there
-already) and put the .po in the perl-install/po directory (see ``Ramdisk or
-not'' to know if you have to regenerate the mdkinst_stage2.gz)
 
 ********************************************************************************
 * PCMCIA install ***************************************************************
 ********************************************************************************
 If the media you use to install is a pcmcia device, use the pcmcia boot disk.
-
-********************************************************************************
-* Ramdisk or not ***************************************************************
-********************************************************************************
-The DrakX install is much bigger than the newt one. So the ramdisk which was
-used is getting big, and costs a lot in memory 
-(eg: the mdkinst_stage2 is 14MB - 23/09/99)
-(update! now size is 21MB - 24/01/01)
-(update! now size is 19MB - 26/04/01)
-
-|       | newt    | DrakX
-|-------+---------+----------------------------------------------------------
-| nfs   | live    | live
-| ftp   | ramdisk | ramdisk
-| http  | ramdisk | ramdisk
-| hd    | ramdisk | live if install/stage2/live/usr/bin/runinstall2 is a link,
-|       |         |   ramdisk otherwise
-| cdrom | ramdisk | live if memory < 52MB, ramdisk otherwise
-
-Where ramdisk is needed, if detected memory is below the limit allowed for
-ramdisk (maintained in file gi/mdk-stage1/config-stage1.h; currently 52 Mb),
-a failure dialog will be printed explaining that there is not enough memory
-to perform the installation.
-
-When i say live, it means that the stage1 will *mount* the
-install/stage2/live and use it that way.
-
-The ramdisk is used in place of the live in some cases. This ramdisk is filled
-with mdkinst_stage2.gz
-
-For cdrom install, the ramdisk is used to speed up things (access time is quite
-high on cdrom drives)
-
-For pcmcia, it depends on the type of install.
-
 
 ********************************************************************************
 * modules **********************************************************************
