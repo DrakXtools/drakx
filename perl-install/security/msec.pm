@@ -6,17 +6,6 @@ use MDK::Common;
 
 
 #-------------------------------------------------------------
-# msec files
-
-my $check_file    = "$::prefix/etc/security/msec/security.conf";
-my $curr_sec_file = "$::prefix/var/lib/msec/security.conf";
-my $options_file  = "$::prefix/etc/security/msec/level.local";
-
-
-my $num_level;
-
-
-#-------------------------------------------------------------
 # msec options managment methods
 
 
@@ -24,24 +13,13 @@ my $num_level;
 # option defaults
 
 sub load_defaults {
-    my ($category) = @_;
-    my $default_file;
-    my $num_level = 0;
-
-    if ($category eq 'functions') {
-        require security::level;
-        $num_level ||= security::level::get();
-        $default_file = "$::prefix/usr/share/msec/level.".$num_level;
-    }
-    elsif ($category eq 'checks') { $default_file = $curr_sec_file }
-
-    my $separator = $category eq 'functions' ? ' ' : $category eq 'checks' ? '=' : undef;
-    do { print "BACKTRACE:\n", backtrace(), "\n"; die 'wrong category' } unless $separator;
+    my ($msec, $category) = @_;
+    my $separator = $msec->{$category}{def_separator};
     map { 
         my ($opt, $val) = split /$separator/;
         chop $val;
         if_($opt ne 'set_security_conf', $opt => $val);
-    } cat_($default_file);
+    } cat_($msec->{$category}{defaults_file});
 }
 
 
@@ -64,24 +42,19 @@ sub get_function_default {
 # option values
 
 sub load_values {
-    my ($category) = @_;
-    my $item_file =
-      $category eq 'functions' ? $options_file :
-      $category eq 'checks' ? $check_file : '';
-
-    my $separator = $category eq 'functions' ? '\(' : $category eq 'checks' ? '=' : undef;
-    do { print "BACKTRACE:\n", backtrace(), "\n"; die 'wrong category' } unless $separator;
+    my ($msec, $category) = @_;
+    my $separator = $msec->{$category}{val_separator};
     map {
         my ($opt, $val) = split /$separator/;
         chop $val;
         $val =~ s/[()]//g;
         chop $opt if $separator eq '\(';  # $opt =~ s/ //g if $separator eq '\(';
-        $opt => $val;
-    } cat_($item_file);
+        if_($val, $opt => $val);
+    } cat_($msec->{$category}{values_file});
 }
 
 
-# get_XXX_value(function) -
+# get_XXX_value(check|function) -
 #   return the value of the function|check passed in argument.
 #   If no value is set, return "default".
 
@@ -92,15 +65,13 @@ sub get_function_value {
 
 sub get_check_value {
     my ($msec, $check) = @_;
-#    print "value for '$check' is '$msec->{checks}{value}{$check}'\n";
     $msec->{checks}{value}{$check} || "default";
 }
 
 
 
-
 #-------------------------------------------------------------
-# get list of functions
+# get list of check|functions
 
 # list_(functions|checks) -
 #   return a list of functions|checks handled by level.local|security.conf
@@ -165,7 +136,7 @@ sub apply_functions {
                 if_($value ne 'default', "$_ ($value)");
             } @list);
         }
-    } $options_file;
+    } $msec->{functions}{values_file};
 }
 
 sub apply_checks {
@@ -179,17 +150,35 @@ sub apply_checks {
                 if_($value ne 'default', $_ . '=' . $value);
             } @list), "\n";
         }
-    } $check_file;
+    } $msec->{checks}{values_file};
+}
+
+sub reload {
+    my ($msec) = @_;
+    my $num_level = 0;
+    require security::level;
+    $num_level ||= security::level::get();
+    $msec->{functions}{defaults_file} = "$::prefix/usr/share/msec/level.".$num_level;
+    $msec->{functions}{default} = { $msec->load_defaults('functions') };
 }
 
 sub new { 
     my $type = shift;
-    my $thing = {};
-    $thing->{checks}{default}    = { load_defaults('checks') };
-    $thing->{functions}{default} = { load_defaults('functions') };
-    $thing->{functions}{value}   = { load_values('functions') };
-    $thing->{checks}{value}      = { load_values('checks') };
-    bless $thing, $type;
+    my $msec = bless {}, $type;
+
+    $msec->{functions}{values_file}   = "$::prefix/etc/security/msec/level.local";
+    $msec->{checks}{values_file}      = "$::prefix/etc/security/msec/security.conf";
+    $msec->{checks}{defaults_file}    = "$::prefix/var/lib/msec/security.conf";
+    $msec->{checks}{val_separator}    = '=';
+    $msec->{functions}{val_separator} = '\(';
+    $msec->{checks}{def_separator}    = '=';
+    $msec->{functions}{def_separator} = ' ';
+    $msec->reload();
+
+    $msec->{checks}{default}    = { $msec->load_defaults('checks') };
+    $msec->{functions}{value}   = { $msec->load_values('functions') };
+    $msec->{checks}{value}      = { $msec->load_values('checks') };
+    $msec;
 }
 
 1;
