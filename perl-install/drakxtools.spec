@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.6mdk
+Release: 0.7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Feb  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.7mdk
+- drakx11: make XFdrake startup be instantenous for non nv|ati cards
+- drakTermServ: add PXE image support (Venantius Kumar)
+
 * Fri Feb  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.6mdk
 - move drakbug, drakclock, drakperm, draksec, drakTermServ,
   net_monitor in drakxtools since they require ugtk2 (#7413)
