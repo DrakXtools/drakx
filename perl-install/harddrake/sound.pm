@@ -8,6 +8,7 @@ package harddrake::sound;
 #    o pci cards: snd-als4000, snd-es968, snd-hdsp
 #    o isa cards: snd-azt2320, snd-cs4231, snd-cs4236, 
 #      snd-dt0197h, snd-korg1212, snd-rme32
+#    o pcmcia cards: snd-vxp440 snd-vxpocket
 
 # TODO: 
 #    o ensure sound isn't user (either dsp/midi/sequencer/mixer)
@@ -31,6 +32,7 @@ our %alsa2oss =
      "snd-ali5451" => [ "trident" ],
      "snd-als100"  => [ "sb" ], # isa
      "snd-als4000" => [ "unknown" ],
+     "snd-atiixp"  => [ "unknown" ],
      "snd-au8810" => [ "unknown" ],
      "snd-au8820" => [ "unknown" ],
      "snd-au8830" => [ "unknown" ],
@@ -45,6 +47,7 @@ our %alsa2oss =
      "snd-cs4281"  => [ "cs4281" ],
      "snd-cs46xx"  => [ "cs46xx" ],
      "snd-dt0197h" => [ "unknown" ], # isa
+     "snd-dt019x"  => [ "unknown" ], # isa
      "snd-emu10k1" => [ "audigy", "emu10k1" ],
      "snd-ens1370" => [ "es1370" ],
      "snd-ens1371" => [ "es1371" ],
@@ -62,11 +65,15 @@ our %alsa2oss =
      "snd-ice1724" => [ "unknown" ], # isa
      "snd-intel8x0" => [ "ali5455", "i810_audio", "nvaudio" ],
      "snd-interwave" => [ "gus" ],  # isa
+     "snd-interwave-stb" => [ "unknown" ], # isa
      "snd-korg1212" => [ "unknown" ], # isa
      "snd-maestro3" => [ "maestro3" ],
+     "snd-mixart"  => [ "unknown" ],
      "snd-mpu401"  => [ "mpu401" ],
      "snd-nm256"   => [ "nm256_audio" ],
      "snd-opl3sa2" => [ "opl3", "opl3sa", "opl3sa2" ], # isa
+     "snd-opti92x-ad1848" => [ "unknown" ], # isa
+     "snd-opti92x-cs4231" => [ "unknown" ], # isa
      "snd-opti93x" => [ "mad16" ],
      "snd-rme32"   => [ "unknown" ], # isa
      "snd-rme96"   => [ "rme96xx" ], # pci
@@ -76,9 +83,13 @@ our %alsa2oss =
      "snd-sbawe"   => [ "awe_wave" ],
      "snd-sgalaxy" => [ "sgalaxy" ], # isa
      "snd-sonicvibes" => [ "sonicvibes" ],
+     "snd-sscape"  => [ "sscape" ], # isa
      "snd-trident" => [ "trident" ],
      "snd-usb-audio" => [ "audio" ], # usb
      "snd-via82xx"  => [ "via82cxxx_audio" ],
+     "snd-vx222"   => [ "unknown" ],
+     "snd-vxp440"  => [ "unknown" ], # pcmcia
+     "snd-vxpocket" => [ "unknown" ], # pcmcia
      "snd-wavefront" => [ "wavefront" ], # isa
      "snd-ymfpci"  => [ "ymfpci" ]
      );
@@ -123,7 +134,7 @@ our %oss2alsa =
      "sb"      => [ "snd-als100", "snd-cmi8330", "snd-es1688", "snd-es18xx", "snd-es968", "snd-sb8", "snd-sb16" ],
      "sgalaxy" => [ "snd-sgalaxy" ],
      "sonicvibes" => [ "snd-sonicvibes" ],
-     "sscape"  => [ "snd-sb16" ],
+     "sscape"  => [ "snd-sb16", "snd-sscape" ],
      "trident" => [ "snd-ali5451", "snd-trident" ],
      "via82cxxx_audio" => [ "snd-via82xx" ],
      "wavefront" => [ "snd-wavefront" ],
