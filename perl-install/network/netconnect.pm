@@ -570,7 +570,7 @@ killall pppd
                         $in->do_pkgs->install($packages{$adsl_device}->[0]) if $packages{$adsl_device} && !-e $packages{$adsl_device}->[1];
                         if ($adsl_device eq 'speedtouch' && ! -r '$::prefix/usr/share/speedtouch/mgmt.o' && !$::testing) {
                             $in->do_pkgs->what_provides("speedtouch_mgmt") and 
-                              $in->do_pkgs->install('speedtouch_mgmt', 'auto');
+                              $in->do_pkgs->install('speedtouch_mgmt');
                             return 'adsl_speedtouch_firmware' if ! -e "$::prefix/usr/share/speedtouch/mgmt.o";
                         }
                         return 'adsl_provider' if $adsl_devices{$adsl_device};
