@@ -157,7 +157,7 @@ if (!$un_build) {
     }
     foreach (@clps) {
 	my $list = $lists{$_ . '_simpl'} || $lists{$_};
-	next if $_ eq 'nvidia' && ! -e $list->[0];
+	next if $_ eq 'nvidia' && ! -e "$prefix$list->[0]";
 	create_light_tree($prefix, $_, $list);
     }
     create_totem_links('totem', $lists{totem});
