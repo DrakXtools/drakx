@@ -29,7 +29,9 @@ sub read_fstab {
     my %comments;
     my $comment;
     my @l = grep {
-	if (/^\s*#/) {
+	if (/^Filename\s*Type\s*Size/) {
+	    0; #- when reading /proc/swaps
+	} elsif (/^\s*#/) {
 	    $comment .= chomp_($_) . "\n";
 	    0;
 	} else {
@@ -130,6 +132,7 @@ sub subpart_from_wild_device_name {
     if ($dev =~ /^LABEL=(.*)/) {
 	return { device_LABEL => $1 };
     } elsif ($dev eq 'none') {
+    } elsif ($dev eq 'rootfs') {
     } elsif ($dev =~ m!^(\S+):/\w!) {
 	#- nfs
     } elsif ($dev =~ m!^//\w!) {
@@ -140,7 +143,7 @@ sub subpart_from_wild_device_name {
 	if ($dev !~ m!^/! && -e "$::prefix/dev/$dev") {
 	    $dev = "/dev/$dev";
 	}
-	if ($dev =~ m!^/(tmp|dev)/(.*)!) {
+	if ($dev =~ m!^/(tmp|u?dev)/(.*)!) {
 	    my %part;
 	    if (my $rdev = (stat "$::prefix$dev")[6]) {
 		($part{major}, $part{minor}) = unmakedev($rdev);
@@ -152,11 +155,13 @@ sub subpart_from_wild_device_name {
 		    $dev = $symlink;
 		}
 	    }
-	    $dev =~ s!/(tmp|dev)/!!;
+	    $dev =~ s!/(tmp|u?dev)/!!;
 
 	    my $is_devfs = $dev =~ m!/(disc|part\d+)$!;
 	    $part{$is_devfs ? 'devfs_device' : 'device'} = $dev;
 	    return \%part;
+	} elsif ($dev =~ m!^/! && -f "$::prefix$dev") {
+	    #- loopback file
 	} else {
 	    log::l("part_from_wild_device_name: unknown device $dev");
 	}
