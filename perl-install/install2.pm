@@ -46,12 +46,12 @@ my (%installSteps, @orderedInstallSteps);
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "doPartitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions" ],
   installPackages    => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
+  setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages" ],
+  addUser            => [ __("Add a user"), 1, 1, '', "installPackages" ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '', "formatPartitions" ],
 #-  installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
   summary            => [ __("Summary"), 1, 0, '', "installPackages" ],
   configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages" ],
-  setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages" ],
-  addUser            => [ __("Add a user"), 1, 1, '', "installPackages" ],
 ((arch() !~ /alpha/) && (arch() !~ /ppc/)) ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "installPackages" ],
 ) : (),
@@ -546,6 +546,10 @@ sub main {
 	    log::l("found network config file $file");
 	    my $l = network::read_interface_conf($file);
 	    add2hash(network::findIntf($o->{intf} ||= {}, $l->{DEVICE}), $l);
+	}
+	if (my ($file) = glob_('/etc/resolv.conf')) {
+	    log::l("found network config file $file");
+	    add2hash($o->{netc}, network::read_resolv_conf($file));
 	}
     }
 
