@@ -1072,7 +1072,7 @@ sub remove_bigseldom_used {
     log::l("remove_bigseldom_used");
     $::testing and return;
     remove_unused();
-    unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(DarkMarble marble3d);
+    unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(marble3d);
     unlink(m|^/| ? $_ : "/usr/bin/$_") foreach 
       ((map { @$_ } @bigseldom_used_groups),
        qw(mkreiserfs resize_reiserfs),
