@@ -225,7 +225,7 @@ sub readCompss($) {
 	if (/^(\S+)/) {
 	    my $p = $compss;
 	    my @l = split ':', $1;
-	    pop @l if $l[-1] =~ /^(x11|console)$/;
+#- Why?	    pop @l if $l[-1] =~ /^(x11|console)$/;
 	    foreach (@l) {
 		$p->{childs}{$_} ||= { childs => {} };
 		$p = $p->{childs}{$_};
