@@ -434,8 +434,7 @@ sub main {
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
     log::l("second stage install running (", any::drakx_version(), ")");
 
-    mkdir '/sys';
-    syscall_('mount', (my $_dev = 'none'), (my $_where = '/sys'), (my $_type = 'sysfs'), 0);
+    eval { fs::mount('none', '/sys', 'sysfs', 1) };
 
     if ($::move) {
         require move;
