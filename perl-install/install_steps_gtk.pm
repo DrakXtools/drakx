@@ -400,7 +400,7 @@ sub choosePackagesTree {
 				    $o->ask_okcancel('', [ $isSelection ? 
 							   N("The following packages are going to be installed") :
 							   N("The following packages are going to be removed"),
-							       formatList(20, sort @l) ], 1) or $error = ''; #- defined
+							       formatList(20, sort(map { $_->name } @l)) ], 1) or $error = ''; #- defined
 				}
 				$error and $o->ask_warn('', $error);
 				if (defined $error) {
@@ -411,8 +411,7 @@ sub choosePackagesTree {
 				} else {
 				    #- keep the changes, update visible state.
 				    foreach (@l) {
-					my $p = pkgs::packageByName($packages, $_);
-					$set_state->($_, $p->flag_selected ? 'selected' : 'unselected');
+					$set_state->($_->name, $_->flag_selected ? 'selected' : 'unselected');
 				    }
 				}
 			    },
