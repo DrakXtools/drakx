@@ -1129,7 +1129,8 @@ sub setupBootloader {
 	    log::l("OldWorld or Unknown Machine - no yaboot setup");
 	    return;
 	}
-    } elsif (arch() =~ /^alpha/) {
+    }
+    if (arch() =~ /^alpha/) {
 	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
 	catch_cdie { $o->SUPER::setupBootloader } sub {
 	    $o->ask_yesorno('', 
