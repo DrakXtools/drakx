@@ -197,15 +197,17 @@ sub create_okcancel($;$$) {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    @_ = map { ref $_ ? $_ : warp_text($_) } @_;
-    $o->{box} = gtkpack_(new Gtk::VBox(0,0),
-			 (map{
-			      my $w = ref $_ ? $_ : new Gtk::Label($_);
-			      $w->set_name("Title");
-			      0, $w;
-			     } @_),
-			 0, new Gtk::HSeparator,
-		       )
+    $o->{box} = (@_ <= 2 && (map { split "\n" } @_) > 6) ?
+      gtkpack(new Gtk::VBox(0,0),
+	      gtkset_usize(createScrolledWindow(gtktext_insert(new Gtk::Text, join "\n", @_)), 400, 250)) :
+      gtkpack_(new Gtk::VBox(0,0),
+	       (map {
+		   my $w = ref $_ ? $_ : new Gtk::Label($_);
+		   $w->set_name("Title");
+		   0, $w;
+	       } map { ref $_ ? $_ : warp_text($_) } @_),
+	       0, new Gtk::HSeparator,
+	      );
 }
 
 sub createScrolledWindow($) {

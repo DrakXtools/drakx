@@ -49,9 +49,18 @@ System configuration
 Web Server
 	daemons:network:http
 
-Network Management Workstation
+Network Management Workstation	
 	network:tools
-	daemons:network
+# above is daemons:network *without* sendmail
+	daemons:network:base
+	daemons:network:ftp
+	daemons:network:http
+	daemons:network:nfs
+	daemons:network:telnet
+	BeroList
+	comsat
+	postfix
+	imap
 
 Documentation
 	documentation:languages:en

@@ -1,5 +1,14 @@
+cyrillic font buggy in DrakX
+
+mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
+
 in ftp install, locale not installed properly
-locale (and fonts?) buggy in case ramdisk is used
+
+in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
+
+remove xfs user from kdm
+
+when clicking on X configuration, installation of packages is not displayed
 
 bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
 
@@ -10,8 +19,6 @@ bug in diskdrake:
 in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
 in the middle, remove the first one. Result hda5 at the end and bug.
 
-urpmi.addmedia: (done,pix) |gzip instead of doing it afterwards
-rpmdrake: Installed packages not in hdlist should be there
 urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
 
 standalone applications for configuration (netdrake, authentificationconf, soundcard)
@@ -209,3 +216,8 @@ suggested partition tables must be better foreach installClass
 
 (done,pix)missing alias ll for root
 
+(done,pix)urpmi.addmedia:  |gzip instead of doing it afterwards
+
+(done,pix)locale (and fonts?) buggy in case ramdisk is used
+
+(done,pix)rpmdrake: Installed packages not in hdlist should be there

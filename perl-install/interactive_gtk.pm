@@ -31,12 +31,8 @@ sub ask_from_listW {
     if (@$l < 5) { #- really ? : && sum(map { length $_ } @$l) < 90) {
 	my $defW;
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
-	my $box = (@$l <= 2 && (map { split "\n" } @$messages) > 6) ?
-	  gtkpack(new Gtk::VBox(0,0),
-		  gtkset_usize(createScrolledWindow(gtktext_insert(new Gtk::Text, join "\n", @$messages)), 400, 250)) :
-	  create_box_with_title($w, @$messages);
 	gtkadd($w->{window},
-	       gtkpack($box,
+	       gtkpack(create_box_with_title($w, @$messages),
 		       gtkadd((@$l < 3 ? create_hbox() : create_vbox()),
 			      map {
 				  my $b = new Gtk::Button($_);

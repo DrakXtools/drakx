@@ -374,7 +374,7 @@ sub substInFile(&@) {
 	    local $_ = '';
 	    &$f($_);
 	    select $old;
-	    output($file, $_);
+	    eval { output($file, $_) };
 	}
     }
 }

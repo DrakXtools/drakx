@@ -14,7 +14,7 @@ local $_ = join '', @ARGV;
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
 $::isStandalone = 1;
 
-my $in = vnew interactive('su');
+my $in = vnew interactive();
 
 my %m = reverse (my %l = (
   0 => _("Windows(TM)"),
@@ -24,10 +24,20 @@ my %m = reverse (my %l = (
   4 => _("High"),
   5 => _("Paranoid"),
 ));
-delete @l{0,1,5} unless $::expert;
+my %help = (
+  0 => _("This level is to be used with care. It makes your system more easy to use, but very sensitive: it must not be used for a machine connected to others or to the Internet. There is no password access."),
+  1 => _("Password are now enabled, but use as a networked computer is still not recommended."),
+  2 => _("Few improvements for this security level, the main one is that there are more security warnings and checks."),
+  3 => _("This is the standard security recommended for a computer that will be used to connect to the Internet as a client. There are now security checks. "),
+  4 => _("With this security level, the use of this system as a server becomes possible. The security is now high enough to use the system as a server which accept connections from many clients. "),
+  5 => _("We take level 4 features, but now the system is entirely closed. Security features are at their maximum."),
+);
 
-if (my $level = $in->ask_from_list('', 
-_("Choose security level"), 
+delete @l{0,1,5} unless $::expert;
+delete @help{0,1,5} unless $::expert;
+
+if (my $level = $in->ask_from_list('', _("Choose security level") . "\n\n" . 
+				   join('', map { "$l{$_}: $help{$_}\n\n" } keys %l), 
 				   [ values %l ], $l{$ENV{SECURE_LEVEL}})) {
     my $w = $in->wait_message('', _("Setting security level"));
     $in->suspend;

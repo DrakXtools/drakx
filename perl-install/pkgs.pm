@@ -30,7 +30,7 @@ my %by_lang = (
   'zh_TW.Big5' => [ 'rxvt-CLE', 'fonts-ttf-big5' ],
 );
 
-my @prefered = qw(perl-GTK);
+my @preferred = qw(perl-GTK postfix);
 
 my $A = 20471;
 my $B = 16258;
@@ -50,7 +50,7 @@ sub allpackages {
 
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
-    my %prefered; @prefered{@prefered} = ();
+    my %preferred; @preferred{@preferred} = ();
     my ($n, $v);
     unless ($p->{installed}) { #- if the same or better version is installed, do not select.
 	$p->{base} ||= $base;
@@ -64,7 +64,7 @@ sub select($$;$) {
 		    my $p = Package($packages, $_);
 		    $i ||= $p;
 		    $p && $p->{selected} and $i = $p, last;
-		    $p && exists $prefered{$_} and $i = $p;
+		    $p && exists $preferred{$_} and $i = $p;
 		}
 	    }
 	    $i->{base} ||= $base;

@@ -304,7 +304,10 @@ sub partitionDisks {
 	$o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
     }
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
-    fsedit::get_root($o->{fstab}) or die _("Partitioning failed: no root filesystem");
+    fsedit::get_root($o->{fstab}) or die 
+_("You must have a root partition.
+For this, create a partition (or click on an existing one).
+Then choose action ``Mount point'' and set it to `/'");
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/rhimage nfs| &&
       !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{manualFstab} || []} and
@@ -371,7 +374,7 @@ sub miscellaneous {
 
 	local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
 	run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-    } 'setupBootloader';
+    } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------

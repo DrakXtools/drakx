@@ -123,7 +123,7 @@ sub rm {
 
     my $rm; $rm = sub {
 	foreach (@_) {
-	    if (-d $_) {
+	    if (!-l $_ && -d $_) {
 		$rec or die "$_ is a directory\n";
 		&$rm(glob_($_));
 		rmdir $_ or die "can't remove directory $_: $!\n";
@@ -504,8 +504,8 @@ sub dmesg { print cat_("/tmp/syslog"); }
 
 #my %cached_failed_install_cpio;
 #- double space between sub and install_cpio cuz install_cpio is not a shell command
-sub  install_cpio($$) {
-    my ($dir, $name) = @_; 
+sub  install_cpio($$;@) {
+    my ($dir, $name, @more) = @_; 
 
 #    return if $cached_failed_install_cpio{"$dir $name"};
     return "$dir/$name" if -e "$dir/$name";
@@ -516,7 +516,9 @@ sub  install_cpio($$) {
     eval { rm("-r", $dir) };
     mkdir $dir, 0755;
     require 'run_program.pm';
-    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
+    
+    my $more = join " ", map { $_ && "$_ $_/*" } @more;
+    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/* $more");
 
     #- not found, cache result
 #    return if $cached_failed_install_cpio{"$dir $name"} = ! -e "$dir/$name";

@@ -242,6 +242,10 @@ sub choosePackages {
 	$v or next;
 	pkgs::select($packages, $_) foreach @{$o->{compssUsers}{$k}};
     }
+
+    my $f = "$o->{prefix}/etc/sysconfig/desktop";
+    output($f, "KDE\n") if !-e $f && $o->{compssUsersChoice}{KDE};
+    output($f, "GNOME\n") if !-e $f && $o->{compssUsersChoice}{Gnome};
 }
 
 #------------------------------------------------------------------------------

@@ -42,7 +42,7 @@ sub vnew {
     my ($type, $su) = @_;
     $su = $su eq "su";
     require c;
-    if (c::Xtest($ENV{DISPLAY} ||= ":0")) {
+    if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {
 	if ($su) {
 	    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 	    $> and exec "kdesu", "-c", "$0 @ARGV";	    

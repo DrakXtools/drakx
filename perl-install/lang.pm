@@ -170,13 +170,20 @@ sub set {
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
 	$ENV{LINGUAS}   = $languages{$lang}[3];
+
+	local $_ = $languages{$lang}[1];
+	s/iso-8859-1$/iso-8859-15/;
+	s/iso-/iso/;
+	s/koi8-.*/koi8/;
+	s/cp1251/mscp1251/;
+	
+	commands::install_cpio("/usr/share/locale", $languages{$lang}[2], "misc", $_);
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
 	delete $ENV{LC_ALL};
 	delete $ENV{LINGUAS};
     }
-    commands::install_cpio("/usr/share/locale", $lang);
 }
 
 sub write {
