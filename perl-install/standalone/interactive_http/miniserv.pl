@@ -58,7 +58,7 @@ if ($config{'syslog'}) {
 eval "use Authen::PAM";
 if (!$@) {
 	# check if the PAM authentication can be used by opening a handle
-	if (! ref($pamh = new Authen::PAM("webmin", "root", \&pam_conv_func))) {
+	if (! ref($pamh = new Authen::PAM("miniserv", "root", \&pam_conv_func))) {
 		print STDERR "PAM module available, but error during init !\n";
 		print STDERR "Disabling PAM functions.\n";
 		}
@@ -159,7 +159,7 @@ if ($use_ssl) {
 
 # Setup syslog support if possible and if requested
 if ($use_syslog) {
-	eval { openlog("webmin", "cons,pid,ndelay", "daemon") };
+	eval { openlog("miniserv", "cons,pid,ndelay", "daemon") };
 	$use_syslog = 0 if ($@);
 	}
 
@@ -268,7 +268,7 @@ die "Failed to bind port $config{port} : $!" if ($i == 5);
 listen(MAIN, SOMAXCONN);
 
 if ($config{'listen'}) {
-	# Open the socket that allows other webmin servers to find this one
+	# Open the socket that allows other miniserv servers to find this one
 	$proto = getprotobyname('udp');
 	if (socket(LISTEN, PF_INET, SOCK_DGRAM, $proto)) {
 		setsockopt(LISTEN, SOL_SOCKET, SO_REUSEADDR, pack("l", 1));
@@ -507,7 +507,7 @@ while(1) {
 		}
 
 	if ($config{'listen'} && vec($rmask, fileno(LISTEN), 1)) {
-		# Got UDP packet from another webmin server
+		# Got UDP packet from another miniserv server
 		local $rcvbuf;
 		local $from = recv(LISTEN, $rcvbuf, 1024, 0);
 		next if (!$from);
@@ -710,7 +710,7 @@ if (@deny && &ip_match($acptip, $localip, @deny) ||
 
 if ($use_libwrap) {
 	# Check address with TCP-wrappers
-	if (!hosts_ctl("webmin", STRING_UNKNOWN, $acptip, STRING_UNKNOWN)) {
+	if (!hosts_ctl("miniserv", STRING_UNKNOWN, $acptip, STRING_UNKNOWN)) {
 		&http_error(403, "Access denied for $acptip");
 		return 0;
 		}
@@ -739,8 +739,8 @@ if (%users) {
 	$blocked = 0;
 
 	# Session authentication is never used for connections by
-	# another webmin server
-	if ($header{'user-agent'} =~ /webmin/i) {
+	# another miniserv server
+	if ($header{'user-agent'} =~ /miniserv/i) {
 		$config{'session'} = 0;
 		}
 
@@ -1783,7 +1783,7 @@ return 0 if (!$_[0] || !$users{$_[0]});
 if ($users{$_[0]} eq 'x' && $use_pam) {
 	$pam_username = $_[0];
 	$pam_password = $_[1];
-	local $pamh = new Authen::PAM("webmin", $pam_username, \&pam_conv_func);
+	local $pamh = new Authen::PAM("miniserv", $pam_username, \&pam_conv_func);
 	if (!ref($pamh)) {
 		print STDERR "PAM init failed : $pamh\n";
 		return 0;

@@ -11,6 +11,7 @@ use interactive;
 use common;
 use log;
 
+my $script_name = $ENV{INTERACTIVE_HTTP};
 my $no_header;
 my $uid;
 my $pipe_r = "/tmp/interactive_http_r";
@@ -63,7 +64,7 @@ sub ask_from_entries_refW {
 
 #    print $q->img({ -src => "/icons/$o->{icon}" }) if $o->{icon};
     print @{$common->{messages}};
-    print $q->start_form(-name => 'form', -action => '/cgi-bin/interactive_http', -method => 'get');
+    print $q->start_form(-name => 'form', -action => $script_name, -method => 'post');
 
     print "<table>\n";
 

@@ -1,6 +1,8 @@
 include Makefile.config
 
-DIRS = ddcprobe serial_probe share/po Newt c resize_fat
+INLIBDEST_DIRS = Newt c resize_fat sbus_probing 
+HAVEINST_DIRS = share/po interactive_http 
+DIRS = $(INLIBDEST_DIRS) ddcprobe serial_probe
 NAME = libDrakX
 PREFIX = 
 LIBDIR = $(PREFIX)/usr/lib
@@ -21,11 +23,11 @@ $(DIRS):
 	install -d auto
 	rm standalone ; ln -s . standalone
 	rm -f share/po/DrakX.pot # force rebuild of po's
-	$(MAKE) -C $@
+	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
-	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(NETLIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(DIRS:%=$(LIBDEST)/%)
-	install -d $(LIBDEST)/sbus_probing
+	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR) $(LIBDEST) $(NETLIBDEST) $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) 
+	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
@@ -35,12 +37,16 @@ install:
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(ETCDEST)
 	install -m 644 share/wizard.rc $(ETCDEST)
+
 	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
 	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
 	install -m 644 $(patsubst %,sbus_probing/%.pm,main) $(LIBDEST)/sbus_probing
 	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
+
 	find $(LIBDEST) -name "*.pm" | xargs perl -pi -e '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/'
 
-	$(MAKE) -C share/po install DATADIR=$(DATADIR) NAME=$(NAME)
+	for i in $(HAVEINST_DIRS); do \
+		$(MAKE) -C $$i install PREFIX=$(PREFIX) DATADIR=$(DATADIR) NAME=$(NAME) ; \
+ 	done
 
 	cp -rfL auto icons $(LIBDEST)

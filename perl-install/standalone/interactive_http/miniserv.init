@@ -1,0 +1,51 @@
+#!/bin/sh
+# chkconfig: 235 99 00
+# description: Start or stop the miniserv administration server
+
+name=drakxtools_http
+server=/usr/share/libDrakX/$name/miniserv.pl
+
+case "$1" in
+'start')
+	echo -n "Starting $name: "
+	perl $server /etc/$name.conf
+	touch /var/lock/subsys/drakxtools_http
+	echo $name
+	;;
+'stop')
+	echo -n "Shutting down $name: "
+	kill `cat /var/run/$name.pid`
+	rm -f /var/lock/subsys/drakxtools_http
+	echo $name
+	;;
+'status')
+	if [ -s /var/run/$name.pid ]; then
+	    pid=`cat /var/run/$name.pid`
+		kill -0 $pid >/dev/null 2>&1
+		if [ "$?" = "0" ]; then
+			echo "$name (pid $pid) is running"
+		else
+			echo "$name is stopped"
+		fi
+	else
+		echo "$name is stopped"
+	fi
+	;;
+'restart')
+	$0 stop
+	$0 start
+	;;
+'reload')
+        $0 stop
+        $0 start
+        ;;
+'condrestart')
+	if [ -f /var/lock/subsys/drakxtools_http ]; then
+            $0 restart
+        fi
+        ;;
+*)
+	echo "Usage: $0 {start|stop|restart|status|reload|condrestart}"
+	;;
+esac
+exit 0
