@@ -142,10 +142,13 @@ my $lilo_pic = new Gtk::Pixmap(gtkcreate_png($themes{'def_thmb'}));
 my $boot_pic = new Gtk::Pixmap(gtkcreate_png($themes{'def_thmb'}));
 my $thm_button = new Gtk::Button(_("Install themes"));
 my $logo_thm = new Gtk::CheckButton(_("Display theme under console"));
+my $B_create = new Gtk::Button(_("Create new theme"));
 my $keep_logo = 1;
 $logo_thm->set_active(1);
 $logo_thm->signal_connect(clicked => sub { invbool(\$keep_logo) });
-
+$B_create->signal_connect(clicked => sub{
+    $::isEmbedded ? (kill('USR1', $::CCPID) and system('/usr/sbin/draksplash ')) : system('/usr/sbin/draksplash ') ;
+    });
 #- ******** action to take on changing combos values
 
 $combo{'thms'}->entry->signal_connect(changed => sub {
@@ -274,7 +277,8 @@ Click on Configure to launch the setup wizard.", $lilogrub),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            _("Lilo screen"),
                                            $combo{'lilo'},
-                                           $lilo_pic),
+                                           $lilo_pic,
+					   $B_create),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            _("Bootsplash"),
                                            $combo{'boot'},
