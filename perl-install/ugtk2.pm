@@ -390,8 +390,7 @@ sub create_factory_menu_ {
     my $widget = Gtk2::ItemFactory->new($type, $name, my $accel_group = Gtk2::AccelGroup->new);
     $widget->create_items([ @menu_items ]);
     $window->add_accel_group($accel_group);
-    my $menu = $widget->get_widget($name);
-    $menu, $menu->{factory} = $widget;
+    ($widget->get_widget($name), $widget);
 }
 
 sub create_factory_menu { create_factory_menu_(Gtk2::MenuBar->get_type, '<main>', @_) }
