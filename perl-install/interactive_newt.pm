@@ -193,26 +193,22 @@ sub ask_fromW {
 	    local $::setstep = 1;
 	    $form->RunForm;
 	};
-	foreach (@widgets) {
-	    if ($$r == ${$_->{w}}) {
-		$destroyed = 1;
-		$form->FormDestroy;
-		Newt::PopWindow;
-		my $v = do {
-		    local $::setstep = 1;
-		    $_->{e}{clicked_may_quit}();
-		};
-		$v or return ask_fromW($o, $common, $l, $l2);
-	    }
-	}
 	$canceled = $cancel && $$r == $$cancel;
 
+	if (my ($button) = grep { $$r == ${$_->{w}} } @widgets) {
+	    $get_all->();
+	    my $v = do {
+		local $::setstep = 1;
+		$button->{e}{clicked_may_quit}();
+	    };
+	    $form->FormDestroy;
+	    Newt::PopWindow;
+	    return $v || &ask_fromW;
+	}
     } until ($check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'}));
 
-    if (!$destroyed) {
-	$form->FormDestroy;
-	Newt::PopWindow;
-    }
+    $form->FormDestroy;
+    Newt::PopWindow;
     !$canceled;
 }
 
