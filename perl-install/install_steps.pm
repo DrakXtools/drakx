@@ -349,7 +349,6 @@ sub pkg_install {
     } else {
 	log::l("all packages selected are already installed, nothing to do")
     }
-    delete $o->{packages}{rpmdb};
 }
 
 sub pkg_install_if_requires_satisfied {
@@ -367,7 +366,6 @@ sub pkg_install_if_requires_satisfied {
 	}
     }
     $o->installPackages;
-    delete $o->{packages}{rpmdb};
 }
 
 sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
