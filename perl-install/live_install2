@@ -1,0 +1,12 @@
+#!../perl
+
+my $dir = `pwd`;
+chomp $dir;
+$dir .= "/../../..";
+
+$ENV{PERL5LIB} = join ":", map { "$dir/$_" } @INC;
+$ENV{LD_LIBRARY_PATH} = "$dir/lib:$dir/usr/lib";
+$ENV{PATH} = join(":", map { "$dir/$_" } split ":", "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin") . ":$ENV{PATH}";
+$ENV{SHARE_PATH} = "$dir/usr/share";
+
+exec "../../../lib/ld-linux.so.2", "../perl", "./install2", "--live", @ARGV or die;

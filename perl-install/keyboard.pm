@@ -247,7 +247,7 @@ sub xmodmap_file {
     my ($keyboard) = @_;
     my $f = "$ENV{SHARE_PATH}/xmodmap/xmodmap.$keyboard";
     if (! -e $f) {
-	run_program::run("extract_archive", "$ENV{SHARE_PATH}/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
+	run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
 	$f = "/tmp/xmodmap.$keyboard";
     }
     -e $f && $f;

@@ -230,6 +230,7 @@ $o = $::o = {
 
 #------------------------------------------------------------------------------
 sub selectLanguage {
+    $::live and return;
     $o->selectLanguage($_[1] == 1);
 
     addToBeDone {
@@ -240,6 +241,7 @@ sub selectLanguage {
 
 #------------------------------------------------------------------------------
 sub selectMouse {
+    $::live and return;
     my ($clicked) = $_[0];
 
     add2hash($o->{mouse} ||= {}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
@@ -250,6 +252,7 @@ sub selectMouse {
 
 #------------------------------------------------------------------------------
 sub setupSCSI {
+    $::live and return;
     my ($clicked) = $_[0];
     $o->{autoSCSI} ||= $::beginner;
 
@@ -258,6 +261,7 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub selectKeyboard {
+    $::live and return;
     my ($clicked) = $_[0];
 
     return unless $o->{isUpgrade} || !$::beginner || $clicked;
@@ -274,6 +278,7 @@ sub selectKeyboard {
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
+    $::live and return;
     $o->selectInstallClass(@install_classes);
    
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
@@ -294,6 +299,7 @@ sub selectInstallClass {
 
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
+    $::live and return;
     $o->{steps}{formatPartitions}{done} = 0;
     $o->doPartitionDisksBefore;
     $o->doPartitionDisks;
@@ -301,6 +307,7 @@ sub doPartitionDisks {
 }
 
 sub formatPartitions {
+    $::live and return;
     unless ($o->{isUpgrade}) {
 	$o->choosePartitionsToFormat($o->{fstab});
 	$o->formatMountPartitions($o->{fstab}) unless $::testing;
@@ -365,6 +372,7 @@ sub installPackages {
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
+    $::live and return;
     $o->miscellaneous($_[0]);
 
     addToBeDone {
@@ -389,6 +397,7 @@ sub miscellaneous {
 
 #------------------------------------------------------------------------------
 sub configureNetwork {
+    $::live and return;
     #- get current configuration of network device.
     log::l("debugging: $o->{netc}{HOSTNAME}");
     eval {
@@ -406,10 +415,10 @@ sub configureNetwork {
     $o->configureNetwork($_[1] == 1);
 }
 #------------------------------------------------------------------------------
-sub installCrypto { $o->installCrypto }
-
+sub installCrypto { $::live or $o->installCrypto }
 #------------------------------------------------------------------------------
 sub configureTimezone {
+    $::live and return;
     my ($clicked) = @_;
     my $f = "$o->{prefix}/etc/sysconfig/clock";
 
@@ -424,9 +433,9 @@ sub configureTimezone {
     $o->configureTimezone($f, $clicked);
 }
 #------------------------------------------------------------------------------
-sub configureServices { $::expert and $o->configureServices }
+sub configureServices { $::live or $::expert and $o->configureServices }
 #------------------------------------------------------------------------------
-sub configurePrinter  { $o->configurePrinter($_[0]) }
+sub configurePrinter  { $::live or $o->configurePrinter($_[0]) }
 #------------------------------------------------------------------------------
 sub setRootPassword {
     return if $o->{isUpgrade};
@@ -444,12 +453,14 @@ sub addUser {
 
 #------------------------------------------------------------------------------
 sub createBootdisk {
+    $::live and return;
     modules::write_conf($o->{prefix});
     $o->createBootdisk($_[1] == 1);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
+    $::live and return;
     return if $::g_auto_install;
 
     modules::write_conf($o->{prefix});
@@ -462,6 +473,7 @@ sub setupBootloader {
 }
 #------------------------------------------------------------------------------
 sub configureX {
+    $::live and return;
     my ($clicked) = $_[0];
 
     #- done here and also at the end of install2.pm, just in case...
@@ -471,12 +483,10 @@ sub configureX {
     $o->configureX if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked;
 }
 #------------------------------------------------------------------------------
-sub generateAutoInstFloppy { 
-    $o->generateAutoInstFloppy;
-}
+sub generateAutoInstFloppy { $::live or $o->generateAutoInstFloppy }
 
 #------------------------------------------------------------------------------
-sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
+sub exitInstall { $::live or $o->exitInstall(getNextStep() eq "exitInstall") }
 
 
 #-######################################################################################
@@ -533,6 +543,7 @@ sub main {
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
 	    security  => sub { $o->{security} = $v },
+	    live      => sub { $::live = 1 },
 	    test      => sub { $::testing = 1 },
 	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
@@ -556,7 +567,7 @@ sub main {
 	$o->{method} ||= "cdrom";
 	$o->{mkbootdisk} = 0;
     }
-    unless ($::testing) {
+    unless ($::testing || $::live) {
 	unlink $_ foreach ( $o->{pcmcia} ? () : ("/sbin/install"), #- #- install include cardmgr!
 			   "/modules/modules.cgz",
 			   "/sbin/insmod", "/sbin/rmmod",
@@ -574,8 +585,18 @@ sub main {
 
     eval { spawnShell() };
 
-    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
+    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     $o->{root}   = $::testing ? "/tmp/root-perl-install" : "/";
+    if ($::live) {
+	@{$o->{orderedSteps}} = grep { /choosePackages/ || /installPackages/ } @{$o->{orderedSteps}};
+	my $s; foreach (@{$o->{orderedSteps}}) {
+	    $s->{next} = $_ if $s;
+	    $s = $o->{steps}{$_};
+	}
+	$o->{isUpgrade} = 1;
+	$::beginner = 0; #- use custom by default.
+	$::expert = 1;
+    }
     mkdir $o->{prefix}, 0755;
     mkdir $o->{root}, 0755;
 
@@ -606,7 +627,7 @@ sub main {
     eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
 
-    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
+    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
     modules::unload($_) foreach qw(vfat msdos fat);
@@ -695,7 +716,7 @@ sub main {
     install_any::clean_postinstall_rpms();
     install_any::ejectCdrom();
 
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
+    $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf($o->{prefix});
 
     #- to ensure linuxconf doesn't cry against those files being in the future
@@ -703,7 +724,7 @@ sub main {
 	my $now = time - 24 * 60 * 60;
 	utime $now, $now, "$o->{prefix}/$_";
     }
-    install_any::killCardServices();
+    $::live or install_any::killCardServices();
 
     #- make sure failed upgrade will not hurt too much.
     install_steps::cleanIfFailedUpgrade($o);

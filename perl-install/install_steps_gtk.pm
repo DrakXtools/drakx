@@ -539,6 +539,7 @@ sub load_rc($) {
 }
 
 sub install_theme {
+    $::live and return;
     my ($o, $theme) = @_;    
     $o->{theme} = $theme || $o->{theme} || $themes[0];
 
@@ -581,6 +582,7 @@ sub create_big_help {
 
 #------------------------------------------------------------------------------
 sub create_help_window {
+    $::live and return;
     my ($o) = @_;
 
 #    $o->{help_window}->destroy if $o->{help_window};
@@ -632,7 +634,8 @@ sub create_help_window {
     $o->{help_window} = $w;
 }
 
-sub set_help { 
+sub set_help {
+    $::live and return 1;
     shift;
     gtktext_insert($w_help, 
 		   formatAlaTeX(join "\n", 
@@ -642,6 +645,7 @@ sub set_help {
 
 #------------------------------------------------------------------------------
 sub create_steps_window {
+    $::live and return;
     my ($o) = @_;
 
     my $PIX_H = my $PIX_W = 21;
@@ -708,6 +712,7 @@ sub create_steps_window {
 
 #------------------------------------------------------------------------------
 sub create_logo_window() {
+    $::live and return;
     my ($o) = @_;
     gtkdestroy($o->{logo_window});
     my $w = bless {}, 'my_gtk';

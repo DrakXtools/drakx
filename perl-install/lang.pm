@@ -217,7 +217,7 @@ sub set {
     my ($lang) = @_;
 
     if ($lang && $languages{$lang}) {
-	#- use extract_archive that follow symlinks and expand directory.
+	#- use "packdrake -x" that follow symlinks and expand directory.
 	#- it is necessary as there is a lot of symlinks inside locale.cz2,
 	#- using a compressed cpio archive is nighmare to extract all files.
 	#- reset locale environment variable to avoid any warnings by perl,
@@ -227,7 +227,7 @@ sub set {
 
 	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
 	    require 'run_program.pm';
-	    run_program::run("extract_archive", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
+	    run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
 	}
 
 	$ENV{LC_ALL}    = $lang;
@@ -321,7 +321,7 @@ sub load_po($) {
 	} else {
 	    -e ($f = "$_/po.cz2") and last foreach @INC;
 	    log::l("trying to load $lang.po from $f");
-	    open F, "extract_archive $f '' $lang.po 2>/dev/null |";
+	    open F, "packdrake -x $f '' $lang.po 2>/dev/null |";
 	}
     } else {
 	open F, $f; #- not returning here help avoiding reading the same multiple times.

@@ -425,7 +425,7 @@ sub insmod {
 	    $f = "/tmp/$_.o";
 	    my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
 	    if (-e $cz) {
-		run_program::run("extract_archive $cz /tmp $_.o");
+		run_program::run("packdrake -x $cz /tmp $_.o");
 	    } elsif (-e "/lib/modules.cpio.bz2") {
 		run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");
 	    } else {

@@ -171,7 +171,7 @@ sub extractHeaders($$$) {
 
     cleanHeaders($prefix);
 
-    run_program::run("extract_archive",
+    run_program::run("packdrake", "-x",
 		     "/tmp/$medium->{hdlist}",
 		     "$prefix/tmp/headers",
 		     map { packageHeaderFile($_) } @$pkgs);
@@ -468,7 +468,7 @@ sub psUsingHdlist {
 
     #- extract filename from archive, this take advantage of verifying
     #- the archive too.
-    open F, "extract_archive $newf |";
+    open F, "packdrake $newf |";
     foreach (<F>) {
 	chomp;
 	/^[dlf]\s+/ or next;
@@ -754,7 +754,8 @@ sub init_db {
     if ($isUpgrade) {
 	c::rpmdbRebuild($prefix) or die "rebuilding of rpm database failed: ", c::rpmErrorString();
     }
-    c::rpmdbInit($prefix, 0644) or die "creation of rpm database failed: ", c::rpmErrorString();
+    #- seems no more necessary to rpmdbInit ?
+    #c::rpmdbOpen($prefix) or die "creation of rpm database failed: ", c::rpmErrorString();
 }
 
 sub done_db {
@@ -1116,10 +1117,11 @@ sub install($$$;$$) {
 	} else {
 	    #- child process will run each transaction.
 	    $SIG{SEGV} = sub { log::l("segmentation fault on transactions"); c::_exit(0) };
+	    my $db;
 	    eval {
 		close INPUT;
 		select((select(OUTPUT),  $| = 1)[0]);
-		my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
+		$db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
 		my $trans = c::rpmtransCreateSet($db, $prefix);
 		log::l("opened rpm database for transaction of ". scalar @transToInstall ." new packages, still $nb after that to do");
 
@@ -1151,9 +1153,10 @@ sub install($$$;$$) {
 		    c::rpmdbClose($db);
 		    die "installation of rpms failed:\n  ", join("\n  ", @probs);
 		}
-		c::rpmdbClose($db);
-		log::l("rpm database closed");
 	    }; $@ and print OUTPUT "die:$@\n";
+
+	    c::rpmdbClose($db);
+	    log::l("rpm database closed");
 
 	    close OUTPUT;
 	    c::_exit(0);

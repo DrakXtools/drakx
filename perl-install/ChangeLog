@@ -1,3 +1,19 @@
+2000-08-24  François Pons  <fpons@mandrakesoft.com>
+
+	* ../update_kernel*: changed reference from extract_archive to
+	packadrake.
+	* Makefile*: added live_install and live_install2.
+	* Xconfigurator.pm: updated Mach64 acceleration to only 3D Rage
+	Pro AGP card type, commented SiS and S3ViRGE support by GLX.
+	* commands.pm, keyboard.pm, lang.pm, pkgs.pm, list, tools/*:
+	updated to use packdrake now.
+	* install2.pm, install_steps.pm, install_steps_gtk, Makefile*:
+	manage live upgrade.
+	* modules.pm: use standard modprobe command for load in live
+	upgrade.
+	* netconnect.pm: added minimal modification for being compilable.
+	* rescue/list: added packdrake and sfdisk.
+
 2000-08-22  dam's  <damien@mandrakesoft.com>
 
 	* drakfuck (netconnect):finished isdn PCI/ISA card implemetation

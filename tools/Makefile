@@ -14,7 +14,7 @@ $(DIRS):
 
 install:
 	install make_mdkinst_stage2 gencompss $(ROOTDEST)/misc
-	cd /usr/bin ; install build_archive $(ROOTDEST)/misc || { echo "build_archive is missing"; exit 1; }
+	cd /usr/bin ; install packdrake $(ROOTDEST)/misc || { echo "packdrake is missing"; exit 1; }
 	cd /usr/bin ; install gendepslist2 rpm2header genhdlist_cz2 $(ROOTDEST)/misc || { echo "install rpmtools first!" ; exit 1; }
 	mkdir -p $(DEST)/usr/bin
 
@@ -25,16 +25,16 @@ ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
 $(BASE)/compss: $(BASE)/hdlists $(BASE)/hdlist.cz2
-	./gencompss `cat $< | perl -pe 's|(.*)|'$(BASE)'/$$1|' ` > $@ 
+	./gencompss `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' ` > $@ 
 
 $(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz2
-#	gendepslist2 -o $@ `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
+	gendepslist2 -o $@ `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
 
 $(BASE)/filelist: $(RPMS)
-#	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
+	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
 
 $(BASE)/hdlist.cz2: $(BASE)/hdlists $(RPMS)
-#	genhdlists --noclean --distrib $(ROOTDEST)
+	genhdlists --noclean --distrib $(ROOTDEST)
 
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done

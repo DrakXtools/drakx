@@ -183,10 +183,10 @@ sub cardConfiguration(;$$$) {
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /MGA G[24]00/ ||
-			 $card->{type} =~ /ATI Mach64/ ||
+			 $card->{identifier} =~ /3D Rage Pro AGP/ || #- by default only such card are supported, with AGP ?
 			 $card->{type} =~ /RIVA TNT/ ||
-			 $card->{type} =~ /SiS / ||
-			 $card->{type} =~ /S3 ViRGE/ ||
+			 #- $card->{type} =~ /SiS / || #- EXPERIMENTAL
+			 #- $card->{type} =~ /S3 ViRGE/ || #- EXPERIMENTAL
 			 $card->{type} =~ /Intel 810/);
     #- 3D acceleration configuration for XFree 4.0 using DRI.
     $card->{DRI_glx} = ($card->{type} =~ /Voodoo3 / || $card->{type} =~ /Voodoo Banshee / ||

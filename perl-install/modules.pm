@@ -372,9 +372,11 @@ sub load {
 
     if ($::testing) {
 	log::l("i try to install $name module (@options)");
+    } elsif ($::live) {
+	return run_program::run("modprobe", $name, @options);
     } else {
 	$conf{$name}{loaded} and return;
-
+	
 	eval { load($_, 'prereq') } foreach @{$deps{$name}};
 	load_raw([ $name, @options ]);
     }
@@ -413,7 +415,7 @@ sub unload {
 sub load_raw {
     my @l = map { my ($i, @i) = @$_; [ $i, \@i ] } grep { $_->[0] !~ /ignore/ } @_;
     my $cz = "/lib/modules" . (arch() eq 'sparc64' && "64") . ".cz"; -e $cz or $cz .= "2";
-    run_program::run("extract_archive", $cz, "/tmp", map { "$_->[0].o" } @l);
+    run_program::run("packdrake", "-x", $cz, "/tmp", map { "$_->[0].o" } @l);
     my @failed = grep {
 	my $m = "/tmp/$_->[0].o";
 	if (-e $m && run_program::run(["insmod_", "insmod"], "-f", $m, @{$_->[1]})) {

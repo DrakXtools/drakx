@@ -133,7 +133,7 @@ sub doPartitionDisksBefore {
 	install_any::getFile("XXX"); #- close still opened filehandle
 	eval { fs::umount("/tmp/hdimage") };
     }
-    eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
+    eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing && !$::live;
 
     $o->{raid} ||= {};
 }
@@ -281,7 +281,7 @@ sub beforeInstallPackages {
 
     #- some packages need such files for proper installation.
     any::writeandclean_ldsoconf($o->{prefix});
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
+    $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
 

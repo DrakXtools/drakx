@@ -1,0 +1,28 @@
+#!../perl
+
+my $dir = `pwd`;
+chomp $dir;
+$dir .= "/../../..";
+
+#- update /tmp/rhimage which points to top dir of Mandrake CD.
+system "/bin/rm", "-rf", "/tmp/rhimage";
+mkdir "/tmp/rhimage", 0700 or die "cannot create directory /tmp/rhimage";
+system "/bin/rm", "-rf", "/tmp/drakx";
+mkdir "/tmp/drakx", 0700 or die "cannot create directory /tmp/drakx\n";
+
+#- copy whole set of mdkinst tree and symlink to the CD.
+foreach (qw(Mandrake RPMS misc boot images)) {
+    symlink "$dir/../../$_", "/tmp/rhimage/$_";
+}
+system "/bin/cp", "-a", "$dir/../../Mandrake/mdkinst", "/tmp/drakx";
+
+#- start the true live_install.
+if (-x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2") {
+    chdir "/tmp/drakx/mdkinst/usr/bin/perl-install2";
+    system "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2";
+} else {
+    print STDERR "unable to get a working live system to start, check your working directory";
+}
+
+system "/bin/rm", "-rf", "/tmp/drakx";
+system "/bin/rm", "-rf", "/tmp/rhimage";
