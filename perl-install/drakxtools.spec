@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 28mdk
+Release: 29mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -255,6 +255,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %_sbindir/harddrake2
 %_datadir/pixmaps/harddrake2
 %_menudir/harddrake-ui
+%_iconsdir/large/harddrake.png
+%_iconsdir/mini/harddrake.png
+%_iconsdir/harddrake.png
+
 
 %files http -f %{name}-http.list
 %defattr(-,root,root)
@@ -266,6 +270,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Sep  2 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-29mdk
+- harddrake:
+  o use new icons
+  o add menu icon
+- mcc: ensure all binaries're there
+- ugtk: remove all glib warnings
+
 * Mon Sep  2 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-28mdk
 - tinyfirewall is now drakfirewall (daouda)
 

@@ -7,7 +7,9 @@ DIRS = $(INLIBDEST_DIRS) $(HAVEINST_DIRS) ddcprobe serial_probe harddrake
 NAME = libDrakX
 PREFIX = 
 LIBDIR = $(PREFIX)/usr/lib
+MENUDIR= $(LIBDEST)/menu
 DATADIR = $(PREFIX)/usr/share
+ICONSDIR= $(DATADIR)/icons
 BINDEST = $(PREFIX)/usr/bin
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
@@ -26,7 +28,7 @@ $(DIRS):
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps,icons/{large,mini}} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR) $(MENUDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
@@ -49,6 +51,10 @@ install:
 
 	find auto -follow -name .exists -o -name "*.bs" | xargs rm -f
 	cp -rfL auto standalone/icons $(LIBDEST)
+	mv $(LIBDEST)/icons/harddrake2/menu/harddrake-menu32.png $(ICONSDIR)/harddrake.png
+	mv $(LIBDEST)/icons/harddrake2/menu/harddrake-menu48.png $(ICONSDIR)/large/harddrake.png
+	mv $(LIBDEST)/icons/harddrake2/menu/harddrake-menu16.png $(ICONSDIR)/mini/harddrake.png
+	rmdir $(LIBDEST)/icons/harddrake2/menu
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
