@@ -915,7 +915,12 @@ sub report_bug {
 
 sub devfssymlinkf {
     my ($if, $of, $prefix) = @_;
-    symlinkf($if, "$prefix/$_") foreach ("dev/$of", "lib/dev-state/$of");
+    symlinkf($if, "$prefix/dev/$of");
+
+    output_p("$prefix/etc/devfs/conf.d/$of", 
+"REGISTER	^$if\$	CFUNCTION GLOBAL symlink $if $of
+UNREGISTER	^$if\$	CFUNCTION GLOBAL unlink $of
+");
 }
 
 sub fileshare_config {
