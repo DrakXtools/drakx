@@ -626,7 +626,7 @@ sub tell_kernel {
 	    } elsif ($action eq 'del') {
 		$force_reboot ||= !c::del_partition(fileno $F, $part_number);
 	    }
-	    log::l("tell kernel $action ($part_number $o_start $o_size), rebootNeeded is now $hd->{rebootNeeded}.");
+	    log::l("tell kernel $action ($part_number $o_start $o_size), rebootNeeded is now " . bool2yesno($hd->{rebootNeeded}));
 	}
     }
     if ($force_reboot) {
