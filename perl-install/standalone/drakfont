@@ -96,7 +96,7 @@ foreach (@ARGV) {
 print "app : @application\n";
 print "install : @install\n";
 print "uninstall : @uninstall\n";
-print "xx $xlsfonts\n";
+#print "xx $xlsfonts\n";
 
 my $xfs_conffile = '/etc/X11/fs/config';
 my $drakfont_dir = '/home/seb/new_drackfont';
@@ -147,11 +147,22 @@ sub search_windows_font {
 	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
 	    return 0;
 	}
-	foreach my $i (@list_fonts_win) {
-	    grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/windows/fonts/$i";
-	}
-	foreach my $i (@list_fonts_winnt) {
-	    grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/winnt/fonts/$i";
+	if (!$replace)
+	  {
+	      foreach my $i (@list_fonts_win) {
+		  grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/windows/fonts/$i";
+	      }
+	      foreach my $i (@list_fonts_winnt) {
+		  grep ( /$i$/, @font_list) || grep (/$i/, @installed_fonts) or push @font_list, "$win_dir/winnt/fonts/$i";
+	      }
+	  }
+	else {
+	    foreach my $i (@list_fonts_win) {
+		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/windows/fonts/$i";
+	    }
+	    foreach my $i (@list_fonts_winnt) {
+		grep ( /$i$/, @font_list)  or push @font_list, "$win_dir/winnt/fonts/$i";
+	    }
 	}
     }
     1;
@@ -164,54 +175,50 @@ sub search_dir_font {
     if (!(-e $fn )) { print "$_ :: no such file or directory \n";}
     else {
 	if ( -d $fn ) { 
-	    foreach my $i (all($fn)) { if (($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i)
-		    || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
+	    foreach my $i (all($fn)) { 
+		if (($i =~ /.ttf$/i) || ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i) || ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
 		    push @font_list_tmp, "$fn$i";
 		}
 	    }
 	}
 	else {
-	    if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i)
-		|| ($fn =~ /.pcf.gz$/i)) {
+	    if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i) || ($fn =~ /.pcf.gz$/i)) {
 		push @font_list_tmp, "$fn";
 	    }
 	}
 	print "Fonts in directory  : ".$_."\n" foreach (@font_list_tmp);
-#	@font_list = grep !$_, @font_list_tmp foreach @installed_fonts;
-
-
-	foreach my $i (@installed_fonts) {
-	    foreach my $j (@font_list_tmp) {
-		if (( $j =~ !/$i/) && !grep ($j , @font_list))  { push @font_list, "$j" ;}
+	if (!$replace) {
+	    foreach my $i (@installed_fonts) {
+		foreach my $j (@font_list_tmp) {
+		    if (( $j =~ !/$i/) && !grep ($j , @font_list))  {
+			push @font_list, "$j" ;
+		    }
+		}
 	    }
 	}
-
-	print "Font to install : ".$_."\n" foreach (@font_list);
-
+	else { 
+	    $font_list_tmp[0] and  @font_list = @font_list_tmp;
+	}
     }
+    print ".................................................\n\n";
+    print "Font to install : ".$_."\n" foreach (@font_list);
 }
 
 
-
-# Probleme: reperage des fontes de3ja existantes
-#
-#
-#
-
+# gestion not replace ... have to find fonts not installed
 
 sub search_dir_font_uninstall {
     my @font_list_tmp = ();
     my $fn = $_;
     if ( -d $fn ) { 
-	foreach my $i (all($fn)) { if (($i =~ /.ttf$/i)	|| ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i)
-		|| ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
-	    push @font_list_tmp, "$i";
+	foreach my $i (all($fn)) { 
+	    if (($i =~ /.ttf$/i)	|| ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i)	|| ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
+		push @font_list_tmp, "$i";
 	    }
 	}
     }
     else {
-	if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i)
-	    || ($fn =~ /.pcf.gz$/i)) {
+	if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i) || ($fn =~ /.pcf.gz$/i)) {
 	    push @font_list_tmp, "$fn";
 	}
     }
@@ -233,7 +240,8 @@ sub put_font_dir {
     # xlsfonts | less pour verifier l'installation des polices.
 }
 
-$xlsfonts || $windows || $install || $uninstall ? backend_mod() : interactive_mode();
+
+$xlsfonts || $windows || $install[0] || $uninstall[0] ? backend_mod() : interactive_mode();
 
 sub backend_mod {
     if ($xlsfonts) {
@@ -249,30 +257,18 @@ sub backend_mod {
 	print "\n...............The End...................\n";
     }
 
-    if ($install) {
+    if ($install[0]) {
 	print ".......Install Specifics Fonts...........\n\n";
 	search_installed_fonts();
-	foreach my $tmp (@ARGV) {
-	    if (!($tmp =~ /^-/ ))  {
-		print "parse : $tmp \n";
-		push @fontsdir_to_install, $tmp;
-	    }
-	}
-	search_dir_font $_ foreach (@fontsdir_to_install);
+	search_dir_font $_ foreach (@install);
 	#put_font_dir();
 	print "\n...............The End...................\n";
     }
 
-    if ($uninstall) {
+    if ($uninstall[0]) {
 	print "........Uninstall Specifics Fonts........\n\n";
 	search_installed_fonts_full_path();
-	foreach my $tmp (@ARGV) {
-	    if (!($tmp =~ /^-/ ))  {
-		print "parse : $tmp \n";
-		push @fontsdir_to_uninstall, $tmp;
-	    }
-	}
-	search_dir_font_uninstall $_ foreach (@fontsdir_to_uninstall);
+	search_dir_font_uninstall $_ foreach (@uninstall);
 	print "\n...............The End...................\n";
     }
 }
