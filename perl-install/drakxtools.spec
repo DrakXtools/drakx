@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 4mdk
+Release: 5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -338,6 +338,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Sep 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-5mdk
+- drakbackup:
+  o fix crashes in CD/Tape setup (stew)
+  o fix wizard's UI behavior (Nicolas Adenis-Lamarre)
+- drakconnect (blino):
+  o handle CAPI drivers
+  o add support for xDSL over CAPI (eg: AVM cards)
+  o fix pppoe configuration
+- draksec: move help from tooltips into separate page (#9894)
+- scannerdrake: fix "dynamic()" in scannerdrake to do not contain
+  anything interactive (till)
+
 * Mon Sep 13 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-4mdk
 - drakbug_report: fix crash
 - XFdrake: adapt to new proprietary package naming (pixel)
