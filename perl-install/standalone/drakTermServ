@@ -659,16 +659,9 @@ sub make_nbi() {
 	my $kernel;
 	my $nic;
 	
-	#- just a static list for the moment
-	#- method in mknbi-net is much better
-	my @nics = ("3c509", "3c59x", "3c90x", "8139cp", "8139too", "acenic", "airo",
-		"aironet4500_card", "bcm5700", "dgrs", "dl2k", "dmfe", "e100",
-		"e1000", "eepro100", "epic100", "fealnx", "forcedeth", "hamachi", "hp100",
-		"hysdn", "natsemi", "natsemi_old", "ne", "ne2k-pci", "ns83820",
-		"pcnet32", "pegasus", "prism2_pci", "prism2_plx", "rcpci", "sis900",
-		"starfire", "sundance", "sungem", "sunhme", "tlan", "tulip-old",
-		"via-rhine", "winbond-840", "xircom_cb", "xircom_tulip_cb", "yellowfin");
-	
+	require list_modules;
+	my @nics = list_modules::category2modules(list_modules::ethernet_categories());
+
 	#- kernel/module info in tree view
 	my $model = Gtk2::TreeStore->new("Glib::String");
     my $tree_kernels = Gtk2::TreeView->new_with_model($model);
