@@ -53,10 +53,15 @@ endif
 	fi
 	cd $(ROOTDEST)/images; md5sum *.img* > MD5SUM
 
+ifeq (i386,$(ARCH))
+	rm -rf $(ROOTDEST)/isolinux
+	cp -af isolinux $(ROOTDEST)
+endif
+
 	install live_update $(ROOTDEST)/live_update
 	make -C perl-install full_stage2
 
-build: $(FBOOT_IMG)
+build: $(FBOOT_RDZ) $(FBOOT_IMG)
 
 dirs:
 	@for n in . $(DIRS); do \
@@ -127,6 +132,7 @@ upload:
 	upload images MD5SUM ;\
 	upload images *.img* ;\
 	upload images/alternatives '' ;\
+	upload isolinux '' ;\
 	echo
 
 upload_sparc:

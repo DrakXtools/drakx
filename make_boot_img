@@ -3,6 +3,7 @@
 @ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|network|usbnet|blank|pcmcia|live|tftp|tftprd\n";
 
 use Config;
+use MDK::Common;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*)-/;
 my $corporate = $ENV{CORPORATE} && " corporate"; #- use this for building a corporate version.
@@ -61,6 +62,9 @@ foreach (@kernels) {
 	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("all.kernels/$_/boot/vmlinu*"));
 	rename("$img-$main", "$img");
     }
+}
+if ($arch =~ /i.86/ && $img =~ /all/) {
+    isolinux($main, @kernels);
 }
 
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
@@ -464,9 +468,47 @@ cd /tools/ppc
 
 }
 
-sub output {
-    my $f = shift;
-    local *F;
-    open F, "> $f" or die "error writing to $f";
-    print F join '', @_;
+sub isolinux {
+    my ($main, @kernels) = @_;
+    @kernels = ($main, grep { $_ ne $main } @kernels);
+    my $debug = 1 ? '-debug' : '';
+    _ "rm -rf isolinux"; mkdir "isolinux", 0777;
+    my $i = 0;
+    foreach (@kernels) {
+	mkdir "isolinux/alt$i", 0777;
+	my ($kernel) = glob("all.kernels/$_/boot/vmlinu*");
+	_ "cp $kernel isolinux/alt$i/vmlinuz";
+	_ "cp images/all.rdz-$_ isolinux/alt$i/all.rdz";
+	$i++;
+    }
+    _ "cp /usr/lib/isolinux$debug.bin isolinux/isolinux.bin";
+    output "isolinux/isolinux.cfg", "
+default linux
+display help.msg
+label linux
+  kernel alt0/vmlinuz
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=788
+label vgalo
+  kernel alt0/vmlinuz
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=785
+label vgahi
+  kernel alt0/vmlinuz
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga=791
+label vga16
+  kernel alt0/vmlinuz
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 vga16
+label text
+  kernel alt0/vmlinuz
+  append ramdisk_size=32000 initrd=alt0/all.rdz root=/dev/ram3 text
+" . join('', map_index { 
+"label alt$::i
+  kernel alt$::i/vmlinuz
+  append ramdisk_size=32000 initrd=alt$::i/all.rdz root=/dev/ram3 vga=788
+" } @kernels);
+
+    output "isolinux/help.msg", 
+"This is a special bootable CDROM giving you a choice between various kernels.
+
+The default is kernel $main.
+" . join('', map_index { $::i ? "\"alt$::i\" is kernel $_\n" : '' } @kernels);
 }
