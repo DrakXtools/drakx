@@ -17,8 +17,8 @@ $::expert = /-expert/;
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
 my @shells = grep { -x $_ } map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
-my $isMD5 = cat_("/etc/pam.d/passwd") =~ /md5/;
-my $isShadow = cat_("/etc/pam.d/passwd") =~ /shadow/;
+my $isMD5 = cat_("/etc/pam.d/system-auth") =~ /md5/;
+my $isShadow = cat_("/etc/pam.d/system-auth") =~ /shadow/;
 
 
 my $users = []; 
@@ -32,10 +32,10 @@ if (my @l = grep { ! /^-/ } @ARGV) {
 }
 
 system("adduser", $_->{name}) foreach @$users;
-any::addUsers('', $users);
-
 any::write_passwd_user('', $_, $isMD5) foreach @$users;
 system("pwconv") if $isShadow;
+
+any::addUsers('', $users);
 
 #$in->do_pkgs->install("autologin") if $o->{autologin};
 #any::set_autologin('', $o->{autologin}, $o->{desktop});
