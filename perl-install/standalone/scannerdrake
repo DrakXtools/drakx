@@ -49,6 +49,7 @@ $::CCPID and kill 'USR2', $::CCPID;
 my $wait = $in->wait_message(N("Scannerdrake"),
 			     N("Searching for configured scanners ..."));
 my @c = scanner::configured();
+$wait = undef;
 $wait = $in->wait_message(N("Scannerdrake"),
 			     N("Searching for new scanners ..."));
 my @f = scanner::detect(@c);
