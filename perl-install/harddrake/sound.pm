@@ -73,6 +73,7 @@ our %alsa2oss =
      "snd-gusclassic" => [ "gus" ], # isa
      "snd-gusextreme" => [ "gus" ], # isa
      "snd-gusmax"  => [ "gus" ],    # isa
+     "snd-hda-intelp"    => [ "unknown" ],
      "snd-hdsp"    => [ "unknown" ],
      "snd-ice1712" => [ "unknown" ], # isa
      "snd-ice1724" => [ "unknown" ], # isa

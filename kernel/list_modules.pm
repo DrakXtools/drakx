@@ -158,7 +158,7 @@ our %l = (
           qw(snd-bt87x snd-ca0106 snd-cmi8330 snd-cmipci snd-cs4231 snd-cs4232 snd-cs4236 snd-cs4281),
           qw(snd-cs46xx snd-darla20 snd-darla24 snd-dt019x snd-emu10k1 snd-ens1370 snd-ens1371 snd-es1688 snd-es18xx),
           qw(snd-es1938 snd-es1968 snd-es968 snd-fm801 snd-gina20 snd-gina24 snd-gina3g snd-gusclassic snd-gusextreme),
-          qw(snd-gusmax snd-hdsp snd-ice1712 snd-ice1724 snd-indi snd-indigodj snd-indigoio snd-intel8x0 snd-interwave),
+          qw(snd-gusmax snd-hda-intel snd-hdsp snd-ice1712 snd-ice1724 snd-indi snd-indigodj snd-indigoio snd-intel8x0 snd-interwave),
           qw(snd-interwave-stb snd-korg1212 snd-layla20 snd-layla24 snd-layla3g snd-maestro3 snd-mia snd-mixart snd-mona snd-mpu401 snd-nm256),
           qw(snd-opl3sa2 snd-opti92x-ad1848 snd-opti92x-cs4231 snd-opti93x snd-pcxhr snd-rme32),
           qw(snd-rme96 snd-rme9652 snd-sb16 snd-sb8 snd-sbawe snd-sgalaxy snd-sonicvibes),
