@@ -67,7 +67,16 @@ sub ppp_configure {
     $in->do_pkgs->install('ppp') if !$::testing;
     $in->do_pkgs->install('kdenetwork-kppp') if !$::testing && $in->do_pkgs->is_installed('kdebase');
 
-    any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
+    if ($modem->{device} ne "/dev/modem") {
+        my $dev = $modem->{device};
+        $dev =~ s!^/dev/!!;
+        any::devfssymlinkf({ device => $dev }, 'modem');
+        #- add a specific udev script in addition to the udev rules file
+        #- (ttySL0 is a symlink, udev won't be called when it's created)
+        my $udev_conf = "$::prefix/etc/udev/conf.d/modem.conf";
+        output_p($udev_conf, "ln -sf $dev /dev/modem\n");
+        chmod 0755, $udev_conf;
+    }
 
     my %toreplace = map { $_ => $modem->{$_} } qw(Authentication AutoName connection dns1 dns2 domain IPAddr login passwd phone SubnetMask);
     $toreplace{phone} =~ s/[a-zA-Z]//g;
