@@ -91,6 +91,14 @@ sub setup_userconf {
     }
 }
 
+sub lang2move_clp_name {
+    my ($lang) = @_;
+    my $dir = '/usr/share/locale/' . lang::l2locale($lang);
+    my $link = readlink($dir) or return;
+    my ($name) = $link =~ m!image_(i18n_.*?)/! or log::l("ERROR: bad link $link for $dir"), return;
+    $name;
+}
+
 #- run very soon at stage2 start, setup things on tmpfs rw / that
 #- were not necessary to start stage2 itself (there were setup
 #- by stage1 of course)
@@ -193,14 +201,13 @@ sub init {
     }
     if (-s '/etc/sysconfig/i18n') {
         lang::set($o->{locale} = lang::read('', 0)); #- read ~/.i18n first if it exists
-	install2::handleI18NClp();
     }
 
     touch '/var/run/rebootctl';
 
 drakx_stuff:
     $o->{steps}{$_} = { reachable => 1, text => $_ }
-      foreach qw(initGraphical autoSelectLanguage handleI18NClp verifyKey configMove startMove);
+      foreach qw(initGraphical autoSelectLanguage verifyKey configMove startMove);
     $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ $using_existing_host_config ?
                            qw(initGraphical verifyKey startMove)
@@ -213,12 +220,12 @@ drakx_stuff:
     delete $o->{authentication}{shadow};
 
     foreach my $lang (keys %lang::langs) {
-	my $dir = '/usr/share/locale/' . lang::l2locale($lang);
-	my $link = readlink($dir) or next;
-	my ($name) = $link =~ m!image_(i18n_.*?)/! or log::l("ERROR: bad link $link for $dir"), next;
-	log::l("disabling lang $lang");
-	-e "/cdrom/live_tree_$name.clp" or delete $lang::langs{$lang};
-    }   
+	my $clp_name = lang2move_clp_name($lang) or next;
+	if (! -e "/cdrom/live_tree_$clp_name.clp") {
+	    log::l("disabling lang $lang");
+	    delete $lang::langs{$lang};
+	}
+    }
 }
 
 sub lomount_clp {
@@ -246,12 +253,13 @@ sub install2::autoSelectLanguage {
     install_steps::selectLanguage($o);
 }
 
-sub install2::handleI18NClp {
-    my $o = $::o;
+sub handleI18NClp {
+    my ($lang) = @_;
 
-    log::l("move: handleI18NClp");
-    lomount_clp("i18n_$o->{locale}{lang}", '/usr');
-    lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
+    my $clp_name = lang2move_clp_name($lang) or return;
+    log::l("move: handleI18NClp (lang=$lang, clp_name=$clp_name)");
+    lomount_clp($clp_name, '/usr');
+    lomount_clp("always_$clp_name", '/usr');
 }
 
 sub key_parts {
@@ -363,7 +371,7 @@ sub reboot() {
 }
 
 sub install2::verifyKey {
-    my ($o) = $::o;
+    my $o = $::o;
 
     log::l("automatic transparent key support is disabled"), return if $key_disabled;
 
@@ -606,14 +614,6 @@ sub install2::initGraphical {
     
     undef *install_steps_interactive::errorInStep;
     *install_steps_interactive::errorInStep = \&errorInStep;
-
-    my $gtk_charsetChanged = \&install_steps_gtk::charsetChanged;
-    undef *install_steps_gtk::charsetChanged;
-    *install_steps_gtk::charsetChanged = sub {
-	log::l("move: charsetChanged");
-	install2::handleI18NClp();
-	&$gtk_charsetChanged;
-    };
 }
 
 sub install2::startMove {
