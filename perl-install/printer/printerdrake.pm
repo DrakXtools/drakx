@@ -3786,7 +3786,8 @@ sub security_check {
     # wants to activate the spooler in the given security mode. Stop the
     # operation of installing the spooler if he disagrees.
     my $securitystr = ($security == 4 ? N("high") : N("paranoid"));
-    if ($in->ask_yesorno(N("Installing a printing system in the %s security level", $securitystr),
+    if ($in &&
+	$in->ask_yesorno(N("Installing a printing system in the %s security level", $securitystr),
 			 N("You are about to install the printing system %s on a system running in the %s security level.
 
 This printing system runs a daemon (background process) which waits for print jobs and handles them. This daemon is also accessible by remote machines through the network and so it is a possible point for attacks. Therefore only a few selected daemons are started by default in this security level.
