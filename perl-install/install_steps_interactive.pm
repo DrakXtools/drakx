@@ -122,44 +122,18 @@ sub selectKeyboard {
     any::keyboard_group_toggle_choose($o, $o->{keyboard}) or goto &selectKeyboard;
     install_steps::selectKeyboard($o);
 }
-#------------------------------------------------------------------------------
-sub selectInstallClass1 {
-    my ($o, $verif, $l, $def, $l2, $def2) = @_;
-    $verif->($o->ask_from_list(N("Install Class"), N("Which installation class do you want?"), $l, $def) || die 'already displayed');
-
-    return if !@$l2;
-
-    $::live ? 'Update' : $o->ask_from_list_(N("Install/Update"), N("Is this an install or an update?"), $l2, $def2);
-}
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
     my ($o, $clicked) = @_;
 
-    my %c = my @c = (
-      if_(!$::corporate,
-	N("Recommended") => "beginner",
-      ),
-      if_($o->{meta_class} ne 'desktop',
-	N("Expert")	 => "expert",
-      ),
-    );
-    %c = @c = (N("Expert") => "expert") if $::expert && !$clicked;
-
-    $o->set_help('selectInstallClassCorpo') if $::corporate;
-
-    my $verifInstallClass = sub { $::expert = $c{$_[0]} eq "expert" };
     my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? N_("Upgrade packages only") : N_("Upgrade") : N_("Install");
 
-    if ($installMode = $o->selectInstallClass1($verifInstallClass,
-					       first(list2kv(@c)), ${{ reverse %c }}{$::expert ? "expert" : "beginner"},
-					       exists $o->{isUpgrade} ? [] : [ N_("Install"), N_("Upgrade"), N_("Upgrade packages only") ], $installMode)) {
-	log::l("install class: $installMode");
-	$o->{isUpgrade} = $installMode =~ /Upgrade/;
-	$o->{keepConfiguration} = $installMode =~ /packages only/;
-    }
+    $installMode = exists $o->{isUpgrade} || $::live ? 'Update' : $o->ask_from_list_(N("Install/Update"), N("Is this an install or an update?"), [ N_("Install"), N_("Upgrade"), N_("Upgrade packages only") ], $installMode);
 
-    install_steps::selectInstallClass($o);
+    log::l("install class: $installMode");
+    $o->{isUpgrade} = $installMode =~ /Upgrade/;
+    $o->{keepConfiguration} = $installMode =~ /packages only/;
 }
 
 #------------------------------------------------------------------------------

@@ -150,35 +150,6 @@ press `F1' when booting on CDROM, then enter `text'.")) if $first_time && availa
 }
 
 #------------------------------------------------------------------------------
-sub selectInstallClass1 {
-    my ($o, $verif, $l, $def, $l2, $def2) = @_;
-    $::live || @$l == 1 || !@$l2 and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
-
-    my $w = ugtk2->new(N("Install Class"));
-    my ($focused, @radios);
-    gtkadd($w->{window},
-	   gtkpack($w->create_box_with_title(N("Please choose one of the following classes of installation:")),
-		   (@radios = gtkradio($def, @$l)),
-		   gtkadd(create_vbox(),
-			  map { my $v = $_; 
-				my $b = Gtk2::Button->new(translate($_));
-				$focused = $b if $_ eq $def2;
-				gtksignal_connect($b, "clicked" => sub {
-						      $w->{retval} = $v;
-						      mapn { $verif->($_[1]) if $_[0]->get_active } \@radios, $l;
-						      Gtk2->main_quit
-						  });
-			    } @$l2)
-		  ));
-    $focused->grab_focus if $focused;
-    $w->main;
-
-    install_gtk::create_steps_window($o);
-
-    $w->{retval};
-}
-
-#------------------------------------------------------------------------------
 sub selectMouse {
     my ($o, $force) = @_;
     my %old = %{$o->{mouse}};
