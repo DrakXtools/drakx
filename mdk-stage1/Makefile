@@ -56,12 +56,6 @@ COMPILE = $(CC) $(DEFS) $(CFLAGS)
 ifeq (i386, $(ARCH))
 INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
-INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\"
-ifdef MOVE
-INIT_DEFS_ADD_STAGE2 = -DBINARY=\"/usr/bin/runstage2.pl\"
-else
-INIT_DEFS_ADD_STAGE2 = -DBINARY=\"/usr/bin/runinstall2\"
-endif
 else
 ifeq (x86_64, $(ARCH))
 INITSRC = minilibc.c init.c
@@ -74,6 +68,13 @@ else
 INIT_DEFS = -DINIT_HEADERS=\"init-libc-headers.h\" $(DIETLIBC_INCLUDES)
 endif
 endif
+endif
+
+INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\"
+ifdef MOVE
+INIT_DEFS_ADD_STAGE2 = -DBINARY=\"/usr/bin/runstage2.pl\"
+else
+INIT_DEFS_ADD_STAGE2 = -DBINARY=\"/usr/bin/runinstall2\"
 endif
 
 INITOBJS = $(subst .c,.o,$(INITSRC))
