@@ -147,6 +147,7 @@ if (@devices) {
 		  modules::write_conf;
 	   }
 	   scan4channels();
+	}
 } else {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
 											   N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
