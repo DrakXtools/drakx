@@ -642,17 +642,16 @@ sub Resize {
 	    $max = min($max, $nice_resize{fat}->max_size);	    
 	} elsif (isExt2($part) || isThisFs('ext3', $part)) {
 	    write_partitions($in, $hd) or return;
-	    $nice_resize{ext2} = devices::make($part->{device});
-	    my $r = `dumpe2fs $nice_resize{ext2} 2>/dev/null`;
+	    my $dev = devices::make($part->{device});
+	    my $r = run_program::get_stdout('dumpe2fs', $dev);
 	    $r =~ /Block count:\s*(\d+)/ and $block_count = $1;
 	    $r =~ /Free blocks:\s*(\d+)/ and $free_block = $1;
 	    $r =~ /Block size:\s*(\d+)/ and $block_size = $1;
 	    log::l("dumpe2fs $nice_resize{ext2} gives: Block_count=$block_count, Free_blocks=$free_block, Block_size=$block_size");
 	    if ($block_count && $free_block && $block_size) {
-		$min = max($min, ($block_count - $free_block) * $block_size / 512);
-		$max = min($max, $block_count * $block_size / 512);
-	    } else {
-		delete $nice_resize{ext2};
+		$min = max($min, ($block_count - $free_block) * ($block_size / 512));
+		$max = min($max, $block_count * ($block_size / 512));
+		$nice_resize{ext2} = $dev;
 	    }
 	} elsif (isThisFs('ntfs', $part)) {
 	    write_partitions($in, $hd) or return;
