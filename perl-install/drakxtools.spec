@@ -272,6 +272,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %files -n harddrake-ui
 %defattr(-,root,root)
+%dir /etc/sysconfig/harddrake2/
 %_sbindir/harddrake2
 %_datadir/pixmaps/harddrake2
 %_menudir/harddrake-ui
