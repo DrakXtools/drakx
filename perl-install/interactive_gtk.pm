@@ -14,7 +14,7 @@ my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
     ($::windowheight, $::windowwidth) = my_gtk::gtkroot()->get_size if !$::isInstall;
-    ($::wantedheight, $::wantedwidth) = ($::windowheight * 0.8, $::windowwidth * 0.8);
+    ($::wantedheight, $::wantedwidth) = $::isEmbedded ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
     goto &interactive::new;
 }
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
