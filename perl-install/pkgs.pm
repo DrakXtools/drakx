@@ -183,7 +183,7 @@ sub packageByName {
 }
 sub packageById {
     my ($packages, $id) = @_;
-    $packages->{depslist}[$id] or log::l("unknown package id $id") && undef;
+    $packages->{depslist}[$id]; #- do not log as id unsupported are still in depslist.
 }
 sub packagesOfMedium {
     my ($packages, $mediumName) = @_;
@@ -573,9 +573,10 @@ sub getProvides($) {
     #- packages can be managed by DrakX (currently about 2000).
     my $i = 0;
     foreach my $pkg (@{$packages->{depslist}}) {
+	$pkg or next;
 	unless (packageFlagBase($pkg)) {
 	    foreach (map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($pkg)) {
-		my $provided = $packages->{depslist}[$_] or die "invalid package index $_";
+		my $provided = $packages->{depslist}[$_] or next;
 		packageFlagBase($provided) or $provided->[$PROVIDES] = pack "s*", (unpack "s*", $provided->[$PROVIDES]), $i;
 	    }
 	}
@@ -1507,7 +1508,7 @@ sub selected_leaves {
 
     #- initialize l with all id, not couting base package.
     foreach my $id (0 .. $#{$packages->{depslist}}) {
-	my $pkg = $packages->{depslist}[$id];
+	my $pkg = $packages->{depslist}[$id] or next;
 	packageSelectedOrInstalled($pkg) && !packageFlagBase($pkg) or next;
 	$l{$id} = 1;
     }
@@ -1516,7 +1517,8 @@ sub selected_leaves {
 	#- when a package is in a choice, increase its value in hash l, because
 	#- it has to be examined before when we will select them later.
 	#- NB: this number may be computed before to save time.
-	foreach (packageDepsId($packages->{depslist}[$id])) {
+	my $p = $packages->{depslist}[$id] or next;
+	foreach (packageDepsId($p)) {
 	    if (/\|/) {
 		foreach (split '\|') {
 		    exists $l{$_} or next;
@@ -1532,7 +1534,8 @@ sub selected_leaves {
 	#- do not count already deleted id, else cycles will be removed.
 	$l{$id} or next;
 
-	foreach (packageDepsId($packages->{depslist}[$id])) {
+	my $p = $packages->{depslist}[$id] or next;
+	foreach (packageDepsId($p)) {
 	    #- choices need no more to be examined, this has been done above.
 	    /\|/ and next;
 	    #- improve value of this one, so it will be selected before.
