@@ -514,7 +514,7 @@ GridHeight=70
 	}
     }
 
-    fix_broken_alternatives();
+    any::fix_broken_alternatives();
 
     #- update theme directly from a package (simplest).
     if (-s "$o->{prefix}/usr/share/oem-theme.rpm") {
