@@ -232,6 +232,13 @@ image=/vmlinux.gz
     }
 }
 
+sub boot_img_ppc {
+    my ($mnt, $img) = @_;
+    # Here's a quick hack...  just to give the script somethign to do. :)
+    # We do not yet have a set way of making bootable images.
+    _ "cp $type.rdz $img";
+}
+
 sub output {
     my $f = shift;
     local *F;
