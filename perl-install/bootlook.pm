@@ -331,15 +331,15 @@ sub lilo_choice
     local ($_) = `detectloader`;
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
     
-    my ($hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
-    my $fstab = [ fsedit::get_fstab(@$hds) ];
-    fs::get_mntpoints_from_fstab($fstab);
+    my ($all_hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
+    my $fstab = [ fsedit::get_all_fstab($all_hds) ];
+    fs::get_all_mntpoints_from_fstab($all_hds);
  
     $::expert=1;
   ask:
     local $::isEmbedded = 0;
-    any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or return;
-    eval { bootloader::install('', $bootloader, $fstab, $hds) };  
+    any::setupBootloader($in, $bootloader, $all_hds->{hds}, $fstab, $ENV{SECURE_LEVEL}) or return;
+    eval { bootloader::install('', $bootloader, $fstab, $all_hds->{hds}) };  
     if ($@) {
 	$in->ask_warn('', 
 		      [ _("Installation of LILO failed. The following error occured:"),

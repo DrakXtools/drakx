@@ -11,23 +11,35 @@ use common;
 use partition_table qw(:types);
 use commands;
 use fs;
+use fsedit;
 use log;
 
-
-sub file {
-    my ($part) = @_;
-    ($part->{device}{mntpoint} || die "loopback::file but loopback file has no associated mntpoint") . 
-      $part->{loopback_file};
-}
-
-sub loopbacks {
-    map { map { @{$_->{loopback} || []} } partition_table::get_normal_parts($_) } @_;
-}
 
 sub carryRootLoopback {
     my ($part) = @_;
     $_->{mntpoint} eq '/' and return 1 foreach @{$part->{loopback} || []};
     0;
+}
+
+sub check_circular_mounts {
+    my ($hd, $part, $all_hds) = @_;
+
+    my $fstab = [ fsedit::get_all_fstab($all_hds), $part ]; # no pb if $part is already in $all_hds
+
+    my $base_mntpoint = $part->{mntpoint};
+    my $check; $check = sub {
+	my ($part, @seen) = @_;
+	push @seen, $part->{mntpoint} || return;
+	@seen > 1 && $part->{mntpoint} eq $base_mntpoint and die _("Circular mounts %s\n", join(", ", @seen));
+	if (my $part = fs::up_mount_point($part->{mntpoint}, $fstab)) {
+	    #- '/' carrier is a special case, it will be mounted first
+	    $check->($part, @seen) if !carryRootLoopback($part);
+	}
+	if (isLoopback($part)) {
+	    $check->($part->{loopback_device}, @seen);
+	}
+    };
+    $check->($part) if !($base_mntpoint eq '/' && isLoopback($part)); #- '/' is a special case, no loop check
 }
 
 sub carryRootCreateSymlink {
@@ -51,16 +63,15 @@ sub carryRootCreateSymlink {
 
 sub format_part {
     my ($part, $prefix) = @_;
-    fs::mount_part($part->{device}, $prefix);
-    my $f = create($part, $prefix);
-    local $part->{device} = $f;
+    fs::mount_part($part->{loopback_device}, $prefix);
+    create($part, $prefix);
     fs::real_format_part($part);
 }
 
 sub create {
     my ($part, $prefix) = @_;
-    my $f = "$prefix$part->{device}{mntpoint}$part->{loopback_file}";
-    return $f if -e $f;
+    my $f = $part->{device} = "$prefix$part->{loopback_device}{mntpoint}$part->{loopback_file}";
+    return if -e $f;
 
     eval { commands::mkdir_("-p", dirname($f)) };
 
@@ -70,7 +81,6 @@ sub create {
     sysopen F, $f, 2 | c::O_CREAT() or die "failed to create loopback file";
     sysseek F, ($part->{size} << 9) - 1, 0 or die "failed to create loopback file";
     syswrite F, "\0" or die "failed to create loopback file";
-    $f;
 }
 
 sub getFree {

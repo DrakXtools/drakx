@@ -95,18 +95,6 @@ sub get_geometry($) {
     { geom => \%geom, totalsectors => $geom{heads} * $geom{sectors} * $geom{cylinders} };
 }
 
-#- works for both hard drives and partitions ;p
-sub description {
-    my ($hd) = @_;
-    my $win = $hd->{device_windobe};
-
-    sprintf "%s%s (%s%s)", 
-      $hd->{device}, 
-      $win && " [$win:]", 
-      formatXiB($hd->{totalsectors} || $hd->{size}, 512),
-      $hd->{info} && ", $hd->{info}";
-}
-
 sub openit($$;$) { sysopen $_[1], $_[0]{file}, $_[2] || 0; }
 
 # cause kernel to re-read partition table

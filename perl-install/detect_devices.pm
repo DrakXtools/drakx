@@ -30,13 +30,13 @@ sub get {
 
     getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray();
 }
-sub hds() { grep { $_->{type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
-sub zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } get(); }
-sub ide_zips() { grep { $_->{type} =~ /.d/ && isZipDrive($_) } getIDE(); }
-#-sub jazzs() { grep { $_->{type} =~ /.d/ && isJazDrive($_) } get(); }
-sub ls120s() { grep { $_->{type} =~ /.d/ && isLS120Drive($_) } get(); }
+sub hds() { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
+sub zips() { grep { $_->{media_type} =~ /.d/ && isZipDrive($_) } get(); }
+sub ide_zips() { grep { $_->{media_type} =~ /.d/ && isZipDrive($_) } getIDE(); }
+#-sub jazzs() { grep { $_->{media_type} =~ /.d/ && isJazDrive($_) } get(); }
+sub ls120s() { grep { $_->{media_type} =~ /.d/ && isLS120Drive($_) } get(); }
 sub cdroms() { 
-    my @l = grep { $_->{type} eq 'cdrom' } get(); 
+    my @l = grep { $_->{media_type} eq 'cdrom' } get(); 
     if (my @l2 = IDEburners()) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
@@ -49,9 +49,9 @@ sub cdroms() {
     }
     @l;
 }
-sub burners    { grep { $_->{type} eq 'cdrom' && isBurner($_) } get() }
-sub IDEburners { grep { $_->{type} eq 'cdrom' && isBurner($_) } getIDE() }
-sub dvdroms    { grep { $_->{type} eq 'cdrom' && isDvdDrive($_) } get() }
+sub burners    { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } get() }
+sub IDEburners { grep { $_->{media_type} eq 'cdrom' && isBurner($_) } getIDE() }
+sub dvdroms    { grep { $_->{media_type} eq 'cdrom' && isDvdDrive($_) } get() }
 
 sub get_mac_model() {
     my $mac_model = cat_("/proc/device-tree/model") || die "Can't open /proc/device-tree/model";
@@ -76,12 +76,13 @@ sub get_mac_generation() {
 sub floppies() {
     require modules;
     eval { modules::load("floppy") };
-    my @fds = grep { tryOpen($_) } qw(fd0 fd1);
+    my @fds = map {; { device => $_, media_type => 'fd' } } grep { tryOpen($_) } qw(fd0 fd1);
     my @ide = ls120s() and modules::load("ide-floppy");
-    my @scsi = grep { $_->{type} eq 'fd' } getSCSI();
-    (map { $_->{device} } @ide, @scsi), @fds;
+    my @scsi = grep { $_->{media_type} eq 'fd' } getSCSI();
+    @ide, @scsi, @fds;
 }
-sub floppy { first(floppies()) }
+sub floppies_dev() { map { $_->{device} } floppies() }
+sub floppy { first(floppies_dev()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub isBurner { 
@@ -101,7 +102,7 @@ sub isDvdDrive {
 sub isZipDrive { $_[0]->{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 #-sub isJazzDrive { $_[0]->{info} =~ /JAZZ?\s+/ } #- untested.
 sub isLS120Drive { $_[0]->{info} =~ /LS-?120|144MB/ }
-sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]->{type} eq 'fd' } #-or &isJazzDrive }
+sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]->{media_type} eq 'fd' } #-or &isJazzDrive }
 
 sub isFloppyOrHD {
     my ($dev) = @_;
@@ -134,7 +135,7 @@ sub getSCSI() {
 	    $device = "scd" . $cdromNum++;
 	    $type = 'cdrom';
 	}
-	$device and push @drives, { device => $device, type => $type, info => "$vendor $model", id => $id, bus => 0 };
+	$device and push @drives, { device => $device, media_type => $type, info => "$vendor $model", id => $id, bus => 0 };
     }
     @drives;
 }
@@ -152,7 +153,7 @@ sub getIDE() {
 	my $info = chomp_(cat_("$d/model")) || "(none)";
 
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
-	push @idi, { type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };
+	push @idi, { media_type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };
     }
     @idi;
 }
@@ -168,7 +169,7 @@ sub getCompaqSmartArray() {
 	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
 	    foreach (cat_($f)) {
 		if (m|^\s*($name/.*?):|) {
-		    push @idi, { device => $1, info => "Compaq RAID logical disk", type => 'hd' };
+		    push @idi, { device => $1, info => "Compaq RAID logical disk", media_type => 'hd' };
 		}
 	    }
 	}
@@ -183,7 +184,7 @@ sub getDAC960() {
     #- /dev/rd/c0d0: RAID-7, Online, 17928192 blocks, Write Thru0123456790123456789012
     foreach (syslog()) {
 	my ($device, $info) = m|/dev/(rd/.*?): (.*?),| or next;
-	$idi{$device} = { info => $info, type => 'hd', device => $device };
+	$idi{$device} = { info => $info, media_type => 'hd', device => $device };
 	log::l("DAC960: $device ($info)");
     }
     values %idi;
@@ -210,7 +211,7 @@ sub pci_probe {
     my ($probe_type) = @_;
     map {
 	my %l;
-	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function type driver description)} = split "\t";
+	@l{qw(vendor id subvendor subid pci_bus pci_device pci_function media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id subvendor subid);
 	$l{bus} = 'PCI';
 	\%l
@@ -222,7 +223,7 @@ sub usb_probe {
 
     map {
 	my %l;
-	@l{qw(vendor id type driver description)} = split "\t";
+	@l{qw(vendor id media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
 	\%l
@@ -247,7 +248,7 @@ sub stringlist {
 	sprintf("%-16s: %s%s%s", 
 		$_->{driver} ? $_->{driver} : 'unknown', 
 		$_->{description} eq '(null)' ? sprintf("Vendor=0x%04x Device=0x%04x", $_->{vendor}, $_->{id}) : $_->{description},
-		$_->{type} ? sprintf(" [%s]", $_->{type}) : '',
+		$_->{media_type} ? sprintf(" [%s]", $_->{media_type}) : '',
 		$_->{subid} && $_->{subid} != 0xffff ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '',
 	       );
     } probeall(1); 
@@ -318,14 +319,14 @@ sub whatParport() {
     @res;
 }
 
-sub usbMice      { grep { $_->{type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/} usb_probe() }
+sub usbMice      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/} usb_probe() }
 sub usbWacom     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
-sub usbKeyboards { grep { $_->{type} =~ /\|Keyboard/ } usb_probe() }
-sub usbZips      { grep { $_->{type} =~ /Mass Storage\|/ } usb_probe() }
+sub usbKeyboards { grep { $_->{media_type} =~ /\|Keyboard/ } usb_probe() }
+sub usbZips      { grep { $_->{media_type} =~ /Mass Storage\|/ } usb_probe() }
 
 sub whatUsbport() {
     my ($i, $elem, @res) = (0, {});
-    foreach (grep { $_->{type} =~ /Printer/ } usb_probe()) {
+    foreach (grep { $_->{media_type} =~ /Printer/ } usb_probe()) {
 	my ($manufacturer, $model) = split '\|', $_->{description};
 	$_->{description} =~ s/Hewlett[-\s_]Packard/HP/;
 	push @res, { port => "/dev/usb/lp$i", val => { CLASS => 'PRINTER',

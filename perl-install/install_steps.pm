@@ -137,32 +137,31 @@ sub doPartitionDisksBefore {
 	eval {          fs::umount_all($o->{fstab}, $o->{prefix}) };
 	eval { sleep 1; fs::umount_all($o->{fstab}, $o->{prefix}) } if $@; #- HACK
     } if $o->{fstab} && !$::testing && !$::live;
-
-    $o->{raid} ||= {};
 }
 
 #------------------------------------------------------------------------------
 sub doPartitionDisksAfter {
     my ($o) = @_;
-    unless ($::testing) {
-	partition_table::write($_) foreach @{$o->{hds}};
-	$_->{rebootNeeded} and $o->rebootNeeded foreach @{$o->{hds}};
+    if (!$::testing) {
+	my $hds = $o->{all_hds}{hds};
+	partition_table::write($_) foreach @$hds;
+	$_->{rebootNeeded} and $o->rebootNeeded foreach @$hds;
     }
 
-    $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, @{$o->{lvms}}, $o->{raid}) ];
+    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
     
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) {
 	die "Need bootstrap partition to boot system!" if !(defined $partition_table_mac::bootstrap_part);
     }
     
-    if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{hds})) {
+    if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{all_hds})) {
 	die _("You must have a FAT partition mounted in /boot/efi");
     }
 
     if ($o->{partitioning}{use_existing_root}) {
 	#- ensure those partitions are mounted so that they are not proposed in choosePartitionsToFormat
-	fs::mount_part($_, $o->{prefix}) foreach grep { $_->{mntpoint} && !$_->{notFormatted} } @{$o->{fstab}};
+	fs::mount_part($_, $o->{prefix}) foreach grep { $_->{mntpoint} && maybeFormatted($_) } @{$o->{fstab}};
     }
 
     if (my $s = delete $o->{stage1_hd}) {
@@ -192,7 +191,7 @@ sub doPartitionDisks {
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
     } 
     if ($o->{partitioning}{auto_allocate}) {
-	fsedit::auto_allocate($o->{hds}, $o->{partitions}, $o->{raid}{raid});
+	fsedit::auto_allocate($o->{all_hds}, $o->{partitions});
     }
 }
 
@@ -233,9 +232,7 @@ sub choosePartitionsToFormat($$) {
 	
 	add2hash_($_, { toFormat => $_->{notFormatted} });
 	if (!$_->{toFormat}) {
-	    my $t = isLoopback($_) ? 
-	      eval { fsedit::typeOfPart($o->{prefix} . loopback::file($_)) } :
-	      fsedit::typeOfPart($_->{device});
+	    my $t = fsedit::typeOfPart($_->{device});
 	    $_->{toFormatUnsure} = member($_->{mntpoint}, '/', '/usr') ||
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
 	      (!$t || isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
@@ -245,7 +242,7 @@ sub choosePartitionsToFormat($$) {
 
 sub formatMountPartitions {
     my ($o) = @_;
-    fs::formatMount_all($o->{raid}, $o->{fstab}, $o->{prefix});
+    fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix});
 }
 
 #------------------------------------------------------------------------------
@@ -494,7 +491,7 @@ GridHeight=70
     }
 
     if ($o->{blank} || $o->{updatemodules}) {
-	my @l = detect_devices::floppies();
+	my @l = detect_devices::floppies_dev();
 
 	foreach (qw(blank updatemodules)) {
 	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die _("No floppy drive available");
@@ -668,6 +665,7 @@ sub addUser {
 
     any::write_passwd_user($p, $_, $o->{authentication}{md5}) foreach @$users;
 
+    local *F;
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
     print F "$_->{name}:x:$_->{gid}:\n" foreach grep { ! getgrgid($_->{gid}) } @$users;
 
@@ -700,7 +698,7 @@ sub createBootdisk($) {
     my ($o) = @_;
     my $dev = $o->{mkbootdisk} or return;
 
-    my @l = detect_devices::floppies();
+    my @l = detect_devices::floppies_dev();
 
     $dev = shift @l || die _("No floppy drive available")
       if $dev eq "1"; #- special case meaning autochoose
@@ -760,7 +758,7 @@ sub setupBootloaderBefore {
 	    my $p = pkgs::packageByName($o->{packages}, 'Aurora');
 	    $p && pkgs::packageFlagInstalled($p);
 	};
-        bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o),
+        bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab}, install_any::kernelVersion($o),
 			    $has_aurora && $vga);
 	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
 
@@ -797,7 +795,7 @@ sub setupBootloader($) {
 #	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
     } else {
 	require bootloader;
-	bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
+	bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
     }
 }
 

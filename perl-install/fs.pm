@@ -24,6 +24,11 @@ sub add_options(\$@) {
     $$option = join(',', keys %l) || "defaults";
 }
 
+sub raw_hds {
+    detect_devices::floppies(), detect_devices::cdroms(), 
+      (map { $_->{device} .= '4'; $_ } detect_devices::zips());
+}
+
 sub read_fstab($) {
     my ($file) = @_;
 
@@ -61,21 +66,27 @@ sub check_mounted($) {
 }
 
 sub get_mntpoints_from_fstab {
-    my ($fstab, $prefix, $uniq) = @_;
-
+    my ($l, $prefix, $uniq) = @_;
     log::l("reading fstab");
     foreach (read_fstab("$prefix/etc/fstab")) {
-	next if $uniq && fsedit::mntpoint2part($_->{mntpoint}, $fstab);
+	next if $uniq && fsedit::mntpoint2part($_->{mntpoint}, $l);
+	($_->{device} = expand_symlinks(($_->{device} =~ m|^/| ? '' : '/dev/') . $_->{device})) =~ s|^/dev/||;
 
-	foreach my $p (@$fstab) {
+	foreach my $p (@$l) {
 	    $p->{device} eq $_->{device} or next;
 	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p->{type}) and
 		log::l("err, fstab and partition table do not agree for $_->{device} type: " . (type2fs($p->{type}) || type2name($p->{type})) . " vs $_->{type}"), next;
 	    delete $p->{unsafeMntpoint} || !$p->{mntpoint} or next;
+	    $p->{type} ||= $_->{type};
 	    $p->{mntpoint} = $_->{mntpoint};
 	    $p->{options} = $_->{options};
 	}
     }
+}
+sub get_all_mntpoints_from_fstab {
+    my ($all_hds, $prefix, $uniq) = @_;
+    my @l = (fsedit::get_all_fstab($all_hds), @{$all_hds->{raw_hds}});
+    get_mntpoints_from_fstab(\@l, $prefix, $uniq);
 }
 
 #- mke2fs -b (1024|2048|4096) -c -i(1024 > 262144) -N (1 > 100000000) -m (0-100%) -L volume-label
@@ -161,10 +172,10 @@ sub real_format_part {
     $part->{isFormatted} = 1;
 }
 sub format_part {
-    my ($raid, $part, $prefix) = @_;
-    if (isMDRAID($part)) {
+    my ($raids, $part, $prefix) = @_;
+    if (isRAID($part)) {
 	require raid;
-	raid::format_part($raid, $part);
+	raid::format_part($raids, $part);
     } elsif (isLoopback($part)) {
 	loopback::format_part($part, $prefix);
     } else {
@@ -173,25 +184,25 @@ sub format_part {
 }
 
 sub formatMount_part {
-    my ($part, $raid, $fstab, $prefix, $callback) = @_;
+    my ($part, $raids, $fstab, $prefix, $callback) = @_;
 
     if (isLoopback($part)) {
-	formatMount_part($part->{device}, $raid, $fstab, $prefix, $callback);
+	formatMount_part($part->{loopback_device}, $raids, $fstab, $prefix, $callback);
     }
     if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
-	formatMount_part($p, $raid, $fstab, $prefix, $callback) unless loopback::carryRootLoopback($part);
+	formatMount_part($p, $raids, $fstab, $prefix, $callback) unless loopback::carryRootLoopback($part);
     }
 
     if ($part->{toFormat}) {
 	$callback->($part) if $callback;
-	format_part($raid, $part, $prefix);
+	format_part($raids, $part, $prefix);
     }
     mount_part($part, $prefix);
 }
 
 sub formatMount_all {
-    my ($raid, $fstab, $prefix, $callback) = @_;
-    formatMount_part($_, $raid, $fstab, $prefix, $callback) 
+    my ($raids, $fstab, $prefix, $callback) = @_;
+    formatMount_part($_, $raids, $fstab, $prefix, $callback) 
       foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
@@ -206,7 +217,7 @@ sub formatMount_all {
     };
 }
 
-sub mount($$$;$) {
+sub mount {
     my ($dev, $where, $fs, $rdonly) = @_;
     log::l("mounting $dev on $where as type $fs");
 
@@ -252,7 +263,7 @@ sub mount($$$;$) {
 }
 
 #- takes the mount point to umount (can also be the device)
-sub umount($) {
+sub umount {
     my ($mntpoint) = @_;
     $mntpoint =~ s|/$||;
     log::l("calling umount($mntpoint)");
@@ -261,7 +272,7 @@ sub umount($) {
     substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
 }
 
-sub mount_part($;$$) {
+sub mount_part {
     my ($part, $prefix, $rdonly) = @_;
 
     #- root carrier's link can't be mounted
@@ -271,7 +282,7 @@ sub mount_part($;$$) {
 
     unless ($::testing) {
 	if (isSwap($part)) {
-	    swap::swapon(isLoopback($part) ? $prefix . loopback::file($part) : $part->{device});
+	    swap::swapon($part->{device});
 	} else {
 	    $part->{mntpoint} or die "missing mount point";
 
@@ -279,7 +290,7 @@ sub mount_part($;$$) {
 	    my $mntpoint = ($prefix || '') . $part->{mntpoint};
 	    if (isLoopback($part)) {
 		eval { modules::load('loop') };
-		$dev = $part->{real_device} = devices::set_loop($prefix . loopback::file($part)) || die;
+		$dev = $part->{real_device} = devices::set_loop($part->{device}) || die;
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
@@ -290,7 +301,7 @@ sub mount_part($;$$) {
     $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
 }
 
-sub umount_part($;$) {
+sub umount_part {
     my ($part, $prefix) = @_;
 
     $part->{isMounted} or return;
@@ -420,7 +431,7 @@ sub write_fstab($;$$@) {
 	#isThisFs("reiserfs", $_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
 	
 	my $dev = isLoopback($_) ?
-	  ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : loopback::file($_)) :
+	  ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : $_->{device}) :
 	  ($_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}");
 	
 	local $_->{mntpoint} = do { 

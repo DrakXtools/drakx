@@ -6,7 +6,7 @@ package partition_table; # $Id$
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isLVM isRAID isMDRAID isLVMBased isNT isMountableRW isNonMountable isApplePartMap isLoopback isApple isAppleBootstrap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueFS isSwap isDos isWin isFat isSunOS isOtherAvailableFS isPrimary isNfs isSupermount isRawLVM isRawRAID isRAID isLVM isNT isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isApplePartMap isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -28,16 +28,16 @@ if (arch() =~ /ppc/) {
 
 my %types = (
   0x0 => 'Empty',
-arch() =~ /^ppc/ ? (
+if_(arch() =~ /^ppc/, 
   0x401	=> 'Apple Partition',
   0x401	=> 'Apple Bootstrap',
   0x402	=> 'Apple HFS Partition',
-) : arch() =~ /^i.86/ ? (
+), if_(arch() =~ /^i.86/,
   0x183 => 'Journalised FS: ReiserFS',
 #  0x283 => 'Journalised FS: XFS',
   0x383 => 'Journalised FS: JFS',
   0x483 => 'Journalised FS: ext3',
-) : arch() =~ /^sparc/ ? (
+), if_(arch() =~ /^sparc/,
   0x1 => 'SunOS boot',
   0x2 => 'SunOS root',
   0x3 => 'SunOS swap',
@@ -46,7 +46,7 @@ arch() =~ /^ppc/ ? (
   0x6 => 'SunOS stand',
   0x7 => 'SunOS var',
   0x8 => 'SunOS home',
-) : (
+), if_(arch() =~ /^i.86/,
   0x1 => 'DOS 12-bit FAT',
   0x2 => 'XENIX root',
   0x3 => 'XENIX /usr',
@@ -219,48 +219,72 @@ sub name2type($) {
 
 sub isWholedisk($) { arch() =~ /^sparc/ && $_[0]{type} == 5 }
 sub isExtended($) { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
-sub isLVM($) { $_[0]{type} == 0x8e }
-sub isRAID($) { $_[0]{type} == 0xfd }
-sub isMDRAID { $_[0]{device} =~ /^md/ }
-sub isLVMBased { $_[0]{LVMname} }
+sub isRawLVM($) { $_[0]{type} == 0x8e }
+sub isRawRAID($) { $_[0]{type} == 0xfd }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
 sub isDos($) { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isSunOS($) { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
-sub isSolaris($) { 0; } #- hack to search for getting the difference ? TODO
-sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isApple($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isDriver} }
 sub isAppleBootstrap($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
-sub isLoopback { defined $_[0]{loopback_file} }
+
 sub isThisFs { $type2fs{$_[1]{type}} eq $_[0] }
 sub isTrueFS { member($type2fs{$_[0]{type}}, qw(ext2 reiserfs xfs jfs ext3)) }
-sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
-sub isNonMountable { isRAID($_[0]) || isLVM($_[0]) }
 
-sub isPrimary($$) {
+sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
+sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
+sub isNonMountable { isRawRAID($_[0]) || isRawLVM($_[0]) }
+
+sub isPartOfLVM { defined $_[0]{lvm} }
+sub isPartOfRAID { defined $_[0]{raid} }
+sub isPartOfLoopback { defined $_[0]{loopback} }
+sub isRAID { $_[0]{device} =~ /^md/ }
+sub isLVM { $_[0]{LVMname} }
+sub isLoopback { defined $_[0]{loopback_file} }
+sub isMounted { $_[0]{isMounted} }
+sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || isPartOfLoopback($_[0]) }
+sub isSpecial { isRAID($_[0]) || isLVM($_[0]) || isLoopback($_[0]) }
+sub maybeFormatted { $_[0]{isFormatted} || !$_[0]{notFormatted} }
+
+
+#- works for both hard drives and partitions ;p
+sub description {
+    my ($hd) = @_;
+    my $win = $hd->{device_windobe};
+
+    sprintf "%s%s (%s%s%s%s)", 
+      $hd->{device}, 
+      $win && " [$win:]", 
+      formatXiB($hd->{totalsectors} || $hd->{size}, 512),
+      $hd->{info} && ", $hd->{info}",
+      $hd->{mntpoint} && ", " . $hd->{mntpoint},
+      $hd->{type} && ", " . type2name($hd->{type});
+}
+
+sub isPrimary {
     my ($part, $hd) = @_;
     foreach (@{$hd->{primary}{raw}}) { $part eq $_ and return 1; }
     0;
 }
 
-sub adjustStartAndEnd($$) {
+sub adjustStartAndEnd {
     my ($hd, $part) = @_;
 
     $hd->adjustStart($part);
     $hd->adjustEnd($part);
 }
 
-sub verifyNotOverlap($$) {
+sub verifyNotOverlap {
     my ($a, $b) = @_;
     $a->{start} + $a->{size} <= $b->{start} || $b->{start} + $b->{size} <= $a->{start};
 }
-sub verifyInside($$) {
+sub verifyInside {
     my ($a, $b) = @_;
     $b->{start} <= $a->{start} && $a->{start} + $a->{size} <= $b->{start} + $b->{size};
 }
@@ -285,17 +309,17 @@ sub verifyParts_ {
 	}
     }
 }
-sub verifyParts($) {
+sub verifyParts {
     my ($hd) = @_;
     verifyParts_(get_normal_parts($hd));
 }
-sub verifyPrimary($) {
+sub verifyPrimary {
     my ($pt) = @_;
     $_->{start} > 0 || arch() =~ /^sparc/ || die "partition must NOT start at sector 0" foreach @{$pt->{normal}};
     verifyParts_(@{$pt->{normal}}, $pt->{extended});
 }
 
-sub assign_device_numbers($) {
+sub assign_device_numbers {
     my ($hd) = @_;
 
     my $i = 1;
@@ -332,7 +356,7 @@ sub assign_device_numbers($) {
     $_->{device_windobe} = chr($i++) foreach @others;
 }
 
-sub remove_empty_extended($) {
+sub remove_empty_extended {
     my ($hd) = @_;
     my $last = $hd->{primary}{extended} or return;
     @{$hd->{extended}} = grep {
@@ -346,7 +370,7 @@ sub remove_empty_extended($) {
     adjust_main_extended($hd);
 }
 
-sub adjust_main_extended($) {
+sub adjust_main_extended {
     my ($hd) = @_;
 
     if (!is_empty_array_ref $hd->{extended}) {
@@ -373,7 +397,7 @@ sub adjust_main_extended($) {
     verifyParts($hd); #- verify everything is all right
 }
 
-sub adjust_local_extended($$) {
+sub adjust_local_extended {
     my ($hd, $part) = @_;
     
     foreach (@{$hd->{extended} || []}) {
@@ -383,28 +407,28 @@ sub adjust_local_extended($$) {
     }
 }
 
-sub get_normal_parts($) {
+sub get_normal_parts {
     my ($hd) = @_;
-
-    #- HACK !!
-    $hd->{raid} and return grep {$_} @{$hd->{raid}};
-    $hd->{loopback} and return grep {$_} @{$hd->{loopback}};
 
     @{$hd->{primary}{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []}
 }
 
-sub get_holes($) {
+sub get_normal_parts_and_holes {
     my ($hd) = @_;
-
     my $start = arch() eq "alpha" ? 2048 : 1;
 
-    map {
+    ref($hd) or print("get_normal_parts_and_holes: bad hd" . backtrace(), "\n");
+
+    my @l = map {
 	my $current = $start;
 	$start = $_->{start} + $_->{size};
-	{ start => $current, size => $_->{start} - $current }
-    } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd), { start => $hd->{totalsectors}, size => 0 };    
-}
+	my $hole = { start => $current, size => $_->{start} - $current, type => 0, rootDevice => $hd->{device} };
+	$hole, $_;
+    } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
 
+    push @l, { start => $start, size => $hd->{totalsectors} - $start, type => 0, rootDevice => $hd->{device} };
+    grep { $_->{size} >= $hd->cylinder_size } @l;
+}
 
 sub read_one($$) {
     my ($hd, $sector) = @_;
@@ -524,7 +548,7 @@ sub write($) {
     }
 }
 
-sub active($$) {
+sub active {
     my ($hd, $part) = @_;
 
     $_->{active} = 0 foreach @{$hd->{primary}{normal}};
@@ -534,7 +558,7 @@ sub active($$) {
 
 
 # remove a normal partition from hard drive hd
-sub remove($$) {
+sub remove {
     my ($hd, $part) = @_;
     my $i;
 
@@ -567,7 +591,7 @@ sub remove($$) {
 }
 
 # create of partition at starting at `start', of size `size' and of type `type' (nice comment, uh?)
-sub add_primary($$) {
+sub add_primary {
     my ($hd, $part) = @_;
 
     {
@@ -628,7 +652,7 @@ The only solution is to move your primary partitions to have the hole next to th
     adjust_main_extended($hd);
 }
 
-sub add($$;$$) {
+sub add {
     my ($hd, $part, $primaryOrExtended, $forceNoAdjust) = @_;
 
     get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(sd|ida|cciss)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
@@ -657,7 +681,7 @@ sub add($$;$$) {
 }
 
 # search for the next partition
-sub next($$) {
+sub next {
     my ($hd, $part) = @_;
 
     first(
@@ -666,7 +690,7 @@ sub next($$) {
 	  get_normal_parts($hd)
 	 );
 }
-sub next_start($$) {
+sub next_start {
     my ($hd, $part) = @_;
     my $next = &next($hd, $part);
     $next ? $next->{start} : $hd->{totalsectors};
@@ -688,7 +712,7 @@ sub raw_add {
     die "raw_add: partition table already full";
 }
 
-sub load($$;$) {
+sub load {
     my ($hd, $file, $force) = @_;
 
     local *F;
@@ -716,7 +740,7 @@ sub load($$;$) {
     $hd->{isDirty} = $hd->{needKernelReread} = 1;
 }
 
-sub save($$) {
+sub save {
     my ($hd, $file) = @_;
     my @h = @{$hd}{@fields2save};
     local *F;

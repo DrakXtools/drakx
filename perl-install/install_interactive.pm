@@ -25,16 +25,16 @@ You can find some information about them at: %s", join(", ", @l))) if @l;
 }
 
 sub partition_with_diskdrake {
-    my ($o, $hds, $nowizard) = @_;
+    my ($o, $all_hds, $nowizard) = @_;
     my $ok; 
 
     $o->set_help('partition_with_diskdrake');
     do {
 	$ok = 1;
 	require diskdrake;
-	diskdrake::main($hds, $o->{lvms}, $o->{raid}, interactive_gtk->new, $nowizard);
+	diskdrake::main(interactive_gtk->new, $all_hds, $nowizard);
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
-	my @fstab = fsedit::get_fstab(@$hds, @{$o->{lvms}}, $o->{raid});
+	my @fstab = fsedit::get_all_fstab($all_hds);
 	
 	unless (fsedit::get_root_(\@fstab)) {
 	    $ok = 0;
@@ -46,7 +46,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	    $o->ask_warn('', _("You must have a swap partition")), $ok=0 if !$::expert;
 	    $ok &&= $::expert || $o->ask_okcancel('', _("You don't have a swap partition\n\nContinue anyway?"));
 	}
-	if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $hds)) {
+	if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $all_hds)) {
 	    $o->ask_warn('', _("You must have a FAT partition mounted in /boot/efi"));
 	    $ok = '';
 	}
@@ -55,7 +55,8 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 }
 
 sub partitionWizardSolutions {
-    my ($o, $hds, $fstab, $readonly) = @_;
+    my ($o, $all_hds, $fstab, $readonly) = @_;
+    my $hds = $all_hds->{hds};
     my @wizlog;
     my (@solutions, %solutions);
 
@@ -69,7 +70,7 @@ sub partitionWizardSolutions {
 
     my @good_hds = grep { partition_table::can_raw_add($_) } @$hds;
     if (fsedit::free_space(@good_hds) > $min_linux and !$readonly) {
-	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($hds); 1 } ]
+	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($all_hds); 1 } ]
     } else { 
 	push @wizlog, _("Not enough free space to allocate new partitions") . ": " .
 	  (@good_hds ? 
@@ -91,7 +92,7 @@ sub partitionWizardSolutions {
 	  [ -10 - @fats, _("Use the Windows partition for loopback"), 
 	    sub { 
 		my ($s_root, $s_swap);
-		my $part = $o->ask_from_listf('', _("Which partition do you want to use for Linux4Win?"), \&partition_table_raw::description, \@ok_forloopback) or return;
+		my $part = $o->ask_from_listf('', _("Which partition do you want to use for Linux4Win?"), \&partition_table::description, \@ok_forloopback) or return;
 		$max_swap = $min_swap + 1 if $part->{free} - $max_swap < $min_linux;
 		$o->ask_from_entries_refH('', _("Choose the sizes"), [ 
 		   { label => _("Root partition size in MB: "), val => \$s_root, min => $min_linux >> 11, max => min($part->{free} - $max_swap, $max_linux) >> 11, type => 'range' },
@@ -106,7 +107,7 @@ sub partitionWizardSolutions {
 	  [ 6 - @fats, _("Use the free space on the Windows partition"),
 	    sub {
 		$o->set_help('resizeFATChoose');
-		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table_raw::description, \@ok_forloopback) or return;
+		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table::description, \@ok_forloopback) or return;
 		$o->set_help('resizeFATWait');
 		my $w = $o->wait_message(_("Resizing"), _("Computing Windows filesystem bounds"));
 		require resize_fat::main;
@@ -125,7 +126,7 @@ When sure, press Ok.")) or return;
 
 		my $size = $part->{size};
 		$o->ask_from_entries_refH('', _("Which size do you want to keep for windows on"), [
-                   { label => _("partition %s", partition_table_raw::description($part)), val => \$size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
+                   { label => _("partition %s", partition_table::description($part)), val => \$size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
 		$size <<= 11;
 
@@ -136,13 +137,13 @@ When sure, press Ok.")) or return;
 		$part->{size} = $size;
 		$part->{isFormatted} = 1;
 		
-		my ($hd) = grep { $_->{device} eq $part->{rootDevice} } @$hds;
+		my ($hd) = fsedit::part2hd($part, $all_hds);
 		$hd->{isDirty} = $hd->{needKernelReread} = 1;
 		$hd->adjustEnd($part);
 		partition_table::adjust_local_extended($hd, $part);
 		partition_table::adjust_main_extended($hd);
 
-		fsedit::auto_allocate($hds);
+		fsedit::auto_allocate($all_hds);
 		1;
 	    } ] if !$readonly;
     } else {
@@ -156,17 +157,17 @@ When sure, press Ok.")) or return;
 	    sub {
 		$o->set_help('takeOverHdChoose');
 		my $hd = $o->ask_from_listf('', _("You have more than one hard drive, which one do you install linux on?"),
-					    \&partition_table_raw::description, $hds) or return;
+					    \&partition_table::description, $hds) or return;
 		$o->set_help('takeOverHdConfirm');
-		$o->ask_okcancel('', _("ALL existing partitions and their data will be lost on drive %s", partition_table_raw::description($hd))) or return;
+		$o->ask_okcancel('', _("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd))) or return;
 		partition_table_raw::zero_MBR($hd);
-		fsedit::auto_allocate($hds);
+		fsedit::auto_allocate($all_hds);
 		1;
 	    } ];
     }
 
     if (!$readonly && $o->isa('interactive_gtk')) { #- diskdrake only available in gtk for now
-	$solutions{diskdrake} = [ 0, _("Custom disk partitioning"), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
+	$solutions{diskdrake} = [ 0, _("Custom disk partitioning"), sub { partition_with_diskdrake($o, $all_hds, 'nowizard') } ];
     }
 
     $solutions{fdisk} =
@@ -174,7 +175,7 @@ When sure, press Ok.")) or return;
 	    $o->enter_console;
 	    foreach (@$hds) {
 		print "\n" x 10, _("You can now partition %s.
-When you are done, don't forget to save using `w'", partition_table_raw::description($_));
+When you are done, don't forget to save using `w'", partition_table::description($_));
 		print "\n\n";
 		my $pid = 0;
 		if (arch() =~ /ppc/) {
@@ -197,7 +198,7 @@ sub partitionWizard {
 
     $o->set_help('doPartitionDisks');
 
-    my %solutions = partitionWizardSolutions($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
+    my %solutions = partitionWizardSolutions($o, $o->{all_hds}, $o->{fstab}, $o->{partitioning}{readonly});
     if ($o->{lnx4win}) {
 	if ($solutions{loopback}) {
 	    %solutions = (loopback => $solutions{loopback});

@@ -14,15 +14,15 @@ use commands;
 use modules;
 use fs;
 
-sub nb($) { 
+sub nb { 
     my ($nb) = @_;
     first((ref $nb ? $nb->{device} : $nb) =~ /(\d+)/);
 }
 
 sub new {
-    my ($raid, @parts) = @_;
-    my $nb = @$raid; 
-    $raid->[$nb] = { 'chunk-size' => "64k", type => 0x83, disks => [ @parts ], device => "md$nb", notFormatted => 1 };
+    my ($raids, @parts) = @_;
+    my $nb = @$raids; 
+    $raids->[$nb] = { 'chunk-size' => "64k", type => 0x83, disks => [ @parts ], device => "md$nb", notFormatted => 1 };
     foreach my $part (@parts) {
 	$part->{raid} = $nb;
 	delete $part->{mntpoint};
@@ -30,42 +30,47 @@ sub new {
     $nb;
 }
 
-sub add($$$) {
-    my ($raid, $part, $nb) = @_; $nb = nb($nb);
-    $raid->[$nb]{isMounted} and die _("Can't add a partition to _formatted_ RAID md%d", $nb);
+sub add {
+    my ($raids, $part, $nb) = @_; $nb = nb($nb);
+    $raids->[$nb]{isMounted} and die _("Can't add a partition to _formatted_ RAID md%d", $nb);
     $part->{raid} = $nb;
     delete $part->{mntpoint};
-    push @{$raid->[$nb]{disks}}, $part;
+    push @{$raids->[$nb]{disks}}, $part;
 }
 
-sub delete($$) {
-    my ($raid, $nb) = @_;
+sub delete {
+    my ($raids, $nb) = @_;
     $nb = nb($nb);
 
-    delete $_->{raid} foreach @{$raid->[$nb]{disks}};
-    undef $raid->[$nb];
+    delete $_->{raid} foreach @{$raids->[$nb]{disks}};
+    undef $raids->[$nb];
 }
 
-sub changeNb($$$) {
-    my ($raid, $oldnb, $newnb) = @_;
+sub changeNb {
+    my ($raids, $oldnb, $newnb) = @_;
     if ($oldnb != $newnb) {
-	($raid->[$newnb], $raid->[$oldnb]) = ($raid->[$oldnb], undef);
-	$raid->[$newnb]{device} = "md$newnb";
-	$_->{raid} = $newnb foreach @{$raid->[$newnb]{disks}};
+	($raids->[$newnb], $raids->[$oldnb]) = ($raids->[$oldnb], undef);
+	$raids->[$newnb]{device} = "md$newnb";
+	$_->{raid} = $newnb foreach @{$raids->[$newnb]{disks}};
     }
     $newnb;
 }
 
-sub removeDisk($$) {
-    my ($raid, $part) = @_;
+sub removeDisk {
+    my ($raids, $part) = @_;
     my $nb = nb($part->{raid});
     run_program::run("raidstop", devices::make($part->{device}));
     delete $part->{raid};
-    @{$raid->[$nb]{disks}} = grep { $_ != $part } @{$raid->[$nb]{disks}};
-    update($raid->[$nb]);
+    my $disks = $raids->[$nb]{disks};
+    @$disks = grep { $_ != $part } @$disks;
+    if (@$disks) {
+	update($raids->[$nb]);
+    } else {
+	undef $raids->[$nb];
+    }
 }
 
-sub updateSize($) {
+sub updateSize {
     my ($part) = @_;
     local $_ = $part->{level};
     my @l = map { $_->{size} } @{$part->{disks}};
@@ -77,7 +82,7 @@ sub updateSize($) {
     };
 }
 
-sub module($) {
+sub module {
     my ($part) = @_;
     my $mod = $part->{level};
 
@@ -86,7 +91,7 @@ sub module($) {
     $mod;
 }
 
-sub updateIsFormatted($) {
+sub updateIsFormatted {
     my ($part) = @_;
     $part->{isFormatted}  = and_ map { $_->{isFormatted}  } @{$part->{disks}};
     $part->{notFormatted} = and_ map { $_->{notFormatted} } @{$part->{disks}};
@@ -98,13 +103,13 @@ sub update {
     }
 }
 
-sub write($) {
-    my ($raid, $file) = @_;
+sub write {
+    my ($raids, $file) = @_;
     local *F;
     local $\ = "\n";
     open F, ">$file" or die _("Can't write file $file");
 
-    foreach (grep {$_} @$raid) {
+    foreach (grep {$_} @$raids) {
 	print F <<"EOF";
 raiddev       /dev/$_->{device}
 raid-level    $_->{level}
@@ -120,39 +125,39 @@ EOF
 }
 
 sub make {
-    my ($raid, $part) = @_;
-    isMDRAID($_) and make($raid, $_) foreach @{$part->{disks}};
+    my ($raids, $part) = @_;
+    isRAID($_) and make($raids, $_) foreach @{$part->{disks}};
     my $dev = devices::make($part->{device});
     eval { modules::load(module($part)) };
-    &write($raid, "/etc/raidtab");
+    &write($raids, "/etc/raidtab");
     run_program::run("raidstop", $dev);
     run_program::run("mkraid", "--really-force", $dev) or die
 	$::isStandalone ? _("mkraid failed (maybe raidtools are missing?)") : _("mkraid failed");
 }
 
-sub format_part($$) {
-    my ($raid, $part) = @_;
+sub format_part {
+    my ($raids, $part) = @_;
     $part->{isFormatted} and return;
 
-    make($raid->{raid}, $part);
+    make($raids, $part);
     fs::real_format_part($part);
     $_->{isFormatted} = 1 foreach @{$part->{disks}};
 }
 
-sub verify($) {
-    my ($raid) = @_;
-    $raid && $raid->{raid} or return;
-    foreach (grep {$_} @{$raid->{raid}}) {
+sub verify {
+    my ($raids) = @_;
+    $raids or return;
+    foreach (grep {$_} @$raids) {
 	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die _("Not enough partitions for RAID level %d\n", $_->{level});
     }
 }
 
-sub prepare_prefixed($$) {
-    my ($raid, $prefix) = @_;
-    $raid && $raid->{raid} or return;
+sub prepare_prefixed {
+    my ($raids, $prefix) = @_;
+    $raids or return;
 
     eval { commands::cp("-f", "/etc/raidtab", "$prefix/etc/raidtab") };
-    foreach (@{$raid->{raid}}) {
+    foreach (grep {$_} @$raids) {
 	devices::make("$prefix/dev/$_->{device}") foreach @{$_->{disks}};
     }
 }

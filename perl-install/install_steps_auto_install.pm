@@ -44,7 +44,7 @@ sub exitInstall {
     return if $o->{autoExitInstall};
 
     if ($o->{interactive}) {
-	(bless $o, "install_steps_$o->{interactive}")->exitInstall($alldone);
+	$o->SUPER::exitInstall($alldone);
     } else {
 	install_steps::exitInstall($o);
 	print "\a";

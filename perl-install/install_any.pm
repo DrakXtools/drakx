@@ -330,8 +330,8 @@ sub setPackages {
 	push @{$o->{default_packages}}, "kernel22-secure" if $o->{security} > 3;
 	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
-	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
-	push @{$o->{default_packages}}, "lvm" if -e '/etc/lvmtab';
+	push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
+	push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
 	push @{$o->{default_packages}}, "usbd" if modules::get_alias("usb-interface");
 	push @{$o->{default_packages}}, "reiserfsprogs" if grep { isThisFs("reiserfs", $_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
@@ -476,9 +476,9 @@ sub unlockCdrom(;$) {
 }
 sub ejectCdrom(;$) {
     my ($cdrom) = @_;
+    getFile("XXX"); #- close still opened filehandle
     $cdrom or cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
     my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
-    getFile("XXX"); #- close still opened filehandle
     eval { fs::umount("/tmp/image") };
     ioctl $f, c::CDROMEJECT(), 1;
 }
@@ -495,7 +495,7 @@ sub setupFB {
 	    $e->{vga} = $vga;
 	}
     }
-    bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
+    bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
     1;
 }
 
@@ -897,13 +897,14 @@ sub getHds {
 #    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
-    my ($hds, $lvms, $raids) = catch_cdie { fsedit::hds(\@drives, $flags) }
+    my $all_hds = catch_cdie { fsedit::hds(\@drives, $flags) }
       sub {
 	  $ok = 0;
 	  my $err = $@; $err =~ s/ at (.*?)$//;
 	  log::l("error reading partition table: $err");
 	  !$flags->{readonly} && $f_err and $f_err->($err);
       };
+    my $hds = $all_hds->{hds};
 
     if (is_empty_array_ref($hds) && $try_scsi) {
 	$try_scsi = 0;
@@ -913,15 +914,13 @@ sub getHds {
     $::testing or partition_table_raw::test_for_bad_drives($_) foreach @$hds;
 
     $ok = fsedit::verifyHds($hds, $flags->{readonly}, $ok)
-        unless $flags->{clearall} || $flags->{clear};
+        if !($flags->{clearall} || $flags->{clear});
 
     #- try to figure out if the same number of hds is available, use them if ok.
-    $ok && $hds && @$hds > 0 && @{$o->{hds} || []} == @$hds and return $ok;
+    $ok && $hds && @$hds > 0 && @{$o->{all_hds}{hds} || []} == @$hds and return $ok;
 
-    $o->{hds} = $hds;
-    $o->{lvms} = $lvms;
-    $o->{raid}->{raid} = $raids;
-    $o->{fstab} = [ fsedit::get_fstab(@$hds, @$lvms) ];
+    $o->{all_hds} = $all_hds;
+    $o->{fstab} = [ fsedit::get_all_fstab($all_hds) ];
     fs::check_mounted($o->{fstab});
     fs::merge_fstabs($o->{fstab}, $o->{manualFstab});
 

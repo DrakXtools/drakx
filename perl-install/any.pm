@@ -88,7 +88,8 @@ sub enableMD5Shadow { #- NO MORE USED
 }
 
 sub setupBootloader {
-    my ($in, $b, $hds, $fstab, $security, $prefix, $more) = @_;
+    my ($in, $b, $all_hds, $fstab, $security, $prefix, $more) = @_;
+    my $hds = $all_hds->{hds};
 
     $more++ if $b->{bootUnsafe};
     $more = 2 if arch() =~ /ppc/; #- no auto for PPC yet
@@ -150,7 +151,7 @@ sub setupBootloader {
     arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : if_(arch() !~ /ia64/,
-{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies() ], not_edit => !$::expert },
+{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies_dev() ], not_edit => !$::expert },
 { label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba", advanced => 1 },
 { label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact"), advanced => 1 },
 { label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, advanced => 1 },
@@ -306,14 +307,6 @@ if (arch() !~ /ppc/) {
 	}
     }
     1;
-}
-
-sub partitions_suggestions {
-    my ($in) = @_;
-    my $t = $::expert ? 
-      $in->ask_from_list_('', _("What type of partitioning?"), [ keys %fsedit::suggestions ]) :
-      'simple';
-    $fsedit::suggestions{$t};
 }
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);

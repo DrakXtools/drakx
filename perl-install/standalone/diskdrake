@@ -26,7 +26,7 @@ use lib qw(/usr/lib/libDrakX);
 use common;
 use diskdrake;
 use standalone;
-use interactive_gtk;
+use interactive;
 use detect_devices;
 use fsedit;
 use fs;
@@ -51,14 +51,8 @@ if ($>) {
 }
 
 
-#if ($ARGV[0] eq '-l') {
-#    $@ and print "Error\n";
-#    $::expert = 1;
-#    print diskdrake::get_info($_, $hds->[0]) foreach fsedit::get_fstab($hds->[0]);
-#    exit !$@;
-#}
-my $in = interactive_gtk->new;
-my ($hds, $lvms) =
+my $in = 'interactive'->vnew('su');
+my ($all_hds) =
     catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
     sub {
 	my ($err) = $@ =~ /(.*) at /;
@@ -69,10 +63,12 @@ I'll try to go on blanking bad partitions"), $err]);
     };
 
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
-my $fstab = [ fsedit::get_fstab(@$hds, @$lvms) ];
- 
-fs::get_mntpoints_from_fstab($fstab);
+my $fstab = [ fsedit::get_all_fstab($all_hds) ];
+
+$all_hds->{raw_hds} = [ fs::raw_hds() ];
+
+fs::get_all_mntpoints_from_fstab($all_hds);
 fs::check_mounted($fstab);
-diskdrake::main($hds, $lvms, {}, $in);
+diskdrake_interactive::main($in, $all_hds);
 
 $in->exit(0);

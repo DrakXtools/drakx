@@ -180,7 +180,7 @@ sub formatPartitions {
     any::rotate_logs($o->{prefix});
 
     require raid;
-    raid::prepare_prefixed($o->{raid}, $o->{prefix});
+    raid::prepare_prefixed($o->{all_hds}{raids}, $o->{prefix});
 
     my $d = "/initrd/loopfs/lnx4win";
     if (-d $d) {
@@ -609,6 +609,7 @@ sub main {
     common::sync(); common::sync();
 
     log::l("installation complete, leaving");
+    log::l("files still open by install2: ", readlink($_)) foreach glob_("/proc/$$/fd/*");
     print "\n" x 80;
 }
 

@@ -305,8 +305,8 @@ sub ask_mntpoint_s {
     } else {
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
-				  [ map { { label => partition_table_raw::description($_), 
-					    val => \$_->{mntpoint}, not_edit => 0, list => [ '', fsedit::suggestions_mntpoint([]) ] }
+				  [ map { { label => partition_table::description($_), 
+					    val => \$_->{mntpoint}, not_edit => 0, list => [ '', fsedit::suggestions_mntpoint(fsedit::empty_all_hds()) ] }
 					} @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
@@ -347,7 +347,7 @@ Continue at your own risk!"));
 		log::l("creating bootstrap partition on drive /dev/$hd->{device}, block $partition_table_mac::freepart_start");
 		$partition_table_mac::bootstrap_part = $partition_table_mac::freepart_part;	
 		log::l("bootstrap now at $partition_table_mac::bootstrap_part");
-		fsedit::add($hd, { start => $partition_table_mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{hds}, { force => 1, primaryOrExtended => 'Primary' });
+		fsedit::add($hd, { start => $partition_table_mac::freepart_start, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
 		$o->ask_warn('',_("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));
@@ -362,11 +362,11 @@ Continue at your own risk!"));
             my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix}) or die _("No root partition found to perform an upgrade");
 	    $p = $o->ask_from_listf(_("Root Partition"),
 			            _("What is the root partition (/) of your system?"),
-			            \&partition_table_raw::description, \@l) or die "setstep exitInstall\n";
+			            \&partition_table::description, \@l) or die "setstep exitInstall\n";
         }
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
     } elsif ($::expert && $o->isa('interactive_gtk')) {
-        install_interactive::partition_with_diskdrake($o, $o->{hds});
+        install_interactive::partition_with_diskdrake($o, $o->{all_hds});
     } else {
         install_interactive::partitionWizard($o);
     }
@@ -394,8 +394,9 @@ sub choosePartitionsToFormat {
     return if @l == 0 || !$::expert && 0 == grep { ! $_->{toFormat} } @l;
 
     my $name2label = sub { 
-        sprintf("%s   %s", isSwap($_) ? type2name($_->{type}) : $_->{mntpoint},
-			   isLoopback($_) ? $::expert && loopback::file($_) : partition_table_raw::description($_));
+        sprintf("%s   %s", 
+		isSwap($_) ? type2name($_->{type}) : $_->{mntpoint},
+		partition_table::description($_));
     };
 
     #- keep it temporary until the guy has accepted
@@ -424,11 +425,11 @@ sub choosePartitionsToFormat {
 sub formatMountPartitions {
     my ($o, $fstab) = @_;
     my $w;
-    fs::formatMount_all($o->{raid}, $o->{fstab}, $o->{prefix}, sub {
+    fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
 	my ($part) = @_;
 	$w ||= $o->wait_message('', _("Formatting partitions"));
 	$w->set(isLoopback($part) ?
-		_("Creating and formatting file %s", loopback::file($part)) :
+		_("Creating and formatting file %s", $part->{device}) :
 		_("Formatting partition %s", $part->{device}));
     });
     die _("Not enough swap to fulfill installation, please add some") if availableMemory < 40 * 1024;
@@ -1012,11 +1013,11 @@ failures.
 If you want to create a bootdisk for your system, insert a floppy in the first
 drive and press \"Ok\"."),
 			 $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
-	my @l = detect_devices::floppies();
+	my @l = detect_devices::floppies_dev();
 	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
 	$o->{mkbootdisk} or return;
     } else {
-	my @l = detect_devices::floppies();
+	my @l = detect_devices::floppies_dev();
 	my %l = (
 		 'fd0'  => _("First floppy drive"),
 		 'fd1'  => _("Second floppy drive"),
@@ -1075,7 +1076,7 @@ _("Error installing aboot,
 try to force installation even if that destroys the first partition?"));
 	};
     } else {
-	any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
+	any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
 
 	eval { $o->SUPER::setupBootloader };
 	if ($@) {

@@ -74,9 +74,18 @@ sub typeOfPart {
 #-######################################################################################
 #- Functions
 #-######################################################################################
+sub empty_all_hds {
+    { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [] };
+}
+sub recompute_loopbacks {
+    my ($all_hds) = @_;
+    my @fstab = get_all_fstab($all_hds);
+    $all_hds->{loopbacks} = [ map { isPartOfLoopback($_) ? @{$_->{loopback}} : () } @fstab ];
+}
+
 sub hds {
     my ($drives, $flags) = @_;
-    my (@hds, @lvms, @raid);
+    my (@hds, @lvms, @raids);
     my $rc;
 
     foreach (@$drives) {
@@ -103,7 +112,7 @@ sub hds {
 	}
 	push @hds, $hd;
     }
-    if (my @pvs = grep { isLVM($_) } map { partition_table::get_normal_parts($_) } @hds) {
+    if (my @pvs = grep { isRawLVM($_) } map { partition_table::get_normal_parts($_) } @hds) {
 	#- otherwise vgscan won't find them
 	devices::make($_->{device}) foreach @pvs; 
 	require lvm;
@@ -111,7 +120,7 @@ sub hds {
 	    my $name = lvm::get_vg($_) or next;
 	    my ($lvm) = grep { $_->{LVMname} eq $name } (@hds, @lvms);
 	    if (!$lvm) {
-		$lvm = bless { disks => [], LVMname => $name, level => 'linear' }, 'lvm';
+		$lvm = bless { disks => [], LVMname => $name }, 'lvm';
 		lvm::update_size($lvm);
 		lvm::get_lvs($lvm);
 		push @lvms, $lvm;
@@ -120,7 +129,7 @@ sub hds {
 	    push @{$lvm->{disks}}, $_;
 	}
     }
-    if ((my @parts = grep { isRAID($_) } map { partition_table::get_normal_parts($_) } @hds) && detect_devices::raidAutoStart()) {
+    if ((my @parts = grep { isRawRAID($_) } map { partition_table::get_normal_parts($_) } @hds) && detect_devices::raidAutoStart()) {
 	my @mdstat = cat_("/proc/mdstat");
 	for (my $i=0 ; $i<@mdstat ; $i++) {
 	    next if $mdstat[$i] !~ /^md(.).* ([^ \[\]]+) ([^ ]+\[[^ \]]+\])(.*)$/;
@@ -148,43 +157,134 @@ sub hds {
 		$type = 0x83;
 		$notformat = 1;
 	    }
-	    $raid[$nb] = { 'chunk-size' => $chunks, type => $type, disks => \@disks,
+	    $raids[$nb] = { 'chunk-size' => $chunks, type => $type, disks => \@disks,
 			   device => "md$nb", notFormatted => $notformat, level => $level };
 	}
 	require raid;
-	raid::update(@raid);
+	raid::update(@raids);
     }
 
-    \@hds, \@lvms, \@raid;
+    
+    my $l = { %{ empty_all_hds() }, hds => \@hds, lvms => \@lvms, raids => \@raids };
+    $l;
+}
+
+
+sub read_partitions() {
+    my (undef, undef, @all) = cat_("/proc/partitions");
+    grep {
+	$_->{size} != 1 &&	 # skip main extended partition
+	$_->{size} != 0x3fffffff # skip cdroms (otherwise stops cd-audios)
+    } map { 
+	my %l; 
+	@l{qw(major minor size dev)} = split; 
+	\%l;
+    } @all;
 }
 
 sub readProcPartitions {
     my ($hds) = @_;
-    my @parts;
-    foreach (cat_("/proc/partitions")) {
-	my (undef, undef, $size, $device) = split;
-	next if $size eq "1"; #- extended partitions
-	foreach (@$hds) {
-	    push @parts, { start => 0, size => $size * 2, device => $device, 
-			   type => typeOfPart($device), rootDevice => $_->{device} 
-			 } if $device =~ /^$_->{device}./;
+
+    my @all = read_partitions();
+    my @parts = grep { $_->{dev} =~ /\d$/ } @all;
+    my @disks = grep { $_->{dev} !~ /\d$/ } @all;
+
+    my $devfs_like = grep { $_->{dev} =~ m|/disc$| } @disks;
+
+    my %devfs2normal = map {
+	my (undef, $major, $minor) = devices::entry($_->{device});
+	my ($disk) = grep { $_->{major} == $major && $_->{minor} == $minor } @disks;
+	$disk->{dev} => $_->{device};
+    } @$hds;
+
+    foreach my $part (@parts) {
+	my $dev;
+	if ($devfs_like) {
+	    $dev = -e "/dev/$part->{dev}" ? $part->{dev} : sprintf("%x%02x", $part->{major}, $part->{minor});
+	    $part->{rootDevice} = $devfs2normal{dirname($part->{dev}) . '/disc'};
+	} else {
+	    $dev = $part->{dev};
+	    foreach my $hd (@$hds) {
+		$part->{rootDevice} = $hd->{device} if $part->{dev} =~ /^$hd->{device}./;
+	    }
 	}
+	$part->{device} = $dev;
+	$part->{start} = 0;	# unknown, but we don't care
+	$part->{size} *= 2;	# from KB to sectors
+	$part->{type} = typeOfPart($dev); 
+
+	delete @$part{'major', 'minor', 'dev'}; # cleanup
     }
     @parts;
 }
 
+sub all_hds {
+    my ($all_hds) = @_;
+    (@{$all_hds->{hds}}, @{$all_hds->{lvms}});
+}
+sub part2hd {
+    my ($part, $all_hds) = @_;
+    my ($hd) = grep { $part->{rootDevice} eq $_->{device} } all_hds($all_hds);
+    $hd;
+}
+
+sub is_same_part {
+    my ($part1, $part2) = @_;
+    foreach ('start', 'size', 'type', 'rootDevice') {
+	$part1->{$_} eq $part2->{$_} or return;
+    }
+    1;
+}
+
 #- get all normal partition including special ones as found on sparc.
 sub get_fstab {
-    loopback::loopbacks(@_), map { partition_table::get_normal_parts($_) } @_
+    map { partition_table::get_normal_parts($_) } @_;
 }
 
 #- get normal partition that should be visible for working on.
 sub get_visible_fstab {
-    grep { $_ && !partition_table::isWholedisk($_) && !partition_table::isHiddenMacPart($_) } map { partition_table::get_normal_parts($_) } @_;
+    grep { $_ && !partition_table::isWholedisk($_) && !partition_table::isHiddenMacPart($_) }
+      map { partition_table::get_normal_parts($_) } @_;
 }
 
+sub get_fstab_and_holes {
+    map {
+	if (isLVM($_)) {
+	    my @parts = partition_table::get_normal_parts($_);
+	    my $free = $_->{totalsectors} - sum map { $_->{size} } @parts;
+	    my $free_part = { start => 0, size => $free, type => 0, rootDevice => $_->{device} };
+	    @parts, if_($free >= $_->cylinder_size, $free_part);
+	} else {
+	    partition_table::get_normal_parts_and_holes($_);
+	}
+    } @_;
+}
+sub get_holes {
+    grep { $_->{type} == 0 } get_fstab_and_holes(@_);
+}
+
+sub get_all_fstab {
+    my ($all_hds) = @_;
+    my @parts = map { partition_table::get_normal_parts($_) } all_hds($all_hds);
+    my @raids = grep {$_} @{$all_hds->{raids}};
+    @parts, @raids, @{$all_hds->{loopbacks}};
+}
+sub get_all_fstab_and_holes {
+    my ($all_hds) = @_;
+    my @raids = grep {$_} @{$all_hds->{raids}};
+    get_fstab_and_holes(all_hds($all_hds)), @raids, @{$all_hds->{loopbacks}};
+}
+sub get_all_holes {
+    my ($all_hds) = @_;
+    grep { $_->{type} == 0 } get_all_fstab_and_holes($all_hds);
+}
+
+sub all_free_space {
+    my ($all_hds) = @_;
+    sum map { $_->{size} } get_all_holes($all_hds);
+}
 sub free_space {
-    sum map { $_->{size} } map { partition_table::get_holes($_) } @_;
+    sum map { $_->{size} } get_holes(@_);
 }
 
 sub is_one_big_fat {
@@ -218,13 +318,13 @@ sub file2part {
 
 
 sub computeSize {
-    my ($part, $best, $hds, $suggestions) = @_;
+    my ($part, $best, $all_hds, $suggestions) = @_;
     my $max = $part->{maxsize} || $part->{size};
     return min($max, $best->{size}) unless $best->{ratio};
 
-    my $free_space = free_space(@$hds);
+    my $free_space = all_free_space($all_hds);
     my @l = my @L = grep { 
-	if (!has_mntpoint($_->{mntpoint}, $hds) && $free_space >= $_->{size}) {
+	if (!has_mntpoint($_->{mntpoint}, $all_hds) && $free_space >= $_->{size}) {
 	    $free_space -= $_->{size};
 	    1;
 	} else { 0 } } @$suggestions;
@@ -254,15 +354,15 @@ sub computeSize {
 }
 
 sub suggest_part {
-    my ($part, $hds, $suggestions) = @_;
+    my ($part, $all_hds, $suggestions) = @_;
     $suggestions ||= $suggestions{server};
 
-    my $has_swap = grep { isSwap($_) } get_fstab(@$hds);
+    my $has_swap = grep { isSwap($_) } get_all_fstab($all_hds);
 
     my ($best, $second) =
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
-      grep { !has_mntpoint($_->{mntpoint}, $hds) || isSwap($_) && !$has_swap }
+      grep { !has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
       grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
       grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part) && isTrueFS($_) }
 	@$suggestions or return;
@@ -277,13 +377,13 @@ sub suggest_part {
 
     $part->{mntpoint} = $best->{mntpoint};
     $part->{type} = $best->{type};
-    $part->{size} = computeSize($part, $best, $hds, $suggestions);
+    $part->{size} = computeSize($part, $best, $all_hds, $suggestions);
     1;
 }
 
 sub suggestions_mntpoint {
-    my ($hds) = @_;
-    sort grep { !/swap/ && !has_mntpoint($_, $hds) }
+    my ($all_hds) = @_;
+    sort grep { !/swap/ && !has_mntpoint($_, $all_hds) }
       (@suggestions_mntpoints, map { $_->{mntpoint} } @{$suggestions{server}});
 }
 
@@ -312,8 +412,8 @@ sub mntpoint2part {
     first(grep { $mntpoint eq $_->{mntpoint} } @$fstab);
 }
 sub has_mntpoint {
-    my ($mntpoint, $hds) = @_;
-    mntpoint2part($mntpoint, [ get_fstab(@$hds) ]);
+    my ($mntpoint, $all_hds) = @_;
+    mntpoint2part($mntpoint, [ get_all_fstab($all_hds) ]);
 }
 sub get_root_ {
     my ($fstab, $boot) = @_;
@@ -321,102 +421,97 @@ sub get_root_ {
 }
 sub get_root { &get_root_ || {} }
 
+#- do this before modifying $part->{type}
+sub check_type {
+    my ($type, $hd, $part) = @_;
+    isThisFs("jfs", { type => name2type($type) }) && $part->{size} < 16 << 11 and die _("You can't use JFS for partitions smaller than 16MB");    
+    isThisFs("reiserfs", { type => name2type($type) }) && $part->{size} < 32 << 11 and die _("You can't use ReiserFS for partitions smaller than 32MB");
+}
+
 #- do this before modifying $part->{mntpoint}
 #- $part->{mntpoint} should not be used here, use $mntpoint instead
 sub check_mntpoint {
-    my ($mntpoint, $hd, $part, $hds, $loopbackDevice) = @_;
-
-    ref $loopbackDevice or undef $loopbackDevice;
+    my ($mntpoint, $hd, $part, $all_hds) = @_;
 
     $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
+    $mntpoint =~ m|^/| or die _("Mount points must begin with a leading /");
+    has_mntpoint($mntpoint, $all_hds) and die _("There is already a partition with mount point %s\n", $mntpoint);
 
-    local $_ = $mntpoint;
-    m|^/| or die _("Mount points must begin with a leading /");
-#-    m|(.)/$| and die "The mount point $_ is illegal.\nMount points may not end with a /";
+    die "raid / with no /boot" 
+      if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
+    die _("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
+      if ($mntpoint eq '/' || $mntpoint eq '/boot') && isLVM($hd);
+    die _("This directory should remain within the root filesystem")
+      if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
+    die _("You need a true filesystem (ext2, reiserfs) for this mount point\n")
+      if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
 
-    has_mntpoint($mntpoint, $hds) and die _("There is already a partition with mount point %s\n", $mntpoint);
-
-    my $fake_part = { mntpoint => $mntpoint, device => $loopbackDevice };
-    $fake_part->{loopback_file} = 1 if $loopbackDevice;
-    my $fstab = [ get_fstab(@$hds), $fake_part ];
-    my $check; $check = sub {
-	my ($p, @seen) = @_;
-	push @seen, $p->{mntpoint} || return;
-	@seen > 1 && $p->{mntpoint} eq $mntpoint and die _("Circular mounts %s\n", join(", ", @seen));
-	if (my $part = fs::up_mount_point($p->{mntpoint}, $fstab)) {
-	    #- '/' carrier is a special case, it will be mounted first
-	    $check->($part, @seen) unless loopback::carryRootLoopback($p);
-	}
-	if (isLoopback($p)) {
-	    $check->($p->{device}, @seen);
-	}
-    };
-    $check->($fake_part) unless $mntpoint eq '/' && $loopbackDevice; #- '/' is a special case, no loop check
-
-    die "raid / with no /boot" if $mntpoint eq "/" && isMDRAID($part) && !has_mntpoint("/boot", $hds);
-    die _("You can't use a LVM Logical Volume for mount point %s", $mntpoint) if ($mntpoint eq '/' || $mntpoint eq '/boot') && isLVMBased($hd);
-    die _("This directory should remain within the root filesystem") if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
-    die _("You need a true filesystem (ext2, reiserfs) for this mount point\n") if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
-#-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i.86/) {
-#-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
-#-	  die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
-#-    }
+    local $part->{mntpoint} = $mntpoint;
+    loopback::check_circular_mounts($hd, $part, $all_hds);
 }
 
-sub add($$$;$) {
-    my ($hd, $part, $hds, $options) = @_;
+sub check {
+    my ($hd, $part, $all_hds) = @_;
+    check_mntpoint($part->{mntpoint}, $hd, $part, $all_hds);
+    check_type($part->{type}, $hd, $part);
+}
+
+sub add {
+    my ($hd, $part, $all_hds, $options) = @_;
 
     isSwap($part) ?
       ($part->{mntpoint} = 'swap') :
-      $options->{force} || check_mntpoint($part->{mntpoint}, $hd, $part, $hds);
+      $options->{force} || check_mntpoint($part->{mntpoint}, $hd, $part, $all_hds);
 
     delete $part->{maxsize};
 
-    if (isLVMBased($hd)) {
+    if (isLVM($hd)) {
 	lvm::lv_create($hd, $part);
     } else {
 	partition_table::add($hd, $part, $options->{primaryOrExtended});
     }
 }
 
-sub allocatePartitions($$) {
-    my ($hds, $to_add) = @_;
+sub allocatePartitions {
+    my ($all_hds, $to_add) = @_;
 
-    foreach my $hd (@$hds) {
-	foreach (partition_table::get_holes($hd)) {
-	    my ($start, $size) = @$_{"start", "size"};
-	    my $part;
-	    while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $hd->{device} }, 
-				$hds, $to_add)) {
-		add($hd, $part, $hds);
-		$size -= $part->{size} + $part->{start} - $start;
-		$start = $part->{start} + $part->{size};
-	    }
+    foreach my $part (get_all_holes($all_hds)) {
+	my ($start, $size, $dev) = @$part{"start", "size", "rootDevice"};
+	my $part;
+	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
+			    $all_hds, $to_add)) {
+	    my ($hd) = fsedit::part2hd($part, $all_hds);
+	    add($hd, $part, $all_hds);
+	    $size -= $part->{size} + $part->{start} - $start;
+	    $start = $part->{start} + $part->{size};
 	}
     }
 }
 
 sub auto_allocate {
-    my ($hds, $suggestions, $raid) = @_;    
-    allocatePartitions($hds, $suggestions || $suggestions{simple});
+    my ($all_hds, $suggestions) = @_;
+    my $before = listlength(fsedit::get_all_fstab($all_hds));
 
-    auto_allocate_raids($hds, $suggestions, $raid) if $raid && $suggestions;
+    allocatePartitions($all_hds, $suggestions || $suggestions{simple});
+    auto_allocate_raids($all_hds, $suggestions) if $suggestions;
 
-    map { partition_table::assign_device_numbers($_) } @$hds;
+    partition_table::assign_device_numbers($_) foreach @{$all_hds->{hds}};
+
+    $before != listlength(fsedit::get_all_fstab($all_hds));
 }
 
 sub auto_allocate_raids {
-    my ($hds, $suggestions, $raid) = @_;
+    my ($all_hds, $suggestions) = @_;
 
-    my @raids = grep { isRAID($_) } get_fstab(@$hds) or return;
+    my @raids = grep { isRawRAID($_) } get_all_fstab($all_hds) or return;
     if (@raids) {
 	require raid;
 	my @mds = grep { $_->{hd} =~ /md/ } @$suggestions;
 	foreach my $md (@mds) {
 	    my @raids_ = grep { !$md->{parts} || $md->{parts} =~ /\Q$_->{mntpoint}/ } @raids;
 	    @raids = difference2(\@raids, \@raids_);
-	    my $nb = raid::new($raid, @raids_);
-	    my $part = $raid->[$nb];
+	    my $nb = raid::new($all_hds->{raids}, @raids_);
+	    my $part = $all_hds->{raids}[$nb];
 
 	    my %h = %$md;
 	    delete @h{'hd', 'parts'};
@@ -425,28 +520,30 @@ sub auto_allocate_raids {
     }
 }
 
-sub undo_prepare($) {
-    my ($hds) = @_;
+sub undo_prepare {
+    my ($all_hds) = @_;
     require Data::Dumper;
     $Data::Dumper::Purity = 1;
-    foreach (@$hds) {
+    foreach (@{$all_hds->{hds}}) {
 	my @h = @{$_}{@partition_table::fields2save};
 	push @{$_->{undo}}, Data::Dumper->Dump([\@h], ['$h']);
     }
 }
-sub undo($) {
-    my ($hds) = @_;
-    foreach (@$hds) {
+sub undo {
+    my ($all_hds) = @_;
+    foreach (@{$all_hds->{hds}}) {
 	my $h; eval pop @{$_->{undo}} || next;
 	@{$_}{@partition_table::fields2save} = @$h;
 
 	$_->{isDirty} = $_->{needKernelReread} = 1 if $_->{hasBeenDirty};
     }
+    
 }
 
 sub move {
     my ($hd, $part, $hd2, $sector2) = @_;
 
+    die 'TODO'; # doesn't work for the moment
     my $part1 = { %$part };
     my $part2 = { %$part };
     $part2->{start} = $sector2;
@@ -499,12 +596,13 @@ sub move {
     }
 }
 
-sub change_type($$$) {
-    my ($hd, $part, $type) = @_;
+sub change_type {
+    my ($type, $hd, $part) = @_;
     $type != $part->{type} or return;
+    check_type($type, $hd, $part);
     $hd->{isDirty} = 1;
     $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
-    $part->{mntpoint} = '' if isLVM({ type => $type }) || isRAID({ type => $type });
+    $part->{mntpoint} = '' if isRawLVM({ type => $type }) || isRawRAID({ type => $type });
     $part->{type} = $type;
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;    

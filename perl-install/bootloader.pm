@@ -117,7 +117,7 @@ sub read($$) {
     \%b;
 }
 
-sub suggest_onmbr ($) {
+sub suggest_onmbr {
     my ($hds) = @_;
     
     my $type = partition_table_raw::typeOfMBR($hds->[0]{device});
@@ -395,7 +395,7 @@ wait %d seconds for default boot.
 	     yaboot => to_bool(arch() =~ /ppc/),
 	     silo => to_bool(arch() =~ /sparc/),
 	     lilo => to_bool(arch() !~ /sparc|ppc/) && !isLoopback(fsedit::get_root($fstab)),
-	     grub => to_bool(arch() !~ /sparc|ppc/ && availableRamMB() < 800), #- don't use grub if more than 800MB
+	     grub => to_bool(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab)) && availableRamMB() < 800), #- don't use grub if more than 800MB
 	     loadlin => to_bool(arch() !~ /sparc|ppc/) && -e "/initrd/loopfs/lnx4win",
 	    );
     unless ($lilo->{methods}) {
@@ -764,7 +764,7 @@ sub dev2grub {
 sub write_grub_config {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     my %dev2bios = (
-      (map_index { $_ => "fd$::i" } detect_devices::floppies()),
+      (map_index { $_ => "fd$::i" } detect_devices::floppies_dev()),
       (map_index { $_ => "hd$::i" } dev2bios($hds, $lilo->{boot})),
     );
 
@@ -984,10 +984,10 @@ sub install {
     }
     $lilo->{keytable} = keytable($prefix, $lilo->{keytable});
 
-    if (arch() =~ /i.86/) {
+    if (exists $lilo->{methods}{grub}) {
 	#- when lilo is selected, we don't try to install grub. 
 	#- just create the config file in case it may be useful
-	write_grub_config($prefix, $lilo, $fstab, $hds);
+	eval { write_grub_config($prefix, $lilo, $fstab, $hds) };
     }
 
     my %l = grep_each { $::b } %{$lilo->{methods}};
