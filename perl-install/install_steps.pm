@@ -837,11 +837,16 @@ sub setupBootloaderBefore {
     if (cat_("/proc/cmdline") =~ /\b(pci)=(\S+)/) {
 	bootloader::set_append($o->{bootloader}, $1, $2);
     }
-    if (cat_("/proc/cmdline") =~ /\bacpi=off/) {
-	bootloader::set_append($o->{bootloader}, acpi => 'off');
-    }
-    if (cat_("/proc/cmdline") =~ /\bacpi=ht/) {
-	bootloader::set_append($o->{bootloader}, acpi => 'ht');
+    if (my ($acpi) = cat_("/proc/cmdline") =~ /\bacpi=(\w+)/) {
+	if ($acpi eq 'ht') {
+	    #- the user is using the default, which may not be the best
+	    my $year = detect_devices::dmidecode()->{BIOS_Year};
+	    if (detect_devices::isLaptop() && $year >= 2002) {
+		log::l("forcing ACPI on a laptop with recent bios ($year)");
+		$acpi = 'on';
+	    }
+	}
+	bootloader::set_append($o->{bootloader}, acpi => $acpi);
     }
     if (cat_("/proc/cmdline") =~ /\bnoapic/) {
 	bootloader::set_append($o->{bootloader}, 'noapic');
