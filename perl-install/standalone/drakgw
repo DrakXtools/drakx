@@ -167,7 +167,7 @@ Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
 #OBSOLETE! require pci_probing::main;
 #($_->[0] =~ /NETWORK_ETHERNET/) and (push @pci_ethernet_cards, $_) foreach (pci_probing::main::probe('.'));
 
-#($#pci_ethernet_cards == -1) and $in->ask_warn('', _("No PCI network ethernet devices found!")) and $in->exit(0);
+#(@pci_ethernet_cards == ()) and $in->ask_warn('', _("No PCI network ethernet devices found!")) and $in->exit(0);
 #
 ##  push @pci_ethernet_cards, [ "NETWORK_ETHERNET", "Fake ne2000", "ne2k" ];
 
@@ -215,13 +215,13 @@ log::l("[drakgw] Available network cards: ".join(" ; ", @all_cards)."\n");
 #- setup the network interface we shall use
 
 my $interface;
-if ($#all_cards == -1)
+if (@all_cards == ())
 {
     $in->ask_warn(_("No network adapter on your system!"), 
 		  _("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
     quit_global($in);
 }
-elsif ($#all_cards == 0)
+elsif (@all_cards == 1)
 {
     $interface = $all_cards[0];
     $::verbose and ($in->ask_okcancel(_("Network interface"),
@@ -235,8 +235,7 @@ else
 				    );
     defined $interface or quit_global($in);
 }
-$interface =~ /(eth[0-9]+)/ or die("Internal error");
-my $device = $1;
+my ($device) = $interface =~ /(eth[0-9]+)/ or die("Internal error");
 log::l("[drakgw] Choosing network card: $device\n");
 
 grep(/$device/, @configured_devices) and
@@ -250,8 +249,8 @@ my $full_lan_address = "192.168.0.0";
 #						       _("You may now decide which class C network to use.\n"),
 #						       _("Network:"), $full_lan_address,
 #						       ) or $in->exit(0));
-($full_lan_address =~ /^([0-9]+\.[0-9]+\.[0-9]+)\.0$/) or die "Invalid network.\n";
-my $lan_address = $1;
+my ($lan_address) =
+  $full_lan_address =~ /^([0-9]+\.[0-9]+\.[0-9]+)\.0$/ or die "Invalid network.\n";
 
 
 #- test for potential conflict with other networks
@@ -260,13 +259,9 @@ foreach (@configured_devices)
 {
     if ($_ ne $device)
     {
-	local *IFCFG;
-	my $ifcfg = "/etc/sysconfig/network-scripts/ifcfg-$_";
-	open IFCFG, "$ifcfg" or die "Can't open $ifcfg";
-	my @ifcfg_content = <IFCFG>;
+	my @ifcfg_content = cat_("/etc/sysconfig/network-scripts/ifcfg-$_");
 	grep(/$lan_address/, @ifcfg_content) and
 	    $in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) and quit_global($in);
-	close IFCFG;
     }
 }
 
@@ -274,7 +269,7 @@ foreach (@configured_devices)
 #- test for potential conflict with previous firewall config
 
 my @chain_rules;
-(-f "/etc/sysconfig/ipchains" or ((-x "/sbin/ipchains") and (@chain_rules = `/sbin/ipchains -L`) and ($#chain_rules > 2)))
+(-f "/etc/sysconfig/ipchains" or ((-x "/sbin/ipchains") and (@chain_rules = `/sbin/ipchains -L`) and (@chain_rules > 3)))
     and ($in->ask_okcancel(_("Firewalling configuration detected!"),
 			   _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation. Proceed?"), 1) or quit_global($in));
 
@@ -296,8 +291,7 @@ $wait_configuring = $in->wait_message(_("Configuring..."), _("Configuring script
 my $network_scripts = "/etc/sysconfig/network-scripts";
 -f "$network_scripts/ifcfg-$device" and rename("$network_scripts/ifcfg-$device", "$network_scripts/old.ifcfg-$device");
 my $ifcfg = "$network_scripts/ifcfg-$device";
-local *IFCFG; open IFCFG, ">$ifcfg" or die "Can't open $ifcfg";
-print IFCFG <<EOF;
+output($ifcfg, qq(
 DEVICE=$device
 BOOTPROTO=static
 IPADDR=$lan_address.1
@@ -305,8 +299,8 @@ NETMASK=255.255.255.0
 NETWORK=$lan_address.0
 BROADCAST=$lan_address.255
 ONBOOT=yes
-EOF
-close IFCFG;
+));
+
 
 
 #- install and setup the RPM packages
@@ -331,7 +325,7 @@ if (-f "/etc/rc.d/rc.firewall")
     open RCFIREWALL, "/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
     my @rcfirewall_content = <RCFIREWALL>;
     close RCFIREWALL;
-    grep(/\/etc\/rc\.d\/rc\.firewall\.inet_sharing/, @rcfirewall_content) or push @rcfirewall_content, "# Added by drakgw\n[ -x /etc/rc.d/rc.firewall.inet_sharing ] && /etc/rc.d/rc.firewall.inet_sharing\n";
+    grep(m|\Q/etc/rc.d/rc.firewall.inet_sharing|, @rcfirewall_content) or push @rcfirewall_content, "# Added by drakgw\n[ -x /etc/rc.d/rc.firewall.inet_sharing ] && /etc/rc.d/rc.firewall.inet_sharing\n";
     open RCFIREWALL, ">/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
     print RCFIREWALL @rcfirewall_content;
     close RCFIREWALL;
@@ -492,14 +486,11 @@ close DHCPDCONF;
 
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
 
-open CONF_LINUXCONF, "$conf_linuxconf" or die "Can't open $conf_linuxconf";
-my @conf_linuxconf_content = <CONF_LINUXCONF>;
-close CONF_LINUXCONF;
-($_ =~ /^DHCP.interface/ and $_="DHCP.interface $device\n") foreach @conf_linuxconf_content;
+my @conf_linuxconf_content = cat_($conf_linuxconf);
+(/^DHCP.interface/ and $_="DHCP.interface $device\n") foreach @conf_linuxconf_content;
 grep(/DHCP.interface/, @conf_linuxconf_content) or push @conf_linuxconf_content, "DHCP.interface $device\n";
-open CONF_LINUXCONF, ">$conf_linuxconf" or die "Can't open $conf_linuxconf";
-print CONF_LINUXCONF @conf_linuxconf_content;
-close CONF_LINUXCONF;
+output($conf_linuxconf, @conf_linuxconf_content);
+
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
 #- working correctly: 
@@ -514,15 +505,11 @@ close CONF_LINUXCONF;
 
 if (-f $cups_conf)
 {
-    open CONF_CUPS, "$cups_conf" or die "Can't open $cups_conf";
-    my @cups_conf_content = <CONF_CUPS>;
-    close CONF_CUPS;
-    ($_ =~ /ServerName[^:]/ and $_="ServerName $lan_address.1\n") foreach @cups_conf_content;
-    grep(/ServerName[^:]/, @cups_conf_content) or push @cups_conf_content, "ServerName $lan_address.1\n";
-    grep(/^BrowseAddress $lan_address.255/, @cups_conf_content) or push @cups_conf_content, "BrowseAddress $lan_address.255\n";
-    open CONF_CUPS, ">$cups_conf" or die "Can't open $conf_linuxconf";
-    print CONF_CUPS @cups_conf_content;
-    close CONF_CUPS;
+    my @cups_conf_content = cat_($cups_conf);
+    /ServerName[^:]/ and $_ = "ServerName $lan_address.1\n" foreach @cups_conf_content;
+    push @cups_conf_content, "ServerName $lan_address.1\n" if grep /ServerName[^:]/, @cups_conf_content;
+    push @cups_conf_content, "BrowseAddress $lan_address.255\n" if grep /^BrowseAddress $lan_address.255/, @cups_conf_content;
+    output($cups_conf, @cups_conf_content);
 }
 
 #- start the daemons
@@ -552,6 +539,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.22  2001/02/26 18:39:12  prigaux
+#- pixelization
+#-
 #- Revision 1.21  2001/02/08 10:11:37  damien
 #- implemented or updated embedded mode
 #-
