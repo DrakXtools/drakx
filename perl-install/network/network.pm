@@ -420,7 +420,7 @@ sub configureNetwork2 {
         write_conf("$etc/sysconfig/network", $netc);
         write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
         write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $::prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
-        add2hosts("$etc/hosts", $netc->{HOSTNAME}, "127.0.0.1") if $netc->{HOSTNAME});
+        add2hosts("$etc/hosts", $netc->{HOSTNAME}, "127.0.0.1") if $netc->{HOSTNAME};
         add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
         any { $_->{BOOTPROTO} eq "dhcp" } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
