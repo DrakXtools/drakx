@@ -264,12 +264,16 @@ sub ask_from__add_modify_remove {
 	put_in_hash($e, { allow_empty_list => 1, val => \$chosen_element, type => 'list' });
 
 	while (1) {
-	    my $c;
+	    my $continue;
 	    my @l = (@$l, 
-		     map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $callback{$s}->($chosen_element); $c = 1 } } }
+		     map { my $s = $_; { val => translate($_), clicked_may_quit => sub { 
+					     my $r = $callback{$s}->($chosen_element);
+					     defined $r or return;
+					     $continue = 1;
+					 } } }
 		     N_("Add"), if_(@{$e->{list}} > 0, N_("Modify"), N_("Remove")));
 	    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback }, \@l) or return;
-	    return if !$c;
+	    return if !$continue;
 	}
     }
 }
