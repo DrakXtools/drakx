@@ -29,7 +29,7 @@ use c;
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: printerdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+/-h/ and die "usage: printerdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing] [--cups] [--lprng] [--lpd] [--pdq]\n";
 
 $::beginner = /-beginner/;
 $::expert = /-expert/;
@@ -42,27 +42,29 @@ my $printer;
 
 my $in = 'interactive'->vnew('su', 'printer');
 
+my $commandline = $_;
+
 {
 my $w = $in->wait_message('', _("Reading printer data ..."));
 # Get what was installed before
 eval { $printer = printer::getinfo('') };
 # Choose the spooler by command line options
-/-cups/ and
+$commandline =~ /-cups/ and
     $printer->{SPOOLER} = 'cups' and printer::read_configured_queues($printer);
-/-lpr/ and 
+$commandline =~ /-lpr/ and 
     $printer->{SPOOLER} = 'lpd' and printer::read_configured_queues($printer);
-/-lpd/ and 
+$commandline =~ /-lpd/ and 
     $printer->{SPOOLER} = 'lpd' and printer::read_configured_queues($printer);
-/-lprng/ and 
+$commandline =~ /-lprng/ and 
     $printer->{SPOOLER} ='lprng' and printer::read_configured_queues($printer);
-/-pdq/ and 
+$commandline =~ /-pdq/ and 
     $printer->{SPOOLER} = 'pdq' and printer::read_configured_queues($printer);
-
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 }
 
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
+
 printerdrake::main($printer, $in, 1);
 
 $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
