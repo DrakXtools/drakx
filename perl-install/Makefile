@@ -8,7 +8,7 @@ include Makefile.config
 
 POFILES   = $(shell ls share/po/*.po)
 MOFILES   = $(POFILES:%.po=%.mo)
-DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config ddcprobe drakxtools.spec serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons pixmaps pixmaps/langs standalone/interactive_http rpcinfo-flushed.c standalone/service_harddrake.sh
+DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config ddcprobe drakxtools.spec serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons standalone/man/C/* pixmaps pixmaps/langs standalone/interactive_http rpcinfo-flushed.c standalone/service_harddrake.sh
 OTHERS     = $(OTHERDIRS) $(OTHERFILES)
 OTHERDIRS  = tools/ddcprobe tools/serial_probe
 OTHERFILES = tools/rpcinfo-flushed.c
@@ -18,6 +18,10 @@ STAGE1 = ../mdk-stage1
 .PHONY: all $(DIRS) install clean stage2 full_stage2
 
 all: list_modules.pm TAGS $(DIRS)
+
+up:
+	(cd ..; cvs up;cd -;make localsrpm;up /home/tv/rpm/SRPMS/drakxtools-$(PKGVERSION)-$(RELEASE:).src.rpm)
+
 
 xs: $(DIRS)
 

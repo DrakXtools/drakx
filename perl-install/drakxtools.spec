@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 6mdk
+Release: 7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -303,6 +303,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %_iconsdir/localedrake.png
 %_iconsdir/large/localedrake.png
 %_iconsdir/mini/localedrake.png
+%_mandir/*/*
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)

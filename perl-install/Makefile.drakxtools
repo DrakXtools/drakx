@@ -75,3 +75,5 @@ install:
 	ln -s {net_monitor,$(SBINDEST)/draknet_monitor}
 	ln -s {printerdrake,$(SBINDEST)/drakprinter}
 	ln -s {scannerdrake,$(SBINDEST)/drakscanner}
+	mkdir -p $(PREFIX)/usr/share/man/man{5,8}
+	for i in 5 8; do install -m 644 standalone/man/C/man$$i/* $(PREFIX)/usr/share/man/man$$i; done
