@@ -155,11 +155,16 @@ sub process {
         my %yesno = (yes => N("Yes"), no => N("No"));
         my $yes;
         $data2 = [ { val => \$yes, type => 'list', list => [ values %yesno ], gtk => { use_boxradio => 1 } } ] if $page->{type} eq "yesorno";
-        my $a = $in->ask_from_({ title => $o->{name}, 
+        my $a;
+        if (ref $data2 eq 'ARRAY' && @$data2) {
+            $a = $in->ask_from_({ title => $o->{name}, 
                                  messages => $name, 
                                  callbacks => { map { $_ => $page->{$_} || $default_callback{$_} } qw(focus_out complete) },
                                  if_($page->{interactive_help_id}, interactive_help_id => $page->{interactive_help_id}),
                                }, $data2);
+        } else {
+            $a = $in->ask_okcancel($o->{name}, $name);
+        }
         # interactive->ask_yesorno does not support stepping forward or backward:
         $a = $yes if $a && $page->{type} eq "yesorno";
         if ($a) {
