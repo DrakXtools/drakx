@@ -445,7 +445,9 @@ sub setup {
 
 sub write {
     my ($keyboard) = @_;
+    $keyboard = { %$keyboard };
 
+    delete $keyboard->{unsafe};
     $keyboard->{KEYTABLE} = keyboard2kmap($keyboard);
 
     setVarsInSh("$::prefix/etc/sysconfig/keyboard", $keyboard);
