@@ -286,7 +286,7 @@ sub cz_file() {
 sub extract_modules {
     my ($dir, @modules) = @_;
     my $cz = cz_file();
-    if (!-e $cz) {
+    if (!-e $cz && !$::uml_install) {
 	unlink $_ foreach glob_("/lib/modules*.cz*");
 	require install_any;
         install_any::getAndSaveFile("install/stage2/live$cz", $cz) or die "failed to get modules $cz: $!";
