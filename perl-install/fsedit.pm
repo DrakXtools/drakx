@@ -281,14 +281,14 @@ sub is_same_hd {
 sub are_same_partitions {
     my ($part1, $part2) = @_;
     foreach ('start', 'size', 'pt_type', 'fs_type', 'rootDevice') {
-	$part1->{$_} eq $part2->{$_} or return;
+	$part1->{$_} eq $part2->{$_} or return 0;
     }
     1;
 }
 
 sub is_one_big_fat_or_NT {
     my ($hds) = @_;
-    @$hds == 1 or return;
+    @$hds == 1 or return 0;
 
     my @l = fs::get::hds_fstab(@$hds);
     @l == 1 && isFat_or_NTFS($l[0]) && fs::get::hds_free_space(@$hds) < 10 << 11;
@@ -357,7 +357,7 @@ sub suggest_part {
       grep { !$part->{fs_type} || $part->{fs_type} eq $_->{fs_type} || isTrueFS($part) && isTrueFS($_) }
 	@local_suggestions;
 
-    defined $best or return; #- sorry no suggestion :(
+    defined $best or return 0; #- sorry no suggestion :(
 
     $part->{mntpoint} = $best->{mntpoint};
     fs::type::set_type_subpart($part, $best) if !isTrueFS($best) || !isTrueFS($part);
@@ -379,7 +379,7 @@ sub suggestions_mntpoint {
 sub check_mntpoint {
     my ($mntpoint, $hd, $part, $all_hds) = @_;
 
-    $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
+    $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return 0;
     $mntpoint =~ m|^/| or die N("Mount points must begin with a leading /");
     $mntpoint =~ m|[\x7f-\xff]| and cdie N("Mount points should contain only alphanumerical characters");
     fs::get::mntpoint2part($mntpoint, [ grep { $_ ne $part } fs::get::really_all_fstab($all_hds) ]) and die N("There is already a partition with mount point %s\n", $mntpoint);
@@ -496,9 +496,9 @@ sub auto_allocate_raids {
 sub auto_allocate_vgs {
     my ($all_hds, $suggestions) = @_;
 
-    my @pvs = grep { isRawLVM($_) } fs::get::fstab($all_hds) or return;
+    my @pvs = grep { isRawLVM($_) } fs::get::fstab($all_hds) or return 0;
 
-    my @vgs = grep { $_->{VG_name} } @$suggestions or return;
+    my @vgs = grep { $_->{VG_name} } @$suggestions or return 0;
 
     partition_table::write(@{$all_hds->{hds}});
 
