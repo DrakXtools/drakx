@@ -2052,6 +2052,7 @@ sub setup_common {
     my $hplipdevice = "";
     my $ptaldevice = "";
     my $isHPOJ = 0;
+    my $isHPLIP = 0;
     my $w;
     if ($device =~ m!^/dev/! || $device =~ m!^socket://!) {
 	# Ask user whether he has a multi-function device when he did not
@@ -2062,14 +2063,34 @@ sub setup_common {
 	    $makemodel =~ /^\s*$/) {
 	    local $::isWizard = 0;
 	    if (!$printer->{noninteractive}) {
-		$isHPOJ = $in->ask_yesorno(N("Add a new printer"),
-					   N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
+		if (($device =~ m!/usb/!) &&
+		    ($printer->{SPOOLER} eq 'cups')) {
+		    my $choice = $in->ask_from_list
+			(N("Add a new printer"),
+			 N("On many HP printers there are special functions available, maintenance (ink level checking, nozzle cleaning. head alignment, ...) on all not too old inkjets, scanning on multi-function devices, and memory card access on printers with card readers. ") .
+			 "\n\n" .
+			 N("To access these extra functions on your HP printer, it must be set up with the appropriate software: ") . 
+			 N("Either with the newer HPLIP which allows printer maintenance through the easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on newer PhotoSmart models ") .
+			 N("or with the older HPOJ which allows only scanner and memory card access, but could help you in case of failure of HPLIP. ") . 
+			 "\n\n" .
+			 N("What is your choice (choose \"None\" for non-HP printers)? "),
+			 [N("None"), N("HPLIP"), N("HPOJ")], N("None"));
+		    if ($choice eq N("HPLIP")) {
+			$isHPLIP = 1;
+		    } elsif ($choice eq N("HPOJ")) {
+			$isHPOJ = 1;
+		    }
+		} else {
+		    $isHPOJ = $in->ask_yesorno(N("Add a new printer"),
+					       N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
+		}
 	    }
 	}
 	my $hplipentry;
 	if (($printer->{SPOOLER} eq 'cups') &&
-	    ($hplipentry =
-	     printer::main::hplip_device_entry($device, @autodetected))) {
+	    (($hplipentry =
+	      printer::main::hplip_device_entry($device, @autodetected)) ||
+	     $isHPLIP)) {
 	    # Device is supported by HPLIP
 
 	    # Install HPLIP packages
@@ -2099,10 +2120,35 @@ sub setup_common {
 		 N("Printerdrake"),
 		 N("Checking device and configuring HPLIP..."))
 		if !$printer->{noninteractive};
-	    
-	    $hplipdevice = printer::main::start_hplip
-		($device, $hplipentry, @autodetected) if 
-		!$hplipinstallfailed;
+
+	    if (!$hplipinstallfailed) {
+		if ($isHPLIP) {
+		    my @uris = printer::main::start_hplip_manual();
+		    my @menu; my %menuhash;
+		    for my $item (@uris) {
+			if ($item =~ m!^hp:/(usb|par|net)/(\S*?)(\?\S*|)$!){
+			    my $modelname = "HP " . $2;
+			    $modelname =~ s/_/ /g;
+			    push(@menu, $modelname);
+			    $menuhash{$modelname} = $item;
+			}
+		    }
+		    undef $w;
+		    local $::isWizard = 0;
+		    my $choice = $in->ask_from_list
+			(N("Add a new printer"),
+			 N("Which printer do you want to set up with HPLIP?"),
+			 \@menu, $menu[0]);
+		    $hplipdevice = $menuhash{$choice};
+		    $hplipentry = 
+			printer::main::hplip_device_entry_from_uri
+			($hplipdevice);
+		    $makemodel = $choice;
+		} else {
+		    $hplipdevice = printer::main::start_hplip
+			($device, $hplipentry, @autodetected);
+		}
+	    }
 
 	    if ($hplipdevice) {
 		# Configure scanning with SANE on HP's MF devices

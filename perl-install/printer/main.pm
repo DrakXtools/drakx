@@ -2524,6 +2524,23 @@ sub start_hplip {
     return undef;
 }
 
+sub start_hplip_manual {
+
+    # Start HPLIP daemons
+    printer::services::start_not_running_service("hplip");
+
+    # Return all possible device URIs
+    open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+	 '/bin/sh -c "export LC_ALL=C; /usr/lib/cups/backend/hp" |') or
+	 die 'Could not run "/usr/lib/cups/backend/hp"!';
+    my @uris;
+    while (<$F>) {
+        m!^direct\s+(hp:\S+)\s+!;
+	push(@uris, $1);
+    }
+    return @uris;
+}
+
 sub configure_hpoj {
     my ($device, @autodetected) = @_;
 
