@@ -468,7 +468,7 @@ sub keyboard2full_xkb {
 			       if_($keyboard->{GRP_TOGGLE} ne 'rwin_toggle', 'compose:rwin'), 
 			       "grp:$keyboard->{GRP_TOGGLE}", 
 			       'grp_led:scroll'),
-			   if_(member($XkbLayout, 'az', 'tr', 'tr_f'), 'caps:shift')),
+			   ),
     };
 }
 
