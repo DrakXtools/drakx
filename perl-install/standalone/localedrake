@@ -34,6 +34,7 @@ if (defined $klang) {
 my $locale = lang::read($>);
 my $in = 'interactive'->vnew;
 
+$ugtk2::wm_icon = "localedrake";
 $::Wizard_title = N("LocaleDrake");
 
 sub select_country() {
