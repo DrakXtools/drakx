@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-open F, "links -dump http://www.eecis.udel.edu/~mills/ntp/clock1.htm|";
-open G, "links -dump http://www.eecis.udel.edu/~mills/ntp/clock2.htm|";
+#open F, "/usr/bin/lynx -dump http://www.eecis.udel.edu/~mills/ntp/clock1a.html|";
+open(my $G, "/usr/bin/lynx -dump http://www.eecis.udel.edu/~mills/ntp/clock2a.html|");
 
 # Chris Kloiber <ckloiber@redhat.com> writes:
 # > It's not considered polite to use the Stratum 1 servers for purposes that 
@@ -9,45 +9,50 @@ open G, "links -dump http://www.eecis.udel.edu/~mills/ntp/clock2.htm|";
 # > the few nanoseconds difference. 
 #parse() while <F>;
 
-parse() while <G>;
+parse($_) while <$G>;
 
+my @all;
+my ($l, $nb);
 sub parse {
-    /\0/ .. 1 or return;
-    if (/^   [\d\0]\d\./) {
-	push @all, { name => $name, indic => $indic, %l } if $name;
-	%l = ();
+    local ($_) = @_;
+    /Active Servers/ .. /Discontinued Service/ or return;
+    if (/^\s+\d+\. ([A-Z ]*[A-Z]);?\s+([.\w-]+)/) {
+	push @all, $l = { name => $2, indic => $1 };
 	$nb = 0;
     } else {
 	s/^\s*//;
 	s/\s*$//;
-	if ($nb == 2) {
-	    s/US CA:/US CA/;
-	    ($indic, $name) = /([A-Z ]*[A-Z])\s+([.\w-]+)/ or die "bad line $_";
+	my ($field, $val) = /^(.*):\s*(.*)/;
+	if ($field =~ /policy/i) {
+	    $field = "policy";
+	    $val = lc join(' ', split(' ', $val));
+	    $val =~ s/glad to receive a note//;
+	    $val =~ s/(but )?please send (a )?message to notify//;
+	    $val =~ s/an email note is appreciated//;
+	    $val =~ s/please send a message with the//;
+	    $val =~ s/no need to notify//;
+	    $val =~ s/[(), .;]*$//;
+	    $val = "open access" if $val eq "public";
+	    warn "$val ($all[-1]{name})\n" if $val ne 'open access';
+	} elsif ($field =~ /^Contact|Synchroni[sz]ation|Location|Geographic\s+Coordinates|Service\s+Area|Note$/i) {
 	} else {
-	    s/^(.*):\s*/$field = $1; ''/e;
-	    $field = lc $field;
-	    if ($field =~ /policy/) {
-		$field = "policy";
-		$_ = lc $_;
-		s/glad to receive a note//;
-		s/[(), ]*$//;
-		$_ = "open access" if $_ eq "public";
-	    }
-	    $l{$field} .= ($l{$field} && ' ') . $_;
+#	    warn "bad line ($field) $_\n";
+	    return;
 	}
+	$l->{$field} .= ($l->{$field} && ' ') . $val;
     }
     $nb++;
 }
 
 
 use Data::Dumper;
-#print Dumper(\@all);
+#warn Dumper(\@all);
 
 foreach (grep { $_->{policy} eq 'open access' } @all) {
-    ($country, $state) = split ' ', $_->{indic};
+    my ($country, $state) = split ' ', $_->{indic};
     $country = ucfirst(lc $country_codes{$country});
     $country .= " $state" if $state;
-    print "$country (", lc($_->{name}), ")\n";
+    printf "\t'%s' => '%s',\n", lc($_->{name}), $country;
 }
 
 BEGIN {
