@@ -598,7 +598,7 @@ sub install_urpmi {
 	#- build list file using internal data, synthesis file should exists.
 	#- WARNING this method of build only works because synthesis (or hdlist)
 	#-         has been read.
-	foreach my $pkg (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
+	foreach (@{$packages->{depslist}}[$_->{start} .. $_->{end}]) {
 	    print LIST "$dir/".$_->filename."\n";
 	}
 	close LIST;
