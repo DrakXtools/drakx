@@ -173,10 +173,7 @@ sub switch {
                           N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
                             $device->{description}, $driver),
                           [
-                           {
-                            val => N("Let me pick any driver"), disabled => sub {},
-                            clicked => sub { &choose_any_driver($in, $driver, $device->{description}); goto end }
-                           },
+                           &get_any_driver_entry($in, $driver, $device),
                           ]
                          );
         } elsif ($in->ask_from(N("Sound configuration"),
@@ -212,10 +209,7 @@ To use alsa, one can either use:
                                     val => N("Trouble shooting"), disabled => sub {},
                                     clicked => sub { &trouble($in) }
                                 },
-                                {
-                                    val => N("Let me pick any driver"), disabled => sub {},
-                                 clicked => sub { &choose_any_driver($in, $driver, $device->{description}) }
-                                },
+                                &get_any_driver_entry($in, $driver, $device),
                                 ]))
         {
             return if $new_driver eq $driver;
@@ -233,12 +227,13 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
                       N("There's no free driver for your sound card (%s), but there's a proprietary driver at \"%s\".",
                         $device->{description}, $driver));
     } elsif ($driver eq "unknown") {
-        $in->ask_warn(N("No known driver"), 
+        $in->ask_from(N("No known driver"), 
                       N("There's no known driver for your sound card (%s)",
-                        $device->{description}));
+                        $device->{description}),
+                      [ &get_any_driver_entry($in, $driver, $device) ]);
     } else {
         $in->ask_warn(N("Unkown driver"), 
-                      N("The \"%s\" driver for your sound card is unlisted"),
+                      N("Error: The \"%s\" driver for your sound card is unlisted"),
                       $driver);
     }
   end:
@@ -289,6 +284,14 @@ The current driver for your \"%s\" sound card is \"%s\" ", $card, $driver)),
                      )) {
         
         do_switch($old_driver, $driver);
+    }
+}
+
+sub get_any_driver_entry {
+    my ($in, $driver, $device) = @_;
+    {
+        val => N("Let me pick any driver"), disabled => sub {},
+        clicked => sub { &choose_any_driver($in, $driver, $device->{description}); goto end }
     }
 }
 
