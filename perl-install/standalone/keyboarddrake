@@ -6,7 +6,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 
 use interactive;
 use keyboard;
-use Xconfigurator_consts;
+use Xconfig::xfree;
 use common;
 use c;
 
@@ -41,24 +41,13 @@ if ($keyboard) {
     my $xkb = keyboard::keyboard2xkb($keyboard);
     system('setxkbmap', $xkb);
 
-    my $f = "/etc/X11/XF86Config";
-    my $g = "/etc/X11/XF86Config-4";
-
-    substInFile {
-	if (/^Section\s+"Keyboard"/ .. /^EndSection/) {
-	    s|^(\s*XkbLayout\s+).*|$1"$xkb"| 
-	      and $_ .= join '', map { "    $_\n" } @{$Xconfigurator::xkb_options{$xkb} || []};
-	    $_ = '' if m,^(\s*(XkbVariant|XkbOptions)\s+),; # remove existing one
-	}
-    } $f if -e $f && !$::testing;
-
-    substInFile {
-	if (/Identifier\s+"Keyboard1"/ .. /^EndSection/) {
-	    s|^(\s*Option\s+"XkbLayout"\s+).*|$1"$xkb"| 
-	      and $_ .= join '', map { /(\S+)(.*)/; qq(    Option "$1" $2\n) } @{$Xconfigurator::xkb_options{$xkb} || []};
-	    $_ = '' if m,^(\s*Option\s+"(XkbVariant|XkbOptions)"\s+),; # remove existing one
-	}
-    } $g if -e $g && !$::testing;
+    eval {
+	my $xfree_conf = Xconfig::xfree->read;
+	my $x_kbd_conf = $xfree_conf->get_keyboard;
+	$x_kbd_conf->{XkbLayout} = $xkb;
+	$xfree_conf->set_keyboard($x_kbd_conf);
+	$xfree_conf->write;
+    };
 
     keyboard::write('', $keyboard, $isNotDelete);
 }
