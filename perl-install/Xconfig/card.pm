@@ -349,7 +349,9 @@ sub install_server {
 	fglrx => [ 'ATI_kernel', 'ATI_GLX' ], #- using ATI fglrx driver (Radeon, Fire GL cards only).
     );
     if (my $rpms_needed = $proprietary_Driver2{$card->{Driver2}}) {
-	push @packages, $do_pkgs->check_kernel_module_packages($rpms_needed->[0], $rpms_needed->[1]);
+	if (my $proprietary_packages = $do_pkgs->check_kernel_module_packages($rpms_needed->[0], $rpms_needed->[1])) {
+	    push @packages, @$proprietary_packages;
+	}
     }
 
     $do_pkgs->install(@packages) if @packages;
