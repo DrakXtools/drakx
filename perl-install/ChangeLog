@@ -1,3 +1,371 @@
+2001/07/30  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm: debug
+	added internet connection selection in case of multiple configurations
+
+	* network/adsl.pm, network/tools.pm, network/modem.pm, network/isdn.pm:
+	added internet connection selection in case of multiple configurations
+
+	* network/ethernet.pm: added cable internet connection selection
+	added internet connection selection in case of multiple configurations
+
+2001/07/30  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/tools.c, mdk-stage1/stage1.c, mdk-stage1/config-stage1.h:
+	have a memory limit also for Rescue (different one)
+
+2001/07/30  Pixel  <pixel@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: use MDK::Common
+	i wonder why it was included and Till used an older version without
+	merging?
+
+	* resize_fat/main.pm: switch to MDK::Common (i wonder why it was not done
+	yet)
+
+	* share/rpmsrate: raise rxvt (4->5)
+	lower rpmdrake & harddrake (5->4)
+	remove rootfiles (unneeded)
+
+	* pkgs.pm (getDeps): ensure "depslist.ordered has not same package as
+	hdlist files"
+	occurs when the hdlists are in fact not available
+
+	* Makefile: use -excludeMDK::Common::Globals for perl_checker
+	automatic handling of locales.tar.bz2 based on installed glibc
+
+	* share/locales.tar.bz2.ppc, share/locales.tar.bz2,
+	share/locales.tar.bz2.sparc, share/.cvsignore, share/gen_locales.sh,
+	share/locales-skeleton.tar.bz2: automatic handling of locales.tar.bz2
+	based on installed glibc
+
+2001/07/28  tkamppeter
+
+	* printer.pm, printerdrake.pm: Support for PPD files of PostScript
+	printers (when CUPS is used)
+
+2001/07/27  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: fixed undeselectable group when 'Other' sub-tree
+	is seen as a package.
+
+	* interactive_gtk.pm: allow ask_browse_tree_info_refW to return 0 on
+	cancel (previously always 1).
+	added a before leaving code to clean added reference (else it seems to
+	bahave
+	strangely on changing steps).
+	fixed wrong reference to added icons to ask_browse_tree_info_refW.
+
+	* services.pm: allow cancel on services which do not change anything.
+
+	* install_steps_interactive.pm: changed warn dialog to okcancel dialog
+	when asking user to insert Boot floppy
+	used or Update Modules floppy (die may cause to rerun install else).
+
+2001/07/27  gbeauchesne
+
+	* install_steps_gtk.pm: 
+	  - install_steps_gtk.pm (launchX) : create /var/log, if not existent,
+	for
+	XFree86.log
+
+2001/07/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/modules.c: allow to escape from Update Modules if you don't
+	want to insert an ext2 floppy
+	Disk -> Floppy for Update Modules disk
+
+2001/07/27  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* share/locales.tar.bz2.ppc, keyboard.pm, help.pm, partition_table.pm,
+	Xconfigurator.pm: last of sync with PPC beta mods
+
+2001/07/27  tkamppeter
+
+	* standalone/printerdrake, printer.pm, printerdrake.pm: Printerdrake
+	changed to use Foomatic, driver options, spooler change
+
+2001/07/26  dam's  <damien@mandrakesoft.com>
+
+	* network/isdn.pm: added firmware loading/configuration
+	not loading the module at detection.
+
+	* standalone/draknet: MDK::common correction
+
+	* modules.pm: added default option id="HiSax" to isdn module
+
+2001/07/26  fcrozat
+
+	* share/po/fr.po: Fix spelling of 'molette'
+
+2001/07/26  François Pons  <fpons@mandrakesoft.com>
+
+	* install2.pm: added blank and updatemodules options to DrakX.
+
+	* bootloader.pm: added prioritary kernel entry 'default' as the kernel
+	typically copied from a
+	modified blank.img file with a kernel (no initrd.img necessary to
+	build).
+	This kernel takes precedance over any other kernel.
+
+	* install_steps_interactive.pm: really fixes Diskette with Floppy.
+	fix typo as Diskette to Floppy.
+	add support for new modules load as described by GG.
+
+	* install_steps.pm: fixed some silly typo and tiny bugs.
+	fixed typo as Diskette to Floppy.
+	add support for modified blank.img floppy and Update Modules floppy.
+	In first case copy kernel to /boot/vmlinuz-default to be taken into
+	account by
+	bootloader suggestion method.
+	In second case, check installed kernel and update any modules listed in
+	the
+	Update Modules floppy.
+
+2001/07/26  gbeauchesne
+
+	* bootloader.pm: 
+	  - Don't set "lba32" on ia64
+
+2001/07/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.h, mdk-stage1/modules.c: pass
+	"--blank" to DrakX when module loading is disabled
+	  - add "changedisk" feature
+	  - add "updatemodules" feature
+
+	* mdk-stage1/tools.c, mdk-stage1/doc/UPDATEMODULES, mdk-stage1/stage1.h: 
+	  - add "changedisk" feature
+	  - add "updatemodules" feature
+
+	* mdk-stage1/probing.c: silently load usb controllers
+
+2001/07/25  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: fixed new network organization
+
+	* standalone/net_monitor: updated. Profile handling.
+
+	* network/isdn_consts.pm: updated ISDN detection. Added firmware handling
+	and drivers other than hisax
+
+2001/07/25  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: fixed no test (or die test) to void package read on depslist
+	(allowed to keep
+	package indexing good on multi-arch).
+	cleaned code to examine depslist.ordered and packages list.
+
+	* rescue/make_rescue_img: fixed to use perl-MDK-Common.
+
+	* tools/syncrpms: fixed still missing rpmtools:: before a version_compare
+	...
+
+2001/07/25  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/modules_descr.h: small typo
+
+	* mdk-stage1/init.c, mdk-stage1/newt-frontend.c: Use Yahve quoting
+
+2001/07/25  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile (install): build mo's
+
+	* commands: move to MDK::Common, bool->to_bool
+
+	* common.pm: do not export sync, keep it in common (esp. so that it
+	doesn't conflict with my_gtk::sync
+	(removeXiBSuffix): add TB (tera)
+
+	* share/po/i18n_compssUsers, rescue/make_rescue_img: use MDK::Common
+
+	* share/verify_modules.pl: new common syntax
+
+	* Makefile: 
+	  - temporary hack to have at least good UTF-8 based locales (otherwise
+	rpmlib segfaults)
+	  - touch share/po/*.po, so that they are not rebuilded (pablo takes
+	care of them)
+
+	* share/list: add MDK::Common::Globals
+
+	* partition_table_sun.pm, install2.pm, partition_table.pm, commands.pm,
+	install_steps.pm, partition_table_raw.pm, partition_table_mac.pm: do not
+	export sync, keep it in common (esp. so that it doesn't conflict with
+	my_gtk::sync
+
+2001/07/25  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* mdk-stage1/modules_descr.h: add decriptions for integrated Apple
+	Network/SCSI hardware
+
+2001/07/24  dam's  <damien@mandrakesoft.com>
+
+	* network/isdn_consts.pm, network/netconnect.pm, network/ethernet.pm:
+	corrected speed fax + PCI, updated configuration
+
+2001/07/24  daouda
+
+	* bootlook.pm: better runlevel handling -> persistent level choice
+
+2001/07/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/da.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2001/07/24  Pixel  <pixel@mandrakesoft.com>
+
+	* commands.pm: move to MDK::Common, bool->to_bool
+	fix syntax
+	removed/renamed unused/seldom-used functions
+	generalize the use of chomp_ as the functional alternative to chomp (and
+	works on lists)
+
+	* swap.pm: temporary hack to have at least good UTF-8 based locales
+	(otherwise rpmlib segfaults)
+	move to MDK::Common, bool->to_bool
+
+	* unused/scsi.pm, standalone/draknet: generalize the use of chomp_ as the
+	functional alternative to chomp (and works on lists)
+
+	* globals.pm, perl2fcalls: 
+	  - globals is now MDK::Common::Globals
+	  - perl2fcalls is now /usr/bin/perl_checker
+
+	* install_steps_gtk.pm: move to MDK::Common, bool->to_bool
+	move to MDK::Common, bool->to_bool
+	removed/renamed unused/seldom-used functions
+
+	* common.pm: move to MDK::Common, bool->to_bool
+	cleanup (remove unused stuff and dangerous prototypes)
+	removed/renamed unused/seldom-used functions
+	generalize the use of chomp_ as the functional alternative to chomp (and
+	works on lists)
+
+	* network/tools.pm, network/adsl.pm, network/netconnect.pm,
+	network/ethernet.pm, network/isdn.pm, network/modem.pm: 
+	  - globals is now MDK::Common::Globals
+	  - perl2fcalls is now /usr/bin/perl_checker
+	move to MDK::Common, bool->to_bool
+
+	* partition_table_dos.pm, partition_table_empty.pm, my_gtk.pm, modparm.pm,
+	standalone/keyboarddrake, install2.pm, raid.pm, crypto.pm,
+	partition_table_mac.pm, standalone/mousedrake, devices.pm,
+	install_steps.pm, resize_fat/main.pm, help.pm, install_interactive.pm,
+	install_steps_stdio.pm, loopback.pm, resize_fat/any.pm,
+	standalone/drakboot, pkgs.pm, keyboard.pm, Xconfigurator.pm, fs.pm,
+	interactive_gtk.pm, standalone/drakxservices, fsedit.pm,
+	network/network.pm, interactive_stdio.pm, diskdrake.pm, modules.pm,
+	resize_fat/directory.pm, standalone/net_monitor,
+	install_steps_auto_install.pm, partition_table_sun.pm, proxy.pm,
+	lang.pm, partition_table_bsd.pm, tinyfirewall.pm, standalone/draksec,
+	standalone/drakxconf, resize_fat/info_sector.pm,
+	standalone/adduserdrake, sbus_probing/main.pm, printer.pm,
+	partition_table_raw.pm, install_steps_interactive.pm, install_gtk.pm,
+	Xconfigurator_consts.pm, resize_fat/boot_sector.pm, partition_table.pm,
+	standalone/livedrake, standalone/drakgw, mouse.pm, lvm.pm,
+	interactive.pm, share/list, interactive_newt.pm, install_steps_newt.pm,
+	bootloader.pm: move to MDK::Common, bool->to_bool
+
+	* services.pm, printerdrake.pm: move to MDK::Common, bool->to_bool
+	removed/renamed unused/seldom-used functions
+
+	* standalone/diskdrake, install_any.pm, any.pm, Xconfig.pm, timezone.pm,
+	detect_devices.pm, bootlook.pm: move to MDK::Common, bool->to_bool
+	generalize the use of chomp_ as the functional alternative to chomp (and
+	works on lists)
+
+	* Makefile: temporary hack to have at least good UTF-8 based locales
+	(otherwise rpmlib segfaults)
+	move to MDK::Common, bool->to_bool
+	move to MDK::Common, bool->to_bool
+
+2001/07/23  dam's  <damien@mandrakesoft.com>
+
+	* modules.pm, network/tools.pm, network/isdn_consts.pm,
+	network/netconnect.pm, network/isdn.pm: isdn now works with isdn-light.
+	Only 64kb/s and still some debuf stuff to be fixed.
+
+2001/07/23  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po, share/po/sk.po: updated Slovak and Croatian files
+
+2001/07/23  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: cleanup
+
+	* c/stuff.xs.pm, Makefile.drakxtools, standalone.pm, common.pm, Makefile,
+	tools/make_mdkinst_stage2, lang.pm, share/po/Makefile,
+	share/po/.cvsignore: do not use the po's directly. Use mo's through
+	gettext
+
+2001/07/22  dam's  <damien@mandrakesoft.com>
+
+	* network/netconnect.pm, network/isdn.pm: updated isdn config, moved
+	isdn_data from netconnect_const to isdn_const
+	big work on isdn. Not finished
+
+	* modules.pm, standalone/net_monitor, network/tools.pm, detect_devices.pm:
+	big work on isdn. Not finished
+
+	* network/netconnect_consts.pm, network/isdn_consts.pm: updated isdn
+	config, moved isdn_data from netconnect_const to isdn_const
+
+2001/07/20  François Pons  <fpons@mandrakesoft.com>
+
+	* docs/README.pxe: initial release, dhcpd and tftpd only.
+
+2001/07/20  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/el.po: updated Greek file
+
+2001/07/20  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile: externalize the pm 2 pm_.c in fake_c.pl
+
+	* lang.pm: fix
+	(load_po): enhance readability
+
+	* share/po/fake_c.pl: cleanup
+	externalize the pm 2 pm_.c in fake_c.pl
+
+	* common.pm (translate): basic plural forms handling (not finished)
+
+	* help.pm: fix missing ``"''
+
+	* bootloader.pm: fix
+	(install_lilo): order fat partitions first
+
+2001/07/19  dam's  <damien@mandrakesoft.com>
+
+	* share/themes.rc, share/logo-mandrake.png, share/themes-mdk.rc,
+	share/help.png: new color
+
+	* network/netconnect.pm: correct bug. thanx to the little stagiaire.
+
+2001/07/19  François Pons  <fpons@mandrakesoft.com>
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: updated with new
+	graphic logo for 8.1
+
+2001/07/19  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po, share/po/fi.po, share/po/DrakX.pot, share/po/es.po,
+	share/po/eo.po, share/po/fr.po, share/po/wa.po, share/po/da.po,
+	share/po/de.po, share/po/el.po, share/po/et.po, share/po/hu.po,
+	share/po/eu.po: updated Croatian file
+
 2001/07/19  François Pons  <fpons@mandrakesoft.com>
 
 	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: updated with new
