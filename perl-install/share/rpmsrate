@@ -569,7 +569,7 @@ BOOKS
   4 !LOCALES"fr" !LOCALES"it" !LOCALES"es" mandrake-doc-en
 
 X
-  5 xorg-x11 rxvt xorg-x11-75dpi-fonts urw-fonts fonts-ttf-vera
+  5 xorg-x11 xorg-x11-server rxvt xorg-x11-75dpi-fonts urw-fonts fonts-ttf-vera
   5 icewm-light
   5 HIGH_SECURITY mountloop
   5 LOCALES"zh" || LOCALES"am" scim-tables
@@ -687,8 +687,8 @@ INSTALL
   NOCOPY
     5 kernel kernel-smp kernel-i686-up-4GB
       raidtools lvm2 reiserfsprogs jfsprogs xfsprogs 
-      alsa-utils
-    4 xorg-x11 brltty
+      alsa-utils xorg-x11 xorg-x11-server 
+    4 brltty
 
   5 pptp-adsl dhcpcd dhcpxd dhcp-client rp-pppoe pump
     ppp nfs-utils-clients libiw27 wireless-tools ppp-pppoe ppp-pppoatm
@@ -706,4 +706,4 @@ INSTALL
     synaptics
 
   5 cups cups-drivers hpoj libhpojip0
-  4 xorg-x11-server xorg-x11-glide-module Glide_V3-DRI Glide_V5 Mesa
+  4 xorg-x11-glide-module Glide_V3-DRI Glide_V5 Mesa
