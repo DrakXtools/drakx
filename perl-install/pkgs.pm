@@ -729,6 +729,7 @@ sub openInstallLog {
     CORE::select((CORE::select($LOG), $| = 1)[0]);
     c::rpmErrorSetCallback(fileno $LOG);
 #-    c::rpmSetVeryVerbose();
+    $LOG;
 }
 
 sub rpmDbOpen {
