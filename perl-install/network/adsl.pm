@@ -138,21 +138,11 @@ user "$adsl->{login}"
 						      ['ppp-compress-24', 'ppp_deflate'],
 						      ['ppp-compress-26', 'ppp_deflate']);
 	$::isStandalone and modules::write_conf($prefix);
-	my $mgmtrpm;
-	if ($::isStandalone) {
-	    $mgmtrpm = `grep speedtouch_mgmt /var/lib/urpmi/depslist.ordered` ? 1 : 0;
-	} else {
-	    require pkgs;
-	    $mgmtrpm = pkgs::packageByName($in->{package}, "speedtouch_mgmt");
-	}
-	if ($mgmtrpm) {
-	    $in->do_pkgs->install('speedtouch_mgmt')
-	} else {
-	    -e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', _('You need the alcatel microcode.
+	$in->do_pkgs->install('speedtouch_mgmt');
+	-e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', _('You need the alcatel microcode.
 Download it at
 http://www.alcatel.com/consumer/dsl/dvrreg_lx.htm
 and copy the mgmt.o in /usr/share/speedtouch'));
-	}
     }
 
     if ($adsl_type eq 'pptp') {
