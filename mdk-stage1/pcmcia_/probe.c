@@ -1,3 +1,19 @@
+/*
+ * Guillaume Cottenceau (gc@mandrakesoft.com)
+ *
+ * Copyright 2000-2001 MandrakeSoft
+ *
+ * This software may be freely redistributed under the terms of the GNU
+ * public license.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *
+ * Code comes from /anonymous@projects.sourceforge.net:/pub/pcmcia-cs/pcmcia-cs-3.1.29.tar.bz2
+ */
+
 /*======================================================================
 
     PCMCIA controller probe
@@ -39,11 +55,13 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#include <pcmcia/config.h>
+//mdk-stage1// #include <pcmcia/config.h>
+#include "log.h"
+#include "pcmcia.h"
 
 /*====================================================================*/
 
-#ifdef CONFIG_PCI
+//mdk-stage1// #ifdef CONFIG_PCI
 
 typedef struct {
     u_short	vendor, device;
@@ -59,6 +77,7 @@ pci_id_t pci_id[] = {
     { 0x1180, 0x0466, "Ricoh RL5C466", "Ricoh RL5C466" },
     { 0x1180, 0x0475, "Ricoh RL5C475", "Ricoh RL5C475" },
     { 0x1180, 0x0476, "Ricoh RL5C476", "Ricoh RL5C476" },
+    { 0x1180, 0x0477, "Ricoh RL5c477", "Ricoh RL5c477" },   //mdk-stage1// added from pcitable
     { 0x1180, 0x0478, "Ricoh RL5C478", "Ricoh RL5C478" },
     { 0x104c, 0xac12, "Texas Instruments PCI1130", "TI 1130" },
     { 0x104c, 0xac13, "Texas Instruments PCI1031", "TI 1031" },
@@ -88,18 +107,19 @@ pci_id_t pci_id[] = {
     { 0x1179, 0x060f, "Toshiba ToPIC97", "Toshiba ToPIC97" },
     { 0x1179, 0x0617, "Toshiba ToPIC100", "Toshiba ToPIC100" },
     { 0x119b, 0x1221, "Omega Micro 82C092G", "Omega Micro 82C092G" },
-    { 0x8086, 0x1221, "Intel 82092AA", "Intel 82092AA" }
+    { 0x8086, 0x1221, "Intel 82092AA", "Intel 82092AA_0" },
+    { 0x8086, 0x1222, "Intel 82092AA", "Intel 82092AA_1" }   //mdk-stage1// added from pcitable
 };
 #define PCI_COUNT (sizeof(pci_id)/sizeof(pci_id_t))
 
-static int pci_probe(int verbose, int module)
+static int pci_probe(void)
 {
-    char s[256], *t, *name = NULL;
+    char s[256], *name = NULL;
     u_int device, vendor, i;
     FILE *f;
     
-    if (!module)
-	printf("PCI bridge probe: ");
+//mdk-stage1//     if (!module)
+    log_message("PCMCIA: probing PCI bus..");
 
     if ((f = fopen("/proc/bus/pci/devices", "r")) != NULL) {
 	while (fgets(s, 256, f) != NULL) {
@@ -113,57 +133,59 @@ static int pci_probe(int verbose, int module)
 		break;
 	    }
 	}
-    } else if ((f = fopen("/proc/pci", "r")) != NULL) {
-	while (fgets(s, 256, f) != NULL) {
-	    t = strstr(s, "Device id=");
-	    if (t) {
-		device = strtoul(t+10, NULL, 16);
-		t = strstr(s, "Vendor id=");
-		vendor = strtoul(t+10, NULL, 16);
-		for (i = 0; i < PCI_COUNT; i++)
-		    if ((vendor == pci_id[i].vendor) &&
-			(device == pci_id[i].device)) break;
-	    } else
-		for (i = 0; i < PCI_COUNT; i++)
-		    if (strstr(s, pci_id[i].tag) != NULL) break;
-	    if (i != PCI_COUNT) {
-		name = pci_id[i].name;
-		break;
-	    } else {
-		t = strstr(s, "CardBus bridge");
-		if (t != NULL) {
-		    name = t + 16;
-		    t = strchr(s, '(');
-		    t[-1] = '\0';
-		    break;
-		}
-	    }
-	}
     }
-    
+//mdk-stage1// else if ((f = fopen("/proc/pci", "r")) != NULL) {
+//mdk-stage1// 	while (fgets(s, 256, f) != NULL) {
+//mdk-stage1// 	    t = strstr(s, "Device id=");
+//mdk-stage1// 	    if (t) {
+//mdk-stage1// 		device = strtoul(t+10, NULL, 16);
+//mdk-stage1// 		t = strstr(s, "Vendor id=");
+//mdk-stage1// 		vendor = strtoul(t+10, NULL, 16);
+//mdk-stage1// 		for (i = 0; i < PCI_COUNT; i++)
+//mdk-stage1// 		    if ((vendor == pci_id[i].vendor) &&
+//mdk-stage1// 			(device == pci_id[i].device)) break;
+//mdk-stage1// 	    } else
+//mdk-stage1// 		for (i = 0; i < PCI_COUNT; i++)
+//mdk-stage1// 		    if (strstr(s, pci_id[i].tag) != NULL) break;
+//mdk-stage1// 	    if (i != PCI_COUNT) {
+//mdk-stage1// 		name = pci_id[i].name;
+//mdk-stage1// 		break;
+//mdk-stage1// 	    } else {
+//mdk-stage1// 		t = strstr(s, "CardBus bridge");
+//mdk-stage1// 		if (t != NULL) {
+//mdk-stage1// 		    name = t + 16;
+//mdk-stage1// 		    t = strchr(s, '(');
+//mdk-stage1// 		    t[-1] = '\0';
+//mdk-stage1// 		    break;
+//mdk-stage1// 		}
+//mdk-stage1// 	    }
+//mdk-stage1// 	}
+//mdk-stage1//     }
+    fclose(f);
+
     if (name) {
-	if (module)
-	    printf("i82365\n");
-	else
-	    printf("%s found, 2 sockets.\n", name);
+//mdk-stage1// 	if (module)
+//mdk-stage1// 	    printf("i82365\n");
+//mdk-stage1// 	else
+	    log_message("\t%s found, 2 sockets.", name);
 	return 0;
     } else {
-	if (!module)
-	    printf("not found.\n");
+//mdk-stage1// 	if (!module)
+	    log_message("\tnot found.");
 	return -ENODEV;
     }
 }
-#endif
+//mdk-stage1// #endif
 
 /*====================================================================*/
 
-#ifdef CONFIG_ISA
-
-#ifdef __GLIBC__
+//mdk-stage1// #ifdef CONFIG_ISA
+//mdk-stage1// 
+//mdk-stage1// #ifdef __GLIBC__
 #include <sys/io.h>
-#else
-#include <asm/io.h>
-#endif
+//mdk-stage1// #else
+//mdk-stage1// #include <asm/io.h>
+//mdk-stage1// #endif
 typedef u_short ioaddr_t;
 
 #include "i82365.h"
@@ -199,22 +221,25 @@ static void i365_bclr(u_short sock, u_short reg, u_char mask)
     i365_set(sock, reg, d);
 }
 
-int i365_probe(int verbose, int module)
+int i365_probe(void)
 {
     int val, sock, done;
     char *name = "i82365sl";
 
-    if (!module)
-	printf("Intel PCIC probe: ");
-    if (verbose) printf("\n");
+//mdk-stage1// if (!module)
+    log_message("PCMCIA: probing for Intel PCIC (ISA)..");
+//mdk-stage1//     if (verbose) printf("\n");
     
     sock = done = 0;
-    ioperm(i365_base, 4, 1);
+    if (ioperm(i365_base, 4, 1)) {
+               log_perror("PCMCIA: ioperm");
+               return -1;
+    }
     ioperm(0x80, 1, 1);
     for (; sock < 2; sock++) {
 	val = i365_get(sock, I365_IDENT);
-	if (verbose)
-	    printf("  ident(%d)=%#2.2x", sock, val); 
+//mdk-stage1//	if (verbose)
+//mdk-stage1//	    printf("  ident(%d)=%#2.2x", sock, val); 
 	switch (val) {
 	case 0x82:
 	    name = "i82365sl A step";
@@ -236,10 +261,10 @@ int i365_probe(int verbose, int module)
 	if (done) break;
     }
 
-    if (verbose) printf("\n  ");
+//mdk-stage1//    if (verbose) printf("\n  ");
     if (sock == 0) {
-	if (!module)
-	    printf("not found.\n");
+//mdk-stage1//	if (!module)
+	log_message("\tnot found.");
 	return -ENODEV;
     }
 
@@ -277,23 +302,23 @@ int i365_probe(int verbose, int module)
 	}
     }
 
-    if (module)
-	printf("i82365\n");
-    else
-	printf("%s found, %d sockets.\n", name, sock);
+//mdk-stage1//    if (module)
+//mdk-stage1//	printf("i82365\n");
+//mdk-stage1//    else
+	printf("\t%s found, %d sockets.\n", name, sock);
     return 0;
     
 } /* i365_probe */
 
-#endif /* CONFIG_ISA */
+//mdk-stage1//#endif /* CONFIG_ISA */
 
 /*====================================================================*/
 
-#ifdef CONFIG_ISA
+//mdk-stage1//#ifdef CONFIG_ISA
 
 #include "tcic.h"
 
-static ioaddr_t tcic_base = TCIC_BASE;
+//mdk-stage1//static ioaddr_t tcic_base = TCIC_BASE;
 
 static u_char tcic_getb(ioaddr_t base, u_char reg)
 {
@@ -341,7 +366,7 @@ static int get_tcic_id(ioaddr_t base)
     return id;
 }
 
-int tcic_probe_at(ioaddr_t base, int module)
+int tcic_probe_at(ioaddr_t base)
 {
     int i;
     u_short old;
@@ -351,8 +376,8 @@ int tcic_probe_at(ioaddr_t base, int module)
 	if (tcic_getw(base, i) == 0xffff)
 	    return -1;
 
-    if (!module)
-	printf("  at %#3.3x: ", base); fflush(stdout);
+//mdk-stage1//    if (!module)
+    log_message("\tat %#3.3x: ", base); fflush(stdout);
 
     /* Try to reset the chip */
     tcic_setw(base, TCIC_SCTRL, TCIC_SCTRL_RESET);
@@ -373,91 +398,107 @@ int tcic_probe_at(ioaddr_t base, int module)
     return 2;
 }
 
-int tcic_probe(int verbose, int module, ioaddr_t base)
+int tcic_probe(void)
 {
     int sock, id;
 
-    if (!module)
-	printf("Databook TCIC-2 probe: "); fflush(stdout);
+//mdk-stage1//     if (!module)
+    log_message("PCMCIA: probing for Databook TCIC-2 (ISA).."); fflush(stdout);
     
-    ioperm(base, 16, 1);
+    if (ioperm(TCIC_BASE, 16, 1)) {
+	    log_perror("PCMCIA: ioperm");
+	    return -1;
+    }
     ioperm(0x80, 1, 1);
-    sock = tcic_probe_at(base, module);
+    sock = tcic_probe_at(TCIC_BASE);
     
     if (sock <= 0) {
-	if (!module)
-	    printf("not found.\n");
+//mdk-stage1//	if (!module)
+	    log_message("\tnot found.");
 	return -ENODEV;
     }
 
-    if (module)
-	printf("tcic\n");
-    else {
-	id = get_tcic_id(base);
+//mdk-stage1//    if (module)
+//mdk-stage1//	printf("tcic\n");
+//mdk-stage1//    else {
+	id = get_tcic_id(TCIC_BASE);
 	switch (id) {
 	case TCIC_ID_DB86082:
-	    printf("DB86082"); break;
+	    log_message("DB86082"); break;
 	case TCIC_ID_DB86082A:
-	    printf("DB86082A"); break;
+	    log_message("DB86082A"); break;
 	case TCIC_ID_DB86084:
-	    printf("DB86084"); break;
+	    log_message("DB86084"); break;
 	case TCIC_ID_DB86084A:
-	    printf("DB86084A"); break;
+	    log_message("DB86084A"); break;
 	case TCIC_ID_DB86072:
-	    printf("DB86072"); break;
+	    log_message("DB86072"); break;
 	case TCIC_ID_DB86184:
-	    printf("DB86184"); break;
+	    log_message("DB86184"); break;
 	case TCIC_ID_DB86082B:
-	    printf("DB86082B"); break;
+	    log_message("DB86082B"); break;
 	default:
-	    printf("Unknown TCIC-2 ID 0x%02x", id);
+	    log_message("Unknown TCIC-2 ID 0x%02x", id);
 	}
-	printf(" found at %#6x, %d sockets.\n", base, sock);
-    }
+	log_message(" found at %#6x, %d sockets.", TCIC_BASE, sock);
+//mdk-stage1//     }
     return 0;
     
 } /* tcic_probe */
 
-#endif /* CONFIG_ISA */
+//mdk-stage1// #endif /* CONFIG_ISA */
 
-/*====================================================================*/
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// int main(int argc, char *argv[])
+//mdk-stage1// {
+//mdk-stage1//     int optch, errflg;
+//mdk-stage1//     extern char *optarg;
+//mdk-stage1//     int verbose = 0, module = 0;
+//mdk-stage1//     
+//mdk-stage1//     errflg = 0;
+//mdk-stage1//     while ((optch = getopt(argc, argv, "t:vxm")) != -1) {
+//mdk-stage1// 	switch (optch) {
+//mdk-stage1// #ifdef CONFIG_ISA
+//mdk-stage1// 	case 't':
+//mdk-stage1// 	    tcic_base = strtoul(optarg, NULL, 0); break;
+//mdk-stage1// #endif
+//mdk-stage1// 	case 'v':
+//mdk-stage1// 	    verbose = 1; break;
+//mdk-stage1// 	case 'm':
+//mdk-stage1// 	    module = 1; break;
+//mdk-stage1// 	default:
+//mdk-stage1// 	    errflg = 1; break;
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1//     if (errflg || (optind < argc)) {
+//mdk-stage1// 	fprintf(stderr, "usage: %s [-t tcic_base] [-v] [-m]\n", argv[0]);
+//mdk-stage1// 	exit(EXIT_FAILURE);
+//mdk-stage1//     }
+//mdk-stage1// 
+//mdk-stage1// #ifdef CONFIG_PCI
+//mdk-stage1//     if (pci_probe(verbose, module) == 0)
+//mdk-stage1// 	exit(EXIT_SUCCESS);
+//mdk-stage1// #endif
+//mdk-stage1// #ifdef CONFIG_ISA
+//mdk-stage1//     if (i365_probe(verbose, module) == 0)
+//mdk-stage1// 	exit(EXIT_SUCCESS);
+//mdk-stage1//     else if (tcic_probe(verbose, module, tcic_base) == 0)
+//mdk-stage1// 	exit(EXIT_SUCCESS);
+//mdk-stage1// #endif
+//mdk-stage1//     exit(EXIT_FAILURE);
+//mdk-stage1//     return 0;
+//mdk-stage1// }
 
-int main(int argc, char *argv[])
+
+char * pcmcia_probe(void)
 {
-    int optch, errflg;
-    extern char *optarg;
-    int verbose = 0, module = 0;
-    
-    errflg = 0;
-    while ((optch = getopt(argc, argv, "t:vxm")) != -1) {
-	switch (optch) {
-#ifdef CONFIG_ISA
-	case 't':
-	    tcic_base = strtoul(optarg, NULL, 0); break;
-#endif
-	case 'v':
-	    verbose = 1; break;
-	case 'm':
-	    module = 1; break;
-	default:
-	    errflg = 1; break;
-	}
-    }
-    if (errflg || (optind < argc)) {
-	fprintf(stderr, "usage: %s [-t tcic_base] [-v] [-m]\n", argv[0]);
-	exit(EXIT_FAILURE);
-    }
-
-#ifdef CONFIG_PCI
-    if (pci_probe(verbose, module) == 0)
-	exit(EXIT_SUCCESS);
-#endif
-#ifdef CONFIG_ISA
-    if (i365_probe(verbose, module) == 0)
-	exit(EXIT_SUCCESS);
-    else if (tcic_probe(verbose, module, tcic_base) == 0)
-	exit(EXIT_SUCCESS);
-#endif
-    exit(EXIT_FAILURE);
-    return 0;
+	if (!pci_probe())
+		return "yenta_socket";  // will only work for 2.4 with kernel pcmcia :-(
+	else if (!i365_probe())
+		return "i82365";
+	else if (!tcic_probe())
+		return "tcic";
+	else
+		return NULL;
 }

@@ -1,3 +1,21 @@
+/*
+ * Guillaume Cottenceau (gc@mandrakesoft.com)
+ *
+ * Copyright 2000 MandrakeSoft
+ *
+ * This software may be freely redistributed under the terms of the GNU
+ * public license.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ *
+ * Code comes from /anonymous@projects.sourceforge.net:/pub/pcmcia-cs/pcmcia-cs-3.1.29.tar.bz2
+ *
+ *   Licence of this code follows:
+ *
+ */
 /*======================================================================
 
     PCMCIA Card Manager daemon
@@ -42,8 +60,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <syslog.h>
-#include <getopt.h>
+//mdk-stage1// #include <syslog.h>
+//mdk-stage1// #include <getopt.h>
 #include <signal.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
@@ -52,14 +70,18 @@
 #include <sys/utsname.h>
 #include <sys/file.h>
 
-#include <pcmcia/version.h>
-#include <pcmcia/config.h>
-#include <pcmcia/cs_types.h>
-#include <pcmcia/cs.h>
-#include <pcmcia/cistpl.h>
-#include <pcmcia/ds.h>
+#include <pcmcia_/version.h>
+//mdk-stage1// #include <pcmcia/config.h>
+#include <pcmcia_/cs_types.h>
+#include <pcmcia_/cs.h>
+#include <pcmcia_/cistpl.h>
+#include <pcmcia_/ds.h>
 
 #include "cardmgr.h"
+
+#include "../log.h"
+#include "modules.h"
+#include "pcmcia.h"
 
 /*====================================================================*/
 
@@ -107,27 +129,27 @@ static char *configpath = "/etc/pcmcia";
 #endif
 
 /* Default path for pid file */
-static char *pidfile = "/var/run/cardmgr.pid";
+//mdk-stage1// static char *pidfile = "/var/run/cardmgr.pid";
 
 #ifdef __linux__
 /* Default path for finding modules */
-static char *modpath = NULL;
+//mdk-stage1// static char *modpath = NULL;
 #endif
 
 /* Default path for socket info table */
 static char *stabfile;
 
 /* If set, don't generate beeps when cards are inserted */
-static int be_quiet = 0;
+//mdk-stage1// static int be_quiet = 0;
 
 /* If set, use modprobe instead of insmod */
-static int do_modprobe = 0;
+//mdk-stage1// static int do_modprobe = 0;
 
 /* If set, configure already inserted cards, then exit */
-static int one_pass = 0;
+//mdk-stage1// static int one_pass = 0;
 
 /* Extra message logging? */
-static int verbose = 0;
+//mdk-stage1// static int verbose = 0;
 
 /*====================================================================*/
 
@@ -158,19 +180,12 @@ static int lookup_dev(char *name)
 
 int open_dev(dev_t dev, int mode)
 {
-    static char *paths[] = {
-	"/var/lib/pcmcia", "/var/run", "/dev", "/tmp", NULL
-    };
-    char **p, fn[64];
+    char * fn = "/tmp/cardmgr_tmp";
     int fd;
 
-    for (p = paths; *p; p++) {
-	sprintf(fn, "%s/cm-%d", *p, getpid());
-	if (mknod(fn, mode, dev) == 0)
-	    break;
-    }
-    if (!*p)
-	return -1;
+    unlink(fn);
+	if (mknod(fn, mode, dev) != 0)
+		return -1;
     fd = open(fn, (mode&S_IWRITE)?O_RDWR:O_RDONLY);
     if (fd < 0)
 	fd = open(fn, O_NONBLOCK|((mode&S_IWRITE)?O_RDWR:O_RDONLY));
@@ -206,10 +221,10 @@ int open_sock(int sock, int mode)
 
 #include <linux/major.h>
 #include <scsi/scsi.h>
-#define VERSION(v,p,s) (((v)<<16)+(p<<8)+s)
-#if (LINUX_VERSION_CODE < VERSION(2,1,126))
-#define SCSI_DISK0_MAJOR SCSI_DISK_MAJOR
-#endif
+//mdk-stage1// #define VERSION(v,p,s) (((v)<<16)+(p<<8)+s)
+//mdk-stage1// #if (LINUX_VERSION_CODE < VERSION(2,1,126))
+//mdk-stage1// #define SCSI_DISK0_MAJOR SCSI_DISK_MAJOR
+//mdk-stage1// #endif
 
 static int xlate_scsi_name(bind_info_t *bind)
 {
@@ -261,21 +276,21 @@ static int xlate_scsi_name(bind_info_t *bind)
 
 #ifdef __linux__
 
-#include <sys/kd.h>
-
+//mdk-stage1// #include <sys/kd.h>
+//mdk-stage1// 
 static void beep(unsigned int ms, unsigned int freq)
 {
-    int fd, arg;
-
-    if (be_quiet)
-	return;
-    fd = open("/dev/console", O_RDWR);
-    if (fd < 0)
-	return;
-    arg = (ms << 16) | freq;
-    ioctl(fd, KDMKTONE, arg);
-    close(fd);
-    usleep(ms*1000);
+//mdk-stage1//     int fd, arg;
+//mdk-stage1// 
+//mdk-stage1//     if (be_quiet)
+//mdk-stage1// 	return;
+//mdk-stage1//     fd = open("/dev/console", O_RDWR);
+//mdk-stage1//     if (fd < 0)
+//mdk-stage1// 	return;
+//mdk-stage1//     arg = (ms << 16) | freq;
+//mdk-stage1//     ioctl(fd, KDMKTONE, arg);
+//mdk-stage1//     close(fd);
+//mdk-stage1//     usleep(ms*1000);
 }
 
 #endif /* __linux__ */
@@ -289,17 +304,17 @@ static void beep(unsigned int ms, unsigned int freq)
 
 /*====================================================================*/
 
-static void write_pid(void)
-{
-    FILE *f;
-    f = fopen(pidfile, "w");
-    if (f == NULL)
-	syslog(LOG_WARNING, "could not open %s: %m", pidfile);
-    else {
-	fprintf(f, "%d\n", getpid());
-	fclose(f);
-    }
-}
+//mdk-stage1// static void write_pid(void)
+//mdk-stage1// {
+//mdk-stage1//     FILE *f;
+//mdk-stage1//     f = fopen(pidfile, "w");
+//mdk-stage1//     if (f == NULL)
+//mdk-stage1// 	syslog(LOG_WARNING, "could not open %s: %m", pidfile);
+//mdk-stage1//     else {
+//mdk-stage1// 	fprintf(f, "%d\n", getpid());
+//mdk-stage1// 	fclose(f);
+//mdk-stage1//     }
+//mdk-stage1// }
 
 static void write_stab(void)
 {
@@ -310,12 +325,12 @@ static void write_stab(void)
 
     f = fopen(stabfile, "w");
     if (f == NULL) {
-	syslog(LOG_WARNING, "fopen(stabfile) failed: %m");
+	log_message("CM: fopen(stabfile) failed: %m");
 	return;
     }
 #ifndef __BEOS__
     if (flock(fileno(f), LOCK_EX) != 0) {
-	syslog(LOG_ERR, "flock(stabfile) failed: %m");
+	log_message("CM: flock(stabfile) failed: %m");
 	return;
     }
 #endif
@@ -365,11 +380,11 @@ static int get_tuple(int ns, cisdata_t code, ds_ioctl_arg_t *arg)
 	return -1;
     arg->tuple.TupleOffset = 0;
     if (ioctl(s->fd, DS_GET_TUPLE_DATA, arg) != 0) {
-	syslog(LOG_INFO, "error reading CIS data on socket %d: %m", ns);
+	log_message("CM: error reading CIS data on socket %d: %m", ns);
 	return -1;
     }
     if (ioctl(s->fd, DS_PARSE_TUPLE, arg) != 0) {
-	syslog(LOG_INFO, "error parsing CIS on socket %d: %m", ns);
+	log_message("CM: error parsing CIS on socket %d: %m", ns);
 	return -1;
     }
     return 0;
@@ -408,38 +423,38 @@ static int get_pci_id(int ns, pci_id_t *id)
 
 /*====================================================================*/
 
-static void log_card_info(cistpl_vers_1_t *vers,
-			  cistpl_manfid_t *manfid,
-			  cistpl_funcid_t *funcid,
-			  pci_id_t *pci_id)
-{
-    char v[256] = "";
-    int i;
-    static char *fn[] = {
-	"multi", "memory", "serial", "parallel", "fixed disk",
-	"video", "network", "AIMS", "SCSI"
-    };
-    
-    if (vers) {
-	for (i = 0; i < vers->ns; i++)
-	    sprintf(v+strlen(v), "%s\"%s\"",
-		    (i>0) ? ", " : "", vers->str+vers->ofs[i]);
-	syslog(LOG_INFO, "  product info: %s", v);
-    } else {
-	syslog(LOG_INFO, "  no product info available");
-    }
-    *v = '\0';
-    if (manfid->manf != 0)
-	sprintf(v, "  manfid: 0x%04x, 0x%04x",
-		manfid->manf, manfid->card);
-    if (funcid->func != 0xff)
-	sprintf(v+strlen(v), "  function: %d (%s)", funcid->func,
-		fn[funcid->func]);
-    if (strlen(v) > 0) syslog(LOG_INFO, "%s", v);
-    if (pci_id->vendor != 0)
-	syslog(LOG_INFO, "  PCI id: 0x%04x, 0x%04x",
-	       pci_id->vendor, pci_id->device);
-}
+//mdk-stage1// static void log_card_info(cistpl_vers_1_t *vers,
+//mdk-stage1// 			  cistpl_manfid_t *manfid,
+//mdk-stage1// 			  cistpl_funcid_t *funcid,
+//mdk-stage1// 			  pci_id_t *pci_id)
+//mdk-stage1// {
+//mdk-stage1//     char v[256] = "";
+//mdk-stage1//     int i;
+//mdk-stage1//     static char *fn[] = {
+//mdk-stage1// 	"multi", "memory", "serial", "parallel", "fixed disk",
+//mdk-stage1// 	"video", "network", "AIMS", "SCSI"
+//mdk-stage1//     };
+//mdk-stage1//     
+//mdk-stage1//     if (vers) {
+//mdk-stage1// 	for (i = 0; i < vers->ns; i++)
+//mdk-stage1// 	    sprintf(v+strlen(v), "%s\"%s\"",
+//mdk-stage1// 		    (i>0) ? ", " : "", vers->str+vers->ofs[i]);
+//mdk-stage1// 	syslog(LOG_INFO, "  product info: %s", v);
+//mdk-stage1//     } else {
+//mdk-stage1// 	syslog(LOG_INFO, "  no product info available");
+//mdk-stage1//     }
+//mdk-stage1//     *v = '\0';
+//mdk-stage1//     if (manfid->manf != 0)
+//mdk-stage1// 	sprintf(v, "  manfid: 0x%04x, 0x%04x",
+//mdk-stage1// 		manfid->manf, manfid->card);
+//mdk-stage1//     if (funcid->func != 0xff)
+//mdk-stage1// 	sprintf(v+strlen(v), "  function: %d (%s)", funcid->func,
+//mdk-stage1// 		fn[funcid->func]);
+//mdk-stage1//     if (strlen(v) > 0) syslog(LOG_INFO, "%s", v);
+//mdk-stage1//     if (pci_id->vendor != 0)
+//mdk-stage1// 	syslog(LOG_INFO, "  PCI id: 0x%04x, 0x%04x",
+//mdk-stage1// 	       pci_id->vendor, pci_id->device);
+//mdk-stage1// }
 
 static card_info_t *lookup_card(int ns)
 {
@@ -533,7 +548,7 @@ static card_info_t *lookup_card(int ns)
 	} else {
 	    /* this is a 2.4 kernel; hotplug handles these cards */
 	    s->state |= SOCKET_HOTPLUG;
-	    syslog(LOG_INFO, "socket %d: CardBus hotplug device", ns);
+	    log_message("CM: socket %d: CardBus hotplug device", ns);
 	    //beep(BEEP_TIME, BEEP_OK);
 	    return NULL;
 	}
@@ -547,308 +562,312 @@ static card_info_t *lookup_card(int ns)
     }
 
     if (card) {
-	syslog(LOG_INFO, "socket %d: %s", ns, card->name);
-	beep(BEEP_TIME, BEEP_OK);
-	if (verbose) log_card_info(vers, &manfid, &funcid, &pci_id);
+	log_message("CM: socket %d: %s", ns, card->name);
+ 	beep(BEEP_TIME, BEEP_OK);
+//mdk-stage1// 	if (verbose) log_card_info(vers, &manfid, &funcid, &pci_id);
 	return card;
     }
 
     if (!blank_card || (status.CardState & CS_EVENT_CB_DETECT) ||
 	manfid.manf || manfid.card || pci_id.vendor || vers) {
-	syslog(LOG_INFO, "unsupported card in socket %d", ns);
-	if (one_pass) return NULL;
+	log_message("CM: unsupported card in socket %d", ns);
+//mdk-stage1// 	if (one_pass) return NULL;
 	beep(BEEP_TIME, BEEP_ERR);
-	log_card_info(vers, &manfid, &funcid, &pci_id);
+//mdk-stage1// 	log_card_info(vers, &manfid, &funcid, &pci_id);
 	return NULL;
     } else {
 	card = blank_card;
-	syslog(LOG_INFO, "socket %d: %s", ns, card->name);
-	beep(BEEP_TIME, BEEP_WARN);
+	log_message("CM: socket %d: %s", ns, card->name);
+ 	beep(BEEP_TIME, BEEP_WARN);
 	return card;
     }
 }
 
 /*====================================================================*/
 
-static void load_config(void)
+static int load_config(void)
 {
     if (chdir(configpath) != 0) {
-	syslog(LOG_ERR, "chdir to %s failed: %m", configpath);
-	exit(EXIT_FAILURE);
+	    log_message("CM: chdir to %s failed: %m", configpath);
+	    return -1;
     }
-    if (parse_configfile("config") != 0)
-	exit(EXIT_FAILURE);
+    if (parse_configfile("config") != 0) {
+	    log_message("CM: parsing of config file failed: %m");
+	    return -1;
+    }
     if (root_device == NULL)
-	syslog(LOG_WARNING, "no device drivers defined");
+		log_message("CM: no device drivers defined");
     if ((root_card == NULL) && (root_func == NULL))
-	syslog(LOG_WARNING, "no cards defined");
+		log_message("CM: no cards defined");
+    return 0;
 }
 
-/*====================================================================*/
-
-static void free_card(card_info_t *card)
-{
-    if (card && (--card->refs == 0)) {
-	int i;
-	free(card->name);
-	switch(card->ident_type) {
-	case VERS_1_IDENT:
-	    for (i = 0; i < card->id.vers.ns; i++)
-		free(card->id.vers.pi[i]);
-	break;
-	case TUPLE_IDENT:
-	    free(card->id.tuple.info);
-	    break;
-	default:
-	    break;
-	}
-	free(card);
-    }
-}
-
-static void free_device(device_info_t *dev)
-{
-    if (dev && (--dev->refs == 0)) {
-	int i;
-	for (i = 0; i < dev->modules; i++) {
-	    free(dev->module[i]);
-	    if (dev->opts[i]) free(dev->opts[i]);
-	}
-	if (dev->class) free(dev->class);
-	free(dev);
-    }
-}
-
-static void free_mtd(mtd_ident_t *mtd)
-{
-    if (mtd && (--mtd->refs == 0)) {
-	free(mtd->name);
-	free(mtd->module);
-	free(mtd);
-    }
-}
-
-static void free_config(void)
-{
-    while (root_adjust != NULL) {
-	adjust_list_t *adj = root_adjust;
-	root_adjust = root_adjust->next;
-	free(adj);
-    }
-    
-    while (root_device != NULL) {
-	device_info_t *dev = root_device;
-	root_device = root_device->next;
-	free_device(dev);
-    }
-
-    while (root_card != NULL) {
-	card_info_t *card = root_card;
-	root_card = root_card->next;
-	free_card(card);
-    }
-    
-    while (root_func != NULL) {
-	card_info_t *card = root_func;
-	root_func = root_func->next;
-	free_card(card);
-    }
-    blank_card = NULL;
-    
-    while (root_mtd != NULL) {
-	mtd_ident_t *mtd = root_mtd;
-	root_mtd = root_mtd->next;
-	free_mtd(mtd);
-    }
-    default_mtd = NULL;
-}
-
-/*====================================================================*/
-
-static int execute(char *msg, char *cmd)
-{
-    int ret;
-    FILE *f;
-    char line[256];
-
-    syslog(LOG_INFO, "executing: '%s'", cmd);
-    strcat(cmd, " 2>&1");
-    f = popen(cmd, "r");
-    while (fgets(line, 255, f)) {
-	line[strlen(line)-1] = '\0';
-	syslog(LOG_INFO, "+ %s", line);
-    }
-    ret = pclose(f);
-    if (WIFEXITED(ret)) {
-	if (WEXITSTATUS(ret))
-	    syslog(LOG_INFO, "%s exited with status %d",
-		   msg, WEXITSTATUS(ret));
-	return WEXITSTATUS(ret);
-    } else
-	syslog(LOG_INFO, "%s exited on signal %d",
-	       msg, WTERMSIG(ret));
-    return -1;
-}
-
-/*====================================================================*/
-
-static int execute_on_dev(char *action, char *class, char *dev)
-{
-    /* Fixed length strings are ok here */
-    char msg[128], cmd[128];
-
-    sprintf(msg, "%s cmd", action);
-    sprintf(cmd, "./%s %s %s", class, action, dev);
-    return execute(msg, cmd);
-}
-
-static int execute_on_all(char *cmd, char *class, int sn, int fn)
-{
-    socket_info_t *s = &socket[sn];
-    bind_info_t *bind;
-    int ret = 0;
-    for (bind = s->bind[fn]; bind != NULL; bind = bind->next)
-	if (bind->name[0] && (bind->name[2] != '#'))
-	    ret |= execute_on_dev(cmd, class, bind->name);
-    return ret;
-}
-
-/*====================================================================*/
-
-#ifdef __linux__
-
-typedef struct module_list_t {
-    char *mod;
-    int usage;
-    struct module_list_t *next;
-} module_list_t;
-
-static module_list_t *module_list = NULL;
-
-static int try_insmod(char *mod, char *opts)
-{
-    char *cmd = malloc(strlen(mod) + strlen(modpath) +
-		       (opts ? strlen(opts) : 0) + 30);
-    int ret;
-
-    strcpy(cmd, "insmod ");
-    if (strchr(mod, '/') != NULL)
-	sprintf(cmd+7, "%s/%s.o", modpath, mod);
-    else
-	sprintf(cmd+7, "%s/pcmcia/%s.o", modpath, mod);
-    if (access(cmd+7, R_OK) != 0) {
-	syslog(LOG_INFO, "module %s not available", cmd+7);
-	free(cmd);
-	return -1;
-    }
-    if (opts) {
-	strcat(cmd, " ");
-	strcat(cmd, opts);
-    }
-    ret = execute("insmod", cmd);
-    free(cmd);
-    return ret;
-}
-
-static int try_modprobe(char *mod, char *opts)
-{
-    char *cmd = malloc(strlen(mod) + (opts ? strlen(opts) : 0) + 20);
-    char *s = strrchr(mod, '/');
-    int ret;
-
-    sprintf(cmd, "modprobe %s", (s) ? s+1 : mod);
-    if (opts) {
-	strcat(cmd, " ");
-	strcat(cmd, opts);
-    }
-    ret = execute("modprobe", cmd);
-    free(cmd);
-    return ret;
-}
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static void free_card(card_info_t *card)
+//mdk-stage1// {
+//mdk-stage1//     if (card && (--card->refs == 0)) {
+//mdk-stage1// 	int i;
+//mdk-stage1// 	free(card->name);
+//mdk-stage1// 	switch(card->ident_type) {
+//mdk-stage1// 	case VERS_1_IDENT:
+//mdk-stage1// 	    for (i = 0; i < card->id.vers.ns; i++)
+//mdk-stage1// 		free(card->id.vers.pi[i]);
+//mdk-stage1// 	break;
+//mdk-stage1// 	case TUPLE_IDENT:
+//mdk-stage1// 	    free(card->id.tuple.info);
+//mdk-stage1// 	    break;
+//mdk-stage1// 	default:
+//mdk-stage1// 	    break;
+//mdk-stage1// 	}
+//mdk-stage1// 	free(card);
+//mdk-stage1//     }
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// static void free_device(device_info_t *dev)
+//mdk-stage1// {
+//mdk-stage1//     if (dev && (--dev->refs == 0)) {
+//mdk-stage1// 	int i;
+//mdk-stage1// 	for (i = 0; i < dev->modules; i++) {
+//mdk-stage1// 	    free(dev->module[i]);
+//mdk-stage1// 	    if (dev->opts[i]) free(dev->opts[i]);
+//mdk-stage1// 	}
+//mdk-stage1// 	if (dev->class) free(dev->class);
+//mdk-stage1// 	free(dev);
+//mdk-stage1//     }
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// static void free_mtd(mtd_ident_t *mtd)
+//mdk-stage1// {
+//mdk-stage1//     if (mtd && (--mtd->refs == 0)) {
+//mdk-stage1// 	free(mtd->name);
+//mdk-stage1// 	free(mtd->module);
+//mdk-stage1// 	free(mtd);
+//mdk-stage1//     }
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// static void free_config(void)
+//mdk-stage1// {
+//mdk-stage1//     while (root_adjust != NULL) {
+//mdk-stage1// 	adjust_list_t *adj = root_adjust;
+//mdk-stage1// 	root_adjust = root_adjust->next;
+//mdk-stage1// 	free(adj);
+//mdk-stage1//     }
+//mdk-stage1//     
+//mdk-stage1//     while (root_device != NULL) {
+//mdk-stage1// 	device_info_t *dev = root_device;
+//mdk-stage1// 	root_device = root_device->next;
+//mdk-stage1// 	free_device(dev);
+//mdk-stage1//     }
+//mdk-stage1// 
+//mdk-stage1//     while (root_card != NULL) {
+//mdk-stage1// 	card_info_t *card = root_card;
+//mdk-stage1// 	root_card = root_card->next;
+//mdk-stage1// 	free_card(card);
+//mdk-stage1//     }
+//mdk-stage1//     
+//mdk-stage1//     while (root_func != NULL) {
+//mdk-stage1// 	card_info_t *card = root_func;
+//mdk-stage1// 	root_func = root_func->next;
+//mdk-stage1// 	free_card(card);
+//mdk-stage1//     }
+//mdk-stage1//     blank_card = NULL;
+//mdk-stage1//     
+//mdk-stage1//     while (root_mtd != NULL) {
+//mdk-stage1// 	mtd_ident_t *mtd = root_mtd;
+//mdk-stage1// 	root_mtd = root_mtd->next;
+//mdk-stage1// 	free_mtd(mtd);
+//mdk-stage1//     }
+//mdk-stage1//     default_mtd = NULL;
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static int execute(char *msg, char *cmd)
+//mdk-stage1// {
+//mdk-stage1//     int ret;
+//mdk-stage1//     FILE *f;
+//mdk-stage1//     char line[256];
+//mdk-stage1// 
+//mdk-stage1//     syslog(LOG_INFO, "executing: '%s'", cmd);
+//mdk-stage1//     strcat(cmd, " 2>&1");
+//mdk-stage1//     f = popen(cmd, "r");
+//mdk-stage1//     while (fgets(line, 255, f)) {
+//mdk-stage1// 	line[strlen(line)-1] = '\0';
+//mdk-stage1// 	syslog(LOG_INFO, "+ %s", line);
+//mdk-stage1//     }
+//mdk-stage1//     ret = pclose(f);
+//mdk-stage1//     if (WIFEXITED(ret)) {
+//mdk-stage1// 	if (WEXITSTATUS(ret))
+//mdk-stage1// 	    syslog(LOG_INFO, "%s exited with status %d",
+//mdk-stage1// 		   msg, WEXITSTATUS(ret));
+//mdk-stage1// 	return WEXITSTATUS(ret);
+//mdk-stage1//     } else
+//mdk-stage1// 	syslog(LOG_INFO, "%s exited on signal %d",
+//mdk-stage1// 	       msg, WTERMSIG(ret));
+//mdk-stage1//     return -1;
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static int execute_on_dev(char *action, char *class, char *dev)
+//mdk-stage1// {
+//mdk-stage1//     /* Fixed length strings are ok here */
+//mdk-stage1//     char msg[128], cmd[128];
+//mdk-stage1// 
+//mdk-stage1//     sprintf(msg, "%s cmd", action);
+//mdk-stage1//     sprintf(cmd, "./%s %s %s", class, action, dev);
+//mdk-stage1//     return execute(msg, cmd);
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// static int execute_on_all(char *cmd, char *class, int sn, int fn)
+//mdk-stage1// {
+//mdk-stage1//     socket_info_t *s = &socket[sn];
+//mdk-stage1//     bind_info_t *bind;
+//mdk-stage1//     int ret = 0;
+//mdk-stage1//     for (bind = s->bind[fn]; bind != NULL; bind = bind->next)
+//mdk-stage1// 	if (bind->name[0] && (bind->name[2] != '#'))
+//mdk-stage1// 	    ret |= execute_on_dev(cmd, class, bind->name);
+//mdk-stage1//     return ret;
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// #ifdef __linux__
+//mdk-stage1// 
+//mdk-stage1// typedef struct module_list_t {
+//mdk-stage1//     char *mod;
+//mdk-stage1//     int usage;
+//mdk-stage1//     struct module_list_t *next;
+//mdk-stage1// } module_list_t;
+//mdk-stage1// 
+//mdk-stage1// static module_list_t *module_list = NULL;
+//mdk-stage1// 
+//mdk-stage1// static int try_insmod(char *mod, char *opts)
+//mdk-stage1// {
+//mdk-stage1//     char *cmd = malloc(strlen(mod) + strlen(modpath) +
+//mdk-stage1// 		       (opts ? strlen(opts) : 0) + 30);
+//mdk-stage1//     int ret;
+//mdk-stage1// 
+//mdk-stage1//     strcpy(cmd, "insmod ");
+//mdk-stage1//     if (strchr(mod, '/') != NULL)
+//mdk-stage1// 	sprintf(cmd+7, "%s/%s.o", modpath, mod);
+//mdk-stage1//     else
+//mdk-stage1// 	sprintf(cmd+7, "%s/pcmcia/%s.o", modpath, mod);
+//mdk-stage1//     if (access(cmd+7, R_OK) != 0) {
+//mdk-stage1// 	syslog(LOG_INFO, "module %s not available", cmd+7);
+//mdk-stage1// 	free(cmd);
+//mdk-stage1// 	return -1;
+//mdk-stage1//     }
+//mdk-stage1//     if (opts) {
+//mdk-stage1// 	strcat(cmd, " ");
+//mdk-stage1// 	strcat(cmd, opts);
+//mdk-stage1//     }
+//mdk-stage1//     ret = execute("insmod", cmd);
+//mdk-stage1//     free(cmd);
+//mdk-stage1//     return ret;
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// static int try_modprobe(char *mod, char *opts)
+//mdk-stage1// {
+//mdk-stage1//     char *cmd = malloc(strlen(mod) + (opts ? strlen(opts) : 0) + 20);
+//mdk-stage1//     char *s = strrchr(mod, '/');
+//mdk-stage1//     int ret;
+//mdk-stage1// 
+//mdk-stage1//     sprintf(cmd, "modprobe %s", (s) ? s+1 : mod);
+//mdk-stage1//     if (opts) {
+//mdk-stage1// 	strcat(cmd, " ");
+//mdk-stage1// 	strcat(cmd, opts);
+//mdk-stage1//     }
+//mdk-stage1//     ret = execute("modprobe", cmd);
+//mdk-stage1//     free(cmd);
+//mdk-stage1//     return ret;
+//mdk-stage1// }
 
 static void install_module(char *mod, char *opts)
 {
-    module_list_t *ml;
-
-    for (ml = module_list; ml != NULL; ml = ml->next)
-	if (strcmp(mod, ml->mod) == 0) break;
-    if (ml == NULL) {
-	ml = (module_list_t *)malloc(sizeof(struct module_list_t));
-	ml->mod = mod;
-	ml->usage = 0;
-	ml->next = module_list;
-	module_list = ml;
-    }
-    ml->usage++;
-    if (ml->usage != 1)
-	return;
-
-#ifdef __linux__
-    if (access("/proc/bus/pccard/drivers", R_OK) == 0) {
-	FILE *f = fopen("/proc/bus/pccard/drivers", "r");
-	if (f) {
-	    char a[61], s[33];
-	    while (fgets(a, 60, f)) {
-		int is_kernel;
-		sscanf(a, "%s %d", s, &is_kernel);
-		if (strcmp(s, mod) != 0) continue;
-		/* If it isn't a module, we won't try to rmmod */
-		ml->usage += is_kernel;
-		fclose(f);
-		return;
-	    }
-	    fclose(f);
-	}
-    }
-#endif
-
-    if (do_modprobe) {
-	if (try_modprobe(mod, opts) != 0)
-	    try_insmod(mod, opts);
-    } else {
-	if (try_insmod(mod, opts) != 0)
-	    try_modprobe(mod, opts);
-    }
+	my_insmod(mod, ANY_DRIVER_TYPE, opts);
+//mdk-stage1//     module_list_t *ml;
+//mdk-stage1// 
+//mdk-stage1//     for (ml = module_list; ml != NULL; ml = ml->next)
+//mdk-stage1// 	if (strcmp(mod, ml->mod) == 0) break;
+//mdk-stage1//     if (ml == NULL) {
+//mdk-stage1// 	ml = (module_list_t *)malloc(sizeof(struct module_list_t));
+//mdk-stage1// 	ml->mod = mod;
+//mdk-stage1// 	ml->usage = 0;
+//mdk-stage1// 	ml->next = module_list;
+//mdk-stage1// 	module_list = ml;
+//mdk-stage1//     }
+//mdk-stage1//     ml->usage++;
+//mdk-stage1//     if (ml->usage != 1)
+//mdk-stage1// 	return;
+//mdk-stage1// 
+//mdk-stage1// #ifdef __linux__
+//mdk-stage1//     if (access("/proc/bus/pccard/drivers", R_OK) == 0) {
+//mdk-stage1// 	FILE *f = fopen("/proc/bus/pccard/drivers", "r");
+//mdk-stage1// 	if (f) {
+//mdk-stage1// 	    char a[61], s[33];
+//mdk-stage1// 	    while (fgets(a, 60, f)) {
+//mdk-stage1// 		int is_kernel;
+//mdk-stage1// 		sscanf(a, "%s %d", s, &is_kernel);
+//mdk-stage1// 		if (strcmp(s, mod) != 0) continue;
+//mdk-stage1// 		/* If it isn't a module, we won't try to rmmod */
+//mdk-stage1// 		ml->usage += is_kernel;
+//mdk-stage1// 		fclose(f);
+//mdk-stage1// 		return;
+//mdk-stage1// 	    }
+//mdk-stage1// 	    fclose(f);
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1// #endif
+//mdk-stage1// 
+//mdk-stage1//     if (do_modprobe) {
+//mdk-stage1// 	if (try_modprobe(mod, opts) != 0)
+//mdk-stage1// 	    try_insmod(mod, opts);
+//mdk-stage1//     } else {
+//mdk-stage1// 	if (try_insmod(mod, opts) != 0)
+//mdk-stage1// 	    try_modprobe(mod, opts);
+//mdk-stage1//     }
 }
 
-static void remove_module(char *mod)
-{
-    char *s, cmd[128];
-    module_list_t *ml;
-
-    for (ml = module_list; ml != NULL; ml = ml->next)
-	if (strcmp(mod, ml->mod) == 0) break;
-    if (ml != NULL) {
-	ml->usage--;
-	if (ml->usage == 0) {
-	    /* Strip off leading path names */
-	    s = strrchr(mod, '/');
-	    s = (s) ? s+1 : mod;
-	    sprintf(cmd, do_modprobe ? "modprobe -r %s" : "rmmod %s", s);
-	    execute(do_modprobe ? "modprobe" : "rmmod", cmd);
-	}
-    }
-}
-
-#endif /* __linux__ */
-
-/*====================================================================*/
-
-#ifdef __BEOS__
-
-#define install_module(a,b)
-#define remove_module(a)
-
-static void republish_driver(char *mod)
-{
-    int fd = open("/dev", O_RDWR);
-    write(fd, mod, strlen(mod));
-    close(fd);
-}
-
-#endif /* __BEOS__ */
-
-/*====================================================================*/
+//mdk-stage1// static void remove_module(char *mod)
+//mdk-stage1// {
+//mdk-stage1//     char *s, cmd[128];
+//mdk-stage1//     module_list_t *ml;
+//mdk-stage1// 
+//mdk-stage1//     for (ml = module_list; ml != NULL; ml = ml->next)
+//mdk-stage1// 	if (strcmp(mod, ml->mod) == 0) break;
+//mdk-stage1//     if (ml != NULL) {
+//mdk-stage1// 	ml->usage--;
+//mdk-stage1// 	if (ml->usage == 0) {
+//mdk-stage1// 	    /* Strip off leading path names */
+//mdk-stage1// 	    s = strrchr(mod, '/');
+//mdk-stage1// 	    s = (s) ? s+1 : mod;
+//mdk-stage1// 	    sprintf(cmd, do_modprobe ? "modprobe -r %s" : "rmmod %s", s);
+//mdk-stage1// 	    execute(do_modprobe ? "modprobe" : "rmmod", cmd);
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// #endif /* __linux__ */
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// #ifdef __BEOS__
+//mdk-stage1// 
+//mdk-stage1// #define install_module(a,b)
+//mdk-stage1// #define remove_module(a)
+//mdk-stage1// 
+//mdk-stage1// static void republish_driver(char *mod)
+//mdk-stage1// {
+//mdk-stage1//     int fd = open("/dev", O_RDWR);
+//mdk-stage1//     write(fd, mod, strlen(mod));
+//mdk-stage1//     close(fd);
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// #endif /* __BEOS__ */
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
 
 static mtd_ident_t *lookup_mtd(region_info_t *region)
 {
@@ -903,7 +922,7 @@ static void bind_mtd(int sn)
 		    mtd->refs++;
 		    nr++;
 		}
-		syslog(LOG_INFO, "  %s memory region at 0x%x: %s",
+		log_message("CM: %s memory region at 0x%x: %s",
 		       attr ? "Attribute" : "Common", region.CardOffset,
 		       mtd->name);
 		/* Bind MTD to this region */
@@ -911,8 +930,7 @@ static void bind_mtd(int sn)
 		mtd_info.Attributes = region.Attributes;
 		mtd_info.CardOffset = region.CardOffset;
 		if (ioctl(s->fd, DS_BIND_MTD, &mtd_info) != 0) {
-		    syslog(LOG_INFO,
-			   "bind MTD '%s' to region at 0x%x failed: %m",
+		    log_message("CM: bind MTD '%s' to region at 0x%x failed: %m",
 			   (char *)mtd_info.dev_info, region.CardOffset);
 		}
 	    }
@@ -926,7 +944,7 @@ static void bind_mtd(int sn)
 	strcpy(bind.dev_info, s->mtd[i]->module);
 	bind.function = 0;
 	if (ioctl(s->fd, DS_BIND_REQUEST, &bind) != 0)
-	    syslog(LOG_INFO, "bind MTD '%s' to socket %d failed: %m",
+	    log_message("CM: bind MTD '%s' to socket %d failed: %m",
 		   (char *)bind.dev_info, sn);
     }
 }
@@ -938,12 +956,12 @@ static void update_cis(socket_info_t *s)
     cisdump_t cis;
     FILE *f = fopen(s->card->cis_file, "r");
     if (f == NULL)
-	syslog(LOG_ERR, "could not open '%s': %m", s->card->cis_file);
+	log_message("CM: could not open '%s': %m", s->card->cis_file);
     else {
 	cis.Length = fread(cis.Data, 1, CISTPL_MAX_CIS_SIZE, f);
 	fclose(f);
 	if (ioctl(s->fd, DS_REPLACE_CIS, &cis) != 0)
-	    syslog(LOG_ERR, "could not replace CIS: %m");
+	    log_message("CM: could not replace CIS: %m");
     }
 }
 
@@ -961,7 +979,7 @@ static void do_insert(int sn)
     if ((s->card != NULL) && (s->card != blank_card))
 	return;
 
-    if (verbose) syslog(LOG_INFO, "initializing socket %d", sn);
+    log_message("CM: initializing socket %d", sn);
     card = lookup_card(sn);
     if (s->state & SOCKET_HOTPLUG) {
 	write_stab();
@@ -1002,10 +1020,10 @@ static void do_insert(int sn)
 	    bind->function = card->dev_fn[i];
 	if (ioctl(s->fd, DS_BIND_REQUEST, bind) != 0) {
 	    if (errno == EBUSY) {
-		syslog(LOG_INFO, "'%s' already bound to socket %d",
+		log_message("CM: '%s' already bound to socket %d",
 		       (char *)bind->dev_info, sn);
 	    } else {
-		syslog(LOG_INFO, "bind '%s' to socket %d failed: %m",
+		log_message("CM: bind '%s' to socket %d failed: %m",
 		       (char *)bind->dev_info, sn);
 		beep(BEEP_TIME, BEEP_ERR);
 		write_stab();
@@ -1024,7 +1042,7 @@ static void do_insert(int sn)
 	    usleep(100000);
 	}
 	if (ret != 0) {
-	    syslog(LOG_INFO, "get dev info on socket %d failed: %m",
+	    log_message("CM: get dev info on socket %d failed: %m",
 		   sn);
 	    ioctl(s->fd, DS_UNBIND_REQUEST, bind);
 	    beep(BEEP_TIME, BEEP_ERR);
@@ -1047,148 +1065,148 @@ static void do_insert(int sn)
 	write_stab();
     }
 
-    /* Run "start" commands */
-    for (i = ret = 0; i < card->bindings; i++)
-	if (dev[i]->class)
-	    ret |= execute_on_all("start", dev[i]->class, sn, i);
-    beep(BEEP_TIME, (ret) ? BEEP_ERR : BEEP_OK);
+//mdk-stage1//     /* Run "start" commands */
+//mdk-stage1//     for (i = ret = 0; i < card->bindings; i++)
+//mdk-stage1// 	if (dev[i]->class)
+//mdk-stage1// 	    ret |= execute_on_all("start", dev[i]->class, sn, i);
+//mdk-stage1//     beep(BEEP_TIME, (ret) ? BEEP_ERR : BEEP_OK);
     
 }
 
-/*====================================================================*/
-
-static int do_check(int sn)
-{
-    socket_info_t *s = &socket[sn];
-    card_info_t *card;
-    device_info_t **dev;
-    int i, ret;
-
-    card = s->card;
-    if (card == NULL)
-	return 0;
-    
-    /* Run "check" commands */
-    dev = card->device;
-    for (i = 0; i < card->bindings; i++) {
-	if (dev[i]->class) {
-	    ret = execute_on_all("check", dev[i]->class, sn, i);
-	    if (ret != 0)
-		return CS_IN_USE;
-	}
-    }
-    return 0;
-}
-
-/*====================================================================*/
-
-static void do_remove(int sn)
-{
-    socket_info_t *s = &socket[sn];
-    card_info_t *card;
-    device_info_t **dev;
-    bind_info_t *bind;
-    int i, j;
-
-    if (verbose) syslog(LOG_INFO, "shutting down socket %d", sn);
-
-    card = s->card;
-    if (card == NULL)
-	goto done;
-
-    /* Run "stop" commands */
-    dev = card->device;
-    for (i = 0; i < card->bindings; i++) {
-	if (dev[i]->class) {
-	    execute_on_all("stop", dev[i]->class, sn, i);
-	}
-    }
-
-    /* unbind driver instances */
-    for (i = 0; i < card->bindings; i++) {
-	if (s->bind[i]) {
-	    if (ioctl(s->fd, DS_UNBIND_REQUEST, s->bind[i]) != 0)
-		syslog(LOG_INFO, "unbind '%s' from socket %d failed: %m",
-		       (char *)s->bind[i]->dev_info, sn);
-	    while (s->bind[i]) {
-		bind = s->bind[i];
-		s->bind[i] = bind->next;
-		free(bind);
-	    }
-	}
-    }
-    for (i = 0; (s->mtd[i] != NULL); i++) {
-	bind_info_t b;
-	strcpy(b.dev_info, s->mtd[i]->module);
-	b.function = 0;
-	if (ioctl(s->fd, DS_UNBIND_REQUEST, &b) != 0)
-	    syslog(LOG_INFO, "unbind MTD '%s' from socket %d failed: %m",
-		   s->mtd[i]->module, sn);
-    }
-
-    /* remove kernel modules in inverse order */
-    for (i = 0; i < card->bindings; i++) {
-	for (j = dev[i]->modules-1; j >= 0; j--)
-	    remove_module(dev[i]->module[j]);
-	free_device(dev[i]);
-    }
-    /* Remove any MTD's bound to this socket */
-    for (i = 0; (s->mtd[i] != NULL); i++) {
-	remove_module(s->mtd[i]->module);
-	free_mtd(s->mtd[i]);
-	s->mtd[i] = NULL;
-    }
-
-done:
-    beep(BEEP_TIME, BEEP_OK);
-    free_card(card);
-    s->card = NULL;
-    write_stab();
-}
-
-/*====================================================================*/
-
-static void do_suspend(int sn)
-{
-    socket_info_t *s = &socket[sn];
-    card_info_t *card;
-    device_info_t **dev;
-    int i, ret;
-    
-    card = s->card;
-    if (card == NULL)
-	return;
-    dev = card->device;
-    for (i = 0; i < card->bindings; i++) {
-	if (dev[i]->class) {
-	    ret = execute_on_all("suspend", dev[i]->class, sn, i);
-	    if (ret != 0)
-		beep(BEEP_TIME, BEEP_ERR);
-	}
-    }
-}
-
-/*====================================================================*/
-
-static void do_resume(int sn)
-{
-    socket_info_t *s = &socket[sn];
-    card_info_t *card;
-    device_info_t **dev;
-    int i, ret;
-    
-    card = s->card;
-    if (card == NULL)
-	return;
-    dev = card->device;
-    for (i = 0; i < card->bindings; i++) {
-	if (dev[i]->class) {
-	    ret = execute_on_all("resume", dev[i]->class, sn, i);
-	    if (ret != 0)
-		beep(BEEP_TIME, BEEP_ERR);
-	}
-    }
-}
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static int do_check(int sn)
+//mdk-stage1// {
+//mdk-stage1//     socket_info_t *s = &socket[sn];
+//mdk-stage1//     card_info_t *card;
+//mdk-stage1//     device_info_t **dev;
+//mdk-stage1//     int i, ret;
+//mdk-stage1// 
+//mdk-stage1//     card = s->card;
+//mdk-stage1//     if (card == NULL)
+//mdk-stage1// 	return 0;
+//mdk-stage1//     
+//mdk-stage1//     /* Run "check" commands */
+//mdk-stage1//     dev = card->device;
+//mdk-stage1//     for (i = 0; i < card->bindings; i++) {
+//mdk-stage1// 	if (dev[i]->class) {
+//mdk-stage1// 	    ret = execute_on_all("check", dev[i]->class, sn, i);
+//mdk-stage1// 	    if (ret != 0)
+//mdk-stage1// 		return CS_IN_USE;
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1//     return 0;
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static void do_remove(int sn)
+//mdk-stage1// {
+//mdk-stage1//     socket_info_t *s = &socket[sn];
+//mdk-stage1//     card_info_t *card;
+//mdk-stage1//     device_info_t **dev;
+//mdk-stage1//     bind_info_t *bind;
+//mdk-stage1//     int i, j;
+//mdk-stage1// 
+//mdk-stage1//     if (verbose) syslog(LOG_INFO, "shutting down socket %d", sn);
+//mdk-stage1// 
+//mdk-stage1//     card = s->card;
+//mdk-stage1//     if (card == NULL)
+//mdk-stage1// 	goto done;
+//mdk-stage1// 
+//mdk-stage1//     /* Run "stop" commands */
+//mdk-stage1//     dev = card->device;
+//mdk-stage1//     for (i = 0; i < card->bindings; i++) {
+//mdk-stage1// 	if (dev[i]->class) {
+//mdk-stage1// 	    execute_on_all("stop", dev[i]->class, sn, i);
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1// 
+//mdk-stage1//     /* unbind driver instances */
+//mdk-stage1//     for (i = 0; i < card->bindings; i++) {
+//mdk-stage1// 	if (s->bind[i]) {
+//mdk-stage1// 	    if (ioctl(s->fd, DS_UNBIND_REQUEST, s->bind[i]) != 0)
+//mdk-stage1// 		syslog(LOG_INFO, "unbind '%s' from socket %d failed: %m",
+//mdk-stage1// 		       (char *)s->bind[i]->dev_info, sn);
+//mdk-stage1// 	    while (s->bind[i]) {
+//mdk-stage1// 		bind = s->bind[i];
+//mdk-stage1// 		s->bind[i] = bind->next;
+//mdk-stage1// 		free(bind);
+//mdk-stage1// 	    }
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1//     for (i = 0; (s->mtd[i] != NULL); i++) {
+//mdk-stage1// 	bind_info_t b;
+//mdk-stage1// 	strcpy(b.dev_info, s->mtd[i]->module);
+//mdk-stage1// 	b.function = 0;
+//mdk-stage1// 	if (ioctl(s->fd, DS_UNBIND_REQUEST, &b) != 0)
+//mdk-stage1// 	    syslog(LOG_INFO, "unbind MTD '%s' from socket %d failed: %m",
+//mdk-stage1// 		   s->mtd[i]->module, sn);
+//mdk-stage1//     }
+//mdk-stage1// 
+//mdk-stage1//     /* remove kernel modules in inverse order */
+//mdk-stage1//     for (i = 0; i < card->bindings; i++) {
+//mdk-stage1// 	for (j = dev[i]->modules-1; j >= 0; j--)
+//mdk-stage1// 	    remove_module(dev[i]->module[j]);
+//mdk-stage1// 	free_device(dev[i]);
+//mdk-stage1//     }
+//mdk-stage1//     /* Remove any MTD's bound to this socket */
+//mdk-stage1//     for (i = 0; (s->mtd[i] != NULL); i++) {
+//mdk-stage1// 	remove_module(s->mtd[i]->module);
+//mdk-stage1// 	free_mtd(s->mtd[i]);
+//mdk-stage1// 	s->mtd[i] = NULL;
+//mdk-stage1//     }
+//mdk-stage1// 
+//mdk-stage1// done:
+//mdk-stage1//     beep(BEEP_TIME, BEEP_OK);
+//mdk-stage1//     free_card(card);
+//mdk-stage1//     s->card = NULL;
+//mdk-stage1//     write_stab();
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static void do_suspend(int sn)
+//mdk-stage1// {
+//mdk-stage1//     socket_info_t *s = &socket[sn];
+//mdk-stage1//     card_info_t *card;
+//mdk-stage1//     device_info_t **dev;
+//mdk-stage1//     int i, ret;
+//mdk-stage1//     
+//mdk-stage1//     card = s->card;
+//mdk-stage1//     if (card == NULL)
+//mdk-stage1// 	return;
+//mdk-stage1//     dev = card->device;
+//mdk-stage1//     for (i = 0; i < card->bindings; i++) {
+//mdk-stage1// 	if (dev[i]->class) {
+//mdk-stage1// 	    ret = execute_on_all("suspend", dev[i]->class, sn, i);
+//mdk-stage1// 	    if (ret != 0)
+//mdk-stage1// 		beep(BEEP_TIME, BEEP_ERR);
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static void do_resume(int sn)
+//mdk-stage1// {
+//mdk-stage1//     socket_info_t *s = &socket[sn];
+//mdk-stage1//     card_info_t *card;
+//mdk-stage1//     device_info_t **dev;
+//mdk-stage1//     int i, ret;
+//mdk-stage1//     
+//mdk-stage1//     card = s->card;
+//mdk-stage1//     if (card == NULL)
+//mdk-stage1// 	return;
+//mdk-stage1//     dev = card->device;
+//mdk-stage1//     for (i = 0; i < card->bindings; i++) {
+//mdk-stage1// 	if (dev[i]->class) {
+//mdk-stage1// 	    ret = execute_on_all("resume", dev[i]->class, sn, i);
+//mdk-stage1// 	    if (ret != 0)
+//mdk-stage1// 		beep(BEEP_TIME, BEEP_ERR);
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1// }
 
 /*====================================================================*/
 
@@ -1207,25 +1225,25 @@ static void wait_for_pending(void)
     }
 }
 
-/*====================================================================*/
-
-static void free_resources(void)
-{
-    adjust_list_t *al;
-    int fd = socket[0].fd;
-
-    for (al = root_adjust; al; al = al->next) {
-	if (al->adj.Action == ADD_MANAGED_RESOURCE) {
-	    al->adj.Action = REMOVE_MANAGED_RESOURCE;
-	    ioctl(fd, DS_ADJUST_RESOURCE_INFO, &al->adj);
-	} else if ((al->adj.Action == REMOVE_MANAGED_RESOURCE) &&
-		   (al->adj.Resource == RES_IRQ)) {
-	    al->adj.Action = ADD_MANAGED_RESOURCE;
-	    ioctl(fd, DS_ADJUST_RESOURCE_INFO, &al->adj);
-	}
-    }
-    
-}
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static void free_resources(void)
+//mdk-stage1// {
+//mdk-stage1//     adjust_list_t *al;
+//mdk-stage1//     int fd = socket[0].fd;
+//mdk-stage1// 
+//mdk-stage1//     for (al = root_adjust; al; al = al->next) {
+//mdk-stage1// 	if (al->adj.Action == ADD_MANAGED_RESOURCE) {
+//mdk-stage1// 	    al->adj.Action = REMOVE_MANAGED_RESOURCE;
+//mdk-stage1// 	    ioctl(fd, DS_ADJUST_RESOURCE_INFO, &al->adj);
+//mdk-stage1// 	} else if ((al->adj.Action == REMOVE_MANAGED_RESOURCE) &&
+//mdk-stage1// 		   (al->adj.Resource == RES_IRQ)) {
+//mdk-stage1// 	    al->adj.Action = ADD_MANAGED_RESOURCE;
+//mdk-stage1// 	    ioctl(fd, DS_ADJUST_RESOURCE_INFO, &al->adj);
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1//     
+//mdk-stage1// }
 
 /*====================================================================*/
 
@@ -1256,74 +1274,74 @@ static void adjust_resources(void)
 		sprintf(tmp, "irq %u", al->adj.resource.irq.IRQ);
 		break;
 	    }
-	    syslog(LOG_INFO, "could not adjust resource: %s: %m", tmp);
+	    log_message("CM: could not adjust resource: %s: %m", tmp);
 	}
     }
 }
     
-/*====================================================================*/
-
-static int cleanup_files = 0;
-
-static void fork_now(void)
-{
-    int ret;
-    if ((ret = fork()) > 0) {
-	cleanup_files = 0;
-	exit(0);
-    }
-    if (ret == -1)
-	syslog(LOG_ERR, "forking: %m");
-    if (setsid() < 0)
-	syslog(LOG_ERR, "detaching from tty: %m");
-}    
-
-static void done(void)
-{
-    syslog(LOG_INFO, "exiting");
-    if (cleanup_files) {
-	unlink(pidfile);
-	unlink(stabfile);
-    }
-}
-
-/*====================================================================*/
-
-/* most recent signal */
-static int caught_signal = 0;
-
-static void catch_signal(int sig)
-{
-    caught_signal = sig;
-    if (signal(sig, catch_signal) == SIG_ERR)
-	syslog(LOG_INFO, "signal(%d): %m", sig);
-}
-
-static void handle_signal(void)
-{
-    int i;
-    switch (caught_signal) {
-    case SIGTERM:
-    case SIGINT:
-	for (i = 0; i < sockets; i++)
-	    if ((socket[i].state & SOCKET_PRESENT) &&
-		(do_check(i) == 0)) do_remove(i);
-	free_resources();
-	exit(0);
-	break;
-    case SIGHUP:
-	free_resources();
-	free_config();
-	syslog(LOG_INFO, "re-loading config file");
-	load_config();
-	adjust_resources();
-	break;
-#ifdef SIGPWR
-    case SIGPWR:
-	break;
-#endif
-    }
-}
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// static int cleanup_files = 0;
+//mdk-stage1// 
+//mdk-stage1// static void fork_now(void)
+//mdk-stage1// {
+//mdk-stage1//     int ret;
+//mdk-stage1//     if ((ret = fork()) > 0) {
+//mdk-stage1// 	cleanup_files = 0;
+//mdk-stage1// 	exit(0);
+//mdk-stage1//     }
+//mdk-stage1//     if (ret == -1)
+//mdk-stage1// 	syslog(LOG_ERR, "forking: %m");
+//mdk-stage1//     if (setsid() < 0)
+//mdk-stage1// 	syslog(LOG_ERR, "detaching from tty: %m");
+//mdk-stage1// }    
+//mdk-stage1// 
+//mdk-stage1// static void done(void)
+//mdk-stage1// {
+//mdk-stage1//     syslog(LOG_INFO, "exiting");
+//mdk-stage1//     if (cleanup_files) {
+//mdk-stage1// 	unlink(pidfile);
+//mdk-stage1// 	unlink(stabfile);
+//mdk-stage1//     }
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// /* most recent signal */
+//mdk-stage1// static int caught_signal = 0;
+//mdk-stage1// 
+//mdk-stage1// static void catch_signal(int sig)
+//mdk-stage1// {
+//mdk-stage1//     caught_signal = sig;
+//mdk-stage1//     if (signal(sig, catch_signal) == SIG_ERR)
+//mdk-stage1// 	syslog(LOG_INFO, "signal(%d): %m", sig);
+//mdk-stage1// }
+//mdk-stage1// 
+//mdk-stage1// static void handle_signal(void)
+//mdk-stage1// {
+//mdk-stage1//     int i;
+//mdk-stage1//     switch (caught_signal) {
+//mdk-stage1//     case SIGTERM:
+//mdk-stage1//     case SIGINT:
+//mdk-stage1// 	for (i = 0; i < sockets; i++)
+//mdk-stage1// 	    if ((socket[i].state & SOCKET_PRESENT) &&
+//mdk-stage1// 		(do_check(i) == 0)) do_remove(i);
+//mdk-stage1// 	free_resources();
+//mdk-stage1// 	exit(0);
+//mdk-stage1// 	break;
+//mdk-stage1//     case SIGHUP:
+//mdk-stage1// 	free_resources();
+//mdk-stage1// 	free_config();
+//mdk-stage1// 	syslog(LOG_INFO, "re-loading config file");
+//mdk-stage1// 	load_config();
+//mdk-stage1// 	adjust_resources();
+//mdk-stage1// 	break;
+//mdk-stage1// #ifdef SIGPWR
+//mdk-stage1//     case SIGPWR:
+//mdk-stage1// 	break;
+//mdk-stage1// #endif
+//mdk-stage1//     }
+//mdk-stage1// }
 
 /*====================================================================*/
 
@@ -1336,10 +1354,10 @@ static int init_sockets(void)
     major = lookup_dev("pcmcia");
     if (major < 0) {
 	if (major == -ENODEV)
-	    syslog(LOG_ERR, "no pcmcia driver in /proc/devices");
+	    log_message("CM: no pcmcia driver in /proc/devices");
 	else
-	    syslog(LOG_ERR, "could not open /proc/devices: %m");
-	exit(EXIT_FAILURE);
+	    log_message("CM: could not open /proc/devices: %m");
+	return -1;
     }
 #endif
     for (fd = -1, i = 0; i < MAX_SOCKS; i++) {
@@ -1349,209 +1367,286 @@ static int init_sockets(void)
 	socket[i].state = 0;
     }
     if ((fd < 0) && (errno != ENODEV) && (errno != ENOENT))
-	syslog(LOG_ERR, "open_sock(socket %d) failed: %m", i);
+	log_message("CM: open_sock(socket %d) failed: %m", i);
     sockets = i;
     if (sockets == 0) {
-	syslog(LOG_ERR, "no sockets found!");
+	log_message("CM: no sockets found!");
 	return -1;
     } else
-	syslog(LOG_INFO, "watching %d sockets", sockets);
+	log_message("CM: watching %d sockets", sockets);
 
     if (ioctl(socket[0].fd, DS_GET_CARD_SERVICES_INFO, &serv) == 0) {
 	if (serv.Revision != CS_RELEASE_CODE)
-	    syslog(LOG_INFO, "Card Services release does not match");
+	    log_message("CM: warning, Card Services release does not match kernel (generally harmless)");
     } else {
-	syslog(LOG_ERR, "could not get CS revision info!");
+	log_message("CM: could not get CS revision info!");
 	return -1;
     }
     adjust_resources();
     return 0;
 }
 
-/*====================================================================*/
+//mdk-stage1// /*====================================================================*/
+//mdk-stage1// 
+//mdk-stage1// int main(int argc, char *argv[])
+//mdk-stage1// {
+//mdk-stage1//     int optch, errflg;
+//mdk-stage1//     int i, max_fd, ret, event, pass;
+//mdk-stage1//     int delay_fork = 0;
+//mdk-stage1//     struct timeval tv;
+//mdk-stage1//     fd_set fds;
+//mdk-stage1// 
+//mdk-stage1//     if (access("/var/lib/pcmcia", R_OK) == 0) {
+//mdk-stage1// 	stabfile = "/var/lib/pcmcia/stab";
+//mdk-stage1//     } else {
+//mdk-stage1// 	stabfile = "/var/run/stab";
+//mdk-stage1//     }
+//mdk-stage1// 
+//mdk-stage1//     errflg = 0;
+//mdk-stage1//     while ((optch = getopt(argc, argv, "Vqdvofc:m:p:s:")) != -1) {
+//mdk-stage1// 	switch (optch) {
+//mdk-stage1// 	case 'V':
+//mdk-stage1// 	    fprintf(stderr, "cardmgr version " CS_RELEASE "\n");
+//mdk-stage1// 	    return 0;
+//mdk-stage1// 	    break;
+//mdk-stage1// 	case 'q':
+//mdk-stage1// 	    be_quiet = 1; break;
+//mdk-stage1// 	case 'v':
+//mdk-stage1// 	    verbose = 1; break;
+//mdk-stage1// 	case 'o':
+//mdk-stage1// 	    one_pass = 1; break;
+//mdk-stage1// 	case 'f':
+//mdk-stage1// 	    delay_fork = 1; break;
+//mdk-stage1// 	case 'c':
+//mdk-stage1// 	    configpath = strdup(optarg); break;
+//mdk-stage1// #ifdef __linux__
+//mdk-stage1// 	case 'd':
+//mdk-stage1// 	    do_modprobe = 1; break;
+//mdk-stage1// 	case 'm':
+//mdk-stage1// 	    modpath = strdup(optarg); break;
+//mdk-stage1// #endif
+//mdk-stage1// 	case 'p':
+//mdk-stage1// 	    pidfile = strdup(optarg); break;
+//mdk-stage1// 	case 's':
+//mdk-stage1// 	    stabfile = strdup(optarg); break;
+//mdk-stage1// 	default:
+//mdk-stage1// 	    errflg = 1; break;
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1//     if (errflg || (optind < argc)) {
+//mdk-stage1// 	fprintf(stderr, "usage: %s [-V] [-q] [-v] [-d] [-o] [-f] "
+//mdk-stage1// 		"[-c configpath] [-m modpath]\n               "
+//mdk-stage1// 		"[-p pidfile] [-s stabfile]\n", argv[0]);
+//mdk-stage1// 	exit(EXIT_FAILURE);
+//mdk-stage1//     }
+//mdk-stage1// 
+//mdk-stage1// #ifdef DEBUG
+//mdk-stage1//     openlog("cardmgr", LOG_PID|LOG_PERROR, LOG_DAEMON);
+//mdk-stage1// #else
+//mdk-stage1//     openlog("cardmgr", LOG_PID|LOG_CONS, LOG_DAEMON);
+//mdk-stage1//     close(0); close(1); close(2);
+//mdk-stage1//     if (!delay_fork && !one_pass)
+//mdk-stage1// 	fork_now();
+//mdk-stage1// #endif
+//mdk-stage1//     
+//mdk-stage1//     syslog(LOG_INFO, "starting, version is " CS_RELEASE);
+//mdk-stage1//     atexit(&done);
+//mdk-stage1//     putenv("PATH=/bin:/sbin:/usr/bin:/usr/sbin");
+//mdk-stage1//     if (verbose)
+//mdk-stage1// 	putenv("VERBOSE=1");
+//mdk-stage1// 
+//mdk-stage1// #ifdef __linux__
+//mdk-stage1//     if (modpath == NULL) {
+//mdk-stage1// 	if (access("/lib/modules/preferred", X_OK) == 0)
+//mdk-stage1// 	    modpath = "/lib/modules/preferred";
+//mdk-stage1// 	else {
+//mdk-stage1// 	    struct utsname utsname;
+//mdk-stage1// 	    if (uname(&utsname) != 0) {
+//mdk-stage1// 		syslog(LOG_ERR, "uname(): %m");
+//mdk-stage1// 		exit(EXIT_FAILURE);
+//mdk-stage1// 	    }
+//mdk-stage1// 	    modpath = (char *)malloc(strlen(utsname.release)+14);
+//mdk-stage1// 	    sprintf(modpath, "/lib/modules/%s", utsname.release);
+//mdk-stage1// 	}
+//mdk-stage1//     }
+//mdk-stage1//     if (access(modpath, X_OK) != 0)
+//mdk-stage1// 	syslog(LOG_INFO, "cannot access %s: %m", modpath);
+//mdk-stage1//     /* We default to using modprobe if it is available */
+//mdk-stage1//     do_modprobe |= (access("/sbin/modprobe", X_OK) == 0);
+//mdk-stage1// #endif /* __linux__ */
+//mdk-stage1//     
+//mdk-stage1//     load_config();
+//mdk-stage1//     
+//mdk-stage1//     if (init_sockets() != 0)
+//mdk-stage1// 	exit(EXIT_FAILURE);
+//mdk-stage1// 
+//mdk-stage1//     /* If we've gotten this far, then clean up pid and stab at exit */
+//mdk-stage1//     write_pid();
+//mdk-stage1//     write_stab();
+//mdk-stage1//     cleanup_files = 1;
+//mdk-stage1//     
+//mdk-stage1//     if (signal(SIGHUP, catch_signal) == SIG_ERR)
+//mdk-stage1// 	syslog(LOG_ERR, "signal(SIGHUP): %m");
+//mdk-stage1//     if (signal(SIGTERM, catch_signal) == SIG_ERR)
+//mdk-stage1// 	syslog(LOG_ERR, "signal(SIGTERM): %m");
+//mdk-stage1//     if (signal(SIGINT, catch_signal) == SIG_ERR)
+//mdk-stage1// 	syslog(LOG_ERR, "signal(SIGINT): %m");
+//mdk-stage1// #ifdef SIGPWR
+//mdk-stage1//     if (signal(SIGPWR, catch_signal) == SIG_ERR)
+//mdk-stage1// 	syslog(LOG_ERR, "signal(SIGPWR): %m");
+//mdk-stage1// #endif
+//mdk-stage1//     
+//mdk-stage1//     for (i = max_fd = 0; i < sockets; i++)
+//mdk-stage1// 	max_fd = (socket[i].fd > max_fd) ? socket[i].fd : max_fd;
+//mdk-stage1// 
+//mdk-stage1//     /* First select() call: poll, don't wait */
+//mdk-stage1//     tv.tv_sec = tv.tv_usec = 0;
+//mdk-stage1// 
+//mdk-stage1//     /* Wait for sockets in setup-pending state to settle */
+//mdk-stage1//     if (one_pass || delay_fork)
+//mdk-stage1// 	wait_for_pending();
+//mdk-stage1//     
+//mdk-stage1//     for (pass = 0; ; pass++) {
+//mdk-stage1// 	FD_ZERO(&fds);
+//mdk-stage1// 	for (i = 0; i < sockets; i++)
+//mdk-stage1// 	    FD_SET(socket[i].fd, &fds);
+//mdk-stage1// 
+//mdk-stage1// 	while ((ret = select(max_fd+1, &fds, NULL, NULL,
+//mdk-stage1// 			     ((pass == 0) ? &tv : NULL))) < 0) {
+//mdk-stage1// 	    if (errno == EINTR) {
+//mdk-stage1// 		handle_signal();
+//mdk-stage1// 	    } else {
+//mdk-stage1// 		syslog(LOG_ERR, "select(): %m");
+//mdk-stage1// 		exit(EXIT_FAILURE);
+//mdk-stage1// 	    }
+//mdk-stage1// 	}
+//mdk-stage1// 
+//mdk-stage1// 	for (i = 0; i < sockets; i++) {
+//mdk-stage1// 	    if (!FD_ISSET(socket[i].fd, &fds))
+//mdk-stage1// 		continue;
+//mdk-stage1// 	    ret = read(socket[i].fd, &event, 4);
+//mdk-stage1// 	    if ((ret == -1) && (errno != EAGAIN))
+//mdk-stage1// 		syslog(LOG_INFO, "read(%d): %m\n", i);
+//mdk-stage1// 	    if (ret != 4)
+//mdk-stage1// 		continue;
+//mdk-stage1// 	    
+//mdk-stage1// 	    switch (event) {
+//mdk-stage1// 	    case CS_EVENT_CARD_REMOVAL:
+//mdk-stage1// 		socket[i].state = 0;
+//mdk-stage1// 		do_remove(i);
+//mdk-stage1// 		break;
+//mdk-stage1// 	    case CS_EVENT_EJECTION_REQUEST:
+//mdk-stage1// 		ret = do_check(i);
+//mdk-stage1// 		if (ret == 0) {
+//mdk-stage1// 		    socket[i].state = 0;
+//mdk-stage1// 		    do_remove(i);
+//mdk-stage1// 		}
+//mdk-stage1// 		write(socket[i].fd, &ret, 4);
+//mdk-stage1// 		break;
+//mdk-stage1// 	    case CS_EVENT_CARD_INSERTION:
+//mdk-stage1// 	    case CS_EVENT_INSERTION_REQUEST:
+//mdk-stage1// 		socket[i].state |= SOCKET_PRESENT;
+//mdk-stage1// 	    case CS_EVENT_CARD_RESET:
+//mdk-stage1// 		socket[i].state |= SOCKET_READY;
+//mdk-stage1// 		do_insert(i);
+//mdk-stage1// 		break;
+//mdk-stage1// 	    case CS_EVENT_RESET_PHYSICAL:
+//mdk-stage1// 		socket[i].state &= ~SOCKET_READY;
+//mdk-stage1// 		break;
+//mdk-stage1// 	    case CS_EVENT_PM_SUSPEND:
+//mdk-stage1// 		do_suspend(i);
+//mdk-stage1// 		break;
+//mdk-stage1// 	    case CS_EVENT_PM_RESUME:
+//mdk-stage1// 		do_resume(i);
+//mdk-stage1// 		break;
+//mdk-stage1// 	    }
+//mdk-stage1// 	    
+//mdk-stage1// 	}
+//mdk-stage1// 
+//mdk-stage1// 	if (one_pass)
+//mdk-stage1// 	    exit(EXIT_SUCCESS);
+//mdk-stage1// 	if (delay_fork) {
+//mdk-stage1// 	    fork_now();
+//mdk-stage1// 	    write_pid();
+//mdk-stage1// 	}
+//mdk-stage1// 	
+//mdk-stage1//     } /* repeat */
+//mdk-stage1//     return 0;
+//mdk-stage1// }
 
-int main(int argc, char *argv[])
+
+
+static void cardmgr_fail(void)
 {
-    int optch, errflg;
-    int i, max_fd, ret, event, pass;
-    int delay_fork = 0;
-    struct timeval tv;
-    fd_set fds;
+	log_message("CM: cardmgr: failed");
+}
 
-    if (access("/var/lib/pcmcia", R_OK) == 0) {
-	stabfile = "/var/lib/pcmcia/stab";
-    } else {
+int cardmgr_call(void)
+{
+	int i, max_fd, ret, event;
+	struct timeval tv;
+	fd_set fds;
+	
 	stabfile = "/var/run/stab";
-    }
-
-    errflg = 0;
-    while ((optch = getopt(argc, argv, "Vqdvofc:m:p:s:")) != -1) {
-	switch (optch) {
-	case 'V':
-	    fprintf(stderr, "cardmgr version " CS_RELEASE "\n");
-	    return 0;
-	    break;
-	case 'q':
-	    be_quiet = 1; break;
-	case 'v':
-	    verbose = 1; break;
-	case 'o':
-	    one_pass = 1; break;
-	case 'f':
-	    delay_fork = 1; break;
-	case 'c':
-	    configpath = strdup(optarg); break;
-#ifdef __linux__
-	case 'd':
-	    do_modprobe = 1; break;
-	case 'm':
-	    modpath = strdup(optarg); break;
-#endif
-	case 'p':
-	    pidfile = strdup(optarg); break;
-	case 's':
-	    stabfile = strdup(optarg); break;
-	default:
-	    errflg = 1; break;
+	
+	log_message("CM: cardmgr/hacked starting, version is " CS_RELEASE);
+	
+	if (load_config()) {
+		cardmgr_fail();
+		return -1;
 	}
-    }
-    if (errflg || (optind < argc)) {
-	fprintf(stderr, "usage: %s [-V] [-q] [-v] [-d] [-o] [-f] "
-		"[-c configpath] [-m modpath]\n               "
-		"[-p pidfile] [-s stabfile]\n", argv[0]);
-	exit(EXIT_FAILURE);
-    }
-
-#ifdef DEBUG
-    openlog("cardmgr", LOG_PID|LOG_PERROR, LOG_DAEMON);
-#else
-    openlog("cardmgr", LOG_PID|LOG_CONS, LOG_DAEMON);
-    close(0); close(1); close(2);
-    if (!delay_fork && !one_pass)
-	fork_now();
-#endif
-    
-    syslog(LOG_INFO, "starting, version is " CS_RELEASE);
-    atexit(&done);
-    putenv("PATH=/bin:/sbin:/usr/bin:/usr/sbin");
-    if (verbose)
-	putenv("VERBOSE=1");
-
-#ifdef __linux__
-    if (modpath == NULL) {
-	if (access("/lib/modules/preferred", X_OK) == 0)
-	    modpath = "/lib/modules/preferred";
-	else {
-	    struct utsname utsname;
-	    if (uname(&utsname) != 0) {
-		syslog(LOG_ERR, "uname(): %m");
-		exit(EXIT_FAILURE);
-	    }
-	    modpath = (char *)malloc(strlen(utsname.release)+14);
-	    sprintf(modpath, "/lib/modules/%s", utsname.release);
+	
+	if (init_sockets()) {
+		cardmgr_fail();
+		return -1;
 	}
-    }
-    if (access(modpath, X_OK) != 0)
-	syslog(LOG_INFO, "cannot access %s: %m", modpath);
-    /* We default to using modprobe if it is available */
-    do_modprobe |= (access("/sbin/modprobe", X_OK) == 0);
-#endif /* __linux__ */
+	
+	/* If we've gotten this far, then clean up pid and stab at exit */
+	write_stab();
     
-    load_config();
-    
-    if (init_sockets() != 0)
-	exit(EXIT_FAILURE);
+	for (i = max_fd = 0; i < sockets; i++)
+		max_fd = (socket[i].fd > max_fd) ? socket[i].fd : max_fd;
 
-    /* If we've gotten this far, then clean up pid and stab at exit */
-    write_pid();
-    write_stab();
-    cleanup_files = 1;
-    
-    if (signal(SIGHUP, catch_signal) == SIG_ERR)
-	syslog(LOG_ERR, "signal(SIGHUP): %m");
-    if (signal(SIGTERM, catch_signal) == SIG_ERR)
-	syslog(LOG_ERR, "signal(SIGTERM): %m");
-    if (signal(SIGINT, catch_signal) == SIG_ERR)
-	syslog(LOG_ERR, "signal(SIGINT): %m");
-#ifdef SIGPWR
-    if (signal(SIGPWR, catch_signal) == SIG_ERR)
-	syslog(LOG_ERR, "signal(SIGPWR): %m");
-#endif
-    
-    for (i = max_fd = 0; i < sockets; i++)
-	max_fd = (socket[i].fd > max_fd) ? socket[i].fd : max_fd;
+	/* First select() call: poll, don't wait */
+	tv.tv_sec = tv.tv_usec = 0;
 
-    /* First select() call: poll, don't wait */
-    tv.tv_sec = tv.tv_usec = 0;
-
-    /* Wait for sockets in setup-pending state to settle */
-    if (one_pass || delay_fork)
+	/* Wait for sockets in setup-pending state to settle */
 	wait_for_pending();
     
-    for (pass = 0; ; pass++) {
+
 	FD_ZERO(&fds);
 	for (i = 0; i < sockets; i++)
-	    FD_SET(socket[i].fd, &fds);
+		FD_SET(socket[i].fd, &fds);
 
-	while ((ret = select(max_fd+1, &fds, NULL, NULL,
-			     ((pass == 0) ? &tv : NULL))) < 0) {
-	    if (errno == EINTR) {
-		handle_signal();
-	    } else {
-		syslog(LOG_ERR, "select(): %m");
-		exit(EXIT_FAILURE);
-	    }
+	if (select(max_fd+1, &fds, NULL, NULL, &tv) < 0) {
+		log_perror("CM: select fails");
+		return -1;
 	}
 
 	for (i = 0; i < sockets; i++) {
-	    if (!FD_ISSET(socket[i].fd, &fds))
-		continue;
-	    ret = read(socket[i].fd, &event, 4);
-	    if ((ret == -1) && (errno != EAGAIN))
-		syslog(LOG_INFO, "read(%d): %m\n", i);
-	    if (ret != 4)
-		continue;
+		if (!FD_ISSET(socket[i].fd, &fds))
+			continue;
+		ret = read(socket[i].fd, &event, 4);
+		if ((ret == -1) && (errno != EAGAIN))
+			log_message("CM: read(%d): %m", i);
+		if (ret != 4)
+			continue;
 	    
-	    switch (event) {
-	    case CS_EVENT_CARD_REMOVAL:
-		socket[i].state = 0;
-		do_remove(i);
-		break;
-	    case CS_EVENT_EJECTION_REQUEST:
-		ret = do_check(i);
-		if (ret == 0) {
-		    socket[i].state = 0;
-		    do_remove(i);
+		switch (event) {
+		case CS_EVENT_CARD_INSERTION:
+		case CS_EVENT_INSERTION_REQUEST:
+			socket[i].state |= SOCKET_PRESENT;
+		case CS_EVENT_CARD_RESET:
+			socket[i].state |= SOCKET_READY;
+			do_insert(i);
+			break;
+		case CS_EVENT_RESET_PHYSICAL:
+			socket[i].state &= ~SOCKET_READY;
+			break;
 		}
-		write(socket[i].fd, &ret, 4);
-		break;
-	    case CS_EVENT_CARD_INSERTION:
-	    case CS_EVENT_INSERTION_REQUEST:
-		socket[i].state |= SOCKET_PRESENT;
-	    case CS_EVENT_CARD_RESET:
-		socket[i].state |= SOCKET_READY;
-		do_insert(i);
-		break;
-	    case CS_EVENT_RESET_PHYSICAL:
-		socket[i].state &= ~SOCKET_READY;
-		break;
-	    case CS_EVENT_PM_SUSPEND:
-		do_suspend(i);
-		break;
-	    case CS_EVENT_PM_RESUME:
-		do_resume(i);
-		break;
-	    }
 	    
 	}
 
-	if (one_pass)
-	    exit(EXIT_SUCCESS);
-	if (delay_fork) {
-	    fork_now();
-	    write_pid();
-	}
+	return 0;
 	
-    } /* repeat */
-    return 0;
 }

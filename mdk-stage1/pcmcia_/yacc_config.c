@@ -1,6 +1,3 @@
-#ifndef lint
-static char yysccsid[] = "@(#)yaccpar	1.9 (Berkeley) 02/21/93";
-#endif
 #define YYBYACC 1
 #define YYMAJOR 1
 #define YYMINOR 9
@@ -45,10 +42,10 @@ static char yysccsid[] = "@(#)yaccpar	1.9 (Berkeley) 02/21/93";
 #include <syslog.h>
 #include <sys/types.h>
 
-#include <pcmcia/cs_types.h>
-#include <pcmcia/cs.h>
-#include <pcmcia/cistpl.h>
-#include <pcmcia/ds.h>
+#include <pcmcia_/cs_types.h>
+#include <pcmcia_/cs.h>
+#include <pcmcia_/cistpl.h>
+#include <pcmcia_/ds.h>
     
 #include "cardmgr.h"
 
@@ -427,6 +424,7 @@ void main(int argc, char *argv[])
 #define YYREJECT goto yyabort
 #define YYACCEPT goto yyaccept
 #define YYERROR goto yyerrlab
+int yylex(void);
 int
 yyparse()
 {
@@ -452,7 +450,7 @@ yyparse()
     *yyssp = yystate = 0;
 
 yyloop:
-    if (yyn = yydefred[yystate]) goto yyreduce;
+    if ((yyn = yydefred[yystate])) goto yyreduce;
     if (yychar < 0)
     {
         if ((yychar = yylex()) < 0) yychar = 0;
@@ -492,10 +490,6 @@ yyloop:
         goto yyreduce;
     }
     if (yyerrflag) goto yyinrecovery;
-#ifdef lint
-    goto yynewerror;
-#endif
-yynewerror:
     yyerror("syntax error");
 #ifdef lint
     goto yyerrlab;

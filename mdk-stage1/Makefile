@@ -152,12 +152,12 @@ DIRS = dietlibc
 endif
 DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt ppp/pppd rp-pppoe/src
 ifeq (i386,$(ARCH))
-DIRS += pcmcia
+DIRS += pcmcia_
 endif
 
 
 ifeq (i386,$(ARCH))
-GLIBC_PCMCIA_LIB = pcmcia/libpcmcia.a
+GLIBC_PCMCIA_LIB = pcmcia_/libpcmcia.a
 DIETLIBC_PCMCIA_LIB = $(subst .a,-DIET.a,$(GLIBC_PCMCIA_LIB))
 PCMCIA_LIB = $($(L)_PCMCIA_LIB)
 PCMCIA_DEFS = -DENABLE_PCMCIA

@@ -1,9 +1,9 @@
 /*
  * Guillaume Cottenceau (gc@mandrakesoft.com)
  *
- * Copyright 2000 MandrakeSoft
+ * Copyright 2000-2001 MandrakeSoft
  *
- * View the homepage: http://us.mandrakesoft.com/~gc/html/stage1.html
+ * View the homepage: http://people.mandrakesoft.com/~gc/html/stage1.html
  *
  *
  * This software may be freely redistributed under the terms of the GNU
@@ -48,7 +48,7 @@
 #include "insmod.h"
 
 #ifdef ENABLE_PCMCIA
-#include "pcmcia/pcmcia.h"
+#include "pcmcia_/pcmcia.h"
 #endif
 
 #ifndef DISABLE_CDROM
@@ -268,6 +268,20 @@ static void expert_third_party_modules(void)
 static void handle_pcmcia(char ** pcmcia_adapter)
 {
 #ifdef ENABLE_PCMCIA
+	char buf[50];
+	int fd = open("/proc/version", O_RDONLY);
+	int size;
+	if (fd == -1) 
+		fatal_error("could not open /proc/version");
+	size = read(fd, buf, sizeof(buf));
+	buf[size-1] = '\0';   // -1 to eat the \n
+	close(fd);
+	buf[17] = '\0';       // enough to extract `2.2'
+	if (ptr_begins_static_str(buf+14, "2.2")) {
+		stg1_error_message("We now use kernel pcmcia support and this won't work with a 2.2 kernel.");
+		return;
+	}
+
 	*pcmcia_adapter = pcmcia_probe();
 	if (!*pcmcia_adapter) {
 		log_message("no pcmcia adapter found");

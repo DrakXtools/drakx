@@ -132,7 +132,7 @@ extern FILE *yyin, *yyout;
 		} \
 	while ( 0 )
 
-#define unput(c) yyunput( c, yytext_ptr )
+//mdk-stage1// #define unput(c) yyunput( c, yytext_ptr )
 
 /* The following is because we cannot portably get our hands on size_t
  * (without autoconf's help, which isn't available because we want
@@ -554,8 +554,8 @@ char *yytext;
 #include <glob.h>
 #define src 1
 
-#include <pcmcia/cs_types.h>
-#include <pcmcia/cs.h>
+#include <pcmcia_/cs_types.h>
+#include <pcmcia_/cs.h>
 
 #include "yacc_config.h"
 
@@ -582,7 +582,7 @@ extern int yywrap YY_PROTO(( void ));
 #endif
 
 #ifndef YY_NO_UNPUT
-static void yyunput YY_PROTO(( int c, char *buf_ptr ));
+//mdk-stage1// static void yyunput YY_PROTO(( int c, char *buf_ptr ));
 #endif
 
 #ifndef yytext_ptr
@@ -1367,49 +1367,49 @@ yy_state_type yy_current_state;
 	}
 
 
-#ifndef YY_NO_UNPUT
-#ifdef YY_USE_PROTOS
-static void yyunput( int c, register char *yy_bp )
-#else
-static void yyunput( c, yy_bp )
-int c;
-register char *yy_bp;
-#endif
-	{
-	register char *yy_cp = yy_c_buf_p;
-
-	/* undo effects of setting up yytext */
-	*yy_cp = yy_hold_char;
-
-	if ( yy_cp < yy_current_buffer->yy_ch_buf + 2 )
-		{ /* need to shift things up to make room */
-		/* +2 for EOB chars. */
-		register int number_to_move = yy_n_chars + 2;
-		register char *dest = &yy_current_buffer->yy_ch_buf[
-					yy_current_buffer->yy_buf_size + 2];
-		register char *source =
-				&yy_current_buffer->yy_ch_buf[number_to_move];
-
-		while ( source > yy_current_buffer->yy_ch_buf )
-			*--dest = *--source;
-
-		yy_cp += (int) (dest - source);
-		yy_bp += (int) (dest - source);
-		yy_current_buffer->yy_n_chars =
-			yy_n_chars = yy_current_buffer->yy_buf_size;
-
-		if ( yy_cp < yy_current_buffer->yy_ch_buf + 2 )
-			YY_FATAL_ERROR( "flex scanner push-back overflow" );
-		}
-
-	*--yy_cp = (char) c;
-
-
-	yytext_ptr = yy_bp;
-	yy_hold_char = *yy_cp;
-	yy_c_buf_p = yy_cp;
-	}
-#endif	/* ifndef YY_NO_UNPUT */
+//mdk-stage1// #ifndef YY_NO_UNPUT
+//mdk-stage1// #ifdef YY_USE_PROTOS
+//mdk-stage1// static void yyunput( int c, register char *yy_bp )
+//mdk-stage1// #else
+//mdk-stage1// static void yyunput( c, yy_bp )
+//mdk-stage1// int c;
+//mdk-stage1// register char *yy_bp;
+//mdk-stage1// #endif
+//mdk-stage1// 	{
+//mdk-stage1// 	register char *yy_cp = yy_c_buf_p;
+//mdk-stage1// 
+//mdk-stage1// 	/* undo effects of setting up yytext */
+//mdk-stage1// 	*yy_cp = yy_hold_char;
+//mdk-stage1// 
+//mdk-stage1// 	if ( yy_cp < yy_current_buffer->yy_ch_buf + 2 )
+//mdk-stage1// 		{ /* need to shift things up to make room */
+//mdk-stage1// 		/* +2 for EOB chars. */
+//mdk-stage1// 		register int number_to_move = yy_n_chars + 2;
+//mdk-stage1// 		register char *dest = &yy_current_buffer->yy_ch_buf[
+//mdk-stage1// 					yy_current_buffer->yy_buf_size + 2];
+//mdk-stage1// 		register char *source =
+//mdk-stage1// 				&yy_current_buffer->yy_ch_buf[number_to_move];
+//mdk-stage1// 
+//mdk-stage1// 		while ( source > yy_current_buffer->yy_ch_buf )
+//mdk-stage1// 			*--dest = *--source;
+//mdk-stage1// 
+//mdk-stage1// 		yy_cp += (int) (dest - source);
+//mdk-stage1// 		yy_bp += (int) (dest - source);
+//mdk-stage1// 		yy_current_buffer->yy_n_chars =
+//mdk-stage1// 			yy_n_chars = yy_current_buffer->yy_buf_size;
+//mdk-stage1// 
+//mdk-stage1// 		if ( yy_cp < yy_current_buffer->yy_ch_buf + 2 )
+//mdk-stage1// 			YY_FATAL_ERROR( "flex scanner push-back overflow" );
+//mdk-stage1// 		}
+//mdk-stage1// 
+//mdk-stage1// 	*--yy_cp = (char) c;
+//mdk-stage1// 
+//mdk-stage1// 
+//mdk-stage1// 	yytext_ptr = yy_bp;
+//mdk-stage1// 	yy_hold_char = *yy_cp;
+//mdk-stage1// 	yy_c_buf_p = yy_cp;
+//mdk-stage1// 	}
+//mdk-stage1// #endif	/* ifndef YY_NO_UNPUT */
 
 
 #ifdef __cplusplus
@@ -2031,6 +2031,7 @@ static int do_eof(void)
     The main entry point... returns -1 if the file can't be accessed.
 
 ======================================================================*/
+int yyparse(void);
 
 int parse_configfile(char *fn)
 {
