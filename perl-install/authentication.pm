@@ -147,9 +147,9 @@ sub set {
 	update_ldap_conf(
 			 host => $authentication->{AD_server},
 			 base => domain_to_ldap_domain($authentication->{AD_domain}),
-			 nss_base_shadow => "$authentication->{AD_users_db}?one",
-			 nss_base_passwd => "$authentication->{AD_users_db}?one",
-			 nss_base_group => "$authentication->{AD_users_db}?one",
+			 nss_base_shadow => "$authentication->{AD_users_db}?sub",
+			 nss_base_passwd => "$authentication->{AD_users_db}?sub",
+			 nss_base_group => "$authentication->{AD_users_db}?sub",
 
 			 ssl => $ssl,
 			 sasl_mech => $authentication->{sub_kind} eq 'kerberos' ? 'GSSAPI' : '',
@@ -192,13 +192,12 @@ sub set {
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
-	}) if !$::isInstall; #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
-    } elsif ($kind eq 'winbind' || $kind eq 'AD' && $authentication->{subkind} eq 'SFU') {
+	}) if !$::isInstall; 
+#- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
+    } elsif ($kind eq 'winbind') {
 	my $domain = uc $netc->{WINDOMAIN};
-
-	configure_krb5_for_AD($authentication) if $kind eq 'AD';
-
-	$in->do_pkgs->install('samba-winbind', if_($kind eq 'AD', 'pam_krb5'));
+	
+	$in->do_pkgs->install('samba-winbind');
 	set_nsswitch_priority('winbind');
 	set_pam_authentication('winbind');
 
@@ -208,8 +207,28 @@ sub set {
 	mkdir_p("$::prefix/home/$domain");
 	
 	#- defer running smbpassword until the network is up
+
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'smbpasswd', '-j', $domain, '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
+	});
+    } elsif ($kind eq 'AD' && $authentication->{subkind} eq 'winbind') {
+
+	my $domain = uc $netc->{WINDOMAIN};
+	my $realm = $authentication->{AD_domain};
+
+	configure_krb5_for_AD($authentication);
+	$in->do_pkgs->install('samba-winbind', 'pam_krb5');
+	set_nsswitch_priority('winbind');
+	set_pam_authentication('winbind');
+
+    
+	require network::smb;
+	network::smb::write_smb_ads_conf($domain,$realm);
+	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
+	mkdir_p("$::prefix/home/$domain");
+	
+	$when_network_is_up->(sub {
+	    run_program::rooted($::prefix, 'net','ads','join', '-U', $authentication->{winuser} . '%' . $authentication->{winpass});
 	});
     }
 }
@@ -357,8 +376,8 @@ sub configure_krb5_for_AD {
     krb5_conf_update($krb5_conf_file,
 		     libdefaults => (
 				     default_realm => $uc_domain,
-				     dns_lookup_realm => $authentication->{AD_server} ? 'true' : 'false',
-				     dns_lookup_kdc => $authentication->{AD_server} ? 'true' : 'false',
+				     dns_lookup_realm => $authentication->{AD_server} ? 'false' : 'true',
+				     dns_lookup_kdc => $authentication->{AD_server} ? 'false' : 'true',
 				    ));
 
     my @sections = (
@@ -450,6 +469,5 @@ sub krb5_conf_update {
     MDK::Common::File::output($file, $s);
 
 }
-
 1;
 
