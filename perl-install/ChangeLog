@@ -1,3 +1,279 @@
+2003/08/25  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/25  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Add /etc/modules for local hardware config.
+
+2003/08/25  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Fixed recognition of installed parallel HPOJ-driven MF
+	devices.
+
+	* printer/detect.pm: Removed use of "parport_probe", we do not need to
+	support kernel 2.2.x
+	any more.
+
+2003/08/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: fix drakconnect not working on console (found by
+	poulpy) due to having
+	killed pre_func() which used to set a background pixmap in the old
+	days, thus the bogus test that went in.
+
+	* standalone/drakfloppy: this tool really is gtk2 ported, so do not trash
+	languages not handled
+	by gtk+-1.x
+
+2003/08/24  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po, share/po/zh_CN.po, share/po/fa.po, share/po/uk.po,
+	share/po/eu.po: updated Basque, Farsi, Hungarian, Ukrainian and Chinese
+	files
+
+2003/08/24  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm: Adapted version mark in HPOJ config files to the
+	current HPOJ.
+	  - Fixed expert/normal mode switch (it will perhaps be removed, but a
+	working switch makes the further development easier).
+	  - Added connectionstr() function which produces a human-readable
+	  string for the connection type, needed for new main window.
+	  - Added missing parantheses (there was a warning complaining about
+	this).
+
+	* printer/printerdrake.pm: Made the HP DeskJet 450 really being recognized
+	as a printer needing HPOJ.
+	Added HP DeskJet 450 to the models which need HPOJ.
+	  - Fixed expert/normal mode switch (it will perhaps be removed, but a
+	working switch makes the further development easier).
+	  - Added connectionstr() function which produces a human-readable
+	  string for the connection type, needed for new main window.
+	  - Added missing parantheses (there was a warning complaining about
+	this).
+
+2003/08/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: require a perl-Gtk2 that properly handle perl
+	exceptions in gtk+ callbacks
+	typo fix
+
+2003/08/23  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2003/08/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po, share/po/zh_CN.po, share/po/eu.po: updated pot file
+	updated Basque, Hungarian and Chinese files
+
+	* share/po/ta.po, share/po/pt_BR.po, share/po/fr.po, share/po/de.po,
+	share/po/cy.po, share/po/lv.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/he.po, share/po/cs.po, share/po/fi.po, share/po/ca.po,
+	share/po/ms.po, share/po/ja.po, share/po/bs.po, share/po/bg.po,
+	share/po/th.po, share/po/mt.po, share/po/el.po, share/po/et.po,
+	share/po/wa.po, share/po/pl.po, share/po/fa.po, share/po/uk.po,
+	share/po/uz@Cyrl.po, share/po/nl.po, share/po/is.po, share/po/it.po,
+	share/po/sq.po, share/po/es.po, share/po/id.po, share/po/ko.po,
+	share/po/tr.po, share/po/be.po, share/po/hr.po, share/po/vi.po,
+	share/po/sr@Latn.po, share/po/az.po, share/po/ar.po, share/po/nb.po,
+	share/po/eo.po, share/po/gl.po, share/po/sl.po, share/po/ru.po,
+	share/po/pt.po, share/po/sk.po, share/po/af.po, share/po/tg.po,
+	share/po/lt.po, share/po/ga.po, share/po/zh_TW.po, share/po/da.po,
+	share/po/ro.po, share/po/uz.po, share/po/sr.po: updated pot file
+
+2003/08/23  Till Kamppeter  <till at mandrakesoft.com>
+
+	* handle_configs.pm: if_($A, $B) got extremely slow, replaced by ( $A ? $B
+	: () ).
+
+2003/08/23  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/08/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: as discussed with david, gc, laurent & pixel early this week,
+	since
+	gtk+ dialogs are HIG-ed and since most drakxtools' explicit gtk+
+	windows follow cancel/ok order for now, let implicit windows (that is
+	interactive written ones) follow the same order in standalone mode.
+	after release, we'll have to make ugtk2 handle one more abstractions,
+	that is taking some buttons callbacks, add buttons that have callbacks
+	and pack them in kde or gnome order depending of interface team
+	decision or maybe of runtime detection of desktop.
+
+	* standalone/icons/non-editable.png: add new icon for drakperm
+
+	* standalone/drakperm: rename $treeModel as $model since it really is a
+	ListModel, not a
+	TreeModel anymore (cosmetic)
+	  - disable up button when selected rule is the first one
+	  - disable down button when selected rule is the latest one or when
+	next rule is non editable
+	always add newly created setting at top of editable settings so that
+	we're we can sort them since they're no non editable items between old
+	& new editable ones
+	once we start to alter settings ordering, we need to save it on exit;
+	so just tell it to drakperm
+	  - fix gtk bug on moving down line
+	  - merge moving up & down callbacks
+	  - we do not have a hierarchy, so just use a s/tree/list/
+
+	* share/po/fr.po: a few more translations
+	translate last remaining non translated languages with google help
+
+	* drakxtools.spec: 9.2-0.35mdk
+	9.2-0.34mdk
+
+2003/08/22  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: typo fix s/succeed/succeeded/
+
+2003/08/22  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: updated Spanish translations
+
+2003/08/22  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: add erwan
+
+	* share/po/fr.po: fix titi
+
+	* interactive/gtk.pm: fix keyboard browsing in treeviews not always
+	centering on
+	selected row (workaround gtk2 bug not honouring centering on the
+	given row if node was closed by updating ui before requesting the
+	scrolling to the cell)
+
+2003/08/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+	updated pot file
+
+	* share/po/ru.po: updated Russian file
+	updated pot file
+
+	* share/po/ta.po, share/po/pt_BR.po, share/po/fr.po, share/po/de.po,
+	share/po/cy.po, share/po/lv.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/hu.po, share/po/he.po, share/po/fi.po, share/po/ca.po,
+	share/po/ms.po, share/po/ja.po, share/po/bs.po, share/po/zh_CN.po,
+	share/po/bg.po, share/po/th.po, share/po/eu.po, share/po/mt.po,
+	share/po/el.po, share/po/et.po, share/po/wa.po, share/po/pl.po,
+	share/po/fa.po, share/po/uk.po, share/po/uz@Cyrl.po, share/po/nl.po,
+	share/po/is.po, share/po/it.po, share/po/sq.po, share/po/es.po,
+	share/po/id.po, share/po/ko.po, share/po/tr.po, share/po/be.po,
+	share/po/hr.po, share/po/vi.po, share/po/sr@Latn.po, share/po/az.po,
+	share/po/ar.po, share/po/eo.po, share/po/gl.po, share/po/sl.po,
+	share/po/pt.po, share/po/sk.po, share/po/af.po, share/po/tg.po,
+	share/po/lt.po, share/po/ga.po, share/po/zh_TW.po, share/po/da.po,
+	share/po/ro.po, share/po/uz.po, share/po/sr.po: updated pot file
+
+	* lang.pm: use "Sans" as default font name
+
+	* share/po/cs.po: updated po file
+	updated pot file
+
+2003/08/22  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: fix crash on file select of "Other"
+	finish custom cron configuration - normal users can now do cron backups
+
+2003/08/22  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/detect.pm: Adapted to scli 0.2.12.
+
+	* printer/printerdrake.pm, printer/main.pm: Support for the new
+	"ptal://..." (two slashes) URIs of the new HPOJ.
+
+2003/08/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* interactive/gtk.pm (ask_fromW) split $set_advanced into $set_advanced
+	and
+	$set_advanced_raw to fix drakconnect "failling" to detect network
+	interfaces in standalone mode when in expert mode
+
+	* standalone/draksec: translate default value in help tooltips too
+	CJK fixes: use newly introduced Gtk2::WrappedLabel package
+
+	* network/drakfirewall.pm: offer samba in services list
+
+	* standalone/drakperm: renew drakperm gui (interface team feedback):
+	  - indicate if current setting is editable or not
+	  - only display current security level, editable settings or both
+
+	* ugtk2.pm: CJK fixes: use newly introduced Gtk2::WrappedLabel package
+	introduce Gtk2::WrappedLabel to factorize fixed labels for CJK
+	languages
+	(gtkset_line_wrap) export it
+
+	* share/po/fr.po: update french translation
+	minor fix (due to ala latex format used in draksec)
+	update french translation
+	update french translation
+	update french translation
+	translate draksec main label
+
+2003/08/21  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: 
+	  - more use info in load_firmware_floppy
+	  - catch no floppy in drive error
+	  - catch wizcancel
+	  - add '-e 1' pppoa option for speedtouch USB
+	  - N_ instead of N, won't translate twice (guillaume has the greatest
+	member)
+
+	* network/modem.pm: fix no winmodem message/behavior
+
+2003/08/21  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nl.po: updated Dutch file
+
+	* network/adsl.pm: s/alcatel/Alcatel/
+
+	* share/po/zh_CN.po: updated Chinese file
+
+	* share/po/fr.po: updated French file
+
+	* share/po/cs.po: updated Czech file
+
+2003/08/21  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/resize_ntfs.pm: display the error returned by ntfsresize (need
+	i18n though)
+
+	* standalone/draksec: fix english (thanks to Reinout van Schouwen)
+
+	* bootloader.pm: have bootsplash also for smp & enterprise kernels
+
+	* ugtk2.pm: only access $::o->{mouse}{unsafe} during install
+
+	* modules.pm: don't care if insmod'ing ohci1394 fail (bug #1972)
+
+2003/08/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm: 
+	  - (gtkset_line_wrap) introduce a Gtk2::Label wrapper for
+	set_line_wrap()
+	  - (create_box_with_title)
+	  o factorize label creation
+	  o fix label wrongly wrap cjk languages by enabling its wrapping
+	    (real bugs is that GtkLabel does not really know its geometry: see
+	    gtk+ bugs #118045, #118046, #101968 and #104188)
+	move ugtk2 related language fixes into ugtk2 jail
+
+	* harddrake/sound.pm: typo fixes from Arpad Biro
+
+	* standalone.pm: move ugtk2 related language fixes into ugtk2 jail
+
+	* standalone/harddrake2: workaround gtk bug #118047
+
 2003/08/21  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: updated to current pot
@@ -19403,7 +19679,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.821 2003/08/21 01:10:11 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.822 2003/08/21 18:00:38 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
