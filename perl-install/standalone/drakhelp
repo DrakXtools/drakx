@@ -16,7 +16,7 @@ die "Usage: drakhelp <help_path>" if @ARGV != 1;
 my $in = interactive->vnew;
 
 my $locale = lang::read('', $>);
-printf("lang is %s\n",$locale->{lang});
+printf("lang is %s\n", $locale->{lang});
 $locale->{lang} = 'en' unless member($locale->{lang}, qw(en es fr));
 my $path2help = "/usr/share/doc/mandrake/" . $locale->{lang} . "/";
 my $path = $ARGV[0] =~ /^http|^www/ ? $ARGV[0] : $path2help . $ARGV[0];

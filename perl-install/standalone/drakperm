@@ -16,7 +16,8 @@ local $_ = join '', @ARGV;
 my ($default_perm_level) = "level ".chomp_(`cat /etc/sysconfig/msec | grep SECURE_LEVEL= |cut -d= -f2`);
 my $perm_path       = '/usr/share/msec/';
 my $local_path = '/etc/security/msec/';
-my %perm = ( 'level 1' => $perm_path.'perm.1',
+my %perm = ( 
+	     'level 1' => $perm_path.'perm.1',
              'level 2' => $perm_path.'perm.2',
              'level 3' => $perm_path.'perm.3',
              'level 4' => $perm_path.'perm.4',
@@ -367,7 +368,7 @@ sub row_setting_dialog {
                                    $vbox;
                                } keys %rights),
                                gtkpack(Gtk2::VBox->new(0,5),
-                                       Gtk2::Label->new (' '),
+                                       Gtk2::Label->new(' '),
                                        $suid,
                                        $gid,
                                        $sticky,

@@ -277,7 +277,7 @@ sub unselectPackage($$;$) {
     my $state = $packages->{state} ||= {};
     log::l("removing selection on package ".$pkg->fullname);
     my @l = $packages->disable_selected($packages->{rpmdb}, $state, $pkg);
-    log::l("   removed selection on package ".$pkg->fullname. "gives ".join(',', map { scalar $_->fullname } @l));
+    log::l("   removed selection on package " . $pkg->fullname . "gives " . join(',', map { scalar $_->fullname } @l));
     if ($o_otherOnly) {
 	foreach (@l) {
 	    $o_otherOnly->{$_->id} = undef;

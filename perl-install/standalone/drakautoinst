@@ -118,7 +118,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 		wacom => '',
 	      );
 
-    member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [ $_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_\}") ] foreach keys %$o;
+    member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [ $_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_}") ] foreach keys %$o;
 
     my $W = ugtk2->new('$o edition');
     my @box_to_hide;
@@ -167,7 +167,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 							      my $local_page = $nb_pages;
 							      my $function = sub { $notebook->set_page($local_page) };
 							      gtksignal_connect($button, toggled => sub {
-										    $button->get_active() and $function->()
+										    $button->get_active and $function->()
 										});
 							      my $b;
                                          if ($_->[1] ne "") { $b = gtkcreate_img($_->[1]) } else { $b = () };
@@ -258,7 +258,7 @@ sub h2widget {
 							    $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
 					map {
 					    my $e;
-					    $e = h2widget($k->{$_}, "$label\{$_\}");
+					    $e = h2widget($k->{$_}, "$label\{$_}");
 					    [ "$_ : ", $e ] } @list_keys
 									    ),
 						       )
@@ -270,7 +270,7 @@ sub h2widget {
 						$field eq '' and return undef;
 						gtkpack__($vb,
 							  $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
-										      [ "$field : ", h2widget($ref_local_k, "$label\{$field\}") ])
+										      [ "$field : ", h2widget($ref_local_k, "$label\{$field}") ])
 							 );
 						@$widget_list2 = @widget_list;
 					    },
@@ -278,7 +278,7 @@ sub h2widget {
 			 );
 	} else {
 	    $w = create_packtable({ col_spacings => 10, row_spacings => 3 },
-				  map { create_entry_element($k->{$_}, "$label\{$_\}", $_) } @list_keys
+				  map { create_entry_element($k->{$_}, "$label\{$_}", $_) } @list_keys
 				 )
 	}
     } elsif (ref($k) =~ /ARRAY/) {
@@ -288,13 +288,13 @@ sub h2widget {
 	$w = gtkpack_(new Gtk2::VBox(0,0),
 		      1, create_scrolled_window(
 					      gtkpack__($vb = new Gtk2::VBox(0,5),
-							map { $i++; $widget_list[$i] = h2widget($_, "$label\[$i\]") } @$k,
+							map { $i++; $widget_list[$i] = h2widget($_, "$label\[$i]") } @$k,
 						       )
 					     ),
 		      control_buttons($k->[0],
 				      sub { my ($vb, $widget_list2, $ref_local_k, $i) = @_;
 					    my @widget_list = @$widget_list2;
-					    gtkpack__($vb, $widget_list[$i] = h2widget($ref_local_k, "$label\[$i\]"));
+					    gtkpack__($vb, $widget_list[$i] = h2widget($ref_local_k, "$label\[$i]"));
 					    @$widget_list2 = @widget_list;
 					},
 				      $vb, \$i, \@widget_list)
@@ -311,9 +311,9 @@ sub create_entry_element {
     my ($text, $value, $label) = @_;
     my $e;
     if (ref $text =~ /HASH/) {
-	return ([ "$label : ", h2widget($text, $label) ]);
+	return [ "$label : ", h2widget($text, $label) ];
     } elsif (ref $text =~ /ARRAY/) {
-	return ([ "$label : ", h2widget($text, $label) ]);
+	return [ "$label : ", h2widget($text, $label) ];
     } else {
 	$e = new Gtk2::Entry;
 	$e->{value} = $value;
