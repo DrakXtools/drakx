@@ -154,7 +154,7 @@ gtkadd($window,
 						       if ($in->ask_yesorno(N("Warning"), 
 						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
                                                      N("Do you want to configure it now ?") ])) {
-                                                           lilo_choice();
+                                                           enable_framebuffer();
                                                            #- it would be nice to get available themes for new cur_res here
                                                            $splash_mode = 1
                                                        };
@@ -293,4 +293,42 @@ sub change_image {
     my $boot_pixbuf = gtkcreate_pixbuf($img_file);
     $boot_pixbuf = $boot_pixbuf->scale_simple(300, 200, 'nearest');
     $boot_pic->set_from_pixbuf($boot_pixbuf);
+}
+
+sub enable_framebuffer() {
+    my $vga = Xconfig::resolution_and_depth::from_bios($bootloader->{default_vga});
+    my ($current_entry) = cat_('/proc/cmdline') =~ /^BOOT_IMAGE=(\S+)/;
+    my %entries = (
+                   $current_entry => 1
+                  );
+    local $::isWizard = 1;
+    local $::Wizard_no_previous = 1;
+    local $::Wizard_finished = 1;
+    $::Wizard_title = N("Boot Style Configuration");
+    eval {
+        $in->ask_from(N("Video mode"),
+                      N("Please choose a video mode, it will be applied to each of the boot entries selected below.
+Be sure your video card supports the mode you choose."),
+                      [
+                       { label => N("Video mode"), val => \$vga,
+                         list => [ '', Xconfig::resolution_and_depth::bios_vga_modes() ],
+                         format => \&Xconfig::resolution_and_depth::to_string
+                       },
+                       map {
+                           { text => $_->{label}, val => \$entries{$_->{label}}, type => 'bool' }
+                       } grep { $_->{label} !~ /failsafe|floppy|memtest/ } @{$bootloader->{entries}}
+                      ]);
+        if ($vga) {
+            $vga = $vga->{bios} if ref($vga);
+            while (my ($label, $e) = each %entries) {
+                $e or next;
+                my $entry = find { $_->{label} eq $label } @{$bootloader->{entries}};
+                $entry->{vga} = $vga;
+            }
+            bootloader::install($bootloader, $all_hds);
+        }
+    };
+    die if $@ && $@ !~ /^wizcancel/;
+    $::WizardWindow->destroy;
+    return $vga;
 }
