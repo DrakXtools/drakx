@@ -1,10 +1,11 @@
 
 GRAPHICAL_DESKTOP
-  3 Epplets WMRack WindowMaker blackbox enlightenment ethemes gtk-themes icepref
+  4 WindowMaker
+  3 Epplets WMRack blackbox enlightenment ethemes gtk-themes icepref
     wmakerconf xlockmore
   2 wmnet
   2 GNOME icewm
-  1 lesstif-mwm xbanner
+  1 lesstif-mwm xbanner xfce
 
 GNOME
   4 gnome-tiles gnome-users-guide gdm gnome-applets
@@ -194,7 +195,7 @@ NETWORKING_REMOTE_ACCESS
   1 sftp
 NETWORKING_REMOTE_ACCESS_SERVER
   5 openssh-server
-  1 telnet-server rsh-server 
+  1 telnet-server rsh-server
 
 NETWORKING_DNS
   4 bind-utils 
@@ -205,12 +206,11 @@ NETWORKING_DNS_SERVER
 
 NETWORKING_FILE
   4 samba-client nfs-utils-clients
-  3 am-utils
   2 GNOME gnomba gtm
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 samba
-  3 squid
+  3 squid am-utils
 
 NETWORKING_WWW
   5 lynx
@@ -379,25 +379,24 @@ FILE_TOOLS
   1 xdelta
 
 CONFIG
-  5 drakxtools ldetect
+  4 userdrake linuxconf
+  4 GNOME gnome-linuxconf
   3 webmin
-  3 gfcc ipvsadm linuxconf
-    quota shapecfg timetool userdrake usernet
+  3 gfcc ipvsadm quota shapecfg timetool usernet
   2 control-panel adjtimex isicom xinput timeconfig Bastille-Tk-module
   1 ipxutils
-  4 GNOME gnome-linuxconf
 
 SYSTEM
   5 !GNOME !KDE icewm-light
 
-  5 DrakConf MAKEDEV XFree86 XFree86-75dpi-fonts 
+  5 MAKEDEV XFree86 XFree86-75dpi-fonts 
     at anacron eject gurpmi harddrake kudzu
     linux_logo locales man-pages iputils 
     rpmdrake urpmi Bastille-Curses-module
-  4 fonts-ttf-decoratives fonts-ttf-west_european
+  4 DrakConf fonts-ttf-decoratives fonts-ttf-west_european
     menudrake sndconfig ftp gpm
     hexedit strace rxvt drakfloppy drakfont mandrake_desk rootfiles Bastille
-  4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" || LOCALES"zh_CN" || LOCALES"zh_CN.GB2312" || LOCALES"zh_TW" || LOCALES"zh_TW.Big5" rxvt-CJK
+  4 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" rxvt-CJK
   3 XFree86-100dpi-fonts autofs drakprofile bc
   2 kernel-utils sane acpid tksysv imlib-cfgeditor adns audiofile awesfx fbset sudo
   1 DrakeLogo Mesa xtoolwait fdutils genromfs mailcap usbview pinfo X11R6-contrib 
@@ -405,8 +404,10 @@ SYSTEM
     3 gnome-print gnorpm
 
   BOOKS 
+    5 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
     4 grub-doc lilo-doc
       howto-html-de howto-html-el howto-html-en howto-html-es howto-html-fr howto-html-hr howto-html-hu howto-html-id howto-html-it howto-html-ja howto-html-ko howto-html-pl howto-html-ro howto-html-sl howto-html-sv howto-html-zh
+
 
   5 xcin xa+cv xvnkb FreeWnn ami
   5 GNOME ami-gnome
@@ -424,13 +425,13 @@ SYSTEM
 
   4 LOCALES"tr" || LOCALES"az" XFree86-ISO8859-9 XFree86-ISO8859-9-75dpi-fonts
     LOCALES"lt" || LOCALES"lv" || LOCALES"mi" fonts-type1-baltic
-    LOCALES"ru" || LOCALES"ru_RU.KOI8-R" || LOCALES"uk" XFree86-cyrillic-fonts
+    LOCALES"ru" || LOCALES"uk" XFree86-cyrillic-fonts
     LOCALES"hy" fonts-ttf-armenian
     LOCALES"ja" fonts-ttf-japanese
     LOCALES"ko" fonts-ttf-korean
     LOCALES"he" fonts-hebrew-elmar
-    LOCALES"zh_CN" || LOCALES"zh_CN.GB2312" fonts-ttf-gb2312
-    LOCALES"zh_TW" || LOCALES"zh_TW.Big5" taipeifonts fonts-ttf-big5
+    LOCALES"zh_CN" fonts-ttf-gb2312
+    LOCALES"zh_TW" taipeifonts fonts-ttf-big5
     LOCALES"cs" || LOCALES"hr" || LOCALES"hu" || LOCALES"pl" || LOCALES"ro" || LOCALES"sk" || LOCALES"sl" || LOCALES"sp" || LOCALES"sq" || LOCALES"sr"
       XFree86-ISO8859-2
       XFree86-ISO8859-2-75dpi-fonts
@@ -439,9 +440,6 @@ EMULATORS
   3 wine
   2 BasiliskII BasiliskII-sheepnet xdosemu 
   1 xmame xmess
-
-BOOKS
-  4 man-pages-cs man-pages-de man-pages-es man-pages-fr man-pages-hu man-pages-id man-pages-ja man-pages-ko man-pages-pl man-pages-ru man-pages-zh
 
 INSTALL
   5 pptp-adsl-fr dhcpcd dhcpxd dhcp-client isdn4net isdn4k-utils rp-pppoe pump wireless-tools
