@@ -89,12 +89,13 @@ sub ask_many_from_list($$$$;$) {
       [ map { $$_ } @$val ] : undef;
 }
 
-sub ask_from_entry($$$;$) {
-    my ($o, $title, $message, $def) = @_;
+sub ask_from_entry($$$;$%) {
+    my ($o, $title, $message, $def, %callback) = @_;
 
+    
     $message = ref $message ? $message : [ $message ];
-
-    $o->ask_from_entryW($title, $message, $def);
+    $o->ask_from_entries($title, $message, [$def], %callback);
+#    $o->ask_from_entryW($title, $message, $def);
 }
 
 sub ask_from_entries($$$$;$%) {

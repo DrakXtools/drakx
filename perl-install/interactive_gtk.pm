@@ -149,8 +149,12 @@ sub ask_from_entries_refW {
 	$entry->signal_connect(key_press_event => sub {
 	   my ($w, $e) = @_;
 	   my $c = chr $e->{keyval};
-	   &$go_to_next if $c eq "\x8d";
-	   });
+	   if ($c eq "\x8d")
+	     {
+		 $w->signal_emit_stop("key_press_event");
+	     }
+	    ;
+	    });
 	
 	$entry->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
 	$entry->set_visibility(0) if $val->[$i]{hidden};
