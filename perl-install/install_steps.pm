@@ -281,7 +281,7 @@ sub choosePartitionsToFormat($$) {
 
 sub formatMountPartitions {
     my ($o) = @_;
-    fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix});
+    fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, undef);
 }
 
 #------------------------------------------------------------------------------

@@ -458,8 +458,8 @@ sub formatMount_part {
 }
 
 sub formatMount_all {
-    my ($raids, $fstab, $prefix, $o_wait_message) = @_;
-    formatMount_part($_, $raids, $fstab, $prefix, $o_wait_message) 
+    my ($raids, $fstab, $prefix, $wait_message) = @_;
+    formatMount_part($_, $raids, $fstab, $prefix, $wait_message) 
       foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
