@@ -50,9 +50,9 @@ following:
 
   - Normal: choose this if you intend to use your machine primarily for
     everyday use (office work, graphics manipulation and so on). Do not
-    expect any compiler, development utility et al. installed.
+    expect any compiler, development utility, etc. installed.
 
-  - Development: as its name says. Choose this if you intend to use your
+  - Development: as its name says, choose this if you intend to use your
     machine primarily for software development. You will then have a complete
     collection of software installed in order to compile, debug and format
     source code, or create software packages.
