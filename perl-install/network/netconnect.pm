@@ -432,7 +432,7 @@ killall pppd
                         $modem ||= $netcnx->{$netcnx->{type}};
                         $modem->{device} ||= $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
-                        $modem->{Gateway} ||= $l{Gateway};
+                        $modem->{$_} ||= $l{$_} foreach qw (Gateway IPAddr SubnetMask);
                         $modem->{connection} ||= $l{Name};
                         $modem->{domain} ||= $l{Domain};
                         ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
@@ -443,6 +443,7 @@ killall pppd
                         foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
                             /NAME=(['"]?)(.*)\1/ and $modem->{login} ||= $2;
                         }
+                        $modem->{login} ||= $l{Username};
                         my $secret = network::tools::read_secret_backend();
                         foreach (@$secret) {
                             $modem->{passwd} ||= $_->{passwd} if $_->{login} eq $modem->{login};
@@ -450,7 +451,9 @@ killall pppd
                         #my $secret = network::tools::read_secret_backend();
                         #my @cnx_list = map { $_->{server} } @$secret;
                         $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
-                          
+                        $modem->{auto_gateway} ||= $modem->{Gateway} eq '0.0.0.0' ? N("Automatic") : N("Manual");
+                        $modem->{auto_ip} ||=  $modem->{IPAdddr} eq '0.0.0.0' ? N("Automatic") : N("Manual");
+                        $modem->{auto_dns} ||= defined $modem->{dns1} || defined $modem->{dns2} ? N("Manual") : N("Automatic");
                     },
                     name => N("Dialup: account options"), 
                     data => sub {
