@@ -51,9 +51,29 @@ my ($partitionEntry_format, $partitionEntry_fields) = list2kv(
   a72   => 'name',
 );
 
-$_ = join('', @$_) foreach $main_format, $partitionEntry_format;
+my ($guid_format, $guid_fields) = list2kv(
+  N     => 'time_low',
+  n     => 'time_mid',
+  n     => 'time_hi_and_version',
+  n     => 'clock_seq',
+  a6    => 'node',
+);
+
+$_ = join('', @$_) foreach $main_format, $partitionEntry_format, $guid_format;
 
 my $magic = "EFI PART";
+
+sub generate_guid {
+	local *F;
+	open F, devices::make("random") or die "Could not open /dev/random for GUID generation";
+	read F, $tmp, psizeof($guid_format);
+	close F;
+	
+	my %guid; @guid{@$guid_fields} = unpack $guid_format, $tmp;
+	$guid{clock_seq} = ($guid{clock_seq} & 0x3fff) | 0x8000;
+	$guid{time_hi_and_version} = ($guid{time_hi_and_version} & 0x0fff) | 0x4000;
+	pack($guid_format, @guid{@$guid_fields});
+}
 
 sub crc32 {
     my ($buffer) = @_;
@@ -147,7 +167,7 @@ sub write {
 
     foreach (@$pt) {
 	$_->{ending} = $_->{start} + $_->{size} - 1;
-	$_->{guid} ||= 'TODO';
+	$_->{guid} ||= generate_guid;
 	$_->{gpt_type} = $gpt_types{$_->{type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
     my $partitionEntries = join('', map {
@@ -219,8 +239,8 @@ sub info {
 	alternateLBA => $hd->{totalsectors} - 1,
 	firstUsableLBA => $nb_sect + 2,
 	lastUsableLBA => $hd->{totalsectors} - $nb_sect - 2,
-	guid => 'TODO',
-        partitionEntriesLBA => 2,
+	guid => generate_guid,
+	partitionEntriesLBA => 2,
 	nbPartitions => $nb_sect * 512 / psizeof($partitionEntry_format),
 	partitionEntrySize => psizeof($partitionEntry_format),
     };
