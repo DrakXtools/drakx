@@ -34,7 +34,7 @@ our @tree =
 	 sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }, 1 ],
 	["TV","Tvcard", "tv.png", "/usr/bin/XawTV", 
 	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_VIDEO' } @devices}, 0 ],
-	["MULTIMEDIA_OTHER","Other MultiMedia devices", "tv.png", "", 
+	["MULTIMEDIA_OTHER","Other MultiMedia devices", "multimedia.png", "", 
 	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_OTHER' } @devices}, 0 ],
 	["AUDIO","Soundcard", "sound.png", "$sbindir/draksound", 
 	 sub { grep { $_->{media_type} =~ 'MULTIMEDIA_AUDIO' } @devices}, 0 ],
