@@ -186,13 +186,13 @@ my %xim = (
 	XIM_PROGRAM => 'chinput',
 	XMODIFIERS => '"@im=Chinput"',
 	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
   'zh_CN.UTF-8' => {
 	ENC => 'utf8',
 	XIM => 'Chinput',
 	XIM_PROGRAM => 'chinput',
 	XMODIFIERS => '"@im=Chinput"',
 	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
   },
   'ko' => {
 	ENC => 'kr',
@@ -696,7 +696,7 @@ sub write_langs {
 }
 
 sub write { 
-    my ($prefix, $lang, $user_only) = @_;
+    my ($prefix, $lang, $user_only, $dont_touch_kde_files) = @_;
 
     $lang or return;
 
@@ -768,7 +768,7 @@ sub write {
 	    		      StandardFont => charset2kde_font($charset, 0),
 	    		  ));
 	}
-    };
+    } if !$dont_touch_kde_files;
 }
 
 sub bindtextdomain() {
