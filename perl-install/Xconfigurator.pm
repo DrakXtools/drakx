@@ -303,25 +303,31 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$_->{memory} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
 	$_->{memory} = 16384, delete $_->{depth} if $_->{chipset} =~ /PERMEDIA/ && $_->{memory} <= 1024;
     }
-    #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
-    $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
-			 $card->{identifier} =~ /Rage X[CL]/ ||
-			 $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
-                         #- NOT WORKING $card->{type} =~ /Intel 810/);
-    $card->{Utah_glx} = '' if arch() =~ /ppc/; #- No 3D XFree 3.3 for PPC
-    #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
-    $card->{Utah_glx_EXPERIMENTAL} = ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2?/ || #- all RIVA/GeForce comes from NVIDIA ...
-				      $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||   #- and may freeze (gltron).
-				      $card->{identifier} =~ /[nN]Vidia.*Vanta/ ||
-				      $card->{identifier} =~ /[nN]Vidia.*GeForce/ ||
-				      $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
-				      $card->{identifier} =~ /[nN]Vidia.*Quadro/ ||
-				      $card->{identifier} =~ /Riva.*128/ || # moved here as not working correctly enough
-				      $card->{identifier} =~ /S3.*Savage.*3D/ || #- only this one is evoluting.
-				      $card->{identifier} =~ /Rage Mobility [PL]/ ||
-				      $card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
-				      $card->{identifier} =~ /SiS.*6C?236/ ||
-				      $card->{identifier} =~ /SiS.*630/);
+    if (availableRamMB() <= 800 || arch() =~ /ppc/) {
+	#- No 3D XFree 3.3 for PPC
+	#- and no Utah GLX if more than 800 Mb (server, or kernel-enterprise, Utha GLX does not work with latest).
+	$card->{Utah_glx} = $card->{Utah_glx_EXPERIMENTAL} = '';
+    } else {
+	#- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
+	$card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
+			     $card->{identifier} =~ /Rage X[CL]/ ||
+			     $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
+                             #- NOT WORKING $card->{type} =~ /Intel 810/);
+	#- 3D acceleration configuration for XFree 3.3 using Utah-GLX
+	#- but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
+	$card->{Utah_glx_EXPERIMENTAL} = ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2?/ || #- all RIVA/GeForce comes from NVIDIA ...
+					  $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||   #- and may freeze (gltron).
+					  $card->{identifier} =~ /[nN]Vidia.*Vanta/ ||
+					  $card->{identifier} =~ /[nN]Vidia.*GeForce/ ||
+					  $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
+					  $card->{identifier} =~ /[nN]Vidia.*Quadro/ ||
+					  $card->{identifier} =~ /Riva.*128/ || # moved here as not working correctly enough
+					  $card->{identifier} =~ /S3.*Savage.*3D/ || #- only this one is evoluting.
+					  $card->{identifier} =~ /Rage Mobility [PL]/ ||
+					  $card->{identifier} =~ /SiS.*6C?326/ || #- prefer 16bit, other ?
+					  $card->{identifier} =~ /SiS.*6C?236/ ||
+					  $card->{identifier} =~ /SiS.*630/);
+    }
     #- 3D acceleration configuration for XFree 4 using DRI.
     $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]|Voodoo Banshee/ || #- 16bit only
 			$card->{identifier} =~ /Matrox.* G[245][05]0/ || #- prefer 16bit with AGP only
