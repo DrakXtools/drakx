@@ -1,0 +1,65 @@
+        Mandrakelinux GlobeTrotter, powered by LaCie Mobile Hard Drive project
+        ======================================================================
+
+
+
+Requirements:
+=============
+
+1) packages:
+------------
+
+you need to have the distro repositery mounted in /export.
+
+on top of the mdk10.0 base + its updates, the following packages were
+updated from cooker:
+
+- misc bug fixes:
+  o drakconf-10-13mdk
+  o {drakxtools,harddrake}*-10-34mdk
+  o mdkonline-1.0-7mdk
+  o menudrake-0.7.4-8mdk
+  o netprofile-0.6.3-1.1mdk (for fixed profiles)
+  o perl-Libconf*-0.33-2mdk
+  o rpmdrake-2.1.3-4mdk
+  o initscripts-7.06-49.1mdk:
+    * usb starting when usb host drivers were loaded by initrd
+    * globetrotter support
+- root=LABEL=foobar and boot from USB support:
+  o mkinitrd-3.5.18-10mdk 
+  o bootloader-utils-1.7-1mdk
+- coexistance:
+  o glibc with /etc/ld.so.conf.d/ support
+  o ATI driver
+  o NIVIDIA driver
+- new packages:
+  o kdetv, libkdevideo
+- should we also take new kernel?
+
+Note: once you've updated some packages, you need to run "gendistrib
+      /export".
+
+
+2) local checkout of drakx:
+---------------------------
+
+you need a copy of gi/perl-install in ../perl-install as well as
+gi/mdk-stage1.
+
+you need to install the following packages: gcc, e2fsprogs,
+ldetect-devel, libext2fs2-devel, libxfree86-devel, perl-devel,
+perl-URPM, rpm-devel, rpmtools, and urpmi.
+
+then you need to type "make c" in ../perl-install.
+
+last but not least, you need to copy list_modules from gi/kernel into
+perl-instéall and gi/mdk-stage1/pcmcia_/probe.c into perl-install/c.
+
+
+
+Building the hd image:
+======================
+
+just type ./make_live
+
+it'll reformat the hard disk, mount it and install packages

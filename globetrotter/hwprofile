@@ -1,0 +1,47 @@
+#!/usr/bin/perl
+
+# Copyright (c) 2004 MandrakeSoft
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+use lib qw(/usr/lib/libDrakX);
+
+use common;
+use standalone;
+use Digest::MD5 qw(md5_hex);
+use network::tools;
+use network::netconnect;
+
+# md5_hex call came from move::machine_ident() :
+my $id = "MDK" . md5_hex(join("", (map { (split)[1] } cat_("/proc/bus/pci/devices"))));
+
+my $netcnx = {};
+my $is_first_boot = !glob_("/etc/netprofile/profiles/MDK*");
+
+# create hardware profile if needed:
+if (! -d "/etc/netprofile/profiles/$id") {
+    network::tools::reread_net_conf($netcnx, {}, {});
+    network::netconnect::add_profile($netcnx, $id);
+}
+
+# restore hardware profile:
+$netcnx->{PROFILE} = $id;
+eval { network::netconnect::set_profile($netcnx) };
+
+# first boot wizard:
+$is_first_boot and system('/usr/sbin/mdkmove');
+
+# redo ldconfig cache for libGL (since we've both ATI and NVIDIA GLX packages):
+system("/sbin/ldconfig");

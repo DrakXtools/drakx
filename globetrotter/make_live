@@ -1,0 +1,410 @@
+#!/usr/bin/perl
+
+$::isInstall = 1; # for /root/drakx/ddebug.log
+
+use strict;
+#use lib qw(/usr/lib/libDrakX);
+use lib "../perl-install";
+use standalone;
+use interactive;
+use common;
+use partition_table;
+use fsedit;
+use fs;
+use any;
+use pkgs;
+use class_discard;
+use run_program;
+use log;
+
+# my $in = interactive->vnew;
+
+$::isStandalone = undef;  # for /tmp/ddebug.log
+
+my (%options, @new_ARGV);
+
+foreach (@ARGV) {
+    if (/^--(.*)/) {
+        $options{$1} = 1;
+    } else {
+        push @new_ARGV, $_;
+    }
+}
+
+@ARGV = @new_ARGV;
+
+my @suggestions = (
+                   { mntpoint => "/",     size => 4500 << 11, type => 0x483, ratio => 1, maxsize => 6000 << 11 },
+                   # splited / and /usr:
+                   # { mntpoint => "/",     size => 250 << 11, type => 0x483, ratio => 1, maxsize => 2000 << 11 },
+                   # { mntpoint => "/usr",  size => 300 << 11, type => 0x483, ratio => 4, maxsize => 4000 << 11 },
+                   { mntpoint => "/home", size => 100 << 11, type => 0x483, ratio => 3 },
+
+                   # share partition with windows:
+                   { mntpoint => "/mnt/share",  size => 2000 << 11, type => 0xb, ratio => 2, maxsize => 10000 << 11 },
+                   { mntpoint => "/mnt/packages", size => 7500 << 11, type => 0x483, ratio => 3, maxsize => 7500 << 11 },
+                   # allocated last b/c end of disk is usually faster:
+                   { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  500 << 11 },
+                  );
+
+
+sub get_hds() {
+	my $all_hds = fsedit::get_hds();
+     my $other;
+	($all_hds->{hds}, $other) = partition { $_->{usb_description} eq 'LaCie|LaCie Hard Drive USB' } @{$all_hds->{hds}};
+	$all_hds, $all_hds->{hds}[0]; # $other
+}
+
+
+sub prepare_disk() {
+    # repartion the hard disk:
+    print "PARTITIONNING\n";
+    my ($all_hds, $hd, $other) = get_hds();
+    # partition_table::remove($hd, $_) while partition_table::get_normal_parts($hd);
+    run_program::run("swapoff", "/dev/$all_hds->{hds}[0]{device}8") if any { /$all_hds->{hds}[0]{device}/ } cat_("/proc/partitions");
+
+    partition_table::raw::zero_MBR_and_dirty($hd);
+    fsedit::allocatePartitions($all_hds, \@suggestions);
+    require diskdrake::interactive;
+    require class_discard;
+    # diskdrake::interactive::write_partitions(class_discard->new, $_, 'skip_check_rebootNeeded') foreach (@{$all_hds->{hds}});
+    foreach (@{$all_hds->{hds}}) {
+	    local $::isStandalone = undef;
+	    print "WRITE PARTITION ON $_->{file}\n";
+	    diskdrake::interactive::write_partitions(class_discard->new, $_, 'skip_check_rebootNeeded')
+    }
+    # partition_table::write(@{$all_hds->{hds}});
+    ($all_hds, $hd, $other);
+}
+
+
+sub formatdisk {
+    my ($hd) = @_;
+    print "FORMATTING\n";
+    foreach (partition_table::get_normal_parts($hd)) { 
+        print qq(Formatting "$_->{device}" ($_->{mntpoint})\n); 
+        fs::format_part(undef, $_, $::prefix, undef) if !$::testing;
+    }
+}
+
+
+#@ARGV <= 1 or die "usage: make_live [live_location=/tmp/live_tree]\n";
+
+    if (!find { m!/proc/bus/usb! } run_program::get_stdout('mount')) {
+        warn "USB service is *NOT* started";
+        run_program::get_stdout('service', 'usb', 'start');
+    }
+
+
+my $kernel_version = do {
+    #my @l = glob_('/export/Mandrake/RPMS/kernel-enterprise-2.6*');
+    my @l = glob_('/export/Mandrake/RPMS/kernel-2.6*');
+    @l >= 1 or die "can't find kernel";
+    @l <= 1 or die "too many kernels";
+    first(`rpm -qp --qf '%{name}' $l[0]` =~ /kernel-(.*)/);
+};
+
+
+sub installPackages() {
+    local $::testing = undef;
+
+    # for a gconftool-2 cleaner:
+    my $pid = fork();
+    !defined $pid and die("cannot fork: $!");
+    !$pid and do {
+        while (1) {
+            sleep(10);
+            run_program::run('/usr/bin/killall', 'gconftool-2');
+        }
+    };
+    my $_b = before_leaving { print "KILLING\n"; kill 'TERM', $pid if $pid };
+
+    # ensure no %_install_langs:
+    output_p("$::prefix/etc/rpm/macros", "%_install_langs all\n");
+    # ensure boot from USB will work:
+    output_p("$::prefix/etc/sysconfig/mkinitrd", "forceusb=yes\n");
+
+    mkdir_p("$::prefix/var/lib/rpm");
+    mkdir_p("$::prefix/root/drakx");
+
+
+    undef *install_any::setDefaultPackages;
+    *install_any::setDefaultPackages = sub {};
+
+    undef *install_any::getFile;
+    *install_any::getFile = sub {
+	my ($f, $o_method) = @_;
+	log::l("getFile $f:$o_method");
+	open(my $F, '/export/' . install_any::relGetFile($f)) or return;
+	$F;
+    };
+
+    undef *c::kernel_version;
+    *c::kernel_version = sub { $kernel_version };
+
+    print "INSTALLING\n";
+    install_any::setPackages(my $o = $::o =
+                             { 
+                              prefix => $::prefix, 
+                              meta_class => 'desktop', 
+                              default_packages => [
+				 qw(XFree86-server XFree86-xfs XFree86-FBDev),
+				 qw(openssh-server), #- fred wants it
+				 qw(alsa-utils cdialog newt),
+                     qw(k3b-dvd),
+				 qw(davfs nfs-utils samba-server sane-backends xsane xsane-gimp ntp),
+                     qw(acpi acpid), #- so that removing acpi=ht will work
+				 qw(mountloop),	#- crypted folders
+				 qw(mandrake-doc-en mandrake-doc-fr mandrake-doc-drakxtools-en mandrake-doc-drakxtools-fr),
+				 qw(synaptics),
+				 #- network conf:
+				 qw(wireless-tools pcmcia-cs),
+				 #- zeroconf:
+				 qw(zcip dhcpcd tmdns),
+				 #- cnx stuff:
+				 qw(dhcp-client ppp kdenetwork-kppp ppp-pppoatm ppp-pppoe pptp-linux pptp-adsl rp-pppoe),
+				 #- ISDN stuff:
+				 # qw(isdn4net ibod isdn4k-utils), # not installed since it provides an interface (will be automatically installed by drakconnect)
+				 #- network file sharing:
+				 qw(nfs-utils-clients samba-client),
+				 #- network drivers and firmwares:
+				 qw(eagle-usb speedtouch speedtouch_mgmt unicorn),
+				 #- alt kernels:
+				 # glob_('/export/Mandrake/RPMS/kernel-2.4*'), #- for ISDN
+				 #- configuration:
+				 qw(drakconf drakcronat drakfirsttime drakxtools harddrake-ui mdkonline rpmdrake userdrake2),
+				 qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
+				 "ATI_kernel-$kernel_version", qw(ATI_GLX ATI_GLX-utils NVIDIA_GLX libMesaGLU1), # ATI_GLX requires ATI_kernel
+				 "NVIDIA_kernel-$kernel_version",
+				 # qw(hcfpcimodem hsflinmodem ltmodem), #- 2.4.x only
+				 qw(xinput), #- for some mice
+				 qw(bash-completion binutils  emacs-X11 ntsysv perl-doc perl-Term-Readline-Gnu),  #- allow debugging
+				 qw(openssh-askpass-gnome),  #- openssh-askpass for mountloop doesn't allow to click on ok/cancel buttons
+				 qw(clanbomber freeciv-client freeciv-server crack-attack kdegames),  #- more games
+				 qw(numlock),  # shorewall # not installed since its default config breaks network (will be automatically installed by drakfirewall)
+				 qw(xawtv zapping),  #- tv apps
+				 qw(scribus scribus-i18n-de scribus-i18n-fr),  #- John Jablonski says it's so much useful
+                     (map { "OpenOffice.org-l10n-$_" } qw(ar ca cs da de el en es eu fi fr it ja ko nl pl pt pt_BR ru sk sv tr zh_CN zh_TW)),
+				 qw(dosfstools mtools),
+				 qw(koffice konsole),
+				 qw(devfsd dynamic harddrake hotplug magicdev mandrake-globetrotter netprofile),
+				 qw(gnome2),
+				 qw(alsa-utils),
+				 qw(ipw2100 ipw2100_kernel), # ipw2100_kernel-$kernel_version,
+                     #- fonts:
+				 qw(XFree86-100dpi-fonts XFree86-75dpi-fonts),
+				 qw(fonts-bitmap-tscii fonts-hebrew-elmar),
+                     (map { "fonts-ttf-$_" } qw(arabic armenian bengali big5 decoratives ethiopic gb2312 japanese kannada korean latex tamil thai tscii vera west_european)),
+                     (map { "fonts-type1-$_" } qw(cyrillic greek hebrew)),
+                     ],
+					    });
+
+    my %compssUsersChoice = map { $_ => 1 } map { @{$_->{flags}} } values %{$o->{compssUsers}};
+    $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB', 'SOUND', 'BURNER', 'UTF8', 'DOCS', 'TV', '3D', 'INSTALL';
+    $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
+
+    pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
+    use Data::Dumper;
+    output("/tmp/pkgs1", Dumper($o->{packages}));
+
+    # unselect some packages whose services fsck up the box and whose services are not enabled by appropriate tools:
+    # (shorewall must be deselected before iptables is)
+    foreach (qw(at hpoj shorewall iptables ntp tmdns zcip )) {
+        my $p = pkgs::packageByName($o->{packages}, $_);
+        pkgs::unselectPackage($o->{packages}, $p) if $p;
+    }
+
+    my @toInstall = pkgs::packagesToInstall($o->{packages});
+    output("/tmp/pkgs2", Dumper([ map { $_->name } @toInstall ]));
+    local $ENV{DURING_INSTALL} = 1;
+    $ENV{LD_LIBRARY_PATH} = "/lib:/usr/lib:/usr/X11R6/lib:/usr/lib/qt3/lib";
+    pkgs::install($::prefix, 0, \@toInstall, $o->{packages});
+    
+    eval { fs::umount("$::prefix/proc") };
+}
+
+sub config_X_proprietary_drivers() {
+    unlink "$::prefix/usr/lib/libGL.so";
+
+    my %name_to_Driver = (NVIDIA_GLX => 'nvidia', ATI_GLX => 'fglrx');
+
+    my $lib = 'libGL.so.1';
+    symlinkf("/etc/X11/$lib", "$::prefix/usr/lib/$lib");
+    foreach (keys %name_to_Driver) {
+	my ($full_name) = run_program::rooted_get_stdout($::prefix, 'rpm', '-ql', $_) =~ m!/usr/lib/(\Q$lib\E\..*)! or die '';
+	symlinkf($full_name, "$::prefix/usr/lib/$lib.$name_to_Driver{$_}");
+    }
+    #- remove the dirty hack done by NVIDIA_kernel-xxx proprietary package
+    #- we do it by hand when needed
+    substInFile { $_ = '' if $_ eq 'nvidia' } "$::prefix/etc/modules";
+}
+
+$::prefix = $ARGV[0] || '/tmp/live_tree';
+
+-d $::prefix or mkdir $::prefix;
+print "Making live in $::prefix directory.\n";
+
+
+my ($all_hds, $hd, $other) = do {
+    # here we want testing so that diskdrake still set mount points in data structure:
+    local $::testing = !$options{partition};
+    prepare_disk();
+};
+
+formatdisk($hd) if $options{format};
+
+add2hash($hd, $other);
+
+undef $::testing;
+
+my @parts = partition_table::get_normal_parts($hd);
+
+my ($root) = grep { $_->{mntpoint} eq "/" } @parts;
+print "Root is $root->{device}\n";
+run_program::run('tune2fs', '-L', "MDK-ROOT", "/dev/$root->{device}");
+# fs::mount_part($root, $::prefix);
+my $fstab = [ fsedit::get_all_fstab($all_hds) ];
+
+# we need to mount every fs we want to see into /etc/fstab !!!
+fs::mount_part($_, $::prefix) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} } @$fstab;
+
+
+eval {
+    print "Installing packages\n";
+    installPackages();
+} if $options{install};
+print "ERROR WHILE INSTALLING PACKAGES: $@\n" if $@;
+log::closeLog;
+
+sub doRootSubst {
+    my ($file) = @_;
+    substInFile {
+        s!/dev/$root->{device}!LABEL=MDK-ROOT!g;
+    } $file;
+}
+
+#fs::merge_info_from_mtab($fstab);
+fs::write_fstab($all_hds, $::prefix);
+append_to_file("$::prefix/etc/fstab", "none /dev/pts devpts mode=0620 0 0");
+doRootSubst("$::prefix/etc/fstab");
+
+#-------------------------------------------------------------------
+#- Bootloader
+print "Configuring bootloader\n";
+system("modprobe loop");
+require keyboard;
+require bootloader;
+
+my $bootloader = {
+                  keytable => keyboard::keyboard2kmap(keyboard::lang2keyboard('fr')),
+		  bios => { '/dev/sda' => '0x80' },
+                 };
+
+bootloader::suggest($bootloader, $all_hds->{hds}, $fstab,
+                    vga_fb => 788, 
+                    quiet => 1);
+
+# LILO failled to boot from SCSI:
+# $bootloader->{method} = 'lilo-graphic';
+$bootloader->{method} = 'grub';
+
+bootloader::install($bootloader, $fstab, $all_hds->{hds});
+
+doRootSubst("$::prefix/boot/grub/menu.lst");
+run_program::rooted($::prefix, 'sh', '/boot/grub/install.sh');
+
+# fix GRUB configuration:
+substInFile {
+    # use FB by default on versionned entries so that the initial versionned entry behave like those created by /sbin/installkernel:
+    s/$/ vga=788/ if /^kernel.*\d\.\d\.\d/;
+    # set devfs=mount as well so that installkernel can properly install bootable 2.4.x kernels:
+    s/$/ devfs=mount/ if /^kernel/ && !/failsafe/;
+} "$::prefix/boot/grub/menu.lst";
+
+
+## disable ISDN by default (bogus isdn4net came with an enabled interface :-():
+#substInFile {
+#    s/#ONBOOT.*/ONBOOT="no"/
+#} "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
+#
+
+print "Post install misc configuration\n";
+
+
+# clean services:
+# cups-lpd ibod isdn4linux isdnlog)) {
+run_program::rooted($::prefix, '/sbin/chkconfig', '--del', $_) foreach qw(acon jserver oki4daemon);
+#foreach my $service (qw(acon atd cups-lpd hpoj ibod iptables isdn4linux isdnlog jserver ntpd oki4daemon shorewall tmdns)) {
+#    run_program::rooted($::prefix, '/sbin/chkconfig', '--level', $_, $service, 'off') foreach qw(3 5);
+#}
+
+# probably useless:
+foreach my $service (qw(alsa dm harddrake hotplug sound)) {
+    run_program::rooted($::prefix, '/sbin/chkconfig', '--level', $_, $service,  'on') foreach qw(3 5);
+}
+
+if ($options{post}) {
+    #-------------------------------------------------------------------
+    # save a few more files in profiles
+    my $prof_cfg = "$::prefix/etc/netprofile/list";
+    my @files = map { chomp_($_) } cat_($prof_cfg);
+    # do not save the whole /etc/sysconfig;
+    push @files, (map { "/etc/X11/$_" } qw(XF86Config XF86Config-4)),
+      (map { "/etc/sysconfig/$_" } qw(keyboard harddrake2/previous_hw harddisks)),
+        (map { "/etc/$_" } qw(modprobe.conf modprobe.devfs modprobe.preload modules modules.conf modules.devfs)),
+          qw(/etc/asound.state /etc/fstab /etc/ld.so.conf/GL.conf);
+
+    output($prof_cfg, join("\n", sort @files));
+
+
+    #-------------------------------------------------------------------
+    #- regenerate library loader and fonts cache
+    run_program::rooted($::prefix, 'ldconfig');
+    any::fix_broken_alternatives();
+    run_program::rooted($::prefix, 'fc-cache'); #- generate cache in all directories mentioned in config file
+
+    #- XFree
+
+    touch("$::prefix/etc/menu/enable_simplified");
+
+    {
+        local $ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
+        #local $ENV{HOME} = '/'; #- savekdemimetypes.pl needs this otherwise it's tmp file fails
+        run_program::rooted($::prefix, 'update-menus', '-n');
+    }
+
+    run_program::rooted($::prefix, 'nspluginscan'); #- must be run before kbuildsycoca for the ksycoca to be flash plugin aware
+
+    $ENV{HELP_BROWSER} = "kfmclient openProfile webbrowsing";
+    $ENV{BROWSER} = "kfmclient openProfile webbrowsing";
+    $ENV{DESKTOP} = "kde";
+    #- faster boot:
+    foreach my $lang (lang::list_langs()) {
+        local $ENV{LC_ALL} = lang::getLANGUAGE($lang);
+        unlink "$::prefix/usr/share/services/ksycoca";
+        run_program::rooted($::prefix, 'kbuildsycoca', '--global');
+        rename("$::prefix/usr/share/services/ksycoca", "$::prefix/usr/share/services/ksycoca-$lang");
+    }
+    symlinkf('/etc/X11/ksycoca', "$::prefix/usr/share/services/ksycoca");
+}
+
+# clean gconftool-2 mess:
+unlink $_ foreach glob("$::prefix/core.*");
+
+
+##- Mandrake
+#substInFile {
+#    s!Mandrake(l| L)inux release (\S+) \(.*\)!Mandrakelinux Nomad, powered by LaCie Mobile Hard Drive)!;
+#} "$::prefix/etc/mandrake-release";
+#
+
+
+system("rsync -rvltp /export/ $::prefix/mnt/packages/");
+unlink $_ foreach glob("$::prefix/var/lib/urpmi/*");
+run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'main', 'file:///mnt/packages/Mandrake/RPMS');
+run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'contrib', 'file:///mnt/packages/Mandrake/RPMS2');
+
+# for fast test replaying:
+run_program::rooted($::prefix, 'tar', 'cfj', '/root/etc.tar.bz2', '/etc');
+
+fs::umount_all($fstab, $::prefix);
