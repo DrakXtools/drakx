@@ -17,7 +17,6 @@ my ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
 my $virtual_key_part;
 my $key_mountopts = 'umask=077,uid=501,gid=501,shortname=mixed';
-my $rootwindow;  #- holds background image
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
@@ -446,7 +445,7 @@ sub install_TrueFS_in_home {
 
 sub install2::displayBackground {
     require ugtk2;
-    $rootwindow = ugtk2::gtkroot();
+    my $rootwindow = ugtk2::gtkroot();
     my $pixbuf = eval { Gtk2::Gdk::Pixbuf->new_from_file("/image/move/BOOT-$::rootwidth-MOVE.jpg") };
     $pixbuf ||= Gtk2::Gdk::Pixbuf->new_from_file('/usr/share/mdk/screensaver/3.png');
     my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
@@ -458,6 +457,7 @@ sub install2::startMove {
     my $o = $::o;
 
     $::WizardWindow->destroy if $::WizardWindow;
+    install2::displayBackground();
 
     #- get info from existing fstab. This won't do anything if we already wrote fstab in configMove
     fs::get_info_from_fstab($o->{all_hds}, '');
@@ -489,7 +489,6 @@ sub install2::startMove {
 
     if (fork()) {
 	sleep 1;
-        undef $rootwindow;
         log::l("DrakX waves bye-bye");
 
 	my (undef, undef, $uid, $gid, undef, undef, undef, $home, $shell) = getpwnam($username);
