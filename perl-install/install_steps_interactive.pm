@@ -530,36 +530,33 @@ sub choosePackagesTree {
 }
 sub loadSavePackagesOnFloppy {
     my ($o, $packages) = @_;
-    my $choice = $o->ask_from_listf('', 
+    $o->ask_from('', 
 _("Please choose load or save package selection on floppy.
 The format is the same as auto_install generated floppies."),
-				    sub { $_[0]{text} },
-				    [ { text => _("Load from floppy"), code => sub {
-					    while (1) {
-						my $w = $o->wait_message(_("Package selection"), _("Loading from floppy"));
-						log::l("load package selection from floppy");
-						my $O = eval { install_any::loadO(undef, 'floppy') };
-						if ($@) {
-						    $w = undef; #- close wait message.
-						    $o->ask_okcancel('', _("Insert a floppy containing package selection"))
-						      or return;
-						} else {
-						    install_any::unselectMostPackages($o);
-						    foreach (@{$O->{default_packages} || []}) {
-							my $pkg = pkgs::packageByName($packages, $_);
-							pkgs::selectPackage($packages, $pkg) if $pkg;
-						    }
-						    return 1;
-						}
-					    }
-					} },
-				      { text => _("Save on floppy"), code => sub {
-					    log::l("save package selection to floppy");
-					    install_any::g_default_packages($o, 'quiet');
-					} },
-				      { text => _("Cancel") },
-				    ]);
-    $choice->{code} and $choice->{code}();
+		 [ { val => \ (my $choice), list => [ __("Load from floppy"), __("Save on floppy") ], format => \&translate, type => 'list' } ]) or return;
+
+    if ($choice eq 'Load from floppy') {
+	while (1) {
+	    my $w = $o->wait_message(_("Package selection"), _("Loading from floppy"));
+	    log::l("load package selection from floppy");
+	    my $O = eval { install_any::loadO(undef, 'floppy') };
+	    if ($@) {
+		$w = undef;	#- close wait message.
+		$o->ask_okcancel('', _("Insert a floppy containing package selection"))
+		  or return;
+	    } else {
+		install_any::unselectMostPackages($o);
+		foreach (@{$O->{default_packages} || []}) {
+		    my $pkg = pkgs::packageByName($packages, $_);
+		    pkgs::selectPackage($packages, $pkg) if $pkg;
+		}
+		return 1;
+	    }
+	}
+    } else {
+	log::l("save package selection to floppy");
+	install_any::g_default_packages($o, 'quiet');
+    }
 }
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
