@@ -90,7 +90,9 @@ our %langs = (
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
 'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-1',  'nn:no@nynorsk:no_NY:no:nb' ],
 'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
-'ph' =>    [ 'Filipino',            'Filipino',          'ph_PH', ' 2   ', 'iso-8859-1',  'ph:tl' ],
+# 'tl' in priority position for now, as 'ph' is not yet official and 'tl'
+# is used instead. Monolingual window managers won't see the menus otherwise
+'ph' =>    [ 'Filipino',            'Filipino',          'ph_PH', ' 2   ', 'iso-8859-1',  'tl:ph' ],
 'pl' =>    [ 'Polish',              'Polski',            'pl_PL', '1    ', 'iso-8859-2' ],
 'pt' =>    [ 'Portuguese',          'Portugues',         'pt_PT', '1 3  ', 'iso-8859-15', 'pt_PT:pt:pt_BR' ],
 'pt_BR' => [ 'Portuguese Brazil', 'Portugues do Brasil', 'pt_BR', '    5', 'iso-8859-1',  'pt_BR:pt_PT:pt' ],
