@@ -9,6 +9,7 @@ GRAPHICAL_DESKTOP
 
 GNOME
   5 gnome-panel nautilus gnome-control-center metacity 
+    nautilus-gtkhtml
   4 gnome-applets gtk-themes file-roller
     gnome-utils gucharmap xlockmore gtk-engines2 
     gnome-vfs-extras gconf-editor
@@ -17,9 +18,11 @@ GNOME
   2 bug-buddy
 
 KDE
-  5 kdebase-progs kdebase-nsplugins mdkkdm galaxy-kde mandrake-galaxy krozat kdeartwork-kde-classic
+  5 kdebase-progs kdebase-nsplugins mdkkdm galaxy-kde galaxy-kde-kwin mandrake-galaxy krozat kdeartwork-kde-classic
   5 kde-i18n-af kde-i18n-ar kde-i18n-az kde-i18n-bg kde-i18n-bs kde-i18n-ca kde-i18n-cs kde-i18n-da kde-i18n-de kde-i18n-el kde-i18n-en_GB kde-i18n-eo kde-i18n-es kde-i18n-et kde-i18n-eu kde-i18n-fa kde-i18n-fi kde-i18n-fr kde-i18n-he kde-i18n-hr kde-i18n-hu kde-i18n-is kde-i18n-it kde-i18n-ja kde-i18n-ko kde-i18n-lt kde-i18n-lv kde-i18n-mk kde-i18n-nb kde-i18n-nl kde-i18n-nn kde-i18n-pl kde-i18n-pt kde-i18n-pt_BR kde-i18n-ro kde-i18n-ru kde-i18n-se kde-i18n-sk kde-i18n-sl kde-i18n-sr kde-i18n-sv kde-i18n-ta kde-i18n-th kde-i18n-tr kde-i18n-uk kde-i18n-vi kde-i18n-zh_CN.GB2312 kde-i18n-zh_TW.Big5 kde-i18n-zu
   5 kdebase-servicemenu zip
+  5 kdeutils-kcharselect
+  3 kdebase-kdm
 
 VIDEO
   5 RealPlayer
@@ -49,6 +52,8 @@ OFFICE
     5 kdepim-knotes
     5 kdegraphics-kghostview
     3 koffice koffice-i18n-az koffice-i18n-bg koffice-i18n-cs koffice-i18n-da koffice-i18n-de koffice-i18n-en_GB koffice-i18n-eo koffice-i18n-es koffice-i18n-et koffice-i18n-fr koffice-i18n-hu koffice-i18n-it koffice-i18n-ja koffice-i18n-lt koffice-i18n-mt koffice-i18n-nb koffice-i18n-nl koffice-i18n-nn koffice-i18n-pl koffice-i18n-pt koffice-i18n-pt_BR koffice-i18n-ro koffice-i18n-ru koffice-i18n-sk koffice-i18n-sl koffice-i18n-sv koffice-i18n-ta koffice-i18n-tr koffice-i18n-uk koffice-i18n-zh_CN koffice-i18n-zh_TW
+    3 kdegraphics-kdvi
+    3 kdepim-kpilot
   GNOME
     4 gnome-pim
     3 gnome-pilot-conduits Guppi
@@ -71,12 +76,23 @@ AUDIO
   5 totem
   5 KDE kdemultimedia-kaudiocreator
   5 gnome-media
-  4 GNOME gnome-audio
-  3 grip xmms xmms-skins
-  3 3D xmms-mesa
-  3 cdp cdparanoia cdrecord-cdda2wav space_sounds timidity-instruments xmms-esd
-    xmms-kjofol-skins xmms-more-vis-plugins
+  4 GNOME gnome-audi
+  3 cdp
+  3 cdparanoia
+  3 cdrecord-cdda2wav
+  3 grip
   3 GNOME gnome-audio-extra
+  3 KDE kdeaddons-noatun
+  3 KDE kdemultimedia-kmid
+  3 KDE kdemultimedia-kmidi
+  3 KDE kdemultimedia-noatun
+  3 timidity-instruments
+  3 xmms
+  3 xmms-esd
+  3 xmms-kjofol-skins
+  3 xmms-more-vis-plugins
+  3 xmms-skins
+  3 3D xmms-mesa
   3 HW"Rio 500" rio500
   2 mokmod mp3info mpg123 playmidi playmidi-X11 xmms-mikmod
 
@@ -105,12 +121,19 @@ SHELLS
 
 SCIENCES
   4 gnuplot
+  4 KDE kdeedu
+  4 KDE kdeutils-kcalc
   3 HDF
   2 mathplot octave
 
 EDITORS
   4 emacs-X11
-  3 GXedit vim-X11 yudit
+  3 GXedit
+  3 KDE kdebase-kate
+  3 KDE kdeutils-kedit
+  3 KDE kdeutils-khexedit
+  3 vim-X11
+  3 yudit
   2 nedit cooledit emacs-tramp joe emacs-leim jed-xjed xemacs xemacs-extras xemacs-info
   1 emacs-el jed xemacs-el emacs-nox
   GNOME
@@ -148,7 +171,9 @@ TERMINALS
   4 LOCALES"ja" kterm 
 
 NETWORKING_CHAT
+  3 KDE kdenetwork-ktalk
   3 talk ytalk
+
 NETWORKING_CHAT_SERVER
   4 jabber 
   3 talk-server
@@ -173,6 +198,7 @@ NETWORKING_INSTANT_MESSAGING
   3 licq
   3 everybuddy licq-console licq-rms
   3 KDE kopete
+  3 KDE kdenetwork-kit
   GNOME
     3 gnomeicu gabber
     3 gtk+licq
@@ -199,6 +225,7 @@ NETWORKING_MAIL
   3 faces mozilla-mail
   3 fetchmail urlview mutt spamassassin
   3 !GNOME !KDE xmailbox
+  3 KDE kdenetwork-korn
   2 FaxMail faces-xface
   1 fetchmail-daemon fetchmailconf
 
@@ -233,6 +260,7 @@ NETWORKING_OTHER_SERVER
 
 NIS
   5 ypbind
+
 NIS_SERVER
   5 ypserv
 
@@ -240,6 +268,7 @@ NETWORKING_REMOTE_ACCESS
   5 openssh-clients telnet-client-krb5
   5 KDE lisa
   4 traceroute rfbdrake
+  3 KDE kdeutils-kdessh
   3 tightvnc
   2 rsh
 
@@ -249,8 +278,10 @@ NETWORKING_REMOTE_ACCESS_SERVER
   2 tightvnc-server
   1 telnet-server-krb5 rsh-server
   3 BOOKS tight-vnc-doc
+
 NETWORKING_DNS
   4 bind-utils 
+
 NETWORKING_DNS_SERVER
   5 bind 
   4 caching-nameserver
@@ -262,10 +293,12 @@ NETWORKING_FILE
   2 arkeia-gui arkeia-client arkeia-arkc
   2 GNOME gnomba gtm
   2 autofs
+
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 samba-server bwbserver_linux
-  3 BOOKS samba-doc 
+  3 BOOKS samba-doc
+  3 KDE kdenetwork-krfb
   2 arkeia-server samba-winbind
   3 squid squidGuard
 
@@ -276,8 +309,14 @@ NETWORKING_WWW
   4 FlashPlayer crossover-plugin-demo j2re
   4 wget
   4 lynx
-  3 links mozilla
-  3 mozplugger opera bluefish
+  3 KDE kdeaddons
+  3 links
+  3 KDE kdenetwork-kget
+  3 KDE kdenetwork-knewsticker
+  3 mozilla
+  3 mozplugger
+  3 opera
+  3 bluefish
 
 NETWORKING_WWW_SERVER
   5 apache2 apache2-mod_perl apache2-mod_ssl apache2-mod_php 
@@ -295,7 +334,17 @@ GRAPHICS
   5 KDE kdegraphics-ksnapshot
   5 flphoto gtkam gimp-plugin
   4 ImageMagick giftrans gphoto2
-  3 gimp-data-extras gqview sketch xwpick xli
+  3 gimp-data-extras
+  3 gqview
+  3 KDE kdeaddons-konqimagegallery
+  3 KDE kdegraphics-kpaint
+  3 KDE kdegraphics-kruler
+  3 KDE kdegraphics-kuickshow
+  3 KDE kdegraphics-kview
+  3 KDE kdegraphics-mrmlsearch
+  3 sketch
+  3 xwpick
+  3 xli
   2 gif2png gimp-perl xpcd xfig xpcd-gimp gd-utils cameleo
   1 libgr-progs libungif-progs qcad transfig xpaint xmorph
   1 3D Mesa-demos
@@ -357,6 +406,8 @@ GAMES
     1 gtkgo
   KDE
     3 kdegames
+    3 kdeaddons-atlantik
+    3 kdetoys
   3D
     5 armagetron csmash
       !HW"Riva.*128" chromium tuxracer
@@ -421,6 +472,7 @@ DEVELOPMENT
       libkdepim-common-devel libkdepim2-devel libkdepim-devel libkdesdk1-devel libkdesdk-devel libkdetoys1-devel libkdetoys-devel
       libkdeutils-common-devel libkdeutils1-devel libkdeutils-devel libkdeutils-ksim-devel
       libkdevelop2-devel libkdevelop-devel
+    4 kdesdk
 
     1 kdesupport-devel kdeaddutils-devel libkoffice2-devel koffice-devel
 
@@ -454,6 +506,9 @@ MONITORING
   4 lsof swatch tcpdump traceroute
   4 nmap
   4 X nmap-frontend
+  3 KDE kdeutils-kdf
+  3 KDE kdeutils-ksim
+  3 KDE kdeutils-ktimer
   3 iplog arpwatch lslk xcpustate xsysinfo
   2 cfengine gkrellm gps rusers mon 3D xtraceroute
   1 logcheck
@@ -495,6 +550,8 @@ X
 
   3 XFree86-100dpi-fonts draksync
   3 USB usbview
+  3 KDE kdeartwork
+  3 KDE kdeartwork-kde-classic
   2 LOCALES"ja" || LOCALES"ko" || LOCALES"zh" jmcce 
   2 imlib-cfgeditor
   1 Mesa xtoolwait X11R6-contrib 
@@ -521,8 +578,6 @@ X
     LOCALES"th" fonts-ttf-thai
     LOCALES"zh_CN" || LOCALES"zh" fonts-ttf-gb2312
     LOCALES"zh_TW" || LOCALES"zh" taipeifonts fonts-ttf-big5
-
-  5 LOCALES"zh_CN" miniChinput
 
 DOCS
   5 man info man-pages
