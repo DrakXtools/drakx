@@ -34,7 +34,7 @@ my $scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
 our $scannerDB = readScannerDB("$scannerDBdir/ScannerDB");
 
 sub confScanner {
-    my ($model, $port, $vendor, $product) = @_;
+    my ($model, $port, $vendor, $product, $firmware) = @_;
     $port ||= detect_devices::dev_is_devfs() ? "$::prefix/dev/usb/scanner0" : "$::prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
@@ -47,11 +47,13 @@ sub confScanner {
 	next if $line =~ /\$VENDOR/;
 	$line =~ s/\$PRODUCT/$product/g if $product;
 	next if $line =~ /\$PRODUCT/;
+	$line =~ s/\$FIRMWARE/$firmware/g if $firmware;
+	next if $line =~ /\$FIRMWARE/;
 	my $linetype;
 	if ($line =~ /^(\S*)LINE\s+(.*?)$/) {
-         $linetype = $1;
-         $line = $2;
-     }
+	    $linetype = $1;
+	    $line = $2;
+	}
 	next if !$line;
 	if (!$linetype ||
 	    ($linetype eq "USB" && ($port =~ /usb/i || $vendor)) ||
@@ -60,6 +62,8 @@ sub confScanner {
 	    ($linetype eq "SCSI" && !$vendor &&
 	     $port =~ m!(/sg|scsi|/scanner)!i)) {
 	    handle_configs::set_directive(\@driverconf, $line, 1);
+	} elsif ($linetype eq "FIRMWARE" && $firmware) {
+	    handle_configs::set_directive(\@driverconf, $line, 0);
 	}
     }
     output("$sanedir/$a.conf", @driverconf);
@@ -370,6 +374,7 @@ sub readScannerDB {
         SCSILINE => sub { push @{$card->{lines}}, "SCSILINE $val" },
         USBLINE => sub { push @{$card->{lines}}, "USBLINE $val" },
         PARPORTLINE => sub { push @{$card->{lines}}, "PARPORTLINE $val" },
+        FIRMWARELINE => sub { push @{$card->{lines}}, "FIRMWARELINE $val" },
 	NAME => sub {
 	    #$cards{$card->{type}} = $card if ($card and !$card->{flags}{unsupported});
 	    $cards{$card->{type}} = $card if $card;

@@ -144,11 +144,75 @@ sub dynamic() {
 		next;
 	    }
 	    scanner::confScanner($name, $_->{port},
-				 $_->{val}{vendor}, $_->{val}{id});
+				 $_->{val}{vendor}, $_->{val}{id}, "");
 	} else {
 	    $in->ask_warn('Scannerdrake', N("The %s is not known by this version of Scannerdrake.", removeverticalbar($name))); 
 	}
     }
+}
+
+sub installfirmware {
+    my ($model) = @_;
+    my $firmware;
+    my $choice = N("Do not install firmware file");
+    while (1) {
+	# Tell user about firmware installation
+	$in->ask_from('Scannerdrake',
+		      N("It is possible that your %s needs its Firmware to be uploaded everytime when it is turned on.", removeverticalbar($model)) . " " .
+		      N("If this is the case, you can make this be done automatically for you.") . " " .
+		      N("To do so, you need to supply the firmware file for your scanner so that it can be installed.") . " " .
+		      N("You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."),
+		      [
+		       { label => N("Install firmware file from"), 
+			 val => \$choice,
+			 list => [N("CD-ROM"),
+				  N("Floppy Disk"), 
+				  N("Other place"),
+				  N("Do not install firmware file")], 
+			 not_edit => 1, sort => 0 },
+		       ],
+		      ) or return "///";
+	my $dir;
+	if ($choice eq N("CD-ROM")) {
+	    $dir = "/mnt/cdrom";
+	} elsif ($choice eq N("Floppy Disk")) {
+	    $dir = "/mnt/floppy";
+	} elsif ($choice eq N("Other place")) {
+	    $dir = "/mnt";
+	} else {
+	    return "";
+	}
+	# Let user select a firmware file from a floppy, hard disk, ...
+        $firmware = $in->ask_file(N("Select firmware file"), "$dir");
+	last if !$firmware || (-r $firmware);
+	$in->ask_warn('Scannerdrake',
+		      N("The firmware file %s does not exist or is unreadable!",
+			$firmware));
+	
+    }
+    if ($firmware) {
+	# Install firmware
+	run_program::rooted($::prefix, "mkdir", "-p",
+			    "/usr/share/sane/firmware") || do {
+				$in->ask_warn('Scannerdrake',
+					      N("Could not create directory /usr/share/sane/firmware!"));
+				return "";
+			    };
+	run_program::rooted($::prefix, "cp", "-f", "$firmware",
+			    "/usr/share/sane/firmware") || do {
+				$in->ask_warn('Scannerdrake',
+					      N("Could not copy firmware file %s to /usr/share/sane/firmware!", $firmware));
+				return "";
+			    };
+	$firmware =~ s!^(.*)(/[^/]+)$!/usr/share/sane/firmware$2!;
+	run_program::rooted($::prefix, "chmod", "644",
+			    $firmware) || do {
+				$in->ask_warn('Scannerdrake',
+					      N("Could not set permissions of firmware file %s!", $firmware));
+				return "";
+			    };
+    }
+    return $firmware;
 }
 
 sub tryConfScanner {
@@ -230,7 +294,12 @@ sub tryConfScanner {
 	}
     }
     ($vendor, $product) = scanner::get_usb_ids_for_port($port);
-    scanner::confScanner($model, $port, $vendor, $product);
+    my $firmware;
+    if (grep { /FIRMWARELINE/ } @{$scanner::scannerDB->{$model}{lines}} ) {
+	$firmware = installfirmware($model);
+	return 0 if $firmware eq "///";
+    }
+    scanner::confScanner($model, $port, $vendor, $product, $firmware);
     $in->ask_warn(N("Congratulations!"),
 		  N("Your %s has been configured.\nYou may now scan documents using \"XSane\" from Multimedia/Graphics in the applications menu.", removeverticalbar($model)));
     return 1;
