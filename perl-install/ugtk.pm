@@ -18,13 +18,15 @@ my $use_imlib;
 my $use_gnome;
 
 BEGIN {
-    eval { require Gtk; Gtk->init };
-    eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
-    $use_pixbuf = $@ ? 0 : 1;
-    eval { require Gtk::Gdk::ImlibImage; Gtk::Gdk::ImlibImage->init };
-    $use_imlib = $@ ? 0 : 1;
-    eval { require Gnome };
-    $use_gnome = $@ ? 0 : 1;
+    unless ($::isInstall) {
+	eval { require Gtk; Gtk->init };
+	eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
+	$use_pixbuf = $@ ? 0 : 1;
+	eval { require Gtk::Gdk::ImlibImage; Gtk::Gdk::ImlibImage->init };
+	$use_imlib = $@ ? 0 : 1;
+	eval { require Gnome };
+	$use_gnome = $@ ? 0 : 1;
+    }
 }
 
 use Gtk;
