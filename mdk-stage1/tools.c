@@ -201,7 +201,7 @@ int total_memory(void)
 
 int ramdisk_possible(void)
 {
-	if (total_memory() > MEM_LIMIT_RAMDISK)
+	if (total_memory() > (IS_RESCUE ? MEM_LIMIT_RESCUE : MEM_LIMIT_RAMDISK))
 		return 1;
 	else {
 		log_message("warning, ramdisk is not possible due to low mem!");
@@ -247,7 +247,7 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	BZFILE * st2;
 	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd, and that root=/dev/ram3 is actually passed to the kernel at boot time */
 	int ram_fd;
-	char buffer[4096];
+	char buffer[32768];
 	int z_errnum;
 	char * wait_msg = "Loading program into memory...";
 	int bytes_read = 0;

@@ -388,6 +388,13 @@ int main(int argc, char **argv, char **env)
 		stg1_info_message("You are starting the installation with an alternate booting method. "
 				  "Please change your disk, and insert the Installation disk.");
 
+	if (IS_RESCUE && total_memory() < MEM_LIMIT_RESCUE) {
+		stg1_error_message("You are starting the rescue with a low memory configuration. "
+				   "From that point, experience showed us that the program may stop "
+				   "or crash at any point without immediate proper reason. Continue at "
+				   "your own risk. Alternatively, you may reboot your system now.");
+	}
+
 	ret = method_select_and_prepare();
 
 	finish_frontend();
