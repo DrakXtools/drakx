@@ -59,7 +59,7 @@ sub raw_from_file { #- internal
 	if (/^$/) {
 	    $comment .= "\n" if $comment;
 	    next;
-	} elsif (/^#\W/ || /^#$/) {
+	} elsif (@objs ? m/^#\W/ || /^#$/ : /^#/) {
 	    s/^#\s+/# /;
 	    $comment .= "$_\n";
 	    next;
