@@ -85,13 +85,12 @@ $kernel_combo->entry->signal_connect(changed => sub {
 
 
 # Create root tree
-my $tree_model = Gtk2::TreeStore->new(("Glib::String") x 2);
+my $tree_model = Gtk2::TreeStore->new(("Glib::String") x 2, "Glib::Int");
 my $tree = Gtk2::TreeView->new_with_model($tree_model);
 #$tree->get_selection->set_mode('browse');
 $tree->set_headers_visible(0);
 $tree->append_column(my $textcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
-#$tree->append_column(my $dummy_textcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
-$tree->signal_connect('row-expanded',  \&expand_tree);
+$tree->signal_connect('row-expanded', \&expand_tree);
 $tree->get_selection->signal_connect('changed' => \&selected_tree);
 
 
@@ -210,7 +209,7 @@ sub fill_tree {
     my ($root_dir) = @_;
     $root_dir = "/lib/modules/" . $root_dir;
     # Create root tree item widget
-    my $parent_iter = $tree_model->append_set(undef, [ 0 => $root_dir, 1 => $root_dir ]);
+    my $parent_iter = $tree_model->append_set(undef, [ 0 => $root_dir, 1 => $root_dir, 2 => has_sub_trees($root_dir) ]);
 
     # Create the subtree
     expand_tree($tree, $parent_iter, $tree_model->get_path($parent_iter)) if has_sub_trees($root_dir);
@@ -238,26 +237,28 @@ sub selected_tree {
     $list_model->append_set([ 0 => $file, 1 => $size ]);
 }
 
-
 # Callback for expanding a tree - find subdirectories, files and add them to tree
 sub expand_tree {
     my ($tree, $parent_iter, $path) = @_;
+    return if !$tree || !$parent_iter;
     my $dir   = $tree_model->get($parent_iter, 1);
-    my $child = $tree_model->iter_children($parent_iter);
-    print "($tree, $parent_iter, $path, $dir, $child)\n";
-    return if !$child;
 
-    #- hackish: if first child has '' as name, then we need to expand on the fly
-    if ($child && $tree_model->get($child, 0) eq '') {
-        $tree_model->remove($child);
-    }
-    unless ($child && $tree_model->iter_has_child($parent_iter)) {
+    #- if we're hinted to be expandable
+    if ($tree_model->get($parent_iter, 2)) {
+        #- hackish: if first child has '' as name, then we need to expand on the fly
+        if ($tree_model->iter_has_child($parent_iter)) {
+            my $child = $tree_model->iter_children($parent_iter);
+            # BUG: ->iter_children return invalid iterators !!! thus the dummy empty line
+            $tree_model->remove($child) if $tree_model->iter_is_valid($child) && $tree_model->get($child, 0) eq '';
+        }
+        # do not refill the parent anymore
+        $tree_model->set($parent_iter, 2 => 0);
+        
         foreach my $dir_entry (all($dir)) {
             my $entry_path = $dir . "/" . $dir_entry;
             if (-d $entry_path || $dir_entry =~ /\.o(\.gz)?$/) {
                 $entry_path =~ s|//|/|g;
-                
-                my $iter = $tree_model->append_set($parent_iter, [ 0 => $dir_entry, 1 => $entry_path ]);
+                my $iter = $tree_model->append_set($parent_iter, [ 0 => $dir_entry, 1 => $entry_path, 2 => has_sub_trees($entry_path) ]);
                 #- hackery for partial displaying of trees, used in rpmdrake:
                 #- if leaf is void, we may create the parent and one child (to have the [+] in front of the parent in the ctree)
                 #- though we use '' as the label of the child; then rpmdrake will connect on tree_expand, and whenever
