@@ -39,6 +39,9 @@ use my_gtk qw(:helpers :wrappers);
 use common;
 use strict;
 
+my $in = 'interactive'->vnew('', 'default');
+!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
+
 
 if ("@ARGV" =~ /--help|-h/) {
     print q(Backup and monitoring application
@@ -75,7 +78,6 @@ my $cfg_file_exist = 0;
 
 # config. FILES ->  PATH  & Global variables.
 my @sys_files = ("/etc");
-	# fixme check system to find all users.
 my @home_files = ("/home/seb") ;
 my @other_files = ("/var/www") ;
 my $cfg_file = "/etc/drakxtools/drakbackup/drakbackup.conf";
@@ -109,9 +111,19 @@ sub debug {
 }
 
 
+sub read_passwd {
+#foreach (grep /[5-9][0-9][0-9]/, cat_('/etc/passwd'));    
+#grep 5[0-9][0-9], cat_('/etc/passwd');
+	
+	
+    
+
+}
+
+
 sub save_conf_file {
 # perl -ne 'split(":");print "$_[0]:*:$_[2]:$_[3]:::\n";' /etc/passwd > passwd 
-# gawk -F":" '{ if ($3 >= 500 ) print "login " $1 " uid = " $3 " rép perso : " $6}' /etc/passwdgawk -F":" '{ if ($3 >= 500 ) print "login " $1 " uid = " $3 " rép perso : " $6}' /etc/passwd
+# gawk -F":" '{ if ($3 >= 500 ) print "login " $1 " uid = " $3 " rép perso : " $6}' /etc/passwd
     my @cfg_list = ( "SYS_FILES=@sys_files\n",
 		     "HOME_FILES=@home_files\n", 
 		     "OTHER_FILES=@other_files\n",
@@ -130,8 +142,7 @@ sub save_conf_file {
 
 sub read_conf_file {
     if (-e $cfg_file) {
-	open ( CONF_FILE, "<"."$cfg_file") || die;
-	while (<CONF_FILE>) {
+	while (cat_ ('$cfg_file')) {
 	    next unless /\S/;
 	    next if /^#/;
 	    chomp;
@@ -142,7 +153,6 @@ sub read_conf_file {
 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
 	}
-	close CONF_FILE;
 	$cfg_file_exist = 1;
     } else {
 	$cfg_file_exist = 0;
@@ -226,10 +236,12 @@ sub interactive_mode {
 						       ),
 					   0, new Gtk::HSeparator,
 					   0, gtkpack_(gtkset_layout(new Gtk::HButtonBox, -end),
-						       1, gtksignal_connect(new Gtk::Button(_("Advanced Configuration")), clicked => 
+						       1, gtksignal_connect(new Gtk::Button(_("Advanced Conf.")), clicked => 
 									    sub { ${$central_widget}->destroy(); advanced() }),
-						       1, gtksignal_connect(new Gtk::Button(_("Wizard Configuration")), clicked => 
+						       1, gtksignal_connect(new Gtk::Button(_("Wizard Conf.")), clicked => 
 									    sub { ${$central_widget}->destroy(); wizard() }),
+						       1, gtksignal_connect(new Gtk::Button(_("About")), clicked => 
+									    sub { ${$central_widget}->destroy(); about() }),
 						       1, gtksignal_connect(new Gtk::Button(_("close")), clicked => 
 									    sub { save_conf_file(); Gtk->main_quit() }),
 						       ),
@@ -283,7 +295,7 @@ sub about {
 					      ),
 				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
-							      sub { ${$central_widget}->destroy(); retore_window  }),
+							      sub { ${$central_widget}->destroy(); interactive_mode()  }),
 					    ),
 				  )
 	    );
@@ -348,14 +360,41 @@ configuration file:
 
 
 sub wizard {
-    my $wizard_box;
- 
-    gtkpack($up_box,
-	    new Gtk::VBox(0,10),
-	    $wizard_box = new Gtk::FontSelection,
-	    );
-    $central_widget = \$wizard_box;
-    $up_box->show_all();
+    my $intf;
+    my $user = 1;
+    my $user2;
+
+    my $module;
+    my $text;
+  begin: 
+    $::isWizard=1;
+
+ step_what_backup:
+#   $::Wizard_no_previous = 1;
+    $in->ask_from(_("Please choose that you want to backup"),
+  	          (_("Please choose that you want to backup") . "\n\n") .
+	          $text,
+		  [ 
+		    #{ label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
+		    { label => _("System Files"), val => \$user, type => "bool", text => _("  all files on your /etc directory.") },
+		    { label => _("user: seb"), val => \$user2, type => "bool", text => _("") },
+
+		    ],
+		  ),
+    
+
+   my $r = $in->ask_from_list_(_("Backup Configuration wizard"),
+				_("Please choose what you need to backup from your system"),
+				[ __("Hard Drive"), __("accross the Network"), __("Burn auto boot Restore CDROM") ]) 
+	or quit_global($in, 0);
+     
+  step_where_backup:
+    undef $::Wizard_no_previous;
+    my $r2 = $in->ask_from_no_check(_("Backup Configuration wizard"),
+				_("Please choose how to backup your system"),
+				[ __("Hard Drive"), __("accross the Network"), __("Burn auto boot Restore CDROM") ]) 
+	or quit_global($in, 0);
+
 
 }
 sub after_adv {
@@ -545,6 +584,29 @@ sub advanced {
 
 
 
+
+
+
+#   step_where_backup:
+#     undef $::Wizard_no_previous;
+#     my $r2 = $in->ask_from_list_(_("Backup Configuration wizard"),
+# 				_("Please choose how to backup your system"),
+# 				[ __("Hard Drive"), __("accross the Network"), __("Burn auto boot Restore CDROM") ]) 
+# 	or quit_global($in, 0);
+
+
+
+#    print "$r AAAA \n";
+#$r eq "Hard Drive" and  do something
+
+#     my $wizard_box;
+ 
+#     gtkpack($up_box,
+# 	    new Gtk::VBox(0,10),
+# 	    $wizard_box = new Gtk::FontSelection,
+# 	    );
+#     $central_widget = \$wizard_box;
+#     $up_box->show_all();
 
 
 
