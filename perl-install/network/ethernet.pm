@@ -77,7 +77,7 @@ qq(
 sub conf_network_card {
     my ($netc, $intf, $type, $ipadr, $netadr) = @_;
     #-type =static or dhcp
-    modules::interactive::load_category($in, 'network/main|usb', !$::expert, 1);
+    modules::interactive::load_category($in, 'network/main|gigabit|usb', !$::expert, 1);
     my @all_cards = conf_network_card_backend($netc, $intf, $type, undef, $ipadr, $netadr);
     my $interface;
     @all_cards == () and $in->ask_warn('', N("No ethernet network adapter has been detected on your system.
@@ -99,7 +99,7 @@ I cannot set up this connection type.")) and return;
     1;
 }
 
-#- conf_network_card_backend : configure the network cards and return the list of them, or configure one specified interface : WARNING, you have to setup the ethernet cards, by calling load_category($in, 'network/main|usb', !$::expert, 1) or load_category_backend before calling this function. Basically, you call this function in 2 times.
+#- conf_network_card_backend : configure the network cards and return the list of them, or configure one specified interface : WARNING, you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1) or load_category_backend before calling this function. Basically, you call this function in 2 times.
 #- input
 #-  $prefix
 #-  $netc
@@ -166,7 +166,7 @@ sub go_ethernet {
 sub configureNetwork {
     my ($netc, $intf, $_first_time) = @_;
     local $_;
-    modules::interactive::load_category($in, 'network/main|usb|pcmcia', !$::expert, 1) or return;
+    modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1) or return;
     my @l = detect_devices::getNet() or die N("no network card found");
     my @all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);
 

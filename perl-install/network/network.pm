@@ -437,7 +437,7 @@ sub easy_dhcp {
 
     require modules;
     require network::ethernet;
-    modules::load_category('network/main|usb');
+    modules::load_category('network/main|gigabit|usb');
     my @all_cards = network::ethernet::conf_network_card_backend();
 
     #- only for a single network card

@@ -59,7 +59,7 @@ sub detect {
     $auto_detect->{isdn}{$_} = $isdn->{$_} foreach qw(description vendor id driver card_type type);
     $auto_detect->{isdn}{description} =~ s/.*\|//;
 
-    modules::load_category('network/main|usb');
+    modules::load_category('network/main|gigabit|usb');
     require network::ethernet;
     network::ethernet->import;
     my @all_cards = conf_network_card_backend(undef, undef, undef, undef, undef, undef);
@@ -325,7 +325,7 @@ sub save_conf {
     $netcnx->{type} =~ /adsl/ and $adsl = $netcnx->{$netcnx->{type}};
     $netcnx->{type} eq 'isdn_external' || $netcnx->{type} eq 'modem' and $modem = $netcnx->{$netcnx->{type}};
     $netcnx->{type} eq 'isdn_internal' and $isdn = $netcnx->{$netcnx->{type}};
-    modules::load_category('network/main|usb');
+    modules::load_category('network/main|gigabit|usb');
     require network::ethernet;
     network::ethernet->import;
     my @_all_cards = conf_network_card_backend($netc, $intf, undef, undef, undef, undef);

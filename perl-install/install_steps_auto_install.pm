@@ -40,7 +40,7 @@ sub new {
 sub configureNetwork {
     my ($_o) = @_;
     log::l("install_steps_auto_install::configureNetwork");
-    modules::load_category('network/main|usb');
+    modules::load_category('network/main|gigabit|usb');
     goto &install_steps::configureNetwork;
 }
 
