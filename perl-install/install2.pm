@@ -348,7 +348,7 @@ sub choosePackages {
     if ($_[1] > 1 || !$o->{isUpgrade} || $::expert) {
 	if ($_[1] == 1) { 
 	    $o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
-	    $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
+#	    $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
 	}
 	$o->choosePackages($o->{packages}, $o->{compss}, 
 			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);

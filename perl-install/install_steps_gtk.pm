@@ -409,14 +409,14 @@ sub choosePackagesTree {
 			       gtkadd(gtkset_usize(new Gtk::Frame(_("Info")), 150, 0),
 				      createScrolledWindow($info_widget = new Gtk::Text),
 				     )),
-		    0, my $l = new Gtk::HBox(0,0),
+		    0, my $l = new Gtk::HBox(0,15),
 		    0, gtkpack(new Gtk::HBox(0,10),
 			       $go = gtksignal_connect(new Gtk::Button(_("Install")), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
 			      )
     ));
-    gtkpack__($l, $w_size = new Gtk::Label(''));
-    $l->pack_end(my $toolbar = new Gtk::Toolbar('horizontal', 'icons'), 0, 1, 0);
-    $l->pack_end(gtksignal_connect(new Gtk::CheckButton(_("Automatic dependencies")), clicked => sub { invbool \$auto_deps }), 0, 1, 0);
+    gtkpack__($l, my $toolbar = new Gtk::Toolbar('horizontal', 'icons'));
+    gtkpack__($l, gtksignal_connect(new Gtk::CheckButton(_("Automatic dependencies")), clicked => sub { invbool \$auto_deps }));
+    $l->pack_end($w_size = new Gtk::Label(''), 0, 1, 20);
 
     $w->{window}->set_usize(map { $_ - 2 * $my_gtk::border - 4 } $::windowwidth, $::windowheight);
     $go->grab_focus;
@@ -552,12 +552,11 @@ sub installPackages {
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
     my $w = my_gtk->new(_("Installing"), grab => 1);
-    $w->{window}->set_usize($::windowwidth * 0.8, 280);
+    $w->{window}->set_usize($::windowwidth * 0.8, 260);
     my $text = new Gtk::Label;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
-    gtkadd($w->{window}, gtkadd(new Gtk::EventBox,
-				gtkpack(new Gtk::VBox(0,10),
+    gtkadd($w->{window}, gtkpack(new Gtk::VBox(0,10),
 			       _("Please wait, "), $msg, $progress,
 			       create_packtable({},
 						[_("Time remaining "), $msg_time_remaining],
@@ -569,7 +568,7 @@ sub installPackages {
 			       gtkadd(create_hbox(),
 				      gtksignal_connect(new Gtk::Button(_("Cancel")), 
 							clicked => sub { $pkgs::cancel_install = 1 })),
-			      )));
+			      ));
     $msg->set(_("Preparing installation"));
     $w->sync;
 

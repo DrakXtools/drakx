@@ -332,9 +332,8 @@ sub testFinalConfig($;$$) {
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
-	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && $o->{card}{driver} && "-4")) :
-	   ())),
-	":9" or c::_exit(0);
+	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && $o->{card}{driver} && "-4")) : ()),
+	  ":9" or c::_exit(0);
     }
 
     do { sleep 1 } until c::Xtest(":9") || waitpid($pid, c::WNOHANG());

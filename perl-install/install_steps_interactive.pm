@@ -308,6 +308,7 @@ sub choosePackagesTree {}
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $compssUsersSorted) = @_;
 
+    add2hash_($o->{compssUsersChoice}, { Individual => $::expert });
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
 			       [ @$compssUsersSorted, _("Miscellaneous"), _("Individual package selection") ],

@@ -34,6 +34,7 @@ use c;
  -20 => __("i18n (very nice)"), #- every beginner/custom install in the corresponding lang have theses packages
  -30 => __("i18n (nice)"),
 );
+#- HACK: rating += 50 for some packages (like kapm, cf install_any::setPackages)
 #- HACK: rating += 10 if the group is selected and it is not a kde package (aka name !~ /^k/)
 
 
@@ -494,11 +495,11 @@ sub setSelectedFromCompssList {
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.
 	my %newSelection;
-	selectPackage($packages, $p, \%newSelection);
+	selectPackage($packages, $p, 0, \%newSelection);
 
 	#- this enable an incremental total size.
-	foreach (values %newSelection) {
-	    $nb += packageSize($_);
+	foreach (grep { $newSelection{$_} } keys %newSelection) {
+	    $nb += packageSize($packages->[0]{$_});
 	}
 	if ($max_size && $nb > $max_size) {
 	    $min_level = $p->{values}[$ind];
