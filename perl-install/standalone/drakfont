@@ -744,7 +744,7 @@ sub file_ok_sel {
 
 sub list_remove() { #- TODO : multi-selection
     my ($treeStore, $iter) = $list->get_selection->get_selected;
-    my $to_remove = $treeStore->_get($iter, 0);
+    my $to_remove = $treeStore->get($iter, 0);
     my ($index) = map_index { if_($_ eq $to_remove, $::i) } @install;
     splice @install, $index, 1;
     $treeStore->remove($iter);
@@ -783,7 +783,7 @@ sub list_to_remove() {
     #my @files_path = grep(!/fonts/, all($current_path)); garbage ?
     gtkflush();
     my ($tree, @tux) = $left_list->get_selection->get_selected_rows(); #- get tree & paths
-    foreach (@tux) { my $iter = $tree->get_iter($_); push @uninstall, $tree->_get($iter, 0) }
+    push @uninstall, $tree->get($tree->get_iter($_), 0) foreach @tux;
     #push @uninstall, $current_path . "/" . $files_path[$_] foreach @number_to_remove; garbage ?
     $$central_widget->destroy();
     show_list_to_remove();
@@ -911,10 +911,7 @@ sub import_status_uninstall() {
 
 sub progress {
     my ($progressbar, $incr, $label_text) = @_;
-    my ($new_val) = $progressbar->fraction;
-    $new_val += $incr;
-    if ($new_val > 1) { $new_val = 1 }
-    $progressbar->fraction($new_val);
+    $progressbar->set_fraction(min(1, $progressbar->get_fraction + $incr));
     $progressbar->set_text($label_text);
     gtkflush();
 }
