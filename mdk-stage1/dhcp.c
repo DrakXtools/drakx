@@ -340,7 +340,7 @@ static unsigned long currticks(void)
 
 #define BACKOFF_LIMIT 7
 #define	TICKS_PER_SEC 18
-#define MAX_ARP_RETRIES	4
+#define MAX_ARP_RETRIES	7
 
 static void rfc951_sleep(int exp)
 {
