@@ -291,7 +291,7 @@ sub configureNetwork($) {
     } else {
 	$_ = $::beginner ? "Do not" :
 	  $o->ask_from_list_([ _("Network Configuration") ],
-			     _("Do you want to configure networking for yout system?"),
+			     _("Do you want to configure networking for your system?"),
 			     [ __("Local LAN"), __("Dialup with modem"), __("Do not set up networking") ]);
     }
 
