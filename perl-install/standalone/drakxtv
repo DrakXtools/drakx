@@ -102,9 +102,8 @@ sub scan4channels() {
                            "scantv -n $norm -C /dev/v4l/vbi$::i -c /dev/v4l/video$::i -f $ftable_id -o $home/.xawtv" .
                            ($use_X ? "" : " &>$home/tmp/scantv.log;"));
 		  if ($i) {
-			 $in->ask_warn(N("There was an error while scanning for TV channels"),
-                              N("XawTV isn't installed!")) }
-		  else {
+			 $in->ask_warn(N("Error"), N("There was an error while scanning for TV channels"));
+            } else {
 			 log::explanations("created file $home/.xawtv");
                 $in->ask_warn(N("Have a nice day!"),
                               N("Now, you can run xawtv (under X Window!) !\n")) unless $use_X;
