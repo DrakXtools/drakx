@@ -1055,6 +1055,7 @@ sub generateAutoInstFloppy {
 
         commands::rm("-rf", $workdir, $mountdir, $imagefile);
     } else {
+	my $param = 'kickstart=floppy ' . install_any::generate_automatic_stage1_params($o);
 	{
 	    my $w = $o->wait_message('', _("Creating auto install floppy"));
 	    install_any::getAndSaveFile("images/$image.img", $dev) or log::l("failed to write $dev"), return;
@@ -1062,11 +1063,10 @@ sub generateAutoInstFloppy {
         fs::mount($dev, "/floppy", "vfat", 0);
 	substInFile { 
 	    s/timeout.*/$replay ? 'timeout 1' : ''/e;
-	    s/^(\s*append)/$1 kickstart=floppy/ 
+	    s/^(\s*append)/$1 $param/ 
 	} "/floppy/syslinux.cfg";
 
 	unlink "/floppy/help.msg";
-	output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
 	output "/floppy/boot.msg", "\n0c",
 "!! If you press enter, an auto-install is going to start.
    All data on this computer is going to be lost !!
