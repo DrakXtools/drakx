@@ -21,6 +21,7 @@ if_(arch() =~ /ppc/,
     [ 'grub', 0, "\xEBH", 0x181, "GRUB \0" ],
     [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],
+    [ 'lilo', 0x6 + 0x40,  "LILO" ], #- when relocated in lilo's bsect_update(), variable "space" on paragraph boundary gives 0x40
     [ 'grub', 0x6,  "GRUB" ],
     [ 'osbs', 0x2,  "OSBS" ], #- http://www.prz.tu-berlin.de/~wolf/os-bs.html
     [ 'pqmagic', 0xef, "PQV" ],
