@@ -564,7 +564,7 @@ sub setup_local_autoscan {
 		} elsif ($p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!) {
 		    $menustr .= N(", printer \"%s\" on SMB/Windows server \"%s\"", $2, $1);
 		}
-          $menustr .= " ($p->{port})" if $::expert;
+		$menustr .= " ($p->{port})" if $::expert;
 		$menuentries->{$menustr} = $p->{port};
 		push @str, N("Detected %s", $menustr);
 	    } else {
@@ -585,7 +585,7 @@ sub setup_local_autoscan {
 	my @port;
 	if ($::expert) {
 	    @port = detect_devices::whatPrinterPort();
-	    LOOP: foreach my $q (@port) {
+	  LOOP: foreach my $q (@port) {
 		if (@str) {
 		    foreach my $p (@autodetected) {
 			last LOOP if $p->{port} eq $q;
@@ -634,9 +634,36 @@ sub setup_local_autoscan {
     my $oldmenuchoice = "";
     my $device;
     if ($printer->{configured}{$queue} &&
-	$printer->{currentqueue}{connect} =~ m/^file:/) {
+	$printer->{currentqueue}{connect} =~
+	m!^usb://([^/]+)/([^/\?]+)(|\?serial=(\S+))$!) {
+	# USB device with URI referring to printer model
+	my $make = $1;
+	my $model = $2;
+	my $serial = $4;
+	if ($make and $model) {
+	    $make =~ s/\%20/ /g;
+	    $model =~ s/\%20/ /g;
+	    $serial =~ s/\%20/ /g;
+	    $make =~ s/Hewlett[-\s_]Packard/HP/;
+	    $make =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	    foreach my $p (@autodetected) {
+		next if (!$p->{val}{MANUFACTURER} or
+			 ($p->{val}{MANUFACTURER} ne $make));
+		next if (!$p->{val}{MODEL} or
+			 ($p->{val}{MODEL} ne $model));
+		next if ((!$p->{val}{SERIALNUMBER} and $serial) or
+			 ($p->{val}{SERIALNUMBER} and !$serial) or
+			 ($p->{val}{SERIALNUMBER} ne $serial));
+		$device = $p->{port};
+		$menuchoice = { reverse %$menuentries }->{$device}
+	    }
+	}
+    } elsif ($printer->{configured}{$queue} &&
+	$printer->{currentqueue}{connect} =~
+	m/^(file|parallel|usb|serial):/) {
 	# Non-HP or HP print-only device (HPOJ not used)
 	$device = $printer->{currentqueue}{connect};
+	$device =~ s/^(file|parallel|usb|serial)://;
 	$menuchoice = { reverse %$menuentries }->{$device}
     } elsif ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m!^ptal:/mlc:!) {
@@ -646,13 +673,12 @@ sub setup_local_autoscan {
 	if ($ptaldevice =~ /^par:(\d+)$/) {
 	    $menuchoice = { reverse %$menuentries }->{"/dev/lp$1"}
 	} else {
-	    my $make = lc($printer->{currentqueue}{make});
-	    my $model = lc($printer->{currentqueue}{model});
+	    $ptaldevice =~ /^usb:(.*)$/;
+	    my $model = $1;
+	    $model =~ s/_/ /g;
 	    $device = "";
 	    foreach my $p (keys %{$menuentries}) {
-		my $menumakemodel = lc($p);
-		if ($menumakemodel =~ /$make/ && 
-		    $menumakemodel =~ /$model/) {
+		if ($p =~ /$model/i) {
 		    $menuchoice = $p;
 		    $device = $menuentries->{$p};
 		    last;
@@ -1264,13 +1290,16 @@ N("You can specify directly the URI to access the printer. The URI must fulfill 
 { label => N("Printer Device URI"),
 val => \$printer->{currentqueue}{connect},
 list => [ $printer->{currentqueue}{connect},
-	  "file:/",
+	  "parallel:/",
+	  "usb:/",
+	  "serial:/",
 	  "http://",
 	  "ipp://",
 	  "lpd://",
 	  "smb://",
 	  "ncp://",
 	  "socket://",
+	  "file:/",
 	  "postpipe:\"\"",
 	  ], not_edit => 0 }, ],
 complete => sub {
@@ -1490,8 +1519,20 @@ sub setup_common {
     }
 
     if ($printer->{currentqueue}{connect} !~ /:/) {
-	$printer->{currentqueue}{connect} =
-	    "file:" . $printer->{currentqueue}{connect};
+	if ($printer->{currentqueue}{connect} =~ /usb/) {
+	    $printer->{currentqueue}{connect} =
+		"usb:" . $printer->{currentqueue}{connect};
+	} elsif ($printer->{currentqueue}{connect} =~ /(serial|tty)/) {
+	    $printer->{currentqueue}{connect} =
+		"serial:" . $printer->{currentqueue}{connect};
+	} elsif ($printer->{currentqueue}{connect} =~ 
+		 /(printers|parallel|parport|lp\d)/) {
+	    $printer->{currentqueue}{connect} =
+		"parallel:" . $printer->{currentqueue}{connect};
+	} else {
+	    $printer->{currentqueue}{connect} =
+		"file:" . $printer->{currentqueue}{connect};
+	}
     }
 
     #- if CUPS is the spooler, make sure that CUPS knows the device
@@ -1864,6 +1905,12 @@ N("If your printer is not listed, choose a compatible (see printer manual) or a 
 }
 
 my %lexmarkinkjet_options = (
+                             'parallel:/dev/lp0' => " -o Port=ParPort1",
+                             'parallel:/dev/lp1' => " -o Port=ParPort2",
+                             'parallel:/dev/lp2' => " -o Port=ParPort3",
+                             'usb:/dev/usb/lp0' => " -o Port=USB1",
+                             'usb:/dev/usb/lp1' => " -o Port=USB2",
+                             'usb:/dev/usb/lp2' => " -o Port=USB3",
                              'file:/dev/lp0' => " -o Port=ParPort1",
                              'file:/dev/lp1' => " -o Port=ParPort2",
                              'file:/dev/lp2' => " -o Port=ParPort3",
@@ -1942,8 +1989,8 @@ sub get_printer_info {
 		# oki4w driver -> OKI winprinter which needs the
 		# oki4daemon to work
 		if ($printer->{currentqueue}{driver} eq 'oki4w') {
-		    if ($printer->{currentqueue}{connect} ne 
-			'file:/dev/lp0') {
+		    if ($printer->{currentqueue}{connect} !~ 
+			m!^(parallel|file):/dev/lp0$!) {
 			$in->ask_warn(N("OKI winprinter configuration"),
 				      N("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they work only when connected to the first parallel port. When your printer is connected to another port or to a print server box please connect the printer to the first parallel port before you print a test page. Otherwise the printer will not work. Your connection type setting will be ignored by the driver."));
 		    }
@@ -1970,13 +2017,14 @@ sub get_printer_info {
 			return 0;
 		    }
 		    # Set device permissions
-		    $printer->{currentqueue}{connect} =~ /^\s*file:(\S*)\s*$/;
+		    $printer->{currentqueue}{connect} =~ 
+			/^\s*(file|parallel|usb):(\S*)\s*$/;
 		    if ($printer->{SPOOLER} eq 'cups') {
-			set_permissions($1, '660', 'lp', 'sys');
+			set_permissions($2, '660', 'lp', 'sys');
 		    } elsif ($printer->{SPOOLER} eq 'pdq') {
-			set_permissions($1, '666');
+			set_permissions($2, '666');
 		    } else {
-			set_permissions($1, '660', 'lp', 'lp');
+			set_permissions($2, '660', 'lp', 'lp');
 		    }
 		    # This is needed to have the device not blocked by the
 		    # spooler backend.
@@ -2928,11 +2976,19 @@ sub setup_default_spooler {
 
 sub configure_queue {
     my ($printer, $in) = @_;
-    my $_w = $in->wait_message(N("Printerdrake"), N("Configuring printer \"%s\"...",
-				$printer->{currentqueue}{queue}));
+    my $_w = $in->wait_message(N("Printerdrake"),
+			       N("Configuring printer \"%s\"...",
+				 $printer->{currentqueue}{queue}));
     $printer->{complete} = 1;
-    printer::main::configure_queue($printer);
+    my $retval = printer::main::configure_queue($printer);
     $printer->{complete} = 0;
+    if (!$retval) {
+	local $::isWizard = 0;
+	$in->ask_warn(N("Printerdrake"),
+		      N("Failed to configure printer \"%s\"!",
+			$printer->{currentqueue}{queue}));
+    }
+    return $retval;
 }
 
 sub install_foomatic {
@@ -3321,7 +3377,7 @@ sub main {
 		  step_5:
 		    setup_options($printer, $in) or
 			goto step_4;
-		    configure_queue($printer, $in);
+		    configure_queue($printer, $in) or die 'wizcancel';
 		    undef $printer->{MANUAL} if $printer->{MANUAL};
 		    $::Wizard_no_previous = 1;
 		    setasdefault($printer, $in);
@@ -3373,7 +3429,7 @@ sub main {
 		}
 		get_printer_info($printer, $in) or next;
 		setup_options($printer, $in) or next;
-		configure_queue($printer, $in);
+		configure_queue($printer, $in) or next;
 		undef $printer->{MANUAL} if $printer->{MANUAL};
 		setasdefault($printer, $in);
 		$cursorpos = 
