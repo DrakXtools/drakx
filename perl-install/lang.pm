@@ -793,11 +793,11 @@ my %charset2kde_font = (
   'gb2312' => [ "Nimbus Sans L,12", "Monospace,12" ],
   'Big5' => [ "AR PL Mingti2L Big5,13" ],
   'tis620' => [ "Norasi,16", "Norasi,15" ],
-  'utf_ar' => [ "Kacs_qr,14", "Courier New,13", "Kacs_qr,13" ], 
+  'utf_ar' => [ "Roya,14", "Courier New,13", "Roya,13" ], 
   'utf_am' => [ "GF Zemen Unicode,15" ],
-  'utf_az' => [ "Nimbus Sans,12", "Nimbus Mono,10", "Nimbus Sans,11" ],
+  'utf_az' => [ "Nimbus Sans L,12", "Nimbus Mono L,10", "Nimbus Sans L,11" ],
   'utf_bn' => [ "Mukti Narrow,14", "Mitra Mono,12", "Mukti Narrow,14" ],
-  'utf_he' => [ "Nachlieli,13", "Miriam Mono,10", "Nachlieli,11" ],
+  'utf_he' => [ "Nachlieli CLM,13", "Miriam Mono CLM,10", "Nachlieli CLM,11" ],
   'utf_hi' => [ "Raghindi,14", ],
   'utf_hy' => [ "Artsounk,12", "Monospace,10", "Artsounk,11" ],
 #-'utf_iu' => [ "????,14", ],
@@ -805,11 +805,11 @@ my %charset2kde_font = (
   'utf_kn' => [ "Sampige,14", ],
   'utf_ml' => [ "malayalam,14", ],
   'utf_ta' => [ "TSCu_Paranar,14", "Tsc_avarangalfxd,10", "TSCu_Paranar,12", ],
-  'utf_vi' => [ "Nimbus Sans,12", "Nimbus Mono,10", "Nimbus Sans,11" ],
+  'utf_vi' => [ "Nimbus Sans L,12", "Nimbus Mono L,10", "Nimbus Sans L,11" ],
   #- the following should be changed to better defaults when better fonts
   #- get available
-  'utf_ka' => [ "clearlyu,15" ],
-  'utf_lo' => [ "clearlyu,15" ],
+  'utf_ka' => [ "ClearlyU,15" ],
+  'utf_lo' => [ "ClearlyU,15" ],
   'default' => [ "Sans,12", "Monospace,10", "Sans,11" ],
 );
 
@@ -829,7 +829,7 @@ sub charset2kde_font {
 # an appropriate font for each language for the installer only.
 my %charset2pango_font = (
   'tis620' =>      "Norasi 17",
-  'utf_ar' =>      "Kacst-Qr 14",
+  'utf_ar' =>      "Roya 14",
   'utf_cyr2' =>    "Nimbus Sans L 12",
   'utf_he' =>      "Sans 12",
   'utf_hy' =>      "Artsounk 14",
@@ -1076,13 +1076,19 @@ sub write {
             s!^function lang\b.*!function lang()="$h->{LANG}"!g;
         } "$::prefix/etc/menu-methods/lang.h" if !$b_user_only;
     }
+    
+    my $charset = l2charset($locale->{lang});
+    my $qtglobals = $b_user_only ? "$ENV{HOME}/.qt/qtrc" : "/etc/qtrc";
+    update_gnomekderc($qtglobals, General => (
+       		      font => charset2kde_font($charset, 0),
+       	          ));
+
+	configure_kdeglobals($locale, $confdir);
 
     eval {
 	my $confdir = $::prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
 
 	-d $confdir or die 'not configuring kde config files since it is not installed/used';
-
-	configure_kdeglobals($locale, $confdir);
 
 	my %qt_xim = (zh => 'Over The Spot', ko => 'On The Spot', ja => 'On The Spot');
 	if ($b_user_only && (my $qt_xim = $qt_xim{locale_to_main_locale($locale->{lang})})) {
