@@ -241,9 +241,6 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 
 enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options)
 {
-#ifndef DISABLE_NETWORK
-	char alias[500];
-#endif
 	int i;
 #ifndef DISABLE_NETWORK
 	char ** net_devices = NULL; /* fucking compiler */
@@ -271,6 +268,7 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char 
 		if (type == NETWORK_DEVICES) {
 			char ** new_net_devices = get_net_devices();
 			while (new_net_devices && *new_net_devices) {
+				char alias[500];
 				char ** ptr = net_devices;
 				while (ptr && *ptr) {
 					if (!strcmp(*new_net_devices, *ptr))
