@@ -503,6 +503,11 @@ my %gtkqt_im =
              XIM_PROGRAM => 'fcitx',
              XMODIFIERS => '@im=fcitx',
             },
+   'im-ja' => {
+               GTK_IM_MODULE => 'im-ja',  # 'im-ja-xim-server',
+               XMODIFIERS => '@im=im-ja-xim-server',
+              },
+
    kinput2 => {   
                XIM => 'kinput2',
                XIM_PROGRAM => 'kinput2',
