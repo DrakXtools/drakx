@@ -129,7 +129,7 @@ sub setupBootloader {
 			   if_(exists $b->{methods}{lilo},
 			       __("LILO with text menu")      => sub { $b->{methods}{lilo} = "boot-menu.b" },
 			       __("LILO with graphical menu") => sub { $b->{methods}{lilo} = "boot-graphic.b" }),
-			   if_(exists $b->{methods}{grub} && !$::isEmbedded,
+			   if_(exists $b->{methods}{grub},
 			       #- put lilo if grub is chosen, so that /etc/lilo.conf is generated
 			       __("Grub")                     => sub { $b->{methods}{grub} = 1;
 								       exists $b->{methods}{lilo}
