@@ -93,7 +93,7 @@ sub load_category {
       if_(arch() =~ /ppc/, 
 	  if_($category =~ /scsi/, 'mesh', 'mac53c94'),
 	  if_($category =~ /net/, 'bmac', 'gmac', 'mace', 'airport'),
-	  if_($category =~ /sound/, 'dmasound_awacs'),
+	  if_($category =~ /sound/, 'dmasound_pmac'),
       ),
     );
     grep {
