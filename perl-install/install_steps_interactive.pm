@@ -429,7 +429,7 @@ sub choosePackages {
     my $min_size = pkgs::selectedSize($packages);
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
-    my $min_mark = $::expert ? 1 : 2;
+    my $min_mark = $::expert ? 3 : 4;
     my $def_mark = 4; #-TODO: was 59, 59 is for packages that need gl hw acceleration.
 
     my $b = pkgs::saveSelected($packages);
