@@ -1029,7 +1029,7 @@ So, here, the lifetime units are 'min', 'min', 'sec', 'sec', 'sec' and 'hour'.
       {	label => N("Authentication algorithm"), val => \$data->{5}[1],
 	list => [ qw(des 3des des_iv64 des_iv32 hmac_md5 hmac_sha1 non_auth) ] },
       {	label => N("Compression algorithm"), val => \$data->{6}[1],
-	list => [ 'deflate' ], allow_empty_list => 1 }
+	list => [ N_("deflate") ], format => \&translate, allow_empty_list => 1 }
 
 ]) }
 
@@ -1054,7 +1054,7 @@ specified by separating them with a comma. All of the
 modes are acceptable. The first exchange mode is what
 racoon uses when it is the initiator.\n") },
                      { label => N("Generate policy"), val => \$main_remote_section->{3}[1], 
-	list => [ 'off', 'on' ],
+	list => [ N_("off"), N_("on") ], format => \&translate,
 	help => N("This directive is for the responder.  Therefore you
 should set passive on in order that racoon(8) only
 becomes a responder.  If the responder does not have any
@@ -1070,7 +1070,7 @@ installed due to some policy mismatches between the ini-
 tiator and the responder.  This directive is ignored in
 the initiator case.  The default value is off.") },
                      { label => N("Passive"), val => \$main_remote_section->{4}[1], 
-	list => [ 'off', 'on' ], 
+	list => [ N_("off"), N_("on") ], format => \&translate, 
 	help => N("If you do not want to initiate the negotiation, set this
 to on.  The default value is off.  It is useful for a
 server.") },
@@ -1083,7 +1083,7 @@ server.") },
                      { label => N("Peers certfile"), val => \$main_remote_section->{6}[1], type => 'entry',
 	help => N("Name of the peers certificate") },
                      { label => N("Verify cert"), val => \$main_remote_section->{7}[1],
-	list => [ 'off', 'on' ], 
+	list => [ N_("off"), N_("on") ], format => \&translate,
 	help => N("If you do not want to verify the peer's certificate for
 some reason, set this to off.  The default is on.") },
                      { label => N("My identifier"), val => \$main_remote_section->{8}[1], type => 'entry',
@@ -1129,14 +1129,18 @@ sub ask_info3 {
 	[	{ label => N("Command"), val => \$section->{command}, list => [ 'spdadd' ], allow_empty_list => 1 },
 		{ label => N("Source IP range"), val => \$section->{src_range}, type => 'entry' },
 		{ label => N("Destination IP range"), val => \$section->{dst_range}, type => 'entry' },
-		{ label => N("Upper-layer protocol"), val => \$section->{upperspec}, list =>  [ 'any' ], allow_empty_list => 1 },
+		{ label => N("Upper-layer protocol"), val => \$section->{upperspec}, list => [ N_("any") ],
+            format => \&translate, allow_empty_list => 1 },
 		{ label => N("Flag"), val => \$section->{flag}, list => [ '-P' ], allow_empty_list => 1 },
 		{ label => N("Direction"), val => \$section->{direction}, list => [ 'in', 'out' ] },
-		{ label => N("IPsec policy"), val => \$section->{ipsec}, list => [ 'ipsec', 'discard', 'none' ] },
+		{ label => N("IPsec policy"), val => \$section->{ipsec}, list => [ N_("ipsec"), N_("discard"), N_("none") ],
+            format => \&translate },
 		{ label => N("Protocol"), val => \$section->{protocol}, list => [ 'esp', 'ah', 'ipcomp' ] },
-		{ label => N("Mode"), val => \$section->{mode}, list => [ 'tunnel', 'transport', 'any' ] },
+		{ label => N("Mode"), val => \$section->{mode}, list => [ N_("tunnel"), N_("transport"), N_("any") ],
+            format => \&translate },
 		{ label => N("Source/destination"), val => \$section->{src_dest}, type => 'entry' },
-		{ label => N("Level"), val => \$section->{level}, list => [ 'require', 'default', 'use', 'unique' ] },
+		{ label => N("Level"), val => \$section->{level}, list => [ N_("require"), N_("default"), N_("use"), N_("unique") ],
+            format => \&translate },
 		  ]);
 }
 
