@@ -38,13 +38,23 @@ my $sysconf_network = "/etc/sysconfig/network";
 my $conf_linuxconf = "/etc/conf.linuxconf";
 my $rc_firewall = "/etc/rc.d/rc.firewall.inet_sharing";
 my $dhcpd_conf = "/etc/dhcpd.conf";
+my $cups_conf = "/etc/cups/cupsd.conf";
 
 
 my $drakgw_setup = "/etc/sysconfig/inet_sharing";
 
 sub start_daemons()
 {
+    my $cups_used = 0;
     log::l("[drakgw] Starting daemons\n");
+    if (-f "/etc/rc.d/init.d/cups")
+    {
+        if (grep(/is running/, `/etc/rc.d/init.d/cups status`))
+        {
+           $cups_used = 1;
+           (system("/etc/rc.d/init.d/cups stop") == 0) or die "Could not stop the CUPS daemon";
+        }
+    }
     grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
     grep(/error: cannot connect/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
     (system("/etc/rc.d/init.d/network restart") == 0) or die "Could not restart the network";
@@ -53,7 +63,10 @@ sub start_daemons()
     (system("/sbin/chkconfig --level 345 named on") == 0) or die "Could not chkconfig named";
     (system("/etc/rc.d/init.d/dhcpd start") == 0) or die "Could not start the dhcp server";
     (system("/sbin/chkconfig --level 345 dhcpd on") == 0) or die "Could not chkconfig dhcpd";
-    
+    if ($cups_used == 1)
+    {
+        (system("/etc/rc.d/init.d/cups start") == 0) or die "Could not start the CUPS daemon";
+    }
     local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
     print DRAKGW_SETUP "INET_SHARING=enabled\n";
     close DRAKGW_SETUP;
@@ -90,7 +103,7 @@ sub fatal_quit($)
 
 
 #- **********************************
-#- * 0nd step: verify if we are already set up
+#- * 0th step: verify if we are already set up
 
 if (-f $drakgw_setup)
 {
@@ -491,6 +504,29 @@ open CONF_LINUXCONF, ">$conf_linuxconf" or die "Can't open $conf_linuxconf";
 print CONF_LINUXCONF @conf_linuxconf_content;
 close CONF_LINUXCONF;
 
+#- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
+#- working correctly: 
+#- 
+#-  1. ServerName <server's IP address>  # because clients do necessarily 
+#-                                       # know the server's name
+#-
+#-  2. BrowseAddress <server's Broadcast IP> # broadcast printer info into
+#-                                           # the local network.
+#-
+#- These steps are only done when the CUPS package is installed.
+
+if (-f $cups_conf)
+{
+    open CONF_CUPS, "$cups_conf" or die "Can't open $cups_conf";
+    my @cups_conf_content = <CONF_CUPS>;
+    close CONF_CUPS;
+    ($_ =~ /ServerName[^:]/ and $_="ServerName $lan_address.1\n") foreach @cups_conf_content;
+    grep(/ServerName[^:]/, @cups_conf_content) or push @cups_conf_content, "ServerName $lan_address.1\n";
+    grep(/^BrowseAddress $lan_address.255/, @cups_conf_content) or push @cups_conf_content, "BrowseAddress $lan_address.255\n";
+    open CONF_CUPS, ">$cups_conf" or die "Can't open $conf_linuxconf";
+    print CONF_CUPS @cups_conf_content;
+    close CONF_CUPS;
+}
 
 #- start the daemons
 
@@ -513,6 +549,9 @@ $in->exit(0);
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.17  2000/11/13 15:48:33  gc
+#- Integrate Till's patches for better work with Cups.
+#-
 #- Revision 1.16  2000/10/10 15:31:50  gc
 #- make only one call to urpmi in order to install all the needed rpm's
 #-
