@@ -532,9 +532,12 @@ sub create_vbox {
 sub _create_window($$) {
     my ($o, $title) = @_;
     my $w = new Gtk::Window;
-    my $f = new Gtk::Frame(undef);
+    gtkadd($w,
+	   gtkadd( my $f_ = gtkset_shadow_type(new Gtk::Frame(undef), 'out'),
+		   my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
+		 ),
+  	  );
     $w->set_name("Title");
-    gtkadd($w, $f);
 
     $w->set_title($title);
 
@@ -584,6 +587,7 @@ sub _create_window($$) {
 
     $o->{window} = $f;
     $o->{rwindow} = $w;
+    $f_->draw(undef);
 }
 
 my ($next_child, $left, $right, $up, $down);
