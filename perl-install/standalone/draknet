@@ -333,7 +333,7 @@ Gtk->main;
 Gtk->exit(0);
 
 dd:
-netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
+network::netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
 $in->exit(0);
 
 

@@ -88,98 +88,10 @@ sub main {
     ($prefix, my $netcnx, my $netc, my $mouse, $in, my $intf, $install, my $first_time, my $direct_fr) = @_;
     $netc->{minus_one}=0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
-    my $continue = !(!$::expert && values %$intf > 0 && $first_time);
     $::isStandalone and read_net_conf($netcnx, $netc); # REDONDANCE with intro. FIXME
     $netc->{NET_DEVICE}=$netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
     $netc->{NET_INTERFACE}=$netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
     network::read_all_conf($prefix, $netc ||= {}, $intf ||= {});
-#    $in->set_help('') unless $::isStandalone;
-
-#use network::adsl;
-#use network::ethernet;
-#use network::isdn;
-#use network::modem;
-
-    my $configure_modem = sub {
-	require network::modem;
-	network::modem::configure($netcnx, $mouse, $netc);
-    };
-
-    my $configure_isdn = sub {
-	require network::isdn;
-	network::isdn::configure($netcnx, $netc);
-    };
-    my $configure_adsl = sub {
-	require network::adsl;
-	network::adsl::configure($netcnx, $netc);
-    };
-    my $configure_cable = sub {
-	$::isInstall and $in->set_help('configureNetworkCable');
-	$netcnx->{type}='cable';
-	#  		     $netcnx->{cable}={};
-	#  		     $in->ask_from_entries_ref(_("Cable connection"),
-	#  _("Please enter your host name if you know it.
-	#  Some DHCP servers require the hostname to work.
-	#  Your host name should be a fully-qualified host name,
-	#  such as ``mybox.mylab.myco.com''."),
-	#  					       [_("Host name:")], [ \$netcnx->{cable}{hostname} ]);
-	if ($::expert) {
-	    #- dhcpcd, etc are program names; no need to translate them.
-	    my @m=(
-		   { description => "dhcpcd",
-		     c => 1},
-		   { description => "dhcpxd",
-		     c => 3},
-		   { description => "dhcp-client",
-		     c => 4},
-		  );
-	    if (my $f = $in->ask_from_listf(_("Connect to the Internet"),
-					    _("Which dhcp client do you want to use?
-Default is dhcpcd"),
-					    sub { $_[0]{description} },
-					    \@m )) {
-		$f->{c}==1 and $netcnx->{dhcp_client}="dhcpcd" and $install->(qw(dhcpcd));
-		$f->{c}==3 and $netcnx->{dhcp_client}="dhcpxd" and $install->(qw(dhcpxd));
-		$f->{c}==4 and $netcnx->{dhcp_client}="dhcp-client" and $install->(qw(dhcp-client));
-	    }
-	} else {
-	    $install->(qw(dhcpcd));
-	}
-	go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
-    };
-    my $configure_lan = sub {
-	$::isInstall and $in->set_help('configureNetworkIP');
-	network::configureNetwork($prefix, $netc, $in, $intf, $first_time) or return;
-	network::configureNetwork2($in, $prefix, $netc, $intf, $install);
-	if ($::isStandalone and $in->ask_yesorno(_("Network configuration"),
-						 _("Do you want to restart the network"), 1)) {
-	    run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
-	    if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network start")) {
-		$in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network start`), 0) or return;
-	    }
-	}
-	$netc->{NETWORKING} = "yes";
-	if ($netc->{GATEWAY}) {
-	    $netcnx->{type}='lan';
-	    $netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
-	    $netcnx->{NET_INTERFACE} = 'lan';#$netc->{NET_INTERFACE};
-	}
-	output "$prefix$connect_file",
-	  qq(
-#!/bin/bash
-/etc/rc.d/init.d/network restart
-);
-	output "$prefix$disconnect_file",
-	  qq(
-#!/bin/bash
-/etc/rc.d/init.d/network stop
-/sbin/ifup lo
-);
-	chmod 0755, "$prefix$disconnect_file";
-	chmod 0755, "$prefix$connect_file";
-	$::isStandalone and modules::write_conf($prefix);
-	1;
-    };
 
     modules::mergein_conf("$prefix/etc/modules.conf");
 
@@ -239,15 +151,6 @@ ifdown eth0
     my $i=0;
     map { defined $set_default or do { $_->[1] and $set_default=$i; }; $i++; } @l;
     foreach (keys %{$netc->{autodetect}}) { print "plop $_\n" };
-#    my $e = $in->ask_from_listf(_("Network Configuration Wizard"),
-#				_("How do you want to connect to the Internet?"), sub { translate($_[0][0]) . if_($_[0][1], " - " . _ ($_[0][2], $_[0][1])) }, \@l , $l[$set_default]
-#			       ) or goto step_1;
-
-#    my @l2 = map {
-#{
-#	label => $_[0][0] . if_($_[0][1], " - " . _ ($_[0][2], $_[0][1])),
-#	  val => $_[0][3], type => 'bool'}
-# } @l;
     my $e = $in->ask_from_entries_refH(_("Network Configuration Wizard"),
 				       _("Choose"),
 				       [
@@ -259,11 +162,11 @@ ifdown eth0
 
 #    load_conf ($netcnx, $netc, $intf);
 
-    $conf{modem} and do { $configure_modem->() or goto step_2 };
-    $conf{isdn} and do { $configure_isdn->() or goto step_2 };
-    $conf{adsl} and do { $configure_adsl->() or goto step_2 };
-    $conf{cable} and do { $configure_cable->() or goto step_2 };
-    $conf{lan} and do { $configure_lan->() or goto step_2 };
+    $conf{modem} and do { require network::modem; network::modem::configure($netcnx, $mouse, $netc) or goto step_2 };
+    $conf{isdn} and do { require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };
+    $conf{adsl} and do { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{cable} and do { require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2 };
+    $conf{lan} and do { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2 };
 
   step_3:
 

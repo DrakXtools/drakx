@@ -11,6 +11,7 @@ use vars qw(@ISA @EXPORT);
 @EXPORT = qw(adsl_ask_info adsl_detect adsl_conf adsl_conf_backend);
 
 sub configure{
+    my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkADSL');
   conf_adsl_step1:
     my $type = $in->ask_from_list_(_("Connect to the Internet"),

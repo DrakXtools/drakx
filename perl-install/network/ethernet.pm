@@ -10,6 +10,78 @@ use vars qw(@ISA @EXPORT);
 @ISA = qw(Exporter);
 @EXPORT = qw(conf_network_card conf_network_card_backend go_ethernet);
 
+sub configure_cable {
+    my ($netcnx, $netc, $intf, $first_time) = @_;
+    $::isInstall and $in->set_help('configureNetworkCable');
+    $netcnx->{type}='cable';
+    #  		     $netcnx->{cable}={};
+    #  		     $in->ask_from_entries_ref(_("Cable connection"),
+    #  _("Please enter your host name if you know it.
+    #  Some DHCP servers require the hostname to work.
+    #  Your host name should be a fully-qualified host name,
+    #  such as ``mybox.mylab.myco.com''."),
+    #  					       [_("Host name:")], [ \$netcnx->{cable}{hostname} ]);
+    if ($::expert) {
+	my @m=(
+	       { description => "dhcpcd",
+		 c => 1},
+	       { description => "dhcpxd",
+		 c => 3},
+	       { description => "dhcp-client",
+		 c => 4},
+	      );
+	if (my $f = $in->ask_from_listf(_("Connect to the Internet"),
+					_("Which dhcp client do you want to use?
+Default is dhcpcd"),
+					sub { $_[0]{description} },
+					\@m )) {
+	    $f->{c}==1 and $netcnx->{dhcp_client}="dhcpcd" and $install->(qw(dhcpcd));
+	    $f->{c}==3 and $netcnx->{dhcp_client}="dhcpxd" and $install->(qw(dhcpxd));
+	    $f->{c}==4 and $netcnx->{dhcp_client}="dhcp-client" and $install->(qw(dhcp-client));
+	}
+    } else {
+	$install->(qw(dhcpcd));
+    }
+    go_ethernet($netc, $intf, 'dhcp', '', '', $first_time);
+}
+
+sub configure_lan {
+    my ($netcnx, $netc, $intf, $first_time) = @_;
+    $::isInstall and $in->set_help('configureNetworkIP');
+    require Data::Dumper;
+    print "plop :" . Data::Dumper->Dump([\$in], ['$in']) . "\n";
+    network::configureNetwork($prefix, $netc, $in, $intf, $first_time) or return;
+    network::configureNetwork2($in, $prefix, $netc, $intf, $install);
+    if ($::isStandalone and $in->ask_yesorno(_("Network configuration"),
+					     _("Do you want to restart the network"), 1)) {
+	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
+	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network start")) {
+	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network start`), 0) or return;
+	}
+    }
+    $netc->{NETWORKING} = "yes";
+    if ($netc->{GATEWAY}) {
+	$netcnx->{type}='lan';
+	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
+	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
+    }
+    output "$prefix$connect_file",
+      qq(
+#!/bin/bash
+/etc/rc.d/init.d/network restart
+);
+    output "$prefix$disconnect_file",
+      qq(
+#!/bin/bash
+/etc/rc.d/init.d/network stop
+/sbin/ifup lo
+);
+    chmod 0755, "$prefix$disconnect_file";
+    chmod 0755, "$prefix$connect_file";
+    $::isStandalone and modules::write_conf($prefix);
+    1;
+}
+
 sub conf_network_card {
     my ($netc, $intf, $type, $ipadr, $netadr) = @_;
     #-type =static or dhcp
