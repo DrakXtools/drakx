@@ -633,7 +633,8 @@ sub autoDefaultDepth($$) {
 
 	#- try to have resolution_wanted
 	$best = max($best || 0, $d) if $r->[0][0] >= $wres_wanted;
-	$best = $card->{suggest_depth}, last if $r->[0][0] >= $wres_wanted || $r->[0][0] >= $card->{suggest_wres};
+	$best = $card->{suggest_depth}, last if ($card->{suggest_depth} &&
+						 $card->{suggest_wres} && $r->[0][0] >= $card->{suggest_wres});
     }
     $best || $depth or die "no valid modes";
 }
