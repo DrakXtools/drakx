@@ -4,13 +4,13 @@
          $Date$
 
 
-Nowadays, you can boot Linux without every relying on CHS
+Nowadays, you can boot Linux without ever relying on CHS
 (Cylinder/Head/Size):
 
 - CHS information on partition table is obsolete and not used anymore.
 It was causing the 1024th cylinder limitation:
-  - disallowing partitions above 8GiG. Problem overcome using 32bits linear
-  addressing in partition table.
+  - disallowing partitions above 8GiG. Problem overcome using 28bits Linear
+  Block Addressing (LBA) in partition table.
   - disallowing to boot on partition above 8GiG (due to int13 limitation used
   in bootloaders). Problem overcome using int13 extensions (EDD)
 
