@@ -31,7 +31,7 @@ foreach (uniq(get(''), get('.desktop'))) {
         s/"/\"/g;
         s/\n//g;
         print qq(
-#: ../../share/compssUsers
+#: ../../share/compssUsers:999
 msgid "$_"
 msgstr ""
 );
