@@ -24,7 +24,9 @@ sub read_directives {
     my ($lines_ptr, $directive) = @_;
 
     my $searchdirective = searchstr($directive);
-    map { if_(/^\s*$searchdirective\s+(\S.*)$/, chomp_($1)) } @$lines_ptr;
+    # do not use if_() below because it slow down printerdrake
+    # to the point one can believe in process freeze:
+    map { (/^\s*$searchdirective\s+(\S.*)$/ ? chomp_($1) : ()) } @$lines_ptr;
 }
 
 sub read_unique_directive {
