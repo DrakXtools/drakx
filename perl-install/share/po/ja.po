@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2000-07-05 15:44+0200\n"
+"PO-Revision-Date: 2003-02-28 13:46+0100\n"
 "Last-Translator: YAMAGATA Hiroo <hiyori13@alum.mit.edu>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,16 +22,18 @@ msgstr ""
 "ユーザ毎の共有は、“fileshare”グループを使います。\n"
 "このグループにユーザを追加するには、userdrake が使えますよ。"
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "キャンセル"
@@ -109,15 +111,14 @@ msgid "Country"
 msgstr "マウント"
 
 #: ../../any.pm:1
+#, fuzzy, c-format
+msgid "All languages"
+msgstr "言語の選択"
+
+#: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
 msgstr ""
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "ぜんぶ"
 
 #: ../../any.pm:1
 #, c-format
@@ -499,6 +500,16 @@ msgstr "コマンドラインオプションの制限"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Enable ACPI"
+msgstr "CD からの起動を有効にしますか？"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "デフォルトイメージ起動の待ち時間"
 
@@ -551,6 +562,11 @@ msgstr "スキップ"
 #, fuzzy, c-format
 msgid "On Floppy"
 msgstr "起動フロッピー"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "First sector of the root partition"
+msgstr "ブートパーティションの最初のセクタ"
 
 #: ../../any.pm:1
 #, c-format
@@ -761,241 +777,6 @@ msgstr ""
 "Ichiran kara erande <ENTER> wo oshimasu. %d byou de Default ni narimasu.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "OK"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr "この (ユーザ、デスクトップ）で自動ログインする"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "自動ログインはしない"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "起動時に X ウィンドウを実行"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "システムモード"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "起動スプラッシュ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "lilo画面"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"liloと起動スプラッシュの\n"
-"テーマを選びましょう。\n"
-"両者は別々に選べます"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "テーマ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "スプラッシュ選択"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "設定"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"いま、ブートマネージャには %s をお使いです。\n"
-"設定ウィザードを起動するには「設定」をクリックしましょう。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "Liloと起動時スプラッシュテーマのインストール成功"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "テーマのインストール失敗！"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "通知"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "エラー"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "liloを再実行します"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"LiLoを再実行できません！\n"
-"Liloテーマのインストールを完了するにはrootになって「lilo」を実行します。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "mkinitrd -f /boot/initrd-%s.img %sをinitrdにする"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "mkinitrd -f /boot/initrd-%s.img %sを起動できません。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"/etc/sysconfig/bootsplashが書き込めません\n"
-"ファイルが見つかりません。"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "%sを書き込む"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "/etc/sysconfig/bootsplashが書けません"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "liloメッセージが見つかりません"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "%s を%sにコピー中"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "%s を %s.old にバックアップ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "新しいテーマを作成"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"コンソールで\n"
-"テーマを表示"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "テーマの導入"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "Lilo/grub モード"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot モード"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "起動時にAuroraを実行"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "ふつうの Gtk+ モニタ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "ふつうのモニタ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "新スタイルモニタ"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "新スタイルに分類されるモニタ"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/ファイル(F)/終了(_Q)"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/ファイル(_F)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "起動方式の設定"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1152,9 +933,25 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "LVM 論理ボリュームはマウントポイント %s には使えません"
 
 #: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"あなたはルート(/)ととしてソフトウェアRAIDパーティションを選びましたね。\n"
+"/boot パーティション無しでこれを操作出来るブートローダはありません。\n"
+"ですから /boot パーティションの追加をお忘れなく。"
+
+#: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "パーティションはマウントポイント %s にマウント済み\n"
+
+#: ../../fsedit.pm:1
+#, fuzzy, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "プリンタ名は、文字と数字とアンダースコア (_)しか使えません"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1188,6 +985,15 @@ msgstr ""
 "(エラーは%sです)\n"
 "\n"
 "全パーティションを消去してよろしいですね？\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "エラー"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1297,8 +1103,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1311,7 +1117,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1646,7 +1452,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1825,7 +1631,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2502,7 +2308,7 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2579,7 +2385,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2625,7 +2431,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -3173,12 +2979,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "いいえ"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "はい"
@@ -3287,6 +3095,13 @@ msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr ""
 "リサイズやループバック用のFATパーティションがありません (または十分なスペース"
 "が無い)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3790,6 +3605,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "ステップ 「%s」を始めます\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "ヘルプ"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "not configured"
+msgstr "再設定"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "設定"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4000,14 +3835,6 @@ msgstr "次 ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "個別パッケージの選択"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "ヘルプ"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4251,12 +4078,13 @@ msgstr "認証"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "このパスワードは簡単すぎます（最低でも %d 文字使ってください）"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "パスワードなし"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "ルートパスワード"
@@ -4316,11 +4144,6 @@ msgstr "セキュリティ"
 #, fuzzy, c-format
 msgid "Security Level"
 msgstr "セキュリティ水準:"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "not configured"
-msgstr "再設定"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4427,6 +4250,16 @@ msgid "Which is your timezone?"
 msgstr "あなたの時間帯はどれですか？"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Would you like to try again?"
+msgstr "印刷の設定をしますか？"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Unable to contact mirror %s"
+msgstr "%s をフォークできません"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "サイトに接続してパッケージ一覧を取得しています"
@@ -4504,6 +4337,11 @@ msgstr ""
 "上記の一覧のCDがすべてそろっていれば、Okをクリックしましょう。\n"
 "CDが一つもなければ、キャンセルをクリックしてください。\n"
 "手元にないCDがあれば、それを選択からはずしてからOkをクリックします。"
+
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "ぜんぶ"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4583,6 +4421,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "手持ちのパッケージをさがしています"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "アップグレードするパッケージをさがしています"
 
@@ -4590,11 +4433,6 @@ msgstr "アップグレードするパッケージをさがしています"
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "インストール済みパッケージを調べています..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "手持ちのパッケージをさがしています"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4706,11 +4544,6 @@ msgid "Please choose your type of mouse."
 msgstr "マウスの型はなんですか？"
 
 #: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Upgrade"
-msgstr "更新"
-
-#: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
 msgid "Upgrade %s"
 msgstr "更新"
@@ -4735,15 +4568,19 @@ msgstr "使えるキーボードレイアウトの一覧を表示します。"
 msgid "Please choose your keyboard layout."
 msgstr "キーボードレイアウトは何ですか？"
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "終了"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "ソフト使用ライセンス条項"
-
-#: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
-msgid "default:LTR"
-msgstr "デフォルト"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5295,6 +5132,11 @@ msgstr "ベルギー"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "アゼルバイジャン(ラテン)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6456,6 +6298,11 @@ msgstr "ベンダー"
 msgid "Afghanistan"
 msgstr "アルバニア"
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "default:LTR"
+msgstr "デフォルト"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6874,10 +6721,10 @@ msgstr ""
 "ネットワークが複雑になってくると、これでは不十分です。"
 
 #: ../../services.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Oracle などのアプリケーションで使えるように、ブロックデバイス\n"
 "たとえばハードドライブパーティション）を生デバイスに割りつけます。"
@@ -7150,8 +6997,8 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
 
 #: ../../standalone.pm:1
@@ -7294,8 +7141,8 @@ msgid "Exit install"
 msgstr "導入作業を終了"
 
 #: ../../steps.pm:1
-#, c-format
-msgid "Install system updates"
+#, fuzzy, c-format
+msgid "Install updates"
 msgstr "システム更新をインストール"
 
 #: ../../steps.pm:1
@@ -7322,6 +7169,11 @@ msgstr "ネットワーク設定"
 #, c-format
 msgid "Add a user"
 msgstr "ユーザの登録"
+
+#: ../../steps.pm:1
+#, fuzzy, c-format
+msgid "Root password"
+msgstr "パスワードなし"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7370,13 +7222,21 @@ msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "言語の選択"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr ""
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "OK"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7558,7 +7418,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "オプション"
@@ -7582,14 +7442,6 @@ msgstr "モニタ"
 #, c-format
 msgid "Graphic Card"
 msgstr "グラフィックカード"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "終了"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7907,9 +7759,10 @@ msgid "Create"
 msgstr "作成"
 
 #: ../../diskdrake/hd_gtk.pm:1
+# "FS" instead  of "fairuistemu" because we must keep label narrow
 #, c-format
 msgid "Filesystem types:"
-msgstr "ファイルシステム タイプ:"
+msgstr "FS タイプ:"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7937,9 +7790,10 @@ msgid "Swap"
 msgstr "スワップ"
 
 #: ../../diskdrake/hd_gtk.pm:1
+# we must keep label narrow, full katakana label is too wide
 #, c-format
 msgid "Journalised FS"
-msgstr "ジャーナリングファイルシステム"
+msgstr "Journalised FS"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -8240,42 +8094,6 @@ msgstr "リブートしてパーティションテーブルの変更を反映させる必要があります"
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "ドライブ %s のパーティションテーブルをディスクに書き込みます！"
-
-#: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"あなたはルート(/)ととしてソフトウェアRAIDパーティションを選びましたね。\n"
-"/boot パーティション無しでこれを操作出来るブートローダはありません。\n"
-"ですから /boot パーティションの追加をお忘れなく。"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"いまルート(/)用に選んだパーティションは，物理的にドライブの先頭から\n"
-"1024 シリンダより遠くにあって，さらにあなたは/boot パーティションを\n"
-"持っていませんね。LILO をブートマネージャに使うなら，/boot パーティ\n"
-"ションの追加をお忘れなく。"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"ごめんなさい，そこはドライブのかなり奥のほう(シリンダ>1024)なので\n"
-"そこに /boot は作れません。/bootがそこだと、LILO がうまく働かないし，\n"
-"LILO を使わないなら /boot は要りませんから"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8773,6 +8591,11 @@ msgstr ""
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr ""
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr ""
 
@@ -8905,7 +8728,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9334,7 +9157,7 @@ msgstr "インターネットへ接続"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
+msgid "Sagem (using pppoa) usb"
 msgstr ""
 
 #: ../../network/adsl.pm:1
@@ -9449,13 +9272,13 @@ msgid "Zeroconf host name must not contain a ."
 msgstr ""
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
-msgid "Zeroconf Host name"
+#, c-format
+msgid "Host name"
 msgstr "ホスト名:"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Host name"
+#, fuzzy, c-format
+msgid "Zeroconf Host name"
 msgstr "ホスト名:"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
@@ -9466,18 +9289,6 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"ホスト名が分かるなら、それを入力して下さい。\n"
-"いくつかのDHCPサーバは動作するのにホスト名を必要とします。\n"
-"ホスト名は“mybox.mylab.myco.com”のように制限して下さい。"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10124,6 +9935,11 @@ msgstr "起動時に開始"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
+msgid "Assign host name from DHCP address"
+msgstr "ホスト名か IP を入力してください。"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
 msgid "Network Hotplugging"
 msgstr "ネットワークの設定"
 
@@ -10134,13 +9950,8 @@ msgstr "ネットワークカードのidを追跡（ラップトップで便利）"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "IP の自動設定"
+msgid "DHCP host name"
+msgstr "ホスト名:"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10148,10 +9959,21 @@ msgstr "IP の自動設定"
 msgid "Netmask"
 msgstr "ネットマスク:"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "IP アドレス:"
+
+#: ../../network/network.pm:1
+#, fuzzy, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "IP の自動設定"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10401,7 +10223,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Print, Don't Queue（キューなしで印刷）"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "未知のモデル"
@@ -10410,6 +10232,11 @@ msgstr "未知のモデル"
 #, c-format
 msgid "Unknown model"
 msgstr "未知のモデル"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "ポート"
 
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
@@ -10564,11 +10391,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "別のプリンタを設定しますか？"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "プリンタ \"%s\" を削除中..."
 
@@ -10583,8 +10405,8 @@ msgid "Remove printer"
 msgstr "プリンタ削除"
 
 #: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Know how to use this printer"
+#, fuzzy, c-format
+msgid "Learn how to use this printer"
 msgstr "このプリンタの使い方を調べる"
 
 #: ../../printer/printerdrake.pm:1
@@ -10684,11 +10506,6 @@ msgid "Printer connection type"
 msgstr "プリンタ接続の種類"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Learn how to use this printer"
-msgstr "このプリンタの使い方を調べる"
-
-#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer"
 msgstr "生のプリンタ"
@@ -10725,6 +10542,7 @@ msgid "Add a new printer"
 msgstr "プリンタ追加"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "ノーマルモード"
@@ -10747,6 +10565,11 @@ msgstr "CUPS 設定"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Refresh printer list (to display all available remote CUPS printers)"
+msgstr "プリンタ一覧更新（リモート CUPSプリンタをすべて表示)"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Display all available remote CUPS printers"
 msgstr "プリンタ一覧更新（リモート CUPSプリンタをすべて表示)"
 
 #: ../../printer/printerdrake.pm:1
@@ -10776,16 +10599,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "印刷システム:"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "印刷の設定をしますか？"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "PrinterDrake準備中..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10821,6 +10634,11 @@ msgstr "どの印刷システム（スプーラ）を使いますか？"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "プリンタのスプーラを選んでください"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Setting Default Printer..."
+msgstr "デフォルトプリンタ"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -12354,6 +12172,35 @@ msgstr ""
 "そのオプション、プリンタ接続方式を選べるようにします。"
 
 #: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Configuring printer ..."
+msgstr "プリンタ \"%s\" の設定中..."
+
+#: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Searching for new printers..."
 msgstr "使えるプリンタ"
@@ -12472,6 +12319,64 @@ msgid "Checking your system..."
 msgstr "システム調査中..."
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Restarting CUPS..."
+msgstr "XFS 再起動"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "このモデルを使う"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "NCP サーバ名がありません！"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "リモートCUPS サーバ上のプリンタ"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "選んだものを削除"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "%s を検出"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "ユーザを追加"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr ""
@@ -12483,37 +12388,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -12571,6 +12451,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "自動 CUPS 設定"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "終了"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "CUPS サーバ「%s」上で"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -12730,8 +12633,8 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -14404,6 +14307,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "バックアップするデータを選んでください..."
 
@@ -14662,16 +14570,6 @@ msgstr "バックアップの保存ディレクトリを入力してください"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "ハードディスクから復元する"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "セキュア接続"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "FTP 接続"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15596,6 +15494,194 @@ msgstr "Cron はまだroot以外では使えません"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "%s のインストールに失敗しました。以下のエラーが発生:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "自動ログインはしない"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "この (ユーザ、デスクトップ）で自動ログインする"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "起動時に X ウィンドウを実行"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "システムモード"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "起動スプラッシュ"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "lilo画面"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"liloと起動スプラッシュの\n"
+"テーマを選びましょう。\n"
+"両者は別々に選べます"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "テーマ"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "スプラッシュ選択"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"いま、ブートマネージャには %s をお使いです。\n"
+"設定ウィザードを起動するには「設定」をクリックしましょう。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "Liloと起動時スプラッシュテーマのインストール成功"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "テーマのインストール失敗！"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "通知"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "liloを再実行します"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"LiLoを再実行できません！\n"
+"Liloテーマのインストールを完了するにはrootになって「lilo」を実行します。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "mkinitrd -f /boot/initrd-%s.img %sをinitrdにする"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "mkinitrd -f /boot/initrd-%s.img %sを起動できません。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"/etc/sysconfig/bootsplashが書き込めません\n"
+"ファイルが見つかりません。"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "%sを書き込む"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "/etc/sysconfig/bootsplashが書けません"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "liloメッセージが見つかりません"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "%s を%sにコピー中"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "%s を %s.old にバックアップ"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "新しいテーマを作成"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"コンソールで\n"
+"テーマを表示"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "テーマの導入"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "Lilo/grub モード"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot モード"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/ファイル(F)/終了(_Q)"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/ファイル(_F)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "起動方式の設定"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -15733,6 +15819,16 @@ msgstr "Mandrake バグ報告ツール"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "パラメータ"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "インターネット接続設定"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP クライアント"
 
@@ -15746,11 +15842,6 @@ msgstr "イーサネットカード"
 msgid "Gateway"
 msgstr "ゲートウェイ"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "パラメータ"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -15760,11 +15851,6 @@ msgstr "接続の種類: "
 #, c-format
 msgid "Profile: "
 msgstr "プロフィール: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "インターネット接続設定"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16035,8 +16121,8 @@ msgstr "モジュールの削除"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "raid モジュールは飛ばす"
+msgid "Add a module"
+msgstr "モジュール追加"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16050,13 +16136,13 @@ msgstr "必要な場合のみ"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "強制"
+msgid "omit raid modules"
+msgstr "raid モジュールは飛ばす"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "モジュール追加"
+msgid "force"
+msgstr "強制"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16070,23 +16156,18 @@ msgstr "エキスパート向け"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "一般"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "カーネルバージョン"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "DrakFloppyエラー： %s"
+msgid "default"
+msgstr "デフォルト"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "デフォルト"
+msgid "General"
+msgstr "一般"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16107,13 +16188,6 @@ msgstr "サイズ"
 #, c-format
 msgid "Module name"
 msgstr "モジュール名"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr ""
-"-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,-misc-fixed-medium-r-normal--14-*-"
-"75-75-c-*-jisx0208.1983-0,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16779,6 +16853,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "パス"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "グループ: "
 
@@ -16838,11 +16917,6 @@ msgstr "プロパティ"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "パス"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "パーミッション"
 
@@ -16855,22 +16929,6 @@ msgstr "現在のユーザ"
 #, c-format
 msgid "browse"
 msgstr "ブラウズ"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "閲覧/編集するpermファイルを選択"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm は、パーミッションや所有者、グループを msecでいじるためのもので"
-"す。\n"
-"またデフォルトを消して自分のルールを編集することもできます。"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16921,6 +16979,22 @@ msgstr "選んだルールを一段上げる"
 #, c-format
 msgid "Up"
 msgstr "上"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "閲覧/編集するpermファイルを選択"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm は、パーミッションや所有者、グループを msecでいじるためのもので"
+"す。\n"
+"またデフォルトを消して自分のルールを編集することもできます。"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17086,14 +17160,14 @@ msgid "Security Alerts:"
 msgstr "セキュリティ水準"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
-msgid "(default value: %s)"
-msgstr " (デフォルト)"
-
-#: ../../standalone/draksec:1
 #, c-format
 msgid "Security Level:"
 msgstr "セキュリティ水準:"
+
+#: ../../standalone/draksec:1
+#, fuzzy, c-format
+msgid "(default value: %s)"
+msgstr " (デフォルト)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17109,7 +17183,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17118,7 +17192,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -17465,26 +17539,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/オプション(O)"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect jazz drives"
-msgstr "自動検出されたもの"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect modems"
-msgstr "自動検出されたもの"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "/Autodetect printers"
-msgstr "自動検出されたもの"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "一次"
 
@@ -17498,6 +17552,16 @@ msgstr "二次"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "Unknown"
+msgstr "未知のモデル"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "unknown"
+msgstr "未知のモデル"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17558,11 +17622,6 @@ msgstr "Harddrakeについて"
 msgid "/_About..."
 msgstr "/情報(_A)..."
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/ヘルプ(_H)"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -17599,15 +17658,20 @@ msgstr "Harddrake ヘルプ"
 msgid "/_Fields description"
 msgstr "説明"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/ヘルプ(_H)"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/終了(_Q)"
+
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "自動検出されたもの"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/オプション(_O)"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -17619,10 +17683,10 @@ msgstr "自動検出されたもの"
 msgid "/Autodetect _printers"
 msgstr "自動検出されたもの"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/終了(_Q)"
+msgid "/_Options"
+msgstr "/オプション(_O)"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -17721,7 +17785,7 @@ msgstr "レベル"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -17870,6 +17934,16 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -18345,9 +18419,9 @@ msgid "Network Monitoring"
 msgstr "ネットワークの設定"
 
 #: ../../standalone/printerdrake:1
-#, c-format
-msgid "Reading printer data ..."
-msgstr "プリンタの情報を読んでいます..."
+#, fuzzy, c-format
+msgid "Reading data of installed printers..."
+msgstr "使えるプリンタ"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18456,55 +18530,6 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"%s スキャナが設定されました。\n"
-"アプリケーションメニューのマルチメディア／グラフィックから、「Xsane」を選ぶと"
-"スキャナが使えます。"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"%s スキャナはprinterdrakeで設定してください。\n"
-"printerdrake の起動は、Mandrake コントロールセンターのハードウェアの項で行っ"
-"てください。"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "デバイス選択"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake は %s スキャナを検出できませんでした。\n"
-"スキャナが接続されているデバイスを選んでください"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is unsupported"
-msgstr "この %s スキャナはサポートされていません"
-
-#: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s は本バージョンのMandrake Linuxではサポートされていません"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "%s は本バージョンのMandrake Linuxではサポートされていません"
-
-#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr ""
@@ -18562,8 +18587,92 @@ msgstr ""
 "未知のプリンタが一台マシンに直結しています"
 
 #: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"%s スキャナが設定されました。\n"
+"アプリケーションメニューのマルチメディア／グラフィックから、「Xsane」を選ぶと"
+"スキャナが使えます。"
+
+#: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
+msgid "choose device"
+msgstr "デバイス選択"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Please select the device where your %s is attached"
+msgstr ""
+"Scannerdrake は %s スキャナを検出できませんでした。\n"
+"スキャナが接続されているデバイスを選んでください"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Searching for scanners ..."
+msgstr "使えるプリンタ"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Auto-detect available ports"
+msgstr "自動検出されたもの"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"%s スキャナはprinterdrakeで設定してください。\n"
+"printerdrake の起動は、Mandrake コントロールセンターのハードウェアの項で行っ"
+"てください。"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is unsupported"
+msgstr "この %s スキャナはサポートされていません"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "%s は本バージョンのMandrake Linuxではサポートされていません"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "%s は本バージョンのMandrake Linuxではサポートされていません"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Port: %s"
+msgstr "ポート"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Detected model: %s"
+msgstr "検出されたモデル: %s %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select a scanner model"
 msgstr "スキャナを選択して下さい"
 
 #: ../../standalone/scannerdrake:1
@@ -18657,6 +18766,10 @@ msgid "Scientific Workstation"
 msgstr "科学ワークステーション"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr ""
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "コンソールツール"
 
@@ -18729,12 +18842,14 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache と Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "サーバ、メール/グループウェア/ニュース"
+#, fuzzy
+msgid "Mail"
+msgstr "毎日"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix メールサーバ, Inn ニュースサーバ"
+#, fuzzy
+msgid "Postfix mail server"
+msgstr "Postfix メールサーバ"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -18831,6 +18946,103 @@ msgstr "個人の財務管理"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "gnucashなどの家計管理ソフト"
+
+#~ msgid ""
+#~ "Please enter your host name if you know it.\n"
+#~ "Some DHCP servers require the hostname to work.\n"
+#~ "Your host name should be a fully-qualified host name,\n"
+#~ "such as ``mybox.mylab.myco.com''."
+#~ msgstr ""
+#~ "ホスト名が分かるなら、それを入力して下さい。\n"
+#~ "いくつかのDHCPサーバは動作するのにホスト名を必要とします。\n"
+#~ "ホスト名は“mybox.mylab.myco.com”のように制限して下さい。"
+
+#~ msgid "DrakFloppy Error: %s"
+#~ msgstr "DrakFloppyエラー： %s"
+
+#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgstr ""
+#~ "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,-misc-fixed-medium-r-normal--"
+#~ "14-*-75-75-c-*-jisx0208.1983-0,*"
+
+#~ msgid "Launch Aurora at boot time"
+#~ msgstr "起動時にAuroraを実行"
+
+#~ msgid "Traditional Gtk+ Monitor"
+#~ msgstr "ふつうの Gtk+ モニタ"
+
+#~ msgid "Traditional Monitor"
+#~ msgstr "ふつうのモニタ"
+
+#~ msgid "NewStyle Monitor"
+#~ msgstr "新スタイルモニタ"
+
+#~ msgid "NewStyle Categorizing Monitor"
+#~ msgstr "新スタイルに分類されるモニタ"
+
+#~ msgid "Secure Connection"
+#~ msgstr "セキュア接続"
+
+#~ msgid "FTP Connection"
+#~ msgstr "FTP 接続"
+
+#~ msgid "Mail/Groupware/News"
+#~ msgstr "サーバ、メール/グループウェア/ニュース"
+
+#~ msgid "Postfix mail server, Inn news server"
+#~ msgstr "Postfix メールサーバ, Inn ニュースサーバ"
+
+#~ msgid "/Options"
+#~ msgstr "/オプション(O)"
+
+#, fuzzy
+#~ msgid "/Autodetect jazz drives"
+#~ msgstr "自動検出されたもの"
+
+#, fuzzy
+#~ msgid "/Autodetect modems"
+#~ msgstr "自動検出されたもの"
+
+#, fuzzy
+#~ msgid "/Autodetect printers"
+#~ msgstr "自動検出されたもの"
+
+#~ msgid ""
+#~ "The partition you've selected to add as root (/) is physically located "
+#~ "beyond\n"
+#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
+#~ "partition"
+#~ msgstr ""
+#~ "いまルート(/)用に選んだパーティションは，物理的にドライブの先頭から\n"
+#~ "1024 シリンダより遠くにあって，さらにあなたは/boot パーティションを\n"
+#~ "持っていませんね。LILO をブートマネージャに使うなら，/boot パーティ\n"
+#~ "ションの追加をお忘れなく。"
+
+#~ msgid ""
+#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
+#~ "> 1024).\n"
+#~ "Either you use LILO and it won't work, or you don't use LILO and you "
+#~ "don't need /boot"
+#~ msgstr ""
+#~ "ごめんなさい，そこはドライブのかなり奥のほう(シリンダ>1024)なので\n"
+#~ "そこに /boot は作れません。/bootがそこだと、LILO がうまく働かないし，\n"
+#~ "LILO を使わないなら /boot は要りませんから"
+
+#~ msgid "Upgrade"
+#~ msgstr "更新"
+
+#~ msgid "Do you want to configure another printer?"
+#~ msgstr "別のプリンタを設定しますか？"
+
+#~ msgid "Know how to use this printer"
+#~ msgstr "このプリンタの使い方を調べる"
+
+#~ msgid "Preparing Printerdrake..."
+#~ msgstr "PrinterDrake準備中..."
+
+#~ msgid "Reading printer data ..."
+#~ msgstr "プリンタの情報を読んでいます..."
 
 #~ msgid ""
 #~ "You must indicate where you wish to place the information required to "

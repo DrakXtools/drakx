@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
 "POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-07 11:57+0200\n"
+"PO-Revision-Date: 2003-02-24 11:57+0200\n"
 "Last-Translator: Riho Kurg <rx@linux.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,16 +24,18 @@ msgstr ""
 "Kasutaja kaupa jagamise lubamine rakendab gruppi \"fileshare\". \n"
 "Sellesse gruppi kasutajate lisamiseks saab tarvitada userdraket."
 
-#: ../../any.pm:1 ../../bootlook.pm:1 ../../install_steps_gtk.pm:1
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
+#: ../../any.pm:1 ../../install_steps_gtk.pm:1
+#: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakboot:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakgw:1
+#: ../../standalone/draksec:1 ../../standalone/logdrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Katkesta"
@@ -112,14 +114,13 @@ msgstr "Maa"
 
 #: ../../any.pm:1
 #, c-format
+msgid "All languages"
+msgstr "Kõik keeled"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Use Unicode by default"
 msgstr "Unicode kasutamine vaikimisi"
-
-#: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid "All"
-msgstr "Kõik"
 
 #: ../../any.pm:1
 #, c-format
@@ -498,6 +499,16 @@ msgstr "Piira käsurea suvandeid"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Force No APIC"
+msgstr "APIC sunnitakse mitte toimima"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Enable ACPI"
+msgstr "ACPI lubamine"
+
+#: ../../any.pm:1
+#, c-format
 msgid "Delay before booting default image"
 msgstr "Ooteaeg alglaadimisel"
 
@@ -550,6 +561,11 @@ msgstr "Jäta vahele"
 #, c-format
 msgid "On Floppy"
 msgstr "Flopil"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First sector of the root partition"
+msgstr "Juurpartitsiooni algusesse"
 
 #: ../../any.pm:1
 #, c-format
@@ -763,244 +779,6 @@ msgstr ""
 "vaikimisi oodake %d sekundit.\n"
 "\n"
 
-#: ../../bootlook.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1
-#: ../../network/netconnect.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
-#, c-format
-msgid "OK"
-msgstr "Olgu"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yes, I want autologin with this (user, desktop)"
-msgstr ""
-"Jah, soovin automaatset sisselogimist sellele (kasutajale, keskkonnale)"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "No, I don't want autologin"
-msgstr "Ei taha automaatselt siseneda"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch the graphical environment when your system starts"
-msgstr "Käivita X-Windows alglaadimisel"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "System mode"
-msgstr "Töömood"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Bootsplash"
-msgstr "Käivituslogo"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo screen"
-msgstr "LiLo ekraan"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"\n"
-"Select the theme for\n"
-"lilo and bootsplash,\n"
-"you can choose\n"
-"them separately"
-msgstr ""
-"\n"
-"Valige teema LiLo-le\n"
-"ja käivituslogole,\n"
-"neid võib valida\n"
-"ka eraldi"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Themes"
-msgstr "Teemad"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Splash selection"
-msgstr "Käivituslogo valik"
-
-#: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#, c-format
-msgid "Configure"
-msgstr "Seadista"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"You are currently using %s as your boot manager.\n"
-"Click on Configure to launch the setup wizard."
-msgstr ""
-"Praegu on Teil alglaadimise haldurina kasutusel %s.\n"
-"Valige seadistamisnõustaja käivitamiseks 'Seadista'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "LiLo and Bootsplash themes installation successfull"
-msgstr "LiLo ja käivituslogo teemade paigaldus õnnestus"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Theme installation failed!"
-msgstr "Teema paigaldamine ebaõnnestus!"
-
-#: ../../bootlook.pm:1 ../../standalone/draksplash:1
-#, c-format
-msgid "Notice"
-msgstr "Märguanne"
-
-#: ../../bootlook.pm:1 ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/draksplash:1
-#, c-format
-msgid "Error"
-msgstr "Viga"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Relaunch 'lilo'"
-msgstr "Taaskäivita 'lilo'"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't relaunch LiLo!\n"
-"Launch \"lilo\" as root in command line to complete LiLo theme installation."
-msgstr ""
-"LiLo taaskäivitamine ebaõnnestus!\n"
-"Käivitage \"lilo\" administraatorina käsurealt LiLo teema paigaldamise "
-"lõpetamiseks."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr "Loo initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr "mkinitrd -f /boot/initrd-%s.img %s käivitamine ebaõnnestus."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Can't write /etc/sysconfig/bootsplash\n"
-"File not found."
-msgstr ""
-"/etc/sysconfig/bootsplash kirjutamine ebaõnnestus\n"
-"Faili ei leitud."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Write %s"
-msgstr "Kirjuta %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Can't write /etc/sysconfig/bootsplash."
-msgstr "/etc/sysconfig/bootsplash kirjutamine ebaõnnestus."
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "LiLo sõnumit ei leitud"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Copy %s to %s"
-msgstr "Tee %s -st koopia %s"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Backup %s to %s.old"
-msgstr "Tee %s -st varukoopia %s.old"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Create new theme"
-msgstr "Uue teema loomine"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid ""
-"Display theme\n"
-"under console"
-msgstr ""
-"Teema näitamine\n"
-"konsoolis"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Install themes"
-msgstr "Teemade paigaldamine"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Lilo/grub mode"
-msgstr "LiLo/grub resiim"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Yaboot mode"
-msgstr "Yaboot resiim"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Launch Aurora at boot time"
-msgstr "Käivita alglaadimisel Aurora"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Gtk+ Monitor"
-msgstr "Traditsiooniline Gtk+ jälgimine"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Traditional Monitor"
-msgstr "Tavaline jälgimine"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Monitor"
-msgstr "NewStyle jälgimine"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "NewStyle Categorizing Monitor"
-msgstr "NewStyle kategoriseeritud jälgimine"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "<control>Q"
-msgstr "<control>Q"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "/File/_Quit"
-msgstr "/Fail/_Välju"
-
-#: ../../bootlook.pm:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_File"
-msgstr "/_Fail"
-
-#: ../../bootlook.pm:1
-#, c-format
-msgid "Boot Style Configuration"
-msgstr "Alglaaduri stiil"
-
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
@@ -1156,11 +934,27 @@ msgstr "See kataloog peab jääma kokku juurfailisüsteemiga"
 msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Te ei saa haakepunkti %s jaoks kasutada LVM loogilist ketast"
 
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You've selected a software RAID partition as root (/).\n"
+"No bootloader is able to handle this without a /boot partition.\n"
+"Please be sure to add a /boot partition"
+msgstr ""
+"Olete valinud juurpartitsiooniks (/) tarkvaralise RAID-i.\n"
+"Ilma /boot partitsioonita ei ole võimalik sellist süsteemi laadida.\n"
+"Lisage kindlasti /boot partitsioon!"
+
 # c-format
 #: ../../fsedit.pm:1
 #, c-format
 msgid "There is already a partition with mount point %s\n"
 msgstr "Haakepunktile %s on juba partitsioon määratud\n"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid "Mount points should contain only alphanumerical characters"
+msgstr "Haakepunkti nimi tohib sisaldada vaid tähti ja numbreid"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1193,6 +987,15 @@ msgstr ""
 "(Viga oli selline: %s)\n"
 "\n"
 "Kas olete nõus kõigi partitsioonide kaotamisega?\n"
+
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
+#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Error"
+msgstr "Viga"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1301,8 +1104,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country for which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1315,7 +1118,7 @@ msgid ""
 "\n"
 " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
 "interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your grapical interface.\n"
+"the button to reconfigure your graphical interface.\n"
 "\n"
 " * \"Network\": If you want to configure your Internet or local network\n"
 "access now, you can by clicking on this button.\n"
@@ -1700,7 +1503,7 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\").\n"
 "\n"
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -1893,7 +1696,7 @@ msgid ""
 "``incorrect'' password will have to be used the first time you connect.\n"
 "\n"
 "If you wish access to this computer to be controlled by an authentication\n"
-"server, clisk the \"Advanced\" button.\n"
+"server, click the \"Advanced\" button.\n"
 "\n"
 "If your network uses either LDAP, NIS, or PDC Windows Domain authentication\n"
 "services, select the appropriate one as \"authentication\". If you do not\n"
@@ -2669,7 +2472,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue bot media\n"
+"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
 "handy.\n"
 "\n"
 "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
@@ -2759,7 +2562,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 "Kuvatihedus\n"
@@ -2815,7 +2618,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -3463,12 +3266,14 @@ msgstr ""
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Ei"
 
 #: ../../install_any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr "Jah"
@@ -3575,6 +3380,15 @@ msgstr "Eemalda Windows(TM)"
 #, c-format
 msgid "There is no FAT partition to resize (or not enough space left)"
 msgstr "Sobivat FAT-partitsiooni ei leitud (ei ole piisavalt ruumi)"
+
+#: ../../install_interactive.pm:1 ../../diskdrake/interactive.pm:1
+#, c-format
+msgid ""
+"To ensure data integrity after resizing the partition(s), \n"
+"filesystem checks will be run on your next boot into Windows(TM)"
+msgstr ""
+"Andmepidevuse tagamiseks pärast partitsiooni(de) suuruse muutmist \n"
+"kontrollitakse järgmisel Windows(TM) alglaadimisel failisüsteemi"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -4089,6 +3903,26 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr "Järgmine samm: '%s'\n"
 
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Help"
+msgstr "Abi"
+
+#: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid "not configured"
+msgstr "seadistamata"
+
+#: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Configure"
+msgstr "Seadista"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
@@ -4300,14 +4134,6 @@ msgstr "Järgmine ->"
 #, c-format
 msgid "Individual package selection"
 msgstr "Valik paketthaaval"
-
-#: ../../install_steps_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
-#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Abi"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4552,12 +4378,13 @@ msgstr "Autentimisviis"
 msgid "This password is too short (it must be at least %d characters long)"
 msgstr "Salasõna on liiga lühike (peaks olema vähemalt %d tähemärki)"
 
+#. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
 msgstr "Salasõna puudub"
 
-#: ../../install_steps_interactive.pm:1 ../../steps.pm:1
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
 msgstr "Juurkasutaja salasõna"
@@ -4617,11 +4444,6 @@ msgstr "Turvalisus"
 #, c-format
 msgid "Security Level"
 msgstr "Turvatase"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "not configured"
-msgstr "seadistamata"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4727,6 +4549,16 @@ msgstr "Millises ajavöötmes asute?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Would you like to try again?"
+msgstr "Kas soovite uuesti proovida?"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Unable to contact mirror %s"
+msgstr "Ühendust peegliga %s ei saadud"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Contacting the mirror to get the list of available packages..."
 msgstr "Proovin lugeda peeglilt pakettide nimekirja..."
 
@@ -4808,6 +4640,11 @@ msgstr ""
 "Kui Teil ei ole ühtki neist, klõpsake <Katkesta>.\n"
 "Kui puuduvad mõned CD-d, märkige vaid olemasolevad ja siis <Olgu>."
 
+#: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
+#, c-format
+msgid "All"
+msgstr "Kõik"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Truly minimal install (especially no urpmi)"
@@ -4887,6 +4724,11 @@ msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
+msgid "Looking for available packages..."
+msgstr "Otsin saadaolevaid pakette..."
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Finding packages to upgrade..."
 msgstr "Otsin uuendatavaid pakette..."
 
@@ -4894,11 +4736,6 @@ msgstr "Otsin uuendatavaid pakette..."
 #, c-format
 msgid "Looking at packages already installed..."
 msgstr "Tuvastan juba paigaldatud pakette..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Looking for available packages..."
-msgstr "Otsin saadaolevaid pakette..."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5010,11 +4847,6 @@ msgstr "Palun valige hiire tüüp."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Upgrade"
-msgstr "Uuendus"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "Upgrade %s"
 msgstr "%s uuendus"
 
@@ -5038,15 +4870,19 @@ msgstr "Võimalike klaviatuuride täielik nimekiri"
 msgid "Please choose your keyboard layout."
 msgstr "Palun valige klaviatuuriasetus."
 
+#: ../../install_steps_interactive.pm:1 ../../Xconfig/main.pm:1
+#: ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakperm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Välju"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
 msgstr "Lõppkasutaja litsentsileping"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "default:LTR"
-msgstr "vaikimisi:LTR"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5597,6 +5433,11 @@ msgstr "Belgia"
 #, c-format
 msgid "Azerbaidjani (latin)"
 msgstr "Aserbaidžaani (ladina)"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Arabic"
+msgstr "Araabia"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -6758,6 +6599,11 @@ msgstr "Andorra"
 msgid "Afghanistan"
 msgstr "Afganistan"
 
+#: ../../lang.pm:1
+#, c-format
+msgid "default:LTR"
+msgstr "default:LTR"
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -7172,11 +7018,11 @@ msgstr ""
 #, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
-"partitions), for the use of applications such as Oracle"
+"partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Toorseadmete seostamine blokkseadmetega\n"
 "(näiteks kõvaketta partitsioonid)\n"
-"selliste rakenduste, nagu Oracle tarbeks"
+"selliste rakenduste, nagu Oracle või DVD mängijad tarbeks"
 
 #: ../../services.pm:1
 #, c-format
@@ -7450,11 +7296,11 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
-"[--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] "
-"[--dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [device=dev] [--update-sane=sane_desc_dir] [--update-usbtable] [--"
-"dynamic=dev]"
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7659,7 +7505,7 @@ msgstr "Välju programmist"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Install system updates"
+msgid "Install updates"
 msgstr "Uuenduste paigaldus"
 
 #: ../../steps.pm:1
@@ -7686,6 +7532,11 @@ msgstr "Võrgusätted"
 #, c-format
 msgid "Add a user"
 msgstr "Tavakasutaja"
+
+#: ../../steps.pm:1
+#, c-format
+msgid "Root password"
+msgstr "Administraatori salasõna"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7734,13 +7585,21 @@ msgstr "Litsents"
 
 #: ../../steps.pm:1
 #, c-format
-msgid "Choose your language"
+msgid "Language"
 msgstr "Valige sobiv keel"
 
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
 msgstr "utopia 25"
+
+#: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
+#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#, c-format
+msgid "OK"
+msgstr "Olgu"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../standalone/logdrake:1
 #, c-format
@@ -7921,7 +7780,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Eelistused"
@@ -7945,14 +7804,6 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Graafikakaart"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/drakperm:1
-#: ../../standalone/draksplash:1 ../../standalone/harddrake2:1
-#: ../../standalone/logdrake:1 ../../standalone/scannerdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Välju"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8612,42 +8463,6 @@ msgstr "Ketta %s partitsioonitabel salvestatakse!"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
-msgid ""
-"You've selected a software RAID partition as root (/).\n"
-"No bootloader is able to handle this without a /boot partition.\n"
-"Please be sure to add a /boot partition"
-msgstr ""
-"Olete valinud juurpartitsiooniks (/) tarkvaralise RAID-i.\n"
-"Ilma /boot partitsioonita ei ole võimalik sellist süsteemi laadida.\n"
-"Lisage kindlasti /boot partitsioon!"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"The partition you've selected to add as root (/) is physically located "
-"beyond\n"
-"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-"If you plan to use the LILO boot manager, be careful to add a /boot partition"
-msgstr ""
-"Partitsioon, mida soovite kasutada juurkataloogi (/) hoidmiseks, asub\n"
-"füüsiliselt tagapool silindrit 1024 ja Teil ei ole /boot partitsiooni.\n"
-"Kui plaanite kasutada LILO alglaadurit, lisage kindlasti /boot partitsioon"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
-msgid ""
-"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
-"1024).\n"
-"Either you use LILO and it won't work, or you don't use LILO and you don't "
-"need /boot"
-msgstr ""
-"Vabandust, aga ei saa nõustuda /boot kataloogi paigutamisega kaugemale "
-"silindrist 1024.\n"
-"Kui kasutate LiLo-t, ei tööta see sel moel, kui aga ei kasuta, ei ole Teile "
-"ka /boot vajalik"
-
-#: ../../diskdrake/interactive.pm:1
-#, c-format
 msgid "The package %s is needed. Install it?"
 msgstr "Vajalik on pakett %s. Kas paigaldada see?"
 
@@ -9141,6 +8956,11 @@ msgstr "SCSI kontrolerid"
 
 #: ../../harddrake/data.pm:1
 #, c-format
+msgid "Firewire controllers"
+msgstr "Firewire kontrollerid"
+
+#: ../../harddrake/data.pm:1
+#, c-format
 msgid "(E)IDE/ATA controllers"
 msgstr "(E)IDE/ATA kontrollerid"
 
@@ -9277,7 +9097,7 @@ msgid ""
 "- \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card use\n"
 "by default\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" will tell you what driver it\n"
+"- \"grep sound-slot /etc/modules.conf\" will tell you what driver it\n"
 "currently uses\n"
 "\n"
 "- \"/sbin/lsmod\" will enable you to check if its module (driver) is\n"
@@ -9298,7 +9118,7 @@ msgstr ""
 "- \"lspcidrake -v | fgrep AUDIO\" näitab, millist draiverit Teie\n"
 "helikaart vaikimisi kasutab\n"
 "\n"
-"- \"grep snd-slot /etc/modules.conf\" näitab, millist draiverit\n"
+"- \"grep sound-slot /etc/modules.conf\" näitab, millist draiverit\n"
 "praegu kasutatakse\n"
 "\n"
 "- \"/sbin/lsmod\" näitab, kas vastav moodul (draiver) on hetkel laetud\n"
@@ -9756,8 +9576,8 @@ msgstr "Loo internetiühendus"
 
 #: ../../network/adsl.pm:1
 #, c-format
-msgid "Sagem (using pppoe) usb"
-msgstr "Sagem (pppoe vahendusel) usb"
+msgid "Sagem (using pppoa) usb"
+msgstr "Sagem (pppoa vahendusel) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9877,13 +9697,13 @@ msgstr "Zeroconfi masina nimi ei tohi sisaldada punkti (.)"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Zeroconf Host name"
-msgstr "Zefoconf masina nimi"
+msgid "Host name"
+msgstr "Masinanimi"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
-msgid "Host name"
-msgstr "Masinanimi"
+msgid "Zeroconf Host name"
+msgstr "Zefoconf masina nimi"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9897,19 +9717,6 @@ msgstr ""
 "\n"
 "Sisestage Zeroconfi masina nimi (ilma punktideta), kui Te\n"
 "ei soovi kasutada vaikimisi antud masina nime."
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid ""
-"Please enter your host name if you know it.\n"
-"Some DHCP servers require the hostname to work.\n"
-"Your host name should be a fully-qualified host name,\n"
-"such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Palun sisestage oma masina nimi.\n"
-"Seda nõuavad ka mõned DHCP serverid.\n"
-"Masina nimi peab olema esitatud täiskujul,\n"
-"nagu ``minumasin.minufirma.ee''."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -10568,6 +10375,11 @@ msgstr "Käivitub alglaadimisel"
 
 #: ../../network/network.pm:1
 #, c-format
+msgid "Assign host name from DHCP address"
+msgstr "Omista masinanimi DHCP aadressist"
+
+#: ../../network/network.pm:1
+#, c-format
 msgid "Network Hotplugging"
 msgstr "Võrgu kohene valmidus (hotplugging)"
 
@@ -10578,13 +10390,8 @@ msgstr "Võrgukaadi id tuvastus (kasulik sülearvutite puhul)"
 
 #: ../../network/network.pm:1
 #, c-format
-msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp/zeroconf)"
-
-#: ../../network/network.pm:1
-#, c-format
-msgid "Automatic IP"
-msgstr "Automaatne IP"
+msgid "DHCP host name"
+msgstr "DHCP masinanimi"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10592,10 +10399,21 @@ msgstr "Automaatne IP"
 msgid "Netmask"
 msgstr "Võrgumask"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "IP aadress"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "(bootp/dhcp/zeroconf)"
+msgstr "(bootp/dhcp/zeroconf)"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Automatic IP"
+msgstr "Automaatne IP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10846,7 +10664,7 @@ msgstr "PDQ"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Trüki kohe"
 
-#: ../../printer/detect.pm:1
+#: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown Model"
 msgstr "Tundmatu mudel"
@@ -10855,6 +10673,11 @@ msgstr "Tundmatu mudel"
 #, c-format
 msgid "Unknown model"
 msgstr "Tundmatu mudel"
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "%s (Port %s)"
+msgstr "%s (port %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -11008,11 +10831,6 @@ msgstr "Printerdrake"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Do you want to configure another printer?"
-msgstr "Kas soovite seadistada mõne muu printeri?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Printeri \"%s\" eemaldamine..."
 
@@ -11028,7 +10846,7 @@ msgstr "Eemalda printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Know how to use this printer"
+msgid "Learn how to use this printer"
 msgstr "Printeri kasutama õppimine"
 
 #: ../../printer/printerdrake.pm:1
@@ -11129,11 +10947,6 @@ msgstr "Printeri ühendusviis"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Learn how to use this printer"
-msgstr "Printeri kasutama õppimine"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Raw printer"
 msgstr "Toorprinter"
 
@@ -11169,6 +10982,7 @@ msgid "Add a new printer"
 msgstr "Lisa uus printer"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Normal Mode"
 msgstr "Tavakasutus"
@@ -11197,6 +11011,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Display all available remote CUPS printers"
+msgstr "Näita kõiki saadaolevaid CUPS printserveri printereid"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -11221,16 +11040,6 @@ msgstr ""
 #, c-format
 msgid "Printing system: "
 msgstr "Trükkimissüsteem: "
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Would you like to configure printing?"
-msgstr "Kas soovite trükkimist seadistada?"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Preparing Printerdrake..."
-msgstr "Printerdrake ettevalmistamine..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11266,6 +11075,11 @@ msgstr "Millist trükkimissüsteemi (spuulerit) soovite kasutada?"
 #, c-format
 msgid "Select Printer Spooler"
 msgstr "Printeri spuuleri valik"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Setting Default Printer..."
+msgstr "Vaikeprinteri seadmine..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12813,6 +12627,39 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid ""
+"\n"
+"\n"
+"Printerdrake could not determine which model your printer %s is. Please "
+"choose the correct model from the list."
+msgstr ""
+"\n"
+"\n"
+"Printerdrake ei suutnud määrata Teie printeri %s mudelit. Valige palun õige "
+"mudel nimekirjast."
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid ")"
+msgstr ")"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on "
+msgstr " masinal "
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "("
+msgstr "("
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Configuring printer ..."
+msgstr "Printeri seadistamine..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Searching for new printers..."
 msgstr "Uute printerite otsimine..."
 
@@ -12935,6 +12782,68 @@ msgstr "Süsteemi kontrollimine..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Restarting CUPS..."
+msgstr "CUPSi taaskäivitamine..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr "See server on juba nimekirjas ja seda ei ole võimalik uuesti lisada.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr "Korrektne IP aadress on näiteks:\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Sisestatud IP aadress ei ole korrektne.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr "Serveri IP puudub!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+"Sisestage serveri IP aadress ja prot, mille printereid soovite kasutada."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Ligipääs printeritele CUPS printserveril"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr "Valitud serveri eemaldamine"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr "Valitud serveri muutmine"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr "Serveri lisamine"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+"Lisage siia CUPS serverid, mille printereid soovite kasutada. Seda tuleb "
+"teha ainult siis, kui serverid ei saada oma printeri(te) infot üldleviga "
+"kohtvõrku."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr "Masina/võrgu IP aadress:"
 
@@ -12946,38 +12855,13 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr "192.168.100.0/255.255.255.0\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr "192.168.100.0/24\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr "10.1.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr "10.0.0.*\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr "192.168.100.194\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr "Korrektne IP aadress on näiteks:\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
 msgstr "Sisestatud masina/võrgu IP aadress ei ole korrektne.\n"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
+msgstr "Masina/võrgu IP aadress puudub."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13050,6 +12934,36 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "CUPS-i automaatne seadistamine"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+"Juurdepääsu saamiseks CUPS serverite printeritele Teie kohtvõrgus tuleb vaid "
+"ära märkida võimalus \"Otsi automaatselt kõiki kättesaadavaid võrguprintereid"
+"\". CUPS serverid annavad Teie masinale automaatselt teada oma printeritest. "
+"Kõik Teie masinale parajasti kättesaadavad printerid on näidatud "
+"Printerdrake peaakna sektsioonis \"Võrguprinterid\". Kui CUPS server(id) ei "
+"asu kohtvõrgus, tuleb nende kohta info hankimiseks sisestada IP aadress(id) "
+"ning võimaluse/vajaduse korral ka pordi number."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr "Puudub"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
+msgstr "Täiendavad CUPS serverid: "
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13225,11 +13139,11 @@ msgstr "kui on 'jah', saadab kontrolli tulemused syslog-i."
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
-"if set to yes, check for empty password, or a password while it should be "
-"in /etc/shadow or other users with id 0."
+"if set to yes, check for empty passwords, for no password in /etc/shadow and "
+"for users with the 0 id other than root."
 msgstr ""
-"kui on 'jah', kontrollib tühja salasõna või salasõna, kui see peaks olema /"
-"etc/shadow-s või teisi kasutajaid id-ga 0."
+"kui on 'jah', kontrollib tühja salasõna /etc/shadow-s ning kasutajaid id-ga "
+"0, kes pole aga administraatorid."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -15171,6 +15085,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "%s"
+msgstr "%s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Please select data to backup..."
 msgstr "Valige palun varundamiseks andmed..."
 
@@ -15429,16 +15348,6 @@ msgstr "Sisestage palun kataloog, kuhu varukoopiad on salvestatud"
 #, c-format
 msgid "Restore from Hard Disk."
 msgstr "Taastamine kõvakettalt."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Secure Connection"
-msgstr "Turvaline ühendus"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "FTP Connection"
-msgstr "FTP ühendus"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16363,6 +16272,197 @@ msgstr "Cron ei ole veel saadaval mitteadministraatorile"
 msgid "Installation of %s failed. The following error occured:"
 msgstr "%s paigaldamine ebaõnnestus. Tekkis järgmine viga:"
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "No, I don't want autologin"
+msgstr "Ei taha automaatselt siseneda"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr ""
+"Jah, soovin automaatset sisselogimist sellele (kasutajale, keskkonnale)"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Launch the graphical environment when your system starts"
+msgstr "Käivita X Windows alglaadimisel"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "System mode"
+msgstr "Töömood"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Bootsplash"
+msgstr "Käivituslogo"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo screen"
+msgstr "LiLo ekraan"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"\n"
+"Select the theme for\n"
+"lilo and bootsplash,\n"
+"you can choose\n"
+"them separately"
+msgstr ""
+"\n"
+"Valige teema LiLo-le\n"
+"ja käivituslogole,\n"
+"neid võib valida\n"
+"ka eraldi"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Themes"
+msgstr "Teemad"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Käivituslogo valik"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"You are currently using %s as your boot manager.\n"
+"Click on Configure to launch the setup wizard."
+msgstr ""
+"Praegu on Teil alglaadimise haldurina kasutusel %s.\n"
+"Valige seadistamisnõustaja käivitamiseks 'Seadista'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "LiLo and Bootsplash themes installation successfull"
+msgstr "LiLo ja käivituslogo teemade paigaldus õnnestus"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Theme installation failed!"
+msgstr "Teema paigaldamine ebaõnnestus!"
+
+#: ../../standalone/drakboot:1 ../../standalone/draksplash:1
+#, c-format
+msgid "Notice"
+msgstr "Märguanne"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Relaunch 'lilo'"
+msgstr "Taaskäivita 'lilo'"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't relaunch LiLo!\n"
+"Launch \"lilo\" as root in command line to complete LiLo theme installation."
+msgstr ""
+"LiLo taaskäivitamine ebaõnnestus!\n"
+"Käivitage \"lilo\" administraatorina käsurealt LiLo teema paigaldamise "
+"lõpetamiseks."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+msgstr "Loo initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
+msgstr "mkinitrd -f /boot/initrd-%s.img %s käivitamine ebaõnnestus."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Can't write /etc/sysconfig/bootsplash\n"
+"File not found."
+msgstr ""
+"/etc/sysconfig/bootsplash kirjutamine ebaõnnestus\n"
+"Faili ei leitud."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Write %s"
+msgstr "Kirjuta %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Can't write /etc/sysconfig/bootsplash."
+msgstr "/etc/sysconfig/bootsplash kirjutamine ebaõnnestus."
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "LiLo sõnumit ei leitud"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Copy %s to %s"
+msgstr "Tee %s -st koopia %s"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Backup %s to %s.old"
+msgstr "Tee %s -st varukoopia %s.old"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Create new theme"
+msgstr "Uue teema loomine"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Teema näitamine\n"
+"konsoolis"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Install themes"
+msgstr "Teemade paigaldamine"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo/grub mode"
+msgstr "LiLo/grub resiim"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Yaboot mode"
+msgstr "Yaboot resiim"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "<control>Q"
+msgstr "<control>Q"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "/File/_Quit"
+msgstr "/Fail/_Välju"
+
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_File"
+msgstr "/_Fail"
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Boot Style Configuration"
+msgstr "Alglaaduri stiil"
+
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "No browser available! Please install one"
@@ -16500,6 +16600,16 @@ msgstr "Mandrake veateate abivahend"
 
 #: ../../standalone/drakconnect:1
 #, c-format
+msgid "Parameters"
+msgstr "Parameetrid"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Internet Connection Configuration"
+msgstr "Internetiühenduse seadistamine"
+
+#: ../../standalone/drakconnect:1
+#, c-format
 msgid "DHCP Client"
 msgstr "DHCP klient"
 
@@ -16513,11 +16623,6 @@ msgstr "Võrgukaart"
 msgid "Gateway"
 msgstr "Vaikelüüs"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Parameters"
-msgstr "Parameetrid"
-
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connection type: "
@@ -16527,11 +16632,6 @@ msgstr "Ühenduse tüüp: "
 #, c-format
 msgid "Profile: "
 msgstr "Profiil: "
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Internet Connection Configuration"
-msgstr "Internetiühenduse seadistamine"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16803,8 +16903,8 @@ msgstr "Eemalda moodul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "omit raid modules"
-msgstr "raid moodulite vahelejätt"
+msgid "Add a module"
+msgstr "Lisa moodul"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16818,13 +16918,13 @@ msgstr "kui vaja"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "force"
-msgstr "sunni peale"
+msgid "omit raid modules"
+msgstr "raid moodulite vahelejätt"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "Add a module"
-msgstr "Lisa moodul"
+msgid "force"
+msgstr "sunni peale"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16838,23 +16938,18 @@ msgstr "Ekspertidele"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "General"
-msgstr "Üldine"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
 msgid "kernel version"
 msgstr "kerneli versioon"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "DrakFloppy Error: %s"
-msgstr "DrakFloppy viga: %s"
+msgid "default"
+msgstr "tavaline"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
-msgid "default"
-msgstr "tavaline"
+msgid "General"
+msgstr "Üldine"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16875,11 +16970,6 @@ msgstr "Suurus"
 #, c-format
 msgid "Module name"
 msgstr "Mooduli nimi"
-
-#: ../../standalone/drakfloppy:1
-#, c-format
-msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -17578,6 +17668,11 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
+msgid "Path"
+msgstr "Asukoht"
+
+#: ../../standalone/drakperm:1
+#, c-format
 msgid "group :"
 msgstr "grupp :"
 
@@ -17637,11 +17732,6 @@ msgstr "Omadus"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Path"
-msgstr "Asukoht"
-
-#: ../../standalone/drakperm:1
-#, c-format
 msgid "Permissions"
 msgstr "Loabitid"
 
@@ -17654,22 +17744,6 @@ msgstr "Praegune kasutaja"
 #, c-format
 msgid "browse"
 msgstr "lehitse"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "select perm file to see/edit"
-msgstr "loafaili valik vaatamiseks/muutmiseks"
-
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"Drakperm is used to see files to use in order to fix permissions, owners, "
-"and groups via msec.\n"
-"You can also edit your own rules which will owerwrite the default rules."
-msgstr ""
-"Drakperm on kasutatav failide vaatamiseks, et mseci abil parandada loabitte, "
-"omanikke ja gruppe.\n"
-"Võite ka muuta oma reegleid, mis tühistavad vaikereeglid."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17720,6 +17794,22 @@ msgstr "Valitud reegel üks tase ülespoole"
 #, c-format
 msgid "Up"
 msgstr "Üles"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "select perm file to see/edit"
+msgstr "loafaili valik vaatamiseks/muutmiseks"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"Drakperm is used to see files to use in order to fix permissions, owners, "
+"and groups via msec.\n"
+"You can also edit your own rules which will owerwrite the default rules."
+msgstr ""
+"Drakperm on kasutatav failide vaatamiseks, et mseci abil parandada loabitte, "
+"omanikke ja gruppe.\n"
+"Võite ka muuta oma reegleid, mis tühistavad vaikereeglid."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17908,13 +17998,13 @@ msgstr "Turvahoiatused:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "(default value: %s)"
-msgstr "(vaikeväärtus: %s)"
+msgid "Security Level:"
+msgstr "Turvatase:"
 
 #: ../../standalone/draksec:1
 #, c-format
-msgid "Security Level:"
-msgstr "Turvatase:"
+msgid "(default value: %s)"
+msgstr "(vaikeväärtus: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17930,7 +18020,7 @@ msgid ""
 "which can accept\n"
 "              connections from many clients. If your machine is only a "
 "client on the Internet, you\n"
-"\t      should choose a lower level.\n"
+"           should choose a lower level.\n"
 "\n"
 "Paranoid:  This is similar to the previous level, but the system is entirely "
 "closed and security\n"
@@ -17939,7 +18029,7 @@ msgid ""
 "Security Administrator:\n"
 "               If the 'Security Alerts' option is set, security alerts will "
 "be sent to this user (username or\n"
-"\t       email)"
+"            email)"
 msgstr ""
 "Standardne: see on tavaline turvatase, mida võib soovitada arvutile, mis on "
 "Internetiga\n"
@@ -18325,26 +18415,6 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "/Options"
-msgstr "/Eelistused"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect jazz drives"
-msgstr "/JAZZ ketaste automaattuvastus"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect modems"
-msgstr "/Modemite automaattuvastus"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect printers"
-msgstr "/Printerite automaattuvastus"
-
-#: ../../standalone/harddrake2:1
-#, c-format
 msgid "primary"
 msgstr "esmane"
 
@@ -18359,6 +18429,16 @@ msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
 "Klõps seadmel vasakul asuvas puus näitab siin selle kohta käivat infot."
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Unknown"
+msgstr "Tundmatu"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "unknown"
+msgstr "Tundmatu"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18419,11 +18499,6 @@ msgstr "HardDrake info"
 msgid "/_About..."
 msgstr "/_Misvärk"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Help"
-msgstr "/_Abi"
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/_Report Bug"
@@ -18462,15 +18537,20 @@ msgstr "HardDrake abi"
 msgid "/_Fields description"
 msgstr "/Välja_de kirjeldus"
 
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "/_Help"
+msgstr "/_Abi"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/_Quit"
+msgstr "/_Välju"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "/_JAZZ ketaste automaattuvastus"
-
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "/_Options"
-msgstr "/_Eelistused"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18482,10 +18562,10 @@ msgstr "/_Modemite automaattuvastus"
 msgid "/Autodetect _printers"
 msgstr "/_Printerite automaattuvastus"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
-msgid "/_Quit"
-msgstr "/_Välju"
+msgid "/_Options"
+msgstr "/_Eelistused"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18584,7 +18664,7 @@ msgstr "Tase"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Format of floppies the drive accept"
+msgid "Format of floppies supported by the drive"
 msgstr "Flopi vorming, mida seade tunnustab"
 
 #: ../../standalone/harddrake2:1
@@ -18741,6 +18821,16 @@ msgstr "Kas sel CPU-l on Cyrix 6x86 \"koomaviga\" ?"
 #, c-format
 msgid "Coma bug"
 msgstr "\"Koomaviga\""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "special capacities of the driver (burning ability and or DVD support)"
+msgstr "ketta eriomadused (nt. kirjutamine ja/või DVD tugi)"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "Drive capacity"
+msgstr "Ketta eriomadused"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19219,8 +19309,8 @@ msgstr "Võrgu jälgimine"
 
 #: ../../standalone/printerdrake:1
 #, c-format
-msgid "Reading printer data ..."
-msgstr "Printeri andmete lugemine ..."
+msgid "Reading data of installed printers..."
+msgstr "Paigaldatud printerite andmete lugemine..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19338,52 +19428,6 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid ""
-"Your %s has been configured.\n"
-"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
-"applications menu."
-msgstr ""
-"Teie %s skänner on seadistatud.\n"
-"Nüüd võite skaneerida dokumente, kasutades selleks rakendust \"XSane\", "
-"mille leiate rakenduste menüüs rubriigist Multimeedia/Graafika."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid ""
-"The %s must be configured by printerdrake.\n"
-"You can launch printerdrake from the Mandrake Control Center in Hardware "
-"section."
-msgstr ""
-"See %s skänner tuleb seadistada printerdrake abil.\n"
-"Printerdrake saab käivitada Mandrake juhtimiskeskuse riistvara sektsioonist."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "choose device"
-msgstr "valige seade"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Please select the device where your %s is attached"
-msgstr "Valige palun seade, kuhu %s on ühendatud"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is unsupported"
-msgstr "Sel %s skänneril puudub tugi"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s on Scannerdrake praegusele versioonile tundmatu."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "Mandrake Linuxi praegusel versioonil puudub %s tugi."
-
-#: ../../standalone/scannerdrake:1
-#, c-format
 msgid "Re-generating list of configured scanners ..."
 msgstr "Seadistatud skännerite nimekirja taasloomine..."
 
@@ -19445,8 +19489,89 @@ msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
-msgid "Select a scanner"
-msgstr "Valige skänner"
+msgid ""
+"Your %s has been configured.\n"
+"You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
+"applications menu."
+msgstr ""
+"Teie %s skänner on seadistatud.\n"
+"Nüüd võite skaneerida dokumente, kasutades selleks rakendust \"XSane\", "
+"mille leiate rakenduste menüüs rubriigist Multimeedia/Graafika."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "choose device"
+msgstr "valige seade"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Please select the device where your %s is attached"
+msgstr "Valige palun seade, kuhu %s on ühendatud"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Searching for scanners ..."
+msgstr "Skännerite otsimine..."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Auto-detect available ports"
+msgstr "Kättesaadavate portide automaattuvastus"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "(Note: Parallel ports cannot be auto-detected)"
+msgstr "(Märkus: paralleelporte ei tuvastata)"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"The %s must be configured by printerdrake.\n"
+"You can launch printerdrake from the Mandrake Control Center in Hardware "
+"section."
+msgstr ""
+"See %s skänner tuleb seadistada printerdrake abil.\n"
+"Printerdrake saab käivitada Mandrake juhtimiskeskuse riistvara sektsioonist."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is unsupported"
+msgstr "Sel %s skänneril puudub tugi"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not known by this version of Scannerdrake."
+msgstr "%s on Scannerdrake praegusele versioonile tundmatu."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The %s is not supported by this version of Mandrake Linux."
+msgstr "Mandrake Linuxi praegusel versioonil puudub %s tugi."
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Port: %s"
+msgstr "Port: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ", "
+msgstr ", "
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Detected model: %s"
+msgstr "Tuvastati mudel: %s"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid " ("
+msgstr " ("
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select a scanner model"
+msgstr "Valige skänneri mudel"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19538,6 +19663,10 @@ msgid "Scientific Workstation"
 msgstr "Teadustööjaam"
 
 #: ../../share/compssUsers:999
+msgid "Scientific applications such as gnuplot"
+msgstr "Teaduserakendused, näiteks gnuplot"
+
+#: ../../share/compssUsers:999
 msgid "Console Tools"
 msgstr "Konsoolivahendid"
 
@@ -19611,12 +19740,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache ja Pro-ftpd"
 
 #: ../../share/compssUsers:999
-msgid "Mail/Groupware/News"
-msgstr "Meil/grupitöö/uudised"
+msgid "Mail"
+msgstr "E-post"
 
 #: ../../share/compssUsers:999
-msgid "Postfix mail server, Inn news server"
-msgstr "Postfix meiliserver, uudisteserver Inn"
+msgid "Postfix mail server"
+msgstr "Postfix meiliserver"
 
 #: ../../share/compssUsers:999
 msgid "Database"
