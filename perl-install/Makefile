@@ -90,6 +90,7 @@ ifeq (sparc,$(ARCH))
 endif
 ifeq (i386,$(ARCH))
 #	install -s ../kernel/cardmgr/cardmgr $(DEST)/usr/bin
+	install -s ../tools/i386/mkreiserfs $(DEST)/usr/bin
 endif
 
 	for i in `cat /tmp/list`; do \
