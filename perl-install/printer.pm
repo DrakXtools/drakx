@@ -598,7 +598,7 @@ sub configure_queue($) {
 
 		if ($_->{TYPE} eq "LOCAL") {
 		    print PRINTCAP "\t:lp=$_->{DEVICE}:\\\n";
-		} elsif ($_->{TYPE} eq "REMOTE") {
+		} elsif ($_->{TYPE} eq "LPD") {
 		    print PRINTCAP "\t:rm=$_->{REMOTEHOST}:\\\n";
 		    print PRINTCAP "\t:rp=$_->{REMOTEQUEUE}:\\\n";
 		} else {

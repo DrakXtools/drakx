@@ -553,8 +553,8 @@ sub configurePrinter {
 	eval { add2hash($o->{printer}, printer::getinfo($o->{prefix})) }; #- get existing configuration.
 	$use_cups and printer::poll_ppd_base();
 	$use_lpr and printer::read_printer_db();
-	foreach (keys %{$o->{printer}{configured} || {}}) {
-	    log::l("configuring printer queue $_->{queue} for $_->{mode}");
+	foreach (values %{$o->{printer}{configured} || {}}) {
+	    log::l("configuring printer queue $_->{QUEUE} for $_->{mode}");
 	    printer::copy_printer_params($_, $o->{printer});
 	    #- setup all configured queues, which is not the case interactively where
 	    #- only the working queue is setup on configuration.
