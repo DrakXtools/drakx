@@ -72,7 +72,7 @@ sub adsl_conf {
   adsl_conf_step_1:
     adsl_ask_info ($adsl, $netc, $intf) or return;
   adsl_conf_step_2:
-    conf_network_card ($in, $netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
+    conf_network_card($in, $netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
     adsl_conf_backend($adsl, $netc, $adsl_type);
 
   adsl_conf_step_3:
