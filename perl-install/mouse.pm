@@ -199,6 +199,7 @@ sub write {
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
     any::devfssymlinkf ($mouse->{device}, 'mouse', $prefix) or log::l("creating $prefix/dev/mouse symlink failed");
+    $mouse->{auxmouse} and any::devfssymlinkf ($mouse->{auxmouse}{device}, 'mouse1', $prefix) or log::l("creating $prefix/dev/mouse1 symlink failed");
 
     if (arch() =~ /ppc/) {
 	my $s = join('',
