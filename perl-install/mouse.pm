@@ -319,7 +319,7 @@ sub detect() {
 			MOUSETYPE  => "Microsoft",
 			XMOUSETYPE => "Microsoft"}, @wacom;
 
-    if (!modules::get_probeall("usb-interface") && detect_devices::is_a_recent_computer() && $::isInstall && !$::noauto) {
+    if (!modules::get_probeall("usb-interface") && detect_devices::is_a_recent_computer() && $::isInstall) {
 	#- special case for non detected usb interface on a box with no mouse.
 	#- we *must* find out if there really is no usb, otherwise the box may
 	#- not be accessible via the keyboard (if the keyboard is USB)

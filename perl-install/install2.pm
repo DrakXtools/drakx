@@ -499,7 +499,7 @@ sub main {
     require"install_steps_$o->{interactive}.pm" if $o->{interactive}; #- no space to skip perl2fcalls
 
     #- needed before accessing floppy (in case of usb floppy)
-    $::noauto or modules::load_category('bus/usb'); 
+    modules::load_category('bus/usb'); 
 
     #- patch should be read after defcfg in order to take precedance.
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;

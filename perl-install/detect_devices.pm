@@ -379,6 +379,9 @@ sub pcmcia_probe {
 # => probeall with $probe_type is unsafe
 sub probeall {
     my ($probe_type) = @_;
+
+    return if $::noauto;
+
     require sbus_probing::main;
     pci_probe($probe_type), usb_probe(), pcmcia_probe(), sbus_probing::main::probe();
 }

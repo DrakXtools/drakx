@@ -641,7 +641,7 @@ sub load_category {
     my ($in, $category, $auto, $at_least_one) = @_;
 
     my @l;
-    if (!$::noauto) {
+    {
 	my $w;
 	my $wait_message = sub { $w = wait_load_module($in, $category, @_) };
 	@l = modules::load_category($category, $wait_message);
