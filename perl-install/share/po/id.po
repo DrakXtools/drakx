@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-19 16:40+0700\n"
+"PO-Revision-Date: 2005-03-19 17:31+0700\n"
 "Last-Translator: bayu artanto <bayuart@yahoo.com>\n"
 "Language-Team: Indonesia <mdk-id@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -12021,12 +12021,12 @@ msgid ""
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
-"HP LaserJet 1000 perlu firmware di-upload setelah dinyalakan. Downloadlah "
-"paket driver Windows dari situs web HP (firmware di CD printer tak bekerja) "
-"dan urailah file firmware (self-extracting '.exe' file) dg utilitas 'unzip' "
-"dan carilah file 'sihp1000.img'. Copy file ini ke direktori '/etc/printer'. "
-"Di sana ia akan ditemukan oleh skrip uploader otomatis dan di-upload ketika "
-"printer dihubungkan dan dinyalakan.\n"
+"HP LaserJet 1000 perlu mengupload firmware setelah dinyalakan. Downloadlah "
+"paket driver Windows dari situs web HP (firmware pada CD tidak bekerja) "
+"dan urailah file firmware dengan utilitas 'unzip' dan carilah file "
+"'sihp1000.img'. Salin file ke direktori '/etc/printer'. Di sana ia akan "
+"ditemukan oleh skrip uploader otomatis dan di-upload ketika printer "
+"dihubungkan dan dinyalakan.\n"
 
 #: printer/printerdrake.pm:61
 #, c-format
@@ -12039,7 +12039,7 @@ msgid ""
 "Here you can choose whether the printers connected to this machine should be "
 "accessible by remote machines and by which remote machines."
 msgstr ""
-"Di sini Anda dapat memilih apakah printer yg terhubung dg komputer ini bisa "
+"Di sini Anda dapat memilih apakah printer yang terhubung dengan komputer ini bisa "
 "diakses oleh komputer remote dan oleh komputer remote mana."
 
 #: printer/printerdrake.pm:63
@@ -12048,23 +12048,23 @@ msgid ""
 "You can also decide here whether printers on remote machines should be "
 "automatically made available on this machine."
 msgstr ""
-"Anda dapat memutuskan apakah printer di komputer remote harus dibuat secara "
-"otomatis agar dapat dipakai di komputer ini."
+"Anda dapat memutuskan apakah printer di komputer remote harus tersedia "
+"secara otomatis agar dapat dipakai pada komputer ini."
 
 #: printer/printerdrake.pm:66
 #, c-format
 msgid "The printers on this machine are available to other computers"
-msgstr "Printer di komputer ini dapat dipakai oleh komputer lain"
+msgstr "Printer pada komputer ini dapat dipakai oleh komputer lain"
 
 #: printer/printerdrake.pm:71
 #, c-format
 msgid "Automatically find available printers on remote machines"
-msgstr "Cari printer di komputer lain secara otomatis"
+msgstr "Cari printer pada komputer lain secara otomatis"
 
 #: printer/printerdrake.pm:76
 #, c-format
 msgid "Printer sharing on hosts/networks: "
-msgstr "Sharing printer di host/jaringan: "
+msgstr "Sharing printer pada host/jaringan: "
 
 #: printer/printerdrake.pm:78
 #, c-format
@@ -12075,7 +12075,7 @@ msgstr "Konfigurasi pribadi"
 #: standalone/scannerdrake:610
 #, c-format
 msgid "No remote machines"
-msgstr "Tiada komputer remote"
+msgstr "Tidak ada komputer remote"
 
 #: printer/printerdrake.pm:94
 #, c-format
@@ -12094,21 +12094,21 @@ msgid ""
 "address(es) and optionally the port number(s) here to get the printer "
 "information from the server(s)."
 msgstr ""
-"Utk mengakses printer di server CUPS dalam jaringan lokal Anda hanya perlu\n"
+"Untuk mengakses printer pada server CUPS dalam jaringan lokal Anda hanya perlu\n"
 "menyalakan opsi \"Cari printer di komputer lain secara otomatis\"; server "
 "CUPS\n"
-"secara otomatis memberitahu komputer Anda ttg printer mereka. Semua printer "
-"yg\n"
+"secara otomatis memberitahu komputer Anda tentang printer mereka. Semua printer "
+"yang \n"
 "kini dikenal oleh komputer Anda terdaftar di bagian \"Printer remote\" "
 "window\n"
-"utama Printerdrake. Jika server CUPS Anda tak berada di jaringan lokal,\n"
+"utama Printerdrake. Jika server CUPS Anda tidak berada di jaringan lokal,\n"
 "masukkan alamat IP (dan nomor port bila perlu) untuk mendapat info printer\n"
 "dari server."
 
 #: printer/printerdrake.pm:109
 #, c-format
 msgid "Japanese text printing mode"
-msgstr "Mode cetak teks Jepang"
+msgstr "Mode pencetakan teks Jepang"
 
 #: printer/printerdrake.pm:110
 #, c-format
@@ -12121,16 +12121,17 @@ msgid ""
 "print Japanese text on a printer set up on a remote machine, you have to "
 "activate this function on that remote machine."
 msgstr ""
-"Nyalakan ini HANYA BILA Anda benar-benar perlu mencetak teks bahasa Jepang, "
+"Menyalakan ini akan mengijinkan Anda mencetak teks bahasa Jepang. Gunakan "
+"fungsi ini jika Anda Anda mingin mencetak teks dalam bahasa Jepang, karena "
 "jika ini aktif Anda tak dapat mencetak huruf aksen font latin dan takkan "
 "dapat menyetel margin, ukuran huruf, dsb. Setting ini hanya berlaku bagi "
-"printer yg didefinisikan di komputer ini. Jika ingin mencetak teks Jepang di "
-"printer komputer lain, aktifkan fungsi ini di komputer remote tsb."
+"printer yg didefinisikan di komputer ini. Jika ingin mencetak teks Jepang "
+"pada printer komputer lain, aktifkan fungsi ini pada komputer remote tsb."
 
 #: printer/printerdrake.pm:117
 #, c-format
 msgid "Automatic correction of CUPS configuration"
-msgstr "Koreksi otomatis konfigurasi CUPS"
+msgstr "Perbaikan otomatis konfigurasi CUPS"
 
 #: printer/printerdrake.pm:119
 #, c-format
@@ -12148,9 +12149,9 @@ msgid ""
 "If some of these measures lead to problems for you, turn this option off, "
 "but then you have to take care of these points."
 msgstr ""
-"Jika opsi ini dipilih, pada tiap penyalaan CUPS akan dipastikan bahwa\n"
+"Jika opsi ini dipilih, Setiap kali startup CUPS akan dipastikan bahwa\n"
 "\n"
-"- jika LPD/LPRng terinstal, /etc/printcap takkan ditindih oleh CUPS\n"
+"- jika LPD/LPRng terinstal, /etc/printcap tidak akan ditimpa oleh CUPS\n"
 "\n"
 "- jika /etc/cups/cupsd.conf hilang, akan dibuatkan\n"
 "\n"
@@ -12163,7 +12164,7 @@ msgstr ""
 #: printer/printerdrake.pm:4292
 #, c-format
 msgid "Remote CUPS server and no local CUPS daemon"
-msgstr ""
+msgstr "Server remote CUPS dan tidak ada daemon CUPS lokal"
 
 #: printer/printerdrake.pm:135
 #, c-format
@@ -12174,7 +12175,7 @@ msgstr "Aktif"
 #: printer/printerdrake.pm:519
 #, c-format
 msgid "Off"
-msgstr "Tak aktif"
+msgstr "Tidak aktif"
 
 #: printer/printerdrake.pm:138 printer/printerdrake.pm:501
 #, c-format
@@ -12184,6 +12185,10 @@ msgid ""
 "define local print queues then and if the specified server is down it cannot "
 "be printed at all from this machine."
 msgstr ""
+"Pada mode ini, daemon lokal CUPS akan dihentikan dan setiap permintaan "
+"pencetakan akan diarahkan pada server yang ditentukan. Perhatikan bahwa "
+"tidak mungkin untuk mendefinisikan antrian pencetakan lokal dan jika "
+"server tidak berfungsi, maka tidak bisa mencetak dari komputer ini."
 
 #: printer/printerdrake.pm:155 printer/printerdrake.pm:230
 #, c-format
@@ -12195,7 +12200,8 @@ msgstr "Berbagi printer lokal"
 msgid ""
 "These are the machines and networks on which the locally connected printer"
 "(s) should be available:"
-msgstr "Mesin dan jaringan yg printer lokalnya dapat dipakai:"
+msgstr ""
+"Berikut adalah komputer dan jaringan yang printer lokalnya dapat dipakai:"
 
 #: printer/printerdrake.pm:167
 #, c-format
@@ -12224,7 +12230,8 @@ msgstr "Alamat IP host/jaringan:"
 msgid ""
 "Choose the network or host on which the local printers should be made "
 "available:"
-msgstr "Pilihlah jaringan/host yg ingin dipakai printer lokalnya:"
+msgstr ""
+"Pilihlah jaringan/host yang ingin dipakai printer lokalnya:"
 
 #: printer/printerdrake.pm:238
 #, c-format
@@ -12234,22 +12241,22 @@ msgstr "Alamat IP host/jaringan hilang."
 #: printer/printerdrake.pm:246
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
-msgstr "IP host/jaringan tak benar.\n"
+msgstr "IP host/jaringan tidak benar.\n"
 
 #: printer/printerdrake.pm:247 printer/printerdrake.pm:423
 #, c-format
 msgid "Examples for correct IPs:\n"
-msgstr "Contoh IP yg benar:\n"
+msgstr "Contoh IP yang benar:\n"
 
 #: printer/printerdrake.pm:271
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
-msgstr "Host/jaringan ini sudah terdaftar, tak dapat ditambahkan lagi.\n"
+msgstr "Host/jaringan ini sudah terdaftar, tidak dapat ditambahkan lagi.\n"
 
 #: printer/printerdrake.pm:340 printer/printerdrake.pm:410
 #, c-format
 msgid "Accessing printers on remote CUPS servers"
-msgstr "Sedang mengakses printer di server CUPS remote"
+msgstr "Mengakses printer pada server CUPS remote"
 
 #: printer/printerdrake.pm:341
 #, c-format
@@ -12258,9 +12265,9 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
-"Tambahkan di sini server CUPS yg printernya ingin Anda pakai. Anda hanya "
-"perlu melakukan ini jika server tak menyiarkan info printernya ke jaringan "
-"lokal."
+"Tambahkan di sini server CUPS yang printernya ingin Anda pakai. Anda hanya "
+"perlu melakukan ini jika server tidak menyiarkan informasi printernya ke "
+"jaringan lokal."
 
 #: printer/printerdrake.pm:352
 #, c-format
@@ -12270,32 +12277,32 @@ msgstr "Tambah server"
 #: printer/printerdrake.pm:358
 #, c-format
 msgid "Edit selected server"
-msgstr "Edit server yg dipilih"
+msgstr "Edit server yang terpilih"
 
 #: printer/printerdrake.pm:367
 #, c-format
 msgid "Remove selected server"
-msgstr "Hapus server yg dipilih"
+msgstr "Hapus server yang terpilih"
 
 #: printer/printerdrake.pm:411
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
-msgstr "Masukkan alamat IP dan port host yg ingin Anda pakai printernya."
+msgstr "Masukkan alamat IP dan port host yang ingin Anda pakai printernya."
 
 #: printer/printerdrake.pm:412
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr "Jika port tak diberikan, sbg standar akan dipakai 631."
+msgstr "Jika port tidak diberikan, 631 akan dipakai sebagai default."
 
 #: printer/printerdrake.pm:416
 #, c-format
 msgid "Server IP missing!"
-msgstr "Server IP hilang!"
+msgstr "IP Server hilang!"
 
 #: printer/printerdrake.pm:422
 #, c-format
 msgid "The entered IP is not correct.\n"
-msgstr "IP tak benar.\n"
+msgstr "IP yang dimasukkan tidak benar.\n"
 
 #: printer/printerdrake.pm:434 printer/printerdrake.pm:1852
 #, c-format
@@ -12305,7 +12312,7 @@ msgstr "Nomor port harus berupa bilangan bulat"
 #: printer/printerdrake.pm:445
 #, c-format
 msgid "This server is already in the list, it cannot be added again.\n"
-msgstr "Server ini sudah terdaftar, tak dapat ditambahkan lagi.\n"
+msgstr "Server ini sudah terdaftar, tidak dapat ditambahkan lagi.\n"
 
 #: printer/printerdrake.pm:456 printer/printerdrake.pm:1873
 #: standalone/drakups:247 standalone/harddrake2:50
@@ -12316,15 +12323,15 @@ msgstr "Port"
 #: printer/printerdrake.pm:489 printer/printerdrake.pm:505
 #: printer/printerdrake.pm:520 printer/printerdrake.pm:524
 #: printer/printerdrake.pm:530
-#, fuzzy, c-format
+#, c-format
 msgid "On, Name or IP of remote server:"
-msgstr "Printer di server lpd remote"
+msgstr "Aktif, Nama atau IP server remote:"
 
 #: printer/printerdrake.pm:508 printer/printerdrake.pm:4301
 #: printer/printerdrake.pm:4366
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS server name or IP address missing."
-msgstr "Alamat IP host/jaringan hilang."
+msgstr "Nama server CUPS atau alamat IP hilang."
 
 #: printer/printerdrake.pm:560 printer/printerdrake.pm:580
 #: printer/printerdrake.pm:673 printer/printerdrake.pm:739
@@ -12357,12 +12364,12 @@ msgstr "Printerdrake"
 #: printer/printerdrake.pm:4436
 #, c-format
 msgid "Reading printer data..."
-msgstr "Pembacaan data printer..."
+msgstr "Membaca data printer..."
 
 #: printer/printerdrake.pm:581
 #, c-format
 msgid "Restarting CUPS..."
-msgstr "Jalankan ulang CUPS..."
+msgstr "Menjalankan ulang CUPS..."
 
 #: printer/printerdrake.pm:608 printer/printerdrake.pm:628
 #, c-format
@@ -12382,8 +12389,8 @@ msgid ""
 "printers will be automatically detected."
 msgstr ""
 "\n"
-"Printer pada server CUPS remote tak perlu dikonfigurasikan di sini; printer "
-"ini akan secara otomatis dideteksi."
+"Printer pada server CUPS remote tidak perlu dikonfigurasikan di sini; printer "
+"ini akan secara otomatis terdeteksi."
 
 #: printer/printerdrake.pm:614 printer/printerdrake.pm:4675
 #, c-format
@@ -12392,22 +12399,27 @@ msgid ""
 "WARNING: No local network connection active, remote printers can neither be "
 "detected nor tested!"
 msgstr ""
+"\n"
+"PERINGATAN: Tidak ada koneksi jaringan lokal yang aktif, printer remote "
+"tidak bisa dideteksi atau diuji!"
 
 #: printer/printerdrake.pm:621
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Printer auto-detection (Local, TCP/Socket, SMB printers, and device URI)"
-msgstr "Printer deteksi otomatis (Lokal, TCP/Socket, dan SMB)"
+msgstr ""
+"Pendeteksian otomatis printer (Lokal, TCP/Socket, printer SMB, dan divais URI)"
 
 #: printer/printerdrake.pm:623
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
+msgstr "Modifikasi timeout untuk pendeteksian otomatis printer jaringan"
 
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr ""
+msgstr "Masukkan timeout untuk pendeteksian otomatis printer jaringan "
+"(dalam msec) disini."
 
 #: printer/printerdrake.pm:631
 #, c-format
@@ -12416,26 +12428,29 @@ msgid ""
 "network printers will be, but the scan can take longer then, especially if "
 "there are many machines with local firewalls in the network. "
 msgstr ""
+"Semakin lama timeout, semakin handal pendeteksian printer jaringan, "
+"tetapi pendeteksian akan semakin lama, terutama jika terdapat banyak "
+"komputer dengan firewall lokal pada jaringan. "
 
 #: printer/printerdrake.pm:635
-#, fuzzy, c-format
+#, c-format
 msgid "The timeout must be a positive integer number!"
-msgstr "Opsi %s harus berupa integer!"
+msgstr "Timeout harus berupa bilangan integer positif!"
 
 #: printer/printerdrake.pm:673
 #, c-format
 msgid "Checking your system..."
-msgstr "Pengecekan sistem..."
+msgstr "Menguji sistem..."
 
 #: printer/printerdrake.pm:690
 #, c-format
 msgid "and one unknown printer"
-msgstr "dan satu printer tak dikenal"
+msgstr "dan satu printer tidak dikenal"
 
 #: printer/printerdrake.pm:692
 #, c-format
 msgid "and %d unknown printers"
-msgstr "dan %d printer tak dikenal"
+msgstr "dan %d printer tidak dikenal"
 
 #: printer/printerdrake.pm:696
 #, c-format
@@ -12448,7 +12463,7 @@ msgstr ""
 "Printer berikut\n"
 "\n"
 "%s%s\n"
-"terhubung langsung dg sistem Anda"
+"terhubung langsung dengan sistem Anda"
 
 #: printer/printerdrake.pm:698
 #, c-format
@@ -12461,7 +12476,7 @@ msgstr ""
 "Printer berikut\n"
 "\n"
 "%s%s\n"
-"terhubung langsung dg sistem Anda"
+"terhubung langsung dengan sistem Anda"
 
 #: printer/printerdrake.pm:699
 #, c-format
@@ -12474,7 +12489,7 @@ msgstr ""
 "Printer berikut\n"
 "\n"
 "%s%s\n"
-"terhubung langsung dg sistem Anda"
+"terhubung langsung dengan sistem Anda"
 
 #: printer/printerdrake.pm:703
 #, c-format
@@ -12483,7 +12498,7 @@ msgid ""
 "There is one unknown printer directly connected to your system"
 msgstr ""
 "\n"
-"Sebuah printer tak dikenal terhubung langsung dengan sistem Anda"
+"Sebuah printer tidak dikenal terhubung langsung dengan sistem Anda"
 
 #: printer/printerdrake.pm:704
 #, c-format
@@ -12492,13 +12507,14 @@ msgid ""
 "There are %d unknown printers directly connected to your system"
 msgstr ""
 "\n"
-"%d printer tak dikenal terhubung langsung dengan sistem Anda"
+"%d printer tidak dikenal terhubung langsung dengan sistem Anda"
 
 #: printer/printerdrake.pm:707
 #, c-format
 msgid ""
 "There are no printers found which are directly connected to your machine"
-msgstr "Tiada printer yg ditemukan terhubung langsung ke komputer Anda"
+msgstr ""
+"Tidak ada printer yang ditemukan terhubung langsung ke komputer Anda"
 
 #: printer/printerdrake.pm:710
 #, c-format
@@ -12511,23 +12527,23 @@ msgid ""
 "Do you want to enable printing on the printers mentioned above or on "
 "printers in the local network?\n"
 msgstr ""
-"Anda ingin mengaktifkan pencetakan di printer tersebut di atas atau printer "
-"di jaringan lokal?\n"
+"Apakah Anda ingin mengaktifkan pencetakan di printer tersebut di "
+"atas atau printer pada jaringan lokal?\n"
 
 #: printer/printerdrake.pm:724
 #, c-format
 msgid "Do you want to enable printing on printers in the local network?\n"
-msgstr "Anda ingin mengaktifkan pencetakan di printer jaringan lokal?\n"
+msgstr "Apakah Anda ingin mengaktifkan pencetakan pada printer jaringan lokal?\n"
 
 #: printer/printerdrake.pm:726
 #, c-format
 msgid "Do you want to enable printing on the printers mentioned above?\n"
-msgstr "Anda ingin mengaktifkan pencetakan di printer tersebut di atas?\n"
+msgstr "Apakah Anda ingin mengaktifkan pencetakan pada printer tersebut di atas?\n"
 
 #: printer/printerdrake.pm:727
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
-msgstr "Anda yakin ingin men-setup pencetakan di komputer ini?\n"
+msgstr "Anda yakin ingin men-setup pencetakan pada komputer ini?\n"
 
 #: printer/printerdrake.pm:728
 #, c-format
@@ -12535,18 +12551,18 @@ msgid ""
 "NOTE: Depending on the printer model and the printing system up to %d MB of "
 "additional software will be installed."
 msgstr ""
-"CATATAN: Akan diinstal divais lunak tambahan hingga %d MB tergantung model "
-"printer dan sistem cetak."
+"CATATAN: Bergantung pada model printer dan sistem pencetakan, perangkat "
+"lunak tambahan sebesar %d MB akan diinstall."
 
 #: printer/printerdrake.pm:767
 #, c-format
 msgid "Searching for new printers..."
-msgstr "Cari printer baru..."
+msgstr "Mencari printer baru..."
 
 #: printer/printerdrake.pm:826
-#, fuzzy, c-format
+#, c-format
 msgid "Found printer on %s..."
-msgstr "Menghapus printer \"%s\"..."
+msgstr "Menemukan printer pada %s..."
 
 #: printer/printerdrake.pm:851
 #, c-format
@@ -12556,7 +12572,7 @@ msgstr "("
 #: printer/printerdrake.pm:852
 #, c-format
 msgid " on "
-msgstr " di "
+msgstr " pada "
 
 #: printer/printerdrake.pm:853 standalone/scannerdrake:137
 #, c-format
@@ -12566,12 +12582,12 @@ msgstr ")"
 #: printer/printerdrake.pm:858 printer/printerdrake.pm:2868
 #, c-format
 msgid "Printer model selection"
-msgstr "Seleksi model printer"
+msgstr "Pilihan model printer"
 
 #: printer/printerdrake.pm:859 printer/printerdrake.pm:2869
 #, c-format
 msgid "Which printer model do you have?"
-msgstr "Anda punya model printer mana?"
+msgstr "Model mana yang Anda miliki?"
 
 #: printer/printerdrake.pm:860
 #, c-format
@@ -12583,8 +12599,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Printerdrake tak dapat menentukan model printer %s Anda. Pilihlah model yg "
-"benar dari daftar."
+"Printerdrake tidak dapat menentukan model printer %s Anda. Pilihlah model "
+"yang benar dari daftar."
 
 #: printer/printerdrake.pm:863 printer/printerdrake.pm:2874
 #, c-format
@@ -12592,18 +12608,18 @@ msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
 "similar one."
 msgstr ""
-"Jika printer Anda tak terdaftar, pilih yang kompatibel (lihat manual) atau "
+"Jika printer Anda tidak terdaftar, pilih yang kompatibel (lihat manual) atau "
 "yang mirip."
 
 #: printer/printerdrake.pm:868
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring printer on %s..."
-msgstr "Konfigurasikan printer \"%s\"..."
+msgstr "Mengkonfigurasikan printer pada %s..."
 
 #: printer/printerdrake.pm:878 printer/printerdrake.pm:4455
 #, c-format
 msgid "Configuring printer \"%s\"..."
-msgstr "Konfigurasikan printer \"%s\"..."
+msgstr "Mengkonfigurasikan printer \"%s\"..."
 
 #: printer/printerdrake.pm:1036 printer/printerdrake.pm:1048
 #: printer/printerdrake.pm:1107 printer/printerdrake.pm:2103
@@ -12627,14 +12643,14 @@ msgid ""
 "connection types."
 msgstr ""
 "\n"
-"Selamat Datang di Dukun Setup Printer\n"
+"Selamat Datang di Wizard Setup Printer\n"
 "\n"
-"Dukun ini dapat menginstal printer lokal atau remote untuk digunakan dari "
-"komputer ini dan juga dari komputer lain di network.\n"
+"Wizard mengijinkan Anda menginstall printer lokal atau remote untuk digunakan "
+"dari komputer ini dan juga dari komputer lain pada jaringan.\n"
 "\n"
-"Dia akan menanyai semua info yg dibutuhkan untuk menset up printer dan "
-"memberi Anda akses ke semua driver printer tersedia, opsi driver, dan tipe "
-"koneksi printer."
+"Dia akan menanyakan semua informasi yang dibutuhkan untuk menset up printer "
+"dan memberi Anda akses ke semua driver printer tersedia, opsi driver, dan "
+"tipe koneksi printer."
 
 #: printer/printerdrake.pm:1050
 #, c-format
@@ -12658,24 +12674,24 @@ msgid ""
 "to set up your printer(s) now."
 msgstr ""
 "\n"
-"Selamat Datang di Penolong Setup Printer\n"
+"Selamat Datang di Wizard Setup Printer\n"
 "\n"
-"Alat ini menolong Anda menginstal printer yg terhubung dg komputer ini, dg "
-"jaringan atau dg komputer Windows remote.\n"
+"Wizard ini akan menolong Anda menginstall printer yang terhubung dengan "
+"komputer ini, dengan jaringan atau dengan komputer Windows remote.\n"
 "\n"
-"Hubungkan dan nyalakan semua printer yg terhubung dg komputer ini agar dapat "
-"dideteksi. Juga printer jaringan dan komputer Windows harus terhubung dan "
-"dinyalakan.\n"
+"Hubungkan dan nyalakan semua printer yang terhubung dengan komputer ini "
+"agar dapat dideteksi. Juga printer jaringan dan komputer Windows harus "
+"terhubung dan dinyalakan.\n"
 "\n"
-"Ingat, deteksi printer jaringan butuh waktu lebih lama daripada printer yg "
-"terhubung langsung dg komputer ini. Matikan deteksi printer jaringan dan/"
-"atau Windows jika tak perlu.\n"
+"Perhatikan bahwa pendeteksian printer jaringan membutuhkan waktu lebih "
+"lama daripada printer yang terhubung langsung dengan komputer ini. "
+"Matikan pendeteksian jaringan dan atau Windows jika tidak diperlukan.\n"
 "\n"
-" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
+" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tidak ingin men-setup "
 "printer sekarang."
 
 #: printer/printerdrake.pm:1059
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -12690,14 +12706,15 @@ msgid ""
 "to set up your printer(s) now."
 msgstr ""
 "\n"
-"Selamat Datang di Penolong Setup Printer\n"
+"Selamat Datang di Wizard Setup Printer\n"
 "\n"
-"Alat ini menolong Anda menginstal printer yg terhubung dg komputer ini.\n"
+"Wizard ini akan menolong Anda menginstall printer yang terhubung dengan "
+"komputer ini.\n"
 "\n"
-"Jika Anda punya printer terhubung dg komputer ini, hubungkan dan nyalakan "
-"sehingga dapat dideteksi.\n"
+"Silahkan hubungkan dan nyalakan semua printer yang terhubung dengan "
+"komputer ini, sehingga dapat dideteksi secara otomatis.\n"
 "\n"
-" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
+" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tidak ingin men-setup "
 "printer sekarang."
 
 #: printer/printerdrake.pm:1067
@@ -12721,20 +12738,20 @@ msgid ""
 "to set up your printer(s) now."
 msgstr ""
 "\n"
-"Selamat Datang di Penolong Setup Printer\n"
+"Selamat Datang di Wizard Setup Printer\n"
 "\n"
-"Alat ini menolong Anda menginstal printer yg terhubung dg komputer ini atau "
-"jaringan.\n"
+"Wizard ini akan menolong Anda menginstall printer yang terhubung dengan "
+"komputer ini atau jaringan.\n"
 "\n"
-"Jika Anda punya printer terhubung dg komputer ini, hubungkan dan nyalakan "
-"sehingga ia/mereka dapat dideteksi. Juga printer jaringan harus terhubung "
-"dan dinyalakan.\n"
+"Jika Anda memiliki printer yang terhubung dengan komputer ini, hubungkan "
+"dan nyalakan dapat dideteksi secara otomatis. Juga printer jaringan "
+"harus terhubung dan dinyalakan.\n"
 "\n"
-"Ingat, deteksi printer jaringan membutuhkan waktu lebih lama daripada "
-"printer yg terhubung langsung dg komputer ini. Matikan deteksi printer "
-"jaringan jika tak perlu.\n"
+"Ingat, pendeteksian printer jaringan membutuhkan waktu lebih lama daripada "
+"printer yang terhubung langsung dengan komputer ini. Matikan pendeteksian "
+"printer jaringan jika tidak diperlukan.\n"
 "\n"
-" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
+" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tidak ingin men-setup "
 "printer sekarang."
 
 #: printer/printerdrake.pm:1076
@@ -12753,38 +12770,39 @@ msgid ""
 "to set up your printer(s) now."
 msgstr ""
 "\n"
-"Selamat Datang di Penolong Setup Printer\n"
+"Selamat Datang di Wizard Setup Printer\n"
 "\n"
-"Alat ini menolong Anda menginstal printer yg terhubung dg komputer ini.\n"
+"Wizard ini akan menolong Anda menginstall printer yang terhubung dengan "
+"komputer ini.\n"
 "\n"
-"Jika Anda punya printer terhubung dg komputer ini, hubungkan dan nyalakan "
-"sehingga dapat dideteksi.\n"
+"Jika Anda memiliki printer yang terhubung dengan komputer ini, "
+"hubungkan dan nyalakan sehingga dapat dideteksi secara otmatis.\n"
 "\n"
-" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tak ingin men-setup "
+" Klik \"Lanjut\" jika siap, dan \"Batal\" jika Anda tidak ingin men-setup "
 "printer sekarang."
 
 #: printer/printerdrake.pm:1085
 #, c-format
 msgid "Auto-detect printers connected to this machine"
-msgstr "Deteksi printer yg terhubung dg komputer ini"
+msgstr "Deteksi otomatis printer yang terhubung dengan komputer ini"
 
 #: printer/printerdrake.pm:1088
 #, c-format
 msgid "Auto-detect printers connected directly to the local network"
-msgstr "Deteksi printer yang terhubung dengan jaringan lokal"
+msgstr "Deteksi otomatis printer yang terhubung dengan jaringan lokal"
 
 #: printer/printerdrake.pm:1091
 #, c-format
 msgid "Auto-detect printers connected to machines running Microsoft Windows"
-msgstr "Deteksi printer yg terhubung dg komputer Microsoft Windows"
+msgstr "Deteksi printer yang terhubung dengan komputer yang menjalankan Microsoft Windows"
 
 #: printer/printerdrake.pm:1108
-#, fuzzy, c-format
+#, c-format
 msgid "No auto-detection"
-msgstr "Deteksi otomatis"
+msgstr "Tanpa deteksi otomatis"
 
 #: printer/printerdrake.pm:1173
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Congratulations, your printer is now installed and configured!\n"
@@ -12799,12 +12817,12 @@ msgstr ""
 "\n"
 "Selamat, printer Anda kini terinstal dan terkonfigurasi!\n"
 "\n"
-"Anda dapat mencetak dg perintah \"Cetak\" di aplikasi Anda (biasanya di menu "
-"\"File\").\n"
+"Anda dapat mencetak dengan perintah \"Cetak\" pada aplikasi Anda (biasanya "
+"pada menu \"File\").\n"
 "\n"
 "Jika Anda ingin menambah, menghapus atau mengubah nama printer, atau jika "
 "ingin mengubah opsi standar setting (tray kertas, kualitas cetak, ...), "
-"pilih \"Printer\" di bagian \"Perangkat Keras\" Pusat Kontrol Mandrake."
+"pilih \"Printer\" pada bagian \"Perangkat Keras\" dari Pusat Kontrol %s."
 
 #: printer/printerdrake.pm:1143 printer/printerdrake.pm:1373
 #: printer/printerdrake.pm:1435 printer/printerdrake.pm:1525
@@ -12814,14 +12832,14 @@ msgstr ""
 #: printer/printerdrake.pm:2005 printer/printerdrake.pm:2143
 #: printer/printerdrake.pm:2229 printer/printerdrake.pm:2275
 #: printer/printerdrake.pm:2342 printer/printerdrake.pm:2377
-#, fuzzy, c-format
+#, c-format
 msgid "Could not install the %s packages!"
-msgstr "Instalasi paket %s"
+msgstr "Tidak bisa menginstall paket %s"
 
 #: printer/printerdrake.pm:1145
 #, c-format
 msgid "Skipping Windows/SMB server auto-detection"
-msgstr ""
+msgstr "Melewati pendeteksian otomatis server Windows/SMB"
 
 #: printer/printerdrake.pm:1151 printer/printerdrake.pm:1296
 #: printer/printerdrake.pm:1531 printer/printerdrake.pm:1785
@@ -12832,7 +12850,7 @@ msgstr "Deteksi otomatis printer"
 #: printer/printerdrake.pm:1151
 #, c-format
 msgid "Detecting devices..."
-msgstr "Deteksi device..."
+msgstr "Mendeteksi divais..."
 
 #: printer/printerdrake.pm:1181
 #, c-format
@@ -12842,7 +12860,7 @@ msgstr ", printer jaringan \"%s\", port %s"
 #: printer/printerdrake.pm:1184
 #, c-format
 msgid ", printer \"%s\" on SMB/Windows server \"%s\""
-msgstr ", printer \"%s\" di server SMB/Windows \"%s\""
+msgstr ", printer \"%s\" pada server SMB/Windows \"%s\""
 
 #: printer/printerdrake.pm:1188
 #, c-format
@@ -12853,7 +12871,7 @@ msgstr "Terdeteksi %s"
 #: printer/printerdrake.pm:1238
 #, c-format
 msgid "Printer on parallel port #%s"
-msgstr "Printer di port paralel #%s"
+msgstr "Printer pada port paralel #%s"
 
 #: printer/printerdrake.pm:1199
 #, c-format
@@ -12863,7 +12881,7 @@ msgstr "Printer jaringan \"%s\", port %s"
 #: printer/printerdrake.pm:1202
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
-msgstr "Printer \"%s\" di server SMB/Windows \"%s\""
+msgstr "Printer \"%s\" pada server SMB/Windows \"%s\""
 
 #: printer/printerdrake.pm:1283
 #, c-format
@@ -12878,20 +12896,20 @@ msgid ""
 "equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB "
 "printer: /dev/usb/lp1, ...)."
 msgstr ""
-"Printer tak ditemukan! Untuk menginstal printer secara manual masukkan nama "
-"alat / file di baris masukan (Port Parallel: /dev/lp0, /dev/lp1, ..., "
-"sebanding dg LPT1:, LPT2:, ..., printer USB pertama: /dev/usb/lp0, printer "
-"USB kedua: /dev/usb/lp1, ...)."
+"Tidak ada printer lokal yang ditemukan! Untuk menginstal printer secara "
+"manual masukkan nama divais/file pada baris masukan (Port Parallel: "
+"/dev/lp0, /dev/lp1, ..., "sebanding dengan LPT1:, LPT2:, ..., printer "
+"USB pertama: /dev/usb/lp0, printer USB kedua: /dev/usb/lp1, ...)."
 
 #: printer/printerdrake.pm:1288
 #, c-format
 msgid "You must enter a device or file name!"
-msgstr "Masukkan nama device atau file!"
+msgstr "Anda harus memasukkan nama divais atau file!"
 
 #: printer/printerdrake.pm:1297
 #, c-format
 msgid "No printer found!"
-msgstr "Printer tak ditemukan!"
+msgstr "Tidak ada printer yang ditemukan!"
 
 #: printer/printerdrake.pm:1305
 #, c-format
@@ -12901,12 +12919,12 @@ msgstr "Printer Lokal"
 #: printer/printerdrake.pm:1306
 #, c-format
 msgid "Available printers"
-msgstr "Printer yg tersedia"
+msgstr "Printer yang tersedia"
 
 #: printer/printerdrake.pm:1310 printer/printerdrake.pm:1319
 #, c-format
 msgid "The following printer was auto-detected. "
-msgstr "Printer berikut terdeteksi otomatis. "
+msgstr "Printer berikut terdeteksi secara otomatis. "
 
 #: printer/printerdrake.pm:1312
 #, c-format
@@ -12914,26 +12932,29 @@ msgid ""
 "If it is not the one you want to configure, enter a device name/file name in "
 "the input line"
 msgstr ""
-"Jika ini bukan yang ingin dikonfigurasikan, masukkan nama device/file di "
+"Jika ini bukan yang ingin dikonfigurasikan, masukkan nama device/file pada "
 "baris masukan"
 
 #: printer/printerdrake.pm:1313
 #, c-format
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
-msgstr "Abg alternatif, Anda dapat menentukan nama device/file"
+msgstr ""
+"Sebagai alternatif, Anda dapat menentukan nama device/file pada baris masukan"
 
 #: printer/printerdrake.pm:1314 printer/printerdrake.pm:1323
 #, c-format
 msgid "Here is a list of all auto-detected printers. "
-msgstr "Berikut adalah daftar printer yg terdeteksi otomatis"
+msgstr "Berikut adalah daftar printer yang terdeteksi secara otomatis"
 
 #: printer/printerdrake.pm:1316
 #, c-format
 msgid ""
 "Please choose the printer you want to set up or enter a device name/file "
 "name in the input line"
-msgstr "Pilih printer yg ingin diset up atau ketikkan nama device/file"
+msgstr ""
+"Silahkan pilih printer yang ingin diset up atau ketikkan nama device/file"
+"pada baris masukan"
 
 #: printer/printerdrake.pm:1317
 #, c-format
@@ -12942,7 +12963,7 @@ msgid ""
 "device name/file name in the input line"
 msgstr ""
 "Pilih printer tempat job cetak Anda harus disalurkan atau ketikkan nama "
-"device/file"
+"device/file pada baris masukan"
 
 #: printer/printerdrake.pm:1321
 #, c-format
@@ -12951,14 +12972,14 @@ msgid ""
 "printer was not correctly detected or if you prefer a customized printer "
 "configuration, turn on \"Manual configuration\"."
 msgstr ""
-"Konfigurasi printer akan bekerja otomatis. Jika printer Anda tak terdeteksi "
-"dengan benar atau jika ingin Anda konfigurasi sendiri, jalankan "
-"\"Konfigurasi manual\"."
+"Konfigurasi printer akan bekerja otomatis. Jika printer Anda tidak "
+"terdeteksi dengan benar atau jika ingin Anda konfigurasi sendiri, "
+"aktifkan \"Konfigurasi manual\"."
 
 #: printer/printerdrake.pm:1322
 #, c-format
 msgid "Currently, no alternative possibility is available"
-msgstr "Saat ini tidak ada kemungkinan lain"
+msgstr "Saat ini, tidak ada solusi alternatif yang ada"
 
 #: printer/printerdrake.pm:1325
 #, c-format
@@ -12969,8 +12990,8 @@ msgid ""
 "\"Manual configuration\"."
 msgstr ""
 "Pilihlah printer yang ingin diset up. Konfigurasi printer akan bekerja "
-"otomatis. Jika printer Anda tak terdeteksi dengan benar atau jika ingin Anda "
-"konfigurasi sendiri, jalankan \"Konfigurasi manual\"."
+"otomatis. Jika printer Anda tidak terdeteksi dengan benar atau jika ingin Anda "
+"konfigurasi sendiri, aktifkan \"Konfigurasi manual\"."
 
 #: printer/printerdrake.pm:1326
 #, c-format
