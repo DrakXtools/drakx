@@ -51,7 +51,7 @@ foreach $type (keys %t) {
 	}
     }
 
-    my %names_in_stage2 = ( network => [ 'net' ], medias => [ 'scsi', 'disk' ] );
+    my %names_in_stage2 = ( network => [ 'net' ], medias => [ 'scsi', 'disk', 'big' ] );
     require modules;
     my @modulez;
     push @modulez, modules::module_of_type__4update_kernel($_) foreach @{$names_in_stage2{$type}};
