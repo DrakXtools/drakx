@@ -34,7 +34,8 @@ sub gtknew {
     if (my $r = find { ref $_->[0] } group_by2(@_)) {
 	internal_error("gtknew $class: $r should be a string in @_");
     }
-    _gtk(undef, $class, 'gtknew', @_);
+    my %opts = @_;
+    _gtk(undef, $class, 'gtknew', \%opts);
 }
 
 sub gtkset {
@@ -46,9 +47,11 @@ sub gtkset {
     if (my $r = find { ref $_->[0] } group_by2(@_)) {
 	internal_error("gtkset $class: $r should be a string in @_");
     }
+    my %opts = @_;
+
     $class =~ s/^Gtk2::(Gdk::)?// or internal_error("gtkset unknown class $class");
     
-    _gtk($w, $class, 'gtkset', @_);
+    _gtk($w, $class, 'gtkset', \%opts);
 }
 
 sub gtkadd {
@@ -60,9 +63,10 @@ sub gtkadd {
     if (my $r = find { ref $_->[0] } group_by2(@_)) {
 	internal_error("gtkadd $class: $r should be a string in @_");
     }
+    my %opts = @_;
     $class =~ s/^Gtk2::(Gdk::)?// or internal_error("gtkadd unknown class $class");
     
-    _gtk('gtkadd', $w, $class, @_);
+    _gtk('gtkadd', $w, $class, \%opts);
 }
 
 
@@ -89,30 +93,30 @@ sub gtkval_modify {
 my $global_tooltips;
 
 sub _gtk {
-    my ($w, $class, $action, %opts) = @_;
+    my ($w, $class, $action, $opts) = @_;
 
     if (my $f = $mygtk2::{"_gtk__$class"}) {
-	$w = $f->($w, \%opts, $class, $action);
+	$w = $f->($w, $opts, $class, $action);
     } else {
 	internal_error("$action $class: unknown class");
     }
 
-    $w->set_size_request(delete $opts{width} || -1, delete $opts{height} || -1) if exists $opts{width} || exists $opts{height};
-    if (my $position = delete $opts{position}) {
+    $w->set_size_request(delete $opts->{width} || -1, delete $opts->{height} || -1) if exists $opts->{width} || exists $opts->{height};
+    if (my $position = delete $opts->{position}) {
 	$w->set_uposition($position->[0], $position->[1]);
     }
-    $w->set_name(delete $opts{widget_name}) if exists $opts{widget_name};
-    $w->can_focus(delete $opts{can_focus}) if exists $opts{can_focus};
-    $w->can_default(delete $opts{can_default}) if exists $opts{can_default};
-    $w->grab_focus if delete $opts{grab_focus};
-    (delete $opts{size_group})->add_widget($w) if $opts{size_group};
-    if (my $tip = delete $opts{tip}) {
+    $w->set_name(delete $opts->{widget_name}) if exists $opts->{widget_name};
+    $w->can_focus(delete $opts->{can_focus}) if exists $opts->{can_focus};
+    $w->can_default(delete $opts->{can_default}) if exists $opts->{can_default};
+    $w->grab_focus if delete $opts->{grab_focus};
+    (delete $opts->{size_group})->add_widget($w) if $opts->{size_group};
+    if (my $tip = delete $opts->{tip}) {
 	$global_tooltips ||= Gtk2::Tooltips->new;
 	$global_tooltips->set_tip($w, $tip);
     }
 
-    if (%opts && !$opts{allow_unknown_options}) {
-	internal_error("$action $class: unknown option(s) " . join(', ', keys %opts));
+    if (%$opts && !$opts->{allow_unknown_options}) {
+	internal_error("$action $class: unknown option(s) " . join(', ', keys %$opts));
     }
     $w;
 }
