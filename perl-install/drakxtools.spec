@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 8mdk
+Release: 9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -291,6 +291,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Feb 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-9mdk
+- drakconnect: 
+  o fix lan configuration window filling
+  o fix net configuration window sizing
+- drakperm: make it fit better in both embedded and non embedded modes
+- drakgw: fix embedding
+- logdrake: fix scrolling for embedded explanations
+- mousedrake: fix embedding  (gc)
+
 * Thu Feb 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-8mdk
 - drakfloppy gtk+2 port
 - drakboot:
