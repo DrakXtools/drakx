@@ -450,7 +450,7 @@ sub update {
 	    if ($isconnected == 1 && !in_ifconfig($netcnx->{NET_INTERFACE})) {
 		$isconnected = 0;
 		$statusbar->pop(1);
-		$statusbar->push(1, N("Warning, another internet connexion has been detected, maybe using your network"));
+		$statusbar->push(1, N("Warning, another internet connection has been detected, maybe using your network"));
 	    } else {
 		#- translators : $netcnx->{type} is the type of network connection (modem, adsl...)
 		$statusbar->pop(1);
