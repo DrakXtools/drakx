@@ -711,7 +711,7 @@ sub mount {
 	} elsif ($fs eq 'jfs' && !$rdonly) {
 	    #- needed if the system is dirty otherwise mounting read-write simply fails
 	    run_program::run("fsck.jfs", $dev) or die "fsck.jfs failed";
-	} elsif ($fs eq 'ext2') {
+	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall) {
 	    foreach ('-a', '-y') {
 		run_program::run("fsck.ext2", $_, $dev);
 		my $err = $?;
@@ -723,18 +723,13 @@ sub mount {
 		    last;
 		}
 	    }
+	    # really mount as ext2 during install for speed up
+	    $fs = 'ext2';
 	}
 	if (member($fs, @fs_modules)) {
 	    eval { modules::load($fs) };
 	} elsif ($fs eq 'iso9660') {
 	    eval { modules::load('isofs') };
-	}
-	if ($fs eq 'ext3' && $::isInstall) {
-	    # ext3 mount to use the journal
-	    syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
-	    syscall_('umount', $where);
-	    # really mount as ext2 during install for speed up
-	    $fs = 'ext2';
 	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
