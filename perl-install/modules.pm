@@ -590,7 +590,7 @@ sub write_conf {
     push @l, 'ide-floppy' if detect_devices::ide_zips();
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
     my $l = join '|', @l;
-    log::l("to put in modules @l");
+    log::l("to put in modules ", join(", ", @l));
 
     substInFile { 
 	$_ = '' if /$l/;
