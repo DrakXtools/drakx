@@ -334,7 +334,7 @@ notation (for example, 1.2.3.4).");
 		     }
 		     return 0 if $auto_ip;
 
-		     if (my @bad = map_index { if_(is_ip($intf->{$_}), $::i) } @fields) {
+		     if (my @bad = map_index { if_(!is_ip($intf->{$_}), $::i) } @fields) {
 			 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
 			 return 1, $bad[0];
 		     }
