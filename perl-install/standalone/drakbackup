@@ -85,9 +85,7 @@
 #
 #
 # TODO:
-#		1- tar -cvf tarfilename --after-date="sept 1, 2000" /home
-#		   l.380 incremental: date -> si deja existe faire find -m ... | tar ...
-#		   non incremental: date + supprime old avant le backup
+#		1bis - refaire en clist.
 #		3 - add port for ftp backup.
 #		4 - change NET::FTP to ftp cmds.  
 #		5 - add icons (win & lin) on adv_what_all.
@@ -102,6 +100,7 @@
 #		12- custom deamon
 #		13- placer README dans $save_path -> prevenir des danger de supprimer la premier version
 #		    explain configuration file variables (mainly for non X users)
+#		13bis -  option mode update tar u ....
 #		14- webdav
 #	        15- backend : --resore_all, --restore_sys, --restore_users
 #			  --build_cd_autoinst 	
@@ -114,10 +113,6 @@
 #
 #		               
 # DONE TODAY:
-#		- gi for other media during restore. hd-> ok 
-#		- backend for build backup update and support 
-#		  incremental backups.	
-#		- real incremental backup 		
 #________________________________________________________________
 
 
@@ -204,7 +199,8 @@ my $restore_other_path = 0;
 my $restore_other_src;
 my $path_to_find_restore;
 my $other_media_hd;
-
+my $backup_bef_restore = 0;
+my $table;
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -437,6 +433,24 @@ sub ftp_client {
     $ftp->quit; 
 }
 
+sub return_file_date {
+    my($more_recent) = @_;
+    my $file_date;
+    $_ = $more_recent;
+    s/backup\_incr\_sys\_//gi;
+    s/backup\_base\_sys\_//gi;
+    s/backup\_incr\_user\_//gi;
+    s/backup\_base\_user\_//gi;
+    s/.tar.\w+$//gi;
+    s/\_/ /gi;
+    my $date = substr($_, 0, 8);
+    my $hour = substr($_, 9,  2);
+    my $min =  substr($_, 11, 2);
+    $file_date = $date . ' ' . $hour . ':' . $min;
+    return $file_date;
+}
+
+
 sub build_backup_files {
     my $path_name;
     my $tar_cmd;
@@ -452,6 +466,7 @@ sub build_backup_files {
     my @list_temp = ();
     my @list_other_;
     my @dir_content = ();
+    my $file_date;
 
     the_time();    
     -d  $save_path or mkdir_p($save_path);
@@ -477,13 +492,21 @@ sub build_backup_files {
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	if ($backup_sys) { 
 	    if ($backup_sys_versions) {
-		if (grep(/backup\_incr\_sys/, @dir_content)) { 
-		    @list_temp = sort (grep(/backup\_incr\_sys/, @dir_content));
-		    $more_recent = pop @list_temp;
-		}
-		else { $more_recent = grep(/backup\_base\_sys/, @dir_content); }
-		$base_sys_exist or   system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files");
-		$base_sys_exist and  system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext --after-date=\"`date -r $more_recent`\" -no-recursion  @sys_files");
+ 		if (grep(/backup_incr_sys/, @dir_content)) { 
+		    my @more_recent = grep /backup_incr_sys/, @dir_content; 
+		    @list_temp = sort  @more_recent;
+ 		    $more_recent = pop @list_temp;
+		    $file_date = return_file_date($more_recent);
+ 		}
+  		else { 
+		    my @more_recent = grep /backup_base_sys/, @dir_content; 
+		    $more_recent = @more_recent[0];
+		    $file_date = return_file_date($more_recent);
+ 		}
+		if (!$base_sys_exist) { 
+		    system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); }
+		else { 
+		    system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext --after-date='$file_date'  @sys_files"); }
 	    } else {
 		system("cd $save_path && rm -f backup_sys* backup_base_sys* backup_incr_sys*");
 		system("$tar_cmd_sys -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
@@ -494,13 +517,16 @@ sub build_backup_files {
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup files..."));
 
 	if (@list_other) {
-	    if ($backup_other_versions) {
-		$base_other_exist or  system("$tar_cmd_other -f $save_path/backup_base_other$the_time.$tar_ext @list_other");
-		$base_other_exist and system("$tar_cmd_other -f $save_path/backup_incr_other$the_time.$tar_ext @list_other");
-	    } else {
-		system("cd $save_path && rm -f backup_other* backup_base_other* backup_incr_other*");
-		system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
-	    }
+#	    if ($backup_other_versions) {
+#		$base_other_exist or  system("$tar_cmd_other -f $save_path/backup_base_other$the_time.$tar_ext @list_other");
+#		$base_other_exist and system("$tar_cmd_other -f $save_path/backup_incr_other$the_time.$tar_ext @list_other");
+#	    } else {
+#	    system("cd $save_path && rm -f backup_other* backup_base_other* backup_incr_other*");
+#	    system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
+#	    }
+	    system("cd $save_path && rm -f backup_other* ");
+	    system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
+	    
 	    foreach (@list_other) { push @list_other_, $_ . "\n"; }
 	    output_p( $save_path . '/list_other', @list_other_);    
 	}
@@ -510,12 +536,26 @@ sub build_backup_files {
 	
 	if ($backup_user) {
 	    foreach (@user_list) {
-		if (grep (/backup_base_user_$_/, @dir_content)) {  $base_user_exist = 1; }
+		my $user = $_;
+		if (grep (/backup_base_user_$user/, @dir_content)) {  $base_user_exist = 1; }
 		else { $base_user_exist = 0; }
-		$path_name = return_path($_);
+		$path_name = return_path($user);
 		if ($backup_user_versions) {
-		    $base_user_exist or  system("$tar_cmd_user -f $save_path/backup_base_user_$_$the_time.$tar_ext $path_name");
-		    $base_user_exist and system("$tar_cmd_user -f $save_path/backup_incr_user_$_$the_time.$tar_ext $path_name");
+		    if (grep(/backup_incr_user/, @dir_content)) { 
+			my @more_recent = grep /backup_incr_user/, @dir_content; 
+			@list_temp = sort  @more_recent;
+			$more_recent = pop @list_temp;
+			$file_date = return_file_date($more_recent);
+		    }
+		    else { 
+			my @more_recent = grep /backup_base_user/, @dir_content; 
+			$more_recent = @more_recent[0];
+			$file_date = return_file_date($more_recent);
+		    }
+		    if (!$base_user_exist) { 
+			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");}
+		    else { 
+			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext --after-date='$file_date' $path_name");}
 		} else {
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
@@ -539,10 +579,7 @@ sub build_backup_files {
 #         close S;
     }
     if ($where_net_ftp) { }
-    if ($where_cd) {	
-    }
-    print "liste content: $_\n" foreach @dir_content;
-    print "\n\n\n\n\n $more_recent \n\n\n";
+    if ($where_cd)      { }
 }
 
 sub list_remove {
@@ -695,7 +732,7 @@ sub advanced_what_other {
 					    gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub {filedialog()  }),
 					    gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list_other),
 					    ),
-				  0, my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ),
+				  0, gtkset_sensitive(my $check_what_other_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ), 0), 
 				       ),
 	    );
     gtksignal_connect(gtkset_active($check_what_other_versions, $backup_other_versions), toggled => sub {
@@ -1432,12 +1469,19 @@ sub find_backup_to_restore {
 	# fixme: 
 	# faire test existance cd
 	# faire reponse si non existance de  $path_to_find_restore
-
+    my @list_backup_tmp2 = ();
+    my @list_backup = ();
     my @list_backup_tmp;
     my @user_backuped_tmp;
 
     @user_backuped = ();
-    -d $path_to_find_restore and my @list_backup = all($path_to_find_restore);
+    -d $path_to_find_restore and my @list_backup_tmp2 = all($path_to_find_restore);
+    foreach (@list_backup_tmp2) {
+	s/\_base//gi;
+	s/\_incr//gi;
+	push @list_backup , $_;
+	
+    }
     if (grep /^backup_other/, @list_backup) {$other_backuped = 1;}
     if (grep /^backup_sys/, @list_backup) {$sys_backuped = 1;}
     foreach (grep /^backup_user_/, @list_backup) {
@@ -1472,7 +1516,6 @@ sub system_state {
     }
     else {$system_state = _("No configuration please click Wizard or Advanced.\n")}
 }
-
 
 sub restore_state {
     $restore_state = _("List of data to restore:\n\n");
@@ -1511,8 +1554,25 @@ sub restore_backend {
     print "End of restore\n";
 }
 
-
 sub restore_do {
+
+    if ($backup_bef_restore) {
+	if ($restore_sys) { $backup_sys = 1;}
+	else { $backup_sys = 0;}
+	if ($restore_user) { 
+	    $backup_user = 1;
+	    @user_list = @user_list_to_restore;
+	} else { $backup_user = 0;}
+	build_backup_status();
+	build_backup_files();
+	read_conf_file();
+	$table->destroy();
+    }
+    restore_do2();
+}
+
+
+sub restore_do2 {
     my $do_restore;
     my $button_restore;
     my $text = new Gtk::Text(undef, undef);
@@ -1529,25 +1589,20 @@ sub restore_do {
     button_box_restore_end();
     $previous_widget =\&restore_box;
     $custom_help = "restore";
-    $current_widget = \&restore_do;
+    $current_widget = \&restore_do2;
     $central_widget = \$do_restore;
     $up_box->show_all();
 }
 
 sub restore_step_other {
     my $retore_step_other;
-
+    my $text = new Gtk::Text(undef, undef);
+    my $other_rest = cat_("$path_to_find_restore/list_other");
+    gtktext_insert($text, $other_rest); 
     gtkpack($advanced_box,
 	    $retore_step_other = gtkpack_(new Gtk::VBox(0,10),
 					  1, new Gtk::VBox(0,10),
-					  1, createScrolledWindow(gtkpack(new Gtk::VBox(0,0),
-									  gtkadd(new Gtk::Frame(_("Backup of other files content.")),
-										 gtkpack(new Gtk::VBox(0,10),
-											 cat_("$path_to_find_restore/list_other"),
-											 ),
-										 ),
-									  ),
-								  ),
+					  1, createScrolledWindow($text),
 					  0, my $check_restore_other_sure = new Gtk::CheckButton(_(" Sure to restore the other files .")),
 					  1, new Gtk::VBox(0,10),
 					  ),
@@ -1557,6 +1612,7 @@ sub restore_step_other {
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
 	}
     $next_widget = \&restore_do;
+    $previous_widget = \&restore_step2;
     $custom_help = "restore";
     $current_widget = \&restore_step_other;
     $central_widget = \$retore_step_other;
@@ -1810,10 +1866,12 @@ sub restore_step2 {
 					1, new Gtk::HBox(0,10),
 					0, gtkset_sensitive(my $restore_path_entry = new Gtk::Entry(), $restore_other_path),
 						 ),
+				     0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("Build Last Backup before Restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions ),
 				     1, new Gtk::VBox(0,10),
 				     ),
 	    );
     foreach  ([$check_restore_sys, \$restore_sys], 
+	      [$check_backup_bef_restore, \$backup_bef_restore],
 	      [$check_restore_user, \$restore_user],
 	      [$check_restore_other, \$restore_other]) {
 	my $ref = $_->[1];
@@ -1948,7 +2006,8 @@ sub button_box_backup_end {
 				       0, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), clicked => sub { 
 					   ${$central_widget}->destroy();
 					   build_backup_status();
-					   build_backup_files(); 
+					   build_backup_files
+(); 
 				       }),
 				       ),
 	    );
@@ -2259,7 +2318,6 @@ sub find_backup_to_put_on_cd {
 }
 
 sub build_backup_status {
-    my $table;
     $pbar =   new Gtk::ProgressBar;
     $pbar1 =  new Gtk::ProgressBar;
     $pbar2 =  new Gtk::ProgressBar;
@@ -2501,6 +2559,7 @@ sub build_backup_box {
 sub interactive_mode_box {
     $box2->destroy();
 
+    read_conf_file();
     gtkadd($advanced_box,
 	   $box2 = gtkpack_(new Gtk::HBox(0, 15),	
 			    1, new Gtk::VBox(0, 5),	
@@ -2660,21 +2719,49 @@ _("options description:
 	To preserve disk space, it recommeded to not include
 	browsers cache.
 
- - Backup User files: 
+ - Backup Other files: 
 
 	This option allow to add more data to save.
+	With the other backup it's not possible in
+	moment to select select incremental backup.		
  
  - Incremental Backups:
 
 	The incremental backup is the most powerfull 
 	option to use backup, this option allow you 
 	to backup all your data the first time, and 
-	only the changed data after.
+	only the changed after.
 	So you will be able during the restore
 	step, to restore your data from a specified
 	date.
 	If you have not selected this options all
 	old backups are deleted before each backup.    
+
+
+")); }
+    elsif ($custom_help eq "restore") { gtktext_insert($text, 
+_("restore description:
+ 
+Only the most recent date will be used ,because with incremental 
+backups it is necesarry to restore one by one each older backups.
+
+So if you don't like to restore an user please unselect all his
+check box.
+
+Otherwise, you are able to select only one of this
+
+ - Incremental Backups:
+
+	The incremental backup is the most powerfull 
+	option to use backup, this option allow you 
+	to backup all your data the first time, and 
+	only the changed after.
+	So you will be able during the restore
+	step, to restore your data from a specified
+	date.
+	If you have not selected this options all
+	old backups are deleted before each backup.    
+
 
 
 ")); }
@@ -2835,13 +2922,27 @@ Drakbacup allow to restore the system (etc, var files)
 }
 
 
-# _____________________________________________________________ OLD CODE
-
-
-
-
-
 # _____________________________________________________________ DOCS
+
+##### tester taille decompressee
+
+#(seb@lutin)[~]-% gzip -l old_drakbackup.tar.gz 
+#compressed  uncompr. ratio uncompressed_name
+#   128662    174080  26.1% old_drakbackup.tar
+
+
+#### tester integrite archive
+
+# idem pour bzip2 -t
+# (seb@lutin)[~]-% gzip -t drakbackup.tar.gz
+#
+# gzip: drakbackup.tar.gz: invalid compressed data--crc error
+#
+# gzip: drakbackup.tar.gz: invalid compressed data--length error
+
+
+
+
 
 # Comment récupérer la date du jour ?
 
