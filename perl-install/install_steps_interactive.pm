@@ -790,7 +790,6 @@ sub miscellaneous {
     );
     delete @l{0,1,5} unless $::expert;
 
-    install_steps::miscellaneous($o);
     my $u = $o->{miscellaneous} ||= {};
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
     my $s = $o->{security};
@@ -804,7 +803,7 @@ sub miscellaneous {
 	_("Miscellaneous questions"), [
 _("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 _("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
-_("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 3) => \$u->{memsize}, #- add three for correction.
+_("Precise RAM size if needed (found %d MB)", availableRam / 1024 + 1) => \$u->{memsize}, #- add three for correction.
 arch() !~ /^sparc/ ? (
 _("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' }, ) : (),
      $::expert ? (
@@ -829,6 +828,8 @@ _("Be carefull, having numlock enabled causes a lot of keystrokes to
 give digits instead of normal letters (eg: pressing `p' gives `6')")) || return;
 	    0; }
     ) || return;
+
+    install_steps::miscellaneous($o);
 }
 
 #------------------------------------------------------------------------------

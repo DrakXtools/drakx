@@ -191,7 +191,7 @@ sub mount($$$;$) {
     } elsif ($fs eq 'smb') {
 	die "no smb yet...";
     } else {
-	$dev = devices::make($dev) if $fs ne 'proc';
+	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
 
 	my $flag = c::MS_MGC_VAL();
 	$flag |= c::MS_RDONLY() if $rdonly;

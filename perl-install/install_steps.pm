@@ -791,9 +791,7 @@ sub configureXAfter {
 }
 
 #------------------------------------------------------------------------------
-# miscellaneousNetwork moved to any
-#------------------------------------------------------------------------------
-sub miscellaneous {
+sub miscellaneousBefore {
     my ($o) = @_;
 
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
@@ -806,6 +804,9 @@ sub miscellaneous {
 
     cat_("/proc/cmdline") =~ /.mem=(\S+)/; #- if /^mem/, it means that's the value grub gave
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });
+}
+sub miscellaneous {
+    my ($o) = @_;
 
     local $_ = $o->{bootloader}{perImageAppend};
     if (my $ramsize = $o->{miscellaneous}{memsize} and !/mem=/) {

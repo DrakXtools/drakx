@@ -346,6 +346,7 @@ sub installPackages {
 #------------------------------------------------------------------------------
 sub miscellaneous {
     $::live and return;
+    $o->miscellaneousBefore($_[0]);
     $o->miscellaneous($_[0]);
 
     addToBeDone {

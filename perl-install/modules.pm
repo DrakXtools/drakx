@@ -464,11 +464,12 @@ sub load_raw {
 	    }
 	} elsif ($_->[0] =~ /usb-[uo]hci/) {
 	    add_alias('usb-interface', $_->[0]);
-	    my $d = '/proc/bus/usb';
-	    syscall_('mount', $d, $d, my $t= 'usbdevfs', my $f = c::MS_MGC_VAL(), my $fl = '') or die;
-	    #- ensure keyboard is working, the kernel must do the job the BIOS was doing
-	    sleep 2;
-	    load_multi("usbkbd", "keybdev") if detect_devices::hasUsbKeyboard();
+	    eval {
+		require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
+		#- ensure keyboard is working, the kernel must do the job the BIOS was doing
+		sleep 2;
+		load_multi("usbkbd", "keybdev") if detect_devices::hasUsbKeyboard();
+	    }
 	}
     }
 }
