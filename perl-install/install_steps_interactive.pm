@@ -897,7 +897,7 @@ sub summary {
 	clicked => sub {
 	    any::selectCountry($o, $o->{locale}) or return;
 
-	    my $pkg_locale = substr(lang::getlocale_for_country($o->{locale}{lang}, $o->{locale}{country}), 0, 2);
+	    my $pkg_locale = locale_to_main_locale(lang::getlocale_for_country($o->{locale}{lang}, $o->{locale}{country}));
 	    my @pkgs = pkgs::packagesProviding($o->{packages}, "locales-$pkg_locale");
 	    $o->pkg_install(map { $_->name } @pkgs) if @pkgs;
 

@@ -9,6 +9,7 @@ use strict;
 use common;
 use detect_devices;
 use run_program;
+use lang;
 use log;
 use c;
 
@@ -364,9 +365,11 @@ sub unpack_keyboards {
 }
 sub lang2keyboards {
     my @li = sort { $b->[1] <=> $a->[1] } map { @$_ } map {
-	#- first try with the 5 first chars of LANG; if it fails then try with
-	#- with the 2 first chars of LANG before resorting to default. 
-	unpack_keyboards($lang2keyboard{substr($_, 0, 5)}) || unpack_keyboards($lang2keyboard{substr($_, 0, 2)}) || [ [ ($keyboards{$_} ? $_ : "us") => 100 ] ];
+	my $h = lang::analyse_locale_name($_);
+	#- example: pt_BR and pt
+	my @l = if_($h->{country}, $h->{main} . '_' . $h->{country}), $h->{main};
+	my $k = find { $_ } map { $lang2keyboard{$_} } @l;
+	unpack_keyboards($k) || [ [ ($keyboards{$_} ? $_ : "us") => 100 ] ];
     } @_;
     \@li;
 }
@@ -525,7 +528,6 @@ sub read() {
 }
 
 sub check() {
-    require lang;
     $^W = 0;
 
     my $not_ok = 0;

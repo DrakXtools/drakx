@@ -685,8 +685,11 @@ sub selectCountry {
 
     my $country = $locale->{country};
     my @countries = lang::list_countries(exclude_non_installed => !$::isInstall);
-    my @best = uniq map { if_((/^\Q$locale->{lang}/ || substr($_, 0, 2) eq substr($locale->{lang}, 0, 2))
-			      && /.._(..)/, $1) } @lang::locales;
+    my @best = uniq grep {
+	my $h = lang::analyse_locale_name($_);
+	if_($h->{main} eq lang::locale_to_main_locale($locale->{lang}) && $h->{country},
+	    $h->{country});
+    } @lang::locales;
     @best == 1 and @best = ();
 
     my ($other, $ext_country);

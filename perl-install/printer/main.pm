@@ -15,6 +15,7 @@ use printer::office;
 use printer::detect;
 use handle_configs;
 use services;
+use lang;
 
 use vars qw(@ISA @EXPORT);
 
@@ -1534,7 +1535,7 @@ sub ppd_entry_str {
 	if $mf && $mf !~ m![\\/\(\)\[\]\|\.\$\@\%\*\?]!;
     # Put out the resulting description string
     uc($mf) . '|' . $model . '|' . $driver .
-      ($lang && " (" . lc(substr($lang, 0, 2)) . ")");
+      ($lang && " (" . lang::locale_to_main_locale($lang) . ")");
 }
 
 sub get_descr_from_ppd {
