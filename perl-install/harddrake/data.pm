@@ -12,7 +12,7 @@ my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/ && $_->{driver} ne '^(scanner|usbvision)$' && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|class\|Mouse/  && $_->{media_type} !~ /class\|Mouse/ } @devices;
+    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|Hub|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/ && $_->{driver} ne '^(scanner|usbvision)$' && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|class\|Mouse/  && $_->{media_type} !~ /class\|Mouse/ } @devices;
 }
 
 
@@ -61,7 +61,7 @@ our @tree =
 
      [ "ATA_STORAGE", "(E)IDE/ATA controllers", "ide_hd.png", "", sub { grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices }, 0 ],
      [ "SCSI_CONTROLLER", "SCSI controllers", "scsi.png", "", sub { grep { $_->{media_type} =~ /STORAGE_SCSI/ } @devices }, 0 ],
-     [ "USB_CONTROLLER", "USB controllers", "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_USB/ } @devices }, 0 ],
+     [ "USB_CONTROLLER", "USB controllers", "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_USB|Hub/ } @devices }, 0 ],
      [ "SMB_CONTROLLER", "SMBus controllers", "usb.png", "", sub { grep { $_->{media_type} =~ /SERIAL_SMBUS/ } @devices }, 0 ],
      );
 
