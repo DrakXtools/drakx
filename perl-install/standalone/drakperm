@@ -253,15 +253,24 @@ sub row_setting_dialog {
     my %rights_labels = (user => N("User"), group => N("Group"), other => N("Other"));
     my %checks = ('read' => {
                              label => N("Read"),
-                             tip => { map { $_ => N("Enable \"%s\" to read the file", translate($_)) } keys %rights },
+                             tip => { map { $_ => 
+                                              #-PO: here %s will be either "user", "group" or "other"
+                                              N("Enable \"%s\" to read the file", translate($_))
+                                          } keys %rights },
                             },
                   'write' => {
                               label => N("Write"),
-                              tip => { map { $_ => N("Enable \"%s\" to write the file", translate($_)) } keys %rights },
+                              tip => { map { $_ => 
+                                              #-PO: here %s will be either "user", "group" or "other"
+                                              N("Enable \"%s\" to write the file", translate($_))
+                                          } keys %rights },
                              },
                   'execute' => {
                                 label => N("Execute"),
-                                tip => { map { $_ => N("Enable \"%s\" to execute the file", translate($_)) } keys %rights },
+                                tip => { map { $_ => 
+                                              #-PO: here %s will be either "user", "group" or "other"
+                                              N("Enable \"%s\" to execute the file", translate($_))
+                                          } keys %rights },
                                },
                   sticky => { label => N("Sticky-bit"), tip => N("Used for directory:\n only owner of directory or file in this directory can delete it") },
                   suid => { label => N("Set-UID"), tip => N("Use owner id for execution") },
