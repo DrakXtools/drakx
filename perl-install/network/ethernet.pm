@@ -171,6 +171,7 @@ sub configureNetwork {
     }
     $last or return;
     
+  configureNetwork_step_2:
     if ($last->{BOOTPROTO} !~ /static/) {
 	$netc->{minus_one} = 1;
 
@@ -192,7 +193,7 @@ want to use the default host name."),
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
     }
-    network::network::miscellaneous_choose($in, $::o->{miscellaneous} ||= {}) or goto configureNetwork_step_1;
+    network::network::miscellaneous_choose($in, $::o->{miscellaneous} ||= {}) or goto configureNetwork_step_2;
     1;
 }
 
