@@ -381,6 +381,15 @@ sub install_TrueFS_in_home {
 
 	    run_program::run('mount', '-o', 'bind', "$dir/$_", "/home/$user/$_");
 	}
+
+	my $cache = "/tmp/.$user-cache";
+	foreach (qw(.kde/share/cache)) {
+	    mkdir_p("$cache/$_");
+	    mkdir_p("/home/$user/" . dirname($_));
+	    symlink "$cache/$_", "/home/$user/$_";
+	}
+        run_program::run('chown', '-R', "$user.$user", $cache);
+
 	$ENV{ICEAUTHORITY} = "$dir/.ICEauthority";
     }
 }
