@@ -61,7 +61,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 	   my ($ftable_id, $norm);
 
 #   my %freqtables = map {$i=$_;$i =~ s/ (.*)/-\1/;_($_) => $i} (...)
-#   this table must be checked on each xawtv release :
+#   this table must be checked on each xawtv release:
 	   my %freqtables = 
 		  ("us-bcast" => _("USA (broadcast)"), "us-cable" => _("USA (cable)"), "us-cable-hrc" => _("USA (cable-hrc)"), "canada-cable" => _("Canada (cable)"),
 		   "japan-bcast" => _("Japan (broadcast)"), "japan-cable" => _("Japan (cable)"), "china-bcast" => _("China (broadcast)"),
@@ -106,8 +106,8 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 
 	   if ($in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
 					 [
-					  { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo' },
-					  { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
+					  { label => _("TV norm:"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], type => 'combo' },
+					  { label => _("Area:"), val => \$ftable_id, list => [keys %freqtables], format => sub { $freqtables{$_[0]} }, sort => 1},
 					  ]
 					 ))
 	   {   my $wait = $in->wait_message(_('Please wait'),
@@ -161,7 +161,7 @@ http://www.linux-mandrake.com/en/hardware.php3")));
 }
 
 
-# TODO :
+# TODO:
 # - offer to sort channels after
 # - use Video-Capture-V4l-0.221 ?
 # - configure kwintv and zapping ? => they've already wizards :-(

@@ -17,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 # drakfont Future Overview
-#         - Fonts import :
+#         - Fonts import:
 #                 pfb ( Adobe Type 1 binary )
 #                 pfa ( Adobe Type 1 ASCII )
 #                 ttf ( True-Type  )
@@ -341,7 +341,7 @@ sub search_dir_font_uninstall {
             if ( $i =~ /$j/ ) { push @font_list, "$i"; }
         }
     }
-    print "Fonts to uninstal : " . $_ . "\n" foreach (@font_list);
+    print "Fonts to uninstal: " . $_ . "\n" foreach (@font_list);
 }
 
 sub search_dir_font_uninstall_gi {
@@ -350,7 +350,7 @@ sub search_dir_font_uninstall_gi {
 }
 
 sub print_list {
-    print "Font(s) to Install :\n\n";
+    print "Font(s) to Install:\n\n";
     print "$_\n" foreach (@font_list);
 }
 
@@ -573,7 +573,7 @@ sub backend_mod {
         print "\nInstall Specifics Fonts...........\n";
         search_installed_fonts();
         search_dir_font;
-        print "Font to install : " . $_ . "\n" foreach (@font_list);
+        print "Font to install: " . $_ . "\n" foreach (@font_list);
         put_font_dir();
         print "\nThe End...........................\n";
     }
@@ -820,7 +820,7 @@ sub help {
                 1,
                 gtktext_insert(
                     gtkset_editable( $text, 1 ), "drakfont Future Overview
-        - Fonts import :
+        - Fonts import:
                 pfb ( Adobe Type 1 binary )
                 pfa ( Adobe Type 1 ASCII )
                 ttf ( True-Type  )
@@ -906,7 +906,7 @@ sub appli_choice {
                         new Gtk::HBox( 0, 10 ),
                         new Gtk::HBox( 0, 10 ),
                         _(
-"Choose the applications that will support the fonts :"
+"Choose the applications that will support the fonts:"
                         ),
                         new Gtk::HBox( 0, 10 ),
                     ),
