@@ -545,7 +545,7 @@ sub main {
     #- needed very early for install_steps_gtk
     unless ($::testing) {
 	if ($o->{mouse}) {
-	    mouse::load_modules();
+	    mouse::load_modules($o->{mouse});
 	} else {
 	    eval { $o->{mouse} = mouse::detect() } unless $o->{nomouseprobe};
 	}
