@@ -469,12 +469,12 @@ sub create_menu {
 }
 
 sub create_notebook {
-    my $n = Gtk2::Notebook->new;
+    my $book = Gtk2::Notebook->new;
     while (@_) {
-	my ($title, $book) = splice(@_, 0, 2);
-	gtkappend_page($n, $title, $book);
+	my ($title, $page) = splice(@_, 0, 2);
+	gtkappend_page($book, $title, $page);
     }
-    $n
+    $book
 }
 
 sub create_packtable {
