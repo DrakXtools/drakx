@@ -291,7 +291,7 @@ sub preConfigureTimezone {
     require timezone;
    
     #- can't be done in install cuz' timeconfig %post creates funny things
-    add2hash($o->{timezone}, timezone::read($o->{prefix})) if $o->{isUpgrade};
+    add2hash($o->{timezone}, timezone::read()) if $o->{isUpgrade};
 
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
 

@@ -18,8 +18,7 @@ sub getTimeZones {
 }
 
 sub read {
-    my ($prefix) = @_;
-    my %t = getVarsFromSh("$prefix/etc/sysconfig/clock") or return {};
+    my %t = getVarsFromSh("$::prefix/etc/sysconfig/clock") or return {};
     { timezone => $t{ZONE}, UTC => text2bool($t{UTC}) };
 }
 
