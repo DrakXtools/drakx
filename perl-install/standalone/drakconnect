@@ -477,9 +477,11 @@ sub build_notebook {
 		     ),
 		);
 
-	my %auth_methods = map_index { $::i => $_ } N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"), N("PAP/CHAP");
-	$gui->{intf}{auth}->set_popdown_strings(sort values %auth_methods);
-	$gui->{intf}{auth}->set_text($auth_methods{$intf->{Authentication}}) if $auth_methods{$intf->{Authentication}};
+	if ($interface eq 'modem') {
+            my %auth_methods = map_index { $::i => $_ } N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"), N("PAP/CHAP");
+            $gui->{intf}{auth}->set_popdown_strings(sort values %auth_methods);
+            $gui->{intf}{auth}->set_text($auth_methods{$intf->{Authentication}});
+	}
 	$gui->{intf}{passwd}->set_visibility(0);
     }
 
