@@ -95,6 +95,9 @@ sub tryConfScanner {
      	return;
     }
     scanner::confScanner($model,$port);
+$in->ask_warn(_("Congratulations!"),
+_("Your %s scanner has been configured.\nYou may now scan documents using ``XSane'' from Multimedia/Graphics in the applications menu.", $model));
+
 }
 
 sub quit {
@@ -103,6 +106,9 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.9  2002/03/09 14:23:48  yduret
+# added sum up at the end
+#
 # Revision 1.8  2002/03/09 00:58:36  yduret
 # uncomment line that checks if sane rpm is installed or not (thx gc).
 # i sux,
