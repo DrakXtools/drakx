@@ -1,3 +1,94 @@
+2003/09/17  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: fresh updates
+
+2003/09/17  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/09/17  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps.pm: fixed to close rpm db whenever possible.
+
+2003/09/17  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* install_steps.pm, lang.pm: treat C encoding specially when computing
+	utf8 flag, it should not trigger utf8 set by itself
+
+2003/09/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/pt.po, share/po/nb.po, share/po/et.po, share/po/cy.po,
+	share/po/hu.po: updated Welsh, Estonian, Hungarian, Norwegian and
+	Portuguese files
+
+2003/09/17  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/gtk.pm: fix ugliness: don't display $advanced_pack when
+	there are no @widgets_advanced
+	(esp. since $advanced_pack is now in its own scrolled window)
+
+	* any.pm: add /usr/lib/qt3/lib (and sometimes /usr/lib/qt3/lib64) in
+	ld.so.conf
+	(needed for upgrade where package renaming can cause this to disappear)
+	run nisdomainname et ypbind so that nis is correctly set up *now*, not
+	at next reboot.
+	TODO: also do it during install since nis can be useful to resolve
+	domain names. Not done because 9.2-RC
+
+	* fsedit.pm: when the checking the mount point is not already used, don't
+	take into account current partition
+
+	* install_steps_interactive.pm: cancel in setRootPassword means "No
+	password", not cancel
+
+	* standalone/drakauth: display errors occuring in
+	any::set_authentication()
+	(esp. for "Can't use broadcast with no NIS domain")
+
+	* diskdrake/interactive.pm: don't display a wait_message together with the
+	write_partitions() dialog
+
+	* fs.pm, partition_table.pm: ensure that a number is not written as the
+	type in fstab
+
+2003/09/17  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/09/16  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps.pm: make sure / and /usr are formatted in recovery mode.
+
+2003/09/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sl.po, share/po/fa.po, share/po/sr.po, share/po/ar.po,
+	share/po/sr@Latn.po, share/po/nl.po, share/po/es.po, share/po/eo.po,
+	share/po/th.po, share/po/uz@Cyrl.po, share/po/vi.po, share/po/hu.po,
+	share/po/wa.po, share/po/eu.po, share/po/tr.po, share/po/ro.po,
+	share/po/sq.po, share/po/et.po, share/po/is.po, share/po/zh_CN.po,
+	share/po/he.po, share/po/ca.po, share/po/be.po, share/po/lt.po,
+	share/po/ja.po, share/po/ms.po, share/po/da.po, share/po/nb.po,
+	share/po/bs.po, share/po/cs.po, share/po/el.po, share/po/pt_BR.po,
+	share/po/az.po, share/po/cy.po, share/po/uz.po, share/po/hr.po,
+	share/po/ru.po, share/po/bg.po, share/po/gl.po, share/po/ko.po,
+	share/po/mt.po, share/po/zh_TW.po, share/po/uk.po, share/po/tg.po,
+	share/po/sv.po, share/po/pl.po, share/po/af.po, share/po/pt.po,
+	share/po/ta.po, share/po/fr.po, share/po/fi.po, share/po/id.po,
+	share/po/de.po, share/po/sk.po, share/po/ga.po, share/po/it.po,
+	share/po/lv.po: updated pot files
+
+2003/09/16  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: pixelization
+
+2003/09/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: fix typos
+
+	* harddrake/sound.pm: fix #5403:
+	  - make sure to use OptionMenu instead of Combo boxes
+	  - move help into a tooltip
+
 2003/09/16  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
 	* network/adsl.pm: fix firmware testing at installation
@@ -21857,7 +21948,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.838 2003/09/16 16:11:40 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.839 2003/09/16 16:27:37 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
