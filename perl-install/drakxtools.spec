@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.7mdk
+Release: 0.8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -366,6 +366,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jan  5 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.8mdk
+- drakauth: "Administrator (root)" is more user-friendly than "root"
+- drakbackup (stew):
+  o directories with spaces Mandrakeclub
+  o perms on tarballs too (#12861)
+- drakconnect: update ADSL ISPs list (baud)
+- drakfirewall: "Samba server" is better named "Windows Files Sharing
+  (SMB)" (pixel, #10585)
+- draksound, harddrake service: handle a couple of new ALSA drivers
+- handle handle spaces in SMB username (pixel)
+- keyboardrake: handle various new keyboard layouts (pablo)
+- localedrake: do not localize console in japanese (Funda Wang)
+- remove codepage= option for fs types which don't handle it (eg:
+  ntfs) (pixel)
+
 * Thu Dec 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.7mdk
 - detect more floppies when dmidecode is supported (pixel)
 - drakconnect:
