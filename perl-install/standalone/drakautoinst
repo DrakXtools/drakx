@@ -220,6 +220,8 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 #    $W->destroy();
 }
 
+$o->{interactiveSteps} = \@manual_steps;
+
 my $str = join('',
 "#!/usr/bin/perl -cw
 #
@@ -229,12 +231,7 @@ my $str = join('',
 # You can do this with 'perl -cw auto_inst.cfg.pl' or by executing this file
 # (note the '#!/usr/bin/perl -cw' on the first line).
 ",
-	       Data::Dumper->Dump([$o], ['$o']), q(
-package install_steps_auto_install;
-$graphical = 1;
-), Data::Dumper->Dump([\@manual_steps], ['$msteps']),
-q(push @graphical_steps, @$msteps;
-), "\0");
+	       Data::Dumper->Dump([$o], ['$o']), "\0");
 $str =~ s/ {8}/\t/g; #- replace all 8 space char by only one tabulation, this reduces file size so much :-)
 output($cfgfile, $str);
 
@@ -368,6 +365,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.20  2002/07/30 09:57:11  prigaux
+#- use $o->{interactiveSteps} instead of @install_steps_auto_install::graphical_steps
+#-
 #- Revision 1.19  2002/07/23 10:35:55  tvignaud
 #- - Big Move 1: interactive::* hierarchy
 #-
