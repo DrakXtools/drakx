@@ -93,6 +93,18 @@ sub adsl_detect() {
     return $adsl;
 }
 
+sub sagem_set_parameters {
+    my ($netc) = @_;
+    my %l = map { $_ => sprintf("%08s", $netc->{$_}) } qw(vci vpi Encapsulation);
+    foreach my $cfg_file (qw(/etc/analog/adiusbadsl.conf /etc/eagle-usb/eagle-usb.conf)) {
+        substInFile {
+            s/VCI=.*\n/VCI=$l{vci}\n/;
+            s/VPI=.*\n/VPI=$l{vpi}\n/;
+            s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
+        } "$::prefix$cfg_file";
+    }
+}
+
 sub adsl_conf_backend {
     my ($in, $modules_conf, $adsl, $netc, $intf, $adsl_device, $adsl_type, $o_netcnx) = @_;
     # FIXME: should not be needed:
@@ -310,19 +322,9 @@ TYPE=$kind
 METRIC=$metric
 ));    
 
-    # sagem specific stuff
-    if ($adsl_device eq 'sagem') {
-        my %l = map { $_ => sprintf("%08s", $netc->{$_}) } qw(vci vpi Encapsulation);
-        # set vpi and vci parameters for sagem
-        foreach my $cfg_file (qw(/etc/analog/adiusbadsl.conf /etc/eagle-usb/eagle-usb.conf)) {
-            substInFile {
-                s/VCI=.*\n/VCI=$l{vci}\n/;
-                s/VPI=.*\n/VPI=$l{vpi}\n/;
-                s/Encapsulation=.*\n/Encapsulation=$l{Encapsulation}\n/;
-            } "$::prefix$cfg_file";
-        }
-    }
-    
+    #- set vpi, vci and encapsulation parameters for sagem
+    sagem_set_parameters($netc) if $adsl_device eq 'sagem';
+
     # set aliases:
     if (exists $modems{$adsl_device}{aliases}) {
         $modules_conf->set_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
