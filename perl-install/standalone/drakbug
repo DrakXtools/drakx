@@ -22,13 +22,9 @@ use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;
-use interactive;
 use common;
 use ugtk2 qw(:all);
 use Config;
-
-
-my $in = 'interactive'->vnew;
 
 my $bugzilla_url = "http://drakbug.mandrakesoft.com";
 my $version = "0.9.0";
@@ -157,12 +153,12 @@ sub parse_release() {
 
 sub connect_bugzilla {
     my ($url) = @_;
-    my $_w = $in->wait_message('', N("connecting to Bugzilla wizard ...")); 
+    my $_w = create_dialog(N("Please wait"), N("connecting to Bugzilla wizard ...")); 
     sleep(3);
     exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
     my @browser = qw(mozilla konqueror galeon);
     foreach (@browser) {
 	if (-e "/usr/bin/$_") { log::explanations("Contacting $url with $_\n "); exec $_,$url } 
     }
-    $in->ask_warn('', N("No browser available! Please install one"));
+    create_dialog(N("Error"), N("No browser available! Please install one"));
 }
