@@ -235,7 +235,7 @@ sub init_sizes() {
 
 #------------------------------------------------------------------------------
 sub createXconf {
-    my ($file, $mouse_type, $mouse_dev, $wacom_dev, $Driver) = @_;
+    my ($file, $mouse_type, $mouse_dev, $_wacom_dev, $Driver) = @_;
 
     $mouse_type = 'IMPS/2' if $mouse_type eq 'ExplorerPS/2';
     symlinkf(devices::make($mouse_dev), "/dev/mouse") if $mouse_dev ne 'none';
