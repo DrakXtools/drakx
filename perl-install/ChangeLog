@@ -1,3 +1,57 @@
+2003/02/23  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/interactive.pm (migrate_files): check return values (fixes bug
+	#2170)
+
+2003/02/23  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/printerdrake.pm, install_steps_interactive.pm: Fixed bug of
+	printerdrake loosing the printer queue info during the
+	preparation of the "Summary" window (only if there are local
+	printers). No the printer queue entries should not be empty when
+	clicking on "Configure" in the "Printer" part of the "Summary" window.
+
+2003/02/22  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po, share/po/wa.po: updated pot file
+	updated Estonian file
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/sq.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/lv.po, share/po/hu.po: updated pot file
+
+	* standalone/harddrake2: changed an English string
+
+2003/02/22  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive/gtk.pm: in $::expert, use a SpinButton instead of HScale for
+	type "range"
+	(useful in diskdrake to enter the partition size directly)
+
+	* share/rpmsrate: ensure galaxy-kde is installed together with kdebase
+
+	* partition_table/raw.pm (test_for_bad_drives): don't open in write mode
+	when testing
+
+2003/02/22  siegel
+
+	* share/po/de.po: updates
+
+2003/02/21  alus
+
+	* share/po/pl.po: updated
+
 2003/02/21  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* network/network.pm: no need to use regexp
@@ -12617,7 +12671,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.790 2003/02/20 15:14:33 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.791 2003/02/21 21:58:09 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
