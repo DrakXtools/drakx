@@ -42,6 +42,10 @@ struct module_descr modules_descriptions[] = {
 	{ "sym53c8xx", "Symbios 53c family" },
 	{ "sim710",    "NCR53C710 family" },
 
+	/* description of usb drivers that have not very explicit names */
+	{ "usbnet",    "Netchip/ or Prolific USB-USB Bridge" },
+	{ "pegasus",   "ADMtek AN986 (USB Ethernet chipset)" },
+	{ "kaweth",    "KL5KUSB101 (USB Ethernet chipset)" },
 };
 
 int modules_descriptions_num = sizeof(modules_descriptions) / sizeof(struct module_descr);
