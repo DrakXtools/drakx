@@ -12,4 +12,4 @@ my $progname = basename($0);
 # hack as some functions are defined by perl... so chmod -> chmod_
 &{$commands::{$progname} || $commands::{$progname . "_"} || \&err}(@ARGV), exit 0;
 
-sub err { die "$0: unknown program (unimplemented)\n"; }
+sub err { die "$0: unknown program (unimplemented)\n" }
