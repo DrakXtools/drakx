@@ -465,7 +465,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
     if (grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
-	$::isStandalone ? $in->standalone::pkgs_install('dhcpd') : $install->('dhcpcd');
+	$::isStandalone ? $in->standalone::pkgs_install('dhcpcd') : $install->('dhcpcd');
     }
     if (grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
 	$::isStandalone ? $in->standalone::pkgs_install('pump') : $install->('pump');
