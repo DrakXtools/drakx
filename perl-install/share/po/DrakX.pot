@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-08-27 17:44+0200\n"
+"POT-Creation-Date: 2003-08-29 22:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -588,6 +588,11 @@ msgstr ""
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr ""
 
+#: ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
+#, c-format
+msgid "Printer Name"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Remove a module"
@@ -873,7 +878,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr ""
@@ -1759,7 +1764,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../printer/cups.pm:1
+#: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Configured on other machines"
 msgstr ""
@@ -2140,6 +2145,11 @@ msgstr ""
 msgid "No open source driver"
 msgstr ""
 
+#: ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
+#, c-format
+msgid "Def."
+msgstr ""
+
 #: ../../security/level.pm:1
 #, c-format
 msgid "This is similar to the previous level, but the system is entirely closed and security features are at their maximum."
@@ -2158,6 +2168,11 @@ msgstr ""
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "European protocol (EDSS1)"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Delete"
 msgstr ""
 
 #: ../../any.pm:1 ../../any.pm:1
@@ -2931,7 +2946,7 @@ msgstr ""
 msgid "Horizontal refresh rate"
 msgstr ""
 
-#: ../../standalone/drakperm:1
+#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Edit"
 msgstr ""
@@ -3725,7 +3740,7 @@ msgstr ""
 msgid "Accept"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Description"
 msgstr ""
@@ -3846,6 +3861,11 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Loading printer configuration... Please wait"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -4288,7 +4308,7 @@ msgstr ""
 msgid "I don't know how to format %s in type %s"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Model"
 msgstr ""
@@ -4947,7 +4967,7 @@ msgstr ""
 msgid "This partition is not resizeable"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Location"
 msgstr ""
@@ -4984,14 +5004,14 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Select the files or directories and click on 'OK'"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Select the files or directories and click on 'OK'"
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
@@ -5165,6 +5185,11 @@ msgid ""
 "connections from many clients. Note: if your machine is only a client on the Internet, you should choose a lower level."
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Server Name"
+msgstr ""
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
@@ -5185,6 +5210,21 @@ msgid ""
 "This implies you already have a bootloader on the hard drive you boot (eg: System Commander).\n"
 "\n"
 "On which drive are you booting?"
+msgstr ""
+
+#: ../../install_interactive.pm:1
+#, c-format
+msgid ""
+"WARNING!\n"
+"\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
+"installation. You should also backup your data.\n"
+"When sure, press Ok."
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -5441,14 +5481,14 @@ msgstr ""
 msgid "Uruguay"
 msgstr ""
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid "SMB/Windows server \"%s\", share \"%s\""
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Benin"
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "SMB/Windows server \"%s\", share \"%s\""
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -5582,11 +5622,6 @@ msgstr ""
 msgid "Other OS (SunOS...)"
 msgstr ""
 
-#: ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Hostname configuration"
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Install/Upgrade"
@@ -5659,6 +5694,13 @@ msgid ""
 " allowed for Drakbackup (MB)"
 msgstr ""
 
+#: ../../loopback.pm:1
+#, c-format
+msgid ""
+"Circular mounts %s\n"
+""
+msgstr ""
+
 #: ../../my_gtk.pm:1
 #, c-format
 msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
@@ -5667,13 +5709,6 @@ msgstr ""
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Lilo/grub mode"
-msgstr ""
-
-#: ../../loopback.pm:1
-#, c-format
-msgid ""
-"Circular mounts %s\n"
-""
 msgstr ""
 
 #: ../../lang.pm:1
@@ -5844,6 +5879,11 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Expert mode"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
@@ -5953,6 +5993,11 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Polish (qwerty layout)"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Add Printer"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -6209,6 +6254,11 @@ msgstr ""
 msgid ""
 "Graphics card: %s\n"
 ""
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/Set as _Default"
 msgstr ""
 
 #: ../../security/l10n.pm:1
@@ -6566,6 +6616,11 @@ msgstr ""
 msgid ""
 "Mounted\n"
 ""
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Configure CUPS"
 msgstr ""
 
 #: ../../help.pm:1
@@ -6979,6 +7034,11 @@ msgstr ""
 msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Configure CUPS"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ", "
@@ -7048,6 +7108,11 @@ msgstr ""
 msgid "Enhance your computer performance with the help of a selection of partners offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Authors: "
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
@@ -7113,6 +7178,11 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Ethernet Card"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Delete selected printer"
 msgstr ""
 
 #: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
@@ -7486,14 +7556,14 @@ msgstr ""
 msgid "Automatic Steps Configuration"
 msgstr ""
 
-#: ../../share/advertising/02-community.pl:1
-#, c-format
-msgid "Want to know more and to contribute to the Open Source community? Get involved in the Free Software world!"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Barbados"
+msgstr ""
+
+#: ../../share/advertising/02-community.pl:1
+#, c-format
+msgid "Want to know more and to contribute to the Open Source community? Get involved in the Free Software world!"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -7536,6 +7606,11 @@ msgstr ""
 #: ../../security/level.pm:1
 #, c-format
 msgid "High"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Add a new printer to the system"
 msgstr ""
 
 #: ../../any.pm:1
@@ -8244,6 +8319,11 @@ msgstr ""
 msgid "the CPU frequency in MHz (Megahertz which in first approximation may be coarsely assimilated to number of instructions the cpu is able to execute per second)"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Mandrake Linux Printer Management Tool"
+msgstr ""
+
 #: ../../pkgs.pm:1
 #, c-format
 msgid "important"
@@ -8284,14 +8364,14 @@ msgid ""
 "configure the driver."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Users"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Aruba"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Users"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -8694,7 +8774,7 @@ msgstr ""
 msgid "Theme name"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr ""
@@ -8781,24 +8861,14 @@ msgstr ""
 msgid "View Last Log"
 msgstr ""
 
-#: ../../install_interactive.pm:1
-#, c-format
-msgid ""
-"WARNING!\n"
-"\n"
-"DrakX will now resize your Windows partition. Be careful: this\n"
-"operation is dangerous. If you have not already done so, you\n"
-"first need to exit the installation, run \"chkdsk c:\" from a\n"
-"Command Prompt under Windows (beware, running graphical program\n"
-"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
-"Command Prompt!), optionally run defrag, then restart the\n"
-"installation. You should also backup your data.\n"
-"When sure, press Ok."
-msgstr ""
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Which services would you like to allow the Internet to connect to?"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Connection Type"
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -8962,7 +9032,7 @@ msgstr ""
 msgid "You must enter a device or file name!"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr ""
@@ -9240,16 +9310,16 @@ msgstr ""
 msgid "Dutch"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Angola"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
 "The following packages need to be installed:\n"
 ""
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Angola"
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -9451,7 +9521,7 @@ msgstr ""
 msgid "Saami (swedish/finnish)"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/net_monitor:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/net_monitor:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Close"
 msgstr ""
@@ -10060,6 +10130,11 @@ msgstr ""
 msgid "Add a scanner manually"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh"
+msgstr ""
+
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Reload partition table"
@@ -10078,11 +10153,6 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Search for fonts in installed list"
-msgstr ""
-
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Hostname"
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -10192,6 +10262,11 @@ msgstr ""
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Save packages selection"
+msgstr ""
+
+#: ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Actions"
 msgstr ""
 
 #: ../../standalone/drakautoinst:1
@@ -10451,6 +10526,13 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Unselected All"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid ""
+"Printer Management \n"
+""
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -11161,6 +11243,11 @@ msgstr ""
 msgid "please choose the date to restore"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Netherlands Antilles"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Switching from ext2 to ext3"
@@ -11169,11 +11256,6 @@ msgstr ""
 #: ../../printer/data.pm:1
 #, c-format
 msgid "LPRng"
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Netherlands Antilles"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -11446,7 +11528,7 @@ msgstr ""
 msgid "Permission denied transferring %s to %s"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr ""
@@ -11960,12 +12042,17 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Set as default"
+msgstr ""
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
 msgstr ""
 
-#: ../../printer/main.pm:1
+#: ../../printer/main.pm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Configured on this machine"
 msgstr ""
@@ -13035,6 +13122,11 @@ msgstr ""
 msgid "Mandrake Bug Report Tool"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Apply filter"
+msgstr ""
+
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
@@ -13065,11 +13157,6 @@ msgstr ""
 msgid "Dvorak (Swedish)"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "More Options"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Afghanistan"
@@ -13077,7 +13164,17 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "More Options"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Burundi"
 msgstr ""
 
 #: ../../services.pm:1
@@ -13086,11 +13183,6 @@ msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
 "at periodic scheduled times. vixie cron adds a number of features to the basic\n"
 "UNIX cron, including better security and more powerful configuration options."
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Burundi"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -13238,6 +13330,11 @@ msgstr ""
 msgid "FATAL"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Refresh the list"
+msgstr ""
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -13248,7 +13345,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1 ../../standalone/drakperm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1 ../../standalone/drakperm:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Delete"
 msgstr ""
@@ -14299,6 +14396,11 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "United Arab Emirates"
+msgstr ""
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
@@ -14311,17 +14413,17 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "United Arab Emirates"
-msgstr ""
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Thailand"
 msgstr ""
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_1"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Search:"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -14448,6 +14550,11 @@ msgstr ""
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Check open ports"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Edit selected printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
@@ -14709,6 +14816,11 @@ msgstr ""
 msgid "Host name or IP."
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Edit"
+msgstr ""
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -14764,7 +14876,7 @@ msgstr ""
 msgid "Backup Now"
 msgstr ""
 
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr ""
@@ -14903,7 +15015,7 @@ msgstr ""
 msgid "Kernel:"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr ""
@@ -14966,6 +15078,11 @@ msgstr ""
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Show current interface configuration"
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Add Printer"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -15307,6 +15424,11 @@ msgstr ""
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Configure CUPS printing system"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Ecuador"
@@ -15473,6 +15595,11 @@ msgstr ""
 msgid "Computing the size of the Windows partition"
 msgstr ""
 
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "/_Refresh"
+msgstr ""
+
 #: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "Italy"
@@ -15552,6 +15679,11 @@ msgid ""
 "\n"
 "\n"
 "Printerdrake could not determine which model your printer %s is. Please choose the correct model from the list."
+msgstr ""
+
+#: ../../standalone/printerdrake:1
+#, c-format
+msgid "Set selected printer as the default printer"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
