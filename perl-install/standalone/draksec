@@ -183,9 +183,9 @@ my $help_msg = N("The following options can be set to customize your\nsystem sec
 foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ]) {
     my ($domain, $label) = @$_;
     my %values;
-    $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0, 0),
-                                                                   0, Gtk2::Label->new($help_msg),
-                                                                   1, create_packtable($common_opts,
+    $notebook->append_page(gtkshow(gtkpack_(Gtk2::VBox->new,
+                                            0, Gtk2::Label->new($help_msg),
+                                            1, create_scrolled_window(create_packtable($common_opts,
                                                                                        map {
                                                                                            my $i = $_;
                                                                                            
@@ -202,9 +202,11 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($opt)));
                                                                                            set_help_tip($entry, $default, $opt);
                                                                                            [ Gtk2::WrappedLabel->new($i), resize($values{$i}) ];
-                                                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain))),
-                                                          [ 'never', 'automatic' ],
-                                                         )
+                                                                                       } sort map { $fields{$_} || $_ } $msec->list_functions($domain),
+                                                                                      ),
+                                                                      [ 'never', 'automatic' ],
+                                                                     ),
+                                           )
                                   ),
                            Gtk2::WrappedLabel->new($label));
     $options_values{$domain} = \%values;
@@ -213,9 +215,9 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
 ######################## PERIODIC CHECKS ###################################
 my %security_checks_value;
 
-$notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0, 0),
-                                                               0, Gtk2::Label->new($help_msg),
-                                                               1, create_packtable($common_opts,
+$notebook->append_page(gtkshow(gtkpack_(Gtk2::VBox->new,
+                                        0, Gtk2::Label->new($help_msg),
+                                        1, create_scrolled_window(create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
                                                                                        my $opt = $inv_fields{$i} || $i;
