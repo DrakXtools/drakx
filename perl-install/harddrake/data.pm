@@ -67,7 +67,7 @@ our @tree =
        0 ],
      [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
      [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
-                                                                                if_(!is_empty_hash_ref($isdn), $isdn) }, 0 ],
+                                                                                if_(!is_empty_hash_ref($isdn), f(values %$isdn)) }, 0 ],
      [ "ETHERNET", , N("Ethernetcard"), "hw_network.png", "$sbindir/drakconnect", sub {
          #- generic NIC detection for USB seems broken (class, subclass, 
          #- protocol report are not accurate) so I'll need to verify against
