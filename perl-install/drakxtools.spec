@@ -292,8 +292,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog 
 * Thu Feb 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-10mdk
-- harddrake service: offer to configure cdrom/dvd/burners/floppies/
-  and the like mount points
+- harddrake service: 
+  o offer to configure cdrom/dvd/burners/floppies/
+    and the like mount points
+  o configure firewire controllers
+- diskdrake fixes (pixel)
+- drakconnect fixes (francois)
 
 * Thu Feb 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-9mdk
 - drakconnect: 
