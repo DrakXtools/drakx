@@ -202,9 +202,9 @@ sub chk_empty_xfs_path() {
 
 sub search_installed_fonts() {
     list_fontpath();
-    $interactive and progress($pbar, 0.1, N("Search installed fonts"));
+    interactive_progress($pbar, 0.1, N("Search installed fonts"));
     push @installed_fonts, all($_) foreach @installed_fonts_path;
-    $interactive and progress($pbar, 0.1, N("Unselect fonts installed"));
+    interactive_progress($pbar, 0.1, N("Unselect fonts installed"));
 }
 
 sub search_installed_fonts_full_path() {
@@ -278,9 +278,9 @@ sub search_dir_font() {
 		!grep { /$fn/ } @installed_fonts and push @font_list, $fn;
 	    }
         }
-        $interactive and progress($pbar, 0.50 / @install, N("Reselect correct fonts"));
+        interactive_progress($pbar, 0.50 / @install, N("Reselect correct fonts"));
     }
-    $interactive and progress($pbar, 1, N("done"));
+    interactive_progress($pbar, 1, N("done"));
     !@font_list && $interactive and display_error(N("could not find any font.\n"));
 }
 
@@ -298,7 +298,7 @@ sub search_dir_font_uninstall {
 
 sub search_dir_font_uninstall_gi() {
     @font_list = @uninstall;
-    $interactive and progress($pbar, 1, N("Search for fonts in installed list"));
+    interactive_progress($pbar, 1, N("Search for fonts in installed list"));
 }
 
 sub print_list() {
@@ -322,7 +322,7 @@ sub convert_fonts {
     $o_generate_pfb = $o_generate_pfb ? "-b" : "";
     foreach my $fontname (@$fonts) {
         system("cd $drakfont_dir/tmp/tmp && $converter $o_generate_pfb $fontname");
-        $interactive and progress($pbar2, 0.50 / @$fontname, N("%s fonts conversion", $font_type));
+        interactive_progress($pbar2, 0.50 / @$fontname, N("%s fonts conversion", $font_type));
     }
 }
 
@@ -339,20 +339,20 @@ sub put_font_dir() {
         dir_created();
         foreach my $i (@font_list) {
             cp_af($i, $drakfont_dir . "/tmp/tmp");
-            $interactive and progress($pbar1, 1 / @font_list, N("Fonts copy"));
+            interactive_progress($pbar1, 1 / @font_list, N("Fonts copy"));
         }
-        $interactive and progress($pbar1, 0.01, N("done"));
-        $interactive and progress($pbar2, 0.10, N("True Type fonts installation"));
+        interactive_progress($pbar1, 0.01, N("done"));
+        interactive_progress($pbar2, 0.10, N("True Type fonts installation"));
         glob("$drakfont_dir/tmp/tmp/*.TTF") 
           and system('cd ' . $drakfont_dir . '/tmp/tmp ; for foo in *.TTF; do mv $foo `basename $foo .TTF`.ttf; done');
         system('cd ' . $drakfont_dir . '/tmp/tmp  && cp *.ttf ../../ttf');
-        $interactive and progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
+        interactive_progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
 
         my $ttfdir = $drakfont_dir . "/ttf";
         # mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
         #`$mkttfdir $ttfdir`;
        	system("cd $ttfdir && $fccache && $ttmkfdir -u > fonts.dir");
-        $interactive and progress($pbar2, 0.10, N("True Type install done"));
+        interactive_progress($pbar2, 0.10, N("True Type install done"));
         my $update_chkfontpath = "$chkfontpath -a $drakfont_dir/ttf";
 
         if ($so && $gs) {
@@ -360,13 +360,13 @@ sub put_font_dir() {
             convert_ttf_fonts(\@glob_drak, 1);
             system("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm *.afm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
-            $interactive and progress($pbar2, 0.10, N("type1inst building"));
+            interactive_progress($pbar2, 0.10, N("type1inst building"));
             -e "$drakfont_dir/tmp/Type1/Fontmap" 
               and system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
             system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
             system("cd $type1dir && $fccache && $type1inst");
-            $interactive and progress($pbar2, 0.05, N("Ghostscript referencing"));
+            interactive_progress($pbar2, 0.05, N("Ghostscript referencing"));
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
         }
 
@@ -374,12 +374,12 @@ sub put_font_dir() {
             convert_ttf_fonts([ glob("$/drakfont_dir/tmp/tmp/*.ttf") ], 1);
             system("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
-            $interactive and progress($pbar2, 0.1, N("type1inst building"));
+            interactive_progress($pbar2, 0.1, N("type1inst building"));
             system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
             system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
             system("cd $type1dir && $fccache && $type1inst");
-            $interactive and progress($pbar2, 0.05, N("Ghostscript referencing"));
+            interactive_progress($pbar2, 0.05, N("Ghostscript referencing"));
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
         }
 
@@ -390,19 +390,19 @@ sub put_font_dir() {
             system("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
             system("cd $type1dir && $fccache && $type1inst");
-            $interactive and progress($pbar2, 0.14, N("type1inst building"));
+            interactive_progress($pbar2, 0.14, N("type1inst building"));
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
         }
 
-        $interactive and progress($pbar2, 1, N("done"));
-        $interactive and progress($pbar3, 0.25, N("Suppress Temporary Files"));
+        interactive_progress($pbar2, 1, N("done"));
+        interactive_progress($pbar3, 0.25, N("Suppress Temporary Files"));
         rm_rf("$drakfont_dir/tmp/");
         print "\n\nretarting xfs......\n";
-        $interactive and progress($pbar3, 0.5, N("Restart XFS"));
+        interactive_progress($pbar3, 0.5, N("Restart XFS"));
         system($update_chkfontpath);
         system('/etc/rc.d/init.d/xfs restart');
-	system('xset fp rehash');
-        $interactive and progress($pbar3, 0.30, N("done"));
+        system('xset fp rehash');
+        interactive_progress($pbar3, 0.30, N("done"));
     }
 }
 
@@ -428,7 +428,7 @@ sub remove_gs_fonts() {
 sub remove_fonts() {
     my @list_dir;
     -e $drakfont_dir . "/remove" or mkdir_p($drakfont_dir . "/remove");
-    $interactive and progress($pbar, 1, N("done"));
+    interactive_progress($pbar, 1, N("done"));
     
     foreach my $i (@font_list) {
         local $_ = $i;
@@ -443,9 +443,9 @@ sub remove_fonts() {
         }
         $i =~ s!/\w*\.\w*!!gi;
         grep { $i } @list_dir or push @list_dir, $i;
-        $interactive and progress($pbar1, 1 / @font_list, N("Suppress Fonts Files"));
+        interactive_progress($pbar1, 1 / @font_list, N("Suppress Fonts Files"));
     }
-    $interactive and progress($pbar1, 0.01, N("done"));
+    interactive_progress($pbar1, 0.01, N("done"));
     -e "/usr/share/ghostscript" and remove_gs_fonts();
     foreach my $i (@list_dir) {
         if (listlength all($i) < 3) {
@@ -453,13 +453,13 @@ sub remove_fonts() {
         } else {
             system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
         }
-        $interactive and progress($pbar2, 1 / @list_dir, N("Suppress Fonts Files"));
+        interactive_progress($pbar2, 1 / @list_dir, N("Suppress Fonts Files"));
     }
-    $interactive and progress($pbar2, 0.01, N("xfs restart"));
+    interactive_progress($pbar2, 0.01, N("xfs restart"));
     system("/etc/rc.d/init.d/xfs restart");
     system('xset fp rehash');
     -e "/usr/share/ghostscript" and rm_rf("$drakfont_dir/remove");
-    $interactive and progress($pbar2, 0.01, N("done"));
+    interactive_progress($pbar2, 0.01, N("done"));
 }
 
 sub license_msg() {
@@ -533,7 +533,7 @@ sub interactive_mode() {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Import Fonts"));
     }
-
+    my ($adv_opt_button, $font_button);
     gtkadd($window1->{window},
 	   gtkpack_(new Gtk2::VBox(0, 2), if_(!$::isEmbedded, 0, gtkcreate_img("drakfont.620x57")), 1,
 		    gtkpack_(new Gtk2::HBox(0, 2), 1,
@@ -554,14 +554,18 @@ sub interactive_mode() {
 									}),
 						     ), 0,
 					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-						      gtksignal_connect(new Gtk2::Button(N("Advanced Options")),
+						      gtksignal_connect($adv_opt_button = new Gtk2::Button(N("Advanced Options")),
 									clicked => sub {
+                                                 $font_button->set_sensitive(1);
+                                                 $adv_opt_button->set_sensitive(0);
 									    $$central_widget->destroy();
 									    $windows = 0;
 									    advanced_install();
 									}),
-						      gtksignal_connect(new Gtk2::Button(N("Font List")),
+						      gtksignal_connect($font_button = new Gtk2::Button(N("Font List")),
 									clicked => sub {
+                                                 $font_button->set_sensitive(0);
+                                                 $adv_opt_button->set_sensitive(1);
 									    $$central_widget->destroy();
 									    create_fontsel();
 									}),
@@ -577,6 +581,7 @@ sub interactive_mode() {
 		   ),
 	  );
     $central_widget = \$font_sel;
+    $font_button->set_sensitive(0);
     $window1->{rwindow}->show_all;
     $window1->{rwindow}->realize;
     $window1->main;
@@ -606,8 +611,8 @@ sub text_view {
 sub help() {
     ugtk2::create_dialog(N("
  Copyright (C) 2001-2002 by MandrakeSoft 
-	DUPONT Sebastien (original version)
-        CHAUMETTE Damien <dchaumette\@mandrakesoft.com>
+     DUPONT Sebastien (original version)
+     CHAUMETTE Damien <dchaumette\@mandrakesoft.com>
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -899,3 +904,6 @@ sub progress {
     gtkflush();
 }
 
+sub interactive_progress {
+    $interactive and progress(@_);
+}
