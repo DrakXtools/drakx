@@ -181,8 +181,7 @@ sub draksec_main {
 
 		  $w = wait_msg(_("Please wait, setting security options..."));
 		  standalone::explanations("Setting security administrator option");
-		  if ($secadmin_check_value == 1) { $msec->config_check('MAIL_WARN', 'yes') }
-		  else { $msec->config_check('MAIL_WARN', 'no') }
+		  $msec->config_check('MAIL_WARN', $secadmin_check_value == 1 ? 'yes' : 'no');
 
 		  standalone::explanations("Setting security administrator contact");
 		  if ($secadmin_value ne $msec->get_check_value('MAIL_USER') && $secadmin_check_value) {
