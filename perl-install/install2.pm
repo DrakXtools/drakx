@@ -386,7 +386,7 @@ sub selectInstallClass {
 
     addToBeDone {
 	install_any::setPackages($o); #update package list
-    }  'formatPartitions';
+    }  'formatPartitions' unless $o->{steps}{doInstallStep}{done};
 }
 
 #------------------------------------------------------------------------------

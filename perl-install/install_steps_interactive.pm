@@ -485,7 +485,8 @@ failures. Would you like to create a bootdisk for your system?"), !$o->{mkbootdi
 
 	$o->{mkbootdisk} = $o->ask_from_list('', 
 					     _("Choose the floppy drive you want to use to make the bootdisk"), 
-					     \@l, $o->{mkbootdisk});
+					     [ @l, "Cancel" ], $o->{mkbootdisk});
+	return if $o->{mkbootdisk} eq "Cancel";
     }
 
     $o->ask_warn('', _("Insert a floppy in drive %s", $o->{mkbootdisk}));
