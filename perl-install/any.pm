@@ -304,7 +304,7 @@ sub setupBootloader__entries {
 	    @l = (
 		  { label => N("Label"), val => \$e->{label} },
 		  @l,
-		  { label => N("Default"), val => \$default, type => 'bool' },
+		  { text => N("Default"), val => \$default, type => 'bool' },
 		 );
 	} else {
 	    unshift @l, { label => N("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
@@ -314,7 +314,7 @@ sub setupBootloader__entries {
 		if_($::expert, { label => N("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
 		if_($::expert, $l[5]),
 		{ label => N("NoVideo"), val => \$e->{novideo}, type => 'bool' },
-		{ label => N("Default"), val => \$default, type => 'bool' }
+		{ text => N("Default"), val => \$default, type => 'bool' }
 		);
 	    }
 	}
