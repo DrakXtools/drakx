@@ -744,7 +744,7 @@ sub configurePrinter {
 
     foreach (values %{$o->{printer}{configured} || {}}) {
 	log::l("configuring printer queue " . $_->{queuedata}{queue} || $_->{QUEUE});
-	#- when copy is so adulée (sorry french taste :-)
+	#- when copy is so adulee (sorry french taste :-)
 	#- and when there are some configuration in one place and in another place...
 	$o->{printer}{currentqueue} = {};
 	printer::main::copy_printer_params($_->{queuedata}, $o->{printer}{currentqueue});
