@@ -26,25 +26,6 @@
 	automated install'.
 	(summary): nicer mouse name
 
-2001/02/23  Pixel  <pixel@mandrakesoft.com>
-
-	* install_any.pm (g_auto_install): handle $replay flag. It means a 'not
-	fully automated install'.
-
-	* install_steps_auto_install.pm (@graphical_steps): specify which step
-	should be interactive
-
-	* c/Makefile (stuff.xs): exporting C_RPM and C_DRAKX is needed
-
-	* install_steps.pm (afterInstallPackages): no kdm UserView in NIS
-	(configurePrinter): if_'ization
-
-	* install_steps_interactive.pm (exitInstall): ask wether Replay or
-	Automated
-	(generateAutoInstFloppy): handle $replay flag. It means a 'not fully
-	automated install'.
-	(summary): nicer mouse name
-
 2001/02/23  dam's  <damien@mandrakesoft.com>
 
 	* network.pm, standalone/draknet, netconnect.pm, my_gtk.pm: new wizard
@@ -93,13 +74,9 @@
 	* install_any.pm (g_auto_install): handle $replay flag. It means a 'not
 	fully automated install'.
 
-	* interactive_gtk.pm (ask_from_entries_refW): double clicking on list
-	means 'Ok'
-
 	* c/Makefile.PL: use C_DRAKX
 
 	* pkgs.pm (setSelectedFromCompssList): fix the fix
-	(setSelectedFromCompssList): fix sillyness
 
 	* c/Makefile (stuff.xs): exporting C_RPM and C_DRAKX is needed
 	add setting C_DRAKX to 1 by default
