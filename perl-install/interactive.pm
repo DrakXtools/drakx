@@ -189,7 +189,7 @@ sub ask_from_listf {
     ask_from_listf_raw($o, { title => $title, messages => $message }, $f, $l, $o_def);
 }
 sub ask_from_listf_raw {
-    my ($_o, $_common, $_f, $l, $_def) = @_;
+    my ($_o, $_common, $_f, $l, $_o_def) = @_;
     @$l == 0 and die "ask_from_list: empty list\n" . backtrace();
     @$l == 1 and return $l->[0];
     goto &ask_from_listf_raw_no_check;
