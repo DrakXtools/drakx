@@ -76,7 +76,7 @@ supported printer:
 		   }
 	  Resolution: {300} {300} {}
 	  BitsPerPixel:  {3} {Normal color printing with color cartridge}
-	  BitsPerPixel:  {8} {Floyd-Steinberg B&W printing for better greys}
+	  BitsPerPixel:  {8} {Floyd-Steinberg B & W printing for better greys}
 	  BitsPerPixel: {24} {Floyd-Steinberg Color printing (best, but slow)}
 	  BitsPerPixel: {32} {Sometimes provides better output than 24}
 	EndEntry

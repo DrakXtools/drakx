@@ -1,5 +1,5 @@
 VERSION     = 2.2.10-BOOT                                                                             
-SUDO        = sudo                                                                                    
+SUDO        = sudo
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
 PMS         = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake
 ROOTDEST    = /export
