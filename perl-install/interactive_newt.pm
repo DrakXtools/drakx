@@ -205,7 +205,7 @@ sub ask_from_entries_refW {
 
 sub waitbox {
     my ($title, $messages) = @_;
-    my ($t, $w, $h) = myTextbox(1, 0, @$messages);
+    my ($t, $w, $h) = myTextbox(1, @$messages);
     my $f = Newt::Component::Form(\undef, '', 0);
     Newt::CenteredWindow($w, $h, $title);
     $f->FormAddComponent($t);
@@ -229,7 +229,8 @@ sub wait_message_nextW {
 }
 sub wait_message_endW {
     my ($o, $w) = @_;
-    log::l("interactive_newt does not handle none stacked wait-messages") if $w->{form} != pop @wait_messages;
+    my $wait = pop @wait_messages;
+#    log::l("interactive_newt does not handle none stacked wait-messages") if $w->{form} != $wait;
     Newt::PopWindow;
 }
 
