@@ -1,5 +1,6 @@
 package network::modem;
 
+use strict;
 use common;
 use any;
 use modules;

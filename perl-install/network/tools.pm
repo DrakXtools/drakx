@@ -1,5 +1,6 @@
 package network::tools;
 
+use strict;
 use common;
 use run_program;
 use c;

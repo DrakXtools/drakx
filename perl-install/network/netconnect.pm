@@ -1,5 +1,6 @@
 package network::netconnect;
 
+use strict;
 use common;
 use log;
 use detect_devices;
@@ -199,7 +200,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 	   load_conf($netcnx, $netc, $intf);
 	   $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($in, $netcnx, $mouse, $netc, $intf) or goto step_2 };
 	   $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($in, $netc) or goto step_2 }; 
-	   $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc, $isdn) or goto step_2 };
+	   $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc, undef) or goto step_2 };
 	   $conf{adsl} and do { pre_func("adsl"); require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) or goto step_2 };
 	   $conf{cable} and do { pre_func("cable"); require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
 	   $conf{lan} and do { pre_func("local network"); require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) or goto step_2; $netconnect::need_restart_network = 1 };
