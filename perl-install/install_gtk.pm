@@ -199,6 +199,18 @@ sub create_logo_window {
 #------------------------------------------------------------------------------
 sub init_gtk() {
     symlink("/tmp/stage2/etc/$_", "/etc/$_") foreach qw(gtk-2.0 pango fonts);
+
+    if (!listlength(cat_('/proc/fb'))) {
+        #- inactivate antialias in VGA16 because it makes fonts look worse
+        output('/tmp/fonts.conf',
+q(<fontconfig>
+<include>/etc/fonts/fonts.conf</include>
+<match target="font"><edit name="antialias"><bool>false</bool></edit></match>
+</fontconfig>
+));
+        $ENV{FONTCONFIG_FILE} = '/tmp/fonts.conf';
+    }
+
     Gtk2->init;
     Gtk2->set_locale;
 }
