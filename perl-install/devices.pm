@@ -53,7 +53,7 @@ sub set_loop {
     if ($encrypt_key && $encryption) {
 	my $cmd = "losetup -p 0 -e $encryption $dev $file";
 	log::l("calling $cmd");
-	open my $F, "|$cmd";
+	open(my $F, "|$cmd");
 	print $F $encrypt_key;
 	close $F or die "losetup failed";
     } else {

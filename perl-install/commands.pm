@@ -331,7 +331,7 @@ sub more {
     require devices;
     my $tty = devices::make('tty');
     my $n = 0; 
-    open my $IN, $tty or die "can't open $tty\n";
+    open(my $IN, $tty) or die "can't open $tty\n";
     local $_;
     while (<>) {
 	if (++$n == 25) {

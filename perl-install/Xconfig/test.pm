@@ -67,7 +67,7 @@ sub test {
     my $b = before_leaving { unlink $f_err };
 
     if (!xtest(":9")) {
-	open my $F, $f_err;
+	open(my $F, $f_err);
 
 	local $_;
       i: while (<$F>) {
@@ -99,7 +99,7 @@ sub test {
     }
 
     $::noShadow = 1;
-    open my $F, "|perl 2>/dev/null";
+    open(my $F, "|perl 2>/dev/null");
     print $F "use lib qw(", join(' ', @INC), ");\n";
     print $F q(
         BEGIN { $::no_ugtk_init = 1 }

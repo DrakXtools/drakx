@@ -615,7 +615,7 @@ sub whatUsbport() {
 	my $realport = devices::make($port);
 	next if !$realport;
 	next if ! -r $realport;
-	open my $PORT, $realport or next;
+	open(my $PORT, $realport) or next;
 	my $idstr = "";
 	# Calculation of IOCTL function 0x84005001 (to get device ID
 	# string):
@@ -735,7 +735,7 @@ sub hasMousePS2 {
 }
 
 sub raidAutoStartIoctl {
-    sysopen my $F, devices::make("md0"), 2 or return;
+    sysopen(my $F, devices::make("md0"), 2) or return;
     ioctl $F, 2324, 0;
 }
 

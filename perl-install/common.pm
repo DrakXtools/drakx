@@ -34,7 +34,7 @@ sub N_ { $_[0] }
 sub salt {
     my ($nb) = @_;
     require devices;
-    open my $F, devices::make("random") or die "missing random";
+    open(my $F, devices::make("random")) or die "missing random";
     my $s; read $F, $s, $nb;
     $s = pack("b8" x $nb, unpack "b6" x $nb, $s);
     $s =~ tr|\0-\x3f|0-9a-zA-Z./|;
@@ -72,7 +72,7 @@ sub availableRamMB()  {
 sub setVirtual {
     my ($vt_number) = @_;
     my $vt = '';
-    sysopen my $C, "/dev/console", 2 or die "failed to open /dev/console: $!";
+    sysopen(my $C, "/dev/console", 2) or die "failed to open /dev/console: $!";
     ioctl($C, c::VT_GETSTATE(), $vt) &&
       ioctl($C, c::VT_ACTIVATE(), $vt_number) &&
 	ioctl($C, c::VT_WAITACTIVE(), $vt_number) or die "setVirtual failed";
