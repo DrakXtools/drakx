@@ -355,7 +355,11 @@ sub ask_fromW {
     my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $max_width);
     my $total_size = 0;
     my $tooltips = Gtk2::Tooltips->new;
-    my $ok_clicked = sub { $mainw->{ok}->get_property('sensitive') and $mainw->{ok}->clicked };
+    my $ok_clicked = sub { 
+	$mainw->{ok}->get_property('sensitive') or return;
+	$mainw->{retval} = 1;
+	Gtk2->main_quit;
+    };
     my $set_all = sub {
 	$ignore = 1;
 	$_->{set}->(${$_->{e}{val}}, $_) foreach @widgets_always, @widgets_advanced;
