@@ -1268,8 +1268,7 @@ Do you really want to quit now?"), 0);
 	 ok => N("Reboot"),
 	},      
 	[
-	 if_($::expert,
-	     { val => \ (my $_t1 = N("Generate auto install floppy")), clicked => sub {
+	 { val => \ (my $_t1 = N("Generate auto install floppy")), clicked => sub {
 		   my $t = $o->ask_from_list_('', 
 N("The auto install can be fully automated if wanted,
 in that case it will take over the hard drive!!
@@ -1279,8 +1278,7 @@ You may prefer to replay the installation.
 "), [ N_("Replay"), N_("Automated") ]);
 		   $t and $o->generateAutoInstFloppy($t eq 'Replay');
 	       }, advanced => 1 },
-	     { val => \ (my $_t2 = N("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
-	 ),
+	 { val => \ (my $_t2 = N("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
 	]
 	) if $alldone && !$::g_auto_install;
 }
