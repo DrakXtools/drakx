@@ -219,11 +219,7 @@ sub UpdateAvailable() {
 }
 
 sub AddNet {
-	my $essid = shift @_;
-	my $mode = shift @_;
-	my $channel = shift @_;
-	my $key = shift @_;
-	my $dhcp = shift @_;
+	my ($essid, $mode, $channel, $key, $dhcp) = @_;
 	print "Adding net $essid\n";
 	push @{$KnownList->{data}}, [ $essid, $mode, $channel, $key, $dhcp ];
 }
