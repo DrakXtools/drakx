@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.7mdk
+Release: 0.8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,6 +312,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jul  1 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.8mdk
+- drakbackup: try to better fit gui when embedded (fix #4111) (stew)
+- drakTermServ: enable local client hardware configuration (stew)
+- harddrake2: let gui behave better when embedded
+- ugtk2: locales setting fix for rpmdrake (gc)
+
 * Tue Jun 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.7mdk
 - drakboot: more work on grub conf reread
 - drakedm: fix crash on service restart
