@@ -536,29 +536,9 @@ sub getNet() {
 #    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
 #}
 
-# heavily inspirated from hidups driver from nut:
 sub getUPS() {
-    # nut/driver/hidups.h:
-    my $UPS_USAGE   = 0x840004;
-    my $POWER_USAGE = 0x840020;
-    my $hiddev_find_application = sub {
-        my ($fd, $usage) = @_;
-        my $i = 0;
-	my $ret;
-        do { $i++ } while ($ret = ioctl($fd, c::HIDIOCAPPLICATION(), $i)) && $ret != $usage;
-        return $ret == $usage ? 1 : 0;
-    };
-
-    (map { $_->{driver} = "mge-shut"; $_ } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
-    (map {
-        open(my $f, $_);
-        if_(!$hiddev_find_application->($f, $UPS_USAGE) && !$hiddev_find_application->($f, $POWER_USAGE),
-            { port => $_,
-              name => c::get_usb_ups_name(fileno($f)),
-              driver => "hidups",
-            }
-           );
-    } -e "/dev/.devfsd" ? glob("/dev/usb/hid/hiddev*") : glob("/dev/usb/hiddev*"));
+    (map { $_->{driver} = "mge-shut"; $_->{media_type} = 'UPS'; $_ } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
+    (map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_->{port} = "/dev/"; $_->{media_type} = 'UPS'; $_} grep { $_->{driver} =~ /ups$/ }  usb_probe());
 }
 
 $pcitable_addons = <<'EOF';
