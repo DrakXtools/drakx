@@ -431,7 +431,8 @@ if_(arch() !~ /sparc|ppc|ia64/,
 	1;
     };
 
-    $in->ask_from__add_modify_remove('',
+    my @prev_entries = @{$b->{entries}};
+    if ($in->ask_from__add_modify_remove('',
 N("Here are the entries on your boot menu so far.
 You can create additional entries or change the existing ones."), [ { 
         format => sub {
@@ -440,7 +441,12 @@ You can create additional entries or change the existing ones."), [ {
 	      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
 		translate($e);
 	}, list => $b->{entries},
-    } ], Add => $Add, Modify => $Modify, Remove => $Remove);
+    } ], Add => $Add, Modify => $Modify, Remove => $Remove)) {
+	1;
+    } else {
+	@{$b->{entries}} = @prev_entries;
+	'';
+    }
 }
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
