@@ -1225,6 +1225,7 @@ sub generateAutoInstFloppy {
 	output("/floppy/auto_inst.cfg", install_any::g_auto_install($replay));
 
 	fs::umount("/floppy");
+	common::sync();         #- if you shall remove the floppy right after the LED switches off
     }
 }
 
