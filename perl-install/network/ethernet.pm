@@ -8,6 +8,7 @@ use detect_devices;
 use common;
 use run_program;
 use network::tools;
+use vars qw(@ISA @EXPORT);
 
 use MDK::Common::Globals "network", qw($in $prefix);
 
