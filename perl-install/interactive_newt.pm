@@ -11,14 +11,14 @@ use common qw(:common :functional);
 use log;
 use Newt::Newt; #- !! provides Newt and not Newt::Newt
 
-my $width = 80;
-my $height = 25;
+my ($width, $height) = (80, 25);
 my @wait_messages;
 
 sub new() {
     Newt::Init;
     Newt::Cls;
     Newt::SetSuspendCallback;
+    ($width, $height) = Newt::GetScreenSize;
     open STDERR,">/dev/null" if $::isStandalone;
     bless {}, $_[0];
 }
@@ -32,9 +32,20 @@ sub exit() { end; exit($_[0]) }
 END { end() }
 
 sub myTextbox {
+    my $allow_scroll = shift;
+
+    my $width = $width - 9;
     my @l = map { /(.{1,$width})/g } map { split "\n" } @_;
-    my $h = min($height, int @l);
-    my $flag = 1 << 6; $flag |= 1 << 2 if $h < @l; #- NEWT_FLAG_SCROLL
+    my $h = min($height - 13, int @l);
+    my $flag = 1 << 6; 
+    if ($h < @l) {
+	if ($allow_scroll) {
+	    $flag |= 1 << 2; #- NEWT_FLAG_SCROLL
+	} else {
+	    # remove the text, no other way!
+	    @l = @l[0 .. $h-1];
+	}
+    }
     my $mess = Newt::Component::Textbox(1, 0, my $w = max(map { length } @l) + 1, $h, $flag);
     $mess->TextboxSetText(join("\n", @_));
     $mess, $w + 1, $h;
@@ -100,7 +111,10 @@ sub ask_from_entries_refW {
 #	     $get = sub { $adj->get_value };
 	 } elsif ($e->{type} =~ /list/) {
 	    my ($h, $wi) = (5, 20);
-	    $w = Newt::Component::Listbox(-1, -1, $h, @{$e->{list}} > $h ? 1 << 2 : 0); #- NEWT_FLAG_SCROLL	    
+	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
+	    $size = min(int @{$e->{list}}, $h);
+
+	    $w = Newt::Component::Listbox(-1, -1, $h, $scroll); #- NEWT_FLAG_SCROLL	    
 	    foreach (@{$e->{list}}) {
 		my $t = may_apply($e->{format}, $_);
 		$w->ListboxAddEntry($t, $_);
@@ -158,7 +172,7 @@ sub ask_from_entries_refW {
     my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($common->{ok} || '', if_($common->{cancel}, $common->{cancel}));
 
     my $form = Newt::Component::Form(\undef, '', 0);
-    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@{$common->{messages}})), $listg, $buttons);
+    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@widgets == 0, @{$common->{messages}})), $listg, $buttons);
     $window->GridWrappedWindow($common->{title} || '');
     $form->FormAddGrid($window, 1);
 
@@ -188,7 +202,7 @@ sub ask_from_entries_refW {
 
 sub waitbox {
     my ($title, $messages) = @_;
-    my ($t, $w, $h) = myTextbox(@$messages);
+    my ($t, $w, $h) = myTextbox(1, 0, @$messages);
     my $f = Newt::Component::Form(\undef, '', 0);
     Newt::CenteredWindow($w, $h, $title);
     $f->FormAddComponent($t);
