@@ -84,7 +84,7 @@ get_needed_files: $(DIRS) $(MOFILES)
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
 	perl -pe "s/ARCH/$(ARCH)/g ; s/PERL_VERSION/$$version/g ; s|/LIB/|/$(LIB)/|g " | \
-	perl -pe 'if (/\*/) { @l = glob; @l == 1 and $$_ = "$$l[0]\n" } ' > /tmp/list
+	perl -lpe 'if (m|\*|) { @l = glob; !m|\*.*/| || @l == 1 and $$_ = join("\n", @l) } ' > /tmp/list
 	rpm -ql perl-GTK2 | grep '^/usr/lib/perl5' >> /tmp/list
 
 	@missing=`perl -lne 'print if !-e $$_' /tmp/list`; [ -z "$$missing" ] || { echo "missing or multiple files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$missing" ; echo "missing or multiple files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
