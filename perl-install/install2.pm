@@ -595,7 +595,7 @@ sub main {
 
     #- needed very early for install_steps_gtk
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
-
+    
     $::o = $o = $::auto_install ?
       install_steps_auto_install->new($o) :
 	$o->{interactive} eq "stdio" ?

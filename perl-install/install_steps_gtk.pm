@@ -775,8 +775,6 @@ sub create_logo_window() {
 #------------------------------------------------------------------------------
 sub createXconf($$$) {
     my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
-    $mouse_type ||= "Microsoft";
-    $mouse_dev = devices::make($mouse_dev || "ttyS0");
 
     my $wacom;
     if ($wacom_dev) {
