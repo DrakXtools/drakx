@@ -2,7 +2,7 @@ package install_steps; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@filesToSaveForUpgrade @ISA);
+use vars qw(@filesToSaveForUpgrade @filesNewerToUseAfterUpgrade @ISA);
 
 #-######################################################################################
 #- misc imports
@@ -26,6 +26,9 @@ use fs;
 /etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules /etc/modules.conf
 );
 
+@filesNewerToUseAfterUpgrade = qw(
+/etc/profile
+);
 
 #-######################################################################################
 #- OO Stuff
@@ -287,6 +290,9 @@ sub beforeInstallPackages {
 		eval { cp_af("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
 	    }
 	}
+	foreach (@filesNewerToUseAfterUpgrade) {
+	    unlink "$o->{prefix}/$_.rpmnew";
+	}
     }
 
     #- some packages need such files for proper installation.
@@ -490,6 +496,13 @@ GridHeight=70
 	foreach (@filesToSaveForUpgrade) {
 	    renamef("$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_.mdkgiorig")
 	      if -e "$o->{prefix}$_.mdkgisave";
+	}
+
+	foreach (@filesNewerToUseAfterUpgrade) {
+	    if (-e "$o->{prefix}/$_.rpmnew" && -e "$o->{prefix}/$_") {
+		renamef("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgiorig");
+		renamef("$o->{prefix}/$_.rpmnew", "$o->{prefix}/$_");
+	    }
 	}
     }
 
