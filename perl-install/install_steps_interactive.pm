@@ -1153,6 +1153,7 @@ sub setRootPassword {
 	$o->ask_from_({
 	 title => N("Set root password and network authentication methods"), 
 	 messages => N("Set root password"),
+	 advanced_messages => authentication::kind2description(),
 	 interactive_help_id => "setRootPassword",
 	 cancel => ($o->{security} <= 2 && !$::corporate ? 
 		    #-PO: keep this short or else the buttons will not fit in the window
@@ -1167,7 +1168,7 @@ sub setRootPassword {
         } } }, [
 { label => N("Password"), val => \$sup->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },
-{ label => N("Authentication"), val => \$authentication_kind, list => [ authentication::kinds() ], format => \&authentication::kind2description, advanced => 1 },
+{ label => N("Authentication"), val => \$authentication_kind, type => 'list', list => [ authentication::kinds() ], format => \&authentication::kind2name, advanced => 1 },
         ]) or delete $sup->{password};
 
 	authentication::ask_parameters($o, $o->{netc}, $o->{authentication}, $authentication_kind) or goto &setRootPassword;
