@@ -141,9 +141,9 @@ sub configure_chooser {
 }
 
 sub configure_everything_or_configure_chooser {
-    my ($in, $options, $auto, $keyboard, $mouse) = @_;
+    my ($in, $options, $auto, $o_keyboard, $o_mouse) = @_;
     my $raw_X = Xconfig::xfree->read;
-    my $default = Xconfig::default::configure($keyboard, $mouse);
+    my $default = Xconfig::default::configure($o_keyboard, $o_mouse);
     my $has_conf = @{$raw_X->{xfree3}} || @{$raw_X->{xfree4}};
     $raw_X->{xfree3} = $default->{xfree3} if !@{$raw_X->{xfree3}};
     $raw_X->{xfree4} = $default->{xfree4} if !@{$raw_X->{xfree4}};
