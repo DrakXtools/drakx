@@ -63,7 +63,7 @@ our @tree =
 		require printerdrake; printerdrake::auto_detect(class_discard->new)  } ],
 	["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake",
 	 sub { 
-		require scanner; scanner::findScannerUsbport() }],
+		require scanner; scanner::detect() }],
 	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { 
 	    require mouse; &mouse::detect() } ],
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}],

@@ -39,7 +39,7 @@ $in = 'interactive'->vnew('su', 'default');
 $in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
 if ($::Manual) { manual(); quit() }
 my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
-@f = scanner::findScannerUsbport();
+@f = scanner::detect();
 $wait=undef;
 (@f) ? auto() : manual();
 quit();
@@ -62,7 +62,7 @@ sub manual {
 }
 
 sub dynamic {
-    @f = scanner::findScannerUsbport();
+    @f = scanner::detect();
     foreach (@f) { 
 	if (member($_->{val}{DESCRIPTION}), keys %$scanner::scannerDB) {
 	    my $name = $_->{val}{DESCRIPTION};

@@ -51,7 +51,7 @@ sub add2dll {
     close F;
 }
 
-sub findScannerUsbport {
+sub detect {
     my ($i, $elem, @res) = (0, {});
     foreach (grep { $_->{driver} =~ /scanner/ } detect_devices::usb_probe()) {
 	#my ($manufacturer, $model) = split '\|', $_->{description};
@@ -65,13 +65,15 @@ sub findScannerUsbport {
 							  }};
 	++$i;
     }
+    foreach ({$_->{media_type} =~ /scanner/  } detect_devices::getSCSI()) {
+	   push @res, { port => "/dev/usb/scanner$i", 
+				 val => { DESCRIPTION => $_->{info} },
+	   };
+	   ++$i;
+    }
     @res;
 }
 
-
-sub findScannerScsi {
-
-}
 
 sub readScannerDB {
     my ($file) = @_;
