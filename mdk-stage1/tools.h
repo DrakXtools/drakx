@@ -23,8 +23,12 @@
 #define _TOOLS_H_
 
 
-/* returns value of MemTotal tag from /proc/meminfo */
+void process_cmdline(void);
+int get_param(int i);
+void set_param(int i);
 int total_memory(void);
+int ramdisk_possible(void);
+enum return_type load_ramdisk(void);
 
 
 #endif

@@ -61,7 +61,7 @@ void error_message(char *msg)
 
 void wait_message(char *msg, ...)
 {
-	int width = 36;
+	int width = strlen(msg) + 12;
 	int height = 3;
 	char * title = "Please wait...";
 	newtComponent t, f;

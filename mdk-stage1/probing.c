@@ -47,7 +47,7 @@ static void pci_probing(enum driver_type type)
 	if (IS_EXPERT) {
 		error_message("You should be asked if you have some SCSI.");
 	} else {
-		wait_message("Installing SCSI module...");
+		wait_message("Installing SCSI module..."); sleep(1);
 		remove_wait_message();
 	}
 }
@@ -127,11 +127,11 @@ static void find_media(void)
 			tmp[count].model = strdup(buf);
 		}
 
+		log_message("IDE/%d: %s is a %s", tmp[count].type, tmp[count].name, tmp[count].model);
 		tmp[count].bus = IDE;
 		count++;
     	}
 
-	log_message("found %d IDE media", count);
 
 
 	/* ----------------------------------------------- */
@@ -215,7 +215,7 @@ static void find_media(void)
 				while (*chptr == ' ') chptr--;
 				*(chptr + 1) = '\0';
 				
-				strcat(tmp_model, ", ");
+				strcat(tmp_model, " ");
 				strcat(tmp_model, start);
 
 				tmp[count].model = strdup(tmp_model);
@@ -242,6 +242,7 @@ static void find_media(void)
 
 				if (*tmp_name) {
 					tmp[count].name = strdup(tmp_name);
+					log_message("SCSI/%d: %s is a %s", tmp[count].type, tmp[count].name, tmp[count].model);
 					tmp[count].bus = SCSI;
 					count++;
 				}
@@ -254,8 +255,6 @@ static void find_media(void)
 		
 	end_scsi:
 	}
-
-	log_message("adding SCSI totals %d media", count);
 
     
 	/* ----------------------------------------------- */

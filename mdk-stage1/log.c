@@ -65,9 +65,26 @@ void log_message(const char * s, ...)
 
 void log_perror(char *msg)
 {
-	log_message("%s %s", strerror(errno), msg);
+	log_message("%s: %s", msg, strerror(errno));
 }
 
+void log_progression(int divide_for_count)
+{
+	static int count = 0;
+	if (count <= 0) {
+		fprintf(logfile, ".");
+		fflush(logfile);
+		count = divide_for_count;
+	}
+	else
+		count--;
+}
+
+void log_progression_done(void)
+{
+	fprintf(logfile, "done\n");
+}
+	
 
 void open_log(void)
 {

@@ -27,7 +27,7 @@ ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 
  #- We can leave "-g" forever since stripping will remove everything
-CFLAGS = -Os -g -Wall -Werror -fomit-frame-pointer
+CFLAGS = -Os -g -Wall -Werror # -fomit-frame-pointer
 INCLUDES = -I.
 DEFS = -D_GNU_SOURCE=1 -DVERSION=\"$(VERSION)\"
 
@@ -103,6 +103,9 @@ stage1-network: stage1-network.o $(STAGE1OBJS) $(NETOBJS)
 stage1-network-diet: $(STAGE1OBJS) stage1-network.o $(NETOBJS)
 	gcc -nostdlib -o $@ ../../../tmp/dietlibc/start.o $^ ../../../tmp/dietlibc/dietlibc.a
 	strip -s $@
+
+test: stage1-network.o $(STAGE1OBJS) $(NETOBJS)
+	$(CC) -o st1 $^
 
 .c.o:
 	$(COMPILE) -c $<

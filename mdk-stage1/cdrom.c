@@ -59,10 +59,13 @@ static enum return_type try_with_device(char *dev_name)
 	}
 
 	log_message("found a Linux-Mandrake CDROM, good news!");
-/*
-	if (special_stage2 || total_memory() > 52 * 1024) loadMdkinstStage2();
-	if (rescue) umount("/tmp/rhimage");
-*/
+
+	if (IS_SPECIAL_STAGE2 || ramdisk_possible())
+		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
+
+	if (IS_RESCUE) umount("/tmp/image"); /* TOCHECK */
+
+	method_name = strdup("cdrom");
 	return RETURN_OK;
 }
 
@@ -82,7 +85,6 @@ enum return_type cdrom_prepare(void)
 
 	ptr = medias;
 	while (ptr && *ptr) {
-		log_message("have CDROM %s", *ptr);
 		count++;
 		ptr++;
 	}
@@ -96,7 +98,6 @@ enum return_type cdrom_prepare(void)
 	}
 
 	if (count == 1) {
-		log_message("Only one CDROM detected: %s (%s)", *medias, *medias_models);
 		results = try_with_device(*medias);
 		if (results == RETURN_OK)
 			return RETURN_OK;

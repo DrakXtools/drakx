@@ -22,7 +22,7 @@
 #ifndef _PROBING_H_
 #define _PROBING_H_
 
-enum media_type { DISK, FLOPPY, CDROM, TAPE, UNKNOWN_MEDIA };
+enum media_type { CDROM, DISK, FLOPPY, TAPE, UNKNOWN_MEDIA };
 
 enum bus_type { IDE, SCSI };
 

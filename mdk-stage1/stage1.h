@@ -22,21 +22,14 @@
 #ifndef _STAGE1_H_
 #define _STAGE1_H_
 
+#include "config-stage1.h"
+#include "tools.h"
+
 
 /* Some global stuff */
 
-struct cmdline_elem
-{
-	char * name;
-	char * value;
-};
-
-extern struct cmdline_elem params[500];
-
-
 enum return_type { RETURN_OK, RETURN_BACK, RETURN_ERROR };
 
-extern int stage1_mode;
 extern char * method_name;
 
 #define MODE_TESTING        (1 << 0)
@@ -47,16 +40,19 @@ extern char * method_name;
 #define MODE_PCMCIA         (1 << 5)
 #define MODE_CDROM          (1 << 6)
 #define MODE_LIVE           (1 << 7)
+#define MODE_SPECIAL_STAGE2 (1 << 8)
+#define MODE_RAMDISK        (1 << 9)
 
-#define IS_TESTING     ((stage1_mode) & MODE_TESTING)
-#define IS_EXPERT      ((stage1_mode) & MODE_EXPERT)
-#define IS_TEXT        ((stage1_mode) & MODE_TEXT)
-#define IS_RESCUE      ((stage1_mode) & MODE_RESCUE)
-#define IS_KICKSTART   ((stage1_mode) & MODE_KICKSTART)
-#define IS_PCMCIA      ((stage1_mode) & MODE_PCMCIA)
-#define IS_CDROM       ((stage1_mode) & MODE_CDROM)
-#define IS_LIVE        ((stage1_mode) & MODE_LIVE)
-
+#define IS_TESTING     (get_param(MODE_TESTING))
+#define IS_EXPERT      (get_param(MODE_EXPERT))
+#define IS_TEXT        (get_param(MODE_TEXT))
+#define IS_RESCUE      (get_param(MODE_RESCUE))
+#define IS_KICKSTART   (get_param(MODE_KICKSTART))
+#define IS_PCMCIA      (get_param(MODE_PCMCIA))
+#define IS_CDROM       (get_param(MODE_CDROM))
+#define IS_LIVE        (get_param(MODE_LIVE))
+#define IS_SPECIAL_STAGE2 (get_param(MODE_SPECIAL_STAGE2))
+#define IS_RAMDISK     (get_param(MODE_RAMDISK))
 
 void fatal_error(char *msg);
 

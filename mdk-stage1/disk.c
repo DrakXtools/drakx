@@ -32,6 +32,8 @@
 static enum return_type try_with_device(char *dev_name)
 {
 
+	/* I have to do the partition check here */
+
 	return RETURN_OK;
 }
 
@@ -48,7 +50,6 @@ enum return_type disk_prepare(void)
 	
 	medias = get_medias(DISK, QUERY_NAME);
 
-	/* TODO partition check */
 	ptr = medias;
 	while (ptr && *ptr) {
 		log_message("found DISK %s", *ptr);

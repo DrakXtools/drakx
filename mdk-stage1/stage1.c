@@ -38,7 +38,7 @@
 #include "probing.h"
 #include "frontend.h"
 #include "modules.h"
-
+#include "tools.h"
 #include "cdrom.h"
 #include "network.h"
 #include "disk.h"
@@ -46,71 +46,13 @@
 
 /* globals */
 
-struct cmdline_elem params[500];
-int stage1_mode = 0;
 char * method_name;
 
 
 void fatal_error(char *msg)
 {
-	printf("FATAL ERROR IN STAGE1: %s\n\nI can't recover from this, please reboot manually and send bugreport.\n", msg);
+	printf("FATAL ERROR IN STAGE1: %s\n\nI can't recover from this.\n", msg);
 	while (1);
-}
-
-
-void process_cmdline(void)
-{
-	char buf[512];
-	int fd, size, i, p;
-	
-	log_message("opening /proc/cmdline... ");
-	
-	if ((fd = open("/proc/cmdline", O_RDONLY, 0)) == -1)
-		fatal_error("could not open /proc/cmdline");
-	
-	size = read(fd, buf, sizeof(buf));
-	buf[size-1] = 0;
-	close(fd);
-
-	log_message("\t%s", buf);
-
-	i = 0; p = 0;
-	while (buf[i] != 0) {
-		char *name, *value = NULL;
-		int j = i;
-		while (buf[i] != ' ' && buf[i] != '=' && buf[i] != 0)
-			i++;
-		if (i == j) {
-			i++;
-			continue;
-		}
-		name = (char *) malloc(i-j + 1);
-		memcpy(name, &buf[j], i-j);
-		name[i-j] = 0;
-
-		if (buf[i] == '=') {
-			int k = i+1;
-			i++;
-			while (buf[i] != ' ' && buf[i] != 0)
-				i++;
-			value = (char *) malloc(i-k + 1);
-			memcpy(value, &buf[k], i-k);
-			value[i-k] = 0;
-		}
-
-		params[p].name = name;
-		params[p].value = value;
-		p++;
-		i++;
-		if (!strcmp(name, "expert")) stage1_mode |= MODE_EXPERT;
-		if (!strcmp(name, "text")) stage1_mode |= MODE_TEXT;
-		if (!strcmp(name, "rescue")) stage1_mode |= MODE_RESCUE;
-		if (!strcmp(name, "pcmcia")) stage1_mode |= MODE_PCMCIA;
-		if (!strcmp(name, "cdrom")) stage1_mode |= MODE_CDROM;
-	}
-	params[p].name = NULL;
-
-	log_message("\tgot %d args", p);
 }
 
 
@@ -184,17 +126,20 @@ enum return_type method_select_and_prepare(void)
 		return results;
 
 	if (!strcmp(choice, cdrom_install))
-		return cdrom_prepare();
+		results = cdrom_prepare();
 	else if (!strcmp(choice, disk_install))
-		return disk_prepare();
+		results = disk_prepare();
 	else if (!strcmp(choice, network_nfs_install))
-		return nfs_prepare();
+		results = nfs_prepare();
 	else if (!strcmp(choice, network_ftp_install))
-		return ftp_prepare();
+		results = ftp_prepare();
 	else if (!strcmp(choice, network_http_install))
-		return http_prepare();
+		results = http_prepare();
 
-	return RETURN_ERROR;
+	if (results != RETURN_OK)
+		method_select_and_prepare();
+
+	return RETURN_OK;
 }
 
 
@@ -204,51 +149,49 @@ int main(int argc, char **argv)
 	char ** argptr;
 	char * stage2_args[30];
 
-
 	if (getpid() > 50)
-		stage1_mode |= MODE_TESTING;
+		set_param(MODE_TESTING);
 
 	open_log();
-
 	log_message("welcome to the Linux-Mandrake install (stage1, version " VERSION " built " __DATE__ " " __TIME__")");
-
 	process_cmdline();
 	spawn_shell();
 	if (load_modules_dependencies())
 		fatal_error("could not open and parse modules dependencies");
-
 	init_frontend();
 
-	if (IS_CDROM)
+	if (IS_CDROM) {
+		/* try as automatic as possible with cdrom bootdisk */
 		ret = cdrom_prepare();
+		if (ret != RETURN_OK)
+			ret = method_select_and_prepare();
+	}
 	else
 		ret = method_select_and_prepare();
 
-	while (ret == RETURN_BACK)
-		ret = method_select_and_prepare();
-
 	finish_frontend();
+	close_log();
 
-	if (ret == RETURN_ERROR)
+	if (ret != RETURN_OK)
 		fatal_error("could not select an installation method");
 
-	if (!IS_LIVE) {
+	if (!IS_RAMDISK) {
 		if (symlink("/tmp/image/Mandrake/mdkinst", "/tmp/stage2") != 0)
 			fatal_error("symlink to /tmp/stage2 failed");
 	}
 
-	close_log();
+	if (IS_TESTING)
+	  return 0;
 
 	argptr = stage2_args;
 	*argptr++ = "/usr/bin/runinstall2";
-	*argptr++ = "--method";
 	*argptr++ = method_name;
 	*argptr++ = NULL;
 
 	execv(stage2_args[0], stage2_args);
 
-	printf("error in exec of stage2 :-(");
+	printf("error in exec of stage2 :-(\n");
 	fatal_error(strerror(errno));
 	
-	return 0; /* shut up compiler (we can't get here) */
+	return 0; /* shut up compiler (we can't get here anyway!) */
 }

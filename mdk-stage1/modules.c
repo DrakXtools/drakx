@@ -198,6 +198,5 @@ int my_insmod(char * mod_name)
 
 enum return_type ask_scsi_insmod(void)
 {
-	error_message("Try to load a SCSI module");
-	return RETURN_OK;
+	return ask_yes_no("Try to load a SCSI module");
 }
