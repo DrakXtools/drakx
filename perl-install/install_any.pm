@@ -439,7 +439,7 @@ sub selectSupplMedia {
 		useMedium($medium_name);
 
 		#- probe for an hdlists file and then look for all hdlists listed herein
-		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom/", $o->{packages}, $medium_name) };
+		eval { pkgs::psUsingHdlists($o, $suppl_method, "/mnt/cdrom", $o->{packages}, $medium_name) };
 		log::l("psUsingHdlists failed: $@") if $@;
 
 		#- copy latest compssUsers.pl and rpmsrate somewhere locally
@@ -467,7 +467,7 @@ sub selectSupplMedia {
 	    useMedium($medium_name);
 	    require "$suppl_method.pm";
 	    #- first, try to find an hdlists file
-	    eval { pkgs::psUsingHdlists($o, $suppl_method, "$url/", $o->{packages}, $medium_name) };
+	    eval { pkgs::psUsingHdlists($o, $suppl_method, $url, $o->{packages}, $medium_name, \&setup_suppl_medium) };
 	    if ($@) {
 		log::l("psUsingHdlists failed: $@");
 	    } else {
@@ -506,14 +506,7 @@ sub selectSupplMedia {
 	    close $f;
 	    if ($supplmedium) {
 		log::l("read suppl hdlist (via $suppl_method)");
-		$supplmedium->{prefix} = $url; #- for install_urpmi
-		if ($suppl_method eq 'ftp') {
-		    $url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
-			and $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
-		}
-		$supplmedium->{selected} = 1;
-		$supplmedium->{method} = $suppl_method;
-		$supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
+		setup_suppl_medium($supplmedium, $url, $suppl_method);
 	    } else {
 		log::l("no suppl hdlist");
 	    }
@@ -523,6 +516,18 @@ sub selectSupplMedia {
     }
     useMedium($prev_asked_medium); #- back to main medium
     return $suppl_method;
+}
+
+sub setup_suppl_medium {
+    my ($supplmedium, $url, $suppl_method) = @_;
+    $supplmedium->{prefix} = $url; #- for install_urpmi
+    if ($suppl_method eq 'ftp') {
+	$url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
+	    and $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
+    }
+    $supplmedium->{selected} = 1;
+    $supplmedium->{method} = $suppl_method;
+    $supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
 }
 
 sub setPackages {
