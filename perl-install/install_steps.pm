@@ -822,12 +822,14 @@ sub setupBootloaderBefore {
 					 );
 
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
-	my $has_aurora = do {
-	    my $p = pkgs::packageByName($o->{packages}, 'Aurora');
-	    $p && pkgs::packageFlagInstalled($p);
-	};
+	my $need_fb;
+	foreach (qw(Aurora bootsplash)) {
+	    my $p = pkgs::packageByName($o->{packages}, $_);
+	    $p && pkgs::packageFlagInstalled($p) and $need_fb = 1;
+	}
+
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
-			    ($force_vga || $vga && $has_aurora) && $o->{vga});
+			    ($force_vga || $vga && $need_fb) && $o->{vga});
 	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
 
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
