@@ -159,7 +159,9 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
 #- image file selection for new theme
 $first{widgets}{button}{file}->signal_connect(clicked => sub {
-	my $file_dialog = new Gtk2::FileSelection(N("choose image"));
+	my $file_dialog = gtkset_modal(Gtk2::FileSelection->new(N("choose image")), 1);
+	$file_dialog->set_transient_for($window->{rwindow});
+
 	$file_dialog->set_filename($first{widgets}{label}{file}->get_text ne N("choose image file") ? $first{widgets}{label}{file}->get_text : '~/');
 	$file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
 	$file_dialog->ok_button->signal_connect(clicked => sub { $first{widgets}{label}{file}->set_text($file_dialog->get_filename); $file_dialog->destroy });
