@@ -385,7 +385,7 @@ sub beforeInstallPackages {
     install_any::write_fstab($o);
 
     require network::network;
-    network::network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
+    network::network::add2hosts("$o->{prefix}/etc/hosts", "localhost", "127.0.0.1");
 
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
