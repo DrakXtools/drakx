@@ -121,7 +121,7 @@ sub write_resolv_conf {
 	    push @unknown, $_;
 	}
     }
-    unlink $file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
+    unlink $file if -l $file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
 
     if (@{$new{search}} || @{$new{nameserver}}) {
 	$prev{$_} = [ difference2($prev{$_} || [], $new{$_}) ] foreach keys %new;
