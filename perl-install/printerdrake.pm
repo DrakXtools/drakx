@@ -1578,10 +1578,11 @@ sub main {
 		# This entry and the check for this entry have to use
 		# the same translation to work properly
 		my $spoolerentry = _("Printing system: ");
-		# Show a queue list window when there is at least one queue
-		# or when we are in expert mode
+		# Show a queue list window when there is at least one queue,
+		# when we are in expert mode, or when we are not in the
+		# installation.
 		unless ((%{$printer->{configured} || {}} == ()) && 
-			(!$::expert)) {
+			(!$::expert) && ($::isInstall)) {
 		    # Cancelling the printer type dialog should leed to this
 		    # dialog
 		    $continue = 1;
