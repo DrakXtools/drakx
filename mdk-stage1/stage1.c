@@ -461,6 +461,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	execve(stage2_args[0], stage2_args, grab_env());
 
 	printf("error in exec of stage2 :-(\n");
+	printf("trying to execute '/usr/bin/runinstall2' from the installation volume,\nthe following fatal error occurred\n");
 	fatal_error(strerror(errno));
 	
 	return 0; /* shut up compiler (we can't get here anyway!) */
