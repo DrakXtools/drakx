@@ -49,6 +49,9 @@ install: build
 	 #- overwrite stuff.so of drakxtools because it doesn't contain C_DRAKX stuff
 	sudo cp -f ../perl-install/c/blib/arch/auto/stuff/stuff.so $(DEST_LIVETREE)/usr/lib/libDrakX/auto/c/stuff
 
+	 #- overwrite MDK-Common
+	sudo cp -f ../../soft/perl-MDK-Common/MDK/Common/*.pm $(DEST_LIVETREE)/usr/$(LIB_NAME)/perl5/vendor_perl/*/MDK/Common
+
 	 #- duplicated :(
 	sudo perl -pi -e 's/#[-+].*//; $$_ = "\n" if (/^=(head|begin)/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $(DEST_STAGE2)/*.pm `find $(DEST_LIVETREE)/usr/lib/libDrakX -name "*.pm"`
 
