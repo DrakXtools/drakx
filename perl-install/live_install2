@@ -6,7 +6,8 @@ $dir .= "/../../..";
 
 #- allow devfsd to enable a faster upgrade.
 system "modprobe loop";
-system "killall devfsd >/dev/null 2>/dev/null";
+my $devfsd_pid = `/sbin/pidof devfsd`;
+$devfsd_pid > 0 and kill 15, $devfsd_pid;
 
 #- perl version of the install, we use directly the version we found,
 #- this means there SHOULD BE no module compiled for an older version of perl
@@ -59,5 +60,8 @@ $ENV{DISPLAY} and system "xset", "fp", "rehash";
 
 system "/bin/rm", "-rf", "/tmp/drakx";
 system "/bin/rm", "-rf", "/tmp/rhimage";
+
+#- restore devfsd if it was running.
+$devfsd_pid > 0 and system "/sbin/devfsd /dev";
 
 exec "/bin/sync";
