@@ -327,7 +327,6 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
     push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-    push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     # BUG: if first snd card is managed by OSS and the second one by alsa, we do not install alsa-utils:
