@@ -329,7 +329,7 @@ sub selectInstallClass {
 
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{doInstallStep}{done}) {
         $o->setPackages(\@install_classes);
-        $o->findPackagesToUpgrade() if $o->{isUpgrade};
+        $o->selectPackagesToUpgrade() if $o->{isUpgrade};
     }
 }
 
@@ -404,7 +404,7 @@ sub formatPartitions {
 #-PADTODO
 sub choosePackages {
     $o->setPackages($o, \@install_classes) if $_[1] == 1;
-    $o->findPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
+    $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
     $o->choosePackages($o->{packages}, $o->{compss});
     $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}};
 }

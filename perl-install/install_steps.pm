@@ -131,9 +131,9 @@ sub setPackages {
     my ($o, $install_classes) = @_;
     install_any::setPackages($o, $install_classes);
 }
-sub findPackagesToUpgrade {
+sub selectPackagesToUpgrade {
     my ($o) = @_;
-    install_any::findPackagesToUpgrade($o);
+    install_any::selectPackagesToUpgrade($o);
 }
 
 sub choosePackages($$$) {

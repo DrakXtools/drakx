@@ -99,8 +99,8 @@ sub getAvailableSpace {
     do { $_->{mntpoint} eq '/'    and return $_->{size} * 512 } foreach @{$o->{fstab}};
 
     if ($::testing) {
-	log::l("taking 200MB for testing");
-	return 200 << 20;
+	log::l("taking 2000MB for testing");
+	return 2000 << 20;
     }
     die "missing root partition";
 }
@@ -132,13 +132,13 @@ sub setPackages($$) {
     }
 
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
-    ($o->{packages_}{ind}, $o->{packages_}{select_level}) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
+    ($o->{packages_}{ind}, $o->{packages_}{select_level}) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
 }
 
-sub findPackagesToUpgrade($) {
+sub selectPackagesToUpgrade($) {
     my ($o) = @_;
 
-    pkgs::findPackagesToUpgrade($o->{packages}, $o->{prefix});
+    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
 }
 
 sub addToBeDone(&$) {

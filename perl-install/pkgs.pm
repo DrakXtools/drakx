@@ -37,18 +37,22 @@ sub allpackages {
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
     my ($n, $v);
-    $p->{base} ||= $base;
-    $p->{selected} = -1; #- selected by user
-    my %l; @l{@{$p->{deps} || die "missing deps file"}} = ();
-    while (do { my %l = %l; while (($n, $v) = each %l) { last if $v != 1; } $n }) {
-	$l{$n} = 1;
-	my $i = Package($packages, $n) or next;
-	$i->{base} ||= $base;
-	$i->{deps} or log::l("missing deps for $n");
-	unless ($i->{selected}) {
-	    $l{$_} ||= 0 foreach @{$i->{deps} || []};
+    unless ($p->{installed}) { #- if the same or better version is installed, do not select.
+	$p->{base} ||= $base;
+	$p->{selected} = -1; #- selected by user
+	my %l; @l{@{$p->{deps} || die "missing deps file"}} = ();
+	while (do { my %l = %l; while (($n, $v) = each %l) { last if $v != 1; } $n }) {
+	    $l{$n} = 1;
+	    my $i = Package($packages, $n) or next;
+	    $i->{base} ||= $base;
+	    $i->{deps} or log::l("missing deps for $n");
+	    unless ($i->{installed}) {
+		unless ($i->{selected}) {
+		    $l{$_} ||= 0 foreach @{$i->{deps} || []};
+		}
+		$i->{selected}++ unless $i->{selected} == -1;
+	    }
 	}
-	$i->{selected}++ unless $i->{selected} == -1;
     }
     1;
 }
@@ -231,8 +235,8 @@ sub setShowFromCompss($$$) {
     }
 }
 
-sub setSelectedFromCompssList($$$$$) {
-    my ($compssListLevels, $packages, $size, $install_class, $lang) = @_;
+sub setSelectedFromCompssList($$$$$$) {
+    my ($compssListLevels, $packages, $size, $install_class, $lang, $isUpgrade) = @_;
     my ($level, $ind) = 100;
 
     my @packages = values %$packages;
@@ -249,13 +253,13 @@ sub setSelectedFromCompssList($$$$$) {
 	last if $level == 0;
 
 	verif_lang($p, $lang) or next;
-	&select($packages, $p);
+	&select($packages, $p) unless $isUpgrade;
 
 	my $nb = 0; foreach (@packages) {
 	    $nb += $_->{size} if $_->{selected};
 	}
 	if ($nb > $size) {
-	    unselect($packages, $p, $nb - $size);
+	    unselect($packages, $p, $nb - $size) unless $isUpgrade;
 	    last;
 	}
     }
@@ -288,7 +292,7 @@ sub getHeader($) {
     $p->{header};
 }
 
-sub findPackagesToUpgrade($$) {
+sub selectPackagesToUpgrade($$) {
     my ($packages, $prefix) = @_;
 
     log::l("reading /usr/lib/rpm/rpmrc");
@@ -296,13 +300,19 @@ sub findPackagesToUpgrade($$) {
     log::l("\tdone");
 
     my $db = c::rpmdbOpenForTraversal($prefix) or die "unable to open $prefix/var/lib/rpm/packages.rpm";
-    my %installedFilesToRemove; #- files installed but not present in the package to upgrade -> to remove.
+    my %installedFilesForUpgrade; #- help searching package to upgrade in regard to already installed files.
 
-    #- mark all files which are not in /etc/rc.d/ for packages which are already installed.
+    #- mark all files which are not in /etc/rc.d/ for packages which are already installed but which
+    #- are not in the packages list to upgrade.
     c::rpmdbTraverse($db, sub {
 			 my ($header) = @_;
-			 my @filenames = c::headerGetEntry($header, 'filenames');
-			 @installedFilesToRemove{grep { $_ !~ m@/etc/rc.d/@ } @filenames} = ();
+			 my $p = $packages->{c::headerGetEntry($header, 'name')};
+			 if ($p) {
+			     $p->{installed} = 1 if c::headerGetEntry($header, 'version') ge $p->{version};
+			 } else {
+			     my @installedFiles = c::headerGetEntry($header, 'filenames');
+			     @installedFilesForUpgrade{grep { $_ !~ m@^/etc/rc.d/@ } @installedFiles} = ();
+			 }
 		     });
 
     #- find new packages to upgrade.
@@ -313,17 +323,32 @@ sub findPackagesToUpgrade($$) {
 						    my ($header) = @_;
 						    $skipThis ||= (c::headerGetEntry($header, 'version') ge $p->{version});
 						}) == 0; #- skip if not installed (package not found in current install).
+
 	#- select the package if it is already installed with a lower version or simply not installed.
-	pkgs::select($packages, $p) unless ($skipThis || $p->{selected});
+	unless ($skipThis) {
+	    pkgs::select($packages, $p) unless $p->{selected};
+
+	    #- keep in mind installed files which are not being updated. doing this costs in
+	    #- execution time but use less memory, else hash all installed files and unhash
+	    #- all file for package marked for upgrade.
+	    c::rpmdbNameTraverse($db, $p->{name}, sub {
+				     my ($header) = @_;
+				     my @installedFiles = c::headerGetEntry($header, 'filenames');
+				     @installedFilesForUpgrade{ grep { $_ !~ m@^/etc/rc.d/@ } @installedFiles} = ();
+				 });
+	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
+	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
+	}
     }
 
-    #- unmark all files for all packages marked for upgrade.
+    #- unmark all files for all packages marked for upgrade. it may not have been done above
+    #- since some packages may have been selected by depsList.
     foreach (values %$packages) {
 	my $p = $_;
 
 	if ($p->{selected}) {
-	    my @availFiles = $p->{filename} ? c::headerGetEntry($p->{header}, 'filename') : ();
-	    map { delete $installedFilesToRemove{$_} } grep { $_ !~ m@/etc/rc.d/@ } @availFiles;
+	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
+	    map { delete $installedFilesForUpgrade{$_} } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
 	}
     }
 
@@ -332,15 +357,22 @@ sub findPackagesToUpgrade($$) {
 	my $p = $_;
 
 	unless ($p->{selected}) {
-	    my @availFiles = $p->{filename} ? c::headerGetEntry($p->{header}, 'filename') : ();
+	    my @availFiles = $p->{header} ? c::headerGetEntry($p->{header}, 'filenames') : ();
 	    my $toSelect = 0;
-	    map { if (exists $installedFilesToRemove{$_}) {
-		$toSelect = 1; delete $installedFilesToRemove{$_} } } grep { $_ !~ m@/etc/rc.d/@ } @availFiles;
+	    map { if (exists $installedFilesForUpgrade{$_}) {
+		$toSelect = 1; delete $installedFilesForUpgrade{$_} } } grep { $_ !~ m@^/etc/rc.d/@ } @availFiles;
 	    pkgs::select($packages, $p) if ($toSelect);
 	}
     }
 
-    #- select packages which obseletes other package, TODO.
+    #- select packages which obseletes other package, obselete package are not removed,
+    #- should we remove them ? this could be dangerous !
+    foreach (values %$packages) {
+	my $p = $_;
+
+	my @obsoletes = $p->{header} ? c::headerGetEntry($p->{header}, 'obsoletes') : ();
+	map { pkgs::select($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
+    }
 
     #- consistency check: deselect all packages with a version lower to already existing.
     foreach (values %$packages) {
