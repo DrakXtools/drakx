@@ -482,21 +482,24 @@ sub interactive_mode() {
     my $button = {};
     my $disable = sub { my ($b) = @_; $button->{$_}->set_sensitive($_ ne $b) foreach keys %$button };
 
+    local $::Wizard_no_previous = 1;
     gtkadd($window1->{window},
 	   gtkpack_(Gtk2::VBox->new(0, 2), 
                  if_(!$::isEmbedded, 0, gtkcreate_img("drakfont.620x57")), 
                  0, Gtk2::WrappedLabel->new(N("Font List")),
                  1, create_fontsel(),
-                 0, gtkpack(gtkset_layout(Gtk2::HButtonBox->new, 'end'),
-                            gtksignal_connect(Gtk2::Button->new(N("About")), clicked => \&help),
-                            gtksignal_connect(Gtk2::Button->new(N("Options")), clicked => \&appli_choice),
-                            gtksignal_connect(Gtk2::Button->new(N("Uninstall")), clicked => \&uninstall),
-                            gtksignal_connect(Gtk2::Button->new(N("Import")), clicked => \&advanced_install),
-                            Gtk2::Label->new("  "),
-                            gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { Gtk2->main_quit }),
-                           ),
+                 0, create_okcancel( my $oc = {
+                                     ok_clicked => sub { Gtk2->main_quit },
+                                    },
+                                    undef, undef, '',
+                                    [ N("About"),     \&help, 1 ],
+                                    [ N("Options"),   \&appli_choice, 1 ],
+                                    [ N("Uninstall"), \&uninstall, 1 ],
+                                    [ N("Import"),    \&advanced_install, 1 ],
+                                   ),
                 ),
           );
+    $oc->{ok}->set_label(N("Close"));
 
     $disable->('font_list');
     $window1->{rwindow}->show_all;

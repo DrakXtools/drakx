@@ -95,19 +95,10 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                                     ),
                                                         ),
                                             ),
-                                0, gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'end'),
-                                          gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit(0) }),
-                                          $button_reset = gtksignal_connect(Gtk2::Button->new(N("Reset")), clicked => sub {
-                                              $its_reset = 1;
-                                              $timer = Glib::Timeout->add(120, \&update_time);
-                                              Repaint($drawing_area, 1);
-                                              $calendar->select_month($old_month, $old_year);
-                                              $calendar->select_day($old_day);
-                                              $button_reset->set_sensitive(0);
-                                              $its_reset = 0;
-                                          }),
-                                          gtksignal_connect(Gtk2::Button->new(N("Ok")), 
-                                                                       clicked => sub {
+                                0, create_okcancel(my $w =
+                                                   {
+                                                    cancel_clicked => sub { ugtk2->exit(0) },
+                                                    ok_clicked => sub {
 									   if ($check_ntp->get_active) {
 									       my $choosed_serv = $combo_ntpserver->entry->get_text;
 									       $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
@@ -128,10 +119,23 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
 									   -e '/sbin/hwclock' and system('/sbin/hwclock --systohc');
 									   system("dcop kicker Panel restart") if $ENV{DESKTOP} eq 'kde';
 									   ugtk2->exit(0);
-                                                                       }),
-                                          )
+                                            },
+                                                   },
+                                                   undef, undef, '',
+                                                   [ N("Reset"), sub {
+                                                         $its_reset = 1;
+                                                         $timer = Glib::Timeout->add(120, \&update_time);
+                                                         Repaint($drawing_area, 1);
+                                                         $calendar->select_month($old_month, $old_year);
+                                                         $calendar->select_day($old_day);
+                                                         $button_reset->set_sensitive(0);
+                                                         $its_reset = 0;
+                                                     } ]
+                                                  ),
                                 )
                        );
+$button_reset = $w->{buttons}{N("Reset")};
+
 my $servers = get_server();
 $combo_ntpserver->set_popdown_strings(@$servers);
 if (-e $ntpfile && -e $ntpdlock) {

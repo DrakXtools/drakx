@@ -126,13 +126,13 @@ Select permissions to see/edit", $level)),
                                     0, Gtk2::VBox->new,
                                    ),
                           ),
-                 0, gtkpack(Gtk2::HButtonBox->new,
-                            gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => 
-                                              sub { unless (fork()) { exec("drakhelp --id drakperm") } }),
-                            Gtk2::Label->new(""),
-                            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit }),
-                            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => \&save_perm),
-                           )
+                 0, create_okcancel({
+                                     cancel_clicked => sub { ugtk2->exit },
+                                     ok_clicked => \&save_perm,
+                                    },
+                                    undef, undef, '',
+                                    [ N("Help"), sub { unless (fork()) { exec("drakhelp --id drakperm") } } ],
+                                   )
                 )
        );
 $W->show_all;
@@ -239,8 +239,6 @@ sub row_setting_dialog {
     $dlg->set_transient_for($w->{rwindow}) unless $::isEmbedded;
     $dlg->set_modal(1);
 #    $dlg->set_resizable(0);
-    my $ok          = Gtk2::Button->new(N("Ok"));
-    my $cancel      = Gtk2::Button->new(N("Cancel"));
     my $browse = new Gtk2::Button(N("browse"));
     my $file        = new Gtk2::Entry;
     my ($other, $group, $user, $s) = reverse(split(//, $model->get($iter, 4))) if $iter;
@@ -270,8 +268,8 @@ sub row_setting_dialog {
     #- dlg widgets settings
     my %s_right = get_right($s);
      
+    my $alrd_exsts = defined $iter;
     $file->set_text($model->get($iter, 1)) if $iter;
-    $ok->set_sensitive(!$model->get($iter, 0)) if $iter;
 
     my $users  = Gtk2::OptionMenu->new;
     $users->set_popdown_strings(&get_user_or_group('users'));
@@ -299,7 +297,6 @@ sub row_setting_dialog {
     }
      
      
-    $cancel->signal_connect(clicked => sub { $dlg->destroy });
     $browse->signal_connect(clicked => sub {
                      my $file_dlg = new Gtk2::FileSelection(N("Path selection"));
                      $file_dlg->set_modal(1);
@@ -313,29 +310,6 @@ sub row_setting_dialog {
                                                });
                     });
     my %perms;
-    $ok->signal_connect(clicked => sub {
-                            my ($path, $user, $group, $perms, $_idx);
-                            $path = $file->get_text;
-                            if ($usr_check->get_active) {
-                                $user  = 'current';
-                                $group = '';
-                            } else {
-                                $user  = $users->entry->get_text;
-                                $group = $groups->entry->get_text;
-                            }
-			    $perms = sprintf("%03o", eval(join('', "0b",
-							     (map { $perms{$_}->get_active || 0 } reverse @bits),
-							     (map { my $owner = $_;map_index { $perms{$owner}{$_}->get_active || 0 } @rights } @owners))));
-                            # create new item if needed (that is when adding a new one) at end of list
-                            if (!$iter) {
-                                $iter = $model->append;
-                                push @rules, { path => $path, user => $user, group => $group, perms => $perms, index => $index };
-                                $model->set($iter, 5 => $index++);
-                            }
-                            $model->set($iter, 1 => $path, 2 => $user, 3 => $group, 4 => $perms);
-                            $dlg->destroy;
-                            $modified++;
-                        });
 
     gtkpack_($dlg->vbox,
              0, gtkadd(Gtk2::Frame->new(N("Path")),
@@ -385,11 +359,40 @@ sub row_setting_dialog {
     $perms{gid}->set_active($s_right{write});
     $perms{suid}->set_active($s_right{read});
 
-    gtkadd($dlg->action_area,
-           $cancel,
-           $ok
+    gtkadd($dlg->action_area, 
+           create_okcancel(my $w =
+                           {
+                            cancel_clicked => sub { $dlg->destroy },
+                            ok_clicked => sub {
+                                my ($path, $user, $group, $perms, $_idx);
+                                $path = $file->get_text;
+                                if ($usr_check->get_active) {
+                                    $user  = 'current';
+                                    $group = '';
+                                } else {
+                                    $user  = $users->entry->get_text;
+                                    $group = $groups->entry->get_text;
+                                }
+                                $perms = sprintf("%03o", eval(join('', "0b",
+                                                                   (map { $perms{$_}->get_active || 0 } reverse @bits),
+                                                                   (map { my $owner = $_;map_index {
+                                                                       $perms{$owner}{$_}->get_active || 0
+                                                                   } @rights } @owners))));
+                                # create new item if needed (that is when adding a new one) at end of list
+                                if (!$iter) {
+                                    $iter = $model->append;
+                                    push @rules, { path => $path, user => $user, group => $group, perms => $perms, index => $index };
+                                    $model->set($iter, 5 => $index++);
+                                }
+                                $model->set($iter, 1 => $path, 2 => $user, 3 => $group, 4 => $perms);
+                                $dlg->destroy;
+                                $modified++;
+                            }
+                           },
+                          ),
           );
      
+    $w->{ok}->set_sensitive(!$model->get($iter, 0)) if $alrd_exsts;
     $dlg->show_all;
 
 }

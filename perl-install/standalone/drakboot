@@ -284,13 +284,14 @@ gtkadd($window,
                                  )
                        ),
                  1, Gtk2::VBox->new,
-                 0, gtkadd(Gtk2::HButtonBox->new,
-                        gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit(0) }),
-                        gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
+                0, create_okcancel({
+                                    cancel_clicked => sub { ugtk2->exit(0) },
+                                    ok_clicked => sub {
                                               Xconfig::various::runlevel($x_mode ? 5 : 3);
                                               updateAutologin();
                                               ugtk2->exit(0);
-                                          }),
+                                          }
+                                   },
                        )
                )
       );

@@ -227,8 +227,12 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
 
 
 ####################### OK CANCEL BUTTONS ##################################
-my $bok = gtksignal_connect(Gtk2::Button->new(N("Ok")),
-                            'clicked' => sub {
+gtkpack_($vbox,
+         1, gtkshow($notebook),
+         0, create_okcancel(my $oc =
+                            {
+                             cancel_clicked => sub { ugtk2->exit(0) },
+                             ok_clicked => sub {
                                 my $seclevel_value = $seclevel_entry->entry->get_text;
                                 my $secadmin_check_value = $secadmin_check->get_active;
                                 my $secadmin_value = $secadmin_entry->get_text;
@@ -272,21 +276,14 @@ my $bok = gtksignal_connect(Gtk2::Button->new(N("Ok")),
                                 remove_wait_msg($w);
 
                                 ugtk2->exit(0);
-                            });
-
-my $bcancel = gtksignal_connect(Gtk2::Button->new(N("Cancel")),
-                                'clicked' => sub { ugtk2->exit(0) });
-gtkpack_($vbox,
-         1, gtkshow($notebook),
-         0, gtkpack(Gtk2::HButtonBox->new,
-                    gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { unless (fork()) { exec("drakhelp --id draksec") } }),
-                    Gtk2::Label->new(""),
-                    $bcancel,
-                    $bok,
-                   ),
+                            }
+                            },
+                            undef, undef, '',
+                            [ N("Help"), sub { unless (fork()) { exec("drakhelp --id draksec") } } ],
+                           ),
         );
-$bcancel->can_default(1);
-$bcancel->grab_default;
+$oc->{cancel}->can_default(1);
+$oc->{cancel}->grab_default;
 
 $w->main;
 ugtk2->exit(0);

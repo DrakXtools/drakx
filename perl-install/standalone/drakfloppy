@@ -99,17 +99,13 @@ $window->{window}->add(
                                                    ),
                                          ),
                                 1, Gtk2::VBox->new,
-                                0, gtkpack__(new Gtk2::HButtonBox(),
-                                             gtksignal_connect(Gtk2::Button->new(N("Cancel")),
-                                                               clicked => sub { ugtk2->exit(0) }
-                                                              ),
-                                             gtksignal_connect(Gtk2::Button->new(N("Preferences")), clicked => \&pref_dialog),
-                                             gtksignal_connect(gtkset_tip($tips, 
-                                                                          Gtk2::Button->new(N("Ok")),
-                                                                          N("Build the disk")),
-                                                               clicked => \&build_it
-                                                              ),
-                                            ),
+                                0, create_okcancel({
+                                                    cancel_clicked => sub { ugtk2->exit(0) },
+                                                    ok_clicked  => \&build_it,
+                                                   },
+                                                   undef, undef, '',
+                                                   [ N("Preferences"), \&pref_dialog, 0 ],
+                                                  ),
                                ),
                       );
 
@@ -188,21 +184,23 @@ sub pref_dialog() {
     $remove_but->set_sensitive(scalar @modules);
     @temp_modules = ();
 
-    gtkpack($dialog->action_area,
-            gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $dialog->destroy }),
-            gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
-                                  # save values:
-                                  $options{$_} = $buttons{$_}->get_active foreach keys %buttons;
-                                  my $val;
-                                  @modules = ();
-                                  $list_model->foreach(sub {
-                                                           my ($model, $_path, $iter) = @_;
-                                                           push @modules, $model->get($iter, 0);
-                                                           return 0;
-                                                       }, $val);
-                                  $dialog->destroy;
-                              }),
-           );
+    gtkadd($dialog->action_area,
+           create_okcancel({
+                            cancel_clicked => sub { $dialog->destroy },
+                            ok_clicked => sub { 
+                                # save values:
+                                $options{$_} = $buttons{$_}->get_active foreach keys %buttons;
+                                my $val;
+                                @modules = ();
+                                $list_model->foreach(sub {
+                                                         my ($model, $_path, $iter) = @_;
+                                                         push @modules, $model->get($iter, 0);
+                                                         return 0;
+                                                     }, $val);
+                                $dialog->destroy;
+                            },
+                           }),
+          );
     $dialog->show_all;
     $dialog->run;
 }
