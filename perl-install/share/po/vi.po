@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX for Mandrake Linux 9.x\n"
-"POT-Creation-Date: 2003-03-12 14:29+0100\n"
-"PO-Revision-Date: 2003-03-11 18:09+0700\n"
+"POT-Creation-Date: 2003-03-12 17:27+0100\n"
+"PO-Revision-Date: 2003-03-15 11:14+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
 "Language-Team: Gnome-Vi <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -7364,7 +7364,7 @@ msgstr "Format các phân vùng"
 #: ../../steps.pm:1
 #, c-format
 msgid "Partitioning"
-msgstr "Tạo phân vùng"
+msgstr "Phân vùng đĩa"
 
 #: ../../steps.pm:1
 #, c-format
@@ -11211,14 +11211,14 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "In/Quét/Thẻ photo trên \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
-"Để biết về các tùy chọn có sẵn cho máy in hiện thời, hãy đọc danh sách bên "
-"dưới hoặc nhấn chuột lên \"Danh sách tùy chọn máy in\" .%s%s\n"
+"Để biết về các tùy chọn hiện có cho máy in hiện thời, hãy đọc danh sách bên "
+"dưới hoặc nhấn lên \"Danh sách tùy chọn in\". %s%s%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11465,7 +11465,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
-msgstr ""
+msgstr "Firmware-Upload cho HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12545,7 +12545,7 @@ msgstr "Thiếu IP máy chủ!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
+msgstr "Nếu không chọn cổng, 631 sẽ được lấy làm mặc định."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12683,11 +12683,16 @@ msgid ""
 "print japanese text on a printer set up on a remote machine, you have to "
 "activate this function on that remote machine."
 msgstr ""
+"Bật chức năng này cho phép in tập tin văn bản đơn thuần bằng tiếng Nhật. Chỉ "
+"dùng chức năng này khi bạn muốn in tiếng Nhật và bạn không in được các ký tự "
+"latin có dấu nữa cũng như điều chỉnh lề và kích cỡ chữ... . Thiết lập này "
+"chỉ tác động tới máy in cụ thể trên máy tính này, nếu muốn in trên máy in ở "
+"xa, bạn phải bật chức năng này trên máy in đó."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Japanese text printing mode"
-msgstr "Thay đổi hệ thống in"
+msgstr "Chế độ in chữ Nhật Bản"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12763,9 +12768,9 @@ msgstr ""
 "được từ máy tính ở xa và cụ thể là từ máy ở xa nào."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer configuration"
-msgstr "Cấu hình chia sẻ máy in CUPS"
+msgstr "Cấu hình máy in CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12804,6 +12809,13 @@ msgid ""
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
+"Máy HP LaserJet 1000 cần firmware của nó được tải lên sau khi bật điện. Hãy "
+"tải xuống gói Windows driver từ HP web site ( firmware trên đĩa CD của máy "
+"in không làm việc) và giải nén tập tin firmware ra bằng cách chạy tập tin tự "
+"giải nén '.exe' với tiện ích 'unzip' và tìm tập tin 'sihp1000.img'. Hãy sao "
+"chép tập tin này vào thư mục '/etc/printer'. Tại đó, nó được phát hiện bởi "
+"script của trình tải lên tự động và được tải lên vào bất kỳ lúc nào mà máy "
+"in được nối và bật điện.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -19540,40 +19552,32 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Máy chủ NFS, SMB, SSH, ủy nhiệm"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Audio station"
-msgstr "Đa phương tiện"
+msgstr "Audio"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Sound playing/editing programs"
-msgstr "Các chương trình chơi Audio-Video/soạn thảo"
+msgstr "chương trình chơi / biên tập âm thanh"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video station"
-msgstr "Trò chơi"
+msgstr "Video"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video playing programs"
-msgstr "Các chương trình chơi Audio-Video/soạn thảo"
+msgstr "Các chương trình chơi Video"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphic station"
-msgstr "Trò chơi"
+msgstr "Đồ họa"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphics programs"
-msgstr "Các chương trình đồ hoạ như là Gimp"
+msgstr "Các chương trình đồ họa"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
-msgstr ""
-"Các công cụ đọc và gửi thư tín và tin tức (pine, mutt, tin..) và để duyệt Web"
+msgstr "Bộ công cụ đọc và gửi thư, tin tức và duyệt Web"
 
 #~ msgid "Printer sharing"
 #~ msgstr "Chia sẻ máy in"
