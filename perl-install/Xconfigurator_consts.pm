@@ -1,11 +1,11 @@
 use common qw(:common);
 
 %depths = (
-      8 => __("256 colors"),
-     15 => __("32 thousand colors"),
-     16 => __("65 thousand colors"),
-     24 => __("16 million colors"),
-     32 => __("4 billion colors"),
+      8 => __("256 colors (8 bits)"),
+     15 => __("32 thousand colors (15 bits)"),
+     16 => __("65 thousand colors (16 bits)"),
+     24 => __("16 million colors (24 bits)"),
+     32 => __("4 billion colors (32 bits)"),
 );
 @depths = ikeys(%depths);
 

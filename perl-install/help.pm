@@ -4,46 +4,46 @@ use common qw(:common);
 
 %steps = (
 selectLanguage =>
- __("
-      Quelques sites de recherche :
-      Quelques sites de recherche :
-      Quelques sites de recherche :
-      Quelques sites de recherche :
-      Quelques sites de recherche :
-      Quelques sites de recherche :
-      Quelques sites de recherche :
- 
-"),
-#__("Choose preferred language for install and system usage."),
+# __("
+#      Quelques sites de recherche :
+#      Quelques sites de recherche :
+#      Quelques sites de recherche :
+#      Quelques sites de recherche :
+#      Quelques sites de recherche :
+#      Quelques sites de recherche :
+#      Quelques sites de recherche :
+# 
+#"),
+__("Choose preferred language for install and system usage."),
 
 selectKeyboard =>
  __("Choose the layout corresponding to your keyboard from the list above"),
 
 selectPath =>
- __("Choose \"Installation\" if there are no previous versions of Linux
-installed, or if you wish use to multiple distributions or versions.
+ __("Choose \"Install\" if there are no previous versions of Linux
+nstalled, or if you wish use to multiple distributions or versions.
 
 
-Choose \"Update\" if you wish to update a previous version of Mandrake
+Choose \"Upgrade\" if you wish to update a previous version of Mandrake
 Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
 
 selectInstallClass =>
  __("Select:
 
-  - Beginner: If you have never installed Linux before.
+  - Recommended: If you have never installed Linux before.
 
 
-  - Developer: If you are familiar with Linux and will be using the
-computer primarily for software development, you will find happiness
-here.
-
-
-  - Server: If you wish to install a general purpose server (for mail,
-printing...), select this.
+  - Customized: If you are familiar with Linux, you will be able to 
+select the usage for the installed system between normal, development or
+server. Choose \"Normal\" for a general purpose installation of your
+computer. You may choose \"Development\" if you will be using the computer
+primarily for software development, or choose \"Server\" if you wish to
+install a general purpose server (for mail, printing...).
 
 
   - Expert: If you are fluent with GNU/Linux and want to perform
-a highly customized installation, this Install Class is for you."),
+a highly customized installation, this Install Class is for you. You will
+be able to select the usage of your installed system as for \"Customized\"."),
 
 setupSCSI =>
  __("DrakX will attempt at first to look for one or more PCI
@@ -70,26 +70,33 @@ on your system), as suggested by the installation guide. These
 are the options you will need to provide to the driver."),
 
 partitionDisks =>
- __("In this stage, you may choose what partition(s) use to install your
-Linux-Mandrake system."),
+#- __("In this stage, you may choose what partition(s) use to install your
+#-Linux-Mandrake system."),
 
-#At this point, hard drive partitions must be defined. (Unless you
-#are overwriting a previous install of Linux and have already defined
-#your hard drive partitions as desired.) This operation consists of
-#logically dividing the computer's hard drive capacity into separate
-#areas for use.
-#
-#
-#Two common partition are: the root partition (/), which is the starting
-#point of the filesystem's directory hierarchy, and /boot, which contains
-#all files necessary to start the operating system when the
-#computer is first turned on.
-#
-#
-#Because the effects of this process are usually irreversible, partitioning
-#can be intimidating and stressful to the unexperienced. DiskDrake
-#simplifies the process so that it need not be. Consult the documentation
-#and take your time before proceeding."),
+ __("At this point, you may choose what partition(s) to use to install
+your Linux-Mandrake system if they have been already defined (from a
+previous install of Linux or from another partitionning tool). In other
+cases, hard drive partitions must be defined. This operation consists of
+logically dividing the computer's hard drive capacity into separate
+areas for use.
+
+
+If you have to create new partitions, use \"Auto allocate\" to automatically
+create partitions for Linux. You can select the disk for partitionning by
+clicking on \"hda\" for the first IDE drive,
+\"hdb\" for the second or \"sda\" for the first SCSI drive and so on.
+
+
+Two common partition are: the root partition (/), which is the starting
+point of the filesystem's directory hierarchy, and /boot, which contains
+all files necessary to start the operating system when the
+computer is first turned on.
+
+
+Because the effects of this process are usually irreversible, partitioning
+can be intimidating and stressful to the unexperienced user. DiskDrake
+simplifies the process so that it need not be. Consult the documentation
+and take your time before proceeding."),
 
 formatPartitions =>
  __("Any partitions that have been newly defined must be formatted for
@@ -103,6 +110,13 @@ choosePackages =>
  __("You may now select the packages you wish to install.
 
 
+First you can select the size of your installed system and an automated
+selection of packages will be done according to your system usage. After
+that you can select more packages by group or click on Ok to keep the
+previous selection.
+
+
+If you are in expert mode, you can select packages individually.
 Please note that some packages require the installation of others.
 These are referred to as package dependencies. The packages you select,
 and the packages they require will be automatically selected for
@@ -111,12 +125,14 @@ of its dependencies.
 
 
 Information on each category and specific package is available in the
-area titled \"Info\",  located between list of packages and the five
-buttons \"Install\", \"Select more/less\" and \"Show more/less\"."),
+area titled \"Info\",  located between list of packages and the
+button \"Install\" to start the installation."),
 
 doInstallStep =>
  __("The packages selected are now being installed. This operation
-should only take a few minutes."),
+should take a few minutes unless you have chosen to upgrade an
+existing system, in that case it can take more time even before
+upgrade starts."),
 
 selectMouse =>
  __("If DrakX failed to find your mouse, or if you want to
@@ -133,12 +149,14 @@ In case of a serial mouse, you will also have to tell DrakX
 which serial port it is connected to."),
 
 configureNetwork =>
- __("This section is dedicated to configuring a local area network,
-or LAN. If you answer \"Yes\" here, DrakX will try to find an
-Ethernet adapter on your machine. PCI adapters should be found and
-initialized automatically. However, if your peripheral is ISA,
-autodetection will not work, and you will have to choose a driver
-from the list that will appear then.
+ __("This section is dedicated to configuring a local area
+network (LAN) or a modem.
+
+Choose \"Local LAN\" and DrakX will
+try to find an Ethernet adapter on your machine. PCI adapters
+should be found and initialized automatically.
+However, if your peripheral is ISA, autodetection will not work,
+and you will have to choose a driver from the list that will appear then.
 
 
 As for SCSI adapters, you can let the driver probe for the adapter
@@ -152,10 +170,20 @@ of an already existing network, the network administrator will
 have given you all necessary information (IP address, network
 submask or netmask for short, and hostname). If you're setting
 up a private network at home for example, you should choose
-addresses "),
+addresses.
+
+
+Choose \"Dialup with modem\" and the Internet connection with
+a modem will be configured. DrakX will try to find your modem,
+if it fails you will have to select the right serial port where
+your modem is connected to."),
 
 configureTimezone =>
- __("Help"),
+ __("You can now select your timezone according to where you live.
+
+
+Linux manages time in GMT or \"Greenwich Meridian Time\" and translates it
+in local time according to the time zone you have selected."),
 
 configureServices =>
  __("Help"),
@@ -171,7 +199,7 @@ printer is connected to, and select the appropriate filter.
 
 
 If you want to access a printer located on a remote Unix machine,
-you will have to select \"Remote lpd queue\". In order to make
+you will have to select \"Remote lpd\". In order to make
 it work, no username or password is required, but you will need
 to know the name of the printing queue on this server.
 
@@ -184,7 +212,7 @@ access the printer, and of course the name of the printer. The same goes
 for a NetWare printer, except that you need no workgroup information."),
 
 setRootPassword =>
- __("You must now enter the root password for your Linux-Mandrake
+ __("You can now enter the root password for your Linux-Mandrake
 system. The password must be entered twice to verify that both
 password entries are identical.
 
@@ -245,11 +273,15 @@ ask DrakX not to) so that you can check and see if the
 settings suit you. If they don't, you can come back and
 change them, as many times as necessary."),
 
+miscellaneous =>
+ __("You can now select some miscellaneous options for your system."),
+
 exitInstall =>
- __("Help"),
+ __("Exit Linux-Mandrake installation to reboot your system."),
 );
 
 #- ################################################################################
+#- NO LONGER UP-TO-DATE...
 %steps_long = (
 selectLanguage =>
  __("Choose preferred language for install and system usage."),

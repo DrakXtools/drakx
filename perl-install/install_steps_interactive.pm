@@ -525,8 +525,8 @@ wish to access and any applicable user name and password."),
     my $action;
     my @action = qw(ascii ps both done);
     my %action = (
-		  ascii  => _("Yes, print ascii test page"),
-		  ps     => _("Yes, print postscript test page"),
+		  ascii  => _("Yes, print ASCII test page"),
+		  ps     => _("Yes, print PostScript test page"),
 		  both   => _("Yes, print both test pages"),
 		  done   => _("No"),
 		 );
@@ -887,13 +887,13 @@ sub miscellaneous {
 
     !$::beginner || $clicked and $o->ask_from_entries_ref('',
 	_("Miscellaneous questions"),
-	[ _("Do you have a laptop?"), 
-	  _("Use hard drive optimizations?"), 
+	[ _("Is this machine a laptop?"), 
+	  _("Use hard drive optimisations?"), 
 	  _("Choose security level"),
-	  _("Precise ram size if needed (found %d MB)", availableRam / 1024),
+	  _("Precise RAM size if needed (found %d MB)", availableRam / 1024),
 	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
-	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause disk problems)") },
+	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
 	  { val => \$s, list => [ map { $l{$_} } ikeys %l ], not_edit => 1 },
 	  \$u->{memsize},
 	],
@@ -974,7 +974,7 @@ sub load_module {
     my @options;
 
     my $l = $o->ask_from_list('',
-			      _("What %s card do you have?", $type),
+			      _("Which %s driver should I try?", $type),
 			      [ modules::text_of_type($type) ]) or return;
     my $m = modules::text2driver($l);
 
@@ -1036,7 +1036,7 @@ sub setup_thiskind {
 	my $msg = @l ?
 	  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),
 	    _("Do you have another one?") ] :
-	  _("Do you have an %s interface?", $type);
+	  _("Do you have any %s interface?", $type);
 
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;
