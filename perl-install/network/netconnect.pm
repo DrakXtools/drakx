@@ -591,7 +591,7 @@ sub load_conf {
 sub read_raw_net_conf {
     my ($suffix) = @_;
     my $dir = "$::prefix/etc/sysconfig/network-scripts";
-    $suffix = $suffix ? ".$suffix" : '';
+#    $suffix = $suffix ? ".$suffix" : '';
     rename "$dir/draknet$suffix", "$dir/drakconnect$suffix";
     getVarsFromSh("$dir/drakconnect_conf");
 }
@@ -602,7 +602,7 @@ sub get_net_device {
 
 sub read_net_conf {
     my ($prefix, $netcnx, $netc)=@_;
-    add2hash($netcnx, { read_raw_net_conf() });
+    add2hash($netcnx, { read_raw_net_conf('_conf') });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
     $netcnx->{$netcnx->{type}}||={};
     add2hash($netcnx->{$netcnx->{type}}, { read_raw_net_conf($netcnx->{type}) });
