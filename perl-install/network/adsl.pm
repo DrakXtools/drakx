@@ -144,7 +144,10 @@ user "$adsl->{login}"
 	    require pkgs;
 	    $mgmtrpm = pkgs::packageByName($in->{package}, "speedtouch_mgmt");
 	}
-	$mgmtrpm ? $in->do_pkgs->install('speedtouch_mgmt') : $in->ask_warn('', _('You need the alcatel microcode.
+	if($mgmtrpm) {
+	    $in->do_pkgs->install('speedtouch_mgmt')
+	} else {
+	    -e "$prefix/usr/share/speedtouch/mgmt.o" or $in->ask_warn('', _('You need the alcatel microcode.
 Download it at
 http://www.alcatel.com/consumer/dsl/dvrreg_lx.htm
 and copy the mgmt.o in /usr/share/speedtouch'));
