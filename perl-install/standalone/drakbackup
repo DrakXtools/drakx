@@ -22,14 +22,14 @@
 #
 #  Description:
 #
-#   Drakbacup is use to backup your system.
+#   Drakbackup is used to backup your system.
 #   During the configuration you can select 
 # 	- System files, 
 # 	- Users files, 
 # 	- Other files.
 # 	or All your system ...  and Other (like windows Partitions)
 #
-#   Drakbacup allow you to backup your system on:
+#   Drakbackup allows you to backup your system on:
 # 	- Harddrive.
 # 	- NFS.
 # 	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
@@ -38,18 +38,18 @@
 # 	- Webdav.
 # 	- Tape.
 #
-#   Drakbacup allow you to Restore your system on
+#   Drakbackup allows you to Restore your system on
 #   choosen directory.
 #
-#   Per default all backup will be stored on your
+#   By default all backups will be stored in your
 #   /var/drakbackup directory
 #
-#   configuration file:
+#   Configuration file:
 # 	/etc/drakconf/drakbackup/drakbakup.conf
 #
 #________________________________________________________________
 #
-#  backup files formats:
+#  Backup files formats:
 #	
 #	no incremental backup:
 #			backup_sys_date_hour.tar.*
@@ -128,7 +128,7 @@ if ("@ARGV" =~ /--help|-h/) {
     print q(Backup and Restore application
 
 --default             : save default directories.
---debug		      : permit to see all debug messages.
+--debug		      : show all debug messages.
 --show-conf           : list of files or directories to backup.
 --daemon              : use daemon configuration. 
 --help                : show this message.
@@ -732,7 +732,7 @@ sub advanced_what_sys {
     gtkpack($advanced_box,
 	    $box_what_sys =  gtkpack_(new Gtk::VBox(0, 15),
 		     1, _("\nPlease check all options that you need.\n"),
-		     1, _("This options can backup and restore all files on your /etc directory.\n"),
+		     1, _("These options can backup and restore all files in your /etc directory.\n"),
 		     0, my $check_what_sys = new Gtk::CheckButton( _("Backup your System files. ( /etc directory )")),
 		     0, my $check_what_versions = new Gtk::CheckButton( _("Use incremental backup  (do not replace old backups)") ),
 		     0, my $check_what_critical = new Gtk::CheckButton( _("Do not include critical files (passwd, goup, fstab)") ),
@@ -762,7 +762,7 @@ sub advanced_what_user {
     all_user_list();
     gtkpack($advanced_box,
 	    $box_what_user = gtkpack_(new Gtk::VBox(0, 15),
-				      0, _("Please check all user that you want to include inb your backup."),
+				      0, _("Please check all users that you want to include in your backup."),
 				      0, new Gtk::HSeparator,
 				      1, createScrolledWindow( 
 						gtkpack__(new Gtk::VBox(0,0),
@@ -789,7 +789,7 @@ sub advanced_what_user {
 							      $b } (@all_user_list) 
 							),
 							       ),
-				      0, my $check_what_browser = new Gtk::CheckButton( _("do not include the browser cache") ),
+				      0, my $check_what_browser = new Gtk::CheckButton( _("Do not include the browser cache") ),
 	    0, my $check_what_user_versions = new Gtk::CheckButton( _("Use Incremental Backups  (do not replace old backups)") ),
 				      ),
 	    );
@@ -934,31 +934,31 @@ sub advanced_where_net_ftp {
     gtkpack($advanced_box,
 	    $box_where_net = gtkpack_(new Gtk::VBox(0, 15),
 	 0, new Gtk::HSeparator,
-	 0, my $check_where_net_ftp = new Gtk::CheckButton( _("Use FTP connexion to backup") ),
+	 0, my $check_where_net_ftp = new Gtk::CheckButton( _("Use FTP connection to backup") ),
 	 0, new Gtk::HSeparator,
 	 0, gtkpack_(new Gtk::HBox(0,10),
-		     0, gtkset_sensitive(new Gtk::Label(_("please entrer the host name or IP.")), $where_net_ftp),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please enter the host name or IP.")), $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $host_name_entry = new Gtk::Entry(), $where_net_ftp),
 		     ),
 	 0, gtkpack_(new Gtk::HBox(0,10),
-	 0, gtkset_sensitive(new Gtk::Label(_("Please entrer the directory to\n put the backup on this host.")), $where_net_ftp),
+	 0, gtkset_sensitive(new Gtk::Label(_("Please enter the directory to\n put the backup on this host.")), $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $host_path_entry = new Gtk::Entry(), $where_net_ftp), 
 		     ),
 	 0, gtkpack_(new Gtk::HBox(0,10),
-		     0, gtkset_sensitive(new Gtk::Label(_("please entrer your login")), $where_net_ftp),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please enter your login")), $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $login_user_entry = new Gtk::Entry(), $where_net_ftp),
 		     ),
 	 0, gtkpack_(new Gtk::HBox(0,10),
-		     0, gtkset_sensitive(new Gtk::Label(_("please entrer your passord")),  $where_net_ftp),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please enter your passord")),  $where_net_ftp),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $passwd_user_entry = new Gtk::Entry(), $where_net_ftp),
 		     ),
 	 0, gtkpack_(new Gtk::HBox(0,10),
 	   1, new Gtk::HBox(0,10),
-	   0, gtkset_sensitive(my $check_remember_pass = new Gtk::CheckButton( _("remember this password")), $where_net_ftp),
+	   0, gtkset_sensitive(my $check_remember_pass = new Gtk::CheckButton( _("Remember this password")), $where_net_ftp),
 		     ),
 	 ),
 	    );
@@ -1034,14 +1034,14 @@ sub advanced_where_net {
 				      1, gtkpack_(new Gtk::VBox(0, 15),	
 						  1, new Gtk::VBox(0, 5),
 						  1, new Gtk::VBox(0,10),
-						  1, gtksignal_connect(new Gtk::Button(_("FTP Connexion")), clicked => sub { 
+						  1, gtksignal_connect(new Gtk::Button(_("FTP Connection")), clicked => sub { 
 						      $box_where_net->destroy(); 
 						      if ($previous_function ) {
 							  advanced_where_net_ftp(\&$previous_function);
 						      } else {
 							  advanced_where_net_ftp();
 						      }}),
-						  1, gtksignal_connect(new Gtk::Button(_("Secure Connexion")),  clicked => sub {
+						  1, gtksignal_connect(new Gtk::Button(_("Secure Connection")),  clicked => sub {
 						      $box_where_net->destroy(); 
 						      if ($previous_function ) {
 							  advanced_where_net_ssh(\&$previous_function);
@@ -1142,7 +1142,7 @@ gtkpack($advanced_box,
 		 0, my $check_where_tape = new Gtk::CheckButton( _("Use tape to backup") ),
 		 0, new Gtk::HSeparator,
 		 0, gtkpack_(new Gtk::HBox(0,10),
-			     0, gtkset_sensitive(new Gtk::Label(_("Please entrer device name where backup")), $where_tape ),
+			     0, gtkset_sensitive(new Gtk::Label(_("Please enter the device name to use for backup")), $where_tape ),
 			     1, new Gtk::VBox(0, 6),
 			     0, gtkset_usize(gtkset_sensitive(my $save_device_tape_entry = new Gtk::Entry(), $where_tape), 200, 20),
 				 ),
@@ -1297,13 +1297,13 @@ sub advanced_when{
 		      ),
 	  0, new Gtk::HSeparator,
 	  0, gtkpack_(new Gtk::HBox(0,10),
-		      0, gtkset_sensitive(new Gtk::Label(_("Please choose interval \nspace between each backup")),  $backup_daemon),
+		      0, gtkset_sensitive(new Gtk::Label(_("Please choose the time \ninterval between each backup")),  $backup_daemon),
 		      1, new Gtk::HBox(0,10),
 		      0, gtkset_sensitive($combo_when_space, $backup_daemon),
 		      ),
 	  0, new Gtk::HBox(0,10),
 	  0, gtkpack_(new Gtk::HBox(0,10),
-		   0, gtkset_sensitive(new Gtk::Label(_("Please choose\nmedia to backup.")), $backup_daemon),
+		   0, gtkset_sensitive(new Gtk::Label(_("Please choose the\nmedia for backup.")), $backup_daemon),
 		   1, new Gtk::HBox(0,10),
 		   0, gtkpack_(new Gtk::VBox(0,10),
 #	   0, gtkset_sensitive($check_where_cd_daemon = new Gtk::CheckButton(_("Use CD/DVDROM with daemon")), $backup_daemon),
@@ -1313,7 +1313,7 @@ sub advanced_when{
 			       ),
 		      ),
 	  0, new Gtk::HSeparator,
-	  1, gtkset_sensitive(new Gtk::Label(_("Please be careful that cron deamon is include on your services.")),  $backup_daemon),
+	  1, gtkset_sensitive(new Gtk::Label(_("Please be sure that the cron daemon is included in your services.")),  $backup_daemon),
 	  ),
 	    );
     foreach (
@@ -1354,7 +1354,7 @@ sub advanced_options{
 # 					     ),
 # 				 0, new Gtk::HSeparator,
 # 				 0, gtkpack_(new Gtk::VBox(0,10),
-# 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk::CheckButton( _("Use Tar and bzip2  ( very slow) [please be careful if you\n (un)select this option all your old backups will be deleted ]") ), 0),
+# 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk::CheckButton( _("Use Tar and bzip2 (very slow) [Please be careful if you\n (un)select this option, as all your old backups will be deleted.]") ), 0),
 # 			 0, gtkset_sensitive(my $check_backupignore = new Gtk::CheckButton( _("Use .backupignore files")), 0),
 				    0, new Gtk::VBox(0,10),
 				    0, gtkpack_(new Gtk::HBox(0,10),
@@ -1470,7 +1470,7 @@ sub wizard_step2 {
 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
 						      0, my $check_wizard_hd = new Gtk::CheckButton(_("on Hard Drive")),
 						      1, new Gtk::VBox(0, 5),
-						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure it")),
+						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure")),
 											    clicked => sub {
 												${$central_widget}->destroy();
 												advanced_where_hd(\&wizard_step2);
@@ -1479,7 +1479,7 @@ sub wizard_step2 {
 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
 						      0, my $check_wizard_net = new Gtk::CheckButton(_("across Network")),
 						      1, new Gtk::VBox(0, 5),
-						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure it")),
+						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure")),
 											    clicked => sub {
 												${$central_widget}->destroy();
 												advanced_where_net(\&wizard_step2);
@@ -1488,7 +1488,7 @@ sub wizard_step2 {
 # 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
 # 						      0, my $check_wizard_cd = new Gtk::CheckButton(_("on CDROM")),
 # 						      1, new Gtk::VBox(0, 5),	
-# 						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure it")),
+# 						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure")),
 # 											    clicked => sub {
 # 												${$central_widget}->destroy();
 # 												advanced_where_cd(\&wizard_step2);
@@ -1497,7 +1497,7 @@ sub wizard_step2 {
 # 					  0, gtkpack_(new Gtk::HBox(0, 15),	      
 # 						      0, my $check_wizard_tape = new Gtk::CheckButton(_("on Tape Device")),
 # 						      1, new Gtk::VBox(0, 5),
-# 						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure it")), 
+# 						      0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Configure")), 
 # 											    clicked => sub {
 # 												${$central_widget}->destroy();
 # 												advanced_where_tape(\&wizard_step2);
@@ -1543,7 +1543,7 @@ sub wizard   {
 			      1, new Gtk::VBox(0, 5),	
 			      1, gtkpack_(new Gtk::VBox(0, 15),	
 					  1, new Gtk::VBox(0, 5),
-					  0, _("Please choose that you want to backup"),
+					  0, _("Please choose what you want to backup"),
 					  0, my $check_wizard_sys = new Gtk::CheckButton(_("Backup system")),
 					  0, my $check_wizard_user = new Gtk::CheckButton(_("Backup Users")),
 					  0, gtkpack_(new Gtk::HBox(0, 15),
@@ -1637,7 +1637,7 @@ sub system_state {
 	$system_state .= _("\nBackup Sources: \n");
         $backup_sys and $system_state .= _("\n- System Files:\n"); 
         $backup_sys and $system_state .= "\t\t$_\n" foreach @sys_files; 
-        $backup_user and $system_state .= _("\n- Users Files:\n");
+        $backup_user and $system_state .= _("\n- User Files:\n");
         $backup_user and $system_state .= "\t\t$_\n" foreach @user_list;
         @list_other and $system_state .= _("\n- Other Files:\n"); 
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
@@ -1654,7 +1654,7 @@ sub system_state {
 	$ftp_daemon and $system_state .= _("\t-Network by FTP.\n");    
 	$ssh_daemon and $system_state .= _("\t-Network by SSH.\n");    
     }
-    else {$system_state = _("No configuration please click Wizard or Advanced.\n")}
+    else {$system_state = _("No configuration, please click Wizard or Advanced.\n")}
 }
 
 sub restore_state {
@@ -1664,7 +1664,7 @@ sub restore_state {
 			$restore_state .= "   - from date: $tmp[0] $tmp[1]\n";
 			}
     if ($restore_user) { 
-	$restore_state .= "- Restore Users Files: \n" ;
+	$restore_state .= "- Restore User Files: \n" ;
 	$restore_state .= "\t\t$_\n" foreach @user_list_to_restore2 ;
 	push @user_list_to_restore, (split(',', $_))[0] foreach @user_list_to_restore2 ;
     }
@@ -1916,7 +1916,7 @@ sub restore_step_other {
 	    $retore_step_other = gtkpack_(new Gtk::VBox(0,10),
 					  1, new Gtk::VBox(0,10),
 					  1, createScrolledWindow($text),
-			      0, my $check_restore_other_sure = new Gtk::CheckButton(_("Sure to restore the other files .")),
+			      0, my $check_restore_other_sure = new Gtk::CheckButton(_("OK to restore the other files.")),
 					  1, new Gtk::VBox(0,10),
 					  ),
 	    );
@@ -1941,7 +1941,7 @@ sub restore_step_user {
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
 		     0, new Gtk::VBox(0,10),
-		     0, _("User list to restore (only the more recent date per user is important)"),
+		     0, _("User list to restore (only the most recent date per user is important)"),
 		     1, createScrolledWindow( gtkpack__(new Gtk::VBox(0,0),
 							map { my $name;
 							      my $var2;
@@ -1994,7 +1994,7 @@ sub restore_step_sys {
     gtkpack($advanced_box,
 	    $restore_step_sys = gtkpack_(new Gtk::VBox(0,10),
 					1, new Gtk::VBox(0,10),
-					0, my $check_backup_before = new Gtk::CheckButton(_("Backup the system files before.")),
+					0, my $check_backup_before = new Gtk::CheckButton(_("Backup the system files before:")),
 					0, gtkpack_(new Gtk::HBox(0,10),
 						    1, _("please choose the date to restore"),
 						    0, $combo_restore_step_sys,
@@ -2029,7 +2029,7 @@ sub restore_other_media_hd {
 	 0, my $check_where_hd = new Gtk::CheckButton( _("Use Hard Disk to backup") ),
 	 0, new Gtk::HSeparator,
 	 0, gtkpack_(new Gtk::HBox(0,10),
-		     0, gtkset_sensitive(new Gtk::Label(_("Please entrer the directory to save:")), $where_hd ),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please enter the directory to save:")), $where_hd ),
 		     1, new Gtk::VBox(0, 6),
 		     0, gtkset_usize(gtkset_sensitive($save_path_entry = new Gtk::Entry(), $where_hd), 152, 20),
 		     0, gtkset_sensitive($button = gtksignal_connect(new Gtk::Button(),  clicked => sub {
@@ -2037,7 +2037,7 @@ sub restore_other_media_hd {
 		     ),
 	 0, new Gtk::VBox(0, 6),
 	 0, gtkpack_(new Gtk::HBox(0,10),
-	    0, gtkset_sensitive(new Gtk::Label(_("Please entrer the maximum size\n allowed for Drakbackup")),  $where_hd ),
+	    0, gtkset_sensitive(new Gtk::Label(_("Please enter the maximum size\n allowed for Drakbackup")),  $where_hd ),
 	    1, new Gtk::VBox(0, 6),
 	    0, gtkset_usize(gtkset_sensitive(my $spinner = new Gtk::SpinButton( $adj, 0, 0), $where_hd ), 200, 20),
 		     ),
@@ -2078,7 +2078,7 @@ sub restore_find_net {
 				      1, gtkpack_(new Gtk::VBox(0, 15),	
 						  1, new Gtk::VBox(0, 5),
 						  1, new Gtk::VBox(0,10),
-						  1, gtksignal_connect(new Gtk::Button(_("FTP Connexion")), clicked => sub { 
+						  1, gtksignal_connect(new Gtk::Button(_("FTP Connection")), clicked => sub { 
 						      $box_where_net->destroy(); 
 						      if ($previous_function ) {
 							  message_underdevel();
@@ -2086,7 +2086,7 @@ sub restore_find_net {
 						      } else {
 							  advanced_where_net_ftp();
 						      }}),
-						  1, gtksignal_connect(new Gtk::Button(_("Secure Connexion")),  clicked => sub {
+						  1, gtksignal_connect(new Gtk::Button(_("Secure Connection")),  clicked => sub {
 						      $box_where_net->destroy(); 
 						      if ($previous_function ) {
 							  advanced_where_net_ssh(\&$previous_function);
@@ -2116,9 +2116,9 @@ sub restore_other_media {
     gtkpack($advanced_box,
 	    $box_find_restore = gtkpack_(new Gtk::VBox(0, 6),
 	 0, new Gtk::HSeparator,
-	 0, my $check_other_media_hd = new Gtk::CheckButton( _("Use Hard Disk to find backups") ),
+	 0, my $check_other_media_hd = new Gtk::CheckButton( _("Restore from Hard Disk.") ),
 				 0, gtkpack_(new Gtk::HBox(0,10),
-				 0, gtkset_sensitive(new Gtk::Label(_("Please entrer the directory to find backup")), $other_media_hd ),
+				 0, gtkset_sensitive(new Gtk::Label(_("Please enter the directory where backups are stored")), $other_media_hd ),
 				 1, new Gtk::VBox(0, 6),
 				 0, gtkset_usize(gtkset_sensitive($restore_find_path_entry = new Gtk::Entry(), $other_media_hd), 152, 20),
 				 0, gtkset_sensitive($button = gtksignal_connect(new Gtk::Button(),  clicked => sub {
@@ -2126,7 +2126,7 @@ sub restore_other_media {
 					     ),
 					 1, new Gtk::VBox(0, 6),
 #					 0, new Gtk::HSeparator,
-# 					 0, my $check_other_media_net = new Gtk::CheckButton( _("Use Network to find backups") ),
+# 					 0, my $check_other_media_net = new Gtk::CheckButton( _("Restore from Network") ),
 # 					 0, new Gtk::VBox(0, 6),
 # 					 1, gtkpack(new Gtk::HBox(0,10),
 # 						    new Gtk::VBox(0, 6),
@@ -2179,7 +2179,7 @@ sub restore_step2 {
 	 1, new Gtk::VBox(0,10),
 	 1, new Gtk::VBox(0,10),
 	 0, gtkpack_(new Gtk::HBox(0,10),
-		     0, my $check_restore_other_src = new Gtk::CheckButton(_("select an other media to find backups")),
+		     0, my $check_restore_other_src = new Gtk::CheckButton(_("Select another media to restore from")),
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Other Media")),
 							   clicked => sub {
@@ -2195,8 +2195,8 @@ sub restore_step2 {
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $restore_path_entry = new Gtk::Entry(), $restore_other_path),
 		     ),
-         0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("do new backup before restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions  ),
-	 0, gtkset_sensitive(my $check_remove_user_dir = new Gtk::CheckButton(_("Remove initials directories before restore.")), $sys_exist),
+         0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("Do new backup before restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions  ),
+	 0, gtkset_sensitive(my $check_remove_user_dir = new Gtk::CheckButton(_("Remove user directories before restore.")), $sys_exist),
 	 1, new Gtk::VBox(0,10),
 	 ),
 	    );
@@ -2479,7 +2479,7 @@ sub button_box_main {
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack(gtkset_layout(new Gtk::HButtonBox, -start),
-				      gtksignal_connect(new Gtk::Button(_("close")), clicked => sub {  
+				      gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {  
 					  Gtk->main_quit() }),
 				      gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub { 
 					  ${$central_widget}->destroy(); adv_help(\&interactive_mode_box,$custom_help) }),
@@ -2567,7 +2567,7 @@ sub message_norestore_box {
 			    1, gtkpack(new Gtk::HBox(0, 15),	
 				       new Gtk::VBox(0, 5),	
 				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Please check data to restore..."),
+				       _("Please select data to restore..."),
 				       new Gtk::VBox(0, 5),	
 				       ),
 			    1, new Gtk::VBox(0, 5),	
@@ -2588,7 +2588,7 @@ sub message_noselect_box {
 			    1, gtkpack(new Gtk::HBox(0, 15),	
 				       new Gtk::VBox(0, 5),	
 				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Please check way where backup..."),
+				       _("Please select media for backup..."),
 				       new Gtk::VBox(0, 5),	
 				       ),
 			    1, new Gtk::VBox(0, 5),	
@@ -2610,7 +2610,7 @@ sub message_noselect_what_box {
 			    1, gtkpack(new Gtk::HBox(0, 15),	
 				       new Gtk::VBox(0, 5),	
 				       new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				       _("Please check data to backup..."),
+				       _("Please select data to backup..."),
 				       new Gtk::VBox(0, 5),	
 				       ),
 			    1, new Gtk::VBox(0, 5),	
@@ -2765,7 +2765,7 @@ sub build_backup_ftp_status {
 			       1, new Gtk::VBox(0, 15),
 			       1, create_packtable({ col_spacings => 10, row_spacings => 5},
 #						    [ $pbar->set_show_text( $show_text );
-						    [_("files sending ...")],
+						    [_("Sending files...")],
 						    [""], 
 						    [ $pbar->{label} = new Gtk::Label(' ' )],
 						    [ $pbar],
@@ -3123,27 +3123,27 @@ sub adv_help {
     my $advanced_box_help;
     
     if ($custom_help eq "options") { gtktext_insert($text, 
-_("options description:
+_("Options description:
 
- In this step Drakbacup allow you to change:
+ In this step Drakbackup allow you to change:
 
- - the compression mode:
+ - The compression mode:
     
-      if you check bzip2 compression, you will compress
-      better than gzip your data (about 2-10 %).
-      This options are not checked by default because
-      this compression mode need more time ( about 1000% more).
+      If you check bzip2 compression, you will compress
+      your data better than gzip (about 2-10 %).
+      This option is not checked by default because
+      this compression mode needs more time ( about 1000% more).
  
- - the udpate mode:
+ - The update mode:
 
-      This options will update your backup, but this
-      options are not really interesting because you need
-      to decompress your backup before to update it.
+      This option will update your backup, but this
+      option is not really useful because you need to
+      decompress your backup before you can update it.
       
  - the .backupignore mode:
 
       Like with cvs, Drakbackup will ignore all references
-      included on  .backupignore files in each directories.
+      included in .backupignore files in each directories.
       ex: 
          #> cat .backupignore
          *.o
@@ -3157,42 +3157,42 @@ _("options description:
 
  - Backup system files:
        
-	This  options allow you to backup your /etc directory,
-	which contain all configuration files please be
-	carreful during restore step to not overwriting
+	This option allows you to backup your /etc directory,
+	which contains all configuration files. Please be
+	careful during the restore step to not overwrite:
 		/etc/passwd 
 		/etc/group 
 		/etc/fstab
 
  - Backup User files: 
 
-	This option allow to select all users that you want 
+	This option allows you select all users that you want 
 	to backup.
-	To preserve disk space, it recommeded to not include
-	browsers cache.
+	To preserve disk space, it is recommended that you 
+	do not include web browser's cache.
 
  - Backup Other files: 
 
-	This option allow to add more data to save.
-	With the other backup it's not possible in
+	This option allows you to add more data to save.
+	With the other backup it's not possible at the 
 	moment to select select incremental backup.		
  
  - Incremental Backups:
 
-	The incremental backup is the most powerfull 
-	option to use backup, this option allow you 
+	The incremental backup is the most powerful 
+	option for backup. This option allows you 
 	to backup all your data the first time, and 
-	only the changed after.
-	So you will be able during the restore
+	only the changed afterward.
+	Then you will be able, during the restore
 	step, to restore your data from a specified
 	date.
-	If you have not selected this options all
+	If you have not selected this option all
 	old backups are deleted before each backup.    
 
 
 ")); }
     elsif ($custom_help eq "restore") { gtktext_insert($text, 
-_("restore description:
+_("Restore description:
  
 Only the most recent date will be used ,because with incremental 
 backups it is necesarry to restore one by one each older backups.
@@ -3221,8 +3221,8 @@ Otherwise, you are able to select only one of this
 _("Sendmail Error:
 
 
- some errors during sendmail are caused by 
- a bad configuration of postfix, to solve it you have to
+ Some errors during sendmail are caused by 
+ a bad configuration of postfix. To solve it you have to
  set myhostname or mydomain in /etc/postfix/main.cf
 
 ")); }
@@ -3245,16 +3245,16 @@ _(" Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>
 
                                             _____________________
 
-description:
+Description:
 
-  Drakbacup is use to backup your system.
-  During the configuration you can select 
+  Drakbackup is used to backup your system.
+  During the configuration you can select: 
 	- System files, 
 	- Users files, 
 	- Other files.
-	or All your system ...  and Other (like windows Partitions)
+	or All your system ...  and Other (like Windows Partitions)
 
-  Drakbacup allow you to backup your system on:
+  Drakbackup allows you to backup your system on:
 	- Harddrive.
 	- NFS.
 	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
@@ -3263,22 +3263,22 @@ description:
 	- Webdav.
 	- Tape.
 
-  Drakbacup allow you to Restore your system on
-  choosen directory.
+  Drakbackup allows you to restore your system to
+  a user selected directory.
 
-  Per default all backup will be stored on your
-  /var/drakbackup directory
+  By default all backups will be stored in your
+  /var/drakbackup directory.
 
-  configuration file:
+  Configuration file:
 	/etc/drakconf/drakbackup/drakbakup.conf
 
 
 Restore Step:
   
-  During the Restore Step DrakBackup will remove 
+  During the restore step, DrakBackup will remove 
   your original directory and verify that all 
-  backup files are not corrupted. But it is recommended 
-  to build a last backup before to do it.
+  backup files are not corrupted. It is recommended 
+  you do a last backup before restoring.
 
 
 ")); }
@@ -3286,21 +3286,21 @@ Restore Step:
 _("options description:
 
 Please be careful when you are using ftp backup, because only 
-backup already build are send on server.
-So in moment, you need to build backup on your hard drive
-before to send it.
+backups that are already built are sent to the server.
+So at the moment, you need to build the backup on your hard 
+drive before sending it to the server.
 
 ")); } 
     elsif ($custom_help eq "restore_pbs") { gtktext_insert($text,  
 _("
 Restore Backup Problems:
 
-During the restore step, Drakbackup verify all your
-backup files before to restore it.
-Because before to restore it, Drakbackup will remove 
+During the restore step, Drakbackup will verify all your
+backup files before restoring them.
+Before the restore, Drakbackup will remove 
 your original directory, and you will loose all your 
-data. so please be carreful and do not modify the backup
-data files by hand.
+data. It is important to be careful and not modify the 
+backup data files by hand.
 
 ")); }  
     else { gtktext_insert($text,
@@ -3322,16 +3322,16 @@ _(" Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\@epita.fr>
 
                                             _____________________
 
-description:
+Description:
 
-  Drakbacup is use to backup your system.
+  Drakbackup is used to backup your system.
   During the configuration you can select 
 	- System files, 
 	- Users files, 
 	- Other files.
-	or All your system ...  and Other (like windows Partitions)
+	or All your system ...  and Other (like Windows Partitions)
 
-  Drakbacup allow you to backup your system on:
+  Drakbackup allows you to backup your system on:
 	- Harddrive.
 	- NFS.
 	- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).
@@ -3340,21 +3340,21 @@ description:
 	- Webdav.
 	- Tape.
 
-  Drakbacup allow you to Restore your system on
-  choosen directory.
+  Drakbackup allows you to restore your system to
+  a user selected directory.
 
-  Per default all backup will be stored on your
-  /var/drakbackup directory
+  By default all backups will be stored in your
+  /var/drakbackup directory.
 
-  configuration file:
+  Configuration file:
 	/etc/drakconf/drakbackup/drakbakup.conf
 
 Restore Step:
   
-  During the Restore Step DrakBackup will remove 
-  your original directory and verify that all 
-  backup files are not corrupted. But it is recommended 
-  to build a last backup before to do it.
+  During the restore step, Drakbackup will remove
+  your original directory and verify that all
+  backup files are not corrupted. It is recommended
+  you do a last backup before restoring.
  
 "));}
 
