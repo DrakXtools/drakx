@@ -159,7 +159,6 @@ Normally, CUPS is automatically configured according to your network environment
 			      $_ } @cupsd_conf;
 		}
 	        printer::write_cupsd_conf(@cupsd_conf);
-		sleep 3;
 	    }
 	    # Set auto-configuration state
 	    if ($autoconf != $oldautoconf) {
@@ -342,6 +341,13 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	$device = $menuentries->{$menuchoice};
     } else {
 	$device = $menuchoice;
+    }
+
+    #- if CUPS is the spooler, make sure that CUPS knows the device
+    if ($printer->{SPOOLER} eq "cups") {
+	my $w = $in->wait_message
+	    ('', _("Making printer port available for CUPS ..."));
+	printer::assure_device_is_available_for_cups($device);
     }
 
     #- make the DeviceURI from $device.
@@ -2004,7 +2010,6 @@ sub main {
 		    # is shown directly after having done an operation.
 		    $menushown = 1;
 		    # Initialize the cursor position
-		    #print "##### |$cursorpos|$printer->{DEFAULT}|\n";
 		    if (($cursorpos eq "::") && 
 			($printer->{DEFAULT}) &&
 			($printer->{DEFAULT} ne "")) {

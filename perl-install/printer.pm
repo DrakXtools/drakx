@@ -126,13 +126,29 @@ sub set_permissions {
 sub restart_service ($) {
     my ($service) = @_;
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
-    if (($? >> 8) != 0) {return 0;} else {return 1;}
+    if (($? >> 8) != 0) {
+	return 0;
+    } else {
+	# CUPS needs some time to come up.
+	if ($service eq "cups") {
+	    wait_for_cups();
+	}
+	return 1;
+    }
 }
 
 sub start_service ($) {
     my ($service) = @_;
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
-    if (($? >> 8) != 0) {return 0;} else {return 1;}
+    if (($? >> 8) != 0) {
+	return 0;
+    } else {
+	# CUPS needs some time to come up.
+	if ($service eq "cups") {
+	    wait_for_cups();
+	}
+	return 1;
+    }
 }
 
 sub stop_service ($) {
@@ -182,16 +198,61 @@ sub SIGHUP_daemon {
     } elsif ($service eq "devfs") {
 	$daemon = "devfsd";
     } else {
-	return 1;
+	$daemon = $service;
     }
     # Send the SIGHUP
     run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
     # CUPS needs some time to come up.
     if ($service eq "cups") {
-	sleep 5;
+	wait_for_cups();
     }
     return 1;
 }
+
+sub wait_for_cups {
+    # CUPS needs some time to come up. Wait up to 30 seconds, checking
+    # whether CUPS is ready.
+    my $cupsready = 0;
+    my $i;
+    for ($i = 0; $i < 30; $i++) {
+	run_program::rooted($prefix, "/usr/bin/lpstat", "-r");
+	if (($? >> 8) != 0) {
+	    # CUPS is not ready, continue
+	    sleep 1;
+	} else {
+	    # CUPS is ready, quit
+	    $cupsready = 1;
+	    last;
+	}
+    }
+    return cupsready;
+}
+
+sub assure_device_is_available_for_cups {
+    # Checks whether CUPS already "knows" a certain port, it does not
+    # know it usually when the appropriate kernel module is loaded
+    # after CUPS was started or when the printer is turned on after
+    # CUPS was started. CUPS 1.1.12 and newer refuses to set up queues
+    # on devices which it does not know, it points these queues to
+    # file:/dev/null instead. Restart CUPS if necessary to assure that
+    # CUPS knows the device.
+    my ($device) = @_;
+    local *F; 
+    open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	"/bin/sh -c \"export LC_ALL=C; /usr/sbin/lpinfo -v\" |" ||
+	    die "Could not run \"lpinfo\"!";
+    while (<F>) {
+	print "##### $device $_";
+	if ($_ =~ /$device/) { # Found a line containing the device name,
+	                       # so CUPS knows it.
+	    close F;
+	    return 1;
+	}
+    }
+    close F;
+    return SIGHUP_daemon("cups");
+}    
+    
 
 sub network_running {
     # If the network is not running return 0, otherwise 1.
@@ -1168,7 +1229,7 @@ sub restart_queue($) {
     for ($printer->{SPOOLER}) {
 	/cups/ && do {
 	    #- restart cups.
-	    restart_service("cups"); sleep 1;
+	    restart_service("cups");
 	    last };
 	/lpr|lprng/ && do {
 	    #- restart lpd.
