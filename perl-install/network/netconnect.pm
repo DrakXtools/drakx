@@ -840,8 +840,8 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                    lan_alrd_cfg =>
                    {
                     name => N("WARNING: this device has been previously configured to connect to the Internet.
-Modifying the fields below will override this configuration.
-Do you really want to reconfigure this device ?"),
+Modifying the fields below will override this configuration.") .
+N("Do you really want to reconfigure this device ?"),
                     type => "yesorno",
                     default => "no",
                     post => sub {
