@@ -173,7 +173,8 @@ sub gtkprepend_text {
 
 sub gtkset_mousecursor {
     my ($type, $w) = @_;
-    ($w || gtkroot())->set_cursor(Gtk2::Gdk::Cursor->new($type));
+    ($w || gtkroot())->set_cursor(my $c = Gtk2::Gdk::Cursor->new($type));
+    $c->unref;
 }
 
 sub gtksignal_connect {
