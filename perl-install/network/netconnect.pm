@@ -461,6 +461,12 @@ Take a look at http://www.linmodems.org"),
                         [ { label => N("Modem"), type => "list", val => \$modem_name, allow_empty_list => 1,
                             list => [ keys %{$netc->{autodetect}{modem}}, N("Manual choice") ], } ],
                     },
+                    complete => sub {
+                        if ($netc->{autodetect}{modem}{$modem_name}{driver} =~ /^H[cs]f:/ && c::kernel_version() !~ /^\Q2.4/) {
+                            $in->ask_warn(N("Warning"), N("Sorry, we support only 2.4 and above kernels."));
+                        }
+                        return 0;
+                    },
                     post => sub {
                         $modem ||= $netcnx->{modem} ||= {};;
                         return 'choose_serial_port' if $modem_name eq N("Manual choice");
