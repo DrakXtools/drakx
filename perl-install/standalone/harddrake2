@@ -105,6 +105,10 @@ my %groups = (
                N("Identification") => [ qw(Vendor model description info media_type) ],
                N("Connection") => [ qw(bus pci_bus pci_device pci_function vendor id subvendor subid) ],
               },
+              AUDIO =>
+              {
+               N("Driver") => [ qw(driver alternative_drivers) ],
+              },
               CPU =>
               {
                N("Identification") => [ qw(processor vendor_id), "model name", "cpu family", qw(model level stepping) ],
