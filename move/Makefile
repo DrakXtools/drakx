@@ -101,6 +101,7 @@ iso: un_live_tree_boot install live_tree_boot
 	rm -rf /tmp/iso /tmp/live_tree.clp
 	mkdir /tmp/iso
 	cp -a isolinux /tmp/iso
+	rm -rf /tmp/iso/isolinux/CVS
 	$(MAKE) /tmp/live_tree.clp
 	mv /tmp/*.clp /tmp/iso
 
