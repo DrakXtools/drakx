@@ -36,7 +36,8 @@ goto ask;
 
 sub lilo_choice
 {
-    my $bootloader = arch() =~ /ppc/ ? bootloader::read('', '/etc/yaboot.conf') : bootloader::read('', '/etc/lilo.conf');
+    my $bootloader = bootloader::read; 
+    #- (no use since bootloader::read was modified) # arch() =~ /ppc/ ? bootloader::read('','/etc/yaboot.conf') : bootloader::read('','/etc/lilo.conf');
     local ($_) = `detectloader`;
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i, if_(arch() =~ /ppc/, yaboot => 1) };
     
