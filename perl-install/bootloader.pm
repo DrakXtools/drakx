@@ -983,6 +983,7 @@ sub write_lilo {
 	    push @entry_conf, qq(append="$entry->{append}") if $entry->{append};
 	    push @entry_conf, "vga=$entry->{vga}" if $entry->{vga};
 	    push @entry_conf, $entry->{'read-write'} ? "read-write" : "read-only";
+	    push @entry_conf, grep { $entry->{$_} } qw(optional);
 	} else {
 	    push @entry_conf, "table=$entry->{table}" if $entry->{table};
 	    push @entry_conf, "unsafe" if $entry->{unsafe} && !$entry->{table};
