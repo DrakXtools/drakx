@@ -17,19 +17,18 @@ our %l = (
       if_(arch() =~ /ppc/, qw(mace bmac sungem)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
-        qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x),
-	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
-        qw(cs89x0 de600 de620),
+        qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x 3c990 3c990fx),
+        qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp),
+        qw(b44 bcm4400 com20020-pci cs89x0 de600 de620),
         qw(defxx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
-        qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
-        qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci),
-        qw(sb1000 sis900 smc-ultra smc9194 starfire tlan tmspci tulip tulip_old via-rhine),
+        qw(ewrk3 farsync fealnx hamachi hp hp-plus hp100 ibmtr),
+        qw(iph5526), #- fibre channel
+        qw(lance lanstreamer natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
+        qw(olympic pcnet32 plip prism2_plx rcpci),
+        qw(sb1000 sdladrv sis900 skfp smc-ultra smc9194 starfire),
+        qw(tc35815 tlan tmspci tulip tulip_old via-rhine),
         qw(wd winbond-840 forcedeth),
-	qw(fealnx 3c990 3c990fx b44 bcm4400),
-        qw(skfp tc35815 lanstreamer farsync sdladrv prism2_plx),
-
-	qw(iph5526), #- fibre channel
       ),
       qw(3c59x 8139too 8139cp sundance), #rtl8139
     ],
