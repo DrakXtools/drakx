@@ -373,6 +373,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o install scim-chewing for zh locale
   o fix font setting for zh_CN
 - printerdrake: show banner when embedded
+- write in lilo.conf the global root= (pixel, #12312)
 
 * Thu Jan  6 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.9mdk
 - diskdrake: display a progress bar while formating (pixel)
