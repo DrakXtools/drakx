@@ -334,9 +334,13 @@ sub killCardServices {
     $pid and kill(15, $pid); #- send SIGTERM
 }
 
-sub unlockCdroms {
+sub unlockCdroms() {
     ioctl detect_devices::tryOpen($_->{device}), c::CDROM_LOCKDOOR(), 0
       foreach detect_devices::cdroms();
+}
+sub ejectCdrom() {
+    ioctl detect_devices::tryOpen($_), c::CDROMEJECT(), 1
+      foreach map { first split } grep { m|/tmp/rhimage| } cat_("/proc/mounts");
 }
 
 sub setupFB {

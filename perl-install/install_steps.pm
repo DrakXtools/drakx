@@ -452,7 +452,10 @@ sub miscellaneous {
 }
 
 #------------------------------------------------------------------------------
-sub exitInstall { install_any::unlockCdroms }
+sub exitInstall { 
+    install_any::unlockCdroms;
+    install_any::ejectCdrom;
+}
 
 #-######################################################################################
 #- Wonderful perl :(
