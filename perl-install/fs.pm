@@ -585,7 +585,7 @@ sub mount {
 	    syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
 	    syscall_('umount', $where);
 	    # really mount as ext2 during install for speed up
-	    $type = 'ext2';
+	    $fs = 'ext2';
 	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die _("mount failed: ") . "$!";
