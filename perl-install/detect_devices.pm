@@ -363,7 +363,7 @@ sub getCPUs {
 		  push @cpus, $cpu if $cpu;
 		  $cpu = {};
 	   }
-	   /(\S*)\s*:\s*(\S*)/;
+	   /^([^\t]*).*:\s(.*)$/;
 	   $cpu->{$1} = $2 if $1;
     }
     push @cpus, $cpu;
