@@ -211,7 +211,7 @@ sub selectKeyboard {
 	  [ if_(@best > 1, { val => \$o->{keyboard}, type => 'list', format => $format, sort => 1,
 	      list => [ @best ] }),
 	    { val => \$ext_keyboard, type => 'list', format => $format,
-	      list => [ keyboard::keyboards ], advanced => @best > 1 }
+	      list => [ difference2([ keyboard::keyboards ], \@best) ], advanced => @best > 1 }
 	  ]);
     delete $o->{keyboard_unsafe};
 
