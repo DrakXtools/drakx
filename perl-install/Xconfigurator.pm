@@ -231,7 +231,7 @@ sub cardConfiguration(;$$$) {
 	$msg = ($card->{use_xf4} && !$card->{DRI_glx} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
-_("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n" . $msg;
+_("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n\n" . $msg;
 	$::beginner and @choices = (); #- keep it by default here as it is the only choice available.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
 			    code => sub { $card->{use_xf4} = '';
@@ -246,7 +246,7 @@ _("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s,
-NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "\n\n" . $msg;
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "\n\n\n" . $msg;
 	push @choices, { text => _("XFree %s with EXPERIMENTAL 3D hardware acceleration", $xf3_ver),
 			 code => sub { $card->{use_xf4} = ''; $card->{Utah_glx} = 'EXPERIMENTAL';
 				       log::l("Using XFree $xf3_ver with EXPERIMENTAL 3D hardware acceleration") } };
@@ -254,14 +254,15 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 
     #- ask the expert user to enable or not hardware acceleration support.
     if ($card->{use_xf4} && $card->{DRI_glx}) {
-	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n" . $msg;
+	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n\n" . $msg;
 	$::expert or @choices = (); #- keep all user by default with XFree 4.0 including 3D acceleration.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
 			    code => sub { log::l("Using XFree $xf4_ver with 3D hardware acceleration") } };
     }
 
-    #- examine choice of user, beware the list MUST NOT BE REORDERED AS THERE ARE FALL TRHOUGH!
-    my $tc = $in->ask_from_listf(_("XFree configuration"), $msg, sub { translate($_[0]{text}) }, \@choices);
+    #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
+    #- proposed one by DrakX.
+    my $tc = $in->ask_from_listf(_("XFree configuration"), formatAlaTeX($msg), sub { translate($_[0]{text}) }, \@choices);
     $tc->{code} and $tc->{code}();
 
     $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
@@ -1140,7 +1141,10 @@ sub autologin {
 	my %l; @l{@etc_pass_fields} = split ':';
 	$l{uid} > 500, $l{name};
     } cat_("$prefix/etc/passwd");
-    if (!($::isStandalone && $0 =~ /Xdrakres/) && !($::auto && $o->{skiptest}) &&
+    my @runlevel = mapgrep {
+	/^id:([35]):initdefault:\s*$/ > 0, $1;
+    } cat_("$prefix/etc/inittab");
+    if (!($::isStandalone && $0 =~ /Xdrakres/) && !($::auto && $o->{skiptest}) && first(@runlevel, 0) == 5 &&
 	@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
 	my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
 	$o->{autologin} ||= $l{USER};
