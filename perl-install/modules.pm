@@ -35,7 +35,7 @@ arch() =~ /^sparc/ ? (
   "82596" => "Apricot 82596",
 #  "atp" => "ATP", # builtin the kernel
   "e2100" => "Cabletron E2100",
-#  "tlan" => "Compaq Netelligent",
+  "tlan" => "Compaq Netelligent",
   "cs89x0" => "CS89x0",
   "de600" => "D-Link DE-600 pocket adapter",
   "de620" => "D-Link DE-620 pocket adapter",
@@ -63,26 +63,26 @@ arch() =~ /^sparc/ ? (
   "es3210" => "Racal-Interlan ES3210",
   "rcpci" => "Red Creek Hardware VPN",
   "epic100" => "SMC 83c170 EPIC/100",
-#  "sktr" => "Syskonnect Token ring adaptor",
+  "sktr" => "Syskonnect Token ring adaptor",
   "smc9194" => "SMC 9000 series",
   "smc-ultra" => "SMC Ultra",
   "smc-ultra32" => "SMC Ultra 32",
-#  "yellowfin" => "Symbios Yellowfin G-NIC",
+  "yellowfin" => "Symbios Yellowfin G-NIC",
   "via-rhine" => "VIA Rhine",
 #  "wavelan" => "AT&T WaveLAN & DEC RoamAbout DS", # TODO is a "AT&T GIS WaveLAN ISA" ?
   "wd" => "WD8003, WD8013 and compatible",
-#  "z85230" => "Z85x30",
+  "z85230" => "Z85x30",
 
   "dmfe" => "dmfe",
-#  "fmv18x" => "fmv18x",
+  "fmv18x" => "fmv18x",
   "ibmtr" => "Token Ring Tropic",
   "olympic" => "olympic",
   "plip" => "PLIP (parallel port)",
-#  "rl100a" => "rl100a",
-#  "sb1000" => "sb1000",
-#  "sbni" => "sbni",
-#  "sis900" => "sis900",
-#  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
+  "rl100a" => "rl100a",
+  "sb1000" => "sb1000",
+  "sbni" => "sbni",
+  "sis900" => "sis900",
+  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
 ),
   "3c59x" => "3com 3c59x (Vortex)",
   "de4x5" => "Digital 425,434,435,450,500",
@@ -122,23 +122,23 @@ arch() =~ /^sparc/ ? (
   "53c7,8xx" => "NCR 53c7xx",
   "qlogicfas" => "Qlogic FAS",
   "seagate" => "Seagate ST01/02",
-#  "t128" => "Trantor T128/T128F/T228",
-#  "u14-34f" => "UltraStor 14F/34F",
-#  "ultrastor" => "UltraStor 14F/24F/34F",
-#  "wd7000" => "Western Digital wd7000",
+  "t128" => "Trantor T128/T128F/T228",
+  "u14-34f" => "UltraStor 14F/34F",
+  "ultrastor" => "UltraStor 14F/24F/34F",
+  "wd7000" => "Western Digital wd7000",
 
-#  "a100u2w" => "a100u2w",
-#  "atp870u" => "atp870u (Acard/Artop)",
-#  "dc395x_trm" => "dc395x_trm",
-#  "psi240i" => "psi240i",
-#  "qlogicfc" => "qlogicfc",
-#  "sim710" => "sim710",
+  "a100u2w" => "a100u2w",
+  "atp870u" => "atp870u (Acard/Artop)",
+  "dc395x_trm" => "dc395x_trm",
+  "psi240i" => "psi240i",
+  "qlogicfc" => "qlogicfc",
+  "sim710" => "sim710",
   "sym53c416" => "sym53c416",
-#  "tmscsim" => "tmscsim",
+  "tmscsim" => "tmscsim",
 ),
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "ncr53c8xx" => "NCR 53C8xx PCI",
-#  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
+  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
 }],
@@ -153,13 +153,13 @@ arch() =~ /^sparc/ ? (
 arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
 ) : arch() =~ /alpha/ ? () : (
-#  "DAC960" => "Mylex DAC960",
-#  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
+  "DAC960" => "Mylex DAC960",
+  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
   "megaraid" => "AMI MegaRAID",
   "aacraid" => "AACxxx Raid Controller",
-#  "cpqarray" => "Compaq Smart-2/P RAID Controller",
-#  "gdth" => "ICP Disk Array Controller",
-#  "ips" => "IBM ServeRAID controller",
+  "cpqarray" => "Compaq Smart-2/P RAID Controller",
+  "gdth" => "ICP Disk Array Controller",
+  "ips" => "IBM ServeRAID controller",
   "eata" => "EATA SCSI PM2x24/PM3224",
   "eata_pio" => "EATA PIO Adapters",
   "eata_dma" => "EATA DMA Adapters",
@@ -173,11 +173,11 @@ arch() =~ /^sparc/ ? (
 [ 'cdrom', {
 arch() !~ /^sparc|alpha/ ? (
   "sbpcd" => "SoundBlaster/Panasonic",
-#  "aztcd" => "Aztech CD",
-#  "gscd" => "Goldstar R420",
-#  "isp16" => "ISP16/MAD16/Mozart",
-#  "mcd" => "Mitsumi", #- removed for space
-#  "mcdx" => "Mitsumi (alternate)",
+  "aztcd" => "Aztech CD",
+  "gscd" => "Goldstar R420",
+  "isp16" => "ISP16/MAD16/Mozart",
+  "mcd" => "Mitsumi", #- removed for space
+  "mcdx" => "Mitsumi (alternate)",
   "optcd" => "Optics Storage 8000",
   "cm206" => "Phillips CM206/CM260",
   "sjcd" => "Sanyo",
@@ -223,10 +223,10 @@ arch() !~ /^sparc/ ? (
   "fmvj18x_cs" => "fmvj18x_cs",
   "fdomain_cs" => "fdomain_cs",
   "netwave_cs" => "netwave_cs",
-#  "serial_cs" => "serial_cs",
+  "serial_cs" => "serial_cs",
   "wavelan_cs" => "wavelan_cs",
   "pcnet_cs" => "pcnet_cs",
-#  "aha152x_cs" => "aha152x_cs",
+  "aha152x_cs" => "aha152x_cs",
   "xirc2ps_cs" => "xirc2ps_cs",
   "3c574_cs" => "3c574_cs",
   "qlogic_cs" => "qlogic_cs",
@@ -237,15 +237,15 @@ arch() !~ /^sparc/ ? (
   "ftl_cs" => "ftl_cs",
   "smc91c92_cs" => "smc91c92_cs",
   "3c589_cs" => "3c589_cs",
-#  "parport_cs" => "parport_cs", 
+  "parport_cs" => "parport_cs", 
   "3c575_cb" => "3c575_cb",
   "apa1480_cb" => "apa1480_cb",
   "cb_enabler" => "cb_enabler",
   "epic_cb" => "epic_cb",
-#  "iflash2+_mtd" => "iflash2+_mtd",
-#  "iflash2_mtd" => "iflash2_mtd",
+  "iflash2+_mtd" => "iflash2+_mtd",
+  "iflash2_mtd" => "iflash2_mtd",
 #  "memory_cb" => "memory_cb",
-#  "serial_cb" => "serial_cb",
+  "serial_cb" => "serial_cb",
 #  "sram_mtd" => "sram_mtd",
   "tulip_cb" => "tulip_cb",
 
@@ -329,19 +329,12 @@ my %type_aliases = (
   scsi => 'disk',
 );
 
-#my @skip_big_modules_on_stage1 = 
-#qw(
-#acenic sk98lin
-#BusLogic seagate fdomain g_NCR5380 tmscsim
-#dpt_i2o gdth eata eata_pio eata_dma
-#aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
-#);
 my @skip_big_modules_on_stage1 = 
 qw(
 acenic sk98lin
-BusLogic seagate fdomain g_NCR5380
-dpt_i2o eata eata_pio eata_dma
-optcd cm206 sjcd cdu31a
+BusLogic seagate fdomain g_NCR5380 tmscsim
+dpt_i2o gdth eata eata_pio eata_dma
+aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
 );
 
 my @skip_modules_on_stage1 = (
@@ -454,9 +447,13 @@ sub load_multi {
       grep { my $o = $l{$_}; $l{$_} = 1; !$o }
       $f->(@_);
 
-    $::testing and log::l("i would install modules @l"), return;
-
-    load_raw(map { [ $_ ] } @l);
+    if ($::testing) {
+	log::l("i would install modules @l");
+    } elsif ($::isStandalone || $::live) {
+	foreach (@l) { run_program::run("modprobe", $_)	}
+    } else {
+	load_raw(map { [ $_ ] } @l);
+    }
 }
 
 sub unload {
