@@ -444,6 +444,7 @@ sub ask_fromW {
 	    my $adj = create_adjustment(${$e->{val}}, $e->{min}, $e->{max});
 	    $adj->signal_connect(value_changed => $changed);
 	    $w = Gtk2::HScale->new($adj);
+	    $w->set_size_request(200, -1);
 	    $w->set_digits(0);
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $set = sub { $adj->set_value($_[0]) };
