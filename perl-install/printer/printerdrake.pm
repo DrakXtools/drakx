@@ -14,6 +14,11 @@ use printer::detect;
 use printer::default;
 use printer::data;
 
+# Overtake translation for "(recommended)" from printer/main.pm
+my $recstr = $printer::main::recstr;
+my $precstr = $printer::main::precstr;
+my $sprecstr = $printer::main::sprecstr;
+
 my $shortdistroname = "Mandrakelinux";
 
 my $hp1000fwtext = N("The HP LaserJet 1000 needs its firmware to be uploaded after being turned on. Download the Windows driver package from the HP web site (the firmware on the printer's CD does not work) and extract the firmware file from it by decompressing the self-extracting '.exe' file with the 'unzip' utility and searching for the 'sihp1000.img' file. Copy this file into the '/etc/printer' directory. There it will be found by the automatic uploader script and uploaded whenever the printer is connected and turned on.
@@ -2821,7 +2826,7 @@ sub get_db_entry {
 		# database key contains the "(recommended)" for the
 		# recommended driver, so add it if necessary
 		unless (exists($printer::main::thedb{$printer->{DBENTRY}})) {
-		    $printer->{DBENTRY} .= " (recommended)";
+		    $printer->{DBENTRY} .= " $precstr";
 		}
 	    } else {
 		$printer->{DBENTRY} = "$make|$model";
@@ -2833,7 +2838,7 @@ sub get_db_entry {
 		printer::main::get_descr_from_ppd($printer) ||
 		$printer->{DBENTRY};
 	    unless (exists($printer::main::thedb{$printer->{DBENTRY}})) {
-		$printer->{DBENTRY} .= " (recommended)";
+		$printer->{DBENTRY} .= " $precstr";
 	    }
 	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
 	}
@@ -2855,7 +2860,7 @@ sub get_db_entry {
 	    }
 	    foreach my $key (keys %printer::main::thedb) {
 		if ($printer->{expert} &&
-		    $key =~ /^$make\|$model\|.*\(recommended\).*$/ ||
+		    $key =~ /^$make\|$model\|.*$sprecstr.*$/ ||
 		    !$printer->{expert} && $key =~ /^$make\|$model$/) {
 		    $printer->{DBENTRY} = $key;
 		}
@@ -2868,7 +2873,7 @@ sub get_db_entry {
 	    $model =~ s/PostScript//i;
 	    $model =~ s/Series//i;
 	    foreach my $key (keys %printer::main::thedb) {
-		if ($printer->{expert} && $key =~ /^$make\|$model\|.*\(recommended\).*$/ ||
+		if ($printer->{expert} && $key =~ /^$make\|$model\|.*$sprecstr.*$/ ||
 		    !$printer->{expert} && $key =~ /^$make\|$model$/) {
 		    $printer->{DBENTRY} = $key;
 		}
@@ -2892,10 +2897,10 @@ sub get_db_entry {
 	    $printer->{OLD_CHOICE} = "XXX";
 	}
     } else {
-	if ($printer->{expert} && $printer->{DBENTRY} !~ /(recommended)/) {
+	if ($printer->{expert} && $printer->{DBENTRY} !~ /$sprecstr/) {
 	    my ($make, $model) = $printer->{DBENTRY} =~ /^([^\|]+)\|([^\|]+)\|/;
 	    foreach my $key (keys %printer::main::thedb) {
-		if ($key =~ /^$make\|$model\|.*\(recommended\).*$/) {
+		if ($key =~ /^$make\|$model\|.*$sprecstr.*$/) {
 		    $printer->{DBENTRY} = $key;
 		}
 	    }

@@ -41,6 +41,11 @@ our %thedb;
 
 our $hplipdevicesdb;
 
+# Translation of the "(recommended)" in printer driver entries
+our $recstr = N("recommended");
+our $precstr = "($recstr)";
+our $sprecstr = quotemeta($precstr);
+
 #------------------------------------------------------------------------------
 
 sub spooler() {
@@ -568,7 +573,7 @@ sub read_printer_db {
 				$driverstr = "GhostScript + $driver";
 			    }
 			    if ($driver eq $entry->{defaultdriver}) {
-				$driverstr .= " (recommended)";
+				$driverstr .= " $precstr";
 			    }
 			    $entry->{ENTRY} = "$entry->{make}|$entry->{model}|$driverstr";
 			    $entry->{ENTRY} =~ s/^CITOH/C.ITOH/i;
@@ -1652,6 +1657,8 @@ sub ppd_entry_str {
     # model name, this with the cleaned manufacturer name
     $model =~ s/^$mf[\s\-]+//i 
 	if $mf && $mf !~ m![\\/\(\)\[\]\|\.\$\@\%\*\?]!;
+    # Translate "(recommended)" in the driver string
+    $driver =~ s/\(recommended\)/$precstr/gi;
     # Put out the resulting description string
     uc($mf) . '|' . $model . '|' . $driver .
       ($lang && " (" . lang::locale_to_main_locale($lang) . ")");
@@ -1739,7 +1746,7 @@ sub poll_ppd_base {
 		$driver =~ s/\s*\([a-z]{2}(|_[A-Z]{2})\)\s*$//;
 		# Recommended Foomatic PPD? Extract "(recommended)"
 		my $isrecommended = 
-		    $driver =~ s/\s+\(recommended\)\s*$//i;
+		    $driver =~ s/\s+$sprecstr\s*$//i;
 		# Remove trailing white space
 		$driver =~ s/\s+$//;
 		# For Foomatic: Driver with "GhostScript + "
@@ -1802,7 +1809,7 @@ sub poll_ppd_base {
 		} elsif ((defined 
 			   $thedb{"$mf|$model|$fullfoomaticdriver"} ||
 			  defined 
-			   $thedb{"$mf|$model|$fullfoomaticdriver (recommended)"}) && 
+			   $thedb{"$mf|$model|$fullfoomaticdriver $precstr"}) && 
 			 $isfoomatic) {
 		    # Expert mode: There is already an entry for the
 		    # same printer/driver combo produced by the
@@ -1810,20 +1817,20 @@ sub poll_ppd_base {
 		    # entry
 		    next;
 		} elsif (defined
-			 $thedb{"$mf|$model|PostScript (recommended)"} &&
+			 $thedb{"$mf|$model|PostScript $precstr"} &&
 			 $isnativeps) {
 		    # Expert mode: "Foomatic + Postscript" driver is
 		    # recommended and this is a PostScript PPD? Make
 		    # this PPD the recommended one
 		    foreach (keys 
-		         %{$thedb{"$mf|$model|PostScript (recommended)"}}) {
+		         %{$thedb{"$mf|$model|PostScript $precstr"}}) {
 			$thedb{"$mf|$model|PostScript"}{$_} =
-			  $thedb{"$mf|$model|PostScript (recommended)"}{$_};
+			  $thedb{"$mf|$model|PostScript $precstr"}{$_};
 		    }
 		    delete
-			$thedb{"$mf|$model|PostScript (recommended)"};
+			$thedb{"$mf|$model|PostScript $precstr"};
 		    if (!$isrecommended) {
-			$key .= " (recommended)";
+			$key .= " $precstr";
 		    }
 		} elsif ($driver =~ /PostScript/i &&
 			 $isrecommended && $isfoomatic &&
@@ -1835,20 +1842,20 @@ sub poll_ppd_base {
 		    # recommended and there was a PostScript PPD? Make
 		    # the PostScript PPD the recommended one
 		    my $firstfound = $foundkeys[0];
-		    if (!(any { /\(recommended\)/ } @foundkeys)) {
+		    if (!(any { /$sprecstr/ } @foundkeys)) {
 			# Do it only if none of the native PostScript
 			# PPDs for this printer is already "recommended"
 			foreach (keys %{$thedb{$firstfound}}) {
-			    $thedb{"$firstfound (recommended)"}{$_} =
+			    $thedb{"$firstfound $precstr"}{$_} =
 				$thedb{$firstfound}{$_};
 			}
 			delete $thedb{$firstfound};
 		    }
-		    $key =~ s/\s*\(recommended\)//;
+		    $key =~ s/\s*$sprecstr//;
 		} elsif ($driver !~ /PostScript/i &&
 			 $isrecommended && $isfoomatic &&
 			 (@foundkeys = grep {
-			     /^$mf\|$model\|.*\(recommended\)/ && 
+			     /^$mf\|$model\|.*$sprecstr/ && 
 			     !/CUPS/i && $thedb{$_}{driver} eq "PPD" 
 			 } keys %thedb)) {
 		    # Expert mode: Foomatic driver other than "Foomatic +
@@ -1858,7 +1865,7 @@ sub poll_ppd_base {
 		    foreach my $sourcekey (@foundkeys) {
 			# Remove the "recommended" tag
 			my $destkey = $sourcekey;
-			$destkey =~ s/\s+\(recommended\)\s*$//i;
+			$destkey =~ s/\s+$sprecstr\s*$//i;
 			foreach (keys %{$thedb{$sourcekey}}) {
 			    $thedb{$destkey}{$_} = $thedb{$sourcekey}{$_};
 			}
