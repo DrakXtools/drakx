@@ -147,10 +147,10 @@ sub card_config__not_listed {
     my @xf4 = grep { $options->{allowFB} || $_ ne 'fbdev' } @xfree4_Drivers;
     my @list = (
 	(map { 'Vendor|' . $_ } keys %$cards),
-	(map { 'XFree 4|' . $_ } @xf4),
+	(map { 'Xorg|' . $_ } @xf4),
     );
 
-    my $r = exists $cards->{$card->{BoardName}} ? "Vendor|$card->{BoardName}" : 'XFree 4|vesa';
+    my $r = exists $cards->{$card->{BoardName}} ? "Vendor|$card->{BoardName}" : 'Xorg|vesa';
     $in->ask_from_({ title => N("X server"), 
 		     messages => N("Choose an X server"),
 		     interactive_help_id => 'configureX_card_list',
@@ -251,7 +251,7 @@ sub configure {
 
     eval { install_server($card, $options, $do_pkgs) };
     if ($@) {
-	$in->ask_warn('', N("Can't install XFree package: %s", $@));
+	$in->ask_warn('', N("Can't install Xorg package: %s", $@));
 	goto card_config__not_listed;
     }
     

@@ -40,7 +40,7 @@ sub info {
 	$info .= N("Color depth: %s\n", translate($Xconfig::resolution_and_depth::depth2text{$resolution->{Depth}}));
 	$info .= N("Resolution: %s\n", join('x', @$resolution{'X', 'Y'}));
     }
-    $info .= N("XFree86 driver: %s\n", $device->{Driver}) if $device->{Driver};
+    $info .= N("Xorg driver: %s\n", $device->{Driver}) if $device->{Driver};
     "$title\n\n$info";
 }
 
@@ -71,8 +71,8 @@ sub choose_xdm {
 	$xdm = $in->ask_yesorno_({ 
 				  title => N("Graphical interface at startup"),
 				  messages =>
-N("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
-Would you like XFree to start when you reboot?"),
+N("I can setup your computer to automatically start the graphical interface (Xorg) upon booting.
+Would you like Xorg to start when you reboot?"),
 				  interactive_help_id => 'configureXxdm',
 				 }, $xdm);
     }

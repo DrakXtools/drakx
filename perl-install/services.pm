@@ -62,7 +62,7 @@ This service provides NFS server functionality, which is configured via the
 nfslock => N_("NFS is a popular protocol for file sharing across TCP/IP
 networks. This service provides NFS file locking functionality."),
 numlock => N_("Automatically switch on numlock key locker under console
-and XFree at boot."),
+and Xorg at boot."),
 oki4daemon => N_("Support the OKI 4w and compatible winprinters."),
 pcmcia => N_("PCMCIA support is usually to support things like ethernet and
 modems in laptops.  It won't get started unless configured so it is safe to have
@@ -88,7 +88,7 @@ sound => N_("Launch the sound system on your machine"),
 syslog => N_("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
 usb => N_("Load the drivers for your usb devices."),
-xfs => N_("Starts the X Font Server (this is mandatory for XFree to run)."),
+xfs => N_("Starts the X Font Server (this is mandatory for Xorg to run)."),
     );
     my ($name) = @_;
     my $s = $services{$name};

@@ -69,7 +69,7 @@ sub check_XFree {
 
     my $f = "/usr/X11R6/lib/X11/rgb.txt"; #- this one is on all platform
     -e $f or $in->do_pkgs->install('xorg-x11', 'xorg-x11-75dpi-fonts');
-    -e $f or die "install XFree86 first!\n";
+    -e $f or die "install Xorg first!\n";
 
     system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 }
