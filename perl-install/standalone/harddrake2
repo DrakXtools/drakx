@@ -142,7 +142,7 @@ my ($menubar, $factory, $opt_menu, $help_menu);
 if ($::isEmbedded) {
     ($menubar, $factory) = create_factory_popup_menu($::Plug, @menu_items);
     $opt_menu = $factory->get_widget("<main>" . strip_first_underscore($menus{options}));
-    print "MENU: $opt_menu => \"<main>" . strip_first_underscore($menus{options}),"\"\n";
+    print "MENU: $opt_menu => \"<main>" . strip_first_underscore($menus{options}), "\"\n";
     $help_menu = $factory->get_widget("<main>" . strip_first_underscore($menus{help}));
 } else {
     $::main_window = $w->{rwindow};
