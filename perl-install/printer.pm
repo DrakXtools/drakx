@@ -602,12 +602,11 @@ sub get_descr_from_ppd {
 }
 
 sub poll_ppd_base {
-    
     #- before trying to poll the ppd database available to cups, we have to make sure
     #- the file /etc/cups/ppds.dat is no more modified.
     #- if cups continue to modify it (because it reads the ppd files available), the
     #- poll_ppd_base program simply cores :-)
-    run_program::rooted($prefix, "ifup lo"); #- else cups will not be happy!
+    run_program::rooted($prefix, "ifconfig lo 127.0.0.1"); #- else cups will not be happy! and ifup lo don't run ?
     run_program::rooted($prefix, "/etc/rc.d/init.d/cups start");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
