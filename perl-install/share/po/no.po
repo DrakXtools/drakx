@@ -1,5 +1,7 @@
-# translation of KensDrakX-no.po to 
-# translation of DrakX-no.po to 
+# translation of DrakX-no.po to Norwegian Bokmål
+# translation of DrakX-no.po to
+# translation of KensDrakX-no.po to
+# translation of DrakX-no.po to
 # translation of DrakX-no.po to
 # translation of DrakX-no.po to
 # translation of DrakX-no.po to Norsk Bokmål
@@ -9,14 +11,15 @@
 # Terje Bjerkelia <terje@bjerkelia.com>, 1999-2000
 # Andreas Bergstrøm <abergstr@halden.net>, 2000
 # Kenneth Rørvik <kenneth@argon.no-ip.com>, 2003
+# Per Øyvind Karlsen <peroyvind@sintrax.net>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: KensDrakX-no\n"
+"Project-Id-Version: DrakX-no\n"
 "POT-Creation-Date: 2003-03-09 13:01+0100\n"
-"PO-Revision-Date: 2003-03-08 21:49-0500\n"
-"Last-Translator: \n"
-"Language-Team:  <C@li.org>\n"
+"PO-Revision-Date: 2003-03-09 16:20-0500\n"
+"Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
+"Language-Team: Norwegian Bokmål <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4836,9 +4839,9 @@ msgid "Please choose your type of mouse."
 msgstr "Vennligst velg din musetype."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key for %s"
-msgstr "Krypteringsnøkkel"
+msgstr "Krypteringsnøkkel for %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7330,6 +7333,13 @@ msgid ""
 "description window\n"
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
+"[OPSJON]...\n"
+"  --no-confirmation      ikke spør det første bekreftelsesspørsmålet i "
+"MandrakeUpdate modus\n"
+"  --no-verify-rpm        ikke verifiser pakkesignaturer\n"
+"  --changelog-first      vis endringslogg før filliste i "
+"beskrivelsesvinduet   --merge-all-rpmnew     foreslå å slå sammen alle ."
+"rpmnew/.rpmsave filer"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7349,6 +7359,15 @@ msgid ""
 "--status : returns 1 if connected 0 otherwise, then exit.\n"
 "--quiet : don't be interactive. To be used with (dis)connect."
 msgstr ""
+"[OPSJONER]\n"
+"Nettverks og internett forbindelse og overvåkningsapplikasjon\n"
+"\n"
+"--defaultintf interface : vis dette grensesnittet som standard\n"
+"--connect : Koble til internett dersom ikke allerede tilkoblet\n"
+"--disconnect : koble fra internett dersom tilkoblet\n"
+"--force : tving til/frakobling. Brukes med --(dis)connect.\n"
+"--status : returnerer 1 dersom tilkoblet, 0 hvis ikke.\n"
+"--quiet : ikke vær interaktiv. Brukes med --(dis)connect."
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7377,6 +7396,19 @@ msgid ""
 "--delclient      : delete a client machine from MTS (requires MAC address, "
 "IP, nbi image name)"
 msgstr ""
+"[OPSJONER]...\n"
+"Mandrake Terminaltjener konfigurasjon\n"
+"--enable         : aktiver MTS\n"
+"--disable        : deaktiver MTS\n"
+"--start          : start MTS\n"
+"--stop           : stopp MTS\n"
+"--adduser        : legg til en eksisterende systembruker til MTS (krever "
+"brukernavn)\n"
+"--deluser        : fjern en systembruker fra MTS (krever brukernavn)\n"
+"--addclient      : legg til en klientmaskin til MTS (krever MAC addresse, "
+"IP, nbi bildenavn)\n"
+"--delclient      : slett en klientmaskin fra MTS (krever MAC addresse, IP, "
+"nbi bildenavn)"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7394,6 +7426,18 @@ msgid ""
 "                 : name_of_application like  so for staroffice \n"
 "                 : and gs for ghostscript for only this one."
 msgstr ""
+"Skrifttype import og "
+"overvåkningsapplikasjon                                     \n"
+"--windows_import : importer fra alle tilgjengelige windowspartisjoner.\n"
+"--xls_fonts      : vis alle typer som allerede eksisterer fra xls\n"
+"--strong         : sterk verifikasjon af skrifttyper.\n"
+"--install        : installer alle typer og kataloger.\n"
+"--uninstall      : avinstaller alle typer og kataloger.\n"
+"--replace        : erstatt typer som eksisterer fra før\n"
+"--application    : 0 ingen applikasjon.\n"
+"                 : 1 alle tilgjengelige støttede applikasjoner.\n"
+"                 : applikasjonsnavn, som \"so\" for staroffice \n"
+"                 : og gs for ghostscript."
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7405,6 +7449,12 @@ msgid ""
 "  --report          - program should be one of mandrake tools\n"
 "  --incident        - program should be one of mandrake tools"
 msgstr ""
+"[OPSJONER] [PROGRAMNAVN]\n"
+"\n"
+"OPTIONS:\n"
+"  --help            - skriv denne hjelp-meldingen.\n"
+"  --report          - program skal være et av Mandrakeverktøyene\n"
+"  --incident        - program skal være et av Mandrakeverktøyene"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7421,6 +7471,17 @@ msgid ""
 "--help                : show this message.\n"
 "--version             : show version number.\n"
 msgstr ""
+"[--config-info] [--daemon] [--debug] [--default] [--show-conf]\n"
+"Backup og gjenopprettingsapplikasjon\n"
+"\n"
+"--default             : lagre standardkataloger.\n"
+"--debug               : vis alle avlusningsmeldinger.\n"
+"--show-conf           : liste over filer eller kataloger til å ta backup "
+"av.\n"
+"--config-info         : forklar konfigurasjonsfilvalg (for ikke-X brukere)\n"
+"--daemon              : bruk tjenestekonfigurasjon. \n"
+"--help                : vis denne meldingen.\n"
+"--version             : vis versjonsnummer.\n"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -9082,6 +9143,23 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
+"Den klassiske metoden for å avluse lydoppsettet er å kjøre følgende\n"
+"kommandoer:\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" vil vise hvilken driver lydortet bruker \n"
+"som standard\n"
+"- \"grep sound-slot /etc/modules.conf\" vil vise hvilken driver som er i "
+"bruk\n"
+"\n"
+"- \"/sbin/lsmod\" lar deg se om denne driveren er lastet\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" og \"/sbin/chkconfig --list alsa\" vil\n"
+"vise om disse tjenestene er satt opp til å startes.\n"
+"\n"
+"- \"aumix -q\" vil vise om lydvolumet er skrudd ned eller ikke\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" vil vise hvilke programmer som bruker "
+"lydkortet\n"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9342,7 +9420,7 @@ msgstr "Ditt valg? (standard `%s'%s) "
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid " enter `void' for void entry"
-msgstr ""
+msgstr " skriv 'void' for tomt felt"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -10301,6 +10379,8 @@ msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
 "enough '0' (zeroes)."
 msgstr ""
+"Hastighet skal ha suffix k, M eller G (for eksempel \"11M\"), eller "
+"tilstrekkelig antall nuller"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -11656,6 +11736,25 @@ msgid ""
 "The first command can be given by any normal user, the second must be given "
 "as root. After having done so you can print normally.\n"
 msgstr ""
+"Skriveren din tillhører gruppen av GDI laserskrivere (winprinters) solgt av "
+"forskjellige produsenter som bruker Zenographics ZJ stream rasterformat for "
+"dataene som blir sendt til skriveren. Driveren for disse skriverne "
+"erfortsatt i et meget tidlig utviklingstrinn og vil da kanskje ikke alltid "
+"fungere skikkelig. Spesielt er det mulig at skriveren bare arbeider når du "
+"velger A4 papirstørrelse.\n"
+"\n"
+"Noen av disse skriverne, som HP Laserjet 1000, som denne driveren "
+"opprinnelig ble laget for, trenger at deres firmware blir lastet opp til dem "
+"etter de skrus på. I HP Laserjet 1000 tilfellet, så trengs det at du søker "
+"igjennom skriverens Windows driver CD eller din Windows partisjon for filen "
+"\"sihp1000.img\" og laster filen opp til printeren med en av de følgende "
+"kommandoene:\n"
+"\n"
+"     lpr -o raw sihp1000.img\n"
+"     cat sihp1000.img > /dev/usb/lp0\n"
+"\n"
+"Den første kommandoen kan gis av en vanlig bruker, den andre må bli gitt som "
+"root. Etter at du har gjort det kan skrive ut som vanlig.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13161,6 +13260,9 @@ msgid ""
 "\n"
 "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
+"Argumenter: (navn)\n"
+"\n"
+"Legg til navnet som et unntak for håndteringen av passordforeldelse fra msec."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13169,6 +13271,9 @@ msgid ""
 "\n"
 " Enable/Disable sulogin(8) in single user level."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aktiver/Deaktiver sulogin(8) i enbruker-nivå."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13177,6 +13282,9 @@ msgid ""
 "\n"
 " Activate/Disable daily security check."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aktiver/Deaktiver daglig sikkerhetssjekk."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13185,6 +13293,9 @@ msgid ""
 "\n"
 "Activate/Disable ethernet cards promiscuity check."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aktiver/Deaktiver ethernettkorts promiskiøssjekk."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13193,6 +13304,9 @@ msgid ""
 "\n"
 "Use password to authenticate users."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Bruk passord for å autentisere brukere."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13201,6 +13315,10 @@ msgid ""
 "\n"
 " Enabling su only from members of the wheel group or allow su from any user."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+" Aktiver su bare for medlemmer av wheel gruppen eller tillat su fra hvilken "
+"som helst bruker."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13209,6 +13327,9 @@ msgid ""
 "\n"
 "Enable/Disable msec hourly security check."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aktiver/Deaktiver msec sikkerhetssjekk hver time."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13217,6 +13338,9 @@ msgid ""
 "\n"
 "Enable/Disable the logging of IPv4 strange packets."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aktiver/Deaktiver loggingen av rare IPv4 pakker."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13225,6 +13349,9 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aktiver/Deaktiver libsafe hvis libsafe er funnet på systemet."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13233,6 +13360,9 @@ msgid ""
 "\n"
 "Enable/Disable IP spoofing protection."
 msgstr ""
+"Argumenter: (arg, alert=1)\n"
+"\n"
+"Aktiver/Deaktiver IP forfalskningsbeskyttelse."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13242,6 +13372,10 @@ msgid ""
 "Enable/Disable name resolution spoofing protection.  If\n"
 "\\fIalert\\fP is true, also reports to syslog."
 msgstr ""
+"Argumenter: (arg, alert=1)\n"
+"\n"
+"Aktiver/Deaktiver navneoppslags forfalskningsbeskyttelse.  Hvis\n"
+"\\fIalert\\fP er sann, rapporter også til syslog."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13252,6 +13386,11 @@ msgid ""
 "expression describing what to log (see syslog.conf(5) for more details) and\n"
 "dev the device to report the log."
 msgstr ""
+"Argumenter: (arg, expr='*.*', dev='tty12')\n"
+"\n"
+"Aktiver/Deaktiver syslog rapporter til konsol12. \\fIexpr\\fP er uttrykket\n"
+"som beskriver hva som skal logges (se syslog.conf(5) for flere detaljer) og\n"
+"dev er enheten som loggen skal rapporteres til."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13262,6 +13401,11 @@ msgid ""
 "allow and /etc/at.allow\n"
 "(see man at(1) and crontab(1))."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aktiver/Deaktiver crontab og at for brukere. Plasser tillatte brukere i /etc/"
+"cron.allow og /etc/at.allow\n"
+"(se man at(1) og crontab(1))."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13277,6 +13421,16 @@ msgid ""
 "the file\n"
 "during the installation of packages."
 msgstr ""
+"Argumenter: ()\n"
+"\n"
+"Hvis SERVER_LEVEL (eller SECURE_LEVEL hvis fraværende) er større enn 3\n"
+"i /etc/security/msec/security.conf, opprettes symlinken /etc/security/msec/"
+"server\n"
+"til å peke til /etc/security/msec/server.<SERVER_LEVEL>. /etc/security/msec/"
+"server\n"
+"brukes av chkconfig --add for å avgjøre om en tjeneste skal legges til hvis "
+"den er tilstede i filen\n"
+"under installasjonenen av pakker."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13289,6 +13443,13 @@ msgid ""
 "services you need, use /etc/hosts.allow\n"
 "(see hosts.allow(5))."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Autoriser alle tjenester kontrollert av tcp_wrappers (se hosts.deny(5)) hvis "
+"\\fIarg\\fP = ALL. Bare lokale\n"
+"hvis \\fIarg\\fP = LOCAL og ingen hvis \\fIarg\\fP = NONE. For å "
+"autoriseretjenestene du trenger, bruk /etc/hosts.allow\n"
+"(se hosts.allow(5))."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13298,6 +13459,10 @@ msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server on the tcp port 6000 or not."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Dette argumentet spesifiserer om klienter er autoriserte til å koble\n"
+"til X-tjeneren på tcp port 6000 eller ei."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13308,6 +13473,11 @@ msgid ""
 "on the client side: ALL (all connections are allowed), LOCAL (only\n"
 "local connection) and NONE (no connection)."
 msgstr ""
+"Argumenter: (arg, listen_tcp=None)\n"
+"\n"
+"Tillat/Forby X-tilkoblinger. Første argumentet spesifiserer hva som er\n"
+"gjort på klientsiden: ALL (alle tilkoblinger er tillatt), LOCAL (bare\n"
+"lokale tilkoblinger) og NONE (ingen tilkoblinger)."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13317,6 +13487,10 @@ msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Tillat/Forby liste over brukere på systemet i innloggingshåndterer (kdm, "
+"mdkdm og gdm)"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13325,6 +13499,9 @@ msgid ""
 "\n"
 "Allow/Forbid direct root login."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Tillat/Forby direkte root-innlogging"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13333,6 +13510,9 @@ msgid ""
 "\n"
 "Allow/Forbid remote root login."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Tillat/Forby fjern root-innlogging"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13341,6 +13521,9 @@ msgid ""
 "\n"
 "Allow/Forbid reboot by the console user."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aksepter/Nekt omstart av konsolbrukeren."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13351,6 +13534,11 @@ msgid ""
 "\\fP = NONE no issues are\n"
 "allowed else only /etc/issue is allowed."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"If \\fIarg\\fP = ALL tillater /etc/issue og /etc/issue.net å eksistere. Hvis "
+"\\fIarg\\fP = NONE ingen n issues får\n"
+"tillatelse, ellers er bare /etc/issue tillatt."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13359,6 +13547,9 @@ msgid ""
 "\n"
 "Allow/Forbid autologin."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Tillat/Forby automatisk innlogging."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13367,6 +13558,9 @@ msgid ""
 "\n"
 " Accept/Refuse icmp echo."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aksepter/Nekt icmp echo."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13375,6 +13569,9 @@ msgid ""
 "\n"
 " Accept/Refuse broadcasted icmp echo."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aksepter/Nekt kringkastede icmp echo."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13383,6 +13580,9 @@ msgid ""
 "\n"
 "Accept/Refuse bogus IPv4 error messages."
 msgstr ""
+"Argumenter: (arg)\n"
+"\n"
+"Aksepter/Nekt tullete IPv4 feilmeldinger."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -13532,7 +13732,7 @@ msgstr "Noe gikk feil! - Er mkisofs installert?"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Etherboot ISO image is %s"
-msgstr ""
+msgstr "Etheroppstart ISO imagefil er %s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13631,6 +13831,9 @@ msgid ""
 "Need to restart the Display Manager for full changes to take effect. \n"
 "(service dm restart - at the console)"
 msgstr ""
+"Trenger å starte innlogginshåndterer på nytt for at alle endringer skal tre "
+"i effekt. \n"
+"(service dm restart - i konsolet)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13665,7 +13868,7 @@ msgstr "Tynn klient"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "No net boot images created!"
-msgstr ""
+msgstr "Ingen nettverksoppstart imagefiler ble laget!"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13689,6 +13892,9 @@ msgid ""
 " the one in the Terminal Server database.\n"
 "Delete/re-add the user to the Terminal Server to enable login."
 msgstr ""
+"!!! Indikerer at passordet i systemdatabasen er annerledes enn\n"
+" det i terminalserver-databasen.\n"
+"Slett/legg til bruker på nytt i terminalserveren for å aktivere innlogging."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13876,6 +14082,137 @@ msgid ""
 " \n"
 "\n"
 msgstr ""
+"drakTermServ oversikt\n"
+"\t\t\t   \n"
+"        - Lag Etheroppstartsaktiverte oppstartsimagefiler:\n"
+"        \t\tFor å starte med en kjerne via etheroppstart, må en spesiell "
+"kjerne/initrd imagefil opprettes.\n"
+"        \t\tmkinitrd-net gjør mye av dette arbeidet og drakTermServ er bare "
+"et grafisk grensesnitt\n"
+"        \t\tfor å hjelpe til med å håndtere/endre på disse imagefilene.\n"
+"\n"
+"        - Vedlikehold /etc/dhcpd.conf:\n"
+"        \t\tFor å starte klientene over nettverk, hver klient trenger en "
+"entré i dhcpd.conf, som gir ut en IP-adresse\n"
+"        \t\tog nettverksoppstart imagefiler til maskinen. drakTermServ "
+"hjelper til med å lage//fjerne disse entréene.\n"
+"\t\t\t\n"
+"        \t\t(PCI-kort kan unnlate imagefilen - etherboot vil forespørre "
+"denriktige imagefilen. Du burde\n"
+"        \t\togså vurdere det når etherboot ser etter bildefilene, den "
+"forventer navn som\n"
+"        \t\tboot-3c59x.nbi, framfor boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tEn typisk dhcpd.conf strofe for å støtte diskløse klienter "
+"serslik ut:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tMens du kan bruke en brønn av IP-adresse, framfor å sette opp en "
+"spesifikoppsettsentré for\n"
+"\t\t\ten klient maskin, ved bruk av faste adresseskjema som letter\n"
+"bruken\n"
+"\t\t\tav klientspesifike konfigurasjonsfiler som ClusterNFS tilbyr.\n"
+"\t\t\t\n"
+"\t\t\tMerk: \"#type\" entréen er bare brukt av drakTermServ.  Klienter "
+"kanenten være \"tynne\"\n"
+"\t\t\teller 'fete'.  Tynne klienter kjører mesteparten av programvaren via "
+"xdmcp, mens tykke klienter kjører mesteparten\n"
+"av programvaren på klientmaskinen. En spesiell inttab, /etc/inittab\\$\\"
+"$IP=client_ip\\$\\$ blir\n"
+"\t\t\tskrevet for tynne klienter. Systemkonfigurasjonsfilene xdm-config, "
+"kdmrc, og gdm.conf blir modifiserte\n"
+"\t\t\thvis tynne klienter blir brukt, for å aktivere xdmcp. Siden det er "
+"sikkerhetsproblematikkrundt bruken av xdmcp,\n"
+"\t\t\tså blir hosts.deny og hosts.allow endret for å begrense tilgangen til "
+"det lokale subnettet.\n"
+"\t\t\t\n"
+"\t\t\tMerk: Du må stoppe/starte tjeneren etter å ha lagt til eller "
+"endretklienter.\n"
+"\t\t\t\n"
+"        - Vedlikehold /etc/exports:\n"
+"        \t\tClusternfs lar deg eksportere rot-filsystemet til diskløse "
+"klienter, drakTermServ\n"
+"        \t\tsetter opp de riktige entréene for å tillate anonym tilgang "
+"tilrot-filsystemet fra\n"
+"        \t\tdiskløse klienter.\n"
+"\n"
+"        \t\tEn typisk eksportering-entré for clusternfs er:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNETT/MASKE(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tHvor SUBNETT/MASKE blir defintert for ditt nettverk.\n"
+"        \t\t\n"
+"        - Vedlikehold /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tFor at brukere skal kunne logge inn på systemet fra en "
+"diskløsklient, så må deres entré i\n"
+"        \t\t/etc/shadow kopieres inn i /etc/shadow\\$\\$CLIENTS\\$\\$. "
+"drakTermServ hjelper til\n"
+"        \t\tved å legge til og slette brukere fra denne filen.\n"
+"\n"
+"        - Per klient /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
+"        \t\tGjennom clusternfs så kan hver diskløse klient ha deres "
+"egneunike konfigurasjonsfil\n"
+"        \t\tpå rot filsystemet på tjeneren. I fremtiden vil drakTermServ "
+"kunne hjelpe til med å lage disse\n"
+"        \t\tfilene.\n"
+"\n"
+"        - Per klient systemkonfigurasjonsfiler:\n"
+"        \t\tGhennomclusternfs så hver diskløse klient ha deres egne unike "
+"konfigurasjonsfiler\n"
+"        \t\tpå rot-filesystemet på tjeneren. I fremtiden vil drakTermServ "
+"kunne hjelpe til med å opprette disse filene\n"
+"        \t\tsom feks. /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
+"sysconfig/keyboard på per klient\n"
+"        \t\tbasis.\n"
+"\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ vil configure denne filen til å virke sammenmed "
+"imagefilene som blir opprettet av\n"
+"        \t\tmkinitrd-net, og entréene i /etc/dhcpd.conf, for å gi "
+"utnettverks oppstartsimagefilene til hver \n"
+"        \t\tdiskløse klient.\n"
+"\n"
+"        \t\tEn typisk tftp konfigurasjonsfil ser slik ut:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tForandringen her fra den vanlige installasjonen er forandringen "
+"av disable flagget til\n"
+"        \t\t'no' og endring av filbanen til /var/lib/tftpboot, hvor mkinitrd-"
+"net\n"
+"        \t\tplassere sine imagefiler.\n"
+"\n"
+"        - Opprett etherboot disketter/CD'er:\n"
+"        \t\tDe diskløse klientmaskinene trenger enten ROM imagefiler på "
+"nettverkskortet, en oppstartsdiskket\n"
+"        \t\teller en CD for å initiere oppstartssekvensen.  drakTermServ vil "
+"hjelpe til med generere disse imagefilene,\n"
+"        \t\tbasert på nettverkskortet i klientmaskinen.\n"
+"        \t\t\n"
+"        \t\tEt basis eksempel på opprrettelse av en oppstartsdiskett for "
+"3Com 3c509 manuelt:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -14079,6 +14416,15 @@ msgid ""
 "data. It is important to be careful and not modify the \n"
 "backup data files by hand.\n"
 msgstr ""
+"\n"
+"Problemer ved gjenoppretting fra sikkerhetskopi:\n"
+"\n"
+"Under gjenopprettingssteget så vil DrakBackup sjekke alle dine\n"
+"sikkerhetskopifiler før dem blir gjenopprettet.\n"
+"Før du gjenoppretter så vil DrakBackup fjerne din\n"
+"opprinnelige katalog, og du vil miste alle dine data. \n"
+"Det er viktig at du er forsiktig og ikke modifiserer \n"
+"sikkerhetskopidata for hånd.\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14091,6 +14437,13 @@ msgid ""
 "drive before sending it to the server.\n"
 "\n"
 msgstr ""
+"valgbeskrivelse:\n"
+"\n"
+"Vær varsom når du bruker ftp-sikkerhetskopiering, siden bare \n"
+"sikkerhetskopier som allerede er ferdige blir sendt til tjeneren.\n"
+"Så for øyeblikket så trenger du å lage sikkerhetskopien på din \n"
+"harddisk før du sender den til tjeneren.\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14131,6 +14484,41 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"Beskrivelse:\n"
+"\n"
+"  Drakbackup blir brukt til å ta sikkerhetskopi av ditt system.\n"
+"  Under konfigureringen kan du velge: \n"
+"\t- Systemfiler, \n"
+"\t- Brukerfiler, \n"
+"\t- Andre filer.\n"
+"\teller hele ditt system ... og Andre (som Windows partisjoner)\n"
+"\n"
+"  Drakbackup lar deg ta sikkerhetskopi av ditt system til:\n"
+"\t- Harddisk.\n"
+"\t- NFS.\n"
+"\t- CD-ROM (CDRW), DVD-ROM (med autoboot, rescue og autoinstall.).\n"
+"\t- FTP.\n"
+"\t- Rsync.\n"
+"\t- Webdav.\n"
+"\t- Tape.\n"
+"\n"
+"  Drakbackup lar deg gjenopprette ditt system til\n"
+"  en egenvalgt katalog.\n"
+"\n"
+"  Som standard så vil alle dine sikkerhetskopier bli lagret i din\n"
+"  /var/lib/drakbackup katalog.\n"
+"\n"
+"  Konfigurasjonsfiler:\n"
+"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
+"\n"
+"Gjenopprettelsessteg:\n"
+"  \n"
+"  Under gjenopprettelsessteget så vil DrakBackup fjerne \n"
+"  din opprinnelige katalog og sjekke at alle \n"
+"  sikkerhetskopifiler ikke er blitt korrupte. Det er anbefalt at \n"
+"  du gjør en siste sikkerhetskopi før du gjenoppretter.\n"
+"\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14177,6 +14565,28 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"gjenopprettelsesbeskrivelse:\n"
+" \n"
+"Bare den alle siste datoen vil bli brukt, pga. voksende sikkerhetskopier \n"
+"så er det nødvendig å gjenopprette en etter en med eldre sikkerhetskopier.\n"
+"\n"
+"Så om du ikke vil gjenopprette en bruker, velg vekk all deres\n"
+"sjekkbokser.\n"
+"\n"
+" - Voksende sikkerhetskopier:\n"
+"\n"
+"\tVoksende sikkerhetskopi er den mest opsjonen \n"
+"\tvalget du kan bruke. Dette valget tillater deg å \n"
+"\tta sikkerhetskopi av alle dine data første gangen, og \n"
+"\tbare den forandrede dataen senere.\n"
+"\tSå da vil du ha muligheten til under gjenopprettingen,\n"
+"\tå kunne gjenopprette dine data fra en bestemt\n"
+" dato\n"
+"\tHvis du ikke har valgt denne opsjonen, så vil alle\n"
+"\teldre sikkerhetskopier bli slettet før hver sikkerhetskopiering.    \n"
+"\n"
+"\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14219,6 +14629,42 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"Beskrivelse av opsjoner:\n"
+"\n"
+" - Backup av systemfiler:\n"
+"       \n"
+"\tDenne opsjonen lar deg ta backup av din /etc katalog,\n"
+"\tsom inneholder alle konfigurasjonsfiler. Vær \n"
+"\tforsiktig så du ikke overskriver:\n"
+"\t\t/etc/passwd \n"
+"\t\t/etc/group \n"
+"\t\t/etc/fstab\n"
+"\n"
+" - Ta backup av brukerfiler: \n"
+"\n"
+"\tDette valget lar deg velge alle brukere som du  \n"
+"\tønsker å ta backup av .\n"
+"\tFor å spare plass anbefales det at du ikke  \n"
+"\tinkluderer nettleserens cache.\n"
+"\n"
+" - Ta backup av andre filer: \n"
+"\n"
+"\tDenne opsjonen lar deg legge til mer data.\n"
+"\tMed de andre backupvalgene er det ikke\n"
+"\tmulig å velge inkrementell backup.\t\t\n"
+" \n"
+" - Inkrementell backup:\n"
+"\n"
+"\tDEtte er det kraftigste valget for å ta \n"
+"\tbackup. Dette valget lar deg ta backup \n"
+"\tav alle data den første gangen, og senere \n"
+"\tbare data som har endret seg.\n"
+"\tDu kan senere gjenopprette data \n"
+"\tfra en spesifisert dato.\n"
+"\tHvis du ikke har valgt denne opsjonen blir \n"
+"\talle gamle backups slettet før ny blir kjørt.    \n"
+"\n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14267,6 +14713,34 @@ msgid ""
 "      \n"
 "\n"
 msgstr ""
+"Beskrivelse av opsjoner::\n"
+"\n"
+" Her vil Drakbackup tillate endring av:\n"
+"\n"
+" - Kompresjonsmodus:\n"
+"    \n"
+"      Hvis du velger bzip2 kompresjon, vil du komprimere\n"
+"      dataene bedre enn med gzip (ca 2-10 %%).\n"
+"      Dette er ikke valgt som standard siden\n"
+"      slik kompresjon tar lenger tid (ca 1000%% mer).\n"
+" \n"
+" - Oppdateringsmodus:\n"
+"\n"
+"      Denne opsjonen vil oppdatere din backup, men \n"
+"      er ikek særlig nyttig siden du må dekomprimere\n"
+"      din backup før du kan oppdatere den.\n"
+"      \n"
+" - Ignorer backup modus:\n"
+"\n"
+"      Som CVS vil Drakbackup ignorere alle referanser\n"
+"      inkludert i .backupignore filer i hver katalog.\n"
+"      eks: \n"
+"         #> cat .backupignore\n"
+"         *.o\n"
+"         *~\n"
+"         ...\n"
+"      \n"
+"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17442,7 +17916,7 @@ msgid "choose image file"
 msgstr "velg bildefil"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose image"
 msgstr "velg bildefil"
 
@@ -18936,6 +19410,9 @@ msgid ""
 "Your new operating system is the result of collaborative work of the "
 "worldwide Linux Community."
 msgstr ""
+"Suksessen til Mandrakesoft er basert på prinsippene tli Fri Programvare. "
+"Ditt nye operativsystem er resultatet av samarbeidet til det verdensdekkende "
+"Linuxmiljøet. "
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
@@ -18953,6 +19430,8 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
+"For å dele din kunnskap og hjelpe til med å lage Linuxprogramvare, bli med i "
+"våre diskusjonsfora på våre \"Community\" vevsider. "
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -18960,11 +19439,13 @@ msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
 "involved in the Free Software world!"
 msgstr ""
+"Vil du vite mer og bidra til Open Source samfunnet? Bli involvert i verdenen "
+"av Fri Programvare!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
-msgstr ""
+msgstr "Bygg fremftiden for Linux!"
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -18972,6 +19453,9 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
+"Og selvfølgelig, press multimedia til sine ytterste grenser med den aller "
+"siste programvare for å spille av video, lydfiler og for å håndtere dine "
+"bilder eller fotoer."
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -18979,11 +19463,13 @@ msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
 "Kmail, create your documents with OpenOffice.org."
 msgstr ""
+"Surf nettet med Mozilla eller Konqueroer, les din epost med Evolution eller "
+"Kmail, lag dine dokumenter med OpenOffice.org."
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
-msgstr ""
+msgstr "MandrakeSoft har valgt den beste programvaren for deg"
 
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
@@ -18993,11 +19479,15 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
+"Mandrake Linux 9.1 gir deg Mandrake Kontrollsenter, et kraftig verktøy for å "
+"tilpasse din maskin fullstendig til det bruk du har behov for. Konfigurer og "
+"tilpass elementer som sikkerhetsnivå, tilbehør (skjerm, mus, tastatur), "
+"internettforbindelse og mye mer!"
 
 #: ../../share/advertising/04-configuration.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrake's multipurpose configuration tool"
-msgstr "Mandrake Terminalserver konfigurasjon"
+msgstr "Mandrakes multifunksjons konfigurasjonsverktøy"
 
 #: ../../share/advertising/05-desktop.pl:1
 #, c-format
@@ -19006,11 +19496,14 @@ msgid ""
 "Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
 "2.2, Window Maker, ..."
 msgstr ""
+"Tilpass din maskin fullstendig til dine behov takket være 11 tilgjengelige "
+"Mandake Linux brukergrensesnitt som kan modifiseres i stor grad: KDE 3.1, "
+"GNOME 2.2, Window Maker, ..."
 
 #: ../../share/advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
-msgstr ""
+msgstr "Et tilpasningsvennlig miljø"
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
@@ -19019,11 +19512,14 @@ msgid ""
 "+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
 "development environments."
 msgstr ""
+"Å modifisere og endre i forskjellige språk som Perl, Python, C og C++ har "
+"aldri vært så enkelt, takket være GNU gcc 3 og de beste utviklingsmiljøene "
+"basert på åpen kildekode."
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.1: the ultimate development platform"
-msgstr ""
+msgstr "Mandrake Linux 9.1: den ultimate utviklingsplattformen"
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
@@ -19031,11 +19527,13 @@ msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
 "firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
+"Gjør om din maskin til en kraftig Linux-tjener: Webtjener, epost, brannmur, "
+"router, fil og skriverdeling (etc.) er bare noen få klikk unna!"
 
 #: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
-msgstr ""
+msgstr "Gjør om din maskin til en server du kan stole på"
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
@@ -19043,11 +19541,13 @@ msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
+"Vår lange rekke av Linux løsninger, så vel som spesialtilbyd på produkter og "
+"andre \"godsaker\", er tilgjengelig fra fra vår e-butikk:"
 
 #: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid "The official MandrakeSoft Store"
-msgstr ""
+msgstr "Den offisielle MandrakeSoft butikken"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
@@ -19055,11 +19555,13 @@ msgid ""
 "Enhance your computer performance with the help of a selection of partners "
 "offering professional solutions compatible with Mandrake Linux"
 msgstr ""
+"Forbedre din maskinytelse ved hjelp av utvalgte partnere som tilbyr "
+"profesjonelle løsninger kompatible med Mandrake Linux"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
-msgstr ""
+msgstr "Få de beste sakene med Mandrake Linux strategiske partnere"
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -19068,6 +19570,9 @@ msgid ""
 "version ever: Draksec, a system security management tool, and a strong "
 "firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
+"MandrakeSoft har designet eksklusive verktøy for å lage den mest sikre Linux-"
+"versjonen noensinne: Draksec, et systemsikkerhets-håndteringsverktøy, og en "
+"sterk brannmur i lag sammen for å redusere hackingrisikoen betraktelig."
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -19087,6 +19592,10 @@ msgid ""
 "network (VPN) server and client, an intrusion detection system and a traffic "
 "manager."
 msgstr ""
+"Fullfør ditt sikkerhetsoppsett med denne veldig brukervennlige programvaren "
+"som kombinerer høyytelses komponenter som brannmur, virutelle private "
+"nettverk (VPN) tjener og klient, et innbrudsoppdagelsessystem og en "
+"trafikkhåndterer."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
