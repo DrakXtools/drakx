@@ -683,7 +683,7 @@ sub setSelectedFromCompssList {
 	    last;
 	}
     }
-    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ") for flags ", map_each { if_($::b, $::a) } %$rpmsrate_flags_chosen);
+    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ") for flags ", sort(map_each { if_($::b, $::a) } %$rpmsrate_flags_chosen));
     log::l("setSelectedFromCompssList: ", join(" ", sort map { $_->name } grep { $_->flag_selected } @{$packages->{depslist}}));
     $min_level;
 }

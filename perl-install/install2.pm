@@ -220,7 +220,7 @@ sub choosePackages {
     #- always setPackages as it may have to copy hdlist files and synthesis files.
     installStepsCall($o, $auto, 'setPackages', $o->{isUpgrade} && $ent_number == 1);
     installStepsCall($o, $auto, 'choosePackages', $o->{packages}, $o->{compssUsers}, $ent_number == 1);
-    log::l("rpmsrate_flags_chosen's: ", join(" ", map_each { if_($::b, $::a) } %{$o->{rpmsrate_flags_chosen}}));
+    log::l("rpmsrate_flags_chosen's: ", join(" ", sort(map_each { if_($::b, $::a) } %{$o->{rpmsrate_flags_chosen}})));
 
     #- check pre-condition where base backage has to be selected.
     pkgs::packageByName($o->{packages}, 'basesystem')->flag_available or die "basesystem package not selected";
