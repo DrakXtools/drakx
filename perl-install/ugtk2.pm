@@ -863,7 +863,7 @@ sub new {
 
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
-		$::WizardTable->set_size_request(540,420);
+		$::WizardTable->set_size_request(540,460);
 	    }
 	    $::WizardWindow->show_all;
 	    flush();
