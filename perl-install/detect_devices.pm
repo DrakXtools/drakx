@@ -11,6 +11,7 @@ use log;
 use common;
 use devices;
 use run_program;
+use modules;
 use c;
 
 #-#####################################################################################
@@ -450,9 +451,7 @@ sub getSoundDevices() {
 
 sub isTVcard { member($_[0]{driver}, qw(bttv cx8800 saa7134 usbvision)) }
 
-sub getTVcards() { 
-    grep { isTVcard($_) } detect_devices::probeall();
-}
+sub getTVcards() { modules::probe_category('multimedia/tv') }
 
 sub getInputDevices() {
     my (@devices, $device);
