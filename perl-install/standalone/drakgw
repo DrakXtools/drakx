@@ -51,7 +51,7 @@ my $masq_file = "/etc/shorewall/masq";
 my $dhcpd_conf = "/etc/dhcpd.conf";
 my $cups_conf = "/etc/cups/cupsd.conf";
 
-my $shorewall = network::shorewall::read();
+my $shorewall = network::shorewall::read($in,'silent');
 
 my $in = 'interactive'->vnew('su');
 $::Wizard_title = N("Internet Connection Sharing");
