@@ -218,7 +218,7 @@ sub real_main {
           if (1 < $nb) {
               return "multiple_internet_cnx";
           } else {
-              $netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0] if $nb == 1;
+              $netc->{internet_cnx_choice} = $nb == 1 ? (keys %{$netc->{internet_cnx}})[0] : $netcnx->{type};
               return $save_cnx->();
           }
       };
