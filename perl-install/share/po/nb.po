@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-nb\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-12 14:56+0200\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-18 16:51+0200\n"
 "Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
 "Language-Team: Norwegian Bokmål <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -196,7 +196,7 @@ msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
 "Hvis satt, send epostrapport til denne epost-adressen, ellers send til root."
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Parametre"
@@ -515,6 +515,11 @@ msgstr "Buss"
 msgid "Iraq"
 msgstr "Irak"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "kobler til %s ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -558,6 +563,21 @@ msgstr "Søk igjennom installerte skrifttyper"
 #, c-format
 msgid "Default desktop"
 msgstr "Standard skrivebord"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"For å sende en bugrapport, klikk på knappen rapport.\n"
+"Dette vil åpne  et nettleservindu på %s\n"
+" hvor du vil finne ett skjema for utfylling. Informasjonen ovenfor vil bli "
+"bli \n"
+"overført til den serveren."
 
 #: ../../lang.pm:1
 #, c-format
@@ -1152,6 +1172,61 @@ msgid ""
 msgstr ""
 "Resten av verden \n"
 " ingen D-kanal (leid linje)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ vil configure denne filen til å virke sammenmed "
+"imagefilene som blir opprettet av\n"
+"        \t\tmkinitrd-net, og entréene i /etc/dhcpd.conf, for å gi "
+"utnettverks oppstartsimagefilene til hver \n"
+"        \t\tdiskløse klient.\n"
+"\n"
+"        \t\tEn typisk tftp konfigurasjonsfil ser slik ut:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \t\tForandringen her fra den vanlige installasjonen er forandringen "
+"av disable flagget til\n"
+"        \t\t'no' og endring av filbanen til /var/lib/tftpboot, hvor mkinitrd-"
+"net\n"
+"        \t\tplassere sine imagefiler."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1828,15 +1903,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Bruk %c og %c tastene for å velge hvilken oppføringg som er markert."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "Aktiver \"%s\" for å kjøre filen"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Generisk 2-knappers mus"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "Aktiver \"%s\" for å kjøre filen"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -3081,6 +3156,35 @@ msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Opprett etherboot-disketter/CDer:\n"
+"        \tDe diskløse klientmaskinene trenger enten ROM-imagefiler på "
+"nettverkskortet, en oppstartsdiskket\n"
+"        \teller en CD for å initiere oppstartssekvensen.  drakTermServ vil "
+"hjelpe til med å generere disse imagefilene,\n"
+"        \tbasert på nettverkskortet i klientmaskinen.\n"
+"        \t\t\n"
+"        \tEt basis eksempel på opprrettelse av en oppstartsdiskett for 3Com "
+"3c509 manuelt:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Etheroppstart ISO imagefil er %s"
 
@@ -3490,32 +3594,6 @@ msgstr "Gjem filer"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "Finn skrivere tilkoblet denne maskin automatisk"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"XawTV er ikke installert!\n"
-"\n"
-"\n"
-"Hvis du har et TV-kort, men DrakX aldri oppdaget det (ingen bttv eller\n"
-"saa7134  modul i \"/etc/modules\") eller ikke isntallerte xawtv, vennligst\n"
-" send resultatet av \"lspcidrak -v -f\" til \"install\\@mandrakesoft.com\"\n"
-"med emnet \"undetected TV card\"(på engelsk).\n"
-"\n"
-"\n"
-"Du kan installere det ved å skrive \"urpmi xawtv\" som root, i et konsoll."
 
 #: ../../any.pm:1
 #, c-format
@@ -4101,6 +4179,19 @@ msgstr ""
 msgid "Restore From Tape"
 msgstr "Gjenopprett fra bånd"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"For å sende en feilrapport, klikk på rapport-knappen. som vil åpnedin "
+"standard nettleser\n"
+"til Anthill hvor du vil få muligheten til å laste opp informasjonen ovenfor "
+"som en feilmelding."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -4260,7 +4351,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "Trenger vertsnavn, brukernavn og passord!"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Sett inn diskett"
@@ -4402,10 +4493,23 @@ msgstr "Nettverksgrensesnitt allerede konfigurert"
 msgid "Couldn't access the floppy!"
 msgstr "Kunne ikke få tilgang til diskettstasjonen!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "Kobler til Bugzilla veiviser ..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
+"Advarsel: Fri programvare er ikke nødvendigvis patentfri, og noe fri\n"
+"programvare inkluderer eller kan være dekket av penteter i ditt land.\n"
+"For eksempel sp kan det være at MP3-dekodere krever en lisens forbruk\n"
+"(se http://www.mp3licensing.com for flere detaljer). Hvis du er usikker "
+"hvis\n"
+"en patent kan gjelde deg, sjekk dine lokale lover."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4593,6 +4697,11 @@ msgstr "Godta"
 #, c-format
 msgid "Description"
 msgstr "Beskrivelse"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Vennligst skriv inn tekstsammendrag."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -5566,7 +5675,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Høyre Control-tast"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6712,6 +6821,34 @@ msgstr "Advarsel : IP-adresse %s er vanligvis reservert !"
 msgid "busmouse"
 msgstr "bussmus"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Opprett Etherbootaktiverte oppstartsimagefiler:\n"
+"        \tFor å starte med en kjerne via etherboot, må en spesiell kjerne/"
+"initrd-imagefil opprettes.\n"
+"        \tmkinitrd-net gjør mye av dette arbeidet og drakTermServ er bare et "
+"grafisk \n"
+"grensesnitt\n"
+"        \tfor å hjelpe til med å håndtere/endre på disse imagefilene. For å "
+"opprette filen \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include som blir dratt inn som en "
+"\"include\" i \n"
+"        \tdhcpd.conf, så burde du opprette etherboot-imagefilene for i det "
+"minste en full kjerne."
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -7089,37 +7226,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Diskett"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - Vedlikehold /etc/exports:\n"
-"        \t\tClusternfs lar deg eksportere root-filsystemet til diskløse "
-"klienter, drakTermServ\n"
-"        \t\tsetter opp de riktige entréene for å tillate anonym tilgang til "
-"root-filsystemet fra\n"
-"        \t\tdiskløse klienter.\n"
-"\n"
-"        \t\tEn typisk eksportering-entré for clusternfs er:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNETT/MASKE(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tHvor SUBNETT/MASKE blir defintert for ditt nettverk."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7769,6 +7875,11 @@ msgstr "Deling av Internetttilkobling"
 msgid "Choose file"
 msgstr "Velg fil"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "Oppsummering: "
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7847,6 +7958,22 @@ msgstr "French Southern Territories"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "prosessorens leverandørnavn"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - Vedlikehold %s:\n"
+"        \t\tFor at brukere skal kunne logge inn på systemet fra en "
+"diskløsklient, så må deres entré i\n"
+"        \t\t/etc/shadow kopieres inn i %s. drakTermServ hjelper til\n"
+"        \t\tved å legge til og slette brukere fra denne filen."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8169,6 +8296,11 @@ msgstr "Gjenopprett brukere"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Krypteringsnøkkel for %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "Ønsker du å redde ditt system?"
 
 #: ../../services.pm:1
 #, c-format
@@ -8616,6 +8748,11 @@ msgstr "/_Konfigurer CUPS"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "Send lspci"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8856,6 +8993,11 @@ msgstr ""
 "\n"
 "Jeg er i ferd med å sette opp ditt lokale nettverk (LAN) med dette adapteret."
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "Send cpuinfo"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8865,6 +9007,11 @@ msgstr "Minimal installasjon"
 #, c-format
 msgid "Ethiopia"
 msgstr "Ethiopia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "JA"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9224,15 +9371,6 @@ msgstr "Type av installasjon"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "Skriver \"%s\" på SMB/Windows-tjener \"%s\""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- Daemon (%s) inkluderer:\n"
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -9555,6 +9693,11 @@ msgstr "Skjerm HorizSync: %s\n"
 #, c-format
 msgid "Path"
 msgstr "Filbane"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "IKKE FUNNET"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10159,24 +10302,6 @@ msgstr "viktig"
 msgid "Total Progress"
 msgstr "Total framgang"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - Vedlikehold /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor at brukere skal kunne logge inn på systemet fra en "
-"diskløsklient, så må deres entré i\n"
-"        \t\t/etc/shadow kopieres inn i /etc/shadow\\$\\$CLIENTS\\$\\$. "
-"drakTermServ hjelper til\n"
-"        \t\tved å legge til og slette brukere fra denne filen."
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -10311,6 +10436,40 @@ msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr ""
 "Bruk inkrementelle sikkerhetskopier  (ikke bytt ut gamle sikkerhetskopier)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - Vedlikehold /etc/dhcpd.conf:\n"
+"        \t\tFor å starte klientene over nettverk, hver klient trenger en "
+"entré i dhcpd.conf, som gir ut en IP-adresse\n"
+"        \t\tog nettverksoppstart imagefiler til maskinen. drakTermServ "
+"hjelper til med å lage//fjerne disse entréene.\n"
+"\t\t\t\n"
+"        \t\t(PCI-kort kan unnlate imagefilen - etherboot vil forespørre "
+"denriktige imagefilen. Du burde\n"
+"        \t\togså vurdere det når etherboot ser etter bildefilene, den "
+"forventer navn som\n"
+"        \t\tboot-3c59x.nbi, framfor boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tEn typisk dhcpd.conf strofe for å støtte diskløse klienter "
+"serslik ut:"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -10429,6 +10588,15 @@ msgid ""
 msgstr ""
 "x-koordinat for tekst­-boks\n"
 "i nummer av tegn"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+"Det kan være at du ikke kan installere lilo (siden lilo ikke håndterer én LV "
+"på flere PVer)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10731,6 +10899,16 @@ msgstr "Vertsnavn kreves"
 msgid "Unselect fonts installed"
 msgstr "Velg vekk skrifttyper som er installert"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Hjul"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "Send kjerneversjon"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10751,11 +10929,6 @@ msgstr "Avbryt"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Søker etter konfigurerte scannere ..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Hjul"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10824,6 +10997,11 @@ msgstr "Standard"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Emulering 2 knapper"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Vennligst oppgi et pakkenavn"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10907,6 +11085,11 @@ msgstr ""
 " Copyright (C) 2002 ved MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11080,6 +11263,65 @@ msgstr "Filsystemkrypteringsnøkkel"
 #, c-format
 msgid "Gujarati"
 msgstr "Gujarati"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"\t\t\tMens du kan bruke en brønn av IP-adresse, framfor å sette opp en "
+"spesifikoppsettsentré for\n"
+"\t\t\ten klient maskin, ved bruk av faste adresseskjema som letter\n"
+"bruken\n"
+"\t\t\tav klientspesifike konfigurasjonsfiler som ClusterNFS tilbyr.\n"
+"\t\t\t\n"
+"\t\t\tMerk: \"#type\" entréen er bare brukt av drakTermServ.  Klienter "
+"kanenten være \"tynne\"\n"
+"\t\t\teller 'fete'.  Tynne klienter kjører mesteparten av programvaren via "
+"xdmcp, mens tykke klienter kjører mesteparten\n"
+"av programvaren på klientmaskinen. En spesiell inttab, %s blir\n"
+"\t\t\tskrevet for tynne klienter. Systemkonfigurasjonsfilene xdm-config, "
+"kdmrc, og gdm.conf blir modifiserte\n"
+"\t\t\thvis tynne klienter blir brukt, for å aktivere xdmcp. Siden det er "
+"sikkerhetsproblematikkrundt bruken av xdmcp,\n"
+"\t\t\tså blir hosts.deny og hosts.allow endret for å begrense tilgangen til "
+"det lokale subnettet.\n"
+"\t\t\t\n"
+"\t\t\tMerk: Du må stoppe/starte tjeneren etter å ha lagt til eller "
+"endretklienter."
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11409,66 +11651,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"\t\t\tMens du kan bruke en brønn av IP-adresse, framfor å sette opp en "
-"spesifikoppsettsentré for\n"
-"\t\t\ten klient maskin, ved bruk av faste adresseskjema som letter\n"
-"bruken\n"
-"\t\t\tav klientspesifike konfigurasjonsfiler som ClusterNFS tilbyr.\n"
-"\t\t\t\n"
-"\t\t\tMerk: \"#type\" entréen er bare brukt av drakTermServ.  Klienter "
-"kanenten være \"tynne\"\n"
-"\t\t\teller 'fete'.  Tynne klienter kjører mesteparten av programvaren via "
-"xdmcp, mens tykke klienter kjører mesteparten\n"
-"av programvaren på klientmaskinen. En spesiell inttab, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ blir\n"
-"\t\t\tskrevet for tynne klienter. Systemkonfigurasjonsfilene xdm-config, "
-"kdmrc, og gdm.conf blir modifiserte\n"
-"\t\t\thvis tynne klienter blir brukt, for å aktivere xdmcp. Siden det er "
-"sikkerhetsproblematikkrundt bruken av xdmcp,\n"
-"\t\t\tså blir hosts.deny og hosts.allow endret for å begrense tilgangen til "
-"det lokale subnettet.\n"
-"\t\t\t\n"
-"\t\t\tMerk: Du må stoppe/starte tjeneren etter å ha lagt til eller "
-"endretklienter."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11884,38 +12066,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - Vedlikehold /etc/dhcpd.conf:\n"
-"        \t\tFor å starte klientene over nettverk, hver klient trenger en "
-"entré i dhcpd.conf, som gir ut en IP-adresse\n"
-"        \t\tog nettverksoppstart imagefiler til maskinen. drakTermServ "
-"hjelper til med å lage//fjerne disse entréene.\n"
-"\t\t\t\n"
-"        \t\t(PCI-kort kan unnlate imagefilen - etherboot vil forespørre "
-"denriktige imagefilen. Du burde\n"
-"        \t\togså vurdere det når etherboot ser etter bildefilene, den "
-"forventer navn som\n"
-"        \t\tboot-3c59x.nbi, framfor boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tEn typisk dhcpd.conf strofe for å støtte diskløse klienter "
-"serslik ut:"
+"Applikasjonnavn\n"
+"eller full sti:"
 
 #: ../../services.pm:1
 #, c-format
@@ -12299,27 +12457,6 @@ msgstr "Problemer ved installering av pakke %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Du vil motta en advarsel hvis lasten er høyere enn denne advarselen"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"For å sende en bugrapport, klikk på knappen rapport.\n"
-"Dette vil åpne  et nettleservindu på https://drakbug.mandrakesoft.com\n"
-" hvor du vil finne ett skjema for utfylling. Informasjonen ovenfor vil bli "
-"bli \n"
-"overført til den serveren\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -12457,7 +12594,7 @@ msgstr "Sikkerhetsadministrator"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "Sett skallets tidsavbrudd. Null betyr inget tidsavbrudd."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Firmwarekopiering vellykket"
@@ -12828,11 +12965,6 @@ msgstr ""
 "Skriveren \"%s\" eksisterer allerede,\n"
 "ønsker du å overskrive dens konfigurasjon?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "ingen tilgjengelige partisjoner"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12842,6 +12974,11 @@ msgstr "Bruk scannere på verter: "
 #, c-format
 msgid "Unselected All"
 msgstr "Valgte vekk alle"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "ingen tilgjengelige partisjoner"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -12883,7 +13020,7 @@ msgstr "Bygg hele kjernen -->"
 msgid "modem"
 msgstr "modem"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
@@ -12969,6 +13106,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "Ikke det riktige CD-navnet. CD'en er merket med %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Daemon (%s) via:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -13105,40 +13251,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Systemfiler:\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - Systemkonfigurasjonsfiler per klient:\n"
-"        \t\tGjennom clusternfs så har hver diskløse klient deres egne unike "
-"konfigurasjonsfiler\n"
-"        \t\tpå tjenerens root-filesystem. I fremtiden vil drakTermServ kunne "
-"hjelpe til med å opprette disse filene\n"
-"        \t\tsom feks. /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
-"sysconfig/keyboard på per-klient-basis\n"
-"\n"
-"        Merk: Aktivering va maskinvarekonfigurering for lokale klienter "
-"aktiverer ikke root-innlogging på terminaltjeneren\n"
-"        for hver klientmaskin som har denne finessen aktivert.  Lokal "
-"konfigurasjon kan bli skrudd\n"
-"        av igjen, og beholde konfigurasjonsfilene så fort klientmaskinen er "
-"konfigurert."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13991,7 +14103,7 @@ msgstr "Bygg fremftiden for Linux!"
 msgid "Local Printer"
 msgstr "Lokal skriver"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Disketttilgangsfeil, ikke i stand til å montere enheten %s"
@@ -14095,61 +14207,6 @@ msgstr "Enhet mus: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Velg korrekte skrifttyper på nytt"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ vil configure denne filen til å virke sammenmed "
-"imagefilene som blir opprettet av\n"
-"        \t\tmkinitrd-net, og entréene i /etc/dhcpd.conf, for å gi "
-"utnettverks oppstartsimagefilene til hver \n"
-"        \t\tdiskløse klient.\n"
-"\n"
-"        \t\tEn typisk tftp konfigurasjonsfil ser slik ut:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tForandringen her fra den vanlige installasjonen er forandringen "
-"av disable flagget til\n"
-"        \t\t'no' og endring av filbanen til /var/lib/tftpboot, hvor mkinitrd-"
-"net\n"
-"        \t\tplassere sine imagefiler."
 
 #: ../../help.pm:1
 #, c-format
@@ -14486,6 +14543,11 @@ msgstr "Mai"
 msgid "Yaboot mode"
 msgstr "Yaboot modus"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Generisk 3-knappers mus"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14500,11 +14562,6 @@ msgstr ""
 "Kan ikke starte LiLo på nytt!\n"
 "Start \"lilo\" som root i kommandolinjen for å fullføre LiLo tema "
 "installasjon."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Generisk 3-knappers mus"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14849,35 +14906,6 @@ msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 " --id <id_label>       - last html-hjelpesiden som refererer til id_label\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - Opprett etherboot disketter/CD'er:\n"
-"        \t\tDe diskløse klientmaskinene trenger enten ROM imagefiler på "
-"nettverkskortet, en oppstartsdiskket\n"
-"        \t\teller en CD for å initiere oppstartssekvensen.  drakTermServ vil "
-"hjelpe til med generere disse imagefilene,\n"
-"        \t\tbasert på nettverkskortet i klientmaskinen.\n"
-"        \t\t\n"
-"        \t\tEt basis eksempel på opprrettelse av en oppstartsdiskett for "
-"3Com 3c509 manuelt:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15277,11 +15305,6 @@ msgstr "Domenenavn"
 msgid "Sharing of local printers"
 msgstr "Delin av lokale skrivere"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -15291,6 +15314,11 @@ msgstr "Aktiver/Deaktiver libsafe hvis libsafe er funnet på systemet."
 #, c-format
 msgid "Available printers"
 msgstr "Tilgjengelige skrivere"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "NEI"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15324,27 +15352,6 @@ msgstr ""
 "\n"
 "\n"
 "Trykk \"%s\" for å fortsette."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - Lag Etheroppstartsaktiverte oppstartsimagefiler:\n"
-"        \t\tFor å starte med en kjerne via etheroppstart, må en spesiell "
-"kjerne/initrd imagefil opprettes.\n"
-"        \t\tmkinitrd-net gjør mye av dette arbeidet og drakTermServ er bare "
-"et grafisk grensesnitt\n"
-"        \t\tfor å hjelpe til med å håndtere/endre på disse imagefilene."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16175,6 +16182,23 @@ msgstr "FATALT"
 msgid "Refresh the list"
 msgstr "Oppdater listen"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - Per klient %s:\n"
+"        \t\tGjennom clusternfs så kan hver diskløse klient ha deres "
+"egneunike konfigurasjonsfil\n"
+"        \t\tpå root-filsystemet på tjeneren. I fremtiden vil drakTermServ "
+"kunne hjelpe til med å lage disse\n"
+"        \t\tfilene."
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16743,12 +16767,17 @@ msgstr "Generisk"
 msgid "Cylinder %d to %d\n"
 msgstr "Sylinder %d til %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "DIN TEKST HER"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Ny profil...."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "NONE"
@@ -17332,6 +17361,11 @@ msgstr "Andre multimediaenheter"
 msgid "burner"
 msgstr "brenner"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "Feilbeskrivelse/Systeminformasjon"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " (Default is all users)"
@@ -17465,6 +17499,41 @@ msgstr "Opsjoner oppringt"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Hvis ingen port blir gitt, så vil 631 bli valgt som standard"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - Systemkonfigurasjonsfiler per klient:\n"
+"        \t Gjennom clusternfs så har hver diskløse klient deres egne unike "
+"konfigurasjonsfiler\n"
+"        \tpå tjenerens root-filesystem. Ved å tillate lokal konfigurasjon av "
+"klientens maskinvare, \n"
+"        \tså kan klienter skreddersy filer som /etc/modules.conf, /etc/ "
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard på per-klient-basis\n"
+"\n"
+"        Merk: Aktivering av maskinvarekonfigurering for lokale klienter "
+"aktiverer ikke root-innlogging på terminaltjeneren\n"
+"        for hver klientmaskin som har denne finessen aktivert.  Lokal "
+"konfigurasjon kan bli skrudd\n"
+"        av igjen, og beholde konfigurasjonsfilene så fort klientmaskinen er "
+"konfigurert."
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17692,7 +17761,7 @@ msgstr ""
 " (Parallelporter: /dev/lp0, /dev/lp1, ..., lik LPT1:, LPT2:, ..., 1st USB "
 "skriver: /dev/usb/lp0, 2nd USB skriver: /dev/usb/lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Neste"
@@ -19021,7 +19090,7 @@ msgstr " adsl"
 msgid "format of floppies supported by the drive"
 msgstr "diskettformater diskettstasjonen støtter"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Firmwarekopiering feilet, filen %s ble ikke funnet"
@@ -19738,6 +19807,11 @@ msgstr ""
 "\n"
 "Vil du miste alle partisjonene?\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Finn pakke"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -19852,6 +19926,37 @@ msgstr "LAN-konfigurasjon"
 #, c-format
 msgid "hard disk model"
 msgstr "harddisk modell"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - Vedlikehold /etc/exports:\n"
+"        \t\tClusternfs lar deg eksportere root-filsystemet til diskløse "
+"klienter, drakTermServ\n"
+"        \t\tsetter opp de riktige entréene for å tillate anonym tilgang til "
+"root-filsystemet fra\n"
+"        \t\tdiskløse klienter.\n"
+"\n"
+"        \t\tEn typisk eksportering-entré for clusternfs er:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t\t/home              SUBNETT/MASKE(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tHvor SUBNETT/MASKE blir defintert for ditt nettverk."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -20039,15 +20144,15 @@ msgstr "UK-tastatur"
 msgid "Unmount"
 msgstr "Demonter"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Avinstaller skrifttyper"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Utforsker"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Avinstaller skrifttyper"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20425,23 +20530,6 @@ msgstr "Kjører \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "aktiver radiostøtte"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - Per klient /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tGjennom clusternfs så kan hver diskløse klient ha deres "
-"egneunike konfigurasjonsfil\n"
-"        \t\tpå root-filsystemet på tjeneren. I fremtiden vil drakTermServ "
-"kunne hjelpe til med å lage disse\n"
-"        \t\tfilene."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -20876,6 +20964,32 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Sett med verktøy for å lese og sende e-post og nyheter for åsurfe på nett"
 
+#~ msgid ""
+#~ "XawTV isn't installed!\n"
+#~ "\n"
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
+#~ msgstr ""
+#~ "XawTV er ikke installert!\n"
+#~ "\n"
+#~ "\n"
+#~ "Hvis du har et TV-kort, men DrakX aldri oppdaget det (ingen bttv eller\n"
+#~ "saa7134  modul i \"/etc/modules\") eller ikke isntallerte xawtv, "
+#~ "vennligst\n"
+#~ " send resultatet av \"lspcidrak -v -f\" til \"install\\@mandrakesoft.com"
+#~ "\"\n"
+#~ "med emnet \"undetected TV card\"(på engelsk).\n"
+#~ "\n"
+#~ "\n"
+#~ "Du kan installere det ved å skrive \"urpmi xawtv\" som root, i et konsoll."
+
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 
@@ -21105,9 +21219,6 @@ msgstr ""
 
 #~ msgid "Please enter the host name or IP."
 #~ msgstr "Vennligst spesifiser vertsnavn eller IP."
-
-#~ msgid "Please enter your login"
-#~ msgstr "Vennligst skriv inn ditt login"
 
 #~ msgid ""
 #~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"
