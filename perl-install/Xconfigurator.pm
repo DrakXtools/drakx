@@ -876,7 +876,7 @@ sub chooseResolutionsGtk($$;$) {
 						   ),
 					  ),
 			       ),
-		    0, gtkadd($W->create_okcancel,
+		    0, gtkadd($W->create_okcancel(_("Ok"), _("More")),
 			      $::isEmbedded ?
 			      gtksignal_connect(new Gtk::Button(_("Expert Mode")), clicked => sub { system ("XFdrake --expert"); }) :
 			      gtksignal_connect(new Gtk::Button(_("Show all")), clicked => sub { $W->{retval} = 1; $chosen_w = 0; Gtk->main_quit })),
