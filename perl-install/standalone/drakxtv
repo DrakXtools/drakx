@@ -79,7 +79,7 @@ sub scan4channels() {
         }
         # default to pal since most people use that
         $norm ||= "PAL";
-        log::l("[drakxtv] guess country=>$locale->{country}, norm=>$norm, area=>$ ftable_id");
+        log::l("[drakxtv] guess country=>$locale->{country}, norm=>$norm, area=>$ftable_id");
         my %users = map { $_->[6] || $_->[0] => $_->[7] } grep { $_->[2] == 0 || 500 <= $_->[2] } list_passwd();
         my $user;
 
