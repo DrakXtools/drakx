@@ -263,3 +263,26 @@ redhat 8.0:
 			 "mount point.") % (self.mountpoint,)
 		
 
+* hwdata 0.47 (redhat 8.0) vs 0.62 (redhat 8.1 beta1 phoebe)
+  - pcitable & upgradelist
+     - replace eepro100 with e100
+     - switch 0x1106 0x3059 "via82cxxx_audio" to "unknown"
+  - Cards
+     - remove most swcursor with comment:
+        # mharris - Nov 23, 2002 - Commented out the swcursor option, if it is still
+        # needed, then lets disable it right in the driver completely, or possibly
+        # fix it.
+     - using driver "nv" for GeForce4 and Quadro4 with comment:
+        # mharris - Nov 23, 2002 - enabling "nv" driver for GeForce 4 and Quadro 4 as
+        # CVS XFree86 support them now in 4.2.99.2
+     - special options "externDisp" and "internDisp" for NeoMagic cards
+       together with CHIPSET
+
+* kudzu 0.99.69 (redhat 8.0) vs 0.99.83 (redhat 8.1 beta1 phoebe)
+  - don't read eepro100 entries from the pcitable
+  - handle compressed modules
+  - many changes in PS/2 mouse detection, and handle "intellips/2" mouse
+  - changes in PnP serial modem detection
+  - use "udf,iso9660" option for cdrom entry in fstab 
+    (note that comma separated choice of filesystems *is* allowed, though not
+     documented in fstab(5))
