@@ -141,14 +141,9 @@ sub write_resolv_conf {
 sub write_interface_conf {
     my ($file, $intf, $_netc, $_prefix) = @_;
 
-    if ($intf->{HWADDR} && -e "$::prefix/sbin/ip") {
-	$intf->{HWADDR} = undef;
-	if (my $s = `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`) {
-	    if ($s =~ m|.*link/ether\s([0-9a-z:]+)\s|) {
-		$intf->{HWADDR} = $1;
-	    }
-	}
-    }
+    my ($mac_address) = `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null` =~ m|.*link/ether\s([0-9a-z:]+)\s|;
+    $intf->{HWADDR} &&= $mac_address; #- set HWADDR to MAC address if required
+
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
 
@@ -327,6 +322,40 @@ sub proxy_configure {
     chmod 0755, "$::prefix/etc/profile.d/proxy.sh";
     setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $u, qw(http_proxy ftp_proxy));
     chmod 0755, "$::prefix/etc/profile.d/proxy.csh";
+
+    #- Gnome proxy settings
+    if (-d "$::prefix/etc/gconf/2/") {
+        my $defaults_dir = "/etc/gconf/2/local-defaults.path";
+        my $p_defaults_dir = "$::prefix$defaults_dir";
+        my $p_defaults_path = "$::prefix/etc/gconf/gconf.xml.local-defaults";
+        -d $p_defaults_dir or mkdir $p_defaults_dir, 0755;
+        -r $p_defaults_path or output_with_perm($p_defaults_path, 0755, qq(
+# System local settings
+xml:readonly:$defaults_dir
+));
+        my $gconf_cmd = $::prefix . "gconftool --config-source='xml::$p_defaults_dir' --direct ";
+
+        #- http proxy
+        if (my ($user, $password, $host, $port) = $u->{http_proxy} =~ m,^http://(?:([^:\@]+)(?::([^:\@]+))?\@)?([^\:]+)(?::(\d+))?$,) {
+            $port ||= 80;
+            system($gconf_cmd . "--set --type=bool /system/http_proxy/use_http_proxy true");
+            system($gconf_cmd . "--set --type=string /system/http_proxy/host '$host'");
+            system($gconf_cmd . "--set --type=int /system/http_proxy/port '$port'");
+            system($gconf_cmd . "--set --type=bool /system/http_proxy/use_authentication " . ($user ? "true" : "false"));
+            $user and system($gconf_cmd . "--set --type=string /system/http_proxy/authentication_user '$user'");
+            $password and system($gconf_cmd . "--set --type=string /system/http_proxy/authentication_password '$password'");
+        }
+        #- ftp proxy
+        if (my ($host, $port) = $u->{ftp_proxy} =~ m,^ftp://(?:[^:\@]+(?::[^:\@]+)?\@)?([^\:]+)(?::(\d+))?$,) {
+            $port ||= 21;
+            system($gconf_cmd . "--set --type=string /system/proxy/mode manual");
+            system($gconf_cmd . "--set --type=string /system/proxy/ftp_host '$host'");
+            system($gconf_cmd . "--set --type=int /system/proxy/ftp_port '$port'");
+        }
+        # FIXME: add https support, when should /system/proxy/mode be set ?
+        #- make gconf daemons reload their settings
+        system("killall -s HUP gconfd-2");
+    }
 }
 
 sub read_all_conf {
