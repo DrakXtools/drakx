@@ -659,9 +659,16 @@ sub font_choice {
 sub file_ok_sel { 
     my ( $widget, $file_selection ) = @_;     
     my $file_name = $file_selection->get_filename();
-    push @install, $file_name;
-    $list->add(gtkshow(new Gtk::ListItem($file_name)));
-    print ("@install\n");   
+    print "nom du rep:".$file_name."\n\n";
+#    print "liste complete rep : $_ \n" foreach (@install);
+#    print "\n___________\n";
+    if (@install) {   
+	grep( $file_name , @install) or push @install, $file_name &&  $list->add(gtkshow(new Gtk::ListItem($file_name)));
+    }
+    else { 
+	push @install, $file_name &&  $list->add(gtkshow(new Gtk::ListItem($file_name))); 
+    }
+#    print ("$file_name\n");   
 }
 
 sub list_remove {
