@@ -81,11 +81,7 @@ sub readMonitorsDB {
 	}
 	$monitors{"$l{vendor}|$l{type}"} = \%l;
     }
-    while (my ($k, $v) = each %Xconfigurator_consts::standard_monitors) {
-	$monitors{'Generic|' . translate($k)} = $standard_monitors{$k} = 
-	  { hsyncrange => $v->[1], vsyncrange => $v->[2] };
-    }
-    \%monitors, \%standard_monitors;
+    \%monitors;
 }
 
 sub keepOnlyLegalModes {
@@ -106,31 +102,38 @@ sub keepOnlyLegalModes {
 sub cardConfigurationAuto() {
     my @c = grep { $_->{driver} =~ /(Card|Server|Driver):/ } detect_devices::probeall();
 
-    if (@c >= 2 && $c[0]{driver} eq $c[1]{driver} && $c[0]{driver} eq 'Card:Intel 830') {
-	shift @c;
-    }
     my @cards = map_index {
 	my $card = { 
 	    identifier => $_->{description} . (@c > 1 && " $::i"),
 	    busid => "PCI:$_->{pci_bus}:$_->{pci_device}:$_->{pci_function}",
 	};
-	if    ($_->{driver} =~ /Card:(.*)/)   { $card->{type} = $1 }
+	if    ($_->{driver} =~ /Card:(.*)/)   { updateCardAccordingName($card, $1) }
 	elsif ($_->{driver} =~ /Server:(.*)/) { $card->{server} = $1 }
 	elsif ($_->{driver} =~ /Driver:(.*)/) { $card->{driver} = $1 }
 	else { internal_error() }
 	
 	$card;
     } @c;
+
+    if (@cards >= 2 && $cards[0]{type} eq $cards[1]{type} && $cards[0]{type} eq 'Intel 830') {
+	shift @cards;
+    }
     #- take a default on sparc if nothing has been found.
     if (arch() =~ /^sparc/ && !@cards) {
         log::l("Using probe with /proc/fb as nothing has been found!");
 	local $_ = cat_("/proc/fb");
 	@cards = { server => /Mach64/ ? "Mach64" : /Permedia2/ ? "3DLabs" : "Sun24" };
     }
-    #- special case for dual head card using only one busid.
+    #- special case for multi head card using only one busid.
     @cards = map { 
-	my $dup = member($_->{type}, 'Matrox Millennium G450', 'Matrox Millennium G550') ? 2 : 1;
-	map { {%$_} } ($_) x $dup;
+	if ($_->{MULTI_HEAD} && $_->{type} =~ /G[24]00/) {
+	    if ($ENV{MATROX_HAL}) {
+		$_->{flags}{need_MATROX_HAL} = 1;
+	    } else {
+		delete $_->{MULTI_HEAD};
+	    }
+	}
+	map { {%$_} } ($_) x ($_->{MULTI_HEAD} || 1);
     } @cards;
 
     #- make sure no type are already used, duplicate both screen
@@ -138,7 +141,6 @@ sub cardConfigurationAuto() {
     if (@cards > 1) {
 	my $card = 1;
 	foreach (@cards) {
-	    updateCardAccordingName($_, $_->{type}) if $_->{type};
 	    $_->{type} = "$_->{type} $card";
 	    $card++;
 	}
@@ -189,6 +191,8 @@ sub install_server {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{driver} = 'nvidia';
     }
+
+    Xconfig::install_matrox_proprietary_hal($prefix) if $card->{flags}{need_MATROX_HAL};
 
     $prog;
 }
@@ -436,7 +440,7 @@ sub monitorConfiguration(;$$) {
     my $monitor = shift || {};
     my $useFB = shift || 0;
 
-    my ($monitors, $standard_monitors_) = readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
+    my $monitors = readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
     if ($monitor->{EISA_ID}) {
 	log::l("EISA_ID: $monitor->{EISA_ID}");
@@ -466,7 +470,7 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
 				  [ { val => \$monitor->{hsyncrange}, list => \@Xconfigurator_consts::hsyncranges, label => _("Horizontal refresh rate"), not_edit => 0 },
 				    { val => \$monitor->{vsyncrange}, list => \@Xconfigurator_consts::vsyncranges, label => _("Vertical refresh rate"), not_edit => 0 } ]);
     } else {
-	add2hash($monitor, $monitors->{$monitor->{type}} || $standard_monitors_->{$monitor->{type}});
+	add2hash($monitor, $monitors->{$monitor->{type}});
     }
     add2hash($monitor, { type => "monitor1", manual => 1 });
 }
@@ -1107,11 +1111,6 @@ Section "Module"
 );
     }
     print G qq(
-
-    SubSection	"extmod"
-	#Option	"omit xfree86-dga"
-    EndSubSection
-
     Load	"type1"
     Load	"freetype"
 EndSection
@@ -1135,7 +1134,6 @@ EndSection
     print F qq(    VertRefresh $O->{vsyncrange}\n\n);
     print G qq(    VertRefresh $O->{vsyncrange}\n\n);
     print F $O->{ModeLines_xf3} if $O->{ModeLines_xf3};
-    print F $O->{ModeLines} if $O->{ModeLines};
     print G $O->{ModeLines} if $O->{ModeLines};
     print F "\nEndSection\n\n\n";
     print G "\nEndSection\n\n\n";
@@ -1256,9 +1254,6 @@ Section "Screen"
     Device      "$O->{type}"
     Monitor     "$X->{monitor}{type}"
 );
-    #- hack for DRI with Matrox card at 24 bpp, need another command.
-    $O->{DRI_GLX} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $X->{default_depth} == 24 and
-      print G "    DefaultFbBpp      32\n";
     #- bpp 32 not handled by XF4
     $subscreen->(*G, "svga", min($X->{default_depth}, 24), $O->{depth});
     foreach (2..@{$O->{cards} || []}) {
@@ -1269,9 +1264,6 @@ Section "Screen"
     Device      "$device"
     Monitor     "monitor$_"
 );
-	#- hack for DRI with Matrox card at 24 bpp, need another command.
-	$O->{DRI_GLX} && $O->{identifier} =~ /Matrox.* G[245][05]0/ && $X->{default_depth} == 24 and
-	  print G "    DefaultFbBpp      32\n";
 	#- bpp 32 not handled by XF4
 	$subscreen->(*G, "svga", min($X->{default_depth}, 24), $O->{depth});
     }

@@ -79,6 +79,7 @@ sub bios_vga_modes {
 	19 => "1280x1024",
 	20 => "1280x1024",
         21 => "1600x1200",
+        22 => "1600x1200",
     );
     for (my $i = 0; $i < $l[0]; $i++) {
 	$monitorSize2resolution[$i] = $l[1];
@@ -104,28 +105,11 @@ $good_default_monitor = arch() !~ /ppc/ ? "High Frequency SVGA, 1024x768 at 70 H
     detect_devices::get_mac_model =~ /^iBook/ ? "iBook 800x600" : "iMac/PowerBook 1024x768";
 $low_default_monitor = "Super VGA, 800x600 at 56 Hz";
 
-%standard_monitors = (
-  __("Standard VGA, 640x480 at 60 Hz")                             => [ '640x480@60',      "31.5"            , "60" ],
-  __("Super VGA, 800x600 at 56 Hz") 				   => [ '800x600@56',      "31.5-35.1"       , "55-60" ],
-  __("8514 Compatible, 1024x768 at 87 Hz interlaced (no 800x600)") => [ '8514 compatible', "31.5,35.5"       , "60,70,87" ],
-  __("Super VGA, 1024x768 at 87 Hz interlaced, 800x600 at 56 Hz")  => [ '1024x768@87i',    "31.5,35.15,35.5" , "55-90" ],
-  __("Extended Super VGA, 800x600 at 60 Hz, 640x480 at 72 Hz")     => [ '800x600@60',      "31.5-37.9"       , "55-90" ],
-  __("Non-Interlaced SVGA, 1024x768 at 60 Hz, 800x600 at 72 Hz")   => [ '1024x768@60',     "31.5-48.5"       , "55-90" ],
-  __("High Frequency SVGA, 1024x768 at 70 Hz") 		           => [ '1024x768@70',     "31.5-57.0"       , "50-90" ],
-  __("Multi-frequency that can do 1280x1024 at 60 Hz") 	           => [ '1280x1024@60',    "31.5-64.3"       , "50-90" ],
-  __("Multi-frequency that can do 1280x1024 at 74 Hz") 	           => [ '1280x1024@74',    "31.5-79.0"       , "50-100" ],
-  __("Multi-frequency that can do 1280x1024 at 76 Hz") 	           => [ '1280x1024@76',    "31.5-82.0"       , "40-100" ],
-  __("Monitor that can do 1600x1200 at 70 Hz")                     => [ '1600x1200@70',    "31.5-88.0"       , "50-120" ],
-  __("Monitor that can do 1600x1200 at 76 Hz")		           => [ '1600x1200@76',    "31.5-94.0"       , "50-160" ],
-);
-
 @vsyncranges = ("50-70", "50-90", "50-100", "40-150");
 
 @hsyncranges = (
 	"31.5",
 	"31.5-35.1",
-	"31.5, 35.5",
-	"31.5, 35.15, 35.5",
 	"31.5-37.9",
 	"31.5-48.5",
 	"31.5-57.0",
