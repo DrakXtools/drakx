@@ -81,6 +81,10 @@ sub set_options {
     my ($iocharset, $codepage) = lang::fs_options(lang::read());
 
     fs::set_default_options($part, 1, $use_supermount, $security, $iocharset, $codepage);
+
+    my ($options, $unknown) = fs::mount_options_unpack($part);
+    $options->{kudzu} = 1;
+    fs::mount_options_pack($part, $options, $unknown);
 }
 
 sub set_mount_point {
@@ -136,6 +140,13 @@ sub main {
 	    print STDERR "Not found in fstab\n" if $::testing;
 	    return;
 	}
+	foreach (@$existing_fstab_entries) {
+	    if ($_->{options} !~ /\bkudzu\b/) {
+		print STDERR "Not a 'kudzu'-flagged entry\n" if $::testing;
+		return;
+	    }
+	}
+
 	my ($s) = fs::prepare_write_fstab($fstab_, '', 'keep_smb_credentials');
 	output($fstab_file, $s);
 
