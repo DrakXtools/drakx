@@ -1051,7 +1051,7 @@ You may also enter the IP address of the gateway if you have one."),
                     type => "yesorno",
                     post => sub {
 			require Data::Dumper;
-			output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$config']));
+			output('/etc/sysconfig/drakconnect', Data::Dumper->Dump([$config], ['$p']));
 			"network_on_boot" },
                    },
                    
