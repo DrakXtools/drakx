@@ -49,6 +49,12 @@
 #include "probing.h"
 
 
+static void warning_insmod_failed(void)
+{
+	error_message("Warning, installation of driver failed.");
+}
+
+
 void probe_that_type(enum driver_type type)
 {
 	if (IS_EXPERT)
@@ -100,15 +106,18 @@ void probe_that_type(enum driver_type type)
 					if (type == SCSI_ADAPTERS) {
 						/* insmod takes time, let's use the wait message */
 						wait_message("Installing %s", pcidb[i].name);
-						my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
+						garb = my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
 						remove_wait_message();
+						if (garb)
+							warning_insmod_failed();
 					}
 #endif
 #ifndef DISABLE_NETWORK
 					if (type == NETWORK_DEVICES) {
 						/* insmod is quick, let's use the info message */
 						info_message("Found %s", pcidb[i].name);
-						my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL);
+						if (my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL))
+							warning_insmod_failed();
 					}
 #endif
 				}
