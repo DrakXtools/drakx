@@ -8,6 +8,8 @@ my @langs = map { /^../; $& } split /\s/, (cat_('move.pm') =~ /ALLOWED_LANGS = q
 
 @ARGV <= 1 or die "usage: make_live [live_location=/tmp/live_tree]\n";
 
+my $kernel_version = '2.4.22.21.1mdk';
+
 sub installPackages {
     output_p("$::prefix/etc/rpm/macros", "%_install_langs " . join(":", @langs) . "\n");
     rename '/etc/rpm/macros', '/etc/rpm/macros.';
@@ -41,7 +43,8 @@ sub installPackages {
 				 qw(zcip dhcp-client dhcpcd ppp kdenetwork-kppp rp-pppoe pptp-adsl speedtouch speedtouch_mgmt nfs-utils-clients samba-client tmdns wireless-tools adiusbadsl pcmcia-cs), #- network conf
                                  qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
 				 qw(ATI_GLX NVIDIA_GLX),
-				 qw(hcfpcimodem hsflinmodem ltmodem NVIDIA_nforce-2.4.22.21mdk),
+                                 "kernel-smp-$kernel_version",
+				 qw(hcfpcimodem hsflinmodem ltmodem), "NVIDIA_nforce-$kernel_version",
 				 qw(xinput), #- for some mice
                                  qw(perl-Term-Readline-Gnu binutils),  #- allow debugging move
                                                                  ],
