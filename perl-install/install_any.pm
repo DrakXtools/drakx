@@ -526,8 +526,7 @@ sub selectSupplMedia {
 		if ($suppl_method eq 'http') {
 		    http::getFile("$url/media_info/hdlist.cz");
 		} elsif ($suppl_method eq 'ftp') {
-		    my ($login, $pass, $host, $prefix) = $url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!;
-		    ftp::getFile("media_info/hdlist.cz", $host, $prefix, $login, $pass);
+		    getFile("media_info/hdlist.cz");
 		} else { undef }
 	    };
 	    if (!defined $f) {
