@@ -6,6 +6,7 @@ use Getopt::Long;
 use common;
 use bootloader;
 
+$::isStandalone = 1; #- not using standalone which messes with @ARGV and usage
 
 my %options = (
 	       'action=s' => \ (my $action),
