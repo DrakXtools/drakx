@@ -904,11 +904,10 @@ sub new {
 	if (!$::Plug && $o->{isEmbedded}) {
 	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
 	    flush();
-	    $::Plug->add($::WizardTable);
+	    gtkadd($::Plug, $::WizardTable);
 	} elsif (!$::WizardWindow) {
 	    $::WizardWindow = _create_window($title);
-
-	    $::WizardWindow->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
+	    gtkadd($::WizardWindow, gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
 
 	    if ($::isInstall) {
 		$::WizardWindow->signal_connect(key_press_event => sub {
@@ -940,10 +939,11 @@ sub new {
 
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
+		$draw1->show;
 	    }
+	    $::WizardWindow->show;
 	}
 	$::WizardWindow->set_title($title);
-	$::WizardWindow->show_all;
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
     }
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
