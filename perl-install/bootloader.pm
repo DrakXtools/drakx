@@ -102,25 +102,53 @@ sub get_label {
 }
 
 sub mkinitrd {
-    my ($kernel_version, $initrd, $o_vga) = @_;
+    my ($kernel_version, $entry) = @_;
 
+    my $initrd = $entry->{initrd};
     $::testing || -e "$::prefix/$initrd" and return 1;
 
     my $loop_boot = loopback::prepare_boot();
 
-    my $o_resolution = $o_vga && do {
-	require Xconfig::resolution_and_depth;
-	my $res = Xconfig::resolution_and_depth::from_bios($o_vga);
-	$res && $res->{X};
-    };
     modules::load('loop');
-    if (!run_program::rooted($::prefix, "mkinitrd", "-v", "-f", $initrd, "--ifneeded", $kernel_version, if_($o_resolution, '--splash' => $o_resolution))) {
+    my @options = (
+		   "-v", "-f", $initrd, "--ifneeded", $kernel_version, 
+		   if_($entry->{initrd_options}, split(' ', $entry->{initrd_options})),
+		  );
+    if (!run_program::rooted($::prefix, 'mkinitrd', @options)) {
 	unlink("$::prefix/$initrd");
 	die "mkinitrd failed";
     }
+    add_boot_splash($entry->{initrd}, $entry->{vga});
+
     loopback::save_boot($loop_boot);
 
     -e "$::prefix/$initrd";
+}
+
+sub make_boot_splash {
+    my ($initrd, $vga) = @_;
+
+    if ($vga) {
+	add_boot_splash($initrd, $vga);
+    } else {
+	remove_boot_splash($initrd);
+    }
+}
+sub remove_boot_splash {
+    my ($initrd) = @_;
+    run_program::rooted($::prefix, '/usr/share/bootsplash/scripts/remove-boot-splash', $initrd);
+}
+sub add_boot_splash {
+    my ($initrd, $vga) = @_;
+
+    $vga or return;
+
+    require Xconfig::resolution_and_depth;
+    if (my $res = Xconfig::resolution_and_depth::from_bios($vga)) {
+	run_program::rooted($::prefix, '/usr/share/bootsplash/scripts/make-boot-splash', $initrd, $res->{X});
+    } else {
+	log::l("unknown vga bios mode $vga");
+    }
 }
 
 sub read {
@@ -131,6 +159,12 @@ sub read {
 	my $bootloader = $f->($fstab);
 	my $type = partition_table::raw::typeOfMBR($bootloader->{boot});
 	if ($type eq $main_method) {
+	    my @prefered_entries = map { get_label($_, $bootloader) } $bootloader->{default}, 'linux';
+
+	    if (my $default = find { $_ && $_->{append} } (@prefered_entries, @{$bootloader->{entries}})) {
+		$bootloader->{default_vga} = $default->{vga};
+		$bootloader->{perImageAppend} ||= $default->{append};
+	    }
 	    return $bootloader;
 	}
     }
@@ -257,10 +291,6 @@ sub read_lilo() {
 	delete $b{message};
     }
 
-    if (my $default = find { $_ && $_->{append} } get_label($b{default}, \%b), @{$b{entries}}) {
-	$b{perImageAppend} ||= $default->{append};
-    }
-
     #- cleanup duplicate labels & bad entries (in case file is corrupted)
     my %seen;
     @{$b{entries}} = 
@@ -351,9 +381,12 @@ sub _do_the_symlink {
     my $old_long_name = $existing_link =~ m!^/! ? $existing_link : "/boot/$existing_link";
     if (-e "$::prefix$old_long_name") {
 	foreach (@{$bootloader->{entries}}) {
-	    $_->{$kind} eq $entry->{$kind} && $_->{label} ne 'failsafe' or next;
-	    log::l("replacing $_->{$kind} with $old_long_name for bootloader label $_->{labe}");
-	    $_->{$kind} = $old_long_name;
+	    if ($_->{$kind} eq $entry->{$kind}
+		#- we don't modify existing failsafe or linux-nonfb unless we overwrite them
+		&& ($_->{label} eq $entry->{label} || !member($_->{label}, 'failsafe', 'linux-nonfb'))) {
+		log::l("replacing $_->{$kind} with $old_long_name for bootloader label $_->{labe}");
+		$_->{$kind} = $old_long_name;
+	    }
 	}
     } else {
 	log::l("ERROR: $entry->{$kind} points to $old_long_name which doesn't exist");
@@ -365,29 +398,7 @@ sub _do_the_symlink {
 }
 
 sub add_kernel {
-    my ($bootloader, $kernel_str, $nolink, $v) = @_;
-
-    #- new versions of yaboot don't handle symlinks
-    $nolink ||= arch() =~ /ppc/;
-
-    $nolink ||= $kernel_str->{use_long_name};
-
-    my $vmlinuz_long = kernel_str2vmlinuz_long($kernel_str);
-    $v->{kernel_or_dev} = "/boot/$vmlinuz_long";
-    -e "$::prefix$v->{kernel_or_dev}" or log::l("unable to find kernel image $::prefix$v->{kernel_or_dev}"), return;
-    if (!$nolink) {
-	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
-	_do_the_symlink($bootloader, $v, 'kernel_or_dev', $vmlinuz_long);
-    }
-    log::l("adding $v->{kernel_or_dev}");
-
-    my $initrd_long = kernel_str2initrd_long($kernel_str);
-    $v->{initrd} = "/boot/$initrd_long";
-    mkinitrd($kernel_str->{version}, $v->{initrd}, $v->{vga}) or undef $v->{initrd};
-    if ($v->{initrd} && !$nolink) {
-	$v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
-	_do_the_symlink($bootloader, $v, 'initrd', $initrd_long);
-    }
+    my ($bootloader, $kernel_str, $v, $b_nolink, $b_no_initrd) = @_;
 
     add2hash($v,
 	     {
@@ -395,6 +406,31 @@ sub add_kernel {
 	      label => kernel_str2label($kernel_str),
 	     });
     $v->{append} = normalize_append("$bootloader->{perImageAppend} $v->{append}");
+
+    #- new versions of yaboot don't handle symlinks
+    $b_nolink ||= arch() =~ /ppc/;
+
+    $b_nolink ||= $kernel_str->{use_long_name};
+
+    my $vmlinuz_long = kernel_str2vmlinuz_long($kernel_str);
+    $v->{kernel_or_dev} = "/boot/$vmlinuz_long";
+    -e "$::prefix$v->{kernel_or_dev}" or log::l("unable to find kernel image $::prefix$v->{kernel_or_dev}"), return;
+    if (!$b_nolink) {
+	$v->{kernel_or_dev} = '/boot/' . kernel_str2vmlinuz_short($kernel_str);
+	_do_the_symlink($bootloader, $v, 'kernel_or_dev', $vmlinuz_long);
+    }
+    log::l("adding $v->{kernel_or_dev}");
+
+    if (!$b_no_initrd) {
+	my $initrd_long = kernel_str2initrd_long($kernel_str);
+	$v->{initrd} = "/boot/$initrd_long";
+	mkinitrd($kernel_str->{version}, $v) or undef $v->{initrd};
+	if ($v->{initrd} && !$b_nolink) {
+	    $v->{initrd} = '/boot/' . kernel_str2initrd_short($kernel_str);
+	    _do_the_symlink($bootloader, $v, 'initrd', $initrd_long);
+	}
+    }
+
     add_entry($bootloader, $v);
 }
 
@@ -489,7 +525,7 @@ sub configure_entry {
 
     if (my $kernel_str = vmlinuz2kernel_str($entry->{kernel_or_dev})) {
 	$entry->{initrd} ||= '/boot/' . kernel_str2initrd_short($kernel_str);
-	mkinitrd($kernel_str->{version}, $entry->{initrd}, $entry->{vga}) or undef $entry->{initrd};
+	mkinitrd($kernel_str->{version}, $entry) or undef $entry->{initrd};
     }
 }
 
@@ -634,7 +670,7 @@ wait for default boot.
     my @kernels = get_kernels_and_labels() or die "no kernel installed";
 
     foreach my $kernel (@kernels) {
-	add_kernel($bootloader, $kernel, 0,
+	add_kernel($bootloader, $kernel,
 	       {
 		root => $root,
 		if_($options{vga_fb} && $kernel->{ext} eq '', vga => $options{vga_fb}), #- using framebuffer
@@ -642,14 +678,14 @@ wait for default boot.
 	       });
 
 	if ($options{vga_fb} && $kernel->{ext} eq '') {
-	    add_kernel($bootloader, $kernel, 0, { root => $root, label => 'linux-nonfb' });
+	    add_kernel($bootloader, $kernel, { root => $root, label => 'linux-nonfb' });
 	}
     }
 
     #- remove existing libsafe, don't care if the previous one was modified by the user?
     @{$bootloader->{entries}} = grep { $_->{label} ne 'failsafe' } @{$bootloader->{entries}};
 
-    add_kernel($bootloader, $kernels[0], 0,
+    add_kernel($bootloader, $kernels[0],
 	       { root => $root, label => 'failsafe', append => 'devfs=nomount failsafe' });
 
     if (arch() =~ /ppc/) {
@@ -750,6 +786,20 @@ sub keytable {
     -r "$::prefix/$f" && $f;
 }
 
+
+sub create_link_source() {
+    #- we simply do it for all kernels :)
+    #- so this can be used in %post of kernel and also of kernel-source
+    foreach (all("$::prefix/usr/src")) {
+	my ($version) = /^linux-(\d+\.\d+.*)/ or next;
+	foreach (glob("$::prefix/lib/modules/$version*")) {
+	    -d $_ or next;
+	    log::l("creating symlink $_/build");
+	    symlink "/usr/src/linux-$version", "$_/build";
+	}
+    }
+}
+
 sub has_profiles { my ($b) = @_; to_bool(get_label("office", $b)) }
 sub set_profiles {
     my ($b, $want_profiles) = @_;
@@ -784,7 +834,7 @@ sub check_enough_space() {
     unlink $e;
 }
 
-sub install_yaboot {
+sub write_yaboot {
     my ($bootloader, $_hds) = @_;
     $bootloader->{prompt} = $bootloader->{timeout};
 
@@ -843,7 +893,16 @@ sub install_yaboot {
 	log::l("writing yaboot config to $f");
 	output($f, map { "$_\n" } @conf);
     }
+}
+
+sub install_yaboot {
+    my ($bootloader, $hds) = @_;    
     log::l("Installing boot loader...");
+    write_yaboot($bootloader, $hds);
+    when_config_changed_yaboot($bootloader);
+}
+sub when_config_changed_yaboot {
+    my ($bootloader) = @_;
     my $f = "$::prefix/tmp/of_boot_dev";
     my $of_dev = get_of_dev($bootloader->{boot});
     output($f, "$of_dev\n");  
@@ -863,7 +922,7 @@ sub make_label_lilo_compatible {
     qq("$label");
 }
 
-sub write_lilo_conf {
+sub write_lilo {
     my ($bootloader, $hds) = @_;
     $bootloader->{prompt} = $bootloader->{timeout};
 
@@ -892,7 +951,7 @@ sub write_lilo_conf {
     #- normalize: RESTRICTED is only valid if PASSWORD is set
     delete $bootloader->{restricted} if !$bootloader->{password};
 
-    if (every { $_->{label} ne $bootloader->{default} } @{$bootloader->{entries}}) {
+    if (!get_label('default', $bootloader)) {
 	log::l("default bootloader entry $bootloader->{default} is invalid, choose another one");
 	$bootloader->{default} = $bootloader->{entries}[0]{label};
     }
@@ -949,17 +1008,23 @@ sub write_lilo_conf {
 }
 
 sub install_lilo {
-    my ($bootloader, $hds, $method) = @_;
+    my ($bootloader, $hds) = @_;
 
-    if (my ($install) = $method =~ /lilo-(text|menu)/) {
+    if (my ($install) = $bootloader->{method} =~ /lilo-(text|menu)/) {
 	$bootloader->{install} = $install;
     } else {
 	delete $bootloader->{install};
     }
     output("$::prefix/boot/message-text", $bootloader->{message}) if $bootloader->{message};
-    symlinkf "message-" . ($method ne 'lilo-graphic' ? 'text' : 'graphic'), "$::prefix/boot/message";
+    symlinkf "message-" . ($bootloader->{method} ne 'lilo-graphic' ? 'text' : 'graphic'), "$::prefix/boot/message";
 
-    write_lilo_conf($bootloader, $hds);
+    write_lilo($bootloader, $hds);
+
+    when_config_changed_lilo($bootloader);
+}
+
+sub when_config_changed_lilo {
+    my ($bootloader) = @_;
 
     if (!$::testing && arch() !~ /ia64/ && $bootloader->{method} =~ /lilo/) {
 	log::l("Installing boot loader on $bootloader->{boot}...");
@@ -1050,7 +1115,7 @@ sub grub2file {
     }
 }
 
-sub write_grub_config {
+sub write_grub {
     my ($bootloader, $hds) = @_;
 
     my $fstab = [ fsedit::get_fstab(@$hds) ]; 
@@ -1123,7 +1188,7 @@ EOF
 sub install_grub {
     my ($bootloader, $hds) = @_;
 
-    write_grub_config($bootloader, $hds);
+    write_grub($bootloader, $hds);
 
     if (!$::testing) {
 	log::l("Installing boot loader...");
@@ -1132,6 +1197,18 @@ sub install_grub {
 	run_program::run("sh", '/boot/grub/install.sh', "2>", \$error) or die "grub failed: $error";
 	unlink "/boot";
     }
+}
+sub when_config_changed_grub {
+    my ($_bootloader) = @_;
+    #- don't do anything
+}
+
+sub action {
+    my ($bootloader, $action, @para) = @_;
+
+    my $main_method = main_method($bootloader->{method});
+    my $f = $bootloader::{$action . '_' . $main_method} or die "unknown bootloader method $bootloader->{method} ($action)";
+    $f->($bootloader, @para);
 }
 
 sub install {
@@ -1142,10 +1219,7 @@ sub install {
 	  if isThisFs('xfs', $part);
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});
-
-    my $main_method = main_method($bootloader->{method});
-    my $f = $bootloader::{"install_$main_method"} or die "unknown bootloader method $bootloader->{method} (install)";
-    $f->($bootloader, $hds, $bootloader->{method});
+    action($bootloader, 'install', $hds);
 }
 
 sub update_for_renumbered_partitions {
