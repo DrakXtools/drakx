@@ -718,7 +718,7 @@ sub getAndSaveInstallFloppy {
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
 	  arch() =~ /ia64|ppc/ ? "all"  : #- we only use all.img there
-	  ${{ disk => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+	  ${{ disk => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
 	getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
     }
