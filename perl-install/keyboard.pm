@@ -24,23 +24,24 @@ my %lang2keyboard =
   "en" => "us",
 );
 
-#- [1] = name for loadkeys, [2] = extension for Xmodmap
+#- key = extension for Xmodmap file, [0] = description of the keyboard,
+#- [1] = name for loadkeys, [2] = name for XKB
 my %keyboards = (
 #- armenian xmodmap have to be checked...
 #- "am" => [ __("Armenian"),       "am-armscii8",  "am" ],
  "be" => [ __("Belgian"),        "be-latin1",   "be" ],
  "bg" => [ __("Bulgarian"),      "bg",          "bg" ],
- "cz" => [ __("Czech"),          "cz-latin2",   "cz" ],
+ "cz" => [ __("Czech"),          "cz-latin2",   "czsk" ],
  "de" => [ __("German"),         "de-latin1",   "de" ],
  "dk" => [ __("Danish"),         "dk-latin1",   "dk" ],
 "dvorak" => [ __("Dvorak"),      "dvorak",      "dvorak" ],
- "ee" => [ __("Estonian"),      "ee-latin9",   "ee" ],
- "es" => [ __("Spanish"),       "es-latin1",   "es" ],
+ "ee" => [ __("Estonian"),       "ee-latin9",   "ee" ],
+ "es" => [ __("Spanish"),        "es-latin1",   "es" ],
  "fi" => [ __("Finnish"),        "fi-latin1",   "fi" ],
  "fr" => [ __("French"),         "fr-latin1",   "fr" ],
 #- georgian keyboards have to be written...
 #-"ge_ru"=>[__("Georgian (\"Russian\" layout)","ge_ru-georgian_academy","ge_ru"],
-#-"ge_la"=>[__("Georgian ("\Latin\" layout)","ge_la-georgian_academy","ge_ru"],
+#-"ge_la"=>[__("Georgian ("\Latin\" layout)","ge_la-georgian_academy","ge_la"],
  "gr" => [ __("Greek"),          "gr-8859_7",   "gr" ],
  "hu" => [ __("Hungarian"),      "hu-latin2",   "hu" ],
  "il" => [ __("Israelian"),      "il-8859_8",   "il" ],
@@ -48,22 +49,25 @@ my %keyboards = (
  "it" => [ __("Italian"),        "it-latin1",   "it" ],
  "la" => [ __("Latin American"), "la-latin1",   "la" ],
  "nl" => [ __("Dutch"),          "nl-latin1",   "nl" ],
+ "lt" => [ __("Lithuanian AZERTY"), "lta-latin7", "lt" ],
+ "lt_b" => [ __("Lithuanian \"number row\" QWERTY"), "ltb-latin7", "lt_b" ],
+ "lt_p" => [ __("Lithuanian \"phonétic\" QWERTY"), "ltp-latin7", "lt_p" ],
  "no" => [ __("Norwegian"),      "no-latin1",   "no" ],
  "pl" => [ __("Polish"),         "pl-latin2",   "pl" ],
  "pt" => [ __("Portuguese"),     "pt-latin1",   "pt" ],
- "qc" => [ __("Canadian (Quebec)"), "qc-latin1","qc" ],
+ "qc" => [ __("Canadian (Quebec)"), "qc-latin1","ca_enhanced" ],
  "ru" => [ __("Russian"),        "ru-koi8",     "ru" ],
- "se" => [ __("Swedish"),        "se-latin1",   "se" ],
- "sf" => [ __("Swiss (french layout)"), "sf-latin1", "sf" ],
- "sg" => [ __("Swiss (german layout)"), "sg-latin1", "sg" ],
+ "se" => [ __("Swedish"),        "se-latin1",   "se_SE" ],
+ "sf" => [ __("Swiss (french layout)"), "sf-latin1", "fr_CH" ],
+ "sg" => [ __("Swiss (german layout)"), "sg-latin1", "de_CH" ],
  "si" => [ __("Slovenian"),      "si-latin1",   "si" ],
- "sk" => [ __("Slovakian"),      "sk-latin2",   "sk" ],
+ "sk" => [ __("Slovakian"),      "sk-latin2",   "czsk" ],
 #- the xmodmap.th has to be fixed to use tis620 keymaps
 #- "th" => [ __("Thai keyboard"),  "th",          "th" ],
  "tr_f"  => [ __("Turkish (traditional \"F\" model)"), "tr_f-latin5", "tr_f" ],
  "tr_q" => [ __("Turkish (modern \"Q\" model)"), "tr_q-latin5", "tr_q" ],
- "uk" => [ __("UK keyboard"),    "uk-latin1",   "uk" ],
- "us" => [ __("US keyboard"),    "us-latin",    "us" ],
+ "uk" => [ __("UK keyboard"),    "uk-latin1",   "gb" ],
+ "us" => [ __("US keyboard"),    "us-latin",    "us_intl" ],
  "yu" => [ __("Yugoslavian (latin layout)"), "yu-latin2", "yu" ],
 );
 
@@ -71,7 +75,7 @@ my %keyboards = (
 #- Functions
 #-######################################################################################
 sub list { map { $_->[0] } values %keyboards }
-sub xmodmaps { map { $_->[2] } values %keyboards }
+sub xmodmaps { map { $_ } values %keyboards }
 sub keyboard2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
 sub text2keyboard {
     my ($t) = @_;
@@ -128,7 +132,7 @@ sub setup($) {
 	log::l("loading keymap $o->[1]");
 	load(cat_($file)) if -e $file;
     }
-    if (my $file = install_any::install_cpio("/usr/share/xmodmap", "xmodmap.$o->[2]")) {
+    if (my $file = install_any::install_cpio("/usr/share/xmodmap", "xmodmap.$keyboard")) {
 	eval { run_program::run('xmodmap', $file) } unless $::testing;
     }
 }
