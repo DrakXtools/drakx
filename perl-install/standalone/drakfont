@@ -600,36 +600,45 @@ sub text_view {
 }
 
 sub help() {
-    ugtk2::create_dialog(N("Help"), N("
- Copyright (C) 2001-2002 by MandrakeSoft 
-     DUPONT Sebastien (original version)
-     CHAUMETTE Damien <dchaumette\@mandrakesoft.com>
+    ugtk2::create_dialog(N("Help"), formatAlaTeX(N("Copyright (C) 2001-2002 by MandrakeSoft 
 
- This program is free software; you can redistribute it and/or modify
+
+       DUPONT Sebastien (original version)
+
+       CHAUMETTE Damien <dchaumette\@mandrakesoft.com>
+
+       VIGNAUD Thierry <tvignaud\@mandrakesoft.com>")
+
+. "\n\n\n" . N("This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2, or (at your option)
  any later version.
+
 
  This program is distributed in the hope that it will be useful,
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
 
+
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.")
 
- Thanks:
+. "\n\n\n" . N("Thanks:
+
     -  pfm2afm:   
 	 by Ken Borgendale:
 	    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)
+
     -  type1inst:
 	 by James Macnicol: 
 	    type1inst generates files fonts.dir fonts.scale & Fontmap.
+
     -  ttf2pt1:   
 	  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  
              Convert ttf font files to afm and pfb fonts
-"));
+")));
 }
 
 sub appli_choice() {
