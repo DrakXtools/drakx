@@ -1,3 +1,40 @@
+2001/09/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps.pm: voodoo cards don't like performing 3d accel in fb mode
+
+2001/09/23  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/cs.po, share/po/hu.po: updated Czech and Hungarian file
+
+	* share/po/zh_TW.po: updated Chinese file
+
+2001/09/23  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm: add "Graphical Environment" in meta_class server
+
+	* fsedit.pm: add magic SWAPSPACE2
+
+	* bootloader.pm: allow bootloader on fat partitions
+
+	* share/compssUsers, share/rpmsrate, install_any.pm: do not force X flag,
+	have it selected for any "Graphical Environment"
+
+2001/09/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile: version is 8.1
+
+2001/09/22  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/bs.po: updated Bosnian file
+
+2001/09/22  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm, install2.pm: 
+	  - cleanup noatime option setting
+	  - cleanup exec option setting (must noexec => 0 instead of exec => 1)
+
+	* bootloader.pm (suggest): fix kernel 2.2 secure adding in menu
+
 2001/09/22  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/bg.po: updated Bulgarian file
