@@ -21,7 +21,7 @@ save_help($base);
 foreach my $lang (keys %helps) {
     local *F;
     my ($charset) = cat_("$lang.po") =~ /charset=([^\\]+)/ or die "missing charset in $lang.po\n";
-    open F, "| iconv -f utf8 -t $charset > help-$lang.pot";
+    open F, "| iconv -f utf8 -t $charset//TRANSLIT > help-$lang.pot";
     print F "\n";
     foreach my $id (keys %{$helps{$lang}}) {
 	$base->{$id} or die "$lang:$id doesn't exist in english\n";
@@ -89,9 +89,14 @@ sub find {
 
 sub rewrite2 {
     my ($tree, $lang) = @_;
-    my $i18ned_open_quote  = $ {{ fr => "«", de => "â€ž"}}{$lang};
-    my $i18ned_close_quote = $ {{ fr => "»", de => "â€œ"}}{$lang};
-
+    my $i18ned_open_text_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
+    my $i18ned_close_text_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
+    my $i18ned_open_label_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
+    my $i18ned_close_label_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
+    my $i18ned_open_command_quote  = $ {{ fr => "« ", de => "â€ž"}}{$lang};
+    my $i18ned_close_command_quote = $ {{ fr => " »", de => "â€œ"}}{$lang};
+    my $i18ned_open_input_quote  = $ {{ fr => "« ", de => "Â»"}}{$lang};
+    my $i18ned_close_input_quote = $ {{ fr => " »", de => "Â«"}}{$lang};
     # rewrite2_ fills in $help
     $help = {};
     rewrite2_($tree);
@@ -121,14 +126,16 @@ sub rewrite2_ {
 	$text =~ s/\s+$//;
 	qq(\n$text\n);
     } elsif (member($tree->{tag}, 'quote', 'citetitle', 'foreignphrase')) {
-	($i18ned_open_quote || "``") . $text . ($i18ned_close_quote || "''");
+	($i18ned_open_text_quote || "``") . $text . ($i18ned_close_text_quote || "''");
     } elsif ($tree->{tag} eq 'guilabel') {
-	($i18ned_open_quote || "\\\"") . $text . ($i18ned_close_quote || "\\\"");
+	($i18ned_open_label_quote || "\\\"") . $text . ($i18ned_close_label_quote || "\\\"");
     } elsif ($tree->{tag} eq 'command') {
-	qq(\\"$text\\");
+	($i18ned_open_command_quote || "\\\"") . $text . ($i18ned_close_command_quote || "\\\"");
     } elsif ($tree->{tag} eq 'userinput') {
-	qq(>>$text<<);
-    } elsif (member($tree->{tag}, 'footnote', 'keysym')) {
+	($i18ned_open_input_quote || ">>") . $text . ($i18ned_close_input_quote || "<<");
+    } elsif (member($tree->{tag}, 'keysym')) {
+	qq($text);
+    } elsif (member($tree->{tag}, 'footnote')) {
 	'(*)'
     } elsif ($tree->{tag} eq 'warning') {
 	$text =~ s/^(\s+)/$1!! /;
