@@ -355,7 +355,7 @@ our @tree =
      {
       class => "UPS",
       string => N("UPS"),
-      icon => "harddisk.png",
+      icon => "ups.png",
       configurator => "$sbindir/drakups",
       detector => sub { f(detect_devices::getUPS()) },
       checked_on_boot => 0,
