@@ -189,7 +189,7 @@ our %l = (
   # just here for classification, unused categories (nor auto-detect, nor load_thiskind)
   {
     raid => [
-      qw(dm-crypt dm-mirror dm-mod linear lvm-mod multipath raid0 raid1 raid5),
+      qw(dm-crypt dm-mirror dm-mod linear lvm-mod multipath raid0 raid1 raid10 raid5),
     ],
     mouse => [
       qw(atixlmouse busmouse generic_serial inport logibm logibusmouse msbusmouse pcips2 qpmouse synclinkmp),
