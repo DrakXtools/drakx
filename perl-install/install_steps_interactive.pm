@@ -142,7 +142,7 @@ sub configureNetwork($) {
 	$o->setup_thiskind('net', !$::expert, 1);
 	my @l = detect_devices::getNet() or die _("no network card found");
 
-	my $last; foreach ($::expert ? @l : $l[0]) {
+	my $last; foreach ($::beginner ? $l[0] : @l) {
 	    my $intf = network::findIntf($o->{intf} ||= [], $_);
 	    add2hash($intf, $last);
 	    add2hash($intf, { NETMASK => '255.255.255.0' });
@@ -479,7 +479,7 @@ lilo on your system, or another operating system removes lilo, or lilo doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
 failures. Would you like to create a bootdisk for your system?"), !$o->{mkbootdisk}) or return;
-	$o->{mkbootdisk} = $l[1] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
+	$o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
     } else {
 	@l or die _("Sorry, no floppy drive available");
 

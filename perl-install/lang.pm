@@ -109,10 +109,10 @@ sub text2lang {
 }
 
 sub set {
-    my $lang = shift;
+    my ($lang) = @_;
 
     if ($lang) {
-	$ENV{LC_ALL}    = $lang;                
+	$ENV{LC_ALL}    = $lang;
 	$ENV{LANG}      = $languages{$lang}[2]; 
 	$ENV{LANGUAGES} = $languages{$lang}[3]; 
 	if (my $f = $languages{$lang}[1]) { load_font($f) }
@@ -158,7 +158,7 @@ sub load_font {
     my $fontSet = "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1";
 
     if (my $c = $charsets{$charset}) {
-	log::l("loading " . $c . " font");
+	log::l("loading $charset font");
         $fontFile = $c->[0];
 	$fontSet  = $c->[2]; 
     }

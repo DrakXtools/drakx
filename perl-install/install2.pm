@@ -279,9 +279,10 @@ $o = $::o = {
 #		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
 #	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
-    lang         => 'fr_FR',
+    lang         => 'us',
     isUpgrade    => 0,
-    installClass => 'expert',
+    installClass => "beginner",
+
     timezone => {
                    timezone => "Europe/Paris",
                    GMT      => 1,
@@ -320,8 +321,6 @@ $o = $::o = {
 #    display => "192.168.1.9:0",
     steps        => \%installSteps,        
     orderedSteps => \@orderedInstallSteps, 
-
-    installClass => "expert",
 
     base => [ qw(basesystem initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
 # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
