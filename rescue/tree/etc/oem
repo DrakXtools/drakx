@@ -469,7 +469,7 @@ foreach my $medium (@media) {
 	$pkg->{closure} && !$pkg->{selected} or next;
 	my $file = "/cdrom/$medium->{rpmsdir}/" . rpm_filename($pkg);
 	if (-e $file) {
-	    print "  copying $pkg->{name}.$_.rpm\n";
+	    print "  copying " . rpm_filename($pkg) . "\n";
 	    system "cp", "-a", $file, "/hd/$medium->{rpmsdir}";
 	    delete $pkg->{closure};
 	}
@@ -518,7 +518,13 @@ if (-e "/cdrom/Mandrake/base/oem-message-graphic") {
 }
 
 system "umount", "/mnt/proc";
-system "umount", "-a", "-f", "-t", "noproc";
+$home and system "umount", "/mnt/home";
+$var and system "umount", "/mnt/var";
+system "umount", "/mnt";
+system "umount", "/tmp/hd";
+system "umount", "/hd";
+system "umount", "/cdrom";
+
 $cd and system "eject", "/dev/$cd";
 
 print "
@@ -603,7 +609,7 @@ sub select_packages {
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 4, 0);
 
     #- package that have to selected here as a bonus for oem install.
-    foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools reiserfsprogs xfsprogs jfsprogs icewm-light
+    foreach (qw(cups cups-drivers drakprofile draksync numlock raidtools icewm-light
 		Mesa Mesa-demos alsa alsa-utils Mesa-demos
                 glibc vim-minimal kernel
                )) {
@@ -615,7 +621,7 @@ sub select_packages {
     foreach (qw(kernel-smp kernel-linus kernel-secure hackkernel-smp hackkernel-linus hackkernel-secure kernel-pcmcia-cs
 		xawtv kwintv xscreensaver-gl xmms-mesa 
 		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
-		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs
+		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs xfsprogs jfsprogs 
 		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
 		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
