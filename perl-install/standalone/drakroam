@@ -40,8 +40,6 @@ my $DHClient = '/sbin/dhclient';
 
 # initialize variables
 my $ScanInterval = 60; # tell deamon to search for new nets every x seconds
-my $NumberOfNets = 0; # really lame way to count the number of nets to write to config file
-# there must be a better way to count the number of arrays in $KnownList->{data} !!
 
 # initialize main window
 $MainWindow = Gtk2::Window->new;
@@ -157,7 +155,6 @@ $KnownControls->pack_start($RemoveNetButton, 0, 0, 0);
 $RemoveNetButton->signal_connect(clicked => sub {
 	my @selected = $KnownList->get_selected_indices;
 	splice @{$KnownList->{data}}, "@selected", 1;
-	$NumberOfNets--;
 });
 $ConnectButton = Gtk2::Button->new("Connect");
 $KnownControls->pack_start($ConnectButton, 0, 0, 0);
@@ -307,8 +304,7 @@ sub AddNet {
 	my $key = shift @_;
 	my $dhcp = shift @_;
 	print "Adding net $essid\n";
-	push(@{$KnownList->{data}}, [$essid, $mode, $channel, $key, $dhcp]);
-	$NumberOfNets++;
+	push @{$KnownList->{data}}, [ $essid, $mode, $channel, $key, $dhcp ];
 }
 
 sub ReadConfig {
@@ -345,19 +341,19 @@ sub ReadConfig {
 sub WriteConfig {
 	open(my $CONFIG, "> $config") or die("Can't open configuration file\n");
 	print $CONFIG "#wlandetect configuration file\n#format: essid<tab><tab>commands\n#use @DEV@ for device name\n";
-	for ($row=0; $row < $NumberOfNets; $row++) { # again, lame
-		print $CONFIG "$KnownList->{data}[$row][0]\t\t$IWConfig essid $KnownList->{data}[$row][0]";
-		if ($KnownList->{data}[$row][1]) {
-			print $CONFIG "mode $KnownList->{data}[$row][1] ";
+	foreach my $row (@{$KnownList->{data}}) { # again, lame
+		print $CONFIG "$row->[0]\t\t$IWConfig essid $row->[0]";
+		if ($row->[1]) {
+			print $CONFIG "mode $row->[1] ";
 		}
-		if ($KnownList->{data}[$row][2]) {
-			print $CONFIG "channel $KnownList->{data}[$row][2] ";
+		if ($row->[2]) {
+			print $CONFIG "channel $row->[2] ";
 		}
-		if ($KnownList->{data}[$row][3]) {
-			print $CONFIG "key $KnownList->{data}[$row][3] ";
+		if ($row->[3]) {
+			print $CONFIG "key $row->[3] ";
 		}
 		print $CONFIG "; ";
-		if ($KnownList->{data}[$row][4]) {
+		if ($row->[4]) {
 			print $CONFIG "$IFConfig \@DEV\@ up; $DHClient \@DEV\@";
 		}
 		else {
