@@ -59,8 +59,8 @@ my ($output, @modules, @temp_modules, %buttons, %options, $tree_model, $tree, $l
 my $conffile = "/etc/sysconfig/drakfloppy";
 
 # we must be robust against config file parsing
-eval { %options = getVarsFromSh($conffile); } or warn N("Error while parsing \"MODULES\" line from $conffile");
-@modules  = split (' ', $options{MODULES});
+eval { %options = getVarsFromSh($conffile) } or warn N("Error while parsing \"MODULES\" line from %s", $conffile);
+@modules  = split(' ', $options{MODULES});
 
 
 ######## up part
@@ -134,7 +134,7 @@ sub pref_dialog() {
     $tree_model = Gtk2::TreeStore->new(("Glib::String") x 2, "Glib::Int");
     $tree = Gtk2::TreeView->new_with_model($tree_model);
     $tree->set_headers_visible(0);
-    $tree->append_column(my $textcolumn  = Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
+    $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
     $tree->signal_connect('row-expanded', \&expand_tree);
     $tree->get_selection->signal_connect('changed' => \&selected_tree);
 
@@ -288,7 +288,7 @@ sub build_it() {
                            if_($options{needed}, "--ifneeded"),
                            if_($options{scsi},   "--omit-scsi-modules"),
                            if_($options{raid},   "--omit-raid-modules"),
-                           if_(@modules, map { my $i = $_; $i =~ s@.*/@@; "--with=$i" } @modules),
+                           if_(@modules, map { my $i = $_; $i =~ s!.*/!!; "--with=$i" } @modules),
                           );
     $initrd_args = "--mkinitrdargs \"$initrd_args\"" if $initrd_args;
     my $co = join(' ', "/sbin/mkbootdisk --noprompt --verbose --device", $device_combo->entry->get_text, $initrd_args);
@@ -316,7 +316,7 @@ sub build_it() {
         err_dialog(N("Error"), N("Unable to properly close mkbootdisk:\n\n<span foreground=\"Red\"><tt>%s</tt></span>", $log), { use_markup => 1, small => 1 });
     }
   
-    return (0);
+    return 0;
 }
 
 sub get_file_size {
