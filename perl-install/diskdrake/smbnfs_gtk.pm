@@ -12,7 +12,7 @@ use network::smb;
 use network::nfs;
 use my_gtk qw(:helpers :wrappers :ask);
 
-my ($all_hds, $in);
+my ($all_hds, $in, $current_entry);
 
 sub main {
     ($in, $all_hds, my $type) = @_;
@@ -30,17 +30,27 @@ sub main {
 # nfs/smb: helpers
 ################################################################################
 sub try {
-    my ($name, @args) = @_;
+    my ($kind, $name, @args) = @_;
     my $f = $diskdrake::interactive::{$name} or die "unknown function $name";
-    try_($name, \&{$f}, @args);
+    try_($kind, $name, \&{$f}, @args);
 }
 sub try_ {
-    my ($name, $f, @args) = @_;
+    my ($kind, $name, $f, @args) = @_;
     eval { $f->($in, @args, $all_hds); };
     if (my $err = $@) {
 	$in->ask_warn(_("Error"), formatError($err));
     }
+    update($kind);
     Gtk->main_quit if $name eq 'Done';
+}
+
+sub raw_hd_options {
+    my ($in, $raw_hd) = @_;
+    diskdrake::interactive::Options($in, {}, $raw_hd);
+}
+sub raw_hd_mount_point {
+    my ($in, $raw_hd) = @_;
+    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds);
 }
 
 sub per_entry_info_box {
@@ -53,23 +63,15 @@ sub per_entry_info_box {
     gtkpack($box, gtkadd(new Gtk::Frame(_("Details")), gtkset_justify(new Gtk::Label($info), 'left')));
 }
 
-sub raw_hd_options {
-    my ($in, $raw_hd) = @_;
-    diskdrake::interactive::Options($in, {}, $raw_hd);
-}
-sub raw_hd_mount_point {
-    my ($in, $raw_hd) = @_;
-    diskdrake::interactive::Mount_point_raw_hd($in, $raw_hd, $all_hds);
-}
-
-
 sub per_entry_action_box {
     my ($box, $kind, $entry) = @_;
     $_->widget->destroy foreach $box->children;
 
-    my @buttons = map {
+    my @buttons;
+
+    push @buttons, map {
 	  my $s = $_;
-	  gtksignal_connect(new Gtk::Button(translate($s)), clicked => sub { try($s, {}, $entry) });
+	  gtksignal_connect(new Gtk::Button(translate($s)), clicked => sub { try($kind, $s, {}, $entry) });
       } (if_($entry->{isMounted}, __("Unmount")),
 	 if_($entry->{mntpoint} && !$entry->{isMounted}, __("Mount"))) if $entry;
 
@@ -81,7 +83,7 @@ sub per_entry_action_box {
 	    );
     push @buttons, map {
 	my ($txt, $f) = @$_;
-	gtksignal_connect(new Gtk::Button(translate($txt)), clicked => sub { try_($txt, $f, $entry) });
+	gtksignal_connect(new Gtk::Button(translate($txt)), clicked => sub { try_($kind, $txt, $f, $entry) });
     } group_by2(@l);
 
     gtkadd($box, gtkpack(new Gtk::HBox(0,0), @buttons));
@@ -92,10 +94,10 @@ sub done {
     diskdrake::interactive::Done($in, $all_hds);
 }
 
-sub current_entry_changed {
-    my ($kind, $entry) = @_;
-    per_entry_action_box($kind->{action_box}, $kind, $entry);
-    per_entry_info_box($kind->{info_box}, $kind, $entry);
+sub update {
+    my ($kind) = @_;
+    per_entry_action_box($kind->{action_box}, $kind, $current_entry);
+    per_entry_info_box($kind->{info_box}, $kind, $current_entry);
 }
 
 sub import_ctree {
@@ -146,17 +148,21 @@ sub import_ctree {
 	    } else {
 		push @{$kind->{val}}, $entry;
 	    }
-	    current_entry_changed($kind, $entry);
-	} elsif (!$curr->row->children) {
-	    $tree->freeze;
-	    if ($curr == $click_here) {
-		$add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $find_servers->();
-		$tree->remove_node($click_here);
-	    } else {
-		$add_exports->($curr);
+	    $current_entry = $entry;
+	} else {
+	    if (!$curr->row->children) {
+		$tree->freeze;
+		if ($curr == $click_here) {
+		    $add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $find_servers->();
+		    $tree->remove_node($click_here);
+		} else {
+		    $add_exports->($curr);
+		}
+		$tree->thaw;
 	    }
-	    $tree->thaw;
+	    $current_entry = undef;
 	}
+	update($kind);
 	$inside = 0;
     });
     $tree;
@@ -180,7 +186,8 @@ sub add_smbnfs {
 	     );
 
     $widget->add($kind->{main_box});
-    current_entry_changed($kind, undef);
+    $current_entry = undef;
+    update($kind);
     $kind;
 }
 
