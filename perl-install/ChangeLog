@@ -1,3 +1,10 @@
+2000-02-25  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table_raw.pm (adjustEnd): more explicit error message
+
+	* fsedit.pm (allocatePartitions): fix a bug (size was getting too
+	big after each allocation) making adjustEnd cry
+
 2000-02-24  Pixel  <pixel@mandrakesoft.com>
 
 	* interactive_gtk.pm (new): added the "new" method to initialize

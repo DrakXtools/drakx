@@ -20,9 +20,6 @@ diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 RAID upgrades
 
-diskdrake and auto partitioning, may have the last creation of partition rejected,
-try to figure why?
-
 -features-------------------------------------------------------------------------------
 (NEED 7.1) auto-install for corporate, very important (need consolidation).
 
@@ -188,6 +185,7 @@ have a better time estimation of the remaining time in install packages
 
 (?) options in mkfs, progress bar when formatting
 
+(?) when some occur, partition must be unset isFormatted
 
 -hardware-------------------------------------------------------------------------------
 token ring is tr0 not eth0
@@ -460,3 +458,7 @@ peut en sortir. La seule solution est de redémarrer.
 (done,pix)urpmi: handle many args on cmd-line
 
 (done,pix)fix any // in path to ftp server otherwise windobe server bug :(
+
+(done,pix)diskdrake and auto partitioning, may have the last creation of partition rejected,
+try to figure why?
+

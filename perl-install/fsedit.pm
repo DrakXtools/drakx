@@ -263,10 +263,9 @@ sub allocatePartitions($$) {
 				$part = { start => $start, size => 0, maxsize => $size }, 
 				$hds, $to_add)) {
 		add($hd, $part, $hds);
+		$size -= $part->{size} + $part->{start} - $start;
 		$start = $part->{start} + $part->{size};
-		$size -= $part->{size};
 	    }
-	    $start = $_->{start} + $_->{size};
 	}
     }
 }
