@@ -7,9 +7,8 @@ use standalone;
 
 use common;
 use ugtk2 qw(:helpers :wrappers :create);
-use interactive;
 
-my $in = 'interactive'->vnew('su');
+require_root_capability();
 local $_ = join '', @ARGV;
 
 #- vars declaration
@@ -141,7 +140,7 @@ $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
 $combo_perm->entry->set_text($perm_l10n{all});
 display_perm('all');
-my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($rev_perm_l10n{$combo_perm->entry->get_text} , @_) });
+my $_combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($rev_perm_l10n{$combo_perm->entry->get_text} , @_) });
 
 $permList->get_selection->signal_connect('changed' => sub {
                                                my ($select) = @_;
@@ -315,8 +314,7 @@ sub row_setting_dialog {
                     });
     my %perms;
     $ok->signal_connect(clicked => sub {
-                            my ($path, $user, $group, $perms, $idx);
-                            # create new item if needed (that is when adding a new one) at end of list
+                            my ($path, $user, $group, $perms, $_idx);
                             $path = $file->get_text;
                             if ($usr_check->get_active) {
                                 $user  = 'current';
@@ -328,6 +326,7 @@ sub row_setting_dialog {
 			    $perms = sprintf("%o", eval(join('', "0b",
 							     (map { $perms{$_}->get_active || 0 } reverse @bits),
 							     (map { my $owner = $_;map_index { $perms{$owner}{$_}->get_active || 0 } @rights } @owners))));
+                            # create new item if needed (that is when adding a new one) at end of list
                             if (!$iter) {
                                 $iter = $model->append;
                                 push @rules, { path => $path, user => $user, group => $group, perms => $perms, index => $index };

@@ -76,40 +76,14 @@ my @menu_items = (
 		  { path => N("/_Help"), item_type => '<LastBranch>' },
 		  { path => N("/Help/_About...") } 
 		 );
-my $menubar = create_factory_menu($my_win->{rwindow}, @menu_items) unless $::isEmbedded;
+my $_menubar = create_factory_menu($my_win->{rwindow}, @menu_items) unless $::isEmbedded;
 ######### menus end
 
 
 ########## font and colors
-my %n = ('font' => ''); # Gtk2::Pango::FontDescription->from_string('Serif 12');#Gtk2::Gdk::Font->fontset_load(N("-misc-fixed-medium-r-*-*-*-100-*-*-*-*-*-*,*"));
-my %b = ('font' => 'Bold'); #Gtk2::Pango::FontDescription->from_string('Serif Bold 12');#Gtk2::Gdk::Font->fontset_load(N("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*,*"));
+my %n = ('font' => '');
+my %b = ('font' => 'Bold');
 
-#$black    = "\033[30m";
-#$red      = "\033[31m";
-#$green    = "\033[32m";
-#$yellow   = "\033[33m";
-#$blue     = "\033[34m";
-#$magenta  = "\033[35m";
-#$purple   = "\033[35m";
-#$cyan     = "\033[36m";
-#$white    = "\033[37m";
-#$darkgray = "\033[30m";
-#$col_norm =             "\033[00m";
-#$col_background =       "\033[07m";
-#$col_brighten =         "\033[01m";
-#$col_underline =        "\033[04m";
-#$col_blink =            "\033[05m";
-
-my $white    = gtkcolor(50400, 655, 20000);
-my $black    = gtkcolor(0, 0, 0);
-my $red      = gtkcolor(0xFFFF, 655, 655);
-my $green    = gtkcolor(0x0, 0x9898,0x0);
-my $yellow   = gtkcolor(0xFFFF, 0xD7D7, 0);
-my $blue     = gtkcolor(655, 655, 0xFFFF);
-my $magenta  = gtkcolor(0xFFFF, 655, 0xFFFF);
-my $purple   = gtkcolor(0xA0A0, 0x2020, 0xF0F0);
-my $cyan     = gtkcolor(0x0, 0x9898, 0x9898);
-my $darkgray = gtkcolor(0x2F2F, 0x4F4F, 0x4F4F);
     
 # Define global terms:
 # Define good notables:
@@ -117,12 +91,9 @@ my @word_good = ("starting\n", "Freeing", "Detected", "starting.", "accepted.\n"
 my @word_warn = ("dangling", "closed.\n", "Assuming", "root", "root\n", "exiting\n", "missing", "Ignored", "adminalert:", "deleting", "OFFLINE\n");
 my @word_bad = "bad";
 my @word_note = ("LOGIN", "DHCP_OFFER", "optimized", "reset:", "unloaded", "disconnected", "connect", "Successful", "registered\n");
-my @line_good = ("up", "DHCP_ACK", "Cleaned", "Initializing", "Starting", "success", "successfully", "alive", "found", "ONLINE\n");
-my @line_warn = ("warning:", "WARNING:", "invalid", "obsolete", "bad", "Password", "detected", "timeout", "timeout:", "attackalert:", "wrong", "Lame", "FAILED", "failing", "unknown", "obsolete", "stopped.\n", "terminating.", "disabled\n", "disabled", "Lost");
-my @line_bad = ("DENY", "lost", "shutting", "dead", "DHCP_NAK", "failure;", "Unable", "inactive", "terminating", "refused", "rejected", "down", "OFFLINE\n", "error\n", "ERROR\n", "ERROR:", "error", "ERROR", "error:", "failed:");
-
-# Define specifics:
-my @daemons = "named";
+#my @line_good = ("up", "DHCP_ACK", "Cleaned", "Initializing", "Starting", "success", "successfully", "alive", "found", "ONLINE\n");
+#my @line_warn = ("warning:", "WARNING:", "invalid", "obsolete", "bad", "Password", "detected", "timeout", "timeout:", "attackalert:", "wrong", "Lame", "FAILED", "failing", "unknown", "obsolete", "stopped.\n", "terminating.", "disabled\n", "disabled", "Lost");
+#my @line_bad = ("DENY", "lost", "shutting", "dead", "DHCP_NAK", "failure;", "Unable", "inactive", "terminating", "refused", "rejected", "down", "OFFLINE\n", "error\n", "ERROR\n", "ERROR:", "error", "ERROR", "error:", "failed:");
 
 # Now define what we want to use when:
 my $col_good = 'green4';

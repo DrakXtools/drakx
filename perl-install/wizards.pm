@@ -132,7 +132,7 @@ sub process {
         local $::Wizard_no_cancel = $page->{no_cancel} || $page->{end};
         local $::Wizard_finished = $page->{end};
         defined $page->{pre} and $page->{pre}($page);
-        die "inexistant \"$next\" wizard step" if is_empty_hash_ref($page);
+        die qq(inexistant "$next" wizard step) if is_empty_hash_ref($page);
         
         # FIXME or the displaying fails
         my $data = defined $page->{data} ? (ref($page->{data}) eq 'CODE' ? $page->{data}->() : $page->{data}) : [ { label => '' } ];
@@ -167,10 +167,10 @@ sub process {
                 if (!defined $o->{pages}{$next}) {
                     $next = $page->{next};
                 } else {
-                    die "the \"$next\" page (from previous wizard step) is undefined" if !$next;
+                    die qq(the "$next" page (from previous wizard step) is undefined) if !$next;
                 }
             }
-            die "Step \"$current\": inexistant \"$next\" page" if !exists $o->{pages}{$next};
+            die qq(Step "$current": inexistant "$next" page) if !exists $o->{pages}{$next};
         } else {
             # step back:
             $next = pop @steps
