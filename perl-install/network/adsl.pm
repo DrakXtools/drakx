@@ -277,16 +277,16 @@ LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE
 ', $netc->{adsltype}) } elsif ($adsl_type eq 'sagem') {
     write_cnx_script($netc, 'adsl',
 '/sbin/route del default
-/usr/sbin/adictrl -s
-INTERFACE=`/usr/sbin/adictrl -i`
-/sbin/ifconfig $INTERFACE 192.168.60.30 netmask 255.255.255.0 up
+/usr/sbin/adictrl -w
+#INTERFACE=`/usr/sbin/adictrl -i`
+#/sbin/ifconfig $INTERFACE 192.168.60.30 netmask 255.255.255.0 up
 /usr/sbin/pppd file /etc/ppp/peers/adsl
 ',
 '/usr/sbin/stopadsl
 ', $netc->{adsltype}) } elsif ($adsl_type eq 'sagem_dhcp') {
     write_cnx_script($netc, 'adsl',
 '/sbin/route del default
-/usr/sbin/adictrl -s
+/usr/sbin/adictrl -w
 INTERFACE=`/usr/sbin/adictrl -i`
 /sbin/dhcpcd $INTERFACE
 ',
