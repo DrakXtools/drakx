@@ -64,7 +64,9 @@ sub new($$) {
 		sleep 1;
 		log::l("Server died"), return 0 if !$ok;
 		if (c::Xtest($wanted_DISPLAY)) {
-		    fork() || exec("aewm-drakx") || c::_exit(0);
+		    if (-x '/usr/bin/aewm-drakx') {
+			fork() || exec("aewm-drakx") || c::_exit(0);
+		    }
 		    return 1;
 		}
 	    }
