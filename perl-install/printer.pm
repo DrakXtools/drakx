@@ -29,7 +29,7 @@ our %spoolers = ('ppq' => {
 					 'short_name' => _("PDQ")
                  },
                 'lpd' => {
-                        'help' => "/usr/bin/pdq -h -P %s 2>&1 |"
+                        'help' => "/usr/bin/pdq -h -P %s 2>&1 |",
                         'print_command' => 'lpr-cups',
 				    'long_name' => _("LPD - Line Printer Daemon"),
 					   'short_name' => _("LPD")
@@ -77,12 +77,16 @@ sub spooler {
 
     # LPRng is not officially supported any more since Mandrake 9.0, so
     # show it only in the spooler menu when it was manually installed.
+    my @res;
     if (files_exist((qw(/usr/lib/filters/lpf
 			/usr/sbin/lpd)))) {
-	return @spooler_inv{qw(cups lprng pdq)}{long_name};
+        foreach (qw(cups lprng pdq)) { push @res, $spooler_inv{$_}{long_name} };
+#        {qw(cups lprng pdq)}{long_name};
     } else {
-	return @spooler_inv{qw(cups pdq)}{long_name};
+        foreach (qw(cups pdq)) { push @res, $spooler_inv{$_}{long_name} };
+#	return spooler_inv{qw(cups pdq)}{long_name};
     }
+    return @res;
 }
 
 sub printer_type($) {
@@ -1694,7 +1698,7 @@ sub help_output {
     open F, ($::testing ? $prefix : "chroot $prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
     $helptext = join("", <F>);
     close F;
-    $helptext = "Option list not available!\n"; if ($spooler eq 'lpq' && (!$helptext || ($helptext eq "")));
+    $helptext = "Option list not available!\n" if ($spooler eq 'lpq' && (!$helptext || ($helptext eq "")));
     return $helptext;
 }
 
