@@ -1,3 +1,151 @@
+2003/03/11  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: typos fixed
+
+2003/03/11  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/10-security.png, share/advertising/07-server.pl,
+	share/advertising/12-mdkexpert.png,
+	share/advertising/06-development.png,
+	share/advertising/06-development.pl, share/advertising/11-mnf.pl,
+	share/advertising/09-mdksecure.png, share/advertising/01-thanks.png,
+	share/advertising/07-server.png, share/advertising/02-community.png,
+	share/po/fr.po, share/advertising/list, share/advertising/11-mnf.png,
+	share/advertising/02-community.pl, share/advertising/03-software.pl,
+	share/advertising/05-desktop.pl, share/advertising/09-mdksecure.pl,
+	share/advertising/01-thanks.pl,
+	share/advertising/13-mdkexpert_corporate.pl,
+	share/advertising/12-mdkexpert.pl, share/advertising/03-software.png,
+	share/advertising/08-store.pl, share/advertising/04-configuration.png,
+	share/advertising/13-mdkexpert_corporate.png,
+	share/advertising/10-security.pl, share/advertising/05-desktop.png,
+	share/advertising/04-configuration.pl, share/advertising/08-store.png:
+	Update
+
+2003/03/11  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakgw: really use the chosen net_connect interface
+
+2003/03/11  François Pons  <fpons at mandrakesoft.com>
+
+	* network/network.pm: changed netcnx type probe (so that if an ethernet
+	connection exists, it won't
+	cause netcnx type to be always lan).
+
+	* rescue/tree/etc/oem: modified language settings.
+
+	* network/adsl.pm: moved probing code outside adsl_ask_info.
+
+	* network/ethernet.pm: use $::prefix, waiting for 9.1 to be out before
+	cleaning network modules.
+
+	* standalone/drakconnect: added probing of adsl connection.
+
+2003/03/11  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* install_steps_gtk.pm: the shadow behind the new adverts looks ugly,
+	remove it
+	new advertisement will be with grey background
+
+	* share/po/fr.po: rephrase a bit MNF advert to make it fit
+	spelling
+
+	* share/advertising/07-server.pl, share/advertising/06-development.pl,
+	share/advertising/11-mnf.pl, share/advertising/02-community.pl,
+	share/advertising/03-software.pl, share/advertising/05-desktop.pl,
+	share/advertising/09-mdksecure.pl, share/advertising/01-thanks.pl,
+	share/advertising/12-mdkexpert.pl,
+	share/advertising/13-mdkexpert_corporate.pl,
+	share/advertising/08-store.pl, share/advertising/10-security.pl,
+	share/advertising/04-configuration.pl: fix pablo breaking translation of
+	advertisement :)
+
+	* lang.pm: thx perl checko
+	(pablo) change kde font scheme (crossing fingers)
+
+	* install_steps_interactive.pm: install additional locales package for
+	country according to the locale that will be really used, not according
+	to the default locale for a given country (fixing unecessary installing
+	of locales-de in case of a fr_CH install)
+
+2003/03/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po, share/po/no.po: updated Italian and Norwegian files
+
+	* lang.pm: Changed Qt Chinese XIMStyle to 'Over The Spot' ('On The Spot'
+	crashes)
+	changed KDE default font names for CJK
+
+	* share/po/nl.po, share/po/cs.po: updated Dutch and Czech files
+
+	* share/po/da.po, share/po/vi.po: updated Danish and Vientamese files
+
+2003/03/11  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/main.pm: remove XFdrake icons (per dadou's request)
+
+	* any.pm, bootloader.pm, standalone/drakboot: fix lilo-menu not working
+	(bug #3048)
+
+2003/03/11  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: More gtk2 fixes.
+
+2003/03/11  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Added button to switch to japanese text file
+	printing.
+	Many bug fixes:
+	  - Wait messages bloxked the OK buttons of the dialogs telling how to
+	scan and how to read photo cards on HP´s MF devices.
+	  - Do not configure OpenOffice.org any more, only Star Office.
+	  OpenOffice.org is patched to have native CUPS support now.
+	  - If the Port for a BrowsePoll address is left blank, 631 is taken as
+	  default now.
+	  - Text for firmware upload for HP LaserJet 1000 now also available in
+	  the 'Learn how to use printer' dialog.
+	  - Updated check of model name for HP´s MF devices to newest models.
+
+	* printer/detect.pm: Made sure that all IP addresses of the local machine
+	are in 'Allow
+	From' lines in the /etc/cups/cupsd.conf, otherwise one can have
+	certain configurations with which one cannot access to the options of
+	the local printer(s).
+
+	* printer/main.pm: Made sure that all IP addresses of the local machine
+	are in 'Allow
+	From' lines in the /etc/cups/cupsd.conf, otherwise one can have
+	certain configurations with which one cannot access to the options of
+	the local printer(s).
+	Added button to switch to japanese text file printing.
+
+	* printer/office.pm: Many bug fixes:
+	  - Wait messages bloxked the OK buttons of the dialogs telling how to
+	scan and how to read photo cards on HP´s MF devices.
+	  - Do not configure OpenOffice.org any more, only Star Office.
+	  OpenOffice.org is patched to have native CUPS support now.
+	  - If the Port for a BrowsePoll address is left blank, 631 is taken as
+	  default now.
+	  - Text for firmware upload for HP LaserJet 1000 now also available in
+	  the 'Learn how to use printer' dialog.
+	  - Updated check of model name for HP´s MF devices to newest models.
+
+2003/03/11  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 9.1-19mdk final
+
+	* docs/mdk-9.2: update
+
+2003/03/11  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: add kdeartwork level 3 in KDE
+
+	* share/logo-mandrake.png: 9.1 logo
+
+2003/03/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/no.po: minor typo
+
 2003/03/10  Alice Lafox  <alice at lafox.com.ua>
 
 	* share/po/ru.po: some fixes
@@ -14500,7 +14648,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.804 2003/03/08 00:11:54 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.805 2003/03/10 21:12:57 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
