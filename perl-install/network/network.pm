@@ -446,7 +446,7 @@ sub configureNetwork2 {
     }
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
-    any::miscellaneousNetwork($prefix);
+    any::miscellaneousNetwork();
 }
 
 

@@ -446,8 +446,9 @@ sub setup {
 
 sub write {
     my ($keyboard) = @_;
-    $keyboard = { %$keyboard };
+    log::l("keyboard::write $keyboard->{KEYBOARD}");
 
+    $keyboard = { %$keyboard };
     delete $keyboard->{unsafe};
     $keyboard->{KEYTABLE} = keyboard2kmap($keyboard);
 

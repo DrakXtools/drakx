@@ -117,7 +117,7 @@ sub selectKeyboard {
 
     addToBeDone {
 	keyboard::write($o->{keyboard});
-    } 'installPackages' unless $::g_auto_install;
+    } 'installPackages' if !$::g_auto_install && (!$o->{isUpgrade} || !$o->{keyboard}{unsafe});
 }
 #------------------------------------------------------------------------------
 sub acceptLicence {}
@@ -813,8 +813,11 @@ sub setupBootloaderBefore {
     if ($o->{miscellaneous}{HDPARM}) {
 	bootloader::add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
     }
-    if (grep { /mem=nopentium/ } cat_("/proc/cmdline")) {
+    if (cat_("/proc/cmdline") =~ /mem=nopentium/) {
 	bootloader::add_append($o->{bootloader}, 'mem', 'nopentium');
+    }
+    if (cat_("/proc/cmdline") =~ /\b(pci)=(\S+)/) {
+	bootloader::add_append($o->{bootloader}, $1, $2);
     }
 
     if (arch() =~ /alpha/) {

@@ -98,11 +98,9 @@ sub selectMouse {
     require pkgs;
     my ($first_time) = $ent_number == 1;
 
-    add2hash($o->{mouse} ||= {}, mouse::read($o->{prefix})) if $o->{isUpgrade} && $first_time;
-
     installStepsCall($o, $auto, 'selectMouse', !$first_time || $clicked);
 
-    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'installPackages';
+    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'installPackages' if !$o->{isUpgrade} || $clicked;
 }
 
 #------------------------------------------------------------------------------
@@ -119,13 +117,16 @@ sub setupSCSI {
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($clicked, $first_time, $auto) = ($_[0], $_[1] == 1, $_[2]);
-	    
-    if ($o->{isUpgrade} && $first_time && $o->{keyboard}{unsafe}) {
+
+    installStepsCall($o, $auto, 'selectKeyboard', $clicked);
+
+    #- read keyboard ASAP (so that summary displays ok)
+    addToBeDone {	
+	$o->{keyboard}{unsafe} or return;
 	if (my $keyboard = keyboard::read()) {
 	    $o->{keyboard} = $keyboard;
 	}
-    }
-    installStepsCall($o, $auto, 'selectKeyboard', $clicked);
+    } 'formatPartitions' if $o->{isUpgrade};
 }
 
 #------------------------------------------------------------------------------
