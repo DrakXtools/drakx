@@ -106,7 +106,7 @@ while (<F>) {
 }
 close F;
 for (1..2) {
-    open F, "parted /dev/$hd print |";
+    open F, "parted /dev/$hd -s print |";
     while (<F>) {
 	/^Disk geometry [^:]*:\s*([\d\.]+)-([\d\.]+)/ and do { $hd_size = $2 - $1 };
 	#/^Disk label type:\s*msdos/ and do { $hd_type = 'msdos' };
@@ -182,6 +182,7 @@ Type \`\`yes'' and [enter] to go on\n"
     } else {
 	$point = $hd_parts[$fat_pos]{end};
     }
+    $point+=9; #- keep blank space between partitions if parted cannot handle partition table correctly.
 } else {
     unless (defined $yes) {
 	do {
