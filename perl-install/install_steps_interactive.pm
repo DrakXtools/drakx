@@ -120,8 +120,11 @@ sub selectInstallClass($@) {
 	$::expert   = $c{$_[0]} eq "expert" &&
 	  $o->ask_from_list_('',
 _("Are you sure you are an expert? 
-You will be allowed to make powerful but dangerous things here."), 
-			 [ _("Expert"), _("Customized") ]) ne "Customized";
+You will be allowed to make powerful but dangerous things here.
+
+You will be asked questions such as: ``Use shadow file for passwords?'',
+are you ready to answer that kind of questions?"), 
+			 [ _("Customized"), _("Expert") ]) ne "Customized";
     };      
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
@@ -206,6 +209,24 @@ sub ask_mntpoint_s {
 					} @fstab }) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
+}
+
+#------------------------------------------------------------------------------
+sub doPartitionDisks {
+    my ($o) = @_;
+    my %solutions = install_any::partitionWizard($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
+    my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
+
+    my $level = $::beginner ? 2 : -9999;
+    my @sol = grep { $_->[0] >= $level } @solutions;
+    @solutions = @sol if @sol > 1;
+
+    my $ok; while (!$ok) {
+	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;
+	eval { $ok = $sol->[2]->() };
+	$ok &&= !$@;
+	$@ and $o->ask_warn('', _("Partitioning failed: %s", $@));
+    }
 }
 
 #------------------------------------------------------------------------------
@@ -935,7 +956,7 @@ sub configureX {
 	    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
 	}
     }
-    $::force_xf3 = $::force_xf3; ; #- for no warning
+    $::force_xf3 = $::force_xf3; #- for no warning
     $::force_xf3 = $o->ask_yesorno('', 
 _("DrakX will generate config files for both XFree 3.3 and XFree 4.0.
 By default, the 4.0 server is used unless your card is not supported.

@@ -148,6 +148,7 @@ arch() =~ /^sparc/ ? (
   "DAC960" => "Mylex DAC960",
 #  "dpt" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "megaraid" => "AMI MegaRAID",
+  "aacraid" => "AACxxx Raid Controller",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "gdth" => "ICP Disk Array Controller",
   "ips" => "IBM ServeRAID controller",

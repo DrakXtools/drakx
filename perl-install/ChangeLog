@@ -1,3 +1,30 @@
+2000-08-11  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (selectInstallClass): yet a bigger
+	warning so that people don't choose expert installs. Also set the
+	focus on "Custom" by default.
+	
+	* install_steps_interactive.pm (doPartitionDisks): created, calls
+	the wizard.
+	* install_steps.pm (doPartitionDisksBefore,
+	doPartitionDisksAfter): created (was mainly in
+	install2::doPartitionDisks)
+	* install2.pm (doPartitionDisks): much cleanup
+	* install_any.pm (partitionWizard): working state (still rough)
+
+2000-08-08  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/rpmdrake (AddMedia): fix the ftp addmedia, fix the
+	cdrom addmedia
+
+2000-08-07  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm (Resize): 
+	* install_steps_gtk.pm (doPartitionDisks): remove the
+	before_leaving ensuring the filehandle is closed
+	* resize_fat/main.pm (DESTROY): use a better solution for ensuring
+	the filehandle is closed
+
 2000-08-07  François Pons  <fpons@mandrakesoft.com>
 
 	* Xconfigurator.pm: added SiS6326 in the list of chipset that

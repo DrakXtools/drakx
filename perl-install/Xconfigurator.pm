@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $isLaptop @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
+use vars qw($in $install $isLaptop @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $XF86firstchunk_text $XF86firstchunk_text2 $keyboardsection_start $keyboardsection_start_v4 $keyboardsection_part2 $keyboardsection_part3 $keyboardsection_part3_v4 $keyboardsection_end $pointersection_text $pointersection_text_v4 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $devicesection_text_v4 $screensection_text1 %lines @options %xkb_options $default_monitor $layoutsection_v4);
 
 use common qw(:common :file :functional :system);
 use log;
@@ -225,7 +225,7 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '
     unless ($card->{type}) {
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
     }
-    $card->{options}{power_saver} = 1;
+    $card->{options}{DPMS} = 1;
 
     $card->{flags}{needVideoRam} and
       $card->{memory} ||=
@@ -298,7 +298,7 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
     } else {
 	add2hash($monitor, $monitors{$monitor->{type}});
     }
-    add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
+    add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown", manual => 1 });
 }
 
 sub testConfig($) {
@@ -680,8 +680,10 @@ sub write_XF86Config {
     open F, ">$file"   or die "can't write XF86Config in $file: $!";
     open G, ">$file-4" or die "can't write XF86Config in $file-4: $!";
 
-    print F $XF86firstchunk_text;
+    print F $XF86firstchunk_text, $XF86firstchunk_text2;
     print G $XF86firstchunk_text;
+    print G qq(    Option "Pixmap"  "24"\n) if $o->{card}{type} eq "SiS 6326";
+    print G $XF86firstchunk_text2;
 
     #- Write keyboard section.
     $O = $o->{keyboard};

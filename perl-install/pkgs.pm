@@ -468,7 +468,7 @@ sub psUsingHdlist {
 
     #- extract filename from archive, this take advantage of verifying
     #- the archive too.
-    open F, "extract_archive $newf |" or die "unable to parse $newf";
+    open F, "extract_archive $newf |";
     foreach (<F>) {
 	chomp;
 	/^[dlf]\s+/ or next;
@@ -501,7 +501,7 @@ sub psUsingHdlist {
 	    die "bad hdlist file: $newf";
 	}
     }
-    close F;
+    close F or die "unable to parse $newf";
 
     #- update maximal index.
     $m->{max} = scalar(keys %{$packages->[0]}) - 1;

@@ -34,24 +34,6 @@ sub new($$) {
     (bless {}, ref $type || $type)->SUPER::new($o);
 }
 
-sub doPartitionDisks($$) {
-    my ($o, $hds, $raid) = @_;
-
-    Newt::Suspend();
-    foreach (@$hds) {
-	print 
-_("You can now partition your %s hard drive
-When you are done, don't forget to save using `w'", $_->{device});
-	print "\n\n";
-	my $pid = fork or exec "fdisk", devices::make($_->{device});
-	waitpid($pid, 0);
-    }
-    Newt::Resume();
-
-    install_any::getHds($o);
-    $o->ask_mntpoint_s($o->{fstab});
-}
-
 sub enteringStep {
     my ($o, $step) = @_;
     $o->SUPER::enteringStep($step);

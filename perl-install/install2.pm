@@ -297,43 +297,10 @@ sub selectInstallClass {
 sub doPartitionDisks {
     return install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
 
-    my $stage1_hd;
-    if (cat_("/proc/mounts") =~ m|/\w+/(\S+)\s+/tmp/hdimage\s+(\S+)|) {
-	$stage1_hd = { dev => $1, fs => $2 };
-	install_any::getFile("XXX"); #- close still opened filehandle
-	eval { fs::umount("/tmp/hdimage") };
-    }
-    $::o->{steps}{formatPartitions}{done} = 0;
-    eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
-
-    my $ok = fsedit::get_root($o->{fstab} || []) ? 1 : install_any::getHds($o);
-    my $auto = $ok && !$o->{partitioning}{readonly} && !$o->{lnx4win} &&
-	($o->{partitioning}{auto_allocate} || $::beginner && fsedit::get_fstab(@{$o->{hds}}) < 3);
-
-    eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $auto;
-
-    if ($auto && fsedit::get_root_($o->{hds}) && $_[1] == 1) {
-	#- we have a root partition, that's enough :)
-	$o->install_steps::doPartitionDisks($o->{hds});	
-    } elsif ($o->{partitioning}{readonly}) {
-	$o->ask_mntpoint_s($o->{fstab});
-    } else {
-	$o->doPartitionDisks($o->{hds}, $o->{raid} ||= {});
-    }
-    unless ($::testing) {
-	$o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
-    }
-    eval { fs::mount($stage1_hd->{dev}, "/tmp/hdimage", $stage1_hd->{fs}) } if $stage1_hd;
-
-    $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
-    fsedit::get_root($o->{fstab}) or die 
-_("You must have a root partition.
-For this, create a partition (or click on an existing one).
-Then choose action ``Mount point'' and set it to `/'");
-
-    cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/rhimage nfs| &&
-      !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{manualFstab} || []} and
-	push @{$o->{manualFstab}}, { type => "nfs", mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,rsize=8192,wsize=8192" };
+    $o->{steps}{formatPartitions}{done} = 0;
+    $o->doPartitionDisksBefore;
+    $o->doPartitionDisks;
+    $o->doPartitionDisksAfter;
 }
 
 sub formatPartitions {
@@ -506,7 +473,7 @@ sub configureX {
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf($o->{prefix});
 
-    $o->configureX if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
+    $o->configureX if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked;
 }
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy { 

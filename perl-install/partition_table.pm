@@ -450,6 +450,7 @@ sub read_extended {
 # write the partition table
 sub write($) {
     my ($hd) = @_;
+    $hd->{isDirty} or return;
 
     #- set first primary partition active if no primary partitions are marked as active.
     for ($hd->{primary}{raw}) {

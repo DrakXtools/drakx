@@ -55,7 +55,11 @@ sub new($$$) {
     bless $fs, $type;
 }
 
-sub DESTROY { resize_fat::c_rewritten::free_all() }
+sub DESTROY {
+    my ($fs) = @_;
+    close $fs->{fd};
+    resize_fat::c_rewritten::free_all();
+}
 
 #- copy all clusters >= <start_cluster> to a new place on the partition, less
 #- than <start_cluster>. Only copies files, not directories.

@@ -16,13 +16,8 @@ sub new {
     $::windowheight ||= 400 if $::isStandalone;
     goto &interactive::new;
 }
-
-#-#- redefine ask_warn
-#-sub ask_warn {
-#-    my $o = shift;
-#-    local $my_gtk::grab = 1;
-#-    $o->SUPER::ask_warn(@_);
-#-}
+sub suspend { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
+sub resume { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 
 sub exit { 
     c::_exit($_[0]) #- workaround 
@@ -182,17 +177,24 @@ sub ask_from_entries_refW {
     my $w = my_gtk->new($title_, %$o);
     #-the widgets
     my @widgets = map {
-	if ($_->{type} eq "list") {
+	my $i = $_;
+	if ($i->{type} eq "list") {
 	    my $w = new Gtk::Combo;
 	    $w->set_use_arrows_always(1);
-	    $w->entry->set_editable(!$_->{not_edit});
-	    $w->set_popdown_strings(@{$_->{list}});
+	    $w->entry->set_editable(!$i->{not_edit});
+	    $w->set_popdown_strings(@{$i->{list}});
 	    $w->disable_activate;
 	    $w;
-	} elsif ($_->{type} eq "bool") {
-	    my $w = Gtk::CheckButton->new($_->{text});
-	    $w->set_active(${$_->{val}});
-	    my $i = $_; $w->signal_connect(clicked => sub { $ignore or invbool \${$i->{val}} });
+	} elsif ($i->{type} eq "bool") {
+	    my $w = Gtk::CheckButton->new($i->{text});
+	    $w->set_active(${$i->{val}});
+	    $w->signal_connect(clicked => sub { $ignore or invbool \${$i->{val}} });
+	    $w;
+	} elsif ($i->{type} eq "range") {
+	    my $adj = create_adjustment(${$i->{val}}, $i->{min}, $i->{max});
+	    $adj->signal_connect(value_changed => sub { ${$i->{val}} = $adj->get_value });
+	    my $w = new Gtk::HScale($adj);
+	    $w->set_digits(0);
 	    $w;
 	} else {
 	    new Gtk::Entry;
@@ -207,7 +209,7 @@ sub ask_from_entries_refW {
     my @updates = mapn {
 	my ($w, $ref) = @_;
 	sub {
-	    $ref->{type} eq "bool" and return;
+	    $ref->{type} =~ /bool|range/ and return;
 	    ${$ref->{val}} = widget($w, $ref)->get_text;
 	};
     } \@widgets, $val;
@@ -215,8 +217,10 @@ sub ask_from_entries_refW {
     my @updates_inv = mapn {
 	my ($w, $ref) = @_;
 	sub { 
-	    $ref->{type} eq "bool" ? 
+	    $ref->{type} eq "bool" ?
 	      $w->set_active(${$ref->{val}}) :
+	    $ref->{type} eq "bool" ?
+	      $w->get_adjustment->set_value(${$ref->{val}}) :
 	      widget($w, $ref)->set_text(${$ref->{val}})
 	};
     } \@widgets, $val;
@@ -236,6 +240,18 @@ sub ask_from_entries_refW {
 		$ignore = 0;
 	    };
 	};
+	my $may_go_to_next = sub {
+	    my ($W, $e) = @_;
+	    if (($e->{keyval} & 0x7f) == 0xd) {
+		$W->signal_emit_stop("key_press_event");
+		if ($ind == $#$l) {
+		    @$l == 1 ? $w->{ok}->clicked : $w->{ok}->grab_focus;
+		} else {
+		    widget($widgets[$ind+1],$val->[$ind+1])->grab_focus;
+		}
+	    }
+	};
+
 	if ($hcallback{focus_out}) {
 	    my $focusout_callback = sub {
 		return if $ignore;
@@ -247,22 +263,12 @@ sub ask_from_entries_refW {
 	    };
 	    $widget->signal_connect(focus_out_event => $focusout_callback);
 	}
+	if (ref $widget eq "Gtk::HScale") {
+	    $widget->signal_connect(key_press_event => $may_go_to_next);
+	}
 	if (ref $widget eq "Gtk::Entry") {
 	    $widget->signal_connect(changed => $changed_callback);
-	    my $go_to_next = sub {
-		if ($ind == $#$l) {
-		    @$l == 1 ? $w->{ok}->clicked : $w->{ok}->grab_focus();
-		} else {
-		    widget($widgets[$ind+1],$val->[$ind+1])->grab_focus();
-		}
-	    };
-	    $widget->signal_connect(activate => $go_to_next);
-	    $widget->signal_connect(key_press_event => sub {
-		my ($w, $e) = @_;
-		#-don't know why it works, i believe that
-		#-i must say before &$go_to_next, but with it doen't work HACK!
-		$w->signal_emit_stop("key_press_event") if chr($e->{keyval} & 0xff) eq "\x8d";
-	    });
+	    $widget->signal_connect(key_press_event => $may_go_to_next);
 	    $widget->set_text(${$val->[$i]{val}});
 	    $widget->set_visibility(0) if $val->[$i]{hidden};
 	}
