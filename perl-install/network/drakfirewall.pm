@@ -45,6 +45,12 @@ my @all_servers =
    hide => 1,
   },
   {
+   name => "Samba",
+   pkg => 'libsmbclient0',
+   ports => '137/tcp 137/udp 138/tcp 138/udp 139/tcp 139/udp ',
+   hide => 1,
+  },
+  {
    name => "CUPS",
    pkg => 'cups',
    ports => '631/tcp 631/udp',
