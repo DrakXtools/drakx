@@ -66,7 +66,6 @@ sub to_raw_X {
     }
 
     $raw_X->remove_Section('DRI');
-    $raw_X->add_Section('DRI', { Mode => { val => '0666' } }) if $card->{use_DRI_GLX};
 
     $raw_X->remove_load_module('v4l') if $card->{use_DRI_GLX} && $card->{Driver} eq 'r128';
 }
