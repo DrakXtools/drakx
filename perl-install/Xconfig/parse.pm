@@ -118,6 +118,7 @@ sub raw_to_string {
     my $s = do {
 	if ($e->{l}) {
 	    my $inside = join('', map_index { raw_to_string($_, $::i) } @{$e->{l}});
+	    $inside .= $e->{post_comment} || '';
 	    $inside =~ s/^/    /mg;
 	    qq(\n$e->{kind} "$e->{name}"\n) . $inside . "End$e->{kind}";
 	} else {
@@ -126,7 +127,7 @@ sub raw_to_string {
 	      (defined $e->{val} ? ($e->{Option} && $e->{val} !~ /^"/ ? qq( "$e->{val}") : qq( $e->{val})) : '');
 	}
     };
-    ($e->{pre_comment} ? ($b_want_spacing ? "\n" : '') . $e->{pre_comment} : '') . $s . ($e->{comment_on_line} || '') . "\n" . ($e->{post_comment} || '');
+    ($e->{pre_comment} ? ($b_want_spacing ? "\n" : '') . $e->{pre_comment} : '') . $s . ($e->{comment_on_line} || '') . "\n" . (!$e->{l} && $e->{post_comment} || '');
 }
 
 #-###############################################################################
